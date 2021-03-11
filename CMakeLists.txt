@@ -1,5 +1,5 @@
 # -*- mode:cmake -*-
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.15 FATAL_ERROR)
 
 # Detect build type, fallback to release and throw a warning if use didn't
 # specify any
@@ -22,7 +22,7 @@ project(SURELOG)
 
 # NOTE: Policy changes has to happen before adding any subprojects
 cmake_policy(SET CMP0091 NEW)
-set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
 
 set(FLATBUFFERS_BUILD_TESTS OFF CACHE BOOL "Skip flatbuffers' tests")
 add_subdirectory(third_party/flatbuffers EXCLUDE_FROM_ALL)
@@ -93,7 +93,7 @@ if(MSVC)
       "${CMAKE_CXX_FLAGS_DEBUG} ${TCMALLOC_COMPILE_OPTIONS} /Zc:__cplusplus /W0 /bigobj ${MY_CXX_WARNING_FLAGS}"
   )
   set(CMAKE_CXX_FLAGS_RELWITHDEBINFO
-      "${CMAKE_CXX_FLAGS_RELEASE} ${TCMALLOC_COMPILE_OPTIONS} /Zc:__cplusplus /W0 /bigobj ${MY_CXX_WARNING_FLAGS}"
+      "${CMAKE_CXX_FLAGS_RELEASE} ${TCMALLOC_COMPILE_OPTIONS} /Zi /Zc:__cplusplus /W0 /bigobj ${MY_CXX_WARNING_FLAGS}"
   )
   set(CMAKE_CXX_FLAGS_RELEASE
       "${CMAKE_CXX_FLAGS_RELEASE} ${TCMALLOC_COMPILE_OPTIONS} /Zc:__cplusplus /W0 /bigobj ${MY_CXX_WARNING_FLAGS}"
@@ -104,11 +104,12 @@ else()
     # Under MSYS some files are too large to build without additional flags
     set(MSYS_COMPILE_OPTIONS "-m64 -Wa,-mbig-obj")
   endif()
-  #set(MEM_SANITIZER_FLAGS
-  #    "-fsanitize=address -fno-omit-frame-pointer"
-  #)
+
   set(CMAKE_CXX_FLAGS_DEBUG
-      "${CMAKE_CXX_FLAGS_DEBUG} ${TCMALLOC_COMPILE_OPTIONS} -Wall -O0 -g ${MSYS_COMPILE_OPTIONS} ${MY_CXX_WARNING_FLAGS} ${MEM_SANITIZER_FLAGS}"
+      "${CMAKE_CXX_FLAGS_DEBUG} ${TCMALLOC_COMPILE_OPTIONS} -Wall -O0 -g ${MSYS_COMPILE_OPTIONS} ${MY_CXX_WARNING_FLAGS}"
+  )
+  set(CMAKE_CXX_FLAGS_RELWITHDEBINFO
+      "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} ${TCMALLOC_COMPILE_OPTIONS} -Wall -O3 -g ${MSYS_COMPILE_OPTIONS} -DNDEBUG ${MY_CXX_WARNING_FLAGS}"
   )
   set(CMAKE_CXX_FLAGS_RELEASE
       "${CMAKE_CXX_FLAGS_RELEASE} ${TCMALLOC_COMPILE_OPTIONS} -Wall -O3 ${MSYS_COMPILE_OPTIONS} -DNDEBUG ${MY_CXX_WARNING_FLAGS}"
@@ -612,19 +613,20 @@ install(
         ${PROJECT_SOURCE_DIR}/src/Expression/Value.h
   DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/surelog/Expression)
 
-if (WIN32 AND $<CONFIG:Debug>)
+if(WIN32)
   install(
     FILES $<TARGET_PDB_FILE:surelog-bin>
+          ${UHDM_BINARY_DIR}/bin/uhdm-dump.pdb
           ${Python3_RUNTIME_LIBRARY_DIRS}/python${Python3_VERSION_MAJOR}${Python3_VERSION_MINOR}$<$<CONFIG:Debug>:_d>.dll
     DESTINATION ${CMAKE_INSTALL_BINDIR})
   install(
     FILES ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/surelog.dir/surelog.pdb
           ${FlatBuffers_BINARY_DIR}/CMakeFiles/flatbuffers.dir/flatbuffers.pdb
-          ${LIBANTLR4_BINARY_DIR}/runtime/CMakeFiles/antlr4_static.dir/antlr4_static.pdb
+          ${LIBANTLR4_BINARY_DIR}/runtime/antlr4-runtime-static.pdb
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/surelog)
   install(
     FILES ${UHDM_BINARY_DIR}/CMakeFiles/uhdm.dir/uhdm.pdb
-          ${UHDM_BINARY_DIR}/third_party/capnproto/c++/src/capnp/CMakeFiles/capnp.dir/capnp.pdb
-          ${UHDM_BINARY_DIR}/third_party/capnproto/c++/src/kj/CMakeFiles/kj.dir/kj.pdb
+          ${Cap\'n\ Proto_BINARY_DIR}/src/capnp/CMakeFiles/capnp.dir/capnp.pdb
+          ${Cap\'n\ Proto_BINARY_DIR}/src/kj/CMakeFiles/kj.dir/kj.pdb
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/uhdm)
 endif()

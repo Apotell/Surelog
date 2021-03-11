@@ -1,0 +1,151 @@
+name: 'davenche'
+
+on: [ push ]
+
+env:
+  MODULE_NAME: Surelog
+  PYTHON3_VERSION: 3.8.6
+  JAVA_VERSION: 1.8.0.275
+  NO_TCMALLOC: On
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+        - { os: ubuntu-18.04, artifact-tag: bionic-gcc, build-type: debug }
+        - { os: ubuntu-18.04, artifact-tag: bionic-gcc, build-type: release }
+        - { os: windows-2019, artifact-tag: windows-msvc, build-type: debug }
+        - { os: windows-2019, artifact-tag: windows-msvc, build-type: release }
+
+    runs-on: ${{ matrix.config.os }}
+
+    steps:
+    - name: Install Core Dependencies
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt-get update -qq
+        sudo apt install -y g++-9
+        sudo apt install -y tclsh
+        sudo apt install -y default-jre
+        sudo apt install -y cmake
+        sudo apt install -y build-essential
+        sudo apt install -y swig
+        sudo apt install -y uuid-dev
+        sudo apt install -y ninja-build
+
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ env.PYTHON3_VERSION }}
+        architecture: x64
+
+    - name: Install Core Dependencies
+      if: runner.os == 'Windows'
+      shell: cmd
+      run: |
+        choco install -y swig --version=3.0.12
+        choco install -y python3 --version=${{ env.PYTHON3_VERSION }} --installargs="/quiet Include_debug=1 TargetDir=%pythonLocation%"
+
+    - name: Setup Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: ${{ env.JAVA_VERSION }}
+        java-package: jre
+        architecture: x64
+
+    - name: Get top commit details
+      uses: actions/github-script@0.3.0
+      id: author-date
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const commit_details = await github.git.getCommit({ owner: context.repo.owner, repo: context.repo.repo, commit_sha: context.sha });
+          return commit_details.data.author.date
+
+    - name: Setup environment
+      shell: bash
+      run: |
+        git config --global core.autocrlf input
+
+        export COMMITTED_AT=$(date -d ${{ steps.author-date.outputs.result }} +'%Y.%m.%d_%H.%M.%S')
+        export ARTIFACT_NAME=${{ env.MODULE_NAME }}_${{ matrix.config.artifact-tag }}_${{ matrix.config.build-type }}_$COMMITTED_AT
+
+        echo "COMMITTED_AT=$COMMITTED_AT" >> $GITHUB_ENV
+        echo "ARTIFACT_NAME=$ARTIFACT_NAME" >> $GITHUB_ENV
+
+    - name: Git Pull
+      uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+
+    - name: Build on Linux
+      if: runner.os == 'Linux'
+      shell: bash
+      env:
+        CC: gcc-9
+        CXX: g++-9
+      run: |
+        env
+        which cmake && cmake --version
+        which swig && swig -version
+        which java && java -version
+        which python && python --version
+        which ninja && ninja --version
+        which tclsh && echo 'puts [info patchlevel];exit 0' | tclsh
+        which $CC && $CC --version
+        which $CXX && $CXX --version
+
+        if [[ "${{ matrix.config.build-type }}" == "debug" ]]; then
+          cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug -DPython3_ROOT_DIR=$pythonLocation -DWITH_STATIC_CRT=0 -DCMAKE_INSTALL_PREFIX=out/install -S . -B out/build
+        else
+          cmake -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo -DPython3_ROOT_DIR=$pythonLocation -DWITH_STATIC_CRT=0 -DCMAKE_INSTALL_PREFIX=out/install -S . -B out/build
+        fi
+
+        cmake --build out/build -j `nproc`
+        cmake --install out/build
+
+    - name: Build on Windows
+      if: runner.os == 'Windows'
+      shell: cmd
+      env:
+        CC: cl
+        CXX: cl
+      run: |
+        call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+
+        set TCL_DIR=%PROGRAMFILES%\Git\mingw64\bin
+        set SWIG_DIR=%PROGRMDATA%\chocolatey\lib\swig\tools\install\swigwin-3.0.12
+        set PATH=%SWIG_DIR%;%JAVA_HOME%\bin;%TCL_DIR%;%PATH%
+
+        set
+        where cmake && cmake --version
+        where swig && swig -version
+        where java && java -version
+        where python && python --version
+        where ninja && ninja --version
+        where %CC% && %CC%
+        where %CXX% && %CXX%
+
+        if "${{ matrix.config.build-type }}" EQU "debug" (
+          cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug -DPython3_ROOT_DIR=%pythonLocation% -DWITH_STATIC_CRT=0 -DCMAKE_INSTALL_PREFIX=out/install -S . -B out/build
+        ) else (
+          cmake -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo -DPython3_ROOT_DIR=%pythonLocation% -DWITH_STATIC_CRT=0 -DCMAKE_INSTALL_PREFIX=out/install -S . -B out/build
+        )
+
+        cmake --build out/build -j %NUMBER_OF_PROCESSORS%
+        cmake --install out/build
+
+    - name: Build compressed artifacts
+      shell: bash
+      run: |
+        cd out
+        mv install ${{ env.ARTIFACT_NAME }}
+        tar czfp ${{ env.ARTIFACT_NAME }}.tgz ${{ env.ARTIFACT_NAME }}
+
+    - name: Archive artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ env.ARTIFACT_NAME }}
+        path: out/${{ env.ARTIFACT_NAME }}.tgz

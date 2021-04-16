@@ -46,35 +46,45 @@ Instance tree:
 
 [NTE:EL0523] dut.sv:2: Instance "work@top.u_mie_csr".
 
-UHDM HTML COVERAGE REPORT: ../../build/tests/Connection/slpp_unit//surelog.uhdm.chk.html
+[INF:UH0706] Creating UHDM Model...
+
+[INF:UH0708] Writing UHDM DB: ../../build/tests/Connection/slpp_unit//surelog.uhdm...
+
+[INF:UH0709] Writing UHDM Html Coverage: ../../build/tests/Connection/slpp_unit//surelog.uhdm.chk.html...
+
+[INF:UH0710] Loading UHDM DB: ../../build/tests/Connection/slpp_unit//surelog.uhdm...
+
+[INF:UH0711] Decompling UHDM...
+
 ====== UHDM =======
 design: (work@top)
 |vpiName:work@top
 |uhdmallPackages:
-\_package: builtin (builtin), parent:work@top
+\_package: builtin (builtin::), parent:work@top
   |vpiDefName:builtin
   |vpiName:builtin
+  |vpiFullName:builtin::
   |vpiClassDefn:
-  \_class_defn: (builtin::array), parent:builtin
+  \_class_defn: (builtin::array), parent:builtin::
     |vpiName:array
     |vpiFullName:builtin::array
   |vpiClassDefn:
-  \_class_defn: (builtin::queue), parent:builtin
+  \_class_defn: (builtin::queue), parent:builtin::
     |vpiName:queue
     |vpiFullName:builtin::queue
   |vpiClassDefn:
-  \_class_defn: (builtin::string), parent:builtin
+  \_class_defn: (builtin::string), parent:builtin::
     |vpiName:string
     |vpiFullName:builtin::string
   |vpiClassDefn:
-  \_class_defn: (builtin::system), parent:builtin
+  \_class_defn: (builtin::system), parent:builtin::
     |vpiName:system
     |vpiFullName:builtin::system
 |uhdmallClasses:
-\_class_defn: (work@mailbox) ${SURELOG_DIR}/build/bin/sv/builtin.sv:4: , parent:work@top
+\_class_defn: (work@mailbox) ${SURELOG_DIR}/build/bin/sv/builtin.sv:4: , endln:30:8, parent:work@top
   |vpiName:work@mailbox
   |vpiMethod:
-  \_function: (work@mailbox::new), line:6, parent:work@mailbox
+  \_function: (work@mailbox::new), line:6:2, endln:7:13, parent:work@mailbox
     |vpiMethod:1
     |vpiName:new
     |vpiFullName:work@mailbox::new
@@ -83,24 +93,29 @@ design: (work@top)
       |vpiTypespec:
       \_class_typespec: 
         |vpiClassDefn:
-        \_class_defn: (work@mailbox) ${SURELOG_DIR}/build/bin/sv/builtin.sv:4: , parent:work@top
+        \_class_defn: (work@mailbox) ${SURELOG_DIR}/build/bin/sv/builtin.sv:4: , endln:30:8, parent:work@top
     |vpiIODecl:
     \_io_decl: (bound)
       |vpiName:bound
       |vpiDirection:1
+      |vpiTypedef:
+      \_int_typespec: , line:6:16, endln:6:19
       |vpiExpr:
-      \_int_var: (bound), line:6, parent:bound
-        |vpiFullName:bound
+      \_constant: , line:6:28, endln:6:29
+        |vpiConstType:9
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
   |vpiMethod:
-  \_function: (work@mailbox::num), line:9, parent:work@mailbox
+  \_function: (work@mailbox::num), line:9:2, endln:10:13, parent:work@mailbox
     |vpiMethod:1
     |vpiVisibility:1
     |vpiName:num
     |vpiFullName:work@mailbox::num
     |vpiReturn:
-    \_int_var: , line:9
+    \_int_var: , line:9:11, endln:9:14
   |vpiMethod:
-  \_task: (work@mailbox::put), line:12, parent:work@mailbox
+  \_task: (work@mailbox::put), line:12:2, endln:13:9, parent:work@mailbox
     |vpiMethod:1
     |vpiVisibility:1
     |vpiName:put
@@ -110,7 +125,7 @@ design: (work@top)
       |vpiName:message
       |vpiDirection:1
   |vpiMethod:
-  \_function: (work@mailbox::try_put), line:15, parent:work@mailbox
+  \_function: (work@mailbox::try_put), line:15:2, endln:16:13, parent:work@mailbox
     |vpiMethod:1
     |vpiVisibility:1
     |vpiName:try_put
@@ -120,7 +135,7 @@ design: (work@top)
       |vpiName:message
       |vpiDirection:1
   |vpiMethod:
-  \_task: (work@mailbox::get), line:18, parent:work@mailbox
+  \_task: (work@mailbox::get), line:18:2, endln:19:9, parent:work@mailbox
     |vpiMethod:1
     |vpiVisibility:1
     |vpiName:get
@@ -130,19 +145,19 @@ design: (work@top)
       |vpiName:message
       |vpiDirection:6
   |vpiMethod:
-  \_function: (work@mailbox::try_get), line:21, parent:work@mailbox
+  \_function: (work@mailbox::try_get), line:21:2, endln:22:13, parent:work@mailbox
     |vpiMethod:1
     |vpiVisibility:1
     |vpiName:try_get
     |vpiFullName:work@mailbox::try_get
     |vpiReturn:
-    \_int_var: , line:21
+    \_int_var: , line:21:11, endln:21:14
     |vpiIODecl:
     \_io_decl: (message)
       |vpiName:message
       |vpiDirection:6
   |vpiMethod:
-  \_task: (work@mailbox::peek), line:24, parent:work@mailbox
+  \_task: (work@mailbox::peek), line:24:2, endln:25:9, parent:work@mailbox
     |vpiMethod:1
     |vpiVisibility:1
     |vpiName:peek
@@ -152,61 +167,71 @@ design: (work@top)
       |vpiName:message
       |vpiDirection:6
   |vpiMethod:
-  \_function: (work@mailbox::try_peek), line:27, parent:work@mailbox
+  \_function: (work@mailbox::try_peek), line:27:2, endln:28:13, parent:work@mailbox
     |vpiMethod:1
     |vpiVisibility:1
     |vpiName:try_peek
     |vpiFullName:work@mailbox::try_peek
     |vpiReturn:
-    \_int_var: , line:27
+    \_int_var: , line:27:11, endln:27:14
     |vpiIODecl:
     \_io_decl: (message)
       |vpiName:message
       |vpiDirection:6
 |uhdmallClasses:
-\_class_defn: (work@process) ${SURELOG_DIR}/build/bin/sv/builtin.sv:33: , parent:work@top
+\_class_defn: (work@process) ${SURELOG_DIR}/build/bin/sv/builtin.sv:33: , endln:55:8, parent:work@top
   |vpiName:work@process
   |vpiMethod:
-  \_function: (work@process::self), line:37, parent:work@process
+  \_function: (work@process::self), line:37:2, endln:37:8, parent:work@process
     |vpiMethod:1
     |vpiVisibility:1
     |vpiName:self
     |vpiFullName:work@process::self
     |vpiReturn:
-    \_chandle_var: , line:37
+    \_chandle_var: , line:37:18, endln:37:25
   |vpiMethod:
-  \_function: (work@process::status), line:40, parent:work@process
+  \_function: (work@process::status), line:40:2, endln:41:13, parent:work@process
     |vpiMethod:1
     |vpiVisibility:1
     |vpiName:status
     |vpiFullName:work@process::status
     |vpiReturn:
-    \_int_var: , line:40
+    \_int_var: , line:40:11, endln:40:16
       |vpiTypespec:
-      \_enum_typespec: (state), line:35
+      \_enum_typespec: (state), line:35:65, endln:35:70
         |vpiName:state
         |vpiEnumConst:
-        \_enum_const: (FINISHED), line:35
+        \_enum_const: (FINISHED), line:35:17, endln:35:25
           |vpiName:FINISHED
+          |vpiDecompile:0
           |INT:0
+          |vpiSize:64
         |vpiEnumConst:
-        \_enum_const: (KILLED), line:35
-          |vpiName:KILLED
-          |INT:4
-        |vpiEnumConst:
-        \_enum_const: (RUNNING), line:35
+        \_enum_const: (RUNNING), line:35:27, endln:35:34
           |vpiName:RUNNING
+          |vpiDecompile:1
           |INT:1
+          |vpiSize:64
         |vpiEnumConst:
-        \_enum_const: (SUSPENDED), line:35
-          |vpiName:SUSPENDED
-          |INT:3
-        |vpiEnumConst:
-        \_enum_const: (WAITING), line:35
+        \_enum_const: (WAITING), line:35:36, endln:35:43
           |vpiName:WAITING
+          |vpiDecompile:2
           |INT:2
+          |vpiSize:64
+        |vpiEnumConst:
+        \_enum_const: (SUSPENDED), line:35:45, endln:35:54
+          |vpiName:SUSPENDED
+          |vpiDecompile:3
+          |INT:3
+          |vpiSize:64
+        |vpiEnumConst:
+        \_enum_const: (KILLED), line:35:56, endln:35:62
+          |vpiName:KILLED
+          |vpiDecompile:4
+          |INT:4
+          |vpiSize:64
   |vpiMethod:
-  \_task: (work@process::kill), line:43, parent:work@process
+  \_task: (work@process::kill), line:43:2, endln:44:9, parent:work@process
     |vpiMethod:1
     |vpiVisibility:1
     |vpiName:kill
@@ -215,7 +240,7 @@ design: (work@top)
     \_begin: (work@process::kill), parent:work@process::kill
       |vpiFullName:work@process::kill
   |vpiMethod:
-  \_task: (work@process::await), line:46, parent:work@process
+  \_task: (work@process::await), line:46:2, endln:47:9, parent:work@process
     |vpiMethod:1
     |vpiVisibility:1
     |vpiName:await
@@ -224,7 +249,7 @@ design: (work@top)
     \_begin: (work@process::await), parent:work@process::await
       |vpiFullName:work@process::await
   |vpiMethod:
-  \_task: (work@process::suspend), line:49, parent:work@process
+  \_task: (work@process::suspend), line:49:2, endln:50:9, parent:work@process
     |vpiMethod:1
     |vpiVisibility:1
     |vpiName:suspend
@@ -233,7 +258,7 @@ design: (work@top)
     \_begin: (work@process::suspend), parent:work@process::suspend
       |vpiFullName:work@process::suspend
   |vpiMethod:
-  \_task: (work@process::resume), line:52, parent:work@process
+  \_task: (work@process::resume), line:52:2, endln:53:9, parent:work@process
     |vpiMethod:1
     |vpiVisibility:1
     |vpiName:resume
@@ -242,12 +267,12 @@ design: (work@top)
     \_begin: (work@process::resume), parent:work@process::resume
       |vpiFullName:work@process::resume
   |vpiTypedef:
-  \_enum_typespec: (state), line:35
+  \_enum_typespec: (state), line:35:65, endln:35:70
 |uhdmallClasses:
-\_class_defn: (work@semaphore) ${SURELOG_DIR}/build/bin/sv/builtin.sv:58: , parent:work@top
+\_class_defn: (work@semaphore) ${SURELOG_DIR}/build/bin/sv/builtin.sv:58: , endln:72:8, parent:work@top
   |vpiName:work@semaphore
   |vpiMethod:
-  \_function: (work@semaphore::new), line:60, parent:work@semaphore
+  \_function: (work@semaphore::new), line:60:2, endln:61:13, parent:work@semaphore
     |vpiMethod:1
     |vpiName:new
     |vpiFullName:work@semaphore::new
@@ -256,16 +281,21 @@ design: (work@top)
       |vpiTypespec:
       \_class_typespec: 
         |vpiClassDefn:
-        \_class_defn: (work@semaphore) ${SURELOG_DIR}/build/bin/sv/builtin.sv:58: , parent:work@top
+        \_class_defn: (work@semaphore) ${SURELOG_DIR}/build/bin/sv/builtin.sv:58: , endln:72:8, parent:work@top
     |vpiIODecl:
     \_io_decl: (keyCount)
       |vpiName:keyCount
       |vpiDirection:1
+      |vpiTypedef:
+      \_int_typespec: , line:60:15, endln:60:18
       |vpiExpr:
-      \_int_var: (keyCount), line:60, parent:keyCount
-        |vpiFullName:keyCount
+      \_constant: , line:60:30, endln:60:31
+        |vpiConstType:9
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
   |vpiMethod:
-  \_task: (work@semaphore::put), line:63, parent:work@semaphore
+  \_task: (work@semaphore::put), line:63:2, endln:64:9, parent:work@semaphore
     |vpiMethod:1
     |vpiVisibility:1
     |vpiName:put
@@ -274,11 +304,16 @@ design: (work@top)
     \_io_decl: (keyCount)
       |vpiName:keyCount
       |vpiDirection:1
+      |vpiTypedef:
+      \_int_typespec: , line:63:11, endln:63:14
       |vpiExpr:
-      \_int_var: (keyCount), line:63, parent:keyCount
-        |vpiFullName:keyCount
+      \_constant: , line:63:26, endln:63:27
+        |vpiConstType:9
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
   |vpiMethod:
-  \_task: (work@semaphore::get), line:66, parent:work@semaphore
+  \_task: (work@semaphore::get), line:66:2, endln:67:9, parent:work@semaphore
     |vpiMethod:1
     |vpiVisibility:1
     |vpiName:get
@@ -287,130 +322,140 @@ design: (work@top)
     \_io_decl: (keyCount)
       |vpiName:keyCount
       |vpiDirection:1
+      |vpiTypedef:
+      \_int_typespec: , line:66:11, endln:66:14
       |vpiExpr:
-      \_int_var: (keyCount), line:66, parent:keyCount
-        |vpiFullName:keyCount
+      \_constant: , line:66:26, endln:66:27
+        |vpiConstType:9
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
   |vpiMethod:
-  \_function: (work@semaphore::try_get), line:69, parent:work@semaphore
+  \_function: (work@semaphore::try_get), line:69:2, endln:70:13, parent:work@semaphore
     |vpiMethod:1
     |vpiVisibility:1
     |vpiName:try_get
     |vpiFullName:work@semaphore::try_get
     |vpiReturn:
-    \_int_var: , line:69
+    \_int_var: , line:69:11, endln:69:14
     |vpiIODecl:
     \_io_decl: (keyCount)
       |vpiName:keyCount
       |vpiDirection:1
+      |vpiTypedef:
+      \_int_typespec: , line:69:23, endln:69:26
       |vpiExpr:
-      \_int_var: (keyCount), line:69, parent:keyCount
-        |vpiFullName:keyCount
+      \_constant: , line:69:38, endln:69:39
+        |vpiConstType:9
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
 |uhdmallModules:
-\_module: work@ibex_csr (work@ibex_csr) dut.sv:12: , parent:work@top
+\_module: work@ibex_csr (work@ibex_csr) dut.sv:12: , endln:19:9, parent:work@top
   |vpiDefName:work@ibex_csr
   |vpiFullName:work@ibex_csr
   |vpiPort:
-  \_port: (rd_const_conn), line:14, parent:work@ibex_csr
+  \_port: (rd_const_conn), line:14:19, parent:work@ibex_csr
     |vpiName:rd_const_conn
     |vpiDirection:1
     |vpiLowConn:
     \_ref_obj: 
       |vpiActual:
-      \_logic_net: (work@ibex_csr.rd_const_conn), line:14, parent:work@ibex_csr
+      \_logic_net: (work@ibex_csr.rd_const_conn), line:14:19, parent:work@ibex_csr
         |vpiName:rd_const_conn
         |vpiFullName:work@ibex_csr.rd_const_conn
         |vpiNetType:36
   |vpiPort:
-  \_port: (rd_impl_conn), line:15, parent:work@ibex_csr
+  \_port: (rd_impl_conn), line:15:20, parent:work@ibex_csr
     |vpiName:rd_impl_conn
     |vpiDirection:2
     |vpiLowConn:
     \_ref_obj: 
       |vpiActual:
-      \_logic_net: (work@ibex_csr.rd_impl_conn), line:15, parent:work@ibex_csr
+      \_logic_net: (work@ibex_csr.rd_impl_conn), line:15:20, parent:work@ibex_csr
         |vpiName:rd_impl_conn
         |vpiFullName:work@ibex_csr.rd_impl_conn
         |vpiNetType:36
   |vpiPort:
-  \_port: (rd_name_conn), line:15, parent:work@ibex_csr
+  \_port: (rd_name_conn), line:15:34, parent:work@ibex_csr
     |vpiName:rd_name_conn
     |vpiDirection:2
     |vpiLowConn:
     \_ref_obj: 
       |vpiActual:
-      \_logic_net: (work@ibex_csr.rd_name_conn), line:15, parent:work@ibex_csr
+      \_logic_net: (work@ibex_csr.rd_name_conn), line:15:34, parent:work@ibex_csr
         |vpiName:rd_name_conn
         |vpiFullName:work@ibex_csr.rd_name_conn
         |vpiNetType:36
   |vpiPort:
-  \_port: (rd_disconn), line:15, parent:work@ibex_csr
+  \_port: (rd_disconn), line:15:48, parent:work@ibex_csr
     |vpiName:rd_disconn
     |vpiDirection:2
     |vpiLowConn:
     \_ref_obj: 
       |vpiActual:
-      \_logic_net: (work@ibex_csr.rd_disconn), line:15, parent:work@ibex_csr
+      \_logic_net: (work@ibex_csr.rd_disconn), line:15:48, parent:work@ibex_csr
         |vpiName:rd_disconn
         |vpiFullName:work@ibex_csr.rd_disconn
         |vpiNetType:36
   |vpiNet:
-  \_logic_net: (work@ibex_csr.rd_const_conn), line:14, parent:work@ibex_csr
+  \_logic_net: (work@ibex_csr.rd_const_conn), line:14:19, parent:work@ibex_csr
   |vpiNet:
-  \_logic_net: (work@ibex_csr.rd_impl_conn), line:15, parent:work@ibex_csr
+  \_logic_net: (work@ibex_csr.rd_impl_conn), line:15:20, parent:work@ibex_csr
   |vpiNet:
-  \_logic_net: (work@ibex_csr.rd_name_conn), line:15, parent:work@ibex_csr
+  \_logic_net: (work@ibex_csr.rd_name_conn), line:15:34, parent:work@ibex_csr
   |vpiNet:
-  \_logic_net: (work@ibex_csr.rd_disconn), line:15, parent:work@ibex_csr
+  \_logic_net: (work@ibex_csr.rd_disconn), line:15:48, parent:work@ibex_csr
 |uhdmallModules:
-\_module: work@top (work@top) dut.sv:1: , parent:work@top
+\_module: work@top (work@top) dut.sv:1: , endln:10:9, parent:work@top
   |vpiDefName:work@top
   |vpiFullName:work@top
   |vpiPort:
-  \_port: (rd_impl_conn), line:1, parent:work@top
+  \_port: (rd_impl_conn), line:1:17, parent:work@top
     |vpiName:rd_impl_conn
     |vpiDirection:1
     |vpiLowConn:
     \_ref_obj: 
       |vpiActual:
-      \_logic_net: (work@top.rd_impl_conn), line:1, parent:work@top
+      \_logic_net: (work@top.rd_impl_conn), line:1:17, parent:work@top
         |vpiName:rd_impl_conn
         |vpiFullName:work@top.rd_impl_conn
   |vpiPort:
-  \_port: (rd_name_conn), line:1, parent:work@top
+  \_port: (rd_name_conn), line:1:31, parent:work@top
     |vpiName:rd_name_conn
     |vpiDirection:1
     |vpiLowConn:
     \_ref_obj: 
       |vpiActual:
-      \_logic_net: (work@top.rd_name_conn), line:1, parent:work@top
+      \_logic_net: (work@top.rd_name_conn), line:1:31, parent:work@top
         |vpiName:rd_name_conn
         |vpiFullName:work@top.rd_name_conn
   |vpiNet:
-  \_logic_net: (work@top.rd_impl_conn), line:1, parent:work@top
+  \_logic_net: (work@top.rd_impl_conn), line:1:17, parent:work@top
   |vpiNet:
-  \_logic_net: (work@top.rd_name_conn), line:1, parent:work@top
+  \_logic_net: (work@top.rd_name_conn), line:1:31, parent:work@top
 |uhdmtopModules:
-\_module: work@top (work@top) dut.sv:1: 
+\_module: work@top (work@top) dut.sv:1: , endln:10:9
   |vpiDefName:work@top
   |vpiName:work@top
   |vpiPort:
-  \_port: (rd_impl_conn), line:1, parent:work@top
+  \_port: (rd_impl_conn), line:1:17, endln:1:29, parent:work@top
     |vpiName:rd_impl_conn
     |vpiDirection:1
     |vpiLowConn:
     \_ref_obj: 
       |vpiActual:
-      \_logic_net: (work@top.rd_impl_conn), line:1, parent:work@top
+      \_logic_net: (work@top.rd_impl_conn), line:1:17, endln:1:29, parent:work@top
         |vpiName:rd_impl_conn
         |vpiFullName:work@top.rd_impl_conn
   |vpiPort:
-  \_port: (rd_name_conn), line:1, parent:work@top
+  \_port: (rd_name_conn), line:1:31, endln:1:43, parent:work@top
     |vpiName:rd_name_conn
     |vpiDirection:1
     |vpiLowConn:
     \_ref_obj: 
       |vpiActual:
-      \_logic_net: (work@top.rd_name_conn), line:1, parent:work@top
+      \_logic_net: (work@top.rd_name_conn), line:1:31, endln:1:43, parent:work@top
         |vpiName:rd_name_conn
         |vpiFullName:work@top.rd_name_conn
   |vpiModule:
@@ -419,11 +464,11 @@ design: (work@top)
     |vpiName:u_mie_csr
     |vpiFullName:work@top.u_mie_csr
     |vpiPort:
-    \_port: (rd_const_conn), line:14, parent:work@top.u_mie_csr
+    \_port: (rd_const_conn), line:14:19, endln:14:32, parent:work@top.u_mie_csr
       |vpiName:rd_const_conn
       |vpiDirection:1
       |vpiHighConn:
-      \_constant: , line:7
+      \_constant: , line:7:20, endln:7:24
         |vpiConstType:3
         |vpiDecompile:1'b1
         |vpiSize:1
@@ -431,67 +476,70 @@ design: (work@top)
       |vpiLowConn:
       \_ref_obj: 
         |vpiActual:
-        \_logic_net: (work@top.u_mie_csr.rd_const_conn), line:14, parent:work@top.u_mie_csr
+        \_logic_net: (work@top.u_mie_csr.rd_const_conn), line:14:19, endln:14:32, parent:work@top.u_mie_csr
           |vpiName:rd_const_conn
           |vpiFullName:work@top.u_mie_csr.rd_const_conn
           |vpiNetType:36
     |vpiPort:
-    \_port: (rd_impl_conn), line:15, parent:work@top.u_mie_csr
+    \_port: (rd_impl_conn), line:15:20, endln:15:32, parent:work@top.u_mie_csr
       |vpiName:rd_impl_conn
       |vpiDirection:2
       |vpiHighConn:
-      \_ref_obj: (rd_impl_conn), line:4
+      \_ref_obj: (rd_impl_conn), line:4:6, endln:4:18
         |vpiName:rd_impl_conn
         |vpiActual:
-        \_logic_net: (work@top.rd_impl_conn), line:1, parent:work@top
+        \_logic_net: (work@top.rd_impl_conn), line:1:17, endln:1:29, parent:work@top
       |vpiLowConn:
       \_ref_obj: 
         |vpiActual:
-        \_logic_net: (work@top.u_mie_csr.rd_impl_conn), line:15, parent:work@top.u_mie_csr
+        \_logic_net: (work@top.u_mie_csr.rd_impl_conn), line:15:20, endln:15:32, parent:work@top.u_mie_csr
           |vpiName:rd_impl_conn
           |vpiFullName:work@top.u_mie_csr.rd_impl_conn
           |vpiNetType:36
     |vpiPort:
-    \_port: (rd_name_conn), line:15, parent:work@top.u_mie_csr
+    \_port: (rd_name_conn), line:15:34, endln:15:46, parent:work@top.u_mie_csr
       |vpiName:rd_name_conn
       |vpiDirection:2
       |vpiHighConn:
-      \_ref_obj: (rd_name_conn), line:5
+      \_ref_obj: (rd_name_conn), line:5:19, endln:5:31
         |vpiName:rd_name_conn
         |vpiActual:
-        \_logic_net: (work@top.rd_name_conn), line:1, parent:work@top
+        \_logic_net: (work@top.rd_name_conn), line:1:31, endln:1:43, parent:work@top
       |vpiLowConn:
       \_ref_obj: 
         |vpiActual:
-        \_logic_net: (work@top.u_mie_csr.rd_name_conn), line:15, parent:work@top.u_mie_csr
+        \_logic_net: (work@top.u_mie_csr.rd_name_conn), line:15:34, endln:15:46, parent:work@top.u_mie_csr
           |vpiName:rd_name_conn
           |vpiFullName:work@top.u_mie_csr.rd_name_conn
           |vpiNetType:36
     |vpiPort:
-    \_port: (rd_disconn), line:15, parent:work@top.u_mie_csr
+    \_port: (rd_disconn), line:15:48, endln:15:58, parent:work@top.u_mie_csr
       |vpiName:rd_disconn
       |vpiDirection:2
+      |vpiHighConn:
+      \_operation: , line:6:18, endln:6:17
+        |vpiOpType:36
       |vpiLowConn:
       \_ref_obj: 
         |vpiActual:
-        \_logic_net: (work@top.u_mie_csr.rd_disconn), line:15, parent:work@top.u_mie_csr
+        \_logic_net: (work@top.u_mie_csr.rd_disconn), line:15:48, endln:15:58, parent:work@top.u_mie_csr
           |vpiName:rd_disconn
           |vpiFullName:work@top.u_mie_csr.rd_disconn
           |vpiNetType:36
     |vpiNet:
-    \_logic_net: (work@top.u_mie_csr.rd_const_conn), line:14, parent:work@top.u_mie_csr
+    \_logic_net: (work@top.u_mie_csr.rd_const_conn), line:14:19, endln:14:32, parent:work@top.u_mie_csr
     |vpiNet:
-    \_logic_net: (work@top.u_mie_csr.rd_impl_conn), line:15, parent:work@top.u_mie_csr
+    \_logic_net: (work@top.u_mie_csr.rd_impl_conn), line:15:20, endln:15:32, parent:work@top.u_mie_csr
     |vpiNet:
-    \_logic_net: (work@top.u_mie_csr.rd_name_conn), line:15, parent:work@top.u_mie_csr
+    \_logic_net: (work@top.u_mie_csr.rd_name_conn), line:15:34, endln:15:46, parent:work@top.u_mie_csr
     |vpiNet:
-    \_logic_net: (work@top.u_mie_csr.rd_disconn), line:15, parent:work@top.u_mie_csr
+    \_logic_net: (work@top.u_mie_csr.rd_disconn), line:15:48, endln:15:58, parent:work@top.u_mie_csr
     |vpiInstance:
-    \_module: work@top (work@top) dut.sv:1: 
+    \_module: work@top (work@top) dut.sv:1: , endln:10:9
   |vpiNet:
-  \_logic_net: (work@top.rd_impl_conn), line:1, parent:work@top
+  \_logic_net: (work@top.rd_impl_conn), line:1:17, endln:1:29, parent:work@top
   |vpiNet:
-  \_logic_net: (work@top.rd_name_conn), line:1, parent:work@top
+  \_logic_net: (work@top.rd_name_conn), line:1:31, endln:1:43, parent:work@top
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

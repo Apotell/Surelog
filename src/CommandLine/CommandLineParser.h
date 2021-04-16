@@ -104,6 +104,7 @@ class CommandLineParser final {
   bool getCoverUhdm() { return m_coverUhdm; }
   bool getParametersSubstitution() { return m_parametersubstitution; }
   bool showVpiIds() { return m_showVpiIDs; }
+  bool replay() { return m_replay; }
   bool getDebugInstanceTree() { return m_debugInstanceTree; }
   bool getDebugLibraryDef() { return m_debugLibraryDef; }
   bool getDebugIncludeFileInfo() { return m_debugIncludeFileInfo; }
@@ -124,6 +125,7 @@ class CommandLineParser final {
   bool pythonListener() { return m_pythonListener && m_pythonAllowed; }
   bool pythonAllowed() { return m_pythonAllowed; }
   void noPython() { m_pythonAllowed = false; }
+  void withPython();
   bool pythonEvalScriptPerFile() {
     return m_pythonEvalScriptPerFile && m_pythonAllowed;
   }
@@ -249,6 +251,7 @@ class CommandLineParser final {
   bool m_elabUhdm;
   bool m_coverUhdm;
   bool m_showVpiIDs;
+  bool m_replay;
 };
 
 }  // namespace SURELOG

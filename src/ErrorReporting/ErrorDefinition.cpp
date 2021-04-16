@@ -363,8 +363,10 @@ bool ErrorDefinition::init() {
       "Undefined imported package: \"%s\"");
   rec(ELAB_OUT_OF_RANGE_PARAM_INDEX, ERROR, ELAB,
       "Out of range parameter index: \"%s\"");
-  rec(ELAB_NEGATIVE_VALUE, ERROR, ELAB,
-      "Negative value in instance %s");    
+  rec(ELAB_NEGATIVE_VALUE, NOTE, ELAB,
+      "Negative value in instance %s");
+  rec(ELAB_DIVIDE_BY_ZERO, ERROR, ELAB, 
+      "Division by zero in instance \"%s\"");    
   rec(LIB_FILE_MAPS_TO_MULTIPLE_LIBS, ERROR, LIB,
       "File \"%exobj\" maps to multiple libraries: \"%s\"");
   rec(UHDM_UNSUPPORTED_EXPR, ERROR, UHDM, "Unsupported expression \"%s\""); 
@@ -373,5 +375,11 @@ bool ErrorDefinition::init() {
   rec(UHDM_WRONG_OBJECT_TYPE, ERROR, UHDM, "%s");  
   rec(UHDM_WRONG_COVERAGE_LINE, ERROR, UHDM, "UHDM coverage pointing to empty source line"); 
   rec(UHDM_UNSUPPORTED_TYPE, ERROR, UHDM, "Unsupported data type \"%s\"");
+  rec(UHDM_CREATING_MODEL, INFO, UHDM, "Creating UHDM Model..");
+  rec(UHDM_ELABORATION, INFO, UHDM, "Elaborating UHDM..");
+  rec(UHDM_WRITE_DB, INFO, UHDM, "Writing UHDM DB: %s..");
+  rec(UHDM_WRITE_HTML_COVERAGE, INFO, UHDM, "Writing UHDM Html Coverage: %s..");
+  rec(UHDM_LOAD_DB, INFO, UHDM, "Loading UHDM DB: %s..");
+  rec(UHDM_VISITOR, INFO, UHDM, "Decompling UHDM..");
   return true;
 }

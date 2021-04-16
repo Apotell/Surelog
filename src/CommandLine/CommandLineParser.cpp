@@ -57,10 +57,10 @@ using namespace antlr4;
 using namespace SURELOG;
 
 std::string defaultLogFileName = "surelog.log";
-std::string CommandLineParser::m_versionNumber = "1.00";
+std::string CommandLineParser::m_versionNumber = "1.01";
 
 const std::vector<std::string> copyright = {
-    "Copyright (c) 2017-2019 Alain Dargelas,",
+    "Copyright (c) 2017-2021 Alain Dargelas,",
     "http://www.apache.org/licenses/LICENSE-2.0"};
 
 const std::vector<std::string> banner = {
@@ -126,6 +126,7 @@ const std::vector<std::string> helpText = {
     "  -pythonevalscript <script.py> Eval the Python script at the design "
     "level",
     "  -nopython             Turns off all Python features, including waivers",
+    "  -withpython           Turns on all Python features, including waivers",
     "  -strictpythoncheck    Turns on strict Python checks",
     "  -mt/--threads <nb_max_threads> 0 up to 512 max threads, 0 or 1 being single "
     "threaded,",
@@ -141,6 +142,7 @@ const std::vector<std::string> helpText = {
     "  -nostdout             Mutes Standard output",
     "  -verbose              Gives verbose processing information",
     "  -profile              Gives Profiling information",
+    "  -replay               Enables replay of internal elaboration errors",
     "  -l <file>             Specifies log file, default is surelog.log under "
     "output dir",
     "", "OUTPUT OPTIONS:",
@@ -205,6 +207,12 @@ std::string printStringArray(const std::vector<std::string>& array) {
   }
   report += "\n";
   return report;
+}
+
+void CommandLineParser::withPython() {
+#ifdef SURELOG_WITH_PYTHON
+ m_pythonAllowed = true;  
+#endif 
 }
 
 const std::string CommandLineParser::currentDateTime() {
@@ -283,7 +291,11 @@ CommandLineParser::CommandLineParser(ErrorContainer* errors,
       m_debugInstanceTree(false),
       m_debugLibraryDef(false),
       m_useTbb(false),
+#ifdef SURELOG_WITH_PYTHON      
       m_pythonAllowed(true),
+#else
+      m_pythonAllowed(false),
+#endif
       m_nbLinesForFileSplitting(500),
       m_pythonEvalScriptPerFile(false),
       m_pythonEvalScript(false),
@@ -300,7 +312,8 @@ CommandLineParser::CommandLineParser(ErrorContainer* errors,
       m_dumpUhdm(false),
       m_elabUhdm(false),
       m_coverUhdm(false),
-      m_showVpiIDs(false) {
+      m_showVpiIDs(false), 
+      m_replay(false) {
   m_errors->regiterCmdLine(this);
   m_logFileId = m_symbolTable->registerSymbol(defaultLogFileName);
   m_compileUnitDirectory = m_symbolTable->registerSymbol("slpp_unit/");
@@ -510,7 +523,6 @@ bool CommandLineParser::parseCommandLine(int argc, const char** argv) {
   cmd += "\n\n";
   std::cout << cmd;
   */
- 
   for (unsigned int i = 0; i < all_arguments.size(); i++) {
     if (all_arguments[i] == "-help" || all_arguments[i] == "-h" ||
         all_arguments[i] == "--help") {
@@ -543,6 +555,8 @@ bool CommandLineParser::parseCommandLine(int argc, const char** argv) {
       m_muteStdout = true;
     } else if (all_arguments[i] == "-nopython") {
       m_pythonAllowed = false;
+    } else if (all_arguments[i] == "-withpython") {
+      withPython();
     }
   }
 
@@ -821,6 +835,8 @@ bool CommandLineParser::parseCommandLine(int argc, const char** argv) {
       }
       i++;
       m_cacheDirId = m_symbolTable->registerSymbol(all_arguments[i]);
+    } else if (all_arguments[i] == "-replay") {
+      m_replay = true; 
     } else if (all_arguments[i] == "-writepp") {
       m_writePpOutput = true;
     } else if (all_arguments[i] == "-noinfo") {
@@ -904,6 +920,8 @@ bool CommandLineParser::parseCommandLine(int argc, const char** argv) {
         std::cout << "ERROR: No Python allowed, check your arguments!\n";
     } else if (all_arguments[i] == "-nopython") {
       m_pythonAllowed = false;
+    } else if (all_arguments[i] == "-withpython") {
+      withPython();
     } else if (all_arguments[i] == "-pythonevalscriptperfile") {
       if (i == all_arguments.size() - 1) {
         Location loc(mutableSymbolTable()->registerSymbol(all_arguments[i]));

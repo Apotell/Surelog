@@ -115,10 +115,10 @@ public:
 // UHDM modeling
 
   bool compileContinuousAssignment(DesignComponent* component,
-        const FileContent* fC, NodeId id, CompileDesign* compileDesign);
+        const FileContent* fC, NodeId id, CompileDesign* compileDesign, ValuedComponentI* instance);
 
   bool compileAlwaysBlock(DesignComponent* component, const FileContent* fC,
-        NodeId id, CompileDesign* compileDesign);
+        NodeId id, CompileDesign* compileDesign, ValuedComponentI* instance);
 
   UHDM::any* compileTfCall(DesignComponent* component, const FileContent* fC,
         NodeId Tf_call_stmt,
@@ -129,17 +129,17 @@ public:
         CompileDesign* compileDesign, UHDM::any* call, ValuedComponentI* instance, bool reduce, bool muteErrors);
 
   UHDM::assignment* compileBlockingAssignment(DesignComponent* component, const FileContent* fC, NodeId nodeId,
-        bool blocking, CompileDesign* compileDesign, UHDM::any* pstmt);
+        bool blocking, CompileDesign* compileDesign, UHDM::any* pstmt, ValuedComponentI* instance = nullptr);
 
   UHDM::atomic_stmt* compileProceduralTimingControlStmt(DesignComponent* component, const FileContent* fC, NodeId nodeId,
-        CompileDesign* compileDesign);
+        CompileDesign* compileDesign, UHDM::any* pstmt, ValuedComponentI* instance = nullptr);
 
   UHDM::atomic_stmt* compileEventControlStmt(DesignComponent* component, const FileContent* fC,
         NodeId nodeId,
-        CompileDesign* compileDesign) ;
+        CompileDesign* compileDesign, UHDM::any* pstmt, ValuedComponentI* instance = nullptr) ;
 
   UHDM::atomic_stmt* compileConditionalStmt(DesignComponent* component, const FileContent* fC, NodeId nodeId,
-        CompileDesign* compileDesign);
+        CompileDesign* compileDesign, UHDM::any* pstmt, ValuedComponentI* instance = nullptr);
 
   bool compileParameterDeclaration(DesignComponent* component, const FileContent* fC, NodeId nodeId,
         CompileDesign* compileDesign, bool localParam, ValuedComponentI* m_instance, bool port_param, bool reduce, bool muteErrors);
@@ -161,10 +161,10 @@ public:
                          CompileDesign* compileDesign);
 
   UHDM::atomic_stmt* compileCaseStmt(DesignComponent* component, const FileContent* fC, NodeId nodeId,
-        CompileDesign* compileDesign);
+        CompileDesign* compileDesign, UHDM::any* pstmt = nullptr, ValuedComponentI* instance = nullptr);
 
   UHDM::VectorOfany* compileStmt(DesignComponent* component, const FileContent* fC, NodeId nodeId,
-        CompileDesign* compileDesign, UHDM::any* pstmt = NULL);
+        CompileDesign* compileDesign, UHDM::any* pstmt = nullptr, ValuedComponentI* instance = nullptr);
 
   UHDM::any* compileVariable(DesignComponent* component, const FileContent* fC, NodeId nodeId,
         CompileDesign* compileDesign, UHDM::any* pstmt, ValuedComponentI* instance, bool reduce, bool muteErrors);
@@ -265,18 +265,22 @@ public:
                                     const FileContent* fC, NodeId nodeId,
                                     CompileDesign* compileDesign);
 
+  void compileImportDeclaration(DesignComponent* component,
+        const FileContent* fC, NodeId id,
+        CompileDesign* compileDesign);
+
   UHDM::any* bindVariable(DesignComponent* component, const UHDM::any* scope, const std::string& name, CompileDesign* compileDesign);
   UHDM::any* bindVariable(DesignComponent* component, ValuedComponentI* instance, const std::string& name, CompileDesign* compileDesign);
 
   UHDM::event_control* compileClocking_event(DesignComponent* component, const FileContent* fC, NodeId nodeId,
-                                    CompileDesign* compileDesign);
+                                    CompileDesign* compileDesign, UHDM::any* pexpr, ValuedComponentI* instance);
 
   UHDM::clocking_block* compileClockingBlock(DesignComponent* component, const FileContent* fC, NodeId nodeId,
-                                    CompileDesign* compileDesign);
+                                    CompileDesign* compileDesign, UHDM::any* pexpr, ValuedComponentI* instance);
 
   UHDM::atomic_stmt* compileDelayControl(DesignComponent* component, const FileContent* fC,
         NodeId Procedural_timing_control,
-        CompileDesign* compileDesign);
+        CompileDesign* compileDesign, UHDM::any* pexpr, ValuedComponentI* instance);
 
   bool compileClassConstructorDeclaration(DesignComponent* component,
                                           const FileContent* fC, NodeId nodeId,
@@ -295,17 +299,27 @@ public:
 
   void setParentNoOverride(UHDM::any* obj, UHDM::any* parent);
 
-  UHDM::any* getValue(const std::string& name, DesignComponent* component,
-               CompileDesign* compileDesign, ValuedComponentI* instance, 
-               const std::string& fileName, int lineNumber, UHDM::any* pexpr, bool muteErrors = false);
-
   bool isMultidimensional(UHDM::typespec* ts, DesignComponent* component);
 
   int64_t get_value(bool& invalidValue, const UHDM::expr* expr);
 
+  long double get_double(bool& invalidValue, const UHDM::expr* expr);
+
   UHDM::expr* reduceExpr(UHDM::any* expr, bool& invalidValue, DesignComponent* component,
                CompileDesign* compileDesign, ValuedComponentI* instance, const std::string& fileName, int lineNumber, UHDM::any* pexpr, bool muteErrors = false);
- 
+
+  UHDM::expr* reduceCompOp(UHDM::operation* op, bool& invalidValue,
+                           DesignComponent* component,
+                           CompileDesign* compileDesign,
+                           ValuedComponentI* instance,
+                           const std::string& fileName, int lineNumber,
+                           UHDM::any* pexpr, bool muteErrors);
+
+  UHDM::expr* reduceBitSelect(UHDM::expr* op, unsigned int index_val, bool& invalidValue, DesignComponent* component,
+                CompileDesign* compileDesign, ValuedComponentI* instance,
+                const std::string& fileName, int lineNumber, 
+                UHDM::any* pexpr, bool muteErrors);
+
   uint64_t Bits(const UHDM::any* typespec, bool& invalidValue, DesignComponent* component,
                CompileDesign* compileDesign, ValuedComponentI* instance, const std::string& fileName, int lineNumber, bool reduce, bool sizeMode);         
 
@@ -327,10 +341,14 @@ public:
 
   void evalScheduledExprs(DesignComponent* component, CompileDesign* compileDesign);                     
 
+  UHDM::any* getValue(const std::string& name, DesignComponent* component,
+               CompileDesign* compileDesign, ValuedComponentI* instance, 
+               const std::string& fileName, int lineNumber, UHDM::any* pexpr, bool reduce, bool muteErrors = false);
+
   int64_t getValue(bool& validValue, DesignComponent* component, const FileContent* fC, NodeId nodeId,
 			  CompileDesign* compileDesign,
-                    UHDM::any* pexpr = NULL,
-                    ValuedComponentI* instance = NULL);
+                    UHDM::any* pexpr,
+                    ValuedComponentI* instance, bool reduce, bool muteErrors = false);
 
   UHDM::typespec* elabTypespec(DesignComponent* component, UHDM::typespec* spec, CompileDesign* compileDesign, UHDM::any* pexpr = NULL,
                     ValuedComponentI* instance = NULL);
@@ -340,7 +358,12 @@ public:
   UHDM::any* getObject(const std::string& name, DesignComponent* component,
                CompileDesign* compileDesign, ValuedComponentI* instance, const UHDM::any* pexpr);
 
-  void errorOnNegativeConstant(DesignComponent* component, UHDM::expr* exp, CompileDesign* compileDesign, ValuedComponentI* instance);
+  void reorderAssignmentPattern(DesignComponent* mod, const UHDM::any* lhs, UHDM::any* rhs, CompileDesign* compileDesign, ValuedComponentI* instance, int level);
+
+  bool errorOnNegativeConstant(DesignComponent* component, UHDM::expr* exp, CompileDesign* compileDesign, ValuedComponentI* instance);
+  bool errorOnNegativeConstant(DesignComponent* component, Value* value, CompileDesign* compileDesign, ValuedComponentI* instance);
+  bool errorOnNegativeConstant(DesignComponent* component, const std::string& value, CompileDesign* compileDesign, ValuedComponentI* instance,
+                               const std::string& fileName, unsigned int lineNo, unsigned short columnNo);
 
  private:
   CompileHelper(const CompileHelper&) = delete;

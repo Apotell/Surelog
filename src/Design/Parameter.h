@@ -44,11 +44,18 @@ class Parameter : public DataType {
   bool isPortParam() { return m_port_param; }
   void setImportedPackage(const std::string& package) {m_importedPackage = package; }
   std::string importedPackage() { return m_importedPackage; }
+  bool isTypeParam() { return type_param; }
+  void setTypeParam() { type_param = true; }
+  bool isMultidimension() { return multi_dimension; }
+  void setMultidimension() { multi_dimension  = true; }
+  
  private:
   NodeId m_ntype;
   UHDM::any* m_param;
   std::string m_importedPackage;
   bool m_port_param;
+  bool type_param = false;
+  bool multi_dimension = false;
 };
 
 }  // namespace SURELOG

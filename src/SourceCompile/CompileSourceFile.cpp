@@ -20,6 +20,9 @@
  *
  * Created on February 20, 2017, 9:54 PM
  */
+
+#include <string.h>
+
 #include "CommandLine/CommandLineParser.h"
 #include "ErrorReporting/ErrorContainer.h"
 #include "SourceCompile/SymbolTable.h"
@@ -98,7 +101,7 @@ bool CompileSourceFile::compile(Action action) {
   std::string fileName = m_symbolTable->getSymbol(m_fileId);
   if (m_commandLineParser->verbose()) {
     SymbolId fileId = m_fileId;
-    if (strstr(fileName.c_str(), "builtin.sv")) {
+    if (strstr(fileName.c_str(), "/bin/sv/builtin.sv")) {
       fileId = m_symbolTable->registerSymbol("builtin.sv");
     }
     Location loc(fileId);
@@ -130,7 +133,7 @@ bool CompileSourceFile::compile(Action action) {
     case Parse:
       return parse_();
     case PythonAPI: {
-      if (!strstr(fileName.c_str(), "builtin.sv")) {
+      if (!strstr(fileName.c_str(), "/bin/sv/builtin.sv")) {
         return pythonAPI_();
       }
     }
@@ -261,7 +264,13 @@ bool CompileSourceFile::postPreprocess_() {
       (m_commandLineParser->writePpOutputFileId() != 0)) {
     const std::string& directory =
         symbolTable->getSymbol(m_commandLineParser->getFullCompileDir());
-    std::string fileName = FileUtils::makeRelativePath(symbolTable->getSymbol(m_fileId));
+    //std::string fileName = FileUtils::makeRelativePath(symbolTable->getSymbol(m_fileId));
+    std::string fullFileName = symbolTable->getSymbol(m_fileId);
+    std::string baseFileName = FileUtils::basename(fullFileName);
+    std::string filePath = FileUtils::getPathName(fullFileName);
+    std::string hashedPath = FileUtils::hashPath(filePath);
+    std::string fileName = hashedPath + baseFileName;
+
     const std::string& writePpOutputFileName =
         symbolTable->getSymbol(m_commandLineParser->writePpOutputFileId());
     std::string libName = m_library->getName() + "/";

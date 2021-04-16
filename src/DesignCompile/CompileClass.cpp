@@ -20,6 +20,7 @@
  *
  * Created on June 7, 2018, 10:26 PM
  */
+#include <string.h>
 #include "SourceCompile/VObjectTypes.h"
 #include "Design/VObject.h"
 #include "Library/Library.h"
@@ -172,6 +173,7 @@ bool CompileClass::compile() {
     switch (type) {
       case VObjectType::slPackage_import_item: {
         m_helper.importPackage(m_class, m_design, fC, id, m_compileDesign);
+        m_helper.compileImportDeclaration(m_class, fC, id, m_compileDesign);
         break;
       }
       case VObjectType::slClass_constructor_declaration: {
@@ -663,7 +665,7 @@ bool CompileClass::compile_local_parameter_declaration_(const FileContent* fC,
   */
   NodeId list_of_type_assignments = fC->Child(id);
   if (fC->Type(list_of_type_assignments) == slList_of_type_assignments ||
-      fC->Type(list_of_type_assignments) == slList_of_param_assignments) {
+      fC->Type(list_of_type_assignments) == slType) {
     // Type param
     m_helper.compileParameterDeclaration(m_class, fC, list_of_type_assignments,
                                          m_compileDesign, true, nullptr, false, false, false);
@@ -705,7 +707,7 @@ bool CompileClass::compile_parameter_declaration_(const FileContent* fC,
                                                   NodeId id) {
   NodeId list_of_type_assignments = fC->Child(id);
   if (fC->Type(list_of_type_assignments) == slList_of_type_assignments ||
-      fC->Type(list_of_type_assignments) == slList_of_param_assignments) {
+      fC->Type(list_of_type_assignments) == slType) {
     // Type param
     m_helper.compileParameterDeclaration(m_class, fC, list_of_type_assignments,
                                          m_compileDesign, false, nullptr, false, false, false);
@@ -808,7 +810,7 @@ bool CompileClass::compile_class_parameters_(const FileContent* fC, NodeId id) {
     while (parameter_port_declaration) {
       NodeId list_of_type_assignments = fC->Child(parameter_port_declaration);
       if (fC->Type(list_of_type_assignments) == slList_of_type_assignments ||
-          fC->Type(list_of_type_assignments) == slList_of_param_assignments) {
+          fC->Type(list_of_type_assignments) == slType) {
         // Type param
         m_helper.compileParameterDeclaration(m_class, fC, list_of_type_assignments, m_compileDesign, false, nullptr, false, false, false);
 

@@ -76,20 +76,26 @@ bool CompileHelper::importPackage(DesignComponent* scope, Design* design,
       scope->addNamedObject(name, fnid, comp);
       scope->insertDataType(name, (ClassDefinition*) comp);
     }
-
+    // Typespecs
     auto& typeSet = def->getDataTypeMap();
     for (auto& type : typeSet) {
       scope->insertDataType(type.first, type.second);
     }
-
+    // Variables
     auto& variableSet = def->getVariables();
     for (auto& var : variableSet) {
       scope->addVariable(var.second);
       Value* val = def->getValue(var.first);
       if (val) {
-        //scope->setValue(var.first, val, *def->getExprBuilder());
         scope->setValue(var.first, m_exprBuilder.clone(val), m_exprBuilder);
       }
+    }
+    // Incomplete bindings
+    for (auto& var : def->getLateBinding()) {
+      scope->needLateBinding(var);
+    }
+    for (auto& var : def->getLateTypedefBinding()) {
+      scope->needLateTypedefBinding(var);
     }
 
     // Type parameters
@@ -113,9 +119,19 @@ bool CompileHelper::importPackage(DesignComponent* scope, Design* design,
         if (pclone->UhdmType() == uhdmtype_parameter) {
           type_parameter* the_p = (type_parameter*) pclone;
           the_p->VpiImported(pack_name);
+          if (const typespec* tps = the_p->Typespec()) {
+            if (tps->UhdmType() == uhdmunsupported_typespec) {
+              scope->needLateTypedefBinding(the_p);
+            }
+          }
         } else {
           parameter* the_p = (parameter*) pclone;
           the_p->VpiImported(pack_name);
+          if (const typespec* tps = the_p->Typespec()) {
+            if (tps->UhdmType() == uhdmunsupported_typespec) {
+              scope->needLateTypedefBinding(the_p);
+            }
+          }
         }
         parameters->push_back(pclone);
         clone->setUhdmParam(pclone);
@@ -145,11 +161,16 @@ bool CompileHelper::importPackage(DesignComponent* scope, Design* design,
       clone->setUhdmParamAssign(cpass);
       param_assigns->push_back(cpass);
       UHDM::any* orig_p = (UHDM::any*) cpass->Lhs();
-      UHDM::any* pclone = UHDM::clone_tree(orig_p, s, &listener);
+      UHDM::any* pclone = orig_p; // The param_assign clone already cloned the param
       cpass->Lhs(pclone);
       if (pclone->UhdmType() == uhdmparameter) {
         parameter* the_p = (parameter*)pclone;
         the_p->VpiImported(pack_name);
+        if (const typespec* tps = the_p->Typespec()) {
+          if (tps->UhdmType() == uhdmunsupported_typespec) {
+            scope->needLateTypedefBinding(the_p);
+          }
+        }
       }
     }
 
@@ -506,6 +527,23 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope, const File
     newTypeDef->setDataType(the_enum);
     newTypeDef->setDefinition(the_enum);
     the_enum->setBaseTypespec(compileTypespec(scope, fC, fC->Child(enum_base_type), compileDesign, nullptr, nullptr, false));
+
+    UHDM::enum_typespec* enum_t = s.MakeEnum_typespec();
+    if (typespecs)
+      typespecs->push_back(enum_t);
+    the_enum->setTypespec(enum_t);
+    enum_t->VpiName(name);
+    enum_t->VpiFile(the_enum->getFileContent()->getFileName());
+    enum_t->VpiLineNo(the_enum->getFileContent()->Line(the_enum->getDefinitionId()));
+    enum_t->VpiColumnNo(the_enum->getFileContent()->Column(the_enum->getDefinitionId()));
+    enum_t->VpiEndLineNo(the_enum->getFileContent()->EndLine(the_enum->getDefinitionId()));
+    enum_t->VpiEndColumnNo(the_enum->getFileContent()->EndColumn(the_enum->getDefinitionId()));
+    // Enum basetype
+    enum_t->Base_typespec(the_enum->getBaseTypespec());
+    // Enum values
+    VectorOfenum_const* econsts = s.MakeEnum_constVec();
+    enum_t->Enum_consts(econsts);
+
     while (enum_name_declaration) {
       NodeId enumNameId = fC->Child(enum_name_declaration);
       std::string enumName = fC->SymName(enumNameId);
@@ -525,28 +563,26 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope, const File
       Variable* variable = new Variable(type, fC, enumValueId, 0, enumName);
       if (scope)
         scope->addVariable(variable);
-    }
-
-    UHDM::enum_typespec* enum_t = s.MakeEnum_typespec();
-    if (typespecs)
-      typespecs->push_back(enum_t);
-    the_enum->setTypespec(enum_t);
-    enum_t->VpiName(name);
-    enum_t->VpiFile(the_enum->getFileContent()->getFileName());
-    enum_t->VpiLineNo(the_enum->getFileContent()->Line(the_enum->getDefinitionId()));
-    // Enum basetype
-    enum_t->Base_typespec(the_enum->getBaseTypespec());
-    // Enum values
-    VectorOfenum_const* econsts = s.MakeEnum_constVec();
-    enum_t->Enum_consts(econsts);
-    for (std::map<std::string, std::pair<unsigned int, Value*>>::iterator
-         enum_val = the_enum->getValues().begin();
-         enum_val != the_enum->getValues().end(); enum_val++) {
+    
       enum_const* econst = s.MakeEnum_const();
-      econst->VpiName((*enum_val).first);
+      econst->VpiName(enumName);
       econst->VpiFile(the_enum->getFileContent()->getFileName());
-      econst->VpiLineNo((*enum_val).second.first);
-      econst->VpiValue((*enum_val).second.second->uhdmValue());
+      econst->VpiLineNo(fC->Line(enumNameId));
+      econst->VpiColumnNo(fC->Column(enumNameId));
+      econst->VpiEndLineNo(fC->EndLine(enumNameId));
+      econst->VpiEndColumnNo(fC->EndColumn(enumNameId));
+      econst->VpiValue(value->uhdmValue());
+      if (enumValueId) {
+        std::vector<VObjectType> stopPoints = {slIntConst, slStringConst};
+        std::vector<NodeId> nodes = fC->sl_collect_all(enumValueId, stopPoints, true);
+        if (nodes.size()) {
+          NodeId c = nodes[0];
+          econst->VpiDecompile(fC->SymName(c));
+        }
+      } else {
+        econst->VpiDecompile(value->decompiledValue());
+      }
+      econst->VpiSize(value->getSize());
       econsts->push_back(econst);
     }
 
@@ -558,7 +594,8 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope, const File
   } else if (structType) {
   } else {
     NodeId stype = fC->Child(data_type);
-    if (fC->Type(stype) == VObjectType::slStringConst) {
+    if ((fC->Type(stype) == VObjectType::slStringConst) ||
+         fC->Type(stype) == VObjectType::slClass_scope) {
       TypeDef* newTypeDef = new TypeDef(fC, type_declaration, stype, name);
       type->setDefinition(newTypeDef);
       if (scope)
@@ -566,16 +603,21 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope, const File
       DummyType* dummy = new DummyType(fC, type_name, stype);
       newTypeDef->setDataType(dummy);
       newTypeDef->setDefinition(dummy);
+      
+      // Don't create the typespec here, as it is most likely going to be incomplete at compilation time
       /*
-       Don't create the typespec here, as it is most likely going to be incomplete at compilation time
-      UHDM::typespec* ts = compileTypespec(scope, fC, stype, compileDesign, nullptr, nullptr, true);
+      UHDM::typespec* ts = compileTypespec(scope, fC, stype, compileDesign, nullptr, nullptr, false);
       if (ts) {
-        ts->VpiName(name);
+        ElaboratorListener listener(&s);
+        typespec* tpclone = (typespec*) UHDM::clone_tree((any*) ts, s, &listener);
+        tpclone->VpiName(name);
         if (typespecs)
-          typespecs->push_back(ts);
+          typespecs->push_back(tpclone);
+          newTypeDef->setTypespec(tpclone); 
+        dummy->setTypespec(tpclone);   
       }
-      simple->setTypespec(ts);
       */
+
       if (scope)
         scope->insertTypeDef(newTypeDef);
       newType = newTypeDef;
@@ -1030,6 +1072,8 @@ VObjectType getSignalType(const FileContent* fC, NodeId net_port_type, NodeId& P
             nodeType = integer_vector_type;
             if (the_type != VObjectType::slClass_scope)
               Packed_dimension = fC->Sibling(integer_vector_type);
+            else 
+              Packed_dimension = fC->Sibling(fC->Sibling(integer_vector_type)); 
           }
         } else if (the_type == VObjectType::slSigning_Signed) {
           Packed_dimension = fC->Sibling(data_type);
@@ -1075,6 +1119,9 @@ void setDirectionAndType(DesignComponent* component, const FileContent* fC,
           NodeId unpacked_dimension = fC->Sibling(signal);
           if (fC->Type(unpacked_dimension) == slUnpacked_dimension) {
             port->setUnpackedDimension(unpacked_dimension);
+          }
+          if (fC->Type(unpacked_dimension) == slConstant_expression) {
+            port->setDefaultValue(unpacked_dimension);
           }
           port->setPackedDimension(packed_dimension);
           port->setDirection(dir_type);
@@ -1298,6 +1345,9 @@ bool CompileHelper::compileAnsiPortDeclaration(DesignComponent* component,
     }
 
     NodeId packedDimension = fC->Sibling(NetType);
+    if (fC->Type(packedDimension) == slStringConst) { // net type is class_scope
+      packedDimension = fC->Sibling(packedDimension);
+    }
     NodeId specParamId = 0;
     bool is_signed = false;
     if (packedDimension == 0) {
@@ -1309,9 +1359,6 @@ bool CompileHelper::compileAnsiPortDeclaration(DesignComponent* component,
     } else if (fC->Type(packedDimension) == VObjectType::slSigning_Unsigned) {
       packedDimension = fC->Sibling(packedDimension);
     }
-    // else {
-    //  packedDimension = fC->Child(packedDimension);
-    // }
     if (fC->Type(NetType) == VObjectType::slClass_scope) {
       specParamId = NetType;
     } else if (fC->Type(NetType) == VObjectType::slStringConst) {
@@ -1345,7 +1392,6 @@ bool CompileHelper::compileAnsiPortDeclaration(DesignComponent* component,
     n<> u<15> t<Ansi_port_declaration> p<16> c<13> l<11>
     */
     component->getPorts().push_back(new Signal(fC, port_name, interface_name, slNoType, unpacked_dimension, false));
-    //component->getSignals().push_back(new Signal(fC, port_name, interface_name));
   } else {
     NodeId data_type_or_implicit = fC->Child(net_port_type);
     NodeId data_type = fC->Child(data_type_or_implicit);
@@ -1433,12 +1479,7 @@ bool CompileHelper::compileNetDeclaration(DesignComponent* component,
       List_of_net_decl_assignments = net;
     }
   }
-  /*
-  if (nettype == VObjectType::slIntVec_TypeLogic ||
-      nettype == VObjectType::slNetType_Wire ||
-      nettype == VObjectType::slIntVec_TypeReg )
-    compileContinuousAssignment(component, fC, List_of_net_decl_assignments, compileDesign);
-*/
+  
   NodeId delay = 0;
   if (fC->Type(List_of_net_decl_assignments) == slDelay3) {
     delay = List_of_net_decl_assignments;
@@ -1455,7 +1496,11 @@ bool CompileHelper::compileNetDeclaration(DesignComponent* component,
         break;
       }
     }
-    NodeId Unpacked_dimension = fC->Sibling(signal);
+    NodeId Unpacked_dimension = 0;
+    NodeId tmp = fC->Sibling(signal);
+    if (fC->Type(tmp) == slUnpacked_dimension) {
+      Unpacked_dimension = tmp;
+    }
 
     if (fC->Type(Packed_dimension) == slData_type) {
       NetType = fC->Child(Packed_dimension);
@@ -1470,7 +1515,7 @@ bool CompileHelper::compileNetDeclaration(DesignComponent* component,
       sig->setDelay(delay);
       component->getSignals().push_back(sig);
     } else {
-      Signal* sig = new Signal(fC, signal, nettype, slNoType, Packed_dimension, false);
+      Signal* sig = new Signal(fC, signal, nettype, Packed_dimension, slNoType, 0, Unpacked_dimension, false);
       if (portRef)
         portRef->setLowConn(sig);
       sig->setDelay(delay);
@@ -1482,6 +1527,50 @@ bool CompileHelper::compileNetDeclaration(DesignComponent* component,
   return true;
 }
 
+void CompileHelper::compileImportDeclaration(DesignComponent* component,
+        const FileContent* fC, NodeId package_import_item_id,
+        CompileDesign* compileDesign) {
+  /*
+     Verilog:
+       import my_pkg::opcode_e, my_pkg::OPCODE_LOAD;
+     Expected tree:
+       n<my_pkg> u<27> t<StringConst> p<29> s<28> l<3>
+       n<opcode_e> u<28> t<StringConst> p<29> l<3>
+       n<> u<29> t<Package_import_item> p<33> c<27> s<32> l<3>
+       n<my_pkg> u<30> t<StringConst> p<32> s<31> l<3>
+       n<OPCODE_LOAD> u<31> t<StringConst> p<32> l<3>
+       n<> u<32> t<Package_import_item> p<33> c<30> l<3>
+       n<> u<33> t<Package_import_declaration> p<34> c<29> l<3>
+     */
+  Serializer& s = compileDesign->getSerializer();
+  while (package_import_item_id != 0) {
+    import* import_stmt = s.MakeImport();
+    import_stmt->VpiFile(fC->getFileName());
+    import_stmt->VpiLineNo(fC->Line(package_import_item_id));
+    import_stmt->VpiColumnNo(fC->Column(package_import_item_id));
+    import_stmt->VpiEndLineNo(fC->EndLine(package_import_item_id));
+    import_stmt->VpiEndColumnNo(fC->EndColumn(package_import_item_id));
+    NodeId package_name_id = fC->Child(package_import_item_id);
+
+    NodeId item_name_id = fC->Sibling(package_name_id);
+    Value* item_name = m_exprBuilder.getValueFactory().newStValue();
+    if (item_name_id != 0) {
+      item_name->set(fC->SymName(item_name_id));
+    } else {
+      item_name->set("*");
+    }
+    UHDM::constant* imported_item = constantFromValue(item_name, compileDesign);
+    m_exprBuilder.deleteValue(item_name);
+    import_stmt->Item(imported_item);
+
+    std::string package_name(fC->SymName(package_name_id));
+    import_stmt->VpiName(package_name);
+
+    package_import_item_id = fC->Sibling(package_import_item_id);
+    component->addImportedSymbol(import_stmt);
+  }
+}
+
 bool CompileHelper::compileDataDeclaration(DesignComponent* component,
         const FileContent* fC, NodeId id,
         bool interface,
@@ -1490,6 +1579,8 @@ bool CompileHelper::compileDataDeclaration(DesignComponent* component,
   NodeId subNode = fC->Child(id);
   VObjectType subType = fC->Type(subNode);
   switch (subType) {
+  case VObjectType::slPackage_import_declaration:
+    break;
   case VObjectType::slType_declaration:
   {
     /*
@@ -1499,44 +1590,6 @@ bool CompileHelper::compileDataDeclaration(DesignComponent* component,
       n<> u<18> t<Data_declaration> p<19> c<17> l<13>
      */
     compileTypeDef(component, fC, id, compileDesign);
-    break;
-  }
-  case VObjectType::slPackage_import_declaration: {
-    /*
-    Verilog:
-      import my_pkg::opcode_e, my_pkg::OPCODE_LOAD;
-    Expected tree:
-      n<my_pkg> u<27> t<StringConst> p<29> s<28> l<3>
-      n<opcode_e> u<28> t<StringConst> p<29> l<3>
-      n<> u<29> t<Package_import_item> p<33> c<27> s<32> l<3>
-      n<my_pkg> u<30> t<StringConst> p<32> s<31> l<3>
-      n<OPCODE_LOAD> u<31> t<StringConst> p<32> l<3>
-      n<> u<32> t<Package_import_item> p<33> c<30> l<3>
-      n<> u<33> t<Package_import_declaration> p<34> c<29> l<3>
-    */
-    Serializer& s = compileDesign->getSerializer();
-    NodeId package_import_item_id = fC->Child(subNode);
-    while (package_import_item_id != 0) {
-      import* import_stmt = s.MakeImport();
-      NodeId package_name_id = fC->Child(package_import_item_id);
-
-      NodeId item_name_id = fC->Sibling(package_name_id);
-      Value* item_name = m_exprBuilder.getValueFactory().newStValue(); 
-      if (item_name_id != 0) {
-        item_name->set(fC->SymName(item_name_id));
-      } else {
-        item_name->set("*");
-      }
-      UHDM::constant* imported_item = constantFromValue(item_name, compileDesign);
-      m_exprBuilder.deleteValue(item_name);
-      import_stmt->Item(imported_item);
-
-      std::string package_name(fC->SymName(package_name_id));
-      import_stmt->VpiName(package_name);
-
-      package_import_item_id = fC->Sibling(package_import_item_id);
-      component->addImportedSymbol(import_stmt);
-    }
     break;
   }
   default:
@@ -1656,7 +1709,7 @@ bool CompileHelper::compileDataDeclaration(DesignComponent* component,
 
 bool CompileHelper::compileContinuousAssignment(DesignComponent* component,
         const FileContent* fC, NodeId List_of_net_assignments,
-        CompileDesign* compileDesign) {
+        CompileDesign* compileDesign, ValuedComponentI* instance) {
    UHDM::Serializer& s = compileDesign->getSerializer();
   /*
 n<o> u<6> t<StringConst> p<7> l<4>
@@ -1682,7 +1735,7 @@ n<> u<17> t<Continuous_assign> p<18> c<16> l<4>
     Strength1 = fC->Sibling(Strength0);
     List_of_net_assignments = fC->Sibling(List_of_net_assignments);
   } else if (fC->Type(List_of_net_assignments) == VObjectType::slDelay3) {
-    delay_expr = (expr*) compileExpression(component, fC, List_of_net_assignments, compileDesign);
+    delay_expr = (expr*) compileExpression(component, fC, List_of_net_assignments, compileDesign, nullptr, instance);
     List_of_net_assignments = fC->Sibling(List_of_net_assignments);
   }
   NodeId Net_assignment = fC->Child(List_of_net_assignments);
@@ -1695,11 +1748,11 @@ n<> u<17> t<Continuous_assign> p<18> c<16> l<4>
       if (fC->Child(Net_lvalue))
         Ps_or_hierarchical_identifier = fC->Child(Net_lvalue);
       UHDM::any* lhs_exp =
-          compileExpression(component, fC, Ps_or_hierarchical_identifier, compileDesign);
+          compileExpression(component, fC, Ps_or_hierarchical_identifier, compileDesign, nullptr, instance);
 
       // RHS
       UHDM::any* rhs_exp =
-          compileExpression(component, fC, Expression, compileDesign);
+          compileExpression(component, fC, Expression, compileDesign, nullptr, instance);
 
       UHDM::cont_assign* cassign = s.MakeCont_assign();
       if (Strength0) {
@@ -1716,6 +1769,9 @@ n<> u<17> t<Continuous_assign> p<18> c<16> l<4>
       setParentNoOverride(rhs_exp, cassign);
       cassign->VpiFile(fC->getFileName());
       cassign->VpiLineNo(fC->Line(List_of_net_assignments));
+      cassign->VpiColumnNo(fC->Column(List_of_net_assignments));
+      cassign->VpiEndLineNo(fC->EndLine(List_of_net_assignments));
+      cassign->VpiEndColumnNo(fC->EndColumn(List_of_net_assignments));
       if (component->getContAssigns() == nullptr) {
         component->setContAssigns(s.MakeCont_assignVec());
       }
@@ -1771,7 +1827,7 @@ bool CompileHelper::compileFinalBlock(DesignComponent* component,
 
 UHDM::atomic_stmt* CompileHelper::compileProceduralTimingControlStmt(DesignComponent* component, const FileContent* fC,
         NodeId Procedural_timing_control,
-        CompileDesign* compileDesign) {
+        CompileDesign* compileDesign, UHDM::any* pstmt, ValuedComponentI* instance) {
   UHDM::Serializer& s = compileDesign->getSerializer();
   /*
   n<#100> u<70> t<IntConst> p<71> l<7>
@@ -1781,7 +1837,7 @@ UHDM::atomic_stmt* CompileHelper::compileProceduralTimingControlStmt(DesignCompo
 
   NodeId Delay_control = fC->Child(Procedural_timing_control);
   if (fC->Type(Delay_control) == VObjectType::slEvent_control) {
-    return compileEventControlStmt(component, fC, Procedural_timing_control, compileDesign);
+    return compileEventControlStmt(component, fC, Procedural_timing_control, compileDesign, pstmt, instance);
   }
   NodeId IntConst = fC->Child(Delay_control);
   std::string value = fC->SymName(IntConst);
@@ -1789,7 +1845,7 @@ UHDM::atomic_stmt* CompileHelper::compileProceduralTimingControlStmt(DesignCompo
   dc->VpiDelay(value);
   NodeId Statement_or_null = fC->Sibling(Procedural_timing_control);
   if (Statement_or_null) {
-    VectorOfany* st = compileStmt(component, fC, Statement_or_null, compileDesign, dc);
+    VectorOfany* st = compileStmt(component, fC, Statement_or_null, compileDesign, dc, instance);
     if (st) {
       any* stmt = (*st)[0];
       dc->Stmt(stmt);
@@ -1801,12 +1857,12 @@ UHDM::atomic_stmt* CompileHelper::compileProceduralTimingControlStmt(DesignCompo
 
 UHDM::atomic_stmt* CompileHelper::compileDelayControl(DesignComponent* component, const FileContent* fC,
         NodeId Procedural_timing_control,
-        CompileDesign* compileDesign) {
+        CompileDesign* compileDesign, UHDM::any* pexpr, ValuedComponentI* instance) {
   UHDM::Serializer& s = compileDesign->getSerializer();
  
   NodeId Delay_control = fC->Child(Procedural_timing_control);
   if (fC->Type(Delay_control) == VObjectType::slEvent_control) {
-    return compileEventControlStmt(component, fC, Procedural_timing_control, compileDesign);
+    return compileEventControlStmt(component, fC, Procedural_timing_control, compileDesign, pexpr, instance);
   }
   NodeId IntConst = fC->Child(Delay_control);
   std::string value = fC->SymName(IntConst);
@@ -1816,7 +1872,7 @@ UHDM::atomic_stmt* CompileHelper::compileDelayControl(DesignComponent* component
 }
 
 bool CompileHelper::compileAlwaysBlock(DesignComponent* component, const FileContent* fC,
-        NodeId id, CompileDesign* compileDesign) {
+        NodeId id, CompileDesign* compileDesign, ValuedComponentI* instance) {
   UHDM::Serializer& s = compileDesign->getSerializer();
   compileDesign->lockSerializer();
   always* always = s.MakeAlways();
@@ -1846,7 +1902,7 @@ bool CompileHelper::compileAlwaysBlock(DesignComponent* component, const FileCon
   NodeId Statement = fC->Sibling(always_keyword);
   NodeId Statement_item = fC->Child(Statement);
   NodeId the_stmt = fC->Child(Statement_item);
-  VectorOfany* stmts = compileStmt(component, fC, the_stmt, compileDesign, always);
+  VectorOfany* stmts = compileStmt(component, fC, the_stmt, compileDesign, always, instance);
   if (stmts) {
     any* stmt = (*stmts)[0];
     always->Stmt(stmt);
@@ -1854,6 +1910,9 @@ bool CompileHelper::compileAlwaysBlock(DesignComponent* component, const FileCon
   }
   always->VpiFile(fC->getFileName());
   always->VpiLineNo(fC->Line(id));
+  always->VpiColumnNo(fC->Column(id));
+  always->VpiEndLineNo(fC->EndLine(id));
+  always->VpiEndColumnNo(fC->EndColumn(id));
   compileDesign->unlockSerializer();
   return true;
 }
@@ -1919,6 +1978,9 @@ bool CompileHelper::compileParameterDeclaration(DesignComponent* component, cons
       p->VpiName(fC->SymName(typeNameId));
       p->VpiFile(fC->getFileName());
       p->VpiLineNo(fC->Line(typeNameId));
+      p->VpiColumnNo(fC->Column(typeNameId));
+      p->VpiEndLineNo(fC->Line(typeNameId));
+      p->VpiEndColumnNo(fC->Column(typeNameId));
       typespec* tps = compileTypespec(component, fC, ntype, compileDesign,
                                            p, nullptr, false, "");
       p->Typespec(tps);
@@ -1930,15 +1992,17 @@ bool CompileHelper::compileParameterDeclaration(DesignComponent* component, cons
       parameters->push_back(p);
       Parameter* param =
           new Parameter(fC, typeNameId, fC->SymName(typeNameId), ntype, port_param);
+      param->setTypeParam();    
       param->setUhdmParam(p);
       component->insertParameter(param);
       typeNameId = fC->Sibling(typeNameId);
       if (skip) typeNameId = fC->Sibling(typeNameId);
     }
 
-  } else if (fC->Type(nodeId) == slList_of_param_assignments) {
+  } else if (fC->Type(nodeId) == slType) {
     // Type param
-    NodeId Param_assignment = fC->Child(nodeId);
+    NodeId list_of_param_assignments = fC->Sibling(nodeId);
+    NodeId Param_assignment = fC->Child(list_of_param_assignments);
     while (Param_assignment) {
       NodeId Identifier = fC->Child(Param_assignment);
       NodeId Constant_param_expression = fC->Sibling(Identifier);
@@ -1946,6 +2010,9 @@ bool CompileHelper::compileParameterDeclaration(DesignComponent* component, cons
       p->VpiName(fC->SymName(Identifier));
       p->VpiFile(fC->getFileName());
       p->VpiLineNo(fC->Line(Identifier));
+      p->VpiColumnNo(fC->Column(Identifier));
+      p->VpiEndLineNo(fC->EndLine(Identifier));
+      p->VpiEndColumnNo(fC->EndColumn(Identifier));
       NodeId Data_type = fC->Child(Constant_param_expression);
       typespec* tps = compileTypespec(component, fC, Data_type, compileDesign,
                                            p, nullptr, false, "");
@@ -1958,22 +2025,30 @@ bool CompileHelper::compileParameterDeclaration(DesignComponent* component, cons
       parameters->push_back(p);
       Parameter* param =
           new Parameter(fC, Identifier, fC->SymName(Identifier), Constant_param_expression, port_param);
+      param->setTypeParam();        
       param->setUhdmParam(p);
       component->insertParameter(param);
       Param_assignment = fC->Sibling(Param_assignment);
     }
   } else {
     // Regular param
-    NodeId Data_type_or_implicit = fC->Child(nodeId);
+    NodeId Data_type_or_implicit = 0;
+     NodeId List_of_param_assignments = 0;
+    if (fC->Type(nodeId) == slList_of_param_assignments) {
+      List_of_param_assignments = nodeId;
+    } else {
+      Data_type_or_implicit = fC->Child(nodeId);
+      List_of_param_assignments = fC->Sibling(Data_type_or_implicit);
+    }
  
-    NodeId List_of_param_assignments = fC->Sibling(Data_type_or_implicit);
     NodeId Param_assignment = fC->Child(List_of_param_assignments);
     while (Param_assignment) {
 
-      UHDM::typespec* ts =
-        compileTypespec(component, fC, fC->Child(Data_type_or_implicit),
+      UHDM::typespec* ts = nullptr;
+      if (Data_type_or_implicit) {
+        ts = compileTypespec(component, fC, fC->Child(Data_type_or_implicit),
                         compileDesign, nullptr, instance, reduce);
-
+      }
       bool isSigned = false;
       NodeId Data_type = fC->Child(Data_type_or_implicit);
       VObjectType the_type = fC->Type(Data_type);
@@ -1989,12 +2064,13 @@ bool CompileHelper::compileParameterDeclaration(DesignComponent* component, cons
       NodeId name = fC->Child(Param_assignment);
       NodeId value = fC->Sibling(name);
       const std::string& the_name = fC->SymName(name);
+      NodeId actual_value = value;
+      while (fC->Type(actual_value) == slUnpacked_dimension) {
+        actual_value = fC->Sibling(actual_value);
+        isMultiDimension = true;
+      }
 
       if (dynamic_cast<Package*>(component) && (instance == nullptr)) {
-        NodeId actual_value = value;
-        while (fC->Type(actual_value) == slUnpacked_dimension) {
-          actual_value = fC->Sibling(actual_value);
-        }
         Value* val = m_exprBuilder.evalExpr(fC, actual_value, component,
                                             true);  // Errors muted
         if (val->isValid()) {
@@ -2030,9 +2106,14 @@ bool CompileHelper::compileParameterDeclaration(DesignComponent* component, cons
       Parameter* p =
           new Parameter(fC, name, fC->SymName(name), fC->Child(Data_type_or_implicit), port_param);
       p->setUhdmParam(param);
+      if (isMultiDimension)
+        p->setMultidimension();
       component->insertParameter(p);
 
       param->Typespec(ts);
+      if (ts && (ts->UhdmType() == uhdmunsupported_typespec)) {
+        component->needLateTypedefBinding(param);
+      }
       if (ts) {
         ts->VpiParent(param);
         if (ts->VpiName() == "")
@@ -2041,6 +2122,9 @@ bool CompileHelper::compileParameterDeclaration(DesignComponent* component, cons
       param->VpiSigned(isSigned);
       param->VpiFile(fC->getFileName());
       param->VpiLineNo(fC->Line(Param_assignment));
+      param->VpiColumnNo(fC->Column(Param_assignment));
+      param->VpiEndLineNo(fC->EndLine(Param_assignment));
+      param->VpiEndColumnNo(fC->EndColumn(Param_assignment));
       param->VpiName(fC->SymName(name));
       // Unpacked dimensions
       if (fC->Type(value) == VObjectType::slUnpacked_dimension) {
@@ -2065,6 +2149,9 @@ bool CompileHelper::compileParameterDeclaration(DesignComponent* component, cons
         component->addParamAssign(assign);
         param_assign->VpiFile(fC->getFileName());
         param_assign->VpiLineNo(fC->Line(Param_assignment));
+        param_assign->VpiColumnNo(fC->Column(Param_assignment));
+        param_assign->VpiEndLineNo(fC->EndLine(Param_assignment));
+        param_assign->VpiEndColumnNo(fC->EndColumn(Param_assignment));
         param_assigns->push_back(param_assign);
         param->Expr(unpacked);
         param_assign->Lhs(param);
@@ -2176,6 +2263,9 @@ UHDM::any* CompileHelper::compileTfCall(DesignComponent* component, const FileCo
       const std::string& mname = fC->SymName(tfNameNode);
       fcall->VpiFile(fC->getFileName());
       fcall->VpiLineNo(fC->Line(Constant_bit_select));
+      fcall->VpiColumnNo(fC->Column(Constant_bit_select));
+      fcall->VpiEndLineNo(fC->EndLine(Constant_bit_select));
+      fcall->VpiEndColumnNo(fC->EndColumn(Constant_bit_select));
       fcall->VpiName(mname);
       ref_obj* prefix = s.MakeRef_obj();
       prefix->VpiName(name);
@@ -2282,7 +2372,7 @@ VectorOfany* CompileHelper::compileTfCallArguments(DesignComponent* component, c
 
 UHDM::assignment* CompileHelper::compileBlockingAssignment(DesignComponent* component, const FileContent* fC,
         NodeId Operator_assignment, bool blocking,
-        CompileDesign* compileDesign, UHDM::any* pstmt) {
+        CompileDesign* compileDesign, UHDM::any* pstmt, ValuedComponentI* instance) {
   UHDM::Serializer& s = compileDesign->getSerializer();
   NodeId Variable_lvalue = 0;
   if (fC->Type(Operator_assignment) == slVariable_lvalue) {
@@ -2298,12 +2388,15 @@ UHDM::assignment* CompileHelper::compileBlockingAssignment(DesignComponent* comp
     NodeId Variable_lvalue = Operator_assignment;
     Delay_or_event_control = fC->Sibling(Variable_lvalue);
     NodeId Expression = fC->Sibling(Delay_or_event_control);
-    lhs_rf = dynamic_cast<expr*> (compileExpression(component, fC, Variable_lvalue, compileDesign));
+    lhs_rf = dynamic_cast<expr*> (compileExpression(component, fC, Variable_lvalue, compileDesign, pstmt, instance));
     AssignOp_Assign = 0;
     if (fC->Type(Delay_or_event_control) == slDynamic_array_new) {
       method_func_call* fcall = s.MakeMethod_func_call();
       fcall->VpiFile(fC->getFileName());
       fcall->VpiLineNo(fC->Line(Delay_or_event_control));
+      fcall->VpiColumnNo(fC->Column(Delay_or_event_control));
+      fcall->VpiEndLineNo(fC->EndLine(Delay_or_event_control));
+      fcall->VpiEndColumnNo(fC->EndColumn(Delay_or_event_control));
       fcall->VpiName("new");
       NodeId List_of_arguments = fC->Child(Delay_or_event_control);
       if (List_of_arguments) {
@@ -2313,14 +2406,14 @@ UHDM::assignment* CompileHelper::compileBlockingAssignment(DesignComponent* comp
       Delay_or_event_control = 0;
       rhs_rf = fcall;
     } else {
-      rhs_rf = compileExpression(component, fC, Expression, compileDesign);
+      rhs_rf = compileExpression(component, fC, Expression, compileDesign, pstmt, instance);
     }
   } else if (fC->Type(Variable_lvalue) == slVariable_lvalue) {
     AssignOp_Assign = fC->Sibling(Variable_lvalue);
     NodeId Hierarchical_identifier = Variable_lvalue;
     if (fC->Type(Hierarchical_identifier) == slHierarchical_identifier)
        Hierarchical_identifier = fC->Child(Hierarchical_identifier);
-    lhs_rf = dynamic_cast<expr*> (compileExpression(component, fC, Hierarchical_identifier, compileDesign, pstmt));
+    lhs_rf = dynamic_cast<expr*> (compileExpression(component, fC, Hierarchical_identifier, compileDesign, pstmt, instance));
     NodeId Expression = 0;
     if (fC->Type(AssignOp_Assign) == VObjectType::slExpression) {
       Expression = AssignOp_Assign;
@@ -2332,18 +2425,21 @@ UHDM::assignment* CompileHelper::compileBlockingAssignment(DesignComponent* comp
     } else {
       Expression = fC->Sibling(AssignOp_Assign);
     }
-    rhs_rf = compileExpression(component, fC, Expression, compileDesign, pstmt);
+    rhs_rf = compileExpression(component, fC, Expression, compileDesign, pstmt, instance);
   } else if (fC->Type(Operator_assignment) == slHierarchical_identifier) {
     //  = new ...
     NodeId Hierarchical_identifier = Operator_assignment;
     NodeId Select = fC->Sibling(Hierarchical_identifier);
     NodeId Class_new = fC->Sibling(Select);
     NodeId List_of_arguments = fC->Child(Class_new);
-    lhs_rf = dynamic_cast<expr*> (compileExpression(component, fC, Hierarchical_identifier, compileDesign));
+    lhs_rf = dynamic_cast<expr*> (compileExpression(component, fC, Hierarchical_identifier, compileDesign, pstmt, instance));
     method_func_call* fcall = s.MakeMethod_func_call();
     fcall->VpiName("new");
     fcall->VpiFile(fC->getFileName());
     fcall->VpiLineNo(fC->Line(Hierarchical_identifier));
+    fcall->VpiColumnNo(fC->Column(Hierarchical_identifier));
+    fcall->VpiEndLineNo(fC->EndLine(Hierarchical_identifier));
+    fcall->VpiEndColumnNo(fC->EndColumn(Hierarchical_identifier));
     if (List_of_arguments) {
       VectorOfany *arguments = compileTfCallArguments(component, fC, List_of_arguments, compileDesign, fcall, nullptr, false, false);
       fcall->Tf_call_args(arguments);
@@ -2429,7 +2525,7 @@ std::vector<UHDM::attribute*>* CompileHelper::compileAttributes(
 
 UHDM::clocking_block* CompileHelper::compileClockingBlock(
     DesignComponent* component, const FileContent* fC, NodeId nodeId,
-    CompileDesign* compileDesign) {
+    CompileDesign* compileDesign, UHDM::any* pstmt, ValuedComponentI* instance) {
   UHDM::Serializer& s = compileDesign->getSerializer();
   UHDM::clocking_block* cblock = s.MakeClocking_block();
 
@@ -2453,8 +2549,11 @@ UHDM::clocking_block* CompileHelper::compileClockingBlock(
   cblock->VpiName(name);
   cblock->VpiFile(fC->getFileName());
   cblock->VpiLineNo(fC->Line(nodeId));
+  cblock->VpiColumnNo(fC->Column(nodeId));
+  cblock->VpiEndLineNo(fC->EndLine(nodeId));
+  cblock->VpiEndColumnNo(fC->EndColumn(nodeId));
   event_control* ctrl =
-      compileClocking_event(component, fC, clocking_event, compileDesign);
+      compileClocking_event(component, fC, clocking_event, compileDesign, cblock, instance);
   cblock->Clocking_event(ctrl);
   NodeId clocking_item = fC->Sibling(clocking_event);
   while (clocking_item) {
@@ -2482,7 +2581,7 @@ UHDM::clocking_block* CompileHelper::compileClockingBlock(
           }
           if (Skew) {
             UHDM::delay_control* dc = (delay_control*)compileDelayControl(
-                component, fC, Skew, compileDesign);
+                component, fC, Skew, compileDesign, cblock, instance);
             cblock->Input_skew(dc);
           }
           Clocking_skew = fC->Sibling(Clocking_skew);
@@ -2501,7 +2600,7 @@ UHDM::clocking_block* CompileHelper::compileClockingBlock(
             }
             if (Skew) {
               UHDM::delay_control* dc = (delay_control*)compileDelayControl(
-                  component, fC, Clocking_skew, compileDesign);
+                  component, fC, Clocking_skew, compileDesign, cblock, instance);
               cblock->Output_skew(dc);
             }
           }
@@ -2524,7 +2623,7 @@ UHDM::clocking_block* CompileHelper::compileClockingBlock(
           }
           if (Skew) {
             UHDM::delay_control* dc = (delay_control*)compileDelayControl(
-                component, fC, Skew, compileDesign);
+                component, fC, Skew, compileDesign, cblock, instance);
             cblock->Input_skew(dc);
           }
         }
@@ -2546,7 +2645,7 @@ UHDM::clocking_block* CompileHelper::compileClockingBlock(
           }
           if (Skew) {
             UHDM::delay_control* dc = (delay_control*)compileDelayControl(
-                component, fC, Skew, compileDesign);
+                component, fC, Skew, compileDesign, cblock, instance);
             cblock->Output_skew(dc);
           }
         }
@@ -2567,7 +2666,7 @@ UHDM::clocking_block* CompileHelper::compileClockingBlock(
           }
           if (Skew) {
             dcInp = (delay_control*)compileDelayControl(component, fC, Skew,
-                                                        compileDesign);
+                                                        compileDesign, cblock, instance);
           }
         }
       } else if (direction == slClockingDir_Output) {
@@ -2587,7 +2686,7 @@ UHDM::clocking_block* CompileHelper::compileClockingBlock(
           }
           if (Skew) {
             dcOut = (delay_control*)compileDelayControl(component, fC, Skew,
-                                                        compileDesign);
+                                                        compileDesign, cblock, instance);
           }
         }
       } else if (direction == slClockingDir_InputOutput) {
@@ -2607,7 +2706,7 @@ UHDM::clocking_block* CompileHelper::compileClockingBlock(
           }
           if (Skew) {
             dcInp = (delay_control*)compileDelayControl(component, fC, Skew,
-                                                        compileDesign);
+                                                        compileDesign, cblock, instance);
           }
 
           Clocking_skew = fC->Sibling(Clocking_skew);
@@ -2626,7 +2725,7 @@ UHDM::clocking_block* CompileHelper::compileClockingBlock(
             }
             if (Skew) {
               dcOut = (delay_control*)compileDelayControl(component, fC, Skew,
-                                                          compileDesign);
+                                                          compileDesign, cblock, instance);
             }
           }
         }
@@ -2651,7 +2750,7 @@ UHDM::clocking_block* CompileHelper::compileClockingBlock(
           io->VpiOutputEdge(outputEdge);
           if (Expr) {
             UHDM::expr* exp =
-                (expr*)compileExpression(component, fC, Expr, compileDesign);
+                (expr*)compileExpression(component, fC, Expr, compileDesign, ctrl, instance);
             io->Expr(exp);
             if (exp) exp->VpiParent(ctrl);
           }
@@ -2682,11 +2781,11 @@ UHDM::clocking_block* CompileHelper::compileClockingBlock(
 
 UHDM::event_control* CompileHelper::compileClocking_event(
     DesignComponent* component, const FileContent* fC, NodeId nodeId,
-    CompileDesign* compileDesign) {
+    CompileDesign* compileDesign, UHDM::any* pexpr, ValuedComponentI* instance) {
   UHDM::Serializer& s = compileDesign->getSerializer();
   event_control* ctrl = s.MakeEvent_control();
   NodeId identifier = fC->Child(nodeId);
-  UHDM::any* exp = compileExpression(component, fC, identifier, compileDesign);
+  UHDM::any* exp = compileExpression(component, fC, identifier, compileDesign, pexpr, instance);
   ctrl->VpiCondition(exp);
   if (exp) exp->VpiParent(ctrl);
   return ctrl;

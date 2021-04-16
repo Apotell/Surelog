@@ -137,13 +137,16 @@ bool CompilePackage::collectObjects_(CollectType collectType) {
         case VObjectType::slPackage_import_item: {
           if (collectType != CollectType::FUNCTION) break; 
           m_helper.importPackage(m_package, m_design, fC, id, m_compileDesign);
+          m_helper.compileImportDeclaration(m_package, fC, id, m_compileDesign);
           break;
         }
         case VObjectType::slParameter_declaration: {
           if (collectType != CollectType::DEFINITION) break; 
           NodeId list_of_type_assignments = fC->Child(id);
           if (fC->Type(list_of_type_assignments) ==
-              slList_of_type_assignments) {
+              slList_of_type_assignments||
+              fC->Type(list_of_type_assignments) ==
+                  slType) {
             // Type param
             m_helper.compileParameterDeclaration(
                 m_package, fC, list_of_type_assignments, m_compileDesign, false,
@@ -159,7 +162,9 @@ bool CompilePackage::collectObjects_(CollectType collectType) {
           if (collectType != CollectType::DEFINITION) break; 
           NodeId list_of_type_assignments = fC->Child(id);
           if (fC->Type(list_of_type_assignments) ==
-              slList_of_type_assignments) {
+              slList_of_type_assignments||
+              fC->Type(list_of_type_assignments) ==
+                  slType) {
             // Type param
             m_helper.compileParameterDeclaration(
                 m_package, fC, list_of_type_assignments, m_compileDesign, true,

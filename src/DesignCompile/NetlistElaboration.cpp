@@ -20,6 +20,9 @@
  *
  * Created on Mar 1, 2020, 6:36 PM
  */
+
+#include <string.h>
+
 #include "Utils/StringUtils.h"
 #include "SourceCompile/VObjectTypes.h"
 #include "Design/VObject.h"
@@ -53,7 +56,7 @@
 #include "ElaboratorListener.h"
 #include "clone_tree.h"
 #include <queue>
-
+#include <algorithm>
 #include "uhdm.h"
 #include "Serializer.h"
 #include "UhdmWriter.h"
@@ -112,6 +115,7 @@ bool NetlistElaboration::elaborate() {
 bool NetlistElaboration::elab_parameters_(ModuleInstance* instance, bool param_port) {
   Serializer& s =  m_compileDesign->getSerializer();
   if (!instance) return true;
+  bool en_replay = m_compileDesign->getCompiler()->getCommandLineParser()->replay();
   ModuleDefinition* mod =
       dynamic_cast<ModuleDefinition*>(instance->getDefinition());
   if (!mod) return true;
@@ -142,15 +146,25 @@ bool NetlistElaboration::elab_parameters_(ModuleInstance* instance, bool param_p
       if (rhs && rhs->UhdmType() == uhdmoperation) {
         operation* op = (operation*)rhs;
         int opType = op->VpiOpType();
-        if (opType == vpiCastOp) {
+        if (opType == vpiCastOp ||
+           (opType == vpiMultiConcatOp) ||
+           (opType == vpiConditionOp)) {
           isMultidimensional = false;
         }
+
         // Don't reduce these operations
         if (opType == vpiAssignmentPatternOp || opType == vpiMultiAssignmentPatternOp) {
-         // ElaboratorListener listener(&s);
-          //param_assign* pclone = (param_assign*) UHDM::clone_tree(mod_assign, s, &listener);
-         // pclone->VpiParent((any*) mod_assign->VpiParent());
-          assigns->push_back(mod_assign);
+          ElaboratorListener listener(&s);
+          param_assign* pclone = (param_assign*) UHDM::clone_tree(mod_assign, s, &listener);
+          pclone->VpiParent((any*) mod_assign->VpiParent());
+          
+          if (opType == vpiAssignmentPatternOp) {
+            const any* lhs = pclone->Lhs();
+            any* rhs = (any*) pclone->Rhs();
+            m_helper.reorderAssignmentPattern(mod, lhs, rhs, m_compileDesign, instance, 0);
+          }
+          
+          assigns->push_back(pclone);
           continue;
         }
       }
@@ -159,6 +173,9 @@ bool NetlistElaboration::elab_parameters_(ModuleInstance* instance, bool param_p
     param_assign* inst_assign = s.MakeParam_assign();
     inst_assign->VpiFile(mod_assign->VpiFile());
     inst_assign->VpiLineNo(mod_assign->VpiLineNo());
+    inst_assign->VpiColumnNo(mod_assign->VpiColumnNo());
+    inst_assign->VpiEndLineNo(mod_assign->VpiEndLineNo());
+    inst_assign->VpiEndColumnNo(mod_assign->VpiEndColumnNo());
     inst_assign->Lhs((any*) mod_assign->Lhs());
     const std::string& paramName = assign->getFileContent()->SymName(assign->getParamId());
 
@@ -174,6 +191,17 @@ bool NetlistElaboration::elab_parameters_(ModuleInstance* instance, bool param_p
           expr* rhs = (expr*)m_helper.compileExpression(
               pmod, tpm->getFileContent(), tpm->getNodeId(), m_compileDesign,
               nullptr, pinst, !isMultidimensional);
+          
+          if (en_replay && m_helper.errorOnNegativeConstant(pmod, rhs, m_compileDesign, pinst)) {
+            bool replay = false;
+            // GDB: p replay=true
+            if (replay) {
+              m_helper.compileExpression(pmod, tpm->getFileContent(),
+                                         tpm->getNodeId(), m_compileDesign,
+                                         nullptr, pinst, !isMultidimensional);
+            }
+          }
+          
           // If it is a complex expression (! constant)...
           if ((!rhs) || (rhs && (rhs->UhdmType() != uhdmconstant))) {
             // But if this value can be reduced to a constant then take the
@@ -182,6 +210,17 @@ bool NetlistElaboration::elab_parameters_(ModuleInstance* instance, bool param_p
                 mod, assign->getFileContent(), assign->getAssignId(),
                 m_compileDesign, nullptr, instance, true);
             if (crhs && crhs->UhdmType() == uhdmconstant) {
+              
+              if (en_replay && m_helper.errorOnNegativeConstant(mod, crhs, m_compileDesign, instance)) {
+                bool replay = false;
+                // GDB: p replay=true
+                if (replay) {
+                  m_helper.compileExpression(
+                      mod, assign->getFileContent(), assign->getAssignId(),
+                      m_compileDesign, nullptr, instance, true);
+                }
+              }
+              
               constant* ccrhs = (constant*)crhs;
               const std::string& s = ccrhs->VpiValue();
               Value* v1 = m_exprBuilder.fromVpiValue(s);
@@ -206,14 +245,50 @@ bool NetlistElaboration::elab_parameters_(ModuleInstance* instance, bool param_p
         c->VpiSize(value->getSize());
         c->VpiConstType(value->vpiValType());
         c->VpiLineNo(assign->getFileContent()->Line(assign->getAssignId()));
+        c->VpiColumnNo(assign->getFileContent()->Column(assign->getAssignId()));
+        c->VpiEndLineNo(assign->getFileContent()->EndLine(assign->getAssignId()));
+        c->VpiEndColumnNo(assign->getFileContent()->EndColumn(assign->getAssignId()));
         inst_assign->Rhs(c);
+        
+        if (en_replay && m_helper.errorOnNegativeConstant(mod, c, m_compileDesign, instance)) {
+          bool replay = false;
+          //GDB: p replay=true
+          if (replay) {
+            instance->getValue(paramName, m_exprBuilder);
+          }
+        }
+        
         override = true;
       }
     }
     if (override == false) {
       expr* exp = instance->getComplexValue(paramName);
       if (exp) {
+        if (!isMultidimensional) {
+          bool invalidValue = false;
+          expr* tmp = m_helper.reduceExpr(exp, invalidValue, mod, m_compileDesign, instance, exp->VpiFile(), exp->VpiLineNo(), nullptr, true);
+          if (tmp && (invalidValue == false))
+            exp = tmp;
+        }
         inst_assign->Rhs(exp);
+        
+        if (en_replay && m_helper.errorOnNegativeConstant(mod, exp, m_compileDesign, instance)) {
+          bool replay = false;
+          //GDB: p replay=true
+          if (replay) {
+            expr* exp = instance->getComplexValue(paramName);
+            if (exp) {
+              if (!isMultidimensional) {
+                bool invalidValue = false;
+                expr* tmp = m_helper.reduceExpr(
+                    exp, invalidValue, mod, m_compileDesign, instance,
+                    exp->VpiFile(), exp->VpiLineNo(), nullptr, true);
+                if (tmp && (invalidValue == false)) exp = tmp;
+              }
+            }
+          }
+        }
+        
         override = true;
       }
     }
@@ -381,6 +456,9 @@ bool NetlistElaboration::high_conn_(ModuleInstance* instance) {
               ref_obj* ref = s.MakeRef_obj();
               ref->VpiFile(fC->getFileName());
               ref->VpiLineNo(fC->Line(sigId));
+              ref->VpiColumnNo(fC->Column(sigId));
+              ref->VpiEndLineNo(fC->EndLine(sigId));
+              ref->VpiEndColumnNo(fC->EndColumn(sigId));
               p->High_conn(ref);
               ref->VpiName(sigName);
               any* net = bind_net_(parent, sigName);
@@ -405,10 +483,16 @@ bool NetlistElaboration::high_conn_(ModuleInstance* instance) {
           }
           p->VpiFile(fC->getFileName());
           p->VpiLineNo(fC->Line(Net_lvalue));
+          p->VpiColumnNo(fC->Column(Net_lvalue));
+          p->VpiEndLineNo(fC->EndLine(Net_lvalue));
+          p->VpiEndColumnNo(fC->EndColumn(Net_lvalue));
           if (fC->Type(sigId) == slStringConst) {
             ref_obj* ref = s.MakeRef_obj();
             ref->VpiFile(fC->getFileName());
             ref->VpiLineNo(fC->Line(sigId));
+            ref->VpiColumnNo(fC->Column(sigId));
+            ref->VpiEndLineNo(fC->EndLine(sigId));
+            ref->VpiEndColumnNo(fC->EndColumn(sigId));
             p->High_conn(ref);
             ref->VpiName(sigName);
             any* net = bind_net_(parent, sigName);
@@ -449,41 +533,32 @@ bool NetlistElaboration::high_conn_(ModuleInstance* instance) {
       if (fC->Type(Named_port_connection) == VObjectType::slOrdered_port_connection) {
         orderedConnection = true;
       }
+
+      bool wildcard = false;
+      NodeId MemNamed_port_connection = Named_port_connection;
+      unsigned int wildcardLineNumber = 0;
+      unsigned short wildcardColumnNumber = 0;
+      while (Named_port_connection) {
+        NodeId formalId = fC->Child(Named_port_connection);
+        if (fC->Type(formalId) == VObjectType::slDotStar) {
+          // .* connection
+          wildcard = true;
+          wildcardLineNumber = fC->Line(formalId);
+          wildcardColumnNumber = fC->Column(formalId);
+          break;
+        }
+        Named_port_connection = fC->Sibling(Named_port_connection);
+      }
+
+      Named_port_connection = MemNamed_port_connection;
       while (Named_port_connection) {
         NodeId formalId = fC->Child(Named_port_connection);
         if (formalId == 0)
           break;
         if (fC->Type(formalId) == VObjectType::slDotStar) {
           // .* connection
-          if (signals) {
-            for (Signal* s1 : *signals) {
-              port* p = nullptr;
-              if (ports) {
-                if (index < ports->size()) {
-                  p = (*ports)[index];
-                } else {
-                  p = s.MakePort();
-                  ports->push_back(p);
-                }
-              } else {
-                ports = s.MakePortVec();
-                netlist->ports(ports);
-                p = s.MakePort();
-                ports->push_back(p);
-              }
-              const std::string& sigName = s1->getName();
-              p->VpiName(sigName);
-              ref_obj* ref = s.MakeRef_obj();
-              ref->VpiFile(fC->getFileName());
-              ref->VpiLineNo(fC->Line(formalId));
-              ref->VpiName(sigName);
-              p->High_conn(ref);
-              UHDM::any* net = bind_net_(parent, sigName);
-              ref->Actual_group(net);
-              index++;
-            }
-          }
-          break;
+          Named_port_connection = fC->Sibling(Named_port_connection);
+          continue;
         }
 
         std::string formalName = fC->SymName(formalId);
@@ -498,11 +573,47 @@ bool NetlistElaboration::high_conn_(ModuleInstance* instance) {
           NodeId tmp = Expression;
           if (fC->Type(tmp) == slOpenParens) {
             tmp =  fC->Sibling(tmp);
-            if (fC->Type(tmp) == slCloseParens) { // .p()  explict disconnect
+            if (fC->Type(tmp) == slCloseParens) {  // .p()  explicit disconnect
               Named_port_connection = fC->Sibling(Named_port_connection);
+              port* p = nullptr;
+              if (ports) {
+                if (index < ports->size()) {
+                  if (orderedConnection) {
+                    formalName = ((*signals)[index])->getName();
+                    p = (*ports)[index];
+                  } else {
+                    for (port* pItr : *ports) {
+                      if (pItr->VpiName() == formalName) {
+                        p = pItr;
+                        break;
+                      }
+                    }
+                    if (p == nullptr) p = (*ports)[index];
+                  }
+                } else {
+                  p = s.MakePort();
+                  ports->push_back(p);
+                  p->VpiName(formalName);
+                }
+              } else {
+                ports = s.MakePortVec();
+                netlist->ports(ports);
+                p = s.MakePort();
+                ports->push_back(p);
+                p->VpiName(formalName);
+              }
+              operation* op = s.MakeOperation();
+              op->VpiOpType(vpiNullOp);
+              op->VpiFile(fC->getFileName());
+              op->VpiLineNo(fC->Line(tmp));
+              op->VpiColumnNo(fC->EndColumn(tmp));
+              op->VpiEndLineNo(fC->EndLine(tmp));
+              op->VpiEndColumnNo(fC->Column(tmp));
+              p->High_conn(op);
               index++;
               continue;
-            } else if (fC->Type(tmp) == slExpression) { // .p(s) connection by name
+            } else if (fC->Type(tmp) ==
+                       slExpression) {  // .p(s) connection by name
               formalId = tmp;
               Expression = tmp;
             }
@@ -569,10 +680,13 @@ bool NetlistElaboration::high_conn_(ModuleInstance* instance) {
           ref_obj* ref = s.MakeRef_obj();
           ref->VpiFile(fC->getFileName());
           ref->VpiLineNo(fC->Line(sigId));
+          ref->VpiColumnNo(fC->Column(sigId));
+          ref->VpiEndLineNo(fC->EndLine(sigId));
+          ref->VpiEndColumnNo(fC->EndColumn(sigId));
           ref->VpiName(sigName);
           p->High_conn(ref);
           ref->Actual_group(net);
-        } else {
+        } else if (hexpr != nullptr) {
           p->High_conn(hexpr);
           if (hexpr->UhdmType() == uhdmref_obj) {
             ((ref_obj*)hexpr)->Actual_group(net);
@@ -651,6 +765,44 @@ bool NetlistElaboration::high_conn_(ModuleInstance* instance) {
 
         Named_port_connection = fC->Sibling(Named_port_connection);
         index++;
+      }
+      if (wildcard) {
+        if (signals) {
+          // Add missing ports
+          VectorOfport* newPorts = s.MakePortVec();
+          for (Signal* s1 : *signals) {
+            const std::string& sigName = s1->getName();
+            bool found = false;
+            port* pp = nullptr;
+            for (port* p : *ports) {
+              if (p->VpiName() == s1->getName()) {
+                newPorts->push_back(p);
+                found = true;
+                pp = p;
+                break;
+              }
+            }
+            if (!found) {
+              port* p = s.MakePort();
+              p->VpiName(sigName);
+              newPorts->push_back(p);
+              pp = p;
+            }
+            if (pp->High_conn() == nullptr) {
+              ref_obj* ref = s.MakeRef_obj();
+              ref->VpiFile(fC->getFileName());
+              ref->VpiLineNo(wildcardLineNumber);
+              ref->VpiColumnNo(wildcardColumnNumber);
+              ref->VpiEndLineNo(wildcardLineNumber);
+              ref->VpiEndColumnNo(wildcardColumnNumber + 1);
+              ref->VpiName(sigName);
+              pp->High_conn(ref);
+              UHDM::any* net = bind_net_(parent, sigName);
+              ref->Actual_group(net);
+            }  
+          }
+          netlist->ports(newPorts);
+        }
       }
     }
   }
@@ -767,9 +919,15 @@ bool NetlistElaboration::elab_generates_(ModuleInstance* instance) {
       gen_scope_array->Gen_scopes(vec);
       gen_scope->VpiFile(fC->getFileName());
       gen_scope->VpiLineNo(fC->Line(mm->getGenBlockId()));
+      gen_scope->VpiColumnNo(fC->Column(mm->getGenBlockId()));
+      gen_scope->VpiEndLineNo(fC->EndLine(mm->getGenBlockId()));
+      gen_scope->VpiEndColumnNo(fC->EndColumn(mm->getGenBlockId()));
       gen_scope->VpiName(instance->getInstanceName());
       gen_scope_array->VpiFile(fC->getFileName());
       gen_scope_array->VpiLineNo(fC->Line(mm->getGenBlockId()));
+      gen_scope_array->VpiColumnNo(fC->Column(mm->getGenBlockId()));
+      gen_scope_array->VpiEndLineNo(fC->EndLine(mm->getGenBlockId()));
+      gen_scope_array->VpiEndColumnNo(fC->EndColumn(mm->getGenBlockId()));
       gen_scopes->push_back(gen_scope_array);
 
       if (mm->getContAssigns())
@@ -916,7 +1074,9 @@ void NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance, Modul
 
   // Assignment to a default value
   expr* exp = exprFromAssign_(comp, fC, id, unpackedDimension, child);
-
+  if ((exp == nullptr) && sig->getDefaultValue()) {
+    exp = (expr*) m_helper.compileExpression(comp, fC, sig->getDefaultValue(), m_compileDesign, nullptr, child, true);
+  }
   if (isNet) {
     // Nets
     if (dtype) {
@@ -1016,11 +1176,14 @@ void NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance, Modul
           nets = s.MakeNetVec();
           netlist->nets(nets);
         }
-        if (obj->UhdmType() == uhdmenum_net) {
+        UHDM_OBJECT_TYPE nettype = obj->UhdmType();
+        if (nettype == uhdmenum_net) {
           ((enum_net*)obj)->VpiName(signame);
-        } else if (obj->UhdmType() == uhdmstruct_net) {
+        } else if (nettype == uhdmstruct_net) {
           ((struct_net*)obj)->VpiName(signame);
-        }
+        } else if (nettype == uhdmpacked_array_net) {
+          ((packed_array_net*)obj)->VpiName(signame);
+        } 
         nets->push_back((net*)obj);
       }
     } else if (subnettype == slStruct_union) {
@@ -1107,8 +1270,12 @@ void NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance, Modul
 
     if (exp) {
       cont_assign* assign = s.MakeCont_assign();
+      assign->VpiNetDeclAssign(true);
       assign->VpiFile(fC->getFileName());
       assign->VpiLineNo(fC->Line(id));
+      assign->VpiColumnNo(fC->Column(id));
+      assign->VpiEndLineNo(fC->EndLine(id));
+      assign->VpiEndColumnNo(fC->EndColumn(id));
       assign->Lhs((expr*)obj);
       assign->Rhs(exp);
       m_helper.setParentNoOverride((expr*)obj, assign);
@@ -1132,6 +1299,9 @@ void NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance, Modul
 
   if (obj) {
     obj->VpiLineNo(fC->Line(id));
+    obj->VpiColumnNo(fC->Column(id));
+    obj->VpiEndLineNo(fC->EndLine(id));
+    obj->VpiEndColumnNo(fC->EndColumn(id));
     obj->VpiFile(fC->getFileName());
     if (parentNetlist)
       parentNetlist->getSymbolTable().insert(std::make_pair(parentSymbol, obj));
@@ -1193,6 +1363,9 @@ bool NetlistElaboration::elab_ports_nets_(ModuleInstance* instance, ModuleInstan
         const std::string& signame = sig->getName();
         dest_port->VpiName(signame);
         dest_port->VpiLineNo(fC->Line(id));
+        dest_port->VpiColumnNo(fC->Column(id));
+        dest_port->VpiEndLineNo(fC->EndLine(id));
+        dest_port->VpiEndColumnNo(fC->EndColumn(id));
         dest_port->VpiFile(fC->getFileName());
         if (ports == nullptr) {
           ports = s.MakePortVec();
@@ -1315,7 +1488,8 @@ bool NetlistElaboration::elab_ports_nets_(ModuleInstance* instance, ModuleInstan
         // Nets pass
         if (do_ports)
           continue;
-        if (portInterf.find(sig->getName()) == portInterf.end())
+        const std::string& signame = sig->getName();
+        if (portInterf.find(signame) == portInterf.end())
           elabSignal(sig, instance, child, parentNetlist, netlist, comp, prefix);   
 
       } else if (pass == 2) {

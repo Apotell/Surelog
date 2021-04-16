@@ -44,11 +44,13 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
 find_package(SWIG 3.0 REQUIRED)
 
 # Python
+if (SURELOG_WITH_PYTHON)
 find_package(Python3 3.3 REQUIRED COMPONENTS Interpreter Development)
 message(STATUS "Python3_LIBRARIES = ${Python3_LIBRARIES}")
 message(STATUS "Python3_EXECUTABLE = ${Python3_EXECUTABLE}")
 message(STATUS "Python3_INCLUDE_DIRS = ${Python3_INCLUDE_DIRS}")
 message(STATUS "Python3_RUNTIME_LIBRARY_DIRS = ${Python3_RUNTIME_LIBRARY_DIRS}")
+endif()
 
 # Includes
 include_directories("${PROJECT_SOURCE_DIR}/third_party/antlr4/runtime/Cpp/runtime/src/")
@@ -61,7 +63,10 @@ include_directories("${PROJECT_SOURCE_DIR}/third_party/UHDM/third_party/capnprot
 include_directories("${PROJECT_SOURCE_DIR}/third_party/UHDM/third_party/UHDM/src/")
 include_directories("${PROJECT_SOURCE_DIR}/third_party/googletest/googletest/include/")
 include_directories("${PROJECT_SOURCE_DIR}/third_party/googletest/googlemock/include/")
+
+if (SURELOG_WITH_PYTHON)
 include_directories(${Python3_INCLUDE_DIRS}) # Keep this at the end
+endif()
 
 # Use tcmalloc if installed and not NO_TCMALLOC is on. TODO: don't use negative
 # names, but positive. -DWITH_TCMALLOC=Off is easier to understand than
@@ -104,9 +109,12 @@ else()
     # Under MSYS some files are too large to build without additional flags
     set(MSYS_COMPILE_OPTIONS "-m64 -Wa,-mbig-obj")
   endif()
+  #set(MEM_SANITIZER_FLAGS
+  #    "-fsanitize=address -fno-omit-frame-pointer"
+  #)
 
   set(CMAKE_CXX_FLAGS_DEBUG
-      "${CMAKE_CXX_FLAGS_DEBUG} ${TCMALLOC_COMPILE_OPTIONS} -Wall -O0 -g ${MSYS_COMPILE_OPTIONS} ${MY_CXX_WARNING_FLAGS}"
+      "${CMAKE_CXX_FLAGS_DEBUG} ${TCMALLOC_COMPILE_OPTIONS} -Wall -O0 -g ${MSYS_COMPILE_OPTIONS} ${MY_CXX_WARNING_FLAGS} ${MEM_SANITIZER_FLAGS}"
   )
   set(CMAKE_CXX_FLAGS_RELWITHDEBINFO
       "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} ${TCMALLOC_COMPILE_OPTIONS} -Wall -O3 -g ${MSYS_COMPILE_OPTIONS} -DNDEBUG ${MY_CXX_WARNING_FLAGS}"
@@ -210,6 +218,7 @@ add_custom_command(
   COMMAND tclsh SourceCompile/generate_parser_listener.tcl out_dir=${PROJECT_SOURCE_DIR}/src
 )
 
+if (SURELOG_WITH_PYTHON)
 add_custom_command(
   OUTPUT  ${PROJECT_SOURCE_DIR}/src/API/SV3_1aPythonListener.h
           ${PROJECT_SOURCE_DIR}/src/API/slSV3_1aPythonListener.py
@@ -228,6 +237,7 @@ add_custom_command(
   COMMAND ${SWIG_EXECUTABLE} -c++ -python -o API/slapi_wrap.cxx API/slapi_scripts.i
   COMMAND tclsh API/embed_python_api.tcl
 )
+endif()
 
 include_directories(${PROJECT_SOURCE_DIR}/src)
 
@@ -370,6 +380,22 @@ set_target_properties(surelog PROPERTIES PUBLIC_HEADER "${SURELOG_PUBLIC_HEADERS
 add_executable(surelog-bin ${PROJECT_SOURCE_DIR}/src/main.cpp)
 set_target_properties(surelog-bin PROPERTIES OUTPUT_NAME surelog)
 
+if (APPLE)
+  # In macOS, it is necessary to add the correct @rpath to the executable for
+  # finding python dynamic libraries ref: https://gitlab.kitware.com/cmake/cmake/-/issues/21293
+  # https://gitlab.kitware.com/cmake/cmake/-/issues/21947
+  # Python3_LINK_OPTIONS is variable available from cmake 3.19, update cmake using homebrew
+  # if can't update cmake use:
+  # set_target_properties(surelog-bin PROPERTIES BUILD_WITH_INSTALL_RPATH TRUE
+  # INSTALL_RPATH "/Library/Developer/CommandLineTools/Library/Frameworks/")
+  # if you installed python with hombrew. Or if you install python with Xcode:
+  # set_target_properties(surelog-bin PROPERTIES BUILD_WITH_INSTALL_RPATH TRUE
+  # INSTALL_RPATH "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/")
+  if (SURELOG_WITH_PYTHON)
+    target_link_options(surelog-bin PRIVATE ${Python3_LINK_OPTIONS})
+  endif()
+endif()
+
 add_executable(hellosureworld ${PROJECT_SOURCE_DIR}/src/hellosureworld.cpp)
 add_executable(hellouhdm ${PROJECT_SOURCE_DIR}/src/hellouhdm.cpp)
 
@@ -393,18 +419,24 @@ add_dependencies(GenerateParser antlr4_static)
 add_dependencies(surelog GenerateParser)
 add_dependencies(surelog GenerateSerializer)
 
-target_link_libraries(surelog PRIVATE ${Python3_LIBRARIES})
+if (SURELOG_WITH_PYTHON)
+  target_link_libraries(surelog PRIVATE ${Python3_LIBRARIES})
+endif()
+
 if($<BOOL:${TCMALLOC_LIBRARY}>)
   target_link_libraries(surelog PRIVATE tcmalloc)
 endif()
 
 if (UNIX)
-  target_link_libraries(surelog PRIVATE stdc++fs)
   target_link_libraries(surelog PRIVATE dl)
   target_link_libraries(surelog PRIVATE util)
   target_link_libraries(surelog PRIVATE m)
-  target_link_libraries(surelog PRIVATE rt)
   target_link_libraries(surelog PRIVATE pthread)
+endif()
+
+if (CMAKE_SYSTEM_NAME MATCHES "Linux")
+  target_link_libraries(surelog PRIVATE stdc++fs)
+  target_link_libraries(surelog PRIVATE rt)
 endif()
 
 # Unit tests
@@ -466,18 +498,30 @@ add_custom_command(
   WORKING_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
 
 if (WIN32)
-  add_custom_command(
-    TARGET surelog-bin
-    POST_BUILD
-    COMMAND echo "       Creating platform depdendent 'WIN32' staging for precompiled packages"
-    COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/third_party/UVM/ovm-2.1.2 ovm-2.1.2
-    COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/third_party/UVM/1800.2-2017-1.0 1800.2-2017-1.0
-    COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/third_party/UVM/vmm-1.1.1a vmm-1.1.1a
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            ${Python3_RUNTIME_LIBRARY_DIRS}/python3${Python3_VERSION_MINOR}$<$<CONFIG:Debug>:_d>.dll
-            ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
-    COMMAND echo "       Platform depdendent staging completed"
-    WORKING_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
+  if (SURELOG_WITH_PYTHON)
+    add_custom_command(
+      TARGET surelog-bin
+      POST_BUILD
+      COMMAND echo "       Creating platform depdendent 'WIN32' staging for precompiled packages"
+      COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/third_party/UVM/ovm-2.1.2 ovm-2.1.2
+      COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/third_party/UVM/1800.2-2017-1.0 1800.2-2017-1.0
+      COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/third_party/UVM/vmm-1.1.1a vmm-1.1.1a
+      COMMAND ${CMAKE_COMMAND} -E copy_if_different
+              ${Python3_RUNTIME_LIBRARY_DIRS}/python3${Python3_VERSION_MINOR}$<$<CONFIG:Debug>:_d>.dll
+              ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+      COMMAND echo "       Platform depdendent staging completed"
+      WORKING_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
+  else()
+    add_custom_command(
+      TARGET surelog-bin
+      POST_BUILD
+      COMMAND echo "       Creating platform depdendent 'WIN32' staging for precompiled packages"
+      COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/third_party/UVM/ovm-2.1.2 ovm-2.1.2
+      COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/third_party/UVM/1800.2-2017-1.0 1800.2-2017-1.0
+      COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/third_party/UVM/vmm-1.1.1a vmm-1.1.1a
+      COMMAND echo "       Platform depdendent staging completed"
+      WORKING_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
+  endif()
 else()
   add_custom_command(
     TARGET surelog-bin
@@ -617,8 +661,13 @@ if(WIN32)
   install(
     FILES $<TARGET_PDB_FILE:surelog-bin>
           ${UHDM_BINARY_DIR}/bin/uhdm-dump.pdb
-          ${Python3_RUNTIME_LIBRARY_DIRS}/python${Python3_VERSION_MAJOR}${Python3_VERSION_MINOR}$<$<CONFIG:Debug>:_d>.dll
     DESTINATION ${CMAKE_INSTALL_BINDIR})
+  if (SURELOG_WITH_PYTHON)
+    install(
+      FILES $<TARGET_PDB_FILE:surelog-bin>
+            ${Python3_RUNTIME_LIBRARY_DIRS}/python${Python3_VERSION_MAJOR}${Python3_VERSION_MINOR}$<$<CONFIG:Debug>:_d>.dll
+      DESTINATION ${CMAKE_INSTALL_BINDIR})
+  endif()
   install(
     FILES ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/surelog.dir/surelog.pdb
           ${FlatBuffers_BINARY_DIR}/CMakeFiles/flatbuffers.dir/flatbuffers.pdb

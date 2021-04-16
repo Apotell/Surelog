@@ -208,6 +208,9 @@ bool CompileModule::collectUdpObjects_() {
           const std::string& name = fC->SymName(port);
           io->VpiFile(fC->getFileName());
           io->VpiLineNo(fC->Line(port));
+          io->VpiColumnNo(fC->Column(port));
+          io->VpiEndLineNo(fC->EndLine(port));
+          io->VpiEndColumnNo(fC->EndColumn(port));
           io->VpiName(name);
           io->VpiParent(defn);
           ios->push_back(io);
@@ -230,6 +233,9 @@ bool CompileModule::collectUdpObjects_() {
         UHDM::logic_net* net = s.MakeLogic_net();
         net->VpiFile(fC->getFileName());
         net->VpiLineNo(fC->Line(id));
+        net->VpiColumnNo(fC->Column(id));
+        net->VpiEndLineNo(fC->EndLine(id));
+        net->VpiEndColumnNo(fC->EndColumn(id));
         net->Attributes(attributes);
         net->VpiParent(defn);
         if (ios) {
@@ -261,6 +267,9 @@ bool CompileModule::collectUdpObjects_() {
             UHDM::logic_net* net = s.MakeLogic_net();
             net->VpiFile(fC->getFileName());
             net->VpiLineNo(fC->Line(id));
+            net->VpiColumnNo(fC->Column(id));
+            net->VpiEndLineNo(fC->EndLine(id));
+            net->VpiEndColumnNo(fC->EndColumn(id));
             net->Attributes(attributes);
             net->VpiParent(defn);
             for (auto io : *ios) {
@@ -318,6 +327,9 @@ bool CompileModule::collectUdpObjects_() {
         entry->VpiSize(nb);
         entry->VpiFile(fC->getFileName());
         entry->VpiLineNo(fC->Line(Level_input_list));
+        entry->VpiColumnNo(fC->Column(Level_symbol));
+        entry->VpiEndLineNo(fC->EndLine(Level_input_list));
+        entry->VpiEndColumnNo(fC->EndColumn(Level_symbol));
         entries->push_back(entry);
         break;
       }
@@ -416,6 +428,9 @@ bool CompileModule::collectUdpObjects_() {
         entry->VpiSize(nb);
         entry->VpiFile(fC->getFileName());
         entry->VpiLineNo(fC->Line(Level_input_list));
+        entry->VpiColumnNo(fC->Column(Level_symbol));
+        entry->VpiEndLineNo(fC->EndLine(Level_input_list));
+        entry->VpiEndColumnNo(fC->EndColumn(Level_symbol));
         entries->push_back(entry);
         break;
       }
@@ -425,6 +440,9 @@ bool CompileModule::collectUdpObjects_() {
         UHDM::initial* init = s.MakeInitial();
         init->VpiFile(fC->getFileName());
         init->VpiLineNo(fC->Line(id));
+        init->VpiColumnNo(fC->Column(id));
+        init->VpiEndLineNo(fC->EndLine(id));
+        init->VpiEndColumnNo(fC->EndColumn(id));
         init->VpiParent(defn);
         defn->Initial(init);
         UHDM::assign_stmt* assign_stmt = s.MakeAssign_stmt();
@@ -435,6 +453,9 @@ bool CompileModule::collectUdpObjects_() {
         assign_stmt->Lhs(ref);
         assign_stmt->VpiFile(fC->getFileName());
         assign_stmt->VpiLineNo(fC->Line(Identifier));
+        assign_stmt->VpiColumnNo(fC->Column(Identifier));
+        assign_stmt->VpiEndLineNo(fC->EndLine(Identifier));
+        assign_stmt->VpiEndColumnNo(fC->EndColumn(Identifier));
         assign_stmt->VpiParent(init);
         UHDM::constant* c = s.MakeConstant();
         assign_stmt->Rhs(c);
@@ -446,6 +467,9 @@ bool CompileModule::collectUdpObjects_() {
         c->VpiParent(assign_stmt);
         c->VpiFile(fC->getFileName());
         c->VpiLineNo(fC->Line(Value));
+        c->VpiColumnNo(fC->Column(Value));
+        c->VpiEndLineNo(fC->EndLine(Value));
+        c->VpiEndColumnNo(fC->EndColumn(Value));
         break;
       }
       default:
@@ -486,9 +510,12 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
       }
       endOfBlockId = tmp;
       while (endOfBlockId) {
-         if (fC->Type(endOfBlockId) == VObjectType::slEnd)
-           break;
-         endOfBlockId = fC->Sibling(endOfBlockId);
+        VObjectType type = fC->Type(endOfBlockId);
+        if (type == VObjectType::slEnd)
+          break; 
+        endOfBlockId = fC->Sibling(endOfBlockId);
+        if (type == VObjectType::slGenerate_module_item)
+          break; 
       }
       if (fC->Type(id) == VObjectType::slGenerate_item) {
         id = fC->Parent(id);
@@ -531,15 +558,12 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
         case VObjectType::slPackage_import_item: {
           if (collectType != CollectType::FUNCTION) break;
           m_helper.importPackage(m_module, m_design, fC, id, m_compileDesign);
+          m_helper.compileImportDeclaration(m_module, fC, id, m_compileDesign);
           break;
         }
         case VObjectType::slAnsi_port_declaration: {
           if (collectType != CollectType::DEFINITION) break;
           m_helper.compileAnsiPortDeclaration(m_module, fC, id, port_direction);
-          break;
-        }
-        case VObjectType::slParameter_port_list: {
-          ParameterPortListId = id;
           break;
         }
         case VObjectType::slPort: {
@@ -577,13 +601,24 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
         case VObjectType::slContinuous_assign:
         {
           if (collectType != CollectType::OTHER) break;
-          m_helper.compileContinuousAssignment(m_module, fC, fC->Child(id), m_compileDesign);
+          m_helper.compileContinuousAssignment(m_module, fC, fC->Child(id), m_compileDesign, m_instance);
           break;
         }
         case VObjectType::slAlways_construct:
         {
           if (collectType != CollectType::OTHER) break;
-          m_helper.compileAlwaysBlock(m_module, fC, id, m_compileDesign);
+          m_helper.compileAlwaysBlock(m_module, fC, id, m_compileDesign, m_instance);
+          break;
+        }
+        case VObjectType::slParameter_port_list: {
+          if (collectType != CollectType::DEFINITION) break;
+          ParameterPortListId = id;
+          NodeId list_of_param_assignments = fC->Child(id);
+          if (list_of_param_assignments)
+            m_helper.compileParameterDeclaration(
+              m_module, fC, list_of_param_assignments, m_compileDesign, false,
+              m_instance, false, m_instance != nullptr,
+              false);
           break;
         }
         case VObjectType::slParameter_declaration: {
@@ -593,7 +628,7 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
           if (fC->Type(list_of_type_assignments) ==
                   slList_of_type_assignments ||
               fC->Type(list_of_type_assignments) ==
-                  slList_of_param_assignments) {
+                  slType) {
             // Type param
             m_helper.compileParameterDeclaration(
                 m_module, fC, list_of_type_assignments, m_compileDesign, false,
@@ -612,7 +647,7 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
           if (fC->Type(list_of_type_assignments) ==
               slList_of_type_assignments || 
               fC->Type(list_of_type_assignments) ==
-              slList_of_param_assignments) {
+              slType) {
             // Type param
             m_helper.compileParameterDeclaration(
                 m_module, fC, list_of_type_assignments, m_compileDesign, true,
@@ -780,10 +815,18 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
         case VObjectType::slPackage_import_item: {
           if (collectType != CollectType::FUNCTION) break;
           m_helper.importPackage(m_module, m_design, fC, id, m_compileDesign);
+          m_helper.compileImportDeclaration(m_module, fC, id, m_compileDesign);
           break;
         }
         case VObjectType::slParameter_port_list: {
+          if (collectType != CollectType::DEFINITION) break;
           ParameterPortListId = id;
+          NodeId list_of_param_assignments = fC->Child(id);
+          if (list_of_param_assignments)
+            m_helper.compileParameterDeclaration(
+              m_module, fC, list_of_param_assignments, m_compileDesign, false,
+              m_instance, false, m_instance != nullptr,
+              false);
           break;
         }
         case VObjectType::slAnsi_port_declaration: {
@@ -806,7 +849,7 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
         case VObjectType::slContinuous_assign: {
           if (collectType != CollectType::OTHER) break;
           m_helper.compileContinuousAssignment(m_module, fC, fC->Child(id),
-                                               m_compileDesign);
+                                               m_compileDesign, m_instance);
           break;
         }
         case VObjectType::slTask_declaration: {
@@ -941,7 +984,9 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
 
           NodeId list_of_type_assignments = fC->Child(id);
           if (fC->Type(list_of_type_assignments) ==
-              slList_of_type_assignments) {
+              slList_of_type_assignments ||
+              fC->Type(list_of_type_assignments) ==
+                  slType) {
             // Type param
             m_helper.compileParameterDeclaration(
                 m_module, fC, list_of_type_assignments, m_compileDesign, false,
@@ -958,7 +1003,9 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
           if (collectType != CollectType::DEFINITION) break;
           NodeId list_of_type_assignments = fC->Child(id);
           if (fC->Type(list_of_type_assignments) ==
-              slList_of_type_assignments) {
+              slList_of_type_assignments ||
+              fC->Type(list_of_type_assignments) ==
+                  slType) {
             // Type param
             m_helper.compileParameterDeclaration(
                 m_module, fC, list_of_type_assignments, m_compileDesign, true,
@@ -1139,7 +1186,7 @@ void CompileModule::compileClockingBlock_(const FileContent* fC, NodeId id) {
   else
     clocking_block_symbol = m_symbols->registerSymbol("unnamed_clocking_block");
   UHDM::clocking_block* cblock =
-      m_helper.compileClockingBlock(m_module, fC, id, m_compileDesign);
+      m_helper.compileClockingBlock(m_module, fC, id, m_compileDesign, nullptr, m_instance);
   ClockingBlock cb(fC, clocking_block_type, clocking_event, type, cblock);
   m_module->addClockingBlock(clocking_block_symbol, cb);
 }

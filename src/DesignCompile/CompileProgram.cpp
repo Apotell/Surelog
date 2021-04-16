@@ -140,10 +140,17 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
       case VObjectType::slPackage_import_item: {
         if (collectType != CollectType::FUNCTION) break;
         m_helper.importPackage(m_program, m_design, fC, id, m_compileDesign);
+        m_helper.compileImportDeclaration(m_program, fC, id, m_compileDesign);
         break;
       }
       case VObjectType::slParameter_port_list: {
+        if (collectType != CollectType::DEFINITION) break;
         ParameterPortListId = id;
+        NodeId list_of_param_assignments = fC->Child(id);
+        if (list_of_param_assignments)
+          m_helper.compileParameterDeclaration(
+              m_program, fC, list_of_param_assignments, m_compileDesign, false,
+              nullptr, false, false, false);
         break;
       }
       case VObjectType::slAnsi_port_declaration: {
@@ -183,14 +190,14 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
       case VObjectType::slContinuous_assign: {
         if (collectType != CollectType::OTHER) break;
         m_helper.compileContinuousAssignment(m_program, fC, fC->Child(id),
-                                             m_compileDesign);
+                                             m_compileDesign, nullptr);
         break;
       }
       case VObjectType::slParameter_declaration: {
         if (collectType != CollectType::DEFINITION) break;
         NodeId list_of_type_assignments = fC->Child(id);
         if (fC->Type(list_of_type_assignments) == slList_of_type_assignments ||
-            fC->Type(list_of_type_assignments) == slList_of_param_assignments) {
+            fC->Type(list_of_type_assignments) == slType) {
           // Type param
           m_helper.compileParameterDeclaration(
               m_program, fC, list_of_type_assignments, m_compileDesign, false,
@@ -207,7 +214,7 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
         if (collectType != CollectType::DEFINITION) break;
         NodeId list_of_type_assignments = fC->Child(id);
         if (fC->Type(list_of_type_assignments) == slList_of_type_assignments ||
-            fC->Type(list_of_type_assignments) == slList_of_param_assignments) {
+            fC->Type(list_of_type_assignments) == slType) {
           // Type param
           m_helper.compileParameterDeclaration(
               m_program, fC, list_of_type_assignments, m_compileDesign, true,

@@ -27,6 +27,25 @@
             ]
         },
         {
+            "name": "UtdSV",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/dbuild/bin/surelog",
+            "args": ["-batch", "batch.txt"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/third_party/tests/UtdSV",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
             "name": "Ibex",
             "type": "cppdbg",
             "request": "launch",
@@ -241,9 +260,28 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/dbuild/bin/surelog",
-            "args": ["-DSURELOG_DIR=/home/alain/Surelog", "-f", "/home/alain/Surelog/third_party/tests/black-parrot/bp_top/syn/BlackParrot.debug"],
+            "args": ["-DSURELOG_DIR=/home/alain/Surelog", "-DBP_TOP_DIR=../../../../../bp_top/", "-DHARDFLOAT_DIR=../../../../../external/HardFloat/", "-DBP_ME_DIR=../../../../../bp_me/", "-DBP_BE_DIR=../../../../../bp_be/", "-DBP_FE_DIR=../../../../../bp_fe/", "-DBP_COMMON_DIR=../../../../../bp_common/", "-DBASEJUMP_STL_DIR=../../../../../external/basejump_stl/", "-f", "/home/alain/Surelog/third_party/tests/black-parrot/bp_top/syn/BlackParrot.debug"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/third_party/tests/black-parrot/bp_top/syn/results/verilator/bp_tethered.e_bp_default_cfg.none.build",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "BlackScratch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/dbuild/bin/surelog",
+            "args": ["-DSURELOG_DIR=/home/alain/Surelog", "-DBP_TOP_DIR=../bp_top/", "-DHARDFLOAT_DIR=../external/HardFloat/", "-DBP_ME_DIR=../bp_me/", "-DBP_BE_DIR=../bp_be/", "-DBP_FE_DIR=../bp_fe/", "-DBP_COMMON_DIR=../bp_common/", "-DBASEJUMP_STL_DIR=../external/basejump_stl/", "-f", "flist.vcs", "-parse", "-d", "uhdm", "-nobuiltin", "-d", "ast", "-nocache"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/third_party/tests/black-parrot/scratch",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
@@ -263,6 +301,27 @@
             "args": ["-parse", "-f", "SimpleParserTest.sl", "-d", "ast", "-d", "uhdm", "-nocache"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/third_party/tests/SimpleParserTest",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "BuildUVMPkg",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/dbuild/bin/surelog",
+            "args": ["-nobuiltin", "-createcache", 
+                "+incdir+.+1800.2-2017-1.0/src/", "1800.2-2017-1.0/src/uvm_pkg.sv", "-writepp", 
+                "-parse", "-nocomp", "-noelab", "-verbose"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/dbuild/bin",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
@@ -450,7 +509,26 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/dbuild/bin/surelog",
-            "args": ["-parse", "tests/ScratchPad.sv","-d", "inst" ,"-d", "ast", "-d", "uhdm","-nobuiltin", "-nocache", "-d", "vpi_ids", "-elabuhdm"],
+            "args": ["-parse", "tests/ScratchPad.sv","-d", "inst" ,"-d", "ast", "-d", "uhdm","-nobuiltin", "-nocache", "-d", "vpi_ids", "-elabuhdm", "-d", "coveruhdm", "-replay"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "BlackParrotConf",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/dbuild/bin/surelog",
+            "args": ["-parse", "tests/BlackParrotConf/dut.sv","-d", "inst", "-nobuiltin", "-nocache",  "-elabuhdm"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

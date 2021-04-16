@@ -20,6 +20,9 @@
  *
  * Created on January 17, 2020, 9:13 PM
  */
+
+#include <string.h>
+
 #include <map>
 #include <sstream>
 #include "uhdm.h"
@@ -62,9 +65,10 @@
 using namespace SURELOG;
 using namespace UHDM;
 
-bool UhdmChecker::registerFile(const FileContent* fC) {
+bool UhdmChecker::registerFile(const FileContent* fC, std::set<std::string>& moduleNames) {
   VObject current = fC->Object(fC->getSize() - 2);
   NodeId id = current.m_child;
+  SymbolId fileId = fC->getSymbolId();
   if (!id) id = current.m_sibling;
   if (!id) return false;
   std::stack<NodeId> stack;
@@ -77,14 +81,38 @@ bool UhdmChecker::registerFile(const FileContent* fC) {
     fileItr = fileNodeCoverMap.find(fC);
   }
   std::map<unsigned int, int>& uhdmCover = (*fileItr).second;
-
+  bool skipModule = false;
+  NodeId endModuleNode = 0;
   while (stack.size()) {
     id = stack.top();
     stack.pop();
     current = fC->Object(id);
     bool skip = false;
     VObjectType type = (VObjectType) current.m_type;
-    if (type == VObjectType::slEnd ||
+    if ( type == VObjectType::slEnd) 
+      skip = true;
+    
+    // Skip macro expansion which resides in another file (header)
+    SymbolId fid = fC->getFileId(id);
+    if (fid != fileId) {
+      if (current.m_sibling)
+        stack.push(current.m_sibling);
+      continue;
+    }
+      
+    if (type == VObjectType::slModule_declaration) {
+      NodeId stId = fC->sl_collect(id, VObjectType::slStringConst,
+                                         VObjectType::slAttr_spec);
+      if (stId != InvalidNodeId) {
+        std::string name = fC->getLibrary()->getName() + "@" +  fC->SymName(stId);
+        if (moduleNames.find(name) == moduleNames.end()) {
+          skipModule = true;
+        }
+      }
+      endModuleNode = fC->Parent(id);
+      endModuleNode = fC->Sibling(endModuleNode);
+    }
+    if ( type == VObjectType::slDescription || 
         type == VObjectType::slEndcase ||
         type == VObjectType::slEndtask ||
         type == VObjectType::slEndfunction||
@@ -105,7 +133,6 @@ bool UhdmChecker::registerFile(const FileContent* fC) {
         type == VObjectType::slEndspecify ||
         type == VObjectType::slEndsequence ||
         type == VObjectType::slPort_declaration ||
-        type == VObjectType::slPackage_import_item ||
         type == VObjectType::slList_of_ports ||
         type == VObjectType::slList_of_port_declarations ||
         type == VObjectType::slPort ||
@@ -123,9 +150,8 @@ bool UhdmChecker::registerFile(const FileContent* fC) {
       }
       skip = true; // Only skip the item itself
 
-      if (type == VObjectType::slPackage_import_item) // Skip the item and its sibling/child
-        continue;
     }
+ 
     if (((type == VObjectType::slStringConst) && (fC->Type(current.m_parent) == slModule_declaration)) || // endmodule : name
         ((type == VObjectType::slStringConst) && (fC->Type(current.m_parent) == slPackage_declaration)) || // endpackage : name
         ((type == VObjectType::slStringConst) && (fC->Type(current.m_parent) == slFunction_body_declaration)) || // endfunction  : name
@@ -135,21 +161,26 @@ bool UhdmChecker::registerFile(const FileContent* fC) {
         ((type == VObjectType::slStringConst) && (fC->Type(current.m_parent) == slType_declaration)) // struct name
         ) {
       std::map<unsigned int, int>::iterator lineItr =  uhdmCover.find(current.m_line);
-      if (lineItr != uhdmCover.end()) {
-        //uhdmCover.erase(lineItr);
-        (*lineItr).second = 1;
-      } else {
-        uhdmCover.insert(std::make_pair(current.m_line, 1));
+      if (skipModule == false) {
+        if (lineItr != uhdmCover.end()) {
+          (*lineItr).second = 1;
+        } else {
+          uhdmCover.insert(std::make_pair(current.m_line, 1));
+        }
       }
       skip = true; // Only skip the item itself
     }
-
+    
     if (current.m_sibling)
       stack.push(current.m_sibling);
     if (current.m_child)
        stack.push(current.m_child);
-    if (skip == false)
-      uhdmCover.insert(std::make_pair(current.m_line, 0));
+    if (skip == false && skipModule == false)
+      uhdmCover.insert(std::make_pair(current.m_line, 0)); 
+
+    if (id == endModuleNode) {
+      skipModule = false;
+    }  
   }
   return true;
 }
@@ -158,7 +189,6 @@ bool UhdmChecker::reportHtml(CompileDesign* compileDesign, const std::string& re
   ErrorContainer* errors = compileDesign->getCompiler()->getErrorContainer();
   SymbolTable* symbols = compileDesign->getCompiler()->getSymbolTable();
   std::ofstream report;
-  std::cout << "UHDM HTML COVERAGE REPORT: " << std::string(reportFile + ".html") << std::endl;
   report.open(reportFile + ".html");
   if (report.bad())
     return false;
@@ -327,7 +357,10 @@ void UhdmChecker::annotate(CompileDesign* m_compileDesign) {
     if (!bc)
       continue;
     bool unsupported = false;
-    if (bc->UhdmType() == uhdmunsupported_expr || bc->UhdmType() == uhdmunsupported_stmt)
+    UHDM_OBJECT_TYPE ot = bc->UhdmType();
+    if ((ot == uhdmunsupported_expr) || 
+        (ot == uhdmunsupported_stmt) || 
+        (ot == uhdmunsupported_typespec))
       unsupported  = true;
     const std::string& fn = bc->VpiFile();
     const auto& fItr =  fileMap.find(fn);
@@ -348,21 +381,50 @@ void UhdmChecker::annotate(CompileDesign* m_compileDesign) {
   }
 }
 
+
+void collectUsedFileContents(std::set<const FileContent*>& files, std::set<std::string>& moduleNames, ModuleInstance* instance) {
+  if (instance) {
+    DesignComponent* def = instance->getDefinition();
+    if (def) {
+      moduleNames.insert(def->getName());
+      for (auto file : def->getFileContents()) {
+        if (file)
+          files.insert(file);
+      }
+    }
+    for (unsigned int index = 0; index < instance->getNbChildren(); index++) {
+      collectUsedFileContents(files, moduleNames, instance->getChildren(index));
+    }
+  }
+}
+
 bool UhdmChecker::check(const std::string& reportFile) {
   // Register all objects location in file content
-  SymbolTable* const symbols = m_compileDesign->getCompiler()->getSymbolTable();
   CommandLineParser* clp = m_compileDesign->getCompiler()->getCommandLineParser();
-  for (const auto& [ fid, fC] : m_design->getAllFileContents()) {
-    const std::string& fileName = symbols->getSymbol(fid);
+  std::set<const FileContent*> files;
+  std::set<std::string> moduleNames;
+  for (ModuleInstance* top : m_design->getTopLevelModuleInstances()) {
+    collectUsedFileContents(files, moduleNames, top);
+  }
+  for (auto packInfo : m_design->getPackageDefinitions()) {
+    Package* pack = packInfo.second;
+    for (auto file : pack->getFileContents()) {
+      if (file)
+        files.insert(file);
+    }
+  }
+
+  for (const FileContent* fC : files) {
+    const std::string& fileName = fC->getFileName();
     if (!clp->createCache()) {
-      if (strstr(fileName.c_str(), "builtin.sv") ||
+      if (strstr(fileName.c_str(), "/bin/sv/builtin.sv") ||
           strstr(fileName.c_str(), "uvm_pkg.sv") ||
           strstr(fileName.c_str(), "ovm_pkg.sv")) {
         continue;
       }
     }
     fileMap.insert(std::make_pair(fileName, fC));
-    registerFile(fC);
+    registerFile(fC, moduleNames);
   }
 
   // Annotate UHDM object coverage

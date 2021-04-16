@@ -56,13 +56,18 @@ SymbolId SV3_1aPpTreeListenerHelper::registerSymbol(const std::string &symbol) {
   return m_pp->getCompileSourceFile()->getSymbolTable()->registerSymbol(symbol);
 }
 
-unsigned int SV3_1aPpTreeListenerHelper::getFileLine(ParserRuleContext* ctx,
-                                                SymbolId& fileId) {
+std::tuple<unsigned int, unsigned short, unsigned int, unsigned short> SV3_1aPpTreeListenerHelper::getFileLine(ParserRuleContext* ctx,
+                                                SymbolId& fileId) {                                                
   std::pair<int, int> lineCol = ParseUtils::getLineColumn(m_tokens, ctx);
+  std::pair<int, int> endLineCol = ParseUtils::getEndLineColumn(m_tokens, ctx);
   unsigned int line = 0;
+  unsigned short column = lineCol.second;
+  unsigned int endLine = 0;
+  unsigned short endColumn = endLineCol.second;
   fileId = m_pp->getFileId(lineCol.first);
   line = m_pp->getLineNb(lineCol.first);
-  return line;
+  endLine = m_pp->getLineNb(endLineCol.first);
+  return std::make_tuple(line, column, endLine, endColumn);
 }
 
 void SV3_1aPpTreeListenerHelper::init() {

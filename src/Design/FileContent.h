@@ -157,6 +157,12 @@ class FileContent : public DesignComponent {
 
   unsigned int Line(NodeId index) const;
 
+  unsigned short Column(NodeId index) const;
+
+  unsigned int EndLine(NodeId index) const;
+
+  unsigned short EndColumn(NodeId index) const;
+
   const std::string& SymName(NodeId index) const {
     return m_symbolTable->getSymbol(Name(index));
   }
@@ -206,7 +212,7 @@ class FileContent : public DesignComponent {
   bool diffTree(NodeId id, const FileContent* oFc, NodeId oId,
                 std::string *diff_out) const;
 
-  NodeId getNodeId() const { return m_fileId; }
+  SymbolId getSymbolId() const { return m_fileId; }
 
  protected:
   std::vector<DesignElement> m_elements;

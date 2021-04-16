@@ -11,12 +11,12 @@ endpackage
 
 module flash_ctrl_info_cfg import flash_ctrl_pkg::*; ();
 
-  parameter int InfoSel = 0;
+  parameter int InfoSel = 2;
 
   for(genvar i = 0; i < InfosPerBank; i++) begin : gen_info_priv
 
 
-    if (i > InfoTypeSize[InfoSel+ 2]) begin : gen_invalid_region
+    if (i > InfoTypeSize[InfoSel]) begin : gen_invalid_region
       assign cfgs_o[i] = '0;
     end
   end

@@ -27,7 +27,7 @@
 using namespace SURELOG;
 
 std::string VObject::print(SymbolTable* symbols, unsigned int uniqueId,
-                           NodeId definitionFile) const {
+                           NodeId definitionFile, SymbolId printedFile) const {
   std::string text;
   std::string symbol = symbols->getSymbol(m_name);
   if (symbol == symbols->getBadSymbol()) {
@@ -63,6 +63,14 @@ std::string VObject::print(SymbolTable* symbols, unsigned int uniqueId,
     text += "s<" + std::to_string(m_sibling) + ">";
   }
   text += " ";
-  text += "l<" + std::to_string(m_line) + ">";
+  if (printedFile != m_fileId) {
+    text += "f<" + std::to_string(m_fileId) + ">";
+    text += " ";
+  }
+  text += "l<" + std::to_string(m_line) + ":" + std::to_string(m_column) + ">";
+  if (m_endLine) {
+    text += " ";
+    text += "el<" + std::to_string(m_endLine) + ":" + std::to_string(m_endColumn) + ">";
+  }
   return text;
 }

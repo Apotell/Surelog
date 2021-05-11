@@ -23,8 +23,9 @@
 
 #ifndef UNION_H
 #define UNION_H
-#include <string>
 #include <map>
+#include <string>
+
 #include "Design/DataType.h"
 
 namespace SURELOG {
@@ -39,7 +40,7 @@ class Union : public DataType {
   NodeId getNameId() const { return m_nameId; }
 
  private:
-  NodeId m_nameId;
+  const NodeId m_nameId;
 };
 
 };  // namespace SURELOG

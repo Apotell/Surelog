@@ -23,8 +23,10 @@
 
 #ifndef COMPILATIONUNIT_H
 #define COMPILATIONUNIT_H
-#include "SourceCompile/MacroInfo.h"
+
 #include "Design/TimeInfo.h"
+#include "SourceCompile/MacroInfo.h"
+#include "SourceCompile/SymbolTable.h"
 
 namespace SURELOG {
 

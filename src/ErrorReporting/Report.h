@@ -23,17 +23,23 @@
 
 #ifndef REPORT_H
 #define REPORT_H
+
+#include <utility>
+
+#include "CommandLine/CommandLineParser.h"
+#include "SourceCompile/SymbolTable.h"
+
 namespace SURELOG {
 
 class Report final {
-public:
+ public:
   Report() {}
   std::pair<bool, bool> makeDiffCompUnitReport(CommandLineParser* clp,
                                                SymbolTable* st);
 
-private:
+ private:
   Report(const Report& orig) = delete;
 };
 
-}     // namespace SURELOG
+}  // namespace SURELOG
 #endif /* REPORT_H */

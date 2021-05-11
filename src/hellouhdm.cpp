@@ -24,10 +24,13 @@
 // Example of usage:
 // cd tests/UnitElabBlock
 // hellouhdm top.v -parse -mutestdout
-#include <iostream>
 #include <functional>
-#include "uhdm.h"
+#include <iostream>
+
+#include "headers/ElaboratorListener.h"
+#include "headers/vpi_listener.h"
 #include "surelog.h"
+#include "uhdm.h"
 
 int main(int argc, const char** argv) {
   // Read command line, compile a design, use -parse argument
@@ -40,7 +43,8 @@ int main(int argc, const char** argv) {
   clp->setParse(true);
   clp->setwritePpOutput(true);
   clp->setCompile(true);
-  clp->setElaborate(true);
+  clp->setElaborate(true);  // Request Surelog instance tree Elaboration
+  // clp->setElabUhdm(true);  // Request UHDM Uniquification/Elaboration
   bool success = clp->parseCommandLine(argc, argv);
   errors->printMessages(clp->muteStdout());
   vpiHandle the_design = 0;
@@ -57,6 +61,16 @@ int main(int argc, const char** argv) {
 
   std::string result;
 
+  // If UHDM is not already elaborated/uniquified (uhdm db was saved by a
+  // different process pre-elaboration), then optionally elaborate it:
+  if (the_design && (!vpi_get(vpiElaborated, the_design))) {
+    std::cout << "UHDM Elaboration...\n";
+    UHDM::Serializer serializer;
+    UHDM::ElaboratorListener* listener =
+        new UHDM::ElaboratorListener(&serializer, true);
+    listen_designs({the_design}, listener);
+  }
+
   // Browse the UHDM Data Model using the IEEE VPI API.
   // See third_party/Verilog_Object_Model.pdf
 
@@ -68,15 +82,19 @@ int main(int argc, const char** argv) {
 
   if (the_design) {
     UHDM::design* udesign = nullptr;
-    if (vpi_get(vpiType,the_design) == vpiDesign) {
-      // C++ top handle from which the entire design can be traversed using the C++ API
-      udesign = (UHDM::design*) ((uhdm_handle*)the_design)->object;
+    if (vpi_get(vpiType, the_design) == vpiDesign) {
+      // C++ top handle from which the entire design can be traversed using the
+      // C++ API
+      udesign = (UHDM::design*)((uhdm_handle*)the_design)->object;
       result += "Design name (C++): " + udesign->VpiName() + "\n";
     }
-    // Example demonstrating the classic VPI API traversal of the folded model of the design
-    // Flat non-elaborated module/interface/packages/classes list contains ports/nets/statements (No ranges or sizes here, see elaborated section below)
+    // Example demonstrating the classic VPI API traversal of the folded model
+    // of the design Flat non-elaborated module/interface/packages/classes list
+    // contains ports/nets/statements (No ranges or sizes here, see elaborated
+    // section below)
     result +=
-        "Design name (VPI): " + std::string(vpi_get_str(vpiName, the_design)) + "\n";
+        "Design name (VPI): " + std::string(vpi_get_str(vpiName, the_design)) +
+        "\n";
     // Flat Module list:
     result += "Module List:\n";
     vpiHandle modItr = vpi_iterate(UHDM::uhdmallModules, the_design);
@@ -98,21 +116,21 @@ int main(int argc, const char** argv) {
       // ...
       // Iterate thru statements
       // ...
-      result +=
-          "+ module: " + defName + objectName +
-          ", file:" + std::string(vpi_get_str(vpiFile, obj_h)) +
-          ", line:" + std::to_string(vpi_get(vpiLineNo, obj_h));
+      result += "+ module: " + defName + objectName +
+                ", file:" + std::string(vpi_get_str(vpiFile, obj_h)) +
+                ", line:" + std::to_string(vpi_get(vpiLineNo, obj_h));
       vpiHandle processItr = vpi_iterate(vpiProcess, obj_h);
       while (vpiHandle sub_h = vpi_scan(processItr)) {
-        result +=
-            "\n    \\_ process stmt, file:" + std::string(vpi_get_str(vpiFile, sub_h)) +
-            ", line:" + std::to_string(vpi_get(vpiLineNo, sub_h));
+        result += "\n    \\_ process stmt, file:" +
+                  std::string(vpi_get_str(vpiFile, sub_h)) +
+                  ", line:" + std::to_string(vpi_get(vpiLineNo, sub_h));
         vpi_release_handle(sub_h);
       }
       vpiHandle assignItr = vpi_iterate(vpiContAssign, obj_h);
       while (vpiHandle sub_h = vpi_scan(assignItr)) {
-        result += "\n    \\_ assign stmt, file:" + std::string(vpi_get_str(vpiFile, sub_h)) +
-            ", line:" + std::to_string(vpi_get(vpiLineNo, sub_h));
+        result += "\n    \\_ assign stmt, file:" +
+                  std::string(vpi_get_str(vpiFile, sub_h)) +
+                  ", line:" + std::to_string(vpi_get(vpiLineNo, sub_h));
       }
       vpi_release_handle(assignItr);
       // ...
@@ -124,40 +142,62 @@ int main(int argc, const char** argv) {
     vpi_release_handle(modItr);
 
     // Instance tree:
-    // Instance tree (all sizes evaluated) contains instances, elaborated nets (with ranges)
+    // Elaborated Instance tree
     result += "Instance Tree:\n";
     vpiHandle instItr = vpi_iterate(UHDM::uhdmtopModules, the_design);
     while (vpiHandle obj_h = vpi_scan(instItr)) {
-      std::function<std::string(vpiHandle,  std::string)> inst_visit =
+      std::function<std::string(vpiHandle, std::string)> inst_visit =
           [&inst_visit](vpiHandle obj_h, std::string margin) {
-        std::string res;
-        std::string defName;
-        std::string objectName;
-        if (const char* s = vpi_get_str(vpiDefName, obj_h)) {
-          defName = s;
-        }
-        if (const char* s = vpi_get_str(vpiName, obj_h)) {
-          if (!defName.empty()) {
-            defName += " ";
-          }
-          objectName = std::string("(") + s + std::string(")");
-        }
-        res +=
-          margin + "+ module: " + defName + objectName +
-          ", file:" + std::string(vpi_get_str(vpiFile, obj_h)) +
-          ", line:" + std::to_string(vpi_get(vpiLineNo, obj_h)) + "\n";
-        // ...
-        // Iterate thru ports/nets/low conn/high conn
-        // ...
+            std::string res;
+            std::string defName;
+            std::string objectName;
+            if (const char* s = vpi_get_str(vpiDefName, obj_h)) {
+              defName = s;
+            }
+            if (const char* s = vpi_get_str(vpiName, obj_h)) {
+              if (!defName.empty()) {
+                defName += " ";
+              }
+              objectName = std::string("(") + s + std::string(")");
+            }
+            std::string f;
+            if (const char* s = vpi_get_str(vpiFile, obj_h)) {
+              f = s;
+            }
+            res += margin + "+ module: " + defName + objectName +
+                   ", file:" + f +
+                   ", line:" + std::to_string(vpi_get(vpiLineNo, obj_h)) + "\n";
 
-        // Recursive tree traversal
-        vpiHandle subItr = vpi_iterate(vpiModule, obj_h);
-        margin = "  " + margin;
-        while (vpiHandle sub_h = vpi_scan(subItr)) {
-          res += inst_visit(sub_h, margin);
-        }
-        return res;
-      };
+            // Recursive tree traversal
+            margin = "  " + margin;
+            if (vpi_get(vpiType, obj_h) == vpiModule ||
+                vpi_get(vpiType, obj_h) == vpiGenScope) {
+              vpiHandle subItr = vpi_iterate(vpiModule, obj_h);
+              while (vpiHandle sub_h = vpi_scan(subItr)) {
+                res += inst_visit(sub_h, margin);
+                vpi_release_handle(sub_h);
+              }
+              vpi_release_handle(subItr);
+            }
+            if (vpi_get(vpiType, obj_h) == vpiModule ||
+                vpi_get(vpiType, obj_h) == vpiGenScope) {
+              vpiHandle subItr = vpi_iterate(vpiGenScopeArray, obj_h);
+              while (vpiHandle sub_h = vpi_scan(subItr)) {
+                res += inst_visit(sub_h, margin);
+                vpi_release_handle(sub_h);
+              }
+              vpi_release_handle(subItr);
+            }
+            if (vpi_get(vpiType, obj_h) == vpiGenScopeArray) {
+              vpiHandle subItr = vpi_iterate(vpiGenScope, obj_h);
+              while (vpiHandle sub_h = vpi_scan(subItr)) {
+                res += inst_visit(sub_h, margin);
+                vpi_release_handle(sub_h);
+              }
+              vpi_release_handle(subItr);
+            }
+            return res;
+          };
       result += inst_visit(obj_h, "");
     }
   }

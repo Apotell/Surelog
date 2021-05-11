@@ -23,8 +23,9 @@
 
 #ifndef ERRORDEFINITION_H
 #define ERRORDEFINITION_H
-#include <string>
+
 #include <map>
+#include <string>
 
 namespace SURELOG {
 
@@ -203,16 +204,17 @@ class ErrorDefinition {
 
   class ErrorInfo {
    public:
-    ErrorInfo(ErrorSeverity severity, ErrorCategory category, std::string s,
-              std::string extra)
+    ErrorInfo(ErrorSeverity severity, ErrorCategory category,
+              const std::string& s, const std::string& extra)
         : m_severity(severity),
           m_category(category),
           m_errorText(s),
           m_extraText(extra) {}
+
     ErrorSeverity m_severity;
-    ErrorCategory m_category;
-    std::string m_errorText;
-    std::string m_extraText;
+    const ErrorCategory m_category;
+    const std::string m_errorText;
+    const std::string m_extraText;
   };
 
   static bool init();

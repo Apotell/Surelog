@@ -23,14 +23,16 @@
 
 #ifndef DESIGNCOMPONENT_H
 #define DESIGNCOMPONENT_H
-#include <vector>
+
 #include <map>
-#include "SourceCompile/VObjectTypes.h"
-#include "Design/FileCNodeId.h"
-#include "Design/DataType.h"
-#include "Testbench/TypeDef.h"
+#include <vector>
+
 #include "Common/PortNetHolder.h"
+#include "Design/DataType.h"
+#include "Design/FileCNodeId.h"
 #include "Design/ValuedComponentI.h"
+#include "SourceCompile/VObjectTypes.h"
+#include "Testbench/TypeDef.h"
 
 namespace SURELOG {
 
@@ -41,22 +43,27 @@ class Parameter;
 class ParamAssign;
 
 class ExprEval {
-  public:
-  ExprEval(UHDM::expr* expr, ValuedComponentI* instance, const std::string& fileName, int lineNumber, UHDM::any* pexpr) : 
-               m_expr(expr), m_instance(instance), m_fileName(fileName), m_lineNumber(lineNumber), m_pexpr(pexpr) {}
-  UHDM::expr* m_expr; 
-  ValuedComponentI* m_instance; 
+ public:
+  ExprEval(UHDM::expr* expr, ValuedComponentI* instance,
+           const std::string& fileName, int lineNumber, UHDM::any* pexpr)
+      : m_expr(expr),
+        m_instance(instance),
+        m_fileName(fileName),
+        m_lineNumber(lineNumber),
+        m_pexpr(pexpr) {}
+  UHDM::expr* m_expr;
+  ValuedComponentI* m_instance;
   std::string m_fileName;
   int m_lineNumber;
-  UHDM::any* m_pexpr; 
+  UHDM::any* m_pexpr;
 };
-
 
 class DesignComponent : public ValuedComponentI, public PortNetHolder {
  public:
-  DesignComponent(const DesignComponent* parent,
-                  DesignComponent* definition)
-    : ValuedComponentI(parent, definition), PortNetHolder(), m_instance(nullptr) {}
+  DesignComponent(const DesignComponent* parent, DesignComponent* definition)
+      : ValuedComponentI(parent, definition),
+        PortNetHolder(),
+        m_instance(nullptr) {}
   ~DesignComponent() override {}
 
   virtual unsigned int getSize() const = 0;
@@ -89,7 +96,8 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
   getNamedObjects() {
     return m_namedObjects;
   }
-  const std::pair<FileCNodeId, DesignComponent*>* getNamedObject(const std::string& name) const;
+  const std::pair<FileCNodeId, DesignComponent*>* getNamedObject(
+      const std::string& name) const;
 
   DataTypeMap& getUsedDataTypeMap() { return m_usedDataTypes; }
   DataType* getUsedDataType(const std::string& name);
@@ -117,24 +125,38 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
   const ParameterMap& getParameterMap() const { return m_parameterMap; }
   Parameter* getParameter(const std::string& name) const;
   void insertParameter(Parameter* p);
-  const ParameterVec& getOrderedParameters() const { return m_orderedParameters; }
+  const ParameterVec& getOrderedParameters() const {
+    return m_orderedParameters;
+  }
 
   void addParamAssign(ParamAssign* assign) { m_paramAssigns.push_back(assign); }
   const ParamAssignVec& getParamAssignVec() const { return m_paramAssigns; }
 
   void addImportedSymbol(UHDM::import* i) { m_imported_symbols.push_back(i); }
-  const std::vector<UHDM::import*>& getImportedSymbols() const { return m_imported_symbols; }
+  const std::vector<UHDM::import*>& getImportedSymbols() const {
+    return m_imported_symbols;
+  }
 
   void needLateBinding(UHDM::ref_obj* obj) { m_needLateBinding.push_back(obj); }
-  const std::vector<UHDM::ref_obj*>& getLateBinding() const { return m_needLateBinding; }
+  const std::vector<UHDM::ref_obj*>& getLateBinding() const {
+    return m_needLateBinding;
+  }
 
-  void needLateTypedefBinding(UHDM::any* obj) { m_needLateTypedefBinding.push_back(obj); }
-  const std::vector<UHDM::any*>& getLateTypedefBinding() const { return m_needLateTypedefBinding; }
+  void needLateTypedefBinding(UHDM::any* obj) {
+    m_needLateTypedefBinding.push_back(obj);
+  }
+  const std::vector<UHDM::any*>& getLateTypedefBinding() const {
+    return m_needLateTypedefBinding;
+  }
 
   void setUhdmInstance(UHDM::instance* instance) { m_instance = instance; }
   UHDM::instance* getUhdmInstance() { return m_instance; }
-  void scheduleParamExprEval(const std::string& name, ExprEval& expr_eval) { m_scheduledParamExprEval.push_back(std::make_pair(name, expr_eval)); }
-  std::vector<std::pair<std::string, ExprEval>>& getScheduledParamExprEval() { return m_scheduledParamExprEval; }
+  void scheduleParamExprEval(const std::string& name, ExprEval& expr_eval) {
+    m_scheduledParamExprEval.push_back(std::make_pair(name, expr_eval));
+  }
+  std::vector<std::pair<std::string, ExprEval>>& getScheduledParamExprEval() {
+    return m_scheduledParamExprEval;
+  }
 
  protected:
   std::vector<const FileContent*> m_fileContents;
@@ -146,9 +168,11 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
   std::map<std::string, std::pair<FileCNodeId, DesignComponent*>>
       m_namedObjects;
   std::vector<FileCNodeId> m_empty;
- protected: 
+
+ protected:
   DataTypeMap m_dataTypes;
- private: 
+
+ private:
   DataTypeMap m_usedDataTypes;
   TypeDefMap m_typedefs;
   std::vector<Package*> m_packages;
@@ -161,7 +185,6 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
   ParamAssignVec m_paramAssigns;
   UHDM::instance* m_instance;
   std::vector<std::pair<std::string, ExprEval>> m_scheduledParamExprEval;
-
 };
 
 };  // namespace SURELOG

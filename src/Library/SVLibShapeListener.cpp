@@ -20,38 +20,38 @@
  *
  * Created on January 28, 2018, 10:17 PM
  */
+#include "Library/SVLibShapeListener.h"
+
+#include <regex>
+
 #include "CommandLine/CommandLineParser.h"
+#include "Library/ParseLibraryDef.h"
 #include "SourceCompile/CompilationUnit.h"
-#include "SourceCompile/PreprocessFile.h"
 #include "SourceCompile/CompileSourceFile.h"
 #include "SourceCompile/Compiler.h"
 #include "SourceCompile/ParseFile.h"
-#include "Library/ParseLibraryDef.h"
-#include "Utils/FileUtils.h"
-#include "antlr4-runtime.h"
-#include "atn/ParserATNSimulator.h"
-using namespace antlr4;
-#include "Library/ParseLibraryDef.h"
-#include "Library/SVLibShapeListener.h"
+#include "SourceCompile/PreprocessFile.h"
 #include "Utils/FileUtils.h"
 #include "Utils/ParseUtils.h"
-#include <regex>
+#include "antlr4-runtime.h"
+#include "atn/ParserATNSimulator.h"
+
 using namespace SURELOG;
 
 SVLibShapeListener::SVLibShapeListener(ParseLibraryDef *parser,
                                        antlr4::CommonTokenStream *tokens,
                                        std::string relativePath)
-  : SV3_1aTreeShapeHelper(new ParseFile(parser->getFileId(),
-                                        parser->getSymbolTable(),
-					parser->getErrorContainer()),
-			  tokens, 0),
-    m_parser(parser),
-    m_tokens(tokens),
-    m_currentConfig(NULL),
-    m_relativePath(relativePath) {
-  m_fileContent = new FileContent(m_parser->getFileId(), NULL,
-                                  m_parser->getSymbolTable(),
-                                  m_parser->getErrorContainer(), NULL, 0);
+    : SV3_1aTreeShapeHelper(
+          new ParseFile(parser->getFileId(), parser->getSymbolTable(),
+                        parser->getErrorContainer()),
+          tokens, 0),
+      m_parser(parser),
+      m_tokens(tokens),
+      m_currentConfig(NULL),
+      m_relativePath(relativePath) {
+  m_fileContent =
+      new FileContent(m_parser->getFileId(), NULL, m_parser->getSymbolTable(),
+                      m_parser->getErrorContainer(), NULL, 0);
   m_pf->setFileContent(m_fileContent);
   IncludeFileInfo info(1, m_pf->getFileId(0), 0, 1);
   m_includeFileInfo.push(info);
@@ -62,7 +62,6 @@ SVLibShapeListener::~SVLibShapeListener() {}
 SymbolId SVLibShapeListener::registerSymbol(const std::string &symbol) {
   return m_parser->getSymbolTable()->registerSymbol(symbol);
 }
-
 
 void SVLibShapeListener::enterLibrary_declaration(
     SV3_1aParser::Library_declarationContext *ctx) {
@@ -156,8 +155,7 @@ void SVLibShapeListener::exitString_value(
   }
 }
 
-void SVLibShapeListener::exitIdentifier(
-    SV3_1aParser::IdentifierContext *ctx) {
+void SVLibShapeListener::exitIdentifier(SV3_1aParser::IdentifierContext *ctx) {
   std::string ident;
   if (ctx->Simple_identifier())
     ident = ctx->Simple_identifier()->getText();
@@ -183,9 +181,9 @@ void SVLibShapeListener::exitIdentifier(
 void SVLibShapeListener::exitHierarchical_identifier(
     SV3_1aParser::Hierarchical_identifierContext *ctx) {
   std::string ident;
-  ParserRuleContext *childCtx = NULL;
+  antlr4::ParserRuleContext *childCtx = NULL;
 
-  childCtx = (ParserRuleContext *)ctx->children[0];
+  childCtx = (antlr4::ParserRuleContext *)ctx->children[0];
   ident = ctx->getText();
   ident = std::regex_replace(ident, std::regex(EscapeSequence), "");
   addVObject(childCtx, ident, VObjectType::slStringConst);

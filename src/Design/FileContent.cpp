@@ -20,17 +20,19 @@
  *
  * Created on June 8, 2017, 8:22 PM
  */
-
-#include "SourceCompile/SymbolTable.h"
-#include "Design/TimeInfo.h"
-#include "Design/DesignElement.h"
-#include "Library/Library.h"
-#include "ErrorReporting/ErrorContainer.h"
 #include "Design/FileContent.h"
-#include <queue>
-#include <iostream>
-#include <stack>
+
 #include <string.h>
+
+#include <iostream>
+#include <queue>
+#include <stack>
+
+#include "Design/DesignElement.h"
+#include "Design/TimeInfo.h"
+#include "ErrorReporting/ErrorContainer.h"
+#include "Library/Library.h"
+#include "SourceCompile/SymbolTable.h"
 
 using namespace SURELOG;
 
@@ -62,12 +64,12 @@ std::string FileContent::printObjects() const {
 
   if (m_library) text += "LIB:  " + m_library->getName() + "\n";
   std::string fileName = m_symbolTable->getSymbol(m_fileId);
-  if (strstr(fileName.c_str(), "/bin/sv/builtin.sv"))
-    return "";
+  if (strstr(fileName.c_str(), "/bin/sv/builtin.sv")) return "";
   text += "FILE: " + fileName + "\n";
 
   for (auto object : m_objects) {
-    text += object.print(m_symbolTable, index, GetDefinitionFile(index), m_fileId);
+    text +=
+        object.print(m_symbolTable, index, GetDefinitionFile(index), m_fileId);
     text += "\n";
     index++;
   }
@@ -75,7 +77,8 @@ std::string FileContent::printObjects() const {
 }
 
 std::string FileContent::printObject(NodeId nodeId) const {
-  return m_objects[nodeId].print(m_symbolTable, nodeId, GetDefinitionFile(nodeId), m_fileId);
+  return m_objects[nodeId].print(m_symbolTable, nodeId,
+                                 GetDefinitionFile(nodeId), m_fileId);
 }
 
 unsigned int FileContent::getSize() const { return m_objects.size(); }
@@ -145,7 +148,8 @@ const Program* FileContent::getProgram(const std::string& name) const {
   }
 }
 
-const ClassDefinition* FileContent::getClassDefinition(const std::string& name) const {
+const ClassDefinition* FileContent::getClassDefinition(
+    const std::string& name) const {
   ClassNameClassDefinitionMultiMap::const_iterator itr =
       m_classDefinitions.find(name);
   if (itr == m_classDefinitions.end()) {
@@ -158,8 +162,8 @@ const ClassDefinition* FileContent::getClassDefinition(const std::string& name) 
 std::vector<std::string> FileContent::collectSubTree(NodeId index) {
   std::vector<std::string> text;
 
-  text.push_back(
-      m_objects[index].print(m_symbolTable, index, GetDefinitionFile(index), m_fileId));
+  text.push_back(m_objects[index].print(m_symbolTable, index,
+                                        GetDefinitionFile(index), m_fileId));
 
   if (m_objects[index].m_child) {
     for (auto s : collectSubTree(m_objects[index].m_child)) {
@@ -187,9 +191,7 @@ SymbolId FileContent::GetDefinitionFile(NodeId index) const {
 }
 
 VObject FileContent::Object(NodeId index) const { return m_objects[index]; }
-VObject* FileContent::MutableObject(NodeId index) {
-  return &m_objects[index];
-}
+VObject* FileContent::MutableObject(NodeId index) { return &m_objects[index]; }
 
 NodeId FileContent::UniqueId(NodeId index) { return index; }
 
@@ -220,9 +222,9 @@ VObjectType FileContent::Type(NodeId index) const {
 unsigned int FileContent::Line(NodeId index) const {
   if (index >= m_objects.size()) {
     Location loc(this->m_fileId);
-    Error err (ErrorDefinition::COMP_INTERNAL_ERROR_OUT_OF_BOUND, loc);
+    Error err(ErrorDefinition::COMP_INTERNAL_ERROR_OUT_OF_BOUND, loc);
     m_errors->addError(err);
-    std::cout << "\nINTERNAL OUT OF BOUND ERROR\n\n";  
+    std::cout << "\nINTERNAL OUT OF BOUND ERROR\n\n";
     return m_objects[0].m_line;
   }
   return m_objects[index].m_line;
@@ -231,9 +233,9 @@ unsigned int FileContent::Line(NodeId index) const {
 unsigned short FileContent::Column(NodeId index) const {
   if (index >= m_objects.size()) {
     Location loc(this->m_fileId);
-    Error err (ErrorDefinition::COMP_INTERNAL_ERROR_OUT_OF_BOUND, loc);
+    Error err(ErrorDefinition::COMP_INTERNAL_ERROR_OUT_OF_BOUND, loc);
     m_errors->addError(err);
-    std::cout << "\nINTERNAL OUT OF BOUND ERROR\n\n";  
+    std::cout << "\nINTERNAL OUT OF BOUND ERROR\n\n";
     return m_objects[0].m_column;
   }
   return m_objects[index].m_column;
@@ -242,9 +244,9 @@ unsigned short FileContent::Column(NodeId index) const {
 unsigned int FileContent::EndLine(NodeId index) const {
   if (index >= m_objects.size()) {
     Location loc(this->m_fileId);
-    Error err (ErrorDefinition::COMP_INTERNAL_ERROR_OUT_OF_BOUND, loc);
+    Error err(ErrorDefinition::COMP_INTERNAL_ERROR_OUT_OF_BOUND, loc);
     m_errors->addError(err);
-    std::cout << "\nINTERNAL OUT OF BOUND ERROR\n\n";  
+    std::cout << "\nINTERNAL OUT OF BOUND ERROR\n\n";
     return m_objects[0].m_endLine;
   }
   return m_objects[index].m_endLine;
@@ -253,9 +255,9 @@ unsigned int FileContent::EndLine(NodeId index) const {
 unsigned short FileContent::EndColumn(NodeId index) const {
   if (index >= m_objects.size()) {
     Location loc(this->m_fileId);
-    Error err (ErrorDefinition::COMP_INTERNAL_ERROR_OUT_OF_BOUND, loc);
+    Error err(ErrorDefinition::COMP_INTERNAL_ERROR_OUT_OF_BOUND, loc);
     m_errors->addError(err);
-    std::cout << "\nINTERNAL OUT OF BOUND ERROR\n\n";  
+    std::cout << "\nINTERNAL OUT OF BOUND ERROR\n\n";
     return m_objects[0].m_endColumn;
   }
   return m_objects[index].m_endColumn;
@@ -511,8 +513,8 @@ std::vector<NodeId> FileContent::sl_collect_all(
   return objects;
 }
 
-bool FileContent::diffTree(NodeId root, const FileContent* oFc,
-                           NodeId oroot, std::string *diff_out) const {
+bool FileContent::diffTree(NodeId root, const FileContent* oFc, NodeId oroot,
+                           std::string* diff_out) const {
   diff_out->clear();
 
   VObject current1 = Object(root);

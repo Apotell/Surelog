@@ -21,7 +21,8 @@
  * Created on April 5, 2017, 11:46 PM
  */
 
-#include "SourceCompile/SymbolTable.h"
 #include "SourceCompile/MacroInfo.h"
+
+#include "SourceCompile/SymbolTable.h"
 
 using namespace SURELOG;

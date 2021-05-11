@@ -24,20 +24,21 @@
 #ifndef TASK_H
 #define TASK_H
 #include <string>
-#include "SourceCompile/SymbolTable.h"
+
 #include "Design/FileContent.h"
 #include "Design/Function.h"
+#include "SourceCompile/SymbolTable.h"
 
 namespace SURELOG {
 
 class Task : public Procedure {
  public:
-  Task(DesignComponent* parent, const FileContent* fC,
-       NodeId id, std::string name)
+  Task(DesignComponent* parent, const FileContent* fC, NodeId id,
+       const std::string& name)
       : Procedure(parent, fC, id, name) {}
+  ~Task() override;
 
   bool compile(CompileHelper& compile_helper);
-  ~Task() override;
 };
 
 }  // namespace SURELOG

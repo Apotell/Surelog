@@ -20,28 +20,30 @@
  *
  * Created on November 21, 2019, 10:09 PM
  */
-
 #ifndef SURELOG_H
 #define SURELOG_H
+
+#include "CommandLine/CommandLineParser.h"
+#include "Design/Design.h"
 #include "sv_vpi_user.h"
 
 namespace SURELOG {
-  struct scompiler;
-  // Create a compiler session based on the command line options
-  SURELOG::scompiler* start_compiler (SURELOG::CommandLineParser* clp); 
+struct scompiler;
+// Create a compiler session based on the command line options
+SURELOG::scompiler* start_compiler(SURELOG::CommandLineParser* clp);
 
-  // Surelog internal design representation and AST access
-  SURELOG::Design*    get_design(SURELOG::scompiler* compiler);
+// Surelog internal design representation and AST access
+SURELOG::Design* get_design(SURELOG::scompiler* compiler);
 
-  // UHDM Database design access (use UHDM SystemVerilog Object Model schema to navigate)
-  // see: third_party/Verilog_Object_Model.pdf
-  //      third_party/UHDM/include/
-  //      third_party/UHDM/headers/
-  vpiHandle get_uhdm_design(SURELOG::scompiler* compiler);
+// UHDM Database design access (use UHDM SystemVerilog Object Model schema to
+// navigate) see: third_party/Verilog_Object_Model.pdf
+//      third_party/UHDM/include/
+//      third_party/UHDM/headers/
+vpiHandle get_uhdm_design(SURELOG::scompiler* compiler);
 
-  // Terminate the compiler session, cleanup internal datastructures, 
-  // the design persists post this operation 
-  void       shutdown_compiler(SURELOG::scompiler* compiler);
-}  
+// Terminate the compiler session, cleanup internal datastructures,
+// the design persists post this operation
+void shutdown_compiler(SURELOG::scompiler* compiler);
+}  // namespace SURELOG
 
 #endif

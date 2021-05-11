@@ -26,12 +26,16 @@
 
 #include <string>
 
+#include "Design/Design.h"
+#include "DesignCompile/CompileDesign.h"
+#include "SourceCompile/VObjectTypes.h"
+
 namespace SURELOG {
 
 class UhdmWriter final {
-public:
+ public:
   UhdmWriter(CompileDesign* compiler, Design* design)
-    : m_compileDesign(compiler), m_design(design) {}
+      : m_compileDesign(compiler), m_design(design) {}
 
   vpiHandle write(const std::string& uhdmFile) const;
 
@@ -43,7 +47,7 @@ public:
 
   static unsigned int getStrengthType(VObjectType type);
 
-private:
+ private:
   CompileDesign* const m_compileDesign;
   Design* const m_design;
 };

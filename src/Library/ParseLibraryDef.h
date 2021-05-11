@@ -23,14 +23,18 @@
 
 #ifndef PARSELIBRARYDEF_H
 #define PARSELIBRARYDEF_H
-#include "Library/LibrarySet.h"
+
+#include "CommandLine/CommandLineParser.h"
 #include "Config/ConfigSet.h"
 #include "Design/FileContent.h"
+#include "ErrorReporting/ErrorContainer.h"
+#include "Library/LibrarySet.h"
+#include "SourceCompile/SymbolTable.h"
 
 namespace SURELOG {
 
 class ParseLibraryDef final {
-public:
+ public:
   ParseLibraryDef(CommandLineParser* commandLineParser, ErrorContainer* errors,
                   SymbolTable* symbolTable, LibrarySet* librarySet,
                   ConfigSet* configSet);
@@ -50,7 +54,7 @@ public:
 
   ConfigSet* getConfigSet() { return m_configSet; }
 
-private:
+ private:
   ParseLibraryDef(const ParseLibraryDef& orig) = delete;
 
   SymbolId m_fileId;

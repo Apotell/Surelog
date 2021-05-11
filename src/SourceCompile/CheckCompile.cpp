@@ -20,26 +20,27 @@
  *
  * Created on June 10, 2017, 10:15 PM
  */
+#include "SourceCompile/CheckCompile.h"
+
 #include <iostream>
 #include <set>
-#include "SourceCompile/SymbolTable.h"
-#include "Design/TimeInfo.h"
+
+#include "CommandLine/CommandLineParser.h"
 #include "Design/DesignElement.h"
 #include "Design/FileContent.h"
-#include "ErrorReporting/Location.h"
+#include "Design/TimeInfo.h"
 #include "ErrorReporting/Error.h"
-#include "ErrorReporting/ErrorDefinition.h"
 #include "ErrorReporting/ErrorContainer.h"
+#include "ErrorReporting/ErrorDefinition.h"
+#include "ErrorReporting/Location.h"
 #include "SourceCompile/CompilationUnit.h"
-#include "SourceCompile/PreprocessFile.h"
 #include "SourceCompile/CompileSourceFile.h"
 #include "SourceCompile/Compiler.h"
 #include "SourceCompile/ParseFile.h"
-#include "CommandLine/CommandLineParser.h"
-#include "SourceCompile/CheckCompile.h"
+#include "SourceCompile/PreprocessFile.h"
+#include "SourceCompile/SymbolTable.h"
 
-using namespace SURELOG;
-
+namespace SURELOG {
 CheckCompile::~CheckCompile() {}
 
 bool CheckCompile::check() {
@@ -52,8 +53,7 @@ bool CheckCompile::check() {
 bool CheckCompile::checkSyntaxErrors_() {
   ErrorContainer* errors = m_compiler->getErrorContainer();
   const SURELOG::ErrorContainer::Stats& stats = errors->getErrorStats();
-  if (stats.nbSyntax)
-    return false;
+  if (stats.nbSyntax) return false;
   return true;
 }
 
@@ -65,8 +65,9 @@ bool CheckCompile::mergeSymbolTables_() {
     m_compiler->getSymbolTable()->registerSymbol(fileContent->getFileName());
     for (NodeId id : fileContent->getNodeIds()) {
       *fileContent->getMutableFileId(id) =
-        m_compiler->getSymbolTable()->registerSymbol(
-          fileContent->getSymbolTable()->getSymbol(fileContent->getFileId(id)));
+          m_compiler->getSymbolTable()->registerSymbol(
+              fileContent->getSymbolTable()->getSymbol(
+                  fileContent->getFileId(id)));
     }
     for (DesignElement& elem : fileContent->getDesignElements()) {
       elem.m_name = m_compiler->getSymbolTable()->registerSymbol(
@@ -143,3 +144,4 @@ bool CheckCompile::checkTimescale_() {
 
   return true;
 }
+}  // namespace SURELOG

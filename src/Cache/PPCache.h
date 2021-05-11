@@ -24,10 +24,11 @@
 #ifndef PPCACHE_H
 #define PPCACHE_H
 
-#include "flatbuffers/flatbuffers.h"
-#include "Cache/preproc_generated.h"
-#include <cstdio>  // For printing and file access.
 #include "Cache/Cache.h"
+#include "Cache/preproc_generated.h"
+#include "ErrorReporting/Error.h"
+#include "SourceCompile/PreprocessFile.h"
+#include "SourceCompile/SymbolTable.h"
 
 namespace SURELOG {
 
@@ -35,14 +36,14 @@ class PPCache : Cache {
  public:
   PPCache(PreprocessFile* pp);
 
-  bool restore();
+  bool restore(bool errorsOnly);
   bool save();
 
  private:
   PPCache(const PPCache& orig) = delete;
 
   std::string getCacheFileName_(std::string fileName = "");
-  bool restore_(std::string cacheFileName);
+  bool restore_(std::string cacheFileName, bool errorsOnly);
   bool checkCacheIsValid_(std::string cacheFileName);
 
   PreprocessFile* m_pp;

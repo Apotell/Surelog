@@ -29,8 +29,8 @@
 #include <string_view>
 #include <vector>
 
-#include "SourceCompile/SymbolTable.h"
 #include "Design/FileContent.h"
+#include "SourceCompile/SymbolTable.h"
 
 namespace SURELOG {
 
@@ -50,8 +50,7 @@ class UseClause {
         m_node(id),
         m_used(false) {}
   UseClause(Type type, const std::vector<std::string>& libs,
-            const FileContent* fC,
-            NodeId id)
+            const FileContent* fC, NodeId id)
       : m_type(type),
         m_name(""),
         m_libs(libs),

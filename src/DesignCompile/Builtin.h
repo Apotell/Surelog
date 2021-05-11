@@ -20,26 +20,27 @@
  *
  * Created on May 30, 2019, 6:36 PM
  */
-
 #ifndef BUILTIN_H
 #define BUILTIN_H
 
-namespace SURELOG {
+#include "Design/Design.h"
+#include "DesignCompile/CompileDesign.h"
 
-class Design;
+namespace SURELOG {
 
 // TODO: this looks like it should probably be more a
 // function ? Something like
 // SURELOG::addBuiltinsTo(Design *design);
 class Builtin final {
-public:
-  Builtin(CompileDesign* compiler, Design* design) : m_compiler(compiler), m_design(design) {}
+ public:
+  Builtin(CompileDesign* compiler, Design* design)
+      : m_compiler(compiler), m_design(design) {}
 
   void addBuiltins();
 
-private:
-  CompileDesign* m_compiler;
-  Design* m_design;
+ private:
+  CompileDesign* const m_compiler;
+  Design* const m_design;
 };
 
 };  // namespace SURELOG

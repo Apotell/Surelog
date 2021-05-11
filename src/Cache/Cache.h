@@ -20,13 +20,14 @@
  *
  * Created on April 28, 2017, 9:32 PM
  */
-
 #ifndef CACHE_H
 #define CACHE_H
 
-#include "flatbuffers/flatbuffers.h"
 #include "Cache/header_generated.h"
-#include <cstdio>  // For printing and file access.
+#include "Design/FileContent.h"
+#include "ErrorReporting/ErrorContainer.h"
+#include "SourceCompile/SymbolTable.h"
+#include "flatbuffers/flatbuffers.h"
 
 namespace SURELOG {
 
@@ -34,11 +35,11 @@ namespace SURELOG {
 // things in flatbuffers.
 // All methods are protected as they are ment for derived classes to use.
 class Cache {
-protected:
-  using VectorOffsetError = flatbuffers::Vector<
-    flatbuffers::Offset<SURELOG::CACHE::Error>>;
-  using VectorOffsetString = flatbuffers::Vector<
-    flatbuffers::Offset<flatbuffers::String>>;
+ protected:
+  using VectorOffsetError =
+      flatbuffers::Vector<flatbuffers::Offset<SURELOG::CACHE::Error>>;
+  using VectorOffsetString =
+      flatbuffers::Vector<flatbuffers::Offset<flatbuffers::String>>;
 
   Cache() = default;
 
@@ -56,8 +57,8 @@ protected:
                            std::string cacheFileName);
 
   const flatbuffers::Offset<SURELOG::CACHE::Header> createHeader(
-    flatbuffers::FlatBufferBuilder& builder, std::string schemaVersion,
-    std::string origFileName);
+      flatbuffers::FlatBufferBuilder& builder, std::string schemaVersion,
+      std::string origFileName);
 
   std::pair<flatbuffers::Offset<VectorOffsetError>,
             flatbuffers::Offset<VectorOffsetString>>
@@ -65,24 +66,22 @@ protected:
               SymbolTable& canonicalSymbols, ErrorContainer* errorContainer,
               SymbolTable* symbols, SymbolId subjectId);
 
-  void restoreErrors(
-    const VectorOffsetError* errorsBuf,
-    const VectorOffsetString* symbolBuf,
-    SymbolTable& canonicalSymbols, ErrorContainer* errorContainer,
-    SymbolTable* symbols);
+  void restoreErrors(const VectorOffsetError* errorsBuf,
+                     const VectorOffsetString* symbolBuf,
+                     SymbolTable& canonicalSymbols,
+                     ErrorContainer* errorContainer, SymbolTable* symbols);
 
-  std::vector<CACHE::VObject>
-  cacheVObjects(FileContent* fcontent, SymbolTable& canonicalSymbols,
-                SymbolTable& fileTable, SymbolId fileId);
+  std::vector<CACHE::VObject> cacheVObjects(FileContent* fcontent,
+                                            SymbolTable& canonicalSymbols,
+                                            SymbolTable& fileTable,
+                                            SymbolId fileId);
 
   void restoreVObjects(
-    const flatbuffers::Vector<const SURELOG::CACHE::VObject*>* objects,
-    SymbolTable& canonicalSymbols,
-    SymbolTable& fileTable,
-    SymbolId fileId,
-    FileContent* fileContent);
+      const flatbuffers::Vector<const SURELOG::CACHE::VObject*>* objects,
+      SymbolTable& canonicalSymbols, SymbolTable& fileTable, SymbolId fileId,
+      FileContent* fileContent);
 
-private:
+ private:
   Cache(const Cache& orig) = delete;
 };
 

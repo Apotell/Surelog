@@ -2923,6 +2923,7 @@ n<> u<2867> t<Top_level_rule> l<3:0> el<90:0>
 ====== UHDM =======
 design: (work@top)
 |vpiName:work@top
+|vpiElaborated:1
 |uhdmallPackages:
 \_package: builtin (builtin::), parent:work@top
   |vpiDefName:builtin
@@ -2959,13 +2960,13 @@ design: (work@top)
         |vpiClassDefn:
         \_class_defn: (work@mailbox) ${SURELOG_DIR}/build/bin/sv/builtin.sv:4: , endln:30:8, parent:work@top
     |vpiIODecl:
-    \_io_decl: (bound), parent:work@mailbox::new
+    \_io_decl: (bound)
       |vpiName:bound
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:6:16, endln:6:19, parent:bound
+      \_int_typespec: , line:6:16, endln:6:19
       |vpiExpr:
-      \_constant: , line:6:28, endln:6:29, parent:bound
+      \_constant: , line:6:28, endln:6:29
         |vpiConstType:9
         |vpiDecompile:0
         |vpiSize:64
@@ -2994,8 +2995,10 @@ design: (work@top)
     |vpiVisibility:1
     |vpiName:try_put
     |vpiFullName:work@mailbox::try_put
+    |vpiReturn:
+    \_logic_var: 
     |vpiIODecl:
-    \_io_decl: (message), parent:work@mailbox::try_put
+    \_io_decl: (message)
       |vpiName:message
       |vpiDirection:1
   |vpiMethod:
@@ -3017,7 +3020,7 @@ design: (work@top)
     |vpiReturn:
     \_int_var: , line:21:11, endln:21:14
     |vpiIODecl:
-    \_io_decl: (message), parent:work@mailbox::try_get
+    \_io_decl: (message)
       |vpiName:message
       |vpiDirection:6
   |vpiMethod:
@@ -3039,7 +3042,7 @@ design: (work@top)
     |vpiReturn:
     \_int_var: , line:27:11, endln:27:14
     |vpiIODecl:
-    \_io_decl: (message), parent:work@mailbox::try_peek
+    \_io_decl: (message)
       |vpiName:message
       |vpiDirection:6
 |uhdmallClasses:
@@ -3178,13 +3181,13 @@ design: (work@top)
         |vpiClassDefn:
         \_class_defn: (work@semaphore) ${SURELOG_DIR}/build/bin/sv/builtin.sv:58: , endln:72:8, parent:work@top
     |vpiIODecl:
-    \_io_decl: (keyCount), parent:work@semaphore::new
+    \_io_decl: (keyCount)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:60:15, endln:60:18, parent:keyCount
+      \_int_typespec: , line:60:15, endln:60:18
       |vpiExpr:
-      \_constant: , line:60:30, endln:60:31, parent:keyCount
+      \_constant: , line:60:30, endln:60:31
         |vpiConstType:9
         |vpiDecompile:0
         |vpiSize:64
@@ -3200,9 +3203,9 @@ design: (work@top)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:63:11, endln:63:14, parent:keyCount
+      \_int_typespec: , line:63:11, endln:63:14
       |vpiExpr:
-      \_constant: , line:63:26, endln:63:27, parent:keyCount
+      \_constant: , line:63:26, endln:63:27
         |vpiConstType:9
         |vpiDecompile:1
         |vpiSize:64
@@ -3218,9 +3221,9 @@ design: (work@top)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:66:11, endln:66:14, parent:keyCount
+      \_int_typespec: , line:66:11, endln:66:14
       |vpiExpr:
-      \_constant: , line:66:26, endln:66:27, parent:keyCount
+      \_constant: , line:66:26, endln:66:27
         |vpiConstType:9
         |vpiDecompile:1
         |vpiSize:64
@@ -3234,13 +3237,13 @@ design: (work@top)
     |vpiReturn:
     \_int_var: , line:69:11, endln:69:14
     |vpiIODecl:
-    \_io_decl: (keyCount), parent:work@semaphore::try_get
+    \_io_decl: (keyCount)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:69:23, endln:69:26, parent:keyCount
+      \_int_typespec: , line:69:23, endln:69:26
       |vpiExpr:
-      \_constant: , line:69:38, endln:69:39, parent:keyCount
+      \_constant: , line:69:38, endln:69:39
         |vpiConstType:9
         |vpiDecompile:1
         |vpiSize:64
@@ -3408,7 +3411,6 @@ design: (work@top)
             |vpiName:output_dirs_sparse_lp
             |vpiFullName:work@top.output_dirs_sparse_lp
             |vpiLocalParam:1
-            |INT:5
   |vpiParamAssign:
   \_param_assign: , line:4:12, endln:4:17, parent:work@top
     |vpiRhs:
@@ -3422,6 +3424,7 @@ design: (work@top)
       |vpiName:i
       |vpiFullName:work@top.i
       |vpiLocalParam:1
+      |UINT:0
   |vpiParamAssign:
   \_param_assign: , line:5:11, endln:5:34, parent:work@top
     |vpiRhs:
@@ -3434,6 +3437,7 @@ design: (work@top)
     \_parameter: (work@top.dims_p), line:5:11, endln:5:34, parent:work@top
       |vpiName:dims_p
       |vpiFullName:work@top.dims_p
+      |UINT:2
   |vpiParamAssign:
   \_param_assign: , line:6:10, endln:6:38, parent:work@top
     |vpiRhs:
@@ -6247,7 +6251,7 @@ design: (work@top)
       \_sys_func_call: ($display), line:57:2, endln:57:46, parent:work@top
         |vpiName:$display
         |vpiArgument:
-        \_constant: , line:57:12, endln:57:20, parent:$display
+        \_constant: , line:57:12, endln:57:20
           |vpiConstType:6
           |vpiDecompile:d = %d
           |vpiSize:6
@@ -6261,7 +6265,6 @@ design: (work@top)
             |vpiName:output_dirs_sparse_lp
             |vpiFullName:work@top.output_dirs_sparse_lp
             |vpiLocalParam:1
-            |INT:5
   |vpiParamAssign:
   \_param_assign: , line:4:12, endln:4:17, parent:work@top
     |vpiRhs:
@@ -6301,7 +6304,6 @@ design: (work@top)
     \_parameter: (work@top.dirs_lp), line:6:10, endln:6:38, parent:work@top
       |vpiName:dirs_lp
       |vpiFullName:work@top.dirs_lp
-      |INT:5
   |vpiParamAssign:
   \_param_assign: , line:8:33, endln:25:32, parent:work@top
     |vpiRhs:
@@ -6678,7 +6680,6 @@ design: (work@top)
     \_parameter: (work@middle.A), line:70:12, endln:70:21, parent:work@middle
       |vpiName:A
       |vpiFullName:work@middle.A
-      |UINT:1
   |vpiParameter:
   \_parameter: (work@middle.A3), line:69:16, endln:69:36, parent:work@middle
   |vpiParameter:
@@ -6744,7 +6745,6 @@ design: (work@top)
     \_parameter: (work@bottom.A), line:82:12, endln:82:21, parent:work@bottom
       |vpiName:A
       |vpiFullName:work@bottom.A
-      |UINT:3
   |vpiParameter:
   \_parameter: (work@bottom.A3), line:81:16, endln:81:35, parent:work@bottom
   |vpiParameter:

@@ -20,29 +20,30 @@
  *
  * Created on July 1, 2017, 1:23 PM
  */
+#include "Design/Design.h"
+
 #include <queue>
 #include <set>
-#include "Utils/StringUtils.h"
-#include "SourceCompile/VObjectTypes.h"
-#include "Design/VObject.h"
+
+#include "CommandLine/CommandLineParser.h"
 #include "Design/FileContent.h"
-#include "SourceCompile/SymbolTable.h"
+#include "Design/VObject.h"
 #include "ErrorReporting/Error.h"
 #include "ErrorReporting/ErrorContainer.h"
 #include "ErrorReporting/ErrorDefinition.h"
-#include "CommandLine/CommandLineParser.h"
 #include "SourceCompile/CompilationUnit.h"
-#include "SourceCompile/PreprocessFile.h"
 #include "SourceCompile/CompileSourceFile.h"
 #include "SourceCompile/Compiler.h"
 #include "SourceCompile/ParseFile.h"
-#include "Utils/FileUtils.h"
-#include "Design/Design.h"
+#include "SourceCompile/PreprocessFile.h"
+#include "SourceCompile/SymbolTable.h"
+#include "SourceCompile/VObjectTypes.h"
 #include "Testbench/ClassDefinition.h"
+#include "Utils/FileUtils.h"
+#include "Utils/StringUtils.h"
 
-using namespace SURELOG;
-
-static std::mutex m;
+namespace SURELOG {
+static std::mutex m;  // Why this is a global mutex, not instance mutex ?
 void Design::addFileContent(SymbolId fileId, FileContent* content) {
   m.lock();
   m_fileContents.push_back(std::make_pair(fileId, content));
@@ -142,18 +143,16 @@ std::string Design::reportInstanceTree() const {
           for (auto ps : inst->getMappedValues()) {
             const std::string& name = ps.first;
             Value* val = ps.second.first;
-            tree += std::string("    " + name + " = " + val->uhdmValue() +
-                                     "\n");
+            tree +=
+                std::string("    " + name + " = " + val->uhdmValue() + "\n");
           }
           for (auto ps : inst->getComplexValues()) {
             const std::string& name = ps.first;
-            tree += std::string("    " + name + " = " + "complex" +
-                                     "\n");
+            tree += std::string("    " + name + " = " + "complex" + "\n");
           }
         }
       }
     }
-
   }
 
   return tree;
@@ -321,8 +320,7 @@ void Design::addDefParam(const std::string& name, const FileContent* fC,
   }
 }
 
-void Design::addDefParam_(std::vector<std::string>& path,
-                          const FileContent* fC,
+void Design::addDefParam_(std::vector<std::string>& path, const FileContent* fC,
                           NodeId nodeId, Value* value, DefParam* parent) {
   if (path.size() == 0) {
     parent->setValue(value);
@@ -339,10 +337,9 @@ void Design::addDefParam_(std::vector<std::string>& path,
            previous->getLocation()->getFileId(previous->getNodeId())) ||
           (fC->Line(nodeId) !=
            previous->getLocation()->Line(previous->getNodeId()))) {
-        Location loc1(
-            fC->getFileId(nodeId), fC->Line(nodeId), 0,
-            m_errors->getSymbolTable()->registerSymbol(
-                previous->getFullName()));
+        Location loc1(fC->getFileId(nodeId), fC->Line(nodeId), 0,
+                      m_errors->getSymbolTable()->registerSymbol(
+                          previous->getFullName()));
         Location loc2(previous->getLocation()->getFileId(previous->getNodeId()),
                       previous->getLocation()->Line(previous->getNodeId()), 0,
                       0);
@@ -381,8 +378,7 @@ void Design::checkDefParamUsage(DefParam* parent) {
       Location loc(
           parent->getLocation()->getFileId(parent->getNodeId()),
           parent->getLocation()->Line(parent->getNodeId()), 0,
-          m_errors->getSymbolTable()->registerSymbol(
-              parent->getFullName()));
+          m_errors->getSymbolTable()->registerSymbol(parent->getFullName()));
 
       Error err(ErrorDefinition::ELAB_UNMATCHED_DEFPARAM, loc);
       m_errors->addError(err);
@@ -501,3 +497,21 @@ void Design::clearContainers() {
 
   m_orderedPackageNames.clear();
 }
+
+std::vector<BindStmt*> Design::getBindStmts(const std::string& targetName) {
+  std::vector<BindStmt*> results;
+  BindMap::iterator itr = m_bindMap.find(targetName);
+  while (itr != m_bindMap.end()) {
+    if ((*itr).first != targetName) {
+      break;
+    }
+    results.push_back((*itr).second);
+    itr++;
+  }
+  return results;
+}
+
+void Design::addBindStmt(const std::string& targetName, BindStmt* stmt) {
+  m_bindMap.insert(std::make_pair(targetName, stmt));
+}
+}  // namespace SURELOG

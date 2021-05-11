@@ -20,25 +20,25 @@
  *
  * Created on March 28, 2018, 10:16 PM
  */
-#include "SourceCompile/VObjectTypes.h"
-#include "Design/VObject.h"
-#include "Library/Library.h"
-#include "Design/FileContent.h"
-#include "SourceCompile/SymbolTable.h"
-#include "ErrorReporting/Error.h"
-#include "ErrorReporting/Location.h"
-#include "ErrorReporting/Error.h"
-#include "CommandLine/CommandLineParser.h"
-#include "ErrorReporting/ErrorDefinition.h"
-#include "ErrorReporting/ErrorContainer.h"
-#include "SourceCompile/CompilationUnit.h"
-#include "SourceCompile/PreprocessFile.h"
-#include "SourceCompile/CompileSourceFile.h"
-#include "SourceCompile/ParseFile.h"
-#include "SourceCompile/Compiler.h"
-#include "DesignCompile/CompileDesign.h"
 #include "DesignCompile/CompileFileContent.h"
+
+#include "CommandLine/CommandLineParser.h"
+#include "Design/FileContent.h"
+#include "Design/VObject.h"
+#include "DesignCompile/CompileDesign.h"
 #include "DesignCompile/CompileHelper.h"
+#include "ErrorReporting/Error.h"
+#include "ErrorReporting/ErrorContainer.h"
+#include "ErrorReporting/ErrorDefinition.h"
+#include "ErrorReporting/Location.h"
+#include "Library/Library.h"
+#include "SourceCompile/CompilationUnit.h"
+#include "SourceCompile/CompileSourceFile.h"
+#include "SourceCompile/Compiler.h"
+#include "SourceCompile/ParseFile.h"
+#include "SourceCompile/PreprocessFile.h"
+#include "SourceCompile/SymbolTable.h"
+#include "SourceCompile/VObjectTypes.h"
 
 using namespace SURELOG;
 
@@ -94,7 +94,8 @@ bool CompileFileContent::collectObjects_() {
               n<> u<17> t<Type_declaration> p<18> c<15> l<13>
               n<> u<18> t<Data_declaration> p<19> c<17> l<13>
             */
-            m_helper.compileTypeDef(m_fileContent, m_fileContent, id, m_compileDesign);
+            m_helper.compileTypeDef(m_fileContent, m_fileContent, id,
+                                    m_compileDesign);
             break;
           }
           default:

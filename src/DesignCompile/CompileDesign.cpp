@@ -20,66 +20,66 @@
  *
  * Created on July 1, 2017, 1:11 PM
  */
+#include "DesignCompile/CompileDesign.h"
+
+#if (defined(_MSC_VER) || defined(__MINGW32__) || defined(__CYGWIN__))
+#include <process.h>  // Has to be included before <thread>
+#endif
+
 #include <stdint.h>
 
-#include "SourceCompile/SymbolTable.h"
-#include "Library/Library.h"
-#include "Design/FileContent.h"
-#include "ErrorReporting/Error.h"
-#include "ErrorReporting/Location.h"
-#include "ErrorReporting/Error.h"
-#include "ErrorReporting/ErrorDefinition.h"
-#include "ErrorReporting/ErrorContainer.h"
-#include "SourceCompile/CompilationUnit.h"
-#include "SourceCompile/PreprocessFile.h"
-#include "SourceCompile/CompileSourceFile.h"
 #include "CommandLine/CommandLineParser.h"
-#include "SourceCompile/ParseFile.h"
-#include "Testbench/ClassDefinition.h"
-#include "SourceCompile/Compiler.h"
-#include "DesignCompile/CompileDesign.h"
-#include "DesignCompile/ResolveSymbols.h"
+#include "Design/FileContent.h"
+#include "DesignCompile/Builtin.h"
+#include "DesignCompile/CompileClass.h"
+#include "DesignCompile/CompileFileContent.h"
+#include "DesignCompile/CompileModule.h"
+#include "DesignCompile/CompilePackage.h"
+#include "DesignCompile/CompileProgram.h"
 #include "DesignCompile/DesignElaboration.h"
 #include "DesignCompile/NetlistElaboration.h"
-#include "DesignCompile/UVMElaboration.h"
-#include "DesignCompile/CompilePackage.h"
-#include "DesignCompile/CompileModule.h"
-#include "DesignCompile/CompileFileContent.h"
-#include "DesignCompile/CompileProgram.h"
-#include "DesignCompile/CompileClass.h"
-#include "DesignCompile/Builtin.h"
 #include "DesignCompile/PackageAndRootElaboration.h"
+#include "DesignCompile/ResolveSymbols.h"
+#include "DesignCompile/UVMElaboration.h"
 #include "DesignCompile/UhdmWriter.h"
+#include "ErrorReporting/Error.h"
+#include "ErrorReporting/ErrorContainer.h"
+#include "ErrorReporting/ErrorDefinition.h"
+#include "ErrorReporting/Location.h"
+#include "Library/Library.h"
+#include "SourceCompile/CompilationUnit.h"
+#include "SourceCompile/CompileSourceFile.h"
+#include "SourceCompile/Compiler.h"
+#include "SourceCompile/ParseFile.h"
+#include "SourceCompile/PreprocessFile.h"
+#include "SourceCompile/SymbolTable.h"
+#include "Testbench/ClassDefinition.h"
 #include "vpi_visitor.h"
 
 #ifdef USETBB
 #include <tbb/task.h>
 #include <tbb/task_group.h>
+
 #include "tbb/task_scheduler_init.h"
 #endif
 
-#if (defined(_MSC_VER) || defined(__MINGW32__) || defined(__CYGWIN__))
-  #include <process.h>  // Has to be included before <thread>
-#endif
-
-#include <vector>
 #include <thread>
+#include <vector>
 
 using namespace SURELOG;
 
 CompileDesign::CompileDesign(Compiler* compiler) : m_compiler(compiler) {}
 
-
 bool CompileDesign::compile() {
   ExprBuilder::unitTest();
-  
+
   // Handle UHDM Internal errors
   UHDM::ErrorHandler errHandler = [=](const std::string& msg) {
-     ErrorContainer* errors = m_compiler->getErrorContainer();
-     SymbolTable* symbols = m_compiler->getSymbolTable();
-     Location loc(symbols->registerSymbol(msg));
-     Error err (ErrorDefinition::UHDM_WRONG_OBJECT_TYPE, loc);
-     errors->addError(err);
+    ErrorContainer* errors = m_compiler->getErrorContainer();
+    SymbolTable* symbols = m_compiler->getSymbolTable();
+    Location loc(symbols->registerSymbol(msg));
+    Error err(ErrorDefinition::UHDM_WRONG_OBJECT_TYPE, loc);
+    errors->addError(err);
   };
   m_serializer.SetErrorHandler(errHandler);
 
@@ -95,7 +95,7 @@ bool CompileDesign::compile() {
 }
 
 template <class ObjectType, class ObjectMapType, typename FunctorType>
-void CompileDesign::compileMT_(ObjectMapType& objects, int maxThreadCount) { 
+void CompileDesign::compileMT_(ObjectMapType& objects, int maxThreadCount) {
   if (maxThreadCount == 0) {
     for (auto itr : objects) {
       FunctorType funct(this, itr.second, m_compiler->getDesign(),
@@ -269,13 +269,14 @@ bool CompileDesign::compilation_() {
 
   int maxThreadCount = m_compiler->getCommandLineParser()->getNbMaxTreads();
 
-  // The Actual Module... Compilation is not Multithread safe anymore due to the UHDM model creation 
+  // The Actual Module... Compilation is not Multithread safe anymore due to the
+  // UHDM model creation
   maxThreadCount = 0;
 
   int index = 0;
   do {
-    SymbolTable* symbols = new SymbolTable(
-            m_compiler->getCommandLineParser()->getSymbolTable());
+    SymbolTable* symbols =
+        new SymbolTable(m_compiler->getCommandLineParser()->getSymbolTable());
     m_symbolTables.push_back(symbols);
     ErrorContainer* errors = new ErrorContainer(symbols);
     errors->regiterCmdLine(m_compiler->getCommandLineParser());
@@ -333,8 +334,7 @@ bool CompileDesign::compilation_() {
   return true;
 }
 
-bool CompileDesign::elaboration_()
-{
+bool CompileDesign::elaboration_() {
   PackageAndRootElaboration* packEl = new PackageAndRootElaboration(this);
   packEl->elaborate();
   delete packEl;

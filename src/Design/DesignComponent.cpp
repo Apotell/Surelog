@@ -20,17 +20,18 @@
  *
  * Created on March 25, 2018, 10:27 PM
  */
-#include <vector>
-#include "SourceCompile/SymbolTable.h"
-#include "SourceCompile/VObjectTypes.h"
-#include "Design/FileContent.h"
 #include "Design/DesignComponent.h"
+
+#include <vector>
+
+#include "Design/FileContent.h"
 #include "Design/Function.h"
 #include "Design/Parameter.h"
+#include "SourceCompile/SymbolTable.h"
+#include "SourceCompile/VObjectTypes.h"
 #include "Testbench/Variable.h"
 
-using namespace SURELOG;
-
+namespace SURELOG {
 void DesignComponent::addFileContent(const FileContent* fileContent,
                                      NodeId nodeId) {
   bool add = true;
@@ -42,8 +43,8 @@ void DesignComponent::addFileContent(const FileContent* fileContent,
   }
 }
 
-const std::vector<FileCNodeId>& DesignComponent::getObjects(VObjectType type)
-  const {
+const std::vector<FileCNodeId>& DesignComponent::getObjects(
+    VObjectType type) const {
   auto itr = m_objects.find(type);
   if (itr == m_objects.end()) {
     return m_empty;
@@ -126,7 +127,8 @@ DataType* DesignComponent::getUsedDataType(const std::string& name) {
 const TypeDef* DesignComponent::getTypeDef(const std::string& name) const {
   TypeDefMap::const_iterator itr = m_typedefs.find(name);
   if (itr == m_typedefs.end()) {
-    const DesignComponent* parent = dynamic_cast<const DesignComponent*>(getParentScope());
+    const DesignComponent* parent =
+        dynamic_cast<const DesignComponent*>(getParentScope());
     if (parent) {
       return parent->getTypeDef(name);
     } else
@@ -143,7 +145,8 @@ void DesignComponent::insertTypeDef(TypeDef* p) {
 Function* DesignComponent::getFunction(const std::string& name) const {
   FunctionMap::const_iterator itr = m_functions.find(name);
   if (itr == m_functions.end()) {
-    const DesignComponent* parent = dynamic_cast<const DesignComponent*>(getParentScope());
+    const DesignComponent* parent =
+        dynamic_cast<const DesignComponent*>(getParentScope());
     if (parent) {
       return parent->getFunction(name);
     } else
@@ -183,3 +186,4 @@ void DesignComponent::insertParameter(Parameter* p) {
   m_parameterMap.insert(std::make_pair(p->getName(), p));
   m_orderedParameters.push_back(p);
 }
+}  // namespace SURELOG

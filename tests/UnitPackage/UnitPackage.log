@@ -764,6 +764,7 @@ Instance tree:
 ====== UHDM =======
 design: (work@simple_package)
 |vpiName:work@simple_package
+|vpiElaborated:1
 |uhdmallPackages:
 \_package: builtin (builtin::), parent:work@simple_package
   |vpiDefName:builtin
@@ -871,6 +872,7 @@ design: (work@simple_package)
     \_parameter: (definesPkg::SIZE), line:8:12, endln:8:20, parent:definesPkg::
       |vpiName:SIZE
       |vpiFullName:definesPkg::SIZE
+      |UINT:2
   |vpiParameter:
   \_parameter: (definesPkg::SIZE), line:8:12, endln:8:20, parent:definesPkg::
 |uhdmallPackages:
@@ -1216,13 +1218,13 @@ design: (work@simple_package)
         |vpiClassDefn:
         \_class_defn: (work@mailbox) ${SURELOG_DIR}/build/bin/sv/builtin.sv:4: , endln:30:8, parent:work@simple_package
     |vpiIODecl:
-    \_io_decl: (bound), parent:work@mailbox::new
+    \_io_decl: (bound)
       |vpiName:bound
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:6:16, endln:6:19, parent:bound
+      \_int_typespec: , line:6:16, endln:6:19
       |vpiExpr:
-      \_constant: , line:6:28, endln:6:29, parent:bound
+      \_constant: , line:6:28, endln:6:29
         |vpiConstType:9
         |vpiDecompile:0
         |vpiSize:64
@@ -1251,8 +1253,10 @@ design: (work@simple_package)
     |vpiVisibility:1
     |vpiName:try_put
     |vpiFullName:work@mailbox::try_put
+    |vpiReturn:
+    \_logic_var: 
     |vpiIODecl:
-    \_io_decl: (message), parent:work@mailbox::try_put
+    \_io_decl: (message)
       |vpiName:message
       |vpiDirection:1
   |vpiMethod:
@@ -1274,7 +1278,7 @@ design: (work@simple_package)
     |vpiReturn:
     \_int_var: , line:21:11, endln:21:14
     |vpiIODecl:
-    \_io_decl: (message), parent:work@mailbox::try_get
+    \_io_decl: (message)
       |vpiName:message
       |vpiDirection:6
   |vpiMethod:
@@ -1296,7 +1300,7 @@ design: (work@simple_package)
     |vpiReturn:
     \_int_var: , line:27:11, endln:27:14
     |vpiIODecl:
-    \_io_decl: (message), parent:work@mailbox::try_peek
+    \_io_decl: (message)
       |vpiName:message
       |vpiDirection:6
 |uhdmallClasses:
@@ -1435,13 +1439,13 @@ design: (work@simple_package)
         |vpiClassDefn:
         \_class_defn: (work@semaphore) ${SURELOG_DIR}/build/bin/sv/builtin.sv:58: , endln:72:8, parent:work@simple_package
     |vpiIODecl:
-    \_io_decl: (keyCount), parent:work@semaphore::new
+    \_io_decl: (keyCount)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:60:15, endln:60:18, parent:keyCount
+      \_int_typespec: , line:60:15, endln:60:18
       |vpiExpr:
-      \_constant: , line:60:30, endln:60:31, parent:keyCount
+      \_constant: , line:60:30, endln:60:31
         |vpiConstType:9
         |vpiDecompile:0
         |vpiSize:64
@@ -1457,9 +1461,9 @@ design: (work@simple_package)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:63:11, endln:63:14, parent:keyCount
+      \_int_typespec: , line:63:11, endln:63:14
       |vpiExpr:
-      \_constant: , line:63:26, endln:63:27, parent:keyCount
+      \_constant: , line:63:26, endln:63:27
         |vpiConstType:9
         |vpiDecompile:1
         |vpiSize:64
@@ -1475,9 +1479,9 @@ design: (work@simple_package)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:66:11, endln:66:14, parent:keyCount
+      \_int_typespec: , line:66:11, endln:66:14
       |vpiExpr:
-      \_constant: , line:66:26, endln:66:27, parent:keyCount
+      \_constant: , line:66:26, endln:66:27
         |vpiConstType:9
         |vpiDecompile:1
         |vpiSize:64
@@ -1491,13 +1495,13 @@ design: (work@simple_package)
     |vpiReturn:
     \_int_var: , line:69:11, endln:69:14
     |vpiIODecl:
-    \_io_decl: (keyCount), parent:work@semaphore::try_get
+    \_io_decl: (keyCount)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:69:23, endln:69:26, parent:keyCount
+      \_int_typespec: , line:69:23, endln:69:26
       |vpiExpr:
-      \_constant: , line:69:38, endln:69:39, parent:keyCount
+      \_constant: , line:69:38, endln:69:39
         |vpiConstType:9
         |vpiDecompile:1
         |vpiSize:64
@@ -2036,6 +2040,7 @@ design: (work@simple_package)
             \_parameter: (definesPkg::SIZE), line:8:12, endln:8:20, parent:definesPkg::
               |vpiName:SIZE
               |vpiFullName:definesPkg::SIZE
+              |UINT:2
           |vpiParameter:
           \_parameter: (definesPkg::SIZE), line:8:12, endln:8:20, parent:definesPkg::
     |vpiTypespecMember:
@@ -2081,11 +2086,13 @@ design: (work@simple_package)
       |vpiName:SIZE
       |vpiFullName:work@simple_package.SIZE
       |vpiImported:definesPkg
+      |UINT:2
   |vpiParameter:
   \_parameter: (work@simple_package.SIZE), line:8:12, endln:8:20, parent:work@simple_package
     |vpiName:SIZE
     |vpiFullName:work@simple_package.SIZE
     |vpiImported:definesPkg
+    |UINT:2
 |uhdmtopModules:
 \_module: work@simple_package (work@simple_package) simple_pkg.sv:11: , endln:30:9
   |vpiDefName:work@simple_package
@@ -2101,13 +2108,13 @@ design: (work@simple_package)
         |vpiTask:
         \_task: (msgPkg::initMsgPkg), line:12:2, endln:15:9, parent:msgPkg::
         |vpiArgument:
-        \_constant: , line:20:21, endln:20:31, parent:msgPkg::initMsgPkg
+        \_constant: , line:20:21, endln:20:31
           |vpiConstType:6
           |vpiDecompile:PACKAGES
           |vpiSize:8
           |STRING:PACKAGES
         |vpiArgument:
-        \_constant: , line:20:32, endln:20:33, parent:msgPkg::initMsgPkg
+        \_constant: , line:20:32, endln:20:33
           |vpiConstType:9
           |vpiDecompile:0
           |vpiSize:64
@@ -2118,7 +2125,7 @@ design: (work@simple_package)
         |vpiTask:
         \_task: (msgPkg::msg_info), line:19:2, endln:21:9, parent:msgPkg::
         |vpiArgument:
-        \_constant: , line:21:19, endln:21:37, parent:msgPkg::msg_info
+        \_constant: , line:21:19, endln:21:37
           |vpiConstType:6
           |vpiDecompile:Testing Packages
           |vpiSize:16
@@ -2132,7 +2139,7 @@ design: (work@simple_package)
           |vpiTask:
           \_task: (msgPkg::msg_warn), line:25:2, endln:28:9, parent:msgPkg::
           |vpiArgument:
-          \_constant: , line:22:23, endln:22:41, parent:msgPkg::msg_warn
+          \_constant: , line:22:23, endln:22:41
             |vpiConstType:6
             |vpiDecompile:Testing Packages
             |vpiSize:16
@@ -2146,7 +2153,7 @@ design: (work@simple_package)
           |vpiTask:
           \_task: (msgPkg::msg_error), line:32:2, endln:36:9, parent:msgPkg::
           |vpiArgument:
-          \_constant: , line:23:24, endln:23:42, parent:msgPkg::msg_error
+          \_constant: , line:23:24, endln:23:42
             |vpiConstType:6
             |vpiDecompile:Testing Packages
             |vpiSize:16
@@ -2160,7 +2167,7 @@ design: (work@simple_package)
         \_sys_func_call: ($psprintf), line:24:19, endln:25:45, parent:msgPkg::msg_info
           |vpiName:$psprintf
           |vpiArgument:
-          \_constant: , line:24:29, endln:24:65, parent:$psprintf
+          \_constant: , line:24:29, endln:24:65
             |vpiConstType:6
             |vpiDecompile:Warning Count %0d, Error Count %0d
             |vpiSize:34
@@ -2226,7 +2233,7 @@ design: (work@simple_package)
             |vpiTask:
             \_task: (msgPkg::msg_fatal), line:40:2, endln:43:9, parent:msgPkg::
             |vpiArgument:
-            \_constant: , line:27:26, endln:27:42, parent:msgPkg::msg_fatal
+            \_constant: , line:27:26, endln:27:42
               |vpiConstType:6
               |vpiDecompile:Value is FALSE
               |vpiSize:14
@@ -2288,6 +2295,7 @@ design: (work@simple_package)
                 \_parameter: (definesPkg::SIZE), line:8:12, endln:8:20, parent:definesPkg::
                   |vpiName:SIZE
                   |vpiFullName:definesPkg::SIZE
+                  |UINT:2
               |vpiParameter:
               \_parameter: (definesPkg::SIZE), line:8:12, endln:8:20, parent:definesPkg::
         |vpiTypespecMember:
@@ -2342,349 +2350,345 @@ design: (work@simple_package)
     |vpiName:initMsgPkg
     |vpiFullName:msgPkg::initMsgPkg
     |vpiInstance:
-    \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
-      |vpiDefName:msgPkg
-      |vpiName:msgPkg
-      |vpiFullName:msgPkg::
-      |vpiTaskFunc:
-      \_task: (msgPkg::initMsgPkg), line:12:2, endln:15:9, parent:msgPkg::
-        |vpiVisibility:1
-        |vpiName:initMsgPkg
-        |vpiFullName:msgPkg::initMsgPkg
-        |vpiInstance:
-        \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
-        |vpiIODecl:
-        \_io_decl: (mName)
-          |vpiName:mName
-          |vpiDirection:1
-          |vpiTypedef:
-          \_string_typespec: , line:12:19, endln:12:25
-            |vpiInstance:
-            \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
-        |vpiIODecl:
-        \_io_decl: (term)
-          |vpiName:term
-          |vpiDirection:1
-          |vpiTypedef:
-          \_bit_typespec: , line:12:33, endln:12:36
-            |vpiInstance:
-            \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
-        |vpiStmt:
-        \_begin: (msgPkg::initMsgPkg), parent:msgPkg::initMsgPkg
-          |vpiFullName:msgPkg::initMsgPkg
-          |vpiStmt:
-          \_assignment: , line:13:4, endln:13:29, parent:msgPkg::initMsgPkg
-            |vpiOpType:82
-            |vpiBlocking:1
-            |vpiLhs:
-            \_ref_obj: (msgPkg::initMsgPkg::terminate_on_error), line:13:4, endln:13:22, parent:msgPkg::initMsgPkg
-              |vpiName:terminate_on_error
-              |vpiFullName:msgPkg::initMsgPkg::terminate_on_error
-            |vpiRhs:
-            \_ref_obj: (msgPkg::initMsgPkg::term), line:13:25, endln:13:29, parent:msgPkg::initMsgPkg
-              |vpiName:term
-              |vpiFullName:msgPkg::initMsgPkg::term
-              |vpiActual:
-              \_io_decl: (term)
-          |vpiStmt:
-          \_assignment: , line:14:4, endln:14:19, parent:msgPkg::initMsgPkg
-            |vpiOpType:82
-            |vpiBlocking:1
-            |vpiLhs:
-            \_ref_obj: (msgPkg::initMsgPkg::msgName), line:14:4, endln:14:11, parent:msgPkg::initMsgPkg
-              |vpiName:msgName
-              |vpiFullName:msgPkg::initMsgPkg::msgName
-            |vpiRhs:
-            \_ref_obj: (msgPkg::initMsgPkg::mName), line:14:14, endln:14:19, parent:msgPkg::initMsgPkg
-              |vpiName:mName
-              |vpiFullName:msgPkg::initMsgPkg::mName
-              |vpiActual:
-              \_io_decl: (mName)
-      |vpiTaskFunc:
-      \_task: (msgPkg::msg_info), line:19:2, endln:21:9, parent:msgPkg::
-        |vpiVisibility:1
-        |vpiName:msg_info
-        |vpiFullName:msgPkg::msg_info
-        |vpiInstance:
-        \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
-        |vpiIODecl:
-        \_io_decl: (msg)
-          |vpiName:msg
-          |vpiDirection:1
-          |vpiTypedef:
-          \_string_typespec: , line:19:18, endln:19:24
-            |vpiInstance:
-            \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
-        |vpiStmt:
-        \_sys_func_call: ($display), line:20:4, endln:20:55, parent:msgPkg::msg_info
-          |vpiName:$display
-          |vpiArgument:
-          \_constant: , line:20:14, endln:20:35
-            |vpiConstType:6
-            |vpiDecompile:@%0dns %s INFO : %s
-            |vpiSize:19
-            |STRING:@%0dns %s INFO : %s
-          |vpiArgument:
-          \_sys_func_call: ($time), line:20:36, endln:20:41, parent:$display
-            |vpiName:$time
-          |vpiArgument:
-          \_ref_obj: (msgPkg::msg_info::msgName), line:20:42, endln:20:49, parent:$display
-            |vpiName:msgName
-            |vpiFullName:msgPkg::msg_info::msgName
-          |vpiArgument:
-          \_ref_obj: (msgPkg::msg_info::msg), line:20:50, endln:20:53, parent:$display
-            |vpiName:msg
-            |vpiFullName:msgPkg::msg_info::msg
-      |vpiTaskFunc:
-      \_task: (msgPkg::msg_warn), line:25:2, endln:28:9, parent:msgPkg::
-        |vpiVisibility:1
-        |vpiName:msg_warn
-        |vpiFullName:msgPkg::msg_warn
-        |vpiInstance:
-        \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
-        |vpiIODecl:
-        \_io_decl: (msg)
-          |vpiName:msg
-          |vpiDirection:1
-          |vpiTypedef:
-          \_string_typespec: , line:25:18, endln:25:24
-            |vpiInstance:
-            \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
-        |vpiStmt:
-        \_begin: (msgPkg::msg_warn), parent:msgPkg::msg_warn
-          |vpiFullName:msgPkg::msg_warn
-          |vpiStmt:
-          \_sys_func_call: ($display), line:26:4, endln:26:55, parent:msgPkg::msg_warn
-            |vpiName:$display
-            |vpiArgument:
-            \_constant: , line:26:14, endln:26:35
-              |vpiConstType:6
-              |vpiDecompile:@%0dns %s WARN : %s
-              |vpiSize:19
-              |STRING:@%0dns %s WARN : %s
-            |vpiArgument:
-            \_sys_func_call: ($time), line:26:36, endln:26:41, parent:$display
-              |vpiName:$time
-            |vpiArgument:
-            \_ref_obj: (msgPkg::msg_warn::msgName), line:26:42, endln:26:49, parent:$display
-              |vpiName:msgName
-              |vpiFullName:msgPkg::msg_warn::msgName
-            |vpiArgument:
-            \_ref_obj: (msgPkg::msg_warn::msg), line:26:50, endln:26:53, parent:$display
-              |vpiName:msg
-              |vpiFullName:msgPkg::msg_warn::msg
-          |vpiStmt:
-          \_operation: , line:27:4, endln:27:14, parent:msgPkg::msg_warn
-            |vpiOpType:62
-            |vpiOperand:
-            \_ref_obj: (msgPkg::msg_warn::warnCnt), line:27:4, endln:27:11, parent:msgPkg::msg_warn
-              |vpiName:warnCnt
-              |vpiFullName:msgPkg::msg_warn::warnCnt
-      |vpiTaskFunc:
-      \_task: (msgPkg::msg_error), line:32:2, endln:36:9, parent:msgPkg::
-        |vpiVisibility:1
-        |vpiName:msg_error
-        |vpiFullName:msgPkg::msg_error
-        |vpiInstance:
-        \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
-        |vpiIODecl:
-        \_io_decl: (msg)
-          |vpiName:msg
-          |vpiDirection:1
-          |vpiTypedef:
-          \_string_typespec: , line:32:19, endln:32:25
-            |vpiInstance:
-            \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
-        |vpiStmt:
-        \_begin: (msgPkg::msg_error), parent:msgPkg::msg_error
-          |vpiFullName:msgPkg::msg_error
-          |vpiStmt:
-          \_sys_func_call: ($display), line:33:4, endln:33:56, parent:msgPkg::msg_error
-            |vpiName:$display
-            |vpiArgument:
-            \_constant: , line:33:14, endln:33:36
-              |vpiConstType:6
-              |vpiDecompile:@%0dns %s ERROR : %s
-              |vpiSize:20
-              |STRING:@%0dns %s ERROR : %s
-            |vpiArgument:
-            \_sys_func_call: ($time), line:33:37, endln:33:42, parent:$display
-              |vpiName:$time
-            |vpiArgument:
-            \_ref_obj: (msgPkg::msg_error::msgName), line:33:43, endln:33:50, parent:$display
-              |vpiName:msgName
-              |vpiFullName:msgPkg::msg_error::msgName
-            |vpiArgument:
-            \_ref_obj: (msgPkg::msg_error::msg), line:33:51, endln:33:54, parent:$display
-              |vpiName:msg
-              |vpiFullName:msgPkg::msg_error::msg
-          |vpiStmt:
-          \_operation: , line:34:4, endln:34:13, parent:msgPkg::msg_error
-            |vpiOpType:62
-            |vpiOperand:
-            \_ref_obj: (msgPkg::msg_error::errCnt), line:34:4, endln:34:10, parent:msgPkg::msg_error
-              |vpiName:errCnt
-              |vpiFullName:msgPkg::msg_error::errCnt
-          |vpiStmt:
-          \_if_stmt: , line:35:4, endln:35:36, parent:msgPkg::msg_error
-            |vpiCondition:
-            \_ref_obj: (msgPkg::msg_error::terminate_on_error), line:35:8, endln:35:26
-              |vpiName:terminate_on_error
-              |vpiFullName:msgPkg::msg_error::terminate_on_error
-            |vpiStmt:
-            \_sys_func_call: ($finish), line:35:28, endln:35:36
-              |vpiName:$finish
-      |vpiTaskFunc:
-      \_task: (msgPkg::msg_fatal), line:40:2, endln:43:9, parent:msgPkg::
-        |vpiVisibility:1
-        |vpiName:msg_fatal
-        |vpiFullName:msgPkg::msg_fatal
-        |vpiInstance:
-        \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
-        |vpiIODecl:
-        \_io_decl: (msg)
-          |vpiName:msg
-          |vpiDirection:1
-          |vpiTypedef:
-          \_string_typespec: , line:40:19, endln:40:25
-            |vpiInstance:
-            \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
-        |vpiStmt:
-        \_begin: (msgPkg::msg_fatal), parent:msgPkg::msg_fatal
-          |vpiFullName:msgPkg::msg_fatal
-          |vpiStmt:
-          \_sys_func_call: ($display), line:41:4, endln:41:56, parent:msgPkg::msg_fatal
-            |vpiName:$display
-            |vpiArgument:
-            \_constant: , line:41:14, endln:41:36
-              |vpiConstType:6
-              |vpiDecompile:@%0dns %s FATAL : %s
-              |vpiSize:20
-              |STRING:@%0dns %s FATAL : %s
-            |vpiArgument:
-            \_sys_func_call: ($time), line:41:37, endln:41:42, parent:$display
-              |vpiName:$time
-            |vpiArgument:
-            \_ref_obj: (msgPkg::msg_fatal::msgName), line:41:43, endln:41:50, parent:$display
-              |vpiName:msgName
-              |vpiFullName:msgPkg::msg_fatal::msgName
-            |vpiArgument:
-            \_ref_obj: (msgPkg::msg_fatal::msg), line:41:51, endln:41:54, parent:$display
-              |vpiName:msg
-              |vpiFullName:msgPkg::msg_fatal::msg
-          |vpiStmt:
-          \_sys_func_call: ($finish), line:42:4, endln:42:12, parent:msgPkg::msg_fatal
-            |vpiName:$finish
-      |vpiTaskFunc:
-      \_function: (msgPkg::getErrCnt), line:47:2, endln:49:13, parent:msgPkg::
-        |vpiVisibility:1
-        |vpiName:getErrCnt
-        |vpiFullName:msgPkg::getErrCnt
-        |vpiReturn:
-        \_int_var: , line:47:11, endln:47:18
-        |vpiInstance:
-        \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
-        |vpiStmt:
-        \_assignment: , line:48:4, endln:48:22, parent:msgPkg::getErrCnt
-          |vpiOpType:82
-          |vpiBlocking:1
-          |vpiLhs:
-          \_ref_obj: (msgPkg::getErrCnt::getErrCnt), line:48:4, endln:48:13, parent:msgPkg::getErrCnt
-            |vpiName:getErrCnt
-            |vpiFullName:msgPkg::getErrCnt::getErrCnt
-          |vpiRhs:
-          \_ref_obj: (msgPkg::getErrCnt::errCnt), line:48:16, endln:48:22, parent:msgPkg::getErrCnt
-            |vpiName:errCnt
-            |vpiFullName:msgPkg::getErrCnt::errCnt
-      |vpiTaskFunc:
-      \_function: (msgPkg::getWarnCnt), line:53:2, endln:55:13, parent:msgPkg::
-        |vpiVisibility:1
-        |vpiName:getWarnCnt
-        |vpiFullName:msgPkg::getWarnCnt
-        |vpiReturn:
-        \_int_var: , line:53:11, endln:53:18
-        |vpiInstance:
-        \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
-        |vpiStmt:
-        \_assignment: , line:54:4, endln:54:24, parent:msgPkg::getWarnCnt
-          |vpiOpType:82
-          |vpiBlocking:1
-          |vpiLhs:
-          \_ref_obj: (msgPkg::getWarnCnt::getWarnCnt), line:54:4, endln:54:14, parent:msgPkg::getWarnCnt
-            |vpiName:getWarnCnt
-            |vpiFullName:msgPkg::getWarnCnt::getWarnCnt
-          |vpiRhs:
-          \_ref_obj: (msgPkg::getWarnCnt::warnCnt), line:54:17, endln:54:24, parent:msgPkg::getWarnCnt
-            |vpiName:warnCnt
-            |vpiFullName:msgPkg::getWarnCnt::warnCnt
-      |vpiVariables:
-      \_int_var: (msgPkg::errCnt), line:5:11, endln:5:17, parent:msgPkg::
-        |vpiName:errCnt
-        |vpiFullName:msgPkg::errCnt
-        |vpiAutomatic:1
-        |vpiVisibility:1
-        |vpiExpr:
-        \_constant: , line:5:21, endln:5:22
-          |vpiConstType:9
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-      |vpiVariables:
-      \_int_var: (msgPkg::warnCnt), line:6:11, endln:6:18, parent:msgPkg::
-        |vpiName:warnCnt
-        |vpiFullName:msgPkg::warnCnt
-        |vpiAutomatic:1
-        |vpiVisibility:1
-        |vpiExpr:
-        \_constant: , line:6:21, endln:6:22
-          |vpiConstType:9
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-      |vpiVariables:
-      \_bit_var: (msgPkg::terminate_on_error), line:7:11, endln:7:29, parent:msgPkg::
-        |vpiName:terminate_on_error
-        |vpiFullName:msgPkg::terminate_on_error
-        |vpiAutomatic:1
-        |vpiVisibility:1
-        |vpiExpr:
-        \_constant: , line:7:32, endln:7:33
-          |vpiConstType:9
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-        |vpiTypespec:
-        \_bit_typespec: , line:7:2, endln:7:5
-          |vpiInstance:
-          \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
-      |vpiVariables:
-      \_string_var: (msgPkg::msgName), line:8:11, endln:8:18, parent:msgPkg::
-        |vpiName:msgName
-        |vpiFullName:msgPkg::msgName
-        |vpiAutomatic:1
-        |vpiVisibility:1
-        |vpiExpr:
-        \_constant: , line:8:21, endln:8:27
-          |vpiConstType:6
-          |vpiDecompile:NULL
-          |vpiSize:4
-          |STRING:NULL
+    \_module: work@simple_package (work@simple_package) simple_pkg.sv:11: , endln:30:9
     |vpiIODecl:
     \_io_decl: (mName), parent:msgPkg::initMsgPkg
       |vpiName:mName
       |vpiDirection:1
       |vpiTypedef:
-      \_string_typespec: , line:12:19, endln:12:25, parent:mName
+      \_string_typespec: , line:12:19, endln:12:25
         |vpiInstance:
         \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
+          |vpiDefName:msgPkg
+          |vpiName:msgPkg
+          |vpiFullName:msgPkg::
+          |vpiTaskFunc:
+          \_task: (msgPkg::initMsgPkg), line:12:2, endln:15:9, parent:msgPkg::
+            |vpiVisibility:1
+            |vpiName:initMsgPkg
+            |vpiFullName:msgPkg::initMsgPkg
+            |vpiInstance:
+            \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
+            |vpiIODecl:
+            \_io_decl: (mName)
+              |vpiName:mName
+              |vpiDirection:1
+              |vpiTypedef:
+              \_string_typespec: , line:12:19, endln:12:25
+            |vpiIODecl:
+            \_io_decl: (term)
+              |vpiName:term
+              |vpiDirection:1
+              |vpiTypedef:
+              \_bit_typespec: , line:12:33, endln:12:36
+                |vpiInstance:
+                \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
+            |vpiStmt:
+            \_begin: (msgPkg::initMsgPkg), parent:msgPkg::initMsgPkg
+              |vpiFullName:msgPkg::initMsgPkg
+              |vpiStmt:
+              \_assignment: , line:13:4, endln:13:29, parent:msgPkg::initMsgPkg
+                |vpiOpType:82
+                |vpiBlocking:1
+                |vpiLhs:
+                \_ref_obj: (msgPkg::initMsgPkg::terminate_on_error), line:13:4, endln:13:22, parent:msgPkg::initMsgPkg
+                  |vpiName:terminate_on_error
+                  |vpiFullName:msgPkg::initMsgPkg::terminate_on_error
+                |vpiRhs:
+                \_ref_obj: (msgPkg::initMsgPkg::term), line:13:25, endln:13:29, parent:msgPkg::initMsgPkg
+                  |vpiName:term
+                  |vpiFullName:msgPkg::initMsgPkg::term
+                  |vpiActual:
+                  \_io_decl: (term)
+              |vpiStmt:
+              \_assignment: , line:14:4, endln:14:19, parent:msgPkg::initMsgPkg
+                |vpiOpType:82
+                |vpiBlocking:1
+                |vpiLhs:
+                \_ref_obj: (msgPkg::initMsgPkg::msgName), line:14:4, endln:14:11, parent:msgPkg::initMsgPkg
+                  |vpiName:msgName
+                  |vpiFullName:msgPkg::initMsgPkg::msgName
+                |vpiRhs:
+                \_ref_obj: (msgPkg::initMsgPkg::mName), line:14:14, endln:14:19, parent:msgPkg::initMsgPkg
+                  |vpiName:mName
+                  |vpiFullName:msgPkg::initMsgPkg::mName
+                  |vpiActual:
+                  \_io_decl: (mName)
+          |vpiTaskFunc:
+          \_task: (msgPkg::msg_info), line:19:2, endln:21:9, parent:msgPkg::
+            |vpiVisibility:1
+            |vpiName:msg_info
+            |vpiFullName:msgPkg::msg_info
+            |vpiInstance:
+            \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
+            |vpiIODecl:
+            \_io_decl: (msg)
+              |vpiName:msg
+              |vpiDirection:1
+              |vpiTypedef:
+              \_string_typespec: , line:19:18, endln:19:24
+                |vpiInstance:
+                \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
+            |vpiStmt:
+            \_sys_func_call: ($display), line:20:4, endln:20:55, parent:msgPkg::msg_info
+              |vpiName:$display
+              |vpiArgument:
+              \_constant: , line:20:14, endln:20:35
+                |vpiConstType:6
+                |vpiDecompile:@%0dns %s INFO : %s
+                |vpiSize:19
+                |STRING:@%0dns %s INFO : %s
+              |vpiArgument:
+              \_sys_func_call: ($time), line:20:36, endln:20:41, parent:$display
+                |vpiName:$time
+              |vpiArgument:
+              \_ref_obj: (msgPkg::msg_info::msgName), line:20:42, endln:20:49, parent:$display
+                |vpiName:msgName
+                |vpiFullName:msgPkg::msg_info::msgName
+              |vpiArgument:
+              \_ref_obj: (msgPkg::msg_info::msg), line:20:50, endln:20:53, parent:$display
+                |vpiName:msg
+                |vpiFullName:msgPkg::msg_info::msg
+          |vpiTaskFunc:
+          \_task: (msgPkg::msg_warn), line:25:2, endln:28:9, parent:msgPkg::
+            |vpiVisibility:1
+            |vpiName:msg_warn
+            |vpiFullName:msgPkg::msg_warn
+            |vpiInstance:
+            \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
+            |vpiIODecl:
+            \_io_decl: (msg)
+              |vpiName:msg
+              |vpiDirection:1
+              |vpiTypedef:
+              \_string_typespec: , line:25:18, endln:25:24
+                |vpiInstance:
+                \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
+            |vpiStmt:
+            \_begin: (msgPkg::msg_warn), parent:msgPkg::msg_warn
+              |vpiFullName:msgPkg::msg_warn
+              |vpiStmt:
+              \_sys_func_call: ($display), line:26:4, endln:26:55, parent:msgPkg::msg_warn
+                |vpiName:$display
+                |vpiArgument:
+                \_constant: , line:26:14, endln:26:35
+                  |vpiConstType:6
+                  |vpiDecompile:@%0dns %s WARN : %s
+                  |vpiSize:19
+                  |STRING:@%0dns %s WARN : %s
+                |vpiArgument:
+                \_sys_func_call: ($time), line:26:36, endln:26:41, parent:$display
+                  |vpiName:$time
+                |vpiArgument:
+                \_ref_obj: (msgPkg::msg_warn::msgName), line:26:42, endln:26:49, parent:$display
+                  |vpiName:msgName
+                  |vpiFullName:msgPkg::msg_warn::msgName
+                |vpiArgument:
+                \_ref_obj: (msgPkg::msg_warn::msg), line:26:50, endln:26:53, parent:$display
+                  |vpiName:msg
+                  |vpiFullName:msgPkg::msg_warn::msg
+              |vpiStmt:
+              \_operation: , line:27:4, endln:27:14, parent:msgPkg::msg_warn
+                |vpiOpType:62
+                |vpiOperand:
+                \_ref_obj: (msgPkg::msg_warn::warnCnt), line:27:4, endln:27:11, parent:msgPkg::msg_warn
+                  |vpiName:warnCnt
+                  |vpiFullName:msgPkg::msg_warn::warnCnt
+          |vpiTaskFunc:
+          \_task: (msgPkg::msg_error), line:32:2, endln:36:9, parent:msgPkg::
+            |vpiVisibility:1
+            |vpiName:msg_error
+            |vpiFullName:msgPkg::msg_error
+            |vpiInstance:
+            \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
+            |vpiIODecl:
+            \_io_decl: (msg)
+              |vpiName:msg
+              |vpiDirection:1
+              |vpiTypedef:
+              \_string_typespec: , line:32:19, endln:32:25
+                |vpiInstance:
+                \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
+            |vpiStmt:
+            \_begin: (msgPkg::msg_error), parent:msgPkg::msg_error
+              |vpiFullName:msgPkg::msg_error
+              |vpiStmt:
+              \_sys_func_call: ($display), line:33:4, endln:33:56, parent:msgPkg::msg_error
+                |vpiName:$display
+                |vpiArgument:
+                \_constant: , line:33:14, endln:33:36
+                  |vpiConstType:6
+                  |vpiDecompile:@%0dns %s ERROR : %s
+                  |vpiSize:20
+                  |STRING:@%0dns %s ERROR : %s
+                |vpiArgument:
+                \_sys_func_call: ($time), line:33:37, endln:33:42, parent:$display
+                  |vpiName:$time
+                |vpiArgument:
+                \_ref_obj: (msgPkg::msg_error::msgName), line:33:43, endln:33:50, parent:$display
+                  |vpiName:msgName
+                  |vpiFullName:msgPkg::msg_error::msgName
+                |vpiArgument:
+                \_ref_obj: (msgPkg::msg_error::msg), line:33:51, endln:33:54, parent:$display
+                  |vpiName:msg
+                  |vpiFullName:msgPkg::msg_error::msg
+              |vpiStmt:
+              \_operation: , line:34:4, endln:34:13, parent:msgPkg::msg_error
+                |vpiOpType:62
+                |vpiOperand:
+                \_ref_obj: (msgPkg::msg_error::errCnt), line:34:4, endln:34:10, parent:msgPkg::msg_error
+                  |vpiName:errCnt
+                  |vpiFullName:msgPkg::msg_error::errCnt
+              |vpiStmt:
+              \_if_stmt: , line:35:4, endln:35:36, parent:msgPkg::msg_error
+                |vpiCondition:
+                \_ref_obj: (msgPkg::msg_error::terminate_on_error), line:35:8, endln:35:26
+                  |vpiName:terminate_on_error
+                  |vpiFullName:msgPkg::msg_error::terminate_on_error
+                |vpiStmt:
+                \_sys_func_call: ($finish), line:35:28, endln:35:36
+                  |vpiName:$finish
+          |vpiTaskFunc:
+          \_task: (msgPkg::msg_fatal), line:40:2, endln:43:9, parent:msgPkg::
+            |vpiVisibility:1
+            |vpiName:msg_fatal
+            |vpiFullName:msgPkg::msg_fatal
+            |vpiInstance:
+            \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
+            |vpiIODecl:
+            \_io_decl: (msg)
+              |vpiName:msg
+              |vpiDirection:1
+              |vpiTypedef:
+              \_string_typespec: , line:40:19, endln:40:25
+                |vpiInstance:
+                \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
+            |vpiStmt:
+            \_begin: (msgPkg::msg_fatal), parent:msgPkg::msg_fatal
+              |vpiFullName:msgPkg::msg_fatal
+              |vpiStmt:
+              \_sys_func_call: ($display), line:41:4, endln:41:56, parent:msgPkg::msg_fatal
+                |vpiName:$display
+                |vpiArgument:
+                \_constant: , line:41:14, endln:41:36
+                  |vpiConstType:6
+                  |vpiDecompile:@%0dns %s FATAL : %s
+                  |vpiSize:20
+                  |STRING:@%0dns %s FATAL : %s
+                |vpiArgument:
+                \_sys_func_call: ($time), line:41:37, endln:41:42, parent:$display
+                  |vpiName:$time
+                |vpiArgument:
+                \_ref_obj: (msgPkg::msg_fatal::msgName), line:41:43, endln:41:50, parent:$display
+                  |vpiName:msgName
+                  |vpiFullName:msgPkg::msg_fatal::msgName
+                |vpiArgument:
+                \_ref_obj: (msgPkg::msg_fatal::msg), line:41:51, endln:41:54, parent:$display
+                  |vpiName:msg
+                  |vpiFullName:msgPkg::msg_fatal::msg
+              |vpiStmt:
+              \_sys_func_call: ($finish), line:42:4, endln:42:12, parent:msgPkg::msg_fatal
+                |vpiName:$finish
+          |vpiTaskFunc:
+          \_function: (msgPkg::getErrCnt), line:47:2, endln:49:13, parent:msgPkg::
+            |vpiVisibility:1
+            |vpiName:getErrCnt
+            |vpiFullName:msgPkg::getErrCnt
+            |vpiReturn:
+            \_int_var: , line:47:11, endln:47:18
+            |vpiInstance:
+            \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
+            |vpiStmt:
+            \_assignment: , line:48:4, endln:48:22, parent:msgPkg::getErrCnt
+              |vpiOpType:82
+              |vpiBlocking:1
+              |vpiLhs:
+              \_ref_obj: (msgPkg::getErrCnt::getErrCnt), line:48:4, endln:48:13, parent:msgPkg::getErrCnt
+                |vpiName:getErrCnt
+                |vpiFullName:msgPkg::getErrCnt::getErrCnt
+              |vpiRhs:
+              \_ref_obj: (msgPkg::getErrCnt::errCnt), line:48:16, endln:48:22, parent:msgPkg::getErrCnt
+                |vpiName:errCnt
+                |vpiFullName:msgPkg::getErrCnt::errCnt
+          |vpiTaskFunc:
+          \_function: (msgPkg::getWarnCnt), line:53:2, endln:55:13, parent:msgPkg::
+            |vpiVisibility:1
+            |vpiName:getWarnCnt
+            |vpiFullName:msgPkg::getWarnCnt
+            |vpiReturn:
+            \_int_var: , line:53:11, endln:53:18
+            |vpiInstance:
+            \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
+            |vpiStmt:
+            \_assignment: , line:54:4, endln:54:24, parent:msgPkg::getWarnCnt
+              |vpiOpType:82
+              |vpiBlocking:1
+              |vpiLhs:
+              \_ref_obj: (msgPkg::getWarnCnt::getWarnCnt), line:54:4, endln:54:14, parent:msgPkg::getWarnCnt
+                |vpiName:getWarnCnt
+                |vpiFullName:msgPkg::getWarnCnt::getWarnCnt
+              |vpiRhs:
+              \_ref_obj: (msgPkg::getWarnCnt::warnCnt), line:54:17, endln:54:24, parent:msgPkg::getWarnCnt
+                |vpiName:warnCnt
+                |vpiFullName:msgPkg::getWarnCnt::warnCnt
+          |vpiVariables:
+          \_int_var: (msgPkg::errCnt), line:5:11, endln:5:17, parent:msgPkg::
+            |vpiName:errCnt
+            |vpiFullName:msgPkg::errCnt
+            |vpiAutomatic:1
+            |vpiVisibility:1
+            |vpiExpr:
+            \_constant: , line:5:21, endln:5:22
+              |vpiConstType:9
+              |vpiDecompile:0
+              |vpiSize:64
+              |UINT:0
+          |vpiVariables:
+          \_int_var: (msgPkg::warnCnt), line:6:11, endln:6:18, parent:msgPkg::
+            |vpiName:warnCnt
+            |vpiFullName:msgPkg::warnCnt
+            |vpiAutomatic:1
+            |vpiVisibility:1
+            |vpiExpr:
+            \_constant: , line:6:21, endln:6:22
+              |vpiConstType:9
+              |vpiDecompile:0
+              |vpiSize:64
+              |UINT:0
+          |vpiVariables:
+          \_bit_var: (msgPkg::terminate_on_error), line:7:11, endln:7:29, parent:msgPkg::
+            |vpiName:terminate_on_error
+            |vpiFullName:msgPkg::terminate_on_error
+            |vpiAutomatic:1
+            |vpiVisibility:1
+            |vpiExpr:
+            \_constant: , line:7:32, endln:7:33
+              |vpiConstType:9
+              |vpiDecompile:0
+              |vpiSize:64
+              |UINT:0
+            |vpiTypespec:
+            \_bit_typespec: , line:7:2, endln:7:5
+              |vpiInstance:
+              \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
+          |vpiVariables:
+          \_string_var: (msgPkg::msgName), line:8:11, endln:8:18, parent:msgPkg::
+            |vpiName:msgName
+            |vpiFullName:msgPkg::msgName
+            |vpiAutomatic:1
+            |vpiVisibility:1
+            |vpiExpr:
+            \_constant: , line:8:21, endln:8:27
+              |vpiConstType:6
+              |vpiDecompile:NULL
+              |vpiSize:4
+              |STRING:NULL
     |vpiIODecl:
     \_io_decl: (term), parent:msgPkg::initMsgPkg
       |vpiName:term
       |vpiDirection:1
       |vpiTypedef:
-      \_bit_typespec: , line:12:33, endln:12:36, parent:term
-        |vpiInstance:
-        \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
+      \_bit_typespec: , line:12:33, endln:12:36
     |vpiStmt:
     \_begin: (work@simple_package.initMsgPkg), parent:msgPkg::initMsgPkg
       |vpiFullName:work@simple_package.initMsgPkg
@@ -2722,24 +2726,18 @@ design: (work@simple_package)
     |vpiName:msg_info
     |vpiFullName:msgPkg::msg_info
     |vpiInstance:
-    \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
+    \_module: work@simple_package (work@simple_package) simple_pkg.sv:11: , endln:30:9
     |vpiIODecl:
     \_io_decl: (msg), parent:msgPkg::msg_info
       |vpiName:msg
       |vpiDirection:1
       |vpiTypedef:
-      \_string_typespec: , line:19:18, endln:19:24, parent:msg
-        |vpiInstance:
-        \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
+      \_string_typespec: , line:19:18, endln:19:24
     |vpiStmt:
     \_sys_func_call: ($display), line:20:4, endln:20:55, parent:msgPkg::msg_info
       |vpiName:$display
       |vpiArgument:
-      \_constant: , line:20:14, endln:20:35, parent:$display
-        |vpiConstType:6
-        |vpiDecompile:@%0dns %s INFO : %s
-        |vpiSize:19
-        |STRING:@%0dns %s INFO : %s
+      \_constant: , line:20:14, endln:20:35
       |vpiArgument:
       \_sys_func_call: ($time), line:20:36, endln:20:41, parent:$display
         |vpiName:$time
@@ -2759,15 +2757,13 @@ design: (work@simple_package)
     |vpiName:msg_warn
     |vpiFullName:msgPkg::msg_warn
     |vpiInstance:
-    \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
+    \_module: work@simple_package (work@simple_package) simple_pkg.sv:11: , endln:30:9
     |vpiIODecl:
     \_io_decl: (msg), parent:msgPkg::msg_warn
       |vpiName:msg
       |vpiDirection:1
       |vpiTypedef:
-      \_string_typespec: , line:25:18, endln:25:24, parent:msg
-        |vpiInstance:
-        \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
+      \_string_typespec: , line:25:18, endln:25:24
     |vpiStmt:
     \_begin: (work@simple_package.msg_warn), parent:msgPkg::msg_warn
       |vpiFullName:work@simple_package.msg_warn
@@ -2775,11 +2771,7 @@ design: (work@simple_package)
       \_sys_func_call: ($display), line:26:4, endln:26:55, parent:work@simple_package.msg_warn
         |vpiName:$display
         |vpiArgument:
-        \_constant: , line:26:14, endln:26:35, parent:$display
-          |vpiConstType:6
-          |vpiDecompile:@%0dns %s WARN : %s
-          |vpiSize:19
-          |STRING:@%0dns %s WARN : %s
+        \_constant: , line:26:14, endln:26:35
         |vpiArgument:
         \_sys_func_call: ($time), line:26:36, endln:26:41, parent:$display
           |vpiName:$time
@@ -2806,15 +2798,13 @@ design: (work@simple_package)
     |vpiName:msg_error
     |vpiFullName:msgPkg::msg_error
     |vpiInstance:
-    \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
+    \_module: work@simple_package (work@simple_package) simple_pkg.sv:11: , endln:30:9
     |vpiIODecl:
     \_io_decl: (msg), parent:msgPkg::msg_error
       |vpiName:msg
       |vpiDirection:1
       |vpiTypedef:
-      \_string_typespec: , line:32:19, endln:32:25, parent:msg
-        |vpiInstance:
-        \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
+      \_string_typespec: , line:32:19, endln:32:25
     |vpiStmt:
     \_begin: (work@simple_package.msg_error), parent:msgPkg::msg_error
       |vpiFullName:work@simple_package.msg_error
@@ -2822,11 +2812,7 @@ design: (work@simple_package)
       \_sys_func_call: ($display), line:33:4, endln:33:56, parent:work@simple_package.msg_error
         |vpiName:$display
         |vpiArgument:
-        \_constant: , line:33:14, endln:33:36, parent:$display
-          |vpiConstType:6
-          |vpiDecompile:@%0dns %s ERROR : %s
-          |vpiSize:20
-          |STRING:@%0dns %s ERROR : %s
+        \_constant: , line:33:14, endln:33:36
         |vpiArgument:
         \_sys_func_call: ($time), line:33:37, endln:33:42, parent:$display
           |vpiName:$time
@@ -2862,15 +2848,13 @@ design: (work@simple_package)
     |vpiName:msg_fatal
     |vpiFullName:msgPkg::msg_fatal
     |vpiInstance:
-    \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
+    \_module: work@simple_package (work@simple_package) simple_pkg.sv:11: , endln:30:9
     |vpiIODecl:
     \_io_decl: (msg), parent:msgPkg::msg_fatal
       |vpiName:msg
       |vpiDirection:1
       |vpiTypedef:
-      \_string_typespec: , line:40:19, endln:40:25, parent:msg
-        |vpiInstance:
-        \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
+      \_string_typespec: , line:40:19, endln:40:25
     |vpiStmt:
     \_begin: (work@simple_package.msg_fatal), parent:msgPkg::msg_fatal
       |vpiFullName:work@simple_package.msg_fatal
@@ -2878,11 +2862,7 @@ design: (work@simple_package)
       \_sys_func_call: ($display), line:41:4, endln:41:56, parent:work@simple_package.msg_fatal
         |vpiName:$display
         |vpiArgument:
-        \_constant: , line:41:14, endln:41:36, parent:$display
-          |vpiConstType:6
-          |vpiDecompile:@%0dns %s FATAL : %s
-          |vpiSize:20
-          |STRING:@%0dns %s FATAL : %s
+        \_constant: , line:41:14, endln:41:36
         |vpiArgument:
         \_sys_func_call: ($time), line:41:37, endln:41:42, parent:$display
           |vpiName:$time
@@ -2907,7 +2887,7 @@ design: (work@simple_package)
     |vpiReturn:
     \_int_var: , line:47:11, endln:47:18
     |vpiInstance:
-    \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
+    \_module: work@simple_package (work@simple_package) simple_pkg.sv:11: , endln:30:9
     |vpiStmt:
     \_assignment: , line:48:4, endln:48:22, parent:msgPkg::getErrCnt
       |vpiOpType:82
@@ -2928,7 +2908,7 @@ design: (work@simple_package)
     |vpiReturn:
     \_int_var: , line:53:11, endln:53:18
     |vpiInstance:
-    \_package: msgPkg (msgPkg::) msgPkg.pkg:4: , endln:57:10, parent:work@simple_package
+    \_module: work@simple_package (work@simple_package) simple_pkg.sv:11: , endln:30:9
     |vpiStmt:
     \_assignment: , line:54:4, endln:54:24, parent:msgPkg::getWarnCnt
       |vpiOpType:82
@@ -2944,74 +2924,9 @@ design: (work@simple_package)
   |vpiVariables:
   \_enum_var: (work@simple_package.value), line:13:7, endln:13:12, parent:work@simple_package
   |vpiTypedef:
-  \_enum_typespec: (definesPkg::bool), line:10:30, endln:10:34, parent:work@simple_package
-    |vpiName:definesPkg::bool
-    |vpiEnumConst:
-    \_enum_const: (FALSE), line:10:17, endln:10:22, parent:definesPkg::bool
-      |vpiName:FALSE
-      |vpiDecompile:0
-      |INT:0
-      |vpiSize:64
-    |vpiEnumConst:
-    \_enum_const: (TRUE), line:10:24, endln:10:28, parent:definesPkg::bool
-      |vpiName:TRUE
-      |vpiDecompile:1
-      |INT:1
-      |vpiSize:64
+  \_enum_typespec: (definesPkg::bool), line:10:30, endln:10:34
   |vpiTypedef:
-  \_struct_typespec: (definesPkg::mem_s), line:11:10, endln:11:16, parent:work@simple_package
-    |vpiName:definesPkg::mem_s
-    |vpiTypespecMember:
-    \_typespec_member: (addr), line:12:19, endln:12:23, parent:definesPkg::mem_s
-      |vpiName:addr
-      |vpiTypespec:
-      \_bit_typespec: , line:12:5, endln:12:8, parent:addr
-        |vpiRange:
-        \_range: , line:12:12, endln:12:15
-          |vpiLeftRange:
-          \_constant: , line:12:12, endln:12:13
-            |vpiConstType:9
-            |vpiDecompile:7
-            |vpiSize:64
-            |UINT:7
-          |vpiRightRange:
-          \_constant: , line:12:14, endln:12:15
-            |vpiConstType:9
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
-        |vpiInstance:
-        \_package: definesPkg (definesPkg::) definesPkg.pkg:4: , endln:17:10, parent:work@simple_package
-    |vpiTypespecMember:
-    \_typespec_member: (data), line:13:19, endln:13:23, parent:definesPkg::mem_s
-      |vpiName:data
-      |vpiTypespec:
-      \_bit_typespec: , line:13:5, endln:13:8, parent:data
-        |vpiRange:
-        \_range: , line:13:12, endln:13:15
-          |vpiLeftRange:
-          \_constant: , line:13:12, endln:13:13
-            |vpiConstType:9
-            |vpiDecompile:7
-            |vpiSize:64
-            |UINT:7
-          |vpiRightRange:
-          \_constant: , line:13:14, endln:13:15
-            |vpiConstType:9
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
-        |vpiInstance:
-        \_package: definesPkg (definesPkg::) definesPkg.pkg:4: , endln:17:10, parent:work@simple_package
-    |vpiTypespecMember:
-    \_typespec_member: (wr), line:14:19, endln:14:21, parent:definesPkg::mem_s
-      |vpiName:wr
-      |vpiTypespec:
-      \_bit_typespec: , line:14:5, endln:14:8, parent:wr
-        |vpiInstance:
-        \_package: definesPkg (definesPkg::) definesPkg.pkg:4: , endln:17:10, parent:work@simple_package
-    |vpiInstance:
-    \_package: definesPkg (definesPkg::) definesPkg.pkg:4: , endln:17:10, parent:work@simple_package
+  \_struct_typespec: (definesPkg::mem_s), line:11:10, endln:11:16
   |vpiParamAssign:
   \_param_assign: , line:8:12, endln:8:20, parent:work@simple_package
     |vpiRhs:
@@ -3021,13 +2936,9 @@ design: (work@simple_package)
       |vpiSize:64
       |UINT:2
     |vpiLhs:
-    \_parameter: (work@simple_package.SIZE), line:8:12, endln:8:20, parent:work@simple_package
-      |vpiName:SIZE
-      |vpiFullName:work@simple_package.SIZE
-      |vpiImported:definesPkg
-      |UINT:2
+    \_parameter: (work@simple_package.inst.SIZE), line:8:12, endln:8:20, parent:work@simple_package.inst
   |vpiParameter:
-  \_parameter: (work@simple_package.SIZE), line:8:12, endln:8:20, parent:work@simple_package
+  \_parameter: (work@simple_package.inst.SIZE), line:8:12, endln:8:20, parent:work@simple_package.inst
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

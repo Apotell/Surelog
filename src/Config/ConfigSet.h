@@ -24,22 +24,22 @@
 #ifndef CONFIGSET_H
 #define CONFIGSET_H
 
-#include "Config/Config.h"
-
-#include <vector>
 #include <string_view>
+#include <vector>
+
+#include "Config/Config.h"
 
 namespace SURELOG {
 
 class ConfigSet final {
-public:
+ public:
   void addConfig(const Config& config) { m_configs.emplace_back(config); }
   std::vector<Config>& getAllMutableConfigs() { return m_configs; }
   Config* getMutableConfigByName(std::string_view configName);
 
   // Are there places where we can return a non-mutable config ?
 
-private:
+ private:
   std::vector<Config> m_configs;
 };
 

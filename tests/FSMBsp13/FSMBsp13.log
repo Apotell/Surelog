@@ -6015,6 +6015,7 @@ n<> u<744> t<Top_level_rule> l<1:0> el<65:0>
 ====== UHDM =======
 design: (work@top)
 |vpiName:work@top
+|vpiElaborated:1
 |uhdmallPackages:
 \_package: builtin (builtin::), parent:work@top
   |vpiDefName:builtin
@@ -6051,13 +6052,13 @@ design: (work@top)
         |vpiClassDefn:
         \_class_defn: (work@mailbox) ${SURELOG_DIR}/build/bin/sv/builtin.sv:4: , endln:30:8, parent:work@top
     |vpiIODecl:
-    \_io_decl: (bound), parent:work@mailbox::new
+    \_io_decl: (bound)
       |vpiName:bound
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:6:16, endln:6:19, parent:bound
+      \_int_typespec: , line:6:16, endln:6:19
       |vpiExpr:
-      \_constant: , line:6:28, endln:6:29, parent:bound
+      \_constant: , line:6:28, endln:6:29
         |vpiConstType:9
         |vpiDecompile:0
         |vpiSize:64
@@ -6086,8 +6087,10 @@ design: (work@top)
     |vpiVisibility:1
     |vpiName:try_put
     |vpiFullName:work@mailbox::try_put
+    |vpiReturn:
+    \_logic_var: 
     |vpiIODecl:
-    \_io_decl: (message), parent:work@mailbox::try_put
+    \_io_decl: (message)
       |vpiName:message
       |vpiDirection:1
   |vpiMethod:
@@ -6109,7 +6112,7 @@ design: (work@top)
     |vpiReturn:
     \_int_var: , line:21:11, endln:21:14
     |vpiIODecl:
-    \_io_decl: (message), parent:work@mailbox::try_get
+    \_io_decl: (message)
       |vpiName:message
       |vpiDirection:6
   |vpiMethod:
@@ -6131,7 +6134,7 @@ design: (work@top)
     |vpiReturn:
     \_int_var: , line:27:11, endln:27:14
     |vpiIODecl:
-    \_io_decl: (message), parent:work@mailbox::try_peek
+    \_io_decl: (message)
       |vpiName:message
       |vpiDirection:6
 |uhdmallClasses:
@@ -6270,13 +6273,13 @@ design: (work@top)
         |vpiClassDefn:
         \_class_defn: (work@semaphore) ${SURELOG_DIR}/build/bin/sv/builtin.sv:58: , endln:72:8, parent:work@top
     |vpiIODecl:
-    \_io_decl: (keyCount), parent:work@semaphore::new
+    \_io_decl: (keyCount)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:60:15, endln:60:18, parent:keyCount
+      \_int_typespec: , line:60:15, endln:60:18
       |vpiExpr:
-      \_constant: , line:60:30, endln:60:31, parent:keyCount
+      \_constant: , line:60:30, endln:60:31
         |vpiConstType:9
         |vpiDecompile:0
         |vpiSize:64
@@ -6292,9 +6295,9 @@ design: (work@top)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:63:11, endln:63:14, parent:keyCount
+      \_int_typespec: , line:63:11, endln:63:14
       |vpiExpr:
-      \_constant: , line:63:26, endln:63:27, parent:keyCount
+      \_constant: , line:63:26, endln:63:27
         |vpiConstType:9
         |vpiDecompile:1
         |vpiSize:64
@@ -6310,9 +6313,9 @@ design: (work@top)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:66:11, endln:66:14, parent:keyCount
+      \_int_typespec: , line:66:11, endln:66:14
       |vpiExpr:
-      \_constant: , line:66:26, endln:66:27, parent:keyCount
+      \_constant: , line:66:26, endln:66:27
         |vpiConstType:9
         |vpiDecompile:1
         |vpiSize:64
@@ -6326,13 +6329,13 @@ design: (work@top)
     |vpiReturn:
     \_int_var: , line:69:11, endln:69:14
     |vpiIODecl:
-    \_io_decl: (keyCount), parent:work@semaphore::try_get
+    \_io_decl: (keyCount)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:69:23, endln:69:26, parent:keyCount
+      \_int_typespec: , line:69:23, endln:69:26
       |vpiExpr:
-      \_constant: , line:69:38, endln:69:39, parent:keyCount
+      \_constant: , line:69:38, endln:69:39
         |vpiConstType:9
         |vpiDecompile:1
         |vpiSize:64
@@ -8911,6 +8914,7 @@ design: (work@top)
     \_parameter: (work@FSM1.ST_Read), line:7:16, endln:7:27, parent:work@FSM1
       |vpiName:ST_Read
       |vpiFullName:work@FSM1.ST_Read
+      |UINT:0
       |vpiTypespec:
       \_bit_typespec: (ST_Read), line:7:10, endln:7:15, parent:work@FSM1.ST_Read
         |vpiName:ST_Read
@@ -8940,6 +8944,7 @@ design: (work@top)
     \_parameter: (work@FSM1.ST_Write), line:7:29, endln:7:41, parent:work@FSM1
       |vpiName:ST_Write
       |vpiFullName:work@FSM1.ST_Write
+      |UINT:1
       |vpiTypespec:
       \_bit_typespec: (ST_Write), line:7:10, endln:7:15, parent:work@FSM1.ST_Write
         |vpiName:ST_Write
@@ -8969,6 +8974,7 @@ design: (work@top)
     \_parameter: (work@FSM1.ST_Delay), line:7:43, endln:7:55, parent:work@FSM1
       |vpiName:ST_Delay
       |vpiFullName:work@FSM1.ST_Delay
+      |UINT:2
       |vpiTypespec:
       \_bit_typespec: (ST_Delay), line:7:10, endln:7:15, parent:work@FSM1.ST_Delay
         |vpiName:ST_Delay
@@ -8998,6 +9004,7 @@ design: (work@top)
     \_parameter: (work@FSM1.ST_Trx), line:8:16, endln:8:26, parent:work@FSM1
       |vpiName:ST_Trx
       |vpiFullName:work@FSM1.ST_Trx
+      |UINT:3
       |vpiTypespec:
       \_bit_typespec: (ST_Trx), line:7:10, endln:7:15, parent:work@FSM1.ST_Trx
         |vpiName:ST_Trx
@@ -9027,6 +9034,7 @@ design: (work@top)
     \_parameter: (work@FSM1.ST_Hold), line:8:28, endln:8:39, parent:work@FSM1
       |vpiName:ST_Hold
       |vpiFullName:work@FSM1.ST_Hold
+      |UINT:4
       |vpiTypespec:
       \_bit_typespec: (ST_Hold), line:7:10, endln:7:15, parent:work@FSM1.ST_Hold
         |vpiName:ST_Hold
@@ -9056,6 +9064,7 @@ design: (work@top)
     \_parameter: (work@FSM1.ST_Block), line:8:41, endln:8:53, parent:work@FSM1
       |vpiName:ST_Block
       |vpiFullName:work@FSM1.ST_Block
+      |UINT:5
       |vpiTypespec:
       \_bit_typespec: (ST_Block), line:7:10, endln:7:15, parent:work@FSM1.ST_Block
         |vpiName:ST_Block
@@ -9085,6 +9094,7 @@ design: (work@top)
     \_parameter: (work@FSM1.ST_Wait), line:9:16, endln:9:27, parent:work@FSM1
       |vpiName:ST_Wait
       |vpiFullName:work@FSM1.ST_Wait
+      |UINT:6
       |vpiTypespec:
       \_bit_typespec: (ST_Wait), line:7:10, endln:7:15, parent:work@FSM1.ST_Wait
         |vpiName:ST_Wait
@@ -9114,6 +9124,7 @@ design: (work@top)
     \_parameter: (work@FSM1.ST_Turn), line:9:29, endln:9:40, parent:work@FSM1
       |vpiName:ST_Turn
       |vpiFullName:work@FSM1.ST_Turn
+      |UINT:7
       |vpiTypespec:
       \_bit_typespec: (ST_Turn), line:7:10, endln:7:15, parent:work@FSM1.ST_Turn
         |vpiName:ST_Turn
@@ -9143,6 +9154,7 @@ design: (work@top)
     \_parameter: (work@FSM1.ST_Quit), line:9:42, endln:9:53, parent:work@FSM1
       |vpiName:ST_Quit
       |vpiFullName:work@FSM1.ST_Quit
+      |UINT:8
       |vpiTypespec:
       \_bit_typespec: (ST_Quit), line:7:10, endln:7:15, parent:work@FSM1.ST_Quit
         |vpiName:ST_Quit
@@ -9172,6 +9184,7 @@ design: (work@top)
     \_parameter: (work@FSM1.ST_Exit), line:10:16, endln:10:27, parent:work@FSM1
       |vpiName:ST_Exit
       |vpiFullName:work@FSM1.ST_Exit
+      |UINT:9
       |vpiTypespec:
       \_bit_typespec: (ST_Exit), line:7:10, endln:7:15, parent:work@FSM1.ST_Exit
         |vpiName:ST_Exit
@@ -9201,6 +9214,7 @@ design: (work@top)
     \_parameter: (work@FSM1.ST_Done), line:10:29, endln:10:41, parent:work@FSM1
       |vpiName:ST_Done
       |vpiFullName:work@FSM1.ST_Done
+      |UINT:10
       |vpiTypespec:
       \_bit_typespec: (ST_Done), line:7:10, endln:7:15, parent:work@FSM1.ST_Done
         |vpiName:ST_Done
@@ -10919,6 +10933,7 @@ design: (work@top)
     \_parameter: (work@FSM2.ST0), line:6:16, endln:6:22, parent:work@FSM2
       |vpiName:ST0
       |vpiFullName:work@FSM2.ST0
+      |UINT:0
       |vpiTypespec:
       \_bit_typespec: (ST0), line:6:10, endln:6:15, parent:work@FSM2.ST0
         |vpiName:ST0
@@ -10948,6 +10963,7 @@ design: (work@top)
     \_parameter: (work@FSM2.ST1), line:6:24, endln:6:29, parent:work@FSM2
       |vpiName:ST1
       |vpiFullName:work@FSM2.ST1
+      |UINT:1
       |vpiTypespec:
       \_bit_typespec: (ST1), line:6:10, endln:6:15, parent:work@FSM2.ST1
         |vpiName:ST1
@@ -10977,6 +10993,7 @@ design: (work@top)
     \_parameter: (work@FSM2.ST2), line:6:31, endln:6:36, parent:work@FSM2
       |vpiName:ST2
       |vpiFullName:work@FSM2.ST2
+      |UINT:2
       |vpiTypespec:
       \_bit_typespec: (ST2), line:6:10, endln:6:15, parent:work@FSM2.ST2
         |vpiName:ST2
@@ -11006,6 +11023,7 @@ design: (work@top)
     \_parameter: (work@FSM2.ST3), line:6:38, endln:6:43, parent:work@FSM2
       |vpiName:ST3
       |vpiFullName:work@FSM2.ST3
+      |UINT:3
       |vpiTypespec:
       \_bit_typespec: (ST3), line:6:10, endln:6:15, parent:work@FSM2.ST3
         |vpiName:ST3
@@ -11035,6 +11053,7 @@ design: (work@top)
     \_parameter: (work@FSM2.ST4), line:6:45, endln:6:50, parent:work@FSM2
       |vpiName:ST4
       |vpiFullName:work@FSM2.ST4
+      |UINT:4
       |vpiTypespec:
       \_bit_typespec: (ST4), line:6:10, endln:6:15, parent:work@FSM2.ST4
         |vpiName:ST4
@@ -11064,6 +11083,7 @@ design: (work@top)
     \_parameter: (work@FSM2.ST5), line:6:52, endln:6:57, parent:work@FSM2
       |vpiName:ST5
       |vpiFullName:work@FSM2.ST5
+      |UINT:5
       |vpiTypespec:
       \_bit_typespec: (ST5), line:6:10, endln:6:15, parent:work@FSM2.ST5
         |vpiName:ST5
@@ -11093,6 +11113,7 @@ design: (work@top)
     \_parameter: (work@FSM2.ST6), line:6:59, endln:6:64, parent:work@FSM2
       |vpiName:ST6
       |vpiFullName:work@FSM2.ST6
+      |UINT:6
       |vpiTypespec:
       \_bit_typespec: (ST6), line:6:10, endln:6:15, parent:work@FSM2.ST6
         |vpiName:ST6
@@ -11122,6 +11143,7 @@ design: (work@top)
     \_parameter: (work@FSM2.ST7), line:6:65, endln:6:70, parent:work@FSM2
       |vpiName:ST7
       |vpiFullName:work@FSM2.ST7
+      |UINT:7
       |vpiTypespec:
       \_bit_typespec: (ST7), line:6:10, endln:6:15, parent:work@FSM2.ST7
         |vpiName:ST7
@@ -11151,6 +11173,7 @@ design: (work@top)
     \_parameter: (work@FSM2.ST8), line:7:16, endln:7:21, parent:work@FSM2
       |vpiName:ST8
       |vpiFullName:work@FSM2.ST8
+      |UINT:8
       |vpiTypespec:
       \_bit_typespec: (ST8), line:6:10, endln:6:15, parent:work@FSM2.ST8
         |vpiName:ST8
@@ -11180,6 +11203,7 @@ design: (work@top)
     \_parameter: (work@FSM2.ST9), line:7:23, endln:7:28, parent:work@FSM2
       |vpiName:ST9
       |vpiFullName:work@FSM2.ST9
+      |UINT:9
       |vpiTypespec:
       \_bit_typespec: (ST9), line:6:10, endln:6:15, parent:work@FSM2.ST9
         |vpiName:ST9
@@ -11209,6 +11233,7 @@ design: (work@top)
     \_parameter: (work@FSM2.ST10), line:7:30, endln:7:37, parent:work@FSM2
       |vpiName:ST10
       |vpiFullName:work@FSM2.ST10
+      |UINT:10
       |vpiTypespec:
       \_bit_typespec: (ST10), line:6:10, endln:6:15, parent:work@FSM2.ST10
         |vpiName:ST10
@@ -11392,7 +11417,7 @@ design: (work@top)
               \_parameter: (work@top.F3.Stop), line:8:10, endln:8:27, parent:work@top.F3
                 |vpiName:Stop
                 |vpiFullName:work@top.F3.Stop
-                |UINT:0
+                |BIN:0000
           |vpiElseStmt:
           \_if_else: , line:25:11, endln:25:21
             |vpiCondition:
@@ -11438,7 +11463,7 @@ design: (work@top)
                     \_parameter: (work@top.F3.Slow), line:11:10, endln:11:27, parent:work@top.F3
                       |vpiName:Slow
                       |vpiFullName:work@top.F3.Slow
-                      |UINT:3
+                      |BIN:0011
               |vpiCaseItem:
               \_case_item: , line:28:6, endln:28:29
                 |vpiExpr:
@@ -11449,7 +11474,7 @@ design: (work@top)
                   \_parameter: (work@top.F3.Move), line:9:10, endln:9:27, parent:work@top.F3
                     |vpiName:Move
                     |vpiFullName:work@top.F3.Move
-                    |UINT:1
+                    |BIN:0001
                 |vpiStmt:
                 \_assignment: , line:28:14, endln:28:28
                   |vpiOpType:82
@@ -11468,7 +11493,7 @@ design: (work@top)
                     \_parameter: (work@top.F3.Faster), line:14:10, endln:14:27, parent:work@top.F3
                       |vpiName:Faster
                       |vpiFullName:work@top.F3.Faster
-                      |UINT:6
+                      |BIN:0110
               |vpiCaseItem:
               \_case_item: , line:29:6, endln:29:27
                 |vpiExpr:
@@ -11479,7 +11504,7 @@ design: (work@top)
                   \_parameter: (work@top.F3.Turn), line:10:10, endln:10:27, parent:work@top.F3
                     |vpiName:Turn
                     |vpiFullName:work@top.F3.Turn
-                    |UINT:2
+                    |BIN:0010
                 |vpiStmt:
                 \_assignment: , line:29:14, endln:29:26
                   |vpiOpType:82
@@ -11522,7 +11547,7 @@ design: (work@top)
                     \_parameter: (work@top.F3.Medium), line:12:10, endln:12:27, parent:work@top.F3
                       |vpiName:Medium
                       |vpiFullName:work@top.F3.Medium
-                      |UINT:4
+                      |BIN:0100
               |vpiCaseItem:
               \_case_item: , line:31:6, endln:31:27
                 |vpiExpr:
@@ -11549,7 +11574,7 @@ design: (work@top)
                     \_parameter: (work@top.F3.Fast), line:13:10, endln:13:27, parent:work@top.F3
                       |vpiName:Fast
                       |vpiFullName:work@top.F3.Fast
-                      |UINT:5
+                      |BIN:0101
               |vpiCaseItem:
               \_case_item: , line:32:6, endln:32:27
                 |vpiExpr:
@@ -12027,6 +12052,7 @@ design: (work@top)
     \_parameter: (work@FSM3.Stop), line:8:10, endln:8:27, parent:work@FSM3
       |vpiName:Stop
       |vpiFullName:work@FSM3.Stop
+      |BIN:0000
   |vpiParamAssign:
   \_param_assign: , line:9:10, endln:9:27, parent:work@FSM3
     |vpiRhs:
@@ -12039,6 +12065,7 @@ design: (work@top)
     \_parameter: (work@FSM3.Move), line:9:10, endln:9:27, parent:work@FSM3
       |vpiName:Move
       |vpiFullName:work@FSM3.Move
+      |BIN:0001
   |vpiParamAssign:
   \_param_assign: , line:10:10, endln:10:27, parent:work@FSM3
     |vpiRhs:
@@ -12051,6 +12078,7 @@ design: (work@top)
     \_parameter: (work@FSM3.Turn), line:10:10, endln:10:27, parent:work@FSM3
       |vpiName:Turn
       |vpiFullName:work@FSM3.Turn
+      |BIN:0010
   |vpiParamAssign:
   \_param_assign: , line:11:10, endln:11:27, parent:work@FSM3
     |vpiRhs:
@@ -12063,6 +12091,7 @@ design: (work@top)
     \_parameter: (work@FSM3.Slow), line:11:10, endln:11:27, parent:work@FSM3
       |vpiName:Slow
       |vpiFullName:work@FSM3.Slow
+      |BIN:0011
   |vpiParamAssign:
   \_param_assign: , line:12:10, endln:12:27, parent:work@FSM3
     |vpiRhs:
@@ -12075,6 +12104,7 @@ design: (work@top)
     \_parameter: (work@FSM3.Medium), line:12:10, endln:12:27, parent:work@FSM3
       |vpiName:Medium
       |vpiFullName:work@FSM3.Medium
+      |BIN:0100
   |vpiParamAssign:
   \_param_assign: , line:13:10, endln:13:27, parent:work@FSM3
     |vpiRhs:
@@ -12087,6 +12117,7 @@ design: (work@top)
     \_parameter: (work@FSM3.Fast), line:13:10, endln:13:27, parent:work@FSM3
       |vpiName:Fast
       |vpiFullName:work@FSM3.Fast
+      |BIN:0101
   |vpiParamAssign:
   \_param_assign: , line:14:10, endln:14:27, parent:work@FSM3
     |vpiRhs:
@@ -12099,6 +12130,7 @@ design: (work@top)
     \_parameter: (work@FSM3.Faster), line:14:10, endln:14:27, parent:work@FSM3
       |vpiName:Faster
       |vpiFullName:work@FSM3.Faster
+      |BIN:0110
   |vpiParameter:
   \_parameter: (work@FSM3.Stop), line:8:10, endln:8:27, parent:work@FSM3
   |vpiParameter:
@@ -14536,7 +14568,7 @@ design: (work@top)
       \_sys_func_call: ($vtDumpvars), line:121:2, endln:121:24, parent:work@top
         |vpiName:$vtDumpvars
         |vpiArgument:
-        \_constant: , line:121:14, endln:121:15, parent:$vtDumpvars
+        \_constant: , line:121:14, endln:121:15
           |vpiConstType:9
           |vpiDecompile:1
           |vpiSize:64
@@ -18902,1715 +18934,7 @@ design: (work@top)
       |vpiName:SwitchCtrl
       |vpiFullName:work@top.F2.SwitchCtrl
       |vpiInstance:
-      \_module: work@FSM2 (work@FSM2) fsm2.v:1: , endln:135:9, parent:work@top
-        |vpiDefName:work@FSM2
-        |vpiFullName:work@FSM2
-        |vpiProcess:
-        \_initial: , parent:work@FSM2
-          |vpiStmt:
-          \_begin: (work@FSM2), line:12:8, endln:20:3
-            |vpiFullName:work@FSM2
-            |vpiStmt:
-            \_assignment: , line:13:2, endln:13:11, parent:work@FSM2
-              |vpiOpType:82
-              |vpiBlocking:1
-              |vpiLhs:
-              \_ref_obj: (work@FSM2.Ctrl1), line:13:2, endln:13:7, parent:work@FSM2
-                |vpiName:Ctrl1
-                |vpiFullName:work@FSM2.Ctrl1
-                |vpiActual:
-                \_logic_net: (work@top.F2.Ctrl1), line:10:4, endln:10:9, parent:work@top.F2
-              |vpiRhs:
-              \_constant: , line:13:10, endln:13:11
-                |vpiConstType:9
-                |vpiDecompile:1
-                |vpiSize:64
-                |UINT:1
-            |vpiStmt:
-            \_assignment: , line:14:2, endln:14:11, parent:work@FSM2
-              |vpiOpType:82
-              |vpiBlocking:1
-              |vpiLhs:
-              \_ref_obj: (work@FSM2.Ctrl2), line:14:2, endln:14:7, parent:work@FSM2
-                |vpiName:Ctrl2
-                |vpiFullName:work@FSM2.Ctrl2
-                |vpiActual:
-                \_logic_net: (work@top.F2.Ctrl2), line:10:10, endln:10:15, parent:work@top.F2
-              |vpiRhs:
-              \_constant: , line:14:10, endln:14:11
-                |vpiConstType:9
-                |vpiDecompile:0
-                |vpiSize:64
-                |UINT:0
-            |vpiStmt:
-            \_assignment: , line:15:2, endln:15:11, parent:work@FSM2
-              |vpiOpType:82
-              |vpiBlocking:1
-              |vpiLhs:
-              \_ref_obj: (work@FSM2.Ctrl3), line:15:2, endln:15:7, parent:work@FSM2
-                |vpiName:Ctrl3
-                |vpiFullName:work@FSM2.Ctrl3
-                |vpiActual:
-                \_logic_net: (work@top.F2.Ctrl3), line:10:16, endln:10:21, parent:work@top.F2
-              |vpiRhs:
-              \_constant: , line:15:10, endln:15:11
-                |vpiConstType:9
-                |vpiDecompile:1
-                |vpiSize:64
-                |UINT:1
-            |vpiStmt:
-            \_assignment: , line:16:2, endln:16:11, parent:work@FSM2
-              |vpiOpType:82
-              |vpiBlocking:1
-              |vpiLhs:
-              \_ref_obj: (work@FSM2.Ctrl4), line:16:2, endln:16:7, parent:work@FSM2
-                |vpiName:Ctrl4
-                |vpiFullName:work@FSM2.Ctrl4
-                |vpiActual:
-                \_logic_net: (work@top.F2.Ctrl4), line:10:22, endln:10:27, parent:work@top.F2
-              |vpiRhs:
-              \_constant: , line:16:10, endln:16:11
-                |vpiConstType:9
-                |vpiDecompile:0
-                |vpiSize:64
-                |UINT:0
-            |vpiStmt:
-            \_assignment: , line:17:2, endln:17:11, parent:work@FSM2
-              |vpiOpType:82
-              |vpiBlocking:1
-              |vpiLhs:
-              \_ref_obj: (work@FSM2.Ctrl5), line:17:2, endln:17:7, parent:work@FSM2
-                |vpiName:Ctrl5
-                |vpiFullName:work@FSM2.Ctrl5
-                |vpiActual:
-                \_logic_net: (work@top.F2.Ctrl5), line:10:28, endln:10:33, parent:work@top.F2
-              |vpiRhs:
-              \_constant: , line:17:10, endln:17:11
-                |vpiConstType:9
-                |vpiDecompile:1
-                |vpiSize:64
-                |UINT:1
-            |vpiStmt:
-            \_assignment: , line:18:2, endln:18:11, parent:work@FSM2
-              |vpiOpType:82
-              |vpiBlocking:1
-              |vpiLhs:
-              \_ref_obj: (work@FSM2.Ctrl6), line:18:2, endln:18:7, parent:work@FSM2
-                |vpiName:Ctrl6
-                |vpiFullName:work@FSM2.Ctrl6
-                |vpiActual:
-                \_logic_net: (work@top.F2.Ctrl6), line:10:34, endln:10:39, parent:work@top.F2
-              |vpiRhs:
-              \_constant: , line:18:10, endln:18:11
-                |vpiConstType:9
-                |vpiDecompile:0
-                |vpiSize:64
-                |UINT:0
-            |vpiStmt:
-            \_assignment: , line:19:2, endln:19:11, parent:work@FSM2
-              |vpiOpType:82
-              |vpiBlocking:1
-              |vpiLhs:
-              \_ref_obj: (work@FSM2.Ctrl7), line:19:2, endln:19:7, parent:work@FSM2
-                |vpiName:Ctrl7
-                |vpiFullName:work@FSM2.Ctrl7
-                |vpiActual:
-                \_logic_net: (work@top.F2.Ctrl7), line:10:40, endln:10:45, parent:work@top.F2
-              |vpiRhs:
-              \_constant: , line:19:10, endln:19:11
-                |vpiConstType:9
-                |vpiDecompile:1
-                |vpiSize:64
-                |UINT:1
-        |vpiProcess:
-        \_always: , line:36, endln:113:3, parent:work@FSM2
-          |vpiAlwaysType:1
-          |vpiStmt:
-          \_event_control: , line:36:7, endln:113:3
-            |vpiCondition:
-            \_operation: , line:36:9, endln:36:16
-              |vpiOpType:35
-              |vpiOperand:
-              \_ref_obj: (control), line:36:9, endln:36:16
-                |vpiName:control
-              |vpiOperand:
-              \_ref_obj: (CurrentState), line:36:20, endln:36:32
-                |vpiName:CurrentState
-            |vpiStmt:
-            \_named_begin: (work@FSM2.COMB), line:36:34, endln:113:3
-              |vpiName:COMB
-              |vpiFullName:work@FSM2.COMB
-              |vpiStmt:
-              \_assignment: , line:37:2, endln:37:17, parent:work@FSM2.COMB
-                |vpiOpType:82
-                |vpiBlocking:1
-                |vpiLhs:
-                \_ref_obj: (work@FSM2.COMB.NextState), line:37:2, endln:37:11, parent:work@FSM2.COMB
-                  |vpiName:NextState
-                  |vpiFullName:work@FSM2.COMB.NextState
-                  |vpiActual:
-                  \_logic_net: (work@top.F2.NextState), line:8:24, endln:8:33, parent:work@top.F2
-                |vpiRhs:
-                \_ref_obj: (work@FSM2.COMB.ST0), line:37:14, endln:37:17, parent:work@FSM2.COMB
-                  |vpiName:ST0
-                  |vpiFullName:work@FSM2.COMB.ST0
-                  |vpiActual:
-                  \_parameter: (work@top.F2.ST0), line:6:16, endln:6:22, parent:work@top.F2
-              |vpiStmt:
-              \_case_stmt: , line:38:2, endln:112:9, parent:work@FSM2.COMB
-                |vpiCaseType:1
-                |vpiCondition:
-                \_ref_obj: (work@FSM2.COMB.CurrentState), line:38:8, endln:38:20, parent:work@FSM2.COMB
-                  |vpiName:CurrentState
-                  |vpiFullName:work@FSM2.COMB.CurrentState
-                  |vpiActual:
-                  \_logic_net: (work@top.F2.CurrentState), line:8:10, endln:8:22, parent:work@top.F2
-                |vpiCaseItem:
-                \_case_item: , line:39:4, endln:42:7
-                  |vpiExpr:
-                  \_ref_obj: (work@FSM2.COMB.ST0), line:39:4, endln:39:7, parent:work@FSM2.COMB
-                    |vpiName:ST0
-                    |vpiFullName:work@FSM2.COMB.ST0
-                    |vpiActual:
-                    \_parameter: (work@top.F2.ST0), line:6:16, endln:6:22, parent:work@top.F2
-                  |vpiStmt:
-                  \_begin: (work@FSM2.COMB), line:39:8, endln:42:7
-                    |vpiFullName:work@FSM2.COMB
-                    |vpiStmt:
-                    \_assignment: , line:40:6, endln:40:21, parent:work@FSM2.COMB
-                      |vpiOpType:82
-                      |vpiBlocking:1
-                      |vpiLhs:
-                      \_ref_obj: (work@FSM2.COMB.NextState), line:40:6, endln:40:15, parent:work@FSM2.COMB
-                        |vpiName:NextState
-                        |vpiFullName:work@FSM2.COMB.NextState
-                        |vpiActual:
-                        \_logic_net: (work@top.F2.NextState), line:8:24, endln:8:33, parent:work@top.F2
-                      |vpiRhs:
-                      \_ref_obj: (work@FSM2.COMB.ST1), line:40:18, endln:40:21, parent:work@FSM2.COMB
-                        |vpiName:ST1
-                        |vpiFullName:work@FSM2.COMB.ST1
-                        |vpiActual:
-                        \_parameter: (work@top.F2.ST1), line:6:24, endln:6:29, parent:work@top.F2
-                    |vpiStmt:
-                    \_task_call: (SwitchCtrl), line:41:6, endln:41:17, parent:work@FSM2.COMB
-                      |vpiName:SwitchCtrl
-                      |vpiTask:
-                      \_task: (work@FSM2.SwitchCtrl), line:23, endln:33:7, parent:work@FSM2
-                |vpiCaseItem:
-                \_case_item: , line:44:4, endln:50:7
-                  |vpiExpr:
-                  \_ref_obj: (work@FSM2.COMB.ST1), line:44:4, endln:44:7, parent:work@FSM2.COMB
-                    |vpiName:ST1
-                    |vpiFullName:work@FSM2.COMB.ST1
-                    |vpiActual:
-                    \_parameter: (work@top.F2.ST1), line:6:24, endln:6:29, parent:work@top.F2
-                  |vpiStmt:
-                  \_begin: (work@FSM2.COMB), line:44:8, endln:50:7
-                    |vpiFullName:work@FSM2.COMB
-                    |vpiStmt:
-                    \_if_else: , line:45:6, endln:48:24, parent:work@FSM2.COMB
-                      |vpiCondition:
-                      \_ref_obj: (work@FSM2.COMB.control), line:45:10, endln:45:17
-                        |vpiName:control
-                        |vpiFullName:work@FSM2.COMB.control
-                        |vpiActual:
-                        \_logic_net: (work@top.F2.control), line:1:26, endln:1:33, parent:work@top.F2
-                      |vpiStmt:
-                      \_assignment: , line:46:8, endln:46:23
-                        |vpiOpType:82
-                        |vpiBlocking:1
-                        |vpiLhs:
-                        \_ref_obj: (work@FSM2.COMB.NextState), line:46:8, endln:46:17
-                          |vpiName:NextState
-                          |vpiFullName:work@FSM2.COMB.NextState
-                          |vpiActual:
-                          \_logic_net: (work@top.F2.NextState), line:8:24, endln:8:33, parent:work@top.F2
-                        |vpiRhs:
-                        \_ref_obj: (work@FSM2.COMB.ST2), line:46:20, endln:46:23
-                          |vpiName:ST2
-                          |vpiFullName:work@FSM2.COMB.ST2
-                          |vpiActual:
-                          \_parameter: (work@top.F2.ST2), line:6:31, endln:6:36, parent:work@top.F2
-                      |vpiElseStmt:
-                      \_assignment: , line:48:8, endln:48:23
-                        |vpiOpType:82
-                        |vpiBlocking:1
-                        |vpiLhs:
-                        \_ref_obj: (work@FSM2.COMB.NextState), line:48:8, endln:48:17
-                          |vpiName:NextState
-                          |vpiFullName:work@FSM2.COMB.NextState
-                          |vpiActual:
-                          \_logic_net: (work@top.F2.NextState), line:8:24, endln:8:33, parent:work@top.F2
-                        |vpiRhs:
-                        \_ref_obj: (work@FSM2.COMB.ST3), line:48:20, endln:48:23
-                          |vpiName:ST3
-                          |vpiFullName:work@FSM2.COMB.ST3
-                          |vpiActual:
-                          \_parameter: (work@top.F2.ST3), line:6:38, endln:6:43, parent:work@top.F2
-                    |vpiStmt:
-                    \_task_call: (SwitchCtrl), line:49:6, endln:49:17, parent:work@FSM2.COMB
-                      |vpiName:SwitchCtrl
-                      |vpiTask:
-                      \_task: (work@FSM2.SwitchCtrl), line:23, endln:33:7, parent:work@FSM2
-                |vpiCaseItem:
-                \_case_item: , line:52:4, endln:55:7
-                  |vpiExpr:
-                  \_ref_obj: (work@FSM2.COMB.ST2), line:52:4, endln:52:7, parent:work@FSM2.COMB
-                    |vpiName:ST2
-                    |vpiFullName:work@FSM2.COMB.ST2
-                    |vpiActual:
-                    \_parameter: (work@top.F2.ST2), line:6:31, endln:6:36, parent:work@top.F2
-                  |vpiStmt:
-                  \_begin: (work@FSM2.COMB), line:52:8, endln:55:7
-                    |vpiFullName:work@FSM2.COMB
-                    |vpiStmt:
-                    \_assignment: , line:53:6, endln:53:21, parent:work@FSM2.COMB
-                      |vpiOpType:82
-                      |vpiBlocking:1
-                      |vpiLhs:
-                      \_ref_obj: (work@FSM2.COMB.NextState), line:53:6, endln:53:15, parent:work@FSM2.COMB
-                        |vpiName:NextState
-                        |vpiFullName:work@FSM2.COMB.NextState
-                        |vpiActual:
-                        \_logic_net: (work@top.F2.NextState), line:8:24, endln:8:33, parent:work@top.F2
-                      |vpiRhs:
-                      \_ref_obj: (work@FSM2.COMB.ST3), line:53:18, endln:53:21, parent:work@FSM2.COMB
-                        |vpiName:ST3
-                        |vpiFullName:work@FSM2.COMB.ST3
-                        |vpiActual:
-                        \_parameter: (work@top.F2.ST3), line:6:38, endln:6:43, parent:work@top.F2
-                    |vpiStmt:
-                    \_task_call: (SwitchCtrl), line:54:6, endln:54:17, parent:work@FSM2.COMB
-                      |vpiName:SwitchCtrl
-                      |vpiTask:
-                      \_task: (work@FSM2.SwitchCtrl), line:23, endln:33:7, parent:work@FSM2
-                |vpiCaseItem:
-                \_case_item: , line:57:4, endln:59:7
-                  |vpiExpr:
-                  \_ref_obj: (work@FSM2.COMB.ST3), line:57:4, endln:57:7, parent:work@FSM2.COMB
-                    |vpiName:ST3
-                    |vpiFullName:work@FSM2.COMB.ST3
-                    |vpiActual:
-                    \_parameter: (work@top.F2.ST3), line:6:38, endln:6:43, parent:work@top.F2
-                  |vpiStmt:
-                  \_begin: (work@FSM2.COMB), line:57:8, endln:59:7
-                    |vpiFullName:work@FSM2.COMB
-                    |vpiStmt:
-                    \_assignment: , line:58:6, endln:58:21, parent:work@FSM2.COMB
-                      |vpiOpType:82
-                      |vpiBlocking:1
-                      |vpiLhs:
-                      \_ref_obj: (work@FSM2.COMB.NextState), line:58:6, endln:58:15, parent:work@FSM2.COMB
-                        |vpiName:NextState
-                        |vpiFullName:work@FSM2.COMB.NextState
-                        |vpiActual:
-                        \_logic_net: (work@top.F2.NextState), line:8:24, endln:8:33, parent:work@top.F2
-                      |vpiRhs:
-                      \_ref_obj: (work@FSM2.COMB.ST0), line:58:18, endln:58:21, parent:work@FSM2.COMB
-                        |vpiName:ST0
-                        |vpiFullName:work@FSM2.COMB.ST0
-                        |vpiActual:
-                        \_parameter: (work@top.F2.ST0), line:6:16, endln:6:22, parent:work@top.F2
-                |vpiCaseItem:
-                \_case_item: , line:61:3, endln:64:6
-                  |vpiExpr:
-                  \_ref_obj: (work@FSM2.COMB.ST4), line:61:3, endln:61:6, parent:work@FSM2.COMB
-                    |vpiName:ST4
-                    |vpiFullName:work@FSM2.COMB.ST4
-                    |vpiActual:
-                    \_parameter: (work@top.F2.ST4), line:6:45, endln:6:50, parent:work@top.F2
-                  |vpiStmt:
-                  \_begin: (work@FSM2.COMB), line:61:7, endln:64:6
-                    |vpiFullName:work@FSM2.COMB
-                    |vpiStmt:
-                    \_task_call: (SwitchCtrl), line:62:6, endln:62:17, parent:work@FSM2.COMB
-                      |vpiName:SwitchCtrl
-                      |vpiTask:
-                      \_task: (work@FSM2.SwitchCtrl), line:23, endln:33:7, parent:work@FSM2
-                    |vpiStmt:
-                    \_assignment: , line:63:6, endln:63:21, parent:work@FSM2.COMB
-                      |vpiOpType:82
-                      |vpiBlocking:1
-                      |vpiLhs:
-                      \_ref_obj: (work@FSM2.COMB.NextState), line:63:6, endln:63:15, parent:work@FSM2.COMB
-                        |vpiName:NextState
-                        |vpiFullName:work@FSM2.COMB.NextState
-                        |vpiActual:
-                        \_logic_net: (work@top.F2.NextState), line:8:24, endln:8:33, parent:work@top.F2
-                      |vpiRhs:
-                      \_ref_obj: (work@FSM2.COMB.ST5), line:63:18, endln:63:21, parent:work@FSM2.COMB
-                        |vpiName:ST5
-                        |vpiFullName:work@FSM2.COMB.ST5
-                        |vpiActual:
-                        \_parameter: (work@top.F2.ST5), line:6:52, endln:6:57, parent:work@top.F2
-                |vpiCaseItem:
-                \_case_item: , line:66:3, endln:69:6
-                  |vpiExpr:
-                  \_ref_obj: (work@FSM2.COMB.ST5), line:66:3, endln:66:6, parent:work@FSM2.COMB
-                    |vpiName:ST5
-                    |vpiFullName:work@FSM2.COMB.ST5
-                    |vpiActual:
-                    \_parameter: (work@top.F2.ST5), line:6:52, endln:6:57, parent:work@top.F2
-                  |vpiStmt:
-                  \_begin: (work@FSM2.COMB), line:66:7, endln:69:6
-                    |vpiFullName:work@FSM2.COMB
-                    |vpiStmt:
-                    \_assignment: , line:67:6, endln:67:22, parent:work@FSM2.COMB
-                      |vpiOpType:82
-                      |vpiBlocking:1
-                      |vpiLhs:
-                      \_ref_obj: (work@FSM2.COMB.NextState), line:67:6, endln:67:15, parent:work@FSM2.COMB
-                        |vpiName:NextState
-                        |vpiFullName:work@FSM2.COMB.NextState
-                        |vpiActual:
-                        \_logic_net: (work@top.F2.NextState), line:8:24, endln:8:33, parent:work@top.F2
-                      |vpiRhs:
-                      \_ref_obj: (work@FSM2.COMB.ST10), line:67:18, endln:67:22, parent:work@FSM2.COMB
-                        |vpiName:ST10
-                        |vpiFullName:work@FSM2.COMB.ST10
-                        |vpiActual:
-                        \_parameter: (work@top.F2.ST10), line:7:30, endln:7:37, parent:work@top.F2
-                    |vpiStmt:
-                    \_task_call: (SwitchCtrl), line:68:6, endln:68:17, parent:work@FSM2.COMB
-                      |vpiName:SwitchCtrl
-                      |vpiTask:
-                      \_task: (work@FSM2.SwitchCtrl), line:23, endln:33:7, parent:work@FSM2
-                |vpiCaseItem:
-                \_case_item: , line:71:3, endln:74:6
-                  |vpiExpr:
-                  \_ref_obj: (work@FSM2.COMB.ST6), line:71:3, endln:71:6, parent:work@FSM2.COMB
-                    |vpiName:ST6
-                    |vpiFullName:work@FSM2.COMB.ST6
-                    |vpiActual:
-                    \_parameter: (work@top.F2.ST6), line:6:59, endln:6:64, parent:work@top.F2
-                  |vpiStmt:
-                  \_begin: (work@FSM2.COMB), line:71:7, endln:74:6
-                    |vpiFullName:work@FSM2.COMB
-                    |vpiStmt:
-                    \_task_call: (SwitchCtrl), line:72:6, endln:72:17, parent:work@FSM2.COMB
-                      |vpiName:SwitchCtrl
-                      |vpiTask:
-                      \_task: (work@FSM2.SwitchCtrl), line:23, endln:33:7, parent:work@FSM2
-                    |vpiStmt:
-                    \_assignment: , line:73:6, endln:73:21, parent:work@FSM2.COMB
-                      |vpiOpType:82
-                      |vpiBlocking:1
-                      |vpiLhs:
-                      \_ref_obj: (work@FSM2.COMB.NextState), line:73:6, endln:73:15, parent:work@FSM2.COMB
-                        |vpiName:NextState
-                        |vpiFullName:work@FSM2.COMB.NextState
-                        |vpiActual:
-                        \_logic_net: (work@top.F2.NextState), line:8:24, endln:8:33, parent:work@top.F2
-                      |vpiRhs:
-                      \_ref_obj: (work@FSM2.COMB.ST3), line:73:18, endln:73:21, parent:work@FSM2.COMB
-                        |vpiName:ST3
-                        |vpiFullName:work@FSM2.COMB.ST3
-                        |vpiActual:
-                        \_parameter: (work@top.F2.ST3), line:6:38, endln:6:43, parent:work@top.F2
-                |vpiCaseItem:
-                \_case_item: , line:76:3, endln:86:6
-                  |vpiExpr:
-                  \_ref_obj: (work@FSM2.COMB.ST7), line:76:3, endln:76:6, parent:work@FSM2.COMB
-                    |vpiName:ST7
-                    |vpiFullName:work@FSM2.COMB.ST7
-                    |vpiActual:
-                    \_parameter: (work@top.F2.ST7), line:6:65, endln:6:70, parent:work@top.F2
-                  |vpiStmt:
-                  \_begin: (work@FSM2.COMB), line:76:7, endln:86:6
-                    |vpiFullName:work@FSM2.COMB
-                    |vpiStmt:
-                    \_task_call: (SwitchCtrl), line:77:6, endln:77:17, parent:work@FSM2.COMB
-                      |vpiName:SwitchCtrl
-                      |vpiTask:
-                      \_task: (work@FSM2.SwitchCtrl), line:23, endln:33:7, parent:work@FSM2
-                    |vpiStmt:
-                    \_if_else: , line:78:6, endln:85:27, parent:work@FSM2.COMB
-                      |vpiCondition:
-                      \_ref_obj: (work@FSM2.COMB.Ctrl1), line:78:10, endln:78:15
-                        |vpiName:Ctrl1
-                        |vpiFullName:work@FSM2.COMB.Ctrl1
-                        |vpiActual:
-                        \_logic_net: (work@top.F2.Ctrl1), line:10:4, endln:10:9, parent:work@top.F2
-                      |vpiStmt:
-                      \_assignment: , line:78:17, endln:78:32
-                        |vpiOpType:82
-                        |vpiBlocking:1
-                        |vpiLhs:
-                        \_ref_obj: (work@FSM2.COMB.NextState), line:78:17, endln:78:26
-                          |vpiName:NextState
-                          |vpiFullName:work@FSM2.COMB.NextState
-                          |vpiActual:
-                          \_logic_net: (work@top.F2.NextState), line:8:24, endln:8:33, parent:work@top.F2
-                        |vpiRhs:
-                        \_ref_obj: (work@FSM2.COMB.ST8), line:78:29, endln:78:32
-                          |vpiName:ST8
-                          |vpiFullName:work@FSM2.COMB.ST8
-                          |vpiActual:
-                          \_parameter: (work@top.F2.ST8), line:7:16, endln:7:21, parent:work@top.F2
-                      |vpiElseStmt:
-                      \_if_else: , line:79:15, endln:79:20
-                        |vpiCondition:
-                        \_ref_obj: (work@FSM2.COMB.Ctrl2), line:79:15, endln:79:20
-                          |vpiName:Ctrl2
-                          |vpiFullName:work@FSM2.COMB.Ctrl2
-                          |vpiActual:
-                          \_logic_net: (work@top.F2.Ctrl2), line:10:10, endln:10:15, parent:work@top.F2
-                        |vpiStmt:
-                        \_assignment: , line:79:22, endln:79:37
-                          |vpiOpType:82
-                          |vpiBlocking:1
-                          |vpiLhs:
-                          \_ref_obj: (work@FSM2.COMB.NextState), line:79:22, endln:79:31
-                            |vpiName:NextState
-                            |vpiFullName:work@FSM2.COMB.NextState
-                            |vpiActual:
-                            \_logic_net: (work@top.F2.NextState), line:8:24, endln:8:33, parent:work@top.F2
-                          |vpiRhs:
-                          \_ref_obj: (work@FSM2.COMB.ST4), line:79:34, endln:79:37
-                            |vpiName:ST4
-                            |vpiFullName:work@FSM2.COMB.ST4
-                            |vpiActual:
-                            \_parameter: (work@top.F2.ST4), line:6:45, endln:6:50, parent:work@top.F2
-                        |vpiElseStmt:
-                        \_if_else: , line:80:15, endln:80:20
-                          |vpiCondition:
-                          \_ref_obj: (work@FSM2.COMB.Ctrl3), line:80:15, endln:80:20
-                            |vpiName:Ctrl3
-                            |vpiFullName:work@FSM2.COMB.Ctrl3
-                            |vpiActual:
-                            \_logic_net: (work@top.F2.Ctrl3), line:10:16, endln:10:21, parent:work@top.F2
-                          |vpiStmt:
-                          \_assignment: , line:80:22, endln:80:37
-                            |vpiOpType:82
-                            |vpiBlocking:1
-                            |vpiLhs:
-                            \_ref_obj: (work@FSM2.COMB.NextState), line:80:22, endln:80:31
-                              |vpiName:NextState
-                              |vpiFullName:work@FSM2.COMB.NextState
-                              |vpiActual:
-                              \_logic_net: (work@top.F2.NextState), line:8:24, endln:8:33, parent:work@top.F2
-                            |vpiRhs:
-                            \_ref_obj: (work@FSM2.COMB.ST3), line:80:34, endln:80:37
-                              |vpiName:ST3
-                              |vpiFullName:work@FSM2.COMB.ST3
-                              |vpiActual:
-                              \_parameter: (work@top.F2.ST3), line:6:38, endln:6:43, parent:work@top.F2
-                          |vpiElseStmt:
-                          \_if_else: , line:81:15, endln:81:20
-                            |vpiCondition:
-                            \_ref_obj: (work@FSM2.COMB.Ctrl4), line:81:15, endln:81:20
-                              |vpiName:Ctrl4
-                              |vpiFullName:work@FSM2.COMB.Ctrl4
-                              |vpiActual:
-                              \_logic_net: (work@top.F2.Ctrl4), line:10:22, endln:10:27, parent:work@top.F2
-                            |vpiStmt:
-                            \_assignment: , line:81:22, endln:81:37
-                              |vpiOpType:82
-                              |vpiBlocking:1
-                              |vpiLhs:
-                              \_ref_obj: (work@FSM2.COMB.NextState), line:81:22, endln:81:31
-                                |vpiName:NextState
-                                |vpiFullName:work@FSM2.COMB.NextState
-                                |vpiActual:
-                                \_logic_net: (work@top.F2.NextState), line:8:24, endln:8:33, parent:work@top.F2
-                              |vpiRhs:
-                              \_ref_obj: (work@FSM2.COMB.ST1), line:81:34, endln:81:37
-                                |vpiName:ST1
-                                |vpiFullName:work@FSM2.COMB.ST1
-                                |vpiActual:
-                                \_parameter: (work@top.F2.ST1), line:6:24, endln:6:29, parent:work@top.F2
-                            |vpiElseStmt:
-                            \_if_else: , line:82:15, endln:82:20
-                              |vpiCondition:
-                              \_ref_obj: (work@FSM2.COMB.Ctrl5), line:82:15, endln:82:20
-                                |vpiName:Ctrl5
-                                |vpiFullName:work@FSM2.COMB.Ctrl5
-                                |vpiActual:
-                                \_logic_net: (work@top.F2.Ctrl5), line:10:28, endln:10:33, parent:work@top.F2
-                              |vpiStmt:
-                              \_assignment: , line:82:22, endln:82:37
-                                |vpiOpType:82
-                                |vpiBlocking:1
-                                |vpiLhs:
-                                \_ref_obj: (work@FSM2.COMB.NextState), line:82:22, endln:82:31
-                                  |vpiName:NextState
-                                  |vpiFullName:work@FSM2.COMB.NextState
-                                  |vpiActual:
-                                  \_logic_net: (work@top.F2.NextState), line:8:24, endln:8:33, parent:work@top.F2
-                                |vpiRhs:
-                                \_ref_obj: (work@FSM2.COMB.ST0), line:82:34, endln:82:37
-                                  |vpiName:ST0
-                                  |vpiFullName:work@FSM2.COMB.ST0
-                                  |vpiActual:
-                                  \_parameter: (work@top.F2.ST0), line:6:16, endln:6:22, parent:work@top.F2
-                              |vpiElseStmt:
-                              \_if_else: , line:83:15, endln:83:20
-                                |vpiCondition:
-                                \_ref_obj: (work@FSM2.COMB.Ctrl6), line:83:15, endln:83:20
-                                  |vpiName:Ctrl6
-                                  |vpiFullName:work@FSM2.COMB.Ctrl6
-                                  |vpiActual:
-                                  \_logic_net: (work@top.F2.Ctrl6), line:10:34, endln:10:39, parent:work@top.F2
-                                |vpiStmt:
-                                \_assignment: , line:83:22, endln:83:37
-                                  |vpiOpType:82
-                                  |vpiBlocking:1
-                                  |vpiLhs:
-                                  \_ref_obj: (work@FSM2.COMB.NextState), line:83:22, endln:83:31
-                                    |vpiName:NextState
-                                    |vpiFullName:work@FSM2.COMB.NextState
-                                    |vpiActual:
-                                    \_logic_net: (work@top.F2.NextState), line:8:24, endln:8:33, parent:work@top.F2
-                                  |vpiRhs:
-                                  \_ref_obj: (work@FSM2.COMB.ST2), line:83:34, endln:83:37
-                                    |vpiName:ST2
-                                    |vpiFullName:work@FSM2.COMB.ST2
-                                    |vpiActual:
-                                    \_parameter: (work@top.F2.ST2), line:6:31, endln:6:36, parent:work@top.F2
-                                |vpiElseStmt:
-                                \_if_else: , line:84:15, endln:84:20
-                                  |vpiCondition:
-                                  \_ref_obj: (work@FSM2.COMB.Ctrl7), line:84:15, endln:84:20
-                                    |vpiName:Ctrl7
-                                    |vpiFullName:work@FSM2.COMB.Ctrl7
-                                    |vpiActual:
-                                    \_logic_net: (work@top.F2.Ctrl7), line:10:40, endln:10:45, parent:work@top.F2
-                                  |vpiStmt:
-                                  \_assignment: , line:84:22, endln:84:37
-                                    |vpiOpType:82
-                                    |vpiBlocking:1
-                                    |vpiLhs:
-                                    \_ref_obj: (work@FSM2.COMB.NextState), line:84:22, endln:84:31
-                                      |vpiName:NextState
-                                      |vpiFullName:work@FSM2.COMB.NextState
-                                      |vpiActual:
-                                      \_logic_net: (work@top.F2.NextState), line:8:24, endln:8:33, parent:work@top.F2
-                                    |vpiRhs:
-                                    \_ref_obj: (work@FSM2.COMB.ST5), line:84:34, endln:84:37
-                                      |vpiName:ST5
-                                      |vpiFullName:work@FSM2.COMB.ST5
-                                      |vpiActual:
-                                      \_parameter: (work@top.F2.ST5), line:6:52, endln:6:57, parent:work@top.F2
-                                  |vpiElseStmt:
-                                  \_assignment: , line:85:11, endln:85:26
-                                    |vpiOpType:82
-                                    |vpiBlocking:1
-                                    |vpiLhs:
-                                    \_ref_obj: (work@FSM2.COMB.NextState), line:85:11, endln:85:20
-                                      |vpiName:NextState
-                                      |vpiFullName:work@FSM2.COMB.NextState
-                                      |vpiActual:
-                                      \_logic_net: (work@top.F2.NextState), line:8:24, endln:8:33, parent:work@top.F2
-                                    |vpiRhs:
-                                    \_ref_obj: (work@FSM2.COMB.ST1), line:85:23, endln:85:26
-                                      |vpiName:ST1
-                                      |vpiFullName:work@FSM2.COMB.ST1
-                                      |vpiActual:
-                                      \_parameter: (work@top.F2.ST1), line:6:24, endln:6:29, parent:work@top.F2
-                |vpiCaseItem:
-                \_case_item: , line:88:3, endln:98:6
-                  |vpiExpr:
-                  \_ref_obj: (work@FSM2.COMB.ST8), line:88:3, endln:88:6, parent:work@FSM2.COMB
-                    |vpiName:ST8
-                    |vpiFullName:work@FSM2.COMB.ST8
-                    |vpiActual:
-                    \_parameter: (work@top.F2.ST8), line:7:16, endln:7:21, parent:work@top.F2
-                  |vpiStmt:
-                  \_begin: (work@FSM2.COMB), line:88:7, endln:98:6
-                    |vpiFullName:work@FSM2.COMB
-                    |vpiStmt:
-                    \_task_call: (SwitchCtrl), line:89:6, endln:89:17, parent:work@FSM2.COMB
-                      |vpiName:SwitchCtrl
-                      |vpiTask:
-                      \_task: (work@FSM2.SwitchCtrl), line:23, endln:33:7, parent:work@FSM2
-                    |vpiStmt:
-                    \_if_else: , line:90:6, endln:97:27, parent:work@FSM2.COMB
-                      |vpiCondition:
-                      \_ref_obj: (work@FSM2.COMB.Ctrl1), line:90:10, endln:90:15
-                        |vpiName:Ctrl1
-                        |vpiFullName:work@FSM2.COMB.Ctrl1
-                        |vpiActual:
-                        \_logic_net: (work@top.F2.Ctrl1), line:10:4, endln:10:9, parent:work@top.F2
-                      |vpiStmt:
-                      \_assignment: , line:90:17, endln:90:32
-                        |vpiOpType:82
-                        |vpiBlocking:1
-                        |vpiLhs:
-                        \_ref_obj: (work@FSM2.COMB.NextState), line:90:17, endln:90:26
-                          |vpiName:NextState
-                          |vpiFullName:work@FSM2.COMB.NextState
-                          |vpiActual:
-                          \_logic_net: (work@top.F2.NextState), line:8:24, endln:8:33, parent:work@top.F2
-                        |vpiRhs:
-                        \_ref_obj: (work@FSM2.COMB.ST8), line:90:29, endln:90:32
-                          |vpiName:ST8
-                          |vpiFullName:work@FSM2.COMB.ST8
-                          |vpiActual:
-                          \_parameter: (work@top.F2.ST8), line:7:16, endln:7:21, parent:work@top.F2
-                      |vpiElseStmt:
-                      \_if_else: , line:91:15, endln:91:21
-                        |vpiCondition:
-                        \_operation: , line:91:15, endln:91:21
-                          |vpiOpType:3
-                          |vpiOperand:
-                          \_ref_obj: (work@FSM2.COMB.Ctrl2), line:91:16, endln:91:21
-                            |vpiName:Ctrl2
-                            |vpiFullName:work@FSM2.COMB.Ctrl2
-                            |vpiActual:
-                            \_logic_net: (work@top.F2.Ctrl2), line:10:10, endln:10:15, parent:work@top.F2
-                        |vpiStmt:
-                        \_assignment: , line:91:23, endln:91:38
-                          |vpiOpType:82
-                          |vpiBlocking:1
-                          |vpiLhs:
-                          \_ref_obj: (work@FSM2.COMB.NextState), line:91:23, endln:91:32
-                            |vpiName:NextState
-                            |vpiFullName:work@FSM2.COMB.NextState
-                            |vpiActual:
-                            \_logic_net: (work@top.F2.NextState), line:8:24, endln:8:33, parent:work@top.F2
-                          |vpiRhs:
-                          \_ref_obj: (work@FSM2.COMB.ST4), line:91:35, endln:91:38
-                            |vpiName:ST4
-                            |vpiFullName:work@FSM2.COMB.ST4
-                            |vpiActual:
-                            \_parameter: (work@top.F2.ST4), line:6:45, endln:6:50, parent:work@top.F2
-                        |vpiElseStmt:
-                        \_if_else: , line:92:15, endln:92:20
-                          |vpiCondition:
-                          \_ref_obj: (work@FSM2.COMB.Ctrl3), line:92:15, endln:92:20
-                            |vpiName:Ctrl3
-                            |vpiFullName:work@FSM2.COMB.Ctrl3
-                            |vpiActual:
-                            \_logic_net: (work@top.F2.Ctrl3), line:10:16, endln:10:21, parent:work@top.F2
-                          |vpiStmt:
-                          \_assignment: , line:92:22, endln:92:37
-                            |vpiOpType:82
-                            |vpiBlocking:1
-                            |vpiLhs:
-                            \_ref_obj: (work@FSM2.COMB.NextState), line:92:22, endln:92:31
-                              |vpiName:NextState
-                              |vpiFullName:work@FSM2.COMB.NextState
-                              |vpiActual:
-                              \_logic_net: (work@top.F2.NextState), line:8:24, endln:8:33, parent:work@top.F2
-                            |vpiRhs:
-                            \_ref_obj: (work@FSM2.COMB.ST3), line:92:34, endln:92:37
-                              |vpiName:ST3
-                              |vpiFullName:work@FSM2.COMB.ST3
-                              |vpiActual:
-                              \_parameter: (work@top.F2.ST3), line:6:38, endln:6:43, parent:work@top.F2
-                          |vpiElseStmt:
-                          \_if_else: , line:93:15, endln:93:21
-                            |vpiCondition:
-                            \_operation: , line:93:15, endln:93:21
-                              |vpiOpType:3
-                              |vpiOperand:
-                              \_ref_obj: (work@FSM2.COMB.Ctrl4), line:93:16, endln:93:21
-                                |vpiName:Ctrl4
-                                |vpiFullName:work@FSM2.COMB.Ctrl4
-                                |vpiActual:
-                                \_logic_net: (work@top.F2.Ctrl4), line:10:22, endln:10:27, parent:work@top.F2
-                            |vpiStmt:
-                            \_assignment: , line:93:23, endln:93:38
-                              |vpiOpType:82
-                              |vpiBlocking:1
-                              |vpiLhs:
-                              \_ref_obj: (work@FSM2.COMB.NextState), line:93:23, endln:93:32
-                                |vpiName:NextState
-                                |vpiFullName:work@FSM2.COMB.NextState
-                                |vpiActual:
-                                \_logic_net: (work@top.F2.NextState), line:8:24, endln:8:33, parent:work@top.F2
-                              |vpiRhs:
-                              \_ref_obj: (work@FSM2.COMB.ST1), line:93:35, endln:93:38
-                                |vpiName:ST1
-                                |vpiFullName:work@FSM2.COMB.ST1
-                                |vpiActual:
-                                \_parameter: (work@top.F2.ST1), line:6:24, endln:6:29, parent:work@top.F2
-                            |vpiElseStmt:
-                            \_if_else: , line:94:15, endln:94:20
-                              |vpiCondition:
-                              \_ref_obj: (work@FSM2.COMB.Ctrl5), line:94:15, endln:94:20
-                                |vpiName:Ctrl5
-                                |vpiFullName:work@FSM2.COMB.Ctrl5
-                                |vpiActual:
-                                \_logic_net: (work@top.F2.Ctrl5), line:10:28, endln:10:33, parent:work@top.F2
-                              |vpiStmt:
-                              \_assignment: , line:94:22, endln:94:37
-                                |vpiOpType:82
-                                |vpiBlocking:1
-                                |vpiLhs:
-                                \_ref_obj: (work@FSM2.COMB.NextState), line:94:22, endln:94:31
-                                  |vpiName:NextState
-                                  |vpiFullName:work@FSM2.COMB.NextState
-                                  |vpiActual:
-                                  \_logic_net: (work@top.F2.NextState), line:8:24, endln:8:33, parent:work@top.F2
-                                |vpiRhs:
-                                \_ref_obj: (work@FSM2.COMB.ST0), line:94:34, endln:94:37
-                                  |vpiName:ST0
-                                  |vpiFullName:work@FSM2.COMB.ST0
-                                  |vpiActual:
-                                  \_parameter: (work@top.F2.ST0), line:6:16, endln:6:22, parent:work@top.F2
-                              |vpiElseStmt:
-                              \_if_else: , line:95:15, endln:95:21
-                                |vpiCondition:
-                                \_operation: , line:95:15, endln:95:21
-                                  |vpiOpType:3
-                                  |vpiOperand:
-                                  \_ref_obj: (work@FSM2.COMB.Ctrl6), line:95:16, endln:95:21
-                                    |vpiName:Ctrl6
-                                    |vpiFullName:work@FSM2.COMB.Ctrl6
-                                    |vpiActual:
-                                    \_logic_net: (work@top.F2.Ctrl6), line:10:34, endln:10:39, parent:work@top.F2
-                                |vpiStmt:
-                                \_assignment: , line:95:23, endln:95:38
-                                  |vpiOpType:82
-                                  |vpiBlocking:1
-                                  |vpiLhs:
-                                  \_ref_obj: (work@FSM2.COMB.NextState), line:95:23, endln:95:32
-                                    |vpiName:NextState
-                                    |vpiFullName:work@FSM2.COMB.NextState
-                                    |vpiActual:
-                                    \_logic_net: (work@top.F2.NextState), line:8:24, endln:8:33, parent:work@top.F2
-                                  |vpiRhs:
-                                  \_ref_obj: (work@FSM2.COMB.ST2), line:95:35, endln:95:38
-                                    |vpiName:ST2
-                                    |vpiFullName:work@FSM2.COMB.ST2
-                                    |vpiActual:
-                                    \_parameter: (work@top.F2.ST2), line:6:31, endln:6:36, parent:work@top.F2
-                                |vpiElseStmt:
-                                \_if_else: , line:96:15, endln:96:20
-                                  |vpiCondition:
-                                  \_ref_obj: (work@FSM2.COMB.Ctrl7), line:96:15, endln:96:20
-                                    |vpiName:Ctrl7
-                                    |vpiFullName:work@FSM2.COMB.Ctrl7
-                                    |vpiActual:
-                                    \_logic_net: (work@top.F2.Ctrl7), line:10:40, endln:10:45, parent:work@top.F2
-                                  |vpiStmt:
-                                  \_assignment: , line:96:22, endln:96:37
-                                    |vpiOpType:82
-                                    |vpiBlocking:1
-                                    |vpiLhs:
-                                    \_ref_obj: (work@FSM2.COMB.NextState), line:96:22, endln:96:31
-                                      |vpiName:NextState
-                                      |vpiFullName:work@FSM2.COMB.NextState
-                                      |vpiActual:
-                                      \_logic_net: (work@top.F2.NextState), line:8:24, endln:8:33, parent:work@top.F2
-                                    |vpiRhs:
-                                    \_ref_obj: (work@FSM2.COMB.ST5), line:96:34, endln:96:37
-                                      |vpiName:ST5
-                                      |vpiFullName:work@FSM2.COMB.ST5
-                                      |vpiActual:
-                                      \_parameter: (work@top.F2.ST5), line:6:52, endln:6:57, parent:work@top.F2
-                                  |vpiElseStmt:
-                                  \_assignment: , line:97:11, endln:97:26
-                                    |vpiOpType:82
-                                    |vpiBlocking:1
-                                    |vpiLhs:
-                                    \_ref_obj: (work@FSM2.COMB.NextState), line:97:11, endln:97:20
-                                      |vpiName:NextState
-                                      |vpiFullName:work@FSM2.COMB.NextState
-                                      |vpiActual:
-                                      \_logic_net: (work@top.F2.NextState), line:8:24, endln:8:33, parent:work@top.F2
-                                    |vpiRhs:
-                                    \_ref_obj: (work@FSM2.COMB.ST1), line:97:23, endln:97:26
-                                      |vpiName:ST1
-                                      |vpiFullName:work@FSM2.COMB.ST1
-                                      |vpiActual:
-                                      \_parameter: (work@top.F2.ST1), line:6:24, endln:6:29, parent:work@top.F2
-                |vpiCaseItem:
-                \_case_item: , line:100:3, endln:104:6
-                  |vpiExpr:
-                  \_ref_obj: (work@FSM2.COMB.ST9), line:100:3, endln:100:6, parent:work@FSM2.COMB
-                    |vpiName:ST9
-                    |vpiFullName:work@FSM2.COMB.ST9
-                    |vpiActual:
-                    \_parameter: (work@top.F2.ST9), line:7:23, endln:7:28, parent:work@top.F2
-                  |vpiStmt:
-                  \_begin: (work@FSM2.COMB), line:100:7, endln:104:6
-                    |vpiFullName:work@FSM2.COMB
-                    |vpiStmt:
-                    \_task_call: (SwitchCtrl), line:101:6, endln:101:17, parent:work@FSM2.COMB
-                      |vpiName:SwitchCtrl
-                      |vpiTask:
-                      \_task: (work@FSM2.SwitchCtrl), line:23, endln:33:7, parent:work@FSM2
-                    |vpiStmt:
-                    \_if_else: , line:102:6, endln:103:27, parent:work@FSM2.COMB
-                      |vpiCondition:
-                      \_ref_obj: (work@FSM2.COMB.Ctrl3), line:102:10, endln:102:15
-                        |vpiName:Ctrl3
-                        |vpiFullName:work@FSM2.COMB.Ctrl3
-                        |vpiActual:
-                        \_logic_net: (work@top.F2.Ctrl3), line:10:16, endln:10:21, parent:work@top.F2
-                      |vpiStmt:
-                      \_assignment: , line:102:17, endln:102:32
-                        |vpiOpType:82
-                        |vpiBlocking:1
-                        |vpiLhs:
-                        \_ref_obj: (work@FSM2.COMB.NextState), line:102:17, endln:102:26
-                          |vpiName:NextState
-                          |vpiFullName:work@FSM2.COMB.NextState
-                          |vpiActual:
-                          \_logic_net: (work@top.F2.NextState), line:8:24, endln:8:33, parent:work@top.F2
-                        |vpiRhs:
-                        \_ref_obj: (work@FSM2.COMB.ST7), line:102:29, endln:102:32
-                          |vpiName:ST7
-                          |vpiFullName:work@FSM2.COMB.ST7
-                          |vpiActual:
-                          \_parameter: (work@top.F2.ST7), line:6:65, endln:6:70, parent:work@top.F2
-                      |vpiElseStmt:
-                      \_assignment: , line:103:11, endln:103:26
-                        |vpiOpType:82
-                        |vpiBlocking:1
-                        |vpiLhs:
-                        \_ref_obj: (work@FSM2.COMB.NextState), line:103:11, endln:103:20
-                          |vpiName:NextState
-                          |vpiFullName:work@FSM2.COMB.NextState
-                          |vpiActual:
-                          \_logic_net: (work@top.F2.NextState), line:8:24, endln:8:33, parent:work@top.F2
-                        |vpiRhs:
-                        \_ref_obj: (work@FSM2.COMB.ST1), line:103:23, endln:103:26
-                          |vpiName:ST1
-                          |vpiFullName:work@FSM2.COMB.ST1
-                          |vpiActual:
-                          \_parameter: (work@top.F2.ST1), line:6:24, endln:6:29, parent:work@top.F2
-                |vpiCaseItem:
-                \_case_item: , line:106:3, endln:110:6
-                  |vpiExpr:
-                  \_ref_obj: (work@FSM2.COMB.ST10), line:106:3, endln:106:7, parent:work@FSM2.COMB
-                    |vpiName:ST10
-                    |vpiFullName:work@FSM2.COMB.ST10
-                    |vpiActual:
-                    \_parameter: (work@top.F2.ST10), line:7:30, endln:7:37, parent:work@top.F2
-                  |vpiStmt:
-                  \_begin: (work@FSM2.COMB), line:106:8, endln:110:6
-                    |vpiFullName:work@FSM2.COMB
-                    |vpiStmt:
-                    \_task_call: (SwitchCtrl), line:107:6, endln:107:17, parent:work@FSM2.COMB
-                      |vpiName:SwitchCtrl
-                      |vpiTask:
-                      \_task: (work@FSM2.SwitchCtrl), line:23, endln:33:7, parent:work@FSM2
-                    |vpiStmt:
-                    \_if_else: , line:108:6, endln:109:27, parent:work@FSM2.COMB
-                      |vpiCondition:
-                      \_ref_obj: (work@FSM2.COMB.Ctrl4), line:108:10, endln:108:15
-                        |vpiName:Ctrl4
-                        |vpiFullName:work@FSM2.COMB.Ctrl4
-                        |vpiActual:
-                        \_logic_net: (work@top.F2.Ctrl4), line:10:22, endln:10:27, parent:work@top.F2
-                      |vpiStmt:
-                      \_assignment: , line:108:17, endln:108:32
-                        |vpiOpType:82
-                        |vpiBlocking:1
-                        |vpiLhs:
-                        \_ref_obj: (work@FSM2.COMB.NextState), line:108:17, endln:108:26
-                          |vpiName:NextState
-                          |vpiFullName:work@FSM2.COMB.NextState
-                          |vpiActual:
-                          \_logic_net: (work@top.F2.NextState), line:8:24, endln:8:33, parent:work@top.F2
-                        |vpiRhs:
-                        \_ref_obj: (work@FSM2.COMB.ST6), line:108:29, endln:108:32
-                          |vpiName:ST6
-                          |vpiFullName:work@FSM2.COMB.ST6
-                          |vpiActual:
-                          \_parameter: (work@top.F2.ST6), line:6:59, endln:6:64, parent:work@top.F2
-                      |vpiElseStmt:
-                      \_assignment: , line:109:11, endln:109:26
-                        |vpiOpType:82
-                        |vpiBlocking:1
-                        |vpiLhs:
-                        \_ref_obj: (work@FSM2.COMB.NextState), line:109:11, endln:109:20
-                          |vpiName:NextState
-                          |vpiFullName:work@FSM2.COMB.NextState
-                          |vpiActual:
-                          \_logic_net: (work@top.F2.NextState), line:8:24, endln:8:33, parent:work@top.F2
-                        |vpiRhs:
-                        \_ref_obj: (work@FSM2.COMB.ST1), line:109:23, endln:109:26
-                          |vpiName:ST1
-                          |vpiFullName:work@FSM2.COMB.ST1
-                          |vpiActual:
-                          \_parameter: (work@top.F2.ST1), line:6:24, endln:6:29, parent:work@top.F2
-        |vpiProcess:
-        \_always: , line:116, endln:121:3, parent:work@FSM2
-          |vpiAlwaysType:1
-          |vpiStmt:
-          \_event_control: , line:116:7, endln:121:3
-            |vpiCondition:
-            \_operation: , line:116:9, endln:116:22
-              |vpiOpType:35
-              |vpiOperand:
-              \_operation: , line:116:9, endln:116:16
-                |vpiOpType:39
-                |vpiOperand:
-                \_ref_obj: (clock), line:116:17, endln:116:22
-                  |vpiName:clock
-                  |vpiActual:
-                  \_logic_net: (work@top.F2.clock), line:1:12, endln:1:17, parent:work@top.F2
-              |vpiOperand:
-              \_operation: , line:116:26, endln:116:33
-                |vpiOpType:39
-                |vpiOperand:
-                \_ref_obj: (reset), line:116:34, endln:116:39
-                  |vpiName:reset
-                  |vpiActual:
-                  \_logic_net: (work@top.F2.reset), line:1:19, endln:1:24, parent:work@top.F2
-            |vpiStmt:
-            \_named_begin: (work@FSM2.SEQ), line:116:41, endln:121:3
-              |vpiName:SEQ
-              |vpiFullName:work@FSM2.SEQ
-              |vpiStmt:
-              \_if_else: , line:117:2, endln:120:29, parent:work@FSM2.SEQ
-                |vpiCondition:
-                \_ref_obj: (work@FSM2.SEQ.reset), line:117:6, endln:117:11
-                  |vpiName:reset
-                  |vpiFullName:work@FSM2.SEQ.reset
-                  |vpiActual:
-                  \_logic_net: (work@top.F2.reset), line:1:19, endln:1:24, parent:work@top.F2
-                |vpiStmt:
-                \_assignment: , line:118:4, endln:118:22
-                  |vpiOpType:82
-                  |vpiBlocking:1
-                  |vpiLhs:
-                  \_ref_obj: (work@FSM2.SEQ.CurrentState), line:118:4, endln:118:16
-                    |vpiName:CurrentState
-                    |vpiFullName:work@FSM2.SEQ.CurrentState
-                    |vpiActual:
-                    \_logic_net: (work@top.F2.CurrentState), line:8:10, endln:8:22, parent:work@top.F2
-                  |vpiRhs:
-                  \_ref_obj: (work@FSM2.SEQ.ST0), line:118:19, endln:118:22
-                    |vpiName:ST0
-                    |vpiFullName:work@FSM2.SEQ.ST0
-                    |vpiActual:
-                    \_parameter: (work@top.F2.ST0), line:6:16, endln:6:22, parent:work@top.F2
-                |vpiElseStmt:
-                \_assignment: , line:120:4, endln:120:28
-                  |vpiOpType:82
-                  |vpiBlocking:1
-                  |vpiLhs:
-                  \_ref_obj: (work@FSM2.SEQ.CurrentState), line:120:4, endln:120:16
-                    |vpiName:CurrentState
-                    |vpiFullName:work@FSM2.SEQ.CurrentState
-                    |vpiActual:
-                    \_logic_net: (work@top.F2.CurrentState), line:8:10, endln:8:22, parent:work@top.F2
-                  |vpiRhs:
-                  \_ref_obj: (work@FSM2.SEQ.NextState), line:120:19, endln:120:28
-                    |vpiName:NextState
-                    |vpiFullName:work@FSM2.SEQ.NextState
-                    |vpiActual:
-                    \_logic_net: (work@top.F2.NextState), line:8:24, endln:8:33, parent:work@top.F2
-        |vpiProcess:
-        \_always: , line:124, endln:132:3, parent:work@FSM2
-          |vpiAlwaysType:1
-          |vpiStmt:
-          \_event_control: , line:124:7, endln:132:3
-            |vpiCondition:
-            \_ref_obj: (work@FSM2.CurrentState), line:124:9, endln:124:21
-              |vpiName:CurrentState
-              |vpiFullName:work@FSM2.CurrentState
-            |vpiStmt:
-            \_named_begin: (work@FSM2.OUT_LOGIC), line:124:23, endln:132:3
-              |vpiName:OUT_LOGIC
-              |vpiFullName:work@FSM2.OUT_LOGIC
-              |vpiStmt:
-              \_case_stmt: , line:125:2, endln:131:9, parent:work@FSM2.OUT_LOGIC
-                |vpiCaseType:1
-                |vpiCondition:
-                \_ref_obj: (work@FSM2.OUT_LOGIC.CurrentState), line:125:8, endln:125:20, parent:work@FSM2.OUT_LOGIC
-                  |vpiName:CurrentState
-                  |vpiFullName:work@FSM2.OUT_LOGIC.CurrentState
-                  |vpiActual:
-                  \_logic_net: (work@top.F2.CurrentState), line:8:10, endln:8:22, parent:work@top.F2
-                |vpiCaseItem:
-                \_case_item: , line:126:4, endln:126:13
-                  |vpiExpr:
-                  \_ref_obj: (work@FSM2.OUT_LOGIC.ST0), line:126:4, endln:126:7, parent:work@FSM2.OUT_LOGIC
-                    |vpiName:ST0
-                    |vpiFullName:work@FSM2.OUT_LOGIC.ST0
-                    |vpiActual:
-                    \_parameter: (work@top.F2.ST0), line:6:16, endln:6:22, parent:work@top.F2
-                  |vpiStmt:
-                  \_assignment: , line:126:9, endln:126:12
-                    |vpiOpType:82
-                    |vpiBlocking:1
-                    |vpiLhs:
-                    \_ref_obj: (work@FSM2.OUT_LOGIC.y), line:126:9, endln:126:10
-                      |vpiName:y
-                      |vpiFullName:work@FSM2.OUT_LOGIC.y
-                      |vpiActual:
-                      \_logic_net: (work@top.F2.y), line:4:10, endln:4:11, parent:work@top.F2
-                    |vpiRhs:
-                    \_constant: , line:126:11, endln:126:12
-                      |vpiConstType:9
-                      |vpiDecompile:1
-                      |vpiSize:64
-                      |UINT:1
-                |vpiCaseItem:
-                \_case_item: , line:127:4, endln:127:13
-                  |vpiExpr:
-                  \_ref_obj: (work@FSM2.OUT_LOGIC.ST1), line:127:4, endln:127:7, parent:work@FSM2.OUT_LOGIC
-                    |vpiName:ST1
-                    |vpiFullName:work@FSM2.OUT_LOGIC.ST1
-                    |vpiActual:
-                    \_parameter: (work@top.F2.ST1), line:6:24, endln:6:29, parent:work@top.F2
-                  |vpiStmt:
-                  \_assignment: , line:127:9, endln:127:12
-                    |vpiOpType:82
-                    |vpiBlocking:1
-                    |vpiLhs:
-                    \_ref_obj: (work@FSM2.OUT_LOGIC.y), line:127:9, endln:127:10
-                      |vpiName:y
-                      |vpiFullName:work@FSM2.OUT_LOGIC.y
-                      |vpiActual:
-                      \_logic_net: (work@top.F2.y), line:4:10, endln:4:11, parent:work@top.F2
-                    |vpiRhs:
-                    \_constant: , line:127:11, endln:127:12
-                      |vpiConstType:9
-                      |vpiDecompile:2
-                      |vpiSize:64
-                      |UINT:2
-                |vpiCaseItem:
-                \_case_item: , line:128:4, endln:128:13
-                  |vpiExpr:
-                  \_ref_obj: (work@FSM2.OUT_LOGIC.ST2), line:128:4, endln:128:7, parent:work@FSM2.OUT_LOGIC
-                    |vpiName:ST2
-                    |vpiFullName:work@FSM2.OUT_LOGIC.ST2
-                    |vpiActual:
-                    \_parameter: (work@top.F2.ST2), line:6:31, endln:6:36, parent:work@top.F2
-                  |vpiStmt:
-                  \_assignment: , line:128:9, endln:128:12
-                    |vpiOpType:82
-                    |vpiBlocking:1
-                    |vpiLhs:
-                    \_ref_obj: (work@FSM2.OUT_LOGIC.y), line:128:9, endln:128:10
-                      |vpiName:y
-                      |vpiFullName:work@FSM2.OUT_LOGIC.y
-                      |vpiActual:
-                      \_logic_net: (work@top.F2.y), line:4:10, endln:4:11, parent:work@top.F2
-                    |vpiRhs:
-                    \_constant: , line:128:11, endln:128:12
-                      |vpiConstType:9
-                      |vpiDecompile:3
-                      |vpiSize:64
-                      |UINT:3
-                |vpiCaseItem:
-                \_case_item: , line:129:4, endln:129:13
-                  |vpiExpr:
-                  \_ref_obj: (work@FSM2.OUT_LOGIC.ST3), line:129:4, endln:129:7, parent:work@FSM2.OUT_LOGIC
-                    |vpiName:ST3
-                    |vpiFullName:work@FSM2.OUT_LOGIC.ST3
-                    |vpiActual:
-                    \_parameter: (work@top.F2.ST3), line:6:38, endln:6:43, parent:work@top.F2
-                  |vpiStmt:
-                  \_assignment: , line:129:9, endln:129:12
-                    |vpiOpType:82
-                    |vpiBlocking:1
-                    |vpiLhs:
-                    \_ref_obj: (work@FSM2.OUT_LOGIC.y), line:129:9, endln:129:10
-                      |vpiName:y
-                      |vpiFullName:work@FSM2.OUT_LOGIC.y
-                      |vpiActual:
-                      \_logic_net: (work@top.F2.y), line:4:10, endln:4:11, parent:work@top.F2
-                    |vpiRhs:
-                    \_constant: , line:129:11, endln:129:12
-                      |vpiConstType:9
-                      |vpiDecompile:4
-                      |vpiSize:64
-                      |UINT:4
-                |vpiCaseItem:
-                \_case_item: , line:130:4, endln:130:17
-                  |vpiStmt:
-                  \_assignment: , line:130:13, endln:130:16
-                    |vpiOpType:82
-                    |vpiBlocking:1
-                    |vpiLhs:
-                    \_ref_obj: (work@FSM2.OUT_LOGIC.y), line:130:13, endln:130:14
-                      |vpiName:y
-                      |vpiFullName:work@FSM2.OUT_LOGIC.y
-                      |vpiActual:
-                      \_logic_net: (work@top.F2.y), line:4:10, endln:4:11, parent:work@top.F2
-                    |vpiRhs:
-                    \_constant: , line:130:15, endln:130:16
-                      |vpiConstType:9
-                      |vpiDecompile:1
-                      |vpiSize:64
-                      |UINT:1
-        |vpiPort:
-        \_port: (clock), line:1:12, parent:work@FSM2
-          |vpiName:clock
-          |vpiDirection:1
-          |vpiLowConn:
-          \_ref_obj: 
-            |vpiActual:
-            \_logic_net: (work@FSM2.clock), line:1:12, parent:work@FSM2
-              |vpiName:clock
-              |vpiFullName:work@FSM2.clock
-        |vpiPort:
-        \_port: (reset), line:1:19, parent:work@FSM2
-          |vpiName:reset
-          |vpiDirection:1
-          |vpiLowConn:
-          \_ref_obj: 
-            |vpiActual:
-            \_logic_net: (work@FSM2.reset), line:1:19, parent:work@FSM2
-              |vpiName:reset
-              |vpiFullName:work@FSM2.reset
-        |vpiPort:
-        \_port: (control), line:1:26, parent:work@FSM2
-          |vpiName:control
-          |vpiDirection:1
-          |vpiLowConn:
-          \_ref_obj: 
-            |vpiActual:
-            \_logic_net: (work@FSM2.control), line:1:26, parent:work@FSM2
-              |vpiName:control
-              |vpiFullName:work@FSM2.control
-        |vpiPort:
-        \_port: (y), line:1:35, parent:work@FSM2
-          |vpiName:y
-          |vpiDirection:2
-          |vpiLowConn:
-          \_ref_obj: 
-            |vpiActual:
-            \_logic_net: (work@FSM2.y), line:4:10, parent:work@FSM2
-              |vpiName:y
-              |vpiFullName:work@FSM2.y
-              |vpiNetType:48
-        |vpiTaskFunc:
-        \_task: (work@FSM2.SwitchCtrl), line:23, endln:33:7, parent:work@FSM2
-          |vpiVisibility:1
-          |vpiName:SwitchCtrl
-          |vpiFullName:work@FSM2.SwitchCtrl
-          |vpiInstance:
-          \_module: work@FSM2 (work@FSM2) fsm2.v:1: , endln:135:9, parent:work@top
-          |vpiStmt:
-          \_begin: (work@FSM2.SwitchCtrl), line:24, endln:32:3, parent:work@FSM2.SwitchCtrl
-            |vpiFullName:work@FSM2.SwitchCtrl
-            |vpiStmt:
-            \_assignment: , line:25:2, endln:25:16, parent:work@FSM2.SwitchCtrl
-              |vpiOpType:82
-              |vpiBlocking:1
-              |vpiLhs:
-              \_ref_obj: (work@FSM2.SwitchCtrl.Ctrl1), line:25:2, endln:25:7, parent:work@FSM2.SwitchCtrl
-                |vpiName:Ctrl1
-                |vpiFullName:work@FSM2.SwitchCtrl.Ctrl1
-                |vpiActual:
-                \_logic_net: (work@top.F2.Ctrl1), line:10:4, endln:10:9, parent:work@top.F2
-              |vpiRhs:
-              \_operation: , line:25:10, endln:25:11, parent:work@FSM2.SwitchCtrl
-                |vpiOpType:4
-                |vpiOperand:
-                \_ref_obj: (work@FSM2.SwitchCtrl.Ctrl1), line:25:11, endln:25:16
-                  |vpiName:Ctrl1
-                  |vpiFullName:work@FSM2.SwitchCtrl.Ctrl1
-                  |vpiActual:
-                  \_logic_net: (work@top.F2.Ctrl1), line:10:4, endln:10:9, parent:work@top.F2
-            |vpiStmt:
-            \_assignment: , line:26:2, endln:26:16, parent:work@FSM2.SwitchCtrl
-              |vpiOpType:82
-              |vpiBlocking:1
-              |vpiLhs:
-              \_ref_obj: (work@FSM2.SwitchCtrl.Ctrl2), line:26:2, endln:26:7, parent:work@FSM2.SwitchCtrl
-                |vpiName:Ctrl2
-                |vpiFullName:work@FSM2.SwitchCtrl.Ctrl2
-                |vpiActual:
-                \_logic_net: (work@top.F2.Ctrl2), line:10:10, endln:10:15, parent:work@top.F2
-              |vpiRhs:
-              \_operation: , line:26:10, endln:26:11, parent:work@FSM2.SwitchCtrl
-                |vpiOpType:4
-                |vpiOperand:
-                \_ref_obj: (work@FSM2.SwitchCtrl.Ctrl2), line:26:11, endln:26:16
-                  |vpiName:Ctrl2
-                  |vpiFullName:work@FSM2.SwitchCtrl.Ctrl2
-                  |vpiActual:
-                  \_logic_net: (work@top.F2.Ctrl2), line:10:10, endln:10:15, parent:work@top.F2
-            |vpiStmt:
-            \_assignment: , line:27:2, endln:27:16, parent:work@FSM2.SwitchCtrl
-              |vpiOpType:82
-              |vpiBlocking:1
-              |vpiLhs:
-              \_ref_obj: (work@FSM2.SwitchCtrl.Ctrl3), line:27:2, endln:27:7, parent:work@FSM2.SwitchCtrl
-                |vpiName:Ctrl3
-                |vpiFullName:work@FSM2.SwitchCtrl.Ctrl3
-                |vpiActual:
-                \_logic_net: (work@top.F2.Ctrl3), line:10:16, endln:10:21, parent:work@top.F2
-              |vpiRhs:
-              \_operation: , line:27:10, endln:27:11, parent:work@FSM2.SwitchCtrl
-                |vpiOpType:4
-                |vpiOperand:
-                \_ref_obj: (work@FSM2.SwitchCtrl.Ctrl3), line:27:11, endln:27:16
-                  |vpiName:Ctrl3
-                  |vpiFullName:work@FSM2.SwitchCtrl.Ctrl3
-                  |vpiActual:
-                  \_logic_net: (work@top.F2.Ctrl3), line:10:16, endln:10:21, parent:work@top.F2
-            |vpiStmt:
-            \_assignment: , line:28:2, endln:28:16, parent:work@FSM2.SwitchCtrl
-              |vpiOpType:82
-              |vpiBlocking:1
-              |vpiLhs:
-              \_ref_obj: (work@FSM2.SwitchCtrl.Ctrl4), line:28:2, endln:28:7, parent:work@FSM2.SwitchCtrl
-                |vpiName:Ctrl4
-                |vpiFullName:work@FSM2.SwitchCtrl.Ctrl4
-                |vpiActual:
-                \_logic_net: (work@top.F2.Ctrl4), line:10:22, endln:10:27, parent:work@top.F2
-              |vpiRhs:
-              \_operation: , line:28:10, endln:28:11, parent:work@FSM2.SwitchCtrl
-                |vpiOpType:4
-                |vpiOperand:
-                \_ref_obj: (work@FSM2.SwitchCtrl.Ctrl4), line:28:11, endln:28:16
-                  |vpiName:Ctrl4
-                  |vpiFullName:work@FSM2.SwitchCtrl.Ctrl4
-                  |vpiActual:
-                  \_logic_net: (work@top.F2.Ctrl4), line:10:22, endln:10:27, parent:work@top.F2
-            |vpiStmt:
-            \_assignment: , line:29:2, endln:29:16, parent:work@FSM2.SwitchCtrl
-              |vpiOpType:82
-              |vpiBlocking:1
-              |vpiLhs:
-              \_ref_obj: (work@FSM2.SwitchCtrl.Ctrl5), line:29:2, endln:29:7, parent:work@FSM2.SwitchCtrl
-                |vpiName:Ctrl5
-                |vpiFullName:work@FSM2.SwitchCtrl.Ctrl5
-                |vpiActual:
-                \_logic_net: (work@top.F2.Ctrl5), line:10:28, endln:10:33, parent:work@top.F2
-              |vpiRhs:
-              \_operation: , line:29:10, endln:29:11, parent:work@FSM2.SwitchCtrl
-                |vpiOpType:4
-                |vpiOperand:
-                \_ref_obj: (work@FSM2.SwitchCtrl.Ctrl5), line:29:11, endln:29:16
-                  |vpiName:Ctrl5
-                  |vpiFullName:work@FSM2.SwitchCtrl.Ctrl5
-                  |vpiActual:
-                  \_logic_net: (work@top.F2.Ctrl5), line:10:28, endln:10:33, parent:work@top.F2
-            |vpiStmt:
-            \_assignment: , line:30:2, endln:30:16, parent:work@FSM2.SwitchCtrl
-              |vpiOpType:82
-              |vpiBlocking:1
-              |vpiLhs:
-              \_ref_obj: (work@FSM2.SwitchCtrl.Ctrl6), line:30:2, endln:30:7, parent:work@FSM2.SwitchCtrl
-                |vpiName:Ctrl6
-                |vpiFullName:work@FSM2.SwitchCtrl.Ctrl6
-                |vpiActual:
-                \_logic_net: (work@top.F2.Ctrl6), line:10:34, endln:10:39, parent:work@top.F2
-              |vpiRhs:
-              \_operation: , line:30:10, endln:30:11, parent:work@FSM2.SwitchCtrl
-                |vpiOpType:4
-                |vpiOperand:
-                \_ref_obj: (work@FSM2.SwitchCtrl.Ctrl6), line:30:11, endln:30:16
-                  |vpiName:Ctrl6
-                  |vpiFullName:work@FSM2.SwitchCtrl.Ctrl6
-                  |vpiActual:
-                  \_logic_net: (work@top.F2.Ctrl6), line:10:34, endln:10:39, parent:work@top.F2
-            |vpiStmt:
-            \_assignment: , line:31:2, endln:31:16, parent:work@FSM2.SwitchCtrl
-              |vpiOpType:82
-              |vpiBlocking:1
-              |vpiLhs:
-              \_ref_obj: (work@FSM2.SwitchCtrl.Ctrl7), line:31:2, endln:31:7, parent:work@FSM2.SwitchCtrl
-                |vpiName:Ctrl7
-                |vpiFullName:work@FSM2.SwitchCtrl.Ctrl7
-                |vpiActual:
-                \_logic_net: (work@top.F2.Ctrl7), line:10:40, endln:10:45, parent:work@top.F2
-              |vpiRhs:
-              \_operation: , line:31:10, endln:31:11, parent:work@FSM2.SwitchCtrl
-                |vpiOpType:4
-                |vpiOperand:
-                \_ref_obj: (work@FSM2.SwitchCtrl.Ctrl7), line:31:11, endln:31:16
-                  |vpiName:Ctrl7
-                  |vpiFullName:work@FSM2.SwitchCtrl.Ctrl7
-                  |vpiActual:
-                  \_logic_net: (work@top.F2.Ctrl7), line:10:40, endln:10:45, parent:work@top.F2
-        |vpiNet:
-        \_logic_net: (work@FSM2.y), line:4:10, parent:work@FSM2
-        |vpiNet:
-        \_logic_net: (work@FSM2.CurrentState), line:8:10, parent:work@FSM2
-          |vpiName:CurrentState
-          |vpiFullName:work@FSM2.CurrentState
-          |vpiNetType:48
-        |vpiNet:
-        \_logic_net: (work@FSM2.NextState), line:8:24, parent:work@FSM2
-          |vpiName:NextState
-          |vpiFullName:work@FSM2.NextState
-          |vpiNetType:48
-        |vpiNet:
-        \_logic_net: (work@FSM2.Ctrl1), line:10:4, parent:work@FSM2
-          |vpiName:Ctrl1
-          |vpiFullName:work@FSM2.Ctrl1
-          |vpiNetType:48
-        |vpiNet:
-        \_logic_net: (work@FSM2.Ctrl2), line:10:10, parent:work@FSM2
-          |vpiName:Ctrl2
-          |vpiFullName:work@FSM2.Ctrl2
-          |vpiNetType:48
-        |vpiNet:
-        \_logic_net: (work@FSM2.Ctrl3), line:10:16, parent:work@FSM2
-          |vpiName:Ctrl3
-          |vpiFullName:work@FSM2.Ctrl3
-          |vpiNetType:48
-        |vpiNet:
-        \_logic_net: (work@FSM2.Ctrl4), line:10:22, parent:work@FSM2
-          |vpiName:Ctrl4
-          |vpiFullName:work@FSM2.Ctrl4
-          |vpiNetType:48
-        |vpiNet:
-        \_logic_net: (work@FSM2.Ctrl5), line:10:28, parent:work@FSM2
-          |vpiName:Ctrl5
-          |vpiFullName:work@FSM2.Ctrl5
-          |vpiNetType:48
-        |vpiNet:
-        \_logic_net: (work@FSM2.Ctrl6), line:10:34, parent:work@FSM2
-          |vpiName:Ctrl6
-          |vpiFullName:work@FSM2.Ctrl6
-          |vpiNetType:48
-        |vpiNet:
-        \_logic_net: (work@FSM2.Ctrl7), line:10:40, parent:work@FSM2
-          |vpiName:Ctrl7
-          |vpiFullName:work@FSM2.Ctrl7
-          |vpiNetType:48
-        |vpiNet:
-        \_logic_net: (work@FSM2.clock), line:1:12, parent:work@FSM2
-        |vpiNet:
-        \_logic_net: (work@FSM2.reset), line:1:19, parent:work@FSM2
-        |vpiNet:
-        \_logic_net: (work@FSM2.control), line:1:26, parent:work@FSM2
-        |vpiParamAssign:
-        \_param_assign: , line:6:16, endln:6:22, parent:work@FSM2
-          |vpiRhs:
-          \_constant: , line:6:21, endln:6:22
-            |vpiConstType:9
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
-          |vpiLhs:
-          \_parameter: (work@FSM2.ST0), line:6:16, endln:6:22, parent:work@FSM2
-            |vpiName:ST0
-            |vpiFullName:work@FSM2.ST0
-            |vpiTypespec:
-            \_bit_typespec: (ST0), line:6:10, endln:6:15, parent:work@FSM2.ST0
-              |vpiName:ST0
-              |vpiRange:
-              \_range: , line:6:11, endln:6:14
-                |vpiLeftRange:
-                \_constant: , line:6:11, endln:6:12
-                  |vpiConstType:9
-                  |vpiDecompile:3
-                  |vpiSize:64
-                  |UINT:3
-                |vpiRightRange:
-                \_constant: , line:6:13, endln:6:14
-                  |vpiConstType:9
-                  |vpiDecompile:0
-                  |vpiSize:64
-                  |UINT:0
-        |vpiParamAssign:
-        \_param_assign: , line:6:24, endln:6:29, parent:work@FSM2
-          |vpiRhs:
-          \_constant: , line:6:28, endln:6:29
-            |vpiConstType:9
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
-          |vpiLhs:
-          \_parameter: (work@FSM2.ST1), line:6:24, endln:6:29, parent:work@FSM2
-            |vpiName:ST1
-            |vpiFullName:work@FSM2.ST1
-            |vpiTypespec:
-            \_bit_typespec: (ST1), line:6:10, endln:6:15, parent:work@FSM2.ST1
-              |vpiName:ST1
-              |vpiRange:
-              \_range: , line:6:11, endln:6:14
-                |vpiLeftRange:
-                \_constant: , line:6:11, endln:6:12
-                  |vpiConstType:9
-                  |vpiDecompile:3
-                  |vpiSize:64
-                  |UINT:3
-                |vpiRightRange:
-                \_constant: , line:6:13, endln:6:14
-                  |vpiConstType:9
-                  |vpiDecompile:0
-                  |vpiSize:64
-                  |UINT:0
-        |vpiParamAssign:
-        \_param_assign: , line:6:31, endln:6:36, parent:work@FSM2
-          |vpiRhs:
-          \_constant: , line:6:35, endln:6:36
-            |vpiConstType:9
-            |vpiDecompile:2
-            |vpiSize:64
-            |UINT:2
-          |vpiLhs:
-          \_parameter: (work@FSM2.ST2), line:6:31, endln:6:36, parent:work@FSM2
-            |vpiName:ST2
-            |vpiFullName:work@FSM2.ST2
-            |vpiTypespec:
-            \_bit_typespec: (ST2), line:6:10, endln:6:15, parent:work@FSM2.ST2
-              |vpiName:ST2
-              |vpiRange:
-              \_range: , line:6:11, endln:6:14
-                |vpiLeftRange:
-                \_constant: , line:6:11, endln:6:12
-                  |vpiConstType:9
-                  |vpiDecompile:3
-                  |vpiSize:64
-                  |UINT:3
-                |vpiRightRange:
-                \_constant: , line:6:13, endln:6:14
-                  |vpiConstType:9
-                  |vpiDecompile:0
-                  |vpiSize:64
-                  |UINT:0
-        |vpiParamAssign:
-        \_param_assign: , line:6:38, endln:6:43, parent:work@FSM2
-          |vpiRhs:
-          \_constant: , line:6:42, endln:6:43
-            |vpiConstType:9
-            |vpiDecompile:3
-            |vpiSize:64
-            |UINT:3
-          |vpiLhs:
-          \_parameter: (work@FSM2.ST3), line:6:38, endln:6:43, parent:work@FSM2
-            |vpiName:ST3
-            |vpiFullName:work@FSM2.ST3
-            |vpiTypespec:
-            \_bit_typespec: (ST3), line:6:10, endln:6:15, parent:work@FSM2.ST3
-              |vpiName:ST3
-              |vpiRange:
-              \_range: , line:6:11, endln:6:14
-                |vpiLeftRange:
-                \_constant: , line:6:11, endln:6:12
-                  |vpiConstType:9
-                  |vpiDecompile:3
-                  |vpiSize:64
-                  |UINT:3
-                |vpiRightRange:
-                \_constant: , line:6:13, endln:6:14
-                  |vpiConstType:9
-                  |vpiDecompile:0
-                  |vpiSize:64
-                  |UINT:0
-        |vpiParamAssign:
-        \_param_assign: , line:6:45, endln:6:50, parent:work@FSM2
-          |vpiRhs:
-          \_constant: , line:6:49, endln:6:50
-            |vpiConstType:9
-            |vpiDecompile:4
-            |vpiSize:64
-            |UINT:4
-          |vpiLhs:
-          \_parameter: (work@FSM2.ST4), line:6:45, endln:6:50, parent:work@FSM2
-            |vpiName:ST4
-            |vpiFullName:work@FSM2.ST4
-            |vpiTypespec:
-            \_bit_typespec: (ST4), line:6:10, endln:6:15, parent:work@FSM2.ST4
-              |vpiName:ST4
-              |vpiRange:
-              \_range: , line:6:11, endln:6:14
-                |vpiLeftRange:
-                \_constant: , line:6:11, endln:6:12
-                  |vpiConstType:9
-                  |vpiDecompile:3
-                  |vpiSize:64
-                  |UINT:3
-                |vpiRightRange:
-                \_constant: , line:6:13, endln:6:14
-                  |vpiConstType:9
-                  |vpiDecompile:0
-                  |vpiSize:64
-                  |UINT:0
-        |vpiParamAssign:
-        \_param_assign: , line:6:52, endln:6:57, parent:work@FSM2
-          |vpiRhs:
-          \_constant: , line:6:56, endln:6:57
-            |vpiConstType:9
-            |vpiDecompile:5
-            |vpiSize:64
-            |UINT:5
-          |vpiLhs:
-          \_parameter: (work@FSM2.ST5), line:6:52, endln:6:57, parent:work@FSM2
-            |vpiName:ST5
-            |vpiFullName:work@FSM2.ST5
-            |vpiTypespec:
-            \_bit_typespec: (ST5), line:6:10, endln:6:15, parent:work@FSM2.ST5
-              |vpiName:ST5
-              |vpiRange:
-              \_range: , line:6:11, endln:6:14
-                |vpiLeftRange:
-                \_constant: , line:6:11, endln:6:12
-                  |vpiConstType:9
-                  |vpiDecompile:3
-                  |vpiSize:64
-                  |UINT:3
-                |vpiRightRange:
-                \_constant: , line:6:13, endln:6:14
-                  |vpiConstType:9
-                  |vpiDecompile:0
-                  |vpiSize:64
-                  |UINT:0
-        |vpiParamAssign:
-        \_param_assign: , line:6:59, endln:6:64, parent:work@FSM2
-          |vpiRhs:
-          \_constant: , line:6:63, endln:6:64
-            |vpiConstType:9
-            |vpiDecompile:6
-            |vpiSize:64
-            |UINT:6
-          |vpiLhs:
-          \_parameter: (work@FSM2.ST6), line:6:59, endln:6:64, parent:work@FSM2
-            |vpiName:ST6
-            |vpiFullName:work@FSM2.ST6
-            |vpiTypespec:
-            \_bit_typespec: (ST6), line:6:10, endln:6:15, parent:work@FSM2.ST6
-              |vpiName:ST6
-              |vpiRange:
-              \_range: , line:6:11, endln:6:14
-                |vpiLeftRange:
-                \_constant: , line:6:11, endln:6:12
-                  |vpiConstType:9
-                  |vpiDecompile:3
-                  |vpiSize:64
-                  |UINT:3
-                |vpiRightRange:
-                \_constant: , line:6:13, endln:6:14
-                  |vpiConstType:9
-                  |vpiDecompile:0
-                  |vpiSize:64
-                  |UINT:0
-        |vpiParamAssign:
-        \_param_assign: , line:6:65, endln:6:70, parent:work@FSM2
-          |vpiRhs:
-          \_constant: , line:6:69, endln:6:70
-            |vpiConstType:9
-            |vpiDecompile:7
-            |vpiSize:64
-            |UINT:7
-          |vpiLhs:
-          \_parameter: (work@FSM2.ST7), line:6:65, endln:6:70, parent:work@FSM2
-            |vpiName:ST7
-            |vpiFullName:work@FSM2.ST7
-            |vpiTypespec:
-            \_bit_typespec: (ST7), line:6:10, endln:6:15, parent:work@FSM2.ST7
-              |vpiName:ST7
-              |vpiRange:
-              \_range: , line:6:11, endln:6:14
-                |vpiLeftRange:
-                \_constant: , line:6:11, endln:6:12
-                  |vpiConstType:9
-                  |vpiDecompile:3
-                  |vpiSize:64
-                  |UINT:3
-                |vpiRightRange:
-                \_constant: , line:6:13, endln:6:14
-                  |vpiConstType:9
-                  |vpiDecompile:0
-                  |vpiSize:64
-                  |UINT:0
-        |vpiParamAssign:
-        \_param_assign: , line:7:16, endln:7:21, parent:work@FSM2
-          |vpiRhs:
-          \_constant: , line:7:20, endln:7:21
-            |vpiConstType:9
-            |vpiDecompile:8
-            |vpiSize:64
-            |UINT:8
-          |vpiLhs:
-          \_parameter: (work@FSM2.ST8), line:7:16, endln:7:21, parent:work@FSM2
-            |vpiName:ST8
-            |vpiFullName:work@FSM2.ST8
-            |vpiTypespec:
-            \_bit_typespec: (ST8), line:6:10, endln:6:15, parent:work@FSM2.ST8
-              |vpiName:ST8
-              |vpiRange:
-              \_range: , line:6:11, endln:6:14
-                |vpiLeftRange:
-                \_constant: , line:6:11, endln:6:12
-                  |vpiConstType:9
-                  |vpiDecompile:3
-                  |vpiSize:64
-                  |UINT:3
-                |vpiRightRange:
-                \_constant: , line:6:13, endln:6:14
-                  |vpiConstType:9
-                  |vpiDecompile:0
-                  |vpiSize:64
-                  |UINT:0
-        |vpiParamAssign:
-        \_param_assign: , line:7:23, endln:7:28, parent:work@FSM2
-          |vpiRhs:
-          \_constant: , line:7:27, endln:7:28
-            |vpiConstType:9
-            |vpiDecompile:9
-            |vpiSize:64
-            |UINT:9
-          |vpiLhs:
-          \_parameter: (work@FSM2.ST9), line:7:23, endln:7:28, parent:work@FSM2
-            |vpiName:ST9
-            |vpiFullName:work@FSM2.ST9
-            |vpiTypespec:
-            \_bit_typespec: (ST9), line:6:10, endln:6:15, parent:work@FSM2.ST9
-              |vpiName:ST9
-              |vpiRange:
-              \_range: , line:6:11, endln:6:14
-                |vpiLeftRange:
-                \_constant: , line:6:11, endln:6:12
-                  |vpiConstType:9
-                  |vpiDecompile:3
-                  |vpiSize:64
-                  |UINT:3
-                |vpiRightRange:
-                \_constant: , line:6:13, endln:6:14
-                  |vpiConstType:9
-                  |vpiDecompile:0
-                  |vpiSize:64
-                  |UINT:0
-        |vpiParamAssign:
-        \_param_assign: , line:7:30, endln:7:37, parent:work@FSM2
-          |vpiRhs:
-          \_constant: , line:7:35, endln:7:37
-            |vpiConstType:9
-            |vpiDecompile:10
-            |vpiSize:64
-            |UINT:10
-          |vpiLhs:
-          \_parameter: (work@FSM2.ST10), line:7:30, endln:7:37, parent:work@FSM2
-            |vpiName:ST10
-            |vpiFullName:work@FSM2.ST10
-            |vpiTypespec:
-            \_bit_typespec: (ST10), line:6:10, endln:6:15, parent:work@FSM2.ST10
-              |vpiName:ST10
-              |vpiRange:
-              \_range: , line:6:11, endln:6:14
-                |vpiLeftRange:
-                \_constant: , line:6:11, endln:6:12
-                  |vpiConstType:9
-                  |vpiDecompile:3
-                  |vpiSize:64
-                  |UINT:3
-                |vpiRightRange:
-                \_constant: , line:6:13, endln:6:14
-                  |vpiConstType:9
-                  |vpiDecompile:0
-                  |vpiSize:64
-                  |UINT:0
-        |vpiParameter:
-        \_parameter: (work@FSM2.ST0), line:6:16, endln:6:22, parent:work@FSM2
-        |vpiParameter:
-        \_parameter: (work@FSM2.ST1), line:6:24, endln:6:29, parent:work@FSM2
-        |vpiParameter:
-        \_parameter: (work@FSM2.ST2), line:6:31, endln:6:36, parent:work@FSM2
-        |vpiParameter:
-        \_parameter: (work@FSM2.ST3), line:6:38, endln:6:43, parent:work@FSM2
-        |vpiParameter:
-        \_parameter: (work@FSM2.ST4), line:6:45, endln:6:50, parent:work@FSM2
-        |vpiParameter:
-        \_parameter: (work@FSM2.ST5), line:6:52, endln:6:57, parent:work@FSM2
-        |vpiParameter:
-        \_parameter: (work@FSM2.ST6), line:6:59, endln:6:64, parent:work@FSM2
-        |vpiParameter:
-        \_parameter: (work@FSM2.ST7), line:6:65, endln:6:70, parent:work@FSM2
-        |vpiParameter:
-        \_parameter: (work@FSM2.ST8), line:7:16, endln:7:21, parent:work@FSM2
-        |vpiParameter:
-        \_parameter: (work@FSM2.ST9), line:7:23, endln:7:28, parent:work@FSM2
-        |vpiParameter:
-        \_parameter: (work@FSM2.ST10), line:7:30, endln:7:37, parent:work@FSM2
+      \_module: work@FSM2 (work@top.F2) top.v:17: , parent:work@top
       |vpiStmt:
       \_begin: (work@top.F2.SwitchCtrl), line:24, endln:32:3, parent:work@top.F2.SwitchCtrl
         |vpiFullName:work@top.F2.SwitchCtrl
@@ -21054,7 +19378,7 @@ design: (work@top)
                 \_parameter: (work@top.F3.Stop), line:8:10, endln:8:27, parent:work@top.F3
                   |vpiName:Stop
                   |vpiFullName:work@top.F3.Stop
-                  |UINT:0
+                  |BIN:0000
             |vpiElseStmt:
             \_if_else: , line:25:11, endln:25:21
               |vpiCondition:
@@ -21100,7 +19424,7 @@ design: (work@top)
                       \_parameter: (work@top.F3.Slow), line:11:10, endln:11:27, parent:work@top.F3
                         |vpiName:Slow
                         |vpiFullName:work@top.F3.Slow
-                        |UINT:3
+                        |BIN:0011
                 |vpiCaseItem:
                 \_case_item: , line:28:6, endln:28:29
                   |vpiExpr:
@@ -21111,7 +19435,7 @@ design: (work@top)
                     \_parameter: (work@top.F3.Move), line:9:10, endln:9:27, parent:work@top.F3
                       |vpiName:Move
                       |vpiFullName:work@top.F3.Move
-                      |UINT:1
+                      |BIN:0001
                   |vpiStmt:
                   \_assignment: , line:28:14, endln:28:28
                     |vpiOpType:82
@@ -21130,7 +19454,7 @@ design: (work@top)
                       \_parameter: (work@top.F3.Faster), line:14:10, endln:14:27, parent:work@top.F3
                         |vpiName:Faster
                         |vpiFullName:work@top.F3.Faster
-                        |UINT:6
+                        |BIN:0110
                 |vpiCaseItem:
                 \_case_item: , line:29:6, endln:29:27
                   |vpiExpr:
@@ -21141,7 +19465,7 @@ design: (work@top)
                     \_parameter: (work@top.F3.Turn), line:10:10, endln:10:27, parent:work@top.F3
                       |vpiName:Turn
                       |vpiFullName:work@top.F3.Turn
-                      |UINT:2
+                      |BIN:0010
                   |vpiStmt:
                   \_assignment: , line:29:14, endln:29:26
                     |vpiOpType:82
@@ -21184,7 +19508,7 @@ design: (work@top)
                       \_parameter: (work@top.F3.Medium), line:12:10, endln:12:27, parent:work@top.F3
                         |vpiName:Medium
                         |vpiFullName:work@top.F3.Medium
-                        |UINT:4
+                        |BIN:0100
                 |vpiCaseItem:
                 \_case_item: , line:31:6, endln:31:27
                   |vpiExpr:
@@ -21211,7 +19535,7 @@ design: (work@top)
                       \_parameter: (work@top.F3.Fast), line:13:10, endln:13:27, parent:work@top.F3
                         |vpiName:Fast
                         |vpiFullName:work@top.F3.Fast
-                        |UINT:5
+                        |BIN:0101
                 |vpiCaseItem:
                 \_case_item: , line:32:6, endln:32:27
                   |vpiExpr:

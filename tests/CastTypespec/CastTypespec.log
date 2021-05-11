@@ -495,6 +495,7 @@ n<> u<441> t<Top_level_rule> l<2:0> el<44:0>
 ====== UHDM =======
 design: (work@tlul_adapter_host)
 |vpiName:work@tlul_adapter_host
+|vpiElaborated:1
 |uhdmallPackages:
 \_package: builtin (builtin::), parent:work@tlul_adapter_host
   |vpiDefName:builtin
@@ -534,6 +535,7 @@ design: (work@tlul_adapter_host)
       |vpiName:TL_AW
       |vpiFullName:top_pkg::TL_AW
       |vpiLocalParam:1
+      |UINT:32
       |vpiTypespec:
       \_int_typespec: (TL_AW), line:4:13, endln:4:16, parent:top_pkg::TL_AW
         |vpiName:TL_AW
@@ -552,6 +554,7 @@ design: (work@tlul_adapter_host)
       |vpiName:TL_DW
       |vpiFullName:top_pkg::TL_DW
       |vpiLocalParam:1
+      |UINT:32
       |vpiTypespec:
       \_int_typespec: (TL_DW), line:5:13, endln:5:16, parent:top_pkg::TL_DW
         |vpiName:TL_DW
@@ -570,6 +573,7 @@ design: (work@tlul_adapter_host)
       |vpiName:TL_AIW
       |vpiFullName:top_pkg::TL_AIW
       |vpiLocalParam:1
+      |UINT:8
       |vpiTypespec:
       \_int_typespec: (TL_AIW), line:6:13, endln:6:16, parent:top_pkg::TL_AIW
         |vpiName:TL_AIW
@@ -588,6 +592,7 @@ design: (work@tlul_adapter_host)
       |vpiName:TL_DIW
       |vpiFullName:top_pkg::TL_DIW
       |vpiLocalParam:1
+      |UINT:1
       |vpiTypespec:
       \_int_typespec: (TL_DIW), line:7:13, endln:7:16, parent:top_pkg::TL_DIW
         |vpiName:TL_DIW
@@ -606,6 +611,7 @@ design: (work@tlul_adapter_host)
       |vpiName:TL_DUW
       |vpiFullName:top_pkg::TL_DUW
       |vpiLocalParam:1
+      |UINT:16
       |vpiTypespec:
       \_int_typespec: (TL_DUW), line:8:13, endln:8:16, parent:top_pkg::TL_DUW
         |vpiName:TL_DUW
@@ -624,6 +630,7 @@ design: (work@tlul_adapter_host)
       |vpiName:TL_DBW
       |vpiFullName:top_pkg::TL_DBW
       |vpiLocalParam:1
+      |UINT:4
       |vpiTypespec:
       \_int_typespec: (TL_DBW), line:9:13, endln:9:16, parent:top_pkg::TL_DBW
         |vpiName:TL_DBW
@@ -642,6 +649,7 @@ design: (work@tlul_adapter_host)
       |vpiName:TL_SZW
       |vpiFullName:top_pkg::TL_SZW
       |vpiLocalParam:1
+      |UINT:2
       |vpiTypespec:
       \_int_typespec: (TL_SZW), line:10:13, endln:10:16, parent:top_pkg::TL_SZW
         |vpiName:TL_SZW
@@ -676,13 +684,13 @@ design: (work@tlul_adapter_host)
         |vpiClassDefn:
         \_class_defn: (work@mailbox) ${SURELOG_DIR}/build/bin/sv/builtin.sv:4: , endln:30:8, parent:work@tlul_adapter_host
     |vpiIODecl:
-    \_io_decl: (bound), parent:work@mailbox::new
+    \_io_decl: (bound)
       |vpiName:bound
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:6:16, endln:6:19, parent:bound
+      \_int_typespec: , line:6:16, endln:6:19
       |vpiExpr:
-      \_constant: , line:6:28, endln:6:29, parent:bound
+      \_constant: , line:6:28, endln:6:29
         |vpiConstType:9
         |vpiDecompile:0
         |vpiSize:64
@@ -711,8 +719,10 @@ design: (work@tlul_adapter_host)
     |vpiVisibility:1
     |vpiName:try_put
     |vpiFullName:work@mailbox::try_put
+    |vpiReturn:
+    \_logic_var: 
     |vpiIODecl:
-    \_io_decl: (message), parent:work@mailbox::try_put
+    \_io_decl: (message)
       |vpiName:message
       |vpiDirection:1
   |vpiMethod:
@@ -734,7 +744,7 @@ design: (work@tlul_adapter_host)
     |vpiReturn:
     \_int_var: , line:21:11, endln:21:14
     |vpiIODecl:
-    \_io_decl: (message), parent:work@mailbox::try_get
+    \_io_decl: (message)
       |vpiName:message
       |vpiDirection:6
   |vpiMethod:
@@ -756,7 +766,7 @@ design: (work@tlul_adapter_host)
     |vpiReturn:
     \_int_var: , line:27:11, endln:27:14
     |vpiIODecl:
-    \_io_decl: (message), parent:work@mailbox::try_peek
+    \_io_decl: (message)
       |vpiName:message
       |vpiDirection:6
 |uhdmallClasses:
@@ -895,13 +905,13 @@ design: (work@tlul_adapter_host)
         |vpiClassDefn:
         \_class_defn: (work@semaphore) ${SURELOG_DIR}/build/bin/sv/builtin.sv:58: , endln:72:8, parent:work@tlul_adapter_host
     |vpiIODecl:
-    \_io_decl: (keyCount), parent:work@semaphore::new
+    \_io_decl: (keyCount)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:60:15, endln:60:18, parent:keyCount
+      \_int_typespec: , line:60:15, endln:60:18
       |vpiExpr:
-      \_constant: , line:60:30, endln:60:31, parent:keyCount
+      \_constant: , line:60:30, endln:60:31
         |vpiConstType:9
         |vpiDecompile:0
         |vpiSize:64
@@ -917,9 +927,9 @@ design: (work@tlul_adapter_host)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:63:11, endln:63:14, parent:keyCount
+      \_int_typespec: , line:63:11, endln:63:14
       |vpiExpr:
-      \_constant: , line:63:26, endln:63:27, parent:keyCount
+      \_constant: , line:63:26, endln:63:27
         |vpiConstType:9
         |vpiDecompile:1
         |vpiSize:64
@@ -935,9 +945,9 @@ design: (work@tlul_adapter_host)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:66:11, endln:66:14, parent:keyCount
+      \_int_typespec: , line:66:11, endln:66:14
       |vpiExpr:
-      \_constant: , line:66:26, endln:66:27, parent:keyCount
+      \_constant: , line:66:26, endln:66:27
         |vpiConstType:9
         |vpiDecompile:1
         |vpiSize:64
@@ -951,13 +961,13 @@ design: (work@tlul_adapter_host)
     |vpiReturn:
     \_int_var: , line:69:11, endln:69:14
     |vpiIODecl:
-    \_io_decl: (keyCount), parent:work@semaphore::try_get
+    \_io_decl: (keyCount)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:69:23, endln:69:26, parent:keyCount
+      \_int_typespec: , line:69:23, endln:69:26
       |vpiExpr:
-      \_constant: , line:69:38, endln:69:39, parent:keyCount
+      \_constant: , line:69:38, endln:69:39
         |vpiConstType:9
         |vpiDecompile:1
         |vpiSize:64
@@ -1190,6 +1200,7 @@ design: (work@tlul_adapter_host)
       |vpiName:HartSelLen
       |vpiFullName:work@top.HartSelLen
       |vpiLocalParam:1
+      |UINT:2
   |vpiParameter:
   \_parameter: (work@top.HartSelLen), line:35:13, endln:35:27, parent:work@top
 |uhdmtopModules:
@@ -1221,9 +1232,8 @@ design: (work@tlul_adapter_host)
         \_operation: , line:18:17, endln:18:43
           |vpiOpType:67
           |vpiOperand:
-          \_ref_obj: (work@tlul_adapter_host.WordSize), line:18:34, endln:18:42
+          \_ref_obj: (WordSize), line:18:34, endln:18:42
             |vpiName:WordSize
-            |vpiFullName:work@tlul_adapter_host.WordSize
           |vpiTypespec:
           \_int_typespec: 
             |UINT:2
@@ -1250,18 +1260,18 @@ design: (work@tlul_adapter_host)
             |vpiName:v1
             |vpiFullName:work@top.v1
             |vpiTypespec:
-            \_struct_typespec: (ab_t), line:27:12, endln:27:18, parent:work@top.v1
+            \_struct_typespec: (ab_t), line:27:12, endln:27:18
               |vpiName:ab_t
               |vpiTypespecMember:
-              \_typespec_member: (a), line:27:24, endln:27:25, parent:ab_t
+              \_typespec_member: (a), line:27:24, endln:27:25
                 |vpiName:a
                 |vpiTypespec:
-                \_int_typespec: , line:27:20, endln:27:23, parent:a
+                \_int_typespec: , line:27:20, endln:27:23
               |vpiTypespecMember:
-              \_typespec_member: (b), line:27:26, endln:27:27, parent:ab_t
+              \_typespec_member: (b), line:27:26, endln:27:27
                 |vpiName:b
                 |vpiTypespec:
-                \_int_typespec: , line:27:20, endln:27:23, parent:b
+                \_int_typespec: , line:27:20, endln:27:23
           |vpiRange:
           \_range: , line:31:14, endln:31:17, parent:work@top
             |vpiLeftRange:
@@ -1439,18 +1449,7 @@ design: (work@tlul_adapter_host)
     |vpiAutomatic:1
     |vpiVisibility:1
   |vpiTypedef:
-  \_struct_typespec: (ab_t), line:27:12, endln:27:18, parent:work@top
-    |vpiName:ab_t
-    |vpiTypespecMember:
-    \_typespec_member: (a), line:27:24, endln:27:25, parent:ab_t
-      |vpiName:a
-      |vpiTypespec:
-      \_int_typespec: , line:27:20, endln:27:23, parent:a
-    |vpiTypespecMember:
-    \_typespec_member: (b), line:27:26, endln:27:27, parent:ab_t
-      |vpiName:b
-      |vpiTypespec:
-      \_int_typespec: , line:27:20, endln:27:23, parent:b
+  \_struct_typespec: (ab_t), line:27:12, endln:27:18
   |vpiParamAssign:
   \_param_assign: , line:35:13, endln:35:27, parent:work@top
     |vpiRhs:

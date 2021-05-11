@@ -20,44 +20,37 @@
  *
  * Created on December 4, 2019, 8:17 PM
  */
-
-#include "SourceCompile/SymbolTable.h"
-#include "CommandLine/CommandLineParser.h"
-#include "ErrorReporting/ErrorContainer.h"
-#include "SourceCompile/SymbolTable.h"
-#include "SourceCompile/CompilationUnit.h"
-#include "SourceCompile/PreprocessFile.h"
-#include "SourceCompile/CompileSourceFile.h"
-#include "SourceCompile/Compiler.h"
-#include "SourceCompile/PreprocessFile.h"
-#include "Utils/StringUtils.h"
+#include "SourceCompile/SV3_1aPpTreeListenerHelper.h"
 
 #include <cstdlib>
 #include <iostream>
 #include <regex>
 
-using namespace std;
-using namespace SURELOG;
-
+#include "CommandLine/CommandLineParser.h"
+#include "ErrorReporting/ErrorContainer.h"
+#include "SourceCompile/CompilationUnit.h"
+#include "SourceCompile/CompileSourceFile.h"
+#include "SourceCompile/Compiler.h"
+#include "SourceCompile/PreprocessFile.h"
+#include "SourceCompile/SymbolTable.h"
+#include "Utils/FileUtils.h"
+#include "Utils/ParseUtils.h"
+#include "Utils/StringUtils.h"
 #include "parser/SV3_1aPpLexer.h"
 #include "parser/SV3_1aPpParser.h"
 #include "parser/SV3_1aPpParserBaseListener.h"
-using namespace antlr4;
-#include "Utils/ParseUtils.h"
-#include "Utils/FileUtils.h"
 
-#include "SV3_1aPpTreeListenerHelper.h"
+using namespace SURELOG;
 
-SV3_1aPpTreeListenerHelper::~SV3_1aPpTreeListenerHelper()
-{
-}
+SV3_1aPpTreeListenerHelper::~SV3_1aPpTreeListenerHelper() {}
 
-SymbolId SV3_1aPpTreeListenerHelper::registerSymbol(const std::string &symbol) {
+SymbolId SV3_1aPpTreeListenerHelper::registerSymbol(const std::string& symbol) {
   return m_pp->getCompileSourceFile()->getSymbolTable()->registerSymbol(symbol);
 }
 
-std::tuple<unsigned int, unsigned short, unsigned int, unsigned short> SV3_1aPpTreeListenerHelper::getFileLine(ParserRuleContext* ctx,
-                                                SymbolId& fileId) {                                                
+std::tuple<unsigned int, unsigned short, unsigned int, unsigned short>
+SV3_1aPpTreeListenerHelper::getFileLine(antlr4::ParserRuleContext* ctx,
+                                        SymbolId& fileId) {
   std::pair<int, int> lineCol = ParseUtils::getLineColumn(m_tokens, ctx);
   std::pair<int, int> endLineCol = ParseUtils::getEndLineColumn(m_tokens, ctx);
   unsigned int line = 0;
@@ -125,10 +118,10 @@ void SV3_1aPpTreeListenerHelper::init() {
   }
 }
 
-
 void SV3_1aPpTreeListenerHelper::logError(ErrorDefinition::ErrorType error,
-                                         ParserRuleContext* ctx,
-                                         std::string object, bool printColumn) {
+                                          antlr4::ParserRuleContext* ctx,
+                                          std::string object,
+                                          bool printColumn) {
   if (m_instructions.m_mute) return;
   std::pair<int, int> lineCol =
       ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
@@ -150,7 +143,7 @@ void SV3_1aPpTreeListenerHelper::logError(ErrorDefinition::ErrorType error,
 }
 
 void SV3_1aPpTreeListenerHelper::logError(ErrorDefinition::ErrorType error,
-                                         Location& loc, bool showDuplicates) {
+                                          Location& loc, bool showDuplicates) {
   if (m_instructions.m_mute) return;
   Error err(error, loc);
   m_pp->getCompileSourceFile()->getErrorContainer()->addError(err,
@@ -158,8 +151,8 @@ void SV3_1aPpTreeListenerHelper::logError(ErrorDefinition::ErrorType error,
 }
 
 void SV3_1aPpTreeListenerHelper::logError(ErrorDefinition::ErrorType error,
-                                         Location& loc, Location& extraLoc,
-                                         bool showDuplicates) {
+                                          Location& loc, Location& extraLoc,
+                                          bool showDuplicates) {
   if (m_instructions.m_mute) return;
   std::vector<Location> extras;
   extras.push_back(extraLoc);
@@ -168,32 +161,30 @@ void SV3_1aPpTreeListenerHelper::logError(ErrorDefinition::ErrorType error,
                                                               showDuplicates);
 }
 
-
-void SV3_1aPpTreeListenerHelper::forwardToParser(ParserRuleContext* ctx) {
+void SV3_1aPpTreeListenerHelper::forwardToParser(
+    antlr4::ParserRuleContext* ctx) {
   if (m_inActiveBranch && (!m_inMacroDefinitionParsing) &&
       (!m_pp->getCompileSourceFile()
             ->getCommandLineParser()
             ->filterSimpleDirectives()) &&
       (!(m_filterProtectedRegions && m_inProtectedRegion))) {
-    //m_pp->append(ctx->getText() + "\n");
+    // m_pp->append(ctx->getText() + "\n");
     m_pp->append(ctx->getText());
   } else {
     addLineFiller(ctx);
   }
 }
 
-void SV3_1aPpTreeListenerHelper::addLineFiller(ParserRuleContext* ctx) {
-  if (m_pp->isMacroBody())
-    return;
+void SV3_1aPpTreeListenerHelper::addLineFiller(antlr4::ParserRuleContext* ctx) {
+  if (m_pp->isMacroBody()) return;
   const std::string& text = ctx->getText();
   for (unsigned int i = 0; i < text.size(); i++) {
-    if (text[i] == '\n')
-      m_pp->append("\n");
+    if (text[i] == '\n') m_pp->append("\n");
   }
 }
 
 void SV3_1aPpTreeListenerHelper::checkMultiplyDefinedMacro(
-    const std::string &macroName, ParserRuleContext* ctx) {
+    const std::string& macroName, antlr4::ParserRuleContext* ctx) {
   std::set<PreprocessFile*> visited;
   MacroInfo* macroInf = m_pp->getMacro(macroName);
   if (macroInf) {
@@ -212,7 +203,8 @@ void SV3_1aPpTreeListenerHelper::checkMultiplyDefinedMacro(
   }
 }
 
-void SV3_1aPpTreeListenerHelper::setCurrentBranchActivity(unsigned int currentLine) {
+void SV3_1aPpTreeListenerHelper::setCurrentBranchActivity(
+    unsigned int currentLine) {
   PreprocessFile::IfElseStack& stack = m_pp->getStack();
   if (stack.size()) {
     int index = stack.size() - 1;

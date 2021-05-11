@@ -20,25 +20,13 @@
  *
  * Created on July 1, 2017, 12:38 PM
  */
-#include "SourceCompile/VObjectTypes.h"
-#include "Design/VObject.h"
-#include "Library/Library.h"
-#include "Design/FileContent.h"
-#include "SourceCompile/SymbolTable.h"
-#include "ErrorReporting/Error.h"
-#include "ErrorReporting/Location.h"
-#include "ErrorReporting/Error.h"
-#include "ErrorReporting/ErrorDefinition.h"
-#include "ErrorReporting/ErrorContainer.h"
-#include "SourceCompile/CompilationUnit.h"
-#include "SourceCompile/PreprocessFile.h"
-#include "SourceCompile/CompileSourceFile.h"
-#include "SourceCompile/ParseFile.h"
-#include "SourceCompile/Compiler.h"
-#include "Testbench/Program.h"
-#include "Testbench/ClassDefinition.h"
-#include "DesignCompile/CompileDesign.h"
 #include "DesignCompile/ResolveSymbols.h"
+
+#include "ErrorReporting/Error.h"
+#include "ErrorReporting/ErrorContainer.h"
+#include "ErrorReporting/ErrorDefinition.h"
+#include "ErrorReporting/Location.h"
+#include "Testbench/ClassDefinition.h"
 #include "headers/uhdm.h"
 
 using namespace SURELOG;
@@ -120,8 +108,9 @@ void ResolveSymbols::createFastLookup() {
               m_fileData->insertObjectLookup(fullSubName, subobject,
                                              m_errorContainer);
 
-              ClassDefinition* def = new ClassDefinition(
-                  name, lib, pdef, m_fileData, subobject, NULL, s.MakeClass_defn());
+              ClassDefinition* def =
+                  new ClassDefinition(name, lib, pdef, m_fileData, subobject,
+                                      NULL, s.MakeClass_defn());
               m_fileData->addClassDefinition(fullSubName, def);
               pdef->addClassDefinition(name, def);
             }
@@ -145,8 +134,9 @@ void ResolveSymbols::createFastLookup() {
               std::string fullSubName = fullName + "::" + name;
               m_fileData->insertObjectLookup(fullSubName, subobject,
                                              m_errorContainer);
-              ClassDefinition* def = new ClassDefinition(
-                  name, lib, mdef, m_fileData, subobject, NULL, s.MakeClass_defn());
+              ClassDefinition* def =
+                  new ClassDefinition(name, lib, mdef, m_fileData, subobject,
+                                      NULL, s.MakeClass_defn());
               m_fileData->addClassDefinition(fullSubName, def);
               mdef->addClassDefinition(name, def);
             }
@@ -154,8 +144,9 @@ void ResolveSymbols::createFastLookup() {
           break;
         }
         case VObjectType::slClass_declaration: {
-          ClassDefinition* def = new ClassDefinition(fullName, lib, NULL,
-                                                     m_fileData, object, NULL, s.MakeClass_defn());
+          ClassDefinition* def =
+              new ClassDefinition(fullName, lib, NULL, m_fileData, object, NULL,
+                                  s.MakeClass_defn());
           m_fileData->addClassDefinition(fullName, def);
           break;
         }
@@ -181,8 +172,9 @@ void ResolveSymbols::createFastLookup() {
 
               if (m_fileData->Type(subobject) ==
                   VObjectType::slClass_declaration) {
-                ClassDefinition* def = new ClassDefinition(
-                    name, lib, mdef, m_fileData, subobject, NULL, s.MakeClass_defn());
+                ClassDefinition* def =
+                    new ClassDefinition(name, lib, mdef, m_fileData, subobject,
+                                        NULL, s.MakeClass_defn());
                 m_fileData->addClassDefinition(fullSubName, def);
                 mdef->addClassDefinition(name, def);
               } else {

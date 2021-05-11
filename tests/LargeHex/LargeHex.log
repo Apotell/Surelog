@@ -297,6 +297,7 @@ n<> u<247> t<Top_level_rule> l<1:0> el<21:0>
 ====== UHDM =======
 design: (work@tlul_socket_1n)
 |vpiName:work@tlul_socket_1n
+|vpiElaborated:1
 |uhdmallPackages:
 \_package: builtin (builtin::), parent:work@tlul_socket_1n
   |vpiDefName:builtin
@@ -333,13 +334,13 @@ design: (work@tlul_socket_1n)
         |vpiClassDefn:
         \_class_defn: (work@mailbox) ${SURELOG_DIR}/build/bin/sv/builtin.sv:4: , endln:30:8, parent:work@tlul_socket_1n
     |vpiIODecl:
-    \_io_decl: (bound), parent:work@mailbox::new
+    \_io_decl: (bound)
       |vpiName:bound
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:6:16, endln:6:19, parent:bound
+      \_int_typespec: , line:6:16, endln:6:19
       |vpiExpr:
-      \_constant: , line:6:28, endln:6:29, parent:bound
+      \_constant: , line:6:28, endln:6:29
         |vpiConstType:9
         |vpiDecompile:0
         |vpiSize:64
@@ -368,8 +369,10 @@ design: (work@tlul_socket_1n)
     |vpiVisibility:1
     |vpiName:try_put
     |vpiFullName:work@mailbox::try_put
+    |vpiReturn:
+    \_logic_var: 
     |vpiIODecl:
-    \_io_decl: (message), parent:work@mailbox::try_put
+    \_io_decl: (message)
       |vpiName:message
       |vpiDirection:1
   |vpiMethod:
@@ -391,7 +394,7 @@ design: (work@tlul_socket_1n)
     |vpiReturn:
     \_int_var: , line:21:11, endln:21:14
     |vpiIODecl:
-    \_io_decl: (message), parent:work@mailbox::try_get
+    \_io_decl: (message)
       |vpiName:message
       |vpiDirection:6
   |vpiMethod:
@@ -413,7 +416,7 @@ design: (work@tlul_socket_1n)
     |vpiReturn:
     \_int_var: , line:27:11, endln:27:14
     |vpiIODecl:
-    \_io_decl: (message), parent:work@mailbox::try_peek
+    \_io_decl: (message)
       |vpiName:message
       |vpiDirection:6
 |uhdmallClasses:
@@ -552,13 +555,13 @@ design: (work@tlul_socket_1n)
         |vpiClassDefn:
         \_class_defn: (work@semaphore) ${SURELOG_DIR}/build/bin/sv/builtin.sv:58: , endln:72:8, parent:work@tlul_socket_1n
     |vpiIODecl:
-    \_io_decl: (keyCount), parent:work@semaphore::new
+    \_io_decl: (keyCount)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:60:15, endln:60:18, parent:keyCount
+      \_int_typespec: , line:60:15, endln:60:18
       |vpiExpr:
-      \_constant: , line:60:30, endln:60:31, parent:keyCount
+      \_constant: , line:60:30, endln:60:31
         |vpiConstType:9
         |vpiDecompile:0
         |vpiSize:64
@@ -574,9 +577,9 @@ design: (work@tlul_socket_1n)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:63:11, endln:63:14, parent:keyCount
+      \_int_typespec: , line:63:11, endln:63:14
       |vpiExpr:
-      \_constant: , line:63:26, endln:63:27, parent:keyCount
+      \_constant: , line:63:26, endln:63:27
         |vpiConstType:9
         |vpiDecompile:1
         |vpiSize:64
@@ -592,9 +595,9 @@ design: (work@tlul_socket_1n)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:66:11, endln:66:14, parent:keyCount
+      \_int_typespec: , line:66:11, endln:66:14
       |vpiExpr:
-      \_constant: , line:66:26, endln:66:27, parent:keyCount
+      \_constant: , line:66:26, endln:66:27
         |vpiConstType:9
         |vpiDecompile:1
         |vpiSize:64
@@ -608,13 +611,13 @@ design: (work@tlul_socket_1n)
     |vpiReturn:
     \_int_var: , line:69:11, endln:69:14
     |vpiIODecl:
-    \_io_decl: (keyCount), parent:work@semaphore::try_get
+    \_io_decl: (keyCount)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:69:23, endln:69:26, parent:keyCount
+      \_int_typespec: , line:69:23, endln:69:26
       |vpiExpr:
-      \_constant: , line:69:38, endln:69:39, parent:keyCount
+      \_constant: , line:69:38, endln:69:39
         |vpiConstType:9
         |vpiDecompile:1
         |vpiSize:64
@@ -640,6 +643,7 @@ design: (work@tlul_socket_1n)
     \_parameter: (work@tlul_fifo_sync.ReqDepth), line:1:47, endln:1:59, parent:work@tlul_fifo_sync
       |vpiName:ReqDepth
       |vpiFullName:work@tlul_fifo_sync.ReqDepth
+      |UINT:2
       |vpiTypespec:
       \_int_typespec: (ReqDepth), line:1:34, endln:1:37, parent:work@tlul_fifo_sync.ReqDepth
         |vpiName:ReqDepth
@@ -671,6 +675,7 @@ design: (work@tlul_socket_1n)
     \_parameter: (work@tlul_socket_1n.DReqDepth), line:7:26, endln:7:59, parent:work@tlul_socket_1n
       |vpiName:DReqDepth
       |vpiFullName:work@tlul_socket_1n.DReqDepth
+      |HEX:2000000000000000F
       |vpiTypespec:
       \_bit_typespec: (DReqDepth), line:7:15, endln:7:18, parent:work@tlul_socket_1n.DReqDepth
         |vpiName:DReqDepth
@@ -795,7 +800,7 @@ design: (work@tlul_socket_1n)
       \_parameter: (work@tlul_socket_1n.fifo_d.ReqDepth), line:1:47, endln:1:59, parent:work@tlul_socket_1n.fifo_d
         |vpiName:ReqDepth
         |vpiFullName:work@tlul_socket_1n.fifo_d.ReqDepth
-        |UINT:15
+        |UINT:2
         |vpiTypespec:
         \_int_typespec: (ReqDepth), line:1:34, endln:1:37, parent:work@tlul_socket_1n.fifo_d.ReqDepth
           |vpiName:ReqDepth
@@ -881,7 +886,6 @@ design: (work@tlul_socket_1n)
     \_parameter: (work@tlul_socket_1n.ReqDepthKO), line:8:28, endln:8:58, parent:work@tlul_socket_1n
       |vpiName:ReqDepthKO
       |vpiFullName:work@tlul_socket_1n.ReqDepthKO
-      |UINT:0
       |vpiTypespec:
       \_int_typespec: (ReqDepthKO), line:8:15, endln:8:18, parent:work@tlul_socket_1n.ReqDepthKO
         |vpiName:ReqDepthKO
@@ -897,7 +901,6 @@ design: (work@tlul_socket_1n)
     \_parameter: (work@tlul_socket_1n.ReqDepthOK), line:11:28, endln:11:56, parent:work@tlul_socket_1n
       |vpiName:ReqDepthOK
       |vpiFullName:work@tlul_socket_1n.ReqDepthOK
-      |UINT:15
       |vpiTypespec:
       \_int_typespec: (ReqDepthOK), line:11:15, endln:11:18, parent:work@tlul_socket_1n.ReqDepthOK
         |vpiName:ReqDepthOK

@@ -24,8 +24,6 @@
 #ifndef LOGLISTENER_H
 #define LOGLISTENER_H
 
-#pragma once
-
 #include <deque>
 #include <fstream>
 #include <mutex>
@@ -50,9 +48,7 @@ class LogListener {
     return static_cast<int>(result) >= 0;
   }
 
-  static bool failed(LogResult result) {
-    return static_cast<int>(result) < 0;
-  }
+  static bool failed(LogResult result) { return static_cast<int>(result) < 0; }
 
  public:
   LogListener() = default;

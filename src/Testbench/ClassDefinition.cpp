@@ -20,16 +20,16 @@
  *
  * Created on June 1, 2018, 10:12 PM
  */
-#include "SourceCompile/SymbolTable.h"
+#include "Testbench/ClassDefinition.h"
+
 #include "Design/FileContent.h"
-#include "ClassDefinition.h"
+#include "SourceCompile/SymbolTable.h"
 
-using namespace SURELOG;
-
+namespace SURELOG {
 ClassDefinition::ClassDefinition(std::string name, Library* library,
                                  DesignComponent* container,
-                                 const FileContent* fC,
-                                 NodeId nodeId, ClassDefinition* parent, 
+                                 const FileContent* fC, NodeId nodeId,
+                                 ClassDefinition* parent,
                                  UHDM::class_defn* uhdm_definition)
     : DesignComponent(container ? container : fC, NULL),
       DataType(fC, nodeId, name,
@@ -37,7 +37,7 @@ ClassDefinition::ClassDefinition(std::string name, Library* library,
       m_name(name),
       m_library(library),
       m_container(container),
-      m_parent(parent), 
+      m_parent(parent),
       m_uhdm_definition(uhdm_definition) {
   m_category = DataType::Category::CLASS;
   addFileContent(fC, nodeId);
@@ -83,8 +83,8 @@ Function* ClassDefinition::getFunction(const std::string& name) const {
 
   for (const auto& parent : getBaseClassMap()) {
     if (parent.second) {
-      const ClassDefinition* cparent
-        = dynamic_cast<const ClassDefinition*>(parent.second);
+      const ClassDefinition* cparent =
+          dynamic_cast<const ClassDefinition*>(parent.second);
       if (cparent) {
         Function* d = cparent->getFunction(name);
         if (d) return d;
@@ -174,8 +174,8 @@ void ClassDefinition::insertBaseClass(DataType* p) {
   m_baseclasses.insert(std::make_pair(p->getName(), p));
 }
 
-const DataType* ClassDefinition::getBaseDataType(const std::string& name)
-  const {
+const DataType* ClassDefinition::getBaseDataType(
+    const std::string& name) const {
   const DataTypeMap& dataTypes = getDataTypeMap();
   DataTypeMap::const_iterator itr = dataTypes.find(name);
   if (itr == dataTypes.end()) {
@@ -198,8 +198,8 @@ const DataType* ClassDefinition::getBaseDataType(const std::string& name)
 bool ClassDefinition::hasCompleteBaseSpecification() const {
   for (const auto& parent : getBaseClassMap()) {
     if (parent.second) {
-      const ClassDefinition* cparent
-        = dynamic_cast<const ClassDefinition*>(parent.second);
+      const ClassDefinition* cparent =
+          dynamic_cast<const ClassDefinition*>(parent.second);
       if (cparent) {
         return cparent->hasCompleteBaseSpecification();
       }
@@ -209,3 +209,4 @@ bool ClassDefinition::hasCompleteBaseSpecification() const {
   }
   return true;
 }
+}  // namespace SURELOG

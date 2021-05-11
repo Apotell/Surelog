@@ -160,7 +160,12 @@ set EXE_PATH "[pwd]/bin"
 if [regexp {path=([A-Za-z0-9_/\.\-\:]+)} $argv tmp EXE_PATH] {
 }
 
-set SURELOG_VERSION "$EXE_PATH/surelog"
+set EXE_NAME "surelog"
+
+if [regexp {exe_name=([A-Za-z0-9_/\.\-\:]+)} $argv tmp EXE_NAME] {
+}
+
+set SURELOG_VERSION "$EXE_PATH/$EXE_NAME"
 set UHDM_DUMP_COMMAND "[pwd]/third_party/UHDM/bin/uhdm-dump"
 #This condition is not compatible across platforms. 
 #if ![file exist $SURELOG_VERSION] {
@@ -175,6 +180,7 @@ set SURELOG_COMMAND "$TIME $DEBUG_TOOL $SURELOG_VERSION"
 set WINDOWS_BLACK_LIST [dict create]
 dict set WINDOWS_BLACK_LIST Ariane 1
 dict set WINDOWS_BLACK_LIST BlackParrot 1
+dict set WINDOWS_BLACK_LIST BlackPBe 1
 dict set WINDOWS_BLACK_LIST CoresSweRV 1
 dict set WINDOWS_BLACK_LIST SimpleIncludeAndMacros 1
 dict set WINDOWS_BLACK_LIST TestFileSplit 1
@@ -192,9 +198,11 @@ dict set WINDOWS_BLACK_LIST Earlgrey_nexysvideo 1
 set UNIX_BLACK_LIST [dict create]
 # 2 message diff:
 dict set UNIX_BLACK_LIST UnitElabExternNested 1
-# Not sure why this test dies in the CI machine, RAM is now 5.9Go, less than other tests
+
+# RAM size in CI machines
 dict set UNIX_BLACK_LIST Earlgrey_nexysvideo 1
 dict set UNIX_BLACK_LIST BlackParrot 1
+dict set UNIX_BLACK_LIST BlackPBe 1
 
 if { $tcl_platform(platform) == "windows" } {
     set BLACK_LIST $WINDOWS_BLACK_LIST
@@ -202,8 +210,11 @@ if { $tcl_platform(platform) == "windows" } {
     set BLACK_LIST $UNIX_BLACK_LIST
 }
 
-proc findFiles { basedir pattern } {
+proc findFiles { basedir pattern {level 0}} {
 
+    if {$level > 3} {
+      return
+    }
     # Fix the directory name, this ensures the directory name is in the
     # native format for the platform and contains a final directory seperator
     set basedir [string trimright [file join [file normalize $basedir] { }]]
@@ -220,7 +231,7 @@ proc findFiles { basedir pattern } {
     foreach dirName [glob -nocomplain -type {d  r} -path $basedir *] {
         # Recusively call the routine on the sub directory and append any
         # new files to the results
-        set subDirList [findFiles $dirName $pattern]
+        set subDirList [findFiles $dirName $pattern [expr $level +1]]
         if { [llength $subDirList] > 0 } {
             foreach subDirFile $subDirList {
                 lappend fileList $subDirFile
@@ -461,6 +472,9 @@ proc run_regression { } {
                 if {$MP_MAX > 0} {
                     regsub -all {\-nocache} $command "" command
                 }
+		if [regexp {\-lowmem} $command] {
+		    set MP_MAX 1
+		}
                 set command "$command -mt $MT_MAX -mp $MP_MAX $output_path"
 
                 if {($ONETEST != "") && ($testname != $ONETEST)} {
@@ -675,8 +689,9 @@ proc run_regression { } {
         }
 
 	if {($DIFF_MODE == 0) && ($passstatus == "PASS")} {
-            file delete -force slpp_all slpp_unit
-            file delete -force $REGRESSION_PATH/tests/$test/slpp_all  $REGRESSION_PATH/tests/$test/slpp_unit
+            file delete -force slpp_all slpp_unit uhdm.dump
+            file delete -force $REGRESSION_PATH/tests/$test/slpp_all  $REGRESSION_PATH/tests/$test/slpp_unit $REGRESSION_PATH/tests/$test/uhdm.dump
+	    file delete -force $testdir/slpp_all $testdir/slpp_unit $testdir/uhdm.dump
         }
 	
         cd $REGRESSION_PATH/tests

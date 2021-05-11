@@ -430,6 +430,7 @@ n<> u<380> t<Top_level_rule> l<1:0> el<25:0>
 ====== UHDM =======
 design: (work@top)
 |vpiName:work@top
+|vpiElaborated:1
 |uhdmallPackages:
 \_package: builtin (builtin::), parent:work@top
   |vpiDefName:builtin
@@ -466,13 +467,13 @@ design: (work@top)
         |vpiClassDefn:
         \_class_defn: (work@mailbox) ${SURELOG_DIR}/build/bin/sv/builtin.sv:4: , endln:30:8, parent:work@top
     |vpiIODecl:
-    \_io_decl: (bound), parent:work@mailbox::new
+    \_io_decl: (bound)
       |vpiName:bound
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:6:16, endln:6:19, parent:bound
+      \_int_typespec: , line:6:16, endln:6:19
       |vpiExpr:
-      \_constant: , line:6:28, endln:6:29, parent:bound
+      \_constant: , line:6:28, endln:6:29
         |vpiConstType:9
         |vpiDecompile:0
         |vpiSize:64
@@ -501,8 +502,10 @@ design: (work@top)
     |vpiVisibility:1
     |vpiName:try_put
     |vpiFullName:work@mailbox::try_put
+    |vpiReturn:
+    \_logic_var: 
     |vpiIODecl:
-    \_io_decl: (message), parent:work@mailbox::try_put
+    \_io_decl: (message)
       |vpiName:message
       |vpiDirection:1
   |vpiMethod:
@@ -524,7 +527,7 @@ design: (work@top)
     |vpiReturn:
     \_int_var: , line:21:11, endln:21:14
     |vpiIODecl:
-    \_io_decl: (message), parent:work@mailbox::try_get
+    \_io_decl: (message)
       |vpiName:message
       |vpiDirection:6
   |vpiMethod:
@@ -546,7 +549,7 @@ design: (work@top)
     |vpiReturn:
     \_int_var: , line:27:11, endln:27:14
     |vpiIODecl:
-    \_io_decl: (message), parent:work@mailbox::try_peek
+    \_io_decl: (message)
       |vpiName:message
       |vpiDirection:6
 |uhdmallClasses:
@@ -685,13 +688,13 @@ design: (work@top)
         |vpiClassDefn:
         \_class_defn: (work@semaphore) ${SURELOG_DIR}/build/bin/sv/builtin.sv:58: , endln:72:8, parent:work@top
     |vpiIODecl:
-    \_io_decl: (keyCount), parent:work@semaphore::new
+    \_io_decl: (keyCount)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:60:15, endln:60:18, parent:keyCount
+      \_int_typespec: , line:60:15, endln:60:18
       |vpiExpr:
-      \_constant: , line:60:30, endln:60:31, parent:keyCount
+      \_constant: , line:60:30, endln:60:31
         |vpiConstType:9
         |vpiDecompile:0
         |vpiSize:64
@@ -707,9 +710,9 @@ design: (work@top)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:63:11, endln:63:14, parent:keyCount
+      \_int_typespec: , line:63:11, endln:63:14
       |vpiExpr:
-      \_constant: , line:63:26, endln:63:27, parent:keyCount
+      \_constant: , line:63:26, endln:63:27
         |vpiConstType:9
         |vpiDecompile:1
         |vpiSize:64
@@ -725,9 +728,9 @@ design: (work@top)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:66:11, endln:66:14, parent:keyCount
+      \_int_typespec: , line:66:11, endln:66:14
       |vpiExpr:
-      \_constant: , line:66:26, endln:66:27, parent:keyCount
+      \_constant: , line:66:26, endln:66:27
         |vpiConstType:9
         |vpiDecompile:1
         |vpiSize:64
@@ -741,13 +744,13 @@ design: (work@top)
     |vpiReturn:
     \_int_var: , line:69:11, endln:69:14
     |vpiIODecl:
-    \_io_decl: (keyCount), parent:work@semaphore::try_get
+    \_io_decl: (keyCount)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:69:23, endln:69:26, parent:keyCount
+      \_int_typespec: , line:69:23, endln:69:26
       |vpiExpr:
-      \_constant: , line:69:38, endln:69:39, parent:keyCount
+      \_constant: , line:69:38, endln:69:39
         |vpiConstType:9
         |vpiDecompile:1
         |vpiSize:64
@@ -783,6 +786,7 @@ design: (work@top)
     \_parameter: (work@ibex_register_file.RV32E), line:15:27, endln:15:48, parent:work@ibex_register_file
       |vpiName:RV32E
       |vpiFullName:work@ibex_register_file.RV32E
+      |UINT:0
       |vpiTypespec:
       \_bit_typespec: (RV32E), line:15:14, endln:15:17, parent:work@ibex_register_file.RV32E
         |vpiName:RV32E
@@ -798,6 +802,7 @@ design: (work@top)
     \_parameter: (work@ibex_register_file.DataWidth), line:16:27, endln:16:49, parent:work@ibex_register_file
       |vpiName:DataWidth
       |vpiFullName:work@ibex_register_file.DataWidth
+      |UINT:32
       |vpiTypespec:
       \_int_typespec: (DataWidth), line:16:14, endln:16:17, parent:work@ibex_register_file.DataWidth
         |vpiName:DataWidth
@@ -848,7 +853,6 @@ design: (work@top)
           |vpiName:ADDR_WIDTH
           |vpiFullName:work@ibex_register_file.ADDR_WIDTH
           |vpiLocalParam:1
-          |INT:5
           |vpiTypespec:
           \_int_typespec: (ADDR_WIDTH), line:18:13, endln:18:16, parent:work@ibex_register_file.ADDR_WIDTH
             |vpiName:ADDR_WIDTH
@@ -885,6 +889,7 @@ design: (work@top)
       |vpiName:NrHarts
       |vpiFullName:work@top.NrHarts
       |vpiLocalParam:1
+      |UINT:1
       |vpiTypespec:
       \_int_typespec: (NrHarts), line:2:19, endln:2:22, parent:work@top.NrHarts
         |vpiName:NrHarts
@@ -901,6 +906,7 @@ design: (work@top)
       |vpiName:NrHarts2
       |vpiFullName:work@top.NrHarts2
       |vpiLocalParam:1
+      |UINT:8
       |vpiTypespec:
       \_int_typespec: (NrHarts2), line:4:12, endln:4:15, parent:work@top.NrHarts2
         |vpiName:NrHarts2
@@ -1094,7 +1100,6 @@ design: (work@top)
       |vpiName:HartSelLen1
       |vpiFullName:work@top.HartSelLen1
       |vpiLocalParam:1
-      |INT:1
       |vpiTypespec:
       \_int_typespec: (HartSelLen1), line:6:12, endln:6:15, parent:work@top.HartSelLen1
         |vpiName:HartSelLen1
@@ -1111,7 +1116,6 @@ design: (work@top)
       |vpiName:HartSelLen2
       |vpiFullName:work@top.HartSelLen2
       |vpiLocalParam:1
-      |INT:1
       |vpiTypespec:
       \_int_typespec: (HartSelLen2), line:8:12, endln:8:15, parent:work@top.HartSelLen2
         |vpiName:HartSelLen2
@@ -1128,7 +1132,6 @@ design: (work@top)
       |vpiName:HartSelLen3
       |vpiFullName:work@top.HartSelLen3
       |vpiLocalParam:1
-      |INT:1
       |vpiTypespec:
       \_int_typespec: (HartSelLen3), line:10:12, endln:10:15, parent:work@top.HartSelLen3
         |vpiName:HartSelLen3
@@ -1276,7 +1279,6 @@ design: (work@top)
       |vpiName:ADDR_WIDTH
       |vpiFullName:work@ibex_register_file.ADDR_WIDTH
       |vpiLocalParam:1
-      |INT:5
       |vpiTypespec:
       \_int_typespec: (ADDR_WIDTH), line:18:13, endln:18:16, parent:work@ibex_register_file.ADDR_WIDTH
         |vpiName:ADDR_WIDTH
@@ -1293,7 +1295,6 @@ design: (work@top)
       |vpiName:NUM_WORDS
       |vpiFullName:work@ibex_register_file.NUM_WORDS
       |vpiLocalParam:1
-      |INT:32
       |vpiTypespec:
       \_int_typespec: (NUM_WORDS), line:19:13, endln:19:16, parent:work@ibex_register_file.NUM_WORDS
         |vpiName:NUM_WORDS

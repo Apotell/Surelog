@@ -20,29 +20,36 @@
  *
  * Created on April 29, 2017, 4:20 PM
  */
+#include "Cache/ParseCache.h"
 
-#include <stdint.h>
-#include <sys/types.h>
+#if defined(_MSC_VER)
+#include <direct.h>
+#include <process.h>
+#else
+#include <sys/param.h>
+#include <unistd.h>
+#endif
+
 #include <sys/stat.h>
+#include <sys/types.h>
 
+#include <cstdint>
 #include <cstdio>
 #include <ctime>
 
+#include "Cache/Cache.h"
 #include "CommandLine/CommandLineParser.h"
+#include "Design/FileContent.h"
 #include "ErrorReporting/ErrorContainer.h"
-#include "SourceCompile/SymbolTable.h"
+#include "Package/Precompiled.h"
 #include "SourceCompile/CompilationUnit.h"
-#include "SourceCompile/PreprocessFile.h"
 #include "SourceCompile/CompileSourceFile.h"
 #include "SourceCompile/Compiler.h"
-#include "SourceCompile/ParseFile.h"
-#include "Utils/StringUtils.h"
+#include "SourceCompile/PreprocessFile.h"
+#include "SourceCompile/SymbolTable.h"
 #include "Utils/FileUtils.h"
-#include "Cache/Cache.h"
+#include "Utils/StringUtils.h"
 #include "flatbuffers/util.h"
-#include "Cache/ParseCache.h"
-#include "Design/FileContent.h"
-#include "Package/Precompiled.h"
 
 using namespace SURELOG;
 
@@ -108,7 +115,8 @@ bool ParseCache::restore_(std::string cacheFileName) {
         m_parse->getCompileSourceFile()->getSymbolTable()->registerSymbol(
             canonicalSymbols.getSymbol(elemc->m_fileId())),
         (DesignElement::ElemType)elemc->m_type(), elemc->m_uniqueId(),
-        elemc->m_line(), elemc->m_column(), elemc->m_end_line(), elemc->m_end_column(), elemc->m_parent());
+        elemc->m_line(), elemc->m_column(), elemc->m_end_line(),
+        elemc->m_end_column(), elemc->m_parent());
     elem.m_node = elemc->m_node();
     elem.m_timeInfo.m_type = (TimeInfo::Type)elemc->m_timeInfo()->m_type();
     elem.m_timeInfo.m_fileId = elemc->m_timeInfo()->m_fileId();
@@ -125,11 +133,9 @@ bool ParseCache::restore_(std::string cacheFileName) {
 
   /* Restore design objects */
   auto objects = ppcache->m_objects();
-  restoreVObjects(objects,
-        canonicalSymbols,
-        *m_parse->getCompileSourceFile()->getSymbolTable(),
-        m_parse->getFileId(0),
-        fileContent);
+  restoreVObjects(objects, canonicalSymbols,
+                  *m_parse->getCompileSourceFile()->getSymbolTable(),
+                  m_parse->getFileId(0), fileContent);
 
   delete[] buffer_pointer;
   return true;
@@ -165,12 +171,18 @@ bool ParseCache::isValid() {
 }
 
 bool ParseCache::restore() {
-  bool cacheAllowed =
-      m_parse->getCompileSourceFile()->getCommandLineParser()->cacheAllowed();
+  CommandLineParser* clp =
+      m_parse->getCompileSourceFile()->getCommandLineParser();
+  bool cacheAllowed = clp->cacheAllowed();
   if (!cacheAllowed) return false;
 
   std::string cacheFileName = getCacheFileName_();
   if (!checkCacheIsValid_(cacheFileName)) {
+    // char path [10000];
+    // char* p = getcwd(path, 9999);
+    // if (!clp->parseOnly())
+    //   std::cout << "Cache miss for: " << cacheFileName << " pwd: " << p <<
+    //   "\n";
     return false;
   }
 
@@ -178,12 +190,19 @@ bool ParseCache::restore() {
 }
 
 bool ParseCache::save() {
-  bool cacheAllowed =
-      m_parse->getCompileSourceFile()->getCommandLineParser()->cacheAllowed();
+  CommandLineParser* clp =
+      m_parse->getCompileSourceFile()->getCommandLineParser();
+  bool cacheAllowed = clp->cacheAllowed();
+  bool parseOnly = clp->parseOnly();
+
   if (!cacheAllowed) return true;
   std::string svFileName = m_parse->getPpFileName();
   std::string origFileName = svFileName;
-
+  if (parseOnly) {
+    SymbolId cacheDirId = clp->getCacheDir();
+    std::string cacheDirName = m_parse->getSymbol(cacheDirId);
+    origFileName = cacheDirName + "../" + origFileName;
+  }
   std::string cacheFileName = getCacheFileName_();
 
   flatbuffers::FlatBufferBuilder builder(1024);
@@ -209,12 +228,13 @@ bool ParseCache::save() {
     DesignElement& elem = fcontent->getDesignElements()[i];
     TimeInfo& info = elem.m_timeInfo;
     auto timeInfo = CACHE::CreateTimeInfo(
-      builder, static_cast<uint16_t>(info.m_type),
-      canonicalSymbols.getId(
-        m_parse->getCompileSourceFile()->getSymbolTable()->getSymbol(
-          info.m_fileId)),
-      info.m_line, static_cast<uint16_t>(info.m_timeUnit), info.m_timeUnitValue,
-      static_cast<uint16_t>(info.m_timePrecision), info.m_timePrecisionValue);
+        builder, static_cast<uint16_t>(info.m_type),
+        canonicalSymbols.getId(
+            m_parse->getCompileSourceFile()->getSymbolTable()->getSymbol(
+                info.m_fileId)),
+        info.m_line, static_cast<uint16_t>(info.m_timeUnit),
+        info.m_timeUnitValue, static_cast<uint16_t>(info.m_timePrecision),
+        info.m_timePrecisionValue);
     element_vec.push_back(PARSECACHE::CreateDesignElement(
         builder,
         canonicalSymbols.getId(
@@ -223,16 +243,18 @@ bool ParseCache::save() {
         canonicalSymbols.getId(
             m_parse->getCompileSourceFile()->getSymbolTable()->getSymbol(
                 elem.m_fileId)),
-        elem.m_type, elem.m_uniqueId, elem.m_line, elem.m_column, elem.m_endLine, elem.m_endColumn, timeInfo, elem.m_parent,
+        elem.m_type, elem.m_uniqueId, elem.m_line, elem.m_column,
+        elem.m_endLine, elem.m_endColumn, timeInfo, elem.m_parent,
         elem.m_node));
   }
   auto elementList = builder.CreateVector(element_vec);
 
   /* Cache the design objects */
-  std::vector<CACHE::VObject> object_vec = cacheVObjects(fcontent, canonicalSymbols,
-          *m_parse->getCompileSourceFile()->getSymbolTable(),
-          m_parse->getFileId(0));
-   auto objectList = builder.CreateVectorOfStructs(object_vec);
+  std::vector<CACHE::VObject> object_vec =
+      cacheVObjects(fcontent, canonicalSymbols,
+                    *m_parse->getCompileSourceFile()->getSymbolTable(),
+                    m_parse->getFileId(0));
+  auto objectList = builder.CreateVectorOfStructs(object_vec);
 
   /* Create Flatbuffers */
   auto ppcache = PARSECACHE::CreateParseCache(

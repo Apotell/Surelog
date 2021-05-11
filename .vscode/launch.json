@@ -294,6 +294,44 @@
             ]
         },
         {
+            "name": "HelloDesign",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/dbuild/bin/hellodesign",
+            "args": ["tests/ScratchPad.sv", "-parse", "-d", "uhdm", "-nobuiltin", "-d", "ast", "-nocache"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "EarlgreyScratch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/dbuild/bin/surelog",
+            "args": ["-DSURELOG_DIR=/home/alain/Surelog", "-DFPGA_XILINX=1", "-DPRIM_DEFAULT_IMPL=prim_pkg::ImplXilinx", "-DSYNTHESIS", "ibex_core.sv", "-parse", "-d", "uhdm", "-nobuiltin", "-d", "ast", "-nocache"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/third_party/tests/Earlgrey_nexysvideo/scratch",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
             "name": "SimpleParserTest",
             "type": "cppdbg",
             "request": "launch",
@@ -509,9 +547,28 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/dbuild/bin/surelog",
-            "args": ["-parse", "tests/ScratchPad.sv","-d", "inst" ,"-d", "ast", "-d", "uhdm","-nobuiltin", "-nocache", "-d", "vpi_ids", "-elabuhdm", "-d", "coveruhdm", "-replay"],
+            "args": ["-parse", "tests/ScratchPad.sv","-d", "inst" ,"-d", "ast", "-d", "uhdm","-nobuiltin", "-d", "vpi_ids", "-elabuhdm", "-d", "coveruhdm", "-replay", "-writepp", "-o", "ccc"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "ParseOnly",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/dbuild/bin/surelog",
+            "args": ["-parseonly", "-nobuiltin", "-o", "/home/alain/Surelog/ccc/slpp_all/../", "-l", "1_ScratchPad.sv.log", "/home/alain/Surelog/ccc/slpp_all/../slpp_all/work/tests_16772411270750708302/ScratchPad.sv" ,"-d", "ast", "-d", "uhdm", "-elabuhdm", "-replay"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/ccc/slpp_all",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",

@@ -24,9 +24,14 @@
 #ifndef SLAPI_H
 #define SLAPI_H
 
-typedef unsigned int NodeId;
-namespace SURELOG {
+#include <string>
+#include <vector>
 
+#include "ParserRuleContext.h"  // Antlr runtime
+#include "SourceCompile/VObjectTypes.h"
+
+namespace SURELOG {
+typedef uint32_t NodeId;  // as defined in SourceCompile/SymbolTable.h
 class ModuleDefinition;
 class FileContent;
 class SV3_1aPythonListener;
@@ -54,15 +59,16 @@ void SLaddError(ErrorContainer* container, const char* messageId,
                 const char* fileName, unsigned int line, unsigned int col,
                 const char* objectName);
 
-void SLaddErrorContext(SV3_1aPythonListener* prog, antlr4::ParserRuleContext* context,
+void SLaddErrorContext(SV3_1aPythonListener* prog,
+                       antlr4::ParserRuleContext* context,
                        const char* messageId, const char* objectName,
                        bool printColumn = 0);
 
 void SLaddMLErrorContext(SV3_1aPythonListener* prog,
                          antlr4::ParserRuleContext* context1,
-                         antlr4::ParserRuleContext* context2, const char* messageId,
-                         const char* objectName1, const char* objectName2,
-                         bool printColumn = 0);
+                         antlr4::ParserRuleContext* context2,
+                         const char* messageId, const char* objectName1,
+                         const char* objectName2, bool printColumn = 0);
 
 void SLaddMLError(ErrorContainer* container, const char* messageId,
                   const char* fileName1, unsigned int line1, unsigned int col1,
@@ -71,19 +77,21 @@ void SLaddMLError(ErrorContainer* container, const char* messageId,
                   const char* objectName2);
 
 /* File Listener API */
-std::string SLgetFile(SV3_1aPythonListener* prog, antlr4::ParserRuleContext* context);
+std::string SLgetFile(SV3_1aPythonListener* prog,
+                      antlr4::ParserRuleContext* context);
 
 int SLgetLine(SV3_1aPythonListener* prog, antlr4::ParserRuleContext* context);
 
 int SLgetColumn(SV3_1aPythonListener* prog, antlr4::ParserRuleContext* context);
 
-std::string SLgetText(SV3_1aPythonListener* prog, antlr4::ParserRuleContext* context);
+std::string SLgetText(SV3_1aPythonListener* prog,
+                      antlr4::ParserRuleContext* context);
 
 std::vector<std::string> SLgetTokens(SV3_1aPythonListener* prog,
                                      antlr4::ParserRuleContext* context);
 
-antlr4::ParserRuleContext* SLgetParentContext(SV3_1aPythonListener* prog,
-                                      antlr4::ParserRuleContext* context);
+antlr4::ParserRuleContext* SLgetParentContext(
+    SV3_1aPythonListener* prog, antlr4::ParserRuleContext* context);
 
 std::vector<antlr4::ParserRuleContext*> SLgetChildrenContext(
     SV3_1aPythonListener* prog, antlr4::ParserRuleContext* context);

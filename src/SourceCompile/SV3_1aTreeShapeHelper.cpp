@@ -20,35 +20,31 @@
  *
  * Created on June 25, 2017, 2:51 PM
  */
-
-#include "SourceCompile/SymbolTable.h"
-#include "CommandLine/CommandLineParser.h"
-#include "ErrorReporting/ErrorContainer.h"
-#include "SourceCompile/CompilationUnit.h"
-#include "SourceCompile/PreprocessFile.h"
-#include "SourceCompile/CompileSourceFile.h"
-#include "SourceCompile/Compiler.h"
-#include "SourceCompile/ParseFile.h"
+#include "SourceCompile/SV3_1aTreeShapeHelper.h"
 
 #include <cstdlib>
 #include <iostream>
-#include "antlr4-runtime.h"
-using namespace std;
-using namespace antlr4;
-using namespace SURELOG;
 
+#include "CommandLine/CommandLineParser.h"
+#include "ErrorReporting/ErrorContainer.h"
+#include "SourceCompile/CompilationUnit.h"
+#include "SourceCompile/CompileSourceFile.h"
+#include "SourceCompile/Compiler.h"
+#include "SourceCompile/ParseFile.h"
+#include "SourceCompile/PreprocessFile.h"
+#include "SourceCompile/SymbolTable.h"
+#include "Utils/ParseUtils.h"
+#include "antlr4-runtime.h"
 #include "parser/SV3_1aLexer.h"
 #include "parser/SV3_1aParser.h"
 #include "parser/SV3_1aParserBaseListener.h"
-#include "SourceCompile/SV3_1aTreeShapeHelper.h"
-using namespace antlr4;
-#include "Utils/ParseUtils.h"
-#include "SourceCompile/SV3_1aTreeShapeHelper.h"
 
+namespace SURELOG {
 SV3_1aTreeShapeHelper::SV3_1aTreeShapeHelper(ParseFile* pf,
                                              antlr4::CommonTokenStream* tokens,
                                              unsigned int lineOffset)
-    : CommonListenerHelper(), m_pf(pf),
+    : CommonListenerHelper(),
+      m_pf(pf),
       m_currentElement(NULL),
       m_lineOffset(lineOffset) {
   if (pf->getCompileSourceFile())
@@ -60,7 +56,8 @@ SV3_1aTreeShapeHelper::SV3_1aTreeShapeHelper(ParseFile* pf,
 
 SV3_1aTreeShapeHelper::SV3_1aTreeShapeHelper(ParseLibraryDef* pf,
                                              antlr4::CommonTokenStream* tokens)
-    : CommonListenerHelper(), m_pf(NULL),
+    : CommonListenerHelper(),
+      m_pf(NULL),
       m_currentElement(NULL),
       m_lineOffset(0),
       m_ppOutputFileLocation(false) {
@@ -70,8 +67,8 @@ SV3_1aTreeShapeHelper::SV3_1aTreeShapeHelper(ParseLibraryDef* pf,
 SV3_1aTreeShapeHelper::~SV3_1aTreeShapeHelper() {}
 
 void SV3_1aTreeShapeHelper::logError(ErrorDefinition::ErrorType error,
-                                     ParserRuleContext* ctx, std::string object,
-                                     bool printColumn) {
+                                     antlr4::ParserRuleContext* ctx,
+                                     std::string object, bool printColumn) {
   std::pair<int, int> lineCol = ParseUtils::getLineColumn(m_tokens, ctx);
 
   Location loc(
@@ -108,18 +105,19 @@ NodeId SV3_1aTreeShapeHelper::generateNodeId() {
   return m_pf->getCompilationUnit()->generateUniqueNodeId();
 }
 
-SymbolId SV3_1aTreeShapeHelper::registerSymbol(const std::string &symbol) {
+SymbolId SV3_1aTreeShapeHelper::registerSymbol(const std::string& symbol) {
   return m_pf->getSymbolTable()->registerSymbol(symbol);
 }
 
 void SV3_1aTreeShapeHelper::addNestedDesignElement(
-    ParserRuleContext* ctx, std::string name, DesignElement::ElemType elemtype,
-    VObjectType objtype) {
+    antlr4::ParserRuleContext* ctx, std::string name,
+    DesignElement::ElemType elemtype, VObjectType objtype) {
   SymbolId fileId;
   auto [line, column, endLine, endColumn] = getFileLine(ctx, fileId);
 
   DesignElement elem(registerSymbol(name), fileId, elemtype,
-                     generateDesignElemId(), line, column, endLine, endColumn, 0);
+                     generateDesignElemId(), line, column, endLine, endColumn,
+                     0);
   elem.m_context = ctx;
   elem.m_timeInfo =
       m_pf->getCompilationUnit()->getTimeInfo(m_pf->getFileId(line), line);
@@ -132,14 +130,15 @@ void SV3_1aTreeShapeHelper::addNestedDesignElement(
   m_nestedElements.push(m_currentElement);
 }
 
-void SV3_1aTreeShapeHelper::addDesignElement(ParserRuleContext* ctx,
+void SV3_1aTreeShapeHelper::addDesignElement(antlr4::ParserRuleContext* ctx,
                                              std::string name,
                                              DesignElement::ElemType elemtype,
                                              VObjectType objtype) {
   SymbolId fileId;
   auto [line, column, endLine, endColumn] = getFileLine(ctx, fileId);
   DesignElement elem(registerSymbol(name), fileId, elemtype,
-                     generateDesignElemId(), line, column, endLine, endColumn, 0);
+                     generateDesignElemId(), line, column, endLine, endColumn,
+                     0);
   elem.m_context = ctx;
   elem.m_timeInfo =
       m_pf->getCompilationUnit()->getTimeInfo(m_pf->getFileId(line), line);
@@ -147,8 +146,9 @@ void SV3_1aTreeShapeHelper::addDesignElement(ParserRuleContext* ctx,
   m_currentElement = &m_fileContent->getDesignElements().back();
 }
 
-std::tuple<unsigned int, unsigned short, unsigned int, unsigned short> SV3_1aTreeShapeHelper::getFileLine(ParserRuleContext* ctx,
-                                                SymbolId& fileId) {
+std::tuple<unsigned int, unsigned short, unsigned int, unsigned short>
+SV3_1aTreeShapeHelper::getFileLine(antlr4::ParserRuleContext* ctx,
+                                   SymbolId& fileId) {
   std::pair<int, int> lineCol = ParseUtils::getLineColumn(m_tokens, ctx);
   std::pair<int, int> endLineCol = ParseUtils::getEndLineColumn(m_tokens, ctx);
   unsigned int line = 0;
@@ -183,3 +183,4 @@ std::pair<double, TimeInfo::Unit> SV3_1aTreeShapeHelper::getTimeValue(
 
   return std::make_pair(actual_value, unit);
 }
+}  // namespace SURELOG

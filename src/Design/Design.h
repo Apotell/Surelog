@@ -23,35 +23,35 @@
 
 #ifndef DESIGN_H
 #define DESIGN_H
+
+#include "Config/ConfigSet.h"
+#include "Design/BindStmt.h"
+#include "Design/DefParam.h"
 #include "Design/ModuleDefinition.h"
 #include "Design/ModuleInstance.h"
-#include "Design/DefParam.h"
 #include "Library/LibrarySet.h"
-#include "Config/ConfigSet.h"
 #include "Package/Package.h"
 #include "Testbench/Program.h"
 
 namespace SURELOG {
 
 class Design final {
- friend class CompileDesign;
- friend class AnalyzeFile;
- friend class PreprocessFile;
- friend class ParseFile;
- friend class Compiler;
- friend class PPCache;
- friend class ParseCache;
- friend class SV3_1aPpTreeShapeListener;
- friend class SV3_1aTreeShapeListener;
- friend class Builtin;
- friend class DesignElaboration;
- friend class SVLibShapeListener;
+  friend class CompileDesign;
+  friend class AnalyzeFile;
+  friend class PreprocessFile;
+  friend class ParseFile;
+  friend class Compiler;
+  friend class PPCache;
+  friend class ParseCache;
+  friend class SV3_1aPpTreeShapeListener;
+  friend class SV3_1aTreeShapeListener;
+  friend class Builtin;
+  friend class DesignElaboration;
+  friend class SVLibShapeListener;
 
  public:
   Design(ErrorContainer* errors, LibrarySet* librarySet, ConfigSet* configSet)
-      : m_errors(errors),
-        m_librarySet(librarySet),
-        m_configSet(configSet) {}
+      : m_errors(errors), m_librarySet(librarySet), m_configSet(configSet) {}
 
   Design(const Design& orig) = delete;
 
@@ -131,8 +131,15 @@ class Design final {
 
   ErrorContainer* getErrorContainer() { return m_errors; }
 
- protected:
+  typedef std::multimap<const std::string, BindStmt*> BindMap;
 
+  BindMap& getBindMap() { return m_bindMap; }
+
+  std::vector<BindStmt*> getBindStmts(const std::string& targetName);
+
+  void addBindStmt(const std::string& targetName, BindStmt* stmt);
+
+ protected:
   // Thread-safe
   void addFileContent(SymbolId fileId, FileContent* content);
 
@@ -174,8 +181,7 @@ class Design final {
                                 ModuleInstance* scope);
   void addDefParam_(std::vector<std::string>& path, const FileContent* fC,
                     NodeId nodeId, Value* value, DefParam* parent);
-  DefParam* getDefParam_(std::vector<std::string>& path,
-                         DefParam* parent);
+  DefParam* getDefParam_(std::vector<std::string>& path, DefParam* parent);
 
   ErrorContainer* m_errors;
 
@@ -204,6 +210,8 @@ class Design final {
   ClassNameClassDefinitionMap m_uniqueClassDefinitions;
 
   std::vector<std::string> m_orderedPackageNames;
+
+  BindMap m_bindMap;
 };
 
 }  // namespace SURELOG

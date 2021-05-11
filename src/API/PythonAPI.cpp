@@ -20,52 +20,44 @@
  *
  * Created on May 13, 2017, 4:42 PM
  */
+#include "API/PythonAPI.h"
 
 #include <string.h>
-#include "ParserRuleContext.h"
 
-#include "SourceCompile/SymbolTable.h"
-#include "Utils/StringUtils.h"
-#include "Utils/FileUtils.h"
+#include <cstdio>
+#include <cstdlib>
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <string>
+
 #include "CommandLine/CommandLineParser.h"
 #include "ErrorReporting/ErrorContainer.h"
+#include "ParserRuleContext.h"
 #include "SourceCompile/CompilationUnit.h"
-#include "SourceCompile/PreprocessFile.h"
 #include "SourceCompile/CompileSourceFile.h"
 #include "SourceCompile/Compiler.h"
 #include "SourceCompile/ParseFile.h"
-#include "antlr4-runtime.h"
-
-using namespace std;
-using namespace antlr4;
-
+#include "SourceCompile/PreprocessFile.h"
+#include "SourceCompile/PythonListen.h"
+#include "SourceCompile/SymbolTable.h"
+#include "Utils/FileUtils.h"
+#include "Utils/StringUtils.h"
 #include "parser/SV3_1aParserBaseListener.h"
 
-#include "API/SV3_1aPythonListener.h"
-
-using namespace SURELOG;
-
-#include <sstream>
-#include <string>
-#include <fstream>
-#include <iostream>
-#include <cstdio>
-
-#include "API/PythonAPI.h"
-
+// Antlr runtime. TODO: add proper prefix.
 #include "API/SLAPI.h"
-
 #include "ParserRuleContext.h"
+#include "antlr4-runtime.h"
 
 #ifdef SURELOG_WITH_PYTHON
-#include "API/slapi_wrap.cxx"
+#include "API/SV3_1aPythonListener.h"
 #include "API/slapi_scripts.h"
+#include "API/slapi_wrap.cxx"
 #include "API/vobjecttypes_py.h"
 #endif
 
-#include <cstdlib>
-#include "SourceCompile/PythonListen.h"
-
+namespace SURELOG {
 std::string PythonAPI::m_invalidScriptResult = "INVALID_PYTHON_SCRIPT_RESULT";
 
 PyThreadState* PythonAPI::m_mainThreadState = NULL;
@@ -81,8 +73,6 @@ bool PythonAPI::m_strictMode = false;
 std::string PythonAPI::m_builtinPath;
 
 PythonAPI::PythonAPI() {}
-
-PythonAPI::PythonAPI(const PythonAPI& orig) {}
 
 PythonAPI::~PythonAPI() {}
 
@@ -101,25 +91,25 @@ static PyObject* PyInit_slapi(void) { return PyModule_Create(&SLAPI_module); }
 #endif
 
 void PythonAPI::shutdown() {
-  #ifdef SURELOG_WITH_PYTHON
+#ifdef SURELOG_WITH_PYTHON
   PyEval_RestoreThread(m_mainThreadState);
   Py_Finalize();
-  #endif
+#endif
 }
 
 bool PythonAPI::loadScript(std::string name, bool check) {
-  #ifdef SURELOG_WITH_PYTHON
+#ifdef SURELOG_WITH_PYTHON
   PyEval_AcquireThread(m_mainThreadState);
   bool status = loadScript_(name, check);
   PyEval_ReleaseThread(m_mainThreadState);
   return status;
-  #else
+#else
   return false;
-  #endif
+#endif
 }
 
 bool PythonAPI::loadScript_(std::string name, bool check) {
-#ifdef SURELOG_WITH_PYTHON  
+#ifdef SURELOG_WITH_PYTHON
   if (FileUtils::fileExists(name)) {
     FILE* fp = fopen(name.c_str(), "r");
     PyRun_SimpleFile(fp, name.c_str());
@@ -164,7 +154,6 @@ void PythonAPI::shutdown(PyThreadState* interp) {
 }
 
 void PythonAPI::loadScriptsInInterp_() {
-
   bool waiverLoaded = false;
   std::string waivers = "./slwaivers.py";
   if (FileUtils::fileExists(waivers)) {
@@ -178,7 +167,6 @@ void PythonAPI::loadScriptsInInterp_() {
     }
   }
 
-
   bool messageFormatLoaded = false;
   std::string format = "./slformatmsg.py";
   if (FileUtils::fileExists(format)) {
@@ -191,7 +179,6 @@ void PythonAPI::loadScriptsInInterp_() {
       messageFormatLoaded = loadScript_(format);
     }
   }
-
 
   if (!m_listenerScript.empty()) {
     if (FileUtils::fileExists(m_listenerScript)) {
@@ -216,18 +203,18 @@ void PythonAPI::loadScriptsInInterp_() {
   }
 }
 
-void PythonAPI::loadScripts () {
-#ifdef SURELOG_WITH_PYTHON  
+void PythonAPI::loadScripts() {
+#ifdef SURELOG_WITH_PYTHON
   PyEval_AcquireThread(m_mainThreadState);
 
   loadScriptsInInterp_();
 
   PyEval_ReleaseThread(m_mainThreadState);
-#endif  
+#endif
 }
 
-void PythonAPI::initInterp_ () {
- #ifdef SURELOG_WITH_PYTHON
+void PythonAPI::initInterp_() {
+#ifdef SURELOG_WITH_PYTHON
   // Loads the python SWIG generated defs
   std::string script;
   for (auto s : slapi_scripts) {
@@ -242,7 +229,7 @@ void PythonAPI::initInterp_ () {
   PyRun_SimpleString("sys.path.append(\".\")");
   PyRun_SimpleString(
       std::string("sys.path.append(\"" + m_programPath + "\")").c_str());
-#endif      
+#endif
 }
 
 void PythonAPI::init(int argc, const char** argv) {
@@ -250,15 +237,15 @@ void PythonAPI::init(int argc, const char** argv) {
   m_programPath = StringUtils::replaceAll(m_programPath, "\\", "/");
   m_programPath = StringUtils::rtrim(m_programPath, '/');
   for (int i = 1; i < argc; i++) {
-      if (!strcmp(argv[i], "-builtin")) {
-          if (i < argc - 1) {
-            m_builtinPath = argv[i + 1];
-          }
+    if (!strcmp(argv[i], "-builtin")) {
+      if (i < argc - 1) {
+        m_builtinPath = argv[i + 1];
       }
+    }
   }
   // Before Python 3.7, the parameter to SetProgramName() was not a
   // const wchar_t* but a wchar_t (even though never written to).
-#ifdef SURELOG_WITH_PYTHON   
+#ifdef SURELOG_WITH_PYTHON
   static wchar_t progname[] = L"surelog";
 
   Py_SetProgramName(progname);
@@ -273,13 +260,13 @@ void PythonAPI::init(int argc, const char** argv) {
   initInterp_();
 
   PyEval_ReleaseThread(m_mainThreadState);
-#endif  
+#endif
 }
 
 void PythonAPI::evalScript(std::string function, SV3_1aPythonListener* listener,
                            parser_rule_context* ctx1) {
-#ifdef SURELOG_WITH_PYTHON                               
-  antlr4::ParserRuleContext* ctx = (antlr4::ParserRuleContext*) ctx1;
+#ifdef SURELOG_WITH_PYTHON
+  antlr4::ParserRuleContext* ctx = (antlr4::ParserRuleContext*)ctx1;
   PyEval_AcquireThread(listener->getPyThreadState());
   PyObject *pModuleName, *pModule, *pFunc;
   PyObject *pArgs, *pValue;
@@ -307,13 +294,13 @@ void PythonAPI::evalScript(std::string function, SV3_1aPythonListener* listener,
   Py_XDECREF(pFunc);
   Py_DECREF(pModule);
   PyEval_ReleaseThread(listener->getPyThreadState());
-#endif  
+#endif
 }
 
 std::string PythonAPI::evalScript(std::string module, std::string function,
                                   std::vector<std::string> args,
                                   PyThreadState* interp) {
-#ifdef SURELOG_WITH_PYTHON                                    
+#ifdef SURELOG_WITH_PYTHON
   PyEval_AcquireThread(interp);
 
   std::string result;
@@ -385,7 +372,7 @@ std::string PythonAPI::evalScript(std::string module, std::string function,
 
 bool PythonAPI::evalScriptPerFile(std::string script, ErrorContainer* errors,
                                   FileContent* fC, PyThreadState* interp) {
-#ifdef SURELOG_WITH_PYTHON                                    
+#ifdef SURELOG_WITH_PYTHON
   PyEval_AcquireThread(interp);
   loadScript_(script);
   std::string function = "slUserCallbackPerFile";
@@ -419,11 +406,11 @@ bool PythonAPI::evalScriptPerFile(std::string script, ErrorContainer* errors,
   return true;
 #else
   return false;
-#endif  
+#endif
 }
 
 bool PythonAPI::evalScript(std::string script, Design* design) {
-#ifdef SURELOG_WITH_PYTHON  
+#ifdef SURELOG_WITH_PYTHON
   PyEval_AcquireThread(m_mainThreadState);
   loadScript_(script);
   std::string function = "slUserCallbackPerDesign";
@@ -440,9 +427,8 @@ bool PythonAPI::evalScript(std::string script, Design* design) {
     return false;
   }
   pArgs = PyTuple_New(2);
-  pValue = SWIG_NewPointerObj(
-      SWIG_as_voidptr(design->getErrorContainer()),
-      SWIGTYPE_p_SURELOG__ErrorContainer, 0 | 0);
+  pValue = SWIG_NewPointerObj(SWIG_as_voidptr(design->getErrorContainer()),
+                              SWIGTYPE_p_SURELOG__ErrorContainer, 0 | 0);
   PyTuple_SetItem(pArgs, 0, pValue);
   pValue = SWIG_NewPointerObj(SWIG_as_voidptr(design),
                               SWIGTYPE_p_SURELOG__Design, 0 | 0);
@@ -457,5 +443,7 @@ bool PythonAPI::evalScript(std::string script, Design* design) {
   return true;
 #else
   return false;
-#endif    
+#endif
 }
+
+}  // namespace SURELOG

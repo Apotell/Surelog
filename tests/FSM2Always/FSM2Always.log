@@ -877,6 +877,7 @@ n<> u<833> t<Top_level_rule> l<6:0> el<92:0>
 ====== UHDM =======
 design: (work@fsm_using_always)
 |vpiName:work@fsm_using_always
+|vpiElaborated:1
 |uhdmallPackages:
 \_package: builtin (builtin::), parent:work@fsm_using_always
   |vpiDefName:builtin
@@ -913,13 +914,13 @@ design: (work@fsm_using_always)
         |vpiClassDefn:
         \_class_defn: (work@mailbox) ${SURELOG_DIR}/build/bin/sv/builtin.sv:4: , endln:30:8, parent:work@fsm_using_always
     |vpiIODecl:
-    \_io_decl: (bound), parent:work@mailbox::new
+    \_io_decl: (bound)
       |vpiName:bound
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:6:16, endln:6:19, parent:bound
+      \_int_typespec: , line:6:16, endln:6:19
       |vpiExpr:
-      \_constant: , line:6:28, endln:6:29, parent:bound
+      \_constant: , line:6:28, endln:6:29
         |vpiConstType:9
         |vpiDecompile:0
         |vpiSize:64
@@ -948,8 +949,10 @@ design: (work@fsm_using_always)
     |vpiVisibility:1
     |vpiName:try_put
     |vpiFullName:work@mailbox::try_put
+    |vpiReturn:
+    \_logic_var: 
     |vpiIODecl:
-    \_io_decl: (message), parent:work@mailbox::try_put
+    \_io_decl: (message)
       |vpiName:message
       |vpiDirection:1
   |vpiMethod:
@@ -971,7 +974,7 @@ design: (work@fsm_using_always)
     |vpiReturn:
     \_int_var: , line:21:11, endln:21:14
     |vpiIODecl:
-    \_io_decl: (message), parent:work@mailbox::try_get
+    \_io_decl: (message)
       |vpiName:message
       |vpiDirection:6
   |vpiMethod:
@@ -993,7 +996,7 @@ design: (work@fsm_using_always)
     |vpiReturn:
     \_int_var: , line:27:11, endln:27:14
     |vpiIODecl:
-    \_io_decl: (message), parent:work@mailbox::try_peek
+    \_io_decl: (message)
       |vpiName:message
       |vpiDirection:6
 |uhdmallClasses:
@@ -1132,13 +1135,13 @@ design: (work@fsm_using_always)
         |vpiClassDefn:
         \_class_defn: (work@semaphore) ${SURELOG_DIR}/build/bin/sv/builtin.sv:58: , endln:72:8, parent:work@fsm_using_always
     |vpiIODecl:
-    \_io_decl: (keyCount), parent:work@semaphore::new
+    \_io_decl: (keyCount)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:60:15, endln:60:18, parent:keyCount
+      \_int_typespec: , line:60:15, endln:60:18
       |vpiExpr:
-      \_constant: , line:60:30, endln:60:31, parent:keyCount
+      \_constant: , line:60:30, endln:60:31
         |vpiConstType:9
         |vpiDecompile:0
         |vpiSize:64
@@ -1154,9 +1157,9 @@ design: (work@fsm_using_always)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:63:11, endln:63:14, parent:keyCount
+      \_int_typespec: , line:63:11, endln:63:14
       |vpiExpr:
-      \_constant: , line:63:26, endln:63:27, parent:keyCount
+      \_constant: , line:63:26, endln:63:27
         |vpiConstType:9
         |vpiDecompile:1
         |vpiSize:64
@@ -1172,9 +1175,9 @@ design: (work@fsm_using_always)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:66:11, endln:66:14, parent:keyCount
+      \_int_typespec: , line:66:11, endln:66:14
       |vpiExpr:
-      \_constant: , line:66:26, endln:66:27, parent:keyCount
+      \_constant: , line:66:26, endln:66:27
         |vpiConstType:9
         |vpiDecompile:1
         |vpiSize:64
@@ -1188,13 +1191,13 @@ design: (work@fsm_using_always)
     |vpiReturn:
     \_int_var: , line:69:11, endln:69:14
     |vpiIODecl:
-    \_io_decl: (keyCount), parent:work@semaphore::try_get
+    \_io_decl: (keyCount)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:69:23, endln:69:26, parent:keyCount
+      \_int_typespec: , line:69:23, endln:69:26
       |vpiExpr:
-      \_constant: , line:69:38, endln:69:39, parent:keyCount
+      \_constant: , line:69:38, endln:69:39
         |vpiConstType:9
         |vpiDecompile:1
         |vpiSize:64
@@ -1296,7 +1299,7 @@ design: (work@fsm_using_always)
               \_parameter: (work@fsm_using_always.IDLE), line:24:10, endln:24:24, parent:work@fsm_using_always
                 |vpiName:IDLE
                 |vpiFullName:work@fsm_using_always.IDLE
-                |UINT:1
+                |BIN:001
             |vpiStmt:
             \_if_else: , line:33:10, endln:39:17
               |vpiCondition:
@@ -1338,7 +1341,7 @@ design: (work@fsm_using_always)
                     \_parameter: (work@fsm_using_always.GNT0), line:24:25, endln:24:38, parent:work@fsm_using_always
                       |vpiName:GNT0
                       |vpiFullName:work@fsm_using_always.GNT0
-                      |UINT:2
+                      |BIN:010
               |vpiElseStmt:
               \_if_else: , line:35:27, endln:35:40
                 |vpiCondition:
@@ -1380,7 +1383,7 @@ design: (work@fsm_using_always)
                       \_parameter: (work@fsm_using_always.GNT1), line:24:39, endln:24:52, parent:work@fsm_using_always
                         |vpiName:GNT1
                         |vpiFullName:work@fsm_using_always.GNT1
-                        |UINT:4
+                        |BIN:100
                 |vpiElseStmt:
                 \_begin: (work@fsm_using_always.FSM_COMBO), line:37:23, endln:39:17
                   |vpiFullName:work@fsm_using_always.FSM_COMBO
@@ -2001,6 +2004,7 @@ design: (work@fsm_using_always)
     \_parameter: (work@fsm_using_always.SIZE), line:23:10, endln:23:18, parent:work@fsm_using_always
       |vpiName:SIZE
       |vpiFullName:work@fsm_using_always.SIZE
+      |UINT:3
   |vpiParamAssign:
   \_param_assign: , line:24:10, endln:24:24, parent:work@fsm_using_always
     |vpiRhs:
@@ -2013,6 +2017,7 @@ design: (work@fsm_using_always)
     \_parameter: (work@fsm_using_always.IDLE), line:24:10, endln:24:24, parent:work@fsm_using_always
       |vpiName:IDLE
       |vpiFullName:work@fsm_using_always.IDLE
+      |BIN:001
   |vpiParamAssign:
   \_param_assign: , line:24:25, endln:24:38, parent:work@fsm_using_always
     |vpiRhs:
@@ -2025,6 +2030,7 @@ design: (work@fsm_using_always)
     \_parameter: (work@fsm_using_always.GNT0), line:24:25, endln:24:38, parent:work@fsm_using_always
       |vpiName:GNT0
       |vpiFullName:work@fsm_using_always.GNT0
+      |BIN:010
   |vpiParamAssign:
   \_param_assign: , line:24:39, endln:24:52, parent:work@fsm_using_always
     |vpiRhs:
@@ -2037,6 +2043,7 @@ design: (work@fsm_using_always)
     \_parameter: (work@fsm_using_always.GNT1), line:24:39, endln:24:52, parent:work@fsm_using_always
       |vpiName:GNT1
       |vpiFullName:work@fsm_using_always.GNT1
+      |BIN:100
   |vpiParameter:
   \_parameter: (work@fsm_using_always.SIZE), line:23:10, endln:23:18, parent:work@fsm_using_always
   |vpiParameter:
@@ -2157,7 +2164,7 @@ design: (work@fsm_using_always)
               \_parameter: (work@fsm_using_always.IDLE), line:24:10, endln:24:24, parent:work@fsm_using_always
                 |vpiName:IDLE
                 |vpiFullName:work@fsm_using_always.IDLE
-                |UINT:1
+                |BIN:001
             |vpiStmt:
             \_if_else: , line:33:10, endln:39:17
               |vpiCondition:
@@ -2196,7 +2203,7 @@ design: (work@fsm_using_always)
                     \_parameter: (work@fsm_using_always.GNT0), line:24:25, endln:24:38, parent:work@fsm_using_always
                       |vpiName:GNT0
                       |vpiFullName:work@fsm_using_always.GNT0
-                      |UINT:2
+                      |BIN:010
               |vpiElseStmt:
               \_if_else: , line:35:27, endln:35:40
                 |vpiCondition:
@@ -2235,7 +2242,7 @@ design: (work@fsm_using_always)
                       \_parameter: (work@fsm_using_always.GNT1), line:24:39, endln:24:52, parent:work@fsm_using_always
                         |vpiName:GNT1
                         |vpiFullName:work@fsm_using_always.GNT1
-                        |UINT:4
+                        |BIN:100
                 |vpiElseStmt:
                 \_begin: (work@fsm_using_always.FSM_COMBO), line:37:23, endln:39:17
                   |vpiFullName:work@fsm_using_always.FSM_COMBO

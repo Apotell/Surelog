@@ -24,7 +24,10 @@
 #ifndef COMPILEDESIGN_H
 #define COMPILEDESIGN_H
 
+#include <mutex>
+
 #include "Serializer.h"
+#include "SourceCompile/Compiler.h"
 #include "sv_vpi_user.h"
 
 namespace SURELOG {
@@ -32,7 +35,7 @@ namespace SURELOG {
 void decompile(ValuedComponentI* instance);
 
 class CompileDesign {
-public:
+ public:
   CompileDesign(Compiler* compiler);
   virtual ~CompileDesign() {}  // Used in MockCompileDesign
 
@@ -40,13 +43,12 @@ public:
   bool elaborate();
   vpiHandle writeUHDM(const std::string& fileName);
 
-
   Compiler* getCompiler() { return m_compiler; }
   virtual UHDM::Serializer& getSerializer() { return m_serializer; }
   void lockSerializer() { m_serializerMutex.lock(); }
   void unlockSerializer() { m_serializerMutex.unlock(); }
 
-private:
+ private:
   CompileDesign(const CompileDesign& orig) = delete;
 
   template <class ObjectType, class ObjectMapType, typename FunctorType>

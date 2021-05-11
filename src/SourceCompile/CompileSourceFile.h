@@ -23,12 +23,12 @@
 
 #ifndef COMPILESOURCEFILE_H
 #define COMPILESOURCEFILE_H
-#include "API/PythonAPI.h"
 #include <string>
 #include <vector>
 
-#include "SourceCompile/ParseFile.h"
+#include "API/PythonAPI.h"
 #include "SourceCompile/AnalyzeFile.h"
+#include "SourceCompile/ParseFile.h"
 #include "SourceCompile/PreprocessFile.h"
 
 namespace SURELOG {
@@ -70,9 +70,11 @@ class CompileSourceFile {
                                    PreprocessFile::AntlrParserHandler* pp);
   PreprocessFile::AntlrParserHandler* getAntlrPpHandlerForId(SymbolId);
 
+#ifdef SURELOG_WITH_PYTHON
   void setPythonInterp(PyThreadState* interpState);
   void shutdownPythonInterp();
   PyThreadState* getPythonInterp() { return m_interpState; }
+#endif
 
   void setSymbolTable(SymbolTable* symbols);
   void setErrorContainer(ErrorContainer* errors) { m_errors = errors; }
@@ -97,22 +99,24 @@ class CompileSourceFile {
   bool pythonAPI_();
 
   SymbolId m_fileId;
-  CommandLineParser* m_commandLineParser;
-  ErrorContainer* m_errors;
-  Compiler* m_compiler;
-  PreprocessFile* m_pp;
-  SymbolTable* m_symbolTable;
+  CommandLineParser* m_commandLineParser = nullptr;
+  ErrorContainer* m_errors = nullptr;
+  Compiler* m_compiler = nullptr;
+  PreprocessFile* m_pp = nullptr;
+  SymbolTable* m_symbolTable = nullptr;
   std::vector<PreprocessFile*> m_ppIncludeVec;
-  ParseFile* m_parser;
+  ParseFile* m_parser = nullptr;
   CompilationUnit* m_compilationUnit;
   Action m_action;
   SymbolId m_ppResultFileId;
   std::map<SymbolId, PreprocessFile::AntlrParserHandler*>
       m_antlrPpMap;  // Preprocessor Antlr Handlers (One per included file)
-  PyThreadState* m_interpState;
-  PythonListen* m_pythonListener;
-  AnalyzeFile* m_fileAnalyzer;
-  Library* m_library;
+#ifdef SURELOG_WITH_PYTHON
+  PyThreadState* m_interpState = nullptr;
+  PythonListen* m_pythonListener = nullptr;
+#endif
+  AnalyzeFile* m_fileAnalyzer = nullptr;
+  Library* m_library = nullptr;
 };
 
 };  // namespace SURELOG

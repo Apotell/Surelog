@@ -24,15 +24,16 @@
 #ifndef LIBRARYSET_H
 #define LIBRARYSET_H
 
-#include "Library/Library.h"
-
-#include <vector>
 #include <string_view>
+#include <vector>
+
+#include "ErrorReporting/ErrorContainer.h"
+#include "Library/Library.h"
 
 namespace SURELOG {
 
 class LibrarySet final {
-public:
+ public:
   LibrarySet();
 
   void addLibrary(const Library& lib) { m_libraries.push_back(lib); }
@@ -42,7 +43,7 @@ public:
   void checkErrors(SymbolTable* symbols, ErrorContainer* errors);
   std::string report(SymbolTable* symbols);
 
-private:
+ private:
   LibrarySet(const LibrarySet& orig) = default;
   std::vector<Library> m_libraries;
 };

@@ -278,6 +278,7 @@ n<> u<236> t<Top_level_rule> l<1:0> el<31:0>
 ====== UHDM =======
 design: (work@top)
 |vpiName:work@top
+|vpiElaborated:1
 |uhdmallPackages:
 \_package: builtin (builtin::), parent:work@top
   |vpiDefName:builtin
@@ -314,13 +315,13 @@ design: (work@top)
         |vpiClassDefn:
         \_class_defn: (work@mailbox) ${SURELOG_DIR}/build/bin/sv/builtin.sv:4: , endln:30:8, parent:work@top
     |vpiIODecl:
-    \_io_decl: (bound), parent:work@mailbox::new
+    \_io_decl: (bound)
       |vpiName:bound
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:6:16, endln:6:19, parent:bound
+      \_int_typespec: , line:6:16, endln:6:19
       |vpiExpr:
-      \_constant: , line:6:28, endln:6:29, parent:bound
+      \_constant: , line:6:28, endln:6:29
         |vpiConstType:9
         |vpiDecompile:0
         |vpiSize:64
@@ -349,8 +350,10 @@ design: (work@top)
     |vpiVisibility:1
     |vpiName:try_put
     |vpiFullName:work@mailbox::try_put
+    |vpiReturn:
+    \_logic_var: 
     |vpiIODecl:
-    \_io_decl: (message), parent:work@mailbox::try_put
+    \_io_decl: (message)
       |vpiName:message
       |vpiDirection:1
   |vpiMethod:
@@ -372,7 +375,7 @@ design: (work@top)
     |vpiReturn:
     \_int_var: , line:21:11, endln:21:14
     |vpiIODecl:
-    \_io_decl: (message), parent:work@mailbox::try_get
+    \_io_decl: (message)
       |vpiName:message
       |vpiDirection:6
   |vpiMethod:
@@ -394,7 +397,7 @@ design: (work@top)
     |vpiReturn:
     \_int_var: , line:27:11, endln:27:14
     |vpiIODecl:
-    \_io_decl: (message), parent:work@mailbox::try_peek
+    \_io_decl: (message)
       |vpiName:message
       |vpiDirection:6
 |uhdmallClasses:
@@ -533,13 +536,13 @@ design: (work@top)
         |vpiClassDefn:
         \_class_defn: (work@semaphore) ${SURELOG_DIR}/build/bin/sv/builtin.sv:58: , endln:72:8, parent:work@top
     |vpiIODecl:
-    \_io_decl: (keyCount), parent:work@semaphore::new
+    \_io_decl: (keyCount)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:60:15, endln:60:18, parent:keyCount
+      \_int_typespec: , line:60:15, endln:60:18
       |vpiExpr:
-      \_constant: , line:60:30, endln:60:31, parent:keyCount
+      \_constant: , line:60:30, endln:60:31
         |vpiConstType:9
         |vpiDecompile:0
         |vpiSize:64
@@ -555,9 +558,9 @@ design: (work@top)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:63:11, endln:63:14, parent:keyCount
+      \_int_typespec: , line:63:11, endln:63:14
       |vpiExpr:
-      \_constant: , line:63:26, endln:63:27, parent:keyCount
+      \_constant: , line:63:26, endln:63:27
         |vpiConstType:9
         |vpiDecompile:1
         |vpiSize:64
@@ -573,9 +576,9 @@ design: (work@top)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:66:11, endln:66:14, parent:keyCount
+      \_int_typespec: , line:66:11, endln:66:14
       |vpiExpr:
-      \_constant: , line:66:26, endln:66:27, parent:keyCount
+      \_constant: , line:66:26, endln:66:27
         |vpiConstType:9
         |vpiDecompile:1
         |vpiSize:64
@@ -589,13 +592,13 @@ design: (work@top)
     |vpiReturn:
     \_int_var: , line:69:11, endln:69:14
     |vpiIODecl:
-    \_io_decl: (keyCount), parent:work@semaphore::try_get
+    \_io_decl: (keyCount)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:69:23, endln:69:26, parent:keyCount
+      \_int_typespec: , line:69:23, endln:69:26
       |vpiExpr:
-      \_constant: , line:69:38, endln:69:39, parent:keyCount
+      \_constant: , line:69:38, endln:69:39
         |vpiConstType:9
         |vpiDecompile:1
         |vpiSize:64
@@ -793,7 +796,7 @@ design: (work@top)
       \_bit_select: (mode), parent:csr_pmp_cfg_ie.mode[0]
         |vpiName:mode
         |vpiIndex:
-        \_constant: , line:25:36, endln:25:37, parent:mode
+        \_constant: , line:25:36, endln:25:37
           |vpiConstType:9
           |vpiDecompile:0
           |vpiSize:64
@@ -871,18 +874,17 @@ design: (work@top)
   |vpiNet:
   \_logic_net: (work@top.third), line:26:7, endln:26:12
   |vpiVariables:
-  \_array_var: (work@top.csr_pmp_cfg_i), parent:work@top
+  \_array_var: (work@top.csr_pmp_cfg_i), line:16:16, endln:16:29, parent:work@top
     |vpiArrayType:1
     |vpiName:csr_pmp_cfg_i
     |vpiFullName:work@top.csr_pmp_cfg_i
+    |vpiAutomatic:1
     |vpiRandType:1
     |vpiVisibility:1
     |vpiSize:4
     |vpiReg:
-    \_struct_var: (work@top.csr_pmp_cfg_i), line:16:16, endln:16:29, parent:work@top.csr_pmp_cfg_i
+    \_struct_var: (work@top.csr_pmp_cfg_i), parent:work@top.csr_pmp_cfg_i
       |vpiFullName:work@top.csr_pmp_cfg_i
-      |vpiAutomatic:1
-      |vpiVisibility:1
       |vpiTypespec:
       \_struct_typespec: (pmp_cfg_t), line:11:9, endln:11:15
     |vpiRange:
@@ -935,83 +937,11 @@ design: (work@top)
     |vpiTypespec:
     \_enum_typespec: (pmp_cfg_enum), line:5:3, endln:5:15
   |vpiTypedef:
-  \_enum_typespec: (pmp_cfg_enum), line:5:3, endln:5:15, parent:work@top
-    |vpiName:pmp_cfg_enum
-    |vpiBaseTypespec:
-    \_logic_typespec: , line:3:14, endln:3:19, parent:pmp_cfg_enum
-      |vpiRange:
-      \_range: , line:3:21, endln:3:24
-        |vpiLeftRange:
-        \_constant: , line:3:21, endln:3:22
-          |vpiConstType:9
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-        |vpiRightRange:
-        \_constant: , line:3:23, endln:3:24
-          |vpiConstType:9
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-    |vpiEnumConst:
-    \_enum_const: (PMP_MODE_OFF), line:4:3, endln:4:15, parent:pmp_cfg_enum
-      |vpiName:PMP_MODE_OFF
-      |vpiDecompile:2'b00
-      |UINT:0
-      |vpiSize:2
+  \_enum_typespec: (pmp_cfg_enum), line:5:3, endln:5:15
   |vpiTypedef:
-  \_struct_typespec: (pmp_cfg_struct), line:7:9, endln:7:15, parent:work@top
-    |vpiPacked:1
-    |vpiName:pmp_cfg_struct
-    |vpiTypespecMember:
-    \_typespec_member: (a), line:8:9, endln:8:10, parent:pmp_cfg_struct
-      |vpiName:a
-      |vpiTypespec:
-      \_logic_typespec: , line:8:3, endln:8:8, parent:a
+  \_struct_typespec: (pmp_cfg_struct), line:7:9, endln:7:15
   |vpiTypedef:
-  \_struct_typespec: (pmp_cfg_t), line:11:9, endln:11:15, parent:work@top
-    |vpiPacked:1
-    |vpiName:pmp_cfg_t
-    |vpiTypespecMember:
-    \_typespec_member: (mode), line:12:16, endln:12:20, parent:pmp_cfg_t
-      |vpiName:mode
-      |vpiTypespec:
-      \_enum_typespec: (pmp_cfg_enum), line:5:3, endln:5:15, parent:mode
-        |vpiName:pmp_cfg_enum
-        |vpiBaseTypespec:
-        \_logic_typespec: , line:3:14, endln:3:19, parent:pmp_cfg_enum
-          |vpiRange:
-          \_range: , line:3:21, endln:3:24
-            |vpiLeftRange:
-            \_constant: , line:3:21, endln:3:22
-              |vpiConstType:9
-              |vpiDecompile:1
-              |vpiSize:64
-              |UINT:1
-            |vpiRightRange:
-            \_constant: , line:3:23, endln:3:24
-              |vpiConstType:9
-              |vpiDecompile:0
-              |vpiSize:64
-              |UINT:0
-        |vpiEnumConst:
-        \_enum_const: (PMP_MODE_OFF), line:4:3, endln:4:15, parent:pmp_cfg_enum
-          |vpiName:PMP_MODE_OFF
-          |vpiDecompile:2'b00
-          |UINT:0
-          |vpiSize:2
-    |vpiTypespecMember:
-    \_typespec_member: (struct_var), line:13:18, endln:13:28, parent:pmp_cfg_t
-      |vpiName:struct_var
-      |vpiTypespec:
-      \_struct_typespec: (pmp_cfg_struct), line:7:9, endln:7:15, parent:struct_var
-        |vpiPacked:1
-        |vpiName:pmp_cfg_struct
-        |vpiTypespecMember:
-        \_typespec_member: (a), line:8:9, endln:8:10, parent:pmp_cfg_struct
-          |vpiName:a
-          |vpiTypespec:
-          \_logic_typespec: , line:8:3, endln:8:8, parent:a
+  \_struct_typespec: (pmp_cfg_t), line:11:9, endln:11:15
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

@@ -20,49 +20,49 @@
  *
  * Created on January 17, 2020, 9:13 PM
  */
+#include "DesignCompile/UhdmWriter.h"
+
 #include <map>
-#include "headers/uhdm.h"
-#include "SourceCompile/SymbolTable.h"
-#include "Utils/StringUtils.h"
-#include "Library/Library.h"
-#include "Design/FileContent.h"
-#include "ErrorReporting/Error.h"
-#include "ErrorReporting/Location.h"
-#include "ErrorReporting/Error.h"
-#include "ErrorReporting/ErrorDefinition.h"
-#include "ErrorReporting/ErrorContainer.h"
-#include "SourceCompile/CompilationUnit.h"
-#include "SourceCompile/PreprocessFile.h"
-#include "SourceCompile/CompileSourceFile.h"
+
 #include "CommandLine/CommandLineParser.h"
-#include "SourceCompile/ParseFile.h"
-#include "Testbench/ClassDefinition.h"
-#include "SourceCompile/Compiler.h"
-#include "DesignCompile/CompileDesign.h"
-#include "DesignCompile/ResolveSymbols.h"
-#include "DesignCompile/DesignElaboration.h"
-#include "DesignCompile/UVMElaboration.h"
-#include "DesignCompile/CompilePackage.h"
-#include "DesignCompile/CompileModule.h"
-#include "DesignCompile/CompileFileContent.h"
-#include "DesignCompile/CompileProgram.h"
-#include "DesignCompile/CompileClass.h"
-#include "DesignCompile/Builtin.h"
-#include "DesignCompile/PackageAndRootElaboration.h"
+#include "Design/FileContent.h"
 #include "Design/ModuleInstance.h"
 #include "Design/Netlist.h"
+#include "Design/SimpleType.h"
 #include "Design/Struct.h"
 #include "Design/Union.h"
-#include "Design/SimpleType.h"
-#include "surelog.h"
-#include "UhdmWriter.h"
-#include "headers/vpi_visitor.h"
+#include "DesignCompile/Builtin.h"
+#include "DesignCompile/CompileClass.h"
+#include "DesignCompile/CompileFileContent.h"
+#include "DesignCompile/CompileModule.h"
+#include "DesignCompile/CompilePackage.h"
+#include "DesignCompile/CompileProgram.h"
+#include "DesignCompile/DesignElaboration.h"
+#include "DesignCompile/PackageAndRootElaboration.h"
+#include "DesignCompile/ResolveSymbols.h"
+#include "DesignCompile/UVMElaboration.h"
+#include "DesignCompile/UhdmChecker.h"
+#include "ErrorReporting/Error.h"
+#include "ErrorReporting/ErrorContainer.h"
+#include "ErrorReporting/ErrorDefinition.h"
+#include "ErrorReporting/Location.h"
+#include "Library/Library.h"
+#include "SourceCompile/CompilationUnit.h"
+#include "SourceCompile/CompileSourceFile.h"
+#include "SourceCompile/Compiler.h"
+#include "SourceCompile/ParseFile.h"
+#include "SourceCompile/PreprocessFile.h"
+#include "SourceCompile/SymbolTable.h"
+#include "Testbench/ClassDefinition.h"
+#include "Utils/StringUtils.h"
+#include "headers/ElaboratorListener.h"
 #include "headers/Serializer.h"
 #include "headers/module.h"
-#include "DesignCompile/UhdmChecker.h"
+#include "headers/uhdm.h"
 #include "headers/vpi_listener.h"
-#include "headers/ElaboratorListener.h"
 #include "headers/vpi_uhdm.h"
+#include "headers/vpi_visitor.h"
+#include "surelog.h"
 
 using namespace SURELOG;
 using namespace UHDM;
@@ -76,221 +76,221 @@ typedef std::map<std::string, BaseClass*> VpiSignalMap;
 
 unsigned int getBuiltinType(VObjectType type) {
   switch (type) {
-  case VObjectType::slNInpGate_And:
-    return vpiAndPrim;
-  case VObjectType::slNInpGate_Or:
-    return vpiOrPrim;
-  case VObjectType::slNInpGate_Nor:
-    return vpiNorPrim;
-  case VObjectType::slNInpGate_Nand:
-    return vpiNandPrim;
-  case VObjectType::slNInpGate_Xor:
-    return vpiXorPrim;
-  case VObjectType::slNInpGate_Xnor:
-    return vpiXnorPrim;
-  case VObjectType::slNOutGate_Buf:
-    return vpiBufPrim;
-  case VObjectType::slNOutGate_Not:
-    return vpiNotPrim;
-  case VObjectType::slPassEnSwitch_Tranif0:
-    return vpiTranif0Prim;
-  case VObjectType::slPassEnSwitch_Tranif1:
-    return vpiTranif1Prim;
-  case VObjectType::slPassEnSwitch_RTranif1:
-    return vpiRtranif1Prim;
-  case VObjectType::slPassEnSwitch_RTranif0:
-    return vpiRtranif0Prim;
-  case VObjectType::slPassSwitch_Tran:
-    return vpiTranPrim;
-  case VObjectType::slPassSwitch_RTran:
-    return vpiRtranPrim;
-  case VObjectType::slCmosSwitchType_Cmos:
-    return vpiCmosPrim;
-  case VObjectType::slCmosSwitchType_RCmos:
-    return vpiRcmosPrim;
-  case VObjectType::slEnableGateType_Bufif0:
-    return vpiBufif0Prim;
-  case VObjectType::slEnableGateType_Bufif1:
-    return vpiBufif1Prim;
-  case VObjectType::slEnableGateType_Notif0:
-    return vpiNotif0Prim;
-  case VObjectType::slEnableGateType_Notif1:
-    return vpiNotif1Prim;
-  case VObjectType::slMosSwitchType_NMos:
-    return vpiNmosPrim;
-  case VObjectType::slMosSwitchType_PMos:
-    return vpiPmosPrim;
-  case VObjectType::slMosSwitchType_RNMos:
-    return vpiRnmosPrim;
-  case VObjectType::slMosSwitchType_RPMos:
-    return vpiRpmosPrim;
-  case VObjectType::slPullup:
-    return vpiPullupPrim;
-  case VObjectType::slPulldown:
-    return vpiPulldownPrim;    
-  default:
-    return 0;
+    case VObjectType::slNInpGate_And:
+      return vpiAndPrim;
+    case VObjectType::slNInpGate_Or:
+      return vpiOrPrim;
+    case VObjectType::slNInpGate_Nor:
+      return vpiNorPrim;
+    case VObjectType::slNInpGate_Nand:
+      return vpiNandPrim;
+    case VObjectType::slNInpGate_Xor:
+      return vpiXorPrim;
+    case VObjectType::slNInpGate_Xnor:
+      return vpiXnorPrim;
+    case VObjectType::slNOutGate_Buf:
+      return vpiBufPrim;
+    case VObjectType::slNOutGate_Not:
+      return vpiNotPrim;
+    case VObjectType::slPassEnSwitch_Tranif0:
+      return vpiTranif0Prim;
+    case VObjectType::slPassEnSwitch_Tranif1:
+      return vpiTranif1Prim;
+    case VObjectType::slPassEnSwitch_RTranif1:
+      return vpiRtranif1Prim;
+    case VObjectType::slPassEnSwitch_RTranif0:
+      return vpiRtranif0Prim;
+    case VObjectType::slPassSwitch_Tran:
+      return vpiTranPrim;
+    case VObjectType::slPassSwitch_RTran:
+      return vpiRtranPrim;
+    case VObjectType::slCmosSwitchType_Cmos:
+      return vpiCmosPrim;
+    case VObjectType::slCmosSwitchType_RCmos:
+      return vpiRcmosPrim;
+    case VObjectType::slEnableGateType_Bufif0:
+      return vpiBufif0Prim;
+    case VObjectType::slEnableGateType_Bufif1:
+      return vpiBufif1Prim;
+    case VObjectType::slEnableGateType_Notif0:
+      return vpiNotif0Prim;
+    case VObjectType::slEnableGateType_Notif1:
+      return vpiNotif1Prim;
+    case VObjectType::slMosSwitchType_NMos:
+      return vpiNmosPrim;
+    case VObjectType::slMosSwitchType_PMos:
+      return vpiPmosPrim;
+    case VObjectType::slMosSwitchType_RNMos:
+      return vpiRnmosPrim;
+    case VObjectType::slMosSwitchType_RPMos:
+      return vpiRpmosPrim;
+    case VObjectType::slPullup:
+      return vpiPullupPrim;
+    case VObjectType::slPulldown:
+      return vpiPulldownPrim;
+    default:
+      return 0;
   }
 }
 
 unsigned int UhdmWriter::getStrengthType(VObjectType type) {
   switch (type) {
-  case VObjectType::slSupply0:
-    return vpiSupply0;
-  case VObjectType::slSupply1:
-    return vpiSupply1;
-  case VObjectType::slStrong0:
-    return vpiStrongDrive;
-  case VObjectType::slStrong1:
-    return vpiStrongDrive;
-  case VObjectType::slPull0:
-    return vpiPullDrive;
-  case VObjectType::slPull1:
-    return vpiPullDrive;
-  case VObjectType::slWeak0:
-    return vpiWeakDrive;
-  case VObjectType::slWeak1:
-    return vpiWeakDrive;
-  case VObjectType::slHighZ0:
-    return vpiHighZ;
-  case VObjectType::slHighZ1:
-    return vpiHighZ;
-  default:
-    return 0;
+    case VObjectType::slSupply0:
+      return vpiSupply0;
+    case VObjectType::slSupply1:
+      return vpiSupply1;
+    case VObjectType::slStrong0:
+      return vpiStrongDrive;
+    case VObjectType::slStrong1:
+      return vpiStrongDrive;
+    case VObjectType::slPull0:
+      return vpiPullDrive;
+    case VObjectType::slPull1:
+      return vpiPullDrive;
+    case VObjectType::slWeak0:
+      return vpiWeakDrive;
+    case VObjectType::slWeak1:
+      return vpiWeakDrive;
+    case VObjectType::slHighZ0:
+      return vpiHighZ;
+    case VObjectType::slHighZ1:
+      return vpiHighZ;
+    default:
+      return 0;
   }
 }
 
 unsigned int UhdmWriter::getVpiOpType(VObjectType type) {
   switch (type) {
-  case VObjectType::slBinOp_Plus:
-    return vpiAddOp;
-  case VObjectType::slBinOp_Minus:
-    return vpiSubOp;
-  case VObjectType::slBinOp_Mult:
-    return vpiMultOp;
-  case VObjectType::slBinOp_MultMult:
-    return vpiPowerOp;
-  case VObjectType::slBinOp_Div:
-    return vpiDivOp;
-  case VObjectType::slBinOp_Great:
-    return vpiGtOp;
-  case VObjectType::slBinOp_GreatEqual:
-    return vpiGeOp;
-  case VObjectType::slBinOp_Less:
-    return vpiLtOp;
-  case VObjectType::slBinOp_Imply:
-    return vpiImplyOp;
-  case VObjectType::slBinOp_Equivalence:
-    return vpiEqOp;
-  case VObjectType::slBinOp_LessEqual:
-    return vpiLeOp;
-  case VObjectType::slBinOp_Equiv:
-    return vpiEqOp;
-  case VObjectType::slBinOp_Not:
-  case VObjectType::slNOT:
-    return vpiNeqOp;
-  case VObjectType::slBinOp_Percent:
-    return vpiModOp;
-  case VObjectType::slBinOp_LogicAnd:
-    return vpiLogAndOp;
-  case VObjectType::slBinOp_LogicOr:
-    return vpiLogOrOp;
-  case VObjectType::slBinOp_BitwAnd:
-    return vpiBitAndOp;
-  case VObjectType::slBinOp_BitwOr:
-    return vpiBitOrOp;
-  case VObjectType::slBinOp_BitwXor:
-    return vpiBitXorOp;
-	case VObjectType::slBinOp_ReductXnor1:
-	case VObjectType::slBinOp_ReductXnor2:
-  case VObjectType::slBinModOp_ReductXnor1:
-	case VObjectType::slBinModOp_ReductXnor2:
-		return vpiBitXNorOp;
-  case VObjectType::slBinOp_ReductNand:
-    return vpiUnaryNandOp;
-  case VObjectType::slBinOp_ReductNor:
-    return vpiUnaryNorOp;
-  case VObjectType::slUnary_Plus:
-    return vpiPlusOp;
-  case VObjectType::slUnary_Minus:
-    return vpiMinusOp;
-  case VObjectType::slUnary_Not:
-    return vpiNotOp;
-  case VObjectType::slUnary_Tilda:
-    return vpiBitNegOp;
-  case VObjectType::slUnary_BitwAnd:
-    return vpiUnaryAndOp;
-  case VObjectType::slUnary_BitwOr:
-    return vpiUnaryOrOp;
-  case VObjectType::slUnary_BitwXor:
-    return vpiUnaryXorOp;
-  case VObjectType::slUnary_ReductNand:
-    return vpiUnaryNandOp;
-  case VObjectType::slUnary_ReductNor:
-    return vpiUnaryNorOp;
-  case VObjectType::slUnary_ReductXnor1:
-  case VObjectType::slUnary_ReductXnor2:
-    return  vpiUnaryXNorOp;
-  case VObjectType::slBinOp_ShiftLeft:
-    return vpiLShiftOp;
-  case VObjectType::slBinOp_ShiftRight:
-    return vpiRShiftOp;
-  case VObjectType::slBinOp_ArithShiftLeft:
-    return vpiArithLShiftOp;
-  case VObjectType::slBinOp_ArithShiftRight:
-    return vpiArithRShiftOp;
-  case VObjectType::slIncDec_PlusPlus:
-    return vpiPostIncOp;
-  case VObjectType::slIncDec_MinusMinus:
-    return vpiPostDecOp;
-  case VObjectType::slConditional_operator:
-  case VObjectType::slQmark:
-    return vpiConditionOp;
-  case VObjectType::slInsideOp:
-  case VObjectType::slOpen_range_list:
-    return vpiInsideOp;
-  case VObjectType::slBinOp_FourStateLogicEqual:
-    return vpiCaseEqOp;
-  case VObjectType::slBinOp_FourStateLogicNotEqual:
-    return vpiCaseNeqOp;
-  case VObjectType::slAssignOp_Assign:
-    return vpiAssignmentOp;
-  case VObjectType::slAssignOp_Add:
-    return vpiAddOp;
-  case VObjectType::slAssignOp_Sub:
-    return vpiSubOp;
-  case VObjectType::slAssignOp_Mult:
-    return vpiMultOp;
-  case VObjectType::slAssignOp_Div:
-    return vpiDivOp;
-  case VObjectType::slAssignOp_Modulo:
-    return vpiModOp;
-  case VObjectType::slAssignOp_BitwAnd:
-    return vpiBitAndOp;
-  case VObjectType::slAssignOp_BitwOr:
-    return vpiBitOrOp;
-  case VObjectType::slAssignOp_BitwXor:
-    return vpiBitXorOp;
-  case VObjectType::slAssignOp_BitwLeftShift:
-    return vpiLShiftOp;
-  case VObjectType::slAssignOp_BitwRightShift:
-    return vpiRShiftOp;
-  case VObjectType::slAssignOp_ArithShiftLeft:
-    return vpiArithLShiftOp;
-  case VObjectType::slAssignOp_ArithShiftRight:
-    return vpiArithRShiftOp;
-  case VObjectType::slMatches:
-    return vpiMatchOp;
-  case VObjectType::slBinOp_WildcardEqual:
-  case VObjectType::slBinOp_WildEqual:
-    return vpiWildEqOp;
-  case VObjectType::slBinOp_WildcardNotEqual: 
-  case VObjectType::slBinOp_WildNotEqual:
-    return vpiWildNeqOp;
-  case VObjectType::slIff:
-    return vpiIffOp;
-  default:
-    return 0;
+    case VObjectType::slBinOp_Plus:
+      return vpiAddOp;
+    case VObjectType::slBinOp_Minus:
+      return vpiSubOp;
+    case VObjectType::slBinOp_Mult:
+      return vpiMultOp;
+    case VObjectType::slBinOp_MultMult:
+      return vpiPowerOp;
+    case VObjectType::slBinOp_Div:
+      return vpiDivOp;
+    case VObjectType::slBinOp_Great:
+      return vpiGtOp;
+    case VObjectType::slBinOp_GreatEqual:
+      return vpiGeOp;
+    case VObjectType::slBinOp_Less:
+      return vpiLtOp;
+    case VObjectType::slBinOp_Imply:
+      return vpiImplyOp;
+    case VObjectType::slBinOp_Equivalence:
+      return vpiEqOp;
+    case VObjectType::slBinOp_LessEqual:
+      return vpiLeOp;
+    case VObjectType::slBinOp_Equiv:
+      return vpiEqOp;
+    case VObjectType::slBinOp_Not:
+    case VObjectType::slNOT:
+      return vpiNeqOp;
+    case VObjectType::slBinOp_Percent:
+      return vpiModOp;
+    case VObjectType::slBinOp_LogicAnd:
+      return vpiLogAndOp;
+    case VObjectType::slBinOp_LogicOr:
+      return vpiLogOrOp;
+    case VObjectType::slBinOp_BitwAnd:
+      return vpiBitAndOp;
+    case VObjectType::slBinOp_BitwOr:
+      return vpiBitOrOp;
+    case VObjectType::slBinOp_BitwXor:
+      return vpiBitXorOp;
+    case VObjectType::slBinOp_ReductXnor1:
+    case VObjectType::slBinOp_ReductXnor2:
+    case VObjectType::slBinModOp_ReductXnor1:
+    case VObjectType::slBinModOp_ReductXnor2:
+      return vpiBitXNorOp;
+    case VObjectType::slBinOp_ReductNand:
+      return vpiUnaryNandOp;
+    case VObjectType::slBinOp_ReductNor:
+      return vpiUnaryNorOp;
+    case VObjectType::slUnary_Plus:
+      return vpiPlusOp;
+    case VObjectType::slUnary_Minus:
+      return vpiMinusOp;
+    case VObjectType::slUnary_Not:
+      return vpiNotOp;
+    case VObjectType::slUnary_Tilda:
+      return vpiBitNegOp;
+    case VObjectType::slUnary_BitwAnd:
+      return vpiUnaryAndOp;
+    case VObjectType::slUnary_BitwOr:
+      return vpiUnaryOrOp;
+    case VObjectType::slUnary_BitwXor:
+      return vpiUnaryXorOp;
+    case VObjectType::slUnary_ReductNand:
+      return vpiUnaryNandOp;
+    case VObjectType::slUnary_ReductNor:
+      return vpiUnaryNorOp;
+    case VObjectType::slUnary_ReductXnor1:
+    case VObjectType::slUnary_ReductXnor2:
+      return vpiUnaryXNorOp;
+    case VObjectType::slBinOp_ShiftLeft:
+      return vpiLShiftOp;
+    case VObjectType::slBinOp_ShiftRight:
+      return vpiRShiftOp;
+    case VObjectType::slBinOp_ArithShiftLeft:
+      return vpiArithLShiftOp;
+    case VObjectType::slBinOp_ArithShiftRight:
+      return vpiArithRShiftOp;
+    case VObjectType::slIncDec_PlusPlus:
+      return vpiPostIncOp;
+    case VObjectType::slIncDec_MinusMinus:
+      return vpiPostDecOp;
+    case VObjectType::slConditional_operator:
+    case VObjectType::slQmark:
+      return vpiConditionOp;
+    case VObjectType::slInsideOp:
+    case VObjectType::slOpen_range_list:
+      return vpiInsideOp;
+    case VObjectType::slBinOp_FourStateLogicEqual:
+      return vpiCaseEqOp;
+    case VObjectType::slBinOp_FourStateLogicNotEqual:
+      return vpiCaseNeqOp;
+    case VObjectType::slAssignOp_Assign:
+      return vpiAssignmentOp;
+    case VObjectType::slAssignOp_Add:
+      return vpiAddOp;
+    case VObjectType::slAssignOp_Sub:
+      return vpiSubOp;
+    case VObjectType::slAssignOp_Mult:
+      return vpiMultOp;
+    case VObjectType::slAssignOp_Div:
+      return vpiDivOp;
+    case VObjectType::slAssignOp_Modulo:
+      return vpiModOp;
+    case VObjectType::slAssignOp_BitwAnd:
+      return vpiBitAndOp;
+    case VObjectType::slAssignOp_BitwOr:
+      return vpiBitOrOp;
+    case VObjectType::slAssignOp_BitwXor:
+      return vpiBitXorOp;
+    case VObjectType::slAssignOp_BitwLeftShift:
+      return vpiLShiftOp;
+    case VObjectType::slAssignOp_BitwRightShift:
+      return vpiRShiftOp;
+    case VObjectType::slAssignOp_ArithShiftLeft:
+      return vpiArithLShiftOp;
+    case VObjectType::slAssignOp_ArithShiftRight:
+      return vpiArithRShiftOp;
+    case VObjectType::slMatches:
+      return vpiMatchOp;
+    case VObjectType::slBinOp_WildcardEqual:
+    case VObjectType::slBinOp_WildEqual:
+      return vpiWildEqOp;
+    case VObjectType::slBinOp_WildcardNotEqual:
+    case VObjectType::slBinOp_WildNotEqual:
+      return vpiWildNeqOp;
+    case VObjectType::slIff:
+      return vpiIffOp;
+    default:
+      return 0;
   }
 }
 
@@ -309,12 +309,13 @@ bool isMultidimensional(const UHDM::typespec* ts) {
     } else if (ts->UhdmType() == uhdmbit_typespec) {
       bit_typespec* lts = (bit_typespec*)ts;
       if (lts->Ranges() && lts->Ranges()->size() > 1) isMultiDimension = true;
-    } 
+    }
   }
   return isMultiDimension;
 }
 
-bool writeElabParameters(Serializer& s, ModuleInstance* instance, UHDM::scope* m, ExprBuilder& exprBuilder) {
+bool writeElabParameters(Serializer& s, ModuleInstance* instance,
+                         UHDM::scope* m, ExprBuilder& exprBuilder) {
   Netlist* netlist = instance->getNetlist();
   DesignComponent* mod = instance->getDefinition();
 
@@ -372,17 +373,24 @@ bool writeElabParameters(Serializer& s, ModuleInstance* instance, UHDM::scope* m
           any* pclone = UHDM::clone_tree(orig, s, &listener);
           pclone->VpiParent(m);
           paramSet.insert(std::make_pair(name, pclone));
+          /*
+
+            Keep the value of the parameter used during definition. The
+          param_assign contains the actual value useful for elaboration
+
           const typespec* ts = ((parameter*)pclone)->Typespec();
           bool multi = isMultidimensional(ts);
-          if (((parameter*)pclone)->Ranges() && ((parameter*)pclone)->Ranges()->size() > 1)
-            multi = true;
+          if (((parameter*)pclone)->Ranges() &&
+          ((parameter*)pclone)->Ranges()->size() > 1) multi = true;
+
           if (instance->getComplexValue(name)) {
-          } else { 
+          } else {
             Value* val = instance->getValue(name, exprBuilder);
             if (val && val->isValid() && (!multi)) {
               ((parameter*)pclone)->VpiValue(val->uhdmValue());
             }
           }
+          */
           params->push_back(pclone);
         }
       }
@@ -402,8 +410,7 @@ bool writeElabParameters(Serializer& s, ModuleInstance* instance, UHDM::scope* m
   return true;
 }
 
-unsigned int UhdmWriter::getVpiDirection(VObjectType type)
-{
+unsigned int UhdmWriter::getVpiDirection(VObjectType type) {
   unsigned int direction = vpiNoDirection;
   if (type == VObjectType::slPortDir_Inp ||
       type == VObjectType::slTfPortDir_Inp)
@@ -420,8 +427,7 @@ unsigned int UhdmWriter::getVpiDirection(VObjectType type)
   return direction;
 }
 
-unsigned int UhdmWriter::getVpiNetType(VObjectType type)
-{
+unsigned int UhdmWriter::getVpiNetType(VObjectType type) {
   unsigned int nettype = 0;
   if (type == VObjectType::slNetType_Wire)
     nettype = vpiWire;
@@ -441,24 +447,27 @@ static void writePorts(std::vector<Signal*>& orig_ports, BaseClass* parent,
                        VectorOfport* dest_ports, VectorOfnet* dest_nets,
                        Serializer& s, ComponentMap& componentMap,
                        ModPortMap& modPortMap,
-                       SignalBaseClassMap& signalBaseMap,
-                       SignalMap& signalMap,
+                       SignalBaseClassMap& signalBaseMap, SignalMap& signalMap,
                        ModuleInstance* instance = nullptr) {
-  for (Signal* orig_port : orig_ports ) {
+  for (Signal* orig_port : orig_ports) {
     port* dest_port = s.MakePort();
     signalBaseMap.insert(std::make_pair(orig_port, dest_port));
     signalMap.insert(std::make_pair(orig_port->getName(), orig_port));
     dest_port->VpiName(orig_port->getName());
-    unsigned int direction = UhdmWriter::getVpiDirection(orig_port->getDirection());
+    unsigned int direction =
+        UhdmWriter::getVpiDirection(orig_port->getDirection());
     dest_port->VpiDirection(direction);
-    dest_port->VpiLineNo(orig_port->getFileContent()->Line(orig_port->getNodeId()));
-    dest_port->VpiColumnNo(orig_port->getFileContent()->Column(orig_port->getNodeId()));
+    dest_port->VpiLineNo(
+        orig_port->getFileContent()->Line(orig_port->getNodeId()));
+    dest_port->VpiColumnNo(
+        orig_port->getFileContent()->Column(orig_port->getNodeId()));
     dest_port->VpiFile(orig_port->getFileContent()->getFileName());
     dest_port->VpiParent(parent);
     if (ModPort* orig_modport = orig_port->getModPort()) {
       ref_obj* ref = s.MakeRef_obj();
       dest_port->Low_conn(ref);
-      std::map<ModPort*, modport*>::iterator itr = modPortMap.find(orig_modport);
+      std::map<ModPort*, modport*>::iterator itr =
+          modPortMap.find(orig_modport);
       if (itr != modPortMap.end()) {
         ref->Actual_group((*itr).second);
       }
@@ -484,13 +493,11 @@ void writeDataTypes(const DesignComponent::DataTypeMap& datatypeMap,
       dtype = dtype->getDefinition();
     }
     if (dtype->getCategory() == DataType::Category::TYPEDEF) {
-      if (dtype->getTypespec() == nullptr)
-        dtype = dtype->getDefinition();
+      if (dtype->getTypespec() == nullptr) dtype = dtype->getDefinition();
     }
     typespec* tps = dtype->getTypespec();
     if (parent->UhdmType() == uhdmpackage) {
-      if (tps) 
-        tps->VpiName(parent->VpiName() + "::" + tps->VpiName());
+      if (tps) tps->VpiName(parent->VpiName() + "::" + tps->VpiName());
     }
     if (tps) {
       if (ids.find(tps->UhdmId()) == ids.end()) {
@@ -502,13 +509,13 @@ void writeDataTypes(const DesignComponent::DataTypeMap& datatypeMap,
 }
 
 void writeNets(std::vector<Signal*>& orig_nets, BaseClass* parent,
-        VectorOfnet* dest_nets, Serializer& s, SignalBaseClassMap& signalBaseMap,
-        SignalMap& signalMap, SignalMap& portMap, ModuleInstance* instance = nullptr) {
-
-  for (auto& orig_net : orig_nets ) {
+               VectorOfnet* dest_nets, Serializer& s,
+               SignalBaseClassMap& signalBaseMap, SignalMap& signalMap,
+               SignalMap& portMap, ModuleInstance* instance = nullptr) {
+  for (auto& orig_net : orig_nets) {
     net* dest_net = nullptr;
     if (instance) {
-      for(net* net : *instance->getNetlist()->nets()) {
+      for (net* net : *instance->getNetlist()->nets()) {
         SignalMap::iterator itr = signalMap.find(net->VpiName());
         if (itr == signalMap.end()) {
           if (net->VpiName() == orig_net->getName()) {
@@ -527,7 +534,7 @@ void writeNets(std::vector<Signal*>& orig_nets, BaseClass* parent,
         if (sig) {
           SignalBaseClassMap::iterator itr = signalBaseMap.find(sig);
           if (itr != signalBaseMap.end()) {
-            port* p = (port*) ((*itr).second);
+            port* p = (port*)((*itr).second);
             if (p->Low_conn() == nullptr) {
               ref_obj* ref = s.MakeRef_obj();
               ref->Actual_group(dest_net);
@@ -539,8 +546,10 @@ void writeNets(std::vector<Signal*>& orig_nets, BaseClass* parent,
       signalBaseMap.insert(std::make_pair(orig_net, dest_net));
       signalMap.insert(std::make_pair(orig_net->getName(), orig_net));
       dest_net->VpiName(orig_net->getName());
-      dest_net->VpiLineNo(orig_net->getFileContent()->Line(orig_net->getNodeId()));
-      dest_net->VpiColumnNo(orig_net->getFileContent()->Column(orig_net->getNodeId()));
+      dest_net->VpiLineNo(
+          orig_net->getFileContent()->Line(orig_net->getNodeId()));
+      dest_net->VpiColumnNo(
+          orig_net->getFileContent()->Column(orig_net->getNodeId()));
       dest_net->VpiFile(orig_net->getFileContent()->getFileName());
       dest_net->VpiNetType(UhdmWriter::getVpiNetType(orig_net->getType()));
       dest_net->VpiParent(parent);
@@ -550,24 +559,26 @@ void writeNets(std::vector<Signal*>& orig_nets, BaseClass* parent,
 }
 
 void mapLowConns(std::vector<Signal*>& orig_ports, Serializer& s,
-        SignalBaseClassMap& signalBaseMap) {
-   for (Signal* orig_port : orig_ports ) {
-     if (Signal* lowconn = orig_port->getLowConn()) {
-       std::map<Signal*, BaseClass*>::iterator itrlow = signalBaseMap.find(lowconn);
-       if (itrlow != signalBaseMap.end()) {
-         std::map<Signal*, BaseClass*>::iterator itrport = signalBaseMap.find(orig_port);
-         if (itrport != signalBaseMap.end()) {
-           ref_obj* ref = s.MakeRef_obj();
-           ((port*)(*itrport).second)->Low_conn(ref);
-           ref->Actual_group((*itrlow).second);
-         }
-       }
-     }
-   }
+                 SignalBaseClassMap& signalBaseMap) {
+  for (Signal* orig_port : orig_ports) {
+    if (Signal* lowconn = orig_port->getLowConn()) {
+      std::map<Signal*, BaseClass*>::iterator itrlow =
+          signalBaseMap.find(lowconn);
+      if (itrlow != signalBaseMap.end()) {
+        std::map<Signal*, BaseClass*>::iterator itrport =
+            signalBaseMap.find(orig_port);
+        if (itrport != signalBaseMap.end()) {
+          ref_obj* ref = s.MakeRef_obj();
+          ((port*)(*itrport).second)->Low_conn(ref);
+          ref->Actual_group((*itrlow).second);
+        }
+      }
+    }
+  }
 }
 
-void writeClass (ClassDefinition* classDef, VectorOfclass_defn* dest_classes, Serializer& s,
-        ComponentMap& componentMap, BaseClass* parent) {
+void writeClass(ClassDefinition* classDef, VectorOfclass_defn* dest_classes,
+                Serializer& s, ComponentMap& componentMap, BaseClass* parent) {
   if (classDef->getFileContents().size() &&
       classDef->getType() == VObjectType::slClass_declaration) {
     const FileContent* fC = classDef->getFileContents()[0];
@@ -585,8 +596,7 @@ void writeClass (ClassDefinition* classDef, VectorOfclass_defn* dest_classes, Se
     c->Task_funcs(classDef->getTask_funcs());
     if (c->Task_funcs()) {
       for (auto tf : *c->Task_funcs()) {
-        if (tf->VpiParent() == 0)
-          tf->VpiParent(c);
+        if (tf->VpiParent() == 0) tf->VpiParent(c);
       }
     }
     // Parameters
@@ -607,10 +617,8 @@ void writeClass (ClassDefinition* classDef, VectorOfclass_defn* dest_classes, Se
     c->VpiParent(parent);
     dest_classes->push_back(c);
     const std::string& name = classDef->getName();
-    if (c->VpiName() == "")
-      c->VpiName(name);
-    if (c->VpiFullName() == "")
-      c->VpiFullName(name);  
+    if (c->VpiName() == "") c->VpiName(name);
+    if (c->VpiFullName() == "") c->VpiFullName(name);
     c->Attributes(classDef->Attributes());
     if (fC) {
       // Builtin classes have no file
@@ -627,27 +635,26 @@ void writeClass (ClassDefinition* classDef, VectorOfclass_defn* dest_classes, Se
       VectorOfclass_defn* dest_classes = s.MakeClass_defnVec();
       writeClass(c_nested, dest_classes, s, componentMap, c);
     }
-
   }
 }
 
 void writeClasses(ClassNameClassDefinitionMultiMap& orig_classes,
-        VectorOfclass_defn* dest_classes, Serializer& s,
-        ComponentMap& componentMap, BaseClass* parent) {
-  for (auto& orig_class : orig_classes ) {
+                  VectorOfclass_defn* dest_classes, Serializer& s,
+                  ComponentMap& componentMap, BaseClass* parent) {
+  for (auto& orig_class : orig_classes) {
     ClassDefinition* classDef = orig_class.second;
     writeClass(classDef, dest_classes, s, componentMap, parent);
   }
 }
 
 void writeVariables(const DesignComponent::VariableMap& orig_vars,
-                    BaseClass* parent,
-                    VectorOfvariables* dest_vars,
+                    BaseClass* parent, VectorOfvariables* dest_vars,
                     Serializer& s, ComponentMap& componentMap) {
   for (auto& orig_var : orig_vars) {
     Variable* var = orig_var.second;
     const DataType* dtype = var->getDataType();
-    const ClassDefinition* classdef = dynamic_cast<const ClassDefinition*> (dtype);
+    const ClassDefinition* classdef =
+        dynamic_cast<const ClassDefinition*>(dtype);
     if (classdef) {
       class_var* cvar = s.MakeClass_var();
       cvar->VpiName(var->getName());
@@ -657,7 +664,7 @@ void writeVariables(const DesignComponent::VariableMap& orig_vars,
       cvar->VpiParent(parent);
       const auto& found = componentMap.find(classdef);
       if (found != componentMap.end()) {
-        //TODO: Bind Class type,
+        // TODO: Bind Class type,
         // class_var -> class_typespec -> class_defn
       }
       dest_vars->push_back(cvar);
@@ -666,7 +673,7 @@ void writeVariables(const DesignComponent::VariableMap& orig_vars,
 }
 
 void writePackage(Package* pack, package* p, Serializer& s,
-        ComponentMap& componentMap) {
+                  ComponentMap& componentMap) {
   p->VpiFullName(pack->getName() + "::");
   // Typepecs
   VectorOftypespec* typespecs = s.MakeTypespecVec();
@@ -688,7 +695,8 @@ void writePackage(Package* pack, package* p, Serializer& s,
       if (ps->UhdmType() == uhdmparameter) {
         ((parameter*)ps)->VpiFullName(pack->getName() + "::" + ps->VpiName());
       } else {
-        ((type_parameter*)ps)->VpiFullName(pack->getName() + "::" + ps->VpiName());
+        ((type_parameter*)ps)
+            ->VpiFullName(pack->getName() + "::" + ps->VpiName());
       }
     }
   }
@@ -723,9 +731,8 @@ void writePackage(Package* pack, package* p, Serializer& s,
 }
 
 void writeModule(ModuleDefinition* mod, module* m, Serializer& s,
-        ComponentMap& componentMap,
-        ModPortMap& modPortMap,
-        ModuleInstance* instance = nullptr) {
+                 ComponentMap& componentMap, ModPortMap& modPortMap,
+                 ModuleInstance* instance = nullptr) {
   SignalBaseClassMap signalBaseMap;
   SignalMap portMap;
   SignalMap netMap;
@@ -740,12 +747,13 @@ void writeModule(ModuleDefinition* mod, module* m, Serializer& s,
   std::vector<Signal*>& orig_ports = mod->getPorts();
   VectorOfport* dest_ports = s.MakePortVec();
   VectorOfnet* dest_nets = s.MakeNetVec();
-  writePorts(orig_ports, m, dest_ports, dest_nets, s, componentMap,
-        modPortMap, signalBaseMap, portMap, instance);
+  writePorts(orig_ports, m, dest_ports, dest_nets, s, componentMap, modPortMap,
+             signalBaseMap, portMap, instance);
   m->Ports(dest_ports);
   // Nets
   std::vector<Signal*> orig_nets = mod->getSignals();
-  writeNets(orig_nets, m, dest_nets, s, signalBaseMap, netMap, portMap, instance);
+  writeNets(orig_nets, m, dest_nets, s, signalBaseMap, netMap, portMap,
+            instance);
   m->Nets(dest_nets);
   mapLowConns(orig_ports, s, signalBaseMap);
   // Classes
@@ -754,10 +762,10 @@ void writeModule(ModuleDefinition* mod, module* m, Serializer& s,
   writeClasses(orig_classes, dest_classes, s, componentMap, m);
   m->Class_defns(dest_classes);
   // Variables
-  //DesignComponent::VariableMap& orig_vars = mod->getVariables();
-  //VectorOfvariables* dest_vars = s.MakeVariablesVec();
-  //writeVariables(orig_vars, m, dest_vars, s, componentMap);
-  //m->Variables(dest_vars);
+  // DesignComponent::VariableMap& orig_vars = mod->getVariables();
+  // VectorOfvariables* dest_vars = s.MakeVariablesVec();
+  // writeVariables(orig_vars, m, dest_vars, s, componentMap);
+  // m->Variables(dest_vars);
 
   // Cont assigns
   std::vector<cont_assign*>* orig_cont_assigns = mod->getContAssigns();
@@ -786,7 +794,7 @@ void writeModule(ModuleDefinition* mod, module* m, Serializer& s,
     for (auto ps : *m->Parameters()) {
       ps->VpiParent(m);
     }
-  }  
+  }
   // Param_assigns
   if (mod->getParam_assigns()) {
     m->Param_assigns(mod->getParam_assigns());
@@ -798,10 +806,8 @@ void writeModule(ModuleDefinition* mod, module* m, Serializer& s,
   m->Task_funcs(mod->getTask_funcs());
   if (m->Task_funcs()) {
     for (auto tf : *m->Task_funcs()) {
-      if (tf->VpiParent() == 0)
-        tf->VpiParent(m);
-      if (tf->Instance() == 0)
-        tf->Instance(m);
+      if (tf->VpiParent() == 0) tf->VpiParent(m);
+      if (tf->Instance() == 0) tf->Instance(m);
     }
   }
 
@@ -810,23 +816,23 @@ void writeModule(ModuleDefinition* mod, module* m, Serializer& s,
     ClockingBlock& cblock = ctupple.second;
     switch (cblock.getType()) {
       case ClockingBlock::Type::Default: {
-         m->Default_clocking(cblock.getActual());
-         break;
+        m->Default_clocking(cblock.getActual());
+        break;
       }
       case ClockingBlock::Type::Global: {
-         m->Global_clocking(cblock.getActual());
-         break;
+        m->Global_clocking(cblock.getActual());
+        break;
       }
       case ClockingBlock::Type::Regular: {
-         VectorOfclocking_block* cblocks = m->Clocking_blocks();
-         if (cblocks == nullptr) {
-           m->Clocking_blocks(s.MakeClocking_blockVec());
-           cblocks = m->Clocking_blocks();
-         }
-         cblocks->push_back(cblock.getActual());
-         break;
+        VectorOfclocking_block* cblocks = m->Clocking_blocks();
+        if (cblocks == nullptr) {
+          m->Clocking_blocks(s.MakeClocking_blockVec());
+          cblocks = m->Clocking_blocks();
+        }
+        cblocks->push_back(cblock.getActual());
+        break;
       }
-    }  
+    }
   }
 
   // Assertions
@@ -839,8 +845,8 @@ void writeModule(ModuleDefinition* mod, module* m, Serializer& s,
 }
 
 void writeInterface(ModuleDefinition* mod, interface* m, Serializer& s,
-        ComponentMap& componentMap,
-        ModPortMap& modPortMap, ModuleInstance* instance = nullptr) {
+                    ComponentMap& componentMap, ModPortMap& modPortMap,
+                    ModuleInstance* instance = nullptr) {
   SignalBaseClassMap signalBaseMap;
   SignalMap portMap;
   SignalMap netMap;
@@ -855,18 +861,20 @@ void writeInterface(ModuleDefinition* mod, interface* m, Serializer& s,
   std::vector<Signal*>& orig_ports = mod->getPorts();
   VectorOfport* dest_ports = s.MakePortVec();
   VectorOfnet* dest_nets = s.MakeNetVec();
-  writePorts(orig_ports, m, dest_ports, dest_nets, s, componentMap,
-        modPortMap, signalBaseMap, portMap, instance);
+  writePorts(orig_ports, m, dest_ports, dest_nets, s, componentMap, modPortMap,
+             signalBaseMap, portMap, instance);
   m->Ports(dest_ports);
   std::vector<Signal*> orig_nets = mod->getSignals();
-  writeNets(orig_nets, m, dest_nets, s, signalBaseMap, netMap, portMap, instance);
+  writeNets(orig_nets, m, dest_nets, s, signalBaseMap, netMap, portMap,
+            instance);
   m->Nets(dest_nets);
   // Modports
-  ModuleDefinition::ModPortSignalMap& orig_modports = mod->getModPortSignalMap();
+  ModuleDefinition::ModPortSignalMap& orig_modports =
+      mod->getModPortSignalMap();
   VectorOfmodport* dest_modports = s.MakeModportVec();
-  for (auto& orig_modport : orig_modports ) {
+  for (auto& orig_modport : orig_modports) {
     modport* dest_modport = s.MakeModport();
-    //dest_modport->Interface(m); // Loop in elaboration!
+    // dest_modport->Interface(m); // Loop in elaboration!
     dest_modport->VpiParent(m);
     modPortMap.insert(std::make_pair(&orig_modport.second, dest_modport));
     dest_modport->VpiName(orig_modport.first);
@@ -886,43 +894,39 @@ void writeInterface(ModuleDefinition* mod, interface* m, Serializer& s,
   m->Task_funcs(mod->getTask_funcs());
   if (m->Task_funcs()) {
     for (auto tf : *m->Task_funcs()) {
-      if (tf->VpiParent() == 0)
-        tf->VpiParent(m);
-      if (tf->Instance() == 0)
-        tf->Instance(m);  
+      if (tf->VpiParent() == 0) tf->VpiParent(m);
+      if (tf->Instance() == 0) tf->Instance(m);
     }
   }
 
-   // ClockingBlocks
+  // ClockingBlocks
   for (auto ctupple : mod->getClockingBlockMap()) {
     ClockingBlock& cblock = ctupple.second;
     switch (cblock.getType()) {
       case ClockingBlock::Type::Default: {
-         m->Default_clocking(cblock.getActual());
-         break;
+        m->Default_clocking(cblock.getActual());
+        break;
       }
       case ClockingBlock::Type::Global: {
-         m->Global_clocking(cblock.getActual());
-         break;
+        m->Global_clocking(cblock.getActual());
+        break;
       }
       case ClockingBlock::Type::Regular: {
-         VectorOfclocking_block* cblocks = m->Clocking_blocks();
-         if (cblocks == nullptr) {
-           m->Clocking_blocks(s.MakeClocking_blockVec());
-           cblocks = m->Clocking_blocks();
-         }
-         cblocks->push_back(cblock.getActual());
-         break;
+        VectorOfclocking_block* cblocks = m->Clocking_blocks();
+        if (cblocks == nullptr) {
+          m->Clocking_blocks(s.MakeClocking_blockVec());
+          cblocks = m->Clocking_blocks();
+        }
+        cblocks->push_back(cblock.getActual());
+        break;
       }
-    }  
+    }
   }
-
 }
 
 void writeProgram(Program* mod, program* m, Serializer& s,
-        ComponentMap& componentMap,
-        ModPortMap& modPortMap,
-        ModuleInstance* instance = nullptr) {
+                  ComponentMap& componentMap, ModPortMap& modPortMap,
+                  ModuleInstance* instance = nullptr) {
   SignalBaseClassMap signalBaseMap;
   SignalMap portMap;
   SignalMap netMap;
@@ -937,12 +941,13 @@ void writeProgram(Program* mod, program* m, Serializer& s,
   std::vector<Signal*>& orig_ports = mod->getPorts();
   VectorOfport* dest_ports = s.MakePortVec();
   VectorOfnet* dest_nets = s.MakeNetVec();
-  writePorts(orig_ports, m, dest_ports, dest_nets, s, componentMap,
-        modPortMap, signalBaseMap, portMap, instance);
+  writePorts(orig_ports, m, dest_ports, dest_nets, s, componentMap, modPortMap,
+             signalBaseMap, portMap, instance);
   m->Ports(dest_ports);
-   // Nets
+  // Nets
   std::vector<Signal*>& orig_nets = mod->getSignals();
-  writeNets(orig_nets, m, dest_nets, s, signalBaseMap, netMap, portMap, instance);
+  writeNets(orig_nets, m, dest_nets, s, signalBaseMap, netMap, portMap,
+            instance);
   m->Nets(dest_nets);
   mapLowConns(orig_ports, s, signalBaseMap);
   // Classes
@@ -974,25 +979,23 @@ void writeProgram(Program* mod, program* m, Serializer& s,
     ClockingBlock& cblock = ctupple.second;
     switch (cblock.getType()) {
       case ClockingBlock::Type::Default: {
-         m->Default_clocking(cblock.getActual());
-         break;
+        m->Default_clocking(cblock.getActual());
+        break;
       }
       case ClockingBlock::Type::Regular: {
-         VectorOfclocking_block* cblocks = m->Clocking_blocks();
-         if (cblocks == nullptr) {
-           m->Clocking_blocks(s.MakeClocking_blockVec());
-           cblocks = m->Clocking_blocks();
-         }
-         cblocks->push_back(cblock.getActual());
-         break;
+        VectorOfclocking_block* cblocks = m->Clocking_blocks();
+        if (cblocks == nullptr) {
+          m->Clocking_blocks(s.MakeClocking_blockVec());
+          cblocks = m->Clocking_blocks();
+        }
+        cblocks->push_back(cblock.getActual());
+        break;
       }
       default:
         break;
-    }  
+    }
   }
-
 }
-
 
 bool writeElabProgram(Serializer& s, ModuleInstance* instance, program* m) {
   Netlist* netlist = instance->getNetlist();
@@ -1089,12 +1092,13 @@ bool writeElabProgram(Serializer& s, ModuleInstance* instance, program* m) {
   return true;
 }
 
-
-bool writeElabGenScope(Serializer& s, ModuleInstance* instance, gen_scope* m, ExprBuilder& exprBuilder) {
+bool writeElabGenScope(Serializer& s, ModuleInstance* instance, gen_scope* m,
+                       ExprBuilder& exprBuilder) {
   Netlist* netlist = instance->getNetlist();
 
   // Typepecs
-  ModuleDefinition* mod = dynamic_cast<ModuleDefinition*> (instance->getDefinition());
+  ModuleDefinition* mod =
+      dynamic_cast<ModuleDefinition*>(instance->getDefinition());
   if (mod) {
     VectorOftypespec* typespecs = s.MakeTypespecVec();
     m->Typespecs(typespecs);
@@ -1197,24 +1201,23 @@ bool writeElabGenScope(Serializer& s, ModuleInstance* instance, gen_scope* m, Ex
     ClockingBlock& cblock = ctupple.second;
     switch (cblock.getType()) {
       case ClockingBlock::Type::Default: {
-         // No default clocking
-         //m->Default_clocking(cblock.getActual());
-         break;
+        // No default clocking
+        // m->Default_clocking(cblock.getActual());
+        break;
       }
       case ClockingBlock::Type::Regular: {
-         VectorOfclocking_block* cblocks = m->Clocking_blocks();
-         if (cblocks == nullptr) {
-           m->Clocking_blocks(s.MakeClocking_blockVec());
-           cblocks = m->Clocking_blocks();
-         }
-         cblocks->push_back(cblock.getActual());
-         break;
+        VectorOfclocking_block* cblocks = m->Clocking_blocks();
+        if (cblocks == nullptr) {
+          m->Clocking_blocks(s.MakeClocking_blockVec());
+          cblocks = m->Clocking_blocks();
+        }
+        cblocks->push_back(cblock.getActual());
+        break;
       }
       default:
         break;
-    }  
+    }
   }
-
 
   if (mod) {
     for (UHDM::ref_obj* ref : mod->getLateBinding()) {
@@ -1253,10 +1256,10 @@ bool writeElabGenScope(Serializer& s, ModuleInstance* instance, gen_scope* m, Ex
   return true;
 }
 
-bool writeElabModule(Serializer& s, ModuleInstance* instance, module* m, ExprBuilder& exprBuilder) {
+bool writeElabModule(Serializer& s, ModuleInstance* instance, module* m,
+                     ExprBuilder& exprBuilder) {
   Netlist* netlist = instance->getNetlist();
-  if (netlist == nullptr)
-    return true;
+  if (netlist == nullptr) return true;
   m->Ports(netlist->ports());
 
   // Typepecs
@@ -1366,8 +1369,7 @@ bool writeElabModule(Serializer& s, ModuleInstance* instance, module* m, ExprBui
               }
             }
           }
-          if (ref->Actual_group()) 
-            break;
+          if (ref->Actual_group()) break;
         }
         if (ref->Actual_group()) continue;
       }
@@ -1377,8 +1379,8 @@ bool writeElabModule(Serializer& s, ModuleInstance* instance, module* m, ExprBui
   return true;
 }
 
-
-bool writeElabInterface(Serializer& s, ModuleInstance* instance, interface* m, ExprBuilder& exprBuilder) {
+bool writeElabInterface(Serializer& s, ModuleInstance* instance, interface* m,
+                        ExprBuilder& exprBuilder) {
   Netlist* netlist = instance->getNetlist();
 
   // Typepecs
@@ -1442,14 +1444,15 @@ bool writeElabInterface(Serializer& s, ModuleInstance* instance, interface* m, E
       assigns->push_back(obj);
     }
   }
- 
+
   // Modports
-  ModuleDefinition* module = (ModuleDefinition*) mod;
-  ModuleDefinition::ModPortSignalMap& orig_modports = module->getModPortSignalMap();
+  ModuleDefinition* module = (ModuleDefinition*)mod;
+  ModuleDefinition::ModPortSignalMap& orig_modports =
+      module->getModPortSignalMap();
   VectorOfmodport* dest_modports = s.MakeModportVec();
-  for (auto& orig_modport : orig_modports ) {
+  for (auto& orig_modport : orig_modports) {
     modport* dest_modport = s.MakeModport();
-     dest_modport->Interface(m);
+    dest_modport->Interface(m);
     dest_modport->VpiName(orig_modport.first);
     dest_modport->VpiParent(m);
     VectorOfio_decl* ios = s.MakeIo_declVec();
@@ -1465,7 +1468,6 @@ bool writeElabInterface(Serializer& s, ModuleInstance* instance, interface* m, E
     dest_modports->push_back(dest_modport);
   }
   m->Modports(dest_modports);
- 
 
   if (mod) {
     for (UHDM::ref_obj* ref : mod->getLateBinding()) {
@@ -1495,7 +1497,8 @@ bool writeElabInterface(Serializer& s, ModuleInstance* instance, interface* m, E
   return true;
 }
 
-void writePrimTerms(ModuleInstance* instance, primitive* prim, int vpiGateType, Serializer& s) {
+void writePrimTerms(ModuleInstance* instance, primitive* prim, int vpiGateType,
+                    Serializer& s) {
   Netlist* netlist = instance->getNetlist();
   VectorOfprim_term* terms = s.MakePrim_termVec();
   prim->Prim_terms(terms);
@@ -1513,9 +1516,8 @@ void writePrimTerms(ModuleInstance* instance, primitive* prim, int vpiGateType, 
       term->VpiDirection(port->VpiDirection());
       term->VpiParent(prim);
       term->VpiTermIndex(index);
-      if (vpiGateType == vpiBufPrim ||
-          vpiGateType == vpiNotPrim) {
-        if (index < ports->size() -1) {
+      if (vpiGateType == vpiBufPrim || vpiGateType == vpiNotPrim) {
+        if (index < ports->size() - 1) {
           term->VpiDirection(vpiOutput);
         } else {
           term->VpiDirection(vpiInput);
@@ -1523,14 +1525,13 @@ void writePrimTerms(ModuleInstance* instance, primitive* prim, int vpiGateType, 
       } else if (vpiGateType == vpiTranif1Prim ||
                  vpiGateType == vpiTranif0Prim ||
                  vpiGateType == vpiRtranif1Prim ||
-                 vpiGateType == vpiRtranif0Prim || 
-                 vpiGateType == vpiTranPrim ||
+                 vpiGateType == vpiRtranif0Prim || vpiGateType == vpiTranPrim ||
                  vpiGateType == vpiRtranPrim) {
-        if (index < ports->size() -1) {
+        if (index < ports->size() - 1) {
           term->VpiDirection(vpiInout);
         } else {
           term->VpiDirection(vpiInput);
-        }           
+        }
       } else {
         if (index == 0) {
           term->VpiDirection(vpiOutput);
@@ -1544,38 +1545,36 @@ void writePrimTerms(ModuleInstance* instance, primitive* prim, int vpiGateType, 
 }
 
 void writeInstance(ModuleDefinition* mod, ModuleInstance* instance, any* m,
-        CompileDesign* compileDesign,
-        ComponentMap& componentMap,
-        ModPortMap& modPortMap,
-        InstanceMap& instanceMap,
-        ExprBuilder& exprBuilder) {
-  Serializer& s = compileDesign->getSerializer();        
+                   CompileDesign* compileDesign, ComponentMap& componentMap,
+                   ModPortMap& modPortMap, InstanceMap& instanceMap,
+                   ExprBuilder& exprBuilder) {
+  Serializer& s = compileDesign->getSerializer();
   VectorOfmodule* subModules = nullptr;
   VectorOfprogram* subPrograms = nullptr;
   VectorOfinterface* subInterfaces = nullptr;
   VectorOfprimitive* subPrimitives = nullptr;
   VectorOfprimitive_array* subPrimitiveArrays = nullptr;
   VectorOfgen_scope_array* subGenScopeArrays = nullptr;
-  
+
   if (m->UhdmType() == uhdmmodule) {
-    writeElabModule(s, instance, (module*) m, exprBuilder);
+    writeElabModule(s, instance, (module*)m, exprBuilder);
   } else if (m->UhdmType() == uhdmgen_scope) {
-    writeElabGenScope(s, instance, (gen_scope*) m, exprBuilder);
+    writeElabGenScope(s, instance, (gen_scope*)m, exprBuilder);
   } else if (m->UhdmType() == uhdminterface) {
-    writeElabInterface(s, instance, (interface*) m, exprBuilder);
+    writeElabInterface(s, instance, (interface*)m, exprBuilder);
   }
 
   for (unsigned int i = 0; i < instance->getNbChildren(); i++) {
     ModuleInstance* child = instance->getChildren(i);
     DesignComponent* childDef = child->getDefinition();
-    if (ModuleDefinition* mm = dynamic_cast<ModuleDefinition*> (childDef)) {
+    if (ModuleDefinition* mm = dynamic_cast<ModuleDefinition*>(childDef)) {
       VObjectType insttype = child->getType();
       if (insttype == VObjectType::slModule_instantiation) {
-        if (subModules == nullptr)
-          subModules = s.MakeModuleVec();
+        if (subModules == nullptr) subModules = s.MakeModuleVec();
         module* sm = s.MakeModule();
         if (childDef && childDef->getFileContents().size() &&
-            compileDesign->getCompiler()->isLibraryFile(childDef->getFileContents()[0]->getSymbolId())) {
+            compileDesign->getCompiler()->isLibraryFile(
+                childDef->getFileContents()[0]->getSymbolId())) {
           sm->VpiCellInstance(true);
         }
         sm->VpiName(child->getInstanceName());
@@ -1585,34 +1584,36 @@ void writeInstance(ModuleDefinition* mod, ModuleInstance* instance, any* m,
         sm->VpiLineNo(child->getLineNb());
         subModules->push_back(sm);
         if (m->UhdmType() == uhdmmodule) {
-          ((module*) m)->Modules(subModules);
-          sm->Instance((module*) m);
-          sm->Module((module*) m);
+          ((module*)m)->Modules(subModules);
+          sm->Instance((module*)m);
+          sm->Module((module*)m);
           sm->VpiParent(m);
         } else if (m->UhdmType() == uhdmgen_scope) {
-          ((gen_scope*) m)->Modules(subModules);
+          ((gen_scope*)m)->Modules(subModules);
           sm->VpiParent(m);
         }
-        writeInstance(mm, child, sm, compileDesign, componentMap, modPortMap,instanceMap, exprBuilder);
+        writeInstance(mm, child, sm, compileDesign, componentMap, modPortMap,
+                      instanceMap, exprBuilder);
       } else if (insttype == VObjectType::slConditional_generate_construct ||
                  insttype == VObjectType::slLoop_generate_construct ||
                  insttype == VObjectType::slGenerate_block ||
                  insttype == VObjectType::slGenerate_item ||
                  insttype == VObjectType::slGenerate_module_loop_statement ||
-                 insttype == VObjectType::slGenerate_module_conditional_statement ||
+                 insttype ==
+                     VObjectType::slGenerate_module_conditional_statement ||
                  insttype == VObjectType::slGenerate_module_block ||
                  insttype == VObjectType::slGenerate_module_item ||
                  insttype == VObjectType::slGenerate_module_named_block ||
                  insttype == VObjectType::slGenerate_module_block ||
                  insttype == VObjectType::slGenerate_module_item ||
                  insttype == VObjectType::slGenerate_interface_loop_statement ||
-                 insttype == VObjectType::slGenerate_interface_conditional_statement ||
+                 insttype ==
+                     VObjectType::slGenerate_interface_conditional_statement ||
                  insttype == VObjectType::slGenerate_interface_block ||
                  insttype == VObjectType::slGenerate_interface_item ||
                  insttype == VObjectType::slGenerate_interface_named_block ||
                  insttype == VObjectType::slGenerate_interface_block ||
                  insttype == VObjectType::slGenerate_interface_item) {
-
         if (subGenScopeArrays == nullptr)
           subGenScopeArrays = s.MakeGen_scope_arrayVec();
         gen_scope_array* sm = s.MakeGen_scope_array();
@@ -1627,7 +1628,7 @@ void writeInstance(ModuleDefinition* mod, ModuleInstance* instance, any* m,
         a_gen_scope->VpiParent(sm);
         UHDM_OBJECT_TYPE utype = m->UhdmType();
         if (utype == uhdmmodule) {
-          ((module*) m)->Gen_scope_arrays(subGenScopeArrays);
+          ((module*)m)->Gen_scope_arrays(subGenScopeArrays);
           sm->VpiParent(m);
         } else if (utype == uhdmgen_scope) {
           ((gen_scope*)m)->Gen_scope_arrays(subGenScopeArrays);
@@ -1636,11 +1637,11 @@ void writeInstance(ModuleDefinition* mod, ModuleInstance* instance, any* m,
           ((interface*)m)->Gen_scope_arrays(subGenScopeArrays);
           sm->VpiParent(m);
         }
-        writeInstance(mm, child, a_gen_scope, compileDesign, componentMap, modPortMap,instanceMap, exprBuilder);
+        writeInstance(mm, child, a_gen_scope, compileDesign, componentMap,
+                      modPortMap, instanceMap, exprBuilder);
 
       } else if (insttype == VObjectType::slInterface_instantiation) {
-        if (subInterfaces == nullptr)
-          subInterfaces = s.MakeInterfaceVec();
+        if (subInterfaces == nullptr) subInterfaces = s.MakeInterfaceVec();
         interface* sm = s.MakeInterface();
         sm->VpiName(child->getInstanceName());
         sm->VpiDefName(child->getModuleName());
@@ -1650,17 +1651,18 @@ void writeInstance(ModuleDefinition* mod, ModuleInstance* instance, any* m,
         subInterfaces->push_back(sm);
         UHDM_OBJECT_TYPE utype = m->UhdmType();
         if (utype == uhdmmodule) {
-          ((module*) m)->Interfaces(subInterfaces);
-          sm->Instance((module*) m);
+          ((module*)m)->Interfaces(subInterfaces);
+          sm->Instance((module*)m);
           sm->VpiParent(m);
         } else if (utype == uhdmgen_scope) {
-          ((gen_scope*) m)->Interfaces(subInterfaces);
+          ((gen_scope*)m)->Interfaces(subInterfaces);
           sm->VpiParent(m);
         } else if (utype == uhdminterface) {
-          ((interface*) m)->Interfaces(subInterfaces);
+          ((interface*)m)->Interfaces(subInterfaces);
           sm->VpiParent(m);
         }
-        writeInstance(mm, child, sm, compileDesign, componentMap, modPortMap,instanceMap, exprBuilder);
+        writeInstance(mm, child, sm, compileDesign, componentMap, modPortMap,
+                      instanceMap, exprBuilder);
 
       } else if ((insttype == VObjectType::slUdp_instantiation) ||
                  (insttype == VObjectType::slGate_instantiation)) {
@@ -1673,7 +1675,8 @@ void writeInstance(ModuleDefinition* mod, ModuleInstance* instance, any* m,
         if (insttype == VObjectType::slUdp_instantiation) {
           UHDM::udp* udp = s.MakeUdp();
           gate = udp;
-          if (ModuleDefinition* mm = dynamic_cast<ModuleDefinition*> (childDef)) {
+          if (ModuleDefinition* mm =
+                  dynamic_cast<ModuleDefinition*>(childDef)) {
             udp->Udp_defn(mm->getUdpDefn());
           }
           if (UHDM::VectorOfrange* ranges = child->getNetlist()->ranges()) {
@@ -1684,18 +1687,19 @@ void writeInstance(ModuleDefinition* mod, ModuleInstance* instance, any* m,
             prims->push_back(gate);
             if (subPrimitiveArrays == nullptr)
               subPrimitiveArrays = s.MakePrimitive_arrayVec();
-            subPrimitiveArrays->push_back(gate_array);  
+            subPrimitiveArrays->push_back(gate_array);
           } else {
-            if (subPrimitives == nullptr)
-              subPrimitives = s.MakePrimitiveVec();
-            subPrimitives->push_back(gate);  
+            if (subPrimitives == nullptr) subPrimitives = s.MakePrimitiveVec();
+            subPrimitives->push_back(gate);
           }
         } else if (vpiGateType == vpiPmosPrim || vpiGateType == vpiRpmosPrim ||
-            vpiGateType == vpiNmosPrim || vpiGateType == vpiRnmosPrim ||
-            vpiGateType == vpiCmosPrim || vpiGateType == vpiRcmosPrim ||
-            vpiGateType == vpiTranif1Prim || vpiGateType == vpiTranif0Prim ||
-            vpiGateType == vpiRtranif1Prim || vpiGateType == vpiRtranif0Prim ||
-            vpiGateType == vpiTranPrim || vpiGateType == vpiRtranPrim) {
+                   vpiGateType == vpiNmosPrim || vpiGateType == vpiRnmosPrim ||
+                   vpiGateType == vpiCmosPrim || vpiGateType == vpiRcmosPrim ||
+                   vpiGateType == vpiTranif1Prim ||
+                   vpiGateType == vpiTranif0Prim ||
+                   vpiGateType == vpiRtranif1Prim ||
+                   vpiGateType == vpiRtranif0Prim ||
+                   vpiGateType == vpiTranPrim || vpiGateType == vpiRtranPrim) {
           gate = s.MakeSwitch_tran();
           if (UHDM::VectorOfrange* ranges = child->getNetlist()->ranges()) {
             gate_array = s.MakeSwitch_array();
@@ -1705,11 +1709,10 @@ void writeInstance(ModuleDefinition* mod, ModuleInstance* instance, any* m,
             prims->push_back(gate);
             if (subPrimitiveArrays == nullptr)
               subPrimitiveArrays = s.MakePrimitive_arrayVec();
-            subPrimitiveArrays->push_back(gate_array);  
+            subPrimitiveArrays->push_back(gate_array);
           } else {
-            if (subPrimitives == nullptr)
-              subPrimitives = s.MakePrimitiveVec();
-            subPrimitives->push_back(gate);  
+            if (subPrimitives == nullptr) subPrimitives = s.MakePrimitiveVec();
+            subPrimitives->push_back(gate);
           }
           gate->VpiPrimType(vpiGateType);
         } else {
@@ -1722,11 +1725,10 @@ void writeInstance(ModuleDefinition* mod, ModuleInstance* instance, any* m,
             prims->push_back(gate);
             if (subPrimitiveArrays == nullptr)
               subPrimitiveArrays = s.MakePrimitive_arrayVec();
-            subPrimitiveArrays->push_back(gate_array);    
+            subPrimitiveArrays->push_back(gate_array);
           } else {
-            if (subPrimitives == nullptr)
-              subPrimitives = s.MakePrimitiveVec();
-            subPrimitives->push_back(gate);  
+            if (subPrimitives == nullptr) subPrimitives = s.MakePrimitiveVec();
+            subPrimitives->push_back(gate);
           }
           gate->VpiPrimType(vpiGateType);
         }
@@ -1735,7 +1737,7 @@ void writeInstance(ModuleDefinition* mod, ModuleInstance* instance, any* m,
             gate->Delay((*delays)[0]);
           }
         }
-        
+
         gate->VpiName(child->getInstanceName());
         gate->VpiDefName(child->getModuleName());
         gate->VpiFullName(child->getFullPathName());
@@ -1743,21 +1745,20 @@ void writeInstance(ModuleDefinition* mod, ModuleInstance* instance, any* m,
         gate->VpiLineNo(child->getLineNb());
         UHDM_OBJECT_TYPE utype = m->UhdmType();
         if (utype == uhdmmodule) {
-          ((module*) m)->Primitives(subPrimitives);
-          ((module*) m)->Primitive_arrays(subPrimitiveArrays);
+          ((module*)m)->Primitives(subPrimitives);
+          ((module*)m)->Primitive_arrays(subPrimitiveArrays);
           gate->VpiParent(m);
         } else if (utype == uhdmgen_scope) {
-          ((gen_scope*) m)->Primitives(subPrimitives);
-          ((gen_scope*) m)->Primitive_arrays(subPrimitiveArrays);
+          ((gen_scope*)m)->Primitives(subPrimitives);
+          ((gen_scope*)m)->Primitive_arrays(subPrimitiveArrays);
           gate->VpiParent(m);
         }
         writePrimTerms(child, gate, vpiGateType, s);
       } else {
         // Unknown object type
       }
-    } else if (dynamic_cast<Program*> (childDef)) {
-      if (subPrograms == nullptr)
-        subPrograms = s.MakeProgramVec();
+    } else if (dynamic_cast<Program*>(childDef)) {
+      if (subPrograms == nullptr) subPrograms = s.MakeProgramVec();
       program* sm = s.MakeProgram();
       sm->VpiName(child->getInstanceName());
       sm->VpiDefName(child->getModuleName());
@@ -1767,18 +1768,17 @@ void writeInstance(ModuleDefinition* mod, ModuleInstance* instance, any* m,
       subPrograms->push_back(sm);
       UHDM_OBJECT_TYPE utype = m->UhdmType();
       if (utype == uhdmmodule) {
-        ((module*) m)->Programs(subPrograms);
-        sm->Instance((module*) m);
+        ((module*)m)->Programs(subPrograms);
+        sm->Instance((module*)m);
         sm->VpiParent(m);
       } else if (utype == uhdmgen_scope) {
-        ((gen_scope*) m)->Programs(subPrograms);
+        ((gen_scope*)m)->Programs(subPrograms);
         sm->VpiParent(m);
       }
       writeElabProgram(s, child, sm);
     } else {
       // Undefined module
-      if (subModules == nullptr)
-        subModules = s.MakeModuleVec();
+      if (subModules == nullptr) subModules = s.MakeModuleVec();
       module* sm = s.MakeModule();
       sm->VpiName(child->getInstanceName());
       sm->VpiDefName(child->getModuleName());
@@ -1788,17 +1788,31 @@ void writeInstance(ModuleDefinition* mod, ModuleInstance* instance, any* m,
       subModules->push_back(sm);
       UHDM_OBJECT_TYPE utype = m->UhdmType();
       if (utype == uhdmmodule) {
-        ((module*) m)->Modules(subModules);
-        sm->Instance((module*) m);
-        sm->Module((module*) m);
+        ((module*)m)->Modules(subModules);
+        sm->Instance((module*)m);
+        sm->Module((module*)m);
         sm->VpiParent(m);
       } else if (utype == uhdmgen_scope) {
-        ((gen_scope*) m)->Modules(subModules);
+        ((gen_scope*)m)->Modules(subModules);
         sm->VpiParent(m);
       }
-      writeInstance(mm, child, sm, compileDesign, componentMap, modPortMap,instanceMap, exprBuilder);
+      writeInstance(mm, child, sm, compileDesign, componentMap, modPortMap,
+                    instanceMap, exprBuilder);
     }
   }
+}
+
+void printUhdmStats(Serializer& s) {
+  std::cout << "UHDM Objects Stats:\n";
+  std::map<std::string, unsigned long> stats = s.ObjectStats();
+  std::multimap<unsigned long, std::string> rstats;
+  for (auto stat : stats) {
+    if (stat.second) rstats.insert(std::make_pair(stat.second, stat.first));
+  }
+  for (auto stat : rstats) {
+    std::cout << stat.second << " " << stat.first << "\n";
+  }
+  std::cout << "\n";
 }
 
 vpiHandle UhdmWriter::write(const std::string& uhdmFile) const {
@@ -1807,13 +1821,16 @@ vpiHandle UhdmWriter::write(const std::string& uhdmFile) const {
   InstanceMap instanceMap;
   Serializer& s = m_compileDesign->getSerializer();
   ExprBuilder exprBuilder;
-  exprBuilder.seterrorReporting(m_compileDesign->getCompiler()->getErrorContainer(), 
-     m_compileDesign->getCompiler()->getSymbolTable());
+  exprBuilder.seterrorReporting(
+      m_compileDesign->getCompiler()->getErrorContainer(),
+      m_compileDesign->getCompiler()->getSymbolTable());
 
-  Location loc(m_compileDesign->getCompiler()->getSymbolTable()->registerSymbol(uhdmFile));
+  Location loc(m_compileDesign->getCompiler()->getSymbolTable()->registerSymbol(
+      uhdmFile));
   Error err(ErrorDefinition::UHDM_CREATING_MODEL, loc);
   m_compileDesign->getCompiler()->getErrorContainer()->addError(err);
-  m_compileDesign->getCompiler()->getErrorContainer()->printMessages(m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
+  m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
+      m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
 
   vpiHandle designHandle = 0;
   std::vector<vpiHandle> designs;
@@ -1847,7 +1864,7 @@ vpiHandle UhdmWriter::write(const std::string& uhdmFile) const {
       if (pack->getFileContents().size() &&
           pack->getType() == VObjectType::slPackage_declaration) {
         const FileContent* fC = pack->getFileContents()[0];
-        package* p = (package*) pack->getUhdmInstance();
+        package* p = (package*)pack->getUhdmInstance();
         componentMap.insert(std::make_pair(pack, p));
         p->VpiParent(d);
         p->VpiDefName(pack->getName());
@@ -1886,7 +1903,7 @@ vpiHandle UhdmWriter::write(const std::string& uhdmFile) const {
         p->VpiEndLineNo(fC->EndLine(modId));
         p->VpiEndColumnNo(fC->EndColumn(modId));
         p->Attributes(prog->Attributes());
-        writeProgram(prog, p, s, componentMap,modPortMap);
+        writeProgram(prog, p, s, componentMap, modPortMap);
         uhdm_programs->push_back(p);
       }
     }
@@ -1929,7 +1946,8 @@ vpiHandle UhdmWriter::write(const std::string& uhdmFile) const {
       } else if (mod->getType() == VObjectType::slModule_declaration) {
         const FileContent* fC = mod->getFileContents()[0];
         module* m = s.MakeModule();
-        if (m_compileDesign->getCompiler()->isLibraryFile(mod->getFileContents()[0]->getSymbolId())) {
+        if (m_compileDesign->getCompiler()->isLibraryFile(
+                mod->getFileContents()[0]->getSymbolId())) {
           m->VpiCellInstance(true);
         }
         componentMap.insert(std::make_pair(mod, m));
@@ -1983,39 +2001,50 @@ vpiHandle UhdmWriter::write(const std::string& uhdmFile) const {
     VectorOfmodule* uhdm_top_modules = s.MakeModuleVec();
     for (ModuleInstance* inst : topLevelModules) {
       DesignComponent* component = inst->getDefinition();
-      ModuleDefinition* mod = dynamic_cast<ModuleDefinition*> (component);
-      const auto &itr = componentMap.find(mod);
+      ModuleDefinition* mod = dynamic_cast<ModuleDefinition*>(component);
+      const auto& itr = componentMap.find(mod);
       module* m = s.MakeModule();
-      module* def = (module*) itr->second;
+      module* def = (module*)itr->second;
       m->VpiDefName(def->VpiDefName());
-      m->VpiName(def->VpiDefName()); // Top's instance name is module name
-      m->VpiFullName(def->VpiDefName()); // Top's full instance name is module name
+      m->VpiName(def->VpiDefName());  // Top's instance name is module name
+      m->VpiFullName(
+          def->VpiDefName());  // Top's full instance name is module name
       m->VpiFile(def->VpiFile());
       m->VpiLineNo(def->VpiLineNo());
       m->VpiColumnNo(def->VpiColumnNo());
       m->VpiEndLineNo(def->VpiEndLineNo());
       m->VpiEndColumnNo(def->VpiEndColumnNo());
-      writeInstance(mod, inst, m, m_compileDesign, componentMap, modPortMap, instanceMap, exprBuilder);
+      writeInstance(mod, inst, m, m_compileDesign, componentMap, modPortMap,
+                    instanceMap, exprBuilder);
       uhdm_top_modules->push_back(m);
     }
     d->TopModules(uhdm_top_modules);
   }
+
+  if (m_compileDesign->getCompiler()->getCommandLineParser()->getUhdmStats())
+    printUhdmStats(s);
 
   // ----------------------------------
   // Fully elaborated model
   if (m_compileDesign->getCompiler()->getCommandLineParser()->getElabUhdm()) {
     Error err(ErrorDefinition::UHDM_ELABORATION, loc);
     m_compileDesign->getCompiler()->getErrorContainer()->addError(err);
-    m_compileDesign->getCompiler()->getErrorContainer()->printMessages(m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
+    m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
+        m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
 
     ElaboratorListener* listener = new ElaboratorListener(&s, false);
-    listen_designs(designs,listener);
+    listener->uniquifyTypespec(false);
+    listen_designs(designs, listener);
   }
+
+  if (m_compileDesign->getCompiler()->getCommandLineParser()->getUhdmStats())
+    printUhdmStats(s);
 
   {
     Error err(ErrorDefinition::UHDM_WRITE_DB, loc);
     m_compileDesign->getCompiler()->getErrorContainer()->addError(err);
-    m_compileDesign->getCompiler()->getErrorContainer()->printMessages(m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
+    m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
+        m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
   }
   s.Save(uhdmFile);
 
@@ -2035,27 +2064,32 @@ vpiHandle UhdmWriter::write(const std::string& uhdmFile) const {
     delete uhdmchecker;
   }
   if (m_compileDesign->getCompiler()->getCommandLineParser()->getDebugUhdm()) {
-    Location loc(m_compileDesign->getCompiler()->getSymbolTable()->registerSymbol(uhdmFile));
+    Location loc(
+        m_compileDesign->getCompiler()->getSymbolTable()->registerSymbol(
+            uhdmFile));
     Error err1(ErrorDefinition::UHDM_LOAD_DB, loc);
     m_compileDesign->getCompiler()->getErrorContainer()->addError(err1);
-    m_compileDesign->getCompiler()->getErrorContainer()->printMessages(m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
+    m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
+        m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
 
     const std::vector<vpiHandle>& restoredDesigns = s.Restore(uhdmFile);
 
     Error err2(ErrorDefinition::UHDM_VISITOR, loc);
     m_compileDesign->getCompiler()->getErrorContainer()->addError(err2);
-    m_compileDesign->getCompiler()->getErrorContainer()->printMessages(m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
+    m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
+        m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
 
     std::cout << "====== UHDM =======\n";
     if (restoredDesigns.size()) {
       designHandle = restoredDesigns[0];
     }
-    vpi_show_ids(m_compileDesign->getCompiler()->getCommandLineParser()->showVpiIds());
+    vpi_show_ids(
+        m_compileDesign->getCompiler()->getCommandLineParser()->showVpiIds());
     std::string restored = visit_designs(restoredDesigns);
     std::cout << restored;
     std::cout << "===================\n";
-
   }
-  m_compileDesign->getCompiler()->getErrorContainer()->printMessages(m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
+  m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
+      m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
   return designHandle;
 }

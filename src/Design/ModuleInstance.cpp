@@ -20,16 +20,17 @@
  *
  * Created on October 16, 2017, 10:48 PM
  */
-#include <string>
-#include <iostream>
-#include "SourceCompile/SymbolTable.h"
-#include "Library/Library.h"
-#include "Design/FileContent.h"
-
 #include "Design/ModuleInstance.h"
-#include "uhdm.h"
-#include "clone_tree.h"
+
+#include <iostream>
+#include <string>
+
+#include "Design/FileContent.h"
 #include "ElaboratorListener.h"
+#include "Library/Library.h"
+#include "SourceCompile/SymbolTable.h"
+#include "clone_tree.h"
+#include "uhdm.h"
 
 using namespace SURELOG;
 using namespace UHDM;
@@ -52,17 +53,19 @@ ModuleInstance::ModuleInstance(DesignComponent* moduleDefinition,
   }
 }
 
-Value* ModuleInstance::getValue(const std::string& name, ExprBuilder& exprBuilder) const {
+Value* ModuleInstance::getValue(const std::string& name,
+                                ExprBuilder& exprBuilder) const {
   Value* sval = nullptr;
 
   if (getComplexValue(name)) {
     return nullptr;
   }
 
-  ModuleInstance* instance = (ModuleInstance*) this;
+  ModuleInstance* instance = (ModuleInstance*)this;
   while (instance) {
     if (instance->m_netlist) {
-      UHDM::VectorOfparam_assign* param_assigns = instance->m_netlist->param_assigns();
+      UHDM::VectorOfparam_assign* param_assigns =
+          instance->m_netlist->param_assigns();
       if (param_assigns) {
         for (param_assign* param : *param_assigns) {
           if (param && param->Lhs()) {
@@ -107,7 +110,7 @@ Value* ModuleInstance::getValue(const std::string& name, ExprBuilder& exprBuilde
       }
     }
   }
-  
+
   return sval;
 }
 
@@ -121,8 +124,8 @@ void ModuleInstance::addSubInstances(ModuleInstance** subInstances,
 
 ModuleInstance* ModuleInstanceFactory::newModuleInstance(
     DesignComponent* moduleDefinition, const FileContent* fileContent,
-    NodeId nodeId,
-    ModuleInstance* parent, std::string instName, std::string modName) {
+    NodeId nodeId, ModuleInstance* parent, std::string instName,
+    std::string modName) {
   return new ModuleInstance(moduleDefinition, fileContent, nodeId, parent,
                             instName, modName);
 }

@@ -24,11 +24,14 @@
 #ifndef DESIGNELEMENT_H
 #define DESIGNELEMENT_H
 
+#include "Design/TimeInfo.h"
+#include "SourceCompile/SymbolTable.h"
+
 namespace SURELOG {
 
 class DesignElement final {
  public:
-   enum ElemType {
+  enum ElemType {
     Module,
     Primitive,
     Interface,
@@ -45,18 +48,21 @@ class DesignElement final {
   };
 
   DesignElement(SymbolId name, SymbolId fileId, ElemType type,
-                SymbolId uniqueId, unsigned int line, unsigned short column, unsigned int endLine, unsigned short endColumn, SymbolId parent);
+                SymbolId uniqueId, unsigned int line, unsigned short column,
+                unsigned int endLine, unsigned short endColumn,
+                SymbolId parent);
 
   SymbolId m_name;
   SymbolId m_fileId;
-  ElemType m_type;
-  SymbolId m_uniqueId;
-  unsigned int m_line;
-  unsigned short m_column;
-  unsigned int m_endLine;
-  unsigned short m_endColumn;
-  TimeInfo m_timeInfo;
+  const ElemType m_type;
+  const SymbolId m_uniqueId;
+  const unsigned int m_line;
+  const unsigned short m_column;
+  const unsigned int m_endLine;
+  const unsigned short m_endColumn;
   SymbolId m_parent;
+
+  TimeInfo m_timeInfo;
   NodeId m_node;
   void* m_context;  // Not persisted field, only used to build the DesignElement
                     // -> VNode relation

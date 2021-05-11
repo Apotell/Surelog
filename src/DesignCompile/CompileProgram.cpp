@@ -20,28 +20,27 @@
  *
  * Created on June 6, 2018, 10:43 PM
  */
-#include "SourceCompile/VObjectTypes.h"
-#include "Design/VObject.h"
-#include "Library/Library.h"
-#include "Design/Signal.h"
-#include "Design/FileContent.h"
-#include "Design/ClockingBlock.h"
-#include "Testbench/ClassDefinition.h"
-#include "SourceCompile/SymbolTable.h"
-#include "ErrorReporting/Error.h"
-#include "ErrorReporting/Location.h"
-#include "ErrorReporting/Error.h"
-#include "CommandLine/CommandLineParser.h"
-#include "ErrorReporting/ErrorDefinition.h"
-#include "ErrorReporting/ErrorContainer.h"
-#include "SourceCompile/CompilationUnit.h"
-#include "SourceCompile/PreprocessFile.h"
-#include "SourceCompile/CompileSourceFile.h"
-#include "SourceCompile/ParseFile.h"
-#include "SourceCompile/Compiler.h"
-#include "DesignCompile/CompileHelper.h"
-#include "DesignCompile/CompileDesign.h"
 #include "DesignCompile/CompileProgram.h"
+
+#include "CommandLine/CommandLineParser.h"
+#include "Design/ClockingBlock.h"
+#include "Design/Signal.h"
+#include "Design/VObject.h"
+#include "DesignCompile/CompileDesign.h"
+#include "DesignCompile/CompileHelper.h"
+#include "ErrorReporting/Error.h"
+#include "ErrorReporting/ErrorContainer.h"
+#include "ErrorReporting/ErrorDefinition.h"
+#include "ErrorReporting/Location.h"
+#include "Library/Library.h"
+#include "SourceCompile/CompilationUnit.h"
+#include "SourceCompile/CompileSourceFile.h"
+#include "SourceCompile/Compiler.h"
+#include "SourceCompile/ParseFile.h"
+#include "SourceCompile/PreprocessFile.h"
+#include "SourceCompile/SymbolTable.h"
+#include "SourceCompile/VObjectTypes.h"
+#include "Testbench/ClassDefinition.h"
 
 using namespace SURELOG;
 
@@ -204,9 +203,9 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
               nullptr, ParameterPortListId != 0, false, false);
 
         } else {
-          m_helper.compileParameterDeclaration(m_program, fC, id,
-                                               m_compileDesign, false, nullptr,
-                                               ParameterPortListId != 0, false, false);
+          m_helper.compileParameterDeclaration(
+              m_program, fC, id, m_compileDesign, false, nullptr,
+              ParameterPortListId != 0, false, false);
         }
         break;
       }
@@ -221,9 +220,9 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
               nullptr, ParameterPortListId != 0, false, false);
 
         } else {
-          m_helper.compileParameterDeclaration(m_program, fC, id,
-                                               m_compileDesign, true, nullptr,
-                                               ParameterPortListId != 0, false, false);
+          m_helper.compileParameterDeclaration(
+              m_program, fC, id, m_compileDesign, true, nullptr,
+              ParameterPortListId != 0, false, false);
         }
         break;
       }

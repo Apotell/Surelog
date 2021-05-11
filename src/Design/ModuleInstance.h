@@ -25,10 +25,10 @@
 #define MODULEINSTANCE_H
 
 #include "Design/ModuleDefinition.h"
-#include "Expression/Value.h"
-#include "Expression/ExprBuilder.h"
-#include "Design/ValuedComponentI.h"
 #include "Design/Netlist.h"
+#include "Design/ValuedComponentI.h"
+#include "Expression/ExprBuilder.h"
+#include "Expression/Value.h"
 
 namespace SURELOG {
 
@@ -40,6 +40,9 @@ class ModuleInstance : public ValuedComponentI {
   ~ModuleInstance() override;
   void addSubInstances(ModuleInstance** subInstances,
                        unsigned int nbSubInstances);
+  void setInstanceBinding(ModuleInstance* boundToInstance) {
+    m_boundInstance = boundToInstance;
+  }
   DesignComponent* getDefinition() { return m_definition; }
   unsigned int getNbChildren() { return m_nbChildren; }
   ModuleInstance* getChildren(unsigned int i) {
@@ -71,9 +74,12 @@ class ModuleInstance : public ValuedComponentI {
   Netlist* getNetlist() { return m_netlist; }
   void setNetlist(Netlist* netlist) { m_netlist = netlist; }
 
-  std::vector<Parameter*>& getTypeParams() { return m_typeParams; }   
+  std::vector<Parameter*>& getTypeParams() { return m_typeParams; }
 
-  Value* getValue(const std::string& name, ExprBuilder& exprBuilder) const override;
+  Value* getValue(const std::string& name,
+                  ExprBuilder& exprBuilder) const override;
+
+  ModuleInstance* getInstanceBinding() { return m_boundInstance; }
 
  private:
   DesignComponent* m_definition;
@@ -84,16 +90,16 @@ class ModuleInstance : public ValuedComponentI {
   ModuleInstance* m_parent;
   std::string m_instName;  // Can carry the moduleName@instanceName if the
                            // module is undefined
-  std::vector<Parameter*> m_typeParams;                         
+  std::vector<Parameter*> m_typeParams;
   Netlist* m_netlist;
+  ModuleInstance* m_boundInstance = nullptr;
 };
 
 class ModuleInstanceFactory {
  public:
   ModuleInstance* newModuleInstance(DesignComponent* definition,
                                     const FileContent* fileContent,
-                                    NodeId nodeId,
-                                    ModuleInstance* parent,
+                                    NodeId nodeId, ModuleInstance* parent,
                                     std::string instName,
                                     std::string moduleName);
 };

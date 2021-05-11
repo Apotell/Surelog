@@ -247,6 +247,7 @@ n<> u<167> t<Top_level_rule> l<1:0> el<25:0>
 ====== UHDM =======
 design: (work@flash_ctrl_info_cfg)
 |vpiName:work@flash_ctrl_info_cfg
+|vpiElaborated:1
 |uhdmallPackages:
 \_package: builtin (builtin::), parent:work@flash_ctrl_info_cfg
   |vpiDefName:builtin
@@ -285,6 +286,7 @@ design: (work@flash_ctrl_info_cfg)
     \_parameter: (flash_ctrl_pkg::InfoTypes), line:2:16, endln:2:35, parent:flash_ctrl_pkg::
       |vpiName:InfoTypes
       |vpiFullName:flash_ctrl_pkg::InfoTypes
+      |UINT:3
       |vpiTypespec:
       \_int_typespec: (InfoTypes), line:2:12, endln:2:15, parent:flash_ctrl_pkg::InfoTypes
         |vpiName:InfoTypes
@@ -357,6 +359,7 @@ design: (work@flash_ctrl_info_cfg)
     \_parameter: (flash_ctrl_pkg::InfosPerBank), line:8:16, endln:8:36, parent:flash_ctrl_pkg::
       |vpiName:InfosPerBank
       |vpiFullName:flash_ctrl_pkg::InfosPerBank
+      |UINT:10
       |vpiTypespec:
       \_int_typespec: (InfosPerBank), line:8:12, endln:8:15, parent:flash_ctrl_pkg::InfosPerBank
         |vpiName:InfosPerBank
@@ -383,13 +386,13 @@ design: (work@flash_ctrl_info_cfg)
         |vpiClassDefn:
         \_class_defn: (work@mailbox) ${SURELOG_DIR}/build/bin/sv/builtin.sv:4: , endln:30:8, parent:work@flash_ctrl_info_cfg
     |vpiIODecl:
-    \_io_decl: (bound), parent:work@mailbox::new
+    \_io_decl: (bound)
       |vpiName:bound
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:6:16, endln:6:19, parent:bound
+      \_int_typespec: , line:6:16, endln:6:19
       |vpiExpr:
-      \_constant: , line:6:28, endln:6:29, parent:bound
+      \_constant: , line:6:28, endln:6:29
         |vpiConstType:9
         |vpiDecompile:0
         |vpiSize:64
@@ -418,8 +421,10 @@ design: (work@flash_ctrl_info_cfg)
     |vpiVisibility:1
     |vpiName:try_put
     |vpiFullName:work@mailbox::try_put
+    |vpiReturn:
+    \_logic_var: 
     |vpiIODecl:
-    \_io_decl: (message), parent:work@mailbox::try_put
+    \_io_decl: (message)
       |vpiName:message
       |vpiDirection:1
   |vpiMethod:
@@ -441,7 +446,7 @@ design: (work@flash_ctrl_info_cfg)
     |vpiReturn:
     \_int_var: , line:21:11, endln:21:14
     |vpiIODecl:
-    \_io_decl: (message), parent:work@mailbox::try_get
+    \_io_decl: (message)
       |vpiName:message
       |vpiDirection:6
   |vpiMethod:
@@ -463,7 +468,7 @@ design: (work@flash_ctrl_info_cfg)
     |vpiReturn:
     \_int_var: , line:27:11, endln:27:14
     |vpiIODecl:
-    \_io_decl: (message), parent:work@mailbox::try_peek
+    \_io_decl: (message)
       |vpiName:message
       |vpiDirection:6
 |uhdmallClasses:
@@ -602,13 +607,13 @@ design: (work@flash_ctrl_info_cfg)
         |vpiClassDefn:
         \_class_defn: (work@semaphore) ${SURELOG_DIR}/build/bin/sv/builtin.sv:58: , endln:72:8, parent:work@flash_ctrl_info_cfg
     |vpiIODecl:
-    \_io_decl: (keyCount), parent:work@semaphore::new
+    \_io_decl: (keyCount)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:60:15, endln:60:18, parent:keyCount
+      \_int_typespec: , line:60:15, endln:60:18
       |vpiExpr:
-      \_constant: , line:60:30, endln:60:31, parent:keyCount
+      \_constant: , line:60:30, endln:60:31
         |vpiConstType:9
         |vpiDecompile:0
         |vpiSize:64
@@ -624,9 +629,9 @@ design: (work@flash_ctrl_info_cfg)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:63:11, endln:63:14, parent:keyCount
+      \_int_typespec: , line:63:11, endln:63:14
       |vpiExpr:
-      \_constant: , line:63:26, endln:63:27, parent:keyCount
+      \_constant: , line:63:26, endln:63:27
         |vpiConstType:9
         |vpiDecompile:1
         |vpiSize:64
@@ -642,9 +647,9 @@ design: (work@flash_ctrl_info_cfg)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:66:11, endln:66:14, parent:keyCount
+      \_int_typespec: , line:66:11, endln:66:14
       |vpiExpr:
-      \_constant: , line:66:26, endln:66:27, parent:keyCount
+      \_constant: , line:66:26, endln:66:27
         |vpiConstType:9
         |vpiDecompile:1
         |vpiSize:64
@@ -658,13 +663,13 @@ design: (work@flash_ctrl_info_cfg)
     |vpiReturn:
     \_int_var: , line:69:11, endln:69:14
     |vpiIODecl:
-    \_io_decl: (keyCount), parent:work@semaphore::try_get
+    \_io_decl: (keyCount)
       |vpiName:keyCount
       |vpiDirection:1
       |vpiTypedef:
-      \_int_typespec: , line:69:23, endln:69:26, parent:keyCount
+      \_int_typespec: , line:69:23, endln:69:26
       |vpiExpr:
-      \_constant: , line:69:38, endln:69:39, parent:keyCount
+      \_constant: , line:69:38, endln:69:39
         |vpiConstType:9
         |vpiDecompile:1
         |vpiSize:64
@@ -688,6 +693,7 @@ design: (work@flash_ctrl_info_cfg)
       |vpiName:InfoTypes
       |vpiFullName:work@flash_ctrl_info_cfg.InfoTypes
       |vpiImported:flash_ctrl_pkg
+      |UINT:3
       |vpiTypespec:
       \_int_typespec: (InfoTypes), line:2:12, endln:2:15, parent:work@flash_ctrl_info_cfg.InfoTypes
         |vpiName:InfoTypes
@@ -708,6 +714,7 @@ design: (work@flash_ctrl_info_cfg)
             \_parameter: (flash_ctrl_pkg::InfoTypes), line:2:16, endln:2:35, parent:flash_ctrl_pkg::
               |vpiName:InfoTypes
               |vpiFullName:flash_ctrl_pkg::InfoTypes
+              |UINT:3
               |vpiTypespec:
               \_int_typespec: (InfoTypes), line:2:12, endln:2:15, parent:flash_ctrl_pkg::InfoTypes
                 |vpiName:InfoTypes
@@ -780,6 +787,7 @@ design: (work@flash_ctrl_info_cfg)
             \_parameter: (flash_ctrl_pkg::InfosPerBank), line:8:16, endln:8:36, parent:flash_ctrl_pkg::
               |vpiName:InfosPerBank
               |vpiFullName:flash_ctrl_pkg::InfosPerBank
+              |UINT:10
               |vpiTypespec:
               \_int_typespec: (InfosPerBank), line:8:12, endln:8:15, parent:flash_ctrl_pkg::InfosPerBank
                 |vpiName:InfosPerBank
@@ -860,6 +868,7 @@ design: (work@flash_ctrl_info_cfg)
       |vpiName:InfosPerBank
       |vpiFullName:work@flash_ctrl_info_cfg.InfosPerBank
       |vpiImported:flash_ctrl_pkg
+      |UINT:10
       |vpiTypespec:
       \_int_typespec: (InfosPerBank), line:8:12, endln:8:15, parent:work@flash_ctrl_info_cfg.InfosPerBank
         |vpiName:InfosPerBank
@@ -877,6 +886,7 @@ design: (work@flash_ctrl_info_cfg)
     \_parameter: (work@flash_ctrl_info_cfg.InfoSel), line:14:16, endln:14:27, parent:work@flash_ctrl_info_cfg
       |vpiName:InfoSel
       |vpiFullName:work@flash_ctrl_info_cfg.InfoSel
+      |UINT:2
       |vpiTypespec:
       \_int_typespec: (InfoSel), line:14:12, endln:14:15, parent:work@flash_ctrl_info_cfg.InfoSel
         |vpiName:InfoSel
@@ -918,6 +928,7 @@ design: (work@flash_ctrl_info_cfg)
     |vpiName:InfoTypes
     |vpiFullName:work@flash_ctrl_info_cfg.InfoTypes
     |vpiImported:flash_ctrl_pkg
+    |UINT:3
     |vpiTypespec:
     \_int_typespec: (InfoTypes), line:2:12, endln:2:15, parent:work@flash_ctrl_info_cfg.InfoTypes
       |vpiName:InfoTypes
@@ -928,6 +939,7 @@ design: (work@flash_ctrl_info_cfg)
     |vpiName:InfosPerBank
     |vpiFullName:work@flash_ctrl_info_cfg.InfosPerBank
     |vpiImported:flash_ctrl_pkg
+    |UINT:10
     |vpiTypespec:
     \_int_typespec: (InfosPerBank), line:8:12, endln:8:15, parent:work@flash_ctrl_info_cfg.InfosPerBank
       |vpiName:InfosPerBank
@@ -1001,11 +1013,9 @@ design: (work@flash_ctrl_info_cfg)
               |vpiName:cfgs_o
               |vpiFullName:work@flash_ctrl_info_cfg.gen_info_priv[3].gen_invalid_region.cfgs_o
               |vpiIndex:
-              \_constant: , line:20:20, endln:20:21, parent:work@flash_ctrl_info_cfg.gen_info_priv[3].gen_invalid_region.cfgs_o
-                |vpiConstType:9
-                |vpiDecompile:3
-                |vpiSize:64
-                |UINT:3
+              \_ref_obj: (work@flash_ctrl_info_cfg.gen_info_priv[3].gen_invalid_region.cfgs_o.i), line:20:20, endln:20:21, parent:work@flash_ctrl_info_cfg.gen_info_priv[3].gen_invalid_region.cfgs_o
+                |vpiName:i
+                |vpiFullName:work@flash_ctrl_info_cfg.gen_info_priv[3].gen_invalid_region.cfgs_o.i
       |vpiParameter:
       \_parameter: (work@flash_ctrl_info_cfg.gen_info_priv[3].i), line:16, parent:work@flash_ctrl_info_cfg.gen_info_priv[3]
         |vpiName:i
@@ -1037,11 +1047,9 @@ design: (work@flash_ctrl_info_cfg)
               |vpiName:cfgs_o
               |vpiFullName:work@flash_ctrl_info_cfg.gen_info_priv[4].gen_invalid_region.cfgs_o
               |vpiIndex:
-              \_constant: , line:20:20, endln:20:21, parent:work@flash_ctrl_info_cfg.gen_info_priv[4].gen_invalid_region.cfgs_o
-                |vpiConstType:9
-                |vpiDecompile:4
-                |vpiSize:64
-                |UINT:4
+              \_ref_obj: (work@flash_ctrl_info_cfg.gen_info_priv[4].gen_invalid_region.cfgs_o.i), line:20:20, endln:20:21, parent:work@flash_ctrl_info_cfg.gen_info_priv[4].gen_invalid_region.cfgs_o
+                |vpiName:i
+                |vpiFullName:work@flash_ctrl_info_cfg.gen_info_priv[4].gen_invalid_region.cfgs_o.i
       |vpiParameter:
       \_parameter: (work@flash_ctrl_info_cfg.gen_info_priv[4].i), line:16, parent:work@flash_ctrl_info_cfg.gen_info_priv[4]
         |vpiName:i
@@ -1073,11 +1081,9 @@ design: (work@flash_ctrl_info_cfg)
               |vpiName:cfgs_o
               |vpiFullName:work@flash_ctrl_info_cfg.gen_info_priv[5].gen_invalid_region.cfgs_o
               |vpiIndex:
-              \_constant: , line:20:20, endln:20:21, parent:work@flash_ctrl_info_cfg.gen_info_priv[5].gen_invalid_region.cfgs_o
-                |vpiConstType:9
-                |vpiDecompile:5
-                |vpiSize:64
-                |UINT:5
+              \_ref_obj: (work@flash_ctrl_info_cfg.gen_info_priv[5].gen_invalid_region.cfgs_o.i), line:20:20, endln:20:21, parent:work@flash_ctrl_info_cfg.gen_info_priv[5].gen_invalid_region.cfgs_o
+                |vpiName:i
+                |vpiFullName:work@flash_ctrl_info_cfg.gen_info_priv[5].gen_invalid_region.cfgs_o.i
       |vpiParameter:
       \_parameter: (work@flash_ctrl_info_cfg.gen_info_priv[5].i), line:16, parent:work@flash_ctrl_info_cfg.gen_info_priv[5]
         |vpiName:i
@@ -1109,11 +1115,9 @@ design: (work@flash_ctrl_info_cfg)
               |vpiName:cfgs_o
               |vpiFullName:work@flash_ctrl_info_cfg.gen_info_priv[6].gen_invalid_region.cfgs_o
               |vpiIndex:
-              \_constant: , line:20:20, endln:20:21, parent:work@flash_ctrl_info_cfg.gen_info_priv[6].gen_invalid_region.cfgs_o
-                |vpiConstType:9
-                |vpiDecompile:6
-                |vpiSize:64
-                |UINT:6
+              \_ref_obj: (work@flash_ctrl_info_cfg.gen_info_priv[6].gen_invalid_region.cfgs_o.i), line:20:20, endln:20:21, parent:work@flash_ctrl_info_cfg.gen_info_priv[6].gen_invalid_region.cfgs_o
+                |vpiName:i
+                |vpiFullName:work@flash_ctrl_info_cfg.gen_info_priv[6].gen_invalid_region.cfgs_o.i
       |vpiParameter:
       \_parameter: (work@flash_ctrl_info_cfg.gen_info_priv[6].i), line:16, parent:work@flash_ctrl_info_cfg.gen_info_priv[6]
         |vpiName:i
@@ -1145,11 +1149,9 @@ design: (work@flash_ctrl_info_cfg)
               |vpiName:cfgs_o
               |vpiFullName:work@flash_ctrl_info_cfg.gen_info_priv[7].gen_invalid_region.cfgs_o
               |vpiIndex:
-              \_constant: , line:20:20, endln:20:21, parent:work@flash_ctrl_info_cfg.gen_info_priv[7].gen_invalid_region.cfgs_o
-                |vpiConstType:9
-                |vpiDecompile:7
-                |vpiSize:64
-                |UINT:7
+              \_ref_obj: (work@flash_ctrl_info_cfg.gen_info_priv[7].gen_invalid_region.cfgs_o.i), line:20:20, endln:20:21, parent:work@flash_ctrl_info_cfg.gen_info_priv[7].gen_invalid_region.cfgs_o
+                |vpiName:i
+                |vpiFullName:work@flash_ctrl_info_cfg.gen_info_priv[7].gen_invalid_region.cfgs_o.i
       |vpiParameter:
       \_parameter: (work@flash_ctrl_info_cfg.gen_info_priv[7].i), line:16, parent:work@flash_ctrl_info_cfg.gen_info_priv[7]
         |vpiName:i
@@ -1181,11 +1183,9 @@ design: (work@flash_ctrl_info_cfg)
               |vpiName:cfgs_o
               |vpiFullName:work@flash_ctrl_info_cfg.gen_info_priv[8].gen_invalid_region.cfgs_o
               |vpiIndex:
-              \_constant: , line:20:20, endln:20:21, parent:work@flash_ctrl_info_cfg.gen_info_priv[8].gen_invalid_region.cfgs_o
-                |vpiConstType:9
-                |vpiDecompile:8
-                |vpiSize:64
-                |UINT:8
+              \_ref_obj: (work@flash_ctrl_info_cfg.gen_info_priv[8].gen_invalid_region.cfgs_o.i), line:20:20, endln:20:21, parent:work@flash_ctrl_info_cfg.gen_info_priv[8].gen_invalid_region.cfgs_o
+                |vpiName:i
+                |vpiFullName:work@flash_ctrl_info_cfg.gen_info_priv[8].gen_invalid_region.cfgs_o.i
       |vpiParameter:
       \_parameter: (work@flash_ctrl_info_cfg.gen_info_priv[8].i), line:16, parent:work@flash_ctrl_info_cfg.gen_info_priv[8]
         |vpiName:i
@@ -1217,18 +1217,16 @@ design: (work@flash_ctrl_info_cfg)
               |vpiName:cfgs_o
               |vpiFullName:work@flash_ctrl_info_cfg.gen_info_priv[9].gen_invalid_region.cfgs_o
               |vpiIndex:
-              \_constant: , line:20:20, endln:20:21, parent:work@flash_ctrl_info_cfg.gen_info_priv[9].gen_invalid_region.cfgs_o
-                |vpiConstType:9
-                |vpiDecompile:9
-                |vpiSize:64
-                |UINT:9
+              \_ref_obj: (work@flash_ctrl_info_cfg.gen_info_priv[9].gen_invalid_region.cfgs_o.i), line:20:20, endln:20:21, parent:work@flash_ctrl_info_cfg.gen_info_priv[9].gen_invalid_region.cfgs_o
+                |vpiName:i
+                |vpiFullName:work@flash_ctrl_info_cfg.gen_info_priv[9].gen_invalid_region.cfgs_o.i
       |vpiParameter:
       \_parameter: (work@flash_ctrl_info_cfg.gen_info_priv[9].i), line:16, parent:work@flash_ctrl_info_cfg.gen_info_priv[9]
         |vpiName:i
         |vpiFullName:work@flash_ctrl_info_cfg.gen_info_priv[9].i
         |UINT:9
   |vpiTypedef:
-  \_import: (flash_ctrl_pkg), line:12:34, endln:12:51, parent:work@flash_ctrl_info_cfg
+  \_import: (flash_ctrl_pkg), line:12:34, endln:12:51
   |vpiParamAssign:
   \_param_assign: , line:2:16, endln:2:35, parent:work@flash_ctrl_info_cfg
     |vpiRhs:
@@ -1263,6 +1261,7 @@ design: (work@flash_ctrl_info_cfg)
             \_parameter: (flash_ctrl_pkg::InfoTypes), line:2:16, endln:2:35, parent:flash_ctrl_pkg::
               |vpiName:InfoTypes
               |vpiFullName:flash_ctrl_pkg::InfoTypes
+              |UINT:3
               |vpiTypespec:
               \_int_typespec: (InfoTypes), line:2:12, endln:2:15, parent:flash_ctrl_pkg::InfoTypes
                 |vpiName:InfoTypes
@@ -1335,6 +1334,7 @@ design: (work@flash_ctrl_info_cfg)
             \_parameter: (flash_ctrl_pkg::InfosPerBank), line:8:16, endln:8:36, parent:flash_ctrl_pkg::
               |vpiName:InfosPerBank
               |vpiFullName:flash_ctrl_pkg::InfosPerBank
+              |UINT:10
               |vpiTypespec:
               \_int_typespec: (InfosPerBank), line:8:12, endln:8:15, parent:flash_ctrl_pkg::InfosPerBank
                 |vpiName:InfosPerBank

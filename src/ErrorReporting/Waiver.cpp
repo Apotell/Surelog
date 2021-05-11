@@ -20,12 +20,14 @@
  *
  * Created on May 7, 2017, 11:11 PM
  */
-#include "ErrorReporting/ErrorDefinition.h"
 #include "ErrorReporting/Waiver.h"
-#include <sstream>
-#include <string>
+
 #include <fstream>
 #include <iostream>
+#include <sstream>
+#include <string>
+
+#include "ErrorReporting/ErrorDefinition.h"
 
 using namespace SURELOG;
 
@@ -37,8 +39,8 @@ std::multimap<ErrorDefinition::ErrorType, Waiver::WaiverData> Waiver::m_waivers;
 // 294, col 8: Unused macro argument "CB".
 
 void Waiver::setWaiver(const std::string& messageId,
-                       const std::string& fileName,
-                       unsigned int line, const std::string& objectName) {
+                       const std::string& fileName, unsigned int line,
+                       const std::string& objectName) {
   ErrorDefinition::ErrorType type = ErrorDefinition::getErrorType(messageId);
   Waiver::WaiverData data(type, fileName, line, objectName);
   m_waivers.insert(std::make_pair(type, data));

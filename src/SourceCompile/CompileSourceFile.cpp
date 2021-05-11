@@ -20,39 +20,34 @@
  *
  * Created on February 20, 2017, 9:54 PM
  */
+#include "SourceCompile/CompileSourceFile.h"
 
 #include <string.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 
+#include <cstdlib>
+#include <fstream>
+#include <iostream>
+
+#include "API/PythonAPI.h"
 #include "CommandLine/CommandLineParser.h"
 #include "ErrorReporting/ErrorContainer.h"
-#include "SourceCompile/SymbolTable.h"
+#include "Package/Precompiled.h"
+#include "SourceCompile/AntlrParserHandler.h"
 #include "SourceCompile/CompilationUnit.h"
+#include "SourceCompile/Compiler.h"
+#include "SourceCompile/ParseFile.h"
 #include "SourceCompile/PreprocessFile.h"
-#include "SourceCompile/CompilationUnit.h"
-
+#include "SourceCompile/PythonListen.h"
+#include "SourceCompile/SymbolTable.h"
+#include "Utils/FileUtils.h"
+#include "Utils/StringUtils.h"
 #include "antlr4-runtime.h"
-using namespace antlr4;
 #include "parser/SV3_1aLexer.h"
 #include "parser/SV3_1aParser.h"
 
-#include "SourceCompile/AntlrParserHandler.h"
-
-#include "SourceCompile/CompileSourceFile.h"
-#include "SourceCompile/Compiler.h"
-#include "Utils/StringUtils.h"
-#include "Utils/FileUtils.h"
-#include <cstdlib>
-#include <iostream>
-#include <fstream>
-#include <sys/types.h>
-#include <sys/stat.h>
-using namespace std;
-#include "SourceCompile/PreprocessFile.h"
-#include "SourceCompile/ParseFile.h"
-#include "API/PythonAPI.h"
-#include "SourceCompile/PythonListen.h"
-#include "Package/Precompiled.h"
-
+using namespace antlr4;
 using namespace SURELOG;
 
 CompileSourceFile::CompileSourceFile(SymbolId fileId, CommandLineParser* clp,
@@ -64,15 +59,10 @@ CompileSourceFile::CompileSourceFile(SymbolId fileId, CommandLineParser* clp,
       m_commandLineParser(clp),
       m_errors(errors),
       m_compiler(compiler),
-      m_pp(NULL),
       m_symbolTable(symbols),
-      m_parser(NULL),
       m_compilationUnit(compilationUnit),
       m_action(Preprocess),
       m_ppResultFileId(0),
-      m_interpState(NULL),
-      m_pythonListener(NULL),
-      m_fileAnalyzer(NULL),
       m_library(library) {}
 
 CompileSourceFile::CompileSourceFile(CompileSourceFile* parent,
@@ -83,13 +73,12 @@ CompileSourceFile::CompileSourceFile(CompileSourceFile* parent,
       m_errors(parent->m_errors),
       m_compiler(parent->m_compiler),
       m_pp(parent->m_pp),
-      m_symbolTable(NULL),
-      m_parser(NULL),
       m_compilationUnit(parent->m_compilationUnit),
       m_action(Parse),
       m_ppResultFileId(ppResultFileId),
+#ifdef SURELOG_WITH_PYTHON
       m_interpState(parent->m_interpState),
-      m_pythonListener(NULL),
+#endif
       m_fileAnalyzer(parent->m_fileAnalyzer),
       m_library(parent->m_library) {
   m_parser =
@@ -149,10 +138,10 @@ CompileSourceFile::~CompileSourceFile() {
     delete *itr;
   }
 
-  if (m_parser) delete m_parser;
-
-  if (m_pythonListener) delete m_pythonListener;
-
+  delete m_parser;
+#ifdef SURELOG_WITH_PYTHON
+  delete m_pythonListener;
+#endif
   std::map<SymbolId, PreprocessFile::AntlrParserHandler*>::iterator itr2;
   for (itr2 = m_antlrPpMap.begin(); itr2 != m_antlrPpMap.end(); itr2++) {
     delete (*itr2).second;
@@ -179,6 +168,7 @@ unsigned int CompileSourceFile::getJobSize(Action action) {
 }
 
 bool CompileSourceFile::pythonAPI_() {
+#ifdef SURELOG_WITH_PYTHON
   if (getCommandLineParser()->pythonListener()) {
     m_pythonListener = new PythonListen(m_parser, this);
     if (!m_pythonListener->listen()) {
@@ -189,6 +179,7 @@ bool CompileSourceFile::pythonAPI_() {
       return false;
     }
   }
+
   if (getCommandLineParser()->pythonEvalScriptPerFile()) {
     PythonAPI::evalScriptPerFile(
         getCommandLineParser()->getSymbolTable().getSymbol(
@@ -196,6 +187,9 @@ bool CompileSourceFile::pythonAPI_() {
         m_errors, m_parser->getFileContent(), m_interpState);
   }
   return true;
+#else
+  return false;
+#endif
 }
 
 bool CompileSourceFile::initParser() {
@@ -256,7 +250,8 @@ bool CompileSourceFile::preprocess_() {
 bool CompileSourceFile::postPreprocess_() {
   SymbolTable* symbolTable = getCompiler()->getSymbolTable();
   if (m_commandLineParser->parseOnly()) {
-    m_ppResultFileId = m_symbolTable->registerSymbol(symbolTable->getSymbol(m_fileId));
+    m_ppResultFileId =
+        m_symbolTable->registerSymbol(symbolTable->getSymbol(m_fileId));
     return true;
   }
   std::string m_pp_result = m_pp->getPreProcessedFileContent();
@@ -264,7 +259,6 @@ bool CompileSourceFile::postPreprocess_() {
       (m_commandLineParser->writePpOutputFileId() != 0)) {
     const std::string& directory =
         symbolTable->getSymbol(m_commandLineParser->getFullCompileDir());
-    //std::string fileName = FileUtils::makeRelativePath(symbolTable->getSymbol(m_fileId));
     std::string fullFileName = symbolTable->getSymbol(m_fileId);
     std::string baseFileName = FileUtils::basename(fullFileName);
     std::string filePath = FileUtils::getPathName(fullFileName);
@@ -274,14 +268,16 @@ bool CompileSourceFile::postPreprocess_() {
     const std::string& writePpOutputFileName =
         symbolTable->getSymbol(m_commandLineParser->writePpOutputFileId());
     std::string libName = m_library->getName() + "/";
-    string ppFileName = m_commandLineParser->writePpOutput()
-                            ? directory + libName + fileName
-                            : writePpOutputFileName;
+    std::string ppFileName = m_commandLineParser->writePpOutput()
+                                 ? directory + libName + fileName
+                                 : writePpOutputFileName;
     std::string dirPpFile = FileUtils::getPathName(ppFileName);
     SymbolId ppOutId = symbolTable->registerSymbol(ppFileName);
     m_ppResultFileId = m_symbolTable->registerSymbol(ppFileName);
     SymbolId ppDirId = symbolTable->registerSymbol(dirPpFile);
-
+    if (m_commandLineParser->lowMem()) {
+      return true;
+    }
     if (FileUtils::mkDir(dirPpFile.c_str()) != 0) {
       Location loc(ppDirId);
       Error err(ErrorDefinition::PP_CANNOT_CREATE_DIRECTORY, loc);
@@ -289,7 +285,7 @@ bool CompileSourceFile::postPreprocess_() {
       return false;
     }
     if ((!m_pp->usingCachedVersion()) || (!FileUtils::fileExists(ppFileName))) {
-      ofstream ofs;
+      std::ofstream ofs;
       ofs.open(ppFileName);
       if (ofs.good()) {
         ofs << m_pp_result;
@@ -333,6 +329,7 @@ void CompileSourceFile::setSymbolTable(SymbolTable* symbols) {
   m_symbolTable = symbols;
 }
 
+#ifdef SURELOG_WITH_PYTHON
 void CompileSourceFile::setPythonInterp(PyThreadState* interpState) {
   m_interpState = interpState;
   m_errors->setPythonInterp(interpState);
@@ -343,3 +340,4 @@ void CompileSourceFile::shutdownPythonInterp() {
   PythonAPI::shutdown(m_interpState);
   m_interpState = NULL;
 }
+#endif

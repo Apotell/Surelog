@@ -20,49 +20,38 @@
  *
  * Created on May 13, 2017, 4:42 PM
  */
-#include "API/PythonAPI.h"
-#include <string>
-#include <vector>
-#include <string.h>
-#include "antlr4-runtime.h"
-using namespace antlr4;
-
-#include "ErrorReporting/Waiver.h"
-#include "ErrorReporting/ErrorDefinition.h"
-#include "SourceCompile/SymbolTable.h"
-#include "ErrorReporting/ErrorContainer.h"
-#include "Utils/StringUtils.h"
-
-#include "CommandLine/CommandLineParser.h"
-#include "SourceCompile/CompilationUnit.h"
-#include "SourceCompile/PreprocessFile.h"
-#include "SourceCompile/CompileSourceFile.h"
-#include "SourceCompile/Compiler.h"
-#include "SourceCompile/ParseFile.h"
-#include "SourceCompile/PythonListen.h"
-#include "Design/FileContent.h"
-#include "Testbench/ClassDefinition.h"
-#include <cstdlib>
-#include <iostream>
-#include "antlr4-runtime.h"
-using namespace std;
-using namespace antlr4;
-using namespace SURELOG;
-
-#include "ParserRuleContext.h"
-
-#include "parser/SV3_1aLexer.h"
-#include "parser/SV3_1aParser.h"
-#include "parser/SV3_1aParserBaseListener.h"
-#include "API/SV3_1aPythonListener.h"
-#include "Utils/ParseUtils.h"
-#include "Utils/FileUtils.h"
-#include "API/PythonAPI.h"
-
 #include "API/SLAPI.h"
 
-void SURELOG::SLsetWaiver(const char* messageId, const char* fileName,
-                          unsigned int line, const char* objectName) {
+#include <string.h>
+
+#include <cstdlib>
+#include <iostream>
+
+#include "API/PythonAPI.h"
+#ifdef SURELOG_WITH_PYTHON
+#include "API/SV3_1aPythonListener.h"
+#endif
+
+#include "CommandLine/CommandLineParser.h"
+#include "Design/FileContent.h"
+#include "ErrorReporting/ErrorContainer.h"
+#include "ErrorReporting/ErrorDefinition.h"
+#include "ErrorReporting/Waiver.h"
+#include "SourceCompile/CompilationUnit.h"
+#include "SourceCompile/Compiler.h"
+#include "SourceCompile/PreprocessFile.h"
+#include "SourceCompile/SymbolTable.h"
+#include "Testbench/ClassDefinition.h"
+#include "Utils/FileUtils.h"
+#include "Utils/ParseUtils.h"
+#include "Utils/StringUtils.h"
+#include "antlr4-runtime.h"
+#include "parser/SV3_1aLexer.h"
+#include "parser/SV3_1aParser.h"
+
+namespace SURELOG {
+void SLsetWaiver(const char* messageId, const char* fileName, unsigned int line,
+                 const char* objectName) {
   if (fileName == 0 && line == 0 && objectName == 0) {
     Waiver::setWaiver(messageId, "", 0, "");
   } else if (line == 0 && objectName == 0) {
@@ -74,8 +63,8 @@ void SURELOG::SLsetWaiver(const char* messageId, const char* fileName,
   }
 }
 
-void SURELOG::SLregisterNewErrorType(const char* messageId, const char* text,
-                                     const char* secondLine) {
+void SLregisterNewErrorType(const char* messageId, const char* text,
+                            const char* secondLine) {
   //[WARNI:PP0103]
   std::string errorId = messageId;
   errorId = StringUtils::rtrim(errorId, ']');
@@ -88,14 +77,14 @@ void SURELOG::SLregisterNewErrorType(const char* messageId, const char* text,
   ErrorDefinition::rec(type, severity, category, text, secondLine);
 }
 
-void SURELOG::SLoverrideSeverity(const char* messageId, const char* severity) {
+void SLoverrideSeverity(const char* messageId, const char* severity) {
   ErrorDefinition::setSeverity(ErrorDefinition::getErrorType(messageId),
                                ErrorDefinition::getErrorSeverity(severity));
 }
 
-void SURELOG::SLaddError(ErrorContainer* errors, const char* messageId,
-                         const char* fileName, unsigned int line,
-                         unsigned int col, const char* objectName) {
+void SLaddError(ErrorContainer* errors, const char* messageId,
+                const char* fileName, unsigned int line, unsigned int col,
+                const char* objectName) {
   if (errors == NULL) return;
   SymbolTable* symbolTable = errors->getSymbolTable();
   SymbolId fileId = 0;
@@ -111,11 +100,11 @@ void SURELOG::SLaddError(ErrorContainer* errors, const char* messageId,
   errors->addError(err, false, false);
 }
 
-void SURELOG::SLaddMLError(ErrorContainer* errors, const char* messageId,
-                           const char* fileName1, unsigned int line1,
-                           unsigned int col1, const char* objectName1,
-                           const char* fileName2, unsigned int line2,
-                           unsigned int col2, const char* objectName2) {
+void SLaddMLError(ErrorContainer* errors, const char* messageId,
+                  const char* fileName1, unsigned int line1, unsigned int col1,
+                  const char* objectName1, const char* fileName2,
+                  unsigned int line2, unsigned int col2,
+                  const char* objectName2) {
   if (errors == NULL) return;
   SymbolTable* symbolTable = errors->getSymbolTable();
   SymbolId fileId1 = 0;
@@ -139,10 +128,11 @@ void SURELOG::SLaddMLError(ErrorContainer* errors, const char* messageId,
   errors->addError(err, false, false);
 }
 
-void SURELOG::SLaddErrorContext(SV3_1aPythonListener* prog,
-                                antlr4::ParserRuleContext* context,
-                                const char* messageId, const char* objectName,
-                                bool printColumn) {
+void SLaddErrorContext(SV3_1aPythonListener* prog,
+                       antlr4::ParserRuleContext* context,
+                       const char* messageId, const char* objectName,
+                       bool printColumn) {
+#ifdef SURELOG_WITH_PYTHON
   SV3_1aPythonListener* listener = (SV3_1aPythonListener*)prog;
   antlr4::ParserRuleContext* ctx = (antlr4::ParserRuleContext*)context;
   ErrorContainer* errors =
@@ -161,14 +151,17 @@ void SURELOG::SLaddErrorContext(SV3_1aPythonListener* prog,
           ->registerSymbol(objectName));
   Error err(type, loc);
   errors->addError(err, false, false);
+#else
+  std::cerr << "SLaddErrorContext(): Python support not compiled in\n";
+#endif
 }
 
-void SURELOG::SLaddMLErrorContext(SV3_1aPythonListener* prog,
-                                  antlr4::ParserRuleContext* context1,
-                                  antlr4::ParserRuleContext* context2,
-                                  const char* messageId,
-                                  const char* objectName1,
-                                  const char* objectName2, bool printColumn) {
+void SLaddMLErrorContext(SV3_1aPythonListener* prog,
+                         antlr4::ParserRuleContext* context1,
+                         antlr4::ParserRuleContext* context2,
+                         const char* messageId, const char* objectName1,
+                         const char* objectName2, bool printColumn) {
+#ifdef SURELOG_WITH_PYTHON
   SV3_1aPythonListener* listener = (SV3_1aPythonListener*)prog;
   antlr4::ParserRuleContext* ctx1 = (antlr4::ParserRuleContext*)context1;
   antlr4::ParserRuleContext* ctx2 = (antlr4::ParserRuleContext*)context2;
@@ -199,37 +192,55 @@ void SURELOG::SLaddMLErrorContext(SV3_1aPythonListener* prog,
           ->registerSymbol(objectName2));
   Error err(type, loc1, loc2);
   errors->addError(err, false, false);
+#else
+  std::cerr << "SLaddMLErrorContext(): Python support not compiled in\n";
+#endif
 }
 
-std::string SURELOG::SLgetFile(SV3_1aPythonListener* prog,
-                               antlr4::ParserRuleContext* context) {
+std::string SLgetFile(SV3_1aPythonListener* prog,
+                      antlr4::ParserRuleContext* context) {
+#ifdef SURELOG_WITH_PYTHON
   SV3_1aPythonListener* listener = (SV3_1aPythonListener*)prog;
   std::string file =
       listener->getPythonListen()->getParseFile()->getFileName(0);
   return file;
+#else
+  std::cerr << "SLgetFile(): Python support not compiled in\n";
+  return "";
+#endif
 }
 
-int SURELOG::SLgetLine(SV3_1aPythonListener* prog, antlr4::ParserRuleContext* context) {
+int SLgetLine(SV3_1aPythonListener* prog, antlr4::ParserRuleContext* context) {
+#ifdef SURELOG_WITH_PYTHON
   SV3_1aPythonListener* listener = (SV3_1aPythonListener*)prog;
   antlr4::ParserRuleContext* ctx = (antlr4::ParserRuleContext*)context;
   std::pair<int, int> lineCol =
       ParseUtils::getLineColumn(listener->getTokenStream(), ctx);
   return lineCol.first;
+#else
+  std::cerr << "SLgetLine(): Python support not compiled in\n";
+  return 0;
+#endif
 }
 
-int SURELOG::SLgetColumn(SV3_1aPythonListener* prog,
-                         antlr4::ParserRuleContext* context) {
+int SLgetColumn(SV3_1aPythonListener* prog,
+                antlr4::ParserRuleContext* context) {
+#ifdef SURELOG_WITH_PYTHON
   SV3_1aPythonListener* listener = (SV3_1aPythonListener*)prog;
   antlr4::ParserRuleContext* ctx = (antlr4::ParserRuleContext*)context;
   std::pair<int, int> lineCol =
       ParseUtils::getLineColumn(listener->getTokenStream(), ctx);
   return lineCol.second;
+#else
+  std::cerr << "SLgetColumn(): Python support not compiled in\n";
+  return 0;
+#endif
 }
 
-std::string SURELOG::SLgetText(SV3_1aPythonListener* /*prog*/,
-                               antlr4::ParserRuleContext* context) {
+std::string SLgetText(SV3_1aPythonListener* /*prog*/,
+                      antlr4::ParserRuleContext* context) {
   antlr4::ParserRuleContext* ctx = (antlr4::ParserRuleContext*)context;
-  std::vector<Token*> tokens = ParseUtils::getFlatTokenList(ctx);
+  std::vector<antlr4::Token*> tokens = ParseUtils::getFlatTokenList(ctx);
   std::string text;
   for (auto token : tokens) {
     text += token->getText() + " ";
@@ -237,10 +248,10 @@ std::string SURELOG::SLgetText(SV3_1aPythonListener* /*prog*/,
   return text;
 }
 
-std::vector<std::string> SURELOG::SLgetTokens(SV3_1aPythonListener* prog,
-                                              antlr4::ParserRuleContext* context) {
+std::vector<std::string> SLgetTokens(SV3_1aPythonListener* /*prog*/,
+                                     antlr4::ParserRuleContext* context) {
   antlr4::ParserRuleContext* ctx = (antlr4::ParserRuleContext*)context;
-  std::vector<Token*> tokens = ParseUtils::getFlatTokenList(ctx);
+  std::vector<antlr4::Token*> tokens = ParseUtils::getFlatTokenList(ctx);
   std::vector<std::string> body_tokens;
   for (auto token : tokens) {
     body_tokens.push_back(token->getText());
@@ -248,21 +259,22 @@ std::vector<std::string> SURELOG::SLgetTokens(SV3_1aPythonListener* prog,
   return body_tokens;
 }
 
-antlr4::ParserRuleContext* SURELOG::SLgetParentContext(SV3_1aPythonListener* prog,
-                                               antlr4::ParserRuleContext* context) {
+antlr4::ParserRuleContext* SLgetParentContext(
+    SV3_1aPythonListener* /*prog*/, antlr4::ParserRuleContext* context) {
   antlr4::ParserRuleContext* ctx = (antlr4::ParserRuleContext*)context;
   return (antlr4::ParserRuleContext*)ctx->parent;
 }
 
-std::vector<antlr4::ParserRuleContext*> SURELOG::SLgetChildrenContext(
-    SV3_1aPythonListener* prog, antlr4::ParserRuleContext* context) {
+std::vector<antlr4::ParserRuleContext*> SLgetChildrenContext(
+    SV3_1aPythonListener* /*prog*/, antlr4::ParserRuleContext* context) {
   antlr4::ParserRuleContext* ctx = (antlr4::ParserRuleContext*)context;
   std::vector<antlr4::ParserRuleContext*> children;
 
   for (unsigned int i = 0; i < ctx->children.size(); i++) {
     // Get the i-th child node of `parent`.
-    tree::ParseTree* child = ctx->children[i];
-    tree::TerminalNode* node = dynamic_cast<tree::TerminalNode*>(child);
+    antlr4::tree::ParseTree* child = ctx->children[i];
+    antlr4::tree::TerminalNode* node =
+        dynamic_cast<antlr4::tree::TerminalNode*>(child);
     if (node) {
       // Terminal node
     } else {
@@ -273,95 +285,96 @@ std::vector<antlr4::ParserRuleContext*> SURELOG::SLgetChildrenContext(
   return children;
 }
 
-NodeId SURELOG::SLgetRootNode(FileContent* fC) {
+NodeId SLgetRootNode(FileContent* fC) {
   if (!fC) return 0;
   return fC->getRootNode();
 }
 
-std::string SURELOG::SLgetFile(FileContent* fC, NodeId id) {
+std::string SLgetFile(FileContent* fC, NodeId id) {
   if (!fC) return "";
   return fC->getSymbolTable()->getSymbol(fC->getFileId(id));
 }
 
-unsigned int SURELOG::SLgetType(FileContent* fC, NodeId id) {
+unsigned int SLgetType(FileContent* fC, NodeId id) {
   if (!fC) return 0;
   return fC->Type(id);
 }
 
-NodeId SURELOG::SLgetChild(FileContent* fC, NodeId index) {
+NodeId SLgetChild(FileContent* fC, NodeId index) {
   if (!fC) return 0;
   return fC->Child(index);
 }
 
-NodeId SURELOG::SLgetSibling(FileContent* fC, NodeId index) {
+NodeId SLgetSibling(FileContent* fC, NodeId index) {
   if (!fC) return 0;
   return fC->Sibling(index);
 }
 
-NodeId SURELOG::SLgetParent(FileContent* fC, NodeId index) {
+NodeId SLgetParent(FileContent* fC, NodeId index) {
   if (!fC) return 0;
   return fC->Parent(index);
 }
 
-unsigned int SURELOG::SLgetLine(FileContent* fC, NodeId index) {
+unsigned int SLgetLine(FileContent* fC, NodeId index) {
   if (!fC) return 0;
   return fC->Line(index);
 }
 
-std::string SURELOG::SLgetName(FileContent* fC, NodeId index) {
+std::string SLgetName(FileContent* fC, NodeId index) {
   if (!fC) return "";
   return fC->SymName(index);
 }
 
-NodeId SURELOG::SLgetChild(FileContent* fC, NodeId parent, unsigned int type) {
+NodeId SLgetChild(FileContent* fC, NodeId parent, unsigned int type) {
   if (!fC) return 0;
   return fC->sl_get(parent, (VObjectType)type);
 }
 
-NodeId SURELOG::SLgetParent(FileContent* fC, NodeId parent, unsigned int type) {
+NodeId SLgetParent(FileContent* fC, NodeId parent, unsigned int type) {
   if (!fC) return 0;
   return fC->sl_parent(parent, (VObjectType)type);
 }
 
-std::vector<unsigned int> SURELOG::SLgetAll(FileContent* fC, NodeId parent,
-                                            unsigned int type) {
+std::vector<unsigned int> SLgetAll(FileContent* fC, NodeId parent,
+                                   unsigned int type) {
   if (!fC) return {};
   return fC->sl_get_all(parent, (VObjectType)type);
 }
 
-std::vector<unsigned int> SURELOG::SLgetAll(FileContent* fC, NodeId parent,
-                                            std::vector<unsigned int> types) {
+std::vector<unsigned int> SLgetAll(FileContent* fC, NodeId parent,
+                                   std::vector<unsigned int> types) {
   if (!fC) return {};
   std::vector<VObjectType> vtypes;
   for (auto type : types) vtypes.push_back((VObjectType)type);
   return fC->sl_get_all(parent, vtypes);
 }
 
-NodeId SURELOG::SLcollect(FileContent* fC, NodeId parent, unsigned int type) {
+NodeId SLcollect(FileContent* fC, NodeId parent, unsigned int type) {
   if (!fC) return {};
   return fC->sl_collect(parent, (VObjectType)type);
 }
 
-std::vector<unsigned int> SURELOG::SLcollectAll(FileContent* fC, NodeId parent,
-                                                unsigned int type, bool first) {
+std::vector<unsigned int> SLcollectAll(FileContent* fC, NodeId parent,
+                                       unsigned int type, bool first) {
   if (fC)
     return fC->sl_collect_all(parent, (VObjectType)type, first);
   else
     return {};
 }
 
-std::vector<unsigned int> SURELOG::SLcollectAll(FileContent* fC, NodeId parent,
-                                                std::vector<unsigned int> types,
-                                                bool first) {
+std::vector<unsigned int> SLcollectAll(FileContent* fC, NodeId parent,
+                                       std::vector<unsigned int> types,
+                                       bool first) {
   if (!fC) return {};
   std::vector<VObjectType> vtypes;
   for (auto type : types) vtypes.push_back((VObjectType)type);
   return fC->sl_collect_all(parent, vtypes, first);
 }
 
-std::vector<unsigned int> SURELOG::SLcollectAll(
-    FileContent* fC, NodeId parent, std::vector<unsigned int> types,
-    std::vector<unsigned int> stopPoints, bool first) {
+std::vector<unsigned int> SLcollectAll(FileContent* fC, NodeId parent,
+                                       std::vector<unsigned int> types,
+                                       std::vector<unsigned int> stopPoints,
+                                       bool first) {
   if (!fC) return {};
   std::vector<VObjectType> vtypes;
   for (auto type : types) vtypes.push_back((VObjectType)type);
@@ -370,33 +383,32 @@ std::vector<unsigned int> SURELOG::SLcollectAll(
   return fC->sl_collect_all(parent, vtypes, vstops, first);
 }
 
-unsigned int SURELOG::SLgetnModuleDefinition(Design* design) {
+unsigned int SLgetnModuleDefinition(Design* design) {
   if (!design) return 0;
   return design->getModuleDefinitions().size();
 }
 
-unsigned int SURELOG::SLgetnProgramDefinition(Design* design) {
+unsigned int SLgetnProgramDefinition(Design* design) {
   if (!design) return 0;
   return design->getProgramDefinitions().size();
 }
 
-unsigned int SURELOG::SLgetnPackageDefinition(Design* design) {
+unsigned int SLgetnPackageDefinition(Design* design) {
   if (!design) return 0;
   return design->getPackageDefinitions().size();
 }
 
-unsigned int SURELOG::SLgetnClassDefinition(Design* design) {
+unsigned int SLgetnClassDefinition(Design* design) {
   if (!design) return 0;
   return design->getUniqueClassDefinitions().size();
 }
 
-unsigned int SURELOG::SLgetnTopModuleInstance(Design* design) {
+unsigned int SLgetnTopModuleInstance(Design* design) {
   if (!design) return 0;
   return design->getTopLevelModuleInstances().size();
 }
 
-ModuleDefinition* SURELOG::SLgetModuleDefinition(Design* design,
-                                                 unsigned int index) {
+ModuleDefinition* SLgetModuleDefinition(Design* design, unsigned int index) {
   if (!design) return 0;
   ModuleNameModuleDefinitionMap::iterator itr =
       design->getModuleDefinitions().begin();
@@ -404,7 +416,7 @@ ModuleDefinition* SURELOG::SLgetModuleDefinition(Design* design,
   return (*itr).second;
 }
 
-Program* SURELOG::SLgetProgramDefinition(Design* design, unsigned int index) {
+Program* SLgetProgramDefinition(Design* design, unsigned int index) {
   if (!design) return 0;
   ProgramNameProgramDefinitionMap::iterator itr =
       design->getProgramDefinitions().begin();
@@ -412,7 +424,7 @@ Program* SURELOG::SLgetProgramDefinition(Design* design, unsigned int index) {
   return (*itr).second;
 }
 
-Package* SURELOG::SLgetPackageDefinition(Design* design, unsigned int index) {
+Package* SLgetPackageDefinition(Design* design, unsigned int index) {
   if (!design) return 0;
   PackageNamePackageDefinitionMultiMap::iterator itr =
       design->getPackageDefinitions().begin();
@@ -420,8 +432,7 @@ Package* SURELOG::SLgetPackageDefinition(Design* design, unsigned int index) {
   return (*itr).second;
 }
 
-ClassDefinition* SURELOG::SLgetClassDefinition(Design* design,
-                                               unsigned int index) {
+ClassDefinition* SLgetClassDefinition(Design* design, unsigned int index) {
   if (!design) return 0;
   ClassNameClassDefinitionMap::iterator itr =
       design->getUniqueClassDefinitions().begin();
@@ -429,18 +440,17 @@ ClassDefinition* SURELOG::SLgetClassDefinition(Design* design,
   return (*itr).second;
 }
 
-ModuleInstance* SURELOG::SLgetTopModuleInstance(Design* design,
-                                                unsigned int index) {
+ModuleInstance* SLgetTopModuleInstance(Design* design, unsigned int index) {
   if (!design) return 0;
   return design->getTopLevelModuleInstances()[index];
 }
 
-std::string SURELOG::SLgetModuleName(ModuleDefinition* module) {
+std::string SLgetModuleName(ModuleDefinition* module) {
   if (!module) return "";
   return module->getName();
 }
 
-std::string SURELOG::SLgetModuleFile(ModuleDefinition* module) {
+std::string SLgetModuleFile(ModuleDefinition* module) {
   if (!module) return "";
   if (module->getFileContents().size())
     return module->getFileContents()[0]->getFileName(module->getNodeIds()[0]);
@@ -448,7 +458,7 @@ std::string SURELOG::SLgetModuleFile(ModuleDefinition* module) {
     return "";
 }
 
-unsigned int SURELOG::SLgetModuleLine(ModuleDefinition* module) {
+unsigned int SLgetModuleLine(ModuleDefinition* module) {
   if (!module) return 0;
   if (module->getFileContents().size())
     return module->getFileContents()[0]->Line(module->getNodeIds()[0]);
@@ -456,12 +466,12 @@ unsigned int SURELOG::SLgetModuleLine(ModuleDefinition* module) {
     return 0;
 }
 
-VObjectType SURELOG::SLgetModuleType(ModuleDefinition* module) {
+VObjectType SLgetModuleType(ModuleDefinition* module) {
   if (!module) return VObjectType::slNoType;
   return module->getType();
 }
 
-FileContent* SURELOG::SLgetModuleFileContent(ModuleDefinition* module) {
+FileContent* SLgetModuleFileContent(ModuleDefinition* module) {
   if (!module) return NULL;
   if (module->getFileContents().size())
     // TODO(alain): fix const cast.
@@ -470,7 +480,7 @@ FileContent* SURELOG::SLgetModuleFileContent(ModuleDefinition* module) {
     return NULL;
 }
 
-NodeId SURELOG::SLgetModuleRootNode(ModuleDefinition* module) {
+NodeId SLgetModuleRootNode(ModuleDefinition* module) {
   if (!module) return 0;
   if (module->getFileContents().size())
     return module->getNodeIds()[0];
@@ -478,12 +488,12 @@ NodeId SURELOG::SLgetModuleRootNode(ModuleDefinition* module) {
     return 0;
 }
 
-std::string SURELOG::SLgetClassName(ClassDefinition* module) {
+std::string SLgetClassName(ClassDefinition* module) {
   if (!module) return "";
   return module->getName();
 }
 
-std::string SURELOG::SLgetClassFile(ClassDefinition* module) {
+std::string SLgetClassFile(ClassDefinition* module) {
   if (!module) return "";
   if (module->getFileContents().size() && module->getFileContents()[0])
     return module->getFileContents()[0]->getFileName(module->getNodeIds()[0]);
@@ -491,7 +501,7 @@ std::string SURELOG::SLgetClassFile(ClassDefinition* module) {
     return "";
 }
 
-unsigned int SURELOG::SLgetClassLine(ClassDefinition* module) {
+unsigned int SLgetClassLine(ClassDefinition* module) {
   if (!module) return 0;
   if (module->getFileContents().size() && module->getFileContents()[0])
     return module->getFileContents()[0]->Line(module->getNodeIds()[0]);
@@ -499,12 +509,12 @@ unsigned int SURELOG::SLgetClassLine(ClassDefinition* module) {
     return 0;
 }
 
-VObjectType SURELOG::SLgetClassType(ClassDefinition* module) {
+VObjectType SLgetClassType(ClassDefinition* module) {
   if (!module) return VObjectType::slNoType;
   return module->getType();
 }
 
-FileContent* SURELOG::SLgetClassFileContent(ClassDefinition* module) {
+FileContent* SLgetClassFileContent(ClassDefinition* module) {
   if (!module) return 0;
   if (module->getFileContents().size() && module->getFileContents()[0])
     // TODO(Alain): Fix api.
@@ -513,7 +523,7 @@ FileContent* SURELOG::SLgetClassFileContent(ClassDefinition* module) {
     return NULL;
 }
 
-NodeId SURELOG::SLgetClassRootNode(ClassDefinition* module) {
+NodeId SLgetClassRootNode(ClassDefinition* module) {
   if (!module) return 0;
   if (module->getFileContents().size() && module->getFileContents()[0])
     return module->getNodeIds()[0];
@@ -521,12 +531,12 @@ NodeId SURELOG::SLgetClassRootNode(ClassDefinition* module) {
     return 0;
 }
 
-std::string SURELOG::SLgetPackageName(Package* module) {
+std::string SLgetPackageName(Package* module) {
   if (!module) return "";
   return module->getName();
 }
 
-std::string SURELOG::SLgetPackageFile(Package* module) {
+std::string SLgetPackageFile(Package* module) {
   if (!module) return "";
   if (module->getFileContents().size())
     return module->getFileContents()[0]->getFileName(module->getNodeIds()[0]);
@@ -534,7 +544,7 @@ std::string SURELOG::SLgetPackageFile(Package* module) {
     return "";
 }
 
-unsigned int SURELOG::SLgetPackageLine(Package* module) {
+unsigned int SLgetPackageLine(Package* module) {
   if (!module) return 0;
   if (module->getFileContents().size())
     return module->getFileContents()[0]->Line(module->getNodeIds()[0]);
@@ -542,12 +552,12 @@ unsigned int SURELOG::SLgetPackageLine(Package* module) {
     return 0;
 }
 
-VObjectType SURELOG::SLgetPackageType(Package* module) {
+VObjectType SLgetPackageType(Package* module) {
   if (!module) return VObjectType::slNoType;
   return module->getType();
 }
 
-FileContent* SURELOG::SLgetPackageFileContent(Package* module) {
+FileContent* SLgetPackageFileContent(Package* module) {
   if (!module) return 0;
   if (module->getFileContents().size())
     return const_cast<FileContent*>(module->getFileContents()[0]);
@@ -555,7 +565,7 @@ FileContent* SURELOG::SLgetPackageFileContent(Package* module) {
     return NULL;
 }
 
-NodeId SURELOG::SLgetPackageRootNode(Package* module) {
+NodeId SLgetPackageRootNode(Package* module) {
   if (!module) return 0;
   if (module->getFileContents().size())
     return module->getNodeIds()[0];
@@ -563,12 +573,12 @@ NodeId SURELOG::SLgetPackageRootNode(Package* module) {
     return 0;
 }
 
-std::string SURELOG::SLgetProgramName(Program* module) {
+std::string SLgetProgramName(Program* module) {
   if (!module) return "";
   return module->getName();
 }
 
-std::string SURELOG::SLgetProgramFile(Program* module) {
+std::string SLgetProgramFile(Program* module) {
   if (!module) return "";
   if (module->getFileContents().size())
     return module->getFileContents()[0]->getFileName(module->getNodeIds()[0]);
@@ -576,7 +586,7 @@ std::string SURELOG::SLgetProgramFile(Program* module) {
     return "";
 }
 
-unsigned int SURELOG::SLgetProgramLine(Program* module) {
+unsigned int SLgetProgramLine(Program* module) {
   if (!module) return 0;
   if (module->getFileContents().size())
     return module->getFileContents()[0]->Line(module->getNodeIds()[0]);
@@ -584,12 +594,12 @@ unsigned int SURELOG::SLgetProgramLine(Program* module) {
     return 0;
 }
 
-VObjectType SURELOG::SLgetProgramType(Program* module) {
+VObjectType SLgetProgramType(Program* module) {
   if (!module) return VObjectType::slNoType;
   return module->getType();
 }
 
-FileContent* SURELOG::SLgetProgramFileContent(Program* module) {
+FileContent* SLgetProgramFileContent(Program* module) {
   if (!module) return 0;
   if (module->getFileContents().size())
     return const_cast<FileContent*>(module->getFileContents()[0]);
@@ -597,7 +607,7 @@ FileContent* SURELOG::SLgetProgramFileContent(Program* module) {
     return NULL;
 }
 
-NodeId SURELOG::SLgetProgramRootNode(Program* module) {
+NodeId SLgetProgramRootNode(Program* module) {
   if (!module) return 0;
   if (module->getFileContents().size())
     return module->getNodeIds()[0];
@@ -605,69 +615,70 @@ NodeId SURELOG::SLgetProgramRootNode(Program* module) {
     return 0;
 }
 
-VObjectType SURELOG::SLgetInstanceType(ModuleInstance* instance) {
+VObjectType SLgetInstanceType(ModuleInstance* instance) {
   if (!instance) return VObjectType::slNoType;
   return instance->getType();
 }
 
-VObjectType SURELOG::SLgetInstanceModuleType(ModuleInstance* instance) {
+VObjectType SLgetInstanceModuleType(ModuleInstance* instance) {
   if (!instance) return VObjectType::slNoType;
   return instance->getModuleType();
 }
 
-std::string SURELOG::SLgetInstanceName(ModuleInstance* instance) {
+std::string SLgetInstanceName(ModuleInstance* instance) {
   if (!instance) return "";
   return instance->getInstanceName();
 }
 
-std::string SURELOG::SLgetInstanceFullPathName(ModuleInstance* instance) {
+std::string SLgetInstanceFullPathName(ModuleInstance* instance) {
   if (!instance) return "";
   return instance->getFullPathName();
 }
 
-std::string SURELOG::SLgetInstanceModuleName(ModuleInstance* instance) {
+std::string SLgetInstanceModuleName(ModuleInstance* instance) {
   if (!instance) return "";
   return instance->getModuleName();
 }
 
-DesignComponent* SURELOG::SLgetInstanceDefinition(ModuleInstance* instance) {
+DesignComponent* SLgetInstanceDefinition(ModuleInstance* instance) {
   if (!instance) return NULL;
   return instance->getDefinition();
 }
 
-std::string SURELOG::SLgetInstanceFileName(ModuleInstance* instance) {
+std::string SLgetInstanceFileName(ModuleInstance* instance) {
   if (!instance) return "";
   return instance->getFileContent()->getFileName(instance->getNodeId());
 }
 
-FileContent* SURELOG::SLgetInstanceFileContent(ModuleInstance* instance) {
+FileContent* SLgetInstanceFileContent(ModuleInstance* instance) {
   if (!instance) return NULL;
   // TODO(Alain): fix to return const
   return const_cast<FileContent*>(instance->getFileContent());
 }
 
-NodeId SURELOG::SLgetInstanceNodeId(ModuleInstance* instance) {
+NodeId SLgetInstanceNodeId(ModuleInstance* instance) {
   if (!instance) return 0;
   return instance->getNodeId();
 }
 
-unsigned int SURELOG::SLgetInstanceLine(ModuleInstance* instance) {
+unsigned int SLgetInstanceLine(ModuleInstance* instance) {
   if (!instance) return 0;
   return instance->getLineNb();
 }
 
-unsigned int SURELOG::SLgetnInstanceChildren(ModuleInstance* instance) {
+unsigned int SLgetnInstanceChildren(ModuleInstance* instance) {
   if (!instance) return 0;
   return instance->getNbChildren();
 }
 
-ModuleInstance* SURELOG::SLgetInstanceChildren(ModuleInstance* instance,
-                                               unsigned int i) {
+ModuleInstance* SLgetInstanceChildren(ModuleInstance* instance,
+                                      unsigned int i) {
   if (!instance) return NULL;
   return instance->getChildren(i);
 }
 
-ModuleInstance* SURELOG::SLgetInstanceParent(ModuleInstance* instance) {
+ModuleInstance* SLgetInstanceParent(ModuleInstance* instance) {
   if (!instance) return NULL;
   return instance->getParent();
 }
+}  // namespace SURELOG

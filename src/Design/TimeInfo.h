@@ -24,14 +24,14 @@
 #ifndef TIMEINFO_H
 #define TIMEINFO_H
 
-#include "SourceCompile/SymbolTable.h"
-
 #include <string_view>
+
+#include "SourceCompile/SymbolTable.h"
 
 namespace SURELOG {
 
 class TimeInfo final {
-public:
+ public:
   enum class Type { None, Timescale, TimeUnitTimePrecision };
   enum class Unit {
     Second,

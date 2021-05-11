@@ -23,9 +23,13 @@
 
 #ifndef RESOLVESYMBOLS_H
 #define RESOLVESYMBOLS_H
-#include "Design/TimeInfo.h"
+
+#include "Design/Design.h"
 #include "Design/FileContent.h"
+#include "Design/TimeInfo.h"
+#include "DesignCompile/CompileDesign.h"
 #include "DesignCompile/CompileStep.h"
+#include "SourceCompile/SymbolTable.h"
 
 namespace SURELOG {
 
@@ -101,7 +105,8 @@ class ResolveSymbols : public CompileStep {
 
   std::string SymName(NodeId index) override;
 
-  NodeId sl_get(NodeId parent, VObjectType type) override;  // Get first item of type
+  NodeId sl_get(NodeId parent,
+                VObjectType type) override;  // Get first item of type
 
   NodeId sl_parent(NodeId parent,
                    VObjectType type) override;  // Get first parent item of type
@@ -109,8 +114,9 @@ class ResolveSymbols : public CompileStep {
   NodeId sl_parent(NodeId parent, std::vector<VObjectType> types,
                    VObjectType& actualType) override;
 
-  std::vector<NodeId> sl_get_all(NodeId parent,
-                                 VObjectType type) override;  // get all items of type
+  std::vector<NodeId> sl_get_all(
+      NodeId parent,
+      VObjectType type) override;  // get all items of type
 
   NodeId sl_collect(
       NodeId parent,

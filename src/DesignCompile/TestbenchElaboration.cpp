@@ -21,29 +21,18 @@
  * Created on February 6, 2019, 9:01 PM
  */
 
-#include <queue>
-
-#include "SourceCompile/VObjectTypes.h"
-#include "Design/VObject.h"
-#include "Library/Library.h"
-#include "Design/FileContent.h"
-#include "SourceCompile/SymbolTable.h"
-#include "ErrorReporting/Error.h"
-#include "ErrorReporting/Location.h"
-#include "ErrorReporting/Error.h"
-#include "ErrorReporting/ErrorDefinition.h"
-#include "ErrorReporting/ErrorContainer.h"
-#include "SourceCompile/CompilationUnit.h"
-#include "SourceCompile/PreprocessFile.h"
-#include "SourceCompile/CompileSourceFile.h"
-#include "SourceCompile/ParseFile.h"
-#include "SourceCompile/Compiler.h"
-#include "DesignCompile/CompileDesign.h"
-#include "Testbench/Property.h"
-#include "Design/Function.h"
-#include "Design/SimpleType.h"
-#include "Testbench/ClassDefinition.h"
 #include "DesignCompile/TestbenchElaboration.h"
+
+#include <queue>
+#include <string>
+#include <vector>
+
+#include "Design/DataType.h"
+#include "Design/VObject.h"
+#include "ErrorReporting/Location.h"
+#include "SourceCompile/VObjectTypes.h"
+#include "Testbench/ClassDefinition.h"
+#include "Testbench/Property.h"
 #include "headers/uhdm.h"
 
 using namespace SURELOG;
@@ -51,13 +40,14 @@ using namespace SURELOG;
 TestbenchElaboration::~TestbenchElaboration() {}
 
 bool checkValidFunction(const DataType* dtype, const std::string& function,
-                        Statement* stmt,
-                        Design* design, std::string& datatypeName) {
+                        Statement* stmt, Design* design,
+                        std::string& datatypeName) {
   bool validFunction = true;
   VObjectType type = dtype->getType();
   const DataType* def = dtype->getDefinition();
   if (type == VObjectType::slClass_declaration) {
-    const ClassDefinition* the_class = dynamic_cast<const ClassDefinition*>(dtype);
+    const ClassDefinition* the_class =
+        dynamic_cast<const ClassDefinition*>(dtype);
     if (the_class) {
       Function* func = the_class->getFunction(function);
       if (func)
@@ -84,8 +74,8 @@ bool checkValidFunction(const DataType* dtype, const std::string& function,
         datatypeName = "string";
         validFunction = false;
       }
-    } else 
-     validFunction = false;   
+    } else
+      validFunction = false;
   } else
     validFunction = false;
   return validFunction;
@@ -96,8 +86,7 @@ bool checkValidBuiltinClass_(std::string classname, std::string function,
                              std::string& datatypeName) {
   bool validFunction = true;
   ClassDefinition* array = design->getClassDefinition("builtin::" + classname);
-  if (array == nullptr)
-    return false;
+  if (array == nullptr) return false;
   Function* func = array->getFunction(function);
   if (func)
     stmt->setFunction(func);
@@ -235,7 +224,8 @@ bool TestbenchElaboration::bindBaseClasses_() {
           bindDataType_(class_def.first, class_def.second->getFileContent(),
                         class_def.second->getNodeId(), classDefinition,
                         ErrorDefinition::COMP_UNDEFINED_BASE_CLASS);
-      const ClassDefinition* bdef = dynamic_cast<const ClassDefinition*>(the_def);            
+      const ClassDefinition* bdef =
+          dynamic_cast<const ClassDefinition*>(the_def);
       class_def.second = bdef;
       if (class_def.second) {
         // Super
@@ -315,10 +305,9 @@ bool TestbenchElaboration::bindDataTypes_() {
       if (type == VObjectType::slStringConst ||
           type == VObjectType::slNull_rule ||
           type == VObjectType::slClass_scope) {
-        const DataType* the_def
-          = bindDataType_(dataTypeName, dtype->getFileContent(),
-                          dtype->getNodeId(), classDefinition,
-                          ErrorDefinition::COMP_UNDEFINED_TYPE);
+        const DataType* the_def = bindDataType_(
+            dataTypeName, dtype->getFileContent(), dtype->getNodeId(),
+            classDefinition, ErrorDefinition::COMP_UNDEFINED_TYPE);
         if (the_def != dtype) dtype->setDefinition(the_def);
       }
     }
@@ -734,20 +723,20 @@ bool TestbenchElaboration::bindProperties_() {
       if (fC->Type(unpackedDimension) == slClass_new) {
       } else {
         unpackedDimensions = m_helper.compileRanges(
-          classDefinition, fC, unpackedDimension, m_compileDesign, nullptr,
-          nullptr, true, unpackedSize, false);
+            classDefinition, fC, unpackedDimension, m_compileDesign, nullptr,
+            nullptr, true, unpackedSize, false);
       }
       UHDM::typespec* tps = nullptr;
       NodeId typeSpecId = sig->getTypeSpecId();
       if (typeSpecId) {
-        tps = m_helper.compileTypespec(classDefinition, fC, typeSpecId, m_compileDesign,
-                                       nullptr, nullptr, true);
+        tps = m_helper.compileTypespec(classDefinition, fC, typeSpecId,
+                                       m_compileDesign, nullptr, nullptr, true);
       }
       if (tps == nullptr) {
         if (sig->getInterfaceTypeNameId()) {
           tps = m_helper.compileTypespec(
-              classDefinition, fC, sig->getInterfaceTypeNameId(), m_compileDesign, nullptr,
-              nullptr, true);
+              classDefinition, fC, sig->getInterfaceTypeNameId(),
+              m_compileDesign, nullptr, nullptr, true);
         }
       }
 
@@ -755,9 +744,9 @@ bool TestbenchElaboration::bindProperties_() {
       UHDM::expr* exp =
           exprFromAssign_(classDefinition, fC, id, unpackedDimension, nullptr);
 
-      UHDM::any* obj = makeVar_(classDefinition, sig, packedDimensions, packedSize, 
-                unpackedDimensions, unpackedSize, nullptr, 
-                vars, exp, tps);
+      UHDM::any* obj =
+          makeVar_(classDefinition, sig, packedDimensions, packedSize,
+                   unpackedDimensions, unpackedSize, nullptr, vars, exp, tps);
 
       if (obj) {
         obj->VpiLineNo(fC->Line(id));

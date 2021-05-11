@@ -23,18 +23,20 @@
 
 #ifndef PREPROCESSFILE_H
 #define PREPROCESSFILE_H
-#include <string>
-#include <vector>
+
 #include <map>
 #include <set>
 #include <stack>
+#include <string>
+#include <vector>
 
+#include "ErrorReporting/Error.h"
+#include "Library/Library.h"
+#include "SourceCompile/CompilationUnit.h"
+#include "SourceCompile/IncludeFileInfo.h"
+#include "SourceCompile/LoopCheck.h"
 #include "parser/SV3_1aPpLexer.h"
 #include "parser/SV3_1aPpParser.h"
-#include "SourceCompile/CompilationUnit.h"
-#include "Library/Library.h"
-#include "SourceCompile/LoopCheck.h"
-#include "SourceCompile/IncludeFileInfo.h"
 
 namespace SURELOG {
 
@@ -45,14 +47,13 @@ class FileContent;
 #define LINE1 1
 
 enum VerilogVersion {
-    NoVersion,
-    Verilog1995,
-    Verilog2001,
-    Verilog2005,
-    Verilog2009,
-    SystemVerilog
+  NoVersion,
+  Verilog1995,
+  Verilog2001,
+  Verilog2005,
+  Verilog2009,
+  SystemVerilog
 };
-
 
 /* Can be either an include file or a macro definition being evaluated */
 class PreprocessFile {
@@ -171,7 +172,7 @@ class PreprocessFile {
           m_filterFileLine(DontFilter),
           m_check_macro_loop(DontCheckLoop),
           m_as_is_undefined_macro(ComplainUndefinedMacro),
-          m_evaluate(Evaluate){}
+          m_evaluate(Evaluate) {}
     SpecialInstructions(SpecialInstructions& rhs)
         : m_mute(rhs.m_mute),
           m_mark_empty_macro(rhs.m_mark_empty_macro),
@@ -200,16 +201,15 @@ class PreprocessFile {
                 << ", AsIsUndefMacro:"
                 << (m_as_is_undefined_macro ? "AsIsUndefinedMacro"
                                             : "ComplainUndefinedMacro")
-                << ", Evaluate:"
-                << (m_evaluate ? "Evaluate" : "DontEvaluate")
+                << ", Evaluate:" << (m_evaluate ? "Evaluate" : "DontEvaluate")
                 << std::endl;
     };
-    TraceInstr        m_mute;
-    EmptyMacroInstr   m_mark_empty_macro;
+    TraceInstr m_mute;
+    EmptyMacroInstr m_mark_empty_macro;
     FileLineInfoInstr m_filterFileLine;
-    CheckLoopInstr    m_check_macro_loop;
+    CheckLoopInstr m_check_macro_loop;
     AsIsUndefinedMacroInstr m_as_is_undefined_macro;
-    EvaluateInstr     m_evaluate;
+    EvaluateInstr m_evaluate;
   };
 
   std::string evaluateMacroInstance(
@@ -307,7 +307,10 @@ class PreprocessFile {
   void collectIncludedFiles(std::set<PreprocessFile*>& included);
   bool usingCachedVersion() { return m_usingCachedVersion; }
   std::string getProfileInfo() { return m_profileInfo; }
-  std::vector<LineTranslationInfo>& getLineTranslationInfo() { return m_lineTranslationVec; }
+  std::vector<LineTranslationInfo>& getLineTranslationInfo() {
+    return m_lineTranslationVec;
+  }
+
  private:
   std::pair<bool, std::string> evaluateMacro_(
       const std::string name, std::vector<std::string>& arguments,

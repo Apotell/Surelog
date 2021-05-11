@@ -24,7 +24,14 @@
 #ifndef ELABORATIONSTEP_H
 #define ELABORATIONSTEP_H
 
+#include <string>
+#include <vector>
+
+#include "Design/DesignComponent.h"
+#include "Design/Scope.h"
 #include "DesignCompile/CompileDesign.h"
+#include "DesignCompile/CompileHelper.h"
+#include "ErrorReporting/ErrorDefinition.h"
 #include "headers/uhdm_forward_decl.h"
 
 namespace SURELOG {
@@ -40,9 +47,8 @@ class ElaborationStep {
 
  protected:
   bool bindTypedefs_();
-  
-  const DataType* bindTypeDef_(TypeDef* typd,
-                               const DesignComponent* parent,
+
+  const DataType* bindTypeDef_(TypeDef* typd, const DesignComponent* parent,
                                ErrorDefinition::ErrorType errtype);
 
   const DataType* bindDataType_(const std::string& type_name,
@@ -51,8 +57,8 @@ class ElaborationStep {
                                 ErrorDefinition::ErrorType errtype);
 
   Variable* bindVariable_(std::string var_name, Scope* scope,
-                          const FileContent* fc,
-                          NodeId id, const DesignComponent* parent,
+                          const FileContent* fc, NodeId id,
+                          const DesignComponent* parent,
                           ErrorDefinition::ErrorType errtype,
                           bool returnClassParam);
 
@@ -67,18 +73,25 @@ class ElaborationStep {
                                   DesignComponent* parentComponent,
                                   ErrorDefinition::ErrorType errtype);
 
-  bool bindPortType_(Signal* port,
-                     const FileContent* fC, NodeId id, Scope* scope,
-                     DesignComponent* parentComponent,
+  bool bindPortType_(Signal* port, const FileContent* fC, NodeId id,
+                     Scope* scope, DesignComponent* parentComponent,
                      ErrorDefinition::ErrorType errtype);
 
-  UHDM::expr* exprFromAssign_(DesignComponent* component, const FileContent* fC, NodeId id, NodeId unpackedDimension, ModuleInstance* instance);
+  UHDM::expr* exprFromAssign_(DesignComponent* component, const FileContent* fC,
+                              NodeId id, NodeId unpackedDimension,
+                              ModuleInstance* instance);
 
-  UHDM::typespec* elabTypeParameter_(DesignComponent* component, Parameter* typeParam, ModuleInstance* instance);
+  UHDM::typespec* elabTypeParameter_(DesignComponent* component,
+                                     Parameter* typeParam,
+                                     ModuleInstance* instance);
 
-  UHDM::any* makeVar_(DesignComponent* component, Signal* sig, std::vector<UHDM::range*>* packedDimensions, int packedSize, 
-                std::vector<UHDM::range*>* unpackedDimensions, int unpackedSize, ModuleInstance* instance, 
-                UHDM::VectorOfvariables* vars, UHDM::expr* assignExp, UHDM::typespec* tps);
+  UHDM::any* makeVar_(DesignComponent* component, Signal* sig,
+                      std::vector<UHDM::range*>* packedDimensions,
+                      int packedSize,
+                      std::vector<UHDM::range*>* unpackedDimensions,
+                      int unpackedSize, ModuleInstance* instance,
+                      UHDM::VectorOfvariables* vars, UHDM::expr* assignExp,
+                      UHDM::typespec* tps);
 
   CompileDesign* m_compileDesign;
   ExprBuilder m_exprBuilder;

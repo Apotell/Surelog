@@ -70,9 +70,10 @@ Compiler::Compiler(CommandLineParser* commandLineParser, ErrorContainer* errors,
       m_errors(errors),
       m_symbolTable(symbolTable),
       m_commonCompilationUnit(NULL) {
-  m_design = NULL;
   m_uhdmDesign = 0;
-
+  m_librarySet = new LibrarySet();
+  m_configSet = new ConfigSet();
+  m_design = new Design(getErrorContainer(), m_librarySet, m_configSet);
 #ifdef USETBB
   if (getCommandLineParser()->useTbb() &&
       (getCommandLineParser()->getNbMaxTreads() > 0))
@@ -971,7 +972,8 @@ bool Compiler::compile() {
     std::string directory = m_commandLineParser->getSymbolTable().getSymbol(
         m_commandLineParser->getFullCompileDir());
     std::string uhdmFile = directory + "/surelog.uhdm";
-    m_uhdmDesign = compileDesign->writeUHDM(uhdmFile);
+    if (m_commandLineParser->writeUhdm())
+      m_uhdmDesign = compileDesign->writeUHDM(uhdmFile);
     // Do not delete as now UHDM has to live past the compilation step
     // delete compileDesign;
   }
@@ -1013,9 +1015,6 @@ PreprocessFile::AntlrParserHandler* Compiler::getAntlrPpHandlerForId(
 }
 
 bool Compiler::parseLibrariesDef_() {
-  m_librarySet = new LibrarySet();
-  m_configSet = new ConfigSet();
-  m_design = new Design(getErrorContainer(), m_librarySet, m_configSet);
   ParseLibraryDef* libParser = new ParseLibraryDef(
       m_commandLineParser, m_errors, m_symbolTable, m_librarySet, m_configSet);
   return libParser->parseLibrariesDefinition();

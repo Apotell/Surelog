@@ -89,10 +89,15 @@ expr* CompileHelper::reduceBitSelect(
     std::string binary = NumUtils::toBinary(exp->VpiSize(), val);
     constant* c = s.MakeConstant();
     c->VpiSize(1);
-    char bitv = binary[index_val];
-    int v = bitv - '0';
-    c->VpiValue("BIN:" + std::to_string(v));
-    c->VpiDecompile("1'b" + std::to_string(v));
+    if (index_val < binary.size()) {
+      char bitv = binary[index_val];
+      int v = bitv - '0';
+      c->VpiValue("BIN:" + std::to_string(v));
+      c->VpiDecompile("1'b" + std::to_string(v));
+    } else {
+      c->VpiValue("BIN:0");
+      c->VpiDecompile("1'b0");
+    }
     c->VpiFile(fileName);
     c->VpiLineNo(lineNumber);
     c->VpiColumnNo(op->VpiColumnNo());
@@ -1549,6 +1554,7 @@ expr* CompileHelper::reduceExpr(any* result, bool& invalidValue,
             break;
           default: {
             invalidValue = true;
+            break;
           }
         }
       }
@@ -1918,11 +1924,36 @@ expr* CompileHelper::reduceExpr(any* result, bool& invalidValue,
             result = reduceBitSelect((constant*)object, index_val, invalidValue,
                                      component, compileDesign, instance,
                                      fileName, lineNumber, pexpr, muteErrors);
-            // if (index_val == 0) {
-            //  result = object;
-            //}
           }
         }
+      }
+    }
+  } else if (objtype == uhdmpart_select) {
+    part_select* sel = (part_select*)result;
+    ref_obj* parent = (ref_obj*)sel->VpiParent();
+    const std::string& name = parent->VpiName();
+    any* object = getObject(name, component, compileDesign, instance, pexpr);
+    if (object == nullptr) {
+      object = getValue(name, component, compileDesign, instance, fileName,
+                        lineNumber, pexpr, true, muteErrors);
+      if (object && (object->UhdmType() == uhdmconstant)) {
+        constant* co = (constant*)object;
+        int64_t val = get_value(invalidValue, co);
+        std::string binary = NumUtils::toBinary(co->VpiSize(), val);
+        int64_t l = get_value(invalidValue, sel->Left_range());
+        int64_t r = get_value(invalidValue, sel->Right_range());
+        std::reverse(binary.begin(), binary.end());
+        std::string sub;
+        if (l > r)
+          sub = binary.substr(r, l - r + 1);
+        else
+          sub = binary.substr(l, r - l + 1);
+        UHDM::constant* c = s.MakeConstant();
+        c->VpiValue("BIN:" + sub);
+        c->VpiDecompile(sub);
+        c->VpiSize(sub.size());
+        c->VpiConstType(vpiBinaryConst);
+        result = c;
       }
     }
   } else if (objtype == uhdmvar_select) {
@@ -2409,7 +2440,26 @@ UHDM::any* CompileHelper::compileSelectExpression(
             any* sel =
                 compileExpression(component, fC, Bit_select, compileDesign,
                                   pexpr, instance, reduce, muteErrors);
-            elems->push_back(sel);
+            if (sel) {
+              if (sel->UhdmType() == uhdmhier_path) {
+                hier_path* p = (hier_path*)sel;
+                for (auto el : *p->Path_elems()) {
+                  elems->push_back(el);
+                  std::string n = el->VpiName();
+                  if (el->UhdmType() == uhdmbit_select) {
+                    bit_select* s = (bit_select*)el;
+                    const expr* index = s->VpiIndex();
+                    std::string ind = index->VpiDecompile();
+                    if (ind.size() == 0) ind = index->VpiName();
+                    n += "[" + ind + "]";
+                  }
+                  hname += "." + n;
+                }
+                break;
+              } else {
+                elems->push_back(sel);
+              }
+            }
           } else {
             ref_obj* r2 = s.MakeRef_obj();
             r2->VpiName(fC->SymName(Bit_select));
@@ -3206,7 +3256,9 @@ UHDM::any* CompileHelper::compileExpression(
           Value* sval = NULL;
           if (childType == VObjectType::slPackage_scope) {
             const std::string& packageName = fC->SymName(fC->Child(child));
-            const std::string& n = fC->SymName(fC->Sibling(child));
+            NodeId paramId = fC->Sibling(child);
+            NodeId selectId = fC->Sibling(paramId);
+            const std::string& n = fC->SymName(paramId);
             name = packageName + "::" + n;
             Package* pack =
                 compileDesign->getCompiler()->getDesign()->getPackage(
@@ -3229,6 +3281,14 @@ UHDM::any* CompileHelper::compileExpression(
                     }
                   }
                 }
+              }
+              if (result && selectId) {
+                if (fC->Type(selectId) == slConstant_select) {
+                  selectId = fC->Child(selectId);
+                }
+                result = compileSelectExpression(component, fC, selectId, name,
+                                                 compileDesign, pexpr, instance,
+                                                 reduce, muteErrors);
               }
               if (result == nullptr) sval = pack->getValue(n);
             }
@@ -3261,7 +3321,7 @@ UHDM::any* CompileHelper::compileExpression(
               if (result == nullptr) sval = pack->getValue(n);
             }
           } else {
-            NodeId rhs;
+            NodeId rhs = 0;
             if (parentType == VObjectType::slHierarchical_identifier ||
                 parentType == VObjectType::slPs_or_hierarchical_identifier) {
               rhs = parent;
@@ -3797,27 +3857,57 @@ UHDM::any* CompileHelper::compileExpression(
               }
               tmpName = fC->SymName(dotedName);
             } else if (dtype == VObjectType::slSelect ||
-                       dtype == VObjectType::slConstant_bit_select) {
+                       dtype == VObjectType::slConstant_bit_select ||
+                       dtype == VObjectType::slConstant_expression) {
               std::string ind;
               NodeId Bit_select = fC->Child(dotedName);
               NodeId Expression = fC->Child(Bit_select);
-              expr* index = nullptr;
+              if (Expression == 0) {
+                if (Bit_select) Expression = fC->Sibling(Bit_select);
+              }
+
               is_hierarchical = true;
-              if (Expression)
-                index = (expr*)compileExpression(
-                    component, fC, Expression, compileDesign, pexpr, instance);
-              if (index) {
-                bit_select* select = s.MakeBit_select();
+              if (Expression && (fC->Type(Expression) == slPart_select_range) &&
+                  fC->Child(Expression)) {
+                expr* select = (expr*)compilePartSelectRange(
+                    component, fC, fC->Child(Expression),
+                    "CREATE_UNNAMED_PARENT", compileDesign, nullptr, instance,
+                    reduce, muteErrors);
+                ref_obj* parent = (ref_obj*)select->VpiParent();
+                if (parent) parent->VpiDefName(tmpName);
                 elems->push_back(select);
-                select->VpiIndex(index);
-                select->VpiName(tmpName);
-                select->VpiFullName(tmpName);
-                if (index->UhdmType() == uhdmconstant) {
-                  ind = index->VpiDecompile();
-                  name += "[" + ind + "]";
-                } else if (index->UhdmType() == uhdmref_obj) {
-                  ind = index->VpiName();
-                  name += "[" + ind + "]";
+                if (part_select* pselect = dynamic_cast<part_select*>(select)) {
+                  std::string selectRange =
+                      "[" + pselect->Left_range()->VpiDecompile() + ":" +
+                      pselect->Right_range()->VpiDecompile() + "]";
+                  name += selectRange;
+                } else if (indexed_part_select* pselect =
+                               dynamic_cast<indexed_part_select*>(select)) {
+                  std::string selectRange =
+                      "[" + pselect->Base_expr()->VpiDecompile() +
+                      ((pselect->VpiIndexedPartSelectType() == vpiPosIndexed)
+                           ? "+"
+                           : "-") +
+                      std::string(":") + pselect->Width_expr()->VpiDecompile() +
+                      "]";
+                  name += selectRange;
+                }
+              } else if (Expression) {
+                expr* index = (expr*)compileExpression(
+                    component, fC, Expression, compileDesign, pexpr, instance);
+                if (index) {
+                  bit_select* select = s.MakeBit_select();
+                  elems->push_back(select);
+                  select->VpiIndex(index);
+                  select->VpiName(tmpName);
+                  select->VpiFullName(tmpName);
+                  if (index->UhdmType() == uhdmconstant) {
+                    ind = index->VpiDecompile();
+                    name += "[" + ind + "]";
+                  } else if (index->UhdmType() == uhdmref_obj) {
+                    ind = index->VpiName();
+                    name += "[" + ind + "]";
+                  }
                 }
               } else {
                 ref_obj* ref = s.MakeRef_obj();
@@ -4313,7 +4403,10 @@ UHDM::any* CompileHelper::compilePartSelectRange(
     UHDM::part_select* part_select = s.MakePart_select();
     part_select->Left_range(lexp);
     part_select->Right_range(rexp);
-    if (!name.empty()) {
+    if (name == "CREATE_UNNAMED_PARENT") {
+      UHDM::ref_obj* ref = s.MakeRef_obj();
+      part_select->VpiParent(ref);
+    } else if (!name.empty()) {
       UHDM::ref_obj* ref = s.MakeRef_obj();
       ref->VpiName(name);
       ref->VpiDefName(name);
@@ -4403,7 +4496,10 @@ UHDM::any* CompileHelper::compilePartSelectRange(
         part_select->VpiIndexedPartSelectType(vpiPosIndexed);
       else
         part_select->VpiIndexedPartSelectType(vpiNegIndexed);
-      if (!name.empty()) {
+      if (name == "CREATE_UNNAMED_PARENT") {
+        UHDM::ref_obj* ref = s.MakeRef_obj();
+        part_select->VpiParent(ref);
+      } else if (!name.empty()) {
         UHDM::ref_obj* ref = s.MakeRef_obj();
         ref->VpiName(name);
         part_select->VpiParent(ref);
@@ -5145,9 +5241,10 @@ UHDM::any* CompileHelper::compileComplexFuncCall(
     NodeId Class_type_name = fC->Child(Class_type);
     NodeId Class_scope_name = fC->Sibling(name);
     NodeId List_of_arguments = fC->Sibling(Class_scope_name);
+    NodeId Bit_Select = 0;
     if (List_of_arguments) {
       if (fC->Type(List_of_arguments) == slSelect) {
-        NodeId Bit_Select = fC->Child(List_of_arguments);
+        Bit_Select = fC->Child(List_of_arguments);
         if (fC->Child(Bit_Select) == 0) {
           List_of_arguments = 0;
         }
@@ -5176,6 +5273,15 @@ UHDM::any* CompileHelper::compileComplexFuncCall(
       if (pack && (List_of_arguments == 0)) {
         Value* val = pack->getValue(functionname);
         if (val && val->isValid()) {
+          if (Bit_Select) {
+            if (fC->Type(Bit_Select) == slConstant_select) {
+              Bit_Select = fC->Child(Bit_Select);
+            }
+            any* tmpResult = compileSelectExpression(
+                component, fC, Bit_Select, basename, compileDesign, pexpr,
+                instance, reduce, muteErrors);
+            if (tmpResult) return tmpResult;
+          }
           UHDM::constant* c = s.MakeConstant();
           c->VpiValue(val->uhdmValue());
           c->VpiDecompile(val->decompiledValue());

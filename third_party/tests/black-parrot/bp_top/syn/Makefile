@@ -1,6 +1,5 @@
 ## Set common environment variables
 TOP ?= $(shell 'pwd')/../..
-
 include $(TOP)/Makefile.common
 
 export SYN_PATH     := $(BP_TOP_DIR)/syn
@@ -27,4 +26,3 @@ include $(BP_COMMON_DIR)/syn/Makefile.sv2v
 include $(BP_COMMON_DIR)/syn/Makefile.verilator
 include $(BP_COMMON_DIR)/syn/Makefile.vcs
 include $(BP_COMMON_DIR)/syn/Makefile.vivado
-

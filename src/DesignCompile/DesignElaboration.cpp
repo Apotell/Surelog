@@ -542,6 +542,41 @@ Config* DesignElaboration::getCellConfig(std::string name) {
   return config;
 }
 
+bool DesignElaboration::bindAllInstances_(ModuleInstance* parent,
+                                          ModuleInstanceFactory* factory,
+                                          Config* config) {
+  DesignComponent* def = parent->getDefinition();
+  Design* design = m_compileDesign->getCompiler()->getDesign();
+  std::vector<ModuleInstance*> parentSubInstances;
+  if (def) {
+    for (BindStmt* bind : design->getBindStmts(def->getName())) {
+      ModuleInstance* bindInstance =
+          createBindInstance_(bind, parent, factory, config);
+      if (bindInstance) {
+        parentSubInstances.push_back(bindInstance);
+      }
+    }
+  }
+  for (unsigned int i = 0; i < parent->getNbChildren(); i++) {
+    ModuleInstance* child = parent->getChildren(i);
+    bindAllInstances_(child, factory, config);
+  }
+  if (parentSubInstances.size()) {
+    unsigned int nbExisting = parent->getNbChildren();
+    ModuleInstance** children =
+        new ModuleInstance*[parentSubInstances.size() + nbExisting];
+    unsigned int index = 0;
+    for (; index < nbExisting; index++) {
+      children[index] = parent->getChildren(index);
+    }
+    for (; index < parentSubInstances.size() + nbExisting; index++) {
+      children[index] = parentSubInstances[index - nbExisting];
+    }
+    parent->addSubInstances(children, parentSubInstances.size() + nbExisting);
+  }
+  return true;
+}
+
 bool DesignElaboration::elaborateModule_(std::string moduleName,
                                          const FileContent* fC,
                                          bool onlyTopLevel) {
@@ -567,9 +602,12 @@ bool DesignElaboration::elaborateModule_(std::string moduleName,
         ModuleInstance* instance = design->findInstance(moduleName);
         for (unsigned int i = 0; i < def->getFileContents().size(); i++) {
           std::vector<ModuleInstance*> parentSubInstances;
-          elaborateInstance_(def->getFileContents()[i], def->getNodeIds()[i], 0,
+          NodeId id = def->getNodeIds()[i];
+          elaborateInstance_(def->getFileContents()[i], id, 0,
                              m_moduleInstFactory, instance, config,
                              parentSubInstances);
+          if (instance)
+            bindAllInstances_(instance, m_moduleInstFactory, config);
         }
       }
       break;
@@ -634,8 +672,9 @@ ModuleInstance* DesignElaboration::createBindInstance_(
     const std::string& targetInstName = fC->SymName(targetInstId);
     instanceMatch = (targetInstName == parent->getInstanceName());
   }
+  DesignComponent* targetDef = nullptr;
   if (def && (def->getName() == targetName) && instanceMatch) {
-    DesignComponent* targetDef = design->getModuleDefinition(bindModName);
+    targetDef = design->getModuleDefinition(bindModName);
     if (targetDef) {
       instance = factory->newModuleInstance(targetDef, fC, bind->getStmtId(),
                                             parent->getParent(), instName,
@@ -652,12 +691,12 @@ ModuleInstance* DesignElaboration::createBindInstance_(
     }
   }
   if (instance) {
-    /* return value ignored, no binding in binding */
     std::vector<ModuleInstance*> parentSubInstances;
     instance->setInstanceBinding(parent);
     NodeId parameterOverloading = fC->Sibling(bindNodeId);
-    elaborateInstance_(fC, bind->getStmtId(), parameterOverloading, factory,
-                       instance, config, parentSubInstances);
+    elaborateInstance_(targetDef->getFileContents()[0],
+                       targetDef->getNodeIds()[0], parameterOverloading,
+                       factory, instance, config, parentSubInstances);
   }
   return instance;
 }
@@ -695,18 +734,6 @@ void DesignElaboration::elaborateInstance_(
   NetlistElaboration* nelab = new NetlistElaboration(m_compileDesign);
   nelab->elaborateInstance(parent);
   delete nelab;
-
-  // Bind stmt
-  DesignComponent* def = parent->getDefinition();
-  if (def) {
-    for (BindStmt* bind : design->getBindStmts(def->getName())) {
-      ModuleInstance* bindInstance =
-          createBindInstance_(bind, parent, factory, config);
-      if (bindInstance) {
-        parentSubInstances.push_back(bindInstance);
-      }
-    }
-  }
 
   // Scan for regular instances and generate blocks
   types = {
@@ -901,15 +928,6 @@ void DesignElaboration::elaborateInstance_(
           }
         }
         parent->deleteValue(name, m_exprBuilder);
-        if (allSubInstances.size()) {
-          ModuleInstance** children =
-              new ModuleInstance*[allSubInstances.size()];
-          for (unsigned int index = 0; index < allSubInstances.size();
-               index++) {
-            children[index] = allSubInstances[index];
-          }
-          parent->addSubInstances(children, allSubInstances.size());
-        }
         continue;
 
       } else {  // If-Else or Case stmt
@@ -1078,8 +1096,13 @@ void DesignElaboration::elaborateInstance_(
 
       ModuleInstance* child = factory->newModuleInstance(
           def, fC, subInstanceId, parent, instName, indexedModName);
-      elaborateInstance_(def->getFileContents()[0], childId, paramOverride,
-                         factory, child, config, allSubInstances);
+      while (childId) {
+        elaborateInstance_(def->getFileContents()[0], childId, paramOverride,
+                           factory, child, config, allSubInstances);
+        childId = fC->Sibling(childId);
+        if (fC->Type(childId) == slGenerate_block) break;
+        if (fC->Type(childId) == slEnd) break;
+      }
       allSubInstances.push_back(child);
 
     }
@@ -1338,11 +1361,17 @@ void DesignElaboration::elaborateInstance_(
   }
   // Record sub-scopes and sub-instances
   if (allSubInstances.size()) {
-    ModuleInstance** children = new ModuleInstance*[allSubInstances.size()];
-    for (unsigned int index = 0; index < allSubInstances.size(); index++) {
-      children[index] = allSubInstances[index];
+    unsigned int nbExisting = parent->getNbChildren();
+    ModuleInstance** children =
+        new ModuleInstance*[allSubInstances.size() + nbExisting];
+    unsigned int index = 0;
+    for (; index < nbExisting; index++) {
+      children[index] = parent->getChildren(index);
     }
-    parent->addSubInstances(children, allSubInstances.size());
+    for (; index < allSubInstances.size() + nbExisting; index++) {
+      children[index] = allSubInstances[index - nbExisting];
+    }
+    parent->addSubInstances(children, allSubInstances.size() + nbExisting);
   }
 }
 

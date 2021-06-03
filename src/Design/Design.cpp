@@ -43,17 +43,41 @@
 #include "Utils/StringUtils.h"
 
 namespace SURELOG {
-static std::mutex m;  // Why this is a global mutex, not instance mutex ?
+
+Design::~Design() {
+  for (auto elem : m_ppFileContents) {
+    delete elem.second;
+  }
+  for (auto elem : m_fileContents) {
+    delete elem.second;
+  }
+  for (auto elem : m_moduleDefinitions) {
+    delete elem.second;
+  }
+  for (auto elem : m_topLevelModuleInstances) {
+    delete elem;
+  }
+  for (auto elem : m_orderedPackageDefinitions) {
+    delete elem;
+  }
+  for (auto elem : m_programDefinitions) {
+    delete elem.second;
+  }
+  for (auto elem : m_uniqueClassDefinitions) {
+    delete elem.second;
+  }
+}
+
 void Design::addFileContent(SymbolId fileId, FileContent* content) {
-  m.lock();
+  m_mutex.lock();
   m_fileContents.push_back(std::make_pair(fileId, content));
-  m.unlock();
+  m_mutex.unlock();
 }
 
 void Design::addPPFileContent(SymbolId fileId, FileContent* content) {
-  m.lock();
+  m_mutex.lock();
   m_ppFileContents.push_back(std::make_pair(fileId, content));
-  m.unlock();
+  m_mutex.unlock();
 }
 
 DesignComponent* Design::getComponentDefinition(

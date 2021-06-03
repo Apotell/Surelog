@@ -22,6 +22,8 @@
  */
 #include "DesignCompile/UhdmWriter.h"
 
+#include <string.h>
+
 #include <map>
 
 #include "CommandLine/CommandLineParser.h"
@@ -453,7 +455,9 @@ static void writePorts(std::vector<Signal*>& orig_ports, BaseClass* parent,
     port* dest_port = s.MakePort();
     signalBaseMap.insert(std::make_pair(orig_port, dest_port));
     signalMap.insert(std::make_pair(orig_port->getName(), orig_port));
-    dest_port->VpiName(orig_port->getName());
+    const FileContent* fC = orig_port->getFileContent();
+    if (fC->Type(orig_port->getNodeId()) == slStringConst)
+      dest_port->VpiName(orig_port->getName());
     unsigned int direction =
         UhdmWriter::getVpiDirection(orig_port->getDirection());
     dest_port->VpiDirection(direction);
@@ -497,7 +501,10 @@ void writeDataTypes(const DesignComponent::DataTypeMap& datatypeMap,
     }
     typespec* tps = dtype->getTypespec();
     if (parent->UhdmType() == uhdmpackage) {
-      if (tps) tps->VpiName(parent->VpiName() + "::" + tps->VpiName());
+      if (tps && (!strstr(tps->VpiName().c_str(), "::"))) {
+        const std::string newName = parent->VpiName() + "::" + tps->VpiName();
+        tps->VpiName(newName);
+      }
     }
     if (tps) {
       if (ids.find(tps->UhdmId()) == ids.end()) {
@@ -528,32 +535,35 @@ void writeNets(std::vector<Signal*>& orig_nets, BaseClass* parent,
       dest_net = s.MakeLogic_net();
     }
     if (dest_net) {
-      SignalMap::iterator portItr = portMap.find(orig_net->getName());
-      if (portItr != portMap.end()) {
-        Signal* sig = (*portItr).second;
-        if (sig) {
-          SignalBaseClassMap::iterator itr = signalBaseMap.find(sig);
-          if (itr != signalBaseMap.end()) {
-            port* p = (port*)((*itr).second);
-            if (p->Low_conn() == nullptr) {
-              ref_obj* ref = s.MakeRef_obj();
-              ref->Actual_group(dest_net);
-              p->Low_conn(ref);
+      const FileContent* fC = orig_net->getFileContent();
+      if (fC->Type(orig_net->getNodeId()) == slStringConst) {
+        SignalMap::iterator portItr = portMap.find(orig_net->getName());
+        if (portItr != portMap.end()) {
+          Signal* sig = (*portItr).second;
+          if (sig) {
+            SignalBaseClassMap::iterator itr = signalBaseMap.find(sig);
+            if (itr != signalBaseMap.end()) {
+              port* p = (port*)((*itr).second);
+              if (p->Low_conn() == nullptr) {
+                ref_obj* ref = s.MakeRef_obj();
+                ref->Actual_group(dest_net);
+                p->Low_conn(ref);
+              }
             }
           }
         }
+        signalBaseMap.insert(std::make_pair(orig_net, dest_net));
+        signalMap.insert(std::make_pair(orig_net->getName(), orig_net));
+        dest_net->VpiName(orig_net->getName());
+        dest_net->VpiLineNo(
+            orig_net->getFileContent()->Line(orig_net->getNodeId()));
+        dest_net->VpiColumnNo(
+            orig_net->getFileContent()->Column(orig_net->getNodeId()));
+        dest_net->VpiFile(orig_net->getFileContent()->getFileName());
+        dest_net->VpiNetType(UhdmWriter::getVpiNetType(orig_net->getType()));
+        dest_net->VpiParent(parent);
+        dest_nets->push_back(dest_net);
       }
-      signalBaseMap.insert(std::make_pair(orig_net, dest_net));
-      signalMap.insert(std::make_pair(orig_net->getName(), orig_net));
-      dest_net->VpiName(orig_net->getName());
-      dest_net->VpiLineNo(
-          orig_net->getFileContent()->Line(orig_net->getNodeId()));
-      dest_net->VpiColumnNo(
-          orig_net->getFileContent()->Column(orig_net->getNodeId()));
-      dest_net->VpiFile(orig_net->getFileContent()->getFileName());
-      dest_net->VpiNetType(UhdmWriter::getVpiNetType(orig_net->getType()));
-      dest_net->VpiParent(parent);
-      dest_nets->push_back(dest_net);
     }
   }
 }
@@ -890,6 +900,21 @@ void writeInterface(ModuleDefinition* mod, interface* m, Serializer& s,
     dest_modports->push_back(dest_modport);
   }
   m->Modports(dest_modports);
+  // Parameters
+  if (mod->getParameters()) {
+    m->Parameters(mod->getParameters());
+    for (auto ps : *m->Parameters()) {
+      ps->VpiParent(m);
+    }
+  }
+  // Param_assigns
+  if (mod->getParam_assigns()) {
+    m->Param_assigns(mod->getParam_assigns());
+    for (auto ps : *m->Param_assigns()) {
+      ps->VpiParent(m);
+    }
+  }
+
   // Function and tasks
   m->Task_funcs(mod->getTask_funcs());
   if (m->Task_funcs()) {
@@ -950,6 +975,20 @@ void writeProgram(Program* mod, program* m, Serializer& s,
             instance);
   m->Nets(dest_nets);
   mapLowConns(orig_ports, s, signalBaseMap);
+  // Parameters
+  if (mod->getParameters()) {
+    m->Parameters(mod->getParameters());
+    for (auto ps : *m->Parameters()) {
+      ps->VpiParent(m);
+    }
+  }
+  // Param_assigns
+  if (mod->getParam_assigns()) {
+    m->Param_assigns(mod->getParam_assigns());
+    for (auto ps : *m->Param_assigns()) {
+      ps->VpiParent(m);
+    }
+  }
   // Classes
   ClassNameClassDefinitionMultiMap& orig_classes = mod->getClassDefinitions();
   VectorOfclass_defn* dest_classes = s.MakeClass_defnVec();

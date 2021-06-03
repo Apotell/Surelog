@@ -114,10 +114,17 @@ Value* ModuleInstance::getValue(const std::string& name,
   return sval;
 }
 
-ModuleInstance::~ModuleInstance() {}
+ModuleInstance::~ModuleInstance() {
+  delete m_netlist;
+  for (unsigned int index = 0; index < m_nbChildren; index++) {
+    delete m_children[index];
+  }
+  delete[] m_children;
+}
 
 void ModuleInstance::addSubInstances(ModuleInstance** subInstances,
                                      unsigned int nbSubInstances) {
+  if (m_children) delete[] m_children;
   m_children = subInstances;
   m_nbChildren = nbSubInstances;
 }

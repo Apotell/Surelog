@@ -86,12 +86,12 @@ module_keyword
 
 interface_nonansi_header :  
   ( attribute_instance )* INTERFACE ( lifetime )? interface_identifier  
-  ( parameter_port_list )? list_of_ports SEMICOLUMN ; 
+  ( package_import_declaration )*( parameter_port_list )? list_of_ports SEMICOLUMN ; 
 
 
 interface_ansi_header :  
   ( attribute_instance )* INTERFACE ( lifetime )? interface_identifier  
-  ( parameter_port_list )? ( list_of_port_declarations )? SEMICOLUMN ; 
+  ( package_import_declaration )*  ( parameter_port_list )? ( list_of_port_declarations )? SEMICOLUMN ; 
    
 interface_declaration  
 : interface_nonansi_header ( timeunits_declaration )? ( interface_item )*  
@@ -108,11 +108,11 @@ interface_declaration
  
 program_nonansi_header : 
 ( attribute_instance ) PROGRAM ( lifetime )? identifier  
-( parameter_port_list )? list_of_ports SEMICOLUMN ;  
+( package_import_declaration )* ( parameter_port_list )? list_of_ports SEMICOLUMN ;  
 
 program_ansi_header : 
 ( attribute_instance )* PROGRAM ( lifetime )? identifier  
-( parameter_port_list )? ( list_of_port_declarations )? SEMICOLUMN ; 
+( package_import_declaration )* ( parameter_port_list )? ( list_of_port_declarations )? SEMICOLUMN ; 
 
 checker_declaration : 
       CHECKER identifier ( OPEN_PARENS checker_port_list? CLOSE_PARENS )? SEMICOLUMN 
@@ -361,7 +361,7 @@ program_generate_item :
     ; 
 
 checker_port_list : 
-      checker_port_item ( COMMA checker_port_item )? ; 
+      checker_port_item ( COMMA checker_port_item )* ; 
 
 checker_port_item : 
       attribute_instance* (INPUT | OUTPUT)? property_formal_type identifier 
@@ -1361,7 +1361,9 @@ boolean_abbrev
     | goto_repetition            
     ; 
      
-consecutive_repetition : CONSECUTIVE_REP const_or_range_expression CLOSE_BRACKET ; 
+consecutive_repetition : CONSECUTIVE_REP const_or_range_expression CLOSE_BRACKET
+                       | ASSOCIATIVE_UNSPECIFIED 
+                       | OPEN_BRACKET PLUS CLOSE_BRACKET; 
 
 non_consecutive_repetition : NON_CONSECUTIVE_REP const_or_range_expression CLOSE_BRACKET ; 
                           

@@ -279,6 +279,7 @@ set(surelog_SRC
   ${PROJECT_SOURCE_DIR}/src/DesignCompile/CompileAssertion.cpp
   ${PROJECT_SOURCE_DIR}/src/DesignCompile/CompileClass.cpp
   ${PROJECT_SOURCE_DIR}/src/DesignCompile/CompileDesign.cpp
+  ${PROJECT_SOURCE_DIR}/src/DesignCompile/CompilerHarness.cpp
   ${PROJECT_SOURCE_DIR}/src/DesignCompile/CompileExpression.cpp
   ${PROJECT_SOURCE_DIR}/src/DesignCompile/CompileFileContent.cpp
   ${PROJECT_SOURCE_DIR}/src/DesignCompile/CompileHelper.cpp
@@ -293,6 +294,7 @@ set(surelog_SRC
   ${PROJECT_SOURCE_DIR}/src/DesignCompile/DesignElaboration.cpp
   ${PROJECT_SOURCE_DIR}/src/DesignCompile/ElaborationStep.cpp
   ${PROJECT_SOURCE_DIR}/src/DesignCompile/NetlistElaboration.cpp
+  ${PROJECT_SOURCE_DIR}/src/DesignCompile/ElaboratorHarness.cpp
   ${PROJECT_SOURCE_DIR}/src/DesignCompile/PackageAndRootElaboration.cpp
   ${PROJECT_SOURCE_DIR}/src/DesignCompile/ResolveSymbols.cpp
   ${PROJECT_SOURCE_DIR}/src/DesignCompile/TestbenchElaboration.cpp
@@ -326,6 +328,7 @@ set(surelog_SRC
   ${PROJECT_SOURCE_DIR}/src/SourceCompile/LoopCheck.cpp
   ${PROJECT_SOURCE_DIR}/src/SourceCompile/MacroInfo.cpp
   ${PROJECT_SOURCE_DIR}/src/SourceCompile/ParseFile.cpp
+  ${PROJECT_SOURCE_DIR}/src/SourceCompile/ParserHarness.cpp
   ${PROJECT_SOURCE_DIR}/src/SourceCompile/PreprocessFile.cpp
   ${PROJECT_SOURCE_DIR}/src/SourceCompile/PreprocessHarness.cpp
   ${PROJECT_SOURCE_DIR}/src/SourceCompile/SV3_1aPpTreeListenerHelper.cpp
@@ -479,6 +482,9 @@ register_gtests(
   src/SourceCompile/SymbolTable_test.cpp
   src/Expression/ExprBuilder_test.cpp
   src/SourceCompile/PreprocessFile_test.cpp
+  src/SourceCompile/ParseFile_test.cpp
+  src/DesignCompile/CompileExpression_test.cpp
+  src/DesignCompile/Elaboration_test.cpp
 )
 
 target_link_libraries(hellosureworld surelog)

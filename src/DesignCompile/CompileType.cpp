@@ -168,11 +168,16 @@ UHDM::any* CompileHelper::compileVariable(
   UHDM::Serializer& s = compileDesign->getSerializer();
   UHDM::any* result = nullptr;
   VObjectType the_type = fC->Type(variable);
-  if (the_type == VObjectType::slData_type) {
+  if (the_type == VObjectType::slData_type ||
+      the_type == VObjectType::slPs_or_hierarchical_identifier) {
     variable = fC->Child(variable);
     the_type = fC->Type(variable);
   } else if (the_type == VObjectType::slNull_rule) {
     return nullptr;
+  }
+  if (the_type == VObjectType::slComplex_func_call) {
+    variable = fC->Child(variable);
+    the_type = fC->Type(variable);
   }
   NodeId Packed_dimension = fC->Sibling(variable);
   if (Packed_dimension == 0) {
@@ -335,11 +340,11 @@ UHDM::any* CompileHelper::compileVariable(
 }
 
 const UHDM::typespec* bindTypespec(const std::string& name,
-                                   SURELOG::ValuedComponentI* instance) {
+                                   SURELOG::ValuedComponentI* instance,
+                                   Serializer& s) {
   const typespec* result = nullptr;
   ModuleInstance* modInst = dynamic_cast<ModuleInstance*>(instance);
-  modInst = modInst->getParent();
-  if (modInst) {
+  while (modInst) {
     for (Parameter* param : modInst->getTypeParams()) {
       const std::string& pname = param->getName();
       if (pname == name) {
@@ -348,6 +353,9 @@ const UHDM::typespec* bindTypespec(const std::string& name,
           type_parameter* tparam = dynamic_cast<type_parameter*>(uparam);
           if (tparam) {
             result = tparam->Typespec();
+            ElaboratorListener listener(&s);
+            result = dynamic_cast<typespec*>(
+                UHDM::clone_tree((any*)result, s, &listener));
           }
         }
         break;
@@ -363,11 +371,23 @@ const UHDM::typespec* bindTypespec(const std::string& name,
             type_parameter* tparam = dynamic_cast<type_parameter*>(uparam);
             if (tparam) {
               result = tparam->Typespec();
+              ElaboratorListener listener(&s);
+              result = dynamic_cast<typespec*>(
+                  UHDM::clone_tree((any*)result, s, &listener));
             }
           }
         }
+        const DataType* dt = mod->getDataType(name);
+        if (dt) {
+          dt = dt->getActual();
+          result = dt->getTypespec();
+          ElaboratorListener listener(&s);
+          result = dynamic_cast<typespec*>(
+              UHDM::clone_tree((any*)result, s, &listener));
+        }
       }
     }
+    modInst = modInst->getParent();
   }
   return result;
 }
@@ -682,7 +702,7 @@ int_typespec* CompileHelper::buildIntTypespec(
 UHDM::typespec* CompileHelper::compileTypespec(
     DesignComponent* component, const FileContent* fC, NodeId type,
     CompileDesign* compileDesign, UHDM::any* pstmt,
-    SURELOG::ValuedComponentI* instance, bool reduce,
+    SURELOG::ValuedComponentI* instance, bool reduce, bool isVariable,
     const std::string& suffixname) {
   UHDM::Serializer& s = compileDesign->getSerializer();
   UHDM::typespec* result = nullptr;
@@ -750,14 +770,22 @@ UHDM::typespec* CompileHelper::compileTypespec(
       break;
     }
     case VObjectType::slPacked_dimension: {
-      bit_typespec* tps = s.MakeBit_typespec();
-      tps->VpiFile(fC->getFileName());
-      tps->VpiLineNo(fC->Line(type));
-      tps->VpiColumnNo(fC->Column(type));
-      tps->VpiEndLineNo(fC->EndLine(type));
-      tps->VpiEndColumnNo(fC->EndColumn(type));
-      tps->Ranges(ranges);
-      result = tps;
+      if (isVariable) {
+        // 6.8 Variable declarations, implicit type
+        logic_typespec* tps = s.MakeLogic_typespec();
+        tps->Ranges(ranges);
+        result = tps;
+      } else {
+        // Parameter implicit type is bit
+        bit_typespec* tps = s.MakeBit_typespec();
+        tps->Ranges(ranges);
+        result = tps;
+      }
+      result->VpiFile(fC->getFileName());
+      result->VpiLineNo(fC->Line(type));
+      result->VpiColumnNo(fC->Column(type));
+      result->VpiEndLineNo(fC->EndLine(type));
+      result->VpiEndColumnNo(fC->EndColumn(type));
       break;
     }
     case VObjectType::slExpression: {
@@ -766,7 +794,7 @@ UHDM::typespec* CompileHelper::compileTypespec(
       NodeId Name = fC->Child(Primary_literal);
       const std::string& name = fC->SymName(Name);
       if (instance) {
-        result = (typespec*)bindTypespec(name, instance);
+        result = (typespec*)bindTypespec(name, instance, s);
       }
       break;
     }
@@ -928,25 +956,24 @@ UHDM::typespec* CompileHelper::compileTypespec(
           const TypeDef* typed = dynamic_cast<const TypeDef*>(dtype);
           if (typed) {
             const DataType* dt = typed->getDataType();
-            const Enum* en = dynamic_cast<const Enum*>(dt);
-            if (en) {
+            if (const Enum* en = dynamic_cast<const Enum*>(dt)) {
               result = en->getTypespec();
-            }
-            const Struct* st = dynamic_cast<const Struct*>(dt);
-            if (st) {
+            } else if (const Struct* st = dynamic_cast<const Struct*>(dt)) {
               result = st->getTypespec();
-            }
-            const Union* un = dynamic_cast<const Union*>(dt);
-            if (un) {
+            } else if (const Union* un = dynamic_cast<const Union*>(dt)) {
               result = un->getTypespec();
-            }
-            const SimpleType* sit = dynamic_cast<const SimpleType*>(dt);
-            if (sit) {
+            } else if (const SimpleType* sit =
+                           dynamic_cast<const SimpleType*>(dt)) {
+              result = sit->getTypespec();
+            } else if (const DummyType* sit =
+                           dynamic_cast<const DummyType*>(dt)) {
               result = sit->getTypespec();
             }
           }
           dtype = dtype->getDefinition();
-          if (result) break;
+          if (result) {
+            break;
+          }
         }
         if (!result) {
           UHDM::VectorOfparam_assign* param_assigns = pack->getParam_assigns();
@@ -1242,7 +1269,9 @@ UHDM::typespec* CompileHelper::compileTypespec(
       break;
   };
   if (result && component) {
-    result->Instance(component->getUhdmInstance());
+    if (!result->Instance()) {
+      result->Instance(component->getUhdmInstance());
+    }
   }
   return result;
 }

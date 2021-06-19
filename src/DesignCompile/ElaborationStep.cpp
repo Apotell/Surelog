@@ -28,6 +28,7 @@
 #include <string>
 #include <vector>
 
+#include "Design/DummyType.h"
 #include "Design/Enum.h"
 #include "Design/FileContent.h"
 #include "Design/Netlist.h"
@@ -150,13 +151,24 @@ bool ElaborationStep::bindTypedefs_() {
         if (def && (typd != def)) {
           typd->setDefinition(def);
           typd->setDataType((DataType*)def);
-          if (typespec* tps = def->getTypespec()) {
+          NodeId id = typd->getDefinitionNode();
+          const FileContent* fC = typd->getFileContent();
+          NodeId Packed_dimension = fC->Sibling(id);
+          typespec* tpclone = nullptr;
+          if (Packed_dimension &&
+              fC->Type(Packed_dimension) == slPacked_dimension) {
+            tpclone = m_helper.compileTypespec(
+                defTuple.second, typd->getFileContent(),
+                typd->getDefinitionNode(), m_compileDesign, nullptr, nullptr,
+                true);
+          } else if (typespec* tps = def->getTypespec()) {
             ElaboratorListener listener(&s);
-            typespec* tpclone =
-                (typespec*)UHDM::clone_tree((any*)tps, s, &listener);
+            tpclone = (typespec*)UHDM::clone_tree((any*)tps, s, &listener);
+            tpclone->Typedef_alias(tps);
+          }
+          if (tpclone) {
             typd->setTypespec(tpclone);
             tpclone->VpiName(typd->getName());
-            tpclone->Typedef_alias(tps);
             specs.insert(std::make_pair(typd->getName(), tpclone));
             if (Package* pack = dynamic_cast<Package*>(comp)) {
               std::string name = pack->getName() + "::" + typd->getName();
@@ -810,6 +822,7 @@ bool bindStructInPackage(Design* design, Signal* signal,
 
 bool ElaborationStep::bindPortType_(Signal* signal, const FileContent* fC,
                                     NodeId id, Scope* scope,
+                                    ModuleInstance* instance,
                                     DesignComponent* parentComponent,
                                     ErrorDefinition::ErrorType errtype) {
   if (signal->getDataType() || signal->getInterfaceDef() ||
@@ -1042,10 +1055,38 @@ bool ElaborationStep::bindPortType_(Signal* signal, const FileContent* fC,
                 Parameter* p = parentComponent->getParameter(interfName);
                 type = p;
                 signal->setDataType(type);
-                break;
+                return true;
               }
             }
           }
+        }
+      }
+      if (def == NULL) {
+        while (instance) {
+          for (Parameter* p : instance->getTypeParams()) {
+            if (p->getName() == interfName) {
+              type = p;
+              signal->setDataType(type);
+              return true;
+            }
+          }
+
+          DesignComponent* component = instance->getDefinition();
+          if (component) {
+            if (component->getParameters()) {
+              for (auto param : *component->getParameters()) {
+                if (param->UhdmType() == uhdmtype_parameter) {
+                  if (param->VpiName() == interfName) {
+                    Parameter* p = component->getParameter(interfName);
+                    type = p;
+                    signal->setDataType(type);
+                    return true;
+                  }
+                }
+              }
+            }
+          }
+          instance = instance->getParent();
         }
       }
       checkIfBuiltInTypeOrErrorOut(def, fC, id, type, interfName, errors,
@@ -1198,6 +1239,22 @@ any* ElaborationStep::makeVar_(DesignComponent* component, Signal* sig,
       stv->Typespec(un->getTypespec());
       obj = stv;
       stv->Expr(assignExp);
+    } else if (const DummyType* un = dynamic_cast<const DummyType*>(dtype)) {
+      typespec* tps = un->getTypespec();
+      variables* var = nullptr;
+      UHDM_OBJECT_TYPE ttps = tps->UhdmType();
+      if (ttps == uhdmenum_typespec) {
+        var = s.MakeEnum_var();
+      } else if (ttps == uhdmstruct_typespec) {
+        var = s.MakeStruct_var();
+      } else if (ttps == uhdmunion_typespec) {
+        var = s.MakeUnion_var();
+      } else {
+        var = s.MakeLogic_var();
+      }
+      var->Typespec(tps);
+      var->Expr(assignExp);
+      obj = var;
     } else if (const SimpleType* sit = dynamic_cast<const SimpleType*>(dtype)) {
       UHDM::typespec* spec = sit->getTypespec();
       spec = m_helper.elabTypespec(component, spec, m_compileDesign, nullptr,
@@ -1234,6 +1291,13 @@ any* ElaborationStep::makeVar_(DesignComponent* component, Signal* sig,
       struct_var* stv = s.MakeStruct_var();
       stv->Typespec(tps);
       stv->VpiName(signame);
+      obj = stv;
+      stv->Expr(assignExp);
+    } else if (tpstype == uhdmlogic_typespec) {
+      logic_var* stv = s.MakeLogic_var();
+      stv->Typespec(tps);
+      stv->VpiName(signame);
+      stv->Ranges(packedDimensions);
       obj = stv;
       stv->Expr(assignExp);
     } else if (tpstype == uhdmenum_typespec) {
@@ -1318,7 +1382,7 @@ any* ElaborationStep::makeVar_(DesignComponent* component, Signal* sig,
     var->VpiName(signame);
     var->Expr(assignExp);
     obj = var;
-  } else if (packedDimensions) {
+  } else if (packedDimensions && (obj->UhdmType() != uhdmlogic_var)) {
     // packed struct array ...
     UHDM::packed_array_var* parray = s.MakePacked_array_var();
     parray->Ranges(packedDimensions);
@@ -1355,6 +1419,8 @@ any* ElaborationStep::makeVar_(DesignComponent* component, Signal* sig,
       ((union_var*)obj)->VpiName(signame);
     } else if (obj->UhdmType() == uhdmclass_var) {
       ((class_var*)obj)->VpiName(signame);
+    } else if (obj->UhdmType() == uhdmlogic_var) {
+      ((logic_var*)obj)->VpiName(signame);
     }
     vars->push_back((variables*)obj);
   }

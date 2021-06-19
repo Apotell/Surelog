@@ -75,7 +75,8 @@ class CompileHelper final {
 
   const DataType* compileTypeDef(DesignComponent* scope, const FileContent* fC,
                                  NodeId id, CompileDesign* compileDesign,
-                                 UHDM::any* pstmt = nullptr);
+                                 UHDM::any* pstmt = nullptr,
+                                 bool reduce = false);
 
   bool compileScopeBody(Scope* parent, Statement* parentStmt,
                         const FileContent* fC, NodeId id);
@@ -115,7 +116,7 @@ class CompileHelper final {
 
   bool compileDataDeclaration(DesignComponent* component, const FileContent* fC,
                               NodeId id, bool interface,
-                              CompileDesign* compileDesign);
+                              CompileDesign* compileDesign, bool reduce);
 
   // ------------------------------------------------------------------------------------------
   // UHDM modeling
@@ -208,7 +209,7 @@ class CompileHelper final {
                                   const FileContent* fC, NodeId nodeId,
                                   CompileDesign* compileDesign,
                                   UHDM::any* pstmt, ValuedComponentI* instance,
-                                  bool reduce,
+                                  bool reduce, bool isVariable = false,
                                   const std::string& suffixname = "");
 
   UHDM::typespec* compileDatastructureTypespec(
@@ -462,7 +463,7 @@ class CompileHelper final {
 
   void reorderAssignmentPattern(DesignComponent* mod, const UHDM::any* lhs,
                                 UHDM::any* rhs, CompileDesign* compileDesign,
-                                ValuedComponentI* instance, int level);
+                                ValuedComponentI* instance, unsigned int level);
 
   bool errorOnNegativeConstant(DesignComponent* component, UHDM::expr* exp,
                                CompileDesign* compileDesign,

@@ -383,7 +383,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
                                               const FileContent* fC,
                                               NodeId data_declaration,
                                               CompileDesign* compileDesign,
-                                              UHDM::any* pstmt) {
+                                              UHDM::any* pstmt, bool reduce) {
   DataType* newType = NULL;
   Serializer& s = compileDesign->getSerializer();
   UHDM::VectorOftypespec* typespecs = nullptr;
@@ -452,6 +452,16 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
   }
 
   const NodeId type_name = fC->Sibling(data_type);
+  const NodeId Variable_dimension = fC->Sibling(type_name);
+  array_typespec* array_tps = nullptr;
+  if (Variable_dimension) {
+    array_tps = s.MakeArray_typespec();
+    int size;
+    VectorOfrange* ranges =
+        compileRanges(scope, fC, Variable_dimension, compileDesign, nullptr,
+                      nullptr, reduce, size, false);
+    array_tps->Ranges(ranges);
+  }
   const std::string name = fC->SymName(type_name);
   std::string fullName = name;
   if (Package* pack = dynamic_cast<Package*>(scope)) {
@@ -505,19 +515,39 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       newTypeDef->setDataType(st);
       newTypeDef->setDefinition(st);
       UHDM::typespec* ts = compileTypespec(
-          scope, fC, enum_base_type, compileDesign, nullptr, nullptr, false);
-      ts->VpiName(fullName);
-      st->setTypespec(ts);
-      if (typespecs) typespecs->push_back(ts);
+          scope, fC, enum_base_type, compileDesign, nullptr, nullptr, reduce);
+      if (reduce && (dynamic_cast<Package*>(scope))) {
+        ts->Instance(scope->getUhdmInstance());
+      }
+      if (array_tps) {
+        st->setTypespec(array_tps);
+        array_tps->Elem_typespec(ts);
+        array_tps->VpiName(fullName);
+        if (typespecs) typespecs->push_back(array_tps);
+      } else {
+        ts->VpiName(fullName);
+        st->setTypespec(ts);
+        if (typespecs) typespecs->push_back(ts);
+      }
     } else if (struct_or_union_type == VObjectType::slUnion_keyword) {
       Union* st = new Union(fC, type_name, enum_base_type);
       newTypeDef->setDataType(st);
       newTypeDef->setDefinition(st);
       UHDM::typespec* ts = compileTypespec(
-          scope, fC, enum_base_type, compileDesign, nullptr, nullptr, false);
-      ts->VpiName(fullName);
-      st->setTypespec(ts);
-      if (typespecs) typespecs->push_back(ts);
+          scope, fC, enum_base_type, compileDesign, nullptr, nullptr, reduce);
+      if (reduce && (dynamic_cast<Package*>(scope))) {
+        ts->Instance(scope->getUhdmInstance());
+      }
+      if (array_tps) {
+        st->setTypespec(array_tps);
+        array_tps->Elem_typespec(ts);
+        array_tps->VpiName(fullName);
+        if (typespecs) typespecs->push_back(array_tps);
+      } else {
+        ts->VpiName(fullName);
+        st->setTypespec(ts);
+        if (typespecs) typespecs->push_back(ts);
+      }
     }
 
     if (scope) {
@@ -541,7 +571,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
     newTypeDef->setDefinition(the_enum);
     the_enum->setBaseTypespec(
         compileTypespec(scope, fC, fC->Child(enum_base_type), compileDesign,
-                        nullptr, nullptr, false));
+                        nullptr, nullptr, reduce));
 
     UHDM::enum_typespec* enum_t = s.MakeEnum_typespec();
     if (typespecs) typespecs->push_back(enum_t);
@@ -558,6 +588,9 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
         the_enum->getFileContent()->EndColumn(the_enum->getDefinitionId()));
     // Enum basetype
     enum_t->Base_typespec(the_enum->getBaseTypespec());
+    if (reduce && (dynamic_cast<Package*>(scope))) {
+      enum_t->Instance(scope->getUhdmInstance());
+    }
     // Enum values
     VectorOfenum_const* econsts = s.MakeEnum_constVec();
     enum_t->Enum_consts(econsts);
@@ -620,17 +653,33 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       newTypeDef->setDefinition(dummy);
 
       // Don't create the typespec here, as it is most likely going to be
-      // incomplete at compilation time
-      /*
-      UHDM::typespec* ts = compileTypespec(scope, fC, stype, compileDesign,
-      nullptr, nullptr, false); if (ts) { ElaboratorListener listener(&s);
-        typespec* tpclone = (typespec*) UHDM::clone_tree((any*) ts, s,
-      &listener); tpclone->VpiName(name); if (typespecs)
-          typespecs->push_back(tpclone);
-          newTypeDef->setTypespec(tpclone);
-        dummy->setTypespec(tpclone);
+      // incomplete at compilation time, except for packages
+      if (reduce && (dynamic_cast<Package*>(scope))) {
+        UHDM::typespec* ts = compileTypespec(scope, fC, stype, compileDesign,
+                                             nullptr, nullptr, reduce);
+        if (ts && (ts->UhdmType() != uhdmclass_typespec)) {
+          ElaboratorListener listener(&s);
+          typespec* tpclone =
+              (typespec*)UHDM::clone_tree((any*)ts, s, &listener);
+
+          if (array_tps) {
+            array_tps->Instance(scope->getUhdmInstance());
+            array_tps->VpiName(name);
+            array_tps->Elem_typespec(tpclone);
+            tpclone->Typedef_alias(ts);
+            if (typespecs) typespecs->push_back(array_tps);
+            newTypeDef->setTypespec(array_tps);
+            dummy->setTypespec(array_tps);
+          } else {
+            tpclone->Instance(scope->getUhdmInstance());
+            tpclone->VpiName(name);
+            tpclone->Typedef_alias(ts);
+            if (typespecs) typespecs->push_back(tpclone);
+            newTypeDef->setTypespec(tpclone);
+            dummy->setTypespec(tpclone);
+          }
+        }
       }
-      */
 
       if (scope) scope->insertTypeDef(newTypeDef);
       newType = newTypeDef;
@@ -644,6 +693,9 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       UHDM::typespec* ts = compileTypespec(scope, fC, stype, compileDesign,
                                            nullptr, nullptr, false);
       if (ts) {
+        if (reduce && (dynamic_cast<Package*>(scope))) {
+          ts->Instance(scope->getUhdmInstance());
+        }
         ts->VpiName(name);
         if (typespecs) typespecs->push_back(ts);
       }
@@ -1616,7 +1668,8 @@ void CompileHelper::compileImportDeclaration(DesignComponent* component,
 bool CompileHelper::compileDataDeclaration(DesignComponent* component,
                                            const FileContent* fC, NodeId id,
                                            bool interface,
-                                           CompileDesign* compileDesign) {
+                                           CompileDesign* compileDesign,
+                                           bool reduce) {
   NodeId subNode = fC->Child(id);
   VObjectType subType = fC->Type(subNode);
   switch (subType) {
@@ -1629,7 +1682,7 @@ bool CompileHelper::compileDataDeclaration(DesignComponent* component,
         n<> u<17> t<Type_declaration> p<18> c<15> l<13>
         n<> u<18> t<Data_declaration> p<19> c<17> l<13>
        */
-      compileTypeDef(component, fC, id, compileDesign);
+      compileTypeDef(component, fC, id, compileDesign, nullptr, reduce);
       break;
     }
     default:
@@ -1793,11 +1846,13 @@ n<> u<17> t<Continuous_assign> p<18> c<16> l<4>
     NodeId Expression = fC->Sibling(Net_lvalue);
     if (Expression && (fC->Type(Expression) != slUnpacked_dimension)) {
       // LHS
-      NodeId Ps_or_hierarchical_identifier = Net_lvalue;
-      if (fC->Child(Net_lvalue))
-        Ps_or_hierarchical_identifier = fC->Child(Net_lvalue);
+      NodeId Hierarchical_identifier = fC->Child(Net_lvalue);
+      if (fC->Type(fC->Child(Hierarchical_identifier)) ==
+          slHierarchical_identifier) {
+        Hierarchical_identifier = fC->Child(fC->Child(Hierarchical_identifier));
+      }
       UHDM::any* lhs_exp =
-          compileExpression(component, fC, Ps_or_hierarchical_identifier,
+          compileExpression(component, fC, Hierarchical_identifier,
                             compileDesign, nullptr, instance);
 
       // RHS
@@ -2543,9 +2598,16 @@ UHDM::assignment* CompileHelper::compileBlockingAssignment(
     }
   } else if (fC->Type(Variable_lvalue) == slVariable_lvalue) {
     AssignOp_Assign = fC->Sibling(Variable_lvalue);
-    NodeId Hierarchical_identifier = Variable_lvalue;
-    if (fC->Type(Hierarchical_identifier) == slHierarchical_identifier)
+    NodeId Hierarchical_identifier = fC->Child(Variable_lvalue);
+    if (fC->Type(fC->Child(Hierarchical_identifier)) ==
+        slHierarchical_identifier) {
       Hierarchical_identifier = fC->Child(Hierarchical_identifier);
+      Hierarchical_identifier = fC->Child(Hierarchical_identifier);
+    } else if (fC->Type(Hierarchical_identifier) !=
+               slPs_or_hierarchical_identifier) {
+      Hierarchical_identifier = Variable_lvalue;
+    }
+
     lhs_rf = dynamic_cast<expr*>(
         compileExpression(component, fC, Hierarchical_identifier, compileDesign,
                           pstmt, instance, false));

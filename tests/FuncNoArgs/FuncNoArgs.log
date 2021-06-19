@@ -105,7 +105,7 @@ n<> u<99> t<Data_declaration> p<100> c<98> l<8:9> el<8:19>
 n<> u<100> t<Block_item_declaration> p<101> c<99> l<8:9> el<8:19>
 n<> u<101> t<Tf_item_declaration> p<208> c<100> s<206> l<8:9> el<8:19>
 n<count_nonconst_bits> u<102> t<StringConst> p<103> l<10:13> el<10:32>
-n<> u<103> t<Hierarchical_identifier> p<106> c<102> s<105> l<10:13> el<10:32>
+n<> u<103> t<Ps_or_hierarchical_identifier> p<106> c<102> s<105> l<10:13> el<10:32>
 n<> u<104> t<Bit_select> p<105> l<10:33> el<10:33>
 n<> u<105> t<Select> p<106> c<104> l<10:33> el<10:33>
 n<> u<106> t<Variable_lvalue> p<112> c<103> s<107> l<10:13> el<10:32>
@@ -120,7 +120,7 @@ n<> u<114> t<Statement_item> p<115> c<113> l<10:13> el<10:37>
 n<> u<115> t<Statement> p<116> c<114> l<10:13> el<10:37>
 n<> u<116> t<Statement_or_null> p<203> c<115> s<201> l<10:13> el<10:37>
 n<i> u<117> t<StringConst> p<118> l<11:18> el<11:19>
-n<> u<118> t<Hierarchical_identifier> p<121> c<117> s<120> l<11:18> el<11:19>
+n<> u<118> t<Ps_or_hierarchical_identifier> p<121> c<117> s<120> l<11:18> el<11:19>
 n<> u<119> t<Bit_select> p<120> l<11:20> el<11:20>
 n<> u<120> t<Select> p<121> c<119> l<11:20> el<11:20>
 n<> u<121> t<Variable_lvalue> p<126> c<118> s<125> l<11:18> el<11:19>
@@ -142,7 +142,7 @@ n<> u<136> t<Expression> p<138> c<135> l<11:29> el<11:36>
 n<> u<137> t<BinOp_Less> p<138> s<136> l<11:27> el<11:28>
 n<> u<138> t<Expression> p<198> c<132> s<157> l<11:25> el<11:36>
 n<i> u<139> t<StringConst> p<140> l<11:38> el<11:39>
-n<> u<140> t<Hierarchical_identifier> p<143> c<139> s<142> l<11:38> el<11:39>
+n<> u<140> t<Ps_or_hierarchical_identifier> p<143> c<139> s<142> l<11:38> el<11:39>
 n<> u<141> t<Bit_select> p<142> l<11:39> el<11:39>
 n<> u<142> t<Select> p<143> c<141> l<11:39> el<11:39>
 n<> u<143> t<Variable_lvalue> p<155> c<140> s<144> l<11:38> el<11:39>
@@ -175,7 +175,7 @@ n<> u<169> t<Expression> p<170> c<168> l<12:21> el<12:45>
 n<> u<170> t<Expression_or_cond_pattern> p<171> c<169> l<12:21> el<12:45>
 n<> u<171> t<Cond_predicate> p<193> c<170> s<192> l<12:21> el<12:45>
 n<count_nonconst_bits> u<172> t<StringConst> p<173> l<13:21> el<13:40>
-n<> u<173> t<Hierarchical_identifier> p<176> c<172> s<175> l<13:21> el<13:40>
+n<> u<173> t<Ps_or_hierarchical_identifier> p<176> c<172> s<175> l<13:21> el<13:40>
 n<> u<174> t<Bit_select> p<175> l<13:41> el<13:41>
 n<> u<175> t<Select> p<176> c<174> l<13:41> el<13:41>
 n<> u<176> t<Variable_lvalue> p<188> c<173> s<177> l<13:21> el<13:40>
@@ -674,7 +674,7 @@ design: (work@my_opt_reduce_or)
             |vpiSize:64
             |UINT:0
           |vpiLhs:
-          \_int_var: (work@my_opt_reduce_or.count_nonconst_bits.i), line:11:18, endln:11:19
+          \_chandle_var: (work@my_opt_reduce_or.count_nonconst_bits.i), line:11:18, endln:11:19
             |vpiName:i
             |vpiFullName:work@my_opt_reduce_or.count_nonconst_bits.i
         |vpiForIncStmt:
@@ -849,6 +849,8 @@ design: (work@my_opt_reduce_or)
         \_ref_obj: (work@my_opt_reduce_or.count_nonconst_bits.count_nonconst_bits), line:10:13, endln:10:32
           |vpiName:count_nonconst_bits
           |vpiFullName:work@my_opt_reduce_or.count_nonconst_bits.count_nonconst_bits
+          |vpiActual:
+          \_int_var: , line:7:14, endln:7:21
         |vpiRhs:
         \_constant: , line:10:35, endln:10:36
           |vpiConstType:9
@@ -889,7 +891,7 @@ design: (work@my_opt_reduce_or)
             |vpiSize:64
             |UINT:0
           |vpiLhs:
-          \_int_var: (work@my_opt_reduce_or.count_nonconst_bits.i), line:11:18, endln:11:19
+          \_chandle_var: (work@my_opt_reduce_or.count_nonconst_bits.i), line:11:18, endln:11:19
             |vpiName:i
             |vpiFullName:work@my_opt_reduce_or.count_nonconst_bits.i
         |vpiForIncStmt:
@@ -940,6 +942,8 @@ design: (work@my_opt_reduce_or)
             \_ref_obj: (work@my_opt_reduce_or.count_nonconst_bits.count_nonconst_bits), line:13:21, endln:13:40
               |vpiName:count_nonconst_bits
               |vpiFullName:work@my_opt_reduce_or.count_nonconst_bits.count_nonconst_bits
+              |vpiActual:
+              \_int_var: , line:7:14, endln:7:21
             |vpiRhs:
             \_operation: , line:13:43, endln:13:62
               |vpiOpType:24
@@ -947,6 +951,8 @@ design: (work@my_opt_reduce_or)
               \_ref_obj: (work@my_opt_reduce_or.count_nonconst_bits.count_nonconst_bits), line:13:43, endln:13:62
                 |vpiName:count_nonconst_bits
                 |vpiFullName:work@my_opt_reduce_or.count_nonconst_bits.count_nonconst_bits
+                |vpiActual:
+                \_int_var: , line:7:14, endln:7:21
               |vpiOperand:
               \_constant: , line:13:63, endln:13:64
                 |vpiConstType:9

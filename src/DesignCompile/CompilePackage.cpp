@@ -50,9 +50,13 @@ int FunctorCompilePackage::operator()() const {
 bool CompilePackage::compile() {
   if (!m_package) return false;
   UHDM::Serializer& s = m_compileDesign->getSerializer();
-  UHDM::package* pack = s.MakePackage();
-  pack->VpiName(m_package->getName());
-  m_package->setUhdmInstance(pack);
+  UHDM::package* pack =
+      dynamic_cast<UHDM::package*>(m_package->getUhdmInstance());
+  if (pack == nullptr) {
+    pack = s.MakePackage();
+    pack->VpiName(m_package->getName());
+    m_package->setUhdmInstance(pack);
+  }
   m_package->m_exprBuilder.seterrorReporting(m_errors, m_symbols);
   m_package->m_exprBuilder.setDesign(
       m_compileDesign->getCompiler()->getDesign());
@@ -223,7 +227,7 @@ bool CompilePackage::collectObjects_(CollectType collectType) {
         case VObjectType::slData_declaration: {
           if (collectType != CollectType::DEFINITION) break;
           m_helper.compileDataDeclaration(m_package, fC, id, false,
-                                          m_compileDesign);
+                                          m_compileDesign, true);
           break;
         }
         case VObjectType::slDpi_import_export: {

@@ -32,6 +32,7 @@
 #include "CommandLine/CommandLineParser.h"
 #include "Common/PortNetHolder.h"
 #include "Config/ConfigSet.h"
+#include "Design/DummyType.h"
 #include "Design/Enum.h"
 #include "Design/FileContent.h"
 #include "Design/Function.h"
@@ -451,10 +452,21 @@ bool NetlistElaboration::high_conn_(ModuleInstance* instance) {
         NodeId sigId = 0;
         bool bit_or_part_select = false;
         if (fC->Type(Net_lvalue) == VObjectType::slNet_lvalue) {
-          NodeId Ps_or_hierarchical_identifier = fC->Child(Net_lvalue);
-          if (m_helper.isSelected(fC, Ps_or_hierarchical_identifier))
+          NodeId Hierarchical_identifier = fC->Child(Net_lvalue);
+          if (fC->Type(fC->Child(Hierarchical_identifier)) ==
+              slHierarchical_identifier) {
+            Hierarchical_identifier =
+                fC->Child(fC->Child(Hierarchical_identifier));
+          } else if (fC->Type(Hierarchical_identifier) !=
+                     slPs_or_hierarchical_identifier) {
+            Hierarchical_identifier = Net_lvalue;
+          }
+          if (m_helper.isSelected(fC, Hierarchical_identifier))
             bit_or_part_select = true;
-          sigId = fC->Child(Ps_or_hierarchical_identifier);
+          sigId = Hierarchical_identifier;
+          if (fC->Type(fC->Child(sigId)) == slStringConst) {
+            sigId = fC->Child(sigId);
+          }
           sigName = fC->SymName(sigId);
         } else if (fC->Type(Net_lvalue) == VObjectType::slExpression) {
           NodeId Primary = fC->Child(Net_lvalue);
@@ -483,10 +495,18 @@ bool NetlistElaboration::high_conn_(ModuleInstance* instance) {
             } else {
               any* exp = nullptr;
               if (fC->Type(Net_lvalue) == VObjectType::slNet_lvalue) {
-                NodeId Ps_or_hierarchical_identifier = fC->Child(Net_lvalue);
+                NodeId Hierarchical_identifier = fC->Child(Net_lvalue);
+                if (fC->Type(fC->Child(Hierarchical_identifier)) ==
+                    slHierarchical_identifier) {
+                  Hierarchical_identifier =
+                      fC->Child(fC->Child(Hierarchical_identifier));
+                } else if (fC->Type(Hierarchical_identifier) !=
+                           slPs_or_hierarchical_identifier) {
+                  Hierarchical_identifier = Net_lvalue;
+                }
                 exp = m_helper.compileExpression(
-                    comp, fC, Ps_or_hierarchical_identifier, m_compileDesign,
-                    nullptr, instance);
+                    comp, fC, Hierarchical_identifier, m_compileDesign, nullptr,
+                    instance);
               } else {
                 exp = m_helper.compileExpression(
                     comp, fC, Net_lvalue, m_compileDesign, nullptr, instance);
@@ -519,9 +539,26 @@ bool NetlistElaboration::high_conn_(ModuleInstance* instance) {
                 bind_net_(parent, instance->getInstanceBinding(), sigName);
             ref->Actual_group(net);
           } else {
-            any* exp = m_helper.compileExpression(
-                comp, fC, Net_lvalue, m_compileDesign, nullptr, instance);
+            NodeId Hierarchical_identifier = fC->Child(Net_lvalue);
+            if (fC->Type(fC->Child(Hierarchical_identifier)) ==
+                slHierarchical_identifier) {
+              Hierarchical_identifier =
+                  fC->Child(fC->Child(Hierarchical_identifier));
+            } else if (fC->Type(Hierarchical_identifier) !=
+                       slPs_or_hierarchical_identifier) {
+              Hierarchical_identifier = Net_lvalue;
+            }
+
+            any* exp =
+                m_helper.compileExpression(comp, fC, Hierarchical_identifier,
+                                           m_compileDesign, nullptr, instance);
             p->High_conn(exp);
+            if (exp->UhdmType() == uhdmref_obj) {
+              ref_obj* ref = (ref_obj*)exp;
+              const std::string& n = ref->VpiName();
+              any* net = bind_net_(parent, instance->getInstanceBinding(), n);
+              ref->Actual_group(net);
+            }
           }
           ports->push_back(p);
         }
@@ -1119,7 +1156,62 @@ void NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
     // Nets
     if (dtype) {
       dtype = dtype->getActual();
-      if (const Enum* en = dynamic_cast<const Enum*>(dtype)) {
+      if (const DummyType* en = dynamic_cast<const DummyType*>(dtype)) {
+        UHDM::typespec* spec = en->getTypespec();
+        if (spec->UhdmType() == uhdmlogic_typespec) {
+          logic_net* logicn = s.MakeLogic_net();
+          logicn->VpiSigned(sig->isSigned());
+          logicn->VpiNetType(UhdmWriter::getVpiNetType(sig->getType()));
+          logicn->Ranges(packedDimensions);
+          logicn->VpiName(signame);
+          obj = logicn;
+          logicn->Typespec(spec);
+        } else if (spec->UhdmType() == uhdmstruct_typespec) {
+          struct_net* stv = s.MakeStruct_net();
+          stv->Typespec(spec);
+          obj = stv;
+          if (packedDimensions) {
+            packed_array_net* pnets = s.MakePacked_array_net();
+            pnets->Ranges(packedDimensions);
+            pnets->Elements(s.MakeAnyVec());
+            pnets->Elements()->push_back(stv);
+            obj = pnets;
+          }
+        } else if (spec->UhdmType() == uhdmenum_typespec) {
+          enum_net* stv = s.MakeEnum_net();
+          stv->Typespec(spec);
+          obj = stv;
+          if (packedDimensions) {
+            packed_array_net* pnets = s.MakePacked_array_net();
+            pnets->Ranges(packedDimensions);
+            pnets->Elements(s.MakeAnyVec());
+            pnets->Elements()->push_back(stv);
+            obj = pnets;
+          }
+        } else if (spec->UhdmType() == uhdmbit_typespec) {
+          bit_var* logicn = s.MakeBit_var();
+          logicn->VpiSigned(sig->isSigned());
+          logicn->Ranges(packedDimensions);
+          logicn->VpiName(signame);
+          obj = logicn;
+          logicn->Typespec(spec);
+        } else if (spec->UhdmType() == uhdmbyte_typespec) {
+          byte_var* logicn = s.MakeByte_var();
+          logicn->VpiSigned(sig->isSigned());
+          logicn->VpiName(signame);
+          obj = logicn;
+          logicn->Typespec(spec);
+        } else {
+          variables* var = m_helper.getSimpleVarFromTypespec(
+              spec, packedDimensions, m_compileDesign);
+          var->Expr(exp);
+          var->VpiConstantVariable(sig->isConst());
+          var->VpiSigned(sig->isSigned());
+          var->VpiName(signame);
+          obj = var;
+        }
+
+      } else if (const Enum* en = dynamic_cast<const Enum*>(dtype)) {
         enum_net* stv = s.MakeEnum_net();
         stv->Typespec(en->getTypespec());
         obj = stv;
@@ -1154,6 +1246,17 @@ void NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
           logicn->Typespec(spec);
         } else if (spec->UhdmType() == uhdmstruct_typespec) {
           struct_net* stv = s.MakeStruct_net();
+          stv->Typespec(spec);
+          obj = stv;
+          if (packedDimensions) {
+            packed_array_net* pnets = s.MakePacked_array_net();
+            pnets->Ranges(packedDimensions);
+            pnets->Elements(s.MakeAnyVec());
+            pnets->Elements()->push_back(stv);
+            obj = pnets;
+          }
+        } else if (spec->UhdmType() == uhdmenum_typespec) {
+          enum_net* stv = s.MakeEnum_net();
           stv->Typespec(spec);
           obj = stv;
           if (packedDimensions) {
@@ -1584,6 +1687,24 @@ UHDM::any* NetlistElaboration::bind_net_(ModuleInstance* instance,
   }
   if (result == nullptr) {
     result = bind_net_(instance, name);
+  }
+
+  if (Netlist* netlist = instance->getNetlist()) {
+    if (result == nullptr) {
+      // Implicit net
+      Serializer& s = m_compileDesign->getSerializer();
+      logic_net* net = s.MakeLogic_net();
+      net->VpiName(name);
+      result = net;
+      Netlist::SymbolTable& symbols = netlist->getSymbolTable();
+      std::vector<UHDM::net*>* nets = netlist->nets();
+      if (nets == nullptr) {
+        nets = s.MakeNetVec();
+        netlist->nets(nets);
+      }
+      nets->push_back(net);
+      symbols.insert(std::make_pair(name, result));
+    }
   }
   return result;
 }

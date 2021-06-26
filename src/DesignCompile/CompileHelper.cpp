@@ -2452,8 +2452,9 @@ UHDM::any* CompileHelper::compileTfCall(DesignComponent* component,
       fcall->Prefix(prefix);
       call = fcall;
     }
-
-    task_func* tf = getTaskFunc(name, component, compileDesign, nullptr);
+    std::pair<task_func*, DesignComponent*> ret =
+        getTaskFunc(name, component, compileDesign, nullptr);
+    task_func* tf = ret.first;
     if (tf) {
       if (tf->UhdmType() == uhdmfunction) {
         func_call* fcall = s.MakeFunc_call();

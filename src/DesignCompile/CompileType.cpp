@@ -31,6 +31,7 @@
 #include "Design/Parameter.h"
 #include "Design/SimpleType.h"
 #include "Design/Struct.h"
+#include "Design/Task.h"
 #include "Design/Union.h"
 #include "DesignCompile/CompileHelper.h"
 #include "DesignCompile/UhdmWriter.h"
@@ -206,9 +207,13 @@ UHDM::any* CompileHelper::compileVariable(
       }
     }
     if (result == nullptr) {
-      chandle_var* ref = s.MakeChandle_var();
-      if (the_type != slChandle_type) ref->VpiName(fC->SymName(variable));
-      result = ref;
+      if (the_type == slChandle_type) {
+        result = s.MakeChandle_var();
+      } else {
+        ref_var* ref = s.MakeRef_var();
+        ref->VpiName(typeName);
+        result = ref;
+      }
     }
     result->VpiFile(fC->getFileName());
     result->VpiLineNo(fC->Line(variable));
@@ -1200,7 +1205,9 @@ UHDM::typespec* CompileHelper::compileTypespec(
         result = compileDatastructureTypespec(
             component, fC, type, compileDesign, instance, reduce, "", typeName);
         if (ranges && result) {
-          if (result->UhdmType() == uhdmstruct_typespec) {
+          if (result->UhdmType() == uhdmstruct_typespec ||
+              result->UhdmType() == uhdmenum_typespec ||
+              result->UhdmType() == uhdmunion_typespec) {
             packed_array_typespec* pats = s.MakePacked_array_typespec();
             pats->Elem_typespec(result);
             pats->Ranges(ranges);

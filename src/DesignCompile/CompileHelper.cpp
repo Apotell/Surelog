@@ -454,6 +454,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
   const NodeId type_name = fC->Sibling(data_type);
   const NodeId Variable_dimension = fC->Sibling(type_name);
   array_typespec* array_tps = nullptr;
+  packed_array_typespec* packed_array_tps = nullptr;
   if (Variable_dimension) {
     array_tps = s.MakeArray_typespec();
     int size;
@@ -491,19 +492,23 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
   NodeId enum_base_type = fC->Child(data_type);
   bool enumType = false;
   bool structType = false;
-  // NodeId enum_base_type_node = VObjectType::slNull_rule;
-  // VObjectType enum_base_type_type = VObjectType::slNull_rule;
+  NodeId Packed_dimension = fC->Sibling(enum_base_type);
+  if (Packed_dimension && (fC->Type(Packed_dimension) == slPacked_dimension)) {
+    packed_array_tps = s.MakePacked_array_typespec();
+    int size;
+    VectorOfrange* ranges =
+        compileRanges(scope, fC, Packed_dimension, compileDesign, nullptr,
+                      nullptr, reduce, size, false);
+    packed_array_tps->Ranges(ranges);
+  }
   NodeId enum_name_declaration = VObjectType::slNull_rule;
   if (fC->Type(enum_base_type) == VObjectType::slEnum_base_type) {
-    // enum_base_type_node = fC->Child(enum_base_type);
-    // enum_base_type_type = fC->Type(enum_base_type_node);
     enum_name_declaration = fC->Sibling(enum_base_type);
     enumType = true;
   } else if (fC->Type(enum_base_type) == VObjectType::slEnum_name_declaration) {
     enumType = true;
     enum_name_declaration = enum_base_type;
     enum_base_type = 0;
-    // enum_base_type_type = VObjectType::slIntegerAtomType_Byte;
   } else if (fC->Type(enum_base_type) == VObjectType::slStruct_union) {
     structType = true;
     NodeId struct_or_union = fC->Child(enum_base_type);
@@ -524,6 +529,11 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
         array_tps->Elem_typespec(ts);
         array_tps->VpiName(fullName);
         if (typespecs) typespecs->push_back(array_tps);
+      } else if (packed_array_tps) {
+        st->setTypespec(packed_array_tps);
+        packed_array_tps->Elem_typespec(ts);
+        packed_array_tps->VpiName(fullName);
+        if (typespecs) typespecs->push_back(packed_array_tps);
       } else {
         ts->VpiName(fullName);
         st->setTypespec(ts);
@@ -543,6 +553,11 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
         array_tps->Elem_typespec(ts);
         array_tps->VpiName(fullName);
         if (typespecs) typespecs->push_back(array_tps);
+      } else if (packed_array_tps) {
+        st->setTypespec(packed_array_tps);
+        packed_array_tps->Elem_typespec(ts);
+        packed_array_tps->VpiName(fullName);
+        if (typespecs) typespecs->push_back(packed_array_tps);
       } else {
         ts->VpiName(fullName);
         st->setTypespec(ts);
@@ -574,9 +589,23 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
                         nullptr, nullptr, reduce));
 
     UHDM::enum_typespec* enum_t = s.MakeEnum_typespec();
-    if (typespecs) typespecs->push_back(enum_t);
-    the_enum->setTypespec(enum_t);
-    enum_t->VpiName(name);
+
+    if (array_tps) {
+      the_enum->setTypespec(array_tps);
+      array_tps->Elem_typespec(enum_t);
+      array_tps->VpiName(name);
+      if (typespecs) typespecs->push_back(array_tps);
+    } else if (packed_array_tps) {
+      the_enum->setTypespec(packed_array_tps);
+      packed_array_tps->Elem_typespec(enum_t);
+      packed_array_tps->VpiName(name);
+      if (typespecs) typespecs->push_back(packed_array_tps);
+    } else {
+      enum_t->VpiName(fullName);
+      the_enum->setTypespec(enum_t);
+      if (typespecs) typespecs->push_back(enum_t);
+    }
+
     enum_t->VpiFile(the_enum->getFileContent()->getFileName());
     enum_t->VpiLineNo(
         the_enum->getFileContent()->Line(the_enum->getDefinitionId()));
@@ -670,6 +699,35 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
             if (typespecs) typespecs->push_back(array_tps);
             newTypeDef->setTypespec(array_tps);
             dummy->setTypespec(array_tps);
+          } else if (packed_array_tps) {
+            if (tpclone->UhdmType() == uhdmlogic_typespec) {
+              logic_typespec* logic_array_tps = s.MakeLogic_typespec();
+              logic_array_tps->Ranges(packed_array_tps->Ranges());
+              logic_array_tps->Instance(scope->getUhdmInstance());
+              logic_array_tps->VpiName(name);
+              logic_array_tps->Logic_typespec((logic_typespec*)tpclone);
+              tpclone->Typedef_alias(ts);
+              if (typespecs) typespecs->push_back(logic_array_tps);
+              newTypeDef->setTypespec(logic_array_tps);
+              dummy->setTypespec(logic_array_tps);
+            } else {
+              if (ts->UhdmType() == uhdmpacked_array_typespec) {
+                tpclone->Instance(scope->getUhdmInstance());
+                tpclone->VpiName(name);
+                tpclone->Typedef_alias(ts);
+                if (typespecs) typespecs->push_back(tpclone);
+                newTypeDef->setTypespec(tpclone);
+                dummy->setTypespec(tpclone);
+              } else {
+                packed_array_tps->Instance(scope->getUhdmInstance());
+                packed_array_tps->VpiName(name);
+                packed_array_tps->Elem_typespec(tpclone);
+                tpclone->Typedef_alias(ts);
+                if (typespecs) typespecs->push_back(packed_array_tps);
+                newTypeDef->setTypespec(packed_array_tps);
+                dummy->setTypespec(packed_array_tps);
+              }
+            }
           } else {
             tpclone->Instance(scope->getUhdmInstance());
             tpclone->VpiName(name);
@@ -2233,7 +2291,7 @@ bool CompileHelper::compileParameterDeclaration(
           UHDM::UHDM_OBJECT_TYPE exprtype = expr->UhdmType();
           if (expr && exprtype == UHDM::uhdmconstant) {
             UHDM::constant* c = (UHDM::constant*)expr;
-            val = m_exprBuilder.fromVpiValue(c->VpiValue());
+            val = m_exprBuilder.fromVpiValue(c->VpiValue(), c->VpiSize());
             component->setValue(the_name, val, m_exprBuilder);
           } else if (reduce && (!isMultiDimension)) {
             UHDM::expr* the_expr = (UHDM::expr*)expr;
@@ -3005,4 +3063,93 @@ bool CompileHelper::isSelected(const FileContent* fC,
   NodeId Constant_expression = fC->Child(Constant_bit_select);
   if (Constant_expression) return true;
   return false;
+}
+
+UHDM::expr* CompileHelper::expandPatternAssignment(UHDM::expr* lhs,
+                                                   UHDM::expr* rhs,
+                                                   DesignComponent* component,
+                                                   CompileDesign* compileDesign,
+                                                   ValuedComponentI* instance) {
+  Serializer& s = compileDesign->getSerializer();
+
+  uint64_t size = 1;
+  expr* result = rhs;
+  VectorOfany* vars = nullptr;
+  if (lhs->UhdmType() == uhdmparameter) {
+    parameter* param = (parameter*)lhs;
+    const typespec* tps = param->Typespec();
+    if (tps == nullptr) return result;
+    if (tps->UhdmType() == uhdmpacked_array_typespec) {
+      vars = s.MakeAnyVec();
+      const packed_array_typespec* atps = (const packed_array_typespec*)tps;
+      if (atps->Ranges()) {
+        for (auto range : *atps->Ranges()) {
+          bool invalidValue = false;
+          uint64_t r1 = get_value(
+              invalidValue,
+              reduceExpr((any*)range->Left_expr(), invalidValue, component,
+                         compileDesign, instance, range->Left_expr()->VpiFile(),
+                         range->Left_expr()->VpiLineNo(), nullptr));
+          uint64_t r2 =
+              get_value(invalidValue,
+                        reduceExpr((any*)range->Right_expr(), invalidValue,
+                                   component, compileDesign, instance,
+                                   range->Right_expr()->VpiFile(),
+                                   range->Right_expr()->VpiLineNo(), nullptr));
+          size *= (r1 > r2) ? (r1 - r2 + 1) : (r2 - r1 + 1);
+        }
+      }
+      typespec* etps = (typespec*)atps->Elem_typespec();
+      UHDM_OBJECT_TYPE etps_type = etps->UhdmType();
+      if (size > 1) {
+        if (etps_type == uhdmenum_typespec) {
+          packed_array_var* array = s.MakePacked_array_var();
+          array->VpiSize(size);
+          array->Ranges(atps->Ranges());
+          array->Elements(vars);
+          for (unsigned int i = 0; i < size; i++) {
+            vars->push_back(s.MakeEnum_var());
+          }
+          result = array;
+        }
+      }
+    }
+  }
+
+  std::vector<int> values(size);
+  for (unsigned int i = 0; i < size; i++) {
+    values[i] = 0;
+  }
+  if (rhs->UhdmType() == uhdmoperation) {
+    operation* op = (operation*)rhs;
+    int opType = op->VpiOpType();
+    if (opType == vpiAssignmentPatternOp) {
+      VectorOfany* operands = op->Operands();
+      if (operands) {
+        for (any* op : *operands) {
+          if (op->UhdmType() == uhdmtagged_pattern) {
+            tagged_pattern* tp = (tagged_pattern*)op;
+            const typespec* tps = tp->Typespec();
+            if (tps->VpiName() == "default") {
+              bool invalidValue = false;
+              int val = get_value(
+                  invalidValue,
+                  reduceExpr((any*)tp->Pattern(), invalidValue, component,
+                             compileDesign, instance, tp->Pattern()->VpiFile(),
+                             tp->Pattern()->VpiLineNo(), nullptr));
+              for (unsigned int i = 0; i < size; i++) {
+                values[i] = val;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  for (unsigned int i = 0; i < size; i++) {
+    if (vars && ((int)i < (int)(vars->size()))) {
+      ((variables*)(*vars)[i])->VpiValue("UINT:" + std::to_string(values[i]));
+    }
+  }
+  return result;
 }

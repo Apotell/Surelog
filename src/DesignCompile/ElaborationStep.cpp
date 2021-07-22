@@ -1249,9 +1249,17 @@ any* ElaborationStep::makeVar_(DesignComponent* component, Signal* sig,
         var = s.MakeStruct_var();
       } else if (ttps == uhdmunion_typespec) {
         var = s.MakeUnion_var();
+      } else if (ttps == uhdmpacked_array_typespec) {
+        var = s.MakePacked_array_var();
+      } else if (ttps == uhdmarray_typespec) {
+        array_var* array_var = s.MakeArray_var();
+        array_var->VpiArrayType(vpiStaticArray);
+        array_var->VpiRandType(vpiNotRand);
+        var = array_var;
       } else {
         var = s.MakeLogic_var();
       }
+      var->VpiName(signame);
       var->Typespec(tps);
       var->Expr(assignExp);
       obj = var;

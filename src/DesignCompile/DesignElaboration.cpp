@@ -482,6 +482,53 @@ bool DesignElaboration::identifyTopModules_() {
     Error err(ErrorDefinition::ELAB_MULTIPLE_TOP_LEVEL_MODULES, loc);
     m_compileDesign->getCompiler()->getErrorContainer()->addError(err);
   }
+
+  // User overrides
+  if (!toplevelModuleFound) {
+    for (auto userM : userTopList) {
+      bool found = false;
+      for (auto file : all_files) {
+        if (m_compileDesign->getCompiler()->isLibraryFile(file.first)) continue;
+        for (DesignElement& element : file.second->getDesignElements()) {
+          const std::string& elemName = st->getSymbol(element.m_name);
+          if (element.m_type == DesignElement::Module) {
+            if (element.m_parent) {
+              // This is a nested element
+              continue;
+            }
+            if (userM != elemName) {
+              continue;
+            }
+            found = true;
+            Location locUser(0, 0, 0, st->registerSymbol(userM));
+            Error errUser(ErrorDefinition::ELAB_TOP_LEVEL_IS_NOT_A_TOP_LEVEL,
+                          locUser);
+            m_compileDesign->getCompiler()->getErrorContainer()->addError(
+                errUser);
+
+            const std::string& libName = file.second->getLibrary()->getName();
+            std::string topname = libName;
+            topname += "@" + elemName;
+            m_uniqueTopLevelModules.insert(topname);
+            m_topLevelModules.emplace_back(topname, file.second);
+            toplevelModuleFound = true;
+            SymbolId topid = st->registerSymbol(topname);
+            Location loc(
+                st->registerSymbol(file.second->getFileName(element.m_node)),
+                element.m_line, 0, topid);
+            Error err(ErrorDefinition::ELAB_TOP_LEVEL_MODULE, loc);
+            m_compileDesign->getCompiler()->getErrorContainer()->addError(err);
+          }
+        }
+      }
+      if (!found) {
+        Location locUser(0, 0, 0, st->registerSymbol(userM));
+        Error errUser(ErrorDefinition::ELAB_TOP_LEVEL_DOES_NOT_EXIST, locUser);
+        m_compileDesign->getCompiler()->getErrorContainer()->addError(errUser);
+      }
+    }
+  }
+
   if (modulePresent && (!toplevelModuleFound)) {
     Location loc(0);
     Error err(ErrorDefinition::ELAB_NO_TOP_LEVEL_MODULE, loc);
@@ -861,6 +908,9 @@ void DesignElaboration::elaborateInstance_(
         NodeId assignOp = fC->Sibling(var);
         NodeId expr = fC->Sibling(assignOp);
         if (expr == 0) {  // Unary operator like i++
+          expr = var;
+        } else if (fC->Type(assignOp) !=
+                   slAssignOp_Assign) {  // Operators like +=
           expr = var;
         }
         // Generate block
@@ -1333,6 +1383,8 @@ void DesignElaboration::elaborateInstance_(
                                  allSubInstances);
             } else {
               // Build black box model
+              std::vector<std::string> params;
+              collectParams_(params, fC, subInstanceId, child, paramOverride);
               NetlistElaboration* nelab =
                   new NetlistElaboration(m_compileDesign);
               nelab->elaborateInstance(child);
@@ -1422,10 +1474,11 @@ void DesignElaboration::collectParams_(std::vector<std::string>& params,
        fC->getObjects(VObjectType::slPackage_import_item)) {
     pack_imports.push_back(import);
   }
-  for (auto import : module->getObjects(VObjectType::slPackage_import_item)) {
-    pack_imports.push_back(import);
+  if (module) {
+    for (auto import : module->getObjects(VObjectType::slPackage_import_item)) {
+      pack_imports.push_back(import);
+    }
   }
-
   for (auto pack_import : pack_imports) {
     NodeId pack_id = pack_import.fC->Child(pack_import.nodeId);
     std::string pack_name = pack_import.fC->SymName(pack_id);
@@ -1460,14 +1513,15 @@ void DesignElaboration::collectParams_(std::vector<std::string>& params,
   }
 
   std::vector<std::string> moduleParams;
-  for (FileCNodeId param :
-       module->getObjects(VObjectType::slParam_assignment)) {
-    NodeId ident = param.fC->Child(param.nodeId);
-    std::string name = param.fC->SymName(ident);
-    params.push_back(name);
-    moduleParams.push_back(name);
+  if (module) {
+    for (FileCNodeId param :
+         module->getObjects(VObjectType::slParam_assignment)) {
+      NodeId ident = param.fC->Child(param.nodeId);
+      std::string name = param.fC->SymName(ident);
+      params.push_back(name);
+      moduleParams.push_back(name);
+    }
   }
-
   std::set<std::string> overridenParams;
   std::vector<VObjectType> types;
   // Param overrides
@@ -1532,7 +1586,7 @@ void DesignElaboration::collectParams_(std::vector<std::string>& params,
               }
             }
             const std::string& v = c->VpiValue();
-            value = m_exprBuilder.fromVpiValue(v);
+            value = m_exprBuilder.fromVpiValue(v, c->VpiSize());
           } else if ((exprtype == UHDM::uhdmoperation) ||
                      (exprtype == UHDM::uhdmfunc_call) ||
                      (exprtype == UHDM::uhdmsys_func_call)) {
@@ -1544,26 +1598,52 @@ void DesignElaboration::collectParams_(std::vector<std::string>& params,
                 complexV = (UHDM::expr*)m_helper.compileExpression(
                     parentDefinition, parentFile, expr, m_compileDesign,
                     nullptr, parentInstance, false, false);
+                if (complexV->UhdmType() == UHDM::uhdmref_obj) {
+                  UHDM::ref_obj* ref = (UHDM::ref_obj*)complexV;
+                  if (ref->Actual_group() == nullptr) {
+                    ref->Actual_group(m_helper.bindParameter(
+                        parentDefinition, parentInstance, ref->VpiName(),
+                        m_compileDesign, true));
+                  }
+                }
                 instance->setComplexValue(name, complexV);
               }
+            }
+          } else if (exprtype == UHDM::uhdmref_obj) {
+            bool isTypeParam = false;
+            if (module) {
+              Parameter* p = module->getParameter(name);
+              if (p) isTypeParam = p->isTypeParam();
+            }
+            if (!isTypeParam) {
+              complex = true;
+              UHDM::ref_obj* ref = (UHDM::ref_obj*)complexV;
+              if (ref->Actual_group() == nullptr) {
+                ref->Actual_group(m_helper.bindParameter(
+                    parentDefinition, parentInstance, ref->VpiName(),
+                    m_compileDesign, true));
+              }
+              instance->setComplexValue(name, complexV);
             }
           }
         }
         if (complex == false) {
           if (value == nullptr) {
-            Parameter* p = module->getParameter(name);
-            bool isTypeParam = false;
-            if (p) isTypeParam = p->isTypeParam();
-            value = m_exprBuilder.evalExpr(parentFile, expr, parentInstance,
-                                           isTypeParam);
-            if (en_replay &&
-                m_helper.errorOnNegativeConstant(
-                    parentDefinition, value, m_compileDesign, parentInstance)) {
-              bool replay = false;
-              // GDB: p replay=true
-              if (replay) {
-                m_exprBuilder.evalExpr(parentFile, expr, parentInstance,
-                                       isTypeParam);
+            if (module) {
+              Parameter* p = module->getParameter(name);
+              bool isTypeParam = false;
+              if (p) isTypeParam = p->isTypeParam();
+              value = m_exprBuilder.evalExpr(parentFile, expr, parentInstance,
+                                             isTypeParam);
+              if (en_replay && m_helper.errorOnNegativeConstant(
+                                   parentDefinition, value, m_compileDesign,
+                                   parentInstance)) {
+                bool replay = false;
+                // GDB: p replay=true
+                if (replay) {
+                  m_exprBuilder.evalExpr(parentFile, expr, parentInstance,
+                                         isTypeParam);
+                }
               }
             }
           }
@@ -1591,7 +1671,7 @@ void DesignElaboration::collectParams_(std::vector<std::string>& params,
                                parentFile->Line(expr));
           }
         }
-      } else {
+      } else if (module) {
         // Index param
         NodeId expr = child;
         const DesignComponent::ParameterVec& params =
@@ -1629,7 +1709,7 @@ void DesignElaboration::collectParams_(std::vector<std::string>& params,
           if (complexV->UhdmType() == UHDM::uhdmconstant) {
             UHDM::constant* c = (UHDM::constant*)complexV;
             const std::string& v = c->VpiValue();
-            value = m_exprBuilder.fromVpiValue(v);
+            value = m_exprBuilder.fromVpiValue(v, c->VpiSize());
           } else if (complexV->UhdmType() == UHDM::uhdmoperation) {
             if (instance) {
               complex = true;
@@ -1728,50 +1808,61 @@ void DesignElaboration::collectParams_(std::vector<std::string>& params,
     design->addDefParam(path, fC, hIdent, val);
   }
 
-  for (FileCNodeId param :
-       module->getObjects(VObjectType::slParam_assignment)) {
-    NodeId ident = param.fC->Child(param.nodeId);
-    std::string name = param.fC->SymName(ident);
-    if (overridenParams.find(name) == overridenParams.end()) {
-      NodeId exprId = param.fC->Sibling(ident);
-      while (param.fC->Type(exprId) == slUnpacked_dimension) {
-        exprId = param.fC->Sibling(exprId);
-      }
-      NodeId Data_type = param.fC->Child(exprId);
-      if (param.fC->Type(Data_type) != slData_type) {
-        // Regular params
-        Parameter* p = module->getParameter(name);
-        bool isMultidimension = false;
-        if (p) {
-          isMultidimension = p->isMultidimension();
+  if (module) {
+    for (FileCNodeId param :
+         module->getObjects(VObjectType::slParam_assignment)) {
+      NodeId ident = param.fC->Child(param.nodeId);
+      std::string name = param.fC->SymName(ident);
+      if (overridenParams.find(name) == overridenParams.end()) {
+        NodeId exprId = param.fC->Sibling(ident);
+        while (param.fC->Type(exprId) == slUnpacked_dimension) {
+          exprId = param.fC->Sibling(exprId);
         }
-        if (exprId) {
-          UHDM::expr* expr = (UHDM::expr*)m_helper.compileExpression(
-              instance->getDefinition(), param.fC, exprId, m_compileDesign,
-              nullptr, instance, !isMultidimension, false);
-          Value* value = nullptr;
-          bool complex = false;
-          if (expr) {
-            if (expr->UhdmType() == UHDM::uhdmconstant) {
-              UHDM::constant* c = (UHDM::constant*)expr;
-              const std::string& v = c->VpiValue();
-              value = m_exprBuilder.fromVpiValue(v);
-            } else if (expr->UhdmType() == UHDM::uhdmoperation) {
-              if (instance) {
-                complex = true;
-                instance->setComplexValue(name, expr);
-                m_helper.reorderAssignmentPattern(module, p->getUhdmParam(),
-                                                  expr, m_compileDesign,
-                                                  instance, 0);
+        NodeId Data_type = param.fC->Child(exprId);
+        if (param.fC->Type(Data_type) != slData_type) {
+          // Regular params
+          Parameter* p = module->getParameter(name);
+          bool isMultidimension = false;
+          if (p) {
+            isMultidimension = p->isMultidimension();
+          }
+          if (exprId) {
+            UHDM::expr* expr = (UHDM::expr*)m_helper.compileExpression(
+                instance->getDefinition(), param.fC, exprId, m_compileDesign,
+                nullptr, instance, !isMultidimension, false);
+            Value* value = nullptr;
+            bool complex = false;
+            if (expr) {
+              if (expr->UhdmType() == UHDM::uhdmconstant) {
+                UHDM::constant* c = (UHDM::constant*)expr;
+                const std::string& v = c->VpiValue();
+                value = m_exprBuilder.fromVpiValue(v, c->VpiSize());
+              } else if (expr->UhdmType() == UHDM::uhdmoperation) {
+                if (instance) {
+                  complex = true;
+                  instance->setComplexValue(name, expr);
+                  UHDM::operation* op = (UHDM::operation*)expr;
+                  int opType = op->VpiOpType();
+                  if (opType == vpiAssignmentPatternOp) {
+                    expr = m_helper.expandPatternAssignment(
+                        (UHDM::expr*)p->getUhdmParam(), expr, module,
+                        m_compileDesign, instance);
+                    instance->setComplexValue(name, expr);
+                  }
+
+                  m_helper.reorderAssignmentPattern(module, p->getUhdmParam(),
+                                                    expr, m_compileDesign,
+                                                    instance, 0);
+                }
               }
             }
-          }
 
-          if ((!complex) && (value == nullptr)) {
-            value = m_exprBuilder.evalExpr(param.fC, exprId, instance, true);
-          }
-          if ((!complex) && value && value->isValid()) {
-            instance->setValue(name, value, m_exprBuilder, fC->Line(ident));
+            if ((!complex) && (value == nullptr)) {
+              value = m_exprBuilder.evalExpr(param.fC, exprId, instance, true);
+            }
+            if ((!complex) && value && value->isValid()) {
+              instance->setValue(name, value, m_exprBuilder, fC->Line(ident));
+            }
           }
         }
       }

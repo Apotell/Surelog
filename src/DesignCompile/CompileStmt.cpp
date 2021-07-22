@@ -26,6 +26,7 @@
 #include "Design/Design.h"
 #include "Design/Enum.h"
 #include "Design/Function.h"
+#include "Design/Task.h"
 #include "DesignCompile/CompileDesign.h"
 #include "DesignCompile/CompileHelper.h"
 #include "DesignCompile/UhdmWriter.h"
@@ -1400,7 +1401,8 @@ bool CompileHelper::compileTask(DesignComponent* component,
               param_assigns->push_back(pst);
           } else if (stmt_type == uhdmassign_stmt) {
             assign_stmt* stmt = (assign_stmt*)st;
-            if (stmt->Rhs() == nullptr) {
+            if (stmt->Rhs() == nullptr ||
+                dynamic_cast<variables*>((expr*)stmt->Lhs())) {
               // Declaration
               VectorOfvariables* vars = task->Variables();
               if (vars == nullptr) {
@@ -1408,6 +1410,9 @@ bool CompileHelper::compileTask(DesignComponent* component,
                 vars = task->Variables();
               }
               vars->push_back((variables*)stmt->Lhs());
+              if (stmt->Rhs() != nullptr) {
+                stmts->push_back(st);
+              }
             } else {
               stmts->push_back(st);
             }
@@ -1437,7 +1442,8 @@ bool CompileHelper::compileTask(DesignComponent* component,
               param_assigns->push_back(pst);
           } else if (stmt_type == uhdmassign_stmt) {
             assign_stmt* stmt = (assign_stmt*)st;
-            if (stmt->Rhs() == nullptr) {
+            if (stmt->Rhs() == nullptr ||
+                dynamic_cast<variables*>((expr*)stmt->Lhs())) {
               // Declaration
               VectorOfvariables* vars = task->Variables();
               if (vars == nullptr) {
@@ -1445,6 +1451,9 @@ bool CompileHelper::compileTask(DesignComponent* component,
                 vars = task->Variables();
               }
               vars->push_back((variables*)stmt->Lhs());
+              if (stmt->Rhs() != nullptr) {
+                task->Stmt(st);
+              }
             } else {
               task->Stmt(st);
             }
@@ -1682,10 +1691,13 @@ bool CompileHelper::compileFunction(DesignComponent* component,
         compileVariable(component, fC, Return_data_type, compileDesign, nullptr,
                         nullptr, true, false));
     if (var) {
+      // Explicit return type
       var->VpiName("");
-    } else {
-      var = s.MakeLogic_var();
     }
+    if (!Function_data_type) {
+      // Implicit return type
+      var = s.MakeLogic_var();
+    }  // else void return type
     func->Return(var);
   }
 
@@ -1734,7 +1746,8 @@ bool CompileHelper::compileFunction(DesignComponent* component,
                 param_assigns->push_back(pst);
             } else if (stmt_type == uhdmassign_stmt) {
               assign_stmt* stmt = (assign_stmt*)st;
-              if (stmt->Rhs() == nullptr) {
+              if (stmt->Rhs() == nullptr ||
+                  dynamic_cast<variables*>((expr*)stmt->Lhs())) {
                 // Declaration
                 VectorOfvariables* vars = func->Variables();
                 if (vars == nullptr) {
@@ -1742,6 +1755,9 @@ bool CompileHelper::compileFunction(DesignComponent* component,
                   vars = func->Variables();
                 }
                 vars->push_back((variables*)stmt->Lhs());
+                if (stmt->Rhs() != nullptr) {
+                  stmts->push_back(st);
+                }
               } else {
                 stmts->push_back(st);
               }
@@ -1773,7 +1789,8 @@ bool CompileHelper::compileFunction(DesignComponent* component,
             param_assigns->push_back(pst);
         } else if (stmt_type == uhdmassign_stmt) {
           assign_stmt* stmt = (assign_stmt*)st;
-          if (stmt->Rhs() == nullptr) {
+          if (stmt->Rhs() == nullptr ||
+              dynamic_cast<variables*>((expr*)stmt->Lhs())) {
             // Declaration
             VectorOfvariables* vars = func->Variables();
             if (vars == nullptr) {
@@ -1781,6 +1798,9 @@ bool CompileHelper::compileFunction(DesignComponent* component,
               vars = func->Variables();
             }
             vars->push_back((variables*)stmt->Lhs());
+            if (stmt->Rhs() != nullptr) {
+              func->Stmt(st);
+            }
           } else {
             func->Stmt(st);
           }
@@ -1792,6 +1812,53 @@ bool CompileHelper::compileFunction(DesignComponent* component,
     }
   }
   return true;
+}
+
+Task* CompileHelper::compileTaskPrototype(DesignComponent* scope,
+                                          const FileContent* fC, NodeId id,
+                                          CompileDesign* compileDesign) {
+  UHDM::Serializer& s = compileDesign->getSerializer();
+  std::vector<UHDM::task_func*>* task_funcs = scope->getTask_funcs();
+  if (task_funcs == nullptr) {
+    scope->setTask_funcs(s.MakeTask_funcVec());
+    task_funcs = scope->getTask_funcs();
+  }
+  UHDM::task* task = s.MakeTask();
+  task_funcs->push_back(task);
+  NodeId prop = setFuncTaskQualifiers(fC, id, task);
+  NodeId task_prototype = prop;
+  NodeId task_name = fC->Child(task_prototype);
+  std::string taskName = fC->SymName(task_name);
+  task->VpiFile(fC->getFileName());
+  task->VpiLineNo(fC->Line(id));
+  task->VpiColumnNo(fC->Column(id));
+  task->VpiEndLineNo(fC->EndLine(id));
+  task->VpiEndColumnNo(fC->EndColumn(id));
+  NodeId Tf_port_list = 0;
+  if (fC->Type(task_name) == VObjectType::slStringConst) {
+    Tf_port_list = fC->Sibling(task_name);
+  } else if (fC->Type(task_name) == VObjectType::slClass_scope) {
+    NodeId Class_type = fC->Child(task_name);
+    taskName = fC->SymName(fC->Child(Class_type));
+    NodeId suffixname = fC->Sibling(task_name);
+    taskName += "::" + fC->SymName(suffixname);
+    Tf_port_list = fC->Sibling(suffixname);
+  }
+
+  task->VpiName(taskName);
+
+  if (fC->Type(Tf_port_list) == VObjectType::slTf_port_list) {
+    task->Io_decls(
+        compileTfPortList(scope, task, fC, Tf_port_list, compileDesign));
+  } else if (fC->Type(Tf_port_list) == VObjectType::slTf_item_declaration) {
+    auto results =
+        compileTfPortDecl(scope, task, fC, Tf_port_list, compileDesign);
+    task->Io_decls(results.first);
+  }
+
+  Task* result = new Task(scope, fC, id, taskName);
+  result->compile(*this);
+  return result;
 }
 
 Function* CompileHelper::compileFunctionPrototype(
@@ -2188,6 +2255,33 @@ UHDM::any* CompileHelper::compileForLoop(DesignComponent* component,
   */
 
   return for_stmt;
+}
+
+UHDM::any* CompileHelper::bindParameter(DesignComponent* component,
+                                        ValuedComponentI* instance,
+                                        const std::string& name,
+                                        CompileDesign* compileDesign,
+                                        bool crossHierarchy) {
+  if (instance) {
+    ModuleInstance* inst = dynamic_cast<ModuleInstance*>(instance);
+    while (inst) {
+      if (Netlist* netlist = inst->getNetlist()) {
+        if (netlist->param_assigns()) {
+          for (param_assign* pass : *netlist->param_assigns()) {
+            if (pass->Lhs()->VpiName() == name) {
+              return (any*)pass->Lhs();
+            }
+          }
+        }
+      }
+      if (crossHierarchy) {
+        inst = inst->getParent();
+      } else {
+        break;
+      }
+    }
+  }
+  return nullptr;
 }
 
 UHDM::any* CompileHelper::bindVariable(DesignComponent* component,

@@ -119,11 +119,43 @@ bool NetlistElaboration::elab_parameters_(ModuleInstance* instance,
                                           bool param_port) {
   Serializer& s = m_compileDesign->getSerializer();
   if (!instance) return true;
+  Netlist* netlist = instance->getNetlist();
+  if (netlist == nullptr) return true;
   bool en_replay =
       m_compileDesign->getCompiler()->getCommandLineParser()->replay();
   ModuleDefinition* mod =
       dynamic_cast<ModuleDefinition*>(instance->getDefinition());
-  if (!mod) return true;
+  VectorOfparam_assign* assigns = netlist->param_assigns();
+  if (!mod) {
+    if (param_port) return true;
+    for (auto mv : instance->getMappedValues()) {
+      if (assigns == nullptr) {
+        netlist->param_assigns(s.MakeParam_assignVec());
+        assigns = netlist->param_assigns();
+      }
+      const std::string& paramName = mv.first;
+      Value* value = mv.second.first;
+      unsigned int line = mv.second.second;
+      const FileContent* instfC = instance->getFileContent();
+      if (value && value->isValid()) {
+        parameter* p = s.MakeParameter();
+        p->VpiName(paramName);
+        param_assign* inst_assign = s.MakeParam_assign();
+        constant* c = s.MakeConstant();
+        c->VpiValue(value->uhdmValue());
+        c->VpiDecompile(value->decompiledValue());
+        c->VpiFile(instfC->getFileName());
+        c->VpiSize(value->getSize());
+        c->VpiConstType(value->vpiValType());
+        c->VpiLineNo(line);
+        c->VpiEndLineNo(line);
+        inst_assign->Lhs(p);
+        inst_assign->Rhs(c);
+        assigns->push_back(inst_assign);
+      }
+    }
+    return true;
+  }
   if (mod->getParameters() != nullptr) {
     // Type params
     for (auto nameParam : mod->getParameterMap()) {
@@ -132,9 +164,6 @@ bool NetlistElaboration::elab_parameters_(ModuleInstance* instance,
     }
   }
   // Regular
-  Netlist* netlist = instance->getNetlist();
-  if (netlist == nullptr) return true;
-  VectorOfparam_assign* assigns = netlist->param_assigns();
   bool isMultidimensional = false;
   for (ParamAssign* assign : mod->getParamAssignVec()) {
     if (param_port ^ assign->isPortParam()) {
@@ -167,6 +196,10 @@ bool NetlistElaboration::elab_parameters_(ModuleInstance* instance,
           if (opType == vpiAssignmentPatternOp) {
             const any* lhs = pclone->Lhs();
             any* rhs = (any*)pclone->Rhs();
+
+            rhs = m_helper.expandPatternAssignment((expr*)lhs, (expr*)rhs, mod,
+                                                   m_compileDesign, instance);
+            pclone->Rhs(rhs);
             m_helper.reorderAssignmentPattern(mod, lhs, rhs, m_compileDesign,
                                               instance, 0);
           }
@@ -186,7 +219,6 @@ bool NetlistElaboration::elab_parameters_(ModuleInstance* instance,
     inst_assign->Lhs((any*)mod_assign->Lhs());
     const std::string& paramName =
         assign->getFileContent()->SymName(assign->getParamId());
-
     bool override = false;
     for (Parameter* tpm :
          instance->getTypeParams()) {  // for parameters that do not resolve to
@@ -232,8 +264,8 @@ bool NetlistElaboration::elab_parameters_(ModuleInstance* instance,
 
               constant* ccrhs = (constant*)crhs;
               const std::string& s = ccrhs->VpiValue();
-              Value* v1 = m_exprBuilder.fromVpiValue(s);
-              Value* v2 = m_exprBuilder.fromVpiValue("INT:0");
+              Value* v1 = m_exprBuilder.fromVpiValue(s, ccrhs->VpiSize());
+              Value* v2 = m_exprBuilder.fromVpiValue("INT:0", 64);
               if (*v1 > *v2) {
                 rhs = crhs;
               }
@@ -320,8 +352,9 @@ bool NetlistElaboration::elab_parameters_(ModuleInstance* instance,
 }
 
 bool NetlistElaboration::elaborate_(ModuleInstance* instance, bool recurse) {
+  if (instance->isElaborated()) return true;
+  instance->setElaborated();
   Netlist* netlist = instance->getNetlist();
-
   bool elabPortsNets = false;
   VObjectType insttype = instance->getType();
   if ((insttype != VObjectType::slInterface_instantiation) &&
@@ -842,7 +875,7 @@ bool NetlistElaboration::high_conn_(ModuleInstance* instance) {
           sigId = fC->Child(Primary_literal);
         }
         std::string sigName;
-        if (fC->Name(sigId)) sigName = fC->SymName(sigId);
+        if (fC->Type(sigId) == slStringConst) sigName = fC->SymName(sigId);
         std::string baseName = sigName;
         std::string selectName;
         if (NodeId subId = fC->Sibling(sigId)) {
@@ -1849,25 +1882,50 @@ UHDM::any* NetlistElaboration::bind_net_(ModuleInstance* instance,
   if (boundInstance) {
     result = bind_net_(boundInstance, name);
   }
-  if (result == nullptr) {
+  while (result == nullptr) {
+    if (instance == nullptr) break;
+    const FileContent* fC = instance->getFileContent();
+    NodeId Udp_instantiation = instance->getNodeId();
+    VObjectType insttype = fC->Type(Udp_instantiation);
+
     result = bind_net_(instance, name);
+
+    if ((insttype != VObjectType::slConditional_generate_construct) &&
+        (insttype != VObjectType::slLoop_generate_construct) &&
+        (insttype != VObjectType::slGenerate_item) &&
+        (insttype != VObjectType::slGenerate_module_conditional_statement) &&
+        (insttype != VObjectType::slGenerate_interface_conditional_statement) &&
+        (insttype != VObjectType::slGenerate_module_loop_statement) &&
+        (insttype != VObjectType::slGenerate_interface_loop_statement) &&
+        (insttype != VObjectType::slGenerate_module_named_block) &&
+        (insttype != VObjectType::slGenerate_interface_named_block) &&
+        (insttype != VObjectType::slGenerate_module_block) &&
+        (insttype != VObjectType::slGenerate_interface_block) &&
+        (insttype != VObjectType::slGenerate_module_item) &&
+        (insttype != VObjectType::slGenerate_interface_item) &&
+        (insttype != VObjectType::slGenerate_block)) {
+      break;
+    }
+    instance = instance->getParent();
   }
 
   if (Netlist* netlist = instance->getNetlist()) {
     if (result == nullptr) {
-      // Implicit net
-      Serializer& s = m_compileDesign->getSerializer();
-      logic_net* net = s.MakeLogic_net();
-      net->VpiName(name);
-      result = net;
-      Netlist::SymbolTable& symbols = netlist->getSymbolTable();
-      std::vector<UHDM::net*>* nets = netlist->nets();
-      if (nets == nullptr) {
-        nets = s.MakeNetVec();
-        netlist->nets(nets);
+      if (!strstr(name.c_str(), ".")) {  // Not for hierarchical names
+        // Implicit net
+        Serializer& s = m_compileDesign->getSerializer();
+        logic_net* net = s.MakeLogic_net();
+        net->VpiName(name);
+        result = net;
+        Netlist::SymbolTable& symbols = netlist->getSymbolTable();
+        std::vector<UHDM::net*>* nets = netlist->nets();
+        if (nets == nullptr) {
+          nets = s.MakeNetVec();
+          netlist->nets(nets);
+        }
+        nets->push_back(net);
+        symbols.insert(std::make_pair(name, result));
       }
-      nets->push_back(net);
-      symbols.insert(std::make_pair(name, result));
     }
   }
   return result;

@@ -33,13 +33,13 @@
 #include "Expression/ExprBuilder.h"
 #include "SourceCompile/SymbolTable.h"
 #include "SourceCompile/VObjectTypes.h"
-//#include "headers/uhdm_forward_decl.h"
 #include "headers/uhdm.h"
 namespace SURELOG {
 class Scope;
 class Statement;
 class Design;
 class CompileDesign;
+class Task;
 typedef std::vector<TfPortItem*> TfPortList;
 
 class FScope : public ValuedComponentI {
@@ -101,6 +101,9 @@ class CompileHelper final {
   Function* compileFunctionPrototype(DesignComponent* scope,
                                      const FileContent* fC, NodeId id,
                                      CompileDesign* compileDesign);
+
+  Task* compileTaskPrototype(DesignComponent* scope, const FileContent* fC,
+                             NodeId id, CompileDesign* compileDesign);
 
   bool compilePortDeclaration(DesignComponent* scope, const FileContent* fC,
                               NodeId id, VObjectType& port_direction,
@@ -337,9 +340,14 @@ class CompileHelper final {
   UHDM::any* bindVariable(DesignComponent* component, const UHDM::any* scope,
                           const std::string& name,
                           CompileDesign* compileDesign);
+
   UHDM::any* bindVariable(DesignComponent* component,
                           ValuedComponentI* instance, const std::string& name,
                           CompileDesign* compileDesign);
+
+  UHDM::any* bindParameter(DesignComponent* component,
+                           ValuedComponentI* instance, const std::string& name,
+                           CompileDesign* compileDesign, bool crossHierarchy);
 
   UHDM::event_control* compileClocking_event(DesignComponent* component,
                                              const FileContent* fC,
@@ -410,6 +418,11 @@ class CompileHelper final {
                               const std::string& fileName, int lineNumber,
                               UHDM::any* pexpr, bool muteErrors);
 
+  UHDM::expr* expandPatternAssignment(UHDM::expr* lhs, UHDM::expr* rhs,
+                                      DesignComponent* component,
+                                      CompileDesign* compileDesign,
+                                      ValuedComponentI* instance);
+
   uint64_t Bits(const UHDM::any* typespec, bool& invalidValue,
                 DesignComponent* component, CompileDesign* compileDesign,
                 ValuedComponentI* instance, const std::string& fileName,
@@ -477,6 +490,15 @@ class CompileHelper final {
                                ValuedComponentI* instance,
                                const std::string& fileName, unsigned int lineNo,
                                unsigned short columnNo);
+
+  UHDM::expr* hierarchicalSelector(std::vector<std::string>& select_path,
+                                   unsigned int level, UHDM::any* object,
+                                   bool& invalidValue,
+                                   DesignComponent* component,
+                                   CompileDesign* compileDesign,
+                                   ValuedComponentI* instance, UHDM::any* pexpr,
+                                   const std::string& fileName, int lineNumber,
+                                   bool muteErrors);
 
  private:
   CompileHelper(const CompileHelper&) = delete;

@@ -1,6 +1,6 @@
 #!/usr/bin/tclsh
 
-# Copyright 2019 Alain Dargelas
+# Copyright 2017-2021 Alain Dargelas
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+
+variable myLocation [file normalize [info script]]
+set myProjetPathNoNormalize [file dirname [file dirname [info script]]]
+
+proc project_path {} {
+    variable myLocation
+    return [file dirname [file dirname $myLocation]]
+}
 
 proc printHelp {} {
     puts "regression.tcl help"
@@ -177,36 +186,7 @@ set REGRESSION_PATH [pwd]
 
 set SURELOG_COMMAND "$TIME $DEBUG_TOOL $SURELOG_VERSION"
 
-set WINDOWS_BLACK_LIST [dict create]
-dict set WINDOWS_BLACK_LIST Ariane 1
-dict set WINDOWS_BLACK_LIST BlackParrot 1
-dict set WINDOWS_BLACK_LIST BlackPBe 1
-dict set WINDOWS_BLACK_LIST BlackUnicore 1
-dict set WINDOWS_BLACK_LIST BlackUcode 1
-dict set WINDOWS_BLACK_LIST CoresSweRV 1
-dict set WINDOWS_BLACK_LIST SimpleIncludeAndMacros 1
-dict set WINDOWS_BLACK_LIST TestFileSplit 1
-dict set WINDOWS_BLACK_LIST UnitElabExternNested 1
-dict set WINDOWS_BLACK_LIST UnitPython 1
-dict set WINDOWS_BLACK_LIST UnitSimpleIncludeAndMacros 1
-dict set WINDOWS_BLACK_LIST Verilator 1
-dict set WINDOWS_BLACK_LIST BuildUVMPkg 1
-dict set WINDOWS_BLACK_LIST Compl1001 1
-dict set WINDOWS_BLACK_LIST YosysOpenSparc 1
-dict set WINDOWS_BLACK_LIST Earlgrey_Verilator_0_1 1
-dict set WINDOWS_BLACK_LIST Earlgrey_Verilator_01_05_21 1
-dict set WINDOWS_BLACK_LIST Earlgrey_nexysvideo 1
-
-set UNIX_BLACK_LIST [dict create]
-# 2 message diff:
-dict set UNIX_BLACK_LIST UnitElabExternNested 1
-
-# RAM size in CI machines
-dict set UNIX_BLACK_LIST Earlgrey_nexysvideo 1
-dict set UNIX_BLACK_LIST BlackParrot 1
-dict set UNIX_BLACK_LIST BlackPBe 1
-dict set UNIX_BLACK_LIST BlackUnicore 1
-dict set UNIX_BLACK_LIST BlackUcode 1
+source [project_path]/tests/blacklisted.tcl
 
 if { $tcl_platform(platform) == "windows" } {
     set BLACK_LIST $WINDOWS_BLACK_LIST
@@ -236,6 +216,36 @@ proc findFiles { basedir pattern {level 0}} {
         # Recusively call the routine on the sub directory and append any
         # new files to the results
         set subDirList [findFiles $dirName $pattern [expr $level +1]]
+        if { [llength $subDirList] > 0 } {
+            foreach subDirFile $subDirList {
+                lappend fileList $subDirFile
+            }
+        }
+    }
+    return $fileList
+}
+
+proc findDirs { basedir pattern {level 0}} {
+    if {$level > 3} {
+      return
+    }
+    # Fix the directory name, this ensures the directory name is in the
+    # native format for the platform and contains a final directory seperator
+    set basedir [string trimright [file join [file normalize $basedir] { }]]
+    set fileList {}
+
+    # Look in the current directory for matching files, -type {f r}
+    # means ony readable normal files are looked at, -nocomplain stops
+    # an error being thrown if the returned list is empty
+    foreach fileName [glob -nocomplain -type {d r} -path $basedir $pattern] {
+        lappend fileList $fileName
+    }
+
+    # Now look for any sub direcories in the current directory
+    foreach dirName [glob -nocomplain -type {d  r} -path $basedir *] {
+        # Recusively call the routine on the sub directory and append any
+        # new files to the results
+        set subDirList [findDirs $dirName $pattern [expr $level +1]]
         if { [llength $subDirList] > 0 } {
             foreach subDirFile $subDirList {
                 lappend fileList $subDirFile
@@ -445,8 +455,12 @@ proc run_regression { } {
 
         cd $testdir
         if {$DIFF_MODE == 0} {
-            catch {file delete -force slpp_all slpp_unit} dummy
-            catch {file delete -force $REGRESSION_PATH/tests/$test/slpp_all  $REGRESSION_PATH/tests/$test/slpp_unit} dummy
+	    foreach f [findDirs $REGRESSION_PATH/tests/$test slpp_*] {
+              file delete -force $f
+	    }
+            foreach f [findDirs $testdir slpp_*] {
+              file delete -force $f
+	    }
         }
         set passstatus "PASS"
         if {$DIFF_MODE == 0} {
@@ -517,8 +531,12 @@ proc run_regression { } {
         if {$DIFF_MODE == 0} {
             if [regexp {Segmentation fault} $result] {
                 set segfault 1
-		catch {file delete -force slpp_all slpp_unit} dummy
-                catch {file delete -force $REGRESSION_PATH/tests/$test/slpp_all  $REGRESSION_PATH/tests/$test/slpp_unit} dummy
+		foreach f [findDirs $REGRESSION_PATH/tests/$test slpp_*] {
+		    file delete -force $f
+		}
+		foreach f [findDirs $testdir slpp_*] {
+		    file delete -force $f
+		}
                 if [regexp {\.sh} $command] {
                     catch {set time_result [exec $SHELL $SHELL_ARGS "$TIME $command [lindex $SURELOG_COMMAND 1] > $REGRESSION_PATH/tests/$test/${testname}.log"]} time_result
                 } else {
@@ -693,9 +711,15 @@ proc run_regression { } {
         }
 
 	if {($DIFF_MODE == 0) && ($passstatus == "PASS")} {
-            file delete -force slpp_all slpp_unit uhdm.dump
-            file delete -force $REGRESSION_PATH/tests/$test/slpp_all  $REGRESSION_PATH/tests/$test/slpp_unit $REGRESSION_PATH/tests/$test/uhdm.dump
-	    file delete -force $testdir/slpp_all $testdir/slpp_unit $testdir/uhdm.dump
+	    foreach f [findDirs $REGRESSION_PATH/tests/$test slpp_*] {
+		file delete -force $f
+	    }
+	    foreach f [findDirs $testdir slpp_*] {
+		file delete -force $f
+	    }
+            file delete -force uhdm.dump
+            file delete -force $REGRESSION_PATH/tests/$test/uhdm.dump
+	    file delete -force $testdir/uhdm.dump
         }
 	
         cd $REGRESSION_PATH/tests

@@ -43,16 +43,16 @@ quick: run-cmake-quick
 	cmake --build dbuild -j $(CPU_CORES)
 
 run-cmake-release:
-	cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$(PREFIX) -DBUILD_SHARED_LIBS=OFF $(ADDITIONAL_CMAKE_OPTIONS) -S . -B build
+	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=$(PREFIX) -DBUILD_SHARED_LIBS=OFF $(ADDITIONAL_CMAKE_OPTIONS) -S . -B build
 
 run-cmake-release-shared:
-	cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$(PREFIX) -DBUILD_SHARED_LIBS=ON $(ADDITIONAL_CMAKE_OPTIONS) -S . -B build
+	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=$(PREFIX) -DBUILD_SHARED_LIBS=ON $(ADDITIONAL_CMAKE_OPTIONS) -S . -B build
 
 run-cmake-release-with-python:
-	cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$(PREFIX) $(ADDITIONAL_CMAKE_OPTIONS) -DSURELOG_WITH_PYTHON=1 -DCMAKE_CXX_FLAGS=-fpermissive -S . -B build
+	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=$(PREFIX) $(ADDITIONAL_CMAKE_OPTIONS) -DSURELOG_WITH_PYTHON=1 -DCMAKE_CXX_FLAGS=-fpermissive -S . -B build
 
 run-cmake-release_no_tcmalloc:
-	cmake -DSURELOG_WITH_TCMALLOC=Off -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$(PREFIX) $(ADDITIONAL_CMAKE_OPTIONS) -S . -B build
+	cmake -DSURELOG_WITH_TCMALLOC=Off -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=$(PREFIX) $(ADDITIONAL_CMAKE_OPTIONS) -S . -B build
 
 run-cmake-debug:
 	cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=$(PREFIX) -DSURELOG_WITH_TCMALLOC=Off $(ADDITIONAL_CMAKE_OPTIONS) -S . -B dbuild
@@ -134,7 +134,7 @@ install-shared: release-shared
 	cmake --install build
 
 test_install:
-	cmake -DCMAKE_BUILD_TYPE=Release -DINSTALL_DIR=$(PREFIX) -DCMAKE_PREFIX_PATH=$(PREFIX) $(ADDITIONAL_CMAKE_OPTIONS) -S tests/TestInstall -B tests/TestInstall/build
+	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DINSTALL_DIR=$(PREFIX) -DCMAKE_PREFIX_PATH=$(PREFIX) $(ADDITIONAL_CMAKE_OPTIONS) -S tests/TestInstall -B tests/TestInstall/build
 	cmake --build tests/TestInstall/build -j $(CPU_CORES)
 
 # Using pkg-config. Its search-path might be set in different ways. Set both.

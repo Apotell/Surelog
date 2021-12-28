@@ -429,8 +429,8 @@ PathId PlatformFileSystem::getPrecompiledDir(PathId programId,
 
   const std::filesystem::path programPath = programFile.parent_path();
   const std::vector<std::filesystem::path> search_paths = {
-      programPath,                               // Build path
-      programPath / ".." / "share" / "surelog",  // Install path
+      programPath,                                      // Build path
+      programPath / ".." / ".." / "share" / "surelog",  // Install path
   };
 
   std::error_code ec;

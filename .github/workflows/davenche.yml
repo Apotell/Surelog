@@ -1,0 +1,299 @@
+name: 'davenche'
+
+on: [ push ]
+
+env:
+  MODULE_NAME: Surelog
+  PYTHON3_VERSION: 3.8.6
+  JAVA_VERSION: 1.8.0.275
+  NO_TCMALLOC: On
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+        - { os: ubuntu-18.04, artifact-tag: bionic-gcc, build-type: debug }
+        - { os: ubuntu-18.04, artifact-tag: bionic-gcc, build-type: release }
+        - { os: windows-2019, artifact-tag: windows-cl, build-type: debug }
+        - { os: windows-2019, artifact-tag: windows-cl, build-type: release }
+
+    runs-on: ${{ matrix.config.os }}
+
+    steps:
+    - name: Install Core Dependencies
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt-get update -qq
+        sudo apt install -y g++-9
+        sudo apt install -y default-jre
+        sudo apt install -y cmake
+        sudo apt install -y build-essential
+        sudo apt install -y uuid-dev
+        sudo apt install -y ninja-build
+
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ env.PYTHON3_VERSION }}
+        architecture: 'x64'
+
+    - name: Install Core Dependencies
+      if: runner.os == 'Windows'
+      shell: cmd
+      run: |
+        choco install -y python3 --version=${{ env.PYTHON3_VERSION }} --installargs="/quiet Include_debug=1 TargetDir=%pythonLocation%"
+
+    - name: Setup Python Packages
+      run: |
+        pip3 install orderedmultidict
+        pip3 install psutil
+
+    - name: Setup Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: ${{ env.JAVA_VERSION }}
+        java-package: jre
+        architecture: x64
+
+    - name: Setup environment
+      shell: bash
+      run: |
+        git config --global core.autocrlf input
+
+        export ARTIFACT_NAME=${{ env.MODULE_NAME }}-${{ matrix.config.artifact-tag }}-${{ matrix.config.build-type }}
+        export REGRESSION_ARTIFACT_NAME=${{ env.MODULE_NAME }}-regression-${{ matrix.config.artifact-tag }}-${{ matrix.config.build-type }}
+
+        echo "ARTIFACT_NAME=$ARTIFACT_NAME" >> $GITHUB_ENV
+        echo "REGRESSION_ARTIFACT_NAME=$REGRESSION_ARTIFACT_NAME" >> $GITHUB_ENV
+
+    - name: Move builds to C:\ drive
+      if: runner.os == 'Windows'
+      shell: cmd
+      run: |
+        mkdir C:\Surelog
+        cd /D C:\Surelog
+        rd /S /Q %GITHUB_WORKSPACE%
+        mklink /D %GITHUB_WORKSPACE% C:\Surelog
+
+    - name: Git Pull
+      uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+
+    - name: Build on Linux
+      if: runner.os == 'Linux'
+      shell: bash
+      env:
+        CC: gcc-9
+        CXX: g++-9
+      run: |
+        env
+        which cmake && cmake --version
+        which java && java -version
+        which python && python --version
+        which ninja && ninja --version
+        which $CC && $CC --version
+        which $CXX && $CXX --version
+
+        if [[ "${{ matrix.config.build-type }}" == "debug" ]]; then
+          cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug -DPython3_ROOT_DIR=$pythonLocation -DWITH_STATIC_CRT=0 -DCMAKE_INSTALL_PREFIX=out/install -S . -B out/build
+        else
+          cmake -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo -DPython3_ROOT_DIR=$pythonLocation -DWITH_STATIC_CRT=0 -DCMAKE_INSTALL_PREFIX=out/install -S . -B out/build
+        fi
+
+        cmake --build out/build -j `nproc`
+        cmake --install out/build
+
+    - name: Build on Windows
+      if: runner.os == 'Windows'
+      shell: cmd
+      env:
+        CC: cl
+        CXX: cl
+      run: |
+        call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+
+        set TCL_DIR=%PROGRAMFILES%\Git\mingw64\bin
+        set PATH=%JAVA_HOME%\bin;%TCL_DIR%;%PATH%
+
+        set
+        where cmake && cmake --version
+        where java && java -version
+        where python && python --version
+        where ninja && ninja --version
+        where %CC% && %CC%
+        where %CXX% && %CXX%
+
+        if "${{ matrix.config.build-type }}" EQU "debug" (
+          cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug -DPython3_ROOT_DIR=%pythonLocation% -DWITH_STATIC_CRT=0 -DCMAKE_INSTALL_PREFIX=out/install -S . -B out/build
+        ) else (
+          cmake -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo -DPython3_ROOT_DIR=%pythonLocation% -DWITH_STATIC_CRT=0 -DCMAKE_INSTALL_PREFIX=out/install -S . -B out/build
+        )
+
+        cmake --build out/build -j %NUMBER_OF_PROCESSORS%
+        if %errorlevel% neq 0 exit /b %errorlevel%
+        cmake --install out/build
+
+    - name: Test on Linux
+      if: runner.os == 'Linux' && matrix.config.build-type == 'release'
+      shell: bash
+      run: |
+        find out/build -type f -name "*.cpp.o" -delete
+        python scripts/regression.py run --jobs `nproc` --show-diffs --build-dirpath out/build
+
+    - name: Test on Windows
+      if: runner.os == 'Windows' && matrix.config.build-type == 'release'
+      shell: cmd
+      run: |
+        push out/build
+        del /s *.cpp.o
+        popd
+        python scripts/regression.py run --jobs %NUMBER_OF_PROCESSORS% --show-diffs --build-dirpath out/build
+
+    - name: Build compressed artifacts
+      if: always()
+      shell: bash
+      run: |
+        cp deploy/CMakeLists.txt out/install/.
+        cd out
+
+        mv install/lib install/${{ matrix.config.artifact-tag }}-${{ matrix.config.build-type }}
+        mkdir install/lib
+        mv install/${{ matrix.config.artifact-tag }}-${{ matrix.config.build-type }} install/lib/.
+
+        mv install/bin install/${{ matrix.config.artifact-tag }}-${{ matrix.config.build-type }}
+        mkdir install/bin
+        mv install/${{ matrix.config.artifact-tag }}-${{ matrix.config.build-type }} install/bin/.
+
+        mv install ${{ env.ARTIFACT_NAME }}
+        tar czfp ${{ env.ARTIFACT_NAME }}.tgz ${{ env.ARTIFACT_NAME }}
+
+        if [[ "${{ matrix.config.build-type }}" == "release" ]]; then
+          cd build
+          mv regression ${{ env.REGRESSION_ARTIFACT_NAME }}
+          find ${{ env.REGRESSION_ARTIFACT_NAME }} -name "*.log" | tar czvfp ${{ env.REGRESSION_ARTIFACT_NAME }}.tgz -T -
+        fi
+
+    - name: Archive artifacts
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ env.ARTIFACT_NAME }}
+        path: out/${{ env.ARTIFACT_NAME }}.tgz
+
+    - name: Archive regression artifacts
+      if: always() && matrix.config.build-type == 'release'
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ env.REGRESSION_ARTIFACT_NAME }}
+        path: out/build/${{ env.REGRESSION_ARTIFACT_NAME }}.tgz
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/Davenche'
+
+    steps:
+    - name: Get top commit details
+      uses: actions/github-script@0.3.0
+      id: author-date
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const commit_details = await github.git.getCommit({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            commit_sha: context.sha });
+          return commit_details.data.author.date
+
+    - name: Setup environment
+      run: |
+        export COMMITTED_AT=$(date -d ${{ steps.author-date.outputs.result }} +'%Y.%m.%d_%H.%M.%S')
+        echo "COMMITTED_AT=$COMMITTED_AT" >> $GITHUB_ENV
+        echo "ARTIFACT_BIONIC_GCC_DEBUG=${{ env.MODULE_NAME }}-bionic-gcc-debug" >> $GITHUB_ENV
+        echo "ARTIFACT_BIONIC_GCC_RELEASE=${{ env.MODULE_NAME }}-bionic-gcc-release" >> $GITHUB_ENV
+        echo "ARTIFACT_WINDOWS_CL_DEBUG=${{ env.MODULE_NAME }}-windows-cl-debug" >> $GITHUB_ENV
+        echo "ARTIFACT_WINDOWS_CL_RELEASE=${{ env.MODULE_NAME }}-windows-cl-release" >> $GITHUB_ENV
+
+    - name: Download artifact (bionic-gcc-debug)
+      uses: actions/download-artifact@v2
+      with:
+        name: ${{ env.ARTIFACT_BIONIC_GCC_DEBUG }}
+
+    - name: Download artifact (bionic-gcc-release)
+      uses: actions/download-artifact@v2
+      with:
+        name: ${{ env.ARTIFACT_BIONIC_GCC_RELEASE }}
+
+    - name: Download artifact (windows-cl-debug)
+      uses: actions/download-artifact@v2
+      with:
+        name: ${{ env.ARTIFACT_WINDOWS_CL_DEBUG }}
+
+    - name: Download artifact (windows-cl-release)
+      uses: actions/download-artifact@v2
+      with:
+        name: ${{ env.ARTIFACT_WINDOWS_CL_RELEASE }}
+
+    - name: List directory contents
+      run: ls -R
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ env.COMMITTED_AT }}
+        release_name: ${{ env.MODULE_NAME }}
+        draft: false
+        prerelease: false
+
+    - name: Upload Release Asset (bionic-gcc-debug)
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ${{ env.ARTIFACT_BIONIC_GCC_DEBUG }}.tgz
+        asset_name: 'bionic-gcc-debug.tgz'
+        asset_content_type: application/zip
+
+    - name: Upload Release Asset (bionic-gcc-release)
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ${{ env.ARTIFACT_BIONIC_GCC_RELEASE }}.tgz
+        asset_name: 'bionic-gcc-release.tgz'
+        asset_content_type: application/zip
+
+    - name: Upload Release Asset (windows-cl-debug)
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ${{ env.ARTIFACT_WINDOWS_CL_DEBUG }}.tgz
+        asset_name: 'windows-cl-debug.tgz'
+        asset_content_type: application/zip
+
+    - name: Upload Release Asset (windows-cl-release)
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ${{ env.ARTIFACT_WINDOWS_CL_RELEASE }}.tgz
+        asset_name: 'windows-cl-release.tgz'
+        asset_content_type: application/zip
+
+    - name: Delete some old releases
+      uses: dev-drprasad/delete-older-releases@v0.2.0
+      with:
+        keep_latest: 5
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,5 +1,5 @@
 # -*- mode:cmake -*-
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.15 FATAL_ERROR)
 
 # Detect build type, fallback to release and throw a warning if use didn't
 # specify any
@@ -18,11 +18,17 @@ option(
   "Building with clang++ and libc++(in Linux). To enable with: -DWITH_LIBCXX=On"
   On)
 
+option(WITH_PYTHON_GENERATOR "Use Python generator instead of TCL." ON)
+
+if (DEFINED ENV{WITH_PYTHON_GENERATOR})
+  set(WITH_PYTHON_GENERATOR $ENV{WITH_PYTHON_GENERATOR})
+endif()
+
 project(SURELOG)
 
 # NOTE: Policy changes has to happen before adding any subprojects
 cmake_policy(SET CMP0091 NEW)
-set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -30,7 +36,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(FLATBUFFERS_BUILD_TESTS OFF CACHE BOOL "Skip flatbuffers' tests")
 add_subdirectory(third_party/flatbuffers EXCLUDE_FROM_ALL)
-add_subdirectory(third_party/antlr4_fast/runtime/Cpp EXCLUDE_FROM_ALL)
+add_subdirectory(third_party/antlr4/runtime/Cpp EXCLUDE_FROM_ALL)
 
 set(UHDM_BUILD_TESTS OFF CACHE BOOL "Skip UHDM tests")
 add_subdirectory(third_party/UHDM)
@@ -45,12 +51,15 @@ set(GENDIR ${CMAKE_CURRENT_BINARY_DIR}/generated)
 
 # Python
 if (SURELOG_WITH_PYTHON)
-find_package(Python3 3.3 REQUIRED COMPONENTS Interpreter Development)
-find_package(SWIG 3.0 REQUIRED)
-message(STATUS "Python3_LIBRARIES = ${Python3_LIBRARIES}")
-message(STATUS "Python3_EXECUTABLE = ${Python3_EXECUTABLE}")
-message(STATUS "Python3_INCLUDE_DIRS = ${Python3_INCLUDE_DIRS}")
-message(STATUS "Python3_RUNTIME_LIBRARY_DIRS = ${Python3_RUNTIME_LIBRARY_DIRS}")
+  find_package(Python3 3.3 REQUIRED COMPONENTS Interpreter Development)
+  find_package(SWIG 3.0 REQUIRED)
+  message(STATUS "Python3_LIBRARIES = ${Python3_LIBRARIES}")
+  message(STATUS "Python3_EXECUTABLE = ${Python3_EXECUTABLE}")
+  message(STATUS "Python3_INCLUDE_DIRS = ${Python3_INCLUDE_DIRS}")
+  message(STATUS "Python3_RUNTIME_LIBRARY_DIRS = ${Python3_RUNTIME_LIBRARY_DIRS}")
+elseif (WITH_PYTHON_GENERATOR)
+  find_package(Python3 3.3 REQUIRED Interpreter)
+  message(STATUS "Python3_EXECUTABLE = ${Python3_EXECUTABLE}")
 endif()
 
 # Use tcmalloc if installed and not NO_TCMALLOC is on. TODO: don't use negative
@@ -83,7 +92,7 @@ if(MSVC)
       "${CMAKE_CXX_FLAGS_DEBUG} ${TCMALLOC_COMPILE_OPTIONS} /Zc:__cplusplus /W0 /bigobj ${MY_CXX_WARNING_FLAGS}"
   )
   set(CMAKE_CXX_FLAGS_RELWITHDEBINFO
-      "${CMAKE_CXX_FLAGS_RELEASE} ${TCMALLOC_COMPILE_OPTIONS} /Zc:__cplusplus /W0 /bigobj ${MY_CXX_WARNING_FLAGS}"
+      "${CMAKE_CXX_FLAGS_RELEASE} ${TCMALLOC_COMPILE_OPTIONS} /Zi /Zc:__cplusplus /W0 /bigobj ${MY_CXX_WARNING_FLAGS}"
   )
   set(CMAKE_CXX_FLAGS_RELEASE
       "${CMAKE_CXX_FLAGS_RELEASE} ${TCMALLOC_COMPILE_OPTIONS} /Zc:__cplusplus /W0 /bigobj ${MY_CXX_WARNING_FLAGS}"
@@ -94,11 +103,12 @@ else()
     # Under MSYS some files are too large to build without additional flags
     set(MSYS_COMPILE_OPTIONS "-m64 -Wa,-mbig-obj")
   endif()
-  #set(MEM_SANITIZER_FLAGS
-  #    "-fsanitize=address -fno-omit-frame-pointer"
-  #)
+
   set(CMAKE_CXX_FLAGS_DEBUG
-      "${CMAKE_CXX_FLAGS_DEBUG} ${TCMALLOC_COMPILE_OPTIONS} -Wall -O0 -g ${MSYS_COMPILE_OPTIONS} ${MY_CXX_WARNING_FLAGS} ${MEM_SANITIZER_FLAGS}"
+      "${CMAKE_CXX_FLAGS_DEBUG} ${TCMALLOC_COMPILE_OPTIONS} -Wall -O0 -g ${MSYS_COMPILE_OPTIONS} ${MY_CXX_WARNING_FLAGS}"
+  )
+  set(CMAKE_CXX_FLAGS_RELWITHDEBINFO
+      "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} ${TCMALLOC_COMPILE_OPTIONS} -Wall -O3 -g ${MSYS_COMPILE_OPTIONS} -DNDEBUG ${MY_CXX_WARNING_FLAGS}"
   )
   set(CMAKE_CXX_FLAGS_RELEASE
       "${CMAKE_CXX_FLAGS_RELEASE} ${TCMALLOC_COMPILE_OPTIONS} -Wall -O3 ${MSYS_COMPILE_OPTIONS} -DNDEBUG ${MY_CXX_WARNING_FLAGS}"
@@ -133,7 +143,7 @@ add_custom_command(
 # Java
 find_package(Java REQUIRED COMPONENTS Runtime)
 set(ANTLR_JAR_LOCATION
-    ${PROJECT_SOURCE_DIR}/third_party/antlr4_fast/antlr4-4.9.3-complete.jar)
+    ${PROJECT_SOURCE_DIR}/third_party/antlr4/antlr4-4.9.3-complete.jar)
 
 add_custom_target(GenerateParser DEPENDS
   ${GENDIR}/src/parser/generated-parsers.tstamp
@@ -178,21 +188,37 @@ add_custom_command(
   COMMAND ${CMAKE_COMMAND} -E touch ${GENDIR}/src/parser/generated-parsers.tstamp
 )
 
-add_custom_command(
-  OUTPUT ${GENDIR}/src/SourceCompile/VObjectTypes.h
-         ${GENDIR}/src/SourceCompile/VObjectTypes.cpp
-         ${GENDIR}/src/API/vobjecttypes_py.h
-         ${GENDIR}/src/SourceCompile/SV3_1aTreeShapeListener.h
-         ${GENDIR}/src/SourceCompile/SV3_1aPpTreeShapeListener.h
-  DEPENDS ${GENDIR}/src/parser/generated-parsers.tstamp
-          ${PROJECT_SOURCE_DIR}/src/SourceCompile/generate_parser_listener.tcl
+if (WITH_PYTHON_GENERATOR)
+  add_custom_command(
+    OUTPUT ${GENDIR}/src/SourceCompile/VObjectTypes.h
+           ${GENDIR}/src/SourceCompile/VObjectTypes.cpp
+           ${GENDIR}/src/API/VObjectTypes_py.h
+           ${GENDIR}/src/SourceCompile/SV3_1aTreeShapeListener.h
+           ${GENDIR}/src/SourceCompile/SV3_1aPpTreeShapeListener.h
+    DEPENDS ${GENDIR}/src/parser/generated-parsers.tstamp
+            ${PROJECT_SOURCE_DIR}/scripts/generate_parser_listener.py
 
-  WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}/src/"
-  COMMAND echo "---------- VObjectTypes, Listener generation"
-  COMMAND ${CMAKE_COMMAND} -E make_directory ${GENDIR}/src/SourceCompile
-  COMMAND ${CMAKE_COMMAND} -E make_directory ${GENDIR}/src/API
-  COMMAND tclsh SourceCompile/generate_parser_listener.tcl input_dir=${PROJECT_SOURCE_DIR}/src input_gen_dir=${GENDIR}/src out_dir=${GENDIR}/src
-)
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+    COMMAND echo "---------- VObjectTypes, Listener generation"
+    COMMAND ${Python3_EXECUTABLE} scripts/generate_parser_listener.py --output-dirpath ${GENDIR}
+  )
+else()
+  add_custom_command(
+    OUTPUT ${GENDIR}/src/SourceCompile/VObjectTypes.h
+           ${GENDIR}/src/SourceCompile/VObjectTypes.cpp
+           ${GENDIR}/src/API/VObjectTypes_py.h
+           ${GENDIR}/src/SourceCompile/SV3_1aTreeShapeListener.h
+           ${GENDIR}/src/SourceCompile/SV3_1aPpTreeShapeListener.h
+    DEPENDS ${GENDIR}/src/parser/generated-parsers.tstamp
+            ${PROJECT_SOURCE_DIR}/src/SourceCompile/generate_parser_listener.tcl
+
+    WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}/src/"
+    COMMAND echo "---------- VObjectTypes, Listener generation"
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${GENDIR}/src/SourceCompile
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${GENDIR}/src/API
+    COMMAND tclsh SourceCompile/generate_parser_listener.tcl input_dir=${PROJECT_SOURCE_DIR}/src input_gen_dir=${GENDIR}/src out_dir=${GENDIR}/src
+  )
+endif()
 
 if (SURELOG_WITH_PYTHON)
 set(surelog_python-GENERATED_SRC
@@ -209,7 +235,7 @@ add_custom_command(
   DEPENDS ${PROJECT_SOURCE_DIR}/src/API/slapi_scripts.i
           ${PROJECT_SOURCE_DIR}/src/API/generate_python_listener_api.tcl
           ${PROJECT_SOURCE_DIR}/src/API/embed_python_api.tcl
-          ${GENDIR}/src/API/vobjecttypes_py.h
+          ${GENDIR}/src/API/VObjectTypes_py.h
           ${GENDIR}/src/parser/generated-parsers.tstamp
 
   WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}/src/"
@@ -361,7 +387,7 @@ endforeach()
 add_library(surelog STATIC ${surelog_SRC} ${surelog_generated_SRC})
 set_target_properties(surelog PROPERTIES PUBLIC_HEADER src/surelog.h)
 target_include_directories(surelog PRIVATE
-  third_party/antlr4_fast/runtime/Cpp/runtime/src
+  third_party/antlr4/runtime/Cpp/runtime/src
   third_party/flatbuffers/include
   third_party/googletest/googletest/include
   third_party/googletest/googlemock/include)
@@ -473,7 +499,7 @@ function(register_gtests)
     add_executable(${test_bin} EXCLUDE_FROM_ALL ${gtest_cc_file})
 
     target_include_directories(${test_bin} PRIVATE
-      ${PROJECT_SOURCE_DIR}/third_party/antlr4_fast/runtime/Cpp/runtime/src
+      ${PROJECT_SOURCE_DIR}/third_party/antlr4/runtime/Cpp/runtime/src
       ${PROJECT_SOURCE_DIR}/third_party/flatbuffers/include)
     # For simplicity, we link the test with libsurelog, but there is of
     # course a lot unnecessary churn if headers are modified.
@@ -703,13 +729,7 @@ install(
         ${PROJECT_SOURCE_DIR}/src/Expression/Value.h
   DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/surelog/Expression)
 
-if (WIN32 AND $<CONFIG:Debug>)
-  if (SURELOG_WITH_PYTHON)
-    install(
-      FILES $<TARGET_PDB_FILE:surelog-bin>
-            ${Python3_RUNTIME_LIBRARY_DIRS}/python${Python3_VERSION_MAJOR}${Python3_VERSION_MINOR}$<$<CONFIG:Debug>:_d>.dll
-      DESTINATION ${CMAKE_INSTALL_BINDIR})
-  endif()
+if(WIN32)
   install(
     FILES $<TARGET_PDB_FILE:surelog-bin>
           ${UHDM_BINARY_DIR}/bin/uhdm-dump.pdb
@@ -718,12 +738,12 @@ if (WIN32 AND $<CONFIG:Debug>)
   install(
     FILES ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/surelog.dir/surelog.pdb
           ${FlatBuffers_BINARY_DIR}/CMakeFiles/flatbuffers.dir/flatbuffers.pdb
-          ${LIBANTLR4_BINARY_DIR}/runtime/CMakeFiles/antlr4_static.dir/antlr4_static.pdb
+          ${LIBANTLR4_BINARY_DIR}/runtime/antlr4-runtime-static.pdb
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/surelog)
   install(
     FILES ${UHDM_BINARY_DIR}/CMakeFiles/uhdm.dir/uhdm.pdb
-          ${UHDM_BINARY_DIR}/third_party/capnproto/c++/src/capnp/CMakeFiles/capnp.dir/capnp.pdb
-          ${UHDM_BINARY_DIR}/third_party/capnproto/c++/src/kj/CMakeFiles/kj.dir/kj.pdb
+          ${Cap\'n\ Proto_BINARY_DIR}/src/capnp/CMakeFiles/capnp.dir/capnp.pdb
+          ${Cap\'n\ Proto_BINARY_DIR}/src/kj/CMakeFiles/kj.dir/kj.pdb
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/uhdm)
 endif()
 
@@ -748,4 +768,4 @@ install(
 
 ADD_CUSTOM_TARGET(link_target ALL
                   COMMAND ${CMAKE_COMMAND} -E create_symlink
-                  build/compile_commands.json ../compile_commands.json)
+                  build/compile_commands.json ${PROJECT_SOURCE_DIR}/compile_commands.json)

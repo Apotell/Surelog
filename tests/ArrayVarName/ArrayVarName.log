@@ -134,7 +134,7 @@ param_assign                                           2
 parameter                                              2
 port                                                   2
 range                                                  1
-ref_obj                                                6
+ref_obj                                                5
 return_stmt                                            1
 === UHDM Object Stats End ===
 [INF:UH0707] Elaborating UHDM...
@@ -159,7 +159,7 @@ param_assign                                           2
 parameter                                              2
 port                                                   3
 range                                                  1
-ref_obj                                                9
+ref_obj                                                7
 return_stmt                                            2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ArrayVarName/slpp_all/surelog.uhdm ...
@@ -182,8 +182,6 @@ design: (work@top)
   |vpiDefName:work@top
   |vpiTaskFunc:
   \_function: (work@top.get_a1), line:4:4, endln:7:15
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayVarName/dut.sv, line:1:1, endln:8:10
     |vpiName:get_a1
     |vpiFullName:work@top.get_a1
     |vpiVariables:
@@ -237,8 +235,6 @@ design: (work@top)
       \_int_typespec: , line:4:23, endln:4:26
         |vpiSigned:1
       |vpiSigned:1
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayVarName/dut.sv, line:1:1, endln:8:10
     |vpiStmt:
     \_begin: (work@top.get_a1)
       |vpiParent:
@@ -276,13 +272,11 @@ design: (work@top)
         |vpiCondition:
         \_bit_select: (work@top.get_a1.a), line:6:14, endln:6:18
           |vpiParent:
-          \_ref_obj: (work@top.get_a1.a)
-            |vpiParent:
-            \_return_stmt: , line:6:7, endln:6:13
-            |vpiName:a
-            |vpiFullName:work@top.get_a1.a
+          \_return_stmt: , line:6:7, endln:6:13
           |vpiName:a
           |vpiFullName:work@top.get_a1.a
+          |vpiActual:
+          \_array_var: (work@top.get_a1.a), line:5:11, endln:5:12
           |vpiIndex:
           \_constant: , line:6:16, endln:6:17
             |vpiParent:
@@ -349,8 +343,6 @@ design: (work@top)
   |vpiTop:1
   |vpiTaskFunc:
   \_function: (work@top.get_a1), line:4:4, endln:7:15
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayVarName/dut.sv, line:1:1, endln:8:10
     |vpiName:get_a1
     |vpiFullName:work@top.get_a1
     |vpiVariables:
@@ -374,8 +366,6 @@ design: (work@top)
     |vpiAutomatic:1
     |vpiReturn:
     \_int_var: , line:4:23, endln:4:26
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayVarName/dut.sv, line:1:1, endln:8:10
     |vpiStmt:
     \_begin: (work@top.get_a1)
       |vpiParent:
@@ -435,19 +425,13 @@ design: (work@top)
         |vpiCondition:
         \_bit_select: (work@top.get_a1.a), line:6:14, endln:6:18
           |vpiParent:
-          \_ref_obj: (work@top.get_a1.a)
-            |vpiParent:
-            \_return_stmt: , line:6:7, endln:6:13
-            |vpiName:a
-            |vpiFullName:work@top.get_a1.a
-            |vpiActual:
-            \_array_var: (work@top.get_a1.a), line:5:11, endln:5:12
+          \_return_stmt: , line:6:7, endln:6:13
           |vpiName:a
           |vpiFullName:work@top.get_a1.a
-          |vpiIndex:
-          \_constant: , line:6:16, endln:6:17
           |vpiActual:
           \_array_var: (work@top.get_a1.a), line:5:11, endln:5:12
+          |vpiIndex:
+          \_constant: , line:6:16, endln:6:17
     |vpiInstance:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayVarName/dut.sv, line:1:1, endln:8:10
   |vpiTopModule:1

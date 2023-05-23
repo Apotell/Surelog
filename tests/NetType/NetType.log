@@ -241,7 +241,7 @@ module_inst                                            3
 range                                                  2
 real_typespec                                          8
 real_var                                               2
-ref_obj                                                9
+ref_obj                                                8
 ref_var                                                2
 struct_typespec                                        3
 struct_var                                             1
@@ -267,7 +267,7 @@ module_inst                                            3
 range                                                  2
 real_typespec                                          8
 real_var                                               2
-ref_obj                                                9
+ref_obj                                                8
 ref_var                                                2
 struct_typespec                                        3
 struct_var                                             1
@@ -356,8 +356,6 @@ design: (work@dut)
   \_design: (work@dut)
   |vpiFunction:
   \_function: (my_function), line:3:1, endln:4:12
-    |vpiParent:
-    \_design: (work@dut)
     |vpiName:my_function
     |vpiMethod:1
     |vpiVisibility:1
@@ -366,8 +364,6 @@ design: (work@dut)
     \_bit_var: , line:3:20, endln:3:23
       |vpiTypespec:
       \_bit_typespec: , line:3:20, endln:3:23
-    |vpiParent:
-    \_design: (work@dut)
 |vpiTypedef:
 \_struct_typespec: (wT), line:22:9, endln:22:15
   |vpiParent:
@@ -444,8 +440,6 @@ design: (work@dut)
     |vpiRefEndColumnNo:6
   |vpiFunction:
   \_function: (Tsum), line:28:1, endln:32:12
-    |vpiParent:
-    \_design: (work@dut)
     |vpiName:Tsum
     |vpiMethod:1
     |vpiVisibility:1
@@ -454,8 +448,6 @@ design: (work@dut)
     \_struct_var: , line:28:20, endln:28:21
       |vpiTypespec:
       \_struct_typespec: (T), line:22:9, endln:22:15
-    |vpiParent:
-    \_design: (work@dut)
     |vpiIODecl:
     \_io_decl: (driver), line:28:36, endln:28:42
       |vpiDirection:1
@@ -492,8 +484,6 @@ design: (work@dut)
         |vpiBlocking:1
         |vpiRhs:
         \_constant: , line:29:17, endln:29:20
-          |vpiParent:
-          \_assignment: , line:29:3, endln:29:20
           |vpiDecompile:0.0
           |vpiSize:64
           |REAL:0.000000
@@ -501,7 +491,7 @@ design: (work@dut)
         |vpiLhs:
         \_hier_path: (Tsum.field1), line:29:3, endln:29:14
           |vpiParent:
-          \_begin: (Tsum)
+          \_assignment: , line:29:3, endln:29:20
           |vpiName:Tsum.field1
           |vpiActual:
           \_ref_obj: (Tsum)
@@ -548,34 +538,34 @@ design: (work@dut)
           |vpiRhs:
           \_hier_path: (driver[i].field1), line:31:20, endln:31:36
             |vpiParent:
-            \_foreach_stmt: (Tsum), line:30:3, endln:30:10
+            \_assignment: , line:31:5, endln:31:36
             |vpiName:driver[i].field1
             |vpiActual:
-            \_bit_select: (driver), line:31:20, endln:31:26
+            \_bit_select: (Tsum.driver[i].field1.driver), line:31:20, endln:31:26
               |vpiParent:
-              \_ref_obj: (Tsum.driver[i])
-                |vpiParent:
-                \_hier_path: (driver[i].field1), line:31:20, endln:31:36
-                |vpiName:driver[i]
-                |vpiFullName:Tsum.driver[i]
+              \_hier_path: (driver[i].field1), line:31:20, endln:31:36
               |vpiName:driver
+              |vpiFullName:Tsum.driver[i].field1.driver
+              |vpiActual:
+              \_io_decl: (driver), line:28:36, endln:28:42
               |vpiIndex:
               \_ref_obj: (Tsum.i), line:31:27, endln:31:28
                 |vpiParent:
-                \_foreach_stmt: (Tsum), line:30:3, endln:30:10
+                \_assignment: , line:31:5, endln:31:36
                 |vpiName:i
                 |vpiFullName:Tsum.i
                 |vpiActual:
                 \_ref_var: (Tsum.i), line:30:19, endln:30:20
             |vpiActual:
-            \_ref_obj: (field1), line:31:30, endln:31:36
+            \_ref_obj: (Tsum.field1), line:31:30, endln:31:36
               |vpiParent:
               \_hier_path: (driver[i].field1), line:31:20, endln:31:36
               |vpiName:field1
+              |vpiFullName:Tsum.field1
           |vpiLhs:
           \_hier_path: (Tsum.field1), line:31:5, endln:31:16
             |vpiParent:
-            \_foreach_stmt: (Tsum), line:30:3, endln:30:10
+            \_assignment: , line:31:5, endln:31:36
             |vpiName:Tsum.field1
             |vpiActual:
             \_ref_obj: (Tsum)
@@ -595,8 +585,6 @@ design: (work@dut)
 \_function: (Tsum), line:28:1, endln:32:12
 |vpiTaskFunc:
 \_function: (my_function2), line:41:1, endln:42:12
-  |vpiParent:
-  \_design: (work@dut)
   |vpiName:my_function2
   |vpiMethod:1
   |vpiVisibility:1
@@ -605,8 +593,6 @@ design: (work@dut)
   \_real_var: , line:41:20, endln:41:24
     |vpiTypespec:
     \_real_typespec: , line:41:20, endln:41:24
-  |vpiParent:
-  \_design: (work@dut)
   |vpiIODecl:
   \_io_decl: (driver), line:41:49, endln:41:55
     |vpiDirection:1

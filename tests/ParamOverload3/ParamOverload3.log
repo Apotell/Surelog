@@ -687,7 +687,7 @@ packed_array_typespec                                  4
 param_assign                                          52
 parameter                                             58
 range                                                  6
-ref_obj                                               51
+ref_obj                                               45
 return_stmt                                            2
 string_typespec                                       50
 struct_typespec                                        4
@@ -721,7 +721,7 @@ packed_array_typespec                                  4
 param_assign                                          57
 parameter                                             58
 range                                                  6
-ref_obj                                               65
+ref_obj                                               54
 return_stmt                                            4
 string_typespec                                       50
 struct_typespec                                        4
@@ -1136,8 +1136,6 @@ design: (work@top)
   |vpiDefName:fpnew_pkg
   |vpiTaskFunc:
   \_function: (fpnew_pkg::fp_width), line:37:3, endln:39:14
-    |vpiParent:
-    \_package: fpnew_pkg (fpnew_pkg::), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:1:1, endln:41:11
     |vpiName:fp_width
     |vpiFullName:fpnew_pkg::fp_width
     |vpiVisibility:1
@@ -1148,8 +1146,6 @@ design: (work@top)
       \_int_typespec: , line:37:22, endln:37:34
         |vpiInstance:
         \_package: (fpnew_pkg)
-    |vpiParent:
-    \_package: fpnew_pkg (fpnew_pkg::), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:1:1, endln:41:11
     |vpiIODecl:
     \_io_decl: (fmt), line:37:56, endln:37:59
       |vpiParent:
@@ -1178,29 +1174,27 @@ design: (work@top)
             \_operation: , line:38:12, endln:38:67
             |vpiName:FP_ENCODINGS[fmt].exp_bits
             |vpiActual:
-            \_bit_select: (FP_ENCODINGS), line:38:12, endln:38:24
+            \_bit_select: (fpnew_pkg::fp_width::FP_ENCODINGS[fmt].exp_bits::FP_ENCODINGS), line:38:12, endln:38:24
               |vpiParent:
-              \_ref_obj: (fpnew_pkg::fp_width::FP_ENCODINGS[fmt])
-                |vpiParent:
-                \_hier_path: (FP_ENCODINGS[fmt].exp_bits), line:38:12, endln:38:38
-                |vpiName:FP_ENCODINGS[fmt]
-                |vpiFullName:fpnew_pkg::fp_width::FP_ENCODINGS[fmt]
+              \_hier_path: (FP_ENCODINGS[fmt].exp_bits), line:38:12, endln:38:38
               |vpiName:FP_ENCODINGS
-              |vpiIndex:
-              \_ref_obj: (fpnew_pkg::fp_width::FP_ENCODINGS[fmt]::fmt), line:38:25, endln:38:28
-                |vpiParent:
-                \_bit_select: (FP_ENCODINGS), line:38:12, endln:38:24
-                |vpiName:fmt
-                |vpiFullName:fpnew_pkg::fp_width::FP_ENCODINGS[fmt]::fmt
-                |vpiActual:
-                \_io_decl: (fmt), line:37:56, endln:37:59
+              |vpiFullName:fpnew_pkg::fp_width::FP_ENCODINGS[fmt].exp_bits::FP_ENCODINGS
               |vpiActual:
               \_parameter: (fpnew_pkg::FP_ENCODINGS), line:20:49, endln:20:61
+              |vpiIndex:
+              \_ref_obj: (fpnew_pkg::fp_width::FP_ENCODINGS[fmt].exp_bits::fmt), line:38:25, endln:38:28
+                |vpiParent:
+                \_bit_select: (fpnew_pkg::fp_width::FP_ENCODINGS[fmt].exp_bits::FP_ENCODINGS), line:38:12, endln:38:24
+                |vpiName:fmt
+                |vpiFullName:fpnew_pkg::fp_width::FP_ENCODINGS[fmt].exp_bits::fmt
+                |vpiActual:
+                \_io_decl: (fmt), line:37:56, endln:37:59
             |vpiActual:
-            \_ref_obj: (exp_bits), line:38:30, endln:38:38
+            \_ref_obj: (fpnew_pkg::fp_width::exp_bits), line:38:30, endln:38:38
               |vpiParent:
               \_hier_path: (FP_ENCODINGS[fmt].exp_bits), line:38:12, endln:38:38
               |vpiName:exp_bits
+              |vpiFullName:fpnew_pkg::fp_width::exp_bits
               |vpiActual:
               \_typespec_member: (exp_bits), line:7:18, endln:7:26
           |vpiOperand:
@@ -1209,29 +1203,27 @@ design: (work@top)
             \_operation: , line:38:12, endln:38:67
             |vpiName:FP_ENCODINGS[fmt].man_bits
             |vpiActual:
-            \_bit_select: (FP_ENCODINGS), line:38:41, endln:38:53
+            \_bit_select: (fpnew_pkg::fp_width::FP_ENCODINGS[fmt].man_bits::FP_ENCODINGS), line:38:41, endln:38:53
               |vpiParent:
-              \_ref_obj: (fpnew_pkg::fp_width::FP_ENCODINGS[fmt])
-                |vpiParent:
-                \_hier_path: (FP_ENCODINGS[fmt].man_bits), line:38:41, endln:38:67
-                |vpiName:FP_ENCODINGS[fmt]
-                |vpiFullName:fpnew_pkg::fp_width::FP_ENCODINGS[fmt]
+              \_hier_path: (FP_ENCODINGS[fmt].man_bits), line:38:41, endln:38:67
               |vpiName:FP_ENCODINGS
-              |vpiIndex:
-              \_ref_obj: (fpnew_pkg::fp_width::FP_ENCODINGS[fmt]::fmt), line:38:54, endln:38:57
-                |vpiParent:
-                \_bit_select: (FP_ENCODINGS), line:38:41, endln:38:53
-                |vpiName:fmt
-                |vpiFullName:fpnew_pkg::fp_width::FP_ENCODINGS[fmt]::fmt
-                |vpiActual:
-                \_io_decl: (fmt), line:37:56, endln:37:59
+              |vpiFullName:fpnew_pkg::fp_width::FP_ENCODINGS[fmt].man_bits::FP_ENCODINGS
               |vpiActual:
               \_parameter: (fpnew_pkg::FP_ENCODINGS), line:20:49, endln:20:61
+              |vpiIndex:
+              \_ref_obj: (fpnew_pkg::fp_width::FP_ENCODINGS[fmt].man_bits::fmt), line:38:54, endln:38:57
+                |vpiParent:
+                \_bit_select: (fpnew_pkg::fp_width::FP_ENCODINGS[fmt].man_bits::FP_ENCODINGS), line:38:41, endln:38:53
+                |vpiName:fmt
+                |vpiFullName:fpnew_pkg::fp_width::FP_ENCODINGS[fmt].man_bits::fmt
+                |vpiActual:
+                \_io_decl: (fmt), line:37:56, endln:37:59
             |vpiActual:
-            \_ref_obj: (man_bits), line:38:59, endln:38:67
+            \_ref_obj: (fpnew_pkg::fp_width::man_bits), line:38:59, endln:38:67
               |vpiParent:
               \_hier_path: (FP_ENCODINGS[fmt].man_bits), line:38:41, endln:38:67
               |vpiName:man_bits
+              |vpiFullName:fpnew_pkg::fp_width::man_bits
               |vpiActual:
               \_typespec_member: (man_bits), line:8:18, endln:8:26
         |vpiOperand:
@@ -1614,8 +1606,6 @@ design: (work@top)
   |vpiTop:1
   |vpiTaskFunc:
   \_function: (fpnew_pkg::fp_width), line:37:3, endln:39:14
-    |vpiParent:
-    \_package: fpnew_pkg (fpnew_pkg::), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:1:1, endln:41:11
     |vpiName:fp_width
     |vpiFullName:fpnew_pkg::fp_width
     |vpiVisibility:1
@@ -1626,8 +1616,6 @@ design: (work@top)
       \_int_typespec: , line:37:22, endln:37:34
         |vpiInstance:
         \_package: fpnew_pkg (fpnew_pkg::), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:1:1, endln:41:11
-    |vpiParent:
-    \_package: fpnew_pkg (fpnew_pkg::), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:1:1, endln:41:11
     |vpiIODecl:
     \_io_decl: (fmt), line:37:56, endln:37:59
       |vpiParent:
@@ -1656,29 +1644,27 @@ design: (work@top)
             \_operation: , line:38:12, endln:38:67
             |vpiName:FP_ENCODINGS[fmt].exp_bits
             |vpiActual:
-            \_bit_select: (FP_ENCODINGS), line:38:12, endln:38:24
+            \_bit_select: (fpnew_pkg::fp_width::FP_ENCODINGS[fmt].exp_bits::FP_ENCODINGS), line:38:12, endln:38:24
               |vpiParent:
-              \_ref_obj: (fpnew_pkg::fp_width::FP_ENCODINGS[fmt])
-                |vpiParent:
-                \_hier_path: (FP_ENCODINGS[fmt].exp_bits), line:38:12, endln:38:38
-                |vpiName:FP_ENCODINGS[fmt]
-                |vpiFullName:fpnew_pkg::fp_width::FP_ENCODINGS[fmt]
+              \_hier_path: (FP_ENCODINGS[fmt].exp_bits), line:38:12, endln:38:38
               |vpiName:FP_ENCODINGS
-              |vpiIndex:
-              \_ref_obj: (fpnew_pkg::fp_width::FP_ENCODINGS[fmt]::fmt), line:38:25, endln:38:28
-                |vpiParent:
-                \_bit_select: (FP_ENCODINGS), line:38:12, endln:38:24
-                |vpiName:fmt
-                |vpiFullName:fpnew_pkg::fp_width::FP_ENCODINGS[fmt]::fmt
-                |vpiActual:
-                \_io_decl: (fmt), line:37:56, endln:37:59
+              |vpiFullName:fpnew_pkg::fp_width::FP_ENCODINGS[fmt].exp_bits::FP_ENCODINGS
               |vpiActual:
               \_parameter: (fpnew_pkg::FP_ENCODINGS), line:20:49, endln:20:61
+              |vpiIndex:
+              \_ref_obj: (fpnew_pkg::fp_width::FP_ENCODINGS[fmt].exp_bits::fmt), line:38:25, endln:38:28
+                |vpiParent:
+                \_bit_select: (fpnew_pkg::fp_width::FP_ENCODINGS[fmt].exp_bits::FP_ENCODINGS), line:38:12, endln:38:24
+                |vpiName:fmt
+                |vpiFullName:fpnew_pkg::fp_width::FP_ENCODINGS[fmt].exp_bits::fmt
+                |vpiActual:
+                \_io_decl: (fmt), line:37:56, endln:37:59
             |vpiActual:
-            \_ref_obj: (exp_bits), line:38:30, endln:38:38
+            \_ref_obj: (fpnew_pkg::fp_width::exp_bits), line:38:30, endln:38:38
               |vpiParent:
               \_hier_path: (FP_ENCODINGS[fmt].exp_bits), line:38:12, endln:38:38
               |vpiName:exp_bits
+              |vpiFullName:fpnew_pkg::fp_width::exp_bits
               |vpiActual:
               \_typespec_member: (exp_bits), line:7:18, endln:7:26
           |vpiOperand:
@@ -1687,29 +1673,27 @@ design: (work@top)
             \_operation: , line:38:12, endln:38:67
             |vpiName:FP_ENCODINGS[fmt].man_bits
             |vpiActual:
-            \_bit_select: (FP_ENCODINGS), line:38:41, endln:38:53
+            \_bit_select: (fpnew_pkg::fp_width::FP_ENCODINGS[fmt].man_bits::FP_ENCODINGS), line:38:41, endln:38:53
               |vpiParent:
-              \_ref_obj: (fpnew_pkg::fp_width::FP_ENCODINGS[fmt])
-                |vpiParent:
-                \_hier_path: (FP_ENCODINGS[fmt].man_bits), line:38:41, endln:38:67
-                |vpiName:FP_ENCODINGS[fmt]
-                |vpiFullName:fpnew_pkg::fp_width::FP_ENCODINGS[fmt]
+              \_hier_path: (FP_ENCODINGS[fmt].man_bits), line:38:41, endln:38:67
               |vpiName:FP_ENCODINGS
-              |vpiIndex:
-              \_ref_obj: (fpnew_pkg::fp_width::FP_ENCODINGS[fmt]::fmt), line:38:54, endln:38:57
-                |vpiParent:
-                \_bit_select: (FP_ENCODINGS), line:38:41, endln:38:53
-                |vpiName:fmt
-                |vpiFullName:fpnew_pkg::fp_width::FP_ENCODINGS[fmt]::fmt
-                |vpiActual:
-                \_io_decl: (fmt), line:37:56, endln:37:59
+              |vpiFullName:fpnew_pkg::fp_width::FP_ENCODINGS[fmt].man_bits::FP_ENCODINGS
               |vpiActual:
               \_parameter: (fpnew_pkg::FP_ENCODINGS), line:20:49, endln:20:61
+              |vpiIndex:
+              \_ref_obj: (fpnew_pkg::fp_width::FP_ENCODINGS[fmt].man_bits::fmt), line:38:54, endln:38:57
+                |vpiParent:
+                \_bit_select: (fpnew_pkg::fp_width::FP_ENCODINGS[fmt].man_bits::FP_ENCODINGS), line:38:41, endln:38:53
+                |vpiName:fmt
+                |vpiFullName:fpnew_pkg::fp_width::FP_ENCODINGS[fmt].man_bits::fmt
+                |vpiActual:
+                \_io_decl: (fmt), line:37:56, endln:37:59
             |vpiActual:
-            \_ref_obj: (man_bits), line:38:59, endln:38:67
+            \_ref_obj: (fpnew_pkg::fp_width::man_bits), line:38:59, endln:38:67
               |vpiParent:
               \_hier_path: (FP_ENCODINGS[fmt].man_bits), line:38:41, endln:38:67
               |vpiName:man_bits
+              |vpiFullName:fpnew_pkg::fp_width::man_bits
               |vpiActual:
               \_typespec_member: (man_bits), line:8:18, endln:8:26
         |vpiOperand:
@@ -1984,7 +1968,7 @@ design: (work@top)
         |vpiPattern:
         \_constant: , line:32:20, endln:32:24
           |vpiParent:
-          \_tagged_pattern: , line:32:20, endln:32:24
+          \_operation: , line:52:9, endln:52:52
           |vpiDecompile:1'b1
           |vpiSize:1
           |BIN:1
@@ -2180,19 +2164,15 @@ design: (work@top)
             |vpiLhs:
             \_bit_select: (work@top.gen_nanbox_check[1].no_check.is_boxed), line:59:14, endln:59:27
               |vpiParent:
-              \_ref_obj: (work@top.gen_nanbox_check[1].no_check.is_boxed)
-                |vpiParent:
-                \_cont_assign: , line:59:14, endln:59:32
-                |vpiName:is_boxed
-                |vpiFullName:work@top.gen_nanbox_check[1].no_check.is_boxed
+              \_cont_assign: , line:59:14, endln:59:32
               |vpiName:is_boxed
               |vpiFullName:work@top.gen_nanbox_check[1].no_check.is_boxed
               |vpiIndex:
-              \_ref_obj: (work@top.gen_nanbox_check[1].no_check.is_boxed.fmt), line:59:23, endln:59:26
+              \_ref_obj: (work@top.gen_nanbox_check[1].no_check.fmt), line:59:23, endln:59:26
                 |vpiParent:
                 \_bit_select: (work@top.gen_nanbox_check[1].no_check.is_boxed), line:59:14, endln:59:27
                 |vpiName:fmt
-                |vpiFullName:work@top.gen_nanbox_check[1].no_check.is_boxed.fmt
+                |vpiFullName:work@top.gen_nanbox_check[1].no_check.fmt
                 |vpiActual:
                 \_parameter: (work@top.gen_nanbox_check[1].fmt), line:49:0
   |vpiGenScopeArray:

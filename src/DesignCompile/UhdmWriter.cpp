@@ -46,7 +46,7 @@
 #include <cstring>
 
 // UHDM
-#include <uhdm/ElaboratorListener.h>
+#include <uhdm/Elaborator.h>
 #include <uhdm/ExprEval.h>
 #include <uhdm/Serializer.h>
 #include <uhdm/SynthSubset.h>
@@ -426,8 +426,8 @@ bool writeElabParameters(Serializer& s, ModuleInstance* instance,
           }
         } else {
           // Regular param
-          ElaboratorContext elaboratorContext(&s, false, true);
-          any* pclone = UHDM::clone_tree(orig, &elaboratorContext);
+          Elaborator elaborator(&s, false, true);
+          any* pclone = UHDM::clone_tree(orig, &elaborator);
           pclone->VpiParent(m);
           paramSet.emplace(name, pclone);
 
@@ -1697,9 +1697,9 @@ bool UhdmWriter::writeElabProgram(Serializer& s, ModuleInstance* instance,
       const ClockingBlock& cblock = ctupple.second;
       switch (cblock.getType()) {
         case ClockingBlock::Type::Default: {
-          ElaboratorContext elaboratorContext(&s, false, true);
+          Elaborator elaborator(&s, false, true);
           clocking_block* cb = (clocking_block*)UHDM::clone_tree(
-              cblock.getActual(), &elaboratorContext);
+              cblock.getActual(), &elaborator);
           cb->VpiParent(m);
           m->Default_clocking(cb);
           break;
@@ -1709,9 +1709,9 @@ bool UhdmWriter::writeElabProgram(Serializer& s, ModuleInstance* instance,
           break;
         }
         case ClockingBlock::Type::Regular: {
-          ElaboratorContext elaboratorContext(&s, false, true);
+          Elaborator elaborator(&s, false, true);
           clocking_block* cb = (clocking_block*)UHDM::clone_tree(
-              cblock.getActual(), &elaboratorContext);
+              cblock.getActual(), &elaborator);
           cb->VpiParent(m);
           VectorOfclocking_block* cblocks = m->Clocking_blocks();
           if (cblocks == nullptr) {
@@ -1760,8 +1760,8 @@ void UhdmWriter::writeCont_assign(Netlist* netlist, Serializer& s,
       if (delay && delay->UhdmType() == uhdmref_obj) {
         UHDM::any* var = m_helper.bindParameter(
             mod, netlist->getParent(), delay->VpiName(), m_compileDesign, true);
-        ElaboratorContext elaboratorContext(&s, false, true);
-        assign = (cont_assign*)UHDM::clone_tree(assign, &elaboratorContext);
+        Elaborator elaborator(&s, false, true);
+        assign = (cont_assign*)UHDM::clone_tree(assign, &elaborator);
         lhs = assign->Lhs();
         rhs = assign->Rhs();
         tps = lhs->Typespec();
@@ -1777,10 +1777,9 @@ void UhdmWriter::writeCont_assign(Netlist* netlist, Serializer& s,
         if (var) {
           if (rhs->UhdmType() == uhdmoperation) {
             if (cloned == false) {
-              ElaboratorContext elaboratorContext(&s, false, true);
+              Elaborator elaborator(&s, false, true);
               const UHDM::any* pp = assign->VpiParent();
-              assign =
-                  (cont_assign*)UHDM::clone_tree(assign, &elaboratorContext);
+              assign = (cont_assign*)UHDM::clone_tree(assign, &elaborator);
               if (pp != nullptr) assign->VpiParent(const_cast<UHDM::any*>(pp));
               lhs = assign->Lhs();
               rhs = assign->Rhs();
@@ -1827,9 +1826,9 @@ void UhdmWriter::writeCont_assign(Netlist* netlist, Serializer& s,
         expr* tmp = eval.flattenPatternAssignments(s, tps, (expr*)rhs);
         if (tmp->UhdmType() == uhdmoperation) {
           if (cloned == false) {
-            ElaboratorContext elaboratorContext(&s, false, true);
+            Elaborator elaborator(&s, false, true);
             const UHDM::any* pp = assign->VpiParent();
-            assign = (cont_assign*)UHDM::clone_tree(assign, &elaboratorContext);
+            assign = (cont_assign*)UHDM::clone_tree(assign, &elaborator);
             if (pp != nullptr) assign->VpiParent(const_cast<UHDM::any*>(pp));
             assign->VpiParent(m);
             lhs = assign->Lhs();
@@ -1868,9 +1867,8 @@ void UhdmWriter::writeCont_assign(Netlist* netlist, Serializer& s,
           expr* tmp = eval.flattenPatternAssignments(s, tps, (expr*)rhs);
           if (tmp->UhdmType() == uhdmoperation) {
             if (cloned == false) {
-              ElaboratorContext elaboratorContext(&s, false, true);
-              assign =
-                  (cont_assign*)UHDM::clone_tree(assign, &elaboratorContext);
+              Elaborator elaborator(&s, false, true);
+              assign = (cont_assign*)UHDM::clone_tree(assign, &elaborator);
               assign->VpiParent(m);
               lhs = assign->Lhs();
               rhs = assign->Rhs();
@@ -1900,9 +1898,8 @@ void UhdmWriter::writeCont_assign(Netlist* netlist, Serializer& s,
         if (invalidValue == false) {
           if (res && (res->UhdmType() == uhdmconstant)) {
             if (cloned == false) {
-              ElaboratorContext elaboratorContext(&s, false, true);
-              assign =
-                  (cont_assign*)UHDM::clone_tree(assign, &elaboratorContext);
+              Elaborator elaborator(&s, false, true);
+              assign = (cont_assign*)UHDM::clone_tree(assign, &elaborator);
               assign->VpiParent(m);
               lhs = assign->Lhs();
               cloned = true;
@@ -1921,8 +1918,8 @@ void UhdmWriter::writeCont_assign(Netlist* netlist, Serializer& s,
         detector.listenAny(h_rhs);
         vpi_free_object(h_rhs);
         if (detector.unsizedDetected()) {
-          ElaboratorContext elaboratorContext(&s, false, true);
-          assign = (cont_assign*)UHDM::clone_tree(assign, &elaboratorContext);
+          Elaborator elaborator(&s, false, true);
+          assign = (cont_assign*)UHDM::clone_tree(assign, &elaborator);
           assign->VpiParent(m);
           cloned = true;
         }
@@ -2085,9 +2082,9 @@ bool UhdmWriter::writeElabGenScope(Serializer& s, ModuleInstance* instance,
         break;
       }
       case ClockingBlock::Type::Regular: {
-        ElaboratorContext elaboratorContext(&s, false, true);
-        clocking_block* cb = (clocking_block*)UHDM::clone_tree(
-            cblock.getActual(), &elaboratorContext);
+        Elaborator elaborator(&s, false, true);
+        clocking_block* cb =
+            (clocking_block*)UHDM::clone_tree(cblock.getActual(), &elaborator);
         cb->VpiParent(m);
         VectorOfclocking_block* cblocks = m->Clocking_blocks();
         if (cblocks == nullptr) {
@@ -2794,9 +2791,8 @@ void UhdmWriter::lateBinding(Serializer& s, DesignComponent* mod, scope* m) {
         function* func = (function*)parent;
         if (parent->VpiName() == name) {
           if (const any* ret = func->Return()) {
-            ElaboratorContext elaboratorContext(&s, false, true);
-            variables* var =
-                (variables*)UHDM::clone_tree(ret, &elaboratorContext);
+            Elaborator elaborator(&s, false, true);
+            variables* var = (variables*)UHDM::clone_tree(ret, &elaborator);
             var->VpiName(name);
             var->VpiParent(ref);
             ref->Actual_group(var);
@@ -3389,9 +3385,9 @@ bool UhdmWriter::writeElabModule(Serializer& s, ModuleInstance* instance,
     ModuleDefinition* def = (ModuleDefinition*)mod;
     for (const auto& ctupple : def->getClockingBlockMap()) {
       const ClockingBlock& cblock = ctupple.second;
-      ElaboratorContext elaboratorContext(&s, false, true);
-      clocking_block* cb = (clocking_block*)UHDM::clone_tree(
-          cblock.getActual(), &elaboratorContext);
+      Elaborator elaborator(&s, false, true);
+      clocking_block* cb =
+          (clocking_block*)UHDM::clone_tree(cblock.getActual(), &elaborator);
       cb->VpiParent(m);
       switch (cblock.getType()) {
         case ClockingBlock::Type::Default: {
@@ -3572,9 +3568,9 @@ bool UhdmWriter::writeElabInterface(Serializer& s, ModuleInstance* instance,
     ModuleDefinition* def = (ModuleDefinition*)mod;
     for (const auto& ctupple : def->getClockingBlockMap()) {
       const ClockingBlock& cblock = ctupple.second;
-      ElaboratorContext elaboratorContext(&s, false, true);
-      clocking_block* cb = (clocking_block*)UHDM::clone_tree(
-          cblock.getActual(), &elaboratorContext);
+      Elaborator elaborator(&s, false, true);
+      clocking_block* cb =
+          (clocking_block*)UHDM::clone_tree(cblock.getActual(), &elaborator);
       cb->VpiParent(m);
       switch (cblock.getType()) {
         case ClockingBlock::Type::Default: {
@@ -4411,11 +4407,10 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
     m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
         m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
 
-    if (ElaboratorContext* elaboratorContext =
-            new ElaboratorContext(&s, false, false)) {
-      elaboratorContext->m_elaborator.uniquifyTypespec(false);
-      elaboratorContext->m_elaborator.listenDesigns(designs);
-      delete elaboratorContext;
+    if (Elaborator* elaborator = new Elaborator(&s, false, false)) {
+      elaborator->uniquifyTypespec(false);
+      elaborator->elaborate(designs);
+      delete elaborator;
     }
 
     if (m_compileDesign->getCompiler()

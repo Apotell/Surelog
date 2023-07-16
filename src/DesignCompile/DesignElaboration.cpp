@@ -44,7 +44,7 @@
 #include <Surelog/Utils/StringUtils.h>
 
 // UHDM
-#include <uhdm/ElaboratorListener.h>
+#include <uhdm/Elaborator.h>
 #include <uhdm/ExprEval.h>
 #include <uhdm/clone_tree.h>
 #include <uhdm/uhdm.h>
@@ -662,8 +662,8 @@ const UHDM::any* resize(UHDM::Serializer& serializer, const UHDM::any* object,
   if (type == UHDM::uhdmconstant) {
     UHDM::constant* c = (UHDM::constant*)result;
     if (c->VpiSize() < maxsize) {
-      UHDM::ElaboratorContext elaboratorContext(&serializer);
-      c = (UHDM::constant*)UHDM::clone_tree(c, &elaboratorContext);
+      UHDM::Elaborator elaborator(&serializer);
+      c = (UHDM::constant*)UHDM::clone_tree(c, &elaborator);
       int32_t constType = c->VpiConstType();
       const UHDM::typespec* tps = c->Typespec();
       bool is_signed = false;
@@ -1909,8 +1909,8 @@ std::vector<std::string_view> DesignElaboration::collectParams_(
         const std::string_view name = packageFile->SymName(ident);
         if (UHDM::expr* exp = def->getComplexValue(name)) {
           UHDM::Serializer& s = m_compileDesign->getSerializer();
-          UHDM::ElaboratorContext elaboratorContext(&s, false, true);
-          UHDM::any* pclone = UHDM::clone_tree(exp, &elaboratorContext);
+          UHDM::Elaborator elaborator(&s, false, true);
+          UHDM::any* pclone = UHDM::clone_tree(exp, &elaborator);
           instance->setComplexValue(name, (UHDM::expr*)pclone);
         } else {
           Value* value = m_exprBuilder.clone(def->getValue(name));

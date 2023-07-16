@@ -26,7 +26,7 @@
 #include <Surelog/DesignCompile/CompileHelper.h>
 
 // UHDM
-#include <uhdm/ElaboratorListener.h>
+#include <uhdm/Elaborator.h>
 #include <uhdm/clone_tree.h>
 #include <uhdm/uhdm.h>
 
@@ -77,13 +77,13 @@ UHDM::property_inst* createPropertyInst(DesignComponent* component,
     UHDM::func_call* call = (UHDM::func_call*)property_expr;
     UHDM::property_inst* real_property_expr = s.MakeProperty_inst();
     if (call->Tf_call_args()) {
-      UHDM::ElaboratorContext elaboratorContext(&s, false, true);
+      UHDM::Elaborator elaborator(&s, false, true);
       UHDM::VectorOfany* args = s.MakeAnyVec();
       real_property_expr->VpiArguments(args);
       for (auto arg : *call->Tf_call_args()) {
         if (arg->UhdmType() == UHDM::uhdmref_obj) {
           UHDM::ref_obj* ref =
-              (UHDM::ref_obj*)UHDM::clone_tree(arg, &elaboratorContext);
+              (UHDM::ref_obj*)UHDM::clone_tree(arg, &elaborator);
           args->emplace_back(ref);
           ref->VpiParent(real_property_expr);
           component->needLateBinding(ref);

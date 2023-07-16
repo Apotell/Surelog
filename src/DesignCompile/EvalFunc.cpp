@@ -30,7 +30,7 @@
 #include <Surelog/Utils/StringUtils.h>
 
 // UHDM
-#include <uhdm/ElaboratorListener.h>
+#include <uhdm/Elaborator.h>
 #include <uhdm/ExprEval.h>
 #include <uhdm/clone_tree.h>
 #include <uhdm/uhdm.h>

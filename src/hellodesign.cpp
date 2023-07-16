@@ -34,7 +34,7 @@
 #include <iostream>
 
 // UHDM
-#include <uhdm/ElaboratorListener.h>
+#include <uhdm/Elaborator.h>
 #include <uhdm/VpiListener.h>
 #include <uhdm/uhdm.h>
 

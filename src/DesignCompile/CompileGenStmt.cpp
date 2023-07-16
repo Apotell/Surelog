@@ -56,7 +56,7 @@
 
 // UHDM
 #include <string.h>
-#include <uhdm/ElaboratorListener.h>
+#include <uhdm/Elaborator.h>
 #include <uhdm/ExprEval.h>
 #include <uhdm/VpiListener.h>
 #include <uhdm/clone_tree.h>

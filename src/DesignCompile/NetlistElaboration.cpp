@@ -49,7 +49,7 @@
 #include <algorithm>
 
 // UHDM
-#include <uhdm/ElaboratorListener.h>
+#include <uhdm/Elaborator.h>
 #include <uhdm/ExprEval.h>
 #include <uhdm/clone_tree.h>
 #include <uhdm/uhdm.h>
@@ -209,16 +209,16 @@ bool NetlistElaboration::elab_parameters_(ModuleInstance* instance,
           // Don't reduce these operations
           if (opType == vpiAssignmentPatternOp ||
               opType == vpiMultiAssignmentPatternOp) {
-            ElaboratorContext elaboratorContext(&s, false, true);
+            Elaborator elaborator(&s, false, true);
             param_assign* pclone =
-                (param_assign*)UHDM::clone_tree(mod_assign, &elaboratorContext);
+                (param_assign*)UHDM::clone_tree(mod_assign, &elaborator);
             pclone->VpiParent((any*)mod_assign->VpiParent());
             pclone->VpiOverriden(instance->isOverridenParam(paramName));
             if (opType == vpiAssignmentPatternOp) {
               const any* lhs = pclone->Lhs();
               any* rhs = (any*)pclone->Rhs();
               if (complexVal) {
-                rhs = UHDM::clone_tree(complexVal, &elaboratorContext);
+                rhs = UHDM::clone_tree(complexVal, &elaborator);
                 rhs->VpiParent(pclone);
               }
               const typespec* ts = nullptr;

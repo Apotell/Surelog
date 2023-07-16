@@ -29,7 +29,7 @@
 #include <Surelog/Common/PlatformFileSystem.h>
 #include <Surelog/ErrorReporting/ErrorContainer.h>
 #include <Surelog/SourceCompile/SymbolTable.h>
-#include <uhdm/ElaboratorListener.h>
+#include <uhdm/Elaborator.h>
 #include <uhdm/UhdmListener.h>
 #include <uhdm/VpiListener.h>
 #include <uhdm/uhdm.h>

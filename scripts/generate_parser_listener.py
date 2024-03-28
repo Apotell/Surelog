@@ -31,7 +31,7 @@ _forced_pp_typenames = set([
   'Ps_identifier',
 ])
 
-_forced_pa_typenames = set([
+_forced_pa_rules = set([
   'TimeUnitsDecl_TimeUnitDiv',
   'TimeUnitsDecl_TimeUnit',
   'TimeUnitsDecl_TimePrecision',
@@ -168,7 +168,10 @@ _forced_pa_typenames = set([
   'BinModOp_BitwOr',
   'BinModOp_BitwXor',
   'BinModOp_ReductXnor1',
-  'BinModOp_ReductXnor2',
+  'BinModOp_ReductXnor2'
+])
+
+_forced_pa_tokens = set([
 
   # Forced ones
   '0',
@@ -318,6 +321,8 @@ _forced_pa_typenames = set([
   'NonBlockingTriggerEvent',
 ])
 
+_forced_pa_typenames = set.union(_forced_pa_rules, _forced_pa_tokens)
+
 _blacklisted_typenames = set([
   'ErrorNode',
   'EveryRule',
@@ -446,7 +451,7 @@ def _generate_XXXTreeShapeListener_h(listener: str, antlr_definition_filepath: s
       '',
       '  public:',
       '    SV3_1aTreeShapeListener(ParseFile* pf, antlr4::CommonTokenStream* tokens, uint32_t lineOffset);',
-      '    virtual ~SV3_1aTreeShapeListener() override;',
+      '    ~SV3_1aTreeShapeListener() override;',
       ''
     ])
   else:
@@ -759,7 +764,7 @@ def _generate_VObjectTypes_py_h(pp_typenames: list, pa_typenames: list, filepath
 def _generate_SV3_1aPpParseTreeListener_cpp(tokens: list, rules: list, template_filepath: str, output_filepath: str):
   rule_case_statements = [f'    case SV3_1aPpParser::Rule{rule}: addVObject(ctx, VObjectType::pp{rule}); break;' for rule in rules]
   visit_case_statements = [
-    f'    case SV3_1aPpParser::{token}: addVObject((antlr4::ParserRuleContext *)node, node->getText(), VObjectType::pp{token}); break;'
+    f'    case SV3_1aPpParser::{token}: addVObject(node, VObjectType::pp{token}); break;'
     for token in tokens
   ]
 
@@ -772,8 +777,8 @@ def _generate_SV3_1aPpParseTreeListener_cpp(tokens: list, rules: list, template_
 def _generate_SV3_1aParseTreeListener_cpp(tokens: list, rules: list, template_filepath: str, output_filepath: str):
   rule_case_statements = [f'    case SV3_1aParser::Rule{rule}: nodeId = addVObject(ctx, VObjectType::pa{rule}); break;' for rule in rules]
   visit_case_statements = [
-    f'    case SV3_1aParser::{token}: nodeId = addVObject((antlr4::ParserRuleContext *)node, node->getText(), VObjectType::pa{token}); break;'
-    for token in tokens if token not in ['Escaped_identifier']
+    f'    case SV3_1aParser::{token}: nodeId = addVObject(node, VObjectType::pa{token}); break;'
+    for token in tokens if token not in ['Escaped_identifier', 'PREPROC_BEGIN', 'PREPROC_END']
   ]
 
   content = open(template_filepath, 'rt').read()
@@ -817,7 +822,7 @@ def _generate_ParseTreeListener_cpp(pp_tokens: list, pp_rules: list, pa_tokens: 
       private_listen_implementations.extend([
        f'void ParseTreeListener::listen{prefix}_{rule}(const ParseTreeNode& node) {{',
        f'  enter{prefix}_{rule}(node);',
-        '  listenChildren(node, true);',
+        '  listenChildren(node);',
        f'  leave{prefix}_{rule}(node);',
         '}',
         ''
@@ -931,6 +936,22 @@ def _main():
   _generate_VObjectTypes_py_h(
     pp_typenames, pa_typenames,
     os.path.join(args.output_dirpath, 'include', 'Surelog', 'API', 'VObjectTypes_py.h'))
+
+  _generate_SV3_1aPpParseTreeListener_cpp(
+    pp_tokens, pp_rules,
+    os.path.join(args.input_dirpath, 'src', 'SourceCompile', 'SV3_1aPpParseTreeListener.template.cxx'),
+    os.path.join(args.output_dirpath, 'src', 'SourceCompile', 'SV3_1aPpParseTreeListener.cpp'))
+
+  _generate_SV3_1aParseTreeListener_cpp(
+    pa_tokens, pa_rules,
+    os.path.join(args.input_dirpath, 'src', 'SourceCompile', 'SV3_1aParseTreeListener.template.cxx'),
+    os.path.join(args.output_dirpath, 'src', 'SourceCompile', 'SV3_1aParseTreeListener.cpp'))
+
+  pa_rules = set.union(set(pa_rules), _forced_pa_rules)
+  pa_rules = sorted(pa_rules)
+
+  pa_tokens = set.union(set(pa_tokens), _forced_pa_tokens)
+  pa_tokens = sorted(pa_tokens)
 
   _generate_ParseTreeListener_h(
     pp_tokens, pp_rules, pa_tokens, pa_rules,

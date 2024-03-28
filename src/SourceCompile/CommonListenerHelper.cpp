@@ -24,11 +24,19 @@
 #include <Surelog/Design/DesignElement.h>
 #include <Surelog/Design/FileContent.h>
 #include <Surelog/SourceCompile/CommonListenerHelper.h>
+#include <Surelog/Utils/StringUtils.h>
 #include <antlr4-runtime.h>
 
 namespace SURELOG {
 
 using antlr4::ParserRuleContext;
+
+CommonListenerHelper::CommonListenerHelper(FileContent* file_content,
+                                           antlr4::CommonTokenStream* tokens)
+    : m_fileContent(file_content),
+      m_tokens(tokens),
+      m_escSeqReplaceRegex(kEscapeSequence),
+      m_escSeqSearchRegex(StrCat(kEscapeSequence, "(.*?)", kEscapeSequence)) {}
 
 NodeId CommonListenerHelper::NodeIdFromContext(
     const antlr4::tree::ParseTree* ctx) const {
@@ -137,11 +145,7 @@ void CommonListenerHelper::addParentChildRelations(NodeId indexParent,
 
 NodeId CommonListenerHelper::getObjectId(ParserRuleContext* ctx) const {
   auto itr = m_contextToObjectMap.find(ctx);
-  if (itr == m_contextToObjectMap.end()) {
-    return InvalidNodeId;
-  } else {
-    return (*itr).second;
-  }
+  return (itr == m_contextToObjectMap.end()) ? InvalidNodeId : itr->second;
 }
 
 }  // namespace SURELOG

@@ -33,6 +33,7 @@
 #include <Surelog/SourceCompile/Compiler.h>
 #include <Surelog/SourceCompile/MacroInfo.h>
 #include <Surelog/SourceCompile/PreprocessFile.h>
+#include <Surelog/SourceCompile/SV3_1aPpParseTreeListener.h>
 #include <Surelog/SourceCompile/SV3_1aPpTreeShapeListener.h>
 #include <Surelog/SourceCompile/SymbolTable.h>
 #include <Surelog/Utils/StringUtils.h>
@@ -341,8 +342,8 @@ bool PreprocessFile::preprocess() {
     if (cache.restore(clp->lowMem() || clp->noCacheHash())) {
       m_usingCachedVersion = true;
       getCompilationUnit()->setCurrentTimeInfo(getFileId(0));
-      if (m_debugAstModel && !precompiled)
-        std::cout << m_fileContent->printObjects();
+      if (m_debugAstModel && !precompiled && m_fileId)
+        m_fileContent->printTree(std::cout);
       if (precompiled || clp->noCacheHash()) {
         if (clp->debugCache()) {
           std::cout << "PP CACHE USED FOR: " << PathIdPP(m_fileId) << std::endl;
@@ -500,7 +501,7 @@ bool PreprocessFile::preprocess() {
                   fileSystem->toPath(m_fileId), "\n");
         tmr.reset();
       }
-    } catch (antlr4::ParseCancellationException& pex) {
+    } catch (antlr4::ParseCancellationException&) {
       m_antlrParserHandler->m_pptokens->reset();
       m_antlrParserHandler->m_ppparser->reset();
       m_antlrParserHandler->m_ppparser->addErrorListener(
@@ -540,13 +541,20 @@ bool PreprocessFile::preprocess() {
   m_result.clear();
   m_lineCount = 0;
   delete m_listener;
-  m_listener = new SV3_1aPpTreeShapeListener(
-      this, m_antlrParserHandler->m_pptokens, m_instructions);
+
+  if (clp->parseTree()) {
+    m_listener = new SV3_1aPpParseTreeListener(
+        this, m_antlrParserHandler->m_pptokens, m_instructions);
+  } else {
+    m_listener = new SV3_1aPpTreeShapeListener(
+        this, m_antlrParserHandler->m_pptokens, m_instructions);
+  }
+
   // TODO: this leaks
   antlr4::tree::ParseTreeWalker::DEFAULT.walk(m_listener,
                                               m_antlrParserHandler->m_pptree);
-  if (m_debugAstModel && !precompiled)
-    std::cout << m_fileContent->printObjects();
+  if (m_debugAstModel && !precompiled && m_fileId)
+    m_fileContent->printTree(std::cout);
   m_lineCount = LinesCount(m_result);
   return true;
 }

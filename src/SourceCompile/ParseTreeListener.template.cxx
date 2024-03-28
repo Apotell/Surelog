@@ -31,39 +31,6 @@
 #include <algorithm>
 
 namespace SURELOG {
-namespace {
-struct VObjectComparer final {
-  bool operator()(const VObject& lhs, const VObject& rhs) const {
-    // Sort top to bottom, left to right, outer to inner.
-    // The first two conditions apply primarily to the start line/column
-    // The last, outer to inner, applies to the end line/column
-    // i.e. if two tokens share the same start line/column sort the outer
-    // token ahead of the inner one.
-    if (lhs.m_line != rhs.m_line) {
-      return lhs.m_line < rhs.m_line;
-    }
-    if (lhs.m_column != rhs.m_column) {
-      return lhs.m_column < rhs.m_column;
-    }
-    if (lhs.m_endLine != rhs.m_endLine) {
-      return lhs.m_endLine > rhs.m_endLine;
-    }
-    if (lhs.m_endColumn != rhs.m_endColumn) {
-      return lhs.m_endColumn > rhs.m_endColumn;
-    }
-    return false;
-  }
-
-  bool operator()(const NodeId& lhs, const NodeId& rhs) const {
-    if (lhs == rhs) return false;
-    return operator()(m_objects[(RawNodeId)lhs], m_objects[(RawNodeId)rhs]);
-  }
-
-  const VObject* const m_objects = nullptr;
-  explicit VObjectComparer(const VObject* const objects) : m_objects(objects) {}
-};
-}  // namespace
-
 VObjectType ParseTreeListener::getNodeType(const ParseTreeNode& node) const {
   return node ? node.m_object->m_type : VObjectType::sl_INVALID_;
 }
@@ -80,6 +47,15 @@ ParseTreeNode ParseTreeListener::getRootNode() const {
 
 bool ParseTreeListener::getNodeText(const ParseTreeNode& node,
                                     std::string& text) const {
+  if (node && node.m_object->m_name) {
+    text = m_symbolTable->getSymbol(node.m_object->m_name);
+    return true;
+  }
+  return false;
+}
+
+bool ParseTreeListener::getNodeText(const ParseTreeNode& node,
+                                    std::string_view& text) const {
   if (node && node.m_object->m_name) {
     text = m_symbolTable->getSymbol(node.m_object->m_name);
     return true;
@@ -134,25 +110,13 @@ ParseTreeNode ParseTreeListener::getNodeParent(
 }
 
 bool ParseTreeListener::getNodeChildren(
-    const ParseTreeNode& node, bool ordered,
-    parsetreenode_vector_t& children) const {
+    const ParseTreeNode& node, parsetreenode_vector_t& children) const {
   if (!node) return false;
   if (!node.m_object->m_child) return true;
 
-  std::vector<NodeId> indexes;
-  indexes.reserve(16);
   for (NodeId id = node.m_object->m_child; id;
        id = m_objects[(RawNodeId)id].m_sibling) {
-    indexes.emplace_back(id);
-  }
-
-  if (ordered) {
-    std::sort(indexes.begin(), indexes.end(), VObjectComparer(m_objects));
-  }
-
-  children.reserve(children.size() + indexes.size());
-  for (const NodeId& index : indexes) {
-    children.emplace_back(index, &m_objects[(RawNodeId)index]);
+    children.emplace_back(id, &m_objects[(RawNodeId)id]);
   }
 
   return true;
@@ -162,7 +126,7 @@ ParseTreeNode ParseTreeListener::getNodePrevSibling(
     const ParseTreeNode& node) const {
   if (const ParseTreeNode parent = getNodeParent(node)) {
     parsetreenode_vector_t children;
-    if (getNodeChildren(parent, true, children)) {
+    if (getNodeChildren(parent, children)) {
       for (size_t i = 1, ni = children.size(); i < ni; ++i) {
         if (children[i].m_index == node.m_index) {
           return children[i - 1];
@@ -177,7 +141,7 @@ ParseTreeNode ParseTreeListener::getNodeNextSibling(
     const ParseTreeNode& node) const {
   if (const ParseTreeNode parent = getNodeParent(node)) {
     parsetreenode_vector_t children;
-    if (getNodeChildren(parent, true, children)) {
+    if (getNodeChildren(parent, children)) {
       for (size_t i = 0, ni = children.size() - 1; i < ni; ++i) {
         if (children[i].m_index == node.m_index) {
           return children[i + 1];
@@ -189,27 +153,17 @@ ParseTreeNode ParseTreeListener::getNodeNextSibling(
 }
 
 bool ParseTreeListener::getNodeSiblings(
-    const ParseTreeNode& node, bool ordered,
-    parsetreenode_vector_t& siblings) const {
+    const ParseTreeNode& node, parsetreenode_vector_t& siblings) const {
   if (!node) return false;
   if (!node.m_object->m_parent) return true;
 
   const VObject& parent = m_objects[(RawNodeId)node.m_object->m_parent];
 
-  std::vector<NodeId> indexes;
-  indexes.reserve(16);
   for (NodeId id = parent.m_child; id;
        id = m_objects[(RawNodeId)id].m_sibling) {
-    if (id != node.m_index) indexes.emplace_back(id);
-  }
-
-  if (ordered) {
-    std::sort(indexes.begin(), indexes.end(), VObjectComparer(m_objects));
-  }
-
-  siblings.reserve(siblings.size() + indexes.size());
-  for (const NodeId& index : indexes) {
-    siblings.emplace_back(index, &m_objects[(RawNodeId)index]);
+    if (id != node.m_index) {
+      siblings.emplace_back(id, &m_objects[(RawNodeId)id]);
+    }
   }
 
   return true;
@@ -226,47 +180,27 @@ void ParseTreeListener::listen(PathId fileId, const VObject* objects,
   leaveSourceFile(fileId);
 }
 
-void ParseTreeListener::listenChildren(const ParseTreeNode& node,
-                                       bool ordered) {
+void ParseTreeListener::listenChildren(const ParseTreeNode& node) {
   if (!node || !node.m_object->m_child) return;
 
-  std::vector<NodeId> indexes;
-  indexes.reserve(16);
   for (NodeId id = node.m_object->m_child; id;
        id = m_objects[(RawNodeId)id].m_sibling) {
-    indexes.emplace_back(id);
-  }
-
-  if (ordered) {
-    std::sort(indexes.begin(), indexes.end(), VObjectComparer(m_objects));
-  }
-
-  for (const NodeId& index : indexes) {
-    const ParseTreeNode childNode(index, &m_objects[(RawNodeId)index]);
+    const ParseTreeNode childNode(id, &m_objects[(RawNodeId)id]);
     listen(childNode);
   }
 }
 
-void ParseTreeListener::listenSiblings(const ParseTreeNode& node,
-                                       bool ordered) {
+void ParseTreeListener::listenSiblings(const ParseTreeNode& node) {
   if (!node || !node.m_object->m_parent) return;
 
   const VObject& parent = m_objects[(RawNodeId)node.m_object->m_parent];
 
-  std::vector<NodeId> indexes;
-  indexes.reserve(16);
   for (NodeId id = parent.m_child; id;
        id = m_objects[(RawNodeId)id].m_sibling) {
-    if (id != node.m_index) indexes.emplace_back(id);
-  }
-
-  if (ordered) {
-    std::sort(indexes.begin(), indexes.end(), VObjectComparer(m_objects));
-  }
-
-  for (const NodeId& index : indexes) {
-    const ParseTreeNode siblingNode(index, &m_objects[(RawNodeId)index]);
-    listen(siblingNode);
+    if (id != node.m_index) {
+      const ParseTreeNode siblingNode(id, &m_objects[(RawNodeId)id]);
+      listen(siblingNode);
+    }
   }
 }
 

@@ -69,7 +69,17 @@ std::string_view FileContent::SymName(NodeId index) const {
 }
 
 NodeId FileContent::getRootNode() const {
-  return m_objects.empty() ? InvalidNodeId : m_objects[1].m_sibling;
+  if (m_objects.empty()) return InvalidNodeId;
+
+  int32_t index = static_cast<int32_t>(m_objects.size());
+  while (--index >= 0) {
+    if ((m_objects[index].m_type == VObjectType::ppTop_level_rule) ||
+        (m_objects[index].m_type == VObjectType::paTop_level_rule) ||
+        (m_objects[index].m_type == VObjectType::paTop_level_library_rule)) {
+      return NodeId(index);
+    }
+  }
+  return InvalidNodeId;
 }
 
 PathId FileContent::getFileId(NodeId id) const {
@@ -80,19 +90,35 @@ PathId* FileContent::getMutableFileId(NodeId id) {
   return &m_objects[id].m_fileId;
 }
 
+void FileContent::printTree(std::ostream& strm, NodeId id,
+                            size_t indent /* = 0 */) const {
+  if (!id) return;
+
+  strm << std::string(indent * 2, ' ')
+       << m_objects[id].print(m_symbolTable, id, GetDefinitionFile(id),
+                              m_fileId)
+       << std::endl;
+  for (NodeId childId = m_objects[id].m_child; childId;
+       childId = m_objects[childId].m_sibling) {
+    printTree(strm, childId, indent + 1);
+  }
+}
+
+void FileContent::printTree(std::ostream& strm) const {
+  strm << "AST_DEBUG_BEGIN" << std::endl;
+  if (m_library) strm << "LIB: " << m_library->getName() << std::endl;
+  strm << "FILE: " << FileSystem::getInstance()->toPath(m_fileId) << std::endl;
+  printTree(strm, getRootNode(), 0);
+  strm << "AST_DEBUG_END" << std::endl;
+}
+
 std::string FileContent::printObjects() const {
   std::string text;
-  NodeId index(0);
-
   StrAppend(&text, "AST_DEBUG_BEGIN\n");
   if (m_library) StrAppend(&text, "LIB:  ", m_library->getName(), "\n");
   StrAppend(&text, "FILE: ", FileSystem::getInstance()->toPath(m_fileId), "\n");
-  for (const auto& object : m_objects) {
-    StrAppend(
-        &text,
-        object.print(m_symbolTable, index, GetDefinitionFile(index), m_fileId),
-        "\n");
-    index++;
+  for (size_t i = 0, ni = m_objects.size(); i < ni; ++i) {
+    StrAppend(&text, printObject(NodeId(i)), "\n");
   }
   StrAppend(&text, "AST_DEBUG_END\n");
   return text;
@@ -104,25 +130,14 @@ std::string FileContent::printObject(NodeId nodeId) const {
                                  GetDefinitionFile(nodeId), m_fileId);
 }
 
-std::string FileContent::printSubTree(NodeId nodeId) const {
-  if (!nodeId || (nodeId >= m_objects.size())) return "";
-  std::string text;
-  for (const auto& s : collectSubTree(nodeId)) {
-    text += s + "\n";
-  }
-  return text;
-}
-
 void FileContent::insertObjectLookup(std::string_view name, NodeId id,
                                      ErrorContainer* errors) {
-  NameIdMap::iterator itr = m_objectLookup.find(name);
-  if (itr == m_objectLookup.end()) {
-    m_objectLookup.emplace(name, id);
-  } else {
+  std::pair<NameIdMap::iterator, bool> itr = m_objectLookup.emplace(name, id);
+  if (!itr.second) {
     Location loc(getFileId(id), Line(id), Column(id),
                  errors->getSymbolTable()->registerSymbol(name));
-    Location loc2(getFileId(itr->second), Line(itr->second),
-                  Column(itr->second));
+    Location loc2(getFileId(itr.first->second), Line(itr.first->second),
+                  Column(itr.first->second));
     Error err(ErrorDefinition::COMP_MULTIPLY_DEFINED_DESIGN_UNIT, loc, loc2);
     errors->addError(err);
   }
@@ -178,27 +193,6 @@ const ClassDefinition* FileContent::getClassDefinition(
   } else {
     return (*itr).second;
   }
-}
-
-std::vector<std::string> FileContent::collectSubTree(NodeId index) const {
-  std::vector<std::string> text;
-
-  text.push_back(m_objects[index].print(m_symbolTable, index,
-                                        GetDefinitionFile(index), m_fileId));
-
-  if (m_objects[index].m_child) {
-    for (const auto& s : collectSubTree(m_objects[index].m_child)) {
-      text.push_back("    " + s);
-    }
-  }
-
-  if (m_objects[index].m_sibling) {
-    for (const auto& s : collectSubTree(m_objects[index].m_sibling)) {
-      text.push_back(s);
-    }
-  }
-
-  return text;
 }
 
 void FileContent::SetDefinitionFile(NodeId index, PathId def) {
@@ -719,4 +713,109 @@ void FileContent::populateCoreMembers(NodeId startIndex, NodeId endIndex,
     instance->VpiFile(FileSystem::getInstance()->toPath(fileId));
   }
 }
+
+void FileContent::sortTree(NodeId parentId) {
+  VObject& object = m_objects[(RawNodeId)parentId];
+  if (!object.m_child) return;
+
+  std::vector<NodeId> indicies;
+
+  NodeId childId = object.m_child;
+  while (childId) {
+    sortTree(childId);
+
+    indicies.emplace_back(childId);
+    childId = m_objects[(RawNodeId)childId].m_sibling;
+  }
+  std::sort(indicies.begin(), indicies.end());
+  for (size_t i = 1, ni = indicies.size(); i < ni; ++i) {
+    m_objects[(RawNodeId)indicies[i - 1]].m_sibling = indicies[i];
+  }
+  m_objects[(RawNodeId)indicies.back()].m_sibling = InvalidNodeId;
+  object.m_child = indicies[0];
+}
+
+void FileContent::sortTree() { sortTree(getRootNode()); }
+
+bool FileContent::validate(NodeId parentId) const {
+  const VObject& parentObject = m_objects[(RawNodeId)parentId];
+  if (parentObject.m_line == parentObject.m_endLine) {
+    if (parentObject.m_column > parentObject.m_endColumn) {
+      return false;
+    }
+  } else if (parentObject.m_line > parentObject.m_endLine) {
+    return false;
+  }
+
+  if (!parentObject.m_child) return true;
+
+  uint32_t minLine = parentObject.m_line;
+  uint16_t minColumn = parentObject.m_column;
+
+  uint32_t maxLine = parentObject.m_endLine;
+  uint16_t maxColumn = parentObject.m_endColumn;
+
+  NodeId childId1 = parentObject.m_child;
+  NodeId childId0;
+  while (childId1) {
+    if (!validate(childId1)) {
+      return false;
+    }
+
+    const VObject& child1Object = m_objects[(RawNodeId)childId1];
+
+    if (childId0) {
+      const VObject& child0Object = m_objects[(RawNodeId)childId0];
+
+      if (child0Object.m_line == child1Object.m_line) {
+        if (child1Object.m_column < child0Object.m_endColumn) {
+          return false;
+        }
+      } else if (child1Object.m_line < child0Object.m_line) {
+        return false;
+      } else if (child1Object.m_endLine < child0Object.m_endLine) {
+        return false;
+      }
+    }
+
+    if (child1Object.m_line < minLine) {
+      minLine = child1Object.m_line;
+      minColumn = child1Object.m_column;
+    } else if ((minLine == child1Object.m_line) &&
+               (minColumn > child1Object.m_column)) {
+      minColumn = child1Object.m_column;
+    }
+
+    if (child1Object.m_endLine > maxLine) {
+      maxLine = child1Object.m_endLine;
+      maxColumn = child1Object.m_endColumn;
+    } else if ((maxLine == child1Object.m_endLine) &&
+               (maxColumn < child1Object.m_endColumn)) {
+      maxColumn = child1Object.m_endColumn;
+    }
+
+    childId0 = childId1;
+    childId1 = m_objects[(RawNodeId)childId1].m_sibling;
+  }
+
+  if (minLine > maxLine) {
+    return false;
+  } else if ((minLine == maxLine) && (minColumn > maxColumn)) {
+    return false;
+  }
+
+  if (minLine != parentObject.m_line) {
+    return false;
+  } else if (maxLine != parentObject.m_endLine) {
+    return false;
+  } else if (minColumn != parentObject.m_column) {
+    return false;
+  } else if (maxColumn != parentObject.m_endColumn) {
+    return false;
+  }
+
+  return true;
+}
+
+bool FileContent::validate() const { return validate(getRootNode()); }
 }  // namespace SURELOG

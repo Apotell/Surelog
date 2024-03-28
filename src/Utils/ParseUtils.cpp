@@ -30,15 +30,24 @@ ParseUtils::LineColumn ParseUtils::getLineColumn(antlr4::Token* token) {
   const uint32_t lineNb = static_cast<uint32_t>(token->getLine());
   const uint16_t columnNb =
       static_cast<uint16_t>(token->getCharPositionInLine() + 1);
-  return std::make_pair(lineNb, columnNb);
+  return ParseUtils::LineColumn(lineNb, columnNb);
 }
 
 ParseUtils::LineColumn ParseUtils::getEndLineColumn(antlr4::Token* token) {
-  const uint32_t lineNb = static_cast<uint32_t>(token->getLine());
-  const uint16_t columnNb = static_cast<uint16_t>(
-      token->getCharPositionInLine() + token->getStopIndex() -
-      token->getStartIndex() + 1 + 1);
-  return std::make_pair(lineNb, columnNb);
+  const std::string text = token->getText();
+  const size_t pos = text.rfind('\n');
+  if (pos == std::string::npos) {
+    const uint32_t lineNb = static_cast<uint32_t>(token->getLine());
+    const uint16_t columnNb = static_cast<uint16_t>(
+        token->getCharPositionInLine() + token->getStopIndex() -
+        token->getStartIndex() + 1 + 1);
+    return ParseUtils::LineColumn(lineNb, columnNb);
+  } else {
+    const uint32_t lineNb = static_cast<uint32_t>(token->getLine()) +
+                            std::count(text.begin(), text.end(), '\n');
+    const uint16_t columnNb = static_cast<uint16_t>(text.length() - pos);
+    return ParseUtils::LineColumn(lineNb, columnNb);
+  }
 }
 
 ParseUtils::LineColumn ParseUtils::getLineColumn(
@@ -54,15 +63,16 @@ ParseUtils::LineColumn ParseUtils::getEndLineColumn(
 ParseUtils::LineColumn ParseUtils::getLineColumn(
     antlr4::CommonTokenStream* stream, antlr4::ParserRuleContext* context) {
   const antlr4::misc::Interval sourceInterval = context->getSourceInterval();
-  if (sourceInterval.a == -1) return std::make_pair(0, 0);
-  return getLineColumn(stream->get(sourceInterval.a));
+  return (sourceInterval.a < 0) ? ParseUtils::LineColumn(0, 0)
+                                : getLineColumn(stream->get(sourceInterval.a));
 }
 
 ParseUtils::LineColumn ParseUtils::getEndLineColumn(
     antlr4::CommonTokenStream* stream, antlr4::ParserRuleContext* context) {
   const antlr4::misc::Interval sourceInterval = context->getSourceInterval();
-  if (sourceInterval.b == -1) return std::make_pair(0, 0);
-  return getEndLineColumn(stream->get(sourceInterval.b));
+  return (sourceInterval.b < 0)
+             ? ParseUtils::LineColumn(0, 0)
+             : getEndLineColumn(stream->get(sourceInterval.b));
 }
 
 const std::vector<antlr4::tree::ParseTree*>& ParseUtils::getTopTokenList(

@@ -32,6 +32,8 @@
 #include <Surelog/SourceCompile/VObjectTypes.h>
 
 #include <cstdint>
+#include <string>
+#include <string_view>
 #include <type_traits>
 #include <unordered_set>
 #include <vector>
@@ -98,6 +100,7 @@ class ParseTreeListener {
   ParseTreeListener() = default;
   virtual ~ParseTreeListener() = default;
 
+  virtual bool shouldWalkSourceFile(PathId fileId) { return true; }
   virtual void enterSourceFile(PathId fileId) {}
   virtual void leaveSourceFile(PathId fileId) {}
 
@@ -114,8 +117,8 @@ class ParseTreeListener {
   // clang-format on
 
   void listen(const ParseTreeNode& node);
-  void listenChildren(const ParseTreeNode& node, bool ordered);
-  void listenSiblings(const ParseTreeNode& node, bool ordered);
+  void listenChildren(const ParseTreeNode& node);
+  void listenSiblings(const ParseTreeNode& node);
 
   void listen(PathId fileId, const VObject* objects, size_t count,
               const SymbolTable* symbolTable);
@@ -123,6 +126,7 @@ class ParseTreeListener {
   VObjectType getNodeType(const ParseTreeNode& node) const;
   ParseTreeNode getRootNode() const;
   bool getNodeText(const ParseTreeNode& node, std::string& text) const;
+  bool getNodeText(const ParseTreeNode& node, std::string_view& text) const;
   bool getNodeFileId(const ParseTreeNode& node, PathId& fileId) const;
   bool getNodeStartLocation(const ParseTreeNode& node, int32_t& line,
                             int32_t& column) const;
@@ -134,9 +138,9 @@ class ParseTreeListener {
   ParseTreeNode getNodeParent(const ParseTreeNode& node) const;
   ParseTreeNode getNodePrevSibling(const ParseTreeNode& node) const;
   ParseTreeNode getNodeNextSibling(const ParseTreeNode& node) const;
-  bool getNodeChildren(const ParseTreeNode& node, bool ordered,
+  bool getNodeChildren(const ParseTreeNode& node,
                        parsetreenode_vector_t& children) const;
-  bool getNodeSiblings(const ParseTreeNode& node, bool ordered,
+  bool getNodeSiblings(const ParseTreeNode& node,
                        parsetreenode_vector_t& siblings) const;
 
  private:

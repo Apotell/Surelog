@@ -185,7 +185,7 @@ void SVLibShapeListener::exitHierarchical_identifier(
 
   childCtx = (antlr4::ParserRuleContext *)ctx->children[0];
   ident = ctx->getText();
-  ident = std::regex_replace(ident, std::regex(EscapeSequence), "");
+  ident = std::regex_replace(ident, m_escSeqReplaceRegex, "");
   addVObject(childCtx, ident, VObjectType::slStringConst);
   addVObject(ctx, VObjectType::paHierarchical_identifier);
 

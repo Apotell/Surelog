@@ -30,6 +30,7 @@
 #include <Surelog/SourceCompile/VObjectTypes.h>
 
 #include <map>
+#include <regex>
 #include <string>
 
 namespace antlr4 {
@@ -46,7 +47,13 @@ namespace SURELOG {
 class FileContent;
 class VObject;
 
-static constexpr char EscapeSequence[] = "#~@";
+static constexpr char kEscapeSequence[] = "#~@";
+
+static constexpr std::string_view kPreprocBeginPrefix = "{!< ";
+static constexpr std::string_view kPreprocBeginSuffix = " !}";
+
+static constexpr std::string_view kPreprocEndPrefix = "{! ";
+static constexpr std::string_view kPreprocEndSuffix = " >!}";
 
 class CommonListenerHelper {
  public:
@@ -54,6 +61,7 @@ class CommonListenerHelper {
 
  public:
   FileContent* getFileContent() { return m_fileContent; }
+  const FileContent* getFileContent() const { return m_fileContent; }
 
  protected:
   virtual SymbolId registerSymbol(std::string_view symbol) = 0;
@@ -85,8 +93,7 @@ class CommonListenerHelper {
 
   NodeId getObjectId(antlr4::ParserRuleContext* ctx) const;
 
-  virtual std::tuple<PathId, uint32_t, uint16_t, uint32_t,
-                     uint16_t>
+  virtual std::tuple<PathId, uint32_t, uint16_t, uint32_t, uint16_t>
   getFileLine(antlr4::ParserRuleContext* ctx, antlr4::Token* token) const = 0;
 
   NodeId& MutableChild(NodeId index);
@@ -95,8 +102,7 @@ class CommonListenerHelper {
 
  protected:
   CommonListenerHelper(FileContent* file_content,
-                       antlr4::CommonTokenStream* tokens)
-      : m_fileContent(file_content), m_tokens(tokens) {}
+                       antlr4::CommonTokenStream* tokens);
 
   // These should be *const, but they are still set in some places.
   // TODO: fix these places.
@@ -105,6 +111,9 @@ class CommonListenerHelper {
 
   typedef std::map<const antlr4::tree::ParseTree*, NodeId> ContextToObjectMap;
   ContextToObjectMap m_contextToObjectMap;
+
+  const std::regex m_escSeqReplaceRegex;
+  const std::regex m_escSeqSearchRegex;
 };
 
 }  // namespace SURELOG

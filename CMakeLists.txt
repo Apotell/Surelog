@@ -343,6 +343,8 @@ add_custom_command(
          ${GENDIR}/include/Surelog/SourceCompile/SV3_1aTreeShapeListener.h
          ${GENDIR}/include/Surelog/SourceCompile/VObjectTypes.h
          ${GENDIR}/src/SourceCompile/ParseTreeListener.cpp
+         ${GENDIR}/src/SourceCompile/SV3_1aParseTreeListener.cpp
+         ${GENDIR}/src/SourceCompile/SV3_1aPpParseTreeListener.cpp
          ${GENDIR}/src/SourceCompile/VObjectTypes.cpp
   DEPENDS ${GENDIR}/src/parser/generated-parsers.tstamp
           ${surelog_grammars-GENERATED_SRC}
@@ -350,6 +352,8 @@ add_custom_command(
           ${PROJECT_SOURCE_DIR}/include/Surelog/SourceCompile/ParseTreeTraceListener.template.hpp
           ${PROJECT_SOURCE_DIR}/scripts/generate_parser_listener.py
           ${PROJECT_SOURCE_DIR}/src/SourceCompile/ParseTreeListener.template.cxx
+          ${PROJECT_SOURCE_DIR}/src/SourceCompile/SV3_1aParseTreeListener.template.cxx
+          ${PROJECT_SOURCE_DIR}/src/SourceCompile/SV3_1aPpParseTreeListener.template.cxx
           ${PROJECT_SOURCE_DIR}/src/SourceCompile/SV3_1aPpTreeShapeListener.cpp
           ${PROJECT_SOURCE_DIR}/src/SourceCompile/SV3_1aTreeShapeListener.cpp
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
@@ -367,6 +371,8 @@ add_custom_target(GenerateParserListeners DEPENDS
   ${GENDIR}/include/Surelog/SourceCompile/SV3_1aTreeShapeListener.h
   ${GENDIR}/include/Surelog/SourceCompile/VObjectTypes.h
   ${GENDIR}/src/SourceCompile/ParseTreeListener.cpp
+  ${GENDIR}/src/SourceCompile/SV3_1aParseTreeListener.cpp
+  ${GENDIR}/src/SourceCompile/SV3_1aPpParseTreeListener.cpp
   ${GENDIR}/src/SourceCompile/VObjectTypes.cpp)
 
 if (SURELOG_WITH_PYTHON)
@@ -534,7 +540,9 @@ set(surelog_generated_SRC
 
   # Derived from parser generation.
   ${GENDIR}/src/SourceCompile/VObjectTypes.cpp
-  ${GENDIR}/src/SourceCompile/ParseTreeListener.cpp)
+  ${GENDIR}/src/SourceCompile/ParseTreeListener.cpp
+  ${GENDIR}/src/SourceCompile/SV3_1aParseTreeListener.cpp
+  ${GENDIR}/src/SourceCompile/SV3_1aPpParseTreeListener.cpp)
 
 foreach(gen_src ${surelog_generated_SRC})
   set_source_files_properties(${gen_src} PROPERTIES GENERATED TRUE)

@@ -165,6 +165,12 @@ SV3_1aTreeShapeHelper::getFileLine(antlr4::ParserRuleContext* ctx,
     column = lineCol.second;
     endLine = endLineCol.first;
     endColumn = endLineCol.second;
+  } else if (token != nullptr) {
+    fileId = m_pf->getFileId(lineCol.first + m_lineOffset);
+    line = m_pf->getLineNb(lineCol.first + m_lineOffset);
+    column = lineCol.second;
+    endLine = line + (endLineCol.first - lineCol.first);
+    endColumn = endLineCol.second;
   } else {
     fileId = m_pf->getFileId(lineCol.first + m_lineOffset);
     line = m_pf->getLineNb(lineCol.first + m_lineOffset);

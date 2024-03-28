@@ -468,12 +468,13 @@ void SV3_1aPpTreeShapeListener::enterMacroInstanceWithArgs(
     std::vector<std::string> actualArgs;
     ParseUtils::tokenizeAtComma(actualArgs, tokens);
     macroName.erase(macroName.begin());
-    std::string macroBody;
+
     int32_t openingIndex = -1;
     if (!m_pp->isMacroBody()) {
       m_pp->getSourceFile()->m_loopChecker.clear();
     }
 
+    std::string macroBody;
     MacroInfo *macroInf = m_pp->getMacro(macroName);
     if (macroInf) {
       uint32_t lineSum = m_pp->getSumLineCount() + 1;
@@ -496,32 +497,24 @@ void SV3_1aPpTreeShapeListener::enterMacroInstanceWithArgs(
                 << " BODY: |" << macroBody << "|" << std::endl;
     if (macroBody == PreprocessFile::MacroNotDefined) {
       macroBody += ":" + macroName + "!!! ";
+      macroBody.append(nbCRinArgs, '\n');
       logError(ErrorDefinition::PP_UNKOWN_MACRO, ctx, macroName, true);
     }
     std::string pre;
     std::string post;
 
-    if (macroInf) {
-      if (!m_pp->m_instructions.m_filterFileLine) {
-        if (startLineCol.second == 0) {
-          pre = StrCat("`line ", macroInf->m_startLine, " \"",
-                       fileSystem->toPath(macroInf->m_fileId), "\" 0");
-          post = StrCat("`line ", startLineCol.first + 1, " \"",
-                        fileSystem->toPath(m_pp->getFileId(startLineCol.first)),
-                        "\" 0");
-          if (m_pp->getCompileSourceFile()
-                  ->getCommandLineParser()
-                  ->lineOffsetsAsComments()) {
-            pre = "/* " + pre + "*/";
-            post = "/* " + post + "*/";
-          } else {
-            // Don't insert as parser does not know how to process this
-            // directive in this lexical context
-            pre = "";
-            post = "";
-          }
-        }
-      }
+    if ((macroInf != nullptr) && !m_pp->m_instructions.m_filterFileLine &&
+        (startLineCol.second == 0) &&
+        m_pp->getCompileSourceFile()
+            ->getCommandLineParser()
+            ->lineOffsetsAsComments()) {
+      // Don't insert as parser does not know how to process this
+      // directive in this lexical context
+      pre = StrCat("/* `line ", macroInf->m_startLine, " \"",
+                   fileSystem->toPath(macroInf->m_fileId), "\" 0 */");
+      post = StrCat("/* `line ", startLineCol.first + 1, " \"",
+                    fileSystem->toPath(m_pp->getFileId(startLineCol.first)),
+                    "\" 0 */");
     }
     bool emptyMacroBody = false;
     if (macroBody.empty()) {
@@ -547,19 +540,18 @@ void SV3_1aPpTreeShapeListener::enterMacroInstanceWithArgs(
         line = startLineCol.first;
       }
       uint32_t lineSum = m_pp->getSumLineCount() + 1;
-      int32_t origLine = line;
       int32_t closingIndex = -1;
       if (emptyMacroBody) {
         if (nbCRinArgs) lineSum -= nbCRinArgs;
 
         closingIndex = m_pp->getSourceFile()->addIncludeFileInfo(
-            IncludeFileInfo::Context::MACRO, origLine, BadSymbolId, fileId,
-            lineSum, startLineCol.second,
+            IncludeFileInfo::Context::MACRO, line, BadSymbolId, fileId, lineSum,
+            startLineCol.second,
             lineSum + (endLineCol.first - startLineCol.first),
             endLineCol.second, IncludeFileInfo::Action::POP, openingIndex, 0);
       } else {
         closingIndex = m_pp->getSourceFile()->addIncludeFileInfo(
-            IncludeFileInfo::Context::MACRO, origLine + nbCRinArgs, BadSymbolId,
+            IncludeFileInfo::Context::MACRO, line + nbCRinArgs, BadSymbolId,
             fileId, lineSum, startLineCol.second,
             lineSum + (endLineCol.first - startLineCol.first),
             endLineCol.second, IncludeFileInfo::Action::POP, openingIndex, 0);
@@ -660,28 +652,20 @@ void SV3_1aPpTreeShapeListener::enterMacroInstanceNoArgs(
     std::string pre;
     std::string post;
 
-    if (macroInf) {
-      if (!m_pp->m_instructions.m_filterFileLine) {
-        if (startLineCol.second == 0) {
-          if (macroInf->m_fileId)
-            pre = StrCat("`line ", macroInf->m_startLine, " \"",
-                         fileSystem->toPath(macroInf->m_fileId), "\" 0");
-          post = StrCat("`line ", startLineCol.first + 1, " \"",
-                        fileSystem->toPath(m_pp->getFileId(startLineCol.first)),
-                        "\" 0");
-          if (m_pp->getCompileSourceFile()
-                  ->getCommandLineParser()
-                  ->lineOffsetsAsComments()) {
-            pre = "/* " + pre + "*/";
-            post = "/* " + post + "*/";
-          } else {
-            // Don't insert as parser does not know how to process this
-            // directive in this lexical context
-            pre = "";
-            post = "";
-          }
-        }
+    if (macroInf && !m_pp->m_instructions.m_filterFileLine &&
+        (startLineCol.second == 0) &&
+        m_pp->getCompileSourceFile()
+            ->getCommandLineParser()
+            ->lineOffsetsAsComments()) {
+      // Don't insert as parser does not know how to process this
+      // directive in this lexical context
+      if (macroInf->m_fileId) {
+        pre = StrCat("/* `line ", macroInf->m_startLine, " \"",
+                     fileSystem->toPath(macroInf->m_fileId), "\" 0 */");
       }
+      post = StrCat("/* `line ", startLineCol.first + 1, " \"",
+                    fileSystem->toPath(m_pp->getFileId(startLineCol.first)),
+                    "\" 0 */");
     }
     m_pp->append(pre + macroBody + post);
 
@@ -695,13 +679,11 @@ void SV3_1aPpTreeShapeListener::enterMacroInstanceNoArgs(
         fileId = m_pp->getFileId(startLineCol.first);
         line = startLineCol.first;
       }
-      int32_t nbCRinMacroBody =
-          std::count(macroBody.begin(), macroBody.end(), '\n');
-      if (nbCRinMacroBody) {
+      if (macroBody.find('\n') != std::string::npos) {
         uint32_t lineSum = m_pp->getSumLineCount() + 1;
         int32_t closingIndex = m_pp->getSourceFile()->addIncludeFileInfo(
             IncludeFileInfo::Context::MACRO, line, BadSymbolId, fileId, lineSum,
-            startLineCol.first,
+            startLineCol.second,
             lineSum + (endLineCol.first - startLineCol.first),
             endLineCol.second, IncludeFileInfo::Action::POP, openingIndex, 0);
         if (openingIndex >= 0) {
@@ -958,10 +940,11 @@ void SV3_1aPpTreeShapeListener::enterEscaped_identifier(
   if (m_inActiveBranch &&
       (!(m_filterProtectedRegions && m_inProtectedRegion))) {
     if (!m_inMacroDefinitionParsing) {
-      std::string text = ctx->getText();
-      std::string trunc;
-      for (uint32_t i = 1; i < text.size() - 1; i++) trunc += text[i];
-      m_pp->append(EscapeSequence + trunc + EscapeSequence);
+      const std::string text = ctx->getText();
+      std::string_view trunc = text;
+      trunc.remove_prefix(1);
+      trunc.remove_suffix(1);
+      m_pp->append(StrCat(kEscapeSequence, trunc, kEscapeSequence));
     }
   }
 }

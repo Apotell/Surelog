@@ -31,6 +31,7 @@
 #include <Surelog/SourceCompile/AntlrParserHandler.h>
 #include <Surelog/SourceCompile/CompileSourceFile.h>
 #include <Surelog/SourceCompile/ParseFile.h>
+#include <Surelog/SourceCompile/SV3_1aParseTreeListener.h>
 #include <Surelog/SourceCompile/SV3_1aTreeShapeListener.h>
 #include <Surelog/SourceCompile/SymbolTable.h>
 #include <Surelog/Utils/StringUtils.h>
@@ -374,7 +375,7 @@ bool ParseFile::parseOneFile_(PathId fileId, uint32_t lineOffset) {
       tmr.reset();
       profileParser();
     }
-  } catch (antlr4::ParseCancellationException& pex) {
+  } catch (antlr4::ParseCancellationException&) {
     m_antlrParserHandler->m_tokens->reset();
     m_antlrParserHandler->m_parser->reset();
     m_antlrParserHandler->m_parser->removeErrorListeners();
@@ -458,8 +459,8 @@ bool ParseFile::parse() {
 
     if (cache.restore()) {
       m_usingCachedVersion = true;
-      if (debug_AstModel && !precompiled)
-        std::cout << m_fileContent->printObjects();
+      if (debug_AstModel && !precompiled && m_fileId)
+        m_fileContent->printTree(std::cout);
       if (clp->debugCache()) {
         std::cout << "PARSER CACHE USED FOR: "
                   << fileSystem->toPath(getFileId(0)) << std::endl;
@@ -474,8 +475,8 @@ bool ParseFile::parse() {
       if (cache.restore()) {
         child->m_fileContent->setParent(m_fileContent);
         m_usingCachedVersion = true;
-        if (debug_AstModel && !precompiled)
-          std::cout << child->m_fileContent->printObjects();
+        if (debug_AstModel && !precompiled && m_fileId)
+          child->m_fileContent->printTree(std::cout);
       } else {
         ok = false;
       }
@@ -509,13 +510,20 @@ bool ParseFile::parse() {
     if ((m_parent == nullptr) && (m_children.empty())) {
       Timer tmr;
 
-      m_listener = new SV3_1aTreeShapeListener(
-          this, m_antlrParserHandler->m_tokens, m_offsetLine);
+      if (clp->parseTree()) {
+        FileContent* const ppFileContent =
+            getCompileSourceFile()->getPreprocessor()->getFileContent();
+        m_listener = new SV3_1aParseTreeListener(
+            this, m_antlrParserHandler->m_tokens, m_offsetLine, ppFileContent);
+      } else {
+        m_listener = new SV3_1aTreeShapeListener(
+            this, m_antlrParserHandler->m_tokens, m_offsetLine);
+      }
       antlr4::tree::ParseTreeWalker::DEFAULT.walk(m_listener,
                                                   m_antlrParserHandler->m_tree);
 
-      if (debug_AstModel && !precompiled)
-        std::cout << m_fileContent->printObjects();
+      if (debug_AstModel && !precompiled && m_fileId)
+        m_fileContent->printTree(std::cout);
 
       if (clp->profile()) {
         // m_profileInfo += "AST Walking: " + std::to_string
@@ -545,9 +553,18 @@ bool ParseFile::parse() {
           // Only visit the chunks that got re-parsed
           // TODO: Incrementally regenerate the FileContent
           child->m_fileContent->setParent(m_fileContent);
-          child->m_listener = new SV3_1aTreeShapeListener(
-              child, child->m_antlrParserHandler->m_tokens,
-              child->m_offsetLine);
+          if (clp->parseTree()) {
+            FileContent* const ppFileContent = child->getCompileSourceFile()
+                                                   ->getPreprocessor()
+                                                   ->getFileContent();
+            child->m_listener = new SV3_1aParseTreeListener(
+                child, child->m_antlrParserHandler->m_tokens,
+                child->m_offsetLine, ppFileContent);
+          } else {
+            child->m_listener = new SV3_1aTreeShapeListener(
+                child, child->m_antlrParserHandler->m_tokens,
+                child->m_offsetLine);
+          }
 
           Timer tmr;
           antlr4::tree::ParseTreeWalker::DEFAULT.walk(
@@ -560,8 +577,8 @@ bool ParseFile::parse() {
             tmr.reset();
           }
 
-          if (debug_AstModel && !precompiled)
-            std::cout << child->m_fileContent->printObjects();
+          if (debug_AstModel && !precompiled && m_fileId)
+            child->m_fileContent->printTree(std::cout);
 
           ParseCache cache(child);
           if (clp->link()) return true;

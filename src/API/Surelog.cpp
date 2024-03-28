@@ -63,10 +63,26 @@ void walk_parsetree(scompiler* compiler, ParseTreeListener* listener) {
   Compiler* the_compiler = (Compiler*)compiler;
   for (const CompileSourceFile* csf : the_compiler->getCompileSourceFiles()) {
     const FileContent* const fC = csf->getParser()->getFileContent();
-    const std::vector<VObject>& objects = fC->getVObjects();
-    const SymbolTable* const symbolTable = fC->getSymbolTable();
-    listener->listen(fC->getFileId(), objects.data(), objects.size(),
-                     symbolTable);
+    if (listener->shouldWalkSourceFile(fC->getFileId())) {
+      const std::vector<VObject>& objects = fC->getVObjects();
+      const SymbolTable* const symbolTable = fC->getSymbolTable();
+      listener->listen(fC->getFileId(), objects.data(), objects.size(),
+                       symbolTable);
+    }
+  }
+}
+
+void walk_ast(scompiler* compiler, ParseTreeListener* listener) {
+  if (!compiler || !listener) return;
+  Compiler* the_compiler = (Compiler*)compiler;
+  for (const CompileSourceFile* csf : the_compiler->getCompileSourceFiles()) {
+    const FileContent* const fC = csf->getParser()->getFileContent();
+    if (listener->shouldWalkSourceFile(fC->getFileId())) {
+      const std::vector<VObject>& objects = fC->getVObjects();
+      const SymbolTable* const symbolTable = fC->getSymbolTable();
+      listener->listen(fC->getFileId(), objects.data(), objects.size(),
+                       symbolTable);
+    }
   }
 }
 

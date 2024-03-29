@@ -106,7 +106,6 @@ class SV3_1aPpParseTreeListener final : public SV3_1aPpParserBaseListener,
       SV3_1aPpParser::Simple_macro_definition_bodyContext* ctx) final;
   void exitEscaped_macro_definition_body(
       SV3_1aPpParser::Escaped_macro_definition_bodyContext* ctx) final;
-  void exitMacro_arg(SV3_1aPpParser::Macro_argContext* ctx) final;
 
   void enterEveryRule(antlr4::ParserRuleContext* ctx) final;
   void exitEveryRule(antlr4::ParserRuleContext* ctx) final;

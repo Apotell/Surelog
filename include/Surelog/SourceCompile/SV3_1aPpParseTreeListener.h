@@ -113,10 +113,6 @@ class SV3_1aPpParseTreeListener final : public SV3_1aPpParserBaseListener,
   void appendPreprocBegin(antlr4::ParserRuleContext* ctx);
   void appendPreprocEnd(antlr4::ParserRuleContext *ctx, VObjectType type);
 
-  void recordMacro(std::string_view name, std::string_view arguments,
-                   antlr4::tree::TerminalNode* identifier,
-                   antlr4::ParserRuleContext* body);
-
  private:
   visited_rules_t m_visitedRules;
   rule_callstack_t m_rulCallstack;

@@ -33,7 +33,8 @@ class PreprocessFile;
 class SV3_1aPpParseTreeListener final : public SV3_1aPpParserBaseListener,
                                         public SV3_1aPpTreeListenerHelper {
  public:
-  typedef std::vector<size_t> callstack_t;
+  typedef std::vector<size_t> rule_callstack_t;
+  typedef std::vector<const antlr4::ParserRuleContext*> preproc_callstack_t;
   typedef std::set<const antlr4::ParserRuleContext*> visited_rules_t;
 
  public:
@@ -109,7 +110,7 @@ class SV3_1aPpParseTreeListener final : public SV3_1aPpParserBaseListener,
   bool isOnCallStack(size_t ruleIndex) const;
   bool isAnyOnCallStack(const std::unordered_set<size_t>& ruleIndicies) const;
 
-  void appendPreprocBegin();
+  void appendPreprocBegin(antlr4::ParserRuleContext* ctx);
   void appendPreprocEnd(antlr4::ParserRuleContext *ctx, VObjectType type);
 
   void recordMacro(std::string_view name, std::string_view arguments,
@@ -118,9 +119,9 @@ class SV3_1aPpParseTreeListener final : public SV3_1aPpParserBaseListener,
 
  private:
   visited_rules_t m_visitedRules;
-  callstack_t m_callstack;
+  rule_callstack_t m_rulCallstack;
+  preproc_callstack_t m_preprocCallstack;
   size_t m_pendingCRs = 0;
-  int32_t m_paused = 0;
 };
 }  // namespace SURELOG
 

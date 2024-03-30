@@ -80,12 +80,7 @@ class SV3_1aPpParseTreeListener final : public SV3_1aPpParserBaseListener,
 
   void enterSv_file_directive(
       SV3_1aPpParser::Sv_file_directiveContext* ctx) final;
-  void exitSv_file_directive(
-      SV3_1aPpParser::Sv_file_directiveContext* ctx) final;
-
   void enterSv_line_directive(
-      SV3_1aPpParser::Sv_line_directiveContext* ctx) final;
-  void exitSv_line_directive(
       SV3_1aPpParser::Sv_line_directiveContext* ctx) final;
 
   void enterMacroInstanceWithArgs(
@@ -101,11 +96,6 @@ class SV3_1aPpParseTreeListener final : public SV3_1aPpParserBaseListener,
   void enterMacro_definition(
       SV3_1aPpParser::Macro_definitionContext* ctx) final;
   void exitMacro_definition(SV3_1aPpParser::Macro_definitionContext* ctx) final;
-
-  void exitSimple_macro_definition_body(
-      SV3_1aPpParser::Simple_macro_definition_bodyContext* ctx) final;
-  void exitEscaped_macro_definition_body(
-      SV3_1aPpParser::Escaped_macro_definition_bodyContext* ctx) final;
 
   void enterEveryRule(antlr4::ParserRuleContext* ctx) final;
   void exitEveryRule(antlr4::ParserRuleContext* ctx) final;

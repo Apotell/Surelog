@@ -1029,11 +1029,10 @@ std::pair<bool, std::string> PreprocessFile::evaluateMacro_(
       std::string pp_result = pp->getPreProcessedFileContent();
 
       if (callingLine && callingFile && !callingFile->isMacroBody()) {
-        pp_result = std::regex_replace(
-            pp_result, std::regex(PP__File__Marking),
-            StrCat("\"",
-                   fileSystem->toPath(callingFile->getFileId(callingLine)),
-                   "\""));
+        pp_result =
+            std::regex_replace(pp_result, std::regex(PP__File__Marking),
+                               StrCat(fileSystem->toPlatformAbsPath(
+                                   callingFile->getFileId(callingLine))));
         pp_result = std::regex_replace(pp_result, std::regex(PP__Line__Marking),
                                        std::to_string(callingLine));
       }

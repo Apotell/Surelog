@@ -765,7 +765,7 @@ def _generate_SV3_1aPpParseTreeListener_cpp(tokens: list, rules: list, template_
   rule_case_statements = [f'    case SV3_1aPpParser::Rule{rule}: addVObject(ctx, VObjectType::pp{rule}); break;' for rule in rules]
   visit_case_statements = [
     f'    case SV3_1aPpParser::{token}: addVObject(node, VObjectType::pp{token}); break;'
-    for token in tokens
+    for token in tokens if token not in ['TICK_FILE__', 'TICK_LINE__']
   ]
 
   content = open(template_filepath, 'rt').read()

@@ -47,10 +47,6 @@ SV3_1aPpParseTreeListener::SV3_1aPpParseTreeListener(
   } else {
     m_fileContent = m_pp->getFileContent();
   }
-
-  if (PreprocessFile *includer = pp->getIncluder()) {
-    m_paused = ((SV3_1aPpParseTreeListener *)includer->m_listener)->m_paused;
-  }
 }
 
 NodeId SV3_1aPpParseTreeListener::addVObject(antlr4::tree::TerminalNode *node,
@@ -77,6 +73,7 @@ bool SV3_1aPpParseTreeListener::isAnyOnCallStack(
 }
 
 void SV3_1aPpParseTreeListener::appendPreprocBegin() {
+  if (m_pp->getIncluder() != nullptr) return;
   const size_t index = m_fileContent->getVObjects().size();
   m_pp->append(StrCat(kPreprocBeginPrefix, index, kPreprocBeginSuffix,
                       std::string(m_pendingCRs, '\n')));
@@ -85,6 +82,7 @@ void SV3_1aPpParseTreeListener::appendPreprocBegin() {
 
 void SV3_1aPpParseTreeListener::appendPreprocEnd(antlr4::ParserRuleContext *ctx,
                                                  VObjectType type) {
+  if (m_pp->getIncluder() != nullptr) return;
   const size_t index = (RawNodeId)addVObject(ctx, type);
   m_pp->append(StrCat(std::string(m_pendingCRs, '\n'), kPreprocEndPrefix, index,
                       kPreprocEndSuffix));
@@ -453,6 +451,7 @@ void SV3_1aPpParseTreeListener::exitInclude_directive(
     addVObject(stringNode, VObjectType::ppString);
   }
   addVObject(ctx, VObjectType::ppInclude_directive);
+  m_visitedRules.emplace(ctx);
 }
 
 void SV3_1aPpParseTreeListener::enterLine_directive(
@@ -470,31 +469,38 @@ void SV3_1aPpParseTreeListener::exitLine_directive(
 void SV3_1aPpParseTreeListener::enterSv_file_directive(
     SV3_1aPpParser::Sv_file_directiveContext *ctx) {
   if (m_inMacroDefinitionParsing) return;
-  if (m_paused++ == 0) {
-    appendPreprocBegin();
-    m_pp->append(ctx->getText());
-  }
-}
+  if (m_paused != 0) return;
 
-void SV3_1aPpParseTreeListener::exitSv_file_directive(
-    SV3_1aPpParser::Sv_file_directiveContext *ctx) {
-  if (m_inMacroDefinitionParsing) return;
-  if (--m_paused == 0) appendPreprocEnd(ctx, VObjectType::ppSv_file_directive);
+  if (m_pp->getMacroInfo()) {
+    m_pp->append(PreprocessFile::PP__File__Marking);
+  } else {
+    const ParseUtils::LineColumn lc =
+        ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
+    FileSystem *const fileSystem = FileSystem::getInstance();
+    // StrCat is required here so that the resultatnt path gets streamed in
+    // i.e. << before being appended to the preprocessor content. The stream
+    // operator ensures that the path gets correctly quoted and escaped.
+    m_pp->append(
+        StrCat(fileSystem->toPlatformAbsPath(m_pp->getFileId(lc.first))));
+  }
+
+  m_visitedRules.emplace(ctx);
 }
 
 void SV3_1aPpParseTreeListener::enterSv_line_directive(
     SV3_1aPpParser::Sv_line_directiveContext *ctx) {
   if (m_inMacroDefinitionParsing) return;
-  if (m_paused++ == 0) {
-    appendPreprocBegin();
-    m_pp->append(ctx->getText());
-  }
-}
+  if (m_paused != 0) return;
 
-void SV3_1aPpParseTreeListener::exitSv_line_directive(
-    SV3_1aPpParser::Sv_line_directiveContext *ctx) {
-  if (m_inMacroDefinitionParsing) return;
-  if (--m_paused == 0) appendPreprocEnd(ctx, VObjectType::ppSv_line_directive);
+  if (m_pp->getMacroInfo()) {
+    m_pp->append(PreprocessFile::PP__Line__Marking);
+  } else {
+    const ParseUtils::LineColumn lc =
+        ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
+    m_pp->append(std::to_string(m_pp->getLineNb(lc.first)));
+  }
+
+  m_visitedRules.emplace(ctx);
 }
 
 void SV3_1aPpParseTreeListener::enterMacroInstanceWithArgs(
@@ -850,16 +856,6 @@ void SV3_1aPpParseTreeListener::exitMacro_definition(
   m_inMacroDefinitionParsing = false;
 }
 
-void SV3_1aPpParseTreeListener::exitSimple_macro_definition_body(
-    SV3_1aPpParser::Simple_macro_definition_bodyContext *ctx) {
-  addVObject(ctx, ctx->getText(), VObjectType::ppSimple_macro_definition_body);
-}
-
-void SV3_1aPpParseTreeListener::exitEscaped_macro_definition_body(
-    SV3_1aPpParser::Escaped_macro_definition_bodyContext *ctx) {
-  addVObject(ctx, ctx->getText(), VObjectType::ppEscaped_macro_definition_body);
-}
-
 void SV3_1aPpParseTreeListener::enterEveryRule(antlr4::ParserRuleContext *ctx) {
   m_callstack.emplace_back(ctx->getRuleIndex());
 }
@@ -870,15 +866,6 @@ void SV3_1aPpParseTreeListener::exitEveryRule(antlr4::ParserRuleContext *ctx) {
   }
 
   if (!m_visitedRules.emplace(ctx).second) return;
-
-  if (isAnyOnCallStack({SV3_1aPpParser::RuleEscaped_macro_definition_body,
-                        SV3_1aPpParser::RuleSimple_macro_definition_body,
-                        SV3_1aPpParser::RuleIfdef_directive_in_macro_body,
-                        SV3_1aPpParser::RuleIfndef_directive_in_macro_body,
-                        SV3_1aPpParser::RuleElsif_directive_in_macro_body,
-                        SV3_1aPpParser::RuleElseif_directive_in_macro_body})) {
-    return;
-  }
 
   // clang-format off
   switch (ctx->getRuleIndex()) {
@@ -902,8 +889,14 @@ void SV3_1aPpParseTreeListener::visitTerminal(
     }
     return;
   } else if (m_paused == 0) {
-    if (token->getType() != SV3_1aPpParser::ESCAPED_IDENTIFIER) {
-      m_pp->append(node->getText());
+    switch (token->getType()) {
+      case SV3_1aPpParser::ESCAPED_IDENTIFIER:
+      case SV3_1aPpParser::TICK_FILE__:
+      case SV3_1aPpParser::TICK_LINE__:
+        break;
+
+      default:
+        m_pp->append(node->getText());
     }
   } else {
     const std::string text = node->getText();

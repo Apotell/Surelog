@@ -470,7 +470,10 @@ void SV3_1aPpParseTreeListener::exitLine_directive(
 void SV3_1aPpParseTreeListener::enterSv_file_directive(
     SV3_1aPpParser::Sv_file_directiveContext *ctx) {
   if (m_inMacroDefinitionParsing) return;
-  if (m_paused++ == 0) appendPreprocBegin();
+  if (m_paused++ == 0) {
+    appendPreprocBegin();
+    m_pp->append(ctx->getText());
+  }
 }
 
 void SV3_1aPpParseTreeListener::exitSv_file_directive(
@@ -482,7 +485,10 @@ void SV3_1aPpParseTreeListener::exitSv_file_directive(
 void SV3_1aPpParseTreeListener::enterSv_line_directive(
     SV3_1aPpParser::Sv_line_directiveContext *ctx) {
   if (m_inMacroDefinitionParsing) return;
-  if (m_paused++ == 0) appendPreprocBegin();
+  if (m_paused++ == 0) {
+    appendPreprocBegin();
+    m_pp->append(ctx->getText());
+  }
 }
 
 void SV3_1aPpParseTreeListener::exitSv_line_directive(
@@ -867,7 +873,6 @@ void SV3_1aPpParseTreeListener::exitEveryRule(antlr4::ParserRuleContext *ctx) {
 
   if (isAnyOnCallStack({SV3_1aPpParser::RuleEscaped_macro_definition_body,
                         SV3_1aPpParser::RuleSimple_macro_definition_body,
-                        SV3_1aPpParser::RuleMacro_arg,
                         SV3_1aPpParser::RuleIfdef_directive_in_macro_body,
                         SV3_1aPpParser::RuleIfndef_directive_in_macro_body,
                         SV3_1aPpParser::RuleElsif_directive_in_macro_body,
@@ -911,5 +916,14 @@ void SV3_1aPpParseTreeListener::visitTerminal(
     default: break;
   }
   // clang-format on
+}
+
+void SV3_1aPpParseTreeListener::visitErrorNode(antlr4::tree::ErrorNode *node) {
+  if (m_paused != 0) return;
+  if (!m_inActiveBranch) return;
+
+  if (node->getText().find("<missing ") != 0) {
+    addVObject(node, VObjectType::slUnparsable_Text);
+  }
 }
 }  // namespace SURELOG

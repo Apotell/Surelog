@@ -110,6 +110,7 @@ class SV3_1aPpParseTreeListener final : public SV3_1aPpParserBaseListener,
   void enterEveryRule(antlr4::ParserRuleContext* ctx) final;
   void exitEveryRule(antlr4::ParserRuleContext* ctx) final;
   void visitTerminal(antlr4::tree::TerminalNode* node) final;
+  void visitErrorNode(antlr4::tree::ErrorNode* node) final;
 
  private:
   using SV3_1aPpTreeListenerHelper::addVObject;

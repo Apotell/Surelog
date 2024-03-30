@@ -43,6 +43,9 @@ class SV3_1aParseTreeListener final : public SV3_1aParserBaseListener,
   typedef std::set<const antlr4::Token*> visited_tokens_t;
   typedef std::multimap<antlr4::ParserRuleContext*, NodeId> orphan_objects_t;
   typedef std::vector<antlr4::Token*> preproc_begin_statck_t;
+  typedef std::pair<const antlr4::Token*, const antlr4::Token*>
+      preproc_token_pair_t;
+  typedef std::vector<preproc_token_pair_t> preproc_token_pairs_t;
 
   typedef std::tuple<uint16_t, int32_t> column_offset_t;
   typedef std::multimap<uint32_t, column_offset_t> offsets_t;
@@ -90,6 +93,7 @@ class SV3_1aParseTreeListener final : public SV3_1aParserBaseListener,
   visited_tokens_t m_visitedTokens;
   orphan_objects_t m_orphanObjects;
   preproc_begin_statck_t m_preprocBeginStack;
+  preproc_token_pairs_t m_preprocTokenPairs;
 
   size_t m_lastVisitedTokenIndex = 0;
   int32_t m_paused = 0;

@@ -275,6 +275,7 @@ void SV3_1aParseTreeListener::visitPreprocEnd(antlr4::Token *token,
   antlr4::Token *const endToken = token;
   antlr4::Token *const beginToken = m_preprocBeginStack.back();
   m_preprocBeginStack.pop_back();
+  m_preprocTokenPairs.emplace_back(beginToken, endToken);
 
   line_ends_t ppEnds;
   collectLineRanges(ppNodeId, ppEnds);
@@ -495,7 +496,9 @@ void SV3_1aParseTreeListener::exitEveryRule(antlr4::ParserRuleContext *ctx) {
     m_ruleCallstack.pop_back();
   }
 
-  if (const antlr4::Token *const stopToken = ctx->getStop()) {
+  if (ctx->getRuleIndex() == SV3_1aParser::RuleTop_level_rule) {
+    processPendingTokens(ctx, m_tokens->size());  // Run to end of stream
+  } else if (const antlr4::Token *const stopToken = ctx->getStop()) {
     processPendingTokens(ctx, stopToken->getTokenIndex());
   }
 
@@ -568,7 +571,20 @@ void SV3_1aParseTreeListener::visitTerminal(antlr4::tree::TerminalNode *node) {
 }
 
 void SV3_1aParseTreeListener::visitErrorNode(antlr4::tree::ErrorNode *node) {
-  if (node->getText().find("<missing ") != 0) {
+  bool isEmbeddedInPreproc = false;
+  if (const antlr4::Token *errorToken = node->getSymbol()) {
+    for (const auto &[beginToken, endToken] : m_preprocTokenPairs) {
+      if ((beginToken->getStopIndex() < errorToken->getStartIndex()) &&
+          (errorToken->getStopIndex() < endToken->getStartIndex())) {
+        isEmbeddedInPreproc = true;
+        break;
+      } else if (errorToken->getStopIndex() < beginToken->getStartIndex()) {
+        break;
+      }
+    }
+  }
+
+  if (!isEmbeddedInPreproc && (node->getText().find("<missing ") != 0)) {
     addVObject(node, VObjectType::slUnparsable_Text);
   }
 }

@@ -466,57 +466,6 @@ void SV3_1aParseTreeListener::processPendingTokens(
   }
 }
 
-// void SV3_1aParseTreeListener::processOrphanObjects(
-//     antlr4::ParserRuleContext *ctx, NodeId parentId) {
-//   std::pair<orphan_objects_t::const_iterator, orphan_objects_t::const_iterator>
-//       bounds = m_orphanObjects.equal_range(ctx);
-//   if (bounds.first == bounds.second) return;
-// 
-//   std::vector<VObject> &objects = *m_fileContent->mutableVObjects();
-// 
-//   VObject &parent = objects[parentId];
-//   for (orphan_objects_t::const_iterator it = bounds.first; it != bounds.second;
-//        ++it) {
-//     if (objects[it->second].m_parent == parentId) continue;
-// 
-//     NodeId childId = it->second;
-//     while (childId) {
-//       objects[childId].m_parent = parentId;
-//       childId = objects[childId].m_sibling;
-//     }
-// 
-//     NodeId chain1 = parent.m_child;
-//     NodeId chain2 = it->second;
-//     if (chain1 < chain2) {
-//       parent.m_child = chain1;
-//       chain1 = objects[chain1].m_sibling;
-//     } else {
-//       parent.m_child = chain2;
-//       chain2 = objects[chain2].m_sibling;
-//     }
-// 
-//     NodeId chain = parent.m_child;
-//     for (;;) {
-//       if (!chain1) {
-//         objects[chain].m_sibling = chain2;
-//         break;
-//       } else if (!chain2) {
-//         objects[chain].m_sibling = chain1;
-//         break;
-//       } else if (chain1 < chain2) {
-//         objects[chain].m_sibling = chain1;
-//         chain1 = objects[chain1].m_sibling;
-//       } else {
-//         objects[chain].m_sibling = chain2;
-//         chain2 = objects[chain2].m_sibling;
-//       }
-//       chain = objects[chain].m_sibling;
-//     }
-//   }
-// 
-//   m_orphanObjects.erase(bounds.first, bounds.second);
-// }
-
 void SV3_1aParseTreeListener::processOrphanObjects(
     antlr4::ParserRuleContext *ctx, NodeId parentId) {
   std::pair<orphan_objects_t::const_iterator, orphan_objects_t::const_iterator>

@@ -475,22 +475,7 @@ void SV3_1aPpParseTreeListener::enterInclude_directive(
 void SV3_1aPpParseTreeListener::exitInclude_directive(
     SV3_1aPpParser::Include_directiveContext *ctx) {
   if (m_inMacroDefinitionParsing) return;
-
   appendPreprocEnd(ctx, VObjectType::ppInclude_directive);
-
-  if (!m_inActiveBranch) return;
-
-  if (antlr4::tree::TerminalNode *const escapedIdentifier =
-          ctx->ESCAPED_IDENTIFIER()) {
-    addVObject(escapedIdentifier, VObjectType::ppEscaped_identifier);
-  } else if (antlr4::tree::TerminalNode *const simpleIdentifier =
-                 ctx->Simple_identifier()) {
-    addVObject(simpleIdentifier, VObjectType::ppPs_identifier);
-  } else if (antlr4::tree::TerminalNode *const stringNode = ctx->STRING()) {
-    addVObject(stringNode, VObjectType::ppString);
-  }
-  addVObject(ctx, VObjectType::ppInclude_directive);
-  m_visitedRules.emplace(ctx);
 }
 
 void SV3_1aPpParseTreeListener::enterLine_directive(

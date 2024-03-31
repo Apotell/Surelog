@@ -342,7 +342,8 @@ bool PreprocessFile::preprocess() {
     if (cache.restore(clp->lowMem() || clp->noCacheHash())) {
       m_usingCachedVersion = true;
       getCompilationUnit()->setCurrentTimeInfo(getFileId(0));
-      if (m_debugAstModel && !precompiled && m_fileId)
+      if (m_debugAstModel && !precompiled && m_fileId &&
+          (m_includer == nullptr))
         m_fileContent->printTree(std::cout);
       if (precompiled || clp->noCacheHash()) {
         if (clp->debugCache()) {
@@ -553,7 +554,7 @@ bool PreprocessFile::preprocess() {
   // TODO: this leaks
   antlr4::tree::ParseTreeWalker::DEFAULT.walk(m_listener,
                                               m_antlrParserHandler->m_pptree);
-  if (m_debugAstModel && !precompiled && m_fileId)
+  if (m_debugAstModel && !precompiled && m_fileId && (m_includer == nullptr))
     m_fileContent->printTree(std::cout);
   m_lineCount = LinesCount(m_result);
   return true;

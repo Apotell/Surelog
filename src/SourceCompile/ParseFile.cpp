@@ -459,7 +459,7 @@ bool ParseFile::parse() {
 
     if (cache.restore()) {
       m_usingCachedVersion = true;
-      if (debug_AstModel && !precompiled && m_fileId)
+      if (debug_AstModel && !precompiled && m_fileId && (m_parent == nullptr))
         m_fileContent->printTree(std::cout);
       if (clp->debugCache()) {
         std::cout << "PARSER CACHE USED FOR: "
@@ -475,7 +475,7 @@ bool ParseFile::parse() {
       if (cache.restore()) {
         child->m_fileContent->setParent(m_fileContent);
         m_usingCachedVersion = true;
-        if (debug_AstModel && !precompiled && m_fileId)
+        if (debug_AstModel && !precompiled && m_fileId && (m_parent == nullptr))
           child->m_fileContent->printTree(std::cout);
       } else {
         ok = false;
@@ -522,7 +522,7 @@ bool ParseFile::parse() {
       antlr4::tree::ParseTreeWalker::DEFAULT.walk(m_listener,
                                                   m_antlrParserHandler->m_tree);
 
-      if (debug_AstModel && !precompiled && m_fileId)
+      if (debug_AstModel && !precompiled && m_fileId && (m_parent == nullptr))
         m_fileContent->printTree(std::cout);
 
       if (clp->profile()) {
@@ -577,7 +577,7 @@ bool ParseFile::parse() {
             tmr.reset();
           }
 
-          if (debug_AstModel && !precompiled && m_fileId)
+          if (debug_AstModel && !precompiled && m_fileId && (m_parent == nullptr))
             child->m_fileContent->printTree(std::cout);
 
           ParseCache cache(child);

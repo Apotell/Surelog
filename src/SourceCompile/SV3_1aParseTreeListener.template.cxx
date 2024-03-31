@@ -65,20 +65,8 @@ NodeId SV3_1aParseTreeListener::addVObject(antlr4::ParserRuleContext *ctx,
   auto [fileId, line, column, endLine, endColumn] = getFileLine(nullptr, token);
   const std::string text = token->getText();
 
-  NodeId childIndex =
-      m_fileContent->addObject(registerSymbol(text), fileId, objectType, line,
-                               column, endLine, endColumn);
-
-  NodeId parentIndex = NodeIdFromContext(ctx);
-
-  VObject *const childObject = m_fileContent->MutableObject(childIndex);
-  VObject *const parentObject = m_fileContent->MutableObject(parentIndex);
-
-  childObject->m_parent = parentIndex;
-  childObject->m_sibling = parentObject->m_child;
-  parentObject->m_child = childIndex;
-
-  return childIndex;
+  return m_fileContent->addObject(registerSymbol(text), fileId, objectType,
+                                  line, column, endLine, endColumn);
 }
 
 NodeId SV3_1aParseTreeListener::addVObject(antlr4::tree::TerminalNode *node,
@@ -187,7 +175,7 @@ void SV3_1aParseTreeListener::applyLocationOffsets() {
   // }
   // std::cout << std::endl;
 
-  m_fileContent->sortTree();
+  // m_fileContent->sortTree();
   // m_fileContent->printTree(std::cout);
 
   vobjects_t &vobjects = *m_fileContent->mutableVObjects();
@@ -478,21 +466,104 @@ void SV3_1aParseTreeListener::processPendingTokens(
   }
 }
 
+// void SV3_1aParseTreeListener::processOrphanObjects(
+//     antlr4::ParserRuleContext *ctx, NodeId parentId) {
+//   std::pair<orphan_objects_t::const_iterator, orphan_objects_t::const_iterator>
+//       bounds = m_orphanObjects.equal_range(ctx);
+//   if (bounds.first == bounds.second) return;
+// 
+//   std::vector<VObject> &objects = *m_fileContent->mutableVObjects();
+// 
+//   VObject &parent = objects[parentId];
+//   for (orphan_objects_t::const_iterator it = bounds.first; it != bounds.second;
+//        ++it) {
+//     if (objects[it->second].m_parent == parentId) continue;
+// 
+//     NodeId childId = it->second;
+//     while (childId) {
+//       objects[childId].m_parent = parentId;
+//       childId = objects[childId].m_sibling;
+//     }
+// 
+//     NodeId chain1 = parent.m_child;
+//     NodeId chain2 = it->second;
+//     if (chain1 < chain2) {
+//       parent.m_child = chain1;
+//       chain1 = objects[chain1].m_sibling;
+//     } else {
+//       parent.m_child = chain2;
+//       chain2 = objects[chain2].m_sibling;
+//     }
+// 
+//     NodeId chain = parent.m_child;
+//     for (;;) {
+//       if (!chain1) {
+//         objects[chain].m_sibling = chain2;
+//         break;
+//       } else if (!chain2) {
+//         objects[chain].m_sibling = chain1;
+//         break;
+//       } else if (chain1 < chain2) {
+//         objects[chain].m_sibling = chain1;
+//         chain1 = objects[chain1].m_sibling;
+//       } else {
+//         objects[chain].m_sibling = chain2;
+//         chain2 = objects[chain2].m_sibling;
+//       }
+//       chain = objects[chain].m_sibling;
+//     }
+//   }
+// 
+//   m_orphanObjects.erase(bounds.first, bounds.second);
+// }
+
 void SV3_1aParseTreeListener::processOrphanObjects(
     antlr4::ParserRuleContext *ctx, NodeId parentId) {
   std::pair<orphan_objects_t::const_iterator, orphan_objects_t::const_iterator>
       bounds = m_orphanObjects.equal_range(ctx);
   if (bounds.first == bounds.second) return;
 
-  VObject *const parent = m_fileContent->MutableObject(parentId);
-  for (orphan_objects_t::const_iterator it = bounds.first; it != bounds.second;
-       ++it) {
-    const NodeId &orphanId = it->second;
-    VObject *const orphan = m_fileContent->MutableObject(orphanId);
+  NodeIdSet nodeIds;
+  std::transform(bounds.first, bounds.second, std::inserter(nodeIds, nodeIds.end()),
+                 [](const orphan_objects_t::const_reference entry) {
+                   return entry.second;
+                 });
 
-    orphan->m_parent = parentId;
-    orphan->m_sibling = parent->m_child;
-    parent->m_child = orphanId;
+  std::vector<VObject> &objects = *m_fileContent->mutableVObjects();
+  for (NodeIdSet::const_iterator it2 = nodeIds.cbegin(), it1 = it2++,
+                                 end = nodeIds.cend();
+       it2 != end; ++it1, ++it2) {
+    objects[*it1].m_parent = objects[*it2].m_parent = parentId;
+    objects[*it1].m_sibling = *it2;
+  }
+
+  VObject &parent = objects[parentId];
+  NodeId chain1 = parent.m_child;
+  NodeId chain2 = *nodeIds.cbegin();
+  if (chain1 < chain2) {
+    parent.m_child = chain1;
+    chain1 = objects[chain1].m_sibling;
+  } else {
+    parent.m_child = chain2;
+    chain2 = objects[chain2].m_sibling;
+  }
+
+  NodeId chain = parent.m_child;
+  for (;;) {
+    if (!chain1) {
+      objects[chain].m_sibling = chain2;
+      break;
+    } else if (!chain2) {
+      objects[chain].m_sibling = chain1;
+      break;
+    } else if (chain1 < chain2) {
+      objects[chain].m_sibling = chain1;
+      chain1 = objects[chain1].m_sibling;
+    } else {
+      objects[chain].m_sibling = chain2;
+      chain2 = objects[chain2].m_sibling;
+    }
+    chain = objects[chain].m_sibling;
   }
 
   m_orphanObjects.erase(bounds.first, bounds.second);

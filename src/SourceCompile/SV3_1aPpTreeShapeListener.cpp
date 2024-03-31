@@ -318,24 +318,26 @@ void SV3_1aPpTreeShapeListener::enterInclude_directive(
         if (m_pp->getCompileSourceFile()
                 ->getCommandLineParser()
                 ->lineOffsetsAsComments()) {
-          post = StrCat("\n/* SLline ", info->m_startLine + startLineCol.first,
-                        R"( ""^")", fileSystem->toPath(info->m_fileId),
-                        "\" 0 */\n");
+          post = StrCat(
+              "\n/* SLline ", info->m_startLine + startLineCol.first, R"( ""^)",
+              fileSystem->toPlatformAbsPath(info->m_fileId), " 0 */\n");
         } else {
-          post = StrCat("\n`line ", info->m_startLine + startLineCol.first,
-                        " \"", fileSystem->toPath(info->m_fileId), "\" 0\n");
+          post = StrCat("\n`line ", info->m_startLine + startLineCol.first, " ",
+                        fileSystem->toPlatformAbsPath(info->m_fileId), " 0\n");
         }
       } else {
         if (m_pp->getCompileSourceFile()
                 ->getCommandLineParser()
                 ->lineOffsetsAsComments()) {
-          post = StrCat("\n/* SLline ", startLineCol.first + 1, R"( ""^")",
-                        fileSystem->toPath(m_pp->getFileId(startLineCol.first)),
-                        "\" 2 */\n");
+          post = StrCat("\n/* SLline ", startLineCol.first + 1, R"( ""^)",
+                        fileSystem->toPlatformAbsPath(
+                            m_pp->getFileId(startLineCol.first)),
+                        " 2 */\n");
         } else {
-          post = StrCat("\n`line ", startLineCol.first + 1, " \"",
-                        fileSystem->toPath(m_pp->getFileId(startLineCol.first)),
-                        "\" 2\n");
+          post = StrCat("\n`line ", startLineCol.first + 1, " ",
+                        fileSystem->toPlatformAbsPath(
+                            m_pp->getFileId(startLineCol.first)),
+                        " 2\n");
         }
       }
     }
@@ -510,11 +512,12 @@ void SV3_1aPpTreeShapeListener::enterMacroInstanceWithArgs(
             ->lineOffsetsAsComments()) {
       // Don't insert as parser does not know how to process this
       // directive in this lexical context
-      pre = StrCat("/* `line ", macroInf->m_startLine, " \"",
-                   fileSystem->toPath(macroInf->m_fileId), "\" 0 */");
-      post = StrCat("/* `line ", startLineCol.first + 1, " \"",
-                    fileSystem->toPath(m_pp->getFileId(startLineCol.first)),
-                    "\" 0 */");
+      pre = StrCat("/* `line ", macroInf->m_startLine, " ",
+                   fileSystem->toPlatformAbsPath(macroInf->m_fileId), " 0 */");
+      post = StrCat(
+          "/* `line ", startLineCol.first + 1, " ",
+          fileSystem->toPlatformAbsPath(m_pp->getFileId(startLineCol.first)),
+          " 0 */");
     }
     bool emptyMacroBody = false;
     if (macroBody.empty()) {
@@ -660,12 +663,14 @@ void SV3_1aPpTreeShapeListener::enterMacroInstanceNoArgs(
       // Don't insert as parser does not know how to process this
       // directive in this lexical context
       if (macroInf->m_fileId) {
-        pre = StrCat("/* `line ", macroInf->m_startLine, " \"",
-                     fileSystem->toPath(macroInf->m_fileId), "\" 0 */");
+        pre =
+            StrCat("/* `line ", macroInf->m_startLine, " ",
+                   fileSystem->toPlatformAbsPath(macroInf->m_fileId), " 0 */");
       }
-      post = StrCat("/* `line ", startLineCol.first + 1, " \"",
-                    fileSystem->toPath(m_pp->getFileId(startLineCol.first)),
-                    "\" 0 */");
+      post = StrCat(
+          "/* `line ", startLineCol.first + 1, " ",
+          fileSystem->toPlatformAbsPath(m_pp->getFileId(startLineCol.first)),
+          " 0 */");
     }
     m_pp->append(pre + macroBody + post);
 
@@ -747,8 +752,11 @@ void SV3_1aPpTreeShapeListener::enterSv_file_directive(
     } else {
       ParseUtils::LineColumn lineCol =
           ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
+      // StrCat is required here so that the resultatnt path gets streamed in
+      // i.e. << before being appended to the preprocessor content. The stream
+      // operator ensures that the path gets correctly quoted and escaped.
       m_pp->append(StrCat(
-          "\"", fileSystem->toPath(m_pp->getFileId(lineCol.first)), "\""));
+          fileSystem->toPlatformAbsPath(m_pp->getFileId(lineCol.first))));
     }
   }
   m_pp->pauseAppend();

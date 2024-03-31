@@ -105,7 +105,6 @@ void SV3_1aParseTreeListener::mergeObjects(antlr4::ParserRuleContext *ctx,
         ppObject.m_column, ppObject.m_endLine, ppObject.m_endColumn);
   }
 
-  const NodeId paEndNodeId(paObjects.size());
   for (NodeId ppNodeId = ppStartNodeId, paNodeId = paStartNodeId;
        ppNodeId < ppEndNodeId; ++ppNodeId, ++paNodeId) {
     const VObject &ppObject = ppObjects[ppNodeId];

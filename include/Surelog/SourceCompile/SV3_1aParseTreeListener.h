@@ -68,14 +68,16 @@ class SV3_1aParseTreeListener final : public SV3_1aParserBaseListener,
                     VObjectType objectType);
   NodeId addVObject(antlr4::tree::TerminalNode* node, VObjectType objectType);
 
-  NodeId mergeObjectTree(NodeId ppNodeId);
+  void mergeObjects(antlr4::ParserRuleContext* ctx, NodeId ppStartNodeId,
+                    NodeId ppEndNodeId);
+
   std::optional<bool> isUnaryOperator(
       const antlr4::tree::TerminalNode* node) const;
 
   void sortChildren(vobjects_t& objects, NodeId id) const;
   void applyLocationOffsets();
   void visitPreprocBegin(antlr4::Token* token);
-  void visitPreprocEnd(antlr4::Token* token, NodeId ppNodeId);
+  void visitPreprocEnd(antlr4::ParserRuleContext* ctx, antlr4::Token* token);
   void processPendingTokens(antlr4::ParserRuleContext* ctx,
                             size_t endTokenIndex);
   void processOrphanObjects(antlr4::ParserRuleContext* ctx, NodeId parentId);

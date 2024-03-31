@@ -284,6 +284,7 @@ class PreprocessFile final {
 
   /* To create the preprocessed content */
   void append(std::string_view s);
+  bool isAppendPaused() const { return m_pauseAppend; }
   void pauseAppend() { m_pauseAppend = true; }
   void resumeAppend() { m_pauseAppend = false; }
 

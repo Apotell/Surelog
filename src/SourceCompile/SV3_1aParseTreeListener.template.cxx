@@ -88,42 +88,52 @@ NodeId SV3_1aParseTreeListener::addVObject(antlr4::tree::TerminalNode *node,
                          : InvalidNodeId;
 }
 
-NodeId SV3_1aParseTreeListener::mergeObjectTree(NodeId ppNodeId) {
+void SV3_1aParseTreeListener::mergeObjects(antlr4::ParserRuleContext *ctx,
+                                           NodeId ppStartNodeId,
+                                           NodeId ppEndNodeId) {
   const std::vector<VObject> &ppObjects = m_ppFileContent->getVObjects();
-  const VObject &ppObject = ppObjects[ppNodeId];
 
-  std::vector<VObject> &objects = *m_fileContent->mutableVObjects();
+  std::vector<VObject> &paObjects = *m_fileContent->mutableVObjects();
+  const NodeId paStartNodeId(paObjects.size());
 
-  NodeId firstChildId;
-  NodeId lastChildId;
-  NodeId ppChildId = ppObject.m_child;
-  while (ppChildId) {
-    NodeId childId = mergeObjectTree(ppChildId);
-    if (firstChildId) {
-      objects[lastChildId].m_sibling = childId;
-    } else {
-      firstChildId = childId;
-    }
-    lastChildId = childId;
-    ppChildId = ppObjects[ppChildId].m_sibling;
+  typedef std::map<NodeId, NodeId> nodeid_map_t;
+  nodeid_map_t nodeIdMap;
+  for (NodeId ppNodeId = ppStartNodeId; ppNodeId < ppEndNodeId; ++ppNodeId) {
+    const VObject &ppObject = ppObjects[ppNodeId];
+    nodeIdMap[ppNodeId] = m_fileContent->addObject(
+        ppObject.m_name, ppObject.m_fileId, ppObject.m_type, ppObject.m_line,
+        ppObject.m_column, ppObject.m_endLine, ppObject.m_endColumn);
   }
 
-  NodeId nodeId = m_fileContent->addObject(
-      ppObject.m_name, ppObject.m_fileId, ppObject.m_type, ppObject.m_line,
-      ppObject.m_column, ppObject.m_endLine, ppObject.m_endColumn);
+  const NodeId paEndNodeId(paObjects.size());
+  for (NodeId ppNodeId = ppStartNodeId, paNodeId = paStartNodeId;
+       ppNodeId < ppEndNodeId; ++ppNodeId, ++paNodeId) {
+    const VObject &ppObject = ppObjects[ppNodeId];
+    VObject &paObject = paObjects[paNodeId];
 
-  if (firstChildId) {
-    VObject &object = objects[nodeId];
-    object.m_child = firstChildId;
+    if (ppObject.m_sibling != InvalidNodeId) {
+      if (nodeid_map_t::const_iterator it = nodeIdMap.find(ppObject.m_sibling);
+          it != nodeIdMap.cend()) {
+        paObject.m_sibling = it->second;
+      }
+    }
 
-    NodeId childId = firstChildId;
-    while (childId) {
-      objects[childId].m_parent = nodeId;
-      childId = objects[childId].m_sibling;
+    if (ppObject.m_child != InvalidNodeId) {
+      if (nodeid_map_t::const_iterator it = nodeIdMap.find(ppObject.m_child);
+          it != nodeIdMap.cend()) {
+        paObject.m_child = it->second;
+      }
+    }
+
+    if (ppObject.m_parent != InvalidNodeId) {
+      if (nodeid_map_t::const_iterator it = nodeIdMap.find(ppObject.m_parent);
+          it != nodeIdMap.cend()) {
+        paObject.m_parent = it->second;
+      } else {
+        m_orphanObjects.emplace(ctx, paNodeId);
+      }
     }
   }
-
-  return nodeId;
 }
 
 std::optional<bool> SV3_1aParseTreeListener::isUnaryOperator(
@@ -155,7 +165,7 @@ void SV3_1aParseTreeListener::enterString_value(
   std::string text = ctx->String()->getText();
 
   std::smatch match;
-  while (std::regex_search(text, match, m_escSeqSearchRegex)) {
+  while (std::regex_search(text, match, m_regexEscSeqSearch)) {
     std::string var = "\\" + match[1].str();
     text = text.replace(match.position(0), match.length(0), var);
   }
@@ -270,17 +280,34 @@ void SV3_1aParseTreeListener::visitPreprocBegin(antlr4::Token *token) {
   ++m_paused;
 }
 
-void SV3_1aParseTreeListener::visitPreprocEnd(antlr4::Token *token,
-                                              NodeId ppNodeId) {
+void SV3_1aParseTreeListener::visitPreprocEnd(antlr4::ParserRuleContext *ctx,
+                                                antlr4::Token *token) {
   antlr4::Token *const endToken = token;
   antlr4::Token *const beginToken = m_preprocBeginStack.back();
   m_preprocBeginStack.pop_back();
   m_preprocTokenPairs.emplace_back(beginToken, endToken);
 
-  line_ends_t ppEnds;
-  collectLineRanges(ppNodeId, ppEnds);
+  const std::string endText = endToken->getText();
+  std::string_view svet =
+      std::string_view(endText).substr(kPreprocEndPrefix.length());
 
-  const VObject &object = m_ppFileContent->getVObjects()[(RawNodeId)ppNodeId];
+  uint32_t endIndex = 0;
+  if (!NumUtils::parseUint32(svet, &endIndex)) return;
+
+  const std::string beginText = beginToken->getText();
+  std::string_view svbt =
+      std::string_view(beginText).substr(kPreprocBeginPrefix.length());
+
+  uint32_t beginIndex = 0;
+  if (!NumUtils::parseUint32(svbt, &beginIndex)) return;
+
+  mergeObjects(ctx, NodeId(beginIndex), NodeId(endIndex + 1));
+
+  const NodeId ppEndNodeId(endIndex);
+  const VObject &object = m_ppFileContent->getVObjects()[endIndex];
+
+  line_ends_t ppEnds;
+  collectLineRanges(ppEndNodeId, ppEnds);
 
   switch (object.m_type) {
     case VObjectType::ppInclude_directive:
@@ -427,17 +454,7 @@ void SV3_1aParseTreeListener::processPendingTokens(
       } break;
 
       case SV3_1aParser::PREPROC_END: {
-        antlr4::Token *const endToken = lastToken;
-        const std::string endText = endToken->getText();
-        std::string_view svtext = endText;
-        svtext.remove_prefix(kPreprocEndPrefix.length());
-
-        uint32_t index = 0;
-        if (NumUtils::parseUint32(svtext, &index)) {
-          const NodeId ppNodeId(index);
-          nodeId = mergeObjectTree(ppNodeId);
-          visitPreprocEnd(lastToken, ppNodeId);
-        }
+        visitPreprocEnd(ctx, lastToken);
       } break;
 
       case SV3_1aParser::One_line_comment: {
@@ -535,7 +552,7 @@ void SV3_1aParseTreeListener::visitTerminal(antlr4::tree::TerminalNode *node) {
     case SV3_1aParser::Escaped_identifier: {
       std::string text = node->getText();
       std::smatch match;
-      while (std::regex_search(text, match, m_escSeqSearchRegex)) {
+      while (std::regex_search(text, match, m_regexEscSeqSearch)) {
         std::string var = "\\" + match[1].str();
         text = text.replace(match.position(0), match.length(0), var);
       }

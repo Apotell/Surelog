@@ -80,7 +80,7 @@ void SV3_1aTreeShapeListener::enterModule_declaration(
     else
       ident = "MODULE NAME UNKNOWN";
   }
-  ident = std::regex_replace(ident, m_escSeqReplaceRegex, "");
+  ident = std::regex_replace(ident, m_regexEscSeqReplace, "");
   addNestedDesignElement(ctx, ident, DesignElement::Module,
                          VObjectType::paMODULE);
 }
@@ -252,7 +252,7 @@ void SV3_1aTreeShapeListener::enterInterface_declaration(
                  VObjectType::paINTERFACE);
     }
   }
-  ident = std::regex_replace(ident, m_escSeqReplaceRegex, "");
+  ident = std::regex_replace(ident, m_regexEscSeqReplace, "");
   addNestedDesignElement(ctx, ident, DesignElement::Interface,
                          VObjectType::paINTERFACE);
 }
@@ -622,7 +622,7 @@ void SV3_1aTreeShapeListener::enterProgram_declaration(
                  VObjectType::paPROGRAM);
     }
   }
-  ident = std::regex_replace(ident, m_escSeqReplaceRegex, "");
+  ident = std::regex_replace(ident, m_regexEscSeqReplace, "");
   addDesignElement(ctx, ident, DesignElement::Program, VObjectType::paPROGRAM);
 }
 
@@ -631,7 +631,7 @@ void SV3_1aTreeShapeListener::enterClass_declaration(
   std::string ident;
   if (ctx->identifier(0)) {
     ident = ctx->identifier(0)->getText();
-    ident = std::regex_replace(ident, m_escSeqReplaceRegex, "");
+    ident = std::regex_replace(ident, m_regexEscSeqReplace, "");
     addDesignElement(ctx, ident, DesignElement::Class, VObjectType::paCLASS);
   } else
     addDesignElement(ctx, "UNNAMED_CLASS", DesignElement::Class,
@@ -651,7 +651,7 @@ void SV3_1aTreeShapeListener::enterPackage_declaration(
                VObjectType::paPACKAGE);
   }
   std::string ident = ctx->identifier(0)->getText();
-  ident = std::regex_replace(ident, m_escSeqReplaceRegex, "");
+  ident = std::regex_replace(ident, m_regexEscSeqReplace, "");
   addDesignElement(ctx, ident, DesignElement::Package, VObjectType::paPACKAGE);
 }
 
@@ -818,7 +818,7 @@ void SV3_1aTreeShapeListener::enterUdp_declaration(
                  VObjectType::paPRIMITIVE);
     }
   }
-  ident = std::regex_replace(ident, m_escSeqReplaceRegex, "");
+  ident = std::regex_replace(ident, m_regexEscSeqReplace, "");
   addDesignElement(ctx, ident, DesignElement::Primitive,
                    VObjectType::paPRIMITIVE);
 }
@@ -890,7 +890,7 @@ void SV3_1aTreeShapeListener::exitString_value(
   ident = ctx->String()->getText();
 
   std::smatch match;
-  while (std::regex_search(ident, match, m_escSeqSearchRegex)) {
+  while (std::regex_search(ident, match, m_regexEscSeqSearch)) {
     std::string var = "\\" + match[1].str() + " ";
     ident = ident.replace(match.position(0), match.length(0), var);
   }
@@ -1043,7 +1043,7 @@ void SV3_1aTreeShapeListener::exitHierarchical_identifier(
       if (symbol->getType() == SV3_1aParser::Simple_identifier ||
           symbol->getType() == SV3_1aParser::Escaped_identifier) {
         ident = tnode->getText();
-        ident = std::regex_replace(ident, m_escSeqReplaceRegex, "");
+        ident = std::regex_replace(ident, m_regexEscSeqReplace, "");
         addVObject((antlr4::ParserRuleContext *)tnode, ident,
                    VObjectType::slStringConst);
       } else if (symbol->getType() == SV3_1aParser::THIS ||
@@ -1251,7 +1251,7 @@ void SV3_1aTreeShapeListener::exitPackage_scope(
     childCtx = (antlr4::ParserRuleContext *)ctx->Escaped_identifier();
     ident = ctx->Escaped_identifier()->getText();
     std::smatch match;
-    while (std::regex_search(ident, match, m_escSeqSearchRegex)) {
+    while (std::regex_search(ident, match, m_regexEscSeqSearch)) {
       std::string var = match[1].str();
       ident = ident.replace(match.position(0), match.length(0), var);
     }
@@ -1290,7 +1290,7 @@ void SV3_1aTreeShapeListener::exitPs_identifier(
     childCtx = (antlr4::ParserRuleContext *)ctx->Escaped_identifier()[0];
     ident = ctx->Escaped_identifier()[0]->getText();
     std::smatch match;
-    while (std::regex_search(ident, match, m_escSeqSearchRegex)) {
+    while (std::regex_search(ident, match, m_regexEscSeqSearch)) {
       std::string var = match[1].str();
       ident = ident.replace(match.position(0), match.length(0), var);
     }

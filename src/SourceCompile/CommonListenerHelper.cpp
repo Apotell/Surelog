@@ -35,8 +35,10 @@ CommonListenerHelper::CommonListenerHelper(FileContent* file_content,
                                            antlr4::CommonTokenStream* tokens)
     : m_fileContent(file_content),
       m_tokens(tokens),
-      m_escSeqReplaceRegex(kEscapeSequence),
-      m_escSeqSearchRegex(StrCat(kEscapeSequence, "(.*?)", kEscapeSequence)) {}
+      m_regexEscSeqReplace(kEscapeSequence),
+      m_regexEscSeqSearch(StrCat(kEscapeSequence, "(.*?)", kEscapeSequence)),
+      m_regexTranslateOff(R"(\/\/\s*(synopsys|pragma)\s+translate_off\s*)"),
+      m_regexTranslateOn(R"(\/\/\s*(synopsys|pragma)\s+translate_on\s*)") {}
 
 NodeId CommonListenerHelper::NodeIdFromContext(
     const antlr4::tree::ParseTree* ctx) const {

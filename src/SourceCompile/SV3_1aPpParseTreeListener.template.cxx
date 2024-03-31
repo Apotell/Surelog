@@ -81,12 +81,12 @@ void SV3_1aPpParseTreeListener::appendPreprocBegin(
     m_pendingCRs = 0;
   }
 
-  m_preprocCallstack.emplace_back(ctx);
+  ++m_preprocCallstack;
 }
 
 void SV3_1aPpParseTreeListener::appendPreprocEnd(antlr4::ParserRuleContext *ctx,
                                                  VObjectType type) {
-  if (m_preprocCallstack.empty() || (m_preprocCallstack.back() != ctx)) return;
+  if (m_preprocCallstack == 0) return;
 
   const size_t index = (RawNodeId)addVObject(ctx, type);
   if (m_pp->getIncluder() == nullptr) {
@@ -95,8 +95,8 @@ void SV3_1aPpParseTreeListener::appendPreprocEnd(antlr4::ParserRuleContext *ctx,
     m_pendingCRs = 0;
   }
 
+  --m_preprocCallstack;
   m_visitedRules.emplace(ctx);
-  m_preprocCallstack.pop_back();
 }
 
 void SV3_1aPpParseTreeListener::enterText_blob(
@@ -877,6 +877,32 @@ void SV3_1aPpParseTreeListener::exitMacro_definition(
   m_inMacroDefinitionParsing = false;
 }
 
+void SV3_1aPpParseTreeListener::enterComment(
+    SV3_1aPpParser::CommentContext *ctx) {
+  if (antlr4::tree::TerminalNode *const oneLineCommentNode =
+          ctx->One_line_comment()) {
+    const std::string text = oneLineCommentNode->getText();
+    if (std::regex_match(text, m_regexTranslateOff)) {
+      appendPreprocBegin(ctx);
+      m_inProtectedRegion = true;
+      m_pp->pauseAppend();
+    }
+  }
+}
+
+void SV3_1aPpParseTreeListener::exitComment(
+    SV3_1aPpParser::CommentContext *ctx) {
+  if (antlr4::tree::TerminalNode *const oneLineCommentNode =
+          ctx->One_line_comment()) {
+    const std::string text = oneLineCommentNode->getText();
+    if (std::regex_match(text, m_regexTranslateOn)) {
+      m_pp->resumeAppend();
+      m_inProtectedRegion = false;
+      appendPreprocEnd(ctx, VObjectType::ppPragma_directive);
+    }
+  }
+}
+
 void SV3_1aPpParseTreeListener::enterEveryRule(antlr4::ParserRuleContext *ctx) {
   m_rulCallstack.emplace_back(ctx->getRuleIndex());
 }
@@ -910,7 +936,7 @@ void SV3_1aPpParseTreeListener::visitTerminal(
       m_pendingCRs = 0;
     }
     return;
-  } else if (!m_inMacroDefinitionParsing && m_preprocCallstack.empty()) {
+  } else if (!m_inMacroDefinitionParsing && (m_preprocCallstack == 0)) {
     switch (token->getType()) {
       case SV3_1aPpParser::ESCAPED_IDENTIFIER:
       case SV3_1aPpParser::TICK_FILE__:
@@ -918,10 +944,16 @@ void SV3_1aPpParseTreeListener::visitTerminal(
         break;
 
       default: {
-        m_pp->append(node->getText());
+        const std::string text = node->getText();
+        if (m_pp->isAppendPaused()) {
+          m_pendingCRs += std::count(text.begin(), text.end(), '\n');
+        } else {
+          m_pp->append(StrCat(std::string(m_pendingCRs, '\n'), text));
+          m_pendingCRs = 0;
+        }
       } break;
     }
-  } else if (m_inMacroDefinitionParsing) {
+  } else if (m_inMacroDefinitionParsing || m_inProtectedRegion) {
     const std::string text = node->getText();
     m_pendingCRs += std::count(text.begin(), text.end(), '\n');
   }

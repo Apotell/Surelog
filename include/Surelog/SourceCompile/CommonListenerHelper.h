@@ -112,8 +112,10 @@ class CommonListenerHelper {
   typedef std::map<const antlr4::tree::ParseTree*, NodeId> ContextToObjectMap;
   ContextToObjectMap m_contextToObjectMap;
 
-  const std::regex m_escSeqReplaceRegex;
-  const std::regex m_escSeqSearchRegex;
+  const std::regex m_regexEscSeqReplace;
+  const std::regex m_regexEscSeqSearch;
+  const std::regex m_regexTranslateOn;
+  const std::regex m_regexTranslateOff;
 };
 
 }  // namespace SURELOG

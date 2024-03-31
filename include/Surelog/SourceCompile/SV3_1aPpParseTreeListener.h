@@ -34,7 +34,6 @@ class SV3_1aPpParseTreeListener final : public SV3_1aPpParserBaseListener,
                                         public SV3_1aPpTreeListenerHelper {
  public:
   typedef std::vector<size_t> rule_callstack_t;
-  typedef std::vector<const antlr4::ParserRuleContext*> preproc_callstack_t;
   typedef std::set<const antlr4::ParserRuleContext*> visited_rules_t;
 
  public:
@@ -98,6 +97,9 @@ class SV3_1aPpParseTreeListener final : public SV3_1aPpParserBaseListener,
       SV3_1aPpParser::Macro_definitionContext* ctx) final;
   void exitMacro_definition(SV3_1aPpParser::Macro_definitionContext* ctx) final;
 
+  void enterComment(SV3_1aPpParser::CommentContext* ctx) final;
+  void exitComment(SV3_1aPpParser::CommentContext* ctx) final;
+
   void enterEveryRule(antlr4::ParserRuleContext* ctx) final;
   void exitEveryRule(antlr4::ParserRuleContext* ctx) final;
   void visitTerminal(antlr4::tree::TerminalNode* node) final;
@@ -116,7 +118,7 @@ class SV3_1aPpParseTreeListener final : public SV3_1aPpParserBaseListener,
  private:
   visited_rules_t m_visitedRules;
   rule_callstack_t m_rulCallstack;
-  preproc_callstack_t m_preprocCallstack;
+  int32_t m_preprocCallstack = 0;
   size_t m_pendingCRs = 0;
 };
 }  // namespace SURELOG

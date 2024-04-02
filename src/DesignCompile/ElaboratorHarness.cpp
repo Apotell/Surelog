@@ -22,36 +22,36 @@
  */
 
 #include <Surelog/CommandLine/CommandLineParser.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/Design.h>
 #include <Surelog/DesignCompile/ElaboratorHarness.h>
-#include <Surelog/ErrorReporting/ErrorContainer.h>
-#include <Surelog/SourceCompile/CompileSourceFile.h>
 #include <Surelog/SourceCompile/Compiler.h>
-#include <Surelog/SourceCompile/ParseFile.h>
-#include <Surelog/SourceCompile/SymbolTable.h>
 
 namespace SURELOG {
 
+ElaboratorHarness::ElaboratorHarness(Session* session) : m_session(session) {}
+
 std::tuple<Design*, FileContent*, CompileDesign*> ElaboratorHarness::elaborate(
     std::string_view content) {
-  std::tuple<Design*, FileContent*, CompileDesign*> result;
-  SymbolTable* symbols = new SymbolTable();
-  ErrorContainer* errors = new ErrorContainer(symbols);
-  CommandLineParser* clp = new CommandLineParser(errors, symbols, false, false);
+  CommandLineParser* const clp = m_session->getCommandLineParser();
   clp->setCacheAllowed(false);
   clp->setParse(true);
   clp->setCompile(true);
   clp->setElabUhdm(true);
   clp->setWriteUhdm(false);
   clp->fullSVMode(true);
-  Compiler* compiler = new Compiler(clp, errors, symbols, content);
+
+  Compiler* compiler = new Compiler(m_session, content);
   compiler->compile();
+
   Design* design = compiler->getDesign();
   FileContent* fC = nullptr;
   if (!design->getAllFileContents().empty()) {
     fC = design->getAllFileContents()[0].second;
   }
-  result = std::make_tuple(design, fC, compiler->getCompileDesign());
+
+  std::tuple<Design*, FileContent*, CompileDesign*> result =
+      std::make_tuple(design, fC, compiler->getCompileDesign());
   return result;
 }
 

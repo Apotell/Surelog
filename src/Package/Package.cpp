@@ -27,12 +27,15 @@
 
 namespace SURELOG {
 
-Package::Package(std::string_view name, Library* library, FileContent* fC,
-                 NodeId nodeId)
-    : DesignComponent(fC, nullptr), m_name(name), m_library(library) {
+Package::Package(Session* session, std::string_view name, Library* library,
+                 FileContent* fC, NodeId nodeId)
+    : DesignComponent(session, fC, nullptr),
+      m_name(name),
+      m_library(library),
+      m_exprBuilder(session) {
   addFileContent(fC, nodeId);
   if (!name.empty()) {  // avoid loop
-    m_unElabPackage = new Package("", library, fC, nodeId);
+    m_unElabPackage = new Package(session, "", library, fC, nodeId);
     m_unElabPackage->m_name = name;
   }
 }
@@ -47,12 +50,9 @@ uint32_t Package::getSize() const {
 ClassDefinition* Package::getClassDefinition(std::string_view name) {
   ClassNameClassDefinitionMultiMap::iterator itr =
       m_classDefinitions.find(name);
-  if (itr == m_classDefinitions.end()) {
-    return nullptr;
-  } else {
-    return (*itr).second;
-  }
+  return (itr == m_classDefinitions.end()) ? nullptr : itr->second;
 }
+
 void Package::append(Package* package) {
   DesignComponent::append(package);
   for (auto& type : package->m_dataTypes)

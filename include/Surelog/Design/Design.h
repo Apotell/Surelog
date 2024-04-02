@@ -34,7 +34,6 @@
 #include <vector>
 
 namespace SURELOG {
-
 class AnalyzeFile;
 class BindStmt;
 class Builtin;
@@ -44,7 +43,6 @@ class ConfigSet;
 class DefParam;
 class DesignComponent;
 class DesignElaboration;
-class ErrorContainer;
 class FileContent;
 class LibrarySet;
 class ModuleInstance;
@@ -52,6 +50,7 @@ class ParseCache;
 class ParseFile;
 class PPCache;
 class PreprocessFile;
+class Session;
 class SV3_1aPpTreeShapeListener;
 class SV3_1aTreeShapeListener;
 class SVLibShapeListener;
@@ -72,11 +71,8 @@ class Design final {
   friend class SVLibShapeListener;
 
  public:
-  Design(ErrorContainer* errors, LibrarySet* librarySet, ConfigSet* configSet)
-      : m_errors(errors), m_librarySet(librarySet), m_configSet(configSet) {}
-
+  Design(Session* session, LibrarySet* librarySet, ConfigSet* configSet);
   Design(const Design& orig) = delete;
-
   ~Design();
 
   typedef std::vector<std::pair<PathId, FileContent*>> FileIdDesignContentMap;
@@ -126,8 +122,7 @@ class Design final {
 
   std::string reportInstanceTree() const;
 
-  void reportInstanceTreeStats(uint32_t& nbTopLevelModules,
-                               uint32_t& maxDepth,
+  void reportInstanceTreeStats(uint32_t& nbTopLevelModules, uint32_t& maxDepth,
                                uint32_t& numberOfInstances,
                                uint32_t& numberOfLeafInstances,
                                uint32_t& nbUndefinedModules,
@@ -152,8 +147,6 @@ class Design final {
   Program* getProgram(std::string_view name) const;
 
   ClassDefinition* getClassDefinition(std::string_view name) const;
-
-  ErrorContainer* getErrorContainer() { return m_errors; }
 
   typedef std::multimap<std::string, BindStmt*, std::less<>> BindMap;
 
@@ -206,12 +199,9 @@ class Design final {
   DefParam* getDefParam_(std::vector<std::string>& path,
                          DefParam* parent) const;
 
-  ErrorContainer* m_errors;
-
+  Session* const m_session = nullptr;
   LibrarySet* m_librarySet;
-
   ConfigSet* m_configSet;
-
   FileIdDesignContentMap m_fileContents;
 
   FileIdDesignContentMap m_ppFileContents;

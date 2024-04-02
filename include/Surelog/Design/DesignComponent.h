@@ -69,9 +69,10 @@ class ExprEval {
 class DesignComponent : public ValuedComponentI, public PortNetHolder {
   SURELOG_IMPLEMENT_RTTI(DesignComponent, ValuedComponentI)
  public:
-  DesignComponent(const DesignComponent* parent, DesignComponent* definition)
-      : ValuedComponentI(parent, definition), m_instance(nullptr) {}
-  ~DesignComponent() override {}
+  DesignComponent(Session* session, const DesignComponent* parent,
+                  DesignComponent* definition)
+      : ValuedComponentI(session, parent, definition), m_instance(nullptr) {}
+  ~DesignComponent() override = default;
 
   virtual uint32_t getSize() const = 0;
   virtual VObjectType getType() const = 0;
@@ -93,7 +94,8 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
   typedef std::map<std::string, std::pair<FileCNodeId, DesignComponent*>,
                    StringViewCompare>
       NamedObjectMap;
-  typedef std::vector<std::pair<std::string, UHDM::typespec*>> FuncNameTypespecVec;
+  typedef std::vector<std::pair<std::string, UHDM::typespec*>>
+      FuncNameTypespecVec;
 
   void addFileContent(const FileContent* fileContent, NodeId nodeId);
   const std::vector<const FileContent*>& getFileContents() const {
@@ -238,7 +240,7 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
   std::vector<UHDM::import_typespec*> m_imported_symbols;
   std::vector<UHDM::tf_call*> m_elab_sys_calls;
   std::vector<UHDM::property_decl*> m_property_decls;
-  std::vector<UHDM::sequence_decl*> m_sequence_decls;  
+  std::vector<UHDM::sequence_decl*> m_sequence_decls;
   std::vector<UHDM::ref_obj*> m_needLateBinding;
   std::vector<UHDM::any*> m_needLateTypedefBinding;
   FuncNameTypespecVec m_lateResolutionFunctions;

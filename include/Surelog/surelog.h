@@ -20,8 +20,8 @@
 
 // Header file for Surelog library
 
-#include <Surelog/CommandLine/CommandLineParser.h>
 #include <Surelog/Common/FileSystem.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/ErrorReporting/Error.h>
 #include <Surelog/ErrorReporting/ErrorContainer.h>
 #include <Surelog/ErrorReporting/ErrorDefinition.h>

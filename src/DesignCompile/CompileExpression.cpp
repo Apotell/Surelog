@@ -23,6 +23,7 @@
 
 #include <Surelog/CommandLine/CommandLineParser.h>
 #include <Surelog/Common/FileSystem.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/Enum.h>
 #include <Surelog/Design/FileContent.h>
 #include <Surelog/Design/ModuleDefinition.h>
@@ -65,14 +66,13 @@ bool CompileHelper::substituteAssignedValue(const UHDM::any *oper,
   if (!oper) {
     return false;
   }
+  CommandLineParser *const clp = m_session->getCommandLineParser();
   UHDM_OBJECT_TYPE opType = oper->UhdmType();
   if (opType == uhdmoperation) {
     operation *op = (operation *)oper;
     int32_t opType = op->VpiOpType();
     if (opType == vpiAssignmentPatternOp || opType == vpiConcatOp) {
-      substitute = compileDesign->getCompiler()
-                       ->getCommandLineParser()
-                       ->getParametersSubstitution();
+      substitute = clp->getParametersSubstitution();
     }
     for (auto operand : *op->Operands()) {
       if (!substituteAssignedValue(operand, compileDesign)) {
@@ -757,9 +757,8 @@ any *CompileHelper::decodeHierPath(hier_path *path, bool &invalidValue,
 
   if (res == nullptr) {
     if ((reduce == Reduce::Yes) && (!muteErrors)) {
-      ErrorContainer *errors =
-          compileDesign->getCompiler()->getErrorContainer();
-      SymbolTable *symbols = compileDesign->getCompiler()->getSymbolTable();
+      ErrorContainer *const errors = m_session->getErrorContainer();
+      SymbolTable *const symbols = m_session->getSymbolTable();
       // std::string fileContent = FileUtils::getFileContent(fileName);
       // std::string_view lineText =
       //     StringUtils::getLineInString(fileContent, lineNumber);
@@ -1297,7 +1296,7 @@ UHDM::any *CompileHelper::compileExpression(
   if (m_checkForLoops) {
     m_stackLevel++;
   }
-  FileSystem *const fileSystem = FileSystem::getInstance();
+  FileSystem *const fileSystem = m_session->getFileSystem();
   UHDM::Serializer &s = compileDesign->getSerializer();
   UHDM::any *result = nullptr;
   VObjectType parentType = fC->Type(parent);
@@ -2954,10 +2953,8 @@ UHDM::any *CompileHelper::compileExpression(
                 PathId fileId = fC->getFileId();
                 uint32_t lineNumber = fC->Line(nameId);
                 if (func == nullptr) {
-                  ErrorContainer *errors =
-                      compileDesign->getCompiler()->getErrorContainer();
-                  SymbolTable *symbols =
-                      compileDesign->getCompiler()->getSymbolTable();
+                  ErrorContainer *const errors = m_session->getErrorContainer();
+                  SymbolTable *const symbols = m_session->getSymbolTable();
                   Location loc(fileId, lineNumber, fC->Column(nameId),
                                symbols->registerSymbol(name));
                   Error err(ErrorDefinition::COMP_UNDEFINED_USER_FUNCTION, loc);
@@ -3329,9 +3326,8 @@ UHDM::any *CompileHelper::compileExpression(
   if ((result == nullptr) && (muteErrors == false)) {
     VObjectType exprtype = fC->Type(the_node);
     if (exprtype != VObjectType::paEND) {
-      ErrorContainer *errors =
-          compileDesign->getCompiler()->getErrorContainer();
-      SymbolTable *symbols = compileDesign->getCompiler()->getSymbolTable();
+      ErrorContainer *const errors = m_session->getErrorContainer();
+      SymbolTable *const symbols = m_session->getSymbolTable();
       unsupported_expr *exp = s.MakeUnsupported_expr();
       std::string lineText;
       fileSystem->readLine(fC->getFileId(), fC->Line(the_node), lineText);
@@ -3375,7 +3371,8 @@ UHDM::any *CompileHelper::compileAssignmentPattern(
     DesignComponent *component, const FileContent *fC,
     NodeId Assignment_pattern, CompileDesign *compileDesign, Reduce reduce,
     UHDM::any *pexpr, ValuedComponentI *instance) {
-  FileSystem *const fileSystem = FileSystem::getInstance();
+  SymbolTable *const symbols = m_session->getSymbolTable();
+  FileSystem *const fileSystem = m_session->getFileSystem();
   UHDM::Serializer &s = compileDesign->getSerializer();
   UHDM::any *result = nullptr;
   UHDM::operation *operation = s.MakeOperation();
@@ -3466,8 +3463,7 @@ UHDM::any *CompileHelper::compileAssignmentPattern(
                 bool invalidValue = false;
                 if (any *tmp = reduceExpr(
                         exp, invalidValue, component, compileDesign, instance,
-                        fileSystem->toPathId(op->VpiFile(),
-                                             fC->getSymbolTable()),
+                        fileSystem->toPathId(op->VpiFile(), symbols),
                         op->VpiLineNo(), nullptr, true)) {
                   if (!invalidValue) exp = tmp;
                 }
@@ -3549,14 +3545,13 @@ bool CompileHelper::errorOnNegativeConstant(DesignComponent *component,
                                             expr *exp,
                                             CompileDesign *compileDesign,
                                             ValuedComponentI *instance) {
-  FileSystem *const fileSystem = FileSystem::getInstance();
+  FileSystem *const fileSystem = m_session->getFileSystem();
   if (exp == nullptr) return false;
   if (exp->UhdmType() != uhdmconstant) return false;
   const std::string_view val = exp->VpiValue();
   return errorOnNegativeConstant(
       component, val, compileDesign, instance,
-      fileSystem->toPathId(exp->VpiFile(),
-                           compileDesign->getCompiler()->getSymbolTable()),
+      fileSystem->toPathId(exp->VpiFile(), m_session->getSymbolTable()),
       exp->VpiLineNo(), exp->VpiColumnNo());
 }
 
@@ -3566,7 +3561,7 @@ bool CompileHelper::errorOnNegativeConstant(DesignComponent *component,
                                             ValuedComponentI *instance,
                                             PathId fileId, uint32_t lineNo,
                                             uint16_t columnNo) {
-  FileSystem *const fileSystem = FileSystem::getInstance();
+  FileSystem *const fileSystem = m_session->getFileSystem();
   if (val[4] == '-') {
     std::string instanceName;
     if (instance) {
@@ -3579,12 +3574,12 @@ bool CompileHelper::errorOnNegativeConstant(DesignComponent *component,
     }
     std::string message;
     StrAppend(&message, '"', instanceName, "\"\n");
-    SymbolTable *symbols = compileDesign->getCompiler()->getSymbolTable();
+    SymbolTable *const symbols = m_session->getSymbolTable();
     std::string lineText;
     fileSystem->readLine(fileId, lineNo, lineText);
     StrAppend(&message, "             text: ", lineText, "\n");
     StrAppend(&message, "             value: ", val);
-    ErrorContainer *errors = compileDesign->getCompiler()->getErrorContainer();
+    ErrorContainer *errors = m_session->getErrorContainer();
     Location loc(fileId, lineNo, columnNo, symbols->registerSymbol(message));
     Error err(ErrorDefinition::ELAB_NEGATIVE_VALUE, loc);
 
@@ -3614,8 +3609,7 @@ bool CompileHelper::errorOnNegativeConstant(DesignComponent *component,
           }
           if (inst->getNetlist() && inst->getNetlist()->param_assigns()) {
             for (auto ps : *inst->getNetlist()->param_assigns()) {
-              std::cout << ps->Lhs()->VpiName() << " = "
-                        << "\n";
+              std::cout << ps->Lhs()->VpiName() << " = \n";
               decompile((any *)ps->Rhs());
             }
           }
@@ -3633,7 +3627,7 @@ std::vector<UHDM::range *> *CompileHelper::compileRanges(
     DesignComponent *component, const FileContent *fC, NodeId Packed_dimension,
     CompileDesign *compileDesign, Reduce reduce, UHDM::any *pexpr,
     ValuedComponentI *instance, int32_t &size, bool muteErrors) {
-  FileSystem *const fileSystem = FileSystem::getInstance();
+  FileSystem *const fileSystem = m_session->getFileSystem();
   UHDM::Serializer &s = compileDesign->getSerializer();
   VectorOfrange *ranges = nullptr;
   size = 0;
@@ -3758,10 +3752,8 @@ std::vector<UHDM::range *> *CompileHelper::compileRanges(
           const std::string_view val = c->VpiValue();
           if ((reduce == Reduce::Yes) &&
               ((val == "UINT:0") || (val == "INT:0") || (val[4] == '-'))) {
-            ErrorContainer *errors =
-                compileDesign->getCompiler()->getErrorContainer();
-            SymbolTable *symbols =
-                compileDesign->getCompiler()->getSymbolTable();
+            ErrorContainer *const errors = m_session->getErrorContainer();
+            SymbolTable *const symbols = m_session->getSymbolTable();
             std::string instanceName;
             if (instance) {
               if (ModuleInstance *inst =

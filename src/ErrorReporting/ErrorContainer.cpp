@@ -24,6 +24,7 @@
 #include <Surelog/API/PythonAPI.h>
 #include <Surelog/CommandLine/CommandLineParser.h>
 #include <Surelog/Common/FileSystem.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/ErrorReporting/ErrorContainer.h>
 #include <Surelog/ErrorReporting/ErrorDefinition.h>
 #include <Surelog/ErrorReporting/LogListener.h>
@@ -34,29 +35,22 @@
 #include <iostream>
 
 namespace SURELOG {
-ErrorContainer::ErrorContainer(SymbolTable* symbolTable,
-                               LogListener* logListener /* = nullptr */)
-    : m_clp(nullptr),
+ErrorContainer::ErrorContainer(Session* session)
+    : m_session(session),
       m_reportedFatalErrorLogFile(false),
-      m_symbolTable(symbolTable),
-      m_interpState(nullptr),
-      m_logListener(logListener ? logListener : new LogListener()),
-      m_listenerOwned(logListener == nullptr) {
+      m_interpState(nullptr) {
   m_interpState = PythonAPI::getMainInterp();
   /* Do nothing here */
 }
 
-ErrorContainer::~ErrorContainer() {
-  if (m_listenerOwned) delete m_logListener;
-}
-
 void ErrorContainer::init() {
   if (ErrorDefinition::init()) {
-    FileSystem* const fileSystem = FileSystem::getInstance();
-    if (LogListener::failed(m_logListener->initialize(m_clp->getLogFileId()))) {
+    LogListener* const logListener = m_session->getLogListener();
+    if (LogListener::failed(logListener->initialize())) {
+      FileSystem* const fileSystem = m_session->getFileSystem();
+      CommandLineParser* const clp = m_session->getCommandLineParser();
       std::cerr << "[FTL:LG0001] Cannot create log file \""
-                << fileSystem->toPath(m_clp->getLogFileId()) << "\""
-                << std::endl;
+                << fileSystem->toPath(clp->getLogFileId()) << "\"" << std::endl;
     }
   }
 }
@@ -68,7 +62,8 @@ Error& ErrorContainer::addError(Error& error, bool showDuplicates,
   if (std::get<2>(textStatus))  // filter Message
     return error;
 
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  SymbolTable* const symbolTable = m_session->getSymbolTable();
   std::multimap<ErrorDefinition::ErrorType, Waiver::WaiverData>& waivers =
       Waiver::getWaivers();
   std::pair<
@@ -84,7 +79,7 @@ Error& ErrorContainer::addError(Error& error, bool showDuplicates,
         (((*it).second.m_line == 0) ||
          (error.m_locations[0].m_line == (*it).second.m_line)) &&
         (((*it).second.m_objectId.empty()) ||
-         (m_symbolTable->getSymbol(error.m_locations[0].m_object) ==
+         (symbolTable->getSymbol(error.m_locations[0].m_object) ==
           (*it).second.m_objectId))) {
       error.m_waived = true;
       break;
@@ -94,7 +89,7 @@ Error& ErrorContainer::addError(Error& error, bool showDuplicates,
   // Copy the PathId into our local SymbolTable!
   for (Location& loc : error.m_locations) {
     if (loc.m_fileId) {
-      loc.m_fileId = fileSystem->copy(loc.m_fileId, m_symbolTable);
+      loc.m_fileId = fileSystem->copy(loc.m_fileId, symbolTable);
     }
   }
 
@@ -110,17 +105,18 @@ Error& ErrorContainer::addError(Error& error, bool showDuplicates,
 }
 
 void ErrorContainer::appendErrors(ErrorContainer& rhs) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  SymbolTable* const symbolTable = m_session->getSymbolTable();
   for (uint32_t i = 0; i < rhs.m_errors.size(); i++) {
     Error err = rhs.m_errors[i];
     if (!err.m_reported) {
       // Translate IDs to master symbol table
       for (auto& loc : err.m_locations) {
         if (loc.m_fileId)
-          loc.m_fileId = fileSystem->copy(loc.m_fileId, m_symbolTable);
+          loc.m_fileId = fileSystem->copy(loc.m_fileId, symbolTable);
         if (loc.m_object) {
-          loc.m_object =
-              m_symbolTable->copyFrom(loc.m_object, rhs.m_symbolTable);
+          loc.m_object = symbolTable->copyFrom(loc.m_object,
+                                               rhs.m_session->getSymbolTable());
         }
       }
       addError(err);
@@ -130,7 +126,9 @@ void ErrorContainer::appendErrors(ErrorContainer& rhs) {
 
 std::tuple<std::string, bool, bool> ErrorContainer::createErrorMessage(
     const Error& msg, bool reentrantPython) const {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  SymbolTable* const symbolTable = m_session->getSymbolTable();
+  CommandLineParser* const clp = m_session->getCommandLineParser();
   const std::map<ErrorDefinition::ErrorType, ErrorDefinition::ErrorInfo>&
       infoMap = ErrorDefinition::getErrorInfoMap();
   std::string tmp;
@@ -157,17 +155,17 @@ std::tuple<std::string, bool, bool> ErrorContainer::createErrorMessage(
           break;
         case ErrorDefinition::WARNING:
           severity = "WRN";
-          if (m_clp->filterWarning()) filterMessage = true;
+          if (clp->filterWarning()) filterMessage = true;
           break;
         case ErrorDefinition::INFO:
           severity = "INF";
-          if (m_clp->filterInfo() &&
+          if (clp->filterInfo() &&
               (type != ErrorDefinition::PP_PROCESSING_SOURCE_FILE))
             filterMessage = true;
           break;
         case ErrorDefinition::NOTE:
           severity = "NTE";
-          if (m_clp->filterNote()) filterMessage = true;
+          if (clp->filterNote()) filterMessage = true;
           break;
       }
       std::string category = ErrorDefinition::getCategoryName(info.m_category);
@@ -175,8 +173,7 @@ std::tuple<std::string, bool, bool> ErrorContainer::createErrorMessage(
       const Location& loc = msg.m_locations[0];
       /* Object */
       std::string text = info.m_errorText;
-      const std::string_view objectName =
-          m_symbolTable->getSymbol(loc.m_object);
+      const std::string_view objectName = symbolTable->getSymbol(loc.m_object);
       if (objectName != SymbolTable::getBadSymbol()) {
         size_t objectOffset = text.find("%s");
         if (objectOffset != std::string::npos) {
@@ -236,7 +233,7 @@ std::tuple<std::string, bool, bool> ErrorContainer::createErrorMessage(
         }
         if (extraLoc.m_object) {
           const std::string_view objString =
-              m_symbolTable->getSymbol(extraLoc.m_object);
+              symbolTable->getSymbol(extraLoc.m_object);
           size_t objectOffset = text.find("%exobj");
           if (objectOffset != std::string::npos) {
             text = text.replace(objectOffset, 6, objString);
@@ -251,7 +248,7 @@ std::tuple<std::string, bool, bool> ErrorContainer::createErrorMessage(
         padding = "00";
       else if (msg.m_errorId < 1000)
         padding = "0";
-      if ((reentrantPython == false) || (!m_clp->pythonAllowed())) {
+      if ((reentrantPython == false) || (!clp->pythonAllowed())) {
         tmp = "[" + severity + ":" + category + padding +
               std::to_string(msg.m_errorId) + "] " + location + text + "\n";
       } else {
@@ -373,13 +370,14 @@ ErrorContainer::Stats ErrorContainer::getErrorStats() const {
 }
 
 bool ErrorContainer::printToLogFile(std::string_view report) {
+  LogListener* const logListener = m_session->getLogListener();
   LogListener::LogResult result;
-  if (LogListener::failed(result = m_logListener->log(report))) {
+  if (LogListener::failed(result = logListener->log(report))) {
     if (!m_reportedFatalErrorLogFile &&
         (result == LogListener::LogResult::FailedToOpenFileForWrite)) {
-      FileSystem* const fileSystem = FileSystem::getInstance();
+      FileSystem* const fileSystem = m_session->getFileSystem();
       std::cerr << "[FTL:LG0002] Cannot open log file \""
-                << fileSystem->toPath(m_logListener->getLogFileId())
+                << fileSystem->toPath(logListener->getLogFileId())
                 << "\" in append mode" << std::endl;
       m_reportedFatalErrorLogFile = true;
     }

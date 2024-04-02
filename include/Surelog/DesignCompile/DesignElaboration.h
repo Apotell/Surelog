@@ -29,16 +29,16 @@
 #include <Surelog/DesignCompile/TestbenchElaboration.h>
 
 namespace SURELOG {
-
 class BindStmt;
 class ModuleDefinitionFactory;
 class ModuleInstanceFactory;
+class Session;
 
 class DesignElaboration : public TestbenchElaboration {
  public:
-  explicit DesignElaboration(CompileDesign* compileDesign);
+  DesignElaboration(Session* session, CompileDesign* compileDesign);
   DesignElaboration(const DesignElaboration& orig) = delete;
-  ~DesignElaboration() override;
+  ~DesignElaboration() override = default;
 
   bool createModuleAndPackageDefinitions();
 
@@ -89,6 +89,7 @@ class DesignElaboration : public TestbenchElaboration {
   void createFileList_();
   Config* getInstConfig(std::string_view name);
   Config* getCellConfig(std::string_view name);
+
   std::vector<std::pair<std::string, const FileContent*>> m_topLevelModules;
   std::set<std::string> m_uniqueTopLevelModules;
   ModuleDefinitionFactory* m_moduleDefFactory;

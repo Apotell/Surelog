@@ -32,9 +32,12 @@ VObjectType ModuleDefinition::getType() const {
                                   : m_fileContents[0]->Type(m_nodeIds[0]);
 }
 
-ModuleDefinition::ModuleDefinition(const FileContent* fileContent,
+ModuleDefinition::ModuleDefinition(Session* session,
+                                   const FileContent* fileContent,
                                    NodeId nodeId, const std::string_view name)
-    : DesignComponent(fileContent, nullptr), m_name(name), m_udpDefn(nullptr) {
+    : DesignComponent(session, fileContent, nullptr),
+      m_name(name),
+      m_udpDefn(nullptr) {
   if (fileContent) {
     addFileContent(fileContent, nodeId);
   }
@@ -48,8 +51,9 @@ bool ModuleDefinition::isInstance() const {
 }
 
 ModuleDefinition* ModuleDefinitionFactory::newModuleDefinition(
-    const FileContent* fileContent, NodeId nodeId, std::string_view name) {
-  return new ModuleDefinition(fileContent, nodeId, name);
+    Session* session, const FileContent* fileContent, NodeId nodeId,
+    std::string_view name) {
+  return new ModuleDefinition(session, fileContent, nodeId, name);
 }
 
 uint32_t ModuleDefinition::getSize() const {

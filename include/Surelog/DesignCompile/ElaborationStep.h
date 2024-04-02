@@ -36,25 +36,23 @@
 #include <vector>
 
 namespace SURELOG {
-
 class CompileDesign;
-class ErrorContainer;
 class ModuleInstance;
 class Parameter;
 class Scope;
+class Session;
 class Signal;
-class SymbolTable;
 class TypeDef;
 class Variable;
 
 class ElaborationStep {
  public:
-  explicit ElaborationStep(CompileDesign* compileDesign);
+  ElaborationStep(Session* session, CompileDesign* compileDesign);
   ElaborationStep(const ElaborationStep& orig) = delete;
 
   virtual bool elaborate() = 0;
 
-  virtual ~ElaborationStep();
+  virtual ~ElaborationStep() = default;
 
  protected:
   bool bindTypedefs_();
@@ -105,15 +103,18 @@ class ElaborationStep {
                       UHDM::VectorOfvariables* vars, UHDM::expr* assignExp,
                       UHDM::typespec* tps);
 
-  void swapTypespecPointersInUhdm(UHDM::Serializer& s, std::map<const UHDM::typespec*, const UHDM::typespec*>& typespecSwapMap);
-  void swapTypespecPointersInTypedef(Design* design, std::map<const UHDM::typespec*, const UHDM::typespec*>& typespecSwapMap);
+  void swapTypespecPointersInUhdm(
+      UHDM::Serializer& s,
+      std::map<const UHDM::typespec*, const UHDM::typespec*>& typespecSwapMap);
+  void swapTypespecPointersInTypedef(
+      Design* design,
+      std::map<const UHDM::typespec*, const UHDM::typespec*>& typespecSwapMap);
 
-  CompileDesign* m_compileDesign;
+ protected:
+  Session* const m_session = nullptr;
+  CompileDesign* const m_compileDesign = nullptr;
   ExprBuilder m_exprBuilder;
-  SymbolTable* m_symbols;
-  ErrorContainer* m_errors;
   CompileHelper m_helper;
-
   std::map<std::string, Variable*> m_staticVariables;
 };
 

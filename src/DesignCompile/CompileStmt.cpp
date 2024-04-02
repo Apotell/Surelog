@@ -22,6 +22,7 @@
  */
 
 #include <Surelog/Common/FileSystem.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/BindStmt.h>
 #include <Surelog/Design/Design.h>
 #include <Surelog/Design/Enum.h>
@@ -104,7 +105,10 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
                                         Reduce reduce, UHDM::any* pstmt,
                                         ValuedComponentI* instance,
                                         bool muteErrors) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  ErrorContainer* const errors = m_session->getErrorContainer();
+
   VectorOfany* results = nullptr;
   UHDM::Serializer& s = compileDesign->getSerializer();
   VObjectType type = fC->Type(the_stmt);
@@ -319,9 +323,6 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
       scope->VpiParent(pstmt);
       fC->populateCoreMembers(labelId, labelId, scope);
       if (labelId && endLabelId && (label != endLabel)) {
-        ErrorContainer* errors =
-            compileDesign->getCompiler()->getErrorContainer();
-        SymbolTable* symbols = compileDesign->getCompiler()->getSymbolTable();
         Location loc(fC->getFileId(), fC->Line(labelId), fC->Column(labelId),
                      symbols->registerSymbol(label));
         Location loc2(fC->getFileId(), fC->Line(endLabelId),
@@ -449,10 +450,6 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
             if (NodeId endLabel = fC->Sibling(item)) {
               const std::string_view endlabel = fC->SymName(endLabel);
               if (endlabel != label) {
-                ErrorContainer* errors =
-                    compileDesign->getCompiler()->getErrorContainer();
-                SymbolTable* symbols =
-                    compileDesign->getCompiler()->getSymbolTable();
                 Location loc(fC->getFileId(), fC->Line(labelId),
                              fC->Column(labelId),
                              symbols->registerSymbol(label));
@@ -1084,9 +1081,6 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
         (stmttype != VObjectType::paJoin_keyword) &&
         (stmttype != VObjectType::paJoin_any_keyword) &&
         (stmttype != VObjectType::paJoin_none_keyword)) {
-      ErrorContainer* errors =
-          compileDesign->getCompiler()->getErrorContainer();
-      SymbolTable* symbols = compileDesign->getCompiler()->getSymbolTable();
       unsupported_stmt* ustmt = s.MakeUnsupported_stmt();
       std::string lineText;
       fileSystem->readLine(fC->getFileId(), fC->Line(the_stmt), lineText);
@@ -2421,7 +2415,7 @@ bool CompileHelper::compileFunction(DesignComponent* component,
           (fC->Type(Parameter_declaration) ==
            VObjectType::paLocal_parameter_declaration)) {
         DesignComponent* tmp =
-            new ModuleDefinition(nullptr, InvalidNodeId, "fake");
+            new ModuleDefinition(m_session, nullptr, InvalidNodeId, "fake");
         compileParameterDeclaration(
             tmp, fC, Parameter_declaration, compileDesign, Reduce::No,
             (fC->Type(Parameter_declaration) ==

@@ -28,43 +28,36 @@
 #include <Surelog/DesignCompile/CompileHelper.h>
 
 namespace SURELOG {
-
 class CompileDesign;
 class Design;
-class ErrorContainer;
 class Package;
-class SymbolTable;
+class Session;
 
 struct FunctorCompilePackage {
-  FunctorCompilePackage(CompileDesign* compiler, Package* package,
-                        Design* design, SymbolTable* symbols,
-                        ErrorContainer* errors)
-      : m_compileDesign(compiler),
+  FunctorCompilePackage(Session* session, CompileDesign* compiler,
+                        Package* package, Design* design)
+      : m_session(session),
+        m_compileDesign(compiler),
         m_package(package),
-        m_design(design),
-        m_symbols(symbols),
-        m_errors(errors) {}
+        m_design(design) {}
   int32_t operator()() const;
 
  private:
+  Session* const m_session = nullptr;
   CompileDesign* const m_compileDesign;
   Package* const m_package;
   Design* const m_design;
-  SymbolTable* const m_symbols;
-  ErrorContainer* const m_errors;
 };
 
 class CompilePackage final {
  public:
-  CompilePackage(CompileDesign* compiler, Package* package, Design* design,
-                 SymbolTable* symbols, ErrorContainer* errors)
-      : m_compileDesign(compiler),
+  CompilePackage(Session* session, CompileDesign* compiler, Package* package,
+                 Design* design)
+      : m_session(session),
+        m_compileDesign(compiler),
         m_package(package),
         m_design(design),
-        m_symbols(symbols),
-        m_errors(errors) {
-    m_helper.seterrorReporting(errors, symbols);
-  }
+        m_helper(session) {}
 
   bool compile(Reduce reduce);
 
@@ -72,11 +65,10 @@ class CompilePackage final {
   enum CollectType { FUNCTION, DEFINITION, OTHER };
   bool collectObjects_(CollectType collectType, Reduce reduce);
 
+  Session* const m_session = nullptr;
   CompileDesign* const m_compileDesign;
   Package* const m_package;
   Design* const m_design;
-  SymbolTable* const m_symbols;
-  ErrorContainer* const m_errors;
   CompileHelper m_helper;
   UHDM::VectorOfattribute* m_attributes = nullptr;
 };

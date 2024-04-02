@@ -22,6 +22,7 @@
  */
 
 #include <Surelog/Common/FileSystem.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/Design.h>
 #include <Surelog/Design/FileContent.h>
 #include <Surelog/DesignCompile/Builtin.h>
@@ -56,6 +57,9 @@ static VObjectType convert(std::string_view type) {
     result = VObjectType::paGenericElementType;
   return result;
 }
+
+Builtin::Builtin(Session* session, CompileDesign* compiler, Design* design)
+    : m_session(session), m_compiler(compiler), m_design(design) {}
 
 void Builtin::addBuiltinTypes() {
   struct FunctionDefinition {
@@ -236,7 +240,8 @@ void Builtin::addBuiltinTypes() {
   for (const auto& f : functionDef) {
     Package* package = m_design->getPackage(f.packageName);
     if (package == nullptr) {
-      package = new Package(f.packageName, nullptr, nullptr, InvalidNodeId);
+      package = new Package(m_session, f.packageName, nullptr, nullptr,
+                            InvalidNodeId);
       UHDM::package* pack = s.MakePackage();
       pack->VpiName(package->getName());
       package->setUhdmInstance(pack);
@@ -246,7 +251,7 @@ void Builtin::addBuiltinTypes() {
     ClassDefinition* classDef = m_design->getClassDefinition(fullClassName);
     if (classDef == nullptr) {
       classDef =
-          new ClassDefinition(f.className, nullptr, package, nullptr,
+          new ClassDefinition(m_session, f.className, nullptr, package, nullptr,
                               InvalidNodeId, nullptr, s.MakeClass_defn());
       m_design->addClassDefinition(fullClassName, classDef);
       package->addClassDefinition(f.className, classDef);
@@ -262,7 +267,7 @@ void Builtin::addBuiltinTypes() {
 }
 
 void Builtin::addBuiltinMacros(CompilationUnit* compUnit) {
-  PreprocessHarness ppharness;
+  PreprocessHarness ppharness(m_session);
   ppharness.preprocess(R"(
 `define SV_COV_START 0
 `define SV_COV_STOP 1
@@ -286,16 +291,16 @@ void Builtin::addBuiltinMacros(CompilationUnit* compUnit) {
 
 void Builtin::addBuiltinClasses() {
   // builtin.sv compilation
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  FileSystem* const fileSystem = m_session->getFileSystem();
   UHDM::Serializer& s = m_compiler->getSerializer();
   // A fake path to keep the API simple!
-  SymbolTable* const symbolTable = m_compiler->getCompiler()->getSymbolTable();
+  SymbolTable* const symbolTable = m_session->getSymbolTable();
   PathId fileId = fileSystem->getChild(fileSystem->getWorkingDir(symbolTable),
                                        "builtin.sv", symbolTable);
-  CompileHelper helper;
-  ParserHarness pharness;
-  CompilerHarness charness;
-  FileContent* fC1 = pharness.parse(
+  CompileHelper helper(m_session);
+  ParserHarness pharness(m_session);
+  CompilerHarness charness(m_session);
+  FileContent* const fC1 = pharness.parse(
       R"(  class mailbox;
 
     function new (int bound = 0);
@@ -378,12 +383,11 @@ void Builtin::addBuiltinClasses() {
     const std::string_view libName = fC1->getLibrary()->getName();
     if (stId) {
       const std::string_view name = fC1->SymName(stId);
-      fC1->insertObjectLookup(name, classId,
-                              m_compiler->getCompiler()->getErrorContainer());
+      fC1->insertObjectLookup(name, classId, m_session->getErrorContainer());
       std::string fullName = StrCat(libName, "@", name);
       ClassDefinition* def =
-          new ClassDefinition(fullName, fC1->getLibrary(), nullptr, fC1,
-                              classId, nullptr, s.MakeClass_defn());
+          new ClassDefinition(m_session, fullName, fC1->getLibrary(), nullptr,
+                              fC1, classId, nullptr, s.MakeClass_defn());
       fC1->addClassDefinition(fullName, def);
       m_compiler->getCompiler()->getDesign()->addClassDefinition(name, def);
     }

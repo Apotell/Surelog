@@ -23,6 +23,7 @@
 
 #include <Surelog/CommandLine/CommandLineParser.h>
 #include <Surelog/Common/FileSystem.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/DesignElement.h>
 #include <Surelog/Design/FileContent.h>
 #include <Surelog/Design/ModPort.h>
@@ -43,9 +44,6 @@
 #include <Surelog/Testbench/Variable.h>
 #include <Surelog/Utils/StringUtils.h>
 
-#include <cstring>
-#include <queue>
-
 // UHDM
 #include <uhdm/ElaboratorListener.h>
 #include <uhdm/ExprEval.h>
@@ -57,6 +55,9 @@
 #include <uhdm/clone_tree.h>
 #include <uhdm/uhdm.h>
 #include <uhdm/vpi_visitor.h>
+
+#include <cstring>
+#include <queue>
 
 namespace SURELOG {
 namespace fs = std::filesystem;
@@ -164,12 +165,13 @@ std::string UhdmWriter::builtinGateName(VObjectType type) {
   return modName;
 }
 
-UhdmWriter::UhdmWriter(CompileDesign* compiler, Design* design)
-    : m_compileDesign(compiler), m_design(design), m_uhdmDesign(nullptr) {
-  m_helper.seterrorReporting(
-      m_compileDesign->getCompiler()->getErrorContainer(),
-      m_compileDesign->getCompiler()->getSymbolTable());
-}
+UhdmWriter::UhdmWriter(Session* session, CompileDesign* compiler,
+                       Design* design)
+    : m_session(session),
+      m_compileDesign(compiler),
+      m_design(design),
+      m_uhdmDesign(nullptr),
+      m_helper(session) {}
 
 uint32_t UhdmWriter::getStrengthType(VObjectType type) {
   switch (type) {
@@ -764,9 +766,9 @@ void UhdmWriter::writeNets(DesignComponent* mod,
                            SignalMap& signalMap, SignalMap& portMap,
                            ModuleInstance* instance /* = nullptr */) {
   for (auto& orig_net : orig_nets) {
-    net* dest_net = nullptr;
+    UHDM::net* dest_net = nullptr;
     if (instance) {
-      for (net* net : *instance->getNetlist()->nets()) {
+      for (UHDM::net* net : *instance->getNetlist()->nets()) {
         UhdmWriter::SignalMap::iterator itr = signalMap.find(net->VpiName());
         if (itr == signalMap.end()) {
           if (net->VpiName() == orig_net->getName()) {
@@ -1893,7 +1895,8 @@ class DetectUnsizedConstant final : public VpiListener {
 void UhdmWriter::writeCont_assign(Netlist* netlist, Serializer& s,
                                   DesignComponent* mod, any* m,
                                   std::vector<cont_assign*>* assigns) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  SymbolTable* const symbols = m_session->getSymbolTable();
   if (netlist->cont_assigns()) {
     for (auto assign : *netlist->cont_assigns()) {
       const expr* lhs = assign->Lhs();
@@ -1939,9 +1942,7 @@ void UhdmWriter::writeCont_assign(Netlist* netlist, Serializer& s,
               any* rhstmp = m_helper.reduceExpr(
                   (expr*)rhs, invalidValue, mod, m_compileDesign,
                   netlist->getParent(),
-                  fileSystem->toPathId(
-                      rhs->VpiFile(),
-                      m_compileDesign->getCompiler()->getSymbolTable()),
+                  fileSystem->toPathId(rhs->VpiFile(), symbols),
                   rhs->VpiLineNo(), assign, true);
               m_helper.checkForLoops(false);
               if (const ref_typespec* rt = lhs->Typespec()) {
@@ -2059,10 +2060,7 @@ void UhdmWriter::writeCont_assign(Netlist* netlist, Serializer& s,
         m_helper.checkForLoops(true);
         any* res = m_helper.reduceExpr(
             (expr*)rhs, invalidValue, mod, m_compileDesign,
-            netlist->getParent(),
-            fileSystem->toPathId(
-                rhs->VpiFile(),
-                m_compileDesign->getCompiler()->getSymbolTable()),
+            netlist->getParent(), fileSystem->toPathId(rhs->VpiFile(), symbols),
             rhs->VpiLineNo(), assign, true);
         m_helper.checkForLoops(false);
         if (invalidValue == false) {
@@ -2104,7 +2102,7 @@ void UhdmWriter::writeCont_assign(Netlist* netlist, Serializer& s,
 
 bool UhdmWriter::writeElabGenScope(Serializer& s, ModuleInstance* instance,
                                    gen_scope* m, ExprBuilder& exprBuilder) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  FileSystem* const fileSystem = m_session->getFileSystem();
   Netlist* netlist = instance->getNetlist();
   ModuleDefinition* mod =
       valuedcomponenti_cast<ModuleDefinition*>(instance->getDefinition());
@@ -2298,7 +2296,8 @@ UHDM::any* UhdmWriter::swapForSpecifiedVar(UHDM::Serializer& s,
                                            variables* lvariable,
                                            std::string_view name,
                                            const any* var, const any* parent) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  SymbolTable* const symbols = m_session->getSymbolTable();
   if (tmp->VpiName() == name) {
     if (var->UhdmType() == uhdmref_var) {
       ref_var* ref = (ref_var*)var;
@@ -2309,9 +2308,8 @@ UHDM::any* UhdmWriter::swapForSpecifiedVar(UHDM::Serializer& s,
         if (lvariables) {
           for (auto var : *lvariables) {
             if (var->UhdmType() == uhdmhier_path) {
-              PathId parentFileId = fileSystem->toPathId(
-                  parent->VpiFile(),
-                  m_compileDesign->getCompiler()->getSymbolTable());
+              PathId parentFileId =
+                  fileSystem->toPathId(parent->VpiFile(), symbols);
               bool invalidValue = false;
               indexTypespec = (typespec*)m_helper.decodeHierPath(
                   (hier_path*)var, invalidValue, mod, m_compileDesign,
@@ -2321,9 +2319,8 @@ UHDM::any* UhdmWriter::swapForSpecifiedVar(UHDM::Serializer& s,
           }
         } else if (const variables* var = lvariable) {
           if (var->UhdmType() == uhdmhier_path) {
-            PathId parentFileId = fileSystem->toPathId(
-                parent->VpiFile(),
-                m_compileDesign->getCompiler()->getSymbolTable());
+            PathId parentFileId =
+                fileSystem->toPathId(parent->VpiFile(), symbols);
             bool invalidValue = false;
             indexTypespec = (typespec*)m_helper.decodeHierPath(
                 (hier_path*)var, invalidValue, mod, m_compileDesign,
@@ -2338,9 +2335,8 @@ UHDM::any* UhdmWriter::swapForSpecifiedVar(UHDM::Serializer& s,
             elems->push_back(ref);
             ref->VpiName(var->VpiName());
             path->VpiFullName(var->VpiName());
-            PathId parentFileId = fileSystem->toPathId(
-                parent->VpiFile(),
-                m_compileDesign->getCompiler()->getSymbolTable());
+            PathId parentFileId =
+                fileSystem->toPathId(parent->VpiFile(), symbols);
             indexTypespec = (typespec*)m_helper.decodeHierPath(
                 path, invalidValue, mod, m_compileDesign, Reduce::Yes, nullptr,
                 parentFileId, parent->VpiLineNo(), (any*)parent,
@@ -2377,6 +2373,9 @@ UHDM::any* UhdmWriter::swapForSpecifiedVar(UHDM::Serializer& s,
 
 void UhdmWriter::lateTypedefBinding(UHDM::Serializer& s, DesignComponent* mod,
                                     scope* m) {
+  Compiler* const compiler = m_compileDesign->getCompiler();
+  Design* const design = compiler->getDesign();
+
   for (UHDM::any* var : mod->getLateTypedefBinding()) {
     const typespec* orig = nullptr;
     if (expr* ex = any_cast<expr*>(var)) {
@@ -2412,8 +2411,7 @@ void UhdmWriter::lateTypedefBinding(UHDM::Serializer& s, DesignComponent* mod,
         if (res.size() > 1) {
           const std::string_view packName = res[0];
           const std::string_view typeName = res[1];
-          Package* pack =
-              m_compileDesign->getCompiler()->getDesign()->getPackage(packName);
+          Package* pack = design->getPackage(packName);
           if (pack) {
             const auto& itr = m_componentMap.find(pack);
             if (itr != m_componentMap.end()) {
@@ -3097,7 +3095,11 @@ void UhdmWriter::lateTypedefBinding(UHDM::Serializer& s, DesignComponent* mod,
 }
 
 void UhdmWriter::lateBinding(Serializer& s, DesignComponent* mod, scope* m) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  Compiler* const compiler = m_compileDesign->getCompiler();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  ErrorContainer* const errors = m_session->getErrorContainer();
+  CommandLineParser* const clp = m_session->getCommandLineParser();
   for (UHDM::ref_obj* ref : mod->getLateBinding()) {
     if (ref->Actual_group()) continue;
     std::string_view name = ref->VpiName();
@@ -3108,8 +3110,7 @@ void UhdmWriter::lateBinding(Serializer& s, DesignComponent* mod, scope* m) {
       if (res.size() > 1) {
         const std::string_view packName = res[0];
         const std::string_view typeName = res[1];
-        Package* pack =
-            m_compileDesign->getCompiler()->getDesign()->getPackage(packName);
+        Package* pack = compiler->getDesign()->getPackage(packName);
         if (pack) {
           const auto& itr = m_componentMap.find(pack);
           if (itr != m_componentMap.end()) {
@@ -3740,19 +3741,12 @@ void UhdmWriter::lateBinding(Serializer& s, DesignComponent* mod, scope* m) {
       if (mod) {
         if (auto elem = mod->getDesignElement()) {
           if (elem->m_defaultNetType == VObjectType::slNoType) {
-            Location loc(fileSystem->toPathId(
-                             ref->VpiFile(),
-                             m_compileDesign->getCompiler()->getSymbolTable()),
+            Location loc(fileSystem->toPathId(ref->VpiFile(), symbols),
                          ref->VpiLineNo(), ref->VpiColumnNo(),
-                         m_compileDesign->getCompiler()
-                             ->getSymbolTable()
-                             ->registerSymbol(name));
+                         symbols->registerSymbol(name));
             Error err(ErrorDefinition::ELAB_ILLEGAL_IMPLICIT_NET, loc);
-            m_compileDesign->getCompiler()->getErrorContainer()->addError(err);
-            m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
-                m_compileDesign->getCompiler()
-                    ->getCommandLineParser()
-                    ->muteStdout());
+            errors->addError(err);
+            errors->printMessages(clp->muteStdout());
           } else {
             if (m && (m->UhdmType() == uhdmmodule_inst ||
                       m->UhdmType() == uhdminterface_inst ||
@@ -4182,7 +4176,8 @@ void UhdmWriter::writeInstance(ModuleDefinition* mod, ModuleInstance* instance,
                                any* m, CompileDesign* compileDesign,
                                ModPortMap& modPortMap, InstanceMap& instanceMap,
                                ExprBuilder& exprBuilder) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  Compiler* const compiler = m_compileDesign->getCompiler();
+  FileSystem* const fileSystem = m_session->getFileSystem();
   Serializer& s = compileDesign->getSerializer();
   VectorOfmodule_inst* subModules = nullptr;
   VectorOfprogram* subPrograms = nullptr;
@@ -4252,7 +4247,7 @@ void UhdmWriter::writeInstance(ModuleDefinition* mod, ModuleInstance* instance,
         module_inst* sm = s.MakeModule_inst();
         tempInstanceMap.emplace(child, sm);
         if (childDef && !childDef->getFileContents().empty() &&
-            compileDesign->getCompiler()->isLibraryFile(
+            compiler->isLibraryFile(
                 childDef->getFileContents()[0]->getFileId())) {
           sm->VpiCellInstance(true);
         }
@@ -4656,22 +4651,22 @@ void filterAlwaysBlocks(Serializer& s, design* d) {
   }
 }
 
-vpiHandle UhdmWriter::write(PathId uhdmFileId) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+UHDM::design* UhdmWriter::write(PathId uhdmFileId) {
+  Compiler* const compiler = m_compileDesign->getCompiler();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  ErrorContainer* const errors = m_session->getErrorContainer();
+  CommandLineParser* const clp = m_session->getCommandLineParser();
   ModPortMap modPortMap;
   InstanceMap instanceMap;
   ModuleMap moduleMap;
   Serializer& s = m_compileDesign->getSerializer();
-  ExprBuilder exprBuilder;
-  exprBuilder.seterrorReporting(
-      m_compileDesign->getCompiler()->getErrorContainer(),
-      m_compileDesign->getCompiler()->getSymbolTable());
+  ExprBuilder exprBuilder(m_session);
 
   Location loc(uhdmFileId);
   Error err(ErrorDefinition::UHDM_CREATING_MODEL, loc);
-  m_compileDesign->getCompiler()->getErrorContainer()->addError(err);
-  m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
-      m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
+  errors->addError(err);
+  errors->printMessages(clp->muteStdout());
 
   m_helper.setElabMode(false);
 
@@ -4706,25 +4701,24 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
 
   vpiHandle designHandle = 0;
   std::vector<vpiHandle> designs;
-  design* d = nullptr;
   if (m_design) {
-    d = s.MakeDesign();
-    m_uhdmDesign = d;
-    designHandle = reinterpret_cast<vpiHandle>(new uhdm_handle(uhdmdesign, d));
+    m_uhdmDesign = s.MakeDesign();
+    designHandle =
+        reinterpret_cast<vpiHandle>(new uhdm_handle(uhdmdesign, m_uhdmDesign));
     std::string designName = "unnamed";
-    auto topLevelModules = m_design->getTopLevelModuleInstances();
+    const auto& topLevelModules = m_design->getTopLevelModuleInstances();
     if (!topLevelModules.empty()) {
       designName = topLevelModules.front()->getModuleName();
     }
-    d->VpiName(designName);
+    m_uhdmDesign->VpiName(designName);
     designs.push_back(designHandle);
 
     // ---------------------------
     // Include File Info
     if (m_compileDesign->getFileInfo()) {
-      d->Include_file_infos(m_compileDesign->getFileInfo());
+      m_uhdmDesign->Include_file_infos(m_compileDesign->getFileInfo());
       for (auto ifi : *m_compileDesign->getFileInfo()) {
-        ifi->VpiParent(d);
+        ifi->VpiParent(m_uhdmDesign);
       }
     }
 
@@ -4733,47 +4727,47 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
 
     // FileContent
     VectorOftypespec* typespecs = s.MakeTypespecVec();
-    d->Typespecs(typespecs);
+    m_uhdmDesign->Typespecs(typespecs);
     for (auto& fileIdContent : m_design->getAllFileContents()) {
       // Typepecs
-      writeDataTypes(fileIdContent.second->getDataTypeMap(), d, typespecs, s,
-                     true);
+      writeDataTypes(fileIdContent.second->getDataTypeMap(), m_uhdmDesign,
+                     typespecs, s, true);
 
       // Function and tasks
       if (auto from = fileIdContent.second->getTask_funcs()) {
-        UHDM::VectorOftask_func* target = d->Task_funcs();
+        UHDM::VectorOftask_func* target = m_uhdmDesign->Task_funcs();
         if (target == nullptr) {
-          d->Task_funcs(s.MakeTask_funcVec());
-          target = d->Task_funcs();
+          m_uhdmDesign->Task_funcs(s.MakeTask_funcVec());
+          target = m_uhdmDesign->Task_funcs();
         }
         for (auto tf : *from) {
           target->push_back(tf);
-          if (tf->VpiParent() == nullptr) tf->VpiParent(d);
+          if (tf->VpiParent() == nullptr) tf->VpiParent(m_uhdmDesign);
         }
       }
 
       // Parameters
       if (auto from = fileIdContent.second->getParameters()) {
-        UHDM::VectorOfany* target = d->Parameters();
+        UHDM::VectorOfany* target = m_uhdmDesign->Parameters();
         if (target == nullptr) {
-          d->Parameters(s.MakeAnyVec());
-          target = d->Parameters();
+          m_uhdmDesign->Parameters(s.MakeAnyVec());
+          target = m_uhdmDesign->Parameters();
         }
         for (auto tf : *from) {
-          tf->VpiParent(d);
+          tf->VpiParent(m_uhdmDesign);
           target->push_back(tf);
         }
       }
 
       // Param assigns
       if (auto from = fileIdContent.second->getParam_assigns()) {
-        UHDM::VectorOfparam_assign* target = d->Param_assigns();
+        UHDM::VectorOfparam_assign* target = m_uhdmDesign->Param_assigns();
         if (target == nullptr) {
-          d->Param_assigns(s.MakeParam_assignVec());
-          target = d->Param_assigns();
+          m_uhdmDesign->Param_assigns(s.MakeParam_assignVec());
+          target = m_uhdmDesign->Param_assigns();
         }
         for (auto tf : *from) {
-          tf->VpiParent(d);
+          tf->VpiParent(m_uhdmDesign);
           target->push_back(tf);
         }
       }
@@ -4800,7 +4794,7 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
         const FileContent* fC = pack->getFileContents()[0];
         package* p = (package*)pack->getUhdmInstance();
         m_componentMap.emplace(pack, p);
-        p->VpiParent(d);
+        p->VpiParent(m_uhdmDesign);
         p->VpiTop(true);
         p->VpiDefName(pack->getName());
         if (pack->Attributes() != nullptr) {
@@ -4819,12 +4813,12 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
         v2->push_back(p);
       }
     }
-    d->TopPackages(v2);
+    m_uhdmDesign->TopPackages(v2);
 
     m_helper.setElabMode(false);
 
     VectorOfpackage* v3 = s.MakePackageVec();
-    d->AllPackages(v3);
+    m_uhdmDesign->AllPackages(v3);
     for (Package* pack : packages) {
       if (!pack) continue;
       if (!pack->getFileContents().empty() &&
@@ -4835,7 +4829,7 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
         if (p == nullptr) p = s.MakePackage();
         m_componentMap.emplace(pack->getUnElabPackage(), p);
         p->VpiName(pack->getName());
-        p->VpiParent(d);
+        p->VpiParent(m_uhdmDesign);
         p->VpiDefName(pack->getName());
         if (pack->Attributes() != nullptr) {
           p->Attributes(pack->Attributes());
@@ -4870,7 +4864,7 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
         program* p = s.MakeProgram();
         m_componentMap.emplace(prog, p);
         moduleMap.emplace(prog->getName(), p);
-        p->VpiParent(d);
+        p->VpiParent(m_uhdmDesign);
         p->VpiDefName(prog->getName());
         const NodeId modId = prog->getNodeIds()[0];
         const NodeId startId = fC->sl_collect(modId, VObjectType::paPROGRAM);
@@ -4885,7 +4879,7 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
         uhdm_programs->push_back(p);
       }
     }
-    d->AllPrograms(uhdm_programs);
+    m_uhdmDesign->AllPrograms(uhdm_programs);
 
     // Interfaces
     auto modules = m_design->getModuleDefinitions();
@@ -4899,7 +4893,7 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
         interface_inst* m = s.MakeInterface_inst();
         m_componentMap.emplace(mod, m);
         moduleMap.emplace(mod->getName(), m);
-        m->VpiParent(d);
+        m->VpiParent(m_uhdmDesign);
         m->VpiDefName(mod->getName());
         const NodeId modId = mod->getNodeIds()[0];
         const NodeId startId = fC->sl_collect(modId, VObjectType::paINTERFACE);
@@ -4914,7 +4908,7 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
         writeInterface(mod, m, s, modPortMap);
       }
     }
-    d->AllInterfaces(uhdm_interfaces);
+    m_uhdmDesign->AllInterfaces(uhdm_interfaces);
 
     // Modules
     VectorOfmodule_inst* uhdm_modules = s.MakeModule_instVec();
@@ -4927,8 +4921,7 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
       } else if (mod->getType() == VObjectType::paModule_declaration) {
         const FileContent* fC = mod->getFileContents()[0];
         module_inst* m = s.MakeModule_inst();
-        if (m_compileDesign->getCompiler()->isLibraryFile(
-                mod->getFileContents()[0]->getFileId())) {
+        if (compiler->isLibraryFile(mod->getFileContents()[0]->getFileId())) {
           m->VpiCellInstance(true);
           // Don't list library cells unused in the design
           if (mod && (designComponents.find(mod) == designComponents.end()))
@@ -4939,13 +4932,13 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
         moduleMap.emplace(modName, m);
         m->VpiDefName(modName);
         if (modName.find("::") == std::string_view::npos) {
-          m->VpiParent(d);
+          m->VpiParent(m_uhdmDesign);
         } else {
           modName = StringUtils::rtrim_until(modName, ':');
           modName.remove_suffix(1);
           ModuleMap::const_iterator pmodIt = moduleMap.find(modName);
           if (pmodIt == moduleMap.end()) {
-            m->VpiParent(d);
+            m->VpiParent(m_uhdmDesign);
           } else {
             m->VpiParent(pmodIt->second);
           }
@@ -4967,7 +4960,7 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
         UHDM::udp_defn* defn = mod->getUdpDefn();
         if (defn) {
           m_componentMap.emplace(mod, defn);
-          defn->VpiParent(d);
+          defn->VpiParent(m_uhdmDesign);
           defn->VpiDefName(mod->getName());
           const NodeId modId = mod->getNodeIds()[0];
           const NodeId startId =
@@ -4983,8 +4976,8 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
         }
       }
     }
-    d->AllModules(uhdm_modules);
-    d->AllUdps(uhdm_udps);
+    m_uhdmDesign->AllModules(uhdm_modules);
+    m_uhdmDesign->AllUdps(uhdm_udps);
     for (module_inst* mod : *uhdm_modules) {
       if (mod->Ref_modules()) {
         for (auto subMod : *mod->Ref_modules()) {
@@ -5006,11 +4999,11 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
           classDef->getType() == VObjectType::paClass_declaration) {
         class_defn* c = classDef->getUhdmDefinition();
         if (!c->VpiParent()) {
-          writeClass(classDef, v4, s, d);
+          writeClass(classDef, v4, s, m_uhdmDesign);
         }
       }
     }
-    d->AllClasses(v4);
+    m_uhdmDesign->AllClasses(v4);
 
     // -------------------------------
     // Elaborated Model (Folded)
@@ -5041,10 +5034,10 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
                     exprBuilder);
       uhdm_top_modules->push_back(m);
     }
-    d->TopModules(uhdm_top_modules);
+    m_uhdmDesign->TopModules(uhdm_top_modules);
   }
 
-  if (m_compileDesign->getCompiler()->getCommandLineParser()->getUhdmStats()) {
+  if (clp->getUhdmStats()) {
     s.PrintStats(std::cerr, "Non-Elaborated Model");
   }
 
@@ -5052,11 +5045,10 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
 
   // ----------------------------------
   // Fully elaborated model
-  if (m_compileDesign->getCompiler()->getCommandLineParser()->getElabUhdm()) {
+  if (clp->getElabUhdm()) {
     Error err(ErrorDefinition::UHDM_ELABORATION, loc);
-    m_compileDesign->getCompiler()->getErrorContainer()->addError(err);
-    m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
-        m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
+    errors->addError(err);
+    errors->printMessages(clp->muteStdout());
 
     if (ElaboratorContext* elaboratorContext =
             new ElaboratorContext(&s, false, false)) {
@@ -5065,13 +5057,11 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
       delete elaboratorContext;
     }
 
-    if (m_compileDesign->getCompiler()
-            ->getCommandLineParser()
-            ->getUhdmStats()) {
+    if (clp->getUhdmStats()) {
       s.PrintStats(std::cerr, "Elaborated Model");
     }
 
-    if (UhdmAdjuster* adjuster = new UhdmAdjuster(&s, d)) {
+    if (UhdmAdjuster* adjuster = new UhdmAdjuster(&s, m_uhdmDesign)) {
       adjuster->listenDesigns(designs);
       delete adjuster;
     }
@@ -5079,24 +5069,20 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
 
   // ----------------------------------
   // Lint only the elaborated model
-  if (UhdmLint* linter = new UhdmLint(&s, d)) {
+  if (UhdmLint* linter = new UhdmLint(&s, m_uhdmDesign)) {
     linter->listenDesigns(designs);
     delete linter;
   }
 
-  if (m_compileDesign->getCompiler()
-          ->getCommandLineParser()
-          ->reportNonSynthesizable()) {
+  if (clp->reportNonSynthesizable()) {
     std::set<const any*> nonSynthesizableObjects;
     if (SynthSubset* annotate =
-            new SynthSubset(&s, nonSynthesizableObjects, d, true,
-                            m_compileDesign->getCompiler()
-                                ->getCommandLineParser()
-                                ->reportNonSynthesizableWithFormal())) {
+            new SynthSubset(&s, nonSynthesizableObjects, m_uhdmDesign, true,
+                            clp->reportNonSynthesizableWithFormal())) {
       annotate->listenDesigns(designs);
       annotate->filterNonSynthesizable();
       delete annotate;
-      filterAlwaysBlocks(s, d);
+      filterAlwaysBlocks(s, m_uhdmDesign);
     }
   }
 
@@ -5108,72 +5094,60 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
   }
 
   const fs::path uhdmFile = fileSystem->toPlatformAbsPath(uhdmFileId);
-  if (m_compileDesign->getCompiler()->getCommandLineParser()->writeUhdm()) {
+  if (clp->writeUhdm()) {
     Error err(ErrorDefinition::UHDM_WRITE_DB, loc);
-    m_compileDesign->getCompiler()->getErrorContainer()->addError(err);
-    m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
-        m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
-    s.SetGCEnabled(
-        m_compileDesign->getCompiler()->getCommandLineParser()->gc());
+    errors->addError(err);
+    errors->printMessages(clp->muteStdout());
+    s.SetGCEnabled(clp->gc());
     s.Save(uhdmFile);
   }
 
-  if (m_compileDesign->getCompiler()->getCommandLineParser()->getDebugUhdm() ||
-      m_compileDesign->getCompiler()->getCommandLineParser()->getCoverUhdm()) {
+  if (clp->getDebugUhdm() || clp->getCoverUhdm()) {
     // Check before restore
-    Location loc(fileSystem->getCheckerHtmlFile(
-        uhdmFileId, m_compileDesign->getCompiler()->getSymbolTable()));
+    Location loc(fileSystem->getCheckerHtmlFile(uhdmFileId, symbols));
     Error err(ErrorDefinition::UHDM_WRITE_HTML_COVERAGE, loc);
-    m_compileDesign->getCompiler()->getErrorContainer()->addError(err);
-    m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
-        m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
+    errors->addError(err);
+    errors->printMessages(clp->muteStdout());
 
-    if (UhdmChecker* uhdmchecker = new UhdmChecker(m_compileDesign, m_design)) {
+    if (UhdmChecker* uhdmchecker =
+            new UhdmChecker(m_session, m_compileDesign, m_design)) {
       uhdmchecker->check(uhdmFileId);
       delete uhdmchecker;
     }
   }
 
-  if (m_compileDesign->getCompiler()->getCommandLineParser()->getDebugUhdm()) {
-    if (m_compileDesign->getCompiler()->getCommandLineParser()->writeUhdm()) {
+  if (clp->getDebugUhdm()) {
+    if (clp->writeUhdm()) {
       Location loc((SymbolId)uhdmFileId);
       Error err1(ErrorDefinition::UHDM_LOAD_DB, loc);
-      m_compileDesign->getCompiler()->getErrorContainer()->addError(err1);
-      m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
-          m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
+      errors->addError(err1);
+      errors->printMessages(clp->muteStdout());
       const std::vector<vpiHandle>& restoredDesigns =
           s.Restore(uhdmFile.string());
 
       Error err2(ErrorDefinition::UHDM_VISITOR, loc);
-      m_compileDesign->getCompiler()->getErrorContainer()->addError(err2);
-      m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
-          m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
+      errors->addError(err2);
+      errors->printMessages(clp->muteStdout());
 
       std::cout << "====== UHDM =======\n";
       if (!restoredDesigns.empty()) {
         designHandle = restoredDesigns[0];
       }
-      vpi_show_ids(
-          m_compileDesign->getCompiler()->getCommandLineParser()->showVpiIds());
+      vpi_show_ids(clp->showVpiIds());
       visit_designs(restoredDesigns, std::cout);
       std::cout << "===================\n";
     } else {
-      Location loc(
-          m_compileDesign->getCompiler()->getSymbolTable()->registerSymbol(
-              "in-memory uhdm"));
+      Location loc(symbols->registerSymbol("in-memory uhdm"));
       Error err2(ErrorDefinition::UHDM_VISITOR, loc);
-      m_compileDesign->getCompiler()->getErrorContainer()->addError(err2);
-      m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
-          m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
+      errors->addError(err2);
+      errors->printMessages(clp->muteStdout());
       std::cout << "====== UHDM =======\n";
-      vpi_show_ids(
-          m_compileDesign->getCompiler()->getCommandLineParser()->showVpiIds());
+      vpi_show_ids(clp->showVpiIds());
       visit_designs({designHandle}, std::cout);
       std::cout << "===================\n";
     }
   }
-  m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
-      m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
-  return designHandle;
+  errors->printMessages(clp->muteStdout());
+  return m_uhdmDesign;
 }
 }  // namespace SURELOG

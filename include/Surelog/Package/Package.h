@@ -35,19 +35,19 @@
 #include <uhdm/containers.h>
 
 namespace SURELOG {
-
 class CompilePackage;
 class FileContent;
 class Library;
 class Netlist;
+class Session;
 
 class Package : public DesignComponent {
   SURELOG_IMPLEMENT_RTTI(Package, DesignComponent)
   friend CompilePackage;
 
  public:
-  Package(std::string_view name, Library* library, FileContent* fC,
-          NodeId nodeId);
+  Package(Session* session, std::string_view name, Library* library,
+          FileContent* fC, NodeId nodeId);
   void append(Package* package);
 
   ~Package() override = default;

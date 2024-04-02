@@ -24,6 +24,7 @@
 #include <Surelog/Cache/PPCache.h>
 #include <Surelog/CommandLine/CommandLineParser.h>
 #include <Surelog/Common/FileSystem.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/Design.h>
 #include <Surelog/Design/FileContent.h>
 #include <Surelog/Design/TimeInfo.h>
@@ -36,12 +37,11 @@
 #include <Surelog/SourceCompile/PreprocessFile.h>
 #include <Surelog/SourceCompile/SymbolTable.h>
 #include <Surelog/Utils/StringUtils.h>
+#include <Surelog/config.h>
 #include <capnp/serialize-packed.h>
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-
-#include "Surelog/config.h"
 
 #if defined(_MSC_VER)
 #include <io.h>
@@ -56,15 +56,16 @@ namespace SURELOG {
 static constexpr std::string_view kSchemaVersion = "1.6";
 static constexpr std::string_view UnknownRawPath = "<unknown>";
 
-PPCache::PPCache(PreprocessFile* pp) : m_pp(pp) {}
+PPCache::PPCache(Session* session, PreprocessFile* pp)
+    : Cache(session), m_pp(pp) {}
 
 PathId PPCache::getCacheFileId(PathId sourceFileId) const {
   if (!sourceFileId) sourceFileId = m_pp->getFileId(LINE1);
   if (!sourceFileId) return BadPathId;
 
-  FileSystem* const fileSystem = FileSystem::getInstance();
-  CommandLineParser* clp = m_pp->getCompileSourceFile()->getCommandLineParser();
-  SymbolTable* symbolTable = m_pp->getCompileSourceFile()->getSymbolTable();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  CommandLineParser* const clp = m_session->getCommandLineParser();
 
   const std::string_view libName = m_pp->getLibrary()->getName();
 
@@ -74,14 +75,14 @@ PathId PPCache::getCacheFileId(PathId sourceFileId) const {
     // source location. Compute the "potential" Preprocessor output file so the
     // cache file location would be correct.
     sourceFileId = fileSystem->getPpOutputFile(clp->fileunit(), sourceFileId,
-                                               libName, symbolTable);
+                                               libName, symbols);
   }
 
-  Precompiled* prec = Precompiled::getSingleton();
-  const bool isPrecompiled = prec->isFilePrecompiled(sourceFileId, symbolTable);
+  Precompiled* const precompiled = m_session->getPrecompiled();
+  const bool isPrecompiled = precompiled->isFilePrecompiled(sourceFileId);
 
   return fileSystem->getPpCacheFile(clp->fileunit(), sourceFileId, libName,
-                                    isPrecompiled, symbolTable);
+                                    isPrecompiled, symbols);
 }
 
 void PPCache::cacheSymbols(::PPCache::Builder builder,
@@ -96,11 +97,12 @@ void PPCache::cacheErrors(::PPCache::Builder builder,
                           SymbolTable& targetSymbols,
                           const ErrorContainer* errorContainer,
                           const SymbolTable& sourceSymbols, PathId subjectId) {
+  FileSystem* const fileSystem = m_session->getFileSystem();
   std::vector<Error> sourceErrors;
   sourceErrors.reserve(errorContainer->getErrors().size());
   for (const Error& error : errorContainer->getErrors()) {
     for (const Location& loc : error.getLocations()) {
-      if (loc.m_fileId == subjectId) {
+      if (loc.m_fileId.equals(subjectId, fileSystem)) {
         sourceErrors.emplace_back(error);
         break;
       }
@@ -131,14 +133,13 @@ static bool compareVectors(std::vector<T> a, std::vector<T> b) {
 
 bool PPCache::checkCacheIsValid(PathId cacheFileId,
                                 const ::PPCache::Reader& root) const {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  FileSystem* const fileSystem = m_session->getFileSystem();
   const ::Header::Reader& sourceHeader = root.getHeader();
 
-  SymbolTable* const targetSymbols =
-      m_pp->getCompileSourceFile()->getSymbolTable();
+  SymbolTable* const symbols = m_session->getSymbolTable();
 
-  Precompiled* prec = Precompiled::getSingleton();
-  if (prec->isFilePrecompiled(m_pp->getFileId(LINE1), targetSymbols)) {
+  Precompiled* const precompiled = m_session->getPrecompiled();
+  if (precompiled->isFilePrecompiled(m_pp->getFileId(LINE1))) {
     // For precompiled, check only the signature & version (so using
     // BadPathId instead of the actual arguments)
     return checkIfCacheIsValid(sourceHeader, kSchemaVersion, BadPathId,
@@ -150,7 +151,7 @@ bool PPCache::checkCacheIsValid(PathId cacheFileId,
     return false;
   }
 
-  CommandLineParser* clp = m_pp->getCompileSourceFile()->getCommandLineParser();
+  CommandLineParser* clp = m_session->getCommandLineParser();
   if (clp->parseOnly() || clp->lowMem()) return true;
 
   const ::capnp::List<::capnp::Text, ::capnp::Kind::BLOB>::Reader&
@@ -193,13 +194,11 @@ bool PPCache::checkCacheIsValid(PathId cacheFileId,
         (action == IncludeFileInfo::Action::PUSH)) {
       std::string cachedFile = fileSystem->remap(
           sourceSymbols[sourceIncludeFileInfo.getSectionFileId()].cStr());
-      PathId cachedFileId = fileSystem->toPathId(
-          cachedFile, m_pp->getCompileSourceFile()->getSymbolTable());
+      PathId cachedFileId = fileSystem->toPathId(cachedFile, symbols);
       PathId sessionFileId = fileSystem->locate(
           sourceSymbols[sourceIncludeFileInfo.getSectionSymbolId()].cStr(),
-          clp->getIncludePaths(),
-          m_pp->getCompileSourceFile()->getSymbolTable());
-      if (cachedFileId != sessionFileId) {
+          clp->getIncludePaths(), symbols);
+      if (!cachedFileId.equals(sessionFileId, fileSystem)) {
         return false;  // Symbols don't resolve to the same file!
       }
       targetIncludedFileIds.emplace(sessionFileId);
@@ -222,11 +221,11 @@ bool PPCache::checkCacheIsValid(PathId cacheFileId) const {
   if (!cacheFileId) return false;
   if (m_pp->isMacroBody()) return false;
 
-  CommandLineParser* clp = m_pp->getCompileSourceFile()->getCommandLineParser();
+  CommandLineParser* const clp = m_session->getCommandLineParser();
   if (clp->parseOnly() || clp->lowMem()) return true;
   if (m_pp->isMacroBody()) return false;
 
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  FileSystem* const fileSystem = m_session->getFileSystem();
   const std::string filepath =
       fileSystem->toPlatformAbsPath(cacheFileId).string();
 
@@ -252,7 +251,7 @@ bool PPCache::isValid() { return checkCacheIsValid(getCacheFileId(BadPathId)); }
 void PPCache::cacheMacros(::PPCache::Builder builder,
                           SymbolTable& targetSymbols,
                           const SymbolTable& sourceSymbols) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  FileSystem* const fileSystem = m_session->getFileSystem();
 
   const MacroStorage& sourceMacros = m_pp->getMacros();
   size_t count = 0;
@@ -315,8 +314,7 @@ void PPCache::cacheMacros(::PPCache::Builder builder,
 void PPCache::cacheDefines(::PPCache::Builder builder,
                            SymbolTable& targetSymbols,
                            const SymbolTable& sourceSymbols) {
-  CommandLineParser* const clp =
-      m_pp->getCompileSourceFile()->getCommandLineParser();
+  CommandLineParser* const clp = m_session->getCommandLineParser();
 
   const auto& sourceDefines = clp->getDefineList();
   ::capnp::List<::capnp::Text, ::capnp::Kind::BLOB>::Builder targetDefines =
@@ -334,14 +332,14 @@ void PPCache::cacheDefines(::PPCache::Builder builder,
 void PPCache::cacheTimeInfos(::PPCache::Builder builder,
                              SymbolTable& targetSymbols,
                              const SymbolTable& sourceSymbols) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  FileSystem* const fileSystem = m_session->getFileSystem();
 
   const std::vector<TimeInfo>& sourceTimeInfos =
       m_pp->getCompilationUnit()->getTimeInfo();
 
   size_t count = 0;
   for (const TimeInfo& sourceTimeInfo : sourceTimeInfos) {
-    if (sourceTimeInfo.m_fileId == m_pp->getFileId(0)) {
+    if (sourceTimeInfo.m_fileId.equals(m_pp->getFileId(0), fileSystem)) {
       ++count;
     }
   }
@@ -353,7 +351,8 @@ void PPCache::cacheTimeInfos(::PPCache::Builder builder,
 
   for (size_t i = 0, j = 0, ni = sourceTimeInfos.size(); i < ni; ++i) {
     const TimeInfo& sourceTimeInfo = sourceTimeInfos[i];
-    if (sourceTimeInfo.m_fileId != m_pp->getFileId(0)) continue;
+    if (!sourceTimeInfo.m_fileId.equals(m_pp->getFileId(0), fileSystem))
+      continue;
 
     ::TimeInfo::Builder targetTimeInfo = targetTimeInfos[j++];
     targetTimeInfo.setType(static_cast<uint16_t>(sourceTimeInfo.m_type));
@@ -372,7 +371,7 @@ void PPCache::cacheTimeInfos(::PPCache::Builder builder,
 void PPCache::cacheLineTranslationInfos(::PPCache::Builder builder,
                                         SymbolTable& targetSymbols,
                                         const SymbolTable& sourceSymbols) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  FileSystem* const fileSystem = m_session->getFileSystem();
 
   const std::vector<PreprocessFile::LineTranslationInfo>&
       sourceLineTranslationInfos = m_pp->getLineTranslationInfo();
@@ -399,7 +398,7 @@ void PPCache::cacheLineTranslationInfos(::PPCache::Builder builder,
 void PPCache::cacheIncludeFileInfos(::PPCache::Builder builder,
                                     SymbolTable& targetSymbols,
                                     const SymbolTable& sourceSymbols) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  FileSystem* const fileSystem = m_session->getFileSystem();
 
   const std::vector<IncludeFileInfo>& sourceIncludeFileInfos =
       m_pp->getIncludeFileInfo();
@@ -441,7 +440,7 @@ void PPCache::cacheIncludeFileInfos(::PPCache::Builder builder,
 void PPCache::restoreMacros(SymbolTable& targetSymbols,
                             const ::capnp::List<::Macro>::Reader& sourceMacros,
                             const SymbolTable& sourceSymbols) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  FileSystem* const fileSystem = m_session->getFileSystem();
 
   for (const ::Macro::Reader& sourceMacro : sourceMacros) {
     // std::cout << "RESTORING MACRO: " << macro->name()->str() << std::endl;
@@ -477,7 +476,7 @@ void PPCache::restoreTimeInfos(
     SymbolTable& targetSymbols,
     const ::capnp::List<::TimeInfo>::Reader& sourceTimeInfos,
     const SymbolTable& sourceSymbols) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  FileSystem* const fileSystem = m_session->getFileSystem();
 
   for (const ::TimeInfo::Reader& sourceTimeInfo : sourceTimeInfos) {
     TimeInfo targetTimeInfo;
@@ -504,7 +503,7 @@ void PPCache::restoreLineTranslationInfos(
     const ::capnp::List<::LineTranslationInfo>::Reader&
         sourceLineTranslationInfos,
     const SymbolTable& sourceSymbols) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  FileSystem* const fileSystem = m_session->getFileSystem();
 
   for (const ::LineTranslationInfo::Reader& sourceLineTranslationInfo :
        sourceLineTranslationInfos) {
@@ -523,7 +522,7 @@ void PPCache::restoreIncludeFileInfos(
     SymbolTable& targetSymbols,
     const ::capnp::List<::IncludeFileInfo>::Reader& sourceIncludeFileInfos,
     const SymbolTable& sourceSymbols) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  FileSystem* const fileSystem = m_session->getFileSystem();
 
   for (const ::IncludeFileInfo::Reader& sourceIncludeFileInfo :
        sourceIncludeFileInfos) {
@@ -555,12 +554,15 @@ bool PPCache::restore(PathId cacheFileId, bool errorsOnly,
                       int32_t recursionDepth) {
   if (!cacheFileId) return false;
 
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  FileSystem* const fileSystem = m_session->getFileSystem();
   const std::string filepath =
       fileSystem->toPlatformAbsPath(cacheFileId).string();
 
   const int32_t fd = ::open(filepath.c_str(), O_RDONLY | O_BINARY);
   if (fd < 0) return false;
+
+  SymbolTable* const targetSymbols = m_session->getSymbolTable();
+  ErrorContainer* const errors = m_session->getErrorContainer();
 
   bool result = true;
   do {
@@ -576,12 +578,9 @@ bool PPCache::restore(PathId cacheFileId, bool errorsOnly,
     }
 
     SymbolTable sourceSymbols;
-    SymbolTable* const targetSymbols =
-        m_pp->getCompileSourceFile()->getSymbolTable();
 
     restoreSymbols(sourceSymbols, root.getSymbols());
-    restoreErrors(m_pp->getCompileSourceFile()->getErrorContainer(),
-                  *targetSymbols, root.getErrors(), sourceSymbols);
+    restoreErrors(errors, *targetSymbols, root.getErrors(), sourceSymbols);
 
     // Always restore the macros
     restoreMacros(*targetSymbols, root.getMacros(), sourceSymbols);
@@ -610,9 +609,7 @@ bool PPCache::restore(PathId cacheFileId, bool errorsOnly,
     // FileContent
     FileContent* fC = m_pp->getFileContent();
     if (fC == nullptr) {
-      fC = new FileContent(m_pp->getFileId(0), m_pp->getLibrary(),
-                           m_pp->getCompileSourceFile()->getSymbolTable(),
-                           m_pp->getCompileSourceFile()->getErrorContainer(),
+      fC = new FileContent(m_session, m_pp->getFileId(0), m_pp->getLibrary(),
                            nullptr, BadPathId);
       m_pp->setFileContent(fC);
       m_pp->getCompileSourceFile()
@@ -635,10 +632,10 @@ bool PPCache::restore(PathId cacheFileId, bool errorsOnly,
 bool PPCache::restore(bool errorsOnly) {
   if (m_pp->isMacroBody()) return false;
 
-  CommandLineParser* clp = m_pp->getCompileSourceFile()->getCommandLineParser();
-  Precompiled* prec = Precompiled::getSingleton();
-  if (prec->isFilePrecompiled(m_pp->getFileId(LINE1),
-                              m_pp->getCompileSourceFile()->getSymbolTable())) {
+  CommandLineParser* const clp = m_session->getCommandLineParser();
+
+  Precompiled* const precompiled = m_session->getPrecompiled();
+  if (precompiled->isFilePrecompiled(m_pp->getFileId(LINE1))) {
     if (!clp->precompiledCacheAllowed()) return false;
   } else {
     if (!clp->cacheAllowed()) return false;
@@ -651,16 +648,17 @@ bool PPCache::restore(bool errorsOnly) {
 bool PPCache::save() {
   if (m_pp->isMacroBody()) return true;
 
-  CommandLineParser* const clp =
-      m_pp->getCompileSourceFile()->getCommandLineParser();
+  CommandLineParser* const clp = m_session->getCommandLineParser();
   if (!clp->writeCache()) return true;
+
+  ErrorContainer* const errors = m_session->getErrorContainer();
 
   FileContent* const fC = m_pp->getFileContent();
   if (fC && (fC->getVObjects().size() > Cache::Capacity)) {
     clp->setCacheAllowed(false);
     Location loc(BadSymbolId);
     Error err(ErrorDefinition::CMD_CACHE_CAPACITY_EXCEEDED, loc);
-    m_pp->getCompileSourceFile()->getErrorContainer()->addError(err);
+    errors->addError(err);
     return false;
   }
 
@@ -672,11 +670,9 @@ bool PPCache::save() {
 
   // std::cout << "SAVING FILE: " << PathIdPP(cacheFileId) << std::endl;
 
-  FileSystem* const fileSystem = FileSystem::getInstance();
-  ErrorContainer* const errorContainer =
-      m_pp->getCompileSourceFile()->getErrorContainer();
-  SymbolTable* const sourceSymbols =
-      m_pp->getCompileSourceFile()->getSymbolTable();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  ErrorContainer* const errorContainer = m_session->getErrorContainer();
+  SymbolTable* const sourceSymbols = m_session->getSymbolTable();
   SymbolTable targetSymbols;
 
   ::capnp::MallocMessageBuilder message;

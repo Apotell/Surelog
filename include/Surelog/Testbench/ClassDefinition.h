@@ -45,13 +45,14 @@ class DataType;
 class FileContent;
 class Library;
 class Property;
+class Session;
 
 class ClassDefinition : public DesignComponent, public DataType {
   SURELOG_IMPLEMENT_RTTI_2_BASES(ClassDefinition, DesignComponent, DataType)
   friend class CompileClass;
 
  public:
-  ClassDefinition(std::string_view name, Library* library,
+  ClassDefinition(Session* session, std::string_view name, Library* library,
                   DesignComponent* container, const FileContent* fC,
                   NodeId nodeId, ClassDefinition* parent,
                   UHDM::class_defn* uhdm_definition);

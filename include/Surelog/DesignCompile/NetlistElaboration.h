@@ -28,24 +28,24 @@
 #include <Surelog/DesignCompile/TestbenchElaboration.h>
 
 namespace SURELOG {
-
 class CompileDesign;
 class DesignComponent;
 class ModuleDefinition;
 class ModuleInstance;
 class Netlist;
+class Session;
 class Signal;
 
 class NetlistElaboration : public TestbenchElaboration {
  public:
-  explicit NetlistElaboration(CompileDesign* compileDesign);
+  explicit NetlistElaboration(Session* session, CompileDesign* compileDesign);
   NetlistElaboration(const NetlistElaboration& orig) = delete;
 
   bool elaborate() override;
   bool elaboratePackages();
   bool elaborateInstance(ModuleInstance* instance);
 
-  ~NetlistElaboration() override;
+  ~NetlistElaboration() override = default;
 
   typedef std::map<NodeId, UHDM::typespec*> TypespecCache;
   bool elabSignal(Signal* sig, ModuleInstance* instance, ModuleInstance* child,

@@ -47,9 +47,8 @@ class ModuleDefinition : public DesignComponent, public ClockingBlockHolder {
   friend CompileModule;
 
  public:
-  ModuleDefinition(const FileContent* fileContent, NodeId nodeId,
-                   std::string_view name);
-
+  ModuleDefinition(Session* session, const FileContent* fileContent,
+                   NodeId nodeId, std::string_view name);
   ~ModuleDefinition() override = default;
 
   std::string_view getName() const override { return m_name; }
@@ -147,7 +146,8 @@ class ModuleDefinition : public DesignComponent, public ClockingBlockHolder {
 
 class ModuleDefinitionFactory {
  public:
-  ModuleDefinition* newModuleDefinition(const FileContent* fileContent,
+  ModuleDefinition* newModuleDefinition(Session* session,
+                                        const FileContent* fileContent,
                                         NodeId nodeId, std::string_view name);
 };
 

@@ -43,13 +43,13 @@ class ParseTree;
 }  // namespace antlr4
 
 namespace SURELOG {
-
 class CompilationUnit;
 class CompileSourceFile;
 class Error;
 class FileContent;
 class Library;
 class MacroInfo;
+class Session;
 class SV3_1aPpLexer;
 class SV3_1aPpParser;
 class SV3_1aPpParserBaseListener;
@@ -73,11 +73,11 @@ class PreprocessFile final {
   class DescriptiveErrorListener;
 
   /* Constructors */
-  PreprocessFile(PathId fileId, CompileSourceFile* csf,
+  PreprocessFile(Session* session, PathId fileId, CompileSourceFile* csf,
                  SpecialInstructions& instructions,
                  CompilationUnit* compilationUnit, Library* library,
                  PreprocessFile* includer = nullptr, uint32_t includerLine = 0);
-  PreprocessFile(SymbolId macroId, CompileSourceFile* csf,
+  PreprocessFile(Session* session, SymbolId macroId, CompileSourceFile* csf,
                  SpecialInstructions& instructions,
                  CompilationUnit* compilationUnit, Library* library,
                  PreprocessFile* includer, uint32_t includerLine,
@@ -162,6 +162,7 @@ class PreprocessFile final {
   static const char* const PP__File__Marking;
 
  private:
+  Session* const m_session = nullptr;
   PathId m_fileId;
   SymbolId m_macroId;
   Library* m_library = nullptr;

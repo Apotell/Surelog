@@ -26,23 +26,23 @@
 #pragma once
 
 namespace SURELOG {
-
+class CompilationUnit;
 class CompileDesign;
 class Design;
-class CompilationUnit;
+class Session;
 
 // TODO: this looks like it should probably be more a
 // function ? Something like
 // SURELOG::addBuiltinsTo(Design *design);
 class Builtin final {
  public:
-  Builtin(CompileDesign* compiler, Design* design)
-      : m_compiler(compiler), m_design(design) {}
+  Builtin(Session* session, CompileDesign* compiler, Design* design);
   void addBuiltinMacros(CompilationUnit* compUnit);
   void addBuiltinTypes();
   void addBuiltinClasses();
 
  private:
+  Session* const m_session = nullptr;
   CompileDesign* const m_compiler;
   Design* const m_design;
 };

@@ -27,6 +27,7 @@
 #include <Surelog/API/Surelog.h>
 #include <Surelog/CommandLine/CommandLineParser.h>
 #include <Surelog/Common/PlatformFileSystem.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/ErrorReporting/ErrorContainer.h>
 #include <Surelog/SourceCompile/SymbolTable.h>
 #include <uhdm/ElaboratorListener.h>
@@ -1337,6 +1338,8 @@ class RoundTripTracer final : public UHDM::UhdmListener {
     const std::filesystem::path &filepath = object->VpiFile();
 
     const UHDM::any *const rhs = object->Rhs();
+    if (rhs == nullptr) return;  // Should never happen but it does!!
+
     uint32_t column = rhs->VpiColumnNo();
     // In case of delay, might be need to add one space.
     // Will revisit once get any test file.
@@ -1755,12 +1758,12 @@ class RoundTripTracer final : public UHDM::UhdmListener {
     const std::filesystem::path &filepath = object->VpiFile();
     std::string text = formatName(object->VpiName());
 
-    if (const UHDM::expr *const index = object->VpiIndex()) {
-      text.resize(index->VpiEndColumnNo() - object->VpiColumnNo() + 1,
-                  kOverwriteMarker);
-      text[index->VpiColumnNo() - object->VpiColumnNo() - 1] = '[';
-      text[index->VpiEndColumnNo() - object->VpiColumnNo()] = ']';
-    }
+    // if (const UHDM::expr *const index = object->VpiIndex()) {
+    //   text.resize(index->VpiEndColumnNo() - object->VpiColumnNo() + 1,
+    //               kOverwriteMarker);
+    //   text[index->VpiColumnNo() - object->VpiColumnNo() - 1] = '[';
+    //   text[index->VpiEndColumnNo() - object->VpiColumnNo()] = ']';
+    // }
 
     insert(filepath, object->VpiLineNo(), object->VpiColumnNo(), text);
   }
@@ -3627,32 +3630,33 @@ int main(int argc, const char **argv) {
   }
 #endif
 
-  SURELOG::FileSystem::setInstance(
-      new SURELOG::PlatformFileSystem(std::filesystem::current_path()));
+  SURELOG::Session session;
 
   // Read command line, compile a design, use -parse argument
   uint32_t code = 0;
-  SURELOG::FileSystem *const fileSystem = SURELOG::FileSystem::getInstance();
-  SURELOG::SymbolTable *const symbolTable = new SURELOG::SymbolTable();
-  SURELOG::ErrorContainer *const errors =
-      new SURELOG::ErrorContainer(symbolTable);
-  SURELOG::CommandLineParser *const clp =
-      new SURELOG::CommandLineParser(errors, symbolTable, false, false);
-  bool success = clp->parseCommandLine(argc, argv);
+  SURELOG::FileSystem *const fileSystem = session.getFileSystem();
+  SURELOG::ErrorContainer *const errors = session.getErrorContainer();
+  SURELOG::CommandLineParser *const clp = session.getCommandLineParser();
+  bool success = session.parseCommandLine(argc, argv, false, false);
   clp->noPython();
   clp->setElaborate(false);
   clp->setElabUhdm(false);  // Force disable elaboration!
   clp->setCoverUhdm(false);
-  // clp->setDebugAstModel(false);
+  clp->setDebugAstModel(false);
+#if defined(_DEBUG)
   clp->setDebugUhdm(true);
   clp->showVpiIds(true);
+#else
+  clp->setDebugUhdm(false);
+  clp->showVpiIds(false);
+#endif
   errors->printMessages(clp->muteStdout());
 
   vpiHandle vpi_design = nullptr;
   SURELOG::scompiler *compiler = nullptr;
   if (success && (!clp->help())) {
-    compiler = SURELOG::start_compiler(clp);
-    vpi_design = SURELOG::get_uhdm_design(compiler);
+    compiler = SURELOG::start_compiler(&session);
+    vpi_design = SURELOG::get_vpi_design(compiler);
     auto stats = errors->getErrorStats();
     code = (!success) | stats.nbFatal | stats.nbSyntax | stats.nbError;
   }
@@ -3672,9 +3676,6 @@ int main(int argc, const char **argv) {
 
   // Do not delete these objects until you are done with UHDM
   SURELOG::shutdown_compiler(compiler);
-  delete clp;
-  delete symbolTable;
-  delete errors;
 
 #if defined(_MSC_VER) && defined(_DEBUG)
   // Redirect cout back to screen

@@ -14,6 +14,7 @@
  limitations under the License.
 */
 
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/Design.h>
 #include <Surelog/DesignCompile/CompileDesign.h>
 #include <Surelog/DesignCompile/CompileHelper.h>
@@ -33,8 +34,9 @@ using ::testing::ElementsAre;
 namespace {
 
 TEST(Uhdm, PortType) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   Design* design;
   FileContent* fC;
@@ -51,7 +53,7 @@ TEST(Uhdm, PortType) {
   auto insts = design->getTopLevelModuleInstances();
   EXPECT_EQ(insts.size(), 3);
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     std::string_view instName = topMod->VpiName();
@@ -70,8 +72,9 @@ TEST(Uhdm, PortType) {
   }
 }
 TEST(Uhdm, Unsigned) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   Design* design;
   FileContent* fC;
@@ -90,7 +93,7 @@ TEST(Uhdm, Unsigned) {
   auto insts = design->getTopLevelModuleInstances();
   EXPECT_EQ(insts.size(), 1);
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     EXPECT_EQ(topMod->Param_assigns()->size(), 6);

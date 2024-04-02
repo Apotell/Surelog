@@ -30,14 +30,15 @@
 #include <parser/SV3_1aParserBaseListener.h>
 
 namespace SURELOG {
-
 class Config;
 class ParseLibraryDef;
+class Session;
 
 class SVLibShapeListener : public SV3_1aParserBaseListener,
                            public SV3_1aTreeShapeHelper {
  public:
-  SVLibShapeListener(ParseLibraryDef* parser, antlr4::CommonTokenStream* tokens);
+  SVLibShapeListener(Session* session, ParseLibraryDef* parser,
+                     antlr4::CommonTokenStream* tokens);
 
   SymbolId registerSymbol(std::string_view symbol) final;
 
@@ -170,8 +171,8 @@ class SVLibShapeListener : public SV3_1aParserBaseListener,
       SV3_1aParser::Hierarchical_identifierContext* ctx) final;
 
  private:
-  ParseLibraryDef* m_parser;
-  antlr4::CommonTokenStream* m_tokens;
+  ParseLibraryDef* const m_parser = nullptr;
+  antlr4::CommonTokenStream* const m_tokens = nullptr;
 };
 
 };  // namespace SURELOG

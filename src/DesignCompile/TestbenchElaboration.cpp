@@ -22,6 +22,7 @@
  */
 
 #include <Surelog/Common/FileSystem.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/Design.h>
 #include <Surelog/Design/FileContent.h>
 #include <Surelog/Design/Parameter.h>
@@ -141,6 +142,10 @@ std::vector<std::string_view> computeVarChain(const FileContent* fC,
   return var_chain;
 }
 
+TestbenchElaboration::TestbenchElaboration(Session* session,
+                                           CompileDesign* compileDesign)
+    : ElaborationStep(session, compileDesign) {}
+
 bool TestbenchElaboration::bindClasses_() {
   checkForMultipleDefinition_();
   bindBaseClasses_();
@@ -152,20 +157,21 @@ bool TestbenchElaboration::bindClasses_() {
 }
 
 bool TestbenchElaboration::checkForMultipleDefinition_() {
-  FileSystem* const fileSystem = FileSystem::getInstance();
-  Compiler* compiler = m_compileDesign->getCompiler();
-  ErrorContainer* errors = compiler->getErrorContainer();
-  SymbolTable* symbols = compiler->getSymbolTable();
-  Design* design = compiler->getDesign();
-  ClassNameClassDefinitionMultiMap classes = design->getClassDefinitions();
+  Compiler* const compiler = m_compileDesign->getCompiler();
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  ErrorContainer* const errors = m_session->getErrorContainer();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  Design* const design = compiler->getDesign();
+  const ClassNameClassDefinitionMultiMap& classes =
+      design->getClassDefinitions();
 
   // Check for multiple definition
   std::string prevClassName;
   ClassDefinition* prevClassDefinition = nullptr;
-  for (ClassNameClassDefinitionMultiMap::iterator itr = classes.begin();
-       itr != classes.end(); itr++) {
-    std::string className = (*itr).first;
-    ClassDefinition* classDefinition = (*itr).second;
+  for (ClassNameClassDefinitionMultiMap::const_iterator itr = classes.begin();
+       itr != classes.end(); ++itr) {
+    std::string className = itr->first;
+    ClassDefinition* classDefinition = itr->second;
     bool done = false;
     if (className == prevClassName) {
       const FileContent* fC1 = classDefinition->getFileContents()[0];
@@ -185,7 +191,7 @@ bool TestbenchElaboration::checkForMultipleDefinition_() {
         Location loc2(fileId2, line2, fC2->Column(nodeId2),
                       symbols->registerSymbol(className));
 
-        if ((fileId1 != fileId2) || (line1 != line2)) {
+        if (!fileId1.equals(fileId2, fileSystem) || (line1 != line2)) {
           std::string diff;
           if (fC1->diffTree(nodeId1, fC2, nodeId2, &diff)) {
             locations.push_back(loc2);
@@ -226,8 +232,8 @@ bool TestbenchElaboration::bindBaseClasses_() {
   Compiler* compiler = m_compileDesign->getCompiler();
   Design* design = compiler->getDesign();
   UHDM::Serializer& s = m_compileDesign->getSerializer();
-
-  ClassNameClassDefinitionMultiMap classes = design->getClassDefinitions();
+  const ClassNameClassDefinitionMultiMap& classes =
+      design->getClassDefinitions();
 
   // Bind base classes
   for (const auto& [className, classDefinition] : classes) {
@@ -308,7 +314,8 @@ bool TestbenchElaboration::bindBaseClasses_() {
 bool TestbenchElaboration::bindDataTypes_() {
   Compiler* compiler = m_compileDesign->getCompiler();
   Design* design = compiler->getDesign();
-  ClassNameClassDefinitionMultiMap classes = design->getClassDefinitions();
+  const ClassNameClassDefinitionMultiMap& classes =
+      design->getClassDefinitions();
 
   // Bind data types
   for (const auto& [className, classDefinition] : classes) {
@@ -353,11 +360,12 @@ bool TestbenchElaboration::bindFunctions_() {
 }
 
 bool TestbenchElaboration::bindFunctionReturnTypesAndParamaters_() {
-  Compiler* compiler = m_compileDesign->getCompiler();
-  ErrorContainer* errors = compiler->getErrorContainer();
-  SymbolTable* symbols = compiler->getSymbolTable();
-  Design* design = compiler->getDesign();
-  ClassNameClassDefinitionMultiMap classes = design->getClassDefinitions();
+  Compiler* const compiler = m_compileDesign->getCompiler();
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  ErrorContainer* const errors = m_session->getErrorContainer();
+  Design* const design = compiler->getDesign();
+  const ClassNameClassDefinitionMultiMap& classes =
+      design->getClassDefinitions();
 
   // Bind Function return values, parameters and body
   for (const auto& [className, classDefinition] : classes) {
@@ -413,9 +421,10 @@ bool TestbenchElaboration::bindFunctionReturnTypesAndParamaters_() {
 }
 
 bool TestbenchElaboration::bindSubRoutineCall_(ClassDefinition* classDefinition,
-                                               Statement* stmt, Design* design,
-                                               SymbolTable* symbols,
-                                               ErrorContainer* errors) {
+                                               Statement* stmt,
+                                               Design* design) {
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  ErrorContainer* const errors = m_session->getErrorContainer();
   std::string datatypeName;
   SubRoutineCallStmt* st = statement_cast<SubRoutineCallStmt*>(stmt);
   std::vector<std::string_view> var_chain = st->getVarChainNames();
@@ -616,11 +625,10 @@ bool TestbenchElaboration::bindForeachLoop_(ClassDefinition* classDefinition,
 }
 
 bool TestbenchElaboration::bindFunctionBodies_() {
-  Compiler* compiler = m_compileDesign->getCompiler();
-  ErrorContainer* errors = compiler->getErrorContainer();
-  SymbolTable* symbols = compiler->getSymbolTable();
-  Design* design = compiler->getDesign();
-  ClassNameClassDefinitionMultiMap classes = design->getClassDefinitions();
+  Compiler* const compiler = m_compileDesign->getCompiler();
+  Design* const design = compiler->getDesign();
+  const ClassNameClassDefinitionMultiMap& classes =
+      design->getClassDefinitions();
 
   // Bind Function return values, parameters and body
   for (const auto& [className, classDefinition] : classes) {
@@ -654,7 +662,7 @@ bool TestbenchElaboration::bindFunctionBodies_() {
             break;
           }
           case VObjectType::paSubroutine_call_statement:
-            bindSubRoutineCall_(classDefinition, stmt, design, symbols, errors);
+            bindSubRoutineCall_(classDefinition, stmt, design);
             break;
           default:
             break;
@@ -667,10 +675,9 @@ bool TestbenchElaboration::bindFunctionBodies_() {
 
 bool TestbenchElaboration::bindTasks_() {
   Compiler* compiler = m_compileDesign->getCompiler();
-  // ErrorContainer* errors = compiler->getErrorContainer ();
-  // SymbolTable* symbols = compiler->getSymbolTable ();
   Design* design = compiler->getDesign();
-  ClassNameClassDefinitionMultiMap classes = design->getClassDefinitions();
+  const ClassNameClassDefinitionMultiMap& classes =
+      design->getClassDefinitions();
 
   // Bind Tasks parameters and body
   for (const auto& [className, classDefinition] : classes) {
@@ -694,10 +701,13 @@ bool TestbenchElaboration::bindTasks_() {
 }
 
 bool TestbenchElaboration::bindProperties_() {
-  Compiler* compiler = m_compileDesign->getCompiler();
-  Design* design = compiler->getDesign();
+  Compiler* const compiler = m_compileDesign->getCompiler();
+  Design* const design = compiler->getDesign();
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  ErrorContainer* const errors = m_session->getErrorContainer();
   UHDM::Serializer& s = m_compileDesign->getSerializer();
-  ClassNameClassDefinitionMultiMap classes = design->getClassDefinitions();
+  const ClassNameClassDefinitionMultiMap& classes =
+      design->getClassDefinitions();
 
   // Bind properties
   for (const auto& [className, classDefinition] : classes) {
@@ -766,9 +776,6 @@ bool TestbenchElaboration::bindProperties_() {
         obj->VpiParent(defn);
       } else {
         // Unsupported type
-        ErrorContainer* errors =
-            m_compileDesign->getCompiler()->getErrorContainer();
-        SymbolTable* symbols = m_compileDesign->getCompiler()->getSymbolTable();
         Location loc(fC->getFileId(), fC->Line(id), fC->Column(id),
                      symbols->registerSymbol(signame));
         Error err(ErrorDefinition::UHDM_UNSUPPORTED_SIGNAL, loc);

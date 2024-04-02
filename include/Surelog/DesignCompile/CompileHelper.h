@@ -38,19 +38,17 @@
 #include <uhdm/containers.h>
 
 namespace SURELOG {
-
 class CompileDesign;
 class DataType;
 class Design;
 class DesignComponent;
-class ErrorContainer;
 class FileContent;
 class Function;
 class NodeId;
 class Procedure;
 class Scope;
+class Session;
 class Statement;
-class SymbolTable;
 class Task;
 class TfPortItem;
 typedef std::vector<TfPortItem*> TfPortList;
@@ -58,9 +56,9 @@ typedef std::vector<TfPortItem*> TfPortList;
 class FScope : public ValuedComponentI {
   SURELOG_IMPLEMENT_RTTI(FScope, ValuedComponentI)
  public:
-  FScope(const SURELOG::ValuedComponentI* parent,
+  FScope(Session* session, const SURELOG::ValuedComponentI* parent,
          SURELOG::ValuedComponentI* definition)
-      : ValuedComponentI(parent, definition) {}
+      : ValuedComponentI(session, parent, definition) {}
 
  private:
 };
@@ -70,13 +68,7 @@ enum class Reduce : bool { Yes = true, No = false };
 
 class CompileHelper final {
  public:
-  CompileHelper() {}
-
-  void seterrorReporting(ErrorContainer* errors, SymbolTable* symbols) {
-    m_errors = errors;
-    m_symbols = symbols;
-    m_exprBuilder.seterrorReporting(errors, symbols);
-  }
+  explicit CompileHelper(Session* session);
 
   void setDesign(Design* design) { m_exprBuilder.setDesign(design); }
 
@@ -283,18 +275,20 @@ class CompileHelper final {
                                         CompileDesign* compileDesign,
                                         UHDM::any* pstmt,
                                         ValuedComponentI* instance);
-                                        
+
   UHDM::property_decl* compilePropertyDeclaration(DesignComponent* component,
-                                        const FileContent* fC, NodeId nodeId,
-                                        CompileDesign* compileDesign,
-                                        UHDM::any* pstmt,
-                                        ValuedComponentI* instance);
-                                        
+                                                  const FileContent* fC,
+                                                  NodeId nodeId,
+                                                  CompileDesign* compileDesign,
+                                                  UHDM::any* pstmt,
+                                                  ValuedComponentI* instance);
+
   UHDM::sequence_decl* compileSequenceDeclaration(DesignComponent* component,
-                                        const FileContent* fC, NodeId nodeId,
-                                        CompileDesign* compileDesign,
-                                        UHDM::any* pstmt,
-                                        ValuedComponentI* instance);
+                                                  const FileContent* fC,
+                                                  NodeId nodeId,
+                                                  CompileDesign* compileDesign,
+                                                  UHDM::any* pstmt,
+                                                  ValuedComponentI* instance);
 
   UHDM::initial* compileInitialBlock(DesignComponent* component,
                                      const FileContent* fC, NodeId id,
@@ -505,7 +499,7 @@ class CompileHelper final {
                        int32_t opIndex, UHDM::expr* rhs,
                        DesignComponent* component, CompileDesign* compileDesign,
                        ValuedComponentI* instance);
-  
+
   void adjustUnsized(UHDM::constant* c, int32_t size);
 
   UHDM::any* defaultPatternAssignment(const UHDM::typespec* tps, UHDM::any* exp,
@@ -552,7 +546,7 @@ class CompileHelper final {
                       bool muteErrors = false);
 
   // Parse numeric UHDM constant into int64_t. Returns if successful.
-  bool parseConstant(const UHDM::constant& constant, int64_t* value);
+  static bool parseConstant(const UHDM::constant& constant, int64_t* value);
 
   int64_t getValue(bool& validValue, DesignComponent* component,
                    const FileContent* fC, NodeId nodeId,
@@ -621,10 +615,6 @@ class CompileHelper final {
  private:
   CompileHelper(const CompileHelper&) = delete;
 
-  ErrorContainer* m_errors = nullptr;
-  SymbolTable* m_symbols = nullptr;
-  ExprBuilder m_exprBuilder;
-  UHDM::module_inst* m_exprEvalPlaceHolder = nullptr;
   // Caches
   UHDM::int_typespec* buildIntTypespec(CompileDesign* compileDesign,
                                        PathId fileId, std::string_view name,
@@ -637,6 +627,10 @@ class CompileHelper final {
                                              std::string_view value,
                                              uint32_t line, uint16_t column,
                                              uint32_t eline, uint16_t ecolumn);
+
+  Session* const m_session = nullptr;
+  ExprBuilder m_exprBuilder;
+  UHDM::module_inst* m_exprEvalPlaceHolder = nullptr;
   std::unordered_map<std::string, UHDM::int_typespec*> m_cache_int_typespec;
   std::unordered_map<std::string, UHDM::typespec_member*>
       m_cache_typespec_member;

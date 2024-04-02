@@ -21,7 +21,6 @@
  * Created on May 14, 2023, 11:45 AM
  */
 
-#include <Surelog/CommandLine/CommandLineParser.h>
 #include <Surelog/Common/FileSystem.h>
 #include <Surelog/Design/DataType.h>
 #include <Surelog/Design/DummyType.h>
@@ -81,7 +80,7 @@ UHDM::VectorOfgen_stmt* CompileHelper::compileGenStmt(
     gen_region* genreg = s.MakeGen_region();
     genstmt = genreg;
     ModuleDefinition* subComponent =
-        new ModuleDefinition(fC, id, "GENERATE_STMT_PLACEHOLDER");
+        new ModuleDefinition(m_session, fC, id, "GENERATE_STMT_PLACEHOLDER");
     component = subComponent;
     checkForLoops(true);
     VectorOfany* stmts = compileStmt(component, fC, stmtId, compileDesign,
@@ -137,8 +136,8 @@ UHDM::VectorOfgen_stmt* CompileHelper::compileGenStmt(
           genif->VpiCondition(cond);
         }
         checkForLoops(true);
-        ModuleDefinition* subComponent =
-            new ModuleDefinition(fC, id, "GENERATE_STMT_PLACEHOLDER");
+        ModuleDefinition* subComponent = new ModuleDefinition(
+            m_session, fC, id, "GENERATE_STMT_PLACEHOLDER");
         component = subComponent;
         VectorOfany* stmts = compileStmt(component, fC, stmtId, compileDesign,
                                          Reduce::No, nullptr, nullptr, true);
@@ -167,8 +166,8 @@ UHDM::VectorOfgen_stmt* CompileHelper::compileGenStmt(
         NodeId ElseId = fC->Sibling(stmtId);
         NodeId elseStmtId = fC->Sibling(ElseId);
         checkForLoops(true);
-        subComponent =
-            new ModuleDefinition(fC, id, "GENERATE_STMT_PLACEHOLDER");
+        subComponent = new ModuleDefinition(m_session, fC, id,
+                                            "GENERATE_STMT_PLACEHOLDER");
         component = subComponent;
         stmts = compileStmt(component, fC, elseStmtId, compileDesign,
                             Reduce::No, nullptr, nullptr, true);
@@ -201,8 +200,8 @@ UHDM::VectorOfgen_stmt* CompileHelper::compileGenStmt(
           cond->VpiParent(genif);
         }
         fC->populateCoreMembers(ifElseId, ifElseId, genif);
-        ModuleDefinition* subComponent =
-            new ModuleDefinition(fC, id, "GENERATE_STMT_PLACEHOLDER");
+        ModuleDefinition* subComponent = new ModuleDefinition(
+            m_session, fC, id, "GENERATE_STMT_PLACEHOLDER");
         component = subComponent;
         checkForLoops(true);
         VectorOfany* stmts = compileStmt(component, fC, stmtId, compileDesign,
@@ -256,8 +255,8 @@ UHDM::VectorOfgen_stmt* CompileHelper::compileGenStmt(
           checkForLoops(false);
           stmtId = fC->Sibling(stmtId);
         }
-        ModuleDefinition* subComponent =
-            new ModuleDefinition(fC, id, "GENERATE_STMT_PLACEHOLDER");
+        ModuleDefinition* subComponent = new ModuleDefinition(
+            m_session, fC, id, "GENERATE_STMT_PLACEHOLDER");
         component = subComponent;
         checkForLoops(true);
         VectorOfany* stmts = compileStmt(component, fC, stmtId, compileDesign,
@@ -370,7 +369,7 @@ UHDM::VectorOfgen_stmt* CompileHelper::compileGenStmt(
     // Stmts
     NodeId genBlock = fC->Sibling(iteration);
     ModuleDefinition* subComponent =
-        new ModuleDefinition(fC, id, "GENERATE_STMT_PLACEHOLDER");
+        new ModuleDefinition(m_session, fC, id, "GENERATE_STMT_PLACEHOLDER");
     component = subComponent;
     checkForLoops(true);
     stmts = compileStmt(component, fC, genBlock, compileDesign, Reduce::No,

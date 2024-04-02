@@ -42,12 +42,13 @@ using UHDM::constant;
 using UHDM::param_assign;
 using UHDM::uhdmconstant;
 
-ModuleInstance::ModuleInstance(DesignComponent* moduleDefinition,
+ModuleInstance::ModuleInstance(Session* session,
+                               DesignComponent* moduleDefinition,
                                const FileContent* fileContent, NodeId nodeId,
                                ModuleInstance* parent,
                                std::string_view instName,
                                std::string_view modName)
-    : ValuedComponentI(parent, moduleDefinition),
+    : ValuedComponentI(session, parent, moduleDefinition),
       m_definition(moduleDefinition),
       m_fileContent(fileContent),
       m_nodeId(nodeId),
@@ -177,7 +178,7 @@ ModuleInstance* ModuleInstance::getChildByName(std::string_view name) {
 }
 
 std::string ModuleInstance::decompile(char* valueName) {
-  ExprBuilder exprBuilder;
+  ExprBuilder exprBuilder(m_session);
   Value* val = getValue(valueName, exprBuilder);
   if (val) {
     return val->uhdmValue();
@@ -201,11 +202,11 @@ void ModuleInstance::addSubInstance(ModuleInstance* subInstance) {
 }
 
 ModuleInstance* ModuleInstanceFactory::newModuleInstance(
-    DesignComponent* moduleDefinition, const FileContent* fileContent,
-    NodeId nodeId, ModuleInstance* parent, std::string_view instName,
-    std::string_view modName) {
-  return new ModuleInstance(moduleDefinition, fileContent, nodeId, parent,
-                            instName, modName);
+    Session* session, DesignComponent* moduleDefinition,
+    const FileContent* fileContent, NodeId nodeId, ModuleInstance* parent,
+    std::string_view instName, std::string_view modName) {
+  return new ModuleInstance(session, moduleDefinition, fileContent, nodeId,
+                            parent, instName, modName);
 }
 
 VObjectType ModuleInstance::getType() const {

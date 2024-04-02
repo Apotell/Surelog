@@ -23,6 +23,7 @@
 
 #include <Surelog/CommandLine/CommandLineParser.h>
 #include <Surelog/Common/PlatformFileSystem.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/Design.h>
 #include <Surelog/SourceCompile/Compiler.h>
 #include <Surelog/SourceCompile/ParseFile.h>
@@ -45,9 +46,7 @@ namespace fs = std::filesystem;
 namespace {
 class TestFileSystem : public PlatformFileSystem {
  public:
-  explicit TestFileSystem(const fs::path &wd) : PlatformFileSystem(wd) {
-    FileSystem::setInstance(this);
-  }
+  explicit TestFileSystem(const fs::path &wd) : PlatformFileSystem(wd) {}
   TestFileSystem() : TestFileSystem(fs::current_path()) {}
 };
 
@@ -157,10 +156,8 @@ TEST(PPCacheTest, IncludeChangeTolerance) {
 
   // Run 1
   {
-    std::unique_ptr<ErrorContainer> errors(
-        new ErrorContainer(symbolTable.get()));
-    std::unique_ptr<CommandLineParser> clp(
-        new CommandLineParser(errors.get(), symbolTable.get(), false, false));
+    Session session(fileSystem.get(), symbolTable.get(), nullptr, nullptr,
+                    nullptr, nullptr);
 
     const std::vector<std::string> args{
         kProgramFile.string(),
@@ -177,16 +174,15 @@ TEST(PPCacheTest, IncludeChangeTolerance) {
     std::vector<const char *> cargs;
     std::transform(args.begin(), args.end(), std::back_inserter(cargs),
                    [](const std::string &arg) { return arg.data(); });
-    clp->parseCommandLine(cargs.size(), cargs.data());
+    session.parseCommandLine(cargs.size(), cargs.data(), false, false);
 
-    std::unique_ptr<Compiler> compiler(
-        new Compiler(clp.get(), errors.get(), symbolTable.get()));
+    std::unique_ptr<Compiler> compiler(new Compiler(&session));
     compiler->compile();
 
     const auto &compileSourceFiles = compiler->getCompileSourceFiles();
     for (CompileSourceFile *csf : compileSourceFiles) {
       EXPECT_FALSE(csf->getPreprocessor()->usingCachedVersion())
-          << PathIdPP(csf->getFileId());
+          << PathIdPP(csf->getFileId(), fileSystem.get());
     }
   }
 
@@ -216,10 +212,8 @@ TEST(PPCacheTest, IncludeChangeTolerance) {
 
   // Run 2
   {
-    std::unique_ptr<ErrorContainer> errors(
-        new ErrorContainer(symbolTable.get()));
-    std::unique_ptr<CommandLineParser> clp(
-        new CommandLineParser(errors.get(), symbolTable.get(), false, false));
+    Session session(fileSystem.get(), symbolTable.get(), nullptr, nullptr,
+                    nullptr, nullptr);
 
     const std::vector<std::string> args{
         kProgramFile.string(),
@@ -238,10 +232,9 @@ TEST(PPCacheTest, IncludeChangeTolerance) {
     std::vector<const char *> cargs;
     std::transform(args.begin(), args.end(), std::back_inserter(cargs),
                    [](const std::string &arg) { return arg.data(); });
-    clp->parseCommandLine(cargs.size(), cargs.data());
+    session.parseCommandLine(cargs.size(), cargs.data(), false, false);
 
-    std::unique_ptr<Compiler> compiler(
-        new Compiler(clp.get(), errors.get(), symbolTable.get()));
+    std::unique_ptr<Compiler> compiler(new Compiler(&session));
     compiler->compile();
 
     const auto &compileSourceFiles = compiler->getCompileSourceFiles();
@@ -249,10 +242,12 @@ TEST(PPCacheTest, IncludeChangeTolerance) {
       const PathId fileId = csf->getFileId();
       if ((fileId == header3FileId) || (fileId == sourceFileId)) {
         EXPECT_FALSE(csf->getPreprocessor()->usingCachedVersion())
-            << "fileid:" << fileId << " is " << PathIdPP(fileId);
+            << "fileid:" << fileId << " is "
+            << PathIdPP(fileId, fileSystem.get());
       } else {
         EXPECT_TRUE(csf->getPreprocessor()->usingCachedVersion())
-            << "fileid:" << fileId << " is " << PathIdPP(fileId);
+            << "fileid:" << fileId << " is "
+            << PathIdPP(fileId, fileSystem.get());
       }
     }
   }

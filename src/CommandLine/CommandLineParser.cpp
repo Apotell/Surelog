@@ -1450,6 +1450,9 @@ bool CommandLineParser::parseCommandLine(int32_t argc, const char** argv) {
     }
   }
 
+  // Force disable elaboration!!
+  m_elaborate = m_elabUhdm = false;
+
   if (m_debugFSConfig) {
     fileSystem->printConfiguration(std::cout);
   }

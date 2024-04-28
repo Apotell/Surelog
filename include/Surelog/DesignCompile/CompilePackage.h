@@ -66,7 +66,7 @@ class CompilePackage final {
     m_helper.seterrorReporting(errors, symbols);
   }
 
-  bool compile(Reduce reduce);
+  bool compile(Elaborate elaborate, Reduce reduce);
 
  private:
   enum CollectType { FUNCTION, DEFINITION, OTHER };

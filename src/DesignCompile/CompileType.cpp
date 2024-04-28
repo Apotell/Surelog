@@ -1690,7 +1690,6 @@ UHDM::typespec* CompileHelper::compileTypespec(
               m->Typespec(tsRef);
             }
             m->Typespec()->Actual_typespec(member_ts);
-            member_ts->VpiParent(m);
           }
           if (Expression &&
               (fC->Type(Expression) != VObjectType::paVariable_dimension)) {
@@ -1761,7 +1760,7 @@ UHDM::typespec* CompileHelper::compileTypespec(
         byte_typespec* var = s.MakeByte_typespec();
         fC->populateCoreMembers(type, type, var);
         result = var;
-      } else if (reduce == Reduce::Yes) {
+      } else if ((m_reduce == Reduce::Yes) && (reduce == Reduce::Yes)) {
         if (any* cast_to =
                 getValue(typeName, component, compileDesign,
                          reduce == Reduce::Yes ? Reduce::No : Reduce::Yes,
@@ -2163,7 +2162,7 @@ UHDM::typespec* CompileHelper::elabTypespec(DesignComponent* component,
     default:
       break;
   }
-  if (ranges) {
+  if ((m_reduce == Reduce::Yes) && ranges) {
     for (UHDM::range* oldRange : *ranges) {
       expr* oldLeft = oldRange->Left_expr();
       expr* oldRight = oldRange->Right_expr();

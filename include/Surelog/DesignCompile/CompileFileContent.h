@@ -37,8 +37,8 @@ class ErrorContainer;
 
 struct FunctorCompileFileContentDecl {
   FunctorCompileFileContentDecl(CompileDesign* compiler, FileContent* file,
-                            Design* design, SymbolTable* symbols,
-                            ErrorContainer* errors)
+                                Design* design, SymbolTable* symbols,
+                                ErrorContainer* errors)
       : m_compileDesign(compiler),
         m_fileContent(file),
         m_design(design),
@@ -75,16 +75,17 @@ struct FunctorCompileFileContent {
 
 class CompileFileContent final {
  public:
-  CompileFileContent(CompileDesign* compiler, FileContent* file,
-                     Design* design,
-                     bool declOnly,
-                     [[maybe_unused]] SymbolTable* symbols,
-                     [[maybe_unused]] ErrorContainer* errors)
-      : m_compileDesign(compiler), m_fileContent(file), m_design(design), m_declOnly(declOnly) {
+  CompileFileContent(CompileDesign* compiler, FileContent* file, Design* design,
+                     bool declOnly, SymbolTable* symbols,
+                     ErrorContainer* errors)
+      : m_compileDesign(compiler),
+        m_fileContent(file),
+        m_design(design),
+        m_declOnly(declOnly) {
     m_helper.seterrorReporting(errors, symbols);
   }
 
-  bool compile();
+  bool compile(Elaborate elaborate, Reduce reduce);
 
  private:
   CompileFileContent(const CompileFileContent&) = delete;

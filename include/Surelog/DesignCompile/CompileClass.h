@@ -63,18 +63,10 @@ class CompileClass final {
     builtins_ = {"constraint_mode", "randomize", "rand_mode", "srandom"};
   }
 
-  bool compile();
+  bool compile(Elaborate elaborate, Reduce reduce);
 
  private:
   CompileClass(const CompileClass&) = delete;
-
-  CompileDesign* const m_compileDesign;
-  ClassDefinition* const m_class;
-  Design* const m_design;
-  SymbolTable* const m_symbols;
-  ErrorContainer* const m_errors;
-
-  CompileHelper m_helper;
 
   bool compile_class_parameters_(const FileContent* fC, NodeId id);
   bool compile_class_property_(const FileContent* fC, NodeId id);
@@ -85,8 +77,17 @@ class CompileClass final {
   bool compile_local_parameter_declaration_(const FileContent* fC, NodeId id);
   bool compile_parameter_declaration_(const FileContent* fC, NodeId id);
   bool compile_class_type_(const FileContent* fC, NodeId id);
+
+  CompileDesign* const m_compileDesign;
+  ClassDefinition* const m_class;
+  Design* const m_design;
+  SymbolTable* const m_symbols;
+  ErrorContainer* const m_errors;
+
   std::set<std::string> builtins_;
   UHDM::VectorOfattribute* m_attributes = nullptr;
+
+  CompileHelper m_helper;
 };
 
 }  // namespace SURELOG

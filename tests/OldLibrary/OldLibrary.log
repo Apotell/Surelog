@@ -1,15 +1,15 @@
 [INF:CM0023] Creating log file "${SURELOG_DIR}/build/regression/OldLibrary/slpp_all/surelog.log".
 [INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/OldLibrary/top.v".
-[INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/OldLibrary/lib/CELL2.v".
 [INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/OldLibrary/lib/CELL1.v".
+[INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/OldLibrary/lib/CELL2.v".
 [INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/OldLibrary/lib/CELL3.v".
 [INF:PA0201] Parsing source file "${SURELOG_DIR}/tests/OldLibrary/top.v".
-[INF:PA0201] Parsing source file "${SURELOG_DIR}/tests/OldLibrary/lib/CELL2.v".
 [INF:PA0201] Parsing source file "${SURELOG_DIR}/tests/OldLibrary/lib/CELL1.v".
+[INF:PA0201] Parsing source file "${SURELOG_DIR}/tests/OldLibrary/lib/CELL2.v".
 [INF:PA0201] Parsing source file "${SURELOG_DIR}/tests/OldLibrary/lib/CELL3.v".
 [WRN:PA0205] ${SURELOG_DIR}/tests/OldLibrary/top.v:1:1: No timescale set for "top".
-[WRN:PA0205] ${SURELOG_DIR}/tests/OldLibrary/lib/CELL2.v:1:1: No timescale set for "CELL2".
 [WRN:PA0205] ${SURELOG_DIR}/tests/OldLibrary/lib/CELL1.v:1:1: No timescale set for "CELL1".
+[WRN:PA0205] ${SURELOG_DIR}/tests/OldLibrary/lib/CELL2.v:1:1: No timescale set for "CELL2".
 [WRN:PA0205] ${SURELOG_DIR}/tests/OldLibrary/lib/CELL3.v:1:1: No timescale set for "CELL3".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/OldLibrary/lib/CELL1.v:1:1: Compile module "work@CELL1".
@@ -19,20 +19,6 @@
 [INF:CP0302] Compile class "work@mailbox".
 [INF:CP0302] Compile class "work@process".
 [INF:CP0302] Compile class "work@semaphore".
-[INF:EL0526] Design Elaboration...
-Instance tree:
-[TOP] work@top work@top
-[MOD] work@CELL1 work@top.cell1
-[UDP] work@CELL2 work@top.cell2
-
-[NTE:EL0503] ${SURELOG_DIR}/tests/OldLibrary/top.v:1:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 2.
-[NTE:EL0510] Nb instances: 3.
-[NTE:EL0511] Nb leaf instances: 2.
-[NTE:EL0523] ${SURELOG_DIR}/tests/OldLibrary/top.v:1:1: Instance "work@top".
-[NTE:EL0523] ${SURELOG_DIR}/tests/OldLibrary/top.v:3:4: Instance "work@top.cell1".
-[NTE:EL0523] ${SURELOG_DIR}/tests/OldLibrary/top.v:5:4: Instance "work@top.cell2".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 class_defn                                             8
@@ -49,13 +35,12 @@ int_var                                                4
 io_decl                                               17
 logic_net                                              6
 logic_var                                              1
-module_inst                                            4
+module_inst                                            2
 package                                                2
 ref_module                                             1
 ref_typespec                                          13
 table_entry                                            6
 task                                                   9
-udp                                                    1
 udp_defn                                               2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/OldLibrary/slpp_all/surelog.uhdm ...
@@ -63,7 +48,7 @@ udp_defn                                               2
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 4
-[   NOTE] : 8
+[   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
 [LINT]: ${SURELOG_DIR}/tests/OldLibrary/lib/CELL2.v:13:7: Non synthesizable construct,
@@ -74,5 +59,4 @@ udp_defn                                               2
 [LINT]: ${SURELOG_DIR}/tests/OldLibrary/lib/CELL3.v:14:7: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/OldLibrary/lib/CELL3.v:15:7: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/OldLibrary/lib/CELL3.v:1:1: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/OldLibrary/top.v:5:4: Non synthesizable construct, cell2
 ============================== End Linting Results ==============================

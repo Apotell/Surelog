@@ -456,87 +456,36 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamElabMulti/dut.sv:30:1: Compile module "work@prim_pad_attr".
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamElabMulti/dut.sv:41:1: Compile module "work@sub_top".
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamElabMulti/dut.sv:52:1: Compile module "work@top".
-[INF:EL0526] Design Elaboration...
-[INF:CP0335] ${SURELOG_DIR}/tests/ParamElabMulti/dut.sv:45:41: Compile generate block "work@top.u_sub.gen_dio_attr[0]".
-[INF:CP0335] ${SURELOG_DIR}/tests/ParamElabMulti/dut.sv:34:11: Compile generate block "work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic".
-[INF:CP0335] ${SURELOG_DIR}/tests/ParamElabMulti/dut.sv:25:22: Compile generate block "work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.gen_assign".
-[NTE:EL0503] ${SURELOG_DIR}/tests/ParamElabMulti/dut.sv:52:1: Top level module "work@top".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 6.
-[NTE:EL0510] Nb instances: 4.
-[NTE:EL0511] Nb leaf instances: 0.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             1
-bit_select                                             1
-constant                                             187
-cont_assign                                            3
+constant                                              77
+cont_assign                                            1
 design                                                 1
-enum_const                                            50
-enum_typespec                                         25
+enum_const                                            12
+enum_typespec                                          6
 gen_for                                                1
 gen_if                                                 2
-gen_scope                                              6
-gen_scope_array                                        6
-hier_path                                              1
 import_typespec                                        5
-int_typespec                                          40
-int_var                                                2
+int_typespec                                          22
 logic_net                                              1
-logic_typespec                                        25
-module_inst                                           18
+logic_typespec                                         6
+module_inst                                            8
 named_begin                                            3
-operation                                             50
+operation                                             28
 package                                                4
-packed_array_typespec                                 23
-param_assign                                          20
-parameter                                             26
-range                                                 48
-ref_module                                             5
-ref_obj                                               20
-ref_typespec                                         171
+packed_array_typespec                                  6
+param_assign                                          14
+parameter                                             16
+range                                                 12
+ref_module                                             3
+ref_obj                                               16
+ref_typespec                                          65
 ref_var                                                1
-string_typespec                                       19
-struct_typespec                                       23
-tagged_pattern                                        19
-typespec_member                                       23
-unsupported_typespec                                   1
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-assignment                                             1
-bit_select                                             1
-constant                                             187
-cont_assign                                           10
-design                                                 1
-enum_const                                            50
-enum_typespec                                         25
-gen_for                                                1
-gen_if                                                 2
-gen_scope                                             17
-gen_scope_array                                       17
-hier_path                                              1
-import_typespec                                        5
-int_typespec                                          40
-int_var                                                2
-logic_net                                              1
-logic_typespec                                        25
-module_inst                                           22
-named_begin                                            3
-operation                                             50
-package                                                4
-packed_array_typespec                                 23
-param_assign                                          24
-parameter                                             26
-range                                                 48
-ref_module                                             5
-ref_obj                                               27
-ref_typespec                                         180
-ref_var                                                1
-string_typespec                                       19
-struct_typespec                                       23
-tagged_pattern                                        19
-typespec_member                                       23
+string_typespec                                        8
+struct_typespec                                        6
+tagged_pattern                                         8
+typespec_member                                        6
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamElabMulti/slpp_all/surelog.uhdm ...
@@ -544,13 +493,12 @@ unsupported_typespec                                   1
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ParamElabMulti/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@top)
-|vpiElaborated:1
-|vpiName:work@top
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallPackages:
 \_package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiName:prim_pad_wrapper_pkg
   |vpiFullName:prim_pad_wrapper_pkg::
   |vpiTypedef:
@@ -588,7 +536,7 @@ design: (work@top)
 |uhdmallPackages:
 \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiName:pinmux_pkg
   |vpiFullName:pinmux_pkg::
   |vpiParameter:
@@ -733,142 +681,10 @@ design: (work@top)
   \_import_typespec: (prim_pad_wrapper_pkg), line:9:11, endln:9:34
   |vpiDefName:pinmux_pkg
   |vpiEndLabel:pinmux_pkg
-|uhdmtopPackages:
-\_package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:prim_pad_wrapper_pkg
-  |vpiFullName:prim_pad_wrapper_pkg::
-  |vpiTypedef:
-  \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-  |vpiDefName:prim_pad_wrapper_pkg
-  |vpiTop:1
-  |vpiEndLabel:prim_pad_wrapper_pkg
-|uhdmtopPackages:
-\_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
-  |vpiParent:
-  \_design: (work@top)
-  |vpiName:pinmux_pkg
-  |vpiFullName:pinmux_pkg::
-  |vpiParameter:
-  \_parameter: (pinmux_pkg::NDioPads), line:11:18, endln:11:26
-    |vpiParent:
-    \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
-    |UINT:1
-    |vpiTypespec:
-    \_ref_typespec: (pinmux_pkg::NDioPads)
-      |vpiParent:
-      \_parameter: (pinmux_pkg::NDioPads), line:11:18, endln:11:26
-      |vpiFullName:pinmux_pkg::NDioPads
-      |vpiActual:
-      \_int_typespec: , line:11:14, endln:11:17
-    |vpiSigned:1
-    |vpiName:NDioPads
-    |vpiFullName:pinmux_pkg::NDioPads
-  |vpiParameter:
-  \_parameter: (pinmux_pkg::DefaultTargetCfg), line:17:27, endln:17:43
-    |vpiParent:
-    \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
-    |vpiTypespec:
-    \_ref_typespec: (pinmux_pkg::DefaultTargetCfg)
-      |vpiParent:
-      \_parameter: (pinmux_pkg::DefaultTargetCfg), line:17:27, endln:17:43
-      |vpiFullName:pinmux_pkg::DefaultTargetCfg
-      |vpiActual:
-      \_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
-    |vpiName:DefaultTargetCfg
-    |vpiFullName:pinmux_pkg::DefaultTargetCfg
-  |vpiParamAssign:
-  \_param_assign: , line:11:18, endln:11:30
-    |vpiParent:
-    \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
-    |vpiRhs:
-    \_constant: , line:11:29, endln:11:30
-      |vpiParent:
-      \_param_assign: , line:11:18, endln:11:30
-      |vpiDecompile:1
-      |vpiSize:32
-      |UINT:1
-      |vpiTypespec:
-      \_ref_typespec: (pinmux_pkg)
-        |vpiParent:
-        \_constant: , line:11:29, endln:11:30
-        |vpiFullName:pinmux_pkg
-        |vpiActual:
-        \_int_typespec: , line:11:14, endln:11:17
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (pinmux_pkg::NDioPads), line:11:18, endln:11:26
-  |vpiParamAssign:
-  \_param_assign: , line:17:27, endln:19:5
-    |vpiParent:
-    \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
-    |vpiRhs:
-    \_operation: , line:17:46, endln:19:5
-      |vpiParent:
-      \_param_assign: , line:17:27, endln:19:5
-      |vpiOpType:75
-      |vpiOperand:
-      \_tagged_pattern: , line:18:21, endln:18:34
-        |vpiParent:
-        \_operation: , line:17:46, endln:19:5
-        |vpiPattern:
-        \_constant: , line:18:21, endln:18:34
-          |vpiDecompile:000
-          |vpiSize:3
-          |BIN:000
-          |vpiTypespec:
-          \_ref_typespec: 
-            |vpiParent:
-            \_constant: , line:18:21, endln:18:34
-            |vpiActual:
-            \_int_typespec: 
-          |vpiConstType:3
-        |vpiTypespec:
-        \_ref_typespec: (pinmux_pkg)
-          |vpiParent:
-          \_tagged_pattern: , line:18:21, endln:18:34
-          |vpiFullName:pinmux_pkg
-          |vpiActual:
-          \_string_typespec: (dio_pad_type), line:18:7, endln:18:19
-    |vpiLhs:
-    \_parameter: (pinmux_pkg::DefaultTargetCfg), line:17:27, endln:17:43
-  |vpiTypedef:
-  \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-  |vpiTypedef:
-  \_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
-    |vpiParent:
-    \_module_inst: work@sub_top (work@sub_top), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:41:1, endln:50:10
-    |vpiName:pinmux_pkg::target_cfg_t
-    |vpiInstance:
-    \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
-    |vpiPacked:1
-    |vpiTypespecMember:
-    \_typespec_member: (dio_pad_type), line:14:33, endln:14:45
-      |vpiParent:
-      \_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
-      |vpiName:dio_pad_type
-      |vpiTypespec:
-      \_ref_typespec: (work@sub_top.pinmux_pkg::target_cfg_t.dio_pad_type)
-        |vpiParent:
-        \_typespec_member: (dio_pad_type), line:14:33, endln:14:45
-        |vpiFullName:work@sub_top.pinmux_pkg::target_cfg_t.dio_pad_type
-        |vpiActual:
-        \_packed_array_typespec: , line:14:7, endln:14:32
-      |vpiRefFile:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv
-      |vpiRefLineNo:14
-      |vpiRefColumnNo:7
-      |vpiRefEndLineNo:14
-      |vpiRefEndColumnNo:32
-  |vpiTypedef:
-  \_import_typespec: (prim_pad_wrapper_pkg), line:9:11, endln:9:34
-  |vpiDefName:pinmux_pkg
-  |vpiTop:1
-  |vpiEndLabel:pinmux_pkg
 |uhdmallModules:
 \_module_inst: work@prim_generic_pad_attr (work@prim_generic_pad_attr), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:22:1, endln:28:34
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@prim_generic_pad_attr
   |vpiParameter:
   \_parameter: (work@prim_generic_pad_attr.PadType), line:24:25, endln:24:32
@@ -953,7 +769,7 @@ design: (work@top)
 |uhdmallModules:
 \_module_inst: work@prim_pad_attr (work@prim_pad_attr), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:30:1, endln:39:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@prim_pad_attr
   |vpiParameter:
   \_parameter: (work@prim_pad_attr.PadType), line:32:25, endln:32:32
@@ -1014,7 +830,7 @@ design: (work@top)
 |uhdmallModules:
 \_module_inst: work@sub_top (work@sub_top), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:41:1, endln:50:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@sub_top
   |vpiParameter:
   \_parameter: (work@sub_top.DefaultTargetCfg), line:17:27, endln:17:43
@@ -1159,6 +975,29 @@ design: (work@top)
   \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
   |vpiTypedef:
   \_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
+    |vpiParent:
+    \_module_inst: work@sub_top (work@sub_top), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:41:1, endln:50:10
+    |vpiName:pinmux_pkg::target_cfg_t
+    |vpiInstance:
+    \_package: (pinmux_pkg), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
+    |vpiPacked:1
+    |vpiTypespecMember:
+    \_typespec_member: (dio_pad_type), line:14:33, endln:14:45
+      |vpiParent:
+      \_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
+      |vpiName:dio_pad_type
+      |vpiTypespec:
+      \_ref_typespec: (work@sub_top.pinmux_pkg::target_cfg_t.dio_pad_type)
+        |vpiParent:
+        \_typespec_member: (dio_pad_type), line:14:33, endln:14:45
+        |vpiFullName:work@sub_top.pinmux_pkg::target_cfg_t.dio_pad_type
+        |vpiActual:
+        \_packed_array_typespec: , line:14:7, endln:14:32
+      |vpiRefFile:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv
+      |vpiRefLineNo:14
+      |vpiRefColumnNo:7
+      |vpiRefEndLineNo:14
+      |vpiRefEndColumnNo:32
   |vpiTypedef:
   \_import_typespec: (pinmux_pkg), line:42:11, endln:42:24
   |vpiDefName:work@sub_top
@@ -1184,16 +1023,16 @@ design: (work@top)
         |UINT:0
         |vpiConstType:9
       |vpiLhs:
-      \_int_var: (work@sub_top.k), line:45:15, endln:45:16
+      \_ref_var: (work@sub_top.k), line:45:15, endln:45:16
         |vpiParent:
         \_assignment: , line:45:8, endln:45:20
         |vpiTypespec:
         \_ref_typespec: (work@sub_top.k)
           |vpiParent:
-          \_int_var: (work@sub_top.k), line:45:15, endln:45:16
+          \_ref_var: (work@sub_top.k), line:45:15, endln:45:16
           |vpiFullName:work@sub_top.k
           |vpiActual:
-          \_int_typespec: 
+          \_unsupported_typespec: (k), line:45:15, endln:45:16
         |vpiName:k
         |vpiFullName:work@sub_top.k
     |vpiCondition:
@@ -1252,7 +1091,7 @@ design: (work@top)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:52:1, endln:61:10
   |vpiParent:
-  \_design: (work@top)
+  \_design: (unnamed)
   |vpiFullName:work@top
   |vpiParameter:
   \_parameter: (work@top.PinmuxTargetCfg), line:53:40, endln:53:55
@@ -1321,370 +1160,9 @@ design: (work@top)
     |vpiDefName:work@sub_top
     |vpiActual:
     \_module_inst: work@sub_top (work@sub_top), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:41:1, endln:50:10
-|uhdmtopModules:
-\_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:52:1, endln:61:10
-  |vpiName:work@top
-  |vpiParameter:
-  \_parameter: (work@top.PinmuxTargetCfg), line:53:40, endln:53:55
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:52:1, endln:61:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.PinmuxTargetCfg)
-      |vpiParent:
-      \_parameter: (work@top.PinmuxTargetCfg), line:53:40, endln:53:55
-      |vpiFullName:work@top.PinmuxTargetCfg
-      |vpiActual:
-      \_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
-    |vpiLocalParam:1
-    |vpiName:PinmuxTargetCfg
-    |vpiFullName:work@top.PinmuxTargetCfg
-  |vpiParamAssign:
-  \_param_assign: , line:53:40, endln:55:5
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:52:1, endln:61:10
-    |vpiRhs:
-    \_operation: , line:53:58, endln:55:5
-      |vpiParent:
-      \_param_assign: , line:53:40, endln:55:5
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_operation: , line:53:58, endln:55:5
-        |vpiFullName:work@top
-        |vpiActual:
-        \_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
-      |vpiOpType:75
-      |vpiOperand:
-      \_constant: , line:54:21, endln:54:68
-        |vpiParent:
-        \_operation: , line:53:58, endln:55:5
-        |vpiDecompile:001
-        |vpiSize:3
-        |BIN:001
-        |vpiTypespec:
-        \_ref_typespec: (work@top)
-          |vpiParent:
-          \_constant: , line:54:21, endln:54:68
-          |vpiFullName:work@top
-          |vpiActual:
-          \_int_typespec: 
-        |vpiConstType:3
-    |vpiLhs:
-    \_parameter: (work@top.PinmuxTargetCfg), line:53:40, endln:53:55
-  |vpiDefName:work@top
-  |vpiTop:1
-  |vpiTopModule:1
-  |vpiModule:
-  \_module_inst: work@sub_top (work@top.u_sub), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:57:4, endln:59:14
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:52:1, endln:61:10
-    |vpiName:u_sub
-    |vpiFullName:work@top.u_sub
-    |vpiParameter:
-    \_parameter: (work@top.u_sub.DefaultTargetCfg), line:17:27, endln:17:43
-      |vpiParent:
-      \_module_inst: work@sub_top (work@top.u_sub), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:57:4, endln:59:14
-      |vpiTypespec:
-      \_ref_typespec: (work@top.u_sub.DefaultTargetCfg)
-        |vpiParent:
-        \_parameter: (work@top.u_sub.DefaultTargetCfg), line:17:27, endln:17:43
-        |vpiFullName:work@top.u_sub.DefaultTargetCfg
-        |vpiActual:
-        \_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
-      |vpiName:DefaultTargetCfg
-      |vpiFullName:work@top.u_sub.DefaultTargetCfg
-      |vpiImported:pinmux_pkg
-    |vpiParameter:
-    \_parameter: (work@top.u_sub.NDioPads), line:11:18, endln:11:26
-      |vpiParent:
-      \_module_inst: work@sub_top (work@top.u_sub), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:57:4, endln:59:14
-      |UINT:1
-      |vpiTypespec:
-      \_ref_typespec: (work@top.u_sub.NDioPads)
-        |vpiParent:
-        \_parameter: (work@top.u_sub.NDioPads), line:11:18, endln:11:26
-        |vpiFullName:work@top.u_sub.NDioPads
-        |vpiActual:
-        \_int_typespec: , line:11:14, endln:11:17
-      |vpiSigned:1
-      |vpiName:NDioPads
-      |vpiFullName:work@top.u_sub.NDioPads
-      |vpiImported:pinmux_pkg
-    |vpiParameter:
-    \_parameter: (work@top.u_sub.TargetCfg), line:43:27, endln:43:36
-      |vpiParent:
-      \_module_inst: work@sub_top (work@top.u_sub), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:57:4, endln:59:14
-      |vpiTypespec:
-      \_ref_typespec: (work@top.u_sub.TargetCfg)
-        |vpiParent:
-        \_parameter: (work@top.u_sub.TargetCfg), line:43:27, endln:43:36
-        |vpiFullName:work@top.u_sub.TargetCfg
-        |vpiActual:
-        \_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
-      |vpiName:TargetCfg
-      |vpiFullName:work@top.u_sub.TargetCfg
-    |vpiParamAssign:
-    \_param_assign: , line:11:18, endln:11:30
-      |vpiParent:
-      \_module_inst: work@sub_top (work@top.u_sub), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:57:4, endln:59:14
-      |vpiRhs:
-      \_constant: , line:11:29, endln:11:30
-        |vpiParent:
-        \_param_assign: , line:11:18, endln:11:30
-        |vpiDecompile:1
-        |vpiSize:32
-        |UINT:1
-        |vpiTypespec:
-        \_ref_typespec: (work@top.u_sub)
-          |vpiParent:
-          \_constant: , line:11:29, endln:11:30
-          |vpiFullName:work@top.u_sub
-          |vpiActual:
-          \_int_typespec: , line:11:14, endln:11:17
-        |vpiConstType:9
-      |vpiLhs:
-      \_parameter: (work@top.u_sub.NDioPads), line:11:18, endln:11:26
-    |vpiParamAssign:
-    \_param_assign: , line:17:27, endln:19:5
-      |vpiParent:
-      \_module_inst: work@sub_top (work@top.u_sub), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:57:4, endln:59:14
-      |vpiRhs:
-      \_operation: , line:17:46, endln:19:5
-        |vpiParent:
-        \_param_assign: , line:17:27, endln:19:5
-        |vpiTypespec:
-        \_ref_typespec: (work@top.u_sub)
-          |vpiParent:
-          \_operation: , line:17:46, endln:19:5
-          |vpiFullName:work@top.u_sub
-          |vpiActual:
-          \_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
-        |vpiOpType:75
-        |vpiOperand:
-        \_constant: , line:18:21, endln:18:34
-          |vpiParent:
-          \_operation: , line:17:46, endln:19:5
-          |vpiDecompile:000
-          |vpiSize:3
-          |BIN:000
-          |vpiTypespec:
-          \_ref_typespec: (work@top.u_sub)
-            |vpiParent:
-            \_constant: , line:18:21, endln:18:34
-            |vpiFullName:work@top.u_sub
-            |vpiActual:
-            \_int_typespec: 
-          |vpiConstType:3
-      |vpiLhs:
-      \_parameter: (work@top.u_sub.DefaultTargetCfg), line:17:27, endln:17:43
-    |vpiParamAssign:
-    \_param_assign: , line:43:27, endln:43:55
-      |vpiParent:
-      \_module_inst: work@sub_top (work@top.u_sub), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:57:4, endln:59:14
-      |vpiOverriden:1
-      |vpiRhs:
-      \_operation: , line:58:18, endln:58:33
-        |vpiParent:
-        \_param_assign: , line:43:27, endln:43:55
-        |vpiTypespec:
-        \_ref_typespec: (work@top.u_sub)
-          |vpiParent:
-          \_operation: , line:58:18, endln:58:33
-          |vpiFullName:work@top.u_sub
-          |vpiActual:
-          \_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
-        |vpiOpType:75
-        |vpiOperand:
-        \_constant: , line:54:21, endln:54:68
-          |vpiParent:
-          \_operation: , line:58:18, endln:58:33
-          |vpiDecompile:001
-          |vpiSize:3
-          |BIN:001
-          |vpiTypespec:
-          \_ref_typespec: (work@top.u_sub)
-            |vpiParent:
-            \_constant: , line:54:21, endln:54:68
-            |vpiFullName:work@top.u_sub
-            |vpiActual:
-            \_int_typespec: 
-          |vpiConstType:3
-      |vpiLhs:
-      \_parameter: (work@top.u_sub.TargetCfg), line:43:27, endln:43:36
-    |vpiTypedef:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiTypedef:
-    \_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
-    |vpiTypedef:
-    \_import_typespec: (pinmux_pkg), line:42:11, endln:42:24
-    |vpiDefName:work@sub_top
-    |vpiDefFile:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv
-    |vpiDefLineNo:41
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:52:1, endln:61:10
-    |vpiGenScopeArray:
-    \_gen_scope_array: (work@top.u_sub.gen_dio_attr[0]), line:45:41, endln:49:6
-      |vpiParent:
-      \_module_inst: work@sub_top (work@top.u_sub), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:57:4, endln:59:14
-      |vpiName:gen_dio_attr[0]
-      |vpiFullName:work@top.u_sub.gen_dio_attr[0]
-      |vpiGenScope:
-      \_gen_scope: (work@top.u_sub.gen_dio_attr[0]), line:45:41, endln:49:6
-        |vpiParent:
-        \_gen_scope_array: (work@top.u_sub.gen_dio_attr[0]), line:45:41, endln:49:6
-        |vpiFullName:work@top.u_sub.gen_dio_attr[0]
-        |vpiParameter:
-        \_parameter: (work@top.u_sub.gen_dio_attr[0].k), line:45:0
-          |vpiParent:
-          \_gen_scope: (work@top.u_sub.gen_dio_attr[0]), line:45:41, endln:49:6
-          |UINT:0
-          |vpiTypespec:
-          \_ref_typespec: (work@top.u_sub.gen_dio_attr[0].k)
-            |vpiParent:
-            \_parameter: (work@top.u_sub.gen_dio_attr[0].k), line:45:0
-            |vpiFullName:work@top.u_sub.gen_dio_attr[0].k
-            |vpiActual:
-            \_int_typespec: 
-          |vpiLocalParam:1
-          |vpiName:k
-          |vpiFullName:work@top.u_sub.gen_dio_attr[0].k
-        |vpiModule:
-        \_module_inst: work@prim_pad_attr (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:46:6, endln:48:26
-          |vpiParent:
-          \_gen_scope: (work@top.u_sub.gen_dio_attr[0]), line:45:41, endln:49:6
-          |vpiName:u_prim_pad_attr
-          |vpiFullName:work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr
-          |vpiParameter:
-          \_parameter: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.PadType), line:32:25, endln:32:32
-            |vpiParent:
-            \_param_assign: , line:32:25, endln:32:36
-            |vpiTypespec:
-            \_ref_typespec: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.PadType)
-              |vpiParent:
-              \_parameter: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.PadType), line:32:25, endln:32:32
-              |vpiFullName:work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.PadType
-              |vpiActual:
-              \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-            |vpiName:PadType
-            |vpiFullName:work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.PadType
-          |vpiParamAssign:
-          \_param_assign: , line:32:25, endln:32:36
-            |vpiParent:
-            \_module_inst: work@prim_pad_attr (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:46:6, endln:48:26
-            |vpiOverriden:1
-            |vpiRhs:
-            \_constant: , line:32:35, endln:32:36
-              |vpiParent:
-              \_param_assign: , line:32:25, endln:32:36
-              |vpiDecompile:3'b001
-              |vpiSize:3
-              |BIN:001
-              |vpiTypespec:
-              \_ref_typespec: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr)
-                |vpiParent:
-                \_constant: , line:32:35, endln:32:36
-                |vpiFullName:work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr
-                |vpiActual:
-                \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-              |vpiConstType:3
-            |vpiLhs:
-            \_parameter: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.PadType), line:32:25, endln:32:32
-          |vpiTypedef:
-          \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-          |vpiTypedef:
-          \_import_typespec: (prim_pad_wrapper_pkg), line:31:11, endln:31:34
-          |vpiDefName:work@prim_pad_attr
-          |vpiDefFile:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv
-          |vpiDefLineNo:30
-          |vpiGenScopeArray:
-          \_gen_scope_array: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic), line:34:11, endln:38:7
-            |vpiParent:
-            \_module_inst: work@prim_pad_attr (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:46:6, endln:48:26
-            |vpiName:gen_generic
-            |vpiFullName:work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic
-            |vpiGenScope:
-            \_gen_scope: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic), line:34:11, endln:38:7
-              |vpiParent:
-              \_gen_scope_array: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic), line:34:11, endln:38:7
-              |vpiFullName:work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic
-              |vpiModule:
-              \_module_inst: work@prim_generic_pad_attr (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:35:7, endln:37:26
-                |vpiParent:
-                \_gen_scope: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic), line:34:11, endln:38:7
-                |vpiName:u_impl_generic
-                |vpiFullName:work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic
-                |vpiParameter:
-                \_parameter: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.PadType), line:24:25, endln:24:32
-                  |vpiParent:
-                  \_param_assign: , line:24:25, endln:24:36
-                  |vpiTypespec:
-                  \_ref_typespec: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.PadType)
-                    |vpiParent:
-                    \_parameter: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.PadType), line:24:25, endln:24:32
-                    |vpiFullName:work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.PadType
-                    |vpiActual:
-                    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-                  |vpiName:PadType
-                  |vpiFullName:work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.PadType
-                |vpiParamAssign:
-                \_param_assign: , line:24:25, endln:24:36
-                  |vpiParent:
-                  \_module_inst: work@prim_generic_pad_attr (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:35:7, endln:37:26
-                  |vpiOverriden:1
-                  |vpiRhs:
-                  \_constant: , line:24:35, endln:24:36
-                    |vpiParent:
-                    \_param_assign: , line:24:25, endln:24:36
-                    |vpiDecompile:3'b001
-                    |vpiSize:3
-                    |BIN:001
-                    |vpiTypespec:
-                    \_ref_typespec: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic)
-                      |vpiParent:
-                      \_constant: , line:24:35, endln:24:36
-                      |vpiFullName:work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic
-                      |vpiActual:
-                      \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-                    |vpiConstType:3
-                  |vpiLhs:
-                  \_parameter: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.PadType), line:24:25, endln:24:32
-                |vpiTypedef:
-                \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-                |vpiTypedef:
-                \_import_typespec: (prim_pad_wrapper_pkg), line:23:11, endln:23:34
-                |vpiDefName:work@prim_generic_pad_attr
-                |vpiDefFile:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv
-                |vpiDefLineNo:22
-                |vpiGenScopeArray:
-                \_gen_scope_array: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.gen_assign), line:25:22, endln:27:7
-                  |vpiParent:
-                  \_module_inst: work@prim_generic_pad_attr (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:35:7, endln:37:26
-                  |vpiName:gen_assign
-                  |vpiFullName:work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.gen_assign
-                  |vpiGenScope:
-                  \_gen_scope: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.gen_assign), line:25:22, endln:27:7
-                    |vpiParent:
-                    \_gen_scope_array: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.gen_assign), line:25:22, endln:27:7
-                    |vpiFullName:work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.gen_assign
-                    |vpiContAssign:
-                    \_cont_assign: , line:26:14, endln:26:19
-                      |vpiParent:
-                      \_gen_scope: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.gen_assign), line:25:22, endln:27:7
-                      |vpiRhs:
-                      \_constant: , line:26:18, endln:26:19
-                        |vpiParent:
-                        \_cont_assign: , line:26:14, endln:26:19
-                        |vpiDecompile:1
-                        |vpiSize:64
-                        |UINT:1
-                        |vpiConstType:9
-                      |vpiLhs:
-                      \_ref_obj: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.gen_assign.a), line:26:14, endln:26:15
-                        |vpiParent:
-                        \_cont_assign: , line:26:14, endln:26:19
-                        |vpiName:a
-                        |vpiFullName:work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.gen_assign.a
 \_weaklyReferenced:
+\_package: (pinmux_pkg), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
+  |vpiName:pinmux_pkg
 \_logic_typespec: , line:2:18, endln:2:29
   |vpiInstance:
   \_package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
@@ -1731,17 +1209,11 @@ design: (work@top)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
-\_int_typespec: , line:11:14, endln:11:17
-  |vpiParent:
-  \_parameter: (pinmux_pkg::NDioPads), line:11:18, endln:11:26
-  |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
-  |vpiSigned:1
 \_packed_array_typespec: , line:14:7, endln:14:32
   |vpiParent:
   \_typespec_member: (dio_pad_type), line:14:33, endln:14:45
   |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
+  \_package: (pinmux_pkg), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
   |vpiRange:
   \_range: , line:14:18, endln:14:32
     |vpiParent:
@@ -1769,12 +1241,6 @@ design: (work@top)
     |vpiFullName:work@sub_top.pinmux_pkg::target_cfg_t.dio_pad_type
     |vpiActual:
     \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-\_int_typespec: 
-  |UINT:3
-\_string_typespec: (dio_pad_type), line:18:7, endln:18:19
-  |vpiParent:
-  \_tagged_pattern: , line:18:21, endln:18:34
-  |vpiName:dio_pad_type
 \_int_typespec: , line:11:14, endln:11:17
   |vpiParent:
   \_parameter: (pinmux_pkg::NDioPads), line:11:18, endln:11:26
@@ -1801,8 +1267,6 @@ design: (work@top)
         \_operation: , line:14:19, endln:14:29
         |vpiName:NDioPads
         |vpiFullName:pinmux_pkg::pinmux_pkg::target_cfg_t::dio_pad_type::NDioPads
-        |vpiActual:
-        \_parameter: (pinmux_pkg::NDioPads), line:11:18, endln:11:26
       |vpiOperand:
       \_constant: , line:14:28, endln:14:29
         |vpiParent:
@@ -1837,7 +1301,7 @@ design: (work@top)
   \_ref_typespec: (work@sub_top.DefaultTargetCfg)
   |vpiName:pinmux_pkg::target_cfg_t
   |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
+  \_package: (pinmux_pkg), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
   |vpiPacked:1
   |vpiTypespecMember:
   \_typespec_member: (dio_pad_type), line:14:33, endln:14:45
@@ -1860,7 +1324,7 @@ design: (work@top)
   |vpiParent:
   \_ref_typespec: (work@sub_top.DefaultTargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type)
   |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
+  \_package: (pinmux_pkg), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
   |vpiRange:
   \_range: , line:14:18, endln:14:32
     |vpiParent:
@@ -1893,7 +1357,7 @@ design: (work@top)
   \_ref_typespec: (work@sub_top.DefaultTargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type)
   |vpiName:prim_pad_wrapper_pkg::pad_type_e
   |vpiInstance:
-  \_package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
+  \_package: (prim_pad_wrapper_pkg), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
   |vpiBaseTypespec:
   \_ref_typespec: (work@sub_top.DefaultTargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type.prim_pad_wrapper_pkg::pad_type_e)
     |vpiParent:
@@ -1917,11 +1381,13 @@ design: (work@top)
     |HEX:1
     |vpiDecompile:3'h1
     |vpiSize:3
+\_package: (prim_pad_wrapper_pkg), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
+  |vpiName:prim_pad_wrapper_pkg
 \_logic_typespec: , line:2:18, endln:2:29
   |vpiParent:
   \_ref_typespec: (work@sub_top.DefaultTargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type.prim_pad_wrapper_pkg::pad_type_e)
   |vpiInstance:
-  \_package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
+  \_package: (prim_pad_wrapper_pkg), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
   |vpiRange:
   \_range: , line:2:24, endln:2:29
     |vpiParent:
@@ -1946,19 +1412,19 @@ design: (work@top)
   |vpiParent:
   \_ref_typespec: (work@sub_top.NDioPads)
   |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
+  \_package: (pinmux_pkg), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
   |vpiSigned:1
 \_int_typespec: , line:11:14, endln:11:17
   |vpiParent:
   \_ref_typespec: (work@sub_top)
   |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
+  \_package: (pinmux_pkg), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
   |vpiSigned:1
 \_int_typespec: , line:11:14, endln:11:17
   |vpiParent:
   \_ref_typespec: (work@sub_top.NDioPads)
   |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
+  \_package: (pinmux_pkg), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
   |vpiSigned:1
 \_string_typespec: (dio_pad_type), line:18:7, endln:18:19
   |vpiParent:
@@ -1973,7 +1439,7 @@ design: (work@top)
   \_ref_typespec: (work@sub_top.DefaultTargetCfg)
   |vpiName:pinmux_pkg::target_cfg_t
   |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
+  \_package: (pinmux_pkg), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
   |vpiPacked:1
   |vpiTypespecMember:
   \_typespec_member: (dio_pad_type), line:14:33, endln:14:45
@@ -1996,7 +1462,7 @@ design: (work@top)
   |vpiParent:
   \_ref_typespec: (work@sub_top.DefaultTargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type)
   |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
+  \_package: (pinmux_pkg), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
   |vpiRange:
   \_range: , line:14:18, endln:14:32
     |vpiParent:
@@ -2029,7 +1495,7 @@ design: (work@top)
   \_ref_typespec: (work@sub_top.DefaultTargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type)
   |vpiName:prim_pad_wrapper_pkg::pad_type_e
   |vpiInstance:
-  \_package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
+  \_package: (prim_pad_wrapper_pkg), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
   |vpiBaseTypespec:
   \_ref_typespec: (work@sub_top.DefaultTargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type.prim_pad_wrapper_pkg::pad_type_e)
     |vpiParent:
@@ -2057,7 +1523,7 @@ design: (work@top)
   |vpiParent:
   \_ref_typespec: (work@sub_top.DefaultTargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type.prim_pad_wrapper_pkg::pad_type_e)
   |vpiInstance:
-  \_package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
+  \_package: (prim_pad_wrapper_pkg), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
   |vpiRange:
   \_range: , line:2:24, endln:2:29
     |vpiParent:
@@ -2078,1289 +1544,24 @@ design: (work@top)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
+\_unsupported_typespec: (k), line:45:15, endln:45:16
+  |vpiName:k
 \_int_typespec: , line:11:14, endln:11:17
   |vpiParent:
   \_ref_typespec: (work@sub_top)
   |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
+  \_package: (pinmux_pkg), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
   |vpiSigned:1
 \_string_typespec: (dio_pad_type), line:54:7, endln:54:19
   |vpiParent:
   \_tagged_pattern: , line:54:21, endln:54:68
   |vpiName:dio_pad_type
-\_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
-  |vpiParent:
-  \_ref_typespec: (work@top)
-  |vpiName:pinmux_pkg::target_cfg_t
-  |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (dio_pad_type), line:14:33, endln:14:45
-    |vpiParent:
-    \_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
-    |vpiName:dio_pad_type
-    |vpiTypespec:
-    \_ref_typespec: (work@top.pinmux_pkg::target_cfg_t.dio_pad_type)
-      |vpiParent:
-      \_typespec_member: (dio_pad_type), line:14:33, endln:14:45
-      |vpiFullName:work@top.pinmux_pkg::target_cfg_t.dio_pad_type
-      |vpiActual:
-      \_packed_array_typespec: , line:14:7, endln:14:32
-    |vpiRefFile:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv
-    |vpiRefLineNo:14
-    |vpiRefColumnNo:7
-    |vpiRefEndLineNo:14
-    |vpiRefEndColumnNo:32
-\_packed_array_typespec: , line:14:7, endln:14:32
-  |vpiParent:
-  \_ref_typespec: (work@top.pinmux_pkg::target_cfg_t.dio_pad_type)
-  |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
-  |vpiRange:
-  \_range: , line:14:18, endln:14:32
-    |vpiParent:
-    \_packed_array_typespec: , line:14:7, endln:14:32
-    |vpiLeftRange:
-    \_constant: , line:14:19, endln:14:27
-      |vpiParent:
-      \_range: , line:14:18, endln:14:32
-      |vpiDecompile:0
-      |vpiSize:64
-      |INT:0
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:14:30, endln:14:31
-      |vpiParent:
-      \_range: , line:14:18, endln:14:32
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiElemTypespec:
-  \_ref_typespec: (work@top.pinmux_pkg::target_cfg_t.dio_pad_type)
-    |vpiParent:
-    \_packed_array_typespec: , line:14:7, endln:14:32
-    |vpiFullName:work@top.pinmux_pkg::target_cfg_t.dio_pad_type
-    |vpiActual:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-\_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-  |vpiParent:
-  \_ref_typespec: (work@top.pinmux_pkg::target_cfg_t.dio_pad_type)
-  |vpiName:prim_pad_wrapper_pkg::pad_type_e
-  |vpiInstance:
-  \_package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
-  |vpiBaseTypespec:
-  \_ref_typespec: (work@top.pinmux_pkg::target_cfg_t.dio_pad_type.prim_pad_wrapper_pkg::pad_type_e)
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiFullName:work@top.pinmux_pkg::target_cfg_t.dio_pad_type.prim_pad_wrapper_pkg::pad_type_e
-    |vpiActual:
-    \_logic_typespec: , line:2:18, endln:2:29
-  |vpiEnumConst:
-  \_enum_const: (A), line:3:7, endln:3:15
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiName:A
-    |HEX:0
-    |vpiDecompile:3'h0
-    |vpiSize:3
-  |vpiEnumConst:
-  \_enum_const: (B), line:4:7, endln:4:15
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiName:B
-    |HEX:1
-    |vpiDecompile:3'h1
-    |vpiSize:3
-\_logic_typespec: , line:2:18, endln:2:29
-  |vpiParent:
-  \_ref_typespec: (work@top.pinmux_pkg::target_cfg_t.dio_pad_type.prim_pad_wrapper_pkg::pad_type_e)
-  |vpiInstance:
-  \_package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
-  |vpiRange:
-  \_range: , line:2:24, endln:2:29
-    |vpiParent:
-    \_logic_typespec: , line:2:18, endln:2:29
-    |vpiLeftRange:
-    \_constant: , line:2:25, endln:2:26
-      |vpiParent:
-      \_range: , line:2:24, endln:2:29
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:27, endln:2:28
-      |vpiParent:
-      \_range: , line:2:24, endln:2:29
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_int_typespec: 
-  |vpiParent:
-  \_ref_typespec: (work@top)
-  |UINT:3
-\_operation: , line:53:58, endln:55:5
-  |vpiParent:
-  \_param_assign: , line:53:40, endln:55:5
-  |vpiTypespec:
-  \_ref_typespec: (work@top)
-    |vpiParent:
-    \_operation: , line:53:58, endln:55:5
-    |vpiFullName:work@top
-    |vpiActual:
-    \_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
-  |vpiOpType:75
-  |vpiOperand:
-  \_constant: , line:54:21, endln:54:68
-\_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
-  |vpiParent:
-  \_ref_typespec: (work@top)
-  |vpiName:pinmux_pkg::target_cfg_t
-  |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (dio_pad_type), line:14:33, endln:14:45
-    |vpiParent:
-    \_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
-    |vpiName:dio_pad_type
-    |vpiTypespec:
-    \_ref_typespec: (work@top.pinmux_pkg::target_cfg_t.dio_pad_type)
-      |vpiParent:
-      \_typespec_member: (dio_pad_type), line:14:33, endln:14:45
-      |vpiFullName:work@top.pinmux_pkg::target_cfg_t.dio_pad_type
-      |vpiActual:
-      \_packed_array_typespec: , line:14:7, endln:14:32
-    |vpiRefFile:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv
-    |vpiRefLineNo:14
-    |vpiRefColumnNo:7
-    |vpiRefEndLineNo:14
-    |vpiRefEndColumnNo:32
-\_packed_array_typespec: , line:14:7, endln:14:32
-  |vpiParent:
-  \_ref_typespec: (work@top.pinmux_pkg::target_cfg_t.dio_pad_type)
-  |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
-  |vpiRange:
-  \_range: , line:14:18, endln:14:32
-    |vpiParent:
-    \_packed_array_typespec: , line:14:7, endln:14:32
-    |vpiLeftRange:
-    \_constant: , line:14:19, endln:14:27
-      |vpiParent:
-      \_range: , line:14:18, endln:14:32
-      |vpiDecompile:0
-      |vpiSize:64
-      |INT:0
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:14:30, endln:14:31
-      |vpiParent:
-      \_range: , line:14:18, endln:14:32
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiElemTypespec:
-  \_ref_typespec: (work@top.pinmux_pkg::target_cfg_t.dio_pad_type)
-    |vpiParent:
-    \_packed_array_typespec: , line:14:7, endln:14:32
-    |vpiFullName:work@top.pinmux_pkg::target_cfg_t.dio_pad_type
-    |vpiActual:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-\_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-  |vpiParent:
-  \_ref_typespec: (work@top.pinmux_pkg::target_cfg_t.dio_pad_type)
-  |vpiName:prim_pad_wrapper_pkg::pad_type_e
-  |vpiInstance:
-  \_package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
-  |vpiBaseTypespec:
-  \_ref_typespec: (work@top.pinmux_pkg::target_cfg_t.dio_pad_type.prim_pad_wrapper_pkg::pad_type_e)
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiFullName:work@top.pinmux_pkg::target_cfg_t.dio_pad_type.prim_pad_wrapper_pkg::pad_type_e
-    |vpiActual:
-    \_logic_typespec: , line:2:18, endln:2:29
-  |vpiEnumConst:
-  \_enum_const: (A), line:3:7, endln:3:15
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiName:A
-    |HEX:0
-    |vpiDecompile:3'h0
-    |vpiSize:3
-  |vpiEnumConst:
-  \_enum_const: (B), line:4:7, endln:4:15
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiName:B
-    |HEX:1
-    |vpiDecompile:3'h1
-    |vpiSize:3
-\_logic_typespec: , line:2:18, endln:2:29
-  |vpiParent:
-  \_ref_typespec: (work@top.pinmux_pkg::target_cfg_t.dio_pad_type.prim_pad_wrapper_pkg::pad_type_e)
-  |vpiInstance:
-  \_package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
-  |vpiRange:
-  \_range: , line:2:24, endln:2:29
-    |vpiParent:
-    \_logic_typespec: , line:2:18, endln:2:29
-    |vpiLeftRange:
-    \_constant: , line:2:25, endln:2:26
-      |vpiParent:
-      \_range: , line:2:24, endln:2:29
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:27, endln:2:28
-      |vpiParent:
-      \_range: , line:2:24, endln:2:29
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
-  |vpiParent:
-  \_ref_typespec: (work@top.u_sub)
-  |vpiName:pinmux_pkg::target_cfg_t
-  |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (dio_pad_type), line:14:33, endln:14:45
-    |vpiParent:
-    \_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
-    |vpiName:dio_pad_type
-    |vpiTypespec:
-    \_ref_typespec: (work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type)
-      |vpiParent:
-      \_typespec_member: (dio_pad_type), line:14:33, endln:14:45
-      |vpiFullName:work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type
-      |vpiActual:
-      \_packed_array_typespec: , line:14:7, endln:14:32
-    |vpiRefFile:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv
-    |vpiRefLineNo:14
-    |vpiRefColumnNo:7
-    |vpiRefEndLineNo:14
-    |vpiRefEndColumnNo:32
-\_packed_array_typespec: , line:14:7, endln:14:32
-  |vpiParent:
-  \_ref_typespec: (work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type)
-  |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
-  |vpiRange:
-  \_range: , line:14:18, endln:14:32
-    |vpiParent:
-    \_packed_array_typespec: , line:14:7, endln:14:32
-    |vpiLeftRange:
-    \_constant: , line:14:19, endln:14:27
-      |vpiParent:
-      \_range: , line:14:18, endln:14:32
-      |vpiDecompile:0
-      |vpiSize:64
-      |INT:0
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:14:30, endln:14:31
-      |vpiParent:
-      \_range: , line:14:18, endln:14:32
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiElemTypespec:
-  \_ref_typespec: (work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type)
-    |vpiParent:
-    \_packed_array_typespec: , line:14:7, endln:14:32
-    |vpiFullName:work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type
-    |vpiActual:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-\_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-  |vpiParent:
-  \_ref_typespec: (work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type)
-  |vpiName:prim_pad_wrapper_pkg::pad_type_e
-  |vpiInstance:
-  \_package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
-  |vpiBaseTypespec:
-  \_ref_typespec: (work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type.prim_pad_wrapper_pkg::pad_type_e)
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiFullName:work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type.prim_pad_wrapper_pkg::pad_type_e
-    |vpiActual:
-    \_logic_typespec: , line:2:18, endln:2:29
-  |vpiEnumConst:
-  \_enum_const: (A), line:3:7, endln:3:15
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiName:A
-    |HEX:0
-    |vpiDecompile:3'h0
-    |vpiSize:3
-  |vpiEnumConst:
-  \_enum_const: (B), line:4:7, endln:4:15
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiName:B
-    |HEX:1
-    |vpiDecompile:3'h1
-    |vpiSize:3
-\_logic_typespec: , line:2:18, endln:2:29
-  |vpiParent:
-  \_ref_typespec: (work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type.prim_pad_wrapper_pkg::pad_type_e)
-  |vpiInstance:
-  \_package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
-  |vpiRange:
-  \_range: , line:2:24, endln:2:29
-    |vpiParent:
-    \_logic_typespec: , line:2:18, endln:2:29
-    |vpiLeftRange:
-    \_constant: , line:2:25, endln:2:26
-      |vpiParent:
-      \_range: , line:2:24, endln:2:29
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:27, endln:2:28
-      |vpiParent:
-      \_range: , line:2:24, endln:2:29
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_int_typespec: 
-  |vpiParent:
-  \_ref_typespec: (work@top.u_sub)
-  |UINT:3
-\_operation: , line:17:46, endln:19:5
-  |vpiParent:
-  \_param_assign: , line:17:27, endln:19:5
-  |vpiTypespec:
-  \_ref_typespec: (work@top.u_sub)
-    |vpiParent:
-    \_operation: , line:17:46, endln:19:5
-    |vpiFullName:work@top.u_sub
-    |vpiActual:
-    \_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
-  |vpiOpType:75
-  |vpiOperand:
-  \_constant: , line:18:21, endln:18:34
-\_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
-  |vpiParent:
-  \_ref_typespec: (work@top.u_sub)
-  |vpiName:pinmux_pkg::target_cfg_t
-  |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (dio_pad_type), line:14:33, endln:14:45
-    |vpiParent:
-    \_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
-    |vpiName:dio_pad_type
-    |vpiTypespec:
-    \_ref_typespec: (work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type)
-      |vpiParent:
-      \_typespec_member: (dio_pad_type), line:14:33, endln:14:45
-      |vpiFullName:work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type
-      |vpiActual:
-      \_packed_array_typespec: , line:14:7, endln:14:32
-    |vpiRefFile:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv
-    |vpiRefLineNo:14
-    |vpiRefColumnNo:7
-    |vpiRefEndLineNo:14
-    |vpiRefEndColumnNo:32
-\_packed_array_typespec: , line:14:7, endln:14:32
-  |vpiParent:
-  \_ref_typespec: (work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type)
-  |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
-  |vpiRange:
-  \_range: , line:14:18, endln:14:32
-    |vpiParent:
-    \_packed_array_typespec: , line:14:7, endln:14:32
-    |vpiLeftRange:
-    \_constant: , line:14:19, endln:14:27
-      |vpiParent:
-      \_range: , line:14:18, endln:14:32
-      |vpiDecompile:0
-      |vpiSize:64
-      |INT:0
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:14:30, endln:14:31
-      |vpiParent:
-      \_range: , line:14:18, endln:14:32
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiElemTypespec:
-  \_ref_typespec: (work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type)
-    |vpiParent:
-    \_packed_array_typespec: , line:14:7, endln:14:32
-    |vpiFullName:work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type
-    |vpiActual:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-\_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-  |vpiParent:
-  \_ref_typespec: (work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type)
-  |vpiName:prim_pad_wrapper_pkg::pad_type_e
-  |vpiInstance:
-  \_package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
-  |vpiBaseTypespec:
-  \_ref_typespec: (work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type.prim_pad_wrapper_pkg::pad_type_e)
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiFullName:work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type.prim_pad_wrapper_pkg::pad_type_e
-    |vpiActual:
-    \_logic_typespec: , line:2:18, endln:2:29
-  |vpiEnumConst:
-  \_enum_const: (A), line:3:7, endln:3:15
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiName:A
-    |HEX:0
-    |vpiDecompile:3'h0
-    |vpiSize:3
-  |vpiEnumConst:
-  \_enum_const: (B), line:4:7, endln:4:15
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiName:B
-    |HEX:1
-    |vpiDecompile:3'h1
-    |vpiSize:3
-\_logic_typespec: , line:2:18, endln:2:29
-  |vpiParent:
-  \_ref_typespec: (work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type.prim_pad_wrapper_pkg::pad_type_e)
-  |vpiInstance:
-  \_package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
-  |vpiRange:
-  \_range: , line:2:24, endln:2:29
-    |vpiParent:
-    \_logic_typespec: , line:2:18, endln:2:29
-    |vpiLeftRange:
-    \_constant: , line:2:25, endln:2:26
-      |vpiParent:
-      \_range: , line:2:24, endln:2:29
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:27, endln:2:28
-      |vpiParent:
-      \_range: , line:2:24, endln:2:29
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
-  |vpiParent:
-  \_ref_typespec: (work@top.u_sub)
-  |vpiName:pinmux_pkg::target_cfg_t
-  |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (dio_pad_type), line:14:33, endln:14:45
-    |vpiParent:
-    \_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
-    |vpiName:dio_pad_type
-    |vpiTypespec:
-    \_ref_typespec: (work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type)
-      |vpiParent:
-      \_typespec_member: (dio_pad_type), line:14:33, endln:14:45
-      |vpiFullName:work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type
-      |vpiActual:
-      \_packed_array_typespec: , line:14:7, endln:14:32
-    |vpiRefFile:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv
-    |vpiRefLineNo:14
-    |vpiRefColumnNo:7
-    |vpiRefEndLineNo:14
-    |vpiRefEndColumnNo:32
-\_packed_array_typespec: , line:14:7, endln:14:32
-  |vpiParent:
-  \_ref_typespec: (work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type)
-  |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
-  |vpiRange:
-  \_range: , line:14:18, endln:14:32
-    |vpiParent:
-    \_packed_array_typespec: , line:14:7, endln:14:32
-    |vpiLeftRange:
-    \_constant: , line:14:19, endln:14:27
-      |vpiParent:
-      \_range: , line:14:18, endln:14:32
-      |vpiDecompile:0
-      |vpiSize:64
-      |INT:0
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:14:30, endln:14:31
-      |vpiParent:
-      \_range: , line:14:18, endln:14:32
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiElemTypespec:
-  \_ref_typespec: (work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type)
-    |vpiParent:
-    \_packed_array_typespec: , line:14:7, endln:14:32
-    |vpiFullName:work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type
-    |vpiActual:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-\_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-  |vpiParent:
-  \_ref_typespec: (work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type)
-  |vpiName:prim_pad_wrapper_pkg::pad_type_e
-  |vpiInstance:
-  \_package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
-  |vpiBaseTypespec:
-  \_ref_typespec: (work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type.prim_pad_wrapper_pkg::pad_type_e)
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiFullName:work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type.prim_pad_wrapper_pkg::pad_type_e
-    |vpiActual:
-    \_logic_typespec: , line:2:18, endln:2:29
-  |vpiEnumConst:
-  \_enum_const: (A), line:3:7, endln:3:15
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiName:A
-    |HEX:0
-    |vpiDecompile:3'h0
-    |vpiSize:3
-  |vpiEnumConst:
-  \_enum_const: (B), line:4:7, endln:4:15
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiName:B
-    |HEX:1
-    |vpiDecompile:3'h1
-    |vpiSize:3
-\_logic_typespec: , line:2:18, endln:2:29
-  |vpiParent:
-  \_ref_typespec: (work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type.prim_pad_wrapper_pkg::pad_type_e)
-  |vpiInstance:
-  \_package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
-  |vpiRange:
-  \_range: , line:2:24, endln:2:29
-    |vpiParent:
-    \_logic_typespec: , line:2:18, endln:2:29
-    |vpiLeftRange:
-    \_constant: , line:2:25, endln:2:26
-      |vpiParent:
-      \_range: , line:2:24, endln:2:29
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:27, endln:2:28
-      |vpiParent:
-      \_range: , line:2:24, endln:2:29
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_int_typespec: 
-  |vpiParent:
-  \_ref_typespec: (work@top.u_sub)
-  |UINT:3
-\_operation: , line:58:18, endln:58:33
-  |vpiParent:
-  \_param_assign: , line:43:27, endln:43:55
-  |vpiTypespec:
-  \_ref_typespec: (work@top.u_sub)
-    |vpiParent:
-    \_operation: , line:58:18, endln:58:33
-    |vpiFullName:work@top.u_sub
-    |vpiActual:
-    \_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
-  |vpiOpType:75
-  |vpiOperand:
-  \_constant: , line:54:21, endln:54:68
-\_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
-  |vpiParent:
-  \_ref_typespec: (work@top.u_sub)
-  |vpiName:pinmux_pkg::target_cfg_t
-  |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (dio_pad_type), line:14:33, endln:14:45
-    |vpiParent:
-    \_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
-    |vpiName:dio_pad_type
-    |vpiTypespec:
-    \_ref_typespec: (work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type)
-      |vpiParent:
-      \_typespec_member: (dio_pad_type), line:14:33, endln:14:45
-      |vpiFullName:work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type
-      |vpiActual:
-      \_packed_array_typespec: , line:14:7, endln:14:32
-    |vpiRefFile:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv
-    |vpiRefLineNo:14
-    |vpiRefColumnNo:7
-    |vpiRefEndLineNo:14
-    |vpiRefEndColumnNo:32
-\_packed_array_typespec: , line:14:7, endln:14:32
-  |vpiParent:
-  \_ref_typespec: (work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type)
-  |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
-  |vpiRange:
-  \_range: , line:14:18, endln:14:32
-    |vpiParent:
-    \_packed_array_typespec: , line:14:7, endln:14:32
-    |vpiLeftRange:
-    \_constant: , line:14:19, endln:14:27
-      |vpiParent:
-      \_range: , line:14:18, endln:14:32
-      |vpiDecompile:0
-      |vpiSize:64
-      |INT:0
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:14:30, endln:14:31
-      |vpiParent:
-      \_range: , line:14:18, endln:14:32
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiElemTypespec:
-  \_ref_typespec: (work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type)
-    |vpiParent:
-    \_packed_array_typespec: , line:14:7, endln:14:32
-    |vpiFullName:work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type
-    |vpiActual:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-\_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-  |vpiParent:
-  \_ref_typespec: (work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type)
-  |vpiName:prim_pad_wrapper_pkg::pad_type_e
-  |vpiInstance:
-  \_package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
-  |vpiBaseTypespec:
-  \_ref_typespec: (work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type.prim_pad_wrapper_pkg::pad_type_e)
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiFullName:work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type.prim_pad_wrapper_pkg::pad_type_e
-    |vpiActual:
-    \_logic_typespec: , line:2:18, endln:2:29
-  |vpiEnumConst:
-  \_enum_const: (A), line:3:7, endln:3:15
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiName:A
-    |HEX:0
-    |vpiDecompile:3'h0
-    |vpiSize:3
-  |vpiEnumConst:
-  \_enum_const: (B), line:4:7, endln:4:15
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiName:B
-    |HEX:1
-    |vpiDecompile:3'h1
-    |vpiSize:3
-\_logic_typespec: , line:2:18, endln:2:29
-  |vpiParent:
-  \_ref_typespec: (work@top.u_sub.pinmux_pkg::target_cfg_t.dio_pad_type.prim_pad_wrapper_pkg::pad_type_e)
-  |vpiInstance:
-  \_package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
-  |vpiRange:
-  \_range: , line:2:24, endln:2:29
-    |vpiParent:
-    \_logic_typespec: , line:2:18, endln:2:29
-    |vpiLeftRange:
-    \_constant: , line:2:25, endln:2:26
-      |vpiParent:
-      \_range: , line:2:24, endln:2:29
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:27, endln:2:28
-      |vpiParent:
-      \_range: , line:2:24, endln:2:29
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_param_assign: , line:32:25, endln:32:36
-  |vpiParent:
-  \_module_inst: work@prim_pad_attr (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:46:6, endln:48:26
-  |vpiOverriden:1
-  |vpiRhs:
-  \_constant: , line:32:35, endln:32:36
-  |vpiLhs:
-  \_parameter: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.PadType), line:32:25, endln:32:32
-\_param_assign: , line:24:25, endln:24:36
-  |vpiParent:
-  \_module_inst: work@prim_generic_pad_attr (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:35:7, endln:37:26
-  |vpiOverriden:1
-  |vpiRhs:
-  \_constant: , line:24:35, endln:24:36
-  |vpiLhs:
-  \_parameter: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.PadType), line:24:25, endln:24:32
-\_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
-  |vpiParent:
-  \_ref_typespec: (work@top.PinmuxTargetCfg)
-  |vpiName:pinmux_pkg::target_cfg_t
-  |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (dio_pad_type), line:14:33, endln:14:45
-    |vpiParent:
-    \_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
-    |vpiName:dio_pad_type
-    |vpiTypespec:
-    \_ref_typespec: (work@top.PinmuxTargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type)
-      |vpiParent:
-      \_typespec_member: (dio_pad_type), line:14:33, endln:14:45
-      |vpiFullName:work@top.PinmuxTargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type
-      |vpiActual:
-      \_packed_array_typespec: , line:14:7, endln:14:32
-    |vpiRefFile:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv
-    |vpiRefLineNo:14
-    |vpiRefColumnNo:7
-    |vpiRefEndLineNo:14
-    |vpiRefEndColumnNo:32
-\_packed_array_typespec: , line:14:7, endln:14:32
-  |vpiParent:
-  \_ref_typespec: (work@top.PinmuxTargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type)
-  |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
-  |vpiRange:
-  \_range: , line:14:18, endln:14:32
-    |vpiParent:
-    \_packed_array_typespec: , line:14:7, endln:14:32
-    |vpiLeftRange:
-    \_constant: , line:14:19, endln:14:27
-      |vpiParent:
-      \_range: , line:14:18, endln:14:32
-      |vpiDecompile:0
-      |vpiSize:64
-      |INT:0
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:14:30, endln:14:31
-      |vpiParent:
-      \_range: , line:14:18, endln:14:32
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiElemTypespec:
-  \_ref_typespec: (work@top.PinmuxTargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type)
-    |vpiParent:
-    \_packed_array_typespec: , line:14:7, endln:14:32
-    |vpiFullName:work@top.PinmuxTargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type
-    |vpiActual:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-\_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-  |vpiParent:
-  \_ref_typespec: (work@top.PinmuxTargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type)
-  |vpiName:prim_pad_wrapper_pkg::pad_type_e
-  |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
-  |vpiBaseTypespec:
-  \_ref_typespec: (work@top.PinmuxTargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type.prim_pad_wrapper_pkg::pad_type_e)
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiFullName:work@top.PinmuxTargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type.prim_pad_wrapper_pkg::pad_type_e
-    |vpiActual:
-    \_logic_typespec: , line:2:18, endln:2:29
-  |vpiEnumConst:
-  \_enum_const: (A), line:3:7, endln:3:15
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiName:A
-    |HEX:0
-    |vpiDecompile:3'h0
-    |vpiSize:3
-  |vpiEnumConst:
-  \_enum_const: (B), line:4:7, endln:4:15
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiName:B
-    |HEX:1
-    |vpiDecompile:3'h1
-    |vpiSize:3
-\_logic_typespec: , line:2:18, endln:2:29
-  |vpiParent:
-  \_ref_typespec: (work@top.PinmuxTargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type.prim_pad_wrapper_pkg::pad_type_e)
-  |vpiInstance:
-  \_package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
-  |vpiRange:
-  \_range: , line:2:24, endln:2:29
-    |vpiParent:
-    \_logic_typespec: , line:2:18, endln:2:29
-    |vpiLeftRange:
-    \_constant: , line:2:25, endln:2:26
-      |vpiParent:
-      \_range: , line:2:24, endln:2:29
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:27, endln:2:28
-      |vpiParent:
-      \_range: , line:2:24, endln:2:29
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
-  |vpiParent:
-  \_ref_typespec: (work@top.u_sub.DefaultTargetCfg)
-  |vpiName:pinmux_pkg::target_cfg_t
-  |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (dio_pad_type), line:14:33, endln:14:45
-    |vpiParent:
-    \_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
-    |vpiName:dio_pad_type
-    |vpiTypespec:
-    \_ref_typespec: (work@top.u_sub.DefaultTargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type)
-      |vpiParent:
-      \_typespec_member: (dio_pad_type), line:14:33, endln:14:45
-      |vpiFullName:work@top.u_sub.DefaultTargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type
-      |vpiActual:
-      \_packed_array_typespec: , line:14:7, endln:14:32
-    |vpiRefFile:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv
-    |vpiRefLineNo:14
-    |vpiRefColumnNo:7
-    |vpiRefEndLineNo:14
-    |vpiRefEndColumnNo:32
-\_packed_array_typespec: , line:14:7, endln:14:32
-  |vpiParent:
-  \_ref_typespec: (work@top.u_sub.DefaultTargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type)
-  |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
-  |vpiRange:
-  \_range: , line:14:18, endln:14:32
-    |vpiParent:
-    \_packed_array_typespec: , line:14:7, endln:14:32
-    |vpiLeftRange:
-    \_constant: , line:14:19, endln:14:27
-      |vpiParent:
-      \_range: , line:14:18, endln:14:32
-      |vpiDecompile:0
-      |vpiSize:64
-      |INT:0
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:14:30, endln:14:31
-      |vpiParent:
-      \_range: , line:14:18, endln:14:32
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiElemTypespec:
-  \_ref_typespec: (work@top.u_sub.DefaultTargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type)
-    |vpiParent:
-    \_packed_array_typespec: , line:14:7, endln:14:32
-    |vpiFullName:work@top.u_sub.DefaultTargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type
-    |vpiActual:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-\_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-  |vpiParent:
-  \_ref_typespec: (work@top.u_sub.DefaultTargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type)
-  |vpiName:prim_pad_wrapper_pkg::pad_type_e
-  |vpiInstance:
-  \_package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
-  |vpiBaseTypespec:
-  \_ref_typespec: (work@top.u_sub.DefaultTargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type.prim_pad_wrapper_pkg::pad_type_e)
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiFullName:work@top.u_sub.DefaultTargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type.prim_pad_wrapper_pkg::pad_type_e
-    |vpiActual:
-    \_logic_typespec: , line:2:18, endln:2:29
-  |vpiEnumConst:
-  \_enum_const: (A), line:3:7, endln:3:15
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiName:A
-    |HEX:0
-    |vpiDecompile:3'h0
-    |vpiSize:3
-  |vpiEnumConst:
-  \_enum_const: (B), line:4:7, endln:4:15
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiName:B
-    |HEX:1
-    |vpiDecompile:3'h1
-    |vpiSize:3
-\_logic_typespec: , line:2:18, endln:2:29
-  |vpiParent:
-  \_ref_typespec: (work@top.u_sub.DefaultTargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type.prim_pad_wrapper_pkg::pad_type_e)
-  |vpiInstance:
-  \_package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
-  |vpiRange:
-  \_range: , line:2:24, endln:2:29
-    |vpiParent:
-    \_logic_typespec: , line:2:18, endln:2:29
-    |vpiLeftRange:
-    \_constant: , line:2:25, endln:2:26
-      |vpiParent:
-      \_range: , line:2:24, endln:2:29
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:27, endln:2:28
-      |vpiParent:
-      \_range: , line:2:24, endln:2:29
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_int_typespec: , line:11:14, endln:11:17
-  |vpiParent:
-  \_ref_typespec: (work@top.u_sub.NDioPads)
-  |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
-  |vpiSigned:1
-\_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
-  |vpiParent:
-  \_ref_typespec: (work@top.u_sub.TargetCfg)
-  |vpiName:pinmux_pkg::target_cfg_t
-  |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (dio_pad_type), line:14:33, endln:14:45
-    |vpiParent:
-    \_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
-    |vpiName:dio_pad_type
-    |vpiTypespec:
-    \_ref_typespec: (work@top.u_sub.TargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type)
-      |vpiParent:
-      \_typespec_member: (dio_pad_type), line:14:33, endln:14:45
-      |vpiFullName:work@top.u_sub.TargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type
-      |vpiActual:
-      \_packed_array_typespec: , line:14:7, endln:14:32
-    |vpiRefFile:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv
-    |vpiRefLineNo:14
-    |vpiRefColumnNo:7
-    |vpiRefEndLineNo:14
-    |vpiRefEndColumnNo:32
-\_packed_array_typespec: , line:14:7, endln:14:32
-  |vpiParent:
-  \_ref_typespec: (work@top.u_sub.TargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type)
-  |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
-  |vpiRange:
-  \_range: , line:14:18, endln:14:32
-    |vpiParent:
-    \_packed_array_typespec: , line:14:7, endln:14:32
-    |vpiLeftRange:
-    \_constant: , line:14:19, endln:14:27
-      |vpiParent:
-      \_range: , line:14:18, endln:14:32
-      |vpiDecompile:0
-      |vpiSize:64
-      |INT:0
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:14:30, endln:14:31
-      |vpiParent:
-      \_range: , line:14:18, endln:14:32
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiElemTypespec:
-  \_ref_typespec: (work@top.u_sub.TargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type)
-    |vpiParent:
-    \_packed_array_typespec: , line:14:7, endln:14:32
-    |vpiFullName:work@top.u_sub.TargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type
-    |vpiActual:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-\_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-  |vpiParent:
-  \_ref_typespec: (work@top.u_sub.TargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type)
-  |vpiName:prim_pad_wrapper_pkg::pad_type_e
-  |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
-  |vpiBaseTypespec:
-  \_ref_typespec: (work@top.u_sub.TargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type.prim_pad_wrapper_pkg::pad_type_e)
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiFullName:work@top.u_sub.TargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type.prim_pad_wrapper_pkg::pad_type_e
-    |vpiActual:
-    \_logic_typespec: , line:2:18, endln:2:29
-  |vpiEnumConst:
-  \_enum_const: (A), line:3:7, endln:3:15
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiName:A
-    |HEX:0
-    |vpiDecompile:3'h0
-    |vpiSize:3
-  |vpiEnumConst:
-  \_enum_const: (B), line:4:7, endln:4:15
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiName:B
-    |HEX:1
-    |vpiDecompile:3'h1
-    |vpiSize:3
-\_logic_typespec: , line:2:18, endln:2:29
-  |vpiParent:
-  \_ref_typespec: (work@top.u_sub.TargetCfg.pinmux_pkg::target_cfg_t.dio_pad_type.prim_pad_wrapper_pkg::pad_type_e)
-  |vpiInstance:
-  \_package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
-  |vpiRange:
-  \_range: , line:2:24, endln:2:29
-    |vpiParent:
-    \_logic_typespec: , line:2:18, endln:2:29
-    |vpiLeftRange:
-    \_constant: , line:2:25, endln:2:26
-      |vpiParent:
-      \_range: , line:2:24, endln:2:29
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:27, endln:2:28
-      |vpiParent:
-      \_range: , line:2:24, endln:2:29
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_int_typespec: 
-\_module_inst: work@prim_pad_attr (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:46:6, endln:48:26
-  |vpiParent:
-  \_gen_scope: (work@top.u_sub.gen_dio_attr[0]), line:45:41, endln:49:6
-  |vpiName:u_prim_pad_attr
-  |vpiFullName:work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr
-  |vpiParameter:
-  \_parameter: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.PadType), line:32:25, endln:32:32
-  |vpiParamAssign:
-  \_param_assign: , line:32:25, endln:32:36
-  |vpiTypedef:
-  \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-  |vpiTypedef:
-  \_import_typespec: (prim_pad_wrapper_pkg), line:31:11, endln:31:34
-  |vpiDefName:work@prim_pad_attr
-  |vpiDefFile:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv
-  |vpiDefLineNo:30
-  |vpiGenScopeArray:
-  \_gen_scope_array: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic), line:34:11, endln:38:7
-    |vpiParent:
-    \_module_inst: work@prim_pad_attr (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:46:6, endln:48:26
-    |vpiName:gen_generic
-    |vpiFullName:work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic
-    |vpiGenScope:
-    \_gen_scope: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic), line:34:11, endln:38:7
-      |vpiParent:
-      \_gen_scope_array: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic), line:34:11, endln:38:7
-      |vpiFullName:work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic
-      |vpiModule:
-      \_module_inst: work@prim_generic_pad_attr (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:35:7, endln:37:26
-        |vpiParent:
-        \_gen_scope: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic), line:34:11, endln:38:7
-        |vpiName:u_impl_generic
-        |vpiFullName:work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic
-        |vpiParameter:
-        \_parameter: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.PadType), line:24:25, endln:24:32
-        |vpiParamAssign:
-        \_param_assign: , line:24:25, endln:24:36
-        |vpiTypedef:
-        \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-        |vpiTypedef:
-        \_import_typespec: (prim_pad_wrapper_pkg), line:23:11, endln:23:34
-        |vpiDefName:work@prim_generic_pad_attr
-        |vpiDefFile:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv
-        |vpiDefLineNo:22
-        |vpiGenScopeArray:
-        \_gen_scope_array: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.gen_assign), line:25:22, endln:27:7
-          |vpiParent:
-          \_module_inst: work@prim_generic_pad_attr (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:35:7, endln:37:26
-          |vpiName:gen_assign
-          |vpiFullName:work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.gen_assign
-          |vpiGenScope:
-          \_gen_scope: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.gen_assign), line:25:22, endln:27:7
-            |vpiParent:
-            \_gen_scope_array: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.gen_assign), line:25:22, endln:27:7
-            |vpiFullName:work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.gen_assign
-            |vpiContAssign:
-            \_cont_assign: , line:26:14, endln:26:19
-              |vpiParent:
-              \_gen_scope: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.gen_assign), line:25:22, endln:27:7
-              |vpiRhs:
-              \_constant: , line:26:18, endln:26:19
-              |vpiLhs:
-              \_ref_obj: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.gen_assign.a), line:26:14, endln:26:15
-                |vpiParent:
-                \_cont_assign: , line:26:14, endln:26:19
-                |vpiName:a
-                |vpiFullName:work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.gen_assign.a
-\_gen_scope: (work@top.u_sub.gen_dio_attr[0]), line:45:41, endln:49:6
-  |vpiParent:
-  \_gen_scope_array: (work@top.u_sub.gen_dio_attr[0]), line:45:41, endln:49:6
-  |vpiFullName:work@top.u_sub.gen_dio_attr[0]
-  |vpiParameter:
-  \_parameter: (work@top.u_sub.gen_dio_attr[0].k), line:45:0
-  |vpiModule:
-  \_module_inst: work@prim_pad_attr (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:46:6, endln:48:26
-\_gen_scope_array: (work@top.u_sub.gen_dio_attr[0]), line:45:41, endln:49:6
-  |vpiParent:
-  \_module_inst: work@sub_top (work@top.u_sub), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:57:4, endln:59:14
-  |vpiName:gen_dio_attr[0]
-  |vpiFullName:work@top.u_sub.gen_dio_attr[0]
-  |vpiGenScope:
-  \_gen_scope: (work@top.u_sub.gen_dio_attr[0]), line:45:41, endln:49:6
-\_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-  |vpiParent:
-  \_ref_typespec: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.PadType)
-  |vpiName:prim_pad_wrapper_pkg::pad_type_e
-  |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
-  |vpiBaseTypespec:
-  \_ref_typespec: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.PadType.prim_pad_wrapper_pkg::pad_type_e)
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiFullName:work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.PadType.prim_pad_wrapper_pkg::pad_type_e
-    |vpiActual:
-    \_logic_typespec: , line:2:18, endln:2:29
-  |vpiEnumConst:
-  \_enum_const: (A), line:3:7, endln:3:15
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiName:A
-    |HEX:0
-    |vpiDecompile:3'h0
-    |vpiSize:3
-  |vpiEnumConst:
-  \_enum_const: (B), line:4:7, endln:4:15
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiName:B
-    |HEX:1
-    |vpiDecompile:3'h1
-    |vpiSize:3
-\_ref_typespec: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.PadType)
-  |vpiParent:
-  \_parameter: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.PadType), line:32:25, endln:32:32
-  |vpiFullName:work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.PadType
-  |vpiActual:
-  \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-\_logic_typespec: , line:2:18, endln:2:29
-  |vpiParent:
-  \_ref_typespec: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.PadType.prim_pad_wrapper_pkg::pad_type_e)
-  |vpiInstance:
-  \_package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
-  |vpiRange:
-  \_range: , line:2:24, endln:2:29
-    |vpiParent:
-    \_logic_typespec: , line:2:18, endln:2:29
-    |vpiLeftRange:
-    \_constant: , line:2:25, endln:2:26
-      |vpiParent:
-      \_range: , line:2:24, endln:2:29
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:27, endln:2:28
-      |vpiParent:
-      \_range: , line:2:24, endln:2:29
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-  |vpiParent:
-  \_ref_typespec: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.PadType)
-  |vpiName:prim_pad_wrapper_pkg::pad_type_e
-  |vpiInstance:
-  \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
-  |vpiBaseTypespec:
-  \_ref_typespec: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.PadType.prim_pad_wrapper_pkg::pad_type_e)
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiFullName:work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.PadType.prim_pad_wrapper_pkg::pad_type_e
-    |vpiActual:
-    \_logic_typespec: , line:2:18, endln:2:29
-  |vpiEnumConst:
-  \_enum_const: (A), line:3:7, endln:3:15
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiName:A
-    |HEX:0
-    |vpiDecompile:3'h0
-    |vpiSize:3
-  |vpiEnumConst:
-  \_enum_const: (B), line:4:7, endln:4:15
-    |vpiParent:
-    \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-    |vpiName:B
-    |HEX:1
-    |vpiDecompile:3'h1
-    |vpiSize:3
-\_ref_typespec: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.PadType)
-  |vpiParent:
-  \_parameter: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.PadType), line:24:25, endln:24:32
-  |vpiFullName:work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.PadType
-  |vpiActual:
-  \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:4, endln:5:17
-\_logic_typespec: , line:2:18, endln:2:29
-  |vpiParent:
-  \_ref_typespec: (work@top.u_sub.gen_dio_attr[0].u_prim_pad_attr.gen_generic.u_impl_generic.PadType.prim_pad_wrapper_pkg::pad_type_e)
-  |vpiInstance:
-  \_package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
-  |vpiRange:
-  \_range: , line:2:24, endln:2:29
-    |vpiParent:
-    \_logic_typespec: , line:2:18, endln:2:29
-    |vpiLeftRange:
-    \_constant: , line:2:25, endln:2:26
-      |vpiParent:
-      \_range: , line:2:24, endln:2:29
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:27, endln:2:28
-      |vpiParent:
-      \_range: , line:2:24, endln:2:29
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_int_typespec: 
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 6
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/ParamElabMulti/dut.sv | ${SURELOG_DIR}/build/regression/ParamElabMulti/roundtrip/dut_000.sv | 24 | 61 |

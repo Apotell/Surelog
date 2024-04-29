@@ -203,13 +203,6 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/NetType/dut.sv:11:1: Compile module "work@dut".
 [WRN:CP0323] ${SURELOG_DIR}/tests/NetType/dut.sv:39:9: Multiply defined typedef "my_real",
              ${SURELOG_DIR}/tests/NetType/dut.sv:9:1: previous definition.
-[INF:EL0526] Design Elaboration...
-[ERR:CP0317] ${SURELOG_DIR}/tests/NetType/dut.sv:18:9: Undefined type "some_other_type".
-[NTE:EL0503] ${SURELOG_DIR}/tests/NetType/dut.sv:11:1: Top level module "work@dut".
-[NTE:EL0508] Nb Top level modules: 1.
-[NTE:EL0509] Max instance depth: 1.
-[NTE:EL0510] Nb instances: 1.
-[NTE:EL0511] Nb leaf instances: 1.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             2
@@ -224,56 +217,29 @@ function                                               3
 hier_path                                              4
 io_decl                                                2
 logic_net                                              1
-module_inst                                            3
+module_inst                                            2
 range                                                  2
-real_typespec                                          8
-real_var                                               2
+real_typespec                                          7
+real_var                                               1
 ref_obj                                                7
-ref_typespec                                          18
+ref_typespec                                          16
 ref_var                                                2
 struct_typespec                                        3
 struct_var                                             2
 typespec_member                                        6
-unsupported_typespec                                   4
-=== UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-assignment                                             2
-begin                                                  1
-bit_select                                             1
-bit_typespec                                           5
-bit_var                                                1
-constant                                               5
-design                                                 1
-foreach_stmt                                           1
-function                                               3
-hier_path                                              4
-io_decl                                                2
-logic_net                                              1
-module_inst                                            3
-range                                                  2
-real_typespec                                          8
-real_var                                               2
-ref_obj                                                7
-ref_typespec                                          18
-ref_var                                                2
-struct_typespec                                        3
-struct_var                                             2
-typespec_member                                        6
-unsupported_typespec                                   4
+unsupported_typespec                                   3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/NetType/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/NetType/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/NetType/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
-design: (work@dut)
-|vpiElaborated:1
-|vpiName:work@dut
+design: (unnamed)
+|vpiName:unnamed
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/NetType/dut.sv, line:11:1, endln:15:10
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiFullName:work@dut
   |vpiDefName:work@dut
   |vpiNet:
@@ -285,10 +251,10 @@ design: (work@dut)
 |vpiTypedef:
 \_struct_typespec: (T), line:28:34, endln:28:35
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiName:T
   |vpiInstance:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiTypespecMember:
   \_typespec_member: (field1), line:23:8, endln:23:14
     |vpiParent:
@@ -326,28 +292,21 @@ design: (work@dut)
 |vpiTypedef:
 \_real_typespec: (my_real), line:9:9, endln:9:13
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiName:my_real
   |vpiInstance:
-  \_design: (work@dut)
-|vpiTypedef:
-\_unsupported_typespec: (myalias), line:18:9, endln:18:24
-  |vpiParent:
-  \_design: (work@dut)
-  |vpiName:myalias
-  |vpiInstance:
-  \_design: (work@dut)
+  \_design: (unnamed)
 |vpiTypedef:
 \_bit_typespec: (net_bit), line:6:9, endln:6:12
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiName:net_bit
   |vpiInstance:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiFunction:
   \_function: (my_function), line:3:1, endln:4:12
     |vpiParent:
-    \_design: (work@dut)
+    \_design: (unnamed)
     |vpiName:my_function
     |vpiMethod:1
     |vpiVisibility:1
@@ -367,7 +326,7 @@ design: (work@dut)
 |vpiTypedef:
 \_struct_typespec: (wT), line:22:9, endln:25:2
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiName:wT
   |vpiTypedefAlias:
   \_ref_typespec: (wT)
@@ -377,7 +336,7 @@ design: (work@dut)
     |vpiActual:
     \_struct_typespec: (T), line:28:34, endln:28:35
   |vpiInstance:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiTypespecMember:
   \_typespec_member: (field1), line:23:8, endln:23:14
     |vpiParent:
@@ -415,7 +374,7 @@ design: (work@dut)
 |vpiTypedef:
 \_struct_typespec: (wTsum), line:22:9, endln:25:2
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiName:wTsum
   |vpiTypedefAlias:
   \_ref_typespec: (wTsum)
@@ -425,7 +384,7 @@ design: (work@dut)
     |vpiActual:
     \_struct_typespec: (T), line:28:34, endln:28:35
   |vpiInstance:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiTypespecMember:
   \_typespec_member: (field1), line:23:8, endln:23:14
     |vpiParent:
@@ -463,7 +422,7 @@ design: (work@dut)
   |vpiFunction:
   \_function: (Tsum), line:28:1, endln:32:12
     |vpiParent:
-    \_design: (work@dut)
+    \_design: (unnamed)
     |vpiName:Tsum
     |vpiMethod:1
     |vpiVisibility:1
@@ -538,8 +497,6 @@ design: (work@dut)
             |vpiParent:
             \_hier_path: (Tsum.field1), line:29:3, endln:29:14
             |vpiName:Tsum
-            |vpiActual:
-            \_struct_var: (Tsum), line:28:20, endln:28:21
           |vpiActual:
           \_ref_obj: (field1), line:29:8, endln:29:14
             |vpiParent:
@@ -593,16 +550,12 @@ design: (work@dut)
               \_hier_path: (driver[i].field1), line:31:20, endln:31:36
               |vpiName:driver
               |vpiFullName:driver[i]
-              |vpiActual:
-              \_io_decl: (driver), line:28:36, endln:28:42
               |vpiIndex:
               \_ref_obj: (Tsum.i), line:31:27, endln:31:28
                 |vpiParent:
                 \_hier_path: (driver[i].field1), line:31:20, endln:31:36
                 |vpiName:i
                 |vpiFullName:Tsum.i
-                |vpiActual:
-                \_struct_var: (Tsum.i), line:30:19, endln:30:20
             |vpiActual:
             \_ref_obj: (Tsum.field1), line:31:30, endln:31:36
               |vpiParent:
@@ -619,8 +572,6 @@ design: (work@dut)
               |vpiParent:
               \_hier_path: (Tsum.field1), line:31:5, endln:31:16
               |vpiName:Tsum
-              |vpiActual:
-              \_struct_var: (Tsum), line:28:20, endln:28:21
             |vpiActual:
             \_ref_obj: (field1), line:31:10, endln:31:16
               |vpiParent:
@@ -634,7 +585,7 @@ design: (work@dut)
 |vpiTaskFunc:
 \_function: (my_function2), line:41:1, endln:42:12
   |vpiParent:
-  \_design: (work@dut)
+  \_design: (unnamed)
   |vpiName:my_function2
   |vpiMethod:1
   |vpiVisibility:1
@@ -683,26 +634,6 @@ design: (work@dut)
       |vpiFullName:my_function2.driver
       |vpiActual:
       \_real_typespec: , line:41:44, endln:41:48
-|uhdmtopModules:
-\_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/NetType/dut.sv, line:11:1, endln:15:10
-  |vpiName:work@dut
-  |vpiVariables:
-  \_real_var: (work@dut.my_real_net), line:13:13, endln:13:24
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/NetType/dut.sv, line:11:1, endln:15:10
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.my_real_net)
-      |vpiParent:
-      \_real_var: (work@dut.my_real_net), line:13:13, endln:13:24
-      |vpiFullName:work@dut.my_real_net
-      |vpiActual:
-      \_real_typespec: (my_real), line:9:9, endln:9:13
-    |vpiName:my_real_net
-    |vpiFullName:work@dut.my_real_net
-    |vpiVisibility:1
-  |vpiDefName:work@dut
-  |vpiTop:1
-  |vpiTopModule:1
 \_weaklyReferenced:
 \_real_typespec: , line:23:3, endln:23:7
   |vpiParent:
@@ -728,9 +659,9 @@ design: (work@dut)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 0
 [WARNING] : 2
-[   NOTE] : 5
+[   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
 [LINT]: ${SURELOG_DIR}/tests/NetType/dut.sv:23:3: Non synthesizable construct,
@@ -740,9 +671,6 @@ design: (work@dut)
 [LINT]: ${SURELOG_DIR}/tests/NetType/dut.sv:41:20: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/NetType/dut.sv:41:20: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/NetType/dut.sv:41:44: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/NetType/dut.sv:13:13: Non synthesizable construct, my_real_net
-[LINT]: ${SURELOG_DIR}/tests/NetType/dut.sv:18:9: Unsupported typespec, myalias
-[LINT]:   \_ :0:0:
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================

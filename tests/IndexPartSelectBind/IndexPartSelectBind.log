@@ -142,12 +142,6 @@ AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:CP0301] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:1:1: Compile package "pkg".
 [INF:CP0302] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:8:1: Compile class "pkg::tt".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0508] Nb Top level modules: 0.
-[NTE:EL0509] Max instance depth: 0.
-[NTE:EL0510] Nb instances: 0.
-[NTE:EL0511] Nb leaf instances: 0.
-[ERR:CP0317] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:10:1: Undefined type "uvm_sequence_item".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             2
@@ -173,38 +167,12 @@ struct_typespec                                        2
 typespec_member                                        2
 unsupported_typespec                                   3
 === UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-assignment                                             4
-begin                                                  4
-bit_select                                             2
-class_defn                                             1
-constant                                               3
-design                                                 1
-for_stmt                                               2
-function                                               2
-hier_path                                              4
-indexed_part_select                                    2
-int_typespec                                           1
-int_var                                                2
-io_decl                                                2
-operation                                              6
-package                                                2
-ref_obj                                               16
-ref_typespec                                           7
-ref_var                                                1
-return_stmt                                            2
-struct_typespec                                        2
-typespec_member                                        2
-unsupported_typespec                                   3
-=== UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/IndexPartSelectBind/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/IndexPartSelectBind/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/IndexPartSelectBind/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
-|vpiElaborated:1
 |vpiName:unnamed
 |uhdmallPackages:
 \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:1:1, endln:23:11
@@ -237,414 +205,232 @@ design: (unnamed)
       |vpiRefEndLineNo:5
       |vpiRefEndColumnNo:17
   |vpiDefName:pkg
-|uhdmtopPackages:
-\_package: pkg (pkg::), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:1:1, endln:23:11
+|uhdmallClasses:
+\_class_defn: (pkg::tt), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:8:1, endln:21:9
   |vpiParent:
   \_design: (unnamed)
-  |vpiName:pkg
-  |vpiFullName:pkg::
-  |vpiTypedef:
-  \_struct_typespec: (pkg::uvm_reg_bus_op), line:10:54, endln:10:68
+  |vpiName:tt
+  |vpiFullName:pkg::tt
+  |vpiMethod:
+  \_function: (tt::reg2bus), line:10:1, endln:10:8
     |vpiParent:
-    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:1:1, endln:23:11
-    |vpiName:pkg::uvm_reg_bus_op
-    |vpiInstance:
-    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:1:1, endln:23:11
-    |vpiTypespecMember:
-    \_typespec_member: (data), line:5:18, endln:5:22
+    \_class_defn: (pkg::tt), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:8:1, endln:21:9
+    |vpiName:reg2bus
+    |vpiFullName:tt::reg2bus
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiVirtual:1
+    |vpiReturn:
+    \_ref_var: (tt::reg2bus), line:10:18, endln:10:35
       |vpiParent:
-      \_struct_typespec: (pkg::uvm_reg_bus_op), line:10:54, endln:10:68
-      |vpiName:data
+      \_function: (tt::reg2bus), line:10:1, endln:10:8
       |vpiTypespec:
-      \_ref_typespec: (pkg::pkg::uvm_reg_bus_op::data)
+      \_ref_typespec: (tt::reg2bus)
         |vpiParent:
-        \_typespec_member: (data), line:5:18, endln:5:22
-        |vpiFullName:pkg::pkg::uvm_reg_bus_op::data
+        \_ref_var: (tt::reg2bus), line:10:18, endln:10:35
+        |vpiFullName:tt::reg2bus
         |vpiActual:
-        \_unsupported_typespec: (uvm_reg_data_t), line:5:3, endln:5:17
-      |vpiRefFile:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv
-      |vpiRefLineNo:5
-      |vpiRefColumnNo:3
-      |vpiRefEndLineNo:5
-      |vpiRefEndColumnNo:17
-  |vpiDefName:pkg
-  |vpiTop:1
-  |vpiClassDefn:
-  \_class_defn: (pkg::tt), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:8:1, endln:21:9
-    |vpiParent:
-    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:1:1, endln:23:11
-    |vpiName:tt
-    |vpiFullName:pkg::tt
-    |vpiMethod:
-    \_function: (pkg::tt::reg2bus), line:10:1, endln:10:8
+        \_unsupported_typespec: (uvm_sequence_item), line:10:18, endln:10:35
+      |vpiFullName:tt::reg2bus
+    |vpiIODecl:
+    \_io_decl: (rw), line:10:69, endln:10:71
       |vpiParent:
-      \_class_defn: (pkg::tt), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:8:1, endln:21:9
-      |vpiName:reg2bus
-      |vpiFullName:pkg::tt::reg2bus
-      |vpiMethod:1
-      |vpiVisibility:1
-      |vpiVirtual:1
-      |vpiReturn:
-      \_ref_var: (pkg::tt::reg2bus), line:10:18, endln:10:35
+      \_function: (tt::reg2bus), line:10:1, endln:10:8
+      |vpiDirection:6
+      |vpiName:rw
+      |vpiTypedef:
+      \_ref_typespec: (tt::reg2bus::rw)
         |vpiParent:
-        \_function: (pkg::tt::reg2bus), line:10:1, endln:10:8
-        |vpiTypespec:
-        \_ref_typespec: (pkg::tt::reg2bus)
-          |vpiParent:
-          \_ref_var: (pkg::tt::reg2bus), line:10:18, endln:10:35
-          |vpiFullName:pkg::tt::reg2bus
-          |vpiActual:
-          \_unsupported_typespec: (uvm_sequence_item), line:10:18, endln:10:35
-        |vpiFullName:pkg::tt::reg2bus
-      |vpiIODecl:
-      \_io_decl: (rw), line:10:69, endln:10:71
-        |vpiParent:
-        \_function: (pkg::tt::reg2bus), line:10:1, endln:10:8
-        |vpiDirection:6
-        |vpiName:rw
-        |vpiTypedef:
-        \_ref_typespec: (pkg::tt::reg2bus::rw)
-          |vpiParent:
-          \_io_decl: (rw), line:10:69, endln:10:71
-          |vpiFullName:pkg::tt::reg2bus::rw
-          |vpiActual:
-          \_struct_typespec: (pkg::uvm_reg_bus_op), line:10:54, endln:10:68
+        \_io_decl: (rw), line:10:69, endln:10:71
+        |vpiFullName:tt::reg2bus::rw
+        |vpiActual:
+        \_struct_typespec: (pkg::uvm_reg_bus_op), line:10:54, endln:10:68
+    |vpiStmt:
+    \_begin: (tt::reg2bus), line:17:1, endln:17:11
+      |vpiParent:
+      \_function: (tt::reg2bus), line:10:1, endln:10:8
+      |vpiFullName:tt::reg2bus
       |vpiStmt:
-      \_begin: (pkg::tt::reg2bus), line:17:1, endln:17:11
+      \_for_stmt: (tt::reg2bus), line:12:1, endln:12:4
         |vpiParent:
-        \_function: (pkg::tt::reg2bus), line:10:1, endln:10:8
-        |vpiFullName:pkg::tt::reg2bus
-        |vpiStmt:
-        \_for_stmt: (pkg::tt::reg2bus), line:12:1, endln:12:4
+        \_begin: (tt::reg2bus), line:17:1, endln:17:11
+        |vpiFullName:tt::reg2bus
+        |vpiForInitStmt:
+        \_assignment: , line:12:6, endln:12:15
           |vpiParent:
-          \_begin: (pkg::tt::reg2bus), line:17:1, endln:17:11
-          |vpiFullName:pkg::tt::reg2bus
-          |vpiForInitStmt:
-          \_assignment: , line:12:6, endln:12:15
+          \_for_stmt: (tt::reg2bus), line:12:1, endln:12:4
+          |vpiRhs:
+          \_constant: , line:12:14, endln:12:15
             |vpiParent:
-            \_for_stmt: (pkg::tt::reg2bus), line:12:1, endln:12:4
-            |vpiRhs:
-            \_constant: , line:12:14, endln:12:15
-              |vpiParent:
-              \_assignment: , line:12:6, endln:12:15
-              |vpiDecompile:0
-              |vpiSize:64
-              |UINT:0
-              |vpiConstType:9
-            |vpiLhs:
-            \_int_var: (pkg::tt::reg2bus::i), line:12:10, endln:12:11
-              |vpiParent:
-              \_assignment: , line:12:6, endln:12:15
-              |vpiTypespec:
-              \_ref_typespec: (pkg::tt::reg2bus::i)
-                |vpiParent:
-                \_int_var: (pkg::tt::reg2bus::i), line:12:10, endln:12:11
-                |vpiFullName:pkg::tt::reg2bus::i
-                |vpiActual:
-                \_int_typespec: , line:12:6, endln:12:9
-              |vpiName:i
-              |vpiFullName:pkg::tt::reg2bus::i
-              |vpiSigned:1
-          |vpiForIncStmt:
-          \_operation: , line:12:29, endln:12:32
+            \_assignment: , line:12:6, endln:12:15
+            |vpiDecompile:0
+            |vpiSize:64
+            |UINT:0
+            |vpiConstType:9
+          |vpiLhs:
+          \_int_var: (tt::reg2bus::i), line:12:10, endln:12:11
             |vpiParent:
-            \_for_stmt: (pkg::tt::reg2bus), line:12:1, endln:12:4
-            |vpiOpType:62
-            |vpiOperand:
-            \_ref_obj: (pkg::tt::reg2bus::i), line:12:29, endln:12:30
+            \_assignment: , line:12:6, endln:12:15
+            |vpiTypespec:
+            \_ref_typespec: (tt::reg2bus::i)
               |vpiParent:
-              \_operation: , line:12:29, endln:12:32
-              |vpiName:i
-              |vpiFullName:pkg::tt::reg2bus::i
+              \_int_var: (tt::reg2bus::i), line:12:10, endln:12:11
+              |vpiFullName:tt::reg2bus::i
               |vpiActual:
-              \_int_var: (pkg::tt::reg2bus::i), line:12:10, endln:12:11
-          |vpiCondition:
-          \_operation: , line:12:17, endln:12:27
+              \_int_typespec: , line:12:6, endln:12:9
+            |vpiName:i
+            |vpiFullName:tt::reg2bus::i
+            |vpiSigned:1
+        |vpiForIncStmt:
+        \_operation: , line:12:29, endln:12:32
+          |vpiParent:
+          \_for_stmt: (tt::reg2bus), line:12:1, endln:12:4
+          |vpiOpType:62
+          |vpiOperand:
+          \_ref_obj: (tt::reg2bus::i), line:12:29, endln:12:30
             |vpiParent:
-            \_for_stmt: (pkg::tt::reg2bus), line:12:1, endln:12:4
-            |vpiOpType:20
-            |vpiOperand:
-            \_ref_obj: (pkg::tt::reg2bus::i), line:12:17, endln:12:18
-              |vpiParent:
-              \_operation: , line:12:17, endln:12:27
-              |vpiName:i
-              |vpiFullName:pkg::tt::reg2bus::i
-              |vpiActual:
-              \_int_var: (pkg::tt::reg2bus::i), line:12:10, endln:12:11
-            |vpiOperand:
-            \_ref_obj: (pkg::tt::reg2bus::nbytes), line:12:21, endln:12:27
-              |vpiParent:
-              \_operation: , line:12:17, endln:12:27
-              |vpiName:nbytes
-              |vpiFullName:pkg::tt::reg2bus::nbytes
+            \_operation: , line:12:29, endln:12:32
+            |vpiName:i
+            |vpiFullName:tt::reg2bus::i
+        |vpiCondition:
+        \_operation: , line:12:17, endln:12:27
+          |vpiParent:
+          \_for_stmt: (tt::reg2bus), line:12:1, endln:12:4
+          |vpiOpType:20
+          |vpiOperand:
+          \_ref_obj: (tt::reg2bus::i), line:12:17, endln:12:18
+            |vpiParent:
+            \_operation: , line:12:17, endln:12:27
+            |vpiName:i
+            |vpiFullName:tt::reg2bus::i
+          |vpiOperand:
+          \_ref_obj: (tt::reg2bus::nbytes), line:12:21, endln:12:27
+            |vpiParent:
+            \_operation: , line:12:17, endln:12:27
+            |vpiName:nbytes
+            |vpiFullName:tt::reg2bus::nbytes
+        |vpiStmt:
+        \_begin: (tt::reg2bus), line:12:34, endln:15:4
+          |vpiParent:
+          \_for_stmt: (tt::reg2bus), line:12:1, endln:12:4
+          |vpiFullName:tt::reg2bus
           |vpiStmt:
-          \_begin: (pkg::tt::reg2bus), line:12:34, endln:15:4
+          \_assignment: , line:13:4, endln:13:32
             |vpiParent:
-            \_for_stmt: (pkg::tt::reg2bus), line:12:1, endln:12:4
-            |vpiFullName:pkg::tt::reg2bus
-            |vpiStmt:
-            \_assignment: , line:13:4, endln:13:32
+            \_begin: (tt::reg2bus), line:12:34, endln:15:4
+            |vpiOpType:82
+            |vpiBlocking:1
+            |vpiRhs:
+            \_hier_path: (rw.data[i * 8+:8]), line:13:17, endln:13:32
               |vpiParent:
-              \_begin: (pkg::tt::reg2bus), line:12:34, endln:15:4
-              |vpiOpType:82
-              |vpiBlocking:1
-              |vpiRhs:
-              \_hier_path: (rw.data[i * 8+:8]), line:13:17, endln:13:32
+              \_assignment: , line:13:4, endln:13:32
+              |vpiActual:
+              \_ref_obj: (rw), line:13:17, endln:13:19
                 |vpiParent:
-                \_assignment: , line:13:4, endln:13:32
-                |vpiActual:
-                \_ref_obj: (rw), line:13:17, endln:13:19
+                \_hier_path: (rw.data[i * 8+:8]), line:13:17, endln:13:32
+                |vpiName:rw
+              |vpiActual:
+              \_indexed_part_select: (rw.data[i * 8+:8]), line:13:20, endln:13:31
+                |vpiParent:
+                \_hier_path: (rw.data[i * 8+:8]), line:13:17, endln:13:32
+                |vpiName:data
+                |vpiFullName:rw.data[i * 8+:8]
+                |vpiConstantSelect:1
+                |vpiIndexedPartSelectType:1
+                |vpiBaseExpr:
+                \_operation: , line:13:25, endln:13:28
                   |vpiParent:
-                  \_hier_path: (rw.data[i * 8+:8]), line:13:17, endln:13:32
-                  |vpiName:rw
-                  |vpiActual:
-                  \_io_decl: (rw), line:10:69, endln:10:71
-                |vpiActual:
-                \_indexed_part_select: (rw.data[i * 8+:8]), line:13:20, endln:13:31
-                  |vpiParent:
-                  \_hier_path: (rw.data[i * 8+:8]), line:13:17, endln:13:32
-                  |vpiName:data
-                  |vpiFullName:rw.data[i * 8+:8]
-                  |vpiActual:
-                  \_typespec_member: (data), line:5:18, endln:5:22
-                  |vpiConstantSelect:1
-                  |vpiIndexedPartSelectType:1
-                  |vpiBaseExpr:
-                  \_operation: , line:13:25, endln:13:28
+                  \_indexed_part_select: (rw.data[i * 8+:8]), line:13:20, endln:13:31
+                  |vpiOpType:25
+                  |vpiOperand:
+                  \_ref_obj: (tt::reg2bus::rw.data[i * 8+:8]::data::i), line:13:25, endln:13:26
                     |vpiParent:
-                    \_indexed_part_select: (rw.data[i * 8+:8]), line:13:20, endln:13:31
-                    |vpiOpType:25
-                    |vpiOperand:
-                    \_ref_obj: (pkg::tt::reg2bus::rw.data[i * 8+:8]::data::i), line:13:25, endln:13:26
-                      |vpiParent:
-                      \_operation: , line:13:25, endln:13:28
-                      |vpiName:i
-                      |vpiFullName:pkg::tt::reg2bus::rw.data[i * 8+:8]::data::i
-                      |vpiActual:
-                      \_int_var: (pkg::tt::reg2bus::i), line:12:10, endln:12:11
-                    |vpiOperand:
-                    \_constant: , line:13:27, endln:13:28
-                      |vpiParent:
-                      \_operation: , line:13:25, endln:13:28
-                      |vpiDecompile:8
-                      |vpiSize:64
-                      |UINT:8
-                      |vpiConstType:9
-                  |vpiWidthExpr:
-                  \_constant: , line:13:30, endln:13:31
+                    \_operation: , line:13:25, endln:13:28
+                    |vpiName:i
+                    |vpiFullName:tt::reg2bus::rw.data[i * 8+:8]::data::i
+                  |vpiOperand:
+                  \_constant: , line:13:27, endln:13:28
+                    |vpiParent:
+                    \_operation: , line:13:25, endln:13:28
                     |vpiDecompile:8
                     |vpiSize:64
                     |UINT:8
                     |vpiConstType:9
-                |vpiName:rw.data[i * 8+:8]
-              |vpiLhs:
-              \_hier_path: (rw.data[i]), line:13:4, endln:13:14
-                |vpiParent:
-                \_assignment: , line:13:4, endln:13:32
-                |vpiActual:
-                \_ref_obj: (rw), line:13:7, endln:13:11
-                  |vpiParent:
-                  \_hier_path: (rw.data[i]), line:13:4, endln:13:14
-                  |vpiName:rw
-                  |vpiActual:
-                  \_io_decl: (rw), line:10:69, endln:10:71
-                |vpiActual:
-                \_bit_select: (pkg::tt::reg2bus::rw.data[i]::data), line:13:12, endln:13:13
-                  |vpiParent:
-                  \_hier_path: (rw.data[i]), line:13:4, endln:13:14
-                  |vpiName:data
-                  |vpiFullName:pkg::tt::reg2bus::rw.data[i]::data
-                  |vpiActual:
-                  \_typespec_member: (data), line:5:18, endln:5:22
-                  |vpiIndex:
-                  \_ref_obj: (pkg::tt::reg2bus::rw.data[i]::i), line:13:12, endln:13:13
-                    |vpiParent:
-                    \_bit_select: (pkg::tt::reg2bus::rw.data[i]::data), line:13:12, endln:13:13
-                    |vpiName:i
-                    |vpiFullName:pkg::tt::reg2bus::rw.data[i]::i
-                    |vpiActual:
-                    \_int_var: (pkg::tt::reg2bus::i), line:12:10, endln:12:11
-                |vpiName:rw.data[i]
-        |vpiStmt:
-        \_return_stmt: , line:17:1, endln:17:7
-          |vpiParent:
-          \_begin: (pkg::tt::reg2bus), line:17:1, endln:17:11
-          |vpiCondition:
-          \_ref_obj: (pkg::tt::reg2bus::gp), line:17:8, endln:17:10
-            |vpiParent:
-            \_return_stmt: , line:17:1, endln:17:7
-            |vpiName:gp
-            |vpiFullName:pkg::tt::reg2bus::gp
-\_weaklyReferenced:
-\_unsupported_typespec: (uvm_reg_data_t), line:5:3, endln:5:17
-  |vpiParent:
-  \_typespec_member: (data), line:5:18, endln:5:22
-  |vpiName:uvm_reg_data_t
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:1:1, endln:23:11
-\_unsupported_typespec: (uvm_reg_data_t), line:5:3, endln:5:17
-  |vpiParent:
-  \_typespec_member: (data), line:5:18, endln:5:22
-  |vpiName:uvm_reg_data_t
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:1:1, endln:23:11
-\_function: (pkg::tt::reg2bus), line:10:1, endln:10:8
-  |vpiParent:
-  \_class_defn: (pkg::tt), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:8:1, endln:21:9
-  |vpiName:reg2bus
-  |vpiFullName:pkg::tt::reg2bus
-  |vpiMethod:1
-  |vpiVisibility:1
-  |vpiVirtual:1
-  |vpiReturn:
-  \_ref_var: (pkg::tt::reg2bus), line:10:18, endln:10:35
-  |vpiIODecl:
-  \_io_decl: (rw), line:10:69, endln:10:71
-    |vpiParent:
-    \_function: (pkg::tt::reg2bus), line:10:1, endln:10:8
-    |vpiDirection:6
-    |vpiName:rw
-    |vpiTypedef:
-    \_ref_typespec: (pkg::tt::reg2bus::rw)
-      |vpiParent:
-      \_io_decl: (rw), line:10:69, endln:10:71
-      |vpiFullName:pkg::tt::reg2bus::rw
-      |vpiActual:
-      \_struct_typespec: (pkg::uvm_reg_bus_op), line:10:54, endln:10:68
-  |vpiStmt:
-  \_begin: (pkg::tt::reg2bus), line:17:1, endln:17:11
-    |vpiParent:
-    \_function: (pkg::tt::reg2bus), line:10:1, endln:10:8
-    |vpiFullName:pkg::tt::reg2bus
-    |vpiStmt:
-    \_for_stmt: (pkg::tt::reg2bus), line:12:1, endln:12:4
-      |vpiParent:
-      \_begin: (pkg::tt::reg2bus), line:17:1, endln:17:11
-      |vpiFullName:pkg::tt::reg2bus
-      |vpiForInitStmt:
-      \_assignment: , line:12:6, endln:12:15
-        |vpiParent:
-        \_for_stmt: (pkg::tt::reg2bus), line:12:1, endln:12:4
-        |vpiRhs:
-        \_constant: , line:12:14, endln:12:15
-        |vpiLhs:
-        \_int_var: (pkg::tt::reg2bus::i), line:12:10, endln:12:11
-          |vpiParent:
-          \_assignment: , line:12:6, endln:12:15
-          |vpiTypespec:
-          \_ref_typespec: (pkg::tt::reg2bus::i)
-            |vpiParent:
-            \_int_var: (pkg::tt::reg2bus::i), line:12:10, endln:12:11
-            |vpiFullName:pkg::tt::reg2bus::i
-            |vpiActual:
-            \_int_typespec: , line:12:6, endln:12:9
-          |vpiName:i
-          |vpiFullName:pkg::tt::reg2bus::i
-          |vpiSigned:1
-      |vpiForIncStmt:
-      \_operation: , line:12:29, endln:12:32
-        |vpiParent:
-        \_for_stmt: (pkg::tt::reg2bus), line:12:1, endln:12:4
-        |vpiOpType:62
-        |vpiOperand:
-        \_ref_obj: (pkg::tt::reg2bus::i), line:12:29, endln:12:30
-          |vpiParent:
-          \_operation: , line:12:29, endln:12:32
-          |vpiName:i
-          |vpiFullName:pkg::tt::reg2bus::i
-      |vpiCondition:
-      \_operation: , line:12:17, endln:12:27
-        |vpiParent:
-        \_for_stmt: (pkg::tt::reg2bus), line:12:1, endln:12:4
-        |vpiOpType:20
-        |vpiOperand:
-        \_ref_obj: (pkg::tt::reg2bus::i), line:12:17, endln:12:18
-          |vpiParent:
-          \_operation: , line:12:17, endln:12:27
-          |vpiName:i
-          |vpiFullName:pkg::tt::reg2bus::i
-        |vpiOperand:
-        \_ref_obj: (pkg::tt::reg2bus::nbytes), line:12:21, endln:12:27
-          |vpiParent:
-          \_operation: , line:12:17, endln:12:27
-          |vpiName:nbytes
-          |vpiFullName:pkg::tt::reg2bus::nbytes
-      |vpiStmt:
-      \_begin: (pkg::tt::reg2bus), line:12:34, endln:15:4
-        |vpiParent:
-        \_for_stmt: (pkg::tt::reg2bus), line:12:1, endln:12:4
-        |vpiFullName:pkg::tt::reg2bus
-        |vpiStmt:
-        \_assignment: , line:13:4, endln:13:32
-          |vpiParent:
-          \_begin: (pkg::tt::reg2bus), line:12:34, endln:15:4
-          |vpiOpType:82
-          |vpiBlocking:1
-          |vpiRhs:
-          \_hier_path: (rw.data[i * 8+:8]), line:13:17, endln:13:32
-            |vpiParent:
-            \_assignment: , line:13:4, endln:13:32
-            |vpiActual:
-            \_ref_obj: (rw), line:13:17, endln:13:19
+                |vpiWidthExpr:
+                \_constant: , line:13:30, endln:13:31
+                  |vpiDecompile:8
+                  |vpiSize:64
+                  |UINT:8
+                  |vpiConstType:9
+              |vpiName:rw.data[i * 8+:8]
+            |vpiLhs:
+            \_hier_path: (rw.data[i]), line:13:4, endln:13:14
               |vpiParent:
-              \_hier_path: (rw.data[i * 8+:8]), line:13:17, endln:13:32
-              |vpiName:rw
-            |vpiActual:
-            \_indexed_part_select: (rw.data[i * 8+:8]), line:13:20, endln:13:31
-              |vpiParent:
-              \_hier_path: (rw.data[i * 8+:8]), line:13:17, endln:13:32
-              |vpiName:data
-              |vpiFullName:rw.data[i * 8+:8]
-              |vpiConstantSelect:1
-              |vpiIndexedPartSelectType:1
-              |vpiBaseExpr:
-              \_operation: , line:13:25, endln:13:28
+              \_assignment: , line:13:4, endln:13:32
+              |vpiActual:
+              \_ref_obj: (rw), line:13:7, endln:13:11
                 |vpiParent:
-                \_indexed_part_select: (rw.data[i * 8+:8]), line:13:20, endln:13:31
-                |vpiOpType:25
-                |vpiOperand:
-                \_ref_obj: (pkg::tt::reg2bus::rw.data[i * 8+:8]::data::i), line:13:25, endln:13:26
+                \_hier_path: (rw.data[i]), line:13:4, endln:13:14
+                |vpiName:rw
+              |vpiActual:
+              \_bit_select: (tt::reg2bus::rw.data[i]::data), line:13:12, endln:13:13
+                |vpiParent:
+                \_hier_path: (rw.data[i]), line:13:4, endln:13:14
+                |vpiName:data
+                |vpiFullName:tt::reg2bus::rw.data[i]::data
+                |vpiIndex:
+                \_ref_obj: (tt::reg2bus::rw.data[i]::i), line:13:12, endln:13:13
                   |vpiParent:
-                  \_operation: , line:13:25, endln:13:28
+                  \_bit_select: (tt::reg2bus::rw.data[i]::data), line:13:12, endln:13:13
                   |vpiName:i
-                  |vpiFullName:pkg::tt::reg2bus::rw.data[i * 8+:8]::data::i
-                |vpiOperand:
-                \_constant: , line:13:27, endln:13:28
-              |vpiWidthExpr:
-              \_constant: , line:13:30, endln:13:31
-            |vpiName:rw.data[i * 8+:8]
-          |vpiLhs:
-          \_hier_path: (rw.data[i]), line:13:4, endln:13:14
-            |vpiParent:
-            \_assignment: , line:13:4, endln:13:32
-            |vpiActual:
-            \_ref_obj: (rw), line:13:7, endln:13:11
-              |vpiParent:
-              \_hier_path: (rw.data[i]), line:13:4, endln:13:14
-              |vpiName:rw
-            |vpiActual:
-            \_bit_select: (pkg::tt::reg2bus::rw.data[i]::data), line:13:12, endln:13:13
-              |vpiParent:
-              \_hier_path: (rw.data[i]), line:13:4, endln:13:14
-              |vpiName:data
-              |vpiFullName:pkg::tt::reg2bus::rw.data[i]::data
-              |vpiIndex:
-              \_ref_obj: (pkg::tt::reg2bus::rw.data[i]::i), line:13:12, endln:13:13
-                |vpiParent:
-                \_bit_select: (pkg::tt::reg2bus::rw.data[i]::data), line:13:12, endln:13:13
-                |vpiName:i
-                |vpiFullName:pkg::tt::reg2bus::rw.data[i]::i
-            |vpiName:rw.data[i]
-    |vpiStmt:
-    \_return_stmt: , line:17:1, endln:17:7
-      |vpiParent:
-      \_begin: (pkg::tt::reg2bus), line:17:1, endln:17:11
-      |vpiCondition:
-      \_ref_obj: (pkg::tt::reg2bus::gp), line:17:8, endln:17:10
+                  |vpiFullName:tt::reg2bus::rw.data[i]::i
+              |vpiName:rw.data[i]
+      |vpiStmt:
+      \_return_stmt: , line:17:1, endln:17:7
         |vpiParent:
-        \_return_stmt: , line:17:1, endln:17:7
-        |vpiName:gp
-        |vpiFullName:pkg::tt::reg2bus::gp
+        \_begin: (tt::reg2bus), line:17:1, endln:17:11
+        |vpiCondition:
+        \_ref_obj: (tt::reg2bus::gp), line:17:8, endln:17:10
+          |vpiParent:
+          \_return_stmt: , line:17:1, endln:17:7
+          |vpiName:gp
+          |vpiFullName:tt::reg2bus::gp
+\_weaklyReferenced:
+\_struct_typespec: (pkg::uvm_reg_bus_op), line:10:54, endln:10:68
+  |vpiName:pkg::uvm_reg_bus_op
+  |vpiInstance:
+  \_package: (pkg), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:1:1, endln:23:11
+  |vpiTypespecMember:
+  \_typespec_member: (data), line:5:18, endln:5:22
+    |vpiParent:
+    \_struct_typespec: (pkg::uvm_reg_bus_op), line:10:54, endln:10:68
+    |vpiName:data
+    |vpiTypespec:
+    \_ref_typespec: (pkg::uvm_reg_bus_op.data)
+      |vpiParent:
+      \_typespec_member: (data), line:5:18, endln:5:22
+      |vpiFullName:pkg::uvm_reg_bus_op.data
+      |vpiActual:
+      \_unsupported_typespec: (uvm_reg_data_t), line:5:3, endln:5:17
+    |vpiRefFile:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv
+    |vpiRefLineNo:5
+    |vpiRefColumnNo:3
+    |vpiRefEndLineNo:5
+    |vpiRefEndColumnNo:17
+\_package: (pkg), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:1:1, endln:23:11
+  |vpiName:pkg
+\_unsupported_typespec: (uvm_reg_data_t), line:5:3, endln:5:17
+  |vpiParent:
+  \_typespec_member: (data), line:5:18, endln:5:22
+  |vpiName:uvm_reg_data_t
+  |vpiInstance:
+  \_package: (pkg), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:1:1, endln:23:11
+\_unsupported_typespec: (uvm_reg_data_t), line:5:3, endln:5:17
+  |vpiParent:
+  \_typespec_member: (data), line:5:18, endln:5:22
+  |vpiName:uvm_reg_data_t
+  |vpiInstance:
+  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:1:1, endln:23:11
 \_unsupported_typespec: (uvm_sequence_item), line:10:18, endln:10:35
   |vpiName:uvm_sequence_item
 \_int_typespec: , line:12:6, endln:12:9
@@ -652,17 +438,10 @@ design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 4
+[   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
 [LINT]: ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:8:1: Non synthesizable construct, tt
-[LINT]: ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:5:3: Unsupported typespec, uvm_reg_data_t
-[LINT]:   \_ ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:5:18:
-[LINT]: ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:10:18: Unsupported typespec, uvm_sequence_item
 ============================== End Linting Results ==============================
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv | ${SURELOG_DIR}/build/regression/IndexPartSelectBind/roundtrip/dut_000.sv | 8 | 23 |
-============================== End RoundTrip Results ==============================

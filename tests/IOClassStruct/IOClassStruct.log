@@ -109,11 +109,6 @@ AST_DEBUG_END
 [INF:CP0301] ${SURELOG_DIR}/tests/IOClassStruct/dut.sv:1:1: Compile package "uvm_pkg".
 [INF:CP0302] ${SURELOG_DIR}/tests/IOClassStruct/dut.sv:12:1: Compile class "uvm_pkg::uvm_resource_base".
 [INF:CP0302] ${SURELOG_DIR}/tests/IOClassStruct/dut.sv:3:1: Compile class "uvm_pkg::uvm_resource_types".
-[INF:EL0526] Design Elaboration...
-[NTE:EL0508] Nb Top level modules: 0.
-[NTE:EL0509] Max instance depth: 0.
-[NTE:EL0510] Nb instances: 0.
-[NTE:EL0511] Nb leaf instances: 0.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             2
@@ -134,33 +129,12 @@ struct_typespec                                        1
 typespec_member                                        1
 unsupported_typespec                                   2
 === UHDM Object Stats End ===
-[INF:UH0707] Elaborating UHDM...
-=== UHDM Object Stats Begin (Elaborated Model) ===
-assignment                                             3
-begin                                                  2
-class_defn                                             2
-class_var                                              3
-constant                                               1
-design                                                 1
-function                                               4
-hier_path                                              4
-int_typespec                                           1
-io_decl                                                2
-operation                                              2
-package                                                2
-ref_obj                                                8
-ref_typespec                                           7
-struct_typespec                                        2
-typespec_member                                        2
-unsupported_typespec                                   2
-=== UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/IOClassStruct/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/IOClassStruct/slpp_all/checker/surelog.chk.html ...
 [INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/IOClassStruct/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
-|vpiElaborated:1
 |vpiName:unnamed
 |uhdmallPackages:
 \_package: uvm_pkg (uvm_pkg::), file:${SURELOG_DIR}/tests/IOClassStruct/dut.sv, line:1:1, endln:30:11
@@ -169,185 +143,141 @@ design: (unnamed)
   |vpiName:uvm_pkg
   |vpiFullName:uvm_pkg::
   |vpiDefName:uvm_pkg
-|uhdmtopPackages:
-\_package: uvm_pkg (uvm_pkg::), file:${SURELOG_DIR}/tests/IOClassStruct/dut.sv, line:1:1, endln:30:11
+|uhdmallClasses:
+\_class_defn: (uvm_pkg::uvm_resource_base), file:${SURELOG_DIR}/tests/IOClassStruct/dut.sv, line:12:1, endln:28:9
   |vpiParent:
   \_design: (unnamed)
-  |vpiName:uvm_pkg
-  |vpiFullName:uvm_pkg::
-  |vpiDefName:uvm_pkg
-  |vpiTop:1
-  |vpiClassDefn:
-  \_class_defn: (uvm_pkg::uvm_resource_base), file:${SURELOG_DIR}/tests/IOClassStruct/dut.sv, line:12:1, endln:28:9
+  |vpiName:uvm_resource_base
+  |vpiFullName:uvm_pkg::uvm_resource_base
+  |vpiMethod:
+  \_function: (uvm_resource_base::record_read_access), line:14:3, endln:20:14
     |vpiParent:
-    \_package: uvm_pkg (uvm_pkg::), file:${SURELOG_DIR}/tests/IOClassStruct/dut.sv, line:1:1, endln:30:11
-    |vpiName:uvm_resource_base
-    |vpiFullName:uvm_pkg::uvm_resource_base
-    |vpiMethod:
-    \_function: (uvm_pkg::uvm_resource_base::record_read_access), line:14:3, endln:20:14
+    \_class_defn: (uvm_pkg::uvm_resource_base), file:${SURELOG_DIR}/tests/IOClassStruct/dut.sv, line:12:1, endln:28:9
+    |vpiName:record_read_access
+    |vpiFullName:uvm_resource_base::record_read_access
+    |vpiVariables:
+    \_class_var: (uvm_resource_base::record_read_access::access_record), line:16:35, endln:16:48
       |vpiParent:
-      \_class_defn: (uvm_pkg::uvm_resource_base), file:${SURELOG_DIR}/tests/IOClassStruct/dut.sv, line:12:1, endln:28:9
-      |vpiName:record_read_access
-      |vpiFullName:uvm_pkg::uvm_resource_base::record_read_access
+      \_begin: (uvm_resource_base::record_read_access), line:18:6, endln:18:33
+      |vpiTypespec:
+      \_ref_typespec: (uvm_resource_base::record_read_access::access_record)
+        |vpiParent:
+        \_class_var: (uvm_resource_base::record_read_access::access_record), line:16:35, endln:16:48
+        |vpiFullName:uvm_resource_base::record_read_access::access_record
+        |vpiActual:
+        \_unsupported_typespec: (uvm_resource_types::access_t), line:16:6, endln:16:26
+      |vpiName:access_record
+      |vpiFullName:uvm_resource_base::record_read_access::access_record
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiStmt:
+    \_begin: (uvm_resource_base::record_read_access), line:18:6, endln:18:33
+      |vpiParent:
+      \_function: (uvm_resource_base::record_read_access), line:14:3, endln:20:14
+      |vpiFullName:uvm_resource_base::record_read_access
       |vpiVariables:
-      \_class_var: (uvm_pkg::uvm_resource_base::record_read_access::access_record), line:16:35, endln:16:48
-        |vpiParent:
-        \_function: (uvm_pkg::uvm_resource_base::record_read_access), line:14:3, endln:20:14
-        |vpiTypespec:
-        \_ref_typespec: (uvm_pkg::uvm_resource_base::record_read_access::access_record)
-          |vpiParent:
-          \_class_var: (uvm_pkg::uvm_resource_base::record_read_access::access_record), line:16:35, endln:16:48
-          |vpiFullName:uvm_pkg::uvm_resource_base::record_read_access::access_record
-          |vpiActual:
-          \_struct_typespec: (access_t), line:5:11, endln:8:4
-        |vpiName:access_record
-        |vpiFullName:uvm_pkg::uvm_resource_base::record_read_access::access_record
-      |vpiMethod:1
-      |vpiVisibility:1
+      \_class_var: (uvm_resource_base::record_read_access::access_record), line:16:35, endln:16:48
       |vpiStmt:
-      \_begin: (uvm_pkg::uvm_resource_base::record_read_access), line:18:6, endln:18:33
+      \_operation: , line:18:6, endln:18:32
         |vpiParent:
-        \_function: (uvm_pkg::uvm_resource_base::record_read_access), line:14:3, endln:20:14
-        |vpiFullName:uvm_pkg::uvm_resource_base::record_read_access
-        |vpiVariables:
-        \_class_var: (uvm_pkg::uvm_resource_base::record_read_access::access_record), line:16:35, endln:16:48
+        \_begin: (uvm_resource_base::record_read_access), line:18:6, endln:18:33
+        |vpiOpType:62
+        |vpiOperand:
+        \_hier_path: (access_record.read_count), line:18:6, endln:18:30
           |vpiParent:
-          \_begin: (uvm_pkg::uvm_resource_base::record_read_access), line:18:6, endln:18:33
-          |vpiTypespec:
-          \_ref_typespec: (uvm_pkg::uvm_resource_base::record_read_access::access_record)
-            |vpiParent:
-            \_class_var: (uvm_pkg::uvm_resource_base::record_read_access::access_record), line:16:35, endln:16:48
-            |vpiFullName:uvm_pkg::uvm_resource_base::record_read_access::access_record
-            |vpiActual:
-            \_struct_typespec: (access_t), line:5:11, endln:8:4
-          |vpiName:access_record
-          |vpiFullName:uvm_pkg::uvm_resource_base::record_read_access::access_record
-        |vpiStmt:
-        \_operation: , line:18:6, endln:18:32
-          |vpiParent:
-          \_begin: (uvm_pkg::uvm_resource_base::record_read_access), line:18:6, endln:18:33
-          |vpiOpType:62
-          |vpiOperand:
-          \_hier_path: (access_record.read_count), line:18:6, endln:18:30
-            |vpiParent:
-            \_operation: , line:18:6, endln:18:32
-            |vpiActual:
-            \_ref_obj: (access_record), line:18:20, endln:18:30
-              |vpiParent:
-              \_hier_path: (access_record.read_count), line:18:6, endln:18:30
-              |vpiName:access_record
-              |vpiActual:
-              \_class_var: (uvm_pkg::uvm_resource_base::record_read_access::access_record), line:16:35, endln:16:48
-            |vpiActual:
-            \_ref_obj: (read_count), line:18:20, endln:18:30
-              |vpiParent:
-              \_hier_path: (access_record.read_count), line:18:6, endln:18:30
-              |vpiName:read_count
-              |vpiActual:
-              \_typespec_member: (read_count), line:7:18, endln:7:28
-            |vpiName:access_record.read_count
-    |vpiMethod:
-    \_function: (uvm_pkg::uvm_resource_base::init_access_record), line:23:3, endln:25:12
-      |vpiParent:
-      \_class_defn: (uvm_pkg::uvm_resource_base), file:${SURELOG_DIR}/tests/IOClassStruct/dut.sv, line:12:1, endln:28:9
-      |vpiName:init_access_record
-      |vpiFullName:uvm_pkg::uvm_resource_base::init_access_record
-      |vpiMethod:1
-      |vpiVisibility:1
-      |vpiIODecl:
-      \_io_decl: (access_record), line:23:72, endln:23:85
-        |vpiParent:
-        \_function: (uvm_pkg::uvm_resource_base::init_access_record), line:23:3, endln:25:12
-        |vpiDirection:3
-        |vpiName:access_record
-        |vpiTypedef:
-        \_ref_typespec: (uvm_pkg::uvm_resource_base::init_access_record::access_record)
-          |vpiParent:
-          \_io_decl: (access_record), line:23:72, endln:23:85
-          |vpiFullName:uvm_pkg::uvm_resource_base::init_access_record::access_record
+          \_operation: , line:18:6, endln:18:32
           |vpiActual:
-          \_struct_typespec: (access_t), line:5:11, endln:8:4
-      |vpiStmt:
-      \_assignment: , line:24:3, endln:24:31
-        |vpiParent:
-        \_function: (uvm_pkg::uvm_resource_base::init_access_record), line:23:3, endln:25:12
-        |vpiOpType:82
-        |vpiBlocking:1
-        |vpiRhs:
-        \_constant: , line:24:30, endln:24:31
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiConstType:9
-        |vpiLhs:
-        \_hier_path: (access_record.read_count), line:24:3, endln:24:27
-          |vpiParent:
-          \_assignment: , line:24:3, endln:24:31
-          |vpiActual:
-          \_ref_obj: (access_record), line:24:17, endln:24:27
+          \_ref_obj: (access_record), line:18:20, endln:18:30
             |vpiParent:
-            \_hier_path: (access_record.read_count), line:24:3, endln:24:27
+            \_hier_path: (access_record.read_count), line:18:6, endln:18:30
             |vpiName:access_record
-            |vpiActual:
-            \_io_decl: (access_record), line:23:72, endln:23:85
           |vpiActual:
-          \_ref_obj: (read_count), line:24:17, endln:24:27
+          \_ref_obj: (read_count), line:18:20, endln:18:30
             |vpiParent:
-            \_hier_path: (access_record.read_count), line:24:3, endln:24:27
+            \_hier_path: (access_record.read_count), line:18:6, endln:18:30
             |vpiName:read_count
-            |vpiActual:
-            \_typespec_member: (read_count), line:7:18, endln:7:28
           |vpiName:access_record.read_count
-  |vpiClassDefn:
-  \_class_defn: (uvm_pkg::uvm_resource_types), file:${SURELOG_DIR}/tests/IOClassStruct/dut.sv, line:3:1, endln:10:9
+  |vpiMethod:
+  \_function: (uvm_resource_base::init_access_record), line:23:3, endln:25:12
     |vpiParent:
-    \_package: uvm_pkg (uvm_pkg::), file:${SURELOG_DIR}/tests/IOClassStruct/dut.sv, line:1:1, endln:30:11
-    |vpiName:uvm_resource_types
-    |vpiFullName:uvm_pkg::uvm_resource_types
-    |vpiTypedef:
-    \_struct_typespec: (access_t), line:5:11, endln:8:4
+    \_class_defn: (uvm_pkg::uvm_resource_base), file:${SURELOG_DIR}/tests/IOClassStruct/dut.sv, line:12:1, endln:28:9
+    |vpiName:init_access_record
+    |vpiFullName:uvm_resource_base::init_access_record
+    |vpiMethod:1
+    |vpiVisibility:1
+    |vpiIODecl:
+    \_io_decl: (access_record), line:23:72, endln:23:85
       |vpiParent:
-      \_class_defn: (uvm_pkg::uvm_resource_types), file:${SURELOG_DIR}/tests/IOClassStruct/dut.sv, line:3:1, endln:10:9
-      |vpiName:access_t
-      |vpiTypespecMember:
-      \_typespec_member: (read_count), line:7:18, endln:7:28
+      \_function: (uvm_resource_base::init_access_record), line:23:3, endln:25:12
+      |vpiDirection:3
+      |vpiName:access_record
+      |vpiTypedef:
+      \_ref_typespec: (uvm_resource_base::init_access_record::access_record)
         |vpiParent:
-        \_struct_typespec: (access_t), line:5:11, endln:8:4
-        |vpiName:read_count
-        |vpiTypespec:
-        \_ref_typespec: (uvm_pkg::uvm_resource_types::access_t::read_count)
-          |vpiParent:
-          \_typespec_member: (read_count), line:7:18, endln:7:28
-          |vpiFullName:uvm_pkg::uvm_resource_types::access_t::read_count
-          |vpiActual:
-          \_int_typespec: , line:7:5, endln:7:17
-        |vpiRefFile:${SURELOG_DIR}/tests/IOClassStruct/dut.sv
-        |vpiRefLineNo:7
-        |vpiRefColumnNo:5
-        |vpiRefEndLineNo:7
-        |vpiRefEndColumnNo:17
-\_weaklyReferenced:
-\_struct_typespec: (access_t), line:5:11, endln:8:4
-  |vpiParent:
-  \_class_defn: (uvm_pkg::uvm_resource_types), file:${SURELOG_DIR}/tests/IOClassStruct/dut.sv, line:3:1, endln:10:9
-  |vpiName:access_t
-  |vpiTypespecMember:
-  \_typespec_member: (read_count), line:7:18, endln:7:28
-    |vpiParent:
-    \_struct_typespec: (access_t), line:5:11, endln:8:4
-    |vpiName:read_count
-    |vpiTypespec:
-    \_ref_typespec: (uvm_pkg::uvm_resource_types::access_t::read_count)
+        \_io_decl: (access_record), line:23:72, endln:23:85
+        |vpiFullName:uvm_resource_base::init_access_record::access_record
+        |vpiActual:
+        \_unsupported_typespec: (uvm_resource_types::access_t), line:23:43, endln:23:71
+    |vpiStmt:
+    \_assignment: , line:24:3, endln:24:31
       |vpiParent:
-      \_typespec_member: (read_count), line:7:18, endln:7:28
-      |vpiFullName:uvm_pkg::uvm_resource_types::access_t::read_count
-      |vpiActual:
-      \_int_typespec: , line:7:5, endln:7:17
-    |vpiRefFile:${SURELOG_DIR}/tests/IOClassStruct/dut.sv
-    |vpiRefLineNo:7
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:7
-    |vpiRefEndColumnNo:17
+      \_function: (uvm_resource_base::init_access_record), line:23:3, endln:25:12
+      |vpiOpType:82
+      |vpiBlocking:1
+      |vpiRhs:
+      \_constant: , line:24:30, endln:24:31
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+      |vpiLhs:
+      \_hier_path: (access_record.read_count), line:24:3, endln:24:27
+        |vpiParent:
+        \_assignment: , line:24:3, endln:24:31
+        |vpiActual:
+        \_ref_obj: (access_record), line:24:17, endln:24:27
+          |vpiParent:
+          \_hier_path: (access_record.read_count), line:24:3, endln:24:27
+          |vpiName:access_record
+        |vpiActual:
+        \_ref_obj: (read_count), line:24:17, endln:24:27
+          |vpiParent:
+          \_hier_path: (access_record.read_count), line:24:3, endln:24:27
+          |vpiName:read_count
+        |vpiName:access_record.read_count
+|uhdmallClasses:
+\_class_defn: (uvm_pkg::uvm_resource_types), file:${SURELOG_DIR}/tests/IOClassStruct/dut.sv, line:3:1, endln:10:9
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:uvm_resource_types
+  |vpiFullName:uvm_pkg::uvm_resource_types
+  |vpiTypedef:
+  \_struct_typespec: (access_t), line:5:11, endln:8:4
+    |vpiParent:
+    \_class_defn: (uvm_pkg::uvm_resource_types), file:${SURELOG_DIR}/tests/IOClassStruct/dut.sv, line:3:1, endln:10:9
+    |vpiName:access_t
+    |vpiTypespecMember:
+    \_typespec_member: (read_count), line:7:18, endln:7:28
+      |vpiParent:
+      \_struct_typespec: (access_t), line:5:11, endln:8:4
+      |vpiName:read_count
+      |vpiTypespec:
+      \_ref_typespec: (uvm_resource_types::access_t::read_count)
+        |vpiParent:
+        \_typespec_member: (read_count), line:7:18, endln:7:28
+        |vpiFullName:uvm_resource_types::access_t::read_count
+        |vpiActual:
+        \_int_typespec: , line:7:5, endln:7:17
+      |vpiRefFile:${SURELOG_DIR}/tests/IOClassStruct/dut.sv
+      |vpiRefLineNo:7
+      |vpiRefColumnNo:5
+      |vpiRefEndLineNo:7
+      |vpiRefEndColumnNo:17
+\_weaklyReferenced:
+\_unsupported_typespec: (uvm_resource_types::access_t), line:16:6, endln:16:26
+  |vpiName:uvm_resource_types::access_t
+\_unsupported_typespec: (uvm_resource_types::access_t), line:23:43, endln:23:71
+  |vpiName:uvm_resource_types::access_t
 \_int_typespec: , line:7:5, endln:7:17
   |vpiParent:
   \_typespec_member: (read_count), line:7:18, endln:7:28
@@ -356,15 +286,14 @@ design: (unnamed)
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
-[   NOTE] : 4
+[   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
-[LINT]: ${SURELOG_DIR}/tests/IOClassStruct/dut.sv:16:35: Non synthesizable construct, access_record
 [LINT]: ${SURELOG_DIR}/tests/IOClassStruct/dut.sv:16:35: Non synthesizable construct, access_record
 [LINT]: ${SURELOG_DIR}/tests/IOClassStruct/dut.sv:12:1: Non synthesizable construct, uvm_resource_base
 [LINT]: ${SURELOG_DIR}/tests/IOClassStruct/dut.sv:3:1: Non synthesizable construct, uvm_resource_types
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/IOClassStruct/dut.sv | ${SURELOG_DIR}/build/regression/IOClassStruct/roundtrip/dut_000.sv | 15 | 30 |
+[roundtrip]: ${SURELOG_DIR}/tests/IOClassStruct/dut.sv | ${SURELOG_DIR}/build/regression/IOClassStruct/roundtrip/dut_000.sv | 6 | 30 |
 ============================== End RoundTrip Results ==============================

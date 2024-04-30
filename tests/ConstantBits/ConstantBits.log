@@ -149,18 +149,19 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/ConstantBits/dut.sv:1:1: Compile module "work@dut".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                               7
+constant                                               6
 cont_assign                                            1
 design                                                 1
 logic_net                                              2
 logic_typespec                                         5
-module_inst                                            2
+module_inst                                            1
 operation                                              2
 part_select                                            1
 range                                                  2
-ref_obj                                                1
+ref_obj                                                2
 ref_typespec                                           6
 struct_typespec                                        1
+sys_func_call                                          1
 typespec_member                                        4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConstantBits/slpp_all/surelog.uhdm ...
@@ -302,13 +303,16 @@ design: (unnamed)
           \_part_select: csr_wdata_int (work@dut.csr_wdata_int), line:11:44, endln:11:80
           |vpiOpType:11
           |vpiOperand:
-          \_constant: , line:11:58, endln:11:75
+          \_sys_func_call: ($bits), line:11:58, endln:11:75
             |vpiParent:
             \_operation: , line:11:58, endln:11:77
-            |vpiDecompile:6
-            |vpiSize:64
-            |UINT:6
-            |vpiConstType:9
+            |vpiArgument:
+            \_ref_obj: (work@dut.csr_wdata_int.cpu_ctrl_t), line:11:64, endln:11:74
+              |vpiParent:
+              \_sys_func_call: ($bits), line:11:58, endln:11:75
+              |vpiName:cpu_ctrl_t
+              |vpiFullName:work@dut.csr_wdata_int.cpu_ctrl_t
+            |vpiName:$bits
           |vpiOperand:
           \_constant: , line:11:76, endln:11:77
             |vpiParent:
@@ -333,8 +337,6 @@ design: (unnamed)
       \_logic_net: (work@dut.cpuctrl_wdata), line:9:22, endln:9:35
 \_weaklyReferenced:
 \_logic_typespec: , line:4:11, endln:4:22
-  |vpiParent:
-  \_typespec_member: (dummy_instr_mask), line:4:24, endln:4:40
   |vpiRange:
   \_range: , line:4:17, endln:4:22
     |vpiParent:
@@ -356,14 +358,8 @@ design: (unnamed)
       |UINT:0
       |vpiConstType:9
 \_logic_typespec: , line:5:11, endln:5:16
-  |vpiParent:
-  \_typespec_member: (dummy_instr_en), line:5:24, endln:5:38
 \_logic_typespec: , line:6:11, endln:6:16
-  |vpiParent:
-  \_typespec_member: (data_ind_timing), line:6:24, endln:6:39
 \_logic_typespec: , line:7:11, endln:7:16
-  |vpiParent:
-  \_typespec_member: (icache_enable), line:7:24, endln:7:37
 \_logic_typespec: , line:10:9, endln:10:21
   |vpiRange:
   \_range: , line:10:15, endln:10:21

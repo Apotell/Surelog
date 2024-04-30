@@ -382,7 +382,6 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/EarlgreyPackParam/dut.sv:41:1: No timescale set for "top".
 [WRN:PA0205] ${SURELOG_DIR}/tests/EarlgreyPackParam/dut.sv:49:1: No timescale set for "aes".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/EarlgreyPackParam/dut.sv:2:1: Compile package "alert_handler_reg_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/EarlgreyPackParam/dut.sv:28:1: Compile module "work@GOOD".
 [INF:CP0303] ${SURELOG_DIR}/tests/EarlgreyPackParam/dut.sv:49:1: Compile module "work@aes".
 [INF:CP0303] ${SURELOG_DIR}/tests/EarlgreyPackParam/dut.sv:13:1: Compile module "work@prim_alert_sender".
@@ -393,24 +392,23 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             1
 bit_typespec                                           3
-constant                                              43
+constant                                              26
 design                                                 1
 gen_for                                                1
 gen_if                                                 2
-int_typespec                                           5
+int_typespec                                           2
 logic_net                                              1
-logic_typespec                                         6
-module_inst                                            8
+logic_typespec                                         3
+module_inst                                            7
 named_begin                                            3
-operation                                              8
-package                                                2
-param_assign                                          13
-parameter                                             13
-part_select                                            1
-range                                                  6
+operation                                              7
+package                                                1
+param_assign                                           9
+parameter                                              9
+range                                                  3
 ref_module                                             4
-ref_obj                                                6
-ref_typespec                                          26
+ref_obj                                                7
+ref_typespec                                          16
 ref_var                                                1
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
@@ -555,7 +553,7 @@ design: (unnamed)
   |vpiNet:
   \_logic_net: (work@aes.i), line:52:23, endln:52:24
     |vpiParent:
-    \_module_inst: work@aes (work@aes), file:${SURELOG_DIR}/tests/EarlgreyPackParam/dut.sv, line:49:1, endln:60:10
+    \_operation: , line:52:23, endln:52:28
     |vpiName:i
     |vpiFullName:work@aes.i
     |vpiNetType:1
@@ -811,24 +809,13 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/EarlgreyPackParam/dut.sv, line:7:1, endln:10:10
     |vpiRhs:
-    \_part_select: alert_handler_reg_pkg::AsyncOn (alert_handler_reg_pkg::AsyncOn), line:9:50, endln:9:55
+    \_ref_obj: (work@test.alert_handler_reg_pkg::AsyncOn), line:9:19, endln:9:56
       |vpiParent:
       \_param_assign: , line:9:12, endln:9:56
       |vpiName:alert_handler_reg_pkg::AsyncOn
-      |vpiDefName:alert_handler_reg_pkg::AsyncOn
-      |vpiConstantSelect:1
-      |vpiLeftRange:
-      \_constant: , line:9:50, endln:9:52
-        |vpiDecompile:22
-        |vpiSize:64
-        |UINT:22
-        |vpiConstType:9
-      |vpiRightRange:
-      \_constant: , line:9:53, endln:9:55
-        |vpiDecompile:21
-        |vpiSize:64
-        |UINT:21
-        |vpiConstType:9
+      |vpiFullName:work@test.alert_handler_reg_pkg::AsyncOn
+      |vpiActual:
+      \_parameter: (alert_handler_reg_pkg::AsyncOn), line:4:33, endln:4:40
     |vpiLhs:
     \_parameter: (work@test.Toto), line:9:12, endln:9:16
   |vpiDefName:work@test

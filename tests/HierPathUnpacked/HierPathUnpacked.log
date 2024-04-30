@@ -292,33 +292,33 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv:16:1: No timescale set for "GOOD".
 [WRN:PA0205] ${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv:19:1: No timescale set for "top".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv:1:1: Compile package "keymgr_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv:16:1: Compile module "work@GOOD".
 [INF:CP0303] ${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv:19:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-array_typespec                                         2
+array_typespec                                         1
 begin                                                  2
-bit_select                                             2
-constant                                              40
+bit_select                                             4
+constant                                              21
 design                                                 1
 gen_if                                                 2
-hier_path                                              2
-int_typespec                                          13
+hier_path                                              4
+int_typespec                                           5
 logic_net                                              3
-logic_typespec                                         5
-module_inst                                            5
-operation                                              8
-package                                                2
-param_assign                                          10
-parameter                                             10
+logic_typespec                                         3
+module_inst                                            4
+operation                                              5
+package                                                1
+param_assign                                           6
+parameter                                              6
 port                                                   1
-range                                                  8
+range                                                  4
 ref_module                                             2
-ref_obj                                                7
-ref_typespec                                          31
-struct_typespec                                        4
-typespec_member                                        4
+ref_obj                                                9
+ref_typespec                                          14
+struct_typespec                                        2
+sys_func_call                                          2
+typespec_member                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathUnpacked/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/HierPathUnpacked/slpp_all/checker/surelog.chk.html ...
@@ -470,28 +470,12 @@ design: (unnamed)
   \_parameter: (work@top.p1), line:23:13, endln:23:15
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv, line:19:1, endln:36:10
-    |UINT:16
-    |vpiTypespec:
-    \_ref_typespec: (work@top.p1)
-      |vpiParent:
-      \_parameter: (work@top.p1), line:23:13, endln:23:15
-      |vpiFullName:work@top.p1
-      |vpiActual:
-      \_int_typespec: , line:23:3, endln:23:44
     |vpiName:p1
     |vpiFullName:work@top.p1
   |vpiParameter:
   \_parameter: (work@top.p2), line:24:13, endln:24:15
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv, line:19:1, endln:36:10
-    |UINT:32
-    |vpiTypespec:
-    \_ref_typespec: (work@top.p2)
-      |vpiParent:
-      \_parameter: (work@top.p2), line:24:13, endln:24:15
-      |vpiFullName:work@top.p2
-      |vpiActual:
-      \_int_typespec: , line:24:3, endln:24:34
     |vpiName:p2
     |vpiFullName:work@top.p2
   |vpiParamAssign:
@@ -499,20 +483,34 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv, line:19:1, endln:36:10
     |vpiRhs:
-    \_constant: , line:23:18, endln:23:44
+    \_sys_func_call: ($bits), line:23:18, endln:23:44
       |vpiParent:
       \_param_assign: , line:23:13, endln:23:44
-      |vpiDecompile:16
-      |vpiSize:64
-      |UINT:16
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
+      |vpiArgument:
+      \_hier_path: (keymgr_key_i.key[0]), line:23:24, endln:23:43
         |vpiParent:
-        \_constant: , line:23:18, endln:23:44
-        |vpiFullName:work@top
+        \_sys_func_call: ($bits), line:23:18, endln:23:44
         |vpiActual:
-        \_int_typespec: , line:23:3, endln:23:44
-      |vpiConstType:9
+        \_ref_obj: (keymgr_key_i), line:23:24, endln:23:36
+          |vpiParent:
+          \_hier_path: (keymgr_key_i.key[0]), line:23:24, endln:23:43
+          |vpiName:keymgr_key_i
+        |vpiActual:
+        \_bit_select: (work@top.keymgr_key_i.key[0].key), line:23:41, endln:23:42
+          |vpiParent:
+          \_hier_path: (keymgr_key_i.key[0]), line:23:24, endln:23:43
+          |vpiName:key
+          |vpiFullName:work@top.keymgr_key_i.key[0].key
+          |vpiIndex:
+          \_constant: , line:23:41, endln:23:42
+            |vpiParent:
+            \_bit_select: (work@top.keymgr_key_i.key[0].key), line:23:41, endln:23:42
+            |vpiDecompile:0
+            |vpiSize:64
+            |UINT:0
+            |vpiConstType:9
+        |vpiName:keymgr_key_i.key[0]
+      |vpiName:$bits
     |vpiLhs:
     \_parameter: (work@top.p1), line:23:13, endln:23:15
   |vpiParamAssign:
@@ -520,20 +518,34 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv, line:19:1, endln:36:10
     |vpiRhs:
-    \_constant: , line:24:18, endln:24:34
+    \_sys_func_call: ($bits), line:24:18, endln:24:34
       |vpiParent:
       \_param_assign: , line:24:13, endln:24:34
-      |vpiDecompile:32
-      |vpiSize:64
-      |UINT:32
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
+      |vpiArgument:
+      \_hier_path: (a.pair[0]), line:24:24, endln:24:33
         |vpiParent:
-        \_constant: , line:24:18, endln:24:34
-        |vpiFullName:work@top
+        \_sys_func_call: ($bits), line:24:18, endln:24:34
         |vpiActual:
-        \_int_typespec: , line:24:3, endln:24:34
-      |vpiConstType:9
+        \_ref_obj: (a), line:24:24, endln:24:25
+          |vpiParent:
+          \_hier_path: (a.pair[0]), line:24:24, endln:24:33
+          |vpiName:a
+        |vpiActual:
+        \_bit_select: (work@top.a.pair[0].pair), line:24:31, endln:24:32
+          |vpiParent:
+          \_hier_path: (a.pair[0]), line:24:24, endln:24:33
+          |vpiName:pair
+          |vpiFullName:work@top.a.pair[0].pair
+          |vpiIndex:
+          \_constant: , line:24:31, endln:24:32
+            |vpiParent:
+            \_bit_select: (work@top.a.pair[0].pair), line:24:31, endln:24:32
+            |vpiDecompile:0
+            |vpiSize:64
+            |UINT:0
+            |vpiConstType:9
+        |vpiName:a.pair[0]
+      |vpiName:$bits
     |vpiLhs:
     \_parameter: (work@top.p2), line:24:13, endln:24:15
   |vpiDefName:work@top
@@ -659,154 +671,6 @@ design: (unnamed)
         |vpiName:p2u
         |vpiDefName:work@GOOD
 \_weaklyReferenced:
-\_struct_typespec: (keymgr_pkg::hw_key_req_t), line:5:12, endln:7:5
-  |vpiName:keymgr_pkg::hw_key_req_t
-  |vpiInstance:
-  \_package: (keymgr_pkg), file:${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv, line:1:1, endln:14:11
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (key), line:6:40, endln:6:43
-    |vpiParent:
-    \_struct_typespec: (keymgr_pkg::hw_key_req_t), line:5:12, endln:7:5
-    |vpiName:key
-    |vpiTypespec:
-    \_ref_typespec: (keymgr_pkg::hw_key_req_t.key)
-      |vpiParent:
-      \_typespec_member: (key), line:6:40, endln:6:43
-      |vpiFullName:keymgr_pkg::hw_key_req_t.key
-      |vpiActual:
-      \_logic_typespec: , line:6:7, endln:6:39
-    |vpiRefFile:${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv
-    |vpiRefLineNo:6
-    |vpiRefColumnNo:7
-    |vpiRefEndLineNo:6
-    |vpiRefEndColumnNo:39
-\_package: (keymgr_pkg), file:${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv, line:1:1, endln:14:11
-  |vpiName:keymgr_pkg
-\_logic_typespec: , line:6:7, endln:6:39
-  |vpiParent:
-  \_typespec_member: (key), line:6:40, endln:6:43
-  |vpiInstance:
-  \_package: (keymgr_pkg), file:${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv, line:1:1, endln:14:11
-  |vpiRange:
-  \_range: , line:6:13, endln:6:25
-    |vpiParent:
-    \_logic_typespec: , line:6:7, endln:6:39
-    |vpiLeftRange:
-    \_constant: , line:6:14, endln:6:20
-      |vpiParent:
-      \_range: , line:6:13, endln:6:25
-      |vpiDecompile:1
-      |vpiSize:64
-      |INT:1
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:6:23, endln:6:24
-      |vpiParent:
-      \_range: , line:6:13, endln:6:25
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiRange:
-  \_range: , line:6:25, endln:6:39
-    |vpiParent:
-    \_logic_typespec: , line:6:7, endln:6:39
-    |vpiLeftRange:
-    \_constant: , line:6:26, endln:6:34
-      |vpiParent:
-      \_range: , line:6:25, endln:6:39
-      |vpiDecompile:15
-      |vpiSize:64
-      |INT:15
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:6:37, endln:6:38
-      |vpiParent:
-      \_range: , line:6:25, endln:6:39
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_struct_typespec: (keymgr_pkg::foo_t), line:9:9, endln:11:2
-  |vpiName:keymgr_pkg::foo_t
-  |vpiInstance:
-  \_package: (keymgr_pkg), file:${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv, line:1:1, endln:14:11
-  |vpiTypespecMember:
-  \_typespec_member: (pair), line:10:17, endln:10:24
-    |vpiParent:
-    \_struct_typespec: (keymgr_pkg::foo_t), line:9:9, endln:11:2
-    |vpiName:pair
-    |vpiTypespec:
-    \_ref_typespec: (keymgr_pkg::foo_t.pair)
-      |vpiParent:
-      \_typespec_member: (pair), line:10:17, endln:10:24
-      |vpiFullName:keymgr_pkg::foo_t.pair
-      |vpiActual:
-      \_array_typespec: 
-    |vpiRefFile:${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv
-    |vpiRefLineNo:10
-    |vpiRefColumnNo:4
-    |vpiRefEndLineNo:10
-    |vpiRefEndColumnNo:16
-\_array_typespec: 
-  |vpiRange:
-  \_range: , line:10:22, endln:10:23
-    |vpiLeftRange:
-    \_constant: 
-      |vpiParent:
-      \_range: , line:10:22, endln:10:23
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-    |vpiRightRange:
-    \_operation: , line:10:22, endln:10:23
-      |vpiParent:
-      \_range: , line:10:22, endln:10:23
-      |vpiOpType:11
-      |vpiOperand:
-      \_constant: , line:10:22, endln:10:23
-        |vpiParent:
-        \_operation: , line:10:22, endln:10:23
-        |vpiDecompile:2
-        |vpiSize:64
-        |UINT:2
-        |vpiConstType:9
-      |vpiOperand:
-      \_constant: 
-        |vpiSize:64
-        |INT:1
-        |vpiConstType:7
-  |vpiElemTypespec:
-  \_ref_typespec: 
-    |vpiActual:
-    \_logic_typespec: , line:10:4, endln:10:16
-\_logic_typespec: , line:10:4, endln:10:16
-  |vpiParent:
-  \_typespec_member: (pair), line:10:17, endln:10:24
-  |vpiInstance:
-  \_package: (keymgr_pkg), file:${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv, line:1:1, endln:14:11
-  |vpiRange:
-  \_range: , line:10:10, endln:10:16
-    |vpiParent:
-    \_logic_typespec: , line:10:4, endln:10:16
-    |vpiLeftRange:
-    \_constant: , line:10:11, endln:10:13
-      |vpiParent:
-      \_range: , line:10:10, endln:10:16
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:10:14, endln:10:15
-      |vpiParent:
-      \_range: , line:10:10, endln:10:16
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 \_int_typespec: , line:2:14, endln:2:17
   |vpiParent:
   \_parameter: (keymgr_pkg::Shares), line:2:18, endln:2:24
@@ -820,8 +684,6 @@ design: (unnamed)
   \_package: keymgr_pkg (keymgr_pkg::), file:${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv, line:1:1, endln:14:11
   |vpiSigned:1
 \_logic_typespec: , line:6:7, endln:6:39
-  |vpiParent:
-  \_typespec_member: (key), line:6:40, endln:6:43
   |vpiInstance:
   \_package: keymgr_pkg (keymgr_pkg::), file:${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv, line:1:1, endln:14:11
   |vpiRange:
@@ -834,11 +696,10 @@ design: (unnamed)
       \_range: , line:6:13, endln:6:25
       |vpiOpType:11
       |vpiOperand:
-      \_ref_obj: (keymgr_pkg::keymgr_pkg::hw_key_req_t::key::Shares), line:6:14, endln:6:20
+      \_ref_obj: (Shares), line:6:14, endln:6:20
         |vpiParent:
         \_operation: , line:6:14, endln:6:22
         |vpiName:Shares
-        |vpiFullName:keymgr_pkg::keymgr_pkg::hw_key_req_t::key::Shares
       |vpiOperand:
       \_constant: , line:6:21, endln:6:22
         |vpiParent:
@@ -865,11 +726,10 @@ design: (unnamed)
       \_range: , line:6:25, endln:6:39
       |vpiOpType:11
       |vpiOperand:
-      \_ref_obj: (keymgr_pkg::keymgr_pkg::hw_key_req_t::key::KeyWidth), line:6:26, endln:6:34
+      \_ref_obj: (KeyWidth), line:6:26, endln:6:34
         |vpiParent:
         \_operation: , line:6:26, endln:6:36
         |vpiName:KeyWidth
-        |vpiFullName:keymgr_pkg::keymgr_pkg::hw_key_req_t::key::KeyWidth
       |vpiOperand:
       \_constant: , line:6:35, endln:6:36
         |vpiParent:
@@ -920,8 +780,6 @@ design: (unnamed)
     |vpiActual:
     \_logic_typespec: , line:10:4, endln:10:16
 \_logic_typespec: , line:10:4, endln:10:16
-  |vpiParent:
-  \_typespec_member: (pair), line:10:17, endln:10:24
   |vpiInstance:
   \_package: keymgr_pkg (keymgr_pkg::), file:${SURELOG_DIR}/tests/HierPathUnpacked/dut.sv, line:1:1, endln:14:11
   |vpiRange:
@@ -944,8 +802,6 @@ design: (unnamed)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
-\_int_typespec: , line:23:3, endln:23:44
-\_int_typespec: , line:24:3, endln:24:34
 \_int_typespec: , line:19:19, endln:19:22
   |vpiSigned:1
 ===================

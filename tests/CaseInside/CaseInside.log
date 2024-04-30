@@ -168,7 +168,6 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/CaseInside/top.sv:1:1: No timescale set for "dm".
 [WRN:PA0205] ${SURELOG_DIR}/tests/CaseInside/top.sv:12:1: No timescale set for "dm_csrs".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/CaseInside/top.sv:1:1: Compile package "dm".
 [INF:CP0303] ${SURELOG_DIR}/tests/CaseInside/top.sv:12:1: Compile module "work@dm_csrs".
 AST_DEBUG_BEGIN
 LIB:  work
@@ -437,10 +436,10 @@ case_stmt                                              1
 class_defn                                             8
 class_typespec                                         4
 class_var                                              3
-constant                                              26
+constant                                              18
 design                                                 1
-enum_const                                            11
-enum_typespec                                          3
+enum_const                                             8
+enum_typespec                                          2
 enum_var                                               1
 function                                               9
 hier_path                                              1
@@ -448,15 +447,15 @@ int_typespec                                           9
 int_var                                                4
 io_decl                                               11
 logic_net                                              2
-logic_typespec                                         2
+logic_typespec                                         1
 logic_var                                              1
-module_inst                                            3
+module_inst                                            2
 named_begin                                            1
 operation                                              5
-package                                                4
-range                                                  2
+package                                                2
+range                                                  1
 ref_obj                                                5
-ref_typespec                                          15
+ref_typespec                                          14
 task                                                   9
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CaseInside/slpp_unit/surelog.uhdm ...
@@ -473,6 +472,36 @@ design: (unnamed)
   |vpiName:builtin
   |vpiFullName:builtin::
   |vpiDefName:builtin
+  |vpiClassDefn:
+  \_class_defn: (builtin::any_sverilog_class)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:any_sverilog_class
+    |vpiFullName:builtin::any_sverilog_class
+  |vpiClassDefn:
+  \_class_defn: (builtin::array)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:array
+    |vpiFullName:builtin::array
+  |vpiClassDefn:
+  \_class_defn: (builtin::queue)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:queue
+    |vpiFullName:builtin::queue
+  |vpiClassDefn:
+  \_class_defn: (builtin::string)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:string
+    |vpiFullName:builtin::string
+  |vpiClassDefn:
+  \_class_defn: (builtin::system)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:system
+    |vpiFullName:builtin::system
 |uhdmallPackages:
 \_package: dm (dm::), file:${SURELOG_DIR}/tests/CaseInside/top.sv, line:1:1, endln:10:16
   |vpiParent:
@@ -964,18 +993,18 @@ design: (unnamed)
   |vpiFullName:work@dm_csrs
   |vpiDefName:work@dm_csrs
   |vpiNet:
-  \_logic_net: (work@dm_csrs.resp_queue_data), line:19:11, endln:19:26
+  \_logic_net: (work@dm_csrs.csr_read_write.resp_queue_data), line:19:11, endln:19:26
     |vpiParent:
-    \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/CaseInside/top.sv, line:12:1, endln:29:20
+    \_assignment: , line:19:11, endln:19:33
     |vpiName:resp_queue_data
-    |vpiFullName:work@dm_csrs.resp_queue_data
+    |vpiFullName:work@dm_csrs.csr_read_write.resp_queue_data
     |vpiNetType:1
   |vpiNet:
-  \_logic_net: (work@dm_csrs.dmcontrol_q), line:23:45, endln:23:56
+  \_logic_net: (work@dm_csrs.csr_read_write.dmcontrol_q), line:23:45, endln:23:56
     |vpiParent:
-    \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/CaseInside/top.sv, line:12:1, endln:29:20
+    \_assignment: , line:23:27, endln:23:56
     |vpiName:dmcontrol_q
-    |vpiFullName:work@dm_csrs.dmcontrol_q
+    |vpiFullName:work@dm_csrs.csr_read_write.dmcontrol_q
     |vpiNetType:1
   |vpiProcess:
   \_always: , line:13:3, endln:28:6
@@ -1070,7 +1099,7 @@ design: (unnamed)
                 |vpiName:resp_queue_data
                 |vpiFullName:work@dm_csrs.csr_read_write.resp_queue_data
                 |vpiActual:
-                \_logic_net: (work@dm_csrs.resp_queue_data), line:19:11, endln:19:26
+                \_logic_net: (work@dm_csrs.csr_read_write.resp_queue_data), line:19:11, endln:19:26
         |vpiCaseItem:
         \_case_item: , line:23:9, endln:23:57
           |vpiParent:
@@ -1104,7 +1133,7 @@ design: (unnamed)
               |vpiName:dmcontrol_q
               |vpiFullName:work@dm_csrs.csr_read_write.dmcontrol_q
               |vpiActual:
-              \_logic_net: (work@dm_csrs.dmcontrol_q), line:23:45, endln:23:56
+              \_logic_net: (work@dm_csrs.csr_read_write.dmcontrol_q), line:23:45, endln:23:56
             |vpiLhs:
             \_ref_obj: (work@dm_csrs.csr_read_write.resp_queue_data), line:23:27, endln:23:42
               |vpiParent:
@@ -1112,7 +1141,7 @@ design: (unnamed)
               |vpiName:resp_queue_data
               |vpiFullName:work@dm_csrs.csr_read_write.resp_queue_data
               |vpiActual:
-              \_logic_net: (work@dm_csrs.resp_queue_data), line:19:11, endln:19:26
+              \_logic_net: (work@dm_csrs.csr_read_write.resp_queue_data), line:19:11, endln:19:26
         |vpiCaseItem:
         \_case_item: , line:25:9, endln:25:18
           |vpiParent:

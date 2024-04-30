@@ -4,24 +4,24 @@
 [INF:PA0201] Parsing source file "${SURELOG_DIR}/tests/ValueSize/dut.sv".
 [WRN:PA0205] ${SURELOG_DIR}/tests/ValueSize/dut.sv:1:1: No timescale set for "flash_ctrl_pkg".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/ValueSize/dut.sv:1:1: Compile package "flash_ctrl_pkg".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-bit_typespec                                          10
-constant                                              55
+bit_typespec                                           2
+constant                                              14
 design                                                 1
-logic_typespec                                         4
-module_inst                                            2
-operation                                             12
-package                                                2
-param_assign                                           8
-parameter                                              8
-range                                                 14
-ref_typespec                                          30
-string_typespec                                        6
-struct_typespec                                        4
-tagged_pattern                                         6
-typespec_member                                        4
+logic_typespec                                         2
+module_inst                                            1
+operation                                              6
+package                                                1
+param_assign                                           4
+parameter                                              4
+range                                                  4
+ref_obj                                                3
+ref_typespec                                          12
+string_typespec                                        3
+struct_typespec                                        2
+tagged_pattern                                         3
+typespec_member                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ValueSize/slpp_unit/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ValueSize/slpp_unit/checker/surelog.chk.html ...
@@ -103,20 +103,11 @@ design: (unnamed)
           \_operation: , line:8:44, endln:10:5
           |vpiOpType:33
           |vpiOperand:
-          \_constant: , line:9:14, endln:9:22
+          \_ref_obj: (flash_ctrl_pkg::SeedBank), line:9:14, endln:9:22
             |vpiParent:
-            \_param_assign: , line:7:24, endln:7:36
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
-            |vpiTypespec:
-            \_ref_typespec: (flash_ctrl_pkg)
-              |vpiParent:
-              \_constant: , line:9:14, endln:9:22
-              |vpiFullName:flash_ctrl_pkg
-              |vpiActual:
-              \_bit_typespec: , line:7:14, endln:7:23
-            |vpiConstType:9
+            \_operation: , line:9:13, endln:9:30
+            |vpiName:SeedBank
+            |vpiFullName:flash_ctrl_pkg::SeedBank
           |vpiOperand:
           \_constant: , line:9:24, endln:9:29
             |vpiDecompile:2'b11
@@ -135,7 +126,7 @@ design: (unnamed)
   |vpiTypedef:
   \_struct_typespec: (flash_ctrl_pkg::page_addr_t), line:3:11, endln:5:4
     |vpiParent:
-    \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/ValueSize/dut.sv, line:1:1, endln:12:11
+    \_parameter: (flash_ctrl_pkg::SeedInfoPageSel), line:8:26, endln:8:41
     |vpiName:flash_ctrl_pkg::page_addr_t
     |vpiInstance:
     \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/ValueSize/dut.sv, line:1:1, endln:12:11
@@ -146,10 +137,10 @@ design: (unnamed)
       \_struct_typespec: (flash_ctrl_pkg::page_addr_t), line:3:11, endln:5:4
       |vpiName:addr
       |vpiTypespec:
-      \_ref_typespec: (flash_ctrl_pkg::flash_ctrl_pkg::page_addr_t::addr)
+      \_ref_typespec: (flash_ctrl_pkg::SeedInfoPageSel::flash_ctrl_pkg::page_addr_t::addr)
         |vpiParent:
         \_typespec_member: (addr), line:4:18, endln:4:22
-        |vpiFullName:flash_ctrl_pkg::flash_ctrl_pkg::page_addr_t::addr
+        |vpiFullName:flash_ctrl_pkg::SeedInfoPageSel::flash_ctrl_pkg::page_addr_t::addr
         |vpiActual:
         \_logic_typespec: , line:4:6, endln:4:17
       |vpiRefFile:${SURELOG_DIR}/tests/ValueSize/dut.sv
@@ -160,8 +151,6 @@ design: (unnamed)
   |vpiDefName:flash_ctrl_pkg
 \_weaklyReferenced:
 \_logic_typespec: , line:4:6, endln:4:17
-  |vpiParent:
-  \_typespec_member: (addr), line:4:18, endln:4:22
   |vpiInstance:
   \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/ValueSize/dut.sv, line:1:1, endln:12:11
   |vpiRange:
@@ -209,31 +198,6 @@ design: (unnamed)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
-\_bit_typespec: , line:7:14, endln:7:23
-  |vpiParent:
-  \_ref_typespec: (flash_ctrl_pkg)
-  |vpiInstance:
-  \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/ValueSize/dut.sv, line:1:1, endln:12:11
-  |vpiRange:
-  \_range: , line:7:18, endln:7:23
-    |vpiParent:
-    \_bit_typespec: , line:7:14, endln:7:23
-    |vpiLeftRange:
-    \_constant: , line:7:19, endln:7:20
-      |vpiParent:
-      \_range: , line:7:18, endln:7:23
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:7:21, endln:7:22
-      |vpiParent:
-      \_range: , line:7:18, endln:7:23
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 \_string_typespec: (addr), line:9:7, endln:9:11
   |vpiParent:
   \_tagged_pattern: , line:9:13, endln:9:30
@@ -246,5 +210,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ValueSize/dut.sv | ${SURELOG_DIR}/build/regression/ValueSize/roundtrip/dut_000.sv | 1 | 12 |
+[roundtrip]: ${SURELOG_DIR}/tests/ValueSize/dut.sv | ${SURELOG_DIR}/build/regression/ValueSize/roundtrip/dut_000.sv | 0 | 12 |
 ============================== End RoundTrip Results ==============================

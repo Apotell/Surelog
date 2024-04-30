@@ -435,7 +435,7 @@ logic_var                                              1
 module_inst                                            2
 named_begin                                            1
 operation                                              2
-package                                                2
+package                                                1
 param_assign                                           2
 parameter                                              2
 range                                                  1
@@ -459,6 +459,36 @@ design: (unnamed)
   |vpiName:builtin
   |vpiFullName:builtin::
   |vpiDefName:builtin
+  |vpiClassDefn:
+  \_class_defn: (builtin::any_sverilog_class)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:any_sverilog_class
+    |vpiFullName:builtin::any_sverilog_class
+  |vpiClassDefn:
+  \_class_defn: (builtin::array)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:array
+    |vpiFullName:builtin::array
+  |vpiClassDefn:
+  \_class_defn: (builtin::queue)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:queue
+    |vpiFullName:builtin::queue
+  |vpiClassDefn:
+  \_class_defn: (builtin::string)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:string
+    |vpiFullName:builtin::string
+  |vpiClassDefn:
+  \_class_defn: (builtin::system)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:system
+    |vpiFullName:builtin::system
 |uhdmallClasses:
 \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/CastUnsigned/builtin.sv, line:1:3, endln:27:11
   |vpiParent:
@@ -987,18 +1017,18 @@ design: (unnamed)
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastUnsigned/dut.sv, line:2:1, endln:13:10
   |vpiDefName:work@top
   |vpiNet:
-  \_logic_net: (work@top.setup_received), line:8:11, endln:8:25
+  \_logic_net: (work@top.proc_stall_tieoff.setup_received), line:8:11, endln:8:25
     |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastUnsigned/dut.sv, line:2:1, endln:13:10
+    \_operation: , line:8:11, endln:8:39
     |vpiName:setup_received
-    |vpiFullName:work@top.setup_received
+    |vpiFullName:work@top.proc_stall_tieoff.setup_received
     |vpiNetType:1
   |vpiNet:
-  \_logic_net: (work@top.i), line:8:37, endln:8:38
+  \_logic_net: (work@top.proc_stall_tieoff.i), line:8:37, endln:8:38
     |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastUnsigned/dut.sv, line:2:1, endln:13:10
+    \_operation: , line:8:29, endln:8:39
     |vpiName:i
-    |vpiFullName:work@top.i
+    |vpiFullName:work@top.proc_stall_tieoff.i
     |vpiNetType:1
   |vpiProcess:
   \_always: , line:7:3, endln:11:6
@@ -1026,7 +1056,7 @@ design: (unnamed)
             |vpiName:setup_received
             |vpiFullName:work@top.proc_stall_tieoff.setup_received
             |vpiActual:
-            \_logic_net: (work@top.setup_received), line:8:11, endln:8:25
+            \_logic_net: (work@top.proc_stall_tieoff.setup_received), line:8:11, endln:8:25
           |vpiOperand:
           \_operation: , line:8:29, endln:8:39
             |vpiParent:
@@ -1046,7 +1076,7 @@ design: (unnamed)
               |vpiName:i
               |vpiFullName:work@top.proc_stall_tieoff.i
               |vpiActual:
-              \_logic_net: (work@top.i), line:8:37, endln:8:38
+              \_logic_net: (work@top.proc_stall_tieoff.i), line:8:37, endln:8:38
         |vpiStmt:
         \_begin: (work@top.proc_stall_tieoff), line:8:41, endln:10:10
           |vpiParent:
@@ -1069,7 +1099,7 @@ design: (unnamed)
                 |vpiName:i
                 |vpiFullName:work@top.proc_stall_tieoff.i
                 |vpiActual:
-                \_logic_net: (work@top.i), line:8:37, endln:8:38
+                \_logic_net: (work@top.proc_stall_tieoff.i), line:8:37, endln:8:38
               |vpiName:$unsigned
             |vpiLhs:
             \_hier_path: (hw2reg.stall), line:9:9, endln:9:21

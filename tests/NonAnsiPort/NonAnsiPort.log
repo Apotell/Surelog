@@ -216,25 +216,23 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/NonAnsiPort/dut.sv:7:1: No timescale set for "pkg2".
 [WRN:PA0205] ${SURELOG_DIR}/tests/NonAnsiPort/dut.sv:13:1: No timescale set for "dut".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/NonAnsiPort/dut.sv:1:1: Compile package "pkg1".
-[INF:CP0301] ${SURELOG_DIR}/tests/NonAnsiPort/dut.sv:7:1: Compile package "pkg2".
 [INF:CP0303] ${SURELOG_DIR}/tests/NonAnsiPort/dut.sv:13:1: Compile module "work@dut".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              13
+constant                                               9
 cont_assign                                            3
 design                                                 1
 hier_path                                              3
 logic_net                                              3
-logic_typespec                                         5
-module_inst                                            3
-package                                                4
+logic_typespec                                         3
+module_inst                                            1
+package                                                2
 port                                                   3
-range                                                  5
+range                                                  3
 ref_obj                                                9
-ref_typespec                                           8
-struct_typespec                                        5
-typespec_member                                        5
+ref_typespec                                           6
+struct_typespec                                        3
+typespec_member                                        3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/NonAnsiPort/slpp_unit/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/NonAnsiPort/slpp_unit/checker/surelog.chk.html ...
@@ -501,58 +499,7 @@ design: (unnamed)
         |vpiName:third
       |vpiName:var3.third
 \_weaklyReferenced:
-\_struct_typespec: (pkg1::struct1), line:2:13, endln:4:6
-  |vpiName:pkg1::struct1
-  |vpiInstance:
-  \_package: (pkg1), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:1:1, endln:5:11
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (first), line:3:21, endln:3:26
-    |vpiParent:
-    \_struct_typespec: (pkg1::struct1), line:2:13, endln:4:6
-    |vpiName:first
-    |vpiTypespec:
-    \_ref_typespec: (pkg1::struct1.first)
-      |vpiParent:
-      \_typespec_member: (first), line:3:21, endln:3:26
-      |vpiFullName:pkg1::struct1.first
-      |vpiActual:
-      \_logic_typespec: , line:3:9, endln:3:20
-    |vpiRefFile:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv
-    |vpiRefLineNo:3
-    |vpiRefColumnNo:9
-    |vpiRefEndLineNo:3
-    |vpiRefEndColumnNo:20
-\_package: (pkg1), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:1:1, endln:5:11
-  |vpiName:pkg1
 \_logic_typespec: , line:3:9, endln:3:20
-  |vpiParent:
-  \_typespec_member: (first), line:3:21, endln:3:26
-  |vpiInstance:
-  \_package: (pkg1), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:1:1, endln:5:11
-  |vpiRange:
-  \_range: , line:3:15, endln:3:20
-    |vpiParent:
-    \_logic_typespec: , line:3:9, endln:3:20
-    |vpiLeftRange:
-    \_constant: , line:3:16, endln:3:17
-      |vpiParent:
-      \_range: , line:3:15, endln:3:20
-      |vpiDecompile:7
-      |vpiSize:64
-      |UINT:7
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:18, endln:3:19
-      |vpiParent:
-      \_range: , line:3:15, endln:3:20
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:3:9, endln:3:20
-  |vpiParent:
-  \_typespec_member: (first), line:3:21, endln:3:26
   |vpiInstance:
   \_package: pkg1 (pkg1::), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:1:1, endln:5:11
   |vpiRange:
@@ -575,58 +522,7 @@ design: (unnamed)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
-\_struct_typespec: (pkg2::struct1), line:8:13, endln:10:6
-  |vpiName:pkg2::struct1
-  |vpiInstance:
-  \_package: (pkg2), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:7:1, endln:11:11
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (second), line:9:21, endln:9:27
-    |vpiParent:
-    \_struct_typespec: (pkg2::struct1), line:8:13, endln:10:6
-    |vpiName:second
-    |vpiTypespec:
-    \_ref_typespec: (pkg2::struct1.second)
-      |vpiParent:
-      \_typespec_member: (second), line:9:21, endln:9:27
-      |vpiFullName:pkg2::struct1.second
-      |vpiActual:
-      \_logic_typespec: , line:9:9, endln:9:20
-    |vpiRefFile:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv
-    |vpiRefLineNo:9
-    |vpiRefColumnNo:9
-    |vpiRefEndLineNo:9
-    |vpiRefEndColumnNo:20
-\_package: (pkg2), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:7:1, endln:11:11
-  |vpiName:pkg2
 \_logic_typespec: , line:9:9, endln:9:20
-  |vpiParent:
-  \_typespec_member: (second), line:9:21, endln:9:27
-  |vpiInstance:
-  \_package: (pkg2), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:7:1, endln:11:11
-  |vpiRange:
-  \_range: , line:9:15, endln:9:20
-    |vpiParent:
-    \_logic_typespec: , line:9:9, endln:9:20
-    |vpiLeftRange:
-    \_constant: , line:9:16, endln:9:17
-      |vpiParent:
-      \_range: , line:9:15, endln:9:20
-      |vpiDecompile:6
-      |vpiSize:64
-      |UINT:6
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:9:18, endln:9:19
-      |vpiParent:
-      \_range: , line:9:15, endln:9:20
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:9:9, endln:9:20
-  |vpiParent:
-  \_typespec_member: (second), line:9:21, endln:9:27
   |vpiInstance:
   \_package: pkg2 (pkg2::), file:${SURELOG_DIR}/tests/NonAnsiPort/dut.sv, line:7:1, endln:11:11
   |vpiRange:
@@ -650,8 +546,6 @@ design: (unnamed)
       |UINT:0
       |vpiConstType:9
 \_logic_typespec: , line:15:9, endln:15:20
-  |vpiParent:
-  \_typespec_member: (third), line:15:21, endln:15:26
   |vpiRange:
   \_range: , line:15:15, endln:15:20
     |vpiParent:

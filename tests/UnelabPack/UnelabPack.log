@@ -49,19 +49,16 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/UnelabPack/dut.sv:1:1: No timescale set for "pkg1".
 [WRN:PA0205] ${SURELOG_DIR}/tests/UnelabPack/dut.sv:5:1: No timescale set for "pkg2".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/UnelabPack/dut.sv:1:1: Compile package "pkg1".
-[INF:CP0301] ${SURELOG_DIR}/tests/UnelabPack/dut.sv:5:1: Compile package "pkg2".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                               9
+constant                                               3
 design                                                 1
-int_typespec                                           6
-module_inst                                            2
-package                                                4
-param_assign                                           8
-parameter                                              8
+int_typespec                                           1
+package                                                2
+param_assign                                           4
+parameter                                              4
 ref_obj                                                3
-ref_typespec                                          10
+ref_typespec                                           3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnelabPack/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/UnelabPack/slpp_all/checker/surelog.chk.html ...
@@ -136,6 +133,8 @@ design: (unnamed)
       \_param_assign: , line:6:12, endln:6:23
       |vpiName:pkg1::X
       |vpiFullName:pkg2::pkg1::X
+      |vpiActual:
+      \_parameter: (pkg1::X), line:2:12, endln:2:13
     |vpiLhs:
     \_parameter: (pkg2::Y), line:6:12, endln:6:13
   |vpiDefName:pkg2

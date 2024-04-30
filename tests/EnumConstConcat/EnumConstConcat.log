@@ -155,29 +155,27 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/EnumConstConcat/dut.sv:19:1: No timescale set for "GOOD".
 [WRN:PA0205] ${SURELOG_DIR}/tests/EnumConstConcat/dut.sv:22:1: No timescale set for "top".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/EnumConstConcat/dut.sv:2:1: Compile package "prim_mubi_pkg".
-[INF:CP0301] ${SURELOG_DIR}/tests/EnumConstConcat/dut.sv:11:1: Compile package "pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/EnumConstConcat/dut.sv:19:1: Compile module "work@GOOD".
 [INF:CP0303] ${SURELOG_DIR}/tests/EnumConstConcat/dut.sv:22:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 begin                                                  1
-constant                                              37
+constant                                              17
 design                                                 1
-enum_const                                             6
-enum_typespec                                          4
+enum_const                                             3
+enum_typespec                                          2
 gen_if                                                 1
-int_typespec                                           5
-logic_typespec                                         4
-module_inst                                            6
-operation                                              7
-package                                                4
-param_assign                                           4
-parameter                                              4
-range                                                  4
+int_typespec                                           2
+logic_typespec                                         2
+module_inst                                            4
+operation                                              4
+package                                                2
+param_assign                                           2
+parameter                                              2
+range                                                  2
 ref_module                                             1
-ref_obj                                                3
-ref_typespec                                          13
+ref_obj                                                4
+ref_typespec                                           6
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EnumConstConcat/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/EnumConstConcat/slpp_all/checker/surelog.chk.html ...
@@ -310,13 +308,11 @@ design: (unnamed)
       \_gen_if: , line:24:4, endln:24:6
       |vpiOpType:14
       |vpiOperand:
-      \_constant: , line:24:8, endln:24:13
+      \_ref_obj: (work@top.pkg::ReadingLow), line:24:8, endln:24:23
         |vpiParent:
         \_operation: , line:24:8, endln:24:30
-        |vpiDecompile:10'b0011000101
-        |vpiSize:10
-        |BIN:0011000101
-        |vpiConstType:3
+        |vpiName:pkg::ReadingLow
+        |vpiFullName:work@top.pkg::ReadingLow
       |vpiOperand:
       \_constant: , line:24:27, endln:24:30
         |vpiParent:

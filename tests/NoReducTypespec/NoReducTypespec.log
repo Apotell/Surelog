@@ -214,31 +214,29 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/NoReducTypespec/dut.sv:18:1: No timescale set for "cheshire_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/NoReducTypespec/dut.sv:26:1: No timescale set for "cheshire_soc".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/NoReducTypespec/dut.sv:1:1: Compile package "axi_pkg".
-[INF:CP0301] ${SURELOG_DIR}/tests/NoReducTypespec/dut.sv:18:1: Compile package "cheshire_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/NoReducTypespec/dut.sv:9:1: Compile module "work@axi_xbar".
 [INF:CP0303] ${SURELOG_DIR}/tests/NoReducTypespec/dut.sv:26:1: Compile module "work@cheshire_soc".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 bit_typespec                                           1
-constant                                              28
+constant                                              19
 design                                                 1
 hier_path                                              3
 import_typespec                                        1
-int_typespec                                          18
-module_inst                                            4
-operation                                              9
-package                                                4
-param_assign                                           8
-parameter                                              9
+int_typespec                                          12
+module_inst                                            2
+operation                                              6
+package                                                2
+param_assign                                           6
+parameter                                              7
 range                                                  2
 ref_module                                             1
 ref_obj                                                6
-ref_typespec                                          51
-string_typespec                                       21
-struct_typespec                                        6
-tagged_pattern                                        21
-typespec_member                                       18
+ref_typespec                                          33
+string_typespec                                       12
+struct_typespec                                        4
+tagged_pattern                                        12
+typespec_member                                       12
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/NoReducTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/NoReducTypespec/slpp_all/checker/surelog.chk.html ...
@@ -256,7 +254,7 @@ design: (unnamed)
   |vpiTypedef:
   \_struct_typespec: (axi_pkg::xbar_cfg_t), line:2:11, endln:6:4
     |vpiParent:
-    \_package: axi_pkg (axi_pkg::), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:1:1, endln:7:11
+    \_parameter: (work@axi_xbar.Cfg), line:11:33, endln:11:36
     |vpiName:axi_pkg::xbar_cfg_t
     |vpiInstance:
     \_package: axi_pkg (axi_pkg::), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:1:1, endln:7:11
@@ -267,10 +265,10 @@ design: (unnamed)
       \_struct_typespec: (axi_pkg::xbar_cfg_t), line:2:11, endln:6:4
       |vpiName:NoSlvPorts
       |vpiTypespec:
-      \_ref_typespec: (axi_pkg::axi_pkg::xbar_cfg_t::NoSlvPorts)
+      \_ref_typespec: (work@axi_xbar.Cfg.axi_pkg::xbar_cfg_t.NoSlvPorts)
         |vpiParent:
         \_typespec_member: (NoSlvPorts), line:3:20, endln:3:30
-        |vpiFullName:axi_pkg::axi_pkg::xbar_cfg_t::NoSlvPorts
+        |vpiFullName:work@axi_xbar.Cfg.axi_pkg::xbar_cfg_t.NoSlvPorts
         |vpiActual:
         \_int_typespec: , line:3:5, endln:3:17
       |vpiRefFile:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv
@@ -284,10 +282,10 @@ design: (unnamed)
       \_struct_typespec: (axi_pkg::xbar_cfg_t), line:2:11, endln:6:4
       |vpiName:NoMstPorts
       |vpiTypespec:
-      \_ref_typespec: (axi_pkg::axi_pkg::xbar_cfg_t::NoMstPorts)
+      \_ref_typespec: (work@axi_xbar.Cfg.axi_pkg::xbar_cfg_t.NoMstPorts)
         |vpiParent:
         \_typespec_member: (NoMstPorts), line:4:20, endln:4:30
-        |vpiFullName:axi_pkg::axi_pkg::xbar_cfg_t::NoMstPorts
+        |vpiFullName:work@axi_xbar.Cfg.axi_pkg::xbar_cfg_t.NoMstPorts
         |vpiActual:
         \_int_typespec: , line:4:5, endln:4:17
       |vpiRefFile:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv
@@ -301,10 +299,10 @@ design: (unnamed)
       \_struct_typespec: (axi_pkg::xbar_cfg_t), line:2:11, endln:6:4
       |vpiName:AxiAddrWidth
       |vpiTypespec:
-      \_ref_typespec: (axi_pkg::axi_pkg::xbar_cfg_t::AxiAddrWidth)
+      \_ref_typespec: (work@axi_xbar.Cfg.axi_pkg::xbar_cfg_t.AxiAddrWidth)
         |vpiParent:
         \_typespec_member: (AxiAddrWidth), line:5:20, endln:5:32
-        |vpiFullName:axi_pkg::axi_pkg::xbar_cfg_t::AxiAddrWidth
+        |vpiFullName:work@axi_xbar.Cfg.axi_pkg::xbar_cfg_t.AxiAddrWidth
         |vpiActual:
         \_int_typespec: , line:5:5, endln:5:17
       |vpiRefFile:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv
@@ -612,92 +610,13 @@ design: (unnamed)
     |vpiActual:
     \_module_inst: work@axi_xbar (work@axi_xbar), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:9:1, endln:16:10
 \_weaklyReferenced:
-\_struct_typespec: (axi_pkg::xbar_cfg_t), line:2:11, endln:6:4
-  |vpiParent:
-  \_parameter: (work@axi_xbar.Cfg), line:11:33, endln:11:36
-  |vpiName:axi_pkg::xbar_cfg_t
-  |vpiInstance:
-  \_package: axi_pkg (axi_pkg::), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:1:1, endln:7:11
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (NoSlvPorts), line:3:20, endln:3:30
-    |vpiParent:
-    \_struct_typespec: (axi_pkg::xbar_cfg_t), line:2:11, endln:6:4
-    |vpiName:NoSlvPorts
-    |vpiTypespec:
-    \_ref_typespec: (work@axi_xbar.Cfg.axi_pkg::xbar_cfg_t.NoSlvPorts)
-      |vpiParent:
-      \_typespec_member: (NoSlvPorts), line:3:20, endln:3:30
-      |vpiFullName:work@axi_xbar.Cfg.axi_pkg::xbar_cfg_t.NoSlvPorts
-      |vpiActual:
-      \_int_typespec: , line:3:5, endln:3:17
-    |vpiRefFile:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv
-    |vpiRefLineNo:3
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:3
-    |vpiRefEndColumnNo:17
-  |vpiTypespecMember:
-  \_typespec_member: (NoMstPorts), line:4:20, endln:4:30
-    |vpiParent:
-    \_struct_typespec: (axi_pkg::xbar_cfg_t), line:2:11, endln:6:4
-    |vpiName:NoMstPorts
-    |vpiTypespec:
-    \_ref_typespec: (work@axi_xbar.Cfg.axi_pkg::xbar_cfg_t.NoMstPorts)
-      |vpiParent:
-      \_typespec_member: (NoMstPorts), line:4:20, endln:4:30
-      |vpiFullName:work@axi_xbar.Cfg.axi_pkg::xbar_cfg_t.NoMstPorts
-      |vpiActual:
-      \_int_typespec: , line:4:5, endln:4:17
-    |vpiRefFile:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv
-    |vpiRefLineNo:4
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:4
-    |vpiRefEndColumnNo:17
-  |vpiTypespecMember:
-  \_typespec_member: (AxiAddrWidth), line:5:20, endln:5:32
-    |vpiParent:
-    \_struct_typespec: (axi_pkg::xbar_cfg_t), line:2:11, endln:6:4
-    |vpiName:AxiAddrWidth
-    |vpiTypespec:
-    \_ref_typespec: (work@axi_xbar.Cfg.axi_pkg::xbar_cfg_t.AxiAddrWidth)
-      |vpiParent:
-      \_typespec_member: (AxiAddrWidth), line:5:20, endln:5:32
-      |vpiFullName:work@axi_xbar.Cfg.axi_pkg::xbar_cfg_t.AxiAddrWidth
-      |vpiActual:
-      \_int_typespec: , line:5:5, endln:5:17
-    |vpiRefFile:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv
-    |vpiRefLineNo:5
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:5
-    |vpiRefEndColumnNo:17
 \_int_typespec: , line:3:5, endln:3:17
-  |vpiParent:
-  \_typespec_member: (NoSlvPorts), line:3:20, endln:3:30
   |vpiInstance:
   \_package: axi_pkg (axi_pkg::), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:1:1, endln:7:11
 \_int_typespec: , line:4:5, endln:4:17
-  |vpiParent:
-  \_typespec_member: (NoMstPorts), line:4:20, endln:4:30
   |vpiInstance:
   \_package: axi_pkg (axi_pkg::), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:1:1, endln:7:11
 \_int_typespec: , line:5:5, endln:5:17
-  |vpiParent:
-  \_typespec_member: (AxiAddrWidth), line:5:20, endln:5:32
-  |vpiInstance:
-  \_package: axi_pkg (axi_pkg::), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:1:1, endln:7:11
-\_int_typespec: , line:3:5, endln:3:17
-  |vpiParent:
-  \_typespec_member: (NoSlvPorts), line:3:20, endln:3:30
-  |vpiInstance:
-  \_package: axi_pkg (axi_pkg::), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:1:1, endln:7:11
-\_int_typespec: , line:4:5, endln:4:17
-  |vpiParent:
-  \_typespec_member: (NoMstPorts), line:4:20, endln:4:30
-  |vpiInstance:
-  \_package: axi_pkg (axi_pkg::), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:1:1, endln:7:11
-\_int_typespec: , line:5:5, endln:5:17
-  |vpiParent:
-  \_typespec_member: (AxiAddrWidth), line:5:20, endln:5:32
   |vpiInstance:
   \_package: axi_pkg (axi_pkg::), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:1:1, endln:7:11
 \_string_typespec: (NoSlvPorts), line:20:5, endln:20:15
@@ -800,7 +719,7 @@ design: (unnamed)
   \_ref_typespec: (work@cheshire_soc.AxiXbarCfg)
   |vpiName:axi_pkg::xbar_cfg_t
   |vpiInstance:
-  \_package: (axi_pkg), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:1:1, endln:7:11
+  \_package: axi_pkg (axi_pkg::), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:1:1, endln:7:11
   |vpiPacked:1
   |vpiTypespecMember:
   \_typespec_member: (NoSlvPorts), line:3:20, endln:3:30
@@ -853,23 +772,21 @@ design: (unnamed)
     |vpiRefColumnNo:5
     |vpiRefEndLineNo:5
     |vpiRefEndColumnNo:17
-\_package: (axi_pkg), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:1:1, endln:7:11
-  |vpiName:axi_pkg
 \_int_typespec: , line:3:5, endln:3:17
   |vpiParent:
   \_ref_typespec: (work@cheshire_soc.AxiXbarCfg.axi_pkg::xbar_cfg_t.NoSlvPorts)
   |vpiInstance:
-  \_package: (axi_pkg), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:1:1, endln:7:11
+  \_package: axi_pkg (axi_pkg::), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:1:1, endln:7:11
 \_int_typespec: , line:4:5, endln:4:17
   |vpiParent:
   \_ref_typespec: (work@cheshire_soc.AxiXbarCfg.axi_pkg::xbar_cfg_t.NoMstPorts)
   |vpiInstance:
-  \_package: (axi_pkg), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:1:1, endln:7:11
+  \_package: axi_pkg (axi_pkg::), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:1:1, endln:7:11
 \_int_typespec: , line:5:5, endln:5:17
   |vpiParent:
   \_ref_typespec: (work@cheshire_soc.AxiXbarCfg.axi_pkg::xbar_cfg_t.AxiAddrWidth)
   |vpiInstance:
-  \_package: (axi_pkg), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:1:1, endln:7:11
+  \_package: axi_pkg (axi_pkg::), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:1:1, endln:7:11
 \_string_typespec: (NoSlvPorts), line:20:5, endln:20:15
   |vpiParent:
   \_ref_typespec: (work@cheshire_soc)
@@ -887,7 +804,7 @@ design: (unnamed)
   \_ref_typespec: (work@cheshire_soc.AxiXbarCfg)
   |vpiName:axi_pkg::xbar_cfg_t
   |vpiInstance:
-  \_package: (axi_pkg), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:1:1, endln:7:11
+  \_package: axi_pkg (axi_pkg::), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:1:1, endln:7:11
   |vpiPacked:1
   |vpiTypespecMember:
   \_typespec_member: (NoSlvPorts), line:3:20, endln:3:30
@@ -944,17 +861,17 @@ design: (unnamed)
   |vpiParent:
   \_ref_typespec: (work@cheshire_soc.AxiXbarCfg.axi_pkg::xbar_cfg_t.NoSlvPorts)
   |vpiInstance:
-  \_package: (axi_pkg), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:1:1, endln:7:11
+  \_package: axi_pkg (axi_pkg::), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:1:1, endln:7:11
 \_int_typespec: , line:4:5, endln:4:17
   |vpiParent:
   \_ref_typespec: (work@cheshire_soc.AxiXbarCfg.axi_pkg::xbar_cfg_t.NoMstPorts)
   |vpiInstance:
-  \_package: (axi_pkg), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:1:1, endln:7:11
+  \_package: axi_pkg (axi_pkg::), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:1:1, endln:7:11
 \_int_typespec: , line:5:5, endln:5:17
   |vpiParent:
   \_ref_typespec: (work@cheshire_soc.AxiXbarCfg.axi_pkg::xbar_cfg_t.AxiAddrWidth)
   |vpiInstance:
-  \_package: (axi_pkg), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:1:1, endln:7:11
+  \_package: axi_pkg (axi_pkg::), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:1:1, endln:7:11
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

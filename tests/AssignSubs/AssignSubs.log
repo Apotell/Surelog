@@ -168,7 +168,6 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/AssignSubs/dut.sv:1:1: No timescale set for "pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/AssignSubs/dut.sv:7:1: No timescale set for "dut".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/AssignSubs/dut.sv:1:1: Compile package "pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/AssignSubs/dut.sv:7:1: Compile module "work@dut".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
@@ -176,22 +175,22 @@ always                                                 1
 assignment                                             2
 begin                                                  2
 bit_select                                             1
-constant                                              13
+constant                                               9
 design                                                 1
-enum_const                                             2
-enum_typespec                                          2
+enum_const                                             1
+enum_typespec                                          1
 event_control                                          1
 gen_for                                                1
 import_typespec                                        1
 logic_net                                              3
-logic_typespec                                         4
-module_inst                                            3
+logic_typespec                                         3
+module_inst                                            2
 operation                                              4
-package                                                2
+package                                                1
 port                                                   1
-range                                                  3
+range                                                  2
 ref_obj                                                6
-ref_typespec                                           5
+ref_typespec                                           4
 ref_var                                                1
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
@@ -238,26 +237,6 @@ design: (unnamed)
   |vpiFullName:work@dut
   |vpiTypedef:
   \_enum_typespec: (pkg::priv_lvl_e), line:2:2, endln:4:16
-    |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/AssignSubs/dut.sv, line:7:1, endln:19:10
-    |vpiName:pkg::priv_lvl_e
-    |vpiInstance:
-    \_package: (pkg), file:${SURELOG_DIR}/tests/AssignSubs/dut.sv, line:1:1, endln:5:11
-    |vpiBaseTypespec:
-    \_ref_typespec: (work@dut.pkg::priv_lvl_e)
-      |vpiParent:
-      \_enum_typespec: (pkg::priv_lvl_e), line:2:2, endln:4:16
-      |vpiFullName:work@dut.pkg::priv_lvl_e
-      |vpiActual:
-      \_logic_typespec: , line:2:15, endln:2:26
-    |vpiEnumConst:
-    \_enum_const: (PRIV_LVL_M), line:3:3, endln:3:21
-      |vpiParent:
-      \_enum_typespec: (pkg::priv_lvl_e), line:2:2, endln:4:16
-      |vpiName:PRIV_LVL_M
-      |BIN:11
-      |vpiDecompile:4'b11
-      |vpiSize:4
   |vpiTypedef:
   \_import_typespec: (pkg), line:10:9, endln:10:15
   |vpiDefName:work@dut
@@ -284,7 +263,7 @@ design: (unnamed)
   |vpiNet:
   \_logic_net: (work@dut.i), line:14:21, endln:14:22
     |vpiParent:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/AssignSubs/dut.sv, line:7:1, endln:19:10
+    \_operation: , line:14:21, endln:14:26
     |vpiName:i
     |vpiFullName:work@dut.i
     |vpiNetType:1
@@ -430,31 +409,6 @@ design: (unnamed)
                   |vpiFullName:work@dut.i
         |vpiAlwaysType:1
 \_weaklyReferenced:
-\_package: (pkg), file:${SURELOG_DIR}/tests/AssignSubs/dut.sv, line:1:1, endln:5:11
-  |vpiName:pkg
-\_logic_typespec: , line:2:15, endln:2:26
-  |vpiInstance:
-  \_package: (pkg), file:${SURELOG_DIR}/tests/AssignSubs/dut.sv, line:1:1, endln:5:11
-  |vpiRange:
-  \_range: , line:2:21, endln:2:26
-    |vpiParent:
-    \_logic_typespec: , line:2:15, endln:2:26
-    |vpiLeftRange:
-    \_constant: , line:2:22, endln:2:23
-      |vpiParent:
-      \_range: , line:2:21, endln:2:26
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:24, endln:2:25
-      |vpiParent:
-      \_range: , line:2:21, endln:2:26
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 \_logic_typespec: , line:2:15, endln:2:26
   |vpiInstance:
   \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignSubs/dut.sv, line:1:1, endln:5:11

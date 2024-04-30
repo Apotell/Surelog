@@ -212,14 +212,14 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 array_typespec                                         1
-bit_select                                             3
+bit_select                                             4
 bit_typespec                                           3
 constant                                              11
 design                                                 1
-int_typespec                                           2
+int_typespec                                           1
 logic_net                                              4
 logic_typespec                                         2
-module_inst                                            4
+module_inst                                            3
 operation                                              2
 param_assign                                           2
 parameter                                              2
@@ -227,7 +227,8 @@ port                                                   2
 range                                                  3
 ref_module                                             1
 ref_obj                                                2
-ref_typespec                                           9
+ref_typespec                                           7
+sys_func_call                                          1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BitsArray/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/BitsArray/slpp_all/checker/surelog.chk.html ...
@@ -394,14 +395,6 @@ design: (unnamed)
   \_parameter: (work@toto.a), line:27:14, endln:27:15
     |vpiParent:
     \_module_inst: work@toto (work@toto), file:${SURELOG_DIR}/tests/BitsArray/dut.sv, line:23:1, endln:30:10
-    |UINT:1
-    |vpiTypespec:
-    \_ref_typespec: (work@toto.a)
-      |vpiParent:
-      \_parameter: (work@toto.a), line:27:14, endln:27:15
-      |vpiFullName:work@toto.a
-      |vpiActual:
-      \_int_typespec: , line:27:2, endln:27:52
     |vpiName:a
     |vpiFullName:work@toto.a
   |vpiParamAssign:
@@ -409,20 +402,24 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@toto (work@toto), file:${SURELOG_DIR}/tests/BitsArray/dut.sv, line:23:1, endln:30:10
     |vpiRhs:
-    \_constant: , line:27:18, endln:27:52
+    \_sys_func_call: ($bits), line:27:18, endln:27:52
       |vpiParent:
       \_param_assign: , line:27:14, endln:27:52
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiTypespec:
-      \_ref_typespec: (work@toto)
+      |vpiArgument:
+      \_bit_select: (work@toto.fcoe_reserved_before_sof), line:27:49, endln:27:50
         |vpiParent:
-        \_constant: , line:27:18, endln:27:52
-        |vpiFullName:work@toto
-        |vpiActual:
-        \_int_typespec: , line:27:2, endln:27:52
-      |vpiConstType:9
+        \_sys_func_call: ($bits), line:27:18, endln:27:52
+        |vpiName:fcoe_reserved_before_sof
+        |vpiFullName:work@toto.fcoe_reserved_before_sof
+        |vpiIndex:
+        \_constant: , line:27:49, endln:27:50
+          |vpiParent:
+          \_bit_select: (work@toto.fcoe_reserved_before_sof), line:27:49, endln:27:50
+          |vpiDecompile:0
+          |vpiSize:64
+          |UINT:0
+          |vpiConstType:9
+      |vpiName:$bits
     |vpiLhs:
     \_parameter: (work@toto.a), line:27:14, endln:27:15
   |vpiDefName:work@toto
@@ -444,7 +441,6 @@ design: (unnamed)
   |vpiParent:
   \_parameter: (work@aes_reg_status.Width), line:3:18, endln:3:23
   |vpiSigned:1
-\_int_typespec: , line:27:2, endln:27:52
 \_logic_typespec: , line:5:10, endln:5:27
   |vpiRange:
   \_range: , line:5:16, endln:5:27

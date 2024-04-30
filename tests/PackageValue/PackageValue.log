@@ -588,9 +588,6 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackageValue/top.sv:37:1: No timescale set for "riscv".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackageValue/top.sv:55:1: No timescale set for "ariane_pkg".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/PackageValue/top.sv:1:1: Compile package "prim_pkg".
-[INF:CP0301] ${SURELOG_DIR}/tests/PackageValue/top.sv:37:1: Compile package "riscv".
-[INF:CP0301] ${SURELOG_DIR}/tests/PackageValue/top.sv:55:1: Compile package "ariane_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/PackageValue/top.sv:11:1: Compile module "work@prim_diff_decode".
 AST_DEBUG_BEGIN
 LIB:  work
@@ -859,29 +856,29 @@ case_stmt                                              1
 class_defn                                             8
 class_typespec                                         4
 class_var                                              3
-constant                                             321
+constant                                              98
 design                                                 1
-enum_const                                             9
-enum_typespec                                          3
+enum_const                                             7
+enum_typespec                                          2
 enum_var                                               1
 function                                               9
 gen_if                                                 1
 import_typespec                                        1
 int_typespec                                           9
 int_var                                                4
-integer_typespec                                       2
+integer_typespec                                       1
 io_decl                                               11
-logic_typespec                                        88
+logic_typespec                                        26
 logic_var                                              1
-module_inst                                            6
+module_inst                                            3
 named_begin                                            2
-operation                                             67
-package                                                8
-param_assign                                          53
-parameter                                             53
-range                                                 88
-ref_obj                                               42
-ref_typespec                                         156
+operation                                             34
+package                                                4
+param_assign                                          27
+parameter                                             27
+range                                                 26
+ref_obj                                               43
+ref_typespec                                          66
 task                                                   9
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageValue/slpp_all/surelog.uhdm ...
@@ -898,6 +895,36 @@ design: (unnamed)
   |vpiName:builtin
   |vpiFullName:builtin::
   |vpiDefName:builtin
+  |vpiClassDefn:
+  \_class_defn: (builtin::any_sverilog_class)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:any_sverilog_class
+    |vpiFullName:builtin::any_sverilog_class
+  |vpiClassDefn:
+  \_class_defn: (builtin::array)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:array
+    |vpiFullName:builtin::array
+  |vpiClassDefn:
+  \_class_defn: (builtin::queue)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:queue
+    |vpiFullName:builtin::queue
+  |vpiClassDefn:
+  \_class_defn: (builtin::string)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:string
+    |vpiFullName:builtin::string
+  |vpiClassDefn:
+  \_class_defn: (builtin::system)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:system
+    |vpiFullName:builtin::system
 |uhdmallPackages:
 \_package: prim_pkg (prim_pkg::), file:${SURELOG_DIR}/tests/PackageValue/top.sv, line:1:1, endln:9:11
   |vpiParent:
@@ -907,15 +934,15 @@ design: (unnamed)
   |vpiTypedef:
   \_enum_typespec: (prim_pkg::impl_e), line:4:3, endln:7:12
     |vpiParent:
-    \_package: prim_pkg (prim_pkg::), file:${SURELOG_DIR}/tests/PackageValue/top.sv, line:1:1, endln:9:11
+    \_parameter: (work@prim_diff_decode.Impl), line:12:30, endln:12:34
     |vpiName:prim_pkg::impl_e
     |vpiInstance:
     \_package: prim_pkg (prim_pkg::), file:${SURELOG_DIR}/tests/PackageValue/top.sv, line:1:1, endln:9:11
     |vpiBaseTypespec:
-    \_ref_typespec: (prim_pkg::prim_pkg::impl_e)
+    \_ref_typespec: (work@prim_diff_decode.Impl.prim_pkg::impl_e)
       |vpiParent:
       \_enum_typespec: (prim_pkg::impl_e), line:4:3, endln:7:12
-      |vpiFullName:prim_pkg::prim_pkg::impl_e
+      |vpiFullName:work@prim_diff_decode.Impl.prim_pkg::impl_e
       |vpiActual:
       \_integer_typespec: , line:4:16, endln:4:23
     |vpiEnumConst:
@@ -1459,72 +1486,96 @@ design: (unnamed)
                             \_operation: , line:58:53, endln:59:72
                             |vpiName:riscv::SSTATUS_UIE
                             |vpiFullName:ariane_pkg::riscv::SSTATUS_UIE
+                            |vpiActual:
+                            \_parameter: (riscv::SSTATUS_UIE), line:39:29, endln:39:40
                           |vpiOperand:
                           \_ref_obj: (ariane_pkg::riscv::SSTATUS_SIE), line:59:54, endln:59:72
                             |vpiParent:
                             \_operation: , line:58:53, endln:59:72
                             |vpiName:riscv::SSTATUS_SIE
                             |vpiFullName:ariane_pkg::riscv::SSTATUS_SIE
+                            |vpiActual:
+                            \_parameter: (riscv::SSTATUS_SIE), line:40:29, endln:40:40
                         |vpiOperand:
                         \_ref_obj: (ariane_pkg::riscv::SSTATUS_SPIE), line:60:54, endln:60:73
                           |vpiParent:
                           \_operation: , line:58:53, endln:60:73
                           |vpiName:riscv::SSTATUS_SPIE
                           |vpiFullName:ariane_pkg::riscv::SSTATUS_SPIE
+                          |vpiActual:
+                          \_parameter: (riscv::SSTATUS_SPIE), line:41:29, endln:41:41
                       |vpiOperand:
                       \_ref_obj: (ariane_pkg::riscv::SSTATUS_SPP), line:61:54, endln:61:72
                         |vpiParent:
                         \_operation: , line:58:53, endln:61:72
                         |vpiName:riscv::SSTATUS_SPP
                         |vpiFullName:ariane_pkg::riscv::SSTATUS_SPP
+                        |vpiActual:
+                        \_parameter: (riscv::SSTATUS_SPP), line:42:29, endln:42:40
                     |vpiOperand:
                     \_ref_obj: (ariane_pkg::riscv::SSTATUS_FS), line:62:54, endln:62:71
                       |vpiParent:
                       \_operation: , line:58:53, endln:62:71
                       |vpiName:riscv::SSTATUS_FS
                       |vpiFullName:ariane_pkg::riscv::SSTATUS_FS
+                      |vpiActual:
+                      \_parameter: (riscv::SSTATUS_FS), line:43:29, endln:43:39
                   |vpiOperand:
                   \_ref_obj: (ariane_pkg::riscv::SSTATUS_XS), line:63:54, endln:63:71
                     |vpiParent:
                     \_operation: , line:58:53, endln:63:71
                     |vpiName:riscv::SSTATUS_XS
                     |vpiFullName:ariane_pkg::riscv::SSTATUS_XS
+                    |vpiActual:
+                    \_parameter: (riscv::SSTATUS_XS), line:44:29, endln:44:39
                 |vpiOperand:
                 \_ref_obj: (ariane_pkg::riscv::SSTATUS_SUM), line:64:54, endln:64:72
                   |vpiParent:
                   \_operation: , line:58:53, endln:64:72
                   |vpiName:riscv::SSTATUS_SUM
                   |vpiFullName:ariane_pkg::riscv::SSTATUS_SUM
+                  |vpiActual:
+                  \_parameter: (riscv::SSTATUS_SUM), line:45:29, endln:45:40
               |vpiOperand:
               \_ref_obj: (ariane_pkg::riscv::SSTATUS_MXR), line:65:54, endln:65:72
                 |vpiParent:
                 \_operation: , line:58:53, endln:65:72
                 |vpiName:riscv::SSTATUS_MXR
                 |vpiFullName:ariane_pkg::riscv::SSTATUS_MXR
+                |vpiActual:
+                \_parameter: (riscv::SSTATUS_MXR), line:46:29, endln:46:40
             |vpiOperand:
             \_ref_obj: (ariane_pkg::riscv::SSTATUS_UPIE), line:66:54, endln:66:73
               |vpiParent:
               \_operation: , line:58:53, endln:66:73
               |vpiName:riscv::SSTATUS_UPIE
               |vpiFullName:ariane_pkg::riscv::SSTATUS_UPIE
+              |vpiActual:
+              \_parameter: (riscv::SSTATUS_UPIE), line:47:29, endln:47:41
           |vpiOperand:
           \_ref_obj: (ariane_pkg::riscv::SSTATUS_SPIE), line:67:54, endln:67:73
             |vpiParent:
             \_operation: , line:58:53, endln:67:73
             |vpiName:riscv::SSTATUS_SPIE
             |vpiFullName:ariane_pkg::riscv::SSTATUS_SPIE
+            |vpiActual:
+            \_parameter: (riscv::SSTATUS_SPIE), line:41:29, endln:41:41
         |vpiOperand:
         \_ref_obj: (ariane_pkg::riscv::SSTATUS_UXL), line:68:54, endln:68:72
           |vpiParent:
           \_operation: , line:58:53, endln:68:72
           |vpiName:riscv::SSTATUS_UXL
           |vpiFullName:ariane_pkg::riscv::SSTATUS_UXL
+          |vpiActual:
+          \_parameter: (riscv::SSTATUS_UXL), line:48:29, endln:48:40
       |vpiOperand:
       \_ref_obj: (ariane_pkg::riscv::SSTATUS64_SD), line:69:54, endln:69:73
         |vpiParent:
         \_operation: , line:58:53, endln:69:73
         |vpiName:riscv::SSTATUS64_SD
         |vpiFullName:ariane_pkg::riscv::SSTATUS64_SD
+        |vpiActual:
+        \_parameter: (riscv::SSTATUS64_SD), line:49:29, endln:49:41
     |vpiLhs:
     \_parameter: (ariane_pkg::SMODE_STATUS_READ_MASK), line:58:28, endln:58:50
   |vpiDefName:ariane_pkg
@@ -1975,7 +2026,6 @@ design: (unnamed)
   \_parameter: (work@prim_diff_decode.Impl), line:12:30, endln:12:34
     |vpiParent:
     \_module_inst: work@prim_diff_decode (work@prim_diff_decode), file:${SURELOG_DIR}/tests/PackageValue/top.sv, line:11:1, endln:33:10
-    |UINT:1
     |vpiTypespec:
     \_ref_typespec: (work@prim_diff_decode.Impl)
       |vpiParent:
@@ -1990,52 +2040,15 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@prim_diff_decode (work@prim_diff_decode), file:${SURELOG_DIR}/tests/PackageValue/top.sv, line:11:1, endln:33:10
     |vpiRhs:
-    \_constant: , line:12:37, endln:12:47
+    \_ref_obj: (work@prim_diff_decode.prim_pkg::ImplGeneric), line:12:37, endln:12:58
       |vpiParent:
       \_param_assign: , line:12:30, endln:12:58
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiTypespec:
-      \_ref_typespec: (work@prim_diff_decode)
-        |vpiParent:
-        \_constant: , line:12:37, endln:12:47
-        |vpiFullName:work@prim_diff_decode
-        |vpiActual:
-        \_enum_typespec: (prim_pkg::impl_e), line:4:3, endln:7:12
-      |vpiConstType:9
+      |vpiName:prim_pkg::ImplGeneric
+      |vpiFullName:work@prim_diff_decode.prim_pkg::ImplGeneric
     |vpiLhs:
     \_parameter: (work@prim_diff_decode.Impl), line:12:30, endln:12:34
   |vpiTypedef:
   \_enum_typespec: (prim_pkg::impl_e), line:4:3, endln:7:12
-    |vpiParent:
-    \_module_inst: work@prim_diff_decode (work@prim_diff_decode), file:${SURELOG_DIR}/tests/PackageValue/top.sv, line:11:1, endln:33:10
-    |vpiName:prim_pkg::impl_e
-    |vpiInstance:
-    \_package: (prim_pkg), file:${SURELOG_DIR}/tests/PackageValue/top.sv, line:1:1, endln:9:11
-    |vpiBaseTypespec:
-    \_ref_typespec: (work@prim_diff_decode.prim_pkg::impl_e)
-      |vpiParent:
-      \_enum_typespec: (prim_pkg::impl_e), line:4:3, endln:7:12
-      |vpiFullName:work@prim_diff_decode.prim_pkg::impl_e
-      |vpiActual:
-      \_integer_typespec: , line:4:16, endln:4:23
-    |vpiEnumConst:
-    \_enum_const: (ImplGeneric), line:5:5, endln:5:20
-      |vpiParent:
-      \_enum_typespec: (prim_pkg::impl_e), line:4:3, endln:7:12
-      |vpiName:ImplGeneric
-      |UINT:1
-      |vpiDecompile:1
-      |vpiSize:64
-    |vpiEnumConst:
-    \_enum_const: (ImplXilinx), line:6:5, endln:6:20
-      |vpiParent:
-      \_enum_typespec: (prim_pkg::impl_e), line:4:3, endln:7:12
-      |vpiName:ImplXilinx
-      |UINT:0
-      |vpiDecompile:0
-      |vpiSize:64
   |vpiTypedef:
   \_import_typespec: (prim_pkg), line:15:12, endln:15:23
   |vpiDefName:work@prim_diff_decode
@@ -2129,12 +2142,6 @@ design: (unnamed)
               \_case_stmt: , line:21:7, endln:28:14
         |vpiAlwaysType:2
 \_weaklyReferenced:
-\_package: (prim_pkg), file:${SURELOG_DIR}/tests/PackageValue/top.sv, line:1:1, endln:9:11
-  |vpiName:prim_pkg
-\_integer_typespec: , line:4:16, endln:4:23
-  |vpiInstance:
-  \_package: (prim_pkg), file:${SURELOG_DIR}/tests/PackageValue/top.sv, line:1:1, endln:9:11
-  |vpiSigned:1
 \_integer_typespec: , line:4:16, endln:4:23
   |vpiInstance:
   \_package: prim_pkg (prim_pkg::), file:${SURELOG_DIR}/tests/PackageValue/top.sv, line:1:1, endln:9:11

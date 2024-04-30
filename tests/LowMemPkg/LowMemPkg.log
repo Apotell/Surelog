@@ -72,7 +72,6 @@ PARSER CACHE USED FOR: ${SURELOG_DIR}/tests/LowMemPkg/dut.sv
 [WRN:PA0205] ${SURELOG_DIR}/tests/LowMemPkg/wddr_pkg.sv:19:1: No timescale set for "wddr_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/LowMemPkg/dut.sv:4:1: No timescale set for "top".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/LowMemPkg/wddr_pkg.sv:19:1: Compile package "wddr_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/LowMemPkg/dut.sv:4:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
@@ -81,9 +80,9 @@ design                                                 1
 import_typespec                                        1
 include_file_info                                      1
 logic_net                                              2
-logic_typespec                                         3
+logic_typespec                                         2
 module_inst                                            1
-package                                                2
+package                                                1
 ref_typespec                                           1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LowMemPkg/slpp_all/surelog.uhdm ...
@@ -107,7 +106,7 @@ design: (unnamed)
   |vpiTypedef:
   \_logic_typespec: (wddr_pkg::my_logic), line:20:9, endln:20:14
     |vpiParent:
-    \_package: wddr_pkg (wddr_pkg::), file:${SURELOG_DIR}/tests/LowMemPkg/wddr_pkg.sv, line:19:1, endln:22:11
+    \_design: (unnamed)
     |vpiName:wddr_pkg::my_logic
     |vpiInstance:
     \_package: wddr_pkg (wddr_pkg::), file:${SURELOG_DIR}/tests/LowMemPkg/wddr_pkg.sv, line:19:1, endln:22:11
@@ -118,12 +117,7 @@ design: (unnamed)
   \_design: (unnamed)
   |vpiFullName:work@top
   |vpiTypedef:
-  \_logic_typespec: (my_logic), line:20:9, endln:20:14
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LowMemPkg/dut.sv, line:4:1, endln:8:10
-    |vpiName:my_logic
-    |vpiInstance:
-    \_package: (wddr_pkg), file:${SURELOG_DIR}/tests/LowMemPkg/wddr_pkg.sv, line:19:1, endln:22:11
+  \_logic_typespec: (wddr_pkg::my_logic), line:20:9, endln:20:14
   |vpiDefName:work@top
   |vpiNet:
   \_logic_net: (work@top.a), line:5:13, endln:5:14
@@ -146,10 +140,8 @@ design: (unnamed)
     |vpiFullName:work@top.b
     |vpiNetType:36
 |vpiTypedef:
-\_logic_typespec: (my_logic), line:20:9, endln:20:14
+\_logic_typespec: (wddr_pkg::my_logic), line:20:9, endln:20:14
 \_weaklyReferenced:
-\_package: (wddr_pkg), file:${SURELOG_DIR}/tests/LowMemPkg/wddr_pkg.sv, line:19:1, endln:22:11
-  |vpiName:wddr_pkg
 \_logic_typespec: , line:6:4, endln:6:9
 ===================
 [  FATAL] : 0

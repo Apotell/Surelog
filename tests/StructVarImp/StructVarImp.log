@@ -211,7 +211,6 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/StructVarImp/dut.sv:1:1: No timescale set for "flash_ctrl_reg_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/StructVarImp/dut.sv:33:1: No timescale set for "top".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/StructVarImp/dut.sv:1:1: Compile package "flash_ctrl_reg_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/StructVarImp/dut.sv:33:1: Compile module "work@top".
 AST_DEBUG_BEGIN
 LIB:  work
@@ -475,30 +474,30 @@ AST_DEBUG_END
 class_defn                                             8
 class_typespec                                         4
 class_var                                              3
-constant                                              29
+constant                                              19
 design                                                 1
 enum_const                                             5
 enum_typespec                                          1
 enum_var                                               1
 function                                               9
 import_typespec                                        1
-int_typespec                                          23
+int_typespec                                          19
 int_var                                                4
 io_decl                                               11
 logic_net                                              2
-logic_typespec                                        12
+logic_typespec                                         6
 logic_var                                              1
-module_inst                                            3
-package                                                4
+module_inst                                            2
+package                                                2
 packed_array_typespec                                  1
-param_assign                                          10
-parameter                                             12
-range                                                  5
+param_assign                                           6
+parameter                                              8
+range                                                  3
 ref_obj                                                1
-ref_typespec                                          61
-struct_typespec                                       14
+ref_typespec                                          41
+struct_typespec                                        7
 task                                                   9
-typespec_member                                       24
+typespec_member                                       12
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/StructVarImp/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/StructVarImp/slpp_all/checker/surelog.chk.html ...
@@ -514,6 +513,36 @@ design: (unnamed)
   |vpiName:builtin
   |vpiFullName:builtin::
   |vpiDefName:builtin
+  |vpiClassDefn:
+  \_class_defn: (builtin::any_sverilog_class)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:any_sverilog_class
+    |vpiFullName:builtin::any_sverilog_class
+  |vpiClassDefn:
+  \_class_defn: (builtin::array)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:array
+    |vpiFullName:builtin::array
+  |vpiClassDefn:
+  \_class_defn: (builtin::queue)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:queue
+    |vpiFullName:builtin::queue
+  |vpiClassDefn:
+  \_class_defn: (builtin::string)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:string
+    |vpiFullName:builtin::string
+  |vpiClassDefn:
+  \_class_defn: (builtin::system)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:system
+    |vpiFullName:builtin::system
 |uhdmallPackages:
 \_package: flash_ctrl_reg_pkg (flash_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
   |vpiParent:
@@ -1187,7 +1216,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:4:17, endln:4:27
       |vpiDecompile:2
-      |vpiSize:32
+      |vpiSize:64
       |UINT:2
       |vpiTypespec:
       \_ref_typespec: (work@top)
@@ -1222,7 +1251,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:5:17, endln:5:31
       |vpiDecompile:8
-      |vpiSize:32
+      |vpiSize:64
       |UINT:8
       |vpiTypespec:
       \_ref_typespec: (work@top)
@@ -1250,114 +1279,6 @@ design: (unnamed)
       |vpiImported:flash_ctrl_reg_pkg
   |vpiTypedef:
   \_struct_typespec: (flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t), line:7:11, endln:26:4
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:33:1, endln:38:10
-    |vpiName:flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t
-    |vpiInstance:
-    \_package: (flash_ctrl_reg_pkg), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
-    |vpiPacked:1
-    |vpiTypespecMember:
-    \_typespec_member: (en), line:10:7, endln:10:9
-      |vpiParent:
-      \_struct_typespec: (flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t), line:7:11, endln:26:4
-      |vpiName:en
-      |vpiTypespec:
-      \_ref_typespec: (work@top.flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t.en)
-        |vpiParent:
-        \_typespec_member: (en), line:10:7, endln:10:9
-        |vpiFullName:work@top.flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t.en
-        |vpiActual:
-        \_struct_typespec: , line:8:5, endln:8:11
-      |vpiRefFile:${SURELOG_DIR}/tests/StructVarImp/dut.sv
-      |vpiRefLineNo:8
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:10
-      |vpiRefEndColumnNo:6
-    |vpiTypespecMember:
-    \_typespec_member: (rd_en), line:13:7, endln:13:12
-      |vpiParent:
-      \_struct_typespec: (flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t), line:7:11, endln:26:4
-      |vpiName:rd_en
-      |vpiTypespec:
-      \_ref_typespec: (work@top.flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t.rd_en)
-        |vpiParent:
-        \_typespec_member: (rd_en), line:13:7, endln:13:12
-        |vpiFullName:work@top.flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t.rd_en
-        |vpiActual:
-        \_struct_typespec: , line:11:5, endln:11:11
-      |vpiRefFile:${SURELOG_DIR}/tests/StructVarImp/dut.sv
-      |vpiRefLineNo:11
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:13
-      |vpiRefEndColumnNo:6
-    |vpiTypespecMember:
-    \_typespec_member: (prog_en), line:16:7, endln:16:14
-      |vpiParent:
-      \_struct_typespec: (flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t), line:7:11, endln:26:4
-      |vpiName:prog_en
-      |vpiTypespec:
-      \_ref_typespec: (work@top.flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t.prog_en)
-        |vpiParent:
-        \_typespec_member: (prog_en), line:16:7, endln:16:14
-        |vpiFullName:work@top.flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t.prog_en
-        |vpiActual:
-        \_struct_typespec: , line:14:5, endln:14:11
-      |vpiRefFile:${SURELOG_DIR}/tests/StructVarImp/dut.sv
-      |vpiRefLineNo:14
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:16
-      |vpiRefEndColumnNo:6
-    |vpiTypespecMember:
-    \_typespec_member: (erase_en), line:19:7, endln:19:15
-      |vpiParent:
-      \_struct_typespec: (flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t), line:7:11, endln:26:4
-      |vpiName:erase_en
-      |vpiTypespec:
-      \_ref_typespec: (work@top.flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t.erase_en)
-        |vpiParent:
-        \_typespec_member: (erase_en), line:19:7, endln:19:15
-        |vpiFullName:work@top.flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t.erase_en
-        |vpiActual:
-        \_struct_typespec: , line:17:5, endln:17:11
-      |vpiRefFile:${SURELOG_DIR}/tests/StructVarImp/dut.sv
-      |vpiRefLineNo:17
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:19
-      |vpiRefEndColumnNo:6
-    |vpiTypespecMember:
-    \_typespec_member: (base), line:22:7, endln:22:11
-      |vpiParent:
-      \_struct_typespec: (flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t), line:7:11, endln:26:4
-      |vpiName:base
-      |vpiTypespec:
-      \_ref_typespec: (work@top.flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t.base)
-        |vpiParent:
-        \_typespec_member: (base), line:22:7, endln:22:11
-        |vpiFullName:work@top.flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t.base
-        |vpiActual:
-        \_struct_typespec: , line:20:5, endln:20:11
-      |vpiRefFile:${SURELOG_DIR}/tests/StructVarImp/dut.sv
-      |vpiRefLineNo:20
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:22
-      |vpiRefEndColumnNo:6
-    |vpiTypespecMember:
-    \_typespec_member: (size), line:25:7, endln:25:11
-      |vpiParent:
-      \_struct_typespec: (flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t), line:7:11, endln:26:4
-      |vpiName:size
-      |vpiTypespec:
-      \_ref_typespec: (work@top.flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t.size)
-        |vpiParent:
-        \_typespec_member: (size), line:25:7, endln:25:11
-        |vpiFullName:work@top.flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t.size
-        |vpiActual:
-        \_struct_typespec: , line:23:5, endln:23:11
-      |vpiRefFile:${SURELOG_DIR}/tests/StructVarImp/dut.sv
-      |vpiRefLineNo:23
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:25
-      |vpiRefEndColumnNo:6
   |vpiTypedef:
   \_import_typespec: (flash_ctrl_reg_pkg), line:34:10, endln:34:31
   |vpiDefName:work@top
@@ -1375,223 +1296,12 @@ design: (unnamed)
     |vpiName:region_cfgs
     |vpiFullName:work@top.region_cfgs
   |vpiNet:
-  \_logic_net: (work@top.MpRegions), line:36:43, endln:36:52
+  \_logic_net: (MpRegions), line:36:43, endln:36:52
     |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:33:1, endln:38:10
+    \_range: , line:36:42, endln:36:55
     |vpiName:MpRegions
-    |vpiFullName:work@top.MpRegions
     |vpiNetType:1
 \_weaklyReferenced:
-\_package: (flash_ctrl_reg_pkg), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
-  |vpiName:flash_ctrl_reg_pkg
-\_struct_typespec: , line:8:5, endln:8:11
-  |vpiParent:
-  \_typespec_member: (en), line:10:7, endln:10:9
-  |vpiInstance:
-  \_package: (flash_ctrl_reg_pkg), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (q), line:9:20, endln:9:21
-    |vpiParent:
-    \_struct_typespec: , line:8:5, endln:8:11
-    |vpiName:q
-    |vpiTypespec:
-    \_ref_typespec: (work@top.flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t.en.q)
-      |vpiParent:
-      \_typespec_member: (q), line:9:20, endln:9:21
-      |vpiFullName:work@top.flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t.en.q
-      |vpiActual:
-      \_logic_typespec: , line:9:7, endln:9:12
-    |vpiRefFile:${SURELOG_DIR}/tests/StructVarImp/dut.sv
-    |vpiRefLineNo:9
-    |vpiRefColumnNo:7
-    |vpiRefEndLineNo:9
-    |vpiRefEndColumnNo:12
-\_logic_typespec: , line:9:7, endln:9:12
-  |vpiParent:
-  \_typespec_member: (q), line:9:20, endln:9:21
-  |vpiInstance:
-  \_package: (flash_ctrl_reg_pkg), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
-\_struct_typespec: , line:11:5, endln:11:11
-  |vpiParent:
-  \_typespec_member: (rd_en), line:13:7, endln:13:12
-  |vpiInstance:
-  \_package: (flash_ctrl_reg_pkg), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (q), line:12:20, endln:12:21
-    |vpiParent:
-    \_struct_typespec: , line:11:5, endln:11:11
-    |vpiName:q
-    |vpiTypespec:
-    \_ref_typespec: (work@top.flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t.rd_en.q)
-      |vpiParent:
-      \_typespec_member: (q), line:12:20, endln:12:21
-      |vpiFullName:work@top.flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t.rd_en.q
-      |vpiActual:
-      \_logic_typespec: , line:12:7, endln:12:12
-    |vpiRefFile:${SURELOG_DIR}/tests/StructVarImp/dut.sv
-    |vpiRefLineNo:12
-    |vpiRefColumnNo:7
-    |vpiRefEndLineNo:12
-    |vpiRefEndColumnNo:12
-\_logic_typespec: , line:12:7, endln:12:12
-  |vpiParent:
-  \_typespec_member: (q), line:12:20, endln:12:21
-  |vpiInstance:
-  \_package: (flash_ctrl_reg_pkg), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
-\_struct_typespec: , line:14:5, endln:14:11
-  |vpiParent:
-  \_typespec_member: (prog_en), line:16:7, endln:16:14
-  |vpiInstance:
-  \_package: (flash_ctrl_reg_pkg), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (q), line:15:20, endln:15:21
-    |vpiParent:
-    \_struct_typespec: , line:14:5, endln:14:11
-    |vpiName:q
-    |vpiTypespec:
-    \_ref_typespec: (work@top.flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t.prog_en.q)
-      |vpiParent:
-      \_typespec_member: (q), line:15:20, endln:15:21
-      |vpiFullName:work@top.flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t.prog_en.q
-      |vpiActual:
-      \_logic_typespec: , line:15:7, endln:15:12
-    |vpiRefFile:${SURELOG_DIR}/tests/StructVarImp/dut.sv
-    |vpiRefLineNo:15
-    |vpiRefColumnNo:7
-    |vpiRefEndLineNo:15
-    |vpiRefEndColumnNo:12
-\_logic_typespec: , line:15:7, endln:15:12
-  |vpiParent:
-  \_typespec_member: (q), line:15:20, endln:15:21
-  |vpiInstance:
-  \_package: (flash_ctrl_reg_pkg), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
-\_struct_typespec: , line:17:5, endln:17:11
-  |vpiParent:
-  \_typespec_member: (erase_en), line:19:7, endln:19:15
-  |vpiInstance:
-  \_package: (flash_ctrl_reg_pkg), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (q), line:18:20, endln:18:21
-    |vpiParent:
-    \_struct_typespec: , line:17:5, endln:17:11
-    |vpiName:q
-    |vpiTypespec:
-    \_ref_typespec: (work@top.flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t.erase_en.q)
-      |vpiParent:
-      \_typespec_member: (q), line:18:20, endln:18:21
-      |vpiFullName:work@top.flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t.erase_en.q
-      |vpiActual:
-      \_logic_typespec: , line:18:7, endln:18:12
-    |vpiRefFile:${SURELOG_DIR}/tests/StructVarImp/dut.sv
-    |vpiRefLineNo:18
-    |vpiRefColumnNo:7
-    |vpiRefEndLineNo:18
-    |vpiRefEndColumnNo:12
-\_logic_typespec: , line:18:7, endln:18:12
-  |vpiParent:
-  \_typespec_member: (q), line:18:20, endln:18:21
-  |vpiInstance:
-  \_package: (flash_ctrl_reg_pkg), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
-\_struct_typespec: , line:20:5, endln:20:11
-  |vpiParent:
-  \_typespec_member: (base), line:22:7, endln:22:11
-  |vpiInstance:
-  \_package: (flash_ctrl_reg_pkg), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (q), line:21:20, endln:21:21
-    |vpiParent:
-    \_struct_typespec: , line:20:5, endln:20:11
-    |vpiName:q
-    |vpiTypespec:
-    \_ref_typespec: (work@top.flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t.base.q)
-      |vpiParent:
-      \_typespec_member: (q), line:21:20, endln:21:21
-      |vpiFullName:work@top.flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t.base.q
-      |vpiActual:
-      \_logic_typespec: , line:21:7, endln:21:18
-    |vpiRefFile:${SURELOG_DIR}/tests/StructVarImp/dut.sv
-    |vpiRefLineNo:21
-    |vpiRefColumnNo:7
-    |vpiRefEndLineNo:21
-    |vpiRefEndColumnNo:18
-\_logic_typespec: , line:21:7, endln:21:18
-  |vpiParent:
-  \_typespec_member: (q), line:21:20, endln:21:21
-  |vpiInstance:
-  \_package: (flash_ctrl_reg_pkg), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
-  |vpiRange:
-  \_range: , line:21:13, endln:21:18
-    |vpiParent:
-    \_logic_typespec: , line:21:7, endln:21:18
-    |vpiLeftRange:
-    \_constant: , line:21:14, endln:21:15
-      |vpiParent:
-      \_range: , line:21:13, endln:21:18
-      |vpiDecompile:8
-      |vpiSize:64
-      |UINT:8
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:21:16, endln:21:17
-      |vpiParent:
-      \_range: , line:21:13, endln:21:18
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_struct_typespec: , line:23:5, endln:23:11
-  |vpiParent:
-  \_typespec_member: (size), line:25:7, endln:25:11
-  |vpiInstance:
-  \_package: (flash_ctrl_reg_pkg), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (q), line:24:20, endln:24:21
-    |vpiParent:
-    \_struct_typespec: , line:23:5, endln:23:11
-    |vpiName:q
-    |vpiTypespec:
-    \_ref_typespec: (work@top.flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t.size.q)
-      |vpiParent:
-      \_typespec_member: (q), line:24:20, endln:24:21
-      |vpiFullName:work@top.flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t.size.q
-      |vpiActual:
-      \_logic_typespec: , line:24:7, endln:24:18
-    |vpiRefFile:${SURELOG_DIR}/tests/StructVarImp/dut.sv
-    |vpiRefLineNo:24
-    |vpiRefColumnNo:7
-    |vpiRefEndLineNo:24
-    |vpiRefEndColumnNo:18
-\_logic_typespec: , line:24:7, endln:24:18
-  |vpiParent:
-  \_typespec_member: (q), line:24:20, endln:24:21
-  |vpiInstance:
-  \_package: (flash_ctrl_reg_pkg), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
-  |vpiRange:
-  \_range: , line:24:13, endln:24:18
-    |vpiParent:
-    \_logic_typespec: , line:24:7, endln:24:18
-    |vpiLeftRange:
-    \_constant: , line:24:14, endln:24:15
-      |vpiParent:
-      \_range: , line:24:13, endln:24:18
-      |vpiDecompile:8
-      |vpiSize:64
-      |UINT:8
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:24:16, endln:24:17
-      |vpiParent:
-      \_range: , line:24:13, endln:24:18
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 \_int_typespec: , line:4:13, endln:4:16
   |vpiParent:
   \_parameter: (flash_ctrl_reg_pkg::NBanks), line:4:17, endln:4:23
@@ -1605,8 +1315,6 @@ design: (unnamed)
   \_package: flash_ctrl_reg_pkg (flash_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
   |vpiSigned:1
 \_struct_typespec: , line:8:5, endln:8:11
-  |vpiParent:
-  \_typespec_member: (en), line:10:7, endln:10:9
   |vpiInstance:
   \_package: flash_ctrl_reg_pkg (flash_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
   |vpiPacked:1
@@ -1616,10 +1324,10 @@ design: (unnamed)
     \_struct_typespec: , line:8:5, endln:8:11
     |vpiName:q
     |vpiTypespec:
-    \_ref_typespec: (flash_ctrl_reg_pkg::flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t::en::q)
+    \_ref_typespec: (q)
       |vpiParent:
       \_typespec_member: (q), line:9:20, endln:9:21
-      |vpiFullName:flash_ctrl_reg_pkg::flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t::en::q
+      |vpiFullName:q
       |vpiActual:
       \_logic_typespec: , line:9:7, endln:9:12
     |vpiRefFile:${SURELOG_DIR}/tests/StructVarImp/dut.sv
@@ -1628,13 +1336,9 @@ design: (unnamed)
     |vpiRefEndLineNo:9
     |vpiRefEndColumnNo:12
 \_logic_typespec: , line:9:7, endln:9:12
-  |vpiParent:
-  \_typespec_member: (q), line:9:20, endln:9:21
   |vpiInstance:
   \_package: flash_ctrl_reg_pkg (flash_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
 \_struct_typespec: , line:11:5, endln:11:11
-  |vpiParent:
-  \_typespec_member: (rd_en), line:13:7, endln:13:12
   |vpiInstance:
   \_package: flash_ctrl_reg_pkg (flash_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
   |vpiPacked:1
@@ -1644,10 +1348,10 @@ design: (unnamed)
     \_struct_typespec: , line:11:5, endln:11:11
     |vpiName:q
     |vpiTypespec:
-    \_ref_typespec: (flash_ctrl_reg_pkg::flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t::rd_en::q)
+    \_ref_typespec: (q)
       |vpiParent:
       \_typespec_member: (q), line:12:20, endln:12:21
-      |vpiFullName:flash_ctrl_reg_pkg::flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t::rd_en::q
+      |vpiFullName:q
       |vpiActual:
       \_logic_typespec: , line:12:7, endln:12:12
     |vpiRefFile:${SURELOG_DIR}/tests/StructVarImp/dut.sv
@@ -1656,13 +1360,9 @@ design: (unnamed)
     |vpiRefEndLineNo:12
     |vpiRefEndColumnNo:12
 \_logic_typespec: , line:12:7, endln:12:12
-  |vpiParent:
-  \_typespec_member: (q), line:12:20, endln:12:21
   |vpiInstance:
   \_package: flash_ctrl_reg_pkg (flash_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
 \_struct_typespec: , line:14:5, endln:14:11
-  |vpiParent:
-  \_typespec_member: (prog_en), line:16:7, endln:16:14
   |vpiInstance:
   \_package: flash_ctrl_reg_pkg (flash_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
   |vpiPacked:1
@@ -1672,10 +1372,10 @@ design: (unnamed)
     \_struct_typespec: , line:14:5, endln:14:11
     |vpiName:q
     |vpiTypespec:
-    \_ref_typespec: (flash_ctrl_reg_pkg::flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t::prog_en::q)
+    \_ref_typespec: (q)
       |vpiParent:
       \_typespec_member: (q), line:15:20, endln:15:21
-      |vpiFullName:flash_ctrl_reg_pkg::flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t::prog_en::q
+      |vpiFullName:q
       |vpiActual:
       \_logic_typespec: , line:15:7, endln:15:12
     |vpiRefFile:${SURELOG_DIR}/tests/StructVarImp/dut.sv
@@ -1684,13 +1384,9 @@ design: (unnamed)
     |vpiRefEndLineNo:15
     |vpiRefEndColumnNo:12
 \_logic_typespec: , line:15:7, endln:15:12
-  |vpiParent:
-  \_typespec_member: (q), line:15:20, endln:15:21
   |vpiInstance:
   \_package: flash_ctrl_reg_pkg (flash_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
 \_struct_typespec: , line:17:5, endln:17:11
-  |vpiParent:
-  \_typespec_member: (erase_en), line:19:7, endln:19:15
   |vpiInstance:
   \_package: flash_ctrl_reg_pkg (flash_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
   |vpiPacked:1
@@ -1700,10 +1396,10 @@ design: (unnamed)
     \_struct_typespec: , line:17:5, endln:17:11
     |vpiName:q
     |vpiTypespec:
-    \_ref_typespec: (flash_ctrl_reg_pkg::flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t::erase_en::q)
+    \_ref_typespec: (q)
       |vpiParent:
       \_typespec_member: (q), line:18:20, endln:18:21
-      |vpiFullName:flash_ctrl_reg_pkg::flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t::erase_en::q
+      |vpiFullName:q
       |vpiActual:
       \_logic_typespec: , line:18:7, endln:18:12
     |vpiRefFile:${SURELOG_DIR}/tests/StructVarImp/dut.sv
@@ -1712,13 +1408,9 @@ design: (unnamed)
     |vpiRefEndLineNo:18
     |vpiRefEndColumnNo:12
 \_logic_typespec: , line:18:7, endln:18:12
-  |vpiParent:
-  \_typespec_member: (q), line:18:20, endln:18:21
   |vpiInstance:
   \_package: flash_ctrl_reg_pkg (flash_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
 \_struct_typespec: , line:20:5, endln:20:11
-  |vpiParent:
-  \_typespec_member: (base), line:22:7, endln:22:11
   |vpiInstance:
   \_package: flash_ctrl_reg_pkg (flash_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
   |vpiPacked:1
@@ -1728,10 +1420,10 @@ design: (unnamed)
     \_struct_typespec: , line:20:5, endln:20:11
     |vpiName:q
     |vpiTypespec:
-    \_ref_typespec: (flash_ctrl_reg_pkg::flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t::base::q)
+    \_ref_typespec: (q)
       |vpiParent:
       \_typespec_member: (q), line:21:20, endln:21:21
-      |vpiFullName:flash_ctrl_reg_pkg::flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t::base::q
+      |vpiFullName:q
       |vpiActual:
       \_logic_typespec: , line:21:7, endln:21:18
     |vpiRefFile:${SURELOG_DIR}/tests/StructVarImp/dut.sv
@@ -1740,8 +1432,6 @@ design: (unnamed)
     |vpiRefEndLineNo:21
     |vpiRefEndColumnNo:18
 \_logic_typespec: , line:21:7, endln:21:18
-  |vpiParent:
-  \_typespec_member: (q), line:21:20, endln:21:21
   |vpiInstance:
   \_package: flash_ctrl_reg_pkg (flash_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
   |vpiRange:
@@ -1765,8 +1455,6 @@ design: (unnamed)
       |UINT:0
       |vpiConstType:9
 \_struct_typespec: , line:23:5, endln:23:11
-  |vpiParent:
-  \_typespec_member: (size), line:25:7, endln:25:11
   |vpiInstance:
   \_package: flash_ctrl_reg_pkg (flash_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
   |vpiPacked:1
@@ -1776,10 +1464,10 @@ design: (unnamed)
     \_struct_typespec: , line:23:5, endln:23:11
     |vpiName:q
     |vpiTypespec:
-    \_ref_typespec: (flash_ctrl_reg_pkg::flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t::size::q)
+    \_ref_typespec: (q)
       |vpiParent:
       \_typespec_member: (q), line:24:20, endln:24:21
-      |vpiFullName:flash_ctrl_reg_pkg::flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t::size::q
+      |vpiFullName:q
       |vpiActual:
       \_logic_typespec: , line:24:7, endln:24:18
     |vpiRefFile:${SURELOG_DIR}/tests/StructVarImp/dut.sv
@@ -1788,8 +1476,6 @@ design: (unnamed)
     |vpiRefEndLineNo:24
     |vpiRefEndColumnNo:18
 \_logic_typespec: , line:24:7, endln:24:18
-  |vpiParent:
-  \_typespec_member: (q), line:24:20, endln:24:21
   |vpiInstance:
   \_package: flash_ctrl_reg_pkg (flash_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
   |vpiRange:
@@ -1816,37 +1502,37 @@ design: (unnamed)
   |vpiParent:
   \_ref_typespec: (work@top.NBanks)
   |vpiInstance:
-  \_package: (flash_ctrl_reg_pkg), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
+  \_package: flash_ctrl_reg_pkg (flash_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
   |vpiSigned:1
 \_int_typespec: , line:5:13, endln:5:16
   |vpiParent:
   \_ref_typespec: (work@top.NumRegions)
   |vpiInstance:
-  \_package: (flash_ctrl_reg_pkg), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
+  \_package: flash_ctrl_reg_pkg (flash_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
   |vpiSigned:1
 \_int_typespec: , line:4:13, endln:4:16
   |vpiParent:
   \_ref_typespec: (work@top)
   |vpiInstance:
-  \_package: (flash_ctrl_reg_pkg), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
+  \_package: flash_ctrl_reg_pkg (flash_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
   |vpiSigned:1
 \_int_typespec: , line:4:13, endln:4:16
   |vpiParent:
   \_ref_typespec: (work@top.NBanks)
   |vpiInstance:
-  \_package: (flash_ctrl_reg_pkg), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
+  \_package: flash_ctrl_reg_pkg (flash_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
   |vpiSigned:1
 \_int_typespec: , line:5:13, endln:5:16
   |vpiParent:
   \_ref_typespec: (work@top)
   |vpiInstance:
-  \_package: (flash_ctrl_reg_pkg), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
+  \_package: flash_ctrl_reg_pkg (flash_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
   |vpiSigned:1
 \_int_typespec: , line:5:13, endln:5:16
   |vpiParent:
   \_ref_typespec: (work@top.NumRegions)
   |vpiInstance:
-  \_package: (flash_ctrl_reg_pkg), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
+  \_package: flash_ctrl_reg_pkg (flash_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/StructVarImp/dut.sv, line:1:1, endln:29:11
   |vpiSigned:1
 \_class_typespec: 
   |vpiClassDefn:
@@ -1875,26 +1561,27 @@ design: (unnamed)
   |vpiSigned:1
 \_int_typespec: , line:66:26, endln:66:29
   |vpiSigned:1
+\_range: , line:36:42, endln:36:55
+  |vpiParent:
+  \_packed_array_typespec: , line:36:3, endln:36:55
+  |vpiLeftRange:
+  \_ref_obj: (MpRegions), line:36:43, endln:36:52
+    |vpiParent:
+    \_range: , line:36:42, endln:36:55
+    |vpiName:MpRegions
+    |vpiActual:
+    \_logic_net: (MpRegions), line:36:43, endln:36:52
+  |vpiRightRange:
+  \_constant: , line:36:53, endln:36:54
+    |vpiParent:
+    \_range: , line:36:42, endln:36:55
+    |vpiDecompile:0
+    |vpiSize:64
+    |UINT:0
+    |vpiConstType:9
 \_packed_array_typespec: , line:36:3, endln:36:55
   |vpiRange:
   \_range: , line:36:42, endln:36:55
-    |vpiParent:
-    \_packed_array_typespec: , line:36:3, endln:36:55
-    |vpiLeftRange:
-    \_ref_obj: (MpRegions), line:36:43, endln:36:52
-      |vpiParent:
-      \_range: , line:36:42, endln:36:55
-      |vpiName:MpRegions
-      |vpiActual:
-      \_logic_net: (work@top.MpRegions), line:36:43, endln:36:52
-    |vpiRightRange:
-    \_constant: , line:36:53, endln:36:54
-      |vpiParent:
-      \_range: , line:36:42, endln:36:55
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
   |vpiElemTypespec:
   \_ref_typespec: 
     |vpiParent:

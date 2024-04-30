@@ -5,7 +5,6 @@
 [WRN:PA0205] ${SURELOG_DIR}/tests/ForElab/top.v:16:1: No timescale set for "prim_arbiter_tree".
 [WRN:PA0205] ${SURELOG_DIR}/tests/ForElab/top.v:49:1: No timescale set for "tlul_socket_m1".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/ForElab/top.v:1:1: Compile package "tlul_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/ForElab/top.v:16:1: Compile module "work@prim_arbiter_tree".
 [INF:CP0303] ${SURELOG_DIR}/tests/ForElab/top.v:49:1: Compile module "work@tlul_socket_m1".
 [INF:UH0706] Creating UHDM Model...
@@ -14,7 +13,7 @@ assignment                                             1
 begin                                                  1
 bit_select                                             1
 bit_typespec                                           1
-constant                                              19
+constant                                              14
 cont_assign                                            1
 design                                                 1
 gen_if_else                                            3
@@ -22,18 +21,18 @@ int_typespec                                           3
 logic_net                                              2
 logic_typespec                                         3
 logic_var                                              1
-module_inst                                            3
+module_inst                                            2
 named_begin                                            5
 operation                                              5
-package                                                2
-param_assign                                           8
-parameter                                              8
+package                                                1
+param_assign                                           6
+parameter                                              6
 port                                                   4
 range                                                  2
 ref_module                                             1
-ref_obj                                                7
-ref_typespec                                          18
-string_typespec                                        4
+ref_obj                                                9
+ref_typespec                                          13
+string_typespec                                        1
 sys_func_call                                          1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ForElab/slpp_all/surelog.uhdm ...
@@ -373,20 +372,13 @@ design: (unnamed)
       \_gen_if_else: 
       |vpiOpType:14
       |vpiOperand:
-      \_constant: , line:52:7, endln:52:17
+      \_ref_obj: (work@tlul_socket_m1.tlul_pkg::ArbiterImpl), line:52:7, endln:52:28
         |vpiParent:
         \_operation: , line:52:7, endln:52:37
-        |vpiDecompile:"BINTREE"
-        |vpiSize:56
-        |STRING:BINTREE
-        |vpiTypespec:
-        \_ref_typespec: (work@tlul_socket_m1)
-          |vpiParent:
-          \_constant: , line:52:7, endln:52:17
-          |vpiFullName:work@tlul_socket_m1
-          |vpiActual:
-          \_string_typespec: 
-        |vpiConstType:6
+        |vpiName:tlul_pkg::ArbiterImpl
+        |vpiFullName:work@tlul_socket_m1.tlul_pkg::ArbiterImpl
+        |vpiActual:
+        \_parameter: (tlul_pkg::ArbiterImpl), line:9:13, endln:9:24
       |vpiOperand:
       \_constant: , line:52:32, endln:52:37
         |vpiParent:
@@ -416,20 +408,11 @@ design: (unnamed)
           \_gen_if_else: , line:54:12, endln:64:6
           |vpiOpType:14
           |vpiOperand:
-          \_constant: , line:54:16, endln:54:26
+          \_ref_obj: (work@tlul_socket_m1.tlul_pkg::ArbiterImpl), line:54:16, endln:54:37
             |vpiParent:
             \_operation: , line:54:16, endln:54:50
-            |vpiDecompile:"BINTREE"
-            |vpiSize:56
-            |STRING:BINTREE
-            |vpiTypespec:
-            \_ref_typespec: (work@tlul_socket_m1)
-              |vpiParent:
-              \_constant: , line:54:16, endln:54:26
-              |vpiFullName:work@tlul_socket_m1
-              |vpiActual:
-              \_string_typespec: 
-            |vpiConstType:6
+            |vpiName:tlul_pkg::ArbiterImpl
+            |vpiFullName:work@tlul_socket_m1.tlul_pkg::ArbiterImpl
           |vpiOperand:
           \_constant: , line:54:41, endln:54:50
             |vpiParent:
@@ -509,12 +492,6 @@ design: (unnamed)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
-\_string_typespec: 
-  |vpiParent:
-  \_ref_typespec: (work@tlul_socket_m1)
-\_string_typespec: 
-  |vpiParent:
-  \_ref_typespec: (work@tlul_socket_m1)
 \_logic_typespec: , line:21:9, endln:21:9
 \_logic_typespec: , line:22:9, endln:22:9
 ===================

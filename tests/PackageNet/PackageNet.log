@@ -114,28 +114,27 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackageNet/dut.sv:1:1: No timescale set for "my_package1".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackageNet/dut.sv:13:1: No timescale set for "test".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/PackageNet/dut.sv:1:1: Compile package "my_package1".
 [INF:CP0303] ${SURELOG_DIR}/tests/PackageNet/dut.sv:13:1: Compile module "work@test".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             1
 begin                                                  1
-constant                                              29
+constant                                              17
 design                                                 1
 import_typespec                                        1
 initial                                                1
-int_typespec                                          12
+int_typespec                                           8
 logic_net                                              2
-logic_typespec                                         4
-module_inst                                            2
+logic_typespec                                         3
+module_inst                                            1
 operation                                              1
-package                                                2
-packed_array_typespec                                  2
-param_assign                                          10
-parameter                                             12
-range                                                  6
-ref_obj                                                1
-ref_typespec                                          24
+package                                                1
+packed_array_typespec                                  1
+param_assign                                           6
+parameter                                              8
+range                                                  4
+ref_obj                                                3
+ref_typespec                                          16
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageNet/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PackageNet/slpp_all/checker/surelog.chk.html ...
@@ -307,7 +306,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:3:12, endln:3:18
       |vpiDecompile:1
-      |vpiSize:32
+      |vpiSize:64
       |UINT:1
       |vpiTypespec:
       \_ref_typespec: (work@test)
@@ -341,7 +340,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:4:12, endln:4:18
       |vpiDecompile:2
-      |vpiSize:32
+      |vpiSize:64
       |UINT:2
       |vpiTypespec:
       \_ref_typespec: (work@test)
@@ -368,32 +367,7 @@ design: (unnamed)
       |vpiFullName:work@test.p2
       |vpiImported:my_package1
   |vpiTypedef:
-  \_logic_typespec: (word), line:6:9, endln:6:20
-    |vpiParent:
-    \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/PackageNet/dut.sv, line:13:1, endln:21:10
-    |vpiName:word
-    |vpiInstance:
-    \_package: (my_package1), file:${SURELOG_DIR}/tests/PackageNet/dut.sv, line:1:1, endln:10:11
-    |vpiRange:
-    \_range: , line:6:15, endln:6:20
-      |vpiParent:
-      \_logic_typespec: (word), line:6:9, endln:6:20
-      |vpiLeftRange:
-      \_constant: , line:6:16, endln:6:17
-        |vpiParent:
-        \_range: , line:6:15, endln:6:20
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-      |vpiRightRange:
-      \_constant: , line:6:18, endln:6:19
-        |vpiParent:
-        \_range: , line:6:15, endln:6:20
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
+  \_logic_typespec: (my_package1::word), line:6:9, endln:6:20
   |vpiTypedef:
   \_import_typespec: (my_package1), line:15:8, endln:15:22
   |vpiDefName:work@test
@@ -407,7 +381,7 @@ design: (unnamed)
       \_logic_net: (work@test.v), line:8:6, endln:8:7
       |vpiFullName:work@test.v
       |vpiActual:
-      \_logic_typespec: (word), line:6:9, endln:6:20
+      \_logic_typespec: (my_package1::word), line:6:9, endln:6:20
     |vpiName:v
     |vpiFullName:work@test.v
   |vpiProcess:
@@ -431,35 +405,17 @@ design: (unnamed)
           \_assignment: , line:18:3, endln:18:14
           |vpiOpType:24
           |vpiOperand:
-          \_constant: , line:18:7, endln:18:9
+          \_ref_obj: (work@test.p1), line:18:7, endln:18:9
             |vpiParent:
             \_operation: , line:18:7, endln:18:14
-            |vpiDecompile:1
-            |vpiSize:32
-            |UINT:1
-            |vpiTypespec:
-            \_ref_typespec: (work@test)
-              |vpiParent:
-              \_constant: , line:18:7, endln:18:9
-              |vpiFullName:work@test
-              |vpiActual:
-              \_int_typespec: , line:3:1, endln:3:18
-            |vpiConstType:9
+            |vpiName:p1
+            |vpiFullName:work@test.p1
           |vpiOperand:
-          \_constant: , line:18:12, endln:18:14
+          \_ref_obj: (work@test.p2), line:18:12, endln:18:14
             |vpiParent:
             \_operation: , line:18:7, endln:18:14
-            |vpiDecompile:2
-            |vpiSize:32
-            |UINT:2
-            |vpiTypespec:
-            \_ref_typespec: (work@test)
-              |vpiParent:
-              \_constant: , line:18:12, endln:18:14
-              |vpiFullName:work@test
-              |vpiActual:
-              \_int_typespec: , line:4:1, endln:4:18
-            |vpiConstType:9
+            |vpiName:p2
+            |vpiFullName:work@test.p2
         |vpiLhs:
         \_ref_obj: (work@test.v), line:18:3, endln:18:4
           |vpiParent:
@@ -469,8 +425,6 @@ design: (unnamed)
           |vpiActual:
           \_logic_net: (work@test.v), line:8:6, endln:8:7
 \_weaklyReferenced:
-\_package: (my_package1), file:${SURELOG_DIR}/tests/PackageNet/dut.sv, line:1:1, endln:10:11
-  |vpiName:my_package1
 \_int_typespec: , line:3:1, endln:3:18
 \_int_typespec: , line:4:1, endln:4:18
 \_int_typespec: , line:3:1, endln:3:18
@@ -491,12 +445,6 @@ design: (unnamed)
 \_int_typespec: , line:4:1, endln:4:18
   |vpiParent:
   \_ref_typespec: (work@test.p2)
-\_int_typespec: , line:3:1, endln:3:18
-  |vpiParent:
-  \_ref_typespec: (work@test)
-\_int_typespec: , line:4:1, endln:4:18
-  |vpiParent:
-  \_ref_typespec: (work@test)
 \_logic_typespec: (my_package1::word), line:6:9, endln:6:20
   |vpiName:my_package1::word
   |vpiTypedefAlias:
@@ -528,21 +476,21 @@ design: (unnamed)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
-\_logic_typespec: (word), line:6:9, endln:6:20
-  |vpiName:word
+\_logic_typespec: (my_package1::word), line:6:9, endln:6:20
+  |vpiName:my_package1::word
   |vpiTypedefAlias:
-  \_ref_typespec: (word)
+  \_ref_typespec: (my_package1::word)
     |vpiParent:
-    \_logic_typespec: (word), line:6:9, endln:6:20
-    |vpiFullName:word
+    \_logic_typespec: (my_package1::word), line:6:9, endln:6:20
+    |vpiFullName:my_package1::word
     |vpiActual:
-    \_logic_typespec: (word), line:6:9, endln:6:20
+    \_logic_typespec: (my_package1::word), line:6:9, endln:6:20
   |vpiInstance:
-  \_package: (my_package1), file:${SURELOG_DIR}/tests/PackageNet/dut.sv, line:1:1, endln:10:11
+  \_package: my_package1 (my_package1::), file:${SURELOG_DIR}/tests/PackageNet/dut.sv, line:1:1, endln:10:11
   |vpiRange:
   \_range: , line:6:15, endln:6:20
     |vpiParent:
-    \_logic_typespec: (word), line:6:9, endln:6:20
+    \_logic_typespec: (my_package1::word), line:6:9, endln:6:20
     |vpiLeftRange:
     \_constant: , line:6:16, endln:6:17
       |vpiParent:

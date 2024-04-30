@@ -615,7 +615,6 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/Attributes/test_attributes.sv:52:1: No timescale set for "itf".
 [WRN:PA0205] ${SURELOG_DIR}/tests/Attributes/test_attributes.sv:54:3: No timescale set for "itf2".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/Attributes/test_attributes.sv:2:1: Compile package "myPackage".
 [INF:CP0303] ${SURELOG_DIR}/tests/Attributes/dut.sv:1:1: Compile module "work@bar".
 [INF:CP0303] ${SURELOG_DIR}/tests/Attributes/dut.sv:13:1: Compile module "work@foo".
 [INF:CP0304] ${SURELOG_DIR}/tests/Attributes/test_attributes.sv:52:1: Compile interface "work@itf".
@@ -886,7 +885,7 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 always                                                 1
 assignment                                             5
-attribute                                             26
+attribute                                             24
 begin                                                  1
 case_item                                              3
 case_stmt                                              1
@@ -912,7 +911,7 @@ logic_typespec                                         8
 logic_var                                              1
 module_inst                                            4
 operation                                              4
-package                                                4
+package                                                2
 port                                                  12
 ref_module                                             1
 ref_obj                                               26
@@ -935,6 +934,36 @@ design: (unnamed)
   |vpiName:builtin
   |vpiFullName:builtin::
   |vpiDefName:builtin
+  |vpiClassDefn:
+  \_class_defn: (builtin::any_sverilog_class)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:any_sverilog_class
+    |vpiFullName:builtin::any_sverilog_class
+  |vpiClassDefn:
+  \_class_defn: (builtin::array)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:array
+    |vpiFullName:builtin::array
+  |vpiClassDefn:
+  \_class_defn: (builtin::queue)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:queue
+    |vpiFullName:builtin::queue
+  |vpiClassDefn:
+  \_class_defn: (builtin::string)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:string
+    |vpiFullName:builtin::string
+  |vpiClassDefn:
+  \_class_defn: (builtin::system)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:system
+    |vpiFullName:builtin::system
 |uhdmallPackages:
 \_package: myPackage (myPackage::), file:${SURELOG_DIR}/tests/Attributes/test_attributes.sv, line:3:1, endln:4:11
   |vpiParent:
@@ -1804,42 +1833,42 @@ design: (unnamed)
   |vpiNet:
   \_logic_net: (work@foo.blah), line:22:10, endln:22:14
     |vpiParent:
-    \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/Attributes/dut.sv, line:13:1, endln:41:10
+    \_cont_assign: , line:22:10, endln:22:62
     |vpiName:blah
     |vpiFullName:work@foo.blah
     |vpiNetType:1
   |vpiNet:
   \_logic_net: (work@foo.pieces0), line:22:18, endln:22:25
     |vpiParent:
-    \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/Attributes/dut.sv, line:13:1, endln:41:10
+    \_operation: , line:22:18, endln:22:62
     |vpiName:pieces0
     |vpiFullName:work@foo.pieces0
     |vpiNetType:1
   |vpiNet:
   \_logic_net: (work@foo.b), line:22:61, endln:22:62
     |vpiParent:
-    \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/Attributes/dut.sv, line:13:1, endln:41:10
+    \_operation: , line:22:18, endln:22:62
     |vpiName:b
     |vpiFullName:work@foo.b
     |vpiNetType:1
   |vpiNet:
   \_logic_net: (work@foo.$37), line:24:10, endln:24:20
     |vpiParent:
-    \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/Attributes/dut.sv, line:13:1, endln:41:10
+    \_cont_assign: , line:24:10, endln:24:69
     |vpiName:$37
     |vpiFullName:work@foo.$37
     |vpiNetType:1
   |vpiNet:
   \_logic_net: (work@foo.empty2), line:24:22, endln:24:28
     |vpiParent:
-    \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/Attributes/dut.sv, line:13:1, endln:41:10
+    \_operation: , line:24:22, endln:24:69
     |vpiName:empty2
     |vpiFullName:work@foo.empty2
     |vpiNetType:1
   |vpiNet:
   \_logic_net: (work@foo.a), line:29:11, endln:29:12
     |vpiParent:
-    \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/Attributes/dut.sv, line:13:1, endln:41:10
+    \_begin: (work@foo), line:26:11, endln:37:6
     |vpiName:a
     |vpiFullName:work@foo.a
     |vpiNetType:1

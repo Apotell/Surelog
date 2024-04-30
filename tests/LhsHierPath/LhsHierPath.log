@@ -139,7 +139,6 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/LhsHierPath/dut.sv:1:1: No timescale set for "my_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/LhsHierPath/dut.sv:11:1: No timescale set for "top".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/LhsHierPath/dut.sv:1:1: Compile package "my_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/LhsHierPath/dut.sv:11:1: Compile module "work@top".
 [NTE:CP0309] ${SURELOG_DIR}/tests/LhsHierPath/dut.sv:11:19: Implicit port type (wire) for "o".
 [INF:UH0706] Creating UHDM Model...
@@ -148,21 +147,21 @@ always                                                 1
 assignment                                             1
 begin                                                  1
 bit_select                                             2
-constant                                               7
+constant                                               5
 cont_assign                                            1
 design                                                 1
 hier_path                                              3
 logic_net                                              2
-logic_typespec                                         3
-module_inst                                            2
-package                                                2
-packed_array_typespec                                  2
+logic_typespec                                         2
+module_inst                                            1
+package                                                1
+packed_array_typespec                                  1
 port                                                   1
-range                                                  2
+range                                                  1
 ref_obj                                                6
-ref_typespec                                           8
-struct_typespec                                        4
-typespec_member                                        4
+ref_typespec                                           5
+struct_typespec                                        2
+typespec_member                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LhsHierPath/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/LhsHierPath/slpp_all/checker/surelog.chk.html ...
@@ -365,97 +364,10 @@ design: (unnamed)
       |vpiActual:
       \_logic_net: (work@top.o), line:11:19, endln:11:20
 \_weaklyReferenced:
-\_struct_typespec: (my_pkg::ast_alert_rsp_t), line:6:12, endln:8:5
-  |vpiName:my_pkg::ast_alert_rsp_t
-  |vpiInstance:
-  \_package: (my_pkg), file:${SURELOG_DIR}/tests/LhsHierPath/dut.sv, line:1:1, endln:9:11
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (alerts_ack), line:7:23, endln:7:33
-    |vpiParent:
-    \_struct_typespec: (my_pkg::ast_alert_rsp_t), line:6:12, endln:8:5
-    |vpiName:alerts_ack
-    |vpiTypespec:
-    \_ref_typespec: (my_pkg::ast_alert_rsp_t.alerts_ack)
-      |vpiParent:
-      \_typespec_member: (alerts_ack), line:7:23, endln:7:33
-      |vpiFullName:my_pkg::ast_alert_rsp_t.alerts_ack
-      |vpiActual:
-      \_packed_array_typespec: , line:7:7, endln:7:22
-    |vpiRefFile:${SURELOG_DIR}/tests/LhsHierPath/dut.sv
-    |vpiRefLineNo:7
-    |vpiRefColumnNo:7
-    |vpiRefEndLineNo:7
-    |vpiRefEndColumnNo:22
-\_package: (my_pkg), file:${SURELOG_DIR}/tests/LhsHierPath/dut.sv, line:1:1, endln:9:11
-  |vpiName:my_pkg
-\_packed_array_typespec: , line:7:7, endln:7:22
-  |vpiParent:
-  \_typespec_member: (alerts_ack), line:7:23, endln:7:33
-  |vpiInstance:
-  \_package: (my_pkg), file:${SURELOG_DIR}/tests/LhsHierPath/dut.sv, line:1:1, endln:9:11
-  |vpiRange:
-  \_range: , line:7:17, endln:7:22
-    |vpiParent:
-    \_packed_array_typespec: , line:7:7, endln:7:22
-    |vpiLeftRange:
-    \_constant: , line:7:18, endln:7:19
-      |vpiParent:
-      \_range: , line:7:17, endln:7:22
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:7:20, endln:7:21
-      |vpiParent:
-      \_range: , line:7:17, endln:7:22
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiElemTypespec:
-  \_ref_typespec: (my_pkg::ast_alert_rsp_t.alerts_ack)
-    |vpiParent:
-    \_packed_array_typespec: , line:7:7, endln:7:22
-    |vpiFullName:my_pkg::ast_alert_rsp_t.alerts_ack
-    |vpiActual:
-    \_struct_typespec: (my_pkg::ast_dif_t), line:2:12, endln:4:5
-\_struct_typespec: (my_pkg::ast_dif_t), line:2:12, endln:4:5
-  |vpiName:my_pkg::ast_dif_t
-  |vpiInstance:
-  \_package: (my_pkg), file:${SURELOG_DIR}/tests/LhsHierPath/dut.sv, line:1:1, endln:9:11
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (p), line:3:13, endln:3:14
-    |vpiParent:
-    \_struct_typespec: (my_pkg::ast_dif_t), line:2:12, endln:4:5
-    |vpiName:p
-    |vpiTypespec:
-    \_ref_typespec: (my_pkg::ast_dif_t.p)
-      |vpiParent:
-      \_typespec_member: (p), line:3:13, endln:3:14
-      |vpiFullName:my_pkg::ast_dif_t.p
-      |vpiActual:
-      \_logic_typespec: , line:3:7, endln:3:12
-    |vpiRefFile:${SURELOG_DIR}/tests/LhsHierPath/dut.sv
-    |vpiRefLineNo:3
-    |vpiRefColumnNo:7
-    |vpiRefEndLineNo:3
-    |vpiRefEndColumnNo:12
 \_logic_typespec: , line:3:7, endln:3:12
-  |vpiParent:
-  \_typespec_member: (p), line:3:13, endln:3:14
-  |vpiInstance:
-  \_package: (my_pkg), file:${SURELOG_DIR}/tests/LhsHierPath/dut.sv, line:1:1, endln:9:11
-\_logic_typespec: , line:3:7, endln:3:12
-  |vpiParent:
-  \_typespec_member: (p), line:3:13, endln:3:14
   |vpiInstance:
   \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/LhsHierPath/dut.sv, line:1:1, endln:9:11
 \_packed_array_typespec: , line:7:7, endln:7:22
-  |vpiParent:
-  \_typespec_member: (alerts_ack), line:7:23, endln:7:33
   |vpiInstance:
   \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/LhsHierPath/dut.sv, line:1:1, endln:9:11
   |vpiRange:
@@ -479,10 +391,9 @@ design: (unnamed)
       |UINT:0
       |vpiConstType:9
   |vpiElemTypespec:
-  \_ref_typespec: (my_pkg::my_pkg::ast_alert_rsp_t::alerts_ack)
+  \_ref_typespec: 
     |vpiParent:
     \_packed_array_typespec: , line:7:7, endln:7:22
-    |vpiFullName:my_pkg::my_pkg::ast_alert_rsp_t::alerts_ack
     |vpiActual:
     \_struct_typespec: (my_pkg::ast_dif_t), line:2:12, endln:4:5
 \_logic_typespec: , line:11:19, endln:11:19

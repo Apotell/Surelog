@@ -139,30 +139,29 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/StructArrayNet/dut.sv:6:1: No timescale set for "mod".
 [WRN:PA0205] ${SURELOG_DIR}/tests/StructArrayNet/dut.sv:9:1: No timescale set for "dut".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/StructArrayNet/dut.sv:1:1: Compile package "pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/StructArrayNet/dut.sv:9:1: Compile module "work@dut".
 [INF:CP0303] ${SURELOG_DIR}/tests/StructArrayNet/dut.sv:6:1: Compile module "work@mod".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 bit_select                                             1
-constant                                               8
+constant                                               5
 design                                                 1
-int_typespec                                           5
+int_typespec                                           3
 logic_net                                              3
-logic_typespec                                         2
-module_inst                                            4
+logic_typespec                                         1
+module_inst                                            3
 operation                                              1
-package                                                2
+package                                                1
 packed_array_typespec                                  1
-param_assign                                           4
-parameter                                              4
+param_assign                                           2
+parameter                                              2
 port                                                   3
 range                                                  1
 ref_module                                             1
 ref_obj                                                4
-ref_typespec                                          14
-struct_typespec                                        2
-typespec_member                                        2
+ref_typespec                                           9
+struct_typespec                                        1
+typespec_member                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/StructArrayNet/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/StructArrayNet/slpp_all/checker/surelog.chk.html ...
@@ -346,35 +345,6 @@ design: (unnamed)
       |vpiActual:
       \_struct_typespec: (pkg::Struct), line:3:12, endln:3:38
 \_weaklyReferenced:
-\_struct_typespec: (pkg::Struct), line:3:12, endln:3:38
-  |vpiName:pkg::Struct
-  |vpiInstance:
-  \_package: (pkg), file:${SURELOG_DIR}/tests/StructArrayNet/dut.sv, line:1:1, endln:4:11
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (x), line:3:34, endln:3:35
-    |vpiParent:
-    \_struct_typespec: (pkg::Struct), line:3:12, endln:3:38
-    |vpiName:x
-    |vpiTypespec:
-    \_ref_typespec: (pkg::Struct.x)
-      |vpiParent:
-      \_typespec_member: (x), line:3:34, endln:3:35
-      |vpiFullName:pkg::Struct.x
-      |vpiActual:
-      \_logic_typespec: , line:3:28, endln:3:33
-    |vpiRefFile:${SURELOG_DIR}/tests/StructArrayNet/dut.sv
-    |vpiRefLineNo:3
-    |vpiRefColumnNo:28
-    |vpiRefEndLineNo:3
-    |vpiRefEndColumnNo:33
-\_package: (pkg), file:${SURELOG_DIR}/tests/StructArrayNet/dut.sv, line:1:1, endln:4:11
-  |vpiName:pkg
-\_logic_typespec: , line:3:28, endln:3:33
-  |vpiParent:
-  \_typespec_member: (x), line:3:34, endln:3:35
-  |vpiInstance:
-  \_package: (pkg), file:${SURELOG_DIR}/tests/StructArrayNet/dut.sv, line:1:1, endln:4:11
 \_int_typespec: , line:2:13, endln:2:16
   |vpiParent:
   \_parameter: (pkg::N), line:2:17, endln:2:18
@@ -382,8 +352,6 @@ design: (unnamed)
   \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/StructArrayNet/dut.sv, line:1:1, endln:4:11
   |vpiSigned:1
 \_logic_typespec: , line:3:28, endln:3:33
-  |vpiParent:
-  \_typespec_member: (x), line:3:34, endln:3:35
   |vpiInstance:
   \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/StructArrayNet/dut.sv, line:1:1, endln:4:11
 \_int_typespec: , line:9:18, endln:9:21
@@ -403,6 +371,8 @@ design: (unnamed)
         |vpiParent:
         \_operation: , line:10:17, endln:10:25
         |vpiName:pkg::N
+        |vpiActual:
+        \_parameter: (pkg::N), line:2:17, endln:2:18
       |vpiOperand:
       \_constant: , line:10:24, endln:10:25
         |vpiParent:

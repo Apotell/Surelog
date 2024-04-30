@@ -142,28 +142,27 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackStructField/dut.sv:2:1: No timescale set for "my_package".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackStructField/dut.sv:16:1: No timescale set for "my_module".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/PackStructField/dut.sv:2:1: Compile package "my_package".
 [INF:CP0303] ${SURELOG_DIR}/tests/PackStructField/dut.sv:16:1: Compile module "work@my_module".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              12
+constant                                               6
 cont_assign                                            2
 design                                                 1
 hier_path                                              2
 logic_net                                              2
-logic_typespec                                         8
-module_inst                                            3
-operation                                              6
-package                                                2
-param_assign                                           4
-parameter                                              4
+logic_typespec                                         4
+module_inst                                            1
+operation                                              3
+package                                                1
+param_assign                                           2
+parameter                                              2
 port                                                   2
 ref_obj                                                8
-ref_typespec                                          28
-string_typespec                                       12
-struct_typespec                                        4
-tagged_pattern                                        12
-typespec_member                                        8
+ref_typespec                                          15
+string_typespec                                        6
+struct_typespec                                        2
+tagged_pattern                                         6
+typespec_member                                        4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackStructField/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PackStructField/slpp_all/checker/surelog.chk.html ...
@@ -239,7 +238,7 @@ design: (unnamed)
   |vpiTypedef:
   \_struct_typespec: (my_package::my_struct), line:4:11, endln:7:4
     |vpiParent:
-    \_package: my_package (my_package::), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:2:1, endln:14:24
+    \_parameter: (my_package::my_parameter), line:9:35, endln:9:47
     |vpiName:my_package::my_struct
     |vpiInstance:
     \_package: my_package (my_package::), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:2:1, endln:14:24
@@ -250,10 +249,10 @@ design: (unnamed)
       \_struct_typespec: (my_package::my_struct), line:4:11, endln:7:4
       |vpiName:a
       |vpiTypespec:
-      \_ref_typespec: (my_package::my_package::my_struct::a)
+      \_ref_typespec: (my_package::my_parameter::my_package::my_struct::a)
         |vpiParent:
         \_typespec_member: (a), line:5:11, endln:5:12
-        |vpiFullName:my_package::my_package::my_struct::a
+        |vpiFullName:my_package::my_parameter::my_package::my_struct::a
         |vpiActual:
         \_logic_typespec: , line:5:5, endln:5:10
       |vpiRefFile:${SURELOG_DIR}/tests/PackStructField/dut.sv
@@ -267,10 +266,10 @@ design: (unnamed)
       \_struct_typespec: (my_package::my_struct), line:4:11, endln:7:4
       |vpiName:b
       |vpiTypespec:
-      \_ref_typespec: (my_package::my_package::my_struct::b)
+      \_ref_typespec: (my_package::my_parameter::my_package::my_struct::b)
         |vpiParent:
         \_typespec_member: (b), line:6:11, endln:6:12
-        |vpiFullName:my_package::my_package::my_struct::b
+        |vpiFullName:my_package::my_parameter::my_package::my_struct::b
         |vpiActual:
         \_logic_typespec: , line:6:5, endln:6:10
       |vpiRefFile:${SURELOG_DIR}/tests/PackStructField/dut.sv
@@ -354,7 +353,7 @@ design: (unnamed)
         \_hier_path: (work@my_module), line:21:12, endln:21:38
         |vpiName:my_package::my_parameter
         |vpiActual:
-        \_parameter: (my_parameter), line:9:35, endln:9:47
+        \_parameter: (my_package::my_parameter), line:9:35, endln:9:47
       |vpiActual:
       \_ref_obj: (work@my_module.a), line:21:37, endln:21:38
         |vpiParent:
@@ -384,7 +383,7 @@ design: (unnamed)
         \_hier_path: (work@my_module), line:22:12, endln:22:38
         |vpiName:my_package::my_parameter
         |vpiActual:
-        \_parameter: (my_parameter), line:9:35, endln:9:47
+        \_parameter: (my_package::my_parameter), line:9:35, endln:9:47
       |vpiActual:
       \_ref_obj: (work@my_module.b), line:22:37, endln:22:38
         |vpiParent:
@@ -402,124 +401,10 @@ design: (unnamed)
       \_logic_net: (work@my_module.y), line:18:34, endln:18:35
   |vpiEndLabel:my_module
 \_weaklyReferenced:
-\_struct_typespec: (my_package::my_struct), line:4:11, endln:7:4
-  |vpiParent:
-  \_parameter: (my_package::my_parameter), line:9:35, endln:9:47
-  |vpiName:my_package::my_struct
-  |vpiInstance:
-  \_package: my_package (my_package::), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:2:1, endln:14:24
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (a), line:5:11, endln:5:12
-    |vpiParent:
-    \_struct_typespec: (my_package::my_struct), line:4:11, endln:7:4
-    |vpiName:a
-    |vpiTypespec:
-    \_ref_typespec: (my_package::my_parameter::my_package::my_struct::a)
-      |vpiParent:
-      \_typespec_member: (a), line:5:11, endln:5:12
-      |vpiFullName:my_package::my_parameter::my_package::my_struct::a
-      |vpiActual:
-      \_logic_typespec: , line:5:5, endln:5:10
-    |vpiRefFile:${SURELOG_DIR}/tests/PackStructField/dut.sv
-    |vpiRefLineNo:5
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:5
-    |vpiRefEndColumnNo:10
-  |vpiTypespecMember:
-  \_typespec_member: (b), line:6:11, endln:6:12
-    |vpiParent:
-    \_struct_typespec: (my_package::my_struct), line:4:11, endln:7:4
-    |vpiName:b
-    |vpiTypespec:
-    \_ref_typespec: (my_package::my_parameter::my_package::my_struct::b)
-      |vpiParent:
-      \_typespec_member: (b), line:6:11, endln:6:12
-      |vpiFullName:my_package::my_parameter::my_package::my_struct::b
-      |vpiActual:
-      \_logic_typespec: , line:6:5, endln:6:10
-    |vpiRefFile:${SURELOG_DIR}/tests/PackStructField/dut.sv
-    |vpiRefLineNo:6
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:6
-    |vpiRefEndColumnNo:10
 \_logic_typespec: , line:5:5, endln:5:10
-  |vpiParent:
-  \_typespec_member: (a), line:5:11, endln:5:12
   |vpiInstance:
   \_package: my_package (my_package::), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:2:1, endln:14:24
 \_logic_typespec: , line:6:5, endln:6:10
-  |vpiParent:
-  \_typespec_member: (b), line:6:11, endln:6:12
-  |vpiInstance:
-  \_package: my_package (my_package::), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:2:1, endln:14:24
-\_parameter: (my_parameter), line:9:35, endln:9:47
-  |vpiParent:
-  \_param_assign: , line:9:35, endln:12:4
-  |vpiTypespec:
-  \_ref_typespec: (my_parameter)
-    |vpiParent:
-    \_parameter: (my_parameter), line:9:35, endln:9:47
-    |vpiFullName:my_parameter
-    |vpiActual:
-    \_struct_typespec: (my_package::my_struct), line:4:11, endln:7:4
-  |vpiName:my_parameter
-\_param_assign: , line:9:35, endln:12:4
-  |vpiRhs:
-  \_operation: , line:9:50, endln:12:4
-    |vpiParent:
-    \_param_assign: , line:9:35, endln:12:4
-    |vpiOpType:75
-    |vpiOperand:
-    \_tagged_pattern: , line:10:8, endln:10:12
-      |vpiParent:
-      \_operation: , line:9:50, endln:12:4
-      |vpiPattern:
-      \_constant: , line:10:8, endln:10:12
-        |vpiDecompile:1'b1
-        |vpiSize:1
-        |BIN:1
-        |vpiConstType:3
-      |vpiTypespec:
-      \_ref_typespec: 
-        |vpiParent:
-        \_tagged_pattern: , line:10:8, endln:10:12
-        |vpiActual:
-        \_string_typespec: (a), line:10:5, endln:10:6
-    |vpiOperand:
-    \_tagged_pattern: , line:11:8, endln:11:12
-      |vpiParent:
-      \_operation: , line:9:50, endln:12:4
-      |vpiPattern:
-      \_constant: , line:11:8, endln:11:12
-        |vpiDecompile:1'b0
-        |vpiSize:1
-        |BIN:0
-        |vpiConstType:3
-      |vpiTypespec:
-      \_ref_typespec: 
-        |vpiParent:
-        \_tagged_pattern: , line:11:8, endln:11:12
-        |vpiActual:
-        \_string_typespec: (b), line:11:5, endln:11:6
-  |vpiLhs:
-  \_parameter: (my_parameter), line:9:35, endln:9:47
-\_string_typespec: (a), line:10:5, endln:10:6
-  |vpiParent:
-  \_tagged_pattern: , line:10:8, endln:10:12
-  |vpiName:a
-\_string_typespec: (b), line:11:5, endln:11:6
-  |vpiParent:
-  \_tagged_pattern: , line:11:8, endln:11:12
-  |vpiName:b
-\_logic_typespec: , line:5:5, endln:5:10
-  |vpiParent:
-  \_typespec_member: (a), line:5:11, endln:5:12
-  |vpiInstance:
-  \_package: my_package (my_package::), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:2:1, endln:14:24
-\_logic_typespec: , line:6:5, endln:6:10
-  |vpiParent:
-  \_typespec_member: (b), line:6:11, endln:6:12
   |vpiInstance:
   \_package: my_package (my_package::), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:2:1, endln:14:24
 \_string_typespec: (a), line:10:5, endln:10:6

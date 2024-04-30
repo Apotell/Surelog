@@ -453,7 +453,6 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/CastTypespec/dut.sv:14:3: No timescale set for "tlul_adapter_host".
 [WRN:PA0205] ${SURELOG_DIR}/tests/CastTypespec/dut.sv:25:3: No timescale set for "top".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/CastTypespec/dut.sv:2:1: Compile package "top_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/CastTypespec/dut.sv:14:3: Compile module "work@tlul_adapter_host".
 [INF:CP0303] ${SURELOG_DIR}/tests/CastTypespec/dut.sv:25:3: Compile module "work@top".
 AST_DEBUG_BEGIN
@@ -723,7 +722,7 @@ begin                                                  2
 class_defn                                             8
 class_typespec                                         4
 class_var                                              3
-constant                                              72
+constant                                              39
 cont_assign                                            1
 design                                                 1
 enum_const                                             5
@@ -733,25 +732,25 @@ function                                               9
 hier_path                                              1
 if_stmt                                                1
 initial                                                1
-int_typespec                                          51
+int_typespec                                          33
 int_var                                                4
 integer_typespec                                       1
 io_decl                                               11
 logic_net                                              9
 logic_var                                              1
-module_inst                                            4
+module_inst                                            3
 named_begin                                            1
-operation                                             25
-package                                                4
-param_assign                                          29
-parameter                                             29
+operation                                             19
+package                                                2
+param_assign                                          15
+parameter                                             15
 range                                                  3
-ref_obj                                               20
-ref_typespec                                          90
+ref_obj                                               18
+ref_typespec                                          58
 string_typespec                                        2
 struct_typespec                                        2
 struct_var                                             1
-sys_func_call                                          8
+sys_func_call                                          6
 tagged_pattern                                         2
 task                                                   9
 typespec_member                                        5
@@ -770,6 +769,36 @@ design: (unnamed)
   |vpiName:builtin
   |vpiFullName:builtin::
   |vpiDefName:builtin
+  |vpiClassDefn:
+  \_class_defn: (builtin::any_sverilog_class)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:any_sverilog_class
+    |vpiFullName:builtin::any_sverilog_class
+  |vpiClassDefn:
+  \_class_defn: (builtin::array)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:array
+    |vpiFullName:builtin::array
+  |vpiClassDefn:
+  \_class_defn: (builtin::queue)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:queue
+    |vpiFullName:builtin::queue
+  |vpiClassDefn:
+  \_class_defn: (builtin::string)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:string
+    |vpiFullName:builtin::string
+  |vpiClassDefn:
+  \_class_defn: (builtin::system)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:system
+    |vpiFullName:builtin::system
 |uhdmallPackages:
 \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:2:1, endln:12:13
   |vpiParent:
@@ -1499,14 +1528,14 @@ design: (unnamed)
   |vpiNet:
   \_logic_net: (work@tlul_adapter_host.tl_o), line:16:12, endln:16:16
     |vpiParent:
-    \_module_inst: work@tlul_adapter_host (work@tlul_adapter_host), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:14:3, endln:23:12
+    \_cont_assign: , line:16:12, endln:19:6
     |vpiName:tl_o
     |vpiFullName:work@tlul_adapter_host.tl_o
     |vpiNetType:1
   |vpiNet:
   \_logic_net: (work@tlul_adapter_host.WordSize), line:18:35, endln:18:43
     |vpiParent:
-    \_module_inst: work@tlul_adapter_host (work@tlul_adapter_host), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:14:3, endln:23:12
+    \_operation: , line:18:18, endln:18:44
     |vpiName:WordSize
     |vpiFullName:work@tlul_adapter_host.WordSize
     |vpiNetType:1
@@ -1711,25 +1740,25 @@ design: (unnamed)
     |vpiName:c
     |vpiFullName:work@top.c
   |vpiNet:
-  \_logic_net: (work@top.selected_hart), line:37:9, endln:37:22
+  \_logic_net: (work@top.p_outmux.selected_hart), line:37:9, endln:37:22
     |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
+    \_operation: , line:37:9, endln:37:49
     |vpiName:selected_hart
-    |vpiFullName:work@top.selected_hart
+    |vpiFullName:work@top.p_outmux.selected_hart
     |vpiNetType:1
   |vpiNet:
-  \_logic_net: (work@top.NrHarts), line:37:41, endln:37:48
+  \_logic_net: (work@top.p_outmux.NrHarts), line:37:41, endln:37:48
     |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
+    \_operation: , line:37:25, endln:37:49
     |vpiName:NrHarts
-    |vpiFullName:work@top.NrHarts
+    |vpiFullName:work@top.p_outmux.NrHarts
     |vpiNetType:1
   |vpiNet:
-  \_logic_net: (work@top.resumereq_o), line:38:7, endln:38:18
+  \_logic_net: (work@top.p_outmux.resumereq_o), line:38:7, endln:38:18
     |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
+    \_assignment: , line:38:7, endln:38:41
     |vpiName:resumereq_o
-    |vpiFullName:work@top.resumereq_o
+    |vpiFullName:work@top.p_outmux.resumereq_o
     |vpiNetType:1
   |vpiProcess:
   \_initial: , line:30:5, endln:33:8
@@ -1885,7 +1914,7 @@ design: (unnamed)
             |vpiName:selected_hart
             |vpiFullName:work@top.p_outmux.selected_hart
             |vpiActual:
-            \_logic_net: (work@top.selected_hart), line:37:9, endln:37:22
+            \_logic_net: (work@top.p_outmux.selected_hart), line:37:9, endln:37:22
           |vpiOperand:
           \_operation: , line:37:25, endln:37:49
             |vpiParent:
@@ -1905,7 +1934,7 @@ design: (unnamed)
               |vpiName:NrHarts
               |vpiFullName:work@top.p_outmux.NrHarts
               |vpiActual:
-              \_logic_net: (work@top.NrHarts), line:37:41, endln:37:48
+              \_logic_net: (work@top.p_outmux.NrHarts), line:37:41, endln:37:48
         |vpiStmt:
         \_begin: (work@top.p_outmux), line:37:51, endln:39:8
           |vpiParent:
@@ -1940,7 +1969,7 @@ design: (unnamed)
               |vpiName:resumereq_o
               |vpiFullName:work@top.p_outmux.resumereq_o
               |vpiActual:
-              \_logic_net: (work@top.resumereq_o), line:38:7, endln:38:18
+              \_logic_net: (work@top.p_outmux.resumereq_o), line:38:7, endln:38:18
     |vpiAlwaysType:2
 \_weaklyReferenced:
 \_int_typespec: , line:4:14, endln:4:17
@@ -1990,14 +2019,11 @@ design: (unnamed)
   \_tagged_pattern: , line:17:18, endln:17:22
   |vpiName:a_param
 \_int_typespec: 
-  |UINT:2
 \_string_typespec: (a_size), line:18:7, endln:18:13
   |vpiParent:
   \_tagged_pattern: , line:18:18, endln:18:44
   |vpiName:a_size
 \_int_typespec: , line:27:21, endln:27:24
-  |vpiParent:
-  \_typespec_member: (a), line:27:25, endln:27:26
   |vpiSigned:1
 \_array_typespec: 
   |vpiRange:
@@ -2033,8 +2059,6 @@ design: (unnamed)
     |vpiActual:
     \_int_typespec: , line:27:21, endln:27:24
 \_int_typespec: , line:27:21, endln:27:24
-  |vpiParent:
-  \_typespec_member: (b), line:27:27, endln:27:31
   |vpiSigned:1
 \_int_typespec: , line:35:3, endln:35:28
 \_array_typespec: , line:31:12, endln:31:25
@@ -2184,16 +2208,10 @@ design: (unnamed)
     |vpiRefEndLineNo:26
     |vpiRefEndColumnNo:16
 \_int_typespec: , line:26:13, endln:26:16
-  |vpiParent:
-  \_typespec_member: (X), line:26:17, endln:26:18
   |vpiSigned:1
 \_int_typespec: , line:26:13, endln:26:16
-  |vpiParent:
-  \_typespec_member: (Y), line:26:19, endln:26:20
   |vpiSigned:1
 \_int_typespec: , line:26:13, endln:26:16
-  |vpiParent:
-  \_typespec_member: (Z), line:26:21, endln:26:22
   |vpiSigned:1
 \_int_typespec: , line:28:5, endln:28:8
   |vpiSigned:1

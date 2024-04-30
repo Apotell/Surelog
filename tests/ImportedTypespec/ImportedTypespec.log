@@ -99,27 +99,27 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ImportedTypespec/dut.sv:1:1: No timescale set for "spi_device_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/ImportedTypespec/dut.sv:6:1: No timescale set for "top".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/ImportedTypespec/dut.sv:1:1: Compile package "spi_device_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/ImportedTypespec/dut.sv:6:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              21
+constant                                               9
 cont_assign                                            1
 design                                                 1
 import_typespec                                        1
-int_typespec                                          10
+int_typespec                                           6
 logic_net                                              1
-logic_typespec                                         2
-module_inst                                            4
-operation                                              4
-package                                                2
-packed_array_typespec                                  2
-param_assign                                           5
-parameter                                              6
+logic_typespec                                         1
+module_inst                                            2
+operation                                              2
+package                                                1
+packed_array_typespec                                  1
+param_assign                                           3
+parameter                                              4
 port                                                   1
-range                                                  4
-ref_obj                                                4
-ref_typespec                                          14
+range                                                  2
+ref_obj                                                5
+ref_typespec                                           8
+sys_func_call                                          1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ImportedTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ImportedTypespec/slpp_all/checker/surelog.chk.html ...
@@ -237,7 +237,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:2:27, endln:2:38
       |vpiDecompile:10
-      |vpiSize:32
+      |vpiSize:64
       |UINT:10
       |vpiTypespec:
       \_ref_typespec: (work@top)
@@ -263,32 +263,7 @@ design: (unnamed)
       |vpiFullName:work@top.SramAw
       |vpiImported:spi_device_pkg
   |vpiTypedef:
-  \_logic_typespec: (sram_addr_t), line:3:12, endln:3:30
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ImportedTypespec/dut.sv, line:6:1, endln:10:10
-    |vpiName:sram_addr_t
-    |vpiInstance:
-    \_package: (spi_device_pkg), file:${SURELOG_DIR}/tests/ImportedTypespec/dut.sv, line:1:1, endln:4:11
-    |vpiRange:
-    \_range: , line:3:18, endln:3:30
-      |vpiParent:
-      \_logic_typespec: (sram_addr_t), line:3:12, endln:3:30
-      |vpiLeftRange:
-      \_constant: , line:3:19, endln:3:25
-        |vpiParent:
-        \_range: , line:3:18, endln:3:30
-        |vpiDecompile:9
-        |vpiSize:64
-        |INT:9
-        |vpiConstType:7
-      |vpiRightRange:
-      \_constant: , line:3:28, endln:3:29
-        |vpiParent:
-        \_range: , line:3:18, endln:3:30
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
+  \_logic_typespec: (spi_device_pkg::sram_addr_t), line:3:12, endln:3:30
   |vpiTypedef:
   \_import_typespec: (spi_device_pkg), line:7:11, endln:7:28
   |vpiDefName:work@top
@@ -324,13 +299,16 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ImportedTypespec/dut.sv, line:6:1, endln:10:10
     |vpiRhs:
-    \_constant: , line:9:15, endln:9:33
+    \_sys_func_call: ($bits), line:9:15, endln:9:33
       |vpiParent:
       \_cont_assign: , line:9:11, endln:9:33
-      |vpiDecompile:10
-      |vpiSize:64
-      |UINT:10
-      |vpiConstType:9
+      |vpiArgument:
+      \_ref_obj: (work@top.sram_addr_t), line:9:21, endln:9:32
+        |vpiParent:
+        \_sys_func_call: ($bits), line:9:15, endln:9:33
+        |vpiName:sram_addr_t
+        |vpiFullName:work@top.sram_addr_t
+      |vpiName:$bits
     |vpiLhs:
     \_ref_obj: (work@top.o), line:9:11, endln:9:12
       |vpiParent:
@@ -340,8 +318,6 @@ design: (unnamed)
       |vpiActual:
       \_logic_net: (work@top.o), line:6:23, endln:6:24
 \_weaklyReferenced:
-\_package: (spi_device_pkg), file:${SURELOG_DIR}/tests/ImportedTypespec/dut.sv, line:1:1, endln:4:11
-  |vpiName:spi_device_pkg
 \_int_typespec: , line:2:14, endln:2:26
   |vpiParent:
   \_parameter: (spi_device_pkg::SramAw), line:2:27, endln:2:33
@@ -351,17 +327,17 @@ design: (unnamed)
   |vpiParent:
   \_ref_typespec: (work@top.SramAw)
   |vpiInstance:
-  \_package: (spi_device_pkg), file:${SURELOG_DIR}/tests/ImportedTypespec/dut.sv, line:1:1, endln:4:11
+  \_package: spi_device_pkg (spi_device_pkg::), file:${SURELOG_DIR}/tests/ImportedTypespec/dut.sv, line:1:1, endln:4:11
 \_int_typespec: , line:2:14, endln:2:26
   |vpiParent:
   \_ref_typespec: (work@top)
   |vpiInstance:
-  \_package: (spi_device_pkg), file:${SURELOG_DIR}/tests/ImportedTypespec/dut.sv, line:1:1, endln:4:11
+  \_package: spi_device_pkg (spi_device_pkg::), file:${SURELOG_DIR}/tests/ImportedTypespec/dut.sv, line:1:1, endln:4:11
 \_int_typespec: , line:2:14, endln:2:26
   |vpiParent:
   \_ref_typespec: (work@top.SramAw)
   |vpiInstance:
-  \_package: (spi_device_pkg), file:${SURELOG_DIR}/tests/ImportedTypespec/dut.sv, line:1:1, endln:4:11
+  \_package: spi_device_pkg (spi_device_pkg::), file:${SURELOG_DIR}/tests/ImportedTypespec/dut.sv, line:1:1, endln:4:11
 \_int_typespec: , line:6:19, endln:6:22
   |vpiSigned:1
 ===================
@@ -372,5 +348,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ImportedTypespec/dut.sv | ${SURELOG_DIR}/build/regression/ImportedTypespec/roundtrip/dut_000.sv | 3 | 10 |
+[roundtrip]: ${SURELOG_DIR}/tests/ImportedTypespec/dut.sv | ${SURELOG_DIR}/build/regression/ImportedTypespec/roundtrip/dut_000.sv | 1 | 10 |
 ============================== End RoundTrip Results ==============================

@@ -621,45 +621,44 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:1:1: No timescale set for "fpnew_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:43:1: No timescale set for "top".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:1:1: Compile package "fpnew_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamOverload3/dut.sv:43:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             1
-bit_select                                             5
-constant                                             151
+bit_select                                             3
+constant                                              67
 cont_assign                                            1
 design                                                 1
-enum_const                                            10
-enum_typespec                                          2
+enum_const                                             5
+enum_typespec                                          1
 func_call                                              1
-function                                               2
+function                                               1
 gen_for                                                1
 gen_if_else                                            1
-hier_path                                              6
-int_typespec                                          26
-int_var                                                2
-io_decl                                                2
+hier_path                                              4
+int_typespec                                          12
+int_var                                                1
+io_decl                                                1
 logic_net                                              1
-logic_typespec                                         2
-module_inst                                            3
+logic_typespec                                         1
+module_inst                                            2
 named_begin                                            3
-operation                                             58
-package                                                2
-packed_array_typespec                                  4
-param_assign                                          20
-parameter                                             20
-range                                                  6
-ref_obj                                               26
-ref_typespec                                          91
+operation                                             32
+package                                                1
+packed_array_typespec                                  2
+param_assign                                          12
+parameter                                             12
+range                                                  3
+ref_obj                                               23
+ref_typespec                                          43
 ref_var                                                1
-return_stmt                                            2
-string_typespec                                       35
-struct_typespec                                        4
-sys_func_call                                          4
-tagged_pattern                                        35
-typespec_member                                        8
-unsupported_typespec                                   6
+return_stmt                                            1
+string_typespec                                       15
+struct_typespec                                        2
+sys_func_call                                          3
+tagged_pattern                                        15
+typespec_member                                        4
+unsupported_typespec                                   4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamOverload3/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ParamOverload3/slpp_all/checker/surelog.chk.html ...
@@ -1174,7 +1173,6 @@ design: (unnamed)
   \_parameter: (work@top.NUM_FORMATS), line:44:28, endln:44:39
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:43:1, endln:64:10
-    |UINT:5
     |vpiTypespec:
     \_ref_typespec: (work@top.NUM_FORMATS)
       |vpiParent:
@@ -1209,20 +1207,13 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:43:1, endln:64:10
     |vpiRhs:
-    \_constant: , line:44:43, endln:44:54
+    \_ref_obj: (work@top.fpnew_pkg::NUM_FP_FORMATS), line:44:43, endln:44:68
       |vpiParent:
       \_param_assign: , line:44:28, endln:44:68
-      |vpiDecompile:5
-      |vpiSize:32
-      |UINT:5
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:44:43, endln:44:54
-        |vpiFullName:work@top
-        |vpiActual:
-        \_int_typespec: , line:44:15, endln:44:27
-      |vpiConstType:9
+      |vpiName:fpnew_pkg::NUM_FP_FORMATS
+      |vpiFullName:work@top.fpnew_pkg::NUM_FP_FORMATS
+      |vpiActual:
+      \_parameter: (fpnew_pkg::NUM_FP_FORMATS), line:3:27, endln:3:41
     |vpiLhs:
     \_parameter: (work@top.NUM_FORMATS), line:44:28, endln:44:39
   |vpiParamAssign:
@@ -1230,105 +1221,13 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:43:1, endln:64:10
     |vpiRhs:
-    \_operation: , line:45:63, endln:45:74
+    \_ref_obj: (work@top.fpnew_pkg::RV64D_Xsflt), line:45:63, endln:45:85
       |vpiParent:
       \_param_assign: , line:45:46, endln:45:85
-      |vpiOpType:75
-      |vpiOperand:
-      \_tagged_pattern: , line:30:20, endln:30:22
-        |vpiParent:
-        \_operation: , line:45:63, endln:45:74
-        |vpiPattern:
-        \_constant: , line:30:20, endln:30:22
-          |vpiParent:
-          \_tagged_pattern: , line:30:20, endln:30:22
-          |vpiDecompile:64
-          |vpiSize:64
-          |UINT:64
-          |vpiConstType:9
-        |vpiTypespec:
-        \_ref_typespec: (work@top)
-          |vpiParent:
-          \_tagged_pattern: , line:30:20, endln:30:22
-          |vpiFullName:work@top
-          |vpiActual:
-          \_string_typespec: (Width), line:30:5, endln:30:10
-      |vpiOperand:
-      \_tagged_pattern: , line:31:20, endln:31:24
-        |vpiParent:
-        \_operation: , line:45:63, endln:45:74
-        |vpiPattern:
-        \_constant: , line:31:20, endln:31:24
-          |vpiParent:
-          \_tagged_pattern: , line:31:20, endln:31:24
-          |vpiDecompile:1'b1
-          |vpiSize:1
-          |BIN:1
-          |vpiConstType:3
-        |vpiTypespec:
-        \_ref_typespec: (work@top)
-          |vpiParent:
-          \_tagged_pattern: , line:31:20, endln:31:24
-          |vpiFullName:work@top
-          |vpiActual:
-          \_string_typespec: (EnableVectors), line:31:5, endln:31:18
-      |vpiOperand:
-      \_tagged_pattern: , line:32:20, endln:32:24
-        |vpiParent:
-        \_operation: , line:45:63, endln:45:74
-        |vpiPattern:
-        \_constant: , line:32:20, endln:32:24
-          |vpiParent:
-          \_tagged_pattern: , line:32:20, endln:32:24
-          |vpiDecompile:1'b1
-          |vpiSize:1
-          |BIN:1
-          |vpiConstType:3
-        |vpiTypespec:
-        \_ref_typespec: (work@top)
-          |vpiParent:
-          \_tagged_pattern: , line:32:20, endln:32:24
-          |vpiFullName:work@top
-          |vpiActual:
-          \_string_typespec: (EnableNanBox), line:32:5, endln:32:17
-      |vpiOperand:
-      \_tagged_pattern: , line:33:20, endln:33:28
-        |vpiParent:
-        \_operation: , line:45:63, endln:45:74
-        |vpiPattern:
-        \_constant: , line:33:20, endln:33:28
-          |vpiParent:
-          \_tagged_pattern: , line:33:20, endln:33:28
-          |vpiDecompile:5'b11111
-          |vpiSize:5
-          |BIN:11111
-          |vpiConstType:3
-        |vpiTypespec:
-        \_ref_typespec: (work@top)
-          |vpiParent:
-          \_tagged_pattern: , line:33:20, endln:33:28
-          |vpiFullName:work@top
-          |vpiActual:
-          \_string_typespec: (FpFmtMask), line:33:5, endln:33:14
-      |vpiOperand:
-      \_tagged_pattern: , line:34:20, endln:34:27
-        |vpiParent:
-        \_operation: , line:45:63, endln:45:74
-        |vpiPattern:
-        \_constant: , line:34:20, endln:34:27
-          |vpiParent:
-          \_tagged_pattern: , line:34:20, endln:34:27
-          |vpiDecompile:4'b1111
-          |vpiSize:4
-          |BIN:1111
-          |vpiConstType:3
-        |vpiTypespec:
-        \_ref_typespec: (work@top)
-          |vpiParent:
-          \_tagged_pattern: , line:34:20, endln:34:27
-          |vpiFullName:work@top
-          |vpiActual:
-          \_string_typespec: (IntFmtMask), line:34:5, endln:34:15
+      |vpiName:fpnew_pkg::RV64D_Xsflt
+      |vpiFullName:work@top.fpnew_pkg::RV64D_Xsflt
+      |vpiActual:
+      \_parameter: (fpnew_pkg::RV64D_Xsflt), line:29:29, endln:29:40
     |vpiLhs:
     \_parameter: (work@top.Features), line:45:46, endln:45:54
   |vpiParamAssign:
@@ -1356,7 +1255,7 @@ design: (unnamed)
   |vpiNet:
   \_logic_net: (work@top.fmt), line:49:24, endln:49:27
     |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:43:1, endln:64:10
+    \_operation: , line:49:24, endln:49:47
     |vpiName:fmt
     |vpiFullName:work@top.fmt
     |vpiNetType:1
@@ -1465,7 +1364,7 @@ design: (unnamed)
               |vpiFullName:work@top.gen_nanbox_check.fmt
           |vpiName:fpnew_pkg::fp_width
           |vpiFunction:
-          \_function: (fp_width), line:37:3, endln:39:14
+          \_function: (fpnew_pkg::fp_width), line:37:3, endln:39:14
         |vpiLhs:
         \_parameter: (work@top.gen_nanbox_check.FP_WIDTH), line:50:29, endln:50:89
           |vpiParent:
@@ -1558,182 +1457,6 @@ design: (unnamed)
                 |vpiName:fmt
                 |vpiFullName:work@top.gen_nanbox_check.no_check.fmt
 \_weaklyReferenced:
-\_function: (fp_width), line:37:3, endln:39:14
-  |vpiName:fp_width
-  |vpiVisibility:1
-  |vpiAutomatic:1
-  |vpiReturn:
-  \_int_var: (fp_width), line:37:22, endln:37:34
-    |vpiParent:
-    \_function: (fp_width), line:37:3, endln:39:14
-    |vpiTypespec:
-    \_ref_typespec: (fp_width)
-      |vpiParent:
-      \_int_var: (fp_width), line:37:22, endln:37:34
-      |vpiFullName:fp_width
-      |vpiActual:
-      \_int_typespec: , line:37:22, endln:37:34
-    |vpiFullName:fp_width
-  |vpiIODecl:
-  \_io_decl: (fmt), line:37:56, endln:37:59
-    |vpiParent:
-    \_function: (fp_width), line:37:3, endln:39:14
-    |vpiDirection:1
-    |vpiName:fmt
-    |vpiTypedef:
-    \_ref_typespec: (fp_width.fmt)
-      |vpiParent:
-      \_io_decl: (fmt), line:37:56, endln:37:59
-      |vpiFullName:fp_width.fmt
-      |vpiActual:
-      \_enum_typespec: (fpnew_pkg::fp_format_e), line:37:44, endln:37:55
-  |vpiStmt:
-  \_return_stmt: , line:38:5, endln:38:11
-    |vpiParent:
-    \_function: (fp_width), line:37:3, endln:39:14
-    |vpiCondition:
-    \_operation: , line:38:12, endln:38:71
-      |vpiParent:
-      \_return_stmt: , line:38:5, endln:38:11
-      |vpiOpType:24
-      |vpiOperand:
-      \_operation: , line:38:12, endln:38:67
-        |vpiParent:
-        \_operation: , line:38:12, endln:38:71
-        |vpiOpType:24
-        |vpiOperand:
-        \_hier_path: (FP_ENCODINGS[fmt].exp_bits), line:38:12, endln:38:38
-          |vpiParent:
-          \_operation: , line:38:12, endln:38:67
-          |vpiActual:
-          \_bit_select: (FP_ENCODINGS[fmt]), line:38:12, endln:38:24
-            |vpiParent:
-            \_hier_path: (FP_ENCODINGS[fmt].exp_bits), line:38:12, endln:38:38
-            |vpiName:FP_ENCODINGS
-            |vpiFullName:FP_ENCODINGS[fmt]
-            |vpiIndex:
-            \_ref_obj: (fp_width.fmt), line:38:25, endln:38:28
-              |vpiParent:
-              \_hier_path: (FP_ENCODINGS[fmt].exp_bits), line:38:12, endln:38:38
-              |vpiName:fmt
-              |vpiFullName:fp_width.fmt
-          |vpiActual:
-          \_ref_obj: (fp_width.exp_bits), line:38:30, endln:38:38
-            |vpiParent:
-            \_hier_path: (FP_ENCODINGS[fmt].exp_bits), line:38:12, endln:38:38
-            |vpiName:exp_bits
-            |vpiFullName:fp_width.exp_bits
-          |vpiName:FP_ENCODINGS[fmt].exp_bits
-        |vpiOperand:
-        \_hier_path: (FP_ENCODINGS[fmt].man_bits), line:38:41, endln:38:67
-          |vpiParent:
-          \_operation: , line:38:12, endln:38:67
-          |vpiActual:
-          \_bit_select: (FP_ENCODINGS[fmt]), line:38:41, endln:38:53
-            |vpiParent:
-            \_hier_path: (FP_ENCODINGS[fmt].man_bits), line:38:41, endln:38:67
-            |vpiName:FP_ENCODINGS
-            |vpiFullName:FP_ENCODINGS[fmt]
-            |vpiIndex:
-            \_ref_obj: (fp_width.fmt), line:38:54, endln:38:57
-              |vpiParent:
-              \_hier_path: (FP_ENCODINGS[fmt].man_bits), line:38:41, endln:38:67
-              |vpiName:fmt
-              |vpiFullName:fp_width.fmt
-          |vpiActual:
-          \_ref_obj: (fp_width.man_bits), line:38:59, endln:38:67
-            |vpiParent:
-            \_hier_path: (FP_ENCODINGS[fmt].man_bits), line:38:41, endln:38:67
-            |vpiName:man_bits
-            |vpiFullName:fp_width.man_bits
-          |vpiName:FP_ENCODINGS[fmt].man_bits
-      |vpiOperand:
-      \_constant: , line:38:70, endln:38:71
-        |vpiParent:
-        \_operation: , line:38:12, endln:38:71
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-\_enum_typespec: (fpnew_pkg::fp_format_e), line:37:44, endln:37:55
-  |vpiName:fpnew_pkg::fp_format_e
-  |vpiInstance:
-  \_package: (fpnew_pkg), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:1:1, endln:41:11
-  |vpiBaseTypespec:
-  \_ref_typespec: (fpnew_pkg::fp_format_e)
-    |vpiParent:
-    \_enum_typespec: (fpnew_pkg::fp_format_e), line:37:44, endln:37:55
-    |vpiFullName:fpnew_pkg::fp_format_e
-    |vpiActual:
-    \_logic_typespec: , line:11:16, endln:11:42
-  |vpiEnumConst:
-  \_enum_const: (FP32), line:12:5, endln:12:18
-    |vpiParent:
-    \_enum_typespec: (fpnew_pkg::fp_format_e), line:37:44, endln:37:55
-    |vpiName:FP32
-    |INT:0
-    |vpiDecompile:'d0
-    |vpiSize:-1
-  |vpiEnumConst:
-  \_enum_const: (FP64), line:13:5, endln:13:18
-    |vpiParent:
-    \_enum_typespec: (fpnew_pkg::fp_format_e), line:37:44, endln:37:55
-    |vpiName:FP64
-    |INT:1
-    |vpiDecompile:'d1
-    |vpiSize:-1
-  |vpiEnumConst:
-  \_enum_const: (FP16), line:14:5, endln:14:18
-    |vpiParent:
-    \_enum_typespec: (fpnew_pkg::fp_format_e), line:37:44, endln:37:55
-    |vpiName:FP16
-    |INT:2
-    |vpiDecompile:'d2
-    |vpiSize:-1
-  |vpiEnumConst:
-  \_enum_const: (FP8), line:15:5, endln:15:18
-    |vpiParent:
-    \_enum_typespec: (fpnew_pkg::fp_format_e), line:37:44, endln:37:55
-    |vpiName:FP8
-    |INT:3
-    |vpiDecompile:'d3
-    |vpiSize:-1
-  |vpiEnumConst:
-  \_enum_const: (FP16ALT), line:16:5, endln:16:18
-    |vpiParent:
-    \_enum_typespec: (fpnew_pkg::fp_format_e), line:37:44, endln:37:55
-    |vpiName:FP16ALT
-    |INT:4
-    |vpiDecompile:'d4
-    |vpiSize:-1
-\_package: (fpnew_pkg), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:1:1, endln:41:11
-  |vpiName:fpnew_pkg
-\_logic_typespec: , line:11:16, endln:11:42
-  |vpiInstance:
-  \_package: (fpnew_pkg), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:1:1, endln:41:11
-  |vpiRange:
-  \_range: , line:11:22, endln:11:42
-    |vpiParent:
-    \_logic_typespec: , line:11:16, endln:11:42
-    |vpiLeftRange:
-    \_constant: , line:11:23, endln:11:37
-      |vpiParent:
-      \_range: , line:11:22, endln:11:42
-      |vpiDecompile:2
-      |vpiSize:64
-      |INT:2
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:11:40, endln:11:41
-      |vpiParent:
-      \_range: , line:11:22, endln:11:42
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_int_typespec: , line:37:22, endln:37:34
-  |vpiInstance:
-  \_package: (fpnew_pkg), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:1:1, endln:41:11
 \_int_typespec: , line:3:14, endln:3:26
   |vpiParent:
   \_parameter: (fpnew_pkg::NUM_FP_FORMATS), line:3:27, endln:3:41
@@ -1745,13 +1468,9 @@ design: (unnamed)
   |vpiInstance:
   \_package: fpnew_pkg (fpnew_pkg::), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:1:1, endln:41:11
 \_int_typespec: , line:7:5, endln:7:17
-  |vpiParent:
-  \_typespec_member: (exp_bits), line:7:18, endln:7:26
   |vpiInstance:
   \_package: fpnew_pkg (fpnew_pkg::), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:1:1, endln:41:11
 \_int_typespec: , line:8:5, endln:8:17
-  |vpiParent:
-  \_typespec_member: (man_bits), line:8:18, endln:8:26
   |vpiInstance:
   \_package: fpnew_pkg (fpnew_pkg::), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:1:1, endln:41:11
 \_logic_typespec: , line:11:16, endln:11:42
@@ -1866,26 +1585,6 @@ design: (unnamed)
   |vpiParent:
   \_parameter: (work@top.Features), line:45:46, endln:45:54
   |vpiName:fpnew_pkg::fpu_features_t
-\_string_typespec: (Width), line:30:5, endln:30:10
-  |vpiParent:
-  \_ref_typespec: (work@top)
-  |vpiName:Width
-\_string_typespec: (EnableVectors), line:31:5, endln:31:18
-  |vpiParent:
-  \_ref_typespec: (work@top)
-  |vpiName:EnableVectors
-\_string_typespec: (EnableNanBox), line:32:5, endln:32:17
-  |vpiParent:
-  \_ref_typespec: (work@top)
-  |vpiName:EnableNanBox
-\_string_typespec: (FpFmtMask), line:33:5, endln:33:14
-  |vpiParent:
-  \_ref_typespec: (work@top)
-  |vpiName:FpFmtMask
-\_string_typespec: (IntFmtMask), line:34:5, endln:34:15
-  |vpiParent:
-  \_ref_typespec: (work@top)
-  |vpiName:IntFmtMask
 \_unsupported_typespec: (fmt), line:49:15, endln:49:18
   |vpiName:fmt
 \_int_typespec: , line:49:30, endln:49:33

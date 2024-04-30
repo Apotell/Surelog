@@ -228,7 +228,6 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ParamConst/dut.sv:12:1: No timescale set for "prim_flop".
 [WRN:PA0205] ${SURELOG_DIR}/tests/ParamConst/dut.sv:18:1: No timescale set for "top".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/ParamConst/dut.sv:1:1: Compile package "lc_ctrl_state_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamConst/dut.sv:9:1: Compile module "work@generic_flop".
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamConst/dut.sv:12:1: Compile module "work@prim_flop".
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamConst/dut.sv:18:1: Compile module "work@top".
@@ -494,27 +493,27 @@ AST_DEBUG_END
 class_defn                                             8
 class_typespec                                         4
 class_var                                              3
-constant                                              72
+constant                                              42
 design                                                 1
-enum_const                                             7
-enum_typespec                                          3
+enum_const                                             6
+enum_typespec                                          2
 enum_var                                               1
 function                                               9
 import_typespec                                        1
 int_typespec                                           9
 int_var                                                4
 io_decl                                               11
-logic_typespec                                        22
+logic_typespec                                        13
 logic_var                                              1
-module_inst                                            5
-operation                                              4
-package                                                4
-param_assign                                          12
-parameter                                             14
-range                                                 22
+module_inst                                            4
+operation                                              2
+package                                                2
+param_assign                                           8
+parameter                                             10
+range                                                 13
 ref_module                                             2
 ref_obj                                                4
-ref_typespec                                          45
+ref_typespec                                          32
 task                                                   9
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamConst/slpp_all/surelog.uhdm ...
@@ -531,6 +530,36 @@ design: (unnamed)
   |vpiName:builtin
   |vpiFullName:builtin::
   |vpiDefName:builtin
+  |vpiClassDefn:
+  \_class_defn: (builtin::any_sverilog_class)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:any_sverilog_class
+    |vpiFullName:builtin::any_sverilog_class
+  |vpiClassDefn:
+  \_class_defn: (builtin::array)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:array
+    |vpiFullName:builtin::array
+  |vpiClassDefn:
+  \_class_defn: (builtin::queue)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:queue
+    |vpiFullName:builtin::queue
+  |vpiClassDefn:
+  \_class_defn: (builtin::string)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:string
+    |vpiFullName:builtin::string
+  |vpiClassDefn:
+  \_class_defn: (builtin::system)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:system
+    |vpiFullName:builtin::system
 |uhdmallPackages:
 \_package: lc_ctrl_state_pkg (lc_ctrl_state_pkg::), file:${SURELOG_DIR}/tests/ParamConst/dut.sv, line:1:1, endln:7:11
   |vpiParent:
@@ -1263,25 +1292,6 @@ design: (unnamed)
       |vpiImported:lc_ctrl_state_pkg
   |vpiTypedef:
   \_enum_typespec: (lc_ctrl_state_pkg::lc_state_e), line:4:3, endln:6:16
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamConst/dut.sv, line:18:1, endln:25:10
-    |vpiName:lc_ctrl_state_pkg::lc_state_e
-    |vpiInstance:
-    \_package: (lc_ctrl_state_pkg), file:${SURELOG_DIR}/tests/ParamConst/dut.sv, line:1:1, endln:7:11
-    |vpiBaseTypespec:
-    \_ref_typespec: (work@top.lc_ctrl_state_pkg::lc_state_e)
-      |vpiParent:
-      \_enum_typespec: (lc_ctrl_state_pkg::lc_state_e), line:4:3, endln:6:16
-      |vpiFullName:work@top.lc_ctrl_state_pkg::lc_state_e
-      |vpiActual:
-      \_logic_typespec: , line:4:16, endln:4:27
-    |vpiEnumConst:
-    \_enum_const: (LcStScrap), line:5:5, endln:5:34
-      |vpiParent:
-      \_enum_typespec: (lc_ctrl_state_pkg::lc_state_e), line:4:3, endln:6:16
-      |vpiName:LcStScrap
-      |BIN:1001
-      |vpiSize:4
   |vpiTypedef:
   \_import_typespec: (lc_ctrl_state_pkg), line:19:10, endln:19:30
   |vpiDefName:work@top
@@ -1294,31 +1304,6 @@ design: (unnamed)
     |vpiActual:
     \_module_inst: work@prim_flop (work@prim_flop), file:${SURELOG_DIR}/tests/ParamConst/dut.sv, line:12:1, endln:16:10
 \_weaklyReferenced:
-\_package: (lc_ctrl_state_pkg), file:${SURELOG_DIR}/tests/ParamConst/dut.sv, line:1:1, endln:7:11
-  |vpiName:lc_ctrl_state_pkg
-\_logic_typespec: , line:4:16, endln:4:27
-  |vpiInstance:
-  \_package: (lc_ctrl_state_pkg), file:${SURELOG_DIR}/tests/ParamConst/dut.sv, line:1:1, endln:7:11
-  |vpiRange:
-  \_range: , line:4:22, endln:4:27
-    |vpiParent:
-    \_logic_typespec: , line:4:16, endln:4:27
-    |vpiLeftRange:
-    \_constant: , line:4:23, endln:4:24
-      |vpiParent:
-      \_range: , line:4:22, endln:4:27
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:4:25, endln:4:26
-      |vpiParent:
-      \_range: , line:4:22, endln:4:27
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 \_logic_typespec: , line:2:13, endln:2:24
   |vpiParent:
   \_parameter: (lc_ctrl_state_pkg::B0), line:2:25, endln:2:27
@@ -1442,7 +1427,7 @@ design: (unnamed)
   |vpiParent:
   \_ref_typespec: (work@top.B0)
   |vpiInstance:
-  \_package: (lc_ctrl_state_pkg), file:${SURELOG_DIR}/tests/ParamConst/dut.sv, line:1:1, endln:7:11
+  \_package: lc_ctrl_state_pkg (lc_ctrl_state_pkg::), file:${SURELOG_DIR}/tests/ParamConst/dut.sv, line:1:1, endln:7:11
   |vpiRange:
   \_range: , line:2:19, endln:2:24
     |vpiParent:
@@ -1467,7 +1452,7 @@ design: (unnamed)
   |vpiParent:
   \_ref_typespec: (work@top.B1)
   |vpiInstance:
-  \_package: (lc_ctrl_state_pkg), file:${SURELOG_DIR}/tests/ParamConst/dut.sv, line:1:1, endln:7:11
+  \_package: lc_ctrl_state_pkg (lc_ctrl_state_pkg::), file:${SURELOG_DIR}/tests/ParamConst/dut.sv, line:1:1, endln:7:11
   |vpiRange:
   \_range: , line:3:19, endln:3:24
     |vpiParent:
@@ -1492,7 +1477,7 @@ design: (unnamed)
   |vpiParent:
   \_ref_typespec: (work@top)
   |vpiInstance:
-  \_package: (lc_ctrl_state_pkg), file:${SURELOG_DIR}/tests/ParamConst/dut.sv, line:1:1, endln:7:11
+  \_package: lc_ctrl_state_pkg (lc_ctrl_state_pkg::), file:${SURELOG_DIR}/tests/ParamConst/dut.sv, line:1:1, endln:7:11
   |vpiRange:
   \_range: , line:2:19, endln:2:24
     |vpiParent:
@@ -1517,7 +1502,7 @@ design: (unnamed)
   |vpiParent:
   \_ref_typespec: (work@top.B0)
   |vpiInstance:
-  \_package: (lc_ctrl_state_pkg), file:${SURELOG_DIR}/tests/ParamConst/dut.sv, line:1:1, endln:7:11
+  \_package: lc_ctrl_state_pkg (lc_ctrl_state_pkg::), file:${SURELOG_DIR}/tests/ParamConst/dut.sv, line:1:1, endln:7:11
   |vpiRange:
   \_range: , line:2:19, endln:2:24
     |vpiParent:
@@ -1542,7 +1527,7 @@ design: (unnamed)
   |vpiParent:
   \_ref_typespec: (work@top)
   |vpiInstance:
-  \_package: (lc_ctrl_state_pkg), file:${SURELOG_DIR}/tests/ParamConst/dut.sv, line:1:1, endln:7:11
+  \_package: lc_ctrl_state_pkg (lc_ctrl_state_pkg::), file:${SURELOG_DIR}/tests/ParamConst/dut.sv, line:1:1, endln:7:11
   |vpiRange:
   \_range: , line:3:19, endln:3:24
     |vpiParent:
@@ -1567,7 +1552,7 @@ design: (unnamed)
   |vpiParent:
   \_ref_typespec: (work@top.B1)
   |vpiInstance:
-  \_package: (lc_ctrl_state_pkg), file:${SURELOG_DIR}/tests/ParamConst/dut.sv, line:1:1, endln:7:11
+  \_package: lc_ctrl_state_pkg (lc_ctrl_state_pkg::), file:${SURELOG_DIR}/tests/ParamConst/dut.sv, line:1:1, endln:7:11
   |vpiRange:
   \_range: , line:3:19, endln:3:24
     |vpiParent:
@@ -1624,5 +1609,5 @@ design: (unnamed)
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/ParamConst/builtin.sv | ${SURELOG_DIR}/build/regression/ParamConst/roundtrip/builtin_000.sv | 0 | 0 |
-[roundtrip]: ${SURELOG_DIR}/tests/ParamConst/dut.sv     | ${SURELOG_DIR}/build/regression/ParamConst/roundtrip/dut_000.sv     | 11 | 25 |
+[roundtrip]: ${SURELOG_DIR}/tests/ParamConst/dut.sv     | ${SURELOG_DIR}/build/regression/ParamConst/roundtrip/dut_000.sv     | 10 | 25 |
 ============================== End RoundTrip Results ==============================

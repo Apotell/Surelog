@@ -108,7 +108,6 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/LargeHexCast/dut.sv:1:1: No timescale set for "kmac_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/LargeHexCast/dut.sv:15:1: No timescale set for "kmac_entropy".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/LargeHexCast/dut.sv:1:1: Compile package "kmac_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/LargeHexCast/dut.sv:15:1: Compile module "work@kmac_entropy".
 AST_DEBUG_BEGIN
 LIB:  work
@@ -372,7 +371,7 @@ AST_DEBUG_END
 class_defn                                             8
 class_typespec                                         4
 class_var                                              3
-constant                                              40
+constant                                              28
 design                                                 1
 enum_const                                             5
 enum_typespec                                          1
@@ -381,22 +380,22 @@ function                                               9
 import_typespec                                        1
 int_typespec                                           9
 int_var                                                4
-integer_typespec                                       7
+integer_typespec                                       4
 io_decl                                               11
-logic_typespec                                        10
+logic_typespec                                         7
 logic_var                                              1
-module_inst                                            3
-operation                                             21
-package                                                4
-param_assign                                          10
-parameter                                             12
-range                                                 10
-ref_typespec                                          60
-string_typespec                                       14
-struct_typespec                                       10
-tagged_pattern                                        14
+module_inst                                            1
+operation                                             12
+package                                                2
+param_assign                                           6
+parameter                                              8
+range                                                  7
+ref_typespec                                          42
+string_typespec                                        8
+struct_typespec                                        7
+tagged_pattern                                         8
 task                                                   9
-typespec_member                                       10
+typespec_member                                        7
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LargeHexCast/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/LargeHexCast/slpp_all/checker/surelog.chk.html ...
@@ -412,6 +411,36 @@ design: (unnamed)
   |vpiName:builtin
   |vpiFullName:builtin::
   |vpiDefName:builtin
+  |vpiClassDefn:
+  \_class_defn: (builtin::any_sverilog_class)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:any_sverilog_class
+    |vpiFullName:builtin::any_sverilog_class
+  |vpiClassDefn:
+  \_class_defn: (builtin::array)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:array
+    |vpiFullName:builtin::array
+  |vpiClassDefn:
+  \_class_defn: (builtin::queue)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:queue
+    |vpiFullName:builtin::queue
+  |vpiClassDefn:
+  \_class_defn: (builtin::string)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:string
+    |vpiFullName:builtin::string
+  |vpiClassDefn:
+  \_class_defn: (builtin::system)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:system
+    |vpiFullName:builtin::system
 |uhdmallPackages:
 \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
   |vpiParent:
@@ -517,7 +546,7 @@ design: (unnamed)
   |vpiTypedef:
   \_struct_typespec: (kmac_pkg::app_config_t), line:2:12, endln:4:5
     |vpiParent:
-    \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
+    \_parameter: (kmac_pkg::B), line:10:27, endln:10:28
     |vpiName:kmac_pkg::app_config_t
     |vpiInstance:
     \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
@@ -528,10 +557,10 @@ design: (unnamed)
       \_struct_typespec: (kmac_pkg::app_config_t), line:2:12, endln:4:5
       |vpiName:Prefix
       |vpiTypespec:
-      \_ref_typespec: (kmac_pkg::kmac_pkg::app_config_t::Prefix)
+      \_ref_typespec: (kmac_pkg::B::kmac_pkg::app_config_t::Prefix)
         |vpiParent:
         \_typespec_member: (Prefix), line:3:20, endln:3:26
-        |vpiFullName:kmac_pkg::kmac_pkg::app_config_t::Prefix
+        |vpiFullName:kmac_pkg::B::kmac_pkg::app_config_t::Prefix
         |vpiActual:
         \_logic_typespec: , line:3:7, endln:3:19
       |vpiRefFile:${SURELOG_DIR}/tests/LargeHexCast/dut.sv
@@ -1110,64 +1139,12 @@ design: (unnamed)
       |vpiImported:kmac_pkg
   |vpiTypedef:
   \_struct_typespec: (kmac_pkg::app_config_t), line:2:12, endln:4:5
-    |vpiParent:
-    \_module_inst: work@kmac_entropy (work@kmac_entropy), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:15:1, endln:17:25
-    |vpiName:kmac_pkg::app_config_t
-    |vpiInstance:
-    \_package: (kmac_pkg), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
-    |vpiPacked:1
-    |vpiTypespecMember:
-    \_typespec_member: (Prefix), line:3:20, endln:3:26
-      |vpiParent:
-      \_struct_typespec: (kmac_pkg::app_config_t), line:2:12, endln:4:5
-      |vpiName:Prefix
-      |vpiTypespec:
-      \_ref_typespec: (work@kmac_entropy.kmac_pkg::app_config_t.Prefix)
-        |vpiParent:
-        \_typespec_member: (Prefix), line:3:20, endln:3:26
-        |vpiFullName:work@kmac_entropy.kmac_pkg::app_config_t.Prefix
-        |vpiActual:
-        \_logic_typespec: , line:3:7, endln:3:19
-      |vpiRefFile:${SURELOG_DIR}/tests/LargeHexCast/dut.sv
-      |vpiRefLineNo:3
-      |vpiRefColumnNo:7
-      |vpiRefEndLineNo:3
-      |vpiRefEndColumnNo:19
   |vpiTypedef:
   \_import_typespec: (kmac_pkg), line:16:11, endln:16:22
   |vpiDefName:work@kmac_entropy
   |vpiEndLabel:kmac_entropy
 \_weaklyReferenced:
-\_package: (kmac_pkg), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
-  |vpiName:kmac_pkg
 \_logic_typespec: , line:3:7, endln:3:19
-  |vpiParent:
-  \_typespec_member: (Prefix), line:3:20, endln:3:26
-  |vpiInstance:
-  \_package: (kmac_pkg), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
-  |vpiRange:
-  \_range: , line:3:13, endln:3:19
-    |vpiParent:
-    \_logic_typespec: , line:3:7, endln:3:19
-    |vpiLeftRange:
-    \_constant: , line:3:14, endln:3:16
-      |vpiParent:
-      \_range: , line:3:13, endln:3:19
-      |vpiDecompile:95
-      |vpiSize:64
-      |UINT:95
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:17, endln:3:18
-      |vpiParent:
-      \_range: , line:3:13, endln:3:19
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:3:7, endln:3:19
-  |vpiParent:
-  \_typespec_member: (Prefix), line:3:20, endln:3:26
   |vpiInstance:
   \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
   |vpiRange:
@@ -1207,7 +1184,7 @@ design: (unnamed)
   \_ref_typespec: (work@kmac_entropy.A)
   |vpiName:kmac_pkg::app_config_t
   |vpiInstance:
-  \_package: (kmac_pkg), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
+  \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
   |vpiPacked:1
   |vpiTypespecMember:
   \_typespec_member: (Prefix), line:3:20, endln:3:26
@@ -1230,7 +1207,7 @@ design: (unnamed)
   |vpiParent:
   \_ref_typespec: (work@kmac_entropy.A.kmac_pkg::app_config_t.Prefix)
   |vpiInstance:
-  \_package: (kmac_pkg), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
+  \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
   |vpiRange:
   \_range: , line:3:13, endln:3:19
     |vpiParent:
@@ -1256,7 +1233,7 @@ design: (unnamed)
   \_ref_typespec: (work@kmac_entropy.B)
   |vpiName:kmac_pkg::app_config_t
   |vpiInstance:
-  \_package: (kmac_pkg), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
+  \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
   |vpiPacked:1
   |vpiTypespecMember:
   \_typespec_member: (Prefix), line:3:20, endln:3:26
@@ -1279,7 +1256,7 @@ design: (unnamed)
   |vpiParent:
   \_ref_typespec: (work@kmac_entropy.B.kmac_pkg::app_config_t.Prefix)
   |vpiInstance:
-  \_package: (kmac_pkg), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
+  \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
   |vpiRange:
   \_range: , line:3:13, endln:3:19
     |vpiParent:
@@ -1308,14 +1285,14 @@ design: (unnamed)
   |vpiParent:
   \_ref_typespec: (work@kmac_entropy)
   |vpiInstance:
-  \_package: (kmac_pkg), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
+  \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
   |INT:96
 \_struct_typespec: (kmac_pkg::app_config_t), line:2:12, endln:4:5
   |vpiParent:
   \_ref_typespec: (work@kmac_entropy.A)
   |vpiName:kmac_pkg::app_config_t
   |vpiInstance:
-  \_package: (kmac_pkg), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
+  \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
   |vpiPacked:1
   |vpiTypespecMember:
   \_typespec_member: (Prefix), line:3:20, endln:3:26
@@ -1338,7 +1315,7 @@ design: (unnamed)
   |vpiParent:
   \_ref_typespec: (work@kmac_entropy.A.kmac_pkg::app_config_t.Prefix)
   |vpiInstance:
-  \_package: (kmac_pkg), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
+  \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
   |vpiRange:
   \_range: , line:3:13, endln:3:19
     |vpiParent:
@@ -1368,7 +1345,7 @@ design: (unnamed)
   \_ref_typespec: (work@kmac_entropy.B)
   |vpiName:kmac_pkg::app_config_t
   |vpiInstance:
-  \_package: (kmac_pkg), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
+  \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
   |vpiPacked:1
   |vpiTypespecMember:
   \_typespec_member: (Prefix), line:3:20, endln:3:26
@@ -1391,7 +1368,7 @@ design: (unnamed)
   |vpiParent:
   \_ref_typespec: (work@kmac_entropy.B.kmac_pkg::app_config_t.Prefix)
   |vpiInstance:
-  \_package: (kmac_pkg), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
+  \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
   |vpiRange:
   \_range: , line:3:13, endln:3:19
     |vpiParent:

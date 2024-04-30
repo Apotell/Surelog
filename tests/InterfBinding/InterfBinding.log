@@ -119,7 +119,6 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/InterfBinding/dut.sv:12:1: No timescale set for "ControllerIF".
 [WRN:PA0205] ${SURELOG_DIR}/tests/InterfBinding/dut.sv:29:1: No timescale set for "BypassNetwork".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/InterfBinding/dut.sv:1:1: Compile package "pack".
 [INF:CP0303] ${SURELOG_DIR}/tests/InterfBinding/dut.sv:29:1: Compile module "work@BypassNetwork".
 [INF:CP0304] ${SURELOG_DIR}/tests/InterfBinding/dut.sv:12:1: Compile interface "work@ControllerIF".
 [INF:UH0706] Creating UHDM Model...
@@ -133,15 +132,15 @@ interface_inst                                         1
 interface_typespec                                     2
 io_decl                                                1
 logic_net                                              5
-logic_typespec                                         4
+logic_typespec                                         2
 modport                                                1
 module_inst                                            1
-package                                                2
+package                                                1
 port                                                   3
 ref_obj                                                6
-ref_typespec                                           6
-struct_typespec                                        2
-typespec_member                                        4
+ref_typespec                                           4
+struct_typespec                                        1
+typespec_member                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfBinding/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/InterfBinding/slpp_all/checker/surelog.chk.html ...
@@ -159,7 +158,7 @@ design: (unnamed)
   |vpiTypedef:
   \_struct_typespec: (pack::PipelineControll), line:2:9, endln:6:2
     |vpiParent:
-    \_package: pack (pack::), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:1:1, endln:8:11
+    \_design: (unnamed)
     |vpiName:pack::PipelineControll
     |vpiInstance:
     \_package: pack (pack::), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:1:1, endln:8:11
@@ -170,10 +169,10 @@ design: (unnamed)
       \_struct_typespec: (pack::PipelineControll), line:2:9, endln:6:2
       |vpiName:stall
       |vpiTypespec:
-      \_ref_typespec: (pack::pack::PipelineControll::stall)
+      \_ref_typespec: (pack::PipelineControll.stall)
         |vpiParent:
         \_typespec_member: (stall), line:4:11, endln:4:16
-        |vpiFullName:pack::pack::PipelineControll::stall
+        |vpiFullName:pack::PipelineControll.stall
         |vpiActual:
         \_logic_typespec: , line:4:5, endln:4:10
       |vpiRefFile:${SURELOG_DIR}/tests/InterfBinding/dut.sv
@@ -187,10 +186,10 @@ design: (unnamed)
       \_struct_typespec: (pack::PipelineControll), line:2:9, endln:6:2
       |vpiName:clear
       |vpiTypespec:
-      \_ref_typespec: (pack::pack::PipelineControll::clear)
+      \_ref_typespec: (pack::PipelineControll.clear)
         |vpiParent:
         \_typespec_member: (clear), line:5:11, endln:5:16
-        |vpiFullName:pack::pack::PipelineControll::clear
+        |vpiFullName:pack::PipelineControll.clear
         |vpiActual:
         \_logic_typespec: , line:5:5, endln:5:10
       |vpiRefFile:${SURELOG_DIR}/tests/InterfBinding/dut.sv
@@ -206,46 +205,6 @@ design: (unnamed)
   |vpiFullName:work@ControllerIF
   |vpiTypedef:
   \_struct_typespec: (pack::PipelineControll), line:2:9, endln:6:2
-    |vpiParent:
-    \_module_inst: work@BypassNetwork (work@BypassNetwork), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:29:1, endln:36:10
-    |vpiName:pack::PipelineControll
-    |vpiInstance:
-    \_package: (pack), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:1:1, endln:8:11
-    |vpiPacked:1
-    |vpiTypespecMember:
-    \_typespec_member: (stall), line:4:11, endln:4:16
-      |vpiParent:
-      \_struct_typespec: (pack::PipelineControll), line:2:9, endln:6:2
-      |vpiName:stall
-      |vpiTypespec:
-      \_ref_typespec: (work@BypassNetwork.pack::PipelineControll.stall)
-        |vpiParent:
-        \_typespec_member: (stall), line:4:11, endln:4:16
-        |vpiFullName:work@BypassNetwork.pack::PipelineControll.stall
-        |vpiActual:
-        \_logic_typespec: , line:4:5, endln:4:10
-      |vpiRefFile:${SURELOG_DIR}/tests/InterfBinding/dut.sv
-      |vpiRefLineNo:4
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:4
-      |vpiRefEndColumnNo:10
-    |vpiTypespecMember:
-    \_typespec_member: (clear), line:5:11, endln:5:16
-      |vpiParent:
-      \_struct_typespec: (pack::PipelineControll), line:2:9, endln:6:2
-      |vpiName:clear
-      |vpiTypespec:
-      \_ref_typespec: (work@BypassNetwork.pack::PipelineControll.clear)
-        |vpiParent:
-        \_typespec_member: (clear), line:5:11, endln:5:16
-        |vpiFullName:work@BypassNetwork.pack::PipelineControll.clear
-        |vpiActual:
-        \_logic_typespec: , line:5:5, endln:5:10
-      |vpiRefFile:${SURELOG_DIR}/tests/InterfBinding/dut.sv
-      |vpiRefLineNo:5
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:5
-      |vpiRefEndColumnNo:10
   |vpiDefName:work@ControllerIF
   |vpiNet:
   \_logic_net: (work@ControllerIF.clk), line:14:14, endln:14:17
@@ -330,7 +289,7 @@ design: (unnamed)
   |vpiNet:
   \_logic_net: (work@BypassNetwork.o), line:33:9, endln:33:10
     |vpiParent:
-    \_module_inst: work@BypassNetwork (work@BypassNetwork), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:29:1, endln:36:10
+    \_cont_assign: , line:33:9, endln:33:25
     |vpiName:o
     |vpiFullName:work@BypassNetwork.o
     |vpiNetType:1
@@ -386,26 +345,10 @@ design: (unnamed)
 |vpiTypedef:
 \_struct_typespec: (pack::PipelineControll), line:2:9, endln:6:2
 \_weaklyReferenced:
-\_package: (pack), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:1:1, endln:8:11
-  |vpiName:pack
 \_logic_typespec: , line:4:5, endln:4:10
-  |vpiParent:
-  \_typespec_member: (stall), line:4:11, endln:4:16
-  |vpiInstance:
-  \_package: (pack), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:1:1, endln:8:11
-\_logic_typespec: , line:5:5, endln:5:10
-  |vpiParent:
-  \_typespec_member: (clear), line:5:11, endln:5:16
-  |vpiInstance:
-  \_package: (pack), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:1:1, endln:8:11
-\_logic_typespec: , line:4:5, endln:4:10
-  |vpiParent:
-  \_typespec_member: (stall), line:4:11, endln:4:16
   |vpiInstance:
   \_package: pack (pack::), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:1:1, endln:8:11
 \_logic_typespec: , line:5:5, endln:5:10
-  |vpiParent:
-  \_typespec_member: (clear), line:5:11, endln:5:16
   |vpiInstance:
   \_package: pack (pack::), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:1:1, endln:8:11
 \_interface_typespec: (BypassNetwork), line:30:18, endln:30:31

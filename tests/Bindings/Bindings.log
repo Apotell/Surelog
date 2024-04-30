@@ -1040,7 +1040,6 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/Bindings/dut.sv:67:1: No timescale set for "bsg_dff_reset".
 [WRN:PA0205] ${SURELOG_DIR}/tests/Bindings/dut.sv:82:1: No timescale set for "dut5".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/Bindings/dut.sv:3:1: Compile package "pack1".
 [INF:CP0303] ${SURELOG_DIR}/tests/Bindings/dut.sv:67:1: Compile module "work@bsg_dff_reset".
 [INF:CP0303] ${SURELOG_DIR}/tests/Bindings/dut.sv:20:1: Compile module "work@dut1".
 [INF:CP0303] ${SURELOG_DIR}/tests/Bindings/dut.sv:35:1: Compile module "work@dut2".
@@ -1314,33 +1313,33 @@ case_stmt                                              1
 class_defn                                             8
 class_typespec                                         4
 class_var                                              3
-constant                                              78
+constant                                              59
 cont_assign                                            4
 design                                                 1
-enum_const                                            17
-enum_typespec                                          7
+enum_const                                             9
+enum_typespec                                          3
 enum_var                                               1
 event_control                                          1
 function                                               9
 gen_if                                                 1
 gen_if_else                                            1
 if_else                                                1
-int_typespec                                          25
+int_typespec                                          22
 int_var                                                4
 io_decl                                               11
 logic_net                                             15
-logic_typespec                                        10
+logic_typespec                                         6
 logic_var                                              1
-module_inst                                            8
-operation                                             33
-package                                                4
-param_assign                                          20
-parameter                                             20
+module_inst                                            7
+operation                                             32
+package                                                2
+param_assign                                          16
+parameter                                             16
 port                                                   2
-range                                                 10
+range                                                  6
 ref_module                                             2
-ref_obj                                               53
-ref_typespec                                          65
+ref_obj                                               50
+ref_typespec                                          50
 string_typespec                                        1
 sys_func_call                                          3
 task                                                   9
@@ -1360,6 +1359,36 @@ design: (unnamed)
   |vpiName:builtin
   |vpiFullName:builtin::
   |vpiDefName:builtin
+  |vpiClassDefn:
+  \_class_defn: (builtin::any_sverilog_class)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:any_sverilog_class
+    |vpiFullName:builtin::any_sverilog_class
+  |vpiClassDefn:
+  \_class_defn: (builtin::array)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:array
+    |vpiFullName:builtin::array
+  |vpiClassDefn:
+  \_class_defn: (builtin::queue)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:queue
+    |vpiFullName:builtin::queue
+  |vpiClassDefn:
+  \_class_defn: (builtin::string)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:string
+    |vpiFullName:builtin::string
+  |vpiClassDefn:
+  \_class_defn: (builtin::system)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:system
+    |vpiFullName:builtin::system
 |uhdmallPackages:
 \_package: pack1 (pack1::), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:3:1, endln:17:11
   |vpiParent:
@@ -2007,28 +2036,28 @@ design: (unnamed)
   |vpiNet:
   \_logic_net: (work@bsg_dff_reset.clk_i), line:72:21, endln:72:26
     |vpiParent:
-    \_module_inst: work@bsg_dff_reset (work@bsg_dff_reset), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:67:1, endln:80:10
+    \_operation: , line:72:13, endln:72:26
     |vpiName:clk_i
     |vpiFullName:work@bsg_dff_reset.clk_i
     |vpiNetType:1
   |vpiNet:
   \_logic_net: (work@bsg_dff_reset.reset_i), line:74:13, endln:74:20
     |vpiParent:
-    \_module_inst: work@bsg_dff_reset (work@bsg_dff_reset), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:67:1, endln:80:10
+    \_begin: (work@bsg_dff_reset), line:73:6, endln:78:9
     |vpiName:reset_i
     |vpiFullName:work@bsg_dff_reset.reset_i
     |vpiNetType:1
   |vpiNet:
   \_logic_net: (work@bsg_dff_reset.data_r), line:75:11, endln:75:17
     |vpiParent:
-    \_module_inst: work@bsg_dff_reset (work@bsg_dff_reset), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:67:1, endln:80:10
+    \_assignment: , line:75:11, endln:75:46
     |vpiName:data_r
     |vpiFullName:work@bsg_dff_reset.data_r
     |vpiNetType:1
   |vpiNet:
   \_logic_net: (work@bsg_dff_reset.data_i), line:77:21, endln:77:27
     |vpiParent:
-    \_module_inst: work@bsg_dff_reset (work@bsg_dff_reset), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:67:1, endln:80:10
+    \_assignment: , line:77:11, endln:77:27
     |vpiName:data_i
     |vpiFullName:work@bsg_dff_reset.data_i
     |vpiNetType:1
@@ -2531,35 +2560,35 @@ design: (unnamed)
   |vpiNet:
   \_logic_net: (work@dut3.next_lfsr_state), line:60:10, endln:60:25
     |vpiParent:
-    \_module_inst: work@dut3 (work@dut3), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:54:1, endln:64:10
+    \_cont_assign: , line:60:10, endln:60:95
     |vpiName:next_lfsr_state
     |vpiFullName:work@dut3.next_lfsr_state
     |vpiNetType:1
   |vpiNet:
   \_logic_net: (work@dut3.entropy_i), line:60:36, endln:60:45
     |vpiParent:
-    \_module_inst: work@dut3 (work@dut3), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:54:1, endln:64:10
+    \_operation: , line:60:28, endln:60:46
     |vpiName:entropy_i
     |vpiFullName:work@dut3.entropy_i
     |vpiNetType:1
   |vpiNet:
   \_logic_net: (work@dut3.coeffs), line:60:72, endln:60:78
     |vpiParent:
-    \_module_inst: work@dut3 (work@dut3), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:54:1, endln:64:10
+    \_operation: , line:60:50, endln:60:78
     |vpiName:coeffs
     |vpiFullName:work@dut3.coeffs
     |vpiNetType:1
   |vpiNet:
   \_logic_net: (work@dut3.lfsr_q), line:60:83, endln:60:89
     |vpiParent:
-    \_module_inst: work@dut3 (work@dut3), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:54:1, endln:64:10
+    \_operation: , line:60:83, endln:60:94
     |vpiName:lfsr_q
     |vpiFullName:work@dut3.lfsr_q
     |vpiNetType:1
   |vpiNet:
   \_logic_net: (work@dut3.lockup), line:62:9, endln:62:15
     |vpiParent:
-    \_module_inst: work@dut3 (work@dut3), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:54:1, endln:64:10
+    \_cont_assign: , line:62:9, endln:62:28
     |vpiName:lockup
     |vpiFullName:work@dut3.lockup
     |vpiNetType:1
@@ -2900,7 +2929,7 @@ design: (unnamed)
   |vpiNet:
   \_logic_net: (work@dut5.GEN), line:97:8, endln:97:11
     |vpiParent:
-    \_module_inst: work@dut5 (work@dut5), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:82:1, endln:108:10
+    \_gen_if: , line:97:4, endln:97:6
     |vpiName:GEN
     |vpiFullName:work@dut5.GEN
     |vpiNetType:1

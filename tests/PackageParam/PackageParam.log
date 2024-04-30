@@ -225,9 +225,6 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackageParam/dut.sv:19:1: No timescale set for "otp_ctrl_reg_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackageParam/dut.sv:28:1: No timescale set for "otp_ctrl_pkg".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/PackageParam/dut.sv:2:1: Compile package "lc_ctrl_pkg".
-[INF:CP0301] ${SURELOG_DIR}/tests/PackageParam/dut.sv:19:1: Compile package "otp_ctrl_reg_pkg".
-[INF:CP0301] ${SURELOG_DIR}/tests/PackageParam/dut.sv:28:1: Compile package "otp_ctrl_pkg".
 AST_DEBUG_BEGIN
 LIB:  work
 FILE: ${SURELOG_DIR}/tests/PackageParam/builtin.sv
@@ -491,27 +488,27 @@ AST_DEBUG_END
 class_defn                                             8
 class_typespec                                         4
 class_var                                              3
-constant                                             109
+constant                                              43
 design                                                 1
-enum_const                                             9
-enum_typespec                                          3
+enum_const                                             7
+enum_typespec                                          2
 enum_var                                               1
 function                                               9
-import_typespec                                        4
-int_typespec                                          55
+import_typespec                                        2
+int_typespec                                          28
 int_var                                                4
 io_decl                                               11
-logic_typespec                                        14
+logic_typespec                                         5
 logic_var                                              1
-module_inst                                            6
-operation                                             18
-package                                                8
-param_assign                                          34
-parameter                                             40
-range                                                 14
-ref_obj                                               10
-ref_typespec                                         100
-sys_func_call                                          4
+module_inst                                            3
+operation                                              9
+package                                                4
+param_assign                                          17
+parameter                                             20
+range                                                  5
+ref_obj                                               11
+ref_typespec                                          50
+sys_func_call                                          3
 task                                                   9
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageParam/slpp_all/surelog.uhdm ...
@@ -528,6 +525,36 @@ design: (unnamed)
   |vpiName:builtin
   |vpiFullName:builtin::
   |vpiDefName:builtin
+  |vpiClassDefn:
+  \_class_defn: (builtin::any_sverilog_class)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:any_sverilog_class
+    |vpiFullName:builtin::any_sverilog_class
+  |vpiClassDefn:
+  \_class_defn: (builtin::array)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:array
+    |vpiFullName:builtin::array
+  |vpiClassDefn:
+  \_class_defn: (builtin::queue)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:queue
+    |vpiFullName:builtin::queue
+  |vpiClassDefn:
+  \_class_defn: (builtin::string)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:string
+    |vpiFullName:builtin::string
+  |vpiClassDefn:
+  \_class_defn: (builtin::system)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:system
+    |vpiFullName:builtin::system
 |uhdmallPackages:
 \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/PackageParam/dut.sv, line:2:1, endln:15:11
   |vpiParent:
@@ -842,7 +869,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:22:17, endln:22:39
       |vpiDecompile:2
-      |vpiSize:32
+      |vpiSize:64
       |UINT:2
       |vpiTypespec:
       \_ref_typespec: (otp_ctrl_pkg)
@@ -877,7 +904,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:23:17, endln:23:38
       |vpiDecompile:11
-      |vpiSize:32
+      |vpiSize:64
       |UINT:11
       |vpiTypespec:
       \_ref_typespec: (otp_ctrl_pkg)
@@ -912,7 +939,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:24:17, endln:24:36
       |vpiDecompile:9
-      |vpiSize:32
+      |vpiSize:64
       |UINT:9
       |vpiTypespec:
       \_ref_typespec: (otp_ctrl_pkg)
@@ -969,20 +996,11 @@ design: (unnamed)
       \_param_assign: , line:35:17, endln:35:73
       |vpiOpType:11
       |vpiOperand:
-      \_constant: , line:35:36, endln:35:52
+      \_ref_obj: (otp_ctrl_pkg::OtpByteAddrWidth), line:35:36, endln:35:52
         |vpiParent:
         \_operation: , line:35:36, endln:35:73
-        |vpiDecompile:11
-        |vpiSize:32
-        |UINT:11
-        |vpiTypespec:
-        \_ref_typespec: (otp_ctrl_pkg)
-          |vpiParent:
-          \_constant: , line:35:36, endln:35:52
-          |vpiFullName:otp_ctrl_pkg
-          |vpiActual:
-          \_int_typespec: , line:23:13, endln:23:16
-        |vpiConstType:9
+        |vpiName:OtpByteAddrWidth
+        |vpiFullName:otp_ctrl_pkg::OtpByteAddrWidth
       |vpiOperand:
       \_sys_func_call: ($clog2), line:35:55, endln:35:73
         |vpiParent:
@@ -1558,21 +1576,19 @@ design: (unnamed)
   |vpiParent:
   \_ref_typespec: (otp_ctrl_pkg::NumErrorEntries)
   |vpiInstance:
-  \_package: (otp_ctrl_reg_pkg), file:${SURELOG_DIR}/tests/PackageParam/dut.sv, line:19:1, endln:26:11
+  \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/PackageParam/dut.sv, line:19:1, endln:26:11
   |vpiSigned:1
-\_package: (otp_ctrl_reg_pkg), file:${SURELOG_DIR}/tests/PackageParam/dut.sv, line:19:1, endln:26:11
-  |vpiName:otp_ctrl_reg_pkg
 \_int_typespec: , line:22:13, endln:22:16
   |vpiParent:
   \_ref_typespec: (otp_ctrl_pkg::NumSramKeyReqSlots)
   |vpiInstance:
-  \_package: (otp_ctrl_reg_pkg), file:${SURELOG_DIR}/tests/PackageParam/dut.sv, line:19:1, endln:26:11
+  \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/PackageParam/dut.sv, line:19:1, endln:26:11
   |vpiSigned:1
 \_int_typespec: , line:23:13, endln:23:16
   |vpiParent:
   \_ref_typespec: (otp_ctrl_pkg::OtpByteAddrWidth)
   |vpiInstance:
-  \_package: (otp_ctrl_reg_pkg), file:${SURELOG_DIR}/tests/PackageParam/dut.sv, line:19:1, endln:26:11
+  \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/PackageParam/dut.sv, line:19:1, endln:26:11
   |vpiSigned:1
 \_int_typespec: , line:22:13, endln:22:16
   |vpiParent:
@@ -1622,12 +1638,6 @@ design: (unnamed)
   |vpiInstance:
   \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/PackageParam/dut.sv, line:28:1, endln:37:11
   |vpiSigned:1
-\_int_typespec: , line:23:13, endln:23:16
-  |vpiParent:
-  \_ref_typespec: (otp_ctrl_pkg)
-  |vpiInstance:
-  \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/PackageParam/dut.sv, line:19:1, endln:26:11
-  |vpiSigned:1
 \_class_typespec: 
   |vpiClassDefn:
   \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/PackageParam/builtin.sv, line:1:3, endln:27:11
@@ -1664,5 +1674,5 @@ design: (unnamed)
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/PackageParam/builtin.sv | ${SURELOG_DIR}/build/regression/PackageParam/roundtrip/builtin_000.sv | 0 | 0 |
-[roundtrip]: ${SURELOG_DIR}/tests/PackageParam/dut.sv     | ${SURELOG_DIR}/build/regression/PackageParam/roundtrip/dut_000.sv     | 1 | 37 |
+[roundtrip]: ${SURELOG_DIR}/tests/PackageParam/dut.sv     | ${SURELOG_DIR}/build/regression/PackageParam/roundtrip/dut_000.sv     | 0 | 37 |
 ============================== End RoundTrip Results ==============================

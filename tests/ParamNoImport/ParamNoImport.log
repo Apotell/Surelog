@@ -118,27 +118,26 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ParamNoImport/dut.sv:5:1: No timescale set for "pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/ParamNoImport/dut.sv:14:1: No timescale set for "dut".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/ParamNoImport/dut.sv:5:1: Compile package "pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamNoImport/dut.sv:14:1: Compile module "work@dut".
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamNoImport/dut.sv:1:1: Compile module "work@test".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              15
+constant                                               8
 design                                                 1
 int_typespec                                           1
-logic_typespec                                         4
-module_inst                                            4
-operation                                              6
-package                                                2
-param_assign                                           5
-parameter                                              5
-range                                                  4
+logic_typespec                                         2
+module_inst                                            2
+operation                                              3
+package                                                1
+param_assign                                           3
+parameter                                              3
+range                                                  2
 ref_module                                             1
-ref_typespec                                          17
-string_typespec                                        6
-struct_typespec                                        4
-tagged_pattern                                         6
-typespec_member                                        4
+ref_typespec                                           9
+string_typespec                                        3
+struct_typespec                                        2
+tagged_pattern                                         3
+typespec_member                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamNoImport/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ParamNoImport/slpp_all/checker/surelog.chk.html ...
@@ -197,7 +196,7 @@ design: (unnamed)
   |vpiTypedef:
   \_struct_typespec: (pkg::pwr_ast_rsp_t), line:6:9, endln:8:2
     |vpiParent:
-    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
+    \_parameter: (pkg::PWR_AST_RSP_DEFAULT), line:9:25, endln:9:44
     |vpiName:pkg::pwr_ast_rsp_t
     |vpiInstance:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
@@ -208,10 +207,10 @@ design: (unnamed)
       \_struct_typespec: (pkg::pwr_ast_rsp_t), line:6:9, endln:8:2
       |vpiName:slow_clk_val
       |vpiTypespec:
-      \_ref_typespec: (pkg::pkg::pwr_ast_rsp_t::slow_clk_val)
+      \_ref_typespec: (pkg::PWR_AST_RSP_DEFAULT::pkg::pwr_ast_rsp_t::slow_clk_val)
         |vpiParent:
         \_typespec_member: (slow_clk_val), line:7:15, endln:7:27
-        |vpiFullName:pkg::pkg::pwr_ast_rsp_t::slow_clk_val
+        |vpiFullName:pkg::PWR_AST_RSP_DEFAULT::pkg::pwr_ast_rsp_t::slow_clk_val
         |vpiActual:
         \_logic_typespec: , line:7:3, endln:7:14
       |vpiRefFile:${SURELOG_DIR}/tests/ParamNoImport/dut.sv
@@ -268,8 +267,6 @@ design: (unnamed)
   |vpiDefName:work@test
 \_weaklyReferenced:
 \_logic_typespec: , line:7:3, endln:7:14
-  |vpiParent:
-  \_typespec_member: (slow_clk_val), line:7:15, endln:7:27
   |vpiInstance:
   \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
   |vpiRange:

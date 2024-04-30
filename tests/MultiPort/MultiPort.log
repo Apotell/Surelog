@@ -71,24 +71,23 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/MultiPort/dut.sv:1:1: No timescale set for "my_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/MultiPort/dut.sv:7:1: No timescale set for "top".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/MultiPort/dut.sv:1:1: Compile package "my_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/MultiPort/dut.sv:7:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                               5
+constant                                               3
 design                                                 1
 import_typespec                                        1
-int_typespec                                           2
+int_typespec                                           1
 logic_net                                              2
-logic_typespec                                         2
-module_inst                                            2
-package                                                2
+logic_typespec                                         1
+module_inst                                            1
+package                                                1
 port                                                   2
-range                                                  2
+range                                                  1
 ref_obj                                                2
-ref_typespec                                           6
-struct_typespec                                        2
-typespec_member                                        4
+ref_typespec                                           4
+struct_typespec                                        1
+typespec_member                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/MultiPort/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/MultiPort/slpp_all/checker/surelog.chk.html ...
@@ -152,45 +151,6 @@ design: (unnamed)
   |vpiFullName:work@top
   |vpiTypedef:
   \_struct_typespec: (my_pkg::variable_type), line:2:13, endln:5:6
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/MultiPort/dut.sv, line:7:1, endln:11:10
-    |vpiName:my_pkg::variable_type
-    |vpiInstance:
-    \_package: (my_pkg), file:${SURELOG_DIR}/tests/MultiPort/dut.sv, line:1:1, endln:6:11
-    |vpiTypespecMember:
-    \_typespec_member: (first), line:3:20, endln:3:25
-      |vpiParent:
-      \_struct_typespec: (my_pkg::variable_type), line:2:13, endln:5:6
-      |vpiName:first
-      |vpiTypespec:
-      \_ref_typespec: (work@top.my_pkg::variable_type.first)
-        |vpiParent:
-        \_typespec_member: (first), line:3:20, endln:3:25
-        |vpiFullName:work@top.my_pkg::variable_type.first
-        |vpiActual:
-        \_logic_typespec: , line:3:9, endln:3:19
-      |vpiRefFile:${SURELOG_DIR}/tests/MultiPort/dut.sv
-      |vpiRefLineNo:3
-      |vpiRefColumnNo:9
-      |vpiRefEndLineNo:3
-      |vpiRefEndColumnNo:19
-    |vpiTypespecMember:
-    \_typespec_member: (second), line:4:13, endln:4:19
-      |vpiParent:
-      \_struct_typespec: (my_pkg::variable_type), line:2:13, endln:5:6
-      |vpiName:second
-      |vpiTypespec:
-      \_ref_typespec: (work@top.my_pkg::variable_type.second)
-        |vpiParent:
-        \_typespec_member: (second), line:4:13, endln:4:19
-        |vpiFullName:work@top.my_pkg::variable_type.second
-        |vpiActual:
-        \_int_typespec: , line:4:9, endln:4:12
-      |vpiRefFile:${SURELOG_DIR}/tests/MultiPort/dut.sv
-      |vpiRefLineNo:4
-      |vpiRefColumnNo:9
-      |vpiRefEndLineNo:4
-      |vpiRefEndColumnNo:12
   |vpiTypedef:
   \_import_typespec: (my_pkg), line:7:19, endln:7:40
   |vpiDefName:work@top
@@ -249,42 +209,7 @@ design: (unnamed)
       |vpiActual:
       \_struct_typespec: (my_pkg::variable_type), line:2:13, endln:5:6
 \_weaklyReferenced:
-\_package: (my_pkg), file:${SURELOG_DIR}/tests/MultiPort/dut.sv, line:1:1, endln:6:11
-  |vpiName:my_pkg
 \_logic_typespec: , line:3:9, endln:3:19
-  |vpiParent:
-  \_typespec_member: (first), line:3:20, endln:3:25
-  |vpiInstance:
-  \_package: (my_pkg), file:${SURELOG_DIR}/tests/MultiPort/dut.sv, line:1:1, endln:6:11
-  |vpiRange:
-  \_range: , line:3:14, endln:3:19
-    |vpiParent:
-    \_logic_typespec: , line:3:9, endln:3:19
-    |vpiLeftRange:
-    \_constant: , line:3:15, endln:3:16
-      |vpiParent:
-      \_range: , line:3:14, endln:3:19
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:17, endln:3:18
-      |vpiParent:
-      \_range: , line:3:14, endln:3:19
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_int_typespec: , line:4:9, endln:4:12
-  |vpiParent:
-  \_typespec_member: (second), line:4:13, endln:4:19
-  |vpiInstance:
-  \_package: (my_pkg), file:${SURELOG_DIR}/tests/MultiPort/dut.sv, line:1:1, endln:6:11
-  |vpiSigned:1
-\_logic_typespec: , line:3:9, endln:3:19
-  |vpiParent:
-  \_typespec_member: (first), line:3:20, endln:3:25
   |vpiInstance:
   \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/MultiPort/dut.sv, line:1:1, endln:6:11
   |vpiRange:
@@ -308,8 +233,6 @@ design: (unnamed)
       |UINT:0
       |vpiConstType:9
 \_int_typespec: , line:4:9, endln:4:12
-  |vpiParent:
-  \_typespec_member: (second), line:4:13, endln:4:19
   |vpiInstance:
   \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/MultiPort/dut.sv, line:1:1, endln:6:11
   |vpiSigned:1

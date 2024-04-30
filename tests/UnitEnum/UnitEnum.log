@@ -121,7 +121,6 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/UnitEnum/top.v:2:1: No timescale set for "pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/UnitEnum/top.v:14:1: No timescale set for "top".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/UnitEnum/top.v:2:1: Compile package "pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/UnitEnum/top.v:14:1: Compile module "work@top".
 AST_DEBUG_BEGIN
 LIB:  work
@@ -389,8 +388,8 @@ class_typespec                                         4
 class_var                                              3
 constant                                               6
 design                                                 1
-enum_const                                            17
-enum_typespec                                          4
+enum_const                                            13
+enum_typespec                                          3
 enum_var                                               1
 function                                               9
 import_typespec                                        1
@@ -400,7 +399,7 @@ io_decl                                               11
 logic_net                                              5
 logic_var                                              1
 module_inst                                            1
-package                                                4
+package                                                2
 ref_typespec                                          13
 task                                                   9
 === UHDM Object Stats End ===
@@ -418,6 +417,36 @@ design: (unnamed)
   |vpiName:builtin
   |vpiFullName:builtin::
   |vpiDefName:builtin
+  |vpiClassDefn:
+  \_class_defn: (builtin::any_sverilog_class)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:any_sverilog_class
+    |vpiFullName:builtin::any_sverilog_class
+  |vpiClassDefn:
+  \_class_defn: (builtin::array)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:array
+    |vpiFullName:builtin::array
+  |vpiClassDefn:
+  \_class_defn: (builtin::queue)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:queue
+    |vpiFullName:builtin::queue
+  |vpiClassDefn:
+  \_class_defn: (builtin::string)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:string
+    |vpiFullName:builtin::string
+  |vpiClassDefn:
+  \_class_defn: (builtin::system)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:system
+    |vpiFullName:builtin::system
 |uhdmallPackages:
 \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:2:1, endln:8:11
   |vpiParent:
@@ -464,12 +493,12 @@ design: (unnamed)
       |vpiDecompile:3
       |vpiSize:64
   |vpiDefName:pkg
-|uhdmallClasses:
-\_class_defn: (pkg::Configuration1), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:3:1, endln:4:9
-  |vpiParent:
-  \_design: (unnamed)
-  |vpiName:Configuration1
-  |vpiFullName:pkg::Configuration1
+  |vpiClassDefn:
+  \_class_defn: (pkg::Configuration1), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:3:1, endln:4:9
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:2:1, endln:8:11
+    |vpiName:Configuration1
+    |vpiFullName:pkg::Configuration1
 |uhdmallClasses:
 \_class_defn: (work@Configuration2), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:10:1, endln:11:9
   |vpiParent:
@@ -959,43 +988,6 @@ design: (unnamed)
       |vpiSize:64
   |vpiTypedef:
   \_enum_typespec: (pkg::fsm_t_pkg), line:6:1, endln:6:48
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:14:1, endln:24:10
-    |vpiName:pkg::fsm_t_pkg
-    |vpiInstance:
-    \_package: (pkg), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:2:1, endln:8:11
-    |vpiEnumConst:
-    \_enum_const: (IDLE), line:6:16, endln:6:20
-      |vpiParent:
-      \_enum_typespec: (pkg::fsm_t_pkg), line:6:1, endln:6:48
-      |vpiName:IDLE
-      |INT:0
-      |vpiDecompile:0
-      |vpiSize:64
-    |vpiEnumConst:
-    \_enum_const: (WRITE), line:6:21, endln:6:26
-      |vpiParent:
-      \_enum_typespec: (pkg::fsm_t_pkg), line:6:1, endln:6:48
-      |vpiName:WRITE
-      |INT:1
-      |vpiDecompile:1
-      |vpiSize:64
-    |vpiEnumConst:
-    \_enum_const: (READ), line:6:27, endln:6:31
-      |vpiParent:
-      \_enum_typespec: (pkg::fsm_t_pkg), line:6:1, endln:6:48
-      |vpiName:READ
-      |INT:2
-      |vpiDecompile:2
-      |vpiSize:64
-    |vpiEnumConst:
-    \_enum_const: (DONE), line:6:32, endln:6:36
-      |vpiParent:
-      \_enum_typespec: (pkg::fsm_t_pkg), line:6:1, endln:6:48
-      |vpiName:DONE
-      |INT:3
-      |vpiDecompile:3
-      |vpiSize:64
   |vpiTypedef:
   \_import_typespec: (pkg), line:15:9, endln:15:15
   |vpiDefName:work@top
@@ -1030,8 +1022,6 @@ design: (unnamed)
     |vpiName:cfg
     |vpiFullName:work@top.cfg
 \_weaklyReferenced:
-\_package: (pkg), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:2:1, endln:8:11
-  |vpiName:pkg
 \_class_typespec: 
   |vpiClassDefn:
   \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/UnitEnum/builtin.sv, line:1:3, endln:27:11

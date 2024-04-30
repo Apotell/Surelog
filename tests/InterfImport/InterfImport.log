@@ -271,28 +271,26 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/InterfImport/dut.sv:1:1: No timescale set for "tnoc_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/InterfImport/dut.sv:6:1: No timescale set for "tnoc_port_control_if".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/InterfImport/dut.sv:1:1: Compile package "tnoc_pkg".
 [INF:CP0304] ${SURELOG_DIR}/tests/InterfImport/dut.sv:6:1: Compile interface "work@tnoc_port_control_if".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              19
+constant                                              15
 design                                                 1
 hier_path                                              1
 import_typespec                                        1
-int_typespec                                           7
+int_typespec                                           5
 interface_inst                                         1
 io_decl                                               10
 logic_net                                              5
 logic_typespec                                         5
 modport                                                2
-module_inst                                            1
 operation                                              5
-package                                                2
-param_assign                                           7
-parameter                                              8
+package                                                1
+param_assign                                           5
+parameter                                              6
 range                                                  5
-ref_obj                                                7
-ref_typespec                                          17
+ref_obj                                                8
+ref_typespec                                          13
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfImport/slpp_all/surelog.uhdm ...
@@ -370,7 +368,6 @@ design: (unnamed)
   \_parameter: (work@tnoc_port_control_if.PACKET_CONFIG), line:9:33, endln:9:46
     |vpiParent:
     \_interface_inst: work@tnoc_port_control_if (work@tnoc_port_control_if), file:${SURELOG_DIR}/tests/InterfImport/dut.sv, line:6:1, endln:34:13
-    |UINT:1
     |vpiTypespec:
     \_ref_typespec: (work@tnoc_port_control_if.PACKET_CONFIG)
       |vpiParent:
@@ -404,7 +401,7 @@ design: (unnamed)
       |vpiParent:
       \_param_assign: , line:2:15, endln:2:46
       |vpiDecompile:1
-      |vpiSize:32
+      |vpiSize:64
       |UINT:1
       |vpiTypespec:
       \_ref_typespec: (work@tnoc_port_control_if)
@@ -435,20 +432,11 @@ design: (unnamed)
     |vpiParent:
     \_interface_inst: work@tnoc_port_control_if (work@tnoc_port_control_if), file:${SURELOG_DIR}/tests/InterfImport/dut.sv, line:6:1, endln:34:13
     |vpiRhs:
-    \_constant: , line:9:50, endln:9:76
+    \_ref_obj: (work@tnoc_port_control_if.TNOC_DEFAULT_PACKET_CONFIG), line:9:50, endln:9:76
       |vpiParent:
       \_param_assign: , line:9:33, endln:9:76
-      |vpiDecompile:1
-      |vpiSize:32
-      |UINT:1
-      |vpiTypespec:
-      \_ref_typespec: (work@tnoc_port_control_if)
-        |vpiParent:
-        \_constant: , line:9:50, endln:9:76
-        |vpiFullName:work@tnoc_port_control_if
-        |vpiActual:
-        \_unsupported_typespec: (tnoc_packet_config), line:9:13, endln:9:31
-      |vpiConstType:9
+      |vpiName:TNOC_DEFAULT_PACKET_CONFIG
+      |vpiFullName:work@tnoc_port_control_if.TNOC_DEFAULT_PACKET_CONFIG
     |vpiLhs:
     \_parameter: (work@tnoc_port_control_if.PACKET_CONFIG), line:9:33, endln:9:46
   |vpiParamAssign:

@@ -211,30 +211,29 @@ n<> u<205> t<Top_level_rule> c<1> l<1:1> el<44:1>
 AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackageVar/dut.sv:1:1: No timescale set for "pack".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/PackageVar/dut.sv:1:1: Compile package "pack".
 [INF:CP0302] ${SURELOG_DIR}/tests/PackageVar/dut.sv:13:1: Compile class "pack::ovm_object".
 [INF:CP0302] ${SURELOG_DIR}/tests/PackageVar/dut.sv:6:1: Compile class "pack::ovm_options_container".
 [INF:CP0302] ${SURELOG_DIR}/tests/PackageVar/dut.sv:3:1: Compile class "pack::ovm_printer".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-assignment                                             4
-begin                                                  6
+assignment                                             2
+begin                                                  3
 class_defn                                             3
-class_typespec                                         4
-constant                                               6
+class_typespec                                         3
+constant                                               3
 design                                                 1
-func_call                                              6
-function                                               3
-hier_path                                              4
-if_else                                                2
-if_stmt                                                2
-io_decl                                                3
+func_call                                              3
+function                                               2
+hier_path                                              2
+if_else                                                1
+if_stmt                                                1
+io_decl                                                2
 logic_net                                              1
-method_func_call                                       4
-operation                                              2
-package                                                2
-ref_obj                                               22
-ref_typespec                                           4
+method_func_call                                       2
+operation                                              1
+package                                                1
+ref_obj                                               11
+ref_typespec                                           3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageVar/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PackageVar/slpp_all/checker/surelog.chk.html ...
@@ -250,197 +249,237 @@ design: (unnamed)
   |vpiName:pack
   |vpiFullName:pack::
   |vpiDefName:pack
-  |vpiTaskFunc:
-  \_function: (pack::ovm_object::print), line:23:1, endln:39:12
+  |vpiClassDefn:
+  \_class_defn: (pack::ovm_object), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:13:1, endln:21:9
     |vpiParent:
     \_package: pack (pack::), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:1:1, endln:42:11
-    |vpiName:ovm_object::print
-    |vpiFullName:pack::ovm_object::print
-    |vpiVisibility:1
-    |vpiIODecl:
-    \_io_decl: (printer), line:23:45, endln:23:52
+    |vpiName:ovm_object
+    |vpiFullName:pack::ovm_object
+    |vpiMethod:
+    \_function: (pack::ovm_object::print), line:15:1, endln:15:7
       |vpiParent:
-      \_function: (pack::ovm_object::print), line:23:1, endln:39:12
-      |vpiDirection:1
-      |vpiName:printer
-      |vpiTypedef:
-      \_ref_typespec: (pack::ovm_object::print::printer)
-        |vpiParent:
-        \_io_decl: (printer), line:23:45, endln:23:52
-        |vpiFullName:pack::ovm_object::print::printer
-        |vpiActual:
-        \_class_typespec: (ovm_printer), line:23:33, endln:23:44
-    |vpiStmt:
-    \_begin: (pack::ovm_object::print), line:28:3, endln:38:6
-      |vpiParent:
-      \_function: (pack::ovm_object::print), line:23:1, endln:39:12
+      \_class_defn: (pack::ovm_object), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:13:1, endln:21:9
+      |vpiName:print
       |vpiFullName:pack::ovm_object::print
-      |vpiStmt:
-      \_if_stmt: , line:25:3, endln:26:35
+      |vpiMethod:1
+      |vpiAccessType:2
+      |vpiVisibility:1
+      |vpiIODecl:
+      \_io_decl: (printer), line:15:40, endln:15:47
         |vpiParent:
-        \_begin: (pack::ovm_object::print), line:28:3, endln:38:6
-        |vpiCondition:
-        \_operation: , line:25:6, endln:25:19
+        \_function: (pack::ovm_object::print), line:15:1, endln:15:7
+        |vpiDirection:1
+        |vpiName:printer
+        |vpiTypedef:
+        \_ref_typespec: (pack::ovm_object::print::printer)
+          |vpiParent:
+          \_io_decl: (printer), line:15:40, endln:15:47
+          |vpiFullName:pack::ovm_object::print::printer
+          |vpiActual:
+          \_class_typespec: (ovm_printer), line:15:28, endln:15:39
+    |vpiMethod:
+    \_function: (pack::ovm_object::print), line:23:1, endln:39:12
+      |vpiParent:
+      \_class_defn: (pack::ovm_object), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:13:1, endln:21:9
+      |vpiName:print
+      |vpiFullName:pack::ovm_object::print
+      |vpiVisibility:1
+      |vpiIODecl:
+      \_io_decl: (printer), line:23:45, endln:23:52
+        |vpiParent:
+        \_function: (pack::ovm_object::print), line:23:1, endln:39:12
+        |vpiDirection:1
+        |vpiName:printer
+        |vpiTypedef:
+        \_ref_typespec: (pack::ovm_object::print::printer)
+          |vpiParent:
+          \_io_decl: (printer), line:23:45, endln:23:52
+          |vpiFullName:pack::ovm_object::print::printer
+          |vpiActual:
+          \_class_typespec: (ovm_printer), line:23:33, endln:23:44
+      |vpiStmt:
+      \_begin: (pack::ovm_object::print), line:28:3, endln:38:6
+        |vpiParent:
+        \_function: (pack::ovm_object::print), line:23:1, endln:39:12
+        |vpiFullName:pack::ovm_object::print
+        |vpiStmt:
+        \_if_stmt: , line:25:3, endln:26:35
           |vpiParent:
           \_begin: (pack::ovm_object::print), line:28:3, endln:38:6
-          |vpiOpType:14
-          |vpiOperand:
-          \_ref_obj: (pack::ovm_object::print::printer), line:25:6, endln:25:13
+          |vpiCondition:
+          \_operation: , line:25:6, endln:25:19
             |vpiParent:
-            \_operation: , line:25:6, endln:25:19
-            |vpiName:printer
-            |vpiFullName:pack::ovm_object::print::printer
-            |vpiActual:
-            \_io_decl: (printer), line:23:45, endln:23:52
-          |vpiOperand:
-          \_constant: , line:25:15, endln:25:19
-            |vpiParent:
-            \_operation: , line:25:6, endln:25:19
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
-            |vpiConstType:11
-        |vpiStmt:
-        \_assignment: , line:26:5, endln:26:34
-          |vpiParent:
-          \_if_stmt: , line:25:3, endln:26:35
-          |vpiOpType:82
-          |vpiBlocking:1
-          |vpiRhs:
-          \_ref_obj: (pack::ovm_object::print::ovm_default_printer), line:26:15, endln:26:34
-            |vpiParent:
-            \_assignment: , line:26:5, endln:26:34
-            |vpiName:ovm_default_printer
-            |vpiFullName:pack::ovm_object::print::ovm_default_printer
-          |vpiLhs:
-          \_ref_obj: (pack::ovm_object::print::printer), line:26:5, endln:26:12
-            |vpiParent:
-            \_assignment: , line:26:5, endln:26:34
-            |vpiName:printer
-            |vpiFullName:pack::ovm_object::print::printer
-            |vpiActual:
-            \_io_decl: (printer), line:23:45, endln:23:52
-      |vpiStmt:
-      \_if_else: , line:28:3, endln:38:6
-        |vpiParent:
-        \_begin: (pack::ovm_object::print), line:28:3, endln:38:6
-        |vpiCondition:
-        \_hier_path: (printer.istop), line:28:6, endln:28:21
-          |vpiParent:
-          \_begin: (pack::ovm_object::print), line:28:3, endln:38:6
-          |vpiActual:
-          \_ref_obj: (printer), line:28:6, endln:28:13
-            |vpiParent:
-            \_hier_path: (printer.istop), line:28:6, endln:28:21
-            |vpiName:printer
-          |vpiActual:
-          \_method_func_call: (istop), line:28:14, endln:28:19
-            |vpiParent:
-            \_hier_path: (printer.istop), line:28:6, endln:28:21
-            |vpiName:istop
-          |vpiName:printer.istop
-        |vpiStmt:
-        \_begin: (pack::ovm_object::print), line:28:23, endln:30:6
-          |vpiParent:
-          \_if_else: , line:28:3, endln:38:6
-          |vpiFullName:pack::ovm_object::print
-          |vpiStmt:
-          \_method_func_call: (print_object), line:29:13, endln:29:25
-            |vpiParent:
-            \_begin: (pack::ovm_object::print), line:28:23, endln:30:6
-            |vpiArgument:
-            \_func_call: (get_name), line:29:26, endln:29:36
+            \_begin: (pack::ovm_object::print), line:28:3, endln:38:6
+            |vpiOpType:14
+            |vpiOperand:
+            \_ref_obj: (pack::ovm_object::print::printer), line:25:6, endln:25:13
               |vpiParent:
-              \_method_func_call: (print_object), line:29:13, endln:29:25
-              |vpiName:get_name
-            |vpiArgument:
-            \_ref_obj: (pack::ovm_object::print::this), line:29:38, endln:29:42
-              |vpiParent:
-              \_method_func_call: (print_object), line:29:13, endln:29:25
-              |vpiName:this
-              |vpiFullName:pack::ovm_object::print::this
-            |vpiName:print_object
-            |vpiPrefix:
-            \_ref_obj: (pack::ovm_object::print::printer), line:29:5, endln:29:12
-              |vpiParent:
-              \_method_func_call: (print_object), line:29:13, endln:29:25
-              |vpiName:printer
-              |vpiFullName:pack::ovm_object::print::printer
-        |vpiElseStmt:
-        \_begin: (pack::ovm_object::print), line:31:8, endln:38:6
-          |vpiParent:
-          \_if_else: , line:28:3, endln:38:6
-          |vpiFullName:pack::ovm_object::print
-          |vpiStmt:
-          \_assignment: , line:34:5, endln:34:46
-            |vpiParent:
-            \_begin: (pack::ovm_object::print), line:31:8, endln:38:6
-            |vpiOpType:82
-            |vpiBlocking:1
-            |vpiRhs:
-            \_ref_obj: (pack::ovm_object::print::printer), line:34:39, endln:34:46
-              |vpiParent:
-              \_assignment: , line:34:5, endln:34:46
+              \_operation: , line:25:6, endln:25:19
               |vpiName:printer
               |vpiFullName:pack::ovm_object::print::printer
               |vpiActual:
               \_io_decl: (printer), line:23:45, endln:23:52
-            |vpiLhs:
-            \_hier_path: (ovm_auto_options_object.printer), line:34:5, endln:34:36
+            |vpiOperand:
+            \_constant: , line:25:15, endln:25:19
               |vpiParent:
-              \_assignment: , line:34:5, endln:34:46
-              |vpiActual:
-              \_ref_obj: (ovm_auto_options_object), line:34:29, endln:34:36
-                |vpiParent:
-                \_hier_path: (ovm_auto_options_object.printer), line:34:5, endln:34:36
-                |vpiName:ovm_auto_options_object
-              |vpiActual:
-              \_ref_obj: (printer), line:34:29, endln:34:36
-                |vpiParent:
-                \_hier_path: (ovm_auto_options_object.printer), line:34:5, endln:34:36
-                |vpiName:printer
-              |vpiName:ovm_auto_options_object.printer
-          |vpiStmt:
-          \_func_call: (m_field_automation), line:35:5, endln:35:44
-            |vpiParent:
-            \_begin: (pack::ovm_object::print), line:31:8, endln:38:6
-            |vpiArgument:
-            \_constant: , line:35:24, endln:35:28
-              |vpiParent:
-              \_func_call: (m_field_automation), line:35:5, endln:35:44
+              \_operation: , line:25:6, endln:25:19
               |vpiDecompile:0
               |vpiSize:64
               |UINT:0
               |vpiConstType:11
-            |vpiArgument:
-            \_ref_obj: (pack::ovm_object::print::OVM_PRINT), line:35:30, endln:35:39
-              |vpiParent:
-              \_func_call: (m_field_automation), line:35:5, endln:35:44
-              |vpiName:OVM_PRINT
-              |vpiFullName:pack::ovm_object::print::OVM_PRINT
-            |vpiArgument:
-            \_constant: , line:35:41, endln:35:43
-              |vpiParent:
-              \_func_call: (m_field_automation), line:35:5, endln:35:44
-              |vpiDecompile:""
-              |STRING:
-              |vpiConstType:6
-            |vpiName:m_field_automation
           |vpiStmt:
-          \_func_call: (do_print), line:37:5, endln:37:22
+          \_assignment: , line:26:5, endln:26:34
             |vpiParent:
-            \_begin: (pack::ovm_object::print), line:31:8, endln:38:6
-            |vpiArgument:
-            \_ref_obj: (pack::ovm_object::print::printer), line:37:14, endln:37:21
+            \_if_stmt: , line:25:3, endln:26:35
+            |vpiOpType:82
+            |vpiBlocking:1
+            |vpiRhs:
+            \_ref_obj: (pack::ovm_object::print::ovm_default_printer), line:26:15, endln:26:34
               |vpiParent:
-              \_func_call: (do_print), line:37:5, endln:37:22
+              \_assignment: , line:26:5, endln:26:34
+              |vpiName:ovm_default_printer
+              |vpiFullName:pack::ovm_object::print::ovm_default_printer
+            |vpiLhs:
+            \_ref_obj: (pack::ovm_object::print::printer), line:26:5, endln:26:12
+              |vpiParent:
+              \_assignment: , line:26:5, endln:26:34
               |vpiName:printer
               |vpiFullName:pack::ovm_object::print::printer
               |vpiActual:
               \_io_decl: (printer), line:23:45, endln:23:52
-            |vpiName:do_print
-    |vpiInstance:
+        |vpiStmt:
+        \_if_else: , line:28:3, endln:38:6
+          |vpiParent:
+          \_begin: (pack::ovm_object::print), line:28:3, endln:38:6
+          |vpiCondition:
+          \_hier_path: (printer.istop), line:28:6, endln:28:21
+            |vpiParent:
+            \_begin: (pack::ovm_object::print), line:28:3, endln:38:6
+            |vpiActual:
+            \_ref_obj: (printer), line:28:6, endln:28:13
+              |vpiParent:
+              \_hier_path: (printer.istop), line:28:6, endln:28:21
+              |vpiName:printer
+            |vpiActual:
+            \_method_func_call: (istop), line:28:14, endln:28:19
+              |vpiParent:
+              \_hier_path: (printer.istop), line:28:6, endln:28:21
+              |vpiName:istop
+            |vpiName:printer.istop
+          |vpiStmt:
+          \_begin: (pack::ovm_object::print), line:28:23, endln:30:6
+            |vpiParent:
+            \_if_else: , line:28:3, endln:38:6
+            |vpiFullName:pack::ovm_object::print
+            |vpiStmt:
+            \_method_func_call: (print_object), line:29:13, endln:29:25
+              |vpiParent:
+              \_begin: (pack::ovm_object::print), line:28:23, endln:30:6
+              |vpiArgument:
+              \_func_call: (get_name), line:29:26, endln:29:36
+                |vpiParent:
+                \_method_func_call: (print_object), line:29:13, endln:29:25
+                |vpiName:get_name
+              |vpiArgument:
+              \_ref_obj: (pack::ovm_object::print::this), line:29:38, endln:29:42
+                |vpiParent:
+                \_method_func_call: (print_object), line:29:13, endln:29:25
+                |vpiName:this
+                |vpiFullName:pack::ovm_object::print::this
+              |vpiName:print_object
+              |vpiPrefix:
+              \_ref_obj: (pack::ovm_object::print::printer), line:29:5, endln:29:12
+                |vpiParent:
+                \_method_func_call: (print_object), line:29:13, endln:29:25
+                |vpiName:printer
+                |vpiFullName:pack::ovm_object::print::printer
+          |vpiElseStmt:
+          \_begin: (pack::ovm_object::print), line:31:8, endln:38:6
+            |vpiParent:
+            \_if_else: , line:28:3, endln:38:6
+            |vpiFullName:pack::ovm_object::print
+            |vpiStmt:
+            \_assignment: , line:34:5, endln:34:46
+              |vpiParent:
+              \_begin: (pack::ovm_object::print), line:31:8, endln:38:6
+              |vpiOpType:82
+              |vpiBlocking:1
+              |vpiRhs:
+              \_ref_obj: (pack::ovm_object::print::printer), line:34:39, endln:34:46
+                |vpiParent:
+                \_assignment: , line:34:5, endln:34:46
+                |vpiName:printer
+                |vpiFullName:pack::ovm_object::print::printer
+                |vpiActual:
+                \_io_decl: (printer), line:23:45, endln:23:52
+              |vpiLhs:
+              \_hier_path: (ovm_auto_options_object.printer), line:34:5, endln:34:36
+                |vpiParent:
+                \_assignment: , line:34:5, endln:34:46
+                |vpiActual:
+                \_ref_obj: (ovm_auto_options_object), line:34:29, endln:34:36
+                  |vpiParent:
+                  \_hier_path: (ovm_auto_options_object.printer), line:34:5, endln:34:36
+                  |vpiName:ovm_auto_options_object
+                |vpiActual:
+                \_ref_obj: (printer), line:34:29, endln:34:36
+                  |vpiParent:
+                  \_hier_path: (ovm_auto_options_object.printer), line:34:5, endln:34:36
+                  |vpiName:printer
+                |vpiName:ovm_auto_options_object.printer
+            |vpiStmt:
+            \_func_call: (m_field_automation), line:35:5, endln:35:44
+              |vpiParent:
+              \_begin: (pack::ovm_object::print), line:31:8, endln:38:6
+              |vpiArgument:
+              \_constant: , line:35:24, endln:35:28
+                |vpiParent:
+                \_func_call: (m_field_automation), line:35:5, endln:35:44
+                |vpiDecompile:0
+                |vpiSize:64
+                |UINT:0
+                |vpiConstType:11
+              |vpiArgument:
+              \_ref_obj: (pack::ovm_object::print::OVM_PRINT), line:35:30, endln:35:39
+                |vpiParent:
+                \_func_call: (m_field_automation), line:35:5, endln:35:44
+                |vpiName:OVM_PRINT
+                |vpiFullName:pack::ovm_object::print::OVM_PRINT
+              |vpiArgument:
+              \_constant: , line:35:41, endln:35:43
+                |vpiParent:
+                \_func_call: (m_field_automation), line:35:5, endln:35:44
+                |vpiDecompile:""
+                |STRING:
+                |vpiConstType:6
+              |vpiName:m_field_automation
+            |vpiStmt:
+            \_func_call: (do_print), line:37:5, endln:37:22
+              |vpiParent:
+              \_begin: (pack::ovm_object::print), line:31:8, endln:38:6
+              |vpiArgument:
+              \_ref_obj: (pack::ovm_object::print::printer), line:37:14, endln:37:21
+                |vpiParent:
+                \_func_call: (do_print), line:37:5, endln:37:22
+                |vpiName:printer
+                |vpiFullName:pack::ovm_object::print::printer
+                |vpiActual:
+                \_io_decl: (printer), line:23:45, endln:23:52
+              |vpiName:do_print
+      |vpiInstance:
+      \_package: pack (pack::), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:1:1, endln:42:11
+  |vpiClassDefn:
+  \_class_defn: (pack::ovm_options_container), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:6:1, endln:8:9
+    |vpiParent:
     \_package: pack (pack::), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:1:1, endln:42:11
+    |vpiName:ovm_options_container
+    |vpiFullName:pack::ovm_options_container
+  |vpiClassDefn:
+  \_class_defn: (pack::ovm_printer), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:3:1, endln:4:9
+    |vpiParent:
+    \_package: pack (pack::), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:1:1, endln:42:11
+    |vpiName:ovm_printer
+    |vpiFullName:pack::ovm_printer
   |vpiNet:
   \_logic_net: (pack::ovm_auto_options_object), line:11:23, endln:11:46
     |vpiParent:
@@ -454,46 +493,6 @@ design: (unnamed)
       \_class_typespec: (ovm_options_container), line:11:1, endln:11:22
     |vpiName:ovm_auto_options_object
     |vpiFullName:pack::ovm_auto_options_object
-|uhdmallClasses:
-\_class_defn: (pack::ovm_object), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:13:1, endln:21:9
-  |vpiParent:
-  \_design: (unnamed)
-  |vpiName:ovm_object
-  |vpiFullName:pack::ovm_object
-  |vpiMethod:
-  \_function: (ovm_object::print), line:15:1, endln:15:7
-    |vpiParent:
-    \_class_defn: (pack::ovm_object), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:13:1, endln:21:9
-    |vpiName:print
-    |vpiFullName:ovm_object::print
-    |vpiMethod:1
-    |vpiAccessType:2
-    |vpiVisibility:1
-    |vpiIODecl:
-    \_io_decl: (printer), line:15:40, endln:15:47
-      |vpiParent:
-      \_function: (ovm_object::print), line:15:1, endln:15:7
-      |vpiDirection:1
-      |vpiName:printer
-      |vpiTypedef:
-      \_ref_typespec: (ovm_object::print::printer)
-        |vpiParent:
-        \_io_decl: (printer), line:15:40, endln:15:47
-        |vpiFullName:ovm_object::print::printer
-        |vpiActual:
-        \_class_typespec: (ovm_printer), line:15:28, endln:15:39
-|uhdmallClasses:
-\_class_defn: (pack::ovm_options_container), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:6:1, endln:8:9
-  |vpiParent:
-  \_design: (unnamed)
-  |vpiName:ovm_options_container
-  |vpiFullName:pack::ovm_options_container
-|uhdmallClasses:
-\_class_defn: (pack::ovm_printer), file:${SURELOG_DIR}/tests/PackageVar/dut.sv, line:3:1, endln:4:9
-  |vpiParent:
-  \_design: (unnamed)
-  |vpiName:ovm_printer
-  |vpiFullName:pack::ovm_printer
 \_weaklyReferenced:
 \_class_typespec: (ovm_printer), line:23:33, endln:23:44
   |vpiName:ovm_printer
@@ -522,8 +521,8 @@ design: (unnamed)
 [LINT]: ${SURELOG_DIR}/tests/PackageVar/dut.sv:3:1: Non synthesizable construct, ovm_printer
 [LINT]: ${SURELOG_DIR}/tests/PackageVar/dut.sv:28:14: Non synthesizable construct, istop
 [LINT]: ${SURELOG_DIR}/tests/PackageVar/dut.sv:29:13: Non synthesizable construct, print_object
-[LINT]: ${SURELOG_DIR}/tests/PackageVar/dut.sv:6:1: Non synthesizable construct, ovm_options_container
 [LINT]: ${SURELOG_DIR}/tests/PackageVar/dut.sv:13:1: Non synthesizable construct, ovm_object
+[LINT]: ${SURELOG_DIR}/tests/PackageVar/dut.sv:6:1: Non synthesizable construct, ovm_options_container
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================

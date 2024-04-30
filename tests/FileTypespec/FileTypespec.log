@@ -144,26 +144,24 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/FileTypespec/dut.sv:8:1: No timescale set for "fooes".
 [WRN:PA0205] ${SURELOG_DIR}/tests/FileTypespec/dut.sv:25:1: No timescale set for "top".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/FileTypespec/dut.sv:1:1: Compile package "foo_flags".
-[INF:CP0301] ${SURELOG_DIR}/tests/FileTypespec/dut.sv:8:1: Compile package "fooes".
 [INF:CP0303] ${SURELOG_DIR}/tests/FileTypespec/dut.sv:25:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                               4
+constant                                               2
 cont_assign                                            1
 design                                                 1
-enum_const                                             2
-enum_typespec                                          2
+enum_const                                             1
+enum_typespec                                          1
 logic_net                                              2
-logic_typespec                                         4
-module_inst                                            3
-package                                                4
+logic_typespec                                         2
+module_inst                                            2
+package                                                2
 port                                                   2
-range                                                  2
+range                                                  1
 ref_obj                                                4
-ref_typespec                                           9
-struct_typespec                                        3
-typespec_member                                        5
+ref_typespec                                           7
+struct_typespec                                        2
+typespec_member                                        4
 union_typespec                                         1
 unsupported_typespec                                   2
 === UHDM Object Stats End ===
@@ -336,7 +334,7 @@ design: (unnamed)
       \_typespec_member: (b), line:17:18, endln:17:19
       |vpiFullName:padded_fooes_t.b
       |vpiActual:
-      \_unsupported_typespec: (fooes::classes), line:17:3, endln:17:10
+      \_enum_typespec: (fooes::classes), line:10:3, endln:12:13
     |vpiRefFile:${SURELOG_DIR}/tests/FileTypespec/dut.sv
     |vpiRefLineNo:17
     |vpiRefColumnNo:3
@@ -361,7 +359,7 @@ design: (unnamed)
       \_typespec_member: (atype_t), line:21:30, endln:21:37
       |vpiFullName:top_flag_t.atype_t
       |vpiActual:
-      \_unsupported_typespec: (foo_flags::common_flags_t), line:21:3, endln:21:14
+      \_struct_typespec: (foo_flags::common_flags_t), line:2:11, endln:4:4
     |vpiRefFile:${SURELOG_DIR}/tests/FileTypespec/dut.sv
     |vpiRefLineNo:21
     |vpiRefColumnNo:3
@@ -385,17 +383,7 @@ design: (unnamed)
     |vpiRefEndLineNo:22
     |vpiRefEndColumnNo:17
 \_weaklyReferenced:
-\_unsupported_typespec: (fooes::classes), line:17:3, endln:17:10
-  |vpiParent:
-  \_typespec_member: (b), line:17:18, endln:17:19
-  |vpiName:fooes::classes
-\_unsupported_typespec: (foo_flags::common_flags_t), line:21:3, endln:21:14
-  |vpiParent:
-  \_typespec_member: (atype_t), line:21:30, endln:21:37
-  |vpiName:foo_flags::common_flags_t
 \_logic_typespec: , line:3:5, endln:3:10
-  |vpiParent:
-  \_typespec_member: (a), line:3:11, endln:3:12
   |vpiInstance:
   \_package: foo_flags (foo_flags::), file:${SURELOG_DIR}/tests/FileTypespec/dut.sv, line:1:1, endln:5:23
 \_logic_typespec: , line:10:16, endln:10:27
@@ -427,13 +415,6 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 3
 [   NOTE] : 0
-
-============================== Begin Linting Results ==============================
-[LINT]: ${SURELOG_DIR}/tests/FileTypespec/dut.sv:17:3: Unsupported typespec, fooes::classes
-[LINT]:   \_ ${SURELOG_DIR}/tests/FileTypespec/dut.sv:17:18:
-[LINT]: ${SURELOG_DIR}/tests/FileTypespec/dut.sv:21:3: Unsupported typespec, foo_flags::common_flags_t
-[LINT]:   \_ ${SURELOG_DIR}/tests/FileTypespec/dut.sv:21:30:
-============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================
 [roundtrip]: ${SURELOG_DIR}/tests/FileTypespec/dut.sv | ${SURELOG_DIR}/build/regression/FileTypespec/roundtrip/dut_000.sv | 5 | 27 |

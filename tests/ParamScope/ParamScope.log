@@ -204,27 +204,26 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ParamScope/dut.sv:17:1: No timescale set for "upper".
 [WRN:PA0205] ${SURELOG_DIR}/tests/ParamScope/dut.sv:22:1: No timescale set for "top".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/ParamScope/dut.sv:1:1: Compile package "foo_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamScope/dut.sv:5:1: Compile module "work@bottom".
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamScope/dut.sv:9:1: Compile module "work@lower".
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamScope/dut.sv:22:1: Compile module "work@top".
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamScope/dut.sv:17:1: Compile module "work@upper".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              12
+constant                                               9
 design                                                 1
 import_typespec                                        1
-int_typespec                                          10
-module_inst                                            6
-operation                                              8
-package                                                2
-param_assign                                           9
-parameter                                             10
+int_typespec                                           8
+module_inst                                            4
+operation                                              5
+package                                                1
+param_assign                                           7
+parameter                                              8
 ref_module                                             3
 ref_obj                                                1
-ref_typespec                                          22
-string_typespec                                        7
-tagged_pattern                                         7
+ref_typespec                                          16
+string_typespec                                        4
+tagged_pattern                                         4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamScope/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ParamScope/slpp_all/checker/surelog.chk.html ...
@@ -376,7 +375,7 @@ design: (unnamed)
           |vpiParent:
           \_tagged_pattern: , line:2:41, endln:2:42
           |vpiDecompile:1
-          |vpiSize:32
+          |vpiSize:64
           |UINT:1
           |vpiConstType:9
         |vpiTypespec:
@@ -556,10 +555,8 @@ design: (unnamed)
   |vpiParent:
   \_ref_typespec: (work@lower.VALUE_TEMP)
   |vpiInstance:
-  \_package: (foo_pkg), file:${SURELOG_DIR}/tests/ParamScope/dut.sv, line:1:1, endln:3:11
+  \_package: foo_pkg (foo_pkg::), file:${SURELOG_DIR}/tests/ParamScope/dut.sv, line:1:1, endln:3:11
   |vpiSigned:1
-\_package: (foo_pkg), file:${SURELOG_DIR}/tests/ParamScope/dut.sv, line:1:1, endln:3:11
-  |vpiName:foo_pkg
 \_string_typespec: (default), line:2:32, endln:2:39
   |vpiParent:
   \_ref_typespec: (work@lower)
@@ -568,7 +565,7 @@ design: (unnamed)
   |vpiParent:
   \_ref_typespec: (work@lower.VALUE_TEMP)
   |vpiInstance:
-  \_package: (foo_pkg), file:${SURELOG_DIR}/tests/ParamScope/dut.sv, line:1:1, endln:3:11
+  \_package: foo_pkg (foo_pkg::), file:${SURELOG_DIR}/tests/ParamScope/dut.sv, line:1:1, endln:3:11
   |vpiSigned:1
 \_int_typespec: , line:11:13, endln:11:16
   |vpiParent:

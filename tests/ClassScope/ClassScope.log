@@ -9944,7 +9944,6 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ClassScope/dut.sv:25:1: No timescale set for "I".
 [WRN:PA0205] ${SURELOG_DIR}/tests/ClassScope/dut.sv:36:1: No timescale set for "top".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/ClassScope/dut.sv:9:1: Compile package "P".
 [INF:CP0304] ${SURELOG_DIR}/tests/ClassScope/dut.sv:25:1: Compile interface "work@I".
 [INF:CP0303] ${SURELOG_DIR}/tests/ClassScope/dut.sv:14:1: Compile module "work@M".
 [INF:CP0303] ${SURELOG_DIR}/tests/ClassScope/dut.sv:36:1: Compile module "work@top".
@@ -9953,27 +9952,27 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 begin                                                 16
 class_defn                                             1
-constant                                              98
+constant                                              92
 delay_control                                         10
 design                                                 1
 gen_if                                                 8
 initial                                               10
-int_typespec                                           7
+int_typespec                                           5
 integer_typespec                                       1
 interface_inst                                         1
-logic_typespec                                         4
-module_inst                                            3
-operation                                             22
-package                                                2
-param_assign                                          32
-parameter                                             32
+logic_typespec                                         3
+module_inst                                            2
+operation                                             21
+package                                                1
+param_assign                                          30
+parameter                                             30
 part_select                                            1
-range                                                  3
+range                                                  2
 ref_module                                            48
 ref_obj                                              140
-ref_typespec                                          34
+ref_typespec                                          29
 sys_func_call                                        109
-type_parameter                                         7
+type_parameter                                         6
 unsupported_typespec                                  15
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassScope/slpp_all/surelog.uhdm ...
@@ -10821,20 +10820,11 @@ design: (unnamed)
         |vpiParent:
         \_begin: (work@top)
         |vpiRhs:
-        \_constant: , line:44:35, endln:44:38
+        \_ref_obj: (work@top.P::E), line:44:35, endln:44:39
           |vpiParent:
           \_param_assign: , line:44:24, endln:44:39
-          |vpiDecompile:2
-          |vpiSize:32
-          |UINT:2
-          |vpiTypespec:
-          \_ref_typespec: (work@top)
-            |vpiParent:
-            \_constant: , line:44:35, endln:44:38
-            |vpiFullName:work@top
-            |vpiActual:
-            \_int_typespec: , line:10:5, endln:10:21
-          |vpiConstType:9
+          |vpiName:P::E
+          |vpiFullName:work@top.P::E
         |vpiLhs:
         \_parameter: (work@top.the_expr), line:44:24, endln:44:39
           |vpiParent:
@@ -10974,7 +10964,7 @@ design: (unnamed)
                 \_sys_func_call: ($bits), line:50:68, endln:50:79
                 |vpiName:P::T
                 |vpiActual:
-                \_type_parameter: (T), line:11:21, endln:11:22
+                \_type_parameter: (P::T), line:11:21, endln:11:22
               |vpiName:$bits
             |vpiName:$display
           |vpiStmt:
@@ -11025,7 +11015,7 @@ design: (unnamed)
                 \_sys_func_call: ($left), line:52:47, endln:52:58
                 |vpiName:P::T
                 |vpiActual:
-                \_type_parameter: (T), line:11:21, endln:11:22
+                \_type_parameter: (P::T), line:11:21, endln:11:22
               |vpiName:$left
             |vpiName:$display
           |vpiStmt:
@@ -13003,54 +12993,6 @@ design: (unnamed)
         |vpiName:m3
         |vpiDefName:work@M
 \_weaklyReferenced:
-\_type_parameter: (T), line:11:21, endln:11:22
-  |vpiName:T
-  |vpiLocalParam:1
-  |vpiTypespec:
-  \_ref_typespec: (T)
-    |vpiParent:
-    \_type_parameter: (T), line:11:21, endln:11:22
-    |vpiFullName:T
-    |vpiActual:
-    \_logic_typespec: , line:11:25, endln:11:40
-\_logic_typespec: , line:11:25, endln:11:40
-  |vpiParent:
-  \_type_parameter: (T), line:11:21, endln:11:22
-  |vpiInstance:
-  \_package: (P), file:${SURELOG_DIR}/tests/ClassScope/dut.sv, line:9:1, endln:12:11
-  |vpiRange:
-  \_range: , line:11:31, endln:11:40
-    |vpiParent:
-    \_logic_typespec: , line:11:25, endln:11:40
-    |vpiLeftRange:
-    \_operation: , line:11:32, endln:11:37
-      |vpiParent:
-      \_range: , line:11:31, endln:11:40
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (T.E), line:11:32, endln:11:33
-        |vpiParent:
-        \_operation: , line:11:32, endln:11:37
-        |vpiName:E
-        |vpiFullName:T.E
-      |vpiOperand:
-      \_constant: , line:11:36, endln:11:37
-        |vpiParent:
-        \_operation: , line:11:32, endln:11:37
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:11:38, endln:11:39
-      |vpiParent:
-      \_range: , line:11:31, endln:11:40
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_package: (P), file:${SURELOG_DIR}/tests/ClassScope/dut.sv, line:9:1, endln:12:11
-  |vpiName:P
 \_int_typespec: , line:10:5, endln:10:21
 \_logic_typespec: , line:11:25, endln:11:40
   |vpiParent:
@@ -13141,9 +13083,6 @@ design: (unnamed)
   |vpiName:E
 \_unsupported_typespec: (T), line:54:41, endln:54:42
   |vpiName:T
-\_int_typespec: , line:10:5, endln:10:21
-  |vpiParent:
-  \_ref_typespec: (work@top)
 \_int_typespec: 
   |UINT:2
 \_unsupported_typespec: (P::T), line:54:44, endln:54:47

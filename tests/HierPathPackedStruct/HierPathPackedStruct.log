@@ -141,21 +141,22 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 begin                                                  1
-bit_select                                             1
+bit_select                                             2
 constant                                               9
 design                                                 1
 gen_if                                                 1
-hier_path                                              1
+hier_path                                              2
 logic_net                                              1
 logic_typespec                                         2
-module_inst                                            3
+module_inst                                            2
 operation                                              1
 packed_array_typespec                                  1
 port                                                   1
 range                                                  3
-ref_obj                                                2
+ref_obj                                                3
 ref_typespec                                           5
 struct_typespec                                        2
+sys_func_call                                          1
 typespec_member                                        3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathPackedStruct/slpp_all/surelog.uhdm ...
@@ -208,13 +209,34 @@ design: (unnamed)
       \_gen_if: , line:14:4, endln:14:6
       |vpiOpType:15
       |vpiOperand:
-      \_constant: , line:14:8, endln:14:24
+      \_sys_func_call: ($bits), line:14:8, endln:14:24
         |vpiParent:
         \_operation: , line:14:8, endln:14:30
-        |vpiDecompile:42
-        |vpiSize:64
-        |UINT:42
-        |vpiConstType:9
+        |vpiArgument:
+        \_hier_path: (a.pair[0]), line:14:14, endln:14:23
+          |vpiParent:
+          \_sys_func_call: ($bits), line:14:8, endln:14:24
+          |vpiActual:
+          \_ref_obj: (a), line:14:14, endln:14:15
+            |vpiParent:
+            \_hier_path: (a.pair[0]), line:14:14, endln:14:23
+            |vpiName:a
+          |vpiActual:
+          \_bit_select: (work@some_mod.a.pair[0].pair), line:14:21, endln:14:22
+            |vpiParent:
+            \_hier_path: (a.pair[0]), line:14:14, endln:14:23
+            |vpiName:pair
+            |vpiFullName:work@some_mod.a.pair[0].pair
+            |vpiIndex:
+            \_constant: , line:14:21, endln:14:22
+              |vpiParent:
+              \_bit_select: (work@some_mod.a.pair[0].pair), line:14:21, endln:14:22
+              |vpiDecompile:0
+              |vpiSize:64
+              |UINT:0
+              |vpiConstType:9
+          |vpiName:a.pair[0]
+        |vpiName:$bits
       |vpiOperand:
       \_constant: , line:14:28, endln:14:30
         |vpiParent:
@@ -297,8 +319,6 @@ design: (unnamed)
     |vpiRefEndColumnNo:15
 \_weaklyReferenced:
 \_logic_typespec: , line:2:3, endln:2:15
-  |vpiParent:
-  \_typespec_member: (foo), line:2:16, endln:2:19
   |vpiRange:
   \_range: , line:2:9, endln:2:15
     |vpiParent:
@@ -320,8 +340,6 @@ design: (unnamed)
       |UINT:0
       |vpiConstType:9
 \_logic_typespec: , line:3:3, endln:3:15
-  |vpiParent:
-  \_typespec_member: (bar), line:3:16, endln:3:19
   |vpiRange:
   \_range: , line:3:9, endln:3:15
     |vpiParent:
@@ -343,8 +361,6 @@ design: (unnamed)
       |UINT:0
       |vpiConstType:9
 \_packed_array_typespec: , line:7:3, endln:7:21
-  |vpiParent:
-  \_typespec_member: (pair), line:7:22, endln:7:26
   |vpiRange:
   \_range: , line:7:16, endln:7:21
     |vpiParent:
@@ -366,10 +382,9 @@ design: (unnamed)
       |UINT:0
       |vpiConstType:9
   |vpiElemTypespec:
-  \_ref_typespec: (foo_t.pair)
+  \_ref_typespec: 
     |vpiParent:
     \_packed_array_typespec: , line:7:3, endln:7:21
-    |vpiFullName:foo_t.pair
     |vpiActual:
     \_struct_typespec: (fourty_two_t), line:1:9, endln:4:2
 ===================
@@ -378,7 +393,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/HierPathPackedStruct/dut.sv | ${SURELOG_DIR}/build/regression/HierPathPackedStruct/roundtrip/dut_000.sv | 6 | 17 |
-============================== End RoundTrip Results ==============================

@@ -152,30 +152,29 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/ImportPackage/dut.sv:4:1: No timescale set for "lc_ctrl_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/ImportPackage/dut.sv:9:1: No timescale set for "top".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/ImportPackage/dut.sv:4:1: Compile package "lc_ctrl_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/ImportPackage/dut.sv:1:1: Compile module "work@GOOD".
 [INF:CP0303] ${SURELOG_DIR}/tests/ImportPackage/dut.sv:9:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 begin                                                  1
-constant                                              21
+constant                                              10
 cont_assign                                            1
 design                                                 1
 gen_if                                                 1
 import_typespec                                        1
-int_typespec                                           8
+int_typespec                                           4
 logic_net                                              1
-logic_typespec                                         2
-module_inst                                            4
-operation                                              5
-package                                                2
-packed_array_typespec                                  2
-param_assign                                           5
-parameter                                              5
-range                                                  4
+logic_typespec                                         1
+module_inst                                            3
+operation                                              3
+package                                                1
+packed_array_typespec                                  1
+param_assign                                           3
+parameter                                              3
+range                                                  2
 ref_module                                             1
 ref_obj                                                5
-ref_typespec                                          13
+ref_typespec                                           7
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ImportPackage/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ImportPackage/slpp_all/checker/surelog.chk.html ...
@@ -314,32 +313,7 @@ design: (unnamed)
     |vpiLhs:
     \_parameter: (work@top.TxWidth), line:11:18, endln:11:25
   |vpiTypedef:
-  \_logic_typespec: (unused_type_t), line:6:12, endln:6:31
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:9:1, endln:19:10
-    |vpiName:unused_type_t
-    |vpiInstance:
-    \_package: (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:4:1, endln:7:25
-    |vpiRange:
-    \_range: , line:6:18, endln:6:31
-      |vpiParent:
-      \_logic_typespec: (unused_type_t), line:6:12, endln:6:31
-      |vpiLeftRange:
-      \_constant: , line:6:19, endln:6:26
-        |vpiParent:
-        \_range: , line:6:18, endln:6:31
-        |vpiDecompile:3
-        |vpiSize:64
-        |INT:3
-        |vpiConstType:7
-      |vpiRightRange:
-      \_constant: , line:6:29, endln:6:30
-        |vpiParent:
-        \_range: , line:6:18, endln:6:31
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
+  \_logic_typespec: (lc_ctrl_pkg::unused_type_t), line:6:12, endln:6:31
   |vpiTypedef:
   \_import_typespec: (lc_ctrl_pkg), line:10:11, endln:10:37
   |vpiDefName:work@top
@@ -409,8 +383,6 @@ design: (unnamed)
         |vpiName:good
         |vpiDefName:work@GOOD
 \_weaklyReferenced:
-\_package: (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:4:1, endln:7:25
-  |vpiName:lc_ctrl_pkg
 \_int_typespec: , line:5:14, endln:5:17
   |vpiParent:
   \_parameter: (lc_ctrl_pkg::TxWidth), line:5:18, endln:5:25
@@ -431,5 +403,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ImportPackage/dut.sv | ${SURELOG_DIR}/build/regression/ImportPackage/roundtrip/dut_000.sv | 5 | 19 |
+[roundtrip]: ${SURELOG_DIR}/tests/ImportPackage/dut.sv | ${SURELOG_DIR}/build/regression/ImportPackage/roundtrip/dut_000.sv | 4 | 19 |
 ============================== End RoundTrip Results ==============================

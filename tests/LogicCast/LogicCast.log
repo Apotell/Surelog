@@ -352,7 +352,7 @@ logic_var                                              1
 module_inst                                            1
 named_begin                                            1
 operation                                              4
-package                                                2
+package                                                1
 ref_obj                                                4
 ref_typespec                                          15
 task                                                   9
@@ -371,6 +371,36 @@ design: (unnamed)
   |vpiName:builtin
   |vpiFullName:builtin::
   |vpiDefName:builtin
+  |vpiClassDefn:
+  \_class_defn: (builtin::any_sverilog_class)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:any_sverilog_class
+    |vpiFullName:builtin::any_sverilog_class
+  |vpiClassDefn:
+  \_class_defn: (builtin::array)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:array
+    |vpiFullName:builtin::array
+  |vpiClassDefn:
+  \_class_defn: (builtin::queue)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:queue
+    |vpiFullName:builtin::queue
+  |vpiClassDefn:
+  \_class_defn: (builtin::string)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:string
+    |vpiFullName:builtin::string
+  |vpiClassDefn:
+  \_class_defn: (builtin::system)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:system
+    |vpiFullName:builtin::system
 |uhdmallClasses:
 \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/LogicCast/builtin.sv, line:1:3, endln:27:11
   |vpiParent:
@@ -816,18 +846,18 @@ design: (unnamed)
   |vpiFullName:work@top
   |vpiDefName:work@top
   |vpiNet:
-  \_logic_net: (work@top.hartsel_o), line:3:40, endln:3:49
+  \_logic_net: (work@top.csr_read_write.hartsel_o), line:3:40, endln:3:49
     |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LogicCast/dut.sv, line:1:1, endln:5:10
+    \_operation: , line:3:36, endln:3:50
     |vpiName:hartsel_o
-    |vpiFullName:work@top.hartsel_o
+    |vpiFullName:work@top.csr_read_write.hartsel_o
     |vpiNetType:1
   |vpiNet:
-  \_logic_net: (work@top.NrHarts), line:3:54, endln:3:61
+  \_logic_net: (work@top.csr_read_write.NrHarts), line:3:54, endln:3:61
     |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LogicCast/dut.sv, line:1:1, endln:5:10
+    \_operation: , line:3:54, endln:3:65
     |vpiName:NrHarts
-    |vpiFullName:work@top.NrHarts
+    |vpiFullName:work@top.csr_read_write.NrHarts
     |vpiNetType:1
   |vpiProcess:
   \_always: , line:2:3, endln:4:6
@@ -881,7 +911,7 @@ design: (unnamed)
                 |vpiName:hartsel_o
                 |vpiFullName:work@top.csr_read_write.hartsel_o
                 |vpiActual:
-                \_logic_net: (work@top.hartsel_o), line:3:40, endln:3:49
+                \_logic_net: (work@top.csr_read_write.hartsel_o), line:3:40, endln:3:49
             |vpiOperand:
             \_operation: , line:3:54, endln:3:65
               |vpiParent:
@@ -894,7 +924,7 @@ design: (unnamed)
                 |vpiName:NrHarts
                 |vpiFullName:work@top.csr_read_write.NrHarts
                 |vpiActual:
-                \_logic_net: (work@top.NrHarts), line:3:54, endln:3:61
+                \_logic_net: (work@top.csr_read_write.NrHarts), line:3:54, endln:3:61
               |vpiOperand:
               \_constant: , line:3:64, endln:3:65
                 |vpiParent:

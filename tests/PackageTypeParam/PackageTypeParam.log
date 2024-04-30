@@ -163,28 +163,27 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackageTypeParam/dut.sv:1:1: No timescale set for "new_package".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackageTypeParam/dut.sv:12:1: No timescale set for "module_a".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/PackageTypeParam/dut.sv:1:1: Compile package "new_package".
 [INF:CP0303] ${SURELOG_DIR}/tests/PackageTypeParam/dut.sv:12:1: Compile module "work@module_a".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 always                                                 1
 assignment                                             1
 begin                                                  1
-constant                                               8
+constant                                               4
 design                                                 1
 event_control                                          1
 logic_net                                              3
-logic_typespec                                        11
-module_inst                                            2
+logic_typespec                                         6
+module_inst                                            1
 operation                                              1
-package                                                2
+package                                                1
 port                                                   3
-range                                                  4
+range                                                  2
 ref_obj                                                7
-ref_typespec                                          14
-struct_typespec                                        2
+ref_typespec                                           9
+struct_typespec                                        1
 type_parameter                                         1
-typespec_member                                       10
+typespec_member                                        5
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageTypeParam/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PackageTypeParam/slpp_all/checker/surelog.chk.html ...
@@ -202,7 +201,7 @@ design: (unnamed)
   |vpiTypedef:
   \_struct_typespec: (new_package::zzz), line:2:9, endln:8:2
     |vpiParent:
-    \_package: new_package (new_package::), file:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv, line:1:1, endln:9:25
+    \_type_parameter: (work@module_a.TYPE_PARAMETER), line:14:20, endln:14:34
     |vpiName:new_package::zzz
     |vpiInstance:
     \_package: new_package (new_package::), file:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv, line:1:1, endln:9:25
@@ -213,10 +212,10 @@ design: (unnamed)
       \_struct_typespec: (new_package::zzz), line:2:9, endln:8:2
       |vpiName:a
       |vpiTypespec:
-      \_ref_typespec: (new_package::new_package::zzz::a)
+      \_ref_typespec: (work@module_a.TYPE_PARAMETER.new_package::zzz.a)
         |vpiParent:
         \_typespec_member: (a), line:3:19, endln:3:20
-        |vpiFullName:new_package::new_package::zzz::a
+        |vpiFullName:work@module_a.TYPE_PARAMETER.new_package::zzz.a
         |vpiActual:
         \_logic_typespec: , line:3:5, endln:3:18
       |vpiRefFile:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv
@@ -230,10 +229,10 @@ design: (unnamed)
       \_struct_typespec: (new_package::zzz), line:2:9, endln:8:2
       |vpiName:b
       |vpiTypespec:
-      \_ref_typespec: (new_package::new_package::zzz::b)
+      \_ref_typespec: (work@module_a.TYPE_PARAMETER.new_package::zzz.b)
         |vpiParent:
         \_typespec_member: (b), line:4:19, endln:4:20
-        |vpiFullName:new_package::new_package::zzz::b
+        |vpiFullName:work@module_a.TYPE_PARAMETER.new_package::zzz.b
         |vpiActual:
         \_logic_typespec: , line:4:5, endln:4:16
       |vpiRefFile:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv
@@ -247,10 +246,10 @@ design: (unnamed)
       \_struct_typespec: (new_package::zzz), line:2:9, endln:8:2
       |vpiName:c
       |vpiTypespec:
-      \_ref_typespec: (new_package::new_package::zzz::c)
+      \_ref_typespec: (work@module_a.TYPE_PARAMETER.new_package::zzz.c)
         |vpiParent:
         \_typespec_member: (c), line:5:19, endln:5:20
-        |vpiFullName:new_package::new_package::zzz::c
+        |vpiFullName:work@module_a.TYPE_PARAMETER.new_package::zzz.c
         |vpiActual:
         \_logic_typespec: , line:5:5, endln:5:10
       |vpiRefFile:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv
@@ -264,10 +263,10 @@ design: (unnamed)
       \_struct_typespec: (new_package::zzz), line:2:9, endln:8:2
       |vpiName:d
       |vpiTypespec:
-      \_ref_typespec: (new_package::new_package::zzz::d)
+      \_ref_typespec: (work@module_a.TYPE_PARAMETER.new_package::zzz.d)
         |vpiParent:
         \_typespec_member: (d), line:6:19, endln:6:20
-        |vpiFullName:new_package::new_package::zzz::d
+        |vpiFullName:work@module_a.TYPE_PARAMETER.new_package::zzz.d
         |vpiActual:
         \_logic_typespec: , line:6:5, endln:6:10
       |vpiRefFile:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv
@@ -281,10 +280,10 @@ design: (unnamed)
       \_struct_typespec: (new_package::zzz), line:2:9, endln:8:2
       |vpiName:e
       |vpiTypespec:
-      \_ref_typespec: (new_package::new_package::zzz::e)
+      \_ref_typespec: (work@module_a.TYPE_PARAMETER.new_package::zzz.e)
         |vpiParent:
         \_typespec_member: (e), line:7:19, endln:7:20
-        |vpiFullName:new_package::new_package::zzz::e
+        |vpiFullName:work@module_a.TYPE_PARAMETER.new_package::zzz.e
         |vpiActual:
         \_logic_typespec: , line:7:5, endln:7:10
       |vpiRefFile:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv
@@ -444,168 +443,7 @@ design: (unnamed)
     |vpiAlwaysType:3
   |vpiEndLabel:module_a
 \_weaklyReferenced:
-\_struct_typespec: (new_package::zzz), line:2:9, endln:8:2
-  |vpiParent:
-  \_type_parameter: (work@module_a.TYPE_PARAMETER), line:14:20, endln:14:34
-  |vpiName:new_package::zzz
-  |vpiInstance:
-  \_package: (new_package), file:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv, line:1:1, endln:9:25
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (a), line:3:19, endln:3:20
-    |vpiParent:
-    \_struct_typespec: (new_package::zzz), line:2:9, endln:8:2
-    |vpiName:a
-    |vpiTypespec:
-    \_ref_typespec: (work@module_a.TYPE_PARAMETER.new_package::zzz.a)
-      |vpiParent:
-      \_typespec_member: (a), line:3:19, endln:3:20
-      |vpiFullName:work@module_a.TYPE_PARAMETER.new_package::zzz.a
-      |vpiActual:
-      \_logic_typespec: , line:3:5, endln:3:18
-    |vpiRefFile:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv
-    |vpiRefLineNo:3
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:3
-    |vpiRefEndColumnNo:18
-  |vpiTypespecMember:
-  \_typespec_member: (b), line:4:19, endln:4:20
-    |vpiParent:
-    \_struct_typespec: (new_package::zzz), line:2:9, endln:8:2
-    |vpiName:b
-    |vpiTypespec:
-    \_ref_typespec: (work@module_a.TYPE_PARAMETER.new_package::zzz.b)
-      |vpiParent:
-      \_typespec_member: (b), line:4:19, endln:4:20
-      |vpiFullName:work@module_a.TYPE_PARAMETER.new_package::zzz.b
-      |vpiActual:
-      \_logic_typespec: , line:4:5, endln:4:16
-    |vpiRefFile:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv
-    |vpiRefLineNo:4
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:4
-    |vpiRefEndColumnNo:16
-  |vpiTypespecMember:
-  \_typespec_member: (c), line:5:19, endln:5:20
-    |vpiParent:
-    \_struct_typespec: (new_package::zzz), line:2:9, endln:8:2
-    |vpiName:c
-    |vpiTypespec:
-    \_ref_typespec: (work@module_a.TYPE_PARAMETER.new_package::zzz.c)
-      |vpiParent:
-      \_typespec_member: (c), line:5:19, endln:5:20
-      |vpiFullName:work@module_a.TYPE_PARAMETER.new_package::zzz.c
-      |vpiActual:
-      \_logic_typespec: , line:5:5, endln:5:10
-    |vpiRefFile:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv
-    |vpiRefLineNo:5
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:5
-    |vpiRefEndColumnNo:10
-  |vpiTypespecMember:
-  \_typespec_member: (d), line:6:19, endln:6:20
-    |vpiParent:
-    \_struct_typespec: (new_package::zzz), line:2:9, endln:8:2
-    |vpiName:d
-    |vpiTypespec:
-    \_ref_typespec: (work@module_a.TYPE_PARAMETER.new_package::zzz.d)
-      |vpiParent:
-      \_typespec_member: (d), line:6:19, endln:6:20
-      |vpiFullName:work@module_a.TYPE_PARAMETER.new_package::zzz.d
-      |vpiActual:
-      \_logic_typespec: , line:6:5, endln:6:10
-    |vpiRefFile:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv
-    |vpiRefLineNo:6
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:6
-    |vpiRefEndColumnNo:10
-  |vpiTypespecMember:
-  \_typespec_member: (e), line:7:19, endln:7:20
-    |vpiParent:
-    \_struct_typespec: (new_package::zzz), line:2:9, endln:8:2
-    |vpiName:e
-    |vpiTypespec:
-    \_ref_typespec: (work@module_a.TYPE_PARAMETER.new_package::zzz.e)
-      |vpiParent:
-      \_typespec_member: (e), line:7:19, endln:7:20
-      |vpiFullName:work@module_a.TYPE_PARAMETER.new_package::zzz.e
-      |vpiActual:
-      \_logic_typespec: , line:7:5, endln:7:10
-    |vpiRefFile:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv
-    |vpiRefLineNo:7
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:7
-    |vpiRefEndColumnNo:10
-\_package: (new_package), file:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv, line:1:1, endln:9:25
-  |vpiName:new_package
 \_logic_typespec: , line:3:5, endln:3:18
-  |vpiParent:
-  \_typespec_member: (a), line:3:19, endln:3:20
-  |vpiInstance:
-  \_package: (new_package), file:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv, line:1:1, endln:9:25
-  |vpiRange:
-  \_range: , line:3:11, endln:3:18
-    |vpiParent:
-    \_logic_typespec: , line:3:5, endln:3:18
-    |vpiLeftRange:
-    \_constant: , line:3:12, endln:3:15
-      |vpiParent:
-      \_range: , line:3:11, endln:3:18
-      |vpiDecompile:128
-      |vpiSize:64
-      |UINT:128
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:16, endln:3:17
-      |vpiParent:
-      \_range: , line:3:11, endln:3:18
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:4:5, endln:4:16
-  |vpiParent:
-  \_typespec_member: (b), line:4:19, endln:4:20
-  |vpiInstance:
-  \_package: (new_package), file:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv, line:1:1, endln:9:25
-  |vpiRange:
-  \_range: , line:4:11, endln:4:16
-    |vpiParent:
-    \_logic_typespec: , line:4:5, endln:4:16
-    |vpiLeftRange:
-    \_constant: , line:4:12, endln:4:13
-      |vpiParent:
-      \_range: , line:4:11, endln:4:16
-      |vpiDecompile:4
-      |vpiSize:64
-      |UINT:4
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:4:14, endln:4:15
-      |vpiParent:
-      \_range: , line:4:11, endln:4:16
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:5:5, endln:5:10
-  |vpiParent:
-  \_typespec_member: (c), line:5:19, endln:5:20
-  |vpiInstance:
-  \_package: (new_package), file:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv, line:1:1, endln:9:25
-\_logic_typespec: , line:6:5, endln:6:10
-  |vpiParent:
-  \_typespec_member: (d), line:6:19, endln:6:20
-  |vpiInstance:
-  \_package: (new_package), file:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv, line:1:1, endln:9:25
-\_logic_typespec: , line:7:5, endln:7:10
-  |vpiParent:
-  \_typespec_member: (e), line:7:19, endln:7:20
-  |vpiInstance:
-  \_package: (new_package), file:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv, line:1:1, endln:9:25
-\_logic_typespec: , line:3:5, endln:3:18
-  |vpiParent:
-  \_typespec_member: (a), line:3:19, endln:3:20
   |vpiInstance:
   \_package: new_package (new_package::), file:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv, line:1:1, endln:9:25
   |vpiRange:
@@ -629,8 +467,6 @@ design: (unnamed)
       |UINT:0
       |vpiConstType:9
 \_logic_typespec: , line:4:5, endln:4:16
-  |vpiParent:
-  \_typespec_member: (b), line:4:19, endln:4:20
   |vpiInstance:
   \_package: new_package (new_package::), file:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv, line:1:1, endln:9:25
   |vpiRange:
@@ -654,18 +490,12 @@ design: (unnamed)
       |UINT:0
       |vpiConstType:9
 \_logic_typespec: , line:5:5, endln:5:10
-  |vpiParent:
-  \_typespec_member: (c), line:5:19, endln:5:20
   |vpiInstance:
   \_package: new_package (new_package::), file:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv, line:1:1, endln:9:25
 \_logic_typespec: , line:6:5, endln:6:10
-  |vpiParent:
-  \_typespec_member: (d), line:6:19, endln:6:20
   |vpiInstance:
   \_package: new_package (new_package::), file:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv, line:1:1, endln:9:25
 \_logic_typespec: , line:7:5, endln:7:10
-  |vpiParent:
-  \_typespec_member: (e), line:7:19, endln:7:20
   |vpiInstance:
   \_package: new_package (new_package::), file:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv, line:1:1, endln:9:25
 \_logic_typespec: , line:19:10, endln:19:10

@@ -3,29 +3,27 @@
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackStructVar/dut.sv:16:1: No timescale set for "tlul_pkg".
 [WRN:PA0205] ${SURELOG_DIR}/tests/PackStructVar/dut.sv:41:1: No timescale set for "flash_ctrl".
 [INF:CP0300] Compilation...
-[INF:CP0301] ${SURELOG_DIR}/tests/PackStructVar/dut.sv:1:1: Compile package "top_pkg".
-[INF:CP0301] ${SURELOG_DIR}/tests/PackStructVar/dut.sv:16:1: Compile package "tlul_pkg".
 [INF:CP0303] ${SURELOG_DIR}/tests/PackStructVar/dut.sv:41:1: Compile module "work@flash_ctrl".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                             124
+constant                                              51
 design                                                 1
-enum_const                                             4
-enum_typespec                                          2
-int_typespec                                          53
+enum_const                                             2
+enum_typespec                                          1
+int_typespec                                          22
 logic_net                                              1
-logic_typespec                                        20
-module_inst                                            5
-operation                                             22
-package                                                4
-param_assign                                          44
-parameter                                             44
-range                                                 14
-ref_obj                                               13
-ref_typespec                                         118
-struct_typespec                                        2
-sys_func_call                                          8
-typespec_member                                       20
+logic_typespec                                        10
+module_inst                                            3
+operation                                             11
+package                                                2
+param_assign                                          22
+parameter                                             22
+range                                                  7
+ref_obj                                               11
+ref_typespec                                          54
+struct_typespec                                        1
+sys_func_call                                          6
+typespec_member                                       10
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackStructVar/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PackStructVar/slpp_all/checker/surelog.chk.html ...
@@ -501,7 +499,7 @@ design: (unnamed)
       |vpiDecompile:3'h1
       |vpiSize:3
   |vpiTypedef:
-  \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:36:3
+  \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:44:36
     |vpiParent:
     \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:16:1, endln:38:13
     |vpiName:tlul_pkg::tl_h2d_t
@@ -511,7 +509,7 @@ design: (unnamed)
     |vpiTypespecMember:
     \_typespec_member: (d_valid), line:25:34, endln:25:41
       |vpiParent:
-      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:36:3
+      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:44:36
       |vpiName:d_valid
       |vpiTypespec:
       \_ref_typespec: (tlul_pkg::tlul_pkg::tl_h2d_t::d_valid)
@@ -528,7 +526,7 @@ design: (unnamed)
     |vpiTypespecMember:
     \_typespec_member: (d_opcode), line:26:34, endln:26:42
       |vpiParent:
-      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:36:3
+      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:44:36
       |vpiName:d_opcode
       |vpiTypespec:
       \_ref_typespec: (tlul_pkg::tlul_pkg::tl_h2d_t::d_opcode)
@@ -545,7 +543,7 @@ design: (unnamed)
     |vpiTypespecMember:
     \_typespec_member: (d_param), line:27:34, endln:27:41
       |vpiParent:
-      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:36:3
+      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:44:36
       |vpiName:d_param
       |vpiTypespec:
       \_ref_typespec: (tlul_pkg::tlul_pkg::tl_h2d_t::d_param)
@@ -562,7 +560,7 @@ design: (unnamed)
     |vpiTypespecMember:
     \_typespec_member: (d_size), line:28:34, endln:28:40
       |vpiParent:
-      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:36:3
+      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:44:36
       |vpiName:d_size
       |vpiTypespec:
       \_ref_typespec: (tlul_pkg::tlul_pkg::tl_h2d_t::d_size)
@@ -579,7 +577,7 @@ design: (unnamed)
     |vpiTypespecMember:
     \_typespec_member: (d_source), line:29:34, endln:29:42
       |vpiParent:
-      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:36:3
+      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:44:36
       |vpiName:d_source
       |vpiTypespec:
       \_ref_typespec: (tlul_pkg::tlul_pkg::tl_h2d_t::d_source)
@@ -596,7 +594,7 @@ design: (unnamed)
     |vpiTypespecMember:
     \_typespec_member: (d_sink), line:30:34, endln:30:40
       |vpiParent:
-      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:36:3
+      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:44:36
       |vpiName:d_sink
       |vpiTypespec:
       \_ref_typespec: (tlul_pkg::tlul_pkg::tl_h2d_t::d_sink)
@@ -613,7 +611,7 @@ design: (unnamed)
     |vpiTypespecMember:
     \_typespec_member: (d_data), line:31:34, endln:31:40
       |vpiParent:
-      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:36:3
+      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:44:36
       |vpiName:d_data
       |vpiTypespec:
       \_ref_typespec: (tlul_pkg::tlul_pkg::tl_h2d_t::d_data)
@@ -630,7 +628,7 @@ design: (unnamed)
     |vpiTypespecMember:
     \_typespec_member: (d_user), line:32:34, endln:32:40
       |vpiParent:
-      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:36:3
+      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:44:36
       |vpiName:d_user
       |vpiTypespec:
       \_ref_typespec: (tlul_pkg::tlul_pkg::tl_h2d_t::d_user)
@@ -647,7 +645,7 @@ design: (unnamed)
     |vpiTypespecMember:
     \_typespec_member: (d_error), line:33:34, endln:33:41
       |vpiParent:
-      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:36:3
+      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:44:36
       |vpiName:d_error
       |vpiTypespec:
       \_ref_typespec: (tlul_pkg::tlul_pkg::tl_h2d_t::d_error)
@@ -664,7 +662,7 @@ design: (unnamed)
     |vpiTypespecMember:
     \_typespec_member: (a_ready), line:35:34, endln:35:41
       |vpiParent:
-      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:36:3
+      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:44:36
       |vpiName:a_ready
       |vpiTypespec:
       \_ref_typespec: (tlul_pkg::tlul_pkg::tl_h2d_t::a_ready)
@@ -765,400 +763,6 @@ design: (unnamed)
   |vpiInstance:
   \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:1:1, endln:13:11
   |vpiSigned:1
-\_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:44:36
-  |vpiName:tlul_pkg::tl_h2d_t
-  |vpiInstance:
-  \_package: (tlul_pkg), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:16:1, endln:38:13
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (d_valid), line:25:34, endln:25:41
-    |vpiParent:
-    \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:44:36
-    |vpiName:d_valid
-    |vpiTypespec:
-    \_ref_typespec: (tlul_pkg::tl_h2d_t.d_valid)
-      |vpiParent:
-      \_typespec_member: (d_valid), line:25:34, endln:25:41
-      |vpiFullName:tlul_pkg::tl_h2d_t.d_valid
-      |vpiActual:
-      \_logic_typespec: , line:25:4, endln:25:9
-    |vpiRefFile:${SURELOG_DIR}/tests/PackStructVar/dut.sv
-    |vpiRefLineNo:25
-    |vpiRefColumnNo:4
-    |vpiRefEndLineNo:25
-    |vpiRefEndColumnNo:9
-  |vpiTypespecMember:
-  \_typespec_member: (d_opcode), line:26:34, endln:26:42
-    |vpiParent:
-    \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:44:36
-    |vpiName:d_opcode
-    |vpiTypespec:
-    \_ref_typespec: (tlul_pkg::tl_h2d_t.d_opcode)
-      |vpiParent:
-      \_typespec_member: (d_opcode), line:26:34, endln:26:42
-      |vpiFullName:tlul_pkg::tl_h2d_t.d_opcode
-      |vpiActual:
-      \_enum_typespec: (tlul_pkg::tl_d_op_e), line:18:2, endln:21:14
-    |vpiRefFile:${SURELOG_DIR}/tests/PackStructVar/dut.sv
-    |vpiRefLineNo:26
-    |vpiRefColumnNo:4
-    |vpiRefEndLineNo:26
-    |vpiRefEndColumnNo:13
-  |vpiTypespecMember:
-  \_typespec_member: (d_param), line:27:34, endln:27:41
-    |vpiParent:
-    \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:44:36
-    |vpiName:d_param
-    |vpiTypespec:
-    \_ref_typespec: (tlul_pkg::tl_h2d_t.d_param)
-      |vpiParent:
-      \_typespec_member: (d_param), line:27:34, endln:27:41
-      |vpiFullName:tlul_pkg::tl_h2d_t.d_param
-      |vpiActual:
-      \_logic_typespec: , line:27:4, endln:27:32
-    |vpiRefFile:${SURELOG_DIR}/tests/PackStructVar/dut.sv
-    |vpiRefLineNo:27
-    |vpiRefColumnNo:4
-    |vpiRefEndLineNo:27
-    |vpiRefEndColumnNo:32
-  |vpiTypespecMember:
-  \_typespec_member: (d_size), line:28:34, endln:28:40
-    |vpiParent:
-    \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:44:36
-    |vpiName:d_size
-    |vpiTypespec:
-    \_ref_typespec: (tlul_pkg::tl_h2d_t.d_size)
-      |vpiParent:
-      \_typespec_member: (d_size), line:28:34, endln:28:40
-      |vpiFullName:tlul_pkg::tl_h2d_t.d_size
-      |vpiActual:
-      \_logic_typespec: , line:28:4, endln:28:32
-    |vpiRefFile:${SURELOG_DIR}/tests/PackStructVar/dut.sv
-    |vpiRefLineNo:28
-    |vpiRefColumnNo:4
-    |vpiRefEndLineNo:28
-    |vpiRefEndColumnNo:32
-  |vpiTypespecMember:
-  \_typespec_member: (d_source), line:29:34, endln:29:42
-    |vpiParent:
-    \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:44:36
-    |vpiName:d_source
-    |vpiTypespec:
-    \_ref_typespec: (tlul_pkg::tl_h2d_t.d_source)
-      |vpiParent:
-      \_typespec_member: (d_source), line:29:34, endln:29:42
-      |vpiFullName:tlul_pkg::tl_h2d_t.d_source
-      |vpiActual:
-      \_logic_typespec: , line:29:4, endln:29:32
-    |vpiRefFile:${SURELOG_DIR}/tests/PackStructVar/dut.sv
-    |vpiRefLineNo:29
-    |vpiRefColumnNo:4
-    |vpiRefEndLineNo:29
-    |vpiRefEndColumnNo:32
-  |vpiTypespecMember:
-  \_typespec_member: (d_sink), line:30:34, endln:30:40
-    |vpiParent:
-    \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:44:36
-    |vpiName:d_sink
-    |vpiTypespec:
-    \_ref_typespec: (tlul_pkg::tl_h2d_t.d_sink)
-      |vpiParent:
-      \_typespec_member: (d_sink), line:30:34, endln:30:40
-      |vpiFullName:tlul_pkg::tl_h2d_t.d_sink
-      |vpiActual:
-      \_logic_typespec: , line:30:4, endln:30:32
-    |vpiRefFile:${SURELOG_DIR}/tests/PackStructVar/dut.sv
-    |vpiRefLineNo:30
-    |vpiRefColumnNo:4
-    |vpiRefEndLineNo:30
-    |vpiRefEndColumnNo:32
-  |vpiTypespecMember:
-  \_typespec_member: (d_data), line:31:34, endln:31:40
-    |vpiParent:
-    \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:44:36
-    |vpiName:d_data
-    |vpiTypespec:
-    \_ref_typespec: (tlul_pkg::tl_h2d_t.d_data)
-      |vpiParent:
-      \_typespec_member: (d_data), line:31:34, endln:31:40
-      |vpiFullName:tlul_pkg::tl_h2d_t.d_data
-      |vpiActual:
-      \_logic_typespec: , line:31:4, endln:31:32
-    |vpiRefFile:${SURELOG_DIR}/tests/PackStructVar/dut.sv
-    |vpiRefLineNo:31
-    |vpiRefColumnNo:4
-    |vpiRefEndLineNo:31
-    |vpiRefEndColumnNo:32
-  |vpiTypespecMember:
-  \_typespec_member: (d_user), line:32:34, endln:32:40
-    |vpiParent:
-    \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:44:36
-    |vpiName:d_user
-    |vpiTypespec:
-    \_ref_typespec: (tlul_pkg::tl_h2d_t.d_user)
-      |vpiParent:
-      \_typespec_member: (d_user), line:32:34, endln:32:40
-      |vpiFullName:tlul_pkg::tl_h2d_t.d_user
-      |vpiActual:
-      \_logic_typespec: , line:32:4, endln:32:32
-    |vpiRefFile:${SURELOG_DIR}/tests/PackStructVar/dut.sv
-    |vpiRefLineNo:32
-    |vpiRefColumnNo:4
-    |vpiRefEndLineNo:32
-    |vpiRefEndColumnNo:32
-  |vpiTypespecMember:
-  \_typespec_member: (d_error), line:33:34, endln:33:41
-    |vpiParent:
-    \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:44:36
-    |vpiName:d_error
-    |vpiTypespec:
-    \_ref_typespec: (tlul_pkg::tl_h2d_t.d_error)
-      |vpiParent:
-      \_typespec_member: (d_error), line:33:34, endln:33:41
-      |vpiFullName:tlul_pkg::tl_h2d_t.d_error
-      |vpiActual:
-      \_logic_typespec: , line:33:4, endln:33:9
-    |vpiRefFile:${SURELOG_DIR}/tests/PackStructVar/dut.sv
-    |vpiRefLineNo:33
-    |vpiRefColumnNo:4
-    |vpiRefEndLineNo:33
-    |vpiRefEndColumnNo:9
-  |vpiTypespecMember:
-  \_typespec_member: (a_ready), line:35:34, endln:35:41
-    |vpiParent:
-    \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:44:36
-    |vpiName:a_ready
-    |vpiTypespec:
-    \_ref_typespec: (tlul_pkg::tl_h2d_t.a_ready)
-      |vpiParent:
-      \_typespec_member: (a_ready), line:35:34, endln:35:41
-      |vpiFullName:tlul_pkg::tl_h2d_t.a_ready
-      |vpiActual:
-      \_logic_typespec: , line:35:4, endln:35:9
-    |vpiRefFile:${SURELOG_DIR}/tests/PackStructVar/dut.sv
-    |vpiRefLineNo:35
-    |vpiRefColumnNo:4
-    |vpiRefEndLineNo:35
-    |vpiRefEndColumnNo:9
-\_package: (tlul_pkg), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:16:1, endln:38:13
-  |vpiName:tlul_pkg
-\_enum_typespec: (tlul_pkg::tl_d_op_e), line:18:2, endln:21:14
-  |vpiParent:
-  \_typespec_member: (d_opcode), line:26:34, endln:26:42
-  |vpiName:tlul_pkg::tl_d_op_e
-  |vpiInstance:
-  \_package: (tlul_pkg), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:16:1, endln:38:13
-  |vpiBaseTypespec:
-  \_ref_typespec: (tlul_pkg::tl_h2d_t.d_opcode.tlul_pkg::tl_d_op_e)
-    |vpiParent:
-    \_enum_typespec: (tlul_pkg::tl_d_op_e), line:18:2, endln:21:14
-    |vpiFullName:tlul_pkg::tl_h2d_t.d_opcode.tlul_pkg::tl_d_op_e
-    |vpiActual:
-    \_logic_typespec: , line:18:15, endln:18:26
-  |vpiEnumConst:
-  \_enum_const: (AccessAck), line:19:4, endln:19:24
-    |vpiParent:
-    \_enum_typespec: (tlul_pkg::tl_d_op_e), line:18:2, endln:21:14
-    |vpiName:AccessAck
-    |HEX:0
-    |vpiDecompile:3'h0
-    |vpiSize:3
-  |vpiEnumConst:
-  \_enum_const: (AccessAckData), line:20:4, endln:20:24
-    |vpiParent:
-    \_enum_typespec: (tlul_pkg::tl_d_op_e), line:18:2, endln:21:14
-    |vpiName:AccessAckData
-    |HEX:1
-    |vpiDecompile:3'h1
-    |vpiSize:3
-\_logic_typespec: , line:18:15, endln:18:26
-  |vpiInstance:
-  \_package: (tlul_pkg), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:16:1, endln:38:13
-  |vpiRange:
-  \_range: , line:18:21, endln:18:26
-    |vpiParent:
-    \_logic_typespec: , line:18:15, endln:18:26
-    |vpiLeftRange:
-    \_constant: , line:18:22, endln:18:23
-      |vpiParent:
-      \_range: , line:18:21, endln:18:26
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:18:24, endln:18:25
-      |vpiParent:
-      \_range: , line:18:21, endln:18:26
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:25:4, endln:25:9
-  |vpiParent:
-  \_typespec_member: (d_valid), line:25:34, endln:25:41
-  |vpiInstance:
-  \_package: (tlul_pkg), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:16:1, endln:38:13
-\_logic_typespec: , line:27:4, endln:27:32
-  |vpiParent:
-  \_typespec_member: (d_param), line:27:34, endln:27:41
-  |vpiInstance:
-  \_package: (tlul_pkg), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:16:1, endln:38:13
-  |vpiRange:
-  \_range: , line:27:27, endln:27:32
-    |vpiParent:
-    \_logic_typespec: , line:27:4, endln:27:32
-    |vpiLeftRange:
-    \_constant: , line:27:28, endln:27:29
-      |vpiParent:
-      \_range: , line:27:27, endln:27:32
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:27:30, endln:27:31
-      |vpiParent:
-      \_range: , line:27:27, endln:27:32
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:28:4, endln:28:32
-  |vpiParent:
-  \_typespec_member: (d_size), line:28:34, endln:28:40
-  |vpiInstance:
-  \_package: (tlul_pkg), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:16:1, endln:38:13
-  |vpiRange:
-  \_range: , line:28:11, endln:28:32
-    |vpiParent:
-    \_logic_typespec: , line:28:4, endln:28:32
-    |vpiLeftRange:
-    \_constant: , line:28:12, endln:28:27
-      |vpiParent:
-      \_range: , line:28:11, endln:28:32
-      |vpiDecompile:1
-      |vpiSize:64
-      |INT:1
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:28:30, endln:28:31
-      |vpiParent:
-      \_range: , line:28:11, endln:28:32
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:29:4, endln:29:32
-  |vpiParent:
-  \_typespec_member: (d_source), line:29:34, endln:29:42
-  |vpiInstance:
-  \_package: (tlul_pkg), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:16:1, endln:38:13
-  |vpiRange:
-  \_range: , line:29:11, endln:29:32
-    |vpiParent:
-    \_logic_typespec: , line:29:4, endln:29:32
-    |vpiLeftRange:
-    \_constant: , line:29:12, endln:29:27
-      |vpiParent:
-      \_range: , line:29:11, endln:29:32
-      |vpiDecompile:7
-      |vpiSize:64
-      |INT:7
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:29:30, endln:29:31
-      |vpiParent:
-      \_range: , line:29:11, endln:29:32
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:30:4, endln:30:32
-  |vpiParent:
-  \_typespec_member: (d_sink), line:30:34, endln:30:40
-  |vpiInstance:
-  \_package: (tlul_pkg), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:16:1, endln:38:13
-  |vpiRange:
-  \_range: , line:30:11, endln:30:32
-    |vpiParent:
-    \_logic_typespec: , line:30:4, endln:30:32
-    |vpiLeftRange:
-    \_constant: , line:30:12, endln:30:27
-      |vpiParent:
-      \_range: , line:30:11, endln:30:32
-      |vpiDecompile:0
-      |vpiSize:64
-      |INT:0
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:30:30, endln:30:31
-      |vpiParent:
-      \_range: , line:30:11, endln:30:32
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:31:4, endln:31:32
-  |vpiParent:
-  \_typespec_member: (d_data), line:31:34, endln:31:40
-  |vpiInstance:
-  \_package: (tlul_pkg), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:16:1, endln:38:13
-  |vpiRange:
-  \_range: , line:31:12, endln:31:32
-    |vpiParent:
-    \_logic_typespec: , line:31:4, endln:31:32
-    |vpiLeftRange:
-    \_constant: , line:31:13, endln:31:27
-      |vpiParent:
-      \_range: , line:31:12, endln:31:32
-      |vpiDecompile:31
-      |vpiSize:64
-      |INT:31
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:31:30, endln:31:31
-      |vpiParent:
-      \_range: , line:31:12, endln:31:32
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:32:4, endln:32:32
-  |vpiParent:
-  \_typespec_member: (d_user), line:32:34, endln:32:40
-  |vpiInstance:
-  \_package: (tlul_pkg), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:16:1, endln:38:13
-  |vpiRange:
-  \_range: , line:32:11, endln:32:32
-    |vpiParent:
-    \_logic_typespec: , line:32:4, endln:32:32
-    |vpiLeftRange:
-    \_constant: , line:32:12, endln:32:27
-      |vpiParent:
-      \_range: , line:32:11, endln:32:32
-      |vpiDecompile:15
-      |vpiSize:64
-      |INT:15
-      |vpiConstType:7
-    |vpiRightRange:
-    \_constant: , line:32:30, endln:32:31
-      |vpiParent:
-      \_range: , line:32:11, endln:32:32
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:33:4, endln:33:9
-  |vpiParent:
-  \_typespec_member: (d_error), line:33:34, endln:33:41
-  |vpiInstance:
-  \_package: (tlul_pkg), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:16:1, endln:38:13
-\_logic_typespec: , line:35:4, endln:35:9
-  |vpiParent:
-  \_typespec_member: (a_ready), line:35:34, endln:35:41
-  |vpiInstance:
-  \_package: (tlul_pkg), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:16:1, endln:38:13
 \_logic_typespec: , line:18:15, endln:18:26
   |vpiInstance:
   \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:16:1, endln:38:13
@@ -1183,13 +787,9 @@ design: (unnamed)
       |UINT:0
       |vpiConstType:9
 \_logic_typespec: , line:25:4, endln:25:9
-  |vpiParent:
-  \_typespec_member: (d_valid), line:25:34, endln:25:41
   |vpiInstance:
   \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:16:1, endln:38:13
 \_logic_typespec: , line:27:4, endln:27:32
-  |vpiParent:
-  \_typespec_member: (d_param), line:27:34, endln:27:41
   |vpiInstance:
   \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:16:1, endln:38:13
   |vpiRange:
@@ -1213,8 +813,6 @@ design: (unnamed)
       |UINT:0
       |vpiConstType:9
 \_logic_typespec: , line:28:4, endln:28:32
-  |vpiParent:
-  \_typespec_member: (d_size), line:28:34, endln:28:40
   |vpiInstance:
   \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:16:1, endln:38:13
   |vpiRange:
@@ -1227,11 +825,12 @@ design: (unnamed)
       \_range: , line:28:11, endln:28:32
       |vpiOpType:11
       |vpiOperand:
-      \_ref_obj: (tlul_pkg::tlul_pkg::tl_h2d_t::d_size::top_pkg::TL_SZW), line:28:12, endln:28:27
+      \_ref_obj: (top_pkg::TL_SZW), line:28:12, endln:28:27
         |vpiParent:
         \_operation: , line:28:12, endln:28:29
         |vpiName:top_pkg::TL_SZW
-        |vpiFullName:tlul_pkg::tlul_pkg::tl_h2d_t::d_size::top_pkg::TL_SZW
+        |vpiActual:
+        \_parameter: (top_pkg::TL_SZW), line:8:17, endln:8:23
       |vpiOperand:
       \_constant: , line:28:28, endln:28:29
         |vpiParent:
@@ -1249,8 +848,6 @@ design: (unnamed)
       |UINT:0
       |vpiConstType:9
 \_logic_typespec: , line:29:4, endln:29:32
-  |vpiParent:
-  \_typespec_member: (d_source), line:29:34, endln:29:42
   |vpiInstance:
   \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:16:1, endln:38:13
   |vpiRange:
@@ -1263,11 +860,12 @@ design: (unnamed)
       \_range: , line:29:11, endln:29:32
       |vpiOpType:11
       |vpiOperand:
-      \_ref_obj: (tlul_pkg::tlul_pkg::tl_h2d_t::d_source::top_pkg::TL_AIW), line:29:12, endln:29:27
+      \_ref_obj: (top_pkg::TL_AIW), line:29:12, endln:29:27
         |vpiParent:
         \_operation: , line:29:12, endln:29:29
         |vpiName:top_pkg::TL_AIW
-        |vpiFullName:tlul_pkg::tlul_pkg::tl_h2d_t::d_source::top_pkg::TL_AIW
+        |vpiActual:
+        \_parameter: (top_pkg::TL_AIW), line:4:17, endln:4:23
       |vpiOperand:
       \_constant: , line:29:28, endln:29:29
         |vpiParent:
@@ -1285,8 +883,6 @@ design: (unnamed)
       |UINT:0
       |vpiConstType:9
 \_logic_typespec: , line:30:4, endln:30:32
-  |vpiParent:
-  \_typespec_member: (d_sink), line:30:34, endln:30:40
   |vpiInstance:
   \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:16:1, endln:38:13
   |vpiRange:
@@ -1299,11 +895,12 @@ design: (unnamed)
       \_range: , line:30:11, endln:30:32
       |vpiOpType:11
       |vpiOperand:
-      \_ref_obj: (tlul_pkg::tlul_pkg::tl_h2d_t::d_sink::top_pkg::TL_DIW), line:30:12, endln:30:27
+      \_ref_obj: (top_pkg::TL_DIW), line:30:12, endln:30:27
         |vpiParent:
         \_operation: , line:30:12, endln:30:29
         |vpiName:top_pkg::TL_DIW
-        |vpiFullName:tlul_pkg::tlul_pkg::tl_h2d_t::d_sink::top_pkg::TL_DIW
+        |vpiActual:
+        \_parameter: (top_pkg::TL_DIW), line:5:17, endln:5:23
       |vpiOperand:
       \_constant: , line:30:28, endln:30:29
         |vpiParent:
@@ -1321,8 +918,6 @@ design: (unnamed)
       |UINT:0
       |vpiConstType:9
 \_logic_typespec: , line:31:4, endln:31:32
-  |vpiParent:
-  \_typespec_member: (d_data), line:31:34, endln:31:40
   |vpiInstance:
   \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:16:1, endln:38:13
   |vpiRange:
@@ -1335,11 +930,12 @@ design: (unnamed)
       \_range: , line:31:12, endln:31:32
       |vpiOpType:11
       |vpiOperand:
-      \_ref_obj: (tlul_pkg::tlul_pkg::tl_h2d_t::d_data::top_pkg::TL_DW), line:31:13, endln:31:27
+      \_ref_obj: (top_pkg::TL_DW), line:31:13, endln:31:27
         |vpiParent:
         \_operation: , line:31:13, endln:31:29
         |vpiName:top_pkg::TL_DW
-        |vpiFullName:tlul_pkg::tlul_pkg::tl_h2d_t::d_data::top_pkg::TL_DW
+        |vpiActual:
+        \_parameter: (top_pkg::TL_DW), line:3:17, endln:3:22
       |vpiOperand:
       \_constant: , line:31:28, endln:31:29
         |vpiParent:
@@ -1357,8 +953,6 @@ design: (unnamed)
       |UINT:0
       |vpiConstType:9
 \_logic_typespec: , line:32:4, endln:32:32
-  |vpiParent:
-  \_typespec_member: (d_user), line:32:34, endln:32:40
   |vpiInstance:
   \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:16:1, endln:38:13
   |vpiRange:
@@ -1371,11 +965,12 @@ design: (unnamed)
       \_range: , line:32:11, endln:32:32
       |vpiOpType:11
       |vpiOperand:
-      \_ref_obj: (tlul_pkg::tlul_pkg::tl_h2d_t::d_user::top_pkg::TL_DUW), line:32:12, endln:32:27
+      \_ref_obj: (top_pkg::TL_DUW), line:32:12, endln:32:27
         |vpiParent:
         \_operation: , line:32:12, endln:32:29
         |vpiName:top_pkg::TL_DUW
-        |vpiFullName:tlul_pkg::tlul_pkg::tl_h2d_t::d_user::top_pkg::TL_DUW
+        |vpiActual:
+        \_parameter: (top_pkg::TL_DUW), line:6:17, endln:6:23
       |vpiOperand:
       \_constant: , line:32:28, endln:32:29
         |vpiParent:
@@ -1393,13 +988,9 @@ design: (unnamed)
       |UINT:0
       |vpiConstType:9
 \_logic_typespec: , line:33:4, endln:33:9
-  |vpiParent:
-  \_typespec_member: (d_error), line:33:34, endln:33:41
   |vpiInstance:
   \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:16:1, endln:38:13
 \_logic_typespec: , line:35:4, endln:35:9
-  |vpiParent:
-  \_typespec_member: (a_ready), line:35:34, endln:35:41
   |vpiInstance:
   \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:16:1, endln:38:13
 ===================

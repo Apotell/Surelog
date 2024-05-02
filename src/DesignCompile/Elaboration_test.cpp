@@ -221,7 +221,7 @@ TEST(Elaboration, DollarBits) {
   }
   EXPECT_NE(top, nullptr);
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler-getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto passign : *topMod->Param_assigns()) {
@@ -273,7 +273,7 @@ TEST(Elaboration, DollarBitsHier) {
     parameter o = $bits(reg2hw.ctrl.nco);
   endmodule)");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler-getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto passign : *topMod->Param_assigns()) {
@@ -302,7 +302,7 @@ TEST(Elaboration, ConcatHexa) {
     };
   endmodule)");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler-getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto passign : *topMod->Param_assigns()) {
@@ -330,7 +330,7 @@ TEST(Elaboration, ParamSubstituteWhenConstant) {
     parameter logic [7:0][3:0] P = X;
   endmodule )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler-getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto passign : *topMod->Param_assigns()) {
@@ -396,7 +396,7 @@ endmodule
 
 )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler-getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto passign : *topMod->Param_assigns()) {
@@ -432,7 +432,7 @@ module top();
 endmodule
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler-getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto passign : *topMod->Param_assigns()) {
@@ -480,7 +480,7 @@ module top(output [3:0] x);
 endmodule
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler-getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto cassign : *topMod->Cont_assigns()) {
@@ -537,7 +537,7 @@ module top(output logic [31:0] o);
 endmodule
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler-getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto passign : *topMod->Param_assigns()) {
@@ -571,7 +571,7 @@ module top(output int o);
 endmodule
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler-getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto passign : *topMod->Param_assigns()) {
@@ -612,7 +612,7 @@ endmodule : top
 
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler-getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto passign : *topMod->Param_assigns()) {
@@ -661,7 +661,7 @@ module top();
 endmodule
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler-getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto passign : *topMod->Param_assigns()) {
@@ -691,7 +691,7 @@ module top();
 endmodule
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler-getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto passign : *topMod->Param_assigns()) {
@@ -733,7 +733,7 @@ endmodule
 
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler-getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto inst : *topMod->Modules()) {
@@ -805,7 +805,7 @@ module top;
 endmodule // top
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
 
   UHDM::visit_designs({hdesign}, std::cout);
@@ -852,7 +852,7 @@ module top();
 endmodule
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto inst : *topMod->Modules()) {
@@ -921,7 +921,7 @@ module top;
 endmodule // top
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto inst : *topMod->Modules()) {
@@ -970,7 +970,7 @@ module top(output logic [15:0] o);
 endmodule // top
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto cassign : *topMod->Cont_assigns()) {
@@ -1013,7 +1013,7 @@ module top(output logic [15:0] o);
 endmodule // top
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto cassign : *topMod->Cont_assigns()) {
@@ -1056,7 +1056,7 @@ module top(output logic [15:0] o);
 endmodule // top
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto cassign : *topMod->Cont_assigns()) {
@@ -1101,7 +1101,7 @@ module top(output logic [15:0] o);
 endmodule // top
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto cassign : *topMod->Cont_assigns()) {
@@ -1136,7 +1136,7 @@ module Example();
 endmodule
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto passign : *topMod->Param_assigns()) {
@@ -1166,7 +1166,7 @@ module dut2 #(parameter num_out_p="inv") ();
 endmodule
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto passign : *topMod->Param_assigns()) {
@@ -1221,7 +1221,7 @@ module top();
 endmodule
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto gen_array : *topMod->Gen_scope_arrays()) {
@@ -1250,7 +1250,7 @@ module top(output int o);
 endmodule
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto cassign : *topMod->Cont_assigns()) {
@@ -1284,7 +1284,7 @@ module top (o);
 endmodule
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto cassign : *topMod->Cont_assigns()) {
@@ -1318,7 +1318,7 @@ module top(out1, out2);
 endmodule
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto cassign : *topMod->Cont_assigns()) {
@@ -1369,7 +1369,7 @@ module static_size_casting (
 endmodule : static_size_casting
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto cassign : *topMod->Cont_assigns()) {
@@ -1410,7 +1410,7 @@ module top;
 endmodule
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto cassign : *topMod->Cont_assigns()) {
@@ -1457,7 +1457,7 @@ module top(output int o);
 endmodule // top
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto passign : *topMod->Param_assigns()) {

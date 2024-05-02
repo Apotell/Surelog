@@ -30,6 +30,7 @@ limitations under the License.
 #include <Surelog/ErrorReporting/ErrorContainer.h>
 #include <Surelog/SourceCompile/CompileSourceFile.h>
 #include <Surelog/SourceCompile/PreprocessFile.h>
+#include <uhdm/Serializer.h>
 #include <uhdm/vpi_user.h>
 
 #ifdef USETBB
@@ -39,6 +40,7 @@ limitations under the License.
 #endif
 
 #include <map>
+#include <mutex>
 #include <set>
 #include <string>
 #include <vector>
@@ -72,6 +74,11 @@ class Compiler {
   }
   SymbolTable* getSymbolTable() const { return m_symbolTable; }
   ErrorContainer* getErrorContainer() const { return m_errors; }
+
+  UHDM::Serializer& getSerializer() { return m_serializer; }
+  void lockSerializer() { m_serializerMutex.lock(); }
+  void unlockSerializer() { m_serializerMutex.unlock(); }
+
   std::vector<CompileSourceFile*>& getCompileSourceFiles() {
     return m_compilers;
   }
@@ -92,7 +99,6 @@ class Compiler {
   // of the design.
   Design* getDesign() const { return m_design; }
 
-  vpiHandle getUhdmDesign() const { return m_uhdmDesign; }
   CompileDesign* getCompileDesign() const { return m_compileDesign; }
   ErrorContainer::Stats getErrorStats() const;
   bool isLibraryFile(PathId id) const;
@@ -117,10 +123,12 @@ class Compiler {
                        CompileSourceFile::Action action);
   bool cleanup_();
 
-  CommandLineParser* const m_commandLineParser;
-  ErrorContainer* const m_errors;
-  SymbolTable* const m_symbolTable;
-  CompilationUnit* m_commonCompilationUnit;
+ private:
+  UHDM::Serializer m_serializer;
+  CommandLineParser* const m_commandLineParser = nullptr;
+  ErrorContainer* const m_errors = nullptr;
+  SymbolTable* const m_symbolTable = nullptr;
+  CompilationUnit* m_commonCompilationUnit = nullptr;
   std::map<SymbolId, PreprocessFile::AntlrParserHandler*,
            SymbolIdLessThanComparer>
       m_antlrPpMap;
@@ -130,14 +138,14 @@ class Compiler {
   std::vector<CompilationUnit*> m_compilationUnits;
   std::vector<SymbolTable*> m_symbolTables;
   std::vector<ErrorContainer*> m_errorContainers;
-  LibrarySet* const m_librarySet;
-  ConfigSet* const m_configSet;
-  Design* const m_design;
-  vpiHandle m_uhdmDesign;
+  LibrarySet* const m_librarySet = nullptr;
+  ConfigSet* const m_configSet = nullptr;
+  Design* const m_design = nullptr;
   PathIdSet m_libraryFiles;  // -v <file>
   std::string m_text;        // unit tests
   CompileDesign* m_compileDesign;
   PPFileMap m_ppFileMap;
+  std::mutex m_serializerMutex;
 #ifdef USETBB
   tbb::task_group m_taskGroup;
 #endif

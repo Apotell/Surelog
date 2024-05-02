@@ -251,8 +251,9 @@ bool TestbenchElaboration::bindBaseClasses_() {
             new Property(thisdt, classDefinition->getFileContent(),
                          classDefinition->getNodeId(), InvalidNodeId, "super",
                          false, false, false, false, false);
-        UHDM::class_defn* derived = classDefinition->getUhdmDefinition();
-        UHDM::class_defn* parent = bdef->getUhdmDefinition();
+        UHDM::class_defn* derived =
+            classDefinition->getUhdmScope<UHDM::class_defn>();
+        UHDM::class_defn* parent = bdef->getUhdmScope<UHDM::class_defn>();
         classDefinition->insertProperty(prop);
         UHDM::extends* extends = s.MakeExtends();
         extends->VpiParent(derived);
@@ -296,7 +297,8 @@ bool TestbenchElaboration::bindBaseClasses_() {
           extends_ts->VpiParent(extends);
           extends_ts->Actual_typespec(tps);
           extends->Class_typespec(extends_ts);
-          UHDM::class_defn* def = classDefinition->getUhdmDefinition();
+          UHDM::class_defn* def =
+              classDefinition->getUhdmScope<UHDM::class_defn>();
           def->Extends(extends);
         }
       }
@@ -701,7 +703,7 @@ bool TestbenchElaboration::bindProperties_() {
 
   // Bind properties
   for (const auto& [className, classDefinition] : classes) {
-    UHDM::class_defn* defn = classDefinition->getUhdmDefinition();
+    UHDM::class_defn* defn = classDefinition->getUhdmScope<UHDM::class_defn>();
     UHDM::VectorOfvariables* vars = defn->Variables();
     UHDM::VectorOfnamed_event* events = defn->Named_events();
     for (Signal* sig : classDefinition->getSignals()) {

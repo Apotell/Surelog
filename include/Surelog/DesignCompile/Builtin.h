@@ -36,14 +36,14 @@ class CompilationUnit;
 // SURELOG::addBuiltinsTo(Design *design);
 class Builtin final {
  public:
-  Builtin(CompileDesign* compiler, Design* design)
-      : m_compiler(compiler), m_design(design) {}
+  Builtin(CompileDesign* compileDesign, Design* design)
+      : m_compileDesign(compileDesign), m_design(design) {}
   void addBuiltinMacros(CompilationUnit* compUnit);
   void addBuiltinTypes();
   void addBuiltinClasses();
 
  private:
-  CompileDesign* const m_compiler;
+  CompileDesign* const m_compileDesign;
   Design* const m_design;
 };
 

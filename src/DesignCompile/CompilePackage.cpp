@@ -61,18 +61,13 @@ int32_t FunctorCompilePackage::operator()() const {
 
 bool CompilePackage::compile(Elaborate elaborate, Reduce reduce) {
   if (!m_package) return false;
-  UHDM::Serializer& s = m_compileDesign->getSerializer();
-  UHDM::package* pack = any_cast<UHDM::package*>(m_package->getUhdmInstance());
+  UHDM::package* pack = m_package->getUhdmScope<UHDM::package>();
   const FileContent* fC = m_package->m_fileContents[0];
   NodeId packId = m_package->m_nodeIds[0];
   m_helper.setElaborate(elaborate);
   m_helper.setReduce(reduce);
-  if (pack == nullptr) {
-    pack = s.MakePackage();
-    pack->VpiName(m_package->getName());
-    m_package->setUhdmInstance(pack);
-  }
   fC->populateCoreMembers(packId, packId, pack);
+
   m_package->m_exprBuilder.seterrorReporting(m_errors, m_symbols);
   m_package->m_exprBuilder.setDesign(
       m_compileDesign->getCompiler()->getDesign());
@@ -91,6 +86,7 @@ bool CompilePackage::compile(Elaborate elaborate, Reduce reduce) {
         m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
     delete errors;
   }
+  const UHDM::ScopedScope scopedScope(pack);
   collectObjects_(CollectType::FUNCTION, reduce);
   collectObjects_(CollectType::DEFINITION, reduce);
   m_helper.evalScheduledExprs(m_package, m_compileDesign);
@@ -263,14 +259,14 @@ bool CompilePackage::collectObjects_(CollectType collectType, Reduce reduce) {
         case VObjectType::paProperty_declaration: {
           if (collectType != CollectType::OTHER) break;
           UHDM::property_decl* decl = m_helper.compilePropertyDeclaration(
-              m_package, fC, fC->Child(id), m_compileDesign, nullptr, nullptr);
+              m_package, fC, id, m_compileDesign, nullptr, nullptr);
           m_package->addPropertyDecl(decl);
           break;
         }
         case VObjectType::paSequence_declaration: {
           if (collectType != CollectType::OTHER) break;
           UHDM::sequence_decl* decl = m_helper.compileSequenceDeclaration(
-              m_package, fC, fC->Child(id), m_compileDesign, nullptr, nullptr);
+              m_package, fC, id, m_compileDesign, nullptr, nullptr);
           m_package->addSequenceDecl(decl);
           break;
         }

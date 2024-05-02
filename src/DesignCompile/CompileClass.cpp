@@ -83,8 +83,10 @@ bool CompileClass::compile(Elaborate elaborate, Reduce reduce) {
     }
   }
 
-  if (m_class->m_uhdm_definition->VpiFullName().empty())
-    m_class->m_uhdm_definition->VpiFullName(fullName);
+  UHDM::class_defn* const defn = m_class->getUhdmScope<UHDM::class_defn>();
+  const UHDM::ScopedScope scopedScope(defn);
+
+  if (defn->VpiFullName().empty()) defn->VpiFullName(fullName);
   Location loc(fC->getFileId(nodeId), fC->Line(nodeId), fC->Column(nodeId),
                m_symbols->registerSymbol(fullName));
 
@@ -470,10 +472,10 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
         m_errors->addError(err);
       }
     }
-    m_helper.compileFunction(m_class, fC, fC->Child(id), m_compileDesign,
-                             Reduce::No, nullptr, true);
-    m_helper.compileFunction(m_class, fC, fC->Child(id), m_compileDesign,
-                             Reduce::No, nullptr, true);
+    m_helper.compileFunction(m_class, fC, id, m_compileDesign, Reduce::No,
+                             nullptr, true);
+    m_helper.compileFunction(m_class, fC, id, m_compileDesign, Reduce::No,
+                             nullptr, true);
 
   } else if (func_type == VObjectType::paTask_declaration) {
     /*
@@ -502,10 +504,10 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
           .append(fC->SymName(fC->Sibling(task_name)));
     }
 
-    m_helper.compileTask(m_class, fC, fC->Child(id), m_compileDesign,
-                         Reduce::No, nullptr, true);
-    m_helper.compileTask(m_class, fC, fC->Child(id), m_compileDesign,
-                         Reduce::No, nullptr, true);
+    m_helper.compileTask(m_class, fC, id, m_compileDesign, Reduce::No, nullptr,
+                         true);
+    m_helper.compileTask(m_class, fC, id, m_compileDesign, Reduce::No, nullptr,
+                         true);
 
   } else if (func_type == VObjectType::paMethod_prototype) {
     /*
@@ -536,10 +538,10 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
             .append(fC->SymName(fC->Sibling(task_name)));
       }
 
-      m_helper.compileTask(m_class, fC, fC->Child(id), m_compileDesign,
-                           Reduce::No, nullptr, true);
-      m_helper.compileTask(m_class, fC, fC->Child(id), m_compileDesign,
-                           Reduce::No, nullptr, true);
+      m_helper.compileTask(m_class, fC, id, m_compileDesign, Reduce::No,
+                           nullptr, true);
+      m_helper.compileTask(m_class, fC, id, m_compileDesign, Reduce::No,
+                           nullptr, true);
 
     } else {
       NodeId function_data_type = fC->Child(func_prototype);
@@ -556,10 +558,10 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
       NodeId function_name = fC->Sibling(function_data_type);
       funcName = fC->SymName(function_name);
 
-      m_helper.compileFunction(m_class, fC, fC->Child(id), m_compileDesign,
-                               Reduce::No, nullptr, true);
-      m_helper.compileFunction(m_class, fC, fC->Child(id), m_compileDesign,
-                               Reduce::No, nullptr, true);
+      m_helper.compileFunction(m_class, fC, id, m_compileDesign, Reduce::No,
+                               nullptr, true);
+      m_helper.compileFunction(m_class, fC, id, m_compileDesign, Reduce::No,
+                               nullptr, true);
     }
     is_extern = true;
   } else if (func_type == VObjectType::paClass_constructor_declaration) {
@@ -572,11 +574,10 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
   } else if (func_type == VObjectType::paClass_constructor_prototype) {
     funcName = "new";
 
-    m_helper.compileFunction(m_class, fC, fC->Child(id), m_compileDesign,
-                             Reduce::No, nullptr, true);
-    m_helper.compileFunction(m_class, fC, fC->Child(id), m_compileDesign,
-                             Reduce::No, nullptr, true);
-
+    m_helper.compileFunction(m_class, fC, id, m_compileDesign, Reduce::No,
+                             nullptr, true);
+    m_helper.compileFunction(m_class, fC, id, m_compileDesign, Reduce::No,
+                             nullptr, true);
   } else {
     funcName = "UNRECOGNIZED_METHOD_TYPE";
   }
@@ -654,7 +655,8 @@ bool CompileClass::compile_class_declaration_(const FileContent* fC,
   const NodeId class_name_id = fC->sl_collect(id, VObjectType::slStringConst);
   const std::string_view class_name = fC->SymName(class_name_id);
   std::string full_class_name =
-      StrCat(m_class->m_uhdm_definition->VpiFullName(), "::", class_name);
+      StrCat(m_class->getUhdmScope<UHDM::class_defn>()->VpiFullName(),
+             "::", class_name);
   ClassDefinition* prevDef = m_class->getClass(class_name);
   if (prevDef) {
     Location loc1(fC->getFileId(class_name_id), fC->Line(class_name_id),
@@ -669,15 +671,14 @@ bool CompileClass::compile_class_declaration_(const FileContent* fC,
     Error err(ErrorDefinition::COMP_MULTIPLY_DEFINED_INNER_CLASS, loc1, loc2);
     m_errors->addError(err);
   }
-  UHDM::class_defn* defn = s.MakeClass_defn();
-  defn->VpiVirtual(virtualClass);
-  defn->VpiName(class_name);
-  defn->VpiFullName(full_class_name);
   ClassDefinition* the_class =
       new ClassDefinition(class_name, m_class->getLibrary(),
-                          m_class->getContainer(), fC, id, m_class, defn);
+                          m_class->getContainer(), fC, id, m_class, s);
+  UHDM::class_defn* defn = the_class->getUhdmScope<UHDM::class_defn>();
+  defn->VpiVirtual(virtualClass);
+  defn->VpiFullName(full_class_name);
   m_class->insertClass(the_class);
-  UHDM::class_defn* parent = m_class->getUhdmDefinition();
+  UHDM::class_defn* parent = m_class->getUhdmScope<UHDM::class_defn>();
   defn->VpiParent(parent);
   UHDM::VectorOfscope* scopes = parent->Scopes();
   if (scopes == nullptr) {
@@ -837,7 +838,7 @@ bool CompileClass::compile_class_type_(const FileContent* fC, NodeId id) {
   // Will be bound in UVMElaboration step
   ClassDefinition* base_class = new ClassDefinition(
       base_class_name, m_class->getLibrary(), m_class->getContainer(), fC,
-      base_class_id, nullptr, s.MakeClass_defn());
+      base_class_id, nullptr, s);
   m_class->insertBaseClass(base_class);
 
   return true;
@@ -871,7 +872,7 @@ bool CompileClass::compile_class_parameters_(const FileContent* fC, NodeId id) {
   n<> u<11> t<Parameter_port_list> p<31> c<10> s<20> l<18>
 
   */
-  UHDM::class_defn* defn = m_class->getUhdmDefinition();
+  UHDM::class_defn* defn = m_class->getUhdmScope<UHDM::class_defn>();
 
   if (fC->sl_collect(id, VObjectType::paVIRTUAL)) {
     defn->VpiVirtual(true);

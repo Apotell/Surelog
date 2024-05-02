@@ -31,8 +31,6 @@
 namespace SURELOG {
 
 class BindStmt;
-class ModuleDefinitionFactory;
-class ModuleInstanceFactory;
 
 class DesignElaboration : public TestbenchElaboration {
  public:
@@ -65,7 +63,6 @@ class DesignElaboration : public TestbenchElaboration {
                                                NodeId parentParamOverride);
   void elaborateInstance_(const FileContent* fC, NodeId nodeId,
                           NodeId parentParamOverride,
-                          ModuleInstanceFactory* factory,
                           ModuleInstance* parent, Config* config,
                           std::vector<ModuleInstance*>& parentSubInstances);
   void recurseInstanceLoop_(std::vector<int32_t>& from,
@@ -73,26 +70,21 @@ class DesignElaboration : public TestbenchElaboration {
                             std::vector<int32_t>& indexes, uint32_t pos,
                             DesignComponent* def, const FileContent* fC,
                             NodeId subInstanceId, NodeId paramOverride,
-                            ModuleInstanceFactory* factory,
                             ModuleInstance* parent, Config* config,
                             std::string instanceName, std::string_view modName,
                             std::vector<ModuleInstance*>& allSubInstances);
   void recurseBuildInstanceClause_(std::string_view parentPath, Config* config,
                                    std::set<Config*>& stack);
   ModuleInstance* createBindInstance_(BindStmt* bind, ModuleInstance* parent,
-                                      ModuleInstanceFactory* factory,
                                       Config* config);
   void reduceUnnamedBlocks_();
   void checkConfigurations_();
-  bool bindAllInstances_(ModuleInstance*, ModuleInstanceFactory* factory,
-                         Config* config);
+  bool bindAllInstances_(ModuleInstance*, Config* config);
   void createFileList_();
   Config* getInstConfig(std::string_view name);
   Config* getCellConfig(std::string_view name);
   std::vector<std::pair<std::string, const FileContent*>> m_topLevelModules;
   std::set<std::string> m_uniqueTopLevelModules;
-  ModuleDefinitionFactory* m_moduleDefFactory;
-  ModuleInstanceFactory* m_moduleInstFactory;
   std::set<std::string> m_toplevelConfigModules;
   std::map<std::string, Config, std::less<>> m_instConfig;
   std::map<std::string, Config, std::less<>> m_cellConfig;

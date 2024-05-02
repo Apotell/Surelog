@@ -44,7 +44,7 @@ void shutdown_compiler(scompiler* the_compiler) {
   if (the_compiler == nullptr) return;
   Compiler* compiler = (Compiler*)the_compiler;
   if (CompileDesign* comp = compiler->getCompileDesign()) {
-    comp->getSerializer().Purge();
+    compiler->getSerializer().Purge();
   }
   delete (Compiler*)the_compiler;
 }
@@ -53,7 +53,7 @@ vpiHandle get_uhdm_design(scompiler* compiler) {
   vpiHandle design_handle = 0;
   Compiler* the_compiler = (Compiler*)compiler;
   if (the_compiler) {
-    design_handle = the_compiler->getUhdmDesign();
+    design_handle = the_compiler->getDesign()->getVpiDesign();
   }
   return design_handle;
 }

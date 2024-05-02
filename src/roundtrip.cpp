@@ -3190,7 +3190,7 @@ class RoundTripTracer final : public UHDM::UhdmListener {
 
     if (const UHDM::ref_typespec *const rt = object->Typespec()) {
       if (const UHDM::typespec *typespec = rt->Actual_typespec()) {
-        insert(filepath, object->VpiRefLineNo(), object->VpiRefColumnNo(),
+        insert(filepath, rt->VpiLineNo(), rt->VpiColumnNo(),
                getTypespecName(typespec));
       }
     }

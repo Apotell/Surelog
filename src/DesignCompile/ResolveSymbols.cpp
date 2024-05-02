@@ -92,17 +92,15 @@ void ResolveSymbols::createFastLookup() {
         case VObjectType::paPackage_declaration: {
           // Package names are not prefixed by Library names!
           const std::string_view pkgname = name;
-          Package* pdef = new Package(pkgname, lib, m_fileData, object);
-          UHDM::package* pack = s.MakePackage();
-          pack->VpiName(pdef->getName());
-          pdef->setUhdmInstance(pack);
+          Package* pdef = new Package(pkgname, lib, m_fileData, object, s);
+          UHDM::package* pack = pdef->getUhdmScope<UHDM::package>();
           m_fileData->populateCoreMembers(object, object, pack);
           m_fileData->addPackageDefinition(pkgname, pdef);
 
           VObjectTypeUnorderedSet subtypes = {VObjectType::paClass_declaration};
           std::vector<NodeId> subobjects =
               m_fileData->sl_collect_all(object, subtypes, subtypes);
-          for (auto subobject : subobjects) {
+          for (auto& subobject : subobjects) {
             NodeId stId =
                 m_fileData->sl_collect(subobject, VObjectType::slStringConst,
                                        VObjectType::paAttr_spec);
@@ -112,9 +110,8 @@ void ResolveSymbols::createFastLookup() {
               m_fileData->insertObjectLookup(fullSubName, subobject,
                                              m_errorContainer);
 
-              ClassDefinition* def =
-                  new ClassDefinition(name, lib, pdef, m_fileData, subobject,
-                                      nullptr, s.MakeClass_defn());
+              ClassDefinition* def = new ClassDefinition(
+                  name, lib, pdef, m_fileData, subobject, nullptr, s);
               m_fileData->addClassDefinition(fullSubName, def);
               pdef->getUnElabPackage()->addClassDefinition(name, def);
             }
@@ -128,7 +125,7 @@ void ResolveSymbols::createFastLookup() {
           VObjectTypeUnorderedSet subtypes = {VObjectType::paClass_declaration};
           std::vector<NodeId> subobjects =
               m_fileData->sl_collect_all(object, subtypes, subtypes);
-          for (auto subobject : subobjects) {
+          for (auto& subobject : subobjects) {
             NodeId stId =
                 m_fileData->sl_collect(subobject, VObjectType::slStringConst,
                                        VObjectType::paAttr_spec);
@@ -137,9 +134,8 @@ void ResolveSymbols::createFastLookup() {
               const std::string fullSubName = StrCat(fullName, "::", name);
               m_fileData->insertObjectLookup(fullSubName, subobject,
                                              m_errorContainer);
-              ClassDefinition* def =
-                  new ClassDefinition(name, lib, mdef, m_fileData, subobject,
-                                      nullptr, s.MakeClass_defn());
+              ClassDefinition* def = new ClassDefinition(
+                  name, lib, mdef, m_fileData, subobject, nullptr, s);
               m_fileData->addClassDefinition(fullSubName, def);
               mdef->addClassDefinition(name, def);
             }
@@ -147,15 +143,14 @@ void ResolveSymbols::createFastLookup() {
           break;
         }
         case VObjectType::paClass_declaration: {
-          ClassDefinition* def =
-              new ClassDefinition(fullName, lib, nullptr, m_fileData, object,
-                                  nullptr, s.MakeClass_defn());
+          ClassDefinition* def = new ClassDefinition(
+              fullName, lib, nullptr, m_fileData, object, nullptr, s);
           m_fileData->addClassDefinition(fullName, def);
           break;
         }
         case VObjectType::paModule_declaration: {
           ModuleDefinition* mdef =
-              new ModuleDefinition(m_fileData, object, fullName);
+              new ModuleDefinition(fullName, m_fileData, object, s);
           m_fileData->addModuleDefinition(fullName, mdef);
 
           VObjectTypeUnorderedSet subtypes = {
@@ -163,7 +158,7 @@ void ResolveSymbols::createFastLookup() {
               VObjectType::paModule_declaration};
           std::vector<NodeId> subobjects =
               m_fileData->sl_collect_all(object, subtypes, subtypes);
-          for (auto subobject : subobjects) {
+          for (auto& subobject : subobjects) {
             NodeId stId =
                 m_fileData->sl_collect(subobject, VObjectType::slStringConst,
                                        VObjectType::paAttr_spec);
@@ -175,14 +170,13 @@ void ResolveSymbols::createFastLookup() {
 
               if (m_fileData->Type(subobject) ==
                   VObjectType::paClass_declaration) {
-                ClassDefinition* def =
-                    new ClassDefinition(name, lib, mdef, m_fileData, subobject,
-                                        nullptr, s.MakeClass_defn());
+                ClassDefinition* def = new ClassDefinition(
+                    name, lib, mdef, m_fileData, subobject, nullptr, s);
                 m_fileData->addClassDefinition(fullSubName, def);
                 mdef->getUnelabMmodule()->addClassDefinition(name, def);
               } else {
                 ModuleDefinition* def =
-                    new ModuleDefinition(m_fileData, subobject, fullSubName);
+                    new ModuleDefinition(fullSubName, m_fileData, subobject, s);
                 m_fileData->addModuleDefinition(fullSubName, def);
               }
             }
@@ -195,7 +189,7 @@ void ResolveSymbols::createFastLookup() {
         case VObjectType::paInterface_declaration:
         default: {
           ModuleDefinition* def =
-              new ModuleDefinition(m_fileData, object, fullName);
+              new ModuleDefinition(fullName, m_fileData, object, s);
           m_fileData->addModuleDefinition(fullName, def);
           break;
         }

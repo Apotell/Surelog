@@ -36,6 +36,10 @@
 #include <uhdm/containers.h>
 #include <uhdm/uhdm_forward_decl.h>
 
+namespace UHDM {
+class Serializer;
+}
+
 namespace SURELOG {
 
 class CompileClass;
@@ -54,7 +58,7 @@ class ClassDefinition : public DesignComponent, public DataType {
   ClassDefinition(std::string_view name, Library* library,
                   DesignComponent* container, const FileContent* fC,
                   NodeId nodeId, ClassDefinition* parent,
-                  UHDM::class_defn* uhdm_definition);
+                  UHDM::Serializer& serializer);
 
   ~ClassDefinition() override = default;
 
@@ -66,8 +70,7 @@ class ClassDefinition : public DesignComponent, public DataType {
   std::string_view getName() const override { return m_name; }
   Library* getLibrary() { return m_library; }
   DesignComponent* getContainer() const { return m_container; }
-  void setContainer(DesignComponent* container) { m_container = container; }
-  UHDM::class_defn* getUhdmDefinition() const { return m_uhdm_definition; }
+  void setContainer(DesignComponent* container);
 
   // Parameter definitions are stored DesignComponent maps
   typedef std::map<std::string, Property*, StringViewCompare> PropertyMap;
@@ -125,17 +128,15 @@ class ClassDefinition : public DesignComponent, public DataType {
  private:
   std::string m_name;
   std::string m_endLabel;
-  Library* m_library;
-  DesignComponent* m_container;
-  ClassDefinition* m_parent;
+  Library* const m_library = nullptr;
+  DesignComponent* m_container = nullptr;
+  ClassDefinition* const m_parent = nullptr;
   PropertyMap m_properties;
   TaskMap m_tasks;
   ConstraintMap m_constraints;
   ClassMap m_classes;
   CoverGroupMap m_covergroups;
   BaseClassMap m_baseclasses;
-  UHDM::class_defn* m_uhdm_definition;
-
   UHDM::VectorOfattribute* attributes_ = nullptr;
 };
 

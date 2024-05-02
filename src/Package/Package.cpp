@@ -24,11 +24,13 @@
 #include <Surelog/Design/FileContent.h>
 #include <Surelog/Package/Package.h>
 #include <Surelog/Testbench/ClassDefinition.h>
+#include <uhdm/Serializer.h>
+#include <uhdm/package.h>
 
 namespace SURELOG {
 
-Package::Package(std::string_view name, Library* library, FileContent* fC,
-                 NodeId nodeId)
+Package::Package(std::string_view name, Library* library, const FileContent* fC,
+                 NodeId nodeId, UHDM::Serializer& serializer)
     : DesignComponent(fC, nullptr), m_name(name), m_library(library) {
   addFileContent(fC, nodeId);
   m_unElabPackage = this;
@@ -36,6 +38,12 @@ Package::Package(std::string_view name, Library* library, FileContent* fC,
   //   m_unElabPackage = new Package("", library, fC, nodeId);
   //   m_unElabPackage->m_name = name;
   // }
+
+  UHDM::package* const instance = serializer.MakePackage();
+  if (!name.empty()) instance->VpiName(name);
+  if (nodeId && (fC != nullptr))
+    fC->populateCoreMembers(nodeId, nodeId, instance);
+  setUhdmScope(instance);
 }
 
 uint32_t Package::getSize() const {

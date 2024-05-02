@@ -656,9 +656,11 @@ const DesignElement* FileContent::getDesignElement(
 }
 
 void FileContent::populateCoreMembers(NodeId startIndex, NodeId endIndex,
-                                      UHDM::any* instance) const {
+                                      UHDM::any* instance,
+                                      bool force /* = false */) const {
   if (!startIndex && !endIndex) return;
-  if (startIndex) {
+
+  if (startIndex && ((instance->VpiLineNo() == 0) || force)) {
     if (startIndex < m_objects.size()) {
       const VObject& object = m_objects[startIndex];
       instance->VpiLineNo(object.m_line);
@@ -671,7 +673,7 @@ void FileContent::populateCoreMembers(NodeId startIndex, NodeId endIndex,
     }
   }
 
-  if (endIndex) {
+  if (endIndex && ((instance->VpiEndLineNo() == 0) || force)) {
     if (endIndex < m_objects.size()) {
       const VObject& object = m_objects[endIndex];
       instance->VpiEndLineNo(object.m_endLine);

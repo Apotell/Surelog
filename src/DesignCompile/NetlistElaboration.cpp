@@ -420,7 +420,7 @@ bool NetlistElaboration::elab_parameters_(ModuleInstance* instance,
           }
           m_helper.checkForLoops(false);
         }
-        m_helper.setParentNoOverride(exp, inst_assign);
+        exp->SetVpiParent(inst_assign);
         inst_assign->Rhs(exp);
 
         if (en_replay && m_helper.errorOnNegativeConstant(
@@ -1658,7 +1658,7 @@ interface_inst* NetlistElaboration::elab_interface_(
         net = n;
         io->Expr(net);
       } else {
-        m_helper.setParentNoOverride(net, io);
+        net->SetVpiParent(io);
         io->Expr(net);
       }
       ios->push_back(io);
@@ -2047,7 +2047,7 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
           obj = logicn;
         } else {
           variables* var = m_helper.getSimpleVarFromTypespec(
-              spec, packedDimensions, m_compileDesign);
+              fC, id, id, spec, packedDimensions, m_compileDesign);
           if (sig->attributes()) {
             var->Attributes(sig->attributes());
             for (auto a : *sig->attributes()) a->VpiParent(var);
@@ -2219,7 +2219,7 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
           obj = logicn;
         } else {
           variables* var = m_helper.getSimpleVarFromTypespec(
-              spec, packedDimensions, m_compileDesign);
+              fC, id, id, spec, packedDimensions, m_compileDesign);
           if (sig->attributes()) {
             var->Attributes(sig->attributes());
             for (auto a : *sig->attributes()) a->VpiParent(var);
@@ -2396,8 +2396,8 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
       fC->populateCoreMembers(id, id, assign);
       assign->Lhs((expr*)obj);
       assign->Rhs(exp);
-      m_helper.setParentNoOverride((expr*)obj, assign);
-      m_helper.setParentNoOverride(exp, assign);
+      obj->SetVpiParent(assign);
+      exp->SetVpiParent(assign);
       if (sig->getDelay()) {
         m_helper.checkForLoops(true);
         if (expr* delay_expr = (expr*)m_helper.compileExpression(

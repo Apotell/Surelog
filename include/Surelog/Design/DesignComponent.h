@@ -70,7 +70,7 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
   SURELOG_IMPLEMENT_RTTI(DesignComponent, ValuedComponentI)
  public:
   DesignComponent(const DesignComponent* parent, DesignComponent* definition)
-      : ValuedComponentI(parent, definition), m_instance(nullptr) {}
+      : ValuedComponentI(parent, definition) {}
   ~DesignComponent() override {}
 
   virtual uint32_t getSize() const = 0;
@@ -93,7 +93,8 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
   typedef std::map<std::string, std::pair<FileCNodeId, DesignComponent*>,
                    StringViewCompare>
       NamedObjectMap;
-  typedef std::vector<std::pair<std::string, UHDM::typespec*>> FuncNameTypespecVec;
+  typedef std::vector<std::pair<std::string, UHDM::typespec*>>
+      FuncNameTypespecVec;
 
   void addFileContent(const FileContent* fileContent, NodeId nodeId);
   const std::vector<const FileContent*>& getFileContents() const {
@@ -200,8 +201,13 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
 
   void lateBinding(bool on) { m_lateBinding = on; }
 
-  void setUhdmInstance(UHDM::instance* instance) { m_instance = instance; }
-  UHDM::instance* getUhdmInstance() { return m_instance; }
+  void setUhdmScope(UHDM::any* scope) { m_scope = scope; }
+  UHDM::any* getUhdmScope() { return m_scope; }
+  template <typename T>
+  T* getUhdmScope() const {
+    return (m_scope == nullptr) ? nullptr : any_cast<T>(m_scope);
+  }
+
   void scheduleParamExprEval(std::string_view name, ExprEval& expr_eval) {
     m_scheduledParamExprEval.emplace_back(name, expr_eval);
   }
@@ -238,14 +244,14 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
   std::vector<UHDM::import_typespec*> m_imported_symbols;
   std::vector<UHDM::tf_call*> m_elab_sys_calls;
   std::vector<UHDM::property_decl*> m_property_decls;
-  std::vector<UHDM::sequence_decl*> m_sequence_decls;  
+  std::vector<UHDM::sequence_decl*> m_sequence_decls;
   std::vector<UHDM::ref_obj*> m_needLateBinding;
   std::vector<UHDM::any*> m_needLateTypedefBinding;
   FuncNameTypespecVec m_lateResolutionFunctions;
   ParameterMap m_parameterMap;
   ParameterVec m_orderedParameters;
   ParamAssignVec m_paramAssigns;
-  UHDM::instance* m_instance;
+  UHDM::any* m_scope = nullptr;
   std::vector<std::pair<std::string, ExprEval>> m_scheduledParamExprEval;
   const DesignElement* m_designElement = nullptr;
   LetStmtMap m_letDecls;

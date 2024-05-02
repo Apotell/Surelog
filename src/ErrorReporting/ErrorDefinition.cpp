@@ -489,6 +489,19 @@ bool ErrorDefinition::init() {
   rec(UHDM_FORCING_UNSIGNED_TYPE, WARNING, UHDM,
       "Critical: Forcing signal to unsigned type due to unsigned port binding "
       "\"%s\"");
+
+  rec(INTEGRITY_CHECK_MISSING_LOCATION, ERROR, COMP,
+      "Object %s has invalid location information");
+  rec(INTEGRITY_CHECK_MISSING_PARENT, ERROR, COMP,
+      "Object %s parent cannot be null");
+  rec(INTEGRITY_CHECK_PARENT_IS_NEITHER_SCOPE_NOR_DESIGN, ERROR, COMP,
+      "Object %s should be parented to either a scope or design");
+  rec(INTEGRITY_CHECK_OBJECT_NOT_IN_PARENT_COLLECTION, ERROR, COMP,
+      "Object %s not found in parent (scope|design)'s collection");
+  rec(INTEGRITY_CHECK_CHILD_NOT_ENTIRELY_IN_PARENT_BOUNDARY, ERROR, COMP,
+      "Child %s is not entirely in parent's scope");
+  rec(INTEGRITY_CHECK_COLLECTION_HAS_DUPLICATES, ERROR, COMP,
+      "Object %s has duplicates");
   return true;
 }
 

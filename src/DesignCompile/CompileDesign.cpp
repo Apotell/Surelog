@@ -67,8 +67,15 @@ CompileDesign::CompileDesign(Compiler* compiler) : m_compiler(compiler) {}
 CompileDesign::~CompileDesign() {
   // TODO: ownership not clear.
   // delete m_compiler;
-  m_serializer.Purge();
 }
+
+UHDM::Serializer& CompileDesign::getSerializer() {
+  return m_compiler->getSerializer();
+}
+
+void CompileDesign::lockSerializer() { m_compiler->lockSerializer(); }
+
+void CompileDesign::unlockSerializer() { m_compiler->unlockSerializer(); }
 
 bool CompileDesign::compile() {
   // Register UHDM Error callbacks
@@ -97,7 +104,9 @@ bool CompileDesign::compile() {
           errors->addError(err);
         }
       };
-  m_serializer.SetErrorHandler(errHandler);
+
+  UHDM::Serializer& serializer = m_compiler->getSerializer();
+  serializer.SetErrorHandler(errHandler);
 
   Location loc(BadSymbolId);
   Error err1(ErrorDefinition::COMP_COMPILE, loc);
@@ -182,8 +191,7 @@ void CompileDesign::collectObjects_(Design::FileIdDesignContentMap& all_files,
     const FileContent* fC = file.second;
     Library* lib = fC->getLibrary();
     for (const auto& mod : fC->getModuleDefinitions()) {
-      ModuleDefinition* existing = design->getModuleDefinition(mod.first);
-      if (existing) {
+      if (ModuleDefinition* existing = design->getModuleDefinition(mod.first)) {
         const FileContent* oldFC = existing->getFileContents()[0];
         const FileContent* oldParentFile = oldFC->getParent();
 
@@ -195,7 +203,7 @@ void CompileDesign::collectObjects_(Design::FileIdDesignContentMap& all_files,
           // Recombine splitted module
           existing->addFileContent(mod.second->getFileContents()[0],
                                    mod.second->getNodeIds()[0]);
-          for (auto classdef : mod.second->getClassDefinitions()) {
+          for (auto& classdef : mod.second->getClassDefinitions()) {
             existing->addClassDefinition(classdef.first, classdef.second);
             classdef.second->setContainer(existing);
           }
@@ -275,7 +283,8 @@ bool CompileDesign::elaborate() {
 }
 
 bool CompileDesign::compilation_() {
-  Design* design = m_compiler->getDesign();
+  Design* const design = m_compiler->getDesign();
+  UHDM::Serializer& serializer = m_compiler->getSerializer();
 
   auto& all_files = design->getAllFileContents();
 
@@ -336,14 +345,9 @@ bool CompileDesign::compilation_() {
   compileMT_<Program, ProgramNameProgramDefinitionMap, FunctorCompileProgram>(
       m_compiler->getDesign()->getProgramDefinitions(), maxThreadCount);
 
-  if (m_compiler->getCommandLineParser()->parseBuiltIn()) {
-    Builtin* builtin = new Builtin(this, design);
-    builtin->addBuiltinClasses();
-  }
-
   // Compile Include file info
   FileSystem* const fileSystem = FileSystem::getInstance();
-  m_fileInfo = m_serializer.MakeInclude_file_infoVec();
+  m_fileInfo = serializer.MakeInclude_file_infoVec();
   for (const CompileSourceFile* sourceFile :
        getCompiler()->getCompileSourceFiles()) {
     const PreprocessFile* const pf = sourceFile->getPreprocessor();
@@ -351,7 +355,7 @@ bool CompileDesign::compilation_() {
       if ((ifi.m_context == IncludeFileInfo::Context::INCLUDE) &&
           (ifi.m_action == IncludeFileInfo::Action::PUSH)) {
         UHDM::include_file_info* const pifi =
-            m_serializer.MakeInclude_file_info();
+            serializer.MakeInclude_file_info();
         pifi->VpiFile(fileSystem->toPath(pf->getRawFileId()));
         pifi->VpiIncludedFile(fileSystem->toPath(ifi.m_sectionFileId));
         pifi->VpiLineNo(ifi.m_originalStartLine);
@@ -368,12 +372,14 @@ bool CompileDesign::compilation_() {
              FunctorCompileClass>(
       m_compiler->getDesign()->getClassDefinitions(), maxThreadCount);
   design->clearContainers();
-  collectObjects_(all_files, design, true);
 
   if (m_compiler->getCommandLineParser()->parseBuiltIn()) {
-    Builtin* builtin = new Builtin(this, design);
-    builtin->addBuiltinTypes();
+    Builtin builtin(this, design);
+    builtin.addBuiltinTypes();
+    builtin.addBuiltinClasses();
   }
+
+  collectObjects_(all_files, design, true);
 
   m_compiler->getDesign()->orderPackages();
 
@@ -404,11 +410,13 @@ bool CompileDesign::elaboration_() {
 
 void CompileDesign::purgeParsers() { m_compiler->purgeParsers(); }
 
-vpiHandle CompileDesign::writeUHDM(PathId fileId) {
-  UhdmWriter* uhdmwriter = new UhdmWriter(this, m_compiler->getDesign());
-  vpiHandle h = uhdmwriter->write(fileId);
-  delete uhdmwriter;
-  return h;
+bool CompileDesign::writeUHDM(PathId fileId) {
+  bool result = false;
+  if (UhdmWriter* uhdmwriter = new UhdmWriter(this, m_compiler->getDesign())) {
+    result = uhdmwriter->write(fileId);
+    delete uhdmwriter;
+  }
+  return result;
 }
 
 void decompile(ValuedComponentI* instance) {
@@ -437,8 +445,7 @@ void decompile(ValuedComponentI* instance) {
         }
         if (inst->getNetlist() && inst->getNetlist()->param_assigns()) {
           for (auto ps : *inst->getNetlist()->param_assigns()) {
-            std::cout << ps->Lhs()->VpiName() << " = "
-                      << "\n";
+            std::cout << ps->Lhs()->VpiName() << " = \n";
             decompile((UHDM::any*)ps->Rhs());
           }
         }

@@ -158,14 +158,14 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
       case VObjectType::paProperty_declaration: {
         if (collectType != CollectType::OTHER) break;
         UHDM::property_decl* decl = m_helper.compilePropertyDeclaration(
-            m_program, fC, fC->Child(id), m_compileDesign, nullptr, nullptr);
+            m_program, fC, id, m_compileDesign, nullptr, nullptr);
         m_program->addPropertyDecl(decl);
         break;
       }
       case VObjectType::paSequence_declaration: {
         if (collectType != CollectType::OTHER) break;
         UHDM::sequence_decl* decl = m_helper.compileSequenceDeclaration(
-            m_program, fC, fC->Child(id), m_compileDesign, nullptr, nullptr);
+            m_program, fC, id, m_compileDesign, nullptr, nullptr);
         m_program->addSequenceDecl(decl);
         break;
       }

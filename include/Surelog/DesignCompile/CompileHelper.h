@@ -34,8 +34,12 @@
 #include <unordered_map>
 
 // UHDM
-#include <uhdm/constant.h>
 #include <uhdm/containers.h>
+
+namespace UHDM {
+class constant;
+class Serializer;
+}  // namespace UHDM
 
 namespace SURELOG {
 
@@ -237,9 +241,10 @@ class CompileHelper final {
                                  bool muteError = false);
 
   UHDM::any* compileVariable(DesignComponent* component, const FileContent* fC,
-                             NodeId nodeId, CompileDesign* compileDesign,
-                             Reduce reduce, UHDM::any* pstmt,
-                             ValuedComponentI* instance, bool muteErrors);
+                             NodeId declarationId, NodeId nameId,
+                             CompileDesign* compileDesign, Reduce reduce,
+                             UHDM::any* pstmt, ValuedComponentI* instance,
+                             bool muteErrors);
 
   UHDM::typespec* compileTypespec(DesignComponent* component,
                                   const FileContent* fC, NodeId nodeId,
@@ -251,7 +256,8 @@ class CompileHelper final {
                                          const FileContent* fC, NodeId type,
                                          VObjectType the_type,
                                          CompileDesign* compileDesign,
-                                         std::vector<UHDM::range*>* ranges);
+                                         std::vector<UHDM::range*>* ranges,
+                                         UHDM::any* pstmt);
 
   UHDM::typespec* compileDatastructureTypespec(
       DesignComponent* component, const FileContent* fC, NodeId type,
@@ -284,18 +290,20 @@ class CompileHelper final {
                                         CompileDesign* compileDesign,
                                         UHDM::any* pstmt,
                                         ValuedComponentI* instance);
-                                        
+
   UHDM::property_decl* compilePropertyDeclaration(DesignComponent* component,
-                                        const FileContent* fC, NodeId nodeId,
-                                        CompileDesign* compileDesign,
-                                        UHDM::any* pstmt,
-                                        ValuedComponentI* instance);
-                                        
+                                                  const FileContent* fC,
+                                                  NodeId nodeId,
+                                                  CompileDesign* compileDesign,
+                                                  UHDM::any* pstmt,
+                                                  ValuedComponentI* instance);
+
   UHDM::sequence_decl* compileSequenceDeclaration(DesignComponent* component,
-                                        const FileContent* fC, NodeId nodeId,
-                                        CompileDesign* compileDesign,
-                                        UHDM::any* pstmt,
-                                        ValuedComponentI* instance);
+                                                  const FileContent* fC,
+                                                  NodeId nodeId,
+                                                  CompileDesign* compileDesign,
+                                                  UHDM::any* pstmt,
+                                                  ValuedComponentI* instance);
 
   UHDM::initial* compileInitialBlock(DesignComponent* component,
                                      const FileContent* fC, NodeId id,
@@ -481,15 +489,15 @@ class CompileHelper final {
                        CompileDesign* compileDesign, NodeId id,
                        UHDM::VectorOfport* ports);
 
-  UHDM::VectorOfgen_stmt* compileGenStmt(ModuleDefinition* component,
-                                         const FileContent* fC,
-                                         CompileDesign* compileDesign,
-                                         NodeId id);
+  UHDM::VectorOfany* compileGenStmt(ModuleDefinition* component,
+                                    const FileContent* fC,
+                                    CompileDesign* compileDesign, NodeId id);
+
+  UHDM::constant* compileConst(const FileContent* fC, NodeId child,
+                               UHDM::Serializer& s);
 
   /** Variable is either a bit select or a range */
   bool isSelected(const FileContent* fC, NodeId id);
-
-  void setParentNoOverride(UHDM::any* obj, UHDM::any* parent);
 
   bool isMultidimensional(UHDM::typespec* ts, DesignComponent* component);
 
@@ -506,7 +514,7 @@ class CompileHelper final {
                        int32_t opIndex, UHDM::expr* rhs,
                        DesignComponent* component, CompileDesign* compileDesign,
                        ValuedComponentI* instance);
-  
+
   void adjustUnsized(UHDM::constant* c, int32_t size);
 
   UHDM::any* defaultPatternAssignment(const UHDM::typespec* tps, UHDM::any* exp,
@@ -526,6 +534,7 @@ class CompileHelper final {
                 uint32_t lineNumber, bool sizeMode);
 
   UHDM::variables* getSimpleVarFromTypespec(
+      const FileContent* fC, NodeId declarationId, NodeId nameId,
       UHDM::typespec* spec, std::vector<UHDM::range*>* packedDimensions,
       CompileDesign* compileDesign);
 

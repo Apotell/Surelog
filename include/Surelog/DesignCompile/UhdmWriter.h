@@ -57,7 +57,7 @@ class UhdmWriter final {
 
   UhdmWriter(CompileDesign* compiler, Design* design);
 
-  vpiHandle write(PathId uhdmFileId);
+  bool write(PathId uhdmFileId);
 
   static uint32_t getVpiDirection(VObjectType type);
 
@@ -82,8 +82,9 @@ class UhdmWriter final {
                  SignalMap& signalMap, SignalMap& portMap,
                  ModuleInstance* instance = nullptr);
   void writeDataTypes(const DesignComponent::DataTypeMap& datatypeMap,
-                    UHDM::BaseClass* parent, UHDM::VectorOftypespec* dest_typespecs,
-                    UHDM::Serializer& s, bool setParent);
+                      UHDM::BaseClass* parent,
+                      UHDM::VectorOftypespec* dest_typespecs,
+                      UHDM::Serializer& s, bool setParent);
   void writeVariables(const DesignComponent::VariableMap& orig_vars,
                       UHDM::BaseClass* parent,
                       UHDM::VectorOfvariables* dest_vars, UHDM::Serializer& s);
@@ -122,16 +123,16 @@ class UhdmWriter final {
 
   void lateBinding(UHDM::Serializer& s, DesignComponent* mod, UHDM::scope* m);
   UHDM::any* swapForSpecifiedVar(UHDM::Serializer& s, DesignComponent* mod,
-                           UHDM::any* tmp,
-                           UHDM::VectorOfvariables* lvariables,
-                           UHDM::variables* lvariable, std::string_view name,
-                           const UHDM::any* var, const UHDM::any* parent);
+                                 UHDM::any* tmp,
+                                 UHDM::VectorOfvariables* lvariables,
+                                 UHDM::variables* lvariable,
+                                 std::string_view name, const UHDM::any* var,
+                                 const UHDM::any* parent);
   void lateTypedefBinding(UHDM::Serializer& s, DesignComponent* mod,
                           UHDM::scope* m);
 
   CompileDesign* const m_compileDesign;
   Design* const m_design;
-  UHDM::design* m_uhdmDesign;
   ComponentMap m_componentMap;
   CompileHelper m_helper;
 };

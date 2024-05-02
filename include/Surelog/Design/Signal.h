@@ -27,34 +27,36 @@
 
 #include <Surelog/Common/NodeId.h>
 #include <Surelog/SourceCompile/VObjectTypes.h>
-#include <uhdm/attribute.h>
 
 #include <string>
+#include <vector>
+
+namespace UHDM {
+class attribute;
+}
 
 namespace SURELOG {
 
 class DataType;
+class DesignComponent;
 class FileContent;
 class ModPort;
 class ModuleDefinition;
 
 class Signal final {
  public:
-  Signal(const FileContent* fileContent, NodeId node, VObjectType type,
-         VObjectType direction, NodeId packedDimension, bool is_signed);
-  Signal(const FileContent* fileContent, NodeId node, VObjectType type,
-         NodeId packedDimension, VObjectType direction,
-         NodeId unpackedDimension, bool is_signed);
-  Signal(const FileContent* fileContent, NodeId node, VObjectType type,
-         NodeId packedDimension, VObjectType direction, NodeId typeSpecId,
-         NodeId unpackedDimension, bool is_signed);
-  Signal(const FileContent* fileContent, NodeId node, NodeId interfaceTypeName,
+  Signal(DesignComponent* component, const FileContent* fileContent,
+         NodeId nodeId, NodeId nameId, VObjectType type, VObjectType direction,
+         NodeId packedDimension, NodeId unpackedDimension, bool is_signed);
+  Signal(DesignComponent* component, const FileContent* fileContent,
+         NodeId nodeId, NodeId nameId, NodeId interfaceTypeName,
          VObjectType subnettype, NodeId unpackedDimension, bool is_signed);
 
   VObjectType getType() const { return m_type; }
   VObjectType getDirection() const { return m_direction; }
   const FileContent* getFileContent() const { return m_fileContent; }
   NodeId getNodeId() const { return m_nodeId; }
+  NodeId getNameId() const { return m_nameId; }
   std::string_view getName() const;
   std::string getInterfaceTypeName() const;
 
@@ -103,18 +105,16 @@ class Signal final {
   NodeId getDefaultValue() const { return m_default_value; }
   const DataType* getDataType() const { return m_dataType; }
 
+  DesignComponent* getComponent() { return m_component; }
+
   std::vector<UHDM::attribute*>* attributes() { return m_attributes; }
   void attributes(std::vector<UHDM::attribute*>* attr) { m_attributes = attr; }
 
  private:
-  const FileContent* m_fileContent = nullptr;
-  NodeId m_nodeId;
-  VObjectType m_type = VObjectType::slNoType;
-  VObjectType m_direction = VObjectType::slNoType;
-  ModuleDefinition* m_interfaceDef = nullptr;
-  ModPort* m_modPort = nullptr;
-  const DataType* m_dataType = nullptr;
-  Signal* m_lowConn = nullptr;  // for ports
+  DesignComponent* const m_component = nullptr;
+  const FileContent* const m_fileContent = nullptr;
+  const NodeId m_nodeId;
+  const NodeId m_nameId;
   NodeId m_interfaceTypeNameId;
   NodeId m_packedDimension;
   NodeId m_typeSpecId;
@@ -122,6 +122,13 @@ class Signal final {
   NodeId m_delay;
   NodeId m_drive_strength;
   NodeId m_default_value;
+  VObjectType m_type = VObjectType::slNoType;
+  VObjectType m_direction = VObjectType::slNoType;
+  ModuleDefinition* m_interfaceDef = nullptr;
+  ModPort* m_modPort = nullptr;
+  const DataType* m_dataType = nullptr;
+  Signal* m_lowConn = nullptr;  // for ports
+  std::vector<UHDM::attribute*>* m_attributes = nullptr;
   bool m_const = false;
   bool m_var = false;
   bool m_signed = false;
@@ -130,7 +137,6 @@ class Signal final {
   bool m_protected = false;
   bool m_rand = false;
   bool m_randc = false;
-  std::vector<UHDM::attribute*>* m_attributes = nullptr;
 };
 
 }  // namespace SURELOG

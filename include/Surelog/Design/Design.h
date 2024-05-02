@@ -28,10 +28,16 @@
 #include <Surelog/Common/Containers.h>
 #include <Surelog/Common/NodeId.h>
 #include <Surelog/Common/PathId.h>
+#include <uhdm/vpi_user.h>
 
 #include <map>
 #include <mutex>
 #include <vector>
+
+namespace UHDM {
+class design;
+class Serializer;
+}  // namespace UHDM
 
 namespace SURELOG {
 
@@ -72,9 +78,8 @@ class Design final {
   friend class SVLibShapeListener;
 
  public:
-  Design(ErrorContainer* errors, LibrarySet* librarySet, ConfigSet* configSet)
-      : m_errors(errors), m_librarySet(librarySet), m_configSet(configSet) {}
-
+  Design(UHDM::Serializer& serializer, ErrorContainer* errors,
+         LibrarySet* librarySet, ConfigSet* configSet);
   Design(const Design& orig) = delete;
 
   ~Design();
@@ -126,8 +131,7 @@ class Design final {
 
   std::string reportInstanceTree() const;
 
-  void reportInstanceTreeStats(uint32_t& nbTopLevelModules,
-                               uint32_t& maxDepth,
+  void reportInstanceTreeStats(uint32_t& nbTopLevelModules, uint32_t& maxDepth,
                                uint32_t& numberOfInstances,
                                uint32_t& numberOfLeafInstances,
                                uint32_t& nbUndefinedModules,
@@ -162,6 +166,11 @@ class Design final {
   std::vector<BindStmt*> getBindStmts(std::string_view targetName);
 
   void addBindStmt(std::string_view targetName, BindStmt* stmt);
+
+  UHDM::design* getUhdmDesign() { return m_uhdmDesign; }
+  const UHDM::design* getUhdmDesign() const { return m_uhdmDesign; }
+
+  vpiHandle getVpiDesign() const;
 
  protected:
   // Thread-safe
@@ -206,11 +215,10 @@ class Design final {
   DefParam* getDefParam_(std::vector<std::string>& path,
                          DefParam* parent) const;
 
-  ErrorContainer* m_errors;
-
-  LibrarySet* m_librarySet;
-
-  ConfigSet* m_configSet;
+  ErrorContainer* const m_errors = nullptr;
+  LibrarySet* const m_librarySet = nullptr;
+  ConfigSet* const m_configSet = nullptr;
+  UHDM::design* const m_uhdmDesign = nullptr;
 
   FileIdDesignContentMap m_fileContents;
 

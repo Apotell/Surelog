@@ -28,10 +28,15 @@
 #include <Surelog/Design/Design.h>
 
 // UHDM
-#include <uhdm/Serializer.h>
+#include <uhdm/containers.h>
 #include <uhdm/sv_vpi_user.h>
+#include <uhdm/uhdm_forward_decl.h>
 
 #include <mutex>
+
+namespace UHDM {
+class Serializer;
+}
 
 namespace SURELOG {
 
@@ -50,14 +55,18 @@ class CompileDesign {
   bool compile();
   bool elaborate();
   void purgeParsers();
-  vpiHandle writeUHDM(PathId fileId);
+  bool writeUHDM(PathId fileId);
+
+  UHDM::Serializer& getSerializer();
+  void lockSerializer();
+  void unlockSerializer();
 
   Compiler* getCompiler() const { return m_compiler; }
-  virtual UHDM::Serializer& getSerializer() { return m_serializer; }
-  void lockSerializer() { m_serializerMutex.lock(); }
-  void unlockSerializer() { m_serializerMutex.unlock(); }
   UHDM::VectorOfinclude_file_info* getFileInfo() { return m_fileInfo; }
-  std::map<const UHDM::typespec*, const UHDM::typespec*>& getSwapedObjects() { return m_typespecSwapMap; }
+  std::map<const UHDM::typespec*, const UHDM::typespec*>& getSwapedObjects() {
+    return m_typespecSwapMap;
+  }
+
  private:
   CompileDesign(const CompileDesign& orig) = delete;
 
@@ -73,8 +82,6 @@ class CompileDesign {
   std::vector<SymbolTable*> m_symbolTables;
   std::vector<ErrorContainer*> m_errorContainers;
   UHDM::VectorOfinclude_file_info* m_fileInfo = nullptr;
-  std::mutex m_serializerMutex;
-  UHDM::Serializer m_serializer;
   std::map<const UHDM::typespec*, const UHDM::typespec*> m_typespecSwapMap;
 };
 

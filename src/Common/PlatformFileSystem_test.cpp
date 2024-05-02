@@ -1052,7 +1052,7 @@ TEST(PlatformFileSystemTest, InMemoryTest) {
   }
   EXPECT_NE(top, nullptr);
 
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design *const udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto passign : *topMod->Param_assigns()) {

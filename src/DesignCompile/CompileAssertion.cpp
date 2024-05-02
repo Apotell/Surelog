@@ -442,6 +442,7 @@ UHDM::property_decl* CompileHelper::compilePropertyDeclaration(
   UHDM::Serializer& s = compileDesign->getSerializer();
   UHDM::property_decl* result = s.MakeProperty_decl();
   fC->populateCoreMembers(nodeId, nodeId, result);
+  nodeId = fC->Child(nodeId);
   std::string_view propName = fC->SymName(nodeId);
   result->VpiName(propName);
   result->VpiParent(pstmt);
@@ -526,6 +527,7 @@ UHDM::sequence_decl* CompileHelper::compileSequenceDeclaration(
   UHDM::Serializer& s = compileDesign->getSerializer();
   UHDM::sequence_decl* result = s.MakeSequence_decl();
   fC->populateCoreMembers(nodeId, nodeId, result);
+  nodeId = fC->Child(nodeId);
   std::string_view propName = fC->SymName(nodeId);
   result->VpiName(propName);
   result->VpiParent(pstmt);
@@ -559,6 +561,7 @@ UHDM::sequence_decl* CompileHelper::compileSequenceDeclaration(
   if (fC->Type(lookup) == VObjectType::paClocking_event) {
     UHDM::multiclock_sequence_expr* mexpr = s.MakeMulticlock_sequence_expr();
     fC->populateCoreMembers(Sequence_expr, Sequence_expr, mexpr);
+    mexpr->SetVpiParent(result);
     result->Sequence_expr_multiclock_group(mexpr);
     mexpr->Clocked_seqs(s.MakeClocked_seqVec());
     while (fC->Type(lookup) == VObjectType::paClocking_event) {
@@ -567,6 +570,8 @@ UHDM::sequence_decl* CompileHelper::compileSequenceDeclaration(
       UHDM::clocked_seq* seq = s.MakeClocked_seq();
       mexpr->Clocked_seqs()->push_back(seq);
       seq->VpiClockingEvent(clock_event);
+      seq->SetVpiParent(mexpr);
+      fC->populateCoreMembers(lookup, lookup, seq);
       lookup = fC->Sibling(lookup);
     }
     if (UHDM::any* seq_expr =

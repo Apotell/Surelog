@@ -22,7 +22,10 @@
  */
 
 #include <Surelog/Design/FileContent.h>
+#include <Surelog/DesignCompile/CompileDesign.h>
 #include <Surelog/DesignCompile/CompileFileContent.h>
+#include <Surelog/SourceCompile/Compiler.h>
+#include <uhdm/design.h>
 
 #include <stack>
 
@@ -60,6 +63,10 @@ bool CompileFileContent::collectObjects_() {
       VObjectType::paPackage_declaration,
       VObjectType::paFunction_declaration,
       VObjectType::paInterface_class_declaration};
+
+  Design* const design = m_compileDesign->getCompiler()->getDesign();
+  UHDM::design* const udesign = design->getUhdmDesign();
+  const UHDM::ScopedScope scopedScope(udesign);
 
   FileContent* fC = m_fileContent;
   if (fC->getSize() == 0) return true;

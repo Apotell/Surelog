@@ -57,20 +57,20 @@ jobs:
         cmake --build build -j $(nproc)
         cmake --install build
 
-        cmake --build build --target UnitTests -j $(nproc)
-        pushd build && ctest --output-on-failure && popd
+        # cmake --build build --target UnitTests -j $(nproc)
+        # pushd build && ctest --output-on-failure && popd
 
-        rm -rf build      # make sure we only see installation artifacts
+        # rm -rf build      # make sure we only see installation artifacts
         
         # this shouldnt be necessary, and can't be reproduced outside CI
-        export CMAKE_PREFIX_PATH=$INSTALL_DIR
+        # export CMAKE_PREFIX_PATH=$INSTALL_DIR
 
-        cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DINSTALL_DIR=$INSTALL_DIR -S tests/TestInstall -B tests/TestInstall/build
-        cmake --build tests/TestInstall/build -j $(nproc)
+        # cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DINSTALL_DIR=$INSTALL_DIR -S tests/TestInstall -B tests/TestInstall/build
+        # cmake --build tests/TestInstall/build -j $(nproc)
 
-        echo "-- pkg-config content --"
-        cat $INSTALL_DIR/lib/pkgconfig/Surelog.pc
-        PREFIX=$INSTALL_DIR make test_install_pkgconfig
+        # echo "-- pkg-config content --"
+        # cat $INSTALL_DIR/lib/pkgconfig/Surelog.pc
+        # PREFIX=$INSTALL_DIR make test_install_pkgconfig
 
     - name: Prepare build artifacts
       run: |

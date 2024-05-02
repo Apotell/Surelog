@@ -200,14 +200,6 @@ void ModuleInstance::addSubInstance(ModuleInstance* subInstance) {
   m_allSubInstances.push_back(subInstance);
 }
 
-ModuleInstance* ModuleInstanceFactory::newModuleInstance(
-    DesignComponent* moduleDefinition, const FileContent* fileContent,
-    NodeId nodeId, ModuleInstance* parent, std::string_view instName,
-    std::string_view modName) {
-  return new ModuleInstance(moduleDefinition, fileContent, nodeId, parent,
-                            instName, modName);
-}
-
 VObjectType ModuleInstance::getType() const {
   return m_fileContent->Type(m_nodeId);
 }

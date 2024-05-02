@@ -38,11 +38,13 @@
 #include <uhdm/always.h>
 #include <uhdm/assign_stmt.h>
 #include <uhdm/assignment.h>
+#include <uhdm/attribute.h>
 #include <uhdm/constant.h>
 #include <uhdm/final_stmt.h>
 #include <uhdm/initial.h>
 #include <uhdm/io_decl.h>
 #include <uhdm/logic_net.h>
+#include <uhdm/module_inst.h>
 #include <uhdm/ref_obj.h>
 #include <uhdm/table_entry.h>
 #include <uhdm/udp_defn.h>
@@ -255,8 +257,9 @@ bool CompileModule::collectUdpObjects_() {
   VObject current = fC->Object(id);
   std::stack<NodeId> stack;
   stack.push(id);
-  m_module->m_udpDefn = s.MakeUdp_defn();
-  UHDM::udp_defn* defn = m_module->m_udpDefn;
+
+  const UHDM::ScopedScope scopedScope(m_module->getUhdmScope());
+  UHDM::udp_defn* defn = m_module->getUhdmScope<UHDM::udp_defn>();
   while (!stack.empty()) {
     id = stack.top();
     stack.pop();
@@ -287,7 +290,7 @@ bool CompileModule::collectUdpObjects_() {
           const std::string_view name = fC->SymName(port);
           fC->populateCoreMembers(port, port, io);
           io->VpiName(name);
-          io->VpiParent(defn);
+          io->SetVpiParent(defn);
           ios->push_back(io);
           port = fC->Sibling(port);
         }
@@ -308,7 +311,7 @@ bool CompileModule::collectUdpObjects_() {
 
         const std::string_view outputname = fC->SymName(Output);
         fC->populateCoreMembers(id, id, net);
-        net->VpiParent(defn);
+        net->SetVpiParent(defn);
         if (std::vector<UHDM::io_decl*>* ios = defn->Io_decls()) {
           for (auto io : *ios) {
             if (io->VpiName() == outputname) {
@@ -340,9 +343,9 @@ bool CompileModule::collectUdpObjects_() {
             fC->populateCoreMembers(id, id, net);
             if (attributes != nullptr) {
               net->Attributes(attributes);
-              for (auto a : *attributes) a->VpiParent(net);
+              for (auto a : *attributes) a->SetVpiParent(net);
             }
-            net->VpiParent(defn);
+            net->SetVpiParent(defn);
             for (auto io : *ios) {
               if (io->VpiName() == inputname) {
                 io->Expr(net);
@@ -393,7 +396,7 @@ bool CompileModule::collectUdpObjects_() {
           entries = defn->Table_entrys();
         }
         UHDM::table_entry* entry = s.MakeTable_entry();
-        entry->VpiParent(defn);
+        entry->SetVpiParent(defn);
         entry->VpiValue(ventry);
         entry->VpiSize(nb);
         fC->populateCoreMembers(Level_input_list, Level_input_list, entry);
@@ -490,7 +493,7 @@ bool CompileModule::collectUdpObjects_() {
           entries = defn->Table_entrys();
         }
         UHDM::table_entry* entry = s.MakeTable_entry();
-        entry->VpiParent(defn);
+        entry->SetVpiParent(defn);
         entry->VpiValue(ventry);
         entry->VpiSize(nb);
         fC->populateCoreMembers(Level_input_list, Level_input_list, entry);
@@ -502,17 +505,17 @@ bool CompileModule::collectUdpObjects_() {
         NodeId Value = fC->Sibling(Identifier);
         UHDM::initial* init = s.MakeInitial();
         fC->populateCoreMembers(id, id, init);
-        init->VpiParent(defn);
+        init->SetVpiParent(defn);
         defn->Initial(init);
         UHDM::assignment* assign_stmt = s.MakeAssignment();
         init->Stmt(assign_stmt);
         UHDM::ref_obj* ref = s.MakeRef_obj();
         ref->VpiName(fC->SymName(Identifier));
-        ref->VpiParent(assign_stmt);
+        ref->SetVpiParent(assign_stmt);
         fC->populateCoreMembers(Identifier, Identifier, ref);
         assign_stmt->Lhs(ref);
         fC->populateCoreMembers(id, id, assign_stmt);
-        assign_stmt->VpiParent(init);
+        assign_stmt->SetVpiParent(init);
         UHDM::constant* c = s.MakeConstant();
         assign_stmt->Rhs(c);
         std::string val = StrCat("UINT:", fC->SymName(Value));
@@ -520,7 +523,7 @@ bool CompileModule::collectUdpObjects_() {
         c->VpiDecompile(fC->SymName(Value));
         c->VpiSize(64);
         c->VpiConstType(vpiUIntConst);
-        c->VpiParent(assign_stmt);
+        c->SetVpiParent(assign_stmt);
         fC->populateCoreMembers(Value, Value, c);
         break;
       }
@@ -554,6 +557,7 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
     stopPoints.push_back(VObjectType::paGenerate_region);
   }
 
+  const UHDM::ScopedScope scopedScope(m_module->getUhdmScope());
   for (uint32_t i = 0; i < m_module->m_fileContents.size(); i++) {
     const FileContent* fC = m_module->m_fileContents[i];
     VObject current = fC->Object(m_module->m_nodeIds[i]);
@@ -578,11 +582,11 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
       // Package imports
       std::vector<FileCNodeId> pack_imports;
       // - Local file imports
-      for (auto import : fC->getObjects(VObjectType::paPackage_import_item)) {
+      for (auto& import : fC->getObjects(VObjectType::paPackage_import_item)) {
         pack_imports.push_back(import);
       }
 
-      for (auto pack_import : pack_imports) {
+      for (auto& pack_import : pack_imports) {
         const FileContent* pack_fC = pack_import.fC;
         NodeId pack_id = pack_import.nodeId;
         m_helper.importPackage(m_module, m_design, pack_fC, pack_id,
@@ -699,16 +703,14 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
         case VObjectType::paProperty_declaration: {
           if (collectType != CollectType::OTHER) break;
           UHDM::property_decl* decl = m_helper.compilePropertyDeclaration(
-              m_module, fC, fC->Child(id), m_compileDesign, nullptr,
-              m_instance);
+              m_module, fC, id, m_compileDesign, nullptr, m_instance);
           m_module->addPropertyDecl(decl);
           break;
         }
         case VObjectType::paSequence_declaration: {
           if (collectType != CollectType::OTHER) break;
           UHDM::sequence_decl* decl = m_helper.compileSequenceDeclaration(
-              m_module, fC, fC->Child(id), m_compileDesign, nullptr,
-              m_instance);
+              m_module, fC, id, m_compileDesign, nullptr, m_instance);
           m_module->addSequenceDecl(decl);
           break;
         }
@@ -981,11 +983,11 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
           FileCNodeId fnid(fC, id);
           m_module->addObject(type, fnid);
           if (m_instance) break;
-          UHDM::VectorOfgen_stmt* stmts =
+          UHDM::VectorOfany* stmts =
               m_helper.compileGenStmt(m_module, fC, m_compileDesign, id);
           if (m_module->getGenStmts() == nullptr) {
             m_module->setGenStmts(
-                m_compileDesign->getSerializer().MakeGen_stmtVec());
+                m_compileDesign->getSerializer().MakeAnyVec());
           }
           for (auto st : *stmts) {
             m_module->getGenStmts()->push_back(st);
@@ -1054,6 +1056,8 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
   } else {
     stopPoints.push_back(VObjectType::paGenerate_region);
   }
+
+  const UHDM::ScopedScope scopedScope(m_module->getUhdmScope());
   for (uint32_t i = 0; i < m_module->m_fileContents.size(); i++) {
     const FileContent* fC = m_module->m_fileContents[i];
     VObject current = fC->Object(m_module->m_nodeIds[i]);
@@ -1069,7 +1073,7 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
         pack_imports.push_back(import);
       }
 
-      for (auto pack_import : pack_imports) {
+      for (auto& pack_import : pack_imports) {
         const FileContent* pack_fC = pack_import.fC;
         NodeId pack_id = pack_import.nodeId;
         m_helper.importPackage(m_module, m_design, pack_fC, pack_id,
@@ -1257,16 +1261,14 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
         case VObjectType::paProperty_declaration: {
           if (collectType != CollectType::OTHER) break;
           UHDM::property_decl* decl = m_helper.compilePropertyDeclaration(
-              m_module, fC, fC->Child(id), m_compileDesign, nullptr,
-              m_instance);
+              m_module, fC, id, m_compileDesign, nullptr, m_instance);
           m_module->addPropertyDecl(decl);
           break;
         }
         case VObjectType::paSequence_declaration: {
           if (collectType != CollectType::OTHER) break;
           UHDM::sequence_decl* decl = m_helper.compileSequenceDeclaration(
-              m_module, fC, fC->Child(id), m_compileDesign, nullptr,
-              m_instance);
+              m_module, fC, id, m_compileDesign, nullptr, m_instance);
           m_module->addSequenceDecl(decl);
           break;
         }
@@ -1304,7 +1306,7 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
                   SymbolId port_symbol = fC->Name(simple_port_name);
                   bool port_exists = false;
                   for (auto& port : m_module->m_signals) {
-                    if (port->getFileContent()->Name(port->getNodeId()) ==
+                    if (port->getFileContent()->Name(port->getNameId()) ==
                         port_symbol) {
                       port_exists = true;
                       break;
@@ -1324,9 +1326,10 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
                       m_errors->addError(err);
                     }
                   }
-                  Signal signal(fC, simple_port_name,
-                                VObjectType::paData_type_or_implicit,
-                                port_direction_type, InvalidNodeId, false);
+                  Signal signal(
+                      m_module, fC, port_declaration, simple_port_name,
+                      VObjectType::paData_type_or_implicit, port_direction_type,
+                      InvalidNodeId, InvalidNodeId, false);
                   m_module->insertModPort(modportsymb, signal, modportname);
                   modport_simple_port = fC->Sibling(modport_simple_port);
                 }
@@ -1483,11 +1486,11 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
           FileCNodeId fnid(fC, id);
           m_module->addObject(type, fnid);
           if (m_instance) break;
-          UHDM::VectorOfgen_stmt* stmts =
+          UHDM::VectorOfany* stmts =
               m_helper.compileGenStmt(m_module, fC, m_compileDesign, id);
           if (m_module->getGenStmts() == nullptr) {
             m_module->setGenStmts(
-                m_compileDesign->getSerializer().MakeGen_stmtVec());
+                m_compileDesign->getSerializer().MakeAnyVec());
           }
           for (auto st : *stmts) {
             m_module->getGenStmts()->push_back(st);

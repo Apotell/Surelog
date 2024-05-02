@@ -56,8 +56,6 @@
 namespace SURELOG {
 DesignElaboration::DesignElaboration(CompileDesign* compileDesign)
     : TestbenchElaboration(compileDesign) {
-  m_moduleDefFactory = nullptr;
-  m_moduleInstFactory = nullptr;
   m_exprBuilder.seterrorReporting(
       m_compileDesign->getCompiler()->getErrorContainer(),
       m_compileDesign->getCompiler()->getSymbolTable());
@@ -447,7 +445,6 @@ bool DesignElaboration::identifyTopModules_() {
 }
 
 bool DesignElaboration::createBuiltinPrimitives_() {
-  m_moduleDefFactory = new ModuleDefinitionFactory();
   Design* design = m_compileDesign->getCompiler()->getDesign();
 
   // Register built-in primitives
@@ -462,8 +459,9 @@ bool DesignElaboration::createBuiltinPrimitives_() {
                     "pullup",   "pulldown", "UnsupportedPrimitive"}) {
     std::string name = std::string("work@") + type;
     design->addModuleDefinition(
-        name, m_moduleDefFactory->newModuleDefinition(
-                  nullptr, InvalidNodeId, std::string("work@") + type));
+        name,
+        new ModuleDefinition(std::string("work@") + type, nullptr,
+                             InvalidNodeId, m_compileDesign->getSerializer()));
   }
 
   return true;
@@ -498,15 +496,13 @@ Config* DesignElaboration::getCellConfig(std::string_view name) {
 }
 
 bool DesignElaboration::bindAllInstances_(ModuleInstance* parent,
-                                          ModuleInstanceFactory* factory,
                                           Config* config) {
   DesignComponent* def = parent->getDefinition();
   Design* design = m_compileDesign->getCompiler()->getDesign();
   std::vector<ModuleInstance*> parentSubInstances;
   if (def) {
     for (BindStmt* bind : design->getBindStmts(def->getName())) {
-      ModuleInstance* bindInstance =
-          createBindInstance_(bind, parent, factory, config);
+      ModuleInstance* bindInstance = createBindInstance_(bind, parent, config);
       if (bindInstance) {
         parentSubInstances.push_back(bindInstance);
       }
@@ -514,7 +510,7 @@ bool DesignElaboration::bindAllInstances_(ModuleInstance* parent,
   }
   for (uint32_t i = 0; i < parent->getNbChildren(); i++) {
     ModuleInstance* child = parent->getChildren(i);
-    bindAllInstances_(child, factory, config);
+    bindAllInstances_(child, config);
   }
   for (auto inst : parentSubInstances) {
     parent->addSubInstance(inst);
@@ -530,13 +526,12 @@ bool DesignElaboration::elaborateModule_(std::string_view moduleName,
   Config* config = getInstConfig(moduleName);
   if (config == nullptr) config = getCellConfig(moduleName);
   Design* design = m_compileDesign->getCompiler()->getDesign();
-  if (!m_moduleInstFactory) m_moduleInstFactory = new ModuleInstanceFactory();
   for (const auto& nameId : nameIds) {
     if ((fC->Type(nameId.second) == VObjectType::paModule_declaration) &&
         (moduleName == StrCat(libName, "@", nameId.first))) {
       DesignComponent* def = design->getComponentDefinition(moduleName);
       if (onlyTopLevel) {
-        ModuleInstance* instance = m_moduleInstFactory->newModuleInstance(
+        ModuleInstance* instance = new ModuleInstance(
             def, fC, nameId.second, nullptr, moduleName, moduleName);
         design->addTopLevelModuleInstance(instance);
       } else {
@@ -545,10 +540,8 @@ bool DesignElaboration::elaborateModule_(std::string_view moduleName,
           std::vector<ModuleInstance*> parentSubInstances;
           NodeId id = def->getNodeIds()[i];
           elaborateInstance_(def->getFileContents()[i], id, InvalidNodeId,
-                             m_moduleInstFactory, instance, config,
-                             parentSubInstances);
-          if (instance)
-            bindAllInstances_(instance, m_moduleInstFactory, config);
+                             instance, config, parentSubInstances);
+          if (instance) bindAllInstances_(instance, config);
         }
       }
       break;
@@ -561,9 +554,8 @@ void DesignElaboration::recurseInstanceLoop_(
     std::vector<int32_t>& from, std::vector<int32_t>& to,
     std::vector<int32_t>& indexes, uint32_t pos, DesignComponent* def,
     const FileContent* fC, NodeId subInstanceId, NodeId paramOverride,
-    ModuleInstanceFactory* factory, ModuleInstance* parent, Config* config,
-    std::string instanceName, std::string_view modName,
-    std::vector<ModuleInstance*>& allSubInstances) {
+    ModuleInstance* parent, Config* config, std::string instanceName,
+    std::string_view modName, std::vector<ModuleInstance*>& allSubInstances) {
   if (pos == indexes.size()) {
     // This is where the real logic goes.
     // indexes[i] contain the value of the i-th index.
@@ -575,14 +567,13 @@ void DesignElaboration::recurseInstanceLoop_(
       }
       StrAppend(&instanceName, "[", index, "]");
     }
-    ModuleInstance* child = factory->newModuleInstance(
-        def, fC, subInstanceId, parent, instanceName, modName);
+    ModuleInstance* child = new ModuleInstance(def, fC, subInstanceId, parent,
+                                               instanceName, modName);
     VObjectType type = fC->Type(subInstanceId);
     if (def && (type != VObjectType::paGate_instantiation)) {
       for (uint32_t i = 0; i < def->getFileContents().size(); i++) {
         elaborateInstance_(def->getFileContents()[i], def->getNodeIds()[i],
-                           paramOverride, factory, child, config,
-                           allSubInstances);
+                           paramOverride, child, config, allSubInstances);
       }
     }
     allSubInstances.push_back(child);
@@ -591,15 +582,15 @@ void DesignElaboration::recurseInstanceLoop_(
     for (indexes[pos] = from[pos]; indexes[pos] <= to[pos]; indexes[pos]++) {
       // Recurse for the next level
       recurseInstanceLoop_(from, to, indexes, pos + 1, def, fC, subInstanceId,
-                           paramOverride, factory, parent, config, instanceName,
-                           modName, allSubInstances);
+                           paramOverride, parent, config, instanceName, modName,
+                           allSubInstances);
     }
   }
 }
 
-ModuleInstance* DesignElaboration::createBindInstance_(
-    BindStmt* bind, ModuleInstance* parent, ModuleInstanceFactory* factory,
-    Config* config) {
+ModuleInstance* DesignElaboration::createBindInstance_(BindStmt* bind,
+                                                       ModuleInstance* parent,
+                                                       Config* config) {
   ModuleInstance* instance = nullptr;
   const FileContent* fC = bind->getFileContent();
   Library* lib = fC->getLibrary();
@@ -623,9 +614,8 @@ ModuleInstance* DesignElaboration::createBindInstance_(
   if (def && (def->getName() == targetName) && instanceMatch) {
     targetDef = design->getModuleDefinition(bindModName);
     if (targetDef) {
-      instance = factory->newModuleInstance(targetDef, fC, bind->getStmtId(),
-                                            parent->getParent(), instName,
-                                            bindModName);
+      instance = new ModuleInstance(targetDef, fC, bind->getStmtId(),
+                                    parent->getParent(), instName, bindModName);
     } else {
       SymbolTable* st =
           m_compileDesign->getCompiler()->getErrorContainer()->getSymbolTable();
@@ -647,7 +637,7 @@ ModuleInstance* DesignElaboration::createBindInstance_(
     }
     elaborateInstance_(targetDef->getFileContents()[0],
                        targetDef->getNodeIds()[0], parameterOverloading,
-                       factory, instance, config, parentSubInstances);
+                       instance, config, parentSubInstances);
   }
   return instance;
 }
@@ -696,10 +686,11 @@ const UHDM::any* resize(UHDM::Serializer& serializer, const UHDM::any* object,
 
 void DesignElaboration::elaborateInstance_(
     const FileContent* fC, NodeId nodeId, NodeId parentParamOverride,
-    ModuleInstanceFactory* factory, ModuleInstance* parent, Config* config,
+    ModuleInstance* parent, Config* config,
     std::vector<ModuleInstance*>& parentSubInstances) {
   if (!parent) return;
 
+  UHDM::Serializer& s = m_compileDesign->getSerializer();
   CommandLineParser* clp =
       m_compileDesign->getCompiler()->getCommandLineParser();
   auto& blackboxModules = clp->getBlackBoxModules();
@@ -899,7 +890,7 @@ void DesignElaboration::elaborateInstance_(
   nelab->elaborateInstance(parent);
   delete nelab;
 
-  for (auto subInstanceId : subInstances) {
+  for (auto& subInstanceId : subInstances) {
     VObjectType type = fC->Type(subInstanceId);
     std::vector<NodeId> subSubInstances;
     std::string instName;
@@ -933,7 +924,7 @@ void DesignElaboration::elaborateInstance_(
       subSubInstances.push_back(subInstanceId);
     }
 
-    for (auto subInstanceId : subSubInstances) {
+    for (auto& subInstanceId : subSubInstances) {
       NodeId childId;
       std::string modName;
       DesignComponent* def = nullptr;
@@ -991,8 +982,8 @@ void DesignElaboration::elaborateInstance_(
             identifierId = fC->Child(instId);
             instName = fC->SymName(identifierId);
           }
-          child = factory->newModuleInstance(def, fC, instanceId, parent,
-                                             instName, modName);
+          child = new ModuleInstance(def, fC, instanceId, parent, instName,
+                                     modName);
           parent->addSubInstance(child);
           bindDataTypes_(parent, def);
           NetlistElaboration* nelab = new NetlistElaboration(m_compileDesign);
@@ -1100,8 +1091,7 @@ void DesignElaboration::elaborateInstance_(
 
             def = design->getComponentDefinition(indexedModName);
             if (def == nullptr) {
-              def = m_moduleDefFactory->newModuleDefinition(fC, genBlock,
-                                                            indexedModName);
+              def = new ModuleDefinition(indexedModName, fC, genBlock, s);
               if (DesignComponent* defParent = parent->getDefinition())
                 def->setParentScope(defParent);
               design->addModuleDefinition(indexedModName,
@@ -1116,13 +1106,12 @@ void DesignElaboration::elaborateInstance_(
                 m_compileDesign->getCompiler()->getErrorContainer(), parent);
             funct.operator()();
 
-            child = factory->newModuleInstance(def, fC, genBlock, parent,
-                                               instName, indexedModName);
+            child = new ModuleInstance(def, fC, genBlock, parent, instName,
+                                       indexedModName);
             child->setValue(name, m_exprBuilder.clone(currentIndexValue),
                             m_exprBuilder, fC->Line(varId));
             elaborateInstance_(def->getFileContents()[0], genBlock,
-                               InvalidNodeId, factory, child, config,
-                               allSubInstances);
+                               InvalidNodeId, child, config, allSubInstances);
             parent->addSubInstance(child);
 
             Value* newVal = m_exprBuilder.evalExpr(fC, expr, parent);
@@ -1452,8 +1441,7 @@ void DesignElaboration::elaborateInstance_(
         std::string indexedModName = parent->getFullPathName() + "." + modName;
         def = design->getComponentDefinition(indexedModName);
         if (def == nullptr) {
-          def = m_moduleDefFactory->newModuleDefinition(fC, blockId,
-                                                        indexedModName);
+          def = new ModuleDefinition(indexedModName, fC, blockId, s);
           if (DesignComponent* defParent = parent->getDefinition())
             def->setParentScope(defParent);
           design->addModuleDefinition(indexedModName, (ModuleDefinition*)def);
@@ -1473,11 +1461,11 @@ void DesignElaboration::elaborateInstance_(
             m_compileDesign->getCompiler()->getErrorContainer(), parent);
         funct.operator()();
 
-        child = factory->newModuleInstance(def, fC, blockId, parent, instName,
-                                           indexedModName);
+        child = new ModuleInstance(def, fC, blockId, parent, instName,
+                                   indexedModName);
         while (blockId) {
           elaborateInstance_(def->getFileContents()[0], blockId, paramOverride,
-                             factory, child, config, allSubInstances);
+                             child, config, allSubInstances);
           blockId = fC->Sibling(blockId);
           if (fC->Type(blockId) == VObjectType::paGenerate_begin_end_block) {
             NodeId subChild = fC->Child(blockId);
@@ -1507,16 +1495,14 @@ void DesignElaboration::elaborateInstance_(
 
         def = design->getComponentDefinition(fullName);
         if (def == nullptr) {
-          def = m_moduleDefFactory->newModuleDefinition(fC, subInstanceId,
-                                                        fullName);
+          def = new ModuleDefinition(fullName, fC, subInstanceId, s);
           design->addModuleDefinition(fullName, (ModuleDefinition*)def);
         }
 
-        ModuleInstance* child = factory->newModuleInstance(
-            def, fC, subInstanceId, parent, instName, modName);
+        ModuleInstance* child = new ModuleInstance(def, fC, subInstanceId,
+                                                   parent, instName, modName);
         elaborateInstance_(def->getFileContents()[0], subInstanceId,
-                           paramOverride, factory, child, config,
-                           allSubInstances);
+                           paramOverride, child, config, allSubInstances);
         parent->addSubInstance(child);
 
       } else if (type == VObjectType::paGenerate_region) {
@@ -1540,8 +1526,7 @@ void DesignElaboration::elaborateInstance_(
         def = design->getComponentDefinition(fullName);
         NodeId childId = fC->Child(subInstanceId);
         if (def == nullptr) {
-          def = m_moduleDefFactory->newModuleDefinition(fC, subInstanceId,
-                                                        fullName);
+          def = new ModuleDefinition(fullName, fC, subInstanceId, s);
           design->addModuleDefinition(fullName, (ModuleDefinition*)def);
         }
 
@@ -1557,11 +1542,10 @@ void DesignElaboration::elaborateInstance_(
           funct.operator()();
         }
 
-        ModuleInstance* child = factory->newModuleInstance(
-            def, fC, subInstanceId, parent, instName, modName);
+        ModuleInstance* child = new ModuleInstance(def, fC, subInstanceId,
+                                                   parent, instName, modName);
         elaborateInstance_(def->getFileContents()[0], subInstanceId,
-                           paramOverride, factory, child, config,
-                           allSubInstances);
+                           paramOverride, child, config, allSubInstances);
         parent->addSubInstance(child);
       } else if (type == VObjectType::paGenerate_begin_end_block) {
         NodeId nameId = fC->Child(subInstanceId);
@@ -1579,8 +1563,7 @@ void DesignElaboration::elaborateInstance_(
         def = design->getComponentDefinition(fullName);
         NodeId childId = fC->Child(subInstanceId);
         if (def == nullptr) {
-          def = m_moduleDefFactory->newModuleDefinition(fC, subInstanceId,
-                                                        fullName);
+          def = new ModuleDefinition(fullName, fC, subInstanceId, s);
           design->addModuleDefinition(fullName, (ModuleDefinition*)def);
         }
 
@@ -1596,11 +1579,10 @@ void DesignElaboration::elaborateInstance_(
           funct.operator()();
         }
 
-        ModuleInstance* child = factory->newModuleInstance(
-            def, fC, subInstanceId, parent, instName, modName);
+        ModuleInstance* child = new ModuleInstance(def, fC, subInstanceId,
+                                                   parent, instName, modName);
         elaborateInstance_(def->getFileContents()[0], subInstanceId,
-                           paramOverride, factory, child, config,
-                           allSubInstances);
+                           paramOverride, child, config, allSubInstances);
         parent->addSubInstance(child);
       } else {
         // Regular module binding
@@ -1792,8 +1774,8 @@ void DesignElaboration::elaborateInstance_(
 
             std::vector<ModuleInstance*> localSubInstances;
             recurseInstanceLoop_(from, to, index, 0, def, fC, subInstanceId,
-                                 paramOverride, factory, parent, subConfig,
-                                 instName, modName, localSubInstances);
+                                 paramOverride, parent, subConfig, instName,
+                                 modName, localSubInstances);
             allSubInstances.insert(allSubInstances.end(),
                                    localSubInstances.begin(),
                                    localSubInstances.end());
@@ -1831,12 +1813,12 @@ void DesignElaboration::elaborateInstance_(
               child = parent;
               child->setNodeId(subInstanceId);
             } else {
-              child = factory->newModuleInstance(def, fC, subInstanceId, parent,
-                                                 instName, modName);
+              child = new ModuleInstance(def, fC, subInstanceId, parent,
+                                         instName, modName);
             }
             if (def && (type != VObjectType::paGate_instantiation)) {
               elaborateInstance_(def->getFileContents()[0], childId,
-                                 paramOverride, factory, child, subConfig,
+                                 paramOverride, child, subConfig,
                                  allSubInstances);
             } else {
               // Build black box model

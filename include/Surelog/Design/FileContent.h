@@ -213,7 +213,7 @@ class FileContent : public DesignComponent {
   void setLibraryCellFile() { m_isLibraryCellFile = true; }
 
   void populateCoreMembers(NodeId startIndex, NodeId endIndex,
-                           UHDM::any* instance) const;
+                           UHDM::any* instance, bool force = false) const;
 
  protected:
   std::vector<DesignElement*> m_elements;

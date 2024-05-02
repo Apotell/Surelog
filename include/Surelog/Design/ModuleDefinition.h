@@ -37,6 +37,10 @@
 #include <string_view>
 #include <vector>
 
+namespace UHDM {
+class Serializer;
+}
+
 namespace SURELOG {
 
 class CompileModule;
@@ -47,8 +51,8 @@ class ModuleDefinition : public DesignComponent, public ClockingBlockHolder {
   friend CompileModule;
 
  public:
-  ModuleDefinition(const FileContent* fileContent, NodeId nodeId,
-                   std::string_view name);
+  ModuleDefinition(std::string_view name, const FileContent* fileContent,
+                   NodeId nodeId, UHDM::Serializer& serializer);
 
   ~ModuleDefinition() override = default;
 
@@ -90,7 +94,6 @@ class ModuleDefinition : public DesignComponent, public ClockingBlockHolder {
   }
 
   NodeId getGenBlockId() const { return m_gen_block_id; }
-  UHDM::udp_defn* getUdpDefn() { return m_udpDefn; }
 
   UHDM::VectorOfattribute* Attributes() const { return attributes_; }
 
@@ -115,7 +118,7 @@ class ModuleDefinition : public DesignComponent, public ClockingBlockHolder {
   UHDM::VectorOfgen_scope_array* getGenScopeArrays() {
     return m_subGenScopeArrays;
   }
-  std::vector<UHDM::gen_stmt*>* getGenStmts() { return m_genStmts; }
+  std::vector<UHDM::any*>* getGenStmts() { return m_genStmts; }
   void setPrimitives(UHDM::VectorOfprimitive* primitives) {
     m_subPrimitives = primitives;
   }
@@ -125,7 +128,7 @@ class ModuleDefinition : public DesignComponent, public ClockingBlockHolder {
   void setGenScopeArrays(UHDM::VectorOfgen_scope_array* gen_arrays) {
     m_subGenScopeArrays = gen_arrays;
   }
-  void setGenStmts(std::vector<UHDM::gen_stmt*>* gen_stmts) {
+  void setGenStmts(std::vector<UHDM::any*>* gen_stmts) {
     m_genStmts = gen_stmts;
   }
   std::string_view getEndLabel() const { return m_endLabel; }
@@ -140,7 +143,6 @@ class ModuleDefinition : public DesignComponent, public ClockingBlockHolder {
   ModPortClockingBlockMap m_modportClockingBlockMap;
   ClassNameClassDefinitionMultiMap m_classDefinitions;
   NodeId m_gen_block_id;
-  UHDM::udp_defn* m_udpDefn;
   ModuleDefinition* m_unelabModule;
 
   UHDM::VectorOfattribute* attributes_ = nullptr;
@@ -149,13 +151,7 @@ class ModuleDefinition : public DesignComponent, public ClockingBlockHolder {
   UHDM::VectorOfprimitive* m_subPrimitives = nullptr;
   UHDM::VectorOfprimitive_array* m_subPrimitiveArrays = nullptr;
   UHDM::VectorOfgen_scope_array* m_subGenScopeArrays = nullptr;
-  std::vector<UHDM::gen_stmt*>* m_genStmts = nullptr;
-};
-
-class ModuleDefinitionFactory {
- public:
-  ModuleDefinition* newModuleDefinition(const FileContent* fileContent,
-                                        NodeId nodeId, std::string_view name);
+  std::vector<UHDM::any*>* m_genStmts = nullptr;
 };
 
 };  // namespace SURELOG

@@ -68,8 +68,7 @@ Compiler::Compiler(CommandLineParser* commandLineParser, ErrorContainer* errors,
       m_commonCompilationUnit(nullptr),
       m_librarySet(new LibrarySet()),
       m_configSet(new ConfigSet()),
-      m_design(new Design(getErrorContainer(), m_librarySet, m_configSet)),
-      m_uhdmDesign(0),
+      m_design(new Design(m_serializer, m_errors, m_librarySet, m_configSet)),
       m_compileDesign(nullptr) {
 #ifdef USETBB
   if (getCommandLineParser()->useTbb() &&
@@ -86,8 +85,7 @@ Compiler::Compiler(CommandLineParser* commandLineParser, ErrorContainer* errors,
       m_commonCompilationUnit(nullptr),
       m_librarySet(new LibrarySet()),
       m_configSet(new ConfigSet()),
-      m_design(new Design(getErrorContainer(), m_librarySet, m_configSet)),
-      m_uhdmDesign(0),
+      m_design(new Design(m_serializer, m_errors, m_librarySet, m_configSet)),
       m_text(text),
       m_compileDesign(nullptr) {}
 
@@ -103,6 +101,7 @@ Compiler::~Compiler() {
   delete m_commonCompilationUnit;
 
   cleanup_();
+  m_serializer.Purge();
 }
 
 void Compiler::purgeParsers() {
@@ -151,8 +150,7 @@ bool Compiler::ppinit_() {
   if (!m_commandLineParser->fileunit()) {
     m_commonCompilationUnit = new CompilationUnit(false);
     if (m_commandLineParser->parseBuiltIn()) {
-      Builtin* builtin = new Builtin(nullptr, nullptr);
-      builtin->addBuiltinMacros(m_commonCompilationUnit);
+      Builtin(nullptr, nullptr).addBuiltinMacros(m_commonCompilationUnit);
     }
   }
 
@@ -165,8 +163,7 @@ bool Compiler::ppinit_() {
     if (m_commandLineParser->fileunit()) {
       comp_unit = new CompilationUnit(true);
       if (m_commandLineParser->parseBuiltIn()) {
-        Builtin* builtin = new Builtin(nullptr, nullptr);
-        builtin->addBuiltinMacros(comp_unit);
+        Builtin(nullptr, nullptr).addBuiltinMacros(comp_unit);
       }
       m_compilationUnits.push_back(comp_unit);
       symbols = m_commandLineParser->getSymbolTable()->CreateSnapshot();
@@ -1157,7 +1154,7 @@ bool Compiler::compile() {
     PathId uhdmFileId = fileSystem->getChild(
         m_commandLineParser->getCompileDirId(), "surelog.uhdm",
         m_compileDesign->getCompiler()->getSymbolTable());
-    m_uhdmDesign = m_compileDesign->writeUHDM(uhdmFileId);
+    m_compileDesign->writeUHDM(uhdmFileId);
     // Do not delete as now UHDM has to live past the compilation step
     // delete compileDesign;
   }

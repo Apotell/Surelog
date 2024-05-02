@@ -132,15 +132,6 @@ class ModuleInstance : public ValuedComponentI {
   ModuleArrayModuleInstancesMap m_moduleArrayModuleInstancesMap;
 };
 
-class ModuleInstanceFactory {
- public:
-  ModuleInstance* newModuleInstance(DesignComponent* definition,
-                                    const FileContent* fileContent,
-                                    NodeId nodeId, ModuleInstance* parent,
-                                    std::string_view instName,
-                                    std::string_view moduleName);
-};
-
 }  // namespace SURELOG
 
 #endif /* SURELOG_MODULEINSTANCE_H */

@@ -26,6 +26,8 @@
 #include <Surelog/Testbench/Constraint.h>
 #include <Surelog/Testbench/CoverGroupDefinition.h>
 #include <Surelog/Testbench/Property.h>
+#include <uhdm/Serializer.h>
+#include <uhdm/class_defn.h>
 
 #include <string_view>
 
@@ -35,17 +37,31 @@ ClassDefinition::ClassDefinition(std::string_view name, Library* library,
                                  DesignComponent* container,
                                  const FileContent* fC, NodeId nodeId,
                                  ClassDefinition* parent,
-                                 UHDM::class_defn* uhdm_definition)
+                                 UHDM::Serializer& serializer)
     : DesignComponent(container ? container : fC, nullptr),
       DataType(fC, nodeId, name,
                fC ? fC->Type(nodeId) : VObjectType::paClass_declaration),
       m_name(name),
       m_library(library),
       m_container(container),
-      m_parent(parent),
-      m_uhdm_definition(uhdm_definition) {
+      m_parent(parent) {
   m_category = DataType::Category::CLASS;
   addFileContent(fC, nodeId);
+
+  UHDM::class_defn* const instance = serializer.MakeClass_defn();
+  if (!name.empty()) instance->VpiName(name);
+  if (nodeId && (fC != nullptr))
+    fC->populateCoreMembers(nodeId, nodeId, instance);
+  if (container != nullptr) instance->SetVpiParent(container->getUhdmScope());
+  setUhdmScope(instance);
+}
+
+void ClassDefinition::setContainer(DesignComponent* container) {
+  getUhdmScope()->SetVpiParent(nullptr, true);
+  m_container = container;
+
+  if (m_container != nullptr)
+    getUhdmScope()->SetVpiParent(m_container->getUhdmScope());
 }
 
 uint32_t ClassDefinition::getSize() const {

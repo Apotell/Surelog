@@ -34,10 +34,19 @@
 #include <Surelog/Testbench/ClassDefinition.h>
 #include <Surelog/Testbench/Program.h>
 #include <Surelog/Utils/StringUtils.h>
+#include <uhdm/Serializer.h>
+#include <uhdm/design.h>
 
 #include <queue>
 
 namespace SURELOG {
+
+Design::Design(UHDM::Serializer& serializer, ErrorContainer* errors,
+               LibrarySet* librarySet, ConfigSet* configSet)
+    : m_uhdmDesign(serializer.MakeDesign()),
+      m_errors(errors),
+      m_librarySet(librarySet),
+      m_configSet(configSet) {}
 
 Design::~Design() {
   for (const auto& elem : m_ppFileContents) {
@@ -64,15 +73,13 @@ Design::~Design() {
 }
 
 void Design::addFileContent(PathId fileId, FileContent* content) {
-  m_mutex.lock();
+  std::scoped_lock<std::mutex> lock(m_mutex);
   m_fileContents.emplace_back(fileId, content);
-  m_mutex.unlock();
 }
 
 void Design::addPPFileContent(PathId fileId, FileContent* content) {
-  m_mutex.lock();
+  std::scoped_lock<std::mutex> lock(m_mutex);
   m_ppFileContents.emplace_back(fileId, content);
-  m_mutex.unlock();
 }
 
 DesignComponent* Design::getComponentDefinition(
@@ -503,8 +510,9 @@ Package* Design::addPackageDefinition(std::string_view packageName,
 
 void Design::addClassDefinition(std::string_view className,
                                 ClassDefinition* classDef) {
-  m_classDefinitions.emplace(className, classDef);
-  m_uniqueClassDefinitions.emplace(className, classDef);
+  if (m_uniqueClassDefinitions.emplace(className, classDef).second) {
+    m_classDefinitions.emplace(className, classDef);
+  }
 }
 
 void Design::clearContainers() {
@@ -543,5 +551,10 @@ std::vector<BindStmt*> Design::getBindStmts(std::string_view targetName) {
 
 void Design::addBindStmt(std::string_view targetName, BindStmt* stmt) {
   m_bindMap.emplace(targetName, stmt);
+}
+
+vpiHandle Design::getVpiDesign() const {
+  return reinterpret_cast<vpiHandle>(
+      new uhdm_handle(UHDM::uhdmdesign, m_uhdmDesign));
 }
 }  // namespace SURELOG

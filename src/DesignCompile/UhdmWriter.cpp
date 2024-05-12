@@ -786,15 +786,19 @@ bool writeElabParameters(Serializer& s, ModuleInstance* instance,
   std::map<std::string_view, any*> paramSet;
   if (netlist->param_assigns()) {
     VectorOfany* params = m->Parameters();
-    if (params == nullptr) params = s.MakeAnyVec();
-    m->Parameters(params);
+    if (params == nullptr) {
+      params = s.MakeAnyVec();
+      m->Parameters(params);
+    }
     m->Param_assigns(netlist->param_assigns());
   }
 
   if (mod) {
     VectorOfany* params = m->Parameters();
-    if (params == nullptr) params = s.MakeAnyVec();
-    m->Parameters(params);
+    if (params == nullptr) {
+      params = s.MakeAnyVec();
+      m->Parameters(params);
+    }
     VectorOfany* orig_params = mod->getParameters();
     if (orig_params) {
       for (auto orig : *orig_params) {
@@ -864,8 +868,10 @@ bool writeElabParameters(Serializer& s, ModuleInstance* instance,
 
   if (netlist->param_assigns()) {
     VectorOfany* params = m->Parameters();
-    if (params == nullptr) params = s.MakeAnyVec();
-    m->Parameters(params);
+    if (params == nullptr) {
+      params = s.MakeAnyVec();
+      m->Parameters(params);
+    }
     for (auto p : *netlist->param_assigns()) {
       bool found = false;
       for (auto pt : *params) {
@@ -1272,20 +1278,6 @@ void UhdmWriter::writeClass(ClassDefinition* classDef,
     // Variables
     // Already bound in TestbenchElaboration
 
-    // Function and tasks
-    c->Task_funcs(classDef->getTask_funcs());
-    if (c->Task_funcs()) {
-      for (auto tf : *c->Task_funcs()) {
-        if (tf->VpiParent() == nullptr) tf->SetVpiParent(c);
-      }
-    }
-    // Parameters
-    if (classDef->getParameters()) {
-      c->Parameters(classDef->getParameters());
-      for (auto ps : *c->Parameters()) {
-        ps->SetVpiParent(c);
-      }
-    }
     // Extends, fix late binding
     if (const extends* ext = c->Extends()) {
       if (const ref_typespec* ext_rt = ext->Class_typespec()) {
@@ -1479,10 +1471,8 @@ void UhdmWriter::writePackage(Package* pack, package* p, Serializer& s,
   writeClasses(orig_classes, dest_classes, s, p);
   p->Class_defns(dest_classes);
   // Parameters
-  if (pack->getParameters()) {
-    p->Parameters(pack->getParameters());
+  if (p->Parameters()) {
     for (auto ps : *p->Parameters()) {
-      ps->SetVpiParent(p);
       if (ps->UhdmType() == uhdmparameter) {
         ((parameter*)ps)
             ->VpiFullName(StrCat(pack->getName(), "::", ps->VpiName()));
@@ -1665,30 +1655,10 @@ void UhdmWriter::writeModule(ModuleDefinition* mod, module_inst* m,
       ps->SetVpiParent(m);
     }
   }
-  // Parameters
-  if (mod->getParameters()) {
-    m->Parameters(mod->getParameters());
-    for (auto ps : *m->Parameters()) {
-      ps->SetVpiParent(m);
-    }
-  }
-  // Param_assigns
-  if (mod->getParam_assigns()) {
-    m->Param_assigns(mod->getParam_assigns());
-    for (auto ps : *m->Param_assigns()) {
-      ps->SetVpiParent(m);
-    }
-  }
+
   // Function and tasks
-  if (auto from = mod->getTask_funcs()) {
-    UHDM::VectorOftask_func* target = m->Task_funcs();
-    if (target == nullptr) {
-      m->Task_funcs(s.MakeTask_funcVec());
-      target = m->Task_funcs();
-    }
-    for (auto tf : *from) {
-      target->push_back(tf);
-      if (tf->VpiParent() == nullptr) tf->SetVpiParent(m);
+  if ((m_helper.getElaborate() == Elaborate::Yes) && m->Task_funcs()) {
+    for (auto tf : *m->Task_funcs()) {
       if (tf->Instance() == nullptr) tf->Instance(m);
     }
   }
@@ -1926,26 +1896,9 @@ void UhdmWriter::writeInterface(ModuleDefinition* mod, interface_inst* m,
     }
   }
 
-  // Parameters
-  if (mod->getParameters()) {
-    m->Parameters(mod->getParameters());
-    for (auto ps : *m->Parameters()) {
-      ps->SetVpiParent(m);
-    }
-  }
-  // Param_assigns
-  if (mod->getParam_assigns()) {
-    m->Param_assigns(mod->getParam_assigns());
-    for (auto ps : *m->Param_assigns()) {
-      ps->SetVpiParent(m);
-    }
-  }
-
   // Function and tasks
-  if (mod->getTask_funcs()) {
-    m->Task_funcs(mod->getTask_funcs());
+  if ((m_helper.getElaborate() == Elaborate::Yes) && m->Task_funcs()) {
     for (auto tf : *m->Task_funcs()) {
-      if (tf->VpiParent() == nullptr) tf->SetVpiParent(m);
       if (tf->Instance() == nullptr) tf->Instance(m);
     }
   }
@@ -2007,13 +1960,6 @@ void UhdmWriter::writeProgram(Program* mod, program* m, Serializer& s,
             instance);
   m->Nets(dest_nets);
   mapLowConns(orig_ports, s, signalBaseMap);
-  // Parameters
-  if (mod->getParameters()) {
-    m->Parameters(mod->getParameters());
-    for (auto ps : *m->Parameters()) {
-      ps->SetVpiParent(m);
-    }
-  }
 
   // Assertions
   if (mod->getAssertions()) {
@@ -2023,13 +1969,6 @@ void UhdmWriter::writeProgram(Program* mod, program* m, Serializer& s,
     }
   }
 
-  // Param_assigns
-  if (mod->getParam_assigns()) {
-    m->Param_assigns(mod->getParam_assigns());
-    for (auto ps : *m->Param_assigns()) {
-      ps->SetVpiParent(m);
-    }
-  }
   // Classes
   ClassNameClassDefinitionMultiMap& orig_classes = mod->getClassDefinitions();
   VectorOfclass_defn* dest_classes = s.MakeClass_defnVec();
@@ -2576,8 +2515,7 @@ bool UhdmWriter::writeElabGenScope(Serializer& s, ModuleInstance* instance,
       for (auto& param : instance->getMappedValues()) {
         const std::string_view name = param.first;
         Value* val = param.second.first;
-        VectorOfany* params = nullptr;
-        params = m->Parameters();
+        VectorOfany* params = m->Parameters();
         if (params == nullptr) {
           params = s.MakeAnyVec();
         }
@@ -5124,54 +5062,7 @@ bool UhdmWriter::write(PathId uhdmFileId) {
     // Non-Elaborated Model
 
     // FileContent
-    VectorOftypespec* typespecs = d->Typespecs();
-    if (typespecs == nullptr) {
-      typespecs = s.MakeTypespecVec();
-      d->Typespecs(typespecs);
-    }
     for (auto& fileIdContent : m_design->getAllFileContents()) {
-      // Typepecs
-      writeDataTypes(fileIdContent.second->getDataTypeMap(), d, typespecs, s,
-                     true);
-
-      // Function and tasks
-      if (auto from = fileIdContent.second->getTask_funcs()) {
-        UHDM::VectorOftask_func* target = d->Task_funcs();
-        if (target == nullptr) {
-          d->Task_funcs(s.MakeTask_funcVec());
-          target = d->Task_funcs();
-        }
-        for (auto tf : *from) {
-          target->push_back(tf);
-          if (tf->VpiParent() == nullptr) tf->SetVpiParent(d);
-        }
-      }
-
-      // Parameters
-      if (auto from = fileIdContent.second->getParameters()) {
-        UHDM::VectorOfany* target = d->Parameters();
-        if (target == nullptr) {
-          d->Parameters(s.MakeAnyVec());
-          target = d->Parameters();
-        }
-        for (auto tf : *from) {
-          tf->SetVpiParent(d);
-          target->push_back(tf);
-        }
-      }
-
-      // Param assigns
-      if (auto from = fileIdContent.second->getParam_assigns()) {
-        UHDM::VectorOfparam_assign* target = d->Param_assigns();
-        if (target == nullptr) {
-          d->Param_assigns(s.MakeParam_assignVec());
-          target = d->Param_assigns();
-        }
-        for (auto tf : *from) {
-          tf->SetVpiParent(d);
-          target->push_back(tf);
-        }
-      }
       lateTypedefBinding(s, fileIdContent.second, nullptr);
     }
 

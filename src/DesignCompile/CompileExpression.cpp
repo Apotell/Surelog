@@ -1256,7 +1256,7 @@ UHDM::any *CompileHelper::compileSelectExpression(
               if (sel->UhdmType() == uhdmhier_path) {
                 hier_path *p = (hier_path *)sel;
                 for (auto el : *p->Path_elems()) {
-                  el->SetVpiParent(path);
+                  el->SetVpiParent(path, true);
                   elems->push_back(el);
                 }
                 break;
@@ -5042,6 +5042,8 @@ UHDM::any *CompileHelper::compileComplexFuncCall(
           c->VpiDecompile(val->decompiledValue());
           c->VpiSize(val->getSize());
           c->VpiConstType(val->vpiValType());
+          c->SetVpiParent(pexpr);
+          fC->populateCoreMembers(Class_scope_name, Class_scope_name, c);
           result = c;
           return result;
         }
@@ -5374,8 +5376,7 @@ UHDM::any *CompileHelper::compileComplexFuncCall(
             } else {
               fcall = s.MakeMethod_func_call();
               fcall->VpiName(method_name);
-              fC->populateCoreMembers(method_name_node, method_name_node,
-                                      fcall);
+              fC->populateCoreMembers(method_name_node, id, fcall);
               NodeId list_of_arguments =
                   fC->Sibling(fC->Child(fC->Child(method_child)));
               NodeId with_conditions_node;
@@ -5407,7 +5408,7 @@ UHDM::any *CompileHelper::compileComplexFuncCall(
             fcall = s.MakeMethod_func_call();
             const std::string_view methodName = fC->SymName(dotedName);
             fcall->VpiName(methodName);
-            fC->populateCoreMembers(dotedName, dotedName, fcall);
+            fC->populateCoreMembers(dotedName, id, fcall);
             if (VectorOfany *arguments = compileTfCallArguments(
                     component, fC, List_of_arguments, compileDesign, reduce,
                     fcall, instance, muteErrors)) {

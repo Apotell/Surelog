@@ -789,12 +789,6 @@ typespec* CompileHelper::compileDatastructureTypespec(
                       compileDesign, fC->getFileId(), typeName, "",
                       fC->Line(type), fC->Column(type), fC->EndLine(type),
                       fC->EndColumn(type))) {
-                if (lhs->Typespec() == nullptr) {
-                  ref_typespec* tpsRef = s.MakeRef_typespec();
-                  tpsRef->SetVpiParent(lhs);
-                  lhs->Typespec(tpsRef);
-                }
-                lhs->Typespec()->Actual_typespec(tps);
                 result = tps;
               }
             }

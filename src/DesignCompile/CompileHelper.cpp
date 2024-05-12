@@ -486,6 +486,8 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
   DataType* newType = nullptr;
   Serializer& s = compileDesign->getSerializer();
   if (pstmt == nullptr) pstmt = scope->getUhdmScope();
+  if (pstmt == nullptr)
+    pstmt = compileDesign->getCompiler()->getDesign()->getUhdmDesign();
 
   /*
    n<> u<1> t<IntVec_TypeBit> p<12> s<11> l<5>

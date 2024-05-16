@@ -70,12 +70,21 @@ class IntegrityChecker final : public UhdmListener {
   SymbolTable* const m_symbolTable = nullptr;
   ErrorContainer* const m_errorContainer = nullptr;
 
+  typedef std::set<UHDM_OBJECT_TYPE> object_type_set_t;
+  const object_type_set_t m_acceptedObjectsWithInvalidLocations;
+
  public:
   IntegrityChecker(FileSystem* fileSystem, SymbolTable* symbolTable,
                    ErrorContainer* errorContainer)
       : m_fileSystem(fileSystem),
         m_symbolTable(symbolTable),
-        m_errorContainer(errorContainer) {}
+        m_errorContainer(errorContainer),
+        m_acceptedObjectsWithInvalidLocations({
+            UHDM::uhdmdesign,
+            UHDM::uhdmsource_file,
+            UHDM::uhdmpreproc_macro_definition,
+            UHDM::uhdmpreproc_macro_instance,
+        }) {}
 
   bool isBuiltPackageOnStack(const UHDM::any* const object) const {
     return ((object->UhdmType() == UHDM::uhdmpackage) &&
@@ -88,8 +97,8 @@ class IntegrityChecker final : public UhdmListener {
   }
 
   template <typename T>
-  void checkMembership(const std::vector<T*>* const collection,
-                       const T* const object) {
+  void reportAmbigiousMembership(const std::vector<T*>* const collection,
+                                 const T* const object) {
     if (object == nullptr) return;
     if ((collection == nullptr) ||
         (std::find(collection->cbegin(), collection->cend(), object) ==
@@ -123,7 +132,11 @@ class IntegrityChecker final : public UhdmListener {
     }
   }
 
-  void validateLocation(const UHDM::any* const object) {
+  void reportInvalidLocation(const UHDM::any* const object) {
+    if (m_acceptedObjectsWithInvalidLocations.find(object->UhdmType()) !=
+        m_acceptedObjectsWithInvalidLocations.cend())
+      return;
+
     const UHDM::any* const parent = object->VpiParent();
     if (parent == nullptr) return;
     if (parent->UhdmType() == UHDM::uhdmdesign) return;
@@ -196,6 +209,73 @@ class IntegrityChecker final : public UhdmListener {
     }
   }
 
+  void reportMissingLocation(const UHDM::any* const object) {
+    if ((object->VpiLineNo() != 0) && (object->VpiColumnNo() != 0) &&
+        (object->VpiEndLineNo() != 0) && (object->VpiEndColumnNo() != 0))
+      return;
+
+    if (m_acceptedObjectsWithInvalidLocations.find(object->UhdmType()) !=
+        m_acceptedObjectsWithInvalidLocations.cend())
+      return;
+
+    const UHDM::any* const parent = object->VpiParent();
+    const UHDM::any* const grandParent =
+        (parent == nullptr) ? parent : parent->VpiParent();
+
+    if ((object->UhdmType() == UHDM::uhdmref_typespec) && (parent != nullptr) &&
+        (grandParent != nullptr) && (grandParent->VpiName() == "new") &&
+        (parent->Cast<UHDM::variables>() != nullptr) &&
+        (grandParent->UhdmType() == UHDM::uhdmfunction)) {
+      // For ref_typespec associated with a class's constructor return value
+      // there is no legal position because the "new" operator's return value
+      // is implicit.
+      const UHDM::variables* const parentAsVariables =
+          parent->Cast<UHDM::variables>();
+      const UHDM::function* const grandParentAsFunction =
+          grandParent->Cast<UHDM::function>();
+      if ((grandParentAsFunction->Return() == parent) &&
+          (parentAsVariables->Typespec() == object)) {
+        return;
+      }
+    } else if ((object->UhdmType() == UHDM::uhdmclass_typespec) &&
+               (parent != nullptr) && (parent->VpiName() == "new") &&
+               (parent->UhdmType() == UHDM::uhdmfunction)) {
+      // For typespec associated with a class's constructor return value
+      // there is no legal position because the "new" operator's return value
+      // is implicit.
+      const UHDM::function* const parentAsFunction =
+          parent->Cast<UHDM::function>();
+      if (const UHDM::variables* const var = parentAsFunction->Return()) {
+        if (const UHDM::ref_typespec* const rt = var->Typespec()) {
+          if ((rt == object) || (rt->Actual_typespec() == object)) {
+            return;
+          }
+        }
+      }
+    } else if ((object->Cast<variables>() != nullptr) && (parent != nullptr) &&
+               (parent->UhdmType() == UHDM::uhdmfunction)) {
+      // When no explicit return is specific, the function's name
+      // is consdiered the return type's name.
+      const UHDM::function* const parentAsFunction =
+          parent->Cast<UHDM::function>();
+      if (parentAsFunction->Return() == object) return;
+    } else if ((object->UhdmType() == UHDM::uhdmconstant) &&
+               (parent != nullptr) && (parent->UhdmType() == UHDM::uhdmrange)) {
+      // The left expression of range is allowed to be zero.
+      const UHDM::range* const parentAsRange = parent->Cast<UHDM::range>();
+      if (parentAsRange->Left_expr() == object) return;
+    }
+
+    std::string text = std::to_string(object->UhdmId());
+    text.append(", type: ").append(UHDM::UhdmName(object->UhdmType()));
+
+    Location loc(m_fileSystem->toPathId(object->VpiFile(), m_symbolTable),
+                 object->VpiLineNo(), object->VpiColumnNo(),
+                 m_symbolTable->registerSymbol(text));
+    Error err(ErrorDefinition::INTEGRITY_CHECK_MISSING_LOCATION, loc);
+    m_errorContainer->addError(err);
+  }
+
   void enterAny(const UHDM::any* const object) final {
     if (isBuiltPackageOnStack(object)) return;
 
@@ -254,15 +334,7 @@ class IntegrityChecker final : public UhdmListener {
       }
     }
 
-    if ((object->VpiLineNo() == 0) || (object->VpiColumnNo() == 0) ||
-        (object->VpiEndLineNo() == 0) || (object->VpiEndColumnNo() == 0)) {
-      Location loc(
-          m_fileSystem->toPathId(object->VpiFile(), m_symbolTable),
-          object->VpiLineNo(), object->VpiColumnNo(),
-          m_symbolTable->registerSymbol(std::to_string(object->UhdmId())));
-      Error err(ErrorDefinition::INTEGRITY_CHECK_MISSING_LOCATION, loc);
-      m_errorContainer->addError(err);
-    }
+    reportMissingLocation(object);
 
     const UHDM::any* const parent = object->VpiParent();
     if (parent == nullptr) {
@@ -275,7 +347,7 @@ class IntegrityChecker final : public UhdmListener {
       return;
     }
 
-    validateLocation(object);
+    reportInvalidLocation(object);
 
     const UHDM::scope* const parentAsScope =
         any_cast<const UHDM::scope*>(parent);
@@ -388,46 +460,47 @@ class IntegrityChecker final : public UhdmListener {
     }
 
     if (parentAsDesign != nullptr) {
-      checkMembership(parentAsDesign->Typespecs(),
-                      any_cast<UHDM::typespec>(object));
-      checkMembership(parentAsDesign->Let_decls(),
-                      any_cast<UHDM::let_decl>(object));
-      checkMembership(parentAsDesign->Task_funcs(),
-                      any_cast<UHDM::task_func>(object));
-      checkMembership(
+      reportAmbigiousMembership(parentAsDesign->Typespecs(),
+                                any_cast<UHDM::typespec>(object));
+      reportAmbigiousMembership(parentAsDesign->Let_decls(),
+                                any_cast<UHDM::let_decl>(object));
+      reportAmbigiousMembership(parentAsDesign->Task_funcs(),
+                                any_cast<UHDM::task_func>(object));
+      reportAmbigiousMembership(
           parentAsDesign->Parameters(),
           (any_cast<UHDM::parameter>(object) != nullptr) ? object : nullptr);
-      checkMembership(parentAsDesign->Param_assigns(),
-                      any_cast<UHDM::param_assign>(object));
+      reportAmbigiousMembership(parentAsDesign->Param_assigns(),
+                                any_cast<UHDM::param_assign>(object));
     } else if (parentAsScope != nullptr) {
-      checkMembership(
+      reportAmbigiousMembership(
           parentAsScope->Parameters(),
           (any_cast<UHDM::parameter>(object) != nullptr) ? object : nullptr);
-      checkMembership(parentAsScope->Param_assigns(),
-                      any_cast<UHDM::param_assign>(object));
-      checkMembership(parentAsScope->Typespecs(),
-                      any_cast<UHDM::typespec>(object));
-      checkMembership(parentAsScope->Variables(),
-                      any_cast<UHDM::variables>(object));
-      checkMembership(parentAsScope->Property_decls(),
-                      any_cast<UHDM::property_decl>(object));
-      checkMembership(parentAsScope->Sequence_decls(),
-                      any_cast<UHDM::sequence_decl>(object));
-      checkMembership(parentAsScope->Concurrent_assertions(),
-                      any_cast<UHDM::concurrent_assertions>(object));
-      checkMembership(parentAsScope->Named_events(),
-                      any_cast<UHDM::named_event>(object));
-      checkMembership(parentAsScope->Named_event_arrays(),
-                      any_cast<UHDM::named_event_array>(object));
-      checkMembership(parentAsScope->Virtual_interface_vars(),
-                      any_cast<UHDM::virtual_interface_var>(object));
-      checkMembership(parentAsScope->Logic_vars(),
-                      any_cast<UHDM::logic_var>(object));
-      checkMembership(parentAsScope->Array_vars(),
-                      any_cast<UHDM::array_var>(object));
-      checkMembership(parentAsScope->Let_decls(),
-                      any_cast<UHDM::let_decl>(object));
-      checkMembership(parentAsScope->Scopes(), any_cast<UHDM::scope>(object));
+      reportAmbigiousMembership(parentAsScope->Param_assigns(),
+                                any_cast<UHDM::param_assign>(object));
+      reportAmbigiousMembership(parentAsScope->Typespecs(),
+                                any_cast<UHDM::typespec>(object));
+      reportAmbigiousMembership(parentAsScope->Variables(),
+                                any_cast<UHDM::variables>(object));
+      reportAmbigiousMembership(parentAsScope->Property_decls(),
+                                any_cast<UHDM::property_decl>(object));
+      reportAmbigiousMembership(parentAsScope->Sequence_decls(),
+                                any_cast<UHDM::sequence_decl>(object));
+      reportAmbigiousMembership(parentAsScope->Concurrent_assertions(),
+                                any_cast<UHDM::concurrent_assertions>(object));
+      reportAmbigiousMembership(parentAsScope->Named_events(),
+                                any_cast<UHDM::named_event>(object));
+      reportAmbigiousMembership(parentAsScope->Named_event_arrays(),
+                                any_cast<UHDM::named_event_array>(object));
+      reportAmbigiousMembership(parentAsScope->Virtual_interface_vars(),
+                                any_cast<UHDM::virtual_interface_var>(object));
+      reportAmbigiousMembership(parentAsScope->Logic_vars(),
+                                any_cast<UHDM::logic_var>(object));
+      reportAmbigiousMembership(parentAsScope->Array_vars(),
+                                any_cast<UHDM::array_var>(object));
+      reportAmbigiousMembership(parentAsScope->Let_decls(),
+                                any_cast<UHDM::let_decl>(object));
+      reportAmbigiousMembership(parentAsScope->Scopes(),
+                                any_cast<UHDM::scope>(object));
     }
   }
 };
@@ -5048,15 +5121,6 @@ bool UhdmWriter::write(PathId uhdmFileId) {
     }
     d->VpiName(designName);
     designs.push_back(designHandle);
-
-    // ---------------------------
-    // Include File Info
-    if (m_compileDesign->getFileInfo()) {
-      d->Include_file_infos(m_compileDesign->getFileInfo());
-      for (auto ifi : *m_compileDesign->getFileInfo()) {
-        ifi->SetVpiParent(d);
-      }
-    }
 
     // -------------------------------
     // Non-Elaborated Model

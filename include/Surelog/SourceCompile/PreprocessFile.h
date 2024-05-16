@@ -91,14 +91,15 @@ class PreprocessFile final {
   std::string getPreProcessedFileContent();
 
   /* Macro manipulations */
-  void recordMacro(std::string_view name, uint32_t startLine,
-                   uint16_t startColumn, uint32_t endLine, uint16_t endColumn,
-                   std::string_view formal_arguments,
-                   const std::vector<std::string>& body);
-  void recordMacro(std::string_view name, PathId fileId, uint32_t startLine,
-                   uint16_t startColumn, uint32_t endLine, uint16_t endColumn,
-                   const std::vector<std::string>& formal_arguments,
-                   const std::vector<std::string>& body);
+  MacroInfo* recordMacro(std::string_view name, uint32_t startLine,
+                         uint16_t startColumn, uint32_t endLine,
+                         uint16_t endColumn, std::string_view formal_arguments,
+                         const std::vector<std::string>& body);
+  MacroInfo* recordMacro(std::string_view name, PathId fileId,
+                         uint32_t startLine, uint16_t startColumn,
+                         uint32_t endLine, uint16_t endColumn,
+                         const std::vector<std::string>& formal_arguments,
+                         const std::vector<std::string>& body);
   std::string getMacro(std::string_view name,
                        std::vector<std::string>& actual_arguments,
                        PreprocessFile* callingFile, uint32_t callingLine,
@@ -139,8 +140,8 @@ class PreprocessFile final {
     return m_includeFileInfo;
   }
   int32_t addIncludeFileInfo(
-      IncludeFileInfo::Context context, uint32_t sectionStartLine,
-      SymbolId sectionSymbolId, PathId sectionFileId,
+      IncludeFileInfo::Context context, const MacroInfo* macroInfo,
+      uint32_t sectionStartLine, SymbolId sectionSymbolId, PathId sectionFileId,
       uint32_t originalStartLine, uint32_t originalStartColumn,
       uint32_t originalEndLine, uint32_t originalEndColumn,
       IncludeFileInfo::Action type, int32_t indexOpening = 0,

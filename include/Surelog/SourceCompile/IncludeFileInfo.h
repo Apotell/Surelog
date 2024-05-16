@@ -28,7 +28,11 @@
 #include <Surelog/Common/PathId.h>
 #include <Surelog/Common/SymbolId.h>
 
+#include <vector>
+
 namespace SURELOG {
+
+class MacroInfo;
 
 class IncludeFileInfo {
  public:
@@ -40,27 +44,26 @@ class IncludeFileInfo {
                   uint32_t originalStartLine, uint32_t originalStartColumn,
                   uint32_t originalEndLine, uint32_t originalEndColumn,
                   Action action)
-      : IncludeFileInfo(context, sectionStartLine, sectionSymbolId,
+      : IncludeFileInfo(context, nullptr, sectionStartLine, sectionSymbolId,
                         sectionFileId, originalStartLine, originalStartColumn,
                         originalEndLine, originalEndColumn, action, -1, -1) {}
-  IncludeFileInfo(const IncludeFileInfo& i)
-      : m_context(i.m_context),
-        m_sectionStartLine(i.m_sectionStartLine),
-        m_sectionSymbolId(i.m_sectionSymbolId),
-        m_sectionFileId(i.m_sectionFileId),
-        m_originalStartLine(i.m_originalStartLine),
-        m_originalStartColumn(i.m_originalStartColumn),
-        m_originalEndLine(i.m_originalEndLine),
-        m_originalEndColumn(i.m_originalEndColumn),
-        m_action(i.m_action),
-        m_indexOpening(i.m_indexOpening),
-        m_indexClosing(i.m_indexClosing) {}
-  IncludeFileInfo(Context context, uint32_t sectionStartLine,
-                  SymbolId sectionSymbolId, PathId sectionFileId,
-                  uint32_t originalStartLine, uint32_t originalStartColumn,
-                  uint32_t originalEndLine, uint32_t originalEndColumn,
-                  Action action, int32_t indexOpening, int32_t indexClosing)
+  IncludeFileInfo(Context context, const MacroInfo *macroInstance,
+                  uint32_t sectionStartLine, SymbolId sectionSymbolId,
+                  PathId sectionFileId, uint32_t originalStartLine,
+                  uint32_t originalStartColumn, uint32_t originalEndLine,
+                  uint32_t originalEndColumn, Action action)
+      : IncludeFileInfo(context, macroInstance, sectionStartLine,
+                        sectionSymbolId, sectionFileId, originalStartLine,
+                        originalStartColumn, originalEndLine, originalEndColumn,
+                        action, -1, -1) {}
+  IncludeFileInfo(Context context, const MacroInfo *macroInstance,
+                  uint32_t sectionStartLine, SymbolId sectionSymbolId,
+                  PathId sectionFileId, uint32_t originalStartLine,
+                  uint32_t originalStartColumn, uint32_t originalEndLine,
+                  uint32_t originalEndColumn, Action action,
+                  int32_t indexOpening, int32_t indexClosing)
       : m_context(context),
+        m_macroInstance(macroInstance),
         m_sectionStartLine(sectionStartLine),
         m_sectionSymbolId(sectionSymbolId),
         m_sectionFileId(sectionFileId),
@@ -73,6 +76,7 @@ class IncludeFileInfo {
         m_indexClosing(indexClosing) {}
 
   const Context m_context;
+  const MacroInfo *const m_macroInstance = nullptr;
   uint32_t m_sectionStartLine = 0;
   SymbolId m_sectionSymbolId;
   PathId m_sectionFileId;
@@ -83,6 +87,7 @@ class IncludeFileInfo {
   Action m_action = Action::NONE;  // 1 or 2, push or pop
   int32_t m_indexOpening = 0;
   int32_t m_indexClosing = 0;
+  std::vector<MacroInfo *> m_macroDefinitions;
 };
 
 }  // namespace SURELOG

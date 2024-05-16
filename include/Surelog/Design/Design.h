@@ -215,10 +215,10 @@ class Design final {
   DefParam* getDefParam_(std::vector<std::string>& path,
                          DefParam* parent) const;
 
+  UHDM::design* const m_uhdmDesign = nullptr;
   ErrorContainer* const m_errors = nullptr;
   LibrarySet* const m_librarySet = nullptr;
   ConfigSet* const m_configSet = nullptr;
-  UHDM::design* const m_uhdmDesign = nullptr;
 
   FileIdDesignContentMap m_fileContents;
 

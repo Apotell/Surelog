@@ -43,9 +43,7 @@ Design* get_design(scompiler* the_compiler) {
 void shutdown_compiler(scompiler* the_compiler) {
   if (the_compiler == nullptr) return;
   Compiler* compiler = (Compiler*)the_compiler;
-  if (CompileDesign* comp = compiler->getCompileDesign()) {
-    compiler->getSerializer().Purge();
-  }
+  compiler->getSerializer().Purge();
   delete (Compiler*)the_compiler;
 }
 

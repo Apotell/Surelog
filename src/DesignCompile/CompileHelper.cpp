@@ -2421,6 +2421,8 @@ n<> u<17> t<Continuous_assign> p<18> c<16> l<4>
             bit_select* sel_bs = (bit_select*)sel;
             path->Path_elems()->pop_back();
             sel_bs->VpiName(last->VpiName());
+            sel_bs->VpiLineNo(last->VpiLineNo());
+            sel_bs->VpiColumnNo(last->VpiColumnNo());
             sel_bs->VpiFullName(
                 StrCat(last_ro->VpiFullName(), decompileHelper(sel)));
           }
@@ -4363,12 +4365,11 @@ VectorOfany* CompileHelper::compileTfCallArguments(
       // arg by position
       Expression = argument;
       if (Expression) {
-        UHDM::any* exp =
-            compileExpression(component, fC, Expression, compileDesign, reduce,
-                              call, instance, muteErrors);
-        if (exp) {
+        if (UHDM::any* exp =
+                compileExpression(component, fC, Expression, compileDesign,
+                                  reduce, call, instance, muteErrors)) {
           arguments->push_back(exp);
-          if (exp->VpiParent() == nullptr) exp->SetVpiParent(call);
+          exp->SetVpiParent(call);
         }
       } else {
         constant* c = s.MakeConstant();
@@ -4376,6 +4377,7 @@ VectorOfany* CompileHelper::compileTfCallArguments(
         c->VpiDecompile("0");
         c->VpiSize(64);
         c->VpiConstType(vpiIntConst);
+        c->SetVpiParent(call);
         fC->populateCoreMembers(argumentNode, argumentNode, c);
         arguments->push_back(c);
       }
@@ -4384,11 +4386,11 @@ VectorOfany* CompileHelper::compileTfCallArguments(
   }
   if (NodeId clocking = fC->Sibling(Arg_list_node)) {
     if (fC->Type(clocking) == VObjectType::paClocking_event) {
-      UHDM::any* exp = compileExpression(component, fC, clocking, compileDesign,
-                                         reduce, call, instance, muteErrors);
-      if (exp) {
+      if (UHDM::any* exp =
+              compileExpression(component, fC, clocking, compileDesign, reduce,
+                                call, instance, muteErrors)) {
         arguments->push_back(exp);
-        if (exp->VpiParent() == nullptr) exp->SetVpiParent(call);
+        exp->SetVpiParent(call);
       }
     }
   }
@@ -4406,6 +4408,7 @@ VectorOfany* CompileHelper::compileTfCallArguments(
           c->VpiDecompile("0");
           c->VpiSize(64);
           c->VpiConstType(vpiIntConst);
+          c->SetVpiParent(call);
           arguments->push_back(c);
         }
       }
@@ -4448,6 +4451,7 @@ UHDM::assignment* CompileHelper::compileBlockingAssignment(
     AssignOp_Assign = InvalidNodeId;
     if (fC->Type(Delay_or_event_control) == VObjectType::paDynamic_array_new) {
       method_func_call* fcall = s.MakeMethod_func_call();
+      fcall->SetVpiParent(assign);
       fC->populateCoreMembers(Delay_or_event_control, Delay_or_event_control,
                               fcall);
       fcall->VpiName("new");

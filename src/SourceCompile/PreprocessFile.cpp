@@ -558,14 +558,15 @@ uint32_t PreprocessFile::getSumLineCount() {
 }
 
 int32_t PreprocessFile::addIncludeFileInfo(
-    IncludeFileInfo::Context context, uint32_t sectionStartLine,
-    SymbolId sectionSymbolId, PathId sectionFileId, uint32_t originalStartLine,
-    uint32_t originalStartColumn, uint32_t originalEndLine,
-    uint32_t originalEndColumn, IncludeFileInfo::Action action,
-    int32_t indexOpening /* = 0 */, int32_t indexClosing /* = 0 */) {
+    IncludeFileInfo::Context context, const MacroInfo* macroInfo,
+    uint32_t sectionStartLine, SymbolId sectionSymbolId, PathId sectionFileId,
+    uint32_t originalStartLine, uint32_t originalStartColumn,
+    uint32_t originalEndLine, uint32_t originalEndColumn,
+    IncludeFileInfo::Action action, int32_t indexOpening /* = 0 */,
+    int32_t indexClosing /* = 0 */) {
   int32_t index = m_includeFileInfo.size();
   m_includeFileInfo.emplace_back(
-      context, sectionStartLine, sectionSymbolId, sectionFileId,
+      context, macroInfo, sectionStartLine, sectionSymbolId, sectionFileId,
       originalStartLine, originalStartColumn, originalEndLine,
       originalEndColumn, action, indexOpening, indexClosing);
   return index;
@@ -575,8 +576,9 @@ void PreprocessFile::resetIncludeFileInfo() {
   clearIncludeFileInfo();
   if ((!m_compileSourceFile->m_commandLineParser->parseOnly()) &&
       (!m_compileSourceFile->m_commandLineParser->lowMem())) {
-    addIncludeFileInfo(IncludeFileInfo::Context::NONE, 0, BadSymbolId, m_fileId,
-                       0, 0, 0, 0, IncludeFileInfo::Action::POP, 0, 0);
+    addIncludeFileInfo(IncludeFileInfo::Context::NONE, nullptr, 0, BadSymbolId,
+                       m_fileId, 0, 0, 0, 0, IncludeFileInfo::Action::POP, 0,
+                       0);
   }
 }
 
@@ -589,10 +591,11 @@ void PreprocessFile::append(std::string_view s) {
   }
 }
 
-void PreprocessFile::recordMacro(std::string_view name, uint32_t startLine,
-                                 uint16_t startColumn, uint32_t endLine,
-                                 uint16_t endColumn, std::string_view arguments,
-                                 const std::vector<std::string>& tokens) {
+MacroInfo* PreprocessFile::recordMacro(std::string_view name,
+                                       uint32_t startLine, uint16_t startColumn,
+                                       uint32_t endLine, uint16_t endColumn,
+                                       std::string_view arguments,
+                                       const std::vector<std::string>& tokens) {
   // *** Argument processing
   std::string arguments_short(arguments);
   // Remove (
@@ -632,6 +635,7 @@ void PreprocessFile::recordMacro(std::string_view name, uint32_t startLine,
   itr->second.push_back(macroInfo);
   m_compilationUnit->registerMacroInfo(name, macroInfo);
   checkMacroArguments_(name, startLine, startColumn, args, tokens);
+  return macroInfo;
 }
 
 std::string PreprocessFile::reportIncludeInfo() const {
@@ -651,11 +655,11 @@ std::string PreprocessFile::reportIncludeInfo() const {
   return strm.str();
 }
 
-void PreprocessFile::recordMacro(std::string_view name, PathId fileId,
-                                 uint32_t startLine, uint16_t startColumn,
-                                 uint32_t endLine, uint16_t endColumn,
-                                 const std::vector<std::string>& arguments,
-                                 const std::vector<std::string>& tokens) {
+MacroInfo* PreprocessFile::recordMacro(
+    std::string_view name, PathId fileId, uint32_t startLine,
+    uint16_t startColumn, uint32_t endLine, uint16_t endColumn,
+    const std::vector<std::string>& arguments,
+    const std::vector<std::string>& tokens) {
   MacroInfo* macroInfo = new MacroInfo(
       name, arguments.empty() ? MacroInfo::NO_ARGS : MacroInfo::WITH_ARGS,
       fileId, startLine, startColumn, endLine, endColumn, arguments, tokens);
@@ -665,6 +669,7 @@ void PreprocessFile::recordMacro(std::string_view name, PathId fileId,
   }
   itr->second.push_back(macroInfo);
   m_compilationUnit->registerMacroInfo(name, macroInfo);
+  return macroInfo;
 }
 
 void PreprocessFile::checkMacroArguments_(
@@ -1065,9 +1070,12 @@ bool PreprocessFile::deleteMacro(std::string_view name,
   if (found == false) {
     MacroStorage::iterator itr = m_macros.find(name);
     if (itr != m_macros.end()) {
-      for (auto& macro : itr->second) {
-        delete macro;
-      }
+      // TODO(HS): Fix this memory leak!!
+      // IncludeFilInfo has pointers to these macros and
+      // deleting them here leads to crash.
+      // for (auto& macro : itr->second) {
+      //   delete macro;
+      // }
       m_macros.erase(itr);
       m_compilationUnit->deleteMacro(name);
       found = true;
@@ -1099,11 +1107,14 @@ bool PreprocessFile::deleteMacro(std::string_view name,
 
 void PreprocessFile::undefineAllMacros(std::set<PreprocessFile*>& visited) {
   if (m_debugMacro) std::cout << "PP CALL TO undefineAllMacros" << std::endl;
-  for (auto& [name, macros] : m_macros) {
-    for (auto& macro : macros) {
-      delete macro;
-    }
-  }
+  // TODO(HS): Fix this memory leak!!
+  // IncludeFilInfo has pointers to these macros and
+  // deleting them here leads to crash.
+  // for (auto& [name, macros] : m_macros) {
+  //   for (auto& macro : macros) {
+  //     delete macro;
+  //   }
+  // }
   m_macros.clear();
   m_compilationUnit->deleteAllMacros();
 

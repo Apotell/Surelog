@@ -1173,7 +1173,15 @@ UHDM::any *CompileHelper::compileSelectExpression(
             bit_select->VpiIndex(sel);
             bit_select->SetVpiParent(pexpr);
             sel->SetVpiParent(bit_select);
-            fC->populateCoreMembers(Bit_select, Bit_select, bit_select);
+            NodeId selectId = Bit_select;
+            while (selectId &&
+                   (fC->Type(selectId) != VObjectType::paBit_select) &&
+                   (fC->Type(selectId) != VObjectType::paConstant_select) &&
+                   (fC->Type(selectId) != VObjectType::paConstant_bit_select)) {
+              selectId = fC->Parent(selectId);
+            }
+            if (!selectId) selectId = Bit_select;
+            fC->populateCoreMembers(selectId, selectId, bit_select);
             result = bit_select;
           }
           lastBitExp = bitexp;
@@ -1256,7 +1264,7 @@ UHDM::any *CompileHelper::compileSelectExpression(
               if (sel->UhdmType() == uhdmhier_path) {
                 hier_path *p = (hier_path *)sel;
                 for (auto el : *p->Path_elems()) {
-                  el->SetVpiParent(path, true);
+                  el->Swap(p, path);
                   elems->push_back(el);
                 }
                 break;
@@ -1510,11 +1518,12 @@ UHDM::any *CompileHelper::compileExpression(
       UHDM::method_func_call *sys = s.MakeMethod_func_call();
       sys->VpiName("new");
       sys->SetVpiParent(pexpr);
-      NodeId argListNode = child;
-      UHDM::VectorOfany *arguments =
-          compileTfCallArguments(component, fC, argListNode, compileDesign,
-                                 reduce, sys, instance, muteErrors);
-      sys->Tf_call_args(arguments);
+      fC->populateCoreMembers(parent, parent, sys);
+      if (UHDM::VectorOfany *arguments =
+              compileTfCallArguments(component, fC, child, compileDesign,
+                                     reduce, sys, instance, muteErrors)) {
+        sys->Tf_call_args(arguments);
+      }
       result = sys;
       if (m_checkForLoops) {
         m_stackLevel--;
@@ -1623,6 +1632,7 @@ UHDM::any *CompileHelper::compileExpression(
           c->VpiDecompile("0");
           c->VpiSize(64);
           c->VpiConstType(vpiNullConst);
+          c->SetVpiParent(pexpr);
           result = c;
           break;
         }
@@ -1632,6 +1642,7 @@ UHDM::any *CompileHelper::compileExpression(
           c->VpiValue("STRING:$");
           c->VpiDecompile("$");
           c->VpiSize(1);
+          c->SetVpiParent(pexpr);
           result = c;
           break;
         }
@@ -1891,8 +1902,8 @@ UHDM::any *CompileHelper::compileExpression(
           break;
         }
         case VObjectType::paRandomize_call: {
-          result = compileRandomizeCall(component, fC, fC->Child(child),
-                                        compileDesign, pexpr);
+          result =
+              compileRandomizeCall(component, fC, child, compileDesign, pexpr);
           break;
         }
         case VObjectType::paPattern: {
@@ -2782,7 +2793,7 @@ UHDM::any *CompileHelper::compileExpression(
         case VObjectType::paZ:
         case VObjectType::paTime_literal:
         case VObjectType::slStringLiteral: {
-          if (result = compileConst(fC, child, s)) {
+          if ((result = compileConst(fC, child, s))) {
             result->SetVpiParent(pexpr);
           }
           break;
@@ -3230,6 +3241,7 @@ UHDM::any *CompileHelper::compileExpression(
           c->VpiDecompile("0");
           c->VpiSize(64);
           c->VpiConstType(vpiNullConst);
+          c->SetVpiParent(pexpr);
           result = c;
           break;
         }
@@ -3239,6 +3251,7 @@ UHDM::any *CompileHelper::compileExpression(
           c->VpiValue("STRING:$");
           c->VpiDecompile("$");
           c->VpiSize(1);
+          c->SetVpiParent(pexpr);
           result = c;
           break;
         }
@@ -3249,6 +3262,7 @@ UHDM::any *CompileHelper::compileExpression(
           c->VpiValue("STRING:this");
           c->VpiDecompile("this");
           c->VpiSize(4);
+          c->SetVpiParent(pexpr);
           result = c;
           break;
         }
@@ -3259,6 +3273,7 @@ UHDM::any *CompileHelper::compileExpression(
           c->VpiValue("STRING:super");
           c->VpiDecompile("super");
           c->VpiSize(5);
+          c->SetVpiParent(pexpr);
           result = c;
           break;
         }
@@ -3269,12 +3284,14 @@ UHDM::any *CompileHelper::compileExpression(
           c->VpiValue("STRING:this.super");
           c->VpiDecompile("this.super");
           c->VpiSize(10);
+          c->SetVpiParent(pexpr);
           result = c;
           break;
         }
         case VObjectType::paConstraint_block: {
           // Empty constraint block
           UHDM::constraint *cons = s.MakeConstraint();
+          cons->SetVpiParent(pexpr);
           result = cons;
           break;
         }
@@ -3316,7 +3333,7 @@ UHDM::any *CompileHelper::compileExpression(
         case VObjectType::paZ:
         case VObjectType::paTime_literal:
         case VObjectType::slStringLiteral: {
-          if (result = compileConst(fC, parent, s)) {
+          if ((result = compileConst(fC, parent, s))) {
             result->SetVpiParent(pexpr);
           }
           break;
@@ -3935,6 +3952,7 @@ std::vector<UHDM::range *> *CompileHelper::compileRanges(
           ref_typespec *assoc_tps_rt = s.MakeRef_typespec();
           assoc_tps_rt->SetVpiParent(rexpc);
           assoc_tps_rt->Actual_typespec(assoc_tps);
+          fC->populateCoreMembers(DataType, DataType, assoc_tps_rt);
           rexpc->Typespec(assoc_tps_rt);
         }
 
@@ -4480,6 +4498,7 @@ UHDM::any *CompileHelper::compileBits(
     c->VpiDecompile(std::to_string(bits));
     c->VpiConstType(vpiUIntConst);
     c->VpiSize(64);
+    c->SetVpiParent(pexpr);
     result = c;
   } else if ((m_reduce == Reduce::Yes) && (reduce == Reduce::Yes) && exp &&
              (!invalidValue)) {
@@ -4488,11 +4507,13 @@ UHDM::any *CompileHelper::compileBits(
     c->VpiDecompile(std::to_string(bits));
     c->VpiConstType(vpiUIntConst);
     c->VpiSize(64);
+    c->SetVpiParent(pexpr);
     result = c;
   } else if (sizeMode) {
     UHDM::sys_func_call *sys = s.MakeSys_func_call();
     sys->VpiName("$size");
     sys->SetVpiParent(pexpr);
+    fC->populateCoreMembers(List_of_arguments, List_of_arguments, sys);
     if (VectorOfany *arguments = compileTfCallArguments(
             component, fC, List_of_arguments, compileDesign, reduce, sys,
             instance, muteErrors)) {
@@ -4503,6 +4524,7 @@ UHDM::any *CompileHelper::compileBits(
     UHDM::sys_func_call *sys = s.MakeSys_func_call();
     sys->VpiName("$bits");
     sys->SetVpiParent(pexpr);
+    fC->populateCoreMembers(List_of_arguments, List_of_arguments, sys);
     if (VectorOfany *arguments = compileTfCallArguments(
             component, fC, List_of_arguments, compileDesign, reduce, sys,
             instance, muteErrors)) {
@@ -4897,10 +4919,11 @@ UHDM::any *CompileHelper::compileComplexFuncCall(
     NodeId List_of_arguments = fC->Sibling(Method);
     if (fC->Type(List_of_arguments) == VObjectType::paList_of_arguments) {
       method_func_call *fcall = s.MakeMethod_func_call();
-      expr *object =
-          (expr *)compileExpression(component, fC, Handle, compileDesign,
-                                    reduce, fcall, instance, muteErrors);
-      fcall->Prefix(object);
+      if (expr *object =
+              (expr *)compileExpression(component, fC, Handle, compileDesign,
+                                        reduce, fcall, instance, muteErrors)) {
+        fcall->Prefix(object);
+      }
       fcall->SetVpiParent(pexpr);
       const std::string_view methodName = fC->SymName(Method);
       fcall->VpiName(methodName);
@@ -4983,6 +5006,7 @@ UHDM::any *CompileHelper::compileComplexFuncCall(
       // TODO: this is a mockup
       constant *cvar = s.MakeConstant();
       cvar->VpiDecompile("this");
+      cvar->SetVpiParent(pexpr);
       result = cvar;
     }
   } else if (fC->Type(name) == VObjectType::paClass_scope) {
@@ -5370,9 +5394,8 @@ UHDM::any *CompileHelper::compileComplexFuncCall(
             NodeId randomize_call = fC->Child(method_child);
 
             if (fC->Type(randomize_call) == VObjectType::paRandomize_call) {
-              fcall =
-                  compileRandomizeCall(component, fC, fC->Child(randomize_call),
-                                       compileDesign, pexpr);
+              fcall = compileRandomizeCall(component, fC, randomize_call,
+                                           compileDesign, pexpr);
             } else {
               fcall = s.MakeMethod_func_call();
               fcall->VpiName(method_name);

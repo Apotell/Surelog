@@ -537,10 +537,13 @@ void PPCache::restoreIncludeFileInfos(
     // std::cout << "read sectionFile: " << sectionFileName << " s:" <<
     // incinfo->m_sectionStartLine() << " o:" << incinfo->m_originalLine() <<
     // " t:" << incinfo->m_type() << "\n";
+
+    // TODO(HS): Tie the macro definition to the macro instance. 2nd parameter
+    // to create the IncludeFileInfo shouldn't be nullptr.
     m_pp->addIncludeFileInfo(
         static_cast<IncludeFileInfo::Context>(
             sourceIncludeFileInfo.getContext()),
-        sourceIncludeFileInfo.getSectionStartLine(), sectionSymbolId,
+        nullptr, sourceIncludeFileInfo.getSectionStartLine(), sectionSymbolId,
         sectionFileId, sourceIncludeFileInfo.getOriginalStartLine(),
         sourceIncludeFileInfo.getOriginalStartColumn(),
         sourceIncludeFileInfo.getOriginalEndLine(),

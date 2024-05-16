@@ -363,7 +363,7 @@ UHDM::any* CompileHelper::compileVariable(
         ClassDefinition* cl = design->getClassDefinition(typeName);
         if (cl == nullptr) {
           std::string scopedName = StrCat(component->getName(), "::", typeName);
-          if (cl = design->getClassDefinition(scopedName)) {
+          if ((cl = design->getClassDefinition(scopedName))) {
             typespecName = scopedName;
           }
         }
@@ -372,7 +372,7 @@ UHDM::any* CompileHelper::compileVariable(
                   valuedcomponenti_cast<const DesignComponent*>(
                       component->getParentScope())) {
             std::string scopedName = StrCat(p->getName(), "::", typeName);
-            if (cl = design->getClassDefinition(scopedName)) {
+            if ((cl = design->getClassDefinition(scopedName))) {
               typespecName = scopedName;
             }
           }

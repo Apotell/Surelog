@@ -1283,10 +1283,6 @@ VectorOfany* CompileHelper::compileDataDeclaration(
       break;
     }
     case VObjectType::paType_declaration: {
-      if (pstmt) {
-        // Keep type declaration local to the current stmt
-        component = nullptr;
-      }
       /* const DataType* dt = */ compileTypeDef(
           component, fC, fC->Parent(nodeId), compileDesign, Reduce::No, pstmt);
       if (results == nullptr) {
@@ -1972,6 +1968,9 @@ bool CompileHelper::compileTask(DesignComponent* component,
     component->setTask_funcs(s.MakeTask_funcVec());
     task_funcs = component->getTask_funcs();
   }
+  UHDM::any* pscope = component->getUhdmScope();
+  if (pscope == nullptr)
+    pscope = compileDesign->getCompiler()->getDesign()->getUhdmDesign();
   NodeId nodeId =
       (fC->Type(id) == VObjectType::paTask_declaration) ? id : fC->Child(id);
   std::string name;
@@ -2003,6 +2002,7 @@ bool CompileHelper::compileTask(DesignComponent* component,
     // make placeholder first
     task = s.MakeTask();
     task->VpiName(name);
+    task->SetVpiParent(pscope);
     fC->populateCoreMembers(id, id, task);
     task_funcs->push_back(task);
     return true;
@@ -2257,19 +2257,19 @@ bool CompileHelper::compileClassConstructorDeclaration(
       mcall->VpiName("super.new");
       NodeId Args = fC->Sibling(Stmt);
       if (fC->Type(Args) == VObjectType::paList_of_arguments) {
-        VectorOfany* arguments =
-            compileTfCallArguments(component, fC, Args, compileDesign,
-                                   Reduce::No, mcall, nullptr, false);
-        mcall->Tf_call_args(arguments);
+        if (VectorOfany* arguments =
+                compileTfCallArguments(component, fC, Args, compileDesign,
+                                       Reduce::No, mcall, nullptr, false)) {
+          mcall->Tf_call_args(arguments);
+        }
         Stmt = fC->Sibling(Stmt);  // NOLINT(*.DeadStores)
       }
       func->Stmt(mcall);
+      fC->populateCoreMembers(Stmt, Args, mcall);
     } else {
-      NodeId Statement = fC->Child(Stmt);
-      if (Statement) {
-        VectorOfany* sts = compileStmt(component, fC, Statement, compileDesign,
-                                       Reduce::No, func);
-        if (sts) {
+      if (NodeId Statement = fC->Child(Stmt)) {
+        if (VectorOfany* sts = compileStmt(component, fC, Statement,
+                                           compileDesign, Reduce::No, func)) {
           any* st = sts->front();
           st->SetVpiParent(func);
           func->Stmt(st);
@@ -2286,6 +2286,8 @@ bool CompileHelper::compileClassConstructorDeclaration(
     VectorOfany* stmts = s.MakeAnyVec();
     begin->Stmts(stmts);
     Stmt = fC->Sibling(Tf_port_list);
+    const NodeId firstStmtId = Stmt;
+    NodeId lastStmtId = Stmt;
     while (Stmt) {
       if (fC->Type(Stmt) == VObjectType::paSuper_dot_new) {
         UHDM::method_func_call* mcall = s.MakeMethod_func_call();
@@ -2293,28 +2295,28 @@ bool CompileHelper::compileClassConstructorDeclaration(
         mcall->VpiName("super.new");
         NodeId Args = fC->Sibling(Stmt);
         if (fC->Type(Args) == VObjectType::paList_of_arguments) {
-          VectorOfany* arguments =
-              compileTfCallArguments(component, fC, Args, compileDesign,
-                                     Reduce::No, mcall, nullptr, false);
-          mcall->Tf_call_args(arguments);
+          if (VectorOfany* arguments =
+                  compileTfCallArguments(component, fC, Args, compileDesign,
+                                         Reduce::No, mcall, nullptr, false)) {
+            mcall->Tf_call_args(arguments);
+          }
           Stmt = fC->Sibling(Stmt);
         }
+        fC->populateCoreMembers(Stmt, Args, mcall);
         stmts->push_back(mcall);
         mcall->SetVpiParent(begin);
       } else {
-        NodeId Statement = fC->Child(Stmt);
-        if (Statement) {
+        if (NodeId Statement = fC->Child(Stmt)) {
           if (VectorOfany* sts = compileStmt(
                   component, fC, Statement, compileDesign, Reduce::No, begin)) {
-            for (any* st : *sts) {
-              stmts->push_back(st);
-              st->SetVpiParent(begin);
-            }
+            for (any* st : *sts) stmts->push_back(st);
           }
         }
       }
+      lastStmtId = Stmt;
       Stmt = fC->Sibling(Stmt);
     }
+    fC->populateCoreMembers(firstStmtId, lastStmtId, begin);
   }
 
   return true;
@@ -2393,8 +2395,10 @@ bool CompileHelper::compileFunction(DesignComponent* component,
   if (constructor) {
     UHDM::class_var* var = s.MakeClass_var();
     var->SetVpiParent(func);
+    fC->populateCoreMembers(func_decl, func_decl, var);
     func->Return(var);
     UHDM::class_typespec* tps = s.MakeClass_typespec();
+    tps->SetVpiParent(func);
     ref_typespec* tpsRef = s.MakeRef_typespec();
     tpsRef->SetVpiParent(var);
     tpsRef->Actual_typespec(tps);
@@ -3155,12 +3159,19 @@ UHDM::any* CompileHelper::bindVariable(DesignComponent* component,
 }
 
 UHDM::method_func_call* CompileHelper::compileRandomizeCall(
-    DesignComponent* component, const FileContent* fC, NodeId Identifier_list,
+    DesignComponent* component, const FileContent* fC, NodeId id,
     CompileDesign* compileDesign, UHDM::any* pexpr) {
   UHDM::Serializer& s = compileDesign->getSerializer();
   method_func_call* func_call = s.MakeMethod_func_call();
   method_func_call* result = func_call;
   func_call->VpiName("randomize");
+  fC->populateCoreMembers(id, id, func_call);
+
+  NodeId Identifier_list = id;
+  if (fC->Type(id) == VObjectType::paRandomize_call) {
+    Identifier_list = fC->Child(id);
+  }
+
   NodeId With;
   if (fC->Type(Identifier_list) == VObjectType::paIdentifier_list) {
     With = fC->Sibling(Identifier_list);
@@ -3169,10 +3180,11 @@ UHDM::method_func_call* CompileHelper::compileRandomizeCall(
   }
   NodeId Constraint_block = fC->Sibling(With);
   if (fC->Type(Identifier_list) == VObjectType::paIdentifier_list) {
-    VectorOfany* arguments =
-        compileTfCallArguments(component, fC, Identifier_list, compileDesign,
-                               Reduce::No, func_call, nullptr, false);
-    func_call->Tf_call_args(arguments);
+    if (VectorOfany* arguments = compileTfCallArguments(
+            component, fC, Identifier_list, compileDesign, Reduce::No,
+            func_call, nullptr, false)) {
+      func_call->Tf_call_args(arguments);
+    }
   }
 
   if (Constraint_block) {
@@ -3193,6 +3205,7 @@ UHDM::any* CompileHelper::compileConstraintBlock(DesignComponent* component,
   UHDM::any* result = nullptr;
   UHDM::constraint* cons = s.MakeConstraint();
   cons->SetVpiParent(pexpr);
+  fC->populateCoreMembers(nodeId, nodeId, cons);
   result = cons;
   return result;
 }

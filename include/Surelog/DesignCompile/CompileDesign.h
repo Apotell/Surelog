@@ -62,7 +62,7 @@ class CompileDesign {
   void unlockSerializer();
 
   Compiler* getCompiler() const { return m_compiler; }
-  UHDM::VectorOfinclude_file_info* getFileInfo() { return m_fileInfo; }
+  UHDM::VectorOfsource_file* getUhdmSourceFiles() { return m_uhdmSourcefiles; }
   std::map<const UHDM::typespec*, const UHDM::typespec*>& getSwapedObjects() {
     return m_typespecSwapMap;
   }
@@ -81,7 +81,7 @@ class CompileDesign {
   Compiler* const m_compiler;
   std::vector<SymbolTable*> m_symbolTables;
   std::vector<ErrorContainer*> m_errorContainers;
-  UHDM::VectorOfinclude_file_info* m_fileInfo = nullptr;
+  UHDM::VectorOfsource_file* m_uhdmSourcefiles = nullptr;
   std::map<const UHDM::typespec*, const UHDM::typespec*> m_typespecSwapMap;
 };
 

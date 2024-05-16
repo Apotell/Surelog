@@ -38,11 +38,18 @@
 #include <Surelog/SourceCompile/CompilationUnit.h>
 #include <Surelog/SourceCompile/CompileSourceFile.h>
 #include <Surelog/SourceCompile/Compiler.h>
+#include <Surelog/SourceCompile/MacroInfo.h>
 #include <Surelog/SourceCompile/ParseFile.h>
 #include <Surelog/SourceCompile/SymbolTable.h>
 #include <Surelog/Utils/ContainerUtils.h>
 #include <Surelog/Utils/StringUtils.h>
 #include <Surelog/Utils/Timer.h>
+
+// UHDM
+#include <uhdm/design.h>
+#include <uhdm/preproc_macro_definition.h>
+#include <uhdm/preproc_macro_instance.h>
+#include <uhdm/source_file.h>
 
 #include <climits>
 #include <filesystem>
@@ -1007,6 +1014,84 @@ bool Compiler::compileFileSet_(CompileSourceFile::Action action,
   return true;
 }
 
+void Compiler::writeUhdmSourceFiles() {
+  FileSystem* const fileSystem = FileSystem::getInstance();
+  UHDM::design* const design = m_design->getUhdmDesign();
+  UHDM::VectorOfsource_file* const sourcefiles = design->Source_files(true);
+  for (const CompileSourceFile* sourceFile : m_compilers) {
+    const PreprocessFile* const pf = sourceFile->getPreprocessor();
+
+    UHDM::source_file* const src = m_serializer.MakeSource_file();
+    src->SetVpiParent(design);
+    src->VpiFile(fileSystem->toPath(pf->getRawFileId()));
+    sourcefiles->emplace_back(src);
+
+    // TODO(HS): Embedded macros i.e. macro within a macro
+    // TODO(HS): Macro definitions should include arguments & tokens
+    // TODO(HS): Macro instances should include arguments & compiled text
+    // TODO(HS): Macro instances should also include the start/end
+    // position/column where the compiled text goes in source file.
+
+    const std::vector<IncludeFileInfo>& includeFileInfos =
+        pf->getIncludeFileInfo();
+    std::vector<UHDM::source_file*> stack({src});
+    std::map<const MacroInfo*, UHDM::preproc_macro_definition*> defMap;
+    for (const IncludeFileInfo& ifi : includeFileInfos) {
+      const IncludeFileInfo& cifi = includeFileInfos[ifi.m_indexClosing];
+      if (ifi.m_context == IncludeFileInfo::Context::INCLUDE) {
+        if (ifi.m_action == IncludeFileInfo::Action::PUSH) {
+          UHDM::source_file* const incl = m_serializer.MakeSource_file();
+          incl->SetVpiParent(stack.back());
+          incl->VpiName(m_symbolTable->getSymbol(ifi.m_sectionSymbolId));
+          incl->VpiFile(fileSystem->toPath(ifi.m_sectionFileId));
+          incl->VpiLineNo(cifi.m_sectionStartLine);
+          incl->VpiColumnNo(ifi.m_originalStartColumn);
+          incl->VpiEndLineNo(
+              cifi.m_sectionStartLine +
+              (cifi.m_originalEndLine - cifi.m_originalStartLine));
+          incl->VpiEndColumnNo(ifi.m_originalEndColumn);
+          stack.back()->Includes(true)->emplace_back(incl);
+          stack.emplace_back(incl);
+        } else if (ifi.m_action == IncludeFileInfo::Action::POP) {
+          if (!stack.empty()) stack.pop_back();
+        }
+      }
+
+      for (MacroInfo* mi : ifi.m_macroDefinitions) {
+        UHDM::preproc_macro_definition* const pmd =
+            m_serializer.MakePreproc_macro_definition();
+        pmd->VpiName(mi->m_name);
+        pmd->SetVpiParent(stack.back());
+        pmd->VpiFile(fileSystem->toPath(mi->m_fileId));
+        pmd->VpiLineNo(mi->m_startLine);
+        pmd->VpiColumnNo(mi->m_startColumn);
+        pmd->VpiEndLineNo(mi->m_endLine);
+        pmd->VpiEndColumnNo(mi->m_endColumn);
+        stack.back()->Preproc_macro_definitions(true)->emplace_back(pmd);
+        defMap.emplace(mi, pmd);
+      }
+
+      if ((ifi.m_context == IncludeFileInfo::Context::MACRO) &&
+          (ifi.m_action == IncludeFileInfo::Action::PUSH)) {
+        UHDM::preproc_macro_instance* const pmi =
+            m_serializer.MakePreproc_macro_instance();
+        pmi->SetVpiParent(stack.back());
+        pmi->VpiName(m_symbolTable->getSymbol(ifi.m_sectionSymbolId));
+        pmi->VpiFile(fileSystem->toPath(ifi.m_sectionFileId));
+        pmi->VpiLineNo(cifi.m_sectionStartLine);
+        pmi->VpiColumnNo(ifi.m_originalStartColumn);
+        pmi->VpiEndLineNo(cifi.m_sectionStartLine +
+                          (cifi.m_originalEndLine - cifi.m_originalStartLine));
+        pmi->VpiEndColumnNo(ifi.m_originalEndColumn);
+        if (auto it = defMap.find(ifi.m_macroInstance); it != defMap.cend()) {
+          pmi->Preproc_macro_definition(it->second);
+        }
+        stack.back()->Preproc_macro_instances(true)->emplace_back(pmi);
+      }
+    }
+  }
+}
+
 bool Compiler::compile() {
   FileSystem* const fileSystem = FileSystem::getInstance();
   std::string profile;
@@ -1046,6 +1131,9 @@ bool Compiler::compile() {
     profile += msg;
     tmr.reset();
   }
+
+  // Build source file info into the design before it gets wiped out for parsing
+  writeUhdmSourceFiles();
 
   // Parse
   bool parserInitialized = false;

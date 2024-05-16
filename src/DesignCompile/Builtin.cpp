@@ -370,7 +370,6 @@ void Builtin::addBuiltinClasses() {
       fC1->sl_collect_all(fC1->getRootNode(), VObjectType::paClass_declaration);
   m_compileDesign->getCompiler()->getDesign()->addFileContent(fC1->getFileId(),
                                                               fC1);
-  const std::string_view libName = fC1->getLibrary()->getName();
   for (const auto& classId : classes) {
     NodeId stId = fC1->sl_collect(classId, VObjectType::slStringConst,
                                   VObjectType::paAttr_spec);

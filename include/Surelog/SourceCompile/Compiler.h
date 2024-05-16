@@ -114,6 +114,7 @@ class Compiler {
   bool ppinit_();
   bool createFileList_();
   bool createMultiProcessPreProcessor_();
+  void writeUhdmSourceFiles();
   bool createMultiProcessParser_();
   bool parseinit_();
   bool pythoninit_();

@@ -3414,20 +3414,25 @@ class RoundTripTracer final : public UHDM::UhdmListener {
     // Test file not available.
   }
 
-  void enterInclude_file_info(
-      const UHDM::include_file_info *const object) final {
+  void enterSource_file(const UHDM::source_file *const object) final {
     if (visited.find(object) != visited.end()) return;
 
     constexpr std::string_view keyword = "`include";
 
     const std::filesystem::path &filepath = object->VpiFile();
 
-    std::string text;
-    text.assign(keyword).append(" \"");
-    text.append(object->VpiIncludedFile()).append("\"");
+    if (UHDM::VectorOfsource_file *includes = object->Includes()) {
+      for (const UHDM::source_file *included : *includes) {
+        std::string text;
+        text.assign(keyword)
+            .append(" \"")
+            .append(included->VpiName())
+            .append("\"");
 
-    insert(filepath, object->VpiLineNo(),
-           object->VpiColumnNo() - keyword.length() - 1, text);
+        insert(filepath, object->VpiLineNo(),
+               object->VpiColumnNo() - keyword.length() - 1, text);
+      }
+    }
   }
 
   void enterDesign(const UHDM::design *const object) final {}

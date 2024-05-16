@@ -44,12 +44,13 @@
 #include <Surelog/Library/Library.h>
 #include <Surelog/Package/Package.h>
 #include <Surelog/SourceCompile/Compiler.h>
+#include <Surelog/SourceCompile/MacroInfo.h>
 #include <Surelog/SourceCompile/SymbolTable.h>
 #include <Surelog/Testbench/ClassDefinition.h>
 #include <Surelog/Testbench/Program.h>
+#include <Surelog/Utils/ContainerUtils.h>
 
 // UHDM
-#include <uhdm/include_file_info.h>
 #include <uhdm/param_assign.h>
 #include <uhdm/vpi_visitor.h>
 
@@ -284,7 +285,6 @@ bool CompileDesign::elaborate() {
 
 bool CompileDesign::compilation_() {
   Design* const design = m_compiler->getDesign();
-  UHDM::Serializer& serializer = m_compiler->getSerializer();
 
   auto& all_files = design->getAllFileContents();
 
@@ -308,7 +308,7 @@ bool CompileDesign::compilation_() {
     index++;
   } while (index < maxThreadCount);
 
-  for (auto file : all_files) {
+  for (auto& file : all_files) {
     if (m_compiler->isLibraryFile(file.first)) {
       file.second->setLibraryCellFile();
     }
@@ -345,28 +345,6 @@ bool CompileDesign::compilation_() {
   compileMT_<Program, ProgramNameProgramDefinitionMap, FunctorCompileProgram>(
       m_compiler->getDesign()->getProgramDefinitions(), maxThreadCount);
 
-  // Compile Include file info
-  FileSystem* const fileSystem = FileSystem::getInstance();
-  m_fileInfo = serializer.MakeInclude_file_infoVec();
-  for (const CompileSourceFile* sourceFile :
-       getCompiler()->getCompileSourceFiles()) {
-    const PreprocessFile* const pf = sourceFile->getPreprocessor();
-    for (const IncludeFileInfo& ifi : pf->getIncludeFileInfo()) {
-      if ((ifi.m_context == IncludeFileInfo::Context::INCLUDE) &&
-          (ifi.m_action == IncludeFileInfo::Action::PUSH)) {
-        UHDM::include_file_info* const pifi =
-            serializer.MakeInclude_file_info();
-        pifi->VpiFile(fileSystem->toPath(pf->getRawFileId()));
-        pifi->VpiIncludedFile(fileSystem->toPath(ifi.m_sectionFileId));
-        pifi->VpiLineNo(ifi.m_originalStartLine);
-        pifi->VpiColumnNo(ifi.m_originalStartColumn);
-        pifi->VpiEndLineNo(ifi.m_originalEndLine);
-        pifi->VpiEndColumnNo(ifi.m_originalEndColumn);
-        m_fileInfo->push_back(pifi);
-      }
-    }
-  }
-
   // Compile classes
   compileMT_<ClassDefinition, ClassNameClassDefinitionMultiMap,
              FunctorCompileClass>(
@@ -383,12 +361,11 @@ bool CompileDesign::compilation_() {
 
   m_compiler->getDesign()->orderPackages();
 
-  uint32_t size = m_symbolTables.size();
-  for (uint32_t i = 0; i < size; i++) {
-    m_compiler->getErrorContainer()->appendErrors(*m_errorContainers[i]);
-    delete m_symbolTables[i];
-    delete m_errorContainers[i];
+  for (ErrorContainer* errors : m_errorContainers) {
+    m_compiler->getErrorContainer()->appendErrors(*errors);
   }
+  DeleteContainerPointersAndClear(&m_symbolTables);
+  DeleteContainerPointersAndClear(&m_errorContainers);
   return true;
 }
 

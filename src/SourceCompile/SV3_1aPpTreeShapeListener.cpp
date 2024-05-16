@@ -285,6 +285,7 @@ void SV3_1aPpTreeShapeListener::enterInclude_directive(
     uint32_t lineSum = m_pp->getSumLineCount() + 1;
     openingIndex = m_pp->getSourceFile()->addIncludeFileInfo(
         /* context */ IncludeFileInfo::Context::INCLUDE,
+        /* macroDefinition */ nullptr,
         /* sectionStartLine*/ 1, /* sectionSymbolId */ symbolId,
         /* sectionFileId */ fileId,
         /* originalStartLine */ lineSum,
@@ -349,6 +350,7 @@ void SV3_1aPpTreeShapeListener::enterInclude_directive(
     lineSum = m_pp->getSumLineCount() + 1;
     int32_t closingIndex = m_pp->getSourceFile()->addIncludeFileInfo(
         /* context */ IncludeFileInfo::Context::INCLUDE,
+        /* macroDefinition */ nullptr,
         /* sectionStartLine */ startLineCol.first,
         /* sectionSymbolId */ BadSymbolId,
         /* sectionFileId */ m_pp->getFileId(startLineCol.first),
@@ -420,11 +422,16 @@ void SV3_1aPpTreeShapeListener::enterSimple_no_args_macro_definition(
     }
 
     checkMultiplyDefinedMacro(macroName, ctx);
-    m_pp->recordMacro(macroName, m_pp->getLineNb(startLineCol.first),
-                      startLineCol.second,
-                      m_pp->getLineNb(startLineCol.first) +
-                          (endLineCol.first - startLineCol.first),
-                      endLineCol.second, "", body_tokens);
+    if (MacroInfo *const macroInfo = m_pp->recordMacro(
+            macroName, m_pp->getLineNb(startLineCol.first), startLineCol.second,
+            m_pp->getLineNb(startLineCol.first) +
+                (endLineCol.first - startLineCol.first),
+            endLineCol.second, "", body_tokens)) {
+      m_pp->getSourceFile()
+          ->getIncludeFileInfo(
+              m_pp->getSourceFile()->getIncludeFileInfo().size() - 1)
+          .m_macroDefinitions.emplace_back(macroInfo);
+    }
     addLineFiller(ctx);
   } else {
     addLineFiller(ctx);
@@ -451,15 +458,10 @@ void SV3_1aPpTreeShapeListener::enterMacroInstanceWithArgs(
     std::string macroName;
     if (ctx->Macro_identifier()) {
       macroName = ctx->Macro_identifier()->getText();
-      startLineCol = ParseUtils::getLineColumn(ctx->Macro_identifier());
-      endLineCol = ParseUtils::getEndLineColumn(ctx->Macro_identifier());
     } else if (ctx->Macro_Escaped_identifier()) {
       macroName = ctx->Macro_Escaped_identifier()->getText();
       macroName.erase(0, 1);
       macroName = StringUtils::rtrim(macroName);
-      startLineCol = ParseUtils::getLineColumn(ctx->Macro_Escaped_identifier());
-      endLineCol =
-          ParseUtils::getEndLineColumn(ctx->Macro_Escaped_identifier());
     }
     std::string macroArgs = ctx->macro_actual_args()->getText();
     int32_t nbCRinArgs = std::count(macroArgs.begin(), macroArgs.end(), '\n');
@@ -478,10 +480,17 @@ void SV3_1aPpTreeShapeListener::enterMacroInstanceWithArgs(
     if (macroInf) {
       uint32_t lineSum = m_pp->getSumLineCount() + 1;
       openingIndex = m_pp->getSourceFile()->addIncludeFileInfo(
-          IncludeFileInfo::Context::MACRO, macroInf->m_startLine, BadSymbolId,
-          macroInf->m_fileId, lineSum, startLineCol.second,
-          lineSum + (endLineCol.first - startLineCol.first), endLineCol.second,
-          IncludeFileInfo::Action::PUSH);
+          /* context */ IncludeFileInfo::Context::MACRO,
+          /* macroInfo */ macroInf,
+          /* sectionStartLine */ macroInf->m_startLine,
+          /* sectionSymbolId */ BadSymbolId,
+          /* sectionFileId */ macroInf->m_fileId,
+          /* originalStartLine */ lineSum,
+          /* originalStartColumn */ startLineCol.second,
+          /* originalEndLine */ lineSum +
+              (endLineCol.first - startLineCol.first),
+          /* originalEndColumn */ endLineCol.second,
+          /* type */ IncludeFileInfo::Action::PUSH);
       macroBody = m_pp->getMacro(
           macroName, actualArgs, m_pp, startLineCol.first,
           m_pp->getSourceFile()->m_loopChecker, m_pp->m_instructions,
@@ -553,14 +562,14 @@ void SV3_1aPpTreeShapeListener::enterMacroInstanceWithArgs(
         if (nbCRinArgs) lineSum -= nbCRinArgs;
 
         closingIndex = m_pp->getSourceFile()->addIncludeFileInfo(
-            IncludeFileInfo::Context::MACRO, origLine, BadSymbolId, fileId,
-            lineSum, startLineCol.second,
+            IncludeFileInfo::Context::MACRO, macroInf, origLine, BadSymbolId,
+            fileId, lineSum, startLineCol.second,
             lineSum + (endLineCol.first - startLineCol.first),
             endLineCol.second, IncludeFileInfo::Action::POP, openingIndex, 0);
       } else {
         closingIndex = m_pp->getSourceFile()->addIncludeFileInfo(
-            IncludeFileInfo::Context::MACRO, origLine + nbCRinArgs, BadSymbolId,
-            fileId, lineSum, startLineCol.second,
+            IncludeFileInfo::Context::MACRO, macroInf, origLine + nbCRinArgs,
+            BadSymbolId, fileId, lineSum, startLineCol.second,
             lineSum + (endLineCol.first - startLineCol.first),
             endLineCol.second, IncludeFileInfo::Action::POP, openingIndex, 0);
       }
@@ -602,15 +611,10 @@ void SV3_1aPpTreeShapeListener::enterMacroInstanceNoArgs(
         ParseUtils::getEndLineColumn(m_pp->getTokenStream(), ctx);
     if (ctx->Macro_identifier()) {
       macroName = ctx->Macro_identifier()->getText();
-      startLineCol = ParseUtils::getLineColumn(ctx->Macro_identifier());
-      endLineCol = ParseUtils::getEndLineColumn(ctx->Macro_identifier());
     } else if (ctx->Macro_Escaped_identifier()) {
       macroName = ctx->Macro_Escaped_identifier()->getText();
       macroName.erase(0, 1);
       macroName = StringUtils::rtrim(macroName);
-      startLineCol = ParseUtils::getLineColumn(ctx->Macro_Escaped_identifier());
-      endLineCol =
-          ParseUtils::getEndLineColumn(ctx->Macro_Escaped_identifier());
     }
     macroName.erase(macroName.begin());
     std::vector<std::string> args;
@@ -633,8 +637,8 @@ void SV3_1aPpTreeShapeListener::enterMacroInstanceNoArgs(
 
       uint32_t lineSum = m_pp->getSumLineCount() + 1;
       openingIndex = m_pp->getSourceFile()->addIncludeFileInfo(
-          IncludeFileInfo::Context::MACRO, macroInf->m_startLine, BadSymbolId,
-          macroInf->m_fileId, lineSum, startLineCol.second,
+          IncludeFileInfo::Context::MACRO, macroInf, macroInf->m_startLine,
+          BadSymbolId, macroInf->m_fileId, lineSum, startLineCol.second,
           lineSum + (endLineCol.first - startLineCol.first), endLineCol.second,
           IncludeFileInfo::Action::PUSH);
       macroBody = m_pp->getMacro(macroName, args, m_pp, startLineCol.first,
@@ -700,8 +704,8 @@ void SV3_1aPpTreeShapeListener::enterMacroInstanceNoArgs(
       if (nbCRinMacroBody) {
         uint32_t lineSum = m_pp->getSumLineCount() + 1;
         int32_t closingIndex = m_pp->getSourceFile()->addIncludeFileInfo(
-            IncludeFileInfo::Context::MACRO, line, BadSymbolId, fileId, lineSum,
-            startLineCol.first,
+            IncludeFileInfo::Context::MACRO, macroInf, line, BadSymbolId,
+            fileId, lineSum, startLineCol.first,
             lineSum + (endLineCol.first - startLineCol.first),
             endLineCol.second, IncludeFileInfo::Action::POP, openingIndex, 0);
         if (openingIndex >= 0) {
@@ -870,11 +874,17 @@ void SV3_1aPpTreeShapeListener::exitDefine_directive(
           ParseUtils::getEndLineColumn(identifier);
       checkMultiplyDefinedMacro(macroName, ctx);
       std::vector<std::string> body_tokens;
-      m_pp->recordMacro(macroName, m_pp->getLineNb(startLineCol.first),
-                        startLineCol.second,
-                        m_pp->getLineNb(startLineCol.first) +
-                            (endLineCol.first - startLineCol.first),
-                        endLineCol.second, "", body_tokens);
+      if (MacroInfo *const macroInfo =
+              m_pp->recordMacro(macroName, m_pp->getLineNb(startLineCol.first),
+                                startLineCol.second,
+                                m_pp->getLineNb(startLineCol.first) +
+                                    (endLineCol.first - startLineCol.first),
+                                endLineCol.second, "", body_tokens)) {
+        m_pp->getSourceFile()
+            ->getIncludeFileInfo(
+                m_pp->getSourceFile()->getIncludeFileInfo().size() - 1)
+            .m_macroDefinitions.emplace_back(macroInfo);
+      }
       addLineFiller(ctx);
     }
   } else {
@@ -1471,11 +1481,16 @@ void SV3_1aPpTreeShapeListener::enterMultiline_no_args_macro_definition(
 
     checkMultiplyDefinedMacro(macroName, ctx);
 
-    m_pp->recordMacro(macroName, m_pp->getLineNb(startLineCol.first),
-                      startLineCol.second,
-                      m_pp->getLineNb(startLineCol.first) +
-                          (endLineCol.first - startLineCol.first),
-                      endLineCol.second, "", body_tokens);
+    if (MacroInfo *const macroInfo = m_pp->recordMacro(
+            macroName, m_pp->getLineNb(startLineCol.first), startLineCol.second,
+            m_pp->getLineNb(startLineCol.first) +
+                (endLineCol.first - startLineCol.first),
+            endLineCol.second, "", body_tokens)) {
+      m_pp->getSourceFile()
+          ->getIncludeFileInfo(
+              m_pp->getSourceFile()->getIncludeFileInfo().size() - 1)
+          .m_macroDefinitions.emplace_back(macroInfo);
+    }
     addLineFiller(ctx);
   } else {
     addLineFiller(ctx);
@@ -1523,11 +1538,16 @@ void SV3_1aPpTreeShapeListener::enterMultiline_args_macro_definition(
         ParseUtils::getEndLineColumn(identifier);
 
     checkMultiplyDefinedMacro(macroName, ctx);
-    m_pp->recordMacro(macroName, m_pp->getLineNb(startLineCol.first),
-                      startLineCol.second,
-                      m_pp->getLineNb(startLineCol.first) +
-                          (endLineCol.first - startLineCol.first),
-                      endLineCol.second, arguments, body_tokens);
+    if (MacroInfo *const macroInfo = m_pp->recordMacro(
+            macroName, m_pp->getLineNb(startLineCol.first), startLineCol.second,
+            m_pp->getLineNb(startLineCol.first) +
+                (endLineCol.first - startLineCol.first),
+            endLineCol.second, arguments, body_tokens)) {
+      m_pp->getSourceFile()
+          ->getIncludeFileInfo(
+              m_pp->getSourceFile()->getIncludeFileInfo().size() - 1)
+          .m_macroDefinitions.emplace_back(macroInfo);
+    }
     addLineFiller(ctx);
   } else {
     addLineFiller(ctx);
@@ -1575,11 +1595,16 @@ void SV3_1aPpTreeShapeListener::enterSimple_args_macro_definition(
     ParseUtils::LineColumn endLineCol =
         ParseUtils::getEndLineColumn(identifier);
     checkMultiplyDefinedMacro(macroName, ctx);
-    m_pp->recordMacro(macroName, m_pp->getLineNb(startLineCol.first),
-                      startLineCol.second,
-                      m_pp->getLineNb(startLineCol.first) +
-                          (endLineCol.first - startLineCol.first),
-                      endLineCol.second, arguments, body_tokens);
+    if (MacroInfo *const macroInfo = m_pp->recordMacro(
+            macroName, m_pp->getLineNb(startLineCol.first), startLineCol.second,
+            m_pp->getLineNb(startLineCol.first) +
+                (endLineCol.first - startLineCol.first),
+            endLineCol.second, arguments, body_tokens)) {
+      m_pp->getSourceFile()
+          ->getIncludeFileInfo(
+              m_pp->getSourceFile()->getIncludeFileInfo().size() - 1)
+          .m_macroDefinitions.emplace_back(macroInfo);
+    }
     addLineFiller(ctx);
   } else {
     addLineFiller(ctx);

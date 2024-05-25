@@ -37,17 +37,19 @@ struct Macro {
 }
 
 struct IncludeFileInfo {
-  context             @0  :UInt32;
-  sectionStartLine    @1  :UInt32;
-  sectionSymbolId     @2  :UInt64;
-  sectionFileId       @3  :UInt64;
-  originalStartLine   @4  :UInt32;
-  originalStartColumn @5  :UInt32;
-  originalEndLine     @6  :UInt32;
-  originalEndColumn   @7  :UInt32;
-  action              @8  :UInt32;  # 1 or 2, push or pop
-  indexOpening        @9  :Int32;
-  indexClosing        @10 :Int32;
+  action             @0  :UInt16;  # 1 or 2, push or pop
+  context            @1  :UInt16;
+  sectionFileId      @2  :UInt64;
+  sectionLine        @3  :UInt32;
+  sourceLine         @4  :UInt32;
+  sectionColumn      @5  :UInt16;
+  sourceColumn       @6  :UInt16;
+  symbolId           @7  :UInt32;
+  symbolStartLine    @8  :UInt32;
+  symbolEndLine      @9  :UInt32;
+  symbolStartColumn  @10 :UInt16;
+  symbolEndColumn    @11 :UInt16;
+  indexOpposite      @12 :Int32;
 }
 
 struct LineTranslationInfo {

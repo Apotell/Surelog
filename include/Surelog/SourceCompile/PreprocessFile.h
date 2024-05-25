@@ -82,30 +82,35 @@ class PreprocessFile final {
                  CompilationUnit* compilationUnit, Library* library,
                  PreprocessFile* includer, uint32_t includerLine,
                  std::string_view macroBody = "", MacroInfo* = nullptr,
+                 PathId embeddedMacroCallFile = BadPathId,
                  uint32_t embeddedMacroCallLine = 0,
-                 PathId embeddedMacroCallFile = BadPathId);
+                 uint16_t embeddedMacroCallColumn = 0);
   ~PreprocessFile();
 
   /* Main function */
   bool preprocess();
-  std::string getPreProcessedFileContent();
+  const std::string& getPreProcessedFileContent() const;
 
   /* Macro manipulations */
-  void recordMacro(std::string_view name, uint32_t startLine,
-                   uint16_t startColumn, uint32_t endLine, uint16_t endColumn,
-                   std::string_view formal_arguments,
-                   const std::vector<std::string>& body);
-  void recordMacro(std::string_view name, PathId fileId, uint32_t startLine,
-                   uint16_t startColumn, uint32_t endLine, uint16_t endColumn,
-                   const std::vector<std::string>& formal_arguments,
-                   const std::vector<std::string>& body);
+  MacroInfo* recordMacro(std::string_view name, uint32_t startLine,
+                         uint16_t startColumn, uint32_t endLine,
+                         uint16_t endColumn, uint16_t bodyStartColumn,
+                         std::string_view formal_arguments,
+                         const std::vector<std::string>& body);
+  MacroInfo* recordMacro(std::string_view name, PathId fileId,
+                         uint32_t startLine, uint16_t startColumn,
+                         uint32_t endLine, uint16_t endColumn,
+                         uint16_t bodyStartColumn,
+                         const std::vector<std::string>& formal_arguments,
+                         const std::vector<std::string>& body);
   std::string getMacro(std::string_view name,
                        std::vector<std::string>& actual_arguments,
                        PreprocessFile* callingFile, uint32_t callingLine,
                        LoopCheck& loopChecker,
                        SpecialInstructions& instructions,
+                       PathId embeddedMacroCallFile = BadPathId,
                        uint32_t embeddedMacroCallLine = 0,
-                       PathId embeddedMacroCallFile = BadPathId);
+                       uint16_t embeddedMacroCallColumn = 0);
   bool deleteMacro(std::string_view name, std::set<PreprocessFile*>& visited);
   void undefineAllMacros(std::set<PreprocessFile*>& visited);
   bool isMacroBody() const { return !m_macroBody.empty(); }
@@ -134,18 +139,19 @@ class PreprocessFile final {
   uint32_t getIncluderLine() const { return m_includerLine; }
   size_t getLineCount() const { return m_lineCount; }
   void setLineCount(size_t count) { m_lineCount = count; }
-  uint32_t getSumLineCount();
+  std::pair<uint32_t, uint16_t> getCurrentPosition() const;
   const std::vector<IncludeFileInfo>& getIncludeFileInfo() const {
     return m_includeFileInfo;
   }
-  int32_t addIncludeFileInfo(
-      IncludeFileInfo::Context context, uint32_t sectionStartLine,
-      SymbolId sectionSymbolId, PathId sectionFileId,
-      uint32_t originalStartLine, uint32_t originalStartColumn,
-      uint32_t originalEndLine, uint32_t originalEndColumn,
-      IncludeFileInfo::Action type, int32_t indexOpening = 0,
-      int32_t indexClosing = 0);
-  void resetIncludeFileInfo();
+  int32_t addIncludeFileInfo(IncludeFileInfo::Context context,
+                             IncludeFileInfo::Action action,
+                             const MacroInfo* macroDefinition,
+                             PathId sectionFileId, uint32_t sectionLine,
+                             uint16_t sectionColumn, uint32_t sourceLine,
+                             uint16_t sourceColumn, SymbolId symbolId,
+                             uint32_t symbolStartLine,
+                             uint16_t symbolStartColumn, uint32_t symbolEndLine,
+                             uint16_t symbolEndColumn, int32_t indexOpposite = -1);
   void clearIncludeFileInfo();
   IncludeFileInfo& getIncludeFileInfo(int32_t index) {
     if (index >= 0 && index < ((int32_t)m_includeFileInfo.size()))
@@ -153,8 +159,12 @@ class PreprocessFile final {
     else
       return s_badIncludeFileInfo;
   }
-  uint32_t getEmbeddedMacroCallLine() const { return m_embeddedMacroCallLine; }
+
   PathId getEmbeddedMacroCallFile() const { return m_embeddedMacroCallFile; }
+  uint32_t getEmbeddedMacroCallLine() const { return m_embeddedMacroCallLine; }
+  uint32_t getEmbeddedMacroCallColumn() const {
+    return m_embeddedMacroCallColumn;
+  }
 
   /* Markings */
   static const char* const MacroNotDefined;
@@ -286,6 +296,7 @@ class PreprocessFile final {
   void append(std::string_view s);
   void pauseAppend() { m_pauseAppend = true; }
   void resumeAppend() { m_pauseAppend = false; }
+  bool isPaused() const { return m_pauseAppend; }
 
   void addLineTranslationInfo(LineTranslationInfo& info) {
     m_lineTranslationVec.push_back(info);
@@ -326,7 +337,8 @@ class PreprocessFile final {
       std::string_view name, std::vector<std::string>& arguments,
       PreprocessFile* callingFile, uint32_t callingLine, LoopCheck& loopChecker,
       MacroInfo* macroInfo, SpecialInstructions& instructions,
-      uint32_t embeddedMacroCallLine, PathId embeddedMacroCallFile);
+      PathId embeddedMacroCallFile, uint32_t embeddedMacroCallLine,
+      uint16_t embeddedMacroCallColumn);
 
   void checkMacroArguments_(std::string_view name, uint32_t line,
                             uint16_t column,
@@ -344,8 +356,9 @@ class PreprocessFile final {
   bool m_pauseAppend = false;
   bool m_usingCachedVersion = false;
   std::vector<IncludeFileInfo> m_includeFileInfo;
-  uint32_t m_embeddedMacroCallLine = 0;
   PathId m_embeddedMacroCallFile;
+  uint32_t m_embeddedMacroCallLine = 0;
+  uint16_t m_embeddedMacroCallColumn = 0;
   std::string m_profileInfo;
   FileContent* m_fileContent = nullptr;
   VerilogVersion m_verilogVersion = VerilogVersion::NoVersion;

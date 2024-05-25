@@ -37,7 +37,8 @@ class MacroInfo {
  public:
   MacroInfo(std::string_view name, int32_t type, PathId fileId,
             uint32_t startLine, uint16_t startColumn, uint32_t endLine,
-            uint16_t endColumn, const std::vector<std::string>& arguments,
+            uint16_t endColumn, uint16_t bodyStartColumn,
+            const std::vector<std::string>& arguments,
             const std::vector<std::string>& tokens);
   enum Type {
     NO_ARGS,
@@ -51,6 +52,7 @@ class MacroInfo {
   const uint16_t m_startColumn;
   const uint32_t m_endLine;
   const uint16_t m_endColumn;
+  const uint16_t m_bodyStartColumn;
   const std::vector<std::string> m_arguments;
   const std::vector<std::string> m_tokens;
 };

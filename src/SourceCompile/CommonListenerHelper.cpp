@@ -24,6 +24,7 @@
 #include <Surelog/Design/DesignElement.h>
 #include <Surelog/Design/FileContent.h>
 #include <Surelog/SourceCompile/CommonListenerHelper.h>
+#include <Surelog/SourceCompile/SymbolTable.h>
 #include <antlr4-runtime.h>
 
 namespace SURELOG {
@@ -86,10 +87,11 @@ uint32_t CommonListenerHelper::Line(NodeId index) const {
 NodeId CommonListenerHelper::addVObject(ParserRuleContext* ctx, SymbolId sym,
                                         VObjectType objtype) {
   auto [fileId, line, column, endLine, endColumn] = getFileLine(ctx, nullptr);
-
   NodeId objectIndex = m_fileContent->addObject(sym, fileId, objtype, line,
                                                 column, endLine, endColumn);
+
   VObject* inserted = m_fileContent->MutableObject(objectIndex);
+
   m_contextToObjectMap.emplace(ctx, objectIndex);
   addParentChildRelations(objectIndex, ctx);
   std::vector<SURELOG::DesignElement*>& delements =
@@ -100,6 +102,7 @@ NodeId CommonListenerHelper::addVObject(ParserRuleContext* ctx, SymbolId sym,
       // true file/line when splitting
       inserted->m_fileId = (*it)->m_fileId;
       inserted->m_line = (*it)->m_line;
+      inserted->m_endLine = (*it)->m_endLine;
       (*it)->m_node = NodeId(objectIndex);
       break;
     }

@@ -52,9 +52,9 @@ void SV3_1aTreeShapeListener::enterTop_level_rule(
   }
   CommandLineParser *clp = m_pf->getCompileSourceFile()->getCommandLineParser();
   if ((!clp->parseOnly()) && (!clp->lowMem())) {
-    m_includeFileInfo.emplace(IncludeFileInfo::Context::NONE, 1, BadSymbolId,
-                              m_pf->getFileId(0), 0, 0, 0, 0,
-                              IncludeFileInfo::Action::PUSH);
+    m_includeFileInfo.emplace(IncludeFileInfo::Context::NONE,
+                              IncludeFileInfo::Action::PUSH, m_pf->getFileId(0),
+                              0, 0, 0, 0, BadSymbolId, 0, 0, 0, 0);
   }
 }
 
@@ -205,21 +205,20 @@ void SV3_1aTreeShapeListener::exitSlline(SV3_1aParser::SllineContext *ctx) {
   if (action == IncludeFileInfo::Action::PUSH) {
     // Push
     m_includeFileInfo.emplace(
-        IncludeFileInfo::Context::INCLUDE, startLine,
-        m_pf->getSymbolTable()->registerSymbol(symbol),
-        fileSystem->toPathId(file, m_pf->getSymbolTable()), startLineCol.first,
-        startLineCol.second, endLineCol.first, endLineCol.second,
-        IncludeFileInfo::Action::PUSH);
+        IncludeFileInfo::Context::INCLUDE, IncludeFileInfo::Action::PUSH,
+        fileSystem->toPathId(file, m_pf->getSymbolTable()), startLine, 0, 0, 0,
+        m_pf->getSymbolTable()->registerSymbol(symbol), startLineCol.first,
+        startLineCol.second, endLineCol.first, endLineCol.second);
   } else if (action == IncludeFileInfo::Action::POP) {
     // Pop
     if (!m_includeFileInfo.empty()) m_includeFileInfo.pop();
     if (!m_includeFileInfo.empty()) {
       IncludeFileInfo &info = m_includeFileInfo.top();
-      info.m_sectionSymbolId = m_pf->getSymbolTable()->registerSymbol(symbol);
+      info.m_symbolId = m_pf->getSymbolTable()->registerSymbol(symbol);
       info.m_sectionFileId = fileSystem->toPathId(file, m_pf->getSymbolTable());
-      info.m_originalStartLine = startLineCol.first /*+ m_lineOffset */;
-      info.m_originalStartColumn = startLineCol.second /*+ m_lineOffset */;
-      info.m_sectionStartLine = startLine;
+      info.m_sourceLine = startLineCol.first /*+ m_lineOffset */;
+      info.m_sourceColumn = startLineCol.second /*+ m_lineOffset */;
+      info.m_sectionLine = startLine;
       info.m_action = IncludeFileInfo::Action::POP;
     }
   }

@@ -30,6 +30,7 @@
 #include <Surelog/SourceCompile/AntlrParserErrorListener.h>
 #include <Surelog/SourceCompile/AntlrParserHandler.h>
 #include <Surelog/SourceCompile/CompileSourceFile.h>
+#include <Surelog/SourceCompile/MacroInfo.h>
 #include <Surelog/SourceCompile/ParseFile.h>
 #include <Surelog/SourceCompile/SV3_1aTreeShapeListener.h>
 #include <Surelog/SourceCompile/SymbolTable.h>
@@ -150,119 +151,271 @@ void ParseFile::addError(Error& error) {
   getCompileSourceFile()->getErrorContainer()->addError(error);
 }
 
-void ParseFile::buildLineInfoCache_() {
-  PreprocessFile* pp = getCompileSourceFile()->getPreprocessor();
-  if (!pp) return;
-  auto const& infos = pp->getIncludeFileInfo();
-  if (!infos.empty()) {
-    fileInfoCache.resize(pp->getSumLineCount() + 10);
-    lineInfoCache.resize(pp->getSumLineCount() + 10);
-    lineInfoCache[0] = 1;
-    fileInfoCache[0] = m_fileId;
-    for (uint32_t lineItr = 1; lineItr < pp->getSumLineCount() + 10;
-         lineItr++) {
-      fileInfoCache[lineItr] = m_fileId;
-      lineInfoCache[lineItr] = lineItr;
-      bool inRange = false;
-      uint32_t indexOpeningRange = 0;
-      uint32_t index = infos.size() - 1;
-      while (1) {
-        if ((lineItr >= infos[index].m_originalStartLine) &&
-            (infos[index].m_action == IncludeFileInfo::Action::POP)) {
-          fileInfoCache[lineItr] = infos[index].m_sectionFileId;
-          uint32_t l = infos[index].m_sectionStartLine +
-                       (lineItr - infos[index].m_originalStartLine);
-          lineInfoCache[lineItr] = l;
-          break;
-        }
-        if (infos[index].m_action == IncludeFileInfo::Action::POP) {
-          if (!inRange) {
-            inRange = true;
-            indexOpeningRange = infos[index].m_indexOpening;
-          }
-        } else {
-          if (inRange) {
-            if (index == indexOpeningRange) inRange = false;
-          }
-        }
-        if ((lineItr >= infos[index].m_originalStartLine) &&
-            (infos[index].m_action == IncludeFileInfo::Action::PUSH) &&
-            (infos[index].m_indexClosing > -1) &&
-            (lineItr <
-             infos[infos[index].m_indexClosing].m_originalStartLine)) {
-          fileInfoCache[lineItr] = infos[index].m_sectionFileId;
-          uint32_t l = infos[index].m_sectionStartLine +
-                       (lineItr - infos[index].m_originalStartLine);
-          lineInfoCache[lineItr] = l;
-          break;
-        }
-        if (index == 0) break;
-        index--;
-      }
-    }
-  }
-}
-
 PathId ParseFile::getFileId(uint32_t line) {
-  if (!getCompileSourceFile()) {
-    return m_fileId;
-  }
+  if (!getCompileSourceFile()) return m_fileId;
+
   PreprocessFile* pp = getCompileSourceFile()->getPreprocessor();
   if (!pp) return BadPathId;
-  auto& infos = pp->getIncludeFileInfo();
-  if (!infos.empty()) {
-    if (!fileInfoCache.empty()) {
-      if (line > fileInfoCache.size()) {
-        SymbolId fileId = registerSymbol("CACHE OUT OF BOUND");
-        Location ppfile(fileId);
-        Error err(ErrorDefinition::PA_INTERNAL_WARNING, ppfile);
-        addError(err);
-        return m_fileId;
-      }
-      return fileInfoCache[line];
-    }
-    buildLineInfoCache_();
-    if (line > fileInfoCache.size()) {
-      SymbolId fileId = registerSymbol("CACHE OUT OF BOUND");
-      Location ppfile(fileId);
-      Error err(ErrorDefinition::PA_INTERNAL_WARNING, ppfile);
-      addError(err);
-      return m_fileId;
-    }
-    return fileInfoCache[line];
-  } else {
-    return m_fileId;
+
+  const auto& infos = pp->getIncludeFileInfo();
+  if (infos.empty()) return m_fileId;
+
+  if (m_locationCache.empty()) buildLocationCache();
+
+  if ((line >= 0) && (line < m_locationCache.size())) {
+    return std::get<1>(m_locationCache[line][0]);
   }
+
+  SymbolId fileId = registerSymbol("FILE CACHE OUT OF BOUND");
+  Location ppfile(fileId);
+  Error err(ErrorDefinition::PA_INTERNAL_WARNING, ppfile);
+  addError(err);
+
+  return m_fileId;
 }
 
 uint32_t ParseFile::getLineNb(uint32_t line) {
   if (!getCompileSourceFile()) return line;
+
   PreprocessFile* pp = getCompileSourceFile()->getPreprocessor();
   if (!pp) return 0;
+
   auto& infos = pp->getIncludeFileInfo();
-  if (!infos.empty()) {
-    if (!lineInfoCache.empty()) {
-      if (line > lineInfoCache.size()) {
-        SymbolId fileId = registerSymbol("CACHE OUT OF BOUND");
-        Location ppfile(fileId);
-        Error err(ErrorDefinition::PA_INTERNAL_WARNING, ppfile);
-        addError(err);
-        return line;
-      }
-      return lineInfoCache[line];
-    }
-    buildLineInfoCache_();
-    if (line > lineInfoCache.size()) {
-      SymbolId fileId = registerSymbol("CACHE OUT OF BOUND");
-      Location ppfile(fileId);
-      Error err(ErrorDefinition::PA_INTERNAL_WARNING, ppfile);
-      addError(err);
-      return line;
-    }
-    return lineInfoCache[line];
-  } else {
-    return line;
+  if (infos.empty()) return line;
+
+  if (m_locationCache.empty()) buildLocationCache();
+
+  if ((line >= 0) && (line < m_locationCache.size())) {
+    return std::get<2>(m_locationCache[line][0]);
   }
+
+  SymbolId fileId = registerSymbol("LINE CACHE OUT OF BOUND");
+  Location ppfile(fileId);
+  Error err(ErrorDefinition::PA_INTERNAL_WARNING, ppfile);
+  addError(err);
+
+  return line;
+}
+
+uint32_t ParseFile::buildLocationCache_recursive(uint32_t openIndex,
+                                                 uint32_t closeIndex) {
+  auto const& infos =
+      getCompileSourceFile()->getPreprocessor()->getIncludeFileInfo();
+  const IncludeFileInfo& oifi = infos[openIndex];
+  const IncludeFileInfo& cifi = infos[closeIndex];
+
+  uint32_t prevEndSourceLine = cifi.m_sourceLine;
+  uint32_t sourceLine = oifi.m_sourceLine;
+  uint32_t targetLine = 1;
+
+  PathId macroFileId = oifi.m_sectionFileId;
+  uint32_t macroStartLine = oifi.m_sourceLine;
+  uint32_t macroStartColumn = oifi.m_sourceColumn;
+  uint32_t macroEndLine = cifi.m_sourceLine;
+  uint32_t macroEndColumn = cifi.m_sourceColumn;
+
+  if (oifi.m_macroDefinition != nullptr) {
+    macroFileId = oifi.m_macroDefinition->m_fileId;
+    macroStartLine = oifi.m_macroDefinition->m_startLine;
+    macroStartColumn = oifi.m_macroDefinition->m_bodyStartColumn;
+    macroEndLine = oifi.m_macroDefinition->m_endLine;
+    macroEndColumn = oifi.m_macroDefinition->m_endColumn;
+  }
+
+  // Handling four different cases for macros
+  //  1. Single line instance expands to single line
+  //  2. Single line instance expands to multi line
+  //  3. Multi line instance expands to single line
+  //  4. Multi line instance expands to multi line
+  //     (not necessary the same number of lines)
+
+  if (oifi.m_context == IncludeFileInfo::Context::INCLUDE) {
+    for (uint32_t i = 1; i <= oifi.m_sectionLine; ++i) {
+      m_locationCache[sourceLine++].emplace_back(
+          Delta::Relative, oifi.m_sectionFileId, targetLine++,
+          (i == oifi.m_sectionLine) ? oifi.m_sourceColumn : 1, 0);
+    }
+  } else if (oifi.m_context == IncludeFileInfo::Context::MACRO) {
+    targetLine = oifi.m_symbolStartLine;
+
+    if (oifi.m_sourceLine == cifi.m_sourceLine) {
+      if (oifi.m_symbolStartLine == oifi.m_symbolEndLine) {
+        // Scenario 1. Single line instance expands to single line
+        m_locationCache[oifi.m_sourceLine].emplace_back(
+            Delta::Relative, macroFileId, macroStartLine, oifi.m_sourceColumn,
+            (cifi.m_sourceColumn - oifi.m_sourceColumn) -
+                (oifi.m_symbolEndColumn - oifi.m_symbolStartColumn));
+      } else {
+        // Scenario 3. Multi line instance expands to single line
+        // m_locationCache[oifi.m_sourceLine].emplace_back(
+        //     Delta::Relative, macroFileId, macroStartLine,
+        //     oifi.m_sourceColumn, oifi.m_sourceColumn - oifi.m_sectionColumn);
+      }
+    } else {
+      if (oifi.m_symbolStartLine == oifi.m_symbolEndLine) {
+        // Scenario 2. Single line instance expands to multi line
+        m_locationCache[oifi.m_sourceLine].emplace_back(
+            Delta::Relative, macroFileId, macroStartLine, oifi.m_sourceColumn,
+            (cifi.m_sourceColumn - oifi.m_sourceColumn) -
+                (oifi.m_symbolEndColumn - oifi.m_symbolStartColumn));
+      } else {
+        // Scenario 4. Multi line instance expands to multi line
+        m_locationCache[oifi.m_sourceLine].emplace_back(
+            Delta::Relative, macroFileId, macroStartLine, oifi.m_sourceColumn,
+            -macroStartColumn);
+      }
+      for (uint32_t j = oifi.m_sourceLine + 1,
+                    embeddedLine = macroStartLine + 1;
+           j < (cifi.m_sourceLine + 1); ++j, ++embeddedLine) {
+        m_locationCache[j].emplace_back(Delta::Relative, macroFileId,
+                                        embeddedLine, 1, 0);
+      }
+    }
+  }
+
+  for (uint32_t i = openIndex + 1; i < closeIndex; ++i) {
+    const IncludeFileInfo& ioifi = infos[i];
+    if (ioifi.m_action != IncludeFileInfo::Action::PUSH) {
+      continue;
+    }
+
+    const IncludeFileInfo& icifi = infos[ioifi.m_indexOpposite];
+    if ((prevEndSourceLine > 0) && (prevEndSourceLine < ioifi.m_sourceLine)) {
+      ++sourceLine;
+      ++targetLine;
+    }
+
+    while (sourceLine < ioifi.m_sourceLine) {
+      m_locationCache[sourceLine++].emplace_back(
+          Delta::Relative, oifi.m_sectionFileId, targetLine++, 1, 0);
+    }
+
+    if ((sourceLine == ioifi.m_sourceLine) && (ioifi.m_sourceColumn > 1) &&
+        m_locationCache[sourceLine].empty()) {
+      m_locationCache[sourceLine].emplace_back(
+          Delta::Relative, oifi.m_sectionFileId, targetLine, 1, 0);
+    }
+
+    if (ioifi.m_context == IncludeFileInfo::Context::INCLUDE) {
+      buildLocationCache_recursive(i, ioifi.m_indexOpposite);
+    } else if (ioifi.m_context == IncludeFileInfo::Context::MACRO) {
+      targetLine = buildLocationCache_recursive(i, ioifi.m_indexOpposite);
+    }
+
+    sourceLine = icifi.m_sourceLine;
+    if (ioifi.m_context == IncludeFileInfo::Context::INCLUDE) {
+      m_locationCache[sourceLine].emplace_back(
+          Delta::Relative, oifi.m_sectionFileId, targetLine,
+          icifi.m_sourceColumn,
+          int32_t(icifi.m_sourceColumn) - int32_t(ioifi.m_symbolEndColumn));
+    } else if (ioifi.m_context == IncludeFileInfo::Context::MACRO) {
+    }
+
+    i = ioifi.m_indexOpposite;
+    prevEndSourceLine = sourceLine;
+  }
+
+  if (oifi.m_context == IncludeFileInfo::Context::INCLUDE) {
+    if (prevEndSourceLine != cifi.m_sourceLine) {
+      ++sourceLine;
+      ++targetLine;
+    }
+
+    while (sourceLine <= cifi.m_sourceLine) {
+      m_locationCache[sourceLine++].emplace_back(
+          Delta::Relative, oifi.m_sectionFileId, targetLine++, 1, 0);
+    }
+  } else if (oifi.m_context == IncludeFileInfo::Context::MACRO) {
+    targetLine = oifi.m_symbolEndLine;
+
+    if (oifi.m_sourceLine == cifi.m_sourceLine) {
+      // Scenario 1. Single line instance expands to single line
+      if (oifi.m_symbolStartLine == oifi.m_symbolEndLine) {
+        m_locationCache[oifi.m_sourceLine].emplace_back(
+            Delta::Relative, oifi.m_sectionFileId, targetLine,
+            cifi.m_sourceColumn, 0);
+      } else {
+        // Scenario 3. Multi line instance expands to single line
+        m_locationCache[oifi.m_sourceLine].emplace_back(
+            Delta::Absolute, oifi.m_sectionFileId, targetLine,
+            cifi.m_sourceColumn, cifi.m_sourceColumn - oifi.m_symbolEndColumn);
+      }
+    } else {
+      if (oifi.m_symbolStartLine == oifi.m_symbolEndLine) {
+        // Scenario 2. Single line instance expands to multi line
+        m_locationCache[cifi.m_sourceLine].emplace_back(
+            Delta::Absolute, oifi.m_sectionFileId, targetLine,
+            cifi.m_sourceColumn, -oifi.m_symbolEndColumn + 1);
+      } else {
+        // Scenario 4. Multi line instance expands to multi line
+        m_locationCache[cifi.m_sourceLine].emplace_back(
+            Delta::Relative, oifi.m_sectionFileId, targetLine,
+            cifi.m_sourceColumn, -oifi.m_symbolEndColumn);
+      }
+    }
+  }
+
+  return targetLine;
+}
+
+void ParseFile::buildLocationCache() {
+  PreprocessFile* pp = getCompileSourceFile()->getPreprocessor();
+  if (!pp) return;
+
+  auto const& infos = pp->getIncludeFileInfo();
+  if (infos.empty()) return;
+
+  m_locationCache.clear();
+  m_locationCache.resize(pp->getLineCount() + 10);
+  m_locationCache[0].emplace_back(Delta::Relative, m_fileId, 0, 1, 0);
+  uint32_t targetLine = buildLocationCache_recursive(0, infos.size() - 1);
+
+  for (uint32_t ni = m_locationCache.size(),
+                sourceLine = infos.back().m_sourceLine + 1;
+       sourceLine < ni; ++sourceLine) {
+    m_locationCache[sourceLine].emplace_back(Delta::Relative, m_fileId,
+                                             targetLine++, 1, 0);
+  }
+}
+
+std::tuple<PathId, uint32_t, uint16_t> ParseFile::mapLocation(uint32_t line,
+                                                              uint16_t column) {
+  if (!getCompileSourceFile()) return {m_fileId, line, column};
+
+  PreprocessFile* pp = getCompileSourceFile()->getPreprocessor();
+  if (!pp) return {m_fileId, line, column};
+
+  auto& infos = pp->getIncludeFileInfo();
+  if (infos.empty()) return {BadPathId, 0, 0};
+
+  if (m_locationCache.empty()) buildLocationCache();
+
+  if ((line >= 0) && (line < m_locationCache.size())) {
+    const location_cache_entry_t& entry = m_locationCache[line];
+    const uint16_t columnInSource = column;
+
+    PathId fileId;
+    for (const location_cache_entry_t::value_type& item : entry) {
+      if (columnInSource >= std::get<3>(item)) {
+        fileId = std::get<1>(item);
+        line = std::get<2>(item);
+        if (std::get<0>(item) == Delta::Relative) {
+          column -= std::get<4>(item);
+        } else if (std::get<0>(item) == Delta::Absolute) {
+          column = columnInSource - std::get<4>(item);
+        }
+      }
+    }
+
+    return {fileId, line, column};
+  }
+
+  SymbolId fileId = registerSymbol("Out of bound request to map location");
+  Location ppfile(fileId);
+  Error err(ErrorDefinition::PA_INTERNAL_WARNING, ppfile);
+  addError(err);
+
+  return {m_fileId, line, column};
 }
 
 bool ParseFile::parseOneFile_(PathId fileId, uint32_t lineOffset) {

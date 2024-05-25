@@ -166,11 +166,16 @@ SV3_1aTreeShapeHelper::getFileLine(antlr4::ParserRuleContext* ctx,
     endLine = endLineCol.first;
     endColumn = endLineCol.second;
   } else {
-    fileId = m_pf->getFileId(lineCol.first + m_lineOffset);
-    line = m_pf->getLineNb(lineCol.first + m_lineOffset);
-    column = lineCol.second;
-    endLine = m_pf->getLineNb(endLineCol.first + m_lineOffset);
-    endColumn = endLineCol.second;
+    auto [sf, sl, sc] =
+        m_pf->mapLocation(lineCol.first + m_lineOffset, lineCol.second);
+    fileId = sf;
+    line = sl;
+    column = sc;
+
+    auto [ef, el, ec] =
+        m_pf->mapLocation(endLineCol.first + m_lineOffset, endLineCol.second);
+    endLine = el;
+    endColumn = ec;
   }
   return std::make_tuple(fileId, line, column, endLine, endColumn);
 }

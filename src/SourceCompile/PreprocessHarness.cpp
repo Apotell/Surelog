@@ -52,7 +52,7 @@ std::string PreprocessHarness::preprocess(std::string_view content,
                         compUnit ? compUnit : &unit, &lib);
   PreprocessFile pp(BadSymbolId, &csf, instructions,
                     compUnit ? compUnit : &unit, &lib, nullptr, 0, content,
-                    nullptr, 0, BadPathId);
+                    nullptr, BadPathId, 0, 0);
 
   if (!pp.preprocess()) {
     result = "ERROR_PP";

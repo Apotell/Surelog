@@ -30,6 +30,7 @@
 #include <Surelog/Design/DesignComponent.h>
 #include <Surelog/Design/VObject.h>
 
+#include <ostream>
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
@@ -102,6 +103,9 @@ class FileContent : public DesignComponent {
   std::string_view getName() const override;
   NodeId getRootNode() const;
   std::string printObjects() const;  // The whole file content
+  void printObjects(std::ostream &strm) const;  // The whole file content
+  void printTree(std::ostream& strm) const;
+  void printTree(std::ostream& strm, NodeId nodeId, uint32_t indent) const;
   std::string printSubTree(
       NodeId parentIndex) const;                 // Print subtree from parent
   std::string printObject(NodeId noedId) const;  // Only print that object

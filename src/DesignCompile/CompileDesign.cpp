@@ -347,17 +347,19 @@ bool CompileDesign::compilation_() {
   for (const CompileSourceFile* sourceFile :
        getCompiler()->getCompileSourceFiles()) {
     const PreprocessFile* const pf = sourceFile->getPreprocessor();
-    for (const IncludeFileInfo& ifi : pf->getIncludeFileInfo()) {
+    const auto& includeFileInfos = pf->getIncludeFileInfo();
+    for (int32_t i = 1, ni = includeFileInfos.size() - 1; i < ni; ++i) {
+      const IncludeFileInfo& ifi = includeFileInfos[i];
       if ((ifi.m_context == IncludeFileInfo::Context::INCLUDE) &&
           (ifi.m_action == IncludeFileInfo::Action::PUSH)) {
         UHDM::include_file_info* const pifi =
             m_serializer.MakeInclude_file_info();
         pifi->VpiFile(fileSystem->toPath(pf->getRawFileId()));
         pifi->VpiIncludedFile(fileSystem->toPath(ifi.m_sectionFileId));
-        pifi->VpiLineNo(ifi.m_originalStartLine);
-        pifi->VpiColumnNo(ifi.m_originalStartColumn);
-        pifi->VpiEndLineNo(ifi.m_originalEndLine);
-        pifi->VpiEndColumnNo(ifi.m_originalEndColumn);
+        pifi->VpiLineNo(ifi.m_symbolStartLine);
+        pifi->VpiColumnNo(ifi.m_symbolStartColumn);
+        pifi->VpiEndLineNo(ifi.m_symbolEndLine);
+        pifi->VpiEndColumnNo(ifi.m_symbolEndColumn);
         m_fileInfo->push_back(pifi);
       }
     }

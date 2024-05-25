@@ -98,6 +98,46 @@ std::string FileContent::printObjects() const {
   return text;
 }
 
+void FileContent::printObjects(std::ostream& strm) const {
+  NodeId index(0);
+
+  strm << "AST_DEBUG_BEGIN\n";
+  if (m_library) strm << "LIB:  " << m_library->getName() << "\n";
+  strm << "FILE: " << FileSystem::getInstance()->toPath(m_fileId) << "\n";
+  for (const auto& object : m_objects) {
+    strm << object.print(m_symbolTable, index, GetDefinitionFile(index),
+                         m_fileId)
+         << "\n";
+    index++;
+  }
+  strm << "AST_DEBUG_END\n";
+}
+
+void FileContent::printTree(std::ostream& strm, NodeId nodeId,
+                            uint32_t indent) const {
+  if (!nodeId) return;
+
+  strm << std::string(indent * 2, ' ')
+       << m_objects[nodeId].print(m_symbolTable, nodeId,
+                                  GetDefinitionFile(nodeId), m_fileId)
+       << std::endl;
+  for (NodeId childId = m_objects[nodeId].m_child; childId;
+       childId = m_objects[childId].m_sibling) {
+    printTree(strm, childId, indent + 1);
+  }
+}
+
+void FileContent::printTree(std::ostream& strm) const {
+  NodeId nodeId(m_objects.size() - 1);
+  while (m_objects[nodeId].m_type != VObjectType::paSource_text) --nodeId;
+
+  strm << "AST_DEBUG_BEGIN\n";
+  if (m_library) strm << "LIB:  " << m_library->getName() << "\n";
+  strm << "FILE: " << FileSystem::getInstance()->toPath(m_fileId) << "\n";
+  printTree(strm, nodeId, 0);
+  strm << "AST_DEBUG_END\n";
+}
+
 std::string FileContent::printObject(NodeId nodeId) const {
   if (!nodeId || (nodeId >= m_objects.size())) return "";
   return m_objects[nodeId].print(m_symbolTable, nodeId,

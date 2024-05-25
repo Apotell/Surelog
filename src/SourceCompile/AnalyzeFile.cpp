@@ -40,9 +40,10 @@ void AnalyzeFile::checkSLlineDirective_(std::string_view line,
   std::string keyword;
   ss >> keyword;
   if (keyword == "SLline") {
-    IncludeFileInfo info(IncludeFileInfo::Context::NONE, 0, BadSymbolId,
-                         BadPathId, 0, 0, 0, 0, IncludeFileInfo::Action::NONE);
-    ss >> info.m_sectionStartLine;
+    IncludeFileInfo info(IncludeFileInfo::Context::NONE,
+                         IncludeFileInfo::Action::NONE, BadPathId, 0, 0, 0, 0,
+                         BadSymbolId, 0, 0, 0, 0);
+    ss >> info.m_sectionLine;
     std::string text;
     ss >> text;
     text = StringUtils::unquoted(text);
@@ -50,7 +51,7 @@ void AnalyzeFile::checkSLlineDirective_(std::string_view line,
     StringUtils::tokenize(text, "^", parts);
     std::string_view symbol = StringUtils::unquoted(parts[0]);
     std::string_view file = StringUtils::unquoted(parts[1]);
-    info.m_sectionSymbolId = m_clp->getSymbolTable()->registerSymbol(symbol);
+    info.m_symbolId = m_clp->getSymbolTable()->registerSymbol(symbol);
     info.m_sectionFileId =
         FileSystem::getInstance()->toPathId(file, m_clp->getSymbolTable());
     uint32_t action = 0;
@@ -59,7 +60,7 @@ void AnalyzeFile::checkSLlineDirective_(std::string_view line,
     if (static_cast<IncludeFileInfo::Action>(action) ==
         IncludeFileInfo::Action::PUSH) {
       // Push
-      info.m_originalStartLine = lineNb;
+      info.m_sectionLine = lineNb;
       info.m_action = IncludeFileInfo::Action::PUSH;
       m_includeFileInfo.push(info);
     } else if (static_cast<IncludeFileInfo::Action>(action) ==
@@ -68,10 +69,10 @@ void AnalyzeFile::checkSLlineDirective_(std::string_view line,
       if (!m_includeFileInfo.empty()) m_includeFileInfo.pop();
       if (!m_includeFileInfo.empty()) {
         IncludeFileInfo& top = m_includeFileInfo.top();
-        top.m_sectionSymbolId = info.m_sectionSymbolId;
+        top.m_symbolId = info.m_symbolId;
         top.m_sectionFileId = info.m_sectionFileId;
-        top.m_originalStartLine = lineNb;
-        top.m_sectionStartLine = info.m_sectionStartLine - 1;
+        top.m_sourceLine = lineNb;
+        top.m_sectionLine = info.m_sectionLine - 1;
         top.m_action = IncludeFileInfo::Action::POP;
       }
     }
@@ -83,10 +84,9 @@ std::string AnalyzeFile::setSLlineDirective_(uint32_t lineNb) {
   if (!m_includeFileInfo.empty()) {
     FileSystem* const fileSystem = FileSystem::getInstance();
     const IncludeFileInfo& info = m_includeFileInfo.top();
-    uint32_t origFromLine =
-        lineNb - info.m_originalStartLine + info.m_sectionStartLine;
+    uint32_t origFromLine = lineNb - info.m_sourceLine + info.m_sectionLine;
     result << "SLline " << origFromLine << " "
-           << m_clp->getSymbolTable()->getSymbol(info.m_sectionSymbolId) << "^"
+           << m_clp->getSymbolTable()->getSymbol(info.m_symbolId) << "^"
            << fileSystem->toPath(m_includeFileInfo.top().m_sectionFileId)
            << " 1" << std::endl;
   } else {
@@ -402,9 +402,9 @@ void AnalyzeFile::analyze() {
 
   uint32_t fromLine = 1;
   uint32_t toIndex = 0;
-  m_includeFileInfo.emplace(IncludeFileInfo::Context::INCLUDE, 1, BadSymbolId,
-                            m_fileId, 1, 0, 1, 0,
-                            IncludeFileInfo::Action::PUSH);
+  m_includeFileInfo.emplace(IncludeFileInfo::Context::INCLUDE,
+                            IncludeFileInfo::Action::PUSH, m_fileId, 1, 1, 1, 1,
+                            BadSymbolId, 1, 1, 1, 1);
   uint32_t linesWriten = 0;
   for (uint32_t i = 0; i < fileChunks.size(); i++) {
     DesignElement::ElemType chunkType = fileChunks[i].m_chunkType;

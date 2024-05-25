@@ -196,7 +196,7 @@ bool PPCache::checkCacheIsValid(PathId cacheFileId,
       PathId cachedFileId = fileSystem->toPathId(
           cachedFile, m_pp->getCompileSourceFile()->getSymbolTable());
       PathId sessionFileId = fileSystem->locate(
-          sourceSymbols[sourceIncludeFileInfo.getSectionSymbolId()].cStr(),
+          sourceSymbols[sourceIncludeFileInfo.getSymbolId()].cStr(),
           clp->getIncludePaths(),
           m_pp->getCompileSourceFile()->getSymbolTable());
       if (cachedFileId != sessionFileId) {
@@ -412,29 +412,36 @@ void PPCache::cacheIncludeFileInfos(::PPCache::Builder builder,
     ::IncludeFileInfo::Builder targetIncludeFileInfo =
         targetIncludeFileInfos[i];
 
-    SymbolId sectionSymbolId = targetSymbols.copyFrom(
-        sourceIncludeFileInfo.m_sectionSymbolId, &sourceSymbols);
+    SymbolId symbolId = targetSymbols.copyFrom(sourceIncludeFileInfo.m_symbolId,
+                                               &sourceSymbols);
     PathId sectionFileId =
         fileSystem->copy(sourceIncludeFileInfo.m_sectionFileId, &targetSymbols);
 
     targetIncludeFileInfo.setContext(
-        static_cast<uint32_t>(sourceIncludeFileInfo.m_context));
-    targetIncludeFileInfo.setSectionStartLine(
-        sourceIncludeFileInfo.m_sectionStartLine);
-    targetIncludeFileInfo.setSectionSymbolId((RawSymbolId)sectionSymbolId);
-    targetIncludeFileInfo.setSectionFileId((RawPathId)sectionFileId);
-    targetIncludeFileInfo.setOriginalStartLine(
-        sourceIncludeFileInfo.m_originalStartLine);
-    targetIncludeFileInfo.setOriginalStartColumn(
-        sourceIncludeFileInfo.m_originalStartColumn);
-    targetIncludeFileInfo.setOriginalEndLine(
-        sourceIncludeFileInfo.m_originalEndLine);
-    targetIncludeFileInfo.setOriginalEndColumn(
-        sourceIncludeFileInfo.m_originalEndColumn);
+        static_cast<uint16_t>(sourceIncludeFileInfo.m_context));
     targetIncludeFileInfo.setAction(
-        static_cast<uint32_t>(sourceIncludeFileInfo.m_action));
-    targetIncludeFileInfo.setIndexOpening(sourceIncludeFileInfo.m_indexOpening);
-    targetIncludeFileInfo.setIndexClosing(sourceIncludeFileInfo.m_indexClosing);
+        static_cast<uint16_t>(sourceIncludeFileInfo.m_action));
+
+    targetIncludeFileInfo.setSectionFileId((RawPathId)sectionFileId);
+    targetIncludeFileInfo.setSectionLine(sourceIncludeFileInfo.m_sectionLine);
+    targetIncludeFileInfo.setSectionColumn(
+        sourceIncludeFileInfo.m_sectionColumn);
+
+    targetIncludeFileInfo.setSourceLine(sourceIncludeFileInfo.m_sourceLine);
+    targetIncludeFileInfo.setSourceColumn(sourceIncludeFileInfo.m_sourceColumn);
+
+    targetIncludeFileInfo.setSymbolId((RawSymbolId)symbolId);
+    targetIncludeFileInfo.setSymbolStartLine(
+        sourceIncludeFileInfo.m_symbolStartLine);
+    targetIncludeFileInfo.setSymbolStartColumn(
+        sourceIncludeFileInfo.m_symbolStartColumn);
+    targetIncludeFileInfo.setSymbolEndLine(
+        sourceIncludeFileInfo.m_symbolEndLine);
+    targetIncludeFileInfo.setSymbolEndColumn(
+        sourceIncludeFileInfo.m_symbolEndColumn);
+
+    targetIncludeFileInfo.setIndexOpposite(
+        sourceIncludeFileInfo.m_indexOpposite);
   }
 }
 
@@ -469,7 +476,7 @@ void PPCache::restoreMacros(SymbolTable& targetSymbols,
                                  sourceMacro.getFileId(), UnknownRawPath))),
                              &targetSymbols),
         sourceMacro.getStartLine(), sourceMacro.getStartColumn(),
-        sourceMacro.getEndLine(), sourceMacro.getEndColumn(), args, tokens);
+        sourceMacro.getEndLine(), sourceMacro.getEndColumn(), 0, args, tokens);
   }
 }
 
@@ -528,7 +535,7 @@ void PPCache::restoreIncludeFileInfos(
   for (const ::IncludeFileInfo::Reader& sourceIncludeFileInfo :
        sourceIncludeFileInfos) {
     SymbolId sectionSymbolId = targetSymbols.copyFrom(
-        SymbolId(sourceIncludeFileInfo.getSectionSymbolId(), "<unknown"),
+        SymbolId(sourceIncludeFileInfo.getSymbolId(), "<unknown"),
         &sourceSymbols);
     PathId sectionFileId = fileSystem->toPathId(
         fileSystem->remap(sourceSymbols.getSymbol(SymbolId(
@@ -540,14 +547,16 @@ void PPCache::restoreIncludeFileInfos(
     m_pp->addIncludeFileInfo(
         static_cast<IncludeFileInfo::Context>(
             sourceIncludeFileInfo.getContext()),
-        sourceIncludeFileInfo.getSectionStartLine(), sectionSymbolId,
-        sectionFileId, sourceIncludeFileInfo.getOriginalStartLine(),
-        sourceIncludeFileInfo.getOriginalStartColumn(),
-        sourceIncludeFileInfo.getOriginalEndLine(),
-        sourceIncludeFileInfo.getOriginalEndColumn(),
         static_cast<IncludeFileInfo::Action>(sourceIncludeFileInfo.getAction()),
-        sourceIncludeFileInfo.getIndexClosing(),
-        sourceIncludeFileInfo.getIndexClosing());
+        nullptr, sectionFileId, sourceIncludeFileInfo.getSectionLine(),
+        sourceIncludeFileInfo.getSectionColumn(),
+        sourceIncludeFileInfo.getSourceLine(),
+        sourceIncludeFileInfo.getSourceColumn(), sectionSymbolId,
+        sourceIncludeFileInfo.getSymbolStartLine(),
+        sourceIncludeFileInfo.getSymbolStartColumn(),
+        sourceIncludeFileInfo.getSymbolEndLine(),
+        sourceIncludeFileInfo.getSymbolEndColumn(),
+        sourceIncludeFileInfo.getIndexOpposite());
   }
 }
 

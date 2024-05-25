@@ -28,6 +28,8 @@
 #include <Surelog/ErrorReporting/Error.h>
 
 #include <string>
+#include <tuple>
+#include <vector>
 
 namespace SURELOG {
 
@@ -79,6 +81,9 @@ class ParseFile final {
   PathId getPpFileId() const { return m_ppFileId; }
   uint32_t getLineNb(uint32_t line);
 
+  std::tuple<PathId, uint32_t, uint16_t> mapLocation(uint32_t line,
+                                                     uint16_t column);
+
   class LineTranslationInfo {
    public:
     LineTranslationInfo(PathId pretendFileId, uint32_t originalLine,
@@ -125,7 +130,10 @@ class ParseFile final {
   bool debug_AstModel;
 
   bool parseOneFile_(PathId fileId, uint32_t lineOffset);
-  void buildLineInfoCache_();
+  void buildLocationCache();
+  uint32_t buildLocationCache_recursive(uint32_t openIndex,
+                                        uint32_t closeIndex);
+
   // For file chunk:
   std::vector<ParseFile*> m_children;
   ParseFile* const m_parent;
@@ -134,8 +142,12 @@ class ParseFile final {
   ErrorContainer* const m_errors;
   std::string m_profileInfo;
   std::string m_sourceText;  // For Unit tests
-  std::vector<uint32_t> lineInfoCache;
-  std::vector<PathId> fileInfoCache;
+
+  enum class Delta { Absolute, Relative };
+  typedef std::vector<std::tuple<Delta, PathId, uint32_t, uint32_t, int32_t>>
+      location_cache_entry_t;
+  typedef std::vector<location_cache_entry_t> location_cache_t;
+  location_cache_t m_locationCache;
 };
 
 };  // namespace SURELOG

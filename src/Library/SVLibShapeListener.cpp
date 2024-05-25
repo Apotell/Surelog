@@ -48,9 +48,9 @@ SVLibShapeListener::SVLibShapeListener(ParseLibraryDef *parser,
       m_parser->getFileId(), nullptr, m_parser->getSymbolTable(),
       m_parser->getErrorContainer(), nullptr, BadPathId);
   m_pf->setFileContent(m_fileContent);
-  m_includeFileInfo.emplace(IncludeFileInfo::Context::NONE, 1, BadSymbolId,
-                            m_pf->getFileId(0), 0, 0, 0, 0,
-                            IncludeFileInfo::Action::PUSH);
+  m_includeFileInfo.emplace(IncludeFileInfo::Context::INCLUDE,
+                            IncludeFileInfo::Action::PUSH, m_pf->getFileId(0),
+                            1, 1, 1, 1, BadSymbolId, 0, 0, 0, 0);
 }
 
 SymbolId SVLibShapeListener::registerSymbol(std::string_view symbol) {

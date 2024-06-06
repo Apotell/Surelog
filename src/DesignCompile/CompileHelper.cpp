@@ -645,7 +645,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       UHDM::typespec* ts =
           compileTypespec(scope, fC, enum_base_type, compileDesign, reduce,
                           pstmt, nullptr, false);
-      fC->populateCoreMembers(enum_base_type, type_name, ts, true);
+      fC->populateCoreMembers(type_declaration, type_name, ts, true);
       if ((m_reduce == Reduce::Yes) && (reduce == Reduce::Yes) &&
           (valuedcomponenti_cast<Package*>(scope))) {
         ts->Instance(scope->getUhdmScope<UHDM::instance>());
@@ -3440,6 +3440,7 @@ bool CompileHelper::compileParameterDeclaration(
                                        ntype, port_param);
       param->setTypeParam();
       param->setUhdmParam(p);
+      p->SetVpiParent(pany);
       component->insertParameter(param);
       typeNameId = fC->Sibling(typeNameId);
       if (skip) typeNameId = fC->Sibling(typeNameId);

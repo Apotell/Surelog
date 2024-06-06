@@ -2297,6 +2297,7 @@ UHDM::any *CompileHelper::compileExpression(
               c->VpiDecompile("0");
               c->VpiSize(64);
               c->VpiConstType(vpiIntConst);
+              c->VpiParent(pexpr);
               fC->populateCoreMembers(Sequence_actual_arg, Sequence_actual_arg,
                                       c);
               args->push_back(c);
@@ -3168,16 +3169,21 @@ UHDM::any *CompileHelper::compileExpression(
         case VObjectType::paClocking_event: {
           if (fC->Type(fC->Sibling(child)) == VObjectType::paSequence_expr) {
             UHDM::clocked_seq *seq = s.MakeClocked_seq();
+            NodeId endLocationId = child;
             if (any *cev = compileExpression(component, fC, fC->Child(child),
                                              compileDesign, reduce, seq,
                                              instance, muteErrors)) {
               seq->VpiClockingEvent((expr *)cev);
+              endLocationId = fC->Child(child);
             }
             if (any *ex = compileExpression(component, fC, fC->Sibling(child),
                                             compileDesign, reduce, seq,
                                             instance, muteErrors)) {
               seq->VpiSequenceExpr(ex);
+              endLocationId = fC->Sibling(child);
             }
+            seq->VpiParent(pexpr);
+            fC->populateCoreMembers(child, endLocationId, seq);
             result = seq;
           } else {
             UHDM::clocked_property *prop = s.MakeClocked_property();

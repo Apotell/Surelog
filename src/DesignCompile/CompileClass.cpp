@@ -27,6 +27,7 @@
 #include <Surelog/DesignCompile/CompileClass.h>
 #include <Surelog/DesignCompile/CompileDesign.h>
 #include <Surelog/ErrorReporting/ErrorContainer.h>
+#include <Surelog/Library/Library.h>
 #include <Surelog/SourceCompile/Compiler.h>
 #include <Surelog/SourceCompile/SymbolTable.h>
 #include <Surelog/Testbench/ClassDefinition.h>
@@ -836,9 +837,25 @@ bool CompileClass::compile_class_type_(const FileContent* fC, NodeId id) {
   }
   // Insert base class placeholder
   // Will be bound in UVMElaboration step
-  ClassDefinition* base_class = new ClassDefinition(
-      base_class_name, m_class->getLibrary(), m_class->getContainer(), fC,
-      base_class_id, nullptr, s);
+
+  Library* lib = fC->getLibrary();
+  const std::string_view libName = lib->getName();
+  ClassDefinition* base_class = nullptr;
+  std::string fullName = StrCat(libName, "::", base_class_name);
+  if (m_class->getContainer()) {  // @todo: Need to discuss in which case,
+                                  // container window can be null.
+    fullName =
+        StrCat(m_class->getContainer()->getName(), "::", base_class_name);
+    base_class = fC->getClassDefinition(fullName);
+  }
+
+  if (base_class == nullptr) {
+    base_class = new ClassDefinition(base_class_name, m_class->getLibrary(),
+                                     m_class->getContainer(), fC, base_class_id,
+                                     nullptr, s);
+    const_cast<FileContent*>(fC)->addClassDefinition(fullName, base_class);
+  }
+
   m_class->insertBaseClass(base_class);
 
   return true;

@@ -170,8 +170,15 @@ void ResolveSymbols::createFastLookup() {
 
               if (m_fileData->Type(subobject) ==
                   VObjectType::paClass_declaration) {
-                ClassDefinition* def = new ClassDefinition(
-                    name, lib, mdef, m_fileData, subobject, nullptr, s);
+                ClassDefinition* def = nullptr;
+                def = m_fileData->getClassDefinition(fullSubName);
+                if (def == nullptr) {
+                  def = new ClassDefinition(name, lib, mdef, m_fileData,
+                                            subobject, nullptr, s);
+                } else {
+                  def->setNodeId(subobject);
+                }
+
                 m_fileData->addClassDefinition(fullSubName, def);
                 mdef->getUnelabMmodule()->addClassDefinition(name, def);
               } else {

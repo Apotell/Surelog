@@ -76,6 +76,7 @@ UHDM::property_inst* createPropertyInst(DesignComponent* component,
   if (property_expr->UhdmType() == UHDM::uhdmfunc_call) {
     UHDM::func_call* call = (UHDM::func_call*)property_expr;
     UHDM::property_inst* real_property_expr = s.MakeProperty_inst();
+    real_property_expr->VpiParent(property_expr);
     if (call->Tf_call_args()) {
       UHDM::ElaboratorContext elaboratorContext(&s, false, true);
       UHDM::VectorOfany* args = s.MakeAnyVec();
@@ -462,11 +463,15 @@ UHDM::property_decl* CompileHelper::compilePropertyDeclaration(
 
       NodeId Port_name = fC->Sibling(Property_formal_type);
       UHDM::prop_formal_decl* prop_port_decl = s.MakeProp_formal_decl();
+      prop_port_decl->VpiParent(result);
+      fC->populateCoreMembers(Port_name, Port_name, prop_port_decl);
       ports->push_back(prop_port_decl);
       prop_port_decl->VpiName(fC->SymName(Port_name));
       UHDM::ref_typespec* rtps = s.MakeRef_typespec();
       rtps->Actual_typespec(tps);
       prop_port_decl->Typespec(rtps);
+      rtps->VpiParent(prop_port_decl);
+      fC->populateCoreMembers(Port_name, Port_name, rtps);
       Property_port_item = fC->Sibling(Property_port_item);
     }
     Property_spec = fC->Sibling(Property_spec);

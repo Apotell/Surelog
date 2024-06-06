@@ -169,8 +169,7 @@ const Program* FileContent::getProgram(std::string_view name) const {
   }
 }
 
-const ClassDefinition* FileContent::getClassDefinition(
-    std::string_view name) const {
+ClassDefinition* FileContent::getClassDefinition(std::string_view name) const {
   ClassNameClassDefinitionMultiMap::const_iterator itr =
       m_classDefinitions.find(name);
   if (itr == m_classDefinitions.end()) {

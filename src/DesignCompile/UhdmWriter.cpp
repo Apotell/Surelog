@@ -154,6 +154,13 @@ class IntegrityChecker final : public UhdmListener {
         (parent->UhdmType() == UHDM::uhdmclass_defn))
       return;
 
+    UHDM::UHDM_OBJECT_TYPE oType = object->UhdmType();
+    if ((oType == UHDM::uhdmclass_typespec ||
+         oType == UHDM::uhdmstruct_typespec) &&
+        (object->VpiLineNo() == 0) && (object->VpiEndLineNo() == 0) &&
+        (object->VpiColumnNo() == 0) && (object->VpiEndColumnNo() == 0))
+      return;
+
     // Ports and Io_decl are declared in two different ways
     // Io_decl example - TaskDecls
     const std::map<UHDM_OBJECT_TYPE, std::set<UHDM_OBJECT_TYPE>> exclusions{
@@ -5454,7 +5461,8 @@ bool UhdmWriter::write(PathId uhdmFileId) {
     delete linter;
   }
 
-  if (m_compileDesign->getCompiler()
+  if (m_compileDesign->getCompiler()->getCommandLineParser()->getElabUhdm() &&
+      m_compileDesign->getCompiler()
           ->getCommandLineParser()
           ->reportNonSynthesizable()) {
     std::set<const any*> nonSynthesizableObjects;
@@ -5505,39 +5513,18 @@ bool UhdmWriter::write(PathId uhdmFileId) {
   }
 
   if (m_compileDesign->getCompiler()->getCommandLineParser()->getDebugUhdm()) {
-    if (m_compileDesign->getCompiler()->getCommandLineParser()->writeUhdm()) {
-      Location loc((SymbolId)uhdmFileId);
-      Error err1(ErrorDefinition::UHDM_LOAD_DB, loc);
-      m_compileDesign->getCompiler()->getErrorContainer()->addError(err1);
-      m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
-          m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
-      const std::vector<vpiHandle>& restoredDesigns =
-          s.Restore(uhdmFile.string());
-
-      Error err2(ErrorDefinition::UHDM_VISITOR, loc);
-      m_compileDesign->getCompiler()->getErrorContainer()->addError(err2);
-      m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
-          m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
-
-      std::cout << "====== UHDM =======\n";
-      vpi_show_ids(
-          m_compileDesign->getCompiler()->getCommandLineParser()->showVpiIds());
-      visit_designs(restoredDesigns, std::cout);
-      std::cout << "===================\n";
-    } else {
-      Location loc(
-          m_compileDesign->getCompiler()->getSymbolTable()->registerSymbol(
-              "in-memory uhdm"));
-      Error err2(ErrorDefinition::UHDM_VISITOR, loc);
-      m_compileDesign->getCompiler()->getErrorContainer()->addError(err2);
-      m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
-          m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
-      std::cout << "====== UHDM =======\n";
-      vpi_show_ids(
-          m_compileDesign->getCompiler()->getCommandLineParser()->showVpiIds());
-      visit_designs(designs, std::cout);
-      std::cout << "===================\n";
-    }
+    Location loc(
+        m_compileDesign->getCompiler()->getSymbolTable()->registerSymbol(
+            "in-memory uhdm"));
+    Error err2(ErrorDefinition::UHDM_VISITOR, loc);
+    m_compileDesign->getCompiler()->getErrorContainer()->addError(err2);
+    m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
+        m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
+    std::cout << "====== UHDM =======\n";
+    vpi_show_ids(
+        m_compileDesign->getCompiler()->getCommandLineParser()->showVpiIds());
+    visit_designs(designs, std::cout);
+    std::cout << "===================\n";
   }
   m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
       m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());

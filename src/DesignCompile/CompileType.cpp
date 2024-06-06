@@ -981,6 +981,8 @@ typespec* CompileHelper::compileDatastructureTypespec(
                   tp->Typespec(tpsRef);
                   p->getFileContent()->populateCoreMembers(p->getNodeId(),
                                                            p->getNodeId(), tp);
+                  p->getFileContent()->populateCoreMembers(
+                      p->getNodeId(), p->getNodeId(), tpsRef);
                   params->push_back(tp);
                   param_assign* pass = s.MakeParam_assign();
                   pass->Rhs(tp);
@@ -1004,6 +1006,10 @@ typespec* CompileHelper::compileDatastructureTypespec(
                       ref_typespec* tpsRef = s.MakeRef_typespec();
                       tpsRef->SetVpiParent(tp);
                       tpsRef->Actual_typespec(tps);
+                      p->getFileContent()->populateCoreMembers(
+                          p->getNodeId(), p->getNodeId(), tp);
+                      p->getFileContent()->populateCoreMembers(
+                          p->getNodeId(), p->getNodeId(), tpsRef);
                       tp->Typespec(tpsRef);
                       tps->SetVpiParent(tp);
                       tp->SetVpiParent(ref);
@@ -1012,6 +1018,10 @@ typespec* CompileHelper::compileDatastructureTypespec(
                       pass->Rhs(tp);
                       pass->Lhs(fparam);
                       pass->SetVpiParent(ref);
+                      pass->VpiLineNo(fparam->VpiLineNo());
+                      pass->VpiColumnNo(fparam->VpiColumnNo());
+                      pass->VpiEndLineNo(tp->VpiEndLineNo());
+                      pass->VpiEndColumnNo(tp->VpiEndColumnNo());
                       assigns->push_back(pass);
                     }
                   }
@@ -1594,7 +1604,7 @@ UHDM::typespec* CompileHelper::compileTypespec(
             }
           }
         }
-        if (ranges) {
+        if (ranges && result) {
           if ((result->UhdmType() != uhdmlogic_typespec) &&
               (result->UhdmType() != uhdmbit_typespec) &&
               (result->UhdmType() != uhdmint_typespec)) {

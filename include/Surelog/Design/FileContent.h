@@ -113,14 +113,15 @@ class FileContent : public DesignComponent {
   PathId* getMutableFileId(NodeId id);
   Library* getLibrary() const { return m_library; }
   std::vector<DesignElement*>& getDesignElements() { return m_elements; }
-  const std::vector<DesignElement*>& getDesignElements() const { return m_elements; }
+  const std::vector<DesignElement*>& getDesignElements() const {
+    return m_elements;
+  }
   void addDesignElement(std::string_view name, DesignElement* elem);
   const DesignElement* getDesignElement(std::string_view name) const;
   using DesignComponent::addObject;
   NodeId addObject(SymbolId name, PathId fileId, VObjectType type,
-                   uint32_t line, uint16_t column,
-                   uint32_t endLine, uint16_t endColumn,
-                   NodeId parent = InvalidNodeId,
+                   uint32_t line, uint16_t column, uint32_t endLine,
+                   uint16_t endColumn, NodeId parent = InvalidNodeId,
                    NodeId definition = InvalidNodeId,
                    NodeId child = InvalidNodeId,
                    NodeId sibling = InvalidNodeId);
@@ -198,7 +199,7 @@ class FileContent : public DesignComponent {
 
   const Program* getProgram(std::string_view name) const;
 
-  const ClassDefinition* getClassDefinition(std::string_view name) const;
+  ClassDefinition* getClassDefinition(std::string_view name) const;
 
   const FileContent* getParent() const { return m_parentFile; }
   void setParent(FileContent* parent) { m_parentFile = parent; }

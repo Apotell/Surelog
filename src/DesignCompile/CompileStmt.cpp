@@ -2119,8 +2119,8 @@ bool CompileHelper::compileTask(DesignComponent* component,
           }
         }
       }
-      Statement_or_null = fC->Sibling(Statement_or_null);
       lastStatementId = Statement_or_null;
+      Statement_or_null = fC->Sibling(Statement_or_null);
     }
     fC->populateCoreMembers(firstStatementId, lastStatementId, begin);
   } else {
@@ -2335,7 +2335,9 @@ bool CompileHelper::compileFunction(DesignComponent* component,
   NodeId nodeId = (fC->Type(id) == VObjectType::paFunction_declaration)
                       ? id
                       : fC->Child(id);
-  UHDM::any* const pscope = component->getUhdmScope();
+  UHDM::any* pscope = component->getUhdmScope();
+  if (pscope == nullptr)
+    pscope = compileDesign->getCompiler()->getDesign()->getUhdmDesign();
   std::string name;
   NodeId func_decl = setFuncTaskQualifiers(fC, nodeId, nullptr);
   VObjectType func_decl_type = fC->Type(func_decl);

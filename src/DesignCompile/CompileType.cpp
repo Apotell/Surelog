@@ -348,6 +348,7 @@ UHDM::any* CompileHelper::compileVariable(
             if (ts) {
               if (var->Typespec() == nullptr) {
                 ref_typespec* tsRef = s.MakeRef_typespec();
+                tsRef->VpiName(typeName);
                 tsRef->SetVpiParent(var);
                 var->Typespec(tsRef);
                 fC->populateCoreMembers(declarationId, declarationId, tsRef);
@@ -402,8 +403,10 @@ UHDM::any* CompileHelper::compileVariable(
               ref_typespec* tsRef = s.MakeRef_typespec();
               tsRef->SetVpiParent(var);
               tsRef->Actual_typespec(ts);
+              tsRef->VpiName(ts->VpiName());
               var->Typespec(tsRef);
               fC->populateCoreMembers(declarationId, declarationId, var);
+              fC->populateCoreMembers(declarationId, declarationId, tsRef);
               result = var;
             }
           }
@@ -416,6 +419,7 @@ UHDM::any* CompileHelper::compileVariable(
             ref_typespec* tsRef = s.MakeRef_typespec();
             tsRef->SetVpiParent(var);
             tsRef->Actual_typespec(ts);
+            tsRef->VpiName(ts->VpiName());
             fC->populateCoreMembers(declarationId, declarationId, tsRef);
             var->Typespec(tsRef);
           }
@@ -637,6 +641,7 @@ UHDM::any* CompileHelper::compileVariable(
       if (var == nullptr) var = s.MakeClass_var();
       var->VpiName(completeName);
       ref_typespec* tsRef = s.MakeRef_typespec();
+      tsRef->VpiName(completeName);
       tsRef->SetVpiParent(var);
       tsRef->Actual_typespec(ts);
       fC->populateCoreMembers(declarationId, declarationId, tsRef);
@@ -977,6 +982,7 @@ typespec* CompileHelper::compileDatastructureTypespec(
                   tps->SetVpiParent(tp);
                   ref_typespec* tpsRef = s.MakeRef_typespec();
                   tpsRef->SetVpiParent(tp);
+                  tpsRef->VpiName(fName);
                   tpsRef->Actual_typespec(tps);
                   tp->Typespec(tpsRef);
                   p->getFileContent()->populateCoreMembers(p->getNodeId(),
@@ -1005,6 +1011,7 @@ typespec* CompileHelper::compileDatastructureTypespec(
                       tp->VpiName(fName);
                       ref_typespec* tpsRef = s.MakeRef_typespec();
                       tpsRef->SetVpiParent(tp);
+                      tpsRef->VpiName(fName);
                       tpsRef->Actual_typespec(tps);
                       p->getFileContent()->populateCoreMembers(
                           p->getNodeId(), p->getNodeId(), tp);
@@ -1280,8 +1287,11 @@ UHDM::typespec* CompileHelper::compileTypespec(
   UHDM::typespec* result = nullptr;
   NodeId type = nodeId;
   VObjectType the_type = fC->Type(type);
-  if ((the_type == VObjectType::paData_type_or_implicit) ||
-      (the_type == VObjectType::paData_type)) {
+  if (the_type == VObjectType::paData_type_or_implicit) {
+    type = fC->Child(type);
+    the_type = fC->Type(type);
+  }
+  if (the_type == VObjectType::paData_type) {
     if (fC->Child(type)) {
       type = fC->Child(type);
       if (fC->Type(type) == VObjectType::paVIRTUAL) type = fC->Sibling(type);
@@ -1354,6 +1364,7 @@ UHDM::typespec* CompileHelper::compileTypespec(
     case VObjectType::paEnum_name_declaration: {
       typespec* baseType = nullptr;
       uint64_t baseSize = 64;
+      enum_typespec* en = s.MakeEnum_typespec();
       if (the_type == VObjectType::paEnum_base_type) {
         baseType =
             compileTypespec(component, fC, fC->Child(type), compileDesign,
@@ -1363,17 +1374,18 @@ UHDM::typespec* CompileHelper::compileTypespec(
         baseSize =
             Bits(baseType, invalidValue, component, compileDesign, reduce,
                  instance, fC->getFileId(), baseType->VpiLineNo(), true);
+        ref_typespec* baseTypeRef = s.MakeRef_typespec();
+        baseTypeRef->SetVpiParent(en);
+        baseTypeRef->VpiName(fC->SymName(nodeId));
+        baseTypeRef->Actual_typespec(baseType);
+        fC->populateCoreMembers(nodeId, nodeId, baseTypeRef);
+        en->Base_typespec(baseTypeRef);
       }
       NodeId dataTypeId = nodeId;
       while (dataTypeId && (fC->Type(dataTypeId) != VObjectType::paData_type)) {
         dataTypeId = fC->Parent(dataTypeId);
       }
-      enum_typespec* en = s.MakeEnum_typespec();
-      ref_typespec* baseTypeRef = s.MakeRef_typespec();
-      baseTypeRef->SetVpiParent(en);
-      baseTypeRef->Actual_typespec(baseType);
-      fC->populateCoreMembers(nodeId, nodeId, baseTypeRef);
-      en->Base_typespec(baseTypeRef);
+      en->VpiName(fC->SymName(nodeId));
       fC->populateCoreMembers(dataTypeId, dataTypeId, en);
       VectorOfenum_const* econsts = s.MakeEnum_constVec();
       en->Enum_consts(econsts);
@@ -1713,6 +1725,7 @@ UHDM::typespec* CompileHelper::compileTypespec(
               ref_typespec* tsRef = s.MakeRef_typespec();
               tsRef->SetVpiParent(m);
               fC->populateCoreMembers(Data_type, Data_type, tsRef);
+              tsRef->VpiName(fC->SymName(fC->Child(Data_type)));
               m->Typespec(tsRef);
             }
             m->Typespec()->Actual_typespec(member_ts);
@@ -1926,6 +1939,7 @@ UHDM::typespec* CompileHelper::compileTypespec(
         if (ranges && result) {
           UHDM_OBJECT_TYPE dstype = result->UhdmType();
           ref_typespec* resultRef = s.MakeRef_typespec();
+          resultRef->VpiName(typeName);
           resultRef->Actual_typespec(result);
           if (dstype == uhdmstruct_typespec || dstype == uhdmenum_typespec ||
               dstype == uhdmunion_typespec) {
@@ -1961,14 +1975,10 @@ UHDM::typespec* CompileHelper::compileTypespec(
       if ((!result) && component) {
         if (UHDM::VectorOfany* params = component->getParameters()) {
           for (any* param : *params) {
-            if (param->UhdmType() == uhdmtype_parameter) {
-              if (param->VpiName() == typeName) {
-                type_parameter* tparam = (type_parameter*)param;
-                if (ref_typespec* rt = tparam->Typespec()) {
-                  result = rt->Actual_typespec();
-                }
-                break;
-              }
+            if ((param->UhdmType() == uhdmtype_parameter) &&
+                (param->VpiName() == typeName)) {
+              result = (typespec*)param;
+              break;
             }
           }
         }

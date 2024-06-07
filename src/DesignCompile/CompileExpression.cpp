@@ -2412,6 +2412,7 @@ UHDM::any *CompileHelper::compileExpression(
                                     reduce, operation, instance, false)) {
               if (operation->Typespec() == nullptr) {
                 ref_typespec *rttps = s.MakeRef_typespec();
+                rttps->VpiName(fC->SymName(Simple_type));
                 fC->populateCoreMembers(Simple_type, Simple_type, rttps);
                 rttps->SetVpiParent(operation);
                 operation->Typespec(rttps);

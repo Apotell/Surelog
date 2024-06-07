@@ -494,6 +494,10 @@ bool ErrorDefinition::init() {
       "Object %s has invalid location information");
   rec(INTEGRITY_CHECK_MISSING_PARENT, ERROR, COMP,
       "Object %s parent cannot be null");
+  rec(INTEGRITY_CHECK_MISSING_NAME, ERROR, COMP,
+      "Object %s has missing/invalid name");
+  rec(INTEGRITY_CHECK_MISSING_NAME, ERROR, COMP,
+      "Object %s has missing/invalid file");
   rec(INTEGRITY_CHECK_PARENT_IS_NEITHER_SCOPE_NOR_DESIGN, ERROR, COMP,
       "Object %s should be parented to either a scope or design");
   rec(INTEGRITY_CHECK_OBJECT_NOT_IN_PARENT_COLLECTION, ERROR, COMP,

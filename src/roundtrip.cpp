@@ -291,7 +291,7 @@ class RoundTripTracer final : public UHDM::UhdmListener {
 
   void insert(const std::filesystem::path &filepath, size_t line,
               uint16_t column, std::string_view data) {
-    assert(column < uint16_t(~0u) / 2);
+    assert(column < uint16_t(~0u / 2));
 
     if (filepath.empty() || (line < 1) || (column < 1) || data.empty()) {
       return;
@@ -1676,7 +1676,7 @@ class RoundTripTracer final : public UHDM::UhdmListener {
             posedge
              in)
           */
-          int32_t colLine = operand0->VpiLineNo();
+          uint32_t colLine = operand0->VpiLineNo();
           int32_t colDiff = operand0->VpiColumnNo() - it->second.length();
           if ((colLine > 0) && (colDiff > 0)) {
             if ((colDiff < 0) && (object->VpiLineNo() != colLine))
@@ -3095,8 +3095,8 @@ class RoundTripTracer final : public UHDM::UhdmListener {
     insert(filepath, object->VpiLineNo(), object->VpiColumnNo(), text);
 
     text.assign("} ").append(getTypespecName(object)).append(";");
-    insert(filepath, object->VpiEndLineNo(),
-           object->VpiEndColumnNo() - text.length(), text);
+    insert(filepath, object->VpiEndLineNo(), object->VpiEndColumnNo() + 1,
+           text);
 
     const UHDM::VectorOfenum_const *const enum_consts = object->Enum_consts();
     if ((enum_consts != nullptr) && !enum_consts->empty()) {
@@ -3114,8 +3114,6 @@ class RoundTripTracer final : public UHDM::UhdmListener {
     // Need to verify more. Now struct_typespec/endline looks good!
     const UHDM::VectorOftypespec_member *const members = object->Members();
     if ((members != nullptr) && !members->empty()) {
-      const UHDM::typespec_member *const last = members->back();
-
       constexpr std::string_view keyword1 = "typedef";
       constexpr std::string_view keyword2 = "struct";
       const std::filesystem::path &filepath = object->VpiFile();
@@ -3143,8 +3141,6 @@ class RoundTripTracer final : public UHDM::UhdmListener {
     // TODO: union_typespec/endline is wrong!
     const UHDM::VectorOftypespec_member *const members = object->Members();
     if ((members != nullptr) && !members->empty()) {
-      const UHDM::typespec_member *const last = members->back();
-
       constexpr std::string_view keyword = "typedef";
 
       std::string text;

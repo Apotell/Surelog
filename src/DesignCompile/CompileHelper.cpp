@@ -1890,7 +1890,7 @@ bool CompileHelper::compileAnsiPortDeclaration(DesignComponent* component,
       packedDimension = fC->Sibling(packedDimension);
     }
     if (fC->Type(NetType) == VObjectType::paClass_scope) {
-      specParamId = NetType;
+      specParamId = fC->Parent(NetType);
     } else if (fC->Type(NetType) == VObjectType::slStringConst) {
       specParamId = NetType;
     }
@@ -2575,6 +2575,7 @@ CompileHelper::compileInstantiation(ModuleDefinition* mod,
         fC->populateCoreMembers(typespecId, typespecId, tps);
         if (mod_array->Elem_typespec() == nullptr) {
           ref_typespec* tpsRef = s.MakeRef_typespec();
+          tpsRef->VpiName(fC->SymName(typespecId));
           tpsRef->SetVpiParent(mod_array);
           fC->populateCoreMembers(typespecId, typespecId, tpsRef);
           mod_array->Elem_typespec(tpsRef);
@@ -2972,13 +2973,22 @@ UHDM::atomic_stmt* CompileHelper::compileProceduralTimingControlStmt(
                                    compileDesign, pstmt, instance);
   }
   NodeId IntConst = fC->Child(Delay_control);
-  const std::string_view value = fC->SymName(IntConst);
   UHDM::delay_control* dc = s.MakeDelay_control();
-  if (value[0] == '#') {
+  std::string_view value = fC->SymName(IntConst);
+  if (value.front() == '#') {
     dc->VpiDelay(value);
   } else {
+    NodeId valueNodeId = IntConst;
+    if (value.empty() || (value == SymbolTable::getBadSymbol())) {
+      while (valueNodeId &&
+             (fC->Type(valueNodeId) != VObjectType::slStringConst) &&
+             (fC->Type(valueNodeId) != VObjectType::slIntConst)) {
+        valueNodeId = fC->Child(valueNodeId);
+      }
+    }
+
     ref_obj* ref = s.MakeRef_obj();
-    ref->VpiName(value);
+    ref->VpiName(fC->SymName(valueNodeId));
     ref->SetVpiParent(pstmt);
     fC->populateCoreMembers(IntConst, IntConst, ref);
     dc->Delay(ref);
@@ -3425,6 +3435,7 @@ bool CompileHelper::compileParameterDeclaration(
                                           Reduce::No, p, nullptr, false)) {
         if (p->Typespec() == nullptr) {
           ref_typespec* tpsRef = s.MakeRef_typespec();
+          tpsRef->VpiName(fC->SymName(ntype));
           fC->populateCoreMembers(ntype, ntype, tpsRef);
           tpsRef->SetVpiParent(p);
           p->Typespec(tpsRef);
@@ -3664,8 +3675,8 @@ bool CompileHelper::compileParameterDeclaration(
         if (param->Typespec() == nullptr) {
           ref_typespec* tsRef = s.MakeRef_typespec();
           tsRef->SetVpiParent(param);
-          fC->populateCoreMembers(Data_type_or_implicit, Data_type_or_implicit,
-                                  tsRef);
+          fC->populateCoreMembers(Data_type, Data_type, tsRef);
+          tsRef->VpiName(fC->SymName(fC->Child(Data_type)));
           param->Typespec(tsRef);
         }
         param->Typespec()->Actual_typespec(ts);

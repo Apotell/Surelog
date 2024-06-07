@@ -2132,4 +2132,13 @@ void SV3_1aTreeShapeListener::exitElaboration_system_task(
   addVObject(ctx, VObjectType::paElaboration_system_task);
 }
 
+void SV3_1aTreeShapeListener::exitSimple_type(
+    SV3_1aParser::Simple_typeContext *ctx) {
+  addVObject(ctx, ctx->getText(), VObjectType::paSimple_type);
+}
+
+void SV3_1aTreeShapeListener::exitString_type(
+    SV3_1aParser::String_typeContext *ctx) {
+  addVObject(ctx, ctx->getText(), VObjectType::paString_type);
+}
 }  // namespace SURELOG

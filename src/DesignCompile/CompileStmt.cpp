@@ -1208,6 +1208,7 @@ VectorOfany* CompileHelper::compileDataDeclaration(
                 if (tps->Elem_typespec() == nullptr) {
                   ref_typespec* varRef = s.MakeRef_typespec();
                   varRef->SetVpiParent(tps);
+                  varRef->VpiName(fC->SymName(fC->Child(Data_type)));
                   fC->populateCoreMembers(Data_type, Data_type, varRef);
                   tps->Elem_typespec(varRef);
                 }
@@ -1765,6 +1766,7 @@ std::vector<io_decl*>* CompileHelper::compileTfPortList(
   // Compile arguments
   NodeId tf_port_item = fC->Child(tf_port_list);
   int32_t previousDirection = vpiInput;
+  NodeId prevType = InvalidNodeId;
   UHDM::typespec* ts = nullptr;
   while (tf_port_item) {
     io_decl* decl = s.MakeIo_decl();
@@ -1787,6 +1789,7 @@ std::vector<io_decl*>* CompileHelper::compileTfPortList(
     fC->populateCoreMembers(tf_port_item, tf_port_item, decl);
     NodeId type = fC->Child(tf_data_type);
     if (fC->Type(type) == VObjectType::paVIRTUAL) type = fC->Sibling(type);
+    if (prevType == InvalidNodeId) prevType = type;
 
     NodeId unpackedDimension =
         fC->Sibling(fC->Sibling(fC->Child(tf_port_item)));
@@ -1813,9 +1816,12 @@ std::vector<io_decl*>* CompileHelper::compileTfPortList(
       if (decl->Typespec() == nullptr) {
         ref_typespec* tsRef = s.MakeRef_typespec();
         tsRef->SetVpiParent(decl);
+        NodeId refName = (type == InvalidNodeId) ? prevType : type;
+        if (fC->Type(refName) == VObjectType::paData_type)
+          refName = fC->Child(refName);
+        tsRef->VpiName(fC->SymName(refName));
         decl->Typespec(tsRef);
-        fC->populateCoreMembers(tf_data_type_or_implicit,
-                                tf_data_type_or_implicit, tsRef);
+        fC->populateCoreMembers(refName, refName, tsRef);
       }
       decl->Typespec()->Actual_typespec(ts);
     }
@@ -2309,7 +2315,10 @@ bool CompileHelper::compileClassConstructorDeclaration(
         if (NodeId Statement = fC->Child(Stmt)) {
           if (VectorOfany* sts = compileStmt(
                   component, fC, Statement, compileDesign, Reduce::No, begin)) {
-            for (any* st : *sts) stmts->push_back(st);
+            for (any* st : *sts) {
+              stmts->push_back(st);
+              st->SetVpiParent(begin);
+            }
           }
         }
       }
@@ -2408,6 +2417,7 @@ bool CompileHelper::compileFunction(DesignComponent* component,
     ClassDefinition* cdef = valuedcomponenti_cast<ClassDefinition*>(component);
     tps->Class_defn(cdef->getUhdmScope<UHDM::class_defn>());
     tps->VpiName(cdef->getUhdmScope<UHDM::class_defn>()->VpiFullName());
+    tpsRef->VpiName(tps->VpiName());
   } else {
     NodeId Function_body_declaration;
     if (fC->Type(func_decl) == VObjectType::paFunction_body_declaration)

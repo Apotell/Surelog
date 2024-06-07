@@ -98,7 +98,7 @@ class IntegrityChecker final : public UhdmListener {
 
   template <typename T>
   void reportAmbigiousMembership(const std::vector<T*>* const collection,
-                                 const T* const object) {
+                                 const T* const object) const {
     if (object == nullptr) return;
     if ((collection == nullptr) ||
         (std::find(collection->cbegin(), collection->cend(), object) ==
@@ -117,7 +117,7 @@ class IntegrityChecker final : public UhdmListener {
   template <typename T>
   void reportDuplicates(const UHDM::any* const object,
                         const std::vector<T*>* const collection,
-                        std::string_view name) {
+                        std::string_view name) const {
     if (collection == nullptr) return;
     const std::set<T*> unique(collection->cbegin(), collection->cend());
     if (unique.size() != collection->size()) {
@@ -132,7 +132,7 @@ class IntegrityChecker final : public UhdmListener {
     }
   }
 
-  void reportInvalidLocation(const UHDM::any* const object) {
+  void reportInvalidLocation(const UHDM::any* const object) const {
     if (m_acceptedObjectsWithInvalidLocations.find(object->UhdmType()) !=
         m_acceptedObjectsWithInvalidLocations.cend())
       return;
@@ -216,7 +216,7 @@ class IntegrityChecker final : public UhdmListener {
     }
   }
 
-  void reportMissingLocation(const UHDM::any* const object) {
+  void reportMissingLocation(const UHDM::any* const object) const {
     if ((object->VpiLineNo() != 0) && (object->VpiColumnNo() != 0) &&
         (object->VpiEndLineNo() != 0) && (object->VpiEndColumnNo() != 0))
       return;
@@ -283,6 +283,96 @@ class IntegrityChecker final : public UhdmListener {
     m_errorContainer->addError(err);
   }
 
+  static bool isImplicitFunctionReturnType(const UHDM::any* const object) {
+    if (const UHDM::variables* v = any_cast<UHDM::variables*>(object)) {
+      if (const UHDM::function* f =
+              any_cast<UHDM::function*>(object->VpiParent())) {
+        if ((f->Return() == v) && v->VpiName().empty()) return true;
+      }
+    }
+    return false;
+  }
+
+  static std::string_view stripDecorations(std::string_view name) {
+    while (!name.empty() && name.back() == ':') name.remove_suffix(1);
+
+    size_t pos1 = name.rfind("::");
+    if (pos1 != std::string::npos) name = name.substr(pos1 + 2);
+
+    size_t pos2 = name.rfind('.');
+    if (pos2 != std::string::npos) name = name.substr(pos2 + 1);
+
+    return name;
+  }
+
+  static bool areNamedSame(const UHDM::any* const object,
+                           const UHDM::any* const actual) {
+    std::string_view objectName = stripDecorations(object->VpiName());
+    std::string_view actualName = stripDecorations(actual->VpiName());
+    return (objectName == actualName);
+  }
+
+  void reportInvalidNames(const UHDM::any* const object) const {
+    // Function implicit return type are unnammed.
+    if (isImplicitFunctionReturnType(object)) return;
+
+    bool shouldReport = false;
+
+    if (object->UhdmType() == UHDM::uhdmref_obj) {
+      shouldReport = (object->VpiName() == SymbolTable::getBadSymbol());
+      shouldReport = shouldReport || object->VpiName().empty();
+
+      if (const UHDM::any* const actual =
+              static_cast<const UHDM::ref_obj*>(object)->Actual_group()) {
+        shouldReport = shouldReport || !areNamedSame(object, actual);
+        shouldReport = shouldReport && !isImplicitFunctionReturnType(actual);
+      }
+    }
+
+    if (object->UhdmType() == UHDM::uhdmref_typespec) {
+      shouldReport = (object->VpiName() == SymbolTable::getBadSymbol());
+      if (const UHDM::any* actual =
+              static_cast<const UHDM::ref_typespec*>(object)
+                  ->Actual_typespec()) {
+        if ((actual->UhdmType() == UHDM::uhdmstruct_typespec) ||
+            (actual->UhdmType() == UHDM::uhdmunion_typespec) ||
+            (actual->UhdmType() == UHDM::uhdmenum_typespec)) {
+          //@todo: Need to impliment typedefAlias "test/PreprocUhdmCov"
+          shouldReport = false;
+        } else if ((actual->UhdmType() == UHDM::uhdmclass_typespec) ||
+                   (actual->UhdmType() == UHDM::uhdmmodule_typespec) ||
+                   (actual->UhdmType() == UHDM::uhdmenum_typespec) ||
+                   (actual->UhdmType() == UHDM::uhdminterface_typespec)) {
+          shouldReport = shouldReport || object->VpiName().empty();
+          shouldReport = shouldReport || !areNamedSame(object, actual);
+        }
+      } else {
+        shouldReport = shouldReport || object->VpiName().empty();
+      }
+    }
+
+    if (shouldReport) {
+      Location loc(
+          m_fileSystem->toPathId(object->VpiFile(), m_symbolTable),
+          object->VpiLineNo(), object->VpiColumnNo(),
+          m_symbolTable->registerSymbol(std::to_string(object->UhdmId())));
+      Error err(ErrorDefinition::INTEGRITY_CHECK_MISSING_NAME, loc);
+      m_errorContainer->addError(err);
+    }
+  }
+
+  void reportInvalidFile(const UHDM::any* const object) const {
+    std::string_view filename = object->VpiFile();
+    if (filename.empty() || (filename == SymbolTable::getBadSymbol())) {
+      Location loc(
+          m_fileSystem->toPathId(object->VpiFile(), m_symbolTable),
+          object->VpiLineNo(), object->VpiColumnNo(),
+          m_symbolTable->registerSymbol(std::to_string(object->UhdmId())));
+      Error err(ErrorDefinition::INTEGRITY_CHECK_MISSING_FILE, loc);
+      m_errorContainer->addError(err);
+    }
+  }
+
   void enterAny(const UHDM::any* const object) final {
     if (isBuiltPackageOnStack(object)) return;
 
@@ -342,6 +432,8 @@ class IntegrityChecker final : public UhdmListener {
     }
 
     reportMissingLocation(object);
+    reportInvalidNames(object);
+    reportInvalidFile(object);
 
     const UHDM::any* const parent = object->VpiParent();
     if (parent == nullptr) {
@@ -1163,6 +1255,7 @@ void UhdmWriter::writePorts(std::vector<Signal*>& orig_ports, BaseClass* parent,
               fC->populateCoreMembers(
                   nameId, packedDimensions ? packedDimensions : nameId,
                   array_ts_rt);
+              array_ts_rt->VpiName(ts->VpiName());
               array_ts->Elem_typespec(array_ts_rt);
             }
             array_ts->Elem_typespec()->Actual_typespec(ts);
@@ -1173,6 +1266,7 @@ void UhdmWriter::writePorts(std::vector<Signal*>& orig_ports, BaseClass* parent,
                      Reduce::No, dest_port, nullptr, true)) {
         if (dest_port->Typespec() == nullptr) {
           ref_typespec* dest_port_rt = s.MakeRef_typespec();
+          dest_port_rt->VpiName(ts->VpiName());
           dest_port_rt->SetVpiParent(dest_port);
           dest_port->Typespec(dest_port_rt);
           fC->populateCoreMembers(orig_port->getTypeSpecId(),
@@ -1285,6 +1379,7 @@ void UhdmWriter::writeNets(DesignComponent* mod,
                     mod, fC, orig_net->getTypeSpecId(), m_compileDesign,
                     Reduce::No, nullptr, nullptr, true)) {
               ref_typespec* rt = s.MakeRef_typespec();
+              rt->VpiName(ts->VpiName());
               rt->SetVpiParent(dest_net);
               rt->Actual_typespec(ts);
               dest_net->Typespec(rt);
@@ -1327,10 +1422,9 @@ void mapLowConns(std::vector<Signal*>& orig_ports, Serializer& s,
           ((port*)itrport->second)->Low_conn(ref);
           ref->SetVpiParent(itrport->second);
           ref->Actual_group(itrlow->second);
-
-          const FileContent* fC = orig_port->getFileContent();
-          fC->populateCoreMembers(orig_port->getNodeId(),
-                                  orig_port->getNodeId(), ref);
+          ref->VpiName(orig_port->getName());
+          orig_port->getFileContent()->populateCoreMembers(
+              orig_port->getNodeId(), orig_port->getNodeId(), ref);
         }
       }
     }

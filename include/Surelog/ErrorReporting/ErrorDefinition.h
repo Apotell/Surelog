@@ -26,24 +26,24 @@
 #pragma once
 
 #if defined(_WIN32)
-  #if defined(FATAL)
-    #undef FATAL
-  #endif
-  #if defined(SYNTAX)
-    #undef SYNTAX
-  #endif
-  #if defined(ERROR)
-    #undef ERROR
-  #endif
-  #if defined(WARNING)
-    #undef WARNING
-  #endif
-  #if defined(INFO)
-    #undef INFO
-  #endif
-  #if defined(NOTE)
-    #undef NOTE
-  #endif
+#if defined(FATAL)
+#undef FATAL
+#endif
+#if defined(SYNTAX)
+#undef SYNTAX
+#endif
+#if defined(ERROR)
+#undef ERROR
+#endif
+#if defined(WARNING)
+#undef WARNING
+#endif
+#if defined(INFO)
+#undef INFO
+#endif
+#if defined(NOTE)
+#undef NOTE
+#endif
 #endif
 
 #include <map>
@@ -286,10 +286,12 @@ class ErrorDefinition {
 
     INTEGRITY_CHECK_MISSING_LOCATION = 801,
     INTEGRITY_CHECK_MISSING_PARENT = 802,
-    INTEGRITY_CHECK_PARENT_IS_NEITHER_SCOPE_NOR_DESIGN = 803,
-    INTEGRITY_CHECK_OBJECT_NOT_IN_PARENT_COLLECTION = 804,
-    INTEGRITY_CHECK_CHILD_NOT_ENTIRELY_IN_PARENT_BOUNDARY = 805,
-    INTEGRITY_CHECK_COLLECTION_HAS_DUPLICATES = 806,
+    INTEGRITY_CHECK_MISSING_NAME = 803,
+    INTEGRITY_CHECK_MISSING_FILE = 804,
+    INTEGRITY_CHECK_PARENT_IS_NEITHER_SCOPE_NOR_DESIGN = 805,
+    INTEGRITY_CHECK_OBJECT_NOT_IN_PARENT_COLLECTION = 806,
+    INTEGRITY_CHECK_CHILD_NOT_ENTIRELY_IN_PARENT_BOUNDARY = 807,
+    INTEGRITY_CHECK_COLLECTION_HAS_DUPLICATES = 808,
   };
 
   class ErrorInfo {

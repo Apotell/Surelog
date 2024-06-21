@@ -2331,6 +2331,7 @@ UHDM::any *CompileHelper::compileExpression(
                              VObjectType::
                                  paCycle_delay_const_range_expression) {
                     UHDM::range *r = s.MakeRange();
+                    r->SetVpiParent(operation);
                     NodeId lhs = fC->Child(subOp2);
                     NodeId rhs = fC->Sibling(lhs);
                     r->Left_expr((expr *)compileExpression(
@@ -2407,19 +2408,21 @@ UHDM::any *CompileHelper::compileExpression(
               operands->push_back(operand);
               operand->SetVpiParent(operation);
             }
-            if (UHDM::typespec *tps =
-                    compileTypespec(component, fC, Simple_type, compileDesign,
-                                    reduce, operation, instance, false)) {
-              if (operation->Typespec() == nullptr) {
-                ref_typespec *rttps = s.MakeRef_typespec();
-                rttps->VpiName(fC->SymName(Simple_type));
-                fC->populateCoreMembers(Simple_type, Simple_type, rttps);
-                rttps->SetVpiParent(operation);
-                operation->Typespec(rttps);
-              }
-              operation->Typespec()->Actual_typespec(tps);
-              if (tps->UhdmType() == uhdmunsupported_typespec) {
-                component->needLateTypedefBinding(operation);
+            if (m_elaborate == Elaborate::Yes) {
+              if (UHDM::typespec *tps =
+                      compileTypespec(component, fC, Simple_type, compileDesign,
+                                      reduce, operation, instance, false)) {
+                if (operation->Typespec() == nullptr) {
+                  ref_typespec *rttps = s.MakeRef_typespec();
+                  rttps->VpiName(fC->SymName(Simple_type));
+                  fC->populateCoreMembers(Simple_type, Simple_type, rttps);
+                  rttps->SetVpiParent(operation);
+                  operation->Typespec(rttps);
+                }
+                operation->Typespec()->Actual_typespec(tps);
+                if (tps->UhdmType() == uhdmunsupported_typespec) {
+                  component->needLateTypedefBinding(operation);
+                }
               }
             }
             result = operation;
@@ -3072,6 +3075,7 @@ UHDM::any *CompileHelper::compileExpression(
                 std::string_view val = fC->SymName(subOp1);
                 val.remove_prefix(2);
                 UHDM::constant *c = s.MakeConstant();
+                c->SetVpiParent(operation);
                 c->VpiValue(StrCat("UINT:", val));
                 c->VpiDecompile(val);
                 c->VpiSize(64);
@@ -3234,7 +3238,7 @@ UHDM::any *CompileHelper::compileExpression(
             UHDM::VectorOfany *operands = s.MakeAnyVec();
             if (UHDM::any *operand = compileExpression(
                     component, fC, fC->Sibling(parent), compileDesign, reduce,
-                    op, instance, muteErrors)) {
+                    pexpr, instance, muteErrors)) {
               operands->push_back(operand);
             }
             op->Operands(operands);
@@ -4934,7 +4938,10 @@ UHDM::any *CompileHelper::compileComplexFuncCall(
       fcall->SetVpiParent(pexpr);
       const std::string_view methodName = fC->SymName(Method);
       fcall->VpiName(methodName);
-      fC->populateCoreMembers(Method, Method, fcall);
+      if ((rootName == "super") || (rootName == "this"))
+        fC->populateCoreMembers(name, List_of_arguments, fcall);
+      else
+        fC->populateCoreMembers(Method, Method, fcall);
       if (VectorOfany *arguments = compileTfCallArguments(
               component, fC, List_of_arguments, compileDesign, reduce, fcall,
               instance, muteErrors)) {

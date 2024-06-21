@@ -469,6 +469,7 @@ UHDM::property_decl* CompileHelper::compilePropertyDeclaration(
       prop_port_decl->VpiName(fC->SymName(Port_name));
       UHDM::ref_typespec* rtps = s.MakeRef_typespec();
       rtps->Actual_typespec(tps);
+      rtps->VpiName(fC->SymName(Port_name));
       prop_port_decl->Typespec(rtps);
       rtps->VpiParent(prop_port_decl);
       fC->populateCoreMembers(Port_name, Port_name, rtps);

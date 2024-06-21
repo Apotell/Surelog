@@ -3432,6 +3432,7 @@ class RoundTripTracer final : public UHDM::UhdmListener {
 
   void enterSource_file(const UHDM::source_file *const object) final {
     if (visited.find(object) != visited.end()) return;
+    if ((object->VpiLineNo() == 0) || (object->VpiColumnNo() == 0)) return;
 
     constexpr std::string_view keyword = "`include";
 

@@ -1253,7 +1253,7 @@ VectorOfany* CompileHelper::compileDataDeclaration(
             }
             arr->VpiName(fC->SymName(Var));
             var->VpiName("");
-            var->SetVpiParent(arr);
+            var->SetVpiParent(pstmt);
             var = arr;
           }
         }

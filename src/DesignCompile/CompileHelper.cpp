@@ -642,10 +642,9 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       Struct* st = new Struct(fC, type_name, enum_base_type);
       newTypeDef->setDataType(st);
       newTypeDef->setDefinition(st);
-      UHDM::typespec* ts =
-          compileTypespec(scope, fC, enum_base_type, compileDesign, reduce,
-                          pstmt, nullptr, false);
-      fC->populateCoreMembers(type_declaration, type_name, ts, true);
+      UHDM::typespec* ts = compileTypespec(scope, fC, data_type, compileDesign,
+                                           reduce, pstmt, nullptr, false);
+      fC->populateCoreMembers(data_type, data_type, ts, true);
       if ((m_reduce == Reduce::Yes) && (reduce == Reduce::Yes) &&
           (valuedcomponenti_cast<Package*>(scope))) {
         ts->Instance(scope->getUhdmScope<UHDM::instance>());
@@ -1015,9 +1014,8 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       SimpleType* simple = new SimpleType(fC, type_name, stype);
       newTypeDef->setDataType(simple);
       newTypeDef->setDefinition(simple);
-      if (UHDM::typespec* ts =
-              compileTypespec(scope, fC, stype, compileDesign, reduce,
-                              scope->getUhdmScope(), nullptr, false)) {
+      if (UHDM::typespec* ts = compileTypespec(scope, fC, stype, compileDesign,
+                                               reduce, pstmt, nullptr, false)) {
         if (array_tps) {
           if (array_tps->Elem_typespec() == nullptr) {
             ref_typespec* tsRef = s.MakeRef_typespec();
@@ -3028,8 +3026,10 @@ UHDM::atomic_stmt* CompileHelper::compileProceduralTimingControlStmt(
           fC->populateCoreMembers(fC->Child(unit), fC->Child(unit), call);
           dc->Stmt(call);
           call->SetVpiParent(dc);
-          dc->VpiEndLineNo(call->VpiEndLineNo());
-          dc->VpiEndColumnNo(call->VpiEndColumnNo());
+          if (fC->Child(unit)) {
+            dc->VpiEndLineNo(call->VpiEndLineNo());
+            dc->VpiEndColumnNo(call->VpiEndColumnNo());
+          }
         }
       }
     }
@@ -4574,6 +4574,9 @@ std::vector<UHDM::attribute*>* CompileHelper::compileAttributes(
     DesignComponent* component, const FileContent* fC, NodeId nodeId,
     CompileDesign* compileDesign, UHDM::any* pexpr) {
   UHDM::Serializer& s = compileDesign->getSerializer();
+  if (pexpr == nullptr) pexpr = component->getUhdmScope();
+  if (pexpr == nullptr)
+    pexpr = compileDesign->getCompiler()->getDesign()->getUhdmDesign();
   std::vector<UHDM::attribute*>* results = nullptr;
   if (fC->Type(nodeId) == VObjectType::paAttribute_instance) {
     results = s.MakeAttributeVec();

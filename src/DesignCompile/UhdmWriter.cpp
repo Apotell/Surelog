@@ -3412,7 +3412,7 @@ void UhdmWriter::lateTypedefBinding(UHDM::Serializer& s, DesignComponent* mod,
             tps = replace(tps, m_compileDesign->getSwapedObjects());
           }
 
-          if (unsup->Ranges()) {
+          if (unsup->Ranges() && (m_helper.getElaborate() == Elaborate::Yes)) {
             ref_typespec* tpsRef = s.MakeRef_typespec();
             tpsRef->Actual_typespec(const_cast<UHDM::typespec*>(tps));
             if (unsup->VpiPacked()) {

@@ -83,6 +83,14 @@ class PortNetHolder {
     m_task_funcs = task_funcs;
   }
 
+  std::vector<UHDM::task_func_decl*>* getTask_func_decls() const {
+    return m_task_func_decls;
+  }
+
+  void setTask_func_decls(std::vector<UHDM::task_func_decl*>* task_func_decls) {
+    m_task_func_decls = task_func_decls;
+  }
+
  protected:
   std::vector<Signal*> m_ports;
   std::vector<Signal*> m_signals;
@@ -92,6 +100,7 @@ class PortNetHolder {
   std::vector<UHDM::param_assign*>* m_param_assigns = nullptr;
   std::vector<UHDM::param_assign*>* m_orig_param_assigns = nullptr;
   std::vector<UHDM::task_func*>* m_task_funcs = nullptr;
+  std::vector<UHDM::task_func_decl*>* m_task_func_decls = nullptr;
   std::vector<UHDM::any*>* m_assertions = nullptr;
 };
 

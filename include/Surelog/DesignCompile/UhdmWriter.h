@@ -75,7 +75,7 @@ class UhdmWriter final {
                   UHDM::Serializer& s, ModPortMap& modPortMap,
                   SignalBaseClassMap& signalBaseMap, SignalMap& signalMap,
                   ModuleInstance* instance = nullptr,
-                  ModuleDefinition* mod = nullptr);
+                  DesignComponent* mod = nullptr);
   void writeNets(DesignComponent* mod, std::vector<Signal*>& orig_nets,
                  UHDM::BaseClass* parent, UHDM::VectorOfnet* dest_nets,
                  UHDM::Serializer& s, SignalBaseClassMap& signalBaseMap,
@@ -121,18 +121,16 @@ class UhdmWriter final {
                         DesignComponent* mod, UHDM::any* scope,
                         std::vector<UHDM::cont_assign*>* assigns);
 
-  void lateBinding(UHDM::Serializer& s, DesignComponent* mod, UHDM::scope* m);
   UHDM::any* swapForSpecifiedVar(UHDM::Serializer& s, DesignComponent* mod,
                                  UHDM::any* tmp,
                                  UHDM::VectorOfvariables* lvariables,
                                  UHDM::variables* lvariable,
                                  std::string_view name, const UHDM::any* var,
                                  const UHDM::any* parent);
-  void lateTypedefBinding(UHDM::Serializer& s, DesignComponent* mod,
-                          UHDM::scope* m);
+  void bind(UHDM::Serializer& s, const std::vector<vpiHandle>& designs);
 
   CompileDesign* const m_compileDesign;
-  Design* const m_design;
+  Design* const m_design = nullptr;
   ComponentMap m_componentMap;
   CompileHelper m_helper;
 };

@@ -380,18 +380,22 @@ UHDM::any* CompileHelper::compileVariable(
         }
         if (cl) {
           class_var* var = s.MakeClass_var();
-          class_typespec* tps = s.MakeClass_typespec();
+          if (ts == nullptr) {
+            class_typespec* tps = s.MakeClass_typespec();
+            tps->Class_defn(cl->getUhdmScope<UHDM::class_defn>());
+            tps->VpiName(typespecName);
+            tps->SetVpiParent(pstmt);
+            ts = tps;
+            fC->populateCoreMembers(variable, variable, tps);
+          }
           ref_typespec* tpsRef = s.MakeRef_typespec();
           tpsRef->VpiName(typespecName);
           tpsRef->SetVpiParent(var);
-          tpsRef->Actual_typespec(tps);
+          tpsRef->Actual_typespec(ts);
           var->Typespec(tpsRef);
-          tps->Class_defn(cl->getUhdmScope<UHDM::class_defn>());
-          tps->VpiName(typespecName);
-          tps->SetVpiParent(pstmt);
-          fC->populateCoreMembers(variable, variable, tps);
+          var->VpiName(fC->SymName(nameId));
           fC->populateCoreMembers(variable, variable, tpsRef);
-          fC->populateCoreMembers(declarationId, declarationId, var);
+          fC->populateCoreMembers(nameId, nameId, var);
           result = var;
         }
       }
@@ -431,6 +435,7 @@ UHDM::any* CompileHelper::compileVariable(
             fC->populateCoreMembers(declarationId, declarationId, tsRef);
             tsRef->SetVpiParent(ref);
             tsRef->Actual_typespec(ts);
+            tsRef->VpiName(typeName);
             ref->Typespec(tsRef);
             if (ts->UhdmType() == uhdmunsupported_typespec) {
               component->needLateTypedefBinding(ref);
@@ -449,8 +454,9 @@ UHDM::any* CompileHelper::compileVariable(
       tsRef->SetVpiParent(var);
       tsRef->Actual_typespec(ts);
       var->Typespec(tsRef);
+      var->VpiName(fC->SymName(nameId));
       fC->populateCoreMembers(declarationId, declarationId, tsRef);
-      fC->populateCoreMembers(declarationId, declarationId, var);
+      fC->populateCoreMembers(nameId, nameId, var);
       result = var;
       break;
     }
@@ -461,8 +467,9 @@ UHDM::any* CompileHelper::compileVariable(
       tsRef->Actual_typespec(ts);
       var->Typespec(tsRef);
       var->VpiSigned(isSigned);
+      var->VpiName(fC->SymName(nameId));
       fC->populateCoreMembers(declarationId, declarationId, tsRef);
-      fC->populateCoreMembers(declarationId, declarationId, var);
+      fC->populateCoreMembers(nameId, nameId, var);
       result = var;
       break;
     }
@@ -473,6 +480,8 @@ UHDM::any* CompileHelper::compileVariable(
       tsRef->Actual_typespec(ts);
       var->Typespec(tsRef);
       var->VpiSigned(isSigned);
+      var->VpiName(fC->SymName(nameId));
+      fC->populateCoreMembers(nameId, nameId, var);
       fC->populateCoreMembers(declarationId, declarationId, tsRef);
       result = var;
       break;
@@ -484,6 +493,8 @@ UHDM::any* CompileHelper::compileVariable(
       tsRef->Actual_typespec(ts);
       var->Typespec(tsRef);
       var->VpiSigned(isSigned);
+      var->VpiName(fC->SymName(nameId));
+      fC->populateCoreMembers(nameId, nameId, var);
       fC->populateCoreMembers(declarationId, declarationId, tsRef);
       result = var;
       break;
@@ -497,6 +508,8 @@ UHDM::any* CompileHelper::compileVariable(
         var->Typespec(tsRef);
         fC->populateCoreMembers(declarationId, declarationId, tsRef);
       }
+      var->VpiName(fC->SymName(nameId));
+      fC->populateCoreMembers(nameId, nameId, var);
       var->VpiSigned(isSigned);
       result = var;
       break;
@@ -508,6 +521,8 @@ UHDM::any* CompileHelper::compileVariable(
       tsRef->Actual_typespec(ts);
       var->Typespec(tsRef);
       var->VpiSigned(isSigned);
+      var->VpiName(fC->SymName(nameId));
+      fC->populateCoreMembers(nameId, nameId, var);
       fC->populateCoreMembers(declarationId, declarationId, tsRef);
       result = var;
       break;
@@ -519,6 +534,8 @@ UHDM::any* CompileHelper::compileVariable(
       tsRef->Actual_typespec(ts);
       var->Typespec(tsRef);
       var->VpiSigned(isSigned);
+      var->VpiName(fC->SymName(nameId));
+      fC->populateCoreMembers(nameId, nameId, var);
       fC->populateCoreMembers(declarationId, declarationId, tsRef);
       result = var;
       break;
@@ -530,6 +547,8 @@ UHDM::any* CompileHelper::compileVariable(
       tsRef->Actual_typespec(ts);
       var->Typespec(tsRef);
       var->VpiSigned(isSigned);
+      var->VpiName(fC->SymName(nameId));
+      fC->populateCoreMembers(nameId, nameId, var);
       fC->populateCoreMembers(declarationId, declarationId, tsRef);
       result = var;
       break;
@@ -540,6 +559,8 @@ UHDM::any* CompileHelper::compileVariable(
       tsRef->SetVpiParent(var);
       tsRef->Actual_typespec(ts);
       var->Typespec(tsRef);
+      var->VpiName(fC->SymName(nameId));
+      fC->populateCoreMembers(nameId, nameId, var);
       fC->populateCoreMembers(declarationId, declarationId, tsRef);
       result = var;
       break;
@@ -550,6 +571,8 @@ UHDM::any* CompileHelper::compileVariable(
       tsRef->SetVpiParent(var);
       tsRef->Actual_typespec(ts);
       var->Typespec(tsRef);
+      var->VpiName(fC->SymName(nameId));
+      fC->populateCoreMembers(nameId, nameId, var);
       fC->populateCoreMembers(declarationId, declarationId, tsRef);
       result = var;
       break;
@@ -560,6 +583,8 @@ UHDM::any* CompileHelper::compileVariable(
       tsRef->SetVpiParent(var);
       tsRef->Actual_typespec(ts);
       var->Typespec(tsRef);
+      var->VpiName(fC->SymName(nameId));
+      fC->populateCoreMembers(nameId, nameId, var);
       fC->populateCoreMembers(declarationId, declarationId, tsRef);
       result = var;
       break;
@@ -570,6 +595,8 @@ UHDM::any* CompileHelper::compileVariable(
       tsRef->SetVpiParent(var);
       tsRef->Actual_typespec(ts);
       var->Typespec(tsRef);
+      var->VpiName(fC->SymName(nameId));
+      fC->populateCoreMembers(nameId, nameId, var);
       fC->populateCoreMembers(declarationId, declarationId, tsRef);
       result = var;
       break;
@@ -1060,6 +1087,7 @@ typespec* CompileHelper::compileDatastructureTypespec(
         if (def->getType() == VObjectType::paInterface_declaration) {
           interface_typespec* tps = s.MakeInterface_typespec();
           tps->VpiName(typeName);
+          tps->Interface_inst(def->getUhdmScope<UHDM::interface_inst>());
           fC->populateCoreMembers(type, type, tps);
           result = tps;
           if (!suffixname.empty()) {
@@ -1084,6 +1112,7 @@ typespec* CompileHelper::compileDatastructureTypespec(
             if (def->getModPort(name)) {
               interface_typespec* mptps = s.MakeInterface_typespec();
               mptps->VpiName(name);
+              mptps->Interface_inst(def->getUhdmScope<UHDM::interface_inst>());
               fC->populateCoreMembers(sub, sub, mptps);
               mptps->SetVpiParent(tps);
               mptps->VpiIsModPort(true);

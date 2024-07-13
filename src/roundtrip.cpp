@@ -291,7 +291,7 @@ class RoundTripTracer final : public UHDM::UhdmListener {
 
   void insert(const std::filesystem::path &filepath, size_t line,
               uint16_t column, std::string_view data) {
-    assert(column < uint16_t(~0u / 2));
+    assert(column < (uint16_t(~0) / 2));
 
     if (filepath.empty() || (line < 1) || (column < 1) || data.empty()) {
       return;
@@ -594,6 +594,8 @@ class RoundTripTracer final : public UHDM::UhdmListener {
       }
     }
 
+    if (typespec == nullptr) return;
+
     std::string text(typespec->VpiName());
     if (text.empty()) {
       typespec_names_t::const_iterator it =
@@ -808,39 +810,6 @@ class RoundTripTracer final : public UHDM::UhdmListener {
       insert(filepath, object->VpiEndLineNo(),
              object->VpiEndColumnNo() - keyword2.length(), keyword2);
     }
-  }
-
-  void enterNamed_begin(const UHDM::named_begin *const object) final {
-    if (visited.find(object) != visited.end()) return;
-
-    constexpr std::string_view keyword1 = "begin:";
-    constexpr std::string_view keyword2 = "end";
-
-    const std::filesystem::path &filepath = object->VpiFile();
-    const std::string name = formatName(object->VpiName());
-
-    std::string text;
-
-    text.assign(keyword1).append(name);
-    insert(filepath, object->VpiLineNo(), object->VpiColumnNo(), text);
-    insert(filepath, object->VpiEndLineNo(),
-           object->VpiEndColumnNo() - keyword2.length(), keyword2);
-  }
-
-  void enterNamed_fork(const UHDM::named_fork *const object) final {
-    if (visited.find(object) != visited.end()) return;
-
-    constexpr std::string_view keyword1 = "fork";
-    constexpr std::string_view keyword2 = "join";
-
-    const std::filesystem::path &filepath = object->VpiFile();
-
-    std::string text;
-    text.append(keyword1).append(":").append(formatName(object->VpiName()));
-
-    insert(filepath, object->VpiLineNo(), object->VpiColumnNo(), text);
-    insert(filepath, object->VpiEndLineNo(),
-           object->VpiEndColumnNo() - keyword2.length(), keyword2);
   }
 
   void enterFork_stmt(const UHDM::fork_stmt *const object) final {

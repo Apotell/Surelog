@@ -489,6 +489,7 @@ bool ErrorDefinition::init() {
   rec(UHDM_FORCING_UNSIGNED_TYPE, WARNING, UHDM,
       "Critical: Forcing signal to unsigned type due to unsigned port binding "
       "\"%s\"");
+  rec(UHDM_FAILED_TO_BIND, ERROR, UHDM, "Failed to bind object: \"%s\"");
 
   rec(INTEGRITY_CHECK_MISSING_LOCATION, ERROR, COMP,
       "Object %s has invalid location information");
@@ -506,6 +507,8 @@ bool ErrorDefinition::init() {
       "Child %s is not entirely in parent's scope");
   rec(INTEGRITY_CHECK_COLLECTION_HAS_DUPLICATES, ERROR, COMP,
       "Object %s has duplicates");
+  rec(INTEGRITY_CHECK_ACTUAL_CANNOT_BE_NULL, ERROR, COMP,
+      "Object %s actual cannot be null");
   return true;
 }
 

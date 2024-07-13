@@ -2159,10 +2159,13 @@ void CompileHelper::compileImportDeclaration(DesignComponent* component,
        n<> u<32> t<Package_import_item> p<33> c<30> l<3>
        n<> u<33> t<Package_import_declaration> p<34> c<29> l<3>
      */
+  UHDM::any* pscope = component->getUhdmScope();
+  if (pscope == nullptr)
+    pscope = compileDesign->getCompiler()->getDesign()->getUhdmDesign();
   Serializer& s = compileDesign->getSerializer();
   while (package_import_item_id) {
     import_typespec* import_stmt = s.MakeImport_typespec();
-    import_stmt->SetVpiParent(component->getUhdmScope());
+    import_stmt->SetVpiParent(pscope);
     fC->populateCoreMembers(package_import_item_id, package_import_item_id,
                             import_stmt);
     import_stmt->VpiName(fC->SymName(package_import_item_id));

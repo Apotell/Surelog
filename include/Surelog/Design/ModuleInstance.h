@@ -66,6 +66,7 @@ class ModuleInstance : public ValuedComponentI {
     m_boundInstance = boundToInstance;
   }
   DesignComponent* getDefinition() { return m_definition; }
+  const DesignComponent* getDefinition() const { return m_definition; }
   uint32_t getNbChildren() const { return m_allSubInstances.size(); }
   ModuleInstance* getChildren(uint32_t i) {
     if (i < m_allSubInstances.size()) {

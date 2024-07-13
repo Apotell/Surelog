@@ -46,6 +46,7 @@
 #include <algorithm>
 #include <cstring>
 #include <queue>
+#include <set>
 
 // UHDM
 #include <uhdm/ElaboratorListener.h>
@@ -63,6 +64,1102 @@
 namespace SURELOG {
 namespace fs = std::filesystem;
 using namespace UHDM;  // NOLINT (we're using a whole bunch of these)
+
+class ObjectBinder final : public UHDM::UhdmListener {
+ private:
+  typedef std::map<const UHDM::BaseClass*, const ValuedComponentI*>
+      BaseClassMap;
+  typedef std::map<const ValuedComponentI*, UHDM::BaseClass*> ComponentMap;
+  typedef std::vector<const UHDM::design*> DesignStack;
+  typedef std::vector<const UHDM::package*> PackageStack;
+  typedef std::vector<const UHDM::any*> PrefixStack;
+  typedef std::vector<std::tuple<const UHDM::any*, const UHDM::instance*,
+                                 const ValuedComponentI*>>
+      Unbounded;
+  typedef std::set<const UHDM::any*> Searched;
+
+ public:
+  ObjectBinder(const ComponentMap& componentMap, Serializer& serializer,
+               SymbolTable* const symbolTable,
+               ErrorContainer* const errorContainer, bool muteStdout)
+      : m_componentMap(componentMap),
+        m_serializer(serializer),
+        m_symbolTable(symbolTable),
+        m_errorContainer(errorContainer),
+        m_muteStdout(muteStdout) {
+    for (ComponentMap::const_reference entry : m_componentMap) {
+      m_baseclassMap.emplace(entry.second, entry.first);
+    }
+  }
+
+  inline std::string_view suffixName(std::string_view varg) const {
+    size_t pos1 = varg.find("::");
+    if (pos1 != std::string::npos) {
+      varg = varg.substr(pos1 + 2);
+    }
+
+    size_t pos2 = varg.find("work@");
+    if (pos2 != std::string::npos) {
+      varg = varg.substr(pos2 + 5);
+    }
+    return varg;
+  }
+
+  static bool isInElaboratedTree(const UHDM::any* const object) {
+    const UHDM::any* p = object;
+    while (p != nullptr) {
+      if (const UHDM::instance* const inst =
+              any_cast<const UHDM::instance*>(p)) {
+        if (inst->VpiTop()) return true;
+      }
+      p = p->VpiParent();
+    }
+    return false;
+  }
+
+  VObjectType getDefaultNetType(const ValuedComponentI* component) const {
+    if (component == nullptr) return VObjectType::slNoType;
+
+    if (const DesignComponent* dc1 =
+            valuedcomponenti_cast<const DesignComponent*>(component)) {
+      if (const DesignElement* de = dc1->getDesignElement()) {
+        return de->m_defaultNetType;
+      }
+    }
+
+    if (const ModuleInstance* mi =
+            valuedcomponenti_cast<const ModuleInstance*>(component)) {
+      if (const DesignComponent* dc2 =
+              valuedcomponenti_cast<const DesignComponent*>(
+                  mi->getDefinition())) {
+        if (const DesignElement* de = dc2->getDesignElement()) {
+          return de->m_defaultNetType;
+        }
+      }
+    }
+
+    return VObjectType::slNoType;
+  }
+
+  const UHDM::package* getPackage(std::string_view name) const {
+    if (m_designStack.empty()) return nullptr;
+
+    const UHDM::design* const d = m_designStack.back();
+    if (d->AllPackages() != nullptr) {
+      for (const UHDM::package* p : *d->AllPackages()) {
+        if (p->VpiName() == name) {
+          return p;
+        }
+      }
+    }
+
+    return nullptr;
+  }
+
+  const UHDM::class_defn* getClass_defn(std::string_view name) const {
+    if (!m_packageStack.empty()) {
+      const UHDM::package* const p = m_packageStack.back();
+      if (p->Class_defns() != nullptr) {
+        for (const UHDM::class_defn* c : *p->Class_defns()) {
+          if (c->VpiName() == name) {
+            return c;
+          }
+        }
+      }
+    }
+    if (!m_designStack.empty()) {
+      const UHDM::design* const d = m_designStack.back();
+      if (d->AllClasses() != nullptr) {
+        for (const UHDM::class_defn* c : *d->AllClasses()) {
+          if (c->VpiName() == name) {
+            return c;
+          }
+        }
+      }
+    }
+
+    return nullptr;
+  }
+
+  void enterDesign(const UHDM::design* const object) final {
+    m_designStack.emplace_back(object);
+  }
+
+  void leaveDesign(const UHDM::design* const object) final {
+    m_designStack.pop_back();
+  }
+
+  void enterPackage(const UHDM::package* const object) final {
+    m_packageStack.emplace_back(object);
+  }
+
+  void leavePackage(const UHDM::package* const object) final {
+    m_packageStack.pop_back();
+  }
+
+  void enterHier_path(const UHDM::hier_path* const object) final {
+    m_prefixStack.emplace_back(object);
+  }
+
+  void leaveHier_path(const UHDM::hier_path* const object) final {
+    if (!m_prefixStack.empty() && (m_prefixStack.back() == object)) {
+      m_prefixStack.pop_back();
+    }
+  }
+
+  const UHDM::any* findInTypespec(std::string_view name,
+                                  const UHDM::any* const object,
+                                  const UHDM::typespec* const scope) {
+    if (scope == nullptr) return nullptr;
+    if (!m_searched.emplace(scope).second) return nullptr;
+
+    switch (scope->UhdmType()) {
+      case UHDM::uhdmenum_typespec: {
+        if (const UHDM::any* const actual = findInVectorOfAny(
+                name, object,
+                static_cast<const UHDM::enum_typespec*>(scope)->Enum_consts(),
+                scope)) {
+          return actual;
+        }
+      } break;
+
+      case UHDM::uhdmstruct_typespec: {
+        if (const UHDM::any* const actual = findInVectorOfAny(
+                name, object,
+                static_cast<const UHDM::struct_typespec*>(scope)->Members(),
+                scope)) {
+          return actual;
+        }
+      } break;
+
+      case UHDM::uhdmunion_typespec: {
+        if (const UHDM::any* const actual = findInVectorOfAny(
+                name, object,
+                static_cast<const UHDM::union_typespec*>(scope)->Members(),
+                scope)) {
+          return actual;
+        }
+      } break;
+
+      case UHDM::uhdmimport_typespec: {
+        const UHDM::import_typespec* const it =
+            any_cast<const UHDM::import_typespec*>(scope);
+        if (const UHDM::package* const p = getPackage(it->VpiName())) {
+          if (const UHDM::any* const actual = findInPackage(object, p)) {
+            return actual;
+          }
+        }
+      } break;
+
+      case UHDM::uhdmclass_typespec: {
+        if (const UHDM::class_defn* cd =
+                static_cast<const UHDM::class_typespec*>(scope)->Class_defn()) {
+          if (const UHDM::any* const actual = findInClass_defn(object, cd)) {
+            return actual;
+          }
+        }
+      } break;
+
+      case UHDM::uhdminterface_typespec: {
+        if (const UHDM::interface_inst* ins =
+                static_cast<const UHDM::interface_typespec*>(scope)
+                    ->Interface_inst()) {
+          if (const UHDM::any* const actual =
+                  findInInterface_inst(object, ins)) {
+            return actual;
+          }
+        }
+      } break;
+
+      default:
+        break;
+    }
+
+    return nullptr;
+  }
+
+  const UHDM::any* findInRefTypespec(std::string_view name,
+                                     const UHDM::any* const object,
+                                     const UHDM::ref_typespec* const scope) {
+    if (scope == nullptr) return nullptr;
+
+    if (const UHDM::typespec* const ts = scope->Actual_typespec()) {
+      return findInTypespec(name, object, ts);
+    }
+    return nullptr;
+  }
+
+  template <typename T>
+  const UHDM::any* findInVectorOfAny(std::string_view name,
+                                     const UHDM::any* const object,
+                                     const std::vector<T*>* const collection,
+                                     const UHDM::any* const scope) {
+    if (collection == nullptr) return nullptr;
+
+    std::string_view shortName = name;
+    if (shortName.find("::") != std::string::npos) {
+      std::vector<std::string_view> tokens;
+      StringUtils::tokenizeMulti(shortName, "::", tokens);
+      if (tokens.size() > 1) shortName = tokens.back();
+    }
+
+    for (const UHDM::any* c : *collection) {
+      if (c->UhdmType() == UHDM::uhdmunsupported_typespec) continue;
+      if (c->UhdmType() == UHDM::uhdmbit_select) continue;
+      if (c->UhdmType() == UHDM::uhdmindexed_part_select) continue;
+      if (c->UhdmType() == UHDM::uhdmpart_select) continue;
+      if (c->UhdmType() == UHDM::uhdmref_module) continue;
+      if (c->UhdmType() == UHDM::uhdmref_obj) continue;
+      if (c->UhdmType() == UHDM::uhdmvar_select) continue;
+      if (any_cast<UHDM::typespec>(c) == nullptr) {
+        if (c->VpiName() == name) return c;
+        if (c->VpiName() == shortName) return c;
+      } else {
+        if (any_cast<UHDM::ref_typespec>(object) != nullptr) {
+          if (c->VpiName() == name) return c;
+          if (c->VpiName() == shortName) return c;
+        }
+        if (const UHDM::any* const actual1 = findInTypespec(
+                name, object, static_cast<const UHDM::typespec*>(c))) {
+          return actual1;
+        }
+      }
+      if (c->UhdmType() == UHDM::uhdmenum_var) {
+        if (const UHDM::any* const actual1 = findInRefTypespec(
+                name, object,
+                static_cast<const UHDM::enum_var*>(c)->Typespec())) {
+          return actual1;
+        } else if (const UHDM::any* const actual2 = findInRefTypespec(
+                       shortName, object,
+                       static_cast<const UHDM::enum_var*>(c)->Typespec())) {
+          return actual2;
+        }
+      }
+      // if (c->UhdmType() == UHDM::uhdmstruct_var) {
+      //   if (const UHDM::any* const actual = findInRefTypespec(
+      //           name, static_cast<const UHDM::struct_var*>(c)->Typespec())) {
+      //     return actual;
+      //   }
+      // }
+      if (const UHDM::ref_typespec* rt =
+              any_cast<const UHDM::ref_typespec*>(c)) {
+        if (scope != rt->Actual_typespec()) {
+          if (const UHDM::any* const actual1 =
+                  findInRefTypespec(name, object, rt)) {
+            return actual1;
+          } else if (const UHDM::any* const actual2 =
+                         findInRefTypespec(shortName, object, rt)) {
+            return actual2;
+          }
+        }
+      }
+    }
+
+    return nullptr;
+  }
+
+  const UHDM::any* findInScope(const UHDM::any* const object,
+                               const UHDM::scope* const scope) {
+    if (scope == nullptr) return nullptr;
+
+    std::string_view name = object->VpiName();
+    if (const UHDM::any* const actual1 =
+            findInVectorOfAny(name, object, scope->Variables(), scope)) {
+      return actual1;
+    } else if (const UHDM::any* const actual2 = findInVectorOfAny(
+                   name, object, scope->Param_assigns(), scope)) {
+      return actual2;
+    } else if (const UHDM::any* const actual3 = findInVectorOfAny(
+                   name, object, scope->Parameters(), scope)) {
+      return actual3;
+    } else if (const UHDM::any* const actual3 = findInVectorOfAny(
+                   name, object, scope->Property_decls(), scope)) {
+      return actual3;
+    } else if (const UHDM::any* const actual4 =
+                   findInVectorOfAny(name, object, scope->Typespecs(), scope)) {
+      return actual4;
+    } else if (const UHDM::package* const p =
+                   any_cast<const UHDM::package*>(scope)) {
+      std::string fullName = StrCat(p->VpiName(), "::", name);
+      if (const UHDM::any* const actual =
+              findInVectorOfAny(fullName, object, scope->Typespecs(), scope)) {
+        return actual;
+      }
+    }
+
+    return nullptr;
+  }
+
+  const UHDM::any* findInInstance(const UHDM::any* const object,
+                                  const UHDM::instance* const scope) {
+    if (scope == nullptr) return nullptr;
+
+    std::string_view name = object->VpiName();
+    if (scope->VpiName() == name) return scope;
+
+    if (const UHDM::any* const actual1 =
+            findInVectorOfAny(name, object, scope->Nets(), scope)) {
+      return actual1;
+    } else if (const UHDM::any* const actual2 = findInVectorOfAny(
+                   name, object, scope->Array_nets(), scope)) {
+      return actual2;
+    } else if (const UHDM::any* const actual3 = findInVectorOfAny(
+                   name, object, scope->Task_funcs(), scope)) {
+      return actual3;
+    } else if (const UHDM::any* const actual4 =
+                   findInVectorOfAny(name, object, scope->Programs(), scope)) {
+      return actual4;
+    }
+
+    return findInScope(object, scope);
+  }
+
+  const UHDM::any* findInInterface_inst(
+      const UHDM::any* const object, const UHDM::interface_inst* const scope) {
+    if (scope == nullptr) return nullptr;
+    if (!m_searched.emplace(scope).second) return nullptr;
+
+    std::string_view name = object->VpiName();
+    if (scope->VpiName() == name) {
+      return scope;
+    } else if (const UHDM::any* const actual1 =
+                   findInVectorOfAny(name, object, scope->Modports(), scope)) {
+      return actual1;
+    } else if (const UHDM::any* const actual4 = findInVectorOfAny(
+                   name, object, scope->Interface_tf_decls(), scope)) {
+      return actual4;
+    } else if (const UHDM::any* const actual4 =
+                   findInVectorOfAny(name, object, scope->Ports(), scope)) {
+      return actual4;
+    }
+    return findInInstance(object, scope);
+  }
+
+  const UHDM::any* findInPackage(const UHDM::any* const object,
+                                 const UHDM::package* const scope) {
+    if (scope == nullptr) return nullptr;
+    if (!m_searched.emplace(scope).second) return nullptr;
+
+    std::string_view name = object->VpiName();
+    if (scope->VpiName() == name) return scope;
+
+    if (const UHDM::any* const actual =
+            findInVectorOfAny(name, object, scope->Parameters(), scope)) {
+      return actual;
+    }
+
+    return findInInstance(object, scope);
+  }
+
+  const UHDM::any* findInProgram(const UHDM::any* const object,
+                                 const UHDM::program* const scope) {
+    if (scope == nullptr) return nullptr;
+    if (!m_searched.emplace(scope).second) return nullptr;
+
+    std::string_view name = object->VpiName();
+    if (scope->VpiName() == name) return scope;
+
+    if (const UHDM::any* const actual =
+            findInVectorOfAny(name, object, scope->Parameters(), scope)) {
+      return actual;
+    } else if (const UHDM::any* const actual =
+                   findInVectorOfAny(name, object, scope->Ports(), scope)) {
+      return actual;
+    } else if (const UHDM::any* const actual = findInVectorOfAny(
+                   name, object, scope->Interfaces(), scope)) {
+      return actual;
+    }
+
+    return findInInstance(object, scope);
+  }
+
+  const UHDM::any* findInFunction(const UHDM::any* const object,
+                                  const UHDM::function* const scope) {
+    if (scope == nullptr) return nullptr;
+    if (!m_searched.emplace(scope).second) return nullptr;
+
+    std::string_view name = object->VpiName();
+    if (scope->VpiName() == name) {
+      return scope->Return();
+    } else if (const UHDM::any* const actual1 =
+                   findInVectorOfAny(name, object, scope->Io_decls(), scope)) {
+      return actual1;
+    } else if (const UHDM::any* const actual2 =
+                   findInVectorOfAny(name, object, scope->Variables(), scope)) {
+      return actual2;
+    } else if (const UHDM::any* const actual3 = findInVectorOfAny(
+                   name, object, scope->Parameters(), scope)) {
+      return actual3;
+    } else if (const UHDM::package* const inst =
+                   scope->Instance<UHDM::package>()) {
+      if (const UHDM::any* const actual = findInPackage(object, inst)) {
+        return actual;
+      }
+    }
+
+    return findInScope(object, scope);
+  }
+
+  const UHDM::any* findInTask(const UHDM::any* const object,
+                              const UHDM::task* const scope) {
+    if (scope == nullptr) return nullptr;
+    if (!m_searched.emplace(scope).second) return nullptr;
+
+    std::string_view name = object->VpiName();
+    if (scope->VpiName() == name) return scope;
+
+    if (const UHDM::any* const actual1 =
+            findInVectorOfAny(name, object, scope->Io_decls(), scope)) {
+      return actual1;
+    } else if (const UHDM::any* const actual2 =
+                   findInVectorOfAny(name, object, scope->Variables(), scope)) {
+      return actual2;
+    } else if (const UHDM::package* const p =
+                   scope->Instance<UHDM::package>()) {
+      if (const UHDM::any* const actual = findInPackage(object, p)) {
+        return actual;
+      }
+    }
+
+    return findInScope(object, scope);
+  }
+
+  const UHDM::any* findInFor_stmt(const UHDM::any* const object,
+                                  const UHDM::for_stmt* const scope) {
+    if (scope == nullptr) return nullptr;
+    if (!m_searched.emplace(scope).second) return nullptr;
+
+    const std::string_view name = object->VpiName();
+    std::string_view shortName = name;
+    if (shortName.find("::") != std::string::npos) {
+      std::vector<std::string_view> tokens;
+      StringUtils::tokenizeMulti(shortName, "::", tokens);
+      if (tokens.size() > 1) shortName = tokens.back();
+    }
+
+    if (const VectorOfany* const inits = scope->VpiForInitStmts()) {
+      for (auto init : *inits) {
+        if (init->UhdmType() == uhdmassign_stmt) {
+          const expr* const lhs = static_cast<const assign_stmt*>(init)->Lhs();
+          if (lhs->UhdmType() == UHDM::uhdmbit_select) continue;
+          if (lhs->UhdmType() == UHDM::uhdmindexed_part_select) continue;
+          if (lhs->UhdmType() == UHDM::uhdmpart_select) continue;
+          if (lhs->UhdmType() == UHDM::uhdmref_module) continue;
+          if (lhs->UhdmType() == UHDM::uhdmref_obj) continue;
+          if (lhs->UhdmType() == UHDM::uhdmvar_select) continue;
+          if (lhs->VpiName() == name) return lhs;
+          if (lhs->VpiName() == shortName) return lhs;
+        }
+      }
+    }
+
+    return findInScope(object, scope);
+  }
+
+  const UHDM::any* findInForeach_stmt(const UHDM::any* const object,
+                                      const UHDM::foreach_stmt* const scope) {
+    if (scope == nullptr) return nullptr;
+    if (!m_searched.emplace(scope).second) return nullptr;
+
+    std::string_view name = object->VpiName();
+    if (const UHDM::any* const var =
+            findInVectorOfAny(name, object, scope->VpiLoopVars(), scope)) {
+      return var;
+    }
+
+    return findInScope(object, scope);
+  }
+
+  template <typename T>
+  const UHDM::any* findInScope_sub(
+      const UHDM::any* const object, const T* const scope,
+      typename std::enable_if<
+          std::is_same<UHDM::begin, typename std::decay<T>::type>::value ||
+          std::is_same<UHDM::fork_stmt,
+                       typename std::decay<T>::type>::value>::type* = 0) {
+    if (scope == nullptr) return nullptr;
+    if (!m_searched.emplace(scope).second) return nullptr;
+
+    const std::string_view name = object->VpiName();
+    if (const UHDM::any* const actual1 =
+            findInVectorOfAny(name, object, scope->Variables(), scope)) {
+      return actual1;
+    } else if (const UHDM::any* const actual2 = findInVectorOfAny(
+                   name, object, scope->Parameters(), scope)) {
+      return actual2;
+    }
+
+    std::string_view shortName = name;
+    if (shortName.find("::") != std::string::npos) {
+      std::vector<std::string_view> tokens;
+      StringUtils::tokenizeMulti(shortName, "::", tokens);
+      if (tokens.size() > 1) shortName = tokens.back();
+    }
+
+    if (const VectorOfany* const stmts = scope->Stmts()) {
+      for (auto init : *stmts) {
+        if (init->UhdmType() == uhdmassign_stmt) {
+          const expr* const lhs = static_cast<const assign_stmt*>(init)->Lhs();
+          if (lhs->UhdmType() == UHDM::uhdmbit_select) continue;
+          if (lhs->UhdmType() == UHDM::uhdmindexed_part_select) continue;
+          if (lhs->UhdmType() == UHDM::uhdmpart_select) continue;
+          if (lhs->UhdmType() == UHDM::uhdmref_module) continue;
+          if (lhs->UhdmType() == UHDM::uhdmref_obj) continue;
+          if (lhs->UhdmType() == UHDM::uhdmvar_select) continue;
+          if (lhs->VpiName() == name) return lhs;
+          if (lhs->VpiName() == shortName) return lhs;
+        }
+      }
+    }
+
+    return findInScope(object, scope);
+  }
+
+  const UHDM::any* findInClass_defn(const UHDM::any* const object,
+                                    const UHDM::class_defn* const scope) {
+    if (scope == nullptr) return nullptr;
+    if (!m_searched.emplace(scope).second) return nullptr;
+
+    const std::string_view name = object->VpiName();
+    std::string_view shortName = name;
+    if (shortName.find("::") != std::string::npos) {
+      std::vector<std::string_view> tokens;
+      StringUtils::tokenizeMulti(shortName, "::", tokens);
+      if (tokens.size() > 1) shortName = tokens.back();
+    }
+
+    if (name == "this") return scope;
+
+    if (name == "super") {
+      if (const UHDM::extends* ext =
+              static_cast<const UHDM::class_defn*>(scope)->Extends()) {
+        if (const UHDM::ref_typespec* rt = ext->Class_typespec()) {
+          if (const UHDM::class_typespec* cts =
+                  rt->Actual_typespec<UHDM::class_typespec>())
+            return cts->Class_defn();
+        }
+      }
+      return nullptr;
+    }
+
+    if (scope->VpiName() == name) return scope;
+    if (scope->VpiName() == shortName) return scope;
+
+    if (const UHDM::any* const actual1 =
+            findInVectorOfAny(name, object, scope->Variables(), scope)) {
+      return actual1;
+    } else if (const UHDM::any* const actual2 = findInVectorOfAny(
+                   name, object, scope->Task_funcs(), scope)) {
+      return actual2;
+    } else if (const UHDM::any* const actual3 = findInScope(
+                   object, static_cast<const UHDM::scope*>(scope))) {
+      return actual3;
+    } else if (const UHDM::any* const actual4 = findInVectorOfAny(
+                   name, object, scope->Constraints(), scope)) {
+      return actual4;
+    } else if (const UHDM::extends* ext = scope->Extends()) {
+      if (const ref_typespec* rt = ext->Class_typespec()) {
+        if (const class_typespec* cts = rt->Actual_typespec<class_typespec>()) {
+          return findInClass_defn(object, cts->Class_defn());
+        }
+      }
+    }
+
+    return findInScope(object, scope);
+  }
+
+  const UHDM::any* findInModule_inst(const UHDM::any* const object,
+                                     const UHDM::module_inst* const scope) {
+    if (scope == nullptr) return nullptr;
+    if (!m_searched.emplace(scope).second) return nullptr;
+
+    std::string_view name = suffixName(object->VpiName());
+    if (name == suffixName(scope->VpiName())) {
+      return scope;
+    } else if (const UHDM::any* const actual1 = findInVectorOfAny(
+                   name, object, scope->Interfaces(), scope)) {
+      return actual1;
+    } else if (const UHDM::any* const actual2 = findInVectorOfAny(
+                   name, object, scope->Interface_arrays(), scope)) {
+      return actual2;
+    }
+
+    return findInInstance(object, scope);
+  }
+
+  const UHDM::any* findInDesign(const UHDM::any* const object,
+                                const UHDM::design* const scope) {
+    if (scope == nullptr) return nullptr;
+    if (!m_searched.emplace(scope).second) return nullptr;
+
+    const std::string_view name = object->VpiName();
+
+    if (name == "$root") {
+      return scope;
+    } else if (scope->VpiName() == name) {
+      return scope;
+    } else if (const UHDM::any* const actual1 = findInVectorOfAny(
+                   name, object, scope->Parameters(), scope)) {
+      return actual1;
+    } else if (const UHDM::any* const actual2 = findInVectorOfAny(
+                   name, object, scope->Param_assigns(), scope)) {
+      return actual2;
+    } else if (const UHDM::any* const actual = findInVectorOfAny(
+                   name, object, scope->AllPackages(), scope)) {
+      return actual;
+    }
+
+    return nullptr;
+  }
+
+  const UHDM::any* getPrefix(const UHDM::any* const object) {
+    if (object == nullptr) return nullptr;
+    if (m_prefixStack.empty()) return nullptr;
+    if (m_prefixStack.back() != object->VpiParent()) return nullptr;
+
+    const UHDM::any* const parent = object->VpiParent();
+    switch (parent->UhdmType()) {
+      case UHDM::uhdmhier_path: {
+        const UHDM::hier_path* hp = static_cast<const UHDM::hier_path*>(parent);
+        if (hp->Path_elems() && (hp->Path_elems()->size() > 1)) {
+          for (size_t i = 1, n = hp->Path_elems()->size(); i < n; ++i) {
+            if (hp->Path_elems()->at(i) == object) {
+              const UHDM::any* const previous = hp->Path_elems()->at(i - 1);
+              if (const UHDM::ref_obj* const ro1 =
+                      any_cast<const UHDM::ref_obj*>(previous)) {
+                if ((ro1->VpiName() == "this") || (ro1->VpiName() == "super")) {
+                  const UHDM::any* prefix = ro1->VpiParent();
+                  while (prefix != nullptr) {
+                    if (prefix->UhdmType() == UHDM::uhdmclass_defn)
+                      return prefix;
+
+                    prefix = prefix->VpiParent();
+                  }
+                  return prefix;
+                }
+
+                if (const UHDM::class_var* const cv =
+                        ro1->Actual_group<UHDM::class_var>()) {
+                  if (const UHDM::ref_typespec* const iod2 = cv->Typespec()) {
+                    return iod2->Actual_typespec();
+                  }
+                } else if (const UHDM::io_decl* iod =
+                               ro1->Actual_group<UHDM::io_decl>()) {
+                  if (const UHDM::ref_typespec* const iod2 = iod->Typespec()) {
+                    return iod2->Actual_typespec();
+                  }
+                } else if (const UHDM::struct_var* const sv =
+                               ro1->Actual_group<UHDM::struct_var>()) {
+                  if (const UHDM::ref_typespec* const iod2 = sv->Typespec()) {
+                    return iod2->Actual_typespec();
+                  }
+                } else if (const UHDM::parameter* const p1 =
+                               ro1->Actual_group<UHDM::parameter>()) {
+                  if (const UHDM::ref_typespec* const iod2 = p1->Typespec()) {
+                    return iod2->Actual_typespec();
+                  }
+                } else if (const UHDM::logic_net* const ln =
+                               ro1->Actual_group<UHDM::logic_net>()) {
+                  // Ideally logic_net::Typespec should be valid but for
+                  // too many (or rather most) cases, the Typespec isn't set.
+                  // So, use the corresponding port in the parent module to
+                  // find the typespec.
+
+                  const UHDM::typespec* ts = nullptr;
+                  if (const UHDM::ref_typespec* rt = ln->Typespec()) {
+                    ts = rt->Actual_typespec();
+                  } else if (const UHDM::module_inst* mi =
+                                 ln->VpiParent<UHDM::module_inst>()) {
+                    if (mi->Ports() != nullptr) {
+                      for (const UHDM::port* p2 : *mi->Ports()) {
+                        if (const UHDM::ref_obj* ro2 =
+                                p2->Low_conn<UHDM::ref_obj>()) {
+                          if (ro2->Actual_group() == ln) {
+                            if (const UHDM::ref_typespec* rt = p2->Typespec()) {
+                              ts = rt->Actual_typespec();
+                            }
+                            break;
+                          }
+                        }
+                      }
+                    }
+                  }
+
+                  if (const UHDM::class_typespec* const cts =
+                          any_cast<const UHDM::class_typespec*>(ts)) {
+                    return cts->Class_defn();
+                  } else if (const UHDM::struct_typespec* const sts =
+                                 any_cast<const UHDM::struct_typespec*>(ts)) {
+                    return ts;
+                  }
+                }
+              }
+              break;
+            }
+          }
+        }
+      } break;
+
+      default:
+        break;
+    }
+
+    return nullptr;
+  }
+
+  const UHDM::any* bindObject(const UHDM::any* const object) {
+    const ValuedComponentI* component = nullptr;
+    const UHDM::instance* scope = nullptr;
+    const any* parent = object->VpiParent();
+
+    std::string_view name = object->VpiName();
+    name = StringUtils::trim(name);
+    if (name.empty()) return nullptr;
+
+    m_searched.clear();
+    if (name.find("::") != std::string::npos) {
+      std::vector<std::string_view> tokens;
+      StringUtils::tokenizeMulti(name, "::", tokens);
+      if (tokens.size() > 1) {
+        const std::string_view baseName = tokens[0];
+        if (const UHDM::package* const p = getPackage(baseName)) {
+          parent = p;
+        } else if (const UHDM::class_defn* const c = getClass_defn(baseName)) {
+          parent = c;
+        }
+      }
+    } else if (!m_prefixStack.empty()) {
+      if (const UHDM::any* const prefix = getPrefix(object)) {
+        parent = prefix;
+      }
+    }
+
+    while (parent != nullptr) {
+      switch (parent->UhdmType()) {
+        case UHDM::uhdmfunction: {
+          if (const UHDM::any* const actual = findInFunction(
+                  object, static_cast<const UHDM::function*>(parent))) {
+            return actual;
+          }
+        } break;
+
+        case UHDM::uhdmtask: {
+          if (const UHDM::any* const actual =
+                  findInTask(object, static_cast<const UHDM::task*>(parent))) {
+            return actual;
+          }
+        } break;
+
+        case UHDM::uhdmfor_stmt: {
+          if (const UHDM::any* const actual = findInFor_stmt(
+                  object, static_cast<const UHDM::for_stmt*>(parent))) {
+            return actual;
+          }
+        } break;
+
+        case UHDM::uhdmforeach_stmt: {
+          if (const UHDM::any* const actual = findInForeach_stmt(
+                  object, static_cast<const UHDM::foreach_stmt*>(parent))) {
+            return actual;
+          }
+        } break;
+
+        case UHDM::uhdmbegin: {
+          if (const UHDM::any* const actual = findInScope_sub(
+                  object, static_cast<const UHDM::begin*>(parent))) {
+            return actual;
+          }
+        } break;
+
+        case UHDM::uhdmfork_stmt: {
+          if (const UHDM::any* const actual = findInScope_sub(
+                  object, static_cast<const UHDM::fork_stmt*>(parent))) {
+            return actual;
+          }
+        } break;
+
+        case UHDM::uhdmclass_defn: {
+          if (const UHDM::any* const actual = findInClass_defn(
+                  object, static_cast<const UHDM::class_defn*>(parent))) {
+            return actual;
+          }
+        } break;
+
+        case UHDM::uhdmmodule_inst: {
+          if (const UHDM::any* const actual = findInModule_inst(
+                  object, static_cast<const UHDM::module_inst*>(parent))) {
+            return actual;
+          }
+        } break;
+
+        case UHDM::uhdminterface_inst: {
+          if (const UHDM::any* const actual = findInInterface_inst(
+                  object, static_cast<const UHDM::interface_inst*>(parent))) {
+            return actual;
+          }
+        } break;
+
+        case UHDM::uhdmprogram: {
+          if (const UHDM::any* const actual = findInProgram(
+                  object, static_cast<const UHDM::program*>(parent))) {
+            return actual;
+          }
+        } break;
+
+        case UHDM::uhdmpackage: {
+          if (const UHDM::any* const actual = findInPackage(
+                  object, static_cast<const UHDM::package*>(parent))) {
+            return actual;
+          }
+        } break;
+
+        case UHDM::uhdmdesign: {
+          if (const UHDM::any* const actual = findInDesign(
+                  object, static_cast<const UHDM::design*>(parent))) {
+            return actual;
+          }
+        } break;
+
+        default: {
+          if (const UHDM::typespec* ts = any_cast<UHDM::typespec>(parent)) {
+            if (const UHDM::any* const actual =
+                    findInTypespec(name, object, ts)) {
+              return actual;
+            }
+          }
+        } break;
+      }
+
+      BaseClassMap::const_iterator it = m_baseclassMap.find(parent);
+      if (it != m_baseclassMap.end()) {
+        component = it->second;
+        scope = any_cast<const UHDM::instance*>(parent);
+      }
+
+      parent = parent->VpiParent();
+    }
+
+    for (ComponentMap::const_reference entry : m_componentMap) {
+      const DesignComponent* dc =
+          valuedcomponenti_cast<const DesignComponent*>(entry.first);
+      if (dc == nullptr) continue;
+
+      const auto& fileContents = dc->getFileContents();
+      if (!fileContents.empty()) {
+        if (const FileContent* const fC = fileContents.front()) {
+          for (const auto& td : fC->getTypeDefMap()) {
+            const DataType* dt = td.second;
+            while (dt != nullptr) {
+              const UHDM::typespec* const ts = dt->getTypespec();
+              if (const UHDM::any* const actual =
+                      findInTypespec(name, object, ts)) {
+                return actual;
+              }
+              dt = dt->getDefinition();
+            }
+          }
+        }
+      }
+    }
+
+    m_unbounded.emplace_back(object, scope, component);
+    return nullptr;
+  }
+
+  void enterBit_select(const UHDM::bit_select* const object) final {
+    if (object->Actual_group() != nullptr) return;
+
+    if (const UHDM::any* actual = bindObject(object)) {
+      const_cast<UHDM::bit_select*>(object)->Actual_group(
+          const_cast<UHDM::any*>(actual));
+    }
+  }
+
+  // void enterChandle_var(const UHDM::chandle_var* const object) final {
+  //   if (object->Actual_group() != nullptr) return;
+  //
+  //   if (const UHDM::any* actual = bindObject(object)) {
+  //     const_cast<UHDM::chandle_var*>(object)->Actual_group(
+  //         const_cast<UHDM::any*>(actual));
+  //   }
+  // }
+
+  void enterIndexed_part_select(
+      const UHDM::indexed_part_select* const object) final {
+    if (object->Actual_group() != nullptr) return;
+
+    if (const UHDM::any* actual = bindObject(object)) {
+      const_cast<UHDM::indexed_part_select*>(object)->Actual_group(
+          const_cast<UHDM::any*>(actual));
+    }
+  }
+
+  void enterPart_select(const UHDM::part_select* const object) final {
+    if (object->Actual_group() != nullptr) return;
+
+    if (const UHDM::any* actual = bindObject(object)) {
+      const_cast<UHDM::part_select*>(object)->Actual_group(
+          const_cast<UHDM::any*>(actual));
+    }
+  }
+
+  void enterRef_module(const UHDM::ref_module* const object) final {
+    if (object->Actual_group() != nullptr) return;
+
+    if (const UHDM::any* actual = bindObject(object)) {
+      const_cast<UHDM::ref_module*>(object)->Actual_group(
+          const_cast<UHDM::any*>(actual));
+    }
+  }
+
+  void enterRef_obj(const UHDM::ref_obj* const object) final {
+    if (object->Actual_group() != nullptr) return;
+
+    if (const UHDM::any* actual = bindObject(object)) {
+      const_cast<UHDM::ref_obj*>(object)->Actual_group(
+          const_cast<UHDM::any*>(actual));
+    }
+  }
+
+  void enterRef_typespec(const UHDM::ref_typespec* const object) final {
+    if (const UHDM::typespec* const t = object->Actual_typespec()) {
+      if (t->UhdmType() != UHDM::uhdmunsupported_typespec) {
+        return;
+      }
+    }
+
+    if (const UHDM::any* actual = bindObject(object)) {
+      const_cast<UHDM::ref_typespec*>(object)->Actual_typespec(
+          const_cast<UHDM::typespec*>(any_cast<UHDM::typespec>(actual)));
+    }
+  }
+
+  void reportErrors() {
+    FileSystem* const fileSystem = FileSystem::getInstance();
+    for (auto& [object, scope, component] : m_unbounded) {
+      bool reportMissingActual = false;
+      if (const UHDM::ref_obj* const ro = any_cast<UHDM::ref_obj>(object)) {
+        if (ro->Actual_group() == nullptr) {
+          reportMissingActual = true;
+        }
+      } else if (const UHDM::ref_typespec* const rt =
+                     any_cast<UHDM::ref_typespec>(object)) {
+        if ((rt->Actual_typespec() == nullptr) ||
+            (rt->Actual_typespec()->UhdmType() ==
+             UHDM::uhdmunsupported_typespec)) {
+          reportMissingActual = true;
+        }
+      } else if (const UHDM::ref_module* const rm =
+                     any_cast<UHDM::ref_module>(object)) {
+        if (rm->Actual_group() == nullptr) {
+          reportMissingActual = true;
+        }
+      }
+
+      if (reportMissingActual) {
+        const std::string text =
+            StrCat("id: ", object->UhdmId(), ", name: ", object->VpiName());
+        Location loc(fileSystem->toPathId(object->VpiFile(), m_symbolTable),
+                     object->VpiLineNo(), object->VpiColumnNo(),
+                     m_symbolTable->registerSymbol(text));
+        Error err(ErrorDefinition::UHDM_FAILED_TO_BIND, loc);
+        m_errorContainer->addError(err);
+        m_errorContainer->printMessages(m_muteStdout);
+      }
+
+      if (getDefaultNetType(component) == VObjectType::slNoType) {
+        const std::string text =
+            StrCat("id:", object->UhdmId(), ", name: ", object->VpiName());
+        Location loc(fileSystem->toPathId(object->VpiFile(), m_symbolTable),
+                     object->VpiLineNo(), object->VpiColumnNo(),
+                     m_symbolTable->registerSymbol(text));
+        Error err(ErrorDefinition::ELAB_ILLEGAL_IMPLICIT_NET, loc);
+        m_errorContainer->addError(err);
+        m_errorContainer->printMessages(m_muteStdout);
+      }
+    }
+  }
+
+  bool createDefaultNets() {
+    bool result = false;
+    Unbounded unbounded(m_unbounded);
+    m_unbounded.clear();
+    for (auto& [object, scope, component] : unbounded) {
+      const ref_obj* ro = any_cast<const ref_obj*>(object);
+      if (ro == nullptr) continue;
+
+      if (ro->Actual_group() == nullptr) {
+        enterRef_obj(ro);
+      }
+
+      if (ro->Actual_group() != nullptr) continue;
+
+      const any* const pro = ro->VpiParent();
+      if ((pro != nullptr) && (pro->UhdmType() == UHDM::uhdmsys_func_call) &&
+          (pro->VpiName() == "$bits")) {
+        UHDM::ref_typespec* const rt = m_serializer.MakeRef_typespec();
+        rt->VpiName(object->VpiName());
+        rt->SetVpiParent(const_cast<UHDM::any*>(object->VpiParent()));
+        enterRef_typespec(rt);
+
+        if (rt->Actual_typespec() == nullptr) {
+          rt->SetVpiParent(nullptr);
+          m_unbounded.erase(std::find_if(m_unbounded.begin(), m_unbounded.end(),
+                                         [rt](Unbounded::value_type& entry) {
+                                           return std::get<0>(entry) == rt;
+                                         }));
+          m_serializer.Erase(rt);
+        } else {
+          UHDM::VectorOfany* const args =
+              static_cast<const UHDM::sys_func_call*>(object->VpiParent())
+                  ->Tf_call_args();
+          *std::find(args->begin(), args->end(), object) = rt;
+          m_unbounded.erase(
+              std::find_if(m_unbounded.begin(), m_unbounded.end(),
+                           [object](Unbounded::value_type& entry) {
+                             return std::get<0>(entry) == object;
+                           }));
+          continue;
+        }
+      }
+
+      VObjectType defaultNetType = getDefaultNetType(component);
+      if ((defaultNetType != VObjectType::slNoType) && (scope != nullptr)) {
+        logic_net* net = m_serializer.MakeLogic_net();
+        net->VpiName(object->VpiName());
+        net->VpiParent(const_cast<UHDM::instance*>(scope));
+        net->VpiNetType(UhdmWriter::getVpiNetType(defaultNetType));
+        net->VpiLineNo(object->VpiLineNo());
+        net->VpiColumnNo(object->VpiColumnNo());
+        net->VpiEndLineNo(object->VpiEndLineNo());
+        net->VpiEndColumnNo(object->VpiEndColumnNo());
+        VectorOfnet* nets = scope->Nets();
+        if (nets == nullptr) {
+          const_cast<UHDM::instance*>(scope)->Nets(m_serializer.MakeNetVec());
+          nets = scope->Nets();
+        }
+        nets->push_back(net);
+        const_cast<UHDM::ref_obj*>(ro)->Actual_group(net);
+        result = true;
+      }
+    }
+    return result;
+  }
+
+ private:
+  const ComponentMap& m_componentMap;
+  Serializer& m_serializer;
+  SymbolTable* const m_symbolTable = nullptr;
+  ErrorContainer* const m_errorContainer = nullptr;
+  const bool m_muteStdout = false;
+
+  BaseClassMap m_baseclassMap;
+  PrefixStack m_prefixStack;
+  DesignStack m_designStack;
+  PackageStack m_packageStack;
+  Unbounded m_unbounded;
+  Searched m_searched;
+};
 
 class IntegrityChecker final : public UhdmListener {
  private:
@@ -373,8 +1470,70 @@ class IntegrityChecker final : public UhdmListener {
     }
   }
 
+  void reportNullActual(const UHDM::any* const object) const {
+    if (isBuiltPackageOnStack(object)) return;
+
+    bool shouldReport = false;
+    switch (object->UhdmType()) {
+      case UHDM::uhdmref_obj: {
+        shouldReport =
+            static_cast<const UHDM::ref_obj*>(object)->Actual_group() ==
+            nullptr;
+      } break;
+
+      case UHDM::uhdmref_typespec: {
+        shouldReport =
+            static_cast<const UHDM::ref_typespec*>(object)->Actual_typespec() ==
+            nullptr;
+      } break;
+
+      case UHDM::uhdmbit_select: {
+        shouldReport =
+            static_cast<const UHDM::bit_select*>(object)->Actual_group() ==
+            nullptr;
+      } break;
+
+      case UHDM::uhdmpart_select: {
+        shouldReport =
+            static_cast<const UHDM::part_select*>(object)->Actual_group() ==
+            nullptr;
+      } break;
+
+      case UHDM::uhdmindexed_part_select: {
+        shouldReport = static_cast<const UHDM::indexed_part_select*>(object)
+                           ->Actual_group() == nullptr;
+      } break;
+
+      case UHDM::uhdmref_module: {
+        shouldReport =
+            static_cast<const UHDM::ref_module*>(object)->Actual_group() ==
+            nullptr;
+      } break;
+
+      case UHDM::uhdmchandle_var: {
+        shouldReport =
+            static_cast<const UHDM::chandle_var*>(object)->Actual_group() ==
+            nullptr;
+      } break;
+
+      default:
+        break;
+    }
+
+    if (shouldReport) {
+      Location loc(
+          m_fileSystem->toPathId(object->VpiFile(), m_symbolTable),
+          object->VpiLineNo(), object->VpiColumnNo(),
+          m_symbolTable->registerSymbol(std::to_string(object->UhdmId())));
+      Error err(ErrorDefinition::INTEGRITY_CHECK_ACTUAL_CANNOT_BE_NULL, loc);
+      m_errorContainer->addError(err);
+    }
+  }
+
   void enterAny(const UHDM::any* const object) final {
     if (isBuiltPackageOnStack(object)) return;
+
+    reportNullActual(object);
 
     const UHDM::scope* const objectAsScope =
         any_cast<const UHDM::scope*>(object);
@@ -528,8 +1687,7 @@ class IntegrityChecker final : public UhdmListener {
 
     bool expectScope = (allowedScopeChildren.find(object->UhdmType()) !=
                         allowedScopeChildren.cend());
-    if ((any_cast<begin>(object) != nullptr) ||
-        (any_cast<named_begin>(object) != nullptr)) {
+    if (any_cast<begin>(object) != nullptr) {
       expectScope = false;
     }
 
@@ -1148,7 +2306,7 @@ void UhdmWriter::writePorts(std::vector<Signal*>& orig_ports, BaseClass* parent,
                             Serializer& s, ModPortMap& modPortMap,
                             SignalBaseClassMap& signalBaseMap,
                             SignalMap& signalMap, ModuleInstance* instance,
-                            ModuleDefinition* mod) {
+                            DesignComponent* mod) {
   int32_t lastPortDirection = vpiInout;
   for (Signal* orig_port : orig_ports) {
     port* dest_port = s.MakePort();
@@ -1441,6 +2599,8 @@ void UhdmWriter::writeClass(ClassDefinition* classDef,
     m_componentMap.emplace(classDef, c);
     c->SetVpiParent(parent);
     c->VpiEndLabel(classDef->getEndLabel());
+    c->Task_func_decls(classDef->getTask_func_decls());
+
     // Typepecs
     VectorOftypespec* typespecs = c->Typespecs();
     if (typespecs == nullptr) {
@@ -1692,7 +2852,7 @@ void UhdmWriter::writePackage(Package* pack, package* p, Serializer& s,
         bool foundParentClass = false;
         for (auto cl : *dest_classes) {
           if (cl->VpiName() == className) {
-            tf->SetVpiParent(cl);
+            tf->SetVpiParent(cl, true);
             tf->Instance(p);
             if (cl->Task_funcs() == nullptr) {
               cl->Task_funcs(s.MakeTask_funcVec());
@@ -1744,10 +2904,6 @@ void UhdmWriter::writePackage(Package* pack, package* p, Serializer& s,
   writeNets(pack, orig_nets, p, dest_nets, s, signalBaseMap, netMap, portMap,
             nullptr);
   p->Nets(dest_nets);
-  if (elaborated) {
-    lateTypedefBinding(s, pack, p);
-  }
-  lateBinding(s, pack, p);
 }
 
 void UhdmWriter::writeModule(ModuleDefinition* mod, module_inst* m,
@@ -1894,10 +3050,6 @@ void UhdmWriter::writeModule(ModuleDefinition* mod, module_inst* m,
       subModArr->SetVpiParent(m);
     }
   }
-  // Late bind
-  if (mod) {
-    lateBinding(s, mod, m);
-  }
   // Interface instantiation
   const std::vector<Signal*>& signals = mod->getSignals();
   if (!signals.empty()) {
@@ -1944,7 +3096,6 @@ void UhdmWriter::writeModule(ModuleDefinition* mod, module_inst* m,
       }
     }
   }
-  lateBinding(s, mod, m);
 }
 
 void UhdmWriter::writeInterface(ModuleDefinition* mod, interface_inst* m,
@@ -2002,7 +3153,7 @@ void UhdmWriter::writeInterface(ModuleDefinition* mod, interface_inst* m,
   VectorOfport* dest_ports = s.MakePortVec();
   VectorOfnet* dest_nets = s.MakeNetVec();
   writePorts(orig_ports, m, dest_ports, dest_nets, s, modPortMap, signalBaseMap,
-             portMap, instance);
+             portMap, instance, mod);
   m->Ports(dest_ports);
   std::vector<Signal*> orig_nets = mod->getSignals();
   writeNets(mod, orig_nets, m, dest_nets, s, signalBaseMap, netMap, portMap,
@@ -2126,7 +3277,7 @@ void UhdmWriter::writeProgram(Program* mod, program* m, Serializer& s,
   VectorOfport* dest_ports = s.MakePortVec();
   VectorOfnet* dest_nets = s.MakeNetVec();
   writePorts(orig_ports, m, dest_ports, dest_nets, s, modPortMap, signalBaseMap,
-             portMap, instance);
+             portMap, instance, mod);
   m->Ports(dest_ports);
   // Nets
   std::vector<Signal*>& orig_nets = mod->getSignals();
@@ -2368,11 +3519,6 @@ bool UhdmWriter::writeElabProgram(Serializer& s, ModuleInstance* instance,
         }
       }
     }
-  }
-
-  if (mod) {
-    lateTypedefBinding(s, mod, m);
-    lateBinding(s, mod, m);
   }
 
   return true;
@@ -2873,1419 +4019,24 @@ UHDM::any* UhdmWriter::swapForSpecifiedVar(UHDM::Serializer& s,
   return tmp;
 }
 
-void UhdmWriter::lateTypedefBinding(UHDM::Serializer& s, DesignComponent* mod,
-                                    scope* m) {
-  for (UHDM::any* var : mod->getLateTypedefBinding()) {
-    const typespec* orig = nullptr;
-    if (expr* ex = any_cast<expr*>(var)) {
-      if (ref_typespec* rt = ex->Typespec()) {
-        orig = rt->Actual_typespec();
-      }
-    } else if (typespec_member* ex = any_cast<typespec_member*>(var)) {
-      if (ref_typespec* rt = ex->Typespec()) {
-        orig = rt->Actual_typespec();
-      }
-    } else if (parameter* ex = any_cast<parameter*>(var)) {
-      if (ref_typespec* rt = ex->Typespec()) {
-        orig = rt->Actual_typespec();
-      }
-    } else if (type_parameter* ex = any_cast<type_parameter*>(var)) {
-      if (ref_typespec* rt = ex->Typespec()) {
-        orig = rt->Actual_typespec();
-      }
-    } else if (io_decl* ex = any_cast<io_decl*>(var)) {
-      if (ref_typespec* rt = ex->Typespec()) {
-        orig = rt->Actual_typespec();
-      }
+void UhdmWriter::bind(UHDM::Serializer& s,
+                      const std::vector<vpiHandle>& designs) {
+  Compiler* const compiler = m_compileDesign->getCompiler();
+  SymbolTable* const symbolTable = compiler->getSymbolTable();
+  ErrorContainer* const errorContainer = compiler->getErrorContainer();
+  CommandLineParser* commandLineParser = compiler->getCommandLineParser();
+  if (ObjectBinder* const listener =
+          new ObjectBinder(m_componentMap, s, symbolTable, errorContainer,
+                           commandLineParser->muteStdout())) {
+    for (auto h : designs) {
+      const design* const d =
+          static_cast<const design*>(((const uhdm_handle*)h)->object);
+      listener->listenDesign(d);
     }
-    if (orig && (orig->UhdmType() == uhdmunsupported_typespec)) {
-      unsupported_typespec* unsup = (unsupported_typespec*)orig;
-      std::string_view name = StringUtils::trim(orig->VpiName());
-      const typespec* tps = nullptr;
-      bool found = false;
-
-      if (name.find("::") != std::string::npos) {
-        std::vector<std::string_view> res;
-        StringUtils::tokenizeMulti(name, "::", res);
-        if (res.size() > 1) {
-          const std::string_view packName = res[0];
-          const std::string_view typeName = res[1];
-          Package* pack =
-              m_compileDesign->getCompiler()->getDesign()->getPackage(packName);
-          if (pack) {
-            const auto& itr = m_componentMap.find(pack);
-            if (itr != m_componentMap.end()) {
-              package* p = (package*)itr->second;
-              if (p->Typespecs()) {
-                for (auto n : *p->Typespecs()) {
-                  if (n->VpiName() == typeName) {
-                    found = true;
-                    tps = n;
-                    break;
-                  }
-                  const std::string pname =
-                      StrCat(p->VpiName(), "::", typeName);
-                  if (n->VpiName() == pname) {
-                    found = true;
-                    tps = n;
-                    break;
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-
-      const any* parent = var->VpiParent();
-      while (parent) {
-        if (parent->UhdmType() == uhdmfunction) {
-          function* func = (function*)parent;
-          if (parent->VpiName() == name) {
-            if (const any* ret = func->Return()) {
-              variables* var = (variables*)ret;
-              found = true;
-              if (const ref_typespec* rt = var->Typespec()) {
-                tps = rt->Actual_typespec();
-              }
-            }
-            break;
-          }
-          if (auto decls = func->Io_decls()) {
-            for (auto decl : *decls) {
-              if (decl->VpiName() == name) {
-                if (decl->UhdmType() == uhdmref_var) continue;
-                if (decl->UhdmType() == uhdmref_obj) continue;
-                found = true;
-                if (const ref_typespec* rt = decl->Typespec()) {
-                  tps = rt->Actual_typespec();
-                }
-                break;
-              }
-            }
-          }
-          if (auto vars = func->Variables()) {
-            for (auto decl : *vars) {
-              if (decl->VpiName() == name) {
-                if (decl->UhdmType() == uhdmref_var) continue;
-                if (decl->UhdmType() == uhdmref_obj) continue;
-                found = true;
-                if (const ref_typespec* rt = decl->Typespec()) {
-                  tps = rt->Actual_typespec();
-                }
-                break;
-              }
-            }
-          }
-          if (auto params = func->Parameters()) {
-            for (auto decl : *params) {
-              if (decl->VpiName() == name) {
-                found = true;
-                if (decl->UhdmType() == uhdmparameter) {
-                  if (const ref_typespec* rt = ((parameter*)decl)->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                } else {
-                  if (const ref_typespec* rt =
-                          ((type_parameter*)decl)->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                }
-                break;
-              }
-            }
-          }
-          if (const UHDM::instance* inst = func->Instance()) {
-            if (inst->UhdmType() == uhdmpackage) {
-              package* pack = (package*)inst;
-              if (pack->Variables()) {
-                for (auto n : *pack->Variables()) {
-                  if (n->VpiName() == name) {
-                    if (n->UhdmType() == uhdmref_var) continue;
-                    if (n->UhdmType() == uhdmref_obj) continue;
-                    found = true;
-                    if (ref_typespec* rt = n->Typespec()) {
-                      tps = rt->Actual_typespec();
-                    }
-                    break;
-                  }
-                  if (m) {
-                    const std::string pname = StrCat(m->VpiName(), "::", name);
-                    if (n->VpiName() == pname) {
-                      if (n->UhdmType() == uhdmref_var) continue;
-                      if (n->UhdmType() == uhdmref_obj) continue;
-                      found = true;
-                      if (ref_typespec* rt = n->Typespec()) {
-                        tps = rt->Actual_typespec();
-                      }
-                      break;
-                    }
-                  }
-                }
-              }
-            }
-          }
-          if (found) break;
-        } else if (parent->UhdmType() == uhdmtask) {
-          task* ta = (task*)parent;
-          if (auto decls = ta->Io_decls()) {
-            for (auto decl : *decls) {
-              if (decl->VpiName() == name) {
-                if (decl->UhdmType() == uhdmref_var) continue;
-                if (decl->UhdmType() == uhdmref_obj) continue;
-                found = true;
-                if (ref_typespec* rt = decl->Typespec()) {
-                  tps = rt->Actual_typespec();
-                }
-                break;
-              }
-            }
-          }
-          if (auto vars = ta->Variables()) {
-            for (auto decl : *vars) {
-              if (decl->VpiName() == name) {
-                if (decl->UhdmType() == uhdmref_var) continue;
-                if (decl->UhdmType() == uhdmref_obj) continue;
-                found = true;
-                if (ref_typespec* rt = decl->Typespec()) {
-                  tps = rt->Actual_typespec();
-                }
-                break;
-              }
-            }
-          }
-          if (const UHDM::instance* inst = ta->Instance()) {
-            if (inst->UhdmType() == uhdmpackage) {
-              package* pack = (package*)inst;
-              if (pack->Variables()) {
-                for (auto n : *pack->Variables()) {
-                  if (n->VpiName() == name) {
-                    if (n->UhdmType() == uhdmref_var) continue;
-                    if (n->UhdmType() == uhdmref_obj) continue;
-                    found = true;
-                    if (ref_typespec* rt = n->Typespec()) {
-                      tps = rt->Actual_typespec();
-                    }
-                    break;
-                  }
-                  if (m) {
-                    const std::string pname = StrCat(m->VpiName(), "::", name);
-                    if (n->VpiName() == pname) {
-                      if (n->UhdmType() == uhdmref_var) continue;
-                      if (n->UhdmType() == uhdmref_obj) continue;
-                      found = true;
-                      if (ref_typespec* rt = n->Typespec()) {
-                        tps = rt->Actual_typespec();
-                      }
-                      break;
-                    }
-                  }
-                }
-              }
-            }
-          }
-          if (found) break;
-        } else if (parent->UhdmType() == uhdmfor_stmt) {
-          for_stmt* f = (for_stmt*)parent;
-          VectorOfany* inits = f->VpiForInitStmts();
-          if (inits) {
-            for (auto init : *inits) {
-              if (init->UhdmType() == uhdmassignment) {
-                assignment* as = (assignment*)init;
-                const expr* lhs = as->Lhs();
-                if (lhs && lhs->VpiName() == name) {
-                  if (lhs->UhdmType() == uhdmref_var) continue;
-                  if (lhs->UhdmType() == uhdmref_obj) continue;
-                  found = true;
-                  if (const ref_typespec* rt = lhs->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                  break;
-                }
-              }
-            }
-          }
-        } else if (parent->UhdmType() == uhdmforeach_stmt) {
-          foreach_stmt* f = (foreach_stmt*)parent;
-          VectorOfany* vars = f->VpiLoopVars();
-          if (vars) {
-            for (auto& vart : *vars) {
-              if (vart->VpiName() == name) {
-                if (vart->UhdmType() == uhdmref_var) continue;
-                if (vart->UhdmType() == uhdmref_obj) continue;
-                found = true;
-                if (ref_typespec* rt = ((variables*)vart)->Typespec()) {
-                  tps = rt->Actual_typespec();
-                }
-                if (any* p = var->VpiParent()) {
-                  if (p->UhdmType() == uhdmforeach_stmt) {
-                    foreach_stmt* fc = (foreach_stmt*)p;
-                    VectorOfany* varsc = fc->VpiLoopVars();
-                    for (auto& vartc : *varsc) {
-                      if (vartc->VpiName() == name) {
-                        vartc = vart;
-                        break;
-                      }
-                    }
-                  }
-                }
-                break;
-              }
-            }
-          }
-        } else if (parent->UhdmType() == uhdmmodule_inst) {
-          module_inst* m = (module_inst*)parent;
-          if (auto vars = m->Variables()) {
-            for (auto decl : *vars) {
-              if (decl->VpiName() == name) {
-                if (decl->UhdmType() == uhdmref_var) continue;
-                if (decl->UhdmType() == uhdmref_obj) continue;
-                found = true;
-                if (ref_typespec* rt = decl->Typespec()) {
-                  tps = rt->Actual_typespec();
-                }
-                break;
-              }
-            }
-          }
-          if (found) break;
-          if (auto params = m->Parameters()) {
-            for (auto decl : *params) {
-              if (decl->VpiName() == name) {
-                if (decl->UhdmType() == uhdmparameter) {
-                  if (ref_typespec* rt = ((parameter*)decl)->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                  found = true;
-                } else {
-                  if (ref_typespec* rt = ((type_parameter*)decl)->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                  found = true;
-                }
-                break;
-              }
-            }
-          }
-          if (found) break;
-          if (m) {
-            VectorOfport* ports = m->Ports();
-            if (ports) {
-              for (auto port : *ports) {
-                if (port->VpiName() == name) {
-                  if (ref_typespec* tmp = port->Typespec()) {
-                    found = true;
-                    tps = tmp->Actual_typespec();
-                    break;
-                  }
-                }
-              }
-            }
-            if (found) break;
-            VectorOfnet* nets = m->Nets();
-            if (nets) {
-              for (auto net : *nets) {
-                if (net->VpiName() == name) {
-                  if (ref_typespec* tmp = net->Typespec()) {
-                    found = true;
-                    tps = tmp->Actual_typespec();
-                    break;
-                  }
-                }
-              }
-            }
-            if (found) break;
-          }
-        } else if (parent->UhdmType() == uhdmbegin) {
-          begin* b = (begin*)parent;
-          if (auto vars = b->Variables()) {
-            for (auto decl : *vars) {
-              if (decl->VpiName() == name) {
-                if (decl->UhdmType() == uhdmref_var) continue;
-                if (decl->UhdmType() == uhdmref_obj) continue;
-                found = true;
-                if (ref_typespec* rt = decl->Typespec()) {
-                  tps = rt->Actual_typespec();
-                }
-                break;
-              }
-            }
-          }
-          if (found) break;
-          if (auto params = b->Parameters()) {
-            for (auto decl : *params) {
-              if (decl->VpiName() == name) {
-                if (decl->UhdmType() == uhdmparameter) {
-                  if (ref_typespec* rt = ((parameter*)decl)->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                } else {
-                  if (ref_typespec* rt = ((type_parameter*)decl)->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                }
-                break;
-              }
-            }
-          }
-          if (found) break;
-          VectorOfany* stmts = b->Stmts();
-          if (stmts) {
-            for (auto init : *stmts) {
-              if (init->UhdmType() == uhdmassignment) {
-                assignment* as = (assignment*)init;
-                const expr* lhs = as->Lhs();
-                if (lhs && lhs->VpiName() == name) {
-                  if (lhs->UhdmType() == uhdmref_var) continue;
-                  if (lhs->UhdmType() == uhdmref_obj) continue;
-                  found = true;
-                  if (const ref_typespec* rt = lhs->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                  break;
-                }
-              }
-            }
-          }
-        } else if (parent->UhdmType() == uhdmnamed_begin) {
-          named_begin* b = (named_begin*)parent;
-          if (auto vars = b->Variables()) {
-            for (auto decl : *vars) {
-              if (decl->VpiName() == name) {
-                if (decl->UhdmType() == uhdmref_var) continue;
-                if (decl->UhdmType() == uhdmref_obj) continue;
-                found = true;
-                if (const ref_typespec* rt = decl->Typespec()) {
-                  tps = rt->Actual_typespec();
-                }
-                break;
-              }
-            }
-          }
-          if (found) break;
-          if (auto params = b->Parameters()) {
-            for (auto decl : *params) {
-              if (decl->VpiName() == name) {
-                if (decl->UhdmType() == uhdmparameter) {
-                  if (const ref_typespec* rt = ((parameter*)decl)->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                } else {
-                  if (const ref_typespec* rt =
-                          ((type_parameter*)decl)->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                }
-                break;
-              }
-            }
-          }
-          if (found) break;
-          VectorOfany* stmts = b->Stmts();
-          if (stmts) {
-            for (auto init : *stmts) {
-              if (init->UhdmType() == uhdmassignment) {
-                assignment* as = (assignment*)init;
-                const expr* lhs = as->Lhs();
-                if (lhs && lhs->VpiName() == name) {
-                  if (lhs->UhdmType() == uhdmref_var) continue;
-                  if (lhs->UhdmType() == uhdmref_obj) continue;
-                  found = true;
-                  if (const ref_typespec* rt = lhs->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                  break;
-                }
-              }
-            }
-          }
-        } else if (parent->UhdmType() == uhdmfork_stmt) {
-          fork_stmt* b = (fork_stmt*)parent;
-          if (auto vars = b->Variables()) {
-            for (auto decl : *vars) {
-              if (decl->VpiName() == name) {
-                if (decl->UhdmType() == uhdmref_var) continue;
-                if (decl->UhdmType() == uhdmref_obj) continue;
-                found = true;
-                if (const ref_typespec* rt = decl->Typespec()) {
-                  tps = rt->Actual_typespec();
-                }
-                break;
-              }
-            }
-          }
-          if (found) break;
-          if (auto params = b->Parameters()) {
-            for (auto decl : *params) {
-              if (decl->VpiName() == name) {
-                found = true;
-                if (decl->UhdmType() == uhdmparameter) {
-                  if (const ref_typespec* rt = ((parameter*)decl)->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                } else {
-                  if (const ref_typespec* rt =
-                          ((type_parameter*)decl)->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                }
-                break;
-              }
-            }
-          }
-          if (found) break;
-          VectorOfany* stmts = b->Stmts();
-          if (stmts) {
-            for (auto init : *stmts) {
-              if (init->UhdmType() == uhdmassignment) {
-                assignment* as = (assignment*)init;
-                const expr* lhs = as->Lhs();
-                if (lhs && lhs->VpiName() == name) {
-                  if (lhs->UhdmType() == uhdmref_var) continue;
-                  if (lhs->UhdmType() == uhdmref_obj) continue;
-                  found = true;
-                  if (const ref_typespec* rt = lhs->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                  break;
-                }
-              }
-            }
-          }
-        } else if (parent->UhdmType() == uhdmnamed_fork) {
-          named_fork* b = (named_fork*)parent;
-          if (auto vars = b->Variables()) {
-            for (auto decl : *vars) {
-              if (decl->VpiName() == name) {
-                if (decl->UhdmType() == uhdmref_var) continue;
-                if (decl->UhdmType() == uhdmref_obj) continue;
-                found = true;
-                if (const ref_typespec* rt = decl->Typespec()) {
-                  tps = rt->Actual_typespec();
-                }
-                break;
-              }
-            }
-          }
-          if (found) break;
-          if (auto params = b->Parameters()) {
-            for (auto decl : *params) {
-              if (decl->VpiName() == name) {
-                found = true;
-                if (decl->UhdmType() == uhdmparameter) {
-                  if (const ref_typespec* rt = ((parameter*)decl)->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                } else {
-                  if (const ref_typespec* rt =
-                          ((type_parameter*)decl)->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                }
-                break;
-              }
-            }
-          }
-          if (found) break;
-          VectorOfany* stmts = b->Stmts();
-          if (stmts) {
-            for (auto init : *stmts) {
-              if (init->UhdmType() == uhdmassignment) {
-                assignment* as = (assignment*)init;
-                const expr* lhs = as->Lhs();
-                if (!lhs) continue;
-                if (lhs->UhdmType() == uhdmref_var) continue;
-                if (lhs->UhdmType() == uhdmref_obj) continue;
-                if (lhs->VpiName() == name) {
-                  found = true;
-                  if (const ref_typespec* rt = lhs->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                  break;
-                }
-              }
-            }
-          }
-        }
-        if (found) {
-          if (tps) {
-            tps = replace(tps, m_compileDesign->getSwapedObjects());
-          }
-
-          if (unsup->Ranges() && (m_helper.getElaborate() == Elaborate::Yes)) {
-            ref_typespec* tpsRef = s.MakeRef_typespec();
-            tpsRef->Actual_typespec(const_cast<UHDM::typespec*>(tps));
-            if (unsup->VpiPacked()) {
-              packed_array_typespec* ptps = s.MakePacked_array_typespec();
-              tpsRef->SetVpiParent(ptps);
-              ptps->Elem_typespec(tpsRef);
-              ptps->Ranges(unsup->Ranges());
-              tps = ptps;
-            } else {
-              array_typespec* ptps = s.MakeArray_typespec();
-              tpsRef->SetVpiParent(ptps);
-              ptps->Elem_typespec(tpsRef);
-              ptps->Ranges(unsup->Ranges());
-              tps = ptps;
-            }
-            if (unsup->Ranges()) {
-              for (auto r : *unsup->Ranges()) {
-                r->SetVpiParent(const_cast<typespec*>(tps));
-              }
-            }
-          }
-          break;
-        }
-        parent = parent->VpiParent();
-      }
-
-      if (found == false) {
-        if (const any* parent = var->VpiParent()) {
-          // Foreach-loop, implicit loop var declaration fixup
-          if (parent->UhdmType() == uhdmforeach_stmt) {
-            foreach_stmt* for_stmt = (foreach_stmt*)parent;
-            if (VectorOfany* loopvars = for_stmt->VpiLoopVars()) {
-              for (any*& tmp : *loopvars) {
-                tmp = swapForSpecifiedVar(s, mod, tmp, for_stmt->Variables(),
-                                          for_stmt->Variable(), name, var,
-                                          parent);
-              }
-            }
-          } else if (parent->UhdmType() == uhdmassignment) {
-            parent = var->VpiParent()->VpiParent();
-            // gen_for loop, implicit loop var declaration fixup
-            if (parent->UhdmType() == uhdmgen_for) {
-              gen_for* for_stmt = (gen_for*)parent;
-              if (for_stmt->VpiForInitStmts()) {
-                any* stmt = for_stmt->VpiForInitStmts()->at(0);
-                if (stmt->UhdmType() == uhdmassignment) {
-                  assignment* st = (assignment*)stmt;
-                  st->Lhs((expr*)swapForSpecifiedVar(
-                      s, mod, st->Lhs(), nullptr, nullptr, name, var, parent));
-                }
-              }
-            }
-          }
-        }
-      }
-
-      if ((name.empty()) && (found == false)) {
-        // Port .op({\op[1] ,\op[0] })
-        if (operation* op = any_cast<operation*>(var)) {
-          const typespec* baseTypespec = nullptr;
-          uint64_t size = 0;
-          for (any* oper : *op->Operands()) {
-            if (oper->UhdmType() == uhdmref_obj) {
-              ref_obj* ref = (ref_obj*)oper;
-              if (const expr* ex = ref->Actual_group<expr>()) {
-                if (const UHDM::ref_typespec* rt = ex->Typespec()) {
-                  if (const typespec* tps = rt->Actual_typespec()) {
-                    baseTypespec = tps;
-                    break;
-                  }
-                }
-              }
-            }
-            size++;
-          }
-          if (baseTypespec) {
-            array_typespec* arr = s.MakeArray_typespec();
-            tps = arr;
-            found = true;
-            ref_typespec* baseRef = s.MakeRef_typespec();
-            baseRef->SetVpiParent(arr);
-            baseRef->Actual_typespec(const_cast<typespec*>(baseTypespec));
-            arr->Elem_typespec(baseRef);
-            VectorOfrange* ranges = s.MakeRangeVec();
-            range* ra = s.MakeRange();
-            ranges->push_back(ra);
-            constant* l = s.MakeConstant();
-            l->VpiValue("UINT:" + std::to_string(size - 1));
-            ra->Left_expr(l);
-            constant* r = s.MakeConstant();
-            r->VpiValue("UINT:0");
-            ra->Right_expr(r);
-            arr->Ranges(ranges);
-          }
-        }
-      }
-      if (found == true) {
-        if (tps == nullptr) {
-          if (expr* ex = any_cast<expr*>(var)) {
-            ex->Typespec(nullptr);
-          } else if (typespec_member* ex = any_cast<typespec_member*>(var)) {
-            ex->Typespec(nullptr);
-          } else if (parameter* ex = any_cast<parameter*>(var)) {
-            ex->Typespec(nullptr);
-          } else if (type_parameter* ex = any_cast<type_parameter*>(var)) {
-            ex->Typespec(nullptr);
-          } else if (io_decl* ex = any_cast<io_decl*>(var)) {
-            ex->Typespec(nullptr);
-          }
-        } else {
-          if (expr* ex = any_cast<expr*>(var)) {
-            if (ex->Typespec() == nullptr) {
-              ref_typespec* rt = s.MakeRef_typespec();
-              ex->Typespec(rt);
-              rt->SetVpiParent(ex);
-            }
-            ex->Typespec()->Actual_typespec(const_cast<UHDM::typespec*>(tps));
-          } else if (typespec_member* ex = any_cast<typespec_member*>(var)) {
-            if (ex->Typespec() == nullptr) {
-              ref_typespec* rt = s.MakeRef_typespec();
-              ex->Typespec(rt);
-              rt->SetVpiParent(ex);
-            }
-            ex->Typespec()->Actual_typespec(const_cast<UHDM::typespec*>(tps));
-          } else if (parameter* ex = any_cast<parameter*>(var)) {
-            if (ex->Typespec() == nullptr) {
-              ref_typespec* rt = s.MakeRef_typespec();
-              ex->Typespec(rt);
-              rt->SetVpiParent(ex);
-            }
-            ex->Typespec()->Actual_typespec(const_cast<UHDM::typespec*>(tps));
-          } else if (type_parameter* ex = any_cast<type_parameter*>(var)) {
-            if (ex->Typespec() == nullptr) {
-              ref_typespec* rt = s.MakeRef_typespec();
-              ex->Typespec(rt);
-              rt->SetVpiParent(ex);
-            }
-            ex->Typespec()->Actual_typespec(const_cast<UHDM::typespec*>(tps));
-          } else if (io_decl* ex = any_cast<io_decl*>(var)) {
-            if (ex->Typespec() == nullptr) {
-              ref_typespec* rt = s.MakeRef_typespec();
-              ex->Typespec(rt);
-              rt->SetVpiParent(ex);
-            }
-            ex->Typespec()->Actual_typespec(const_cast<UHDM::typespec*>(tps));
-          }
-        }
-      }
-    }
-  }
-  for (const auto& itr : mod->getLateResolutionFunction()) {
-    std::string_view funcName = itr.first;
-    std::pair<task_func*, DesignComponent*> ret =
-        m_helper.getTaskFunc(funcName, mod, m_compileDesign, nullptr, nullptr);
-    task_func* tf = ret.first;
-    function* resolution_func = any_cast<function*>(tf);
-    typespec* ts = itr.second;
-    if (resolution_func) {
-      if (ts->UhdmType() == uhdmbit_typespec) {
-        bit_typespec* btps = (bit_typespec*)ts;
-        btps->Resolution_func(resolution_func);
-      } else if (ts->UhdmType() == uhdmlogic_typespec) {
-        logic_typespec* btps = (logic_typespec*)ts;
-        btps->Resolution_func(resolution_func);
-      } else if (ts->UhdmType() == uhdmstruct_typespec) {
-        struct_typespec* btps = (struct_typespec*)ts;
-        btps->Resolution_func(resolution_func);
-      } else if (ts->UhdmType() == uhdmreal_typespec) {
-        real_typespec* btps = (real_typespec*)ts;
-        btps->Resolution_func(resolution_func);
-      } else if (ts->UhdmType() == uhdmarray_typespec) {
-        array_typespec* btps = (array_typespec*)ts;
-        btps->Resolution_func(resolution_func);
-      } else if (ts->UhdmType() == uhdmpacked_array_typespec) {
-        packed_array_typespec* btps = (packed_array_typespec*)ts;
-        btps->Resolution_func(resolution_func);
-      }
-    }
-  }
-}
-
-void UhdmWriter::lateBinding(Serializer& s, DesignComponent* mod, scope* m) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
-  for (UHDM::ref_obj* ref : mod->getLateBinding()) {
-    if (ref->Actual_group()) continue;
-    std::string_view name = ref->VpiName();
-    name = StringUtils::trim(name);
-    if (name.find("::") != std::string::npos) {
-      std::vector<std::string_view> res;
-      StringUtils::tokenizeMulti(name, "::", res);
-      if (res.size() > 1) {
-        const std::string_view packName = res[0];
-        const std::string_view typeName = res[1];
-        Package* pack =
-            m_compileDesign->getCompiler()->getDesign()->getPackage(packName);
-        if (pack) {
-          const auto& itr = m_componentMap.find(pack);
-          if (itr != m_componentMap.end()) {
-            package* p = (package*)itr->second;
-            if (p->Parameters()) {
-              for (auto n : *p->Parameters()) {
-                if (n->VpiName() == typeName) {
-                  if (n->UhdmType() == uhdmref_var) continue;
-                  if (n->UhdmType() == uhdmref_obj) continue;
-                  ref->Actual_group(n);
-                  break;
-                }
-                if (m) {
-                  const std::string pname =
-                      StrCat(m->VpiName(), "::", typeName);
-                  if (n->VpiName() == pname) {
-                    if (n->UhdmType() == uhdmref_var) continue;
-                    if (n->UhdmType() == uhdmref_obj) continue;
-                    ref->Actual_group(n);
-                    break;
-                  }
-                }
-              }
-            }
-            if (p->Variables()) {
-              for (auto n : *p->Variables()) {
-                if (n->VpiName() == typeName) {
-                  if (n->UhdmType() == uhdmref_var) continue;
-                  if (n->UhdmType() == uhdmref_obj) continue;
-                  ref->Actual_group(n);
-                  break;
-                }
-                if (m) {
-                  const std::string pname =
-                      StrCat(m->VpiName(), "::", typeName);
-                  if (n->VpiName() == pname) {
-                    if (n->UhdmType() == uhdmref_var) continue;
-                    if (n->UhdmType() == uhdmref_obj) continue;
-                    ref->Actual_group(n);
-                    break;
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-
-      continue;
-    }
-
-    const any* parent = ref->VpiParent();
-    while (parent) {
-      if (parent->UhdmType() == uhdmdesign) {
-        design* d = (design*)parent;
-        if (auto params = d->Parameters()) {
-          for (auto decl : *params) {
-            if (decl->VpiName() == name) {
-              ref->Actual_group(decl);
-              break;
-            }
-          }
-        }
-      } else if (parent->UhdmType() == uhdmfunction) {
-        function* func = (function*)parent;
-        if (parent->VpiName() == name) {
-          if (variables* ret = func->Return<UHDM::variables>()) {
-            if (m_helper.getElaborate() == Elaborate::Yes) {
-              ElaboratorContext elaboratorContext(&s, false, true);
-              variables* var =
-                  (variables*)UHDM::clone_tree(ret, &elaboratorContext);
-              var->VpiName(name);
-              var->SetVpiParent(ref);
-              ref->Actual_group(var);
-            } else {
-              ref->Actual_group(ret);
-            }
-          }
-          break;
-        }
-        if (auto decls = func->Io_decls()) {
-          for (auto decl : *decls) {
-            if (decl->VpiName() == name) {
-              if (decl->UhdmType() == uhdmref_var) continue;
-              if (decl->UhdmType() == uhdmref_obj) continue;
-              ref->Actual_group(decl);
-              break;
-            }
-          }
-        }
-        if (auto vars = func->Variables()) {
-          for (auto decl : *vars) {
-            if (decl->VpiName() == name) {
-              if (decl->UhdmType() == uhdmref_var) continue;
-              if (decl->UhdmType() == uhdmref_obj) continue;
-              ref->Actual_group(decl);
-              break;
-            }
-          }
-        }
-        if (auto params = func->Parameters()) {
-          for (auto decl : *params) {
-            if (decl->VpiName() == name) {
-              ref->Actual_group(decl);
-              break;
-            }
-          }
-        }
-        if (const UHDM::instance* inst = func->Instance()) {
-          if (inst->UhdmType() == uhdmpackage) {
-            package* pack = (package*)inst;
-            if (pack->Variables()) {
-              for (auto n : *pack->Variables()) {
-                if (n->VpiName() == name) {
-                  if (n->UhdmType() == uhdmref_var) continue;
-                  if (n->UhdmType() == uhdmref_obj) continue;
-                  ref->Actual_group(n);
-                  break;
-                }
-                if (m) {
-                  const std::string pname = StrCat(m->VpiName(), "::", name);
-                  if (n->VpiName() == pname) {
-                    if (n->UhdmType() == uhdmref_var) continue;
-                    if (n->UhdmType() == uhdmref_obj) continue;
-                    ref->Actual_group(n);
-                    break;
-                  }
-                }
-              }
-            }
-          }
-        }
-        if (ref->Actual_group()) break;
-      } else if (parent->UhdmType() == uhdmtask) {
-        task* ta = (task*)parent;
-        if (auto decls = ta->Io_decls()) {
-          for (auto decl : *decls) {
-            if (decl->VpiName() == name) {
-              if (decl->UhdmType() == uhdmref_var) continue;
-              if (decl->UhdmType() == uhdmref_obj) continue;
-              ref->Actual_group(decl);
-              break;
-            }
-          }
-        }
-        if (auto vars = ta->Variables()) {
-          for (auto decl : *vars) {
-            if (decl->VpiName() == name) {
-              if (decl->UhdmType() == uhdmref_var) continue;
-              if (decl->UhdmType() == uhdmref_obj) continue;
-              ref->Actual_group(decl);
-              break;
-            }
-          }
-        }
-        if (const UHDM::instance* inst = ta->Instance()) {
-          if (inst->UhdmType() == uhdmpackage) {
-            package* pack = (package*)inst;
-            if (pack->Variables()) {
-              for (auto n : *pack->Variables()) {
-                if (n->VpiName() == name) {
-                  if (n->UhdmType() == uhdmref_var) continue;
-                  if (n->UhdmType() == uhdmref_obj) continue;
-                  ref->Actual_group(n);
-                  break;
-                }
-                if (m) {
-                  const std::string pname = StrCat(m->VpiName(), "::", name);
-                  if (n->VpiName() == pname) {
-                    if (n->UhdmType() == uhdmref_var) continue;
-                    if (n->UhdmType() == uhdmref_obj) continue;
-                    ref->Actual_group(n);
-                    break;
-                  }
-                }
-              }
-            }
-            if (m->Typespecs()) {
-              for (auto n : *m->Typespecs()) {
-                if (n->UhdmType() == uhdmenum_typespec) {
-                  enum_typespec* tps = any_cast<enum_typespec*>(n);
-                  if (tps && tps->Enum_consts()) {
-                    for (auto c : *tps->Enum_consts()) {
-                      if (c->VpiName() == name) {
-                        ref->Actual_group(c);
-                        break;
-                      }
-                      if (std::string(std::string(m->VpiName()) +
-                                      std::string("::") + std::string(name)) ==
-                          c->VpiName()) {
-                        ref->Actual_group(c);
-                        break;
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-        if (ref->Actual_group()) break;
-      } else if (parent->UhdmType() == uhdmfor_stmt) {
-        for_stmt* f = (for_stmt*)parent;
-        VectorOfany* inits = f->VpiForInitStmts();
-        if (inits) {
-          for (auto init : *inits) {
-            if (init->UhdmType() == uhdmassignment) {
-              assignment* as = (assignment*)init;
-              const expr* lhs = as->Lhs();
-              if (lhs && lhs->VpiName() == name) {
-                if (lhs->UhdmType() == uhdmref_var) continue;
-                if (lhs->UhdmType() == uhdmref_obj) continue;
-                ref->Actual_group((expr*)lhs);
-                break;
-              }
-            }
-          }
-        }
-      } else if (parent->UhdmType() == uhdmforeach_stmt) {
-        foreach_stmt* f = (foreach_stmt*)parent;
-        VectorOfany* vars = f->VpiLoopVars();
-        if (vars) {
-          for (auto var : *vars) {
-            if (var->VpiName() == name) {
-              if (var->UhdmType() == uhdmref_var) continue;
-              if (var->UhdmType() == uhdmref_obj) continue;
-              ref->Actual_group((expr*)var);
-              break;
-            }
-          }
-        }
-      } else if (parent->UhdmType() == uhdmbegin) {
-        begin* b = (begin*)parent;
-        if (auto vars = b->Variables()) {
-          for (auto decl : *vars) {
-            if (decl->VpiName() == name) {
-              if (decl->UhdmType() == uhdmref_var) continue;
-              if (decl->UhdmType() == uhdmref_obj) continue;
-              ref->Actual_group(decl);
-              break;
-            }
-          }
-        }
-        if (ref->Actual_group()) break;
-        if (auto params = b->Parameters()) {
-          for (auto decl : *params) {
-            if (decl->VpiName() == name) {
-              ref->Actual_group(decl);
-              break;
-            }
-          }
-        }
-        if (ref->Actual_group()) break;
-        VectorOfany* stmts = b->Stmts();
-        if (stmts) {
-          for (auto init : *stmts) {
-            if (init->UhdmType() == uhdmassignment) {
-              assignment* as = (assignment*)init;
-              const expr* lhs = as->Lhs();
-              if (lhs && lhs->VpiName() == name) {
-                if (lhs->UhdmType() == uhdmref_var) continue;
-                if (lhs->UhdmType() == uhdmref_obj) continue;
-                ref->Actual_group((expr*)lhs);
-                break;
-              }
-            } else if (init->UhdmType() == uhdmassign_stmt) {
-              assign_stmt* as = (assign_stmt*)init;
-              const expr* lhs = as->Lhs();
-              if (lhs->VpiName() == name) {
-                if (lhs->UhdmType() == uhdmref_var) continue;
-                if (lhs->UhdmType() == uhdmref_obj) continue;
-                ref->Actual_group((expr*)lhs);
-                break;
-              }
-            }
-          }
-        }
-      } else if (parent->UhdmType() == uhdmnamed_begin) {
-        named_begin* b = (named_begin*)parent;
-        if (auto vars = b->Variables()) {
-          for (auto decl : *vars) {
-            if (decl->VpiName() == name) {
-              if (decl->UhdmType() == uhdmref_var) continue;
-              if (decl->UhdmType() == uhdmref_obj) continue;
-              ref->Actual_group(decl);
-              break;
-            }
-          }
-        }
-        if (ref->Actual_group()) break;
-        if (auto params = b->Parameters()) {
-          for (auto decl : *params) {
-            if (decl->VpiName() == name) {
-              ref->Actual_group(decl);
-              break;
-            }
-          }
-        }
-        if (ref->Actual_group()) break;
-        VectorOfany* stmts = b->Stmts();
-        if (stmts) {
-          for (auto init : *stmts) {
-            if (init->UhdmType() == uhdmassign_stmt) {
-              assign_stmt* as = (assign_stmt*)init;
-              const expr* lhs = as->Lhs();
-              if (lhs->VpiName() == name) {
-                if (lhs->UhdmType() == uhdmref_var) continue;
-                if (lhs->UhdmType() == uhdmref_obj) continue;
-                ref->Actual_group((expr*)lhs);
-                break;
-              }
-            } else if (init->UhdmType() == uhdmassignment) {
-              assignment* as = (assignment*)init;
-              const expr* lhs = as->Lhs();
-              if (lhs->VpiName() == name) {
-                if (lhs->UhdmType() == uhdmref_var) continue;
-                if (lhs->UhdmType() == uhdmref_obj) continue;
-                ref->Actual_group((expr*)lhs);
-                break;
-              }
-            }
-          }
-        }
-      } else if (parent->UhdmType() == uhdmfork_stmt) {
-        fork_stmt* b = (fork_stmt*)parent;
-        if (auto vars = b->Variables()) {
-          for (auto decl : *vars) {
-            if (decl->VpiName() == name) {
-              if (decl->UhdmType() == uhdmref_var) continue;
-              if (decl->UhdmType() == uhdmref_obj) continue;
-              ref->Actual_group(decl);
-              break;
-            }
-          }
-        }
-        if (ref->Actual_group()) break;
-        if (auto params = b->Parameters()) {
-          for (auto decl : *params) {
-            if (decl->VpiName() == name) {
-              ref->Actual_group(decl);
-              break;
-            }
-          }
-        }
-        if (ref->Actual_group()) break;
-        VectorOfany* stmts = b->Stmts();
-        if (stmts) {
-          for (auto init : *stmts) {
-            if (init->UhdmType() == uhdmassign_stmt) {
-              assign_stmt* as = (assign_stmt*)init;
-              const expr* lhs = as->Lhs();
-              if (lhs->VpiName() == name) {
-                if (lhs->UhdmType() == uhdmref_var) continue;
-                if (lhs->UhdmType() == uhdmref_obj) continue;
-                ref->Actual_group((expr*)lhs);
-                break;
-              }
-            } else if (init->UhdmType() == uhdmassignment) {
-              assignment* as = (assignment*)init;
-              const expr* lhs = as->Lhs();
-              if (lhs->VpiName() == name) {
-                if (lhs->UhdmType() == uhdmref_var) continue;
-                if (lhs->UhdmType() == uhdmref_obj) continue;
-                ref->Actual_group((expr*)lhs);
-                break;
-              }
-            }
-          }
-        }
-      } else if (parent->UhdmType() == uhdmnamed_fork) {
-        named_fork* b = (named_fork*)parent;
-        if (auto vars = b->Variables()) {
-          for (auto decl : *vars) {
-            if (decl->VpiName() == name) {
-              if (decl->UhdmType() == uhdmref_var) continue;
-              if (decl->UhdmType() == uhdmref_obj) continue;
-              ref->Actual_group(decl);
-              break;
-            }
-          }
-        }
-        if (ref->Actual_group()) break;
-        if (auto params = b->Parameters()) {
-          for (auto decl : *params) {
-            if (decl->VpiName() == name) {
-              ref->Actual_group(decl);
-              break;
-            }
-          }
-        }
-        if (ref->Actual_group()) break;
-        VectorOfany* stmts = b->Stmts();
-        if (stmts) {
-          for (auto init : *stmts) {
-            if (init->UhdmType() == uhdmassign_stmt) {
-              assign_stmt* as = (assign_stmt*)init;
-              const expr* lhs = as->Lhs();
-              if (lhs->VpiName() == name) {
-                if (lhs->UhdmType() == uhdmref_var) continue;
-                if (lhs->UhdmType() == uhdmref_obj) continue;
-                ref->Actual_group((expr*)lhs);
-                break;
-              }
-            } else if (init->UhdmType() == uhdmassignment) {
-              assignment* as = (assignment*)init;
-              const expr* lhs = as->Lhs();
-              if (lhs->VpiName() == name) {
-                if (lhs->UhdmType() == uhdmref_var) continue;
-                if (lhs->UhdmType() == uhdmref_obj) continue;
-                ref->Actual_group((expr*)lhs);
-                break;
-              }
-            }
-          }
-        }
-      }
-      if (ref->Actual_group()) break;
-      parent = parent->VpiParent();
-    }
-    if (ref->Actual_group()) continue;
-    if (m && (m->UhdmType() == uhdmmodule_inst)) {
-      module_inst* minst = (module_inst*)m;
-      if (minst->Interfaces()) {
-        for (auto n : *minst->Interfaces()) {
-          if (n->VpiName() == name) {
-            ref->Actual_group(n);
-            break;
-          }
-        }
-        if (ref->Actual_group()) continue;
-      }
-      if (minst->Interface_arrays()) {
-        for (auto n : *minst->Interface_arrays()) {
-          if (n->VpiName() == name) {
-            ref->Actual_group(n);
-            break;
-          }
-        }
-        if (ref->Actual_group()) continue;
-      }
-    }
-    if (m &&
-        (m->UhdmType() == uhdmmodule_inst ||
-         m->UhdmType() == uhdminterface_inst || m->UhdmType() == uhdmprogram)) {
-      instance* inst = (instance*)m;
-      if (inst->Nets()) {
-        for (auto n : *inst->Nets()) {
-          if (n->VpiName() == name) {
-            ref->Actual_group(n);
-            break;
-          }
-          if (const ref_typespec* reftps = n->Typespec()) {
-            const typespec* tps = reftps->Actual_typespec();
-            if (tps->UhdmType() == uhdmenum_typespec) {
-              const enum_typespec* etps = any_cast<const enum_typespec*>(tps);
-              if (etps && etps->Enum_consts()) {
-                for (auto c : *etps->Enum_consts()) {
-                  if (c->VpiName() == name) {
-                    ref->Actual_group(c);
-                    break;
-                  }
-                }
-                if (ref->Actual_group()) break;
-              }
-            }
-          }
-        }
-        if (ref->Actual_group()) continue;
-      }
-      if (inst->Array_nets()) {
-        for (auto n : *inst->Array_nets()) {
-          if (n->VpiName() == name) {
-            ref->Actual_group(n);
-            break;
-          }
-        }
-        if (ref->Actual_group()) continue;
-      }
-    }
-    if (m && m->Variables()) {
-      for (auto n : *m->Variables()) {
-        if (n->VpiName() == name) {
-          ref->Actual_group(n);
-          break;
-        }
-        const std::string pname = StrCat(m->VpiName(), "::", name);
-        if (n->VpiName() == pname) {
-          ref->Actual_group(n);
-          break;
-        }
-      }
-      if (ref->Actual_group()) continue;
-    }
-
-    if (m && m->Param_assigns()) {
-      bool isParam = false;
-      for (auto p : *m->Param_assigns()) {
-        const any* lhs = p->Lhs();
-        if (lhs->VpiName() == name) {
-          // Do not bind blindly here, let the uhdmelab do this correctly
-          // ref->Actual_group((any*)p->Rhs());
-          isParam = true;
-          break;
-        }
-      }
-      if (isParam) continue;
-    }
-    if (m && m->Parameters()) {
-      bool isParam = false;
-      for (auto p : *m->Parameters()) {
-        if (p->VpiName() == name) {
-          isParam = true;
-          break;
-        }
-      }
-      if (isParam) continue;
-    }
-    if (m && m->Property_decls()) {
-      for (auto n : *m->Property_decls()) {
-        if (n->VpiName() == name) {
-          ref->Actual_group(n);
-          break;
-        }
-      }
-    }
-    if (m && m->Sequence_decls()) {
-      for (auto n : *m->Sequence_decls()) {
-        if (n->VpiName() == name) {
-          ref->Actual_group(n);
-          break;
-        }
-      }
-    }
-    if (m && m->Typespecs()) {
-      bool isTypespec = false;
-      std::vector<std::string> importedPackages;
-      for (auto n : *m->Typespecs()) {
-        if (n->UhdmType() == uhdmimport_typespec) {
-          importedPackages.emplace_back(n->VpiName());
-        }
-      }
-
-      for (auto n : *m->Typespecs()) {
-        if (n->UhdmType() == uhdmenum_typespec) {
-          enum_typespec* tps = any_cast<enum_typespec*>(n);
-          if (tps && tps->Enum_consts()) {
-            for (auto c : *tps->Enum_consts()) {
-              if (c->VpiName() == name) {
-                ref->Actual_group(c);
-                break;
-              }
-              if (std::string(std::string(m->VpiName()) + std::string("::") +
-                              std::string(name)) == c->VpiName()) {
-                ref->Actual_group(c);
-                break;
-              }
-            }
-          }
-        }
-        for (const auto& imp : importedPackages) {
-          if (n->VpiName() == StrCat(imp, "::", name)) {
-            isTypespec = true;
-            break;
-          }
-        }
-        if (n->VpiName() == name) {
-          isTypespec = true;
-          break;
-        }
-        if (ref->Actual_group()) break;
-      }
-      if (isTypespec) continue;
-      if (ref->Actual_group()) continue;
-    }
-    const FileContent* fC = mod->getFileContents()[0];
-    for (const auto& td : fC->getTypeDefMap()) {
-      const DataType* dt = td.second;
-      while (dt) {
-        typespec* n = dt->getTypespec();
-        n = replace(n, m_compileDesign->getSwapedObjects());
-        if (n && (n->UhdmType() == uhdmenum_typespec)) {
-          enum_typespec* tps = any_cast<enum_typespec*>(n);
-          if (tps && tps->Enum_consts()) {
-            for (auto c : *tps->Enum_consts()) {
-              if (c->VpiName() == name) {
-                ref->Actual_group(c);
-                break;
-              }
-            }
-          }
-        }
-        dt = dt->getDefinition();
-        if (ref->Actual_group()) break;
-      }
-      if (ref->Actual_group()) break;
-    }
-
-    if (m && m->Variables()) {
-      for (auto var : *m->Variables()) {
-        if (var->UhdmType() == uhdmenum_var) {
-          if (const ref_typespec* rt = var->Typespec()) {
-            if (const enum_typespec* tps =
-                    rt->Actual_typespec<enum_typespec>()) {
-              if (tps->Enum_consts()) {
-                for (auto c : *tps->Enum_consts()) {
-                  if (c->VpiName() == name) {
-                    ref->Actual_group(c);
-                    break;
-                  }
-                }
-              }
-            }
-          }
-        }
-        if (ref->Actual_group()) break;
-      }
-    }
-
-    if (!ref->Actual_group()) {
-      design* d = m_design->getUhdmDesign();
-      if (auto params = d->Parameters()) {
-        for (auto decl : *params) {
-          if (decl->VpiName() == name) {
-            ref->Actual_group(decl);
-            break;
-          }
-        }
-      }
-    }
-
-    if (!ref->Actual_group()) {
-      if (mod) {
-        if (auto elem = mod->getDesignElement()) {
-          if (elem->m_defaultNetType == VObjectType::slNoType) {
-            Location loc(fileSystem->toPathId(
-                             ref->VpiFile(),
-                             m_compileDesign->getCompiler()->getSymbolTable()),
-                         ref->VpiLineNo(), ref->VpiColumnNo(),
-                         m_compileDesign->getCompiler()
-                             ->getSymbolTable()
-                             ->registerSymbol(name));
-            Error err(ErrorDefinition::ELAB_ILLEGAL_IMPLICIT_NET, loc);
-            m_compileDesign->getCompiler()->getErrorContainer()->addError(err);
-            m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
-                m_compileDesign->getCompiler()
-                    ->getCommandLineParser()
-                    ->muteStdout());
-          } else {
-            if (m && (m->UhdmType() == uhdmmodule_inst ||
-                      m->UhdmType() == uhdminterface_inst ||
-                      m->UhdmType() == uhdmprogram)) {
-              instance* inst = (instance*)m;
-              logic_net* net = s.MakeLogic_net();
-              net->VpiName(name);
-              net->SetVpiParent(m);
-              net->VpiLineNo(ref->VpiLineNo());
-              net->VpiColumnNo(ref->VpiColumnNo());
-              net->VpiEndLineNo(ref->VpiEndLineNo());
-              net->VpiEndColumnNo(ref->VpiEndColumnNo());
-              net->VpiNetType(
-                  UhdmWriter::getVpiNetType(elem->m_defaultNetType));
-              net->VpiLineNo(ref->VpiLineNo());
-              net->VpiEndLineNo(ref->VpiEndLineNo());
-              net->VpiColumnNo(ref->VpiColumnNo());
-              net->VpiEndColumnNo(ref->VpiEndColumnNo());
-              net->SetVpiParent(m);
-              ref->Actual_group(net);
-              VectorOfnet* nets = inst->Nets();
-              if (nets == nullptr) {
-                inst->Nets(s.MakeNetVec());
-                nets = inst->Nets();
-              }
-              nets->push_back(net);
-            }
-          }
-        }
-      }
-    }
+    while (listener->createDefaultNets())
+      ;
+    listener->reportErrors();
+    delete listener;
   }
 }
 
@@ -5049,14 +4800,6 @@ void UhdmWriter::writeInstance(ModuleDefinition* mod, ModuleInstance* instance,
       }
     }
   }
-
-  if (mod && netlist) {
-    if (scope* sc = any_cast<scope*>(m)) {
-      lateTypedefBinding(s, mod, sc);
-      lateBinding(s, mod, sc);
-      lateTypedefBinding(s, mod, sc);
-    }
-  }
 }
 
 class AlwaysWithForLoop : public VpiListener {
@@ -5226,11 +4969,6 @@ bool UhdmWriter::write(PathId uhdmFileId) {
     // -------------------------------
     // Non-Elaborated Model
 
-    // FileContent
-    for (auto& fileIdContent : m_design->getAllFileContents()) {
-      lateTypedefBinding(s, fileIdContent.second, nullptr);
-    }
-
     // Packages
     SURELOG::PackageDefinitionVec packages =
         m_design->getOrderedPackageDefinitions();
@@ -5307,11 +5045,6 @@ bool UhdmWriter::write(PathId uhdmFileId) {
           fC->populateCoreMembers(startId, modId, p);
         }
       }
-    }
-
-    // FileContent Late Binding after Packages
-    for (auto& fileIdContent : m_design->getAllFileContents()) {
-      lateTypedefBinding(s, fileIdContent.second, nullptr);
     }
 
     // Programs
@@ -5522,6 +5255,8 @@ bool UhdmWriter::write(PathId uhdmFileId) {
       delete elaboratorContext;
     }
 
+    bind(s, designs);
+
     if (m_compileDesign->getCompiler()
             ->getCommandLineParser()
             ->getUhdmStats()) {
@@ -5532,6 +5267,8 @@ bool UhdmWriter::write(PathId uhdmFileId) {
       adjuster->listenDesigns(designs);
       delete adjuster;
     }
+  } else {
+    bind(s, designs);
   }
 
   CommandLineParser* const clp =

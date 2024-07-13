@@ -39,6 +39,11 @@
 
 // UHDM
 #include <uhdm/class_defn.h>
+#include <uhdm/constraint.h>
+#include <uhdm/function.h>
+#include <uhdm/function_decl.h>
+#include <uhdm/task.h>
+#include <uhdm/task_decl.h>
 
 #include <stack>
 
@@ -366,10 +371,14 @@ bool CompileClass::compile_class_property_(const FileContent* fC, NodeId id) {
           m_errors->addError(err);
         }
 
-        Property* prop =
-            new Property(datatype, fC, var, range, varName, is_local, is_static,
-                         is_protected, is_rand, is_randc);
-        m_class->insertProperty(prop);
+        if (UHDM::any* variable = m_helper.compileVariable(
+                m_class, fC, data_type, var, m_compileDesign, Reduce::No,
+                m_class->getUhdmScope(), nullptr, false)) {
+          Property* prop =
+              new Property(datatype, fC, var, range, varName, is_local,
+                           is_static, is_protected, is_rand, is_randc);
+          m_class->insertProperty(prop);
+        }
 
         variable_decl_assignment = fC->Sibling(variable_decl_assignment);
       }
@@ -521,6 +530,7 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
      n<> u<71> t<Class_method> p<72> c<70> l<37>
      */
     NodeId func_prototype = fC->Child(func_decl);
+    UHDM::Serializer& s = m_compileDesign->getSerializer();
     if (fC->Type(func_prototype) == VObjectType::paTask_prototype) {
       NodeId task_decl =
           m_helper.setFuncTaskQualifiers(fC, fC->Child(id), nullptr);
@@ -544,6 +554,35 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
       m_helper.compileTask(m_class, fC, id, m_compileDesign, Reduce::No,
                            nullptr, true);
 
+      std::vector<UHDM::task_func_decl*>* task_func_decls =
+          m_class->getTask_func_decls();
+      if (task_func_decls == nullptr) {
+        m_class->setTask_func_decls(s.MakeTask_func_declVec());
+        task_func_decls = m_class->getTask_func_decls();
+      }
+
+      UHDM::task_decl* td = nullptr;
+      for (UHDM::task_func_decl* tfd : *m_class->getTask_func_decls()) {
+        if (tfd->VpiName() == taskName) {
+          td = any_cast<UHDM::task_decl>(tfd);
+          break;
+        }
+      }
+
+      if (td == nullptr) {
+        td = s.MakeTask_decl();
+        td->VpiName(taskName);
+        td->SetVpiParent(m_class->getUhdmScope());
+        fC->populateCoreMembers(id, id, td);
+        task_func_decls->push_back(td);
+      }
+
+      for (UHDM::task_func* tf : *m_class->getTask_funcs()) {
+        if (tf->VpiName() == taskName) {
+          td->Task_func(tf);
+          break;
+        }
+      }
     } else {
       NodeId function_data_type = fC->Child(func_prototype);
       NodeId data_type = fC->Child(function_data_type);
@@ -563,6 +602,36 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
                                nullptr, true);
       m_helper.compileFunction(m_class, fC, id, m_compileDesign, Reduce::No,
                                nullptr, true);
+
+      std::vector<UHDM::task_func_decl*>* task_func_decls =
+          m_class->getTask_func_decls();
+      if (task_func_decls == nullptr) {
+        m_class->setTask_func_decls(s.MakeTask_func_declVec());
+        task_func_decls = m_class->getTask_func_decls();
+      }
+
+      UHDM::function_decl* fd = nullptr;
+      for (UHDM::task_func_decl* tfd : *m_class->getTask_func_decls()) {
+        if (tfd->VpiName() == funcName) {
+          fd = any_cast<UHDM::function_decl>(tfd);
+          break;
+        }
+      }
+
+      if (fd == nullptr) {
+        fd = s.MakeFunction_decl();
+        fd->VpiName(funcName);
+        fd->SetVpiParent(m_class->getUhdmScope());
+        fC->populateCoreMembers(id, id, fd);
+        task_func_decls->push_back(fd);
+      }
+
+      for (UHDM::task_func* tf : *m_class->getTask_funcs()) {
+        if (tf->VpiName() == funcName) {
+          fd->Task_func(tf);
+          break;
+        }
+      }
     }
     is_extern = true;
   } else if (func_type == VObjectType::paClass_constructor_declaration) {
@@ -645,6 +714,12 @@ bool CompileClass::compile_class_constraint_(const FileContent* fC,
   }
   Constraint* constraint = new Constraint(fC, class_constraint, constName);
   m_class->insertConstraint(constraint);
+
+  UHDM::class_defn* const pscope = m_class->getUhdmScope<UHDM::class_defn>();
+  if (UHDM::any* const cb = m_helper.compileConstraintBlock(
+          m_class, fC, class_constraint, m_compileDesign, pscope)) {
+    pscope->Constraints(true)->emplace_back(static_cast<UHDM::constraint*>(cb));
+  }
 
   return true;
 }

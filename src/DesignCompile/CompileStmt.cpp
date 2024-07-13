@@ -296,26 +296,20 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
         }
         tempItem = fC->Sibling(tempItem);
       }
-      if (labelId || endLabelId) {
-        UHDM::named_begin* begin = s.MakeNamed_begin();
-        begin->Stmts(stmts);
-        if (labelId) {
-          label = fC->SymName(labelId);
-          begin->VpiName(label);
-        }
-        if (endLabelId) {
-          endLabel = fC->SymName(endLabelId);
-          begin->VpiEndLabel(endLabel);
-        }
-        stmt = begin;
-        scope = begin;
-      } else {
-        UHDM::begin* begin = s.MakeBegin();
-        labelId = the_stmt;
-        begin->Stmts(stmts);
-        stmt = begin;
-        scope = begin;
+      UHDM::begin* begin = s.MakeBegin();
+      begin->Stmts(stmts);
+      if (labelId) {
+        label = fC->SymName(labelId);
+        begin->VpiName(label);
       }
+      if (endLabelId) {
+        endLabel = fC->SymName(endLabelId);
+        begin->VpiEndLabel(endLabel);
+      }
+      stmt = begin;
+      scope = begin;
+      if (!labelId && !endLabelId) labelId = the_stmt;
+
       const UHDM::ScopedScope scopedScope(scope);
       scope->SetVpiParent(pstmt);
       fC->populateCoreMembers(the_stmt, the_stmt, scope);
@@ -393,26 +387,21 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
         }
         tempItem = fC->Sibling(tempItem);
       }
-      if (labelId || endLabelId) {
-        UHDM::named_fork* fork = s.MakeNamed_fork();
-        fork->Stmts(stmts);
-        if (labelId) {
-          label = fC->SymName(labelId);
-          fork->VpiName(label);
-        }
-        if (endLabelId) {
-          endLabel = fC->SymName(endLabelId);
-          fork->VpiEndLabel(endLabel);
-        }
-        stmt = fork;
-        scope = fork;
-      } else {
-        labelId = the_stmt;
-        UHDM::fork_stmt* fork = s.MakeFork_stmt();
-        fork->Stmts(stmts);
-        stmt = fork;
-        scope = fork;
+
+      UHDM::fork_stmt* fork = s.MakeFork_stmt();
+      fork->Stmts(stmts);
+      if (labelId) {
+        label = fC->SymName(labelId);
+        fork->VpiName(label);
       }
+      if (endLabelId) {
+        endLabel = fC->SymName(endLabelId);
+        fork->VpiEndLabel(endLabel);
+      }
+      stmt = fork;
+      scope = fork;
+      if (!labelId && !endLabelId) labelId = the_stmt;
+
       scope->SetVpiParent(pstmt);
       while (item) {
         if (VectorOfany* cstmts =
@@ -465,27 +454,15 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
 
           if (jointype == VObjectType::paJoin_keyword) {
             vpijointype = vpiJoin;
-            if (stmt->UhdmType() == uhdmnamed_fork) {
-              ((UHDM::named_fork*)stmt)->VpiJoinType(vpijointype);
-            } else {
-              ((UHDM::fork_stmt*)stmt)->VpiJoinType(vpijointype);
-            }
+            ((UHDM::fork_stmt*)stmt)->VpiJoinType(vpijointype);
             break;
           } else if (jointype == VObjectType::paJoin_any_keyword) {
             vpijointype = vpiJoinAny;
-            if (stmt->UhdmType() == uhdmnamed_fork) {
-              ((UHDM::named_fork*)stmt)->VpiJoinType(vpijointype);
-            } else {
-              ((UHDM::fork_stmt*)stmt)->VpiJoinType(vpijointype);
-            }
+            ((UHDM::fork_stmt*)stmt)->VpiJoinType(vpijointype);
             break;
           } else if (jointype == VObjectType::paJoin_none_keyword) {
             vpijointype = vpiJoinNone;
-            if (stmt->UhdmType() == uhdmnamed_fork) {
-              ((UHDM::named_fork*)stmt)->VpiJoinType(vpijointype);
-            } else {
-              ((UHDM::fork_stmt*)stmt)->VpiJoinType(vpijointype);
-            }
+            ((UHDM::fork_stmt*)stmt)->VpiJoinType(vpijointype);
             break;
           }
         }
@@ -3213,10 +3190,12 @@ UHDM::any* CompileHelper::compileConstraintBlock(DesignComponent* component,
                                                  NodeId nodeId,
                                                  CompileDesign* compileDesign,
                                                  UHDM::any* pexpr) {
+  NodeId constraint_name = fC->Child(fC->Child(nodeId));
   UHDM::Serializer& s = compileDesign->getSerializer();
   UHDM::any* result = nullptr;
   UHDM::constraint* cons = s.MakeConstraint();
   cons->SetVpiParent(pexpr);
+  cons->VpiName(fC->SymName(constraint_name));
   fC->populateCoreMembers(nodeId, nodeId, cons);
   result = cons;
   return result;

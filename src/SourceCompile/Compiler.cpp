@@ -29,6 +29,7 @@
 #include <Surelog/Design/FileContent.h>
 #include <Surelog/DesignCompile/Builtin.h>
 #include <Surelog/DesignCompile/CompileDesign.h>
+#include <Surelog/DesignCompile/UVMElaboration.h>
 #include <Surelog/Library/Library.h>
 #include <Surelog/Library/LibrarySet.h>
 #include <Surelog/Library/ParseLibraryDef.h>
@@ -1237,6 +1238,11 @@ bool Compiler::compile() {
         }
       }
       m_errors->printMessages(m_commandLineParser->muteStdout());
+    } else {
+      if (UVMElaboration* elaboration = new UVMElaboration(m_compileDesign)) {
+        elaboration->elaborate();
+        delete elaboration;
+      }
     }
 
     PathId uhdmFileId = fileSystem->getChild(

@@ -236,8 +236,7 @@ UHDM::VectorOfany* CompileHelper::compileGenStmt(ModuleDefinition* component,
       gencase->VpiCondition(cond);
     }
     checkForLoops(false);
-    VectorOfcase_item* items = s.MakeCase_itemVec();
-    gencase->Case_items(items);
+    VectorOfcase_item* items = gencase->Case_items(true);
     tmp = fC->Sibling(tmp);
     while (tmp) {
       if (fC->Type(tmp) == VObjectType::paCase_generate_item) {
@@ -262,8 +261,7 @@ UHDM::VectorOfany* CompileHelper::compileGenStmt(ModuleDefinition* component,
         citem->VpiParent(gencase);
         fC->populateCoreMembers(tmp, tmp, citem);
         items->push_back(citem);
-        VectorOfany* exprs = s.MakeAnyVec();
-        citem->VpiExprs(exprs);
+        VectorOfany* exprs = citem->VpiExprs(true);
         if (ex) {
           ex->VpiParent(citem);
           exprs->push_back(ex);
@@ -295,8 +293,7 @@ UHDM::VectorOfany* CompileHelper::compileGenStmt(ModuleDefinition* component,
     const ScopedScope scopedScope(genfor);
 
     // Var init
-    genfor->VpiForInitStmts(s.MakeAnyVec());
-    VectorOfany* stmts = genfor->VpiForInitStmts();
+    VectorOfany* stmts = genfor->VpiForInitStmts(true);
 
     NodeId Var = fC->Child(varInit);
     NodeId Expression = fC->Sibling(Var);

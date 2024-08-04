@@ -30,9 +30,9 @@
 #include <Surelog/Common/SymbolId.h>
 #include <Surelog/Design/ValuedComponentI.h>
 #include <Surelog/SourceCompile/VObjectTypes.h>
+#include <uhdm/Serializer.h>
 
 #include <string_view>
-#include <uhdm/Serializer.h>
 
 namespace SURELOG {
 

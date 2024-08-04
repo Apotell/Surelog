@@ -1023,7 +1023,7 @@ void Compiler::writeUhdmSourceFiles() {
     const PreprocessFile* const pf = sourceFile->getPreprocessor();
 
     UHDM::source_file* const src = m_serializer.MakeSource_file();
-    src->SetVpiParent(design);
+    src->VpiParent(design);
     src->VpiFile(fileSystem->toPath(pf->getRawFileId()));
     sourcefiles->emplace_back(src);
 
@@ -1042,7 +1042,7 @@ void Compiler::writeUhdmSourceFiles() {
       if (ifi.m_context == IncludeFileInfo::Context::INCLUDE) {
         if (ifi.m_action == IncludeFileInfo::Action::PUSH) {
           UHDM::source_file* const incl = m_serializer.MakeSource_file();
-          incl->SetVpiParent(stack.back());
+          incl->VpiParent(stack.back());
           incl->VpiName(m_symbolTable->getSymbol(ifi.m_sectionSymbolId));
           incl->VpiFile(fileSystem->toPath(ifi.m_sectionFileId));
           incl->VpiLineNo(cifi.m_sectionStartLine);
@@ -1062,7 +1062,7 @@ void Compiler::writeUhdmSourceFiles() {
         UHDM::preproc_macro_definition* const pmd =
             m_serializer.MakePreproc_macro_definition();
         pmd->VpiName(mi->m_name);
-        pmd->SetVpiParent(stack.back());
+        pmd->VpiParent(stack.back());
         pmd->VpiFile(fileSystem->toPath(mi->m_fileId));
         pmd->VpiLineNo(mi->m_startLine);
         pmd->VpiColumnNo(mi->m_startColumn);
@@ -1076,7 +1076,7 @@ void Compiler::writeUhdmSourceFiles() {
           (ifi.m_action == IncludeFileInfo::Action::PUSH)) {
         UHDM::preproc_macro_instance* const pmi =
             m_serializer.MakePreproc_macro_instance();
-        pmi->SetVpiParent(stack.back());
+        pmi->VpiParent(stack.back());
         pmi->VpiName(m_symbolTable->getSymbol(ifi.m_sectionSymbolId));
         pmi->VpiFile(fileSystem->toPath(ifi.m_sectionFileId));
         pmi->VpiLineNo(cifi.m_sectionStartLine);

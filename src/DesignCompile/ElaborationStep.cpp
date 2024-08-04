@@ -1756,10 +1756,7 @@ any* ElaborationStep::makeVar_(DesignComponent* component, Signal* sig,
       } else if (ttps == uhdmunion_typespec) {
         var = s.MakeUnion_var();
       } else if (ttps == uhdmpacked_array_typespec) {
-        packed_array_var* avar = s.MakePacked_array_var();
-        auto elems = s.MakeAnyVec();
-        avar->Elements(elems);
-        var = avar;
+        var = s.MakePacked_array_var();
       } else if (ttps == uhdmarray_typespec) {
         UHDM::array_var* array_var = s.MakeArray_var();
         ref_typespec* tmpRef = s.MakeRef_typespec();
@@ -2064,9 +2061,7 @@ any* ElaborationStep::makeVar_(DesignComponent* component, Signal* sig,
     // packed struct array ...
     UHDM::packed_array_var* parray = s.MakePacked_array_var();
     parray->Ranges(packedDimensions);
-    VectorOfany* elements = s.MakeAnyVec();
-    elements->push_back(obj);
-    parray->Elements(elements);
+    parray->Elements(true)->push_back(obj);
     obj->VpiParent(parray);
     parray->VpiName(signame);
     obj = parray;
@@ -2074,7 +2069,6 @@ any* ElaborationStep::makeVar_(DesignComponent* component, Signal* sig,
 
   if (unpackedDimensions) {
     array_var* array_var = s.MakeArray_var();
-    array_var->Variables(s.MakeVariablesVec());
     bool dynamic = false;
     bool associative = false;
     bool queue = false;
@@ -2238,8 +2232,7 @@ any* ElaborationStep::makeVar_(DesignComponent* component, Signal* sig,
     vars->push_back(array_var);
     obj->VpiParent(array_var);
     if ((array_var->Typespec() == nullptr) || associative) {
-      VectorOfvariables* array_vars = array_var->Variables();
-      array_vars->push_back((variables*)obj);
+      array_var->Variables(true)->push_back((variables*)obj);
       ((variables*)obj)->VpiName("");
     }
     if (array_var->Typespec() == nullptr) {

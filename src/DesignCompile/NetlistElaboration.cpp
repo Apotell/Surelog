@@ -420,7 +420,7 @@ bool NetlistElaboration::elab_parameters_(ModuleInstance* instance,
           }
           m_helper.checkForLoops(false);
         }
-        exp->SetVpiParent(inst_assign);
+        exp->VpiParent(inst_assign);
         inst_assign->Rhs(exp);
 
         if (en_replay && m_helper.errorOnNegativeConstant(
@@ -1658,7 +1658,7 @@ interface_inst* NetlistElaboration::elab_interface_(
         net = n;
         io->Expr(net);
       } else {
-        net->SetVpiParent(io);
+        net->VpiParent(io);
         io->Expr(net);
       }
       ios->push_back(io);
@@ -2396,8 +2396,8 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
       fC->populateCoreMembers(id, id, assign);
       assign->Lhs((expr*)obj);
       assign->Rhs(exp);
-      obj->SetVpiParent(assign);
-      exp->SetVpiParent(assign);
+      obj->VpiParent(assign);
+      exp->VpiParent(assign);
       if (sig->getDelay()) {
         m_helper.checkForLoops(true);
         if (expr* delay_expr = (expr*)m_helper.compileExpression(

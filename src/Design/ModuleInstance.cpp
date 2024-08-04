@@ -307,8 +307,8 @@ void ModuleInstance::overrideParentChild(ModuleInstance* parent,
     auto params = child_netlist->param_assigns();
     if (params == nullptr) {
       params = s.MakeParam_assignVec();
+      child_netlist->param_assigns(params);
     }
-    child_netlist->param_assigns(params);
     for (auto p : *netlist->param_assigns()) {
       params->push_back(p);
     }
@@ -321,8 +321,8 @@ void ModuleInstance::overrideParentChild(ModuleInstance* parent,
     auto params = child_netlist->param_assigns();
     if (params == nullptr) {
       params = s.MakeParam_assignVec();
+      child_netlist->param_assigns(params);
     }
-    child_netlist->param_assigns(params);
     bool found = false;
     for (auto p : *params) {
       if (p->VpiName() == name) {

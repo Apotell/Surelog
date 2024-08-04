@@ -41,15 +41,14 @@ bool CompileHelper::compileAssertionItem(DesignComponent* component,
   NodeId item = fC->Child(nodeId);
   if (fC->Type(item) == VObjectType::paConcurrent_assertion_item) {
     NodeId Concurrent_assertion_statement = fC->Child(item);
-    UHDM::VectorOfany* stmts =
-        compileStmt(component, fC, Concurrent_assertion_statement,
-                    compileDesign, Reduce::No, nullptr);
-    UHDM::VectorOfany* assertions = component->getAssertions();
-    if (assertions == nullptr) {
-      component->setAssertions(s.MakeAnyVec());
-      assertions = component->getAssertions();
-    }
-    if (stmts) {
+    if (UHDM::VectorOfany* stmts =
+            compileStmt(component, fC, Concurrent_assertion_statement,
+                        compileDesign, Reduce::No, nullptr)) {
+      UHDM::VectorOfany* assertions = component->getAssertions();
+      if (assertions == nullptr) {
+        component->setAssertions(s.MakeAnyVec());
+        assertions = component->getAssertions();
+      }
       for (auto stmt : *stmts) {
         assertions->push_back(stmt);
       }
@@ -79,8 +78,7 @@ UHDM::property_inst* createPropertyInst(DesignComponent* component,
     real_property_expr->VpiParent(property_expr);
     if (call->Tf_call_args()) {
       UHDM::ElaboratorContext elaboratorContext(&s, false, true);
-      UHDM::VectorOfany* args = s.MakeAnyVec();
-      real_property_expr->VpiArguments(args);
+      UHDM::VectorOfany* args = real_property_expr->VpiArguments(true);
       for (auto arg : *call->Tf_call_args()) {
         if (arg->UhdmType() == UHDM::uhdmref_obj) {
           UHDM::ref_obj* ref =
@@ -450,8 +448,7 @@ UHDM::property_decl* CompileHelper::compilePropertyDeclaration(
   NodeId Property_spec = fC->Sibling(nodeId);
   if (fC->Type(Property_spec) == VObjectType::paProperty_port_list) {
     NodeId Property_port_item = fC->Child(Property_spec);
-    UHDM::VectorOfprop_formal_decl* ports = s.MakeProp_formal_declVec();
-    result->Prop_formal_decls(ports);
+    UHDM::VectorOfprop_formal_decl* ports = result->Prop_formal_decls(true);
     while (Property_port_item) {
       NodeId Property_formal_type = fC->Child(Property_port_item);
       NodeId SeqFormatType_Data = fC->Child(Property_formal_type);
@@ -479,8 +476,7 @@ UHDM::property_decl* CompileHelper::compilePropertyDeclaration(
   }
   if (fC->Type(Property_spec) ==
       VObjectType::paAssertion_variable_declaration) {
-    UHDM::VectorOfvariables* vars = s.MakeVariablesVec();
-    result->Variables(vars);
+    UHDM::VectorOfvariables* vars = result->Variables(true);
     while (fC->Type(Property_spec) ==
            VObjectType::paAssertion_variable_declaration) {
       NodeId Assertion_variable_declaration = Property_spec;
@@ -540,8 +536,7 @@ UHDM::sequence_decl* CompileHelper::compileSequenceDeclaration(
   NodeId Sequence_expr = fC->Sibling(nodeId);
   if (fC->Type(Sequence_expr) == VObjectType::paSequence_port_list) {
     NodeId Sequence_port_item = fC->Child(Sequence_expr);
-    UHDM::VectorOfseq_formal_decl* ports = s.MakeSeq_formal_declVec();
-    result->Seq_formal_decls(ports);
+    UHDM::VectorOfseq_formal_decl* ports = result->Seq_formal_decls(true);
     while (Sequence_port_item) {
       NodeId Sequence_formal_type = fC->Child(Sequence_port_item);
       NodeId SeqFormatType_Data = fC->Child(Sequence_formal_type);
@@ -567,23 +562,22 @@ UHDM::sequence_decl* CompileHelper::compileSequenceDeclaration(
   if (fC->Type(lookup) == VObjectType::paClocking_event) {
     UHDM::multiclock_sequence_expr* mexpr = s.MakeMulticlock_sequence_expr();
     fC->populateCoreMembers(Sequence_expr, Sequence_expr, mexpr);
-    mexpr->SetVpiParent(result);
+    mexpr->VpiParent(result);
     result->Sequence_expr_multiclock_group(mexpr);
-    mexpr->Clocked_seqs(s.MakeClocked_seqVec());
     while (fC->Type(lookup) == VObjectType::paClocking_event) {
       UHDM::expr* clock_event = any_cast<UHDM::expr*>(compileExpression(
           component, fC, lookup, compileDesign, Reduce::No, result, instance));
       UHDM::clocked_seq* seq = s.MakeClocked_seq();
       mexpr->Clocked_seqs()->push_back(seq);
       seq->VpiClockingEvent(clock_event);
-      seq->SetVpiParent(mexpr);
+      seq->VpiParent(mexpr);
       fC->populateCoreMembers(lookup, lookup, seq);
       lookup = fC->Sibling(lookup);
     }
     if (UHDM::any* seq_expr =
             compileExpression(component, fC, lookup, compileDesign, Reduce::No,
                               result, instance)) {
-      mexpr->Clocked_seqs()->back()->VpiSequenceExpr(seq_expr);
+      mexpr->Clocked_seqs(true)->back()->VpiSequenceExpr(seq_expr);
     }
   } else {
     if (UHDM::any* seq_expr =

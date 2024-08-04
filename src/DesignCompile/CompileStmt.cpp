@@ -152,10 +152,9 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
         NodeId tmp = child;
         while (tmp) {
           if (fC->Type(tmp) != VObjectType::slStringConst) {
-            VectorOfany* stmts =
-                compileStmt(component, fC, tmp, compileDesign, reduce, pstmt,
-                            instance, muteErrors);
-            if (stmts) {
+            if (VectorOfany* stmts =
+                    compileStmt(component, fC, tmp, compileDesign, reduce,
+                                pstmt, instance, muteErrors)) {
               for (any* st : *stmts) {
                 results->push_back(st);
               }
@@ -272,7 +271,8 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
     }
     case VObjectType::paSeq_block: {
       NodeId item = fC->Child(the_stmt);
-      VectorOfany* stmts = s.MakeAnyVec();
+      UHDM::begin* begin = s.MakeBegin();
+      VectorOfany* stmts = begin->Stmts(true);
       UHDM::scope* scope = nullptr;
       std::string label, endLabel;
       NodeId labelId, endLabelId;
@@ -296,8 +296,6 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
         }
         tempItem = fC->Sibling(tempItem);
       }
-      UHDM::begin* begin = s.MakeBegin();
-      begin->Stmts(stmts);
       if (labelId) {
         label = fC->SymName(labelId);
         begin->VpiName(label);
@@ -338,12 +336,7 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
                 if (assign->Lhs()) ((variables*)assign->Lhs())->VpiParent(stmt);
               }
             } else if (cstmt->UhdmType() == uhdmsequence_decl) {
-              VectorOfsequence_decl* decls = scope->Sequence_decls();
-              if (decls == nullptr) {
-                decls = s.MakeSequence_declVec();
-                scope->Sequence_decls(decls);
-              }
-              decls->push_back((sequence_decl*)cstmt);
+              scope->Sequence_decls(true)->push_back((sequence_decl*)cstmt);
               isDecl = true;
             }
             if (!isDecl) {
@@ -358,7 +351,8 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
     }
     case VObjectType::paPar_block: {
       NodeId item = fC->Child(the_stmt);
-      VectorOfany* stmts = s.MakeAnyVec();
+      UHDM::fork_stmt* fork = s.MakeFork_stmt();
+      VectorOfany* stmts = fork->Stmts(true);
       UHDM::scope* scope = nullptr;
       std::string label, endLabel;
       NodeId labelId, endLabelId;
@@ -387,8 +381,6 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
         tempItem = fC->Sibling(tempItem);
       }
 
-      UHDM::fork_stmt* fork = s.MakeFork_stmt();
-      fork->Stmts(stmts);
       if (labelId) {
         label = fC->SymName(labelId);
         fork->VpiName(label);
@@ -493,7 +485,7 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
       NodeId Loop_variables = fC->Sibling(Ps_or_hierarchical_array_identifier);
       NodeId loopVarId = fC->Child(Loop_variables);
       NodeId Statement = Loop_variables;
-      VectorOfany* loop_vars = s.MakeAnyVec();
+      VectorOfany* loop_vars = for_each->VpiLoopVars(true);
       while (fC->Type(Statement) == VObjectType::slStringConst ||
              fC->Type(Statement) == VObjectType::paLoop_variables ||
              fC->Type(Statement) == VObjectType::paComma) {
@@ -549,7 +541,7 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
         }
         Statement = fC->Sibling(Statement);
       }
-      for_each->VpiLoopVars(loop_vars);
+
       if (VectorOfany* forev =
               compileStmt(component, fC, Statement, compileDesign, Reduce::No,
                           for_each, instance, muteErrors)) {
@@ -721,8 +713,7 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
         // wait order
         UHDM::ordered_wait* waitst = s.MakeOrdered_wait();
         stmt = waitst;
-        VectorOfany* conditions = s.MakeAnyVec();
-        waitst->VpiConditions(conditions);
+        VectorOfany* conditions = waitst->VpiConditions(true);
         NodeId Hierarchical_identifier = Expression;
         while (Hierarchical_identifier &&
                (fC->Type(Hierarchical_identifier) ==
@@ -1375,15 +1366,13 @@ UHDM::atomic_stmt* CompileHelper::compileRandcaseStmt(
   NodeId RandCase = fC->Child(nodeId);
   UHDM::case_stmt* case_stmt = s.MakeCase_stmt();
   case_stmt->VpiRandType(vpiRand);
-  UHDM::VectorOfcase_item* case_items = s.MakeCase_itemVec();
-  case_stmt->Case_items(case_items);
+  UHDM::VectorOfcase_item* case_items = case_stmt->Case_items(true);
   result = case_stmt;
   while (RandCase) {
     NodeId Expression = fC->Child(RandCase);
     UHDM::case_item* case_item = s.MakeCase_item();
     case_items->push_back(case_item);
-    VectorOfany* exprs = s.MakeAnyVec();
-    case_item->VpiExprs(exprs);
+    VectorOfany* exprs = case_item->VpiExprs(true);
     case_item->VpiParent(case_stmt);
     if (UHDM::any* item_exp =
             compileExpression(component, fC, Expression, compileDesign,
@@ -1423,8 +1412,7 @@ UHDM::atomic_stmt* CompileHelper::compileCaseStmt(
       component, fC, Condition, compileDesign, Reduce::No, pstmt, instance);
   NodeId Case_item = fC->Sibling(Condition);
   UHDM::case_stmt* case_stmt = s.MakeCase_stmt();
-  UHDM::VectorOfcase_item* case_items = s.MakeCase_itemVec();
-  case_stmt->Case_items(case_items);
+  UHDM::VectorOfcase_item* case_items = case_stmt->Case_items(true);
   result = case_stmt;
   case_stmt->VpiCondition((UHDM::expr*)cond_exp);
   cond_exp->VpiParent(case_stmt);
@@ -1473,8 +1461,7 @@ UHDM::atomic_stmt* CompileHelper::compileCaseStmt(
     if (fC->Type(Case_item) == VObjectType::paCase_item) {
       Expression = fC->Child(Case_item);
       if (fC->Type(Expression) == VObjectType::paExpression) {
-        VectorOfany* exprs = s.MakeAnyVec();
-        case_item->VpiExprs(exprs);
+        VectorOfany* exprs = case_item->VpiExprs(true);
         while (Expression) {
           if (fC->Type(Expression) == VObjectType::paExpression) {
             // Expr
@@ -1505,12 +1492,10 @@ UHDM::atomic_stmt* CompileHelper::compileCaseStmt(
       } else {
         operation* insideOp = s.MakeOperation();
         insideOp->VpiOpType(vpiInsideOp);
-        UHDM::VectorOfany* operands = s.MakeAnyVec();
-        insideOp->Operands(operands);
+        UHDM::VectorOfany* operands = insideOp->Operands(true);
         fC->populateCoreMembers(Open_range_list, Open_range_list, insideOp);
         NodeId Value_range = fC->Child(Open_range_list);
-        VectorOfany* exprs = s.MakeAnyVec();
-        case_item->VpiExprs(exprs);
+        VectorOfany* exprs = case_item->VpiExprs(true);
         exprs->push_back(insideOp);
         insideOp->VpiParent(case_item);
 
@@ -1555,14 +1540,10 @@ CompileHelper::compileTfPortDecl(DesignComponent* component,
                                  NodeId tf_item_decl,
                                  CompileDesign* compileDesign) {
   UHDM::Serializer& s = compileDesign->getSerializer();
-  std::vector<io_decl*>* ios = parent->Io_decls();
-  if (ios == nullptr) ios = s.MakeIo_declVec();
-  std::vector<variables*>* vars = parent->Variables();
-  if (vars == nullptr) vars = s.MakeVariablesVec();
+  std::vector<io_decl*>* ios = parent->Io_decls(true);
+  std::vector<variables*>* vars = parent->Variables(true);
   std::pair<std::vector<UHDM::io_decl*>*, std::vector<UHDM::variables*>*>
       results = std::make_pair(ios, vars);
-  parent->Io_decls(results.first);
-  parent->Variables(results.second);
   /*
 n<> u<137> t<TfPortDir_Inp> p<141> s<138> l<28>
 n<> u<138> t<Data_type_or_implicit> p<141> s<140> l<28>
@@ -2038,8 +2019,7 @@ bool CompileHelper::compileTask(DesignComponent* component,
     task->Stmt(begin);
     begin->VpiParent(task);
     const UHDM::ScopedScope scopedScope(begin);
-    VectorOfany* stmts = s.MakeAnyVec();
-    begin->Stmts(stmts);
+    VectorOfany* stmts = begin->Stmts(true);
     const NodeId firstStatementId = Statement_or_null;
     NodeId lastStatementId = Statement_or_null;
     while (Statement_or_null) {
@@ -2071,13 +2051,8 @@ bool CompileHelper::compileTask(DesignComponent* component,
           for (any* st : *sts) {
             UHDM_OBJECT_TYPE stmt_type = st->UhdmType();
             if (stmt_type == uhdmparam_assign) {
-              UHDM::VectorOfparam_assign* param_assigns = task->Param_assigns();
-              if (param_assigns == nullptr) {
-                task->Param_assigns(s.MakeParam_assignVec());
-                param_assigns = task->Param_assigns();
-              }
               if (param_assign* pst = any_cast<param_assign*>(st))
-                param_assigns->push_back(pst);
+                task->Param_assigns(true)->push_back(pst);
             }
             if (stmt_type == uhdmassignment) {
               assignment* stmt = (assignment*)st;
@@ -2115,13 +2090,8 @@ bool CompileHelper::compileTask(DesignComponent* component,
         for (any* st : *stmts) {
           UHDM_OBJECT_TYPE stmt_type = st->UhdmType();
           if (stmt_type == uhdmparam_assign) {
-            UHDM::VectorOfparam_assign* param_assigns = task->Param_assigns();
-            if (param_assigns == nullptr) {
-              task->Param_assigns(s.MakeParam_assignVec());
-              param_assigns = task->Param_assigns();
-            }
             if (param_assign* pst = any_cast<param_assign*>(st))
-              param_assigns->push_back(pst);
+              task->Param_assigns(true)->push_back(pst);
           } else if (stmt_type == uhdmassignment) {
             assignment* stmt = (assignment*)st;
             if (stmt->Rhs() == nullptr ||
@@ -2265,8 +2235,7 @@ bool CompileHelper::compileClassConstructorDeclaration(
     func->Stmt(begin);
     begin->VpiParent(func);
     const UHDM::ScopedScope scopedScope(begin);
-    VectorOfany* stmts = s.MakeAnyVec();
-    begin->Stmts(stmts);
+    VectorOfany* stmts = begin->Stmts(true);
     Stmt = fC->Sibling(Tf_port_list);
     const NodeId firstStmtId = Stmt;
     NodeId lastStmtId = Stmt;
@@ -2486,8 +2455,7 @@ bool CompileHelper::compileFunction(DesignComponent* component,
     begin* begin = s.MakeBegin();
     func->Stmt(begin);
     begin->VpiParent(func);
-    VectorOfany* stmts = s.MakeAnyVec();
-    begin->Stmts(stmts);
+    VectorOfany* stmts = begin->Stmts(true);
     const UHDM::ScopedScope scopedScope(begin);
     const NodeId firstStatementId = Function_statement_or_null;
     NodeId lastStatementId = Function_statement_or_null;
@@ -2499,13 +2467,8 @@ bool CompileHelper::compileFunction(DesignComponent* component,
           for (any* st : *sts) {
             UHDM_OBJECT_TYPE stmt_type = st->UhdmType();
             if (stmt_type == uhdmparam_assign) {
-              UHDM::VectorOfparam_assign* param_assigns = func->Param_assigns();
-              if (param_assigns == nullptr) {
-                func->Param_assigns(s.MakeParam_assignVec());
-                param_assigns = func->Param_assigns();
-              }
               if (param_assign* pst = any_cast<param_assign*>(st))
-                param_assigns->push_back(pst);
+                func->Param_assigns(true)->push_back(pst);
             } else if (stmt_type == uhdmassignment) {
               assignment* stmt = (assignment*)st;
               if (stmt->Rhs() == nullptr ||
@@ -2542,13 +2505,8 @@ bool CompileHelper::compileFunction(DesignComponent* component,
         any* st = sts->front();
         UHDM_OBJECT_TYPE stmt_type = st->UhdmType();
         if (stmt_type == uhdmparam_assign) {
-          UHDM::VectorOfparam_assign* param_assigns = func->Param_assigns();
-          if (param_assigns == nullptr) {
-            func->Param_assigns(s.MakeParam_assignVec());
-            param_assigns = func->Param_assigns();
-          }
           if (param_assign* pst = any_cast<param_assign*>(st))
-            param_assigns->push_back(pst);
+            func->Param_assigns(true)->push_back(pst);
         } else if (stmt_type == uhdmassignment) {
           assignment* stmt = (assignment*)st;
           if (stmt->Rhs() == nullptr ||
@@ -2847,12 +2805,7 @@ UHDM::any* CompileHelper::compileForLoop(DesignComponent* component,
     if (fC->Type(For_variable_declaration) ==
         VObjectType::paFor_variable_declaration) {
       while (For_variable_declaration) {
-        VectorOfany* stmts = for_stmt->VpiForInitStmts();
-        if (stmts == nullptr) {
-          for_stmt->VpiForInitStmts(s.MakeAnyVec());
-          stmts = for_stmt->VpiForInitStmts();
-        }
-
+        VectorOfany* stmts = for_stmt->VpiForInitStmts(true);
         NodeId Data_type = fC->Child(For_variable_declaration);
         NodeId Var = fC->Sibling(Data_type);
         NodeId Expression = fC->Sibling(Var);
@@ -2895,29 +2848,24 @@ UHDM::any* CompileHelper::compileForLoop(DesignComponent* component,
           Hierarchical_identifier = Variable_lvalue;
         }
         NodeId Expression = fC->Sibling(Variable_lvalue);
-        VectorOfany* stmts = for_stmt->VpiForInitStmts();
-        if (stmts == nullptr) {
-          for_stmt->VpiForInitStmts(s.MakeAnyVec());
-          stmts = for_stmt->VpiForInitStmts();
-        }
-
+        VectorOfany* stmts = for_stmt->VpiForInitStmts(true);
         assignment* assign_stmt = s.MakeAssignment();
         assign_stmt->VpiParent(for_stmt);
         fC->populateCoreMembers(Variable_assignment, Variable_assignment,
                                 assign_stmt);
 
-        variables* var = (variables*)compileVariable(
-            component, fC, Hierarchical_identifier, Hierarchical_identifier,
-            compileDesign, Reduce::Yes, assign_stmt, nullptr, false);
-        if (var) {
+        if (variables* var = (variables*)compileVariable(
+                component, fC, Hierarchical_identifier, Hierarchical_identifier,
+                compileDesign, Reduce::Yes, assign_stmt, nullptr, false)) {
           assign_stmt->Lhs(var);
           var->VpiParent(assign_stmt);
         }
 
-        expr* rhs = (expr*)compileExpression(component, fC, Expression,
-                                             compileDesign, Reduce::No);
-        if (rhs) rhs->VpiParent(assign_stmt);
-        assign_stmt->Rhs(rhs);
+        if (expr* rhs = (expr*)compileExpression(component, fC, Expression,
+                                                 compileDesign, Reduce::No)) {
+          rhs->VpiParent(assign_stmt);
+          assign_stmt->Rhs(rhs);
+        }
         stmts->push_back(assign_stmt);
 
         Variable_assignment = fC->Sibling(Variable_assignment);
@@ -2939,25 +2887,20 @@ UHDM::any* CompileHelper::compileForLoop(DesignComponent* component,
   if (For_step) {
     NodeId For_step_assignment = fC->Child(For_step);
     while (For_step_assignment) {
-      VectorOfany* stmts = for_stmt->VpiForIncStmts();
-      if (stmts == nullptr) {
-        for_stmt->VpiForIncStmts(s.MakeAnyVec());
-        stmts = for_stmt->VpiForIncStmts();
-      }
+      VectorOfany* stmts = for_stmt->VpiForIncStmts(true);
 
       NodeId Expression = fC->Child(For_step_assignment);
       if (fC->Type(Expression) == VObjectType::paOperator_assignment) {
-        std::vector<UHDM::any*>* incstmts = compileStmt(
-            component, fC, Expression, compileDesign, Reduce::No, for_stmt);
-        if (incstmts) {
+        if (std::vector<UHDM::any*>* incstmts =
+                compileStmt(component, fC, Expression, compileDesign,
+                            Reduce::No, for_stmt)) {
           for (auto stmt : *incstmts) {
             stmts->push_back(stmt);
           }
         }
       } else {
-        expr* exp = (expr*)compileExpression(component, fC, Expression,
-                                             compileDesign, Reduce::No);
-        if (exp) {
+        if (expr* exp = (expr*)compileExpression(component, fC, Expression,
+                                                 compileDesign, Reduce::No)) {
           exp->VpiParent(for_stmt);
           stmts->push_back(exp);
         }

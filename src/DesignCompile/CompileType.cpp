@@ -135,11 +135,9 @@ variables* CompileHelper::getSimpleVarFromTypespec(
       }
       if (packedDimensions) {
         packed_array_var* array = s.MakePacked_array_var();
-        VectorOfany* vars = s.MakeAnyVec();
         array->Ranges(packedDimensions);
         for (auto r : *packedDimensions) r->VpiParent(array);
-        array->Elements(vars);
-        vars->push_back(var);
+        array->Elements(true)->push_back(var);
         var->VpiParent(array);
         var = array;
       }
@@ -152,11 +150,9 @@ variables* CompileHelper::getSimpleVarFromTypespec(
 
       if (packedDimensions) {
         packed_array_var* array = s.MakePacked_array_var();
-        VectorOfany* vars = s.MakeAnyVec();
         array->Ranges(packedDimensions);
         for (auto r : *packedDimensions) r->VpiParent(array);
-        array->Elements(vars);
-        vars->push_back(var);
+        array->Elements(true)->push_back(var);
         var->VpiParent(array);
         var = array;
       }
@@ -181,11 +177,9 @@ variables* CompileHelper::getSimpleVarFromTypespec(
       }
       if (packedDimensions) {
         packed_array_var* array = s.MakePacked_array_var();
-        VectorOfany* vars = s.MakeAnyVec();
         for (auto pd : *packedDimensions) pd->VpiParent(array);
         array->Ranges(packedDimensions);
-        array->Elements(vars);
-        vars->push_back(var);
+        array->Elements(true)->push_back(var);
         var->VpiParent(array);
         var = array;
       }
@@ -204,11 +198,9 @@ variables* CompileHelper::getSimpleVarFromTypespec(
       }
       if (packedDimensions) {
         packed_array_var* array = s.MakePacked_array_var();
-        VectorOfany* vars = s.MakeAnyVec();
         for (auto pd : *packedDimensions) pd->VpiParent(array);
         array->Ranges(packedDimensions);
-        array->Elements(vars);
-        vars->push_back(var);
+        array->Elements(true)->push_back(var);
         var->VpiParent(array);
         var = array;
       }
@@ -289,8 +281,7 @@ UHDM::any* CompileHelper::compileVariable(
   if (fC->Type(variable) == VObjectType::slStringConst &&
       fC->Type(Packed_dimension) == VObjectType::slStringConst) {
     UHDM::hier_path* path = s.MakeHier_path();
-    VectorOfany* elems = s.MakeAnyVec();
-    path->Path_elems(elems);
+    VectorOfany* elems = path->Path_elems(true);
     std::string fullName(fC->SymName(variable));
     ref_obj* obj = s.MakeRef_obj();
     obj->VpiName(fullName);
@@ -817,10 +808,7 @@ any* CompileHelper::compileVariable(
       } else if (ttps == uhdmunion_typespec) {
         var = s.MakeUnion_var();
       } else if (ttps == uhdmpacked_array_typespec) {
-        packed_array_var* avar = s.MakePacked_array_var();
-        auto elems = s.MakeAnyVec();
-        avar->Elements(elems);
-        var = avar;
+        var = s.MakePacked_array_var();
       } else if (ttps == uhdmarray_typespec) {
         UHDM::array_var* array_var = s.MakeArray_var();
         ref_typespec* tmpRef = s.MakeRef_typespec();
@@ -1136,7 +1124,10 @@ any* CompileHelper::compileVariable(
     var->VpiSigned(sig->isSigned());
     var->VpiConstantVariable(sig->isConst());
     var->VpiName(signame);
-    var->Expr(assignExp);
+    if (assignExp != nullptr) {
+      var->Expr(assignExp);
+      assignExp->VpiParent(var);
+    }
     obj = var;
   } else if (packedDimensions && (obj->UhdmType() != uhdmlogic_var) &&
              (obj->UhdmType() != uhdmbit_var) &&
@@ -1144,9 +1135,7 @@ any* CompileHelper::compileVariable(
     // packed struct array ...
     UHDM::packed_array_var* parray = s.MakePacked_array_var();
     parray->Ranges(packedDimensions);
-    VectorOfany* elements = s.MakeAnyVec();
-    elements->push_back(obj);
-    parray->Elements(elements);
+    parray->Elements(true)->push_back(obj);
     obj->VpiParent(parray);
     parray->VpiName(signame);
     obj = parray;
@@ -1154,7 +1143,6 @@ any* CompileHelper::compileVariable(
 
   if (unpackedDimensions) {
     array_var* array_var = s.MakeArray_var();
-    array_var->Variables(s.MakeVariablesVec());
     array_var->VpiParent(pscope);
     bool dynamic = false;
     bool associative = false;
@@ -1332,8 +1320,7 @@ any* CompileHelper::compileVariable(
     fC->populateCoreMembers(signalId, sig->getNodeId(), array_var);
     obj->VpiParent(pscope);
     if ((array_var->Typespec() == nullptr) || associative) {
-      VectorOfvariables* array_vars = array_var->Variables();
-      array_vars->push_back((variables*)obj);
+      array_var->Variables(true)->push_back((variables*)obj);
       ((variables*)obj)->VpiName("");
     }
     if (array_var->Typespec() == nullptr) {
@@ -1347,7 +1334,10 @@ any* CompileHelper::compileVariable(
       array_var->Typespec(tsRef);
       fC->populateCoreMembers(signalId, signalId, tsRef);
     }
-    array_var->Expr(assignExp);
+    if (assignExp != nullptr) {
+      array_var->Expr(assignExp);
+      assignExp->VpiParent(array_var);
+    }
     if ((obj->VpiLineNo() == 0) && (obj->VpiColumnNo() == 0)) {
       fC->populateCoreMembers(sig->getNodeId(), sig->getNodeId(), obj);
     }
@@ -1398,7 +1388,10 @@ any* CompileHelper::compileVariable(
       for (auto r : *unpackedDimensions) r->VpiParent(obj);
     }
 
-    obj->Expr(assignExp);
+    if (assignExp != nullptr) {
+      obj->Expr(assignExp);
+      assignExp->VpiParent(obj);
+    }
     obj->VpiSigned(sig->isSigned());
     obj->VpiConstantVariable(sig->isConst());
     obj->VpiIsRandomized(sig->isRand() || sig->isRandc());
@@ -1748,10 +1741,8 @@ typespec* CompileHelper::compileDatastructureTypespec(
         }
         if (param && (actualFC->Type(param) !=
                       VObjectType::paList_of_net_decl_assignments)) {
-          VectorOfany* params = s.MakeAnyVec();
-          ref->Parameters(params);
-          VectorOfparam_assign* assigns = s.MakeParam_assignVec();
-          ref->Param_assigns(assigns);
+          VectorOfany* params = ref->Parameters(true);
+          VectorOfparam_assign* assigns = ref->Param_assigns(true);
           uint32_t index = 0;
           NodeId Parameter_value_assignment = param;
           NodeId List_of_parameter_assignments =
@@ -2197,8 +2188,7 @@ UHDM::typespec* CompileHelper::compileTypespec(
       }
       en->VpiName(fC->SymName(nodeId));
       fC->populateCoreMembers(dataTypeId, dataTypeId, en);
-      VectorOfenum_const* econsts = s.MakeEnum_constVec();
-      en->Enum_consts(econsts);
+      VectorOfenum_const* econsts = en->Enum_consts(true);
       NodeId enum_name_declaration = type;
       int32_t val = 0;
       while (enum_name_declaration) {
@@ -2675,12 +2665,11 @@ UHDM::typespec* CompileHelper::compileTypespec(
                           path = (hier_path*)ex;
                         } else if (ex->UhdmType() == uhdmref_obj) {
                           path = s.MakeHier_path();
-                          path->Path_elems(s.MakeAnyVec());
                           ref_obj* ref = s.MakeRef_obj();
                           ref->VpiName(typeName);
                           ref->VpiParent(path);
                           fC->populateCoreMembers(type, type, ref);
-                          path->Path_elems()->push_back(ref);
+                          path->Path_elems(true)->push_back(ref);
                         }
                         if (path) {
                           bool invalidValue = false;

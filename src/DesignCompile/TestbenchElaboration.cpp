@@ -269,12 +269,7 @@ bool TestbenchElaboration::bindBaseClasses_() {
         tps->Class_defn(parent);
         tps->VpiName(placeHolder->getName());
         derived->Extends(extends);
-        UHDM::VectorOfclass_defn* all_derived = parent->Deriveds();
-        if (all_derived == nullptr) {
-          parent->Deriveds(s.MakeClass_defnVec());
-          all_derived = parent->Deriveds();
-        }
-        all_derived->push_back(derived);
+        parent->Deriveds(true)->push_back(derived);
       } else {
         class_def.second = datatype_cast<const Parameter*>(the_def);
         if (class_def.second) {
@@ -698,24 +693,17 @@ bool TestbenchElaboration::bindTasks_() {
 bool TestbenchElaboration::bindProperties_() {
   Compiler* compiler = m_compileDesign->getCompiler();
   Design* design = compiler->getDesign();
-  UHDM::Serializer& s = m_compileDesign->getSerializer();
   ClassNameClassDefinitionMultiMap classes = design->getClassDefinitions();
 
   // Bind properties
   for (const auto& [className, classDefinition] : classes) {
     UHDM::class_defn* defn = classDefinition->getUhdmScope<UHDM::class_defn>();
-    UHDM::VectorOfvariables* vars = defn->Variables();
-    UHDM::VectorOfnamed_event* events = defn->Named_events();
+    UHDM::VectorOfvariables* vars = defn->Variables(true);
     for (Signal* sig : classDefinition->getSignals()) {
       const FileContent* fC = sig->getFileContent();
       NodeId id = sig->getNodeId();
       NodeId packedDimension = sig->getPackedDimension();
       NodeId unpackedDimension = sig->getUnpackedDimension();
-      if (vars == nullptr) {
-        vars = s.MakeVariablesVec();
-        defn->Variables(vars);
-      }
-
       const std::string_view signame = sig->getName();
 
       // Packed and unpacked ranges
@@ -751,17 +739,11 @@ bool TestbenchElaboration::bindProperties_() {
           exprFromAssign_(classDefinition, fC, id, unpackedDimension, nullptr);
       if (exp != nullptr) exp->VpiParent(defn);
 
-      UHDM::any* obj =
-          makeVar_(classDefinition, sig, packedDimensions, packedSize,
-                   unpackedDimensions, unpackedSize, nullptr, vars, exp, tps);
-
-      if (obj) {
+      if (UHDM::any* obj = makeVar_(classDefinition, sig, packedDimensions,
+                                    packedSize, unpackedDimensions,
+                                    unpackedSize, nullptr, vars, exp, tps)) {
         if (obj->UhdmType() == UHDM::uhdmnamed_event) {
-          if (events == nullptr) {
-            defn->Named_events(s.MakeNamed_eventVec());
-            events = defn->Named_events();
-          }
-          events->push_back((UHDM::named_event*)obj);
+          defn->Named_events(true)->push_back((UHDM::named_event*)obj);
         }
 
         fC->populateCoreMembers(id, id, obj);

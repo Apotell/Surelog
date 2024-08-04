@@ -284,11 +284,7 @@ bool CompileModule::collectUdpObjects_() {
         break;
       }
       case VObjectType::paUdp_port_list: {
-        std::vector<UHDM::io_decl*>* ios = defn->Io_decls();
-        if (ios == nullptr) {
-          defn->Io_decls(s.MakeIo_declVec());
-          ios = defn->Io_decls();
-        }
+        std::vector<UHDM::io_decl*>* ios = defn->Io_decls(true);
         NodeId port = fC->Child(id);
         while (port) {
           UHDM::io_decl* io = s.MakeIo_decl();
@@ -395,17 +391,12 @@ bool CompileModule::collectUdpObjects_() {
         ventry += ": ";
         NodeId Symbol = fC->Child(Output_symbol);
         ventry += fC->SymName(Symbol);
-        UHDM::VectorOftable_entry* entries = defn->Table_entrys();
-        if (entries == nullptr) {
-          defn->Table_entrys(s.MakeTable_entryVec());
-          entries = defn->Table_entrys();
-        }
         UHDM::table_entry* entry = s.MakeTable_entry();
         entry->VpiParent(defn);
         entry->VpiValue(ventry);
         entry->VpiSize(nb);
         fC->populateCoreMembers(Level_input_list, Level_input_list, entry);
-        entries->push_back(entry);
+        defn->Table_entrys(true)->push_back(entry);
         break;
       }
       case VObjectType::paSequential_entry: {
@@ -492,17 +483,12 @@ bool CompileModule::collectUdpObjects_() {
           ventry += "-";
         }
 
-        UHDM::VectorOftable_entry* entries = defn->Table_entrys();
-        if (entries == nullptr) {
-          defn->Table_entrys(s.MakeTable_entryVec());
-          entries = defn->Table_entrys();
-        }
         UHDM::table_entry* entry = s.MakeTable_entry();
         entry->VpiParent(defn);
         entry->VpiValue(ventry);
         entry->VpiSize(nb);
         fC->populateCoreMembers(Level_input_list, Level_input_list, entry);
-        entries->push_back(entry);
+        defn->Table_entrys(true)->push_back(entry);
         break;
       }
       case VObjectType::paUdp_initial_statement: {
@@ -708,16 +694,18 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
         }
         case VObjectType::paProperty_declaration: {
           if (collectType != CollectType::OTHER) break;
-          UHDM::property_decl* decl = m_helper.compilePropertyDeclaration(
-              m_module, fC, id, m_compileDesign, nullptr, m_instance);
-          m_module->addPropertyDecl(decl);
+          if (UHDM::property_decl* decl = m_helper.compilePropertyDeclaration(
+                  m_module, fC, id, m_compileDesign, nullptr, m_instance)) {
+            m_module->addPropertyDecl(decl);
+          }
           break;
         }
         case VObjectType::paSequence_declaration: {
           if (collectType != CollectType::OTHER) break;
-          UHDM::sequence_decl* decl = m_helper.compileSequenceDeclaration(
-              m_module, fC, id, m_compileDesign, nullptr, m_instance);
-          m_module->addSequenceDecl(decl);
+          if (UHDM::sequence_decl* decl = m_helper.compileSequenceDeclaration(
+                  m_module, fC, id, m_compileDesign, nullptr, m_instance)) {
+            m_module->addSequenceDecl(decl);
+          }
           break;
         }
         case VObjectType::paAlways_construct: {

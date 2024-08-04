@@ -289,6 +289,7 @@ bool CompileHelper::importPackage(DesignComponent* scope, Design* design,
     VectorOftask_func* sfuncs = scope->getTask_funcs();
     if (sfuncs == nullptr) {
       sfuncs = s.MakeTask_funcVec();
+      scope->setTask_funcs(sfuncs);
     }
     for (auto& func : *funcs) {
       if (!object_name.empty()) {
@@ -313,7 +314,6 @@ bool CompileHelper::importPackage(DesignComponent* scope, Design* design,
         }
       }
     }
-    scope->setTask_funcs(sfuncs);
   }
 
   return true;
@@ -775,8 +775,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       enum_t->Instance(scope->getUhdmScope<UHDM::instance>());
     }
     // Enum values
-    VectorOfenum_const* econsts = s.MakeEnum_constVec();
-    enum_t->Enum_consts(econsts);
+    VectorOfenum_const* econsts = enum_t->Enum_consts(true);
     uint64_t baseSize = 64;
     if (const ref_typespec* rt = enum_t->Base_typespec()) {
       if (const typespec* ts = rt->Actual_typespec()) {
@@ -1982,8 +1981,7 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
           if (packedDimensions) {
             packed_array_net* pnets = s.MakePacked_array_net();
             pnets->Ranges(packedDimensions);
-            pnets->Elements(s.MakeAnyVec());
-            pnets->Elements()->push_back(stv);
+            pnets->Elements(true)->push_back(stv);
             stv->VpiParent(pnets);
             for (auto r : *packedDimensions) r->VpiParent(pnets);
             obj = pnets;
@@ -2003,8 +2001,7 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
           if (packedDimensions) {
             packed_array_net* pnets = s.MakePacked_array_net();
             pnets->Ranges(packedDimensions);
-            pnets->Elements(s.MakeAnyVec());
-            pnets->Elements()->push_back(stv);
+            pnets->Elements(true)->push_back(stv);
             stv->VpiParent(pnets);
             for (auto r : *packedDimensions) r->VpiParent(pnets);
             obj = pnets;
@@ -2068,8 +2065,7 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
         if (packedDimensions) {
           packed_array_net* pnets = s.MakePacked_array_net();
           pnets->Ranges(packedDimensions);
-          pnets->Elements(s.MakeAnyVec());
-          pnets->Elements()->push_back(stv);
+          pnets->Elements(true)->push_back(stv);
           stv->VpiParent(pnets);
           for (auto r : *packedDimensions) r->VpiParent(pnets);
           obj = pnets;
@@ -2092,8 +2088,7 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
         if (packedDimensions) {
           packed_array_net* pnets = s.MakePacked_array_net();
           pnets->Ranges(packedDimensions);
-          pnets->Elements(s.MakeAnyVec());
-          pnets->Elements()->push_back(stv);
+          pnets->Elements(true)->push_back(stv);
           stv->VpiParent(pnets);
           for (auto r : *packedDimensions) r->VpiParent(pnets);
           obj = pnets;
@@ -2147,8 +2142,7 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
           if (packedDimensions) {
             packed_array_net* pnets = s.MakePacked_array_net();
             pnets->Ranges(packedDimensions);
-            pnets->Elements(s.MakeAnyVec());
-            pnets->Elements()->push_back(stv);
+            pnets->Elements(true)->push_back(stv);
             stv->VpiParent(pnets);
             for (auto r : *packedDimensions) r->VpiParent(pnets);
             obj = pnets;
@@ -2172,8 +2166,7 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
           if (packedDimensions) {
             packed_array_net* pnets = s.MakePacked_array_net();
             pnets->Ranges(packedDimensions);
-            pnets->Elements(s.MakeAnyVec());
-            pnets->Elements()->push_back(stv);
+            pnets->Elements(true)->push_back(stv);
             stv->VpiParent(pnets);
             for (auto r : *packedDimensions) r->VpiParent(pnets);
             obj = pnets;
@@ -2340,7 +2333,7 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
       } else {
         logicn->VpiName(signame);
         logicn->VpiSigned(sig->isSigned());
-        obj->VpiParent(uhdmScope);
+        logicn->VpiParent(uhdmScope);
         obj = logicn;
         nets->push_back(logicn);
       }
@@ -3150,10 +3143,7 @@ CompileHelper::compileInstantiation(ModuleDefinition* mod,
         }
         mod_array->Elem_typespec()->Actual_typespec(tps);
         tps->VpiParent(mod_array);
-        VectorOfport* ports = s.MakePortVec();
-        mod_array->Ports(ports);
-        compileHighConn(mod, fC, compileDesign, instId, ports);
-        for (auto p : *ports) p->VpiParent(mod_array);
+        compileHighConn(mod, fC, compileDesign, instId, mod_array->Ports(true));
         fC->populateCoreMembers(typespecId, hierInstId, mod_array);
         results.first.push_back(mod_array);
       }
@@ -3163,11 +3153,8 @@ CompileHelper::compileInstantiation(ModuleDefinition* mod,
       m->VpiName(instName);
       m->VpiDefName(modName);
       fC->populateCoreMembers(id, id, m);
-      VectorOfport* ports = s.MakePortVec();
-      m->Ports(ports);
       results.second.push_back(m);
-      compileHighConn(mod, fC, compileDesign, instId, ports);
-      for (auto p : *ports) p->VpiParent(m);
+      compileHighConn(mod, fC, compileDesign, instId, m->Ports(true));
     }
     hierInstId = fC->Sibling(hierInstId);
   }
@@ -3271,10 +3258,8 @@ void CompileHelper::compileUdpInstantiation(ModuleDefinition* mod,
         mod->setPrimitiveArrays(s.MakePrimitive_arrayVec());
       }
       UHDM::primitive_array* gate_array = s.MakeUdp_array();
-      VectorOfprimitive* prims = s.MakePrimitiveVec();
-      gate_array->Primitives(prims);
       gate_array->Ranges(ranges);
-      prims->push_back(gate);
+      gate_array->Primitives(true)->push_back(gate);
       mod->getPrimitiveArrays()->push_back(gate_array);
     } else {
       if (mod->getPrimitives() == nullptr) {
@@ -3296,8 +3281,7 @@ void CompileHelper::writePrimTerms(ModuleDefinition* mod, const FileContent* fC,
                                    primitive* prim, int32_t vpiGateType,
                                    ValuedComponentI* instance) {
   UHDM::Serializer& s = compileDesign->getSerializer();
-  VectorOfprim_term* terms = s.MakePrim_termVec();
-  prim->Prim_terms(terms);
+  VectorOfprim_term* terms = prim->Prim_terms(true);
   uint32_t index = 0;
   while (id) {
     prim_term* term = s.MakePrim_term();
@@ -3361,14 +3345,12 @@ void CompileHelper::compileGateInstantiation(ModuleDefinition* mod,
     gate = s.MakeSwitch_tran();
     if (fC->Type(Unpacked_dimension) == VObjectType::paUnpacked_dimension) {
       gate_array = s.MakeSwitch_array();
-      VectorOfprimitive* prims = s.MakePrimitiveVec();
       int32_t size;
       VectorOfrange* ranges =
           compileRanges(mod, fC, Unpacked_dimension, compileDesign, Reduce::No,
                         nullptr, instance, size, false);
-      gate_array->Primitives(prims);
       gate_array->Ranges(ranges);
-      prims->push_back(gate);
+      gate_array->Primitives(true)->push_back(gate);
       if (mod->getPrimitiveArrays() == nullptr) {
         mod->setPrimitiveArrays(s.MakePrimitive_arrayVec());
       }
@@ -3386,8 +3368,6 @@ void CompileHelper::compileGateInstantiation(ModuleDefinition* mod,
       gate_array = s.MakeGate_array();
       gate_array->VpiName(fC->SymName(Name));
       fC->populateCoreMembers(id, id, gate_array);
-      VectorOfprimitive* prims = s.MakePrimitiveVec();
-      gate_array->Primitives(prims);
       int32_t size;
       if (VectorOfrange* ranges =
               compileRanges(mod, fC, Unpacked_dimension, compileDesign,
@@ -3395,7 +3375,7 @@ void CompileHelper::compileGateInstantiation(ModuleDefinition* mod,
         gate_array->Ranges(ranges);
       }
       gate->VpiParent(gate_array);
-      prims->push_back(gate);
+      gate_array->Primitives(true)->push_back(gate);
       if (mod->getPrimitiveArrays() == nullptr) {
         mod->setPrimitiveArrays(s.MakePrimitive_arrayVec());
       }
@@ -3635,6 +3615,7 @@ always* CompileHelper::compileAlwaysBlock(DesignComponent* component,
   UHDM::Serializer& s = compileDesign->getSerializer();
   compileDesign->lockSerializer();
   always* always = s.MakeAlways();
+  always->VpiParent(component->getUhdmScope());
   NodeId always_keyword = fC->Child(id);
   switch (fC->Type(always_keyword)) {
     case VObjectType::paALWAYS:
@@ -3928,8 +3909,7 @@ UHDM::any* CompileHelper::defaultPatternAssignment(const UHDM::typespec* tps,
                 uint32_t size = max - min + 1;
                 if (baseType == uhdmint_typespec) {
                   array_expr* array = s.MakeArray_expr();
-                  VectorOfexpr* exprs = s.MakeExprVec();
-                  array->Exprs(exprs);
+                  VectorOfexpr* exprs = array->Exprs(true);
                   for (uint32_t i = 0; i < size; i++) {
                     exprs->push_back(c);
                   }
@@ -4386,10 +4366,7 @@ bool CompileHelper::compileParameterDeclaration(
                   r->VpiParent(its);
                   fC->populateCoreMembers(Param_assignment, Param_assignment,
                                           r);
-
-                  VectorOfrange* ranges = s.MakeRangeVec();
-                  ranges->push_back(r);
-                  its->Ranges(ranges);
+                  its->Ranges(true)->push_back(r);
 
                   ts = its;
                   p->setTypespec(ts);
@@ -4813,7 +4790,7 @@ UHDM::any* CompileHelper::compileTfCall(DesignComponent* component,
           module_inst* modTmp = s.MakeModule_inst();
           modTmp->VpiName("tmp");
           const VectorOfseq_formal_decl* decls = stmt->Ios();
-          VectorOfparam_assign* passigns = s.MakeParam_assignVec();
+          VectorOfparam_assign* passigns = modTmp->Param_assigns(true);
           for (uint32_t i = 0; i < decls->size(); i++) {
             seq_formal_decl* decl = decls->at(i);
             any* actual = nullptr;
@@ -4829,13 +4806,11 @@ UHDM::any* CompileHelper::compileTfCall(DesignComponent* component,
             }
             passigns->push_back(pass);
           }
-          modTmp->Param_assigns(passigns);
           cont_assign* cts = s.MakeCont_assign();
-          VectorOfcont_assign* assigns = s.MakeCont_assignVec();
+          VectorOfcont_assign* assigns = modTmp->Cont_assigns(true);
           const expr* exp = stmt->Expr();
           cts->Rhs((expr*)exp);
           assigns->push_back(cts);
-          modTmp->Cont_assigns(assigns);
 
           if (ElaboratorContext* elaboratorContext =
                   new ElaboratorContext(&s, false)) {
@@ -4853,8 +4828,7 @@ UHDM::any* CompileHelper::compileTfCall(DesignComponent* component,
           if (VectorOfany* arguments = compileTfCallArguments(
                   component, fC, argListNode, compileDesign, Reduce::No, let,
                   nullptr, false)) {
-            VectorOfexpr* exprs = s.MakeExprVec();
-            let->Arguments(exprs);
+            VectorOfexpr* exprs = let->Arguments(true);
             for (auto ex : *arguments) {
               exprs->push_back((expr*)ex);
             }
@@ -5140,7 +5114,7 @@ UHDM::array_var* CompileHelper::compileArrayVar(DesignComponent* component,
   return result;
 }
 
-std::vector<UHDM::attribute*>* CompileHelper::compileAttributes(
+UHDM::VectorOfattribute* CompileHelper::compileAttributes(
     DesignComponent* component, const FileContent* fC, NodeId nodeId,
     CompileDesign* compileDesign, UHDM::any* pexpr) {
   UHDM::Serializer& s = compileDesign->getSerializer();
@@ -5383,12 +5357,7 @@ UHDM::clocking_block* CompileHelper::compileClockingBlock(
       NodeId List_of_clocking_decl_assign = fC->Sibling(item);
       if (List_of_clocking_decl_assign) {
         NodeId Clocking_decl_assign = fC->Child(List_of_clocking_decl_assign);
-        VectorOfclocking_io_decl* ios = cblock->Clocking_io_decls();
-        if (ios == nullptr) {
-          cblock->Clocking_io_decls(s.MakeClocking_io_declVec());
-          ios = cblock->Clocking_io_decls();
-        }
-
+        VectorOfclocking_io_decl* ios = cblock->Clocking_io_decls(true);
         while (Clocking_decl_assign) {
           NodeId Identifier = fC->Child(Clocking_decl_assign);
           NodeId Expr = fC->Sibling(Identifier);
@@ -5957,9 +5926,7 @@ void CompileHelper::setRange(UHDM::constant* c, Value* val,
     c->Typespec(tpsRef);
     range* r = s.MakeRange();
     r->VpiParent(tps);
-    VectorOfrange* ranges = s.MakeRangeVec();
-    ranges->push_back(r);
-    tps->Ranges(ranges);
+    tps->Ranges(true)->push_back(r);
     constant* lc = s.MakeConstant();
     lc->VpiValue("UINT:" + std::to_string(lr));
     r->Left_expr(lc);
@@ -5992,9 +5959,7 @@ void CompileHelper::compileLetDeclaration(DesignComponent* component,
   expr* exp = (expr*)compileExpression(component, fC, Expression, compileDesign,
                                        Reduce::No, decl, nullptr, false);
   component->lateBinding(true);
-  VectorOfexpr* exprs = s.MakeExprVec();
-  exprs->push_back(exp);
-  decl->Expressions(exprs);
+  decl->Expressions(true)->push_back(exp);
   VectorOfseq_formal_decl* args = s.MakeSeq_formal_declVec();
   for (auto io : *ios) {
     seq_formal_decl* formal = s.MakeSeq_formal_decl();
@@ -6025,8 +5990,7 @@ bool CompileHelper::elaborationSystemTask(DesignComponent* component,
   UHDM::sys_task_call* scall = s.MakeSys_task_call();
   fC->populateCoreMembers(id, id, scall);
   scall->VpiName(name);
-  VectorOfany* args = s.MakeAnyVec();
-  scall->Tf_call_args(args);
+  VectorOfany* args = scall->Tf_call_args(true);
   constant* c = s.MakeConstant();
   args->push_back(c);
   c->VpiValue(std::string("STRING:") + std::string(text));

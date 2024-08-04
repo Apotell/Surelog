@@ -816,12 +816,7 @@ bool CompileClass::compile_class_declaration_(const FileContent* fC,
   m_class->insertClass(the_class);
   UHDM::class_defn* parent = m_class->getUhdmScope<UHDM::class_defn>();
   defn->VpiParent(parent);
-  UHDM::VectorOfscope* scopes = parent->Scopes();
-  if (scopes == nullptr) {
-    parent->Scopes(s.MakeScopeVec());
-    scopes = parent->Scopes();
-  }
-  scopes->push_back(defn);
+  parent->Scopes(true)->push_back(defn);
 
   FunctorCompileClass(m_compileDesign, the_class, m_design, m_symbols,
                       m_errors)();

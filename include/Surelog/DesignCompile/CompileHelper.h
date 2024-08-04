@@ -349,13 +349,13 @@ class CompileHelper final {
       std::string_view name, CompileDesign* compileDesign, Reduce reduce,
       UHDM::any* pexpr, ValuedComponentI* instance, bool muteErrors);
 
-  std::vector<UHDM::range*>* compileRanges(DesignComponent* component,
-                                           const FileContent* fC,
-                                           NodeId Packed_dimension,
-                                           CompileDesign* compileDesign,
-                                           Reduce reduce, UHDM::any* pexpr,
-                                           ValuedComponentI* instance,
-                                           int32_t& size, bool muteErrors);
+  UHDM::VectorOfrange* compileRanges(DesignComponent* component,
+                                     const FileContent* fC,
+                                     NodeId Packed_dimension,
+                                     CompileDesign* compileDesign,
+                                     Reduce reduce, UHDM::any* pexpr,
+                                     ValuedComponentI* instance, int32_t& size,
+                                     bool muteErrors);
 
   UHDM::any* compileAssignmentPattern(DesignComponent* component,
                                       const FileContent* fC,
@@ -423,11 +423,11 @@ class CompileHelper final {
                                     ValuedComponentI* instance,
                                     bool muteErrors);
 
-  std::vector<UHDM::attribute*>* compileAttributes(DesignComponent* component,
-                                                   const FileContent* fC,
-                                                   NodeId nodeId,
-                                                   CompileDesign* compileDesign,
-                                                   UHDM::any* pexpr);
+  UHDM::VectorOfattribute* compileAttributes(DesignComponent* component,
+                                             const FileContent* fC,
+                                             NodeId nodeId,
+                                             CompileDesign* compileDesign,
+                                             UHDM::any* pexpr);
 
   void compileImportDeclaration(DesignComponent* component,
                                 const FileContent* fC, NodeId id,

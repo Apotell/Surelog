@@ -79,8 +79,8 @@ struct FunctorGenerateModule {
 
 class CompileModule final {
  public:
-  CompileModule(CompileDesign* compiler, ModuleDefinition* mdl,
-                Design* design, SymbolTable* symbols, ErrorContainer* errors,
+  CompileModule(CompileDesign* compiler, ModuleDefinition* mdl, Design* design,
+                SymbolTable* symbols, ErrorContainer* errors,
                 ValuedComponentI* instance = nullptr)
       : m_compileDesign(compiler),
         m_module(mdl),

@@ -92,12 +92,12 @@ UHDM::VectorOfany* CompileHelper::compileGenStmt(ModuleDefinition* component,
     checkForLoops(false);
 
     begin* stmt = s.MakeBegin();
-    stmt->SetVpiParent(genreg);
+    stmt->VpiParent(genreg);
     fC->populateCoreMembers(stmtId, stmtId, stmt);
     genreg->VpiStmt(stmt);
     if (stmts != nullptr) {
       stmt->Stmts(stmts);
-      for (auto s : *stmts) s->SetVpiParent(stmt);
+      for (auto s : *stmts) s->VpiParent(stmt);
     }
 
     NodeId blockNameId = fC->Child(fC->Child(stmtId));
@@ -129,7 +129,7 @@ UHDM::VectorOfany* CompileHelper::compileGenStmt(ModuleDefinition* component,
         gen_if_else* genif = s.MakeGen_if_else();
         genstmt = genif;
         if (cond != nullptr) {
-          cond->SetVpiParent(genif);
+          cond->VpiParent(genif);
           genif->VpiCondition(cond);
         }
         checkForLoops(true);
@@ -142,15 +142,15 @@ UHDM::VectorOfany* CompileHelper::compileGenStmt(ModuleDefinition* component,
 
         begin* stmt1 = s.MakeBegin();
         fC->populateCoreMembers(stmtId, stmtId, stmt1);
-        stmt1->SetVpiParent(genif);
+        stmt1->VpiParent(genif);
         genif->VpiStmt(stmt1);
         if (stmts != nullptr) {
           stmt1->Stmts(stmts);
-          for (auto s : *stmts) s->SetVpiParent(stmt1);
+          for (auto s : *stmts) s->VpiParent(stmt1);
         }
         if (scope* const s = subComponent->getUhdmScope<scope>()) {
           if (auto* const typespecs = s->Typespecs()) {
-            for (auto t : *typespecs) t->SetVpiParent(stmt1, true);
+            for (auto t : *typespecs) t->VpiParent(stmt1, true);
           }
         }
 
@@ -171,15 +171,15 @@ UHDM::VectorOfany* CompileHelper::compileGenStmt(ModuleDefinition* component,
 
         begin* stmt2 = s.MakeBegin();
         fC->populateCoreMembers(elseStmtId, elseStmtId, stmt2);
-        stmt2->SetVpiParent(genif);
+        stmt2->VpiParent(genif);
         genif->VpiElseStmt(stmt2);
         if (stmts != nullptr) {
           stmt2->Stmts(stmts);
-          for (auto s : *stmts) s->SetVpiParent(stmt2);
+          for (auto s : *stmts) s->VpiParent(stmt2);
         }
         if (scope* const s = subComponent->getUhdmScope<scope>()) {
           if (auto* const typespecs = s->Typespecs()) {
-            for (auto t : *typespecs) t->SetVpiParent(stmt2, true);
+            for (auto t : *typespecs) t->VpiParent(stmt2, true);
           }
         }
 
@@ -193,7 +193,7 @@ UHDM::VectorOfany* CompileHelper::compileGenStmt(ModuleDefinition* component,
         genstmt = genif;
         if (cond != nullptr) {
           genif->VpiCondition(cond);
-          cond->SetVpiParent(genif);
+          cond->VpiParent(genif);
         }
         fC->populateCoreMembers(id, id, genif);
         ModuleDefinition* subComponent =
@@ -206,15 +206,15 @@ UHDM::VectorOfany* CompileHelper::compileGenStmt(ModuleDefinition* component,
 
         begin* stmt = s.MakeBegin();
         fC->populateCoreMembers(stmtId, stmtId, stmt);
-        stmt->SetVpiParent(genif);
+        stmt->VpiParent(genif);
         genif->VpiStmt(stmt);
         if (stmts != nullptr) {
           stmt->Stmts(stmts);
-          for (auto s : *stmts) s->SetVpiParent(stmt);
+          for (auto s : *stmts) s->VpiParent(stmt);
         }
         if (scope* const s = subComponent->getUhdmScope<scope>()) {
           if (auto* const typespecs = s->Typespecs()) {
-            for (auto t : *typespecs) t->SetVpiParent(stmt, true);
+            for (auto t : *typespecs) t->VpiParent(stmt, true);
           }
         }
 
@@ -259,22 +259,22 @@ UHDM::VectorOfany* CompileHelper::compileGenStmt(ModuleDefinition* component,
                                          Reduce::No, nullptr, nullptr, true);
         checkForLoops(false);
         case_item* citem = s.MakeCase_item();
-        citem->SetVpiParent(gencase);
+        citem->VpiParent(gencase);
         fC->populateCoreMembers(tmp, tmp, citem);
         items->push_back(citem);
         VectorOfany* exprs = s.MakeAnyVec();
         citem->VpiExprs(exprs);
         if (ex) {
-          ex->SetVpiParent(citem);
+          ex->VpiParent(citem);
           exprs->push_back(ex);
         }
         begin* stmt = s.MakeBegin();
-        stmt->SetVpiParent(citem);
+        stmt->VpiParent(citem);
         fC->populateCoreMembers(stmtId, stmtId, stmt);
         citem->Stmt(stmt);
         if (stmts != nullptr) {
           stmt->Stmts(stmts);
-          for (auto s : *stmts) s->SetVpiParent(stmt);
+          for (auto s : *stmts) s->VpiParent(stmt);
         }
 
         NodeId blockNameId = fC->Child(fC->Child(stmtId));
@@ -301,13 +301,13 @@ UHDM::VectorOfany* CompileHelper::compileGenStmt(ModuleDefinition* component,
     NodeId Var = fC->Child(varInit);
     NodeId Expression = fC->Sibling(Var);
     assignment* assign_stmt = s.MakeAssignment();
-    assign_stmt->SetVpiParent(genfor);
+    assign_stmt->VpiParent(genfor);
     fC->populateCoreMembers(varInit, varInit, assign_stmt);
     if (variables* varb =
             (variables*)compileVariable(component, fC, Var, Var, compileDesign,
                                         Reduce::No, genfor, nullptr, false)) {
       assign_stmt->Lhs(varb);
-      varb->SetVpiParent(assign_stmt);
+      varb->VpiParent(assign_stmt);
       varb->VpiName(fC->SymName(Var));
       fC->populateCoreMembers(Var, Var, varb);
     }
@@ -345,7 +345,7 @@ UHDM::VectorOfany* CompileHelper::compileGenStmt(ModuleDefinition* component,
       assignment* assign_stmt = s.MakeAssignment();
       assign_stmt->VpiOpType(UhdmWriter::getVpiOpType(fC->Type(assignOp)));
       genfor->VpiForIncStmt(assign_stmt);
-      assign_stmt->SetVpiParent(genfor);
+      assign_stmt->VpiParent(genfor);
       fC->populateCoreMembers(iteration, iteration, assign_stmt);
       checkForLoops(true);
       if (expr* lhs = (expr*)compileExpression(
@@ -366,16 +366,16 @@ UHDM::VectorOfany* CompileHelper::compileGenStmt(ModuleDefinition* component,
     component = subComponent;
     checkForLoops(true);
     stmts = compileStmt(component, fC, genBlock, compileDesign, Reduce::No,
-                        nullptr, nullptr, true);
+                        genfor, nullptr, true);
     checkForLoops(false);
 
     begin* stmt = s.MakeBegin();
-    stmt->SetVpiParent(genfor);
+    stmt->VpiParent(genfor);
     fC->populateCoreMembers(genBlock, genBlock, stmt);
     genfor->VpiStmt(stmt);
     if (stmts != nullptr) {
       stmt->Stmts(stmts);
-      for (auto s : *stmts) s->SetVpiParent(stmt);
+      for (auto s : *stmts) s->VpiParent(stmt);
     }
 
     NodeId blockNameId = fC->Child(fC->Child(genBlock));

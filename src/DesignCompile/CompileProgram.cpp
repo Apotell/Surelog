@@ -221,7 +221,7 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
       case VObjectType::paContinuous_assign: {
         if (collectType != CollectType::OTHER) break;
         m_helper.compileContinuousAssignment(m_program, fC, fC->Child(id),
-                                             m_compileDesign, nullptr);
+                                             m_compileDesign, nullptr, nullptr);
         break;
       }
       case VObjectType::paParameter_declaration: {

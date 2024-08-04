@@ -24,6 +24,7 @@
 #include <Surelog/CommandLine/CommandLineParser.h>
 #include <Surelog/Common/FileSystem.h>
 #include <Surelog/Design/FileContent.h>
+#include <Surelog/Design/Signal.h>
 #include <Surelog/DesignCompile/CompileClass.h>
 #include <Surelog/DesignCompile/CompileDesign.h>
 #include <Surelog/ErrorReporting/ErrorContainer.h>
@@ -40,8 +41,11 @@
 // UHDM
 #include <uhdm/class_defn.h>
 #include <uhdm/constraint.h>
+#include <uhdm/expr.h>
+#include <uhdm/extends.h>
 #include <uhdm/function.h>
 #include <uhdm/function_decl.h>
+#include <uhdm/ref_typespec.h>
 #include <uhdm/task.h>
 #include <uhdm/task_decl.h>
 
@@ -278,6 +282,62 @@ bool CompileClass::compile(Elaborate elaborate, Reduce reduce) {
     m_class->insertFunction(method);
   }
 
+  compile_properties();
+  return true;
+}
+
+bool CompileClass::compile_properties() {
+  UHDM::class_defn* defn = m_class->getUhdmScope<UHDM::class_defn>();
+  for (Signal* sig : m_class->getSignals()) {
+    const FileContent* fC = sig->getFileContent();
+    NodeId id = sig->getNodeId();
+    NodeId packedDimension = sig->getPackedDimension();
+    NodeId unpackedDimension = sig->getUnpackedDimension();
+    const std::string_view signame = sig->getName();
+
+    // Packed and unpacked ranges
+    int32_t packedSize = 0;
+    int32_t unpackedSize = 0;
+    std::vector<UHDM::range*>* packedDimensions = m_helper.compileRanges(
+        m_class, fC, packedDimension, m_compileDesign, Reduce::Yes, nullptr,
+        nullptr, packedSize, false);
+    std::vector<UHDM::range*>* unpackedDimensions = nullptr;
+    if (fC->Type(unpackedDimension) == VObjectType::paClass_new) {
+    } else {
+      unpackedDimensions = m_helper.compileRanges(
+          m_class, fC, unpackedDimension, m_compileDesign, Reduce::Yes, nullptr,
+          nullptr, unpackedSize, false);
+    }
+    UHDM::typespec* tps = nullptr;
+    NodeId typeSpecId = sig->getTypeSpecId();
+    if (typeSpecId) {
+      tps = m_helper.compileTypespec(m_class, fC, typeSpecId, m_compileDesign,
+                                     Reduce::Yes, nullptr, nullptr, false);
+    }
+    if (tps == nullptr) {
+      if (sig->getInterfaceTypeNameId()) {
+        tps = m_helper.compileTypespec(
+            m_class, fC, sig->getInterfaceTypeNameId(), m_compileDesign,
+            Reduce::Yes, nullptr, nullptr, false);
+      }
+    }
+
+    // Assignment to a default value
+    UHDM::expr* exp = m_helper.exprFromAssign(m_class, m_compileDesign, fC, id,
+                                              unpackedDimension);
+    if (exp != nullptr) exp->VpiParent(defn);
+
+    if (UHDM::any* obj = m_helper.compileVariable(
+            m_class, m_compileDesign, sig, packedDimensions, packedSize,
+            unpackedDimensions, unpackedSize, exp, tps)) {
+      if (obj->UhdmType() == UHDM::uhdmnamed_event) {
+        defn->Named_events(true)->push_back((UHDM::named_event*)obj);
+      }
+
+      fC->populateCoreMembers(id, id, obj);
+      obj->VpiParent(defn);
+    }
+  }
   return true;
 }
 
@@ -572,7 +632,7 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
       if (td == nullptr) {
         td = s.MakeTask_decl();
         td->VpiName(taskName);
-        td->SetVpiParent(m_class->getUhdmScope());
+        td->VpiParent(m_class->getUhdmScope());
         fC->populateCoreMembers(id, id, td);
         task_func_decls->push_back(td);
       }
@@ -621,7 +681,7 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
       if (fd == nullptr) {
         fd = s.MakeFunction_decl();
         fd->VpiName(funcName);
-        fd->SetVpiParent(m_class->getUhdmScope());
+        fd->VpiParent(m_class->getUhdmScope());
         fC->populateCoreMembers(id, id, fd);
         task_func_decls->push_back(fd);
       }
@@ -910,28 +970,16 @@ bool CompileClass::compile_class_type_(const FileContent* fC, NodeId id) {
     base_class_id = fC->Sibling(base_class_id);
     base_class_name.append("::").append(fC->SymName(base_class_id));
   }
-  // Insert base class placeholder
-  // Will be bound in UVMElaboration step
+  UHDM::extends* extends = s.MakeExtends();
+  extends->VpiParent(m_class->getUhdmScope());
+  fC->populateCoreMembers(base_class_id, base_class_id, extends);
+  m_class->getUhdmScope<UHDM::class_defn>()->Extends(extends);
 
-  Library* lib = fC->getLibrary();
-  const std::string_view libName = lib->getName();
-  ClassDefinition* base_class = nullptr;
-  std::string fullName = StrCat(libName, "::", base_class_name);
-  if (m_class->getContainer()) {  // @todo: Need to discuss in which case,
-                                  // container window can be null.
-    fullName =
-        StrCat(m_class->getContainer()->getName(), "::", base_class_name);
-    base_class = fC->getClassDefinition(fullName);
-  }
-
-  if (base_class == nullptr) {
-    base_class = new ClassDefinition(base_class_name, m_class->getLibrary(),
-                                     m_class->getContainer(), fC, base_class_id,
-                                     nullptr, s);
-    const_cast<FileContent*>(fC)->addClassDefinition(fullName, base_class);
-  }
-
-  m_class->insertBaseClass(base_class);
+  UHDM::ref_typespec* extends_ts = s.MakeRef_typespec();
+  extends_ts->VpiParent(extends);
+  extends_ts->VpiName(base_class_name);
+  fC->populateCoreMembers(base_class_id, base_class_id, extends_ts);
+  extends->Class_typespec(extends_ts);
 
   return true;
 }

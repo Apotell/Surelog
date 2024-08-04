@@ -247,6 +247,11 @@ bool CompileModule::compile(Elaborate elaborate, Reduce reduce) {
       break;
   }
 
+  for (Signal* sig : m_module->getSignals()) {
+    m_helper.compileSignal(m_module, m_compileDesign, sig, sig->getName(), true,
+                           reduce);
+  }
+
   return true;
 }
 
@@ -290,7 +295,7 @@ bool CompileModule::collectUdpObjects_() {
           const std::string_view name = fC->SymName(port);
           fC->populateCoreMembers(port, port, io);
           io->VpiName(name);
-          io->SetVpiParent(defn);
+          io->VpiParent(defn);
           ios->push_back(io);
           port = fC->Sibling(port);
         }
@@ -311,7 +316,7 @@ bool CompileModule::collectUdpObjects_() {
 
         const std::string_view outputname = fC->SymName(Output);
         fC->populateCoreMembers(id, id, net);
-        net->SetVpiParent(defn);
+        net->VpiParent(defn);
         if (std::vector<UHDM::io_decl*>* ios = defn->Io_decls()) {
           for (auto io : *ios) {
             if (io->VpiName() == outputname) {
@@ -343,9 +348,9 @@ bool CompileModule::collectUdpObjects_() {
             fC->populateCoreMembers(id, id, net);
             if (attributes != nullptr) {
               net->Attributes(attributes);
-              for (auto a : *attributes) a->SetVpiParent(net);
+              for (auto a : *attributes) a->VpiParent(net);
             }
-            net->SetVpiParent(defn);
+            net->VpiParent(defn);
             for (auto io : *ios) {
               if (io->VpiName() == inputname) {
                 io->Expr(net);
@@ -396,7 +401,7 @@ bool CompileModule::collectUdpObjects_() {
           entries = defn->Table_entrys();
         }
         UHDM::table_entry* entry = s.MakeTable_entry();
-        entry->SetVpiParent(defn);
+        entry->VpiParent(defn);
         entry->VpiValue(ventry);
         entry->VpiSize(nb);
         fC->populateCoreMembers(Level_input_list, Level_input_list, entry);
@@ -493,7 +498,7 @@ bool CompileModule::collectUdpObjects_() {
           entries = defn->Table_entrys();
         }
         UHDM::table_entry* entry = s.MakeTable_entry();
-        entry->SetVpiParent(defn);
+        entry->VpiParent(defn);
         entry->VpiValue(ventry);
         entry->VpiSize(nb);
         fC->populateCoreMembers(Level_input_list, Level_input_list, entry);
@@ -505,17 +510,17 @@ bool CompileModule::collectUdpObjects_() {
         NodeId Value = fC->Sibling(Identifier);
         UHDM::initial* init = s.MakeInitial();
         fC->populateCoreMembers(id, id, init);
-        init->SetVpiParent(defn);
+        init->VpiParent(defn);
         defn->Initial(init);
         UHDM::assignment* assign_stmt = s.MakeAssignment();
         init->Stmt(assign_stmt);
         UHDM::ref_obj* ref = s.MakeRef_obj();
         ref->VpiName(fC->SymName(Identifier));
-        ref->SetVpiParent(assign_stmt);
+        ref->VpiParent(assign_stmt);
         fC->populateCoreMembers(Identifier, Identifier, ref);
         assign_stmt->Lhs(ref);
         fC->populateCoreMembers(id, id, assign_stmt);
-        assign_stmt->SetVpiParent(init);
+        assign_stmt->VpiParent(init);
         UHDM::constant* c = s.MakeConstant();
         assign_stmt->Rhs(c);
         std::string val = StrCat("UINT:", fC->SymName(Value));
@@ -523,7 +528,7 @@ bool CompileModule::collectUdpObjects_() {
         c->VpiDecompile(fC->SymName(Value));
         c->VpiSize(64);
         c->VpiConstType(vpiUIntConst);
-        c->SetVpiParent(assign_stmt);
+        c->VpiParent(assign_stmt);
         fC->populateCoreMembers(Value, Value, c);
         break;
       }
@@ -690,7 +695,8 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
           if (collectType != CollectType::OTHER) break;
           std::vector<UHDM::cont_assign*> assigns =
               m_helper.compileContinuousAssignment(m_module, fC, fC->Child(id),
-                                                   m_compileDesign, m_instance);
+                                                   m_compileDesign, nullptr,
+                                                   m_instance);
           if (m_module->getContAssigns() == nullptr) {
             m_module->setContAssigns(
                 m_compileDesign->getSerializer().MakeCont_assignVec());
@@ -1156,7 +1162,8 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
           if (collectType != CollectType::OTHER) break;
           std::vector<UHDM::cont_assign*> assigns =
               m_helper.compileContinuousAssignment(m_module, fC, fC->Child(id),
-                                                   m_compileDesign, m_instance);
+                                                   m_compileDesign, nullptr,
+                                                   m_instance);
           if (m_module->getContAssigns() == nullptr) {
             m_module->setContAssigns(
                 m_compileDesign->getSerializer().MakeCont_assignVec());

@@ -311,7 +311,7 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
       if (!labelId && !endLabelId) labelId = the_stmt;
 
       const UHDM::ScopedScope scopedScope(scope);
-      scope->SetVpiParent(pstmt);
+      scope->VpiParent(pstmt);
       fC->populateCoreMembers(the_stmt, the_stmt, scope);
       if (labelId && endLabelId && (label != endLabel)) {
         ErrorContainer* errors =
@@ -335,8 +335,7 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
               assignment* assign = (assignment*)cstmt;
               if (assign->Rhs() == nullptr) {
                 isDecl = true;
-                if (assign->Lhs())
-                  ((variables*)assign->Lhs())->SetVpiParent(stmt);
+                if (assign->Lhs()) ((variables*)assign->Lhs())->VpiParent(stmt);
               }
             } else if (cstmt->UhdmType() == uhdmsequence_decl) {
               VectorOfsequence_decl* decls = scope->Sequence_decls();
@@ -349,7 +348,7 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
             }
             if (!isDecl) {
               stmts->push_back(cstmt);
-              cstmt->SetVpiParent(stmt);
+              cstmt->VpiParent(stmt);
             }
           }
         }
@@ -402,7 +401,7 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
       scope = fork;
       if (!labelId && !endLabelId) labelId = the_stmt;
 
-      scope->SetVpiParent(pstmt);
+      scope->VpiParent(pstmt);
       while (item) {
         if (VectorOfany* cstmts =
                 compileStmt(component, fC, item, compileDesign, Reduce::No,
@@ -416,13 +415,13 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
                   isDecl = true;
                 }
                 if (assign->Lhs()) {
-                  ((variables*)assign->Lhs())->SetVpiParent(stmt);
+                  ((variables*)assign->Lhs())->VpiParent(stmt);
                 }
               }
             }
             if (!isDecl) {
               stmts->push_back(cstmt);
-              cstmt->SetVpiParent(stmt);
+              cstmt->VpiParent(stmt);
             }
           }
         }
@@ -476,7 +475,7 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
               compileStmt(component, fC, item, compileDesign, Reduce::No,
                           forever, instance, muteErrors)) {
         any* stmt = forev->front();
-        stmt->SetVpiParent(forever);
+        stmt->VpiParent(forever);
         forever->VpiStmt(stmt);
         forever->VpiEndLineNo(stmt->VpiEndLineNo());
         forever->VpiEndColumnNo(stmt->VpiEndColumnNo());
@@ -515,17 +514,17 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
           typespec* tps = s.MakeUnsupported_typespec();
           tps->VpiName(fC->SymName(loopVarId));
           fC->populateCoreMembers(loopVarId, loopVarId, tps);
-          tps->SetVpiParent(ref);
+          tps->VpiParent(ref);
           if (ref->Typespec() == nullptr) {
             ref_typespec* tpsRef = s.MakeRef_typespec();
             fC->populateCoreMembers(loopVarId, loopVarId, tpsRef);
-            tpsRef->SetVpiParent(ref);
+            tpsRef->VpiParent(ref);
             ref->Typespec(tpsRef);
           }
           ref->Typespec()->Actual_typespec(tps);
           component->needLateTypedefBinding(ref);
           loop_vars->push_back(ref);
-          ref->SetVpiParent(for_each);
+          ref->VpiParent(for_each);
           loopVarId = fC->Sibling(loopVarId);
           while (fC->Type(loopVarId) == VObjectType::paComma) {
             NodeId lookahead = fC->Sibling(loopVarId);
@@ -555,13 +554,13 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
               compileStmt(component, fC, Statement, compileDesign, Reduce::No,
                           for_each, instance, muteErrors)) {
         any* stmt = forev->front();
-        stmt->SetVpiParent(for_each);
+        stmt->VpiParent(for_each);
         for_each->VpiStmt(stmt);
         for_each->VpiEndLineNo(stmt->VpiEndLineNo());
         for_each->VpiEndColumnNo(stmt->VpiEndColumnNo());
       }
       if (var) {
-        var->SetVpiParent(for_each);
+        var->VpiParent(for_each);
         for_each->Variable((variables*)var);
       }
       stmt = for_each;
@@ -604,13 +603,13 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
         fC->populateCoreMembers(Param_assignment, Param_assignment,
                                 param_assign);
         param_assigns->push_back(param_assign);
-        param->SetVpiParent(param_assign);
+        param->VpiParent(param_assign);
         param->VpiName(fC->SymName(name));
         if (ts != nullptr) {
           if (param->Typespec() == nullptr) {
             ref_typespec* tsRef = s.MakeRef_typespec();
             fC->populateCoreMembers(name, name, tsRef);
-            tsRef->SetVpiParent(param);
+            tsRef->VpiParent(param);
             param->Typespec(tsRef);
           }
           param->Typespec()->Actual_typespec(ts);
@@ -640,7 +639,7 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
                           repeat, instance, muteErrors)) {
         any* stmt = repeat_stmts->front();
         repeat->VpiStmt(stmt);
-        stmt->SetVpiParent(repeat);
+        stmt->VpiParent(repeat);
         repeat->VpiEndLineNo(stmt->VpiEndLineNo());
         repeat->VpiEndColumnNo(stmt->VpiEndColumnNo());
       }
@@ -660,7 +659,7 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
                           while_st, instance, muteErrors)) {
         any* stmt = while_stmts->front();
         while_st->VpiStmt(stmt);
-        stmt->SetVpiParent(while_st);
+        stmt->VpiParent(while_st);
         while_st->VpiEndLineNo(stmt->VpiEndLineNo());
         while_st->VpiEndColumnNo(stmt->VpiEndColumnNo());
       }
@@ -678,7 +677,7 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
         if (while_stmts && !while_stmts->empty()) {
           any* stmt = while_stmts->front();
           do_while->VpiStmt(stmt);
-          stmt->SetVpiParent(do_while);
+          stmt->VpiParent(do_while);
           do_while->VpiEndLineNo(stmt->VpiEndLineNo());
           do_while->VpiEndColumnNo(stmt->VpiEndColumnNo());
         }
@@ -708,7 +707,7 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
           if (while_stmts && !while_stmts->empty()) {
             any* stmt = while_stmts->front();
             waitst->VpiStmt(stmt);
-            stmt->SetVpiParent(waitst);
+            stmt->VpiParent(waitst);
             waitst->VpiEndLineNo(stmt->VpiEndLineNo());
             waitst->VpiEndColumnNo(stmt->VpiEndColumnNo());
           }
@@ -745,7 +744,7 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
             if (!if_stmts->empty()) {
               any* stmt = if_stmts->front();
               waitst->VpiStmt(stmt);
-              stmt->SetVpiParent(waitst);
+              stmt->VpiParent(waitst);
               waitst->VpiEndLineNo(stmt->VpiEndLineNo());
               waitst->VpiEndColumnNo(stmt->VpiEndColumnNo());
             }
@@ -759,7 +758,7 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
             if (!if_stmts->empty()) {
               any* stmt = if_stmts->front();
               waitst->VpiElseStmt(stmt);
-              stmt->SetVpiParent(waitst);
+              stmt->VpiParent(waitst);
               waitst->VpiEndLineNo(stmt->VpiEndLineNo());
               waitst->VpiEndColumnNo(stmt->VpiEndColumnNo());
             }
@@ -772,7 +771,7 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
             if (!if_stmts->empty()) {
               any* stmt = if_stmts->front();
               waitst->VpiStmt(stmt);
-              stmt->SetVpiParent(waitst);
+              stmt->VpiParent(waitst);
               waitst->VpiEndLineNo(stmt->VpiEndLineNo());
               waitst->VpiEndColumnNo(stmt->VpiEndColumnNo());
             }
@@ -785,7 +784,7 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
             if (!else_stmts->empty()) {
               any* stmt = else_stmts->front();
               waitst->VpiElseStmt(stmt);
-              stmt->SetVpiParent(waitst);
+              stmt->VpiParent(waitst);
               waitst->VpiEndLineNo(stmt->VpiEndLineNo());
               waitst->VpiEndColumnNo(stmt->VpiEndColumnNo());
             }
@@ -822,7 +821,7 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
         if (expr* exp =
                 (expr*)compileExpression(component, fC, cond, compileDesign,
                                          reduce, return_stmt, instance, true)) {
-          exp->SetVpiParent(return_stmt);
+          exp->VpiParent(return_stmt);
           return_stmt->VpiCondition(exp);
           return_stmt->VpiEndLineNo(exp->VpiEndLineNo());
           return_stmt->VpiEndColumnNo(exp->VpiEndColumnNo());
@@ -968,7 +967,7 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
         prop_spec->VpiPropertyExpr(property_expr);
       }
       fC->populateCoreMembers(Property_expr, Property_expr, prop_spec);
-      prop_spec->SetVpiParent(expect);
+      prop_spec->VpiParent(expect);
       expect->Property_spec(prop_spec);
       expect->Stmt(if_stmt);
       expect->Else_stmt(else_stmt);
@@ -980,9 +979,9 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
       component->lateBinding(false);
       VectorOfany* stmts = s.MakeAnyVec();
       auto assigns = compileContinuousAssignment(
-          component, fC, fC->Child(the_stmt), compileDesign, nullptr);
+          component, fC, fC->Child(the_stmt), compileDesign, nullptr, nullptr);
       for (auto assign : assigns) {
-        assign->SetVpiParent(pstmt);
+        assign->VpiParent(pstmt);
         stmts->push_back(assign);
       }
       results = stmts;
@@ -1003,7 +1002,7 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
       if (!result.first.empty()) {
         VectorOfany* stmts = s.MakeAnyVec();
         for (auto mod : result.first) {
-          mod->SetVpiParent(pstmt);
+          mod->VpiParent(pstmt);
           stmts->push_back(mod);
         }
         results = stmts;
@@ -1011,7 +1010,7 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
       if (!result.second.empty()) {
         VectorOfany* stmts = s.MakeAnyVec();
         for (auto mod : result.second) {
-          mod->SetVpiParent(pstmt);
+          mod->VpiParent(pstmt);
           stmts->push_back(mod);
         }
         results = stmts;
@@ -1061,7 +1060,7 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
       if (UHDM::atomic_stmt* stm = any_cast<atomic_stmt*>(stmt)) {
         if (attributes) {
           stm->Attributes(attributes);
-          for (auto a : *attributes) a->SetVpiParent(stm);
+          for (auto a : *attributes) a->VpiParent(stm);
         }
       }
     }
@@ -1069,16 +1068,16 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
     if (stmt->VpiLineNo() == 0) {
       fC->populateCoreMembers(the_stmt, the_stmt, stmt);
     }
-    stmt->SetVpiParent(pstmt);
+    stmt->VpiParent(pstmt);
     results = s.MakeAnyVec();
     results->push_back(stmt);
   } else if (results) {
     for (any* st : *results) {
-      st->SetVpiParent(pstmt);
+      st->VpiParent(pstmt);
       if (UHDM::atomic_stmt* stm = any_cast<atomic_stmt*>(st)) {
         if (attributes) {
           stm->Attributes(attributes);
-          for (auto a : *attributes) a->SetVpiParent(stm);
+          for (auto a : *attributes) a->VpiParent(stm);
         }
       }
     }
@@ -1102,7 +1101,7 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
       errors->addError(err);
       ustmt->VpiValue(StrCat("STRING:", lineText));
       fC->populateCoreMembers(the_stmt, the_stmt, ustmt);
-      ustmt->SetVpiParent(pstmt);
+      ustmt->VpiParent(pstmt);
       stmt = ustmt;  // NOLINT
       // std::cout << "UNSUPPORTED STATEMENT: " << fC->getFileName(the_stmt)
       // << ":" << fC->Line(the_stmt) << ":" << std::endl; std::cout << " -> "
@@ -1184,7 +1183,7 @@ VectorOfany* CompileHelper::compileDataDeclaration(
               if (typespec* ts = var_ts->Actual_typespec()) {
                 if (tps->Elem_typespec() == nullptr) {
                   ref_typespec* varRef = s.MakeRef_typespec();
-                  varRef->SetVpiParent(tps);
+                  varRef->VpiParent(tps);
                   varRef->VpiName(fC->SymName(fC->Child(Data_type)));
                   fC->populateCoreMembers(Data_type, Data_type, varRef);
                   tps->Elem_typespec(varRef);
@@ -1192,15 +1191,15 @@ VectorOfany* CompileHelper::compileDataDeclaration(
                 tps->Elem_typespec()->Actual_typespec(ts);
               }
             }
-            tps->SetVpiParent(pstmt);
+            tps->VpiParent(pstmt);
             fC->populateCoreMembers(Var, fC->Sibling(Var), tps);
             tps->VpiEndLineNo(unpackedDimensions->back()->VpiEndLineNo());
             tps->VpiEndColumnNo(unpackedDimensions->back()->VpiEndColumnNo());
             tps->Ranges(unpackedDimensions);
-            for (auto r : *unpackedDimensions) r->SetVpiParent(tps);
+            for (auto r : *unpackedDimensions) r->VpiParent(tps);
             if (arr->Typespec() == nullptr) {
               ref_typespec* tpsRef = s.MakeRef_typespec();
-              tpsRef->SetVpiParent(arr);
+              tpsRef->VpiParent(arr);
               fC->populateCoreMembers(Data_type, Data_type, tpsRef);
               arr->Typespec(tpsRef);
             }
@@ -1213,7 +1212,7 @@ VectorOfany* CompileHelper::compileDataDeclaration(
                   if (const typespec* ts = rrange_ts->Actual_typespec()) {
                     if (tps->Index_typespec() == nullptr) {
                       ref_typespec* indexRef = s.MakeRef_typespec();
-                      indexRef->SetVpiParent(tps);
+                      indexRef->VpiParent(tps);
                       tps->Index_typespec(indexRef);
                     }
                     tps->Index_typespec()->Actual_typespec(
@@ -1230,7 +1229,7 @@ VectorOfany* CompileHelper::compileDataDeclaration(
             }
             arr->VpiName(fC->SymName(Var));
             var->VpiName("");
-            var->SetVpiParent(pstmt);
+            var->VpiParent(pstmt);
             var = arr;
           }
         }
@@ -1242,7 +1241,7 @@ VectorOfany* CompileHelper::compileDataDeclaration(
         assign_stmt->VpiOpType(vpiAssignmentOp);
         assign_stmt->VpiBlocking(true);
         if (var) {
-          var->SetVpiParent(assign_stmt);
+          var->VpiParent(assign_stmt);
           assign_stmt->Lhs(var);
         }
         fC->populateCoreMembers(Variable_decl_assignment,
@@ -1304,7 +1303,7 @@ UHDM::atomic_stmt* CompileHelper::compileConditionalStmt(
     cond_stmt->VpiQualifier(qualifier);
     cond_stmt->VpiCondition((UHDM::expr*)cond_exp);
     if (cond_exp && (cond_exp->VpiParent() == nullptr))
-      cond_exp->SetVpiParent(cond_stmt);
+      cond_exp->VpiParent(cond_stmt);
     if (VectorOfany* if_stmts =
             compileStmt(component, fC, If_branch_stmt, compileDesign,
                         Reduce::No, cond_stmt, instance, muteErrors)) {
@@ -1321,7 +1320,7 @@ UHDM::atomic_stmt* CompileHelper::compileConditionalStmt(
     cond_stmt->VpiQualifier(qualifier);
     cond_stmt->VpiCondition((UHDM::expr*)cond_exp);
     if (cond_exp && (cond_exp->VpiParent() == nullptr))
-      cond_exp->SetVpiParent(cond_stmt);
+      cond_exp->VpiParent(cond_stmt);
     if (VectorOfany* if_stmts =
             compileStmt(component, fC, If_branch_stmt, compileDesign,
                         Reduce::No, cond_stmt, instance, muteErrors)) {
@@ -1347,7 +1346,7 @@ UHDM::atomic_stmt* CompileHelper::compileEventControlStmt(
   NodeId Event_expression = fC->Child(Event_control);
   UHDM::event_control* event = s.MakeEvent_control();
   fC->populateCoreMembers(Event_control, Event_control, event);
-  event->SetVpiParent(pstmt);
+  event->VpiParent(pstmt);
 
   if (Event_expression) {
     if (UHDM::any* exp = compileExpression(component, fC, Event_expression,
@@ -1385,11 +1384,11 @@ UHDM::atomic_stmt* CompileHelper::compileRandcaseStmt(
     case_items->push_back(case_item);
     VectorOfany* exprs = s.MakeAnyVec();
     case_item->VpiExprs(exprs);
-    case_item->SetVpiParent(case_stmt);
+    case_item->VpiParent(case_stmt);
     if (UHDM::any* item_exp =
             compileExpression(component, fC, Expression, compileDesign,
                               Reduce::No, case_item, instance)) {
-      item_exp->SetVpiParent(case_item);
+      item_exp->VpiParent(case_item);
       exprs->push_back(item_exp);
     }
     NodeId stmt = fC->Sibling(Expression);
@@ -1428,7 +1427,7 @@ UHDM::atomic_stmt* CompileHelper::compileCaseStmt(
   case_stmt->Case_items(case_items);
   result = case_stmt;
   case_stmt->VpiCondition((UHDM::expr*)cond_exp);
-  cond_exp->SetVpiParent(case_stmt);
+  cond_exp->VpiParent(case_stmt);
   VObjectType CaseType = fC->Type(Case_type);
   switch (CaseType) {
     case VObjectType::paCase_inside_item:
@@ -1467,7 +1466,7 @@ UHDM::atomic_stmt* CompileHelper::compileCaseStmt(
       case_item = s.MakeCase_item();
       case_items->push_back(case_item);
       fC->populateCoreMembers(Case_item, Case_item, case_item);
-      case_item->SetVpiParent(case_stmt);
+      case_item->VpiParent(case_stmt);
     }
     bool isDefault = false;
     NodeId Expression;
@@ -1482,7 +1481,7 @@ UHDM::atomic_stmt* CompileHelper::compileCaseStmt(
             if (UHDM::any* item_exp =
                     compileExpression(component, fC, Expression, compileDesign,
                                       Reduce::No, pstmt, instance)) {
-              item_exp->SetVpiParent(case_item);
+              item_exp->VpiParent(case_item);
               exprs->push_back(item_exp);
             }
           } else {
@@ -1513,7 +1512,7 @@ UHDM::atomic_stmt* CompileHelper::compileCaseStmt(
         VectorOfany* exprs = s.MakeAnyVec();
         case_item->VpiExprs(exprs);
         exprs->push_back(insideOp);
-        insideOp->SetVpiParent(case_item);
+        insideOp->VpiParent(case_item);
 
         while (Value_range) {
           if (UHDM::expr* item_exp = (expr*)compileExpression(
@@ -1589,7 +1588,7 @@ n<> u<142> t<Tf_item_declaration> p<386> c<141> s<384> l<28>
         } else if (fC->Type(Data_type) == VObjectType::paPacked_dimension) {
           // Implicit type
           logic_typespec* pts = s.MakeLogic_typespec();
-          pts->SetVpiParent(parent);
+          pts->VpiParent(parent);
           fC->populateCoreMembers(Data_type, Data_type, pts);
           int32_t size;
           if (VectorOfrange* ranges =
@@ -1616,7 +1615,7 @@ n<> u<142> t<Tf_item_declaration> p<386> c<141> s<384> l<28>
           const std::string_view name = fC->SymName(nameId);
           io_decl* decl = s.MakeIo_decl();
           ios->push_back(decl);
-          decl->SetVpiParent(parent);
+          decl->VpiParent(parent);
           decl->VpiDirection(
               UhdmWriter::getVpiDirection(tf_port_direction_type));
           decl->VpiName(name);
@@ -1625,7 +1624,7 @@ n<> u<142> t<Tf_item_declaration> p<386> c<141> s<384> l<28>
           if (ts != nullptr) {
             if (decl->Typespec() == nullptr) {
               ref_typespec* tsRef = s.MakeRef_typespec();
-              tsRef->SetVpiParent(decl);
+              tsRef->VpiParent(decl);
               decl->Typespec(tsRef);
               fC->populateCoreMembers(nameId, nameId, tsRef);
             }
@@ -1672,7 +1671,7 @@ n<> u<142> t<Tf_item_declaration> p<386> c<141> s<384> l<28>
                 if (ts != nullptr) {
                   if (var->Typespec() == nullptr) {
                     ref_typespec* tsRef = s.MakeRef_typespec();
-                    tsRef->SetVpiParent(var);
+                    tsRef->VpiParent(var);
                     fC->populateCoreMembers(Data_type, Data_type, tsRef);
                     var->Typespec(tsRef);
                   }
@@ -1682,7 +1681,7 @@ n<> u<142> t<Tf_item_declaration> p<386> c<141> s<384> l<28>
             } else if (ts != nullptr) {
               if (itr->second->Typespec() == nullptr) {
                 ref_typespec* tsRef = s.MakeRef_typespec();
-                tsRef->SetVpiParent(itr->second);
+                tsRef->VpiParent(itr->second);
                 fC->populateCoreMembers(Data_type, Data_type, tsRef);
                 itr->second->Typespec(tsRef);
               }
@@ -1787,12 +1786,12 @@ std::vector<io_decl*>* CompileHelper::compileTfPortList(
         component->needLateTypedefBinding(decl);
       }
     }
-    decl->SetVpiParent(parent);
+    decl->VpiParent(parent);
 
     if (ts != nullptr) {
       if (decl->Typespec() == nullptr) {
         ref_typespec* tsRef = s.MakeRef_typespec();
-        tsRef->SetVpiParent(decl);
+        tsRef->VpiParent(decl);
         NodeId refName = (type == InvalidNodeId) ? prevType : type;
         if (fC->Type(refName) == VObjectType::paData_type)
           refName = fC->Child(refName);
@@ -1985,7 +1984,7 @@ bool CompileHelper::compileTask(DesignComponent* component,
     // make placeholder first
     task = s.MakeTask();
     task->VpiName(name);
-    task->SetVpiParent(pscope);
+    task->VpiParent(pscope);
     fC->populateCoreMembers(id, id, task);
     task_funcs->push_back(task);
     return true;
@@ -2037,7 +2036,7 @@ bool CompileHelper::compileTask(DesignComponent* component,
     // Page 983, 2017 Standard: More than 1 Stmts
     begin* begin = s.MakeBegin();
     task->Stmt(begin);
-    begin->SetVpiParent(task);
+    begin->VpiParent(task);
     const UHDM::ScopedScope scopedScope(begin);
     VectorOfany* stmts = s.MakeAnyVec();
     begin->Stmts(stmts);
@@ -2089,7 +2088,7 @@ bool CompileHelper::compileTask(DesignComponent* component,
                   stmts->push_back(st);
                 } else {
                   if (variables* var = any_cast<variables*>((expr*)stmt->Lhs()))
-                    var->SetVpiParent(begin);
+                    var->VpiParent(begin);
                   // s.Erase(stmt);
                 }
               } else {
@@ -2098,7 +2097,7 @@ bool CompileHelper::compileTask(DesignComponent* component,
             } else {
               stmts->push_back(st);
             }
-            st->SetVpiParent(begin);
+            st->VpiParent(begin);
           }
         }
       }
@@ -2132,7 +2131,7 @@ bool CompileHelper::compileTask(DesignComponent* component,
                 task->Stmt(st);
               } else {
                 if (variables* var = any_cast<variables*>((expr*)stmt->Lhs()))
-                  var->SetVpiParent(task);
+                  var->VpiParent(task);
                 // s.Erase(stmt);
               }
             } else {
@@ -2141,7 +2140,7 @@ bool CompileHelper::compileTask(DesignComponent* component,
           } else {
             task->Stmt(st);
           }
-          st->SetVpiParent(task);
+          st->VpiParent(task);
         }
       }
     }
@@ -2183,11 +2182,11 @@ bool CompileHelper::compileClassConstructorDeclaration(
 
   if (m_elaborate == Elaborate::Yes) {
     UHDM::class_var* var = s.MakeClass_var();
-    var->SetVpiParent(func);
+    var->VpiParent(func);
     func->Return(var);
     UHDM::class_typespec* tps = s.MakeClass_typespec();
     ref_typespec* tpsRef = s.MakeRef_typespec();
-    tpsRef->SetVpiParent(var);
+    tpsRef->VpiParent(var);
     tpsRef->Actual_typespec(tps);
     var->Typespec(tpsRef);
     fC->populateCoreMembers(varId, varId, var);
@@ -2236,7 +2235,7 @@ bool CompileHelper::compileClassConstructorDeclaration(
   if (nbStmts == 1) {
     if (fC->Type(Stmt) == VObjectType::paSuper_dot_new) {
       UHDM::method_func_call* mcall = s.MakeMethod_func_call();
-      mcall->SetVpiParent(func);
+      mcall->VpiParent(func);
       mcall->VpiName("super.new");
       NodeId Args = fC->Sibling(Stmt);
       if (fC->Type(Args) == VObjectType::paList_of_arguments) {
@@ -2254,7 +2253,7 @@ bool CompileHelper::compileClassConstructorDeclaration(
         if (VectorOfany* sts = compileStmt(component, fC, Statement,
                                            compileDesign, Reduce::No, func)) {
           any* st = sts->front();
-          st->SetVpiParent(func);
+          st->VpiParent(func);
           func->Stmt(st);
           func->VpiEndLineNo(st->VpiEndLineNo());
           func->VpiEndColumnNo(st->VpiEndColumnNo());
@@ -2264,7 +2263,7 @@ bool CompileHelper::compileClassConstructorDeclaration(
   } else if (nbStmts > 1) {
     begin* begin = s.MakeBegin();
     func->Stmt(begin);
-    begin->SetVpiParent(func);
+    begin->VpiParent(func);
     const UHDM::ScopedScope scopedScope(begin);
     VectorOfany* stmts = s.MakeAnyVec();
     begin->Stmts(stmts);
@@ -2274,7 +2273,7 @@ bool CompileHelper::compileClassConstructorDeclaration(
     while (Stmt) {
       if (fC->Type(Stmt) == VObjectType::paSuper_dot_new) {
         UHDM::method_func_call* mcall = s.MakeMethod_func_call();
-        mcall->SetVpiParent(func);
+        mcall->VpiParent(func);
         mcall->VpiName("super.new");
         NodeId Args = fC->Sibling(Stmt);
         if (fC->Type(Args) == VObjectType::paList_of_arguments) {
@@ -2287,14 +2286,14 @@ bool CompileHelper::compileClassConstructorDeclaration(
         }
         fC->populateCoreMembers(Stmt, Args, mcall);
         stmts->push_back(mcall);
-        mcall->SetVpiParent(begin);
+        mcall->VpiParent(begin);
       } else {
         if (NodeId Statement = fC->Child(Stmt)) {
           if (VectorOfany* sts = compileStmt(
                   component, fC, Statement, compileDesign, Reduce::No, begin)) {
             for (any* st : *sts) {
               stmts->push_back(st);
-              st->SetVpiParent(begin);
+              st->VpiParent(begin);
             }
           }
         }
@@ -2371,7 +2370,7 @@ bool CompileHelper::compileFunction(DesignComponent* component,
     // make placeholder first
     func = s.MakeFunction();
     func->VpiName(name);
-    func->SetVpiParent(pscope);
+    func->VpiParent(pscope);
     fC->populateCoreMembers(id, id, func);
     task_funcs->push_back(func);
     return true;
@@ -2382,13 +2381,13 @@ bool CompileHelper::compileFunction(DesignComponent* component,
   func->VpiMethod(isMethod);
   if (constructor) {
     UHDM::class_var* var = s.MakeClass_var();
-    var->SetVpiParent(func);
+    var->VpiParent(func);
     fC->populateCoreMembers(func_decl, func_decl, var);
     func->Return(var);
     UHDM::class_typespec* tps = s.MakeClass_typespec();
-    tps->SetVpiParent(func);
+    tps->VpiParent(func);
     ref_typespec* tpsRef = s.MakeRef_typespec();
-    tpsRef->SetVpiParent(var);
+    tpsRef->VpiParent(var);
     tpsRef->Actual_typespec(tps);
     var->Typespec(tpsRef);
     ClassDefinition* cdef = valuedcomponenti_cast<ClassDefinition*>(component);
@@ -2428,7 +2427,7 @@ bool CompileHelper::compileFunction(DesignComponent* component,
       fC->populateCoreMembers(nameId, nameId, var);
     }  // else void return type
     if (var != nullptr) {
-      var->SetVpiParent(func);
+      var->VpiParent(func);
       func->Return(var);
     }
   }
@@ -2459,12 +2458,12 @@ bool CompileHelper::compileFunction(DesignComponent* component,
             nullptr, false, false);
         if (tmp->getParameters()) {
           for (auto p : *tmp->getParameters()) {
-            p->SetVpiParent(func, true);
+            p->VpiParent(func, true);
           }
         }
         if (tmp->getParam_assigns()) {
           for (auto p : *tmp->getParam_assigns()) {
-            p->SetVpiParent(func, true);
+            p->VpiParent(func, true);
           }
         }
         delete tmp;
@@ -2486,7 +2485,7 @@ bool CompileHelper::compileFunction(DesignComponent* component,
     // Page 983, 2017 Standard: More than 1 Stmts
     begin* begin = s.MakeBegin();
     func->Stmt(begin);
-    begin->SetVpiParent(func);
+    begin->VpiParent(func);
     VectorOfany* stmts = s.MakeAnyVec();
     begin->Stmts(stmts);
     const UHDM::ScopedScope scopedScope(begin);
@@ -2516,7 +2515,7 @@ bool CompileHelper::compileFunction(DesignComponent* component,
                   stmts->push_back(st);
                 } else {
                   if (variables* var = any_cast<variables*>((expr*)stmt->Lhs()))
-                    var->SetVpiParent(begin);
+                    var->VpiParent(begin);
                   // s.Erase(stmt);
                 }
               } else {
@@ -2525,7 +2524,7 @@ bool CompileHelper::compileFunction(DesignComponent* component,
             } else {
               stmts->push_back(st);
             }
-            st->SetVpiParent(begin);
+            st->VpiParent(begin);
           }
         }
       }
@@ -2559,7 +2558,7 @@ bool CompileHelper::compileFunction(DesignComponent* component,
               func->Stmt(st);
             } else {
               if (variables* var = any_cast<variables*>((expr*)stmt->Lhs()))
-                var->SetVpiParent(func);
+                var->VpiParent(func);
               // s.Erase(stmt);
             }
           } else {
@@ -2568,7 +2567,7 @@ bool CompileHelper::compileFunction(DesignComponent* component,
         } else {
           func->Stmt(st);
         }
-        st->SetVpiParent(func);
+        st->VpiParent(func);
       }
     }
   }
@@ -2682,7 +2681,7 @@ Function* CompileHelper::compileFunctionPrototype(
   if (auto v = any_cast<variables*>(compileVariable(scope, fC, type, type,
                                                     compileDesign, Reduce::Yes,
                                                     nullptr, nullptr, false))) {
-    v->SetVpiParent(func);
+    v->VpiParent(func);
     func->Return(v);
   }
   NodeId Tf_port_list;
@@ -2741,10 +2740,10 @@ UHDM::any* CompileHelper::compileProceduralContinuousAssign(
       NodeId Expression = fC->Sibling(Variable_lvalue);
       expr* lhs = (expr*)compileExpression(
           component, fC, Hierarchical_identifier, compileDesign, Reduce::No);
-      if (lhs) lhs->SetVpiParent(assign);
+      if (lhs) lhs->VpiParent(assign);
       expr* rhs = (expr*)compileExpression(component, fC, Expression,
                                            compileDesign, Reduce::No);
-      if (rhs) rhs->SetVpiParent(assign);
+      if (rhs) rhs->VpiParent(assign);
       assign->Lhs(lhs);
       assign->Rhs(rhs);
       the_stmt = assign;
@@ -2765,10 +2764,10 @@ UHDM::any* CompileHelper::compileProceduralContinuousAssign(
       NodeId Expression = fC->Sibling(Variable_lvalue);
       expr* lhs = (expr*)compileExpression(
           component, fC, Hierarchical_identifier, compileDesign, Reduce::No);
-      if (lhs) lhs->SetVpiParent(assign);
+      if (lhs) lhs->VpiParent(assign);
       expr* rhs = (expr*)compileExpression(component, fC, Expression,
                                            compileDesign, Reduce::No);
-      if (rhs) rhs->SetVpiParent(assign);
+      if (rhs) rhs->VpiParent(assign);
       assign->Lhs(lhs);
       assign->Rhs(rhs);
       the_stmt = assign;
@@ -2788,7 +2787,7 @@ UHDM::any* CompileHelper::compileProceduralContinuousAssign(
       }
       expr* lhs = (expr*)compileExpression(
           component, fC, Hierarchical_identifier, compileDesign, Reduce::No);
-      if (lhs) lhs->SetVpiParent(assign);
+      if (lhs) lhs->VpiParent(assign);
       assign->Lhs(lhs);
       the_stmt = assign;
       break;
@@ -2807,7 +2806,7 @@ UHDM::any* CompileHelper::compileProceduralContinuousAssign(
       }
       expr* lhs = (expr*)compileExpression(
           component, fC, Hierarchical_identifier, compileDesign, Reduce::No);
-      if (lhs) lhs->SetVpiParent(assign);
+      if (lhs) lhs->VpiParent(assign);
       assign->Lhs(lhs);
       the_stmt = assign;
       break;
@@ -2858,7 +2857,7 @@ UHDM::any* CompileHelper::compileForLoop(DesignComponent* component,
         NodeId Var = fC->Sibling(Data_type);
         NodeId Expression = fC->Sibling(Var);
         assignment* assign_stmt = s.MakeAssignment();
-        assign_stmt->SetVpiParent(for_stmt);
+        assign_stmt->VpiParent(for_stmt);
         fC->populateCoreMembers(For_variable_declaration,
                                 For_variable_declaration, assign_stmt);
 
@@ -2866,14 +2865,14 @@ UHDM::any* CompileHelper::compileForLoop(DesignComponent* component,
                 component, fC, Data_type, Var, compileDesign, Reduce::Yes,
                 assign_stmt, nullptr, false)) {
           assign_stmt->Lhs(var);
-          var->SetVpiParent(assign_stmt);
+          var->VpiParent(assign_stmt);
           var->VpiName(fC->SymName(Var));
           fC->populateCoreMembers(Var, Var, var);
         }
 
         if (expr* rhs = (expr*)compileExpression(component, fC, Expression,
                                                  compileDesign, Reduce::No)) {
-          rhs->SetVpiParent(assign_stmt);
+          rhs->VpiParent(assign_stmt);
           assign_stmt->Rhs(rhs);
         }
         stmts->push_back(assign_stmt);
@@ -2903,7 +2902,7 @@ UHDM::any* CompileHelper::compileForLoop(DesignComponent* component,
         }
 
         assignment* assign_stmt = s.MakeAssignment();
-        assign_stmt->SetVpiParent(for_stmt);
+        assign_stmt->VpiParent(for_stmt);
         fC->populateCoreMembers(Variable_assignment, Variable_assignment,
                                 assign_stmt);
 
@@ -2912,12 +2911,12 @@ UHDM::any* CompileHelper::compileForLoop(DesignComponent* component,
             compileDesign, Reduce::Yes, assign_stmt, nullptr, false);
         if (var) {
           assign_stmt->Lhs(var);
-          var->SetVpiParent(assign_stmt);
+          var->VpiParent(assign_stmt);
         }
 
         expr* rhs = (expr*)compileExpression(component, fC, Expression,
                                              compileDesign, Reduce::No);
-        if (rhs) rhs->SetVpiParent(assign_stmt);
+        if (rhs) rhs->VpiParent(assign_stmt);
         assign_stmt->Rhs(rhs);
         stmts->push_back(assign_stmt);
 
@@ -2931,7 +2930,7 @@ UHDM::any* CompileHelper::compileForLoop(DesignComponent* component,
     expr* cond = (expr*)compileExpression(component, fC, Condition,
                                           compileDesign, Reduce::No);
     if (cond) {
-      cond->SetVpiParent(for_stmt);
+      cond->VpiParent(for_stmt);
       for_stmt->VpiCondition(cond);
     }
   }
@@ -2959,7 +2958,7 @@ UHDM::any* CompileHelper::compileForLoop(DesignComponent* component,
         expr* exp = (expr*)compileExpression(component, fC, Expression,
                                              compileDesign, Reduce::No);
         if (exp) {
-          exp->SetVpiParent(for_stmt);
+          exp->VpiParent(for_stmt);
           stmts->push_back(exp);
         }
       }
@@ -3194,7 +3193,7 @@ UHDM::any* CompileHelper::compileConstraintBlock(DesignComponent* component,
   UHDM::Serializer& s = compileDesign->getSerializer();
   UHDM::any* result = nullptr;
   UHDM::constraint* cons = s.MakeConstraint();
-  cons->SetVpiParent(pexpr);
+  cons->VpiParent(pexpr);
   cons->VpiName(fC->SymName(constraint_name));
   fC->populateCoreMembers(nodeId, nodeId, cons);
   result = cons;

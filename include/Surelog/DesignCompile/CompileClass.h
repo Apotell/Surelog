@@ -77,6 +77,7 @@ class CompileClass final {
   bool compile_local_parameter_declaration_(const FileContent* fC, NodeId id);
   bool compile_parameter_declaration_(const FileContent* fC, NodeId id);
   bool compile_class_type_(const FileContent* fC, NodeId id);
+  bool compile_properties();
 
   CompileDesign* const m_compileDesign;
   ClassDefinition* const m_class;

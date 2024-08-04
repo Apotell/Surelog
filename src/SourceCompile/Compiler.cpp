@@ -1238,11 +1238,6 @@ bool Compiler::compile() {
         }
       }
       m_errors->printMessages(m_commandLineParser->muteStdout());
-    } else {
-      if (UVMElaboration* elaboration = new UVMElaboration(m_compileDesign)) {
-        elaboration->elaborate();
-        delete elaboration;
-      }
     }
 
     PathId uhdmFileId = fileSystem->getChild(

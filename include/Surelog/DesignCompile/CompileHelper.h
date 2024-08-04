@@ -51,8 +51,10 @@ class ErrorContainer;
 class FileContent;
 class Function;
 class NodeId;
+class Parameter;
 class Procedure;
 class Scope;
+class Signal;
 class Statement;
 class SymbolTable;
 class Task;
@@ -146,12 +148,21 @@ class CompileHelper final {
                               CompileDesign* compileDesign, Reduce reduce,
                               UHDM::VectorOfattribute* attributes);
 
+  bool compileSignal(DesignComponent* comp, CompileDesign* compileDesign,
+                     Signal* sig, std::string_view prefix, bool signalIsPort,
+                     Reduce reduce);
+
+  UHDM::typespec* compileTypeParameter(DesignComponent* component,
+                                       CompileDesign* compileDesign,
+                                       Parameter* sit);
+
   // ------------------------------------------------------------------------------------------
   // UHDM modeling
 
   std::vector<UHDM::cont_assign*> compileContinuousAssignment(
       DesignComponent* component, const FileContent* fC, NodeId id,
-      CompileDesign* compileDesign, ValuedComponentI* instance);
+      CompileDesign* compileDesign, UHDM::any* pstmt,
+      ValuedComponentI* instance);
 
   UHDM::always* compileAlwaysBlock(DesignComponent* component,
                                    const FileContent* fC, NodeId id,
@@ -245,6 +256,13 @@ class CompileHelper final {
                              CompileDesign* compileDesign, Reduce reduce,
                              UHDM::any* pstmt, ValuedComponentI* instance,
                              bool muteErrors);
+  UHDM::any* compileVariable(DesignComponent* component,
+                             CompileDesign* compileDesign, Signal* sig,
+                             std::vector<UHDM::range*>* packedDimensions,
+                             int32_t packedSize,
+                             std::vector<UHDM::range*>* unpackedDimensions,
+                             int32_t unpackedSize, UHDM::expr* assignExp,
+                             UHDM::typespec* tps);
 
   UHDM::typespec* compileTypespec(DesignComponent* component,
                                   const FileContent* fC, NodeId nodeId,
@@ -550,6 +568,11 @@ class CompileHelper final {
 
   void evalScheduledExprs(DesignComponent* component,
                           CompileDesign* compileDesign);
+
+  UHDM::expr* exprFromAssign(DesignComponent* component,
+                             CompileDesign* compileDesign,
+                             const FileContent* fC, NodeId id,
+                             NodeId unpackedDimension);
 
   void checkForLoops(bool on);
   bool loopDetected(PathId fileId, uint32_t lineNumber,

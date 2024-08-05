@@ -368,6 +368,7 @@ void Builtin::addBuiltinClasses() {
 
   std::vector<NodeId> classes =
       fC1->sl_collect_all(fC1->getRootNode(), VObjectType::paClass_declaration);
+  fC1->addPackageDefinition("builtin", builtinPackage);
   m_compileDesign->getCompiler()->getDesign()->addFileContent(fC1->getFileId(),
                                                               fC1);
   for (const auto& classId : classes) {

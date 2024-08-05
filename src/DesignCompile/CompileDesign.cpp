@@ -345,17 +345,17 @@ bool CompileDesign::compilation_() {
   compileMT_<Program, ProgramNameProgramDefinitionMap, FunctorCompileProgram>(
       m_compiler->getDesign()->getProgramDefinitions(), maxThreadCount);
 
-  // Compile classes
-  compileMT_<ClassDefinition, ClassNameClassDefinitionMultiMap,
-             FunctorCompileClass>(
-      m_compiler->getDesign()->getClassDefinitions(), maxThreadCount);
-  design->clearContainers();
-
   if (m_compiler->getCommandLineParser()->parseBuiltIn()) {
     Builtin builtin(this, design);
     builtin.addBuiltinTypes();
     builtin.addBuiltinClasses();
   }
+
+  // Compile classes
+  compileMT_<ClassDefinition, ClassNameClassDefinitionMultiMap,
+             FunctorCompileClass>(
+      m_compiler->getDesign()->getClassDefinitions(), maxThreadCount);
+  design->clearContainers();
 
   collectObjects_(all_files, design, true);
 

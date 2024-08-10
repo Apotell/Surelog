@@ -241,7 +241,7 @@ uint32_t ParseFile::buildLocationCache_recursive(uint32_t openIndex,
     if (oifi.m_sourceLine == cifi.m_sourceLine) {
       if (oifi.m_symbolStartLine == oifi.m_symbolEndLine) {
         // Scenario 1. Single line instance expands to single line
-        m_locationCache[oifi.m_sourceLine].emplace_back(
+        m_locationCache[sourceLine++].emplace_back(
             Delta::Relative, macroFileId, macroStartLine, oifi.m_sourceColumn,
             (cifi.m_sourceColumn - oifi.m_sourceColumn) -
                 (oifi.m_symbolEndColumn - oifi.m_symbolStartColumn));
@@ -254,18 +254,17 @@ uint32_t ParseFile::buildLocationCache_recursive(uint32_t openIndex,
     } else {
       if (oifi.m_symbolStartLine == oifi.m_symbolEndLine) {
         // Scenario 2. Single line instance expands to multi line
-        m_locationCache[oifi.m_sourceLine].emplace_back(
+        m_locationCache[sourceLine++].emplace_back(
             Delta::Relative, macroFileId, macroStartLine, oifi.m_sourceColumn,
             (cifi.m_sourceColumn - oifi.m_sourceColumn) -
                 (oifi.m_symbolEndColumn - oifi.m_symbolStartColumn));
       } else {
         // Scenario 4. Multi line instance expands to multi line
-        m_locationCache[oifi.m_sourceLine].emplace_back(
+        m_locationCache[sourceLine++].emplace_back(
             Delta::Relative, macroFileId, macroStartLine, oifi.m_sourceColumn,
             -macroStartColumn);
       }
-      for (uint32_t j = oifi.m_sourceLine + 1,
-                    embeddedLine = macroStartLine + 1;
+      for (uint32_t j = oifi.m_sourceLine, embeddedLine = macroStartLine + 1;
            j < (cifi.m_sourceLine + 1); ++j, ++embeddedLine) {
         m_locationCache[j].emplace_back(Delta::Relative, macroFileId,
                                         embeddedLine, 1, 0);

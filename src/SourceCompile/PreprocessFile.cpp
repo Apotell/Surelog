@@ -1021,16 +1021,6 @@ std::pair<bool, std::string> PreprocessFile::evaluateMacro_(
     }
     previous = c;
   }
-  // Truncate trailing carriage returns (up to 2)
-
-  if (body_short.back() == '\n') body_short.pop_back();
-  if (body_short.back() == '\n') body_short.pop_back();
-
-  // If it is a Multiline macro, insert a \n at the end
-
-  if (body_short.find('\n') != std::string::npos) {
-    body_short.push_back('\n');
-  }
 
   if (body_short.find('`') != std::string::npos) {
     // Recursively resolve macro instantiation within the macro

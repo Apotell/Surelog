@@ -416,11 +416,16 @@ void SV3_1aPpTreeShapeListener::enterSimple_no_args_macro_definition(
 
     const ParseUtils::LineColumn startLineCol =
         ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
-    ParseUtils::LineColumn endLineCol =
-        ParseUtils::getEndLineColumn(m_pp->getTokenStream(), ctx);
+    antlr4::Token *lastToken = ctx->getStop();
+    std::string text = ctx->getText();
+    while (lastToken->getText() == "\n") {
+      text.pop_back();
+      body_tokens.pop_back();
+      lastToken = m_tokens->get(lastToken->getTokenIndex() - 1);
+    }
+    ParseUtils::LineColumn endLineCol = ParseUtils::getEndLineColumn(lastToken);
     const ParseUtils::LineColumn bodyStartLineCol =
         ParseUtils::getLineColumn(m_pp->getTokenStream(), cBody);
-    std::string text = ctx->getText();
     const uint32_t nCRinArgs = std::count(text.begin(), text.end(), '\n');
     if (nCRinArgs > 0) {
       endLineCol.first = startLineCol.first + nCRinArgs;
@@ -889,9 +894,14 @@ void SV3_1aPpTreeShapeListener::exitDefine_directive(
     if (macroInf == nullptr) {
       const ParseUtils::LineColumn startLineCol =
           ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
+      antlr4::Token *lastToken = ctx->getStop();
+      std::string text = ctx->getText();
+      while (lastToken->getText() == "\n") {
+        text.pop_back();
+        lastToken = m_tokens->get(lastToken->getTokenIndex() - 1);
+      }
       ParseUtils::LineColumn endLineCol =
-          ParseUtils::getEndLineColumn(m_pp->getTokenStream(), ctx);
-      const std::string text = ctx->getText();
+          ParseUtils::getEndLineColumn(lastToken);
       const uint32_t nCRinArgs = std::count(text.begin(), text.end(), '\n');
       if (nCRinArgs > 0) {
         endLineCol.first = startLineCol.first + nCRinArgs;
@@ -1503,11 +1513,16 @@ void SV3_1aPpTreeShapeListener::enterMultiline_no_args_macro_definition(
 
     const ParseUtils::LineColumn startLineCol =
         ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
-    ParseUtils::LineColumn endLineCol =
-        ParseUtils::getEndLineColumn(m_pp->getTokenStream(), ctx);
+    antlr4::Token *lastToken = ctx->getStop();
+    std::string text = ctx->getText();
+    while (lastToken->getText() == "\n") {
+      text.pop_back();
+      body_tokens.pop_back();
+      lastToken = m_tokens->get(lastToken->getTokenIndex() - 1);
+    }
+    ParseUtils::LineColumn endLineCol = ParseUtils::getEndLineColumn(lastToken);
     const ParseUtils::LineColumn bodyStartLineCol =
         ParseUtils::getLineColumn(m_pp->getTokenStream(), cBody);
-    const std::string text = ctx->getText();
     const uint32_t nCRinArgs = std::count(text.begin(), text.end(), '\n');
     if (nCRinArgs > 0) {
       endLineCol.first = startLineCol.first + nCRinArgs;
@@ -1571,11 +1586,16 @@ void SV3_1aPpTreeShapeListener::enterMultiline_args_macro_definition(
 
     const ParseUtils::LineColumn startLineCol =
         ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
-    ParseUtils::LineColumn endLineCol =
-        ParseUtils::getEndLineColumn(m_pp->getTokenStream(), ctx);
+    antlr4::Token *lastToken = ctx->getStop();
+    std::string text = ctx->getText();
+    while (lastToken->getText() == "\n") {
+      text.pop_back();
+      body_tokens.pop_back();
+      lastToken = m_tokens->get(lastToken->getTokenIndex() - 1);
+    }
+    ParseUtils::LineColumn endLineCol = ParseUtils::getEndLineColumn(lastToken);
     const ParseUtils::LineColumn bodyStartLineCol =
         ParseUtils::getLineColumn(m_pp->getTokenStream(), cBody);
-    const std::string text = ctx->getText();
     const uint32_t nCRinArgs = std::count(text.begin(), text.end(), '\n');
     if (nCRinArgs > 0) {
       endLineCol.first = startLineCol.first + nCRinArgs;
@@ -1638,11 +1658,16 @@ void SV3_1aPpTreeShapeListener::enterSimple_args_macro_definition(
     }
     const ParseUtils::LineColumn startLineCol =
         ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
-    ParseUtils::LineColumn endLineCol =
-        ParseUtils::getEndLineColumn(m_pp->getTokenStream(), ctx);
+    antlr4::Token *lastToken = ctx->getStop();
+    std::string text = ctx->getText();
+    while (lastToken->getText() == "\n") {
+      text.pop_back();
+      body_tokens.pop_back();
+      lastToken = m_tokens->get(lastToken->getTokenIndex() - 1);
+    }
+    ParseUtils::LineColumn endLineCol = ParseUtils::getEndLineColumn(lastToken);
     const ParseUtils::LineColumn bodyStartLineCol =
         ParseUtils::getLineColumn(m_pp->getTokenStream(), cBody);
-    const std::string text = ctx->getText();
     const uint32_t nCRinArgs = std::count(text.begin(), text.end(), '\n');
     if (nCRinArgs > 0) {
       endLineCol.first = startLineCol.first + nCRinArgs;

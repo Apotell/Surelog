@@ -844,6 +844,8 @@ any* CompileHelper::compileVariable(
       if (var->Typespec() == nullptr) {
         ref_typespec* tpsRef = s.MakeRef_typespec();
         tpsRef->VpiParent(var);
+        fC->populateCoreMembers(sig->getTypeSpecId(), sig->getTypeSpecId(),
+                                tpsRef);
         var->Typespec(tpsRef);
       }
       var->Typespec()->Actual_typespec(tps);
@@ -930,7 +932,6 @@ any* CompileHelper::compileVariable(
       obj = stv;
     } else if (tpstype == uhdmbit_typespec) {
       bit_var* stv = s.MakeBit_var();
-      stv->Ranges(unpackedDimensions);
       obj = stv;
     } else if (tpstype == uhdmbyte_typespec) {
       byte_var* stv = s.MakeByte_var();
@@ -1164,15 +1165,26 @@ any* CompileHelper::compileVariable(
           if (const ref_typespec* rt = rhs->Typespec()) {
             tp = rt->Actual_typespec();
           }
+
+          NodeId tsId = sig->getTypeSpecId();
           array_typespec* taps = s.MakeArray_typespec();
-          ref_typespec* tpRef = s.MakeRef_typespec();
-          tpRef->VpiParent(taps);
-          tpRef->Actual_typespec(const_cast<UHDM::typespec*>(tp));
-          taps->Index_typespec(tpRef);
+          taps->VpiParent(pscope);
+          fC->populateCoreMembers(tsId, sig->getUnpackedDimension(), taps);
+
+          if (tp != nullptr) {
+            ref_typespec* tpRef = s.MakeRef_typespec();
+            tpRef->VpiParent(taps);
+            tpRef->VpiName(tp->VpiName());
+            tpRef->Actual_typespec(const_cast<UHDM::typespec*>(tp));
+            taps->Index_typespec(tpRef);
+            fC->populateCoreMembers(tsId, tsId, tpRef);
+          }
 
           ref_typespec* taps_ref = s.MakeRef_typespec();
           taps_ref->VpiParent(array_var);
           taps_ref->Actual_typespec(taps);
+          taps_ref->VpiName(array_var->VpiName());
+          fC->populateCoreMembers(tsId, tsId, taps_ref);
           array_var->Typespec(taps_ref);
           unpackedDimensions->erase(itr);
           break;

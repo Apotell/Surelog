@@ -505,7 +505,7 @@ class CompileHelper final {
 
   void compileHighConn(ModuleDefinition* component, const FileContent* fC,
                        CompileDesign* compileDesign, NodeId id,
-                       UHDM::VectorOfport* ports);
+                       UHDM::VectorOfport* ports, UHDM::any* pexpr);
 
   UHDM::VectorOfany* compileGenStmt(ModuleDefinition* component,
                                     const FileContent* fC,
@@ -538,13 +538,12 @@ class CompileHelper final {
   UHDM::any* defaultPatternAssignment(const UHDM::typespec* tps, UHDM::any* exp,
                                       DesignComponent* component,
                                       CompileDesign* compileDesign,
+                                      Reduce reduce,
                                       ValuedComponentI* instance);
 
-  UHDM::expr* expandPatternAssignment(const UHDM::typespec* tps,
-                                      UHDM::expr* rhs,
-                                      DesignComponent* component,
-                                      CompileDesign* compileDesign,
-                                      ValuedComponentI* instance);
+  UHDM::expr* expandPatternAssignment(
+      const UHDM::typespec* tps, UHDM::expr* rhs, DesignComponent* component,
+      CompileDesign* compileDesign, Reduce reduce, ValuedComponentI* instance);
 
   uint64_t Bits(const UHDM::any* typespec, bool& invalidValue,
                 DesignComponent* component, CompileDesign* compileDesign,

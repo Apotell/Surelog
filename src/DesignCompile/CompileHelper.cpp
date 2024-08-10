@@ -1917,6 +1917,64 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
     }
   }
 
+  if (sig->getTypeSpecId()) {
+    checkForLoops(true);
+    tps = compileTypespec(comp, fC, sig->getTypeSpecId(), compileDesign, reduce,
+                          uhdmScope, nullptr, true);
+    checkForLoops(false);
+  }
+  if ((tps == nullptr) && sig->getInterfaceTypeNameId()) {
+    checkForLoops(true);
+    tps = compileTypespec(comp, fC, sig->getInterfaceTypeNameId(),
+                          compileDesign, reduce, uhdmScope, nullptr, true);
+    checkForLoops(false);
+  }
+  if (tps) {
+    typespec* tmp = tps;
+    UHDM_OBJECT_TYPE ttmp = tmp->UhdmType();
+    if (ttmp == uhdmpacked_array_typespec) {
+      if (ref_typespec* ert = ((packed_array_typespec*)tmp)->Elem_typespec()) {
+        tmp = ert->Actual_typespec();
+      }
+    } else if (ttmp == uhdmstruct_typespec) {
+      struct_typespec* the_tps = (struct_typespec*)tmp;
+      if (the_tps->Members()) {
+        isNet = true;
+        for (typespec_member* member : *the_tps->Members()) {
+          if (const typespec* mtps = member->Typespec()->Actual_typespec()) {
+            UHDM_OBJECT_TYPE mtype = mtps->UhdmType();
+            if (mtype != uhdmlogic_typespec && mtype != uhdmstruct_typespec) {
+              isNet = false;
+              break;
+            }
+          }
+        }
+      }
+    } else if (ttmp == uhdmenum_typespec) {
+      isNet = false;
+    } else if (ttmp == uhdmbit_typespec) {
+      isNet = false;
+    } else if (ttmp == uhdmbyte_typespec) {
+      isNet = false;
+    } else if (ttmp == uhdmreal_typespec) {
+      isNet = false;
+    } else if (ttmp == uhdmclass_typespec) {
+      isNet = false;
+    } else if (ttmp == uhdminterface_typespec) {
+      if (!signalIsPort) {
+        SymbolTable* symbols = compileDesign->getCompiler()->getSymbolTable();
+        ErrorContainer* errors =
+            compileDesign->getCompiler()->getErrorContainer();
+        Location loc1(fC->getFileId(), fC->Line(id), fC->Column(id),
+                      symbols->registerSymbol(sig->getName()));
+        Error err(ErrorDefinition::ELAB_USE_INTERFACE_AS_SIGNAL_TYPE, loc1);
+        errors->addError(err);
+      }
+      // Don't create a signal
+      return isNet;
+    }
+  }
+
   const std::string_view signame = sig->getName();
   const std::string parentSymbol = StrCat(prefix, signame);
 
@@ -2226,11 +2284,13 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
         }
         logicn->VpiSigned(sig->isSigned());
         logicn->VpiNetType(UhdmWriter::getVpiNetType(sig->getType()));
-        ref_typespec* rt = s.MakeRef_typespec();
-        rt->VpiParent(logicn);
-        rt->Actual_typespec(tps);
-        logicn->Typespec(rt);
-        tps->VpiParent(logicn);
+        if (tps != nullptr) {
+          ref_typespec* rt = s.MakeRef_typespec();
+          rt->VpiParent(logicn);
+          rt->Actual_typespec(tps);
+          logicn->Typespec(rt);
+          tps->VpiParent(logicn);
+        }
         // Move range to typespec for simple types
         // logicn->Ranges(packedDimensions);
         logicn->VpiName(signame);
@@ -2238,7 +2298,7 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
       }
 
       if (unpackedDimensions) {
-        array_net* array_net = s.MakeArray_net();
+        UHDM::array_net* array_net = s.MakeArray_net();
         array_net->VpiParent(uhdmScope);
         array_net->Ranges(unpackedDimensions);
         array_net->VpiName(signame);
@@ -2266,11 +2326,13 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
         stv->Attributes(sig->attributes());
         for (auto a : *sig->attributes()) a->VpiParent(stv);
       }
-      ref_typespec* rt = s.MakeRef_typespec();
-      rt->VpiParent(stv);
-      rt->Actual_typespec(tps);
-      stv->Typespec(rt);
-      tps->VpiParent(stv);
+      if (tps != nullptr) {
+        ref_typespec* rt = s.MakeRef_typespec();
+        rt->VpiParent(stv);
+        rt->Actual_typespec(tps);
+        stv->Typespec(rt);
+        tps->VpiParent(stv);
+      }
       obj = stv;
       stv->VpiName(signame);
       nets->push_back(stv);
@@ -2285,7 +2347,7 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
       tps->VpiParent(stv);
       obj = stv;
       if (unpackedDimensions) {
-        array_net* array_net = s.MakeArray_net();
+        UHDM::array_net* array_net = s.MakeArray_net();
         array_net->VpiParent(uhdmScope);
         array_net->Ranges(unpackedDimensions);
         array_net->VpiName(signame);
@@ -2996,6 +3058,7 @@ n<> u<17> t<Continuous_assign> p<18> c<16> l<4>
       }
 
       UHDM::cont_assign* cassign = s.MakeCont_assign();
+      cassign->VpiParent(component->getUhdmScope());
 
       // RHS
       UHDM::any* rhs_exp =
@@ -3143,7 +3206,8 @@ CompileHelper::compileInstantiation(ModuleDefinition* mod,
         }
         mod_array->Elem_typespec()->Actual_typespec(tps);
         tps->VpiParent(mod_array);
-        compileHighConn(mod, fC, compileDesign, instId, mod_array->Ports(true));
+        compileHighConn(mod, fC, compileDesign, instId, mod_array->Ports(true),
+                        mod_array);
         fC->populateCoreMembers(typespecId, hierInstId, mod_array);
         results.first.push_back(mod_array);
       }
@@ -3152,9 +3216,10 @@ CompileHelper::compileInstantiation(ModuleDefinition* mod,
       UHDM::ref_module* m = s.MakeRef_module();
       m->VpiName(instName);
       m->VpiDefName(modName);
+      m->VpiParent(mod->getUhdmScope());
       fC->populateCoreMembers(id, id, m);
       results.second.push_back(m);
-      compileHighConn(mod, fC, compileDesign, instId, m->Ports(true));
+      compileHighConn(mod, fC, compileDesign, instId, m->Ports(true), m);
     }
     hierInstId = fC->Sibling(hierInstId);
   }
@@ -3409,7 +3474,7 @@ void CompileHelper::compileGateInstantiation(ModuleDefinition* mod,
 void CompileHelper::compileHighConn(ModuleDefinition* component,
                                     const FileContent* fC,
                                     CompileDesign* compileDesign, NodeId instId,
-                                    VectorOfport* ports) {
+                                    VectorOfport* ports, UHDM::any* pexpr) {
   NodeId list_of_ports = fC->Sibling(instId);
   UHDM::Serializer& s = compileDesign->getSerializer();
   NodeId Port_connection = fC->Child(list_of_ports);
@@ -3420,6 +3485,7 @@ void CompileHelper::compileHighConn(ModuleDefinition* component,
       if (child) {
         port* p = s.MakePort();
         ports->push_back(p);
+        p->VpiParent(pexpr);
         fC->populateCoreMembers(Port_connection, Port_connection, p);
         checkForLoops(true);
         if (any* exp = compileExpression(component, fC, child, compileDesign,
@@ -3440,6 +3506,7 @@ void CompileHelper::compileHighConn(ModuleDefinition* component,
         c->VpiDecompile(".*");
         fC->populateCoreMembers(Port_connection, Port_connection, c);
         port* p = s.MakePort();
+        p->VpiParent(pexpr);
         fC->populateCoreMembers(Port_connection, Port_connection, p);
         p->High_conn(c);
         c->VpiParent(p);
@@ -3449,6 +3516,7 @@ void CompileHelper::compileHighConn(ModuleDefinition* component,
         NodeId expId = fC->Sibling(openParens);
         port* p = s.MakePort();
         ports->push_back(p);
+        p->VpiParent(pexpr);
         fC->populateCoreMembers(Port_connection, Port_connection, p);
         if (fC->Type(expId) == VObjectType::paCLOSE_PARENS) {
           // (.p())
@@ -3727,11 +3795,9 @@ bool CompileHelper::isDecreasingRange(UHDM::typespec* ts,
   return false;
 }
 
-UHDM::any* CompileHelper::defaultPatternAssignment(const UHDM::typespec* tps,
-                                                   UHDM::any* exp,
-                                                   DesignComponent* component,
-                                                   CompileDesign* compileDesign,
-                                                   ValuedComponentI* instance) {
+UHDM::any* CompileHelper::defaultPatternAssignment(
+    const UHDM::typespec* tps, UHDM::any* exp, DesignComponent* component,
+    CompileDesign* compileDesign, Reduce reduce, ValuedComponentI* instance) {
   any* result = exp;
   if (tps == nullptr) {
     return result;
@@ -3823,7 +3889,8 @@ UHDM::any* CompileHelper::defaultPatternAssignment(const UHDM::typespec* tps,
           if (op0Type == vpiConcatOp) {
             VectorOfany* operandsConcat = oper0->Operands();
             any* op0Concat = (*operandsConcat)[0];
-            if (op0Concat->VpiName() == "default") {
+            if ((m_reduce == Reduce::Yes) && (reduce == Reduce::Yes) &&
+                (op0Concat->VpiName() == "default")) {
               bool invalidValue = false;
               UHDM::ExprEval eval;
               uint64_t val0 =
@@ -3874,7 +3941,8 @@ UHDM::any* CompileHelper::defaultPatternAssignment(const UHDM::typespec* tps,
           if (const UHDM::ref_typespec* rt = pattern->Typespec()) {
             ptps = rt->Actual_typespec();
           }
-          if (ptps->VpiName() == "default") {
+          if ((m_reduce == Reduce::Yes) && (reduce == Reduce::Yes) &&
+              (ptps->VpiName() == "default")) {
             expr* expat = (expr*)pattern->Pattern();
             constant* c = any_cast<constant*>(expat);
             int32_t psize = expat->VpiSize();
@@ -4150,7 +4218,7 @@ bool CompileHelper::compileParameterDeclaration(
         UHDM::UHDM_OBJECT_TYPE exprtype = expr->UhdmType();
         if (expr) {
           expr = defaultPatternAssignment(ts, expr, component, compileDesign,
-                                          instance);
+                                          reduce, instance);
           exprtype = expr->UhdmType();
         }
         if (expr && exprtype == UHDM::uhdmarray_expr) {
@@ -4265,8 +4333,8 @@ bool CompileHelper::compileParameterDeclaration(
           expr* rhs =
               (expr*)compileExpression(component, fC, value, compileDesign,
                                        Reduce::No, param_assign, instance);
-          rhs = (expr*)defaultPatternAssignment(ts, rhs, component,
-                                                compileDesign, instance);
+          rhs = (expr*)defaultPatternAssignment(
+              ts, rhs, component, compileDesign, reduce, instance);
           param_assign->Lhs(param);
           if (rhs != nullptr) {
             rhs->VpiParent(param_assign);
@@ -4285,8 +4353,8 @@ bool CompileHelper::compileParameterDeclaration(
             component, fC, value, compileDesign,
             isMultiDimension ? Reduce::No : reduce, param_assign, instance);
         if ((m_reduce == Reduce::Yes) && (reduce == Reduce::Yes)) {
-          rhs = (expr*)defaultPatternAssignment(ts, rhs, component,
-                                                compileDesign, instance);
+          rhs = (expr*)defaultPatternAssignment(
+              ts, rhs, component, compileDesign, reduce, instance);
         }
         if (isDecreasing) {
           if (rhs->UhdmType() == uhdmoperation) {
@@ -5540,11 +5608,9 @@ int32_t CompileHelper::adjustOpSize(const typespec* tps, expr* cop,
   return cop->VpiSize();
 }
 
-UHDM::expr* CompileHelper::expandPatternAssignment(const typespec* tps,
-                                                   UHDM::expr* rhs,
-                                                   DesignComponent* component,
-                                                   CompileDesign* compileDesign,
-                                                   ValuedComponentI* instance) {
+UHDM::expr* CompileHelper::expandPatternAssignment(
+    const typespec* tps, UHDM::expr* rhs, DesignComponent* component,
+    CompileDesign* compileDesign, Reduce reduce, ValuedComponentI* instance) {
   FileSystem* const fileSystem = FileSystem::getInstance();
   Serializer& s = compileDesign->getSerializer();
 
@@ -5575,9 +5641,9 @@ UHDM::expr* CompileHelper::expandPatternAssignment(const typespec* tps,
     if (opType == vpiConditionOp) {
       VectorOfany* ops = op->Operands();
       ops->at(1) = expandPatternAssignment(tps, (expr*)ops->at(1), component,
-                                           compileDesign, instance);
+                                           compileDesign, reduce, instance);
       ops->at(2) = expandPatternAssignment(tps, (expr*)ops->at(2), component,
-                                           compileDesign, instance);
+                                           compileDesign, reduce, instance);
       return result;
     } else if (opType == vpiAssignmentPatternOp) {
       VectorOfany* operands = op->Operands();
@@ -5591,7 +5657,8 @@ UHDM::expr* CompileHelper::expandPatternAssignment(const typespec* tps,
             tagged_pattern* tp = (tagged_pattern*)op;
             if (const UHDM::ref_typespec* rt = tp->Typespec()) {
               if (const typespec* tpsi = rt->Actual_typespec()) {
-                if (tpsi->VpiName() == "default") {
+                if ((m_reduce == Reduce::Yes) && (reduce == Reduce::Yes) &&
+                    (tpsi->VpiName() == "default")) {
                   bool invalidValue = false;
                   UHDM::ExprEval eval;
                   defaultval = eval.get_value(

@@ -897,7 +897,12 @@ void SV3_1aTreeShapeListener::exitData_type(
     addVObject((antlr4::ParserRuleContext *)ctx->VIRTUAL(),
                VObjectType::paVIRTUAL);
   }
-  addVObject(ctx, VObjectType::paData_type);
+  if ((ctx->class_scope() != nullptr) || (ctx->package_scope() != nullptr) ||
+      (ctx->string_type() != nullptr)) {
+    addVObject(ctx, ctx->getText(), VObjectType::paData_type);
+  } else {
+    addVObject(ctx, VObjectType::paData_type);
+  }
 }
 
 void SV3_1aTreeShapeListener::exitString_value(

@@ -431,14 +431,10 @@ bool CompileClass::compile_class_property_(const FileContent* fC, NodeId id) {
           m_errors->addError(err);
         }
 
-        if (UHDM::any* variable = m_helper.compileVariable(
-                m_class, fC, data_type, var, m_compileDesign, Reduce::No,
-                m_class->getUhdmScope(), nullptr, false)) {
-          Property* prop =
-              new Property(datatype, fC, var, range, varName, is_local,
-                           is_static, is_protected, is_rand, is_randc);
-          m_class->insertProperty(prop);
-        }
+        Property* prop =
+            new Property(datatype, fC, var, range, varName, is_local, is_static,
+                         is_protected, is_rand, is_randc);
+        m_class->insertProperty(prop);
 
         variable_decl_assignment = fC->Sibling(variable_decl_assignment);
       }

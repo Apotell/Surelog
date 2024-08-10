@@ -1913,7 +1913,8 @@ std::vector<std::string_view> DesignElaboration::collectParams_(
     pack_imports.push_back(import);
   }
   if (module) {
-    for (auto import : module->getObjects(VObjectType::paPackage_import_item)) {
+    for (auto& import :
+         module->getObjects(VObjectType::paPackage_import_item)) {
       pack_imports.push_back(import);
     }
   }
@@ -2419,7 +2420,7 @@ std::vector<std::string_view> DesignElaboration::collectParams_(
                   complex = true;
                   expr = (UHDM::expr*)m_helper.defaultPatternAssignment(
                       ts, expr, instance->getDefinition(), m_compileDesign,
-                      instance);
+                      m_helper.getReduce(), instance);
                   instance->setComplexValue(name, expr);
                   UHDM::operation* op = (UHDM::operation*)expr;
                   int32_t opType = op->VpiOpType();
@@ -2428,7 +2429,8 @@ std::vector<std::string_view> DesignElaboration::collectParams_(
                       if (m_helper.substituteAssignedValue(expr,
                                                            m_compileDesign)) {
                         expr = m_helper.expandPatternAssignment(
-                            ts, expr, module, m_compileDesign, instance);
+                            ts, expr, module, m_compileDesign,
+                            m_helper.getReduce(), instance);
                       }
                       if (expr) instance->setComplexValue(name, expr);
                     }

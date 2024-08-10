@@ -1743,7 +1743,7 @@ std::vector<io_decl*>* CompileHelper::compileTfPortList(
       tf_data_type = fC->Sibling(tf_data_type_or_implicit);
       tf_param_name = fC->Sibling(tf_data_type);
     }
-    fC->populateCoreMembers(tf_port_item, tf_port_item, decl);
+    fC->populateCoreMembers(tf_param_name, tf_param_name, decl);
     NodeId type = fC->Child(tf_data_type);
     if (fC->Type(type) == VObjectType::paVIRTUAL) type = fC->Sibling(type);
     if (prevType == InvalidNodeId) prevType = type;
@@ -1774,7 +1774,8 @@ std::vector<io_decl*>* CompileHelper::compileTfPortList(
         ref_typespec* tsRef = s.MakeRef_typespec();
         tsRef->VpiParent(decl);
         NodeId refName = (type == InvalidNodeId) ? prevType : type;
-        if (fC->Type(refName) == VObjectType::paData_type)
+        if ((fC->Type(refName) == VObjectType::paData_type) &&
+            (fC->SymName(refName) == SymbolTable::getBadSymbol()))
           refName = fC->Child(refName);
         tsRef->VpiName(fC->SymName(refName));
         decl->Typespec(tsRef);
@@ -2494,7 +2495,11 @@ bool CompileHelper::compileFunction(DesignComponent* component,
       lastStatementId = Function_statement_or_null;
       Function_statement_or_null = fC->Sibling(Function_statement_or_null);
     }
-    fC->populateCoreMembers(firstStatementId, lastStatementId, begin);
+    // begin keyword in function is implicit, and so can't have an explicit
+    // location. However, set the file parameter anyways.
+    // fC->populateCoreMembers(firstStatementId, lastStatementId, begin);
+    begin->VpiFile(
+        FileSystem::getInstance()->toPath(fC->getFileId(firstStatementId)));
   } else {
     // Page 983, 2017 Standard: 0 or 1 Stmt
     NodeId Statement = fC->Child(Function_statement_or_null);

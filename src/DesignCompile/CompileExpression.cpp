@@ -917,7 +917,8 @@ any *CompileHelper::getValue(std::string_view name, DesignComponent *component,
                         }
                       }
                       rhs = expandPatternAssignment(ts, (expr *)rhs, component,
-                                                    compileDesign, instance);
+                                                    compileDesign, reduce,
+                                                    instance);
                       param->Rhs(rhs);
                       reorderAssignmentPattern(component, lhs, rhs,
                                                compileDesign, instance, 0);
@@ -1019,8 +1020,9 @@ any *CompileHelper::getValue(std::string_view name, DesignComponent *component,
                       ts = rt->Actual_typespec();
                     }
                   }
-                  rhs = expandPatternAssignment(ts, (expr *)rhs, component,
-                                                compileDesign, instance);
+                  rhs =
+                      expandPatternAssignment(ts, (expr *)rhs, component,
+                                              compileDesign, reduce, instance);
                   param->Rhs(rhs);
                   reorderAssignmentPattern(component, lhs, rhs, compileDesign,
                                            instance, 0);
@@ -1140,13 +1142,12 @@ UHDM::any *CompileHelper::compileSelectExpression(
           }
           expr *sel =
               (expr *)compileExpression(component, fC, bitexp, compileDesign,
-                                        reduce, pexpr, instance, muteErrors);
+                                        reduce, nullptr, instance, muteErrors);
 
           if (result) {
             UHDM::var_select *var_select = (UHDM::var_select *)result;
             var_select->VpiParent(pexpr);
-            VectorOfexpr *exprs = var_select->Exprs();
-            exprs->push_back(sel);
+            var_select->Exprs(true)->push_back(sel);
             sel->VpiParent(var_select);
           } else if (fC->Child(Bit_select) && fC->Sibling(Bit_select)) {
             UHDM::var_select *var_select = s.MakeVar_select();
@@ -1192,8 +1193,7 @@ UHDM::any *CompileHelper::compileSelectExpression(
                                                  pexpr, instance, muteErrors);
       if (result) {
         UHDM::var_select *var_select = (UHDM::var_select *)result;
-        VectorOfexpr *exprs = var_select->Exprs();
-        exprs->push_back(sel);
+        var_select->Exprs(true)->push_back(sel);
         sel->VpiParent(var_select);
       } else if (fC->Child(Bit_select) && fC->Sibling(Bit_select)) {
         UHDM::var_select *var_select = s.MakeVar_select();
@@ -3793,8 +3793,7 @@ UHDM::VectorOfrange *CompileHelper::compileRanges(
           }
           if (c->VpiConstType() == vpiUnboundedConst) associativeArray = true;
         }
-        if (rexp && (rexp->UhdmType() == uhdmref_obj) &&
-            (m_reduce == Reduce::Yes) && (reduce == Reduce::Yes)) {
+        if (rexp && (rexp->UhdmType() == uhdmref_obj)) {
           if (typespec *assoc_tps =
                   compileTypespec(component, fC, rexpr, compileDesign, reduce,
                                   nullptr, instance, true)) {
@@ -5134,7 +5133,7 @@ UHDM::any *CompileHelper::compileComplexFuncCall(
                                            compileDesign, reduce, pexpr,
                                            instance, muteErrors);
           if (result && (result->UhdmType() == UHDM::uhdmpart_select)) {
-            fC->populateCoreMembers(name, dotedName, result);
+            fC->populateCoreMembers(name, dotedName, result, true);
           }
           return result;
         } else if ((!selectName) &&

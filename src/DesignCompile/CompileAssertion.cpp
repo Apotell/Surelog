@@ -568,7 +568,6 @@ UHDM::sequence_decl* CompileHelper::compileSequenceDeclaration(
       UHDM::expr* clock_event = any_cast<UHDM::expr*>(compileExpression(
           component, fC, lookup, compileDesign, Reduce::No, result, instance));
       UHDM::clocked_seq* seq = s.MakeClocked_seq();
-      mexpr->Clocked_seqs()->push_back(seq);
       seq->VpiClockingEvent(clock_event);
       seq->VpiParent(mexpr);
       fC->populateCoreMembers(lookup, lookup, seq);

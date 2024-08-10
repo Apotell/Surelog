@@ -229,11 +229,11 @@ bool NetlistElaboration::elab_parameters_(ModuleInstance* instance,
               }
             }
             if (m_helper.substituteAssignedValue(rhs, m_compileDesign)) {
-              rhs = m_helper.expandPatternAssignment(ts, (expr*)rhs, mod,
-                                                     m_compileDesign, instance);
+              rhs = m_helper.expandPatternAssignment(
+                  ts, (expr*)rhs, mod, m_compileDesign, Reduce::Yes, instance);
             }
             rhs = (expr*)m_helper.defaultPatternAssignment(
-                ts, rhs, mod, m_compileDesign, instance);
+                ts, rhs, mod, m_compileDesign, Reduce::Yes, instance);
             pclone->Rhs(rhs);
             m_helper.reorderAssignmentPattern(mod, lhs, rhs, m_compileDesign,
                                               instance, 0);
@@ -1329,12 +1329,12 @@ bool NetlistElaboration::high_conn_(ModuleInstance* instance) {
               if (m_helper.substituteAssignedValue(hexpr, m_compileDesign)) {
                 hexpr = m_helper.expandPatternAssignment(
                     tps, (UHDM::expr*)hexpr, parent_comp, m_compileDesign,
-                    netlist->getParent());
+                    Reduce::Yes, netlist->getParent());
               }
             }
             hexpr = (UHDM::expr*)m_helper.defaultPatternAssignment(
                 tps, (UHDM::expr*)hexpr, parent_comp, m_compileDesign,
-                netlist->getParent());
+                Reduce::Yes, netlist->getParent());
             if (p) {
               if (const any* lowc = p->Low_conn()) {
                 if (lowc->UhdmType() == uhdmref_obj) {

@@ -28,6 +28,7 @@
 #include <Surelog/SourceCompile/PythonListen.h>
 #endif
 
+#include <Surelog/Common/Containers.h>
 #include <Surelog/Common/FileSystem.h>
 #include <Surelog/Design/Design.h>
 #include <Surelog/Design/FileContent.h>
@@ -136,7 +137,7 @@ void SLaddErrorContext(SV3_1aPythonListener* prog,
   antlr4::ParserRuleContext* ctx = (antlr4::ParserRuleContext*)context;
   ErrorContainer* errors =
       listener->getPythonListen()->getCompileSourceFile()->getErrorContainer();
-  ParseUtils::LineColumn lineCol =
+  LineColumn lineCol =
       ParseUtils::getLineColumn(listener->getTokenStream(), ctx);
   ErrorDefinition::ErrorType type = ErrorDefinition::getErrorType(messageId);
 
@@ -166,9 +167,9 @@ void SLaddMLErrorContext(SV3_1aPythonListener* prog,
   antlr4::ParserRuleContext* ctx2 = (antlr4::ParserRuleContext*)context2;
   ErrorContainer* errors =
       listener->getPythonListen()->getCompileSourceFile()->getErrorContainer();
-  ParseUtils::LineColumn lineCol1 =
+  LineColumn lineCol1 =
       ParseUtils::getLineColumn(listener->getTokenStream(), ctx1);
-  ParseUtils::LineColumn lineCol2 =
+  LineColumn lineCol2 =
       ParseUtils::getLineColumn(listener->getTokenStream(), ctx2);
   ErrorDefinition::ErrorType type = ErrorDefinition::getErrorType(messageId);
 
@@ -214,7 +215,7 @@ int32_t SLgetLine(SV3_1aPythonListener* prog,
 #ifdef SURELOG_WITH_PYTHON
   SV3_1aPythonListener* listener = (SV3_1aPythonListener*)prog;
   antlr4::ParserRuleContext* ctx = (antlr4::ParserRuleContext*)context;
-  ParseUtils::LineColumn lineCol =
+  LineColumn lineCol =
       ParseUtils::getLineColumn(listener->getTokenStream(), ctx);
   return lineCol.first;
 #else
@@ -228,7 +229,7 @@ int32_t SLgetColumn(SV3_1aPythonListener* prog,
 #ifdef SURELOG_WITH_PYTHON
   SV3_1aPythonListener* listener = (SV3_1aPythonListener*)prog;
   antlr4::ParserRuleContext* ctx = (antlr4::ParserRuleContext*)context;
-  ParseUtils::LineColumn lineCol =
+  LineColumn lineCol =
       ParseUtils::getLineColumn(listener->getTokenStream(), ctx);
   return lineCol.second;
 #else

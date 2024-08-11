@@ -198,10 +198,8 @@ void SV3_1aTreeShapeListener::exitSlline(SV3_1aParser::SllineContext *ctx) {
   std::string_view symbol = StringUtils::unquoted(parts[0]);
   std::string_view file = StringUtils::unquoted(parts[1]);
 
-  ParseUtils::LineColumn startLineCol =
-      ParseUtils::getLineColumn(m_tokens, ctx);
-  ParseUtils::LineColumn endLineCol =
-      ParseUtils::getEndLineColumn(m_tokens, ctx);
+  LineColumn startLineCol = ParseUtils::getLineColumn(m_tokens, ctx);
+  LineColumn endLineCol = ParseUtils::getEndLineColumn(m_tokens, ctx);
   if (action == IncludeFileInfo::Action::PUSH) {
     // Push
     m_includeFileInfo.emplace(
@@ -669,8 +667,7 @@ void SV3_1aTreeShapeListener::enterTimescale_directive(
   TimeInfo compUnitTimeInfo;
   compUnitTimeInfo.m_type = TimeInfo::Type::Timescale;
   compUnitTimeInfo.m_fileId = m_pf->getFileId(0);
-  ParseUtils::LineColumn lineCol =
-      ParseUtils::getLineColumn(ctx->TICK_TIMESCALE());
+  LineColumn lineCol = ParseUtils::getLineColumn(ctx->TICK_TIMESCALE());
   compUnitTimeInfo.m_line = lineCol.first;
   std::regex base_regex("`timescale([0-9]+)([mnsupf]+)/([0-9]+)([mnsupf]+)");
   std::smatch base_match;
@@ -2076,7 +2073,7 @@ void SV3_1aTreeShapeListener::exitDefault_nettype_directive(
   NetTypeInfo info;
   info.m_type = VObjectType::paNetType_Wire;
   info.m_fileId = m_pf->getFileId(0);
-  ParseUtils::LineColumn lineCol = ParseUtils::getLineColumn(m_tokens, ctx);
+  LineColumn lineCol = ParseUtils::getLineColumn(m_tokens, ctx);
   info.m_line = lineCol.first;
   if (ctx->Simple_identifier()) {
     addVObject((antlr4::ParserRuleContext *)ctx->Simple_identifier(),

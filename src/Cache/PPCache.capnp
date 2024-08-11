@@ -24,6 +24,11 @@ enum MacroType {
   withArgs  @1;
 }
 
+struct LineColumn {
+  line    @0 : UInt32;
+  column  @1 : UInt16;
+}
+
 struct Macro {
   nameId      @0 :UInt64;
   type        @1 :MacroType;
@@ -34,6 +39,7 @@ struct Macro {
   endColumn   @6 :UInt16;
   arguments   @7 :List(Text);
   tokens      @8 :List(Text);
+  positions   @9 :List(LineColumn);
 }
 
 struct IncludeFileInfo {

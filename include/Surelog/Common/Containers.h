@@ -42,6 +42,8 @@ typedef std::map<std::string, std::vector<MacroInfo*>, StringViewCompare>
 typedef std::map<std::string, std::vector<MacroInfo*>, StringViewCompare>
     MacroStorageRef;
 
+using LineColumn = std::pair<uint32_t, uint16_t>;
+
 }  // namespace SURELOG
 
 #endif  // SURELOG_CONTAINERS_H

@@ -622,12 +622,11 @@ void PreprocessFile::append(std::string_view s) {
   }
 }
 
-MacroInfo* PreprocessFile::recordMacro(std::string_view name,
-                                       uint32_t startLine, uint16_t startColumn,
-                                       uint32_t endLine, uint16_t endColumn,
-                                       uint16_t bodyStartColumn,
-                                       std::string_view arguments,
-                                       const std::vector<std::string>& tokens) {
+MacroInfo* PreprocessFile::recordMacro(
+    std::string_view name, uint32_t startLine, uint16_t startColumn,
+    uint32_t endLine, uint16_t endColumn, uint16_t bodyStartColumn,
+    std::string_view arguments, const std::vector<std::string>& tokens,
+    const std::vector<LineColumn>& positions) {
   // *** Argument processing
   std::string arguments_short(arguments);
   // Remove (
@@ -659,7 +658,7 @@ MacroInfo* PreprocessFile::recordMacro(std::string_view name,
   MacroInfo* macroInfo = new MacroInfo(
       name, arguments.empty() ? MacroInfo::NO_ARGS : MacroInfo::WITH_ARGS,
       getFileId(startLine), startLine, startColumn, endLine, endColumn,
-      bodyStartColumn, args, tokens);
+      bodyStartColumn, args, tokens, positions);
   MacroStorageRef::iterator itr = m_macros.find(name);
   if (itr == m_macros.end()) {
     itr = m_macros.emplace(name, std::vector<MacroInfo*>()).first;
@@ -691,11 +690,12 @@ MacroInfo* PreprocessFile::recordMacro(
     std::string_view name, PathId fileId, uint32_t startLine,
     uint16_t startColumn, uint32_t endLine, uint16_t endColumn,
     uint16_t bodyStartColumn, const std::vector<std::string>& arguments,
-    const std::vector<std::string>& tokens) {
+    const std::vector<std::string>& tokens,
+    const std::vector<LineColumn>& positions) {
   MacroInfo* macroInfo = new MacroInfo(
       name, arguments.empty() ? MacroInfo::NO_ARGS : MacroInfo::WITH_ARGS,
       fileId, startLine, startColumn, endLine, endColumn, bodyStartColumn,
-      arguments, tokens);
+      arguments, tokens, positions);
   MacroStorageRef::iterator itr = m_macros.find(name);
   if (itr == m_macros.end()) {
     itr = m_macros.emplace(name, std::vector<MacroInfo*>()).first;
@@ -1042,7 +1042,7 @@ std::pair<bool, std::string> PreprocessFile::evaluateMacro_(
                     : m_includer->m_compilationUnit,
         callingFile ? callingFile->m_library : m_includer->m_library,
         callingFile ? callingFile : m_includer, callingLine, body_short,
-        macroInfo, embeddedMacroCallFile, embeddedMacroCallLine - 1,
+        macroInfo, embeddedMacroCallFile, embeddedMacroCallLine,
         embeddedMacroCallColumn);
     getCompileSourceFile()->registerPP(pp);
     if (!pp->preprocess()) {

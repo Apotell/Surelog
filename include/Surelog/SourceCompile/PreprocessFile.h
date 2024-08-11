@@ -96,13 +96,15 @@ class PreprocessFile final {
                          uint16_t startColumn, uint32_t endLine,
                          uint16_t endColumn, uint16_t bodyStartColumn,
                          std::string_view formal_arguments,
-                         const std::vector<std::string>& body);
+                         const std::vector<std::string>& body,
+                         const std::vector<LineColumn>& positions);
   MacroInfo* recordMacro(std::string_view name, PathId fileId,
                          uint32_t startLine, uint16_t startColumn,
                          uint32_t endLine, uint16_t endColumn,
                          uint16_t bodyStartColumn,
                          const std::vector<std::string>& formal_arguments,
-                         const std::vector<std::string>& body);
+                         const std::vector<std::string>& body,
+                         const std::vector<LineColumn>& positions);
   std::string getMacro(std::string_view name,
                        std::vector<std::string>& actual_arguments,
                        PreprocessFile* callingFile, uint32_t callingLine,
@@ -143,15 +145,13 @@ class PreprocessFile final {
   const std::vector<IncludeFileInfo>& getIncludeFileInfo() const {
     return m_includeFileInfo;
   }
-  int32_t addIncludeFileInfo(IncludeFileInfo::Context context,
-                             IncludeFileInfo::Action action,
-                             const MacroInfo* macroDefinition,
-                             PathId sectionFileId, uint32_t sectionLine,
-                             uint16_t sectionColumn, uint32_t sourceLine,
-                             uint16_t sourceColumn, SymbolId symbolId,
-                             uint32_t symbolStartLine,
-                             uint16_t symbolStartColumn, uint32_t symbolEndLine,
-                             uint16_t symbolEndColumn, int32_t indexOpposite = -1);
+  int32_t addIncludeFileInfo(
+      IncludeFileInfo::Context context, IncludeFileInfo::Action action,
+      const MacroInfo* macroDefinition, PathId sectionFileId,
+      uint32_t sectionLine, uint16_t sectionColumn, uint32_t sourceLine,
+      uint16_t sourceColumn, SymbolId symbolId, uint32_t symbolStartLine,
+      uint16_t symbolStartColumn, uint32_t symbolEndLine,
+      uint16_t symbolEndColumn, int32_t indexOpposite = -1);
   void clearIncludeFileInfo();
   IncludeFileInfo& getIncludeFileInfo(int32_t index) {
     if (index >= 0 && index < ((int32_t)m_includeFileInfo.size()))

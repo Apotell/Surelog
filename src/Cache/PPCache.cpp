@@ -456,6 +456,8 @@ void PPCache::restoreMacros(SymbolTable& targetSymbols,
         sourceArguments = sourceMacro.getArguments();
     const ::capnp::List<::capnp::Text, ::capnp::Kind::BLOB>::Reader&
         sourceTokens = sourceMacro.getTokens();
+    const ::capnp::List<::LineColumn, ::capnp::Kind::STRUCT>::Reader&
+        sourcePositions = sourceMacro.getPositions();
 
     std::vector<std::string> args;
     args.reserve(sourceArguments.size());
@@ -469,6 +471,12 @@ void PPCache::restoreMacros(SymbolTable& targetSymbols,
       tokens.emplace_back(sourceToken.cStr());
     }
 
+    std::vector<LineColumn> positions;
+    positions.reserve(sourcePositions.size());
+    for (const ::LineColumn::Reader& sourcePosition : sourcePositions) {
+      positions.emplace_back(sourcePosition.getLine(), sourcePosition.getColumn());
+    }
+
     m_pp->recordMacro(
         sourceSymbols.getSymbol(
             SymbolId(sourceMacro.getNameId(), UnknownRawPath)),
@@ -476,7 +484,8 @@ void PPCache::restoreMacros(SymbolTable& targetSymbols,
                                  sourceMacro.getFileId(), UnknownRawPath))),
                              &targetSymbols),
         sourceMacro.getStartLine(), sourceMacro.getStartColumn(),
-        sourceMacro.getEndLine(), sourceMacro.getEndColumn(), 0, args, tokens);
+        sourceMacro.getEndLine(), sourceMacro.getEndColumn(), 0, args, tokens,
+        positions);
   }
 }
 

@@ -26,14 +26,14 @@
 
 namespace SURELOG {
 
-ParseUtils::LineColumn ParseUtils::getLineColumn(antlr4::Token* token) {
+LineColumn ParseUtils::getLineColumn(antlr4::Token* token) {
   const uint32_t lineNb = static_cast<uint32_t>(token->getLine());
   const uint16_t columnNb =
       static_cast<uint16_t>(token->getCharPositionInLine() + 1);
   return std::make_pair(lineNb, columnNb);
 }
 
-ParseUtils::LineColumn ParseUtils::getEndLineColumn(antlr4::Token* token) {
+LineColumn ParseUtils::getEndLineColumn(antlr4::Token* token) {
   const uint32_t lineNb = static_cast<uint32_t>(token->getLine());
   const uint16_t columnNb = static_cast<uint16_t>(
       token->getCharPositionInLine() + token->getStopIndex() -
@@ -41,25 +41,23 @@ ParseUtils::LineColumn ParseUtils::getEndLineColumn(antlr4::Token* token) {
   return std::make_pair(lineNb, columnNb);
 }
 
-ParseUtils::LineColumn ParseUtils::getLineColumn(
-    antlr4::tree::TerminalNode* node) {
+LineColumn ParseUtils::getLineColumn(antlr4::tree::TerminalNode* node) {
   return getLineColumn(node->getSymbol());
 }
 
-ParseUtils::LineColumn ParseUtils::getEndLineColumn(
-    antlr4::tree::TerminalNode* node) {
+LineColumn ParseUtils::getEndLineColumn(antlr4::tree::TerminalNode* node) {
   return getEndLineColumn(node->getSymbol());
 }
 
-ParseUtils::LineColumn ParseUtils::getLineColumn(
-    antlr4::CommonTokenStream* stream, antlr4::ParserRuleContext* context) {
+LineColumn ParseUtils::getLineColumn(antlr4::CommonTokenStream* stream,
+                                     antlr4::ParserRuleContext* context) {
   const antlr4::misc::Interval sourceInterval = context->getSourceInterval();
   if (sourceInterval.a == -1) return std::make_pair(0, 0);
   return getLineColumn(stream->get(sourceInterval.a));
 }
 
-ParseUtils::LineColumn ParseUtils::getEndLineColumn(
-    antlr4::CommonTokenStream* stream, antlr4::ParserRuleContext* context) {
+LineColumn ParseUtils::getEndLineColumn(antlr4::CommonTokenStream* stream,
+                                        antlr4::ParserRuleContext* context) {
   const antlr4::misc::Interval sourceInterval = context->getSourceInterval();
   if (sourceInterval.b == -1) return std::make_pair(0, 0);
   return getEndLineColumn(stream->get(sourceInterval.b));

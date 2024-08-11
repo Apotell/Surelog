@@ -26,6 +26,7 @@
 #pragma once
 
 #include <Surelog/Common/PathId.h>
+#include <Surelog/Common/Containers.h>
 
 #include <string>
 #include <string_view>
@@ -39,7 +40,8 @@ class MacroInfo {
             uint32_t startLine, uint16_t startColumn, uint32_t endLine,
             uint16_t endColumn, uint16_t bodyStartColumn,
             const std::vector<std::string>& arguments,
-            const std::vector<std::string>& tokens);
+            const std::vector<std::string>& tokens,
+            const std::vector<LineColumn> &positions);
   enum Type {
     NO_ARGS,
     WITH_ARGS,
@@ -55,6 +57,7 @@ class MacroInfo {
   const uint16_t m_bodyStartColumn;
   const std::vector<std::string> m_arguments;
   const std::vector<std::string> m_tokens;
+  const std::vector<LineColumn> m_positions;
 };
 
 };  // namespace SURELOG

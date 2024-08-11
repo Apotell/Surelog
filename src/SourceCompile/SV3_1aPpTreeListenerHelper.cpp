@@ -42,9 +42,8 @@ SymbolId SV3_1aPpTreeListenerHelper::registerSymbol(std::string_view symbol) {
 std::tuple<PathId, uint32_t, uint16_t, uint32_t, uint16_t>
 SV3_1aPpTreeListenerHelper::getFileLine(antlr4::ParserRuleContext* ctx,
                                         antlr4::Token* token) const {
-  ParseUtils::LineColumn lineCol = ParseUtils::getLineColumn(m_tokens, ctx);
-  ParseUtils::LineColumn endLineCol =
-      ParseUtils::getEndLineColumn(m_tokens, ctx);
+  LineColumn lineCol = ParseUtils::getLineColumn(m_tokens, ctx);
+  LineColumn endLineCol = ParseUtils::getEndLineColumn(m_tokens, ctx);
   uint32_t line = m_pp->getLineNb(lineCol.first);
   uint16_t column = lineCol.second;
   uint32_t endLine = m_pp->getLineNb(endLineCol.first);
@@ -113,8 +112,7 @@ void SV3_1aPpTreeListenerHelper::logError(ErrorDefinition::ErrorType error,
                                           std::string_view object,
                                           bool printColumn) {
   if (m_instructions.m_mute) return;
-  ParseUtils::LineColumn lineCol =
-      ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
+  LineColumn lineCol = ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
   if (m_pp->getMacroInfo()) {
     Location loc(m_pp->getMacroInfo()->m_fileId,
                  m_pp->getMacroInfo()->m_startLine + lineCol.first - 1,
@@ -176,8 +174,7 @@ void SV3_1aPpTreeListenerHelper::checkMultiplyDefinedMacro(
     std::string_view macroName, antlr4::ParserRuleContext* ctx) {
   MacroInfo* macroInf = m_pp->getMacro(macroName);
   if (macroInf) {
-    ParseUtils::LineColumn lineCol =
-        ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
+    LineColumn lineCol = ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
     if ((macroInf->m_fileId == m_pp->getFileId(lineCol.first)) &&
         (m_pp->getLineNb(lineCol.first) == macroInf->m_startLine))
       return;

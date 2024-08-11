@@ -64,7 +64,7 @@ void SV3_1aTreeShapeHelper::logError(ErrorDefinition::ErrorType error,
                                      antlr4::ParserRuleContext* ctx,
                                      std::string_view object,
                                      bool printColumn) {
-  ParseUtils::LineColumn lineCol = ParseUtils::getLineColumn(m_tokens, ctx);
+  LineColumn lineCol = ParseUtils::getLineColumn(m_tokens, ctx);
 
   Location loc(
       m_pf->getFileId(lineCol.first /*+ m_lineOffset*/),
@@ -148,12 +148,12 @@ void SV3_1aTreeShapeHelper::addDesignElement(antlr4::ParserRuleContext* ctx,
 std::tuple<PathId, uint32_t, uint16_t, uint32_t, uint16_t>
 SV3_1aTreeShapeHelper::getFileLine(antlr4::ParserRuleContext* ctx,
                                    antlr4::Token* token) const {
-  ParseUtils::LineColumn lineCol =
-      (token == nullptr) ? ParseUtils::getLineColumn(m_tokens, ctx)
-                         : ParseUtils::getLineColumn(token);
-  ParseUtils::LineColumn endLineCol =
-      (token == nullptr) ? ParseUtils::getEndLineColumn(m_tokens, ctx)
-                         : ParseUtils::getEndLineColumn(token);
+  LineColumn lineCol = (token == nullptr)
+                           ? ParseUtils::getLineColumn(m_tokens, ctx)
+                           : ParseUtils::getLineColumn(token);
+  LineColumn endLineCol = (token == nullptr)
+                              ? ParseUtils::getEndLineColumn(m_tokens, ctx)
+                              : ParseUtils::getEndLineColumn(token);
   uint32_t line = 0;
   uint16_t column = 0;
   uint32_t endLine = 0;

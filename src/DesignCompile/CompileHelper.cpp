@@ -1878,7 +1878,6 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
                                   Reduce reduce) {
   Serializer& s = compileDesign->getSerializer();
   UHDM::any* uhdmScope = comp->getUhdmScope();
-  std::vector<net*>* nets = comp->getUhdmScope<UHDM::instance>()->Nets(true);
   const FileContent* fC = sig->getFileContent();
   NodeId id = sig->getNodeId();
   NodeId packedDimension = sig->getPackedDimension();
@@ -2282,6 +2281,7 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
           logicn->Attributes(sig->attributes());
           for (auto a : *sig->attributes()) a->VpiParent(logicn);
         }
+        logicn->VpiParent(uhdmScope);
         logicn->VpiSigned(sig->isSigned());
         logicn->VpiNetType(UhdmWriter::getVpiNetType(sig->getType()));
         if (tps != nullptr) {
@@ -2289,7 +2289,6 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
           rt->VpiParent(logicn);
           rt->Actual_typespec(tps);
           logicn->Typespec(rt);
-          tps->VpiParent(logicn);
         }
         // Move range to typespec for simple types
         // logicn->Ranges(packedDimensions);
@@ -2306,7 +2305,6 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
         for (auto r : *unpackedDimensions) r->VpiParent(array_net);
         fC->populateCoreMembers(sig->getNodeId(), sig->getNodeId(), array_net);
         obj->VpiParent(array_net);
-        array_net->Nets(true)->push_back((net*)obj);
       } else {
         UHDM_OBJECT_TYPE nettype = obj->UhdmType();
         if (nettype == uhdmenum_net) {
@@ -2316,12 +2314,12 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
         } else if (nettype == uhdmpacked_array_net) {
           ((packed_array_net*)obj)->VpiName(signame);
         }
-        nets->push_back((net*)obj);
       }
     } else if (subnettype == VObjectType::paStruct_union) {
       // Implicit type
       struct_net* stv = s.MakeStruct_net();
       stv->VpiName(signame);
+      stv->VpiParent(uhdmScope);
       if (sig->attributes()) {
         stv->Attributes(sig->attributes());
         for (auto a : *sig->attributes()) a->VpiParent(stv);
@@ -2331,11 +2329,9 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
         rt->VpiParent(stv);
         rt->Actual_typespec(tps);
         stv->Typespec(rt);
-        tps->VpiParent(stv);
       }
       obj = stv;
       stv->VpiName(signame);
-      nets->push_back(stv);
     } else if (tps && tps->UhdmType() == uhdmstruct_typespec) {
       struct_net* stv = s.MakeStruct_net();
       stv->VpiName(signame);
@@ -2344,7 +2340,7 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
       fC->populateCoreMembers(sig->getNameId(), sig->getNameId(), rt);
       rt->Actual_typespec(tps);
       stv->Typespec(rt);
-      tps->VpiParent(stv);
+      stv->VpiParent(uhdmScope);
       obj = stv;
       if (unpackedDimensions) {
         UHDM::array_net* array_net = s.MakeArray_net();
@@ -2354,15 +2350,12 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
         array_net->VpiSize(unpackedSize);
         for (auto r : *unpackedDimensions) r->VpiParent(array_net);
         fC->populateCoreMembers(sig->getNodeId(), sig->getNodeId(), array_net);
-        obj->VpiParent(array_net);
-        array_net->Nets(true)->push_back((net*)obj);
       } else {
         if (obj->UhdmType() == uhdmenum_net) {
           ((enum_net*)obj)->VpiName(signame);
         } else if (obj->UhdmType() == uhdmstruct_net) {
           ((struct_net*)obj)->VpiName(signame);
         }
-        nets->push_back((net*)obj);
       }
     } else {
       logic_net* logicn = s.MakeLogic_net();
@@ -2377,9 +2370,10 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
         // logicn->Ranges(packedDimensions);
         ref_typespec* rt = s.MakeRef_typespec();
         rt->VpiParent(logicn);
+        rt->VpiName(signame);
         rt->Actual_typespec(tps);
         logicn->Typespec(rt);
-        tps->VpiParent(logicn);
+        fC->populateCoreMembers(sig->getNameId(), sig->getNameId(), rt);
       }
       if (unpackedDimensions) {
         fC->populateCoreMembers(id, id, logicn);
@@ -2390,14 +2384,12 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
         for (auto r : *unpackedDimensions) r->VpiParent(array_net);
         fC->populateCoreMembers(sig->getNodeId(), sig->getNodeId(), array_net);
         logicn->VpiParent(uhdmScope);
-        array_net->Nets(true)->push_back(logicn);
         obj = array_net;
       } else {
         logicn->VpiName(signame);
         logicn->VpiSigned(sig->isSigned());
         logicn->VpiParent(uhdmScope);
         obj = logicn;
-        nets->push_back(logicn);
       }
     }
 

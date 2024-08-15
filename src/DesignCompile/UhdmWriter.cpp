@@ -593,7 +593,6 @@ uint32_t UhdmWriter::getVpiNetType(VObjectType type) {
 }
 
 void UhdmWriter::writePorts(std::vector<Signal*>& orig_ports, BaseClass* parent,
-                            VectorOfport* dest_ports, VectorOfnet* dest_nets,
                             Serializer& s, ModPortMap& modPortMap,
                             SignalBaseClassMap& signalBaseMap,
                             SignalMap& signalMap, ModuleInstance* instance,
@@ -724,7 +723,6 @@ void UhdmWriter::writePorts(std::vector<Signal*>& orig_ports, BaseClass* parent,
         dest_port->Typespec()->Actual_typespec(ts);
       }
     }
-    dest_ports->push_back(dest_port);
   }
 }
 
@@ -761,7 +759,7 @@ void UhdmWriter::writeDataTypes(const DesignComponent::DataTypeMap& datatypeMap,
         tps->VpiParent(parent);
         ids.emplace(tps->UhdmId());
       } else if (ids.emplace(tps->UhdmId()).second) {
-        dest_typespecs->push_back(tps);
+        tps->VpiParent(parent);
       }
     }
   }
@@ -769,8 +767,7 @@ void UhdmWriter::writeDataTypes(const DesignComponent::DataTypeMap& datatypeMap,
 
 void UhdmWriter::writeNets(DesignComponent* mod,
                            std::vector<Signal*>& orig_nets, BaseClass* parent,
-                           VectorOfnet* dest_nets, Serializer& s,
-                           SignalBaseClassMap& signalBaseMap,
+                           Serializer& s, SignalBaseClassMap& signalBaseMap,
                            SignalMap& signalMap, SignalMap& portMap,
                            ModuleInstance* instance /* = nullptr */) {
   for (auto& orig_net : orig_nets) {
@@ -851,7 +848,6 @@ void UhdmWriter::writeNets(DesignComponent* mod,
         }
         dest_net->VpiNetType(UhdmWriter::getVpiNetType(orig_net->getType()));
         dest_net->VpiParent(parent);
-        dest_nets->push_back(dest_net);
       }
     }
   }
@@ -880,8 +876,7 @@ void mapLowConns(std::vector<Signal*>& orig_ports, Serializer& s,
   }
 }
 
-void UhdmWriter::writeClass(ClassDefinition* classDef,
-                            VectorOfclass_defn* dest_classes, Serializer& s,
+void UhdmWriter::writeClass(ClassDefinition* classDef, Serializer& s,
                             BaseClass* parent) {
   if (!classDef->getFileContents().empty() &&
       classDef->getType() == VObjectType::paClass_declaration) {
@@ -935,7 +930,7 @@ void UhdmWriter::writeClass(ClassDefinition* classDef,
       }
     }
     c->VpiParent(parent);
-    dest_classes->push_back(c);
+
     const std::string_view name = classDef->getName();
     if (c->VpiName().empty()) c->VpiName(name);
     if (c->VpiFullName().empty()) c->VpiFullName(name);
@@ -956,25 +951,20 @@ void UhdmWriter::writeClass(ClassDefinition* classDef,
     // lateBinding(s, classDef, c);
 
     for (auto& nested : classDef->getClassMap()) {
-      ClassDefinition* c_nested = nested.second;
-      VectorOfclass_defn* dest_classes = s.MakeClass_defnVec();
-      writeClass(c_nested, dest_classes, s, c);
+      writeClass(nested.second, s, c);
     }
   }
 }
 
 void UhdmWriter::writeClasses(ClassNameClassDefinitionMultiMap& orig_classes,
-                              VectorOfclass_defn* dest_classes, Serializer& s,
-                              BaseClass* parent) {
+                              Serializer& s, BaseClass* parent) {
   for (auto& orig_class : orig_classes) {
-    ClassDefinition* classDef = orig_class.second;
-    writeClass(classDef, dest_classes, s, parent);
+    writeClass(orig_class.second, s, parent);
   }
 }
 
 void UhdmWriter::writeVariables(const DesignComponent::VariableMap& orig_vars,
-                                BaseClass* parent, VectorOfvariables* dest_vars,
-                                Serializer& s) {
+                                BaseClass* parent, Serializer& s) {
   for (auto& orig_var : orig_vars) {
     Variable* var = orig_var.second;
     const DataType* dtype = var->getDataType();
@@ -990,7 +980,6 @@ void UhdmWriter::writeVariables(const DesignComponent::VariableMap& orig_vars,
         // TODO: Bind Class type,
         // class_var -> class_typespec -> class_defn
       }
-      dest_vars->push_back(cvar);
     }
   }
 }
@@ -1073,8 +1062,7 @@ void UhdmWriter::writePackage(Package* pack, package* p, Serializer& s,
 
   // Classes
   ClassNameClassDefinitionMultiMap& orig_classes = pack->getClassDefinitions();
-  VectorOfclass_defn* dest_classes = p->Class_defns(true);
-  writeClasses(orig_classes, dest_classes, s, p);
+  writeClasses(orig_classes, s, p);
 
   // Parameters
   if (p->Parameters()) {
@@ -1121,13 +1109,14 @@ void UhdmWriter::writePackage(Package* pack, package* p, Serializer& s,
         const std::string_view className = res[0];
         const std::string_view funcName = res[1];
         bool foundParentClass = false;
-        for (auto cl : *dest_classes) {
-          if (cl->VpiName() == className) {
-            tf->VpiParent(cl, true);
-            tf->Instance(p);
-            cl->Task_funcs(true)->push_back(tf);
-            foundParentClass = true;
-            break;
+        if (p->Class_defns()) {
+          for (auto cl : *p->Class_defns()) {
+            if (cl->VpiName() == className) {
+              tf->VpiParent(cl, true);
+              tf->Instance(p);
+              foundParentClass = true;
+              break;
+            }
           }
         }
         if (foundParentClass) {
@@ -1138,22 +1127,19 @@ void UhdmWriter::writePackage(Package* pack, package* p, Serializer& s,
         } else {
           tf->VpiParent(p);
           tf->Instance(p);
-          p->Task_funcs(true)->push_back(tf);
           ((task_func*)tf)
               ->VpiFullName(StrCat(pack->getName(), "::", tf->VpiName()));
         }
       } else {
         tf->VpiParent(p);
         tf->Instance(p);
-        p->Task_funcs(true)->push_back(tf);
         ((task_func*)tf)
             ->VpiFullName(StrCat(pack->getName(), "::", tf->VpiName()));
       }
     }
   }
   // Variables
-  Netlist* netlist = pack->getNetlist();
-  if (netlist) {
+  if (Netlist* netlist = pack->getNetlist()) {
     p->Variables(netlist->variables());
     if (netlist->variables()) {
       for (auto obj : *netlist->variables()) {
@@ -1168,9 +1154,7 @@ void UhdmWriter::writePackage(Package* pack, package* p, Serializer& s,
   SignalMap portMap;
   SignalMap netMap;
   std::vector<Signal*> orig_nets = pack->getSignals();
-  VectorOfnet* dest_nets = p->Nets(true);
-  writeNets(pack, orig_nets, p, dest_nets, s, signalBaseMap, netMap, portMap,
-            nullptr);
+  writeNets(pack, orig_nets, p, s, signalBaseMap, netMap, portMap, nullptr);
 }
 
 void UhdmWriter::writeModule(ModuleDefinition* mod, module_inst* m,
@@ -1208,16 +1192,13 @@ void UhdmWriter::writeModule(ModuleDefinition* mod, module_inst* m,
 
   // Ports
   std::vector<Signal*>& orig_ports = mod->getPorts();
-  VectorOfport* dest_ports = m->Ports(true);
-  VectorOfnet* dest_nets = s.MakeNetVec();
-  writePorts(orig_ports, m, dest_ports, dest_nets, s, modPortMap, signalBaseMap,
-             portMap, instance, mod);
+  writePorts(orig_ports, m, s, modPortMap, signalBaseMap, portMap, instance,
+             mod);
   // Nets
   mapLowConns(orig_ports, s, signalBaseMap);
   // Classes
   ClassNameClassDefinitionMultiMap& orig_classes = mod->getClassDefinitions();
-  VectorOfclass_defn* dest_classes = m->Class_defns(true);
-  writeClasses(orig_classes, dest_classes, s, m);
+  writeClasses(orig_classes, s, m);
 
   // Cont assigns
   if (mod->getContAssigns()) {
@@ -1367,18 +1348,14 @@ void UhdmWriter::writeInterface(ModuleDefinition* mod, interface_inst* m,
   writeDataTypes(mod->getDataTypeMap(), m, typespecs, s, true);
   // Ports
   std::vector<Signal*>& orig_ports = mod->getPorts();
-  VectorOfport* dest_ports = m->Ports(true);
-  VectorOfnet* dest_nets = m->Nets(true);
-  writePorts(orig_ports, m, dest_ports, dest_nets, s, modPortMap, signalBaseMap,
-             portMap, instance, mod);
+  writePorts(orig_ports, m, s, modPortMap, signalBaseMap, portMap, instance,
+             mod);
   std::vector<Signal*> orig_nets = mod->getSignals();
-  writeNets(mod, orig_nets, m, dest_nets, s, signalBaseMap, netMap, portMap,
-            instance);
+  writeNets(mod, orig_nets, m, s, signalBaseMap, netMap, portMap, instance);
 
   // Modports
   ModuleDefinition::ModPortSignalMap& orig_modports =
       mod->getModPortSignalMap();
-  VectorOfmodport* dest_modports = m->Modports(true);
   for (auto& orig_modport : orig_modports) {
     modport* dest_modport = s.MakeModport();
     // dest_modport->Interface(m); // Loop in elaboration!
@@ -1406,7 +1383,6 @@ void UhdmWriter::writeInterface(ModuleDefinition* mod, interface_inst* m,
       io->VpiDirection(direction);
       io->VpiParent(dest_modport);
     }
-    dest_modports->push_back(dest_modport);
   }
 
   // Cont assigns
@@ -1475,15 +1451,12 @@ void UhdmWriter::writeProgram(Program* mod, program* m, Serializer& s,
 
   // Ports
   std::vector<Signal*>& orig_ports = mod->getPorts();
-  VectorOfport* dest_ports = m->Ports(true);
-  VectorOfnet* dest_nets = m->Nets(true);
-  writePorts(orig_ports, m, dest_ports, dest_nets, s, modPortMap, signalBaseMap,
-             portMap, instance, mod);
+  writePorts(orig_ports, m, s, modPortMap, signalBaseMap, portMap, instance,
+             mod);
 
   // Nets
   std::vector<Signal*>& orig_nets = mod->getSignals();
-  writeNets(mod, orig_nets, m, dest_nets, s, signalBaseMap, netMap, portMap,
-            instance);
+  writeNets(mod, orig_nets, m, s, signalBaseMap, netMap, portMap, instance);
   mapLowConns(orig_ports, s, signalBaseMap);
 
   // Assertions
@@ -1495,13 +1468,11 @@ void UhdmWriter::writeProgram(Program* mod, program* m, Serializer& s,
 
   // Classes
   ClassNameClassDefinitionMultiMap& orig_classes = mod->getClassDefinitions();
-  VectorOfclass_defn* dest_classes = m->Class_defns(true);
-  writeClasses(orig_classes, dest_classes, s, m);
+  writeClasses(orig_classes, s, m);
 
   // Variables
   const DesignComponent::VariableMap& orig_vars = mod->getVariables();
-  VectorOfvariables* dest_vars = m->Variables(true);
-  writeVariables(orig_vars, m, dest_vars, s);
+  writeVariables(orig_vars, m, s);
 
   // Cont assigns
   if (mod->getContAssigns()) {
@@ -2410,7 +2381,6 @@ bool UhdmWriter::writeElabInterface(Serializer& s, ModuleInstance* instance,
   ModuleDefinition* module = (ModuleDefinition*)mod;
   ModuleDefinition::ModPortSignalMap& orig_modports =
       module->getModPortSignalMap();
-  VectorOfmodport* dest_modports = m->Modports(true);
   for (auto& orig_modport : orig_modports) {
     modport* dest_modport = s.MakeModport();
     dest_modport->Interface_inst(m);
@@ -2439,7 +2409,6 @@ bool UhdmWriter::writeElabInterface(Serializer& s, ModuleInstance* instance,
       io->VpiParent(dest_modport);
       ios->push_back(io);
     }
-    dest_modports->push_back(dest_modport);
   }
 
   if (mod) {
@@ -3266,14 +3235,13 @@ bool UhdmWriter::write(PathId uhdmFileId) {
 
     // Classes
     const auto& classes = m_design->getClassDefinitions();
-    VectorOfclass_defn* v4 = d->AllClasses(true);
     for (const auto& classNamePair : classes) {
       ClassDefinition* classDef = classNamePair.second;
       if (!classDef->getFileContents().empty() &&
           classDef->getType() == VObjectType::paClass_declaration) {
         class_defn* c = classDef->getUhdmScope<class_defn>();
         if (!c->VpiParent()) {
-          writeClass(classDef, v4, s, d);
+          writeClass(classDef, s, d);
         }
       }
     }

@@ -113,7 +113,7 @@ void ResolveSymbols::createFastLookup() {
               ClassDefinition* def = new ClassDefinition(
                   name, lib, pdef, m_fileData, subobject, nullptr, s);
               m_fileData->addClassDefinition(fullSubName, def);
-              pdef->getUnElabPackage()->addClassDefinition(name, def);
+              pdef->addClassDefinition(name, def);
             }
           }
           break;

@@ -71,23 +71,20 @@ class UhdmWriter final {
 
  private:
   void writePorts(std::vector<Signal*>& orig_ports, UHDM::BaseClass* parent,
-                  UHDM::VectorOfport* dest_ports, UHDM::VectorOfnet* dest_nets,
                   UHDM::Serializer& s, ModPortMap& modPortMap,
                   SignalBaseClassMap& signalBaseMap, SignalMap& signalMap,
                   ModuleInstance* instance = nullptr,
                   DesignComponent* mod = nullptr);
   void writeNets(DesignComponent* mod, std::vector<Signal*>& orig_nets,
-                 UHDM::BaseClass* parent, UHDM::VectorOfnet* dest_nets,
-                 UHDM::Serializer& s, SignalBaseClassMap& signalBaseMap,
-                 SignalMap& signalMap, SignalMap& portMap,
-                 ModuleInstance* instance = nullptr);
+                 UHDM::BaseClass* parent, UHDM::Serializer& s,
+                 SignalBaseClassMap& signalBaseMap, SignalMap& signalMap,
+                 SignalMap& portMap, ModuleInstance* instance = nullptr);
   void writeDataTypes(const DesignComponent::DataTypeMap& datatypeMap,
                       UHDM::BaseClass* parent,
                       UHDM::VectorOftypespec* dest_typespecs,
                       UHDM::Serializer& s, bool setParent);
   void writeVariables(const DesignComponent::VariableMap& orig_vars,
-                      UHDM::BaseClass* parent,
-                      UHDM::VectorOfvariables* dest_vars, UHDM::Serializer& s);
+                      UHDM::BaseClass* parent, UHDM::Serializer& s);
   void writeModule(ModuleDefinition* mod, UHDM::module_inst* m,
                    UHDM::Serializer& s, ModuleMap& moduleMap,
                    ModPortMap& modPortMap, ModuleInstance* instance = nullptr);
@@ -110,10 +107,8 @@ class UhdmWriter final {
                     bool elaborated);
 
   void writeClasses(ClassNameClassDefinitionMultiMap& orig_classes,
-                    UHDM::VectorOfclass_defn* dest_classes, UHDM::Serializer& s,
-                    UHDM::BaseClass* parent);
-  void writeClass(ClassDefinition* classDef,
-                  UHDM::VectorOfclass_defn* dest_classes, UHDM::Serializer& s,
+                    UHDM::Serializer& s, UHDM::BaseClass* parent);
+  void writeClass(ClassDefinition* classDef, UHDM::Serializer& s,
                   UHDM::BaseClass* parent);
   void writeProgram(Program* mod, UHDM::program* m, UHDM::Serializer& s,
                     ModPortMap& modPortMap, ModuleInstance* instance = nullptr);

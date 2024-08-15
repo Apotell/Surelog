@@ -45,6 +45,7 @@
 #include <uhdm/let_decl.h>
 #include <uhdm/logic_var.h>
 #include <uhdm/module_inst.h>
+#include <uhdm/multiclock_sequence_expr.h>
 #include <uhdm/named_event.h>
 #include <uhdm/named_event_array.h>
 #include <uhdm/operation.h>
@@ -131,6 +132,11 @@ void IntegrityChecker::reportInvalidLocation(
   const UHDM::any* const parent = object->VpiParent();
   if (parent == nullptr) return;
   if (parent->UhdmType() == UHDM::uhdmdesign) return;
+
+  if ((parent->UhdmType() == UHDM::uhdmbegin) && (parent->VpiLineNo() == 0) &&
+      (parent->VpiEndLineNo() == 0) && (parent->VpiColumnNo() == 0) &&
+      (parent->VpiEndColumnNo() == 0))
+    return;
 
   // There are cases where things can be different files. e.g. PreprocTest
   if (object->VpiFile() != parent->VpiFile()) return;
@@ -487,109 +493,97 @@ void IntegrityChecker::enterAny(const UHDM::any* const object) {
     reportDuplicates(object, objectAsScope->Virtual_interface_vars(),
                      "Virtual_interface_vars");
   }
-  if (const UHDM::udp_defn* const objectAsUdpDefn =
+  if (const UHDM::udp_defn* const objectAsT =
           any_cast<UHDM::udp_defn>(object)) {
-    reportDuplicates(object, objectAsUdpDefn->Io_decls(), "Io_decls");
-    reportDuplicates(object, objectAsUdpDefn->Table_entrys(), "Table_entrys");
+    reportDuplicates(object, objectAsT->Io_decls(), "Io_decls");
+    reportDuplicates(object, objectAsT->Table_entrys(), "Table_entrys");
   }
-  if (const UHDM::class_defn* const objectAsClassDefn =
+  if (const UHDM::class_defn* const objectAsT =
           any_cast<UHDM::class_defn>(object)) {
-    reportDuplicates(object, objectAsClassDefn->Deriveds(), "Deriveds");
-    reportDuplicates(object, objectAsClassDefn->Class_typespecs(),
-                     "Class_typespecs");
-    reportDuplicates(object, objectAsClassDefn->Constraints(), "Constraints");
-    reportDuplicates(object, objectAsClassDefn->Task_funcs(), "Task_funcs");
+    reportDuplicates(object, objectAsT->Deriveds(), "Deriveds");
+    reportDuplicates(object, objectAsT->Class_typespecs(), "Class_typespecs");
+    reportDuplicates(object, objectAsT->Constraints(), "Constraints");
+    reportDuplicates(object, objectAsT->Task_funcs(), "Task_funcs");
   }
-  if (const UHDM::class_obj* const objectAsClassObj =
+  if (const UHDM::class_obj* const objectAsT =
           any_cast<UHDM::class_obj>(object)) {
-    reportDuplicates(object, objectAsClassObj->Constraints(), "Constraints");
-    reportDuplicates(object, objectAsClassObj->Messages(), "Messages");
-    reportDuplicates(object, objectAsClassObj->Task_funcs(), "Task_funcs");
-    reportDuplicates(object, objectAsClassObj->Threads(), "Threads");
+    reportDuplicates(object, objectAsT->Constraints(), "Constraints");
+    reportDuplicates(object, objectAsT->Messages(), "Messages");
+    reportDuplicates(object, objectAsT->Task_funcs(), "Task_funcs");
+    reportDuplicates(object, objectAsT->Threads(), "Threads");
   }
-  if (const UHDM::instance* const objectAsInstance =
+  if (const UHDM::instance* const objectAsT =
           any_cast<UHDM::instance>(object)) {
-    reportDuplicates(object, objectAsInstance->Array_nets(), "Array_nets");
-    reportDuplicates(object, objectAsInstance->Assertions(), "Assertions");
-    reportDuplicates(object, objectAsInstance->Class_defns(), "Class_defns");
-    reportDuplicates(object, objectAsInstance->Nets(), "Nets");
-    reportDuplicates(object, objectAsInstance->Programs(), "Programs");
-    reportDuplicates(object, objectAsInstance->Program_arrays(),
-                     "Program_arrays");
-    reportDuplicates(object, objectAsInstance->Spec_params(), "Spec_params");
-    reportDuplicates(object, objectAsInstance->Task_funcs(), "Task_funcs");
+    reportDuplicates(object, objectAsT->Array_nets(), "Array_nets");
+    reportDuplicates(object, objectAsT->Assertions(), "Assertions");
+    reportDuplicates(object, objectAsT->Class_defns(), "Class_defns");
+    reportDuplicates(object, objectAsT->Nets(), "Nets");
+    reportDuplicates(object, objectAsT->Programs(), "Programs");
+    reportDuplicates(object, objectAsT->Program_arrays(), "Program_arrays");
+    reportDuplicates(object, objectAsT->Spec_params(), "Spec_params");
+    reportDuplicates(object, objectAsT->Task_funcs(), "Task_funcs");
   }
-  if (const UHDM::checker_decl* const objectAsCheckerDecl =
+  if (const UHDM::checker_decl* const objectAsT =
           any_cast<UHDM::checker_decl>(object)) {
-    reportDuplicates(object, objectAsCheckerDecl->Ports(), "Ports");
-    reportDuplicates(object, objectAsCheckerDecl->Cont_assigns(),
-                     "Cont_assigns");
-    reportDuplicates(object, objectAsCheckerDecl->Process(), "Process");
+    reportDuplicates(object, objectAsT->Ports(), "Ports");
+    reportDuplicates(object, objectAsT->Cont_assigns(), "Cont_assigns");
+    reportDuplicates(object, objectAsT->Process(), "Process");
   }
-  if (const UHDM::checker_inst* const objectAsCheckerInst =
+  if (const UHDM::checker_inst* const objectAsT =
           any_cast<UHDM::checker_inst>(object)) {
-    reportDuplicates(object, objectAsCheckerInst->Ports(), "Ports");
+    reportDuplicates(object, objectAsT->Ports(), "Ports");
   }
-  if (const UHDM::interface_inst* const objectAsInterfaceInst =
+  if (const UHDM::interface_inst* const objectAsT =
           any_cast<UHDM::interface_inst>(object)) {
-    reportDuplicates(object, objectAsInterfaceInst->Clocking_blocks(),
+    reportDuplicates(object, objectAsT->Clocking_blocks(),
                      "Io_dClocking_blocksecls");
-    reportDuplicates(object, objectAsInterfaceInst->Cont_assigns(),
-                     "Cont_assigns");
-    reportDuplicates(object, objectAsInterfaceInst->Gen_scope_arrays(),
-                     "Gen_scope_arrays");
-    reportDuplicates(object, objectAsInterfaceInst->Gen_stmts(), "Gen_stmts");
-    reportDuplicates(object, objectAsInterfaceInst->Interface_arrays(),
-                     "Interface_arrays");
-    reportDuplicates(object, objectAsInterfaceInst->Interfaces(), "Interfaces");
-    reportDuplicates(object, objectAsInterfaceInst->Interface_tf_decls(),
+    reportDuplicates(object, objectAsT->Cont_assigns(), "Cont_assigns");
+    reportDuplicates(object, objectAsT->Gen_scope_arrays(), "Gen_scope_arrays");
+    reportDuplicates(object, objectAsT->Gen_stmts(), "Gen_stmts");
+    reportDuplicates(object, objectAsT->Interface_arrays(), "Interface_arrays");
+    reportDuplicates(object, objectAsT->Interfaces(), "Interfaces");
+    reportDuplicates(object, objectAsT->Interface_tf_decls(),
                      "Interface_tf_decls");
-    reportDuplicates(object, objectAsInterfaceInst->Mod_paths(), "Mod_paths");
-    reportDuplicates(object, objectAsInterfaceInst->Modports(), "Modports");
-    reportDuplicates(object, objectAsInterfaceInst->Ports(), "Ports");
-    reportDuplicates(object, objectAsInterfaceInst->Process(), "Process");
-    reportDuplicates(object, objectAsInterfaceInst->Elab_tasks(), "Elab_tasks");
+    reportDuplicates(object, objectAsT->Mod_paths(), "Mod_paths");
+    reportDuplicates(object, objectAsT->Modports(), "Modports");
+    reportDuplicates(object, objectAsT->Ports(), "Ports");
+    reportDuplicates(object, objectAsT->Process(), "Process");
+    reportDuplicates(object, objectAsT->Elab_tasks(), "Elab_tasks");
   }
-  if (const UHDM::module_inst* const objectAsModuleInst =
+  if (const UHDM::module_inst* const objectAsT =
           any_cast<UHDM::module_inst>(object)) {
-    reportDuplicates(object, objectAsModuleInst->Alias_stmts(), "Alias_stmts");
-    reportDuplicates(object, objectAsModuleInst->Clocking_blocks(),
-                     "Clocking_blocks");
-    reportDuplicates(object, objectAsModuleInst->Cont_assigns(),
-                     "Cont_assigns");
-    reportDuplicates(object, objectAsModuleInst->Def_params(), "Def_params");
-    reportDuplicates(object, objectAsModuleInst->Gen_scope_arrays(),
-                     "Gen_scope_arrays");
-    reportDuplicates(object, objectAsModuleInst->Gen_stmts(), "Gen_stmts");
-    reportDuplicates(object, objectAsModuleInst->Interface_arrays(),
-                     "Interface_arrays");
-    reportDuplicates(object, objectAsModuleInst->Interfaces(), "Interfaces");
-    reportDuplicates(object, objectAsModuleInst->Io_decls(), "Io_decls");
-    reportDuplicates(object, objectAsModuleInst->Mod_paths(), "Mod_paths");
-    reportDuplicates(object, objectAsModuleInst->Module_arrays(),
-                     "Module_arrays");
-    reportDuplicates(object, objectAsModuleInst->Modules(), "Modules");
-    reportDuplicates(object, objectAsModuleInst->Ports(), "Ports");
-    reportDuplicates(object, objectAsModuleInst->Primitives(), "Primitives");
-    reportDuplicates(object, objectAsModuleInst->Primitive_arrays(),
-                     "Primitive_arrays");
-    reportDuplicates(object, objectAsModuleInst->Process(), "Process");
-    reportDuplicates(object, objectAsModuleInst->Ref_modules(), "Ref_modules");
-    reportDuplicates(object, objectAsModuleInst->Tchks(), "Tchks");
-    reportDuplicates(object, objectAsModuleInst->Elab_tasks(), "Elab_tasks");
+    reportDuplicates(object, objectAsT->Alias_stmts(), "Alias_stmts");
+    reportDuplicates(object, objectAsT->Clocking_blocks(), "Clocking_blocks");
+    reportDuplicates(object, objectAsT->Cont_assigns(), "Cont_assigns");
+    reportDuplicates(object, objectAsT->Def_params(), "Def_params");
+    reportDuplicates(object, objectAsT->Gen_scope_arrays(), "Gen_scope_arrays");
+    reportDuplicates(object, objectAsT->Gen_stmts(), "Gen_stmts");
+    reportDuplicates(object, objectAsT->Interface_arrays(), "Interface_arrays");
+    reportDuplicates(object, objectAsT->Interfaces(), "Interfaces");
+    reportDuplicates(object, objectAsT->Io_decls(), "Io_decls");
+    reportDuplicates(object, objectAsT->Mod_paths(), "Mod_paths");
+    reportDuplicates(object, objectAsT->Module_arrays(), "Module_arrays");
+    reportDuplicates(object, objectAsT->Modules(), "Modules");
+    reportDuplicates(object, objectAsT->Ports(), "Ports");
+    reportDuplicates(object, objectAsT->Primitives(), "Primitives");
+    reportDuplicates(object, objectAsT->Primitive_arrays(), "Primitive_arrays");
+    reportDuplicates(object, objectAsT->Process(), "Process");
+    reportDuplicates(object, objectAsT->Ref_modules(), "Ref_modules");
+    reportDuplicates(object, objectAsT->Tchks(), "Tchks");
+    reportDuplicates(object, objectAsT->Elab_tasks(), "Elab_tasks");
   }
-  if (const UHDM::program* const objectAsProgram =
-          any_cast<UHDM::program>(object)) {
-    reportDuplicates(object, objectAsProgram->Clocking_blocks(),
-                     "Clocking_blocks");
-    reportDuplicates(object, objectAsProgram->Cont_assigns(), "Cont_assigns");
-    reportDuplicates(object, objectAsProgram->Gen_scope_arrays(),
-                     "Gen_scope_arrays");
-    reportDuplicates(object, objectAsProgram->Interface_arrays(),
-                     "Interface_arrays");
-    reportDuplicates(object, objectAsProgram->Interfaces(), "Interfaces");
-    reportDuplicates(object, objectAsProgram->Ports(), "Ports");
-    reportDuplicates(object, objectAsProgram->Process(), "Process");
+  if (const UHDM::program* const objectAsT = any_cast<UHDM::program>(object)) {
+    reportDuplicates(object, objectAsT->Clocking_blocks(), "Clocking_blocks");
+    reportDuplicates(object, objectAsT->Cont_assigns(), "Cont_assigns");
+    reportDuplicates(object, objectAsT->Gen_scope_arrays(), "Gen_scope_arrays");
+    reportDuplicates(object, objectAsT->Interface_arrays(), "Interface_arrays");
+    reportDuplicates(object, objectAsT->Interfaces(), "Interfaces");
+    reportDuplicates(object, objectAsT->Ports(), "Ports");
+    reportDuplicates(object, objectAsT->Process(), "Process");
+  }
+  if (const UHDM::multiclock_sequence_expr* const objectAsT =
+          any_cast<UHDM::multiclock_sequence_expr>(object)) {
+    reportDuplicates(object, objectAsT->Clocked_seqs(), "Clocked_seqs");
   }
 
   // Known Issues!
@@ -779,6 +773,522 @@ void IntegrityChecker::enterAny(const UHDM::any* const object) {
     reportAmbigiousMembership(parentAsScope->Scopes(),
                               any_cast<UHDM::scope>(object));
   }
+}
+
+void IntegrityChecker::enterAlias_stmts(
+    const UHDM::any* const object, const UHDM::VectorOfalias_stmt& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterAllClasses(
+    const UHDM::any* const object, const UHDM::VectorOfclass_defn& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterAllInterfaces(
+    const UHDM::any* const object,
+    const UHDM::VectorOfinterface_inst& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterAllModules(
+    const UHDM::any* const object, const UHDM::VectorOfmodule_inst& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterAllPackages(const UHDM::any* const object,
+                                        const UHDM::VectorOfpackage& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterAllPrograms(const UHDM::any* const object,
+                                        const UHDM::VectorOfprogram& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterAllUdps(const UHDM::any* const object,
+                                    const UHDM::VectorOfudp_defn& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterArguments(const UHDM::any* const object,
+                                      const UHDM::VectorOfexpr& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterArray_nets(const UHDM::any* const object,
+                                       const UHDM::VectorOfarray_net& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterArray_var_mems(
+    const UHDM::any* const object, const UHDM::VectorOfarray_var& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterArray_vars(const UHDM::any* const object,
+                                       const UHDM::VectorOfarray_var& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterAssertions(const UHDM::any* const object,
+                                       const UHDM::VectorOfany& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterAttributes(const UHDM::any* const object,
+                                       const UHDM::VectorOfattribute& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterBits(const UHDM::any* const object,
+                                 const UHDM::VectorOfport_bit& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterCase_items(const UHDM::any* const object,
+                                       const UHDM::VectorOfcase_item& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterCase_property_items(
+    const UHDM::any* const object,
+    const UHDM::VectorOfcase_property_item& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterClass_defns(
+    const UHDM::any* const object, const UHDM::VectorOfclass_defn& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterClass_typespecs(
+    const UHDM::any* const object,
+    const UHDM::VectorOfclass_typespec& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterClocked_seqs(
+    const UHDM::any* const object, const UHDM::VectorOfclocked_seq& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterClocking_blocks(
+    const UHDM::any* const object,
+    const UHDM::VectorOfclocking_block& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterClocking_io_decls(
+    const UHDM::any* const object,
+    const UHDM::VectorOfclocking_io_decl& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterConcurrent_assertions(
+    const UHDM::any* const object,
+    const UHDM::VectorOfconcurrent_assertions& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterConstraint_exprs(
+    const UHDM::any* const object,
+    const UHDM::VectorOfconstraint_expr& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterConstraint_items(const UHDM::any* const object,
+                                             const UHDM::VectorOfany& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterConstraints(
+    const UHDM::any* const object, const UHDM::VectorOfconstraint& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterCont_assign_bits(
+    const UHDM::any* const object,
+    const UHDM::VectorOfcont_assign_bit& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterCont_assigns(
+    const UHDM::any* const object, const UHDM::VectorOfcont_assign& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterDef_params(const UHDM::any* const object,
+                                       const UHDM::VectorOfdef_param& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterDeriveds(const UHDM::any* const object,
+                                     const UHDM::VectorOfclass_defn& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterDist_items(const UHDM::any* const object,
+                                       const UHDM::VectorOfdist_item& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterDrivers(const UHDM::any* const object,
+                                    const UHDM::VectorOfnet_drivers& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterElab_tasks(const UHDM::any* const object,
+                                       const UHDM::VectorOftf_call& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterElements(const UHDM::any* const object,
+                                     const UHDM::VectorOfany& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterElse_constraint_exprs(
+    const UHDM::any* const object,
+    const UHDM::VectorOfconstraint_expr& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterEnum_consts(
+    const UHDM::any* const object, const UHDM::VectorOfenum_const& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterExpr_indexes(const UHDM::any* const object,
+                                         const UHDM::VectorOfexpr& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterExpr_tchk_terms(const UHDM::any* const object,
+                                            const UHDM::VectorOfany& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterExpressions(const UHDM::any* const object,
+                                        const UHDM::VectorOfexpr& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterExprs(const UHDM::any* const object,
+                                  const UHDM::VectorOfexpr& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterFunctions(const UHDM::any* const object,
+                                      const UHDM::VectorOffunction& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterGen_scope_arrays(
+    const UHDM::any* const object,
+    const UHDM::VectorOfgen_scope_array& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterGen_scopes(const UHDM::any* const object,
+                                       const UHDM::VectorOfgen_scope& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterGen_stmts(const UHDM::any* const object,
+                                      const UHDM::VectorOfany& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterIncludes(const UHDM::any* const object,
+                                     const UHDM::VectorOfsource_file& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterIndexes(const UHDM::any* const object,
+                                    const UHDM::VectorOfexpr& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterInstance_items(const UHDM::any* const object,
+                                           const UHDM::VectorOfany& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterInstances(const UHDM::any* const object,
+                                      const UHDM::VectorOfinstance& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterInterface_arrays(
+    const UHDM::any* const object,
+    const UHDM::VectorOfinterface_array& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterInterface_tf_decls(
+    const UHDM::any* const object,
+    const UHDM::VectorOfinterface_tf_decl& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterInterfaces(
+    const UHDM::any* const object,
+    const UHDM::VectorOfinterface_inst& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterIo_decls(const UHDM::any* const object,
+                                     const UHDM::VectorOfio_decl& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterLet_decls(const UHDM::any* const object,
+                                      const UHDM::VectorOflet_decl& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterLoads(const UHDM::any* const object,
+                                  const UHDM::VectorOfnet_loads& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterLocal_drivers(
+    const UHDM::any* const object, const UHDM::VectorOfnet_drivers& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterLocal_loads(
+    const UHDM::any* const object, const UHDM::VectorOfnet_loads& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterLogic_vars(const UHDM::any* const object,
+                                       const UHDM::VectorOflogic_var& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterMembers(
+    const UHDM::any* const object,
+    const UHDM::VectorOftypespec_member& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterMessages(const UHDM::any* const object,
+                                     const UHDM::VectorOfexpr& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterMod_paths(const UHDM::any* const object,
+                                      const UHDM::VectorOfmod_path& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterModports(const UHDM::any* const object,
+                                     const UHDM::VectorOfmodport& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterModule_arrays(
+    const UHDM::any* const object, const UHDM::VectorOfmodule_array& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterModules(const UHDM::any* const object,
+                                    const UHDM::VectorOfmodule_inst& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterNamed_event_arrays(
+    const UHDM::any* const object,
+    const UHDM::VectorOfnamed_event_array& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterNamed_event_sequence_expr_groups(
+    const UHDM::any* const object, const UHDM::VectorOfany& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterNamed_events(
+    const UHDM::any* const object, const UHDM::VectorOfnamed_event& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterNet_bits(const UHDM::any* const object,
+                                     const UHDM::VectorOfnet_bit& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterNets(const UHDM::any* const object,
+                                 const UHDM::VectorOfnet& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterNets(const UHDM::any* const object,
+                                 const UHDM::VectorOfnets& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterOperands(const UHDM::any* const object,
+                                     const UHDM::VectorOfany& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterParam_assigns(
+    const UHDM::any* const object, const UHDM::VectorOfparam_assign& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterParameters(const UHDM::any* const object,
+                                       const UHDM::VectorOfany& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterPath_elems(const UHDM::any* const object,
+                                       const UHDM::VectorOfany& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterPath_terms(const UHDM::any* const object,
+                                       const UHDM::VectorOfpath_term& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterPorts(
+    const UHDM::any* const object,
+    const UHDM::VectorOfchecker_inst_port& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterPorts(const UHDM::any* const object,
+                                  const UHDM::VectorOfchecker_port& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterPorts(const UHDM::any* const object,
+                                  const UHDM::VectorOfport& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterPorts(const UHDM::any* const object,
+                                  const UHDM::VectorOfports& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterPreproc_macro_definitions(
+    const UHDM::any* const object,
+    const UHDM::VectorOfpreproc_macro_definition& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterPreproc_macro_instances(
+    const UHDM::any* const object,
+    const UHDM::VectorOfpreproc_macro_instance& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterPrim_terms(const UHDM::any* const object,
+                                       const UHDM::VectorOfprim_term& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterPrimitive_arrays(
+    const UHDM::any* const object,
+    const UHDM::VectorOfprimitive_array& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterPrimitives(const UHDM::any* const object,
+                                       const UHDM::VectorOfprimitive& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterProcess(const UHDM::any* const object,
+                                    const UHDM::VectorOfprocess_stmt& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterProgram_arrays(
+    const UHDM::any* const object, const UHDM::VectorOfprogram& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterProgram_arrays(
+    const UHDM::any* const object, const UHDM::VectorOfprogram_array& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterPrograms(const UHDM::any* const object,
+                                     const UHDM::VectorOfprogram& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterProp_formal_decls(
+    const UHDM::any* const object,
+    const UHDM::VectorOfprop_formal_decl& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterProperty_decls(
+    const UHDM::any* const object, const UHDM::VectorOfproperty_decl& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterRanges(const UHDM::any* const object,
+                                   const UHDM::VectorOfrange& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterRef_modules(
+    const UHDM::any* const object, const UHDM::VectorOfref_module& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterRegs(const UHDM::any* const object,
+                                 const UHDM::VectorOfreg& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterScopes(const UHDM::any* const object,
+                                   const UHDM::VectorOfscope& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterSeq_formal_decls(
+    const UHDM::any* const object,
+    const UHDM::VectorOfseq_formal_decl& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterSequence_decls(
+    const UHDM::any* const object, const UHDM::VectorOfsequence_decl& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterSolve_afters(const UHDM::any* const object,
+                                         const UHDM::VectorOfexpr& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterSolve_befores(const UHDM::any* const object,
+                                          const UHDM::VectorOfexpr& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterSource_files(
+    const UHDM::any* const object, const UHDM::VectorOfsource_file& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterSpec_params(
+    const UHDM::any* const object, const UHDM::VectorOfspec_param& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterStmts(const UHDM::any* const object,
+                                  const UHDM::VectorOfany& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterTable_entrys(
+    const UHDM::any* const object, const UHDM::VectorOftable_entry& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterTask_func_decls(
+    const UHDM::any* const object,
+    const UHDM::VectorOftask_func_decl& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterTask_funcs(const UHDM::any* const object,
+                                       const UHDM::VectorOftask_func& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterTasks(const UHDM::any* const object,
+                                  const UHDM::VectorOftask& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterTchk_terms(const UHDM::any* const object,
+                                       const UHDM::VectorOftchk_term& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterTchks(const UHDM::any* const object,
+                                  const UHDM::VectorOftchk& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterTf_call_args(const UHDM::any* const object,
+                                         const UHDM::VectorOfany& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterThreads(const UHDM::any* const object,
+                                    const UHDM::VectorOfthread_obj& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterTopModules(
+    const UHDM::any* const object, const UHDM::VectorOfmodule_inst& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterTopPackages(const UHDM::any* const object,
+                                        const UHDM::VectorOfpackage& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterTypespecs(const UHDM::any* const object,
+                                      const UHDM::VectorOftypespec& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterVar_bits(const UHDM::any* const object,
+                                     const UHDM::VectorOfvar_bit& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterVar_selects(
+    const UHDM::any* const object, const UHDM::VectorOfvar_select& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterVariable_drivers(const UHDM::any* const object,
+                                             const UHDM::VectorOfany& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterVariable_loads(const UHDM::any* const object,
+                                           const UHDM::VectorOfany& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterVariables(const UHDM::any* const object,
+                                      const UHDM::VectorOfvariables& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterVirtual_interface_vars(
+    const UHDM::any* const object,
+    const UHDM::VectorOfvirtual_interface_var& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterVpiArguments(const UHDM::any* const object,
+                                         const UHDM::VectorOfany& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterVpiConditions(const UHDM::any* const object,
+                                          const UHDM::VectorOfany& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterVpiExprs(const UHDM::any* const object,
+                                     const UHDM::VectorOfany& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterVpiForIncStmts(const UHDM::any* const object,
+                                           const UHDM::VectorOfany& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterVpiForInitStmts(const UHDM::any* const object,
+                                            const UHDM::VectorOfany& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterVpiLoopVars(const UHDM::any* const object,
+                                        const UHDM::VectorOfany& objects) {
+  reportDuplicates(object, &objects, "");
+}
+void IntegrityChecker::enterVpiUses(const UHDM::any* const object,
+                                    const UHDM::VectorOfany& objects) {
+  reportDuplicates(object, &objects, "");
 }
 
 void IntegrityChecker::check(const UHDM::design* const object) {

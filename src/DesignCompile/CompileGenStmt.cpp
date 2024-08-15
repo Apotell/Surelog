@@ -82,23 +82,20 @@ UHDM::VectorOfany* CompileHelper::compileGenStmt(ModuleDefinition* component,
     gen_region* genreg = s.MakeGen_region();
     fC->populateCoreMembers(id, id, genreg);
     genstmt = genreg;
-    const ScopedScope scopedScope(genreg);
-    ModuleDefinition* subComponent =
-        new ModuleDefinition("GENERATE_STMT_PLACEHOLDER", fC, id, s);
-    component = subComponent;
-    checkForLoops(true);
-    VectorOfany* stmts = compileStmt(component, fC, stmtId, compileDesign,
-                                     Reduce::No, nullptr, nullptr, true);
-    checkForLoops(false);
+    const ScopedScope scopedScope1(genreg);
 
     begin* stmt = s.MakeBegin();
     stmt->VpiParent(genreg);
     fC->populateCoreMembers(stmtId, stmtId, stmt);
     genreg->VpiStmt(stmt);
-    if (stmts != nullptr) {
+
+    checkForLoops(true);
+    const ScopedScope scopedScope2(stmt);
+    if (VectorOfany* stmts = compileStmt(component, fC, stmtId, compileDesign,
+                                         Reduce::No, stmt, nullptr, true)) {
       stmt->Stmts(stmts);
-      for (auto s : *stmts) s->VpiParent(stmt);
     }
+    checkForLoops(false);
 
     NodeId blockNameId = fC->Child(fC->Child(stmtId));
     if (fC->Type(blockNameId) == VObjectType::slStringConst) {
@@ -132,27 +129,20 @@ UHDM::VectorOfany* CompileHelper::compileGenStmt(ModuleDefinition* component,
           cond->VpiParent(genif);
           genif->VpiCondition(cond);
         }
-        checkForLoops(true);
-        ModuleDefinition* subComponent =
-            new ModuleDefinition("GENERATE_STMT_PLACEHOLDER", fC, id, s);
-        component = subComponent;
-        VectorOfany* stmts = compileStmt(component, fC, stmtId, compileDesign,
-                                         Reduce::No, nullptr, nullptr, true);
-        checkForLoops(false);
 
         begin* stmt1 = s.MakeBegin();
         fC->populateCoreMembers(stmtId, stmtId, stmt1);
         stmt1->VpiParent(genif);
         genif->VpiStmt(stmt1);
-        if (stmts != nullptr) {
+
+        checkForLoops(true);
+        const ScopedScope scopedScope1(stmt1);
+        if (VectorOfany* stmts =
+                compileStmt(component, fC, stmtId, compileDesign, Reduce::No,
+                            stmt1, nullptr, true)) {
           stmt1->Stmts(stmts);
-          for (auto s : *stmts) s->VpiParent(stmt1);
         }
-        if (scope* const s = subComponent->getUhdmScope<scope>()) {
-          if (auto* const typespecs = s->Typespecs()) {
-            for (auto t : *typespecs) t->VpiParent(stmt1, true);
-          }
-        }
+        checkForLoops(false);
 
         NodeId blockNameId = fC->Child(fC->Child(stmtId));
         if (fC->Type(blockNameId) == VObjectType::slStringConst) {
@@ -161,27 +151,20 @@ UHDM::VectorOfany* CompileHelper::compileGenStmt(ModuleDefinition* component,
 
         NodeId ElseId = fC->Sibling(stmtId);
         NodeId elseStmtId = fC->Sibling(ElseId);
-        checkForLoops(true);
-        subComponent =
-            new ModuleDefinition("GENERATE_STMT_PLACEHOLDER", fC, id, s);
-        component = subComponent;
-        stmts = compileStmt(component, fC, elseStmtId, compileDesign,
-                            Reduce::No, nullptr, nullptr, true);
-        checkForLoops(false);
 
         begin* stmt2 = s.MakeBegin();
         fC->populateCoreMembers(elseStmtId, elseStmtId, stmt2);
         stmt2->VpiParent(genif);
         genif->VpiElseStmt(stmt2);
-        if (stmts != nullptr) {
+
+        checkForLoops(true);
+        const ScopedScope scopedScope2(stmt2);
+        if (VectorOfany* stmts =
+                compileStmt(component, fC, elseStmtId, compileDesign,
+                            Reduce::No, stmt2, nullptr, true)) {
           stmt2->Stmts(stmts);
-          for (auto s : *stmts) s->VpiParent(stmt2);
         }
-        if (scope* const s = subComponent->getUhdmScope<scope>()) {
-          if (auto* const typespecs = s->Typespecs()) {
-            for (auto t : *typespecs) t->VpiParent(stmt2, true);
-          }
-        }
+        checkForLoops(false);
 
         blockNameId = fC->Child(fC->Child(elseStmtId));
         if (fC->Type(blockNameId) == VObjectType::slStringConst) {
@@ -196,27 +179,20 @@ UHDM::VectorOfany* CompileHelper::compileGenStmt(ModuleDefinition* component,
           cond->VpiParent(genif);
         }
         fC->populateCoreMembers(id, id, genif);
-        ModuleDefinition* subComponent =
-            new ModuleDefinition("GENERATE_STMT_PLACEHOLDER", fC, id, s);
-        component = subComponent;
-        checkForLoops(true);
-        VectorOfany* stmts = compileStmt(component, fC, stmtId, compileDesign,
-                                         Reduce::No, nullptr, nullptr, true);
-        checkForLoops(false);
 
         begin* stmt = s.MakeBegin();
         fC->populateCoreMembers(stmtId, stmtId, stmt);
         stmt->VpiParent(genif);
         genif->VpiStmt(stmt);
-        if (stmts != nullptr) {
+
+        checkForLoops(true);
+        const ScopedScope scopedScope(stmt);
+        if (VectorOfany* stmts =
+                compileStmt(component, fC, stmtId, compileDesign, Reduce::No,
+                            stmt, nullptr, true)) {
           stmt->Stmts(stmts);
-          for (auto s : *stmts) s->VpiParent(stmt);
         }
-        if (scope* const s = subComponent->getUhdmScope<scope>()) {
-          if (auto* const typespecs = s->Typespecs()) {
-            for (auto t : *typespecs) t->VpiParent(stmt, true);
-          }
-        }
+        checkForLoops(false);
 
         NodeId blockNameId = fC->Child(fC->Child(stmtId));
         if (fC->Type(blockNameId) == VObjectType::slStringConst) {
@@ -250,30 +226,29 @@ UHDM::VectorOfany* CompileHelper::compileGenStmt(ModuleDefinition* component,
           checkForLoops(false);
           stmtId = fC->Sibling(stmtId);
         }
-        ModuleDefinition* subComponent =
-            new ModuleDefinition("GENERATE_STMT_PLACEHOLDER", fC, id, s);
-        component = subComponent;
-        checkForLoops(true);
-        VectorOfany* stmts = compileStmt(component, fC, stmtId, compileDesign,
-                                         Reduce::No, nullptr, nullptr, true);
-        checkForLoops(false);
+
         case_item* citem = s.MakeCase_item();
         citem->VpiParent(gencase);
         fC->populateCoreMembers(tmp, tmp, citem);
         items->push_back(citem);
-        VectorOfany* exprs = citem->VpiExprs(true);
         if (ex) {
           ex->VpiParent(citem);
-          exprs->push_back(ex);
+          citem->VpiExprs(true)->push_back(ex);
         }
+
         begin* stmt = s.MakeBegin();
         stmt->VpiParent(citem);
         fC->populateCoreMembers(stmtId, stmtId, stmt);
         citem->Stmt(stmt);
-        if (stmts != nullptr) {
+
+        checkForLoops(true);
+        const ScopedScope scopedScope(stmt);
+        if (VectorOfany* stmts =
+                compileStmt(component, fC, stmtId, compileDesign, Reduce::No,
+                            stmt, nullptr, true)) {
           stmt->Stmts(stmts);
-          for (auto s : *stmts) s->VpiParent(stmt);
         }
+        checkForLoops(false);
 
         NodeId blockNameId = fC->Child(fC->Child(stmtId));
         if (fC->Type(blockNameId) == VObjectType::slStringConst) {
@@ -290,11 +265,9 @@ UHDM::VectorOfany* CompileHelper::compileGenStmt(ModuleDefinition* component,
     gen_for* genfor = s.MakeGen_for();
     fC->populateCoreMembers(id, id, genfor);
     genstmt = genfor;
-    const ScopedScope scopedScope(genfor);
+    const ScopedScope scopedScope1(genfor);
 
     // Var init
-    VectorOfany* stmts = genfor->VpiForInitStmts(true);
-
     NodeId Var = fC->Child(varInit);
     NodeId Expression = fC->Sibling(Var);
     assignment* assign_stmt = s.MakeAssignment();
@@ -315,7 +288,7 @@ UHDM::VectorOfany* CompileHelper::compileGenStmt(ModuleDefinition* component,
       assign_stmt->Rhs(rhs);
     }
     checkForLoops(false);
-    stmts->push_back(assign_stmt);
+    genfor->VpiForInitStmts(true)->push_back(assign_stmt);
 
     // Condition
     checkForLoops(true);
@@ -358,22 +331,19 @@ UHDM::VectorOfany* CompileHelper::compileGenStmt(ModuleDefinition* component,
 
     // Stmts
     NodeId genBlock = fC->Sibling(iteration);
-    ModuleDefinition* subComponent =
-        new ModuleDefinition("GENERATE_STMT_PLACEHOLDER", fC, id, s);
-    component = subComponent;
-    checkForLoops(true);
-    stmts = compileStmt(component, fC, genBlock, compileDesign, Reduce::No,
-                        genfor, nullptr, true);
-    checkForLoops(false);
 
     begin* stmt = s.MakeBegin();
     stmt->VpiParent(genfor);
     fC->populateCoreMembers(genBlock, genBlock, stmt);
     genfor->VpiStmt(stmt);
-    if (stmts != nullptr) {
+
+    checkForLoops(true);
+    const ScopedScope scopedScope2(stmt);
+    if (VectorOfany* stmts = compileStmt(component, fC, genBlock, compileDesign,
+                                         Reduce::No, stmt, nullptr, true)) {
       stmt->Stmts(stmts);
-      for (auto s : *stmts) s->VpiParent(stmt);
     }
+    checkForLoops(false);
 
     NodeId blockNameId = fC->Child(fC->Child(genBlock));
     if (fC->Type(blockNameId) == VObjectType::slStringConst) {

@@ -800,9 +800,7 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
       break;
     }
     case VObjectType::paFOR: {
-      UHDM::any* loop =
-          compileForLoop(component, fC, the_stmt, compileDesign, pstmt);
-      stmt = loop;
+      stmt = compileForLoop(component, fC, the_stmt, compileDesign, true);
       break;
     }
     case VObjectType::paRETURN: {
@@ -1743,7 +1741,7 @@ std::vector<io_decl*>* CompileHelper::compileTfPortList(
       tf_data_type = fC->Sibling(tf_data_type_or_implicit);
       tf_param_name = fC->Sibling(tf_data_type);
     }
-    fC->populateCoreMembers(tf_param_name, tf_param_name, decl);
+    fC->populateCoreMembers(tf_port_item, tf_param_name, decl);
     NodeId type = fC->Child(tf_data_type);
     if (fC->Type(type) == VObjectType::paVIRTUAL) type = fC->Sibling(type);
     if (prevType == InvalidNodeId) prevType = type;
@@ -2828,8 +2826,9 @@ UHDM::any* CompileHelper::compileForLoop(DesignComponent* component,
           fC->populateCoreMembers(Var, Var, var);
         }
 
-        if (expr* rhs = (expr*)compileExpression(component, fC, Expression,
-                                                 compileDesign, Reduce::No)) {
+        if (expr* rhs =
+                (expr*)compileExpression(component, fC, Expression,
+                                         compileDesign, Reduce::No, for_stmt)) {
           rhs->VpiParent(assign_stmt);
           assign_stmt->Rhs(rhs);
         }
@@ -2880,9 +2879,8 @@ UHDM::any* CompileHelper::compileForLoop(DesignComponent* component,
 
   // Condition
   if (Condition) {
-    expr* cond = (expr*)compileExpression(component, fC, Condition,
-                                          compileDesign, Reduce::No);
-    if (cond) {
+    if (expr* cond = (expr*)compileExpression(
+            component, fC, Condition, compileDesign, Reduce::No, for_stmt)) {
       cond->VpiParent(for_stmt);
       for_stmt->VpiCondition(cond);
     }

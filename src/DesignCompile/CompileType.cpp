@@ -288,6 +288,7 @@ UHDM::any* CompileHelper::compileVariable(
     obj->VpiParent(path);
     elems->push_back(obj);
     fC->populateCoreMembers(variable, variable, obj);
+    path->VpiFile(obj->VpiFile());
     while (fC->Type(Packed_dimension) == VObjectType::slStringConst) {
       ref_obj* obj = s.MakeRef_obj();
       const std::string_view name = fC->SymName(Packed_dimension);
@@ -987,6 +988,7 @@ any* CompileHelper::compileVariable(
           ref_typespec* rt = s.MakeRef_typespec();
           rt->VpiParent(obj);
           obj->Typespec(rt);
+          rt->VpiName(fC->SymName(fC->Child(sig->getTypeSpecId())));
           NodeId nameId =
               sig->getTypeSpecId() ? sig->getTypeSpecId() : signalId;
           fC->populateCoreMembers(nameId, nameId, rt);
@@ -1143,7 +1145,7 @@ any* CompileHelper::compileVariable(
   }
 
   if (unpackedDimensions) {
-    array_var* array_var = s.MakeArray_var();
+    UHDM::array_var* array_var = s.MakeArray_var();
     array_var->VpiParent(pscope);
     bool dynamic = false;
     bool associative = false;
@@ -1330,6 +1332,10 @@ any* CompileHelper::compileVariable(
     array_var->VpiRandType(vpiNotRand);
     array_var->VpiVisibility(vpiPublicVis);
     fC->populateCoreMembers(signalId, sig->getNodeId(), array_var);
+    if (unpackedDimensions && (unpackedDimensions->size() > 1)) {
+      array_var->VpiEndColumnNo(unpackedDimensions->back()->VpiEndColumnNo());
+    }
+
     obj->VpiParent(pscope);
     if ((array_var->Typespec() == nullptr) || associative) {
       array_var->Variables(true)->push_back((variables*)obj);
@@ -2147,7 +2153,7 @@ UHDM::typespec* CompileHelper::compileTypespec(
   int32_t size;
   VectorOfrange* ranges =
       compileRanges(component, fC, Packed_dimension, compileDesign, reduce,
-                    nullptr, instance, size, false);
+                    pstmt, instance, size, false);
   switch (the_type) {
     case VObjectType::paConstant_mintypmax_expression:
     case VObjectType::paConstant_primary: {

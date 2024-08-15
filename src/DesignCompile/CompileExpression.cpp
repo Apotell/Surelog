@@ -1305,6 +1305,11 @@ UHDM::any *CompileHelper::compileExpression(
   if (m_checkForLoops) {
     m_stackLevel++;
   }
+
+  if (pexpr == nullptr) pexpr = component->getUhdmScope();
+  if (pexpr == nullptr)
+    pexpr = compileDesign->getCompiler()->getDesign()->getUhdmDesign();
+
   FileSystem *const fileSystem = FileSystem::getInstance();
   UHDM::Serializer &s = compileDesign->getSerializer();
   UHDM::any *result = nullptr;

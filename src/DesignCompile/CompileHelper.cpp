@@ -1573,7 +1573,8 @@ void setDirectionAndType(DesignComponent* component, const FileContent* fC,
                          NodeId signal, VObjectType type,
                          VObjectType signal_type, NodeId packed_dimension,
                          bool is_signed, bool is_var, NodeId nodeType,
-                         UHDM::VectorOfattribute* attributes) {
+                         UHDM::VectorOfattribute* attributes,
+                         UHDM::Serializer& s) {
   ModuleDefinition* module =
       valuedcomponenti_cast<ModuleDefinition*>(component);
   VObjectType dir_type = VObjectType::slNoType;
@@ -1619,6 +1620,7 @@ void setDirectionAndType(DesignComponent* component, const FileContent* fC,
             new Signal(component, fC, fC->Parent(signal), signal, signal_type,
                        dir_type, packed_dimension,
                        /* unpackedDimension */ InvalidNodeId, is_signed);
+        sig->uhdmScopeModel(s.TopScope());
         sig->setStatic();
         if (is_var) sig->setVar();
         if (attributes) sig->attributes(attributes);
@@ -1690,6 +1692,7 @@ bool CompileHelper::compilePortDeclaration(DesignComponent* component,
             Signal* signal = new Signal(
                 component, fC, Port_expression, if_name_s, if_type_name_s,
                 VObjectType::slNoType, InvalidNodeId, false);
+            signal->uhdmScopeModel(compileDesign->getSerializer().TopScope());
             signal->setStatic();
             component->getPorts().push_back(signal);
           } else {
@@ -1697,6 +1700,7 @@ bool CompileHelper::compilePortDeclaration(DesignComponent* component,
                 new Signal(component, fC, Port_expression, if_type_name_s,
                            VObjectType::paData_type_or_implicit, port_direction,
                            InvalidNodeId, InvalidNodeId, false);
+            signal->uhdmScopeModel(compileDesign->getSerializer().TopScope());
             signal->setStatic();
             component->getPorts().push_back(signal);
           }
@@ -1707,6 +1711,7 @@ bool CompileHelper::compilePortDeclaration(DesignComponent* component,
           Signal* signal = new Signal(
               component, fC, id, id, VObjectType::slNoType,
               VObjectType::slNoType, InvalidNodeId, InvalidNodeId, false);
+          signal->uhdmScopeModel(compileDesign->getSerializer().TopScope());
           signal->setStatic();
           component->getPorts().push_back(signal);
         }
@@ -1763,6 +1768,7 @@ bool CompileHelper::compilePortDeclaration(DesignComponent* component,
             Signal* signal = new Signal(
                 component, fC, interface_identifier, identifier, interfIdName,
                 VObjectType::slNoType, unpackedDimension, false);
+            signal->uhdmScopeModel(compileDesign->getSerializer().TopScope());
             signal->setStatic();
             component->getSignals().push_back(signal);
             interface_identifier = fC->Sibling(interface_identifier);
@@ -1810,7 +1816,7 @@ bool CompileHelper::compilePortDeclaration(DesignComponent* component,
           }
           setDirectionAndType(component, fC, signal, subType, signal_type,
                               Packed_dimension, is_signed, is_var, nodeType,
-                              attributes);
+                              attributes, compileDesign->getSerializer());
           break;
         }
         default:
@@ -1877,7 +1883,11 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
                                   std::string_view prefix, bool signalIsPort,
                                   Reduce reduce) {
   Serializer& s = compileDesign->getSerializer();
-  UHDM::any* uhdmScope = comp->getUhdmScope();
+
+  UHDM::any* uhdmScope = sig->uhdmScopeModel();
+  if (uhdmScope == nullptr) uhdmScope = comp->getUhdmScope();
+  const ScopedScope scopedScope(uhdmScope);
+
   const FileContent* fC = sig->getFileContent();
   NodeId id = sig->getNodeId();
   NodeId packedDimension = sig->getPackedDimension();
@@ -2440,6 +2450,7 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
 
 bool CompileHelper::compileAnsiPortDeclaration(DesignComponent* component,
                                                const FileContent* fC, NodeId id,
+                                               CompileDesign* compileDesign,
                                                VObjectType& port_direction) {
   /*
   n<mem_if> u<3> t<StringConst> p<4> l<11>
@@ -2535,6 +2546,7 @@ bool CompileHelper::compileAnsiPortDeclaration(DesignComponent* component,
         new Signal(component, fC, id, identifier, signal_type, port_direction,
                    packedDimension, unpackedDimension, is_signed);
     p->setTypespecId(specParamId ? specParamId : nodeType);
+    p->uhdmScopeModel(compileDesign->getSerializer().TopScope());
     if (is_var) p->setVar();
     p->setDefaultValue(defaultValue);
     p->setStatic();
@@ -2543,6 +2555,7 @@ bool CompileHelper::compileAnsiPortDeclaration(DesignComponent* component,
         new Signal(component, fC, id, identifier, signal_type, port_direction,
                    packedDimension, unpackedDimension, is_signed);
     s->setTypespecId(specParamId ? specParamId : nodeType);
+    s->uhdmScopeModel(compileDesign->getSerializer().TopScope());
     if (is_var) s->setVar();
     s->setStatic();
     component->getSignals().push_back(s);
@@ -2563,6 +2576,7 @@ bool CompileHelper::compileAnsiPortDeclaration(DesignComponent* component,
     Signal* s =
         new Signal(component, fC, net_port_header, port_name, interface_name,
                    VObjectType::slNoType, unpacked_dimension, false);
+    s->uhdmScopeModel(compileDesign->getSerializer().TopScope());
     s->setStatic();
     s->setTypespecId(interface_name);
     component->getPorts().push_back(s);
@@ -2579,6 +2593,7 @@ bool CompileHelper::compileAnsiPortDeclaration(DesignComponent* component,
         Signal* signal = new Signal(
             component, fC, id, identifier, fC->Type(if_type_name_s),
             VObjectType::slNoType, InvalidNodeId, unpackedDimension, false);
+        signal->uhdmScopeModel(compileDesign->getSerializer().TopScope());
         signal->setStatic();
         component->getPorts().push_back(signal);
         // DO NOT create signals for interfaces:
@@ -2586,6 +2601,7 @@ bool CompileHelper::compileAnsiPortDeclaration(DesignComponent* component,
       } else {
         Signal* s = new Signal(component, fC, id, identifier, if_type_name_s,
                                VObjectType::slNoType, unpackedDimension, false);
+        s->uhdmScopeModel(compileDesign->getSerializer().TopScope());
         s->setStatic();
         s->setTypespecId(if_type_name_s);
         component->getPorts().push_back(s);
@@ -2612,11 +2628,13 @@ bool CompileHelper::compileAnsiPortDeclaration(DesignComponent* component,
         Signal* signal =
             new Signal(component, fC, id, identifier, dataType, port_direction,
                        packed, unpacked, is_signed);
+        signal->uhdmScopeModel(compileDesign->getSerializer().TopScope());
         signal->setTypespecId(specParamId);
         signal->setStatic();
         component->getPorts().push_back(signal);
         signal = new Signal(component, fC, id, identifier, dataType,
                             port_direction, packed, unpacked, is_signed);
+        signal->uhdmScopeModel(compileDesign->getSerializer().TopScope());
         signal->setTypespecId(specParamId);
         signal->setStatic();
         component->getSignals().push_back(signal);
@@ -2627,6 +2645,7 @@ bool CompileHelper::compileAnsiPortDeclaration(DesignComponent* component,
         Signal* signal =
             new Signal(component, fC, id, identifier, dataType, port_direction,
                        packed, InvalidNodeId, is_signed);
+        signal->uhdmScopeModel(compileDesign->getSerializer().TopScope());
         if (fC->Type(net_port_header) == VObjectType::paInterface_port_header) {
           signal->setTypespecId(identifier);
         }
@@ -2634,6 +2653,7 @@ bool CompileHelper::compileAnsiPortDeclaration(DesignComponent* component,
         component->getPorts().push_back(signal);
         signal = new Signal(component, fC, id, identifier, dataType,
                             port_direction, packed, InvalidNodeId, is_signed);
+        signal->uhdmScopeModel(compileDesign->getSerializer().TopScope());
         if (fC->Type(net_port_header) == VObjectType::paInterface_port_header) {
           signal->setTypespecId(identifier);
         }
@@ -2733,6 +2753,7 @@ bool CompileHelper::compileNetDeclaration(DesignComponent* component,
       Signal* sig =
           new Signal(component, fC, net_decl_assignment, signal, InvalidNodeId,
                      subnettype, Unpacked_dimension, false);
+      sig->uhdmScopeModel(compileDesign->getSerializer().TopScope());
       if (portRef) portRef->setLowConn(sig);
       sig->setDelay(delay);
       sig->setStatic();
@@ -2743,6 +2764,7 @@ bool CompileHelper::compileNetDeclaration(DesignComponent* component,
       Signal* sig = new Signal(component, fC, net_decl_assignment, signal,
                                nettype, VObjectType::slNoType, Packed_dimension,
                                Unpacked_dimension, false);
+      sig->uhdmScopeModel(compileDesign->getSerializer().TopScope());
       sig->setTypespecId(NetType);
       if (portRef) portRef->setLowConn(sig);
       sig->setDelay(delay);
@@ -2950,6 +2972,7 @@ bool CompileHelper::compileDataDeclaration(
         Signal* sig = new Signal(component, fC, var_decl, signal, sigType,
                                  VObjectType::slNoType, packedDimension,
                                  unpackedDimension, false);
+        sig->uhdmScopeModel(compileDesign->getSerializer().TopScope());
         sig->setTypespecId(data_type);
         if (is_const) sig->setConst();
         if (var_type) sig->setVar();

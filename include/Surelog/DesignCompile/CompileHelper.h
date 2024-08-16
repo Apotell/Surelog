@@ -134,6 +134,7 @@ class CompileHelper final {
 
   bool compileAnsiPortDeclaration(DesignComponent* component,
                                   const FileContent* fC, NodeId id,
+                                  CompileDesign* compileDesign,
                                   VObjectType& port_direction);
 
   bool elaborationSystemTask(DesignComponent* component, const FileContent* fC,

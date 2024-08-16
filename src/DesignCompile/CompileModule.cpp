@@ -610,7 +610,8 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
         }
         case VObjectType::paAnsi_port_declaration: {
           if (collectType != CollectType::DEFINITION) break;
-          m_helper.compileAnsiPortDeclaration(m_module, fC, id, port_direction);
+          m_helper.compileAnsiPortDeclaration(m_module, fC, id, m_compileDesign,
+                                              port_direction);
           m_attributes = nullptr;
           break;
         }
@@ -1117,7 +1118,8 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
         }
         case VObjectType::paAnsi_port_declaration: {
           if (collectType != CollectType::DEFINITION) break;
-          m_helper.compileAnsiPortDeclaration(m_module, fC, id, port_direction);
+          m_helper.compileAnsiPortDeclaration(m_module, fC, id, m_compileDesign,
+                                              port_direction);
           m_attributes = nullptr;
           break;
         }

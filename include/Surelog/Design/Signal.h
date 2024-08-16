@@ -28,12 +28,11 @@
 #include <Surelog/Common/NodeId.h>
 #include <Surelog/SourceCompile/VObjectTypes.h>
 
+// uhdm
+#include <uhdm/uhdm_forward_decl.h>
+
 #include <string>
 #include <vector>
-
-namespace UHDM {
-class attribute;
-}
 
 namespace SURELOG {
 
@@ -110,6 +109,11 @@ class Signal final {
   std::vector<UHDM::attribute*>* attributes() { return m_attributes; }
   void attributes(std::vector<UHDM::attribute*>* attr) { m_attributes = attr; }
 
+  UHDM::any* uhdmScopeModel() { return m_uhdmScopeModel; }
+  void uhdmScopeModel(UHDM::any* scopeModel) {
+    m_uhdmScopeModel = scopeModel;
+  }
+
  private:
   DesignComponent* const m_component = nullptr;
   const FileContent* const m_fileContent = nullptr;
@@ -129,6 +133,7 @@ class Signal final {
   const DataType* m_dataType = nullptr;
   Signal* m_lowConn = nullptr;  // for ports
   std::vector<UHDM::attribute*>* m_attributes = nullptr;
+  UHDM::any* m_uhdmScopeModel = nullptr;
   bool m_const = false;
   bool m_var = false;
   bool m_signed = false;

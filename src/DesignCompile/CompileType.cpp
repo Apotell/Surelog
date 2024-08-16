@@ -979,6 +979,8 @@ any* CompileHelper::compileVariable(
     }
 
     if (obj != nullptr) {
+      obj->VpiName(signame);
+      obj->VpiParent(pscope);
       if (assignExp != nullptr) {
         assignExp->VpiParent(obj);
         obj->Expr(assignExp);
@@ -996,8 +998,6 @@ any* CompileHelper::compileVariable(
         obj->Typespec()->Actual_typespec(tps);
         tps->VpiParent(obj);
       }
-      obj->VpiName(signame);
-      obj->VpiParent(pscope);
     }
   }
 

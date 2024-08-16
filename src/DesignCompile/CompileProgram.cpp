@@ -152,7 +152,8 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
       }
       case VObjectType::paAnsi_port_declaration: {
         if (collectType != CollectType::DEFINITION) break;
-        m_helper.compileAnsiPortDeclaration(m_program, fC, id, port_direction);
+        m_helper.compileAnsiPortDeclaration(m_program, fC, id, m_compileDesign,
+                                            port_direction);
         break;
       }
       case VObjectType::paProperty_declaration: {

@@ -3823,12 +3823,19 @@ UHDM::VectorOfrange *CompileHelper::compileRanges(
             rexpc->VpiParent(range);
             fC->populateCoreMembers(Packed_dimension, Packed_dimension, range);
             fC->populateCoreMembers(Packed_dimension, Packed_dimension, rexpc);
+            // ArrayExprFuncArg. Ideally this should not be the case but for
+            // safe validation.
+            if ((fC->Column(Packed_dimension) + 1) >= rexpc->VpiEndColumnNo())
+              rexpc->VpiEndColumnNo(fC->Column(Packed_dimension) + 1);
+            else
+              rexpc->VpiEndColumnNo(fC->Column(Packed_dimension));
             rexpc->VpiEndColumnNo(fC->Column(Packed_dimension) + 1);
             range->Right_expr(rexpc);
 
             ref_typespec *assoc_tps_rt = s.MakeRef_typespec();
             assoc_tps_rt->VpiParent(rexpc);
             assoc_tps_rt->Actual_typespec(assoc_tps);
+            fC->populateCoreMembers(rexpr, rexpr, assoc_tps_rt);
             rexpc->Typespec(assoc_tps_rt);
 
             range->VpiParent(pexpr);

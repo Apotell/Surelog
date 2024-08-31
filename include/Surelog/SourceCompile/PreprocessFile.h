@@ -82,7 +82,7 @@ class PreprocessFile final {
                  CompilationUnit* compilationUnit, Library* library,
                  PreprocessFile* includer, uint32_t includerLine,
                  std::string_view macroBody = "", MacroInfo* = nullptr,
-                 uint32_t embeddedMacroCallLine = 0,
+                 PathId fileId = BadPathId, uint32_t embeddedMacroCallLine = 0,
                  PathId embeddedMacroCallFile = BadPathId);
   ~PreprocessFile();
 

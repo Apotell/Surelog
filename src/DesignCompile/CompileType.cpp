@@ -990,10 +990,17 @@ any* CompileHelper::compileVariable(
           ref_typespec* rt = s.MakeRef_typespec();
           rt->VpiParent(obj);
           obj->Typespec(rt);
-          rt->VpiName(fC->SymName(fC->Child(sig->getTypeSpecId())));
+          NodeId rtNameId = sig->getTypeSpecId();
+          if (fC->Type(rtNameId) != VObjectType::slStringConst)
+            rtNameId = fC->Child(rtNameId);
+          rt->VpiName(fC->SymName(rtNameId));
           NodeId nameId =
               sig->getTypeSpecId() ? sig->getTypeSpecId() : signalId;
           fC->populateCoreMembers(nameId, nameId, rt);
+          if ((tpstype == uhdmclass_typespec) &&
+              (rt->VpiName().empty() ||
+               (rt->VpiName() == SymbolTable::getBadSymbol())))
+            rt->VpiName(tps->VpiName());
         }
         obj->Typespec()->Actual_typespec(tps);
         tps->VpiParent(obj);
@@ -1232,9 +1239,14 @@ any* CompileHelper::compileVariable(
           tps->Elem_typespec(tpsRef);
 
           subtps->Ranges(unpackedDimensions);
+
+          NodeId itypeId = sig->getTypeSpecId() ? sig->getTypeSpecId()
+                                                : sig->getInterfaceTypeNameId();
           switch (obj->UhdmType()) {
             case uhdmint_var: {
               int_typespec* ts = s.MakeInt_typespec();
+              fC->populateCoreMembers(itypeId, itypeId, ts);
+              ts->VpiParent(pscope);
               tpsRef = s.MakeRef_typespec();
               tpsRef->VpiParent(subtps);
               tpsRef->Actual_typespec(ts);
@@ -1243,6 +1255,8 @@ any* CompileHelper::compileVariable(
             }
             case uhdminteger_var: {
               integer_typespec* ts = s.MakeInteger_typespec();
+              fC->populateCoreMembers(itypeId, itypeId, ts);
+              ts->VpiParent(pscope);
               tpsRef = s.MakeRef_typespec();
               tpsRef->VpiParent(subtps);
               tpsRef->Actual_typespec(ts);
@@ -1251,6 +1265,8 @@ any* CompileHelper::compileVariable(
             }
             case uhdmlogic_var: {
               logic_typespec* ts = s.MakeLogic_typespec();
+              fC->populateCoreMembers(itypeId, itypeId, ts);
+              ts->VpiParent(pscope);
               tpsRef = s.MakeRef_typespec();
               tpsRef->VpiParent(subtps);
               tpsRef->Actual_typespec(ts);
@@ -1259,6 +1275,8 @@ any* CompileHelper::compileVariable(
             }
             case uhdmlong_int_var: {
               long_int_typespec* ts = s.MakeLong_int_typespec();
+              fC->populateCoreMembers(itypeId, itypeId, ts);
+              ts->VpiParent(pscope);
               tpsRef = s.MakeRef_typespec();
               tpsRef->VpiParent(subtps);
               tpsRef->Actual_typespec(ts);
@@ -1267,6 +1285,8 @@ any* CompileHelper::compileVariable(
             }
             case uhdmshort_int_var: {
               short_int_typespec* ts = s.MakeShort_int_typespec();
+              fC->populateCoreMembers(itypeId, itypeId, ts);
+              ts->VpiParent(pscope);
               tpsRef = s.MakeRef_typespec();
               tpsRef->VpiParent(subtps);
               tpsRef->Actual_typespec(ts);
@@ -1275,6 +1295,8 @@ any* CompileHelper::compileVariable(
             }
             case uhdmbyte_var: {
               byte_typespec* ts = s.MakeByte_typespec();
+              fC->populateCoreMembers(itypeId, itypeId, ts);
+              ts->VpiParent(pscope);
               tpsRef = s.MakeRef_typespec();
               tpsRef->VpiParent(subtps);
               tpsRef->Actual_typespec(ts);
@@ -1283,6 +1305,8 @@ any* CompileHelper::compileVariable(
             }
             case uhdmbit_var: {
               bit_typespec* ts = s.MakeBit_typespec();
+              fC->populateCoreMembers(itypeId, itypeId, ts);
+              ts->VpiParent(pscope);
               tpsRef = s.MakeRef_typespec();
               tpsRef->VpiParent(subtps);
               tpsRef->Actual_typespec(ts);
@@ -1291,6 +1315,8 @@ any* CompileHelper::compileVariable(
             }
             case uhdmstring_var: {
               string_typespec* ts = s.MakeString_typespec();
+              fC->populateCoreMembers(itypeId, itypeId, ts);
+              ts->VpiParent(pscope);
               tpsRef = s.MakeRef_typespec();
               tpsRef->VpiParent(subtps);
               tpsRef->Actual_typespec(ts);

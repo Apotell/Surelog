@@ -218,7 +218,7 @@ bool CompileSourceFile::preprocess_() {
     m_pp = new PreprocessFile(BadSymbolId, this, instructions,
                               m_compilationUnit, m_library,
                               /* includer */ nullptr, /* includerLine */ 0,
-                              m_text, nullptr, 0, BadPathId);
+                              m_text, nullptr, m_fileId, 0, BadPathId);
   }
   registerPP(m_pp);
 

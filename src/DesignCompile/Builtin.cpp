@@ -58,7 +58,13 @@ static VObjectType convert(std::string_view type) {
   return result;
 }
 
-void Builtin::addBuiltinTypes() {
+Builtin::Builtin(CompileDesign* compileDesign, Design* design,
+                 SymbolTable* symbolTable)
+    : m_compileDesign(compileDesign),
+      m_design(design),
+      m_symbolTable(symbolTable) {}
+
+void Builtin::addBuiltinTypes() const {
   struct FunctionDefinition {
     constexpr FunctionDefinition(std::string_view packageName,
                                  std::string_view className,
@@ -258,7 +264,10 @@ void Builtin::addBuiltinTypes() {
   }
 }
 
-void Builtin::addBuiltinMacros(CompilationUnit* compUnit) {
+void Builtin::addBuiltinMacros(CompilationUnit* compUnit) const {
+  FileSystem* const fileSystem = FileSystem::getInstance();
+  PathId fileId = fileSystem->getChild(fileSystem->getWorkingDir(m_symbolTable),
+                                       "builtin.sv", m_symbolTable);
   PreprocessHarness ppharness;
   ppharness.preprocess(R"(`define SV_COV_START 0
 `define SV_COV_STOP 1
@@ -277,18 +286,16 @@ void Builtin::addBuiltinMacros(CompilationUnit* compUnit) {
 `define SV_COV_PARTIAL 2
 `define SURELOG 1
 )",
-                       compUnit);
+                       compUnit, fileId);
 }
 
-void Builtin::addBuiltinClasses() {
+void Builtin::addBuiltinClasses() const {
   // builtin.sv compilation
   FileSystem* const fileSystem = FileSystem::getInstance();
   UHDM::Serializer& s = m_compileDesign->getSerializer();
   // A fake path to keep the API simple!
-  SymbolTable* const symbolTable =
-      m_compileDesign->getCompiler()->getSymbolTable();
-  PathId fileId = fileSystem->getChild(fileSystem->getWorkingDir(symbolTable),
-                                       "builtin.sv", symbolTable);
+  PathId fileId = fileSystem->getChild(fileSystem->getWorkingDir(m_symbolTable),
+                                       "builtin.sv", m_symbolTable);
   ParserHarness pharness;
   FileContent* fC1 = pharness.parse(
       R"(  class mailbox;

@@ -250,7 +250,7 @@ PreprocessFile::PreprocessFile(SymbolId macroId, CompileSourceFile* csf,
                                CompilationUnit* comp_unit, Library* library,
                                PreprocessFile* includer, uint32_t includerLine,
                                std::string_view macroBody, MacroInfo* macroInfo,
-                               uint32_t embeddedMacroCallLine,
+                               PathId fileId, uint32_t embeddedMacroCallLine,
                                PathId embeddedMacroCallFile)
     : m_macroId(macroId),
       m_library(library),
@@ -269,7 +269,8 @@ PreprocessFile::PreprocessFile(SymbolId macroId, CompileSourceFile* csf,
       m_embeddedMacroCallLine(embeddedMacroCallLine),
       m_embeddedMacroCallFile(embeddedMacroCallFile),
       m_fileContent(nullptr),
-      m_verilogVersion(VerilogVersion::NoVersion) {
+      m_verilogVersion(VerilogVersion::NoVersion),
+      m_fileId(fileId) {
   setDebug(m_compileSourceFile->m_commandLineParser->getDebugLevel());
   if (m_includer != nullptr) {
     m_includer->m_includes.push_back(this);
@@ -1018,7 +1019,8 @@ std::pair<bool, std::string> PreprocessFile::evaluateMacro_(
                     : m_includer->m_compilationUnit,
         callingFile ? callingFile->m_library : m_includer->m_library,
         callingFile ? callingFile : m_includer, callingLine, body_short,
-        macroInfo, embeddedMacroCallLine - 1, embeddedMacroCallFile);
+        macroInfo, macroInfo->m_fileId, embeddedMacroCallLine - 1,
+        embeddedMacroCallFile);
     getCompileSourceFile()->registerPP(pp);
     if (!pp->preprocess()) {
       result = MacroNotDefined;

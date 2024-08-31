@@ -1741,7 +1741,6 @@ std::vector<io_decl*>* CompileHelper::compileTfPortList(
       tf_data_type = fC->Sibling(tf_data_type_or_implicit);
       tf_param_name = fC->Sibling(tf_data_type);
     }
-    fC->populateCoreMembers(tf_port_item, tf_param_name, decl);
     NodeId type = fC->Child(tf_data_type);
     if (fC->Type(type) == VObjectType::paVIRTUAL) type = fC->Sibling(type);
     if (prevType == InvalidNodeId) prevType = type;
@@ -1757,6 +1756,9 @@ std::vector<io_decl*>* CompileHelper::compileTfPortList(
                           Reduce::No, decl, nullptr, size, false)) {
       decl->Ranges(unpackedDimensions);
     }
+    fC->populateCoreMembers(
+        tf_port_item, unpackedDimension ? unpackedDimension : tf_param_name,
+        decl);
     if (UHDM::typespec* tempts =
             compileTypespec(component, fC, type, compileDesign, Reduce::No,
                             decl, nullptr, true)) {
@@ -2902,8 +2904,9 @@ UHDM::any* CompileHelper::compileForLoop(DesignComponent* component,
           }
         }
       } else {
-        if (expr* exp = (expr*)compileExpression(component, fC, Expression,
-                                                 compileDesign, Reduce::No)) {
+        if (expr* exp =
+                (expr*)compileExpression(component, fC, Expression,
+                                         compileDesign, Reduce::No, for_stmt)) {
           exp->VpiParent(for_stmt);
           stmts->push_back(exp);
         }

@@ -35,7 +35,8 @@ class PreprocessHarness {
  public:
   PreprocessHarness();
   std::string preprocess(std::string_view content,
-                         CompilationUnit* compUnit = nullptr);
+                         CompilationUnit* compUnit = nullptr,
+                         PathId fileId = BadPathId);
 
   const ErrorContainer& collected_errors() const { return m_errors; }
 

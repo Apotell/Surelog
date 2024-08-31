@@ -394,12 +394,17 @@ void IntegrityChecker::reportNullActual(const UHDM::any* const object) const {
       shouldReport =
           static_cast<const UHDM::ref_obj*>(object)->Actual_group() == nullptr;
       // Special case for $root and few others
-      shouldReport =
-          shouldReport &&
-          !(((object->VpiName() == "$root") || (object->VpiName() == "size") ||
-             (object->VpiName() == "delete")) &&
-            (object->VpiParent() != nullptr) &&
-            (object->VpiParent()->UhdmType() == UHDM::uhdmhier_path));
+      if (const UHDM::any* const parent = object->VpiParent()) {
+        shouldReport =
+            shouldReport && !(((object->VpiName() == "$root") ||
+                               (object->VpiName() == "size") ||
+                               (object->VpiName() == "delete")) &&
+                              (parent->UhdmType() == UHDM::uhdmhier_path));
+        shouldReport =
+            shouldReport && !((parent->UhdmType() == UHDM::uhdmsys_func_call) &&
+                              (parent->VpiName() == "$bits"));
+        shouldReport = shouldReport && (object->VpiName() != "default");
+      }
     } break;
 
     case UHDM::uhdmref_typespec: {

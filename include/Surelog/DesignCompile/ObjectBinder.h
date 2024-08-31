@@ -28,8 +28,8 @@
 #include <Surelog/SourceCompile/VObjectTypes.h>
 
 // uhdm
-#include <uhdm/uhdm_forward_decl.h>
 #include <uhdm/UhdmListener.h>
+#include <uhdm/uhdm_forward_decl.h>
 
 #include <map>
 #include <set>
@@ -124,6 +124,8 @@ class ObjectBinder final : protected UHDM::UhdmListener {
       const UHDM::any* const object, const UHDM::interface_inst* const scope);
   const UHDM::any* findInPackage(const UHDM::any* const object,
                                  const UHDM::package* const scope);
+  const UHDM::any* findInUdp_defn(const UHDM::any* const object,
+                                  const UHDM::udp_defn* const scope);
   const UHDM::any* findInProgram(const UHDM::any* const object,
                                  const UHDM::program* const scope);
   const UHDM::any* findInFunction(const UHDM::any* const object,

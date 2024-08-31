@@ -346,7 +346,7 @@ bool CompileDesign::compilation_() {
       m_compiler->getDesign()->getProgramDefinitions(), maxThreadCount);
 
   if (m_compiler->getCommandLineParser()->parseBuiltIn()) {
-    Builtin builtin(this, design);
+    Builtin builtin(this, design, m_compiler->getSymbolTable());
     builtin.addBuiltinTypes();
     builtin.addBuiltinClasses();
   }

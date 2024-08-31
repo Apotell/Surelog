@@ -284,7 +284,6 @@ bool CompileModule::collectUdpObjects_() {
         break;
       }
       case VObjectType::paUdp_port_list: {
-        std::vector<UHDM::io_decl*>* ios = defn->Io_decls(true);
         NodeId port = fC->Child(id);
         while (port) {
           UHDM::io_decl* io = s.MakeIo_decl();
@@ -292,7 +291,6 @@ bool CompileModule::collectUdpObjects_() {
           fC->populateCoreMembers(port, port, io);
           io->VpiName(name);
           io->VpiParent(defn);
-          ios->push_back(io);
           port = fC->Sibling(port);
         }
         break;
@@ -396,7 +394,6 @@ bool CompileModule::collectUdpObjects_() {
         entry->VpiValue(ventry);
         entry->VpiSize(nb);
         fC->populateCoreMembers(Level_input_list, Level_input_list, entry);
-        defn->Table_entrys(true)->push_back(entry);
         break;
       }
       case VObjectType::paSequential_entry: {
@@ -488,7 +485,6 @@ bool CompileModule::collectUdpObjects_() {
         entry->VpiValue(ventry);
         entry->VpiSize(nb);
         fC->populateCoreMembers(Level_input_list, Level_input_list, entry);
-        defn->Table_entrys(true)->push_back(entry);
         break;
       }
       case VObjectType::paUdp_initial_statement: {

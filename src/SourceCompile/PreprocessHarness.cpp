@@ -33,7 +33,8 @@ namespace SURELOG {
 PreprocessHarness::PreprocessHarness() : m_errors(&m_symbols) {}
 
 std::string PreprocessHarness::preprocess(std::string_view content,
-                                          CompilationUnit* compUnit) {
+                                          CompilationUnit* compUnit,
+                                          PathId fileId) {
   std::string result;
   PreprocessFile::SpecialInstructions instructions(
       PreprocessFile::SpecialInstructions::DontMute,
@@ -52,7 +53,7 @@ std::string PreprocessHarness::preprocess(std::string_view content,
                         compUnit ? compUnit : &unit, &lib);
   PreprocessFile pp(BadSymbolId, &csf, instructions,
                     compUnit ? compUnit : &unit, &lib, nullptr, 0, content,
-                    nullptr, 0, BadPathId);
+                    nullptr, fileId, 0, BadPathId);
 
   if (!pp.preprocess()) {
     result = "ERROR_PP";

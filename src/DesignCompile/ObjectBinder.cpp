@@ -83,6 +83,7 @@
 #include <uhdm/task.h>
 #include <uhdm/typespec.h>
 #include <uhdm/typespec_member.h>
+#include <uhdm/udp_defn.h>
 #include <uhdm/union_typespec.h>
 
 namespace SURELOG {
@@ -475,6 +476,16 @@ const UHDM::any* ObjectBinder::findInPackage(const UHDM::any* const object,
   }
 
   return findInInstance(object, scope);
+}
+
+const UHDM::any* ObjectBinder::findInUdp_defn(
+    const UHDM::any* const object, const UHDM::udp_defn* const scope) {
+  if (scope == nullptr) return nullptr;
+  if (!m_searched.emplace(scope).second) return nullptr;
+
+  std::string_view name = object->VpiName();
+  if (scope->VpiName() == name) return scope;
+  return findInVectorOfAny(name, object, scope->Io_decls(), scope);
 }
 
 const UHDM::any* ObjectBinder::findInProgram(const UHDM::any* const object,
@@ -940,6 +951,13 @@ const UHDM::any* ObjectBinder::bindObject(const UHDM::any* const object) {
         }
       } break;
 
+      case UHDM::uhdmudp_defn: {
+        if (const UHDM::any* const actual = findInUdp_defn(
+                object, static_cast<const UHDM::udp_defn*>(parent))) {
+          return actual;
+        }
+      } break;
+
       case UHDM::uhdmdesign: {
         if (const UHDM::any* const actual = findInDesign(
                 object, static_cast<const UHDM::design*>(parent))) {
@@ -1120,11 +1138,13 @@ void ObjectBinder::reportErrors() {
     bool reportMissingActual = false;
     if (const UHDM::ref_obj* const ro = any_cast<UHDM::ref_obj>(object)) {
       if (ro->Actual_group() == nullptr) {
-        if (!(((object->VpiName() == "size") ||
-               (object->VpiName() == "delete")) &&
-              object->VpiParent() &&
-              (object->VpiParent()->UhdmType() == UHDM::uhdmhier_path)))
-          reportMissingActual = true;
+        if (const UHDM::any* const parent = object->VpiParent()) {
+          if (!(((object->VpiName() == "size") ||
+                 (object->VpiName() == "delete")) &&
+                (parent->UhdmType() == UHDM::uhdmhier_path)))
+            reportMissingActual = true;
+          if (object->VpiName() != "default") reportMissingActual = true;
+        }
       }
     } else if (const UHDM::ref_typespec* const rt =
                    any_cast<UHDM::ref_typespec>(object)) {

@@ -158,7 +158,8 @@ bool Compiler::ppinit_() {
   if (!m_commandLineParser->fileunit()) {
     m_commonCompilationUnit = new CompilationUnit(false);
     if (m_commandLineParser->parseBuiltIn()) {
-      Builtin(nullptr, nullptr).addBuiltinMacros(m_commonCompilationUnit);
+      Builtin(nullptr, nullptr, m_symbolTable)
+          .addBuiltinMacros(m_commonCompilationUnit);
     }
   }
 
@@ -171,7 +172,7 @@ bool Compiler::ppinit_() {
     if (m_commandLineParser->fileunit()) {
       comp_unit = new CompilationUnit(true);
       if (m_commandLineParser->parseBuiltIn()) {
-        Builtin(nullptr, nullptr).addBuiltinMacros(comp_unit);
+        Builtin(nullptr, nullptr, m_symbolTable).addBuiltinMacros(comp_unit);
       }
       m_compilationUnits.push_back(comp_unit);
       symbols = m_commandLineParser->getSymbolTable()->CreateSnapshot();

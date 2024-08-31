@@ -1227,10 +1227,8 @@ void UhdmWriter::writeModule(ModuleDefinition* mod, module_inst* m,
         m->Global_clocking(cblock.getActual());
         break;
       }
-      case ClockingBlock::Type::Regular: {
-        m->Clocking_blocks(true)->push_back(cblock.getActual());
+      default:
         break;
-      }
     }
   }
 
@@ -1426,10 +1424,8 @@ void UhdmWriter::writeInterface(ModuleDefinition* mod, interface_inst* m,
         m->Global_clocking(cblock.getActual());
         break;
       }
-      case ClockingBlock::Type::Regular: {
-        m->Clocking_blocks(true)->push_back(cblock.getActual());
+      default:
         break;
-      }
     }
   }
 }
@@ -1501,8 +1497,8 @@ void UhdmWriter::writeProgram(Program* mod, program* m, Serializer& s,
         m->Default_clocking(cblock.getActual());
         break;
       }
-      case ClockingBlock::Type::Regular: {
-        m->Clocking_blocks(true)->push_back(cblock.getActual());
+      case ClockingBlock::Type::Global: {
+        // m->Global_clocking(cblock.getActual());
         break;
       }
       default:
@@ -1653,7 +1649,6 @@ bool UhdmWriter::writeElabProgram(Serializer& s, ModuleInstance* instance,
           clocking_block* cb = (clocking_block*)UHDM::clone_tree(
               cblock.getActual(), &elaboratorContext);
           cb->VpiParent(m);
-          m->Clocking_blocks(true)->push_back(cb);
           break;
         }
       }
@@ -2038,7 +2033,6 @@ bool UhdmWriter::writeElabGenScope(Serializer& s, ModuleInstance* instance,
         clocking_block* cb = (clocking_block*)UHDM::clone_tree(
             cblock.getActual(), &elaboratorContext);
         cb->VpiParent(m);
-        m->Clocking_blocks(true)->push_back(cb);
         break;
       }
       default:
@@ -2261,10 +2255,8 @@ bool UhdmWriter::writeElabModule(Serializer& s, ModuleInstance* instance,
           m->Global_clocking(cb);
           break;
         }
-        case ClockingBlock::Type::Regular: {
-          m->Clocking_blocks(true)->push_back(cb);
+        default:
           break;
-        }
       }
     }
   }
@@ -2429,10 +2421,8 @@ bool UhdmWriter::writeElabInterface(Serializer& s, ModuleInstance* instance,
           m->Global_clocking(cb);
           break;
         }
-        case ClockingBlock::Type::Regular: {
-          m->Clocking_blocks(true)->push_back(cb);
+        default:
           break;
-        }
       }
     }
   }

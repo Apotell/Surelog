@@ -69,6 +69,7 @@ class ErrorDefinition {
     LINT,
     USER,
     UHDM,
+    INTG,
   };
 
   enum ErrorType {

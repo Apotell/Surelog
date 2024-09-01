@@ -115,6 +115,9 @@ std::string ErrorDefinition::getCategoryName(
     case ErrorDefinition::UHDM:
       cat = "UH";
       break;
+    case ErrorDefinition::INTG:
+      cat = "IG";
+      break;
   }
   return cat;
 }
@@ -145,6 +148,8 @@ ErrorDefinition::ErrorCategory ErrorDefinition::getCategory(
     return ErrorDefinition::USER;
   else if (cat == "UH")
     return ErrorDefinition::UHDM;
+  else if (cat == "IG")
+    return ErrorDefinition::INTG;
   return ErrorDefinition::USER;
 }
 
@@ -491,23 +496,23 @@ bool ErrorDefinition::init() {
       "\"%s\"");
   rec(UHDM_FAILED_TO_BIND, ERROR, UHDM, "Failed to bind object: \"%s\"");
 
-  rec(INTEGRITY_CHECK_MISSING_LOCATION, ERROR, COMP,
+  rec(INTEGRITY_CHECK_MISSING_LOCATION, ERROR, INTG,
       "Object %s has invalid location information");
-  rec(INTEGRITY_CHECK_MISSING_PARENT, ERROR, COMP,
+  rec(INTEGRITY_CHECK_MISSING_PARENT, ERROR, INTG,
       "Object %s parent cannot be null");
-  rec(INTEGRITY_CHECK_MISSING_NAME, ERROR, COMP,
+  rec(INTEGRITY_CHECK_MISSING_NAME, ERROR, INTG,
       "Object %s has missing/invalid name");
-  rec(INTEGRITY_CHECK_MISSING_FILE, ERROR, COMP,
+  rec(INTEGRITY_CHECK_MISSING_FILE, ERROR, INTG,
       "Object %s has missing/invalid file");
-  rec(INTEGRITY_CHECK_PARENT_IS_NEITHER_SCOPE_NOR_DESIGN, ERROR, COMP,
+  rec(INTEGRITY_CHECK_PARENT_IS_NEITHER_SCOPE_NOR_DESIGN, ERROR, INTG,
       "Object %s should be parented to either a scope or design");
-  rec(INTEGRITY_CHECK_OBJECT_NOT_IN_PARENT_COLLECTION, ERROR, COMP,
+  rec(INTEGRITY_CHECK_OBJECT_NOT_IN_PARENT_COLLECTION, ERROR, INTG,
       "Object %s not found in parent (scope|design)'s collection");
-  rec(INTEGRITY_CHECK_CHILD_NOT_ENTIRELY_IN_PARENT_BOUNDARY, ERROR, COMP,
+  rec(INTEGRITY_CHECK_CHILD_NOT_ENTIRELY_IN_PARENT_BOUNDARY, ERROR, INTG,
       "Child %s is not entirely in parent's scope");
-  rec(INTEGRITY_CHECK_COLLECTION_HAS_DUPLICATES, ERROR, COMP,
+  rec(INTEGRITY_CHECK_COLLECTION_HAS_DUPLICATES, ERROR, INTG,
       "Object %s has duplicates");
-  rec(INTEGRITY_CHECK_ACTUAL_CANNOT_BE_NULL, ERROR, COMP,
+  rec(INTEGRITY_CHECK_ACTUAL_CANNOT_BE_NULL, ERROR, INTG,
       "Object %s actual cannot be null");
   return true;
 }

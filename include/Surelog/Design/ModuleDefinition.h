@@ -51,7 +51,7 @@ class ModuleDefinition : public DesignComponent, public ClockingBlockHolder {
   friend CompileModule;
 
  public:
-  ModuleDefinition(std::string_view name, const FileContent* fileContent,
+  ModuleDefinition(Session* session, std::string_view name, const FileContent* fileContent,
                    NodeId nodeId, UHDM::Serializer& serializer);
 
   ~ModuleDefinition() override = default;
@@ -144,6 +144,7 @@ class ModuleDefinition : public DesignComponent, public ClockingBlockHolder {
   ClassNameClassDefinitionMultiMap m_classDefinitions;
   NodeId m_gen_block_id;
   ModuleDefinition* m_unelabModule;
+  UHDM::udp_defn* m_udpDefn;
 
   UHDM::VectorOfattribute* attributes_ = nullptr;
   std::vector<UHDM::module_array*>* m_moduleArrays = nullptr;

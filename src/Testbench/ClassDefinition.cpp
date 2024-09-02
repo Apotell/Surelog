@@ -33,12 +33,12 @@
 
 namespace SURELOG {
 
-ClassDefinition::ClassDefinition(std::string_view name, Library* library,
-                                 DesignComponent* container,
+ClassDefinition::ClassDefinition(Session* session, std::string_view name,
+								 Library* library, DesignComponent* container,
                                  const FileContent* fC, NodeId nodeId,
                                  ClassDefinition* parent,
                                  UHDM::Serializer& serializer)
-    : DesignComponent(container ? container : fC, nullptr),
+    : DesignComponent(session, container ? container : fC, nullptr),
       DataType(fC, nodeId, name,
                fC ? fC->Type(nodeId) : VObjectType::paClass_declaration),
       m_name(name),

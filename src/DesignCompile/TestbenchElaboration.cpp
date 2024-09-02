@@ -22,6 +22,7 @@
  */
 
 #include <Surelog/Common/FileSystem.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/Design.h>
 #include <Surelog/Design/FileContent.h>
 #include <Surelog/Design/Parameter.h>
@@ -141,7 +142,9 @@ std::vector<std::string_view> computeVarChain(const FileContent* fC,
   return var_chain;
 }
 
-bool TestbenchElaboration::bindClasses_() {
+TestbenchElaboration::TestbenchElaboration(Session* session,
+                                           CompileDesign* compileDesign)
+    : ElaborationStep(session, compileDesign) {}bool TestbenchElaboration::bindClasses_() {
   checkForMultipleDefinition_();
   bindBaseClasses_();
   bindDataTypes_();
@@ -152,11 +155,11 @@ bool TestbenchElaboration::bindClasses_() {
 }
 
 bool TestbenchElaboration::checkForMultipleDefinition_() {
-  FileSystem* const fileSystem = FileSystem::getInstance();
-  Compiler* compiler = m_compileDesign->getCompiler();
-  ErrorContainer* errors = compiler->getErrorContainer();
-  SymbolTable* symbols = compiler->getSymbolTable();
-  Design* design = compiler->getDesign();
+  Compiler* const compiler = m_compileDesign->getCompiler();
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  ErrorContainer* const errors = m_session->getErrorContainer();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  Design* const design = compiler->getDesign();
   ClassNameClassDefinitionMultiMap classes = design->getClassDefinitions();
 
   // Check for multiple definition
@@ -351,8 +354,8 @@ bool TestbenchElaboration::bindFunctions_() {
 
 bool TestbenchElaboration::bindFunctionReturnTypesAndParamaters_() {
   Compiler* compiler = m_compileDesign->getCompiler();
-  ErrorContainer* errors = compiler->getErrorContainer();
-  SymbolTable* symbols = compiler->getSymbolTable();
+  ErrorContainer* errors = m_session->getErrorContainer();
+  SymbolTable* symbols = m_session->getSymbolTable();
   Design* design = compiler->getDesign();
   ClassNameClassDefinitionMultiMap classes = design->getClassDefinitions();
 
@@ -410,9 +413,9 @@ bool TestbenchElaboration::bindFunctionReturnTypesAndParamaters_() {
 }
 
 bool TestbenchElaboration::bindSubRoutineCall_(ClassDefinition* classDefinition,
-                                               Statement* stmt, Design* design,
-                                               SymbolTable* symbols,
-                                               ErrorContainer* errors) {
+                                               Statement* stmt, Design* design) {
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  ErrorContainer* const errors = m_session->getErrorContainer();
   std::string datatypeName;
   SubRoutineCallStmt* st = statement_cast<SubRoutineCallStmt*>(stmt);
   std::vector<std::string_view> var_chain = st->getVarChainNames();
@@ -614,8 +617,6 @@ bool TestbenchElaboration::bindForeachLoop_(ClassDefinition* classDefinition,
 
 bool TestbenchElaboration::bindFunctionBodies_() {
   Compiler* compiler = m_compileDesign->getCompiler();
-  ErrorContainer* errors = compiler->getErrorContainer();
-  SymbolTable* symbols = compiler->getSymbolTable();
   Design* design = compiler->getDesign();
   ClassNameClassDefinitionMultiMap classes = design->getClassDefinitions();
 
@@ -651,7 +652,7 @@ bool TestbenchElaboration::bindFunctionBodies_() {
             break;
           }
           case VObjectType::paSubroutine_call_statement:
-            bindSubRoutineCall_(classDefinition, stmt, design, symbols, errors);
+            bindSubRoutineCall_(classDefinition, stmt, design);
             break;
           default:
             break;
@@ -693,6 +694,9 @@ bool TestbenchElaboration::bindTasks_() {
 bool TestbenchElaboration::bindProperties_() {
   Compiler* compiler = m_compileDesign->getCompiler();
   Design* design = compiler->getDesign();
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  ErrorContainer* const errors = m_session->getErrorContainer();
+  UHDM::Serializer& s = m_compileDesign->getSerializer();
   ClassNameClassDefinitionMultiMap classes = design->getClassDefinitions();
 
   // Bind properties
@@ -750,9 +754,6 @@ bool TestbenchElaboration::bindProperties_() {
         obj->VpiParent(defn);
       } else {
         // Unsupported type
-        ErrorContainer* errors =
-            m_compileDesign->getCompiler()->getErrorContainer();
-        SymbolTable* symbols = m_compileDesign->getCompiler()->getSymbolTable();
         Location loc(fC->getFileId(), fC->Line(id), fC->Column(id),
                      symbols->registerSymbol(signame));
         Error err(ErrorDefinition::UHDM_UNSUPPORTED_SIGNAL, loc);

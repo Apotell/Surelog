@@ -23,6 +23,7 @@
 
 #include <Surelog/CommandLine/CommandLineParser.h>
 #include <Surelog/Common/FileSystem.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/Design.h>
 #include <Surelog/Design/FileContent.h>
 #include <Surelog/SourceCompile/CompilationUnit.h>
@@ -40,17 +41,15 @@ namespace SURELOG {
 void SV3_1aTreeShapeListener::enterTop_level_rule(
     SV3_1aParser::Top_level_ruleContext * /*ctx*/) {
   if (m_pf->getFileContent() == nullptr) {
-    m_fileContent = new FileContent(
-        m_pf->getFileId(0), m_pf->getLibrary(),
-        m_pf->getCompileSourceFile()->getSymbolTable(),
-        m_pf->getCompileSourceFile()->getErrorContainer(), nullptr, BadPathId);
+    m_fileContent = new FileContent(m_session, m_pf->getFileId(0),
+                                    m_pf->getLibrary(), nullptr, BadPathId);
     m_pf->setFileContent(m_fileContent);
     m_pf->getCompileSourceFile()->getCompiler()->getDesign()->addFileContent(
         m_pf->getFileId(0), m_fileContent);
   } else {
     m_fileContent = m_pf->getFileContent();
   }
-  CommandLineParser *clp = m_pf->getCompileSourceFile()->getCommandLineParser();
+  CommandLineParser *clp = m_session->getCommandLineParser();
   if ((!clp->parseOnly()) && (!clp->lowMem())) {
     m_includeFileInfo.emplace(IncludeFileInfo::Context::NONE, 1, BadSymbolId,
                               m_pf->getFileId(0), 0, 0, 0, 0,
@@ -61,9 +60,8 @@ void SV3_1aTreeShapeListener::enterTop_level_rule(
 void SV3_1aTreeShapeListener::enterTop_level_library_rule(
     SV3_1aParser::Top_level_library_ruleContext * /*ctx*/) {
   // Visited from Library/SVLibShapeListener.h
-  m_fileContent = new FileContent(
-      m_pf->getFileId(0), m_pf->getLibrary(), m_pf->getSymbolTable(),
-      m_pf->getErrorContainer(), nullptr, BadPathId);
+  m_fileContent = new FileContent(m_session, 
+      m_pf->getFileId(0), m_pf->getLibrary(), nullptr, BadPathId);
   m_pf->setFileContent(m_fileContent);
 }
 
@@ -188,7 +186,8 @@ void SV3_1aTreeShapeListener::enterSlline(
     SV3_1aParser::SllineContext * /*ctx*/) {}
 
 void SV3_1aTreeShapeListener::exitSlline(SV3_1aParser::SllineContext *ctx) {
-  FileSystem *const fileSystem = FileSystem::getInstance();
+  SymbolTable *const symbols = m_session->getSymbolTable();
+  FileSystem *const fileSystem = m_session->getFileSystem();
   uint32_t startLine = std::stoi(ctx->Integral_number()[0]->getText());
   IncludeFileInfo::Action action = static_cast<IncludeFileInfo::Action>(
       std::stoi(ctx->Integral_number()[1]->getText()));
@@ -206,8 +205,8 @@ void SV3_1aTreeShapeListener::exitSlline(SV3_1aParser::SllineContext *ctx) {
     // Push
     m_includeFileInfo.emplace(
         IncludeFileInfo::Context::INCLUDE, startLine,
-        m_pf->getSymbolTable()->registerSymbol(symbol),
-        fileSystem->toPathId(file, m_pf->getSymbolTable()), startLineCol.first,
+        symbols->registerSymbol(symbol),
+        fileSystem->toPathId(file, symbols), startLineCol.first,
         startLineCol.second, endLineCol.first, endLineCol.second,
         IncludeFileInfo::Action::PUSH);
   } else if (action == IncludeFileInfo::Action::POP) {
@@ -215,8 +214,8 @@ void SV3_1aTreeShapeListener::exitSlline(SV3_1aParser::SllineContext *ctx) {
     if (!m_includeFileInfo.empty()) m_includeFileInfo.pop();
     if (!m_includeFileInfo.empty()) {
       IncludeFileInfo &info = m_includeFileInfo.top();
-      info.m_sectionSymbolId = m_pf->getSymbolTable()->registerSymbol(symbol);
-      info.m_sectionFileId = fileSystem->toPathId(file, m_pf->getSymbolTable());
+      info.m_sectionSymbolId = symbols->registerSymbol(symbol);
+      info.m_sectionFileId = fileSystem->toPathId(file, symbols);
       info.m_originalStartLine = startLineCol.first /*+ m_lineOffset */;
       info.m_originalStartColumn = startLineCol.second /*+ m_lineOffset */;
       info.m_sectionStartLine = startLine;
@@ -639,8 +638,8 @@ void SV3_1aTreeShapeListener::enterClass_declaration(
 }
 
 SV3_1aTreeShapeListener::SV3_1aTreeShapeListener(
-    ParseFile *pf, antlr4::CommonTokenStream *tokens, uint32_t lineOffset)
-    : SV3_1aTreeShapeHelper::SV3_1aTreeShapeHelper(pf, tokens, lineOffset) {}
+    Session *session, ParseFile *pf, antlr4::CommonTokenStream *tokens, uint32_t lineOffset)
+    : SV3_1aTreeShapeHelper::SV3_1aTreeShapeHelper(session, pf, tokens, lineOffset) {}
 
 SV3_1aTreeShapeListener::~SV3_1aTreeShapeListener() {}
 

@@ -22,6 +22,7 @@
  */
 
 #include <Surelog/CommandLine/CommandLineParser.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/FileContent.h>
 #include <Surelog/ErrorReporting/ErrorContainer.h>
 #include <Surelog/Library/Library.h>
@@ -35,26 +36,23 @@
 
 namespace SURELOG {
 
-SV3_1aTreeShapeHelper::SV3_1aTreeShapeHelper(ParseFile* pf,
+SV3_1aTreeShapeHelper::SV3_1aTreeShapeHelper(Session* session, ParseFile* pf,
                                              antlr4::CommonTokenStream* tokens,
-
                                              uint32_t lineOffset)
-    : CommonListenerHelper(nullptr, tokens),
+    : CommonListenerHelper(session, nullptr, tokens),
       m_pf(pf),
       m_currentElement(nullptr),
       m_lineOffset(lineOffset) {
   if (pf->getCompileSourceFile()) {
-    m_ppOutputFileLocation = pf->getCompileSourceFile()
-                                 ->getCommandLineParser()
-                                 ->usePPOutputFileLocation();
+    m_ppOutputFileLocation = session->getCommandLineParser()->usePPOutputFileLocation();
   } else {
     m_ppOutputFileLocation = false;
   }
 }
 
-SV3_1aTreeShapeHelper::SV3_1aTreeShapeHelper(ParseLibraryDef* pf,
+SV3_1aTreeShapeHelper::SV3_1aTreeShapeHelper(Session* session, ParseLibraryDef* pf,
                                              antlr4::CommonTokenStream* tokens)
-    : CommonListenerHelper(nullptr, tokens),
+    : CommonListenerHelper(session, nullptr, tokens),
       m_pf(nullptr),
       m_currentElement(nullptr),
       m_lineOffset(0),
@@ -70,7 +68,7 @@ void SV3_1aTreeShapeHelper::logError(ErrorDefinition::ErrorType error,
       m_pf->getFileId(lineCol.first /*+ m_lineOffset*/),
       m_pf->getLineNb(lineCol.first /*+ m_lineOffset*/),
       printColumn ? lineCol.second : 0,
-      m_pf->getCompileSourceFile()->getSymbolTable()->registerSymbol(object));
+      m_session->getSymbolTable()->registerSymbol(object));
   Error err(error, loc);
   m_pf->addError(err);
 }
@@ -78,8 +76,7 @@ void SV3_1aTreeShapeHelper::logError(ErrorDefinition::ErrorType error,
 void SV3_1aTreeShapeHelper::logError(ErrorDefinition::ErrorType error,
                                      Location& loc, bool showDuplicates) {
   Error err(error, loc);
-  m_pf->getCompileSourceFile()->getErrorContainer()->addError(err,
-                                                              showDuplicates);
+  m_session->getErrorContainer()->addError(err, showDuplicates);
 }
 
 void SV3_1aTreeShapeHelper::logError(ErrorDefinition::ErrorType error,
@@ -88,8 +85,7 @@ void SV3_1aTreeShapeHelper::logError(ErrorDefinition::ErrorType error,
   std::vector<Location> extras;
   extras.push_back(extraLoc);
   Error err(error, loc, &extras);
-  m_pf->getCompileSourceFile()->getErrorContainer()->addError(err,
-                                                              showDuplicates);
+  m_session->getErrorContainer()->addError(err, showDuplicates);
 }
 
 NodeId SV3_1aTreeShapeHelper::generateDesignElemId() {
@@ -101,7 +97,7 @@ NodeId SV3_1aTreeShapeHelper::generateNodeId() {
 }
 
 SymbolId SV3_1aTreeShapeHelper::registerSymbol(std::string_view symbol) {
-  return m_pf->getSymbolTable()->registerSymbol(symbol);
+  return m_session->getSymbolTable()->registerSymbol(symbol);
 }
 
 void SV3_1aTreeShapeHelper::addNestedDesignElement(

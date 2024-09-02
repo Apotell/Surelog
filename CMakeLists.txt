@@ -415,6 +415,7 @@ set(surelog_SRC
   ${PROJECT_SOURCE_DIR}/src/Common/FileSystem.cpp
   ${PROJECT_SOURCE_DIR}/src/Common/PathId.cpp
   ${PROJECT_SOURCE_DIR}/src/Common/PlatformFileSystem.cpp
+  ${PROJECT_SOURCE_DIR}/src/Common/Session.cpp
   ${PROJECT_SOURCE_DIR}/src/Config/Config.cpp
   ${PROJECT_SOURCE_DIR}/src/Config/ConfigSet.cpp
   ${PROJECT_SOURCE_DIR}/src/Design/BindStmt.cpp
@@ -898,6 +899,7 @@ install(
         ${PROJECT_SOURCE_DIR}/include/Surelog/Common/PlatformFileSystem.h
         ${PROJECT_SOURCE_DIR}/include/Surelog/Common/PortNetHolder.h
         ${PROJECT_SOURCE_DIR}/include/Surelog/Common/RTTI.h
+        ${PROJECT_SOURCE_DIR}/include/Surelog/Common/Session.h
         ${PROJECT_SOURCE_DIR}/include/Surelog/Common/SymbolId.h
   DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/Surelog/Common)
 install(

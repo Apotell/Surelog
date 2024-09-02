@@ -30,50 +30,46 @@
 #include <string>
 
 namespace SURELOG {
-
 class AntlrParserErrorListener;
 class AntlrParserHandler;
-class CompileSourceFile;
 class CompilationUnit;
-class ErrorContainer;
+class CompileSourceFile;
 class FileContent;
 class Library;
+class Session;
 class SV3_1aParserBaseListener;
 class SV3_1aPythonListener;
 class SV3_1aTreeShapeListener;
-class SymbolTable;
 
 class ParseFile final {
  public:
   friend class PythonListen;
 
   // Helper constructor used by SVLibShapeListener
-  ParseFile(PathId fileId, SymbolTable* symbolTable, ErrorContainer* errors);
+  ParseFile(Session* session, PathId fileId);
 
   // Regular file
-  ParseFile(PathId fileId, CompileSourceFile* csf,
+  ParseFile(Session* session, PathId fileId, CompileSourceFile* csf,
             CompilationUnit* compilationUnit, Library* library, PathId ppFileId,
             bool keepParserHandler);
 
   // File chunk
-  ParseFile(CompileSourceFile* compileSourceFile, ParseFile* parent,
-            PathId chunkFileId, uint32_t offsetLine);
+  ParseFile(Session* session, CompileSourceFile* compileSourceFile,
+            ParseFile* parent, PathId chunkFileId, uint32_t offsetLine);
 
   // Unit test constructor
-  ParseFile(std::string_view text, CompileSourceFile* csf,
+  ParseFile(Session* session, std::string_view text, CompileSourceFile* csf,
             CompilationUnit* compilationUnit, Library* library);
+  ~ParseFile();
 
   bool parse();
-
-  virtual ~ParseFile();
   bool needToParse();
+
   CompileSourceFile* getCompileSourceFile() const {
     return m_compileSourceFile;
   }
   CompilationUnit* getCompilationUnit() const { return m_compilationUnit; }
   Library* getLibrary() const { return m_library; }
-  SymbolTable* getSymbolTable();
-  ErrorContainer* getErrorContainer();
   PathId getFileId(uint32_t line);
   PathId getRawFileId() const { return m_fileId; }
   PathId getPpFileId() const { return m_ppFileId; }
@@ -111,6 +107,10 @@ class ParseFile final {
   void profileParser();
 
  private:
+  bool parseOneFile_(PathId fileId, uint32_t lineOffset);
+  void buildLineInfoCache_();
+
+  Session* const m_session = nullptr;
   PathId m_fileId;
   PathId m_ppFileId;
   CompileSourceFile* const m_compileSourceFile;
@@ -122,16 +122,12 @@ class ParseFile final {
   bool m_usingCachedVersion;
   bool m_keepParserHandler;
   FileContent* m_fileContent = nullptr;
-  bool debug_AstModel;
+  bool debug_AstModel = false;
 
-  bool parseOneFile_(PathId fileId, uint32_t lineOffset);
-  void buildLineInfoCache_();
   // For file chunk:
   std::vector<ParseFile*> m_children;
   ParseFile* const m_parent;
   uint32_t m_offsetLine;
-  SymbolTable* const m_symbolTable;
-  ErrorContainer* const m_errors;
   std::string m_profileInfo;
   std::string m_sourceText;  // For Unit tests
   std::vector<uint32_t> lineInfoCache;

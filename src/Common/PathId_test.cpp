@@ -30,7 +30,8 @@ namespace {
 class TestFileSystem : public PlatformFileSystem {
  public:
   explicit TestFileSystem(const fs::path &wd) : PlatformFileSystem(wd) {
-    FileSystem::setInstance(this);
+    //@Review: It is not part of session branch so commented.
+    //FileSystem::setInstance(this);
   }
   TestFileSystem() : TestFileSystem(fs::current_path()) {}
 };

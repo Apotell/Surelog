@@ -30,16 +30,19 @@
 namespace SURELOG {
 
 class CompileDesign;
+class Session;
 
 class CompilerHarness {
  public:
+  explicit CompilerHarness(Session* session);
   std::unique_ptr<CompileDesign> createCompileDesign();
 
   ~CompilerHarness();
 
  private:
+  Session* const m_session = nullptr;
   struct Holder;
-  Holder *m_h = nullptr;
+  Holder* m_h = nullptr;
 };
 
 };  // namespace SURELOG

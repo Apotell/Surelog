@@ -23,6 +23,7 @@
 
 #include <Surelog/CommandLine/CommandLineParser.h>
 #include <Surelog/Common/FileSystem.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/DataType.h>
 #include <Surelog/Design/DummyType.h>
 #include <Surelog/Design/Enum.h>
@@ -1589,6 +1590,9 @@ typespec* CompileHelper::compileDatastructureTypespec(
     CompileDesign* compileDesign, Reduce reduce,
     SURELOG::ValuedComponentI* instance, std::string_view suffixname,
     std::string_view typeName) {
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  ErrorContainer* const errors = m_session->getErrorContainer();
+  CommandLineParser* const clp = m_session->getCommandLineParser();
   UHDM::any* pscope = component->getUhdmScope();
   if (pscope == nullptr)
     pscope = compileDesign->getCompiler()->getDesign()->getUhdmDesign();
@@ -1678,10 +1682,6 @@ typespec* CompileHelper::compileDatastructureTypespec(
             if (tmp) {
               if (tmp->UhdmType() == uhdminterface_typespec) {
                 if (!suffixname.empty()) {
-                  ErrorContainer* errors =
-                      compileDesign->getCompiler()->getErrorContainer();
-                  SymbolTable* symbols =
-                      compileDesign->getCompiler()->getSymbolTable();
                   Location loc1(fC->getFileId(), fC->Line(suffixNode),
                                 fC->Column(suffixNode),
                                 symbols->registerSymbol(suffixname));
@@ -1706,7 +1706,7 @@ typespec* CompileHelper::compileDatastructureTypespec(
       }
     }
     if (dt == nullptr) {
-      if (!compileDesign->getCompiler()->getCommandLineParser()->fileunit()) {
+      if (!clp->fileunit()) {
         for (const auto& fC :
              compileDesign->getCompiler()->getDesign()->getAllFileContents()) {
           if (const DataType* dt1 = fC.second->getDataType(typeName)) {
@@ -1951,7 +1951,7 @@ UHDM::typespec_member* CompileHelper::buildTypespecMember(
     CompileDesign* compileDesign, PathId fileId, std::string_view name,
     std::string_view value, uint32_t line, uint16_t column, uint32_t eline,
     uint16_t ecolumn) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  FileSystem* const fileSystem = m_session->getFileSystem();
   /*
   std::string hash = fileName + ":" + name + ":" + value + ":" +
   std::to_string(line) + ":" + std::to_string(column) + ":" +
@@ -1980,7 +1980,7 @@ int_typespec* CompileHelper::buildIntTypespec(
     CompileDesign* compileDesign, PathId fileId, std::string_view name,
     std::string_view value, uint32_t line, uint16_t column, uint32_t eline,
     uint16_t ecolumn) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  FileSystem* const fileSystem = m_session->getFileSystem();
   /*
   std::string hash = fileName + ":" + name + ":" + value + ":" +
   std::to_string(line)  + ":" + std::to_string(column) + ":" +
@@ -2122,7 +2122,10 @@ UHDM::typespec* CompileHelper::compileTypespec(
     DesignComponent* component, const FileContent* fC, NodeId id,
     CompileDesign* compileDesign, Reduce reduce, UHDM::any* pstmt,
     SURELOG::ValuedComponentI* instance, bool isVariable) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  ErrorContainer* const errors = m_session->getErrorContainer();
+
   UHDM::Serializer& s = compileDesign->getSerializer();
   if (pstmt == nullptr) pstmt = component->getUhdmScope();
   if (pstmt == nullptr)
@@ -2603,10 +2606,6 @@ UHDM::typespec* CompileHelper::compileTypespec(
               array_typespec* pats = s.MakeArray_typespec();
               ref_typespec* ref = s.MakeRef_typespec();
               if (isPacked) {
-                ErrorContainer* errors =
-                    compileDesign->getCompiler()->getErrorContainer();
-                SymbolTable* symbols =
-                    compileDesign->getCompiler()->getSymbolTable();
                 Location loc1(
                     fC->getFileId(), fC->Line(Unpacked_dimension),
                     fC->Column(Unpacked_dimension),
@@ -2692,9 +2691,7 @@ UHDM::typespec* CompileHelper::compileTypespec(
                     if (const constant* exp = any_cast<const constant*>(rhs)) {
                       int_typespec* its = buildIntTypespec(
                           compileDesign,
-                          fileSystem->toPathId(
-                              param->VpiFile(),
-                              compileDesign->getCompiler()->getSymbolTable()),
+                          fileSystem->toPathId(param->VpiFile(), symbols),
                           typeName, exp->VpiValue(), param->VpiLineNo(),
                           param->VpiColumnNo(), param->VpiLineNo(),
                           param->VpiColumnNo());
@@ -2744,8 +2741,7 @@ UHDM::typespec* CompileHelper::compileTypespec(
                 int_typespec* its = buildIntTypespec(
                     compileDesign,
                     fileSystem->toPathId(
-                        param->VpiFile(),
-                        compileDesign->getCompiler()->getSymbolTable()),
+                        param->VpiFile(), symbols),
                     typeName, exp->VpiValue(), param->VpiLineNo(),
                     param->VpiColumnNo(), param->VpiLineNo(),
                     param->VpiColumnNo());
@@ -2931,9 +2927,6 @@ UHDM::typespec* CompileHelper::compileTypespec(
             fC->populateCoreMembers(type, type, result);
           }
         } else {
-          ErrorContainer* errors =
-              compileDesign->getCompiler()->getErrorContainer();
-          SymbolTable* symbols = compileDesign->getCompiler()->getSymbolTable();
           std::string lineText;
           fileSystem->readLine(fC->getFileId(), fC->Line(type), lineText);
           Location loc(fC->getFileId(type), fC->Line(type), fC->Column(type),
@@ -2981,9 +2974,6 @@ UHDM::typespec* CompileHelper::compileTypespec(
     }
     default:
       if (type) {
-        ErrorContainer* errors =
-            compileDesign->getCompiler()->getErrorContainer();
-        SymbolTable* symbols = compileDesign->getCompiler()->getSymbolTable();
         std::string lineText;
         fileSystem->readLine(fC->getFileId(), fC->Line(type), lineText);
         Location loc(fC->getFileId(type), fC->Line(type), fC->Column(type),
@@ -3017,7 +3007,9 @@ UHDM::typespec* CompileHelper::elabTypespec(DesignComponent* component,
                                             CompileDesign* compileDesign,
                                             UHDM::any* pexpr,
                                             ValuedComponentI* instance) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+
   Serializer& s = compileDesign->getSerializer();
   typespec* result = spec;
   UHDM_OBJECT_TYPE type = spec->UhdmType();
@@ -3081,13 +3073,11 @@ UHDM::typespec* CompileHelper::elabTypespec(DesignComponent* component,
       bool invalidValue = false;
       expr* newLeft = reduceExpr(
           oldLeft, invalidValue, component, compileDesign, instance,
-          fileSystem->toPathId(oldLeft->VpiFile(),
-                               compileDesign->getCompiler()->getSymbolTable()),
+          fileSystem->toPathId(oldLeft->VpiFile(), symbols),
           oldLeft->VpiLineNo(), pexpr);
       expr* newRight = reduceExpr(
           oldRight, invalidValue, component, compileDesign, instance,
-          fileSystem->toPathId(oldRight->VpiFile(),
-                               compileDesign->getCompiler()->getSymbolTable()),
+          fileSystem->toPathId(oldRight->VpiFile(), symbols),
           oldRight->VpiLineNo(), pexpr);
       if (!invalidValue) {
         oldRange->Left_expr(newLeft);

@@ -23,6 +23,7 @@
 
 #include <Surelog/CommandLine/CommandLineParser.h>
 #include <Surelog/Common/FileSystem.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/FileContent.h>
 #include <Surelog/Design/ModuleDefinition.h>
 #include <Surelog/Design/ModuleInstance.h>
@@ -51,6 +52,7 @@
 #include <Surelog/Utils/ContainerUtils.h>
 
 // UHDM
+//#include <uhdm/include_file_info.h>
 #include <uhdm/param_assign.h>
 #include <uhdm/vpi_visitor.h>
 
@@ -64,12 +66,15 @@
 #endif
 
 namespace SURELOG {
-CompileDesign::CompileDesign(Compiler* compiler) : m_compiler(compiler) {}
+CompileDesign::CompileDesign(Session* session, Compiler* compiler)
+    : m_session(session), m_compiler(compiler) {}
+
 CompileDesign::~CompileDesign() {
   // TODO: ownership not clear.
   // delete m_compiler;
+  //m_serializer.Purge();
 }
-
+// @ Review:
 UHDM::Serializer& CompileDesign::getSerializer() {
   return m_compiler->getSerializer();
 }
@@ -83,9 +88,9 @@ bool CompileDesign::compile() {
   UHDM::ErrorHandler errHandler =
       [=](UHDM::ErrorType errType, std::string_view msg,
           const UHDM::any* object1, const UHDM::any* object2) {
-        FileSystem* const fileSystem = FileSystem::getInstance();
-        ErrorContainer* errors = m_compiler->getErrorContainer();
-        SymbolTable* symbols = m_compiler->getSymbolTable();
+        FileSystem* const fileSystem = m_session->getFileSystem();
+        ErrorContainer* const errors = m_session->getErrorContainer();
+        SymbolTable* const symbols = m_session->getSymbolTable();
         if (object1) {
           Location loc1(fileSystem->toPathId(object1->VpiFile(), symbols),
                         object1->VpiLineNo(), object1->VpiColumnNo(),
@@ -106,28 +111,25 @@ bool CompileDesign::compile() {
         }
       };
 
-  UHDM::Serializer& serializer = m_compiler->getSerializer();
-  serializer.SetErrorHandler(errHandler);
+  //UHDM::Serializer& serializer = m_compiler->getSerializer();
+  //serializer.SetErrorHandler(errHandler);
+  //m_serializer.SetErrorHandler(errHandler);
 
   Location loc(BadSymbolId);
   Error err1(ErrorDefinition::COMP_COMPILE, loc);
-  ErrorContainer* errors =
-      new ErrorContainer(getCompiler()->getSymbolTable(),
-                         getCompiler()->getErrorContainer()->getLogListener());
-  errors->registerCmdLine(getCompiler()->getCommandLineParser());
-  errors->addError(err1);
-  errors->printMessage(err1,
-                       getCompiler()->getCommandLineParser()->muteStdout());
-  delete errors;
+  ErrorContainer* errors2 = new ErrorContainer(m_session);
+  errors2->addError(err1);
+  errors2->printMessage(err1, m_session->getCommandLineParser()->muteStdout());
+  delete errors2;
   return (compilation_());
 }
 
 template <class ObjectType, class ObjectMapType, typename FunctorType>
 void CompileDesign::compileMT_(ObjectMapType& objects, int32_t maxThreadCount) {
+  CommandLineParser* const clp = m_session->getCommandLineParser();
   if (maxThreadCount == 0) {
     for (const auto& itr : objects) {
-      FunctorType funct(this, itr.second, m_compiler->getDesign(),
-                        m_symbolTables[0], m_errorContainers[0]);
+      FunctorType funct(m_session, this, itr.second, m_compiler->getDesign());
       funct.operator()();
     }
   } else {
@@ -150,7 +152,7 @@ void CompileDesign::compileMT_(ObjectMapType& objects, int32_t maxThreadCount) {
       jobArray[newJobIndex].push_back(mod.second);
     }
 
-    if (getCompiler()->getCommandLineParser()->profile()) {
+    if (clp->profile()) {
       std::cout << "Compilation Task\n";
       for (int32_t i = 0; i < maxThreadCount; i++) {
         std::cout << "Thread " << i << " : \n";
@@ -165,8 +167,8 @@ void CompileDesign::compileMT_(ObjectMapType& objects, int32_t maxThreadCount) {
     for (int32_t i = 0; i < maxThreadCount; i++) {
       std::thread* th = new std::thread([=] {
         for (uint32_t j = 0; j < jobArray[i].size(); j++) {
-          FunctorType funct(this, jobArray[i][j], m_compiler->getDesign(),
-                            m_symbolTables[i], m_errorContainers[i]);
+          FunctorType funct(m_sessions[i], this, jobArray[i][j],
+                            m_compiler->getDesign());
           funct.operator()();
         }
       });
@@ -185,8 +187,9 @@ void CompileDesign::collectObjects_(Design::FileIdDesignContentMap& all_files,
                                     Design* design, bool finalCollection) {
   typedef std::map<std::string, std::vector<Package*>> FileNamePackageMap;
   FileNamePackageMap fileNamePackageMap;
-  SymbolTable* symbols = m_compiler->getSymbolTable();
-  ErrorContainer* errors = m_compiler->getErrorContainer();
+  //FileSystem* const fileSystem = m_session->getFileSystem();
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  ErrorContainer* const errors = m_session->getErrorContainer();
   // Collect all packages and module definitions
   for (const auto& file : all_files) {
     const FileContent* fC = file.second;
@@ -272,41 +275,34 @@ void CompileDesign::collectObjects_(Design::FileIdDesignContentMap& all_files,
 bool CompileDesign::elaborate() {
   Location loc(BadSymbolId);
   Error err2(ErrorDefinition::ELAB_ELABORATING_DESIGN, loc);
-  ErrorContainer* errors =
-      new ErrorContainer(getCompiler()->getSymbolTable(),
-                         getCompiler()->getErrorContainer()->getLogListener());
-  errors->registerCmdLine(getCompiler()->getCommandLineParser());
+  ErrorContainer* errors = new ErrorContainer(m_session);
   errors->addError(err2);
-  errors->printMessage(err2,
-                       getCompiler()->getCommandLineParser()->muteStdout());
+  errors->printMessage(err2, m_session->getCommandLineParser()->muteStdout());
   delete errors;
   return (elaboration_());
 }
 
 bool CompileDesign::compilation_() {
+  CommandLineParser* const clp = m_session->getCommandLineParser();
   Design* const design = m_compiler->getDesign();
 
   auto& all_files = design->getAllFileContents();
 
 #if 0
-  int32_t maxThreadCount = m_compiler->getCommandLineParser()->getNbMaxTreads();
+  int32_t maxThreadCount = m_session->getCommandLineParser()->getNbMaxTreads();
 #else
   // The Actual Module... Compilation is not Multithread safe anymore due to
   // the UHDM model creation
   int32_t maxThreadCount = 0;
 #endif
 
-  int32_t index = 0;
-  do {
-    SymbolTable* symbols =
-        m_compiler->getCommandLineParser()->getSymbolTable()->CreateSnapshot();
-    m_symbolTables.push_back(symbols);
-    ErrorContainer* errors = new ErrorContainer(
-        symbols, m_compiler->getErrorContainer()->getLogListener());
-    errors->registerCmdLine(m_compiler->getCommandLineParser());
-    m_errorContainers.push_back(errors);
-    index++;
-  } while (index < maxThreadCount);
+  for (int32_t i = 0; i < maxThreadCount; ++i) {
+    SymbolTable* const symbols = m_session->getSymbolTable()->CreateSnapshot();
+    m_sessions.emplace_back(new Session(m_session->getFileSystem(), symbols,
+                                        m_session->getLogListener(), nullptr,
+                                        m_session->getCommandLineParser(),
+                                        m_session->getPrecompiled()));
+  }
 
   for (auto& file : all_files) {
     if (m_compiler->isLibraryFile(file.first)) {
@@ -328,8 +324,7 @@ bool CompileDesign::compilation_() {
 
   // Compile packages in strict order
   for (auto itr : m_compiler->getDesign()->getOrderedPackageDefinitions()) {
-    FunctorCompilePackage funct(this, itr, m_compiler->getDesign(),
-                                m_symbolTables[0], m_errorContainers[0]);
+    FunctorCompilePackage funct(m_session, this, itr, m_compiler->getDesign());
     funct.operator()();
   }
 
@@ -345,11 +340,33 @@ bool CompileDesign::compilation_() {
   compileMT_<Program, ProgramNameProgramDefinitionMap, FunctorCompileProgram>(
       m_compiler->getDesign()->getProgramDefinitions(), maxThreadCount);
 
-  if (m_compiler->getCommandLineParser()->parseBuiltIn()) {
-    Builtin builtin(this, design, m_compiler->getSymbolTable());
-    builtin.addBuiltinTypes();
-    builtin.addBuiltinClasses();
+  if (clp->parseBuiltIn()) {
+    Builtin* builtin = new Builtin(m_session, this, design);
+    builtin->addBuiltinClasses();
   }
+
+  //@ Review:
+  // Compile Include file info
+  //FileSystem* const fileSystem = m_session->getFileSystem();
+  //m_fileInfo = m_serializer.MakeInclude_file_infoVec();
+  //for (const CompileSourceFile* sourceFile :
+  //     getCompiler()->getCompileSourceFiles()) {
+  //  const PreprocessFile* const pf = sourceFile->getPreprocessor();
+  //  for (const IncludeFileInfo& ifi : pf->getIncludeFileInfo()) {
+  //    if ((ifi.m_context == IncludeFileInfo::Context::INCLUDE) &&
+  //        (ifi.m_action == IncludeFileInfo::Action::PUSH)) {
+  //      UHDM::include_file_info* const pifi =
+  //          m_serializer.MakeInclude_file_info();
+  //      pifi->VpiFile(fileSystem->toPath(pf->getRawFileId()));
+  //      pifi->VpiIncludedFile(fileSystem->toPath(ifi.m_sectionFileId));
+  //      pifi->VpiLineNo(ifi.m_originalStartLine);
+  //      pifi->VpiColumnNo(ifi.m_originalStartColumn);
+  //      pifi->VpiEndLineNo(ifi.m_originalEndLine);
+  //      pifi->VpiEndColumnNo(ifi.m_originalEndColumn);
+  //      m_fileInfo->push_back(pifi);
+  //    }
+  //  }
+  //}
 
   // Compile classes
   compileMT_<ClassDefinition, ClassNameClassDefinitionMultiMap,
@@ -359,27 +376,34 @@ bool CompileDesign::compilation_() {
 
   collectObjects_(all_files, design, true);
 
+  if (clp->parseBuiltIn()) {
+    Builtin* builtin = new Builtin(m_session, this, design);
+    builtin->addBuiltinTypes();
+  }
+
   m_compiler->getDesign()->orderPackages();
 
-  for (ErrorContainer* errors : m_errorContainers) {
-    m_compiler->getErrorContainer()->appendErrors(*errors);
+  ErrorContainer* const errors = m_session->getErrorContainer();
+  for (Session* session : m_sessions) {
+    errors->appendErrors(*session->getErrorContainer());
+    delete session;
   }
-  DeleteContainerPointersAndClear(&m_symbolTables);
-  DeleteContainerPointersAndClear(&m_errorContainers);
+  m_sessions.clear();
   return true;
 }
 
 bool CompileDesign::elaboration_() {
-  PackageAndRootElaboration* packEl = new PackageAndRootElaboration(this);
+  PackageAndRootElaboration* packEl =
+      new PackageAndRootElaboration(m_session, this);
   packEl->elaborate();
   delete packEl;
-  NetlistElaboration* netlistEl = new NetlistElaboration(this);
+  NetlistElaboration* netlistEl = new NetlistElaboration(m_session, this);
   netlistEl->elaboratePackages();
   delete netlistEl;
-  DesignElaboration* designEl = new DesignElaboration(this);
+  DesignElaboration* designEl = new DesignElaboration(m_session, this);
   designEl->elaborate();
   delete designEl;
-  UVMElaboration* uvmEl = new UVMElaboration(this);
+  UVMElaboration* uvmEl = new UVMElaboration(m_session, this);
   uvmEl->elaborate();
   delete uvmEl;
   return true;
@@ -389,15 +413,16 @@ void CompileDesign::purgeParsers() { m_compiler->purgeParsers(); }
 
 bool CompileDesign::writeUHDM(PathId fileId) {
   bool result = false;
-  if (UhdmWriter* uhdmwriter = new UhdmWriter(this, m_compiler->getDesign())) {
+  if (UhdmWriter* uhdmwriter =
+          new UhdmWriter(m_session, this, m_compiler->getDesign())) {
     result = uhdmwriter->write(fileId);
     delete uhdmwriter;
   }
   return result;
 }
 
-void decompile(ValuedComponentI* instance) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+void decompile(Session* session, ValuedComponentI* instance) {
+  FileSystem* const fileSystem = session->getFileSystem();
   if (instance) {
     ModuleInstance* inst = valuedcomponenti_cast<ModuleInstance*>(instance);
     if (inst) {

@@ -14,6 +14,7 @@
  limitations under the License.
 */
 
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/Design.h>
 #include <Surelog/DesignCompile/CompileDesign.h>
 #include <Surelog/DesignCompile/CompileHelper.h>
@@ -33,8 +34,9 @@ using ::testing::ElementsAre;
 namespace {
 #if 0  // Not running elaboration anymore!!
 TEST(Uhdm, PortType) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   Design* design;
   FileContent* fC;
@@ -70,8 +72,9 @@ TEST(Uhdm, PortType) {
   }
 }
 TEST(Uhdm, Unsigned) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   Design* design;
   FileContent* fC;

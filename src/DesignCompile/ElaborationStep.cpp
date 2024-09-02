@@ -23,6 +23,7 @@
 
 #include <Surelog/CommandLine/CommandLineParser.h>
 #include <Surelog/Common/FileSystem.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/DataType.h>
 #include <Surelog/Design/DummyType.h>
 #include <Surelog/Design/Enum.h>
@@ -62,26 +63,21 @@ namespace SURELOG {
 
 using namespace UHDM;  // NOLINT (using a bunch of these)
 
-ElaborationStep::ElaborationStep(CompileDesign* compileDesign)
-    : m_compileDesign(compileDesign) {
-  m_exprBuilder.seterrorReporting(
-      m_compileDesign->getCompiler()->getErrorContainer(),
-      m_compileDesign->getCompiler()->getSymbolTable());
+ElaborationStep::ElaborationStep(Session* session, CompileDesign* compileDesign)
+    : m_session(session),
+      m_compileDesign(compileDesign),
+      m_helper(session),
+      m_exprBuilder(session) {
   m_exprBuilder.setDesign(m_compileDesign->getCompiler()->getDesign());
-  m_helper.seterrorReporting(
-      m_compileDesign->getCompiler()->getErrorContainer(),
-      m_compileDesign->getCompiler()->getSymbolTable());
-  m_symbols = m_compileDesign->getCompiler()->getSymbolTable();
-  m_errors = m_compileDesign->getCompiler()->getErrorContainer();
 }
 
 ElaborationStep::~ElaborationStep() {}
 
 bool ElaborationStep::bindTypedefs_() {
-  FileSystem* const fileSystem = FileSystem::getInstance();
-  Compiler* compiler = m_compileDesign->getCompiler();
-  ErrorContainer* errors = compiler->getErrorContainer();
-  SymbolTable* symbols = compiler->getSymbolTable();
+  Compiler* const compiler = m_compileDesign->getCompiler();
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  ErrorContainer* const errors = m_session->getErrorContainer();
   Design* design = compiler->getDesign();
   Serializer& s = m_compileDesign->getSerializer();
   std::vector<std::pair<TypeDef*, DesignComponent*>> defs;
@@ -758,7 +754,7 @@ const DataType* ElaborationStep::bindTypeDef_(
     TypeDef* typd, const DesignComponent* parent,
     ErrorDefinition::ErrorType errtype) {
   Compiler* compiler = m_compileDesign->getCompiler();
-  SymbolTable* symbols = compiler->getSymbolTable();
+  SymbolTable* symbols = m_session->getSymbolTable();
   NodeId defNode = typd->getDefinitionNode();
   const FileContent* fC = typd->getFileContent();
   VObjectType defType = fC->Type(defNode);
@@ -787,8 +783,8 @@ const DataType* ElaborationStep::bindDataType_(
     std::string_view type_name, const FileContent* fC, NodeId id,
     const DesignComponent* parent, ErrorDefinition::ErrorType errtype) {
   Compiler* compiler = m_compileDesign->getCompiler();
-  ErrorContainer* errors = compiler->getErrorContainer();
-  SymbolTable* symbols = compiler->getSymbolTable();
+  ErrorContainer* errors = m_session->getErrorContainer();
+  SymbolTable* symbols = m_session->getSymbolTable();
   Design* design = compiler->getDesign();
   std::string libName = "work";
   if (!parent->getFileContents().empty()) {
@@ -1002,9 +998,8 @@ Variable* ElaborationStep::bindVariable_(std::string_view var_name,
                                          const DesignComponent* parent,
                                          ErrorDefinition::ErrorType errtype,
                                          bool returnClassParam) {
-  Compiler* compiler = m_compileDesign->getCompiler();
-  ErrorContainer* errors = compiler->getErrorContainer();
-  SymbolTable* symbols = compiler->getSymbolTable();
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  ErrorContainer* const errors = m_session->getErrorContainer();
   Variable* result = nullptr;
 
   const ClassDefinition* classDefinition =
@@ -1248,9 +1243,10 @@ bool ElaborationStep::bindPortType_(Signal* signal, const FileContent* fC,
   if (signal->getDataType() || signal->getInterfaceDef() ||
       signal->getModPort())
     return true;
-  Compiler* compiler = m_compileDesign->getCompiler();
-  ErrorContainer* errors = compiler->getErrorContainer();
-  SymbolTable* symbols = compiler->getSymbolTable();
+  Compiler* const compiler = m_compileDesign->getCompiler();
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  ErrorContainer* const errors = m_session->getErrorContainer();
+  CommandLineParser* const clp = m_session->getCommandLineParser();
   Design* design = compiler->getDesign();
   const std::string_view libName = fC->getLibrary()->getName();
   VObjectType type = fC->Type(id);
@@ -1447,9 +1443,7 @@ bool ElaborationStep::bindPortType_(Signal* signal, const FileContent* fC,
       if (def == nullptr) {
         type = parentComponent->getDataType(interfName);
         if (type == nullptr) {
-          if (!m_compileDesign->getCompiler()
-                   ->getCommandLineParser()
-                   ->fileunit()) {
+          if (!clp->fileunit()) {
             for (const auto& fC : m_compileDesign->getCompiler()
                                       ->getDesign()
                                       ->getAllFileContents()) {

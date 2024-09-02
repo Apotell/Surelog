@@ -43,6 +43,7 @@ class ModPort;
 class ModuleDefinition;
 class ModuleInstance;
 class Netlist;
+class Session;
 class Signal;
 
 class UhdmWriter final {
@@ -55,7 +56,7 @@ class UhdmWriter final {
   typedef std::map<ModuleInstance*, UHDM::BaseClass*> InstanceMap;
   typedef std::map<std::string, UHDM::BaseClass*> VpiSignalMap;
 
-  UhdmWriter(CompileDesign* compiler, Design* design);
+  UhdmWriter(Session* session, CompileDesign* compiler, Design* design);
 
   bool write(PathId uhdmFileId);
 
@@ -124,6 +125,7 @@ class UhdmWriter final {
                                  const UHDM::any* parent);
   void bind(UHDM::Serializer& s, const std::vector<vpiHandle>& designs);
 
+  Session* const m_session = nullptr;
   CompileDesign* const m_compileDesign;
   Design* const m_design = nullptr;
   ComponentMap m_componentMap;

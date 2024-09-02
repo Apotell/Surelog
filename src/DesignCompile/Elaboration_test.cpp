@@ -14,6 +14,7 @@
  limitations under the License.
 */
 
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/Design.h>
 #include <Surelog/Design/FileContent.h>
 #include <Surelog/Design/ModuleInstance.h>
@@ -752,8 +753,9 @@ endmodule
 }
 #endif
 TEST(Elaboration, EnumConstElab) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
@@ -829,8 +831,9 @@ endmodule // top
 }
 
 TEST(Elaboration, ParamNoDefault) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
@@ -871,8 +874,9 @@ endmodule
 }
 
 TEST(Elaboration, ParamOverloading) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
@@ -942,8 +946,9 @@ endmodule // top
 }
 
 TEST(Elaboration, BitSelect) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
@@ -987,8 +992,10 @@ endmodule // top
 }
 
 TEST(Elaboration, PartSelect) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
+
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
@@ -1030,8 +1037,9 @@ endmodule // top
 }
 
 TEST(Elaboration, IndexedPartSelect) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
@@ -1073,8 +1081,9 @@ endmodule // top
 }
 
 TEST(Elaboration, ConcatPartSelect) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
@@ -1118,8 +1127,9 @@ endmodule // top
 }
 
 TEST(Elaboration, StringMath1) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
@@ -1153,8 +1163,9 @@ endmodule
 }
 
 TEST(Elaboration, StringMath2) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
@@ -1183,8 +1194,9 @@ endmodule
 }
 
 TEST(Elaboration, CaseStatement) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
@@ -1235,8 +1247,9 @@ endmodule
 }
 
 TEST(Elaboration, DollarBitsArrayVar) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
@@ -1267,8 +1280,9 @@ endmodule
 }
 
 TEST(Elaboration, FuncImplicitSignedReturn) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
@@ -1301,8 +1315,9 @@ endmodule
 }
 
 TEST(Elaboration, SignedUnsigned) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
@@ -1339,8 +1354,9 @@ endmodule
 }
 
 TEST(Elaboration, ContAssignConst) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
@@ -1396,8 +1412,9 @@ endmodule : static_size_casting
 }
 
 TEST(Elaboration, ConstantPush) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
@@ -1429,8 +1446,9 @@ endmodule
 #if 0
 // Works only in elaborated mode where the sizes are actually computed.
 TEST(Elaboration, HierPathUnpacked) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;

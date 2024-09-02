@@ -22,6 +22,7 @@
  */
 
 #include <Surelog/CommandLine/CommandLineParser.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/ErrorReporting/ErrorContainer.h>
 #include <Surelog/SourceCompile/CompileSourceFile.h>
 #include <Surelog/SourceCompile/MacroInfo.h>
@@ -31,12 +32,23 @@
 
 namespace SURELOG {
 
-SymbolTable* SV3_1aPpTreeListenerHelper::getSymbolTable() const {
-  return m_pp->getCompileSourceFile()->getSymbolTable();
+SV3_1aPpTreeListenerHelper::SV3_1aPpTreeListenerHelper(
+    Session* session, PreprocessFile* pp,
+    PreprocessFile::SpecialInstructions& instructions,
+    antlr4::CommonTokenStream* tokens)
+    : CommonListenerHelper(session, nullptr, tokens),
+      m_pp(pp),
+      m_inActiveBranch(true),
+      m_inMacroDefinitionParsing(false),
+      m_inProtectedRegion(false),
+      m_filterProtectedRegions(false),
+      m_append_paused_context(nullptr),
+      m_instructions(instructions) {
+  init();
 }
 
 SymbolId SV3_1aPpTreeListenerHelper::registerSymbol(std::string_view symbol) {
-  return m_pp->getCompileSourceFile()->getSymbolTable()->registerSymbol(symbol);
+  return m_session->getSymbolTable()->registerSymbol(symbol);
 }
 
 std::tuple<PathId, uint32_t, uint16_t, uint32_t, uint16_t>
@@ -102,9 +114,10 @@ void SV3_1aPpTreeListenerHelper::init() {
       "remove_netname",
       "noremove_netnames"};
 
+  SymbolTable* const symbols = m_session->getSymbolTable();
   for (const std::string_view reserved_macro : kReservedMacros) {
     m_reservedMacroNamesSet.insert(reserved_macro);
-    getSymbolTable()->registerSymbol(reserved_macro);
+    symbols->registerSymbol(reserved_macro);
   }
 }
 
@@ -112,23 +125,24 @@ void SV3_1aPpTreeListenerHelper::logError(ErrorDefinition::ErrorType error,
                                           antlr4::ParserRuleContext* ctx,
                                           std::string_view object,
                                           bool printColumn) {
+  SymbolTable* const symbols = m_session->getSymbolTable();
   if (m_instructions.m_mute) return;
   ParseUtils::LineColumn lineCol =
       ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
   if (m_pp->getMacroInfo()) {
     Location loc(m_pp->getMacroInfo()->m_fileId,
                  m_pp->getMacroInfo()->m_startLine + lineCol.first - 1,
-                 lineCol.second, getSymbolTable()->registerSymbol(object));
+                 lineCol.second, symbols->registerSymbol(object));
     Location extraLoc(m_pp->getIncluderFileId(m_pp->getIncluderLine()),
                       m_pp->getIncluderLine(), 0);
     Error err(error, loc, extraLoc);
-    m_pp->addError(err);
+    m_session->getErrorContainer()->addError(err);
   } else {
     Location loc(m_pp->getFileId(lineCol.first), m_pp->getLineNb(lineCol.first),
                  printColumn ? lineCol.second : 0,
-                 getSymbolTable()->registerSymbol(object));
+                 symbols->registerSymbol(object));
     Error err(error, loc);
-    m_pp->addError(err);
+    m_session->getErrorContainer()->addError(err);
   }
 }
 
@@ -136,8 +150,7 @@ void SV3_1aPpTreeListenerHelper::logError(ErrorDefinition::ErrorType error,
                                           Location& loc, bool showDuplicates) {
   if (m_instructions.m_mute) return;
   Error err(error, loc);
-  m_pp->getCompileSourceFile()->getErrorContainer()->addError(err,
-                                                              showDuplicates);
+  m_session->getErrorContainer()->addError(err, showDuplicates);
 }
 
 void SV3_1aPpTreeListenerHelper::logError(ErrorDefinition::ErrorType error,
@@ -147,16 +160,14 @@ void SV3_1aPpTreeListenerHelper::logError(ErrorDefinition::ErrorType error,
   std::vector<Location> extras;
   extras.push_back(extraLoc);
   Error err(error, loc, &extras);
-  m_pp->getCompileSourceFile()->getErrorContainer()->addError(err,
-                                                              showDuplicates);
+  m_session->getErrorContainer()->addError(err, showDuplicates);
 }
 
 void SV3_1aPpTreeListenerHelper::forwardToParser(
     antlr4::ParserRuleContext* ctx) {
+  CommandLineParser* const clp = m_session->getCommandLineParser();
   if (m_inActiveBranch && (!m_inMacroDefinitionParsing) &&
-      (!m_pp->getCompileSourceFile()
-            ->getCommandLineParser()
-            ->filterSimpleDirectives()) &&
+      (!clp->filterSimpleDirectives()) &&
       (!(m_filterProtectedRegions && m_inProtectedRegion))) {
     // m_pp->append(ctx->getText() + "\n");
     m_pp->append(ctx->getText());
@@ -174,6 +185,7 @@ void SV3_1aPpTreeListenerHelper::addLineFiller(antlr4::ParserRuleContext* ctx) {
 
 void SV3_1aPpTreeListenerHelper::checkMultiplyDefinedMacro(
     std::string_view macroName, antlr4::ParserRuleContext* ctx) {
+  SymbolTable* const symbols = m_session->getSymbolTable();
   MacroInfo* macroInf = m_pp->getMacro(macroName);
   if (macroInf) {
     ParseUtils::LineColumn lineCol =
@@ -182,7 +194,7 @@ void SV3_1aPpTreeListenerHelper::checkMultiplyDefinedMacro(
         (m_pp->getLineNb(lineCol.first) == macroInf->m_startLine))
       return;
     Location loc(m_pp->getFileId(lineCol.first), m_pp->getLineNb(lineCol.first),
-                 lineCol.second, getSymbolTable()->getId(macroName));
+                 lineCol.second, symbols->getId(macroName));
     Location extraLoc(macroInf->m_fileId, macroInf->m_startLine,
                       macroInf->m_startColumn);
     logError(ErrorDefinition::PP_MULTIPLY_DEFINED_MACRO, loc, extraLoc);

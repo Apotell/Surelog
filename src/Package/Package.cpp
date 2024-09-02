@@ -29,9 +29,12 @@
 
 namespace SURELOG {
 
-Package::Package(std::string_view name, Library* library, const FileContent* fC,
+Package::Package(Session* session, std::string_view name, Library* library, const FileContent* fC,
                  NodeId nodeId, UHDM::Serializer& serializer)
-    : DesignComponent(fC, nullptr), m_name(name), m_library(library) {
+    : DesignComponent(session, fC, nullptr),
+      m_name(name),
+      m_library(library),
+      m_exprBuilder(session) {
   addFileContent(fC, nodeId);
   m_unElabPackage = this;
   // if (!name.empty()) {  // avoid loop

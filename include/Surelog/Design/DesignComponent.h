@@ -69,9 +69,10 @@ class ExprEval {
 class DesignComponent : public ValuedComponentI, public PortNetHolder {
   SURELOG_IMPLEMENT_RTTI(DesignComponent, ValuedComponentI)
  public:
-  DesignComponent(const DesignComponent* parent, DesignComponent* definition)
-      : ValuedComponentI(parent, definition) {}
-  ~DesignComponent() override {}
+  DesignComponent(Session* session, const DesignComponent* parent,
+                  DesignComponent* definition)
+      : ValuedComponentI(session, parent, definition), m_instance(nullptr) {}
+  ~DesignComponent() override = default;
 
   virtual uint32_t getSize() const = 0;
   virtual VObjectType getType() const = 0;
@@ -201,6 +202,9 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
 
   void lateBinding(bool on) { m_lateBinding = on; }
 
+  void setUhdmInstance(UHDM::instance* instance) { m_instance = instance; }
+  UHDM::instance* getUhdmInstance() { return m_instance; }
+
   void setUhdmScope(UHDM::any* scope) { m_scope = scope; }
   UHDM::any* getUhdmScope() { return m_scope; }
   template <typename T>
@@ -249,6 +253,7 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
   std::vector<UHDM::any*> m_needLateTypedefBinding;
   FuncNameTypespecVec m_lateResolutionFunctions;
   ParameterMap m_parameterMap;
+  UHDM::instance* m_instance;
   ParameterVec m_orderedParameters;
   ParamAssignVec m_paramAssigns;
   UHDM::any* m_scope = nullptr;

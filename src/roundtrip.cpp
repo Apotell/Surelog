@@ -27,6 +27,7 @@
 #include <Surelog/API/Surelog.h>
 #include <Surelog/CommandLine/CommandLineParser.h>
 #include <Surelog/Common/PlatformFileSystem.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/ErrorReporting/ErrorContainer.h>
 #include <Surelog/SourceCompile/SymbolTable.h>
 #include <uhdm/ElaboratorListener.h>
@@ -3623,13 +3624,14 @@ int main(int argc, const char **argv) {
 
   // Read command line, compile a design, use -parse argument
   int32_t code = 0;
-  SURELOG::FileSystem *const fileSystem = SURELOG::FileSystem::getInstance();
-  SURELOG::SymbolTable *const symbolTable = new SURELOG::SymbolTable();
-  SURELOG::ErrorContainer *const errors =
-      new SURELOG::ErrorContainer(symbolTable);
-  SURELOG::CommandLineParser *const clp =
-      new SURELOG::CommandLineParser(errors, symbolTable, false, false);
-  bool success = clp->parseCommandLine(argc, argv);
+
+  SURELOG::Session session;
+  SURELOG::FileSystem *const fileSystem = session.getFileSystem();
+  //SURELOG::FileSystem *const fileSystem = SURELOG::FileSystem::getInstance();
+  //SURELOG::SymbolTable *const symbolTable = new SURELOG::SymbolTable();
+  SURELOG::ErrorContainer *const errors = session.getErrorContainer();
+  SURELOG::CommandLineParser *const clp = session.getCommandLineParser();
+  bool success = session.parseCommandLine(argc, argv, false, false);
   clp->noPython();
   clp->setElaborate(false);
   clp->setElabUhdm(false);  // Force disable elaboration!
@@ -3642,7 +3644,7 @@ int main(int argc, const char **argv) {
   vpiHandle vpi_design = nullptr;
   SURELOG::scompiler *compiler = nullptr;
   if (success && (!clp->help())) {
-    compiler = SURELOG::start_compiler(clp);
+    compiler = SURELOG::start_compiler(&session);
     vpi_design = SURELOG::get_uhdm_design(compiler);
     auto stats = errors->getErrorStats();
     code = (!success) | stats.nbFatal | stats.nbSyntax | stats.nbError;
@@ -3663,9 +3665,9 @@ int main(int argc, const char **argv) {
 
   // Do not delete these objects until you are done with UHDM
   SURELOG::shutdown_compiler(compiler);
-  delete clp;
-  delete symbolTable;
-  delete errors;
+  //delete clp;
+  //delete symbolTable;
+  //delete errors;
 
 #if defined(_MSC_VER) && defined(_DEBUG)
   // Redirect cout back to screen

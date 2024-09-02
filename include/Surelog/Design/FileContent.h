@@ -43,13 +43,17 @@ class Library;
 class ModuleDefinition;
 class Package;
 class Program;
+class Session;
 
 class FileContent : public DesignComponent {
   SURELOG_IMPLEMENT_RTTI(FileContent, DesignComponent)
  public:
-  FileContent(PathId fileId, Library* library, SymbolTable* symbolTable,
-              ErrorContainer* errors, FileContent* parent, PathId fileChunkId);
+  FileContent(Session* session, PathId fileId, Library* library,
+              FileContent* parent, PathId fileChunkId);
   ~FileContent() override;
+
+  Session* getSession() { return m_session; }
+  const Session* getSession() const { return m_session; }
 
   void setLibrary(Library* lib) { m_library = lib; }
 
@@ -236,7 +240,7 @@ class FileContent : public DesignComponent {
 
   const PathId m_fileId;
   const PathId m_fileChunkId;
-  ErrorContainer* const m_errors;
+  //ErrorContainer* const m_errors;
 
   Library* m_library;          // TODO: should be set in constructor and *const
   SymbolTable* m_symbolTable;  // TODO: should be set in constructor *const

@@ -28,18 +28,18 @@
 #include <utility>
 
 namespace SURELOG {
-
-class CommandLineParser;
-class SymbolTable;
+class Session;
 
 class Report final {
  public:
-  Report() = default;
-  std::pair<bool, bool> makeDiffCompUnitReport(CommandLineParser* clp,
-                                               SymbolTable* st);
+  explicit Report(Session* session);
+  std::pair<bool, bool> makeDiffCompUnitReport();
 
  private:
   Report(const Report& orig) = delete;
+
+ private:
+  Session* const m_session = nullptr;
 };
 
 }  // namespace SURELOG

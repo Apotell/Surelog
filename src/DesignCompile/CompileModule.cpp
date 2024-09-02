@@ -23,6 +23,7 @@
 
 #include <Surelog/CommandLine/CommandLineParser.h>
 #include <Surelog/Common/FileSystem.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/FileContent.h>
 #include <Surelog/Design/ModuleDefinition.h>
 #include <Surelog/Design/ModuleInstance.h>
@@ -53,52 +54,51 @@
 
 namespace SURELOG {
 int32_t FunctorCompileModule::operator()() const {
-  if (CompileModule* instance =
-          new CompileModule(m_compileDesign, m_module->getUnelabMmodule(),
-                            m_design, m_symbols, m_errors, nullptr)) {
+  if (CompileModule* instance = new CompileModule(
+          m_session, m_compileDesign, m_module, m_design, m_instance)) {
     instance->compile(Elaborate::No, Reduce::No);
     delete instance;
   }
 
-  if (m_compileDesign->getCompiler()->getCommandLineParser()->elaborate()) {
-    if (CompileModule* instance =
-            new CompileModule(m_compileDesign, m_module, m_design, m_symbols,
-                              m_errors, nullptr)) {
-      instance->compile(Elaborate::Yes, Reduce::Yes);
-      delete instance;
-    }
-  }
+  //if (m_compileDesign->getCompiler()->getCommandLineParser()->elaborate()) {
+  //  if (CompileModule* instance = new CompileModule(
+  //          m_session, m_compileDesign, m_module, m_design, m_instance))) {
+  //    instance->compile(Elaborate::Yes, Reduce::Yes);
+  //    delete instance;
+  //  }
+  //}
 
   return 0;
 }
 
 int32_t FunctorGenerateModule::operator()() const {
-  if (CompileModule* instance =
-          new CompileModule(m_compileDesign, m_module->getUnelabMmodule(),
-                            m_design, m_symbols, m_errors, nullptr)) {
+  if (CompileModule* instance = new CompileModule(
+          m_session, m_compileDesign, m_module, m_design, m_instance)) {
     instance->compile(Elaborate::No, Reduce::No);
     delete instance;
   }
 
-  if (m_compileDesign->getCompiler()->getCommandLineParser()->elaborate()) {
-    if (CompileModule* instance =
-            new CompileModule(m_compileDesign, m_module, m_design, m_symbols,
-                              m_errors, m_instance)) {
-      instance->compile(Elaborate::Yes, Reduce::Yes);
-      delete instance;
-    }
-  }
+  //if (m_compileDesign->getCompiler()->getCommandLineParser()->elaborate()) {
+  //  if (CompileModule* instance = new CompileModule(
+  //          m_session, m_compileDesign, m_module, m_design, m_instance)) {
+  //    instance->compile(Elaborate::Yes, Reduce::Yes);
+  //    delete instance;
+  //  }
+  //}
 
   return 0;
 }
 
 bool CompileModule::compile(Elaborate elaborate, Reduce reduce) {
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  CommandLineParser* const clp = m_session->getCommandLineParser();
+
   m_helper.setElaborate(elaborate);
   m_helper.setReduce(reduce);
   const FileContent* const fC = m_module->m_fileContents[0];
   NodeId nodeId = m_module->m_nodeIds[0];
   Location loc(fC->getFileId(nodeId), fC->Line(nodeId), fC->Column(nodeId),
-               m_symbols->registerSymbol(m_module->getName()));
+               symbols->registerSymbol(m_module->getName()));
   VObjectType moduleType = fC->Type(nodeId);
   ErrorDefinition::ErrorType errType = ErrorDefinition::COMP_COMPILE_MODULE;
   switch (moduleType) {
@@ -136,8 +136,8 @@ bool CompileModule::compile(Elaborate elaborate, Reduce reduce) {
   m_helper.setElaborate(elaborate);
   m_helper.setReduce(reduce);
 
-  CommandLineParser* clp =
-      m_compileDesign->getCompiler()->getCommandLineParser();
+  //CommandLineParser* clp =
+  //    m_compileDesign->getCompiler()->getCommandLineParser();
   auto& blackboxModules = clp->getBlackBoxModules();
   bool skipModule = false;
   std::string libName;
@@ -166,9 +166,7 @@ bool CompileModule::compile(Elaborate elaborate, Reduce reduce) {
   }
 
   Error err(errType, loc);
-  ErrorContainer* errors =
-      new ErrorContainer(m_symbols, m_errors->getLogListener());
-  errors->registerCmdLine(clp);
+  ErrorContainer* errors = new ErrorContainer(m_session);
   errors->addError(err);
   errors->printMessage(err, clp->muteStdout());
   delete errors;
@@ -525,6 +523,8 @@ bool CompileModule::collectUdpObjects_() {
 }
 
 bool CompileModule::collectModuleObjects_(CollectType collectType) {
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  ErrorContainer* const errors = m_session->getErrorContainer();
   std::vector<VObjectType> stopPoints = {
       VObjectType::paConditional_generate_construct,
       VObjectType::paGenerate_module_conditional_statement,
@@ -951,16 +951,11 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
               Location loc(fC->getFileId(m_module->getNodeIds()[0]),
                            fC->Line(m_module->getNodeIds()[0]),
                            fC->Column(m_module->getNodeIds()[0]),
-                           m_compileDesign->getCompiler()
-                               ->getSymbolTable()
-                               ->registerSymbol(moduleName));
+                           symbols->registerSymbol(moduleName));
               Location loc2(fC->getFileId(id), fC->Line(id), fC->Column(id),
-                            m_compileDesign->getCompiler()
-                                ->getSymbolTable()
-                                ->registerSymbol(endLabel));
+                            symbols->registerSymbol(endLabel));
               Error err(ErrorDefinition::COMP_UNMATCHED_LABEL, loc, loc2);
-              m_compileDesign->getCompiler()->getErrorContainer()->addError(
-                  err);
+              errors->addError(err);
             }
           }
           break;
@@ -1071,6 +1066,10 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
                                m_compileDesign);
       }
     }
+
+    SymbolTable* const symbols = m_session->getSymbolTable();
+    ErrorContainer* const errors = m_session->getErrorContainer();
+
     NodeId ParameterPortListId;
     std::stack<NodeId> stack;
     stack.push(id);
@@ -1247,7 +1246,7 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
             Location loc(fC->getFileId(nodeId), fC->Line(nodeId),
                          fC->Column(nodeId));
             Error err(ErrorDefinition::COMP_NO_MODPORT_IN_GENERATE, loc);
-            m_errors->addError(err);
+            errors->addError(err);
           }
           break;
         }
@@ -1312,11 +1311,11 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
                       Location loc(fC->getFileId(simple_port_name),
                                    fC->Line(simple_port_name),
                                    fC->Column(simple_port_name),
-                                   m_symbols->registerSymbol(
+                                   symbols->registerSymbol(
                                        fC->SymName(simple_port_name)));
                       Error err(ErrorDefinition::COMP_MODPORT_UNDEFINED_PORT,
                                 loc);
-                      m_errors->addError(err);
+                      errors->addError(err);
                     }
                   }
                   Signal signal(
@@ -1335,7 +1334,7 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
                 // CLOCKING
                 NodeId clocking_block_name = port_declaration;
                 SymbolId clocking_block_symbol =
-                    m_symbols->registerSymbol(fC->SymName(clocking_block_name));
+                    symbols->registerSymbol(fC->SymName(clocking_block_name));
                 ClockingBlock* cb =
                     m_module->getClockingBlock(clocking_block_symbol);
                 if (cb == nullptr) {
@@ -1346,7 +1345,7 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
                   Error err(
                       ErrorDefinition::COMP_MODPORT_UNDEFINED_CLOCKING_BLOCK,
                       loc);
-                  m_errors->addError(err);
+                  errors->addError(err);
                 } else {
                   m_module->insertModPort(modportsymb, *cb);
                 }
@@ -1456,16 +1455,11 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
               Location loc(fC->getFileId(m_module->getNodeIds()[0]),
                            fC->Line(m_module->getNodeIds()[0]),
                            fC->Column(m_module->getNodeIds()[0]),
-                           m_compileDesign->getCompiler()
-                               ->getSymbolTable()
-                               ->registerSymbol(moduleName));
+                           symbols->registerSymbol(moduleName));
               Location loc2(fC->getFileId(id), fC->Line(id), fC->Column(id),
-                            m_compileDesign->getCompiler()
-                                ->getSymbolTable()
-                                ->registerSymbol(endLabel));
+                            symbols->registerSymbol(endLabel));
               Error err(ErrorDefinition::COMP_UNMATCHED_LABEL, loc, loc2);
-              m_compileDesign->getCompiler()->getErrorContainer()->addError(
-                  err);
+              errors->addError(err);
             }
           }
           break;
@@ -1531,7 +1525,9 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
 }
 
 bool CompileModule::checkModule_() {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  ErrorContainer* const errors = m_session->getErrorContainer();
   int32_t countMissingType = 0;
   int32_t countMissingDirection = 0;
   Location* missingTypeLoc = nullptr;
@@ -1554,10 +1550,10 @@ bool CompileModule::checkModule_() {
           missingTypeLoc = new Location(
               fileSystem->copy(
                   port->getFileContent()->getFileId(port->getNodeId()),
-                  m_symbols),
+                  symbols),
               port->getFileContent()->Line(port->getNodeId()),
               port->getFileContent()->Column(port->getNodeId()),
-              m_symbols->registerSymbol(port->getName()));
+              symbols->registerSymbol(port->getName()));
         countMissingType++;
       }
     }
@@ -1566,41 +1562,41 @@ bool CompileModule::checkModule_() {
         missingDirectionLoc = new Location(
             fileSystem->copy(
                 port->getFileContent()->getFileId(port->getNodeId()),
-                m_symbols),
+                symbols),
             port->getFileContent()->Line(port->getNodeId()),
             port->getFileContent()->Column(port->getNodeId()),
-            m_symbols->registerSymbol(port->getName()));
+            symbols->registerSymbol(port->getName()));
       countMissingDirection++;
     }
   }
   if (countMissingType) {
     Location countLoc(
-        m_symbols->registerSymbol(std::to_string(countMissingType - 1)));
+        symbols->registerSymbol(std::to_string(countMissingType - 1)));
     if (countMissingType - 1 > 0) {
       Error err(ErrorDefinition::COMP_PORT_MISSING_TYPE, *missingTypeLoc,
                 countLoc);
-      m_errors->addError(err);
+      errors->addError(err);
     } else {
       Error err(ErrorDefinition::COMP_PORT_MISSING_TYPE, *missingTypeLoc);
-      m_errors->addError(err);
+      errors->addError(err);
     }
     delete missingTypeLoc;
   }
   if (countMissingDirection) {
     Location countLoc(
-        m_symbols->registerSymbol(std::to_string(countMissingDirection - 1)));
+        symbols->registerSymbol(std::to_string(countMissingDirection - 1)));
     if (countMissingDirection - 1 > 0) {
       Error err(ErrorDefinition::COMP_PORT_MISSING_DIRECTION,
                 *missingDirectionLoc, countLoc);
-      m_errors->addError(err);
+      errors->addError(err);
     } else {
       Error err(ErrorDefinition::COMP_PORT_MISSING_DIRECTION,
                 *missingDirectionLoc);
-      m_errors->addError(err);
+      errors->addError(err);
     }
     if (countMissingType) {
       Error err(ErrorDefinition::COMP_UNSPECIFIED_PORT, *missingDirectionLoc);
-      m_errors->addError(err);
+      errors->addError(err);
     }
     delete missingDirectionLoc;
   }
@@ -1609,7 +1605,9 @@ bool CompileModule::checkModule_() {
 }
 
 bool CompileModule::checkInterface_() {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  ErrorContainer* const errors = m_session->getErrorContainer();
   int32_t countMissingType = 0;
   Location* missingTypeLoc = nullptr;
   for (auto& port : m_module->m_ports) {
@@ -1620,23 +1618,23 @@ bool CompileModule::checkInterface_() {
           missingTypeLoc = new Location(
               fileSystem->copy(
                   port->getFileContent()->getFileId(port->getNodeId()),
-                  m_symbols),
+                  symbols),
               port->getFileContent()->Line(port->getNodeId()), 0,
-              m_symbols->registerSymbol(port->getName()));
+              symbols->registerSymbol(port->getName()));
         countMissingType++;
       }
     }
   }
   if (countMissingType) {
     Location countLoc(
-        m_symbols->registerSymbol(std::to_string(countMissingType - 1)));
+        symbols->registerSymbol(std::to_string(countMissingType - 1)));
     if (countMissingType - 1 > 0) {
       Error err(ErrorDefinition::COMP_PORT_MISSING_TYPE, *missingTypeLoc,
                 countLoc);
-      m_errors->addError(err);
+      errors->addError(err);
     } else {
       Error err(ErrorDefinition::COMP_PORT_MISSING_TYPE, *missingTypeLoc);
-      m_errors->addError(err);
+      errors->addError(err);
     }
     delete missingTypeLoc;
   }
@@ -1656,7 +1654,7 @@ void CompileModule::compileClockingBlock_(const FileContent* fC, NodeId id) {
     n<> u<20> t<Clocking_event> p<21> c<19> l<39>
     n<> u<21> t<Clocking_declaration> p<22> c<12> l<39>
    */
-
+  SymbolTable* const symbols = m_session->getSymbolTable();
   NodeId clocking_block_type = fC->Child(id);
   NodeId clocking_block_name;
   SymbolId clocking_block_symbol;
@@ -1674,9 +1672,9 @@ void CompileModule::compileClockingBlock_(const FileContent* fC, NodeId id) {
   }
   if (clocking_block_name)
     clocking_block_symbol =
-        m_symbols->registerSymbol(fC->SymName(clocking_block_name));
+        symbols->registerSymbol(fC->SymName(clocking_block_name));
   else
-    clocking_block_symbol = m_symbols->registerSymbol("unnamed_clocking_block");
+    clocking_block_symbol = symbols->registerSymbol("unnamed_clocking_block");
   UHDM::clocking_block* cblock = m_helper.compileClockingBlock(
       m_module, fC, id, m_compileDesign, nullptr, m_instance);
   ClockingBlock cb(fC, clocking_block_type, clocking_event, type, cblock);

@@ -84,8 +84,6 @@ class CompileDesign {
   Compiler* const m_compiler;
   std::vector<Session*> m_sessions;
   UHDM::VectorOfsource_file* m_uhdmSourcefiles = nullptr;
-  std::mutex m_serializerMutex;
-  UHDM::Serializer m_serializer;
   std::map<const UHDM::typespec*, const UHDM::typespec*> m_typespecSwapMap;
 };
 

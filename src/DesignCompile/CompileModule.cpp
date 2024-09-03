@@ -71,24 +71,6 @@ int32_t FunctorCompileModule::operator()() const {
   return 0;
 }
 
-int32_t FunctorGenerateModule::operator()() const {
-  if (CompileModule* instance = new CompileModule(
-          m_session, m_compileDesign, m_module, m_design, m_instance)) {
-    instance->compile(Elaborate::No, Reduce::No);
-    delete instance;
-  }
-
-  //if (m_compileDesign->getCompiler()->getCommandLineParser()->elaborate()) {
-  //  if (CompileModule* instance = new CompileModule(
-  //          m_session, m_compileDesign, m_module, m_design, m_instance)) {
-  //    instance->compile(Elaborate::Yes, Reduce::Yes);
-  //    delete instance;
-  //  }
-  //}
-
-  return 0;
-}
-
 bool CompileModule::compile(Elaborate elaborate, Reduce reduce) {
   SymbolTable* const symbols = m_session->getSymbolTable();
   CommandLineParser* const clp = m_session->getCommandLineParser();

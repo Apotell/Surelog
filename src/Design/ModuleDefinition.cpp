@@ -24,6 +24,7 @@
 #include <Surelog/Design/FileContent.h>
 #include <Surelog/Design/ModPort.h>
 #include <Surelog/Design/ModuleDefinition.h>
+#include <uhdm/Serializer.h>
 #include <uhdm/interface_inst.h>
 #include <uhdm/module_inst.h>
 #include <uhdm/udp_defn.h>
@@ -44,30 +45,30 @@ ModuleDefinition::ModuleDefinition(Session* session, std::string_view name,
   if (fileContent) {
     addFileContent(fileContent, nodeId);
   }
-  //m_unelabModule = this;
-  //switch (fC->Type(nodeId)) {
-  //  // case VObjectType::paConfig_declaration:
-  //  case VObjectType::paUdp_declaration: {
-  //    UHDM::udp_defn* const instance = serializer.MakeUdp_defn();
-  //    if (!name.empty()) instance->VpiDefName(name);
-  //    fC->populateCoreMembers(nodeId, nodeId, instance);
-  //    setUhdmScope(instance);
-  //  } break;
+  m_unelabModule = this;
+  switch (fileContent->Type(nodeId)) {
+    // case VObjectType::paConfig_declaration:
+    case VObjectType::paUdp_declaration: {
+      UHDM::udp_defn* const instance = serializer.MakeUdp_defn();
+      if (!name.empty()) instance->VpiDefName(name);
+      fileContent->populateCoreMembers(nodeId, nodeId, instance);
+      setUhdmScope(instance);
+    } break;
 
-  //  case VObjectType::paInterface_declaration: {
-  //    UHDM::interface_inst* const instance = serializer.MakeInterface_inst();
-  //    if (!name.empty()) instance->VpiName(name);
-  //    fC->populateCoreMembers(nodeId, nodeId, instance);
-  //    setUhdmScope(instance);
-  //  } break;
+    case VObjectType::paInterface_declaration: {
+      UHDM::interface_inst* const instance = serializer.MakeInterface_inst();
+      if (!name.empty()) instance->VpiName(name);
+      fileContent->populateCoreMembers(nodeId, nodeId, instance);
+      setUhdmScope(instance);
+    } break;
 
-  //  default: {
-  //    UHDM::module_inst* const instance = serializer.MakeModule_inst();
-  //    if (!name.empty()) instance->VpiName(name);
-  //    fC->populateCoreMembers(nodeId, nodeId, instance);
-  //    setUhdmScope(instance);
-  //  } break;
-  //}
+    default: {
+      UHDM::module_inst* const instance = serializer.MakeModule_inst();
+      if (!name.empty()) instance->VpiName(name);
+      fileContent->populateCoreMembers(nodeId, nodeId, instance);
+      setUhdmScope(instance);
+    } break;
+  }
 }
 
 bool ModuleDefinition::isInstance() const {
@@ -76,12 +77,6 @@ bool ModuleDefinition::isInstance() const {
           (type == VObjectType::paModule_declaration) ||
           (type == VObjectType::paUdp_declaration));
 }
-// @ Review:
-//ModuleDefinition* ModuleDefinitionFactory::newModuleDefinition(
-//    Session* session, const FileContent* fileContent, NodeId nodeId,
-//    std::string_view name) {
-//  return new ModuleDefinition(session, fileContent, nodeId, name);
-//}
 
 uint32_t ModuleDefinition::getSize() const {
   uint32_t size = 0;

@@ -2130,7 +2130,7 @@ void UhdmWriter::bind(UHDM::Serializer& s,
   ErrorContainer* const errorContainer = m_session->getErrorContainer();
   CommandLineParser* commandLineParser = m_session->getCommandLineParser();
   if (ObjectBinder* const listener =
-          new ObjectBinder(m_componentMap, s, symbolTable, errorContainer,
+          new ObjectBinder(m_session, m_componentMap, s, symbolTable, errorContainer,
                            commandLineParser->muteStdout())) {
     for (auto h : designs) {
       const design* const d =

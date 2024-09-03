@@ -107,7 +107,7 @@ class Netlist {
   }
 
   std::vector<UHDM::port*>& actualPorts() { return m_actualPorts; }
-  //@ Review:
+
   SymbolTable& getSymbolTable() { return m_symbolTable; }
   ModPortMap& getModPortMap() { return m_modPortMap; }
   InstanceMap& getInstanceMap() { return m_instanceMap; }

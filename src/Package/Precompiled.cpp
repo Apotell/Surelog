@@ -28,13 +28,8 @@
 #include <Surelog/SourceCompile/SymbolTable.h>
 
 namespace SURELOG {
-  //@ Review:
-//Precompiled* Precompiled::getSingleton() {
-//  static Precompiled* const singleton = new Precompiled();
-//  return singleton;
-//}
 
-Precompiled::Precompiled(Session *session) : m_session(session) {
+  Precompiled::Precompiled(Session *session) : m_session(session) {
   addPrecompiled("uvm_pkg", "uvm_pkg.sv");
   addPrecompiled("ovm_pkg", "ovm_pkg.sv");
 }

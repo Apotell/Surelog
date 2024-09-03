@@ -3619,8 +3619,8 @@ int main(int argc, const char **argv) {
   }
 #endif
 
-  SURELOG::FileSystem::setInstance(
-      new SURELOG::PlatformFileSystem(std::filesystem::current_path()));
+  //SURELOG::FileSystem::setInstance(
+  //    new SURELOG::PlatformFileSystem(std::filesystem::current_path()));
 
   // Read command line, compile a design, use -parse argument
   int32_t code = 0;

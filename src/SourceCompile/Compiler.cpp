@@ -744,12 +744,6 @@ bool Compiler::parseinit_() {
   // Small files are going to be scheduled in multiple threads based on size.
   // Large files are going to be compiled in a different batch in multithread
 
-  // @ Review:
-  // if (!clp->fileunit()) {
-  //  DeleteContainerPointersAndClear(&m_symbolTables);
-  //  DeleteContainerPointersAndClear(&m_errorContainers);
-  //}
-
   std::vector<CompileSourceFile*> tmp_compilers;
   for (CompileSourceFile* const compiler : m_compilers) {
     const uint32_t nbThreads =

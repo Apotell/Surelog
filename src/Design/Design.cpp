@@ -44,7 +44,10 @@ namespace SURELOG {
 
 Design::Design(Session* session, UHDM::Serializer& serializer,
                LibrarySet* librarySet, ConfigSet* configSet)
-    : m_session(session), m_librarySet(librarySet), m_configSet(configSet) {}
+    : m_session(session),
+      m_uhdmDesign(serializer.MakeDesign()),
+      m_librarySet(librarySet),
+      m_configSet(configSet) {}
 
 Design::~Design() {
   for (const auto& elem : m_ppFileContents) {

@@ -72,9 +72,8 @@ CompileDesign::CompileDesign(Session* session, Compiler* compiler)
 CompileDesign::~CompileDesign() {
   // TODO: ownership not clear.
   // delete m_compiler;
-  //m_serializer.Purge();
 }
-// @ Review:
+
 UHDM::Serializer& CompileDesign::getSerializer() {
   return m_compiler->getSerializer();
 }
@@ -344,29 +343,6 @@ bool CompileDesign::compilation_() {
     Builtin* builtin = new Builtin(m_session, this, design);
     builtin->addBuiltinClasses();
   }
-
-  //@ Review:
-  // Compile Include file info
-  //FileSystem* const fileSystem = m_session->getFileSystem();
-  //m_fileInfo = m_serializer.MakeInclude_file_infoVec();
-  //for (const CompileSourceFile* sourceFile :
-  //     getCompiler()->getCompileSourceFiles()) {
-  //  const PreprocessFile* const pf = sourceFile->getPreprocessor();
-  //  for (const IncludeFileInfo& ifi : pf->getIncludeFileInfo()) {
-  //    if ((ifi.m_context == IncludeFileInfo::Context::INCLUDE) &&
-  //        (ifi.m_action == IncludeFileInfo::Action::PUSH)) {
-  //      UHDM::include_file_info* const pifi =
-  //          m_serializer.MakeInclude_file_info();
-  //      pifi->VpiFile(fileSystem->toPath(pf->getRawFileId()));
-  //      pifi->VpiIncludedFile(fileSystem->toPath(ifi.m_sectionFileId));
-  //      pifi->VpiLineNo(ifi.m_originalStartLine);
-  //      pifi->VpiColumnNo(ifi.m_originalStartColumn);
-  //      pifi->VpiEndLineNo(ifi.m_originalEndLine);
-  //      pifi->VpiEndColumnNo(ifi.m_originalEndColumn);
-  //      m_fileInfo->push_back(pifi);
-  //    }
-  //  }
-  //}
 
   // Compile classes
   compileMT_<ClassDefinition, ClassNameClassDefinitionMultiMap,

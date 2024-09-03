@@ -48,7 +48,7 @@ int32_t FunctorCompilePackage::operator()() const {
     delete instance;
   }
 
-  //@ Review:
+
   //if (m_compileDesign->getCompiler()->getCommandLineParser()->elaborate()) {
   //  if (CompilePackage* instance = new CompilePackage(
   //          m_session, m_compileDesign, m_package, m_design)) {

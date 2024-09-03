@@ -45,6 +45,7 @@ namespace SURELOG {
 class ErrorContainer;
 class SymbolTable;
 class ValuedComponentI;
+class Session;
 
 class ObjectBinder final : protected UHDM::UhdmListener {
  private:
@@ -60,7 +61,7 @@ class ObjectBinder final : protected UHDM::UhdmListener {
   typedef std::set<const UHDM::any*> Searched;
 
  public:
-  ObjectBinder(const ComponentMap& componentMap, UHDM::Serializer& serializer,
+  ObjectBinder(Session* session, const ComponentMap& componentMap, UHDM::Serializer& serializer,
                SymbolTable* const symbolTable,
                ErrorContainer* const errorContainer, bool muteStdout);
 
@@ -156,6 +157,7 @@ class ObjectBinder final : protected UHDM::UhdmListener {
   bool createDefaultNets();
 
  private:
+  Session* const m_session = nullptr;
   const ComponentMap& m_componentMap;
   UHDM::Serializer& m_serializer;
   SymbolTable* const m_symbolTable = nullptr;

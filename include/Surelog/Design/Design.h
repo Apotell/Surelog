@@ -163,7 +163,6 @@ class Design final {
 
   void addBindStmt(std::string_view targetName, BindStmt* stmt);
 
-  //@ Review:
   UHDM::design* getUhdmDesign() { return m_uhdmDesign; }
   const UHDM::design* getUhdmDesign() const { return m_uhdmDesign; }
 

@@ -58,28 +58,6 @@ struct FunctorCompileModule {
   ValuedComponentI* const m_instance;
 };
 
-// @Review: It was not part of session branch.
-struct FunctorGenerateModule {
-  FunctorGenerateModule(Session* session, CompileDesign* compiler,
-                        ModuleDefinition* mdl,
-                        Design* design, ValuedComponentI* instance)
-      : m_session(session),
-        m_compileDesign(compiler),
-        m_module(mdl),
-        m_design(design),
-        m_instance(instance) {}
-  int32_t operator()() const;
-
- private:
-  Session* const m_session = nullptr;
-  CompileDesign* const m_compileDesign;
-  ModuleDefinition* const m_module;
-  Design* const m_design;
-  //SymbolTable* const m_symbols;
-  //ErrorContainer* const m_errors;
-  ValuedComponentI* const m_instance;
-};
-
 class CompileModule final {
  public:
   CompileModule(Session* session, CompileDesign* compiler,

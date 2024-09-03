@@ -37,16 +37,6 @@
 #endif
 
 namespace SURELOG {
-  //@Review: File system is not part of session branch
-FileSystem *FileSystem::sInstance = nullptr;
-
-FileSystem *FileSystem::getInstance() { return sInstance; }
-
-FileSystem *FileSystem::setInstance(FileSystem *fileSystem) {
-  FileSystem *const instance = sInstance;
-  sInstance = fileSystem;
-  return instance;
-}
 
 std::filesystem::path FileSystem::getProgramPath() {
 #if defined(_WIN32)

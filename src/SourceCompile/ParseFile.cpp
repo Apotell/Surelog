@@ -273,7 +273,7 @@ bool ParseFile::parseOneFile_(PathId fileId, uint32_t lineOffset) {
   if (m_sourceText.empty()) {
     std::istream& stream = fileSystem->openForRead(fileId);
     if (!stream.good()) {
-      //fileSystem->close(stream); //@ Review:
+      fileSystem->close(stream);
       Location ppfile(fileId);
       Error err(ErrorDefinition::PA_CANNOT_OPEN_FILE, ppfile);
       addError(err);
@@ -508,9 +508,8 @@ bool ParseFile::parse() {
   if (!m_children.empty() || (m_parent == nullptr)) {
     if ((m_parent == nullptr) && (m_children.empty())) {
       Timer tmr;
-      // @ Review: Must discuss
-      //m_listener = new SV3_1aTreeShapeListener(
-      //    m_session, this, m_antlrParserHandler->m_tokens, m_offsetLine);
+      m_listener = new SV3_1aTreeShapeListener(
+          m_session, this, m_antlrParserHandler->m_tokens, m_offsetLine);
       antlr4::tree::ParseTreeWalker::DEFAULT.walk(m_listener,
                                                   m_antlrParserHandler->m_tree);
 

@@ -696,7 +696,6 @@ bool TestbenchElaboration::bindProperties_() {
   Design* design = compiler->getDesign();
   SymbolTable* const symbols = m_session->getSymbolTable();
   ErrorContainer* const errors = m_session->getErrorContainer();
-  UHDM::Serializer& s = m_compileDesign->getSerializer();
   ClassNameClassDefinitionMultiMap classes = design->getClassDefinitions();
 
   // Bind properties

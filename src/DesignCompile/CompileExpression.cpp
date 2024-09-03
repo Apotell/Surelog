@@ -3385,7 +3385,6 @@ UHDM::any *CompileHelper::compileAssignmentPattern(
     DesignComponent *component, const FileContent *fC,
     NodeId Assignment_pattern, CompileDesign *compileDesign, Reduce reduce,
     UHDM::any *pexpr, ValuedComponentI *instance) {
-  SymbolTable *const symbols = m_session->getSymbolTable();
   FileSystem *const fileSystem = m_session->getFileSystem();
   UHDM::Serializer &s = compileDesign->getSerializer();
   UHDM::any *result = nullptr;

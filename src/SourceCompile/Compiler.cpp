@@ -1284,10 +1284,11 @@ bool Compiler::parseLibrariesDef_() {
   delete libParser;
   return result;
 }
-// vpiHandle Compiler::getVpiDesign() const {
-//   return (m_uhdmDesign != nullptr)
-//              ? m_uhdmDesign->GetSerializer()->MakeUhdmHandle(
-//                    m_uhdmDesign->UhdmType(), m_uhdmDesign)
-//              : nullptr;
-// }
+
+vpiHandle Compiler::getVpiDesign() const {
+  return (m_uhdmDesign != nullptr)
+             ? m_uhdmDesign->GetSerializer()->MakeUhdmHandle(
+                   m_uhdmDesign->UhdmType(), m_uhdmDesign)
+             : nullptr;
+}
 }  // namespace SURELOG

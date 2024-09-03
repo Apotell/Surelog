@@ -639,7 +639,7 @@ void SV3_1aTreeShapeListener::enterClass_declaration(
 
 SV3_1aTreeShapeListener::SV3_1aTreeShapeListener(
     Session *session, ParseFile *pf, antlr4::CommonTokenStream *tokens, uint32_t lineOffset)
-    : SV3_1aTreeShapeHelper::SV3_1aTreeShapeHelper(session, pf, tokens, lineOffset) {}
+    : SV3_1aTreeShapeHelper(session, pf, tokens, lineOffset) {}
 
 SV3_1aTreeShapeListener::~SV3_1aTreeShapeListener() {}
 

@@ -2126,7 +2126,6 @@ UHDM::any* UhdmWriter::swapForSpecifiedVar(UHDM::Serializer& s,
 
 void UhdmWriter::bind(UHDM::Serializer& s,
                       const std::vector<vpiHandle>& designs) {
-  Compiler* const compiler = m_compileDesign->getCompiler();
   SymbolTable* const symbolTable = m_session->getSymbolTable();
   ErrorContainer* const errorContainer = m_session->getErrorContainer();
   CommandLineParser* commandLineParser = m_session->getCommandLineParser();

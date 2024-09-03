@@ -3645,7 +3645,7 @@ int main(int argc, const char **argv) {
   SURELOG::scompiler *compiler = nullptr;
   if (success && (!clp->help())) {
     compiler = SURELOG::start_compiler(&session);
-    vpi_design = SURELOG::get_uhdm_design(compiler);
+    vpi_design = SURELOG::get_vpi_design(compiler);
     auto stats = errors->getErrorStats();
     code = (!success) | stats.nbFatal | stats.nbSyntax | stats.nbError;
   }

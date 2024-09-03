@@ -753,7 +753,6 @@ bool ElaborationStep::bindTypedefsPostElab_() {
 const DataType* ElaborationStep::bindTypeDef_(
     TypeDef* typd, const DesignComponent* parent,
     ErrorDefinition::ErrorType errtype) {
-  Compiler* compiler = m_compileDesign->getCompiler();
   SymbolTable* symbols = m_session->getSymbolTable();
   NodeId defNode = typd->getDefinitionNode();
   const FileContent* fC = typd->getFileContent();

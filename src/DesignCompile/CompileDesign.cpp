@@ -340,8 +340,9 @@ bool CompileDesign::compilation_() {
       m_compiler->getDesign()->getProgramDefinitions(), maxThreadCount);
 
   if (clp->parseBuiltIn()) {
-    Builtin* builtin = new Builtin(m_session, this, design);
-    builtin->addBuiltinClasses();
+    Builtin builtin(m_session, this, design);
+    builtin.addBuiltinTypes();
+    builtin.addBuiltinClasses();
   }
 
   // Compile classes
@@ -351,11 +352,6 @@ bool CompileDesign::compilation_() {
   design->clearContainers();
 
   collectObjects_(all_files, design, true);
-
-  if (clp->parseBuiltIn()) {
-    Builtin* builtin = new Builtin(m_session, this, design);
-    builtin->addBuiltinTypes();
-  }
 
   m_compiler->getDesign()->orderPackages();
 

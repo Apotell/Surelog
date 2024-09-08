@@ -649,7 +649,7 @@ void UhdmWriter::writePorts(std::vector<Signal*>& orig_ports, BaseClass* parent,
         dest_port->High_conn(exp);
       }
     }
-    if (orig_port->getTypeSpecId() && mod) {
+    if (orig_port->getTypespecId() && mod) {
       if (NodeId unpackedDimensions = orig_port->getUnpackedDimension()) {
         NodeId nameId = orig_port->getNameId();
         NodeId packedDimensions = orig_port->getPackedDimension();
@@ -671,7 +671,13 @@ void UhdmWriter::writePorts(std::vector<Signal*>& orig_ports, BaseClass* parent,
               if (const ref_typespec* rt = rrange->Typespec()) {
                 if (const typespec* ag = rt->Actual_typespec()) {
                   ref_typespec* cro = s.MakeRef_typespec();
+                  cro->VpiName(ag->VpiName());
                   cro->VpiParent(array_ts);
+                  cro->VpiFile(array_ts->VpiFile());
+                  cro->VpiLineNo(array_ts->VpiLineNo());
+                  cro->VpiColumnNo(array_ts->VpiColumnNo());
+                  cro->VpiEndLineNo(array_ts->VpiEndLineNo());
+                  cro->VpiEndColumnNo(array_ts->VpiEndColumnNo());
                   cro->Actual_typespec(const_cast<typespec*>(ag));
                   array_ts->Index_typespec(cro);
                 }
@@ -695,7 +701,7 @@ void UhdmWriter::writePorts(std::vector<Signal*>& orig_ports, BaseClass* parent,
           dest_port->Typespec()->Actual_typespec(array_ts);
 
           if (typespec* ts = m_helper.compileTypespec(
-                  mod, fC, orig_port->getTypeSpecId(), m_compileDesign,
+                  mod, fC, orig_port->getTypespecId(), m_compileDesign,
                   Reduce::No, array_ts, nullptr, true)) {
             if (array_ts->Elem_typespec() == nullptr) {
               ref_typespec* array_ts_rt = s.MakeRef_typespec();
@@ -710,15 +716,15 @@ void UhdmWriter::writePorts(std::vector<Signal*>& orig_ports, BaseClass* parent,
           }
         }
       } else if (typespec* ts = m_helper.compileTypespec(
-                     mod, fC, orig_port->getTypeSpecId(), m_compileDesign,
+                     mod, fC, orig_port->getTypespecId(), m_compileDesign,
                      Reduce::No, dest_port, nullptr, true)) {
         if (dest_port->Typespec() == nullptr) {
           ref_typespec* dest_port_rt = s.MakeRef_typespec();
           dest_port_rt->VpiName(ts->VpiName());
           dest_port_rt->VpiParent(dest_port);
           dest_port->Typespec(dest_port_rt);
-          fC->populateCoreMembers(orig_port->getTypeSpecId(),
-                                  orig_port->getTypeSpecId(), dest_port_rt);
+          fC->populateCoreMembers(orig_port->getTypespecId(),
+                                  orig_port->getTypespecId(), dest_port_rt);
         }
         dest_port->Typespec()->Actual_typespec(ts);
       }
@@ -820,17 +826,17 @@ void UhdmWriter::writeNets(DesignComponent* mod,
         } else if (dest_net->Typespec() == nullptr) {
           // compileTypespec function need to account for range
           // location information if there is any in the typespec.
-          if (orig_net->getTypeSpecId()) {
+          if (orig_net->getTypespecId()) {
             if (typespec* ts = m_helper.compileTypespec(
-                    mod, fC, orig_net->getTypeSpecId(), m_compileDesign,
+                    mod, fC, orig_net->getTypespecId(), m_compileDesign,
                     Reduce::No, nullptr, nullptr, true)) {
               ref_typespec* rt = s.MakeRef_typespec();
               rt->VpiName(ts->VpiName());
               rt->VpiParent(dest_net);
               rt->Actual_typespec(ts);
               dest_net->Typespec(rt);
-              fC->populateCoreMembers(orig_net->getTypeSpecId(),
-                                      orig_net->getTypeSpecId(), rt);
+              fC->populateCoreMembers(orig_net->getTypespecId(),
+                                      orig_net->getTypespecId(), rt);
               NodeId dimensions = orig_net->getUnpackedDimension();
               if (!dimensions) dimensions = orig_net->getPackedDimension();
               if (dimensions) {
@@ -881,7 +887,7 @@ void UhdmWriter::writeClass(ClassDefinition* classDef, Serializer& s,
   if (!classDef->getFileContents().empty() &&
       classDef->getType() == VObjectType::paClass_declaration) {
     const FileContent* fC = classDef->getFileContents()[0];
-    class_defn* c = classDef->getUhdmScope<class_defn>();
+    class_defn* c = classDef->getUhdmModel<class_defn>();
     m_componentMap.emplace(classDef, c);
     c->VpiParent(parent);
     c->VpiEndLabel(classDef->getEndLabel());
@@ -2682,7 +2688,7 @@ void UhdmWriter::writeInstance(ModuleDefinition* mod, ModuleInstance* instance,
           gate = udp;
           if (ModuleDefinition* mm =
                   valuedcomponenti_cast<ModuleDefinition>(childDef)) {
-            udp->Udp_defn(mm->getUhdmScope<UHDM::udp_defn>());
+            udp->Udp_defn(mm->getUhdmModel<UHDM::udp_defn>());
           }
           if (UHDM::VectorOfrange* ranges = child->getNetlist()->ranges()) {
             gate_array = s.MakeUdp_array();
@@ -2774,7 +2780,7 @@ void UhdmWriter::writeInstance(ModuleDefinition* mod, ModuleInstance* instance,
       }
     } else if (Program* prog = valuedcomponenti_cast<Program>(childDef)) {
       if (subPrograms == nullptr) subPrograms = s.MakeProgramVec();
-      program* sm = s.MakeProgram();
+      program* sm = prog->getUhdmModel<UHDM::program>();
       sm->VpiName(child->getInstanceName());
       sm->VpiDefName(child->getModuleName());
       sm->VpiFullName(child->getFullPathName());
@@ -3025,7 +3031,7 @@ bool UhdmWriter::write(PathId uhdmFileId) {
         m_design->getOrderedPackageDefinitions();
     for (auto& pack : m_design->getPackageDefinitions()) {
       if (pack.first == "builtin") {
-        pack.second->getUhdmScope()->VpiParent(d);
+        pack.second->getUhdmModel()->VpiParent(d);
         if (pack.second) packages.insert(packages.begin(), pack.second);
         break;
       }
@@ -3041,7 +3047,7 @@ bool UhdmWriter::write(PathId uhdmFileId) {
         if (!pack->getFileContents().empty() &&
             pack->getType() == VObjectType::paPackage_declaration) {
           const FileContent* fC = pack->getFileContents()[0];
-          package* p = pack->getUhdmScope<package>();
+          package* p = pack->getUhdmModel<package>();
           m_componentMap.emplace(pack, p);
           p->VpiParent(d);
           p->VpiTop(true);
@@ -3073,7 +3079,7 @@ bool UhdmWriter::write(PathId uhdmFileId) {
       if (!pack->getFileContents().empty() &&
           pack->getType() == VObjectType::paPackage_declaration) {
         const FileContent* fC = pack->getFileContents()[0];
-        package* p = pack->getUnElabPackage()->getUhdmScope<package>();
+        package* p = pack->getUnElabPackage()->getUhdmModel<package>();
         m_componentMap.emplace(pack->getUnElabPackage(), p);
         p->VpiName(pack->getName());
         p->VpiParent(d);
@@ -3096,13 +3102,12 @@ bool UhdmWriter::write(PathId uhdmFileId) {
 
     // Programs
     const auto& programs = m_design->getProgramDefinitions();
-    VectorOfprogram* uhdm_programs = d->AllPrograms(true);
     for (const auto& progNamePair : programs) {
       Program* prog = progNamePair.second;
       if (!prog->getFileContents().empty() &&
           prog->getType() == VObjectType::paProgram_declaration) {
         const FileContent* fC = prog->getFileContents()[0];
-        program* p = s.MakeProgram();
+        program* p = prog->getUhdmModel<UHDM::program>();
         m_componentMap.emplace(prog, p);
         moduleMap.emplace(prog->getName(), p);
         p->VpiParent(d);
@@ -3117,7 +3122,6 @@ bool UhdmWriter::write(PathId uhdmFileId) {
           }
         }
         writeProgram(prog, p, s, modPortMap);
-        uhdm_programs->push_back(p);
       }
     }
 
@@ -3129,7 +3133,7 @@ bool UhdmWriter::write(PathId uhdmFileId) {
         // Built-in primitive
       } else if (mod->getType() == VObjectType::paInterface_declaration) {
         const FileContent* fC = mod->getFileContents()[0];
-        interface_inst* m = mod->getUhdmScope<interface_inst>();
+        interface_inst* m = mod->getUhdmModel<interface_inst>();
         m_componentMap.emplace(mod, m);
         moduleMap.emplace(mod->getName(), m);
         m->VpiParent(d);
@@ -3154,7 +3158,7 @@ bool UhdmWriter::write(PathId uhdmFileId) {
         // Built-in primitive
       } else if (mod->getType() == VObjectType::paModule_declaration) {
         const FileContent* fC = mod->getFileContents()[0];
-        module_inst* m = mod->getUhdmScope<module_inst>();
+        module_inst* m = mod->getUhdmModel<module_inst>();
         if (m_compileDesign->getCompiler()->isLibraryFile(
                 mod->getFileContents()[0]->getFileId())) {
           m->VpiCellInstance(true);
@@ -3191,7 +3195,7 @@ bool UhdmWriter::write(PathId uhdmFileId) {
         writeModule(mod->getUnelabMmodule(), m, s, moduleMap, modPortMap);
       } else if (mod->getType() == VObjectType::paUdp_declaration) {
         const FileContent* fC = mod->getFileContents()[0];
-        if (UHDM::udp_defn* defn = mod->getUhdmScope<UHDM::udp_defn>()) {
+        if (UHDM::udp_defn* defn = mod->getUhdmModel<UHDM::udp_defn>()) {
           m_componentMap.emplace(mod, defn);
           defn->VpiParent(d);
           defn->VpiDefName(mod->getName());
@@ -3229,7 +3233,7 @@ bool UhdmWriter::write(PathId uhdmFileId) {
       ClassDefinition* classDef = classNamePair.second;
       if (!classDef->getFileContents().empty() &&
           classDef->getType() == VObjectType::paClass_declaration) {
-        class_defn* c = classDef->getUhdmScope<class_defn>();
+        class_defn* c = classDef->getUhdmModel<class_defn>();
         if (!c->VpiParent()) {
           writeClass(classDef, s, d);
         }

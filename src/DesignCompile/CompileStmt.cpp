@@ -336,7 +336,6 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
                 if (assign->Lhs()) ((variables*)assign->Lhs())->VpiParent(stmt);
               }
             } else if (cstmt->UhdmType() == uhdmsequence_decl) {
-              scope->Sequence_decls(true)->push_back((sequence_decl*)cstmt);
               isDecl = true;
             }
             if (!isDecl) {
@@ -514,7 +513,6 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
             ref->Typespec(tpsRef);
           }
           ref->Typespec()->Actual_typespec(tps);
-          component->needLateTypedefBinding(ref);
           loop_vars->push_back(ref);
           ref->VpiParent(for_each);
           loopVarId = fC->Sibling(loopVarId);
@@ -522,6 +520,7 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
             NodeId lookahead = fC->Sibling(loopVarId);
             if (fC->Type(lookahead) == VObjectType::paComma) {
               operation* op = s.MakeOperation();
+              op->VpiParent(for_each);
               fC->populateCoreMembers(loopVarId, loopVarId, op);
               op->VpiOpType(vpiNullOp);
               loop_vars->push_back(op);
@@ -965,7 +964,6 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
     }
     case VObjectType::paContinuous_assign: {
       // Non-elab model
-      component->lateBinding(false);
       VectorOfany* stmts = s.MakeAnyVec();
       auto assigns = compileContinuousAssignment(
           component, fC, fC->Child(the_stmt), compileDesign, nullptr, nullptr);
@@ -974,7 +972,6 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
         stmts->push_back(assign);
       }
       results = stmts;
-      component->lateBinding(true);
       break;
     }
     case VObjectType::paInterface_instantiation:
@@ -983,7 +980,6 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
       // Non-elab model
       ModuleDefinition* mod =
           valuedcomponenti_cast<ModuleDefinition*>(component);
-      mod->lateBinding(false);
       std::pair<std::vector<UHDM::module_array*>,
                 std::vector<UHDM::ref_module*>>
           result =
@@ -1004,40 +1000,33 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
         }
         results = stmts;
       }
-      mod->lateBinding(true);
       break;
     }
     case VObjectType::paAlways_construct: {
       // Non-elab model
       ModuleDefinition* mod =
           valuedcomponenti_cast<ModuleDefinition*>(component);
-      mod->lateBinding(false);
       UHDM::always* always =
           compileAlwaysBlock(mod, fC, the_stmt, compileDesign, nullptr);
       stmt = always;
-      mod->lateBinding(true);
       break;
     }
     case VObjectType::paInitial_construct: {
       // Non-elab model
       ModuleDefinition* mod =
           valuedcomponenti_cast<ModuleDefinition*>(component);
-      mod->lateBinding(false);
       UHDM::initial* init =
           compileInitialBlock(mod, fC, the_stmt, compileDesign);
       stmt = init;
-      mod->lateBinding(true);
       break;
     }
     case VObjectType::paFinal_construct: {
       // Non-elab model
       ModuleDefinition* mod =
           valuedcomponenti_cast<ModuleDefinition*>(component);
-      mod->lateBinding(false);
       UHDM::final_stmt* final =
           compileFinalBlock(mod, fC, the_stmt, compileDesign);
       stmt = final;
-      mod->lateBinding(true);
       break;
     }
     default:
@@ -1202,6 +1191,12 @@ VectorOfany* CompileHelper::compileDataDeclaration(
                     if (tps->Index_typespec() == nullptr) {
                       ref_typespec* indexRef = s.MakeRef_typespec();
                       indexRef->VpiParent(tps);
+                      indexRef->VpiName(ts->VpiName());
+                      indexRef->VpiFile(ts->VpiFile());
+                      indexRef->VpiLineNo(ts->VpiLineNo());
+                      indexRef->VpiColumnNo(ts->VpiColumnNo());
+                      indexRef->VpiEndLineNo(ts->VpiEndLineNo());
+                      indexRef->VpiEndColumnNo(ts->VpiEndColumnNo());
                       tps->Index_typespec(indexRef);
                     }
                     tps->Index_typespec()->Actual_typespec(
@@ -1369,6 +1364,7 @@ UHDM::atomic_stmt* CompileHelper::compileRandcaseStmt(
   while (RandCase) {
     NodeId Expression = fC->Child(RandCase);
     UHDM::case_item* case_item = s.MakeCase_item();
+    fC->populateCoreMembers(Expression, Expression, case_item);
     case_items->push_back(case_item);
     VectorOfany* exprs = case_item->VpiExprs(true);
     case_item->VpiParent(case_stmt);
@@ -1763,9 +1759,6 @@ std::vector<io_decl*>* CompileHelper::compileTfPortList(
             compileTypespec(component, fC, type, compileDesign, Reduce::No,
                             decl, nullptr, true)) {
       ts = tempts;
-      if (ts->UhdmType() == uhdmunsupported_typespec) {
-        component->needLateTypedefBinding(decl);
-      }
     }
     decl->VpiParent(parent);
 
@@ -1932,7 +1925,7 @@ bool CompileHelper::compileTask(DesignComponent* component,
     component->setTask_funcs(s.MakeTask_funcVec());
     task_funcs = component->getTask_funcs();
   }
-  UHDM::any* pscope = component->getUhdmScope();
+  UHDM::any* pscope = component->getUhdmModel();
   if (pscope == nullptr)
     pscope = compileDesign->getCompiler()->getDesign()->getUhdmDesign();
   NodeId nodeId =
@@ -2164,13 +2157,13 @@ bool CompileHelper::compileClassConstructorDeclaration(
 
     if (ClassDefinition* cdef =
             valuedcomponenti_cast<ClassDefinition*>(component)) {
-      tps->Class_defn(cdef->getUhdmScope<UHDM::class_defn>());
-      const std::string_view name = cdef->getUhdmScope()->VpiName();
+      tps->Class_defn(cdef->getUhdmModel<UHDM::class_defn>());
+      const std::string_view name = cdef->getUhdmModel()->VpiName();
       tps->VpiName(name);
     } else if (Package* p = valuedcomponenti_cast<Package*>(component)) {
       if (ClassDefinition* cdef = p->getClassDefinition(className)) {
-        const std::string_view name = cdef->getUhdmScope()->VpiName();
-        tps->Class_defn(cdef->getUhdmScope<UHDM::class_defn>());
+        const std::string_view name = cdef->getUhdmModel()->VpiName();
+        tps->Class_defn(cdef->getUhdmModel<UHDM::class_defn>());
         tps->VpiName(name);
       }
     }
@@ -2290,7 +2283,7 @@ bool CompileHelper::compileFunction(DesignComponent* component,
   NodeId nodeId = (fC->Type(id) == VObjectType::paFunction_declaration)
                       ? id
                       : fC->Child(id);
-  UHDM::any* pscope = component->getUhdmScope();
+  UHDM::any* pscope = component->getUhdmModel();
   if (pscope == nullptr)
     pscope = compileDesign->getCompiler()->getDesign()->getUhdmDesign();
   std::string name;
@@ -2352,17 +2345,19 @@ bool CompileHelper::compileFunction(DesignComponent* component,
   if (constructor) {
     UHDM::class_var* var = s.MakeClass_var();
     var->VpiParent(func);
-    fC->populateCoreMembers(func_decl, func_decl, var);
+    fC->populateCoreMembers(InvalidNodeId, InvalidNodeId, var);
     func->Return(var);
     UHDM::class_typespec* tps = s.MakeClass_typespec();
     tps->VpiParent(func);
+    fC->populateCoreMembers(InvalidNodeId, InvalidNodeId, tps);
     ref_typespec* tpsRef = s.MakeRef_typespec();
     tpsRef->VpiParent(var);
     tpsRef->Actual_typespec(tps);
+    fC->populateCoreMembers(InvalidNodeId, InvalidNodeId, tpsRef);
     var->Typespec(tpsRef);
     ClassDefinition* cdef = valuedcomponenti_cast<ClassDefinition*>(component);
-    tps->Class_defn(cdef->getUhdmScope<UHDM::class_defn>());
-    tps->VpiName(cdef->getUhdmScope<UHDM::class_defn>()->VpiFullName());
+    tps->Class_defn(cdef->getUhdmModel<UHDM::class_defn>());
+    tps->VpiName(cdef->getUhdmModel<UHDM::class_defn>()->VpiFullName());
     tpsRef->VpiName(tps->VpiName());
   } else {
     NodeId Function_body_declaration;
@@ -2547,13 +2542,14 @@ Task* CompileHelper::compileTaskPrototype(DesignComponent* scope,
     task_funcs = scope->getTask_funcs();
   }
   UHDM::task* task = s.MakeTask();
+  const UHDM::ScopedScope scopedScope(task);
   task_funcs->push_back(task);
   NodeId prop = setFuncTaskQualifiers(fC, id, task);
   NodeId task_prototype = prop;
   NodeId task_name = fC->Child(task_prototype);
   std::string taskName(fC->SymName(task_name));
   fC->populateCoreMembers(id, id, task);
-  const UHDM::ScopedScope scopedScope(task);
+
   NodeId Tf_port_list;
   if (fC->Type(task_name) == VObjectType::slStringConst) {
     Tf_port_list = fC->Sibling(task_name);
@@ -2567,6 +2563,7 @@ Task* CompileHelper::compileTaskPrototype(DesignComponent* scope,
   }
 
   task->VpiName(taskName);
+  task->VpiParent(scope->getUhdmModel());
 
   if (fC->Type(Tf_port_list) == VObjectType::paTf_port_list) {
     task->Io_decls(
@@ -2640,6 +2637,8 @@ Function* CompileHelper::compileFunctionPrototype(
     funcName = fC->SymName(function_name);
   }
 
+  func->VpiName(funcName);
+  func->VpiParent(scope->getUhdmModel());
   fC->populateCoreMembers(id, id, func);
   if (auto v = any_cast<variables*>(compileVariable(scope, fC, type, type,
                                                     compileDesign, Reduce::Yes,
@@ -2658,8 +2657,6 @@ Function* CompileHelper::compileFunctionPrototype(
         .append(fC->SymName(suffixname));
     Tf_port_list = fC->Sibling(suffixname);
   }
-
-  func->VpiName(funcName);
 
   if (fC->Type(Tf_port_list) == VObjectType::paTf_port_list) {
     func->Io_decls(
@@ -3100,7 +3097,7 @@ UHDM::method_func_call* CompileHelper::compileRandomizeCall(
     CompileDesign* compileDesign, UHDM::any* pexpr) {
   UHDM::Serializer& s = compileDesign->getSerializer();
   method_func_call* func_call = s.MakeMethod_func_call();
-  method_func_call* result = func_call;
+  func_call->VpiParent(pexpr);
   func_call->VpiName("randomize");
   fC->populateCoreMembers(id, id, func_call);
 
@@ -3126,11 +3123,11 @@ UHDM::method_func_call* CompileHelper::compileRandomizeCall(
 
   if (Constraint_block) {
     if (UHDM::any* cblock = compileConstraintBlock(
-            component, fC, Constraint_block, compileDesign, pexpr)) {
+            component, fC, Constraint_block, compileDesign, func_call)) {
       func_call->With(cblock);
     }
   }
-  return result;
+  return func_call;
 }
 
 UHDM::any* CompileHelper::compileConstraintBlock(DesignComponent* component,

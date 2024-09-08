@@ -263,8 +263,8 @@ bool CompileModule::collectUdpObjects_() {
   std::stack<NodeId> stack;
   stack.push(id);
 
-  const UHDM::ScopedScope scopedScope(m_module->getUhdmScope());
-  UHDM::udp_defn* defn = m_module->getUhdmScope<UHDM::udp_defn>();
+  const UHDM::ScopedScope scopedScope(m_module->getUhdmModel());
+  UHDM::udp_defn* defn = m_module->getUhdmModel<UHDM::udp_defn>();
   while (!stack.empty()) {
     id = stack.top();
     stack.pop();
@@ -544,7 +544,7 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
     stopPoints.push_back(VObjectType::paGenerate_region);
   }
 
-  const UHDM::ScopedScope scopedScope(m_module->getUhdmScope());
+  const UHDM::ScopedScope scopedScope(m_module->getUhdmModel());
   for (uint32_t i = 0; i < m_module->m_fileContents.size(); i++) {
     const FileContent* fC = m_module->m_fileContents[i];
     VObject current = fC->Object(m_module->m_nodeIds[i]);
@@ -1048,7 +1048,7 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
     stopPoints.push_back(VObjectType::paGenerate_region);
   }
 
-  const UHDM::ScopedScope scopedScope(m_module->getUhdmScope());
+  const UHDM::ScopedScope scopedScope(m_module->getUhdmModel());
   for (uint32_t i = 0; i < m_module->m_fileContents.size(); i++) {
     const FileContent* fC = m_module->m_fileContents[i];
     VObject current = fC->Object(m_module->m_nodeIds[i]);

@@ -379,10 +379,8 @@ void Builtin::addBuiltinClasses() const {
   m_compileDesign->getCompiler()->getDesign()->addFileContent(fC1->getFileId(),
                                                               fC1);
   for (const auto& classId : classes) {
-    NodeId stId = fC1->sl_collect(classId, VObjectType::slStringConst,
-                                  VObjectType::paAttr_spec);
-
-    if (stId) {
+    if (NodeId stId = fC1->sl_collect(classId, VObjectType::slStringConst,
+                                      VObjectType::paAttr_spec)) {
       const std::string_view name = fC1->SymName(stId);
       const std::string fullClassName = StrCat("builtin::", name);
       ClassDefinition* classDef = m_design->getClassDefinition(fullClassName);
@@ -393,7 +391,7 @@ void Builtin::addBuiltinClasses() const {
         builtinPackage->addClassDefinition(name, classDef);
       } else {
         classDef->setNodeId(classId);
-        fC1->populateCoreMembers(classId, classId, classDef->getUhdmScope());
+        fC1->populateCoreMembers(classId, classId, classDef->getUhdmModel());
       }
 
       fC1->insertObjectLookup(

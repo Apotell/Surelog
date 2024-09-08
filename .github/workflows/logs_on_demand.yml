@@ -26,7 +26,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         submodules: recursive
         fetch-depth: 0
@@ -79,7 +79,7 @@ jobs:
         tar czfp artifacts/${{ env.artifact-name }}.tar.gz ${{ env.artifact-name }}
 
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ${{ env.artifact-name }}
         path: artifacts/${{ env.artifact-name }}.tar.gz
@@ -110,7 +110,7 @@ jobs:
         sudo apt install -y google-perftools libgoogle-perftools-dev
 
     - name: Setup Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: 3.8
         architecture: x64
@@ -121,13 +121,13 @@ jobs:
         pip3 install psutil
 
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         submodules: recursive
         fetch-depth: 0
 
     - name: Download artifact
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: ${{ env.build-artifact-name }}
 
@@ -155,10 +155,64 @@ jobs:
 
     - name: Upload regression artifacts
       if: always()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ${{ env.regression-artifact-name }}
         path: build/${{ env.regression-artifact-name }}.tar.gz
+
+
+# Collect statistics
+  collect-statistics:
+    name: "Linux | Statistics | ${{ matrix.compiler }} | ${{ matrix.config }}"
+    runs-on: ubuntu-20.04
+    needs: linux-regression
+    if: "!cancelled()"
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler:
+        - gcc
+        config:
+        - release
+    env:
+      regression-artifact-pattern: "sl-${{ github.run_number }}-linux-${{ matrix.compiler }}-${{ matrix.config }}-regression-*"
+      statistics-artifact-name: sl-${{ github.run_number }}-linux-${{ matrix.compiler }}-${{ matrix.config }}-statistics
+
+    steps:
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: 3.8
+        architecture: x64
+
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        submodules: false
+        sparse-checkout: scripts/scan_errors.py
+        sparse-checkout-cone-mode: false
+
+    - name: Download artifact
+      uses: actions/download-artifact@v4
+      with:
+        path: artifacts
+        pattern: ${{ env.regression-artifact-pattern }}
+        merge-multiple: true
+
+    - name: Run scanner
+      timeout-minutes: 30
+      run: |
+        ls -lR
+        python3 scripts/scan_errors.py artifacts ${{ github.run_number }}
+        mv artifacts/sl-${{ github.run_number }}.txt ${{ env.statistics-artifact-name }}.log
+
+    - name: Upload regression artifacts
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ env.statistics-artifact-name }}
+        path: ${{ env.statistics-artifact-name }}.log
 
 
 # Code formatting
@@ -167,7 +221,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
@@ -193,7 +247,7 @@ jobs:
                                 uuid-dev build-essential
 
     - name: Setup Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: 3.8
         architecture: x64
@@ -204,7 +258,7 @@ jobs:
         pip3 install psutil
 
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         submodules: recursive
         fetch-depth: 0

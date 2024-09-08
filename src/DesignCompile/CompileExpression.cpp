@@ -229,10 +229,10 @@ any *CompileHelper::getObject(std::string_view name, DesignComponent *component,
       }
     }
     if (sig) {
-      if (sig->getTypeSpecId()) {
+      if (sig->getTypespecId()) {
         result = compileTypespec(
-            sig->getComponent(), sig->getFileContent(), sig->getTypeSpecId(),
-            compileDesign, Reduce::No, sig->getComponent()->getUhdmScope(),
+            sig->getComponent(), sig->getFileContent(), sig->getTypespecId(),
+            compileDesign, Reduce::No, sig->getComponent()->getUhdmModel(),
             instance, true);
       }
     }
@@ -1225,6 +1225,8 @@ UHDM::any *CompileHelper::compileSelectExpression(
              VObjectType::paPs_or_hierarchical_identifier)) {
           ref_obj *r = s.MakeRef_obj();
           NodeId nameId = fC->Child(Bit_select);
+          while (fC->Type(nameId) != VObjectType::slStringConst)
+            nameId = fC->Child(nameId);
           r->VpiName(fC->SymName(nameId));
           r->VpiParent(path);
           fC->populateCoreMembers(nameId, nameId, r);
@@ -1306,7 +1308,7 @@ UHDM::any *CompileHelper::compileExpression(
     m_stackLevel++;
   }
 
-  if (pexpr == nullptr) pexpr = component->getUhdmScope();
+  if (pexpr == nullptr) pexpr = component->getUhdmModel();
   if (pexpr == nullptr)
     pexpr = compileDesign->getCompiler()->getDesign()->getUhdmDesign();
 
@@ -1552,16 +1554,10 @@ UHDM::any *CompileHelper::compileExpression(
             if (UHDM::any *var =
                     bindVariable(component, pexpr, name, compileDesign))
               ref->Actual_group(var);
-            else if (component)
-              component->needLateBinding(ref);
           } else if (instance) {
             if (UHDM::any *var =
                     bindVariable(component, instance, name, compileDesign))
               ref->Actual_group(var);
-            else if (component)
-              component->needLateBinding(ref);
-          } else if (component) {
-            component->needLateBinding(ref);
           }
         }
         unsupported_typespec *tps = s.MakeUnsupported_typespec();
@@ -1571,7 +1567,6 @@ UHDM::any *CompileHelper::compileExpression(
           op->Typespec(rttps);
         }
         op->Typespec()->Actual_typespec(tps);
-        component->needLateTypedefBinding(op);
         Port_reference = fC->Sibling(Port_reference);
       }
       break;
@@ -2389,9 +2384,6 @@ UHDM::any *CompileHelper::compileExpression(
                   operation->Typespec(rttps);
                 }
                 operation->Typespec()->Actual_typespec(tps);
-                if (tps->UhdmType() == uhdmunsupported_typespec) {
-                  component->needLateTypedefBinding(operation);
-                }
               }
             }
             result = operation;
@@ -2540,16 +2532,10 @@ UHDM::any *CompileHelper::compileExpression(
                     if (UHDM::any *var =
                             bindVariable(component, pexpr, name, compileDesign))
                       ref->Actual_group(var);
-                    else if (component)
-                      component->needLateBinding(ref);
                   } else if (instance) {
                     if (UHDM::any *var = bindVariable(component, instance, name,
                                                       compileDesign))
                       ref->Actual_group(var);
-                    else if (component)
-                      component->needLateBinding(ref);
-                  } else if (component) {
-                    component->needLateBinding(ref);
                   }
                   operands->push_back(ref);
                   result = op;
@@ -2697,16 +2683,10 @@ UHDM::any *CompileHelper::compileExpression(
                 if (UHDM::any *var =
                         bindVariable(component, pexpr, name, compileDesign))
                   ref->Actual_group(var);
-                else if (component)
-                  component->needLateBinding(ref);
               } else if (instance) {
                 if (UHDM::any *var =
                         bindVariable(component, instance, name, compileDesign))
                   ref->Actual_group(var);
-                else if (component)
-                  component->needLateBinding(ref);
-              } else if (component) {
-                component->needLateBinding(ref);
               }
               result = ref;
             }
@@ -2832,9 +2812,15 @@ UHDM::any *CompileHelper::compileExpression(
         }
         case VObjectType::paEmpty_queue: {
           UHDM::array_var *var = s.MakeArray_var();
+          var->VpiParent(pexpr);
+          fC->populateCoreMembers(parent, parent, var);
           ref_typespec *rt = s.MakeRef_typespec();
           rt->VpiParent(var);
-          rt->Actual_typespec(s.MakeArray_typespec());
+          array_typespec *at = s.MakeArray_typespec();
+          at->VpiParent(var);
+          fC->populateCoreMembers(parent, parent, at);
+          rt->Actual_typespec(at);
+          fC->populateCoreMembers(parent, parent, rt);
           var->Typespec(rt);
           var->VpiArrayType(vpiQueueArray);
           result = var;
@@ -2843,6 +2829,10 @@ UHDM::any *CompileHelper::compileExpression(
         case VObjectType::paConstant_concatenation:
         case VObjectType::paConcatenation: {
           UHDM::operation *operation = s.MakeOperation();
+          operation->VpiParent(pexpr);
+          operation->VpiOpType(vpiConcatOp);
+          fC->populateCoreMembers(parent, parent, operation);
+
           UHDM::VectorOfany *operands = operation->Operands(true);
           NodeId Expression = fC->Child(child);
           if (attributes != nullptr) {
@@ -2859,23 +2849,21 @@ UHDM::any *CompileHelper::compileExpression(
             }
             Expression = fC->Sibling(Expression);
           }
-          operation->VpiParent(pexpr);
-          operation->VpiOpType(vpiConcatOp);
-          fC->populateCoreMembers(parent, parent, operation);
           break;
         }
         case VObjectType::paConstant_multiple_concatenation:
         case VObjectType::paMultiple_concatenation: {
           UHDM::operation *operation = s.MakeOperation();
+          operation->VpiParent(pexpr);
+          operation->VpiOpType(vpiMultiConcatOp);
+          fC->populateCoreMembers(parent, parent, operation);
+
           UHDM::VectorOfany *operands = operation->Operands(true);
           if (attributes != nullptr) {
             operation->Attributes(attributes);
             for (auto a : *attributes) a->VpiParent(operation);
           }
           result = operation;
-          operation->VpiParent(pexpr);
-          operation->VpiOpType(vpiMultiConcatOp);
-          fC->populateCoreMembers(parent, parent, operation);
           NodeId NCopy = fC->Child(child);
           if (UHDM::any *exp =
                   compileExpression(component, fC, NCopy, compileDesign, reduce,
@@ -2993,6 +2981,8 @@ UHDM::any *CompileHelper::compileExpression(
           return nullptr;
         case VObjectType::paCycle_delay_const_range_expression: {
           UHDM::range *r = s.MakeRange();
+          r->VpiParent(pexpr);
+
           NodeId lhs = fC->Child(child);
           NodeId rhs = fC->Sibling(lhs);
           r->Left_expr((expr *)compileExpression(component, fC, lhs,
@@ -3009,8 +2999,9 @@ UHDM::any *CompileHelper::compileExpression(
           VObjectType type = fC->Type(child);
           operation *operation = s.MakeOperation();
           operation->VpiParent(pexpr);
-          UHDM::VectorOfany *operands = operation->Operands(true);
           fC->populateCoreMembers(parent, parent, operation);
+
+          UHDM::VectorOfany *operands = operation->Operands(true);
           int32_t operationType = UhdmWriter::getVpiOpType(type);
           if (NodeId subOp1 = fC->Child(child)) {
             VObjectType subOp1type = fC->Type(subOp1);
@@ -3072,6 +3063,7 @@ UHDM::any *CompileHelper::compileExpression(
               case VObjectType::paS_UNTIL_WITH: {
                 int32_t optype = UhdmWriter::getVpiOpType(type);
                 operation *oper = s.MakeOperation();
+                oper->VpiParent(pexpr);
                 oper->VpiOpType(optype);
                 fC->populateCoreMembers(parent, parent, oper);
                 UHDM::VectorOfany *operands = oper->Operands(true);
@@ -3120,10 +3112,10 @@ UHDM::any *CompileHelper::compileExpression(
           VObjectType type = childType;
           operation *operation = s.MakeOperation();
           operation->VpiParent(pexpr);
-          UHDM::VectorOfany *operands = operation->Operands(true);
           fC->populateCoreMembers(parent, parent, operation);
-          int32_t operationType = UhdmWriter::getVpiOpType(type);
-          operation->VpiOpType(operationType);
+          operation->VpiOpType(UhdmWriter::getVpiOpType(type));
+
+          UHDM::VectorOfany *operands = operation->Operands(true);
           if (any *rhs = compileExpression(component, fC, fC->Sibling(child),
                                            compileDesign, reduce, operation,
                                            instance, muteErrors)) {
@@ -3135,6 +3127,8 @@ UHDM::any *CompileHelper::compileExpression(
         case VObjectType::paClocking_event: {
           if (fC->Type(fC->Sibling(child)) == VObjectType::paSequence_expr) {
             UHDM::clocked_seq *seq = s.MakeClocked_seq();
+            seq->VpiParent(pexpr);
+
             NodeId endLocationId = child;
             if (any *cev = compileExpression(component, fC, fC->Child(child),
                                              compileDesign, reduce, seq,
@@ -3148,11 +3142,11 @@ UHDM::any *CompileHelper::compileExpression(
               seq->VpiSequenceExpr(ex);
               endLocationId = fC->Sibling(child);
             }
-            seq->VpiParent(pexpr);
             fC->populateCoreMembers(child, endLocationId, seq);
             result = seq;
           } else {
             UHDM::clocked_property *prop = s.MakeClocked_property();
+            prop->VpiParent(pexpr);
             if (any *cev = compileExpression(component, fC, fC->Child(child),
                                              compileDesign, reduce, prop,
                                              instance, muteErrors)) {
@@ -3811,8 +3805,7 @@ UHDM::VectorOfrange *CompileHelper::compileRanges(
             lexpc->VpiValue("UINT:0");
             lexpc->VpiDecompile("0");
             lexpc->VpiParent(range);
-            fC->populateCoreMembers(Packed_dimension, Packed_dimension, lexpc);
-            lexpc->VpiEndColumnNo(fC->Column(Packed_dimension) + 1);
+            fC->populateCoreMembers(InvalidNodeId, InvalidNodeId, lexpc);
             range->Left_expr(lexpc);
 
             constant *rexpc = s.MakeConstant();
@@ -3823,16 +3816,10 @@ UHDM::VectorOfrange *CompileHelper::compileRanges(
             rexpc->VpiParent(range);
             fC->populateCoreMembers(Packed_dimension, Packed_dimension, range);
             fC->populateCoreMembers(Packed_dimension, Packed_dimension, rexpc);
-            // ArrayExprFuncArg. Ideally this should not be the case but for
-            // safe validation.
-            if ((fC->Column(Packed_dimension) + 1) >= rexpc->VpiEndColumnNo())
-              rexpc->VpiEndColumnNo(fC->Column(Packed_dimension) + 1);
-            else
-              rexpc->VpiEndColumnNo(fC->Column(Packed_dimension));
-            rexpc->VpiEndColumnNo(fC->Column(Packed_dimension) + 1);
             range->Right_expr(rexpc);
 
             ref_typespec *assoc_tps_rt = s.MakeRef_typespec();
+            assoc_tps_rt->VpiName(assoc_tps->VpiName());
             assoc_tps_rt->VpiParent(rexpc);
             assoc_tps_rt->Actual_typespec(assoc_tps);
             fC->populateCoreMembers(rexpr, rexpr, assoc_tps_rt);
@@ -3912,6 +3899,7 @@ UHDM::VectorOfrange *CompileHelper::compileRanges(
         lexpc->VpiDecompile("0");
         lexpc->VpiParent(range);
         range->Left_expr(lexpc);
+        fC->populateCoreMembers(InvalidNodeId, InvalidNodeId, lexpc);
 
         constant *rexpc = s.MakeConstant();
         rexpc->VpiConstType(vpiStringConst);
@@ -3920,6 +3908,7 @@ UHDM::VectorOfrange *CompileHelper::compileRanges(
         rexpc->VpiDecompile("associative");
         rexpc->VpiParent(range);
         range->Right_expr(rexpc);
+        fC->populateCoreMembers(InvalidNodeId, InvalidNodeId, rexpc);
 
         if (typespec *assoc_tps =
                 compileTypespec(component, fC, DataType, compileDesign, reduce,
@@ -4248,10 +4237,10 @@ const typespec *CompileHelper::getTypespec(DesignComponent *component,
       }
     }
     if (sig) {
-      if (NodeId sigTypeId = sig->getTypeSpecId()) {
+      if (NodeId sigTypeId = sig->getTypespecId()) {
         result = compileTypespec(
             sig->getComponent(), fC, sigTypeId, compileDesign, reduce,
-            sig->getComponent()->getUhdmScope(), instance, true);
+            sig->getComponent()->getUhdmModel(), instance, true);
         NodeId Unpacked_dimension = sig->getUnpackedDimension();
         if (fC->Type(Unpacked_dimension) != VObjectType::sl_INVALID_) {
           array_typespec *array = s.MakeArray_typespec();
@@ -4276,7 +4265,7 @@ const typespec *CompileHelper::getTypespec(DesignComponent *component,
           NodeId DataType = fC->Parent(Packed_dimension);
           result = compileTypespec(
               sig->getComponent(), fC, DataType, compileDesign, reduce,
-              sig->getComponent()->getUhdmScope(), instance, false);
+              sig->getComponent()->getUhdmModel(), instance, false);
         }
         NodeId Unpacked_dimension = sig->getUnpackedDimension();
         if (fC->Type(Unpacked_dimension) != VObjectType::sl_INVALID_) {
@@ -4290,7 +4279,7 @@ const typespec *CompileHelper::getTypespec(DesignComponent *component,
           if (result == nullptr) {
             result = compileBuiltinTypespec(
                 sig->getComponent(), fC, sig->getNodeId(), sig->getType(),
-                compileDesign, nullptr, sig->getComponent()->getUhdmScope());
+                compileDesign, nullptr, sig->getComponent()->getUhdmModel());
           }
           ref_typespec *rt = s.MakeRef_typespec();
           rt->VpiParent(array);
@@ -5429,19 +5418,22 @@ UHDM::any *CompileHelper::compileComplexFuncCall(
           fC->populateCoreMembers(name, name, ref);
           tmpName.clear();
         }
-        path->VpiName(the_name);
-        path->VpiFullName(the_name);
-        path->VpiParent(pexpr);
 
         if (elems->size() == 1) {
           result = elems->at(0);
+          result->VpiParent(pexpr, true);
         } else {
-          if (!elems->empty()) {
+          if (elems->empty()) {
+            fC->populateCoreMembers(id, id, path);
+          } else {
             path->VpiLineNo(elems->front()->VpiLineNo());
             path->VpiColumnNo(elems->front()->VpiColumnNo());
             path->VpiEndLineNo(elems->back()->VpiEndLineNo());
             path->VpiEndColumnNo(elems->back()->VpiEndColumnNo());
           }
+          path->VpiName(the_name);
+          path->VpiFullName(the_name);
+          path->VpiParent(pexpr);
           result = path;
         }
       } else {
@@ -5506,16 +5498,10 @@ UHDM::any *CompileHelper::compileComplexFuncCall(
       if (pexpr) {
         if (UHDM::any *var = bindVariable(component, pexpr, n, compileDesign))
           ref->Actual_group(var);
-        else if (component)
-          component->needLateBinding(ref);
       } else if (instance) {
         if (UHDM::any *var =
                 bindVariable(component, instance, n, compileDesign))
           ref->Actual_group(var);
-        else if (component)
-          component->needLateBinding(ref);
-      } else if (component) {
-        component->needLateBinding(ref);
       }
       result = ref;
     }
@@ -5530,15 +5516,9 @@ UHDM::any *CompileHelper::compileComplexFuncCall(
     if (pexpr) {
       if (UHDM::any *var = bindVariable(component, pexpr, n, compileDesign))
         ref->Actual_group(var);
-      else if (component)
-        component->needLateBinding(ref);
     } else if (instance) {
       if (UHDM::any *var = bindVariable(component, instance, n, compileDesign))
         ref->Actual_group(var);
-      else if (component)
-        component->needLateBinding(ref);
-    } else if (component) {
-      component->needLateBinding(ref);
     }
     result = ref;
   } else if (fC->Type(name) == VObjectType::paSubroutine_call) {

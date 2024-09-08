@@ -45,7 +45,7 @@ class Program : public DesignComponent, public ClockingBlockHolder {
 
  public:
   Program(std::string_view name, Library* library, FileContent* fC,
-          NodeId nodeId);
+          NodeId nodeId, UHDM::Serializer& serializer);
   ~Program() override = default;
 
   uint32_t getSize() const override;

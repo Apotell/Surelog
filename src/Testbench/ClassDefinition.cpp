@@ -52,16 +52,16 @@ ClassDefinition::ClassDefinition(std::string_view name, Library* library,
   if (!name.empty()) instance->VpiName(name);
   if (nodeId && (fC != nullptr))
     fC->populateCoreMembers(nodeId, nodeId, instance);
-  if (container != nullptr) instance->VpiParent(container->getUhdmScope());
-  setUhdmScope(instance);
+  if (container != nullptr) instance->VpiParent(container->getUhdmModel());
+  setUhdmModel(instance);
 }
 
 void ClassDefinition::setContainer(DesignComponent* container) {
-  getUhdmScope()->VpiParent(nullptr, true);
+  getUhdmModel()->VpiParent(nullptr, true);
   m_container = container;
 
   if (m_container != nullptr)
-    getUhdmScope()->VpiParent(m_container->getUhdmScope());
+    getUhdmModel()->VpiParent(m_container->getUhdmModel());
 }
 
 uint32_t ClassDefinition::getSize() const {

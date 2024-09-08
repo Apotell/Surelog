@@ -252,8 +252,8 @@ bool TestbenchElaboration::bindBaseClasses_() {
                          classDefinition->getNodeId(), InvalidNodeId, "super",
                          false, false, false, false, false);
         UHDM::class_defn* derived =
-            classDefinition->getUhdmScope<UHDM::class_defn>();
-        UHDM::class_defn* parent = bdef->getUhdmScope<UHDM::class_defn>();
+            classDefinition->getUhdmModel<UHDM::class_defn>();
+        UHDM::class_defn* parent = bdef->getUhdmModel<UHDM::class_defn>();
         classDefinition->insertProperty(prop);
         UHDM::extends* extends = s.MakeExtends();
         extends->VpiParent(derived);
@@ -293,7 +293,7 @@ bool TestbenchElaboration::bindBaseClasses_() {
           extends_ts->Actual_typespec(tps);
           extends->Class_typespec(extends_ts);
           UHDM::class_defn* def =
-              classDefinition->getUhdmScope<UHDM::class_defn>();
+              classDefinition->getUhdmModel<UHDM::class_defn>();
           def->Extends(extends);
         }
       }
@@ -697,7 +697,7 @@ bool TestbenchElaboration::bindProperties_() {
 
   // Bind properties
   for (const auto& [className, classDefinition] : classes) {
-    UHDM::class_defn* defn = classDefinition->getUhdmScope<UHDM::class_defn>();
+    UHDM::class_defn* defn = classDefinition->getUhdmModel<UHDM::class_defn>();
     UHDM::VectorOfvariables* vars = defn->Variables(true);
     for (Signal* sig : classDefinition->getSignals()) {
       const FileContent* fC = sig->getFileContent();
@@ -720,7 +720,7 @@ bool TestbenchElaboration::bindProperties_() {
             Reduce::Yes, nullptr, nullptr, unpackedSize, false);
       }
       UHDM::typespec* tps = nullptr;
-      NodeId typeSpecId = sig->getTypeSpecId();
+      NodeId typeSpecId = sig->getTypespecId();
       if (typeSpecId) {
         tps = m_helper.compileTypespec(classDefinition, fC, typeSpecId,
                                        m_compileDesign, Reduce::Yes, nullptr,
@@ -742,10 +742,6 @@ bool TestbenchElaboration::bindProperties_() {
       if (UHDM::any* obj = makeVar_(classDefinition, sig, packedDimensions,
                                     packedSize, unpackedDimensions,
                                     unpackedSize, nullptr, vars, exp, tps)) {
-        if (obj->UhdmType() == UHDM::uhdmnamed_event) {
-          defn->Named_events(true)->push_back((UHDM::named_event*)obj);
-        }
-
         fC->populateCoreMembers(id, id, obj);
         obj->VpiParent(defn);
       } else {

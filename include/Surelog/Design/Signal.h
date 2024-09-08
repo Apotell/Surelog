@@ -70,7 +70,7 @@ class Signal final {
   void setDataType(const DataType* dtype) { m_dataType = dtype; }
   void setPackedDimension(NodeId id) { m_packedDimension = id; }
   void setUnpackedDimension(NodeId id) { m_unpackedDimension = id; }
-  void setTypespecId(NodeId id) { m_typeSpecId = id; }
+  void setTypespecId(NodeId id) { m_typespecId = id; }
   bool isInterface() const { return (bool)m_interfaceTypeNameId; }
   void setLowConn(Signal* sig) { m_lowConn = sig; }
   void setConst() { m_const = true; }
@@ -98,7 +98,7 @@ class Signal final {
   NodeId getUnpackedDimension() const { return m_unpackedDimension; }
   NodeId getModPortId() const;
   NodeId getInterfaceTypeNameId() const { return m_interfaceTypeNameId; }
-  NodeId getTypeSpecId() const { return m_typeSpecId; }
+  NodeId getTypespecId() const { return m_typespecId; }
   NodeId getDelay() const { return m_delay; }
   NodeId getDriveStrength() const { return m_drive_strength; }
   NodeId getDefaultValue() const { return m_default_value; }
@@ -110,9 +110,7 @@ class Signal final {
   void attributes(std::vector<UHDM::attribute*>* attr) { m_attributes = attr; }
 
   UHDM::any* uhdmScopeModel() { return m_uhdmScopeModel; }
-  void uhdmScopeModel(UHDM::any* scopeModel) {
-    m_uhdmScopeModel = scopeModel;
-  }
+  void uhdmScopeModel(UHDM::any* scopeModel) { m_uhdmScopeModel = scopeModel; }
 
  private:
   DesignComponent* const m_component = nullptr;
@@ -121,7 +119,7 @@ class Signal final {
   const NodeId m_nameId;
   NodeId m_interfaceTypeNameId;
   NodeId m_packedDimension;
-  NodeId m_typeSpecId;
+  NodeId m_typespecId;
   NodeId m_unpackedDimension;
   NodeId m_delay;
   NodeId m_drive_strength;

@@ -173,13 +173,6 @@ bool CompileHelper::importPackage(DesignComponent* scope, Design* design,
     }
     scope->getSignals().push_back(net);
   }
-  // Incomplete bindings
-  for (auto& var : def->getLateBinding()) {
-    scope->needLateBinding(var);
-  }
-  for (auto& var : def->getLateTypedefBinding()) {
-    scope->needLateTypedefBinding(var);
-  }
 
   // Type parameters
   auto& paramSet = def->getParameterMap();
@@ -205,19 +198,9 @@ bool CompileHelper::importPackage(DesignComponent* scope, Design* design,
       if (pclone->UhdmType() == uhdmtype_parameter) {
         type_parameter* the_p = (type_parameter*)pclone;
         the_p->VpiImported(pack_name);
-        if (const ref_typespec* rt = the_p->Typespec()) {
-          if (rt->Actual_typespec<unsupported_typespec>() != nullptr) {
-            scope->needLateTypedefBinding(the_p);
-          }
-        }
       } else {
         parameter* the_p = (parameter*)pclone;
         the_p->VpiImported(pack_name);
-        if (const ref_typespec* rt = the_p->Typespec()) {
-          if (rt->Actual_typespec<unsupported_typespec>() != nullptr) {
-            scope->needLateTypedefBinding(the_p);
-          }
-        }
       }
       parameters->push_back(pclone);
       clone->setUhdmParam(pclone);
@@ -258,11 +241,6 @@ bool CompileHelper::importPackage(DesignComponent* scope, Design* design,
     if (pclone->UhdmType() == uhdmparameter) {
       parameter* the_p = (parameter*)pclone;
       the_p->VpiImported(pack_name);
-      if (const ref_typespec* rt = the_p->Typespec()) {
-        if (rt->Actual_typespec<unsupported_typespec>() != nullptr) {
-          scope->needLateTypedefBinding(the_p);
-        }
-      }
     }
   }
 
@@ -485,7 +463,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
                                               Reduce reduce, UHDM::any* pstmt) {
   DataType* newType = nullptr;
   Serializer& s = compileDesign->getSerializer();
-  if (pstmt == nullptr) pstmt = scope->getUhdmScope();
+  if (pstmt == nullptr) pstmt = scope->getUhdmModel();
   if (pstmt == nullptr)
     pstmt = compileDesign->getCompiler()->getDesign()->getUhdmDesign();
 
@@ -647,7 +625,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       fC->populateCoreMembers(data_type, data_type, ts, true);
       if ((m_reduce == Reduce::Yes) && (reduce == Reduce::Yes) &&
           (valuedcomponenti_cast<Package*>(scope))) {
-        ts->Instance(scope->getUhdmScope<UHDM::instance>());
+        ts->Instance(scope->getUhdmModel<UHDM::instance>());
       }
       if (array_tps) {
         st->setTypespec(array_tps);
@@ -681,7 +659,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       fC->populateCoreMembers(enum_base_type, type_name, ts, true);
       if ((m_reduce == Reduce::Yes) && (reduce == Reduce::Yes) &&
           (valuedcomponenti_cast<Package*>(scope))) {
-        ts->Instance(scope->getUhdmScope<UHDM::instance>());
+        ts->Instance(scope->getUhdmModel<UHDM::instance>());
       }
       if (array_tps) {
         st->setTypespec(array_tps);
@@ -772,7 +750,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
     }
     if ((m_reduce == Reduce::Yes) && (reduce == Reduce::Yes) &&
         (valuedcomponenti_cast<Package*>(scope))) {
-      enum_t->Instance(scope->getUhdmScope<UHDM::instance>());
+      enum_t->Instance(scope->getUhdmModel<UHDM::instance>());
     }
     // Enum values
     VectorOfenum_const* econsts = enum_t->Enum_consts(true);
@@ -870,7 +848,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
               (typespec*)UHDM::clone_tree((any*)ts, &elaboratorContext);
 
           if (array_tps) {
-            array_tps->Instance(scope->getUhdmScope<UHDM::instance>());
+            array_tps->Instance(scope->getUhdmModel<UHDM::instance>());
             array_tps->VpiName(name);
             if (array_tps->Elem_typespec() == nullptr) {
               ref_typespec* tpcloneRef = s.MakeRef_typespec();
@@ -889,15 +867,12 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
             dummy->setTypespec(array_tps);
             if (resolution_func) {
               array_tps->Resolution_func(resolution_func);
-            } else if (!resolutionFunctionName.empty()) {
-              scope->needLateResolutionFunction(resolutionFunctionName,
-                                                array_tps);
             }
           } else if (packed_array_tps) {
             if (tpclone->UhdmType() == uhdmlogic_typespec) {
               logic_typespec* logic_array_tps = s.MakeLogic_typespec();
               logic_array_tps->Ranges(packed_array_tps->Ranges());
-              logic_array_tps->Instance(scope->getUhdmScope<UHDM::instance>());
+              logic_array_tps->Instance(scope->getUhdmModel<UHDM::instance>());
               logic_array_tps->VpiName(name);
               if (logic_array_tps->Elem_typespec() == nullptr) {
                 ref_typespec* tpcloneRef = s.MakeRef_typespec();
@@ -907,9 +882,6 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
               logic_array_tps->Elem_typespec()->Actual_typespec(tpclone);
               if (resolution_func) {
                 logic_array_tps->Resolution_func(resolution_func);
-              } else if (!resolutionFunctionName.empty()) {
-                scope->needLateResolutionFunction(resolutionFunctionName,
-                                                  logic_array_tps);
               }
               if (tpclone->Typedef_alias() == nullptr) {
                 ref_typespec* tsRef = s.MakeRef_typespec();
@@ -921,7 +893,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
               dummy->setTypespec(logic_array_tps);
             } else {
               if (ts->UhdmType() == uhdmpacked_array_typespec) {
-                tpclone->Instance(scope->getUhdmScope<UHDM::instance>());
+                tpclone->Instance(scope->getUhdmModel<UHDM::instance>());
                 tpclone->VpiName(name);
                 if (tpclone->Typedef_alias() == nullptr) {
                   ref_typespec* tsRef = s.MakeRef_typespec();
@@ -940,15 +912,12 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
                     struct_typespec* btps = (struct_typespec*)tpclone;
                     btps->Resolution_func(resolution_func);
                   }
-                } else if (!resolutionFunctionName.empty()) {
-                  scope->needLateResolutionFunction(resolutionFunctionName,
-                                                    tpclone);
                 }
                 newTypeDef->setTypespec(tpclone);
                 dummy->setTypespec(tpclone);
               } else {
                 packed_array_tps->Instance(
-                    scope->getUhdmScope<UHDM::instance>());
+                    scope->getUhdmModel<UHDM::instance>());
                 packed_array_tps->VpiName(name);
                 if (packed_array_tps->Elem_typespec() == nullptr) {
                   ref_typespec* tpcloneRef = s.MakeRef_typespec();
@@ -964,16 +933,13 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
                 tpclone->Typedef_alias()->Actual_typespec(ts);
                 if (resolution_func) {
                   packed_array_tps->Resolution_func(resolution_func);
-                } else if (!resolutionFunctionName.empty()) {
-                  scope->needLateResolutionFunction(resolutionFunctionName,
-                                                    packed_array_tps);
                 }
                 newTypeDef->setTypespec(packed_array_tps);
                 dummy->setTypespec(packed_array_tps);
               }
             }
           } else {
-            tpclone->Instance(scope->getUhdmScope<UHDM::instance>());
+            tpclone->Instance(scope->getUhdmModel<UHDM::instance>());
             tpclone->VpiName(name);
             if (tpclone->Typedef_alias() == nullptr) {
               ref_typespec* tsRef = s.MakeRef_typespec();
@@ -992,9 +958,6 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
                 struct_typespec* btps = (struct_typespec*)tpclone;
                 btps->Resolution_func(resolution_func);
               }
-            } else if (!resolutionFunctionName.empty()) {
-              scope->needLateResolutionFunction(resolutionFunctionName,
-                                                tpclone);
             }
             newTypeDef->setTypespec(tpclone);
             dummy->setTypespec(tpclone);
@@ -1041,13 +1004,11 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
             real_typespec* btps = (real_typespec*)ts;
             btps->Resolution_func(resolution_func);
           }
-        } else if (!resolutionFunctionName.empty()) {
-          scope->needLateResolutionFunction(resolutionFunctionName, ts);
         }
 
         if ((m_reduce == Reduce::Yes) && (reduce == Reduce::Yes) &&
             (valuedcomponenti_cast<Package*>(scope))) {
-          ts->Instance(scope->getUhdmScope<UHDM::instance>());
+          ts->Instance(scope->getUhdmModel<UHDM::instance>());
         }
         ts->VpiName(name);
         simple->setTypespec(ts);
@@ -1622,6 +1583,7 @@ void setDirectionAndType(DesignComponent* component, const FileContent* fC,
                        /* unpackedDimension */ InvalidNodeId, is_signed);
         sig->uhdmScopeModel(s.TopScope());
         sig->setStatic();
+        sig->setTypespecId(nodeType);
         if (is_var) sig->setVar();
         if (attributes) sig->attributes(attributes);
         component->getPorts().push_back(sig);
@@ -1885,7 +1847,7 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
   Serializer& s = compileDesign->getSerializer();
 
   UHDM::any* uhdmScope = sig->uhdmScopeModel();
-  if (uhdmScope == nullptr) uhdmScope = comp->getUhdmScope();
+  if (uhdmScope == nullptr) uhdmScope = comp->getUhdmModel();
   const ScopedScope scopedScope(uhdmScope);
 
   const FileContent* fC = sig->getFileContent();
@@ -1926,9 +1888,9 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
     }
   }
 
-  if (sig->getTypeSpecId()) {
+  if (sig->getTypespecId()) {
     checkForLoops(true);
-    tps = compileTypespec(comp, fC, sig->getTypeSpecId(), compileDesign, reduce,
+    tps = compileTypespec(comp, fC, sig->getTypespecId(), compileDesign, reduce,
                           uhdmScope, nullptr, true);
     checkForLoops(false);
   }
@@ -2330,6 +2292,7 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
       struct_net* stv = s.MakeStruct_net();
       stv->VpiName(signame);
       stv->VpiParent(uhdmScope);
+      fC->populateCoreMembers(sig->getNameId(), sig->getNameId(), stv);
       if (sig->attributes()) {
         stv->Attributes(sig->attributes());
         for (auto a : *sig->attributes()) a->VpiParent(stv);
@@ -2338,15 +2301,17 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
         ref_typespec* rt = s.MakeRef_typespec();
         rt->VpiParent(stv);
         rt->Actual_typespec(tps);
+        rt->VpiName(fC->SymName(sig->getNameId()));
+        fC->populateCoreMembers(sig->getNameId(), sig->getNameId(), rt);
         stv->Typespec(rt);
       }
       obj = stv;
-      stv->VpiName(signame);
     } else if (tps && tps->UhdmType() == uhdmstruct_typespec) {
       struct_net* stv = s.MakeStruct_net();
       stv->VpiName(signame);
       ref_typespec* rt = s.MakeRef_typespec();
       rt->VpiParent(stv);
+      rt->VpiName(fC->SymName(sig->getNameId()));
       fC->populateCoreMembers(sig->getNameId(), sig->getNameId(), rt);
       rt->Actual_typespec(tps);
       stv->Typespec(rt);
@@ -2383,7 +2348,10 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
         rt->VpiName(signame);
         rt->Actual_typespec(tps);
         logicn->Typespec(rt);
-        fC->populateCoreMembers(sig->getNameId(), sig->getNameId(), rt);
+        NodeId typeId = sig->getInterfaceTypeNameId()
+                            ? sig->getInterfaceTypeNameId()
+                            : sig->getTypespecId();
+        fC->populateCoreMembers(typeId, typeId, rt);
       }
       if (unpackedDimensions) {
         fC->populateCoreMembers(id, id, logicn);
@@ -2429,13 +2397,7 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
   }
 
   if (obj) {
-    if (obj->VpiLineNo() == 0) {
-      if (unpackedDimension) {
-        fC->populateCoreMembers(id, unpackedDimension, obj);
-      } else {
-        fC->populateCoreMembers(id, id, obj);
-      }
-    }
+    fC->populateCoreMembers(sig->getNameId(), sig->getNameId(), obj);
   } else {
     // Unsupported type
     ErrorContainer* errors = compileDesign->getCompiler()->getErrorContainer();
@@ -2590,14 +2552,15 @@ bool CompileHelper::compileAnsiPortDeclaration(DesignComponent* component,
         unpackedDimension = InvalidNodeId;
       if (fC->Type(if_type_name_s) == VObjectType::paIntVec_TypeReg ||
           fC->Type(if_type_name_s) == VObjectType::paIntVec_TypeLogic) {
-        Signal* signal = new Signal(
-            component, fC, id, identifier, fC->Type(if_type_name_s),
-            VObjectType::slNoType, InvalidNodeId, unpackedDimension, false);
-        signal->uhdmScopeModel(compileDesign->getSerializer().TopScope());
-        signal->setStatic();
-        component->getPorts().push_back(signal);
+        Signal* s = new Signal(component, fC, id, identifier,
+                               fC->Type(if_type_name_s), VObjectType::slNoType,
+                               InvalidNodeId, unpackedDimension, false);
+        s->uhdmScopeModel(compileDesign->getSerializer().TopScope());
+        s->setStatic();
+        s->setTypespecId(if_type_name_s);
+        component->getPorts().push_back(s);
         // DO NOT create signals for interfaces:
-        // component->getSignals().push_back(signal);
+        // component->getSignals().push_back(s);
       } else {
         Signal* s = new Signal(component, fC, id, identifier, if_type_name_s,
                                VObjectType::slNoType, unpackedDimension, false);
@@ -2606,7 +2569,7 @@ bool CompileHelper::compileAnsiPortDeclaration(DesignComponent* component,
         s->setTypespecId(if_type_name_s);
         component->getPorts().push_back(s);
         // DO NOT create signals for interfaces:
-        // component->getSignals().push_back(signal);
+        // component->getSignals().push_back(s);
       }
     } else {
       VObjectType dataType = VObjectType::paData_type_or_implicit;
@@ -2621,7 +2584,7 @@ bool CompileHelper::compileAnsiPortDeclaration(DesignComponent* component,
         dataType = last->getType();
         packed = last->getPackedDimension();
         is_signed = last->isSigned();
-        specParamId = last->getTypeSpecId();
+        specParamId = last->getTypespecId();
         unpacked = last->getUnpackedDimension();
       }
       if (specParamId) {
@@ -2794,7 +2757,7 @@ void CompileHelper::compileImportDeclaration(DesignComponent* component,
        n<> u<32> t<Package_import_item> p<33> c<30> l<3>
        n<> u<33> t<Package_import_declaration> p<34> c<29> l<3>
      */
-  UHDM::any* pscope = component->getUhdmScope();
+  UHDM::any* pscope = component->getUhdmModel();
   if (pscope == nullptr)
     pscope = compileDesign->getCompiler()->getDesign()->getUhdmDesign();
   Serializer& s = compileDesign->getSerializer();
@@ -3073,7 +3036,7 @@ n<> u<17> t<Continuous_assign> p<18> c<16> l<4>
       }
 
       UHDM::cont_assign* cassign = s.MakeCont_assign();
-      cassign->VpiParent(component->getUhdmScope());
+      cassign->VpiParent(component->getUhdmModel());
 
       // RHS
       UHDM::any* rhs_exp =
@@ -3231,7 +3194,7 @@ CompileHelper::compileInstantiation(ModuleDefinition* mod,
       UHDM::ref_module* m = s.MakeRef_module();
       m->VpiName(instName);
       m->VpiDefName(modName);
-      m->VpiParent(mod->getUhdmScope());
+      m->VpiParent(mod->getUhdmModel());
       fC->populateCoreMembers(id, id, m);
       results.second.push_back(m);
       compileHighConn(mod, fC, compileDesign, instId, m->Ports(true), m);
@@ -3560,6 +3523,7 @@ initial* CompileHelper::compileInitialBlock(DesignComponent* component,
   UHDM::Serializer& s = compileDesign->getSerializer();
   compileDesign->lockSerializer();
   initial* init = s.MakeInitial();
+  init->VpiParent(component->getUhdmModel());
   fC->populateCoreMembers(initial_construct, initial_construct, init);
   NodeId Statement_or_null = fC->Child(initial_construct);
   if (VectorOfany* stmts = compileStmt(component, fC, Statement_or_null,
@@ -3609,26 +3573,40 @@ UHDM::atomic_stmt* CompileHelper::compileProceduralTimingControlStmt(
   if (value.front() == '#') {
     dc->VpiDelay(value);
   } else {
-    NodeId valueNodeId = IntConst;
-    if (value.empty() || (value == SymbolTable::getBadSymbol())) {
-      while (valueNodeId &&
-             (fC->Type(valueNodeId) != VObjectType::slStringConst) &&
-             (fC->Type(valueNodeId) != VObjectType::slIntConst)) {
-        valueNodeId = fC->Child(valueNodeId);
-      }
+    auto childIds =
+        fC->sl_collect_all(IntConst,
+                           {VObjectType::slStringConst, VObjectType::slIntConst,
+                            VObjectType::slRealConst},
+                           true);
+    NodeId valueNodeId = childIds.empty() ? IntConst : childIds.front();
+    if (fC->Type(valueNodeId) == VObjectType::slStringConst) {
+      ref_obj* ref = s.MakeRef_obj();
+      ref->VpiName(fC->SymName(valueNodeId));
+      ref->VpiParent(dc);
+      fC->populateCoreMembers(valueNodeId, valueNodeId, ref);
+      dc->Delay(ref);
+    } else if ((fC->Type(valueNodeId) == VObjectType::slIntConst) ||
+               (fC->Type(valueNodeId) == VObjectType::slRealConst)) {
+      constant* c = s.MakeConstant();
+      std::string value =
+          (fC->Type(valueNodeId) == VObjectType::slIntConst) ? "INT:" : "REAL:";
+      value.append(fC->SymName(valueNodeId));
+      c->VpiValue(value);
+      c->VpiDecompile(fC->SymName(valueNodeId));
+      c->VpiSize(64);
+      c->VpiConstType(fC->Type(valueNodeId) == VObjectType::slIntConst
+                          ? vpiIntConst
+                          : vpiRealConst);
+      c->VpiParent(dc);
+      fC->populateCoreMembers(valueNodeId, valueNodeId, c);
+      dc->Delay(c);
     }
-
-    ref_obj* ref = s.MakeRef_obj();
-    ref->VpiName(fC->SymName(valueNodeId));
-    ref->VpiParent(pstmt);
-    fC->populateCoreMembers(IntConst, IntConst, ref);
-    dc->Delay(ref);
   }
   fC->populateCoreMembers(Delay_control, Delay_control, dc);
   if (NodeId Statement_or_null = fC->Sibling(Procedural_timing_control)) {
-    VectorOfany* st = compileStmt(component, fC, Statement_or_null,
-                                  compileDesign, Reduce::No, dc, instance);
-    if (st) {
+    if (VectorOfany* st =
+            compileStmt(component, fC, Statement_or_null, compileDesign,
+                        Reduce::No, dc, instance)) {
       any* stmt = st->front();
       dc->Stmt(stmt);
       stmt->VpiParent(dc);
@@ -3636,8 +3614,7 @@ UHDM::atomic_stmt* CompileHelper::compileProceduralTimingControlStmt(
       dc->VpiEndColumnNo(stmt->VpiEndColumnNo());
     } else {
       // Malformed AST due to grammar for: #1 t
-      NodeId unit = fC->Child(IntConst);
-      if (unit) {
+      if (NodeId unit = fC->Child(IntConst)) {
         unit = fC->Child(unit);  // StringConst child of Instance_name
         const std::string_view name = fC->SymName(unit);
         std::pair<task_func*, DesignComponent*> ret =
@@ -3656,7 +3633,9 @@ UHDM::atomic_stmt* CompileHelper::compileProceduralTimingControlStmt(
           }
         }
         if (call) {
-          fC->populateCoreMembers(fC->Child(unit), fC->Child(unit), call);
+          NodeId nid = fC->Child(unit);
+          if (!nid) nid = unit;
+          fC->populateCoreMembers(nid, nid, call);
           dc->Stmt(call);
           call->VpiParent(dc);
           if (fC->Child(unit)) {
@@ -3698,7 +3677,7 @@ always* CompileHelper::compileAlwaysBlock(DesignComponent* component,
   UHDM::Serializer& s = compileDesign->getSerializer();
   compileDesign->lockSerializer();
   always* always = s.MakeAlways();
-  always->VpiParent(component->getUhdmScope());
+  always->VpiParent(component->getUhdmModel());
   NodeId always_keyword = fC->Child(id);
   switch (fC->Type(always_keyword)) {
     case VObjectType::paALWAYS:
@@ -4046,7 +4025,7 @@ bool CompileHelper::compileParameterDeclaration(
     component->setParam_assigns(s.MakeParam_assignVec());
     param_assigns = component->getParam_assigns();
   }
-  UHDM::any* const pany = component->getUhdmScope();
+  UHDM::any* const pany = component->getUhdmModel();
   if (fC->Type(nodeId) == VObjectType::paList_of_type_assignments) {
     // Type param
     NodeId typeNameId = fC->Child(nodeId);
@@ -4063,12 +4042,12 @@ bool CompileHelper::compileParameterDeclaration(
       }
       UHDM::type_parameter* p = s.MakeType_parameter();
       p->VpiName(fC->SymName(typeNameId));
-      fC->populateCoreMembers(typeNameId, ntype ? ntype : typeNameId, p);
+      fC->populateCoreMembers(typeNameId, typeNameId, p);
       if (typespec* tps = compileTypespec(component, fC, ntype, compileDesign,
                                           Reduce::No, p, nullptr, false)) {
         if (p->Typespec() == nullptr) {
           ref_typespec* tpsRef = s.MakeRef_typespec();
-          tpsRef->VpiName(fC->SymName(ntype));
+          tpsRef->VpiName(tps->VpiName());
           fC->populateCoreMembers(ntype, ntype, tpsRef);
           tpsRef->VpiParent(p);
           p->Typespec(tpsRef);
@@ -4100,12 +4079,14 @@ bool CompileHelper::compileParameterDeclaration(
       UHDM::type_parameter* p = s.MakeType_parameter();
       p->VpiName(fC->SymName(Identifier));
       p->VpiParent(pany);
+      fC->populateCoreMembers(nodeId, Identifier, p);
       NodeId Data_type = fC->Child(Constant_param_expression);
       if (typespec* tps =
               compileTypespec(component, fC, Data_type, compileDesign,
                               Reduce::No, p, nullptr, false)) {
         if (p->Typespec() == nullptr) {
           ref_typespec* tpsRef = s.MakeRef_typespec();
+          tpsRef->VpiName(tps->VpiName());
           fC->populateCoreMembers(Data_type, Data_type, tpsRef);
           tpsRef->VpiParent(p);
           p->Typespec(tpsRef);
@@ -4113,7 +4094,6 @@ bool CompileHelper::compileParameterDeclaration(
         p->Typespec()->Actual_typespec(tps);
         tps->VpiParent(p);
       }
-      fC->populateCoreMembers(nodeId, Data_type ? Data_type : Identifier, p);
       if (localParam) {
         p->VpiLocalParam(true);
       }
@@ -4314,9 +4294,6 @@ bool CompileHelper::compileParameterDeclaration(
         }
         param->Typespec()->Actual_typespec(ts);
         ts->VpiParent(param);
-        if (ts->UhdmType() == uhdmunsupported_typespec) {
-          component->needLateTypedefBinding(param);
-        }
       }
       param->VpiSigned(isSigned);
       fC->populateCoreMembers(name, name, param);
@@ -4882,11 +4859,7 @@ UHDM::any* CompileHelper::compileTfCall(DesignComponent* component,
             p->VpiName(decl->VpiName());
             param_assign* pass = s.MakeParam_assign();
             pass->Lhs(p);
-            if (actual) {
-              if (actual->UhdmType() == uhdmref_obj)
-                component->needLateBinding((ref_obj*)actual);
-              pass->Rhs(actual);
-            }
+            if (actual) pass->Rhs(actual);
             passigns->push_back(pass);
           }
           cont_assign* cts = s.MakeCont_assign();
@@ -4948,7 +4921,6 @@ VectorOfany* CompileHelper::compileTfCallArguments(
     DesignComponent* component, const FileContent* fC, NodeId Arg_list_node,
     CompileDesign* compileDesign, Reduce reduce, UHDM::any* call,
     ValuedComponentI* instance, bool muteErrors) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
   UHDM::Serializer& s = compileDesign->getSerializer();
   if (fC->Type(Arg_list_node) == VObjectType::paSelect) {
     // Task or func call with no argument, not even ()
@@ -5040,15 +5012,17 @@ VectorOfany* CompileHelper::compileTfCallArguments(
         std::map<std::string, any*>::iterator itr = args.find(name);
         if (itr != args.end()) {
           arguments->push_back((*itr).second);
-        } else {
-          constant* c = s.MakeConstant();
-          c->VpiFile(fileSystem->toPath(fC->getFileId()));
-          c->VpiValue("INT:0");
-          c->VpiDecompile("0");
-          c->VpiSize(64);
-          c->VpiConstType(vpiIntConst);
-          c->VpiParent(call);
-          arguments->push_back(c);
+        } else if (m_elaborate == Elaborate::Yes) {
+          if (const UHDM::constant* const def = decl->Expr<UHDM::constant>()) {
+            constant* c = s.MakeConstant();
+            c->VpiValue(def->VpiValue());
+            c->VpiDecompile(def->VpiDecompile());
+            c->VpiSize(def->VpiSize());
+            c->VpiConstType(def->VpiConstType());
+            c->VpiParent(call);
+            fC->populateCoreMembers(InvalidNodeId, InvalidNodeId, c);
+            arguments->push_back(c);
+          }
         }
       }
     } else {
@@ -5201,7 +5175,7 @@ UHDM::VectorOfattribute* CompileHelper::compileAttributes(
     DesignComponent* component, const FileContent* fC, NodeId nodeId,
     CompileDesign* compileDesign, UHDM::any* pexpr) {
   UHDM::Serializer& s = compileDesign->getSerializer();
-  if (pexpr == nullptr) pexpr = component->getUhdmScope();
+  if (pexpr == nullptr) pexpr = component->getUhdmModel();
   if (pexpr == nullptr)
     pexpr = compileDesign->getCompiler()->getDesign()->getUhdmDesign();
   std::vector<UHDM::attribute*>* results = nullptr;
@@ -6034,13 +6008,11 @@ void CompileHelper::compileLetDeclaration(DesignComponent* component,
   }
   auto ios =
       compileTfPortList(component, nullptr, fC, Let_port_list, compileDesign);
-  component->lateBinding(false);
   let_decl* decl = s.MakeLet_decl();
   decl->VpiName(name);
   fC->populateCoreMembers(Let_declaration, Let_declaration, decl);
   expr* exp = (expr*)compileExpression(component, fC, Expression, compileDesign,
                                        Reduce::No, decl, nullptr, false);
-  component->lateBinding(true);
   decl->Expressions(true)->push_back(exp);
   VectorOfseq_formal_decl* args = s.MakeSeq_formal_declVec();
   for (auto io : *ios) {

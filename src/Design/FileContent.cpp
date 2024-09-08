@@ -657,8 +657,6 @@ const DesignElement* FileContent::getDesignElement(
 void FileContent::populateCoreMembers(NodeId startIndex, NodeId endIndex,
                                       UHDM::any* instance,
                                       bool force /* = false */) const {
-  if (!startIndex && !endIndex) return;
-
   if (startIndex && ((instance->VpiLineNo() == 0) || force)) {
     if (startIndex < m_objects.size()) {
       const VObject& object = m_objects[startIndex];

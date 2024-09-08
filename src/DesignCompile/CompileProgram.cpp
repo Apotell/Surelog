@@ -35,6 +35,7 @@
 #include <Surelog/Utils/StringUtils.h>
 #include <uhdm/final_stmt.h>
 #include <uhdm/initial.h>
+#include <uhdm/program.h>
 
 #include <stack>
 
@@ -71,6 +72,9 @@ bool CompileProgram::compile(Elaborate elaborate, Reduce reduce) {
 
   Error err2(ErrorDefinition::COMP_PROGRAM_OBSOLETE_USAGE, loc);
   m_errors->addError(err2);
+
+  UHDM::program* const prgm = m_program->getUhdmModel<UHDM::program>();
+  const UHDM::ScopedScope scopedScope(prgm);
 
   if (!collectObjects_(CollectType::FUNCTION)) return false;
   if (!collectObjects_(CollectType::DEFINITION)) return false;

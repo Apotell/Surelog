@@ -43,7 +43,7 @@ Package::Package(std::string_view name, Library* library, const FileContent* fC,
   if (!name.empty()) instance->VpiName(name);
   if (nodeId && (fC != nullptr))
     fC->populateCoreMembers(nodeId, nodeId, instance);
-  setUhdmScope(instance);
+  setUhdmModel(instance);
 }
 
 uint32_t Package::getSize() const {

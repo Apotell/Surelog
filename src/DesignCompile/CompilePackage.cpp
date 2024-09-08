@@ -62,7 +62,7 @@ int32_t FunctorCompilePackage::operator()() const {
 
 bool CompilePackage::compile(Elaborate elaborate, Reduce reduce) {
   if (!m_package) return false;
-  UHDM::package* pack = m_package->getUhdmScope<UHDM::package>();
+  UHDM::package* pack = m_package->getUhdmModel<UHDM::package>();
   const FileContent* fC = m_package->m_fileContents[0];
   SymbolTable* const symbols = m_session->getSymbolTable();
   NodeId packId = m_package->m_nodeIds[0];

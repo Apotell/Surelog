@@ -36,6 +36,7 @@
 #include <uhdm/class_defn.h>
 #include <uhdm/class_obj.h>
 #include <uhdm/concurrent_assertions.h>
+#include <uhdm/constant.h>
 #include <uhdm/design.h>
 #include <uhdm/function.h>
 #include <uhdm/indexed_part_select.h>
@@ -59,6 +60,7 @@
 #include <uhdm/ref_obj.h>
 #include <uhdm/ref_typespec.h>
 #include <uhdm/sequence_decl.h>
+#include <uhdm/type_parameter.h>
 #include <uhdm/typespec.h>
 #include <uhdm/udp_defn.h>
 #include <uhdm/variables.h>
@@ -123,19 +125,67 @@ void IntegrityChecker::reportDuplicates(const UHDM::any* const object,
   }
 }
 
+// enum class LocationRelation {
+//   Above,
+//   Below,
+//   InsideAbove,
+//   InsideBelow,
+//   InsideLeft,
+//   InsideRight,
+//   InsideOut,
+//   AboveOverlapped,
+//   BelowOverlapped,
+//   LeftOverlapped,
+//   RightOverlapped,
+//   Inconclusive,
+// };
+//
+// LocationRelation IntegrityChecker::getRelation(
+//   uint32_t oStartLine, uint16_t oStartColumn, uint32_t oEndLine,
+//   uint16_t oEndColumn, uint32_t pStartLine, uint16_t pStartColumn,
+//   uint32_t pEndLine, uint16_t pEndColumn) const {
+//   if ((oStartLine == pStartLine) && (oEndLine == pStartLine)) {
+//     if (oEndColumn < pStartColumn) return LocationRelation::LessThan;
+//     if (oStartColumn > pEndColumn) return LocationRelation::GreaterThan;
+//     if (oEndColumn > pStartColumn) return
+//     LocationRelation::LessThanOrEqualTo; if (oStartColumn < pEndColumn)
+//       return LocationRelation::GreaterThanOrEqualTo;
+//     return LocationRelation::EqualTo;
+//   } else if (oEndLine < pStartLine) {
+//
+//   } else if ((oStartLine < pStartLine) && (oEndLine > pEndLine)) {
+//     return LocationRelation::InsideOut;
+//   } else if (oEndLine <= pStartLine) {
+//     return ((oEndLine == pStartLine) && (oEndColumn < pStartColumn))
+//                ? LocationRelation::AboveOverlapped
+//                : LocationRelation::Above;
+//   } else if (pEndLine <= oStartLine) {
+//     return ((pEndLine == oStartLine) && (pEndColumn < oStartColumn))
+//                ? LocationRelation::BelowOverlapped
+//                : LocationRelation::Below;
+//   } else if ((oStartLine >= pStartLine) && (oEndLine <= pEndLine)) {
+//
+//   }
+//
+//   return LocationRelation::Inconclusive;
+// }
+
 void IntegrityChecker::reportInvalidLocation(
     const UHDM::any* const object) const {
-  if (m_acceptedObjectsWithInvalidLocations.find(object->UhdmType()) !=
-      m_acceptedObjectsWithInvalidLocations.cend())
+  if ((object->VpiLineNo() == 0) && (object->VpiEndLineNo() == 0) &&
+      (object->VpiColumnNo() == 0) && (object->VpiEndColumnNo() == 0))
     return;
 
   const UHDM::any* const parent = object->VpiParent();
   if (parent == nullptr) return;
   if (parent->UhdmType() == UHDM::uhdmdesign) return;
 
-  if ((parent->UhdmType() == UHDM::uhdmbegin) && (parent->VpiLineNo() == 0) &&
-      (parent->VpiEndLineNo() == 0) && (parent->VpiColumnNo() == 0) &&
-      (parent->VpiEndColumnNo() == 0))
+  if ((parent->VpiLineNo() == 0) && (parent->VpiEndLineNo() == 0) &&
+      (parent->VpiColumnNo() == 0) && (parent->VpiEndColumnNo() == 0))
+    return;
+
+  if (m_acceptedObjectsWithInvalidLocations.find(object->UhdmType()) !=
+      m_acceptedObjectsWithInvalidLocations.cend())
     return;
 
   // There are cases where things can be different files. e.g. PreprocTest
@@ -155,6 +205,10 @@ void IntegrityChecker::reportInvalidLocation(
   if ((object->UhdmType() == UHDM::uhdmbegin) &&
       (parent->UhdmType() == UHDM::uhdmfunction))
     return;
+
+  // TODO:
+  // if object==constant, parent==io_decl and parent->expr == object,
+  //   object < expr
 
   UHDM::UHDM_OBJECT_TYPE oType = object->UhdmType();
   if ((oType == UHDM::uhdmclass_typespec ||
@@ -190,9 +244,13 @@ void IntegrityChecker::reportInvalidLocation(
   if (any_cast<UHDM::ref_typespec>(object) != nullptr) {
     valid = valid && (childLineNo <= parentLineNo);
 
-    // type i.e. child should be on the left (or overlapping) of the parent
     if (childLineNo == parentEndLineNo) {
-      valid = valid && (childEndColumnNo <= parentEndColumnNo);
+      if (any_cast<UHDM::type_parameter>(parent) == nullptr) {
+        // type i.e. child should be on the left (or overlapping) of the parent
+        valid = valid && (childEndColumnNo <= parentEndColumnNo);
+      } else {
+        valid = valid && (parentEndColumnNo <= childEndColumnNo);
+      }
     }
   } else {
     valid = valid && (childLineNo >= parentLineNo);
@@ -229,16 +287,18 @@ void IntegrityChecker::reportMissingLocation(
     return;
 
   const UHDM::any* const parent = object->VpiParent();
-  const UHDM::any* const grandParent =
-      (parent == nullptr) ? parent : parent->VpiParent();
+  if (parent == nullptr) return;
+
+  const UHDM::any* const grandParent = parent->VpiParent();
+  if (grandParent == nullptr) return;
 
   // begin in function body are implicit!
-  if ((object->UhdmType() == UHDM::uhdmbegin) && (parent != nullptr) &&
+  if ((object->UhdmType() == UHDM::uhdmbegin) &&
       (parent->UhdmType() == UHDM::uhdmfunction))
     return;
 
-  if ((object->UhdmType() == UHDM::uhdmref_typespec) && (parent != nullptr) &&
-      (grandParent != nullptr) && (grandParent->VpiName() == "new") &&
+  if ((object->UhdmType() == UHDM::uhdmref_typespec) &&
+      (grandParent->VpiName() == "new") &&
       (parent->Cast<UHDM::variables>() != nullptr) &&
       (grandParent->UhdmType() == UHDM::uhdmfunction)) {
     // For ref_typespec associated with a class's constructor return value
@@ -253,7 +313,7 @@ void IntegrityChecker::reportMissingLocation(
       return;
     }
   } else if ((object->UhdmType() == UHDM::uhdmclass_typespec) &&
-             (parent != nullptr) && (parent->VpiName() == "new") &&
+             (parent->VpiName() == "new") &&
              (parent->UhdmType() == UHDM::uhdmfunction)) {
     // For typespec associated with a class's constructor return value
     // there is no legal position because the "new" operator's return value
@@ -268,18 +328,24 @@ void IntegrityChecker::reportMissingLocation(
       }
     }
   } else if ((object->Cast<UHDM::variables>() != nullptr) &&
-             (parent != nullptr) &&
              (parent->UhdmType() == UHDM::uhdmfunction)) {
     // When no explicit return is specific, the function's name
     // is consdiered the return type's name.
     const UHDM::function* const parentAsFunction =
         parent->Cast<UHDM::function>();
     if (parentAsFunction->Return() == object) return;
-  } else if ((object->UhdmType() == UHDM::uhdmconstant) &&
-             (parent != nullptr) && (parent->UhdmType() == UHDM::uhdmrange)) {
-    // The left expression of range is allowed to be zero.
-    const UHDM::range* const parentAsRange = parent->Cast<UHDM::range>();
-    if (parentAsRange->Left_expr() == object) return;
+  } else if (const UHDM::constant* const objectAsConstant =
+                 object->Cast<UHDM::constant>()) {
+    if (const UHDM::range* const parentAsRange = parent->Cast<UHDM::range>()) {
+      // The left expression of range is allowed to be zero.
+      if (parentAsRange->Left_expr() == object) return;
+
+      // The right is allowed to be zero if it's associative
+      if ((parentAsRange->Right_expr() == object) &&
+          (objectAsConstant->VpiValue() == "STRING:associative")) {
+        return;
+      }
+    }
   }
 
   std::string text = std::to_string(object->UhdmId());
@@ -292,11 +358,13 @@ void IntegrityChecker::reportMissingLocation(
   m_errorContainer->addError(err);
 }
 
-bool IntegrityChecker::isImplicitFunctionReturnType(
-    const UHDM::any* const object) {
+bool IntegrityChecker::isImplicitFunctionReturnType(const UHDM::any* object) {
+  if (const UHDM::ref_typespec* const v =
+          any_cast<UHDM::ref_typespec>(object)) {
+    object = object->VpiParent();
+  }
   if (const UHDM::variables* v = any_cast<UHDM::variables>(object)) {
-    if (const UHDM::function* f =
-            any_cast<UHDM::function>(object->VpiParent())) {
+    if (const UHDM::function* f = object->VpiParent<UHDM::function>()) {
       if ((f->Return() == v) && v->VpiName().empty()) return true;
     }
   }

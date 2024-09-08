@@ -904,6 +904,15 @@ void SV3_1aTreeShapeListener::exitData_type(
   }
 }
 
+void SV3_1aTreeShapeListener::exitData_type_or_void(
+    SV3_1aParser::Data_type_or_voidContext *ctx) {
+  if (ctx->VOID()) {
+    addVObject(ctx, ctx->VOID()->getText(), VObjectType::paData_type_or_void);
+  } else {
+    addVObject(ctx, VObjectType::paData_type_or_void);
+  }
+}
+
 void SV3_1aTreeShapeListener::exitString_value(
     SV3_1aParser::String_valueContext *ctx) {
   std::string ident;

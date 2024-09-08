@@ -178,38 +178,14 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
     return m_sequence_decls;
   }
 
-  void needLateBinding(UHDM::ref_obj* obj) {
-    if (m_lateBinding) m_needLateBinding.push_back(obj);
-  }
-  const std::vector<UHDM::ref_obj*>& getLateBinding() const {
-    return m_needLateBinding;
-  }
-
-  void needLateTypedefBinding(UHDM::any* obj) {
-    if (m_lateBinding) m_needLateTypedefBinding.push_back(obj);
-  }
-  const std::vector<UHDM::any*>& getLateTypedefBinding() const {
-    return m_needLateTypedefBinding;
-  }
-
-  void needLateResolutionFunction(std::string_view funcName,
-                                  UHDM::typespec* tps) {
-    if (m_lateBinding) m_lateResolutionFunctions.emplace_back(funcName, tps);
-  }
-  FuncNameTypespecVec& getLateResolutionFunction() {
-    return m_lateResolutionFunctions;
-  }
-
-  void lateBinding(bool on) { m_lateBinding = on; }
-
   void setUhdmInstance(UHDM::instance* instance) { m_instance = instance; }
   UHDM::instance* getUhdmInstance() { return m_instance; }
 
-  void setUhdmScope(UHDM::any* scope) { m_scope = scope; }
-  UHDM::any* getUhdmScope() { return m_scope; }
+  void setUhdmModel(UHDM::any* model) { m_model = model; }
+  UHDM::any* getUhdmModel() { return m_model; }
   template <typename T>
-  T* getUhdmScope() const {
-    return (m_scope == nullptr) ? nullptr : any_cast<T>(m_scope);
+  T* getUhdmModel() const {
+    return (m_model == nullptr) ? nullptr : any_cast<T>(m_model);
   }
 
   void scheduleParamExprEval(std::string_view name, ExprEval& expr_eval) {
@@ -249,18 +225,14 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
   std::vector<UHDM::tf_call*> m_elab_sys_calls;
   std::vector<UHDM::property_decl*> m_property_decls;
   std::vector<UHDM::sequence_decl*> m_sequence_decls;
-  std::vector<UHDM::ref_obj*> m_needLateBinding;
-  std::vector<UHDM::any*> m_needLateTypedefBinding;
-  FuncNameTypespecVec m_lateResolutionFunctions;
   ParameterMap m_parameterMap;
   UHDM::instance* m_instance;
   ParameterVec m_orderedParameters;
   ParamAssignVec m_paramAssigns;
-  UHDM::any* m_scope = nullptr;
+  UHDM::any* m_model = nullptr;
   std::vector<std::pair<std::string, ExprEval>> m_scheduledParamExprEval;
   const DesignElement* m_designElement = nullptr;
   LetStmtMap m_letDecls;
-  bool m_lateBinding = true;
 };
 
 };  // namespace SURELOG

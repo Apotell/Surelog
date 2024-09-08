@@ -37,36 +37,34 @@ VObjectType ModuleDefinition::getType() const {
 }
 
 ModuleDefinition::ModuleDefinition(Session* session, std::string_view name,
-                                   const FileContent* fileContent,
+                                   const FileContent* fC,
                                    NodeId nodeId, UHDM::Serializer& serializer)
-    : DesignComponent(session, fileContent, nullptr),
+    : DesignComponent(session, fC, nullptr),
       m_name(name),
       m_udpDefn(nullptr) {
-  if (fileContent) {
-    addFileContent(fileContent, nodeId);
-  }
+  addFileContent(fC, nodeId);
   m_unelabModule = this;
-  switch (fileContent->Type(nodeId)) {
+  switch (fC->Type(nodeId)) {
     // case VObjectType::paConfig_declaration:
     case VObjectType::paUdp_declaration: {
       UHDM::udp_defn* const instance = serializer.MakeUdp_defn();
       if (!name.empty()) instance->VpiDefName(name);
-      fileContent->populateCoreMembers(nodeId, nodeId, instance);
-      setUhdmScope(instance);
+      fC->populateCoreMembers(nodeId, nodeId, instance);
+      setUhdmModel(instance);
     } break;
 
     case VObjectType::paInterface_declaration: {
       UHDM::interface_inst* const instance = serializer.MakeInterface_inst();
       if (!name.empty()) instance->VpiName(name);
-      fileContent->populateCoreMembers(nodeId, nodeId, instance);
-      setUhdmScope(instance);
+      fC->populateCoreMembers(nodeId, nodeId, instance);
+      setUhdmModel(instance);
     } break;
 
     default: {
       UHDM::module_inst* const instance = serializer.MakeModule_inst();
       if (!name.empty()) instance->VpiName(name);
-      fileContent->populateCoreMembers(nodeId, nodeId, instance);
-      setUhdmScope(instance);
+      fC->populateCoreMembers(nodeId, nodeId, instance);
+      setUhdmModel(instance);
     } break;
   }
 }

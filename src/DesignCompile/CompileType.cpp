@@ -375,7 +375,7 @@ UHDM::any* CompileHelper::compileVariable(
           class_var* var = s.MakeClass_var();
           if (ts == nullptr) {
             class_typespec* tps = s.MakeClass_typespec();
-            tps->Class_defn(cl->getUhdmScope<UHDM::class_defn>());
+            tps->Class_defn(cl->getUhdmModel<UHDM::class_defn>());
             tps->VpiName(typespecName);
             tps->VpiParent(pstmt);
             ts = tps;
@@ -430,9 +430,6 @@ UHDM::any* CompileHelper::compileVariable(
             tsRef->Actual_typespec(ts);
             tsRef->VpiName(typeName);
             ref->Typespec(tsRef);
-            if (ts->UhdmType() == uhdmunsupported_typespec) {
-              component->needLateTypedefBinding(ref);
-            }
           }
           ref->VpiName(typeName);
           result = ref;
@@ -668,7 +665,6 @@ UHDM::any* CompileHelper::compileVariable(
       tsRef->Actual_typespec(ts);
       fC->populateCoreMembers(declarationId, declarationId, tsRef);
       var->Typespec(tsRef);
-      component->needLateTypedefBinding(var);
       result = var;
       break;
     }
@@ -729,7 +725,7 @@ any* CompileHelper::compileVariable(
   NodeId signalId = sig->getNameId();
   const std::string_view signame = sig->getName();
   const FileContent* const fC = sig->getFileContent();
-  UHDM::any* pscope = component->getUhdmScope();
+  UHDM::any* pscope = component->getUhdmModel();
   if (pscope == nullptr)
     pscope = compileDesign->getCompiler()->getDesign()->getUhdmDesign();
 
@@ -846,8 +842,10 @@ any* CompileHelper::compileVariable(
       if (var->Typespec() == nullptr) {
         ref_typespec* tpsRef = s.MakeRef_typespec();
         tpsRef->VpiParent(var);
-        fC->populateCoreMembers(sig->getTypeSpecId(), sig->getTypeSpecId(),
-                                tpsRef);
+        NodeId typeId = sig->getInterfaceTypeNameId()
+                            ? sig->getInterfaceTypeNameId()
+                            : sig->getTypespecId();
+        fC->populateCoreMembers(typeId, typeId, tpsRef);
         var->Typespec(tpsRef);
       }
       var->Typespec()->Actual_typespec(tps);
@@ -991,13 +989,11 @@ any* CompileHelper::compileVariable(
           ref_typespec* rt = s.MakeRef_typespec();
           rt->VpiParent(obj);
           obj->Typespec(rt);
-          NodeId rtNameId = sig->getTypeSpecId();
-          if (fC->Type(rtNameId) != VObjectType::slStringConst)
-            rtNameId = fC->Child(rtNameId);
-          rt->VpiName(fC->SymName(rtNameId));
-          NodeId nameId =
-              sig->getTypeSpecId() ? sig->getTypeSpecId() : signalId;
-          fC->populateCoreMembers(nameId, nameId, rt);
+          NodeId typeId = sig->getInterfaceTypeNameId()
+                              ? sig->getInterfaceTypeNameId()
+                              : sig->getTypespecId();
+          rt->VpiName(fC->SymName(typeId));
+          fC->populateCoreMembers(typeId, typeId, rt);
           if ((tpstype == uhdmclass_typespec) &&
               (rt->VpiName().empty() ||
                (rt->VpiName() == SymbolTable::getBadSymbol())))
@@ -1013,6 +1009,7 @@ any* CompileHelper::compileVariable(
     variables* var = nullptr;
     if (subnettype == VObjectType::paIntegerAtomType_Shortint) {
       UHDM::short_int_var* int_var = s.MakeShort_int_var();
+      fC->populateCoreMembers(signalId, signalId, int_var);
       var = int_var;
       tps = s.MakeShort_int_typespec();
       tps->VpiParent(pscope);
@@ -1020,8 +1017,14 @@ any* CompileHelper::compileVariable(
       tpsRef->VpiParent(int_var);
       tpsRef->Actual_typespec(tps);
       int_var->Typespec(tpsRef);
+      NodeId typeId = sig->getInterfaceTypeNameId()
+                          ? sig->getInterfaceTypeNameId()
+                          : sig->getTypespecId();
+      fC->populateCoreMembers(typeId, typeId, tpsRef);
+      fC->populateCoreMembers(typeId, typeId, tps);
     } else if (subnettype == VObjectType::paIntegerAtomType_Int) {
       UHDM::int_var* int_var = s.MakeInt_var();
+      fC->populateCoreMembers(signalId, signalId, int_var);
       var = int_var;
       tps = s.MakeInt_typespec();
       tps->VpiParent(pscope);
@@ -1029,11 +1032,14 @@ any* CompileHelper::compileVariable(
       tpsRef->VpiParent(int_var);
       tpsRef->Actual_typespec(tps);
       int_var->Typespec(tpsRef);
-      NodeId nameId = sig->getTypeSpecId() ? sig->getTypeSpecId() : signalId;
-      fC->populateCoreMembers(nameId, nameId, tpsRef);
-      fC->populateCoreMembers(nameId, nameId, tps);
+      NodeId typeId = sig->getInterfaceTypeNameId()
+                          ? sig->getInterfaceTypeNameId()
+                          : sig->getTypespecId();
+      fC->populateCoreMembers(typeId, typeId, tpsRef);
+      fC->populateCoreMembers(typeId, typeId, tps);
     } else if (subnettype == VObjectType::paIntegerAtomType_Integer) {
       UHDM::integer_var* int_var = s.MakeInteger_var();
+      fC->populateCoreMembers(signalId, signalId, int_var);
       var = int_var;
       tps = s.MakeInteger_typespec();
       tps->VpiParent(pscope);
@@ -1041,11 +1047,14 @@ any* CompileHelper::compileVariable(
       tpsRef->VpiParent(int_var);
       tpsRef->Actual_typespec(tps);
       int_var->Typespec(tpsRef);
-      NodeId nameId = sig->getTypeSpecId() ? sig->getTypeSpecId() : signalId;
-      fC->populateCoreMembers(nameId, nameId, tpsRef);
-      fC->populateCoreMembers(nameId, nameId, tps);
+      NodeId typeId = sig->getInterfaceTypeNameId()
+                          ? sig->getInterfaceTypeNameId()
+                          : sig->getTypespecId();
+      fC->populateCoreMembers(typeId, typeId, tpsRef);
+      fC->populateCoreMembers(typeId, typeId, tps);
     } else if (subnettype == VObjectType::paIntegerAtomType_LongInt) {
       UHDM::long_int_var* int_var = s.MakeLong_int_var();
+      fC->populateCoreMembers(signalId, signalId, int_var);
       var = int_var;
       tps = s.MakeLong_int_typespec();
       tps->VpiParent(pscope);
@@ -1053,14 +1062,18 @@ any* CompileHelper::compileVariable(
       tpsRef->VpiParent(int_var);
       tpsRef->Actual_typespec(tps);
       int_var->Typespec(tpsRef);
-      NodeId nameId = sig->getTypeSpecId() ? sig->getTypeSpecId() : signalId;
-      fC->populateCoreMembers(nameId, nameId, tpsRef);
-      fC->populateCoreMembers(nameId, nameId, tps);
+      NodeId typeId = sig->getInterfaceTypeNameId()
+                          ? sig->getInterfaceTypeNameId()
+                          : sig->getTypespecId();
+      fC->populateCoreMembers(typeId, typeId, tpsRef);
+      fC->populateCoreMembers(typeId, typeId, tps);
     } else if (subnettype == VObjectType::paIntegerAtomType_Time) {
       UHDM::time_var* int_var = s.MakeTime_var();
+      fC->populateCoreMembers(signalId, signalId, int_var);
       var = int_var;
     } else if (subnettype == VObjectType::paIntVec_TypeBit) {
       UHDM::bit_var* int_var = s.MakeBit_var();
+      fC->populateCoreMembers(signalId, signalId, int_var);
       bit_typespec* btps = s.MakeBit_typespec();
       btps->Ranges(packedDimensions);
       btps->VpiParent(pscope);
@@ -1070,12 +1083,15 @@ any* CompileHelper::compileVariable(
       tpsRef->Actual_typespec(tps);
       int_var->Typespec(tpsRef);
       int_var->Ranges(packedDimensions);
-      NodeId nameId = sig->getTypeSpecId() ? sig->getTypeSpecId() : signalId;
-      fC->populateCoreMembers(nameId, nameId, tpsRef);
-      fC->populateCoreMembers(nameId, nameId, tps);
+      NodeId typeId = sig->getInterfaceTypeNameId()
+                          ? sig->getInterfaceTypeNameId()
+                          : sig->getTypespecId();
+      fC->populateCoreMembers(typeId, typeId, tpsRef);
+      fC->populateCoreMembers(typeId, typeId, tps);
       var = int_var;
     } else if (subnettype == VObjectType::paIntegerAtomType_Byte) {
       UHDM::byte_var* int_var = s.MakeByte_var();
+      fC->populateCoreMembers(signalId, signalId, int_var);
       byte_typespec* btps = s.MakeByte_typespec();
       btps->VpiParent(pscope);
       tps = btps;
@@ -1083,24 +1099,31 @@ any* CompileHelper::compileVariable(
       tpsRef->VpiParent(int_var);
       tpsRef->Actual_typespec(tps);
       int_var->Typespec(tpsRef);
-      NodeId nameId = sig->getTypeSpecId() ? sig->getTypeSpecId() : signalId;
-      fC->populateCoreMembers(nameId, nameId, tpsRef);
-      fC->populateCoreMembers(nameId, nameId, tps);
+      NodeId typeId = sig->getInterfaceTypeNameId()
+                          ? sig->getInterfaceTypeNameId()
+                          : sig->getTypespecId();
+      fC->populateCoreMembers(typeId, typeId, tpsRef);
+      fC->populateCoreMembers(typeId, typeId, tps);
       var = int_var;
     } else if (subnettype == VObjectType::paNonIntType_ShortReal) {
       UHDM::short_real_var* int_var = s.MakeShort_real_var();
+      fC->populateCoreMembers(signalId, signalId, int_var);
       var = int_var;
     } else if (subnettype == VObjectType::paNonIntType_Real) {
       UHDM::real_var* int_var = s.MakeReal_var();
+      fC->populateCoreMembers(signalId, signalId, int_var);
       var = int_var;
     } else if (subnettype == VObjectType::paNonIntType_RealTime) {
       UHDM::time_var* int_var = s.MakeTime_var();
+      fC->populateCoreMembers(signalId, signalId, int_var);
       var = int_var;
     } else if (subnettype == VObjectType::paString_type) {
       UHDM::string_var* int_var = s.MakeString_var();
+      fC->populateCoreMembers(signalId, signalId, int_var);
       var = int_var;
     } else if (subnettype == VObjectType::paChandle_type) {
       UHDM::chandle_var* chandle_var = s.MakeChandle_var();
+      fC->populateCoreMembers(signalId, signalId, chandle_var);
       var = chandle_var;
     } else if (subnettype == VObjectType::paIntVec_TypeLogic) {
       logic_var* logicv = s.MakeLogic_var();
@@ -1118,8 +1141,10 @@ any* CompileHelper::compileVariable(
       ref_typespec* tpsRef = s.MakeRef_typespec();
       tpsRef->VpiParent(logicv);
       tpsRef->Actual_typespec(tps);
-      NodeId nameId = sig->getTypeSpecId() ? sig->getTypeSpecId() : signalId;
-      fC->populateCoreMembers(nameId, nameId, tpsRef);
+      NodeId typeId = sig->getInterfaceTypeNameId()
+                          ? sig->getInterfaceTypeNameId()
+                          : sig->getTypespecId();
+      fC->populateCoreMembers(typeId, typeId, tpsRef);
       logicv->Typespec(tpsRef);
       var = logicv;
     } else if (subnettype == VObjectType::paEvent_type) {
@@ -1176,7 +1201,7 @@ any* CompileHelper::compileVariable(
             tp = rt->Actual_typespec();
           }
 
-          NodeId tsId = sig->getTypeSpecId();
+          NodeId tsId = sig->getTypespecId();
           array_typespec* taps = s.MakeArray_typespec();
           taps->VpiParent(pscope);
           fC->populateCoreMembers(tsId, sig->getUnpackedDimension(), taps);
@@ -1241,12 +1266,12 @@ any* CompileHelper::compileVariable(
 
           subtps->Ranges(unpackedDimensions);
 
-          NodeId itypeId = sig->getTypeSpecId() ? sig->getTypeSpecId()
-                                                : sig->getInterfaceTypeNameId();
+          NodeId typeId = sig->getTypespecId() ? sig->getTypespecId()
+                                               : sig->getInterfaceTypeNameId();
           switch (obj->UhdmType()) {
             case uhdmint_var: {
               int_typespec* ts = s.MakeInt_typespec();
-              fC->populateCoreMembers(itypeId, itypeId, ts);
+              fC->populateCoreMembers(typeId, typeId, ts);
               ts->VpiParent(pscope);
               tpsRef = s.MakeRef_typespec();
               tpsRef->VpiParent(subtps);
@@ -1256,7 +1281,7 @@ any* CompileHelper::compileVariable(
             }
             case uhdminteger_var: {
               integer_typespec* ts = s.MakeInteger_typespec();
-              fC->populateCoreMembers(itypeId, itypeId, ts);
+              fC->populateCoreMembers(typeId, typeId, ts);
               ts->VpiParent(pscope);
               tpsRef = s.MakeRef_typespec();
               tpsRef->VpiParent(subtps);
@@ -1266,7 +1291,7 @@ any* CompileHelper::compileVariable(
             }
             case uhdmlogic_var: {
               logic_typespec* ts = s.MakeLogic_typespec();
-              fC->populateCoreMembers(itypeId, itypeId, ts);
+              fC->populateCoreMembers(typeId, typeId, ts);
               ts->VpiParent(pscope);
               tpsRef = s.MakeRef_typespec();
               tpsRef->VpiParent(subtps);
@@ -1276,7 +1301,7 @@ any* CompileHelper::compileVariable(
             }
             case uhdmlong_int_var: {
               long_int_typespec* ts = s.MakeLong_int_typespec();
-              fC->populateCoreMembers(itypeId, itypeId, ts);
+              fC->populateCoreMembers(typeId, typeId, ts);
               ts->VpiParent(pscope);
               tpsRef = s.MakeRef_typespec();
               tpsRef->VpiParent(subtps);
@@ -1286,7 +1311,7 @@ any* CompileHelper::compileVariable(
             }
             case uhdmshort_int_var: {
               short_int_typespec* ts = s.MakeShort_int_typespec();
-              fC->populateCoreMembers(itypeId, itypeId, ts);
+              fC->populateCoreMembers(typeId, typeId, ts);
               ts->VpiParent(pscope);
               tpsRef = s.MakeRef_typespec();
               tpsRef->VpiParent(subtps);
@@ -1296,7 +1321,7 @@ any* CompileHelper::compileVariable(
             }
             case uhdmbyte_var: {
               byte_typespec* ts = s.MakeByte_typespec();
-              fC->populateCoreMembers(itypeId, itypeId, ts);
+              fC->populateCoreMembers(typeId, typeId, ts);
               ts->VpiParent(pscope);
               tpsRef = s.MakeRef_typespec();
               tpsRef->VpiParent(subtps);
@@ -1306,7 +1331,7 @@ any* CompileHelper::compileVariable(
             }
             case uhdmbit_var: {
               bit_typespec* ts = s.MakeBit_typespec();
-              fC->populateCoreMembers(itypeId, itypeId, ts);
+              fC->populateCoreMembers(typeId, typeId, ts);
               ts->VpiParent(pscope);
               tpsRef = s.MakeRef_typespec();
               tpsRef->VpiParent(subtps);
@@ -1316,7 +1341,7 @@ any* CompileHelper::compileVariable(
             }
             case uhdmstring_var: {
               string_typespec* ts = s.MakeString_typespec();
-              fC->populateCoreMembers(itypeId, itypeId, ts);
+              fC->populateCoreMembers(typeId, typeId, ts);
               ts->VpiParent(pscope);
               tpsRef = s.MakeRef_typespec();
               tpsRef->VpiParent(subtps);
@@ -1327,19 +1352,16 @@ any* CompileHelper::compileVariable(
             default: {
               unsupported_typespec* ts = s.MakeUnsupported_typespec();
               tpsRef = s.MakeRef_typespec();
-              NodeId itypeId = sig->getTypeSpecId()
-                                   ? sig->getTypeSpecId()
-                                   : sig->getInterfaceTypeNameId();
-              ts->VpiName(fC->SymName(itypeId));
+              ts->VpiName(fC->SymName(typeId));
               ts->VpiParent(pscope);
-              fC->populateCoreMembers(itypeId, itypeId, ts);
+              fC->populateCoreMembers(typeId, typeId, ts);
               tpsRef->VpiParent(subtps);
               tpsRef->Actual_typespec(ts);
               subtps->Elem_typespec(tpsRef);
               break;
             }
           }
-          fC->populateCoreMembers(signalId, signalId, tpsRef);
+          fC->populateCoreMembers(typeId, typeId, tpsRef);
         }
       }
     }
@@ -1593,7 +1615,7 @@ typespec* CompileHelper::compileDatastructureTypespec(
   SymbolTable* const symbols = m_session->getSymbolTable();
   ErrorContainer* const errors = m_session->getErrorContainer();
   CommandLineParser* const clp = m_session->getCommandLineParser();
-  UHDM::any* pscope = component->getUhdmScope();
+  UHDM::any* pscope = component->getUhdmModel();
   if (pscope == nullptr)
     pscope = compileDesign->getCompiler()->getDesign()->getUhdmDesign();
   UHDM::Serializer& s = compileDesign->getSerializer();
@@ -1771,8 +1793,9 @@ typespec* CompileHelper::compileDatastructureTypespec(
       } else if (const ClassDefinition* classDefn =
                      datatype_cast<const ClassDefinition*>(dt)) {
         class_typespec* ref = s.MakeClass_typespec();
-        ref->Class_defn(classDefn->getUhdmScope<UHDM::class_defn>());
+        ref->Class_defn(classDefn->getUhdmModel<UHDM::class_defn>());
         ref->VpiName(typeName);
+        ref->VpiParent(pscope);
         fC->populateCoreMembers(type, type, ref);
         result = ref;
 
@@ -1849,7 +1872,7 @@ typespec* CompileHelper::compileDatastructureTypespec(
                       tp->VpiName(fName);
                       ref_typespec* tpsRef = s.MakeRef_typespec();
                       tpsRef->VpiParent(tp);
-                      tpsRef->VpiName(fName);
+                      tpsRef->VpiName(name);
                       tpsRef->Actual_typespec(tps);
                       p->getFileContent()->populateCoreMembers(
                           p->getNodeId(), p->getNodeId(), tp);
@@ -1867,6 +1890,8 @@ typespec* CompileHelper::compileDatastructureTypespec(
                       pass->VpiColumnNo(fparam->VpiColumnNo());
                       pass->VpiEndLineNo(tp->VpiEndLineNo());
                       pass->VpiEndColumnNo(tp->VpiEndColumnNo());
+                      fC->populateCoreMembers(InvalidNodeId, InvalidNodeId,
+                                              pass);
                       assigns->push_back(pass);
                     }
                   }
@@ -1894,7 +1919,7 @@ typespec* CompileHelper::compileDatastructureTypespec(
         if (def->getType() == VObjectType::paInterface_declaration) {
           interface_typespec* tps = s.MakeInterface_typespec();
           tps->VpiName(typeName);
-          tps->Interface_inst(def->getUhdmScope<UHDM::interface_inst>());
+          tps->Interface_inst(def->getUhdmModel<UHDM::interface_inst>());
           fC->populateCoreMembers(type, type, tps);
           result = tps;
           if (!suffixname.empty()) {
@@ -1919,7 +1944,7 @@ typespec* CompileHelper::compileDatastructureTypespec(
             if (def->getModPort(name)) {
               interface_typespec* mptps = s.MakeInterface_typespec();
               mptps->VpiName(name);
-              mptps->Interface_inst(def->getUhdmScope<UHDM::interface_inst>());
+              mptps->Interface_inst(def->getUhdmModel<UHDM::interface_inst>());
               fC->populateCoreMembers(sub, sub, mptps);
               mptps->VpiParent(tps);
               mptps->VpiIsModPort(true);
@@ -2127,7 +2152,7 @@ UHDM::typespec* CompileHelper::compileTypespec(
   ErrorContainer* const errors = m_session->getErrorContainer();
 
   UHDM::Serializer& s = compileDesign->getSerializer();
-  if (pstmt == nullptr) pstmt = component->getUhdmScope();
+  if (pstmt == nullptr) pstmt = component->getUhdmModel();
   if (pstmt == nullptr)
     pstmt = compileDesign->getCompiler()->getDesign()->getUhdmDesign();
   NodeId nodeId = id;
@@ -2420,7 +2445,7 @@ UHDM::typespec* CompileHelper::compileTypespec(
           dtype = (const DataType*)classDefn;
           if (dtype) {
             class_typespec* ref = s.MakeClass_typespec();
-            ref->Class_defn(classDefn->getUhdmScope<UHDM::class_defn>());
+            ref->Class_defn(classDefn->getUhdmModel<UHDM::class_defn>());
             ref->VpiName(typeName);
             fC->populateCoreMembers(type, type, ref);
             result = ref;
@@ -2495,6 +2520,7 @@ UHDM::typespec* CompileHelper::compileTypespec(
       }
       if (result == nullptr) {
         unsupported_typespec* ref = s.MakeUnsupported_typespec();
+        ref->VpiParent(pstmt);
         ref->VpiPacked(isPacked);
         ref->VpiName(typeName);
         fC->populateCoreMembers(type, type, ref);
@@ -2562,8 +2588,8 @@ UHDM::typespec* CompileHelper::compileTypespec(
                                         reduce, result, instance, false);
           } else {
             void_typespec* tps = s.MakeVoid_typespec();
-            fC->populateCoreMembers(Data_type_or_void, Variable_decl_assignment,
-                                    tps);
+            tps->VpiParent(result);
+            fC->populateCoreMembers(Data_type_or_void, Data_type_or_void, tps);
             member_ts = tps;
           }
           NodeId member_name = fC->Child(Variable_decl_assignment);
@@ -2580,7 +2606,8 @@ UHDM::typespec* CompileHelper::compileTypespec(
             if (m->Typespec() == nullptr) {
               ref_typespec* tsRef = s.MakeRef_typespec();
               tsRef->VpiParent(m);
-              fC->populateCoreMembers(Data_type, Data_type, tsRef);
+              fC->populateCoreMembers(Data_type_or_void, Data_type_or_void,
+                                      tsRef);
               tsRef->VpiName(fC->SymName(fC->Child(Data_type)));
               m->Typespec(tsRef);
             }
@@ -2624,10 +2651,6 @@ UHDM::typespec* CompileHelper::compileTypespec(
               pats->Ranges(ranges);
               for (auto r : *ranges) r->VpiParent(pats);
             }
-          }
-          if (component && member_ts &&
-              (member_ts->UhdmType() == uhdmunsupported_typespec)) {
-            component->needLateTypedefBinding(m);
           }
           members->push_back(m);
           Variable_decl_assignment = fC->Sibling(Variable_decl_assignment);
@@ -2776,7 +2799,7 @@ UHDM::typespec* CompileHelper::compileTypespec(
             class_typespec* tps = s.MakeClass_typespec();
             tps->VpiName(typeName);
             tps->VpiParent(pstmt);
-            tps->Class_defn(cl->getUhdmScope<UHDM::class_defn>());
+            tps->Class_defn(cl->getUhdmModel<UHDM::class_defn>());
             fC->populateCoreMembers(type, type, tps);
             result = tps;
           }
@@ -2986,7 +3009,7 @@ UHDM::typespec* CompileHelper::compileTypespec(
   };
   if (result) {
     if ((m_elaborate == Elaborate::Yes) && component && !result->Instance()) {
-      result->Instance(component->getUhdmScope<UHDM::instance>());
+      result->Instance(component->getUhdmModel<UHDM::instance>());
     }
     if (ranges != nullptr) {
       for (auto r : *ranges) r->VpiParent(result);
@@ -2995,8 +3018,8 @@ UHDM::typespec* CompileHelper::compileTypespec(
         result->VpiEndColumnNo(ranges->back()->VpiEndColumnNo());
       }
     }
-    if (component->getUhdmScope() != nullptr) {
-      result->VpiParent(component->getUhdmScope());
+    if (component->getUhdmModel() != nullptr) {
+      result->VpiParent(component->getUhdmModel());
     }
   }
   return result;

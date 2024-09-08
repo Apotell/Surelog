@@ -1836,7 +1836,7 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
     }
   }
 
-  NodeId typeSpecId = sig->getTypeSpecId();
+  NodeId typeSpecId = sig->getTypespecId();
   if (typeSpecId) {
     auto itr = tscache.find(typeSpecId);
     if (itr == tscache.end()) {
@@ -2515,7 +2515,7 @@ bool NetlistElaboration::elab_ports_nets_(
             comp, fC, unpackedDimension, m_compileDesign, Reduce::Yes, nullptr,
             child, unpackedSize, false);
         m_helper.checkForLoops(false);
-        NodeId typeSpecId = sig->getTypeSpecId();
+        NodeId typeSpecId = sig->getTypespecId();
         if (typeSpecId) {
           UHDM::typespec* tps = nullptr;
           auto itr = tscache.find(typeSpecId);
@@ -2717,7 +2717,7 @@ bool NetlistElaboration::elab_ports_nets_(
           // No rebind
         } else {
           if (any* n = bind_net_(netlist->getParent(), signame)) {
-            NodeId typeSpecId = sig->getTypeSpecId();
+            NodeId typeSpecId = sig->getTypespecId();
             if (fC->Type(typeSpecId) == VObjectType::paImplicit_data_type) {
               // interconnect
               if (n->UhdmType() == uhdmlogic_net) {

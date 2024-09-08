@@ -93,7 +93,7 @@ void ResolveSymbols::createFastLookup() {
           // Package names are not prefixed by Library names!
           const std::string_view pkgname = name;
           Package* pdef = new Package(m_session, pkgname, lib, m_fileData, object, s);
-          UHDM::package* pack = pdef->getUhdmScope<UHDM::package>();
+          UHDM::package* pack = pdef->getUhdmModel<UHDM::package>();
           m_fileData->populateCoreMembers(object, object, pack);
           m_fileData->addPackageDefinition(pkgname, pdef);
 
@@ -118,7 +118,7 @@ void ResolveSymbols::createFastLookup() {
           break;
         }
         case VObjectType::paProgram_declaration: {
-          Program* mdef = new Program(m_session, fullName, lib, m_fileData, object);
+          Program* mdef = new Program(m_session, fullName, lib, m_fileData, object, s);
           m_fileData->addProgramDefinition(fullName, mdef);
 
           VObjectTypeUnorderedSet subtypes = {VObjectType::paClass_declaration};

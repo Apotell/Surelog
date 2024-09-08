@@ -338,14 +338,16 @@ const UHDM::any* ObjectBinder::findInVectorOfAny(
     if (c->UhdmType() == UHDM::uhdmref_obj) continue;
     if (c->UhdmType() == UHDM::uhdmvar_select) continue;
 
-    if (any_cast<UHDM::ref_typespec>(object) != nullptr) {
-      if (any_cast<UHDM::typespec>(c) != nullptr) {
+    if (any_cast<UHDM::typespec>(c) == nullptr) {
+      if (any_cast<UHDM::ref_obj>(object) != nullptr) {
         if (c->VpiName() == name) return c;
         if (c->VpiName() == shortName) return c;
       }
     } else {
-      if (c->VpiName() == name) return c;
-      if (c->VpiName() == shortName) return c;
+      if (any_cast<UHDM::ref_typespec>(object) != nullptr) {
+        if (c->VpiName() == name) return c;
+        if (c->VpiName() == shortName) return c;
+      }
     }
 
     if (any_cast<UHDM::typespec>(c) != nullptr) {
@@ -1114,7 +1116,7 @@ void ObjectBinder::enterClass_defn(const UHDM::class_defn* const object) {
       //                  false, false, false, false, false);
       // bdef->insertProperty(prop);
 
-      if (UHDM::class_defn* base = bdef->getUhdmScope<UHDM::class_defn>()) {
+      if (UHDM::class_defn* base = bdef->getUhdmModel<UHDM::class_defn>()) {
         UHDM::Serializer& s = *base->GetSerializer();
         UHDM::class_typespec* tps = s.MakeClass_typespec();
         tps->VpiLineNo(rt->VpiLineNo());
@@ -1221,6 +1223,11 @@ bool ObjectBinder::createDefaultNets() {
                                        }));
         m_serializer.Erase(rt);
       } else {
+        rt->VpiFile(pro->VpiFile());
+        rt->VpiLineNo(pro->VpiLineNo());
+        rt->VpiColumnNo(pro->VpiColumnNo());
+        rt->VpiEndLineNo(pro->VpiEndLineNo());
+        rt->VpiEndColumnNo(pro->VpiEndColumnNo());
         UHDM::VectorOfany* const args =
             static_cast<const UHDM::sys_func_call*>(object->VpiParent())
                 ->Tf_call_args();

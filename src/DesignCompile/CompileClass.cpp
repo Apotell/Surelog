@@ -94,7 +94,7 @@ bool CompileClass::compile(Elaborate elaborate, Reduce reduce) {
     }
   }
 
-  UHDM::class_defn* const defn = m_class->getUhdmScope<UHDM::class_defn>();
+  UHDM::class_defn* const defn = m_class->getUhdmModel<UHDM::class_defn>();
   const UHDM::ScopedScope scopedScope(defn);
 
   if (defn->VpiFullName().empty()) defn->VpiFullName(fullName);
@@ -282,7 +282,7 @@ bool CompileClass::compile(Elaborate elaborate, Reduce reduce) {
 }
 
 bool CompileClass::compile_properties() {
-  UHDM::class_defn* defn = m_class->getUhdmScope<UHDM::class_defn>();
+  UHDM::class_defn* defn = m_class->getUhdmModel<UHDM::class_defn>();
   for (Signal* sig : m_class->getSignals()) {
     const FileContent* fC = sig->getFileContent();
     NodeId id = sig->getNodeId();
@@ -304,7 +304,7 @@ bool CompileClass::compile_properties() {
           nullptr, unpackedSize, false);
     }
     UHDM::typespec* tps = nullptr;
-    NodeId typeSpecId = sig->getTypeSpecId();
+    NodeId typeSpecId = sig->getTypespecId();
     if (typeSpecId) {
       tps = m_helper.compileTypespec(m_class, fC, typeSpecId, m_compileDesign,
                                      Reduce::Yes, nullptr, nullptr, false);
@@ -325,11 +325,7 @@ bool CompileClass::compile_properties() {
     if (UHDM::any* obj = m_helper.compileVariable(
             m_class, m_compileDesign, sig, packedDimensions, packedSize,
             unpackedDimensions, unpackedSize, exp, tps)) {
-      if (obj->UhdmType() == UHDM::uhdmnamed_event) {
-        defn->Named_events(true)->push_back((UHDM::named_event*)obj);
-      }
-
-      fC->populateCoreMembers(id, id, obj);
+      fC->populateCoreMembers(sig->getNameId(), sig->getNameId(), obj);
       obj->VpiParent(defn);
     }
   }
@@ -629,7 +625,7 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
       if (td == nullptr) {
         td = s.MakeTask_decl();
         td->VpiName(taskName);
-        td->VpiParent(m_class->getUhdmScope());
+        td->VpiParent(m_class->getUhdmModel());
         fC->populateCoreMembers(id, id, td);
         task_func_decls->push_back(td);
       }
@@ -678,7 +674,7 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
       if (fd == nullptr) {
         fd = s.MakeFunction_decl();
         fd->VpiName(funcName);
-        fd->VpiParent(m_class->getUhdmScope());
+        fd->VpiParent(m_class->getUhdmModel());
         fC->populateCoreMembers(id, id, fd);
         task_func_decls->push_back(fd);
       }
@@ -775,12 +771,9 @@ bool CompileClass::compile_class_constraint_(const FileContent* fC,
   Constraint* constraint = new Constraint(fC, class_constraint, constName);
   m_class->insertConstraint(constraint);
 
-  UHDM::class_defn* const pscope = m_class->getUhdmScope<UHDM::class_defn>();
-  if (UHDM::any* const cb = m_helper.compileConstraintBlock(
-          m_class, fC, class_constraint, m_compileDesign, pscope)) {
-    pscope->Constraints(true)->emplace_back(static_cast<UHDM::constraint*>(cb));
-  }
-
+  UHDM::class_defn* const pscope = m_class->getUhdmModel<UHDM::class_defn>();
+  m_helper.compileConstraintBlock(m_class, fC, class_constraint,
+                                  m_compileDesign, pscope);
   return true;
 }
 
@@ -794,7 +787,7 @@ bool CompileClass::compile_class_declaration_(const FileContent* fC,
   const NodeId class_name_id = fC->sl_collect(id, VObjectType::slStringConst);
   const std::string_view class_name = fC->SymName(class_name_id);
   std::string full_class_name =
-      StrCat(m_class->getUhdmScope<UHDM::class_defn>()->VpiFullName(),
+      StrCat(m_class->getUhdmModel<UHDM::class_defn>()->VpiFullName(),
              "::", class_name);
   ClassDefinition* prevDef = m_class->getClass(class_name);
   if (prevDef) {
@@ -813,13 +806,12 @@ bool CompileClass::compile_class_declaration_(const FileContent* fC,
   ClassDefinition* the_class =
       new ClassDefinition(m_session, class_name, m_class->getLibrary(),
                           m_class->getContainer(), fC, id, m_class, s);
-  UHDM::class_defn* defn = the_class->getUhdmScope<UHDM::class_defn>();
+  UHDM::class_defn* defn = the_class->getUhdmModel<UHDM::class_defn>();
   defn->VpiVirtual(virtualClass);
   defn->VpiFullName(full_class_name);
   m_class->insertClass(the_class);
-  UHDM::class_defn* parent = m_class->getUhdmScope<UHDM::class_defn>();
+  UHDM::class_defn* parent = m_class->getUhdmModel<UHDM::class_defn>();
   defn->VpiParent(parent);
-  parent->Scopes(true)->push_back(defn);
 
   FunctorCompileClass(m_session, m_compileDesign, the_class, m_design)();
   return true;
@@ -977,9 +969,9 @@ bool CompileClass::compile_class_type_(const FileContent* fC, NodeId id) {
     base_class_name.append("::").append(fC->SymName(base_class_id));
   }
   UHDM::extends* extends = s.MakeExtends();
-  extends->VpiParent(m_class->getUhdmScope());
+  extends->VpiParent(m_class->getUhdmModel());
   fC->populateCoreMembers(base_class_id, base_class_id, extends);
-  m_class->getUhdmScope<UHDM::class_defn>()->Extends(extends);
+  m_class->getUhdmModel<UHDM::class_defn>()->Extends(extends);
 
   UHDM::ref_typespec* extends_ts = s.MakeRef_typespec();
   extends_ts->VpiParent(extends);
@@ -1018,7 +1010,7 @@ bool CompileClass::compile_class_parameters_(const FileContent* fC, NodeId id) {
   n<> u<11> t<Parameter_port_list> p<31> c<10> s<20> l<18>
 
   */
-  UHDM::class_defn* defn = m_class->getUhdmScope<UHDM::class_defn>();
+  UHDM::class_defn* defn = m_class->getUhdmModel<UHDM::class_defn>();
 
   if (fC->sl_collect(id, VObjectType::paVIRTUAL)) {
     defn->VpiVirtual(true);

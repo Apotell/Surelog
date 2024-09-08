@@ -85,7 +85,6 @@ UHDM::property_inst* createPropertyInst(DesignComponent* component,
               (UHDM::ref_obj*)UHDM::clone_tree(arg, &elaboratorContext);
           args->emplace_back(ref);
           ref->VpiParent(real_property_expr);
-          component->needLateBinding(ref);
         } else {
           args->emplace_back(arg);
         }

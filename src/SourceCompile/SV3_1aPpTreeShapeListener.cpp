@@ -447,14 +447,10 @@ void SV3_1aPpTreeShapeListener::enterMacroInstanceWithArgs(
     std::string macroName;
     if (ctx->Macro_identifier()) {
       macroName = ctx->Macro_identifier()->getText();
-      startLineCol = ParseUtils::getLineColumn(ctx->Macro_identifier());
-      endLineCol = ParseUtils::getEndLineColumn(ctx->Macro_identifier());    } else if (ctx->Macro_Escaped_identifier()) {
+    } else if (ctx->Macro_Escaped_identifier()) {
       macroName = ctx->Macro_Escaped_identifier()->getText();
       macroName.erase(0, 1);
       macroName = StringUtils::rtrim(macroName);
-      startLineCol = ParseUtils::getLineColumn(ctx->Macro_Escaped_identifier());
-      endLineCol =
-          ParseUtils::getEndLineColumn(ctx->Macro_Escaped_identifier());
     }
     std::string macroArgs = ctx->macro_actual_args()->getText();
     int32_t nbCRinArgs = std::count(macroArgs.begin(), macroArgs.end(), '\n');

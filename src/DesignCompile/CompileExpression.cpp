@@ -1144,7 +1144,7 @@ UHDM::any *CompileHelper::compileSelectExpression(
           }
           expr *sel =
               (expr *)compileExpression(component, fC, bitexp, compileDesign,
-                                        reduce, pexpr, instance, muteErrors);
+                                        reduce, nullptr, instance, muteErrors);
 
           if (result) {
             UHDM::var_select *var_select = (UHDM::var_select *)result;

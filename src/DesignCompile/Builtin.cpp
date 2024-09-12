@@ -395,7 +395,7 @@ void Builtin::addBuiltinClasses() const {
       ClassDefinition* classDef = m_design->getClassDefinition(fullClassName);
       if (classDef == nullptr) {
         classDef =
-            new ClassDefinition(m_session, fullClassName, fC1->getLibrary(),
+            new ClassDefinition(m_session, name, fC1->getLibrary(),
                              builtinPackage,
                             fC1, classId, nullptr, s);
         m_design->addClassDefinition(fullClassName, classDef);

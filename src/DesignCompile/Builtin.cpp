@@ -244,9 +244,6 @@ void Builtin::addBuiltinTypes() const {
     if (package == nullptr) {
       package = new Package(m_session, f.packageName, nullptr, nullptr,
                             InvalidNodeId, s);
-      UHDM::package* pack = s.MakePackage();
-      pack->VpiName(package->getName());
-      package->setUhdmInstance(pack);
       m_design->addPackageDefinition(f.packageName, package);
     }
     const std::string fullClassName = StrCat(f.packageName, "::", f.className);

@@ -1260,7 +1260,7 @@ UHDM::any *CompileHelper::compileSelectExpression(
                 hier_path *p = (hier_path *)sel;
                 for (auto el : *p->Path_elems()) {
                   el->VpiParent(path);
-                  //el->Swap(p, path);
+                  // el->Swap(p, path);
                   elems->push_back(el);
                 }
                 break;
@@ -3379,6 +3379,7 @@ UHDM::any *CompileHelper::compileAssignmentPattern(
     DesignComponent *component, const FileContent *fC,
     NodeId Assignment_pattern, CompileDesign *compileDesign, Reduce reduce,
     UHDM::any *pexpr, ValuedComponentI *instance) {
+  SymbolTable *const symbols = m_session->getSymbolTable();
   FileSystem *const fileSystem = m_session->getFileSystem();
   UHDM::Serializer &s = compileDesign->getSerializer();
   UHDM::any *result = nullptr;
@@ -3468,8 +3469,7 @@ UHDM::any *CompileHelper::compileAssignmentPattern(
                 bool invalidValue = false;
                 if (any *tmp = reduceExpr(
                         exp, invalidValue, component, compileDesign, instance,
-                        fileSystem->toPathId(op->VpiFile(),
-                                             fC->getSymbolTable()),
+                        fileSystem->toPathId(op->VpiFile(), symbols),
                         op->VpiLineNo(), nullptr, true)) {
                   if (!invalidValue) exp = tmp;
                 }

@@ -165,18 +165,9 @@ bool Compiler::ppinit_() {
     SymbolTable* symbols = m_session->getSymbolTable();
     if (clp->fileunit()) {
       comp_unit = new CompilationUnit(true);
-      if (clp->parseBuiltIn()) {
-        Builtin* builtin = new Builtin(m_session, nullptr, nullptr);
-        builtin->addBuiltinMacros(comp_unit);
-      }
       m_compilationUnits.push_back(comp_unit);
       symbols = symbols->CreateSnapshot();
-      // m_symbolTables.push_back(symbols);
     }
-    // ErrorContainer* errors =
-    //     new ErrorContainer(symbols, m_errors->getLogListener());
-    // m_errorContainers.push_back(errors);
-    // errors->registerCmdLine(m_commandLineParser);
 
     Library* library = m_librarySet->getLibrary(sourceFileId);
     sourceFiles.insert(sourceFileId);
@@ -186,6 +177,10 @@ bool Compiler::ppinit_() {
                                          m_session->getCommandLineParser(),
                                          m_session->getPrecompiled());
     m_sessions.emplace_back(session);
+
+    if (clp->fileunit() && clp->parseBuiltIn()) {
+      Builtin(session, nullptr, nullptr).addBuiltinMacros(comp_unit);
+    }
 
     CompileSourceFile* compiler =
         new CompileSourceFile(session, sourceFileId, this, comp_unit, library);
@@ -938,8 +933,8 @@ bool Compiler::compileFileSet_(CompileSourceFile::Action action,
       for (uint16_t i = 0; i < maxThreadCount; i++) {
         std::cout << "Thread " << i << " : " << std::endl;
         int32_t sum = 0;
-        for (const CompileSourceFile* job : jobArray[i]) {
-          Session* const jobSession = const_cast<Session*>(job->getSession());
+        for (CompileSourceFile* job : jobArray[i]) {
+          Session* const jobSession = job->getSession();
           FileSystem* const jobFileSystem = jobSession->getFileSystem();
           PathId fileId;
           if (job->getPreprocessor())

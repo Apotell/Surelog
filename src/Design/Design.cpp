@@ -514,8 +514,9 @@ Package* Design::addPackageDefinition(std::string_view packageName,
 
 void Design::addClassDefinition(std::string_view className,
                                 ClassDefinition* classDef) {
-  m_classDefinitions.emplace(className, classDef);
-  m_uniqueClassDefinitions.emplace(className, classDef);
+  if (m_uniqueClassDefinitions.emplace(className, classDef).second) {
+    m_classDefinitions.emplace(className, classDef);
+  }
 }
 
 void Design::clearContainers() {

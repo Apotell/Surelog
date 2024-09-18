@@ -111,8 +111,6 @@ class FileContent : public DesignComponent {
   std::string printObject(NodeId noedId) const;  // Only print that object
   std::vector<std::string> collectSubTree(
       NodeId uniqueId) const;  // Helper function
-  SymbolTable* getSymbolTable() const { return m_symbolTable; }
-  void setSymbolTable(SymbolTable* table) { m_symbolTable = table; }
   PathId getFileId(NodeId id) const;
   PathId* getMutableFileId(NodeId id);
   Library* getLibrary() const { return m_library; }
@@ -243,7 +241,6 @@ class FileContent : public DesignComponent {
   //ErrorContainer* const m_errors;
 
   Library* m_library;          // TODO: should be set in constructor and *const
-  SymbolTable* m_symbolTable;  // TODO: should be set in constructor *const
   FileContent* m_parentFile;   // for file chunks
   bool m_isLibraryCellFile = false;
 };

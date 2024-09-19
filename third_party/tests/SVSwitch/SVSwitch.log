@@ -31,9 +31,9 @@
 [INF:CP0303] ${SURELOG_DIR}/third_party/tests/SVSwitch/rtl.sv:1:2: Compile module "work@switch".
 [INF:CP0303] ${SURELOG_DIR}/third_party/tests/SVSwitch/top.sv:12:1: Compile module "work@top".
 [INF:CP0306] ${SURELOG_DIR}/third_party/tests/SVSwitch/testcase.sv:18:1: Compile program "work@testcase".
-[INF:CP0302] Compile class "work@mailbox".
-[INF:CP0302] Compile class "work@process".
-[INF:CP0302] Compile class "work@semaphore".
+[INF:CP0302] Compile class "builtin::mailbox".
+[INF:CP0302] Compile class "builtin::process".
+[INF:CP0302] Compile class "builtin::semaphore".
 [INF:CP0302] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:12:1: Compile class "work@Driver".
 [INF:CP0302] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:12:1: Compile class "work@Environment".
 [INF:CP0302] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:12:1: Compile class "work@Receiver".
@@ -41,36 +41,44 @@
 [INF:CP0302] ${SURELOG_DIR}/third_party/tests/SVSwitch/Coverage.sv:12:1: Compile class "work@coverage".
 [INF:CP0302] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:16:1: Compile class "work@packet".
 [INF:CP0302] ${SURELOG_DIR}/third_party/tests/SVSwitch/testcase.sv:12:1: Compile class "work@small_packet".
+[ERR:UH0705] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:13:1: Unsupported data type "<n<> u<6> t<VIRTUAL> p<7> s<5> l<13:1> el<13:8>> virtual input_interface.IP  input_intf;".
+[ERR:UH0705] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:15:3: Unsupported data type "<n<> u<6> t<VIRTUAL> p<7> s<5> l<15:3> el<15:10>>   virtual mem_interface.MEM    mem_intf       ;".
+[ERR:UH0705] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:16:3: Unsupported data type "<n<> u<18> t<VIRTUAL> p<19> s<17> l<16:3> el<16:10>>   virtual input_interface.IP  input_intf     ;".
+[ERR:UH0705] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:17:3: Unsupported data type "<n<> u<30> t<VIRTUAL> p<31> s<29> l<17:3> el<17:10>>   virtual output_interface.OP output_intf[4] ;".
+[ERR:UH0705] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:14:1: Unsupported data type "<n<> u<6> t<VIRTUAL> p<7> s<5> l<14:1> el<14:8>> virtual output_interface.OP output_intf;".
 [NTE:CP0309] ${SURELOG_DIR}/third_party/tests/SVSwitch/rtl.sv:1:44: Implicit port type (wire) for "port0",
 there are 7 more instances of this message.
 [WRN:CP0314] ${SURELOG_DIR}/third_party/tests/SVSwitch/testcase.sv:18:1: Using programs is discouraged "work@testcase", programs are obsoleted by UVM.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 always                                                13
-array_typespec                                         2
-array_var                                              2
+array_net                                              5
+array_typespec                                         6
+array_var                                              5
 assignment                                           208
-begin                                                 97
+begin                                                 98
 bit_select                                            85
-bit_typespec                                           2
-bit_var                                                1
-byte_typespec                                          3
-byte_var                                               2
+bit_typespec                                          11
+bit_var                                                8
+byte_typespec                                          5
+byte_var                                               4
 case_item                                             10
 case_stmt                                              2
-class_defn                                            16
-class_typespec                                        21
-class_var                                             12
+class_defn                                            15
+class_typespec                                        15
+class_var                                             11
 clocking_block                                         3
 clocking_io_decl                                       9
-constant                                             434
+constant                                             557
+constraint                                             6
 cont_assign                                           76
 delay_control                                          8
 design                                                 1
 enum_const                                             9
 enum_typespec                                          3
-enum_var                                               1
+enum_var                                               3
 event_control                                         31
+extends                                                1
 final_stmt                                             1
 for_stmt                                               1
 foreach_stmt                                           6
@@ -82,59 +90,412 @@ hier_path                                            122
 if_else                                               17
 if_stmt                                               26
 initial                                                2
-int_typespec                                          16
+int_typespec                                          11
 int_var                                                6
 integer_typespec                                      10
-integer_var                                            1
+integer_var                                            9
 interface_inst                                         3
-interface_typespec                                     5
+interface_typespec                                    11
 io_decl                                               28
-logic_net                                            136
-logic_typespec                                       125
-logic_var                                              3
-method_func_call                                      42
+logic_net                                            126
+logic_typespec                                       116
+logic_var                                             24
+method_func_call                                      43
 modport                                                3
 module_array                                           1
 module_inst                                            2
 module_typespec                                        1
-named_begin                                            1
-operation                                            183
+operation                                            186
 package                                                1
 param_assign                                           5
 parameter                                              5
 port                                                  49
+preproc_macro_definition                              14
+preproc_macro_instance                                16
 program                                                1
-range                                                 61
+range                                                126
 ref_module                                             3
-ref_obj                                              776
-ref_typespec                                         201
+ref_obj                                              755
+ref_typespec                                         202
 ref_var                                               13
 repeat                                                 6
 return_stmt                                            1
+source_file                                           11
 sys_func_call                                         72
 task                                                  19
 task_call                                              4
-unsupported_typespec                                  11
+unsupported_typespec                                  21
 var_select                                            16
 wait_stmt                                              1
 while_stmt                                             1
 === UHDM Object Stats End ===
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:48:22: Failed to bind object: "id: 2848, name: size".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:48:22: Illegal implicit net "id:2848, name: size".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:49:26: Failed to bind object: "id: 2855, name: i".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:49:26: Illegal implicit net "id:2855, name: i".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:64:34: Failed to bind object: "id: 2901, name: i".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:64:34: Illegal implicit net "id:2901, name: i".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:76:23: Failed to bind object: "id: 2959, name: i".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:76:23: Illegal implicit net "id:2959, name: i".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:76:13: Failed to bind object: "id: 2957, name: i".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:76:13: Illegal implicit net "id:2957, name: i".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:71:20: Failed to bind object: "id: 2932, name: size".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:71:20: Illegal implicit net "id:2932, name: size".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:78:21: Failed to bind object: "id: 2973, name: size".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:78:21: Illegal implicit net "id:2973, name: size".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:89:19: Failed to bind object: "id: 3028, name: i".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:89:19: Illegal implicit net "id:3028, name: i".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:89:8: Failed to bind object: "id: 3026, name: i".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:89:8: Illegal implicit net "id:3026, name: i".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:86:20: Failed to bind object: "id: 3012, name: bytes".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:86:20: Illegal implicit net "id:3012, name: bytes".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:86:26: Failed to bind object: "id: 3013, name: size".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:86:26: Illegal implicit net "id:3013, name: size".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:91:12: Failed to bind object: "id: 3039, name: bytes".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:91:12: Illegal implicit net "id:3039, name: bytes".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:91:18: Failed to bind object: "id: 3040, name: size".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:91:18: Illegal implicit net "id:3040, name: size".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:122:22: Failed to bind object: "id: 3124, name: i".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:122:22: Illegal implicit net "id:3124, name: i".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:35:10: Failed to bind object: "id: 2092, name: num_of_pkts".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:35:10: Illegal implicit net "id:2092, name: num_of_pkts".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:37:39: Failed to bind object: "id: 2100, name: clock".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:37:39: Illegal implicit net "id:2100, name: clock".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:52:32: Failed to bind object: "id: 2134, name: clock".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:52:32: Illegal implicit net "id:2134, name: clock".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:53:22: Failed to bind object: "id: 2138, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:53:22: Illegal implicit net "id:2138, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:53:25: Failed to bind object: "id: 2139, name: data_status".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:53:25: Illegal implicit net "id:2139, name: data_status".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:54:42: Failed to bind object: "id: 2146, name: i".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:54:42: Illegal implicit net "id:2146, name: i".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:54:22: Failed to bind object: "id: 2144, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:54:22: Illegal implicit net "id:2144, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:54:25: Failed to bind object: "id: 2145, name: data_in".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:54:25: Illegal implicit net "id:2145, name: data_in".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:58:29: Failed to bind object: "id: 2152, name: clock".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:58:29: Illegal implicit net "id:2152, name: clock".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:59:19: Failed to bind object: "id: 2156, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:59:19: Illegal implicit net "id:2156, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:59:22: Failed to bind object: "id: 2157, name: data_status".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:59:22: Illegal implicit net "id:2157, name: data_status".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:60:19: Failed to bind object: "id: 2162, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:60:19: Illegal implicit net "id:2162, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:60:22: Failed to bind object: "id: 2163, name: data_in".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:60:22: Illegal implicit net "id:2163, name: data_in".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:71:10: Failed to bind object: "id: 2176, name: error".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:71:10: Illegal implicit net "id:2176, name: error".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:34:37: Failed to bind object: "id: 2636, name: clock".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:34:37: Illegal implicit net "id:2636, name: clock".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:36:17: Failed to bind object: "id: 2641, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:36:17: Illegal implicit net "id:2641, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:36:20: Failed to bind object: "id: 2642, name: read".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:36:20: Illegal implicit net "id:2642, name: read".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:35:22: Failed to bind object: "id: 2646, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:35:22: Illegal implicit net "id:2646, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:35:25: Failed to bind object: "id: 2647, name: ready".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:35:25: Illegal implicit net "id:2647, name: ready".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:37:37: Failed to bind object: "id: 2654, name: clock".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:37:37: Illegal implicit net "id:2654, name: clock".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:38:24: Failed to bind object: "id: 2658, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:38:24: Illegal implicit net "id:2658, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:38:27: Failed to bind object: "id: 2659, name: ready".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:38:27: Illegal implicit net "id:2659, name: ready".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:40:26: Failed to bind object: "id: 2666, name: size".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:40:26: Illegal implicit net "id:2666, name: size".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:41:44: Failed to bind object: "id: 2679, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:41:44: Illegal implicit net "id:2679, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:41:47: Failed to bind object: "id: 2680, name: data_out".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:41:47: Illegal implicit net "id:2680, name: data_out".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:41:14: Failed to bind object: "id: 2672, name: bytes".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:41:14: Illegal implicit net "id:2672, name: bytes".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:41:20: Failed to bind object: "id: 2673, name: size".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:41:20: Illegal implicit net "id:2673, name: size".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:42:30: Failed to bind object: "id: 2685, name: clock".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:42:30: Illegal implicit net "id:2685, name: clock".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:44:17: Failed to bind object: "id: 2689, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:44:17: Illegal implicit net "id:2689, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:44:20: Failed to bind object: "id: 2690, name: read".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:44:20: Illegal implicit net "id:2690, name: read".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:45:27: Failed to bind object: "id: 2696, name: clock".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:45:27: Illegal implicit net "id:2696, name: clock".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:46:78: Failed to bind object: "id: 2702, name: size".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:46:78: Illegal implicit net "id:2702, name: size".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Coverage.sv:36:1: Failed to bind object: "id: 2800, name: switch_coverage".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Coverage.sv:36:1: Illegal implicit net "id:2800, name: switch_coverage".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Scoreboard.sv:37:7: Failed to bind object: "id: 2773, name: error".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Scoreboard.sv:37:7: Illegal implicit net "id:2773, name: error".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:43:31: Failed to bind object: "id: 2255, name: i".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:43:31: Illegal implicit net "id:2255, name: i".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:43:11: Failed to bind object: "id: 2252, name: i".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:43:11: Illegal implicit net "id:2252, name: i".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:50:12: Failed to bind object: "id: 2269, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:50:12: Illegal implicit net "id:2269, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:50:15: Failed to bind object: "id: 2270, name: mem_data".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:50:15: Illegal implicit net "id:2270, name: mem_data".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:51:12: Failed to bind object: "id: 2275, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:51:12: Illegal implicit net "id:2275, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:51:15: Failed to bind object: "id: 2276, name: mem_add".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:51:15: Illegal implicit net "id:2276, name: mem_add".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:52:12: Failed to bind object: "id: 2281, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:52:12: Illegal implicit net "id:2281, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:52:15: Failed to bind object: "id: 2282, name: mem_en".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:52:15: Illegal implicit net "id:2282, name: mem_en".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:53:12: Failed to bind object: "id: 2287, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:53:12: Illegal implicit net "id:2287, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:53:15: Failed to bind object: "id: 2288, name: mem_rd_wr".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:53:15: Illegal implicit net "id:2288, name: mem_rd_wr".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:54:14: Failed to bind object: "id: 2293, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:54:14: Illegal implicit net "id:2293, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:54:17: Failed to bind object: "id: 2294, name: data_in".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:54:17: Illegal implicit net "id:2294, name: data_in".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:55:14: Failed to bind object: "id: 2299, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:55:14: Illegal implicit net "id:2299, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:55:17: Failed to bind object: "id: 2300, name: data_status".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:55:17: Illegal implicit net "id:2300, name: data_status".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:56:18: Failed to bind object: "id: 2306, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:56:18: Illegal implicit net "id:2306, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:56:21: Failed to bind object: "id: 2307, name: read".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:56:21: Illegal implicit net "id:2307, name: read".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:57:18: Failed to bind object: "id: 2313, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:57:18: Illegal implicit net "id:2313, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:57:21: Failed to bind object: "id: 2314, name: read".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:57:21: Illegal implicit net "id:2314, name: read".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:58:18: Failed to bind object: "id: 2320, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:58:18: Illegal implicit net "id:2320, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:58:21: Failed to bind object: "id: 2321, name: read".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:58:21: Illegal implicit net "id:2321, name: read".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:59:18: Failed to bind object: "id: 2327, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:59:18: Illegal implicit net "id:2327, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:59:21: Failed to bind object: "id: 2328, name: read".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:59:21: Illegal implicit net "id:2328, name: read".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:72:12: Failed to bind object: "id: 2355, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:72:12: Illegal implicit net "id:2355, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:72:15: Failed to bind object: "id: 2356, name: mem_en".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:72:15: Illegal implicit net "id:2356, name: mem_en".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:73:22: Failed to bind object: "id: 2362, name: clock".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:73:22: Illegal implicit net "id:2362, name: clock".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:74:12: Failed to bind object: "id: 2366, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:74:12: Illegal implicit net "id:2366, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:74:15: Failed to bind object: "id: 2367, name: mem_rd_wr".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:74:15: Illegal implicit net "id:2367, name: mem_rd_wr".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:76:22: Failed to bind object: "id: 2373, name: clock".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:76:22: Illegal implicit net "id:2373, name: clock".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:77:12: Failed to bind object: "id: 2377, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:77:12: Illegal implicit net "id:2377, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:77:15: Failed to bind object: "id: 2378, name: mem_add".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:77:15: Illegal implicit net "id:2378, name: mem_add".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:78:12: Failed to bind object: "id: 2383, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:78:12: Illegal implicit net "id:2383, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:78:15: Failed to bind object: "id: 2384, name: mem_data".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:78:15: Illegal implicit net "id:2384, name: mem_data".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:81:22: Failed to bind object: "id: 2394, name: clock".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:81:22: Illegal implicit net "id:2394, name: clock".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:82:12: Failed to bind object: "id: 2398, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:82:12: Illegal implicit net "id:2398, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:82:15: Failed to bind object: "id: 2399, name: mem_add".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:82:15: Illegal implicit net "id:2399, name: mem_add".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:83:12: Failed to bind object: "id: 2404, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:83:12: Illegal implicit net "id:2404, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:83:15: Failed to bind object: "id: 2405, name: mem_data".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:83:15: Illegal implicit net "id:2405, name: mem_data".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:86:22: Failed to bind object: "id: 2415, name: clock".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:86:22: Illegal implicit net "id:2415, name: clock".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:87:12: Failed to bind object: "id: 2419, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:87:12: Illegal implicit net "id:2419, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:87:15: Failed to bind object: "id: 2420, name: mem_add".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:87:15: Illegal implicit net "id:2420, name: mem_add".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:88:12: Failed to bind object: "id: 2425, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:88:12: Illegal implicit net "id:2425, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:88:15: Failed to bind object: "id: 2426, name: mem_data".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:88:15: Illegal implicit net "id:2426, name: mem_data".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:91:22: Failed to bind object: "id: 2436, name: clock".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:91:22: Illegal implicit net "id:2436, name: clock".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:92:12: Failed to bind object: "id: 2440, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:92:12: Illegal implicit net "id:2440, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:92:15: Failed to bind object: "id: 2441, name: mem_add".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:92:15: Illegal implicit net "id:2441, name: mem_add".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:93:12: Failed to bind object: "id: 2446, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:93:12: Illegal implicit net "id:2446, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:93:15: Failed to bind object: "id: 2447, name: mem_data".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:93:15: Illegal implicit net "id:2447, name: mem_data".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:96:22: Failed to bind object: "id: 2457, name: clock".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:96:22: Illegal implicit net "id:2457, name: clock".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:97:12: Failed to bind object: "id: 2461, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:97:12: Illegal implicit net "id:2461, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:97:15: Failed to bind object: "id: 2462, name: mem_en".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:97:15: Illegal implicit net "id:2462, name: mem_en".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:98:12: Failed to bind object: "id: 2467, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:98:12: Illegal implicit net "id:2467, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:98:15: Failed to bind object: "id: 2468, name: mem_rd_wr".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:98:15: Illegal implicit net "id:2468, name: mem_rd_wr".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:99:12: Failed to bind object: "id: 2473, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:99:12: Illegal implicit net "id:2473, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:99:15: Failed to bind object: "id: 2474, name: mem_add".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:99:15: Illegal implicit net "id:2474, name: mem_add".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:100:12: Failed to bind object: "id: 2479, name: cb".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:100:12: Illegal implicit net "id:2479, name: cb".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:100:15: Failed to bind object: "id: 2480, name: mem_data".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:100:15: Illegal implicit net "id:2480, name: mem_data".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:121:31: Failed to bind object: "id: 2516, name: clock".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:121:31: Illegal implicit net "id:2516, name: clock".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:138:13: Failed to bind object: "id: 2540, name: error".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:138:13: Illegal implicit net "id:2540, name: error".
+[ERR:UH0734] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:141:69: Failed to bind object: "id: 2546, name: error".
+[ERR:EL0535] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:141:69: Illegal implicit net "id:2546, name: error".
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:49:26: Object 2855 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:64:34: Object 2901 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:76:23: Object 2959 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:76:13: Object 2957 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:89:19: Object 3028 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:89:8: Object 3026 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:86:20: Object 3012 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:91:12: Object 3039 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:122:22: Object 3124 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:35:10: Object 2092 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:37:39: Object 2100 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:52:32: Object 2134 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:53:22: Object 2138 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:53:25: Object 2139 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:54:42: Object 2146 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:54:22: Object 2144 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:54:25: Object 2145 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:58:29: Object 2152 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:59:19: Object 2156 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:59:22: Object 2157 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:60:19: Object 2162 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:60:22: Object 2163 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:71:10: Object 2176 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:34:37: Object 2636 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:36:17: Object 2641 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:36:20: Object 2642 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:35:22: Object 2646 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:35:25: Object 2647 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:37:37: Object 2654 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:38:24: Object 2658 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:38:27: Object 2659 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:41:44: Object 2679 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:41:47: Object 2680 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:41:14: Object 2672 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:42:30: Object 2685 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:44:17: Object 2689 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:44:20: Object 2690 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:45:27: Object 2696 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Coverage.sv:36:1: Object 2800 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Scoreboard.sv:37:7: Object 2773 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:43:31: Object 2255 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:43:11: Object 2252 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:50:12: Object 2269 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:50:15: Object 2270 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:51:12: Object 2275 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:51:15: Object 2276 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:52:12: Object 2281 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:52:15: Object 2282 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:53:12: Object 2287 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:53:15: Object 2288 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:54:14: Object 2293 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:54:17: Object 2294 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:55:14: Object 2299 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:55:17: Object 2300 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:56:18: Object 2306 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:56:21: Object 2307 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:57:18: Object 2313 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:57:21: Object 2314 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:58:18: Object 2320 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:58:21: Object 2321 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:59:18: Object 2327 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:59:21: Object 2328 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:72:12: Object 2355 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:72:15: Object 2356 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:73:22: Object 2362 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:74:12: Object 2366 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:74:15: Object 2367 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:76:22: Object 2373 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:77:12: Object 2377 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:77:15: Object 2378 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:78:12: Object 2383 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:78:15: Object 2384 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:81:22: Object 2394 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:82:12: Object 2398 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:82:15: Object 2399 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:83:12: Object 2404 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:83:15: Object 2405 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:86:22: Object 2415 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:87:12: Object 2419 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:87:15: Object 2420 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:88:12: Object 2425 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:88:15: Object 2426 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:91:22: Object 2436 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:92:12: Object 2440 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:92:15: Object 2441 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:93:12: Object 2446 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:93:15: Object 2447 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:96:22: Object 2457 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:97:12: Object 2461 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:97:15: Object 2462 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:98:12: Object 2467 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:98:15: Object 2468 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:99:12: Object 2473 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:99:15: Object 2474 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:100:12: Object 2479 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:100:15: Object 2480 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:121:31: Object 2516 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:138:13: Object 2540 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:141:69: Object 2546 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/SVSwitch/testcase.sv:12:28: Object 3202 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SVSwitch/slpp_all/surelog.uhdm ...
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 319
 [WARNING] : 1
 [   NOTE] : 3
 
 ============================== Begin Linting Results ==============================
-[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:12:1: Non synthesizable construct, work@Driver
-[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:16:1: Non synthesizable construct, work@packet
-[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:12:1: Non synthesizable construct, work@Environment
-[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:12:1: Non synthesizable construct, work@Receiver
-[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:40:16: Non synthesizable construct, new
-[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Scoreboard.sv:12:1: Non synthesizable construct, work@Scoreboard
-[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Coverage.sv:12:1: Non synthesizable construct, work@coverage
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:64:3: Non synthesizable construct, $write
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:57:44: Non synthesizable construct, name
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:58:47: Non synthesizable construct, name
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:65:32: Non synthesizable construct, size
 [LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:71:11: Non synthesizable construct, new
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:77:14: Non synthesizable construct, size
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv:16:1: Non synthesizable construct, work@packet
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:38:12: Non synthesizable construct, new
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:40:14: Non synthesizable construct, randomize
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:44:8: Non synthesizable construct, display
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:47:21: Non synthesizable construct, byte_pack
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:63:8: Non synthesizable construct, put
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv:12:1: Non synthesizable construct, work@Driver
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:35:5: Non synthesizable construct,
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:40:16: Non synthesizable construct, new
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:47:11: Non synthesizable construct, new
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:48:5: Non synthesizable construct, byte_unpack
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:49:5: Non synthesizable construct, display
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:50:5: Non synthesizable construct, put
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:51:5: Non synthesizable construct, delete
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv:12:1: Non synthesizable construct, work@Receiver
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Coverage.sv:36:1: Non synthesizable construct, sample
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Coverage.sv:12:1: Non synthesizable construct, work@coverage
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Scoreboard.sv:16:16: Non synthesizable construct, new
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Scoreboard.sv:28:5: Non synthesizable construct, get
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Scoreboard.sv:30:5: Non synthesizable construct, get
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Scoreboard.sv:31:16: Non synthesizable construct, compare
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Scoreboard.sv:34:5: Non synthesizable construct, sample
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Scoreboard.sv:12:1: Non synthesizable construct, work@Scoreboard
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:43:15: Non synthesizable construct, new
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:38:14: Non synthesizable construct, new
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:39:14: Non synthesizable construct, new
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:40:9: Non synthesizable construct, new
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:41:10: Non synthesizable construct, new
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:109:5: Non synthesizable construct, start
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:110:5: Non synthesizable construct, start
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:111:5: Non synthesizable construct, start
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:112:5: Non synthesizable construct, start
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:113:5: Non synthesizable construct, start
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:114:5: Non synthesizable construct, start
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:108:3: Non synthesizable construct,
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:106:1: Non synthesizable construct, start
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv:12:1: Non synthesizable construct, work@Environment
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/testcase.sv:12:28: Non synthesizable construct,
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/testcase.sv:14:1: Non synthesizable construct, small_c
 [LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/testcase.sv:12:1: Non synthesizable construct, work@small_packet
 [LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/interface.sv:44:20: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/interface.sv:44:30: Non synthesizable construct,
@@ -154,16 +515,29 @@ while_stmt                                             1
 [LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/interface.sv:66:15: Non synthesizable construct, ready
 [LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/interface.sv:67:15: Non synthesizable construct, read
 [LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/interface.sv:63:3: Non synthesizable construct, cb
-[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/testcase.sv:26:1: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/testcase.sv:27:1: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/testcase.sv:28:5: Non synthesizable construct, build
-[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/testcase.sv:30:5: Non synthesizable construct, reset
-[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/testcase.sv:31:5: Non synthesizable construct, cfg_dut
-[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/testcase.sv:32:5: Non synthesizable construct, start
-[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/testcase.sv:33:5: Non synthesizable construct, wait_for_end
-[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/testcase.sv:34:5: Non synthesizable construct, report
-[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/testcase.sv:36:1: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/testcase.sv:39:1: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/testcase.sv:18:1: Non synthesizable construct,
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/testcase.sv:26:8: Non synthesizable construct, new
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/testcase.sv:27:7: Non synthesizable construct, new
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/testcase.sv:28:1: Non synthesizable construct, build
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/testcase.sv:30:1: Non synthesizable construct, reset
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/testcase.sv:31:1: Non synthesizable construct, cfg_dut
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/testcase.sv:32:1: Non synthesizable construct, start
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/testcase.sv:33:1: Non synthesizable construct, wait_for_end
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/testcase.sv:34:1: Non synthesizable construct, report
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/testcase.sv:36:1: Non synthesizable construct,
+[LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/testcase.sv:18:1: Non synthesizable construct, work@testcase
 [LINT]: ${SURELOG_DIR}/third_party/tests/SVSwitch/top.sv:20:11: Non synthesizable construct,
 ============================== End Linting Results ==============================
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Coverage.sv    | ${SURELOG_DIR}/build/regression/SVSwitch/roundtrip/Coverage_000.sv    | 19 | 38 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Driver.sv      | ${SURELOG_DIR}/build/regression/SVSwitch/roundtrip/Driver_000.sv      | 30 | 76 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Environemnt.sv | ${SURELOG_DIR}/build/regression/SVSwitch/roundtrip/Environemnt_000.sv | 61 | 146 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Packet.sv      | ${SURELOG_DIR}/build/regression/SVSwitch/roundtrip/Packet_000.sv      | 53 | 136 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Receiver.sv    | ${SURELOG_DIR}/build/regression/SVSwitch/roundtrip/Receiver_000.sv    | 25 | 55 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/SVSwitch/Scoreboard.sv  | ${SURELOG_DIR}/build/regression/SVSwitch/roundtrip/Scoreboard_000.sv  | 14 | 41 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/SVSwitch/interface.sv   | ${SURELOG_DIR}/build/regression/SVSwitch/roundtrip/interface_000.sv   | 19 | 70 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/SVSwitch/rtl.sv         | ${SURELOG_DIR}/build/regression/SVSwitch/roundtrip/rtl_000.sv         | 31 | 38 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/SVSwitch/testcase.sv    | ${SURELOG_DIR}/build/regression/SVSwitch/roundtrip/testcase_000.sv    | 15 | 43 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/SVSwitch/top.sv         | ${SURELOG_DIR}/build/regression/SVSwitch/roundtrip/top_000.sv         | 28 | 73 |
+============================== End RoundTrip Results ==============================

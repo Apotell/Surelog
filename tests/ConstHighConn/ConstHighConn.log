@@ -79,51 +79,69 @@ constant                                               2
 cont_assign                                            1
 design                                                 1
 logic_net                                              2
-logic_typespec                                         2
+logic_typespec                                         4
 module_inst                                            2
 port                                                   3
 ref_module                                             1
-ref_obj                                                3
-ref_typespec                                           2
+ref_obj                                                1
+ref_typespec                                           4
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConstHighConn/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ConstHighConn/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ConstHighConn/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/ConstHighConn/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstHighConn/dut.sv, line:1:1, endln:3:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@dut
-  |vpiDefName:work@dut
-  |vpiNet:
+  |vpiName:work@dut
+  |vpiTypedef:
+  \_logic_typespec: , line:1:20, endln:1:25
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstHighConn/dut.sv, line:1:1, endln:3:10
+  |vpiTypedef:
+  \_logic_typespec: , line:1:20, endln:1:25
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstHighConn/dut.sv, line:1:1, endln:3:10
+  |vpiImportTypespec:
+  \_logic_typespec: , line:1:20, endln:1:25
+  |vpiImportTypespec:
   \_logic_net: (work@dut.o), line:1:26, endln:1:27
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstHighConn/dut.sv, line:1:1, endln:3:10
+    |vpiTypespec:
+    \_ref_typespec: (work@dut.o.o), line:1:20, endln:1:25
+      |vpiParent:
+      \_logic_net: (work@dut.o), line:1:26, endln:1:27
+      |vpiName:o
+      |vpiFullName:work@dut.o.o
+      |vpiActual:
+      \_logic_typespec: , line:1:20, endln:1:25
     |vpiName:o
     |vpiFullName:work@dut.o
     |vpiNetType:36
+  |vpiImportTypespec:
+  \_logic_typespec: , line:1:20, endln:1:25
+  |vpiDefName:work@dut
+  |vpiNet:
+  \_logic_net: (work@dut.o), line:1:26, endln:1:27
   |vpiPort:
-  \_port: (o), line:1:26, endln:1:27
+  \_port: (o), line:1:13, endln:1:27
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstHighConn/dut.sv, line:1:1, endln:3:10
     |vpiName:o
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@dut.o.o), line:1:26, endln:1:27
-      |vpiParent:
-      \_port: (o), line:1:26, endln:1:27
-      |vpiName:o
-      |vpiFullName:work@dut.o.o
-      |vpiActual:
-      \_logic_net: (work@dut.o), line:1:26, endln:1:27
     |vpiTypedef:
-    \_ref_typespec: (work@dut.o)
+    \_ref_typespec: (work@dut.o), line:1:20, endln:1:25
       |vpiParent:
-      \_port: (o), line:1:26, endln:1:27
+      \_port: (o), line:1:13, endln:1:27
       |vpiFullName:work@dut.o
       |vpiActual:
       \_logic_typespec: , line:1:20, endln:1:25
@@ -142,7 +160,7 @@ design: (unnamed)
     |vpiLhs:
     \_ref_obj: (work@dut.o), line:2:11, endln:2:12
       |vpiParent:
-      \_cont_assign: , line:2:11, endln:2:19
+      \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstHighConn/dut.sv, line:1:1, endln:3:10
       |vpiName:o
       |vpiFullName:work@dut.o
       |vpiActual:
@@ -151,38 +169,65 @@ design: (unnamed)
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstHighConn/dut.sv, line:5:1, endln:9:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiNet:
+  |vpiName:work@top
+  |vpiTypedef:
+  \_logic_typespec: , line:5:20, endln:5:25
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstHighConn/dut.sv, line:5:1, endln:9:10
+  |vpiTypedef:
+  \_logic_typespec: , line:5:20, endln:5:25
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstHighConn/dut.sv, line:5:1, endln:9:10
+  |vpiImportTypespec:
+  \_logic_typespec: , line:5:20, endln:5:25
+  |vpiImportTypespec:
   \_logic_net: (work@top.o), line:5:26, endln:5:27
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstHighConn/dut.sv, line:5:1, endln:9:10
+    |vpiTypespec:
+    \_ref_typespec: (work@top.o.o), line:5:20, endln:5:25
+      |vpiParent:
+      \_logic_net: (work@top.o), line:5:26, endln:5:27
+      |vpiName:o
+      |vpiFullName:work@top.o.o
+      |vpiActual:
+      \_logic_typespec: , line:5:20, endln:5:25
     |vpiName:o
     |vpiFullName:work@top.o
     |vpiNetType:36
+  |vpiImportTypespec:
+  \_logic_typespec: , line:5:20, endln:5:25
+  |vpiDefName:work@top
+  |vpiNet:
+  \_logic_net: (work@top.o), line:5:26, endln:5:27
   |vpiPort:
-  \_port: (o), line:5:26, endln:5:27
+  \_port: (o), line:7:10, endln:7:19
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstHighConn/dut.sv, line:5:1, endln:9:10
+    |vpiName:o
+    |vpiHighConn:
+    \_constant: , line:7:13, endln:7:18
+      |vpiParent:
+      \_port: (o), line:7:10, endln:7:19
+      |vpiDecompile:15'b0
+      |vpiSize:15
+      |BIN:0
+      |vpiConstType:3
+  |vpiPort:
+  \_port: (o), line:5:13, endln:5:27
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstHighConn/dut.sv, line:5:1, endln:9:10
     |vpiName:o
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@top.o.o), line:5:26, endln:5:27
-      |vpiParent:
-      \_port: (o), line:5:26, endln:5:27
-      |vpiName:o
-      |vpiFullName:work@top.o.o
-      |vpiActual:
-      \_logic_net: (work@top.o), line:5:26, endln:5:27
     |vpiTypedef:
-    \_ref_typespec: (work@top.o)
+    \_ref_typespec: (work@top.o), line:5:20, endln:5:25
       |vpiParent:
-      \_port: (o), line:5:26, endln:5:27
+      \_port: (o), line:5:13, endln:5:27
       |vpiFullName:work@top.o
       |vpiActual:
       \_logic_typespec: , line:5:20, endln:5:25
   |vpiRefModule:
-  \_ref_module: work@dut (d), line:7:8, endln:7:9
+  \_ref_module: work@dut (d), line:7:4, endln:7:21
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstHighConn/dut.sv, line:5:1, endln:9:10
     |vpiName:d
@@ -191,18 +236,6 @@ design: (unnamed)
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstHighConn/dut.sv, line:1:1, endln:3:10
     |vpiPort:
     \_port: (o), line:7:10, endln:7:19
-      |vpiParent:
-      \_ref_module: work@dut (d), line:7:8, endln:7:9
-      |vpiName:o
-      |vpiHighConn:
-      \_constant: , line:7:13, endln:7:18
-        |vpiDecompile:15'b0
-        |vpiSize:15
-        |BIN:0
-        |vpiConstType:3
-\_weaklyReferenced:
-\_logic_typespec: , line:1:20, endln:1:25
-\_logic_typespec: , line:5:20, endln:5:25
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -211,5 +244,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ConstHighConn/dut.sv | ${SURELOG_DIR}/build/regression/ConstHighConn/roundtrip/dut_000.sv | 3 | 9 |
+[roundtrip]: ${SURELOG_DIR}/tests/ConstHighConn/dut.sv | ${SURELOG_DIR}/build/regression/ConstHighConn/roundtrip/dut_000.sv | 5 | 9 |
 ============================== End RoundTrip Results ==============================

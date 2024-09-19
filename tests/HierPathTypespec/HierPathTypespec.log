@@ -56,7 +56,7 @@ n<pkg> u<50> t<StringConst> p<51> l<10:4> el<10:7>
 n<> u<51> t<Class_type> p<52> c<50> l<10:4> el<10:7>
 n<> u<52> t<Class_scope> p<54> c<51> s<53> l<10:4> el<10:9>
 n<b> u<53> t<StringConst> p<54> l<10:9> el<10:10>
-n<> u<54> t<Data_type> p<58> c<52> s<57> l<10:4> el<10:10>
+n<pkg::b> u<54> t<Data_type> p<58> c<52> s<57> l<10:4> el<10:10>
 n<c> u<55> t<StringConst> p<56> l<10:11> el<10:12>
 n<> u<56> t<Variable_decl_assignment> p<57> c<55> l<10:11> el<10:12>
 n<> u<57> t<List_of_variable_decl_assignments> p<58> c<56> l<10:11> el<10:12>
@@ -120,7 +120,7 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/HierPathTypespec/dut.sv:8:1: No timescale set for "top".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/HierPathTypespec/dut.sv:8:1: Compile module "work@top".
-[NTE:CP0309] ${SURELOG_DIR}/tests/HierPathTypespec/dut.sv:8:19: Implicit port type (wire) for "o".
+[NTE:CP0309] ${SURELOG_DIR}/tests/HierPathTypespec/dut.sv:8:12: Implicit port type (wire) for "o".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 bit_select                                             2
@@ -128,26 +128,31 @@ constant                                               5
 cont_assign                                            2
 design                                                 1
 hier_path                                              2
-logic_net                                              2
-logic_typespec                                         2
+logic_net                                              1
+logic_typespec                                         1
+logic_var                                              1
 module_inst                                            1
 package                                                1
 packed_array_typespec                                  1
 port                                                   1
 range                                                  1
-ref_obj                                                4
-ref_typespec                                           3
+ref_obj                                                3
+ref_typespec                                           1
+source_file                                            1
 struct_typespec                                        1
 typespec_member                                        1
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/HierPathTypespec/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/HierPathTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/HierPathTypespec/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallPackages:
 \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/HierPathTypespec/dut.sv, line:1:1, endln:6:11
   |vpiParent:
@@ -159,73 +164,75 @@ design: (unnamed)
     |vpiParent:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/HierPathTypespec/dut.sv, line:1:1, endln:6:11
     |vpiName:pkg::a
-    |vpiInstance:
-    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/HierPathTypespec/dut.sv, line:1:1, endln:6:11
     |vpiPacked:1
     |vpiTypespecMember:
-    \_typespec_member: (x), line:3:19, endln:3:20
+    \_typespec_member: (x), line:3:7, endln:3:21
       |vpiParent:
       \_struct_typespec: (pkg::a), line:2:12, endln:4:5
       |vpiName:x
       |vpiTypespec:
-      \_ref_typespec: (pkg::pkg::a::x)
+      \_ref_typespec: (pkg::a::x), line:3:7, endln:3:12
         |vpiParent:
-        \_typespec_member: (x), line:3:19, endln:3:20
-        |vpiFullName:pkg::pkg::a::x
+        \_typespec_member: (x), line:3:7, endln:3:21
+        |vpiFullName:pkg::a::x
         |vpiActual:
         \_logic_typespec: , line:3:7, endln:3:12
-      |vpiRefFile:${SURELOG_DIR}/tests/HierPathTypespec/dut.sv
-      |vpiRefLineNo:3
-      |vpiRefColumnNo:7
-      |vpiRefEndLineNo:3
-      |vpiRefEndColumnNo:12
+  |vpiTypedef:
+  \_logic_typespec: , line:3:7, endln:3:12
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/HierPathTypespec/dut.sv, line:1:1, endln:6:11
+  |vpiImportTypespec:
+  \_struct_typespec: (pkg::a), line:2:12, endln:4:5
+  |vpiImportTypespec:
+  \_logic_typespec: , line:3:7, endln:3:12
   |vpiDefName:pkg
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathTypespec/dut.sv, line:8:1, endln:14:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiNet:
+  |vpiName:work@top
+  |vpiVariables:
+  \_logic_var: (work@top.c), line:10:11, endln:10:12
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathTypespec/dut.sv, line:8:1, endln:14:10
+    |vpiName:c
+    |vpiFullName:work@top.c
+    |vpiVisibility:1
+  |vpiReg:
+  \_logic_var: (work@top.c), line:10:11, endln:10:12
+  |vpiTypedef:
+  \_unsupported_typespec: (pkg::b), line:10:4, endln:10:9
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathTypespec/dut.sv, line:8:1, endln:14:10
+    |vpiName:pkg::b
+  |vpiImportTypespec:
   \_logic_net: (work@top.o), line:8:19, endln:8:20
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathTypespec/dut.sv, line:8:1, endln:14:10
     |vpiName:o
     |vpiFullName:work@top.o
-  |vpiNet:
-  \_logic_net: (work@top.c), line:10:11, endln:10:12
+  |vpiImportTypespec:
+  \_unsupported_typespec: (pkg::b), line:10:4, endln:10:9
+  |vpiImportTypespec:
+  \_logic_var: (work@top.c), line:10:11, endln:10:12
+  |vpiImportTypespec:
+  \_logic_net: (work@top.x), line:12:16, endln:12:17
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathTypespec/dut.sv, line:8:1, endln:14:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.c)
-      |vpiParent:
-      \_logic_net: (work@top.c), line:10:11, endln:10:12
-      |vpiFullName:work@top.c
-      |vpiActual:
-      \_unsupported_typespec: (pkg::b), line:10:4, endln:10:9
-    |vpiName:c
-    |vpiFullName:work@top.c
+    |vpiName:x
+    |vpiFullName:work@top.x
+    |vpiNetType:1
+  |vpiDefName:work@top
+  |vpiNet:
+  \_logic_net: (work@top.o), line:8:19, endln:8:20
+  |vpiNet:
+  \_logic_net: (work@top.x), line:12:16, endln:12:17
   |vpiPort:
-  \_port: (o), line:8:19, endln:8:20
+  \_port: (o), line:8:12, endln:8:20
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathTypespec/dut.sv, line:8:1, endln:14:10
     |vpiName:o
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@top.o.o), line:8:19, endln:8:20
-      |vpiParent:
-      \_port: (o), line:8:19, endln:8:20
-      |vpiName:o
-      |vpiFullName:work@top.o.o
-      |vpiActual:
-      \_logic_net: (work@top.o), line:8:19, endln:8:20
-    |vpiTypedef:
-    \_ref_typespec: (work@top.o)
-      |vpiParent:
-      \_port: (o), line:8:19, endln:8:20
-      |vpiFullName:work@top.o
-      |vpiActual:
-      \_logic_typespec: , line:8:19, endln:8:19
   |vpiContAssign:
   \_cont_assign: , line:12:11, endln:12:21
     |vpiParent:
@@ -239,17 +246,21 @@ design: (unnamed)
       |UINT:1
       |vpiConstType:9
     |vpiLhs:
-    \_hier_path: (c[1].x), line:12:11, endln:12:12
+    \_hier_path: (c[1].x), line:12:11, endln:12:17
       |vpiParent:
-      \_cont_assign: , line:12:11, endln:12:21
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathTypespec/dut.sv, line:8:1, endln:14:10
       |vpiActual:
       \_bit_select: (c[1]), line:12:11, endln:12:12
         |vpiParent:
-        \_hier_path: (c[1].x), line:12:11, endln:12:12
+        \_hier_path: (c[1].x), line:12:11, endln:12:17
         |vpiName:c
         |vpiFullName:c[1]
+        |vpiActual:
+        \_logic_var: (work@top.c), line:10:11, endln:10:12
         |vpiIndex:
         \_constant: , line:12:13, endln:12:14
+          |vpiParent:
+          \_hier_path: (c[1].x), line:12:11, endln:12:17
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
@@ -257,9 +268,11 @@ design: (unnamed)
       |vpiActual:
       \_ref_obj: (c[1].x), line:12:16, endln:12:17
         |vpiParent:
-        \_hier_path: (c[1].x), line:12:11, endln:12:12
+        \_hier_path: (c[1].x), line:12:11, endln:12:17
         |vpiName:x
         |vpiFullName:c[1].x
+        |vpiActual:
+        \_logic_net: (work@top.x), line:12:16, endln:12:17
       |vpiName:c[1].x
   |vpiContAssign:
   \_cont_assign: , line:13:11, endln:13:21
@@ -275,8 +288,12 @@ design: (unnamed)
         \_hier_path: (c[1].x), line:13:15, endln:13:21
         |vpiName:c
         |vpiFullName:c[1]
+        |vpiActual:
+        \_logic_var: (work@top.c), line:10:11, endln:10:12
         |vpiIndex:
         \_constant: , line:13:17, endln:13:18
+          |vpiParent:
+          \_hier_path: (c[1].x), line:13:15, endln:13:21
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
@@ -287,22 +304,17 @@ design: (unnamed)
         \_hier_path: (c[1].x), line:13:15, endln:13:21
         |vpiName:x
         |vpiFullName:work@top.x
+        |vpiActual:
+        \_logic_net: (work@top.x), line:12:16, endln:12:17
       |vpiName:c[1].x
     |vpiLhs:
     \_ref_obj: (work@top.o), line:13:11, endln:13:12
       |vpiParent:
-      \_cont_assign: , line:13:11, endln:13:21
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathTypespec/dut.sv, line:8:1, endln:14:10
       |vpiName:o
       |vpiFullName:work@top.o
       |vpiActual:
       \_logic_net: (work@top.o), line:8:19, endln:8:20
-\_weaklyReferenced:
-\_logic_typespec: , line:3:7, endln:3:12
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/HierPathTypespec/dut.sv, line:1:1, endln:6:11
-\_logic_typespec: , line:8:19, endln:8:19
-\_unsupported_typespec: (pkg::b), line:10:4, endln:10:9
-  |vpiName:pkg::b
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

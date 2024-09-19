@@ -296,8 +296,8 @@ checker_inst                                           1
 clocking_block                                         1
 design                                                 1
 event_control                                          1
-logic_net                                              7
 logic_typespec                                         4
+logic_var                                              4
 module_inst                                            1
 operation                                              2
 prop_formal_decl                                       5
@@ -305,40 +305,61 @@ property_decl                                          2
 property_spec                                          2
 ref_obj                                                4
 ref_typespec                                           9
+source_file                                            1
 sys_func_call                                          2
 === UHDM Object Stats End ===
+[ERR:IG0809] ${SURELOG_DIR}/tests/CheckerInst/dut.sv:5:15: Object 9 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/tests/CheckerInst/dut.sv:5:20: Object 11 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/tests/CheckerInst/dut.sv:9:15: Object 19 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/tests/CheckerInst/dut.sv:9:20: Object 21 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/tests/CheckerInst/dut.sv:9:25: Object 23 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CheckerInst/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/CheckerInst/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/CheckerInst/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/CheckerInst/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CheckerInst/dut.sv, line:1:1, endln:16:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
+  |vpiName:work@top
   |vpiPropertyDecl:
-  \_property_decl: (work@top.p1), line:5:12, endln:5:14
+  \_property_decl: (work@top.p1), line:5:3, endln:7:14
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CheckerInst/dut.sv, line:1:1, endln:16:10
     |vpiName:p1
     |vpiFullName:work@top.p1
     |vpiPropFormalDecl:
-    \_prop_formal_decl: (req)
+    \_prop_formal_decl: (req), line:5:15, endln:5:18
+      |vpiParent:
+      \_property_decl: (work@top.p1), line:5:3, endln:7:14
       |vpiName:req
       |vpiTypespec:
-      \_ref_typespec: 
+      \_ref_typespec: (work@top.p1.req.req), line:5:15, endln:5:18
+        |vpiParent:
+        \_prop_formal_decl: (req), line:5:15, endln:5:18
+        |vpiName:req
+        |vpiFullName:work@top.p1.req.req
     |vpiPropFormalDecl:
-    \_prop_formal_decl: (ack)
+    \_prop_formal_decl: (ack), line:5:20, endln:5:23
+      |vpiParent:
+      \_property_decl: (work@top.p1), line:5:3, endln:7:14
       |vpiName:ack
       |vpiTypespec:
-      \_ref_typespec: 
+      \_ref_typespec: (work@top.p1.ack.ack), line:5:20, endln:5:23
+        |vpiParent:
+        \_prop_formal_decl: (ack), line:5:20, endln:5:23
+        |vpiName:ack
+        |vpiFullName:work@top.p1.ack.ack
     |vpiPropertySpec:
     \_property_spec: , line:6:5, endln:6:33
       |vpiParent:
-      \_property_decl: (work@top.p1), line:5:12, endln:5:14
+      \_property_decl: (work@top.p1), line:5:3, endln:7:14
       |vpiClockingEvent:
       \_sys_func_call: ($global_clock), line:6:7, endln:6:20
         |vpiParent:
@@ -352,11 +373,11 @@ design: (unnamed)
         |vpiOperand:
         \_ref_obj: (work@top.p1.req), line:6:22, endln:6:25
           |vpiParent:
-          \_operation: , line:6:22, endln:6:33
+          \_property_spec: , line:6:5, endln:6:33
           |vpiName:req
           |vpiFullName:work@top.p1.req
           |vpiActual:
-          \_logic_net: (work@top.p1.req), line:6:22, endln:6:25
+          \_logic_net: (work@top.req), line:6:22, endln:6:25
         |vpiOperand:
         \_ref_obj: (work@top.p1.ack), line:6:30, endln:6:33
           |vpiParent:
@@ -364,32 +385,50 @@ design: (unnamed)
           |vpiName:ack
           |vpiFullName:work@top.p1.ack
           |vpiActual:
-          \_logic_net: (work@top.p1.ack), line:6:30, endln:6:33
+          \_logic_net: (work@top.ack), line:6:30, endln:6:33
   |vpiPropertyDecl:
-  \_property_decl: (work@top.p2), line:9:12, endln:9:14
+  \_property_decl: (work@top.p2), line:9:3, endln:11:14
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CheckerInst/dut.sv, line:1:1, endln:16:10
     |vpiName:p2
     |vpiFullName:work@top.p2
     |vpiPropFormalDecl:
-    \_prop_formal_decl: (req)
+    \_prop_formal_decl: (req), line:9:15, endln:9:18
+      |vpiParent:
+      \_property_decl: (work@top.p2), line:9:3, endln:11:14
       |vpiName:req
       |vpiTypespec:
-      \_ref_typespec: 
+      \_ref_typespec: (work@top.p2.req.req), line:9:15, endln:9:18
+        |vpiParent:
+        \_prop_formal_decl: (req), line:9:15, endln:9:18
+        |vpiName:req
+        |vpiFullName:work@top.p2.req.req
     |vpiPropFormalDecl:
-    \_prop_formal_decl: (ack)
+    \_prop_formal_decl: (ack), line:9:20, endln:9:23
+      |vpiParent:
+      \_property_decl: (work@top.p2), line:9:3, endln:11:14
       |vpiName:ack
       |vpiTypespec:
-      \_ref_typespec: 
+      \_ref_typespec: (work@top.p2.ack.ack), line:9:20, endln:9:23
+        |vpiParent:
+        \_prop_formal_decl: (ack), line:9:20, endln:9:23
+        |vpiName:ack
+        |vpiFullName:work@top.p2.ack.ack
     |vpiPropFormalDecl:
-    \_prop_formal_decl: (interrupt)
+    \_prop_formal_decl: (interrupt), line:9:25, endln:9:34
+      |vpiParent:
+      \_property_decl: (work@top.p2), line:9:3, endln:11:14
       |vpiName:interrupt
       |vpiTypespec:
-      \_ref_typespec: 
+      \_ref_typespec: (work@top.p2.interrupt.interrupt), line:9:25, endln:9:34
+        |vpiParent:
+        \_prop_formal_decl: (interrupt), line:9:25, endln:9:34
+        |vpiName:interrupt
+        |vpiFullName:work@top.p2.interrupt.interrupt
     |vpiPropertySpec:
     \_property_spec: , line:10:5, endln:10:55
       |vpiParent:
-      \_property_decl: (work@top.p2), line:9:12, endln:9:14
+      \_property_decl: (work@top.p2), line:9:3, endln:11:14
       |vpiClockingEvent:
       \_sys_func_call: ($global_clock), line:10:7, endln:10:20
         |vpiParent:
@@ -407,93 +446,72 @@ design: (unnamed)
           |vpiName:interrupt
           |vpiFullName:work@top.p2.interrupt
           |vpiActual:
-          \_logic_net: (work@top.p2.interrupt), line:10:32, endln:10:41
-  |vpiDefName:work@top
-  |vpiNet:
-  \_logic_net: (work@top.a), line:2:9, endln:2:10
+          \_logic_net: (work@top.interrupt), line:10:32, endln:10:41
+  |vpiVariables:
+  \_logic_var: (work@top.a), line:2:9, endln:2:10
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CheckerInst/dut.sv, line:1:1, endln:16:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.a)
+    \_ref_typespec: (work@top.a), line:2:3, endln:2:8
       |vpiParent:
-      \_logic_net: (work@top.a), line:2:9, endln:2:10
+      \_logic_var: (work@top.a), line:2:9, endln:2:10
       |vpiFullName:work@top.a
       |vpiActual:
       \_logic_typespec: , line:2:3, endln:2:8
     |vpiName:a
     |vpiFullName:work@top.a
-    |vpiNetType:36
-  |vpiNet:
-  \_logic_net: (work@top.b), line:2:12, endln:2:13
+    |vpiVisibility:1
+  |vpiVariables:
+  \_logic_var: (work@top.b), line:2:12, endln:2:13
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CheckerInst/dut.sv, line:1:1, endln:16:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.b)
+    \_ref_typespec: (work@top.b), line:2:3, endln:2:8
       |vpiParent:
-      \_logic_net: (work@top.b), line:2:12, endln:2:13
+      \_logic_var: (work@top.b), line:2:12, endln:2:13
       |vpiFullName:work@top.b
       |vpiActual:
       \_logic_typespec: , line:2:3, endln:2:8
     |vpiName:b
     |vpiFullName:work@top.b
-    |vpiNetType:36
-  |vpiNet:
-  \_logic_net: (work@top.c), line:2:15, endln:2:16
+    |vpiVisibility:1
+  |vpiVariables:
+  \_logic_var: (work@top.c), line:2:15, endln:2:16
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CheckerInst/dut.sv, line:1:1, endln:16:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.c)
+    \_ref_typespec: (work@top.c), line:2:3, endln:2:8
       |vpiParent:
-      \_logic_net: (work@top.c), line:2:15, endln:2:16
+      \_logic_var: (work@top.c), line:2:15, endln:2:16
       |vpiFullName:work@top.c
       |vpiActual:
       \_logic_typespec: , line:2:3, endln:2:8
     |vpiName:c
     |vpiFullName:work@top.c
-    |vpiNetType:36
-  |vpiNet:
-  \_logic_net: (work@top.clk), line:2:18, endln:2:21
+    |vpiVisibility:1
+  |vpiVariables:
+  \_logic_var: (work@top.clk), line:2:18, endln:2:21
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CheckerInst/dut.sv, line:1:1, endln:16:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.clk)
+    \_ref_typespec: (work@top.clk), line:2:3, endln:2:8
       |vpiParent:
-      \_logic_net: (work@top.clk), line:2:18, endln:2:21
+      \_logic_var: (work@top.clk), line:2:18, endln:2:21
       |vpiFullName:work@top.clk
       |vpiActual:
       \_logic_typespec: , line:2:3, endln:2:8
     |vpiName:clk
     |vpiFullName:work@top.clk
-    |vpiNetType:36
-  |vpiNet:
-  \_logic_net: (work@top.p1.req), line:6:22, endln:6:25
-    |vpiParent:
-    \_operation: , line:6:22, endln:6:33
-    |vpiName:req
-    |vpiFullName:work@top.p1.req
-    |vpiNetType:1
-  |vpiNet:
-  \_logic_net: (work@top.p1.ack), line:6:30, endln:6:33
-    |vpiParent:
-    \_operation: , line:6:22, endln:6:33
-    |vpiName:ack
-    |vpiFullName:work@top.p1.ack
-    |vpiNetType:1
-  |vpiNet:
-  \_logic_net: (work@top.p2.interrupt), line:10:32, endln:10:41
-    |vpiParent:
-    \_operation: , line:10:22, endln:10:55
-    |vpiName:interrupt
-    |vpiFullName:work@top.p2.interrupt
-    |vpiNetType:1
-  |vpiAssertion:
-  \_checker_inst: my_checker (work@top.check), line:13:3, endln:15:36
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CheckerInst/dut.sv, line:1:1, endln:16:10
-    |vpiName:check
-    |vpiFullName:work@top.check
-    |vpiDefName:my_checker
-  |vpiGlobalClocking:
+    |vpiVisibility:1
+  |vpiReg:
+  \_logic_var: (work@top.a), line:2:9, endln:2:10
+  |vpiReg:
+  \_logic_var: (work@top.b), line:2:12, endln:2:13
+  |vpiReg:
+  \_logic_var: (work@top.c), line:2:15, endln:2:16
+  |vpiReg:
+  \_logic_var: (work@top.clk), line:2:18, endln:2:21
+  |vpiInternalScope:
   \_clocking_block: (work@top.top_clocking), line:3:3, endln:3:51
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CheckerInst/dut.sv, line:1:1, endln:16:10
@@ -510,24 +528,101 @@ design: (unnamed)
         |vpiName:clk
         |vpiFullName:work@top.top_clocking.clk
         |vpiActual:
-        \_logic_net: (work@top.clk), line:2:18, endln:2:21
-\_weaklyReferenced:
-\_logic_typespec: , line:2:3, endln:2:8
-\_logic_typespec: , line:2:3, endln:2:8
-\_logic_typespec: , line:2:3, endln:2:8
-\_logic_typespec: , line:2:3, endln:2:8
+        \_logic_var: (work@top.clk), line:2:18, endln:2:21
+  |vpiInternalScope:
+  \_checker_inst: my_checker (work@top.check), line:13:3, endln:15:36
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CheckerInst/dut.sv, line:1:1, endln:16:10
+    |vpiName:check
+    |vpiFullName:work@top.check
+    |vpiDefName:my_checker
+  |vpiTypedef:
+  \_logic_typespec: , line:2:3, endln:2:8
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CheckerInst/dut.sv, line:1:1, endln:16:10
+  |vpiTypedef:
+  \_logic_typespec: , line:2:3, endln:2:8
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CheckerInst/dut.sv, line:1:1, endln:16:10
+  |vpiTypedef:
+  \_logic_typespec: , line:2:3, endln:2:8
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CheckerInst/dut.sv, line:1:1, endln:16:10
+  |vpiTypedef:
+  \_logic_typespec: , line:2:3, endln:2:8
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CheckerInst/dut.sv, line:1:1, endln:16:10
+  |vpiImportTypespec:
+  \_logic_typespec: , line:2:3, endln:2:8
+  |vpiImportTypespec:
+  \_logic_var: (work@top.a), line:2:9, endln:2:10
+  |vpiImportTypespec:
+  \_logic_typespec: , line:2:3, endln:2:8
+  |vpiImportTypespec:
+  \_logic_var: (work@top.b), line:2:12, endln:2:13
+  |vpiImportTypespec:
+  \_logic_typespec: , line:2:3, endln:2:8
+  |vpiImportTypespec:
+  \_logic_var: (work@top.c), line:2:15, endln:2:16
+  |vpiImportTypespec:
+  \_logic_typespec: , line:2:3, endln:2:8
+  |vpiImportTypespec:
+  \_logic_var: (work@top.clk), line:2:18, endln:2:21
+  |vpiImportTypespec:
+  \_checker_inst: my_checker (work@top.check), line:13:3, endln:15:36
+  |vpiImportTypespec:
+  \_logic_net: (work@top.req), line:6:22, endln:6:25
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CheckerInst/dut.sv, line:1:1, endln:16:10
+    |vpiName:req
+    |vpiFullName:work@top.req
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@top.ack), line:6:30, endln:6:33
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CheckerInst/dut.sv, line:1:1, endln:16:10
+    |vpiName:ack
+    |vpiFullName:work@top.ack
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@top.interrupt), line:10:32, endln:10:41
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CheckerInst/dut.sv, line:1:1, endln:16:10
+    |vpiName:interrupt
+    |vpiFullName:work@top.interrupt
+    |vpiNetType:1
+  |vpiDefName:work@top
+  |vpiNet:
+  \_logic_net: (work@top.req), line:6:22, endln:6:25
+  |vpiNet:
+  \_logic_net: (work@top.ack), line:6:30, endln:6:33
+  |vpiNet:
+  \_logic_net: (work@top.interrupt), line:10:32, endln:10:41
+  |vpiGlobalClocking:
+  \_clocking_block: (work@top.top_clocking), line:3:3, endln:3:51
+  |vpiClockingBlock:
+  \_clocking_block: (work@top.top_clocking), line:3:3, endln:3:51
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 5
 [WARNING] : 1
 [   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
+[LINT]: ${SURELOG_DIR}/tests/CheckerInst/dut.sv:5:15: Non synthesizable construct, req
+[LINT]: ${SURELOG_DIR}/tests/CheckerInst/dut.sv:5:20: Non synthesizable construct, ack
 [LINT]: ${SURELOG_DIR}/tests/CheckerInst/dut.sv:6:5: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/CheckerInst/dut.sv:5:12: Non synthesizable construct, p1
+[LINT]: ${SURELOG_DIR}/tests/CheckerInst/dut.sv:5:3: Non synthesizable construct, p1
+[LINT]: ${SURELOG_DIR}/tests/CheckerInst/dut.sv:9:15: Non synthesizable construct, req
+[LINT]: ${SURELOG_DIR}/tests/CheckerInst/dut.sv:9:20: Non synthesizable construct, ack
+[LINT]: ${SURELOG_DIR}/tests/CheckerInst/dut.sv:9:25: Non synthesizable construct, interrupt
 [LINT]: ${SURELOG_DIR}/tests/CheckerInst/dut.sv:10:5: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/CheckerInst/dut.sv:9:12: Non synthesizable construct, p2
+[LINT]: ${SURELOG_DIR}/tests/CheckerInst/dut.sv:9:3: Non synthesizable construct, p2
 [LINT]: ${SURELOG_DIR}/tests/CheckerInst/dut.sv:13:3: Non synthesizable construct, check
 [LINT]: ${SURELOG_DIR}/tests/CheckerInst/dut.sv:3:3: Non synthesizable construct, top_clocking
 ============================== End Linting Results ==============================
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/CheckerInst/dut.sv | ${SURELOG_DIR}/build/regression/CheckerInst/roundtrip/dut_000.sv | 11 | 16 |
+============================== End RoundTrip Results ==============================

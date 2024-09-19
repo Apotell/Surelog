@@ -104,69 +104,103 @@ constant                                               1
 design                                                 1
 expect_stmt                                            1
 initial                                                1
-logic_net                                              3
 logic_typespec                                         3
+logic_var                                              3
 module_inst                                            1
 operation                                              2
 property_spec                                          1
 ref_obj                                                3
 ref_typespec                                           3
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ExpectStmt/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ExpectStmt/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ExpectStmt/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/ExpectStmt/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ExpectStmt/dut.sv, line:1:1, endln:11:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiNet:
-  \_logic_net: (work@top.clk), line:3:7, endln:3:10
+  |vpiName:work@top
+  |vpiVariables:
+  \_logic_var: (work@top.clk), line:3:7, endln:3:10
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ExpectStmt/dut.sv, line:1:1, endln:11:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.clk)
+    \_ref_typespec: (work@top.clk), line:3:1, endln:3:6
       |vpiParent:
-      \_logic_net: (work@top.clk), line:3:7, endln:3:10
+      \_logic_var: (work@top.clk), line:3:7, endln:3:10
       |vpiFullName:work@top.clk
       |vpiActual:
       \_logic_typespec: , line:3:1, endln:3:6
     |vpiName:clk
     |vpiFullName:work@top.clk
-    |vpiNetType:36
-  |vpiNet:
-  \_logic_net: (work@top.a), line:4:7, endln:4:8
+    |vpiVisibility:1
+  |vpiVariables:
+  \_logic_var: (work@top.a), line:4:7, endln:4:8
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ExpectStmt/dut.sv, line:1:1, endln:11:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.a)
+    \_ref_typespec: (work@top.a), line:4:1, endln:4:6
       |vpiParent:
-      \_logic_net: (work@top.a), line:4:7, endln:4:8
+      \_logic_var: (work@top.a), line:4:7, endln:4:8
       |vpiFullName:work@top.a
       |vpiActual:
       \_logic_typespec: , line:4:1, endln:4:6
     |vpiName:a
     |vpiFullName:work@top.a
-    |vpiNetType:36
-  |vpiNet:
-  \_logic_net: (work@top.b), line:5:7, endln:5:8
+    |vpiVisibility:1
+  |vpiVariables:
+  \_logic_var: (work@top.b), line:5:7, endln:5:8
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ExpectStmt/dut.sv, line:1:1, endln:11:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.b)
+    \_ref_typespec: (work@top.b), line:5:1, endln:5:6
       |vpiParent:
-      \_logic_net: (work@top.b), line:5:7, endln:5:8
+      \_logic_var: (work@top.b), line:5:7, endln:5:8
       |vpiFullName:work@top.b
       |vpiActual:
       \_logic_typespec: , line:5:1, endln:5:6
     |vpiName:b
     |vpiFullName:work@top.b
-    |vpiNetType:36
+    |vpiVisibility:1
+  |vpiReg:
+  \_logic_var: (work@top.clk), line:3:7, endln:3:10
+  |vpiReg:
+  \_logic_var: (work@top.a), line:4:7, endln:4:8
+  |vpiReg:
+  \_logic_var: (work@top.b), line:5:7, endln:5:8
+  |vpiTypedef:
+  \_logic_typespec: , line:3:1, endln:3:6
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ExpectStmt/dut.sv, line:1:1, endln:11:10
+  |vpiTypedef:
+  \_logic_typespec: , line:4:1, endln:4:6
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ExpectStmt/dut.sv, line:1:1, endln:11:10
+  |vpiTypedef:
+  \_logic_typespec: , line:5:1, endln:5:6
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ExpectStmt/dut.sv, line:1:1, endln:11:10
+  |vpiImportTypespec:
+  \_logic_typespec: , line:3:1, endln:3:6
+  |vpiImportTypespec:
+  \_logic_var: (work@top.clk), line:3:7, endln:3:10
+  |vpiImportTypespec:
+  \_logic_typespec: , line:4:1, endln:4:6
+  |vpiImportTypespec:
+  \_logic_var: (work@top.a), line:4:7, endln:4:8
+  |vpiImportTypespec:
+  \_logic_typespec: , line:5:1, endln:5:6
+  |vpiImportTypespec:
+  \_logic_var: (work@top.b), line:5:7, endln:5:8
+  |vpiDefName:work@top
   |vpiProcess:
   \_initial: , line:7:1, endln:9:4
     |vpiParent:
@@ -196,7 +230,7 @@ design: (unnamed)
               |vpiName:clk
               |vpiFullName:work@top.clk
               |vpiActual:
-              \_logic_net: (work@top.clk), line:3:7, endln:3:10
+              \_logic_var: (work@top.clk), line:3:7, endln:3:10
           |vpiPropertyExpr:
           \_operation: , line:8:28, endln:8:35
             |vpiParent:
@@ -205,13 +239,15 @@ design: (unnamed)
             |vpiOperand:
             \_ref_obj: (work@top.a), line:8:28, endln:8:29
               |vpiParent:
-              \_operation: , line:8:28, endln:8:35
+              \_property_spec: , line:8:13, endln:8:35
               |vpiName:a
               |vpiFullName:work@top.a
               |vpiActual:
-              \_logic_net: (work@top.a), line:4:7, endln:4:8
+              \_logic_var: (work@top.a), line:4:7, endln:4:8
             |vpiOperand:
             \_constant: , line:8:30, endln:8:33
+              |vpiParent:
+              \_operation: , line:8:28, endln:8:35
               |vpiDecompile:1
               |vpiSize:64
               |UINT:1
@@ -223,11 +259,7 @@ design: (unnamed)
               |vpiName:b
               |vpiFullName:work@top.b
               |vpiActual:
-              \_logic_net: (work@top.b), line:5:7, endln:5:8
-\_weaklyReferenced:
-\_logic_typespec: , line:3:1, endln:3:6
-\_logic_typespec: , line:4:1, endln:4:6
-\_logic_typespec: , line:5:1, endln:5:6
+              \_logic_var: (work@top.b), line:5:7, endln:5:8
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -240,5 +272,5 @@ design: (unnamed)
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ExpectStmt/dut.sv | ${SURELOG_DIR}/build/regression/ExpectStmt/roundtrip/dut_000.sv | 1 | 11 |
+[roundtrip]: ${SURELOG_DIR}/tests/ExpectStmt/dut.sv | ${SURELOG_DIR}/build/regression/ExpectStmt/roundtrip/dut_000.sv | 5 | 11 |
 ============================== End RoundTrip Results ==============================

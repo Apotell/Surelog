@@ -884,14 +884,14 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/UhdmCoverage/dut.sv:117:1: Compile module "work@divSqrtRecFN_small".
 [INF:CP0303] ${SURELOG_DIR}/tests/UhdmCoverage/dut.sv:99:1: Compile module "work@e".
 [INF:CP0303] ${SURELOG_DIR}/tests/UhdmCoverage/dut.sv:60:1: Compile module "work@isSigNaNRecFN".
-[NTE:CP0309] ${SURELOG_DIR}/tests/UhdmCoverage/dut.sv:62:55: Implicit port type (wire) for "isSigNaN".
+[NTE:CP0309] ${SURELOG_DIR}/tests/UhdmCoverage/dut.sv:62:48: Implicit port type (wire) for "isSigNaN".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 array_typespec                                         1
-begin                                                  1
+begin                                                  6
 bit_select                                             3
 bit_typespec                                           1
-constant                                              33
+constant                                              35
 cont_assign                                            6
 design                                                 1
 gen_if                                                 1
@@ -899,70 +899,63 @@ gen_if_else                                            2
 gen_region                                             1
 hier_path                                              4
 indexed_part_select                                    3
-int_typespec                                          10
-logic_net                                             13
-logic_typespec                                         6
+int_typespec                                           1
+logic_net                                              6
+logic_typespec                                         1
 module_inst                                           10
-named_begin                                            5
-operation                                             17
+operation                                             19
 param_assign                                          12
 parameter                                             12
 port                                                   8
-range                                                  5
+range                                                  7
 ref_module                                             4
-ref_obj                                               39
-ref_typespec                                          30
+ref_obj                                               38
+ref_typespec                                           7
+source_file                                            1
 string_typespec                                        3
 tagged_pattern                                         3
 === UHDM Object Stats End ===
+[ERR:IG0809] ${SURELOG_DIR}/tests/UhdmCoverage/dut.sv:75:1: Object 14 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UhdmCoverage/dut.sv:27:9: Object 75 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UhdmCoverage/dut.sv:140:24: Object 117 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UhdmCoverage/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/UhdmCoverage/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/UhdmCoverage/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@MOD (work@MOD), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:96:1, endln:97:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@MOD
-  |vpiDefName:work@MOD
-  |vpiNet:
+  |vpiName:work@MOD
+  |vpiImportTypespec:
   \_logic_net: (work@MOD.a), line:96:19, endln:96:20
     |vpiParent:
     \_module_inst: work@MOD (work@MOD), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:96:1, endln:97:10
     |vpiName:a
     |vpiFullName:work@MOD.a
+  |vpiDefName:work@MOD
+  |vpiNet:
+  \_logic_net: (work@MOD.a), line:96:19, endln:96:20
   |vpiPort:
-  \_port: (a), line:96:19, endln:96:20
+  \_port: (a), line:96:13, endln:96:20
     |vpiParent:
     \_module_inst: work@MOD (work@MOD), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:96:1, endln:97:10
     |vpiName:a
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@MOD.a.a), line:96:19, endln:96:20
-      |vpiParent:
-      \_port: (a), line:96:19, endln:96:20
-      |vpiName:a
-      |vpiFullName:work@MOD.a.a
-      |vpiActual:
-      \_logic_net: (work@MOD.a), line:96:19, endln:96:20
-    |vpiTypedef:
-    \_ref_typespec: (work@MOD.a)
-      |vpiParent:
-      \_port: (a), line:96:19, endln:96:20
-      |vpiFullName:work@MOD.a
-      |vpiActual:
-      \_logic_typespec: , line:96:19, endln:96:19
 |uhdmallModules:
 \_module_inst: work@a (work@a), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:71:1, endln:77:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@a
+  |vpiName:work@a
   |vpiDefName:work@a
   |vpiRefModule:
-  \_ref_module: work@U1 (u1), line:75:4, endln:75:6
+  \_ref_module: work@U1 (u1), line:75:1, endln:75:9
     |vpiParent:
     \_module_inst: work@a (work@a), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:71:1, endln:77:10
     |vpiName:u1
@@ -971,28 +964,28 @@ design: (unnamed)
 \_module_inst: work@b (work@b), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:80:1, endln:82:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@b
+  |vpiName:work@b
   |vpiDefName:work@b
 |uhdmallModules:
 \_module_inst: work@bsg_wormhole_router (work@bsg_wormhole_router), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:1:1, endln:13:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@bsg_wormhole_router
+  |vpiName:work@bsg_wormhole_router
   |vpiParameter:
-  \_parameter: (work@bsg_wormhole_router.cord_dims_p), line:4:14, endln:4:25
+  \_parameter: (work@bsg_wormhole_router.cord_dims_p), line:4:14, endln:4:34
     |vpiParent:
     \_module_inst: work@bsg_wormhole_router (work@bsg_wormhole_router), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:1:1, endln:13:10
     |vpiName:cord_dims_p
     |vpiFullName:work@bsg_wormhole_router.cord_dims_p
   |vpiParameter:
-  \_parameter: (work@bsg_wormhole_router.cord_markers_pos_p), line:5:19, endln:5:37
+  \_parameter: (work@bsg_wormhole_router.cord_markers_pos_p), line:5:19, endln:5:69
     |vpiParent:
     \_module_inst: work@bsg_wormhole_router (work@bsg_wormhole_router), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:1:1, endln:13:10
     |vpiSize:1
     |vpiTypespec:
-    \_ref_typespec: (work@bsg_wormhole_router.cord_markers_pos_p)
+    \_ref_typespec: (work@bsg_wormhole_router.cord_markers_pos_p), line:5:15, endln:5:18
       |vpiParent:
-      \_parameter: (work@bsg_wormhole_router.cord_markers_pos_p), line:5:19, endln:5:37
+      \_parameter: (work@bsg_wormhole_router.cord_markers_pos_p), line:5:19, endln:5:69
       |vpiFullName:work@bsg_wormhole_router.cord_markers_pos_p
       |vpiActual:
       \_array_typespec: , line:5:15, endln:5:52
@@ -1000,13 +993,15 @@ design: (unnamed)
     |vpiRange:
     \_range: , line:5:37, endln:5:52
       |vpiParent:
-      \_parameter: (work@bsg_wormhole_router.cord_markers_pos_p), line:5:19, endln:5:37
+      \_parameter: (work@bsg_wormhole_router.cord_markers_pos_p), line:5:19, endln:5:69
       |vpiLeftRange:
       \_ref_obj: (work@bsg_wormhole_router.cord_markers_pos_p.cord_dims_p), line:5:38, endln:5:49
         |vpiParent:
         \_range: , line:5:37, endln:5:52
         |vpiName:cord_dims_p
         |vpiFullName:work@bsg_wormhole_router.cord_markers_pos_p.cord_dims_p
+        |vpiActual:
+        \_parameter: (work@bsg_wormhole_router.cord_dims_p), line:4:14, endln:4:34
       |vpiRightRange:
       \_constant: , line:5:50, endln:5:51
         |vpiParent:
@@ -1018,13 +1013,13 @@ design: (unnamed)
     |vpiName:cord_markers_pos_p
     |vpiFullName:work@bsg_wormhole_router.cord_markers_pos_p
   |vpiParameter:
-  \_parameter: (work@bsg_wormhole_router.routing_matrix_p), line:6:51, endln:6:67
+  \_parameter: (work@bsg_wormhole_router.routing_matrix_p), line:6:51, endln:6:105
     |vpiParent:
     \_module_inst: work@bsg_wormhole_router (work@bsg_wormhole_router), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:1:1, endln:13:10
     |vpiTypespec:
-    \_ref_typespec: (work@bsg_wormhole_router.routing_matrix_p)
+    \_ref_typespec: (work@bsg_wormhole_router.routing_matrix_p), line:6:15, endln:6:18
       |vpiParent:
-      \_parameter: (work@bsg_wormhole_router.routing_matrix_p), line:6:51, endln:6:67
+      \_parameter: (work@bsg_wormhole_router.routing_matrix_p), line:6:51, endln:6:105
       |vpiFullName:work@bsg_wormhole_router.routing_matrix_p
       |vpiActual:
       \_bit_typespec: , line:6:15, endln:6:50
@@ -1043,7 +1038,7 @@ design: (unnamed)
       |vpiActual:
       \_logic_net: (work@bsg_wormhole_router.dims_p), line:4:28, endln:4:34
     |vpiLhs:
-    \_parameter: (work@bsg_wormhole_router.cord_dims_p), line:4:14, endln:4:25
+    \_parameter: (work@bsg_wormhole_router.cord_dims_p), line:4:14, endln:4:34
   |vpiParamAssign:
   \_param_assign: , line:5:19, endln:5:69
     |vpiParent:
@@ -1055,24 +1050,30 @@ design: (unnamed)
       |vpiOpType:75
       |vpiOperand:
       \_constant: , line:5:60, endln:5:61
+        |vpiParent:
+        \_operation: , line:5:57, endln:5:69
         |vpiDecompile:5
         |vpiSize:64
         |UINT:5
         |vpiConstType:9
       |vpiOperand:
       \_constant: , line:5:63, endln:5:64
+        |vpiParent:
+        \_operation: , line:5:57, endln:5:69
         |vpiDecompile:4
         |vpiSize:64
         |UINT:4
         |vpiConstType:9
       |vpiOperand:
       \_constant: , line:5:66, endln:5:67
+        |vpiParent:
+        \_operation: , line:5:57, endln:5:69
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@bsg_wormhole_router.cord_markers_pos_p), line:5:19, endln:5:37
+    \_parameter: (work@bsg_wormhole_router.cord_markers_pos_p), line:5:19, endln:5:69
   |vpiParamAssign:
   \_param_assign: , line:6:51, endln:6:105
     |vpiParent:
@@ -1120,161 +1121,229 @@ design: (unnamed)
         |vpiActual:
         \_logic_net: (work@bsg_wormhole_router.StrictX), line:6:98, endln:6:105
     |vpiLhs:
-    \_parameter: (work@bsg_wormhole_router.routing_matrix_p), line:6:51, endln:6:67
-  |vpiDefName:work@bsg_wormhole_router
-  |vpiNet:
+    \_parameter: (work@bsg_wormhole_router.routing_matrix_p), line:6:51, endln:6:105
+  |vpiTypedef:
+  \_int_typespec: , line:5:15, endln:5:18
+    |vpiParent:
+    \_module_inst: work@bsg_wormhole_router (work@bsg_wormhole_router), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:1:1, endln:13:10
+    |vpiSigned:1
+  |vpiTypedef:
+  \_array_typespec: , line:5:15, endln:5:52
+    |vpiParent:
+    \_module_inst: work@bsg_wormhole_router (work@bsg_wormhole_router), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:1:1, endln:13:10
+    |vpiRange:
+    \_range: , line:5:37, endln:5:52
+    |vpiElemTypespec:
+    \_ref_typespec: (work@bsg_wormhole_router), line:5:15, endln:5:18
+      |vpiParent:
+      \_array_typespec: , line:5:15, endln:5:52
+      |vpiFullName:work@bsg_wormhole_router
+      |vpiActual:
+      \_int_typespec: , line:5:15, endln:5:18
+  |vpiTypedef:
+  \_bit_typespec: , line:6:15, endln:6:50
+    |vpiParent:
+    \_module_inst: work@bsg_wormhole_router (work@bsg_wormhole_router), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:1:1, endln:13:10
+    |vpiRange:
+    \_range: , line:6:19, endln:6:24
+      |vpiParent:
+      \_module_inst: work@bsg_wormhole_router (work@bsg_wormhole_router), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:1:1, endln:13:10
+      |vpiLeftRange:
+      \_constant: , line:6:20, endln:6:21
+        |vpiParent:
+        \_range: , line:6:19, endln:6:24
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:6:22, endln:6:23
+        |vpiParent:
+        \_range: , line:6:19, endln:6:24
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiRange:
+    \_range: , line:6:24, endln:6:37
+      |vpiParent:
+      \_module_inst: work@bsg_wormhole_router (work@bsg_wormhole_router), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:1:1, endln:13:10
+      |vpiLeftRange:
+      \_operation: , line:6:25, endln:6:34
+        |vpiParent:
+        \_range: , line:6:24, endln:6:37
+        |vpiOpType:11
+        |vpiOperand:
+        \_ref_obj: (work@bsg_wormhole_router.dirs_lp), line:6:25, endln:6:32
+          |vpiParent:
+          \_operation: , line:6:25, endln:6:34
+          |vpiName:dirs_lp
+          |vpiFullName:work@bsg_wormhole_router.dirs_lp
+          |vpiActual:
+          \_logic_net: (work@bsg_wormhole_router.dirs_lp), line:6:25, endln:6:32
+        |vpiOperand:
+        \_constant: , line:6:33, endln:6:34
+          |vpiParent:
+          \_operation: , line:6:25, endln:6:34
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:6:35, endln:6:36
+        |vpiParent:
+        \_range: , line:6:24, endln:6:37
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiRange:
+    \_range: , line:6:37, endln:6:50
+      |vpiParent:
+      \_module_inst: work@bsg_wormhole_router (work@bsg_wormhole_router), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:1:1, endln:13:10
+      |vpiLeftRange:
+      \_operation: , line:6:38, endln:6:47
+        |vpiParent:
+        \_range: , line:6:37, endln:6:50
+        |vpiOpType:11
+        |vpiOperand:
+        \_ref_obj: (work@bsg_wormhole_router.dirs_lp), line:6:38, endln:6:45
+          |vpiParent:
+          \_operation: , line:6:38, endln:6:47
+          |vpiName:dirs_lp
+          |vpiFullName:work@bsg_wormhole_router.dirs_lp
+          |vpiActual:
+          \_logic_net: (work@bsg_wormhole_router.dirs_lp), line:6:25, endln:6:32
+        |vpiOperand:
+        \_constant: , line:6:46, endln:6:47
+          |vpiParent:
+          \_operation: , line:6:38, endln:6:47
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:6:48, endln:6:49
+        |vpiParent:
+        \_range: , line:6:37, endln:6:50
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_int_typespec: , line:5:15, endln:5:18
+  |vpiImportTypespec:
+  \_array_typespec: , line:5:15, endln:5:52
+  |vpiImportTypespec:
+  \_bit_typespec: , line:6:15, endln:6:50
+  |vpiImportTypespec:
   \_logic_net: (work@bsg_wormhole_router.clk_i), line:9:10, endln:9:15
     |vpiParent:
     \_module_inst: work@bsg_wormhole_router (work@bsg_wormhole_router), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:1:1, endln:13:10
     |vpiName:clk_i
     |vpiFullName:work@bsg_wormhole_router.clk_i
-  |vpiNet:
+  |vpiImportTypespec:
   \_logic_net: (work@bsg_wormhole_router.reset_i), line:10:10, endln:10:17
     |vpiParent:
     \_module_inst: work@bsg_wormhole_router (work@bsg_wormhole_router), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:1:1, endln:13:10
     |vpiName:reset_i
     |vpiFullName:work@bsg_wormhole_router.reset_i
-  |vpiNet:
+  |vpiImportTypespec:
+  \_logic_net: (work@bsg_wormhole_router.dirs_lp), line:6:25, endln:6:32
+    |vpiParent:
+    \_module_inst: work@bsg_wormhole_router (work@bsg_wormhole_router), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:1:1, endln:13:10
+    |vpiName:dirs_lp
+    |vpiFullName:work@bsg_wormhole_router.dirs_lp
+    |vpiNetType:1
+  |vpiImportTypespec:
   \_logic_net: (work@bsg_wormhole_router.dims_p), line:4:28, endln:4:34
     |vpiParent:
-    \_param_assign: , line:4:14, endln:4:34
+    \_module_inst: work@bsg_wormhole_router (work@bsg_wormhole_router), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:1:1, endln:13:10
     |vpiName:dims_p
     |vpiFullName:work@bsg_wormhole_router.dims_p
     |vpiNetType:1
-  |vpiNet:
-  \_logic_net: (work@bsg_wormhole_router.routing_matrix_p.dirs_lp), line:6:25, endln:6:32
-    |vpiParent:
-    \_operation: , line:6:25, endln:6:34
-    |vpiName:dirs_lp
-    |vpiFullName:work@bsg_wormhole_router.routing_matrix_p.dirs_lp
-    |vpiNetType:1
-  |vpiNet:
+  |vpiImportTypespec:
   \_logic_net: (work@bsg_wormhole_router.StrictXY), line:6:87, endln:6:95
     |vpiParent:
-    \_operation: , line:6:71, endln:6:105
+    \_module_inst: work@bsg_wormhole_router (work@bsg_wormhole_router), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:1:1, endln:13:10
     |vpiName:StrictXY
     |vpiFullName:work@bsg_wormhole_router.StrictXY
     |vpiNetType:1
-  |vpiNet:
+  |vpiImportTypespec:
   \_logic_net: (work@bsg_wormhole_router.StrictX), line:6:98, endln:6:105
     |vpiParent:
-    \_operation: , line:6:71, endln:6:105
+    \_module_inst: work@bsg_wormhole_router (work@bsg_wormhole_router), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:1:1, endln:13:10
     |vpiName:StrictX
     |vpiFullName:work@bsg_wormhole_router.StrictX
     |vpiNetType:1
+  |vpiDefName:work@bsg_wormhole_router
+  |vpiNet:
+  \_logic_net: (work@bsg_wormhole_router.clk_i), line:9:10, endln:9:15
+  |vpiNet:
+  \_logic_net: (work@bsg_wormhole_router.reset_i), line:10:10, endln:10:17
+  |vpiNet:
+  \_logic_net: (work@bsg_wormhole_router.dirs_lp), line:6:25, endln:6:32
+  |vpiNet:
+  \_logic_net: (work@bsg_wormhole_router.dims_p), line:4:28, endln:4:34
+  |vpiNet:
+  \_logic_net: (work@bsg_wormhole_router.StrictXY), line:6:87, endln:6:95
+  |vpiNet:
+  \_logic_net: (work@bsg_wormhole_router.StrictX), line:6:98, endln:6:105
   |vpiPort:
-  \_port: (clk_i), line:9:10, endln:9:15
+  \_port: (clk_i), line:9:4, endln:9:15
     |vpiParent:
     \_module_inst: work@bsg_wormhole_router (work@bsg_wormhole_router), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:1:1, endln:13:10
     |vpiName:clk_i
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@bsg_wormhole_router.clk_i.clk_i), line:9:10, endln:9:15
-      |vpiParent:
-      \_port: (clk_i), line:9:10, endln:9:15
-      |vpiName:clk_i
-      |vpiFullName:work@bsg_wormhole_router.clk_i.clk_i
-      |vpiActual:
-      \_logic_net: (work@bsg_wormhole_router.clk_i), line:9:10, endln:9:15
-    |vpiTypedef:
-    \_ref_typespec: (work@bsg_wormhole_router.clk_i)
-      |vpiParent:
-      \_port: (clk_i), line:9:10, endln:9:15
-      |vpiFullName:work@bsg_wormhole_router.clk_i
-      |vpiActual:
-      \_logic_typespec: , line:9:10, endln:9:10
   |vpiPort:
-  \_port: (reset_i), line:10:10, endln:10:17
+  \_port: (reset_i), line:10:4, endln:10:17
     |vpiParent:
     \_module_inst: work@bsg_wormhole_router (work@bsg_wormhole_router), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:1:1, endln:13:10
     |vpiName:reset_i
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@bsg_wormhole_router.reset_i.reset_i), line:10:10, endln:10:17
-      |vpiParent:
-      \_port: (reset_i), line:10:10, endln:10:17
-      |vpiName:reset_i
-      |vpiFullName:work@bsg_wormhole_router.reset_i.reset_i
-      |vpiActual:
-      \_logic_net: (work@bsg_wormhole_router.reset_i), line:10:10, endln:10:17
-    |vpiTypedef:
-    \_ref_typespec: (work@bsg_wormhole_router.reset_i)
-      |vpiParent:
-      \_port: (reset_i), line:10:10, endln:10:17
-      |vpiFullName:work@bsg_wormhole_router.reset_i
-      |vpiActual:
-      \_logic_typespec: , line:10:10, endln:10:10
 |uhdmallModules:
 \_module_inst: work@c (work@c), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:84:1, endln:87:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@c
+  |vpiName:work@c
   |vpiDefName:work@c
 |uhdmallModules:
 \_module_inst: work@d (work@d), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:89:1, endln:94:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@d
+  |vpiName:work@d
   |vpiDefName:work@d
 |uhdmallModules:
 \_module_inst: work@divSqrtRecFNToRaw_small (work@divSqrtRecFNToRaw_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:15:1, endln:58:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@divSqrtRecFNToRaw_small
+  |vpiName:work@divSqrtRecFNToRaw_small
   |vpiParameter:
-  \_parameter: (work@divSqrtRecFNToRaw_small.expWidth), line:18:22, endln:18:30
+  \_parameter: (work@divSqrtRecFNToRaw_small.expWidth), line:18:22, endln:18:34
     |vpiParent:
     \_module_inst: work@divSqrtRecFNToRaw_small (work@divSqrtRecFNToRaw_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:15:1, endln:58:10
     |UINT:3
-    |vpiTypespec:
-    \_ref_typespec: (work@divSqrtRecFNToRaw_small.expWidth)
-      |vpiParent:
-      \_parameter: (work@divSqrtRecFNToRaw_small.expWidth), line:18:22, endln:18:30
-      |vpiFullName:work@divSqrtRecFNToRaw_small.expWidth
-      |vpiActual:
-      \_int_typespec: , line:18:12, endln:18:34
     |vpiName:expWidth
     |vpiFullName:work@divSqrtRecFNToRaw_small.expWidth
   |vpiParameter:
-  \_parameter: (work@divSqrtRecFNToRaw_small.sigWidth), line:18:46, endln:18:54
+  \_parameter: (work@divSqrtRecFNToRaw_small.sigWidth), line:18:46, endln:18:58
     |vpiParent:
     \_module_inst: work@divSqrtRecFNToRaw_small (work@divSqrtRecFNToRaw_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:15:1, endln:58:10
     |UINT:3
-    |vpiTypespec:
-    \_ref_typespec: (work@divSqrtRecFNToRaw_small.sigWidth)
-      |vpiParent:
-      \_parameter: (work@divSqrtRecFNToRaw_small.sigWidth), line:18:46, endln:18:54
-      |vpiFullName:work@divSqrtRecFNToRaw_small.sigWidth
-      |vpiActual:
-      \_int_typespec: , line:18:36, endln:18:58
     |vpiName:sigWidth
     |vpiFullName:work@divSqrtRecFNToRaw_small.sigWidth
   |vpiParameter:
-  \_parameter: (work@divSqrtRecFNToRaw_small.options), line:18:70, endln:18:77
+  \_parameter: (work@divSqrtRecFNToRaw_small.options), line:18:70, endln:18:81
     |vpiParent:
     \_module_inst: work@divSqrtRecFNToRaw_small (work@divSqrtRecFNToRaw_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:15:1, endln:58:10
     |UINT:0
-    |vpiTypespec:
-    \_ref_typespec: (work@divSqrtRecFNToRaw_small.options)
-      |vpiParent:
-      \_parameter: (work@divSqrtRecFNToRaw_small.options), line:18:70, endln:18:77
-      |vpiFullName:work@divSqrtRecFNToRaw_small.options
-      |vpiActual:
-      \_int_typespec: , line:18:60, endln:18:81
     |vpiName:options
     |vpiFullName:work@divSqrtRecFNToRaw_small.options
   |vpiParameter:
-  \_parameter: (work@divSqrtRecFNToRaw_small.p), line:22:11, endln:22:12
+  \_parameter: (work@divSqrtRecFNToRaw_small.p), line:22:11, endln:22:16
     |vpiParent:
     \_module_inst: work@divSqrtRecFNToRaw_small (work@divSqrtRecFNToRaw_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:15:1, endln:58:10
     |UINT:3
-    |vpiTypespec:
-    \_ref_typespec: (work@divSqrtRecFNToRaw_small.p)
-      |vpiParent:
-      \_parameter: (work@divSqrtRecFNToRaw_small.p), line:22:11, endln:22:12
-      |vpiFullName:work@divSqrtRecFNToRaw_small.p
-      |vpiActual:
-      \_int_typespec: , line:22:1, endln:22:16
     |vpiName:p
     |vpiFullName:work@divSqrtRecFNToRaw_small.p
   |vpiParamAssign:
@@ -1288,16 +1357,9 @@ design: (unnamed)
       |vpiDecompile:3
       |vpiSize:64
       |UINT:3
-      |vpiTypespec:
-      \_ref_typespec: (work@divSqrtRecFNToRaw_small)
-        |vpiParent:
-        \_constant: , line:18:33, endln:18:34
-        |vpiFullName:work@divSqrtRecFNToRaw_small
-        |vpiActual:
-        \_int_typespec: , line:18:12, endln:18:34
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@divSqrtRecFNToRaw_small.expWidth), line:18:22, endln:18:30
+    \_parameter: (work@divSqrtRecFNToRaw_small.expWidth), line:18:22, endln:18:34
   |vpiParamAssign:
   \_param_assign: , line:18:46, endln:18:58
     |vpiParent:
@@ -1309,16 +1371,9 @@ design: (unnamed)
       |vpiDecompile:3
       |vpiSize:64
       |UINT:3
-      |vpiTypespec:
-      \_ref_typespec: (work@divSqrtRecFNToRaw_small)
-        |vpiParent:
-        \_constant: , line:18:57, endln:18:58
-        |vpiFullName:work@divSqrtRecFNToRaw_small
-        |vpiActual:
-        \_int_typespec: , line:18:36, endln:18:58
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@divSqrtRecFNToRaw_small.sigWidth), line:18:46, endln:18:54
+    \_parameter: (work@divSqrtRecFNToRaw_small.sigWidth), line:18:46, endln:18:58
   |vpiParamAssign:
   \_param_assign: , line:18:70, endln:18:81
     |vpiParent:
@@ -1330,16 +1385,9 @@ design: (unnamed)
       |vpiDecompile:0
       |vpiSize:64
       |UINT:0
-      |vpiTypespec:
-      \_ref_typespec: (work@divSqrtRecFNToRaw_small)
-        |vpiParent:
-        \_constant: , line:18:80, endln:18:81
-        |vpiFullName:work@divSqrtRecFNToRaw_small
-        |vpiActual:
-        \_int_typespec: , line:18:60, endln:18:81
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@divSqrtRecFNToRaw_small.options), line:18:70, endln:18:77
+    \_parameter: (work@divSqrtRecFNToRaw_small.options), line:18:70, endln:18:81
   |vpiParamAssign:
   \_param_assign: , line:22:11, endln:22:16
     |vpiParent:
@@ -1351,34 +1399,27 @@ design: (unnamed)
       |vpiDecompile:3
       |vpiSize:64
       |UINT:3
-      |vpiTypespec:
-      \_ref_typespec: (work@divSqrtRecFNToRaw_small)
-        |vpiParent:
-        \_constant: , line:22:15, endln:22:16
-        |vpiFullName:work@divSqrtRecFNToRaw_small
-        |vpiActual:
-        \_int_typespec: , line:22:1, endln:22:16
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@divSqrtRecFNToRaw_small.p), line:22:11, endln:22:12
-  |vpiDefName:work@divSqrtRecFNToRaw_small
-  |vpiGenStmt:
-  \_gen_region: 
+    \_parameter: (work@divSqrtRecFNToRaw_small.p), line:22:11, endln:22:16
+  |vpiInternalScope:
+  \_gen_region: (work@divSqrtRecFNToRaw_small), line:23:1, endln:56:12
     |vpiParent:
     \_module_inst: work@divSqrtRecFNToRaw_small (work@divSqrtRecFNToRaw_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:15:1, endln:58:10
-    |vpiStmt:
-    \_begin: (work@divSqrtRecFNToRaw_small)
+    |vpiFullName:work@divSqrtRecFNToRaw_small
+    |vpiInternalScope:
+    \_begin: (work@divSqrtRecFNToRaw_small), line:24:1, endln:29:10
       |vpiParent:
-      \_gen_region: 
+      \_gen_region: (work@divSqrtRecFNToRaw_small), line:23:1, endln:56:12
       |vpiFullName:work@divSqrtRecFNToRaw_small
       |vpiStmt:
-      \_gen_if: , line:24:1, endln:24:3
+      \_gen_if: , line:24:1, endln:29:10
         |vpiParent:
-        \_begin: (work@divSqrtRecFNToRaw_small)
+        \_begin: (work@divSqrtRecFNToRaw_small), line:24:1, endln:29:10
         |vpiCondition:
         \_operation: , line:24:5, endln:24:11
           |vpiParent:
-          \_gen_if: , line:24:1, endln:24:3
+          \_module_inst: work@divSqrtRecFNToRaw_small (work@divSqrtRecFNToRaw_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:15:1, endln:58:10
           |vpiOpType:14
           |vpiOperand:
           \_ref_obj: (work@divSqrtRecFNToRaw_small.p), line:24:5, endln:24:6
@@ -1386,6 +1427,8 @@ design: (unnamed)
             \_operation: , line:24:5, endln:24:11
             |vpiName:p
             |vpiFullName:work@divSqrtRecFNToRaw_small.p
+            |vpiActual:
+            \_parameter: (work@divSqrtRecFNToRaw_small.p), line:22:11, endln:22:16
           |vpiOperand:
           \_constant: , line:24:10, endln:24:11
             |vpiParent:
@@ -1395,62 +1438,46 @@ design: (unnamed)
             |UINT:3
             |vpiConstType:9
         |vpiStmt:
-        \_named_begin: (work@divSqrtRecFNToRaw_small.threeronew)
+        \_begin: (work@divSqrtRecFNToRaw_small.threeronew), line:26:7, endln:29:10
           |vpiParent:
-          \_gen_if: , line:24:1, endln:24:3
+          \_gen_if: , line:24:1, endln:29:10
           |vpiName:threeronew
           |vpiFullName:work@divSqrtRecFNToRaw_small.threeronew
           |vpiStmt:
-          \_ref_module: work@M (m1), line:27:11, endln:27:13
+          \_ref_module: work@M (m1), line:27:9, endln:27:16
             |vpiParent:
-            \_named_begin: (work@divSqrtRecFNToRaw_small.threeronew)
+            \_module_inst: work@divSqrtRecFNToRaw_small (work@divSqrtRecFNToRaw_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:15:1, endln:58:10
             |vpiName:m1
             |vpiDefName:work@M
+    |vpiStmt:
+    \_begin: (work@divSqrtRecFNToRaw_small), line:24:1, endln:29:10
+  |vpiDefName:work@divSqrtRecFNToRaw_small
+  |vpiRefModule:
+  \_ref_module: work@M (m1), line:27:9, endln:27:16
 |uhdmallModules:
 \_module_inst: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@divSqrtRecFN_small
+  |vpiName:work@divSqrtRecFN_small
   |vpiParameter:
-  \_parameter: (work@divSqrtRecFN_small.expWidth), line:120:20, endln:120:28
+  \_parameter: (work@divSqrtRecFN_small.expWidth), line:120:20, endln:120:32
     |vpiParent:
     \_module_inst: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
     |UINT:3
-    |vpiTypespec:
-    \_ref_typespec: (work@divSqrtRecFN_small.expWidth)
-      |vpiParent:
-      \_parameter: (work@divSqrtRecFN_small.expWidth), line:120:20, endln:120:28
-      |vpiFullName:work@divSqrtRecFN_small.expWidth
-      |vpiActual:
-      \_int_typespec: , line:120:10, endln:120:32
     |vpiName:expWidth
     |vpiFullName:work@divSqrtRecFN_small.expWidth
   |vpiParameter:
-  \_parameter: (work@divSqrtRecFN_small.sigWidth), line:120:44, endln:120:52
+  \_parameter: (work@divSqrtRecFN_small.sigWidth), line:120:44, endln:120:56
     |vpiParent:
     \_module_inst: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
     |UINT:3
-    |vpiTypespec:
-    \_ref_typespec: (work@divSqrtRecFN_small.sigWidth)
-      |vpiParent:
-      \_parameter: (work@divSqrtRecFN_small.sigWidth), line:120:44, endln:120:52
-      |vpiFullName:work@divSqrtRecFN_small.sigWidth
-      |vpiActual:
-      \_int_typespec: , line:120:34, endln:120:56
     |vpiName:sigWidth
     |vpiFullName:work@divSqrtRecFN_small.sigWidth
   |vpiParameter:
-  \_parameter: (work@divSqrtRecFN_small.options), line:120:68, endln:120:75
+  \_parameter: (work@divSqrtRecFN_small.options), line:120:68, endln:120:79
     |vpiParent:
     \_module_inst: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
     |UINT:0
-    |vpiTypespec:
-    \_ref_typespec: (work@divSqrtRecFN_small.options)
-      |vpiParent:
-      \_parameter: (work@divSqrtRecFN_small.options), line:120:68, endln:120:75
-      |vpiFullName:work@divSqrtRecFN_small.options
-      |vpiActual:
-      \_int_typespec: , line:120:58, endln:120:79
     |vpiName:options
     |vpiFullName:work@divSqrtRecFN_small.options
   |vpiParamAssign:
@@ -1464,16 +1491,9 @@ design: (unnamed)
       |vpiDecompile:3
       |vpiSize:64
       |UINT:3
-      |vpiTypespec:
-      \_ref_typespec: (work@divSqrtRecFN_small)
-        |vpiParent:
-        \_constant: , line:120:31, endln:120:32
-        |vpiFullName:work@divSqrtRecFN_small
-        |vpiActual:
-        \_int_typespec: , line:120:10, endln:120:32
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@divSqrtRecFN_small.expWidth), line:120:20, endln:120:28
+    \_parameter: (work@divSqrtRecFN_small.expWidth), line:120:20, endln:120:32
   |vpiParamAssign:
   \_param_assign: , line:120:44, endln:120:56
     |vpiParent:
@@ -1485,16 +1505,9 @@ design: (unnamed)
       |vpiDecompile:3
       |vpiSize:64
       |UINT:3
-      |vpiTypespec:
-      \_ref_typespec: (work@divSqrtRecFN_small)
-        |vpiParent:
-        \_constant: , line:120:55, endln:120:56
-        |vpiFullName:work@divSqrtRecFN_small
-        |vpiActual:
-        \_int_typespec: , line:120:34, endln:120:56
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@divSqrtRecFN_small.sigWidth), line:120:44, endln:120:52
+    \_parameter: (work@divSqrtRecFN_small.sigWidth), line:120:44, endln:120:56
   |vpiParamAssign:
   \_param_assign: , line:120:68, endln:120:79
     |vpiParent:
@@ -1506,39 +1519,344 @@ design: (unnamed)
       |vpiDecompile:0
       |vpiSize:64
       |UINT:0
-      |vpiTypespec:
-      \_ref_typespec: (work@divSqrtRecFN_small)
-        |vpiParent:
-        \_constant: , line:120:78, endln:120:79
-        |vpiFullName:work@divSqrtRecFN_small
-        |vpiActual:
-        \_int_typespec: , line:120:58, endln:120:79
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@divSqrtRecFN_small.options), line:120:68, endln:120:75
-  |vpiDefName:work@divSqrtRecFN_small
-  |vpiNet:
-  \_logic_net: (work@divSqrtRecFN_small.i), line:127:18, endln:127:19
+    \_parameter: (work@divSqrtRecFN_small.options), line:120:68, endln:120:79
+  |vpiImportTypespec:
+  \_logic_net: (work@divSqrtRecFN_small.decode_tv_r), line:129:37, endln:129:48
     |vpiParent:
-    \_operation: , line:127:18, endln:127:28
+    \_module_inst: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
+    |vpiName:decode_tv_r
+    |vpiFullName:work@divSqrtRecFN_small.decode_tv_r
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@divSqrtRecFN_small.amo_op), line:129:49, endln:129:55
+    |vpiParent:
+    \_module_inst: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
+    |vpiName:amo_op
+    |vpiFullName:work@divSqrtRecFN_small.amo_op
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@divSqrtRecFN_small.atomic_result), line:130:34, endln:130:51
+    |vpiParent:
+    \_module_inst: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
+    |vpiName:atomic_result
+    |vpiFullName:work@divSqrtRecFN_small.atomic_result
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@divSqrtRecFN_small.slice_width_lp), line:130:37, endln:130:51
+    |vpiParent:
+    \_module_inst: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
+    |vpiName:slice_width_lp
+    |vpiFullName:work@divSqrtRecFN_small.slice_width_lp
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@divSqrtRecFN_small.st_data_tv_r), line:131:33, endln:131:50
+    |vpiParent:
+    \_module_inst: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
+    |vpiName:st_data_tv_r
+    |vpiFullName:work@divSqrtRecFN_small.st_data_tv_r
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@divSqrtRecFN_small.slice_data), line:129:24, endln:129:34
+    |vpiParent:
+    \_module_inst: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
+    |vpiName:slice_data
+    |vpiFullName:work@divSqrtRecFN_small.slice_data
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@divSqrtRecFN_small.lce_req_link_lo), line:149:41, endln:149:44
+    |vpiParent:
+    \_module_inst: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
+    |vpiName:lce_req_link_lo
+    |vpiFullName:work@divSqrtRecFN_small.lce_req_link_lo
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@divSqrtRecFN_small.i), line:149:42, endln:149:43
+    |vpiParent:
+    \_module_inst: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
     |vpiName:i
     |vpiFullName:work@divSqrtRecFN_small.i
     |vpiNetType:1
-  |vpiNet:
+  |vpiImportTypespec:
+  \_logic_net: (work@divSqrtRecFN_small.lce_cmd_link_lo), line:150:42, endln:150:45
+    |vpiParent:
+    \_module_inst: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
+    |vpiName:lce_cmd_link_lo
+    |vpiFullName:work@divSqrtRecFN_small.lce_cmd_link_lo
+    |vpiNetType:1
+  |vpiImportTypespec:
   \_logic_net: (work@divSqrtRecFN_small.mc_y_dim_p), line:138:19, endln:138:29
     |vpiParent:
-    \_operation: , line:138:19, endln:138:33
+    \_module_inst: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
     |vpiName:mc_y_dim_p
     |vpiFullName:work@divSqrtRecFN_small.mc_y_dim_p
     |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@divSqrtRecFN_small.core_clk_i), line:143:40, endln:143:50
+    |vpiParent:
+    \_module_inst: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
+    |vpiName:core_clk_i
+    |vpiFullName:work@divSqrtRecFN_small.core_clk_i
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@divSqrtRecFN_small.core_reset_i), line:144:42, endln:144:54
+    |vpiParent:
+    \_module_inst: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
+    |vpiName:core_reset_i
+    |vpiFullName:work@divSqrtRecFN_small.core_reset_i
+    |vpiNetType:1
+  |vpiDefName:work@divSqrtRecFN_small
+  |vpiNet:
+  \_logic_net: (work@divSqrtRecFN_small.decode_tv_r), line:129:37, endln:129:48
+  |vpiNet:
+  \_logic_net: (work@divSqrtRecFN_small.amo_op), line:129:49, endln:129:55
+  |vpiNet:
+  \_logic_net: (work@divSqrtRecFN_small.atomic_result), line:130:34, endln:130:51
+  |vpiNet:
+  \_logic_net: (work@divSqrtRecFN_small.slice_width_lp), line:130:37, endln:130:51
+  |vpiNet:
+  \_logic_net: (work@divSqrtRecFN_small.st_data_tv_r), line:131:33, endln:131:50
+  |vpiNet:
+  \_logic_net: (work@divSqrtRecFN_small.slice_data), line:129:24, endln:129:34
+  |vpiNet:
+  \_logic_net: (work@divSqrtRecFN_small.lce_req_link_lo), line:149:41, endln:149:44
+  |vpiNet:
+  \_logic_net: (work@divSqrtRecFN_small.i), line:149:42, endln:149:43
+  |vpiNet:
+  \_logic_net: (work@divSqrtRecFN_small.lce_cmd_link_lo), line:150:42, endln:150:45
+  |vpiNet:
+  \_logic_net: (work@divSqrtRecFN_small.mc_y_dim_p), line:138:19, endln:138:29
+  |vpiNet:
+  \_logic_net: (work@divSqrtRecFN_small.core_clk_i), line:143:40, endln:143:50
+  |vpiNet:
+  \_logic_net: (work@divSqrtRecFN_small.core_reset_i), line:144:42, endln:144:54
+  |vpiContAssign:
+  \_cont_assign: , line:129:24, endln:131:51
+    |vpiParent:
+    \_module_inst: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
+    |vpiRhs:
+    \_operation: , line:129:37, endln:131:51
+      |vpiParent:
+      \_cont_assign: , line:129:24, endln:131:51
+      |vpiOpType:32
+      |vpiOperand:
+      \_hier_path: (decode_tv_r.amo_op), line:129:37, endln:129:55
+        |vpiParent:
+        \_operation: , line:129:37, endln:131:51
+        |vpiActual:
+        \_ref_obj: (decode_tv_r), line:129:37, endln:129:48
+          |vpiParent:
+          \_hier_path: (decode_tv_r.amo_op), line:129:37, endln:129:55
+          |vpiName:decode_tv_r
+          |vpiActual:
+          \_logic_net: (work@divSqrtRecFN_small.decode_tv_r), line:129:37, endln:129:48
+        |vpiActual:
+        \_ref_obj: (work@divSqrtRecFN_small.amo_op), line:129:49, endln:129:55
+          |vpiParent:
+          \_hier_path: (decode_tv_r.amo_op), line:129:37, endln:129:55
+          |vpiName:amo_op
+          |vpiFullName:work@divSqrtRecFN_small.amo_op
+          |vpiActual:
+          \_logic_net: (work@divSqrtRecFN_small.amo_op), line:129:49, endln:129:55
+        |vpiName:decode_tv_r.amo_op
+      |vpiOperand:
+      \_indexed_part_select: atomic_result (work@divSqrtRecFN_small.atomic_result), line:130:34, endln:130:51
+        |vpiParent:
+        \_operation: , line:129:37, endln:131:51
+        |vpiName:atomic_result
+        |vpiFullName:work@divSqrtRecFN_small.atomic_result
+        |vpiDefName:atomic_result
+        |vpiActual:
+        \_logic_net: (work@divSqrtRecFN_small.atomic_result), line:130:34, endln:130:51
+        |vpiConstantSelect:1
+        |vpiIndexedPartSelectType:1
+        |vpiBaseExpr:
+        \_constant: , line:130:34, endln:130:35
+          |vpiParent:
+          \_indexed_part_select: atomic_result (work@divSqrtRecFN_small.atomic_result), line:130:34, endln:130:51
+          |vpiDecompile:0
+          |vpiSize:64
+          |UINT:0
+          |vpiConstType:9
+        |vpiWidthExpr:
+        \_ref_obj: (work@divSqrtRecFN_small.slice_width_lp), line:130:37, endln:130:51
+          |vpiParent:
+          \_indexed_part_select: atomic_result (work@divSqrtRecFN_small.atomic_result), line:130:34, endln:130:51
+          |vpiName:slice_width_lp
+          |vpiFullName:work@divSqrtRecFN_small.slice_width_lp
+          |vpiActual:
+          \_logic_net: (work@divSqrtRecFN_small.slice_width_lp), line:130:37, endln:130:51
+      |vpiOperand:
+      \_indexed_part_select: st_data_tv_r (work@divSqrtRecFN_small.st_data_tv_r), line:131:33, endln:131:50
+        |vpiParent:
+        \_operation: , line:129:37, endln:131:51
+        |vpiName:st_data_tv_r
+        |vpiFullName:work@divSqrtRecFN_small.st_data_tv_r
+        |vpiDefName:st_data_tv_r
+        |vpiActual:
+        \_logic_net: (work@divSqrtRecFN_small.st_data_tv_r), line:131:33, endln:131:50
+        |vpiConstantSelect:1
+        |vpiIndexedPartSelectType:1
+        |vpiBaseExpr:
+        \_constant: , line:131:33, endln:131:34
+          |vpiParent:
+          \_indexed_part_select: st_data_tv_r (work@divSqrtRecFN_small.st_data_tv_r), line:131:33, endln:131:50
+          |vpiDecompile:0
+          |vpiSize:64
+          |UINT:0
+          |vpiConstType:9
+        |vpiWidthExpr:
+        \_ref_obj: (work@divSqrtRecFN_small.slice_width_lp), line:131:36, endln:131:50
+          |vpiParent:
+          \_indexed_part_select: st_data_tv_r (work@divSqrtRecFN_small.st_data_tv_r), line:131:33, endln:131:50
+          |vpiName:slice_width_lp
+          |vpiFullName:work@divSqrtRecFN_small.slice_width_lp
+          |vpiActual:
+          \_logic_net: (work@divSqrtRecFN_small.slice_width_lp), line:130:37, endln:130:51
+    |vpiLhs:
+    \_ref_obj: (work@divSqrtRecFN_small.slice_data), line:129:24, endln:129:34
+      |vpiParent:
+      \_module_inst: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
+      |vpiName:slice_data
+      |vpiFullName:work@divSqrtRecFN_small.slice_data
+      |vpiActual:
+      \_logic_net: (work@divSqrtRecFN_small.slice_data), line:129:24, endln:129:34
+  |vpiContAssign:
+  \_cont_assign: , line:135:24, endln:135:68
+    |vpiParent:
+    \_module_inst: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
+    |vpiRhs:
+    \_indexed_part_select: st_data_tv_r (work@divSqrtRecFN_small.st_data_tv_r), line:135:50, endln:135:67
+      |vpiParent:
+      \_cont_assign: , line:135:24, endln:135:68
+      |vpiName:st_data_tv_r
+      |vpiFullName:work@divSqrtRecFN_small.st_data_tv_r
+      |vpiDefName:st_data_tv_r
+      |vpiActual:
+      \_logic_net: (work@divSqrtRecFN_small.st_data_tv_r), line:131:33, endln:131:50
+      |vpiConstantSelect:1
+      |vpiIndexedPartSelectType:1
+      |vpiBaseExpr:
+      \_constant: , line:135:50, endln:135:51
+        |vpiParent:
+        \_indexed_part_select: st_data_tv_r (work@divSqrtRecFN_small.st_data_tv_r), line:135:50, endln:135:67
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+      |vpiWidthExpr:
+      \_ref_obj: (work@divSqrtRecFN_small.slice_width_lp), line:135:53, endln:135:67
+        |vpiParent:
+        \_indexed_part_select: st_data_tv_r (work@divSqrtRecFN_small.st_data_tv_r), line:135:50, endln:135:67
+        |vpiName:slice_width_lp
+        |vpiFullName:work@divSqrtRecFN_small.slice_width_lp
+        |vpiActual:
+        \_logic_net: (work@divSqrtRecFN_small.slice_width_lp), line:130:37, endln:130:51
+    |vpiLhs:
+    \_ref_obj: (work@divSqrtRecFN_small.slice_data), line:135:24, endln:135:34
+      |vpiParent:
+      \_module_inst: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
+      |vpiName:slice_data
+      |vpiFullName:work@divSqrtRecFN_small.slice_data
+      |vpiActual:
+      \_logic_net: (work@divSqrtRecFN_small.slice_data), line:129:24, endln:129:34
+  |vpiContAssign:
+  \_cont_assign: , line:149:26, endln:149:50
+    |vpiParent:
+    \_module_inst: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
+    |vpiRhs:
+    \_constant: , line:149:48, endln:149:50
+      |vpiParent:
+      \_cont_assign: , line:149:26, endln:149:50
+      |vpiDecompile:'0
+      |vpiSize:-1
+      |BIN:0
+      |vpiConstType:3
+    |vpiLhs:
+    \_bit_select: (work@divSqrtRecFN_small.lce_req_link_lo), line:149:41, endln:149:44
+      |vpiParent:
+      \_module_inst: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
+      |vpiName:lce_req_link_lo
+      |vpiFullName:work@divSqrtRecFN_small.lce_req_link_lo
+      |vpiActual:
+      \_logic_net: (work@divSqrtRecFN_small.lce_req_link_lo), line:149:41, endln:149:44
+      |vpiIndex:
+      \_ref_obj: (work@divSqrtRecFN_small.i), line:149:42, endln:149:43
+        |vpiParent:
+        \_module_inst: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
+        |vpiName:i
+        |vpiFullName:work@divSqrtRecFN_small.i
+        |vpiActual:
+        \_logic_net: (work@divSqrtRecFN_small.i), line:149:42, endln:149:43
+  |vpiContAssign:
+  \_cont_assign: , line:150:27, endln:150:51
+    |vpiParent:
+    \_module_inst: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
+    |vpiRhs:
+    \_constant: , line:150:49, endln:150:51
+      |vpiParent:
+      \_cont_assign: , line:150:27, endln:150:51
+      |vpiDecompile:'0
+      |vpiSize:-1
+      |BIN:0
+      |vpiConstType:3
+    |vpiLhs:
+    \_bit_select: (work@divSqrtRecFN_small.lce_cmd_link_lo), line:150:42, endln:150:45
+      |vpiParent:
+      \_module_inst: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
+      |vpiName:lce_cmd_link_lo
+      |vpiFullName:work@divSqrtRecFN_small.lce_cmd_link_lo
+      |vpiActual:
+      \_logic_net: (work@divSqrtRecFN_small.lce_cmd_link_lo), line:150:42, endln:150:45
+      |vpiIndex:
+      \_ref_obj: (work@divSqrtRecFN_small.i), line:150:43, endln:150:44
+        |vpiParent:
+        \_module_inst: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
+        |vpiName:i
+        |vpiFullName:work@divSqrtRecFN_small.i
+        |vpiActual:
+        \_logic_net: (work@divSqrtRecFN_small.i), line:149:42, endln:149:43
+  |vpiRefModule:
+  \_ref_module: work@bp_l2e_tile_node (l2e), line:140:24, endln:145:29
+    |vpiParent:
+    \_module_inst: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
+    |vpiName:l2e
+    |vpiDefName:work@bp_l2e_tile_node
+    |vpiPort:
+    \_port: (core_clk_i), line:143:28, endln:143:51
+      |vpiParent:
+      \_begin: (work@divSqrtRecFN_small.node), line:139:21, endln:146:22
+      |vpiName:core_clk_i
+      |vpiHighConn:
+      \_ref_obj: (work@divSqrtRecFN_small.node.core_clk_i.core_clk_i), line:143:40, endln:143:50
+        |vpiParent:
+        \_port: (core_clk_i), line:143:28, endln:143:51
+        |vpiName:core_clk_i
+        |vpiFullName:work@divSqrtRecFN_small.node.core_clk_i.core_clk_i
+        |vpiActual:
+        \_logic_net: (work@divSqrtRecFN_small.core_clk_i), line:143:40, endln:143:50
+    |vpiPort:
+    \_port: (core_reset_i), line:144:28, endln:144:55
+      |vpiParent:
+      \_begin: (work@divSqrtRecFN_small.node), line:139:21, endln:146:22
+      |vpiName:core_reset_i
+      |vpiHighConn:
+      \_ref_obj: (work@divSqrtRecFN_small.node.core_reset_i.core_reset_i), line:144:42, endln:144:54
+        |vpiParent:
+        \_port: (core_reset_i), line:144:28, endln:144:55
+        |vpiName:core_reset_i
+        |vpiFullName:work@divSqrtRecFN_small.node.core_reset_i.core_reset_i
+        |vpiActual:
+        \_logic_net: (work@divSqrtRecFN_small.core_reset_i), line:144:42, endln:144:54
   |vpiGenStmt:
-  \_gen_if_else: 
+  \_gen_if_else: , line:127:13, endln:136:18
     |vpiParent:
     \_module_inst: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
     |vpiCondition:
     \_operation: , line:127:17, endln:127:45
       |vpiParent:
-      \_gen_if_else: 
+      \_module_inst: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
       |vpiOpType:27
       |vpiOperand:
       \_operation: , line:127:18, endln:127:28
@@ -1552,7 +1870,7 @@ design: (unnamed)
           |vpiName:i
           |vpiFullName:work@divSqrtRecFN_small.i
           |vpiActual:
-          \_logic_net: (work@divSqrtRecFN_small.i), line:127:18, endln:127:19
+          \_logic_net: (work@divSqrtRecFN_small.i), line:149:42, endln:149:43
         |vpiOperand:
         \_constant: , line:127:23, endln:127:28
           |vpiParent:
@@ -1573,7 +1891,7 @@ design: (unnamed)
           |vpiName:i
           |vpiFullName:work@divSqrtRecFN_small.i
           |vpiActual:
-          \_logic_net: (work@divSqrtRecFN_small.i), line:127:18, endln:127:19
+          \_logic_net: (work@divSqrtRecFN_small.i), line:149:42, endln:149:43
         |vpiOperand:
         \_constant: , line:127:39, endln:127:44
           |vpiParent:
@@ -1583,129 +1901,29 @@ design: (unnamed)
           |BIN:11
           |vpiConstType:3
     |vpiStmt:
-    \_named_begin: (work@divSqrtRecFN_small.atomic)
+    \_begin: (work@divSqrtRecFN_small.atomic), line:128:15, endln:132:18
       |vpiParent:
-      \_gen_if_else: 
+      \_gen_if_else: , line:127:13, endln:136:18
       |vpiName:atomic
       |vpiFullName:work@divSqrtRecFN_small.atomic
       |vpiStmt:
       \_cont_assign: , line:129:24, endln:131:51
-        |vpiParent:
-        \_named_begin: (work@divSqrtRecFN_small.atomic)
-        |vpiRhs:
-        \_operation: , line:129:37, endln:131:51
-          |vpiParent:
-          \_cont_assign: , line:129:24, endln:131:51
-          |vpiOpType:32
-          |vpiOperand:
-          \_hier_path: (decode_tv_r.amo_op), line:129:37, endln:129:55
-            |vpiParent:
-            \_operation: , line:129:37, endln:131:51
-            |vpiActual:
-            \_ref_obj: (decode_tv_r), line:129:37, endln:129:48
-              |vpiParent:
-              \_hier_path: (decode_tv_r.amo_op), line:129:37, endln:129:55
-              |vpiName:decode_tv_r
-            |vpiActual:
-            \_ref_obj: (work@divSqrtRecFN_small.atomic.amo_op), line:129:49, endln:129:55
-              |vpiParent:
-              \_hier_path: (decode_tv_r.amo_op), line:129:37, endln:129:55
-              |vpiName:amo_op
-              |vpiFullName:work@divSqrtRecFN_small.atomic.amo_op
-            |vpiName:decode_tv_r.amo_op
-          |vpiOperand:
-          \_indexed_part_select: atomic_result (work@divSqrtRecFN_small.atomic.atomic_result), line:130:34, endln:130:51
-            |vpiParent:
-            \_operation: , line:129:37, endln:131:51
-            |vpiName:atomic_result
-            |vpiFullName:work@divSqrtRecFN_small.atomic.atomic_result
-            |vpiDefName:atomic_result
-            |vpiConstantSelect:1
-            |vpiIndexedPartSelectType:1
-            |vpiBaseExpr:
-            \_constant: , line:130:34, endln:130:35
-              |vpiDecompile:0
-              |vpiSize:64
-              |UINT:0
-              |vpiConstType:9
-            |vpiWidthExpr:
-            \_ref_obj: (work@divSqrtRecFN_small.atomic.slice_width_lp), line:130:37, endln:130:51
-              |vpiParent:
-              \_indexed_part_select: atomic_result (work@divSqrtRecFN_small.atomic.atomic_result), line:130:34, endln:130:51
-              |vpiName:slice_width_lp
-              |vpiFullName:work@divSqrtRecFN_small.atomic.slice_width_lp
-          |vpiOperand:
-          \_indexed_part_select: st_data_tv_r (work@divSqrtRecFN_small.atomic.st_data_tv_r), line:131:33, endln:131:50
-            |vpiParent:
-            \_operation: , line:129:37, endln:131:51
-            |vpiName:st_data_tv_r
-            |vpiFullName:work@divSqrtRecFN_small.atomic.st_data_tv_r
-            |vpiDefName:st_data_tv_r
-            |vpiConstantSelect:1
-            |vpiIndexedPartSelectType:1
-            |vpiBaseExpr:
-            \_constant: , line:131:33, endln:131:34
-              |vpiDecompile:0
-              |vpiSize:64
-              |UINT:0
-              |vpiConstType:9
-            |vpiWidthExpr:
-            \_ref_obj: (work@divSqrtRecFN_small.atomic.slice_width_lp), line:131:36, endln:131:50
-              |vpiParent:
-              \_indexed_part_select: st_data_tv_r (work@divSqrtRecFN_small.atomic.st_data_tv_r), line:131:33, endln:131:50
-              |vpiName:slice_width_lp
-              |vpiFullName:work@divSqrtRecFN_small.atomic.slice_width_lp
-        |vpiLhs:
-        \_ref_obj: (work@divSqrtRecFN_small.atomic.slice_data), line:129:24, endln:129:34
-          |vpiParent:
-          \_cont_assign: , line:129:24, endln:131:51
-          |vpiName:slice_data
-          |vpiFullName:work@divSqrtRecFN_small.atomic.slice_data
     |vpiElseStmt:
-    \_named_begin: (work@divSqrtRecFN_small.non_atomic)
+    \_begin: (work@divSqrtRecFN_small.non_atomic), line:134:15, endln:136:18
       |vpiParent:
-      \_gen_if_else: 
+      \_gen_if_else: , line:127:13, endln:136:18
       |vpiName:non_atomic
       |vpiFullName:work@divSqrtRecFN_small.non_atomic
       |vpiStmt:
       \_cont_assign: , line:135:24, endln:135:68
-        |vpiParent:
-        \_named_begin: (work@divSqrtRecFN_small.non_atomic)
-        |vpiRhs:
-        \_indexed_part_select: st_data_tv_r (work@divSqrtRecFN_small.non_atomic.st_data_tv_r), line:135:50, endln:135:67
-          |vpiParent:
-          \_cont_assign: , line:135:24, endln:135:68
-          |vpiName:st_data_tv_r
-          |vpiFullName:work@divSqrtRecFN_small.non_atomic.st_data_tv_r
-          |vpiDefName:st_data_tv_r
-          |vpiConstantSelect:1
-          |vpiIndexedPartSelectType:1
-          |vpiBaseExpr:
-          \_constant: , line:135:50, endln:135:51
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
-            |vpiConstType:9
-          |vpiWidthExpr:
-          \_ref_obj: (work@divSqrtRecFN_small.non_atomic.slice_width_lp), line:135:53, endln:135:67
-            |vpiParent:
-            \_indexed_part_select: st_data_tv_r (work@divSqrtRecFN_small.non_atomic.st_data_tv_r), line:135:50, endln:135:67
-            |vpiName:slice_width_lp
-            |vpiFullName:work@divSqrtRecFN_small.non_atomic.slice_width_lp
-        |vpiLhs:
-        \_ref_obj: (work@divSqrtRecFN_small.non_atomic.slice_data), line:135:24, endln:135:34
-          |vpiParent:
-          \_cont_assign: , line:135:24, endln:135:68
-          |vpiName:slice_data
-          |vpiFullName:work@divSqrtRecFN_small.non_atomic.slice_data
   |vpiGenStmt:
-  \_gen_if_else: 
+  \_gen_if_else: , line:138:15, endln:152:20
     |vpiParent:
     \_module_inst: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
     |vpiCondition:
     \_operation: , line:138:19, endln:138:33
       |vpiParent:
-      \_gen_if_else: 
+      \_module_inst: work@divSqrtRecFN_small (work@divSqrtRecFN_small), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:117:1, endln:155:10
       |vpiOpType:18
       |vpiOperand:
       \_ref_obj: (work@divSqrtRecFN_small.mc_y_dim_p), line:138:19, endln:138:29
@@ -1724,106 +1942,130 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiStmt:
-    \_named_begin: (work@divSqrtRecFN_small.node)
+    \_begin: (work@divSqrtRecFN_small.node), line:139:21, endln:146:22
       |vpiParent:
-      \_gen_if_else: 
+      \_gen_if_else: , line:138:15, endln:152:20
       |vpiName:node
       |vpiFullName:work@divSqrtRecFN_small.node
       |vpiStmt:
-      \_ref_module: work@bp_l2e_tile_node (l2e), line:142:26, endln:142:29
-        |vpiParent:
-        \_named_begin: (work@divSqrtRecFN_small.node)
-        |vpiName:l2e
-        |vpiDefName:work@bp_l2e_tile_node
-        |vpiPort:
-        \_port: (core_clk_i), line:143:28, endln:143:51
-          |vpiParent:
-          \_ref_module: work@bp_l2e_tile_node (l2e), line:142:26, endln:142:29
-          |vpiName:core_clk_i
-          |vpiHighConn:
-          \_ref_obj: (work@divSqrtRecFN_small.node.l2e.core_clk_i.core_clk_i), line:143:40, endln:143:50
-            |vpiParent:
-            \_port: (core_clk_i), line:143:28, endln:143:51
-            |vpiName:core_clk_i
-            |vpiFullName:work@divSqrtRecFN_small.node.l2e.core_clk_i.core_clk_i
-        |vpiPort:
-        \_port: (core_reset_i), line:144:28, endln:144:55
-          |vpiParent:
-          \_ref_module: work@bp_l2e_tile_node (l2e), line:142:26, endln:142:29
-          |vpiName:core_reset_i
-          |vpiHighConn:
-          \_ref_obj: (work@divSqrtRecFN_small.node.l2e.core_reset_i.core_reset_i), line:144:42, endln:144:54
-            |vpiParent:
-            \_port: (core_reset_i), line:144:28, endln:144:55
-            |vpiName:core_reset_i
-            |vpiFullName:work@divSqrtRecFN_small.node.l2e.core_reset_i.core_reset_i
+      \_ref_module: work@bp_l2e_tile_node (l2e), line:140:24, endln:145:29
     |vpiElseStmt:
-    \_named_begin: (work@divSqrtRecFN_small.stub)
+    \_begin: (work@divSqrtRecFN_small.stub), line:148:17, endln:152:20
       |vpiParent:
-      \_gen_if_else: 
+      \_gen_if_else: , line:138:15, endln:152:20
       |vpiName:stub
       |vpiFullName:work@divSqrtRecFN_small.stub
       |vpiStmt:
       \_cont_assign: , line:149:26, endln:149:50
-        |vpiParent:
-        \_named_begin: (work@divSqrtRecFN_small.stub)
-        |vpiRhs:
-        \_constant: , line:149:48, endln:149:50
-          |vpiParent:
-          \_cont_assign: , line:149:26, endln:149:50
-          |vpiDecompile:'0
-          |vpiSize:-1
-          |BIN:0
-          |vpiConstType:3
-        |vpiLhs:
-        \_bit_select: (work@divSqrtRecFN_small.stub.lce_req_link_lo), line:149:26, endln:149:44
-          |vpiParent:
-          \_cont_assign: , line:149:26, endln:149:50
-          |vpiName:lce_req_link_lo
-          |vpiFullName:work@divSqrtRecFN_small.stub.lce_req_link_lo
-          |vpiIndex:
-          \_ref_obj: (work@divSqrtRecFN_small.stub.i), line:149:42, endln:149:43
-            |vpiParent:
-            \_bit_select: (work@divSqrtRecFN_small.stub.lce_req_link_lo), line:149:26, endln:149:44
-            |vpiName:i
-            |vpiFullName:work@divSqrtRecFN_small.stub.i
       |vpiStmt:
       \_cont_assign: , line:150:27, endln:150:51
-        |vpiParent:
-        \_named_begin: (work@divSqrtRecFN_small.stub)
-        |vpiRhs:
-        \_constant: , line:150:49, endln:150:51
-          |vpiParent:
-          \_cont_assign: , line:150:27, endln:150:51
-          |vpiDecompile:'0
-          |vpiSize:-1
-          |BIN:0
-          |vpiConstType:3
-        |vpiLhs:
-        \_bit_select: (work@divSqrtRecFN_small.stub.lce_cmd_link_lo), line:150:27, endln:150:45
-          |vpiParent:
-          \_cont_assign: , line:150:27, endln:150:51
-          |vpiName:lce_cmd_link_lo
-          |vpiFullName:work@divSqrtRecFN_small.stub.lce_cmd_link_lo
-          |vpiIndex:
-          \_ref_obj: (work@divSqrtRecFN_small.stub.i), line:150:43, endln:150:44
-            |vpiParent:
-            \_bit_select: (work@divSqrtRecFN_small.stub.lce_cmd_link_lo), line:150:27, endln:150:45
-            |vpiName:i
-            |vpiFullName:work@divSqrtRecFN_small.stub.i
 |uhdmallModules:
 \_module_inst: work@e (work@e), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:99:1, endln:115:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@e
-  |vpiDefName:work@e
-  |vpiNet:
+  |vpiName:work@e
+  |vpiTypedef:
+  \_string_typespec: (data), line:102:35, endln:102:39
+    |vpiParent:
+    \_module_inst: work@e (work@e), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:99:1, endln:115:10
+    |vpiName:data
+  |vpiTypedef:
+  \_string_typespec: (v), line:103:42, endln:103:43
+    |vpiParent:
+    \_module_inst: work@e (work@e), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:99:1, endln:115:10
+    |vpiName:v
+  |vpiTypedef:
+  \_string_typespec: (ready_and_rev), line:104:38, endln:104:51
+    |vpiParent:
+    \_module_inst: work@e (work@e), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:99:1, endln:115:10
+    |vpiName:ready_and_rev
+  |vpiImportTypespec:
+  \_string_typespec: (data), line:102:35, endln:102:39
+  |vpiImportTypespec:
+  \_string_typespec: (v), line:103:42, endln:103:43
+  |vpiImportTypespec:
+  \_string_typespec: (ready_and_rev), line:104:38, endln:104:51
+  |vpiImportTypespec:
+  \_logic_net: (work@e.resp_concentrated_link_lo), line:102:51, endln:102:76
+    |vpiParent:
+    \_module_inst: work@e (work@e), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:99:1, endln:115:10
+    |vpiName:resp_concentrated_link_lo
+    |vpiFullName:work@e.resp_concentrated_link_lo
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@e.data), line:102:77, endln:102:81
+    |vpiParent:
+    \_module_inst: work@e (work@e), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:99:1, endln:115:10
+    |vpiName:data
+    |vpiFullName:work@e.data
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@e.v), line:103:83, endln:103:84
+    |vpiParent:
+    \_module_inst: work@e (work@e), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:99:1, endln:115:10
+    |vpiName:v
+    |vpiFullName:work@e.v
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@e.cce_lce_resp_link_lo), line:104:53, endln:104:73
+    |vpiParent:
+    \_module_inst: work@e (work@e), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:99:1, endln:115:10
+    |vpiName:cce_lce_resp_link_lo
+    |vpiFullName:work@e.cce_lce_resp_link_lo
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@e.ready_and_rev), line:104:74, endln:104:87
+    |vpiParent:
+    \_module_inst: work@e (work@e), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:99:1, endln:115:10
+    |vpiName:ready_and_rev
+    |vpiFullName:work@e.ready_and_rev
+    |vpiNetType:1
+  |vpiImportTypespec:
   \_logic_net: (work@e.lce_resp_link_cast_o), line:102:10, endln:102:30
     |vpiParent:
-    \_cont_assign: , line:102:10, endln:105:38
+    \_module_inst: work@e (work@e), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:99:1, endln:115:10
     |vpiName:lce_resp_link_cast_o
     |vpiFullName:work@e.lce_resp_link_cast_o
     |vpiNetType:1
+  |vpiDefName:work@e
+  |vpiNet:
+  \_logic_net: (work@e.resp_concentrated_link_lo), line:102:51, endln:102:76
+  |vpiNet:
+  \_logic_net: (work@e.data), line:102:77, endln:102:81
+  |vpiNet:
+  \_logic_net: (work@e.v), line:103:83, endln:103:84
+  |vpiNet:
+  \_logic_net: (work@e.cce_lce_resp_link_lo), line:104:53, endln:104:73
+  |vpiNet:
+  \_logic_net: (work@e.ready_and_rev), line:104:74, endln:104:87
+  |vpiNet:
+  \_logic_net: (work@e.lce_resp_link_cast_o), line:102:10, endln:102:30
+  |vpiPort:
+  \_port: (a), line:111:6, endln:112:7
+    |vpiParent:
+    \_module_inst: work@e (work@e), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:99:1, endln:115:10
+    |vpiName:a
+    |vpiHighConn:
+    \_operation: , line:111:9, endln:112:6
+      |vpiParent:
+      \_port: (a), line:111:6, endln:112:7
+      |vpiOpType:33
+      |vpiOperand:
+      \_constant: , line:111:10, endln:111:11
+        |vpiParent:
+        \_operation: , line:111:9, endln:112:6
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiOperand:
+      \_constant: , line:111:12, endln:111:13
+        |vpiParent:
+        \_operation: , line:111:9, endln:112:6
+        |vpiDecompile:2
+        |vpiSize:64
+        |UINT:2
+        |vpiConstType:9
   |vpiContAssign:
   \_cont_assign: , line:102:10, endln:105:38
     |vpiParent:
@@ -1834,7 +2076,7 @@ design: (unnamed)
       \_cont_assign: , line:102:10, endln:105:38
       |vpiOpType:75
       |vpiOperand:
-      \_tagged_pattern: , line:102:51, endln:102:81
+      \_tagged_pattern: , line:102:35, endln:102:81
         |vpiParent:
         \_operation: , line:102:33, endln:105:38
         |vpiPattern:
@@ -1846,22 +2088,27 @@ design: (unnamed)
             |vpiParent:
             \_hier_path: (resp_concentrated_link_lo.data), line:102:51, endln:102:81
             |vpiName:resp_concentrated_link_lo
+            |vpiActual:
+            \_logic_net: (work@e.resp_concentrated_link_lo), line:102:51, endln:102:76
           |vpiActual:
           \_ref_obj: (work@e.data), line:102:77, endln:102:81
             |vpiParent:
             \_hier_path: (resp_concentrated_link_lo.data), line:102:51, endln:102:81
             |vpiName:data
             |vpiFullName:work@e.data
+            |vpiActual:
+            \_logic_net: (work@e.data), line:102:77, endln:102:81
           |vpiName:resp_concentrated_link_lo.data
         |vpiTypespec:
-        \_ref_typespec: (work@e)
+        \_ref_typespec: (work@e.data), line:102:35, endln:102:39
           |vpiParent:
-          \_tagged_pattern: , line:102:51, endln:102:81
-          |vpiFullName:work@e
+          \_tagged_pattern: , line:102:35, endln:102:81
+          |vpiName:data
+          |vpiFullName:work@e.data
           |vpiActual:
           \_string_typespec: (data), line:102:35, endln:102:39
       |vpiOperand:
-      \_tagged_pattern: , line:103:57, endln:103:84
+      \_tagged_pattern: , line:103:42, endln:103:84
         |vpiParent:
         \_operation: , line:102:33, endln:105:38
         |vpiPattern:
@@ -1873,22 +2120,27 @@ design: (unnamed)
             |vpiParent:
             \_hier_path: (resp_concentrated_link_lo.v), line:103:57, endln:103:84
             |vpiName:resp_concentrated_link_lo
+            |vpiActual:
+            \_logic_net: (work@e.resp_concentrated_link_lo), line:102:51, endln:102:76
           |vpiActual:
           \_ref_obj: (work@e.v), line:103:83, endln:103:84
             |vpiParent:
             \_hier_path: (resp_concentrated_link_lo.v), line:103:57, endln:103:84
             |vpiName:v
             |vpiFullName:work@e.v
+            |vpiActual:
+            \_logic_net: (work@e.v), line:103:83, endln:103:84
           |vpiName:resp_concentrated_link_lo.v
         |vpiTypespec:
-        \_ref_typespec: (work@e)
+        \_ref_typespec: (work@e.v), line:103:42, endln:103:43
           |vpiParent:
-          \_tagged_pattern: , line:103:57, endln:103:84
-          |vpiFullName:work@e
+          \_tagged_pattern: , line:103:42, endln:103:84
+          |vpiName:v
+          |vpiFullName:work@e.v
           |vpiActual:
           \_string_typespec: (v), line:103:42, endln:103:43
       |vpiOperand:
-      \_tagged_pattern: , line:104:53, endln:104:87
+      \_tagged_pattern: , line:104:38, endln:104:87
         |vpiParent:
         \_operation: , line:102:33, endln:105:38
         |vpiPattern:
@@ -1900,30 +2152,35 @@ design: (unnamed)
             |vpiParent:
             \_hier_path: (cce_lce_resp_link_lo.ready_and_rev), line:104:53, endln:104:87
             |vpiName:cce_lce_resp_link_lo
+            |vpiActual:
+            \_logic_net: (work@e.cce_lce_resp_link_lo), line:104:53, endln:104:73
           |vpiActual:
           \_ref_obj: (work@e.ready_and_rev), line:104:74, endln:104:87
             |vpiParent:
             \_hier_path: (cce_lce_resp_link_lo.ready_and_rev), line:104:53, endln:104:87
             |vpiName:ready_and_rev
             |vpiFullName:work@e.ready_and_rev
+            |vpiActual:
+            \_logic_net: (work@e.ready_and_rev), line:104:74, endln:104:87
           |vpiName:cce_lce_resp_link_lo.ready_and_rev
         |vpiTypespec:
-        \_ref_typespec: (work@e)
+        \_ref_typespec: (work@e.ready_and_rev), line:104:38, endln:104:51
           |vpiParent:
-          \_tagged_pattern: , line:104:53, endln:104:87
-          |vpiFullName:work@e
+          \_tagged_pattern: , line:104:38, endln:104:87
+          |vpiName:ready_and_rev
+          |vpiFullName:work@e.ready_and_rev
           |vpiActual:
           \_string_typespec: (ready_and_rev), line:104:38, endln:104:51
     |vpiLhs:
     \_ref_obj: (work@e.lce_resp_link_cast_o), line:102:10, endln:102:30
       |vpiParent:
-      \_cont_assign: , line:102:10, endln:105:38
+      \_module_inst: work@e (work@e), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:99:1, endln:115:10
       |vpiName:lce_resp_link_cast_o
       |vpiFullName:work@e.lce_resp_link_cast_o
       |vpiActual:
       \_logic_net: (work@e.lce_resp_link_cast_o), line:102:10, endln:102:30
   |vpiRefModule:
-  \_ref_module: work@MOD (u1), line:110:5, endln:110:7
+  \_ref_module: work@MOD (u1), line:107:4, endln:112:9
     |vpiParent:
     \_module_inst: work@e (work@e), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:99:1, endln:115:10
     |vpiName:u1
@@ -1932,57 +2189,23 @@ design: (unnamed)
     \_module_inst: work@MOD (work@MOD), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:96:1, endln:97:10
     |vpiPort:
     \_port: (a), line:111:6, endln:112:7
-      |vpiParent:
-      \_ref_module: work@MOD (u1), line:110:5, endln:110:7
-      |vpiName:a
-      |vpiHighConn:
-      \_operation: , line:111:9, endln:112:6
-        |vpiParent:
-        \_port: (a), line:111:6, endln:112:7
-        |vpiOpType:33
-        |vpiOperand:
-        \_constant: , line:111:10, endln:111:11
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-        |vpiOperand:
-        \_constant: , line:111:12, endln:111:13
-          |vpiDecompile:2
-          |vpiSize:64
-          |UINT:2
-          |vpiConstType:9
 |uhdmallModules:
 \_module_inst: work@isSigNaNRecFN (work@isSigNaNRecFN), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:60:1, endln:68:14
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@isSigNaNRecFN
+  |vpiName:work@isSigNaNRecFN
   |vpiParameter:
-  \_parameter: (work@isSigNaNRecFN.expWidth), line:61:33, endln:61:41
+  \_parameter: (work@isSigNaNRecFN.expWidth), line:61:33, endln:61:45
     |vpiParent:
     \_module_inst: work@isSigNaNRecFN (work@isSigNaNRecFN), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:60:1, endln:68:14
     |UINT:3
-    |vpiTypespec:
-    \_ref_typespec: (work@isSigNaNRecFN.expWidth)
-      |vpiParent:
-      \_parameter: (work@isSigNaNRecFN.expWidth), line:61:33, endln:61:41
-      |vpiFullName:work@isSigNaNRecFN.expWidth
-      |vpiActual:
-      \_int_typespec: , line:61:23, endln:61:45
     |vpiName:expWidth
     |vpiFullName:work@isSigNaNRecFN.expWidth
   |vpiParameter:
-  \_parameter: (work@isSigNaNRecFN.sigWidth), line:61:57, endln:61:65
+  \_parameter: (work@isSigNaNRecFN.sigWidth), line:61:57, endln:61:69
     |vpiParent:
     \_module_inst: work@isSigNaNRecFN (work@isSigNaNRecFN), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:60:1, endln:68:14
     |UINT:3
-    |vpiTypespec:
-    \_ref_typespec: (work@isSigNaNRecFN.sigWidth)
-      |vpiParent:
-      \_parameter: (work@isSigNaNRecFN.sigWidth), line:61:57, endln:61:65
-      |vpiFullName:work@isSigNaNRecFN.sigWidth
-      |vpiActual:
-      \_int_typespec: , line:61:47, endln:61:69
     |vpiName:sigWidth
     |vpiFullName:work@isSigNaNRecFN.sigWidth
   |vpiParamAssign:
@@ -1996,16 +2219,9 @@ design: (unnamed)
       |vpiDecompile:3
       |vpiSize:64
       |UINT:3
-      |vpiTypespec:
-      \_ref_typespec: (work@isSigNaNRecFN)
-        |vpiParent:
-        \_constant: , line:61:44, endln:61:45
-        |vpiFullName:work@isSigNaNRecFN
-        |vpiActual:
-        \_int_typespec: , line:61:23, endln:61:45
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@isSigNaNRecFN.expWidth), line:61:33, endln:61:41
+    \_parameter: (work@isSigNaNRecFN.expWidth), line:61:33, endln:61:45
   |vpiParamAssign:
   \_param_assign: , line:61:57, endln:61:69
     |vpiParent:
@@ -2017,85 +2233,61 @@ design: (unnamed)
       |vpiDecompile:3
       |vpiSize:64
       |UINT:3
-      |vpiTypespec:
-      \_ref_typespec: (work@isSigNaNRecFN)
-        |vpiParent:
-        \_constant: , line:61:68, endln:61:69
-        |vpiFullName:work@isSigNaNRecFN
-        |vpiActual:
-        \_int_typespec: , line:61:47, endln:61:69
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@isSigNaNRecFN.sigWidth), line:61:57, endln:61:65
-  |vpiDefName:work@isSigNaNRecFN
-  |vpiNet:
+    \_parameter: (work@isSigNaNRecFN.sigWidth), line:61:57, endln:61:69
+  |vpiTypedef:
+  \_logic_typespec: , line:65:8, endln:65:12
+    |vpiParent:
+    \_module_inst: work@isSigNaNRecFN (work@isSigNaNRecFN), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:60:1, endln:68:14
+  |vpiImportTypespec:
   \_logic_net: (work@isSigNaNRecFN.in), line:62:44, endln:62:46
     |vpiParent:
     \_module_inst: work@isSigNaNRecFN (work@isSigNaNRecFN), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:60:1, endln:68:14
     |vpiName:in
     |vpiFullName:work@isSigNaNRecFN.in
-  |vpiNet:
+  |vpiImportTypespec:
   \_logic_net: (work@isSigNaNRecFN.isSigNaN), line:62:55, endln:62:63
     |vpiParent:
     \_module_inst: work@isSigNaNRecFN (work@isSigNaNRecFN), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:60:1, endln:68:14
     |vpiName:isSigNaN
     |vpiFullName:work@isSigNaNRecFN.isSigNaN
-  |vpiNet:
+  |vpiImportTypespec:
+  \_logic_typespec: , line:65:8, endln:65:12
+  |vpiImportTypespec:
   \_logic_net: (work@isSigNaNRecFN.isNaN), line:65:13, endln:65:18
     |vpiParent:
     \_module_inst: work@isSigNaNRecFN (work@isSigNaNRecFN), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:60:1, endln:68:14
     |vpiTypespec:
-    \_ref_typespec: (work@isSigNaNRecFN.isNaN)
+    \_ref_typespec: (work@isSigNaNRecFN.isNaN.isNaN), line:65:8, endln:65:12
       |vpiParent:
       \_logic_net: (work@isSigNaNRecFN.isNaN), line:65:13, endln:65:18
-      |vpiFullName:work@isSigNaNRecFN.isNaN
+      |vpiName:isNaN
+      |vpiFullName:work@isSigNaNRecFN.isNaN.isNaN
       |vpiActual:
       \_logic_typespec: , line:65:8, endln:65:12
     |vpiName:isNaN
     |vpiFullName:work@isSigNaNRecFN.isNaN
     |vpiNetType:1
+  |vpiDefName:work@isSigNaNRecFN
+  |vpiNet:
+  \_logic_net: (work@isSigNaNRecFN.in), line:62:44, endln:62:46
+  |vpiNet:
+  \_logic_net: (work@isSigNaNRecFN.isSigNaN), line:62:55, endln:62:63
+  |vpiNet:
+  \_logic_net: (work@isSigNaNRecFN.isNaN), line:65:13, endln:65:18
   |vpiPort:
-  \_port: (in), line:62:44, endln:62:46
+  \_port: (in), line:62:12, endln:62:46
     |vpiParent:
     \_module_inst: work@isSigNaNRecFN (work@isSigNaNRecFN), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:60:1, endln:68:14
     |vpiName:in
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@isSigNaNRecFN.in.in), line:62:44, endln:62:46
-      |vpiParent:
-      \_port: (in), line:62:44, endln:62:46
-      |vpiName:in
-      |vpiFullName:work@isSigNaNRecFN.in.in
-      |vpiActual:
-      \_logic_net: (work@isSigNaNRecFN.in), line:62:44, endln:62:46
-    |vpiTypedef:
-    \_ref_typespec: (work@isSigNaNRecFN.in)
-      |vpiParent:
-      \_port: (in), line:62:44, endln:62:46
-      |vpiFullName:work@isSigNaNRecFN.in
-      |vpiActual:
-      \_logic_typespec: , line:62:18, endln:62:43
   |vpiPort:
-  \_port: (isSigNaN), line:62:55, endln:62:63
+  \_port: (isSigNaN), line:62:48, endln:62:63
     |vpiParent:
     \_module_inst: work@isSigNaNRecFN (work@isSigNaNRecFN), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:60:1, endln:68:14
     |vpiName:isSigNaN
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@isSigNaNRecFN.isSigNaN.isSigNaN), line:62:55, endln:62:63
-      |vpiParent:
-      \_port: (isSigNaN), line:62:55, endln:62:63
-      |vpiName:isSigNaN
-      |vpiFullName:work@isSigNaNRecFN.isSigNaN.isSigNaN
-      |vpiActual:
-      \_logic_net: (work@isSigNaNRecFN.isSigNaN), line:62:55, endln:62:63
-    |vpiTypedef:
-    \_ref_typespec: (work@isSigNaNRecFN.isSigNaN)
-      |vpiParent:
-      \_port: (isSigNaN), line:62:55, endln:62:63
-      |vpiFullName:work@isSigNaNRecFN.isSigNaN
-      |vpiActual:
-      \_logic_typespec: , line:62:55, endln:62:55
   |vpiContAssign:
   \_cont_assign: , line:67:15, endln:67:52
     |vpiParent:
@@ -2119,22 +2311,26 @@ design: (unnamed)
         \_operation: , line:67:26, endln:67:52
         |vpiOpType:3
         |vpiOperand:
-        \_bit_select: (work@isSigNaNRecFN.in), line:67:39, endln:67:51
+        \_bit_select: (work@isSigNaNRecFN.in), line:67:38, endln:67:52
           |vpiParent:
           \_operation: , line:67:35, endln:67:52
           |vpiName:in
           |vpiFullName:work@isSigNaNRecFN.in
+          |vpiActual:
+          \_logic_net: (work@isSigNaNRecFN.in), line:62:44, endln:62:46
           |vpiIndex:
           \_operation: , line:67:39, endln:67:51
             |vpiParent:
-            \_bit_select: (work@isSigNaNRecFN.in), line:67:39, endln:67:51
+            \_module_inst: work@isSigNaNRecFN (work@isSigNaNRecFN), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:60:1, endln:68:14
             |vpiOpType:11
             |vpiOperand:
-            \_ref_obj: (work@isSigNaNRecFN.in.sigWidth), line:67:39, endln:67:47
+            \_ref_obj: (work@isSigNaNRecFN.sigWidth), line:67:39, endln:67:47
               |vpiParent:
               \_operation: , line:67:39, endln:67:51
               |vpiName:sigWidth
-              |vpiFullName:work@isSigNaNRecFN.in.sigWidth
+              |vpiFullName:work@isSigNaNRecFN.sigWidth
+              |vpiActual:
+              \_parameter: (work@isSigNaNRecFN.sigWidth), line:61:57, endln:61:69
             |vpiOperand:
             \_constant: , line:67:50, endln:67:51
               |vpiParent:
@@ -2146,174 +2342,18 @@ design: (unnamed)
     |vpiLhs:
     \_ref_obj: (work@isSigNaNRecFN.isSigNaN), line:67:15, endln:67:23
       |vpiParent:
-      \_cont_assign: , line:67:15, endln:67:52
+      \_module_inst: work@isSigNaNRecFN (work@isSigNaNRecFN), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:60:1, endln:68:14
       |vpiName:isSigNaN
       |vpiFullName:work@isSigNaNRecFN.isSigNaN
       |vpiActual:
       \_logic_net: (work@isSigNaNRecFN.isSigNaN), line:62:55, endln:62:63
-\_weaklyReferenced:
-\_array_typespec: , line:5:15, endln:5:52
-  |vpiParent:
-  \_parameter: (work@bsg_wormhole_router.cord_markers_pos_p), line:5:19, endln:5:37
-  |vpiRange:
-  \_range: , line:5:37, endln:5:52
-  |vpiElemTypespec:
-  \_ref_typespec: (work@bsg_wormhole_router.cord_markers_pos_p)
-    |vpiParent:
-    \_array_typespec: , line:5:15, endln:5:52
-    |vpiFullName:work@bsg_wormhole_router.cord_markers_pos_p
-    |vpiActual:
-    \_int_typespec: , line:5:15, endln:5:18
-\_int_typespec: , line:5:15, endln:5:18
-  |vpiSigned:1
-\_operation: , line:6:25, endln:6:34
-  |vpiParent:
-  \_range: , line:6:24, endln:6:37
-  |vpiOpType:11
-  |vpiOperand:
-  \_ref_obj: (work@bsg_wormhole_router.routing_matrix_p.dirs_lp), line:6:25, endln:6:32
-    |vpiParent:
-    \_operation: , line:6:25, endln:6:34
-    |vpiName:dirs_lp
-    |vpiFullName:work@bsg_wormhole_router.routing_matrix_p.dirs_lp
-    |vpiActual:
-    \_logic_net: (work@bsg_wormhole_router.routing_matrix_p.dirs_lp), line:6:25, endln:6:32
-  |vpiOperand:
-  \_constant: , line:6:33, endln:6:34
-    |vpiParent:
-    \_operation: , line:6:25, endln:6:34
-    |vpiDecompile:1
-    |vpiSize:64
-    |UINT:1
-    |vpiConstType:9
-\_range: , line:6:24, endln:6:37
-  |vpiParent:
-  \_bit_typespec: , line:6:15, endln:6:50
-  |vpiLeftRange:
-  \_operation: , line:6:25, endln:6:34
-  |vpiRightRange:
-  \_constant: , line:6:35, endln:6:36
-    |vpiParent:
-    \_range: , line:6:24, endln:6:37
-    |vpiDecompile:0
-    |vpiSize:64
-    |UINT:0
-    |vpiConstType:9
-\_bit_typespec: , line:6:15, endln:6:50
-  |vpiParent:
-  \_parameter: (work@bsg_wormhole_router.routing_matrix_p), line:6:51, endln:6:67
-  |vpiRange:
-  \_range: , line:6:19, endln:6:24
-    |vpiParent:
-    \_bit_typespec: , line:6:15, endln:6:50
-    |vpiLeftRange:
-    \_constant: , line:6:20, endln:6:21
-      |vpiParent:
-      \_range: , line:6:19, endln:6:24
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:6:22, endln:6:23
-      |vpiParent:
-      \_range: , line:6:19, endln:6:24
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiRange:
-  \_range: , line:6:24, endln:6:37
-  |vpiRange:
-  \_range: , line:6:37, endln:6:50
-    |vpiParent:
-    \_bit_typespec: , line:6:15, endln:6:50
-    |vpiLeftRange:
-    \_operation: , line:6:38, endln:6:47
-      |vpiParent:
-      \_range: , line:6:37, endln:6:50
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@bsg_wormhole_router.routing_matrix_p.dirs_lp), line:6:38, endln:6:45
-        |vpiParent:
-        \_operation: , line:6:38, endln:6:47
-        |vpiName:dirs_lp
-        |vpiFullName:work@bsg_wormhole_router.routing_matrix_p.dirs_lp
-        |vpiActual:
-        \_logic_net: (work@bsg_wormhole_router.routing_matrix_p.dirs_lp), line:6:25, endln:6:32
-      |vpiOperand:
-      \_constant: , line:6:46, endln:6:47
-        |vpiParent:
-        \_operation: , line:6:38, endln:6:47
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:6:48, endln:6:49
-      |vpiParent:
-      \_range: , line:6:37, endln:6:50
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_int_typespec: , line:18:12, endln:18:34
-\_int_typespec: , line:18:36, endln:18:58
-\_int_typespec: , line:18:60, endln:18:81
-\_int_typespec: , line:22:1, endln:22:16
-\_int_typespec: , line:120:10, endln:120:32
-\_int_typespec: , line:120:34, endln:120:56
-\_int_typespec: , line:120:58, endln:120:79
-\_string_typespec: (data), line:102:35, endln:102:39
-  |vpiParent:
-  \_tagged_pattern: , line:102:51, endln:102:81
-  |vpiName:data
-\_string_typespec: (v), line:103:42, endln:103:43
-  |vpiParent:
-  \_tagged_pattern: , line:103:57, endln:103:84
-  |vpiName:v
-\_string_typespec: (ready_and_rev), line:104:38, endln:104:51
-  |vpiParent:
-  \_tagged_pattern: , line:104:53, endln:104:87
-  |vpiName:ready_and_rev
-\_int_typespec: , line:61:23, endln:61:45
-\_int_typespec: , line:61:47, endln:61:69
-\_logic_typespec: , line:96:19, endln:96:19
-\_logic_typespec: , line:9:10, endln:9:10
-\_logic_typespec: , line:10:10, endln:10:10
-\_logic_typespec: , line:62:18, endln:62:43
-  |vpiRange:
-  \_range: , line:62:18, endln:62:43
-    |vpiParent:
-    \_logic_typespec: , line:62:18, endln:62:43
-    |vpiLeftRange:
-    \_operation: , line:62:20, endln:62:39
-      |vpiParent:
-      \_range: , line:62:18, endln:62:43
-      |vpiOpType:24
-      |vpiOperand:
-      \_ref_obj: (expWidth), line:62:20, endln:62:28
-        |vpiParent:
-        \_operation: , line:62:20, endln:62:39
-        |vpiName:expWidth
-      |vpiOperand:
-      \_ref_obj: (sigWidth), line:62:31, endln:62:39
-        |vpiParent:
-        \_operation: , line:62:20, endln:62:39
-        |vpiName:sigWidth
-    |vpiRightRange:
-    \_constant: , line:62:41, endln:62:42
-      |vpiParent:
-      \_range: , line:62:18, endln:62:43
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:62:55, endln:62:55
-\_logic_typespec: , line:65:8, endln:65:12
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 3
 [WARNING] : 10
 [   NOTE] : 1
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/UhdmCoverage/dut.sv | ${SURELOG_DIR}/build/regression/UhdmCoverage/roundtrip/dut_000.sv | 97 | 155 |
+============================== End RoundTrip Results ==============================

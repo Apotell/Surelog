@@ -139,101 +139,287 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/BuiltInMethod/dut.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+array_typespec                                         1
+array_var                                              1
 byte_typespec                                          5
+byte_var                                               5
+constant                                               5
 design                                                 1
-logic_net                                              5
-module_inst                                            1
-ref_typespec                                           5
+hier_path                                              4
+method_func_call                                       4
+module_inst                                            2
+operation                                              1
+range                                                  1
+ref_obj                                                4
+ref_typespec                                           6
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BuiltInMethod/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/BuiltInMethod/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/BuiltInMethod/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/BuiltInMethod/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BuiltInMethod/dut.sv, line:1:1, endln:7:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiNet:
-  \_logic_net: (work@top.b), line:2:10, endln:2:11
+  |vpiName:work@top
+  |vpiVariables:
+  \_byte_var: (work@top), line:2:5, endln:2:26
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BuiltInMethod/dut.sv, line:1:1, endln:7:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.b)
+    \_ref_typespec: (work@top), line:2:5, endln:2:9
       |vpiParent:
-      \_logic_net: (work@top.b), line:2:10, endln:2:11
+      \_byte_var: (work@top), line:2:5, endln:2:26
+      |vpiFullName:work@top
+      |vpiActual:
+      \_byte_typespec: , line:2:5, endln:2:9
+    |vpiFullName:work@top
+    |vpiExpr:
+    \_operation: , line:2:16, endln:2:25
+      |vpiParent:
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BuiltInMethod/dut.sv, line:1:1, endln:7:10
+      |vpiOpType:33
+      |vpiOperand:
+      \_constant: , line:2:17, endln:2:18
+        |vpiParent:
+        \_operation: , line:2:16, endln:2:25
+        |vpiDecompile:1
+        |vpiSize:8
+        |UINT:1
+        |vpiConstType:9
+      |vpiOperand:
+      \_constant: , line:2:20, endln:2:21
+        |vpiParent:
+        \_operation: , line:2:16, endln:2:25
+        |vpiDecompile:1
+        |vpiSize:8
+        |UINT:1
+        |vpiConstType:9
+      |vpiOperand:
+      \_constant: , line:2:23, endln:2:24
+        |vpiParent:
+        \_operation: , line:2:16, endln:2:25
+        |vpiDecompile:1
+        |vpiSize:8
+        |UINT:1
+        |vpiConstType:9
+  |vpiVariables:
+  \_array_var: (work@top.b), line:2:10, endln:2:26
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BuiltInMethod/dut.sv, line:1:1, endln:7:10
+    |vpiSize:1
+    |vpiTypespec:
+    \_ref_typespec: (work@top.b), line:2:10, endln:2:11
+      |vpiParent:
+      \_array_var: (work@top.b), line:2:10, endln:2:26
       |vpiFullName:work@top.b
       |vpiActual:
-      \_byte_typespec: , line:2:5, endln:2:13
+      \_array_typespec: , line:2:10, endln:2:11
     |vpiName:b
     |vpiFullName:work@top.b
-  |vpiNet:
-  \_logic_net: (work@top.o), line:3:10, endln:3:11
+    |vpiSigned:1
+    |vpiRandType:1
+    |vpiVisibility:1
+    |vpiExpr:
+    \_operation: , line:2:16, endln:2:25
+    |vpiArrayType:2
+    |vpiReg:
+    \_byte_var: (work@top), line:2:5, endln:2:26
+  |vpiVariables:
+  \_byte_var: (work@top.o), line:3:10, endln:3:11
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BuiltInMethod/dut.sv, line:1:1, endln:7:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.o)
+    \_ref_typespec: (work@top.o), line:3:5, endln:3:9
       |vpiParent:
-      \_logic_net: (work@top.o), line:3:10, endln:3:11
+      \_byte_var: (work@top.o), line:3:10, endln:3:11
       |vpiFullName:work@top.o
       |vpiActual:
-      \_byte_typespec: , line:3:5, endln:3:19
+      \_byte_typespec: , line:3:5, endln:3:9
     |vpiName:o
     |vpiFullName:work@top.o
-  |vpiNet:
-  \_logic_net: (work@top.o), line:4:10, endln:4:11
+    |vpiSigned:1
+    |vpiVisibility:1
+    |vpiExpr:
+    \_hier_path: (b), line:3:14, endln:3:19
+      |vpiParent:
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BuiltInMethod/dut.sv, line:1:1, endln:7:10
+      |vpiActual:
+      \_ref_obj: (work@top.b), line:3:14, endln:3:15
+        |vpiParent:
+        \_hier_path: (b), line:3:14, endln:3:19
+        |vpiName:b
+        |vpiFullName:work@top.b
+        |vpiActual:
+        \_array_var: (work@top.b), line:2:10, endln:2:26
+      |vpiActual:
+      \_method_func_call: (and), line:3:16, endln:3:19
+        |vpiParent:
+        \_hier_path: (b), line:3:14, endln:3:19
+        |vpiName:and
+      |vpiName:b
+  |vpiVariables:
+  \_byte_var: (work@top.o), line:4:10, endln:4:11
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BuiltInMethod/dut.sv, line:1:1, endln:7:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.o)
+    \_ref_typespec: (work@top.o), line:4:5, endln:4:9
       |vpiParent:
-      \_logic_net: (work@top.o), line:4:10, endln:4:11
+      \_byte_var: (work@top.o), line:4:10, endln:4:11
       |vpiFullName:work@top.o
       |vpiActual:
-      \_byte_typespec: , line:4:5, endln:4:18
+      \_byte_typespec: , line:4:5, endln:4:9
     |vpiName:o
     |vpiFullName:work@top.o
-  |vpiNet:
-  \_logic_net: (work@top.o), line:5:10, endln:5:11
+    |vpiSigned:1
+    |vpiVisibility:1
+    |vpiExpr:
+    \_hier_path: (b), line:4:14, endln:4:18
+      |vpiParent:
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BuiltInMethod/dut.sv, line:1:1, endln:7:10
+      |vpiActual:
+      \_ref_obj: (work@top.b), line:4:14, endln:4:15
+        |vpiParent:
+        \_hier_path: (b), line:4:14, endln:4:18
+        |vpiName:b
+        |vpiFullName:work@top.b
+        |vpiActual:
+        \_array_var: (work@top.b), line:2:10, endln:2:26
+      |vpiActual:
+      \_method_func_call: (or), line:4:16, endln:4:18
+        |vpiParent:
+        \_hier_path: (b), line:4:14, endln:4:18
+        |vpiName:or
+      |vpiName:b
+  |vpiVariables:
+  \_byte_var: (work@top.o), line:5:10, endln:5:11
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BuiltInMethod/dut.sv, line:1:1, endln:7:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.o)
+    \_ref_typespec: (work@top.o), line:5:5, endln:5:9
       |vpiParent:
-      \_logic_net: (work@top.o), line:5:10, endln:5:11
+      \_byte_var: (work@top.o), line:5:10, endln:5:11
       |vpiFullName:work@top.o
       |vpiActual:
-      \_byte_typespec: , line:5:5, endln:5:19
+      \_byte_typespec: , line:5:5, endln:5:9
     |vpiName:o
     |vpiFullName:work@top.o
-  |vpiNet:
-  \_logic_net: (work@top.o), line:6:10, endln:6:11
+    |vpiSigned:1
+    |vpiVisibility:1
+    |vpiExpr:
+    \_hier_path: (b), line:5:14, endln:5:19
+      |vpiParent:
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BuiltInMethod/dut.sv, line:1:1, endln:7:10
+      |vpiActual:
+      \_ref_obj: (work@top.b), line:5:14, endln:5:15
+        |vpiParent:
+        \_hier_path: (b), line:5:14, endln:5:19
+        |vpiName:b
+        |vpiFullName:work@top.b
+        |vpiActual:
+        \_array_var: (work@top.b), line:2:10, endln:2:26
+      |vpiActual:
+      \_method_func_call: (xor), line:5:16, endln:5:19
+        |vpiParent:
+        \_hier_path: (b), line:5:14, endln:5:19
+        |vpiName:xor
+      |vpiName:b
+  |vpiVariables:
+  \_byte_var: (work@top.o), line:6:10, endln:6:11
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BuiltInMethod/dut.sv, line:1:1, endln:7:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.o)
+    \_ref_typespec: (work@top.o), line:6:5, endln:6:9
       |vpiParent:
-      \_logic_net: (work@top.o), line:6:10, endln:6:11
+      \_byte_var: (work@top.o), line:6:10, endln:6:11
       |vpiFullName:work@top.o
       |vpiActual:
-      \_byte_typespec: , line:6:5, endln:6:22
+      \_byte_typespec: , line:6:5, endln:6:9
     |vpiName:o
     |vpiFullName:work@top.o
-\_weaklyReferenced:
-\_byte_typespec: , line:2:5, endln:2:13
-  |vpiSigned:1
-\_byte_typespec: , line:3:5, endln:3:19
-  |vpiSigned:1
-\_byte_typespec: , line:4:5, endln:4:18
-  |vpiSigned:1
-\_byte_typespec: , line:5:5, endln:5:19
-  |vpiSigned:1
-\_byte_typespec: , line:6:5, endln:6:22
-  |vpiSigned:1
+    |vpiSigned:1
+    |vpiVisibility:1
+    |vpiExpr:
+    \_hier_path: (b), line:6:14, endln:6:22
+      |vpiParent:
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BuiltInMethod/dut.sv, line:1:1, endln:7:10
+      |vpiActual:
+      \_ref_obj: (work@top.b), line:6:14, endln:6:15
+        |vpiParent:
+        \_hier_path: (b), line:6:14, endln:6:22
+        |vpiName:b
+        |vpiFullName:work@top.b
+        |vpiActual:
+        \_array_var: (work@top.b), line:2:10, endln:2:26
+      |vpiActual:
+      \_method_func_call: (unique), line:6:16, endln:6:22
+        |vpiParent:
+        \_hier_path: (b), line:6:14, endln:6:22
+        |vpiName:unique
+      |vpiName:b
+  |vpiRegArray:
+  \_array_var: (work@top.b), line:2:10, endln:2:26
+  |vpiTypedef:
+  \_byte_typespec: , line:2:5, endln:2:9
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BuiltInMethod/dut.sv, line:1:1, endln:7:10
+    |vpiSigned:1
+  |vpiTypedef:
+  \_array_typespec: , line:2:10, endln:2:11
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BuiltInMethod/dut.sv, line:1:1, endln:7:10
+  |vpiTypedef:
+  \_byte_typespec: , line:3:5, endln:3:9
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BuiltInMethod/dut.sv, line:1:1, endln:7:10
+    |vpiSigned:1
+  |vpiTypedef:
+  \_byte_typespec: , line:4:5, endln:4:9
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BuiltInMethod/dut.sv, line:1:1, endln:7:10
+    |vpiSigned:1
+  |vpiTypedef:
+  \_byte_typespec: , line:5:5, endln:5:9
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BuiltInMethod/dut.sv, line:1:1, endln:7:10
+    |vpiSigned:1
+  |vpiTypedef:
+  \_byte_typespec: , line:6:5, endln:6:9
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BuiltInMethod/dut.sv, line:1:1, endln:7:10
+    |vpiSigned:1
+  |vpiImportTypespec:
+  \_byte_typespec: , line:2:5, endln:2:9
+  |vpiImportTypespec:
+  \_byte_var: (work@top), line:2:5, endln:2:26
+  |vpiImportTypespec:
+  \_array_var: (work@top.b), line:2:10, endln:2:26
+  |vpiImportTypespec:
+  \_array_typespec: , line:2:10, endln:2:11
+  |vpiImportTypespec:
+  \_byte_typespec: , line:3:5, endln:3:9
+  |vpiImportTypespec:
+  \_byte_var: (work@top.o), line:3:10, endln:3:11
+  |vpiImportTypespec:
+  \_byte_typespec: , line:4:5, endln:4:9
+  |vpiImportTypespec:
+  \_byte_var: (work@top.o), line:4:10, endln:4:11
+  |vpiImportTypespec:
+  \_byte_typespec: , line:5:5, endln:5:9
+  |vpiImportTypespec:
+  \_byte_var: (work@top.o), line:5:10, endln:5:11
+  |vpiImportTypespec:
+  \_byte_typespec: , line:6:5, endln:6:9
+  |vpiImportTypespec:
+  \_byte_var: (work@top.o), line:6:10, endln:6:11
+  |vpiDefName:work@top
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -241,6 +427,13 @@ design: (unnamed)
 [WARNING] : 1
 [   NOTE] : 0
 
+============================== Begin Linting Results ==============================
+[LINT]: ${SURELOG_DIR}/tests/BuiltInMethod/dut.sv:3:16: Non synthesizable construct, and
+[LINT]: ${SURELOG_DIR}/tests/BuiltInMethod/dut.sv:4:16: Non synthesizable construct, or
+[LINT]: ${SURELOG_DIR}/tests/BuiltInMethod/dut.sv:5:16: Non synthesizable construct, xor
+[LINT]: ${SURELOG_DIR}/tests/BuiltInMethod/dut.sv:6:16: Non synthesizable construct, unique
+============================== End Linting Results ==============================
+
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/BuiltInMethod/dut.sv | ${SURELOG_DIR}/build/regression/BuiltInMethod/roundtrip/dut_000.sv | 5 | 7 |
+[roundtrip]: ${SURELOG_DIR}/tests/BuiltInMethod/dut.sv | ${SURELOG_DIR}/build/regression/BuiltInMethod/roundtrip/dut_000.sv | 7 | 7 |
 ============================== End RoundTrip Results ==============================

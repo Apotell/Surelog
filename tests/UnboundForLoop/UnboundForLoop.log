@@ -145,140 +145,351 @@ AST_DEBUG_END
 always                                                 1
 assignment                                             3
 begin                                                  1
-constant                                               7
+constant                                              15
 design                                                 1
 event_control                                          1
 for_stmt                                               1
 integer_typespec                                       1
-logic_net                                              3
-logic_typespec                                         2
+integer_var                                            1
+logic_net                                              2
+logic_typespec                                         4
 module_inst                                            1
 operation                                              2
 port                                                   2
-range                                                  2
-ref_obj                                                7
-ref_typespec                                           3
+range                                                  6
+ref_obj                                                5
+ref_typespec                                           5
 ref_var                                                1
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnboundForLoop/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/UnboundForLoop/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/UnboundForLoop/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/UnboundForLoop/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@signed_shifter (work@signed_shifter), file:${SURELOG_DIR}/tests/UnboundForLoop/dut.sv, line:1:1, endln:8:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@signed_shifter
-  |vpiDefName:work@signed_shifter
-  |vpiNet:
+  |vpiName:work@signed_shifter
+  |vpiVariables:
+  \_integer_var: (work@signed_shifter.j), line:4:11, endln:4:12
+    |vpiParent:
+    \_module_inst: work@signed_shifter (work@signed_shifter), file:${SURELOG_DIR}/tests/UnboundForLoop/dut.sv, line:1:1, endln:8:10
+    |vpiTypespec:
+    \_ref_typespec: (work@signed_shifter.j), line:4:3, endln:4:10
+      |vpiParent:
+      \_integer_var: (work@signed_shifter.j), line:4:11, endln:4:12
+      |vpiFullName:work@signed_shifter.j
+      |vpiActual:
+      \_integer_typespec: , line:4:3, endln:4:10
+    |vpiName:j
+    |vpiFullName:work@signed_shifter.j
+    |vpiSigned:1
+    |vpiVisibility:1
+  |vpiTypedef:
+  \_logic_typespec: , line:2:9, endln:2:19
+    |vpiParent:
+    \_module_inst: work@signed_shifter (work@signed_shifter), file:${SURELOG_DIR}/tests/UnboundForLoop/dut.sv, line:1:1, endln:8:10
+    |vpiRange:
+    \_range: , line:2:14, endln:2:19
+      |vpiParent:
+      \_module_inst: work@signed_shifter (work@signed_shifter), file:${SURELOG_DIR}/tests/UnboundForLoop/dut.sv, line:1:1, endln:8:10
+      |vpiLeftRange:
+      \_constant: , line:2:15, endln:2:16
+        |vpiParent:
+        \_range: , line:2:14, endln:2:19
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:2:17, endln:2:18
+        |vpiParent:
+        \_range: , line:2:14, endln:2:19
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_logic_typespec: , line:3:10, endln:3:26
+    |vpiParent:
+    \_module_inst: work@signed_shifter (work@signed_shifter), file:${SURELOG_DIR}/tests/UnboundForLoop/dut.sv, line:1:1, endln:8:10
+    |vpiRange:
+    \_range: , line:3:21, endln:3:26
+      |vpiParent:
+      \_module_inst: work@signed_shifter (work@signed_shifter), file:${SURELOG_DIR}/tests/UnboundForLoop/dut.sv, line:1:1, endln:8:10
+      |vpiLeftRange:
+      \_constant: , line:3:22, endln:3:23
+        |vpiParent:
+        \_range: , line:3:21, endln:3:26
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:3:24, endln:3:25
+        |vpiParent:
+        \_range: , line:3:21, endln:3:26
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiSigned:1
+  |vpiTypedef:
+  \_integer_typespec: , line:4:3, endln:4:10
+    |vpiParent:
+    \_module_inst: work@signed_shifter (work@signed_shifter), file:${SURELOG_DIR}/tests/UnboundForLoop/dut.sv, line:1:1, endln:8:10
+    |vpiSigned:1
+  |vpiTypedef:
+  \_logic_typespec: , line:2:9, endln:2:19
+    |vpiParent:
+    \_module_inst: work@signed_shifter (work@signed_shifter), file:${SURELOG_DIR}/tests/UnboundForLoop/dut.sv, line:1:1, endln:8:10
+    |vpiRange:
+    \_range: , line:2:14, endln:2:19
+      |vpiParent:
+      \_port: (i), line:2:3, endln:2:21
+      |vpiLeftRange:
+      \_constant: , line:2:15, endln:2:16
+        |vpiParent:
+        \_range: , line:2:14, endln:2:19
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:2:17, endln:2:18
+        |vpiParent:
+        \_range: , line:2:14, endln:2:19
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_logic_typespec: , line:3:10, endln:3:26
+    |vpiParent:
+    \_module_inst: work@signed_shifter (work@signed_shifter), file:${SURELOG_DIR}/tests/UnboundForLoop/dut.sv, line:1:1, endln:8:10
+    |vpiRange:
+    \_range: , line:3:21, endln:3:26
+      |vpiParent:
+      \_port: (Q), line:3:3, endln:3:28
+      |vpiLeftRange:
+      \_constant: , line:3:22, endln:3:23
+        |vpiParent:
+        \_range: , line:3:21, endln:3:26
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:3:24, endln:3:25
+        |vpiParent:
+        \_range: , line:3:21, endln:3:26
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiSigned:1
+  |vpiImportTypespec:
+  \_logic_typespec: , line:2:9, endln:2:19
+  |vpiImportTypespec:
   \_logic_net: (work@signed_shifter.i), line:2:20, endln:2:21
     |vpiParent:
     \_module_inst: work@signed_shifter (work@signed_shifter), file:${SURELOG_DIR}/tests/UnboundForLoop/dut.sv, line:1:1, endln:8:10
+    |vpiTypespec:
+    \_ref_typespec: (work@signed_shifter.i.i), line:2:9, endln:2:13
+      |vpiParent:
+      \_logic_net: (work@signed_shifter.i), line:2:20, endln:2:21
+      |vpiName:i
+      |vpiFullName:work@signed_shifter.i.i
+      |vpiActual:
+      \_logic_typespec: , line:2:9, endln:2:19
     |vpiName:i
     |vpiFullName:work@signed_shifter.i
     |vpiNetType:1
-  |vpiNet:
+  |vpiImportTypespec:
+  \_logic_typespec: , line:3:10, endln:3:26
+  |vpiImportTypespec:
   \_logic_net: (work@signed_shifter.Q), line:3:27, endln:3:28
     |vpiParent:
     \_module_inst: work@signed_shifter (work@signed_shifter), file:${SURELOG_DIR}/tests/UnboundForLoop/dut.sv, line:1:1, endln:8:10
+    |vpiTypespec:
+    \_ref_typespec: (work@signed_shifter.Q.Q), line:3:10, endln:3:13
+      |vpiParent:
+      \_logic_net: (work@signed_shifter.Q), line:3:27, endln:3:28
+      |vpiName:Q
+      |vpiFullName:work@signed_shifter.Q.Q
+      |vpiActual:
+      \_logic_typespec: , line:3:10, endln:3:26
     |vpiName:Q
     |vpiFullName:work@signed_shifter.Q
     |vpiNetType:48
+    |vpiSigned:1
+  |vpiImportTypespec:
+  \_integer_typespec: , line:4:3, endln:4:10
+  |vpiImportTypespec:
+  \_integer_var: (work@signed_shifter.j), line:4:11, endln:4:12
+  |vpiImportTypespec:
+  \_logic_typespec: , line:2:9, endln:2:19
+  |vpiImportTypespec:
+  \_logic_typespec: , line:3:10, endln:3:26
+  |vpiDefName:work@signed_shifter
   |vpiNet:
-  \_logic_net: (work@signed_shifter.j), line:4:11, endln:4:12
-    |vpiParent:
-    \_module_inst: work@signed_shifter (work@signed_shifter), file:${SURELOG_DIR}/tests/UnboundForLoop/dut.sv, line:1:1, endln:8:10
-    |vpiName:j
-    |vpiFullName:work@signed_shifter.j
+  \_logic_net: (work@signed_shifter.i), line:2:20, endln:2:21
+  |vpiNet:
+  \_logic_net: (work@signed_shifter.Q), line:3:27, endln:3:28
   |vpiPort:
-  \_port: (i), line:2:20, endln:2:21
+  \_port: (i), line:2:3, endln:2:21
     |vpiParent:
     \_module_inst: work@signed_shifter (work@signed_shifter), file:${SURELOG_DIR}/tests/UnboundForLoop/dut.sv, line:1:1, endln:8:10
     |vpiName:i
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@signed_shifter.i.i), line:2:20, endln:2:21
-      |vpiParent:
-      \_port: (i), line:2:20, endln:2:21
-      |vpiName:i
-      |vpiFullName:work@signed_shifter.i.i
-      |vpiActual:
-      \_logic_net: (work@signed_shifter.i), line:2:20, endln:2:21
     |vpiTypedef:
-    \_ref_typespec: (work@signed_shifter.i)
+    \_ref_typespec: (work@signed_shifter.i), line:2:9, endln:2:13
       |vpiParent:
-      \_port: (i), line:2:20, endln:2:21
+      \_port: (i), line:2:3, endln:2:21
       |vpiFullName:work@signed_shifter.i
       |vpiActual:
       \_logic_typespec: , line:2:9, endln:2:19
   |vpiPort:
-  \_port: (Q), line:3:27, endln:3:28
+  \_port: (Q), line:3:3, endln:3:28
     |vpiParent:
     \_module_inst: work@signed_shifter (work@signed_shifter), file:${SURELOG_DIR}/tests/UnboundForLoop/dut.sv, line:1:1, endln:8:10
     |vpiName:Q
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@signed_shifter.Q.Q), line:3:27, endln:3:28
-      |vpiParent:
-      \_port: (Q), line:3:27, endln:3:28
-      |vpiName:Q
-      |vpiFullName:work@signed_shifter.Q.Q
-      |vpiActual:
-      \_logic_net: (work@signed_shifter.Q), line:3:27, endln:3:28
     |vpiTypedef:
-    \_ref_typespec: (work@signed_shifter.Q)
+    \_ref_typespec: (work@signed_shifter.Q), line:3:10, endln:3:13
       |vpiParent:
-      \_port: (Q), line:3:27, endln:3:28
+      \_port: (Q), line:3:3, endln:3:28
       |vpiFullName:work@signed_shifter.Q
       |vpiActual:
       \_logic_typespec: , line:3:10, endln:3:26
-\_weaklyReferenced:
-\_logic_typespec: , line:2:9, endln:2:19
-  |vpiRange:
-  \_range: , line:2:14, endln:2:19
+  |vpiProcess:
+  \_always: , line:5:3, endln:7:6
     |vpiParent:
-    \_logic_typespec: , line:2:9, endln:2:19
-    |vpiLeftRange:
-    \_constant: , line:2:15, endln:2:16
+    \_module_inst: work@signed_shifter (work@signed_shifter), file:${SURELOG_DIR}/tests/UnboundForLoop/dut.sv, line:1:1, endln:8:10
+    |vpiStmt:
+    \_event_control: , line:5:10, endln:7:6
       |vpiParent:
-      \_range: , line:2:14, endln:2:19
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:17, endln:2:18
-      |vpiParent:
-      \_range: , line:2:14, endln:2:19
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:3:10, endln:3:26
-  |vpiRange:
-  \_range: , line:3:21, endln:3:26
-    |vpiParent:
-    \_logic_typespec: , line:3:10, endln:3:26
-    |vpiLeftRange:
-    \_constant: , line:3:22, endln:3:23
-      |vpiParent:
-      \_range: , line:3:21, endln:3:26
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:24, endln:3:25
-      |vpiParent:
-      \_range: , line:3:21, endln:3:26
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiSigned:1
+      \_always: , line:5:3, endln:7:6
+      |vpiStmt:
+      \_begin: (work@signed_shifter), line:5:14, endln:7:6
+        |vpiParent:
+        \_event_control: , line:5:10, endln:7:6
+        |vpiFullName:work@signed_shifter
+        |vpiVariables:
+        \_ref_var: (work@signed_shifter.j), line:6:9, endln:6:10
+          |vpiParent:
+          \_begin: (work@signed_shifter), line:5:14, endln:7:6
+          |vpiName:j
+          |vpiFullName:work@signed_shifter.j
+        |vpiInternalScope:
+        \_for_stmt: (work@signed_shifter), line:6:5, endln:6:33
+          |vpiParent:
+          \_begin: (work@signed_shifter), line:5:14, endln:7:6
+          |vpiFullName:work@signed_shifter
+          |vpiForInitStmt:
+          \_assignment: , line:6:9, endln:6:12
+            |vpiParent:
+            \_for_stmt: (work@signed_shifter), line:6:5, endln:6:33
+            |vpiRhs:
+            \_constant: , line:6:11, endln:6:12
+              |vpiParent:
+              \_module_inst: work@signed_shifter (work@signed_shifter), file:${SURELOG_DIR}/tests/UnboundForLoop/dut.sv, line:1:1, endln:8:10
+              |vpiDecompile:0
+              |vpiSize:64
+              |UINT:0
+              |vpiConstType:9
+            |vpiLhs:
+            \_ref_var: (work@signed_shifter.j), line:6:9, endln:6:10
+          |vpiForIncStmt:
+          \_assignment: , line:6:17, endln:6:22
+            |vpiParent:
+            \_for_stmt: (work@signed_shifter), line:6:5, endln:6:33
+            |vpiOpType:82
+            |vpiBlocking:1
+            |vpiRhs:
+            \_operation: , line:6:19, endln:6:22
+              |vpiParent:
+              \_assignment: , line:6:17, endln:6:22
+              |vpiOpType:24
+              |vpiOperand:
+              \_ref_obj: (work@signed_shifter.j), line:6:19, endln:6:20
+                |vpiParent:
+                \_operation: , line:6:19, endln:6:22
+                |vpiName:j
+                |vpiFullName:work@signed_shifter.j
+                |vpiActual:
+                \_ref_var: (work@signed_shifter.j), line:6:9, endln:6:10
+              |vpiOperand:
+              \_constant: , line:6:21, endln:6:22
+                |vpiParent:
+                \_operation: , line:6:19, endln:6:22
+                |vpiDecompile:1
+                |vpiSize:64
+                |UINT:1
+                |vpiConstType:9
+            |vpiLhs:
+            \_ref_obj: (work@signed_shifter.j), line:6:17, endln:6:18
+              |vpiParent:
+              \_assignment: , line:6:17, endln:6:22
+              |vpiName:j
+              |vpiFullName:work@signed_shifter.j
+              |vpiActual:
+              \_ref_var: (work@signed_shifter.j), line:6:9, endln:6:10
+          |vpiCondition:
+          \_operation: , line:6:13, endln:6:16
+            |vpiParent:
+            \_for_stmt: (work@signed_shifter), line:6:5, endln:6:33
+            |vpiOpType:20
+            |vpiOperand:
+            \_ref_obj: (work@signed_shifter.j), line:6:13, endln:6:14
+              |vpiParent:
+              \_operation: , line:6:13, endln:6:16
+              |vpiName:j
+              |vpiFullName:work@signed_shifter.j
+              |vpiActual:
+              \_ref_var: (work@signed_shifter.j), line:6:9, endln:6:10
+            |vpiOperand:
+            \_ref_obj: (work@signed_shifter.i), line:6:15, endln:6:16
+              |vpiParent:
+              \_operation: , line:6:13, endln:6:16
+              |vpiName:i
+              |vpiFullName:work@signed_shifter.i
+              |vpiActual:
+              \_logic_net: (work@signed_shifter.i), line:2:20, endln:2:21
+          |vpiStmt:
+          \_assignment: , line:6:24, endln:6:32
+            |vpiParent:
+            \_for_stmt: (work@signed_shifter), line:6:5, endln:6:33
+            |vpiOpType:82
+            |vpiBlocking:1
+            |vpiRhs:
+            \_constant: , line:6:28, endln:6:32
+              |vpiParent:
+              \_assignment: , line:6:24, endln:6:32
+              |vpiDecompile:1'b1
+              |vpiSize:1
+              |BIN:1
+              |vpiConstType:3
+            |vpiLhs:
+            \_ref_obj: (work@signed_shifter.Q), line:6:24, endln:6:25
+              |vpiParent:
+              \_assignment: , line:6:24, endln:6:32
+              |vpiName:Q
+              |vpiFullName:work@signed_shifter.Q
+              |vpiActual:
+              \_logic_net: (work@signed_shifter.Q), line:3:27, endln:3:28
+        |vpiImportTypespec:
+        \_ref_var: (work@signed_shifter.j), line:6:9, endln:6:10
+        |vpiStmt:
+        \_for_stmt: (work@signed_shifter), line:6:5, endln:6:33
+    |vpiAlwaysType:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -287,5 +498,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/UnboundForLoop/dut.sv | ${SURELOG_DIR}/build/regression/UnboundForLoop/roundtrip/dut_000.sv | 6 | 8 |
+[roundtrip]: ${SURELOG_DIR}/tests/UnboundForLoop/dut.sv | ${SURELOG_DIR}/build/regression/UnboundForLoop/roundtrip/dut_000.sv | 7 | 8 |
 ============================== End RoundTrip Results ==============================

@@ -41,16 +41,15 @@
 [INF:CP0303] ${SURELOG_DIR}/tests/SplitFile/top1.v:36:3: Compile module "work@middle::nested".
 [INF:CP0304] ${SURELOG_DIR}/tests/SplitFile/top1.v:2:1: Compile interface "work@my_interface".
 [INF:CP0303] ${SURELOG_DIR}/tests/SplitFile/top1.v:15:1: Compile module "work@top".
-[INF:CP0302] Compile class "work@mailbox".
-[INF:CP0302] Compile class "work@process".
-[INF:CP0302] Compile class "work@semaphore".
+[INF:CP0302] Compile class "builtin::mailbox".
+[INF:CP0302] Compile class "builtin::process".
+[INF:CP0302] Compile class "builtin::semaphore".
 [INF:CP0302] ${SURELOG_DIR}/tests/SplitFile/top2.v:7:1: Compile class "toto1::blah1".
 [INF:CP0302] ${SURELOG_DIR}/tests/SplitFile/top2.v:21:1: Compile class "toto1::blah2".
 [INF:CP0302] ${SURELOG_DIR}/tests/SplitFile/top2.v:38:1: Compile class "toto1::blah3".
 [INF:CP0302] ${SURELOG_DIR}/tests/SplitFile/top2.v:59:1: Compile class "toto2::blah21".
 [INF:CP0302] ${SURELOG_DIR}/tests/SplitFile/top2.v:65:1: Compile class "toto2::blah22".
 [INF:CP0302] ${SURELOG_DIR}/tests/SplitFile/top2.v:121:1: Compile class "toto4::blah31".
-[INF:CP0302] ${SURELOG_DIR}/tests/SplitFile/top2.v:135:1: Compile class "toto4::blah31".
 [INF:CP0302] ${SURELOG_DIR}/tests/SplitFile/top2.v:167:1: Compile class "toto4::blah31_167".
 [INF:CP0302] ${SURELOG_DIR}/tests/SplitFile/top2.v:152:1: Compile class "toto4::blah32".
 [WRN:CP0334] ${SURELOG_DIR}/tests/SplitFile/top2.v:135:1: Colliding compilation unit name: "toto4::blah31",
@@ -58,11 +57,11 @@
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 class_defn                                            17
-class_typespec                                         4
-class_var                                              3
+class_typespec                                         1
+class_var                                              1
 clocking_block                                         1
 clocking_io_decl                                       2
-constant                                               6
+constant                                              12
 cont_assign                                            1
 design                                                 1
 enum_const                                             5
@@ -75,23 +74,27 @@ int_typespec                                           9
 int_var                                                4
 interface_inst                                         1
 io_decl                                               11
-logic_net                                             14
-logic_typespec                                         7
+logic_net                                             13
+logic_typespec                                         3
 logic_var                                              1
-module_inst                                           11
+module_inst                                           14
 operation                                              2
 package                                                5
 port                                                  12
 prim_term                                              1
+range                                                  3
 ref_module                                             3
-ref_obj                                               16
-ref_typespec                                          20
+ref_obj                                               12
+ref_typespec                                          14
+source_file                                            3
 task                                                   9
 === UHDM Object Stats End ===
+[ERR:IG0809] ${SURELOG_DIR}/tests/SplitFile/top.v:28:2: Object 43 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/tests/SplitFile/top.v:91:2: Object 48 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SplitFile/slpp_unit/surelog.uhdm ...
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 2
 [WARNING] : 23
 [   NOTE] : 0
 
@@ -103,16 +106,15 @@ task                                                   9
 [LINT]: ${SURELOG_DIR}/tests/SplitFile/top2.v:65:1: Non synthesizable construct, blah22
 [LINT]: ${SURELOG_DIR}/tests/SplitFile/top2.v:121:1: Non synthesizable construct, blah31
 [LINT]: ${SURELOG_DIR}/tests/SplitFile/top2.v:135:1: Non synthesizable construct, blah31
-[LINT]: ${SURELOG_DIR}/tests/SplitFile/top2.v:167:1: Non synthesizable construct, blah31_167
 [LINT]: ${SURELOG_DIR}/tests/SplitFile/top2.v:152:1: Non synthesizable construct, blah32
+[LINT]: ${SURELOG_DIR}/tests/SplitFile/top2.v:167:1: Non synthesizable construct, blah31_167
 [LINT]: ${SURELOG_DIR}/tests/SplitFile/top1.v:8:11: Non synthesizable construct, select
 [LINT]: ${SURELOG_DIR}/tests/SplitFile/top1.v:8:19: Non synthesizable construct, data
 [LINT]: ${SURELOG_DIR}/tests/SplitFile/top1.v:7:3: Non synthesizable construct, cb
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/SplitFile/builtin.sv | ${SURELOG_DIR}/build/regression/SplitFile/roundtrip/builtin_000.sv | 0 | 0 |
-[roundtrip]: ${SURELOG_DIR}/tests/SplitFile/top.v      | ${SURELOG_DIR}/build/regression/SplitFile/roundtrip/top_000.v      | 26 | 99 |
-[roundtrip]: ${SURELOG_DIR}/tests/SplitFile/top1.v     | ${SURELOG_DIR}/build/regression/SplitFile/roundtrip/top1_000.v     | 20 | 39 |
-[roundtrip]: ${SURELOG_DIR}/tests/SplitFile/top2.v     | ${SURELOG_DIR}/build/regression/SplitFile/roundtrip/top2_000.v     | 0 | 194 |
+[roundtrip]: ${SURELOG_DIR}/tests/SplitFile/top.v  | ${SURELOG_DIR}/build/regression/SplitFile/roundtrip/top_000.v  | 32 | 99 |
+[roundtrip]: ${SURELOG_DIR}/tests/SplitFile/top1.v | ${SURELOG_DIR}/build/regression/SplitFile/roundtrip/top1_000.v | 25 | 39 |
+[roundtrip]: ${SURELOG_DIR}/tests/SplitFile/top2.v | ${SURELOG_DIR}/build/regression/SplitFile/roundtrip/top2_000.v | 8 | 194 |
 ============================== End RoundTrip Results ==============================

@@ -48,20 +48,43 @@ constant                                               1
 design                                                 1
 initial                                                1
 module_inst                                            1
+preproc_macro_definition                               2
+preproc_macro_instance                                 1
+source_file                                            1
 sys_func_call                                          1
 === UHDM Object Stats End ===
+[ERR:IG0807] ${SURELOG_DIR}/tests/PreprocString/dut.sv:5:5: Child 9 is not entirely in parent's scope.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PreprocString/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PreprocString/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/PreprocString/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/PreprocString/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiPreprocMacroDefinitions:
+  \_preproc_macro_definition: (message), line:3:9, endln:3:16
+    |vpiParent:
+    \_source_file: , file:${SURELOG_DIR}/tests/PreprocString/dut.sv
+    |vpiName:message
+  |vpiPreprocMacroDefinitions:
+  \_preproc_macro_definition: (MAKE_MEM_PATH), line:5:9, endln:5:22
+    |vpiParent:
+    \_source_file: , file:${SURELOG_DIR}/tests/PreprocString/dut.sv
+    |vpiName:MAKE_MEM_PATH
+  |vpiPreprocMacroInstances:
+  \_preproc_macro_instance: , file:${SURELOG_DIR}/tests/PreprocString/dut.sv, line:7:14, endln:7:37
+    |vpiParent:
+    \_source_file: , file:${SURELOG_DIR}/tests/PreprocString/dut.sv
+    |vpiPreprocMacroDefinition:
+    \_preproc_macro_definition: (MAKE_MEM_PATH), line:5:9, endln:5:22
 |uhdmallModules:
 \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/PreprocString/dut.sv, line:1:1, endln:9:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@test
+  |vpiName:work@test
   |vpiDefName:work@test
   |vpiProcess:
   \_initial: , line:6:1, endln:8:8
@@ -88,10 +111,10 @@ design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 2
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PreprocString/dut.sv | ${SURELOG_DIR}/build/regression/PreprocString/roundtrip/dut_000.sv | 3 | 9 |
+[roundtrip]: ${SURELOG_DIR}/tests/PreprocString/dut.sv | ${SURELOG_DIR}/build/regression/PreprocString/roundtrip/dut_000.sv | 7 | 9 |
 ============================== End RoundTrip Results ==============================

@@ -171,68 +171,49 @@ constant                                               7
 design                                                 1
 if_else                                                1
 initial                                                1
-int_typespec                                           3
 module_inst                                            2
 operation                                              1
 param_assign                                           3
 parameter                                              3
 ref_module                                             1
 ref_obj                                                4
-ref_typespec                                           6
+source_file                                            1
 sys_func_call                                          3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EmptyAssign/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/EmptyAssign/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/EmptyAssign/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:1:1, endln:11:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@dut
+  |vpiName:work@dut
   |vpiParameter:
-  \_parameter: (work@dut.a), line:1:24, endln:1:25
+  \_parameter: (work@dut.a), line:1:24, endln:1:29
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:1:1, endln:11:10
     |UINT:1
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.a)
-      |vpiParent:
-      \_parameter: (work@dut.a), line:1:24, endln:1:25
-      |vpiFullName:work@dut.a
-      |vpiActual:
-      \_int_typespec: , line:1:14, endln:1:43
     |vpiName:a
     |vpiFullName:work@dut.a
   |vpiParameter:
-  \_parameter: (work@dut.b), line:1:31, endln:1:32
+  \_parameter: (work@dut.b), line:1:31, endln:1:36
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:1:1, endln:11:10
     |UINT:2
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.b)
-      |vpiParent:
-      \_parameter: (work@dut.b), line:1:31, endln:1:32
-      |vpiFullName:work@dut.b
-      |vpiActual:
-      \_int_typespec: , line:1:14, endln:1:43
     |vpiName:b
     |vpiFullName:work@dut.b
   |vpiParameter:
-  \_parameter: (work@dut.c), line:1:38, endln:1:39
+  \_parameter: (work@dut.c), line:1:38, endln:1:43
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:1:1, endln:11:10
     |UINT:3
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.c)
-      |vpiParent:
-      \_parameter: (work@dut.c), line:1:38, endln:1:39
-      |vpiFullName:work@dut.c
-      |vpiActual:
-      \_int_typespec: , line:1:14, endln:1:43
     |vpiName:c
     |vpiFullName:work@dut.c
   |vpiParamAssign:
@@ -246,16 +227,9 @@ design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
-      |vpiTypespec:
-      \_ref_typespec: (work@dut)
-        |vpiParent:
-        \_constant: , line:1:28, endln:1:29
-        |vpiFullName:work@dut
-        |vpiActual:
-        \_int_typespec: , line:1:14, endln:1:43
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@dut.a), line:1:24, endln:1:25
+    \_parameter: (work@dut.a), line:1:24, endln:1:29
   |vpiParamAssign:
   \_param_assign: , line:1:31, endln:1:36
     |vpiParent:
@@ -267,16 +241,9 @@ design: (unnamed)
       |vpiDecompile:2
       |vpiSize:64
       |UINT:2
-      |vpiTypespec:
-      \_ref_typespec: (work@dut)
-        |vpiParent:
-        \_constant: , line:1:35, endln:1:36
-        |vpiFullName:work@dut
-        |vpiActual:
-        \_int_typespec: , line:1:14, endln:1:43
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@dut.b), line:1:31, endln:1:32
+    \_parameter: (work@dut.b), line:1:31, endln:1:36
   |vpiParamAssign:
   \_param_assign: , line:1:38, endln:1:43
     |vpiParent:
@@ -288,16 +255,9 @@ design: (unnamed)
       |vpiDecompile:3
       |vpiSize:64
       |UINT:3
-      |vpiTypespec:
-      \_ref_typespec: (work@dut)
-        |vpiParent:
-        \_constant: , line:1:42, endln:1:43
-        |vpiFullName:work@dut
-        |vpiActual:
-        \_int_typespec: , line:1:14, endln:1:43
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@dut.c), line:1:38, endln:1:39
+    \_parameter: (work@dut.c), line:1:38, endln:1:43
   |vpiDefName:work@dut
   |vpiProcess:
   \_initial: , line:3:1, endln:9:4
@@ -326,18 +286,24 @@ design: (unnamed)
           \_sys_func_call: ($display), line:4:3, endln:4:35
           |vpiName:a
           |vpiFullName:work@dut.a
+          |vpiActual:
+          \_parameter: (work@dut.a), line:1:24, endln:1:29
         |vpiArgument:
         \_ref_obj: (work@dut.b), line:4:30, endln:4:31
           |vpiParent:
           \_sys_func_call: ($display), line:4:3, endln:4:35
           |vpiName:b
           |vpiFullName:work@dut.b
+          |vpiActual:
+          \_parameter: (work@dut.b), line:1:31, endln:1:36
         |vpiArgument:
         \_ref_obj: (work@dut.c), line:4:33, endln:4:34
           |vpiParent:
           \_sys_func_call: ($display), line:4:3, endln:4:35
           |vpiName:c
           |vpiFullName:work@dut.c
+          |vpiActual:
+          \_parameter: (work@dut.c), line:1:38, endln:1:43
         |vpiName:$display
       |vpiStmt:
       \_if_else: , line:5:3, endln:8:24
@@ -354,6 +320,8 @@ design: (unnamed)
             \_operation: , line:5:7, endln:5:14
             |vpiName:b
             |vpiFullName:work@dut.b
+            |vpiActual:
+            \_parameter: (work@dut.b), line:1:31, endln:1:36
           |vpiOperand:
           \_constant: , line:5:13, endln:5:14
             |vpiParent:
@@ -392,20 +360,16 @@ design: (unnamed)
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:13:1, endln:17:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
+  |vpiName:work@top
   |vpiDefName:work@top
   |vpiRefModule:
-  \_ref_module: work@dut (dut), line:15:27, endln:15:30
+  \_ref_module: work@dut (dut), line:15:1, endln:15:33
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:13:1, endln:17:10
     |vpiName:dut
     |vpiDefName:work@dut
     |vpiActual:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/EmptyAssign/dut.sv, line:1:1, endln:11:10
-\_weaklyReferenced:
-\_int_typespec: , line:1:14, endln:1:43
-\_int_typespec: , line:1:14, endln:1:43
-\_int_typespec: , line:1:14, endln:1:43
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -414,5 +378,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/EmptyAssign/dut.sv | ${SURELOG_DIR}/build/regression/EmptyAssign/roundtrip/dut_000.sv | 2 | 17 |
+[roundtrip]: ${SURELOG_DIR}/tests/EmptyAssign/dut.sv | ${SURELOG_DIR}/build/regression/EmptyAssign/roundtrip/dut_000.sv | 5 | 17 |
 ============================== End RoundTrip Results ==============================

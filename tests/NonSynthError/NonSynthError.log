@@ -76,23 +76,31 @@ int_var                                                1
 module_inst                                            1
 param_assign                                           1
 parameter                                              1
+source_file                                            1
 sys_func_call                                          2
 === UHDM Object Stats End ===
-[WRN:UH0720] ${SURELOG_DIR}/tests/NonSynthError/dut.sv:10:1: Non-synthesizable construct "A".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/NonSynthError/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/NonSynthError/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/NonSynthError/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/NonSynthError/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/NonSynthError/dut.sv, line:2:1, endln:13:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@dut
+  |vpiName:work@dut
+  |vpiVariables:
+  \_int_var: (work@dut), line:4:21, endln:4:24
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/NonSynthError/dut.sv, line:2:1, endln:13:10
+    |vpiFullName:work@dut
   |vpiParameter:
-  \_parameter: (work@dut.S), line:4:11, endln:4:12
+  \_parameter: (work@dut.S), line:4:11, endln:4:25
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/NonSynthError/dut.sv, line:2:1, endln:13:10
     |vpiName:S
@@ -102,24 +110,27 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/NonSynthError/dut.sv, line:2:1, endln:13:10
     |vpiRhs:
-    \_sys_func_call: ($size), line:4:15, endln:4:20
+    \_sys_func_call: ($size), line:4:21, endln:4:24
       |vpiParent:
       \_param_assign: , line:4:11, endln:4:25
       |vpiArgument:
       \_int_var: (work@dut), line:4:21, endln:4:24
-        |vpiParent:
-        \_sys_func_call: ($size), line:4:15, endln:4:20
-        |vpiFullName:work@dut
       |vpiName:$size
     |vpiLhs:
-    \_parameter: (work@dut.S), line:4:11, endln:4:12
-  |vpiDefName:work@dut
-  |vpiClassDefn:
+    \_parameter: (work@dut.S), line:4:11, endln:4:25
+  |vpiInternalScope:
   \_class_defn: (work@dut::A), file:${SURELOG_DIR}/tests/NonSynthError/dut.sv, line:10:1, endln:11:9
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/NonSynthError/dut.sv, line:2:1, endln:13:10
     |vpiName:A
     |vpiFullName:work@dut::A
+  |vpiImportTypespec:
+  \_class_defn: (work@dut::A), file:${SURELOG_DIR}/tests/NonSynthError/dut.sv, line:10:1, endln:11:9
+  |vpiImportTypespec:
+  \_int_var: (work@dut), line:4:21, endln:4:24
+  |vpiDefName:work@dut
+  |vpiClassDefn:
+  \_class_defn: (work@dut::A), file:${SURELOG_DIR}/tests/NonSynthError/dut.sv, line:10:1, endln:11:9
   |vpiProcess:
   \_initial: , line:6:1, endln:8:4
     |vpiParent:
@@ -129,11 +140,16 @@ design: (unnamed)
       |vpiParent:
       \_initial: , line:6:1, endln:8:4
       |vpiFullName:work@dut
+      |vpiStmt:
+      \_sys_func_call: ($display), line:7:3, endln:7:13
+        |vpiParent:
+        \_begin: (work@dut), line:6:9, endln:8:4
+        |vpiName:$display
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
-[WARNING] : 1
+[WARNING] : 0
 [   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
@@ -141,5 +157,5 @@ design: (unnamed)
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/NonSynthError/dut.sv | ${SURELOG_DIR}/build/regression/NonSynthError/roundtrip/dut_000.sv | 2 | 13 |
+[roundtrip]: ${SURELOG_DIR}/tests/NonSynthError/dut.sv | ${SURELOG_DIR}/build/regression/NonSynthError/roundtrip/dut_000.sv | 6 | 13 |
 ============================== End RoundTrip Results ==============================

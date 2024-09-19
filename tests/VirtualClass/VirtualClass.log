@@ -172,7 +172,7 @@ n<C> u<166> t<StringConst> p<167> s<165> l<13:5> el<13:6>
 n<> u<167> t<Class_type> p<168> c<166> l<13:5> el<13:15>
 n<> u<168> t<Class_scope> p<170> c<167> s<169> l<13:5> el<13:17>
 n<t_vector> u<169> t<StringConst> p<170> l<13:17> el<13:25>
-n<> u<170> t<Data_type> p<174> c<168> s<173> l<13:5> el<13:25>
+n<C#(t_t0,3)::t_vector> u<170> t<Data_type> p<174> c<168> s<173> l<13:5> el<13:25>
 n<v0> u<171> t<StringConst> p<172> l<13:26> el<13:28>
 n<> u<172> t<Variable_decl_assignment> p<173> c<171> l<13:26> el<13:28>
 n<> u<173> t<List_of_variable_decl_assignments> p<174> c<172> l<13:26> el<13:28>
@@ -204,7 +204,7 @@ n<C> u<198> t<StringConst> p<199> s<197> l<13:30> el<13:31>
 n<> u<199> t<Class_type> p<200> c<198> l<13:30> el<13:40>
 n<> u<200> t<Class_scope> p<202> c<199> s<201> l<13:30> el<13:42>
 n<t_array> u<201> t<StringConst> p<202> l<13:42> el<13:49>
-n<> u<202> t<Data_type> p<206> c<200> s<205> l<13:30> el<13:49>
+n<C#(t_t0,3)::t_array> u<202> t<Data_type> p<206> c<200> s<205> l<13:30> el<13:49>
 n<a0> u<203> t<StringConst> p<204> l<13:50> el<13:52>
 n<> u<204> t<Variable_decl_assignment> p<205> c<203> l<13:50> el<13:52>
 n<> u<205> t<List_of_variable_decl_assignments> p<206> c<204> l<13:50> el<13:52>
@@ -233,7 +233,7 @@ n<C> u<227> t<StringConst> p<228> s<226> l<14:5> el<14:6>
 n<> u<228> t<Class_type> p<229> c<227> l<14:5> el<14:14>
 n<> u<229> t<Class_scope> p<231> c<228> s<230> l<14:5> el<14:16>
 n<t_struct> u<230> t<StringConst> p<231> l<14:16> el<14:24>
-n<> u<231> t<Data_type> p<235> c<229> s<234> l<14:5> el<14:24>
+n<C#(bit,4)::t_struct> u<231> t<Data_type> p<235> c<229> s<234> l<14:5> el<14:24>
 n<s0> u<232> t<StringConst> p<233> l<14:25> el<14:27>
 n<> u<233> t<Variable_decl_assignment> p<234> c<232> l<14:25> el<14:27>
 n<> u<234> t<List_of_variable_decl_assignments> p<235> c<233> l<14:25> el<14:27>
@@ -259,19 +259,19 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 array_typespec                                         2
 class_defn                                             1
-constant                                              16
+constant                                              14
 design                                                 1
-int_typespec                                           1
-logic_net                                              3
-logic_typespec                                         4
+logic_typespec                                         3
+logic_var                                              3
 module_inst                                            1
-operation                                              6
+operation                                              5
 packed_array_typespec                                  2
 param_assign                                           1
 parameter                                              1
-range                                                  7
-ref_obj                                                5
-ref_typespec                                          10
+range                                                  6
+ref_obj                                                4
+ref_typespec                                           4
+source_file                                            1
 struct_typespec                                        1
 type_parameter                                         1
 typespec_member                                        2
@@ -279,47 +279,43 @@ unsupported_typespec                                   4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/VirtualClass/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/VirtualClass/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/VirtualClass/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/VirtualClass/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallClasses:
-\_class_defn: (work@C), file:${SURELOG_DIR}/tests/VirtualClass/dut.sv, line:1:9, endln:8:9
+\_class_defn: (work@C), file:${SURELOG_DIR}/tests/VirtualClass/dut.sv, line:1:1, endln:8:9
   |vpiParent:
   \_design: (unnamed)
   |vpiName:work@C
   |vpiParameter:
-  \_type_parameter: (work@C::T), line:1:33, endln:1:34
+  \_type_parameter: (work@C::T), line:1:28, endln:1:34
     |vpiParent:
-    \_class_defn: (work@C), file:${SURELOG_DIR}/tests/VirtualClass/dut.sv, line:1:9, endln:8:9
+    \_class_defn: (work@C), file:${SURELOG_DIR}/tests/VirtualClass/dut.sv, line:1:1, endln:8:9
     |vpiName:T
     |vpiFullName:work@C::T
     |vpiTypespec:
-    \_ref_typespec: (work@C::T)
+    \_ref_typespec: (work@C::T), line:1:37, endln:1:42
       |vpiParent:
-      \_type_parameter: (work@C::T), line:1:33, endln:1:34
+      \_type_parameter: (work@C::T), line:1:28, endln:1:34
       |vpiFullName:work@C::T
       |vpiActual:
       \_logic_typespec: , line:1:37, endln:1:42
   |vpiParameter:
-  \_parameter: (work@C::SIZE), line:1:54, endln:1:58
+  \_parameter: (work@C::SIZE), line:1:54, endln:1:62
     |vpiParent:
-    \_class_defn: (work@C), file:${SURELOG_DIR}/tests/VirtualClass/dut.sv, line:1:9, endln:8:9
+    \_class_defn: (work@C), file:${SURELOG_DIR}/tests/VirtualClass/dut.sv, line:1:1, endln:8:9
     |UINT:1
-    |vpiTypespec:
-    \_ref_typespec: (work@C::SIZE)
-      |vpiParent:
-      \_parameter: (work@C::SIZE), line:1:54, endln:1:58
-      |vpiFullName:work@C::SIZE
-      |vpiActual:
-      \_int_typespec: , line:1:44, endln:1:62
     |vpiName:SIZE
     |vpiFullName:work@C::SIZE
   |vpiParamAssign:
   \_param_assign: , line:1:54, endln:1:62
     |vpiParent:
-    \_class_defn: (work@C), file:${SURELOG_DIR}/tests/VirtualClass/dut.sv, line:1:9, endln:8:9
+    \_class_defn: (work@C), file:${SURELOG_DIR}/tests/VirtualClass/dut.sv, line:1:1, endln:8:9
     |vpiRhs:
     \_constant: , line:1:61, endln:1:62
       |vpiParent:
@@ -327,75 +323,37 @@ design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
-      |vpiTypespec:
-      \_ref_typespec: (work@C)
-        |vpiParent:
-        \_constant: , line:1:61, endln:1:62
-        |vpiFullName:work@C
-        |vpiActual:
-        \_int_typespec: , line:1:44, endln:1:62
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@C::SIZE), line:1:54, endln:1:58
+    \_parameter: (work@C::SIZE), line:1:54, endln:1:62
   |vpiTypedef:
-  \_struct_typespec: (t_struct), line:4:13, endln:7:6
+  \_type_parameter: (work@C::T), line:1:28, endln:1:34
+  |vpiTypedef:
+  \_logic_typespec: , line:1:37, endln:1:42
     |vpiParent:
-    \_class_defn: (work@C), file:${SURELOG_DIR}/tests/VirtualClass/dut.sv, line:1:9, endln:8:9
-    |vpiName:t_struct
-    |vpiTypespecMember:
-    \_typespec_member: (m0), line:5:18, endln:5:33
-      |vpiParent:
-      \_struct_typespec: (t_struct), line:4:13, endln:7:6
-      |vpiName:m0
-      |vpiTypespec:
-      \_ref_typespec: (work@C::t_struct::m0)
-        |vpiParent:
-        \_typespec_member: (m0), line:5:18, endln:5:33
-        |vpiFullName:work@C::t_struct::m0
-        |vpiActual:
-        \_array_typespec: 
-      |vpiRefFile:${SURELOG_DIR}/tests/VirtualClass/dut.sv
-      |vpiRefLineNo:5
-      |vpiRefColumnNo:9
-      |vpiRefEndLineNo:5
-      |vpiRefEndColumnNo:17
-    |vpiTypespecMember:
-    \_typespec_member: (m1), line:6:17, endln:6:19
-      |vpiParent:
-      \_struct_typespec: (t_struct), line:4:13, endln:7:6
-      |vpiName:m1
-      |vpiTypespec:
-      \_ref_typespec: (work@C::t_struct::m1)
-        |vpiParent:
-        \_typespec_member: (m1), line:6:17, endln:6:19
-        |vpiFullName:work@C::t_struct::m1
-        |vpiActual:
-        \_unsupported_typespec: (t_array), line:6:9, endln:6:16
-      |vpiRefFile:${SURELOG_DIR}/tests/VirtualClass/dut.sv
-      |vpiRefLineNo:6
-      |vpiRefColumnNo:9
-      |vpiRefEndLineNo:6
-      |vpiRefEndColumnNo:16
+    \_class_defn: (work@C), file:${SURELOG_DIR}/tests/VirtualClass/dut.sv, line:1:1, endln:8:9
   |vpiTypedef:
   \_logic_typespec: (t_vector), line:2:13, endln:2:29
     |vpiParent:
-    \_class_defn: (work@C), file:${SURELOG_DIR}/tests/VirtualClass/dut.sv, line:1:9, endln:8:9
+    \_class_defn: (work@C), file:${SURELOG_DIR}/tests/VirtualClass/dut.sv, line:1:1, endln:8:9
     |vpiName:t_vector
     |vpiRange:
     \_range: , line:2:19, endln:2:29
       |vpiParent:
-      \_logic_typespec: (t_vector), line:2:13, endln:2:29
+      \_class_defn: (work@C), file:${SURELOG_DIR}/tests/VirtualClass/dut.sv, line:1:1, endln:8:9
       |vpiLeftRange:
       \_operation: , line:2:20, endln:2:26
         |vpiParent:
         \_range: , line:2:19, endln:2:29
         |vpiOpType:11
         |vpiOperand:
-        \_ref_obj: (work@C::t_vector::SIZE), line:2:20, endln:2:24
+        \_ref_obj: (work@C::SIZE), line:2:20, endln:2:24
           |vpiParent:
           \_operation: , line:2:20, endln:2:26
           |vpiName:SIZE
-          |vpiFullName:work@C::t_vector::SIZE
+          |vpiFullName:work@C::SIZE
+          |vpiActual:
+          \_parameter: (work@C::SIZE), line:1:54, endln:1:62
         |vpiOperand:
         \_constant: , line:2:25, endln:2:26
           |vpiParent:
@@ -412,23 +370,153 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_struct_typespec: (t_struct), line:4:13, endln:7:6
+    |vpiParent:
+    \_class_defn: (work@C), file:${SURELOG_DIR}/tests/VirtualClass/dut.sv, line:1:1, endln:8:9
+    |vpiName:t_struct
+    |vpiTypespecMember:
+    \_typespec_member: (m0), line:5:9, endln:5:34
+      |vpiParent:
+      \_struct_typespec: (t_struct), line:4:13, endln:7:6
+      |vpiName:m0
+      |vpiTypespec:
+      \_ref_typespec: (work@C::t_struct::m0::t_vector), line:5:9, endln:5:17
+        |vpiParent:
+        \_typespec_member: (m0), line:5:9, endln:5:34
+        |vpiName:t_vector
+        |vpiFullName:work@C::t_struct::m0::t_vector
+        |vpiActual:
+        \_array_typespec: , line:5:21, endln:5:33
+    |vpiTypespecMember:
+    \_typespec_member: (m1), line:6:9, endln:6:20
+      |vpiParent:
+      \_struct_typespec: (t_struct), line:4:13, endln:7:6
+      |vpiName:m1
+      |vpiTypespec:
+      \_ref_typespec: (work@C::t_struct::m1::t_array), line:6:9, endln:6:16
+        |vpiParent:
+        \_typespec_member: (m1), line:6:9, endln:6:20
+        |vpiName:t_array
+        |vpiFullName:work@C::t_struct::m1::t_array
+        |vpiActual:
+        \_unsupported_typespec: (t_array), line:6:9, endln:6:16
+  |vpiTypedef:
+  \_array_typespec: , line:5:21, endln:5:33
+    |vpiParent:
+    \_class_defn: (work@C), file:${SURELOG_DIR}/tests/VirtualClass/dut.sv, line:1:1, endln:8:9
+    |vpiRange:
+    \_range: , line:5:21, endln:5:33
+      |vpiParent:
+      \_array_typespec: , line:5:21, endln:5:33
+      |vpiLeftRange:
+      \_operation: , line:5:22, endln:5:30
+        |vpiParent:
+        \_range: , line:5:21, endln:5:33
+        |vpiOpType:11
+        |vpiOperand:
+        \_operation: , line:5:22, endln:5:28
+          |vpiParent:
+          \_operation: , line:5:22, endln:5:30
+          |vpiOpType:25
+          |vpiOperand:
+          \_constant: , line:5:22, endln:5:23
+            |vpiParent:
+            \_operation: , line:5:22, endln:5:28
+            |vpiDecompile:2
+            |vpiSize:64
+            |UINT:2
+            |vpiConstType:9
+          |vpiOperand:
+          \_ref_obj: (work@C::SIZE), line:5:24, endln:5:28
+            |vpiParent:
+            \_operation: , line:5:22, endln:5:28
+            |vpiName:SIZE
+            |vpiFullName:work@C::SIZE
+            |vpiActual:
+            \_parameter: (work@C::SIZE), line:1:54, endln:1:62
+        |vpiOperand:
+        \_constant: , line:5:29, endln:5:30
+          |vpiParent:
+          \_operation: , line:5:22, endln:5:30
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:5:31, endln:5:32
+        |vpiParent:
+        \_range: , line:5:21, endln:5:33
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_ref_typespec: (work@C::t_struct::m0), line:5:9, endln:5:17
+      |vpiParent:
+      \_typespec_member: (m0), line:5:9, endln:5:34
+      |vpiFullName:work@C::t_struct::m0
+      |vpiActual:
+      \_logic_typespec: (t_vector), line:2:13, endln:2:29
+  |vpiTypedef:
+  \_unsupported_typespec: (t_array), line:6:9, endln:6:16
+    |vpiParent:
+    \_class_defn: (work@C), file:${SURELOG_DIR}/tests/VirtualClass/dut.sv, line:1:1, endln:8:9
+    |vpiName:t_array
+  |vpiImportTypespec:
+  \_type_parameter: (work@C::T), line:1:28, endln:1:34
+  |vpiImportTypespec:
+  \_logic_typespec: , line:1:37, endln:1:42
+  |vpiImportTypespec:
+  \_logic_typespec: (t_vector), line:2:13, endln:2:29
+  |vpiImportTypespec:
+  \_struct_typespec: (t_struct), line:4:13, endln:7:6
+  |vpiImportTypespec:
+  \_array_typespec: , line:5:21, endln:5:33
+  |vpiImportTypespec:
+  \_unsupported_typespec: (t_array), line:6:9, endln:6:16
   |vpiVirtual:1
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/VirtualClass/dut.sv, line:11:1, endln:15:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
+  |vpiName:work@top
+  |vpiVariables:
+  \_logic_var: (work@top.v0), line:13:26, endln:13:28
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/VirtualClass/dut.sv, line:11:1, endln:15:10
+    |vpiName:v0
+    |vpiFullName:work@top.v0
+    |vpiVisibility:1
+  |vpiVariables:
+  \_logic_var: (work@top.a0), line:13:50, endln:13:52
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/VirtualClass/dut.sv, line:11:1, endln:15:10
+    |vpiName:a0
+    |vpiFullName:work@top.a0
+    |vpiVisibility:1
+  |vpiVariables:
+  \_logic_var: (work@top.s0), line:14:25, endln:14:27
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/VirtualClass/dut.sv, line:11:1, endln:15:10
+    |vpiName:s0
+    |vpiFullName:work@top.s0
+    |vpiVisibility:1
+  |vpiReg:
+  \_logic_var: (work@top.v0), line:13:26, endln:13:28
+  |vpiReg:
+  \_logic_var: (work@top.a0), line:13:50, endln:13:52
+  |vpiReg:
+  \_logic_var: (work@top.s0), line:14:25, endln:14:27
   |vpiTypedef:
   \_logic_typespec: (t_t0), line:12:13, endln:12:24
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/VirtualClass/dut.sv, line:11:1, endln:15:10
     |vpiName:t_t0
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/VirtualClass/dut.sv, line:11:1, endln:15:10
     |vpiRange:
     \_range: , line:12:19, endln:12:24
       |vpiParent:
-      \_logic_typespec: (t_t0), line:12:13, endln:12:24
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/VirtualClass/dut.sv, line:11:1, endln:15:10
       |vpiLeftRange:
       \_constant: , line:12:20, endln:12:21
         |vpiParent:
@@ -445,145 +533,36 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_unsupported_typespec: (C::t_vector), line:13:5, endln:13:17
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/VirtualClass/dut.sv, line:11:1, endln:15:10
+    |vpiName:C::t_vector
+  |vpiTypedef:
+  \_unsupported_typespec: (C::t_array), line:13:30, endln:13:42
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/VirtualClass/dut.sv, line:11:1, endln:15:10
+    |vpiName:C::t_array
+  |vpiTypedef:
+  \_unsupported_typespec: (C::t_struct), line:14:5, endln:14:16
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/VirtualClass/dut.sv, line:11:1, endln:15:10
+    |vpiName:C::t_struct
+  |vpiImportTypespec:
+  \_logic_typespec: (t_t0), line:12:13, endln:12:24
+  |vpiImportTypespec:
+  \_unsupported_typespec: (C::t_vector), line:13:5, endln:13:17
+  |vpiImportTypespec:
+  \_logic_var: (work@top.v0), line:13:26, endln:13:28
+  |vpiImportTypespec:
+  \_unsupported_typespec: (C::t_array), line:13:30, endln:13:42
+  |vpiImportTypespec:
+  \_logic_var: (work@top.a0), line:13:50, endln:13:52
+  |vpiImportTypespec:
+  \_unsupported_typespec: (C::t_struct), line:14:5, endln:14:16
+  |vpiImportTypespec:
+  \_logic_var: (work@top.s0), line:14:25, endln:14:27
   |vpiDefName:work@top
-  |vpiNet:
-  \_logic_net: (work@top.v0), line:13:26, endln:13:28
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/VirtualClass/dut.sv, line:11:1, endln:15:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.v0)
-      |vpiParent:
-      \_logic_net: (work@top.v0), line:13:26, endln:13:28
-      |vpiFullName:work@top.v0
-      |vpiActual:
-      \_unsupported_typespec: (C::t_vector), line:13:5, endln:13:17
-    |vpiName:v0
-    |vpiFullName:work@top.v0
-  |vpiNet:
-  \_logic_net: (work@top.a0), line:13:50, endln:13:52
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/VirtualClass/dut.sv, line:11:1, endln:15:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.a0)
-      |vpiParent:
-      \_logic_net: (work@top.a0), line:13:50, endln:13:52
-      |vpiFullName:work@top.a0
-      |vpiActual:
-      \_unsupported_typespec: (C::t_array), line:13:30, endln:13:42
-    |vpiName:a0
-    |vpiFullName:work@top.a0
-  |vpiNet:
-  \_logic_net: (work@top.s0), line:14:25, endln:14:27
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/VirtualClass/dut.sv, line:11:1, endln:15:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.s0)
-      |vpiParent:
-      \_logic_net: (work@top.s0), line:14:25, endln:14:27
-      |vpiFullName:work@top.s0
-      |vpiActual:
-      \_unsupported_typespec: (C::t_struct), line:14:5, endln:14:16
-    |vpiName:s0
-    |vpiFullName:work@top.s0
-\_weaklyReferenced:
-\_logic_typespec: , line:1:37, endln:1:42
-  |vpiParent:
-  \_type_parameter: (work@C::T), line:1:33, endln:1:34
-\_int_typespec: , line:1:44, endln:1:62
-\_array_typespec: 
-  |vpiRange:
-  \_range: , line:5:21, endln:5:33
-    |vpiLeftRange:
-    \_operation: , line:5:22, endln:5:30
-      |vpiParent:
-      \_range: , line:5:21, endln:5:33
-      |vpiOpType:11
-      |vpiOperand:
-      \_operation: , line:5:22, endln:5:28
-        |vpiParent:
-        \_operation: , line:5:22, endln:5:30
-        |vpiOpType:25
-        |vpiOperand:
-        \_constant: , line:5:22, endln:5:23
-          |vpiParent:
-          \_operation: , line:5:22, endln:5:28
-          |vpiDecompile:2
-          |vpiSize:64
-          |UINT:2
-          |vpiConstType:9
-        |vpiOperand:
-        \_ref_obj: (SIZE), line:5:24, endln:5:28
-          |vpiParent:
-          \_operation: , line:5:22, endln:5:28
-          |vpiName:SIZE
-      |vpiOperand:
-      \_constant: , line:5:29, endln:5:30
-        |vpiParent:
-        \_operation: , line:5:22, endln:5:30
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:5:31, endln:5:32
-      |vpiParent:
-      \_range: , line:5:21, endln:5:33
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiElemTypespec:
-  \_ref_typespec: 
-    |vpiActual:
-    \_logic_typespec: (t_vector), line:2:13, endln:2:29
-\_logic_typespec: (t_vector), line:2:13, endln:2:29
-  |vpiName:t_vector
-  |vpiTypedefAlias:
-  \_ref_typespec: (t_vector)
-    |vpiParent:
-    \_logic_typespec: (t_vector), line:2:13, endln:2:29
-    |vpiFullName:t_vector
-    |vpiActual:
-    \_logic_typespec: (t_vector), line:2:13, endln:2:29
-  |vpiRange:
-  \_range: , line:2:19, endln:2:29
-    |vpiParent:
-    \_logic_typespec: (t_vector), line:2:13, endln:2:29
-    |vpiLeftRange:
-    \_operation: , line:2:20, endln:2:26
-      |vpiParent:
-      \_range: , line:2:19, endln:2:29
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (t_vector.SIZE), line:2:20, endln:2:24
-        |vpiParent:
-        \_operation: , line:2:20, endln:2:26
-        |vpiName:SIZE
-        |vpiFullName:t_vector.SIZE
-      |vpiOperand:
-      \_constant: , line:2:25, endln:2:26
-        |vpiParent:
-        \_operation: , line:2:20, endln:2:26
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:27, endln:2:28
-      |vpiParent:
-      \_range: , line:2:19, endln:2:29
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_unsupported_typespec: (t_array), line:6:9, endln:6:16
-  |vpiName:t_array
-\_unsupported_typespec: (C::t_vector), line:13:5, endln:13:17
-  |vpiName:C::t_vector
-\_unsupported_typespec: (C::t_array), line:13:30, endln:13:42
-  |vpiName:C::t_array
-\_unsupported_typespec: (C::t_struct), line:14:5, endln:14:16
-  |vpiName:C::t_struct
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -592,9 +571,9 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
-[LINT]: ${SURELOG_DIR}/tests/VirtualClass/dut.sv:1:9: Non synthesizable construct, work@C
+[LINT]: ${SURELOG_DIR}/tests/VirtualClass/dut.sv:1:1: Non synthesizable construct, work@C
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/VirtualClass/dut.sv | ${SURELOG_DIR}/build/regression/VirtualClass/roundtrip/dut_000.sv | 5 | 15 |
+[roundtrip]: ${SURELOG_DIR}/tests/VirtualClass/dut.sv | ${SURELOG_DIR}/build/regression/VirtualClass/roundtrip/dut_000.sv | 9 | 15 |
 ============================== End RoundTrip Results ==============================

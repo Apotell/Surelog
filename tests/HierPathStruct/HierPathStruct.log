@@ -123,17 +123,22 @@ module_inst                                            1
 package                                                1
 range                                                  1
 ref_obj                                                3
-ref_typespec                                           3
+ref_typespec                                           4
+source_file                                            1
 struct_typespec                                        2
 typespec_member                                        3
+unsupported_typespec                                   1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathStruct/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/HierPathStruct/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/HierPathStruct/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/HierPathStruct/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallPackages:
 \_package: gpio_reg_pkg (gpio_reg_pkg::), file:${SURELOG_DIR}/tests/HierPathStruct/dut.sv, line:1:1, endln:11:11
   |vpiParent:
@@ -141,91 +146,124 @@ design: (unnamed)
   |vpiName:gpio_reg_pkg
   |vpiFullName:gpio_reg_pkg::
   |vpiTypedef:
-  \_struct_typespec: (gpio_reg_pkg::gpio_hw2reg_t), line:7:11, endln:9:4
-    |vpiParent:
-    \_package: gpio_reg_pkg (gpio_reg_pkg::), file:${SURELOG_DIR}/tests/HierPathStruct/dut.sv, line:1:1, endln:11:11
-    |vpiName:gpio_reg_pkg::gpio_hw2reg_t
-    |vpiInstance:
-    \_package: gpio_reg_pkg (gpio_reg_pkg::), file:${SURELOG_DIR}/tests/HierPathStruct/dut.sv, line:1:1, endln:11:11
-    |vpiPacked:1
-    |vpiTypespecMember:
-    \_typespec_member: (data_in), line:8:20, endln:8:27
-      |vpiParent:
-      \_struct_typespec: (gpio_reg_pkg::gpio_hw2reg_t), line:7:11, endln:9:4
-      |vpiName:data_in
-      |vpiTypespec:
-      \_ref_typespec: (gpio_reg_pkg::gpio_reg_pkg::gpio_hw2reg_t::data_in)
-        |vpiParent:
-        \_typespec_member: (data_in), line:8:20, endln:8:27
-        |vpiFullName:gpio_reg_pkg::gpio_reg_pkg::gpio_hw2reg_t::data_in
-        |vpiActual:
-        \_struct_typespec: (gpio_reg_pkg::gpio_hw2reg_tt), line:2:11, endln:5:4
-      |vpiRefFile:${SURELOG_DIR}/tests/HierPathStruct/dut.sv
-      |vpiRefLineNo:8
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:8
-      |vpiRefEndColumnNo:19
-  |vpiTypedef:
   \_struct_typespec: (gpio_reg_pkg::gpio_hw2reg_tt), line:2:11, endln:5:4
     |vpiParent:
     \_package: gpio_reg_pkg (gpio_reg_pkg::), file:${SURELOG_DIR}/tests/HierPathStruct/dut.sv, line:1:1, endln:11:11
     |vpiName:gpio_reg_pkg::gpio_hw2reg_tt
-    |vpiInstance:
-    \_package: gpio_reg_pkg (gpio_reg_pkg::), file:${SURELOG_DIR}/tests/HierPathStruct/dut.sv, line:1:1, endln:11:11
     |vpiPacked:1
     |vpiTypespecMember:
-    \_typespec_member: (d), line:3:18, endln:3:19
+    \_typespec_member: (d), line:3:5, endln:3:20
       |vpiParent:
       \_struct_typespec: (gpio_reg_pkg::gpio_hw2reg_tt), line:2:11, endln:5:4
       |vpiName:d
       |vpiTypespec:
-      \_ref_typespec: (gpio_reg_pkg::gpio_reg_pkg::gpio_hw2reg_tt::d)
+      \_ref_typespec: (gpio_reg_pkg::gpio_hw2reg_tt::d), line:3:5, endln:3:17
         |vpiParent:
-        \_typespec_member: (d), line:3:18, endln:3:19
-        |vpiFullName:gpio_reg_pkg::gpio_reg_pkg::gpio_hw2reg_tt::d
+        \_typespec_member: (d), line:3:5, endln:3:20
+        |vpiFullName:gpio_reg_pkg::gpio_hw2reg_tt::d
         |vpiActual:
         \_logic_typespec: , line:3:5, endln:3:17
-      |vpiRefFile:${SURELOG_DIR}/tests/HierPathStruct/dut.sv
-      |vpiRefLineNo:3
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:3
-      |vpiRefEndColumnNo:17
     |vpiTypespecMember:
-    \_typespec_member: (de), line:4:18, endln:4:20
+    \_typespec_member: (de), line:4:5, endln:4:21
       |vpiParent:
       \_struct_typespec: (gpio_reg_pkg::gpio_hw2reg_tt), line:2:11, endln:5:4
       |vpiName:de
       |vpiTypespec:
-      \_ref_typespec: (gpio_reg_pkg::gpio_reg_pkg::gpio_hw2reg_tt::de)
+      \_ref_typespec: (gpio_reg_pkg::gpio_hw2reg_tt::de), line:4:5, endln:4:10
         |vpiParent:
-        \_typespec_member: (de), line:4:18, endln:4:20
-        |vpiFullName:gpio_reg_pkg::gpio_reg_pkg::gpio_hw2reg_tt::de
+        \_typespec_member: (de), line:4:5, endln:4:21
+        |vpiFullName:gpio_reg_pkg::gpio_hw2reg_tt::de
         |vpiActual:
         \_logic_typespec: , line:4:5, endln:4:10
-      |vpiRefFile:${SURELOG_DIR}/tests/HierPathStruct/dut.sv
-      |vpiRefLineNo:4
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:4
-      |vpiRefEndColumnNo:10
+  |vpiTypedef:
+  \_logic_typespec: , line:3:5, endln:3:17
+    |vpiParent:
+    \_package: gpio_reg_pkg (gpio_reg_pkg::), file:${SURELOG_DIR}/tests/HierPathStruct/dut.sv, line:1:1, endln:11:11
+    |vpiRange:
+    \_range: , line:3:11, endln:3:17
+      |vpiParent:
+      \_struct_typespec: (gpio_reg_pkg::gpio_hw2reg_tt), line:2:11, endln:5:4
+      |vpiLeftRange:
+      \_constant: , line:3:12, endln:3:14
+        |vpiParent:
+        \_range: , line:3:11, endln:3:17
+        |vpiDecompile:31
+        |vpiSize:64
+        |UINT:31
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:3:15, endln:3:16
+        |vpiParent:
+        \_range: , line:3:11, endln:3:17
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_logic_typespec: , line:4:5, endln:4:10
+    |vpiParent:
+    \_package: gpio_reg_pkg (gpio_reg_pkg::), file:${SURELOG_DIR}/tests/HierPathStruct/dut.sv, line:1:1, endln:11:11
+  |vpiTypedef:
+  \_struct_typespec: (gpio_reg_pkg::gpio_hw2reg_t), line:7:11, endln:9:4
+    |vpiParent:
+    \_package: gpio_reg_pkg (gpio_reg_pkg::), file:${SURELOG_DIR}/tests/HierPathStruct/dut.sv, line:1:1, endln:11:11
+    |vpiName:gpio_reg_pkg::gpio_hw2reg_t
+    |vpiPacked:1
+    |vpiTypespecMember:
+    \_typespec_member: (data_in), line:8:5, endln:8:28
+      |vpiParent:
+      \_struct_typespec: (gpio_reg_pkg::gpio_hw2reg_t), line:7:11, endln:9:4
+      |vpiName:data_in
+      |vpiTypespec:
+      \_ref_typespec: (gpio_reg_pkg::gpio_hw2reg_t::data_in::gpio_hw2reg_tt), line:8:5, endln:8:19
+        |vpiParent:
+        \_typespec_member: (data_in), line:8:5, endln:8:28
+        |vpiName:gpio_hw2reg_tt
+        |vpiFullName:gpio_reg_pkg::gpio_hw2reg_t::data_in::gpio_hw2reg_tt
+        |vpiActual:
+        \_struct_typespec: (gpio_reg_pkg::gpio_hw2reg_tt), line:2:11, endln:5:4
+  |vpiImportTypespec:
+  \_struct_typespec: (gpio_reg_pkg::gpio_hw2reg_tt), line:2:11, endln:5:4
+  |vpiImportTypespec:
+  \_logic_typespec: , line:3:5, endln:3:17
+  |vpiImportTypespec:
+  \_logic_typespec: , line:4:5, endln:4:10
+  |vpiImportTypespec:
+  \_struct_typespec: (gpio_reg_pkg::gpio_hw2reg_t), line:7:11, endln:9:4
   |vpiDefName:gpio_reg_pkg
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/HierPathStruct/dut.sv, line:13:1, endln:19:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@dut
-  |vpiTypedef:
-  \_struct_typespec: (gpio_reg_pkg::gpio_hw2reg_t), line:7:11, endln:9:4
-  |vpiTypedef:
-  \_struct_typespec: (gpio_reg_pkg::gpio_hw2reg_tt), line:2:11, endln:5:4
+  |vpiName:work@dut
   |vpiTypedef:
   \_import_typespec: (gpio_reg_pkg), line:15:8, endln:15:23
-  |vpiDefName:work@dut
-  |vpiNet:
+  |vpiTypedef:
+  \_unsupported_typespec: (gpio_hw2reg_t), line:16:1, endln:16:14
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/HierPathStruct/dut.sv, line:13:1, endln:19:10
+    |vpiName:gpio_hw2reg_t
+  |vpiImportTypespec:
+  \_import_typespec: (gpio_reg_pkg), line:15:8, endln:15:23
+  |vpiImportTypespec:
+  \_unsupported_typespec: (gpio_hw2reg_t), line:16:1, endln:16:14
+  |vpiImportTypespec:
   \_logic_net: (work@dut.hw2reg), line:16:15, endln:16:21
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/HierPathStruct/dut.sv, line:13:1, endln:19:10
+    |vpiTypespec:
+    \_ref_typespec: (work@dut.hw2reg.hw2reg), line:16:1, endln:16:14
+      |vpiParent:
+      \_logic_net: (work@dut.hw2reg), line:16:15, endln:16:21
+      |vpiName:hw2reg
+      |vpiFullName:work@dut.hw2reg.hw2reg
+      |vpiActual:
+      \_unsupported_typespec: (gpio_hw2reg_t), line:16:1, endln:16:14
     |vpiName:hw2reg
     |vpiFullName:work@dut.hw2reg
+  |vpiDefName:work@dut
+  |vpiNet:
+  \_logic_net: (work@dut.hw2reg), line:16:15, endln:16:21
   |vpiContAssign:
   \_cont_assign: , line:17:8, endln:17:32
     |vpiParent:
@@ -239,52 +277,31 @@ design: (unnamed)
       |BIN:1
       |vpiConstType:3
     |vpiLhs:
-    \_hier_path: (hw2reg.data_in.de), line:17:8, endln:17:25
+    \_hier_path: (hw2reg.data_in.de), line:17:14, endln:17:25
       |vpiParent:
-      \_cont_assign: , line:17:8, endln:17:32
+      \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/HierPathStruct/dut.sv, line:13:1, endln:19:10
       |vpiActual:
-      \_ref_obj: (hw2reg), line:17:15, endln:17:22
+      \_ref_obj: (hw2reg), line:17:14, endln:17:22
         |vpiParent:
-        \_hier_path: (hw2reg.data_in.de), line:17:8, endln:17:25
+        \_hier_path: (hw2reg.data_in.de), line:17:14, endln:17:25
         |vpiName:hw2reg
+        |vpiActual:
+        \_logic_net: (work@dut.hw2reg), line:16:15, endln:16:21
       |vpiActual:
       \_ref_obj: (data_in), line:17:15, endln:17:22
         |vpiParent:
-        \_hier_path: (hw2reg.data_in.de), line:17:8, endln:17:25
+        \_hier_path: (hw2reg.data_in.de), line:17:14, endln:17:25
         |vpiName:data_in
+        |vpiActual:
+        \_typespec_member: (data_in), line:8:5, endln:8:28
       |vpiActual:
       \_ref_obj: (de), line:17:23, endln:17:25
         |vpiParent:
-        \_hier_path: (hw2reg.data_in.de), line:17:8, endln:17:25
+        \_hier_path: (hw2reg.data_in.de), line:17:14, endln:17:25
         |vpiName:de
+        |vpiActual:
+        \_typespec_member: (de), line:4:5, endln:4:21
       |vpiName:hw2reg.data_in.de
-\_weaklyReferenced:
-\_logic_typespec: , line:3:5, endln:3:17
-  |vpiInstance:
-  \_package: gpio_reg_pkg (gpio_reg_pkg::), file:${SURELOG_DIR}/tests/HierPathStruct/dut.sv, line:1:1, endln:11:11
-  |vpiRange:
-  \_range: , line:3:11, endln:3:17
-    |vpiParent:
-    \_logic_typespec: , line:3:5, endln:3:17
-    |vpiLeftRange:
-    \_constant: , line:3:12, endln:3:14
-      |vpiParent:
-      \_range: , line:3:11, endln:3:17
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:15, endln:3:16
-      |vpiParent:
-      \_range: , line:3:11, endln:3:17
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:4:5, endln:4:10
-  |vpiInstance:
-  \_package: gpio_reg_pkg (gpio_reg_pkg::), file:${SURELOG_DIR}/tests/HierPathStruct/dut.sv, line:1:1, endln:11:11
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -293,5 +310,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/HierPathStruct/dut.sv | ${SURELOG_DIR}/build/regression/HierPathStruct/roundtrip/dut_000.sv | 2 | 19 |
+[roundtrip]: ${SURELOG_DIR}/tests/HierPathStruct/dut.sv | ${SURELOG_DIR}/build/regression/HierPathStruct/roundtrip/dut_000.sv | 4 | 19 |
 ============================== End RoundTrip Results ==============================

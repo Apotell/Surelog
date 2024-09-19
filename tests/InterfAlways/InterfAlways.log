@@ -90,34 +90,72 @@ assignment                                             1
 begin                                                  1
 constant                                               1
 design                                                 1
-int_typespec                                           1
+int_typespec                                           4
+int_var                                                2
 interface_inst                                         1
-logic_net                                              2
+logic_net                                              1
 module_inst                                            1
 port                                                   3
 ref_module                                             1
-ref_obj                                                4
-ref_typespec                                           1
+ref_obj                                                3
+ref_typespec                                           4
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfAlways/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/InterfAlways/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/InterfAlways/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/InterfAlways/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallInterfaces:
 \_interface_inst: work@sw_test_status_if (work@sw_test_status_if), file:${SURELOG_DIR}/tests/InterfAlways/dut.sv, line:1:1, endln:5:13
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@sw_test_status_if
-  |vpiDefName:work@sw_test_status_if
-  |vpiNet:
+  |vpiName:work@sw_test_status_if
+  |vpiVariables:
+  \_int_var: (work@sw_test_status_if.x), line:1:40, endln:1:41
+    |vpiParent:
+    \_interface_inst: work@sw_test_status_if (work@sw_test_status_if), file:${SURELOG_DIR}/tests/InterfAlways/dut.sv, line:1:1, endln:5:13
+    |vpiTypespec:
+    \_ref_typespec: (work@sw_test_status_if.x), line:1:36, endln:1:39
+      |vpiParent:
+      \_int_var: (work@sw_test_status_if.x), line:1:40, endln:1:41
+      |vpiFullName:work@sw_test_status_if.x
+      |vpiActual:
+      \_int_typespec: , line:1:36, endln:1:39
+    |vpiName:x
+    |vpiFullName:work@sw_test_status_if.x
+    |vpiSigned:1
+    |vpiVisibility:1
+  |vpiTypedef:
+  \_int_typespec: , line:1:36, endln:1:39
+    |vpiParent:
+    \_interface_inst: work@sw_test_status_if (work@sw_test_status_if), file:${SURELOG_DIR}/tests/InterfAlways/dut.sv, line:1:1, endln:5:13
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:1:36, endln:1:39
+    |vpiParent:
+    \_interface_inst: work@sw_test_status_if (work@sw_test_status_if), file:${SURELOG_DIR}/tests/InterfAlways/dut.sv, line:1:1, endln:5:13
+    |vpiSigned:1
+  |vpiImportTypespec:
+  \_int_typespec: , line:1:36, endln:1:39
+  |vpiImportTypespec:
+  \_int_var: (work@sw_test_status_if.x), line:1:40, endln:1:41
+  |vpiImportTypespec:
+  \_int_typespec: , line:1:36, endln:1:39
+  |vpiImportTypespec:
   \_logic_net: (work@sw_test_status_if.x), line:1:40, endln:1:41
     |vpiParent:
     \_interface_inst: work@sw_test_status_if (work@sw_test_status_if), file:${SURELOG_DIR}/tests/InterfAlways/dut.sv, line:1:1, endln:5:13
     |vpiName:x
     |vpiFullName:work@sw_test_status_if.x
+  |vpiDefName:work@sw_test_status_if
+  |vpiNet:
+  \_logic_net: (work@sw_test_status_if.x), line:1:40, endln:1:41
   |vpiProcess:
   \_always: , line:2:4, endln:4:7
     |vpiParent:
@@ -135,6 +173,8 @@ design: (unnamed)
         |vpiBlocking:1
         |vpiRhs:
         \_constant: , line:3:11, endln:3:13
+          |vpiParent:
+          \_assignment: , line:3:7, endln:3:13
           |vpiDecompile:10
           |vpiSize:64
           |UINT:10
@@ -145,9 +185,11 @@ design: (unnamed)
           \_assignment: , line:3:7, endln:3:13
           |vpiName:x
           |vpiFullName:work@sw_test_status_if.x
+          |vpiActual:
+          \_port: (x), line:1:29, endln:1:41
     |vpiAlwaysType:1
   |vpiPort:
-  \_port: (x), line:1:40, endln:1:41
+  \_port: (x), line:1:29, endln:1:41
     |vpiParent:
     \_interface_inst: work@sw_test_status_if (work@sw_test_status_if), file:${SURELOG_DIR}/tests/InterfAlways/dut.sv, line:1:1, endln:5:13
     |vpiName:x
@@ -155,46 +197,83 @@ design: (unnamed)
     |vpiLowConn:
     \_ref_obj: (work@sw_test_status_if.x.x), line:1:40, endln:1:41
       |vpiParent:
-      \_port: (x), line:1:40, endln:1:41
+      \_port: (x), line:1:29, endln:1:41
       |vpiName:x
       |vpiFullName:work@sw_test_status_if.x.x
       |vpiActual:
       \_logic_net: (work@sw_test_status_if.x), line:1:40, endln:1:41
+    |vpiTypedef:
+    \_ref_typespec: (work@sw_test_status_if.x), line:1:36, endln:1:39
+      |vpiParent:
+      \_port: (x), line:1:29, endln:1:41
+      |vpiFullName:work@sw_test_status_if.x
+      |vpiActual:
+      \_int_typespec: , line:1:36, endln:1:39
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InterfAlways/dut.sv, line:7:1, endln:9:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiNet:
-  \_logic_net: (work@top.o), line:7:23, endln:7:24
+  |vpiName:work@top
+  |vpiVariables:
+  \_int_var: (work@top.o), line:7:23, endln:7:24
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InterfAlways/dut.sv, line:7:1, endln:9:10
+    |vpiTypespec:
+    \_ref_typespec: (work@top.o), line:7:19, endln:7:22
+      |vpiParent:
+      \_int_var: (work@top.o), line:7:23, endln:7:24
+      |vpiFullName:work@top.o
+      |vpiActual:
+      \_int_typespec: , line:7:19, endln:7:22
     |vpiName:o
     |vpiFullName:work@top.o
+    |vpiSigned:1
+    |vpiVisibility:1
+  |vpiTypedef:
+  \_int_typespec: , line:7:19, endln:7:22
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InterfAlways/dut.sv, line:7:1, endln:9:10
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:7:19, endln:7:22
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InterfAlways/dut.sv, line:7:1, endln:9:10
+    |vpiSigned:1
+  |vpiImportTypespec:
+  \_int_typespec: , line:7:19, endln:7:22
+  |vpiImportTypespec:
+  \_int_var: (work@top.o), line:7:23, endln:7:24
+  |vpiImportTypespec:
+  \_int_typespec: , line:7:19, endln:7:22
+  |vpiDefName:work@top
   |vpiPort:
-  \_port: (o), line:7:23, endln:7:24
+  \_port: (x), line:8:27, endln:8:32
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InterfAlways/dut.sv, line:7:1, endln:9:10
+    |vpiName:x
+    |vpiHighConn:
+    \_ref_obj: (work@top.x.o), line:8:30, endln:8:31
+      |vpiParent:
+      \_port: (x), line:8:27, endln:8:32
+      |vpiName:o
+      |vpiFullName:work@top.x.o
+      |vpiActual:
+      \_int_var: (work@top.o), line:7:23, endln:7:24
+  |vpiPort:
+  \_port: (o), line:7:12, endln:7:24
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InterfAlways/dut.sv, line:7:1, endln:9:10
     |vpiName:o
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@top.o.o), line:7:23, endln:7:24
-      |vpiParent:
-      \_port: (o), line:7:23, endln:7:24
-      |vpiName:o
-      |vpiFullName:work@top.o.o
-      |vpiActual:
-      \_logic_net: (work@top.o), line:7:23, endln:7:24
     |vpiTypedef:
-    \_ref_typespec: (work@top.o)
+    \_ref_typespec: (work@top.o), line:7:19, endln:7:22
       |vpiParent:
-      \_port: (o), line:7:23, endln:7:24
+      \_port: (o), line:7:12, endln:7:24
       |vpiFullName:work@top.o
       |vpiActual:
       \_int_typespec: , line:7:19, endln:7:22
   |vpiRefModule:
-  \_ref_module: work@sw_test_status_if (u_sw), line:8:22, endln:8:26
+  \_ref_module: work@sw_test_status_if (u_sw), line:8:4, endln:8:34
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InterfAlways/dut.sv, line:7:1, endln:9:10
     |vpiName:u_sw
@@ -203,20 +282,6 @@ design: (unnamed)
     \_interface_inst: work@sw_test_status_if (work@sw_test_status_if), file:${SURELOG_DIR}/tests/InterfAlways/dut.sv, line:1:1, endln:5:13
     |vpiPort:
     \_port: (x), line:8:27, endln:8:32
-      |vpiParent:
-      \_ref_module: work@sw_test_status_if (u_sw), line:8:22, endln:8:26
-      |vpiName:x
-      |vpiHighConn:
-      \_ref_obj: (work@top.u_sw.x.o), line:8:30, endln:8:31
-        |vpiParent:
-        \_port: (x), line:8:27, endln:8:32
-        |vpiName:o
-        |vpiFullName:work@top.u_sw.x.o
-        |vpiActual:
-        \_logic_net: (work@top.o), line:7:23, endln:7:24
-\_weaklyReferenced:
-\_int_typespec: , line:7:19, endln:7:22
-  |vpiSigned:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -225,5 +290,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/InterfAlways/dut.sv | ${SURELOG_DIR}/build/regression/InterfAlways/roundtrip/dut_000.sv | 3 | 9 |
+[roundtrip]: ${SURELOG_DIR}/tests/InterfAlways/dut.sv | ${SURELOG_DIR}/build/regression/InterfAlways/roundtrip/dut_000.sv | 7 | 9 |
 ============================== End RoundTrip Results ==============================

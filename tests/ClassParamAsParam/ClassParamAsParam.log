@@ -9,24 +9,31 @@
 [INF:CP0302] ${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv:7:1: Compile class "work@resource_db".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-class_defn                                             5
-class_typespec                                         2
+class_defn                                             4
+class_typespec                                         1
+class_var                                              1
 design                                                 1
+extends                                                1
 int_typespec                                           4
-logic_net                                              1
-long_int_typespec                                      1
+logic_var                                              1
+method_func_call                                       1
 module_inst                                            1
-param_assign                                           2
-ref_typespec                                           7
-type_parameter                                         6
+ref_typespec                                           6
+source_file                                            1
+type_parameter                                         4
+unsupported_typespec                                   1
 === UHDM Object Stats End ===
+[ERR:IG0809] ${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv:14:38: Object 16 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassParamAsParam/slpp_unit/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ClassParamAsParam/slpp_unit/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ClassParamAsParam/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallClasses:
 \_class_defn: (work@config_db), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:14:1, endln:15:9
   |vpiParent:
@@ -39,30 +46,62 @@ design: (unnamed)
     |vpiName:T
     |vpiFullName:work@config_db::T
     |vpiTypespec:
-    \_ref_typespec: (work@config_db::T)
+    \_ref_typespec: (work@config_db::T), line:14:25, endln:14:28
       |vpiParent:
       \_type_parameter: (work@config_db::T), line:14:23, endln:14:24
       |vpiFullName:work@config_db::T
       |vpiActual:
       \_int_typespec: , line:14:25, endln:14:28
+  |vpiTypedef:
+  \_int_typespec: , line:14:25, endln:14:28
+    |vpiParent:
+    \_class_defn: (work@config_db), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:14:1, endln:15:9
+    |vpiSigned:1
+  |vpiTypedef:
+  \_type_parameter: (work@config_db::T), line:14:23, endln:14:24
+  |vpiImportTypespec:
+  \_int_typespec: , line:14:25, endln:14:28
+  |vpiImportTypespec:
+  \_type_parameter: (work@config_db::T), line:14:23, endln:14:24
+  |vpiExtends:
+  \_extends: , line:14:38, endln:14:49
+    |vpiParent:
+    \_class_defn: (work@config_db), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:14:1, endln:15:9
+    |vpiClassTypespec:
+    \_ref_typespec: (work@config_db::resource_db), line:14:38, endln:14:49
+      |vpiParent:
+      \_extends: , line:14:38, endln:14:49
+      |vpiName:resource_db
+      |vpiFullName:work@config_db::resource_db
 |uhdmallClasses:
-\_class_defn: (work@object), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:1:9, endln:2:9
+\_class_defn: (work@object), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:1:1, endln:2:9
   |vpiParent:
   \_design: (unnamed)
   |vpiName:work@object
   |vpiParameter:
   \_type_parameter: (work@object::T), line:1:28, endln:1:29
     |vpiParent:
-    \_class_defn: (work@object), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:1:9, endln:2:9
+    \_class_defn: (work@object), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:1:1, endln:2:9
     |vpiName:T
     |vpiFullName:work@object::T
     |vpiTypespec:
-    \_ref_typespec: (work@object::T)
+    \_ref_typespec: (work@object::T), line:1:30, endln:1:33
       |vpiParent:
       \_type_parameter: (work@object::T), line:1:28, endln:1:29
       |vpiFullName:work@object::T
       |vpiActual:
       \_int_typespec: , line:1:30, endln:1:33
+  |vpiTypedef:
+  \_int_typespec: , line:1:30, endln:1:33
+    |vpiParent:
+    \_class_defn: (work@object), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:1:1, endln:2:9
+    |vpiSigned:1
+  |vpiTypedef:
+  \_type_parameter: (work@object::T), line:1:28, endln:1:29
+  |vpiImportTypespec:
+  \_int_typespec: , line:1:30, endln:1:33
+  |vpiImportTypespec:
+  \_type_parameter: (work@object::T), line:1:28, endln:1:29
   |vpiVirtual:1
 |uhdmallClasses:
 \_class_defn: (work@resource), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:4:1, endln:5:9
@@ -76,17 +115,38 @@ design: (unnamed)
     |vpiName:T
     |vpiFullName:work@resource::T
     |vpiTypespec:
-    \_ref_typespec: (work@resource::T)
+    \_ref_typespec: (work@resource::T), line:4:25, endln:4:28
       |vpiParent:
       \_type_parameter: (work@resource::T), line:4:23, endln:4:24
       |vpiFullName:work@resource::T
       |vpiActual:
       \_int_typespec: , line:4:25, endln:4:28
+  |vpiTypedef:
+  \_int_typespec: , line:4:25, endln:4:28
+    |vpiParent:
+    \_class_defn: (work@resource), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:4:1, endln:5:9
+    |vpiSigned:1
+  |vpiTypedef:
+  \_type_parameter: (work@resource::T), line:4:23, endln:4:24
+  |vpiImportTypespec:
+  \_int_typespec: , line:4:25, endln:4:28
+  |vpiImportTypespec:
+  \_type_parameter: (work@resource::T), line:4:23, endln:4:24
 |uhdmallClasses:
 \_class_defn: (work@resource_db), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:7:1, endln:12:9
   |vpiParent:
   \_design: (unnamed)
   |vpiName:work@resource_db
+  |vpiVariables:
+  \_logic_var: (work@resource_db::rsrc), line:10:9, endln:10:13
+    |vpiParent:
+    \_class_defn: (work@resource_db), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:7:1, endln:12:9
+    |vpiName:rsrc
+    |vpiFullName:work@resource_db::rsrc
+    |vpiAutomatic:1
+    |vpiVisibility:1
+  |vpiReg:
+  \_logic_var: (work@resource_db::rsrc), line:10:9, endln:10:13
   |vpiParameter:
   \_type_parameter: (work@resource_db::T), line:7:26, endln:7:27
     |vpiParent:
@@ -94,118 +154,87 @@ design: (unnamed)
     |vpiName:T
     |vpiFullName:work@resource_db::T
     |vpiTypespec:
-    \_ref_typespec: (work@resource_db::T)
+    \_ref_typespec: (work@resource_db::T), line:7:28, endln:7:31
       |vpiParent:
       \_type_parameter: (work@resource_db::T), line:7:26, endln:7:27
       |vpiFullName:work@resource_db::T
       |vpiActual:
       \_int_typespec: , line:7:28, endln:7:31
+  |vpiTypedef:
+  \_int_typespec: , line:7:28, endln:7:31
+    |vpiParent:
+    \_class_defn: (work@resource_db), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:7:1, endln:12:9
+    |vpiSigned:1
+  |vpiTypedef:
+  \_type_parameter: (work@resource_db::T), line:7:26, endln:7:27
+  |vpiTypedef:
+  \_unsupported_typespec: (rsrc_t), line:10:2, endln:10:8
+    |vpiParent:
+    \_class_defn: (work@resource_db), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:7:1, endln:12:9
+    |vpiName:rsrc_t
+  |vpiImportTypespec:
+  \_int_typespec: , line:7:28, endln:7:31
+  |vpiImportTypespec:
+  \_type_parameter: (work@resource_db::T), line:7:26, endln:7:27
+  |vpiImportTypespec:
+  \_unsupported_typespec: (rsrc_t), line:10:2, endln:10:8
+  |vpiImportTypespec:
+  \_logic_var: (work@resource_db::rsrc), line:10:9, endln:10:13
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:17:1, endln:19:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiNet:
-  \_logic_net: (work@top.misc2), line:18:32, endln:18:37
+  |vpiName:work@top
+  |vpiVariables:
+  \_class_var: (work@top.misc2), line:18:32, endln:18:37
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:17:1, endln:19:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.misc2)
+    \_ref_typespec: (work@top.misc2.config_db), line:18:3, endln:18:31
       |vpiParent:
-      \_logic_net: (work@top.misc2), line:18:32, endln:18:37
-      |vpiFullName:work@top.misc2
+      \_class_var: (work@top.misc2), line:18:32, endln:18:37
+      |vpiName:config_db
+      |vpiFullName:work@top.misc2.config_db
       |vpiActual:
-      \_class_typespec: (config_db), line:18:3, endln:18:43
+      \_class_typespec: (config_db), line:18:3, endln:18:12
     |vpiName:misc2
     |vpiFullName:work@top.misc2
-\_weaklyReferenced:
-\_int_typespec: , line:14:25, endln:14:28
-  |vpiParent:
-  \_type_parameter: (work@config_db::T), line:14:23, endln:14:24
-  |vpiSigned:1
-\_int_typespec: , line:1:30, endln:1:33
-  |vpiParent:
-  \_type_parameter: (work@object::T), line:1:28, endln:1:29
-  |vpiSigned:1
-\_int_typespec: , line:4:25, endln:4:28
-  |vpiParent:
-  \_type_parameter: (work@resource::T), line:4:23, endln:4:24
-  |vpiSigned:1
-\_int_typespec: , line:7:28, endln:7:31
-  |vpiParent:
-  \_type_parameter: (work@resource_db::T), line:7:26, endln:7:27
-  |vpiSigned:1
-\_class_typespec: (config_db), line:18:3, endln:18:43
-  |vpiName:config_db
-  |vpiParameter:
-  \_type_parameter: (config_db.T), line:14:23, endln:14:24
-    |vpiParent:
-    \_class_typespec: (config_db), line:18:3, endln:18:43
-    |vpiName:T
-    |vpiFullName:config_db.T
-    |vpiTypespec:
-    \_ref_typespec: (config_db.T)
+    |vpiVisibility:1
+    |vpiExpr:
+    \_method_func_call: (new), line:18:40, endln:18:43
       |vpiParent:
-      \_type_parameter: (config_db.T), line:14:23, endln:14:24
-      |vpiFullName:config_db.T
-      |vpiActual:
-      \_class_typespec: (object), line:18:14, endln:18:20
-  |vpiParamAssign:
-  \_param_assign: , line:14:23, endln:14:24
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:17:1, endln:19:10
+      |vpiName:new
+  |vpiTypedef:
+  \_class_typespec: (config_db), line:18:3, endln:18:12
     |vpiParent:
-    \_class_typespec: (config_db), line:18:3, endln:18:43
-    |vpiRhs:
-    \_type_parameter: (config_db.T), line:14:23, endln:14:24
-    |vpiLhs:
-    \_type_parameter: (work@config_db::T), line:14:23, endln:14:24
-  |vpiClassDefn:
-  \_class_defn: (work@config_db), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:14:1, endln:15:9
-\_class_typespec: (object), line:18:14, endln:18:20
-  |vpiParent:
-  \_type_parameter: (config_db.T), line:14:23, endln:14:24
-  |vpiName:object
-  |vpiParameter:
-  \_type_parameter: (config_db.T.object.T), line:1:28, endln:1:29
-    |vpiParent:
-    \_class_typespec: (object), line:18:14, endln:18:20
-    |vpiName:T
-    |vpiFullName:config_db.T.object.T
-    |vpiTypespec:
-    \_ref_typespec: (config_db.T.object.T)
-      |vpiParent:
-      \_type_parameter: (config_db.T.object.T), line:1:28, endln:1:29
-      |vpiFullName:config_db.T.object.T
-      |vpiActual:
-      \_long_int_typespec: , line:18:22, endln:18:29
-  |vpiParamAssign:
-  \_param_assign: , line:1:28, endln:1:29
-    |vpiParent:
-    \_class_typespec: (object), line:18:14, endln:18:20
-    |vpiRhs:
-    \_type_parameter: (config_db.T.object.T), line:1:28, endln:1:29
-    |vpiLhs:
-    \_type_parameter: (work@object::T), line:1:28, endln:1:29
-  |vpiClassDefn:
-  \_class_defn: (work@object), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:1:9, endln:2:9
-\_long_int_typespec: , line:18:22, endln:18:29
-  |vpiParent:
-  \_type_parameter: (config_db.T.object.T), line:1:28, endln:1:29
-  |vpiSigned:1
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:17:1, endln:19:10
+    |vpiName:config_db
+    |vpiClassDefn:
+    \_class_defn: (work@config_db), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:14:1, endln:15:9
+  |vpiImportTypespec:
+  \_class_typespec: (config_db), line:18:3, endln:18:12
+  |vpiImportTypespec:
+  \_class_var: (work@top.misc2), line:18:32, endln:18:37
+  |vpiDefName:work@top
+  |vpiSysTaskCall:
+  \_method_func_call: (new), line:18:40, endln:18:43
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 1
 [   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
-[LINT]: ${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv:14:1: Non synthesizable construct, work@config_db
-[LINT]: ${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv:1:9: Non synthesizable construct, work@object
+[LINT]: ${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv:1:1: Non synthesizable construct, work@object
 [LINT]: ${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv:4:1: Non synthesizable construct, work@resource
 [LINT]: ${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv:7:1: Non synthesizable construct, work@resource_db
+[LINT]: ${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv:14:38: Non synthesizable construct,
+[LINT]: ${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv:14:1: Non synthesizable construct, work@config_db
+[LINT]: ${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv:18:40: Non synthesizable construct, new
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv | ${SURELOG_DIR}/build/regression/ClassParamAsParam/roundtrip/dut_000.sv | 7 | 19 |
+[roundtrip]: ${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv | ${SURELOG_DIR}/build/regression/ClassParamAsParam/roundtrip/dut_000.sv | 9 | 19 |
 ============================== End RoundTrip Results ==============================

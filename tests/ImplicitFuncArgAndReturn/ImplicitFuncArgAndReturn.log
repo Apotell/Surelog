@@ -126,44 +126,40 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             1
-constant                                               4
+constant                                               2
 design                                                 1
 function                                               1
-int_typespec                                           2
+int_typespec                                           1
 io_decl                                                1
-logic_var                                              2
+logic_var                                              1
 module_inst                                            2
 param_assign                                           2
 parameter                                              2
-range                                                  1
 ref_module                                             1
 ref_obj                                                2
-ref_typespec                                           4
+ref_typespec                                           1
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ImplicitFuncArgAndReturn/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ImplicitFuncArgAndReturn/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ImplicitFuncArgAndReturn/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/ImplicitFuncArgAndReturn/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@ScratchPad (work@ScratchPad), file:${SURELOG_DIR}/tests/ImplicitFuncArgAndReturn/dut.sv, line:9:1, endln:24:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@ScratchPad
+  |vpiName:work@ScratchPad
   |vpiParameter:
-  \_parameter: (work@ScratchPad.M00_SECURE), line:12:14, endln:12:24
+  \_parameter: (work@ScratchPad.M00_SECURE), line:12:14, endln:12:31
     |vpiParent:
     \_module_inst: work@ScratchPad (work@ScratchPad), file:${SURELOG_DIR}/tests/ImplicitFuncArgAndReturn/dut.sv, line:9:1, endln:24:10
     |BIN:0
-    |vpiTypespec:
-    \_ref_typespec: (work@ScratchPad.M00_SECURE)
-      |vpiParent:
-      \_parameter: (work@ScratchPad.M00_SECURE), line:12:14, endln:12:24
-      |vpiFullName:work@ScratchPad.M00_SECURE
-      |vpiActual:
-      \_int_typespec: , line:12:4, endln:12:31
     |vpiName:M00_SECURE
     |vpiFullName:work@ScratchPad.M00_SECURE
   |vpiParamAssign:
@@ -177,31 +173,29 @@ design: (unnamed)
       |vpiDecompile:1'b0
       |vpiSize:1
       |BIN:0
-      |vpiTypespec:
-      \_ref_typespec: (work@ScratchPad)
-        |vpiParent:
-        \_constant: , line:12:27, endln:12:31
-        |vpiFullName:work@ScratchPad
-        |vpiActual:
-        \_int_typespec: , line:12:4, endln:12:31
       |vpiConstType:3
     |vpiLhs:
-    \_parameter: (work@ScratchPad.M00_SECURE), line:12:14, endln:12:24
-  |vpiDefName:work@ScratchPad
-  |vpiTaskFunc:
+    \_parameter: (work@ScratchPad.M00_SECURE), line:12:14, endln:12:31
+  |vpiInternalScope:
   \_function: (work@ScratchPad.w_1), line:15:1, endln:17:12
     |vpiParent:
     \_module_inst: work@ScratchPad (work@ScratchPad), file:${SURELOG_DIR}/tests/ImplicitFuncArgAndReturn/dut.sv, line:9:1, endln:24:10
     |vpiName:w_1
     |vpiFullName:work@ScratchPad.w_1
-    |vpiVisibility:1
-    |vpiReturn:
-    \_logic_var: (work@ScratchPad.w_1)
+    |vpiVariables:
+    \_logic_var: (work@ScratchPad.w_1), line:15:10, endln:15:13
       |vpiParent:
       \_function: (work@ScratchPad.w_1), line:15:1, endln:17:12
       |vpiFullName:work@ScratchPad.w_1
+    |vpiReg:
+    \_logic_var: (work@ScratchPad.w_1), line:15:10, endln:15:13
+    |vpiImportTypespec:
+    \_logic_var: (work@ScratchPad.w_1), line:15:10, endln:15:13
+    |vpiVisibility:1
+    |vpiReturn:
+    \_logic_var: (work@ScratchPad.w_1), line:15:10, endln:15:13
     |vpiIODecl:
-    \_io_decl: (val), line:15:20, endln:15:23
+    \_io_decl: (val), line:15:14, endln:15:23
       |vpiParent:
       \_function: (work@ScratchPad.w_1), line:15:1, endln:17:12
       |vpiDirection:1
@@ -219,7 +213,7 @@ design: (unnamed)
         |vpiName:val
         |vpiFullName:work@ScratchPad.w_1.val
         |vpiActual:
-        \_io_decl: (val), line:15:20, endln:15:23
+        \_io_decl: (val), line:15:14, endln:15:23
       |vpiLhs:
       \_ref_obj: (work@ScratchPad.w_1.w_1), line:16:5, endln:16:8
         |vpiParent:
@@ -227,11 +221,14 @@ design: (unnamed)
         |vpiName:w_1
         |vpiFullName:work@ScratchPad.w_1.w_1
         |vpiActual:
-        \_logic_var: (work@ScratchPad.w_1.w_1)
-    |vpiInstance:
-    \_module_inst: work@ScratchPad (work@ScratchPad), file:${SURELOG_DIR}/tests/ImplicitFuncArgAndReturn/dut.sv, line:9:1, endln:24:10
+        \_logic_var: (work@ScratchPad.w_1), line:15:10, endln:15:13
+  |vpiImportTypespec:
+  \_function: (work@ScratchPad.w_1), line:15:1, endln:17:12
+  |vpiDefName:work@ScratchPad
+  |vpiTaskFunc:
+  \_function: (work@ScratchPad.w_1), line:15:1, endln:17:12
   |vpiRefModule:
-  \_ref_module: work@sub (m1), line:21:43, endln:21:45
+  \_ref_module: work@sub (m1), line:21:4, endln:21:48
     |vpiParent:
     \_module_inst: work@ScratchPad (work@ScratchPad), file:${SURELOG_DIR}/tests/ImplicitFuncArgAndReturn/dut.sv, line:9:1, endln:24:10
     |vpiName:m1
@@ -242,16 +239,16 @@ design: (unnamed)
 \_module_inst: work@sub (work@sub), file:${SURELOG_DIR}/tests/ImplicitFuncArgAndReturn/dut.sv, line:3:1, endln:6:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@sub
+  |vpiName:work@sub
   |vpiParameter:
-  \_parameter: (work@sub.M_SECURE), line:4:18, endln:4:26
+  \_parameter: (work@sub.M_SECURE), line:4:18, endln:4:30
     |vpiParent:
     \_module_inst: work@sub (work@sub), file:${SURELOG_DIR}/tests/ImplicitFuncArgAndReturn/dut.sv, line:3:1, endln:6:10
     |UINT:1
     |vpiTypespec:
-    \_ref_typespec: (work@sub.M_SECURE)
+    \_ref_typespec: (work@sub.M_SECURE), line:4:14, endln:4:17
       |vpiParent:
-      \_parameter: (work@sub.M_SECURE), line:4:18, endln:4:26
+      \_parameter: (work@sub.M_SECURE), line:4:18, endln:4:30
       |vpiFullName:work@sub.M_SECURE
       |vpiActual:
       \_int_typespec: , line:4:14, endln:4:17
@@ -269,41 +266,24 @@ design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
-      |vpiTypespec:
-      \_ref_typespec: (work@sub)
-        |vpiParent:
-        \_constant: , line:4:29, endln:4:30
-        |vpiFullName:work@sub
-        |vpiActual:
-        \_int_typespec: , line:4:14, endln:4:17
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@sub.M_SECURE), line:4:18, endln:4:26
-  |vpiDefName:work@sub
-\_weaklyReferenced:
-\_int_typespec: , line:12:4, endln:12:31
-  |vpiRange:
-  \_range: 
+    \_parameter: (work@sub.M_SECURE), line:4:18, endln:4:30
+  |vpiTypedef:
+  \_int_typespec: , line:4:14, endln:4:17
     |vpiParent:
-    \_int_typespec: , line:12:4, endln:12:31
-    |vpiLeftRange:
-    \_constant: 
-      |INT:0
-    |vpiRightRange:
-    \_constant: 
-      |INT:0
-\_int_typespec: , line:4:14, endln:4:17
-  |vpiParent:
-  \_parameter: (work@sub.M_SECURE), line:4:18, endln:4:26
-  |vpiSigned:1
-\_logic_var: (work@ScratchPad.w_1.w_1)
-  |vpiParent:
-  \_ref_obj: (work@ScratchPad.w_1.w_1), line:16:5, endln:16:8
-  |vpiName:w_1
-  |vpiFullName:work@ScratchPad.w_1.w_1
+    \_module_inst: work@sub (work@sub), file:${SURELOG_DIR}/tests/ImplicitFuncArgAndReturn/dut.sv, line:3:1, endln:6:10
+    |vpiSigned:1
+  |vpiImportTypespec:
+  \_int_typespec: , line:4:14, endln:4:17
+  |vpiDefName:work@sub
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/ImplicitFuncArgAndReturn/dut.sv | ${SURELOG_DIR}/build/regression/ImplicitFuncArgAndReturn/roundtrip/dut_000.sv | 9 | 24 |
+============================== End RoundTrip Results ==============================

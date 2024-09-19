@@ -691,17 +691,18 @@ n<> u<247> t<Description> p<248> c<246> f<0> l<55:3> el<69:11>
 n<> u<248> t<Source_text> p<249> c<105> f<0> l<1:3> el<69:11>
 n<> u<249> t<Top_level_rule> c<1> f<0> l<1:3> el<71:9>
 AST_DEBUG_END
-[INF:CP0302] Compile class "work@mailbox".
-[INF:CP0302] Compile class "work@process".
-[INF:CP0302] Compile class "work@semaphore".
+[INF:CP0302] Compile class "builtin::mailbox".
+[INF:CP0302] Compile class "builtin::process".
+[INF:CP0302] Compile class "builtin::semaphore".
 [ERR:CP0316] ${SURELOG_DIR}/tests/PackageHierRef/top.sv:21:8: Undefined package "bug".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             9
+begin                                                  2
 class_defn                                             8
-class_typespec                                         4
-class_var                                              3
-constant                                              24
+class_typespec                                         1
+class_var                                              1
+constant                                              23
 design                                                 1
 enum_const                                             5
 enum_typespec                                          1
@@ -711,26 +712,32 @@ gen_if                                                 1
 hier_path                                              4
 import_typespec                                        2
 initial                                                1
-int_typespec                                          31
+int_typespec                                          22
 int_var                                                9
 io_decl                                               11
-logic_net                                             10
+logic_net                                              8
 logic_var                                              1
 module_inst                                            1
-named_begin                                            2
 package                                                5
-param_assign                                           9
-parameter                                             10
+param_assign                                           4
+parameter                                              4
 ref_module                                             1
 ref_obj                                                9
-ref_typespec                                          53
-struct_typespec                                       10
+ref_typespec                                          36
+source_file                                            2
+struct_typespec                                        8
 task                                                   9
-typespec_member                                       10
+typespec_member                                        8
 === UHDM Object Stats End ===
+[ERR:IG0809] ${SURELOG_DIR}/tests/PackageHierRef/top.sv:34:5: Object 86 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageHierRef/slpp_unit/surelog.uhdm ...
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 2
 [WARNING] : 5
 [   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/PackageHierRef/packages.sv | ${SURELOG_DIR}/build/regression/PackageHierRef/roundtrip/packages_000.sv | 16 | 76 |
+[roundtrip]: ${SURELOG_DIR}/tests/PackageHierRef/top.sv      | ${SURELOG_DIR}/build/regression/PackageHierRef/roundtrip/top_000.sv      | 24 | 38 |
+============================== End RoundTrip Results ==============================

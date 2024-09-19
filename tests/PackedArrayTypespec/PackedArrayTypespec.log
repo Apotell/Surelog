@@ -99,37 +99,63 @@ module_inst                                            2
 packed_array_typespec                                  2
 range                                                  3
 ref_typespec                                           1
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedArrayTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PackedArrayTypespec/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/PackedArrayTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/PackedArrayTypespec/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayTypespec/dut.sv, line:1:1, endln:13:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
+  |vpiName:work@top
   |vpiTypedef:
-  \_enum_typespec: (unit_type_t), line:3:4, endln:7:17
+  \_logic_typespec: , line:3:17, endln:3:28
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayTypespec/dut.sv, line:1:1, endln:13:10
+    |vpiRange:
+    \_range: , line:3:23, endln:3:28
+      |vpiParent:
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayTypespec/dut.sv, line:1:1, endln:13:10
+      |vpiLeftRange:
+      \_constant: , line:3:24, endln:3:25
+        |vpiParent:
+        \_range: , line:3:23, endln:3:28
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:3:26, endln:3:27
+        |vpiParent:
+        \_range: , line:3:23, endln:3:28
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_enum_typespec: (unit_type_t), line:3:12, endln:7:17
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayTypespec/dut.sv, line:1:1, endln:13:10
     |vpiName:unit_type_t
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayTypespec/dut.sv, line:1:1, endln:13:10
     |vpiBaseTypespec:
-    \_ref_typespec: (work@top.unit_type_t)
+    \_ref_typespec: (work@top.unit_type_t), line:3:12, endln:7:17
       |vpiParent:
-      \_enum_typespec: (unit_type_t), line:3:4, endln:7:17
+      \_enum_typespec: (unit_type_t), line:3:12, endln:7:17
       |vpiFullName:work@top.unit_type_t
       |vpiActual:
       \_logic_typespec: , line:3:17, endln:3:28
     |vpiEnumConst:
     \_enum_const: (DISABLED), line:4:5, endln:4:13
       |vpiParent:
-      \_enum_typespec: (unit_type_t), line:3:4, endln:7:17
+      \_enum_typespec: (unit_type_t), line:3:12, endln:7:17
       |vpiName:DISABLED
       |INT:0
       |vpiDecompile:0
@@ -137,7 +163,7 @@ design: (unnamed)
     |vpiEnumConst:
     \_enum_const: (PARALLEL), line:5:5, endln:5:13
       |vpiParent:
-      \_enum_typespec: (unit_type_t), line:3:4, endln:7:17
+      \_enum_typespec: (unit_type_t), line:3:12, endln:7:17
       |vpiName:PARALLEL
       |INT:1
       |vpiDecompile:1
@@ -145,34 +171,16 @@ design: (unnamed)
     |vpiEnumConst:
     \_enum_const: (MERGED), line:6:5, endln:6:11
       |vpiParent:
-      \_enum_typespec: (unit_type_t), line:3:4, endln:7:17
+      \_enum_typespec: (unit_type_t), line:3:12, endln:7:17
       |vpiName:MERGED
       |INT:2
       |vpiDecompile:2
       |vpiSize:2
+  |vpiImportTypespec:
+  \_logic_typespec: , line:3:17, endln:3:28
+  |vpiImportTypespec:
+  \_enum_typespec: (unit_type_t), line:3:12, endln:7:17
   |vpiDefName:work@top
-\_weaklyReferenced:
-\_logic_typespec: , line:3:17, endln:3:28
-  |vpiRange:
-  \_range: , line:3:23, endln:3:28
-    |vpiParent:
-    \_logic_typespec: , line:3:17, endln:3:28
-    |vpiLeftRange:
-    \_constant: , line:3:24, endln:3:25
-      |vpiParent:
-      \_range: , line:3:23, endln:3:28
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:26, endln:3:27
-      |vpiParent:
-      \_range: , line:3:23, endln:3:28
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -181,5 +189,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PackedArrayTypespec/dut.sv | ${SURELOG_DIR}/build/regression/PackedArrayTypespec/roundtrip/dut_000.sv | 2 | 13 |
+[roundtrip]: ${SURELOG_DIR}/tests/PackedArrayTypespec/dut.sv | ${SURELOG_DIR}/build/regression/PackedArrayTypespec/roundtrip/dut_000.sv | 5 | 13 |
 ============================== End RoundTrip Results ==============================

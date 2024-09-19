@@ -545,45 +545,49 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-array_typespec                                         5
+array_typespec                                         3
 array_var                                              1
 assignment                                             5
 begin                                                  9
 bit_select                                             6
-constant                                              24
+constant                                              22
 design                                                 1
 for_stmt                                               2
 func_call                                              2
 function                                               2
 gen_if                                                 5
 if_stmt                                                1
-int_typespec                                          14
-int_var                                                6
+int_typespec                                          10
+int_var                                                3
 io_decl                                                2
 module_inst                                            2
-operation                                             16
+operation                                             11
 param_assign                                           4
 parameter                                              4
-range                                                  5
+range                                                  8
 ref_module                                             1
-ref_obj                                               23
-ref_typespec                                          19
+ref_obj                                               30
+ref_typespec                                          17
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ArrayExprFuncArg/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ArrayExprFuncArg/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ArrayExprFuncArg/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@main (work@main), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:46:1, endln:48:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@main
+  |vpiName:work@main
   |vpiDefName:work@main
   |vpiRefModule:
-  \_ref_module: work@top (top1), line:47:9, endln:47:13
+  \_ref_module: work@top (top1), line:47:1, endln:47:16
     |vpiParent:
     \_module_inst: work@main (work@main), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:46:1, endln:48:10
     |vpiName:top1
@@ -594,16 +598,16 @@ design: (unnamed)
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
+  |vpiName:work@top
   |vpiParameter:
-  \_parameter: (work@top.CNT), line:4:25, endln:4:28
+  \_parameter: (work@top.CNT), line:4:25, endln:4:32
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
     |UINT:3
     |vpiTypespec:
-    \_ref_typespec: (work@top.CNT)
+    \_ref_typespec: (work@top.CNT), line:4:12, endln:4:15
       |vpiParent:
-      \_parameter: (work@top.CNT), line:4:25, endln:4:28
+      \_parameter: (work@top.CNT), line:4:25, endln:4:32
       |vpiFullName:work@top.CNT
       |vpiActual:
       \_int_typespec: , line:4:12, endln:4:24
@@ -611,99 +615,95 @@ design: (unnamed)
     |vpiName:CNT
     |vpiFullName:work@top.CNT
   |vpiParameter:
-  \_parameter: (work@top.V), line:7:26, endln:7:27
+  \_parameter: (work@top.V), line:7:26, endln:7:43
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
     |vpiSize:1
     |vpiTypespec:
-    \_ref_typespec: (work@top.V)
+    \_ref_typespec: (work@top.V), line:7:13, endln:7:25
       |vpiParent:
-      \_parameter: (work@top.V), line:7:26, endln:7:27
+      \_parameter: (work@top.V), line:7:26, endln:7:43
       |vpiFullName:work@top.V
       |vpiActual:
       \_array_typespec: , line:7:13, endln:7:32
     |vpiRange:
-    \_range: , line:7:28, endln:7:31
+    \_range: , line:7:27, endln:7:32
       |vpiParent:
-      \_parameter: (work@top.V), line:7:26, endln:7:27
+      \_parameter: (work@top.V), line:7:26, endln:7:43
       |vpiLeftRange:
       \_constant: 
         |vpiParent:
-        \_range: , line:7:28, endln:7:31
+        \_range: , line:7:27, endln:7:32
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
       |vpiRightRange:
-      \_operation: , line:7:28, endln:7:31
+      \_constant: , line:7:27, endln:7:32
         |vpiParent:
-        \_range: , line:7:28, endln:7:31
-        |vpiOpType:11
-        |vpiOperand:
-        \_ref_obj: (work@top.V.CNT), line:7:28, endln:7:31
+        \_range: , line:7:27, endln:7:32
+        |vpiDecompile:associative
+        |STRING:associative
+        |vpiTypespec:
+        \_ref_typespec: (work@top.V), line:7:28, endln:7:31
           |vpiParent:
-          \_operation: , line:7:28, endln:7:31
-          |vpiName:CNT
-          |vpiFullName:work@top.V.CNT
-        |vpiOperand:
-        \_constant: 
-          |vpiSize:64
-          |INT:1
-          |vpiConstType:7
+          \_constant: , line:7:27, endln:7:32
+          |vpiFullName:work@top.V
+          |vpiActual:
+          \_int_typespec: , line:4:12, endln:4:24
+        |vpiConstType:6
     |vpiLocalParam:1
     |vpiName:V
     |vpiFullName:work@top.V
   |vpiParameter:
-  \_parameter: (work@top.VADDR), line:16:25, endln:16:30
+  \_parameter: (work@top.VADDR), line:16:25, endln:16:52
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
     |vpiSize:1
     |vpiTypespec:
-    \_ref_typespec: (work@top.VADDR)
+    \_ref_typespec: (work@top.VADDR), line:16:12, endln:16:24
       |vpiParent:
-      \_parameter: (work@top.VADDR), line:16:25, endln:16:30
+      \_parameter: (work@top.VADDR), line:16:25, endln:16:52
       |vpiFullName:work@top.VADDR
       |vpiActual:
       \_array_typespec: , line:16:12, endln:16:35
     |vpiRange:
-    \_range: , line:16:31, endln:16:34
+    \_range: , line:16:30, endln:16:35
       |vpiParent:
-      \_parameter: (work@top.VADDR), line:16:25, endln:16:30
+      \_parameter: (work@top.VADDR), line:16:25, endln:16:52
       |vpiLeftRange:
       \_constant: 
         |vpiParent:
-        \_range: , line:16:31, endln:16:34
+        \_range: , line:16:30, endln:16:35
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
       |vpiRightRange:
-      \_operation: , line:16:31, endln:16:34
+      \_constant: , line:16:30, endln:16:35
         |vpiParent:
-        \_range: , line:16:31, endln:16:34
-        |vpiOpType:11
-        |vpiOperand:
-        \_ref_obj: (work@top.VADDR.CNT), line:16:31, endln:16:34
+        \_range: , line:16:30, endln:16:35
+        |vpiDecompile:associative
+        |STRING:associative
+        |vpiTypespec:
+        \_ref_typespec: (work@top.VADDR), line:16:31, endln:16:34
           |vpiParent:
-          \_operation: , line:16:31, endln:16:34
-          |vpiName:CNT
-          |vpiFullName:work@top.VADDR.CNT
-        |vpiOperand:
-        \_constant: 
-          |vpiSize:64
-          |INT:1
-          |vpiConstType:7
+          \_constant: , line:16:30, endln:16:35
+          |vpiFullName:work@top.VADDR
+          |vpiActual:
+          \_int_typespec: , line:4:12, endln:4:24
+        |vpiConstType:6
     |vpiLocalParam:1
     |vpiName:VADDR
     |vpiFullName:work@top.VADDR
   |vpiParameter:
-  \_parameter: (work@top.MAX_VADDR), line:34:25, endln:34:34
+  \_parameter: (work@top.MAX_VADDR), line:34:25, endln:34:62
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.MAX_VADDR)
+    \_ref_typespec: (work@top.MAX_VADDR), line:34:12, endln:34:15
       |vpiParent:
-      \_parameter: (work@top.MAX_VADDR), line:34:25, endln:34:34
+      \_parameter: (work@top.MAX_VADDR), line:34:25, endln:34:62
       |vpiFullName:work@top.MAX_VADDR
       |vpiActual:
       \_int_typespec: , line:34:12, endln:34:24
@@ -721,16 +721,9 @@ design: (unnamed)
       |vpiDecompile:3
       |vpiSize:64
       |UINT:3
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:4:31, endln:4:32
-        |vpiFullName:work@top
-        |vpiActual:
-        \_int_typespec: , line:4:12, endln:4:24
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@top.CNT), line:4:25, endln:4:28
+    \_parameter: (work@top.CNT), line:4:25, endln:4:32
   |vpiParamAssign:
   \_param_assign: , line:7:26, endln:7:43
     |vpiParent:
@@ -742,164 +735,178 @@ design: (unnamed)
       |vpiOpType:75
       |vpiOperand:
       \_constant: , line:7:37, endln:7:38
+        |vpiParent:
+        \_operation: , line:7:35, endln:7:43
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
         |vpiConstType:9
       |vpiOperand:
       \_constant: , line:7:39, endln:7:40
+        |vpiParent:
+        \_operation: , line:7:35, endln:7:43
         |vpiDecompile:5
         |vpiSize:64
         |UINT:5
         |vpiConstType:9
       |vpiOperand:
       \_constant: , line:7:41, endln:7:42
+        |vpiParent:
+        \_operation: , line:7:35, endln:7:43
         |vpiDecompile:4
         |vpiSize:64
         |UINT:4
         |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@top.V), line:7:26, endln:7:27
+    \_parameter: (work@top.V), line:7:26, endln:7:43
   |vpiParamAssign:
   \_param_assign: , line:16:25, endln:16:52
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
     |vpiRhs:
-    \_func_call: (ASSIGN_VADDR), line:16:38, endln:16:50
+    \_func_call: (ASSIGN_VADDR), line:16:38, endln:16:51
       |vpiParent:
       \_param_assign: , line:16:25, endln:16:52
       |vpiName:ASSIGN_VADDR
       |vpiFunction:
       \_function: (work@top.ASSIGN_VADDR), line:10:1, endln:14:12
     |vpiLhs:
-    \_parameter: (work@top.VADDR), line:16:25, endln:16:30
+    \_parameter: (work@top.VADDR), line:16:25, endln:16:52
   |vpiParamAssign:
   \_param_assign: , line:34:25, endln:34:62
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
     |vpiRhs:
-    \_func_call: (MAX_VADDR_CNT), line:34:37, endln:34:50
+    \_func_call: (MAX_VADDR_CNT), line:34:37, endln:34:61
       |vpiParent:
       \_param_assign: , line:34:25, endln:34:62
       |vpiArgument:
       \_ref_obj: (work@top.VADDR), line:34:51, endln:34:56
         |vpiParent:
-        \_func_call: (MAX_VADDR_CNT), line:34:37, endln:34:50
+        \_func_call: (MAX_VADDR_CNT), line:34:37, endln:34:61
         |vpiName:VADDR
         |vpiFullName:work@top.VADDR
+        |vpiActual:
+        \_parameter: (work@top.VADDR), line:16:25, endln:16:52
       |vpiArgument:
       \_ref_obj: (work@top.CNT), line:34:58, endln:34:61
         |vpiParent:
-        \_func_call: (MAX_VADDR_CNT), line:34:37, endln:34:50
+        \_func_call: (MAX_VADDR_CNT), line:34:37, endln:34:61
         |vpiName:CNT
         |vpiFullName:work@top.CNT
+        |vpiActual:
+        \_parameter: (work@top.CNT), line:4:25, endln:4:32
       |vpiName:MAX_VADDR_CNT
       |vpiFunction:
       \_function: (work@top.MAX_VADDR_CNT), line:25:1, endln:32:12
     |vpiLhs:
-    \_parameter: (work@top.MAX_VADDR), line:34:25, endln:34:34
-  |vpiTypedef:
-  \_array_typespec: (ASSIGN_VADDR_RET_T), line:9:9, endln:9:45
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
-    |vpiName:ASSIGN_VADDR_RET_T
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
-    |vpiRange:
-    \_range: , line:9:41, endln:9:44
-      |vpiParent:
-      \_array_typespec: (ASSIGN_VADDR_RET_T), line:9:9, endln:9:45
-      |vpiLeftRange:
-      \_constant: 
-        |vpiParent:
-        \_range: , line:9:41, endln:9:44
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-      |vpiRightRange:
-      \_operation: , line:9:41, endln:9:44
-        |vpiParent:
-        \_range: , line:9:41, endln:9:44
-        |vpiOpType:11
-        |vpiOperand:
-        \_ref_obj: (work@top.ASSIGN_VADDR_RET_T.CNT), line:9:41, endln:9:44
-          |vpiParent:
-          \_operation: , line:9:41, endln:9:44
-          |vpiName:CNT
-          |vpiFullName:work@top.ASSIGN_VADDR_RET_T.CNT
-        |vpiOperand:
-        \_constant: 
-          |vpiSize:64
-          |INT:1
-          |vpiConstType:7
-    |vpiElemTypespec:
-    \_ref_typespec: (work@top.ASSIGN_VADDR_RET_T)
-      |vpiParent:
-      \_array_typespec: (ASSIGN_VADDR_RET_T), line:9:9, endln:9:45
-      |vpiFullName:work@top.ASSIGN_VADDR_RET_T
-      |vpiActual:
-      \_int_typespec: , line:9:9, endln:9:21
-  |vpiDefName:work@top
-  |vpiTaskFunc:
+    \_parameter: (work@top.MAX_VADDR), line:34:25, endln:34:62
+  |vpiInternalScope:
   \_function: (work@top.ASSIGN_VADDR), line:10:1, endln:14:12
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
     |vpiName:ASSIGN_VADDR
     |vpiFullName:work@top.ASSIGN_VADDR
-    |vpiVisibility:1
-    |vpiReturn:
+    |vpiVariables:
     \_array_var: (work@top.ASSIGN_VADDR), line:10:17, endln:10:35
       |vpiParent:
       \_function: (work@top.ASSIGN_VADDR), line:10:1, endln:14:12
       |vpiTypespec:
-      \_ref_typespec: (work@top.ASSIGN_VADDR)
+      \_ref_typespec: (work@top.ASSIGN_VADDR.ASSIGN_VADDR_RET_T), line:10:17, endln:10:35
         |vpiParent:
         \_array_var: (work@top.ASSIGN_VADDR), line:10:17, endln:10:35
-        |vpiFullName:work@top.ASSIGN_VADDR
+        |vpiName:ASSIGN_VADDR_RET_T
+        |vpiFullName:work@top.ASSIGN_VADDR.ASSIGN_VADDR_RET_T
         |vpiActual:
         \_array_typespec: (ASSIGN_VADDR_RET_T), line:9:9, endln:9:45
       |vpiFullName:work@top.ASSIGN_VADDR
-    |vpiStmt:
-    \_for_stmt: (work@top.ASSIGN_VADDR), line:11:4, endln:11:7
+    |vpiVariables:
+    \_int_var: (work@top.ASSIGN_VADDR.i), line:11:13, endln:11:14
+      |vpiParent:
+      \_function: (work@top.ASSIGN_VADDR), line:10:1, endln:14:12
+      |vpiTypespec:
+      \_ref_typespec: (work@top.ASSIGN_VADDR.i), line:11:9, endln:11:12
+        |vpiParent:
+        \_int_var: (work@top.ASSIGN_VADDR.i), line:11:13, endln:11:14
+        |vpiFullName:work@top.ASSIGN_VADDR.i
+        |vpiActual:
+        \_int_typespec: , line:11:9, endln:11:12
+      |vpiName:i
+      |vpiFullName:work@top.ASSIGN_VADDR.i
+      |vpiSigned:1
+    |vpiRegArray:
+    \_array_var: (work@top.ASSIGN_VADDR), line:10:17, endln:10:35
+    |vpiInternalScope:
+    \_for_stmt: (work@top.ASSIGN_VADDR), line:11:4, endln:13:11
       |vpiParent:
       \_function: (work@top.ASSIGN_VADDR), line:10:1, endln:14:12
       |vpiFullName:work@top.ASSIGN_VADDR
+      |vpiInternalScope:
+      \_begin: (work@top.ASSIGN_VADDR), line:11:34, endln:13:11
+        |vpiParent:
+        \_for_stmt: (work@top.ASSIGN_VADDR), line:11:4, endln:13:11
+        |vpiFullName:work@top.ASSIGN_VADDR
+        |vpiStmt:
+        \_assignment: , line:12:2, endln:12:24
+          |vpiParent:
+          \_begin: (work@top.ASSIGN_VADDR), line:11:34, endln:13:11
+          |vpiOpType:82
+          |vpiBlocking:1
+          |vpiRhs:
+          \_bit_select: (work@top.ASSIGN_VADDR.V), line:12:21, endln:12:24
+            |vpiParent:
+            \_assignment: , line:12:2, endln:12:24
+            |vpiName:V
+            |vpiFullName:work@top.ASSIGN_VADDR.V
+            |vpiActual:
+            \_parameter: (work@top.V), line:7:26, endln:7:43
+            |vpiIndex:
+            \_ref_obj: (work@top.i), line:12:22, endln:12:23
+              |vpiParent:
+              \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
+              |vpiName:i
+              |vpiFullName:work@top.i
+              |vpiActual:
+              \_logic_net: (work@top.i), line:12:22, endln:12:23
+          |vpiLhs:
+          \_bit_select: (work@top.ASSIGN_VADDR.ASSIGN_VADDR), line:12:14, endln:12:17
+            |vpiParent:
+            \_assignment: , line:12:2, endln:12:24
+            |vpiName:ASSIGN_VADDR
+            |vpiFullName:work@top.ASSIGN_VADDR.ASSIGN_VADDR
+            |vpiActual:
+            \_array_var: (work@top.ASSIGN_VADDR), line:10:17, endln:10:35
+            |vpiIndex:
+            \_ref_obj: (work@top.i), line:12:15, endln:12:16
+              |vpiParent:
+              \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
+              |vpiName:i
+              |vpiFullName:work@top.i
+              |vpiActual:
+              \_logic_net: (work@top.i), line:12:22, endln:12:23
       |vpiForInitStmt:
       \_assignment: , line:11:9, endln:11:18
         |vpiParent:
-        \_for_stmt: (work@top.ASSIGN_VADDR), line:11:4, endln:11:7
+        \_for_stmt: (work@top.ASSIGN_VADDR), line:11:4, endln:13:11
         |vpiRhs:
         \_constant: , line:11:17, endln:11:18
           |vpiParent:
-          \_assignment: , line:11:9, endln:11:18
+          \_for_stmt: (work@top.ASSIGN_VADDR), line:11:4, endln:13:11
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
           |vpiConstType:9
         |vpiLhs:
         \_int_var: (work@top.ASSIGN_VADDR.i), line:11:13, endln:11:14
-          |vpiParent:
-          \_assignment: , line:11:9, endln:11:18
-          |vpiTypespec:
-          \_ref_typespec: (work@top.ASSIGN_VADDR.i)
-            |vpiParent:
-            \_int_var: (work@top.ASSIGN_VADDR.i), line:11:13, endln:11:14
-            |vpiFullName:work@top.ASSIGN_VADDR.i
-            |vpiActual:
-            \_int_typespec: , line:11:9, endln:11:12
-          |vpiName:i
-          |vpiFullName:work@top.ASSIGN_VADDR.i
-          |vpiSigned:1
       |vpiForIncStmt:
       \_operation: , line:11:29, endln:11:32
         |vpiParent:
-        \_for_stmt: (work@top.ASSIGN_VADDR), line:11:4, endln:11:7
+        \_for_stmt: (work@top.ASSIGN_VADDR), line:11:4, endln:13:11
         |vpiOpType:62
         |vpiOperand:
         \_ref_obj: (work@top.ASSIGN_VADDR.i), line:11:29, endln:11:30
           |vpiParent:
-          \_operation: , line:11:29, endln:11:32
+          \_for_stmt: (work@top.ASSIGN_VADDR), line:11:4, endln:13:11
           |vpiName:i
           |vpiFullName:work@top.ASSIGN_VADDR.i
           |vpiActual:
@@ -907,7 +914,7 @@ design: (unnamed)
       |vpiCondition:
       \_operation: , line:11:20, endln:11:27
         |vpiParent:
-        \_for_stmt: (work@top.ASSIGN_VADDR), line:11:4, endln:11:7
+        \_for_stmt: (work@top.ASSIGN_VADDR), line:11:4, endln:13:11
         |vpiOpType:20
         |vpiOperand:
         \_ref_obj: (work@top.ASSIGN_VADDR.i), line:11:20, endln:11:21
@@ -923,185 +930,164 @@ design: (unnamed)
           \_operation: , line:11:20, endln:11:27
           |vpiName:CNT
           |vpiFullName:work@top.ASSIGN_VADDR.CNT
+          |vpiActual:
+          \_parameter: (work@top.CNT), line:4:25, endln:4:32
       |vpiStmt:
       \_begin: (work@top.ASSIGN_VADDR), line:11:34, endln:13:11
-        |vpiParent:
-        \_for_stmt: (work@top.ASSIGN_VADDR), line:11:4, endln:11:7
-        |vpiFullName:work@top.ASSIGN_VADDR
-        |vpiStmt:
-        \_assignment: , line:12:2, endln:12:24
-          |vpiParent:
-          \_begin: (work@top.ASSIGN_VADDR), line:11:34, endln:13:11
-          |vpiOpType:82
-          |vpiBlocking:1
-          |vpiRhs:
-          \_bit_select: (work@top.ASSIGN_VADDR.V), line:12:22, endln:12:23
-            |vpiParent:
-            \_assignment: , line:12:2, endln:12:24
-            |vpiName:V
-            |vpiFullName:work@top.ASSIGN_VADDR.V
-            |vpiIndex:
-            \_ref_obj: (work@top.ASSIGN_VADDR.i), line:12:22, endln:12:23
-              |vpiParent:
-              \_bit_select: (work@top.ASSIGN_VADDR.V), line:12:22, endln:12:23
-              |vpiName:i
-              |vpiFullName:work@top.ASSIGN_VADDR.i
-              |vpiActual:
-              \_int_var: (work@top.ASSIGN_VADDR.i), line:11:13, endln:11:14
-          |vpiLhs:
-          \_bit_select: (work@top.ASSIGN_VADDR.ASSIGN_VADDR), line:12:2, endln:12:17
-            |vpiParent:
-            \_assignment: , line:12:2, endln:12:24
-            |vpiName:ASSIGN_VADDR
-            |vpiFullName:work@top.ASSIGN_VADDR.ASSIGN_VADDR
-            |vpiIndex:
-            \_ref_obj: (work@top.ASSIGN_VADDR.i), line:12:15, endln:12:16
-              |vpiParent:
-              \_bit_select: (work@top.ASSIGN_VADDR.ASSIGN_VADDR), line:12:2, endln:12:17
-              |vpiName:i
-              |vpiFullName:work@top.ASSIGN_VADDR.i
-              |vpiActual:
-              \_int_var: (work@top.ASSIGN_VADDR.i), line:11:13, endln:11:14
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
-  |vpiTaskFunc:
+    |vpiTypedef:
+    \_int_typespec: , line:11:9, endln:11:12
+      |vpiParent:
+      \_function: (work@top.ASSIGN_VADDR), line:10:1, endln:14:12
+      |vpiSigned:1
+    |vpiImportTypespec:
+    \_array_var: (work@top.ASSIGN_VADDR), line:10:17, endln:10:35
+    |vpiImportTypespec:
+    \_int_typespec: , line:11:9, endln:11:12
+    |vpiImportTypespec:
+    \_int_var: (work@top.ASSIGN_VADDR.i), line:11:13, endln:11:14
+    |vpiVisibility:1
+    |vpiReturn:
+    \_array_var: (work@top.ASSIGN_VADDR), line:10:17, endln:10:35
+    |vpiStmt:
+    \_for_stmt: (work@top.ASSIGN_VADDR), line:11:4, endln:13:11
+  |vpiInternalScope:
   \_function: (work@top.MAX_VADDR_CNT), line:25:1, endln:32:12
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
     |vpiName:MAX_VADDR_CNT
     |vpiFullName:work@top.MAX_VADDR_CNT
-    |vpiVisibility:1
-    |vpiReturn:
+    |vpiVariables:
     \_int_var: (work@top.MAX_VADDR_CNT), line:25:17, endln:25:29
       |vpiParent:
       \_function: (work@top.MAX_VADDR_CNT), line:25:1, endln:32:12
       |vpiTypespec:
-      \_ref_typespec: (work@top.MAX_VADDR_CNT)
+      \_ref_typespec: (work@top.MAX_VADDR_CNT), line:25:17, endln:25:29
         |vpiParent:
         \_int_var: (work@top.MAX_VADDR_CNT), line:25:17, endln:25:29
         |vpiFullName:work@top.MAX_VADDR_CNT
         |vpiActual:
         \_int_typespec: , line:25:17, endln:25:29
       |vpiFullName:work@top.MAX_VADDR_CNT
-    |vpiIODecl:
-    \_io_decl: (SRC), line:25:57, endln:25:60
-      |vpiParent:
-      \_function: (work@top.MAX_VADDR_CNT), line:25:1, endln:32:12
-      |vpiDirection:1
-      |vpiName:SRC
-      |vpiRange:
-      \_range: , line:25:61, endln:25:64
-        |vpiParent:
-        \_io_decl: (SRC), line:25:57, endln:25:60
-        |vpiLeftRange:
-        \_constant: 
-          |vpiParent:
-          \_range: , line:25:61, endln:25:64
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiConstType:9
-        |vpiRightRange:
-        \_operation: , line:25:61, endln:25:64
-          |vpiParent:
-          \_range: , line:25:61, endln:25:64
-          |vpiOpType:11
-          |vpiOperand:
-          \_ref_obj: (work@top.MAX_VADDR_CNT.SRC.CNT), line:25:61, endln:25:64
-            |vpiParent:
-            \_operation: , line:25:61, endln:25:64
-            |vpiName:CNT
-            |vpiFullName:work@top.MAX_VADDR_CNT.SRC.CNT
-          |vpiOperand:
-          \_constant: 
-            |vpiSize:64
-            |INT:1
-            |vpiConstType:7
-      |vpiTypedef:
-      \_ref_typespec: (work@top.MAX_VADDR_CNT.SRC)
-        |vpiParent:
-        \_io_decl: (SRC), line:25:57, endln:25:60
-        |vpiFullName:work@top.MAX_VADDR_CNT.SRC
-        |vpiActual:
-        \_int_typespec: , line:25:44, endln:25:47
-    |vpiIODecl:
-    \_io_decl: (ICNT), line:25:80, endln:25:84
-      |vpiParent:
-      \_function: (work@top.MAX_VADDR_CNT), line:25:1, endln:32:12
-      |vpiDirection:1
-      |vpiName:ICNT
-      |vpiTypedef:
-      \_ref_typespec: (work@top.MAX_VADDR_CNT.ICNT)
-        |vpiParent:
-        \_io_decl: (ICNT), line:25:80, endln:25:84
-        |vpiFullName:work@top.MAX_VADDR_CNT.ICNT
-        |vpiActual:
-        \_int_typespec: , line:25:67, endln:25:70
-    |vpiStmt:
-    \_begin: (work@top.MAX_VADDR_CNT), line:27:5, endln:31:8
+    |vpiInternalScope:
+    \_begin: (work@top.MAX_VADDR_CNT)
       |vpiParent:
       \_function: (work@top.MAX_VADDR_CNT), line:25:1, endln:32:12
       |vpiFullName:work@top.MAX_VADDR_CNT
-      |vpiStmt:
-      \_assignment: , line:26:5, endln:26:22
+      |vpiVariables:
+      \_int_var: (work@top.MAX_VADDR_CNT.i), line:27:14, endln:27:15
         |vpiParent:
-        \_begin: (work@top.MAX_VADDR_CNT), line:27:5, endln:31:8
-        |vpiOpType:82
-        |vpiBlocking:1
-        |vpiRhs:
-        \_constant: , line:26:21, endln:26:22
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiConstType:9
-        |vpiLhs:
-        \_ref_obj: (work@top.MAX_VADDR_CNT.MAX_VADDR_CNT), line:26:5, endln:26:18
+        \_begin: (work@top.MAX_VADDR_CNT)
+        |vpiTypespec:
+        \_ref_typespec: (work@top.MAX_VADDR_CNT.i), line:27:10, endln:27:13
           |vpiParent:
-          \_assignment: , line:26:5, endln:26:22
-          |vpiName:MAX_VADDR_CNT
-          |vpiFullName:work@top.MAX_VADDR_CNT.MAX_VADDR_CNT
+          \_int_var: (work@top.MAX_VADDR_CNT.i), line:27:14, endln:27:15
+          |vpiFullName:work@top.MAX_VADDR_CNT.i
           |vpiActual:
-          \_int_var: (work@top.MAX_VADDR_CNT.MAX_VADDR_CNT), line:25:17, endln:25:29
-      |vpiStmt:
-      \_for_stmt: (work@top.MAX_VADDR_CNT), line:27:5, endln:27:8
+          \_int_typespec: , line:27:10, endln:27:13
+        |vpiName:i
+        |vpiFullName:work@top.MAX_VADDR_CNT.i
+        |vpiSigned:1
+      |vpiInternalScope:
+      \_for_stmt: (work@top.MAX_VADDR_CNT), line:27:5, endln:31:8
         |vpiParent:
-        \_begin: (work@top.MAX_VADDR_CNT), line:27:5, endln:31:8
+        \_begin: (work@top.MAX_VADDR_CNT)
         |vpiFullName:work@top.MAX_VADDR_CNT
+        |vpiInternalScope:
+        \_begin: (work@top.MAX_VADDR_CNT), line:27:36, endln:31:8
+          |vpiParent:
+          \_for_stmt: (work@top.MAX_VADDR_CNT), line:27:5, endln:31:8
+          |vpiFullName:work@top.MAX_VADDR_CNT
+          |vpiStmt:
+          \_if_stmt: , line:28:9, endln:30:12
+            |vpiParent:
+            \_begin: (work@top.MAX_VADDR_CNT), line:27:36, endln:31:8
+            |vpiCondition:
+            \_operation: , line:28:13, endln:28:35
+              |vpiParent:
+              \_begin: (work@top.MAX_VADDR_CNT), line:27:36, endln:31:8
+              |vpiOpType:18
+              |vpiOperand:
+              \_bit_select: (work@top.MAX_VADDR_CNT.SRC), line:28:16, endln:28:19
+                |vpiParent:
+                \_operation: , line:28:13, endln:28:35
+                |vpiName:SRC
+                |vpiFullName:work@top.MAX_VADDR_CNT.SRC
+                |vpiActual:
+                \_io_decl: (SRC), line:25:44, endln:25:65
+                |vpiIndex:
+                \_ref_obj: (work@top.i), line:28:17, endln:28:18
+                  |vpiParent:
+                  \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
+                  |vpiName:i
+                  |vpiFullName:work@top.i
+                  |vpiActual:
+                  \_logic_net: (work@top.i), line:12:22, endln:12:23
+              |vpiOperand:
+              \_ref_obj: (work@top.MAX_VADDR_CNT.MAX_VADDR_CNT), line:28:22, endln:28:35
+                |vpiParent:
+                \_operation: , line:28:13, endln:28:35
+                |vpiName:MAX_VADDR_CNT
+                |vpiFullName:work@top.MAX_VADDR_CNT.MAX_VADDR_CNT
+                |vpiActual:
+                \_int_var: (work@top.MAX_VADDR_CNT), line:25:17, endln:25:29
+            |vpiStmt:
+            \_begin: (work@top.MAX_VADDR_CNT), line:28:37, endln:30:12
+              |vpiParent:
+              \_if_stmt: , line:28:9, endln:30:12
+              |vpiFullName:work@top.MAX_VADDR_CNT
+              |vpiStmt:
+              \_assignment: , line:29:13, endln:29:35
+                |vpiParent:
+                \_begin: (work@top.MAX_VADDR_CNT), line:28:37, endln:30:12
+                |vpiOpType:82
+                |vpiBlocking:1
+                |vpiRhs:
+                \_bit_select: (work@top.MAX_VADDR_CNT.SRC), line:29:32, endln:29:35
+                  |vpiParent:
+                  \_assignment: , line:29:13, endln:29:35
+                  |vpiName:SRC
+                  |vpiFullName:work@top.MAX_VADDR_CNT.SRC
+                  |vpiActual:
+                  \_io_decl: (SRC), line:25:44, endln:25:65
+                  |vpiIndex:
+                  \_ref_obj: (work@top.i), line:29:33, endln:29:34
+                    |vpiParent:
+                    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
+                    |vpiName:i
+                    |vpiFullName:work@top.i
+                    |vpiActual:
+                    \_logic_net: (work@top.i), line:12:22, endln:12:23
+                |vpiLhs:
+                \_ref_obj: (work@top.MAX_VADDR_CNT.MAX_VADDR_CNT), line:29:13, endln:29:26
+                  |vpiParent:
+                  \_assignment: , line:29:13, endln:29:35
+                  |vpiName:MAX_VADDR_CNT
+                  |vpiFullName:work@top.MAX_VADDR_CNT.MAX_VADDR_CNT
+                  |vpiActual:
+                  \_int_var: (work@top.MAX_VADDR_CNT), line:25:17, endln:25:29
         |vpiForInitStmt:
         \_assignment: , line:27:10, endln:27:19
           |vpiParent:
-          \_for_stmt: (work@top.MAX_VADDR_CNT), line:27:5, endln:27:8
+          \_for_stmt: (work@top.MAX_VADDR_CNT), line:27:5, endln:31:8
           |vpiRhs:
           \_constant: , line:27:18, endln:27:19
             |vpiParent:
-            \_assignment: , line:27:10, endln:27:19
+            \_for_stmt: (work@top.MAX_VADDR_CNT), line:27:5, endln:31:8
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
             |vpiConstType:9
           |vpiLhs:
           \_int_var: (work@top.MAX_VADDR_CNT.i), line:27:14, endln:27:15
-            |vpiParent:
-            \_assignment: , line:27:10, endln:27:19
-            |vpiTypespec:
-            \_ref_typespec: (work@top.MAX_VADDR_CNT.i)
-              |vpiParent:
-              \_int_var: (work@top.MAX_VADDR_CNT.i), line:27:14, endln:27:15
-              |vpiFullName:work@top.MAX_VADDR_CNT.i
-              |vpiActual:
-              \_int_typespec: , line:27:10, endln:27:13
-            |vpiName:i
-            |vpiFullName:work@top.MAX_VADDR_CNT.i
-            |vpiSigned:1
         |vpiForIncStmt:
         \_operation: , line:27:31, endln:27:34
           |vpiParent:
-          \_for_stmt: (work@top.MAX_VADDR_CNT), line:27:5, endln:27:8
+          \_for_stmt: (work@top.MAX_VADDR_CNT), line:27:5, endln:31:8
           |vpiOpType:62
           |vpiOperand:
           \_ref_obj: (work@top.MAX_VADDR_CNT.i), line:27:31, endln:27:32
             |vpiParent:
-            \_operation: , line:27:31, endln:27:34
+            \_for_stmt: (work@top.MAX_VADDR_CNT), line:27:5, endln:31:8
             |vpiName:i
             |vpiFullName:work@top.MAX_VADDR_CNT.i
             |vpiActual:
@@ -1109,7 +1095,7 @@ design: (unnamed)
         |vpiCondition:
         \_operation: , line:27:21, endln:27:29
           |vpiParent:
-          \_for_stmt: (work@top.MAX_VADDR_CNT), line:27:5, endln:27:8
+          \_for_stmt: (work@top.MAX_VADDR_CNT), line:27:5, endln:31:8
           |vpiOpType:20
           |vpiOperand:
           \_ref_obj: (work@top.MAX_VADDR_CNT.i), line:27:21, endln:27:22
@@ -1126,97 +1112,266 @@ design: (unnamed)
             |vpiName:ICNT
             |vpiFullName:work@top.MAX_VADDR_CNT.ICNT
             |vpiActual:
-            \_io_decl: (ICNT), line:25:80, endln:25:84
+            \_io_decl: (ICNT), line:25:67, endln:25:84
         |vpiStmt:
         \_begin: (work@top.MAX_VADDR_CNT), line:27:36, endln:31:8
+      |vpiTypedef:
+      \_int_typespec: , line:27:10, endln:27:13
+        |vpiParent:
+        \_begin: (work@top.MAX_VADDR_CNT)
+        |vpiSigned:1
+      |vpiImportTypespec:
+      \_int_typespec: , line:27:10, endln:27:13
+      |vpiImportTypespec:
+      \_int_var: (work@top.MAX_VADDR_CNT.i), line:27:14, endln:27:15
+      |vpiStmt:
+      \_assignment: , line:26:5, endln:26:22
+        |vpiParent:
+        \_begin: (work@top.MAX_VADDR_CNT)
+        |vpiOpType:82
+        |vpiBlocking:1
+        |vpiRhs:
+        \_constant: , line:26:21, endln:26:22
           |vpiParent:
-          \_for_stmt: (work@top.MAX_VADDR_CNT), line:27:5, endln:27:8
-          |vpiFullName:work@top.MAX_VADDR_CNT
-          |vpiStmt:
-          \_if_stmt: , line:28:9, endln:30:12
+          \_assignment: , line:26:5, endln:26:22
+          |vpiDecompile:0
+          |vpiSize:64
+          |UINT:0
+          |vpiConstType:9
+        |vpiLhs:
+        \_ref_obj: (work@top.MAX_VADDR_CNT.MAX_VADDR_CNT), line:26:5, endln:26:18
+          |vpiParent:
+          \_assignment: , line:26:5, endln:26:22
+          |vpiName:MAX_VADDR_CNT
+          |vpiFullName:work@top.MAX_VADDR_CNT.MAX_VADDR_CNT
+          |vpiActual:
+          \_int_var: (work@top.MAX_VADDR_CNT), line:25:17, endln:25:29
+      |vpiStmt:
+      \_for_stmt: (work@top.MAX_VADDR_CNT), line:27:5, endln:31:8
+    |vpiTypedef:
+    \_int_typespec: , line:25:17, endln:25:29
+      |vpiParent:
+      \_function: (work@top.MAX_VADDR_CNT), line:25:1, endln:32:12
+    |vpiTypedef:
+    \_int_typespec: , line:25:44, endln:25:56
+      |vpiParent:
+      \_function: (work@top.MAX_VADDR_CNT), line:25:1, endln:32:12
+    |vpiTypedef:
+    \_int_typespec: , line:25:67, endln:25:79
+      |vpiParent:
+      \_function: (work@top.MAX_VADDR_CNT), line:25:1, endln:32:12
+    |vpiImportTypespec:
+    \_int_typespec: , line:25:17, endln:25:29
+    |vpiImportTypespec:
+    \_int_var: (work@top.MAX_VADDR_CNT), line:25:17, endln:25:29
+    |vpiImportTypespec:
+    \_int_typespec: , line:25:44, endln:25:56
+    |vpiImportTypespec:
+    \_int_typespec: , line:25:67, endln:25:79
+    |vpiVisibility:1
+    |vpiReturn:
+    \_int_var: (work@top.MAX_VADDR_CNT), line:25:17, endln:25:29
+    |vpiIODecl:
+    \_io_decl: (SRC), line:25:44, endln:25:65
+      |vpiParent:
+      \_function: (work@top.MAX_VADDR_CNT), line:25:1, endln:32:12
+      |vpiDirection:1
+      |vpiName:SRC
+      |vpiRange:
+      \_range: , line:25:60, endln:25:65
+        |vpiParent:
+        \_io_decl: (SRC), line:25:44, endln:25:65
+        |vpiLeftRange:
+        \_constant: 
+          |vpiParent:
+          \_range: , line:25:60, endln:25:65
+          |vpiDecompile:0
+          |vpiSize:64
+          |UINT:0
+          |vpiConstType:9
+        |vpiRightRange:
+        \_constant: , line:25:60, endln:25:65
+          |vpiParent:
+          \_range: , line:25:60, endln:25:65
+          |vpiDecompile:associative
+          |STRING:associative
+          |vpiTypespec:
+          \_ref_typespec: (work@top.MAX_VADDR_CNT.SRC), line:25:61, endln:25:64
             |vpiParent:
-            \_begin: (work@top.MAX_VADDR_CNT), line:27:36, endln:31:8
-            |vpiCondition:
-            \_operation: , line:28:13, endln:28:35
-              |vpiParent:
-              \_begin: (work@top.MAX_VADDR_CNT), line:27:36, endln:31:8
-              |vpiOpType:18
-              |vpiOperand:
-              \_bit_select: (work@top.MAX_VADDR_CNT.SRC), line:28:17, endln:28:18
-                |vpiParent:
-                \_operation: , line:28:13, endln:28:35
-                |vpiName:SRC
-                |vpiFullName:work@top.MAX_VADDR_CNT.SRC
-                |vpiIndex:
-                \_ref_obj: (work@top.MAX_VADDR_CNT.i), line:28:17, endln:28:18
-                  |vpiParent:
-                  \_bit_select: (work@top.MAX_VADDR_CNT.SRC), line:28:17, endln:28:18
-                  |vpiName:i
-                  |vpiFullName:work@top.MAX_VADDR_CNT.i
-                  |vpiActual:
-                  \_int_var: (work@top.MAX_VADDR_CNT.i), line:27:14, endln:27:15
-              |vpiOperand:
-              \_ref_obj: (work@top.MAX_VADDR_CNT.MAX_VADDR_CNT), line:28:22, endln:28:35
-                |vpiParent:
-                \_operation: , line:28:13, endln:28:35
-                |vpiName:MAX_VADDR_CNT
-                |vpiFullName:work@top.MAX_VADDR_CNT.MAX_VADDR_CNT
-                |vpiActual:
-                \_int_var: (work@top.MAX_VADDR_CNT.MAX_VADDR_CNT), line:25:17, endln:25:29
-            |vpiStmt:
-            \_begin: (work@top.MAX_VADDR_CNT), line:28:37, endln:30:12
-              |vpiParent:
-              \_if_stmt: , line:28:9, endln:30:12
-              |vpiFullName:work@top.MAX_VADDR_CNT
-              |vpiStmt:
-              \_assignment: , line:29:13, endln:29:35
-                |vpiParent:
-                \_begin: (work@top.MAX_VADDR_CNT), line:28:37, endln:30:12
-                |vpiOpType:82
-                |vpiBlocking:1
-                |vpiRhs:
-                \_bit_select: (work@top.MAX_VADDR_CNT.SRC), line:29:33, endln:29:34
-                  |vpiParent:
-                  \_assignment: , line:29:13, endln:29:35
-                  |vpiName:SRC
-                  |vpiFullName:work@top.MAX_VADDR_CNT.SRC
-                  |vpiIndex:
-                  \_ref_obj: (work@top.MAX_VADDR_CNT.i), line:29:33, endln:29:34
-                    |vpiParent:
-                    \_bit_select: (work@top.MAX_VADDR_CNT.SRC), line:29:33, endln:29:34
-                    |vpiName:i
-                    |vpiFullName:work@top.MAX_VADDR_CNT.i
-                    |vpiActual:
-                    \_int_var: (work@top.MAX_VADDR_CNT.i), line:27:14, endln:27:15
-                |vpiLhs:
-                \_ref_obj: (work@top.MAX_VADDR_CNT.MAX_VADDR_CNT), line:29:13, endln:29:26
-                  |vpiParent:
-                  \_assignment: , line:29:13, endln:29:35
-                  |vpiName:MAX_VADDR_CNT
-                  |vpiFullName:work@top.MAX_VADDR_CNT.MAX_VADDR_CNT
-                  |vpiActual:
-                  \_int_var: (work@top.MAX_VADDR_CNT.MAX_VADDR_CNT), line:25:17, endln:25:29
-    |vpiInstance:
+            \_constant: , line:25:60, endln:25:65
+            |vpiFullName:work@top.MAX_VADDR_CNT.SRC
+            |vpiActual:
+            \_int_typespec: , line:4:12, endln:4:24
+          |vpiConstType:6
+      |vpiTypedef:
+      \_ref_typespec: (work@top.MAX_VADDR_CNT.SRC), line:25:44, endln:25:47
+        |vpiParent:
+        \_io_decl: (SRC), line:25:44, endln:25:65
+        |vpiFullName:work@top.MAX_VADDR_CNT.SRC
+        |vpiActual:
+        \_int_typespec: , line:25:44, endln:25:56
+    |vpiIODecl:
+    \_io_decl: (ICNT), line:25:67, endln:25:84
+      |vpiParent:
+      \_function: (work@top.MAX_VADDR_CNT), line:25:1, endln:32:12
+      |vpiDirection:1
+      |vpiName:ICNT
+      |vpiTypedef:
+      \_ref_typespec: (work@top.MAX_VADDR_CNT.ICNT), line:25:67, endln:25:70
+        |vpiParent:
+        \_io_decl: (ICNT), line:25:67, endln:25:84
+        |vpiFullName:work@top.MAX_VADDR_CNT.ICNT
+        |vpiActual:
+        \_int_typespec: , line:25:67, endln:25:79
+    |vpiStmt:
+    \_begin: (work@top.MAX_VADDR_CNT)
+  |vpiTypedef:
+  \_int_typespec: , line:4:12, endln:4:24
+    |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
+    |vpiExpr:
+    \_ref_obj: (work@top.CNT), line:25:61, endln:25:64
+      |vpiParent:
+      \_int_typespec: , line:4:12, endln:4:24
+      |vpiName:CNT
+      |vpiFullName:work@top.CNT
+      |vpiActual:
+      \_parameter: (work@top.CNT), line:4:25, endln:4:32
+  |vpiTypedef:
+  \_int_typespec: , line:7:13, endln:7:25
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
+  |vpiTypedef:
+  \_array_typespec: , line:7:13, endln:7:32
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
+    |vpiRange:
+    \_range: , line:7:27, endln:7:32
+    |vpiElemTypespec:
+    \_ref_typespec: (work@top), line:7:13, endln:7:25
+      |vpiParent:
+      \_array_typespec: , line:7:13, endln:7:32
+      |vpiFullName:work@top
+      |vpiActual:
+      \_int_typespec: , line:7:13, endln:7:25
+  |vpiTypedef:
+  \_int_typespec: , line:9:9, endln:9:21
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
+  |vpiTypedef:
+  \_array_typespec: (ASSIGN_VADDR_RET_T), line:9:9, endln:9:45
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
+    |vpiName:ASSIGN_VADDR_RET_T
+    |vpiRange:
+    \_range: , line:9:40, endln:9:45
+      |vpiParent:
+      \_array_typespec: (ASSIGN_VADDR_RET_T), line:9:9, endln:9:45
+      |vpiLeftRange:
+      \_constant: 
+        |vpiParent:
+        \_range: , line:9:40, endln:9:45
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:9:40, endln:9:45
+        |vpiParent:
+        \_range: , line:9:40, endln:9:45
+        |vpiDecompile:associative
+        |STRING:associative
+        |vpiTypespec:
+        \_ref_typespec: (work@top.ASSIGN_VADDR_RET_T), line:9:41, endln:9:44
+          |vpiParent:
+          \_constant: , line:9:40, endln:9:45
+          |vpiFullName:work@top.ASSIGN_VADDR_RET_T
+          |vpiActual:
+          \_int_typespec: , line:4:12, endln:4:24
+        |vpiConstType:6
+    |vpiElemTypespec:
+    \_ref_typespec: (work@top.ASSIGN_VADDR_RET_T), line:9:9, endln:9:21
+      |vpiParent:
+      \_array_typespec: (ASSIGN_VADDR_RET_T), line:9:9, endln:9:45
+      |vpiFullName:work@top.ASSIGN_VADDR_RET_T
+      |vpiActual:
+      \_int_typespec: , line:9:9, endln:9:21
+  |vpiTypedef:
+  \_int_typespec: , line:16:12, endln:16:24
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
+  |vpiTypedef:
+  \_array_typespec: , line:16:12, endln:16:35
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
+    |vpiRange:
+    \_range: , line:16:30, endln:16:35
+    |vpiElemTypespec:
+    \_ref_typespec: (work@top), line:16:12, endln:16:24
+      |vpiParent:
+      \_array_typespec: , line:16:12, endln:16:35
+      |vpiFullName:work@top
+      |vpiActual:
+      \_int_typespec: , line:16:12, endln:16:24
+  |vpiTypedef:
+  \_int_typespec: , line:34:12, endln:34:24
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
+  |vpiImportTypespec:
+  \_function: (work@top.ASSIGN_VADDR), line:10:1, endln:14:12
+  |vpiImportTypespec:
+  \_function: (work@top.MAX_VADDR_CNT), line:25:1, endln:32:12
+  |vpiImportTypespec:
+  \_int_typespec: , line:4:12, endln:4:24
+  |vpiImportTypespec:
+  \_int_typespec: , line:7:13, endln:7:25
+  |vpiImportTypespec:
+  \_array_typespec: , line:7:13, endln:7:32
+  |vpiImportTypespec:
+  \_int_typespec: , line:9:9, endln:9:21
+  |vpiImportTypespec:
+  \_array_typespec: (ASSIGN_VADDR_RET_T), line:9:9, endln:9:45
+  |vpiImportTypespec:
+  \_int_typespec: , line:16:12, endln:16:24
+  |vpiImportTypespec:
+  \_array_typespec: , line:16:12, endln:16:35
+  |vpiImportTypespec:
+  \_int_typespec: , line:34:12, endln:34:24
+  |vpiImportTypespec:
+  \_logic_net: (work@top.i), line:12:22, endln:12:23
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
+    |vpiName:i
+    |vpiFullName:work@top.i
+    |vpiNetType:1
+  |vpiDefName:work@top
+  |vpiTaskFunc:
+  \_function: (work@top.ASSIGN_VADDR), line:10:1, endln:14:12
+  |vpiTaskFunc:
+  \_function: (work@top.MAX_VADDR_CNT), line:25:1, endln:32:12
+  |vpiNet:
+  \_logic_net: (work@top.i), line:12:22, endln:12:23
   |vpiGenStmt:
-  \_gen_if: , line:17:1, endln:17:3
+  \_gen_if: , line:17:1, endln:19:4
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
     |vpiCondition:
     \_operation: , line:17:5, endln:17:18
       |vpiParent:
-      \_gen_if: , line:17:1, endln:17:3
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
       |vpiOpType:14
       |vpiOperand:
-      \_bit_select: (work@top.VADDR), line:17:5, endln:17:13
+      \_bit_select: (work@top.VADDR), line:17:10, endln:17:13
         |vpiParent:
         \_operation: , line:17:5, endln:17:18
         |vpiName:VADDR
         |vpiFullName:work@top.VADDR
+        |vpiActual:
+        \_parameter: (work@top.VADDR), line:16:25, endln:16:52
         |vpiIndex:
         \_constant: , line:17:11, endln:17:12
           |vpiParent:
-          \_bit_select: (work@top.VADDR), line:17:5, endln:17:13
+          \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
@@ -1230,29 +1385,31 @@ design: (unnamed)
         |UINT:3
         |vpiConstType:9
     |vpiStmt:
-    \_begin: (work@top)
+    \_begin: (work@top), line:17:20, endln:19:4
       |vpiParent:
-      \_gen_if: , line:17:1, endln:17:3
+      \_gen_if: , line:17:1, endln:19:4
       |vpiFullName:work@top
   |vpiGenStmt:
-  \_gen_if: , line:20:1, endln:20:3
+  \_gen_if: , line:20:1, endln:22:4
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
     |vpiCondition:
     \_operation: , line:20:5, endln:20:18
       |vpiParent:
-      \_gen_if: , line:20:1, endln:20:3
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
       |vpiOpType:14
       |vpiOperand:
-      \_bit_select: (work@top.VADDR), line:20:5, endln:20:13
+      \_bit_select: (work@top.VADDR), line:20:10, endln:20:13
         |vpiParent:
         \_operation: , line:20:5, endln:20:18
         |vpiName:VADDR
         |vpiFullName:work@top.VADDR
+        |vpiActual:
+        \_parameter: (work@top.VADDR), line:16:25, endln:16:52
         |vpiIndex:
         \_constant: , line:20:11, endln:20:12
           |vpiParent:
-          \_bit_select: (work@top.VADDR), line:20:5, endln:20:13
+          \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
           |vpiDecompile:2
           |vpiSize:64
           |UINT:2
@@ -1266,18 +1423,18 @@ design: (unnamed)
         |UINT:4
         |vpiConstType:9
     |vpiStmt:
-    \_begin: (work@top)
+    \_begin: (work@top), line:20:20, endln:22:4
       |vpiParent:
-      \_gen_if: , line:20:1, endln:20:3
+      \_gen_if: , line:20:1, endln:22:4
       |vpiFullName:work@top
   |vpiGenStmt:
-  \_gen_if: , line:35:1, endln:35:3
+  \_gen_if: , line:35:1, endln:37:4
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
     |vpiCondition:
     \_operation: , line:35:5, endln:35:19
       |vpiParent:
-      \_gen_if: , line:35:1, endln:35:3
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
       |vpiOpType:14
       |vpiOperand:
       \_ref_obj: (work@top.MAX_VADDR), line:35:5, endln:35:14
@@ -1285,6 +1442,8 @@ design: (unnamed)
         \_operation: , line:35:5, endln:35:19
         |vpiName:MAX_VADDR
         |vpiFullName:work@top.MAX_VADDR
+        |vpiActual:
+        \_parameter: (work@top.MAX_VADDR), line:34:25, endln:34:62
       |vpiOperand:
       \_constant: , line:35:18, endln:35:19
         |vpiParent:
@@ -1294,18 +1453,18 @@ design: (unnamed)
         |UINT:3
         |vpiConstType:9
     |vpiStmt:
-    \_begin: (work@top)
+    \_begin: (work@top), line:35:21, endln:37:4
       |vpiParent:
-      \_gen_if: , line:35:1, endln:35:3
+      \_gen_if: , line:35:1, endln:37:4
       |vpiFullName:work@top
   |vpiGenStmt:
-  \_gen_if: , line:38:1, endln:38:3
+  \_gen_if: , line:38:1, endln:40:4
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
     |vpiCondition:
     \_operation: , line:38:5, endln:38:19
       |vpiParent:
-      \_gen_if: , line:38:1, endln:38:3
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
       |vpiOpType:14
       |vpiOperand:
       \_ref_obj: (work@top.MAX_VADDR), line:38:5, endln:38:14
@@ -1313,6 +1472,8 @@ design: (unnamed)
         \_operation: , line:38:5, endln:38:19
         |vpiName:MAX_VADDR
         |vpiFullName:work@top.MAX_VADDR
+        |vpiActual:
+        \_parameter: (work@top.MAX_VADDR), line:34:25, endln:34:62
       |vpiOperand:
       \_constant: , line:38:18, endln:38:19
         |vpiParent:
@@ -1322,18 +1483,18 @@ design: (unnamed)
         |UINT:5
         |vpiConstType:9
     |vpiStmt:
-    \_begin: (work@top)
+    \_begin: (work@top), line:38:21, endln:40:4
       |vpiParent:
-      \_gen_if: , line:38:1, endln:38:3
+      \_gen_if: , line:38:1, endln:40:4
       |vpiFullName:work@top
   |vpiGenStmt:
-  \_gen_if: , line:41:1, endln:41:3
+  \_gen_if: , line:41:1, endln:43:4
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
     |vpiCondition:
     \_operation: , line:41:5, endln:41:19
       |vpiParent:
-      \_gen_if: , line:41:1, endln:41:3
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
       |vpiOpType:15
       |vpiOperand:
       \_ref_obj: (work@top.MAX_VADDR), line:41:5, endln:41:14
@@ -1341,6 +1502,8 @@ design: (unnamed)
         \_operation: , line:41:5, endln:41:19
         |vpiName:MAX_VADDR
         |vpiFullName:work@top.MAX_VADDR
+        |vpiActual:
+        \_parameter: (work@top.MAX_VADDR), line:34:25, endln:34:62
       |vpiOperand:
       \_constant: , line:41:18, endln:41:19
         |vpiParent:
@@ -1350,148 +1513,17 @@ design: (unnamed)
         |UINT:3
         |vpiConstType:9
     |vpiStmt:
-    \_begin: (work@top)
+    \_begin: (work@top), line:41:21, endln:43:4
       |vpiParent:
-      \_gen_if: , line:41:1, endln:41:3
+      \_gen_if: , line:41:1, endln:43:4
       |vpiFullName:work@top
-\_weaklyReferenced:
-\_int_typespec: , line:4:12, endln:4:24
-  |vpiParent:
-  \_parameter: (work@top.CNT), line:4:25, endln:4:28
-\_array_typespec: , line:7:13, endln:7:32
-  |vpiParent:
-  \_parameter: (work@top.V), line:7:26, endln:7:27
-  |vpiRange:
-  \_range: , line:7:28, endln:7:31
-  |vpiElemTypespec:
-  \_ref_typespec: (work@top.V)
-    |vpiParent:
-    \_array_typespec: , line:7:13, endln:7:32
-    |vpiFullName:work@top.V
-    |vpiActual:
-    \_int_typespec: , line:7:13, endln:7:25
-\_int_typespec: , line:7:13, endln:7:25
-\_int_typespec: , line:9:9, endln:9:21
-\_array_typespec: (ASSIGN_VADDR_RET_T), line:9:9, endln:9:45
-  |vpiName:ASSIGN_VADDR_RET_T
-  |vpiTypedefAlias:
-  \_ref_typespec: (ASSIGN_VADDR_RET_T)
-    |vpiParent:
-    \_array_typespec: (ASSIGN_VADDR_RET_T), line:9:9, endln:9:45
-    |vpiFullName:ASSIGN_VADDR_RET_T
-    |vpiActual:
-    \_array_typespec: (ASSIGN_VADDR_RET_T), line:9:9, endln:9:45
-  |vpiRange:
-  \_range: , line:9:41, endln:9:44
-    |vpiParent:
-    \_array_typespec: (ASSIGN_VADDR_RET_T), line:9:9, endln:9:45
-    |vpiLeftRange:
-    \_constant: 
-      |vpiParent:
-      \_range: , line:9:41, endln:9:44
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-    |vpiRightRange:
-    \_operation: , line:9:41, endln:9:44
-      |vpiParent:
-      \_range: , line:9:41, endln:9:44
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (ASSIGN_VADDR_RET_T.CNT), line:9:41, endln:9:44
-        |vpiParent:
-        \_operation: , line:9:41, endln:9:44
-        |vpiName:CNT
-        |vpiFullName:ASSIGN_VADDR_RET_T.CNT
-      |vpiOperand:
-      \_constant: 
-        |vpiParent:
-        \_operation: , line:9:41, endln:9:44
-        |vpiSize:64
-        |INT:1
-        |vpiConstType:7
-  |vpiElemTypespec:
-  \_ref_typespec: (ASSIGN_VADDR_RET_T)
-    |vpiParent:
-    \_array_typespec: (ASSIGN_VADDR_RET_T), line:9:9, endln:9:45
-    |vpiFullName:ASSIGN_VADDR_RET_T
-    |vpiActual:
-    \_int_typespec: , line:9:9, endln:9:21
-\_int_typespec: , line:9:9, endln:9:21
-  |vpiParent:
-  \_ref_typespec: (ASSIGN_VADDR_RET_T)
-\_int_typespec: , line:11:9, endln:11:12
-  |vpiSigned:1
-\_array_typespec: , line:16:12, endln:16:35
-  |vpiParent:
-  \_parameter: (work@top.VADDR), line:16:25, endln:16:30
-  |vpiRange:
-  \_range: , line:16:31, endln:16:34
-  |vpiElemTypespec:
-  \_ref_typespec: (work@top.VADDR)
-    |vpiParent:
-    \_array_typespec: , line:16:12, endln:16:35
-    |vpiFullName:work@top.VADDR
-    |vpiActual:
-    \_int_typespec: , line:16:12, endln:16:24
-\_int_typespec: , line:16:12, endln:16:24
-\_int_typespec: , line:25:17, endln:25:29
-\_int_typespec: , line:25:44, endln:25:47
-\_int_typespec: , line:25:67, endln:25:70
-\_int_typespec: , line:27:10, endln:27:13
-  |vpiSigned:1
-\_int_typespec: , line:34:12, endln:34:24
-  |vpiParent:
-  \_parameter: (work@top.MAX_VADDR), line:34:25, endln:34:34
-\_int_var: (work@top.MAX_VADDR_CNT.MAX_VADDR_CNT), line:25:17, endln:25:29
-  |vpiParent:
-  \_ref_obj: (work@top.MAX_VADDR_CNT.MAX_VADDR_CNT), line:26:5, endln:26:18
-  |vpiTypespec:
-  \_ref_typespec: (work@top.MAX_VADDR_CNT.MAX_VADDR_CNT)
-    |vpiParent:
-    \_int_var: (work@top.MAX_VADDR_CNT.MAX_VADDR_CNT), line:25:17, endln:25:29
-    |vpiFullName:work@top.MAX_VADDR_CNT.MAX_VADDR_CNT
-    |vpiActual:
-    \_int_typespec: , line:25:17, endln:25:29
-  |vpiName:MAX_VADDR_CNT
-  |vpiFullName:work@top.MAX_VADDR_CNT.MAX_VADDR_CNT
-\_int_typespec: , line:25:17, endln:25:29
-  |vpiParent:
-  \_ref_typespec: (work@top.MAX_VADDR_CNT.MAX_VADDR_CNT)
-\_int_var: (work@top.MAX_VADDR_CNT.MAX_VADDR_CNT), line:25:17, endln:25:29
-  |vpiParent:
-  \_ref_obj: (work@top.MAX_VADDR_CNT.MAX_VADDR_CNT), line:28:22, endln:28:35
-  |vpiTypespec:
-  \_ref_typespec: (work@top.MAX_VADDR_CNT.MAX_VADDR_CNT)
-    |vpiParent:
-    \_int_var: (work@top.MAX_VADDR_CNT.MAX_VADDR_CNT), line:25:17, endln:25:29
-    |vpiFullName:work@top.MAX_VADDR_CNT.MAX_VADDR_CNT
-    |vpiActual:
-    \_int_typespec: , line:25:17, endln:25:29
-  |vpiName:MAX_VADDR_CNT
-  |vpiFullName:work@top.MAX_VADDR_CNT.MAX_VADDR_CNT
-\_int_typespec: , line:25:17, endln:25:29
-  |vpiParent:
-  \_ref_typespec: (work@top.MAX_VADDR_CNT.MAX_VADDR_CNT)
-\_int_var: (work@top.MAX_VADDR_CNT.MAX_VADDR_CNT), line:25:17, endln:25:29
-  |vpiParent:
-  \_ref_obj: (work@top.MAX_VADDR_CNT.MAX_VADDR_CNT), line:29:13, endln:29:26
-  |vpiTypespec:
-  \_ref_typespec: (work@top.MAX_VADDR_CNT.MAX_VADDR_CNT)
-    |vpiParent:
-    \_int_var: (work@top.MAX_VADDR_CNT.MAX_VADDR_CNT), line:25:17, endln:25:29
-    |vpiFullName:work@top.MAX_VADDR_CNT.MAX_VADDR_CNT
-    |vpiActual:
-    \_int_typespec: , line:25:17, endln:25:29
-  |vpiName:MAX_VADDR_CNT
-  |vpiFullName:work@top.MAX_VADDR_CNT.MAX_VADDR_CNT
-\_int_typespec: , line:25:17, endln:25:29
-  |vpiParent:
-  \_ref_typespec: (work@top.MAX_VADDR_CNT.MAX_VADDR_CNT)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv | ${SURELOG_DIR}/build/regression/ArrayExprFuncArg/roundtrip/dut_000.sv | 37 | 48 |
+============================== End RoundTrip Results ==============================

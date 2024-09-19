@@ -100,52 +100,55 @@ constant                                               4
 design                                                 1
 function                                               1
 int_typespec                                           2
-logic_typespec                                         1
-logic_var                                              1
 module_inst                                            1
 operation                                              2
 param_assign                                           2
 parameter                                              2
 range                                                  1
-ref_obj                                                4
-ref_typespec                                           6
+ref_obj                                                2
+ref_typespec                                           2
 return_stmt                                            1
+source_file                                            1
 === UHDM Object Stats End ===
+[ERR:UH0715] ${SURELOG_DIR}/tests/CastToParam/dut.sv:9:14: Void function "get_casted_depth" returns a value.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CastToParam/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/CastToParam/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/CastToParam/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/CastToParam/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastToParam/dut.sv, line:1:1, endln:11:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
+  |vpiName:work@top
   |vpiParameter:
-  \_parameter: (work@top.Depth), line:2:27, endln:2:32
+  \_parameter: (work@top.Depth), line:2:27, endln:2:36
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastToParam/dut.sv, line:1:1, endln:11:10
     |UINT:3
     |vpiTypespec:
-    \_ref_typespec: (work@top.Depth)
+    \_ref_typespec: (work@top.Depth), line:2:14, endln:2:17
       |vpiParent:
-      \_parameter: (work@top.Depth), line:2:27, endln:2:32
+      \_parameter: (work@top.Depth), line:2:27, endln:2:36
       |vpiFullName:work@top.Depth
       |vpiActual:
       \_int_typespec: , line:2:14, endln:2:26
     |vpiName:Depth
     |vpiFullName:work@top.Depth
   |vpiParameter:
-  \_parameter: (work@top.PTR_WIDTH), line:3:27, endln:3:36
+  \_parameter: (work@top.PTR_WIDTH), line:3:27, endln:3:41
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastToParam/dut.sv, line:1:1, endln:11:10
     |UINT:15
     |vpiTypespec:
-    \_ref_typespec: (work@top.PTR_WIDTH)
+    \_ref_typespec: (work@top.PTR_WIDTH), line:3:14, endln:3:17
       |vpiParent:
-      \_parameter: (work@top.PTR_WIDTH), line:3:27, endln:3:36
+      \_parameter: (work@top.PTR_WIDTH), line:3:27, endln:3:41
       |vpiFullName:work@top.PTR_WIDTH
       |vpiActual:
       \_int_typespec: , line:3:14, endln:3:26
@@ -162,16 +165,9 @@ design: (unnamed)
       |vpiDecompile:3
       |vpiSize:64
       |UINT:3
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:2:35, endln:2:36
-        |vpiFullName:work@top
-        |vpiActual:
-        \_int_typespec: , line:2:14, endln:2:26
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@top.Depth), line:2:27, endln:2:32
+    \_parameter: (work@top.Depth), line:2:27, endln:2:36
   |vpiParamAssign:
   \_param_assign: , line:3:27, endln:3:41
     |vpiParent:
@@ -183,18 +179,10 @@ design: (unnamed)
       |vpiDecompile:15
       |vpiSize:64
       |UINT:15
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:3:39, endln:3:41
-        |vpiFullName:work@top
-        |vpiActual:
-        \_int_typespec: , line:3:14, endln:3:26
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@top.PTR_WIDTH), line:3:27, endln:3:36
-  |vpiDefName:work@top
-  |vpiTaskFunc:
+    \_parameter: (work@top.PTR_WIDTH), line:3:27, endln:3:41
+  |vpiInternalScope:
   \_function: (work@top.get_casted_depth), line:8:4, endln:10:15
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastToParam/dut.sv, line:1:1, endln:11:10
@@ -202,95 +190,53 @@ design: (unnamed)
     |vpiFullName:work@top.get_casted_depth
     |vpiVisibility:1
     |vpiAutomatic:1
-    |vpiReturn:
-    \_logic_var: (work@top.get_casted_depth), line:8:23, endln:8:38
-      |vpiParent:
-      \_function: (work@top.get_casted_depth), line:8:4, endln:10:15
-      |vpiTypespec:
-      \_ref_typespec: (work@top.get_casted_depth)
-        |vpiParent:
-        \_logic_var: (work@top.get_casted_depth), line:8:23, endln:8:38
-        |vpiFullName:work@top.get_casted_depth
-        |vpiActual:
-        \_logic_typespec: , line:8:23, endln:8:38
-      |vpiFullName:work@top.get_casted_depth
     |vpiStmt:
-    \_return_stmt: , line:9:7, endln:9:13
+    \_return_stmt: , line:9:7, endln:9:33
       |vpiParent:
       \_function: (work@top.get_casted_depth), line:8:4, endln:10:15
       |vpiCondition:
       \_operation: , line:9:14, endln:9:33
         |vpiParent:
-        \_return_stmt: , line:9:7, endln:9:13
-        |vpiTypespec:
-        \_ref_typespec: (work@top.get_casted_depth)
-          |vpiParent:
-          \_operation: , line:9:14, endln:9:33
-          |vpiFullName:work@top.get_casted_depth
-          |vpiActual:
-          \_int_typespec: , line:3:14, endln:3:26
+        \_return_stmt: , line:9:7, endln:9:33
         |vpiOpType:67
         |vpiOperand:
-        \_ref_obj: (work@top.get_casted_depth.Depth), line:9:27, endln:9:32
+        \_ref_obj: (work@top.Depth), line:9:27, endln:9:32
           |vpiParent:
-          \_operation: , line:9:14, endln:9:33
+          \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastToParam/dut.sv, line:1:1, endln:11:10
           |vpiName:Depth
-          |vpiFullName:work@top.get_casted_depth.Depth
-    |vpiInstance:
+          |vpiFullName:work@top.Depth
+          |vpiActual:
+          \_parameter: (work@top.Depth), line:2:27, endln:2:36
+  |vpiTypedef:
+  \_int_typespec: , line:2:14, endln:2:26
+    |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastToParam/dut.sv, line:1:1, endln:11:10
-\_weaklyReferenced:
-\_int_typespec: , line:2:14, endln:2:26
-  |vpiParent:
-  \_parameter: (work@top.Depth), line:2:27, endln:2:32
-\_int_typespec: , line:3:14, endln:3:26
-  |vpiParent:
-  \_parameter: (work@top.PTR_WIDTH), line:3:27, endln:3:36
-  |vpiExpr:
-  \_ref_obj: (work@top.PTR_WIDTH.PTR_WIDTH)
+  |vpiTypedef:
+  \_int_typespec: , line:3:14, endln:3:26
     |vpiParent:
-    \_int_typespec: , line:3:14, endln:3:26
-    |vpiName:PTR_WIDTH
-    |vpiFullName:work@top.PTR_WIDTH.PTR_WIDTH
-    |vpiActual:
-    \_parameter: (work@top.PTR_WIDTH), line:3:27, endln:3:36
-\_logic_typespec: , line:8:23, endln:8:38
-  |vpiRange:
-  \_range: , line:8:23, endln:8:38
-    |vpiParent:
-    \_logic_typespec: , line:8:23, endln:8:38
-    |vpiLeftRange:
-    \_operation: , line:8:24, endln:8:35
-      |vpiParent:
-      \_range: , line:8:23, endln:8:38
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (PTR_WIDTH), line:8:24, endln:8:33
-        |vpiParent:
-        \_operation: , line:8:24, endln:8:35
-        |vpiName:PTR_WIDTH
-      |vpiOperand:
-      \_constant: , line:8:34, endln:8:35
-        |vpiParent:
-        \_operation: , line:8:24, endln:8:35
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:8:36, endln:8:37
-      |vpiParent:
-      \_range: , line:8:23, endln:8:38
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastToParam/dut.sv, line:1:1, endln:11:10
+  |vpiImportTypespec:
+  \_function: (work@top.get_casted_depth), line:8:4, endln:10:15
+  |vpiImportTypespec:
+  \_int_typespec: , line:2:14, endln:2:26
+  |vpiImportTypespec:
+  \_int_typespec: , line:3:14, endln:3:26
+  |vpiDefName:work@top
+  |vpiTaskFunc:
+  \_function: (work@top.get_casted_depth), line:8:4, endln:10:15
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 1
 [   NOTE] : 0
 
+============================== Begin Linting Results ==============================
+[LINT]: ${SURELOG_DIR}/tests/CastToParam/dut.sv:9:14: Return value void function, get_casted_depth
+[LINT]: ${SURELOG_DIR}/tests/CastToParam/dut.sv:9:14: Return value void function, get_casted_depth
+[LINT]: ${SURELOG_DIR}/tests/CastToParam/dut.sv:9:14: Return value void function, get_casted_depth
+============================== End Linting Results ==============================
+
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/CastToParam/dut.sv | ${SURELOG_DIR}/build/regression/CastToParam/roundtrip/dut_000.sv | 6 | 11 |
+[roundtrip]: ${SURELOG_DIR}/tests/CastToParam/dut.sv | ${SURELOG_DIR}/build/regression/CastToParam/roundtrip/dut_000.sv | 8 | 11 |
 ============================== End RoundTrip Results ==============================

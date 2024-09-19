@@ -288,7 +288,7 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/InsideOp/dut.sv:17:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-begin                                                  3
+begin                                                  8
 constant                                              18
 cont_assign                                            5
 design                                                 1
@@ -296,26 +296,30 @@ enum_const                                             6
 enum_typespec                                          1
 gen_if_else                                            4
 import_typespec                                        1
-int_typespec                                           2
-logic_net                                              1
+int_typespec                                           3
+int_var                                                1
 module_inst                                            3
-named_begin                                            5
 operation                                              4
 package                                                1
 param_assign                                           1
 parameter                                              1
 port                                                   1
 ref_module                                             1
-ref_obj                                               17
-ref_typespec                                           3
+ref_obj                                               16
+ref_typespec                                           4
+source_file                                            1
+unsupported_typespec                                   1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InsideOp/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/InsideOp/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/InsideOp/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/InsideOp/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallPackages:
 \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:1:1, endln:12:11
   |vpiParent:
@@ -323,23 +327,26 @@ design: (unnamed)
   |vpiName:my_pkg
   |vpiFullName:my_pkg::
   |vpiTypedef:
-  \_enum_typespec: (my_pkg::get_e), line:3:3, endln:10:11
+  \_int_typespec: , line:3:16, endln:3:19
     |vpiParent:
-    \_parameter: (work@top.GetWhat), line:20:21, endln:20:28
-    |vpiName:my_pkg::get_e
-    |vpiInstance:
     \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:1:1, endln:12:11
+    |vpiSigned:1
+  |vpiTypedef:
+  \_enum_typespec: (my_pkg::get_e), line:3:11, endln:10:11
+    |vpiParent:
+    \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:1:1, endln:12:11
+    |vpiName:my_pkg::get_e
     |vpiBaseTypespec:
-    \_ref_typespec: (work@top.GetWhat.my_pkg::get_e)
+    \_ref_typespec: (my_pkg::get_e), line:3:11, endln:10:11
       |vpiParent:
-      \_enum_typespec: (my_pkg::get_e), line:3:3, endln:10:11
-      |vpiFullName:work@top.GetWhat.my_pkg::get_e
+      \_enum_typespec: (my_pkg::get_e), line:3:11, endln:10:11
+      |vpiFullName:my_pkg::get_e
       |vpiActual:
       \_int_typespec: , line:3:16, endln:3:19
     |vpiEnumConst:
     \_enum_const: (Get0), line:4:5, endln:4:13
       |vpiParent:
-      \_enum_typespec: (my_pkg::get_e), line:3:3, endln:10:11
+      \_enum_typespec: (my_pkg::get_e), line:3:11, endln:10:11
       |vpiName:Get0
       |UINT:0
       |vpiDecompile:0
@@ -347,7 +354,7 @@ design: (unnamed)
     |vpiEnumConst:
     \_enum_const: (Get1), line:5:5, endln:5:13
       |vpiParent:
-      \_enum_typespec: (my_pkg::get_e), line:3:3, endln:10:11
+      \_enum_typespec: (my_pkg::get_e), line:3:11, endln:10:11
       |vpiName:Get1
       |UINT:1
       |vpiDecompile:1
@@ -355,7 +362,7 @@ design: (unnamed)
     |vpiEnumConst:
     \_enum_const: (Get2), line:6:5, endln:6:13
       |vpiParent:
-      \_enum_typespec: (my_pkg::get_e), line:3:3, endln:10:11
+      \_enum_typespec: (my_pkg::get_e), line:3:11, endln:10:11
       |vpiName:Get2
       |UINT:2
       |vpiDecompile:2
@@ -363,7 +370,7 @@ design: (unnamed)
     |vpiEnumConst:
     \_enum_const: (Get3), line:7:5, endln:7:13
       |vpiParent:
-      \_enum_typespec: (my_pkg::get_e), line:3:3, endln:10:11
+      \_enum_typespec: (my_pkg::get_e), line:3:11, endln:10:11
       |vpiName:Get3
       |UINT:3
       |vpiDecompile:3
@@ -371,7 +378,7 @@ design: (unnamed)
     |vpiEnumConst:
     \_enum_const: (Get4), line:8:5, endln:8:13
       |vpiParent:
-      \_enum_typespec: (my_pkg::get_e), line:3:3, endln:10:11
+      \_enum_typespec: (my_pkg::get_e), line:3:11, endln:10:11
       |vpiName:Get4
       |UINT:4
       |vpiDecompile:4
@@ -379,34 +386,53 @@ design: (unnamed)
     |vpiEnumConst:
     \_enum_const: (GetDefault), line:9:5, endln:9:21
       |vpiParent:
-      \_enum_typespec: (my_pkg::get_e), line:3:3, endln:10:11
+      \_enum_typespec: (my_pkg::get_e), line:3:11, endln:10:11
       |vpiName:GetDefault
       |UINT:100
       |vpiDecompile:100
       |vpiSize:64
+  |vpiImportTypespec:
+  \_int_typespec: , line:3:16, endln:3:19
+  |vpiImportTypespec:
+  \_enum_typespec: (my_pkg::get_e), line:3:11, endln:10:11
   |vpiDefName:my_pkg
 |uhdmallModules:
 \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:14:1, endln:15:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@GOOD
+  |vpiName:work@GOOD
   |vpiDefName:work@GOOD
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiParameter:
-  \_parameter: (work@top.GetWhat), line:20:21, endln:20:28
+  |vpiName:work@top
+  |vpiVariables:
+  \_int_var: (work@top.out), line:22:16, endln:22:19
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.GetWhat)
+    \_ref_typespec: (work@top.out), line:22:12, endln:22:15
       |vpiParent:
-      \_parameter: (work@top.GetWhat), line:20:21, endln:20:28
+      \_int_var: (work@top.out), line:22:16, endln:22:19
+      |vpiFullName:work@top.out
+      |vpiActual:
+      \_int_typespec: , line:22:12, endln:22:15
+    |vpiName:out
+    |vpiFullName:work@top.out
+    |vpiSigned:1
+    |vpiVisibility:1
+  |vpiParameter:
+  \_parameter: (work@top.GetWhat), line:20:21, endln:20:35
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
+    |vpiTypespec:
+    \_ref_typespec: (work@top.GetWhat), line:20:15, endln:20:20
+      |vpiParent:
+      \_parameter: (work@top.GetWhat), line:20:21, endln:20:35
       |vpiFullName:work@top.GetWhat
       |vpiActual:
-      \_enum_typespec: (my_pkg::get_e), line:3:3, endln:10:11
+      \_unsupported_typespec: (get_e), line:20:15, endln:20:20
     |vpiName:GetWhat
     |vpiFullName:work@top.GetWhat
   |vpiParamAssign:
@@ -422,47 +448,164 @@ design: (unnamed)
       |vpiActual:
       \_enum_const: (Get3), line:7:5, endln:7:13
     |vpiLhs:
-    \_parameter: (work@top.GetWhat), line:20:21, endln:20:28
-  |vpiTypedef:
-  \_enum_typespec: (my_pkg::get_e), line:3:3, endln:10:11
+    \_parameter: (work@top.GetWhat), line:20:21, endln:20:35
   |vpiTypedef:
   \_import_typespec: (my_pkg), line:18:8, endln:18:17
-  |vpiDefName:work@top
-  |vpiNet:
-  \_logic_net: (work@top.out), line:22:16, endln:22:19
+  |vpiTypedef:
+  \_unsupported_typespec: (get_e), line:20:15, endln:20:20
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
-    |vpiName:out
-    |vpiFullName:work@top.out
+    |vpiName:get_e
+  |vpiTypedef:
+  \_int_typespec: , line:22:12, endln:22:15
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:22:12, endln:22:15
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
+    |vpiSigned:1
+  |vpiImportTypespec:
+  \_import_typespec: (my_pkg), line:18:8, endln:18:17
+  |vpiImportTypespec:
+  \_unsupported_typespec: (get_e), line:20:15, endln:20:20
+  |vpiImportTypespec:
+  \_int_typespec: , line:22:12, endln:22:15
+  |vpiImportTypespec:
+  \_int_var: (work@top.out), line:22:16, endln:22:19
+  |vpiImportTypespec:
+  \_int_typespec: , line:22:12, endln:22:15
+  |vpiDefName:work@top
   |vpiPort:
-  \_port: (out), line:22:16, endln:22:19
+  \_port: (out), line:22:5, endln:22:19
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
     |vpiName:out
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@top.out.out), line:22:16, endln:22:19
-      |vpiParent:
-      \_port: (out), line:22:16, endln:22:19
-      |vpiName:out
-      |vpiFullName:work@top.out.out
-      |vpiActual:
-      \_logic_net: (work@top.out), line:22:16, endln:22:19
     |vpiTypedef:
-    \_ref_typespec: (work@top.out)
+    \_ref_typespec: (work@top.out), line:22:12, endln:22:15
       |vpiParent:
-      \_port: (out), line:22:16, endln:22:19
+      \_port: (out), line:22:5, endln:22:19
       |vpiFullName:work@top.out
       |vpiActual:
       \_int_typespec: , line:22:12, endln:22:15
+  |vpiContAssign:
+  \_cont_assign: , line:26:12, endln:26:19
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
+    |vpiRhs:
+    \_constant: , line:26:18, endln:26:19
+      |vpiParent:
+      \_cont_assign: , line:26:12, endln:26:19
+      |vpiDecompile:0
+      |vpiSize:64
+      |UINT:0
+      |vpiConstType:9
+    |vpiLhs:
+    \_ref_obj: (work@top.out), line:26:12, endln:26:15
+      |vpiParent:
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
+      |vpiName:out
+      |vpiFullName:work@top.out
+      |vpiActual:
+      \_int_var: (work@top.out), line:22:16, endln:22:19
+  |vpiContAssign:
+  \_cont_assign: , line:28:12, endln:28:19
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
+    |vpiRhs:
+    \_constant: , line:28:18, endln:28:19
+      |vpiParent:
+      \_cont_assign: , line:28:12, endln:28:19
+      |vpiDecompile:1
+      |vpiSize:64
+      |UINT:1
+      |vpiConstType:9
+    |vpiLhs:
+    \_ref_obj: (work@top.out), line:28:12, endln:28:15
+      |vpiParent:
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
+      |vpiName:out
+      |vpiFullName:work@top.out
+      |vpiActual:
+      \_int_var: (work@top.out), line:22:16, endln:22:19
+  |vpiContAssign:
+  \_cont_assign: , line:30:12, endln:30:19
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
+    |vpiRhs:
+    \_constant: , line:30:18, endln:30:19
+      |vpiParent:
+      \_cont_assign: , line:30:12, endln:30:19
+      |vpiDecompile:2
+      |vpiSize:64
+      |UINT:2
+      |vpiConstType:9
+    |vpiLhs:
+    \_ref_obj: (work@top.out), line:30:12, endln:30:15
+      |vpiParent:
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
+      |vpiName:out
+      |vpiFullName:work@top.out
+      |vpiActual:
+      \_int_var: (work@top.out), line:22:16, endln:22:19
+  |vpiContAssign:
+  \_cont_assign: , line:33:12, endln:33:19
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
+    |vpiRhs:
+    \_constant: , line:33:18, endln:33:19
+      |vpiParent:
+      \_cont_assign: , line:33:12, endln:33:19
+      |vpiDecompile:3
+      |vpiSize:64
+      |UINT:3
+      |vpiConstType:9
+    |vpiLhs:
+    \_ref_obj: (work@top.out), line:33:12, endln:33:15
+      |vpiParent:
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
+      |vpiName:out
+      |vpiFullName:work@top.out
+      |vpiActual:
+      \_int_var: (work@top.out), line:22:16, endln:22:19
+  |vpiContAssign:
+  \_cont_assign: , line:35:12, endln:35:21
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
+    |vpiRhs:
+    \_constant: , line:35:18, endln:35:21
+      |vpiParent:
+      \_cont_assign: , line:35:12, endln:35:21
+      |vpiDecompile:255
+      |vpiSize:64
+      |UINT:255
+      |vpiConstType:9
+    |vpiLhs:
+    \_ref_obj: (work@top.out), line:35:12, endln:35:15
+      |vpiParent:
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
+      |vpiName:out
+      |vpiFullName:work@top.out
+      |vpiActual:
+      \_int_var: (work@top.out), line:22:16, endln:22:19
+  |vpiRefModule:
+  \_ref_module: work@GOOD (good), line:31:5, endln:31:17
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
+    |vpiName:good
+    |vpiDefName:work@GOOD
+    |vpiActual:
+    \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:14:1, endln:15:10
   |vpiGenStmt:
-  \_gen_if_else: 
+  \_gen_if_else: , line:25:3, endln:36:6
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
     |vpiCondition:
     \_operation: , line:25:7, endln:25:40
       |vpiParent:
-      \_gen_if_else: 
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
       |vpiOpType:95
       |vpiOperand:
       \_ref_obj: (work@top.GetWhat), line:25:7, endln:25:14
@@ -470,6 +613,8 @@ design: (unnamed)
         \_operation: , line:25:7, endln:25:40
         |vpiName:GetWhat
         |vpiFullName:work@top.GetWhat
+        |vpiActual:
+        \_parameter: (work@top.GetWhat), line:20:21, endln:20:35
       |vpiOperand:
       \_ref_obj: (work@top.Get0), line:25:23, endln:25:27
         |vpiParent:
@@ -487,42 +632,26 @@ design: (unnamed)
         |vpiActual:
         \_enum_const: (GetDefault), line:9:5, endln:9:21
     |vpiStmt:
-    \_named_begin: (work@top.gen_zero)
+    \_begin: (work@top.gen_zero), line:25:42, endln:27:6
       |vpiParent:
-      \_gen_if_else: 
+      \_gen_if_else: , line:25:3, endln:36:6
       |vpiName:gen_zero
       |vpiFullName:work@top.gen_zero
       |vpiStmt:
       \_cont_assign: , line:26:12, endln:26:19
-        |vpiParent:
-        \_named_begin: (work@top.gen_zero)
-        |vpiRhs:
-        \_constant: , line:26:18, endln:26:19
-          |vpiParent:
-          \_cont_assign: , line:26:12, endln:26:19
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiConstType:9
-        |vpiLhs:
-        \_ref_obj: (work@top.gen_zero.out), line:26:12, endln:26:15
-          |vpiParent:
-          \_cont_assign: , line:26:12, endln:26:19
-          |vpiName:out
-          |vpiFullName:work@top.gen_zero.out
     |vpiElseStmt:
-    \_begin: (work@top)
+    \_begin: (work@top), line:27:12, endln:36:6
       |vpiParent:
-      \_gen_if_else: 
+      \_gen_if_else: , line:25:3, endln:36:6
       |vpiFullName:work@top
       |vpiStmt:
       \_gen_if_else: , line:27:12, endln:36:6
         |vpiParent:
-        \_begin: (work@top)
+        \_begin: (work@top), line:27:12, endln:36:6
         |vpiCondition:
         \_operation: , line:27:16, endln:27:31
           |vpiParent:
-          \_gen_if_else: , line:27:12, endln:36:6
+          \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
           |vpiOpType:14
           |vpiOperand:
           \_ref_obj: (work@top.GetWhat), line:27:16, endln:27:23
@@ -530,49 +659,37 @@ design: (unnamed)
             \_operation: , line:27:16, endln:27:31
             |vpiName:GetWhat
             |vpiFullName:work@top.GetWhat
+            |vpiActual:
+            \_parameter: (work@top.GetWhat), line:20:21, endln:20:35
           |vpiOperand:
           \_ref_obj: (work@top.Get1), line:27:27, endln:27:31
             |vpiParent:
             \_operation: , line:27:16, endln:27:31
             |vpiName:Get1
             |vpiFullName:work@top.Get1
+            |vpiActual:
+            \_enum_const: (Get1), line:5:5, endln:5:13
         |vpiStmt:
-        \_named_begin: (work@top.gen_one)
+        \_begin: (work@top.gen_one), line:27:33, endln:29:6
           |vpiParent:
           \_gen_if_else: , line:27:12, endln:36:6
           |vpiName:gen_one
           |vpiFullName:work@top.gen_one
           |vpiStmt:
           \_cont_assign: , line:28:12, endln:28:19
-            |vpiParent:
-            \_named_begin: (work@top.gen_one)
-            |vpiRhs:
-            \_constant: , line:28:18, endln:28:19
-              |vpiParent:
-              \_cont_assign: , line:28:12, endln:28:19
-              |vpiDecompile:1
-              |vpiSize:64
-              |UINT:1
-              |vpiConstType:9
-            |vpiLhs:
-            \_ref_obj: (work@top.gen_one.out), line:28:12, endln:28:15
-              |vpiParent:
-              \_cont_assign: , line:28:12, endln:28:19
-              |vpiName:out
-              |vpiFullName:work@top.gen_one.out
         |vpiElseStmt:
-        \_begin: (work@top)
+        \_begin: (work@top), line:29:12, endln:36:6
           |vpiParent:
           \_gen_if_else: , line:27:12, endln:36:6
           |vpiFullName:work@top
           |vpiStmt:
           \_gen_if_else: , line:29:12, endln:36:6
             |vpiParent:
-            \_begin: (work@top)
+            \_begin: (work@top), line:29:12, endln:36:6
             |vpiCondition:
             \_operation: , line:29:16, endln:29:43
               |vpiParent:
-              \_gen_if_else: , line:29:12, endln:36:6
+              \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
               |vpiOpType:95
               |vpiOperand:
               \_ref_obj: (work@top.GetWhat), line:29:16, endln:29:23
@@ -580,61 +697,47 @@ design: (unnamed)
                 \_operation: , line:29:16, endln:29:43
                 |vpiName:GetWhat
                 |vpiFullName:work@top.GetWhat
+                |vpiActual:
+                \_parameter: (work@top.GetWhat), line:20:21, endln:20:35
               |vpiOperand:
               \_ref_obj: (work@top.Get2), line:29:32, endln:29:36
                 |vpiParent:
                 \_operation: , line:29:16, endln:29:43
                 |vpiName:Get2
                 |vpiFullName:work@top.Get2
+                |vpiActual:
+                \_enum_const: (Get2), line:6:5, endln:6:13
               |vpiOperand:
               \_ref_obj: (work@top.Get3), line:29:38, endln:29:42
                 |vpiParent:
                 \_operation: , line:29:16, endln:29:43
                 |vpiName:Get3
                 |vpiFullName:work@top.Get3
+                |vpiActual:
+                \_enum_const: (Get3), line:7:5, endln:7:13
             |vpiStmt:
-            \_named_begin: (work@top.gen_two)
+            \_begin: (work@top.gen_two), line:29:45, endln:32:6
               |vpiParent:
               \_gen_if_else: , line:29:12, endln:36:6
               |vpiName:gen_two
               |vpiFullName:work@top.gen_two
               |vpiStmt:
               \_cont_assign: , line:30:12, endln:30:19
-                |vpiParent:
-                \_named_begin: (work@top.gen_two)
-                |vpiRhs:
-                \_constant: , line:30:18, endln:30:19
-                  |vpiParent:
-                  \_cont_assign: , line:30:12, endln:30:19
-                  |vpiDecompile:2
-                  |vpiSize:64
-                  |UINT:2
-                  |vpiConstType:9
-                |vpiLhs:
-                \_ref_obj: (work@top.gen_two.out), line:30:12, endln:30:15
-                  |vpiParent:
-                  \_cont_assign: , line:30:12, endln:30:19
-                  |vpiName:out
-                  |vpiFullName:work@top.gen_two.out
               |vpiStmt:
-              \_ref_module: work@GOOD (good), line:31:10, endln:31:14
-                |vpiParent:
-                \_named_begin: (work@top.gen_two)
-                |vpiName:good
-                |vpiDefName:work@GOOD
+              \_ref_module: work@GOOD (good), line:31:5, endln:31:17
             |vpiElseStmt:
-            \_begin: (work@top)
+            \_begin: (work@top), line:32:12, endln:36:6
               |vpiParent:
               \_gen_if_else: , line:29:12, endln:36:6
               |vpiFullName:work@top
               |vpiStmt:
               \_gen_if_else: , line:32:12, endln:36:6
                 |vpiParent:
-                \_begin: (work@top)
+                \_begin: (work@top), line:32:12, endln:36:6
                 |vpiCondition:
                 \_operation: , line:32:16, endln:32:31
                   |vpiParent:
-                  \_gen_if_else: , line:32:12, endln:36:6
+                  \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:17:1, endln:38:10
                   |vpiOpType:14
                   |vpiOperand:
                   \_ref_obj: (work@top.GetWhat), line:32:16, endln:32:23
@@ -642,67 +745,32 @@ design: (unnamed)
                     \_operation: , line:32:16, endln:32:31
                     |vpiName:GetWhat
                     |vpiFullName:work@top.GetWhat
+                    |vpiActual:
+                    \_parameter: (work@top.GetWhat), line:20:21, endln:20:35
                   |vpiOperand:
                   \_ref_obj: (work@top.Get4), line:32:27, endln:32:31
                     |vpiParent:
                     \_operation: , line:32:16, endln:32:31
                     |vpiName:Get4
                     |vpiFullName:work@top.Get4
+                    |vpiActual:
+                    \_enum_const: (Get4), line:8:5, endln:8:13
                 |vpiStmt:
-                \_named_begin: (work@top.gen_three)
+                \_begin: (work@top.gen_three), line:32:33, endln:34:6
                   |vpiParent:
                   \_gen_if_else: , line:32:12, endln:36:6
                   |vpiName:gen_three
                   |vpiFullName:work@top.gen_three
                   |vpiStmt:
                   \_cont_assign: , line:33:12, endln:33:19
-                    |vpiParent:
-                    \_named_begin: (work@top.gen_three)
-                    |vpiRhs:
-                    \_constant: , line:33:18, endln:33:19
-                      |vpiParent:
-                      \_cont_assign: , line:33:12, endln:33:19
-                      |vpiDecompile:3
-                      |vpiSize:64
-                      |UINT:3
-                      |vpiConstType:9
-                    |vpiLhs:
-                    \_ref_obj: (work@top.gen_three.out), line:33:12, endln:33:15
-                      |vpiParent:
-                      \_cont_assign: , line:33:12, endln:33:19
-                      |vpiName:out
-                      |vpiFullName:work@top.gen_three.out
                 |vpiElseStmt:
-                \_named_begin: (work@top.gen_invalid)
+                \_begin: (work@top.gen_invalid), line:34:12, endln:36:6
                   |vpiParent:
                   \_gen_if_else: , line:32:12, endln:36:6
                   |vpiName:gen_invalid
                   |vpiFullName:work@top.gen_invalid
                   |vpiStmt:
                   \_cont_assign: , line:35:12, endln:35:21
-                    |vpiParent:
-                    \_named_begin: (work@top.gen_invalid)
-                    |vpiRhs:
-                    \_constant: , line:35:18, endln:35:21
-                      |vpiParent:
-                      \_cont_assign: , line:35:12, endln:35:21
-                      |vpiDecompile:255
-                      |vpiSize:64
-                      |UINT:255
-                      |vpiConstType:9
-                    |vpiLhs:
-                    \_ref_obj: (work@top.gen_invalid.out), line:35:12, endln:35:15
-                      |vpiParent:
-                      \_cont_assign: , line:35:12, endln:35:21
-                      |vpiName:out
-                      |vpiFullName:work@top.gen_invalid.out
-\_weaklyReferenced:
-\_int_typespec: , line:3:16, endln:3:19
-  |vpiInstance:
-  \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:1:1, endln:12:11
-  |vpiSigned:1
-\_int_typespec: , line:22:12, endln:22:15
-  |vpiSigned:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -711,5 +779,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/InsideOp/dut.sv | ${SURELOG_DIR}/build/regression/InsideOp/roundtrip/dut_000.sv | 12 | 38 |
+[roundtrip]: ${SURELOG_DIR}/tests/InsideOp/dut.sv | ${SURELOG_DIR}/build/regression/InsideOp/roundtrip/dut_000.sv | 18 | 38 |
 ============================== End RoundTrip Results ==============================

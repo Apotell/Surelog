@@ -34,13 +34,21 @@ PARSER CACHE USED FOR: ${SURELOG_DIR}/tests/EvalFunc/dut.sv
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/TestSepComp/badpath/badtop.sv:1:1: Compile module "work@badtop".
 [INF:CP0303] ${SURELOG_DIR}/tests/EvalFunc/dut.sv:22:1: Compile module "work@top".
-[INF:CP0302] Compile class "work@mailbox".
-[INF:CP0302] Compile class "work@process".
-[INF:CP0302] Compile class "work@semaphore".
+[INF:CP0302] Compile class "builtin::mailbox".
+[INF:CP0302] Compile class "builtin::process".
+[INF:CP0302] Compile class "builtin::semaphore".
 [INF:UH0706] Creating UHDM Model...
+[ERR:IG0809] ${SURELOG_DIR}/tests/TestSepComp/badpath/badtop.sv:3:4: Object 74 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/tests/TestSepComp/badpath/slpp_all/surelog.uhdm ...
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 5
 [   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/EvalFunc/dut.sv               | ${SURELOG_DIR}/tests/TestSepComp/badpath/dut_000.sv    | 28 | 68 |
+[roundtrip]: ${SURELOG_DIR}/tests/TestSepComp/badpath/badtop.sv | ${SURELOG_DIR}/tests/TestSepComp/badpath/badtop_000.sv | 5 | 6 |
+[roundtrip]: ${SURELOG_DIR}/tests/TestSepComp/pkg1.sv           | ${SURELOG_DIR}/tests/TestSepComp/badpath/pkg1_000.sv   | 1 | 7 |
+[roundtrip]: ${SURELOG_DIR}/tests/TestSepComp/pkg2.sv           | ${SURELOG_DIR}/tests/TestSepComp/badpath/pkg2_000.sv   | 10 | 16 |
+============================== End RoundTrip Results ==============================

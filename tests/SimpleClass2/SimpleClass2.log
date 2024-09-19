@@ -3,53 +3,58 @@
 [WRN:PA0205] ${SURELOG_DIR}/tests/SimpleClass2/top.v:26:1: No timescale set for "p3".
 [WRN:PA0205] ${SURELOG_DIR}/tests/SimpleClass2/top.v:31:1: No timescale set for "p2".
 [INF:CP0300] Compilation...
-[INF:CP0302] Compile class "work@mailbox".
+[INF:CP0302] Compile class "builtin::mailbox".
+[INF:CP0302] Compile class "builtin::process".
+[INF:CP0302] Compile class "builtin::semaphore".
 [INF:CP0302] ${SURELOG_DIR}/tests/SimpleClass2/top.v:10:1: Compile class "p1::c1".
 [INF:CP0302] ${SURELOG_DIR}/tests/SimpleClass2/top.v:35:1: Compile class "p2::c2".
 [INF:CP0302] ${SURELOG_DIR}/tests/SimpleClass2/top.v:27:1: Compile class "p3::c33".
-[INF:CP0302] Compile class "work@process".
-[INF:CP0302] Compile class "work@semaphore".
 [INF:CP0302] ${SURELOG_DIR}/tests/SimpleClass2/top.v:2:1: Compile class "work@uvm_pool".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 begin                                                  1
-class_defn                                            13
-class_typespec                                         6
-class_var                                              5
+class_defn                                            12
+class_typespec                                         3
+class_var                                              3
 constant                                              12
 design                                                 1
 enum_const                                             5
 enum_typespec                                          1
 enum_var                                               1
+extends                                                1
 function                                              13
 import_typespec                                        1
 int_typespec                                           9
 int_var                                                4
 io_decl                                               15
-logic_var                                              3
+logic_var                                              4
 method_func_call                                       6
 package                                                4
 ref_obj                                                7
 ref_typespec                                          19
-string_typespec                                        3
+source_file                                            1
+string_typespec                                        4
+string_var                                             1
 task                                                   9
-unsupported_typespec                                   1
+unsupported_typespec                                   2
 === UHDM Object Stats End ===
+[ERR:IG0807] ${SURELOG_DIR}/tests/SimpleClass2/top.v:15:30: Child 104 is not entirely in parent's scope.
+[ERR:IG0809] ${SURELOG_DIR}/tests/SimpleClass2/top.v:35:18: Object 109 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SimpleClass2/slpp_all/surelog.uhdm ...
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 2
 [WARNING] : 3
 [   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
 [LINT]: ${SURELOG_DIR}/tests/SimpleClass2/top.v:10:1: Non synthesizable construct, c1
 [LINT]: ${SURELOG_DIR}/tests/SimpleClass2/top.v:27:1: Non synthesizable construct, c33
+[LINT]: ${SURELOG_DIR}/tests/SimpleClass2/top.v:35:18: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/SimpleClass2/top.v:35:1: Non synthesizable construct, c2
 [LINT]: ${SURELOG_DIR}/tests/SimpleClass2/top.v:2:1: Non synthesizable construct, work@uvm_pool
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/SimpleClass2/builtin.sv | ${SURELOG_DIR}/build/regression/SimpleClass2/roundtrip/builtin_000.sv | 0 | 0 |
-[roundtrip]: ${SURELOG_DIR}/tests/SimpleClass2/top.v      | ${SURELOG_DIR}/build/regression/SimpleClass2/roundtrip/top_000.v      | 13 | 52 |
+[roundtrip]: ${SURELOG_DIR}/tests/SimpleClass2/top.v | ${SURELOG_DIR}/build/regression/SimpleClass2/roundtrip/top_000.v | 17 | 52 |
 ============================== End RoundTrip Results ==============================

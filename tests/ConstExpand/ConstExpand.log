@@ -160,107 +160,137 @@ constant                                               5
 design                                                 1
 hier_path                                              1
 indexed_part_select                                    1
-int_typespec                                           3
-logic_net                                              2
+int_typespec                                           4
+int_var                                                1
 module_inst                                            1
 port                                                   1
-ref_obj                                                4
-ref_typespec                                           4
+ref_obj                                                3
+ref_typespec                                           5
+source_file                                            1
 struct_typespec                                        1
+struct_var                                             1
 typespec_member                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConstExpand/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ConstExpand/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ConstExpand/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/ConstExpand/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstExpand/dut.sv, line:1:1, endln:15:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
+  |vpiName:work@top
+  |vpiVariables:
+  \_int_var: (work@top.o), line:1:23, endln:1:24
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstExpand/dut.sv, line:1:1, endln:15:10
+    |vpiTypespec:
+    \_ref_typespec: (work@top.o), line:1:19, endln:1:22
+      |vpiParent:
+      \_int_var: (work@top.o), line:1:23, endln:1:24
+      |vpiFullName:work@top.o
+      |vpiActual:
+      \_int_typespec: , line:1:19, endln:1:22
+    |vpiName:o
+    |vpiFullName:work@top.o
+    |vpiSigned:1
+    |vpiVisibility:1
+  |vpiVariables:
+  \_struct_var: (work@top.operation_i), line:7:27, endln:7:38
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstExpand/dut.sv, line:1:1, endln:15:10
+    |vpiTypespec:
+    \_ref_typespec: (work@top.operation_i.mac_bignum_operation_t), line:7:4, endln:7:26
+      |vpiParent:
+      \_struct_var: (work@top.operation_i), line:7:27, endln:7:38
+      |vpiName:mac_bignum_operation_t
+      |vpiFullName:work@top.operation_i.mac_bignum_operation_t
+      |vpiActual:
+      \_struct_typespec: (mac_bignum_operation_t), line:2:12, endln:5:5
+    |vpiName:operation_i
+    |vpiFullName:work@top.operation_i
+    |vpiVisibility:1
   |vpiTypedef:
   \_struct_typespec: (mac_bignum_operation_t), line:2:12, endln:5:5
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstExpand/dut.sv, line:1:1, endln:15:10
     |vpiName:mac_bignum_operation_t
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstExpand/dut.sv, line:1:1, endln:15:10
     |vpiPacked:1
     |vpiTypespecMember:
-    \_typespec_member: (operand_a), line:3:11, endln:3:20
+    \_typespec_member: (operand_a), line:3:7, endln:3:21
       |vpiParent:
       \_struct_typespec: (mac_bignum_operation_t), line:2:12, endln:5:5
       |vpiName:operand_a
       |vpiTypespec:
-      \_ref_typespec: (work@top.mac_bignum_operation_t.operand_a)
+      \_ref_typespec: (work@top.mac_bignum_operation_t.operand_a), line:3:7, endln:3:10
         |vpiParent:
-        \_typespec_member: (operand_a), line:3:11, endln:3:20
+        \_typespec_member: (operand_a), line:3:7, endln:3:21
         |vpiFullName:work@top.mac_bignum_operation_t.operand_a
         |vpiActual:
         \_int_typespec: , line:3:7, endln:3:10
-      |vpiRefFile:${SURELOG_DIR}/tests/ConstExpand/dut.sv
-      |vpiRefLineNo:3
-      |vpiRefColumnNo:7
-      |vpiRefEndLineNo:3
-      |vpiRefEndColumnNo:10
     |vpiTypespecMember:
-    \_typespec_member: (unused), line:4:11, endln:4:17
+    \_typespec_member: (unused), line:4:7, endln:4:18
       |vpiParent:
       \_struct_typespec: (mac_bignum_operation_t), line:2:12, endln:5:5
       |vpiName:unused
       |vpiTypespec:
-      \_ref_typespec: (work@top.mac_bignum_operation_t.unused)
+      \_ref_typespec: (work@top.mac_bignum_operation_t.unused), line:4:7, endln:4:10
         |vpiParent:
-        \_typespec_member: (unused), line:4:11, endln:4:17
+        \_typespec_member: (unused), line:4:7, endln:4:18
         |vpiFullName:work@top.mac_bignum_operation_t.unused
         |vpiActual:
         \_int_typespec: , line:4:7, endln:4:10
-      |vpiRefFile:${SURELOG_DIR}/tests/ConstExpand/dut.sv
-      |vpiRefLineNo:4
-      |vpiRefColumnNo:7
-      |vpiRefEndLineNo:4
-      |vpiRefEndColumnNo:10
+  |vpiTypedef:
+  \_int_typespec: , line:3:7, endln:3:10
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstExpand/dut.sv, line:1:1, endln:15:10
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:4:7, endln:4:10
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstExpand/dut.sv, line:1:1, endln:15:10
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:1:19, endln:1:22
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstExpand/dut.sv, line:1:1, endln:15:10
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:1:19, endln:1:22
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstExpand/dut.sv, line:1:1, endln:15:10
+    |vpiSigned:1
+  |vpiImportTypespec:
+  \_struct_typespec: (mac_bignum_operation_t), line:2:12, endln:5:5
+  |vpiImportTypespec:
+  \_int_typespec: , line:3:7, endln:3:10
+  |vpiImportTypespec:
+  \_int_typespec: , line:4:7, endln:4:10
+  |vpiImportTypespec:
+  \_int_typespec: , line:1:19, endln:1:22
+  |vpiImportTypespec:
+  \_int_var: (work@top.o), line:1:23, endln:1:24
+  |vpiImportTypespec:
+  \_struct_var: (work@top.operation_i), line:7:27, endln:7:38
+  |vpiImportTypespec:
+  \_int_typespec: , line:1:19, endln:1:22
   |vpiDefName:work@top
-  |vpiNet:
-  \_logic_net: (work@top.o), line:1:23, endln:1:24
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstExpand/dut.sv, line:1:1, endln:15:10
-    |vpiName:o
-    |vpiFullName:work@top.o
-  |vpiNet:
-  \_logic_net: (work@top.operation_i), line:7:27, endln:7:38
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstExpand/dut.sv, line:1:1, endln:15:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.operation_i)
-      |vpiParent:
-      \_logic_net: (work@top.operation_i), line:7:27, endln:7:38
-      |vpiFullName:work@top.operation_i
-      |vpiActual:
-      \_struct_typespec: (mac_bignum_operation_t), line:2:12, endln:5:5
-    |vpiName:operation_i
-    |vpiFullName:work@top.operation_i
   |vpiPort:
-  \_port: (o), line:1:23, endln:1:24
+  \_port: (o), line:1:12, endln:1:24
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstExpand/dut.sv, line:1:1, endln:15:10
     |vpiName:o
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@top.o.o), line:1:23, endln:1:24
-      |vpiParent:
-      \_port: (o), line:1:23, endln:1:24
-      |vpiName:o
-      |vpiFullName:work@top.o.o
-      |vpiActual:
-      \_logic_net: (work@top.o), line:1:23, endln:1:24
     |vpiTypedef:
-    \_ref_typespec: (work@top.o)
+    \_ref_typespec: (work@top.o), line:1:19, endln:1:22
       |vpiParent:
-      \_port: (o), line:1:23, endln:1:24
+      \_port: (o), line:1:12, endln:1:24
       |vpiFullName:work@top.o
       |vpiActual:
       \_int_typespec: , line:1:19, endln:1:22
@@ -282,7 +312,7 @@ design: (unnamed)
         |vpiCondition:
         \_constant: , line:10:20, endln:10:21
           |vpiParent:
-          \_case_stmt: , line:10:7, endln:13:14
+          \_begin: (work@top), line:9:16, endln:14:7
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
@@ -294,7 +324,7 @@ design: (unnamed)
           |vpiExpr:
           \_constant: , line:11:10, endln:11:11
             |vpiParent:
-            \_case_item: , line:11:10, endln:11:46
+            \_begin: (work@top), line:9:16, endln:14:7
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
@@ -306,30 +336,38 @@ design: (unnamed)
             |vpiOpType:82
             |vpiBlocking:1
             |vpiRhs:
-            \_hier_path: (operation_i.operand_a[0+:32]), line:11:17, endln:11:45
+            \_hier_path: (operation_i.operand_a[0+:32]), line:11:17, endln:11:44
               |vpiParent:
               \_assignment: , line:11:13, endln:11:45
               |vpiActual:
               \_ref_obj: (operation_i), line:11:17, endln:11:28
                 |vpiParent:
-                \_hier_path: (operation_i.operand_a[0+:32]), line:11:17, endln:11:45
+                \_hier_path: (operation_i.operand_a[0+:32]), line:11:17, endln:11:44
                 |vpiName:operation_i
+                |vpiActual:
+                \_struct_var: (work@top.operation_i), line:7:27, endln:7:38
               |vpiActual:
               \_indexed_part_select: (operation_i.operand_a[0+:32]), line:11:29, endln:11:44
                 |vpiParent:
-                \_hier_path: (operation_i.operand_a[0+:32]), line:11:17, endln:11:45
+                \_hier_path: (operation_i.operand_a[0+:32]), line:11:17, endln:11:44
                 |vpiName:operand_a
                 |vpiFullName:operation_i.operand_a[0+:32]
+                |vpiActual:
+                \_typespec_member: (operand_a), line:3:7, endln:3:21
                 |vpiConstantSelect:1
                 |vpiIndexedPartSelectType:1
                 |vpiBaseExpr:
                 \_constant: , line:11:39, endln:11:40
+                  |vpiParent:
+                  \_indexed_part_select: (operation_i.operand_a[0+:32]), line:11:29, endln:11:44
                   |vpiDecompile:0
                   |vpiSize:64
                   |UINT:0
                   |vpiConstType:9
                 |vpiWidthExpr:
                 \_constant: , line:11:42, endln:11:44
+                  |vpiParent:
+                  \_indexed_part_select: (operation_i.operand_a[0+:32]), line:11:29, endln:11:44
                   |vpiDecompile:32
                   |vpiSize:64
                   |UINT:32
@@ -342,7 +380,7 @@ design: (unnamed)
               |vpiName:o
               |vpiFullName:work@top.o
               |vpiActual:
-              \_logic_net: (work@top.o), line:1:23, endln:1:24
+              \_int_var: (work@top.o), line:1:23, endln:1:24
         |vpiCaseItem:
         \_case_item: , line:12:10, endln:12:26
           |vpiParent:
@@ -355,6 +393,8 @@ design: (unnamed)
             |vpiBlocking:1
             |vpiRhs:
             \_constant: , line:12:23, endln:12:25
+              |vpiParent:
+              \_assignment: , line:12:19, endln:12:25
               |vpiDecompile:'0
               |vpiSize:-1
               |BIN:0
@@ -366,15 +406,8 @@ design: (unnamed)
               |vpiName:o
               |vpiFullName:work@top.o
               |vpiActual:
-              \_logic_net: (work@top.o), line:1:23, endln:1:24
+              \_int_var: (work@top.o), line:1:23, endln:1:24
     |vpiAlwaysType:2
-\_weaklyReferenced:
-\_int_typespec: , line:3:7, endln:3:10
-  |vpiSigned:1
-\_int_typespec: , line:4:7, endln:4:10
-  |vpiSigned:1
-\_int_typespec: , line:1:19, endln:1:22
-  |vpiSigned:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -383,5 +416,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ConstExpand/dut.sv | ${SURELOG_DIR}/build/regression/ConstExpand/roundtrip/dut_000.sv | 3 | 15 |
+[roundtrip]: ${SURELOG_DIR}/tests/ConstExpand/dut.sv | ${SURELOG_DIR}/build/regression/ConstExpand/roundtrip/dut_000.sv | 7 | 15 |
 ============================== End RoundTrip Results ==============================

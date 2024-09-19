@@ -94,33 +94,57 @@ AST_DEBUG_END
 cont_assign                                            1
 design                                                 1
 hier_path                                              1
-logic_net                                              2
+logic_net                                              1
 logic_typespec                                         1
 module_inst                                            3
 ref_module                                             2
 ref_obj                                                3
 ref_typespec                                           1
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathModule/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/HierPathModule/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/HierPathModule/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/HierPathModule/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/HierPathModule/dut.sv, line:2:1, endln:4:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@bottom
-  |vpiDefName:work@bottom
-  |vpiNet:
+  |vpiName:work@bottom
+  |vpiImportTypespec:
+  \_logic_net: (work@bottom.medium), line:3:14, endln:3:20
+    |vpiParent:
+    \_module_inst: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/HierPathModule/dut.sv, line:2:1, endln:4:10
+    |vpiName:medium
+    |vpiFullName:work@bottom.medium
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@bottom.c), line:3:21, endln:3:22
+    |vpiParent:
+    \_module_inst: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/HierPathModule/dut.sv, line:2:1, endln:4:10
+    |vpiName:c
+    |vpiFullName:work@bottom.c
+    |vpiNetType:1
+  |vpiImportTypespec:
   \_logic_net: (work@bottom.o), line:3:10, endln:3:11
     |vpiParent:
-    \_cont_assign: , line:3:10, endln:3:22
+    \_module_inst: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/HierPathModule/dut.sv, line:2:1, endln:4:10
     |vpiName:o
     |vpiFullName:work@bottom.o
     |vpiNetType:1
+  |vpiDefName:work@bottom
+  |vpiNet:
+  \_logic_net: (work@bottom.medium), line:3:14, endln:3:20
+  |vpiNet:
+  \_logic_net: (work@bottom.c), line:3:21, endln:3:22
+  |vpiNet:
+  \_logic_net: (work@bottom.o), line:3:10, endln:3:11
   |vpiContAssign:
   \_cont_assign: , line:3:10, endln:3:22
     |vpiParent:
@@ -134,17 +158,21 @@ design: (unnamed)
         |vpiParent:
         \_hier_path: (medium.c), line:3:14, endln:3:22
         |vpiName:medium
+        |vpiActual:
+        \_logic_net: (work@bottom.medium), line:3:14, endln:3:20
       |vpiActual:
       \_ref_obj: (work@bottom.c), line:3:21, endln:3:22
         |vpiParent:
         \_hier_path: (medium.c), line:3:14, endln:3:22
         |vpiName:c
         |vpiFullName:work@bottom.c
+        |vpiActual:
+        \_logic_net: (work@bottom.c), line:3:21, endln:3:22
       |vpiName:medium.c
     |vpiLhs:
     \_ref_obj: (work@bottom.o), line:3:10, endln:3:11
       |vpiParent:
-      \_cont_assign: , line:3:10, endln:3:22
+      \_module_inst: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/HierPathModule/dut.sv, line:2:1, endln:4:10
       |vpiName:o
       |vpiFullName:work@bottom.o
       |vpiActual:
@@ -153,24 +181,33 @@ design: (unnamed)
 \_module_inst: work@medium (work@medium), file:${SURELOG_DIR}/tests/HierPathModule/dut.sv, line:6:1, endln:9:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@medium
-  |vpiDefName:work@medium
-  |vpiNet:
+  |vpiName:work@medium
+  |vpiTypedef:
+  \_logic_typespec: , line:7:3, endln:7:7
+    |vpiParent:
+    \_module_inst: work@medium (work@medium), file:${SURELOG_DIR}/tests/HierPathModule/dut.sv, line:6:1, endln:9:10
+  |vpiImportTypespec:
+  \_logic_typespec: , line:7:3, endln:7:7
+  |vpiImportTypespec:
   \_logic_net: (work@medium.c), line:7:8, endln:7:9
     |vpiParent:
     \_module_inst: work@medium (work@medium), file:${SURELOG_DIR}/tests/HierPathModule/dut.sv, line:6:1, endln:9:10
     |vpiTypespec:
-    \_ref_typespec: (work@medium.c)
+    \_ref_typespec: (work@medium.c.c), line:7:3, endln:7:7
       |vpiParent:
       \_logic_net: (work@medium.c), line:7:8, endln:7:9
-      |vpiFullName:work@medium.c
+      |vpiName:c
+      |vpiFullName:work@medium.c.c
       |vpiActual:
       \_logic_typespec: , line:7:3, endln:7:7
     |vpiName:c
     |vpiFullName:work@medium.c
     |vpiNetType:1
+  |vpiDefName:work@medium
+  |vpiNet:
+  \_logic_net: (work@medium.c), line:7:8, endln:7:9
   |vpiRefModule:
-  \_ref_module: work@bottom (b1), line:8:10, endln:8:12
+  \_ref_module: work@bottom (b1), line:8:3, endln:8:15
     |vpiParent:
     \_module_inst: work@medium (work@medium), file:${SURELOG_DIR}/tests/HierPathModule/dut.sv, line:6:1, endln:9:10
     |vpiName:b1
@@ -181,18 +218,16 @@ design: (unnamed)
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathModule/dut.sv, line:11:1, endln:13:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
+  |vpiName:work@top
   |vpiDefName:work@top
   |vpiRefModule:
-  \_ref_module: work@medium (u1), line:12:11, endln:12:13
+  \_ref_module: work@medium (u1), line:12:4, endln:12:16
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathModule/dut.sv, line:11:1, endln:13:10
     |vpiName:u1
     |vpiDefName:work@medium
     |vpiActual:
     \_module_inst: work@medium (work@medium), file:${SURELOG_DIR}/tests/HierPathModule/dut.sv, line:6:1, endln:9:10
-\_weaklyReferenced:
-\_logic_typespec: , line:7:3, endln:7:7
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -201,5 +236,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/HierPathModule/dut.sv | ${SURELOG_DIR}/build/regression/HierPathModule/roundtrip/dut_000.sv | 3 | 13 |
+[roundtrip]: ${SURELOG_DIR}/tests/HierPathModule/dut.sv | ${SURELOG_DIR}/build/regression/HierPathModule/roundtrip/dut_000.sv | 9 | 13 |
 ============================== End RoundTrip Results ==============================

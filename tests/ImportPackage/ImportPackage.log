@@ -162,27 +162,31 @@ cont_assign                                            1
 design                                                 1
 gen_if                                                 1
 import_typespec                                        1
-int_typespec                                           4
-logic_net                                              1
+int_typespec                                           3
+int_var                                                1
 logic_typespec                                         1
 module_inst                                            3
 operation                                              3
 package                                                1
 packed_array_typespec                                  1
-param_assign                                           3
-parameter                                              3
+param_assign                                           2
+parameter                                              2
 range                                                  2
 ref_module                                             1
 ref_obj                                                5
-ref_typespec                                           7
+ref_typespec                                           4
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ImportPackage/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ImportPackage/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ImportPackage/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/ImportPackage/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallPackages:
 \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:4:1, endln:7:25
   |vpiParent:
@@ -190,14 +194,14 @@ design: (unnamed)
   |vpiName:lc_ctrl_pkg
   |vpiFullName:lc_ctrl_pkg::
   |vpiParameter:
-  \_parameter: (lc_ctrl_pkg::TxWidth), line:5:18, endln:5:25
+  \_parameter: (lc_ctrl_pkg::TxWidth), line:5:18, endln:5:29
     |vpiParent:
     \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:4:1, endln:7:25
     |UINT:4
     |vpiTypespec:
-    \_ref_typespec: (lc_ctrl_pkg::TxWidth)
+    \_ref_typespec: (lc_ctrl_pkg::TxWidth), line:5:14, endln:5:17
       |vpiParent:
-      \_parameter: (lc_ctrl_pkg::TxWidth), line:5:18, endln:5:25
+      \_parameter: (lc_ctrl_pkg::TxWidth), line:5:18, endln:5:29
       |vpiFullName:lc_ctrl_pkg::TxWidth
       |vpiActual:
       \_int_typespec: , line:5:14, endln:5:17
@@ -215,38 +219,36 @@ design: (unnamed)
       |vpiDecompile:4
       |vpiSize:64
       |UINT:4
-      |vpiTypespec:
-      \_ref_typespec: (lc_ctrl_pkg)
-        |vpiParent:
-        \_constant: , line:5:28, endln:5:29
-        |vpiFullName:lc_ctrl_pkg
-        |vpiActual:
-        \_int_typespec: , line:5:14, endln:5:17
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (lc_ctrl_pkg::TxWidth), line:5:18, endln:5:25
+    \_parameter: (lc_ctrl_pkg::TxWidth), line:5:18, endln:5:29
   |vpiTypedef:
-  \_logic_typespec: (lc_ctrl_pkg::unused_type_t), line:6:12, endln:6:31
+  \_int_typespec: , line:5:14, endln:5:17
     |vpiParent:
     \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:4:1, endln:7:25
-    |vpiName:lc_ctrl_pkg::unused_type_t
-    |vpiInstance:
+    |vpiSigned:1
+  |vpiTypedef:
+  \_logic_typespec: (unused_type_t), line:6:12, endln:6:31
+    |vpiParent:
     \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:4:1, endln:7:25
+    |vpiName:unused_type_t
     |vpiRange:
     \_range: , line:6:18, endln:6:31
       |vpiParent:
-      \_logic_typespec: (lc_ctrl_pkg::unused_type_t), line:6:12, endln:6:31
+      \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:4:1, endln:7:25
       |vpiLeftRange:
       \_operation: , line:6:19, endln:6:28
         |vpiParent:
         \_range: , line:6:18, endln:6:31
         |vpiOpType:11
         |vpiOperand:
-        \_ref_obj: (lc_ctrl_pkg::lc_ctrl_pkg::unused_type_t::TxWidth), line:6:19, endln:6:26
+        \_ref_obj: (lc_ctrl_pkg::TxWidth), line:6:19, endln:6:26
           |vpiParent:
           \_operation: , line:6:19, endln:6:28
           |vpiName:TxWidth
-          |vpiFullName:lc_ctrl_pkg::lc_ctrl_pkg::unused_type_t::TxWidth
+          |vpiFullName:lc_ctrl_pkg::TxWidth
+          |vpiActual:
+          \_parameter: (lc_ctrl_pkg::TxWidth), line:5:18, endln:5:29
         |vpiOperand:
         \_constant: , line:6:27, endln:6:28
           |vpiParent:
@@ -263,28 +265,47 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiImportTypespec:
+  \_int_typespec: , line:5:14, endln:5:17
+  |vpiImportTypespec:
+  \_logic_typespec: (unused_type_t), line:6:12, endln:6:31
   |vpiDefName:lc_ctrl_pkg
   |vpiEndLabel:lc_ctrl_pkg
 |uhdmallModules:
 \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:1:1, endln:2:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@GOOD
+  |vpiName:work@GOOD
   |vpiDefName:work@GOOD
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:9:1, endln:19:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
+  |vpiName:work@top
+  |vpiVariables:
+  \_int_var: (work@top.o), line:12:18, endln:12:19
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:9:1, endln:19:10
+    |vpiTypespec:
+    \_ref_typespec: (work@top.o), line:12:4, endln:12:7
+      |vpiParent:
+      \_int_var: (work@top.o), line:12:18, endln:12:19
+      |vpiFullName:work@top.o
+      |vpiActual:
+      \_int_typespec: , line:12:4, endln:12:7
+    |vpiName:o
+    |vpiFullName:work@top.o
+    |vpiSigned:1
+    |vpiVisibility:1
   |vpiParameter:
-  \_parameter: (work@top.TxWidth), line:11:18, endln:11:25
+  \_parameter: (work@top.TxWidth), line:11:18, endln:11:29
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:9:1, endln:19:10
     |UINT:1
     |vpiTypespec:
-    \_ref_typespec: (work@top.TxWidth)
+    \_ref_typespec: (work@top.TxWidth), line:11:14, endln:11:17
       |vpiParent:
-      \_parameter: (work@top.TxWidth), line:11:18, endln:11:25
+      \_parameter: (work@top.TxWidth), line:11:18, endln:11:29
       |vpiFullName:work@top.TxWidth
       |vpiActual:
       \_int_typespec: , line:11:14, endln:11:17
@@ -302,34 +323,30 @@ design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:11:28, endln:11:29
-        |vpiFullName:work@top
-        |vpiActual:
-        \_int_typespec: , line:11:14, endln:11:17
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@top.TxWidth), line:11:18, endln:11:25
-  |vpiTypedef:
-  \_logic_typespec: (lc_ctrl_pkg::unused_type_t), line:6:12, endln:6:31
+    \_parameter: (work@top.TxWidth), line:11:18, endln:11:29
   |vpiTypedef:
   \_import_typespec: (lc_ctrl_pkg), line:10:11, endln:10:37
-  |vpiDefName:work@top
-  |vpiNet:
-  \_logic_net: (work@top.o), line:12:18, endln:12:19
+  |vpiTypedef:
+  \_int_typespec: , line:11:14, endln:11:17
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:9:1, endln:19:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.o)
-      |vpiParent:
-      \_logic_net: (work@top.o), line:12:18, endln:12:19
-      |vpiFullName:work@top.o
-      |vpiActual:
-      \_int_typespec: , line:12:4, endln:12:7
-    |vpiName:o
-    |vpiFullName:work@top.o
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:12:4, endln:12:7
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:9:1, endln:19:10
+    |vpiSigned:1
+  |vpiImportTypespec:
+  \_import_typespec: (lc_ctrl_pkg), line:10:11, endln:10:37
+  |vpiImportTypespec:
+  \_int_typespec: , line:11:14, endln:11:17
+  |vpiImportTypespec:
+  \_int_typespec: , line:12:4, endln:12:7
+  |vpiImportTypespec:
+  \_int_var: (work@top.o), line:12:18, endln:12:19
+  |vpiDefName:work@top
   |vpiContAssign:
   \_cont_assign: , line:13:11, endln:13:22
     |vpiParent:
@@ -340,22 +357,32 @@ design: (unnamed)
       \_cont_assign: , line:13:11, endln:13:22
       |vpiName:TxWidth
       |vpiFullName:work@top.TxWidth
+      |vpiActual:
+      \_parameter: (work@top.TxWidth), line:11:18, endln:11:29
     |vpiLhs:
     \_ref_obj: (work@top.o), line:13:11, endln:13:12
       |vpiParent:
-      \_cont_assign: , line:13:11, endln:13:22
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:9:1, endln:19:10
       |vpiName:o
       |vpiFullName:work@top.o
       |vpiActual:
-      \_logic_net: (work@top.o), line:12:18, endln:12:19
+      \_int_var: (work@top.o), line:12:18, endln:12:19
+  |vpiRefModule:
+  \_ref_module: work@GOOD (good), line:16:6, endln:16:18
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:9:1, endln:19:10
+    |vpiName:good
+    |vpiDefName:work@GOOD
+    |vpiActual:
+    \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:1:1, endln:2:10
   |vpiGenStmt:
-  \_gen_if: , line:15:3, endln:15:5
+  \_gen_if: , line:15:3, endln:17:6
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:9:1, endln:19:10
     |vpiCondition:
     \_operation: , line:15:7, endln:15:19
       |vpiParent:
-      \_gen_if: , line:15:3, endln:15:5
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:9:1, endln:19:10
       |vpiOpType:14
       |vpiOperand:
       \_ref_obj: (work@top.TxWidth), line:15:7, endln:15:14
@@ -363,6 +390,8 @@ design: (unnamed)
         \_operation: , line:15:7, endln:15:19
         |vpiName:TxWidth
         |vpiFullName:work@top.TxWidth
+        |vpiActual:
+        \_parameter: (work@top.TxWidth), line:11:18, endln:11:29
       |vpiOperand:
       \_constant: , line:15:18, endln:15:19
         |vpiParent:
@@ -372,29 +401,12 @@ design: (unnamed)
         |UINT:1
         |vpiConstType:9
     |vpiStmt:
-    \_begin: (work@top)
+    \_begin: (work@top), line:15:21, endln:17:6
       |vpiParent:
-      \_gen_if: , line:15:3, endln:15:5
+      \_gen_if: , line:15:3, endln:17:6
       |vpiFullName:work@top
       |vpiStmt:
-      \_ref_module: work@GOOD (good), line:16:11, endln:16:15
-        |vpiParent:
-        \_begin: (work@top)
-        |vpiName:good
-        |vpiDefName:work@GOOD
-\_weaklyReferenced:
-\_int_typespec: , line:5:14, endln:5:17
-  |vpiParent:
-  \_parameter: (lc_ctrl_pkg::TxWidth), line:5:18, endln:5:25
-  |vpiInstance:
-  \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:4:1, endln:7:25
-  |vpiSigned:1
-\_int_typespec: , line:11:14, endln:11:17
-  |vpiParent:
-  \_parameter: (work@top.TxWidth), line:11:18, endln:11:25
-  |vpiSigned:1
-\_int_typespec: , line:12:4, endln:12:7
-  |vpiSigned:1
+      \_ref_module: work@GOOD (good), line:16:6, endln:16:18
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -403,5 +415,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ImportPackage/dut.sv | ${SURELOG_DIR}/build/regression/ImportPackage/roundtrip/dut_000.sv | 4 | 19 |
+[roundtrip]: ${SURELOG_DIR}/tests/ImportPackage/dut.sv | ${SURELOG_DIR}/build/regression/ImportPackage/roundtrip/dut_000.sv | 11 | 19 |
 ============================== End RoundTrip Results ==============================

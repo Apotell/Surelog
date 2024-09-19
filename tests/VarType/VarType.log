@@ -79,62 +79,104 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/VarType/dut.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+constant                                               2
 design                                                 1
-logic_net                                              3
-module_inst                                            1
+logic_var                                              1
+module_inst                                            2
 operation                                              1
 real_typespec                                          2
+real_var                                               2
 ref_obj                                                2
 ref_typespec                                           2
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/VarType/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/VarType/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/VarType/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/VarType/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/VarType/dut.sv, line:1:1, endln:5:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiNet:
-  \_logic_net: (work@top.a), line:2:6, endln:2:7
+  |vpiName:work@top
+  |vpiVariables:
+  \_real_var: (work@top.a), line:2:6, endln:2:7
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/VarType/dut.sv, line:1:1, endln:5:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.a)
+    \_ref_typespec: (work@top.a), line:2:1, endln:2:5
       |vpiParent:
-      \_logic_net: (work@top.a), line:2:6, endln:2:7
+      \_real_var: (work@top.a), line:2:6, endln:2:7
       |vpiFullName:work@top.a
       |vpiActual:
-      \_real_typespec: , line:2:1, endln:2:14
+      \_real_typespec: , line:2:1, endln:2:5
     |vpiName:a
     |vpiFullName:work@top.a
-  |vpiNet:
-  \_logic_net: (work@top.b), line:3:6, endln:3:7
+    |vpiVisibility:1
+    |vpiExpr:
+    \_constant: , line:2:10, endln:2:14
+      |vpiParent:
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/VarType/dut.sv, line:1:1, endln:5:10
+      |vpiDecompile:4.76
+      |vpiSize:64
+      |REAL:4.760000
+      |vpiConstType:2
+  |vpiVariables:
+  \_real_var: (work@top.b), line:3:6, endln:3:7
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/VarType/dut.sv, line:1:1, endln:5:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.b)
+    \_ref_typespec: (work@top.b), line:3:1, endln:3:5
       |vpiParent:
-      \_logic_net: (work@top.b), line:3:6, endln:3:7
+      \_real_var: (work@top.b), line:3:6, endln:3:7
       |vpiFullName:work@top.b
       |vpiActual:
-      \_real_typespec: , line:3:1, endln:3:14
+      \_real_typespec: , line:3:1, endln:3:5
     |vpiName:b
     |vpiFullName:work@top.b
-  |vpiNet:
-  \_logic_net: (work@top.c), line:4:15, endln:4:16
+    |vpiVisibility:1
+    |vpiExpr:
+    \_constant: , line:3:10, endln:3:14
+      |vpiParent:
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/VarType/dut.sv, line:1:1, endln:5:10
+      |vpiDecompile:0.74
+      |vpiSize:64
+      |REAL:0.740000
+      |vpiConstType:2
+  |vpiVariables:
+  \_logic_var: (work@top.c), line:4:15, endln:4:16
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/VarType/dut.sv, line:1:1, endln:5:10
     |vpiName:c
     |vpiFullName:work@top.c
-\_weaklyReferenced:
-\_real_typespec: , line:2:1, endln:2:14
-\_real_typespec: , line:3:1, endln:3:14
+    |vpiVisibility:1
+  |vpiReg:
+  \_logic_var: (work@top.c), line:4:15, endln:4:16
+  |vpiTypedef:
+  \_real_typespec: , line:2:1, endln:2:5
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/VarType/dut.sv, line:1:1, endln:5:10
+  |vpiTypedef:
+  \_real_typespec: , line:3:1, endln:3:5
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/VarType/dut.sv, line:1:1, endln:5:10
+  |vpiImportTypespec:
+  \_real_typespec: , line:2:1, endln:2:5
+  |vpiImportTypespec:
+  \_real_var: (work@top.a), line:2:6, endln:2:7
+  |vpiImportTypespec:
+  \_real_typespec: , line:3:1, endln:3:5
+  |vpiImportTypespec:
+  \_real_var: (work@top.b), line:3:6, endln:3:7
+  |vpiImportTypespec:
+  \_logic_var: (work@top.c), line:4:15, endln:4:16
+  |vpiDefName:work@top
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -144,7 +186,9 @@ design: (unnamed)
 
 ============================== Begin Linting Results ==============================
 [LINT]: ${SURELOG_DIR}/tests/VarType/dut.sv:2:1: Non synthesizable construct,
+[LINT]: ${SURELOG_DIR}/tests/VarType/dut.sv:2:6: Non synthesizable construct, a
 [LINT]: ${SURELOG_DIR}/tests/VarType/dut.sv:3:1: Non synthesizable construct,
+[LINT]: ${SURELOG_DIR}/tests/VarType/dut.sv:3:6: Non synthesizable construct, b
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================

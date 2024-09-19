@@ -332,7 +332,7 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             4
 begin                                                  2
-constant                                              31
+constant                                              35
 cont_assign                                            2
 design                                                 1
 func_call                                              4
@@ -340,75 +340,38 @@ function                                               2
 if_stmt                                                2
 io_decl                                                4
 logic_net                                              3
-logic_typespec                                        11
-logic_var                                              6
+logic_typespec                                         8
 module_inst                                            1
 operation                                              6
 port                                                   3
-range                                                 11
-ref_obj                                               18
-ref_typespec                                          13
+range                                                 13
+ref_obj                                               15
+ref_typespec                                          10
+source_file                                            1
 === UHDM Object Stats End ===
+[ERR:IG0807] ${SURELOG_DIR}/tests/FuncArgs/dut.sv:3:21: Child 112 is not entirely in parent's scope.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FuncArgs/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/FuncArgs/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/FuncArgs/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/FuncArgs/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/FuncArgs/dut.sv, line:1:1, endln:25:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@dut
-  |vpiDefName:work@dut
-  |vpiTaskFunc:
+  |vpiName:work@dut
+  |vpiInternalScope:
   \_function: (work@dut.pow_a), line:5:9, endln:12:20
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/FuncArgs/dut.sv, line:1:1, endln:25:10
     |vpiName:pow_a
     |vpiFullName:work@dut.pow_a
-    |vpiVisibility:1
-    |vpiAutomatic:1
-    |vpiReturn:
-    \_logic_var: (work@dut.pow_a), line:5:28, endln:5:33
-      |vpiParent:
-      \_function: (work@dut.pow_a), line:5:9, endln:12:20
-      |vpiTypespec:
-      \_ref_typespec: (work@dut.pow_a)
-        |vpiParent:
-        \_logic_var: (work@dut.pow_a), line:5:28, endln:5:33
-        |vpiFullName:work@dut.pow_a
-        |vpiActual:
-        \_logic_typespec: , line:5:28, endln:5:33
-      |vpiFullName:work@dut.pow_a
-    |vpiIODecl:
-    \_io_decl: (base), line:6:29, endln:6:33
-      |vpiParent:
-      \_function: (work@dut.pow_a), line:5:9, endln:12:20
-      |vpiDirection:1
-      |vpiName:base
-      |vpiTypedef:
-      \_ref_typespec: (work@dut.pow_a.base)
-        |vpiParent:
-        \_io_decl: (base), line:6:29, endln:6:33
-        |vpiFullName:work@dut.pow_a.base
-        |vpiActual:
-        \_logic_typespec: , line:6:23, endln:6:28
-    |vpiIODecl:
-    \_io_decl: (exp), line:6:35, endln:6:38
-      |vpiParent:
-      \_function: (work@dut.pow_a), line:5:9, endln:12:20
-      |vpiDirection:1
-      |vpiName:exp
-      |vpiTypedef:
-      \_ref_typespec: (work@dut.pow_a.exp)
-        |vpiParent:
-        \_io_decl: (exp), line:6:35, endln:6:38
-        |vpiFullName:work@dut.pow_a.exp
-        |vpiActual:
-        \_logic_typespec: , line:6:23, endln:6:28
-    |vpiStmt:
+    |vpiInternalScope:
     \_begin: (work@dut.pow_a), line:7:17, endln:11:20
       |vpiParent:
       \_function: (work@dut.pow_a), line:5:9, endln:12:20
@@ -421,6 +384,8 @@ design: (unnamed)
         |vpiBlocking:1
         |vpiRhs:
         \_constant: , line:8:33, endln:8:34
+          |vpiParent:
+          \_assignment: , line:8:25, endln:8:34
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
@@ -432,7 +397,7 @@ design: (unnamed)
           |vpiName:pow_a
           |vpiFullName:work@dut.pow_a.pow_a
           |vpiActual:
-          \_logic_var: (work@dut.pow_a.pow_a), line:5:28, endln:5:33
+          \_function: (work@dut.pow_a), line:5:9, endln:12:20
       |vpiStmt:
       \_if_stmt: , line:9:25, endln:10:69
         |vpiParent:
@@ -520,56 +485,70 @@ design: (unnamed)
             |vpiName:pow_a
             |vpiFullName:work@dut.pow_a.pow_a
             |vpiActual:
-            \_logic_var: (work@dut.pow_a.pow_a), line:5:28, endln:5:33
-    |vpiInstance:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/FuncArgs/dut.sv, line:1:1, endln:25:10
-  |vpiTaskFunc:
+            \_function: (work@dut.pow_a), line:5:9, endln:12:20
+    |vpiTypedef:
+    \_logic_typespec: , line:6:23, endln:6:28
+      |vpiParent:
+      \_function: (work@dut.pow_a), line:5:9, endln:12:20
+      |vpiRange:
+      \_range: , line:6:23, endln:6:28
+        |vpiParent:
+        \_logic_typespec: , line:6:23, endln:6:28
+        |vpiLeftRange:
+        \_constant: , line:6:24, endln:6:25
+          |vpiParent:
+          \_range: , line:6:23, endln:6:28
+          |vpiDecompile:3
+          |vpiSize:64
+          |UINT:3
+          |vpiConstType:9
+        |vpiRightRange:
+        \_constant: , line:6:26, endln:6:27
+          |vpiParent:
+          \_range: , line:6:23, endln:6:28
+          |vpiDecompile:0
+          |vpiSize:64
+          |UINT:0
+          |vpiConstType:9
+    |vpiImportTypespec:
+    \_logic_typespec: , line:6:23, endln:6:28
+    |vpiVisibility:1
+    |vpiAutomatic:1
+    |vpiIODecl:
+    \_io_decl: (base), line:6:29, endln:6:33
+      |vpiParent:
+      \_function: (work@dut.pow_a), line:5:9, endln:12:20
+      |vpiDirection:1
+      |vpiName:base
+      |vpiTypedef:
+      \_ref_typespec: (work@dut.pow_a.base), line:6:29, endln:6:33
+        |vpiParent:
+        \_io_decl: (base), line:6:29, endln:6:33
+        |vpiFullName:work@dut.pow_a.base
+        |vpiActual:
+        \_logic_typespec: , line:6:23, endln:6:28
+    |vpiIODecl:
+    \_io_decl: (exp), line:6:35, endln:6:38
+      |vpiParent:
+      \_function: (work@dut.pow_a), line:5:9, endln:12:20
+      |vpiDirection:1
+      |vpiName:exp
+      |vpiTypedef:
+      \_ref_typespec: (work@dut.pow_a.exp), line:6:35, endln:6:38
+        |vpiParent:
+        \_io_decl: (exp), line:6:35, endln:6:38
+        |vpiFullName:work@dut.pow_a.exp
+        |vpiActual:
+        \_logic_typespec: , line:6:23, endln:6:28
+    |vpiStmt:
+    \_begin: (work@dut.pow_a), line:7:17, endln:11:20
+  |vpiInternalScope:
   \_function: (work@dut.pow_b), line:14:9, endln:21:20
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/FuncArgs/dut.sv, line:1:1, endln:25:10
     |vpiName:pow_b
     |vpiFullName:work@dut.pow_b
-    |vpiVisibility:1
-    |vpiAutomatic:1
-    |vpiReturn:
-    \_logic_var: (work@dut.pow_b), line:14:28, endln:14:33
-      |vpiParent:
-      \_function: (work@dut.pow_b), line:14:9, endln:21:20
-      |vpiTypespec:
-      \_ref_typespec: (work@dut.pow_b)
-        |vpiParent:
-        \_logic_var: (work@dut.pow_b), line:14:28, endln:14:33
-        |vpiFullName:work@dut.pow_b
-        |vpiActual:
-        \_logic_typespec: , line:14:28, endln:14:33
-      |vpiFullName:work@dut.pow_b
-    |vpiIODecl:
-    \_io_decl: (base), line:15:29, endln:15:33
-      |vpiParent:
-      \_function: (work@dut.pow_b), line:14:9, endln:21:20
-      |vpiDirection:1
-      |vpiName:base
-      |vpiTypedef:
-      \_ref_typespec: (work@dut.pow_b.base)
-        |vpiParent:
-        \_io_decl: (base), line:15:29, endln:15:33
-        |vpiFullName:work@dut.pow_b.base
-        |vpiActual:
-        \_logic_typespec: , line:15:23, endln:15:28
-    |vpiIODecl:
-    \_io_decl: (exp), line:15:35, endln:15:38
-      |vpiParent:
-      \_function: (work@dut.pow_b), line:14:9, endln:21:20
-      |vpiDirection:1
-      |vpiName:exp
-      |vpiTypedef:
-      \_ref_typespec: (work@dut.pow_b.exp)
-        |vpiParent:
-        \_io_decl: (exp), line:15:35, endln:15:38
-        |vpiFullName:work@dut.pow_b.exp
-        |vpiActual:
-        \_logic_typespec: , line:15:23, endln:15:28
-    |vpiStmt:
+    |vpiInternalScope:
     \_begin: (work@dut.pow_b), line:16:17, endln:20:20
       |vpiParent:
       \_function: (work@dut.pow_b), line:14:9, endln:21:20
@@ -582,6 +561,8 @@ design: (unnamed)
         |vpiBlocking:1
         |vpiRhs:
         \_constant: , line:17:33, endln:17:34
+          |vpiParent:
+          \_assignment: , line:17:25, endln:17:34
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
@@ -593,7 +574,7 @@ design: (unnamed)
           |vpiName:pow_b
           |vpiFullName:work@dut.pow_b.pow_b
           |vpiActual:
-          \_logic_var: (work@dut.pow_b.pow_b), line:14:28, endln:14:33
+          \_function: (work@dut.pow_b), line:14:9, endln:21:20
       |vpiStmt:
       \_if_stmt: , line:18:25, endln:19:69
         |vpiParent:
@@ -681,69 +662,302 @@ design: (unnamed)
             |vpiName:pow_b
             |vpiFullName:work@dut.pow_b.pow_b
             |vpiActual:
-            \_logic_var: (work@dut.pow_b.pow_b), line:14:28, endln:14:33
-    |vpiInstance:
+            \_function: (work@dut.pow_b), line:14:9, endln:21:20
+    |vpiTypedef:
+    \_logic_typespec: , line:15:23, endln:15:28
+      |vpiParent:
+      \_function: (work@dut.pow_b), line:14:9, endln:21:20
+      |vpiRange:
+      \_range: , line:15:23, endln:15:28
+        |vpiParent:
+        \_logic_typespec: , line:15:23, endln:15:28
+        |vpiLeftRange:
+        \_constant: , line:15:24, endln:15:25
+          |vpiParent:
+          \_range: , line:15:23, endln:15:28
+          |vpiDecompile:3
+          |vpiSize:64
+          |UINT:3
+          |vpiConstType:9
+        |vpiRightRange:
+        \_constant: , line:15:26, endln:15:27
+          |vpiParent:
+          \_range: , line:15:23, endln:15:28
+          |vpiDecompile:0
+          |vpiSize:64
+          |UINT:0
+          |vpiConstType:9
+    |vpiImportTypespec:
+    \_logic_typespec: , line:15:23, endln:15:28
+    |vpiVisibility:1
+    |vpiAutomatic:1
+    |vpiIODecl:
+    \_io_decl: (base), line:15:29, endln:15:33
+      |vpiParent:
+      \_function: (work@dut.pow_b), line:14:9, endln:21:20
+      |vpiDirection:1
+      |vpiName:base
+      |vpiTypedef:
+      \_ref_typespec: (work@dut.pow_b.base), line:15:29, endln:15:33
+        |vpiParent:
+        \_io_decl: (base), line:15:29, endln:15:33
+        |vpiFullName:work@dut.pow_b.base
+        |vpiActual:
+        \_logic_typespec: , line:15:23, endln:15:28
+    |vpiIODecl:
+    \_io_decl: (exp), line:15:35, endln:15:38
+      |vpiParent:
+      \_function: (work@dut.pow_b), line:14:9, endln:21:20
+      |vpiDirection:1
+      |vpiName:exp
+      |vpiTypedef:
+      \_ref_typespec: (work@dut.pow_b.exp), line:15:35, endln:15:38
+        |vpiParent:
+        \_io_decl: (exp), line:15:35, endln:15:38
+        |vpiFullName:work@dut.pow_b.exp
+        |vpiActual:
+        \_logic_typespec: , line:15:23, endln:15:28
+    |vpiStmt:
+    \_begin: (work@dut.pow_b), line:16:17, endln:20:20
+  |vpiTypedef:
+  \_logic_typespec: , line:2:15, endln:2:25
+    |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/FuncArgs/dut.sv, line:1:1, endln:25:10
-  |vpiNet:
+    |vpiRange:
+    \_range: , line:2:20, endln:2:25
+      |vpiParent:
+      \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/FuncArgs/dut.sv, line:1:1, endln:25:10
+      |vpiLeftRange:
+      \_constant: , line:2:21, endln:2:22
+        |vpiParent:
+        \_range: , line:2:20, endln:2:25
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:2:23, endln:2:24
+        |vpiParent:
+        \_range: , line:2:20, endln:2:25
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_logic_typespec: , line:3:16, endln:3:26
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/FuncArgs/dut.sv, line:1:1, endln:25:10
+    |vpiRange:
+    \_range: , line:3:21, endln:3:26
+      |vpiParent:
+      \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/FuncArgs/dut.sv, line:1:1, endln:25:10
+      |vpiLeftRange:
+      \_constant: , line:3:22, endln:3:23
+        |vpiParent:
+        \_range: , line:3:21, endln:3:26
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:3:24, endln:3:25
+        |vpiParent:
+        \_range: , line:3:21, endln:3:26
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_logic_typespec: , line:3:16, endln:3:26
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/FuncArgs/dut.sv, line:1:1, endln:25:10
+    |vpiRange:
+    \_range: , line:3:21, endln:3:26
+      |vpiParent:
+      \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/FuncArgs/dut.sv, line:1:1, endln:25:10
+      |vpiLeftRange:
+      \_constant: , line:3:22, endln:3:23
+        |vpiParent:
+        \_range: , line:3:21, endln:3:26
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:3:24, endln:3:25
+        |vpiParent:
+        \_range: , line:3:21, endln:3:26
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_logic_typespec: , line:2:15, endln:2:25
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/FuncArgs/dut.sv, line:1:1, endln:25:10
+    |vpiRange:
+    \_range: , line:2:20, endln:2:25
+      |vpiParent:
+      \_port: (inp), line:2:9, endln:2:29
+      |vpiLeftRange:
+      \_constant: , line:2:21, endln:2:22
+        |vpiParent:
+        \_range: , line:2:20, endln:2:25
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:2:23, endln:2:24
+        |vpiParent:
+        \_range: , line:2:20, endln:2:25
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_logic_typespec: , line:3:16, endln:3:26
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/FuncArgs/dut.sv, line:1:1, endln:25:10
+    |vpiRange:
+    \_range: , line:3:21, endln:3:26
+      |vpiParent:
+      \_port: (out1), line:3:9, endln:3:31
+      |vpiLeftRange:
+      \_constant: , line:3:22, endln:3:23
+        |vpiParent:
+        \_range: , line:3:21, endln:3:26
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:3:24, endln:3:25
+        |vpiParent:
+        \_range: , line:3:21, endln:3:26
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_logic_typespec: , line:3:16, endln:3:26
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/FuncArgs/dut.sv, line:1:1, endln:25:10
+    |vpiRange:
+    \_range: , line:3:21, endln:3:26
+      |vpiParent:
+      \_port: (out2), line:3:33, endln:3:37
+      |vpiLeftRange:
+      \_constant: , line:3:22, endln:3:23
+        |vpiParent:
+        \_range: , line:3:21, endln:3:26
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:3:24, endln:3:25
+        |vpiParent:
+        \_range: , line:3:21, endln:3:26
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_function: (work@dut.pow_a), line:5:9, endln:12:20
+  |vpiImportTypespec:
+  \_function: (work@dut.pow_b), line:14:9, endln:21:20
+  |vpiImportTypespec:
+  \_logic_typespec: , line:2:15, endln:2:25
+  |vpiImportTypespec:
   \_logic_net: (work@dut.inp), line:2:26, endln:2:29
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/FuncArgs/dut.sv, line:1:1, endln:25:10
+    |vpiTypespec:
+    \_ref_typespec: (work@dut.inp.inp), line:2:15, endln:2:19
+      |vpiParent:
+      \_logic_net: (work@dut.inp), line:2:26, endln:2:29
+      |vpiName:inp
+      |vpiFullName:work@dut.inp.inp
+      |vpiActual:
+      \_logic_typespec: , line:2:15, endln:2:25
     |vpiName:inp
     |vpiFullName:work@dut.inp
     |vpiNetType:1
-  |vpiNet:
+  |vpiImportTypespec:
+  \_logic_typespec: , line:3:16, endln:3:26
+  |vpiImportTypespec:
   \_logic_net: (work@dut.out1), line:3:27, endln:3:31
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/FuncArgs/dut.sv, line:1:1, endln:25:10
+    |vpiTypespec:
+    \_ref_typespec: (work@dut.out1.out1), line:3:16, endln:3:20
+      |vpiParent:
+      \_logic_net: (work@dut.out1), line:3:27, endln:3:31
+      |vpiName:out1
+      |vpiFullName:work@dut.out1.out1
+      |vpiActual:
+      \_logic_typespec: , line:3:16, endln:3:26
     |vpiName:out1
     |vpiFullName:work@dut.out1
     |vpiNetType:1
-  |vpiNet:
+  |vpiImportTypespec:
+  \_logic_typespec: , line:3:16, endln:3:26
+  |vpiImportTypespec:
   \_logic_net: (work@dut.out2), line:3:33, endln:3:37
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/FuncArgs/dut.sv, line:1:1, endln:25:10
+    |vpiTypespec:
+    \_ref_typespec: (work@dut.out2.out2), line:3:16, endln:3:20
+      |vpiParent:
+      \_logic_net: (work@dut.out2), line:3:33, endln:3:37
+      |vpiName:out2
+      |vpiFullName:work@dut.out2.out2
+      |vpiActual:
+      \_logic_typespec: , line:3:16, endln:3:26
     |vpiName:out2
     |vpiFullName:work@dut.out2
     |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_typespec: , line:2:15, endln:2:25
+  |vpiImportTypespec:
+  \_logic_typespec: , line:3:16, endln:3:26
+  |vpiImportTypespec:
+  \_logic_typespec: , line:3:16, endln:3:26
+  |vpiDefName:work@dut
+  |vpiTaskFunc:
+  \_function: (work@dut.pow_a), line:5:9, endln:12:20
+  |vpiTaskFunc:
+  \_function: (work@dut.pow_b), line:14:9, endln:21:20
+  |vpiNet:
+  \_logic_net: (work@dut.inp), line:2:26, endln:2:29
+  |vpiNet:
+  \_logic_net: (work@dut.out1), line:3:27, endln:3:31
+  |vpiNet:
+  \_logic_net: (work@dut.out2), line:3:33, endln:3:37
   |vpiPort:
-  \_port: (inp), line:2:26, endln:2:29
+  \_port: (inp), line:2:9, endln:2:29
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/FuncArgs/dut.sv, line:1:1, endln:25:10
     |vpiName:inp
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@dut.inp.inp), line:2:26, endln:2:29
-      |vpiParent:
-      \_port: (inp), line:2:26, endln:2:29
-      |vpiName:inp
-      |vpiFullName:work@dut.inp.inp
-      |vpiActual:
-      \_logic_net: (work@dut.inp), line:2:26, endln:2:29
     |vpiTypedef:
-    \_ref_typespec: (work@dut.inp)
+    \_ref_typespec: (work@dut.inp), line:2:15, endln:2:19
       |vpiParent:
-      \_port: (inp), line:2:26, endln:2:29
+      \_port: (inp), line:2:9, endln:2:29
       |vpiFullName:work@dut.inp
       |vpiActual:
       \_logic_typespec: , line:2:15, endln:2:25
   |vpiPort:
-  \_port: (out1), line:3:27, endln:3:31
+  \_port: (out1), line:3:9, endln:3:31
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/FuncArgs/dut.sv, line:1:1, endln:25:10
     |vpiName:out1
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@dut.out1.out1), line:3:27, endln:3:31
-      |vpiParent:
-      \_port: (out1), line:3:27, endln:3:31
-      |vpiName:out1
-      |vpiFullName:work@dut.out1.out1
-      |vpiActual:
-      \_logic_net: (work@dut.out1), line:3:27, endln:3:31
     |vpiTypedef:
-    \_ref_typespec: (work@dut.out1)
+    \_ref_typespec: (work@dut.out1), line:3:16, endln:3:20
       |vpiParent:
-      \_port: (out1), line:3:27, endln:3:31
+      \_port: (out1), line:3:9, endln:3:31
       |vpiFullName:work@dut.out1
       |vpiActual:
       \_logic_typespec: , line:3:16, endln:3:26
@@ -753,16 +967,8 @@ design: (unnamed)
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/FuncArgs/dut.sv, line:1:1, endln:25:10
     |vpiName:out2
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@dut.out2.out2), line:3:33, endln:3:37
-      |vpiParent:
-      \_port: (out2), line:3:33, endln:3:37
-      |vpiName:out2
-      |vpiFullName:work@dut.out2.out2
-      |vpiActual:
-      \_logic_net: (work@dut.out2), line:3:33, endln:3:37
     |vpiTypedef:
-    \_ref_typespec: (work@dut.out2)
+    \_ref_typespec: (work@dut.out2), line:3:16, endln:3:20
       |vpiParent:
       \_port: (out2), line:3:33, endln:3:37
       |vpiFullName:work@dut.out2
@@ -798,7 +1004,7 @@ design: (unnamed)
     |vpiLhs:
     \_ref_obj: (work@dut.out1), line:23:16, endln:23:20
       |vpiParent:
-      \_cont_assign: , line:23:16, endln:23:36
+      \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/FuncArgs/dut.sv, line:1:1, endln:25:10
       |vpiName:out1
       |vpiFullName:work@dut.out1
       |vpiActual:
@@ -833,306 +1039,18 @@ design: (unnamed)
     |vpiLhs:
     \_ref_obj: (work@dut.out2), line:24:16, endln:24:20
       |vpiParent:
-      \_cont_assign: , line:24:16, endln:24:34
+      \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/FuncArgs/dut.sv, line:1:1, endln:25:10
       |vpiName:out2
       |vpiFullName:work@dut.out2
       |vpiActual:
       \_logic_net: (work@dut.out2), line:3:33, endln:3:37
-\_weaklyReferenced:
-\_logic_typespec: , line:5:28, endln:5:33
-  |vpiRange:
-  \_range: , line:5:28, endln:5:33
-    |vpiParent:
-    \_logic_typespec: , line:5:28, endln:5:33
-    |vpiLeftRange:
-    \_constant: , line:5:29, endln:5:30
-      |vpiParent:
-      \_range: , line:5:28, endln:5:33
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:5:31, endln:5:32
-      |vpiParent:
-      \_range: , line:5:28, endln:5:33
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:6:23, endln:6:28
-  |vpiRange:
-  \_range: , line:6:23, endln:6:28
-    |vpiParent:
-    \_logic_typespec: , line:6:23, endln:6:28
-    |vpiLeftRange:
-    \_constant: , line:6:24, endln:6:25
-      |vpiParent:
-      \_range: , line:6:23, endln:6:28
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:6:26, endln:6:27
-      |vpiParent:
-      \_range: , line:6:23, endln:6:28
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:14:28, endln:14:33
-  |vpiRange:
-  \_range: , line:14:28, endln:14:33
-    |vpiParent:
-    \_logic_typespec: , line:14:28, endln:14:33
-    |vpiLeftRange:
-    \_constant: , line:14:29, endln:14:30
-      |vpiParent:
-      \_range: , line:14:28, endln:14:33
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:14:31, endln:14:32
-      |vpiParent:
-      \_range: , line:14:28, endln:14:33
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:15:23, endln:15:28
-  |vpiRange:
-  \_range: , line:15:23, endln:15:28
-    |vpiParent:
-    \_logic_typespec: , line:15:23, endln:15:28
-    |vpiLeftRange:
-    \_constant: , line:15:24, endln:15:25
-      |vpiParent:
-      \_range: , line:15:23, endln:15:28
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:15:26, endln:15:27
-      |vpiParent:
-      \_range: , line:15:23, endln:15:28
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:2:15, endln:2:25
-  |vpiRange:
-  \_range: , line:2:20, endln:2:25
-    |vpiParent:
-    \_logic_typespec: , line:2:15, endln:2:25
-    |vpiLeftRange:
-    \_constant: , line:2:21, endln:2:22
-      |vpiParent:
-      \_range: , line:2:20, endln:2:25
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:23, endln:2:24
-      |vpiParent:
-      \_range: , line:2:20, endln:2:25
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:3:16, endln:3:26
-  |vpiRange:
-  \_range: , line:3:21, endln:3:26
-    |vpiParent:
-    \_logic_typespec: , line:3:16, endln:3:26
-    |vpiLeftRange:
-    \_constant: , line:3:22, endln:3:23
-      |vpiParent:
-      \_range: , line:3:21, endln:3:26
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:24, endln:3:25
-      |vpiParent:
-      \_range: , line:3:21, endln:3:26
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:3:16, endln:3:26
-  |vpiRange:
-  \_range: , line:3:21, endln:3:26
-    |vpiParent:
-    \_logic_typespec: , line:3:16, endln:3:26
-    |vpiLeftRange:
-    \_constant: , line:3:22, endln:3:23
-      |vpiParent:
-      \_range: , line:3:21, endln:3:26
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:24, endln:3:25
-      |vpiParent:
-      \_range: , line:3:21, endln:3:26
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_var: (work@dut.pow_a.pow_a), line:5:28, endln:5:33
-  |vpiParent:
-  \_ref_obj: (work@dut.pow_a.pow_a), line:8:25, endln:8:30
-  |vpiTypespec:
-  \_ref_typespec: (work@dut.pow_a.pow_a)
-    |vpiParent:
-    \_logic_var: (work@dut.pow_a.pow_a), line:5:28, endln:5:33
-    |vpiFullName:work@dut.pow_a.pow_a
-    |vpiActual:
-    \_logic_typespec: , line:5:28, endln:5:33
-  |vpiName:pow_a
-  |vpiFullName:work@dut.pow_a.pow_a
-\_logic_typespec: , line:5:28, endln:5:33
-  |vpiParent:
-  \_ref_typespec: (work@dut.pow_a.pow_a)
-  |vpiRange:
-  \_range: , line:5:28, endln:5:33
-    |vpiParent:
-    \_logic_typespec: , line:5:28, endln:5:33
-    |vpiLeftRange:
-    \_constant: , line:5:29, endln:5:30
-      |vpiParent:
-      \_range: , line:5:28, endln:5:33
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:5:31, endln:5:32
-      |vpiParent:
-      \_range: , line:5:28, endln:5:33
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_var: (work@dut.pow_a.pow_a), line:5:28, endln:5:33
-  |vpiParent:
-  \_ref_obj: (work@dut.pow_a.pow_a), line:10:33, endln:10:38
-  |vpiTypespec:
-  \_ref_typespec: (work@dut.pow_a.pow_a)
-    |vpiParent:
-    \_logic_var: (work@dut.pow_a.pow_a), line:5:28, endln:5:33
-    |vpiFullName:work@dut.pow_a.pow_a
-    |vpiActual:
-    \_logic_typespec: , line:5:28, endln:5:33
-  |vpiName:pow_a
-  |vpiFullName:work@dut.pow_a.pow_a
-\_logic_typespec: , line:5:28, endln:5:33
-  |vpiParent:
-  \_ref_typespec: (work@dut.pow_a.pow_a)
-  |vpiRange:
-  \_range: , line:5:28, endln:5:33
-    |vpiParent:
-    \_logic_typespec: , line:5:28, endln:5:33
-    |vpiLeftRange:
-    \_constant: , line:5:29, endln:5:30
-      |vpiParent:
-      \_range: , line:5:28, endln:5:33
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:5:31, endln:5:32
-      |vpiParent:
-      \_range: , line:5:28, endln:5:33
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_var: (work@dut.pow_b.pow_b), line:14:28, endln:14:33
-  |vpiParent:
-  \_ref_obj: (work@dut.pow_b.pow_b), line:17:25, endln:17:30
-  |vpiTypespec:
-  \_ref_typespec: (work@dut.pow_b.pow_b)
-    |vpiParent:
-    \_logic_var: (work@dut.pow_b.pow_b), line:14:28, endln:14:33
-    |vpiFullName:work@dut.pow_b.pow_b
-    |vpiActual:
-    \_logic_typespec: , line:14:28, endln:14:33
-  |vpiName:pow_b
-  |vpiFullName:work@dut.pow_b.pow_b
-\_logic_typespec: , line:14:28, endln:14:33
-  |vpiParent:
-  \_ref_typespec: (work@dut.pow_b.pow_b)
-  |vpiRange:
-  \_range: , line:14:28, endln:14:33
-    |vpiParent:
-    \_logic_typespec: , line:14:28, endln:14:33
-    |vpiLeftRange:
-    \_constant: , line:14:29, endln:14:30
-      |vpiParent:
-      \_range: , line:14:28, endln:14:33
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:14:31, endln:14:32
-      |vpiParent:
-      \_range: , line:14:28, endln:14:33
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_var: (work@dut.pow_b.pow_b), line:14:28, endln:14:33
-  |vpiParent:
-  \_ref_obj: (work@dut.pow_b.pow_b), line:19:33, endln:19:38
-  |vpiTypespec:
-  \_ref_typespec: (work@dut.pow_b.pow_b)
-    |vpiParent:
-    \_logic_var: (work@dut.pow_b.pow_b), line:14:28, endln:14:33
-    |vpiFullName:work@dut.pow_b.pow_b
-    |vpiActual:
-    \_logic_typespec: , line:14:28, endln:14:33
-  |vpiName:pow_b
-  |vpiFullName:work@dut.pow_b.pow_b
-\_logic_typespec: , line:14:28, endln:14:33
-  |vpiParent:
-  \_ref_typespec: (work@dut.pow_b.pow_b)
-  |vpiRange:
-  \_range: , line:14:28, endln:14:33
-    |vpiParent:
-    \_logic_typespec: , line:14:28, endln:14:33
-    |vpiLeftRange:
-    \_constant: , line:14:29, endln:14:30
-      |vpiParent:
-      \_range: , line:14:28, endln:14:33
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:14:31, endln:14:32
-      |vpiParent:
-      \_range: , line:14:28, endln:14:33
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 1
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/FuncArgs/dut.sv | ${SURELOG_DIR}/build/regression/FuncArgs/roundtrip/dut_000.sv | 7 | 25 |
+[roundtrip]: ${SURELOG_DIR}/tests/FuncArgs/dut.sv | ${SURELOG_DIR}/build/regression/FuncArgs/roundtrip/dut_000.sv | 13 | 25 |
 ============================== End RoundTrip Results ==============================

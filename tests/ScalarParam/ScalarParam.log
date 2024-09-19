@@ -129,29 +129,33 @@ parameter                                              1
 range                                                  1
 ref_module                                             2
 ref_obj                                                1
-ref_typespec                                           2
+ref_typespec                                           1
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ScalarParam/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ScalarParam/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ScalarParam/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/ScalarParam/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/ScalarParam/dut.sv, line:1:1, endln:2:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@GOOD
+  |vpiName:work@GOOD
   |vpiDefName:work@GOOD
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ScalarParam/dut.sv, line:12:1, endln:18:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@dut
+  |vpiName:work@dut
   |vpiDefName:work@dut
   |vpiRefModule:
-  \_ref_module: work@param_test (t1), line:16:5, endln:16:7
+  \_ref_module: work@param_test (t1), line:14:3, endln:16:11
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ScalarParam/dut.sv, line:12:1, endln:18:10
     |vpiName:t1
@@ -162,16 +166,16 @@ design: (unnamed)
 \_module_inst: work@param_test (work@param_test), file:${SURELOG_DIR}/tests/ScalarParam/dut.sv, line:4:1, endln:10:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@param_test
+  |vpiName:work@param_test
   |vpiParameter:
-  \_parameter: (work@param_test.DRspDepth), line:5:25, endln:5:34
+  \_parameter: (work@param_test.DRspDepth), line:5:25, endln:5:41
     |vpiParent:
     \_module_inst: work@param_test (work@param_test), file:${SURELOG_DIR}/tests/ScalarParam/dut.sv, line:4:1, endln:10:10
     |HEX:2
     |vpiTypespec:
-    \_ref_typespec: (work@param_test.DRspDepth)
+    \_ref_typespec: (work@param_test.DRspDepth), line:5:11, endln:5:14
       |vpiParent:
-      \_parameter: (work@param_test.DRspDepth), line:5:25, endln:5:34
+      \_parameter: (work@param_test.DRspDepth), line:5:25, endln:5:41
       |vpiFullName:work@param_test.DRspDepth
       |vpiActual:
       \_bit_typespec: , line:5:11, endln:5:20
@@ -188,25 +192,52 @@ design: (unnamed)
       |vpiDecompile:4'h2
       |vpiSize:4
       |HEX:2
-      |vpiTypespec:
-      \_ref_typespec: (work@param_test)
-        |vpiParent:
-        \_constant: , line:5:37, endln:5:41
-        |vpiFullName:work@param_test
-        |vpiActual:
-        \_bit_typespec: , line:5:11, endln:5:20
       |vpiConstType:5
     |vpiLhs:
-    \_parameter: (work@param_test.DRspDepth), line:5:25, endln:5:34
+    \_parameter: (work@param_test.DRspDepth), line:5:25, endln:5:41
+  |vpiTypedef:
+  \_bit_typespec: , line:5:11, endln:5:20
+    |vpiParent:
+    \_module_inst: work@param_test (work@param_test), file:${SURELOG_DIR}/tests/ScalarParam/dut.sv, line:4:1, endln:10:10
+    |vpiRange:
+    \_range: , line:5:15, endln:5:20
+      |vpiParent:
+      \_module_inst: work@param_test (work@param_test), file:${SURELOG_DIR}/tests/ScalarParam/dut.sv, line:4:1, endln:10:10
+      |vpiLeftRange:
+      \_constant: , line:5:16, endln:5:17
+        |vpiParent:
+        \_range: , line:5:15, endln:5:20
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:5:18, endln:5:19
+        |vpiParent:
+        \_range: , line:5:15, endln:5:20
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_bit_typespec: , line:5:11, endln:5:20
   |vpiDefName:work@param_test
+  |vpiRefModule:
+  \_ref_module: work@GOOD (good), line:8:6, endln:8:18
+    |vpiParent:
+    \_module_inst: work@param_test (work@param_test), file:${SURELOG_DIR}/tests/ScalarParam/dut.sv, line:4:1, endln:10:10
+    |vpiName:good
+    |vpiDefName:work@GOOD
+    |vpiActual:
+    \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/ScalarParam/dut.sv, line:1:1, endln:2:10
   |vpiGenStmt:
-  \_gen_if: , line:7:4, endln:7:6
+  \_gen_if: , line:7:4, endln:9:7
     |vpiParent:
     \_module_inst: work@param_test (work@param_test), file:${SURELOG_DIR}/tests/ScalarParam/dut.sv, line:4:1, endln:10:10
     |vpiCondition:
     \_operation: , line:7:8, endln:7:22
       |vpiParent:
-      \_gen_if: , line:7:4, endln:7:6
+      \_module_inst: work@param_test (work@param_test), file:${SURELOG_DIR}/tests/ScalarParam/dut.sv, line:4:1, endln:10:10
       |vpiOpType:14
       |vpiOperand:
       \_ref_obj: (work@param_test.DRspDepth), line:7:8, endln:7:17
@@ -214,6 +245,8 @@ design: (unnamed)
         \_operation: , line:7:8, endln:7:22
         |vpiName:DRspDepth
         |vpiFullName:work@param_test.DRspDepth
+        |vpiActual:
+        \_parameter: (work@param_test.DRspDepth), line:5:25, endln:5:41
       |vpiOperand:
       \_constant: , line:7:21, endln:7:22
         |vpiParent:
@@ -223,40 +256,12 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiStmt:
-    \_begin: (work@param_test)
+    \_begin: (work@param_test), line:7:24, endln:9:7
       |vpiParent:
-      \_gen_if: , line:7:4, endln:7:6
+      \_gen_if: , line:7:4, endln:9:7
       |vpiFullName:work@param_test
       |vpiStmt:
-      \_ref_module: work@GOOD (good), line:8:11, endln:8:15
-        |vpiParent:
-        \_begin: (work@param_test)
-        |vpiName:good
-        |vpiDefName:work@GOOD
-\_weaklyReferenced:
-\_bit_typespec: , line:5:11, endln:5:20
-  |vpiParent:
-  \_parameter: (work@param_test.DRspDepth), line:5:25, endln:5:34
-  |vpiRange:
-  \_range: , line:5:15, endln:5:20
-    |vpiParent:
-    \_bit_typespec: , line:5:11, endln:5:20
-    |vpiLeftRange:
-    \_constant: , line:5:16, endln:5:17
-      |vpiParent:
-      \_range: , line:5:15, endln:5:20
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:5:18, endln:5:19
-      |vpiParent:
-      \_range: , line:5:15, endln:5:20
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
+      \_ref_module: work@GOOD (good), line:8:6, endln:8:18
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -265,5 +270,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ScalarParam/dut.sv | ${SURELOG_DIR}/build/regression/ScalarParam/roundtrip/dut_000.sv | 8 | 18 |
+[roundtrip]: ${SURELOG_DIR}/tests/ScalarParam/dut.sv | ${SURELOG_DIR}/build/regression/ScalarParam/roundtrip/dut_000.sv | 14 | 18 |
 ============================== End RoundTrip Results ==============================

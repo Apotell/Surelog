@@ -4,9 +4,9 @@
 [INF:CP0303] ${SURELOG_DIR}/third_party/tests/YosysOldTests/i2c/rtl/i2c_master_bit_ctrl.v:129:1: Compile module "work@i2c_master_bit_ctrl".
 [INF:CP0303] ${SURELOG_DIR}/third_party/tests/YosysOldTests/i2c/rtl/i2c_master_byte_ctrl.v:75:1: Compile module "work@i2c_master_byte_ctrl".
 [INF:CP0303] ${SURELOG_DIR}/third_party/tests/YosysOldTests/i2c/rtl/i2c_master_top.v:79:1: Compile module "work@i2c_master_top".
-[INF:CP0302] Compile class "work@mailbox".
-[INF:CP0302] Compile class "work@process".
-[INF:CP0302] Compile class "work@semaphore".
+[INF:CP0302] Compile class "builtin::mailbox".
+[INF:CP0302] Compile class "builtin::process".
+[INF:CP0302] Compile class "builtin::semaphore".
 [NTE:CP0309] ${SURELOG_DIR}/third_party/tests/YosysOldTests/i2c/rtl/i2c_master_bit_ctrl.v:132:9: Implicit port type (wire) for "scl_o",
 there are 1 more instances of this message.
 [NTE:CP0309] ${SURELOG_DIR}/third_party/tests/YosysOldTests/i2c/rtl/i2c_master_byte_ctrl.v:77:20: Implicit port type (wire) for "dout",
@@ -22,9 +22,9 @@ bit_select                                             9
 case_item                                             42
 case_stmt                                              5
 class_defn                                             8
-class_typespec                                         4
-class_var                                              3
-constant                                             315
+class_typespec                                         1
+class_var                                              1
+constant                                             369
 cont_assign                                           14
 delay_control                                        232
 design                                                 1
@@ -35,12 +35,11 @@ event_control                                         18
 function                                               9
 if_else                                               41
 if_stmt                                               13
-include_file_info                                      6
-int_typespec                                          34
+int_typespec                                           9
 int_var                                                4
 io_decl                                               11
 logic_net                                            104
-logic_typespec                                       104
+logic_typespec                                        59
 logic_var                                              1
 module_inst                                            3
 operation                                            112
@@ -49,10 +48,13 @@ param_assign                                          25
 parameter                                             25
 part_select                                            8
 port                                                  95
-range                                                 45
+preproc_macro_definition                              15
+preproc_macro_instance                                20
+range                                                 72
 ref_module                                             2
-ref_obj                                              572
-ref_typespec                                         167
+ref_obj                                              505
+ref_typespec                                          70
+source_file                                            9
 task                                                   9
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/YosysOldI2c/slpp_unit/surelog.uhdm ...
@@ -296,3 +298,9 @@ task                                                   9
 [LINT]: ${SURELOG_DIR}/third_party/tests/YosysOldTests/i2c/rtl/i2c_master_top.v:289:19: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/third_party/tests/YosysOldTests/i2c/rtl/i2c_master_top.v:291:19: Non synthesizable construct,
 ============================== End Linting Results ==============================
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysOldTests/i2c/rtl/i2c_master_bit_ctrl.v  | ${SURELOG_DIR}/build/regression/YosysOldI2c/roundtrip/i2c_master_bit_ctrl_000.v  | 97 | 535 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysOldTests/i2c/rtl/i2c_master_byte_ctrl.v | ${SURELOG_DIR}/build/regression/YosysOldI2c/roundtrip/i2c_master_byte_ctrl_000.v | 100 | 344 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysOldTests/i2c/rtl/i2c_master_top.v       | ${SURELOG_DIR}/build/regression/YosysOldI2c/roundtrip/i2c_master_top_000.v       | 116 | 301 |
+============================== End RoundTrip Results ==============================

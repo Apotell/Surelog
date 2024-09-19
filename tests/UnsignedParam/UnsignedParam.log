@@ -187,7 +187,6 @@ begin                                                  1
 constant                                              13
 design                                                 1
 gen_if                                                 1
-int_typespec                                           4
 module_inst                                            2
 operation                                              3
 param_assign                                           4
@@ -195,81 +194,56 @@ parameter                                              4
 range                                                  4
 ref_module                                             1
 ref_obj                                                3
-ref_typespec                                           6
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnsignedParam/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/UnsignedParam/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/UnsignedParam/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/UnsignedParam/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/UnsignedParam/dut.sv, line:1:1, endln:2:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@GOOD
+  |vpiName:work@GOOD
   |vpiDefName:work@GOOD
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsignedParam/dut.sv, line:4:1, endln:13:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
+  |vpiName:work@top
   |vpiParameter:
-  \_parameter: (work@top.n), line:5:28, endln:5:29
+  \_parameter: (work@top.n), line:5:28, endln:5:45
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsignedParam/dut.sv, line:4:1, endln:13:10
     |HEX:80000000
-    |vpiTypespec:
-    \_ref_typespec: (work@top.n)
-      |vpiParent:
-      \_parameter: (work@top.n), line:5:28, endln:5:29
-      |vpiFullName:work@top.n
-      |vpiActual:
-      \_int_typespec: , line:5:14, endln:5:20
     |vpiLocalParam:1
     |vpiName:n
     |vpiFullName:work@top.n
   |vpiParameter:
-  \_parameter: (work@top.n2), line:6:28, endln:6:30
+  \_parameter: (work@top.n2), line:6:28, endln:6:41
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsignedParam/dut.sv, line:4:1, endln:13:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.n2)
-      |vpiParent:
-      \_parameter: (work@top.n2), line:6:28, endln:6:30
-      |vpiFullName:work@top.n2
-      |vpiActual:
-      \_int_typespec: , line:6:14, endln:6:20
     |vpiLocalParam:1
     |vpiName:n2
     |vpiFullName:work@top.n2
   |vpiParameter:
-  \_parameter: (work@top.n3), line:7:28, endln:7:30
+  \_parameter: (work@top.n3), line:7:28, endln:7:56
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsignedParam/dut.sv, line:4:1, endln:13:10
     |HEX:8FFFFFFFFFFF0000
-    |vpiTypespec:
-    \_ref_typespec: (work@top.n3)
-      |vpiParent:
-      \_parameter: (work@top.n3), line:7:28, endln:7:30
-      |vpiFullName:work@top.n3
-      |vpiActual:
-      \_int_typespec: , line:7:14, endln:7:20
     |vpiLocalParam:1
     |vpiName:n3
     |vpiFullName:work@top.n3
   |vpiParameter:
-  \_parameter: (work@top.n4), line:8:28, endln:8:30
+  \_parameter: (work@top.n4), line:8:28, endln:8:61
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsignedParam/dut.sv, line:4:1, endln:13:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.n4)
-      |vpiParent:
-      \_parameter: (work@top.n4), line:8:28, endln:8:30
-      |vpiFullName:work@top.n4
-      |vpiActual:
-      \_int_typespec: , line:8:14, endln:8:20
     |vpiLocalParam:1
     |vpiName:n4
     |vpiFullName:work@top.n4
@@ -284,16 +258,9 @@ design: (unnamed)
       |vpiDecompile:32'h80000000
       |vpiSize:32
       |HEX:80000000
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:5:32, endln:5:45
-        |vpiFullName:work@top
-        |vpiActual:
-        \_int_typespec: , line:5:14, endln:5:20
       |vpiConstType:5
     |vpiLhs:
-    \_parameter: (work@top.n), line:5:28, endln:5:29
+    \_parameter: (work@top.n), line:5:28, endln:5:45
   |vpiParamAssign:
   \_param_assign: , line:6:28, endln:6:41
     |vpiParent:
@@ -309,6 +276,8 @@ design: (unnamed)
         \_operation: , line:6:33, endln:6:41
         |vpiName:n
         |vpiFullName:work@top.n
+        |vpiActual:
+        \_parameter: (work@top.n), line:5:28, endln:5:45
       |vpiOperand:
       \_constant: , line:6:37, endln:6:41
         |vpiParent:
@@ -318,7 +287,7 @@ design: (unnamed)
         |BIN:1
         |vpiConstType:3
     |vpiLhs:
-    \_parameter: (work@top.n2), line:6:28, endln:6:30
+    \_parameter: (work@top.n2), line:6:28, endln:6:41
   |vpiParamAssign:
   \_param_assign: , line:7:28, endln:7:56
     |vpiParent:
@@ -330,16 +299,9 @@ design: (unnamed)
       |vpiDecompile:64'h8FFFFFFFFFFF0000
       |vpiSize:64
       |HEX:8FFFFFFFFFFF0000
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:7:33, endln:7:56
-        |vpiFullName:work@top
-        |vpiActual:
-        \_int_typespec: , line:7:14, endln:7:20
       |vpiConstType:5
     |vpiLhs:
-    \_parameter: (work@top.n3), line:7:28, endln:7:30
+    \_parameter: (work@top.n3), line:7:28, endln:7:56
   |vpiParamAssign:
   \_param_assign: , line:8:28, endln:8:61
     |vpiParent:
@@ -355,6 +317,8 @@ design: (unnamed)
         \_operation: , line:8:33, endln:8:61
         |vpiName:n3
         |vpiFullName:work@top.n3
+        |vpiActual:
+        \_parameter: (work@top.n3), line:7:28, endln:7:56
       |vpiOperand:
       \_constant: , line:8:38, endln:8:61
         |vpiParent:
@@ -364,16 +328,24 @@ design: (unnamed)
         |HEX:000000000000FFFF
         |vpiConstType:5
     |vpiLhs:
-    \_parameter: (work@top.n4), line:8:28, endln:8:30
+    \_parameter: (work@top.n4), line:8:28, endln:8:61
   |vpiDefName:work@top
+  |vpiRefModule:
+  \_ref_module: work@GOOD (good), line:11:4, endln:11:16
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsignedParam/dut.sv, line:4:1, endln:13:10
+    |vpiName:good
+    |vpiDefName:work@GOOD
+    |vpiActual:
+    \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/UnsignedParam/dut.sv, line:1:1, endln:2:10
   |vpiGenStmt:
-  \_gen_if: , line:10:3, endln:10:5
+  \_gen_if: , line:10:3, endln:12:6
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsignedParam/dut.sv, line:4:1, endln:13:10
     |vpiCondition:
     \_operation: , line:10:7, endln:10:33
       |vpiParent:
-      \_gen_if: , line:10:3, endln:10:5
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsignedParam/dut.sv, line:4:1, endln:13:10
       |vpiOpType:14
       |vpiOperand:
       \_ref_obj: (work@top.n4), line:10:7, endln:10:9
@@ -381,6 +353,8 @@ design: (unnamed)
         \_operation: , line:10:7, endln:10:33
         |vpiName:n4
         |vpiFullName:work@top.n4
+        |vpiActual:
+        \_parameter: (work@top.n4), line:8:28, endln:8:61
       |vpiOperand:
       \_constant: , line:10:13, endln:10:33
         |vpiParent:
@@ -390,113 +364,12 @@ design: (unnamed)
         |UINT:10376293541461622783
         |vpiConstType:9
     |vpiStmt:
-    \_begin: (work@top)
+    \_begin: (work@top), line:10:35, endln:12:6
       |vpiParent:
-      \_gen_if: , line:10:3, endln:10:5
+      \_gen_if: , line:10:3, endln:12:6
       |vpiFullName:work@top
       |vpiStmt:
-      \_ref_module: work@GOOD (good), line:11:9, endln:11:13
-        |vpiParent:
-        \_begin: (work@top)
-        |vpiName:good
-        |vpiDefName:work@GOOD
-\_weaklyReferenced:
-\_int_typespec: , line:5:14, endln:5:20
-  |vpiParent:
-  \_parameter: (work@top.n), line:5:28, endln:5:29
-  |vpiSigned:1
-  |vpiRange:
-  \_range: , line:5:21, endln:5:27
-    |vpiParent:
-    \_int_typespec: , line:5:14, endln:5:20
-    |vpiLeftRange:
-    \_constant: , line:5:22, endln:5:24
-      |vpiParent:
-      \_range: , line:5:21, endln:5:27
-      |vpiDecompile:63
-      |vpiSize:64
-      |UINT:63
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:5:25, endln:5:26
-      |vpiParent:
-      \_range: , line:5:21, endln:5:27
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_int_typespec: , line:6:14, endln:6:20
-  |vpiParent:
-  \_parameter: (work@top.n2), line:6:28, endln:6:30
-  |vpiSigned:1
-  |vpiRange:
-  \_range: , line:6:21, endln:6:27
-    |vpiParent:
-    \_int_typespec: , line:6:14, endln:6:20
-    |vpiLeftRange:
-    \_constant: , line:6:22, endln:6:24
-      |vpiParent:
-      \_range: , line:6:21, endln:6:27
-      |vpiDecompile:63
-      |vpiSize:64
-      |UINT:63
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:6:25, endln:6:26
-      |vpiParent:
-      \_range: , line:6:21, endln:6:27
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_int_typespec: , line:7:14, endln:7:20
-  |vpiParent:
-  \_parameter: (work@top.n3), line:7:28, endln:7:30
-  |vpiSigned:1
-  |vpiRange:
-  \_range: , line:7:21, endln:7:27
-    |vpiParent:
-    \_int_typespec: , line:7:14, endln:7:20
-    |vpiLeftRange:
-    \_constant: , line:7:22, endln:7:24
-      |vpiParent:
-      \_range: , line:7:21, endln:7:27
-      |vpiDecompile:63
-      |vpiSize:64
-      |UINT:63
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:7:25, endln:7:26
-      |vpiParent:
-      \_range: , line:7:21, endln:7:27
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_int_typespec: , line:8:14, endln:8:20
-  |vpiParent:
-  \_parameter: (work@top.n4), line:8:28, endln:8:30
-  |vpiSigned:1
-  |vpiRange:
-  \_range: , line:8:21, endln:8:27
-    |vpiParent:
-    \_int_typespec: , line:8:14, endln:8:20
-    |vpiLeftRange:
-    \_constant: , line:8:22, endln:8:24
-      |vpiParent:
-      \_range: , line:8:21, endln:8:27
-      |vpiDecompile:63
-      |vpiSize:64
-      |UINT:63
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:8:25, endln:8:26
-      |vpiParent:
-      \_range: , line:8:21, endln:8:27
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
+      \_ref_module: work@GOOD (good), line:11:4, endln:11:16
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -505,5 +378,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/UnsignedParam/dut.sv | ${SURELOG_DIR}/build/regression/UnsignedParam/roundtrip/dut_000.sv | 7 | 13 |
+[roundtrip]: ${SURELOG_DIR}/tests/UnsignedParam/dut.sv | ${SURELOG_DIR}/build/regression/UnsignedParam/roundtrip/dut_000.sv | 11 | 13 |
 ============================== End RoundTrip Results ==============================

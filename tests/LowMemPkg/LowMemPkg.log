@@ -78,25 +78,34 @@ PARSER CACHE USED FOR: ${SURELOG_DIR}/tests/LowMemPkg/dut.sv
 constant                                               1
 design                                                 1
 import_typespec                                        1
-include_file_info                                      1
-logic_net                                              2
+logic_net                                              1
 logic_typespec                                         2
+logic_var                                              1
 module_inst                                            1
 package                                                1
-ref_typespec                                           1
+ref_typespec                                           2
+source_file                                            3
+unsupported_typespec                                   1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LowMemPkg/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/LowMemPkg/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/LowMemPkg/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
-|vpiIncludeFileInfo:
-\_include_file_info: , file:${SURELOG_DIR}/tests/LowMemPkg/dut.sv, line:2:10, endln:2:25
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/LowMemPkg/wddr_pkg.sv
   |vpiParent:
   \_design: (unnamed)
-  |vpiIncludedFile:${SURELOG_DIR}/tests/LowMemPkg/pack_incl.svh
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/LowMemPkg/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiIncludes:
+  \_source_file: (pack_incl.svh), file:${SURELOG_DIR}/tests/LowMemPkg/pack_incl.svh, line:2:10, endln:2:25
+    |vpiParent:
+    \_source_file: , file:${SURELOG_DIR}/tests/LowMemPkg/dut.sv
+    |vpiName:pack_incl.svh
 |uhdmallPackages:
 \_package: wddr_pkg (wddr_pkg::), file:${SURELOG_DIR}/tests/LowMemPkg/wddr_pkg.sv, line:19:1, endln:22:11
   |vpiParent:
@@ -104,45 +113,68 @@ design: (unnamed)
   |vpiName:wddr_pkg
   |vpiFullName:wddr_pkg::
   |vpiTypedef:
-  \_logic_typespec: (wddr_pkg::my_logic), line:20:9, endln:20:14
+  \_logic_typespec: (my_logic), line:20:9, endln:20:14
     |vpiParent:
-    \_design: (unnamed)
-    |vpiName:wddr_pkg::my_logic
-    |vpiInstance:
     \_package: wddr_pkg (wddr_pkg::), file:${SURELOG_DIR}/tests/LowMemPkg/wddr_pkg.sv, line:19:1, endln:22:11
+    |vpiName:my_logic
+  |vpiImportTypespec:
+  \_logic_typespec: (my_logic), line:20:9, endln:20:14
   |vpiDefName:wddr_pkg
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LowMemPkg/dut.sv, line:4:1, endln:8:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiTypedef:
-  \_logic_typespec: (wddr_pkg::my_logic), line:20:9, endln:20:14
-  |vpiDefName:work@top
-  |vpiNet:
-  \_logic_net: (work@top.a), line:5:13, endln:5:14
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LowMemPkg/dut.sv, line:4:1, endln:8:10
-    |vpiName:a
-    |vpiFullName:work@top.a
-  |vpiNet:
-  \_logic_net: (work@top.b), line:6:10, endln:6:11
+  |vpiName:work@top
+  |vpiVariables:
+  \_logic_var: (work@top.b), line:6:10, endln:6:11
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LowMemPkg/dut.sv, line:4:1, endln:8:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.b)
+    \_ref_typespec: (work@top.b), line:6:4, endln:6:9
       |vpiParent:
-      \_logic_net: (work@top.b), line:6:10, endln:6:11
+      \_logic_var: (work@top.b), line:6:10, endln:6:11
       |vpiFullName:work@top.b
       |vpiActual:
       \_logic_typespec: , line:6:4, endln:6:9
     |vpiName:b
     |vpiFullName:work@top.b
-    |vpiNetType:36
+    |vpiVisibility:1
+  |vpiReg:
+  \_logic_var: (work@top.b), line:6:10, endln:6:11
+  |vpiTypedef:
+  \_unsupported_typespec: (my_logic), line:5:4, endln:5:12
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LowMemPkg/dut.sv, line:4:1, endln:8:10
+    |vpiName:my_logic
+  |vpiTypedef:
+  \_logic_typespec: , line:6:4, endln:6:9
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LowMemPkg/dut.sv, line:4:1, endln:8:10
+  |vpiImportTypespec:
+  \_unsupported_typespec: (my_logic), line:5:4, endln:5:12
+  |vpiImportTypespec:
+  \_logic_net: (work@top.a), line:5:13, endln:5:14
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LowMemPkg/dut.sv, line:4:1, endln:8:10
+    |vpiTypespec:
+    \_ref_typespec: (work@top.a.a), line:5:4, endln:5:12
+      |vpiParent:
+      \_logic_net: (work@top.a), line:5:13, endln:5:14
+      |vpiName:a
+      |vpiFullName:work@top.a.a
+      |vpiActual:
+      \_unsupported_typespec: (my_logic), line:5:4, endln:5:12
+    |vpiName:a
+    |vpiFullName:work@top.a
+  |vpiImportTypespec:
+  \_logic_typespec: , line:6:4, endln:6:9
+  |vpiImportTypespec:
+  \_logic_var: (work@top.b), line:6:10, endln:6:11
+  |vpiDefName:work@top
+  |vpiNet:
+  \_logic_net: (work@top.a), line:5:13, endln:5:14
 |vpiTypedef:
-\_logic_typespec: (wddr_pkg::my_logic), line:20:9, endln:20:14
-\_weaklyReferenced:
-\_logic_typespec: , line:6:4, endln:6:9
+\_import_typespec: (wddr_pkg), line:3:8, endln:3:19
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

@@ -42,7 +42,7 @@ n<b> u<36> t<StringConst> p<37> l<10:22> el<10:23>
 n<> u<37> t<Class_type> p<38> c<36> l<10:22> el<10:23>
 n<> u<38> t<Class_scope> p<40> c<37> s<39> l<10:22> el<10:25>
 n<foo_bar_t> u<39> t<StringConst> p<40> l<10:25> el<10:34>
-n<> u<40> t<Data_type> p<41> c<38> l<10:22> el<10:34>
+n<b::foo_bar_t> u<40> t<Data_type> p<41> c<38> l<10:22> el<10:34>
 n<> u<41> t<Function_data_type> p<42> c<40> l<10:22> el<10:34>
 n<> u<42> t<Function_data_type_or_implicit> p<119> c<41> s<43> l<10:22> el<10:34>
 n<foo_bar> u<43> t<StringConst> p<119> s<54> l<10:35> el<10:42>
@@ -51,7 +51,7 @@ n<b> u<45> t<StringConst> p<46> l<12:11> el<12:12>
 n<> u<46> t<Class_type> p<47> c<45> l<12:11> el<12:12>
 n<> u<47> t<Class_scope> p<49> c<46> s<48> l<12:11> el<12:14>
 n<foo_bar_t> u<48> t<StringConst> p<49> l<12:14> el<12:23>
-n<> u<49> t<Data_type> p<50> c<47> l<12:11> el<12:23>
+n<b::foo_bar_t> u<49> t<Data_type> p<50> c<47> l<12:11> el<12:23>
 n<> u<50> t<Data_type_or_implicit> p<53> c<49> s<52> l<12:11> el<12:23>
 n<a> u<51> t<StringConst> p<52> l<12:24> el<12:25>
 n<> u<52> t<List_of_tf_variable_identifiers> p<53> c<51> l<12:24> el<12:25>
@@ -61,7 +61,7 @@ n<b> u<55> t<StringConst> p<56> l<14:5> el<14:6>
 n<> u<56> t<Class_type> p<57> c<55> l<14:5> el<14:6>
 n<> u<57> t<Class_scope> p<59> c<56> s<58> l<14:5> el<14:8>
 n<foo_bar_t> u<58> t<StringConst> p<59> l<14:8> el<14:17>
-n<> u<59> t<Data_type> p<63> c<57> s<62> l<14:5> el<14:17>
+n<b::foo_bar_t> u<59> t<Data_type> p<63> c<57> s<62> l<14:5> el<14:17>
 n<y> u<60> t<StringConst> p<61> l<14:18> el<14:19>
 n<> u<61> t<Variable_decl_assignment> p<62> c<60> l<14:18> el<14:19>
 n<> u<62> t<List_of_variable_decl_assignments> p<63> c<61> l<14:18> el<14:19>
@@ -138,29 +138,33 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             1
 begin                                                  1
-constant                                              10
+constant                                               8
 design                                                 1
 function                                               1
 io_decl                                                1
-logic_typespec                                         4
+logic_typespec                                         3
 logic_var                                              1
 operation                                              3
 package                                                2
-range                                                  5
+range                                                  4
 ref_obj                                                5
-ref_typespec                                           9
-struct_typespec                                        2
-struct_var                                             3
+ref_typespec                                           7
+source_file                                            1
+struct_typespec                                        1
+struct_var                                             2
 sys_func_call                                          3
-typespec_member                                        2
+typespec_member                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackFunc/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PackFunc/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/PackFunc/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/PackFunc/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallPackages:
 \_package: b (b::), file:${SURELOG_DIR}/tests/PackFunc/dut.sv, line:1:1, endln:6:11
   |vpiParent:
@@ -172,26 +176,47 @@ design: (unnamed)
     |vpiParent:
     \_package: b (b::), file:${SURELOG_DIR}/tests/PackFunc/dut.sv, line:1:1, endln:6:11
     |vpiName:b::foo_bar_t
-    |vpiInstance:
-    \_package: b (b::), file:${SURELOG_DIR}/tests/PackFunc/dut.sv, line:1:1, endln:6:11
     |vpiPacked:1
     |vpiTypespecMember:
-    \_typespec_member: (vc), line:3:26, endln:3:28
+    \_typespec_member: (vc), line:3:5, endln:3:29
       |vpiParent:
       \_struct_typespec: (b::foo_bar_t), line:2:11, endln:4:4
       |vpiName:vc
       |vpiTypespec:
-      \_ref_typespec: (b::b::foo_bar_t::vc)
+      \_ref_typespec: (b::foo_bar_t::vc), line:3:5, endln:3:17
         |vpiParent:
-        \_typespec_member: (vc), line:3:26, endln:3:28
-        |vpiFullName:b::b::foo_bar_t::vc
+        \_typespec_member: (vc), line:3:5, endln:3:29
+        |vpiFullName:b::foo_bar_t::vc
         |vpiActual:
         \_logic_typespec: , line:3:5, endln:3:17
-      |vpiRefFile:${SURELOG_DIR}/tests/PackFunc/dut.sv
-      |vpiRefLineNo:3
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:3
-      |vpiRefEndColumnNo:17
+  |vpiTypedef:
+  \_logic_typespec: , line:3:5, endln:3:17
+    |vpiParent:
+    \_package: b (b::), file:${SURELOG_DIR}/tests/PackFunc/dut.sv, line:1:1, endln:6:11
+    |vpiRange:
+    \_range: , line:3:11, endln:3:17
+      |vpiParent:
+      \_struct_typespec: (b::foo_bar_t), line:2:11, endln:4:4
+      |vpiLeftRange:
+      \_constant: , line:3:12, endln:3:14
+        |vpiParent:
+        \_range: , line:3:11, endln:3:17
+        |vpiDecompile:10
+        |vpiSize:64
+        |UINT:10
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:3:15, endln:3:16
+        |vpiParent:
+        \_range: , line:3:11, endln:3:17
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_struct_typespec: (b::foo_bar_t), line:2:11, endln:4:4
+  |vpiImportTypespec:
+  \_logic_typespec: , line:3:5, endln:3:17
   |vpiDefName:b
 |uhdmallPackages:
 \_package: aa (aa::), file:${SURELOG_DIR}/tests/PackFunc/dut.sv, line:8:1, endln:22:11
@@ -199,69 +224,57 @@ design: (unnamed)
   \_design: (unnamed)
   |vpiName:aa
   |vpiFullName:aa::
-  |vpiDefName:aa
-  |vpiTaskFunc:
+  |vpiInternalScope:
   \_function: (aa::foo_bar), line:10:3, endln:21:14
     |vpiParent:
     \_package: aa (aa::), file:${SURELOG_DIR}/tests/PackFunc/dut.sv, line:8:1, endln:22:11
     |vpiName:foo_bar
     |vpiFullName:aa::foo_bar
     |vpiVariables:
-    \_struct_var: (aa::foo_bar::y), line:14:5, endln:14:17
+    \_struct_var: (aa::foo_bar), line:10:22, endln:10:34
       |vpiParent:
       \_function: (aa::foo_bar), line:10:3, endln:21:14
       |vpiTypespec:
-      \_ref_typespec: (aa::foo_bar::y)
+      \_ref_typespec: (aa::foo_bar::b::foo_bar_t), line:10:22, endln:10:34
         |vpiParent:
-        \_struct_var: (aa::foo_bar::y), line:14:5, endln:14:17
-        |vpiFullName:aa::foo_bar::y
+        \_struct_var: (aa::foo_bar), line:10:22, endln:10:34
+        |vpiName:b::foo_bar_t
+        |vpiFullName:aa::foo_bar::b::foo_bar_t
+        |vpiActual:
+        \_struct_typespec: (b::foo_bar_t), line:2:11, endln:4:4
+      |vpiFullName:aa::foo_bar
+    |vpiVariables:
+    \_struct_var: (aa::foo_bar::y), line:14:5, endln:14:19
+      |vpiParent:
+      \_function: (aa::foo_bar), line:10:3, endln:21:14
+      |vpiTypespec:
+      \_ref_typespec: (aa::foo_bar::y::b::foo_bar_t), line:14:5, endln:14:17
+        |vpiParent:
+        \_struct_var: (aa::foo_bar::y), line:14:5, endln:14:19
+        |vpiName:b::foo_bar_t
+        |vpiFullName:aa::foo_bar::y::b::foo_bar_t
         |vpiActual:
         \_struct_typespec: (b::foo_bar_t), line:2:11, endln:4:4
       |vpiName:y
       |vpiFullName:aa::foo_bar::y
       |vpiAutomatic:1
     |vpiVariables:
-    \_logic_var: (aa::foo_bar::a_vec), line:15:5, endln:15:23
+    \_logic_var: (aa::foo_bar::a_vec), line:15:24, endln:15:29
       |vpiParent:
       \_function: (aa::foo_bar), line:10:3, endln:21:14
       |vpiTypespec:
-      \_ref_typespec: (aa::foo_bar::a_vec)
+      \_ref_typespec: (aa::foo_bar::a_vec), line:15:5, endln:15:23
         |vpiParent:
-        \_logic_var: (aa::foo_bar::a_vec), line:15:5, endln:15:23
+        \_logic_var: (aa::foo_bar::a_vec), line:15:24, endln:15:29
         |vpiFullName:aa::foo_bar::a_vec
         |vpiActual:
         \_logic_typespec: , line:15:5, endln:15:23
       |vpiName:a_vec
       |vpiFullName:aa::foo_bar::a_vec
       |vpiAutomatic:1
-    |vpiVisibility:1
-    |vpiAutomatic:1
-    |vpiReturn:
-    \_struct_var: (aa::foo_bar), line:10:22, endln:10:34
-      |vpiParent:
-      \_function: (aa::foo_bar), line:10:3, endln:21:14
-      |vpiTypespec:
-      \_ref_typespec: (aa::foo_bar)
-        |vpiParent:
-        \_struct_var: (aa::foo_bar), line:10:22, endln:10:34
-        |vpiFullName:aa::foo_bar
-        |vpiActual:
-        \_struct_typespec: (b::foo_bar_t), line:2:11, endln:4:4
-      |vpiFullName:aa::foo_bar
-    |vpiIODecl:
-    \_io_decl: (a), line:12:24, endln:12:25
-      |vpiParent:
-      \_function: (aa::foo_bar), line:10:3, endln:21:14
-      |vpiDirection:1
-      |vpiName:a
-      |vpiTypedef:
-      \_ref_typespec: (aa::foo_bar::a)
-        |vpiParent:
-        \_io_decl: (a), line:12:24, endln:12:25
-        |vpiFullName:aa::foo_bar::a
-        |vpiActual:
-        \_struct_typespec: (b::foo_bar_t), line:2:11, endln:4:4
-    |vpiStmt:
+    |vpiReg:
+    \_logic_var: (aa::foo_bar::a_vec), line:15:24, endln:15:29
+    |vpiInternalScope:
     \_begin: (aa::foo_bar), line:17:5, endln:19:8
       |vpiParent:
       \_function: (aa::foo_bar), line:10:3, endln:21:14
@@ -279,7 +292,7 @@ design: (unnamed)
           |vpiName:y
           |vpiFullName:aa::foo_bar::y
           |vpiActual:
-          \_struct_var: (aa::foo_bar::y), line:14:5, endln:14:17
+          \_struct_var: (aa::foo_bar::y), line:14:5, endln:14:19
         |vpiLhs:
         \_ref_obj: (aa::foo_bar::foo_bar), line:18:7, endln:18:14
           |vpiParent:
@@ -287,137 +300,134 @@ design: (unnamed)
           |vpiName:foo_bar
           |vpiFullName:aa::foo_bar::foo_bar
           |vpiActual:
-          \_struct_var: (aa::foo_bar::foo_bar), line:10:22, endln:10:34
+          \_struct_var: (aa::foo_bar), line:10:22, endln:10:34
+    |vpiTypedef:
+    \_logic_typespec: , line:15:5, endln:15:23
+      |vpiParent:
+      \_function: (aa::foo_bar), line:10:3, endln:21:14
+      |vpiRange:
+      \_range: , line:15:9, endln:15:23
+        |vpiParent:
+        \_function: (aa::foo_bar), line:10:3, endln:21:14
+        |vpiLeftRange:
+        \_operation: , line:15:10, endln:15:20
+          |vpiParent:
+          \_range: , line:15:9, endln:15:23
+          |vpiOpType:11
+          |vpiOperand:
+          \_sys_func_call: ($bits), line:15:16, endln:15:17
+            |vpiParent:
+            \_operation: , line:15:10, endln:15:20
+            |vpiArgument:
+            \_ref_obj: (aa::foo_bar::a), line:15:16, endln:15:17
+              |vpiParent:
+              \_sys_func_call: ($bits), line:15:16, endln:15:17
+              |vpiName:a
+              |vpiFullName:aa::foo_bar::a
+              |vpiActual:
+              \_io_decl: (a), line:12:24, endln:12:25
+            |vpiName:$bits
+          |vpiOperand:
+          \_constant: , line:15:19, endln:15:20
+            |vpiParent:
+            \_operation: , line:15:10, endln:15:20
+            |vpiDecompile:1
+            |vpiSize:64
+            |UINT:1
+            |vpiConstType:9
+        |vpiRightRange:
+        \_constant: , line:15:21, endln:15:22
+          |vpiParent:
+          \_range: , line:15:9, endln:15:23
+          |vpiDecompile:0
+          |vpiSize:64
+          |UINT:0
+          |vpiConstType:9
+    |vpiTypedef:
+    \_logic_typespec: , line:15:5, endln:15:23
+      |vpiParent:
+      \_function: (aa::foo_bar), line:10:3, endln:21:14
+      |vpiRange:
+      \_range: , line:15:9, endln:15:23
+        |vpiParent:
+        \_function: (aa::foo_bar), line:10:3, endln:21:14
+        |vpiLeftRange:
+        \_operation: , line:15:10, endln:15:20
+          |vpiParent:
+          \_range: , line:15:9, endln:15:23
+          |vpiOpType:11
+          |vpiOperand:
+          \_sys_func_call: ($bits), line:15:16, endln:15:17
+            |vpiParent:
+            \_operation: , line:15:10, endln:15:20
+            |vpiArgument:
+            \_ref_obj: (aa::foo_bar::a), line:15:16, endln:15:17
+              |vpiParent:
+              \_sys_func_call: ($bits), line:15:16, endln:15:17
+              |vpiName:a
+              |vpiFullName:aa::foo_bar::a
+              |vpiActual:
+              \_io_decl: (a), line:12:24, endln:12:25
+            |vpiName:$bits
+          |vpiOperand:
+          \_constant: , line:15:19, endln:15:20
+            |vpiParent:
+            \_operation: , line:15:10, endln:15:20
+            |vpiDecompile:1
+            |vpiSize:64
+            |UINT:1
+            |vpiConstType:9
+        |vpiRightRange:
+        \_constant: , line:15:21, endln:15:22
+          |vpiParent:
+          \_range: , line:15:9, endln:15:23
+          |vpiDecompile:0
+          |vpiSize:64
+          |UINT:0
+          |vpiConstType:9
+    |vpiImportTypespec:
+    \_struct_var: (aa::foo_bar), line:10:22, endln:10:34
+    |vpiImportTypespec:
+    \_struct_var: (aa::foo_bar::y), line:14:5, endln:14:19
+    |vpiImportTypespec:
+    \_logic_typespec: , line:15:5, endln:15:23
+    |vpiImportTypespec:
+    \_logic_typespec: , line:15:5, endln:15:23
+    |vpiImportTypespec:
+    \_logic_var: (aa::foo_bar::a_vec), line:15:24, endln:15:29
+    |vpiVisibility:1
+    |vpiAutomatic:1
+    |vpiReturn:
+    \_struct_var: (aa::foo_bar), line:10:22, endln:10:34
+    |vpiIODecl:
+    \_io_decl: (a), line:12:24, endln:12:25
+      |vpiParent:
+      \_function: (aa::foo_bar), line:10:3, endln:21:14
+      |vpiDirection:1
+      |vpiName:a
+      |vpiTypedef:
+      \_ref_typespec: (aa::foo_bar::a), line:12:24, endln:12:25
+        |vpiParent:
+        \_io_decl: (a), line:12:24, endln:12:25
+        |vpiFullName:aa::foo_bar::a
+        |vpiActual:
+        \_struct_typespec: (b::foo_bar_t), line:2:11, endln:4:4
+    |vpiStmt:
+    \_begin: (aa::foo_bar), line:17:5, endln:19:8
     |vpiInstance:
     \_package: aa (aa::), file:${SURELOG_DIR}/tests/PackFunc/dut.sv, line:8:1, endln:22:11
-\_weaklyReferenced:
-\_logic_typespec: , line:3:5, endln:3:17
-  |vpiInstance:
-  \_package: b (b::), file:${SURELOG_DIR}/tests/PackFunc/dut.sv, line:1:1, endln:6:11
-  |vpiRange:
-  \_range: , line:3:11, endln:3:17
-    |vpiParent:
-    \_logic_typespec: , line:3:5, endln:3:17
-    |vpiLeftRange:
-    \_constant: , line:3:12, endln:3:14
-      |vpiParent:
-      \_range: , line:3:11, endln:3:17
-      |vpiDecompile:10
-      |vpiSize:64
-      |UINT:10
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:15, endln:3:16
-      |vpiParent:
-      \_range: , line:3:11, endln:3:17
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:15:5, endln:15:23
-  |vpiInstance:
-  \_package: aa (aa::), file:${SURELOG_DIR}/tests/PackFunc/dut.sv, line:8:1, endln:22:11
-  |vpiRange:
-  \_range: , line:15:9, endln:15:23
-    |vpiParent:
-    \_logic_typespec: , line:15:5, endln:15:23
-    |vpiLeftRange:
-    \_operation: , line:15:10, endln:15:20
-      |vpiParent:
-      \_range: , line:15:9, endln:15:23
-      |vpiOpType:11
-      |vpiOperand:
-      \_sys_func_call: ($bits), line:15:10, endln:15:18
-        |vpiParent:
-        \_operation: , line:15:10, endln:15:20
-        |vpiArgument:
-        \_ref_obj: (a), line:15:16, endln:15:17
-          |vpiParent:
-          \_sys_func_call: ($bits), line:15:10, endln:15:18
-          |vpiName:a
-          |vpiActual:
-          \_io_decl: (a), line:12:24, endln:12:25
-        |vpiName:$bits
-      |vpiOperand:
-      \_constant: , line:15:19, endln:15:20
-        |vpiParent:
-        \_operation: , line:15:10, endln:15:20
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:15:21, endln:15:22
-      |vpiParent:
-      \_range: , line:15:9, endln:15:23
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_struct_var: (aa::foo_bar::foo_bar), line:10:22, endln:10:34
-  |vpiParent:
-  \_ref_obj: (aa::foo_bar::foo_bar), line:18:7, endln:18:14
-  |vpiTypespec:
-  \_ref_typespec: (aa::foo_bar::foo_bar)
-    |vpiParent:
-    \_struct_var: (aa::foo_bar::foo_bar), line:10:22, endln:10:34
-    |vpiFullName:aa::foo_bar::foo_bar
-    |vpiActual:
-    \_struct_typespec: (b::foo_bar_t), line:2:11, endln:4:4
-  |vpiName:foo_bar
-  |vpiFullName:aa::foo_bar::foo_bar
-\_struct_typespec: (b::foo_bar_t), line:2:11, endln:4:4
-  |vpiParent:
-  \_ref_typespec: (aa::foo_bar::foo_bar)
-  |vpiName:b::foo_bar_t
-  |vpiInstance:
-  \_package: b (b::), file:${SURELOG_DIR}/tests/PackFunc/dut.sv, line:1:1, endln:6:11
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (vc), line:3:26, endln:3:28
-    |vpiParent:
-    \_struct_typespec: (b::foo_bar_t), line:2:11, endln:4:4
-    |vpiName:vc
-    |vpiTypespec:
-    \_ref_typespec: (aa::foo_bar::foo_bar::b::foo_bar_t::vc)
-      |vpiParent:
-      \_typespec_member: (vc), line:3:26, endln:3:28
-      |vpiFullName:aa::foo_bar::foo_bar::b::foo_bar_t::vc
-      |vpiActual:
-      \_logic_typespec: , line:3:5, endln:3:17
-    |vpiRefFile:${SURELOG_DIR}/tests/PackFunc/dut.sv
-    |vpiRefLineNo:3
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:3
-    |vpiRefEndColumnNo:17
-\_logic_typespec: , line:3:5, endln:3:17
-  |vpiParent:
-  \_ref_typespec: (aa::foo_bar::foo_bar::b::foo_bar_t::vc)
-  |vpiInstance:
-  \_package: b (b::), file:${SURELOG_DIR}/tests/PackFunc/dut.sv, line:1:1, endln:6:11
-  |vpiRange:
-  \_range: , line:3:11, endln:3:17
-    |vpiParent:
-    \_logic_typespec: , line:3:5, endln:3:17
-    |vpiLeftRange:
-    \_constant: , line:3:12, endln:3:14
-      |vpiParent:
-      \_range: , line:3:11, endln:3:17
-      |vpiDecompile:10
-      |vpiSize:64
-      |UINT:10
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:15, endln:3:16
-      |vpiParent:
-      \_range: , line:3:11, endln:3:17
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
+  |vpiImportTypespec:
+  \_function: (aa::foo_bar), line:10:3, endln:21:14
+  |vpiDefName:aa
+  |vpiTaskFunc:
+  \_function: (aa::foo_bar), line:10:3, endln:21:14
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/PackFunc/dut.sv | ${SURELOG_DIR}/build/regression/PackFunc/roundtrip/dut_000.sv | 7 | 22 |
+============================== End RoundTrip Results ==============================

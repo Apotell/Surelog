@@ -146,91 +146,103 @@ constant                                               9
 design                                                 1
 gen_if                                                 1
 hier_path                                              2
-logic_net                                              1
 logic_typespec                                         2
 module_inst                                            2
 operation                                              1
 packed_array_typespec                                  1
 port                                                   1
 range                                                  3
-ref_obj                                                3
-ref_typespec                                           5
+ref_obj                                                2
+ref_typespec                                           6
+source_file                                            1
 struct_typespec                                        2
+struct_var                                             1
 sys_func_call                                          1
 typespec_member                                        3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathPackedStruct/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/HierPathPackedStruct/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/HierPathPackedStruct/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/HierPathPackedStruct/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@some_mod (work@some_mod), file:${SURELOG_DIR}/tests/HierPathPackedStruct/dut.sv, line:10:1, endln:17:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@some_mod
-  |vpiDefName:work@some_mod
-  |vpiNet:
-  \_logic_net: (work@some_mod.a), line:10:29, endln:10:30
+  |vpiName:work@some_mod
+  |vpiVariables:
+  \_struct_var: (work@some_mod.a), line:10:29, endln:10:30
     |vpiParent:
     \_module_inst: work@some_mod (work@some_mod), file:${SURELOG_DIR}/tests/HierPathPackedStruct/dut.sv, line:10:1, endln:17:10
+    |vpiTypespec:
+    \_ref_typespec: (work@some_mod.a.foo_t), line:10:23, endln:10:28
+      |vpiParent:
+      \_struct_var: (work@some_mod.a), line:10:29, endln:10:30
+      |vpiName:foo_t
+      |vpiFullName:work@some_mod.a.foo_t
+      |vpiActual:
+      \_struct_typespec: (foo_t), line:6:9, endln:8:2
     |vpiName:a
     |vpiFullName:work@some_mod.a
+    |vpiVisibility:1
+  |vpiImportTypespec:
+  \_struct_var: (work@some_mod.a), line:10:29, endln:10:30
+  |vpiDefName:work@some_mod
   |vpiPort:
-  \_port: (a), line:10:29, endln:10:30
+  \_port: (a), line:10:17, endln:10:30
     |vpiParent:
     \_module_inst: work@some_mod (work@some_mod), file:${SURELOG_DIR}/tests/HierPathPackedStruct/dut.sv, line:10:1, endln:17:10
     |vpiName:a
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@some_mod.a.a), line:10:29, endln:10:30
-      |vpiParent:
-      \_port: (a), line:10:29, endln:10:30
-      |vpiName:a
-      |vpiFullName:work@some_mod.a.a
-      |vpiActual:
-      \_logic_net: (work@some_mod.a), line:10:29, endln:10:30
     |vpiTypedef:
-    \_ref_typespec: (work@some_mod.a)
+    \_ref_typespec: (work@some_mod.a.foo_t), line:10:23, endln:10:28
       |vpiParent:
-      \_port: (a), line:10:29, endln:10:30
-      |vpiFullName:work@some_mod.a
+      \_port: (a), line:10:17, endln:10:30
+      |vpiName:foo_t
+      |vpiFullName:work@some_mod.a.foo_t
       |vpiActual:
       \_struct_typespec: (foo_t), line:6:9, endln:8:2
   |vpiGenStmt:
-  \_gen_if: , line:14:4, endln:14:6
+  \_gen_if: , line:14:4, endln:16:7
     |vpiParent:
     \_module_inst: work@some_mod (work@some_mod), file:${SURELOG_DIR}/tests/HierPathPackedStruct/dut.sv, line:10:1, endln:17:10
     |vpiCondition:
     \_operation: , line:14:8, endln:14:30
       |vpiParent:
-      \_gen_if: , line:14:4, endln:14:6
+      \_module_inst: work@some_mod (work@some_mod), file:${SURELOG_DIR}/tests/HierPathPackedStruct/dut.sv, line:10:1, endln:17:10
       |vpiOpType:15
       |vpiOperand:
-      \_sys_func_call: ($bits), line:14:8, endln:14:24
+      \_sys_func_call: ($bits), line:14:14, endln:14:23
         |vpiParent:
         \_operation: , line:14:8, endln:14:30
         |vpiArgument:
         \_hier_path: (a.pair[0]), line:14:14, endln:14:23
           |vpiParent:
-          \_sys_func_call: ($bits), line:14:8, endln:14:24
+          \_sys_func_call: ($bits), line:14:14, endln:14:23
           |vpiActual:
           \_ref_obj: (a), line:14:14, endln:14:15
             |vpiParent:
             \_hier_path: (a.pair[0]), line:14:14, endln:14:23
             |vpiName:a
+            |vpiActual:
+            \_struct_var: (work@some_mod.a), line:10:29, endln:10:30
           |vpiActual:
-          \_bit_select: (work@some_mod.a.pair[0].pair), line:14:21, endln:14:22
+          \_bit_select: (work@some_mod.a.pair[0].pair), line:14:20, endln:14:23
             |vpiParent:
             \_hier_path: (a.pair[0]), line:14:14, endln:14:23
             |vpiName:pair
             |vpiFullName:work@some_mod.a.pair[0].pair
+            |vpiActual:
+            \_typespec_member: (pair), line:7:3, endln:7:27
             |vpiIndex:
             \_constant: , line:14:21, endln:14:22
               |vpiParent:
-              \_bit_select: (work@some_mod.a.pair[0].pair), line:14:21, endln:14:22
+              \_module_inst: work@some_mod (work@some_mod), file:${SURELOG_DIR}/tests/HierPathPackedStruct/dut.sv, line:10:1, endln:17:10
               |vpiDecompile:0
               |vpiSize:64
               |UINT:0
@@ -246,83 +258,48 @@ design: (unnamed)
         |UINT:42
         |vpiConstType:9
     |vpiStmt:
-    \_begin: (work@some_mod)
+    \_begin: (work@some_mod), line:14:32, endln:16:7
       |vpiParent:
-      \_gen_if: , line:14:4, endln:14:6
+      \_gen_if: , line:14:4, endln:16:7
       |vpiFullName:work@some_mod
-|vpiTypedef:
-\_struct_typespec: (foo_t), line:6:9, endln:8:2
-  |vpiParent:
-  \_design: (unnamed)
-  |vpiName:foo_t
-  |vpiInstance:
-  \_design: (unnamed)
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (pair), line:7:22, endln:7:26
-    |vpiParent:
-    \_struct_typespec: (foo_t), line:6:9, endln:8:2
-    |vpiName:pair
-    |vpiTypespec:
-    \_ref_typespec: (foo_t.pair)
-      |vpiParent:
-      \_typespec_member: (pair), line:7:22, endln:7:26
-      |vpiFullName:foo_t.pair
-      |vpiActual:
-      \_packed_array_typespec: , line:7:3, endln:7:21
-    |vpiRefFile:${SURELOG_DIR}/tests/HierPathPackedStruct/dut.sv
-    |vpiRefLineNo:7
-    |vpiRefColumnNo:3
-    |vpiRefEndLineNo:7
-    |vpiRefEndColumnNo:21
 |vpiTypedef:
 \_struct_typespec: (fourty_two_t), line:1:9, endln:4:2
   |vpiParent:
   \_design: (unnamed)
   |vpiName:fourty_two_t
-  |vpiInstance:
-  \_design: (unnamed)
   |vpiPacked:1
   |vpiTypespecMember:
-  \_typespec_member: (foo), line:2:16, endln:2:19
+  \_typespec_member: (foo), line:2:3, endln:2:20
     |vpiParent:
     \_struct_typespec: (fourty_two_t), line:1:9, endln:4:2
     |vpiName:foo
     |vpiTypespec:
-    \_ref_typespec: (fourty_two_t.foo)
+    \_ref_typespec: (fourty_two_t.foo), line:2:3, endln:2:15
       |vpiParent:
-      \_typespec_member: (foo), line:2:16, endln:2:19
+      \_typespec_member: (foo), line:2:3, endln:2:20
       |vpiFullName:fourty_two_t.foo
       |vpiActual:
       \_logic_typespec: , line:2:3, endln:2:15
-    |vpiRefFile:${SURELOG_DIR}/tests/HierPathPackedStruct/dut.sv
-    |vpiRefLineNo:2
-    |vpiRefColumnNo:3
-    |vpiRefEndLineNo:2
-    |vpiRefEndColumnNo:15
   |vpiTypespecMember:
-  \_typespec_member: (bar), line:3:16, endln:3:19
+  \_typespec_member: (bar), line:3:3, endln:3:20
     |vpiParent:
     \_struct_typespec: (fourty_two_t), line:1:9, endln:4:2
     |vpiName:bar
     |vpiTypespec:
-    \_ref_typespec: (fourty_two_t.bar)
+    \_ref_typespec: (fourty_two_t.bar), line:3:3, endln:3:15
       |vpiParent:
-      \_typespec_member: (bar), line:3:16, endln:3:19
+      \_typespec_member: (bar), line:3:3, endln:3:20
       |vpiFullName:fourty_two_t.bar
       |vpiActual:
       \_logic_typespec: , line:3:3, endln:3:15
-    |vpiRefFile:${SURELOG_DIR}/tests/HierPathPackedStruct/dut.sv
-    |vpiRefLineNo:3
-    |vpiRefColumnNo:3
-    |vpiRefEndLineNo:3
-    |vpiRefEndColumnNo:15
-\_weaklyReferenced:
+|vpiTypedef:
 \_logic_typespec: , line:2:3, endln:2:15
+  |vpiParent:
+  \_design: (unnamed)
   |vpiRange:
   \_range: , line:2:9, endln:2:15
     |vpiParent:
-    \_logic_typespec: , line:2:3, endln:2:15
+    \_struct_typespec: (fourty_two_t), line:1:9, endln:4:2
     |vpiLeftRange:
     \_constant: , line:2:10, endln:2:12
       |vpiParent:
@@ -339,11 +316,14 @@ design: (unnamed)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
+|vpiTypedef:
 \_logic_typespec: , line:3:3, endln:3:15
+  |vpiParent:
+  \_design: (unnamed)
   |vpiRange:
   \_range: , line:3:9, endln:3:15
     |vpiParent:
-    \_logic_typespec: , line:3:3, endln:3:15
+    \_struct_typespec: (fourty_two_t), line:1:9, endln:4:2
     |vpiLeftRange:
     \_constant: , line:3:10, endln:3:12
       |vpiParent:
@@ -360,11 +340,33 @@ design: (unnamed)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
+|vpiTypedef:
+\_struct_typespec: (foo_t), line:6:9, endln:8:2
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:foo_t
+  |vpiPacked:1
+  |vpiTypespecMember:
+  \_typespec_member: (pair), line:7:3, endln:7:27
+    |vpiParent:
+    \_struct_typespec: (foo_t), line:6:9, endln:8:2
+    |vpiName:pair
+    |vpiTypespec:
+    \_ref_typespec: (foo_t.pair.fourty_two_t), line:7:3, endln:7:21
+      |vpiParent:
+      \_typespec_member: (pair), line:7:3, endln:7:27
+      |vpiName:fourty_two_t
+      |vpiFullName:foo_t.pair.fourty_two_t
+      |vpiActual:
+      \_packed_array_typespec: , line:7:3, endln:7:21
+|vpiTypedef:
 \_packed_array_typespec: , line:7:3, endln:7:21
+  |vpiParent:
+  \_design: (unnamed)
   |vpiRange:
   \_range: , line:7:16, endln:7:21
     |vpiParent:
-    \_packed_array_typespec: , line:7:3, endln:7:21
+    \_struct_typespec: (foo_t), line:6:9, endln:8:2
     |vpiLeftRange:
     \_constant: , line:7:17, endln:7:18
       |vpiParent:
@@ -382,9 +384,10 @@ design: (unnamed)
       |UINT:0
       |vpiConstType:9
   |vpiElemTypespec:
-  \_ref_typespec: 
+  \_ref_typespec: (fourty_two_t), line:7:3, endln:7:15
     |vpiParent:
     \_packed_array_typespec: , line:7:3, endln:7:21
+    |vpiName:fourty_two_t
     |vpiActual:
     \_struct_typespec: (fourty_two_t), line:1:9, endln:4:2
 ===================
@@ -393,3 +396,7 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/HierPathPackedStruct/dut.sv | ${SURELOG_DIR}/build/regression/HierPathPackedStruct/roundtrip/dut_000.sv | 8 | 17 |
+============================== End RoundTrip Results ==============================

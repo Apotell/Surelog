@@ -160,45 +160,66 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/TypespecBits/dut.sv:2:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              12
+constant                                              18
 cont_assign                                            1
 design                                                 1
 indexed_part_select                                    1
 int_typespec                                           1
-logic_net                                              2
-logic_typespec                                         3
+logic_net                                              1
+logic_typespec                                         2
+logic_var                                              1
 module_inst                                            1
-operation                                              2
+operation                                              3
 packed_array_typespec                                  1
 param_assign                                           1
 parameter                                              1
 port                                                   1
-range                                                  6
+range                                                  9
 ref_obj                                                7
-ref_typespec                                           4
-sys_func_call                                          3
+ref_typespec                                           2
+source_file                                            1
+sys_func_call                                          4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypespecBits/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/TypespecBits/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/TypespecBits/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/TypespecBits/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TypespecBits/dut.sv, line:2:1, endln:9:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
+  |vpiName:work@top
+  |vpiVariables:
+  \_logic_var: (work@top.c0), line:6:28, endln:6:30
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TypespecBits/dut.sv, line:2:1, endln:9:10
+    |vpiTypespec:
+    \_ref_typespec: (work@top.c0), line:6:1, endln:6:27
+      |vpiParent:
+      \_logic_var: (work@top.c0), line:6:28, endln:6:30
+      |vpiFullName:work@top.c0
+      |vpiActual:
+      \_logic_typespec: , line:6:1, endln:6:27
+    |vpiName:c0
+    |vpiFullName:work@top.c0
+    |vpiVisibility:1
+  |vpiReg:
+  \_logic_var: (work@top.c0), line:6:28, endln:6:30
   |vpiParameter:
-  \_parameter: (work@top.W), line:2:28, endln:2:29
+  \_parameter: (work@top.W), line:2:28, endln:2:33
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TypespecBits/dut.sv, line:2:1, endln:9:10
     |UINT:4
     |vpiTypespec:
-    \_ref_typespec: (work@top.W)
+    \_ref_typespec: (work@top.W), line:2:24, endln:2:27
       |vpiParent:
-      \_parameter: (work@top.W), line:2:28, endln:2:29
+      \_parameter: (work@top.W), line:2:28, endln:2:33
       |vpiFullName:work@top.W
       |vpiActual:
       \_int_typespec: , line:2:24, endln:2:27
@@ -216,27 +237,23 @@ design: (unnamed)
       |vpiDecompile:4
       |vpiSize:64
       |UINT:4
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:2:32, endln:2:33
-        |vpiFullName:work@top
-        |vpiActual:
-        \_int_typespec: , line:2:24, endln:2:27
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@top.W), line:2:28, endln:2:29
+    \_parameter: (work@top.W), line:2:28, endln:2:33
+  |vpiTypedef:
+  \_int_typespec: , line:2:24, endln:2:27
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TypespecBits/dut.sv, line:2:1, endln:9:10
+    |vpiSigned:1
   |vpiTypedef:
   \_logic_typespec: (sheet_t), line:4:9, endln:4:30
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TypespecBits/dut.sv, line:2:1, endln:9:10
     |vpiName:sheet_t
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TypespecBits/dut.sv, line:2:1, endln:9:10
     |vpiRange:
     \_range: , line:4:20, endln:4:25
       |vpiParent:
-      \_logic_typespec: (sheet_t), line:4:9, endln:4:30
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TypespecBits/dut.sv, line:2:1, endln:9:10
       |vpiLeftRange:
       \_constant: , line:4:21, endln:4:22
         |vpiParent:
@@ -256,13 +273,15 @@ design: (unnamed)
     |vpiRange:
     \_range: , line:4:25, endln:4:30
       |vpiParent:
-      \_logic_typespec: (sheet_t), line:4:9, endln:4:30
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TypespecBits/dut.sv, line:2:1, endln:9:10
       |vpiLeftRange:
-      \_ref_obj: (work@top.sheet_t.W), line:4:26, endln:4:27
+      \_ref_obj: (work@top.W), line:4:26, endln:4:27
         |vpiParent:
         \_range: , line:4:25, endln:4:30
         |vpiName:W
-        |vpiFullName:work@top.sheet_t.W
+        |vpiFullName:work@top.W
+        |vpiActual:
+        \_parameter: (work@top.W), line:2:28, endln:2:33
       |vpiRightRange:
       \_constant: , line:4:28, endln:4:29
         |vpiParent:
@@ -271,48 +290,71 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-  |vpiDefName:work@top
-  |vpiNet:
+  |vpiTypedef:
+  \_logic_typespec: , line:6:1, endln:6:27
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TypespecBits/dut.sv, line:2:1, endln:9:10
+    |vpiRange:
+    \_range: , line:6:7, endln:6:27
+      |vpiParent:
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TypespecBits/dut.sv, line:2:1, endln:9:10
+      |vpiLeftRange:
+      \_operation: , line:6:8, endln:6:24
+        |vpiParent:
+        \_range: , line:6:7, endln:6:27
+        |vpiOpType:11
+        |vpiOperand:
+        \_sys_func_call: ($bits), line:6:14, endln:6:21
+          |vpiParent:
+          \_operation: , line:6:8, endln:6:24
+          |vpiArgument:
+          \_ref_typespec: (work@top.sheet_t), line:6:14, endln:6:21
+            |vpiParent:
+            \_sys_func_call: ($bits), line:6:14, endln:6:21
+            |vpiName:sheet_t
+            |vpiFullName:work@top.sheet_t
+            |vpiActual:
+            \_logic_typespec: (sheet_t), line:4:9, endln:4:30
+          |vpiName:$bits
+        |vpiOperand:
+        \_constant: , line:6:23, endln:6:24
+          |vpiParent:
+          \_operation: , line:6:8, endln:6:24
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:6:25, endln:6:26
+        |vpiParent:
+        \_range: , line:6:7, endln:6:27
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_int_typespec: , line:2:24, endln:2:27
+  |vpiImportTypespec:
+  \_logic_typespec: (sheet_t), line:4:9, endln:4:30
+  |vpiImportTypespec:
   \_logic_net: (work@top.rand_i), line:2:49, endln:2:55
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TypespecBits/dut.sv, line:2:1, endln:9:10
     |vpiName:rand_i
     |vpiFullName:work@top.rand_i
+  |vpiImportTypespec:
+  \_logic_typespec: , line:6:1, endln:6:27
+  |vpiImportTypespec:
+  \_logic_var: (work@top.c0), line:6:28, endln:6:30
+  |vpiDefName:work@top
   |vpiNet:
-  \_logic_net: (work@top.c0), line:6:28, endln:6:30
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TypespecBits/dut.sv, line:2:1, endln:9:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.c0)
-      |vpiParent:
-      \_logic_net: (work@top.c0), line:6:28, endln:6:30
-      |vpiFullName:work@top.c0
-      |vpiActual:
-      \_logic_typespec: , line:6:1, endln:6:27
-    |vpiName:c0
-    |vpiFullName:work@top.c0
-    |vpiNetType:36
+  \_logic_net: (work@top.rand_i), line:2:49, endln:2:55
   |vpiPort:
-  \_port: (rand_i), line:2:49, endln:2:55
+  \_port: (rand_i), line:2:36, endln:2:55
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TypespecBits/dut.sv, line:2:1, endln:9:10
     |vpiName:rand_i
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@top.rand_i.rand_i), line:2:49, endln:2:55
-      |vpiParent:
-      \_port: (rand_i), line:2:49, endln:2:55
-      |vpiName:rand_i
-      |vpiFullName:work@top.rand_i.rand_i
-      |vpiActual:
-      \_logic_net: (work@top.rand_i), line:2:49, endln:2:55
-    |vpiTypedef:
-    \_ref_typespec: (work@top.rand_i)
-      |vpiParent:
-      \_port: (rand_i), line:2:49, endln:2:55
-      |vpiFullName:work@top.rand_i
-      |vpiActual:
-      \_logic_typespec: , line:2:42, endln:2:48
   |vpiContAssign:
   \_cont_assign: , line:7:8, endln:7:53
     |vpiParent:
@@ -324,6 +366,8 @@ design: (unnamed)
       |vpiName:rand_i
       |vpiFullName:work@top.rand_i
       |vpiDefName:rand_i
+      |vpiActual:
+      \_logic_net: (work@top.rand_i), line:2:49, endln:2:55
       |vpiConstantSelect:1
       |vpiIndexedPartSelectType:1
       |vpiBaseExpr:
@@ -340,97 +384,39 @@ design: (unnamed)
           |UINT:1
           |vpiConstType:9
         |vpiOperand:
-        \_sys_func_call: ($bits), line:7:22, endln:7:36
+        \_sys_func_call: ($bits), line:7:28, endln:7:35
           |vpiParent:
           \_operation: , line:7:20, endln:7:36
           |vpiArgument:
-          \_ref_obj: (work@top.rand_i.sheet_t), line:7:28, endln:7:35
+          \_ref_typespec: (work@top.rand_i.sheet_t), line:7:28, endln:7:35
             |vpiParent:
-            \_sys_func_call: ($bits), line:7:22, endln:7:36
+            \_sys_func_call: ($bits), line:7:28, endln:7:35
             |vpiName:sheet_t
             |vpiFullName:work@top.rand_i.sheet_t
+            |vpiActual:
+            \_logic_typespec: (sheet_t), line:4:9, endln:4:30
           |vpiName:$bits
       |vpiWidthExpr:
-      \_sys_func_call: ($bits), line:7:38, endln:7:52
+      \_sys_func_call: ($bits), line:7:44, endln:7:51
         |vpiParent:
         \_indexed_part_select: rand_i (work@top.rand_i), line:7:20, endln:7:52
         |vpiArgument:
-        \_ref_obj: (work@top.rand_i.sheet_t), line:7:44, endln:7:51
+        \_ref_typespec: (work@top.rand_i.sheet_t), line:7:44, endln:7:51
           |vpiParent:
-          \_sys_func_call: ($bits), line:7:38, endln:7:52
+          \_sys_func_call: ($bits), line:7:44, endln:7:51
           |vpiName:sheet_t
           |vpiFullName:work@top.rand_i.sheet_t
+          |vpiActual:
+          \_logic_typespec: (sheet_t), line:4:9, endln:4:30
         |vpiName:$bits
     |vpiLhs:
     \_ref_obj: (work@top.c0), line:7:8, endln:7:10
       |vpiParent:
-      \_cont_assign: , line:7:8, endln:7:53
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TypespecBits/dut.sv, line:2:1, endln:9:10
       |vpiName:c0
       |vpiFullName:work@top.c0
       |vpiActual:
-      \_logic_net: (work@top.c0), line:6:28, endln:6:30
-\_weaklyReferenced:
-\_int_typespec: , line:2:24, endln:2:27
-  |vpiParent:
-  \_parameter: (work@top.W), line:2:28, endln:2:29
-  |vpiSigned:1
-\_logic_typespec: , line:2:42, endln:2:48
-  |vpiRange:
-  \_range: , line:2:42, endln:2:48
-    |vpiParent:
-    \_logic_typespec: , line:2:42, endln:2:48
-    |vpiLeftRange:
-    \_constant: , line:2:43, endln:2:45
-      |vpiParent:
-      \_range: , line:2:42, endln:2:48
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:46, endln:2:47
-      |vpiParent:
-      \_range: , line:2:42, endln:2:48
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:6:1, endln:6:27
-  |vpiRange:
-  \_range: , line:6:7, endln:6:27
-    |vpiParent:
-    \_logic_typespec: , line:6:1, endln:6:27
-    |vpiLeftRange:
-    \_operation: , line:6:8, endln:6:24
-      |vpiParent:
-      \_range: , line:6:7, endln:6:27
-      |vpiOpType:11
-      |vpiOperand:
-      \_sys_func_call: ($bits), line:6:8, endln:6:22
-        |vpiParent:
-        \_operation: , line:6:8, endln:6:24
-        |vpiArgument:
-        \_ref_obj: (sheet_t), line:6:14, endln:6:21
-          |vpiParent:
-          \_sys_func_call: ($bits), line:6:8, endln:6:22
-          |vpiName:sheet_t
-        |vpiName:$bits
-      |vpiOperand:
-      \_constant: , line:6:23, endln:6:24
-        |vpiParent:
-        \_operation: , line:6:8, endln:6:24
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:6:25, endln:6:26
-      |vpiParent:
-      \_range: , line:6:7, endln:6:27
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
+      \_logic_var: (work@top.c0), line:6:28, endln:6:30
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -439,5 +425,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/TypespecBits/dut.sv | ${SURELOG_DIR}/build/regression/TypespecBits/roundtrip/dut_000.sv | 2 | 9 |
+[roundtrip]: ${SURELOG_DIR}/tests/TypespecBits/dut.sv | ${SURELOG_DIR}/build/regression/TypespecBits/roundtrip/dut_000.sv | 5 | 9 |
 ============================== End RoundTrip Results ==============================

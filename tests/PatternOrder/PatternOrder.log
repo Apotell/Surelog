@@ -60,7 +60,7 @@ n<> u<54> t<Primary> p<55> c<53> l<8:16> el<8:28>
 n<> u<55> t<Expression> p<77> c<54> s<60> l<8:16> el<8:28>
 n<> u<56> t<IntegerAtomType_Int> p<57> l<8:30> el<8:33>
 n<> u<57> t<Integer_type> p<58> c<56> l<8:30> el<8:33>
-n<> u<58> t<Simple_type> p<59> c<57> l<8:30> el<8:33>
+n<int> u<58> t<Simple_type> p<59> c<57> l<8:30> el<8:33>
 n<> u<59> t<Assignment_pattern_key> p<60> c<58> l<8:30> el<8:33>
 n<> u<60> t<Structure_pattern_key> p<77> c<59> s<64> l<8:30> el<8:33>
 n<0> u<61> t<IntConst> p<62> l<8:35> el<8:36>
@@ -105,172 +105,308 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/PatternOrder/dut.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+constant                                               4
 design                                                 1
-int_typespec                                           1
-logic_net                                              1
+int_typespec                                           2
 logic_typespec                                         2
 module_inst                                            1
+operation                                              3
 real_typespec                                          2
-ref_typespec                                           8
+ref_typespec                                          12
+source_file                                            1
+string_typespec                                        3
 struct_typespec                                        3
+struct_var                                             1
+tagged_pattern                                         4
 typespec_member                                        7
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PatternOrder/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PatternOrder/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/PatternOrder/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/PatternOrder/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PatternOrder/dut.sv, line:1:1, endln:10:16
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiNet:
-  \_logic_net: (work@top.ABC), line:8:3, endln:8:6
+  |vpiName:work@top
+  |vpiVariables:
+  \_struct_var: (work@top.ABC), line:8:3, endln:8:6
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PatternOrder/dut.sv, line:1:1, endln:10:16
     |vpiTypespec:
-    \_ref_typespec: (work@top.ABC)
+    \_ref_typespec: (work@top.ABC), line:2:4, endln:8:2
       |vpiParent:
-      \_logic_net: (work@top.ABC), line:8:3, endln:8:6
+      \_struct_var: (work@top.ABC), line:8:3, endln:8:6
       |vpiFullName:work@top.ABC
       |vpiActual:
-      \_struct_typespec: , line:2:4, endln:8:57
+      \_struct_typespec: , line:2:4, endln:8:2
     |vpiName:ABC
     |vpiFullName:work@top.ABC
-  |vpiEndLabel:top
-\_weaklyReferenced:
-\_struct_typespec: , line:2:4, endln:8:57
-  |vpiTypespecMember:
-  \_typespec_member: (A), line:3:7, endln:3:8
-    |vpiParent:
-    \_struct_typespec: , line:2:4, endln:8:57
-    |vpiName:A
-    |vpiTypespec:
-    \_ref_typespec: (A)
+    |vpiVisibility:1
+    |vpiExpr:
+    \_operation: , line:8:9, endln:8:57
       |vpiParent:
-      \_typespec_member: (A), line:3:7, endln:3:8
-      |vpiFullName:A
-      |vpiActual:
-      \_int_typespec: , line:3:3, endln:3:6
-    |vpiRefFile:${SURELOG_DIR}/tests/PatternOrder/dut.sv
-    |vpiRefLineNo:3
-    |vpiRefColumnNo:3
-    |vpiRefEndLineNo:3
-    |vpiRefEndColumnNo:6
-  |vpiTypespecMember:
-  \_typespec_member: (BC1), line:7:5, endln:7:8
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PatternOrder/dut.sv, line:1:1, endln:10:16
+      |vpiOpType:75
+      |vpiOperand:
+      \_tagged_pattern: , line:8:11, endln:8:28
+        |vpiParent:
+        \_operation: , line:8:9, endln:8:57
+        |vpiPattern:
+        \_operation: , line:8:16, endln:8:28
+          |vpiParent:
+          \_operation: , line:8:9, endln:8:57
+          |vpiOpType:75
+          |vpiOperand:
+          \_constant: , line:8:18, endln:8:22
+            |vpiParent:
+            \_operation: , line:8:16, endln:8:28
+            |vpiDecompile:1'b1
+            |vpiSize:1
+            |BIN:1
+            |vpiConstType:3
+          |vpiOperand:
+          \_constant: , line:8:24, endln:8:27
+            |vpiParent:
+            \_operation: , line:8:16, endln:8:28
+            |vpiDecompile:1.0
+            |vpiSize:64
+            |REAL:1.000000
+            |vpiConstType:2
+        |vpiTypespec:
+        \_ref_typespec: (work@top.BC1), line:8:11, endln:8:14
+          |vpiParent:
+          \_tagged_pattern: , line:8:11, endln:8:28
+          |vpiName:BC1
+          |vpiFullName:work@top.BC1
+          |vpiActual:
+          \_string_typespec: (BC1), line:8:11, endln:8:14
+      |vpiOperand:
+      \_tagged_pattern: , line:8:30, endln:8:33
+        |vpiParent:
+        \_operation: , line:8:9, endln:8:57
+        |vpiPattern:
+        \_constant: , line:8:35, endln:8:36
+          |vpiParent:
+          \_operation: , line:8:9, endln:8:57
+          |vpiDecompile:0
+          |vpiSize:64
+          |UINT:0
+          |vpiConstType:9
+        |vpiTypespec:
+        \_ref_typespec: (work@top), line:8:30, endln:8:33
+          |vpiParent:
+          \_tagged_pattern: , line:8:30, endln:8:33
+          |vpiFullName:work@top
+          |vpiActual:
+          \_int_typespec: , line:8:30, endln:8:33
+      |vpiOperand:
+      \_tagged_pattern: , line:8:38, endln:8:56
+        |vpiParent:
+        \_operation: , line:8:9, endln:8:57
+        |vpiPattern:
+        \_operation: , line:8:43, endln:8:56
+          |vpiParent:
+          \_operation: , line:8:9, endln:8:57
+          |vpiOpType:75
+          |vpiOperand:
+          \_tagged_pattern: , line:8:45, endln:8:55
+            |vpiParent:
+            \_operation: , line:8:43, endln:8:56
+            |vpiPattern:
+            \_constant: , line:8:54, endln:8:55
+              |vpiParent:
+              \_operation: , line:8:43, endln:8:56
+              |vpiDecompile:0
+              |vpiSize:64
+              |UINT:0
+              |vpiConstType:9
+            |vpiTypespec:
+            \_ref_typespec: (work@top), line:8:45, endln:8:52
+              |vpiParent:
+              \_tagged_pattern: , line:8:45, endln:8:55
+              |vpiFullName:work@top
+              |vpiActual:
+              \_string_typespec: (default), line:8:45, endln:8:52
+        |vpiTypespec:
+        \_ref_typespec: (work@top.BC2), line:8:38, endln:8:41
+          |vpiParent:
+          \_tagged_pattern: , line:8:38, endln:8:56
+          |vpiName:BC2
+          |vpiFullName:work@top.BC2
+          |vpiActual:
+          \_string_typespec: (BC2), line:8:38, endln:8:41
+  |vpiTypedef:
+  \_struct_typespec: , line:2:4, endln:8:2
     |vpiParent:
-    \_struct_typespec: , line:2:4, endln:8:57
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PatternOrder/dut.sv, line:1:1, endln:10:16
+    |vpiTypespecMember:
+    \_typespec_member: (A), line:3:3, endln:3:9
+      |vpiParent:
+      \_struct_typespec: , line:2:4, endln:8:2
+      |vpiName:A
+      |vpiTypespec:
+      \_ref_typespec: (work@top.A), line:3:3, endln:3:6
+        |vpiParent:
+        \_typespec_member: (A), line:3:3, endln:3:9
+        |vpiFullName:work@top.A
+        |vpiActual:
+        \_int_typespec: , line:3:3, endln:3:6
+    |vpiTypespecMember:
+    \_typespec_member: (BC1), line:4:3, endln:7:14
+      |vpiParent:
+      \_struct_typespec: , line:2:4, endln:8:2
+      |vpiName:BC1
+      |vpiTypespec:
+      \_ref_typespec: (work@top.BC1), line:4:3, endln:7:4
+        |vpiParent:
+        \_typespec_member: (BC1), line:4:3, endln:7:14
+        |vpiFullName:work@top.BC1
+        |vpiActual:
+        \_struct_typespec: , line:4:3, endln:7:4
+    |vpiTypespecMember:
+    \_typespec_member: (BC2), line:4:3, endln:7:14
+      |vpiParent:
+      \_struct_typespec: , line:2:4, endln:8:2
+      |vpiName:BC2
+      |vpiTypespec:
+      \_ref_typespec: (work@top.BC2), line:4:3, endln:7:4
+        |vpiParent:
+        \_typespec_member: (BC2), line:4:3, endln:7:14
+        |vpiFullName:work@top.BC2
+        |vpiActual:
+        \_struct_typespec: , line:4:3, endln:7:4
+  |vpiTypedef:
+  \_int_typespec: , line:3:3, endln:3:6
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PatternOrder/dut.sv, line:1:1, endln:10:16
+    |vpiSigned:1
+  |vpiTypedef:
+  \_struct_typespec: , line:4:3, endln:7:4
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PatternOrder/dut.sv, line:1:1, endln:10:16
+    |vpiTypespecMember:
+    \_typespec_member: (B), line:5:5, endln:5:13
+      |vpiParent:
+      \_struct_typespec: , line:4:3, endln:7:4
+      |vpiName:B
+      |vpiTypespec:
+      \_ref_typespec: (work@top.B), line:5:5, endln:5:10
+        |vpiParent:
+        \_typespec_member: (B), line:5:5, endln:5:13
+        |vpiFullName:work@top.B
+        |vpiActual:
+        \_logic_typespec: , line:5:5, endln:5:10
+    |vpiTypespecMember:
+    \_typespec_member: (C), line:6:5, endln:6:12
+      |vpiParent:
+      \_struct_typespec: , line:4:3, endln:7:4
+      |vpiName:C
+      |vpiTypespec:
+      \_ref_typespec: (work@top.C), line:6:5, endln:6:9
+        |vpiParent:
+        \_typespec_member: (C), line:6:5, endln:6:12
+        |vpiFullName:work@top.C
+        |vpiActual:
+        \_real_typespec: , line:6:5, endln:6:9
+  |vpiTypedef:
+  \_logic_typespec: , line:5:5, endln:5:10
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PatternOrder/dut.sv, line:1:1, endln:10:16
+  |vpiTypedef:
+  \_real_typespec: , line:6:5, endln:6:9
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PatternOrder/dut.sv, line:1:1, endln:10:16
+  |vpiTypedef:
+  \_struct_typespec: , line:4:3, endln:7:4
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PatternOrder/dut.sv, line:1:1, endln:10:16
+    |vpiTypespecMember:
+    \_typespec_member: (B), line:5:5, endln:5:13
+      |vpiParent:
+      \_struct_typespec: , line:4:3, endln:7:4
+      |vpiName:B
+      |vpiTypespec:
+      \_ref_typespec: (work@top.B), line:5:5, endln:5:10
+        |vpiParent:
+        \_typespec_member: (B), line:5:5, endln:5:13
+        |vpiFullName:work@top.B
+        |vpiActual:
+        \_logic_typespec: , line:5:5, endln:5:10
+    |vpiTypespecMember:
+    \_typespec_member: (C), line:6:5, endln:6:12
+      |vpiParent:
+      \_struct_typespec: , line:4:3, endln:7:4
+      |vpiName:C
+      |vpiTypespec:
+      \_ref_typespec: (work@top.C), line:6:5, endln:6:9
+        |vpiParent:
+        \_typespec_member: (C), line:6:5, endln:6:12
+        |vpiFullName:work@top.C
+        |vpiActual:
+        \_real_typespec: , line:6:5, endln:6:9
+  |vpiTypedef:
+  \_logic_typespec: , line:5:5, endln:5:10
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PatternOrder/dut.sv, line:1:1, endln:10:16
+  |vpiTypedef:
+  \_real_typespec: , line:6:5, endln:6:9
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PatternOrder/dut.sv, line:1:1, endln:10:16
+  |vpiTypedef:
+  \_string_typespec: (BC1), line:8:11, endln:8:14
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PatternOrder/dut.sv, line:1:1, endln:10:16
     |vpiName:BC1
-    |vpiTypespec:
-    \_ref_typespec: (BC1)
-      |vpiParent:
-      \_typespec_member: (BC1), line:7:5, endln:7:8
-      |vpiFullName:BC1
-      |vpiActual:
-      \_struct_typespec: , line:4:3, endln:4:9
-    |vpiRefFile:${SURELOG_DIR}/tests/PatternOrder/dut.sv
-    |vpiRefLineNo:4
-    |vpiRefColumnNo:3
-    |vpiRefEndLineNo:7
-    |vpiRefEndColumnNo:4
-  |vpiTypespecMember:
-  \_typespec_member: (BC2), line:7:10, endln:7:13
+  |vpiTypedef:
+  \_int_typespec: , line:8:30, endln:8:33
     |vpiParent:
-    \_struct_typespec: , line:2:4, endln:8:57
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PatternOrder/dut.sv, line:1:1, endln:10:16
+    |vpiSigned:1
+  |vpiTypedef:
+  \_string_typespec: (default), line:8:45, endln:8:52
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PatternOrder/dut.sv, line:1:1, endln:10:16
+    |vpiName:default
+  |vpiTypedef:
+  \_string_typespec: (BC2), line:8:38, endln:8:41
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PatternOrder/dut.sv, line:1:1, endln:10:16
     |vpiName:BC2
-    |vpiTypespec:
-    \_ref_typespec: (BC2)
-      |vpiParent:
-      \_typespec_member: (BC2), line:7:10, endln:7:13
-      |vpiFullName:BC2
-      |vpiActual:
-      \_struct_typespec: , line:4:3, endln:4:9
-    |vpiRefFile:${SURELOG_DIR}/tests/PatternOrder/dut.sv
-    |vpiRefLineNo:4
-    |vpiRefColumnNo:3
-    |vpiRefEndLineNo:7
-    |vpiRefEndColumnNo:4
-\_int_typespec: , line:3:3, endln:3:6
-  |vpiSigned:1
-\_struct_typespec: , line:4:3, endln:4:9
-  |vpiTypespecMember:
-  \_typespec_member: (B), line:5:11, endln:5:12
-    |vpiParent:
-    \_struct_typespec: , line:4:3, endln:4:9
-    |vpiName:B
-    |vpiTypespec:
-    \_ref_typespec: (B)
-      |vpiParent:
-      \_typespec_member: (B), line:5:11, endln:5:12
-      |vpiFullName:B
-      |vpiActual:
-      \_logic_typespec: , line:5:5, endln:5:10
-    |vpiRefFile:${SURELOG_DIR}/tests/PatternOrder/dut.sv
-    |vpiRefLineNo:5
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:5
-    |vpiRefEndColumnNo:10
-  |vpiTypespecMember:
-  \_typespec_member: (C), line:6:10, endln:6:11
-    |vpiParent:
-    \_struct_typespec: , line:4:3, endln:4:9
-    |vpiName:C
-    |vpiTypespec:
-    \_ref_typespec: (C)
-      |vpiParent:
-      \_typespec_member: (C), line:6:10, endln:6:11
-      |vpiFullName:C
-      |vpiActual:
-      \_real_typespec: , line:6:5, endln:6:9
-    |vpiRefFile:${SURELOG_DIR}/tests/PatternOrder/dut.sv
-    |vpiRefLineNo:6
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:6
-    |vpiRefEndColumnNo:9
-\_logic_typespec: , line:5:5, endln:5:10
-\_real_typespec: , line:6:5, endln:6:9
-\_struct_typespec: , line:4:3, endln:4:9
-  |vpiTypespecMember:
-  \_typespec_member: (B), line:5:11, endln:5:12
-    |vpiParent:
-    \_struct_typespec: , line:4:3, endln:4:9
-    |vpiName:B
-    |vpiTypespec:
-    \_ref_typespec: (B)
-      |vpiParent:
-      \_typespec_member: (B), line:5:11, endln:5:12
-      |vpiFullName:B
-      |vpiActual:
-      \_logic_typespec: , line:5:5, endln:5:10
-    |vpiRefFile:${SURELOG_DIR}/tests/PatternOrder/dut.sv
-    |vpiRefLineNo:5
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:5
-    |vpiRefEndColumnNo:10
-  |vpiTypespecMember:
-  \_typespec_member: (C), line:6:10, endln:6:11
-    |vpiParent:
-    \_struct_typespec: , line:4:3, endln:4:9
-    |vpiName:C
-    |vpiTypespec:
-    \_ref_typespec: (C)
-      |vpiParent:
-      \_typespec_member: (C), line:6:10, endln:6:11
-      |vpiFullName:C
-      |vpiActual:
-      \_real_typespec: , line:6:5, endln:6:9
-    |vpiRefFile:${SURELOG_DIR}/tests/PatternOrder/dut.sv
-    |vpiRefLineNo:6
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:6
-    |vpiRefEndColumnNo:9
-\_logic_typespec: , line:5:5, endln:5:10
-\_real_typespec: , line:6:5, endln:6:9
+  |vpiImportTypespec:
+  \_struct_typespec: , line:2:4, endln:8:2
+  |vpiImportTypespec:
+  \_int_typespec: , line:3:3, endln:3:6
+  |vpiImportTypespec:
+  \_struct_typespec: , line:4:3, endln:7:4
+  |vpiImportTypespec:
+  \_logic_typespec: , line:5:5, endln:5:10
+  |vpiImportTypespec:
+  \_real_typespec: , line:6:5, endln:6:9
+  |vpiImportTypespec:
+  \_struct_typespec: , line:4:3, endln:7:4
+  |vpiImportTypespec:
+  \_logic_typespec: , line:5:5, endln:5:10
+  |vpiImportTypespec:
+  \_real_typespec: , line:6:5, endln:6:9
+  |vpiImportTypespec:
+  \_string_typespec: (BC1), line:8:11, endln:8:14
+  |vpiImportTypespec:
+  \_int_typespec: , line:8:30, endln:8:33
+  |vpiImportTypespec:
+  \_string_typespec: (default), line:8:45, endln:8:52
+  |vpiImportTypespec:
+  \_string_typespec: (BC2), line:8:38, endln:8:41
+  |vpiImportTypespec:
+  \_struct_var: (work@top.ABC), line:8:3, endln:8:6
+  |vpiDefName:work@top
+  |vpiEndLabel:top
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -282,3 +418,7 @@ design: (unnamed)
 [LINT]: ${SURELOG_DIR}/tests/PatternOrder/dut.sv:6:5: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/PatternOrder/dut.sv:6:5: Non synthesizable construct,
 ============================== End Linting Results ==============================
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/PatternOrder/dut.sv | ${SURELOG_DIR}/build/regression/PatternOrder/roundtrip/dut_000.sv | 4 | 10 |
+============================== End RoundTrip Results ==============================

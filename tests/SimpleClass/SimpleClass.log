@@ -338,9 +338,9 @@ n<> u<247> t<Description> p<248> c<246> f<0> l<55:3> el<69:11>
 n<> u<248> t<Source_text> p<249> c<105> f<0> l<1:3> el<69:11>
 n<> u<249> t<Top_level_rule> c<1> f<0> l<1:3> el<71:9>
 AST_DEBUG_END
-[INF:CP0302] Compile class "work@mailbox".
-[INF:CP0302] Compile class "work@process".
-[INF:CP0302] Compile class "work@semaphore".
+[INF:CP0302] Compile class "builtin::mailbox".
+[INF:CP0302] Compile class "builtin::process".
+[INF:CP0302] Compile class "builtin::semaphore".
 [INF:CP0302] ${SURELOG_DIR}/tests/SimpleClass/top.sv:6:3: Compile class "work@class_t::A".
 [WRN:CP0314] ${SURELOG_DIR}/tests/SimpleClass/top.sv:2:1: Using programs is discouraged "work@class_t", programs are obsoleted by UVM.
 [WRN:CP0322] ${SURELOG_DIR}/tests/SimpleClass/top.sv:17:4: Multiply defined constraint "%s",
@@ -348,9 +348,10 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 class_defn                                             9
-class_typespec                                         4
-class_var                                              3
+class_typespec                                         1
+class_var                                              1
 constant                                               5
+constraint                                             3
 design                                                 1
 enum_const                                             5
 enum_typespec                                          1
@@ -362,7 +363,8 @@ io_decl                                               11
 logic_var                                              1
 package                                                1
 program                                                1
-ref_typespec                                          13
+ref_typespec                                          11
+source_file                                            1
 task                                                   9
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SimpleClass/slpp_unit/surelog.uhdm ...
@@ -373,11 +375,13 @@ task                                                   9
 [   NOTE] : 2
 
 ============================== Begin Linting Results ==============================
+[LINT]: ${SURELOG_DIR}/tests/SimpleClass/top.sv:9:4: Non synthesizable construct, legal
+[LINT]: ${SURELOG_DIR}/tests/SimpleClass/top.sv:15:4: Non synthesizable construct,
+[LINT]: ${SURELOG_DIR}/tests/SimpleClass/top.sv:17:4: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/SimpleClass/top.sv:6:3: Non synthesizable construct, A
-[LINT]: ${SURELOG_DIR}/tests/SimpleClass/top.sv:2:1: Non synthesizable construct,
+[LINT]: ${SURELOG_DIR}/tests/SimpleClass/top.sv:2:1: Non synthesizable construct, work@class_t
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/SimpleClass/builtin.sv | ${SURELOG_DIR}/build/regression/SimpleClass/roundtrip/builtin_000.sv | 0 | 0 |
-[roundtrip]: ${SURELOG_DIR}/tests/SimpleClass/top.sv     | ${SURELOG_DIR}/build/regression/SimpleClass/roundtrip/top_000.sv     | 7 | 21 |
+[roundtrip]: ${SURELOG_DIR}/tests/SimpleClass/top.sv | ${SURELOG_DIR}/build/regression/SimpleClass/roundtrip/top_000.sv | 9 | 21 |
 ============================== End RoundTrip Results ==============================

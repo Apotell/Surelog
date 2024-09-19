@@ -100,48 +100,124 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/TypeDefGenScope/dut.sv:1:1: Compile module "work@dut".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+begin                                                  1
 constant                                               1
 design                                                 1
 gen_if                                                 1
 logic_typespec                                         2
 module_inst                                            1
-named_begin                                            1
 ref_typespec                                           3
+source_file                                            1
 struct_typespec                                        2
 typespec_member                                        3
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypeDefGenScope/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/TypeDefGenScope/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/TypeDefGenScope/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/TypeDefGenScope/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/TypeDefGenScope/dut.sv, line:1:1, endln:24:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@dut
+  |vpiName:work@dut
+  |vpiTypedef:
+  \_unsupported_typespec: (bp_bedrock_mem_rev_payload_s), line:15:9, endln:15:37
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/TypeDefGenScope/dut.sv, line:1:1, endln:24:10
+    |vpiName:bp_bedrock_mem_rev_payload_s
+  |vpiImportTypespec:
+  \_unsupported_typespec: (bp_bedrock_mem_rev_payload_s), line:15:9, endln:15:37
   |vpiDefName:work@dut
   |vpiGenStmt:
-  \_gen_if: , line:3:4, endln:3:6
+  \_gen_if: , line:3:4, endln:21:7
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/TypeDefGenScope/dut.sv, line:1:1, endln:24:10
     |vpiCondition:
     \_constant: , line:3:8, endln:3:9
       |vpiParent:
-      \_gen_if: , line:3:4, endln:3:6
+      \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/TypeDefGenScope/dut.sv, line:1:1, endln:24:10
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
       |vpiConstType:9
     |vpiStmt:
-    \_named_begin: (work@dut.m)
+    \_begin: (work@dut.m), line:3:11, endln:21:7
       |vpiParent:
-      \_gen_if: , line:3:4, endln:3:6
+      \_gen_if: , line:3:4, endln:21:7
       |vpiName:m
       |vpiFullName:work@dut.m
+      |vpiTypedef:
+      \_struct_typespec: (bp_bedrock_mem_fwd_payload_s), line:5:13, endln:9:6
+        |vpiParent:
+        \_begin: (work@dut.m), line:3:11, endln:21:7
+        |vpiName:bp_bedrock_mem_fwd_payload_s
+        |vpiPacked:1
+        |vpiTypespecMember:
+        \_typespec_member: (uncached), line:7:7, endln:7:61
+          |vpiParent:
+          \_struct_typespec: (bp_bedrock_mem_fwd_payload_s), line:5:13, endln:9:6
+          |vpiName:uncached
+          |vpiTypespec:
+          \_ref_typespec: (work@dut.m.bp_bedrock_mem_fwd_payload_s.uncached), line:7:7, endln:7:12
+            |vpiParent:
+            \_typespec_member: (uncached), line:7:7, endln:7:61
+            |vpiFullName:work@dut.m.bp_bedrock_mem_fwd_payload_s.uncached
+            |vpiActual:
+            \_logic_typespec: , line:7:7, endln:7:12
+        |vpiTypespecMember:
+        \_typespec_member: (speculative), line:8:7, endln:8:64
+          |vpiParent:
+          \_struct_typespec: (bp_bedrock_mem_fwd_payload_s), line:5:13, endln:9:6
+          |vpiName:speculative
+          |vpiTypespec:
+          \_ref_typespec: (work@dut.m.bp_bedrock_mem_fwd_payload_s.speculative), line:8:7, endln:8:12
+            |vpiParent:
+            \_typespec_member: (speculative), line:8:7, endln:8:64
+            |vpiFullName:work@dut.m.bp_bedrock_mem_fwd_payload_s.speculative
+            |vpiActual:
+            \_logic_typespec: , line:8:7, endln:8:12
+      |vpiTypedef:
+      \_logic_typespec: , line:7:7, endln:7:12
+        |vpiParent:
+        \_begin: (work@dut.m), line:3:11, endln:21:7
+      |vpiTypedef:
+      \_logic_typespec: , line:8:7, endln:8:12
+        |vpiParent:
+        \_begin: (work@dut.m), line:3:11, endln:21:7
+      |vpiTypedef:
+      \_struct_typespec: (bp_bedrock_mem_fwd_header_s), line:13:13, endln:16:6
+        |vpiParent:
+        \_begin: (work@dut.m), line:3:11, endln:21:7
+        |vpiName:bp_bedrock_mem_fwd_header_s
+        |vpiPacked:1
+        |vpiTypespecMember:
+        \_typespec_member: (payload), line:15:9, endln:15:76
+          |vpiParent:
+          \_struct_typespec: (bp_bedrock_mem_fwd_header_s), line:13:13, endln:16:6
+          |vpiName:payload
+          |vpiTypespec:
+          \_ref_typespec: (work@dut.m.bp_bedrock_mem_fwd_header_s.payload.bp_bedrock_mem_rev_payload_s), line:15:9, endln:15:37
+            |vpiParent:
+            \_typespec_member: (payload), line:15:9, endln:15:76
+            |vpiName:bp_bedrock_mem_rev_payload_s
+            |vpiFullName:work@dut.m.bp_bedrock_mem_fwd_header_s.payload.bp_bedrock_mem_rev_payload_s
+            |vpiActual:
+            \_unsupported_typespec: (bp_bedrock_mem_rev_payload_s), line:15:9, endln:15:37
+      |vpiImportTypespec:
+      \_struct_typespec: (bp_bedrock_mem_fwd_payload_s), line:5:13, endln:9:6
+      |vpiImportTypespec:
+      \_logic_typespec: , line:7:7, endln:7:12
+      |vpiImportTypespec:
+      \_logic_typespec: , line:8:7, endln:8:12
+      |vpiImportTypespec:
+      \_struct_typespec: (bp_bedrock_mem_fwd_header_s), line:13:13, endln:16:6
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -150,5 +226,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/TypeDefGenScope/dut.sv | ${SURELOG_DIR}/build/regression/TypeDefGenScope/roundtrip/dut_000.sv | 13 | 24 |
+[roundtrip]: ${SURELOG_DIR}/tests/TypeDefGenScope/dut.sv | ${SURELOG_DIR}/build/regression/TypeDefGenScope/roundtrip/dut_000.sv | 10 | 24 |
 ============================== End RoundTrip Results ==============================

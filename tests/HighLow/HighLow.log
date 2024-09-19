@@ -292,8 +292,6 @@ constant                                               7
 cont_assign                                            1
 design                                                 1
 gen_if                                                 4
-int_typespec                                           1
-logic_net                                              1
 module_inst                                            2
 operation                                              4
 param_assign                                           5
@@ -301,61 +299,57 @@ parameter                                              5
 range                                                  1
 ref_module                                             4
 ref_obj                                               15
-ref_typespec                                           2
+source_file                                            1
 sys_func_call                                          5
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HighLow/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/HighLow/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/HighLow/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/HighLow/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:1:1, endln:2:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@GOOD
+  |vpiName:work@GOOD
   |vpiDefName:work@GOOD
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:4:1, endln:26:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
+  |vpiName:work@top
   |vpiParameter:
-  \_parameter: (work@top.a), line:6:19, endln:6:20
+  \_parameter: (work@top.a), line:6:19, endln:6:25
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:4:1, endln:26:10
     |UINT:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.a)
-      |vpiParent:
-      \_parameter: (work@top.a), line:6:19, endln:6:20
-      |vpiFullName:work@top.a
-      |vpiActual:
-      \_int_typespec: , line:6:13, endln:6:18
     |vpiName:a
     |vpiFullName:work@top.a
   |vpiParameter:
-  \_parameter: (work@top.high), line:7:14, endln:7:18
+  \_parameter: (work@top.high), line:7:14, endln:7:29
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:4:1, endln:26:10
     |vpiName:high
     |vpiFullName:work@top.high
   |vpiParameter:
-  \_parameter: (work@top.low), line:8:14, endln:8:17
+  \_parameter: (work@top.low), line:8:14, endln:8:27
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:4:1, endln:26:10
     |vpiName:low
     |vpiFullName:work@top.low
   |vpiParameter:
-  \_parameter: (work@top.left), line:9:14, endln:9:18
+  \_parameter: (work@top.left), line:9:14, endln:9:29
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:4:1, endln:26:10
     |vpiName:left
     |vpiFullName:work@top.left
   |vpiParameter:
-  \_parameter: (work@top.right), line:10:14, endln:10:19
+  \_parameter: (work@top.right), line:10:14, endln:10:31
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:4:1, endln:26:10
     |vpiName:right
@@ -371,16 +365,9 @@ design: (unnamed)
       |vpiDecompile:10
       |vpiSize:64
       |UINT:10
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:6:23, endln:6:25
-        |vpiFullName:work@top
-        |vpiActual:
-        \_int_typespec: , line:6:13, endln:6:18
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@top.a), line:6:19, endln:6:20
+    \_parameter: (work@top.a), line:6:19, endln:6:25
   |vpiParamAssign:
   \_param_assign: , line:7:14, endln:7:29
     |vpiParent:
@@ -395,9 +382,11 @@ design: (unnamed)
         \_sys_func_call: ($high), line:7:21, endln:7:29
         |vpiName:a
         |vpiFullName:work@top.a
+        |vpiActual:
+        \_parameter: (work@top.a), line:6:19, endln:6:25
       |vpiName:$high
     |vpiLhs:
-    \_parameter: (work@top.high), line:7:14, endln:7:18
+    \_parameter: (work@top.high), line:7:14, endln:7:29
   |vpiParamAssign:
   \_param_assign: , line:8:14, endln:8:27
     |vpiParent:
@@ -412,9 +401,11 @@ design: (unnamed)
         \_sys_func_call: ($low), line:8:20, endln:8:27
         |vpiName:a
         |vpiFullName:work@top.a
+        |vpiActual:
+        \_parameter: (work@top.a), line:6:19, endln:6:25
       |vpiName:$low
     |vpiLhs:
-    \_parameter: (work@top.low), line:8:14, endln:8:17
+    \_parameter: (work@top.low), line:8:14, endln:8:27
   |vpiParamAssign:
   \_param_assign: , line:9:14, endln:9:29
     |vpiParent:
@@ -429,9 +420,11 @@ design: (unnamed)
         \_sys_func_call: ($left), line:9:21, endln:9:29
         |vpiName:a
         |vpiFullName:work@top.a
+        |vpiActual:
+        \_parameter: (work@top.a), line:6:19, endln:6:25
       |vpiName:$left
     |vpiLhs:
-    \_parameter: (work@top.left), line:9:14, endln:9:18
+    \_parameter: (work@top.left), line:9:14, endln:9:29
   |vpiParamAssign:
   \_param_assign: , line:10:14, endln:10:31
     |vpiParent:
@@ -446,17 +439,21 @@ design: (unnamed)
         \_sys_func_call: ($right), line:10:22, endln:10:31
         |vpiName:a
         |vpiFullName:work@top.a
+        |vpiActual:
+        \_parameter: (work@top.a), line:6:19, endln:6:25
       |vpiName:$right
     |vpiLhs:
-    \_parameter: (work@top.right), line:10:14, endln:10:19
-  |vpiDefName:work@top
-  |vpiNet:
+    \_parameter: (work@top.right), line:10:14, endln:10:31
+  |vpiImportTypespec:
   \_logic_net: (work@top.ccc), line:12:10, endln:12:13
     |vpiParent:
-    \_cont_assign: , line:12:10, endln:12:24
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:4:1, endln:26:10
     |vpiName:ccc
     |vpiFullName:work@top.ccc
     |vpiNetType:1
+  |vpiDefName:work@top
+  |vpiNet:
+  \_logic_net: (work@top.ccc), line:12:10, endln:12:13
   |vpiContAssign:
   \_cont_assign: , line:12:10, endln:12:24
     |vpiParent:
@@ -471,23 +468,57 @@ design: (unnamed)
         \_sys_func_call: ($high), line:12:16, endln:12:24
         |vpiName:a
         |vpiFullName:work@top.a
+        |vpiActual:
+        \_parameter: (work@top.a), line:6:19, endln:6:25
       |vpiName:$high
     |vpiLhs:
     \_ref_obj: (work@top.ccc), line:12:10, endln:12:13
       |vpiParent:
-      \_cont_assign: , line:12:10, endln:12:24
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:4:1, endln:26:10
       |vpiName:ccc
       |vpiFullName:work@top.ccc
       |vpiActual:
       \_logic_net: (work@top.ccc), line:12:10, endln:12:13
+  |vpiRefModule:
+  \_ref_module: work@GOOD (good1), line:15:5, endln:15:18
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:4:1, endln:26:10
+    |vpiName:good1
+    |vpiDefName:work@GOOD
+    |vpiActual:
+    \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:1:1, endln:2:10
+  |vpiRefModule:
+  \_ref_module: work@GOOD (good2), line:18:5, endln:18:18
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:4:1, endln:26:10
+    |vpiName:good2
+    |vpiDefName:work@GOOD
+    |vpiActual:
+    \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:1:1, endln:2:10
+  |vpiRefModule:
+  \_ref_module: work@GOOD (good3), line:21:5, endln:21:18
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:4:1, endln:26:10
+    |vpiName:good3
+    |vpiDefName:work@GOOD
+    |vpiActual:
+    \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:1:1, endln:2:10
+  |vpiRefModule:
+  \_ref_module: work@GOOD (good4), line:24:5, endln:24:18
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:4:1, endln:26:10
+    |vpiName:good4
+    |vpiDefName:work@GOOD
+    |vpiActual:
+    \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:1:1, endln:2:10
   |vpiGenStmt:
-  \_gen_if: , line:14:3, endln:14:5
+  \_gen_if: , line:14:3, endln:16:6
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:4:1, endln:26:10
     |vpiCondition:
     \_operation: , line:14:7, endln:14:16
       |vpiParent:
-      \_gen_if: , line:14:3, endln:14:5
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:4:1, endln:26:10
       |vpiOpType:14
       |vpiOperand:
       \_ref_obj: (work@top.high), line:14:7, endln:14:11
@@ -495,6 +526,8 @@ design: (unnamed)
         \_operation: , line:14:7, endln:14:16
         |vpiName:high
         |vpiFullName:work@top.high
+        |vpiActual:
+        \_parameter: (work@top.high), line:7:14, endln:7:29
       |vpiOperand:
       \_constant: , line:14:15, endln:14:16
         |vpiParent:
@@ -504,24 +537,20 @@ design: (unnamed)
         |UINT:2
         |vpiConstType:9
     |vpiStmt:
-    \_begin: (work@top)
+    \_begin: (work@top), line:14:18, endln:16:6
       |vpiParent:
-      \_gen_if: , line:14:3, endln:14:5
+      \_gen_if: , line:14:3, endln:16:6
       |vpiFullName:work@top
       |vpiStmt:
-      \_ref_module: work@GOOD (good1), line:15:10, endln:15:15
-        |vpiParent:
-        \_begin: (work@top)
-        |vpiName:good1
-        |vpiDefName:work@GOOD
+      \_ref_module: work@GOOD (good1), line:15:5, endln:15:18
   |vpiGenStmt:
-  \_gen_if: , line:17:3, endln:17:5
+  \_gen_if: , line:17:3, endln:19:6
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:4:1, endln:26:10
     |vpiCondition:
     \_operation: , line:17:7, endln:17:15
       |vpiParent:
-      \_gen_if: , line:17:3, endln:17:5
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:4:1, endln:26:10
       |vpiOpType:14
       |vpiOperand:
       \_ref_obj: (work@top.low), line:17:7, endln:17:10
@@ -529,6 +558,8 @@ design: (unnamed)
         \_operation: , line:17:7, endln:17:15
         |vpiName:low
         |vpiFullName:work@top.low
+        |vpiActual:
+        \_parameter: (work@top.low), line:8:14, endln:8:27
       |vpiOperand:
       \_constant: , line:17:14, endln:17:15
         |vpiParent:
@@ -538,24 +569,20 @@ design: (unnamed)
         |UINT:1
         |vpiConstType:9
     |vpiStmt:
-    \_begin: (work@top)
+    \_begin: (work@top), line:17:17, endln:19:6
       |vpiParent:
-      \_gen_if: , line:17:3, endln:17:5
+      \_gen_if: , line:17:3, endln:19:6
       |vpiFullName:work@top
       |vpiStmt:
-      \_ref_module: work@GOOD (good2), line:18:10, endln:18:15
-        |vpiParent:
-        \_begin: (work@top)
-        |vpiName:good2
-        |vpiDefName:work@GOOD
+      \_ref_module: work@GOOD (good2), line:18:5, endln:18:18
   |vpiGenStmt:
-  \_gen_if: , line:20:3, endln:20:5
+  \_gen_if: , line:20:3, endln:22:6
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:4:1, endln:26:10
     |vpiCondition:
     \_operation: , line:20:7, endln:20:16
       |vpiParent:
-      \_gen_if: , line:20:3, endln:20:5
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:4:1, endln:26:10
       |vpiOpType:14
       |vpiOperand:
       \_ref_obj: (work@top.left), line:20:7, endln:20:11
@@ -563,6 +590,8 @@ design: (unnamed)
         \_operation: , line:20:7, endln:20:16
         |vpiName:left
         |vpiFullName:work@top.left
+        |vpiActual:
+        \_parameter: (work@top.left), line:9:14, endln:9:29
       |vpiOperand:
       \_constant: , line:20:15, endln:20:16
         |vpiParent:
@@ -572,24 +601,20 @@ design: (unnamed)
         |UINT:2
         |vpiConstType:9
     |vpiStmt:
-    \_begin: (work@top)
+    \_begin: (work@top), line:20:18, endln:22:6
       |vpiParent:
-      \_gen_if: , line:20:3, endln:20:5
+      \_gen_if: , line:20:3, endln:22:6
       |vpiFullName:work@top
       |vpiStmt:
-      \_ref_module: work@GOOD (good3), line:21:10, endln:21:15
-        |vpiParent:
-        \_begin: (work@top)
-        |vpiName:good3
-        |vpiDefName:work@GOOD
+      \_ref_module: work@GOOD (good3), line:21:5, endln:21:18
   |vpiGenStmt:
-  \_gen_if: , line:23:3, endln:23:5
+  \_gen_if: , line:23:3, endln:25:6
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:4:1, endln:26:10
     |vpiCondition:
     \_operation: , line:23:7, endln:23:17
       |vpiParent:
-      \_gen_if: , line:23:3, endln:23:5
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:4:1, endln:26:10
       |vpiOpType:14
       |vpiOperand:
       \_ref_obj: (work@top.right), line:23:7, endln:23:12
@@ -597,6 +622,8 @@ design: (unnamed)
         \_operation: , line:23:7, endln:23:17
         |vpiName:right
         |vpiFullName:work@top.right
+        |vpiActual:
+        \_parameter: (work@top.right), line:10:14, endln:10:31
       |vpiOperand:
       \_constant: , line:23:16, endln:23:17
         |vpiParent:
@@ -606,40 +633,12 @@ design: (unnamed)
         |UINT:1
         |vpiConstType:9
     |vpiStmt:
-    \_begin: (work@top)
+    \_begin: (work@top), line:23:19, endln:25:6
       |vpiParent:
-      \_gen_if: , line:23:3, endln:23:5
+      \_gen_if: , line:23:3, endln:25:6
       |vpiFullName:work@top
       |vpiStmt:
-      \_ref_module: work@GOOD (good4), line:24:10, endln:24:15
-        |vpiParent:
-        \_begin: (work@top)
-        |vpiName:good4
-        |vpiDefName:work@GOOD
-\_weaklyReferenced:
-\_int_typespec: , line:6:13, endln:6:18
-  |vpiParent:
-  \_parameter: (work@top.a), line:6:19, endln:6:20
-  |vpiRange:
-  \_range: , line:6:13, endln:6:18
-    |vpiParent:
-    \_int_typespec: , line:6:13, endln:6:18
-    |vpiLeftRange:
-    \_constant: , line:6:14, endln:6:15
-      |vpiParent:
-      \_range: , line:6:13, endln:6:18
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:6:16, endln:6:17
-      |vpiParent:
-      \_range: , line:6:13, endln:6:18
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
+      \_ref_module: work@GOOD (good4), line:24:5, endln:24:18
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -648,5 +647,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/HighLow/dut.sv | ${SURELOG_DIR}/build/regression/HighLow/roundtrip/dut_000.sv | 13 | 26 |
+[roundtrip]: ${SURELOG_DIR}/tests/HighLow/dut.sv | ${SURELOG_DIR}/build/regression/HighLow/roundtrip/dut_000.sv | 21 | 26 |
 ============================== End RoundTrip Results ==============================

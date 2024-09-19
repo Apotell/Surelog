@@ -5,17 +5,18 @@
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/third_party/tests/YosysBigSim/softusb_navre/rtl/softusb_navre.v:18:1: Compile module "work@softusb_navre".
 [INF:CP0303] ${SURELOG_DIR}/third_party/tests/YosysBigSim/softusb_navre/sim/bench.v:2:1: Compile module "work@testbench".
-[NTE:CP0309] ${SURELOG_DIR}/third_party/tests/YosysBigSim/softusb_navre/rtl/softusb_navre.v:26:26: Implicit port type (wire) for "pmem_a",
+[NTE:CP0309] ${SURELOG_DIR}/third_party/tests/YosysBigSim/softusb_navre/rtl/softusb_navre.v:26:2: Implicit port type (wire) for "pmem_a",
 there are 2 more instances of this message.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 always                                                19
+array_net                                              4
 assignment                                           545
 begin                                                119
 bit_select                                           204
 case_item                                            187
 case_stmt                                             20
-constant                                             977
+constant                                            1129
 cont_assign                                            3
 delay_control                                          6
 design                                                 1
@@ -26,22 +27,24 @@ for_stmt                                               4
 forever_stmt                                           1
 if_else                                               21
 if_stmt                                               21
-include_file_info                                      1
 initial                                                3
-int_typespec                                           5
 integer_typespec                                       4
-logic_net                                            111
-logic_typespec                                       106
+integer_var                                            4
+logic_net                                            106
+logic_typespec                                       105
 module_inst                                            2
-operation                                            198
+named_event                                            1
+operation                                            213
 param_assign                                          48
 parameter                                             48
 part_select                                           60
 port                                                  17
-range                                                 62
-ref_obj                                              851
-ref_typespec                                         164
+preproc_macro_definition                               1
+range                                                137
+ref_obj                                              847
+ref_typespec                                         109
 ref_var                                                4
+source_file                                            3
 sys_func_call                                         12
 while_stmt                                             1
 === UHDM Object Stats End ===
@@ -54,11 +57,17 @@ while_stmt                                             1
 
 ============================== Begin Linting Results ==============================
 [LINT]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/softusb_navre/sim/bench.v:83:1: Non synthesizable construct,
+[LINT]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/softusb_navre/sim/bench.v:115:4: Non synthesizable construct, output_eof
+[LINT]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/softusb_navre/sim/bench.v:126:2: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/softusb_navre/sim/bench.v:61:3: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/softusb_navre/sim/bench.v:63:3: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/softusb_navre/sim/bench.v:65:9: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/softusb_navre/sim/bench.v:67:3: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/softusb_navre/sim/bench.v:69:3: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/softusb_navre/sim/bench.v:115:4: Non synthesizable construct, output_eof
-[LINT]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/softusb_navre/sim/bench.v:126:2: Non synthesizable construct,
 ============================== End Linting Results ==============================
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/softusb_navre/rtl/softusb_navre.v | ${SURELOG_DIR}/build/regression/YosysBigSimSoft/roundtrip/softusb_navre_000.v | 431 | 1032 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/softusb_navre/sim/bench.v         | ${SURELOG_DIR}/build/regression/YosysBigSimSoft/roundtrip/bench_000.v         | 71 | 139 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/softusb_navre/sim/sieve.vh        | ${SURELOG_DIR}/build/regression/YosysBigSimSoft/roundtrip/sieve_000.vh        | 120 | 120 |
+============================== End RoundTrip Results ==============================

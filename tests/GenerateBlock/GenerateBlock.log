@@ -168,7 +168,8 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/GenerateBlock/dut.sv:1:1: Compile module "work@gen_test9".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                               3
+begin                                                  3
+constant                                               5
 cont_assign                                            1
 design                                                 1
 gen_region                                             3
@@ -176,73 +177,72 @@ hier_path                                              2
 logic_net                                              1
 logic_typespec                                         1
 module_inst                                            1
-named_begin                                            3
 operation                                              2
-range                                                  1
+range                                                  2
 ref_obj                                                5
 ref_typespec                                           1
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/GenerateBlock/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/GenerateBlock/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/GenerateBlock/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/GenerateBlock/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@gen_test9 (work@gen_test9), file:${SURELOG_DIR}/tests/GenerateBlock/dut.sv, line:1:1, endln:19:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@gen_test9
-  |vpiDefName:work@gen_test9
-  |vpiNet:
-  \_logic_net: (work@gen_test9.w), line:2:20, endln:2:21
+  |vpiName:work@gen_test9
+  |vpiInternalScope:
+  \_gen_region: (work@gen_test9), line:3:9, endln:18:20
     |vpiParent:
     \_module_inst: work@gen_test9 (work@gen_test9), file:${SURELOG_DIR}/tests/GenerateBlock/dut.sv, line:1:1, endln:19:10
-    |vpiTypespec:
-    \_ref_typespec: (work@gen_test9.w)
+    |vpiFullName:work@gen_test9
+    |vpiInternalScope:
+    \_begin: (work@gen_test9.A), line:4:17, endln:17:20
       |vpiParent:
-      \_logic_net: (work@gen_test9.w), line:2:20, endln:2:21
-      |vpiFullName:work@gen_test9.w
-      |vpiActual:
-      \_logic_typespec: , line:2:9, endln:2:19
-    |vpiName:w
-    |vpiFullName:work@gen_test9.w
-    |vpiNetType:1
-  |vpiGenStmt:
-  \_gen_region: 
-    |vpiParent:
-    \_module_inst: work@gen_test9 (work@gen_test9), file:${SURELOG_DIR}/tests/GenerateBlock/dut.sv, line:1:1, endln:19:10
-    |vpiStmt:
-    \_named_begin: (work@gen_test9.A)
-      |vpiParent:
-      \_gen_region: 
+      \_gen_region: (work@gen_test9), line:3:9, endln:18:20
       |vpiName:A
       |vpiFullName:work@gen_test9.A
-      |vpiStmt:
-      \_gen_region: , line:6:25, endln:10:36
+      |vpiInternalScope:
+      \_gen_region: (work@gen_test9.A), line:6:25, endln:10:36
         |vpiParent:
-        \_named_begin: (work@gen_test9.A)
-        |vpiStmt:
-        \_named_begin: (work@gen_test9.A.B)
+        \_begin: (work@gen_test9.A), line:4:17, endln:17:20
+        |vpiFullName:work@gen_test9.A
+        |vpiInternalScope:
+        \_begin: (work@gen_test9.A.B), line:7:25, endln:9:28
           |vpiParent:
-          \_gen_region: , line:6:25, endln:10:36
+          \_gen_region: (work@gen_test9.A), line:6:25, endln:10:36
           |vpiName:B
           |vpiFullName:work@gen_test9.A.B
-      |vpiStmt:
-      \_gen_region: , line:11:25, endln:15:36
-        |vpiParent:
-        \_named_begin: (work@gen_test9.A)
         |vpiStmt:
-        \_named_begin: (work@gen_test9.A.C)
+        \_begin: (work@gen_test9.A.B), line:7:25, endln:9:28
+      |vpiInternalScope:
+      \_gen_region: (work@gen_test9.A), line:11:25, endln:15:36
+        |vpiParent:
+        \_begin: (work@gen_test9.A), line:4:17, endln:17:20
+        |vpiFullName:work@gen_test9.A
+        |vpiInternalScope:
+        \_begin: (work@gen_test9.A.C), line:12:25, endln:14:28
           |vpiParent:
-          \_gen_region: , line:11:25, endln:15:36
+          \_gen_region: (work@gen_test9.A), line:11:25, endln:15:36
           |vpiName:C
           |vpiFullName:work@gen_test9.A.C
+        |vpiStmt:
+        \_begin: (work@gen_test9.A.C), line:12:25, endln:14:28
+      |vpiStmt:
+      \_gen_region: (work@gen_test9.A), line:6:25, endln:10:36
+      |vpiStmt:
+      \_gen_region: (work@gen_test9.A), line:11:25, endln:15:36
       |vpiStmt:
       \_cont_assign: , line:16:32, endln:16:53
         |vpiParent:
-        \_named_begin: (work@gen_test9.A)
+        \_module_inst: work@gen_test9 (work@gen_test9), file:${SURELOG_DIR}/tests/GenerateBlock/dut.sv, line:1:1, endln:19:10
         |vpiRhs:
         \_operation: , line:16:36, endln:16:53
           |vpiParent:
@@ -262,12 +262,16 @@ design: (unnamed)
                 |vpiParent:
                 \_hier_path: (B.y), line:16:36, endln:16:39
                 |vpiName:B
+                |vpiActual:
+                \_logic_net: (work@gen_test9.B), line:16:36, endln:16:37
               |vpiActual:
-              \_ref_obj: (work@gen_test9.A.y), line:16:38, endln:16:39
+              \_ref_obj: (work@gen_test9.y), line:16:38, endln:16:39
                 |vpiParent:
                 \_hier_path: (B.y), line:16:36, endln:16:39
                 |vpiName:y
-                |vpiFullName:work@gen_test9.A.y
+                |vpiFullName:work@gen_test9.y
+                |vpiActual:
+                \_logic_net: (work@gen_test9.y), line:16:38, endln:16:39
               |vpiName:B.y
             |vpiOperand:
             \_constant: , line:16:42, endln:16:47
@@ -286,41 +290,118 @@ design: (unnamed)
               |vpiParent:
               \_hier_path: (C.z), line:16:50, endln:16:53
               |vpiName:C
+              |vpiActual:
+              \_logic_net: (work@gen_test9.C), line:16:50, endln:16:51
             |vpiActual:
-            \_ref_obj: (work@gen_test9.A.z), line:16:52, endln:16:53
+            \_ref_obj: (work@gen_test9.z), line:16:52, endln:16:53
               |vpiParent:
               \_hier_path: (C.z), line:16:50, endln:16:53
               |vpiName:z
-              |vpiFullName:work@gen_test9.A.z
+              |vpiFullName:work@gen_test9.z
+              |vpiActual:
+              \_logic_net: (work@gen_test9.z), line:16:52, endln:16:53
             |vpiName:C.z
         |vpiLhs:
-        \_ref_obj: (work@gen_test9.A.x), line:16:32, endln:16:33
+        \_ref_obj: (work@gen_test9.x), line:16:32, endln:16:33
           |vpiParent:
-          \_cont_assign: , line:16:32, endln:16:53
+          \_module_inst: work@gen_test9 (work@gen_test9), file:${SURELOG_DIR}/tests/GenerateBlock/dut.sv, line:1:1, endln:19:10
           |vpiName:x
-          |vpiFullName:work@gen_test9.A.x
-\_weaklyReferenced:
-\_logic_typespec: , line:2:9, endln:2:19
-  |vpiRange:
-  \_range: , line:2:14, endln:2:19
+          |vpiFullName:work@gen_test9.x
+          |vpiActual:
+          \_logic_net: (work@gen_test9.x), line:16:32, endln:16:33
+    |vpiStmt:
+    \_begin: (work@gen_test9.A), line:4:17, endln:17:20
+  |vpiTypedef:
+  \_logic_typespec: , line:2:9, endln:2:19
     |vpiParent:
-    \_logic_typespec: , line:2:9, endln:2:19
-    |vpiLeftRange:
-    \_constant: , line:2:15, endln:2:16
+    \_module_inst: work@gen_test9 (work@gen_test9), file:${SURELOG_DIR}/tests/GenerateBlock/dut.sv, line:1:1, endln:19:10
+    |vpiRange:
+    \_range: , line:2:14, endln:2:19
       |vpiParent:
-      \_range: , line:2:14, endln:2:19
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:17, endln:2:18
+      \_module_inst: work@gen_test9 (work@gen_test9), file:${SURELOG_DIR}/tests/GenerateBlock/dut.sv, line:1:1, endln:19:10
+      |vpiLeftRange:
+      \_constant: , line:2:15, endln:2:16
+        |vpiParent:
+        \_range: , line:2:14, endln:2:19
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:2:17, endln:2:18
+        |vpiParent:
+        \_range: , line:2:14, endln:2:19
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_logic_typespec: , line:2:9, endln:2:19
+  |vpiImportTypespec:
+  \_logic_net: (work@gen_test9.w), line:2:20, endln:2:21
+    |vpiParent:
+    \_module_inst: work@gen_test9 (work@gen_test9), file:${SURELOG_DIR}/tests/GenerateBlock/dut.sv, line:1:1, endln:19:10
+    |vpiTypespec:
+    \_ref_typespec: (work@gen_test9.w.w), line:2:9, endln:2:13
       |vpiParent:
-      \_range: , line:2:14, endln:2:19
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
+      \_logic_net: (work@gen_test9.w), line:2:20, endln:2:21
+      |vpiName:w
+      |vpiFullName:work@gen_test9.w.w
+      |vpiActual:
+      \_logic_typespec: , line:2:9, endln:2:19
+    |vpiName:w
+    |vpiFullName:work@gen_test9.w
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@gen_test9.B), line:16:36, endln:16:37
+    |vpiParent:
+    \_module_inst: work@gen_test9 (work@gen_test9), file:${SURELOG_DIR}/tests/GenerateBlock/dut.sv, line:1:1, endln:19:10
+    |vpiName:B
+    |vpiFullName:work@gen_test9.B
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@gen_test9.y), line:16:38, endln:16:39
+    |vpiParent:
+    \_module_inst: work@gen_test9 (work@gen_test9), file:${SURELOG_DIR}/tests/GenerateBlock/dut.sv, line:1:1, endln:19:10
+    |vpiName:y
+    |vpiFullName:work@gen_test9.y
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@gen_test9.C), line:16:50, endln:16:51
+    |vpiParent:
+    \_module_inst: work@gen_test9 (work@gen_test9), file:${SURELOG_DIR}/tests/GenerateBlock/dut.sv, line:1:1, endln:19:10
+    |vpiName:C
+    |vpiFullName:work@gen_test9.C
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@gen_test9.z), line:16:52, endln:16:53
+    |vpiParent:
+    \_module_inst: work@gen_test9 (work@gen_test9), file:${SURELOG_DIR}/tests/GenerateBlock/dut.sv, line:1:1, endln:19:10
+    |vpiName:z
+    |vpiFullName:work@gen_test9.z
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@gen_test9.x), line:16:32, endln:16:33
+    |vpiParent:
+    \_module_inst: work@gen_test9 (work@gen_test9), file:${SURELOG_DIR}/tests/GenerateBlock/dut.sv, line:1:1, endln:19:10
+    |vpiName:x
+    |vpiFullName:work@gen_test9.x
+    |vpiNetType:1
+  |vpiDefName:work@gen_test9
+  |vpiNet:
+  \_logic_net: (work@gen_test9.w), line:2:20, endln:2:21
+  |vpiNet:
+  \_logic_net: (work@gen_test9.B), line:16:36, endln:16:37
+  |vpiNet:
+  \_logic_net: (work@gen_test9.y), line:16:38, endln:16:39
+  |vpiNet:
+  \_logic_net: (work@gen_test9.C), line:16:50, endln:16:51
+  |vpiNet:
+  \_logic_net: (work@gen_test9.z), line:16:52, endln:16:53
+  |vpiNet:
+  \_logic_net: (work@gen_test9.x), line:16:32, endln:16:33
+  |vpiContAssign:
+  \_cont_assign: , line:16:32, endln:16:53
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -329,5 +410,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/GenerateBlock/dut.sv | ${SURELOG_DIR}/build/regression/GenerateBlock/roundtrip/dut_000.sv | 16 | 19 |
+[roundtrip]: ${SURELOG_DIR}/tests/GenerateBlock/dut.sv | ${SURELOG_DIR}/build/regression/GenerateBlock/roundtrip/dut_000.sv | 17 | 19 |
 ============================== End RoundTrip Results ==============================

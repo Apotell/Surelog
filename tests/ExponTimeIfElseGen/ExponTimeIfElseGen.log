@@ -920,36 +920,31 @@ begin                                                  1
 constant                                               1
 design                                                 1
 gen_region                                             1
-int_typespec                                           1
 module_inst                                            1
 param_assign                                           1
 parameter                                              1
-ref_typespec                                           2
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ExponTimeIfElseGen/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ExponTimeIfElseGen/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ExponTimeIfElseGen/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/ExponTimeIfElseGen/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@Foo (work@Foo), file:${SURELOG_DIR}/tests/ExponTimeIfElseGen/dut.sv, line:1:1, endln:91:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@Foo
+  |vpiName:work@Foo
   |vpiParameter:
-  \_parameter: (work@Foo.ADDR_OFFSET_PART_1), line:2:14, endln:2:32
+  \_parameter: (work@Foo.ADDR_OFFSET_PART_1), line:2:14, endln:2:36
     |vpiParent:
     \_module_inst: work@Foo (work@Foo), file:${SURELOG_DIR}/tests/ExponTimeIfElseGen/dut.sv, line:1:1, endln:91:10
     |UINT:1
-    |vpiTypespec:
-    \_ref_typespec: (work@Foo.ADDR_OFFSET_PART_1)
-      |vpiParent:
-      \_parameter: (work@Foo.ADDR_OFFSET_PART_1), line:2:14, endln:2:32
-      |vpiFullName:work@Foo.ADDR_OFFSET_PART_1
-      |vpiActual:
-      \_int_typespec: , line:2:4, endln:2:36
     |vpiName:ADDR_OFFSET_PART_1
     |vpiFullName:work@Foo.ADDR_OFFSET_PART_1
   |vpiParamAssign:
@@ -963,31 +958,29 @@ design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
-      |vpiTypespec:
-      \_ref_typespec: (work@Foo)
-        |vpiParent:
-        \_constant: , line:2:35, endln:2:36
-        |vpiFullName:work@Foo
-        |vpiActual:
-        \_int_typespec: , line:2:4, endln:2:36
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@Foo.ADDR_OFFSET_PART_1), line:2:14, endln:2:32
-  |vpiDefName:work@Foo
-  |vpiGenStmt:
-  \_gen_region: 
+    \_parameter: (work@Foo.ADDR_OFFSET_PART_1), line:2:14, endln:2:36
+  |vpiInternalScope:
+  \_gen_region: (work@Foo), line:4:5, endln:88:16
     |vpiParent:
     \_module_inst: work@Foo (work@Foo), file:${SURELOG_DIR}/tests/ExponTimeIfElseGen/dut.sv, line:1:1, endln:91:10
-    |vpiStmt:
-    \_begin: (work@Foo)
+    |vpiFullName:work@Foo
+    |vpiInternalScope:
+    \_begin: (work@Foo), line:5:9, endln:87:12
       |vpiParent:
-      \_gen_region: 
+      \_gen_region: (work@Foo), line:4:5, endln:88:16
       |vpiFullName:work@Foo
-\_weaklyReferenced:
-\_int_typespec: , line:2:4, endln:2:36
+    |vpiStmt:
+    \_begin: (work@Foo), line:5:9, endln:87:12
+  |vpiDefName:work@Foo
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/ExponTimeIfElseGen/dut.sv | ${SURELOG_DIR}/build/regression/ExponTimeIfElseGen/roundtrip/dut_000.sv | 77 | 91 |
+============================== End RoundTrip Results ==============================

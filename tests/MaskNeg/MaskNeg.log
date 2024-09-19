@@ -79,25 +79,29 @@ parameter                                              1
 range                                                  1
 ref_module                                             1
 ref_typespec                                           1
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/MaskNeg/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/MaskNeg/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/MaskNeg/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/MaskNeg/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/MaskNeg/dut.sv, line:1:1, endln:3:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@dut
+  |vpiName:work@dut
   |vpiParameter:
   \_parameter: (work@dut.RESVAL), line:2:26, endln:2:32
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/MaskNeg/dut.sv, line:1:1, endln:3:10
     |vpiTypespec:
-    \_ref_typespec: (work@dut.RESVAL)
+    \_ref_typespec: (work@dut.RESVAL), line:2:14, endln:2:19
       |vpiParent:
       \_parameter: (work@dut.RESVAL), line:2:26, endln:2:32
       |vpiFullName:work@dut.RESVAL
@@ -111,45 +115,47 @@ design: (unnamed)
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/MaskNeg/dut.sv, line:1:1, endln:3:10
     |vpiLhs:
     \_parameter: (work@dut.RESVAL), line:2:26, endln:2:32
+  |vpiTypedef:
+  \_logic_typespec: , line:2:14, endln:2:25
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/MaskNeg/dut.sv, line:1:1, endln:3:10
+    |vpiRange:
+    \_range: , line:2:20, endln:2:25
+      |vpiParent:
+      \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/MaskNeg/dut.sv, line:1:1, endln:3:10
+      |vpiLeftRange:
+      \_constant: , line:2:21, endln:2:22
+        |vpiParent:
+        \_range: , line:2:20, endln:2:25
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:2:23, endln:2:24
+        |vpiParent:
+        \_range: , line:2:20, endln:2:25
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_logic_typespec: , line:2:14, endln:2:25
   |vpiDefName:work@dut
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/MaskNeg/dut.sv, line:5:1, endln:9:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
+  |vpiName:work@top
   |vpiDefName:work@top
   |vpiRefModule:
-  \_ref_module: work@dut (u_dut), line:8:6, endln:8:11
+  \_ref_module: work@dut (u_dut), line:6:4, endln:8:14
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/MaskNeg/dut.sv, line:5:1, endln:9:10
     |vpiName:u_dut
     |vpiDefName:work@dut
     |vpiActual:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/MaskNeg/dut.sv, line:1:1, endln:3:10
-\_weaklyReferenced:
-\_logic_typespec: , line:2:14, endln:2:25
-  |vpiParent:
-  \_parameter: (work@dut.RESVAL), line:2:26, endln:2:32
-  |vpiRange:
-  \_range: , line:2:20, endln:2:25
-    |vpiParent:
-    \_logic_typespec: , line:2:14, endln:2:25
-    |vpiLeftRange:
-    \_constant: , line:2:21, endln:2:22
-      |vpiParent:
-      \_range: , line:2:20, endln:2:25
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:23, endln:2:24
-      |vpiParent:
-      \_range: , line:2:20, endln:2:25
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -158,5 +164,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/MaskNeg/dut.sv | ${SURELOG_DIR}/build/regression/MaskNeg/roundtrip/dut_000.sv | 3 | 9 |
+[roundtrip]: ${SURELOG_DIR}/tests/MaskNeg/dut.sv | ${SURELOG_DIR}/build/regression/MaskNeg/roundtrip/dut_000.sv | 8 | 9 |
 ============================== End RoundTrip Results ==============================

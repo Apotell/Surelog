@@ -435,18 +435,19 @@ n<> u<247> t<Description> p<248> c<246> f<0> l<55:3> el<69:11>
 n<> u<248> t<Source_text> p<249> c<105> f<0> l<1:3> el<69:11>
 n<> u<249> t<Top_level_rule> c<1> f<0> l<1:3> el<71:9>
 AST_DEBUG_END
-[INF:CP0302] Compile class "work@mailbox".
-[INF:CP0302] Compile class "work@process".
-[INF:CP0302] Compile class "work@semaphore".
+[INF:CP0302] Compile class "builtin::mailbox".
+[INF:CP0302] Compile class "builtin::process".
+[INF:CP0302] Compile class "builtin::semaphore".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-array_typespec                                         4
+array_typespec                                         1
 assignment                                             1
+begin                                                  2
 bit_select                                             2
 class_defn                                             8
-class_typespec                                         4
-class_var                                              3
-constant                                              43
+class_typespec                                         1
+class_var                                              1
+constant                                              26
 cont_assign                                            1
 design                                                 1
 enum_const                                             5
@@ -456,68 +457,629 @@ function                                               9
 gen_for                                                1
 gen_if                                                 1
 import_typespec                                        1
-int_typespec                                          24
+int_typespec                                          13
 int_var                                                4
 io_decl                                               11
-logic_net                                              1
 logic_var                                              1
 module_inst                                            2
-named_begin                                            2
-operation                                             14
+operation                                              6
 package                                                2
-param_assign                                          10
-parameter                                             13
-range                                                  7
-ref_obj                                               13
-ref_typespec                                          39
+param_assign                                           4
+parameter                                              4
+range                                                  2
+ref_obj                                                9
+ref_typespec                                          21
 ref_var                                                1
+source_file                                            1
 task                                                   9
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ComplexBitSelect/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ComplexBitSelect/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ComplexBitSelect/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallPackages:
 \_package: builtin (builtin::)
   |vpiParent:
   \_design: (unnamed)
   |vpiName:builtin
   |vpiFullName:builtin::
-  |vpiDefName:builtin
-  |vpiClassDefn:
-  \_class_defn: (builtin::any_sverilog_class)
-    |vpiParent:
-    \_package: builtin (builtin::)
-    |vpiName:any_sverilog_class
-    |vpiFullName:builtin::any_sverilog_class
-  |vpiClassDefn:
+  |vpiInternalScope:
   \_class_defn: (builtin::array)
     |vpiParent:
     \_package: builtin (builtin::)
     |vpiName:array
     |vpiFullName:builtin::array
-  |vpiClassDefn:
+  |vpiInternalScope:
   \_class_defn: (builtin::queue)
     |vpiParent:
     \_package: builtin (builtin::)
     |vpiName:queue
     |vpiFullName:builtin::queue
-  |vpiClassDefn:
+  |vpiInternalScope:
   \_class_defn: (builtin::string)
     |vpiParent:
     \_package: builtin (builtin::)
     |vpiName:string
     |vpiFullName:builtin::string
-  |vpiClassDefn:
+  |vpiInternalScope:
   \_class_defn: (builtin::system)
     |vpiParent:
     \_package: builtin (builtin::)
     |vpiName:system
     |vpiFullName:builtin::system
+  |vpiInternalScope:
+  \_class_defn: (builtin::any_sverilog_class)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:any_sverilog_class
+    |vpiFullName:builtin::any_sverilog_class
+  |vpiInternalScope:
+  \_class_defn: (builtin::mailbox), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:1:3, endln:27:11
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:mailbox
+    |vpiFullName:builtin::mailbox
+    |vpiInternalScope:
+    \_function: (builtin::mailbox::num), line:6:5, endln:7:16
+      |vpiParent:
+      \_class_defn: (builtin::mailbox), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:1:3, endln:27:11
+      |vpiName:num
+      |vpiFullName:builtin::mailbox::num
+      |vpiVariables:
+      \_int_var: (builtin::mailbox::num), line:6:14, endln:6:17
+        |vpiParent:
+        \_function: (builtin::mailbox::num), line:6:5, endln:7:16
+        |vpiTypespec:
+        \_ref_typespec: (builtin::mailbox::num), line:6:14, endln:6:17
+          |vpiParent:
+          \_int_var: (builtin::mailbox::num), line:6:14, endln:6:17
+          |vpiFullName:builtin::mailbox::num
+          |vpiActual:
+          \_int_typespec: , line:6:14, endln:6:17
+        |vpiFullName:builtin::mailbox::num
+        |vpiSigned:1
+      |vpiTypedef:
+      \_int_typespec: , line:6:14, endln:6:17
+        |vpiParent:
+        \_function: (builtin::mailbox::num), line:6:5, endln:7:16
+        |vpiSigned:1
+      |vpiImportTypespec:
+      \_int_typespec: , line:6:14, endln:6:17
+      |vpiImportTypespec:
+      \_int_var: (builtin::mailbox::num), line:6:14, endln:6:17
+      |vpiMethod:1
+      |vpiVisibility:1
+      |vpiReturn:
+      \_int_var: (builtin::mailbox::num), line:6:14, endln:6:17
+    |vpiInternalScope:
+    \_task: (builtin::mailbox::put), line:9:5, endln:10:12
+      |vpiParent:
+      \_class_defn: (builtin::mailbox), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:1:3, endln:27:11
+      |vpiName:put
+      |vpiFullName:builtin::mailbox::put
+      |vpiMethod:1
+      |vpiVisibility:1
+      |vpiIODecl:
+      \_io_decl: (message), line:9:15, endln:9:22
+        |vpiParent:
+        \_task: (builtin::mailbox::put), line:9:5, endln:10:12
+        |vpiDirection:1
+        |vpiName:message
+    |vpiInternalScope:
+    \_function: (builtin::mailbox::try_put), line:12:5, endln:13:16
+      |vpiParent:
+      \_class_defn: (builtin::mailbox), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:1:3, endln:27:11
+      |vpiName:try_put
+      |vpiFullName:builtin::mailbox::try_put
+      |vpiVariables:
+      \_logic_var: (builtin::mailbox::try_put), line:12:14, endln:12:21
+        |vpiParent:
+        \_function: (builtin::mailbox::try_put), line:12:5, endln:13:16
+        |vpiFullName:builtin::mailbox::try_put
+      |vpiReg:
+      \_logic_var: (builtin::mailbox::try_put), line:12:14, endln:12:21
+      |vpiImportTypespec:
+      \_logic_var: (builtin::mailbox::try_put), line:12:14, endln:12:21
+      |vpiMethod:1
+      |vpiVisibility:1
+      |vpiReturn:
+      \_logic_var: (builtin::mailbox::try_put), line:12:14, endln:12:21
+      |vpiIODecl:
+      \_io_decl: (message), line:12:23, endln:12:30
+        |vpiParent:
+        \_function: (builtin::mailbox::try_put), line:12:5, endln:13:16
+        |vpiDirection:1
+        |vpiName:message
+    |vpiInternalScope:
+    \_task: (builtin::mailbox::get), line:15:5, endln:16:12
+      |vpiParent:
+      \_class_defn: (builtin::mailbox), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:1:3, endln:27:11
+      |vpiName:get
+      |vpiFullName:builtin::mailbox::get
+      |vpiMethod:1
+      |vpiVisibility:1
+      |vpiIODecl:
+      \_io_decl: (message), line:15:15, endln:15:26
+        |vpiParent:
+        \_task: (builtin::mailbox::get), line:15:5, endln:16:12
+        |vpiDirection:6
+        |vpiName:message
+    |vpiInternalScope:
+    \_function: (builtin::mailbox::try_get), line:18:5, endln:19:16
+      |vpiParent:
+      \_class_defn: (builtin::mailbox), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:1:3, endln:27:11
+      |vpiName:try_get
+      |vpiFullName:builtin::mailbox::try_get
+      |vpiVariables:
+      \_int_var: (builtin::mailbox::try_get), line:18:14, endln:18:17
+        |vpiParent:
+        \_function: (builtin::mailbox::try_get), line:18:5, endln:19:16
+        |vpiTypespec:
+        \_ref_typespec: (builtin::mailbox::try_get), line:18:14, endln:18:17
+          |vpiParent:
+          \_int_var: (builtin::mailbox::try_get), line:18:14, endln:18:17
+          |vpiFullName:builtin::mailbox::try_get
+          |vpiActual:
+          \_int_typespec: , line:18:14, endln:18:17
+        |vpiFullName:builtin::mailbox::try_get
+        |vpiSigned:1
+      |vpiTypedef:
+      \_int_typespec: , line:18:14, endln:18:17
+        |vpiParent:
+        \_function: (builtin::mailbox::try_get), line:18:5, endln:19:16
+        |vpiSigned:1
+      |vpiImportTypespec:
+      \_int_typespec: , line:18:14, endln:18:17
+      |vpiImportTypespec:
+      \_int_var: (builtin::mailbox::try_get), line:18:14, endln:18:17
+      |vpiMethod:1
+      |vpiVisibility:1
+      |vpiReturn:
+      \_int_var: (builtin::mailbox::try_get), line:18:14, endln:18:17
+      |vpiIODecl:
+      \_io_decl: (message), line:18:27, endln:18:38
+        |vpiParent:
+        \_function: (builtin::mailbox::try_get), line:18:5, endln:19:16
+        |vpiDirection:6
+        |vpiName:message
+    |vpiInternalScope:
+    \_task: (builtin::mailbox::peek), line:21:5, endln:22:12
+      |vpiParent:
+      \_class_defn: (builtin::mailbox), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:1:3, endln:27:11
+      |vpiName:peek
+      |vpiFullName:builtin::mailbox::peek
+      |vpiMethod:1
+      |vpiVisibility:1
+      |vpiIODecl:
+      \_io_decl: (message), line:21:16, endln:21:27
+        |vpiParent:
+        \_task: (builtin::mailbox::peek), line:21:5, endln:22:12
+        |vpiDirection:6
+        |vpiName:message
+    |vpiInternalScope:
+    \_function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
+      |vpiParent:
+      \_class_defn: (builtin::mailbox), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:1:3, endln:27:11
+      |vpiName:try_peek
+      |vpiFullName:builtin::mailbox::try_peek
+      |vpiVariables:
+      \_int_var: (builtin::mailbox::try_peek), line:24:14, endln:24:17
+        |vpiParent:
+        \_function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
+        |vpiTypespec:
+        \_ref_typespec: (builtin::mailbox::try_peek), line:24:14, endln:24:17
+          |vpiParent:
+          \_int_var: (builtin::mailbox::try_peek), line:24:14, endln:24:17
+          |vpiFullName:builtin::mailbox::try_peek
+          |vpiActual:
+          \_int_typespec: , line:24:14, endln:24:17
+        |vpiFullName:builtin::mailbox::try_peek
+        |vpiSigned:1
+      |vpiTypedef:
+      \_int_typespec: , line:24:14, endln:24:17
+        |vpiParent:
+        \_function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
+        |vpiSigned:1
+      |vpiImportTypespec:
+      \_int_typespec: , line:24:14, endln:24:17
+      |vpiImportTypespec:
+      \_int_var: (builtin::mailbox::try_peek), line:24:14, endln:24:17
+      |vpiMethod:1
+      |vpiVisibility:1
+      |vpiReturn:
+      \_int_var: (builtin::mailbox::try_peek), line:24:14, endln:24:17
+      |vpiIODecl:
+      \_io_decl: (message), line:24:27, endln:24:38
+        |vpiParent:
+        \_function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
+        |vpiDirection:6
+        |vpiName:message
+    |vpiImportTypespec:
+    \_function: (builtin::mailbox::num), line:6:5, endln:7:16
+    |vpiImportTypespec:
+    \_task: (builtin::mailbox::put), line:9:5, endln:10:12
+    |vpiImportTypespec:
+    \_function: (builtin::mailbox::try_put), line:12:5, endln:13:16
+    |vpiImportTypespec:
+    \_task: (builtin::mailbox::get), line:15:5, endln:16:12
+    |vpiImportTypespec:
+    \_function: (builtin::mailbox::try_get), line:18:5, endln:19:16
+    |vpiImportTypespec:
+    \_task: (builtin::mailbox::peek), line:21:5, endln:22:12
+    |vpiImportTypespec:
+    \_function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
+    |vpiMethod:
+    \_function: (builtin::mailbox::num), line:6:5, endln:7:16
+    |vpiMethod:
+    \_task: (builtin::mailbox::put), line:9:5, endln:10:12
+    |vpiMethod:
+    \_function: (builtin::mailbox::try_put), line:12:5, endln:13:16
+    |vpiMethod:
+    \_task: (builtin::mailbox::get), line:15:5, endln:16:12
+    |vpiMethod:
+    \_function: (builtin::mailbox::try_get), line:18:5, endln:19:16
+    |vpiMethod:
+    \_task: (builtin::mailbox::peek), line:21:5, endln:22:12
+    |vpiMethod:
+    \_function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
+  |vpiInternalScope:
+  \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:30:3, endln:52:11
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:process
+    |vpiFullName:builtin::process
+    |vpiInternalScope:
+    \_function: (builtin::process::self), line:34:5, endln:35:16
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:30:3, endln:52:11
+      |vpiName:self
+      |vpiFullName:builtin::process::self
+      |vpiVariables:
+      \_class_var: (builtin::process::self), line:34:21, endln:34:28
+        |vpiParent:
+        \_function: (builtin::process::self), line:34:5, endln:35:16
+        |vpiTypespec:
+        \_ref_typespec: (builtin::process::self::builtin::process), line:34:21, endln:34:28
+          |vpiParent:
+          \_class_var: (builtin::process::self), line:34:21, endln:34:28
+          |vpiName:builtin::process
+          |vpiFullName:builtin::process::self::builtin::process
+          |vpiActual:
+          \_class_typespec: (process), line:34:21, endln:34:28
+        |vpiFullName:builtin::process::self
+      |vpiTypedef:
+      \_class_typespec: (process), line:34:21, endln:34:28
+        |vpiParent:
+        \_function: (builtin::process::self), line:34:5, endln:35:16
+        |vpiName:process
+        |vpiClassDefn:
+        \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:30:3, endln:52:11
+      |vpiImportTypespec:
+      \_class_typespec: (process), line:34:21, endln:34:28
+      |vpiImportTypespec:
+      \_class_var: (builtin::process::self), line:34:21, endln:34:28
+      |vpiMethod:1
+      |vpiVisibility:1
+      |vpiReturn:
+      \_class_var: (builtin::process::self), line:34:21, endln:34:28
+    |vpiInternalScope:
+    \_function: (builtin::process::status), line:37:5, endln:38:16
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:30:3, endln:52:11
+      |vpiName:status
+      |vpiFullName:builtin::process::status
+      |vpiVariables:
+      \_enum_var: (builtin::process::status), line:37:14, endln:37:19
+        |vpiParent:
+        \_function: (builtin::process::status), line:37:5, endln:38:16
+        |vpiTypespec:
+        \_ref_typespec: (builtin::process::status::state), line:37:14, endln:37:19
+          |vpiParent:
+          \_enum_var: (builtin::process::status), line:37:14, endln:37:19
+          |vpiName:state
+          |vpiFullName:builtin::process::status::state
+          |vpiActual:
+          \_enum_typespec: (state), line:32:13, endln:32:74
+        |vpiFullName:builtin::process::status
+      |vpiImportTypespec:
+      \_enum_var: (builtin::process::status), line:37:14, endln:37:19
+      |vpiMethod:1
+      |vpiVisibility:1
+      |vpiReturn:
+      \_enum_var: (builtin::process::status), line:37:14, endln:37:19
+    |vpiInternalScope:
+    \_task: (builtin::process::kill), line:40:5, endln:41:12
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:30:3, endln:52:11
+      |vpiName:kill
+      |vpiFullName:builtin::process::kill
+      |vpiMethod:1
+      |vpiVisibility:1
+    |vpiInternalScope:
+    \_task: (builtin::process::await), line:43:5, endln:44:12
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:30:3, endln:52:11
+      |vpiName:await
+      |vpiFullName:builtin::process::await
+      |vpiMethod:1
+      |vpiVisibility:1
+    |vpiInternalScope:
+    \_task: (builtin::process::suspend), line:46:5, endln:47:12
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:30:3, endln:52:11
+      |vpiName:suspend
+      |vpiFullName:builtin::process::suspend
+      |vpiMethod:1
+      |vpiVisibility:1
+    |vpiInternalScope:
+    \_task: (builtin::process::resume), line:49:5, endln:50:12
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:30:3, endln:52:11
+      |vpiName:resume
+      |vpiFullName:builtin::process::resume
+      |vpiMethod:1
+      |vpiVisibility:1
+    |vpiTypedef:
+    \_enum_typespec: (state), line:32:13, endln:32:74
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiEnumConst:
+      \_enum_const: (FINISHED), line:32:20, endln:32:28
+        |vpiParent:
+        \_enum_typespec: (state), line:32:13, endln:32:74
+        |vpiName:FINISHED
+        |INT:0
+        |vpiDecompile:0
+        |vpiSize:64
+      |vpiEnumConst:
+      \_enum_const: (RUNNING), line:32:30, endln:32:37
+        |vpiParent:
+        \_enum_typespec: (state), line:32:13, endln:32:74
+        |vpiName:RUNNING
+        |INT:1
+        |vpiDecompile:1
+        |vpiSize:64
+      |vpiEnumConst:
+      \_enum_const: (WAITING), line:32:39, endln:32:46
+        |vpiParent:
+        \_enum_typespec: (state), line:32:13, endln:32:74
+        |vpiName:WAITING
+        |INT:2
+        |vpiDecompile:2
+        |vpiSize:64
+      |vpiEnumConst:
+      \_enum_const: (SUSPENDED), line:32:48, endln:32:57
+        |vpiParent:
+        \_enum_typespec: (state), line:32:13, endln:32:74
+        |vpiName:SUSPENDED
+        |INT:3
+        |vpiDecompile:3
+        |vpiSize:64
+      |vpiEnumConst:
+      \_enum_const: (KILLED), line:32:59, endln:32:65
+        |vpiParent:
+        \_enum_typespec: (state), line:32:13, endln:32:74
+        |vpiName:KILLED
+        |INT:4
+        |vpiDecompile:4
+        |vpiSize:64
+    |vpiImportTypespec:
+    \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_function: (builtin::process::self), line:34:5, endln:35:16
+    |vpiImportTypespec:
+    \_function: (builtin::process::status), line:37:5, endln:38:16
+    |vpiImportTypespec:
+    \_task: (builtin::process::kill), line:40:5, endln:41:12
+    |vpiImportTypespec:
+    \_task: (builtin::process::await), line:43:5, endln:44:12
+    |vpiImportTypespec:
+    \_task: (builtin::process::suspend), line:46:5, endln:47:12
+    |vpiImportTypespec:
+    \_task: (builtin::process::resume), line:49:5, endln:50:12
+    |vpiMethod:
+    \_function: (builtin::process::self), line:34:5, endln:35:16
+    |vpiMethod:
+    \_function: (builtin::process::status), line:37:5, endln:38:16
+    |vpiMethod:
+    \_task: (builtin::process::kill), line:40:5, endln:41:12
+    |vpiMethod:
+    \_task: (builtin::process::await), line:43:5, endln:44:12
+    |vpiMethod:
+    \_task: (builtin::process::suspend), line:46:5, endln:47:12
+    |vpiMethod:
+    \_task: (builtin::process::resume), line:49:5, endln:50:12
+  |vpiInternalScope:
+  \_class_defn: (builtin::semaphore), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:55:3, endln:69:11
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:semaphore
+    |vpiFullName:builtin::semaphore
+    |vpiInternalScope:
+    \_task: (builtin::semaphore::put), line:60:5, endln:61:12
+      |vpiParent:
+      \_class_defn: (builtin::semaphore), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:55:3, endln:69:11
+      |vpiName:put
+      |vpiFullName:builtin::semaphore::put
+      |vpiTypedef:
+      \_int_typespec: , line:60:14, endln:60:17
+        |vpiParent:
+        \_task: (builtin::semaphore::put), line:60:5, endln:61:12
+        |vpiSigned:1
+      |vpiImportTypespec:
+      \_int_typespec: , line:60:14, endln:60:17
+      |vpiMethod:1
+      |vpiVisibility:1
+      |vpiIODecl:
+      \_io_decl: (keyCount), line:60:14, endln:60:26
+        |vpiParent:
+        \_task: (builtin::semaphore::put), line:60:5, endln:61:12
+        |vpiDirection:1
+        |vpiName:keyCount
+        |vpiExpr:
+        \_constant: , line:60:29, endln:60:30
+          |vpiParent:
+          \_io_decl: (keyCount), line:60:14, endln:60:26
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+        |vpiTypedef:
+        \_ref_typespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
+          |vpiParent:
+          \_io_decl: (keyCount), line:60:14, endln:60:26
+          |vpiFullName:builtin::semaphore::put::keyCount
+          |vpiActual:
+          \_int_typespec: , line:60:14, endln:60:17
+    |vpiInternalScope:
+    \_task: (builtin::semaphore::get), line:63:5, endln:64:12
+      |vpiParent:
+      \_class_defn: (builtin::semaphore), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:55:3, endln:69:11
+      |vpiName:get
+      |vpiFullName:builtin::semaphore::get
+      |vpiTypedef:
+      \_int_typespec: , line:63:14, endln:63:17
+        |vpiParent:
+        \_task: (builtin::semaphore::get), line:63:5, endln:64:12
+        |vpiSigned:1
+      |vpiImportTypespec:
+      \_int_typespec: , line:63:14, endln:63:17
+      |vpiMethod:1
+      |vpiVisibility:1
+      |vpiIODecl:
+      \_io_decl: (keyCount), line:63:14, endln:63:26
+        |vpiParent:
+        \_task: (builtin::semaphore::get), line:63:5, endln:64:12
+        |vpiDirection:1
+        |vpiName:keyCount
+        |vpiExpr:
+        \_constant: , line:63:29, endln:63:30
+          |vpiParent:
+          \_io_decl: (keyCount), line:63:14, endln:63:26
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+        |vpiTypedef:
+        \_ref_typespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
+          |vpiParent:
+          \_io_decl: (keyCount), line:63:14, endln:63:26
+          |vpiFullName:builtin::semaphore::get::keyCount
+          |vpiActual:
+          \_int_typespec: , line:63:14, endln:63:17
+    |vpiInternalScope:
+    \_function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+      |vpiParent:
+      \_class_defn: (builtin::semaphore), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:55:3, endln:69:11
+      |vpiName:try_get
+      |vpiFullName:builtin::semaphore::try_get
+      |vpiVariables:
+      \_int_var: (builtin::semaphore::try_get), line:66:14, endln:66:17
+        |vpiParent:
+        \_function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+        |vpiTypespec:
+        \_ref_typespec: (builtin::semaphore::try_get), line:66:14, endln:66:17
+          |vpiParent:
+          \_int_var: (builtin::semaphore::try_get), line:66:14, endln:66:17
+          |vpiFullName:builtin::semaphore::try_get
+          |vpiActual:
+          \_int_typespec: , line:66:14, endln:66:17
+        |vpiFullName:builtin::semaphore::try_get
+        |vpiSigned:1
+      |vpiTypedef:
+      \_int_typespec: , line:66:14, endln:66:17
+        |vpiParent:
+        \_function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+        |vpiSigned:1
+      |vpiTypedef:
+      \_int_typespec: , line:66:26, endln:66:29
+        |vpiParent:
+        \_function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+        |vpiSigned:1
+      |vpiImportTypespec:
+      \_int_typespec: , line:66:14, endln:66:17
+      |vpiImportTypespec:
+      \_int_var: (builtin::semaphore::try_get), line:66:14, endln:66:17
+      |vpiImportTypespec:
+      \_int_typespec: , line:66:26, endln:66:29
+      |vpiMethod:1
+      |vpiVisibility:1
+      |vpiReturn:
+      \_int_var: (builtin::semaphore::try_get), line:66:14, endln:66:17
+      |vpiIODecl:
+      \_io_decl: (keyCount), line:66:26, endln:66:38
+        |vpiParent:
+        \_function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+        |vpiDirection:1
+        |vpiName:keyCount
+        |vpiExpr:
+        \_constant: , line:66:41, endln:66:42
+          |vpiParent:
+          \_io_decl: (keyCount), line:66:26, endln:66:38
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+        |vpiTypedef:
+        \_ref_typespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
+          |vpiParent:
+          \_io_decl: (keyCount), line:66:26, endln:66:38
+          |vpiFullName:builtin::semaphore::try_get::keyCount
+          |vpiActual:
+          \_int_typespec: , line:66:26, endln:66:29
+    |vpiImportTypespec:
+    \_task: (builtin::semaphore::put), line:60:5, endln:61:12
+    |vpiImportTypespec:
+    \_task: (builtin::semaphore::get), line:63:5, endln:64:12
+    |vpiImportTypespec:
+    \_function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+    |vpiMethod:
+    \_task: (builtin::semaphore::put), line:60:5, endln:61:12
+    |vpiMethod:
+    \_task: (builtin::semaphore::get), line:63:5, endln:64:12
+    |vpiMethod:
+    \_function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+  |vpiImportTypespec:
+  \_class_defn: (builtin::array)
+  |vpiImportTypespec:
+  \_class_defn: (builtin::queue)
+  |vpiImportTypespec:
+  \_class_defn: (builtin::string)
+  |vpiImportTypespec:
+  \_class_defn: (builtin::system)
+  |vpiImportTypespec:
+  \_class_defn: (builtin::any_sverilog_class)
+  |vpiImportTypespec:
+  \_class_defn: (builtin::mailbox), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:1:3, endln:27:11
+  |vpiImportTypespec:
+  \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:30:3, endln:52:11
+  |vpiImportTypespec:
+  \_class_defn: (builtin::semaphore), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:55:3, endln:69:11
+  |vpiDefName:builtin
+  |vpiClassDefn:
+  \_class_defn: (builtin::array)
+  |vpiClassDefn:
+  \_class_defn: (builtin::queue)
+  |vpiClassDefn:
+  \_class_defn: (builtin::string)
+  |vpiClassDefn:
+  \_class_defn: (builtin::system)
+  |vpiClassDefn:
+  \_class_defn: (builtin::any_sverilog_class)
+  |vpiClassDefn:
+  \_class_defn: (builtin::mailbox), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:1:3, endln:27:11
+  |vpiClassDefn:
+  \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:30:3, endln:52:11
+  |vpiClassDefn:
+  \_class_defn: (builtin::semaphore), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:55:3, endln:69:11
 |uhdmallPackages:
 \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
   |vpiParent:
@@ -525,14 +1087,14 @@ design: (unnamed)
   |vpiName:flash_ctrl_pkg
   |vpiFullName:flash_ctrl_pkg::
   |vpiParameter:
-  \_parameter: (flash_ctrl_pkg::InfoTypes), line:2:17, endln:2:26
+  \_parameter: (flash_ctrl_pkg::InfoTypes), line:2:17, endln:2:36
     |vpiParent:
     \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
     |UINT:3
     |vpiTypespec:
-    \_ref_typespec: (flash_ctrl_pkg::InfoTypes)
+    \_ref_typespec: (flash_ctrl_pkg::InfoTypes), line:2:13, endln:2:16
       |vpiParent:
-      \_parameter: (flash_ctrl_pkg::InfoTypes), line:2:17, endln:2:26
+      \_parameter: (flash_ctrl_pkg::InfoTypes), line:2:17, endln:2:36
       |vpiFullName:flash_ctrl_pkg::InfoTypes
       |vpiActual:
       \_int_typespec: , line:2:13, endln:2:16
@@ -540,57 +1102,55 @@ design: (unnamed)
     |vpiName:InfoTypes
     |vpiFullName:flash_ctrl_pkg::InfoTypes
   |vpiParameter:
-  \_parameter: (flash_ctrl_pkg::InfoTypeSize), line:3:17, endln:3:29
+  \_parameter: (flash_ctrl_pkg::InfoTypeSize), line:3:17, endln:7:4
     |vpiParent:
     \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
     |vpiSize:1
     |vpiTypespec:
-    \_ref_typespec: (flash_ctrl_pkg::InfoTypeSize)
+    \_ref_typespec: (flash_ctrl_pkg::InfoTypeSize), line:3:13, endln:3:16
       |vpiParent:
-      \_parameter: (flash_ctrl_pkg::InfoTypeSize), line:3:17, endln:3:29
+      \_parameter: (flash_ctrl_pkg::InfoTypeSize), line:3:17, endln:7:4
       |vpiFullName:flash_ctrl_pkg::InfoTypeSize
       |vpiActual:
       \_array_typespec: , line:3:13, endln:3:41
     |vpiSigned:1
     |vpiRange:
-    \_range: , line:3:31, endln:3:40
+    \_range: , line:3:30, endln:3:41
       |vpiParent:
-      \_parameter: (flash_ctrl_pkg::InfoTypeSize), line:3:17, endln:3:29
+      \_parameter: (flash_ctrl_pkg::InfoTypeSize), line:3:17, endln:7:4
       |vpiLeftRange:
       \_constant: 
         |vpiParent:
-        \_range: , line:3:31, endln:3:40
+        \_range: , line:3:30, endln:3:41
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
       |vpiRightRange:
-      \_operation: , line:3:31, endln:3:40
+      \_constant: , line:3:30, endln:3:41
         |vpiParent:
-        \_range: , line:3:31, endln:3:40
-        |vpiOpType:11
-        |vpiOperand:
-        \_ref_obj: (flash_ctrl_pkg::InfoTypeSize::InfoTypes), line:3:31, endln:3:40
+        \_range: , line:3:30, endln:3:41
+        |vpiDecompile:associative
+        |STRING:associative
+        |vpiTypespec:
+        \_ref_typespec: (flash_ctrl_pkg::InfoTypeSize), line:3:31, endln:3:40
           |vpiParent:
-          \_operation: , line:3:31, endln:3:40
-          |vpiName:InfoTypes
-          |vpiFullName:flash_ctrl_pkg::InfoTypeSize::InfoTypes
-        |vpiOperand:
-        \_constant: 
-          |vpiSize:64
-          |INT:1
-          |vpiConstType:7
+          \_constant: , line:3:30, endln:3:41
+          |vpiFullName:flash_ctrl_pkg::InfoTypeSize
+          |vpiActual:
+          \_int_typespec: , line:2:13, endln:2:16
+        |vpiConstType:6
     |vpiName:InfoTypeSize
     |vpiFullName:flash_ctrl_pkg::InfoTypeSize
   |vpiParameter:
-  \_parameter: (flash_ctrl_pkg::InfosPerBank), line:8:17, endln:8:29
+  \_parameter: (flash_ctrl_pkg::InfosPerBank), line:8:17, endln:8:37
     |vpiParent:
     \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
     |UINT:10
     |vpiTypespec:
-    \_ref_typespec: (flash_ctrl_pkg::InfosPerBank)
+    \_ref_typespec: (flash_ctrl_pkg::InfosPerBank), line:8:13, endln:8:16
       |vpiParent:
-      \_parameter: (flash_ctrl_pkg::InfosPerBank), line:8:17, endln:8:29
+      \_parameter: (flash_ctrl_pkg::InfosPerBank), line:8:17, endln:8:37
       |vpiFullName:flash_ctrl_pkg::InfosPerBank
       |vpiActual:
       \_int_typespec: , line:8:13, endln:8:16
@@ -608,16 +1168,9 @@ design: (unnamed)
       |vpiDecompile:3
       |vpiSize:64
       |UINT:3
-      |vpiTypespec:
-      \_ref_typespec: (flash_ctrl_pkg)
-        |vpiParent:
-        \_constant: , line:2:35, endln:2:36
-        |vpiFullName:flash_ctrl_pkg
-        |vpiActual:
-        \_int_typespec: , line:2:13, endln:2:16
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (flash_ctrl_pkg::InfoTypes), line:2:17, endln:2:26
+    \_parameter: (flash_ctrl_pkg::InfoTypes), line:2:17, endln:2:36
   |vpiParamAssign:
   \_param_assign: , line:3:17, endln:7:4
     |vpiParent:
@@ -629,24 +1182,30 @@ design: (unnamed)
       |vpiOpType:75
       |vpiOperand:
       \_constant: , line:4:5, endln:4:7
+        |vpiParent:
+        \_operation: , line:3:44, endln:7:4
         |vpiDecompile:10
         |vpiSize:64
         |UINT:10
         |vpiConstType:9
       |vpiOperand:
       \_constant: , line:5:5, endln:5:6
+        |vpiParent:
+        \_operation: , line:3:44, endln:7:4
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
         |vpiConstType:9
       |vpiOperand:
       \_constant: , line:6:5, endln:6:6
+        |vpiParent:
+        \_operation: , line:3:44, endln:7:4
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
         |vpiConstType:9
     |vpiLhs:
-    \_parameter: (flash_ctrl_pkg::InfoTypeSize), line:3:17, endln:3:29
+    \_parameter: (flash_ctrl_pkg::InfoTypeSize), line:3:17, endln:7:4
   |vpiParamAssign:
   \_param_assign: , line:8:17, endln:8:37
     |vpiParent:
@@ -658,702 +1217,74 @@ design: (unnamed)
       |vpiDecompile:10
       |vpiSize:64
       |UINT:10
-      |vpiTypespec:
-      \_ref_typespec: (flash_ctrl_pkg)
-        |vpiParent:
-        \_constant: , line:8:35, endln:8:37
-        |vpiFullName:flash_ctrl_pkg
-        |vpiActual:
-        \_int_typespec: , line:8:13, endln:8:16
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (flash_ctrl_pkg::InfosPerBank), line:8:17, endln:8:29
-  |vpiDefName:flash_ctrl_pkg
-|uhdmallClasses:
-\_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:1:3, endln:27:11
-  |vpiParent:
-  \_design: (unnamed)
-  |vpiName:work@mailbox
-  |vpiMethod:
-  \_function: (work@mailbox::new), line:3:5, endln:4:16
-    |vpiParent:
-    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:1:3, endln:27:11
-    |vpiName:new
-    |vpiFullName:work@mailbox::new
-    |vpiMethod:1
-    |vpiReturn:
-    \_class_var: (work@mailbox::new), line:3:23, endln:3:28
-      |vpiParent:
-      \_function: (work@mailbox::new), line:3:5, endln:4:16
-      |vpiTypespec:
-      \_ref_typespec: (work@mailbox::new)
-        |vpiParent:
-        \_class_var: (work@mailbox::new), line:3:23, endln:3:28
-        |vpiFullName:work@mailbox::new
-        |vpiActual:
-        \_class_typespec: 
-      |vpiFullName:work@mailbox::new
-    |vpiIODecl:
-    \_io_decl: (bound), line:3:23, endln:3:28
-      |vpiParent:
-      \_function: (work@mailbox::new), line:3:5, endln:4:16
-      |vpiDirection:1
-      |vpiName:bound
-      |vpiExpr:
-      \_constant: , line:3:31, endln:3:32
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-      |vpiTypedef:
-      \_ref_typespec: (work@mailbox::new::bound)
-        |vpiParent:
-        \_io_decl: (bound), line:3:23, endln:3:28
-        |vpiFullName:work@mailbox::new::bound
-        |vpiActual:
-        \_int_typespec: , line:3:19, endln:3:22
-  |vpiMethod:
-  \_function: (work@mailbox::num), line:6:5, endln:7:16
-    |vpiParent:
-    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:1:3, endln:27:11
-    |vpiName:num
-    |vpiFullName:work@mailbox::num
-    |vpiMethod:1
-    |vpiVisibility:1
-    |vpiReturn:
-    \_int_var: (work@mailbox::num), line:6:14, endln:6:17
-      |vpiParent:
-      \_function: (work@mailbox::num), line:6:5, endln:7:16
-      |vpiTypespec:
-      \_ref_typespec: (work@mailbox::num)
-        |vpiParent:
-        \_int_var: (work@mailbox::num), line:6:14, endln:6:17
-        |vpiFullName:work@mailbox::num
-        |vpiActual:
-        \_int_typespec: , line:6:14, endln:6:17
-      |vpiFullName:work@mailbox::num
-      |vpiSigned:1
-  |vpiMethod:
-  \_task: (work@mailbox::put), line:9:5, endln:10:12
-    |vpiParent:
-    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:1:3, endln:27:11
-    |vpiName:put
-    |vpiFullName:work@mailbox::put
-    |vpiMethod:1
-    |vpiVisibility:1
-    |vpiIODecl:
-    \_io_decl: (message), line:9:15, endln:9:22
-      |vpiParent:
-      \_task: (work@mailbox::put), line:9:5, endln:10:12
-      |vpiDirection:1
-      |vpiName:message
-  |vpiMethod:
-  \_function: (work@mailbox::try_put), line:12:5, endln:13:16
-    |vpiParent:
-    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:1:3, endln:27:11
-    |vpiName:try_put
-    |vpiFullName:work@mailbox::try_put
-    |vpiMethod:1
-    |vpiVisibility:1
-    |vpiReturn:
-    \_logic_var: (work@mailbox::try_put)
-      |vpiParent:
-      \_function: (work@mailbox::try_put), line:12:5, endln:13:16
-      |vpiFullName:work@mailbox::try_put
-    |vpiIODecl:
-    \_io_decl: (message), line:12:23, endln:12:30
-      |vpiParent:
-      \_function: (work@mailbox::try_put), line:12:5, endln:13:16
-      |vpiDirection:1
-      |vpiName:message
-  |vpiMethod:
-  \_task: (work@mailbox::get), line:15:5, endln:16:12
-    |vpiParent:
-    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:1:3, endln:27:11
-    |vpiName:get
-    |vpiFullName:work@mailbox::get
-    |vpiMethod:1
-    |vpiVisibility:1
-    |vpiIODecl:
-    \_io_decl: (message), line:15:19, endln:15:26
-      |vpiParent:
-      \_task: (work@mailbox::get), line:15:5, endln:16:12
-      |vpiDirection:6
-      |vpiName:message
-  |vpiMethod:
-  \_function: (work@mailbox::try_get), line:18:5, endln:19:16
-    |vpiParent:
-    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:1:3, endln:27:11
-    |vpiName:try_get
-    |vpiFullName:work@mailbox::try_get
-    |vpiMethod:1
-    |vpiVisibility:1
-    |vpiReturn:
-    \_int_var: (work@mailbox::try_get), line:18:14, endln:18:17
-      |vpiParent:
-      \_function: (work@mailbox::try_get), line:18:5, endln:19:16
-      |vpiTypespec:
-      \_ref_typespec: (work@mailbox::try_get)
-        |vpiParent:
-        \_int_var: (work@mailbox::try_get), line:18:14, endln:18:17
-        |vpiFullName:work@mailbox::try_get
-        |vpiActual:
-        \_int_typespec: , line:18:14, endln:18:17
-      |vpiFullName:work@mailbox::try_get
-      |vpiSigned:1
-    |vpiIODecl:
-    \_io_decl: (message), line:18:31, endln:18:38
-      |vpiParent:
-      \_function: (work@mailbox::try_get), line:18:5, endln:19:16
-      |vpiDirection:6
-      |vpiName:message
-  |vpiMethod:
-  \_task: (work@mailbox::peek), line:21:5, endln:22:12
-    |vpiParent:
-    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:1:3, endln:27:11
-    |vpiName:peek
-    |vpiFullName:work@mailbox::peek
-    |vpiMethod:1
-    |vpiVisibility:1
-    |vpiIODecl:
-    \_io_decl: (message), line:21:20, endln:21:27
-      |vpiParent:
-      \_task: (work@mailbox::peek), line:21:5, endln:22:12
-      |vpiDirection:6
-      |vpiName:message
-  |vpiMethod:
-  \_function: (work@mailbox::try_peek), line:24:5, endln:25:16
-    |vpiParent:
-    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:1:3, endln:27:11
-    |vpiName:try_peek
-    |vpiFullName:work@mailbox::try_peek
-    |vpiMethod:1
-    |vpiVisibility:1
-    |vpiReturn:
-    \_int_var: (work@mailbox::try_peek), line:24:14, endln:24:17
-      |vpiParent:
-      \_function: (work@mailbox::try_peek), line:24:5, endln:25:16
-      |vpiTypespec:
-      \_ref_typespec: (work@mailbox::try_peek)
-        |vpiParent:
-        \_int_var: (work@mailbox::try_peek), line:24:14, endln:24:17
-        |vpiFullName:work@mailbox::try_peek
-        |vpiActual:
-        \_int_typespec: , line:24:14, endln:24:17
-      |vpiFullName:work@mailbox::try_peek
-      |vpiSigned:1
-    |vpiIODecl:
-    \_io_decl: (message), line:24:31, endln:24:38
-      |vpiParent:
-      \_function: (work@mailbox::try_peek), line:24:5, endln:25:16
-      |vpiDirection:6
-      |vpiName:message
-|uhdmallClasses:
-\_class_defn: (work@process), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:30:3, endln:52:11
-  |vpiParent:
-  \_design: (unnamed)
-  |vpiName:work@process
+    \_parameter: (flash_ctrl_pkg::InfosPerBank), line:8:17, endln:8:37
   |vpiTypedef:
-  \_enum_typespec: (state), line:32:5, endln:32:74
+  \_int_typespec: , line:2:13, endln:2:16
     |vpiParent:
-    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:30:3, endln:52:11
-    |vpiName:state
-    |vpiEnumConst:
-    \_enum_const: (FINISHED), line:32:20, endln:32:28
+    \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
+    |vpiExpr:
+    \_ref_obj: (flash_ctrl_pkg::InfoTypes), line:3:31, endln:3:40
       |vpiParent:
-      \_enum_typespec: (state), line:32:5, endln:32:74
-      |vpiName:FINISHED
-      |INT:0
-      |vpiDecompile:0
-      |vpiSize:64
-    |vpiEnumConst:
-    \_enum_const: (RUNNING), line:32:30, endln:32:37
-      |vpiParent:
-      \_enum_typespec: (state), line:32:5, endln:32:74
-      |vpiName:RUNNING
-      |INT:1
-      |vpiDecompile:1
-      |vpiSize:64
-    |vpiEnumConst:
-    \_enum_const: (WAITING), line:32:39, endln:32:46
-      |vpiParent:
-      \_enum_typespec: (state), line:32:5, endln:32:74
-      |vpiName:WAITING
-      |INT:2
-      |vpiDecompile:2
-      |vpiSize:64
-    |vpiEnumConst:
-    \_enum_const: (SUSPENDED), line:32:48, endln:32:57
-      |vpiParent:
-      \_enum_typespec: (state), line:32:5, endln:32:74
-      |vpiName:SUSPENDED
-      |INT:3
-      |vpiDecompile:3
-      |vpiSize:64
-    |vpiEnumConst:
-    \_enum_const: (KILLED), line:32:59, endln:32:65
-      |vpiParent:
-      \_enum_typespec: (state), line:32:5, endln:32:74
-      |vpiName:KILLED
-      |INT:4
-      |vpiDecompile:4
-      |vpiSize:64
-  |vpiMethod:
-  \_function: (work@process::self), line:34:5, endln:34:11
+      \_int_typespec: , line:2:13, endln:2:16
+      |vpiName:InfoTypes
+      |vpiFullName:flash_ctrl_pkg::InfoTypes
+      |vpiActual:
+      \_parameter: (flash_ctrl_pkg::InfoTypes), line:2:17, endln:2:36
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:3:13, endln:3:16
     |vpiParent:
-    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:30:3, endln:52:11
-    |vpiName:self
-    |vpiFullName:work@process::self
-    |vpiMethod:1
-    |vpiVisibility:1
-    |vpiReturn:
-    \_class_var: (work@process::self), line:34:21, endln:34:28
+    \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
+    |vpiSigned:1
+  |vpiTypedef:
+  \_array_typespec: , line:3:13, endln:3:41
+    |vpiParent:
+    \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
+    |vpiRange:
+    \_range: , line:3:30, endln:3:41
+    |vpiElemTypespec:
+    \_ref_typespec: (flash_ctrl_pkg), line:3:13, endln:3:16
       |vpiParent:
-      \_function: (work@process::self), line:34:5, endln:34:11
-      |vpiTypespec:
-      \_ref_typespec: (work@process::self)
-        |vpiParent:
-        \_class_var: (work@process::self), line:34:21, endln:34:28
-        |vpiFullName:work@process::self
-        |vpiActual:
-        \_class_typespec: , line:34:21, endln:34:28
-      |vpiFullName:work@process::self
-  |vpiMethod:
-  \_function: (work@process::status), line:37:5, endln:38:16
+      \_array_typespec: , line:3:13, endln:3:41
+      |vpiFullName:flash_ctrl_pkg
+      |vpiActual:
+      \_int_typespec: , line:3:13, endln:3:16
+  |vpiTypedef:
+  \_int_typespec: , line:8:13, endln:8:16
     |vpiParent:
-    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:30:3, endln:52:11
-    |vpiName:status
-    |vpiFullName:work@process::status
-    |vpiMethod:1
-    |vpiVisibility:1
-    |vpiReturn:
-    \_enum_var: (work@process::status), line:37:14, endln:37:19
-      |vpiParent:
-      \_function: (work@process::status), line:37:5, endln:38:16
-      |vpiTypespec:
-      \_ref_typespec: (work@process::status)
-        |vpiParent:
-        \_enum_var: (work@process::status), line:37:14, endln:37:19
-        |vpiFullName:work@process::status
-        |vpiActual:
-        \_enum_typespec: (state), line:32:5, endln:32:74
-      |vpiFullName:work@process::status
-  |vpiMethod:
-  \_task: (work@process::kill), line:40:5, endln:41:12
-    |vpiParent:
-    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:30:3, endln:52:11
-    |vpiName:kill
-    |vpiFullName:work@process::kill
-    |vpiMethod:1
-    |vpiVisibility:1
-  |vpiMethod:
-  \_task: (work@process::await), line:43:5, endln:44:12
-    |vpiParent:
-    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:30:3, endln:52:11
-    |vpiName:await
-    |vpiFullName:work@process::await
-    |vpiMethod:1
-    |vpiVisibility:1
-  |vpiMethod:
-  \_task: (work@process::suspend), line:46:5, endln:47:12
-    |vpiParent:
-    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:30:3, endln:52:11
-    |vpiName:suspend
-    |vpiFullName:work@process::suspend
-    |vpiMethod:1
-    |vpiVisibility:1
-  |vpiMethod:
-  \_task: (work@process::resume), line:49:5, endln:50:12
-    |vpiParent:
-    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:30:3, endln:52:11
-    |vpiName:resume
-    |vpiFullName:work@process::resume
-    |vpiMethod:1
-    |vpiVisibility:1
-|uhdmallClasses:
-\_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:55:3, endln:69:11
-  |vpiParent:
-  \_design: (unnamed)
-  |vpiName:work@semaphore
-  |vpiMethod:
-  \_function: (work@semaphore::new), line:57:5, endln:58:16
-    |vpiParent:
-    \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:55:3, endln:69:11
-    |vpiName:new
-    |vpiFullName:work@semaphore::new
-    |vpiMethod:1
-    |vpiReturn:
-    \_class_var: (work@semaphore::new), line:57:22, endln:57:30
-      |vpiParent:
-      \_function: (work@semaphore::new), line:57:5, endln:58:16
-      |vpiTypespec:
-      \_ref_typespec: (work@semaphore::new)
-        |vpiParent:
-        \_class_var: (work@semaphore::new), line:57:22, endln:57:30
-        |vpiFullName:work@semaphore::new
-        |vpiActual:
-        \_class_typespec: 
-      |vpiFullName:work@semaphore::new
-    |vpiIODecl:
-    \_io_decl: (keyCount), line:57:22, endln:57:30
-      |vpiParent:
-      \_function: (work@semaphore::new), line:57:5, endln:58:16
-      |vpiDirection:1
-      |vpiName:keyCount
-      |vpiExpr:
-      \_constant: , line:57:33, endln:57:34
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-      |vpiTypedef:
-      \_ref_typespec: (work@semaphore::new::keyCount)
-        |vpiParent:
-        \_io_decl: (keyCount), line:57:22, endln:57:30
-        |vpiFullName:work@semaphore::new::keyCount
-        |vpiActual:
-        \_int_typespec: , line:57:18, endln:57:21
-  |vpiMethod:
-  \_task: (work@semaphore::put), line:60:5, endln:61:12
-    |vpiParent:
-    \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:55:3, endln:69:11
-    |vpiName:put
-    |vpiFullName:work@semaphore::put
-    |vpiMethod:1
-    |vpiVisibility:1
-    |vpiIODecl:
-    \_io_decl: (keyCount), line:60:18, endln:60:26
-      |vpiParent:
-      \_task: (work@semaphore::put), line:60:5, endln:61:12
-      |vpiDirection:1
-      |vpiName:keyCount
-      |vpiExpr:
-      \_constant: , line:60:29, endln:60:30
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-      |vpiTypedef:
-      \_ref_typespec: (work@semaphore::put::keyCount)
-        |vpiParent:
-        \_io_decl: (keyCount), line:60:18, endln:60:26
-        |vpiFullName:work@semaphore::put::keyCount
-        |vpiActual:
-        \_int_typespec: , line:60:14, endln:60:17
-  |vpiMethod:
-  \_task: (work@semaphore::get), line:63:5, endln:64:12
-    |vpiParent:
-    \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:55:3, endln:69:11
-    |vpiName:get
-    |vpiFullName:work@semaphore::get
-    |vpiMethod:1
-    |vpiVisibility:1
-    |vpiIODecl:
-    \_io_decl: (keyCount), line:63:18, endln:63:26
-      |vpiParent:
-      \_task: (work@semaphore::get), line:63:5, endln:64:12
-      |vpiDirection:1
-      |vpiName:keyCount
-      |vpiExpr:
-      \_constant: , line:63:29, endln:63:30
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-      |vpiTypedef:
-      \_ref_typespec: (work@semaphore::get::keyCount)
-        |vpiParent:
-        \_io_decl: (keyCount), line:63:18, endln:63:26
-        |vpiFullName:work@semaphore::get::keyCount
-        |vpiActual:
-        \_int_typespec: , line:63:14, endln:63:17
-  |vpiMethod:
-  \_function: (work@semaphore::try_get), line:66:5, endln:67:16
-    |vpiParent:
-    \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:55:3, endln:69:11
-    |vpiName:try_get
-    |vpiFullName:work@semaphore::try_get
-    |vpiMethod:1
-    |vpiVisibility:1
-    |vpiReturn:
-    \_int_var: (work@semaphore::try_get), line:66:14, endln:66:17
-      |vpiParent:
-      \_function: (work@semaphore::try_get), line:66:5, endln:67:16
-      |vpiTypespec:
-      \_ref_typespec: (work@semaphore::try_get)
-        |vpiParent:
-        \_int_var: (work@semaphore::try_get), line:66:14, endln:66:17
-        |vpiFullName:work@semaphore::try_get
-        |vpiActual:
-        \_int_typespec: , line:66:14, endln:66:17
-      |vpiFullName:work@semaphore::try_get
-      |vpiSigned:1
-    |vpiIODecl:
-    \_io_decl: (keyCount), line:66:30, endln:66:38
-      |vpiParent:
-      \_function: (work@semaphore::try_get), line:66:5, endln:67:16
-      |vpiDirection:1
-      |vpiName:keyCount
-      |vpiExpr:
-      \_constant: , line:66:41, endln:66:42
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-      |vpiTypedef:
-      \_ref_typespec: (work@semaphore::try_get::keyCount)
-        |vpiParent:
-        \_io_decl: (keyCount), line:66:30, endln:66:38
-        |vpiFullName:work@semaphore::try_get::keyCount
-        |vpiActual:
-        \_int_typespec: , line:66:26, endln:66:29
+    \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
+    |vpiSigned:1
+  |vpiImportTypespec:
+  \_int_typespec: , line:2:13, endln:2:16
+  |vpiImportTypespec:
+  \_int_typespec: , line:3:13, endln:3:16
+  |vpiImportTypespec:
+  \_array_typespec: , line:3:13, endln:3:41
+  |vpiImportTypespec:
+  \_int_typespec: , line:8:13, endln:8:16
+  |vpiDefName:flash_ctrl_pkg
 |uhdmallModules:
 \_module_inst: work@flash_ctrl_info_cfg (work@flash_ctrl_info_cfg), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:12:1, endln:24:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@flash_ctrl_info_cfg
+  |vpiName:work@flash_ctrl_info_cfg
   |vpiParameter:
-  \_parameter: (work@flash_ctrl_info_cfg.InfoTypeSize), line:3:17, endln:3:29
-    |vpiParent:
-    \_module_inst: work@flash_ctrl_info_cfg (work@flash_ctrl_info_cfg), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:12:1, endln:24:10
-    |vpiSize:1
-    |vpiTypespec:
-    \_ref_typespec: (work@flash_ctrl_info_cfg.InfoTypeSize)
-      |vpiParent:
-      \_parameter: (work@flash_ctrl_info_cfg.InfoTypeSize), line:3:17, endln:3:29
-      |vpiFullName:work@flash_ctrl_info_cfg.InfoTypeSize
-      |vpiActual:
-      \_array_typespec: , line:3:13, endln:3:41
-    |vpiSigned:1
-    |vpiRange:
-    \_range: , line:3:31, endln:3:40
-      |vpiParent:
-      \_parameter: (work@flash_ctrl_info_cfg.InfoTypeSize), line:3:17, endln:3:29
-      |vpiLeftRange:
-      \_constant: 
-        |vpiParent:
-        \_range: , line:3:31, endln:3:40
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-      |vpiRightRange:
-      \_operation: , line:3:31, endln:3:40
-        |vpiParent:
-        \_range: , line:3:31, endln:3:40
-        |vpiOpType:11
-        |vpiOperand:
-        \_ref_obj: (work@flash_ctrl_info_cfg.InfoTypeSize.InfoTypes), line:3:31, endln:3:40
-          |vpiParent:
-          \_operation: , line:3:31, endln:3:40
-          |vpiName:InfoTypes
-          |vpiFullName:work@flash_ctrl_info_cfg.InfoTypeSize.InfoTypes
-        |vpiOperand:
-        \_constant: 
-          |vpiParent:
-          \_operation: , line:3:31, endln:3:40
-          |vpiSize:64
-          |INT:1
-          |vpiConstType:7
-    |vpiName:InfoTypeSize
-    |vpiFullName:work@flash_ctrl_info_cfg.InfoTypeSize
-    |vpiImported:flash_ctrl_pkg
-  |vpiParameter:
-  \_parameter: (work@flash_ctrl_info_cfg.InfoTypes), line:2:17, endln:2:26
-    |vpiParent:
-    \_module_inst: work@flash_ctrl_info_cfg (work@flash_ctrl_info_cfg), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:12:1, endln:24:10
-    |UINT:3
-    |vpiTypespec:
-    \_ref_typespec: (work@flash_ctrl_info_cfg.InfoTypes)
-      |vpiParent:
-      \_parameter: (work@flash_ctrl_info_cfg.InfoTypes), line:2:17, endln:2:26
-      |vpiFullName:work@flash_ctrl_info_cfg.InfoTypes
-      |vpiActual:
-      \_int_typespec: , line:2:13, endln:2:16
-    |vpiSigned:1
-    |vpiName:InfoTypes
-    |vpiFullName:work@flash_ctrl_info_cfg.InfoTypes
-    |vpiImported:flash_ctrl_pkg
-  |vpiParameter:
-  \_parameter: (work@flash_ctrl_info_cfg.InfosPerBank), line:8:17, endln:8:29
-    |vpiParent:
-    \_module_inst: work@flash_ctrl_info_cfg (work@flash_ctrl_info_cfg), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:12:1, endln:24:10
-    |UINT:10
-    |vpiTypespec:
-    \_ref_typespec: (work@flash_ctrl_info_cfg.InfosPerBank)
-      |vpiParent:
-      \_parameter: (work@flash_ctrl_info_cfg.InfosPerBank), line:8:17, endln:8:29
-      |vpiFullName:work@flash_ctrl_info_cfg.InfosPerBank
-      |vpiActual:
-      \_int_typespec: , line:8:13, endln:8:16
-    |vpiSigned:1
-    |vpiName:InfosPerBank
-    |vpiFullName:work@flash_ctrl_info_cfg.InfosPerBank
-    |vpiImported:flash_ctrl_pkg
-  |vpiParameter:
-  \_parameter: (work@flash_ctrl_info_cfg.InfoSel), line:14:17, endln:14:24
+  \_parameter: (work@flash_ctrl_info_cfg.InfoSel), line:14:17, endln:14:28
     |vpiParent:
     \_module_inst: work@flash_ctrl_info_cfg (work@flash_ctrl_info_cfg), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:12:1, endln:24:10
     |UINT:2
     |vpiTypespec:
-    \_ref_typespec: (work@flash_ctrl_info_cfg.InfoSel)
+    \_ref_typespec: (work@flash_ctrl_info_cfg.InfoSel), line:14:13, endln:14:16
       |vpiParent:
-      \_parameter: (work@flash_ctrl_info_cfg.InfoSel), line:14:17, endln:14:24
+      \_parameter: (work@flash_ctrl_info_cfg.InfoSel), line:14:17, endln:14:28
       |vpiFullName:work@flash_ctrl_info_cfg.InfoSel
       |vpiActual:
       \_int_typespec: , line:14:13, endln:14:16
     |vpiSigned:1
     |vpiName:InfoSel
     |vpiFullName:work@flash_ctrl_info_cfg.InfoSel
-  |vpiParamAssign:
-  \_param_assign: , line:2:17, endln:2:36
-    |vpiParent:
-    \_module_inst: work@flash_ctrl_info_cfg (work@flash_ctrl_info_cfg), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:12:1, endln:24:10
-    |vpiRhs:
-    \_constant: , line:2:35, endln:2:36
-      |vpiParent:
-      \_param_assign: , line:2:17, endln:2:36
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiTypespec:
-      \_ref_typespec: (work@flash_ctrl_info_cfg)
-        |vpiParent:
-        \_constant: , line:2:35, endln:2:36
-        |vpiFullName:work@flash_ctrl_info_cfg
-        |vpiActual:
-        \_int_typespec: , line:2:13, endln:2:16
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@flash_ctrl_info_cfg.InfoTypes), line:2:17, endln:2:26
-      |vpiParent:
-      \_param_assign: , line:2:17, endln:2:36
-      |UINT:3
-      |vpiTypespec:
-      \_ref_typespec: (work@flash_ctrl_info_cfg.InfoTypes)
-        |vpiParent:
-        \_parameter: (work@flash_ctrl_info_cfg.InfoTypes), line:2:17, endln:2:26
-        |vpiFullName:work@flash_ctrl_info_cfg.InfoTypes
-        |vpiActual:
-        \_int_typespec: , line:2:13, endln:2:16
-      |vpiSigned:1
-      |vpiName:InfoTypes
-      |vpiFullName:work@flash_ctrl_info_cfg.InfoTypes
-      |vpiImported:flash_ctrl_pkg
-  |vpiParamAssign:
-  \_param_assign: , line:3:17, endln:7:4
-    |vpiParent:
-    \_module_inst: work@flash_ctrl_info_cfg (work@flash_ctrl_info_cfg), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:12:1, endln:24:10
-    |vpiRhs:
-    \_operation: , line:3:44, endln:7:4
-      |vpiParent:
-      \_param_assign: , line:3:17, endln:7:4
-      |vpiOpType:75
-      |vpiOperand:
-      \_constant: , line:4:5, endln:4:7
-        |vpiParent:
-        \_operation: , line:3:44, endln:7:4
-        |vpiDecompile:10
-        |vpiSize:64
-        |UINT:10
-        |vpiConstType:9
-      |vpiOperand:
-      \_constant: , line:5:5, endln:5:6
-        |vpiParent:
-        \_operation: , line:3:44, endln:7:4
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-      |vpiOperand:
-      \_constant: , line:6:5, endln:6:6
-        |vpiParent:
-        \_operation: , line:3:44, endln:7:4
-        |vpiDecompile:2
-        |vpiSize:64
-        |UINT:2
-        |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@flash_ctrl_info_cfg.InfoTypeSize), line:3:17, endln:3:29
-      |vpiParent:
-      \_param_assign: , line:3:17, endln:7:4
-      |vpiSize:1
-      |vpiTypespec:
-      \_ref_typespec: (work@flash_ctrl_info_cfg.InfoTypeSize)
-        |vpiParent:
-        \_parameter: (work@flash_ctrl_info_cfg.InfoTypeSize), line:3:17, endln:3:29
-        |vpiFullName:work@flash_ctrl_info_cfg.InfoTypeSize
-        |vpiActual:
-        \_array_typespec: , line:3:13, endln:3:41
-      |vpiSigned:1
-      |vpiRange:
-      \_range: , line:3:31, endln:3:40
-        |vpiParent:
-        \_parameter: (work@flash_ctrl_info_cfg.InfoTypeSize), line:3:17, endln:3:29
-        |vpiLeftRange:
-        \_constant: 
-          |vpiParent:
-          \_range: , line:3:31, endln:3:40
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiConstType:9
-        |vpiRightRange:
-        \_operation: , line:3:31, endln:3:40
-          |vpiParent:
-          \_range: , line:3:31, endln:3:40
-          |vpiOpType:11
-          |vpiOperand:
-          \_ref_obj: (work@flash_ctrl_info_cfg.InfoTypeSize.InfoTypes), line:3:31, endln:3:40
-            |vpiParent:
-            \_operation: , line:3:31, endln:3:40
-            |vpiName:InfoTypes
-            |vpiFullName:work@flash_ctrl_info_cfg.InfoTypeSize.InfoTypes
-          |vpiOperand:
-          \_constant: 
-            |vpiParent:
-            \_operation: , line:3:31, endln:3:40
-            |vpiSize:64
-            |INT:1
-            |vpiConstType:7
-      |vpiName:InfoTypeSize
-      |vpiFullName:work@flash_ctrl_info_cfg.InfoTypeSize
-      |vpiImported:flash_ctrl_pkg
-  |vpiParamAssign:
-  \_param_assign: , line:8:17, endln:8:37
-    |vpiParent:
-    \_module_inst: work@flash_ctrl_info_cfg (work@flash_ctrl_info_cfg), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:12:1, endln:24:10
-    |vpiRhs:
-    \_constant: , line:8:35, endln:8:37
-      |vpiParent:
-      \_param_assign: , line:8:17, endln:8:37
-      |vpiDecompile:10
-      |vpiSize:64
-      |UINT:10
-      |vpiTypespec:
-      \_ref_typespec: (work@flash_ctrl_info_cfg)
-        |vpiParent:
-        \_constant: , line:8:35, endln:8:37
-        |vpiFullName:work@flash_ctrl_info_cfg
-        |vpiActual:
-        \_int_typespec: , line:8:13, endln:8:16
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@flash_ctrl_info_cfg.InfosPerBank), line:8:17, endln:8:29
-      |vpiParent:
-      \_param_assign: , line:8:17, endln:8:37
-      |UINT:10
-      |vpiTypespec:
-      \_ref_typespec: (work@flash_ctrl_info_cfg.InfosPerBank)
-        |vpiParent:
-        \_parameter: (work@flash_ctrl_info_cfg.InfosPerBank), line:8:17, endln:8:29
-        |vpiFullName:work@flash_ctrl_info_cfg.InfosPerBank
-        |vpiActual:
-        \_int_typespec: , line:8:13, endln:8:16
-      |vpiSigned:1
-      |vpiName:InfosPerBank
-      |vpiFullName:work@flash_ctrl_info_cfg.InfosPerBank
-      |vpiImported:flash_ctrl_pkg
   |vpiParamAssign:
   \_param_assign: , line:14:17, endln:14:28
     |vpiParent:
@@ -1365,128 +1296,77 @@ design: (unnamed)
       |vpiDecompile:2
       |vpiSize:64
       |UINT:2
-      |vpiTypespec:
-      \_ref_typespec: (work@flash_ctrl_info_cfg)
-        |vpiParent:
-        \_constant: , line:14:27, endln:14:28
-        |vpiFullName:work@flash_ctrl_info_cfg
-        |vpiActual:
-        \_int_typespec: , line:14:13, endln:14:16
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@flash_ctrl_info_cfg.InfoSel), line:14:17, endln:14:24
-  |vpiTypedef:
-  \_import_typespec: (flash_ctrl_pkg), line:12:35, endln:12:52
-  |vpiDefName:work@flash_ctrl_info_cfg
-  |vpiNet:
-  \_logic_net: (work@flash_ctrl_info_cfg.i), line:16:21, endln:16:22
-    |vpiParent:
-    \_operation: , line:16:21, endln:16:37
-    |vpiName:i
-    |vpiFullName:work@flash_ctrl_info_cfg.i
-    |vpiNetType:1
-  |vpiGenStmt:
-  \_gen_for: 
+    \_parameter: (work@flash_ctrl_info_cfg.InfoSel), line:14:17, endln:14:28
+  |vpiInternalScope:
+  \_gen_for: (work@flash_ctrl_info_cfg), line:16:3, endln:22:6
     |vpiParent:
     \_module_inst: work@flash_ctrl_info_cfg (work@flash_ctrl_info_cfg), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:12:1, endln:24:10
-    |vpiForInitStmt:
-    \_assignment: , line:16:7, endln:16:19
+    |vpiFullName:work@flash_ctrl_info_cfg
+    |vpiVariables:
+    \_ref_var: (work@flash_ctrl_info_cfg.i), line:16:14, endln:16:15
       |vpiParent:
-      \_gen_for: 
-      |vpiRhs:
-      \_constant: , line:16:18, endln:16:19
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-      |vpiLhs:
-      \_ref_var: (work@flash_ctrl_info_cfg.i), line:16:14, endln:16:15
+      \_gen_for: (work@flash_ctrl_info_cfg), line:16:3, endln:22:6
+      |vpiTypespec:
+      \_ref_typespec: (work@flash_ctrl_info_cfg.i.i), line:16:14, endln:16:15
         |vpiParent:
-        \_assignment: , line:16:7, endln:16:19
-        |vpiTypespec:
-        \_ref_typespec: (work@flash_ctrl_info_cfg.i)
-          |vpiParent:
-          \_ref_var: (work@flash_ctrl_info_cfg.i), line:16:14, endln:16:15
-          |vpiFullName:work@flash_ctrl_info_cfg.i
-          |vpiActual:
-          \_unsupported_typespec: (i), line:16:14, endln:16:15
+        \_ref_var: (work@flash_ctrl_info_cfg.i), line:16:14, endln:16:15
         |vpiName:i
-        |vpiFullName:work@flash_ctrl_info_cfg.i
-    |vpiCondition:
-    \_operation: , line:16:21, endln:16:37
-      |vpiParent:
-      \_gen_for: 
-      |vpiOpType:20
-      |vpiOperand:
-      \_ref_obj: (work@flash_ctrl_info_cfg.i), line:16:21, endln:16:22
-        |vpiParent:
-        \_operation: , line:16:21, endln:16:37
-        |vpiName:i
-        |vpiFullName:work@flash_ctrl_info_cfg.i
+        |vpiFullName:work@flash_ctrl_info_cfg.i.i
         |vpiActual:
-        \_logic_net: (work@flash_ctrl_info_cfg.i), line:16:21, endln:16:22
-      |vpiOperand:
-      \_ref_obj: (work@flash_ctrl_info_cfg.InfosPerBank), line:16:25, endln:16:37
-        |vpiParent:
-        \_operation: , line:16:21, endln:16:37
-        |vpiName:InfosPerBank
-        |vpiFullName:work@flash_ctrl_info_cfg.InfosPerBank
-    |vpiForIncStmt:
-    \_operation: , line:16:39, endln:16:40
+        \_unsupported_typespec: (i), line:16:14, endln:16:15
+      |vpiName:i
+      |vpiFullName:work@flash_ctrl_info_cfg.i
+    |vpiInternalScope:
+    \_begin: (work@flash_ctrl_info_cfg.gen_info_priv), line:16:44, endln:22:6
       |vpiParent:
-      \_gen_for: 
-      |vpiOpType:62
-      |vpiOperand:
-      \_ref_obj: (work@flash_ctrl_info_cfg.i)
-        |vpiParent:
-        \_gen_for: 
-        |vpiName:i
-        |vpiFullName:work@flash_ctrl_info_cfg.i
-        |vpiActual:
-        \_logic_net: (work@flash_ctrl_info_cfg.i), line:16:21, endln:16:22
-    |vpiStmt:
-    \_named_begin: (work@flash_ctrl_info_cfg.gen_info_priv)
-      |vpiParent:
-      \_gen_for: 
+      \_gen_for: (work@flash_ctrl_info_cfg), line:16:3, endln:22:6
       |vpiName:gen_info_priv
       |vpiFullName:work@flash_ctrl_info_cfg.gen_info_priv
       |vpiStmt:
-      \_gen_if: , line:19:5, endln:19:7
+      \_gen_if: , line:19:5, endln:21:8
         |vpiParent:
-        \_named_begin: (work@flash_ctrl_info_cfg.gen_info_priv)
+        \_begin: (work@flash_ctrl_info_cfg.gen_info_priv), line:16:44, endln:22:6
         |vpiCondition:
         \_operation: , line:19:9, endln:19:34
           |vpiParent:
-          \_gen_if: , line:19:5, endln:19:7
+          \_module_inst: work@flash_ctrl_info_cfg (work@flash_ctrl_info_cfg), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:12:1, endln:24:10
           |vpiOpType:18
           |vpiOperand:
-          \_ref_obj: (work@flash_ctrl_info_cfg.gen_info_priv.i), line:19:9, endln:19:10
+          \_ref_obj: (work@flash_ctrl_info_cfg.i), line:19:9, endln:19:10
             |vpiParent:
             \_operation: , line:19:9, endln:19:34
             |vpiName:i
-            |vpiFullName:work@flash_ctrl_info_cfg.gen_info_priv.i
+            |vpiFullName:work@flash_ctrl_info_cfg.i
+            |vpiActual:
+            \_logic_net: (work@flash_ctrl_info_cfg.i), line:19:9, endln:19:10
           |vpiOperand:
-          \_bit_select: (work@flash_ctrl_info_cfg.gen_info_priv.InfoTypeSize), line:19:13, endln:19:34
+          \_bit_select: (work@flash_ctrl_info_cfg.InfoTypeSize), line:19:25, endln:19:34
             |vpiParent:
             \_operation: , line:19:9, endln:19:34
             |vpiName:InfoTypeSize
-            |vpiFullName:work@flash_ctrl_info_cfg.gen_info_priv.InfoTypeSize
+            |vpiFullName:work@flash_ctrl_info_cfg.InfoTypeSize
+            |vpiActual:
+            \_parameter: (flash_ctrl_pkg::InfoTypeSize), line:3:17, endln:7:4
             |vpiIndex:
-            \_ref_obj: (work@flash_ctrl_info_cfg.gen_info_priv.InfoSel), line:19:26, endln:19:33
+            \_ref_obj: (work@flash_ctrl_info_cfg.InfoSel), line:19:26, endln:19:33
               |vpiParent:
-              \_bit_select: (work@flash_ctrl_info_cfg.gen_info_priv.InfoTypeSize), line:19:13, endln:19:34
+              \_module_inst: work@flash_ctrl_info_cfg (work@flash_ctrl_info_cfg), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:12:1, endln:24:10
               |vpiName:InfoSel
-              |vpiFullName:work@flash_ctrl_info_cfg.gen_info_priv.InfoSel
+              |vpiFullName:work@flash_ctrl_info_cfg.InfoSel
+              |vpiActual:
+              \_parameter: (work@flash_ctrl_info_cfg.InfoSel), line:14:17, endln:14:28
         |vpiStmt:
-        \_named_begin: (work@flash_ctrl_info_cfg.gen_info_priv.gen_invalid_region)
+        \_begin: (work@flash_ctrl_info_cfg.gen_info_priv.gen_invalid_region), line:19:36, endln:21:8
           |vpiParent:
-          \_gen_if: , line:19:5, endln:19:7
+          \_gen_if: , line:19:5, endln:21:8
           |vpiName:gen_invalid_region
           |vpiFullName:work@flash_ctrl_info_cfg.gen_info_priv.gen_invalid_region
           |vpiStmt:
           \_cont_assign: , line:20:14, endln:20:28
             |vpiParent:
-            \_named_begin: (work@flash_ctrl_info_cfg.gen_info_priv.gen_invalid_region)
+            \_module_inst: work@flash_ctrl_info_cfg (work@flash_ctrl_info_cfg), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:12:1, endln:24:10
             |vpiRhs:
             \_constant: , line:20:26, endln:20:28
               |vpiParent:
@@ -1496,207 +1376,112 @@ design: (unnamed)
               |BIN:0
               |vpiConstType:3
             |vpiLhs:
-            \_bit_select: (work@flash_ctrl_info_cfg.gen_info_priv.gen_invalid_region.cfgs_o), line:20:14, endln:20:23
+            \_bit_select: (work@flash_ctrl_info_cfg.cfgs_o), line:20:20, endln:20:23
               |vpiParent:
-              \_cont_assign: , line:20:14, endln:20:28
+              \_module_inst: work@flash_ctrl_info_cfg (work@flash_ctrl_info_cfg), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:12:1, endln:24:10
               |vpiName:cfgs_o
-              |vpiFullName:work@flash_ctrl_info_cfg.gen_info_priv.gen_invalid_region.cfgs_o
+              |vpiFullName:work@flash_ctrl_info_cfg.cfgs_o
+              |vpiActual:
+              \_logic_net: (work@flash_ctrl_info_cfg.cfgs_o), line:20:20, endln:20:23
               |vpiIndex:
-              \_ref_obj: (work@flash_ctrl_info_cfg.gen_info_priv.gen_invalid_region.i), line:20:21, endln:20:22
+              \_ref_obj: (work@flash_ctrl_info_cfg.i), line:20:21, endln:20:22
                 |vpiParent:
-                \_bit_select: (work@flash_ctrl_info_cfg.gen_info_priv.gen_invalid_region.cfgs_o), line:20:14, endln:20:23
+                \_module_inst: work@flash_ctrl_info_cfg (work@flash_ctrl_info_cfg), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:12:1, endln:24:10
                 |vpiName:i
-                |vpiFullName:work@flash_ctrl_info_cfg.gen_info_priv.gen_invalid_region.i
-\_weaklyReferenced:
-\_int_typespec: , line:2:13, endln:2:16
-  |vpiParent:
-  \_parameter: (flash_ctrl_pkg::InfoTypes), line:2:17, endln:2:26
-  |vpiInstance:
-  \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
-  |vpiSigned:1
-\_array_typespec: , line:3:13, endln:3:41
-  |vpiParent:
-  \_parameter: (flash_ctrl_pkg::InfoTypeSize), line:3:17, endln:3:29
-  |vpiRange:
-  \_range: , line:3:31, endln:3:40
-  |vpiElemTypespec:
-  \_ref_typespec: (flash_ctrl_pkg::InfoTypeSize)
-    |vpiParent:
-    \_array_typespec: , line:3:13, endln:3:41
-    |vpiFullName:flash_ctrl_pkg::InfoTypeSize
-    |vpiActual:
-    \_int_typespec: , line:3:13, endln:3:16
-\_int_typespec: , line:3:13, endln:3:16
-  |vpiInstance:
-  \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
-  |vpiSigned:1
-\_int_typespec: , line:8:13, endln:8:16
-  |vpiParent:
-  \_parameter: (flash_ctrl_pkg::InfosPerBank), line:8:17, endln:8:29
-  |vpiInstance:
-  \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
-  |vpiSigned:1
-\_array_typespec: , line:3:13, endln:3:41
-  |vpiParent:
-  \_ref_typespec: (work@flash_ctrl_info_cfg.InfoTypeSize)
-  |vpiRange:
-  \_range: , line:3:31, endln:3:40
-    |vpiParent:
-    \_array_typespec: , line:3:13, endln:3:41
-    |vpiLeftRange:
-    \_constant: 
+                |vpiFullName:work@flash_ctrl_info_cfg.i
+                |vpiActual:
+                \_logic_net: (work@flash_ctrl_info_cfg.i), line:19:9, endln:19:10
+    |vpiImportTypespec:
+    \_ref_var: (work@flash_ctrl_info_cfg.i), line:16:14, endln:16:15
+    |vpiForInitStmt:
+    \_assignment: , line:16:7, endln:16:19
       |vpiParent:
-      \_range: , line:3:31, endln:3:40
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-    |vpiRightRange:
-    \_operation: , line:3:31, endln:3:40
-      |vpiParent:
-      \_range: , line:3:31, endln:3:40
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@flash_ctrl_info_cfg.InfoTypeSize.InfoTypes), line:3:31, endln:3:40
+      \_gen_for: (work@flash_ctrl_info_cfg), line:16:3, endln:22:6
+      |vpiRhs:
+      \_constant: , line:16:18, endln:16:19
         |vpiParent:
-        \_operation: , line:3:31, endln:3:40
-        |vpiName:InfoTypes
-        |vpiFullName:work@flash_ctrl_info_cfg.InfoTypeSize.InfoTypes
-      |vpiOperand:
-      \_constant: 
-        |vpiParent:
-        \_operation: , line:3:31, endln:3:40
+        \_assignment: , line:16:7, endln:16:19
+        |vpiDecompile:0
         |vpiSize:64
-        |INT:1
-        |vpiConstType:7
-  |vpiElemTypespec:
-  \_ref_typespec: (work@flash_ctrl_info_cfg.InfoTypeSize)
-    |vpiParent:
-    \_array_typespec: , line:3:13, endln:3:41
-    |vpiFullName:work@flash_ctrl_info_cfg.InfoTypeSize
-    |vpiActual:
-    \_int_typespec: , line:3:13, endln:3:16
-\_int_typespec: , line:3:13, endln:3:16
-  |vpiParent:
-  \_ref_typespec: (work@flash_ctrl_info_cfg.InfoTypeSize)
-  |vpiInstance:
-  \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
-  |vpiSigned:1
-\_int_typespec: , line:2:13, endln:2:16
-  |vpiParent:
-  \_ref_typespec: (work@flash_ctrl_info_cfg.InfoTypes)
-  |vpiInstance:
-  \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
-  |vpiSigned:1
-\_int_typespec: , line:8:13, endln:8:16
-  |vpiParent:
-  \_ref_typespec: (work@flash_ctrl_info_cfg.InfosPerBank)
-  |vpiInstance:
-  \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
-  |vpiSigned:1
-\_int_typespec: , line:2:13, endln:2:16
-  |vpiParent:
-  \_ref_typespec: (work@flash_ctrl_info_cfg)
-  |vpiInstance:
-  \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
-  |vpiSigned:1
-\_int_typespec: , line:2:13, endln:2:16
-  |vpiParent:
-  \_ref_typespec: (work@flash_ctrl_info_cfg.InfoTypes)
-  |vpiInstance:
-  \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
-  |vpiSigned:1
-\_array_typespec: , line:3:13, endln:3:41
-  |vpiParent:
-  \_ref_typespec: (work@flash_ctrl_info_cfg.InfoTypeSize)
-  |vpiRange:
-  \_range: , line:3:31, endln:3:40
-    |vpiParent:
-    \_array_typespec: , line:3:13, endln:3:41
-    |vpiLeftRange:
-    \_constant: 
+        |UINT:0
+        |vpiConstType:9
+      |vpiLhs:
+      \_ref_var: (work@flash_ctrl_info_cfg.i), line:16:14, endln:16:15
+    |vpiCondition:
+    \_operation: , line:16:21, endln:16:37
       |vpiParent:
-      \_range: , line:3:31, endln:3:40
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-    |vpiRightRange:
-    \_operation: , line:3:31, endln:3:40
+      \_gen_for: (work@flash_ctrl_info_cfg), line:16:3, endln:22:6
+      |vpiOpType:20
+      |vpiOperand:
+      \_ref_obj: (work@flash_ctrl_info_cfg.i), line:16:21, endln:16:22
+        |vpiParent:
+        \_operation: , line:16:21, endln:16:37
+        |vpiName:i
+        |vpiFullName:work@flash_ctrl_info_cfg.i
+        |vpiActual:
+        \_logic_net: (work@flash_ctrl_info_cfg.i), line:19:9, endln:19:10
+      |vpiOperand:
+      \_ref_obj: (work@flash_ctrl_info_cfg.InfosPerBank), line:16:25, endln:16:37
+        |vpiParent:
+        \_operation: , line:16:21, endln:16:37
+        |vpiName:InfosPerBank
+        |vpiFullName:work@flash_ctrl_info_cfg.InfosPerBank
+        |vpiActual:
+        \_parameter: (flash_ctrl_pkg::InfosPerBank), line:8:17, endln:8:37
+    |vpiForIncStmt:
+    \_operation: , line:16:39, endln:16:40
       |vpiParent:
-      \_range: , line:3:31, endln:3:40
-      |vpiOpType:11
+      \_gen_for: (work@flash_ctrl_info_cfg), line:16:3, endln:22:6
+      |vpiOpType:62
       |vpiOperand:
-      \_ref_obj: (work@flash_ctrl_info_cfg.InfoTypeSize.InfoTypes), line:3:31, endln:3:40
+      \_ref_obj: (work@flash_ctrl_info_cfg.i), line:16:39, endln:16:42
         |vpiParent:
-        \_operation: , line:3:31, endln:3:40
-        |vpiName:InfoTypes
-        |vpiFullName:work@flash_ctrl_info_cfg.InfoTypeSize.InfoTypes
-      |vpiOperand:
-      \_constant: 
-        |vpiParent:
-        \_operation: , line:3:31, endln:3:40
-        |vpiSize:64
-        |INT:1
-        |vpiConstType:7
-  |vpiElemTypespec:
-  \_ref_typespec: (work@flash_ctrl_info_cfg.InfoTypeSize)
+        \_gen_for: (work@flash_ctrl_info_cfg), line:16:3, endln:22:6
+        |vpiName:i
+        |vpiFullName:work@flash_ctrl_info_cfg.i
+        |vpiActual:
+        \_logic_net: (work@flash_ctrl_info_cfg.i), line:19:9, endln:19:10
+    |vpiStmt:
+    \_begin: (work@flash_ctrl_info_cfg.gen_info_priv), line:16:44, endln:22:6
+  |vpiTypedef:
+  \_import_typespec: (flash_ctrl_pkg), line:12:35, endln:12:52
+  |vpiTypedef:
+  \_int_typespec: , line:14:13, endln:14:16
     |vpiParent:
-    \_array_typespec: , line:3:13, endln:3:41
-    |vpiFullName:work@flash_ctrl_info_cfg.InfoTypeSize
-    |vpiActual:
-    \_int_typespec: , line:3:13, endln:3:16
-\_int_typespec: , line:3:13, endln:3:16
-  |vpiParent:
-  \_ref_typespec: (work@flash_ctrl_info_cfg.InfoTypeSize)
-  |vpiInstance:
-  \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
-  |vpiSigned:1
-\_int_typespec: , line:8:13, endln:8:16
-  |vpiParent:
-  \_ref_typespec: (work@flash_ctrl_info_cfg)
-  |vpiInstance:
-  \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
-  |vpiSigned:1
-\_int_typespec: , line:8:13, endln:8:16
-  |vpiParent:
-  \_ref_typespec: (work@flash_ctrl_info_cfg.InfosPerBank)
-  |vpiInstance:
-  \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
-  |vpiSigned:1
-\_int_typespec: , line:14:13, endln:14:16
-  |vpiParent:
-  \_parameter: (work@flash_ctrl_info_cfg.InfoSel), line:14:17, endln:14:24
-  |vpiSigned:1
-\_unsupported_typespec: (i), line:16:14, endln:16:15
-  |vpiName:i
-\_class_typespec: 
-  |vpiClassDefn:
-  \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:1:3, endln:27:11
-\_int_typespec: , line:3:19, endln:3:22
-  |vpiSigned:1
-\_int_typespec: , line:6:14, endln:6:17
-  |vpiSigned:1
-\_int_typespec: , line:18:14, endln:18:17
-  |vpiSigned:1
-\_int_typespec: , line:24:14, endln:24:17
-  |vpiSigned:1
-\_class_typespec: , line:34:21, endln:34:28
-  |vpiClassDefn:
-  \_class_defn: (work@process), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:30:3, endln:52:11
-\_class_typespec: 
-  |vpiClassDefn:
-  \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:55:3, endln:69:11
-\_int_typespec: , line:57:18, endln:57:21
-  |vpiSigned:1
-\_int_typespec: , line:60:14, endln:60:17
-  |vpiSigned:1
-\_int_typespec: , line:63:14, endln:63:17
-  |vpiSigned:1
-\_int_typespec: , line:66:14, endln:66:17
-  |vpiSigned:1
-\_int_typespec: , line:66:26, endln:66:29
-  |vpiSigned:1
+    \_module_inst: work@flash_ctrl_info_cfg (work@flash_ctrl_info_cfg), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:12:1, endln:24:10
+    |vpiSigned:1
+  |vpiTypedef:
+  \_unsupported_typespec: (i), line:16:14, endln:16:15
+    |vpiParent:
+    \_module_inst: work@flash_ctrl_info_cfg (work@flash_ctrl_info_cfg), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:12:1, endln:24:10
+    |vpiName:i
+  |vpiImportTypespec:
+  \_import_typespec: (flash_ctrl_pkg), line:12:35, endln:12:52
+  |vpiImportTypespec:
+  \_int_typespec: , line:14:13, endln:14:16
+  |vpiImportTypespec:
+  \_unsupported_typespec: (i), line:16:14, endln:16:15
+  |vpiImportTypespec:
+  \_logic_net: (work@flash_ctrl_info_cfg.i), line:19:9, endln:19:10
+    |vpiParent:
+    \_module_inst: work@flash_ctrl_info_cfg (work@flash_ctrl_info_cfg), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:12:1, endln:24:10
+    |vpiName:i
+    |vpiFullName:work@flash_ctrl_info_cfg.i
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@flash_ctrl_info_cfg.cfgs_o), line:20:20, endln:20:23
+    |vpiParent:
+    \_module_inst: work@flash_ctrl_info_cfg (work@flash_ctrl_info_cfg), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:12:1, endln:24:10
+    |vpiName:cfgs_o
+    |vpiFullName:work@flash_ctrl_info_cfg.cfgs_o
+    |vpiNetType:1
+  |vpiDefName:work@flash_ctrl_info_cfg
+  |vpiNet:
+  \_logic_net: (work@flash_ctrl_info_cfg.i), line:19:9, endln:19:10
+  |vpiNet:
+  \_logic_net: (work@flash_ctrl_info_cfg.cfgs_o), line:20:20, endln:20:23
+  |vpiContAssign:
+  \_cont_assign: , line:20:14, endln:20:28
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -1705,6 +1490,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv | ${SURELOG_DIR}/build/regression/ComplexBitSelect/roundtrip/builtin_000.sv | 0 | 0 |
-[roundtrip]: ${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv     | ${SURELOG_DIR}/build/regression/ComplexBitSelect/roundtrip/dut_000.sv     | 6 | 24 |
+[roundtrip]: ${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv | ${SURELOG_DIR}/build/regression/ComplexBitSelect/roundtrip/dut_000.sv | 11 | 24 |
 ============================== End RoundTrip Results ==============================

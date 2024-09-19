@@ -58,21 +58,27 @@ design                                                 1
 import_typespec                                        1
 initial                                                1
 module_inst                                            1
+source_file                                            1
 sys_func_call                                          1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SynthFilterDollarError/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/SynthFilterDollarError/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/SynthFilterDollarError/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/SynthFilterDollarError/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SynthFilterDollarError/dut.sv, line:3:1, endln:10:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
+  |vpiName:work@top
   |vpiTypedef:
+  \_import_typespec: (pack), line:4:10, endln:4:17
+  |vpiImportTypespec:
   \_import_typespec: (pack), line:4:10, endln:4:17
   |vpiDefName:work@top
   |vpiProcess:
@@ -84,6 +90,18 @@ design: (unnamed)
       |vpiParent:
       \_initial: , line:5:3, endln:7:6
       |vpiFullName:work@top
+      |vpiStmt:
+      \_sys_func_call: ($error), line:6:5, endln:6:15
+        |vpiParent:
+        \_begin: (work@top), line:5:11, endln:7:6
+        |vpiArgument:
+        \_constant: , line:6:12, endln:6:14
+          |vpiParent:
+          \_sys_func_call: ($error), line:6:5, endln:6:15
+          |vpiDecompile:""
+          |STRING:
+          |vpiConstType:6
+        |vpiName:$error
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -92,5 +110,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/SynthFilterDollarError/dut.sv | ${SURELOG_DIR}/build/regression/SynthFilterDollarError/roundtrip/dut_000.sv | 1 | 10 |
+[roundtrip]: ${SURELOG_DIR}/tests/SynthFilterDollarError/dut.sv | ${SURELOG_DIR}/build/regression/SynthFilterDollarError/roundtrip/dut_000.sv | 5 | 10 |
 ============================== End RoundTrip Results ==============================

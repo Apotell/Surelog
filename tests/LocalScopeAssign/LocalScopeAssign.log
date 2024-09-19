@@ -70,63 +70,189 @@ AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv:3:1: Compile module "work@module_scope_Example".
 [INF:UH0706] Creating UHDM Model...
-[ERR:EL0535] ${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv:7:37: Illegal implicit net "v2".
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                               4
+constant                                              12
 cont_assign                                            1
 design                                                 1
 hier_path                                              1
 logic_net                                              2
-logic_typespec                                         2
+logic_typespec                                         4
 module_inst                                            1
 port                                                   2
-range                                                  2
-ref_obj                                                5
-ref_typespec                                           2
+range                                                  6
+ref_obj                                                3
+ref_typespec                                           4
+source_file                                            1
 === UHDM Object Stats End ===
+[ERR:UH0734] ${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv:7:37: Failed to bind object: "id: 8, name: v2".
+[ERR:EL0535] ${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv:7:37: Illegal implicit net "id:8, name: v2".
+[ERR:IG0807] ${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv:4:16: Child 28 is not entirely in parent's scope.
+[ERR:IG0807] ${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv:4:16: Child 34 is not entirely in parent's scope.
+[ERR:IG0807] ${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv:4:11: Child 17 is not entirely in parent's scope.
+[ERR:IG0807] ${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv:4:11: Child 26 is not entirely in parent's scope.
+[ERR:IG0809] ${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv:7:37: Object 8 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LocalScopeAssign/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/LocalScopeAssign/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/LocalScopeAssign/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@module_scope_Example (work@module_scope_Example), file:${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv, line:3:1, endln:8:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@module_scope_Example
-  |vpiDefName:work@module_scope_Example
-  |vpiNet:
+  |vpiName:work@module_scope_Example
+  |vpiTypedef:
+  \_logic_typespec: , line:4:11, endln:4:22
+    |vpiParent:
+    \_module_inst: work@module_scope_Example (work@module_scope_Example), file:${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv, line:3:1, endln:8:10
+    |vpiRange:
+    \_range: , line:4:16, endln:4:22
+      |vpiParent:
+      \_module_inst: work@module_scope_Example (work@module_scope_Example), file:${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv, line:3:1, endln:8:10
+      |vpiLeftRange:
+      \_constant: , line:4:17, endln:4:19
+        |vpiParent:
+        \_range: , line:4:16, endln:4:22
+        |vpiDecompile:31
+        |vpiSize:64
+        |UINT:31
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:4:20, endln:4:21
+        |vpiParent:
+        \_range: , line:4:16, endln:4:22
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_logic_typespec: , line:4:11, endln:4:22
+    |vpiParent:
+    \_module_inst: work@module_scope_Example (work@module_scope_Example), file:${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv, line:3:1, endln:8:10
+    |vpiRange:
+    \_range: , line:4:16, endln:4:22
+      |vpiParent:
+      \_module_inst: work@module_scope_Example (work@module_scope_Example), file:${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv, line:3:1, endln:8:10
+      |vpiLeftRange:
+      \_constant: , line:4:17, endln:4:19
+        |vpiParent:
+        \_range: , line:4:16, endln:4:22
+        |vpiDecompile:31
+        |vpiSize:64
+        |UINT:31
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:4:20, endln:4:21
+        |vpiParent:
+        \_range: , line:4:16, endln:4:22
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_logic_typespec: , line:4:11, endln:4:22
+    |vpiParent:
+    \_module_inst: work@module_scope_Example (work@module_scope_Example), file:${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv, line:3:1, endln:8:10
+    |vpiRange:
+    \_range: , line:4:16, endln:4:22
+      |vpiParent:
+      \_port: (o1), line:3:29, endln:3:31
+      |vpiLeftRange:
+      \_constant: , line:4:17, endln:4:19
+        |vpiParent:
+        \_range: , line:4:16, endln:4:22
+        |vpiDecompile:31
+        |vpiSize:64
+        |UINT:31
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:4:20, endln:4:21
+        |vpiParent:
+        \_range: , line:4:16, endln:4:22
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_logic_typespec: , line:4:11, endln:4:22
+    |vpiParent:
+    \_module_inst: work@module_scope_Example (work@module_scope_Example), file:${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv, line:3:1, endln:8:10
+    |vpiRange:
+    \_range: , line:4:16, endln:4:22
+      |vpiParent:
+      \_port: (o2), line:3:33, endln:3:35
+      |vpiLeftRange:
+      \_constant: , line:4:17, endln:4:19
+        |vpiParent:
+        \_range: , line:4:16, endln:4:22
+        |vpiDecompile:31
+        |vpiSize:64
+        |UINT:31
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:4:20, endln:4:21
+        |vpiParent:
+        \_range: , line:4:16, endln:4:22
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_logic_typespec: , line:4:11, endln:4:22
+  |vpiImportTypespec:
   \_logic_net: (work@module_scope_Example.o1), line:3:29, endln:3:31
     |vpiParent:
     \_module_inst: work@module_scope_Example (work@module_scope_Example), file:${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv, line:3:1, endln:8:10
+    |vpiTypespec:
+    \_ref_typespec: (work@module_scope_Example.o1.o1), line:4:11, endln:4:15
+      |vpiParent:
+      \_logic_net: (work@module_scope_Example.o1), line:3:29, endln:3:31
+      |vpiName:o1
+      |vpiFullName:work@module_scope_Example.o1.o1
+      |vpiActual:
+      \_logic_typespec: , line:4:11, endln:4:22
     |vpiName:o1
     |vpiFullName:work@module_scope_Example.o1
     |vpiNetType:1
-  |vpiNet:
+  |vpiImportTypespec:
+  \_logic_typespec: , line:4:11, endln:4:22
+  |vpiImportTypespec:
   \_logic_net: (work@module_scope_Example.o2), line:3:33, endln:3:35
     |vpiParent:
     \_module_inst: work@module_scope_Example (work@module_scope_Example), file:${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv, line:3:1, endln:8:10
+    |vpiTypespec:
+    \_ref_typespec: (work@module_scope_Example.o2.o2), line:4:11, endln:4:15
+      |vpiParent:
+      \_logic_net: (work@module_scope_Example.o2), line:3:33, endln:3:35
+      |vpiName:o2
+      |vpiFullName:work@module_scope_Example.o2.o2
+      |vpiActual:
+      \_logic_typespec: , line:4:11, endln:4:22
     |vpiName:o2
     |vpiFullName:work@module_scope_Example.o2
     |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_typespec: , line:4:11, endln:4:22
+  |vpiImportTypespec:
+  \_logic_typespec: , line:4:11, endln:4:22
+  |vpiDefName:work@module_scope_Example
+  |vpiNet:
+  \_logic_net: (work@module_scope_Example.o1), line:3:29, endln:3:31
+  |vpiNet:
+  \_logic_net: (work@module_scope_Example.o2), line:3:33, endln:3:35
   |vpiPort:
   \_port: (o1), line:3:29, endln:3:31
     |vpiParent:
     \_module_inst: work@module_scope_Example (work@module_scope_Example), file:${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv, line:3:1, endln:8:10
     |vpiName:o1
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@module_scope_Example.o1.o1), line:3:29, endln:3:31
-      |vpiParent:
-      \_port: (o1), line:3:29, endln:3:31
-      |vpiName:o1
-      |vpiFullName:work@module_scope_Example.o1.o1
-      |vpiActual:
-      \_logic_net: (work@module_scope_Example.o1), line:3:29, endln:3:31
     |vpiTypedef:
-    \_ref_typespec: (work@module_scope_Example.o1)
+    \_ref_typespec: (work@module_scope_Example.o1), line:4:11, endln:4:15
       |vpiParent:
       \_port: (o1), line:3:29, endln:3:31
       |vpiFullName:work@module_scope_Example.o1
@@ -138,16 +264,8 @@ design: (unnamed)
     \_module_inst: work@module_scope_Example (work@module_scope_Example), file:${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv, line:3:1, endln:8:10
     |vpiName:o2
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@module_scope_Example.o2.o2), line:3:33, endln:3:35
-      |vpiParent:
-      \_port: (o2), line:3:33, endln:3:35
-      |vpiName:o2
-      |vpiFullName:work@module_scope_Example.o2.o2
-      |vpiActual:
-      \_logic_net: (work@module_scope_Example.o2), line:3:33, endln:3:35
     |vpiTypedef:
-    \_ref_typespec: (work@module_scope_Example.o2)
+    \_ref_typespec: (work@module_scope_Example.o2), line:4:11, endln:4:15
       |vpiParent:
       \_port: (o2), line:3:33, endln:3:35
       |vpiFullName:work@module_scope_Example.o2
@@ -164,70 +282,31 @@ design: (unnamed)
       |vpiName:v2
       |vpiFullName:work@module_scope_Example.v2
     |vpiLhs:
-    \_hier_path: (module_scope_Example.o2), line:7:11, endln:7:34
+    \_hier_path: (module_scope_Example.o2), line:7:31, endln:7:34
       |vpiParent:
-      \_cont_assign: , line:7:11, endln:7:39
+      \_module_inst: work@module_scope_Example (work@module_scope_Example), file:${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv, line:3:1, endln:8:10
       |vpiActual:
-      \_ref_obj: (module_scope_Example), line:7:32, endln:7:34
+      \_ref_obj: (module_scope_Example), line:7:31, endln:7:34
         |vpiParent:
-        \_hier_path: (module_scope_Example.o2), line:7:11, endln:7:34
+        \_hier_path: (module_scope_Example.o2), line:7:31, endln:7:34
         |vpiName:module_scope_Example
+        |vpiActual:
+        \_module_inst: work@module_scope_Example (work@module_scope_Example), file:${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv, line:3:1, endln:8:10
       |vpiActual:
       \_ref_obj: (o2), line:7:32, endln:7:34
         |vpiParent:
-        \_hier_path: (module_scope_Example.o2), line:7:11, endln:7:34
+        \_hier_path: (module_scope_Example.o2), line:7:31, endln:7:34
         |vpiName:o2
+        |vpiActual:
+        \_logic_net: (work@module_scope_Example.o2), line:3:33, endln:3:35
       |vpiName:module_scope_Example.o2
-\_weaklyReferenced:
-\_logic_typespec: , line:4:11, endln:4:22
-  |vpiRange:
-  \_range: , line:4:16, endln:4:22
-    |vpiParent:
-    \_logic_typespec: , line:4:11, endln:4:22
-    |vpiLeftRange:
-    \_constant: , line:4:17, endln:4:19
-      |vpiParent:
-      \_range: , line:4:16, endln:4:22
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:4:20, endln:4:21
-      |vpiParent:
-      \_range: , line:4:16, endln:4:22
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:4:11, endln:4:22
-  |vpiRange:
-  \_range: , line:4:16, endln:4:22
-    |vpiParent:
-    \_logic_typespec: , line:4:11, endln:4:22
-    |vpiLeftRange:
-    \_constant: , line:4:17, endln:4:19
-      |vpiParent:
-      \_range: , line:4:16, endln:4:22
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:4:20, endln:4:21
-      |vpiParent:
-      \_range: , line:4:16, endln:4:22
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 7
 [WARNING] : 1
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv | ${SURELOG_DIR}/build/regression/LocalScopeAssign/roundtrip/dut_000.sv | 3 | 8 |
+[roundtrip]: ${SURELOG_DIR}/tests/LocalScopeAssign/dut.sv | ${SURELOG_DIR}/build/regression/LocalScopeAssign/roundtrip/dut_000.sv | 5 | 8 |
 ============================== End RoundTrip Results ==============================

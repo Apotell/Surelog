@@ -79,8 +79,8 @@ n<> u<73> t<Package_item> p<150> c<72> s<91> l<7:1> el<13:9>
 n<uvm_component> u<74> t<StringConst> p<89> s<85> l<15:15> el<15:28>
 n<> u<75> t<Extern_qualifier> p<84> s<76> l<16:1> el<16:7>
 n<> u<76> t<MethodQualifier_Virtual> p<84> s<83> l<16:8> el<16:15>
-n<> u<77> t<String_type> p<78> l<16:25> el<16:31>
-n<> u<78> t<Data_type> p<79> c<77> l<16:25> el<16:31>
+n<string> u<77> t<String_type> p<78> l<16:25> el<16:31>
+n<string> u<78> t<Data_type> p<79> c<77> l<16:25> el<16:31>
 n<> u<79> t<Function_data_type> p<80> c<78> l<16:25> el<16:31>
 n<> u<80> t<Function_data_type_or_implicit> p<82> c<79> s<81> l<16:25> el<16:31>
 n<get_full_name> u<81> t<StringConst> p<82> l<16:32> el<16:45>
@@ -136,8 +136,8 @@ n<> u<130> t<Variable_declaration> p<131> c<126> l<27:12> el<27:49>
 n<> u<131> t<Data_declaration> p<132> c<130> l<27:12> el<27:49>
 n<> u<132> t<Class_property> p<133> c<124> l<27:1> el<27:49>
 n<> u<133> t<Class_item> p<146> c<132> s<143> l<27:1> el<27:49>
-n<> u<134> t<String_type> p<135> l<28:10> el<28:16>
-n<> u<135> t<Data_type> p<136> c<134> l<28:10> el<28:16>
+n<string> u<134> t<String_type> p<135> l<28:10> el<28:16>
+n<string> u<135> t<Data_type> p<136> c<134> l<28:10> el<28:16>
 n<> u<136> t<Function_data_type> p<137> c<135> l<28:10> el<28:16>
 n<> u<137> t<Function_data_type_or_implicit> p<140> c<136> s<138> l<28:10> el<28:16>
 n<get_full_name> u<138> t<StringConst> p<140> s<139> l<28:17> el<28:30>
@@ -168,16 +168,20 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 begin                                                  1
-class_defn                                            10
-class_typespec                                         2
+class_defn                                             6
+class_typespec                                         4
+class_var                                              2
 design                                                 1
+extends                                                4
 func_call                                              1
 function                                               2
+function_decl                                          1
 hier_path                                              1
 method_func_call                                       1
 package                                                1
 ref_obj                                                1
-ref_typespec                                           5
+ref_typespec                                          11
+source_file                                            1
 string_typespec                                        2
 string_var                                             2
 task                                                   1
@@ -185,48 +189,98 @@ type_parameter                                         3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassExtendParam/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ClassExtendParam/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ClassExtendParam/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallPackages:
 \_package: uvm (uvm::), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:1:1, endln:33:11
   |vpiParent:
   \_design: (unnamed)
   |vpiName:uvm
   |vpiFullName:uvm::
-  |vpiDefName:uvm
-  |vpiClassDefn:
-  \_class_defn: (uvm::uvm_component), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:15:9, endln:17:9
+  |vpiInternalScope:
+  \_class_defn: (uvm::uvm_sequence), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:3:1, endln:5:9
     |vpiParent:
     \_package: uvm (uvm::), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:1:1, endln:33:11
-    |vpiName:uvm_component
-    |vpiFullName:uvm::uvm_component
-    |vpiVirtual:1
-    |vpiMethod:
-    \_function: (uvm::uvm_component::get_full_name), line:16:1, endln:16:7
+    |vpiName:uvm_sequence
+    |vpiFullName:uvm::uvm_sequence
+    |vpiParameter:
+    \_type_parameter: (uvm::uvm_sequence::REQ), line:3:35, endln:3:38
       |vpiParent:
-      \_class_defn: (uvm::uvm_component), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:15:9, endln:17:9
-      |vpiName:get_full_name
-      |vpiFullName:uvm::uvm_component::get_full_name
-      |vpiMethod:1
-      |vpiAccessType:2
-      |vpiVisibility:1
-      |vpiVirtual:1
-      |vpiReturn:
-      \_string_var: (uvm::uvm_component::get_full_name), line:16:25, endln:16:31
+      \_class_defn: (uvm::uvm_sequence), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:3:1, endln:5:9
+      |vpiName:REQ
+      |vpiFullName:uvm::uvm_sequence::REQ
+      |vpiTypespec:
+      \_ref_typespec: (uvm::uvm_sequence::REQ::uvm_sequence_item), line:3:41, endln:3:58
         |vpiParent:
-        \_function: (uvm::uvm_component::get_full_name), line:16:1, endln:16:7
-        |vpiTypespec:
-        \_ref_typespec: (uvm::uvm_component::get_full_name)
-          |vpiParent:
-          \_string_var: (uvm::uvm_component::get_full_name), line:16:25, endln:16:31
-          |vpiFullName:uvm::uvm_component::get_full_name
-          |vpiActual:
-          \_string_typespec: , line:16:25, endln:16:31
-        |vpiFullName:uvm::uvm_component::get_full_name
-  |vpiClassDefn:
+        \_type_parameter: (uvm::uvm_sequence::REQ), line:3:35, endln:3:38
+        |vpiName:uvm_sequence_item
+        |vpiFullName:uvm::uvm_sequence::REQ::uvm_sequence_item
+        |vpiActual:
+        \_class_typespec: (uvm_sequence_item), line:3:41, endln:3:58
+    |vpiParameter:
+    \_type_parameter: (uvm::uvm_sequence::RSP), line:4:35, endln:4:38
+      |vpiParent:
+      \_class_defn: (uvm::uvm_sequence), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:3:1, endln:5:9
+      |vpiName:RSP
+      |vpiFullName:uvm::uvm_sequence::RSP
+      |vpiTypespec:
+      \_ref_typespec: (uvm::uvm_sequence::RSP::REQ), line:4:41, endln:4:44
+        |vpiParent:
+        \_type_parameter: (uvm::uvm_sequence::RSP), line:4:35, endln:4:38
+        |vpiName:REQ
+        |vpiFullName:uvm::uvm_sequence::RSP::REQ
+        |vpiActual:
+        \_type_parameter: (uvm::uvm_sequence::REQ), line:3:35, endln:3:38
+    |vpiTypedef:
+    \_class_typespec: (uvm_sequence_item), line:3:41, endln:3:58
+      |vpiParent:
+      \_class_defn: (uvm::uvm_sequence), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:3:1, endln:5:9
+      |vpiName:uvm_sequence_item
+      |vpiClassDefn:
+      \_class_defn: (uvm::uvm_sequence_item), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:25:1, endln:31:9
+    |vpiTypedef:
+    \_type_parameter: (uvm::uvm_sequence::REQ), line:3:35, endln:3:38
+    |vpiTypedef:
+    \_type_parameter: (uvm::uvm_sequence::RSP), line:4:35, endln:4:38
+    |vpiTypedef:
+    \_class_typespec: (uvm_sequence_base), line:4:54, endln:4:71
+      |vpiParent:
+      \_class_defn: (uvm::uvm_sequence), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:3:1, endln:5:9
+      |vpiName:uvm_sequence_base
+      |vpiClassDefn:
+      \_class_defn: (uvm::uvm_sequence_base), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:22:1, endln:23:9
+    |vpiImportTypespec:
+    \_class_typespec: (uvm_sequence_item), line:3:41, endln:3:58
+    |vpiImportTypespec:
+    \_type_parameter: (uvm::uvm_sequence::REQ), line:3:35, endln:3:38
+    |vpiImportTypespec:
+    \_type_parameter: (uvm::uvm_sequence::RSP), line:4:35, endln:4:38
+    |vpiImportTypespec:
+    \_class_typespec: (uvm_sequence_base), line:4:54, endln:4:71
+    |vpiVirtual:1
+    |vpiExtends:
+    \_extends: , line:4:54, endln:4:71
+      |vpiParent:
+      \_class_defn: (uvm::uvm_sequence), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:3:1, endln:5:9
+      |vpiClassTypespec:
+      \_ref_typespec: (uvm::uvm_sequence::uvm_sequence_base), line:4:54, endln:4:71
+        |vpiParent:
+        \_extends: , line:4:54, endln:4:71
+        |vpiName:uvm_sequence_base
+        |vpiFullName:uvm::uvm_sequence::uvm_sequence_base
+        |vpiActual:
+        \_class_typespec: (uvm_sequence_base), line:4:54, endln:4:71
+    |vpiClassTypespec:
+    \_class_typespec: (uvm_sequence_item), line:3:41, endln:3:58
+    |vpiClassTypespec:
+    \_class_typespec: (uvm_sequence_base), line:4:54, endln:4:71
+  |vpiInternalScope:
   \_class_defn: (uvm::uvm_reg_sequence), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:7:1, endln:13:9
     |vpiParent:
     \_package: uvm (uvm::), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:1:1, endln:33:11
@@ -239,22 +293,20 @@ design: (unnamed)
       |vpiName:BASE
       |vpiFullName:uvm::uvm_reg_sequence::BASE
       |vpiTypespec:
-      \_ref_typespec: (uvm::uvm_reg_sequence::BASE)
+      \_ref_typespec: (uvm::uvm_reg_sequence::BASE::uvm_sequence), line:7:36, endln:7:48
         |vpiParent:
         \_type_parameter: (uvm::uvm_reg_sequence::BASE), line:7:31, endln:7:35
-        |vpiFullName:uvm::uvm_reg_sequence::BASE
+        |vpiName:uvm_sequence
+        |vpiFullName:uvm::uvm_reg_sequence::BASE::uvm_sequence
         |vpiActual:
         \_class_typespec: (uvm_sequence), line:7:36, endln:7:48
-    |vpiMethod:
+    |vpiInternalScope:
     \_task: (uvm::uvm_reg_sequence::body), line:8:1, endln:12:8
       |vpiParent:
       \_class_defn: (uvm::uvm_reg_sequence), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:7:1, endln:13:9
       |vpiName:body
       |vpiFullName:uvm::uvm_reg_sequence::body
-      |vpiMethod:1
-      |vpiVisibility:1
-      |vpiVirtual:1
-      |vpiStmt:
+      |vpiInternalScope:
       \_begin: (uvm::uvm_reg_sequence::body), line:9:1, endln:11:4
         |vpiParent:
         \_task: (uvm::uvm_reg_sequence::body), line:8:1, endln:12:8
@@ -272,100 +324,290 @@ design: (unnamed)
               |vpiParent:
               \_hier_path: (m_sequencer.get_full_name), line:10:24, endln:10:51
               |vpiName:m_sequencer
+              |vpiActual:
+              \_class_var: (uvm::uvm_sequence_item::m_sequencer), line:26:31, endln:26:42
             |vpiActual:
-            \_method_func_call: (get_full_name), line:10:36, endln:10:49
+            \_method_func_call: (get_full_name), line:10:36, endln:10:51
               |vpiParent:
               \_hier_path: (m_sequencer.get_full_name), line:10:24, endln:10:51
               |vpiName:get_full_name
             |vpiName:m_sequencer.get_full_name
           |vpiName:uvm_report_warning
-  |vpiClassDefn:
-  \_class_defn: (uvm::uvm_sequence), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:3:9, endln:5:9
+      |vpiMethod:1
+      |vpiVisibility:1
+      |vpiVirtual:1
+      |vpiStmt:
+      \_begin: (uvm::uvm_reg_sequence::body), line:9:1, endln:11:4
+    |vpiTypedef:
+    \_class_typespec: (uvm_sequence), line:7:36, endln:7:48
+      |vpiParent:
+      \_class_defn: (uvm::uvm_reg_sequence), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:7:1, endln:13:9
+      |vpiName:uvm_sequence
+      |vpiClassDefn:
+      \_class_defn: (uvm::uvm_sequence), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:3:1, endln:5:9
+    |vpiTypedef:
+    \_type_parameter: (uvm::uvm_reg_sequence::BASE), line:7:31, endln:7:35
+    |vpiImportTypespec:
+    \_class_typespec: (uvm_sequence), line:7:36, endln:7:48
+    |vpiImportTypespec:
+    \_type_parameter: (uvm::uvm_reg_sequence::BASE), line:7:31, endln:7:35
+    |vpiImportTypespec:
+    \_task: (uvm::uvm_reg_sequence::body), line:8:1, endln:12:8
+    |vpiExtends:
+    \_extends: , line:7:74, endln:7:78
+      |vpiParent:
+      \_class_defn: (uvm::uvm_reg_sequence), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:7:1, endln:13:9
+      |vpiClassTypespec:
+      \_ref_typespec: (uvm::uvm_reg_sequence::BASE), line:7:74, endln:7:78
+        |vpiParent:
+        \_extends: , line:7:74, endln:7:78
+        |vpiName:BASE
+        |vpiFullName:uvm::uvm_reg_sequence::BASE
+        |vpiActual:
+        \_type_parameter: (uvm::uvm_reg_sequence::BASE), line:7:31, endln:7:35
+    |vpiMethod:
+    \_task: (uvm::uvm_reg_sequence::body), line:8:1, endln:12:8
+    |vpiClassTypespec:
+    \_class_typespec: (uvm_sequence), line:7:36, endln:7:48
+  |vpiInternalScope:
+  \_class_defn: (uvm::uvm_component), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:15:1, endln:17:9
     |vpiParent:
     \_package: uvm (uvm::), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:1:1, endln:33:11
-    |vpiName:uvm_sequence
-    |vpiFullName:uvm::uvm_sequence
-    |vpiParameter:
-    \_type_parameter: (uvm::uvm_sequence::REQ), line:3:35, endln:3:38
+    |vpiName:uvm_component
+    |vpiFullName:uvm::uvm_component
+    |vpiInternalScope:
+    \_function: (uvm::uvm_component::get_full_name), line:16:1, endln:16:49
       |vpiParent:
-      \_class_defn: (uvm::uvm_sequence), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:3:9, endln:5:9
-      |vpiName:REQ
-      |vpiFullName:uvm::uvm_sequence::REQ
-      |vpiTypespec:
-      \_ref_typespec: (uvm::uvm_sequence::REQ)
+      \_class_defn: (uvm::uvm_component), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:15:1, endln:17:9
+      |vpiName:get_full_name
+      |vpiFullName:uvm::uvm_component::get_full_name
+      |vpiVariables:
+      \_string_var: (uvm::uvm_component::get_full_name), line:16:25, endln:16:31
         |vpiParent:
-        \_type_parameter: (uvm::uvm_sequence::REQ), line:3:35, endln:3:38
-        |vpiFullName:uvm::uvm_sequence::REQ
-        |vpiActual:
-        \_class_typespec: (uvm_sequence_item), line:3:41, endln:3:58
-    |vpiParameter:
-    \_type_parameter: (uvm::uvm_sequence::RSP), line:4:35, endln:4:38
-      |vpiParent:
-      \_class_defn: (uvm::uvm_sequence), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:3:9, endln:5:9
-      |vpiName:RSP
-      |vpiFullName:uvm::uvm_sequence::RSP
-      |vpiTypespec:
-      \_ref_typespec: (uvm::uvm_sequence::RSP)
+        \_function: (uvm::uvm_component::get_full_name), line:16:1, endln:16:49
+        |vpiTypespec:
+        \_ref_typespec: (uvm::uvm_component::get_full_name), line:16:25, endln:16:31
+          |vpiParent:
+          \_string_var: (uvm::uvm_component::get_full_name), line:16:25, endln:16:31
+          |vpiFullName:uvm::uvm_component::get_full_name
+          |vpiActual:
+          \_string_typespec: , line:16:25, endln:16:31
+        |vpiFullName:uvm::uvm_component::get_full_name
+      |vpiTypedef:
+      \_string_typespec: , line:16:25, endln:16:31
         |vpiParent:
-        \_type_parameter: (uvm::uvm_sequence::RSP), line:4:35, endln:4:38
-        |vpiFullName:uvm::uvm_sequence::RSP
-        |vpiActual:
-        \_class_typespec: (uvm_sequence_item), line:3:41, endln:3:58
+        \_function: (uvm::uvm_component::get_full_name), line:16:1, endln:16:49
+      |vpiImportTypespec:
+      \_string_typespec: , line:16:25, endln:16:31
+      |vpiImportTypespec:
+      \_string_var: (uvm::uvm_component::get_full_name), line:16:25, endln:16:31
+      |vpiMethod:1
+      |vpiAccessType:2
+      |vpiVisibility:1
+      |vpiVirtual:1
+      |vpiReturn:
+      \_string_var: (uvm::uvm_component::get_full_name), line:16:25, endln:16:31
+    |vpiImportTypespec:
+    \_function: (uvm::uvm_component::get_full_name), line:16:1, endln:16:49
     |vpiVirtual:1
-  |vpiClassDefn:
-  \_class_defn: (uvm::uvm_sequence_base), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:22:9, endln:23:9
+    |vpiMethod:
+    \_function: (uvm::uvm_component::get_full_name), line:16:1, endln:16:49
+    |vpiTaskFuncDecl:
+    \_function_decl: (uvm::uvm_component::get_full_name), line:16:1, endln:16:49
+      |vpiParent:
+      \_class_defn: (uvm::uvm_component), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:15:1, endln:17:9
+      |vpiName:get_full_name
+      |vpiFullName:uvm::uvm_component::get_full_name
+      |vpiTaskFunc:
+      \_function: (uvm::uvm_component::get_full_name), line:16:1, endln:16:49
+    |vpiDerivedClasses:
+    \_class_defn: (uvm::uvm_sequencer_base), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:19:1, endln:20:9
+      |vpiParent:
+      \_package: uvm (uvm::), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:1:1, endln:33:11
+      |vpiName:uvm_sequencer_base
+      |vpiFullName:uvm::uvm_sequencer_base
+      |vpiTypedef:
+      \_class_typespec: (uvm_component), line:19:34, endln:19:47
+        |vpiParent:
+        \_class_defn: (uvm::uvm_sequencer_base), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:19:1, endln:20:9
+        |vpiName:uvm_component
+        |vpiClassDefn:
+        \_class_defn: (uvm::uvm_component), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:15:1, endln:17:9
+      |vpiImportTypespec:
+      \_class_typespec: (uvm_component), line:19:34, endln:19:47
+      |vpiExtends:
+      \_extends: , line:19:34, endln:19:47
+        |vpiParent:
+        \_class_defn: (uvm::uvm_sequencer_base), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:19:1, endln:20:9
+        |vpiClassTypespec:
+        \_ref_typespec: (uvm::uvm_sequencer_base::uvm_component), line:19:34, endln:19:47
+          |vpiParent:
+          \_extends: , line:19:34, endln:19:47
+          |vpiName:uvm_component
+          |vpiFullName:uvm::uvm_sequencer_base::uvm_component
+          |vpiActual:
+          \_class_typespec: (uvm_component), line:19:34, endln:19:47
+      |vpiClassTypespec:
+      \_class_typespec: (uvm_component), line:19:34, endln:19:47
+  |vpiInternalScope:
+  \_class_defn: (uvm::uvm_sequencer_base), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:19:1, endln:20:9
+  |vpiInternalScope:
+  \_class_defn: (uvm::uvm_sequence_base), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:22:1, endln:23:9
     |vpiParent:
     \_package: uvm (uvm::), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:1:1, endln:33:11
     |vpiName:uvm_sequence_base
     |vpiFullName:uvm::uvm_sequence_base
+    |vpiTypedef:
+    \_class_typespec: (uvm_sequence_item), line:22:41, endln:22:58
+      |vpiParent:
+      \_class_defn: (uvm::uvm_sequence_base), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:22:1, endln:23:9
+      |vpiName:uvm_sequence_item
+      |vpiClassDefn:
+      \_class_defn: (uvm::uvm_sequence_item), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:25:1, endln:31:9
+    |vpiImportTypespec:
+    \_class_typespec: (uvm_sequence_item), line:22:41, endln:22:58
     |vpiVirtual:1
-  |vpiClassDefn:
+    |vpiExtends:
+    \_extends: , line:22:41, endln:22:58
+      |vpiParent:
+      \_class_defn: (uvm::uvm_sequence_base), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:22:1, endln:23:9
+      |vpiClassTypespec:
+      \_ref_typespec: (uvm::uvm_sequence_base::uvm_sequence_item), line:22:41, endln:22:58
+        |vpiParent:
+        \_extends: , line:22:41, endln:22:58
+        |vpiName:uvm_sequence_item
+        |vpiFullName:uvm::uvm_sequence_base::uvm_sequence_item
+        |vpiActual:
+        \_class_typespec: (uvm_sequence_item), line:22:41, endln:22:58
+    |vpiDerivedClasses:
+    \_class_defn: (uvm::uvm_sequence), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:3:1, endln:5:9
+    |vpiClassTypespec:
+    \_class_typespec: (uvm_sequence_item), line:22:41, endln:22:58
+  |vpiInternalScope:
   \_class_defn: (uvm::uvm_sequence_item), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:25:1, endln:31:9
     |vpiParent:
     \_package: uvm (uvm::), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:1:1, endln:33:11
     |vpiName:uvm_sequence_item
     |vpiFullName:uvm::uvm_sequence_item
-    |vpiMethod:
+    |vpiVariables:
+    \_class_var: (uvm::uvm_sequence_item::m_sequencer), line:26:31, endln:26:42
+      |vpiParent:
+      \_class_defn: (uvm::uvm_sequence_item), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:25:1, endln:31:9
+      |vpiTypespec:
+      \_ref_typespec: (uvm::uvm_sequence_item::m_sequencer::uvm_sequencer_base), line:26:12, endln:26:30
+        |vpiParent:
+        \_class_var: (uvm::uvm_sequence_item::m_sequencer), line:26:31, endln:26:42
+        |vpiName:uvm_sequencer_base
+        |vpiFullName:uvm::uvm_sequence_item::m_sequencer::uvm_sequencer_base
+        |vpiActual:
+        \_class_typespec: (uvm_sequencer_base), line:26:12, endln:26:30
+      |vpiName:m_sequencer
+      |vpiFullName:uvm::uvm_sequence_item::m_sequencer
+      |vpiAutomatic:1
+      |vpiVisibility:2
+    |vpiVariables:
+    \_class_var: (uvm::uvm_sequence_item::m_parent_sequence), line:27:31, endln:27:48
+      |vpiParent:
+      \_class_defn: (uvm::uvm_sequence_item), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:25:1, endln:31:9
+      |vpiTypespec:
+      \_ref_typespec: (uvm::uvm_sequence_item::m_parent_sequence::uvm_sequence_base), line:27:12, endln:27:29
+        |vpiParent:
+        \_class_var: (uvm::uvm_sequence_item::m_parent_sequence), line:27:31, endln:27:48
+        |vpiName:uvm_sequence_base
+        |vpiFullName:uvm::uvm_sequence_item::m_parent_sequence::uvm_sequence_base
+        |vpiActual:
+        \_class_typespec: (uvm_sequence_base), line:27:12, endln:27:29
+      |vpiName:m_parent_sequence
+      |vpiFullName:uvm::uvm_sequence_item::m_parent_sequence
+      |vpiAutomatic:1
+      |vpiVisibility:2
+    |vpiInternalScope:
     \_function: (uvm::uvm_sequence_item::get_full_name), line:28:1, endln:29:12
       |vpiParent:
       \_class_defn: (uvm::uvm_sequence_item), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:25:1, endln:31:9
       |vpiName:get_full_name
       |vpiFullName:uvm::uvm_sequence_item::get_full_name
-      |vpiMethod:1
-      |vpiVisibility:1
-      |vpiReturn:
+      |vpiVariables:
       \_string_var: (uvm::uvm_sequence_item::get_full_name), line:28:10, endln:28:16
         |vpiParent:
         \_function: (uvm::uvm_sequence_item::get_full_name), line:28:1, endln:29:12
         |vpiTypespec:
-        \_ref_typespec: (uvm::uvm_sequence_item::get_full_name)
+        \_ref_typespec: (uvm::uvm_sequence_item::get_full_name), line:28:10, endln:28:16
           |vpiParent:
           \_string_var: (uvm::uvm_sequence_item::get_full_name), line:28:10, endln:28:16
           |vpiFullName:uvm::uvm_sequence_item::get_full_name
           |vpiActual:
           \_string_typespec: , line:28:10, endln:28:16
         |vpiFullName:uvm::uvm_sequence_item::get_full_name
+      |vpiTypedef:
+      \_string_typespec: , line:28:10, endln:28:16
+        |vpiParent:
+        \_function: (uvm::uvm_sequence_item::get_full_name), line:28:1, endln:29:12
+      |vpiImportTypespec:
+      \_string_typespec: , line:28:10, endln:28:16
+      |vpiImportTypespec:
+      \_string_var: (uvm::uvm_sequence_item::get_full_name), line:28:10, endln:28:16
+      |vpiMethod:1
+      |vpiVisibility:1
+      |vpiReturn:
+      \_string_var: (uvm::uvm_sequence_item::get_full_name), line:28:10, endln:28:16
+    |vpiTypedef:
+    \_class_typespec: (uvm_sequencer_base), line:26:12, endln:26:30
+      |vpiParent:
+      \_class_defn: (uvm::uvm_sequence_item), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:25:1, endln:31:9
+      |vpiName:uvm_sequencer_base
+      |vpiClassDefn:
+      \_class_defn: (uvm::uvm_sequencer_base), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:19:1, endln:20:9
+    |vpiTypedef:
+    \_class_typespec: (uvm_sequence_base), line:27:12, endln:27:29
+      |vpiParent:
+      \_class_defn: (uvm::uvm_sequence_item), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:25:1, endln:31:9
+      |vpiName:uvm_sequence_base
+      |vpiClassDefn:
+      \_class_defn: (uvm::uvm_sequence_base), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:22:1, endln:23:9
+    |vpiImportTypespec:
+    \_function: (uvm::uvm_sequence_item::get_full_name), line:28:1, endln:29:12
+    |vpiImportTypespec:
+    \_class_typespec: (uvm_sequencer_base), line:26:12, endln:26:30
+    |vpiImportTypespec:
+    \_class_var: (uvm::uvm_sequence_item::m_sequencer), line:26:31, endln:26:42
+    |vpiImportTypespec:
+    \_class_typespec: (uvm_sequence_base), line:27:12, endln:27:29
+    |vpiImportTypespec:
+    \_class_var: (uvm::uvm_sequence_item::m_parent_sequence), line:27:31, endln:27:48
+    |vpiMethod:
+    \_function: (uvm::uvm_sequence_item::get_full_name), line:28:1, endln:29:12
+    |vpiDerivedClasses:
+    \_class_defn: (uvm::uvm_sequence_base), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:22:1, endln:23:9
+    |vpiClassTypespec:
+    \_class_typespec: (uvm_sequencer_base), line:26:12, endln:26:30
+    |vpiClassTypespec:
+    \_class_typespec: (uvm_sequence_base), line:27:12, endln:27:29
+  |vpiImportTypespec:
+  \_class_defn: (uvm::uvm_sequence), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:3:1, endln:5:9
+  |vpiImportTypespec:
+  \_class_defn: (uvm::uvm_reg_sequence), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:7:1, endln:13:9
+  |vpiImportTypespec:
+  \_class_defn: (uvm::uvm_component), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:15:1, endln:17:9
+  |vpiImportTypespec:
+  \_class_defn: (uvm::uvm_sequencer_base), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:19:1, endln:20:9
+  |vpiImportTypespec:
+  \_class_defn: (uvm::uvm_sequence_base), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:22:1, endln:23:9
+  |vpiImportTypespec:
+  \_class_defn: (uvm::uvm_sequence_item), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:25:1, endln:31:9
+  |vpiDefName:uvm
+  |vpiClassDefn:
+  \_class_defn: (uvm::uvm_sequence), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:3:1, endln:5:9
+  |vpiClassDefn:
+  \_class_defn: (uvm::uvm_reg_sequence), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:7:1, endln:13:9
+  |vpiClassDefn:
+  \_class_defn: (uvm::uvm_component), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:15:1, endln:17:9
   |vpiClassDefn:
   \_class_defn: (uvm::uvm_sequencer_base), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:19:1, endln:20:9
-    |vpiParent:
-    \_package: uvm (uvm::), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:1:1, endln:33:11
-    |vpiName:uvm_sequencer_base
-    |vpiFullName:uvm::uvm_sequencer_base
-\_weaklyReferenced:
-\_string_typespec: , line:16:25, endln:16:31
-\_class_typespec: (uvm_sequence), line:7:36, endln:7:48
-  |vpiParent:
-  \_type_parameter: (uvm::uvm_reg_sequence::BASE), line:7:31, endln:7:35
-  |vpiName:uvm_sequence
   |vpiClassDefn:
-  \_class_defn: (uvm::uvm_sequence), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:3:9, endln:5:9
-\_class_typespec: (uvm_sequence_item), line:3:41, endln:3:58
-  |vpiParent:
-  \_type_parameter: (uvm::uvm_sequence::RSP), line:4:35, endln:4:38
-  |vpiName:uvm_sequence_item
+  \_class_defn: (uvm::uvm_sequence_base), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:22:1, endln:23:9
   |vpiClassDefn:
   \_class_defn: (uvm::uvm_sequence_item), file:${SURELOG_DIR}/tests/ClassExtendParam/dut.sv, line:25:1, endln:31:9
-\_string_typespec: , line:28:10, endln:28:16
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -374,15 +616,17 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
-[LINT]: ${SURELOG_DIR}/tests/ClassExtendParam/dut.sv:15:9: Non synthesizable construct, uvm_component
-[LINT]: ${SURELOG_DIR}/tests/ClassExtendParam/dut.sv:3:9: Non synthesizable construct, uvm_sequence
-[LINT]: ${SURELOG_DIR}/tests/ClassExtendParam/dut.sv:10:36: Non synthesizable construct, get_full_name
-[LINT]: ${SURELOG_DIR}/tests/ClassExtendParam/dut.sv:7:1: Non synthesizable construct, uvm_reg_sequence
 [LINT]: ${SURELOG_DIR}/tests/ClassExtendParam/dut.sv:25:1: Non synthesizable construct, uvm_sequence_item
-[LINT]: ${SURELOG_DIR}/tests/ClassExtendParam/dut.sv:22:9: Non synthesizable construct, uvm_sequence_base
+[LINT]: ${SURELOG_DIR}/tests/ClassExtendParam/dut.sv:22:1: Non synthesizable construct, uvm_sequence_base
+[LINT]: ${SURELOG_DIR}/tests/ClassExtendParam/dut.sv:4:54: Non synthesizable construct,
+[LINT]: ${SURELOG_DIR}/tests/ClassExtendParam/dut.sv:3:1: Non synthesizable construct, uvm_sequence
 [LINT]: ${SURELOG_DIR}/tests/ClassExtendParam/dut.sv:19:1: Non synthesizable construct, uvm_sequencer_base
+[LINT]: ${SURELOG_DIR}/tests/ClassExtendParam/dut.sv:10:36: Non synthesizable construct, get_full_name
+[LINT]: ${SURELOG_DIR}/tests/ClassExtendParam/dut.sv:7:74: Non synthesizable construct,
+[LINT]: ${SURELOG_DIR}/tests/ClassExtendParam/dut.sv:7:1: Non synthesizable construct, uvm_reg_sequence
+[LINT]: ${SURELOG_DIR}/tests/ClassExtendParam/dut.sv:15:1: Non synthesizable construct, uvm_component
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ClassExtendParam/dut.sv | ${SURELOG_DIR}/build/regression/ClassExtendParam/roundtrip/dut_000.sv | 9 | 33 |
+[roundtrip]: ${SURELOG_DIR}/tests/ClassExtendParam/dut.sv | ${SURELOG_DIR}/build/regression/ClassExtendParam/roundtrip/dut_000.sv | 11 | 33 |
 ============================== End RoundTrip Results ==============================

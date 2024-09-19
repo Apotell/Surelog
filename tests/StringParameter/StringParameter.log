@@ -13,47 +13,35 @@ module_inst                                            2
 param_assign                                           2
 parameter                                              2
 ref_module                                             1
-ref_typespec                                           4
-string_typespec                                        2
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/StringParameter/slpp_unit/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/StringParameter/slpp_unit/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/StringParameter/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/StringParameter/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@parameter_module (work@parameter_module), file:${SURELOG_DIR}/tests/StringParameter/dut.sv, line:8:1, endln:11:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@parameter_module
+  |vpiName:work@parameter_module
   |vpiParameter:
-  \_parameter: (work@parameter_module.FIRSTPARAMETER), line:9:11, endln:9:25
+  \_parameter: (work@parameter_module.FIRSTPARAMETER), line:9:11, endln:9:40
     |vpiParent:
     \_module_inst: work@parameter_module (work@parameter_module), file:${SURELOG_DIR}/tests/StringParameter/dut.sv, line:8:1, endln:11:10
     |STRING:FIRSTVALUE
-    |vpiTypespec:
-    \_ref_typespec: (work@parameter_module.FIRSTPARAMETER)
-      |vpiParent:
-      \_parameter: (work@parameter_module.FIRSTPARAMETER), line:9:11, endln:9:25
-      |vpiFullName:work@parameter_module.FIRSTPARAMETER
-      |vpiActual:
-      \_string_typespec: 
     |vpiName:FIRSTPARAMETER
     |vpiFullName:work@parameter_module.FIRSTPARAMETER
   |vpiParameter:
-  \_parameter: (work@parameter_module.SECONDPARAMETER), line:10:11, endln:10:26
+  \_parameter: (work@parameter_module.SECONDPARAMETER), line:10:11, endln:10:42
     |vpiParent:
     \_module_inst: work@parameter_module (work@parameter_module), file:${SURELOG_DIR}/tests/StringParameter/dut.sv, line:8:1, endln:11:10
     |STRING:SECONDVALUE
-    |vpiTypespec:
-    \_ref_typespec: (work@parameter_module.SECONDPARAMETER)
-      |vpiParent:
-      \_parameter: (work@parameter_module.SECONDPARAMETER), line:10:11, endln:10:26
-      |vpiFullName:work@parameter_module.SECONDPARAMETER
-      |vpiActual:
-      \_string_typespec: 
     |vpiName:SECONDPARAMETER
     |vpiFullName:work@parameter_module.SECONDPARAMETER
   |vpiParamAssign:
@@ -67,16 +55,9 @@ design: (unnamed)
       |vpiDecompile:"FIRSTVALUE"
       |vpiSize:80
       |STRING:FIRSTVALUE
-      |vpiTypespec:
-      \_ref_typespec: (work@parameter_module)
-        |vpiParent:
-        \_constant: , line:9:28, endln:9:40
-        |vpiFullName:work@parameter_module
-        |vpiActual:
-        \_string_typespec: 
       |vpiConstType:6
     |vpiLhs:
-    \_parameter: (work@parameter_module.FIRSTPARAMETER), line:9:11, endln:9:25
+    \_parameter: (work@parameter_module.FIRSTPARAMETER), line:9:11, endln:9:40
   |vpiParamAssign:
   \_param_assign: , line:10:11, endln:10:42
     |vpiParent:
@@ -88,34 +69,24 @@ design: (unnamed)
       |vpiDecompile:"SECONDVALUE"
       |vpiSize:88
       |STRING:SECONDVALUE
-      |vpiTypespec:
-      \_ref_typespec: (work@parameter_module)
-        |vpiParent:
-        \_constant: , line:10:29, endln:10:42
-        |vpiFullName:work@parameter_module
-        |vpiActual:
-        \_string_typespec: 
       |vpiConstType:6
     |vpiLhs:
-    \_parameter: (work@parameter_module.SECONDPARAMETER), line:10:11, endln:10:26
+    \_parameter: (work@parameter_module.SECONDPARAMETER), line:10:11, endln:10:42
   |vpiDefName:work@parameter_module
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/StringParameter/dut.sv, line:1:1, endln:6:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
+  |vpiName:work@top
   |vpiDefName:work@top
   |vpiRefModule:
-  \_ref_module: work@parameter_module (test_module), line:5:11, endln:5:22
+  \_ref_module: work@parameter_module (test_module), line:2:9, endln:5:26
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/StringParameter/dut.sv, line:1:1, endln:6:10
     |vpiName:test_module
     |vpiDefName:work@parameter_module
     |vpiActual:
     \_module_inst: work@parameter_module (work@parameter_module), file:${SURELOG_DIR}/tests/StringParameter/dut.sv, line:8:1, endln:11:10
-\_weaklyReferenced:
-\_string_typespec: 
-\_string_typespec: 
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -124,5 +95,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/StringParameter/dut.sv | ${SURELOG_DIR}/build/regression/StringParameter/roundtrip/dut_000.sv | 4 | 11 |
+[roundtrip]: ${SURELOG_DIR}/tests/StringParameter/dut.sv | ${SURELOG_DIR}/build/regression/StringParameter/roundtrip/dut_000.sv | 10 | 11 |
 ============================== End RoundTrip Results ==============================

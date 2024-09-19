@@ -196,63 +196,69 @@ AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz:1:1: No timescale set for "foo".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz:1:1: Compile module "work@foo".
-[NTE:CP0309] ${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz:3:12: Implicit port type (wire) for "out".
+[NTE:CP0309] ${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz:3:5: Implicit port type (wire) for "out".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 always                                                 1
 assignment                                             1
 begin                                                  1
 bit_select                                             1
-constant                                               8
+constant                                              11
 cont_assign                                            1
 design                                                 1
 event_control                                          1
-func_call                                              1
+func_call                                              2
 function                                               1
 import_typespec                                        1
 integer_typespec                                       2
 integer_var                                            1
 io_decl                                                1
-logic_net                                              3
-logic_typespec                                         3
+logic_net                                              2
+logic_typespec                                         1
+logic_var                                              1
 module_inst                                            1
-operation                                              5
+operation                                              6
 package                                                1
 port                                                   2
-range                                                  1
-ref_obj                                                8
-ref_typespec                                           5
+range                                                  2
+ref_obj                                                6
+ref_typespec                                           3
 return_stmt                                            1
+source_file                                            2
 sys_func_call                                          1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FileListWithCompressed/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/FileListWithCompressed/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/FileListWithCompressed/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/FileListWithCompressed/pack.sv
+  |vpiParent:
+  \_design: (unnamed)
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallPackages:
 \_package: prim_util_pkg (prim_util_pkg::), file:${SURELOG_DIR}/tests/FileListWithCompressed/pack.sv, line:1:1, endln:7:11
   |vpiParent:
   \_design: (unnamed)
   |vpiName:prim_util_pkg
   |vpiFullName:prim_util_pkg::
-  |vpiDefName:prim_util_pkg
-  |vpiTaskFunc:
+  |vpiInternalScope:
   \_function: (prim_util_pkg::vbits), line:3:2, endln:5:14
     |vpiParent:
     \_package: prim_util_pkg (prim_util_pkg::), file:${SURELOG_DIR}/tests/FileListWithCompressed/pack.sv, line:1:1, endln:7:11
     |vpiName:vbits
     |vpiFullName:prim_util_pkg::vbits
-    |vpiVisibility:1
-    |vpiAutomatic:1
-    |vpiReturn:
+    |vpiVariables:
     \_integer_var: (prim_util_pkg::vbits), line:3:21, endln:3:28
       |vpiParent:
       \_function: (prim_util_pkg::vbits), line:3:2, endln:5:14
       |vpiTypespec:
-      \_ref_typespec: (prim_util_pkg::vbits)
+      \_ref_typespec: (prim_util_pkg::vbits), line:3:21, endln:3:28
         |vpiParent:
         \_integer_var: (prim_util_pkg::vbits), line:3:21, endln:3:28
         |vpiFullName:prim_util_pkg::vbits
@@ -260,27 +266,47 @@ design: (unnamed)
         \_integer_typespec: , line:3:21, endln:3:28
       |vpiFullName:prim_util_pkg::vbits
       |vpiSigned:1
+    |vpiTypedef:
+    \_integer_typespec: , line:3:21, endln:3:28
+      |vpiParent:
+      \_function: (prim_util_pkg::vbits), line:3:2, endln:5:14
+      |vpiSigned:1
+    |vpiTypedef:
+    \_integer_typespec: , line:3:35, endln:3:42
+      |vpiParent:
+      \_function: (prim_util_pkg::vbits), line:3:2, endln:5:14
+      |vpiSigned:1
+    |vpiImportTypespec:
+    \_integer_typespec: , line:3:21, endln:3:28
+    |vpiImportTypespec:
+    \_integer_var: (prim_util_pkg::vbits), line:3:21, endln:3:28
+    |vpiImportTypespec:
+    \_integer_typespec: , line:3:35, endln:3:42
+    |vpiVisibility:1
+    |vpiAutomatic:1
+    |vpiReturn:
+    \_integer_var: (prim_util_pkg::vbits), line:3:21, endln:3:28
     |vpiIODecl:
-    \_io_decl: (value), line:3:43, endln:3:48
+    \_io_decl: (value), line:3:35, endln:3:48
       |vpiParent:
       \_function: (prim_util_pkg::vbits), line:3:2, endln:5:14
       |vpiDirection:1
       |vpiName:value
       |vpiTypedef:
-      \_ref_typespec: (prim_util_pkg::vbits::value)
+      \_ref_typespec: (prim_util_pkg::vbits::value), line:3:35, endln:3:42
         |vpiParent:
-        \_io_decl: (value), line:3:43, endln:3:48
+        \_io_decl: (value), line:3:35, endln:3:48
         |vpiFullName:prim_util_pkg::vbits::value
         |vpiActual:
         \_integer_typespec: , line:3:35, endln:3:42
     |vpiStmt:
-    \_return_stmt: , line:4:5, endln:4:11
+    \_return_stmt: , line:4:5, endln:4:44
       |vpiParent:
       \_function: (prim_util_pkg::vbits), line:3:2, endln:5:14
       |vpiCondition:
       \_operation: , line:4:12, endln:4:44
         |vpiParent:
-        \_return_stmt: , line:4:5, endln:4:11
+        \_return_stmt: , line:4:5, endln:4:44
         |vpiOpType:32
         |vpiOperand:
         \_operation: , line:4:13, endln:4:23
@@ -294,7 +320,7 @@ design: (unnamed)
             |vpiName:value
             |vpiFullName:prim_util_pkg::vbits::value
             |vpiActual:
-            \_io_decl: (value), line:3:43, endln:3:48
+            \_io_decl: (value), line:3:35, endln:3:48
           |vpiOperand:
           \_constant: , line:4:22, endln:4:23
             |vpiParent:
@@ -322,99 +348,129 @@ design: (unnamed)
             |vpiName:value
             |vpiFullName:prim_util_pkg::vbits::value
             |vpiActual:
-            \_io_decl: (value), line:3:43, endln:3:48
+            \_io_decl: (value), line:3:35, endln:3:48
           |vpiName:$clog2
     |vpiInstance:
     \_package: prim_util_pkg (prim_util_pkg::), file:${SURELOG_DIR}/tests/FileListWithCompressed/pack.sv, line:1:1, endln:7:11
+  |vpiImportTypespec:
+  \_function: (prim_util_pkg::vbits), line:3:2, endln:5:14
+  |vpiDefName:prim_util_pkg
+  |vpiTaskFunc:
+  \_function: (prim_util_pkg::vbits), line:3:2, endln:5:14
 |uhdmallModules:
 \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz, line:1:1, endln:11:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@foo
-  |vpiTypedef:
-  \_import_typespec: (prim_util_pkg), line:5:8, endln:5:28
-  |vpiDefName:work@foo
-  |vpiTaskFunc:
-  \_function: (prim_util_pkg::vbits), line:3:2, endln:5:14
-  |vpiNet:
-  \_logic_net: (work@foo.clk), line:2:11, endln:2:14
-    |vpiParent:
-    \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz, line:1:1, endln:11:10
-    |vpiName:clk
-    |vpiFullName:work@foo.clk
-  |vpiNet:
-  \_logic_net: (work@foo.out), line:3:12, endln:3:15
-    |vpiParent:
-    \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz, line:1:1, endln:11:10
-    |vpiName:out
-    |vpiFullName:work@foo.out
-  |vpiNet:
-  \_logic_net: (work@foo.a), line:6:22, endln:6:23
+  |vpiName:work@foo
+  |vpiVariables:
+  \_logic_var: (work@foo.a), line:6:22, endln:6:23
     |vpiParent:
     \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz, line:1:1, endln:11:10
     |vpiTypespec:
-    \_ref_typespec: (work@foo.a)
+    \_ref_typespec: (work@foo.a), line:6:1, endln:6:21
       |vpiParent:
-      \_logic_net: (work@foo.a), line:6:22, endln:6:23
+      \_logic_var: (work@foo.a), line:6:22, endln:6:23
       |vpiFullName:work@foo.a
       |vpiActual:
       \_logic_typespec: , line:6:1, endln:6:21
     |vpiName:a
     |vpiFullName:work@foo.a
+    |vpiVisibility:1
+  |vpiReg:
+  \_logic_var: (work@foo.a), line:6:22, endln:6:23
+  |vpiTypedef:
+  \_import_typespec: (prim_util_pkg), line:5:8, endln:5:28
+  |vpiTypedef:
+  \_logic_typespec: , line:6:1, endln:6:21
+    |vpiParent:
+    \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz, line:1:1, endln:11:10
+    |vpiRange:
+    \_range: , line:6:7, endln:6:21
+      |vpiParent:
+      \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz, line:1:1, endln:11:10
+      |vpiLeftRange:
+      \_operation: , line:6:8, endln:6:18
+        |vpiParent:
+        \_range: , line:6:7, endln:6:21
+        |vpiOpType:11
+        |vpiOperand:
+        \_func_call: (vbits), line:6:8, endln:6:15
+          |vpiParent:
+          \_operation: , line:6:8, endln:6:18
+          |vpiArgument:
+          \_constant: , line:6:14, endln:6:15
+            |vpiParent:
+            \_func_call: (vbits), line:6:8, endln:6:15
+            |vpiDecompile:4
+            |vpiSize:64
+            |UINT:4
+            |vpiConstType:9
+          |vpiName:vbits
+          |vpiFunction:
+          \_function: (prim_util_pkg::vbits), line:3:2, endln:5:14
+        |vpiOperand:
+        \_constant: , line:6:17, endln:6:18
+          |vpiParent:
+          \_operation: , line:6:8, endln:6:18
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:6:19, endln:6:20
+        |vpiParent:
+        \_range: , line:6:7, endln:6:21
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_import_typespec: (prim_util_pkg), line:5:8, endln:5:28
+  |vpiImportTypespec:
+  \_logic_net: (work@foo.clk), line:2:11, endln:2:14
+    |vpiParent:
+    \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz, line:1:1, endln:11:10
+    |vpiName:clk
+    |vpiFullName:work@foo.clk
+  |vpiImportTypespec:
+  \_logic_net: (work@foo.out), line:3:12, endln:3:15
+    |vpiParent:
+    \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz, line:1:1, endln:11:10
+    |vpiName:out
+    |vpiFullName:work@foo.out
+  |vpiImportTypespec:
+  \_logic_typespec: , line:6:1, endln:6:21
+  |vpiImportTypespec:
+  \_logic_var: (work@foo.a), line:6:22, endln:6:23
+  |vpiDefName:work@foo
+  |vpiNet:
+  \_logic_net: (work@foo.clk), line:2:11, endln:2:14
+  |vpiNet:
+  \_logic_net: (work@foo.out), line:3:12, endln:3:15
   |vpiPort:
-  \_port: (clk), line:2:11, endln:2:14
+  \_port: (clk), line:2:5, endln:2:14
     |vpiParent:
     \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz, line:1:1, endln:11:10
     |vpiName:clk
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@foo.clk.clk), line:2:11, endln:2:14
-      |vpiParent:
-      \_port: (clk), line:2:11, endln:2:14
-      |vpiName:clk
-      |vpiFullName:work@foo.clk.clk
-      |vpiActual:
-      \_logic_net: (work@foo.clk), line:2:11, endln:2:14
-    |vpiTypedef:
-    \_ref_typespec: (work@foo.clk)
-      |vpiParent:
-      \_port: (clk), line:2:11, endln:2:14
-      |vpiFullName:work@foo.clk
-      |vpiActual:
-      \_logic_typespec: , line:2:11, endln:2:11
   |vpiPort:
-  \_port: (out), line:3:12, endln:3:15
+  \_port: (out), line:3:5, endln:3:15
     |vpiParent:
     \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz, line:1:1, endln:11:10
     |vpiName:out
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@foo.out.out), line:3:12, endln:3:15
-      |vpiParent:
-      \_port: (out), line:3:12, endln:3:15
-      |vpiName:out
-      |vpiFullName:work@foo.out.out
-      |vpiActual:
-      \_logic_net: (work@foo.out), line:3:12, endln:3:15
-    |vpiTypedef:
-    \_ref_typespec: (work@foo.out)
-      |vpiParent:
-      \_port: (out), line:3:12, endln:3:15
-      |vpiFullName:work@foo.out
-      |vpiActual:
-      \_logic_typespec: , line:3:12, endln:3:12
   |vpiProcess:
   \_always: , line:7:1, endln:9:4
     |vpiParent:
     \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz, line:1:1, endln:11:10
     |vpiStmt:
-    \_event_control: , line:7:8, endln:7:22
+    \_event_control: , line:7:8, endln:9:4
       |vpiParent:
       \_always: , line:7:1, endln:9:4
       |vpiCondition:
       \_operation: , line:7:10, endln:7:21
         |vpiParent:
-        \_event_control: , line:7:8, endln:7:22
+        \_event_control: , line:7:8, endln:9:4
         |vpiOpType:39
         |vpiOperand:
         \_ref_obj: (work@foo.clk), line:7:18, endln:7:21
@@ -427,7 +483,7 @@ design: (unnamed)
       |vpiStmt:
       \_begin: (work@foo), line:7:23, endln:9:4
         |vpiParent:
-        \_event_control: , line:7:8, endln:7:22
+        \_event_control: , line:7:8, endln:9:4
         |vpiFullName:work@foo
         |vpiStmt:
         \_assignment: , line:8:5, endln:8:18
@@ -446,7 +502,7 @@ design: (unnamed)
               |vpiName:a
               |vpiFullName:work@foo.a
               |vpiActual:
-              \_logic_net: (work@foo.a), line:6:22, endln:6:23
+              \_logic_var: (work@foo.a), line:6:22, endln:6:23
             |vpiOperand:
             \_constant: , line:8:14, endln:8:18
               |vpiParent:
@@ -462,22 +518,24 @@ design: (unnamed)
             |vpiName:a
             |vpiFullName:work@foo.a
             |vpiActual:
-            \_logic_net: (work@foo.a), line:6:22, endln:6:23
+            \_logic_var: (work@foo.a), line:6:22, endln:6:23
     |vpiAlwaysType:1
   |vpiContAssign:
   \_cont_assign: , line:10:8, endln:10:18
     |vpiParent:
     \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz, line:1:1, endln:11:10
     |vpiRhs:
-    \_bit_select: (work@foo.a), line:10:16, endln:10:17
+    \_bit_select: (work@foo.a), line:10:15, endln:10:18
       |vpiParent:
       \_cont_assign: , line:10:8, endln:10:18
       |vpiName:a
       |vpiFullName:work@foo.a
+      |vpiActual:
+      \_logic_var: (work@foo.a), line:6:22, endln:6:23
       |vpiIndex:
       \_constant: , line:10:16, endln:10:17
         |vpiParent:
-        \_bit_select: (work@foo.a), line:10:16, endln:10:17
+        \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz, line:1:1, endln:11:10
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
@@ -485,66 +543,19 @@ design: (unnamed)
     |vpiLhs:
     \_ref_obj: (work@foo.out), line:10:8, endln:10:11
       |vpiParent:
-      \_cont_assign: , line:10:8, endln:10:18
+      \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz, line:1:1, endln:11:10
       |vpiName:out
       |vpiFullName:work@foo.out
       |vpiActual:
       \_logic_net: (work@foo.out), line:3:12, endln:3:15
-\_weaklyReferenced:
-\_integer_typespec: , line:3:21, endln:3:28
-  |vpiInstance:
-  \_package: prim_util_pkg (prim_util_pkg::), file:${SURELOG_DIR}/tests/FileListWithCompressed/pack.sv, line:1:1, endln:7:11
-  |vpiSigned:1
-\_integer_typespec: , line:3:35, endln:3:42
-  |vpiInstance:
-  \_package: prim_util_pkg (prim_util_pkg::), file:${SURELOG_DIR}/tests/FileListWithCompressed/pack.sv, line:1:1, endln:7:11
-  |vpiSigned:1
-\_logic_typespec: , line:2:11, endln:2:11
-\_logic_typespec: , line:3:12, endln:3:12
-\_logic_typespec: , line:6:1, endln:6:21
-  |vpiRange:
-  \_range: , line:6:7, endln:6:21
-    |vpiParent:
-    \_logic_typespec: , line:6:1, endln:6:21
-    |vpiLeftRange:
-    \_operation: , line:6:8, endln:6:18
-      |vpiParent:
-      \_range: , line:6:7, endln:6:21
-      |vpiOpType:11
-      |vpiOperand:
-      \_func_call: (vbits), line:6:8, endln:6:13
-        |vpiParent:
-        \_operation: , line:6:8, endln:6:18
-        |vpiArgument:
-        \_constant: , line:6:14, endln:6:15
-          |vpiParent:
-          \_func_call: (vbits), line:6:8, endln:6:13
-          |vpiDecompile:4
-          |vpiSize:64
-          |UINT:4
-          |vpiConstType:9
-        |vpiName:vbits
-        |vpiFunction:
-        \_function: (prim_util_pkg::vbits), line:3:2, endln:5:14
-      |vpiOperand:
-      \_constant: , line:6:17, endln:6:18
-        |vpiParent:
-        \_operation: , line:6:8, endln:6:18
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:6:19, endln:6:20
-      |vpiParent:
-      \_range: , line:6:7, endln:6:21
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 1
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/FileListWithCompressed/dut.sv.gz | ${SURELOG_DIR}/build/regression/FileListWithCompressed/roundtrip/dut.sv_000.gz | 3 | 3 |
+[roundtrip]: ${SURELOG_DIR}/tests/FileListWithCompressed/pack.sv   | ${SURELOG_DIR}/build/regression/FileListWithCompressed/roundtrip/pack_000.sv   | 2 | 7 |
+============================== End RoundTrip Results ==============================

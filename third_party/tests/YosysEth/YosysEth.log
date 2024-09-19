@@ -22,26 +22,25 @@
 [WRN:PA0205] ${SURELOG_DIR}/third_party/tests/YosysEth/udp_complete_64_top.v:1:1: No timescale set for "udp_complete_64_top".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/third_party/tests/YosysEth/udp_complete_64_top.v:1:1: Compile module "work@udp_complete_64_top".
-[INF:CP0302] Compile class "work@mailbox".
-[INF:CP0302] Compile class "work@process".
-[INF:CP0302] Compile class "work@semaphore".
+[INF:CP0302] Compile class "builtin::mailbox".
+[INF:CP0302] Compile class "builtin::process".
+[INF:CP0302] Compile class "builtin::semaphore".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 class_defn                                             8
-class_typespec                                         4
-class_var                                              3
-constant                                             162
+class_typespec                                         1
+class_var                                              1
+constant                                             458
 design                                                 1
 enum_const                                             5
 enum_typespec                                          1
 enum_var                                               1
 function                                               9
-include_file_info                                     19
-int_typespec                                          14
+int_typespec                                           9
 int_var                                                4
 io_decl                                               11
 logic_net                                            126
-logic_typespec                                       126
+logic_typespec                                       252
 logic_var                                              1
 module_inst                                            1
 operation                                              2
@@ -49,15 +48,21 @@ package                                                1
 param_assign                                           7
 parameter                                              7
 port                                                 252
-range                                                 74
+range                                                222
 ref_module                                             1
-ref_obj                                              252
-ref_typespec                                         149
+ref_obj                                              126
+ref_typespec                                         263
+source_file                                           20
 task                                                   9
 === UHDM Object Stats End ===
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/YosysEth/udp_complete_64_top.v:170:1: Object 48 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/YosysEth/slpp_unit/surelog.uhdm ...
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 19
+[  ERROR] : 20
 [WARNING] : 1
 [   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysEth/udp_complete_64_top.v | ${SURELOG_DIR}/build/regression/YosysEth/roundtrip/udp_complete_64_top_000.v | 299 | 315 |
+============================== End RoundTrip Results ==============================

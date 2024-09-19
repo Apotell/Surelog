@@ -92,38 +92,65 @@ logic_typespec                                         1
 module_inst                                            2
 packed_array_typespec                                  1
 range                                                  2
-ref_typespec                                           1
+ref_typespec                                           2
+source_file                                            1
+unsupported_typespec                                   1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedArrayEnum/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PackedArrayEnum/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/PackedArrayEnum/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/PackedArrayEnum/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayEnum/dut.sv, line:1:1, endln:11:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
+  |vpiName:work@top
   |vpiTypedef:
-  \_enum_typespec: (dec_lc_state_e), line:4:3, endln:7:20
+  \_logic_typespec: , line:4:16, endln:4:28
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayEnum/dut.sv, line:1:1, endln:11:10
+    |vpiRange:
+    \_range: , line:4:22, endln:4:28
+      |vpiParent:
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayEnum/dut.sv, line:1:1, endln:11:10
+      |vpiLeftRange:
+      \_constant: , line:4:23, endln:4:25
+        |vpiParent:
+        \_range: , line:4:22, endln:4:28
+        |vpiDecompile:13
+        |vpiSize:64
+        |UINT:13
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:4:26, endln:4:27
+        |vpiParent:
+        \_range: , line:4:22, endln:4:28
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_enum_typespec: (dec_lc_state_e), line:4:11, endln:7:20
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayEnum/dut.sv, line:1:1, endln:11:10
     |vpiName:dec_lc_state_e
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayEnum/dut.sv, line:1:1, endln:11:10
     |vpiBaseTypespec:
-    \_ref_typespec: (work@top.dec_lc_state_e)
+    \_ref_typespec: (work@top.dec_lc_state_e), line:4:11, endln:7:20
       |vpiParent:
-      \_enum_typespec: (dec_lc_state_e), line:4:3, endln:7:20
+      \_enum_typespec: (dec_lc_state_e), line:4:11, endln:7:20
       |vpiFullName:work@top.dec_lc_state_e
       |vpiActual:
       \_logic_typespec: , line:4:16, endln:4:28
     |vpiEnumConst:
     \_enum_const: (DecLcStTestUnlocked0), line:5:5, endln:5:29
       |vpiParent:
-      \_enum_typespec: (dec_lc_state_e), line:4:3, endln:7:20
+      \_enum_typespec: (dec_lc_state_e), line:4:11, endln:7:20
       |vpiName:DecLcStTestUnlocked0
       |UINT:1
       |vpiDecompile:1
@@ -131,40 +158,39 @@ design: (unnamed)
     |vpiEnumConst:
     \_enum_const: (DecLcStTestLocked0), line:6:5, endln:6:27
       |vpiParent:
-      \_enum_typespec: (dec_lc_state_e), line:4:3, endln:7:20
+      \_enum_typespec: (dec_lc_state_e), line:4:11, endln:7:20
       |vpiName:DecLcStTestLocked0
       |UINT:2
       |vpiDecompile:2
       |vpiSize:64
-  |vpiDefName:work@top
-  |vpiNet:
+  |vpiTypedef:
+  \_unsupported_typespec: (ext_dec_lc_state_t), line:9:3, endln:9:21
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayEnum/dut.sv, line:1:1, endln:11:10
+    |vpiName:ext_dec_lc_state_t
+  |vpiImportTypespec:
+  \_logic_typespec: , line:4:16, endln:4:28
+  |vpiImportTypespec:
+  \_enum_typespec: (dec_lc_state_e), line:4:11, endln:7:20
+  |vpiImportTypespec:
+  \_unsupported_typespec: (ext_dec_lc_state_t), line:9:3, endln:9:21
+  |vpiImportTypespec:
   \_logic_net: (work@top.transition_target_d), line:9:22, endln:9:41
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayEnum/dut.sv, line:1:1, endln:11:10
+    |vpiTypespec:
+    \_ref_typespec: (work@top.transition_target_d.transition_target_d), line:9:3, endln:9:21
+      |vpiParent:
+      \_logic_net: (work@top.transition_target_d), line:9:22, endln:9:41
+      |vpiName:transition_target_d
+      |vpiFullName:work@top.transition_target_d.transition_target_d
+      |vpiActual:
+      \_unsupported_typespec: (ext_dec_lc_state_t), line:9:3, endln:9:21
     |vpiName:transition_target_d
     |vpiFullName:work@top.transition_target_d
-\_weaklyReferenced:
-\_logic_typespec: , line:4:16, endln:4:28
-  |vpiRange:
-  \_range: , line:4:22, endln:4:28
-    |vpiParent:
-    \_logic_typespec: , line:4:16, endln:4:28
-    |vpiLeftRange:
-    \_constant: , line:4:23, endln:4:25
-      |vpiParent:
-      \_range: , line:4:22, endln:4:28
-      |vpiDecompile:13
-      |vpiSize:64
-      |UINT:13
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:4:26, endln:4:27
-      |vpiParent:
-      \_range: , line:4:22, endln:4:28
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
+  |vpiDefName:work@top
+  |vpiNet:
+  \_logic_net: (work@top.transition_target_d), line:9:22, endln:9:41
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -173,5 +199,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PackedArrayEnum/dut.sv | ${SURELOG_DIR}/build/regression/PackedArrayEnum/roundtrip/dut_000.sv | 2 | 11 |
+[roundtrip]: ${SURELOG_DIR}/tests/PackedArrayEnum/dut.sv | ${SURELOG_DIR}/build/regression/PackedArrayEnum/roundtrip/dut_000.sv | 4 | 11 |
 ============================== End RoundTrip Results ==============================

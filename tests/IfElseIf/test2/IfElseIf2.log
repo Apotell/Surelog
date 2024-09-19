@@ -129,65 +129,52 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/IfElseIf/test2/dut.sv:4:1: Compile module "work@axi".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-begin                                                  2
+begin                                                  5
 constant                                               4
 design                                                 1
 gen_if_else                                            2
 gen_region                                             1
-int_typespec                                           2
 module_inst                                            2
-named_begin                                            3
 operation                                              3
 param_assign                                           2
 parameter                                              2
 ref_module                                             1
 ref_obj                                                3
-ref_typespec                                           4
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/IfElseIf2/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/IfElseIf2/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/IfElseIf2/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/IfElseIf/test2/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/IfElseIf/test2/dut.sv, line:1:1, endln:2:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@GOOD
+  |vpiName:work@GOOD
   |vpiDefName:work@GOOD
 |uhdmallModules:
 \_module_inst: work@axi (work@axi), file:${SURELOG_DIR}/tests/IfElseIf/test2/dut.sv, line:4:1, endln:20:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@axi
+  |vpiName:work@axi
   |vpiParameter:
-  \_parameter: (work@axi.j), line:6:15, endln:6:16
+  \_parameter: (work@axi.j), line:6:15, endln:6:20
     |vpiParent:
     \_module_inst: work@axi (work@axi), file:${SURELOG_DIR}/tests/IfElseIf/test2/dut.sv, line:4:1, endln:20:10
     |UINT:3
-    |vpiTypespec:
-    \_ref_typespec: (work@axi.j)
-      |vpiParent:
-      \_parameter: (work@axi.j), line:6:15, endln:6:16
-      |vpiFullName:work@axi.j
-      |vpiActual:
-      \_int_typespec: , line:6:5, endln:6:20
     |vpiName:j
     |vpiFullName:work@axi.j
   |vpiParameter:
-  \_parameter: (work@axi.LOG_MASTER), line:7:15, endln:7:25
+  \_parameter: (work@axi.LOG_MASTER), line:7:15, endln:7:34
     |vpiParent:
     \_module_inst: work@axi (work@axi), file:${SURELOG_DIR}/tests/IfElseIf/test2/dut.sv, line:4:1, endln:20:10
     |UINT:5
-    |vpiTypespec:
-    \_ref_typespec: (work@axi.LOG_MASTER)
-      |vpiParent:
-      \_parameter: (work@axi.LOG_MASTER), line:7:15, endln:7:25
-      |vpiFullName:work@axi.LOG_MASTER
-      |vpiActual:
-      \_int_typespec: , line:7:5, endln:7:34
     |vpiName:LOG_MASTER
     |vpiFullName:work@axi.LOG_MASTER
   |vpiParamAssign:
@@ -201,16 +188,9 @@ design: (unnamed)
       |vpiDecompile:3
       |vpiSize:64
       |UINT:3
-      |vpiTypespec:
-      \_ref_typespec: (work@axi)
-        |vpiParent:
-        \_constant: , line:6:19, endln:6:20
-        |vpiFullName:work@axi
-        |vpiActual:
-        \_int_typespec: , line:6:5, endln:6:20
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@axi.j), line:6:15, endln:6:16
+    \_parameter: (work@axi.j), line:6:15, endln:6:20
   |vpiParamAssign:
   \_param_assign: , line:7:15, endln:7:34
     |vpiParent:
@@ -222,34 +202,27 @@ design: (unnamed)
       |vpiDecompile:5
       |vpiSize:64
       |UINT:5
-      |vpiTypespec:
-      \_ref_typespec: (work@axi)
-        |vpiParent:
-        \_constant: , line:7:33, endln:7:34
-        |vpiFullName:work@axi
-        |vpiActual:
-        \_int_typespec: , line:7:5, endln:7:34
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@axi.LOG_MASTER), line:7:15, endln:7:25
-  |vpiDefName:work@axi
-  |vpiGenStmt:
-  \_gen_region: 
+    \_parameter: (work@axi.LOG_MASTER), line:7:15, endln:7:34
+  |vpiInternalScope:
+  \_gen_region: (work@axi), line:9:5, endln:18:16
     |vpiParent:
     \_module_inst: work@axi (work@axi), file:${SURELOG_DIR}/tests/IfElseIf/test2/dut.sv, line:4:1, endln:20:10
-    |vpiStmt:
-    \_begin: (work@axi)
+    |vpiFullName:work@axi
+    |vpiInternalScope:
+    \_begin: (work@axi), line:11:7, endln:17:14
       |vpiParent:
-      \_gen_region: 
+      \_gen_region: (work@axi), line:9:5, endln:18:16
       |vpiFullName:work@axi
       |vpiStmt:
       \_gen_if_else: , line:11:7, endln:17:14
         |vpiParent:
-        \_begin: (work@axi)
+        \_begin: (work@axi), line:11:7, endln:17:14
         |vpiCondition:
         \_operation: , line:11:11, endln:11:17
           |vpiParent:
-          \_gen_if_else: , line:11:7, endln:17:14
+          \_module_inst: work@axi (work@axi), file:${SURELOG_DIR}/tests/IfElseIf/test2/dut.sv, line:4:1, endln:20:10
           |vpiOpType:14
           |vpiOperand:
           \_ref_obj: (work@axi.j), line:11:11, endln:11:12
@@ -257,6 +230,8 @@ design: (unnamed)
             \_operation: , line:11:11, endln:11:17
             |vpiName:j
             |vpiFullName:work@axi.j
+            |vpiActual:
+            \_parameter: (work@axi.j), line:6:15, endln:6:20
           |vpiOperand:
           \_constant: , line:11:16, endln:11:17
             |vpiParent:
@@ -266,24 +241,24 @@ design: (unnamed)
             |UINT:0
             |vpiConstType:9
         |vpiStmt:
-        \_named_begin: (work@axi.LAST_NODE)
+        \_begin: (work@axi.LAST_NODE), line:11:21, endln:13:10
           |vpiParent:
           \_gen_if_else: , line:11:7, endln:17:14
           |vpiName:LAST_NODE
           |vpiFullName:work@axi.LAST_NODE
         |vpiElseStmt:
-        \_begin: (work@axi)
+        \_begin: (work@axi), line:13:16, endln:17:14
           |vpiParent:
           \_gen_if_else: , line:11:7, endln:17:14
           |vpiFullName:work@axi
           |vpiStmt:
           \_gen_if_else: , line:13:16, endln:17:14
             |vpiParent:
-            \_begin: (work@axi)
+            \_begin: (work@axi), line:13:16, endln:17:14
             |vpiCondition:
             \_operation: , line:13:21, endln:13:39
               |vpiParent:
-              \_gen_if_else: , line:13:16, endln:17:14
+              \_module_inst: work@axi (work@axi), file:${SURELOG_DIR}/tests/IfElseIf/test2/dut.sv, line:4:1, endln:20:10
               |vpiOpType:20
               |vpiOperand:
               \_ref_obj: (work@axi.j), line:13:21, endln:13:22
@@ -291,6 +266,8 @@ design: (unnamed)
                 \_operation: , line:13:21, endln:13:39
                 |vpiName:j
                 |vpiFullName:work@axi.j
+                |vpiActual:
+                \_parameter: (work@axi.j), line:6:15, endln:6:20
               |vpiOperand:
               \_operation: , line:13:25, endln:13:39
                 |vpiParent:
@@ -302,6 +279,8 @@ design: (unnamed)
                   \_operation: , line:13:25, endln:13:39
                   |vpiName:LOG_MASTER
                   |vpiFullName:work@axi.LOG_MASTER
+                  |vpiActual:
+                  \_parameter: (work@axi.LOG_MASTER), line:7:15, endln:7:34
                 |vpiOperand:
                 \_constant: , line:13:38, endln:13:39
                   |vpiParent:
@@ -311,29 +290,37 @@ design: (unnamed)
                   |UINT:1
                   |vpiConstType:9
             |vpiStmt:
-            \_named_begin: (work@axi.MIDDLE_NODES)
+            \_begin: (work@axi.MIDDLE_NODES), line:13:42, endln:15:14
               |vpiParent:
               \_gen_if_else: , line:13:16, endln:17:14
               |vpiName:MIDDLE_NODES
               |vpiFullName:work@axi.MIDDLE_NODES
               |vpiStmt:
-              \_ref_module: work@GOOD (good), line:14:18, endln:14:22
+              \_ref_module: work@GOOD (good), line:14:13, endln:14:25
                 |vpiParent:
-                \_named_begin: (work@axi.MIDDLE_NODES)
+                \_module_inst: work@axi (work@axi), file:${SURELOG_DIR}/tests/IfElseIf/test2/dut.sv, line:4:1, endln:20:10
                 |vpiName:good
                 |vpiDefName:work@GOOD
+                |vpiActual:
+                \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/IfElseIf/test2/dut.sv, line:1:1, endln:2:10
             |vpiElseStmt:
-            \_named_begin: (work@axi.LEAF_NODES)
+            \_begin: (work@axi.LEAF_NODES), line:16:16, endln:17:14
               |vpiParent:
               \_gen_if_else: , line:13:16, endln:17:14
               |vpiName:LEAF_NODES
               |vpiFullName:work@axi.LEAF_NODES
-\_weaklyReferenced:
-\_int_typespec: , line:6:5, endln:6:20
-\_int_typespec: , line:7:5, endln:7:34
+    |vpiStmt:
+    \_begin: (work@axi), line:11:7, endln:17:14
+  |vpiDefName:work@axi
+  |vpiRefModule:
+  \_ref_module: work@GOOD (good), line:14:13, endln:14:25
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/IfElseIf/test2/dut.sv | ${SURELOG_DIR}/build/regression/IfElseIf2/roundtrip/dut_000.sv | 14 | 20 |
+============================== End RoundTrip Results ==============================

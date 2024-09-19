@@ -143,35 +143,70 @@ constant                                               1
 cont_assign                                            2
 design                                                 1
 hier_path                                              2
-int_typespec                                           3
+int_typespec                                           6
+int_var                                                3
 interface_inst                                         1
-interface_typespec                                     1
-logic_net                                              5
+interface_typespec                                     2
+logic_net                                              1
 module_inst                                            2
 port                                                   5
 ref_module                                             2
-ref_obj                                               10
-ref_typespec                                           4
+ref_obj                                                7
+ref_typespec                                           7
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfInst/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/InterfInst/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/InterfInst/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/InterfInst/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallInterfaces:
 \_interface_inst: work@sim_sram_if (work@sim_sram_if), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:2:1, endln:4:13
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@sim_sram_if
-  |vpiDefName:work@sim_sram_if
-  |vpiNet:
+  |vpiName:work@sim_sram_if
+  |vpiVariables:
+  \_int_var: (work@sim_sram_if.start_addr), line:3:8, endln:3:18
+    |vpiParent:
+    \_interface_inst: work@sim_sram_if (work@sim_sram_if), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:2:1, endln:4:13
+    |vpiTypespec:
+    \_ref_typespec: (work@sim_sram_if.start_addr), line:3:4, endln:3:7
+      |vpiParent:
+      \_int_var: (work@sim_sram_if.start_addr), line:3:8, endln:3:18
+      |vpiFullName:work@sim_sram_if.start_addr
+      |vpiActual:
+      \_int_typespec: , line:3:4, endln:3:7
+    |vpiName:start_addr
+    |vpiFullName:work@sim_sram_if.start_addr
+    |vpiSigned:1
+    |vpiVisibility:1
+  |vpiTypedef:
+  \_int_typespec: , line:3:4, endln:3:7
+    |vpiParent:
+    \_interface_inst: work@sim_sram_if (work@sim_sram_if), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:2:1, endln:4:13
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:3:4, endln:3:7
+    |vpiParent:
+    \_interface_inst: work@sim_sram_if (work@sim_sram_if), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:2:1, endln:4:13
+    |vpiSigned:1
+  |vpiImportTypespec:
+  \_int_typespec: , line:3:4, endln:3:7
+  |vpiImportTypespec:
+  \_int_var: (work@sim_sram_if.start_addr), line:3:8, endln:3:18
+  |vpiImportTypespec:
+  \_int_typespec: , line:3:4, endln:3:7
+  |vpiImportTypespec:
   \_logic_net: (work@sim_sram_if.start_addr), line:3:8, endln:3:18
     |vpiParent:
     \_interface_inst: work@sim_sram_if (work@sim_sram_if), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:2:1, endln:4:13
     |vpiTypespec:
-    \_ref_typespec: (work@sim_sram_if.start_addr)
+    \_ref_typespec: (work@sim_sram_if.start_addr), line:3:4, endln:3:7
       |vpiParent:
       \_logic_net: (work@sim_sram_if.start_addr), line:3:8, endln:3:18
       |vpiFullName:work@sim_sram_if.start_addr
@@ -179,63 +214,97 @@ design: (unnamed)
       \_int_typespec: , line:3:4, endln:3:7
     |vpiName:start_addr
     |vpiFullName:work@sim_sram_if.start_addr
+  |vpiDefName:work@sim_sram_if
+  |vpiNet:
+  \_logic_net: (work@sim_sram_if.start_addr), line:3:8, endln:3:18
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:6:1, endln:8:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@dut
-  |vpiDefName:work@dut
-  |vpiNet:
-  \_logic_net: (work@dut.a), line:6:42, endln:6:43
+  |vpiName:work@dut
+  |vpiVariables:
+  \_int_var: (work@dut.a), line:6:42, endln:6:43
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:6:1, endln:8:10
+    |vpiTypespec:
+    \_ref_typespec: (work@dut.a), line:6:38, endln:6:41
+      |vpiParent:
+      \_int_var: (work@dut.a), line:6:42, endln:6:43
+      |vpiFullName:work@dut.a
+      |vpiActual:
+      \_int_typespec: , line:6:38, endln:6:41
     |vpiName:a
     |vpiFullName:work@dut.a
-  |vpiNet:
-  \_logic_net: (work@dut.ss_if), line:6:24, endln:6:29
+    |vpiSigned:1
+    |vpiVisibility:1
+  |vpiTypedef:
+  \_int_typespec: , line:6:38, endln:6:41
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:6:1, endln:8:10
+    |vpiSigned:1
+  |vpiTypedef:
+  \_interface_typespec: (sim_sram_if), line:6:12, endln:6:23
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:6:1, endln:8:10
+    |vpiName:sim_sram_if
+    |vpiInterface:
+    \_interface_inst: work@sim_sram_if (work@sim_sram_if), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:2:1, endln:4:13
+  |vpiTypedef:
+  \_interface_typespec: (sim_sram_if), line:6:12, endln:6:23
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:6:1, endln:8:10
+    |vpiName:sim_sram_if
+    |vpiInterface:
+    \_interface_inst: work@sim_sram_if (work@sim_sram_if), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:2:1, endln:4:13
+  |vpiTypedef:
+  \_int_typespec: , line:6:38, endln:6:41
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:6:1, endln:8:10
+    |vpiSigned:1
+  |vpiImportTypespec:
+  \_int_typespec: , line:6:38, endln:6:41
+  |vpiImportTypespec:
+  \_int_var: (work@dut.a), line:6:42, endln:6:43
+  |vpiImportTypespec:
+  \_interface_typespec: (sim_sram_if), line:6:12, endln:6:23
+  |vpiImportTypespec:
+  \_interface_typespec: (sim_sram_if), line:6:12, endln:6:23
+  |vpiImportTypespec:
+  \_int_typespec: , line:6:38, endln:6:41
+  |vpiImportTypespec:
+  \_logic_net: (work@dut.ss_if), line:7:15, endln:7:20
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:6:1, endln:8:10
     |vpiName:ss_if
     |vpiFullName:work@dut.ss_if
+    |vpiNetType:1
+  |vpiDefName:work@dut
+  |vpiNet:
+  \_logic_net: (work@dut.ss_if), line:7:15, endln:7:20
   |vpiPort:
-  \_port: (ss_if), line:6:24, endln:6:29
+  \_port: (ss_if), line:6:12, endln:6:29
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:6:1, endln:8:10
     |vpiName:ss_if
     |vpiDirection:3
-    |vpiLowConn:
-    \_ref_obj: (work@dut.ss_if.ss_if), line:6:24, endln:6:29
-      |vpiParent:
-      \_port: (ss_if), line:6:24, endln:6:29
-      |vpiName:ss_if
-      |vpiFullName:work@dut.ss_if.ss_if
-      |vpiActual:
-      \_logic_net: (work@dut.ss_if), line:6:24, endln:6:29
     |vpiTypedef:
-    \_ref_typespec: (work@dut.ss_if)
+    \_ref_typespec: (work@dut.ss_if.sim_sram_if), line:6:12, endln:6:23
       |vpiParent:
-      \_port: (ss_if), line:6:24, endln:6:29
-      |vpiFullName:work@dut.ss_if
+      \_port: (ss_if), line:6:12, endln:6:29
+      |vpiName:sim_sram_if
+      |vpiFullName:work@dut.ss_if.sim_sram_if
       |vpiActual:
       \_interface_typespec: (sim_sram_if), line:6:12, endln:6:23
   |vpiPort:
-  \_port: (a), line:6:42, endln:6:43
+  \_port: (a), line:6:31, endln:6:43
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:6:1, endln:8:10
     |vpiName:a
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@dut.a.a), line:6:42, endln:6:43
-      |vpiParent:
-      \_port: (a), line:6:42, endln:6:43
-      |vpiName:a
-      |vpiFullName:work@dut.a.a
-      |vpiActual:
-      \_logic_net: (work@dut.a), line:6:42, endln:6:43
     |vpiTypedef:
-    \_ref_typespec: (work@dut.a)
+    \_ref_typespec: (work@dut.a), line:6:38, endln:6:41
       |vpiParent:
-      \_port: (a), line:6:42, endln:6:43
+      \_port: (a), line:6:31, endln:6:43
       |vpiFullName:work@dut.a
       |vpiActual:
       \_int_typespec: , line:6:38, endln:6:41
@@ -252,58 +321,116 @@ design: (unnamed)
         |vpiParent:
         \_hier_path: (ss_if.start_addr), line:7:15, endln:7:31
         |vpiName:ss_if
+        |vpiActual:
+        \_logic_net: (work@dut.ss_if), line:7:15, endln:7:20
       |vpiActual:
       \_ref_obj: (work@dut.start_addr), line:7:21, endln:7:31
         |vpiParent:
         \_hier_path: (ss_if.start_addr), line:7:15, endln:7:31
         |vpiName:start_addr
         |vpiFullName:work@dut.start_addr
+        |vpiActual:
+        \_logic_net: (work@sim_sram_if.start_addr), line:3:8, endln:3:18
       |vpiName:ss_if.start_addr
     |vpiLhs:
     \_ref_obj: (work@dut.a), line:7:11, endln:7:12
       |vpiParent:
-      \_cont_assign: , line:7:11, endln:7:31
+      \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:6:1, endln:8:10
       |vpiName:a
       |vpiFullName:work@dut.a
       |vpiActual:
-      \_logic_net: (work@dut.a), line:6:42, endln:6:43
+      \_int_var: (work@dut.a), line:6:42, endln:6:43
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:10:1, endln:14:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiNet:
-  \_logic_net: (work@top.o), line:10:23, endln:10:24
+  |vpiName:work@top
+  |vpiVariables:
+  \_int_var: (work@top.o), line:10:23, endln:10:24
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:10:1, endln:14:10
+    |vpiTypespec:
+    \_ref_typespec: (work@top.o), line:10:19, endln:10:22
+      |vpiParent:
+      \_int_var: (work@top.o), line:10:23, endln:10:24
+      |vpiFullName:work@top.o
+      |vpiActual:
+      \_int_typespec: , line:10:19, endln:10:22
     |vpiName:o
     |vpiFullName:work@top.o
-  |vpiNet:
-  \_logic_net: (work@top.u_dut.ss_if.u_sim_sram_if), line:13:21, endln:13:34
+    |vpiSigned:1
+    |vpiVisibility:1
+  |vpiTypedef:
+  \_int_typespec: , line:10:19, endln:10:22
     |vpiParent:
-    \_port: (ss_if), line:13:14, endln:13:35
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:10:1, endln:14:10
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:10:19, endln:10:22
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:10:1, endln:14:10
+    |vpiSigned:1
+  |vpiImportTypespec:
+  \_int_typespec: , line:10:19, endln:10:22
+  |vpiImportTypespec:
+  \_int_var: (work@top.o), line:10:23, endln:10:24
+  |vpiImportTypespec:
+  \_int_typespec: , line:10:19, endln:10:22
+  |vpiImportTypespec:
+  \_logic_net: (work@top.u_sim_sram_if), line:13:21, endln:13:34
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:10:1, endln:14:10
     |vpiName:u_sim_sram_if
-    |vpiFullName:work@top.u_dut.ss_if.u_sim_sram_if
+    |vpiFullName:work@top.u_sim_sram_if
     |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@top.start_addr), line:12:25, endln:12:35
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:10:1, endln:14:10
+    |vpiName:start_addr
+    |vpiFullName:work@top.start_addr
+    |vpiNetType:1
+  |vpiDefName:work@top
+  |vpiNet:
+  \_logic_net: (work@top.u_sim_sram_if), line:13:21, endln:13:34
+  |vpiNet:
+  \_logic_net: (work@top.start_addr), line:12:25, endln:12:35
   |vpiPort:
-  \_port: (o), line:10:23, endln:10:24
+  \_port: (ss_if), line:13:14, endln:13:35
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:10:1, endln:14:10
+    |vpiName:ss_if
+    |vpiHighConn:
+    \_ref_obj: (work@top.ss_if.u_sim_sram_if), line:13:21, endln:13:34
+      |vpiParent:
+      \_port: (ss_if), line:13:14, endln:13:35
+      |vpiName:u_sim_sram_if
+      |vpiFullName:work@top.ss_if.u_sim_sram_if
+      |vpiActual:
+      \_logic_net: (work@top.u_sim_sram_if), line:13:21, endln:13:34
+  |vpiPort:
+  \_port: (a), line:13:37, endln:13:42
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:10:1, endln:14:10
+    |vpiName:a
+    |vpiHighConn:
+    \_ref_obj: (work@top.a.o), line:13:40, endln:13:41
+      |vpiParent:
+      \_port: (a), line:13:37, endln:13:42
+      |vpiName:o
+      |vpiFullName:work@top.a.o
+      |vpiActual:
+      \_int_var: (work@top.o), line:10:23, endln:10:24
+  |vpiPort:
+  \_port: (o), line:10:12, endln:10:24
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:10:1, endln:14:10
     |vpiName:o
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@top.o.o), line:10:23, endln:10:24
-      |vpiParent:
-      \_port: (o), line:10:23, endln:10:24
-      |vpiName:o
-      |vpiFullName:work@top.o.o
-      |vpiActual:
-      \_logic_net: (work@top.o), line:10:23, endln:10:24
     |vpiTypedef:
-    \_ref_typespec: (work@top.o)
+    \_ref_typespec: (work@top.o), line:10:19, endln:10:22
       |vpiParent:
-      \_port: (o), line:10:23, endln:10:24
+      \_port: (o), line:10:12, endln:10:24
       |vpiFullName:work@top.o
       |vpiActual:
       \_int_typespec: , line:10:19, endln:10:22
@@ -320,22 +447,26 @@ design: (unnamed)
       |HEX:1234
       |vpiConstType:5
     |vpiLhs:
-    \_hier_path: (u_sim_sram_if.start_addr), line:12:11, endln:12:35
+    \_hier_path: (u_sim_sram_if.start_addr), line:12:24, endln:12:35
       |vpiParent:
-      \_cont_assign: , line:12:11, endln:12:46
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:10:1, endln:14:10
       |vpiActual:
-      \_ref_obj: (u_sim_sram_if), line:12:25, endln:12:35
+      \_ref_obj: (u_sim_sram_if), line:12:24, endln:12:35
         |vpiParent:
-        \_hier_path: (u_sim_sram_if.start_addr), line:12:11, endln:12:35
+        \_hier_path: (u_sim_sram_if.start_addr), line:12:24, endln:12:35
         |vpiName:u_sim_sram_if
+        |vpiActual:
+        \_logic_net: (work@top.u_sim_sram_if), line:13:21, endln:13:34
       |vpiActual:
       \_ref_obj: (start_addr), line:12:25, endln:12:35
         |vpiParent:
-        \_hier_path: (u_sim_sram_if.start_addr), line:12:11, endln:12:35
+        \_hier_path: (u_sim_sram_if.start_addr), line:12:24, endln:12:35
         |vpiName:start_addr
+        |vpiActual:
+        \_logic_net: (work@top.start_addr), line:12:25, endln:12:35
       |vpiName:u_sim_sram_if.start_addr
   |vpiRefModule:
-  \_ref_module: work@sim_sram_if (u_sim_sram_if), line:11:16, endln:11:29
+  \_ref_module: work@sim_sram_if (u_sim_sram_if), line:11:4, endln:11:32
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:10:1, endln:14:10
     |vpiName:u_sim_sram_if
@@ -343,7 +474,7 @@ design: (unnamed)
     |vpiActual:
     \_interface_inst: work@sim_sram_if (work@sim_sram_if), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:2:1, endln:4:13
   |vpiRefModule:
-  \_ref_module: work@dut (u_dut), line:13:8, endln:13:13
+  \_ref_module: work@dut (u_dut), line:13:4, endln:13:44
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:10:1, endln:14:10
     |vpiName:u_dut
@@ -352,39 +483,8 @@ design: (unnamed)
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/InterfInst/dut.sv, line:6:1, endln:8:10
     |vpiPort:
     \_port: (ss_if), line:13:14, endln:13:35
-      |vpiParent:
-      \_ref_module: work@dut (u_dut), line:13:8, endln:13:13
-      |vpiName:ss_if
-      |vpiHighConn:
-      \_ref_obj: (work@top.u_dut.ss_if.u_sim_sram_if), line:13:21, endln:13:34
-        |vpiParent:
-        \_port: (ss_if), line:13:14, endln:13:35
-        |vpiName:u_sim_sram_if
-        |vpiFullName:work@top.u_dut.ss_if.u_sim_sram_if
-        |vpiActual:
-        \_logic_net: (work@top.u_dut.ss_if.u_sim_sram_if), line:13:21, endln:13:34
     |vpiPort:
     \_port: (a), line:13:37, endln:13:42
-      |vpiParent:
-      \_ref_module: work@dut (u_dut), line:13:8, endln:13:13
-      |vpiName:a
-      |vpiHighConn:
-      \_ref_obj: (work@top.u_dut.a.o), line:13:40, endln:13:41
-        |vpiParent:
-        \_port: (a), line:13:37, endln:13:42
-        |vpiName:o
-        |vpiFullName:work@top.u_dut.a.o
-        |vpiActual:
-        \_logic_net: (work@top.o), line:10:23, endln:10:24
-\_weaklyReferenced:
-\_int_typespec: , line:3:4, endln:3:7
-  |vpiSigned:1
-\_interface_typespec: (sim_sram_if), line:6:12, endln:6:23
-  |vpiName:sim_sram_if
-\_int_typespec: , line:6:38, endln:6:41
-  |vpiSigned:1
-\_int_typespec: , line:10:19, endln:10:22
-  |vpiSigned:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -393,5 +493,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/InterfInst/dut.sv | ${SURELOG_DIR}/build/regression/InterfInst/roundtrip/dut_000.sv | 5 | 14 |
+[roundtrip]: ${SURELOG_DIR}/tests/InterfInst/dut.sv | ${SURELOG_DIR}/build/regression/InterfInst/roundtrip/dut_000.sv | 9 | 14 |
 ============================== End RoundTrip Results ==============================

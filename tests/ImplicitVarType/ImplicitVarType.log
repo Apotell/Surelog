@@ -13,39 +13,38 @@ constant                                               2
 design                                                 1
 function                                               1
 io_decl                                                1
-logic_typespec                                         1
 module_inst                                            1
 range                                                  1
-ref_typespec                                           2
+ref_typespec                                           1
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ImplicitVarType/slpp_unit/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ImplicitVarType/slpp_unit/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ImplicitVarType/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/ImplicitVarType/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@spidpi (work@spidpi), file:${SURELOG_DIR}/tests/ImplicitVarType/dut.sv, line:1:1, endln:4:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@spidpi
-  |vpiDefName:work@spidpi
-  |vpiTaskFunc:
+  |vpiName:work@spidpi
+  |vpiInternalScope:
   \_function: (work@spidpi.tick), line:2:3, endln:3:37
     |vpiParent:
     \_module_inst: work@spidpi (work@spidpi), file:${SURELOG_DIR}/tests/ImplicitVarType/dut.sv, line:1:1, endln:4:10
     |vpiName:tick
     |vpiFullName:work@spidpi.tick
-    |vpiAccessType:4
-    |vpiVisibility:1
-    |vpiDPICStr:2
-    |vpiReturn:
+    |vpiVariables:
     \_byte_var: (work@spidpi.tick), line:3:5, endln:3:9
       |vpiParent:
       \_function: (work@spidpi.tick), line:2:3, endln:3:37
       |vpiTypespec:
-      \_ref_typespec: (work@spidpi.tick)
+      \_ref_typespec: (work@spidpi.tick), line:3:5, endln:3:9
         |vpiParent:
         \_byte_var: (work@spidpi.tick), line:3:5, endln:3:9
         |vpiFullName:work@spidpi.tick
@@ -53,45 +52,31 @@ design: (unnamed)
         \_byte_typespec: , line:3:5, endln:3:9
       |vpiFullName:work@spidpi.tick
       |vpiSigned:1
+    |vpiImportTypespec:
+    \_byte_var: (work@spidpi.tick), line:3:5, endln:3:9
+    |vpiAccessType:4
+    |vpiVisibility:1
+    |vpiDPICStr:2
+    |vpiReturn:
+    \_byte_var: (work@spidpi.tick), line:3:5, endln:3:9
     |vpiIODecl:
-    \_io_decl: (d2p_data), line:3:27, endln:3:35
+    \_io_decl: (d2p_data), line:3:15, endln:3:35
       |vpiParent:
       \_function: (work@spidpi.tick), line:2:3, endln:3:37
       |vpiDirection:1
       |vpiName:d2p_data
-      |vpiTypedef:
-      \_ref_typespec: (work@spidpi.tick.d2p_data)
-        |vpiParent:
-        \_io_decl: (d2p_data), line:3:27, endln:3:35
-        |vpiFullName:work@spidpi.tick.d2p_data
-        |vpiActual:
-        \_logic_typespec: , line:3:21, endln:3:26
-    |vpiInstance:
-    \_module_inst: work@spidpi (work@spidpi), file:${SURELOG_DIR}/tests/ImplicitVarType/dut.sv, line:1:1, endln:4:10
-\_weaklyReferenced:
-\_byte_typespec: , line:3:5, endln:3:9
-  |vpiSigned:1
-\_logic_typespec: , line:3:21, endln:3:26
-  |vpiRange:
-  \_range: , line:3:21, endln:3:26
+  |vpiTypedef:
+  \_byte_typespec: , line:3:5, endln:3:9
     |vpiParent:
-    \_logic_typespec: , line:3:21, endln:3:26
-    |vpiLeftRange:
-    \_constant: , line:3:22, endln:3:23
-      |vpiParent:
-      \_range: , line:3:21, endln:3:26
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:24, endln:3:25
-      |vpiParent:
-      \_range: , line:3:21, endln:3:26
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
+    \_module_inst: work@spidpi (work@spidpi), file:${SURELOG_DIR}/tests/ImplicitVarType/dut.sv, line:1:1, endln:4:10
+    |vpiSigned:1
+  |vpiImportTypespec:
+  \_function: (work@spidpi.tick), line:2:3, endln:3:37
+  |vpiImportTypespec:
+  \_byte_typespec: , line:3:5, endln:3:9
+  |vpiDefName:work@spidpi
+  |vpiTaskFunc:
+  \_function: (work@spidpi.tick), line:2:3, endln:3:37
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -100,5 +85,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ImplicitVarType/dut.sv | ${SURELOG_DIR}/build/regression/ImplicitVarType/roundtrip/dut_000.sv | 2 | 4 |
+[roundtrip]: ${SURELOG_DIR}/tests/ImplicitVarType/dut.sv | ${SURELOG_DIR}/build/regression/ImplicitVarType/roundtrip/dut_000.sv | 4 | 4 |
 ============================== End RoundTrip Results ==============================

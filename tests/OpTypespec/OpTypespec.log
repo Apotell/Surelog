@@ -157,9 +157,8 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 array_typespec                                         1
 bit_typespec                                           1
-constant                                               8
+constant                                               6
 design                                                 1
-logic_net                                              1
 logic_typespec                                         2
 module_inst                                            2
 operation                                              4
@@ -168,7 +167,8 @@ parameter                                              2
 range                                                  2
 ref_module                                             1
 ref_obj                                                1
-ref_typespec                                           8
+ref_typespec                                           7
+source_file                                            1
 string_typespec                                        2
 struct_typespec                                        1
 tagged_pattern                                         2
@@ -176,40 +176,35 @@ typespec_member                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/OpTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/OpTypespec/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/OpTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/OpTypespec/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/OpTypespec/dut.sv, line:8:1, endln:21:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@dut
+  |vpiName:work@dut
   |vpiParameter:
-  \_parameter: (work@dut.pmp_cfg_rst), line:14:22, endln:14:33
+  \_parameter: (work@dut.pmp_cfg_rst), line:14:22, endln:16:2
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/OpTypespec/dut.sv, line:8:1, endln:21:10
     |vpiSize:1
     |vpiTypespec:
-    \_ref_typespec: (work@dut.pmp_cfg_rst)
+    \_ref_typespec: (work@dut.pmp_cfg_rst), line:14:12, endln:14:21
       |vpiParent:
-      \_parameter: (work@dut.pmp_cfg_rst), line:14:22, endln:14:33
+      \_parameter: (work@dut.pmp_cfg_rst), line:14:22, endln:16:2
       |vpiFullName:work@dut.pmp_cfg_rst
       |vpiActual:
       \_array_typespec: , line:14:12, endln:14:36
     |vpiRange:
     \_range: , line:14:34, endln:14:35
       |vpiParent:
-      \_parameter: (work@dut.pmp_cfg_rst), line:14:22, endln:14:33
-      |vpiLeftRange:
-      \_constant: 
-        |vpiParent:
-        \_range: , line:14:34, endln:14:35
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
+      \_parameter: (work@dut.pmp_cfg_rst), line:14:22, endln:16:2
       |vpiRightRange:
       \_operation: , line:14:34, endln:14:35
         |vpiParent:
@@ -218,16 +213,11 @@ design: (unnamed)
         |vpiOperand:
         \_constant: , line:14:34, endln:14:35
           |vpiParent:
-          \_operation: , line:14:34, endln:14:35
+          \_range: , line:14:34, endln:14:35
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
           |vpiConstType:9
-        |vpiOperand:
-        \_constant: 
-          |vpiSize:64
-          |INT:1
-          |vpiConstType:7
     |vpiLocalParam:1
     |vpiName:pmp_cfg_rst
     |vpiFullName:work@dut.pmp_cfg_rst
@@ -246,86 +236,123 @@ design: (unnamed)
         \_operation: , line:14:39, endln:16:2
         |vpiOpType:75
         |vpiOperand:
-        \_tagged_pattern: , line:15:11, endln:15:15
+        \_tagged_pattern: , line:15:5, endln:15:15
           |vpiParent:
           \_operation: , line:15:3, endln:15:28
           |vpiPattern:
           \_constant: , line:15:11, endln:15:15
+            |vpiParent:
+            \_operation: , line:15:3, endln:15:28
             |vpiDecompile:1'b0
             |vpiSize:1
             |BIN:0
             |vpiConstType:3
           |vpiTypespec:
-          \_ref_typespec: (work@dut)
+          \_ref_typespec: (work@dut.lock), line:15:5, endln:15:9
             |vpiParent:
-            \_tagged_pattern: , line:15:11, endln:15:15
-            |vpiFullName:work@dut
+            \_tagged_pattern: , line:15:5, endln:15:15
+            |vpiName:lock
+            |vpiFullName:work@dut.lock
             |vpiActual:
             \_string_typespec: (lock), line:15:5, endln:15:9
         |vpiOperand:
-        \_tagged_pattern: , line:15:23, endln:15:27
+        \_tagged_pattern: , line:15:17, endln:15:27
           |vpiParent:
           \_operation: , line:15:3, endln:15:28
           |vpiPattern:
           \_constant: , line:15:23, endln:15:27
+            |vpiParent:
+            \_operation: , line:15:3, endln:15:28
             |vpiDecompile:1'b0
             |vpiSize:1
             |BIN:0
             |vpiConstType:3
           |vpiTypespec:
-          \_ref_typespec: (work@dut)
+          \_ref_typespec: (work@dut.read), line:15:17, endln:15:21
             |vpiParent:
-            \_tagged_pattern: , line:15:23, endln:15:27
-            |vpiFullName:work@dut
+            \_tagged_pattern: , line:15:17, endln:15:27
+            |vpiName:read
+            |vpiFullName:work@dut.read
             |vpiActual:
             \_string_typespec: (read), line:15:17, endln:15:21
     |vpiLhs:
-    \_parameter: (work@dut.pmp_cfg_rst), line:14:22, endln:14:33
+    \_parameter: (work@dut.pmp_cfg_rst), line:14:22, endln:16:2
   |vpiTypedef:
   \_struct_typespec: (pmp_cfg_t), line:9:9, endln:12:2
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/OpTypespec/dut.sv, line:8:1, endln:21:10
     |vpiName:pmp_cfg_t
-    |vpiInstance:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/OpTypespec/dut.sv, line:8:1, endln:21:10
     |vpiPacked:1
     |vpiTypespecMember:
-    \_typespec_member: (lock), line:10:18, endln:10:22
+    \_typespec_member: (lock), line:10:3, endln:10:23
       |vpiParent:
       \_struct_typespec: (pmp_cfg_t), line:9:9, endln:12:2
       |vpiName:lock
       |vpiTypespec:
-      \_ref_typespec: (work@dut.pmp_cfg_t.lock)
+      \_ref_typespec: (work@dut.pmp_cfg_t.lock), line:10:3, endln:10:8
         |vpiParent:
-        \_typespec_member: (lock), line:10:18, endln:10:22
+        \_typespec_member: (lock), line:10:3, endln:10:23
         |vpiFullName:work@dut.pmp_cfg_t.lock
         |vpiActual:
         \_logic_typespec: , line:10:3, endln:10:8
-      |vpiRefFile:${SURELOG_DIR}/tests/OpTypespec/dut.sv
-      |vpiRefLineNo:10
-      |vpiRefColumnNo:3
-      |vpiRefEndLineNo:10
-      |vpiRefEndColumnNo:8
     |vpiTypespecMember:
-    \_typespec_member: (read), line:11:18, endln:11:22
+    \_typespec_member: (read), line:11:3, endln:11:23
       |vpiParent:
       \_struct_typespec: (pmp_cfg_t), line:9:9, endln:12:2
       |vpiName:read
       |vpiTypespec:
-      \_ref_typespec: (work@dut.pmp_cfg_t.read)
+      \_ref_typespec: (work@dut.pmp_cfg_t.read), line:11:3, endln:11:8
         |vpiParent:
-        \_typespec_member: (read), line:11:18, endln:11:22
+        \_typespec_member: (read), line:11:3, endln:11:23
         |vpiFullName:work@dut.pmp_cfg_t.read
         |vpiActual:
         \_logic_typespec: , line:11:3, endln:11:8
-      |vpiRefFile:${SURELOG_DIR}/tests/OpTypespec/dut.sv
-      |vpiRefLineNo:11
-      |vpiRefColumnNo:3
-      |vpiRefEndLineNo:11
-      |vpiRefEndColumnNo:8
+  |vpiTypedef:
+  \_logic_typespec: , line:10:3, endln:10:8
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/OpTypespec/dut.sv, line:8:1, endln:21:10
+  |vpiTypedef:
+  \_logic_typespec: , line:11:3, endln:11:8
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/OpTypespec/dut.sv, line:8:1, endln:21:10
+  |vpiTypedef:
+  \_array_typespec: , line:14:12, endln:14:36
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/OpTypespec/dut.sv, line:8:1, endln:21:10
+    |vpiRange:
+    \_range: , line:14:34, endln:14:35
+    |vpiElemTypespec:
+    \_ref_typespec: (work@dut), line:14:12, endln:14:21
+      |vpiParent:
+      \_array_typespec: , line:14:12, endln:14:36
+      |vpiFullName:work@dut
+      |vpiActual:
+      \_struct_typespec: (pmp_cfg_t), line:9:9, endln:12:2
+  |vpiTypedef:
+  \_string_typespec: (lock), line:15:5, endln:15:9
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/OpTypespec/dut.sv, line:8:1, endln:21:10
+    |vpiName:lock
+  |vpiTypedef:
+  \_string_typespec: (read), line:15:17, endln:15:21
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/OpTypespec/dut.sv, line:8:1, endln:21:10
+    |vpiName:read
+  |vpiImportTypespec:
+  \_struct_typespec: (pmp_cfg_t), line:9:9, endln:12:2
+  |vpiImportTypespec:
+  \_logic_typespec: , line:10:3, endln:10:8
+  |vpiImportTypespec:
+  \_logic_typespec: , line:11:3, endln:11:8
+  |vpiImportTypespec:
+  \_array_typespec: , line:14:12, endln:14:36
+  |vpiImportTypespec:
+  \_string_typespec: (lock), line:15:5, endln:15:9
+  |vpiImportTypespec:
+  \_string_typespec: (read), line:15:17, endln:15:21
   |vpiDefName:work@dut
   |vpiRefModule:
-  \_ref_module: work@ibex_csr (u_pmp_cfg_csr), line:20:5, endln:20:18
+  \_ref_module: work@ibex_csr (u_pmp_cfg_csr), line:18:3, endln:20:22
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/OpTypespec/dut.sv, line:8:1, endln:21:10
     |vpiName:u_pmp_cfg_csr
@@ -336,16 +363,16 @@ design: (unnamed)
 \_module_inst: work@ibex_csr (work@ibex_csr), file:${SURELOG_DIR}/tests/OpTypespec/dut.sv, line:1:1, endln:6:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@ibex_csr
+  |vpiName:work@ibex_csr
   |vpiParameter:
-  \_parameter: (work@ibex_csr.ResetValue), line:2:27, endln:2:37
+  \_parameter: (work@ibex_csr.ResetValue), line:2:27, endln:2:42
     |vpiParent:
     \_module_inst: work@ibex_csr (work@ibex_csr), file:${SURELOG_DIR}/tests/OpTypespec/dut.sv, line:1:1, endln:6:10
     |BIN:0
     |vpiTypespec:
-    \_ref_typespec: (work@ibex_csr.ResetValue)
+    \_ref_typespec: (work@ibex_csr.ResetValue), line:2:11, endln:2:14
       |vpiParent:
-      \_parameter: (work@ibex_csr.ResetValue), line:2:27, endln:2:37
+      \_parameter: (work@ibex_csr.ResetValue), line:2:27, endln:2:42
       |vpiFullName:work@ibex_csr.ResetValue
       |vpiActual:
       \_bit_typespec: , line:2:11, endln:2:26
@@ -362,85 +389,58 @@ design: (unnamed)
       |vpiDecompile:'0
       |vpiSize:-1
       |BIN:0
-      |vpiTypespec:
-      \_ref_typespec: (work@ibex_csr)
-        |vpiParent:
-        \_constant: , line:2:40, endln:2:42
-        |vpiFullName:work@ibex_csr
-        |vpiActual:
-        \_bit_typespec: , line:2:11, endln:2:26
       |vpiConstType:3
     |vpiLhs:
-    \_parameter: (work@ibex_csr.ResetValue), line:2:27, endln:2:37
+    \_parameter: (work@ibex_csr.ResetValue), line:2:27, endln:2:42
+  |vpiTypedef:
+  \_bit_typespec: , line:2:11, endln:2:26
+    |vpiParent:
+    \_module_inst: work@ibex_csr (work@ibex_csr), file:${SURELOG_DIR}/tests/OpTypespec/dut.sv, line:1:1, endln:6:10
+    |vpiRange:
+    \_range: , line:2:15, endln:2:26
+      |vpiParent:
+      \_module_inst: work@ibex_csr (work@ibex_csr), file:${SURELOG_DIR}/tests/OpTypespec/dut.sv, line:1:1, endln:6:10
+      |vpiLeftRange:
+      \_operation: , line:2:16, endln:2:23
+        |vpiParent:
+        \_range: , line:2:15, endln:2:26
+        |vpiOpType:11
+        |vpiOperand:
+        \_ref_obj: (work@ibex_csr.Width), line:2:16, endln:2:21
+          |vpiParent:
+          \_operation: , line:2:16, endln:2:23
+          |vpiName:Width
+          |vpiFullName:work@ibex_csr.Width
+          |vpiActual:
+          \_logic_net: (work@ibex_csr.Width), line:2:16, endln:2:21
+        |vpiOperand:
+        \_constant: , line:2:22, endln:2:23
+          |vpiParent:
+          \_operation: , line:2:16, endln:2:23
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:2:24, endln:2:25
+        |vpiParent:
+        \_range: , line:2:15, endln:2:26
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_bit_typespec: , line:2:11, endln:2:26
+  |vpiImportTypespec:
+  \_logic_net: (work@ibex_csr.Width), line:2:16, endln:2:21
+    |vpiParent:
+    \_module_inst: work@ibex_csr (work@ibex_csr), file:${SURELOG_DIR}/tests/OpTypespec/dut.sv, line:1:1, endln:6:10
+    |vpiName:Width
+    |vpiFullName:work@ibex_csr.Width
+    |vpiNetType:1
   |vpiDefName:work@ibex_csr
   |vpiNet:
-  \_logic_net: (work@ibex_csr.ResetValue.Width), line:2:16, endln:2:21
-    |vpiParent:
-    \_operation: , line:2:16, endln:2:23
-    |vpiName:Width
-    |vpiFullName:work@ibex_csr.ResetValue.Width
-    |vpiNetType:1
-\_weaklyReferenced:
-\_logic_typespec: , line:10:3, endln:10:8
-\_logic_typespec: , line:11:3, endln:11:8
-\_array_typespec: , line:14:12, endln:14:36
-  |vpiParent:
-  \_parameter: (work@dut.pmp_cfg_rst), line:14:22, endln:14:33
-  |vpiRange:
-  \_range: , line:14:34, endln:14:35
-  |vpiElemTypespec:
-  \_ref_typespec: (work@dut.pmp_cfg_rst)
-    |vpiParent:
-    \_array_typespec: , line:14:12, endln:14:36
-    |vpiFullName:work@dut.pmp_cfg_rst
-    |vpiActual:
-    \_struct_typespec: (pmp_cfg_t), line:9:9, endln:12:2
-\_string_typespec: (lock), line:15:5, endln:15:9
-  |vpiParent:
-  \_tagged_pattern: , line:15:11, endln:15:15
-  |vpiName:lock
-\_string_typespec: (read), line:15:17, endln:15:21
-  |vpiParent:
-  \_tagged_pattern: , line:15:23, endln:15:27
-  |vpiName:read
-\_operation: , line:2:16, endln:2:23
-  |vpiParent:
-  \_range: , line:2:15, endln:2:26
-  |vpiOpType:11
-  |vpiOperand:
-  \_ref_obj: (work@ibex_csr.ResetValue.Width), line:2:16, endln:2:21
-    |vpiParent:
-    \_operation: , line:2:16, endln:2:23
-    |vpiName:Width
-    |vpiFullName:work@ibex_csr.ResetValue.Width
-    |vpiActual:
-    \_logic_net: (work@ibex_csr.ResetValue.Width), line:2:16, endln:2:21
-  |vpiOperand:
-  \_constant: , line:2:22, endln:2:23
-    |vpiParent:
-    \_operation: , line:2:16, endln:2:23
-    |vpiDecompile:1
-    |vpiSize:64
-    |UINT:1
-    |vpiConstType:9
-\_range: , line:2:15, endln:2:26
-  |vpiParent:
-  \_bit_typespec: , line:2:11, endln:2:26
-  |vpiLeftRange:
-  \_operation: , line:2:16, endln:2:23
-  |vpiRightRange:
-  \_constant: , line:2:24, endln:2:25
-    |vpiParent:
-    \_range: , line:2:15, endln:2:26
-    |vpiDecompile:0
-    |vpiSize:64
-    |UINT:0
-    |vpiConstType:9
-\_bit_typespec: , line:2:11, endln:2:26
-  |vpiParent:
-  \_parameter: (work@ibex_csr.ResetValue), line:2:27, endln:2:37
-  |vpiRange:
-  \_range: , line:2:15, endln:2:26
+  \_logic_net: (work@ibex_csr.Width), line:2:16, endln:2:21
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -449,5 +449,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/OpTypespec/dut.sv | ${SURELOG_DIR}/build/regression/OpTypespec/roundtrip/dut_000.sv | 8 | 21 |
+[roundtrip]: ${SURELOG_DIR}/tests/OpTypespec/dut.sv | ${SURELOG_DIR}/build/regression/OpTypespec/roundtrip/dut_000.sv | 12 | 21 |
 ============================== End RoundTrip Results ==============================

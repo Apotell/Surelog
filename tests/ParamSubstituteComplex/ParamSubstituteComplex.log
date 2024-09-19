@@ -541,22 +541,23 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 begin                                                  2
 bit_select                                             1
-bit_typespec                                           7
-constant                                              31
+bit_typespec                                           6
+constant                                              24
 design                                                 1
 gen_if                                                 2
 hier_path                                              1
-int_typespec                                           2
-logic_typespec                                         6
+int_typespec                                           1
+logic_typespec                                         3
 module_inst                                            2
 operation                                             11
 packed_array_typespec                                  1
 param_assign                                          13
 parameter                                             13
-range                                                  5
+range                                                  2
 ref_module                                             2
 ref_obj                                               19
-ref_typespec                                          35
+ref_typespec                                          25
+source_file                                            1
 string_typespec                                       10
 struct_typespec                                        1
 tagged_pattern                                        10
@@ -564,30 +565,33 @@ typespec_member                                        5
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamSubstituteComplex/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ParamSubstituteComplex/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ParamSubstituteComplex/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:1:1, endln:2:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@GOOD
+  |vpiName:work@GOOD
   |vpiDefName:work@GOOD
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
+  |vpiName:work@top
   |vpiParameter:
-  \_parameter: (work@top.RV64D_Xsflt), line:16:27, endln:16:38
+  \_parameter: (work@top.RV64D_Xsflt), line:16:27, endln:22:4
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.RV64D_Xsflt)
+    \_ref_typespec: (work@top.RV64D_Xsflt), line:16:12, endln:16:26
       |vpiParent:
-      \_parameter: (work@top.RV64D_Xsflt), line:16:27, endln:16:38
+      \_parameter: (work@top.RV64D_Xsflt), line:16:27, endln:22:4
       |vpiFullName:work@top.RV64D_Xsflt
       |vpiActual:
       \_struct_typespec: (fpu_features_t), line:8:9, endln:14:4
@@ -595,35 +599,28 @@ design: (unnamed)
     |vpiName:RV64D_Xsflt
     |vpiFullName:work@top.RV64D_Xsflt
   |vpiParameter:
-  \_parameter: (work@top.XLEN), line:23:13, endln:23:17
+  \_parameter: (work@top.XLEN), line:23:13, endln:23:22
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
     |UINT:64
-    |vpiTypespec:
-    \_ref_typespec: (work@top.XLEN)
-      |vpiParent:
-      \_parameter: (work@top.XLEN), line:23:13, endln:23:17
-      |vpiFullName:work@top.XLEN
-      |vpiActual:
-      \_int_typespec: , line:23:2, endln:23:22
     |vpiLocalParam:1
     |vpiName:XLEN
     |vpiFullName:work@top.XLEN
   |vpiParameter:
-  \_parameter: (work@top.IS_XLEN64), line:25:12, endln:25:21
+  \_parameter: (work@top.IS_XLEN64), line:25:12, endln:25:51
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
     |vpiLocalParam:1
     |vpiName:IS_XLEN64
     |vpiFullName:work@top.IS_XLEN64
   |vpiParameter:
-  \_parameter: (work@top.RVF), line:26:16, endln:26:19
+  \_parameter: (work@top.RVF), line:26:16, endln:26:31
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.RVF)
+    \_ref_typespec: (work@top.RVF), line:26:12, endln:26:15
       |vpiParent:
-      \_parameter: (work@top.RVF), line:26:16, endln:26:19
+      \_parameter: (work@top.RVF), line:26:16, endln:26:31
       |vpiFullName:work@top.RVF
       |vpiActual:
       \_bit_typespec: , line:26:12, endln:26:15
@@ -631,13 +628,13 @@ design: (unnamed)
     |vpiName:RVF
     |vpiFullName:work@top.RVF
   |vpiParameter:
-  \_parameter: (work@top.RVD), line:27:16, endln:27:19
+  \_parameter: (work@top.RVD), line:27:16, endln:27:31
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.RVD)
+    \_ref_typespec: (work@top.RVD), line:27:12, endln:27:15
       |vpiParent:
-      \_parameter: (work@top.RVD), line:27:16, endln:27:19
+      \_parameter: (work@top.RVD), line:27:16, endln:27:31
       |vpiFullName:work@top.RVD
       |vpiActual:
       \_bit_typespec: , line:27:12, endln:27:15
@@ -645,14 +642,14 @@ design: (unnamed)
     |vpiName:RVD
     |vpiFullName:work@top.RVD
   |vpiParameter:
-  \_parameter: (work@top.XF16), line:28:16, endln:28:20
+  \_parameter: (work@top.XF16), line:28:16, endln:28:30
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
     |BIN:0
     |vpiTypespec:
-    \_ref_typespec: (work@top.XF16)
+    \_ref_typespec: (work@top.XF16), line:28:12, endln:28:15
       |vpiParent:
-      \_parameter: (work@top.XF16), line:28:16, endln:28:20
+      \_parameter: (work@top.XF16), line:28:16, endln:28:30
       |vpiFullName:work@top.XF16
       |vpiActual:
       \_bit_typespec: , line:28:12, endln:28:15
@@ -660,14 +657,14 @@ design: (unnamed)
     |vpiName:XF16
     |vpiFullName:work@top.XF16
   |vpiParameter:
-  \_parameter: (work@top.XF16ALT), line:29:16, endln:29:23
+  \_parameter: (work@top.XF16ALT), line:29:16, endln:29:30
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
     |BIN:0
     |vpiTypespec:
-    \_ref_typespec: (work@top.XF16ALT)
+    \_ref_typespec: (work@top.XF16ALT), line:29:12, endln:29:15
       |vpiParent:
-      \_parameter: (work@top.XF16ALT), line:29:16, endln:29:23
+      \_parameter: (work@top.XF16ALT), line:29:16, endln:29:30
       |vpiFullName:work@top.XF16ALT
       |vpiActual:
       \_bit_typespec: , line:29:12, endln:29:15
@@ -675,14 +672,14 @@ design: (unnamed)
     |vpiName:XF16ALT
     |vpiFullName:work@top.XF16ALT
   |vpiParameter:
-  \_parameter: (work@top.XF8), line:30:16, endln:30:19
+  \_parameter: (work@top.XF8), line:30:16, endln:30:30
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
     |BIN:0
     |vpiTypespec:
-    \_ref_typespec: (work@top.XF8)
+    \_ref_typespec: (work@top.XF8), line:30:12, endln:30:15
       |vpiParent:
-      \_parameter: (work@top.XF8), line:30:16, endln:30:19
+      \_parameter: (work@top.XF8), line:30:16, endln:30:30
       |vpiFullName:work@top.XF8
       |vpiActual:
       \_bit_typespec: , line:30:12, endln:30:15
@@ -690,14 +687,14 @@ design: (unnamed)
     |vpiName:XF8
     |vpiFullName:work@top.XF8
   |vpiParameter:
-  \_parameter: (work@top.XFVEC), line:31:16, endln:31:21
+  \_parameter: (work@top.XFVEC), line:31:16, endln:31:30
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
     |BIN:0
     |vpiTypespec:
-    \_ref_typespec: (work@top.XFVEC)
+    \_ref_typespec: (work@top.XFVEC), line:31:12, endln:31:15
       |vpiParent:
-      \_parameter: (work@top.XFVEC), line:31:16, endln:31:21
+      \_parameter: (work@top.XFVEC), line:31:16, endln:31:30
       |vpiFullName:work@top.XFVEC
       |vpiActual:
       \_bit_typespec: , line:31:12, endln:31:15
@@ -705,13 +702,13 @@ design: (unnamed)
     |vpiName:XFVEC
     |vpiFullName:work@top.XFVEC
   |vpiParameter:
-  \_parameter: (work@top.FPU_FEATURES), line:33:27, endln:33:39
+  \_parameter: (work@top.FPU_FEATURES), line:33:27, endln:39:6
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.FPU_FEATURES)
+    \_ref_typespec: (work@top.FPU_FEATURES), line:33:12, endln:33:26
       |vpiParent:
-      \_parameter: (work@top.FPU_FEATURES), line:33:27, endln:33:39
+      \_parameter: (work@top.FPU_FEATURES), line:33:27, endln:39:6
       |vpiFullName:work@top.FPU_FEATURES
       |vpiActual:
       \_struct_typespec: (fpu_features_t), line:8:9, endln:14:4
@@ -719,33 +716,33 @@ design: (unnamed)
     |vpiName:FPU_FEATURES
     |vpiFullName:work@top.FPU_FEATURES
   |vpiParameter:
-  \_parameter: (work@top.Features), line:40:29, endln:40:37
+  \_parameter: (work@top.Features), line:40:29, endln:40:58
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.Features)
+    \_ref_typespec: (work@top.Features), line:40:12, endln:40:26
       |vpiParent:
-      \_parameter: (work@top.Features), line:40:29, endln:40:37
+      \_parameter: (work@top.Features), line:40:29, endln:40:58
       |vpiFullName:work@top.Features
       |vpiActual:
       \_struct_typespec: (fpu_features_t), line:8:9, endln:14:4
     |vpiName:Features
     |vpiFullName:work@top.Features
   |vpiParameter:
-  \_parameter: (work@top.FpFmtMask), line:41:29, endln:41:38
+  \_parameter: (work@top.FpFmtMask), line:41:29, endln:41:63
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.FpFmtMask)
+    \_ref_typespec: (work@top.FpFmtMask), line:41:12, endln:41:23
       |vpiParent:
-      \_parameter: (work@top.FpFmtMask), line:41:29, endln:41:38
+      \_parameter: (work@top.FpFmtMask), line:41:29, endln:41:63
       |vpiFullName:work@top.FpFmtMask
       |vpiActual:
       \_logic_typespec: (fmt_logic_t), line:6:9, endln:6:20
     |vpiName:FpFmtMask
     |vpiFullName:work@top.FpFmtMask
   |vpiParameter:
-  \_parameter: (work@top.DEBUGME), line:43:12, endln:43:19
+  \_parameter: (work@top.DEBUGME), line:43:12, endln:43:34
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
     |vpiLocalParam:1
@@ -761,92 +758,107 @@ design: (unnamed)
       \_param_assign: , line:16:27, endln:22:4
       |vpiOpType:75
       |vpiOperand:
-      \_tagged_pattern: , line:17:20, endln:17:22
+      \_tagged_pattern: , line:17:5, endln:17:22
         |vpiParent:
         \_operation: , line:16:41, endln:22:4
         |vpiPattern:
         \_constant: , line:17:20, endln:17:22
+          |vpiParent:
+          \_operation: , line:16:41, endln:22:4
           |vpiDecompile:64
           |vpiSize:64
           |UINT:64
           |vpiConstType:9
         |vpiTypespec:
-        \_ref_typespec: (work@top)
+        \_ref_typespec: (work@top.Width), line:17:5, endln:17:10
           |vpiParent:
-          \_tagged_pattern: , line:17:20, endln:17:22
-          |vpiFullName:work@top
+          \_tagged_pattern: , line:17:5, endln:17:22
+          |vpiName:Width
+          |vpiFullName:work@top.Width
           |vpiActual:
           \_string_typespec: (Width), line:17:5, endln:17:10
       |vpiOperand:
-      \_tagged_pattern: , line:18:20, endln:18:24
+      \_tagged_pattern: , line:18:5, endln:18:24
         |vpiParent:
         \_operation: , line:16:41, endln:22:4
         |vpiPattern:
         \_constant: , line:18:20, endln:18:24
+          |vpiParent:
+          \_operation: , line:16:41, endln:22:4
           |vpiDecompile:1'b1
           |vpiSize:1
           |BIN:1
           |vpiConstType:3
         |vpiTypespec:
-        \_ref_typespec: (work@top)
+        \_ref_typespec: (work@top.EnableVectors), line:18:5, endln:18:18
           |vpiParent:
-          \_tagged_pattern: , line:18:20, endln:18:24
-          |vpiFullName:work@top
+          \_tagged_pattern: , line:18:5, endln:18:24
+          |vpiName:EnableVectors
+          |vpiFullName:work@top.EnableVectors
           |vpiActual:
           \_string_typespec: (EnableVectors), line:18:5, endln:18:18
       |vpiOperand:
-      \_tagged_pattern: , line:19:20, endln:19:24
+      \_tagged_pattern: , line:19:5, endln:19:24
         |vpiParent:
         \_operation: , line:16:41, endln:22:4
         |vpiPattern:
         \_constant: , line:19:20, endln:19:24
+          |vpiParent:
+          \_operation: , line:16:41, endln:22:4
           |vpiDecompile:1'b1
           |vpiSize:1
           |BIN:1
           |vpiConstType:3
         |vpiTypespec:
-        \_ref_typespec: (work@top)
+        \_ref_typespec: (work@top.EnableNanBox), line:19:5, endln:19:17
           |vpiParent:
-          \_tagged_pattern: , line:19:20, endln:19:24
-          |vpiFullName:work@top
+          \_tagged_pattern: , line:19:5, endln:19:24
+          |vpiName:EnableNanBox
+          |vpiFullName:work@top.EnableNanBox
           |vpiActual:
           \_string_typespec: (EnableNanBox), line:19:5, endln:19:17
       |vpiOperand:
-      \_tagged_pattern: , line:20:20, endln:20:28
+      \_tagged_pattern: , line:20:5, endln:20:28
         |vpiParent:
         \_operation: , line:16:41, endln:22:4
         |vpiPattern:
         \_constant: , line:20:20, endln:20:28
+          |vpiParent:
+          \_operation: , line:16:41, endln:22:4
           |vpiDecompile:5'b11111
           |vpiSize:5
           |BIN:11111
           |vpiConstType:3
         |vpiTypespec:
-        \_ref_typespec: (work@top)
+        \_ref_typespec: (work@top.FpFmtMask), line:20:5, endln:20:14
           |vpiParent:
-          \_tagged_pattern: , line:20:20, endln:20:28
-          |vpiFullName:work@top
+          \_tagged_pattern: , line:20:5, endln:20:28
+          |vpiName:FpFmtMask
+          |vpiFullName:work@top.FpFmtMask
           |vpiActual:
           \_string_typespec: (FpFmtMask), line:20:5, endln:20:14
       |vpiOperand:
-      \_tagged_pattern: , line:21:20, endln:21:27
+      \_tagged_pattern: , line:21:5, endln:21:27
         |vpiParent:
         \_operation: , line:16:41, endln:22:4
         |vpiPattern:
         \_constant: , line:21:20, endln:21:27
+          |vpiParent:
+          \_operation: , line:16:41, endln:22:4
           |vpiDecompile:4'b1111
           |vpiSize:4
           |BIN:1111
           |vpiConstType:3
         |vpiTypespec:
-        \_ref_typespec: (work@top)
+        \_ref_typespec: (work@top.IntFmtMask), line:21:5, endln:21:15
           |vpiParent:
-          \_tagged_pattern: , line:21:20, endln:21:27
-          |vpiFullName:work@top
+          \_tagged_pattern: , line:21:5, endln:21:27
+          |vpiName:IntFmtMask
+          |vpiFullName:work@top.IntFmtMask
           |vpiActual:
           \_string_typespec: (IntFmtMask), line:21:5, endln:21:15
     |vpiLhs:
-    \_parameter: (work@top.RV64D_Xsflt), line:16:27, endln:16:38
+    \_parameter: (work@top.RV64D_Xsflt), line:16:27, endln:22:4
   |vpiParamAssign:
   \_param_assign: , line:23:13, endln:23:22
     |vpiParent:
@@ -858,16 +870,9 @@ design: (unnamed)
       |vpiDecompile:64
       |vpiSize:64
       |UINT:64
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:23:20, endln:23:22
-        |vpiFullName:work@top
-        |vpiActual:
-        \_int_typespec: , line:23:2, endln:23:22
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@top.XLEN), line:23:13, endln:23:17
+    \_parameter: (work@top.XLEN), line:23:13, endln:23:22
   |vpiParamAssign:
   \_param_assign: , line:25:12, endln:25:51
     |vpiParent:
@@ -888,6 +893,8 @@ design: (unnamed)
           \_operation: , line:25:26, endln:25:36
           |vpiName:XLEN
           |vpiFullName:work@top.XLEN
+          |vpiActual:
+          \_parameter: (work@top.XLEN), line:23:13, endln:23:22
         |vpiOperand:
         \_constant: , line:25:34, endln:25:36
           |vpiParent:
@@ -913,7 +920,7 @@ design: (unnamed)
         |BIN:1
         |vpiConstType:3
     |vpiLhs:
-    \_parameter: (work@top.IS_XLEN64), line:25:12, endln:25:21
+    \_parameter: (work@top.IS_XLEN64), line:25:12, endln:25:51
   |vpiParamAssign:
   \_param_assign: , line:26:16, endln:26:31
     |vpiParent:
@@ -924,8 +931,10 @@ design: (unnamed)
       \_param_assign: , line:26:16, endln:26:31
       |vpiName:IS_XLEN64
       |vpiFullName:work@top.IS_XLEN64
+      |vpiActual:
+      \_parameter: (work@top.IS_XLEN64), line:25:12, endln:25:51
     |vpiLhs:
-    \_parameter: (work@top.RVF), line:26:16, endln:26:19
+    \_parameter: (work@top.RVF), line:26:16, endln:26:31
   |vpiParamAssign:
   \_param_assign: , line:27:16, endln:27:31
     |vpiParent:
@@ -936,8 +945,10 @@ design: (unnamed)
       \_param_assign: , line:27:16, endln:27:31
       |vpiName:IS_XLEN64
       |vpiFullName:work@top.IS_XLEN64
+      |vpiActual:
+      \_parameter: (work@top.IS_XLEN64), line:25:12, endln:25:51
     |vpiLhs:
-    \_parameter: (work@top.RVD), line:27:16, endln:27:19
+    \_parameter: (work@top.RVD), line:27:16, endln:27:31
   |vpiParamAssign:
   \_param_assign: , line:28:16, endln:28:30
     |vpiParent:
@@ -949,16 +960,9 @@ design: (unnamed)
       |vpiDecompile:1'b0
       |vpiSize:1
       |BIN:0
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:28:26, endln:28:30
-        |vpiFullName:work@top
-        |vpiActual:
-        \_bit_typespec: , line:28:12, endln:28:15
       |vpiConstType:3
     |vpiLhs:
-    \_parameter: (work@top.XF16), line:28:16, endln:28:20
+    \_parameter: (work@top.XF16), line:28:16, endln:28:30
   |vpiParamAssign:
   \_param_assign: , line:29:16, endln:29:30
     |vpiParent:
@@ -970,16 +974,9 @@ design: (unnamed)
       |vpiDecompile:1'b0
       |vpiSize:1
       |BIN:0
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:29:26, endln:29:30
-        |vpiFullName:work@top
-        |vpiActual:
-        \_bit_typespec: , line:29:12, endln:29:15
       |vpiConstType:3
     |vpiLhs:
-    \_parameter: (work@top.XF16ALT), line:29:16, endln:29:23
+    \_parameter: (work@top.XF16ALT), line:29:16, endln:29:30
   |vpiParamAssign:
   \_param_assign: , line:30:16, endln:30:30
     |vpiParent:
@@ -991,16 +988,9 @@ design: (unnamed)
       |vpiDecompile:1'b0
       |vpiSize:1
       |BIN:0
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:30:26, endln:30:30
-        |vpiFullName:work@top
-        |vpiActual:
-        \_bit_typespec: , line:30:12, endln:30:15
       |vpiConstType:3
     |vpiLhs:
-    \_parameter: (work@top.XF8), line:30:16, endln:30:19
+    \_parameter: (work@top.XF8), line:30:16, endln:30:30
   |vpiParamAssign:
   \_param_assign: , line:31:16, endln:31:30
     |vpiParent:
@@ -1012,16 +1002,9 @@ design: (unnamed)
       |vpiDecompile:1'b0
       |vpiSize:1
       |BIN:0
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:31:26, endln:31:30
-        |vpiFullName:work@top
-        |vpiActual:
-        \_bit_typespec: , line:31:12, endln:31:15
       |vpiConstType:3
     |vpiLhs:
-    \_parameter: (work@top.XFVEC), line:31:16, endln:31:21
+    \_parameter: (work@top.XFVEC), line:31:16, endln:31:30
   |vpiParamAssign:
   \_param_assign: , line:33:27, endln:39:6
     |vpiParent:
@@ -1032,67 +1015,67 @@ design: (unnamed)
       \_param_assign: , line:33:27, endln:39:6
       |vpiOpType:75
       |vpiOperand:
-      \_tagged_pattern: , line:34:22, endln:34:24
+      \_tagged_pattern: , line:34:7, endln:34:24
         |vpiParent:
         \_operation: , line:33:42, endln:39:6
         |vpiPattern:
         \_constant: , line:34:22, endln:34:24
+          |vpiParent:
+          \_operation: , line:33:42, endln:39:6
           |vpiDecompile:64
           |vpiSize:64
           |UINT:64
           |vpiConstType:9
         |vpiTypespec:
-        \_ref_typespec: (work@top)
+        \_ref_typespec: (work@top.Width), line:34:7, endln:34:12
           |vpiParent:
-          \_tagged_pattern: , line:34:22, endln:34:24
-          |vpiFullName:work@top
+          \_tagged_pattern: , line:34:7, endln:34:24
+          |vpiName:Width
+          |vpiFullName:work@top.Width
           |vpiActual:
           \_string_typespec: (Width), line:34:7, endln:34:12
       |vpiOperand:
-      \_tagged_pattern: , line:35:22, endln:35:27
+      \_tagged_pattern: , line:35:7, endln:35:27
         |vpiParent:
         \_operation: , line:33:42, endln:39:6
         |vpiPattern:
-        \_constant: , line:31:26, endln:31:30
+        \_ref_obj: (work@top.XFVEC), line:35:22, endln:35:27
           |vpiParent:
-          \_param_assign: , line:31:16, endln:31:30
-          |vpiDecompile:1'b0
-          |vpiSize:1
-          |BIN:0
-          |vpiTypespec:
-          \_ref_typespec: (work@top)
-            |vpiParent:
-            \_constant: , line:31:26, endln:31:30
-            |vpiFullName:work@top
-            |vpiActual:
-            \_bit_typespec: , line:31:12, endln:31:15
-          |vpiConstType:3
+          \_operation: , line:33:42, endln:39:6
+          |vpiName:XFVEC
+          |vpiFullName:work@top.XFVEC
+          |vpiActual:
+          \_parameter: (work@top.XFVEC), line:31:16, endln:31:30
         |vpiTypespec:
-        \_ref_typespec: (work@top)
+        \_ref_typespec: (work@top.EnableVectors), line:35:7, endln:35:20
           |vpiParent:
-          \_tagged_pattern: , line:35:22, endln:35:27
-          |vpiFullName:work@top
+          \_tagged_pattern: , line:35:7, endln:35:27
+          |vpiName:EnableVectors
+          |vpiFullName:work@top.EnableVectors
           |vpiActual:
           \_string_typespec: (EnableVectors), line:35:7, endln:35:20
       |vpiOperand:
-      \_tagged_pattern: , line:36:22, endln:36:26
+      \_tagged_pattern: , line:36:7, endln:36:26
         |vpiParent:
         \_operation: , line:33:42, endln:39:6
         |vpiPattern:
         \_constant: , line:36:22, endln:36:26
+          |vpiParent:
+          \_operation: , line:33:42, endln:39:6
           |vpiDecompile:1'b1
           |vpiSize:1
           |BIN:1
           |vpiConstType:3
         |vpiTypespec:
-        \_ref_typespec: (work@top)
+        \_ref_typespec: (work@top.EnableNanBox), line:36:7, endln:36:19
           |vpiParent:
-          \_tagged_pattern: , line:36:22, endln:36:26
-          |vpiFullName:work@top
+          \_tagged_pattern: , line:36:7, endln:36:26
+          |vpiName:EnableNanBox
+          |vpiFullName:work@top.EnableNanBox
           |vpiActual:
           \_string_typespec: (EnableNanBox), line:36:7, endln:36:19
       |vpiOperand:
-      \_tagged_pattern: , line:37:22, endln:37:52
+      \_tagged_pattern: , line:37:7, endln:37:52
         |vpiParent:
         \_operation: , line:33:42, endln:39:6
         |vpiPattern:
@@ -1106,39 +1089,50 @@ design: (unnamed)
             \_operation: , line:37:22, endln:37:52
             |vpiName:RVF
             |vpiFullName:work@top.RVF
+            |vpiActual:
+            \_parameter: (work@top.RVF), line:26:16, endln:26:31
           |vpiOperand:
           \_ref_obj: (work@top.RVD), line:37:28, endln:37:31
             |vpiParent:
             \_operation: , line:37:22, endln:37:52
             |vpiName:RVD
             |vpiFullName:work@top.RVD
+            |vpiActual:
+            \_parameter: (work@top.RVD), line:27:16, endln:27:31
           |vpiOperand:
           \_ref_obj: (work@top.XF16), line:37:33, endln:37:37
             |vpiParent:
             \_operation: , line:37:22, endln:37:52
             |vpiName:XF16
             |vpiFullName:work@top.XF16
+            |vpiActual:
+            \_parameter: (work@top.XF16), line:28:16, endln:28:30
           |vpiOperand:
           \_ref_obj: (work@top.XF8), line:37:39, endln:37:42
             |vpiParent:
             \_operation: , line:37:22, endln:37:52
             |vpiName:XF8
             |vpiFullName:work@top.XF8
+            |vpiActual:
+            \_parameter: (work@top.XF8), line:30:16, endln:30:30
           |vpiOperand:
           \_ref_obj: (work@top.XF16ALT), line:37:44, endln:37:51
             |vpiParent:
             \_operation: , line:37:22, endln:37:52
             |vpiName:XF16ALT
             |vpiFullName:work@top.XF16ALT
+            |vpiActual:
+            \_parameter: (work@top.XF16ALT), line:29:16, endln:29:30
         |vpiTypespec:
-        \_ref_typespec: (work@top)
+        \_ref_typespec: (work@top.FpFmtMask), line:37:7, endln:37:16
           |vpiParent:
-          \_tagged_pattern: , line:37:22, endln:37:52
-          |vpiFullName:work@top
+          \_tagged_pattern: , line:37:7, endln:37:52
+          |vpiName:FpFmtMask
+          |vpiFullName:work@top.FpFmtMask
           |vpiActual:
           \_string_typespec: (FpFmtMask), line:37:7, endln:37:16
       |vpiOperand:
-      \_tagged_pattern: , line:38:22, endln:38:76
+      \_tagged_pattern: , line:38:7, endln:38:76
         |vpiParent:
         \_operation: , line:33:42, endln:39:6
         |vpiPattern:
@@ -1157,12 +1151,16 @@ design: (unnamed)
               \_operation: , line:38:23, endln:38:35
               |vpiName:XFVEC
               |vpiFullName:work@top.XFVEC
+              |vpiActual:
+              \_parameter: (work@top.XFVEC), line:31:16, endln:31:30
             |vpiOperand:
             \_ref_obj: (work@top.XF8), line:38:32, endln:38:35
               |vpiParent:
               \_operation: , line:38:23, endln:38:35
               |vpiName:XF8
               |vpiFullName:work@top.XF8
+              |vpiActual:
+              \_parameter: (work@top.XF8), line:30:16, endln:30:30
           |vpiOperand:
           \_operation: , line:38:37, endln:38:63
             |vpiParent:
@@ -1174,6 +1172,8 @@ design: (unnamed)
               \_operation: , line:38:37, endln:38:63
               |vpiName:XFVEC
               |vpiFullName:work@top.XFVEC
+              |vpiActual:
+              \_parameter: (work@top.XFVEC), line:31:16, endln:31:30
             |vpiOperand:
             \_operation: , line:38:47, endln:38:62
               |vpiParent:
@@ -1185,33 +1185,42 @@ design: (unnamed)
                 \_operation: , line:38:47, endln:38:62
                 |vpiName:XF16
                 |vpiFullName:work@top.XF16
+                |vpiActual:
+                \_parameter: (work@top.XF16), line:28:16, endln:28:30
               |vpiOperand:
               \_ref_obj: (work@top.XF16ALT), line:38:55, endln:38:62
                 |vpiParent:
                 \_operation: , line:38:47, endln:38:62
                 |vpiName:XF16ALT
                 |vpiFullName:work@top.XF16ALT
+                |vpiActual:
+                \_parameter: (work@top.XF16ALT), line:29:16, endln:29:30
           |vpiOperand:
           \_constant: , line:38:65, endln:38:69
+            |vpiParent:
+            \_operation: , line:38:22, endln:38:76
             |vpiDecompile:1'b1
             |vpiSize:1
             |BIN:1
             |vpiConstType:3
           |vpiOperand:
           \_constant: , line:38:71, endln:38:75
+            |vpiParent:
+            \_operation: , line:38:22, endln:38:76
             |vpiDecompile:1'b1
             |vpiSize:1
             |BIN:1
             |vpiConstType:3
         |vpiTypespec:
-        \_ref_typespec: (work@top)
+        \_ref_typespec: (work@top.IntFmtMask), line:38:7, endln:38:17
           |vpiParent:
-          \_tagged_pattern: , line:38:22, endln:38:76
-          |vpiFullName:work@top
+          \_tagged_pattern: , line:38:7, endln:38:76
+          |vpiName:IntFmtMask
+          |vpiFullName:work@top.IntFmtMask
           |vpiActual:
           \_string_typespec: (IntFmtMask), line:38:7, endln:38:17
     |vpiLhs:
-    \_parameter: (work@top.FPU_FEATURES), line:33:27, endln:33:39
+    \_parameter: (work@top.FPU_FEATURES), line:33:27, endln:39:6
   |vpiParamAssign:
   \_param_assign: , line:40:29, endln:40:58
     |vpiParent:
@@ -1222,60 +1231,66 @@ design: (unnamed)
       \_param_assign: , line:40:29, endln:40:58
       |vpiName:FPU_FEATURES
       |vpiFullName:work@top.FPU_FEATURES
+      |vpiActual:
+      \_parameter: (work@top.FPU_FEATURES), line:33:27, endln:39:6
     |vpiLhs:
-    \_parameter: (work@top.Features), line:40:29, endln:40:37
+    \_parameter: (work@top.Features), line:40:29, endln:40:58
   |vpiParamAssign:
   \_param_assign: , line:41:29, endln:41:63
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
     |vpiRhs:
-    \_hier_path: (Features.FpFmtMask), line:41:45, endln:41:63
+    \_hier_path: (Features.FpFmtMask), line:41:53, endln:41:63
       |vpiParent:
       \_param_assign: , line:41:29, endln:41:63
       |vpiActual:
-      \_ref_obj: (Features), line:41:54, endln:41:63
+      \_ref_obj: (Features), line:41:53, endln:41:63
         |vpiParent:
-        \_hier_path: (Features.FpFmtMask), line:41:45, endln:41:63
+        \_hier_path: (Features.FpFmtMask), line:41:53, endln:41:63
         |vpiName:Features
+        |vpiActual:
+        \_parameter: (work@top.Features), line:40:29, endln:40:58
       |vpiActual:
       \_ref_obj: (FpFmtMask), line:41:54, endln:41:63
         |vpiParent:
-        \_hier_path: (Features.FpFmtMask), line:41:45, endln:41:63
+        \_hier_path: (Features.FpFmtMask), line:41:53, endln:41:63
         |vpiName:FpFmtMask
+        |vpiActual:
+        \_typespec_member: (FpFmtMask), line:12:5, endln:12:28
       |vpiName:Features.FpFmtMask
     |vpiLhs:
-    \_parameter: (work@top.FpFmtMask), line:41:29, endln:41:38
+    \_parameter: (work@top.FpFmtMask), line:41:29, endln:41:63
   |vpiParamAssign:
   \_param_assign: , line:43:12, endln:43:34
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
     |vpiRhs:
-    \_bit_select: (work@top.FpFmtMask), line:43:22, endln:43:34
+    \_bit_select: (work@top.FpFmtMask), line:43:31, endln:43:34
       |vpiParent:
       \_param_assign: , line:43:12, endln:43:34
       |vpiName:FpFmtMask
       |vpiFullName:work@top.FpFmtMask
+      |vpiActual:
+      \_parameter: (work@top.FpFmtMask), line:41:29, endln:41:63
       |vpiIndex:
       \_constant: , line:43:32, endln:43:33
         |vpiParent:
-        \_bit_select: (work@top.FpFmtMask), line:43:22, endln:43:34
+        \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@top.DEBUGME), line:43:12, endln:43:19
+    \_parameter: (work@top.DEBUGME), line:43:12, endln:43:34
   |vpiTypedef:
   \_logic_typespec: (fmt_logic_t), line:6:9, endln:6:20
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
     |vpiName:fmt_logic_t
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
     |vpiRange:
     \_range: , line:6:15, endln:6:20
       |vpiParent:
-      \_logic_typespec: (fmt_logic_t), line:6:9, endln:6:20
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
       |vpiLeftRange:
       \_constant: , line:6:16, endln:6:17
         |vpiParent:
@@ -1295,105 +1310,224 @@ design: (unnamed)
   |vpiTypedef:
   \_struct_typespec: (fpu_features_t), line:8:9, endln:14:4
     |vpiParent:
-    \_parameter: (work@top.Features), line:40:29, endln:40:37
-    |vpiName:fpu_features_t
-    |vpiInstance:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
+    |vpiName:fpu_features_t
     |vpiPacked:1
     |vpiTypespecMember:
-    \_typespec_member: (Width), line:9:18, endln:9:23
+    \_typespec_member: (Width), line:9:5, endln:9:24
       |vpiParent:
       \_struct_typespec: (fpu_features_t), line:8:9, endln:14:4
       |vpiName:Width
       |vpiTypespec:
-      \_ref_typespec: (work@top.Features.fpu_features_t.Width)
+      \_ref_typespec: (work@top.fpu_features_t.Width), line:9:5, endln:9:17
         |vpiParent:
-        \_typespec_member: (Width), line:9:18, endln:9:23
-        |vpiFullName:work@top.Features.fpu_features_t.Width
+        \_typespec_member: (Width), line:9:5, endln:9:24
+        |vpiFullName:work@top.fpu_features_t.Width
         |vpiActual:
         \_int_typespec: , line:9:5, endln:9:17
-      |vpiRefFile:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv
-      |vpiRefLineNo:9
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:9
-      |vpiRefEndColumnNo:17
     |vpiTypespecMember:
-    \_typespec_member: (EnableVectors), line:10:18, endln:10:31
+    \_typespec_member: (EnableVectors), line:10:5, endln:10:32
       |vpiParent:
       \_struct_typespec: (fpu_features_t), line:8:9, endln:14:4
       |vpiName:EnableVectors
       |vpiTypespec:
-      \_ref_typespec: (work@top.Features.fpu_features_t.EnableVectors)
+      \_ref_typespec: (work@top.fpu_features_t.EnableVectors), line:10:5, endln:10:10
         |vpiParent:
-        \_typespec_member: (EnableVectors), line:10:18, endln:10:31
-        |vpiFullName:work@top.Features.fpu_features_t.EnableVectors
+        \_typespec_member: (EnableVectors), line:10:5, endln:10:32
+        |vpiFullName:work@top.fpu_features_t.EnableVectors
         |vpiActual:
         \_logic_typespec: , line:10:5, endln:10:10
-      |vpiRefFile:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv
-      |vpiRefLineNo:10
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:10
-      |vpiRefEndColumnNo:10
     |vpiTypespecMember:
-    \_typespec_member: (EnableNanBox), line:11:18, endln:11:30
+    \_typespec_member: (EnableNanBox), line:11:5, endln:11:31
       |vpiParent:
       \_struct_typespec: (fpu_features_t), line:8:9, endln:14:4
       |vpiName:EnableNanBox
       |vpiTypespec:
-      \_ref_typespec: (work@top.Features.fpu_features_t.EnableNanBox)
+      \_ref_typespec: (work@top.fpu_features_t.EnableNanBox), line:11:5, endln:11:10
         |vpiParent:
-        \_typespec_member: (EnableNanBox), line:11:18, endln:11:30
-        |vpiFullName:work@top.Features.fpu_features_t.EnableNanBox
+        \_typespec_member: (EnableNanBox), line:11:5, endln:11:31
+        |vpiFullName:work@top.fpu_features_t.EnableNanBox
         |vpiActual:
         \_logic_typespec: , line:11:5, endln:11:10
-      |vpiRefFile:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv
-      |vpiRefLineNo:11
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:11
-      |vpiRefEndColumnNo:10
     |vpiTypespecMember:
-    \_typespec_member: (FpFmtMask), line:12:18, endln:12:27
+    \_typespec_member: (FpFmtMask), line:12:5, endln:12:28
       |vpiParent:
       \_struct_typespec: (fpu_features_t), line:8:9, endln:14:4
       |vpiName:FpFmtMask
       |vpiTypespec:
-      \_ref_typespec: (work@top.Features.fpu_features_t.FpFmtMask)
+      \_ref_typespec: (work@top.fpu_features_t.FpFmtMask.fmt_logic_t), line:12:5, endln:12:16
         |vpiParent:
-        \_typespec_member: (FpFmtMask), line:12:18, endln:12:27
-        |vpiFullName:work@top.Features.fpu_features_t.FpFmtMask
+        \_typespec_member: (FpFmtMask), line:12:5, endln:12:28
+        |vpiName:fmt_logic_t
+        |vpiFullName:work@top.fpu_features_t.FpFmtMask.fmt_logic_t
         |vpiActual:
         \_logic_typespec: (fmt_logic_t), line:6:9, endln:6:20
-      |vpiRefFile:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv
-      |vpiRefLineNo:12
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:12
-      |vpiRefEndColumnNo:16
     |vpiTypespecMember:
-    \_typespec_member: (IntFmtMask), line:13:17, endln:13:27
+    \_typespec_member: (IntFmtMask), line:13:5, endln:13:28
       |vpiParent:
       \_struct_typespec: (fpu_features_t), line:8:9, endln:14:4
       |vpiName:IntFmtMask
       |vpiTypespec:
-      \_ref_typespec: (work@top.Features.fpu_features_t.IntFmtMask)
+      \_ref_typespec: (work@top.fpu_features_t.IntFmtMask.fmt_logic_t), line:13:5, endln:13:16
         |vpiParent:
-        \_typespec_member: (IntFmtMask), line:13:17, endln:13:27
-        |vpiFullName:work@top.Features.fpu_features_t.IntFmtMask
+        \_typespec_member: (IntFmtMask), line:13:5, endln:13:28
+        |vpiName:fmt_logic_t
+        |vpiFullName:work@top.fpu_features_t.IntFmtMask.fmt_logic_t
         |vpiActual:
         \_logic_typespec: (fmt_logic_t), line:6:9, endln:6:20
-      |vpiRefFile:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv
-      |vpiRefLineNo:13
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:13
-      |vpiRefEndColumnNo:16
+  |vpiTypedef:
+  \_int_typespec: , line:9:5, endln:9:17
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
+  |vpiTypedef:
+  \_logic_typespec: , line:10:5, endln:10:10
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
+  |vpiTypedef:
+  \_logic_typespec: , line:11:5, endln:11:10
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
+  |vpiTypedef:
+  \_string_typespec: (Width), line:17:5, endln:17:10
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
+    |vpiName:Width
+  |vpiTypedef:
+  \_string_typespec: (EnableVectors), line:18:5, endln:18:18
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
+    |vpiName:EnableVectors
+  |vpiTypedef:
+  \_string_typespec: (EnableNanBox), line:19:5, endln:19:17
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
+    |vpiName:EnableNanBox
+  |vpiTypedef:
+  \_string_typespec: (FpFmtMask), line:20:5, endln:20:14
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
+    |vpiName:FpFmtMask
+  |vpiTypedef:
+  \_string_typespec: (IntFmtMask), line:21:5, endln:21:15
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
+    |vpiName:IntFmtMask
+  |vpiTypedef:
+  \_bit_typespec: , line:26:12, endln:26:15
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
+  |vpiTypedef:
+  \_bit_typespec: , line:27:12, endln:27:15
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
+  |vpiTypedef:
+  \_bit_typespec: , line:28:12, endln:28:15
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
+  |vpiTypedef:
+  \_bit_typespec: , line:29:12, endln:29:15
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
+  |vpiTypedef:
+  \_bit_typespec: , line:30:12, endln:30:15
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
+  |vpiTypedef:
+  \_bit_typespec: , line:31:12, endln:31:15
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
+  |vpiTypedef:
+  \_string_typespec: (Width), line:34:7, endln:34:12
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
+    |vpiName:Width
+  |vpiTypedef:
+  \_string_typespec: (EnableVectors), line:35:7, endln:35:20
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
+    |vpiName:EnableVectors
+  |vpiTypedef:
+  \_string_typespec: (EnableNanBox), line:36:7, endln:36:19
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
+    |vpiName:EnableNanBox
+  |vpiTypedef:
+  \_string_typespec: (FpFmtMask), line:37:7, endln:37:16
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
+    |vpiName:FpFmtMask
+  |vpiTypedef:
+  \_string_typespec: (IntFmtMask), line:38:7, endln:38:17
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
+    |vpiName:IntFmtMask
+  |vpiImportTypespec:
+  \_logic_typespec: (fmt_logic_t), line:6:9, endln:6:20
+  |vpiImportTypespec:
+  \_struct_typespec: (fpu_features_t), line:8:9, endln:14:4
+  |vpiImportTypespec:
+  \_int_typespec: , line:9:5, endln:9:17
+  |vpiImportTypespec:
+  \_logic_typespec: , line:10:5, endln:10:10
+  |vpiImportTypespec:
+  \_logic_typespec: , line:11:5, endln:11:10
+  |vpiImportTypespec:
+  \_string_typespec: (Width), line:17:5, endln:17:10
+  |vpiImportTypespec:
+  \_string_typespec: (EnableVectors), line:18:5, endln:18:18
+  |vpiImportTypespec:
+  \_string_typespec: (EnableNanBox), line:19:5, endln:19:17
+  |vpiImportTypespec:
+  \_string_typespec: (FpFmtMask), line:20:5, endln:20:14
+  |vpiImportTypespec:
+  \_string_typespec: (IntFmtMask), line:21:5, endln:21:15
+  |vpiImportTypespec:
+  \_bit_typespec: , line:26:12, endln:26:15
+  |vpiImportTypespec:
+  \_bit_typespec: , line:27:12, endln:27:15
+  |vpiImportTypespec:
+  \_bit_typespec: , line:28:12, endln:28:15
+  |vpiImportTypespec:
+  \_bit_typespec: , line:29:12, endln:29:15
+  |vpiImportTypespec:
+  \_bit_typespec: , line:30:12, endln:30:15
+  |vpiImportTypespec:
+  \_bit_typespec: , line:31:12, endln:31:15
+  |vpiImportTypespec:
+  \_string_typespec: (Width), line:34:7, endln:34:12
+  |vpiImportTypespec:
+  \_string_typespec: (EnableVectors), line:35:7, endln:35:20
+  |vpiImportTypespec:
+  \_string_typespec: (EnableNanBox), line:36:7, endln:36:19
+  |vpiImportTypespec:
+  \_string_typespec: (FpFmtMask), line:37:7, endln:37:16
+  |vpiImportTypespec:
+  \_string_typespec: (IntFmtMask), line:38:7, endln:38:17
   |vpiDefName:work@top
+  |vpiRefModule:
+  \_ref_module: work@GOOD (good1), line:46:3, endln:46:16
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
+    |vpiName:good1
+    |vpiDefName:work@GOOD
+    |vpiActual:
+    \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:1:1, endln:2:10
+  |vpiRefModule:
+  \_ref_module: work@GOOD (good2), line:50:3, endln:50:16
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
+    |vpiName:good2
+    |vpiDefName:work@GOOD
+    |vpiActual:
+    \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:1:1, endln:2:10
   |vpiGenStmt:
-  \_gen_if: , line:45:1, endln:45:3
+  \_gen_if: , line:45:1, endln:47:4
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
     |vpiCondition:
     \_operation: , line:45:5, endln:45:26
       |vpiParent:
-      \_gen_if: , line:45:1, endln:45:3
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
       |vpiOpType:14
       |vpiOperand:
       \_ref_obj: (work@top.FpFmtMask), line:45:5, endln:45:14
@@ -1401,6 +1535,8 @@ design: (unnamed)
         \_operation: , line:45:5, endln:45:26
         |vpiName:FpFmtMask
         |vpiFullName:work@top.FpFmtMask
+        |vpiActual:
+        \_parameter: (work@top.FpFmtMask), line:41:29, endln:41:63
       |vpiOperand:
       \_constant: , line:45:18, endln:45:26
         |vpiParent:
@@ -1410,24 +1546,20 @@ design: (unnamed)
         |BIN:11000
         |vpiConstType:3
     |vpiStmt:
-    \_begin: (work@top)
+    \_begin: (work@top), line:45:28, endln:47:4
       |vpiParent:
-      \_gen_if: , line:45:1, endln:45:3
+      \_gen_if: , line:45:1, endln:47:4
       |vpiFullName:work@top
       |vpiStmt:
-      \_ref_module: work@GOOD (good1), line:46:8, endln:46:13
-        |vpiParent:
-        \_begin: (work@top)
-        |vpiName:good1
-        |vpiDefName:work@GOOD
+      \_ref_module: work@GOOD (good1), line:46:3, endln:46:16
   |vpiGenStmt:
-  \_gen_if: , line:49:1, endln:49:3
+  \_gen_if: , line:49:1, endln:51:4
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
     |vpiCondition:
     \_operation: , line:49:5, endln:49:17
       |vpiParent:
-      \_gen_if: , line:49:1, endln:49:3
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv, line:4:1, endln:53:10
       |vpiOpType:14
       |vpiOperand:
       \_ref_obj: (work@top.DEBUGME), line:49:5, endln:49:12
@@ -1435,6 +1567,8 @@ design: (unnamed)
         \_operation: , line:49:5, endln:49:17
         |vpiName:DEBUGME
         |vpiFullName:work@top.DEBUGME
+        |vpiActual:
+        \_parameter: (work@top.DEBUGME), line:43:12, endln:43:34
       |vpiOperand:
       \_constant: , line:49:16, endln:49:17
         |vpiParent:
@@ -1444,174 +1578,19 @@ design: (unnamed)
         |UINT:1
         |vpiConstType:9
     |vpiStmt:
-    \_begin: (work@top)
+    \_begin: (work@top), line:49:19, endln:51:4
       |vpiParent:
-      \_gen_if: , line:49:1, endln:49:3
+      \_gen_if: , line:49:1, endln:51:4
       |vpiFullName:work@top
       |vpiStmt:
-      \_ref_module: work@GOOD (good2), line:50:8, endln:50:13
-        |vpiParent:
-        \_begin: (work@top)
-        |vpiName:good2
-        |vpiDefName:work@GOOD
-\_weaklyReferenced:
-\_int_typespec: , line:9:5, endln:9:17
-\_logic_typespec: , line:10:5, endln:10:10
-\_logic_typespec: , line:11:5, endln:11:10
-\_logic_typespec: (fmt_logic_t), line:6:9, endln:6:20
-  |vpiName:fmt_logic_t
-  |vpiTypedefAlias:
-  \_ref_typespec: (fmt_logic_t)
-    |vpiParent:
-    \_logic_typespec: (fmt_logic_t), line:6:9, endln:6:20
-    |vpiFullName:fmt_logic_t
-    |vpiActual:
-    \_logic_typespec: (fmt_logic_t), line:6:9, endln:6:20
-  |vpiRange:
-  \_range: , line:6:15, endln:6:20
-    |vpiParent:
-    \_logic_typespec: (fmt_logic_t), line:6:9, endln:6:20
-    |vpiLeftRange:
-    \_constant: , line:6:16, endln:6:17
-      |vpiParent:
-      \_range: , line:6:15, endln:6:20
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:6:18, endln:6:19
-      |vpiParent:
-      \_range: , line:6:15, endln:6:20
-      |vpiDecompile:4
-      |vpiSize:64
-      |UINT:4
-      |vpiConstType:9
-\_logic_typespec: (fmt_logic_t), line:6:9, endln:6:20
-  |vpiName:fmt_logic_t
-  |vpiTypedefAlias:
-  \_ref_typespec: (fmt_logic_t)
-    |vpiParent:
-    \_logic_typespec: (fmt_logic_t), line:6:9, endln:6:20
-    |vpiFullName:fmt_logic_t
-    |vpiActual:
-    \_logic_typespec: (fmt_logic_t), line:6:9, endln:6:20
-  |vpiRange:
-  \_range: , line:6:15, endln:6:20
-    |vpiParent:
-    \_logic_typespec: (fmt_logic_t), line:6:9, endln:6:20
-    |vpiLeftRange:
-    \_constant: , line:6:16, endln:6:17
-      |vpiParent:
-      \_range: , line:6:15, endln:6:20
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:6:18, endln:6:19
-      |vpiParent:
-      \_range: , line:6:15, endln:6:20
-      |vpiDecompile:4
-      |vpiSize:64
-      |UINT:4
-      |vpiConstType:9
-\_string_typespec: (Width), line:17:5, endln:17:10
-  |vpiParent:
-  \_tagged_pattern: , line:17:20, endln:17:22
-  |vpiName:Width
-\_string_typespec: (EnableVectors), line:18:5, endln:18:18
-  |vpiParent:
-  \_tagged_pattern: , line:18:20, endln:18:24
-  |vpiName:EnableVectors
-\_string_typespec: (EnableNanBox), line:19:5, endln:19:17
-  |vpiParent:
-  \_tagged_pattern: , line:19:20, endln:19:24
-  |vpiName:EnableNanBox
-\_string_typespec: (FpFmtMask), line:20:5, endln:20:14
-  |vpiParent:
-  \_tagged_pattern: , line:20:20, endln:20:28
-  |vpiName:FpFmtMask
-\_string_typespec: (IntFmtMask), line:21:5, endln:21:15
-  |vpiParent:
-  \_tagged_pattern: , line:21:20, endln:21:27
-  |vpiName:IntFmtMask
-\_int_typespec: , line:23:2, endln:23:22
-\_bit_typespec: , line:26:12, endln:26:15
-  |vpiParent:
-  \_parameter: (work@top.RVF), line:26:16, endln:26:19
-\_bit_typespec: , line:27:12, endln:27:15
-  |vpiParent:
-  \_parameter: (work@top.RVD), line:27:16, endln:27:19
-\_bit_typespec: , line:28:12, endln:28:15
-  |vpiParent:
-  \_parameter: (work@top.XF16), line:28:16, endln:28:20
-\_bit_typespec: , line:29:12, endln:29:15
-  |vpiParent:
-  \_parameter: (work@top.XF16ALT), line:29:16, endln:29:23
-\_bit_typespec: , line:30:12, endln:30:15
-  |vpiParent:
-  \_parameter: (work@top.XF8), line:30:16, endln:30:19
-\_bit_typespec: , line:31:12, endln:31:15
-  |vpiParent:
-  \_parameter: (work@top.XFVEC), line:31:16, endln:31:21
-\_string_typespec: (Width), line:34:7, endln:34:12
-  |vpiParent:
-  \_tagged_pattern: , line:34:22, endln:34:24
-  |vpiName:Width
-\_bit_typespec: , line:31:12, endln:31:15
-  |vpiParent:
-  \_ref_typespec: (work@top)
-\_string_typespec: (EnableVectors), line:35:7, endln:35:20
-  |vpiParent:
-  \_tagged_pattern: , line:35:22, endln:35:27
-  |vpiName:EnableVectors
-\_string_typespec: (EnableNanBox), line:36:7, endln:36:19
-  |vpiParent:
-  \_tagged_pattern: , line:36:22, endln:36:26
-  |vpiName:EnableNanBox
-\_string_typespec: (FpFmtMask), line:37:7, endln:37:16
-  |vpiParent:
-  \_tagged_pattern: , line:37:22, endln:37:52
-  |vpiName:FpFmtMask
-\_string_typespec: (IntFmtMask), line:38:7, endln:38:17
-  |vpiParent:
-  \_tagged_pattern: , line:38:22, endln:38:76
-  |vpiName:IntFmtMask
-\_logic_typespec: (fmt_logic_t), line:6:9, endln:6:20
-  |vpiParent:
-  \_parameter: (work@top.FpFmtMask), line:41:29, endln:41:38
-  |vpiName:fmt_logic_t
-  |vpiTypedefAlias:
-  \_ref_typespec: (work@top.FpFmtMask.fmt_logic_t)
-    |vpiParent:
-    \_logic_typespec: (fmt_logic_t), line:6:9, endln:6:20
-    |vpiFullName:work@top.FpFmtMask.fmt_logic_t
-    |vpiActual:
-    \_logic_typespec: (fmt_logic_t), line:6:9, endln:6:20
-  |vpiRange:
-  \_range: , line:6:15, endln:6:20
-    |vpiParent:
-    \_logic_typespec: (fmt_logic_t), line:6:9, endln:6:20
-    |vpiLeftRange:
-    \_constant: , line:6:16, endln:6:17
-      |vpiParent:
-      \_range: , line:6:15, endln:6:20
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:6:18, endln:6:19
-      |vpiParent:
-      \_range: , line:6:15, endln:6:20
-      |vpiDecompile:4
-      |vpiSize:64
-      |UINT:4
-      |vpiConstType:9
+      \_ref_module: work@GOOD (good2), line:50:3, endln:50:16
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/ParamSubstituteComplex/dut.sv | ${SURELOG_DIR}/build/regression/ParamSubstituteComplex/roundtrip/dut_000.sv | 26 | 53 |
+============================== End RoundTrip Results ==============================

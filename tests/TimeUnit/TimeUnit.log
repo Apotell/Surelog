@@ -22,9 +22,9 @@
 [INF:CP0304] ${SURELOG_DIR}/tests/TimeUnit/top1.v:2:1: Compile interface "work@my_interface".
 [INF:CP0303] ${SURELOG_DIR}/tests/TimeUnit/top1.v:32:1: Compile module "work@splice1".
 [INF:CP0303] ${SURELOG_DIR}/tests/TimeUnit/top1.v:265:1: Compile module "work@top".
-[INF:CP0302] Compile class "work@mailbox".
-[INF:CP0302] Compile class "work@process".
-[INF:CP0302] Compile class "work@semaphore".
+[INF:CP0302] Compile class "builtin::mailbox".
+[INF:CP0302] Compile class "builtin::process".
+[INF:CP0302] Compile class "builtin::semaphore".
 [WRN:CP0334] ${SURELOG_DIR}/tests/TimeUnit/top1.v:122:1: Colliding compilation unit name: "splice1",
              ${SURELOG_DIR}/tests/TimeUnit/top1.v:32:1: previous usage.
 [WRN:CP0334] ${SURELOG_DIR}/tests/TimeUnit/top1.v:194:1: Colliding compilation unit name: "splice1",
@@ -34,11 +34,11 @@
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 class_defn                                             8
-class_typespec                                         4
-class_var                                              3
+class_typespec                                         1
+class_var                                              1
 clocking_block                                         1
 clocking_io_decl                                       2
-constant                                               6
+constant                                              12
 cont_assign                                            1
 design                                                 1
 enum_const                                             5
@@ -51,23 +51,27 @@ int_typespec                                           9
 int_var                                                4
 interface_inst                                         1
 io_decl                                               11
-logic_net                                             14
-logic_typespec                                         7
+logic_net                                             13
+logic_typespec                                         3
 logic_var                                              1
-module_inst                                            8
+module_inst                                           14
 operation                                              2
 package                                                1
 port                                                  12
 prim_term                                              1
+range                                                  3
 ref_module                                             5
-ref_obj                                               16
-ref_typespec                                          20
+ref_obj                                               12
+ref_typespec                                          14
+source_file                                            2
 task                                                   9
 === UHDM Object Stats End ===
+[ERR:IG0809] ${SURELOG_DIR}/tests/TimeUnit/top.v:24:2: Object 30 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/tests/TimeUnit/top.v:87:2: Object 35 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TimeUnit/slpp_unit/surelog.uhdm ...
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 2
 [WARNING] : 11
 [   NOTE] : 0
 
@@ -78,7 +82,6 @@ task                                                   9
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/TimeUnit/builtin.sv | ${SURELOG_DIR}/build/regression/TimeUnit/roundtrip/builtin_000.sv | 0 | 0 |
-[roundtrip]: ${SURELOG_DIR}/tests/TimeUnit/top.v      | ${SURELOG_DIR}/build/regression/TimeUnit/roundtrip/top_000.v      | 21 | 95 |
-[roundtrip]: ${SURELOG_DIR}/tests/TimeUnit/top1.v     | ${SURELOG_DIR}/build/regression/TimeUnit/roundtrip/top1_000.v     | 27 | 290 |
+[roundtrip]: ${SURELOG_DIR}/tests/TimeUnit/top.v  | ${SURELOG_DIR}/build/regression/TimeUnit/roundtrip/top_000.v  | 27 | 95 |
+[roundtrip]: ${SURELOG_DIR}/tests/TimeUnit/top1.v | ${SURELOG_DIR}/build/regression/TimeUnit/roundtrip/top1_000.v | 34 | 290 |
 ============================== End RoundTrip Results ==============================

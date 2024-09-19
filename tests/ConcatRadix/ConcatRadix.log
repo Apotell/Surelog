@@ -87,7 +87,6 @@ begin                                                  1
 constant                                               5
 design                                                 1
 gen_if                                                 1
-int_typespec                                           1
 module_inst                                            1
 operation                                              2
 param_assign                                           1
@@ -95,31 +94,28 @@ parameter                                              1
 range                                                  1
 ref_module                                             1
 ref_obj                                                1
-ref_typespec                                           1
+source_file                                            1
 === UHDM Object Stats End ===
+[ERR:IG0809] ${SURELOG_DIR}/tests/ConcatRadix/dut.sv:6:5: Object 17 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConcatRadix/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ConcatRadix/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ConcatRadix/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/ConcatRadix/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/ConcatRadix/dut.sv, line:1:1, endln:9:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@test
+  |vpiName:work@test
   |vpiParameter:
-  \_parameter: (work@test.foo), line:3:17, endln:3:20
+  \_parameter: (work@test.foo), line:3:17, endln:3:35
     |vpiParent:
     \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/ConcatRadix/dut.sv, line:1:1, endln:9:10
-    |vpiTypespec:
-    \_ref_typespec: (work@test.foo)
-      |vpiParent:
-      \_parameter: (work@test.foo), line:3:17, endln:3:20
-      |vpiFullName:work@test.foo
-      |vpiActual:
-      \_int_typespec: , line:3:11, endln:3:16
     |vpiName:foo
     |vpiFullName:work@test.foo
   |vpiParamAssign:
@@ -133,27 +129,37 @@ design: (unnamed)
       |vpiOpType:33
       |vpiOperand:
       \_constant: , line:3:24, endln:3:28
+        |vpiParent:
+        \_operation: , line:3:23, endln:3:35
         |vpiDecompile:1'd0
         |vpiSize:1
         |DEC:0
         |vpiConstType:1
       |vpiOperand:
       \_constant: , line:3:30, endln:3:34
+        |vpiParent:
+        \_operation: , line:3:23, endln:3:35
         |vpiDecompile:1'b1
         |vpiSize:1
         |BIN:1
         |vpiConstType:3
     |vpiLhs:
-    \_parameter: (work@test.foo), line:3:17, endln:3:20
+    \_parameter: (work@test.foo), line:3:17, endln:3:35
   |vpiDefName:work@test
+  |vpiRefModule:
+  \_ref_module: work@bar (mybar), line:6:5, endln:6:17
+    |vpiParent:
+    \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/ConcatRadix/dut.sv, line:1:1, endln:9:10
+    |vpiName:mybar
+    |vpiDefName:work@bar
   |vpiGenStmt:
-  \_gen_if: , line:5:1, endln:5:3
+  \_gen_if: , line:5:1, endln:7:4
     |vpiParent:
     \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/ConcatRadix/dut.sv, line:1:1, endln:9:10
     |vpiCondition:
     \_operation: , line:5:5, endln:5:17
       |vpiParent:
-      \_gen_if: , line:5:1, endln:5:3
+      \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/ConcatRadix/dut.sv, line:1:1, endln:9:10
       |vpiOpType:14
       |vpiOperand:
       \_ref_obj: (work@test.foo), line:5:5, endln:5:8
@@ -161,6 +167,8 @@ design: (unnamed)
         \_operation: , line:5:5, endln:5:17
         |vpiName:foo
         |vpiFullName:work@test.foo
+        |vpiActual:
+        \_parameter: (work@test.foo), line:3:17, endln:3:35
       |vpiOperand:
       \_constant: , line:5:12, endln:5:17
         |vpiParent:
@@ -170,47 +178,19 @@ design: (unnamed)
         |BIN:01
         |vpiConstType:3
     |vpiStmt:
-    \_begin: (work@test)
+    \_begin: (work@test), line:5:19, endln:7:4
       |vpiParent:
-      \_gen_if: , line:5:1, endln:5:3
+      \_gen_if: , line:5:1, endln:7:4
       |vpiFullName:work@test
       |vpiStmt:
-      \_ref_module: work@bar (mybar), line:6:9, endln:6:14
-        |vpiParent:
-        \_begin: (work@test)
-        |vpiName:mybar
-        |vpiDefName:work@bar
-\_weaklyReferenced:
-\_int_typespec: , line:3:11, endln:3:16
-  |vpiParent:
-  \_parameter: (work@test.foo), line:3:17, endln:3:20
-  |vpiRange:
-  \_range: , line:3:11, endln:3:16
-    |vpiParent:
-    \_int_typespec: , line:3:11, endln:3:16
-    |vpiLeftRange:
-    \_constant: , line:3:12, endln:3:13
-      |vpiParent:
-      \_range: , line:3:11, endln:3:16
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:14, endln:3:15
-      |vpiParent:
-      \_range: , line:3:11, endln:3:16
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
+      \_ref_module: work@bar (mybar), line:6:5, endln:6:17
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 1
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ConcatRadix/dut.sv | ${SURELOG_DIR}/build/regression/ConcatRadix/roundtrip/dut_000.sv | 4 | 9 |
+[roundtrip]: ${SURELOG_DIR}/tests/ConcatRadix/dut.sv | ${SURELOG_DIR}/build/regression/ConcatRadix/roundtrip/dut_000.sv | 6 | 9 |
 ============================== End RoundTrip Results ==============================

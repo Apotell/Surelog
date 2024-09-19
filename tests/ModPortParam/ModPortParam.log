@@ -83,88 +83,105 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 design                                                 1
 interface_inst                                         1
-interface_typespec                                     2
+interface_typespec                                     3
 io_decl                                                1
-logic_net                                              2
 modport                                                1
 module_inst                                            2
 port                                                   2
 ref_module                                             2
-ref_obj                                                2
+ref_obj                                                1
 ref_typespec                                           1
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ModPortParam/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ModPortParam/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ModPortParam/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/ModPortParam/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallInterfaces:
 \_interface_inst: work@PerformanceCounterIF (work@PerformanceCounterIF), file:${SURELOG_DIR}/tests/ModPortParam/dut.sv, line:1:1, endln:6:13
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@PerformanceCounterIF
+  |vpiName:work@PerformanceCounterIF
   |vpiDefName:work@PerformanceCounterIF
   |vpiModport:
   \_modport: (CSR), line:2:13, endln:2:16
     |vpiParent:
     \_interface_inst: work@PerformanceCounterIF (work@PerformanceCounterIF), file:${SURELOG_DIR}/tests/ModPortParam/dut.sv, line:1:1, endln:6:13
     |vpiName:CSR
-    |vpiIODecl:
-    \_io_decl: (perfCounter), line:4:9, endln:4:20
-      |vpiParent:
-      \_modport: (CSR), line:2:13, endln:2:16
-      |vpiDirection:1
-      |vpiName:perfCounter
 |uhdmallModules:
 \_module_inst: work@CSR_Unit (work@CSR_Unit), file:${SURELOG_DIR}/tests/ModPortParam/dut.sv, line:8:1, endln:11:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@CSR_Unit
-  |vpiDefName:work@CSR_Unit
-  |vpiNet:
-  \_logic_net: (work@CSR_Unit.perfCounter), line:9:30, endln:9:41
+  |vpiName:work@CSR_Unit
+  |vpiTypedef:
+  \_interface_typespec: (PerformanceCounterIF), line:9:5, endln:9:25
     |vpiParent:
     \_module_inst: work@CSR_Unit (work@CSR_Unit), file:${SURELOG_DIR}/tests/ModPortParam/dut.sv, line:8:1, endln:11:10
-    |vpiName:perfCounter
-    |vpiFullName:work@CSR_Unit.perfCounter
+    |vpiName:PerformanceCounterIF
+    |vpiInterface:
+    \_interface_inst: work@PerformanceCounterIF (work@PerformanceCounterIF), file:${SURELOG_DIR}/tests/ModPortParam/dut.sv, line:1:1, endln:6:13
+  |vpiTypedef:
+  \_interface_typespec: (CSR), line:9:26, endln:9:29
+    |vpiParent:
+    \_module_inst: work@CSR_Unit (work@CSR_Unit), file:${SURELOG_DIR}/tests/ModPortParam/dut.sv, line:8:1, endln:11:10
+    |vpiName:CSR
+    |vpiIsModPort:1
+    |vpiInterface:
+    \_interface_inst: work@PerformanceCounterIF (work@PerformanceCounterIF), file:${SURELOG_DIR}/tests/ModPortParam/dut.sv, line:1:1, endln:6:13
+  |vpiImportTypespec:
+  \_interface_typespec: (PerformanceCounterIF), line:9:5, endln:9:25
+  |vpiImportTypespec:
+  \_interface_typespec: (CSR), line:9:26, endln:9:29
+  |vpiDefName:work@CSR_Unit
   |vpiPort:
-  \_port: (perfCounter), line:9:30, endln:9:41
+  \_port: (perfCounter), line:9:5, endln:9:41
     |vpiParent:
     \_module_inst: work@CSR_Unit (work@CSR_Unit), file:${SURELOG_DIR}/tests/ModPortParam/dut.sv, line:8:1, endln:11:10
     |vpiName:perfCounter
     |vpiDirection:3
-    |vpiLowConn:
-    \_ref_obj: (work@CSR_Unit.perfCounter.perfCounter), line:9:30, endln:9:41
-      |vpiParent:
-      \_port: (perfCounter), line:9:30, endln:9:41
-      |vpiName:perfCounter
-      |vpiFullName:work@CSR_Unit.perfCounter.perfCounter
-      |vpiActual:
-      \_logic_net: (work@CSR_Unit.perfCounter), line:9:30, endln:9:41
     |vpiTypedef:
-    \_ref_typespec: (work@CSR_Unit.perfCounter)
+    \_ref_typespec: (work@CSR_Unit.perfCounter.CSR), line:9:5, endln:9:25
       |vpiParent:
-      \_port: (perfCounter), line:9:30, endln:9:41
-      |vpiFullName:work@CSR_Unit.perfCounter
+      \_port: (perfCounter), line:9:5, endln:9:41
+      |vpiName:CSR
+      |vpiFullName:work@CSR_Unit.perfCounter.CSR
       |vpiActual:
       \_interface_typespec: (CSR), line:9:26, endln:9:29
 |uhdmallModules:
 \_module_inst: work@Core (work@Core), file:${SURELOG_DIR}/tests/ModPortParam/dut.sv, line:13:1, endln:17:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@Core
+  |vpiName:work@Core
+  |vpiImportTypespec:
+  \_logic_net: (work@Core.perfCounterIF), line:16:19, endln:16:32
+    |vpiParent:
+    \_module_inst: work@Core (work@Core), file:${SURELOG_DIR}/tests/ModPortParam/dut.sv, line:13:1, endln:17:10
+    |vpiName:perfCounterIF
+    |vpiFullName:work@Core.perfCounterIF
+    |vpiNetType:1
   |vpiDefName:work@Core
   |vpiNet:
-  \_logic_net: (work@Core.csrUnit.perfCounterIF), line:16:19, endln:16:32
+  \_logic_net: (work@Core.perfCounterIF), line:16:19, endln:16:32
+  |vpiPort:
+  \_port: , line:16:19, endln:16:32
     |vpiParent:
-    \_port: , line:16:19, endln:16:32
-    |vpiName:perfCounterIF
-    |vpiFullName:work@Core.csrUnit.perfCounterIF
-    |vpiNetType:1
+    \_module_inst: work@Core (work@Core), file:${SURELOG_DIR}/tests/ModPortParam/dut.sv, line:13:1, endln:17:10
+    |vpiHighConn:
+    \_ref_obj: (work@Core.perfCounterIF), line:16:19, endln:16:32
+      |vpiParent:
+      \_port: , line:16:19, endln:16:32
+      |vpiName:perfCounterIF
+      |vpiFullName:work@Core.perfCounterIF
+      |vpiActual:
+      \_logic_net: (work@Core.perfCounterIF), line:16:19, endln:16:32
   |vpiRefModule:
-  \_ref_module: work@PerformanceCounterIF (perfCounterIF), line:14:23, endln:14:36
+  \_ref_module: work@PerformanceCounterIF (perfCounterIF), line:14:2, endln:14:40
     |vpiParent:
     \_module_inst: work@Core (work@Core), file:${SURELOG_DIR}/tests/ModPortParam/dut.sv, line:13:1, endln:17:10
     |vpiName:perfCounterIF
@@ -172,7 +189,7 @@ design: (unnamed)
     |vpiActual:
     \_interface_inst: work@PerformanceCounterIF (work@PerformanceCounterIF), file:${SURELOG_DIR}/tests/ModPortParam/dut.sv, line:1:1, endln:6:13
   |vpiRefModule:
-  \_ref_module: work@CSR_Unit (csrUnit), line:16:11, endln:16:18
+  \_ref_module: work@CSR_Unit (csrUnit), line:16:2, endln:16:34
     |vpiParent:
     \_module_inst: work@Core (work@Core), file:${SURELOG_DIR}/tests/ModPortParam/dut.sv, line:13:1, endln:17:10
     |vpiName:csrUnit
@@ -181,24 +198,6 @@ design: (unnamed)
     \_module_inst: work@CSR_Unit (work@CSR_Unit), file:${SURELOG_DIR}/tests/ModPortParam/dut.sv, line:8:1, endln:11:10
     |vpiPort:
     \_port: , line:16:19, endln:16:32
-      |vpiParent:
-      \_ref_module: work@CSR_Unit (csrUnit), line:16:11, endln:16:18
-      |vpiHighConn:
-      \_ref_obj: (work@Core.csrUnit.perfCounterIF), line:16:19, endln:16:32
-        |vpiParent:
-        \_port: , line:16:19, endln:16:32
-        |vpiName:perfCounterIF
-        |vpiFullName:work@Core.csrUnit.perfCounterIF
-        |vpiActual:
-        \_logic_net: (work@Core.csrUnit.perfCounterIF), line:16:19, endln:16:32
-\_weaklyReferenced:
-\_interface_typespec: (CSR), line:9:26, endln:9:29
-  |vpiParent:
-  \_interface_typespec: (PerformanceCounterIF), line:9:5, endln:9:25
-  |vpiName:CSR
-  |vpiIsModPort:1
-\_interface_typespec: (PerformanceCounterIF), line:9:5, endln:9:25
-  |vpiName:PerformanceCounterIF
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -207,5 +206,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ModPortParam/dut.sv | ${SURELOG_DIR}/build/regression/ModPortParam/roundtrip/dut_000.sv | 8 | 17 |
+[roundtrip]: ${SURELOG_DIR}/tests/ModPortParam/dut.sv | ${SURELOG_DIR}/build/regression/ModPortParam/roundtrip/dut_000.sv | 14 | 17 |
 ============================== End RoundTrip Results ==============================

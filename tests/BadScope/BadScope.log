@@ -160,7 +160,6 @@ AST_DEBUG_END
 constant                                               5
 design                                                 1
 import_typespec                                        1
-logic_net                                              1
 logic_typespec                                         6
 module_inst                                            1
 operation                                              1
@@ -169,6 +168,7 @@ param_assign                                           1
 parameter                                              1
 ref_obj                                                1
 ref_typespec                                          13
+source_file                                            1
 string_typespec                                        5
 struct_typespec                                        2
 tagged_pattern                                         5
@@ -177,11 +177,14 @@ unsupported_typespec                                   1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BadScope/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/BadScope/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/BadScope/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/BadScope/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallPackages:
 \_package: pack (pack::), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:2:1, endln:9:11
   |vpiParent:
@@ -191,62 +194,64 @@ design: (unnamed)
   |vpiTypedef:
   \_struct_typespec: (pack::status_t), line:4:10, endln:7:4
     |vpiParent:
-    \_parameter: (work@top3.MSTATUS_RST_VAL), line:21:22, endln:21:37
-    |vpiName:pack::status_t
-    |vpiInstance:
     \_package: pack (pack::), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:2:1, endln:9:11
+    |vpiName:pack::status_t
     |vpiPacked:1
     |vpiTypespecMember:
-    \_typespec_member: (A), line:5:16, endln:5:17
+    \_typespec_member: (A), line:5:5, endln:5:18
       |vpiParent:
       \_struct_typespec: (pack::status_t), line:4:10, endln:7:4
       |vpiName:A
       |vpiTypespec:
-      \_ref_typespec: (work@top3.MSTATUS_RST_VAL.pack::status_t.A)
+      \_ref_typespec: (pack::status_t::A), line:5:5, endln:5:10
         |vpiParent:
-        \_typespec_member: (A), line:5:16, endln:5:17
-        |vpiFullName:work@top3.MSTATUS_RST_VAL.pack::status_t.A
+        \_typespec_member: (A), line:5:5, endln:5:18
+        |vpiFullName:pack::status_t::A
         |vpiActual:
         \_logic_typespec: , line:5:5, endln:5:10
-      |vpiRefFile:${SURELOG_DIR}/tests/BadScope/dut.sv
-      |vpiRefLineNo:5
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:5
-      |vpiRefEndColumnNo:10
     |vpiTypespecMember:
-    \_typespec_member: (B), line:6:16, endln:6:17
+    \_typespec_member: (B), line:6:5, endln:6:18
       |vpiParent:
       \_struct_typespec: (pack::status_t), line:4:10, endln:7:4
       |vpiName:B
       |vpiTypespec:
-      \_ref_typespec: (work@top3.MSTATUS_RST_VAL.pack::status_t.B)
+      \_ref_typespec: (pack::status_t::B), line:6:5, endln:6:10
         |vpiParent:
-        \_typespec_member: (B), line:6:16, endln:6:17
-        |vpiFullName:work@top3.MSTATUS_RST_VAL.pack::status_t.B
+        \_typespec_member: (B), line:6:5, endln:6:18
+        |vpiFullName:pack::status_t::B
         |vpiActual:
         \_logic_typespec: , line:6:5, endln:6:10
-      |vpiRefFile:${SURELOG_DIR}/tests/BadScope/dut.sv
-      |vpiRefLineNo:6
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:6
-      |vpiRefEndColumnNo:10
+  |vpiTypedef:
+  \_logic_typespec: , line:5:5, endln:5:10
+    |vpiParent:
+    \_package: pack (pack::), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:2:1, endln:9:11
+  |vpiTypedef:
+  \_logic_typespec: , line:6:5, endln:6:10
+    |vpiParent:
+    \_package: pack (pack::), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:2:1, endln:9:11
+  |vpiImportTypespec:
+  \_struct_typespec: (pack::status_t), line:4:10, endln:7:4
+  |vpiImportTypespec:
+  \_logic_typespec: , line:5:5, endln:5:10
+  |vpiImportTypespec:
+  \_logic_typespec: , line:6:5, endln:6:10
   |vpiDefName:pack
 |uhdmallModules:
 \_module_inst: work@top3 (work@top3), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:12:1, endln:26:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top3
+  |vpiName:work@top3
   |vpiParameter:
-  \_parameter: (work@top3.MSTATUS_RST_VAL), line:21:22, endln:21:37
+  \_parameter: (work@top3.MSTATUS_RST_VAL), line:21:22, endln:25:54
     |vpiParent:
     \_module_inst: work@top3 (work@top3), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:12:1, endln:26:10
     |vpiTypespec:
-    \_ref_typespec: (work@top3.MSTATUS_RST_VAL)
+    \_ref_typespec: (work@top3.MSTATUS_RST_VAL), line:21:13, endln:21:21
       |vpiParent:
-      \_parameter: (work@top3.MSTATUS_RST_VAL), line:21:22, endln:21:37
+      \_parameter: (work@top3.MSTATUS_RST_VAL), line:21:22, endln:25:54
       |vpiFullName:work@top3.MSTATUS_RST_VAL
       |vpiActual:
-      \_struct_typespec: (pack::status_t), line:4:10, endln:7:4
+      \_struct_typespec: (status_t), line:14:10, endln:20:4
     |vpiLocalParam:1
     |vpiName:MSTATUS_RST_VAL
     |vpiFullName:work@top3.MSTATUS_RST_VAL
@@ -260,41 +265,47 @@ design: (unnamed)
       \_param_assign: , line:21:22, endln:25:54
       |vpiOpType:75
       |vpiOperand:
-      \_tagged_pattern: , line:21:48, endln:21:52
+      \_tagged_pattern: , line:21:42, endln:21:52
         |vpiParent:
         \_operation: , line:21:40, endln:25:54
         |vpiPattern:
         \_constant: , line:21:48, endln:21:52
+          |vpiParent:
+          \_operation: , line:21:40, endln:25:54
           |vpiDecompile:1'b0
           |vpiSize:1
           |BIN:0
           |vpiConstType:3
         |vpiTypespec:
-        \_ref_typespec: (work@top3)
+        \_ref_typespec: (work@top3.mie), line:21:42, endln:21:45
           |vpiParent:
-          \_tagged_pattern: , line:21:48, endln:21:52
-          |vpiFullName:work@top3
+          \_tagged_pattern: , line:21:42, endln:21:52
+          |vpiName:mie
+          |vpiFullName:work@top3.mie
           |vpiActual:
           \_string_typespec: (mie), line:21:42, endln:21:45
       |vpiOperand:
-      \_tagged_pattern: , line:22:49, endln:22:53
+      \_tagged_pattern: , line:22:43, endln:22:53
         |vpiParent:
         \_operation: , line:21:40, endln:25:54
         |vpiPattern:
         \_constant: , line:22:49, endln:22:53
+          |vpiParent:
+          \_operation: , line:21:40, endln:25:54
           |vpiDecompile:1'b1
           |vpiSize:1
           |BIN:1
           |vpiConstType:3
         |vpiTypespec:
-        \_ref_typespec: (work@top3)
+        \_ref_typespec: (work@top3.mpie), line:22:43, endln:22:47
           |vpiParent:
-          \_tagged_pattern: , line:22:49, endln:22:53
-          |vpiFullName:work@top3
+          \_tagged_pattern: , line:22:43, endln:22:53
+          |vpiName:mpie
+          |vpiFullName:work@top3.mpie
           |vpiActual:
           \_string_typespec: (mpie), line:22:43, endln:22:47
       |vpiOperand:
-      \_tagged_pattern: , line:23:49, endln:23:59
+      \_tagged_pattern: , line:23:43, endln:23:59
         |vpiParent:
         \_operation: , line:21:40, endln:25:54
         |vpiPattern:
@@ -306,87 +317,204 @@ design: (unnamed)
           |vpiActual:
           \_logic_net: (work@top3.PRIV_LVL_U), line:23:49, endln:23:59
         |vpiTypespec:
-        \_ref_typespec: (work@top3)
+        \_ref_typespec: (work@top3.mpp), line:23:43, endln:23:46
           |vpiParent:
-          \_tagged_pattern: , line:23:49, endln:23:59
-          |vpiFullName:work@top3
+          \_tagged_pattern: , line:23:43, endln:23:59
+          |vpiName:mpp
+          |vpiFullName:work@top3.mpp
           |vpiActual:
           \_string_typespec: (mpp), line:23:43, endln:23:46
       |vpiOperand:
-      \_tagged_pattern: , line:24:49, endln:24:53
+      \_tagged_pattern: , line:24:43, endln:24:53
         |vpiParent:
         \_operation: , line:21:40, endln:25:54
         |vpiPattern:
         \_constant: , line:24:49, endln:24:53
+          |vpiParent:
+          \_operation: , line:21:40, endln:25:54
           |vpiDecompile:1'b0
           |vpiSize:1
           |BIN:0
           |vpiConstType:3
         |vpiTypespec:
-        \_ref_typespec: (work@top3)
+        \_ref_typespec: (work@top3.mprv), line:24:43, endln:24:47
           |vpiParent:
-          \_tagged_pattern: , line:24:49, endln:24:53
-          |vpiFullName:work@top3
+          \_tagged_pattern: , line:24:43, endln:24:53
+          |vpiName:mprv
+          |vpiFullName:work@top3.mprv
           |vpiActual:
           \_string_typespec: (mprv), line:24:43, endln:24:47
       |vpiOperand:
-      \_tagged_pattern: , line:25:49, endln:25:53
+      \_tagged_pattern: , line:25:43, endln:25:53
         |vpiParent:
         \_operation: , line:21:40, endln:25:54
         |vpiPattern:
         \_constant: , line:25:49, endln:25:53
+          |vpiParent:
+          \_operation: , line:21:40, endln:25:54
           |vpiDecompile:1'b0
           |vpiSize:1
           |BIN:0
           |vpiConstType:3
         |vpiTypespec:
-        \_ref_typespec: (work@top3)
+        \_ref_typespec: (work@top3.tw), line:25:43, endln:25:45
           |vpiParent:
-          \_tagged_pattern: , line:25:49, endln:25:53
-          |vpiFullName:work@top3
+          \_tagged_pattern: , line:25:43, endln:25:53
+          |vpiName:tw
+          |vpiFullName:work@top3.tw
           |vpiActual:
           \_string_typespec: (tw), line:25:43, endln:25:45
     |vpiLhs:
-    \_parameter: (work@top3.MSTATUS_RST_VAL), line:21:22, endln:21:37
-  |vpiTypedef:
-  \_struct_typespec: (pack::status_t), line:4:10, endln:7:4
+    \_parameter: (work@top3.MSTATUS_RST_VAL), line:21:22, endln:25:54
   |vpiTypedef:
   \_import_typespec: (pack), line:13:8, endln:13:15
-  |vpiDefName:work@top3
-  |vpiNet:
+  |vpiTypedef:
+  \_struct_typespec: (status_t), line:14:10, endln:20:4
+    |vpiParent:
+    \_module_inst: work@top3 (work@top3), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:12:1, endln:26:10
+    |vpiName:status_t
+    |vpiPacked:1
+    |vpiTypespecMember:
+    \_typespec_member: (mie), line:15:5, endln:15:20
+      |vpiParent:
+      \_struct_typespec: (status_t), line:14:10, endln:20:4
+      |vpiName:mie
+      |vpiTypespec:
+      \_ref_typespec: (work@top3.status_t.mie), line:15:5, endln:15:10
+        |vpiParent:
+        \_typespec_member: (mie), line:15:5, endln:15:20
+        |vpiFullName:work@top3.status_t.mie
+        |vpiActual:
+        \_logic_typespec: , line:15:5, endln:15:10
+    |vpiTypespecMember:
+    \_typespec_member: (mpie), line:16:5, endln:16:21
+      |vpiParent:
+      \_struct_typespec: (status_t), line:14:10, endln:20:4
+      |vpiName:mpie
+      |vpiTypespec:
+      \_ref_typespec: (work@top3.status_t.mpie), line:16:5, endln:16:10
+        |vpiParent:
+        \_typespec_member: (mpie), line:16:5, endln:16:21
+        |vpiFullName:work@top3.status_t.mpie
+        |vpiActual:
+        \_logic_typespec: , line:16:5, endln:16:10
+    |vpiTypespecMember:
+    \_typespec_member: (mpp), line:17:5, endln:17:20
+      |vpiParent:
+      \_struct_typespec: (status_t), line:14:10, endln:20:4
+      |vpiName:mpp
+      |vpiTypespec:
+      \_ref_typespec: (work@top3.status_t.mpp.priv_lvl_e), line:17:5, endln:17:15
+        |vpiParent:
+        \_typespec_member: (mpp), line:17:5, endln:17:20
+        |vpiName:priv_lvl_e
+        |vpiFullName:work@top3.status_t.mpp.priv_lvl_e
+        |vpiActual:
+        \_unsupported_typespec: (priv_lvl_e), line:17:5, endln:17:15
+    |vpiTypespecMember:
+    \_typespec_member: (mprv), line:18:5, endln:18:21
+      |vpiParent:
+      \_struct_typespec: (status_t), line:14:10, endln:20:4
+      |vpiName:mprv
+      |vpiTypespec:
+      \_ref_typespec: (work@top3.status_t.mprv), line:18:5, endln:18:10
+        |vpiParent:
+        \_typespec_member: (mprv), line:18:5, endln:18:21
+        |vpiFullName:work@top3.status_t.mprv
+        |vpiActual:
+        \_logic_typespec: , line:18:5, endln:18:10
+    |vpiTypespecMember:
+    \_typespec_member: (tw), line:19:5, endln:19:19
+      |vpiParent:
+      \_struct_typespec: (status_t), line:14:10, endln:20:4
+      |vpiName:tw
+      |vpiTypespec:
+      \_ref_typespec: (work@top3.status_t.tw), line:19:5, endln:19:10
+        |vpiParent:
+        \_typespec_member: (tw), line:19:5, endln:19:19
+        |vpiFullName:work@top3.status_t.tw
+        |vpiActual:
+        \_logic_typespec: , line:19:5, endln:19:10
+  |vpiTypedef:
+  \_logic_typespec: , line:15:5, endln:15:10
+    |vpiParent:
+    \_module_inst: work@top3 (work@top3), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:12:1, endln:26:10
+  |vpiTypedef:
+  \_logic_typespec: , line:16:5, endln:16:10
+    |vpiParent:
+    \_module_inst: work@top3 (work@top3), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:12:1, endln:26:10
+  |vpiTypedef:
+  \_unsupported_typespec: (priv_lvl_e), line:17:5, endln:17:15
+    |vpiParent:
+    \_module_inst: work@top3 (work@top3), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:12:1, endln:26:10
+    |vpiName:priv_lvl_e
+  |vpiTypedef:
+  \_logic_typespec: , line:18:5, endln:18:10
+    |vpiParent:
+    \_module_inst: work@top3 (work@top3), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:12:1, endln:26:10
+  |vpiTypedef:
+  \_logic_typespec: , line:19:5, endln:19:10
+    |vpiParent:
+    \_module_inst: work@top3 (work@top3), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:12:1, endln:26:10
+  |vpiTypedef:
+  \_string_typespec: (mie), line:21:42, endln:21:45
+    |vpiParent:
+    \_module_inst: work@top3 (work@top3), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:12:1, endln:26:10
+    |vpiName:mie
+  |vpiTypedef:
+  \_string_typespec: (mpie), line:22:43, endln:22:47
+    |vpiParent:
+    \_module_inst: work@top3 (work@top3), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:12:1, endln:26:10
+    |vpiName:mpie
+  |vpiTypedef:
+  \_string_typespec: (mpp), line:23:43, endln:23:46
+    |vpiParent:
+    \_module_inst: work@top3 (work@top3), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:12:1, endln:26:10
+    |vpiName:mpp
+  |vpiTypedef:
+  \_string_typespec: (mprv), line:24:43, endln:24:47
+    |vpiParent:
+    \_module_inst: work@top3 (work@top3), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:12:1, endln:26:10
+    |vpiName:mprv
+  |vpiTypedef:
+  \_string_typespec: (tw), line:25:43, endln:25:45
+    |vpiParent:
+    \_module_inst: work@top3 (work@top3), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:12:1, endln:26:10
+    |vpiName:tw
+  |vpiImportTypespec:
+  \_import_typespec: (pack), line:13:8, endln:13:15
+  |vpiImportTypespec:
+  \_struct_typespec: (status_t), line:14:10, endln:20:4
+  |vpiImportTypespec:
+  \_logic_typespec: , line:15:5, endln:15:10
+  |vpiImportTypespec:
+  \_logic_typespec: , line:16:5, endln:16:10
+  |vpiImportTypespec:
+  \_unsupported_typespec: (priv_lvl_e), line:17:5, endln:17:15
+  |vpiImportTypespec:
+  \_logic_typespec: , line:18:5, endln:18:10
+  |vpiImportTypespec:
+  \_logic_typespec: , line:19:5, endln:19:10
+  |vpiImportTypespec:
+  \_string_typespec: (mie), line:21:42, endln:21:45
+  |vpiImportTypespec:
+  \_string_typespec: (mpie), line:22:43, endln:22:47
+  |vpiImportTypespec:
+  \_string_typespec: (mpp), line:23:43, endln:23:46
+  |vpiImportTypespec:
+  \_string_typespec: (mprv), line:24:43, endln:24:47
+  |vpiImportTypespec:
+  \_string_typespec: (tw), line:25:43, endln:25:45
+  |vpiImportTypespec:
   \_logic_net: (work@top3.PRIV_LVL_U), line:23:49, endln:23:59
     |vpiParent:
-    \_operation: , line:21:40, endln:25:54
+    \_module_inst: work@top3 (work@top3), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:12:1, endln:26:10
     |vpiName:PRIV_LVL_U
     |vpiFullName:work@top3.PRIV_LVL_U
     |vpiNetType:1
-\_weaklyReferenced:
-\_logic_typespec: , line:5:5, endln:5:10
-  |vpiInstance:
-  \_package: pack (pack::), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:2:1, endln:9:11
-\_logic_typespec: , line:6:5, endln:6:10
-  |vpiInstance:
-  \_package: pack (pack::), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:2:1, endln:9:11
-\_string_typespec: (mie), line:21:42, endln:21:45
-  |vpiParent:
-  \_tagged_pattern: , line:21:48, endln:21:52
-  |vpiName:mie
-\_string_typespec: (mpie), line:22:43, endln:22:47
-  |vpiParent:
-  \_tagged_pattern: , line:22:49, endln:22:53
-  |vpiName:mpie
-\_string_typespec: (mpp), line:23:43, endln:23:46
-  |vpiParent:
-  \_tagged_pattern: , line:23:49, endln:23:59
-  |vpiName:mpp
-\_string_typespec: (mprv), line:24:43, endln:24:47
-  |vpiParent:
-  \_tagged_pattern: , line:24:49, endln:24:53
-  |vpiName:mprv
-\_string_typespec: (tw), line:25:43, endln:25:45
-  |vpiParent:
-  \_tagged_pattern: , line:25:49, endln:25:53
-  |vpiName:tw
+  |vpiDefName:work@top3
+  |vpiNet:
+  \_logic_net: (work@top3.PRIV_LVL_U), line:23:49, endln:23:59
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -395,5 +523,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/BadScope/dut.sv | ${SURELOG_DIR}/build/regression/BadScope/roundtrip/dut_000.sv | 7 | 26 |
+[roundtrip]: ${SURELOG_DIR}/tests/BadScope/dut.sv | ${SURELOG_DIR}/build/regression/BadScope/roundtrip/dut_000.sv | 4 | 26 |
 ============================== End RoundTrip Results ==============================

@@ -171,53 +171,94 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 bit_select                                             2
-constant                                               9
+constant                                              13
 cont_assign                                            1
 design                                                 1
 enum_const                                             1
 enum_typespec                                          1
 hier_path                                              1
-logic_net                                              3
 logic_typespec                                         1
 module_inst                                            2
 packed_array_typespec                                  1
-range                                                  3
+packed_array_var                                       1
+range                                                  5
 ref_obj                                                5
 ref_typespec                                           6
+source_file                                            1
 struct_typespec                                        2
 typespec_member                                        3
 union_typespec                                         1
 === UHDM Object Stats End ===
+[ERR:IG0809] ${SURELOG_DIR}/tests/MultiIndexBind/dut.sv:28:21: Object 29 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/MultiIndexBind/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/MultiIndexBind/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/MultiIndexBind/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@PreDecodeStage
+  |vpiName:work@PreDecodeStage
+  |vpiVariables:
+  \_packed_array_var: (work@PreDecodeStage.microOps), line:26:19, endln:26:27
+    |vpiParent:
+    \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
+    |vpiTypespec:
+    \_ref_typespec: (work@PreDecodeStage.microOps), line:26:1, endln:26:18
+      |vpiParent:
+      \_packed_array_var: (work@PreDecodeStage.microOps), line:26:19, endln:26:27
+      |vpiFullName:work@PreDecodeStage.microOps
+      |vpiActual:
+      \_packed_array_typespec: , line:26:1, endln:26:18
+    |vpiName:microOps
+    |vpiFullName:work@PreDecodeStage.microOps
+    |vpiVisibility:1
   |vpiTypedef:
-  \_enum_typespec: (IntALU_Code), line:4:1, endln:7:15
+  \_logic_typespec: , line:4:14, endln:4:25
+    |vpiParent:
+    \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
+    |vpiRange:
+    \_range: , line:4:20, endln:4:25
+      |vpiParent:
+      \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
+      |vpiLeftRange:
+      \_constant: , line:4:21, endln:4:22
+        |vpiParent:
+        \_range: , line:4:20, endln:4:25
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:4:23, endln:4:24
+        |vpiParent:
+        \_range: , line:4:20, endln:4:25
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_enum_typespec: (IntALU_Code), line:4:9, endln:7:15
     |vpiParent:
     \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
     |vpiName:IntALU_Code
-    |vpiInstance:
-    \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
     |vpiBaseTypespec:
-    \_ref_typespec: (work@PreDecodeStage.IntALU_Code)
+    \_ref_typespec: (work@PreDecodeStage.IntALU_Code), line:4:9, endln:7:15
       |vpiParent:
-      \_enum_typespec: (IntALU_Code), line:4:1, endln:7:15
+      \_enum_typespec: (IntALU_Code), line:4:9, endln:7:15
       |vpiFullName:work@PreDecodeStage.IntALU_Code
       |vpiActual:
       \_logic_typespec: , line:4:14, endln:4:25
     |vpiEnumConst:
     \_enum_const: (AC_ADD), line:6:5, endln:6:22
       |vpiParent:
-      \_enum_typespec: (IntALU_Code), line:4:1, endln:7:15
+      \_enum_typespec: (IntALU_Code), line:4:9, endln:7:15
       |vpiName:AC_ADD
       |BIN:0000
       |vpiDecompile:4'b0000
@@ -227,104 +268,143 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
     |vpiName:IntMicroOpOperand
-    |vpiInstance:
-    \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
     |vpiPacked:1
     |vpiTypespecMember:
-    \_typespec_member: (aluCode), line:11:17, endln:11:24
+    \_typespec_member: (aluCode), line:11:5, endln:11:25
       |vpiParent:
       \_struct_typespec: (IntMicroOpOperand), line:9:9, endln:12:2
       |vpiName:aluCode
       |vpiTypespec:
-      \_ref_typespec: (work@PreDecodeStage.IntMicroOpOperand.aluCode)
+      \_ref_typespec: (work@PreDecodeStage.IntMicroOpOperand.aluCode.IntALU_Code), line:11:5, endln:11:16
         |vpiParent:
-        \_typespec_member: (aluCode), line:11:17, endln:11:24
-        |vpiFullName:work@PreDecodeStage.IntMicroOpOperand.aluCode
+        \_typespec_member: (aluCode), line:11:5, endln:11:25
+        |vpiName:IntALU_Code
+        |vpiFullName:work@PreDecodeStage.IntMicroOpOperand.aluCode.IntALU_Code
         |vpiActual:
-        \_enum_typespec: (IntALU_Code), line:4:1, endln:7:15
-      |vpiRefFile:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv
-      |vpiRefLineNo:11
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:11
-      |vpiRefEndColumnNo:16
+        \_enum_typespec: (IntALU_Code), line:4:9, endln:7:15
   |vpiTypedef:
-  \_union_typespec: (MicroOpOperand), line:14:9, endln:17:2
+  \_union_typespec: (MicroOpOperand), line:14:9, endln:17:17
     |vpiParent:
     \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
     |vpiName:MicroOpOperand
-    |vpiInstance:
-    \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
     |vpiPacked:1
     |vpiTypespecMember:
-    \_typespec_member: (intOp), line:16:27, endln:16:32
+    \_typespec_member: (intOp), line:16:5, endln:16:33
       |vpiParent:
-      \_union_typespec: (MicroOpOperand), line:14:9, endln:17:2
+      \_union_typespec: (MicroOpOperand), line:14:9, endln:17:17
       |vpiName:intOp
       |vpiTypespec:
-      \_ref_typespec: (work@PreDecodeStage.MicroOpOperand.intOp)
+      \_ref_typespec: (work@PreDecodeStage.MicroOpOperand.intOp.IntMicroOpOperand), line:16:5, endln:16:22
         |vpiParent:
-        \_typespec_member: (intOp), line:16:27, endln:16:32
-        |vpiFullName:work@PreDecodeStage.MicroOpOperand.intOp
+        \_typespec_member: (intOp), line:16:5, endln:16:33
+        |vpiName:IntMicroOpOperand
+        |vpiFullName:work@PreDecodeStage.MicroOpOperand.intOp.IntMicroOpOperand
         |vpiActual:
         \_struct_typespec: (IntMicroOpOperand), line:9:9, endln:12:2
-      |vpiRefFile:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv
-      |vpiRefLineNo:16
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:16
-      |vpiRefEndColumnNo:22
   |vpiTypedef:
   \_struct_typespec: (OpInfo), line:19:9, endln:22:2
     |vpiParent:
     \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
     |vpiName:OpInfo
-    |vpiInstance:
-    \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
     |vpiPacked:1
     |vpiTypespecMember:
-    \_typespec_member: (operand), line:21:20, endln:21:27
+    \_typespec_member: (operand), line:21:5, endln:21:28
       |vpiParent:
       \_struct_typespec: (OpInfo), line:19:9, endln:22:2
       |vpiName:operand
       |vpiTypespec:
-      \_ref_typespec: (work@PreDecodeStage.OpInfo.operand)
+      \_ref_typespec: (work@PreDecodeStage.OpInfo.operand.MicroOpOperand), line:21:5, endln:21:19
         |vpiParent:
-        \_typespec_member: (operand), line:21:20, endln:21:27
-        |vpiFullName:work@PreDecodeStage.OpInfo.operand
+        \_typespec_member: (operand), line:21:5, endln:21:28
+        |vpiName:MicroOpOperand
+        |vpiFullName:work@PreDecodeStage.OpInfo.operand.MicroOpOperand
         |vpiActual:
-        \_union_typespec: (MicroOpOperand), line:14:9, endln:17:2
-      |vpiRefFile:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv
-      |vpiRefLineNo:21
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:21
-      |vpiRefEndColumnNo:19
-  |vpiDefName:work@PreDecodeStage
-  |vpiNet:
-  \_logic_net: (work@PreDecodeStage.microOps), line:26:19, endln:26:27
+        \_union_typespec: (MicroOpOperand), line:14:9, endln:17:17
+  |vpiTypedef:
+  \_packed_array_typespec: , line:26:1, endln:26:18
     |vpiParent:
     \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
-    |vpiTypespec:
-    \_ref_typespec: (work@PreDecodeStage.microOps)
+    |vpiRange:
+    \_range: , line:26:8, endln:26:13
       |vpiParent:
-      \_logic_net: (work@PreDecodeStage.microOps), line:26:19, endln:26:27
-      |vpiFullName:work@PreDecodeStage.microOps
+      \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
+      |vpiLeftRange:
+      \_constant: , line:26:9, endln:26:10
+        |vpiParent:
+        \_range: , line:26:8, endln:26:13
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:26:11, endln:26:12
+        |vpiParent:
+        \_range: , line:26:8, endln:26:13
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiRange:
+    \_range: , line:26:13, endln:26:18
+      |vpiParent:
+      \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
+      |vpiLeftRange:
+      \_constant: , line:26:14, endln:26:15
+        |vpiParent:
+        \_range: , line:26:13, endln:26:18
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:26:16, endln:26:17
+        |vpiParent:
+        \_range: , line:26:13, endln:26:18
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_ref_typespec: (work@PreDecodeStage.OpInfo), line:26:1, endln:26:7
+      |vpiParent:
+      \_packed_array_typespec: , line:26:1, endln:26:18
+      |vpiName:OpInfo
+      |vpiFullName:work@PreDecodeStage.OpInfo
       |vpiActual:
-      \_packed_array_typespec: , line:26:1, endln:26:13
-    |vpiName:microOps
-    |vpiFullName:work@PreDecodeStage.microOps
-  |vpiNet:
+      \_struct_typespec: (OpInfo), line:19:9, endln:22:2
+  |vpiImportTypespec:
+  \_logic_typespec: , line:4:14, endln:4:25
+  |vpiImportTypespec:
+  \_enum_typespec: (IntALU_Code), line:4:9, endln:7:15
+  |vpiImportTypespec:
+  \_struct_typespec: (IntMicroOpOperand), line:9:9, endln:12:2
+  |vpiImportTypespec:
+  \_union_typespec: (MicroOpOperand), line:14:9, endln:17:17
+  |vpiImportTypespec:
+  \_struct_typespec: (OpInfo), line:19:9, endln:22:2
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:26:1, endln:26:18
+  |vpiImportTypespec:
+  \_packed_array_var: (work@PreDecodeStage.microOps), line:26:19, endln:26:27
+  |vpiImportTypespec:
+  \_logic_net: (work@PreDecodeStage.i), line:28:21, endln:28:22
+    |vpiParent:
+    \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
+    |vpiName:i
+    |vpiFullName:work@PreDecodeStage.i
+    |vpiNetType:1
+  |vpiImportTypespec:
   \_logic_net: (work@PreDecodeStage.o), line:28:8, endln:28:9
     |vpiParent:
-    \_cont_assign: , line:28:8, endln:28:48
+    \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
     |vpiName:o
     |vpiFullName:work@PreDecodeStage.o
     |vpiNetType:1
+  |vpiDefName:work@PreDecodeStage
   |vpiNet:
-  \_logic_net: (work@PreDecodeStage.microOps[i][1].operand.intOp.aluCode.i), line:28:21, endln:28:22
-    |vpiParent:
-    \_hier_path: (microOps[i][1].operand.intOp.aluCode), line:28:12, endln:28:48
-    |vpiName:i
-    |vpiFullName:work@PreDecodeStage.microOps[i][1].operand.intOp.aluCode.i
-    |vpiNetType:1
+  \_logic_net: (work@PreDecodeStage.i), line:28:21, endln:28:22
+  |vpiNet:
+  \_logic_net: (work@PreDecodeStage.o), line:28:8, endln:28:9
   |vpiContAssign:
   \_cont_assign: , line:28:8, endln:28:48
     |vpiParent:
@@ -339,6 +419,8 @@ design: (unnamed)
         \_hier_path: (microOps[i][1].operand.intOp.aluCode), line:28:12, endln:28:48
         |vpiName:microOps
         |vpiFullName:microOps[i]
+        |vpiActual:
+        \_packed_array_var: (work@PreDecodeStage.microOps), line:26:19, endln:26:27
         |vpiIndex:
         \_ref_obj: (work@PreDecodeStage.i), line:28:21, endln:28:22
           |vpiParent:
@@ -346,7 +428,7 @@ design: (unnamed)
           |vpiName:i
           |vpiFullName:work@PreDecodeStage.i
           |vpiActual:
-          \_logic_net: (work@PreDecodeStage.microOps[i][1].operand.intOp.aluCode.i), line:28:21, endln:28:22
+          \_logic_net: (work@PreDecodeStage.i), line:28:21, endln:28:22
       |vpiActual:
       \_bit_select: (microOps[i][1]), line:28:21, endln:28:22
         |vpiParent:
@@ -354,6 +436,8 @@ design: (unnamed)
         |vpiFullName:microOps[i][1]
         |vpiIndex:
         \_constant: , line:28:24, endln:28:25
+          |vpiParent:
+          \_hier_path: (microOps[i][1].operand.intOp.aluCode), line:28:12, endln:28:48
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
@@ -363,102 +447,39 @@ design: (unnamed)
         |vpiParent:
         \_hier_path: (microOps[i][1].operand.intOp.aluCode), line:28:12, endln:28:48
         |vpiName:operand
+        |vpiActual:
+        \_typespec_member: (operand), line:21:5, endln:21:28
       |vpiActual:
       \_ref_obj: (intOp), line:28:35, endln:28:40
         |vpiParent:
         \_hier_path: (microOps[i][1].operand.intOp.aluCode), line:28:12, endln:28:48
         |vpiName:intOp
+        |vpiActual:
+        \_typespec_member: (intOp), line:16:5, endln:16:33
       |vpiActual:
       \_ref_obj: (work@PreDecodeStage.aluCode), line:28:41, endln:28:48
         |vpiParent:
         \_hier_path: (microOps[i][1].operand.intOp.aluCode), line:28:12, endln:28:48
         |vpiName:aluCode
         |vpiFullName:work@PreDecodeStage.aluCode
+        |vpiActual:
+        \_typespec_member: (aluCode), line:11:5, endln:11:25
       |vpiName:microOps[i][1].operand.intOp.aluCode
     |vpiLhs:
     \_ref_obj: (work@PreDecodeStage.o), line:28:8, endln:28:9
       |vpiParent:
-      \_cont_assign: , line:28:8, endln:28:48
+      \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
       |vpiName:o
       |vpiFullName:work@PreDecodeStage.o
       |vpiActual:
       \_logic_net: (work@PreDecodeStage.o), line:28:8, endln:28:9
-\_weaklyReferenced:
-\_logic_typespec: , line:4:14, endln:4:25
-  |vpiRange:
-  \_range: , line:4:20, endln:4:25
-    |vpiParent:
-    \_logic_typespec: , line:4:14, endln:4:25
-    |vpiLeftRange:
-    \_constant: , line:4:21, endln:4:22
-      |vpiParent:
-      \_range: , line:4:20, endln:4:25
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:4:23, endln:4:24
-      |vpiParent:
-      \_range: , line:4:20, endln:4:25
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_packed_array_typespec: , line:26:1, endln:26:13
-  |vpiRange:
-  \_range: , line:26:8, endln:26:13
-    |vpiParent:
-    \_packed_array_typespec: , line:26:1, endln:26:13
-    |vpiLeftRange:
-    \_constant: , line:26:9, endln:26:10
-      |vpiParent:
-      \_range: , line:26:8, endln:26:13
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:26:11, endln:26:12
-      |vpiParent:
-      \_range: , line:26:8, endln:26:13
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiRange:
-  \_range: , line:26:13, endln:26:18
-    |vpiParent:
-    \_packed_array_typespec: , line:26:1, endln:26:13
-    |vpiLeftRange:
-    \_constant: , line:26:14, endln:26:15
-      |vpiParent:
-      \_range: , line:26:13, endln:26:18
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:26:16, endln:26:17
-      |vpiParent:
-      \_range: , line:26:13, endln:26:18
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiElemTypespec:
-  \_ref_typespec: 
-    |vpiParent:
-    \_packed_array_typespec: , line:26:1, endln:26:13
-    |vpiActual:
-    \_struct_typespec: (OpInfo), line:19:9, endln:22:2
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 1
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/MultiIndexBind/dut.sv | ${SURELOG_DIR}/build/regression/MultiIndexBind/roundtrip/dut_000.sv | 10 | 30 |
+[roundtrip]: ${SURELOG_DIR}/tests/MultiIndexBind/dut.sv | ${SURELOG_DIR}/build/regression/MultiIndexBind/roundtrip/dut_000.sv | 12 | 30 |
 ============================== End RoundTrip Results ==============================

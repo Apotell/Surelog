@@ -169,48 +169,42 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/GenerateBlock2/dut.sv:2:1: Compile module "work@sub".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-begin                                                  2
-constant                                               4
+begin                                                  3
+constant                                               2
 design                                                 1
 gen_if                                                 1
 gen_region                                             2
-int_typespec                                           1
 logic_net                                              1
-logic_typespec                                         1
+logic_typespec                                         2
 module_inst                                            2
-named_begin                                            1
 operation                                              1
 param_assign                                           1
 parameter                                              1
 port                                                   1
-range                                                  1
-ref_obj                                                2
-ref_typespec                                           3
+ref_obj                                                1
+ref_typespec                                           2
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/GenerateBlock2/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/GenerateBlock2/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/GenerateBlock2/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/GenerateBlock2/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/GenerateBlock2/dut.sv, line:5:1, endln:21:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@dut
+  |vpiName:work@dut
   |vpiParameter:
-  \_parameter: (work@dut.p), line:6:13, endln:6:14
+  \_parameter: (work@dut.p), line:6:13, endln:6:21
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/GenerateBlock2/dut.sv, line:5:1, endln:21:10
     |BIN:1
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.p)
-      |vpiParent:
-      \_parameter: (work@dut.p), line:6:13, endln:6:14
-      |vpiFullName:work@dut.p
-      |vpiActual:
-      \_int_typespec: , line:6:3, endln:6:21
     |vpiName:p
     |vpiFullName:work@dut.p
   |vpiParamAssign:
@@ -224,34 +218,27 @@ design: (unnamed)
       |vpiDecompile:1'b1
       |vpiSize:1
       |BIN:1
-      |vpiTypespec:
-      \_ref_typespec: (work@dut)
-        |vpiParent:
-        \_constant: , line:6:17, endln:6:21
-        |vpiFullName:work@dut
-        |vpiActual:
-        \_int_typespec: , line:6:3, endln:6:21
       |vpiConstType:3
     |vpiLhs:
-    \_parameter: (work@dut.p), line:6:13, endln:6:14
-  |vpiDefName:work@dut
-  |vpiGenStmt:
-  \_gen_region: 
+    \_parameter: (work@dut.p), line:6:13, endln:6:21
+  |vpiInternalScope:
+  \_gen_region: (work@dut), line:7:3, endln:10:14
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/GenerateBlock2/dut.sv, line:5:1, endln:21:10
-    |vpiStmt:
-    \_begin: (work@dut)
+    |vpiFullName:work@dut
+    |vpiInternalScope:
+    \_begin: (work@dut), line:8:5, endln:9:8
       |vpiParent:
-      \_gen_region: 
+      \_gen_region: (work@dut), line:7:3, endln:10:14
       |vpiFullName:work@dut
       |vpiStmt:
-      \_gen_if: , line:8:5, endln:8:7
+      \_gen_if: , line:8:5, endln:9:8
         |vpiParent:
-        \_begin: (work@dut)
+        \_begin: (work@dut), line:8:5, endln:9:8
         |vpiCondition:
         \_operation: , line:8:9, endln:8:18
           |vpiParent:
-          \_gen_if: , line:8:5, endln:8:7
+          \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/GenerateBlock2/dut.sv, line:5:1, endln:21:10
           |vpiOpType:14
           |vpiOperand:
           \_ref_obj: (work@dut.p), line:8:9, endln:8:10
@@ -259,6 +246,8 @@ design: (unnamed)
             \_operation: , line:8:9, endln:8:18
             |vpiName:p
             |vpiFullName:work@dut.p
+            |vpiActual:
+            \_parameter: (work@dut.p), line:6:13, endln:6:21
           |vpiOperand:
           \_constant: , line:8:14, endln:8:18
             |vpiParent:
@@ -268,70 +257,81 @@ design: (unnamed)
             |BIN:1
             |vpiConstType:3
         |vpiStmt:
-        \_named_begin: (work@dut.blk)
+        \_begin: (work@dut.blk), line:8:20, endln:9:8
           |vpiParent:
-          \_gen_if: , line:8:5, endln:8:7
+          \_gen_if: , line:8:5, endln:9:8
           |vpiName:blk
           |vpiFullName:work@dut.blk
-  |vpiGenStmt:
-  \_gen_region: 
+    |vpiStmt:
+    \_begin: (work@dut), line:8:5, endln:9:8
+  |vpiInternalScope:
+  \_gen_region: (work@dut), line:11:3, endln:20:14
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/GenerateBlock2/dut.sv, line:5:1, endln:21:10
-    |vpiStmt:
-    \_begin: (work@dut)
+    |vpiFullName:work@dut
+    |vpiInternalScope:
+    \_begin: (work@dut), line:12:5, endln:12:23
       |vpiParent:
-      \_gen_region: 
+      \_gen_region: (work@dut), line:11:3, endln:20:14
       |vpiFullName:work@dut
+    |vpiStmt:
+    \_begin: (work@dut), line:12:5, endln:12:23
+  |vpiDefName:work@dut
 |uhdmallModules:
 \_module_inst: work@sub (work@sub), file:${SURELOG_DIR}/tests/GenerateBlock2/dut.sv, line:2:1, endln:3:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@sub
-  |vpiDefName:work@sub
-  |vpiNet:
+  |vpiName:work@sub
+  |vpiTypedef:
+  \_logic_typespec: , line:2:20, endln:2:23
+    |vpiParent:
+    \_module_inst: work@sub (work@sub), file:${SURELOG_DIR}/tests/GenerateBlock2/dut.sv, line:2:1, endln:3:10
+  |vpiTypedef:
+  \_logic_typespec: , line:2:20, endln:2:23
+    |vpiParent:
+    \_module_inst: work@sub (work@sub), file:${SURELOG_DIR}/tests/GenerateBlock2/dut.sv, line:2:1, endln:3:10
+  |vpiImportTypespec:
+  \_logic_typespec: , line:2:20, endln:2:23
+  |vpiImportTypespec:
   \_logic_net: (work@sub.int_status), line:2:24, endln:2:34
     |vpiParent:
     \_module_inst: work@sub (work@sub), file:${SURELOG_DIR}/tests/GenerateBlock2/dut.sv, line:2:1, endln:3:10
+    |vpiTypespec:
+    \_ref_typespec: (work@sub.int_status.int_status), line:2:20, endln:2:23
+      |vpiParent:
+      \_logic_net: (work@sub.int_status), line:2:24, endln:2:34
+      |vpiName:int_status
+      |vpiFullName:work@sub.int_status.int_status
+      |vpiActual:
+      \_logic_typespec: , line:2:20, endln:2:23
     |vpiName:int_status
     |vpiFullName:work@sub.int_status
     |vpiNetType:48
+  |vpiImportTypespec:
+  \_logic_typespec: , line:2:20, endln:2:23
+  |vpiDefName:work@sub
+  |vpiNet:
+  \_logic_net: (work@sub.int_status), line:2:24, endln:2:34
   |vpiPort:
-  \_port: (int_status), line:2:24, endln:2:34
+  \_port: (int_status), line:2:13, endln:2:34
     |vpiParent:
     \_module_inst: work@sub (work@sub), file:${SURELOG_DIR}/tests/GenerateBlock2/dut.sv, line:2:1, endln:3:10
     |vpiName:int_status
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@sub.int_status.int_status), line:2:24, endln:2:34
-      |vpiParent:
-      \_port: (int_status), line:2:24, endln:2:34
-      |vpiName:int_status
-      |vpiFullName:work@sub.int_status.int_status
-      |vpiActual:
-      \_logic_net: (work@sub.int_status), line:2:24, endln:2:34
     |vpiTypedef:
-    \_ref_typespec: (work@sub.int_status)
+    \_ref_typespec: (work@sub.int_status), line:2:20, endln:2:23
       |vpiParent:
-      \_port: (int_status), line:2:24, endln:2:34
+      \_port: (int_status), line:2:13, endln:2:34
       |vpiFullName:work@sub.int_status
       |vpiActual:
       \_logic_typespec: , line:2:20, endln:2:23
-\_weaklyReferenced:
-\_int_typespec: , line:6:3, endln:6:21
-  |vpiRange:
-  \_range: 
-    |vpiParent:
-    \_int_typespec: , line:6:3, endln:6:21
-    |vpiLeftRange:
-    \_constant: 
-      |INT:0
-    |vpiRightRange:
-    \_constant: 
-      |INT:0
-\_logic_typespec: , line:2:20, endln:2:23
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/GenerateBlock2/dut.sv | ${SURELOG_DIR}/build/regression/GenerateBlock2/roundtrip/dut_000.sv | 19 | 21 |
+============================== End RoundTrip Results ==============================

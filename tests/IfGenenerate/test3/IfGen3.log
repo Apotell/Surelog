@@ -183,55 +183,58 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/IfGenenerate/test3/dut3.sv:3:1: Compile module "work@lzc".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-begin                                                  1
+begin                                                  3
 constant                                               5
 design                                                 1
 gen_if                                                 1
 gen_if_else                                            1
 int_typespec                                           4
 module_inst                                            1
-named_begin                                            2
 operation                                              3
 param_assign                                           4
 parameter                                              4
 ref_obj                                                4
-ref_typespec                                           6
+ref_typespec                                           4
+source_file                                            1
 sys_func_call                                          1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/IfGen3/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/IfGen3/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/IfGen3/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/IfGenenerate/test3/dut3.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@lzc (work@lzc), file:${SURELOG_DIR}/tests/IfGenenerate/test3/dut3.sv, line:3:1, endln:21:16
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@lzc
+  |vpiName:work@lzc
   |vpiParameter:
-  \_parameter: (work@lzc.WIDTH), line:4:26, endln:4:31
+  \_parameter: (work@lzc.WIDTH), line:4:26, endln:4:36
     |vpiParent:
     \_module_inst: work@lzc (work@lzc), file:${SURELOG_DIR}/tests/IfGenenerate/test3/dut3.sv, line:3:1, endln:21:16
     |UINT:64
     |vpiTypespec:
-    \_ref_typespec: (work@lzc.WIDTH)
+    \_ref_typespec: (work@lzc.WIDTH), line:4:13, endln:4:16
       |vpiParent:
-      \_parameter: (work@lzc.WIDTH), line:4:26, endln:4:31
+      \_parameter: (work@lzc.WIDTH), line:4:26, endln:4:36
       |vpiFullName:work@lzc.WIDTH
       |vpiActual:
       \_int_typespec: , line:4:13, endln:4:25
     |vpiName:WIDTH
     |vpiFullName:work@lzc.WIDTH
   |vpiParameter:
-  \_parameter: (work@lzc.NUM_LEVELS), line:9:18, endln:9:28
+  \_parameter: (work@lzc.NUM_LEVELS), line:9:18, endln:9:44
     |vpiParent:
     \_module_inst: work@lzc (work@lzc), file:${SURELOG_DIR}/tests/IfGenenerate/test3/dut3.sv, line:3:1, endln:21:16
     |vpiTypespec:
-    \_ref_typespec: (work@lzc.NUM_LEVELS)
+    \_ref_typespec: (work@lzc.NUM_LEVELS), line:9:14, endln:9:17
       |vpiParent:
-      \_parameter: (work@lzc.NUM_LEVELS), line:9:18, endln:9:28
+      \_parameter: (work@lzc.NUM_LEVELS), line:9:18, endln:9:44
       |vpiFullName:work@lzc.NUM_LEVELS
       |vpiActual:
       \_int_typespec: , line:9:14, endln:9:17
@@ -240,14 +243,14 @@ design: (unnamed)
     |vpiName:NUM_LEVELS
     |vpiFullName:work@lzc.NUM_LEVELS
   |vpiParameter:
-  \_parameter: (work@lzc.level), line:10:19, endln:10:24
+  \_parameter: (work@lzc.level), line:10:19, endln:10:28
     |vpiParent:
     \_module_inst: work@lzc (work@lzc), file:${SURELOG_DIR}/tests/IfGenenerate/test3/dut3.sv, line:3:1, endln:21:16
     |UINT:4
     |vpiTypespec:
-    \_ref_typespec: (work@lzc.level)
+    \_ref_typespec: (work@lzc.level), line:10:14, endln:10:17
       |vpiParent:
-      \_parameter: (work@lzc.level), line:10:19, endln:10:24
+      \_parameter: (work@lzc.level), line:10:19, endln:10:28
       |vpiFullName:work@lzc.level
       |vpiActual:
       \_int_typespec: , line:10:14, endln:10:17
@@ -266,16 +269,9 @@ design: (unnamed)
       |vpiDecompile:64
       |vpiSize:64
       |UINT:64
-      |vpiTypespec:
-      \_ref_typespec: (work@lzc)
-        |vpiParent:
-        \_constant: , line:4:34, endln:4:36
-        |vpiFullName:work@lzc
-        |vpiActual:
-        \_int_typespec: , line:4:13, endln:4:25
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@lzc.WIDTH), line:4:26, endln:4:31
+    \_parameter: (work@lzc.WIDTH), line:4:26, endln:4:36
   |vpiParamAssign:
   \_param_assign: , line:9:18, endln:9:44
     |vpiParent:
@@ -290,9 +286,11 @@ design: (unnamed)
         \_sys_func_call: ($clog2), line:9:31, endln:9:44
         |vpiName:WIDTH
         |vpiFullName:work@lzc.WIDTH
+        |vpiActual:
+        \_parameter: (work@lzc.WIDTH), line:4:26, endln:4:36
       |vpiName:$clog2
     |vpiLhs:
-    \_parameter: (work@lzc.NUM_LEVELS), line:9:18, endln:9:28
+    \_parameter: (work@lzc.NUM_LEVELS), line:9:18, endln:9:44
   |vpiParamAssign:
   \_param_assign: , line:10:19, endln:10:28
     |vpiParent:
@@ -304,25 +302,45 @@ design: (unnamed)
       |vpiDecompile:4
       |vpiSize:64
       |UINT:4
-      |vpiTypespec:
-      \_ref_typespec: (work@lzc)
-        |vpiParent:
-        \_constant: , line:10:27, endln:10:28
-        |vpiFullName:work@lzc
-        |vpiActual:
-        \_int_typespec: , line:10:14, endln:10:17
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@lzc.level), line:10:19, endln:10:24
+    \_parameter: (work@lzc.level), line:10:19, endln:10:28
+  |vpiTypedef:
+  \_int_typespec: , line:4:13, endln:4:25
+    |vpiParent:
+    \_module_inst: work@lzc (work@lzc), file:${SURELOG_DIR}/tests/IfGenenerate/test3/dut3.sv, line:3:1, endln:21:16
+  |vpiTypedef:
+  \_int_typespec: , line:9:14, endln:9:17
+    |vpiParent:
+    \_module_inst: work@lzc (work@lzc), file:${SURELOG_DIR}/tests/IfGenenerate/test3/dut3.sv, line:3:1, endln:21:16
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:10:14, endln:10:17
+    |vpiParent:
+    \_module_inst: work@lzc (work@lzc), file:${SURELOG_DIR}/tests/IfGenenerate/test3/dut3.sv, line:3:1, endln:21:16
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:15:18, endln:15:21
+    |vpiParent:
+    \_module_inst: work@lzc (work@lzc), file:${SURELOG_DIR}/tests/IfGenenerate/test3/dut3.sv, line:3:1, endln:21:16
+    |vpiSigned:1
+  |vpiImportTypespec:
+  \_int_typespec: , line:4:13, endln:4:25
+  |vpiImportTypespec:
+  \_int_typespec: , line:9:14, endln:9:17
+  |vpiImportTypespec:
+  \_int_typespec: , line:10:14, endln:10:17
+  |vpiImportTypespec:
+  \_int_typespec: , line:15:18, endln:15:21
   |vpiDefName:work@lzc
   |vpiGenStmt:
-  \_gen_if_else: 
+  \_gen_if_else: , line:12:3, endln:19:6
     |vpiParent:
     \_module_inst: work@lzc (work@lzc), file:${SURELOG_DIR}/tests/IfGenenerate/test3/dut3.sv, line:3:1, endln:21:16
     |vpiCondition:
     \_operation: , line:12:7, endln:12:28
       |vpiParent:
-      \_gen_if_else: 
+      \_module_inst: work@lzc (work@lzc), file:${SURELOG_DIR}/tests/IfGenenerate/test3/dut3.sv, line:3:1, endln:21:16
       |vpiOpType:14
       |vpiOperand:
       \_ref_obj: (work@lzc.level), line:12:7, endln:12:12
@@ -330,6 +348,8 @@ design: (unnamed)
         \_operation: , line:12:7, endln:12:28
         |vpiName:level
         |vpiFullName:work@lzc.level
+        |vpiActual:
+        \_parameter: (work@lzc.level), line:10:19, endln:10:28
       |vpiOperand:
       \_operation: , line:12:16, endln:12:28
         |vpiParent:
@@ -341,6 +361,8 @@ design: (unnamed)
           \_operation: , line:12:16, endln:12:28
           |vpiName:NUM_LEVELS
           |vpiFullName:work@lzc.NUM_LEVELS
+          |vpiActual:
+          \_parameter: (work@lzc.NUM_LEVELS), line:9:18, endln:9:44
         |vpiOperand:
         \_constant: , line:12:27, endln:12:28
           |vpiParent:
@@ -350,38 +372,52 @@ design: (unnamed)
           |UINT:1
           |vpiConstType:9
     |vpiStmt:
-    \_named_begin: (work@lzc.g_last_level)
+    \_begin: (work@lzc.g_last_level), line:12:30, endln:13:6
       |vpiParent:
-      \_gen_if_else: 
+      \_gen_if_else: , line:12:3, endln:19:6
       |vpiName:g_last_level
       |vpiFullName:work@lzc.g_last_level
     |vpiElseStmt:
-    \_begin: (work@lzc)
+    \_begin: (work@lzc), line:13:12, endln:19:6
       |vpiParent:
-      \_gen_if_else: 
+      \_gen_if_else: , line:12:3, endln:19:6
       |vpiFullName:work@lzc
       |vpiStmt:
-      \_gen_if: , line:14:5, endln:14:7
+      \_gen_if: , line:14:5, endln:18:8
         |vpiParent:
-        \_begin: (work@lzc)
+        \_begin: (work@lzc), line:13:12, endln:19:6
         |vpiCondition:
         \_constant: , line:14:9, endln:14:10
           |vpiParent:
-          \_gen_if: , line:14:5, endln:14:7
+          \_module_inst: work@lzc (work@lzc), file:${SURELOG_DIR}/tests/IfGenenerate/test3/dut3.sv, line:3:1, endln:21:16
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
           |vpiConstType:9
         |vpiStmt:
-        \_named_begin: (work@lzc.all_true)
+        \_begin: (work@lzc.all_true), line:14:12, endln:18:8
           |vpiParent:
-          \_gen_if: , line:14:5, endln:14:7
+          \_gen_if: , line:14:5, endln:18:8
           |vpiName:all_true
           |vpiFullName:work@lzc.all_true
-          |vpiStmt:
+          |vpiParameter:
+          \_parameter: (work@lzc.all_true.POWER), line:15:22, endln:15:39
+            |vpiParent:
+            \_begin: (work@lzc.all_true), line:14:12, endln:18:8
+            |vpiTypespec:
+            \_ref_typespec: (work@lzc.all_true.POWER), line:15:22, endln:15:27
+              |vpiParent:
+              \_parameter: (work@lzc.all_true.POWER), line:15:22, endln:15:39
+              |vpiFullName:work@lzc.all_true.POWER
+              |vpiActual:
+              \_int_typespec: , line:15:18, endln:15:21
+            |vpiLocalParam:1
+            |vpiName:POWER
+            |vpiFullName:work@lzc.all_true.POWER
+          |vpiParamAssign:
           \_param_assign: , line:15:22, endln:15:39
             |vpiParent:
-            \_named_begin: (work@lzc.all_true)
+            \_begin: (work@lzc.all_true), line:14:12, endln:18:8
             |vpiRhs:
             \_operation: , line:15:31, endln:15:39
               |vpiParent:
@@ -401,35 +437,13 @@ design: (unnamed)
                 \_operation: , line:15:31, endln:15:39
                 |vpiName:level
                 |vpiFullName:work@lzc.all_true.level
+                |vpiActual:
+                \_parameter: (work@lzc.level), line:10:19, endln:10:28
             |vpiLhs:
             \_parameter: (work@lzc.all_true.POWER), line:15:22, endln:15:39
-              |vpiParent:
-              \_param_assign: , line:15:22, endln:15:39
-              |vpiTypespec:
-              \_ref_typespec: (work@lzc.all_true.POWER)
-                |vpiParent:
-                \_parameter: (work@lzc.all_true.POWER), line:15:22, endln:15:39
-                |vpiFullName:work@lzc.all_true.POWER
-                |vpiActual:
-                \_int_typespec: , line:15:18, endln:15:21
-              |vpiLocalParam:1
-              |vpiName:POWER
-              |vpiFullName:work@lzc.all_true.POWER
+          |vpiStmt:
+          \_param_assign: , line:15:22, endln:15:39
   |vpiEndLabel:lzc
-\_weaklyReferenced:
-\_int_typespec: , line:4:13, endln:4:25
-  |vpiParent:
-  \_parameter: (work@lzc.WIDTH), line:4:26, endln:4:31
-\_int_typespec: , line:9:14, endln:9:17
-  |vpiParent:
-  \_parameter: (work@lzc.NUM_LEVELS), line:9:18, endln:9:28
-  |vpiSigned:1
-\_int_typespec: , line:10:14, endln:10:17
-  |vpiParent:
-  \_parameter: (work@lzc.level), line:10:19, endln:10:24
-  |vpiSigned:1
-\_int_typespec: , line:15:18, endln:15:21
-  |vpiSigned:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -438,5 +452,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/IfGenenerate/test3/dut3.sv | ${SURELOG_DIR}/build/regression/IfGen3/roundtrip/dut3_000.sv | 11 | 21 |
+[roundtrip]: ${SURELOG_DIR}/tests/IfGenenerate/test3/dut3.sv | ${SURELOG_DIR}/build/regression/IfGen3/roundtrip/dut3_000.sv | 15 | 21 |
 ============================== End RoundTrip Results ==============================

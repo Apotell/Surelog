@@ -47,41 +47,116 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/UnsizedArray/dut.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+array_typespec                                         1
+array_var                                              1
 byte_typespec                                          1
+byte_var                                               1
+constant                                               5
 design                                                 1
-logic_net                                              1
-module_inst                                            1
-ref_typespec                                           1
+module_inst                                            2
+operation                                              1
+range                                                  1
+ref_typespec                                           2
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnsizedArray/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/UnsizedArray/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/UnsizedArray/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/UnsizedArray/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedArray/dut.sv, line:1:1, endln:4:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiNet:
-  \_logic_net: (work@top.b), line:2:9, endln:2:10
+  |vpiName:work@top
+  |vpiVariables:
+  \_byte_var: (work@top), line:2:4, endln:2:25
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedArray/dut.sv, line:1:1, endln:4:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.b)
+    \_ref_typespec: (work@top), line:2:4, endln:2:8
       |vpiParent:
-      \_logic_net: (work@top.b), line:2:9, endln:2:10
+      \_byte_var: (work@top), line:2:4, endln:2:25
+      |vpiFullName:work@top
+      |vpiActual:
+      \_byte_typespec: , line:2:4, endln:2:8
+    |vpiFullName:work@top
+    |vpiExpr:
+    \_operation: , line:2:15, endln:2:24
+      |vpiParent:
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedArray/dut.sv, line:1:1, endln:4:10
+      |vpiOpType:33
+      |vpiOperand:
+      \_constant: , line:2:16, endln:2:17
+        |vpiParent:
+        \_operation: , line:2:15, endln:2:24
+        |vpiDecompile:1
+        |vpiSize:8
+        |UINT:1
+        |vpiConstType:9
+      |vpiOperand:
+      \_constant: , line:2:19, endln:2:20
+        |vpiParent:
+        \_operation: , line:2:15, endln:2:24
+        |vpiDecompile:1
+        |vpiSize:8
+        |UINT:1
+        |vpiConstType:9
+      |vpiOperand:
+      \_constant: , line:2:22, endln:2:23
+        |vpiParent:
+        \_operation: , line:2:15, endln:2:24
+        |vpiDecompile:1
+        |vpiSize:8
+        |UINT:1
+        |vpiConstType:9
+  |vpiVariables:
+  \_array_var: (work@top.b), line:2:9, endln:2:25
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedArray/dut.sv, line:1:1, endln:4:10
+    |vpiSize:1
+    |vpiTypespec:
+    \_ref_typespec: (work@top.b), line:2:9, endln:2:10
+      |vpiParent:
+      \_array_var: (work@top.b), line:2:9, endln:2:25
       |vpiFullName:work@top.b
       |vpiActual:
-      \_byte_typespec: , line:2:4, endln:2:12
+      \_array_typespec: , line:2:9, endln:2:10
     |vpiName:b
     |vpiFullName:work@top.b
-\_weaklyReferenced:
-\_byte_typespec: , line:2:4, endln:2:12
-  |vpiSigned:1
+    |vpiSigned:1
+    |vpiRandType:1
+    |vpiVisibility:1
+    |vpiExpr:
+    \_operation: , line:2:15, endln:2:24
+    |vpiArrayType:2
+    |vpiReg:
+    \_byte_var: (work@top), line:2:4, endln:2:25
+  |vpiRegArray:
+  \_array_var: (work@top.b), line:2:9, endln:2:25
+  |vpiTypedef:
+  \_byte_typespec: , line:2:4, endln:2:8
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedArray/dut.sv, line:1:1, endln:4:10
+    |vpiSigned:1
+  |vpiTypedef:
+  \_array_typespec: , line:2:9, endln:2:10
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedArray/dut.sv, line:1:1, endln:4:10
+  |vpiImportTypespec:
+  \_byte_typespec: , line:2:4, endln:2:8
+  |vpiImportTypespec:
+  \_byte_var: (work@top), line:2:4, endln:2:25
+  |vpiImportTypespec:
+  \_array_var: (work@top.b), line:2:9, endln:2:25
+  |vpiImportTypespec:
+  \_array_typespec: , line:2:9, endln:2:10
+  |vpiDefName:work@top
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -90,5 +165,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/UnsizedArray/dut.sv | ${SURELOG_DIR}/build/regression/UnsizedArray/roundtrip/dut_000.sv | 1 | 4 |
+[roundtrip]: ${SURELOG_DIR}/tests/UnsizedArray/dut.sv | ${SURELOG_DIR}/build/regression/UnsizedArray/roundtrip/dut_000.sv | 3 | 4 |
 ============================== End RoundTrip Results ==============================

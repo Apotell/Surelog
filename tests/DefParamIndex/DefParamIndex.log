@@ -281,67 +281,65 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/DefParamIndex/dut.sv:4:1: Compile module "work@hierdefparam_top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-begin                                                  4
+begin                                                  5
 constant                                               6
 design                                                 1
 gen_if                                                 3
 gen_region                                             2
-int_typespec                                           1
 module_inst                                            4
-named_begin                                            1
 operation                                              3
 param_assign                                           1
 parameter                                              1
 range                                                  1
 ref_module                                             4
 ref_obj                                                3
-ref_typespec                                           2
+source_file                                            1
 === UHDM Object Stats End ===
+[ERR:IG0809] ${SURELOG_DIR}/tests/DefParamIndex/dut.sv:31:2: Object 32 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/DefParamIndex/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/DefParamIndex/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/DefParamIndex/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:1:1, endln:2:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@GOOD
+  |vpiName:work@GOOD
   |vpiDefName:work@GOOD
 |uhdmallModules:
 \_module_inst: work@hierdefparam_a (work@hierdefparam_a), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:12:1, endln:20:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@hierdefparam_a
-  |vpiDefName:work@hierdefparam_a
-  |vpiGenStmt:
-  \_gen_region: 
+  |vpiName:work@hierdefparam_a
+  |vpiInternalScope:
+  \_gen_region: (work@hierdefparam_a), line:14:3, endln:18:14
     |vpiParent:
     \_module_inst: work@hierdefparam_a (work@hierdefparam_a), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:12:1, endln:20:10
-    |vpiStmt:
-    \_begin: (work@hierdefparam_a)
+    |vpiFullName:work@hierdefparam_a
+    |vpiInternalScope:
+    \_begin: (work@hierdefparam_a), line:15:5, endln:17:8
       |vpiParent:
-      \_gen_region: 
+      \_gen_region: (work@hierdefparam_a), line:14:3, endln:18:14
       |vpiFullName:work@hierdefparam_a
+    |vpiStmt:
+    \_begin: (work@hierdefparam_a), line:15:5, endln:17:8
+  |vpiDefName:work@hierdefparam_a
 |uhdmallModules:
 \_module_inst: work@hierdefparam_b (work@hierdefparam_b), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:22:1, endln:33:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@hierdefparam_b
+  |vpiName:work@hierdefparam_b
   |vpiParameter:
-  \_parameter: (work@hierdefparam_b.addvalue), line:23:19, endln:23:27
+  \_parameter: (work@hierdefparam_b.addvalue), line:23:19, endln:23:32
     |vpiParent:
     \_module_inst: work@hierdefparam_b (work@hierdefparam_b), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:22:1, endln:33:10
     |UINT:44
-    |vpiTypespec:
-    \_ref_typespec: (work@hierdefparam_b.addvalue)
-      |vpiParent:
-      \_parameter: (work@hierdefparam_b.addvalue), line:23:19, endln:23:27
-      |vpiFullName:work@hierdefparam_b.addvalue
-      |vpiActual:
-      \_int_typespec: , line:23:13, endln:23:18
     |vpiName:addvalue
     |vpiFullName:work@hierdefparam_b.addvalue
   |vpiParamAssign:
@@ -355,25 +353,40 @@ design: (unnamed)
       |vpiDecompile:44
       |vpiSize:64
       |UINT:44
-      |vpiTypespec:
-      \_ref_typespec: (work@hierdefparam_b)
-        |vpiParent:
-        \_constant: , line:23:30, endln:23:32
-        |vpiFullName:work@hierdefparam_b
-        |vpiActual:
-        \_int_typespec: , line:23:13, endln:23:18
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@hierdefparam_b.addvalue), line:23:19, endln:23:27
+    \_parameter: (work@hierdefparam_b.addvalue), line:23:19, endln:23:32
   |vpiDefName:work@hierdefparam_b
+  |vpiRefModule:
+  \_ref_module: work@GOOD (good0), line:25:2, endln:25:15
+    |vpiParent:
+    \_module_inst: work@hierdefparam_b (work@hierdefparam_b), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:22:1, endln:33:10
+    |vpiName:good0
+    |vpiDefName:work@GOOD
+    |vpiActual:
+    \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:1:1, endln:2:10
+  |vpiRefModule:
+  \_ref_module: work@GOOD (good1), line:28:6, endln:28:19
+    |vpiParent:
+    \_module_inst: work@hierdefparam_b (work@hierdefparam_b), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:22:1, endln:33:10
+    |vpiName:good1
+    |vpiDefName:work@GOOD
+    |vpiActual:
+    \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:1:1, endln:2:10
+  |vpiRefModule:
+  \_ref_module: work@BAD (bad), line:31:2, endln:31:12
+    |vpiParent:
+    \_module_inst: work@hierdefparam_b (work@hierdefparam_b), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:22:1, endln:33:10
+    |vpiName:bad
+    |vpiDefName:work@BAD
   |vpiGenStmt:
-  \_gen_if: , line:24:3, endln:24:5
+  \_gen_if: , line:24:3, endln:26:6
     |vpiParent:
     \_module_inst: work@hierdefparam_b (work@hierdefparam_b), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:22:1, endln:33:10
     |vpiCondition:
     \_operation: , line:24:7, endln:24:21
       |vpiParent:
-      \_gen_if: , line:24:3, endln:24:5
+      \_module_inst: work@hierdefparam_b (work@hierdefparam_b), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:22:1, endln:33:10
       |vpiOpType:14
       |vpiOperand:
       \_ref_obj: (work@hierdefparam_b.addvalue), line:24:7, endln:24:15
@@ -381,6 +394,8 @@ design: (unnamed)
         \_operation: , line:24:7, endln:24:21
         |vpiName:addvalue
         |vpiFullName:work@hierdefparam_b.addvalue
+        |vpiActual:
+        \_parameter: (work@hierdefparam_b.addvalue), line:23:19, endln:23:32
       |vpiOperand:
       \_constant: , line:24:19, endln:24:21
         |vpiParent:
@@ -390,24 +405,20 @@ design: (unnamed)
         |UINT:42
         |vpiConstType:9
     |vpiStmt:
-    \_begin: (work@hierdefparam_b)
+    \_begin: (work@hierdefparam_b), line:24:23, endln:26:6
       |vpiParent:
-      \_gen_if: , line:24:3, endln:24:5
+      \_gen_if: , line:24:3, endln:26:6
       |vpiFullName:work@hierdefparam_b
       |vpiStmt:
-      \_ref_module: work@GOOD (good0), line:25:7, endln:25:12
-        |vpiParent:
-        \_begin: (work@hierdefparam_b)
-        |vpiName:good0
-        |vpiDefName:work@GOOD
+      \_ref_module: work@GOOD (good0), line:25:2, endln:25:15
   |vpiGenStmt:
-  \_gen_if: , line:27:3, endln:27:5
+  \_gen_if: , line:27:3, endln:29:6
     |vpiParent:
     \_module_inst: work@hierdefparam_b (work@hierdefparam_b), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:22:1, endln:33:10
     |vpiCondition:
     \_operation: , line:27:7, endln:27:21
       |vpiParent:
-      \_gen_if: , line:27:3, endln:27:5
+      \_module_inst: work@hierdefparam_b (work@hierdefparam_b), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:22:1, endln:33:10
       |vpiOpType:14
       |vpiOperand:
       \_ref_obj: (work@hierdefparam_b.addvalue), line:27:7, endln:27:15
@@ -415,6 +426,8 @@ design: (unnamed)
         \_operation: , line:27:7, endln:27:21
         |vpiName:addvalue
         |vpiFullName:work@hierdefparam_b.addvalue
+        |vpiActual:
+        \_parameter: (work@hierdefparam_b.addvalue), line:23:19, endln:23:32
       |vpiOperand:
       \_constant: , line:27:19, endln:27:21
         |vpiParent:
@@ -424,24 +437,20 @@ design: (unnamed)
         |UINT:43
         |vpiConstType:9
     |vpiStmt:
-    \_begin: (work@hierdefparam_b)
+    \_begin: (work@hierdefparam_b), line:27:23, endln:29:6
       |vpiParent:
-      \_gen_if: , line:27:3, endln:27:5
+      \_gen_if: , line:27:3, endln:29:6
       |vpiFullName:work@hierdefparam_b
       |vpiStmt:
-      \_ref_module: work@GOOD (good1), line:28:11, endln:28:16
-        |vpiParent:
-        \_begin: (work@hierdefparam_b)
-        |vpiName:good1
-        |vpiDefName:work@GOOD
+      \_ref_module: work@GOOD (good1), line:28:6, endln:28:19
   |vpiGenStmt:
-  \_gen_if: , line:30:3, endln:30:5
+  \_gen_if: , line:30:3, endln:32:6
     |vpiParent:
     \_module_inst: work@hierdefparam_b (work@hierdefparam_b), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:22:1, endln:33:10
     |vpiCondition:
     \_operation: , line:30:7, endln:30:21
       |vpiParent:
-      \_gen_if: , line:30:3, endln:30:5
+      \_module_inst: work@hierdefparam_b (work@hierdefparam_b), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:22:1, endln:33:10
       |vpiOpType:14
       |vpiOperand:
       \_ref_obj: (work@hierdefparam_b.addvalue), line:30:7, endln:30:15
@@ -449,6 +458,8 @@ design: (unnamed)
         \_operation: , line:30:7, endln:30:21
         |vpiName:addvalue
         |vpiFullName:work@hierdefparam_b.addvalue
+        |vpiActual:
+        \_parameter: (work@hierdefparam_b.addvalue), line:23:19, endln:23:32
       |vpiOperand:
       \_constant: , line:30:19, endln:30:21
         |vpiParent:
@@ -458,69 +469,48 @@ design: (unnamed)
         |UINT:44
         |vpiConstType:9
     |vpiStmt:
-    \_begin: (work@hierdefparam_b)
+    \_begin: (work@hierdefparam_b), line:30:23, endln:32:6
       |vpiParent:
-      \_gen_if: , line:30:3, endln:30:5
+      \_gen_if: , line:30:3, endln:32:6
       |vpiFullName:work@hierdefparam_b
       |vpiStmt:
-      \_ref_module: work@BAD (bad), line:31:6, endln:31:9
-        |vpiParent:
-        \_begin: (work@hierdefparam_b)
-        |vpiName:bad
-        |vpiDefName:work@BAD
+      \_ref_module: work@BAD (bad), line:31:2, endln:31:12
 |uhdmallModules:
 \_module_inst: work@hierdefparam_top (work@hierdefparam_top), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:4:1, endln:10:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@hierdefparam_top
-  |vpiDefName:work@hierdefparam_top
-  |vpiGenStmt:
-  \_gen_region: 
+  |vpiName:work@hierdefparam_top
+  |vpiInternalScope:
+  \_gen_region: (work@hierdefparam_top), line:5:3, endln:7:18
     |vpiParent:
     \_module_inst: work@hierdefparam_top (work@hierdefparam_top), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:4:1, endln:10:10
-    |vpiStmt:
-    \_named_begin: (work@hierdefparam_top.foo)
+    |vpiFullName:work@hierdefparam_top
+    |vpiInternalScope:
+    \_begin: (work@hierdefparam_top.foo), line:5:12, endln:7:6
       |vpiParent:
-      \_gen_region: 
+      \_gen_region: (work@hierdefparam_top), line:5:3, endln:7:18
       |vpiName:foo
       |vpiFullName:work@hierdefparam_top.foo
       |vpiStmt:
-      \_ref_module: work@hierdefparam_a (mod_a), line:6:20, endln:6:25
+      \_ref_module: work@hierdefparam_a (mod_a), line:6:5, endln:6:28
         |vpiParent:
-        \_named_begin: (work@hierdefparam_top.foo)
+        \_module_inst: work@hierdefparam_top (work@hierdefparam_top), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:4:1, endln:10:10
         |vpiName:mod_a
         |vpiDefName:work@hierdefparam_a
-\_weaklyReferenced:
-\_int_typespec: , line:23:13, endln:23:18
-  |vpiParent:
-  \_parameter: (work@hierdefparam_b.addvalue), line:23:19, endln:23:27
-  |vpiRange:
-  \_range: , line:23:13, endln:23:18
-    |vpiParent:
-    \_int_typespec: , line:23:13, endln:23:18
-    |vpiLeftRange:
-    \_constant: , line:23:14, endln:23:15
-      |vpiParent:
-      \_range: , line:23:13, endln:23:18
-      |vpiDecompile:7
-      |vpiSize:64
-      |UINT:7
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:23:16, endln:23:17
-      |vpiParent:
-      \_range: , line:23:13, endln:23:18
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
+        |vpiActual:
+        \_module_inst: work@hierdefparam_a (work@hierdefparam_a), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:12:1, endln:20:10
+    |vpiStmt:
+    \_begin: (work@hierdefparam_top.foo), line:5:12, endln:7:6
+  |vpiDefName:work@hierdefparam_top
+  |vpiRefModule:
+  \_ref_module: work@hierdefparam_a (mod_a), line:6:5, endln:6:28
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 4
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/DefParamIndex/dut.sv | ${SURELOG_DIR}/build/regression/DefParamIndex/roundtrip/dut_000.sv | 21 | 33 |
+[roundtrip]: ${SURELOG_DIR}/tests/DefParamIndex/dut.sv | ${SURELOG_DIR}/build/regression/DefParamIndex/roundtrip/dut_000.sv | 29 | 33 |
 ============================== End RoundTrip Results ==============================

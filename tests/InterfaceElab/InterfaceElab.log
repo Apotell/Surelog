@@ -167,45 +167,66 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/InterfaceElab/dut.sv:32:1: Compile module "work@testharness".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                               3
+constant                                               7
 design                                                 1
 int_typespec                                           1
 interface_inst                                         1
-interface_typespec                                     2
+interface_typespec                                     4
 io_decl                                                1
-logic_net                                              5
-logic_typespec                                         1
+logic_net                                              3
+logic_typespec                                         4
+logic_var                                              1
 modport                                                1
 module_inst                                            3
-operation                                              2
+operation                                              4
 param_assign                                           1
 parameter                                              1
 port                                                   4
-range                                                  1
+range                                                  3
 ref_module                                             3
-ref_obj                                                5
-ref_typespec                                           3
+ref_obj                                                6
+ref_typespec                                           6
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfaceElab/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/InterfaceElab/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/InterfaceElab/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallInterfaces:
 \_interface_inst: work@REG_BUS (work@REG_BUS), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:2:1, endln:13:13
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@REG_BUS
-  |vpiParameter:
-  \_parameter: (work@REG_BUS.ADDR_WIDTH), line:4:17, endln:4:27
+  |vpiName:work@REG_BUS
+  |vpiVariables:
+  \_logic_var: (work@REG_BUS.addr), line:9:28, endln:9:32
     |vpiParent:
     \_interface_inst: work@REG_BUS (work@REG_BUS), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:2:1, endln:13:13
     |vpiTypespec:
-    \_ref_typespec: (work@REG_BUS.ADDR_WIDTH)
+    \_ref_typespec: (work@REG_BUS.addr), line:9:3, endln:9:25
       |vpiParent:
-      \_parameter: (work@REG_BUS.ADDR_WIDTH), line:4:17, endln:4:27
+      \_logic_var: (work@REG_BUS.addr), line:9:28, endln:9:32
+      |vpiFullName:work@REG_BUS.addr
+      |vpiActual:
+      \_logic_typespec: , line:9:3, endln:9:25
+    |vpiName:addr
+    |vpiFullName:work@REG_BUS.addr
+    |vpiVisibility:1
+  |vpiReg:
+  \_logic_var: (work@REG_BUS.addr), line:9:28, endln:9:32
+  |vpiParameter:
+  \_parameter: (work@REG_BUS.ADDR_WIDTH), line:4:17, endln:4:32
+    |vpiParent:
+    \_interface_inst: work@REG_BUS (work@REG_BUS), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:2:1, endln:13:13
+    |vpiTypespec:
+    \_ref_typespec: (work@REG_BUS.ADDR_WIDTH), line:4:13, endln:4:16
+      |vpiParent:
+      \_parameter: (work@REG_BUS.ADDR_WIDTH), line:4:17, endln:4:32
       |vpiFullName:work@REG_BUS.ADDR_WIDTH
       |vpiActual:
       \_int_typespec: , line:4:13, endln:4:16
@@ -223,26 +244,141 @@ design: (unnamed)
       |vpiOpType:1
       |vpiOperand:
       \_constant: , line:4:31, endln:4:32
+        |vpiParent:
+        \_operation: , line:4:30, endln:4:32
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
         |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@REG_BUS.ADDR_WIDTH), line:4:17, endln:4:27
-  |vpiDefName:work@REG_BUS
-  |vpiNet:
+    \_parameter: (work@REG_BUS.ADDR_WIDTH), line:4:17, endln:4:32
+  |vpiTypedef:
+  \_int_typespec: , line:4:13, endln:4:16
+    |vpiParent:
+    \_interface_inst: work@REG_BUS (work@REG_BUS), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:2:1, endln:13:13
+    |vpiSigned:1
+  |vpiTypedef:
+  \_logic_typespec: , line:6:9, endln:6:14
+    |vpiParent:
+    \_interface_inst: work@REG_BUS (work@REG_BUS), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:2:1, endln:13:13
+  |vpiTypedef:
+  \_logic_typespec: , line:9:3, endln:9:25
+    |vpiParent:
+    \_interface_inst: work@REG_BUS (work@REG_BUS), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:2:1, endln:13:13
+    |vpiRange:
+    \_range: , line:9:9, endln:9:25
+      |vpiParent:
+      \_interface_inst: work@REG_BUS (work@REG_BUS), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:2:1, endln:13:13
+      |vpiLeftRange:
+      \_operation: , line:9:10, endln:9:22
+        |vpiParent:
+        \_range: , line:9:9, endln:9:25
+        |vpiOpType:11
+        |vpiOperand:
+        \_ref_obj: (work@REG_BUS.ADDR_WIDTH), line:9:10, endln:9:20
+          |vpiParent:
+          \_operation: , line:9:10, endln:9:22
+          |vpiName:ADDR_WIDTH
+          |vpiFullName:work@REG_BUS.ADDR_WIDTH
+          |vpiActual:
+          \_parameter: (work@REG_BUS.ADDR_WIDTH), line:4:17, endln:4:32
+        |vpiOperand:
+        \_constant: , line:9:21, endln:9:22
+          |vpiParent:
+          \_operation: , line:9:10, endln:9:22
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:9:23, endln:9:24
+        |vpiParent:
+        \_range: , line:9:9, endln:9:25
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_logic_typespec: , line:6:9, endln:6:14
+    |vpiParent:
+    \_interface_inst: work@REG_BUS (work@REG_BUS), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:2:1, endln:13:13
+  |vpiTypedef:
+  \_logic_typespec: , line:9:3, endln:9:25
+    |vpiParent:
+    \_interface_inst: work@REG_BUS (work@REG_BUS), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:2:1, endln:13:13
+    |vpiRange:
+    \_range: , line:9:9, endln:9:25
+      |vpiParent:
+      \_interface_inst: work@REG_BUS (work@REG_BUS), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:2:1, endln:13:13
+      |vpiLeftRange:
+      \_operation: , line:9:10, endln:9:22
+        |vpiParent:
+        \_range: , line:9:9, endln:9:25
+        |vpiOpType:11
+        |vpiOperand:
+        \_ref_obj: (work@REG_BUS.ADDR_WIDTH), line:9:10, endln:9:20
+          |vpiParent:
+          \_operation: , line:9:10, endln:9:22
+          |vpiName:ADDR_WIDTH
+          |vpiFullName:work@REG_BUS.ADDR_WIDTH
+          |vpiActual:
+          \_parameter: (work@REG_BUS.ADDR_WIDTH), line:4:17, endln:4:32
+        |vpiOperand:
+        \_constant: , line:9:21, endln:9:22
+          |vpiParent:
+          \_operation: , line:9:10, endln:9:22
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:9:23, endln:9:24
+        |vpiParent:
+        \_range: , line:9:9, endln:9:25
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_int_typespec: , line:4:13, endln:4:16
+  |vpiImportTypespec:
+  \_logic_typespec: , line:6:9, endln:6:14
+  |vpiImportTypespec:
+  \_logic_net: (work@REG_BUS.clk_i), line:6:15, endln:6:20
+    |vpiParent:
+    \_interface_inst: work@REG_BUS (work@REG_BUS), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:2:1, endln:13:13
+    |vpiTypespec:
+    \_ref_typespec: (work@REG_BUS.clk_i.clk_i), line:6:9, endln:6:14
+      |vpiParent:
+      \_logic_net: (work@REG_BUS.clk_i), line:6:15, endln:6:20
+      |vpiName:clk_i
+      |vpiFullName:work@REG_BUS.clk_i.clk_i
+      |vpiActual:
+      \_logic_typespec: , line:6:9, endln:6:14
+    |vpiName:clk_i
+    |vpiFullName:work@REG_BUS.clk_i
+    |vpiNetType:36
+  |vpiImportTypespec:
+  \_logic_typespec: , line:9:3, endln:9:25
+  |vpiImportTypespec:
+  \_logic_var: (work@REG_BUS.addr), line:9:28, endln:9:32
+  |vpiImportTypespec:
+  \_logic_typespec: , line:6:9, endln:6:14
+  |vpiImportTypespec:
   \_logic_net: (work@REG_BUS.clk_i), line:6:15, endln:6:20
     |vpiParent:
     \_interface_inst: work@REG_BUS (work@REG_BUS), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:2:1, endln:13:13
     |vpiName:clk_i
     |vpiFullName:work@REG_BUS.clk_i
     |vpiNetType:36
-  |vpiNet:
+  |vpiImportTypespec:
+  \_logic_typespec: , line:9:3, endln:9:25
+  |vpiImportTypespec:
   \_logic_net: (work@REG_BUS.addr), line:9:28, endln:9:32
     |vpiParent:
     \_interface_inst: work@REG_BUS (work@REG_BUS), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:2:1, endln:13:13
     |vpiTypespec:
-    \_ref_typespec: (work@REG_BUS.addr)
+    \_ref_typespec: (work@REG_BUS.addr), line:9:3, endln:9:25
       |vpiParent:
       \_logic_net: (work@REG_BUS.addr), line:9:28, endln:9:32
       |vpiFullName:work@REG_BUS.addr
@@ -251,19 +387,20 @@ design: (unnamed)
     |vpiName:addr
     |vpiFullName:work@REG_BUS.addr
     |vpiNetType:36
+  |vpiDefName:work@REG_BUS
+  |vpiNet:
+  \_logic_net: (work@REG_BUS.clk_i), line:6:15, endln:6:20
+  |vpiNet:
+  \_logic_net: (work@REG_BUS.clk_i), line:6:15, endln:6:20
+  |vpiNet:
+  \_logic_net: (work@REG_BUS.addr), line:9:28, endln:9:32
   |vpiModport:
   \_modport: (out), line:11:11, endln:11:14
     |vpiParent:
     \_interface_inst: work@REG_BUS (work@REG_BUS), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:2:1, endln:13:13
     |vpiName:out
-    |vpiIODecl:
-    \_io_decl: (addr), line:11:23, endln:11:27
-      |vpiParent:
-      \_modport: (out), line:11:11, endln:11:14
-      |vpiDirection:2
-      |vpiName:addr
   |vpiPort:
-  \_port: (clk_i), line:6:15, endln:6:20
+  \_port: (clk_i), line:6:3, endln:6:20
     |vpiParent:
     \_interface_inst: work@REG_BUS (work@REG_BUS), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:2:1, endln:13:13
     |vpiName:clk_i
@@ -271,66 +408,109 @@ design: (unnamed)
     |vpiLowConn:
     \_ref_obj: (work@REG_BUS.clk_i.clk_i), line:6:15, endln:6:20
       |vpiParent:
-      \_port: (clk_i), line:6:15, endln:6:20
+      \_port: (clk_i), line:6:3, endln:6:20
       |vpiName:clk_i
       |vpiFullName:work@REG_BUS.clk_i.clk_i
       |vpiActual:
       \_logic_net: (work@REG_BUS.clk_i), line:6:15, endln:6:20
+    |vpiTypedef:
+    \_ref_typespec: (work@REG_BUS.clk_i), line:6:9, endln:6:14
+      |vpiParent:
+      \_port: (clk_i), line:6:3, endln:6:20
+      |vpiFullName:work@REG_BUS.clk_i
+      |vpiActual:
+      \_logic_typespec: , line:6:9, endln:6:14
 |uhdmallModules:
 \_module_inst: work@apb_to_reg (work@apb_to_reg), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:15:1, endln:19:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@apb_to_reg
-  |vpiDefName:work@apb_to_reg
-  |vpiNet:
-  \_logic_net: (work@apb_to_reg.reg_o), line:16:16, endln:16:21
+  |vpiName:work@apb_to_reg
+  |vpiTypedef:
+  \_interface_typespec: (out), line:16:11, endln:16:14
     |vpiParent:
     \_module_inst: work@apb_to_reg (work@apb_to_reg), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:15:1, endln:19:10
-    |vpiName:reg_o
-    |vpiFullName:work@apb_to_reg.reg_o
+    |vpiName:out
+    |vpiIsModPort:1
+    |vpiInterface:
+    \_interface_inst: work@REG_BUS (work@REG_BUS), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:2:1, endln:13:13
+  |vpiTypedef:
+  \_interface_typespec: (out), line:16:11, endln:16:14
+    |vpiParent:
+    \_module_inst: work@apb_to_reg (work@apb_to_reg), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:15:1, endln:19:10
+    |vpiName:out
+    |vpiIsModPort:1
+    |vpiInterface:
+    \_interface_inst: work@REG_BUS (work@REG_BUS), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:2:1, endln:13:13
+  |vpiImportTypespec:
+  \_interface_typespec: (out), line:16:11, endln:16:14
+  |vpiImportTypespec:
+  \_interface_typespec: (out), line:16:11, endln:16:14
+  |vpiDefName:work@apb_to_reg
   |vpiPort:
-  \_port: (reg_o), line:16:16, endln:16:21
+  \_port: (reg_o), line:16:3, endln:16:21
     |vpiParent:
     \_module_inst: work@apb_to_reg (work@apb_to_reg), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:15:1, endln:19:10
     |vpiName:reg_o
     |vpiDirection:3
-    |vpiLowConn:
-    \_ref_obj: (work@apb_to_reg.reg_o.reg_o), line:16:16, endln:16:21
-      |vpiParent:
-      \_port: (reg_o), line:16:16, endln:16:21
-      |vpiName:reg_o
-      |vpiFullName:work@apb_to_reg.reg_o.reg_o
-      |vpiActual:
-      \_logic_net: (work@apb_to_reg.reg_o), line:16:16, endln:16:21
     |vpiTypedef:
-    \_ref_typespec: (work@apb_to_reg.reg_o)
+    \_ref_typespec: (work@apb_to_reg.reg_o.out), line:16:3, endln:16:10
       |vpiParent:
-      \_port: (reg_o), line:16:16, endln:16:21
-      |vpiFullName:work@apb_to_reg.reg_o
+      \_port: (reg_o), line:16:3, endln:16:21
+      |vpiName:out
+      |vpiFullName:work@apb_to_reg.reg_o.out
       |vpiActual:
       \_interface_typespec: (out), line:16:11, endln:16:14
 |uhdmallModules:
 \_module_inst: work@peripherals (work@peripherals), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:21:1, endln:29:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@peripherals
+  |vpiName:work@peripherals
+  |vpiImportTypespec:
+  \_logic_net: (work@peripherals.clk_i), line:25:16, endln:25:21
+    |vpiParent:
+    \_module_inst: work@peripherals (work@peripherals), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:21:1, endln:29:10
+    |vpiName:clk_i
+    |vpiFullName:work@peripherals.clk_i
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@peripherals.reg_bus), line:27:34, endln:27:41
+    |vpiParent:
+    \_module_inst: work@peripherals (work@peripherals), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:21:1, endln:29:10
+    |vpiName:reg_bus
+    |vpiFullName:work@peripherals.reg_bus
+    |vpiNetType:1
   |vpiDefName:work@peripherals
   |vpiNet:
-  \_logic_net: (work@peripherals.reg_bus.clk_i), line:25:16, endln:25:21
-    |vpiParent:
-    \_port: , line:25:16, endln:25:21
-    |vpiName:clk_i
-    |vpiFullName:work@peripherals.reg_bus.clk_i
-    |vpiNetType:1
+  \_logic_net: (work@peripherals.clk_i), line:25:16, endln:25:21
   |vpiNet:
-  \_logic_net: (work@peripherals.i_apb_to_reg.reg_o.reg_bus), line:27:34, endln:27:41
+  \_logic_net: (work@peripherals.reg_bus), line:27:34, endln:27:41
+  |vpiPort:
+  \_port: , line:25:16, endln:25:21
     |vpiParent:
-    \_port: (reg_o), line:27:26, endln:27:42
-    |vpiName:reg_bus
-    |vpiFullName:work@peripherals.i_apb_to_reg.reg_o.reg_bus
-    |vpiNetType:1
+    \_module_inst: work@peripherals (work@peripherals), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:21:1, endln:29:10
+    |vpiHighConn:
+    \_ref_obj: (work@peripherals.clk_i), line:25:16, endln:25:21
+      |vpiParent:
+      \_port: , line:25:16, endln:25:21
+      |vpiName:clk_i
+      |vpiFullName:work@peripherals.clk_i
+      |vpiActual:
+      \_logic_net: (work@peripherals.clk_i), line:25:16, endln:25:21
+  |vpiPort:
+  \_port: (reg_o), line:27:26, endln:27:42
+    |vpiParent:
+    \_module_inst: work@peripherals (work@peripherals), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:21:1, endln:29:10
+    |vpiName:reg_o
+    |vpiHighConn:
+    \_ref_obj: (work@peripherals.reg_o.reg_bus), line:27:34, endln:27:41
+      |vpiParent:
+      \_port: (reg_o), line:27:26, endln:27:42
+      |vpiName:reg_bus
+      |vpiFullName:work@peripherals.reg_o.reg_bus
+      |vpiActual:
+      \_logic_net: (work@peripherals.reg_bus), line:27:34, endln:27:41
   |vpiRefModule:
-  \_ref_module: work@REG_BUS (reg_bus), line:25:7, endln:25:14
+  \_ref_module: work@REG_BUS (reg_bus), line:23:4, endln:25:23
     |vpiParent:
     \_module_inst: work@peripherals (work@peripherals), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:21:1, endln:29:10
     |vpiName:reg_bus
@@ -339,18 +519,8 @@ design: (unnamed)
     \_interface_inst: work@REG_BUS (work@REG_BUS), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:2:1, endln:13:13
     |vpiPort:
     \_port: , line:25:16, endln:25:21
-      |vpiParent:
-      \_ref_module: work@REG_BUS (reg_bus), line:25:7, endln:25:14
-      |vpiHighConn:
-      \_ref_obj: (work@peripherals.reg_bus.clk_i), line:25:16, endln:25:21
-        |vpiParent:
-        \_port: , line:25:16, endln:25:21
-        |vpiName:clk_i
-        |vpiFullName:work@peripherals.reg_bus.clk_i
-        |vpiActual:
-        \_logic_net: (work@peripherals.reg_bus.clk_i), line:25:16, endln:25:21
   |vpiRefModule:
-  \_ref_module: work@apb_to_reg (i_apb_to_reg), line:27:12, endln:27:24
+  \_ref_module: work@apb_to_reg (i_apb_to_reg), line:27:1, endln:27:44
     |vpiParent:
     \_module_inst: work@peripherals (work@peripherals), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:21:1, endln:29:10
     |vpiName:i_apb_to_reg
@@ -359,74 +529,20 @@ design: (unnamed)
     \_module_inst: work@apb_to_reg (work@apb_to_reg), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:15:1, endln:19:10
     |vpiPort:
     \_port: (reg_o), line:27:26, endln:27:42
-      |vpiParent:
-      \_ref_module: work@apb_to_reg (i_apb_to_reg), line:27:12, endln:27:24
-      |vpiName:reg_o
-      |vpiHighConn:
-      \_ref_obj: (work@peripherals.i_apb_to_reg.reg_o.reg_bus), line:27:34, endln:27:41
-        |vpiParent:
-        \_port: (reg_o), line:27:26, endln:27:42
-        |vpiName:reg_bus
-        |vpiFullName:work@peripherals.i_apb_to_reg.reg_o.reg_bus
-        |vpiActual:
-        \_logic_net: (work@peripherals.i_apb_to_reg.reg_o.reg_bus), line:27:34, endln:27:41
 |uhdmallModules:
 \_module_inst: work@testharness (work@testharness), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:32:1, endln:36:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@testharness
+  |vpiName:work@testharness
   |vpiDefName:work@testharness
   |vpiRefModule:
-  \_ref_module: work@peripherals (i_peripherals), line:34:16, endln:34:29
+  \_ref_module: work@peripherals (i_peripherals), line:34:3, endln:34:33
     |vpiParent:
     \_module_inst: work@testharness (work@testharness), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:32:1, endln:36:10
     |vpiName:i_peripherals
     |vpiDefName:work@peripherals
     |vpiActual:
     \_module_inst: work@peripherals (work@peripherals), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:21:1, endln:29:10
-\_weaklyReferenced:
-\_int_typespec: , line:4:13, endln:4:16
-  |vpiParent:
-  \_parameter: (work@REG_BUS.ADDR_WIDTH), line:4:17, endln:4:27
-  |vpiSigned:1
-\_logic_typespec: , line:9:3, endln:9:25
-  |vpiRange:
-  \_range: , line:9:9, endln:9:25
-    |vpiParent:
-    \_logic_typespec: , line:9:3, endln:9:25
-    |vpiLeftRange:
-    \_operation: , line:9:10, endln:9:22
-      |vpiParent:
-      \_range: , line:9:9, endln:9:25
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (ADDR_WIDTH), line:9:10, endln:9:20
-        |vpiParent:
-        \_operation: , line:9:10, endln:9:22
-        |vpiName:ADDR_WIDTH
-      |vpiOperand:
-      \_constant: , line:9:21, endln:9:22
-        |vpiParent:
-        \_operation: , line:9:10, endln:9:22
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:9:23, endln:9:24
-      |vpiParent:
-      \_range: , line:9:9, endln:9:25
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_interface_typespec: (out), line:16:11, endln:16:14
-  |vpiParent:
-  \_interface_typespec: (REG_BUS), line:16:3, endln:16:10
-  |vpiName:out
-  |vpiIsModPort:1
-\_interface_typespec: (REG_BUS), line:16:3, endln:16:10
-  |vpiName:REG_BUS
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -435,5 +551,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/InterfaceElab/dut.sv | ${SURELOG_DIR}/build/regression/InterfaceElab/roundtrip/dut_000.sv | 11 | 36 |
+[roundtrip]: ${SURELOG_DIR}/tests/InterfaceElab/dut.sv | ${SURELOG_DIR}/build/regression/InterfaceElab/roundtrip/dut_000.sv | 20 | 36 |
 ============================== End RoundTrip Results ==============================

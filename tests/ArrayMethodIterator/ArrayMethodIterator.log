@@ -132,7 +132,7 @@ n<pkg> u<126> t<StringConst> p<127> l<29:1> el<29:4>
 n<> u<127> t<Class_type> p<128> c<126> l<29:1> el<29:4>
 n<> u<128> t<Class_scope> p<130> c<127> s<129> l<29:1> el<29:6>
 n<uvm_callbacks> u<129> t<StringConst> p<130> l<29:6> el<29:19>
-n<> u<130> t<Data_type> p<134> c<128> s<133> l<29:1> el<29:19>
+n<pkg::uvm_callbacks> u<130> t<Data_type> p<134> c<128> s<133> l<29:1> el<29:19>
 n<c1> u<131> t<StringConst> p<132> l<29:20> el<29:22>
 n<> u<132> t<Variable_decl_assignment> p<133> c<131> l<29:20> el<29:22>
 n<> u<133> t<List_of_variable_decl_assignments> p<134> c<132> l<29:20> el<29:22>
@@ -165,41 +165,83 @@ assignment                                             4
 begin                                                  1
 class_defn                                             3
 class_typespec                                         3
-class_var                                              3
-constant                                               4
+class_var                                              1
+constant                                               2
 design                                                 1
 function                                               1
 hier_path                                              2
-logic_net                                              1
+int_typespec                                           1
+int_var                                                1
 method_func_call                                       1
 module_inst                                            1
 package                                                1
 range                                                  2
 ref_obj                                                5
-ref_typespec                                          10
+ref_typespec                                          11
+ref_var                                                3
+source_file                                            1
 type_parameter                                         2
 === UHDM Object Stats End ===
+[ERR:UH0734] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:60: Failed to bind object: "id: 48, name: cb_".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:60: Illegal implicit net "id:48, name: cb_".
+[ERR:UH0734] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:73: Failed to bind object: "id: 50, name: cb_".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:73: Illegal implicit net "id:50, name: cb_".
+[ERR:IG0809] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:60: Object 48 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:73: Object 50 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ArrayMethodIterator/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ArrayMethodIterator/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ArrayMethodIterator/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallPackages:
 \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:1:1, endln:25:11
   |vpiParent:
   \_design: (unnamed)
   |vpiName:pkg
   |vpiFullName:pkg::
-  |vpiDefName:pkg
-  |vpiClassDefn:
+  |vpiInternalScope:
+  \_class_defn: (pkg::uvm_object), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:3:3, endln:4:11
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:1:1, endln:25:11
+    |vpiName:uvm_object
+    |vpiFullName:pkg::uvm_object
+  |vpiInternalScope:
   \_class_defn: (pkg::uvm_callback), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:6:3, endln:8:11
     |vpiParent:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:1:1, endln:25:11
     |vpiName:uvm_callback
     |vpiFullName:pkg::uvm_callback
-  |vpiClassDefn:
+    |vpiVariables:
+    \_int_var: (pkg::uvm_callback::get_inst_id), line:7:8, endln:7:19
+      |vpiParent:
+      \_class_defn: (pkg::uvm_callback), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:6:3, endln:8:11
+      |vpiTypespec:
+      \_ref_typespec: (pkg::uvm_callback::get_inst_id), line:7:4, endln:7:7
+        |vpiParent:
+        \_int_var: (pkg::uvm_callback::get_inst_id), line:7:8, endln:7:19
+        |vpiFullName:pkg::uvm_callback::get_inst_id
+        |vpiActual:
+        \_int_typespec: , line:7:4, endln:7:7
+      |vpiName:get_inst_id
+      |vpiFullName:pkg::uvm_callback::get_inst_id
+      |vpiSigned:1
+      |vpiAutomatic:1
+      |vpiVisibility:1
+    |vpiTypedef:
+    \_int_typespec: , line:7:4, endln:7:7
+      |vpiParent:
+      \_class_defn: (pkg::uvm_callback), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:6:3, endln:8:11
+      |vpiSigned:1
+    |vpiImportTypespec:
+    \_int_typespec: , line:7:4, endln:7:7
+    |vpiImportTypespec:
+    \_int_var: (pkg::uvm_callback::get_inst_id), line:7:8, endln:7:19
+  |vpiInternalScope:
   \_class_defn: (pkg::uvm_callbacks), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:10:1, endln:23:9
     |vpiParent:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:1:1, endln:25:11
@@ -212,10 +254,11 @@ design: (unnamed)
       |vpiName:T
       |vpiFullName:pkg::uvm_callbacks::T
       |vpiTypespec:
-      \_ref_typespec: (pkg::uvm_callbacks::T)
+      \_ref_typespec: (pkg::uvm_callbacks::T::uvm_object), line:10:30, endln:10:40
         |vpiParent:
         \_type_parameter: (pkg::uvm_callbacks::T), line:10:28, endln:10:29
-        |vpiFullName:pkg::uvm_callbacks::T
+        |vpiName:uvm_object
+        |vpiFullName:pkg::uvm_callbacks::T::uvm_object
         |vpiActual:
         \_class_typespec: (uvm_object), line:10:30, endln:10:40
     |vpiParameter:
@@ -225,104 +268,162 @@ design: (unnamed)
       |vpiName:CB
       |vpiFullName:pkg::uvm_callbacks::CB
       |vpiTypespec:
-      \_ref_typespec: (pkg::uvm_callbacks::CB)
+      \_ref_typespec: (pkg::uvm_callbacks::CB::uvm_callback), line:10:50, endln:10:62
         |vpiParent:
         \_type_parameter: (pkg::uvm_callbacks::CB), line:10:47, endln:10:49
-        |vpiFullName:pkg::uvm_callbacks::CB
+        |vpiName:uvm_callback
+        |vpiFullName:pkg::uvm_callbacks::CB::uvm_callback
         |vpiActual:
         \_class_typespec: (uvm_callback), line:10:50, endln:10:62
-    |vpiMethod:
+    |vpiInternalScope:
     \_function: (pkg::uvm_callbacks::get_all), line:12:2, endln:21:12
       |vpiParent:
       \_class_defn: (pkg::uvm_callbacks), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:10:1, endln:23:9
       |vpiName:get_all
       |vpiFullName:pkg::uvm_callbacks::get_all
-      |vpiVariables:
-      \_class_var: (pkg::uvm_callbacks::get_all::cb), line:14:6, endln:14:8
-        |vpiParent:
-        \_begin: (pkg::uvm_callbacks::get_all), line:15:3, endln:15:29
-        |vpiTypespec:
-        \_ref_typespec: (pkg::uvm_callbacks::get_all::cb)
-          |vpiParent:
-          \_class_var: (pkg::uvm_callbacks::get_all::cb), line:14:6, endln:14:8
-          |vpiFullName:pkg::uvm_callbacks::get_all::cb
-          |vpiActual:
-          \_class_typespec: (uvm_callback), line:10:50, endln:10:62
-        |vpiName:cb
-        |vpiFullName:pkg::uvm_callbacks::get_all::cb
-      |vpiVariables:
-      \_array_var: (pkg::uvm_callbacks::get_all::callbacks_to_append), line:15:6, endln:15:25
-        |vpiParent:
-        \_begin: (pkg::uvm_callbacks::get_all), line:15:3, endln:15:29
-        |vpiTypespec:
-        \_ref_typespec: (pkg::uvm_callbacks::get_all::callbacks_to_append)
-          |vpiParent:
-          \_array_var: (pkg::uvm_callbacks::get_all::callbacks_to_append), line:15:6, endln:15:25
-          |vpiFullName:pkg::uvm_callbacks::get_all::callbacks_to_append
-          |vpiActual:
-          \_array_typespec: , line:15:6, endln:15:27
-        |vpiName:callbacks_to_append
-        |vpiFullName:pkg::uvm_callbacks::get_all::callbacks_to_append
-        |vpiArrayType:4
-        |vpiReg:
-        \_class_var: (pkg::uvm_callbacks::get_all::callbacks_to_append), line:15:6, endln:15:25
-          |vpiParent:
-          \_array_var: (pkg::uvm_callbacks::get_all::callbacks_to_append), line:15:6, endln:15:25
-          |vpiTypespec:
-          \_ref_typespec: (pkg::uvm_callbacks::get_all::callbacks_to_append)
-            |vpiParent:
-            \_class_var: (pkg::uvm_callbacks::get_all::callbacks_to_append), line:15:6, endln:15:25
-            |vpiFullName:pkg::uvm_callbacks::get_all::callbacks_to_append
-            |vpiActual:
-            \_class_typespec: (uvm_callback), line:10:50, endln:10:62
-          |vpiFullName:pkg::uvm_callbacks::get_all::callbacks_to_append
-      |vpiVariables:
-      \_array_var: (pkg::uvm_callbacks::get_all::unique_callbacks_to_append), line:16:6, endln:16:32
-        |vpiParent:
-        \_begin: (pkg::uvm_callbacks::get_all), line:15:3, endln:15:29
-        |vpiTypespec:
-        \_ref_typespec: (pkg::uvm_callbacks::get_all::unique_callbacks_to_append)
-          |vpiParent:
-          \_array_var: (pkg::uvm_callbacks::get_all::unique_callbacks_to_append), line:16:6, endln:16:32
-          |vpiFullName:pkg::uvm_callbacks::get_all::unique_callbacks_to_append
-          |vpiActual:
-          \_array_typespec: , line:16:6, endln:16:34
-        |vpiName:unique_callbacks_to_append
-        |vpiFullName:pkg::uvm_callbacks::get_all::unique_callbacks_to_append
-        |vpiArrayType:4
-        |vpiReg:
-        \_class_var: (pkg::uvm_callbacks::get_all::unique_callbacks_to_append), line:16:6, endln:16:32
-          |vpiParent:
-          \_array_var: (pkg::uvm_callbacks::get_all::unique_callbacks_to_append), line:16:6, endln:16:32
-          |vpiTypespec:
-          \_ref_typespec: (pkg::uvm_callbacks::get_all::unique_callbacks_to_append)
-            |vpiParent:
-            \_class_var: (pkg::uvm_callbacks::get_all::unique_callbacks_to_append), line:16:6, endln:16:32
-            |vpiFullName:pkg::uvm_callbacks::get_all::unique_callbacks_to_append
-            |vpiActual:
-            \_class_typespec: (uvm_callback), line:10:50, endln:10:62
-          |vpiFullName:pkg::uvm_callbacks::get_all::unique_callbacks_to_append
-      |vpiMethod:1
-      |vpiVisibility:1
-      |vpiStmt:
-      \_begin: (pkg::uvm_callbacks::get_all), line:15:3, endln:15:29
+      |vpiInternalScope:
+      \_begin: (pkg::uvm_callbacks::get_all)
         |vpiParent:
         \_function: (pkg::uvm_callbacks::get_all), line:12:2, endln:21:12
         |vpiFullName:pkg::uvm_callbacks::get_all
         |vpiVariables:
-        \_class_var: (pkg::uvm_callbacks::get_all::cb), line:14:6, endln:14:8
+        \_ref_var: (pkg::uvm_callbacks::get_all::cb), line:14:3, endln:14:5
+          |vpiParent:
+          \_begin: (pkg::uvm_callbacks::get_all)
+          |vpiTypespec:
+          \_ref_typespec: (pkg::uvm_callbacks::get_all::cb::CB), line:14:3, endln:14:5
+            |vpiParent:
+            \_ref_var: (pkg::uvm_callbacks::get_all::cb), line:14:3, endln:14:5
+            |vpiName:CB
+            |vpiFullName:pkg::uvm_callbacks::get_all::cb::CB
+            |vpiActual:
+            \_type_parameter: (pkg::uvm_callbacks::CB), line:10:47, endln:10:49
+          |vpiName:cb
+          |vpiFullName:pkg::uvm_callbacks::get_all::cb
         |vpiVariables:
-        \_class_var: (pkg::uvm_callbacks::get_all::callbacks_to_append), line:15:6, endln:15:25
+        \_ref_var: (pkg::uvm_callbacks::get_all), line:15:3, endln:15:5
+          |vpiParent:
+          \_begin: (pkg::uvm_callbacks::get_all)
+          |vpiTypespec:
+          \_ref_typespec: (pkg::uvm_callbacks::get_all::CB), line:15:3, endln:15:5
+            |vpiParent:
+            \_ref_var: (pkg::uvm_callbacks::get_all), line:15:3, endln:15:5
+            |vpiName:CB
+            |vpiFullName:pkg::uvm_callbacks::get_all::CB
+            |vpiActual:
+            \_type_parameter: (pkg::uvm_callbacks::CB), line:10:47, endln:10:49
+          |vpiFullName:pkg::uvm_callbacks::get_all
         |vpiVariables:
         \_array_var: (pkg::uvm_callbacks::get_all::callbacks_to_append), line:15:6, endln:15:25
+          |vpiParent:
+          \_begin: (pkg::uvm_callbacks::get_all)
+          |vpiTypespec:
+          \_ref_typespec: (pkg::uvm_callbacks::get_all::callbacks_to_append), line:15:3, endln:15:5
+            |vpiParent:
+            \_array_var: (pkg::uvm_callbacks::get_all::callbacks_to_append), line:15:6, endln:15:25
+            |vpiFullName:pkg::uvm_callbacks::get_all::callbacks_to_append
+            |vpiActual:
+            \_array_typespec: , line:15:6, endln:15:27
+          |vpiName:callbacks_to_append
+          |vpiFullName:pkg::uvm_callbacks::get_all::callbacks_to_append
+          |vpiArrayType:4
         |vpiVariables:
-        \_class_var: (pkg::uvm_callbacks::get_all::unique_callbacks_to_append), line:16:6, endln:16:32
+        \_ref_var: (pkg::uvm_callbacks::get_all), line:16:3, endln:16:5
+          |vpiParent:
+          \_begin: (pkg::uvm_callbacks::get_all)
+          |vpiTypespec:
+          \_ref_typespec: (pkg::uvm_callbacks::get_all::CB), line:16:3, endln:16:5
+            |vpiParent:
+            \_ref_var: (pkg::uvm_callbacks::get_all), line:16:3, endln:16:5
+            |vpiName:CB
+            |vpiFullName:pkg::uvm_callbacks::get_all::CB
+            |vpiActual:
+            \_type_parameter: (pkg::uvm_callbacks::CB), line:10:47, endln:10:49
+          |vpiFullName:pkg::uvm_callbacks::get_all
         |vpiVariables:
+        \_array_var: (pkg::uvm_callbacks::get_all::unique_callbacks_to_append), line:16:6, endln:16:32
+          |vpiParent:
+          \_begin: (pkg::uvm_callbacks::get_all)
+          |vpiTypespec:
+          \_ref_typespec: (pkg::uvm_callbacks::get_all::unique_callbacks_to_append), line:16:3, endln:16:5
+            |vpiParent:
+            \_array_var: (pkg::uvm_callbacks::get_all::unique_callbacks_to_append), line:16:6, endln:16:32
+            |vpiFullName:pkg::uvm_callbacks::get_all::unique_callbacks_to_append
+            |vpiActual:
+            \_array_typespec: , line:16:6, endln:16:34
+          |vpiName:unique_callbacks_to_append
+          |vpiFullName:pkg::uvm_callbacks::get_all::unique_callbacks_to_append
+          |vpiArrayType:4
+        |vpiRegArray:
+        \_array_var: (pkg::uvm_callbacks::get_all::callbacks_to_append), line:15:6, endln:15:25
+        |vpiRegArray:
+        \_array_var: (pkg::uvm_callbacks::get_all::unique_callbacks_to_append), line:16:6, endln:16:32
+        |vpiTypedef:
+        \_array_typespec: , line:15:6, endln:15:27
+          |vpiParent:
+          \_begin: (pkg::uvm_callbacks::get_all)
+          |vpiRange:
+          \_range: , line:15:26, endln:15:27
+            |vpiParent:
+            \_array_typespec: , line:15:6, endln:15:27
+            |vpiRightRange:
+            \_constant: , line:15:26, endln:15:27
+              |vpiParent:
+              \_range: , line:15:26, endln:15:27
+              |vpiDecompile:$
+              |vpiSize:1
+              |STRING:$
+              |vpiConstType:10
+          |vpiElemTypespec:
+          \_ref_typespec: (pkg::uvm_callbacks::get_all::CB), line:15:3, endln:15:5
+            |vpiParent:
+            \_array_typespec: , line:15:6, endln:15:27
+            |vpiName:CB
+            |vpiFullName:pkg::uvm_callbacks::get_all::CB
+            |vpiActual:
+            \_type_parameter: (pkg::uvm_callbacks::CB), line:10:47, endln:10:49
+        |vpiTypedef:
+        \_array_typespec: , line:16:6, endln:16:34
+          |vpiParent:
+          \_begin: (pkg::uvm_callbacks::get_all)
+          |vpiRange:
+          \_range: , line:16:33, endln:16:34
+            |vpiParent:
+            \_array_typespec: , line:16:6, endln:16:34
+            |vpiRightRange:
+            \_constant: , line:16:33, endln:16:34
+              |vpiParent:
+              \_range: , line:16:33, endln:16:34
+              |vpiDecompile:$
+              |vpiSize:1
+              |STRING:$
+              |vpiConstType:10
+          |vpiElemTypespec:
+          \_ref_typespec: (pkg::uvm_callbacks::get_all::CB), line:16:3, endln:16:5
+            |vpiParent:
+            \_array_typespec: , line:16:6, endln:16:34
+            |vpiName:CB
+            |vpiFullName:pkg::uvm_callbacks::get_all::CB
+            |vpiActual:
+            \_type_parameter: (pkg::uvm_callbacks::CB), line:10:47, endln:10:49
+        |vpiImportTypespec:
+        \_ref_var: (pkg::uvm_callbacks::get_all::cb), line:14:3, endln:14:5
+        |vpiImportTypespec:
+        \_ref_var: (pkg::uvm_callbacks::get_all), line:15:3, endln:15:5
+        |vpiImportTypespec:
+        \_array_typespec: , line:15:6, endln:15:27
+        |vpiImportTypespec:
+        \_array_var: (pkg::uvm_callbacks::get_all::callbacks_to_append), line:15:6, endln:15:25
+        |vpiImportTypespec:
+        \_ref_var: (pkg::uvm_callbacks::get_all), line:16:3, endln:16:5
+        |vpiImportTypespec:
+        \_array_typespec: , line:16:6, endln:16:34
+        |vpiImportTypespec:
         \_array_var: (pkg::uvm_callbacks::get_all::unique_callbacks_to_append), line:16:6, endln:16:32
         |vpiStmt:
         \_assignment: , line:19:3, endln:19:90
           |vpiParent:
-          \_begin: (pkg::uvm_callbacks::get_all), line:15:3, endln:15:29
+          \_begin: (pkg::uvm_callbacks::get_all)
           |vpiOpType:82
           |vpiBlocking:1
           |vpiRhs:
@@ -335,14 +436,16 @@ design: (unnamed)
               \_hier_path: (callbacks_to_append), line:19:32, endln:19:90
               |vpiName:callbacks_to_append
               |vpiFullName:pkg::uvm_callbacks::get_all::callbacks_to_append
+              |vpiActual:
+              \_array_var: (pkg::uvm_callbacks::get_all::callbacks_to_append), line:15:6, endln:15:25
             |vpiActual:
-            \_method_func_call: (unique), line:19:52, endln:19:58
+            \_method_func_call: (unique), line:19:52, endln:19:90
               |vpiParent:
               \_hier_path: (callbacks_to_append), line:19:32, endln:19:90
               |vpiArgument:
               \_ref_obj: (pkg::uvm_callbacks::get_all::callbacks_to_append::cb_), line:19:60, endln:19:63
                 |vpiParent:
-                \_method_func_call: (unique), line:19:52, endln:19:58
+                \_method_func_call: (unique), line:19:52, endln:19:90
                 |vpiName:cb_
                 |vpiFullName:pkg::uvm_callbacks::get_all::callbacks_to_append::cb_
               |vpiName:unique
@@ -361,6 +464,8 @@ design: (unnamed)
                   \_hier_path: (cb_.get_inst_id), line:19:73, endln:19:88
                   |vpiName:get_inst_id
                   |vpiFullName:pkg::uvm_callbacks::get_all::get_inst_id
+                  |vpiActual:
+                  \_int_var: (pkg::uvm_callback::get_inst_id), line:7:8, endln:7:19
                 |vpiName:cb_.get_inst_id
             |vpiName:callbacks_to_append
           |vpiLhs:
@@ -369,116 +474,105 @@ design: (unnamed)
             \_assignment: , line:19:3, endln:19:90
             |vpiName:unique_callbacks_to_append
             |vpiFullName:pkg::uvm_callbacks::get_all::unique_callbacks_to_append
+            |vpiActual:
+            \_array_var: (pkg::uvm_callbacks::get_all::unique_callbacks_to_append), line:16:6, endln:16:32
+      |vpiMethod:1
+      |vpiVisibility:1
+      |vpiStmt:
+      \_begin: (pkg::uvm_callbacks::get_all)
+    |vpiTypedef:
+    \_class_typespec: (uvm_object), line:10:30, endln:10:40
+      |vpiParent:
+      \_class_defn: (pkg::uvm_callbacks), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:10:1, endln:23:9
+      |vpiName:uvm_object
+      |vpiClassDefn:
+      \_class_defn: (pkg::uvm_object), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:3:3, endln:4:11
+    |vpiTypedef:
+    \_type_parameter: (pkg::uvm_callbacks::T), line:10:28, endln:10:29
+    |vpiTypedef:
+    \_class_typespec: (uvm_callback), line:10:50, endln:10:62
+      |vpiParent:
+      \_class_defn: (pkg::uvm_callbacks), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:10:1, endln:23:9
+      |vpiName:uvm_callback
+      |vpiClassDefn:
+      \_class_defn: (pkg::uvm_callback), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:6:3, endln:8:11
+    |vpiTypedef:
+    \_type_parameter: (pkg::uvm_callbacks::CB), line:10:47, endln:10:49
+    |vpiImportTypespec:
+    \_class_typespec: (uvm_object), line:10:30, endln:10:40
+    |vpiImportTypespec:
+    \_type_parameter: (pkg::uvm_callbacks::T), line:10:28, endln:10:29
+    |vpiImportTypespec:
+    \_class_typespec: (uvm_callback), line:10:50, endln:10:62
+    |vpiImportTypespec:
+    \_type_parameter: (pkg::uvm_callbacks::CB), line:10:47, endln:10:49
+    |vpiImportTypespec:
+    \_function: (pkg::uvm_callbacks::get_all), line:12:2, endln:21:12
+    |vpiMethod:
+    \_function: (pkg::uvm_callbacks::get_all), line:12:2, endln:21:12
+    |vpiClassTypespec:
+    \_class_typespec: (uvm_object), line:10:30, endln:10:40
+    |vpiClassTypespec:
+    \_class_typespec: (uvm_callback), line:10:50, endln:10:62
+  |vpiImportTypespec:
+  \_class_defn: (pkg::uvm_object), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:3:3, endln:4:11
+  |vpiImportTypespec:
+  \_class_defn: (pkg::uvm_callback), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:6:3, endln:8:11
+  |vpiImportTypespec:
+  \_class_defn: (pkg::uvm_callbacks), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:10:1, endln:23:9
+  |vpiDefName:pkg
   |vpiClassDefn:
   \_class_defn: (pkg::uvm_object), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:3:3, endln:4:11
-    |vpiParent:
-    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:1:1, endln:25:11
-    |vpiName:uvm_object
-    |vpiFullName:pkg::uvm_object
+  |vpiClassDefn:
+  \_class_defn: (pkg::uvm_callback), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:6:3, endln:8:11
+  |vpiClassDefn:
+  \_class_defn: (pkg::uvm_callbacks), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:10:1, endln:23:9
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:27:1, endln:31:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiNet:
-  \_logic_net: (work@top.c1), line:29:20, endln:29:22
+  |vpiName:work@top
+  |vpiVariables:
+  \_class_var: (work@top.c1), line:29:20, endln:29:22
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:27:1, endln:31:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.c1)
+    \_ref_typespec: (work@top.c1.pkg::uvm_callbacks), line:29:1, endln:29:19
       |vpiParent:
-      \_logic_net: (work@top.c1), line:29:20, endln:29:22
-      |vpiFullName:work@top.c1
+      \_class_var: (work@top.c1), line:29:20, endln:29:22
+      |vpiName:pkg::uvm_callbacks
+      |vpiFullName:work@top.c1.pkg::uvm_callbacks
       |vpiActual:
       \_class_typespec: (pkg::uvm_callbacks), line:29:1, endln:29:6
     |vpiName:c1
     |vpiFullName:work@top.c1
-\_weaklyReferenced:
-\_class_typespec: (uvm_object), line:10:30, endln:10:40
-  |vpiParent:
-  \_type_parameter: (pkg::uvm_callbacks::T), line:10:28, endln:10:29
-  |vpiName:uvm_object
-  |vpiClassDefn:
-  \_class_defn: (pkg::uvm_object), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:3:3, endln:4:11
-\_class_typespec: (uvm_callback), line:10:50, endln:10:62
-  |vpiParent:
-  \_type_parameter: (pkg::uvm_callbacks::CB), line:10:47, endln:10:49
-  |vpiName:uvm_callback
-  |vpiClassDefn:
-  \_class_defn: (pkg::uvm_callback), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:6:3, endln:8:11
-\_array_typespec: , line:15:6, endln:15:27
-  |vpiRange:
-  \_range: , line:15:26, endln:15:27
+    |vpiVisibility:1
+  |vpiTypedef:
+  \_class_typespec: (pkg::uvm_callbacks), line:29:1, endln:29:6
     |vpiParent:
-    \_array_typespec: , line:15:6, endln:15:27
-    |vpiLeftRange:
-    \_constant: 
-      |vpiParent:
-      \_range: , line:15:26, endln:15:27
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:15:26, endln:15:27
-      |vpiParent:
-      \_range: , line:15:26, endln:15:27
-      |vpiDecompile:$
-      |vpiSize:1
-      |STRING:$
-      |vpiConstType:10
-  |vpiElemTypespec:
-  \_ref_typespec: 
-    |vpiParent:
-    \_array_typespec: , line:15:6, endln:15:27
-    |vpiActual:
-    \_class_typespec: (uvm_callback), line:10:50, endln:10:62
-\_array_typespec: , line:16:6, endln:16:34
-  |vpiRange:
-  \_range: , line:16:33, endln:16:34
-    |vpiParent:
-    \_array_typespec: , line:16:6, endln:16:34
-    |vpiLeftRange:
-    \_constant: 
-      |vpiParent:
-      \_range: , line:16:33, endln:16:34
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:16:33, endln:16:34
-      |vpiParent:
-      \_range: , line:16:33, endln:16:34
-      |vpiDecompile:$
-      |vpiSize:1
-      |STRING:$
-      |vpiConstType:10
-  |vpiElemTypespec:
-  \_ref_typespec: 
-    |vpiParent:
-    \_array_typespec: , line:16:6, endln:16:34
-    |vpiActual:
-    \_class_typespec: (uvm_callback), line:10:50, endln:10:62
-\_class_typespec: (pkg::uvm_callbacks), line:29:1, endln:29:6
-  |vpiName:pkg::uvm_callbacks
-  |vpiClassDefn:
-  \_class_defn: (pkg::uvm_callbacks), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:10:1, endln:23:9
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:27:1, endln:31:10
+    |vpiName:pkg::uvm_callbacks
+    |vpiClassDefn:
+    \_class_defn: (pkg::uvm_callbacks), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:10:1, endln:23:9
+  |vpiImportTypespec:
+  \_class_typespec: (pkg::uvm_callbacks), line:29:1, endln:29:6
+  |vpiImportTypespec:
+  \_class_var: (work@top.c1), line:29:20, endln:29:22
+  |vpiDefName:work@top
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 6
 [WARNING] : 2
 [   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
-[LINT]: ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:6:3: Non synthesizable construct, uvm_callback
 [LINT]: ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:3:3: Non synthesizable construct, uvm_object
+[LINT]: ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:6:3: Non synthesizable construct, uvm_callback
 [LINT]: ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:52: Non synthesizable construct, unique
 [LINT]: ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:10:1: Non synthesizable construct, uvm_callbacks
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv | ${SURELOG_DIR}/build/regression/ArrayMethodIterator/roundtrip/dut_000.sv | 7 | 31 |
+[roundtrip]: ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv | ${SURELOG_DIR}/build/regression/ArrayMethodIterator/roundtrip/dut_000.sv | 8 | 31 |
 ============================== End RoundTrip Results ==============================

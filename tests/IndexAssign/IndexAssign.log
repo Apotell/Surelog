@@ -6,41 +6,61 @@
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 bit_select                                             1
-constant                                               5
+constant                                               7
 cont_assign                                            1
 design                                                 1
 int_typespec                                           1
-logic_net                                              1
 logic_typespec                                         1
+logic_var                                              1
 module_inst                                            1
-operation                                              2
+operation                                              3
 param_assign                                           1
 parameter                                              1
-range                                                  1
-ref_obj                                                2
-ref_typespec                                           3
+range                                                  2
+ref_obj                                                3
+ref_typespec                                           2
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/IndexAssign/slpp_unit/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/IndexAssign/slpp_unit/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/IndexAssign/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/IndexAssign/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@t (work@t), file:${SURELOG_DIR}/tests/IndexAssign/dut.sv, line:1:1, endln:5:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@t
+  |vpiName:work@t
+  |vpiVariables:
+  \_logic_var: (work@t.sig), line:3:17, endln:3:20
+    |vpiParent:
+    \_module_inst: work@t (work@t), file:${SURELOG_DIR}/tests/IndexAssign/dut.sv, line:1:1, endln:5:10
+    |vpiTypespec:
+    \_ref_typespec: (work@t.sig), line:3:3, endln:3:16
+      |vpiParent:
+      \_logic_var: (work@t.sig), line:3:17, endln:3:20
+      |vpiFullName:work@t.sig
+      |vpiActual:
+      \_logic_typespec: , line:3:3, endln:3:16
+    |vpiName:sig
+    |vpiFullName:work@t.sig
+    |vpiVisibility:1
+  |vpiReg:
+  \_logic_var: (work@t.sig), line:3:17, endln:3:20
   |vpiParameter:
-  \_parameter: (work@t.I), line:2:27, endln:2:28
+  \_parameter: (work@t.I), line:2:27, endln:2:32
     |vpiParent:
     \_module_inst: work@t (work@t), file:${SURELOG_DIR}/tests/IndexAssign/dut.sv, line:1:1, endln:5:10
     |UINT:9
     |vpiTypespec:
-    \_ref_typespec: (work@t.I)
+    \_ref_typespec: (work@t.I), line:2:14, endln:2:17
       |vpiParent:
-      \_parameter: (work@t.I), line:2:27, endln:2:28
+      \_parameter: (work@t.I), line:2:27, endln:2:32
       |vpiFullName:work@t.I
       |vpiActual:
       \_int_typespec: , line:2:14, endln:2:26
@@ -58,31 +78,57 @@ design: (unnamed)
       |vpiDecompile:9
       |vpiSize:64
       |UINT:9
-      |vpiTypespec:
-      \_ref_typespec: (work@t)
-        |vpiParent:
-        \_constant: , line:2:31, endln:2:32
-        |vpiFullName:work@t
-        |vpiActual:
-        \_int_typespec: , line:2:14, endln:2:26
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@t.I), line:2:27, endln:2:28
-  |vpiDefName:work@t
-  |vpiNet:
-  \_logic_net: (work@t.sig), line:3:17, endln:3:20
+    \_parameter: (work@t.I), line:2:27, endln:2:32
+  |vpiTypedef:
+  \_int_typespec: , line:2:14, endln:2:26
     |vpiParent:
     \_module_inst: work@t (work@t), file:${SURELOG_DIR}/tests/IndexAssign/dut.sv, line:1:1, endln:5:10
-    |vpiTypespec:
-    \_ref_typespec: (work@t.sig)
+  |vpiTypedef:
+  \_logic_typespec: , line:3:3, endln:3:16
+    |vpiParent:
+    \_module_inst: work@t (work@t), file:${SURELOG_DIR}/tests/IndexAssign/dut.sv, line:1:1, endln:5:10
+    |vpiRange:
+    \_range: , line:3:9, endln:3:16
       |vpiParent:
-      \_logic_net: (work@t.sig), line:3:17, endln:3:20
-      |vpiFullName:work@t.sig
-      |vpiActual:
-      \_logic_typespec: , line:3:3, endln:3:16
-    |vpiName:sig
-    |vpiFullName:work@t.sig
-    |vpiNetType:36
+      \_module_inst: work@t (work@t), file:${SURELOG_DIR}/tests/IndexAssign/dut.sv, line:1:1, endln:5:10
+      |vpiLeftRange:
+      \_operation: , line:3:10, endln:3:13
+        |vpiParent:
+        \_range: , line:3:9, endln:3:16
+        |vpiOpType:11
+        |vpiOperand:
+        \_ref_obj: (work@t.I), line:3:10, endln:3:11
+          |vpiParent:
+          \_operation: , line:3:10, endln:3:13
+          |vpiName:I
+          |vpiFullName:work@t.I
+          |vpiActual:
+          \_parameter: (work@t.I), line:2:27, endln:2:32
+        |vpiOperand:
+        \_constant: , line:3:12, endln:3:13
+          |vpiParent:
+          \_operation: , line:3:10, endln:3:13
+          |vpiDecompile:4
+          |vpiSize:64
+          |UINT:4
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:3:14, endln:3:15
+        |vpiParent:
+        \_range: , line:3:9, endln:3:16
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_int_typespec: , line:2:14, endln:2:26
+  |vpiImportTypespec:
+  \_logic_typespec: , line:3:3, endln:3:16
+  |vpiImportTypespec:
+  \_logic_var: (work@t.sig), line:3:17, endln:3:20
+  |vpiDefName:work@t
   |vpiContAssign:
   \_cont_assign: , line:4:10, endln:4:22
     |vpiParent:
@@ -96,22 +142,26 @@ design: (unnamed)
       |UINT:3
       |vpiConstType:9
     |vpiLhs:
-    \_bit_select: (work@t.sig), line:4:10, endln:4:18
+    \_bit_select: (work@t.sig), line:4:13, endln:4:18
       |vpiParent:
-      \_cont_assign: , line:4:10, endln:4:22
+      \_module_inst: work@t (work@t), file:${SURELOG_DIR}/tests/IndexAssign/dut.sv, line:1:1, endln:5:10
       |vpiName:sig
       |vpiFullName:work@t.sig
+      |vpiActual:
+      \_logic_var: (work@t.sig), line:3:17, endln:3:20
       |vpiIndex:
       \_operation: , line:4:14, endln:4:17
         |vpiParent:
-        \_bit_select: (work@t.sig), line:4:10, endln:4:18
+        \_module_inst: work@t (work@t), file:${SURELOG_DIR}/tests/IndexAssign/dut.sv, line:1:1, endln:5:10
         |vpiOpType:11
         |vpiOperand:
-        \_ref_obj: (work@t.sig.I), line:4:14, endln:4:15
+        \_ref_obj: (work@t.I), line:4:14, endln:4:15
           |vpiParent:
           \_operation: , line:4:14, endln:4:17
           |vpiName:I
-          |vpiFullName:work@t.sig.I
+          |vpiFullName:work@t.I
+          |vpiActual:
+          \_parameter: (work@t.I), line:2:27, endln:2:32
         |vpiOperand:
         \_constant: , line:4:16, endln:4:17
           |vpiParent:
@@ -120,41 +170,6 @@ design: (unnamed)
           |vpiSize:64
           |UINT:7
           |vpiConstType:9
-\_weaklyReferenced:
-\_int_typespec: , line:2:14, endln:2:26
-  |vpiParent:
-  \_parameter: (work@t.I), line:2:27, endln:2:28
-\_logic_typespec: , line:3:3, endln:3:16
-  |vpiRange:
-  \_range: , line:3:9, endln:3:16
-    |vpiParent:
-    \_logic_typespec: , line:3:3, endln:3:16
-    |vpiLeftRange:
-    \_operation: , line:3:10, endln:3:13
-      |vpiParent:
-      \_range: , line:3:9, endln:3:16
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (I), line:3:10, endln:3:11
-        |vpiParent:
-        \_operation: , line:3:10, endln:3:13
-        |vpiName:I
-      |vpiOperand:
-      \_constant: , line:3:12, endln:3:13
-        |vpiParent:
-        \_operation: , line:3:10, endln:3:13
-        |vpiDecompile:4
-        |vpiSize:64
-        |UINT:4
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:14, endln:3:15
-      |vpiParent:
-      \_range: , line:3:9, endln:3:16
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -163,5 +178,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/IndexAssign/dut.sv | ${SURELOG_DIR}/build/regression/IndexAssign/roundtrip/dut_000.sv | 0 | 5 |
+[roundtrip]: ${SURELOG_DIR}/tests/IndexAssign/dut.sv | ${SURELOG_DIR}/build/regression/IndexAssign/roundtrip/dut_000.sv | 4 | 5 |
 ============================== End RoundTrip Results ==============================

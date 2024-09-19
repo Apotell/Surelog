@@ -144,66 +144,135 @@ design                                                 1
 gen_region                                             1
 hier_path                                              1
 int_typespec                                           1
-logic_net                                              2
+int_var                                                1
 module_inst                                            3
+preproc_macro_definition                               1
+preproc_macro_instance                                 1
 ref_module                                             1
 ref_obj                                                4
 ref_typespec                                           1
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BlackBoxInst/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/BlackBoxInst/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/BlackBoxInst/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/BlackBox/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiPreprocMacroDefinitions:
+  \_preproc_macro_definition: (CORE0), line:27:9, endln:27:14
+    |vpiParent:
+    \_source_file: , file:${SURELOG_DIR}/tests/BlackBox/dut.sv
+    |vpiName:CORE0
+  |vpiPreprocMacroInstances:
+  \_preproc_macro_instance: , file:${SURELOG_DIR}/tests/BlackBox/dut.sv
+    |vpiParent:
+    \_source_file: , file:${SURELOG_DIR}/tests/BlackBox/dut.sv
+    |vpiPreprocMacroDefinition:
+    \_preproc_macro_definition: (CORE0), line:27:9, endln:27:14
 |uhdmallModules:
 \_module_inst: work@core (work@core), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:5:1, endln:9:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@core
-  |vpiDefName:work@core
-  |vpiNet:
-  \_logic_net: (work@core.wb_writeback_en), line:7:5, endln:7:20
+  |vpiName:work@core
+  |vpiVariables:
+  \_int_var: (work@core.wb_writeback_en), line:7:5, endln:7:20
     |vpiParent:
     \_module_inst: work@core (work@core), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:5:1, endln:9:10
     |vpiTypespec:
-    \_ref_typespec: (work@core.wb_writeback_en)
+    \_ref_typespec: (work@core.wb_writeback_en), line:7:1, endln:7:4
       |vpiParent:
-      \_logic_net: (work@core.wb_writeback_en), line:7:5, endln:7:20
+      \_int_var: (work@core.wb_writeback_en), line:7:5, endln:7:20
       |vpiFullName:work@core.wb_writeback_en
       |vpiActual:
       \_int_typespec: , line:7:1, endln:7:4
     |vpiName:wb_writeback_en
     |vpiFullName:work@core.wb_writeback_en
+    |vpiSigned:1
+    |vpiVisibility:1
+  |vpiTypedef:
+  \_int_typespec: , line:7:1, endln:7:4
+    |vpiParent:
+    \_module_inst: work@core (work@core), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:5:1, endln:9:10
+    |vpiSigned:1
+  |vpiImportTypespec:
+  \_int_typespec: , line:7:1, endln:7:4
+  |vpiImportTypespec:
+  \_int_var: (work@core.wb_writeback_en), line:7:5, endln:7:20
+  |vpiDefName:work@core
 |uhdmallModules:
 \_module_inst: work@nyuzi (work@nyuzi), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:12:1, endln:21:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@nyuzi
-  |vpiDefName:work@nyuzi
-  |vpiGenStmt:
-  \_gen_region: 
+  |vpiName:work@nyuzi
+  |vpiInternalScope:
+  \_gen_region: (work@nyuzi), line:15:5, endln:20:16
     |vpiParent:
     \_module_inst: work@nyuzi (work@nyuzi), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:12:1, endln:21:10
-    |vpiStmt:
-    \_begin: (work@nyuzi)
+    |vpiFullName:work@nyuzi
+    |vpiInternalScope:
+    \_begin: (work@nyuzi), line:16:9, endln:19:12
       |vpiParent:
-      \_gen_region: 
+      \_gen_region: (work@nyuzi), line:15:5, endln:20:16
       |vpiFullName:work@nyuzi
+    |vpiStmt:
+    \_begin: (work@nyuzi), line:16:9, endln:19:12
+  |vpiDefName:work@nyuzi
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:25:1, endln:34:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiNet:
+  |vpiName:work@top
+  |vpiImportTypespec:
+  \_logic_net: (work@top.nyuzi), line:31:16, endln:31:21
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:25:1, endln:34:10
+    |vpiName:nyuzi
+    |vpiFullName:work@top.nyuzi
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@top.core_gen), line:31:22, endln:31:30
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:25:1, endln:34:10
+    |vpiName:core_gen
+    |vpiFullName:work@top.core_gen
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@top.core), line:31:34, endln:31:38
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:25:1, endln:34:10
+    |vpiName:core
+    |vpiFullName:work@top.core
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@top.wb_writeback_en), line:31:39, endln:31:54
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:25:1, endln:34:10
+    |vpiName:wb_writeback_en
+    |vpiFullName:work@top.wb_writeback_en
+    |vpiNetType:1
+  |vpiImportTypespec:
   \_logic_net: (work@top.o), line:31:12, endln:31:13
     |vpiParent:
-    \_cont_assign: , line:31:12, endln:31:54
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:25:1, endln:34:10
     |vpiName:o
     |vpiFullName:work@top.o
     |vpiNetType:1
+  |vpiDefName:work@top
+  |vpiNet:
+  \_logic_net: (work@top.nyuzi), line:31:16, endln:31:21
+  |vpiNet:
+  \_logic_net: (work@top.core_gen), line:31:22, endln:31:30
+  |vpiNet:
+  \_logic_net: (work@top.core), line:31:34, endln:31:38
+  |vpiNet:
+  \_logic_net: (work@top.wb_writeback_en), line:31:39, endln:31:54
+  |vpiNet:
+  \_logic_net: (work@top.o), line:31:12, endln:31:13
   |vpiContAssign:
   \_cont_assign: , line:31:12, endln:31:54
     |vpiParent:
@@ -217,14 +286,20 @@ design: (unnamed)
         |vpiParent:
         \_hier_path: (nyuzi.core_gen[0].core.wb_writeback_en), line:31:16, endln:31:54
         |vpiName:nyuzi
+        |vpiActual:
+        \_logic_net: (work@top.nyuzi), line:31:16, endln:31:21
       |vpiActual:
       \_bit_select: (nyuzi.core_gen[0]), line:31:22, endln:31:30
         |vpiParent:
         \_hier_path: (nyuzi.core_gen[0].core.wb_writeback_en), line:31:16, endln:31:54
         |vpiName:core_gen
         |vpiFullName:nyuzi.core_gen[0]
+        |vpiActual:
+        \_logic_net: (work@top.core_gen), line:31:22, endln:31:30
         |vpiIndex:
         \_constant: , line:31:31, endln:31:32
+          |vpiParent:
+          \_hier_path: (nyuzi.core_gen[0].core.wb_writeback_en), line:31:16, endln:31:54
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
@@ -234,32 +309,33 @@ design: (unnamed)
         |vpiParent:
         \_hier_path: (nyuzi.core_gen[0].core.wb_writeback_en), line:31:16, endln:31:54
         |vpiName:core
+        |vpiActual:
+        \_logic_net: (work@top.core), line:31:34, endln:31:38
       |vpiActual:
       \_ref_obj: (work@top.wb_writeback_en), line:31:39, endln:31:54
         |vpiParent:
         \_hier_path: (nyuzi.core_gen[0].core.wb_writeback_en), line:31:16, endln:31:54
         |vpiName:wb_writeback_en
         |vpiFullName:work@top.wb_writeback_en
+        |vpiActual:
+        \_logic_net: (work@top.wb_writeback_en), line:31:39, endln:31:54
       |vpiName:nyuzi.core_gen[0].core.wb_writeback_en
     |vpiLhs:
     \_ref_obj: (work@top.o), line:31:12, endln:31:13
       |vpiParent:
-      \_cont_assign: , line:31:12, endln:31:54
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:25:1, endln:34:10
       |vpiName:o
       |vpiFullName:work@top.o
       |vpiActual:
       \_logic_net: (work@top.o), line:31:12, endln:31:13
   |vpiRefModule:
-  \_ref_module: work@nyuzi (nyuzi), line:29:8, endln:29:13
+  \_ref_module: work@nyuzi (nyuzi), line:29:1, endln:29:16
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:25:1, endln:34:10
     |vpiName:nyuzi
     |vpiDefName:work@nyuzi
     |vpiActual:
     \_module_inst: work@nyuzi (work@nyuzi), file:${SURELOG_DIR}/tests/BlackBox/dut.sv, line:12:1, endln:21:10
-\_weaklyReferenced:
-\_int_typespec: , line:7:1, endln:7:4
-  |vpiSigned:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -268,5 +344,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/BlackBox/dut.sv | ${SURELOG_DIR}/build/regression/BlackBoxInst/roundtrip/dut_000.sv | 10 | 34 |
+[roundtrip]: ${SURELOG_DIR}/tests/BlackBox/dut.sv | ${SURELOG_DIR}/build/regression/BlackBoxInst/roundtrip/dut_000.sv | 16 | 34 |
 ============================== End RoundTrip Results ==============================

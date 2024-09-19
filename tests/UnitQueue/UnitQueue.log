@@ -28,8 +28,8 @@ n<> u<22> t<Data_type_or_implicit> p<24> c<21> s<23> l<9:20> el<9:23>
 n<ar> u<23> t<StringConst> p<24> l<9:24> el<9:26>
 n<> u<24> t<Tf_port_item> p<25> c<22> l<9:20> el<9:26>
 n<> u<25> t<Tf_port_list> p<173> c<24> s<38> l<9:20> el<9:26>
-n<> u<26> t<String_type> p<27> l<10:3> el<10:9>
-n<> u<27> t<Data_type> p<36> c<26> s<35> l<10:3> el<10:9>
+n<string> u<26> t<String_type> p<27> l<10:3> el<10:9>
+n<string> u<27> t<Data_type> p<36> c<26> s<35> l<10:3> el<10:9>
 n<q> u<28> t<StringConst> p<34> s<33> l<10:10> el<10:11>
 n<> u<29> t<Dollar_keyword> p<30> l<10:12> el<10:13>
 n<> u<30> t<Constant_primary> p<31> c<29> l<10:12> el<10:13>
@@ -443,9 +443,9 @@ n<> u<247> t<Description> p<248> c<246> f<0> l<55:3> el<69:11>
 n<> u<248> t<Source_text> p<249> c<105> f<0> l<1:3> el<69:11>
 n<> u<249> t<Top_level_rule> c<1> f<0> l<1:3> el<71:9>
 AST_DEBUG_END
-[INF:CP0302] Compile class "work@mailbox".
-[INF:CP0302] Compile class "work@process".
-[INF:CP0302] Compile class "work@semaphore".
+[INF:CP0302] Compile class "builtin::mailbox".
+[INF:CP0302] Compile class "builtin::process".
+[INF:CP0302] Compile class "builtin::semaphore".
 [INF:CP0302] ${SURELOG_DIR}/tests/UnitQueue/top.v:2:1: Compile class "work@c1".
 [INF:CP0302] ${SURELOG_DIR}/tests/UnitQueue/top.v:7:1: Compile class "work@c2".
 [INF:UH0706] Creating UHDM Model...
@@ -455,9 +455,9 @@ array_var                                              2
 assignment                                             2
 begin                                                  1
 class_defn                                            10
-class_typespec                                         5
-class_var                                              4
-constant                                               9
+class_typespec                                         2
+class_var                                              2
+constant                                               7
 design                                                 1
 enum_const                                             5
 enum_typespec                                          1
@@ -471,32 +471,44 @@ method_func_call                                       8
 package                                                1
 range                                                  2
 ref_obj                                               16
-ref_typespec                                          20
+ref_typespec                                          18
+source_file                                            1
 string_typespec                                        1
 string_var                                             1
 task                                                   9
 === UHDM Object Stats End ===
+[ERR:UH0734] ${SURELOG_DIR}/tests/UnitQueue/top.v:14:15: Failed to bind object: "id: 117, name: a".
+[ERR:EL0535] ${SURELOG_DIR}/tests/UnitQueue/top.v:14:15: Illegal implicit net "id:117, name: a".
+[ERR:UH0734] ${SURELOG_DIR}/tests/UnitQueue/top.v:15:10: Failed to bind object: "id: 120, name: b".
+[ERR:EL0535] ${SURELOG_DIR}/tests/UnitQueue/top.v:15:10: Illegal implicit net "id:120, name: b".
+[ERR:UH0734] ${SURELOG_DIR}/tests/UnitQueue/top.v:18:16: Failed to bind object: "id: 129, name: a".
+[ERR:EL0535] ${SURELOG_DIR}/tests/UnitQueue/top.v:18:16: Illegal implicit net "id:129, name: a".
+[ERR:UH0734] ${SURELOG_DIR}/tests/UnitQueue/top.v:19:11: Failed to bind object: "id: 132, name: b".
+[ERR:EL0535] ${SURELOG_DIR}/tests/UnitQueue/top.v:19:11: Illegal implicit net "id:132, name: b".
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitQueue/top.v:14:15: Object 117 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitQueue/top.v:15:10: Object 120 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitQueue/top.v:18:16: Object 129 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitQueue/top.v:19:11: Object 132 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnitQueue/slpp_all/surelog.uhdm ...
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 12
 [WARNING] : 0
 [   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
 [LINT]: ${SURELOG_DIR}/tests/UnitQueue/top.v:2:1: Non synthesizable construct, work@c1
-[LINT]: ${SURELOG_DIR}/tests/UnitQueue/top.v:12:8: Non synthesizable construct, atoi
-[LINT]: ${SURELOG_DIR}/tests/UnitQueue/top.v:13:8: Non synthesizable construct, atoiq
-[LINT]: ${SURELOG_DIR}/tests/UnitQueue/top.v:14:5: Non synthesizable construct, push_back
-[LINT]: ${SURELOG_DIR}/tests/UnitQueue/top.v:15:5: Non synthesizable construct, toto
-[LINT]: ${SURELOG_DIR}/tests/UnitQueue/top.v:16:9: Non synthesizable construct, f
-[LINT]: ${SURELOG_DIR}/tests/UnitQueue/top.v:17:9: Non synthesizable construct, atoiq
-[LINT]: ${SURELOG_DIR}/tests/UnitQueue/top.v:18:6: Non synthesizable construct, push_back
-[LINT]: ${SURELOG_DIR}/tests/UnitQueue/top.v:19:6: Non synthesizable construct, toto
+[LINT]: ${SURELOG_DIR}/tests/UnitQueue/top.v:12:3: Non synthesizable construct, atoi
+[LINT]: ${SURELOG_DIR}/tests/UnitQueue/top.v:13:3: Non synthesizable construct, atoiq
+[LINT]: ${SURELOG_DIR}/tests/UnitQueue/top.v:14:3: Non synthesizable construct, push_back
+[LINT]: ${SURELOG_DIR}/tests/UnitQueue/top.v:15:3: Non synthesizable construct, toto
+[LINT]: ${SURELOG_DIR}/tests/UnitQueue/top.v:16:3: Non synthesizable construct, f
+[LINT]: ${SURELOG_DIR}/tests/UnitQueue/top.v:17:3: Non synthesizable construct, atoiq
+[LINT]: ${SURELOG_DIR}/tests/UnitQueue/top.v:18:3: Non synthesizable construct, push_back
+[LINT]: ${SURELOG_DIR}/tests/UnitQueue/top.v:19:3: Non synthesizable construct, toto
 [LINT]: ${SURELOG_DIR}/tests/UnitQueue/top.v:7:1: Non synthesizable construct, work@c2
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/UnitQueue/builtin.sv | ${SURELOG_DIR}/build/regression/UnitQueue/roundtrip/builtin_000.sv | 0 | 0 |
-[roundtrip]: ${SURELOG_DIR}/tests/UnitQueue/top.v      | ${SURELOG_DIR}/build/regression/UnitQueue/roundtrip/top_000.v      | 6 | 22 |
+[roundtrip]: ${SURELOG_DIR}/tests/UnitQueue/top.v | ${SURELOG_DIR}/build/regression/UnitQueue/roundtrip/top_000.v | 12 | 22 |
 ============================== End RoundTrip Results ==============================

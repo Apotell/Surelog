@@ -19,18 +19,18 @@
 [INF:CP0303] ${SURELOG_DIR}/third_party/tests/YosysRiscv/smartbextdep.v:51:1: Compile module "work@smartbextdep_direct".
 [INF:CP0303] ${SURELOG_DIR}/third_party/tests/YosysRiscv/smartbextdep.v:97:1: Compile module "work@smartbextdep_lrotcz".
 [INF:CP0303] ${SURELOG_DIR}/third_party/tests/YosysRiscv/smartbextdep.v:228:1: Compile module "work@smartbextdep_pps32".
-[INF:CP0302] Compile class "work@mailbox".
-[INF:CP0302] Compile class "work@process".
-[INF:CP0302] Compile class "work@semaphore".
-[NTE:CP0309] ${SURELOG_DIR}/third_party/tests/YosysRiscv/shifter64.v:24:16: Implicit port type (wire) for "X".
-[NTE:CP0309] ${SURELOG_DIR}/third_party/tests/YosysRiscv/shifter64.v:78:16: Implicit port type (wire) for "X".
-[NTE:CP0309] ${SURELOG_DIR}/third_party/tests/YosysRiscv/smartbextdep.v:197:16: Implicit port type (wire) for "dout".
-[NTE:CP0309] ${SURELOG_DIR}/third_party/tests/YosysRiscv/smartbextdep.v:163:16: Implicit port type (wire) for "dout".
-[NTE:CP0309] ${SURELOG_DIR}/third_party/tests/YosysRiscv/smartbextdep.v:112:16: Implicit port type (wire) for "s1",
+[INF:CP0302] Compile class "builtin::mailbox".
+[INF:CP0302] Compile class "builtin::process".
+[INF:CP0302] Compile class "builtin::semaphore".
+[NTE:CP0309] ${SURELOG_DIR}/third_party/tests/YosysRiscv/shifter64.v:24:2: Implicit port type (wire) for "X".
+[NTE:CP0309] ${SURELOG_DIR}/third_party/tests/YosysRiscv/shifter64.v:78:2: Implicit port type (wire) for "X".
+[NTE:CP0309] ${SURELOG_DIR}/third_party/tests/YosysRiscv/smartbextdep.v:197:2: Implicit port type (wire) for "dout".
+[NTE:CP0309] ${SURELOG_DIR}/third_party/tests/YosysRiscv/smartbextdep.v:163:2: Implicit port type (wire) for "dout".
+[NTE:CP0309] ${SURELOG_DIR}/third_party/tests/YosysRiscv/smartbextdep.v:112:2: Implicit port type (wire) for "s1",
 there are 4 more instances of this message.
-[NTE:CP0309] ${SURELOG_DIR}/third_party/tests/YosysRiscv/smartbextdep.v:55:16: Implicit port type (wire) for "dout_result".
-[NTE:CP0309] ${SURELOG_DIR}/third_party/tests/YosysRiscv/smartbextdep.v:102:17: Implicit port type (wire) for "dout".
-[NTE:CP0309] ${SURELOG_DIR}/third_party/tests/YosysRiscv/smartbextdep.v:230:18: Implicit port type (wire) for "dout".
+[NTE:CP0309] ${SURELOG_DIR}/third_party/tests/YosysRiscv/smartbextdep.v:55:2: Implicit port type (wire) for "dout_result".
+[NTE:CP0309] ${SURELOG_DIR}/third_party/tests/YosysRiscv/smartbextdep.v:102:2: Implicit port type (wire) for "dout".
+[NTE:CP0309] ${SURELOG_DIR}/third_party/tests/YosysRiscv/smartbextdep.v:230:3: Implicit port type (wire) for "dout".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 always                                                 5
@@ -40,9 +40,9 @@ bit_select                                            59
 case_item                                              3
 case_stmt                                              1
 class_defn                                             8
-class_typespec                                         4
-class_var                                              3
-constant                                             800
+class_typespec                                         1
+class_var                                              1
+constant                                            1169
 cont_assign                                           40
 design                                                 1
 enum_const                                             5
@@ -58,22 +58,26 @@ indexed_part_select                                   32
 int_typespec                                           9
 int_var                                                4
 integer_typespec                                       6
+integer_var                                            4
 io_decl                                               14
-logic_net                                            171
-logic_typespec                                       175
-logic_var                                              6
+logic_net                                            167
+logic_typespec                                       125
+logic_var                                              3
 module_inst                                            9
-operation                                            417
+operation                                            423
 package                                                1
 param_assign                                           2
 parameter                                              2
 part_select                                           43
 port                                                  80
-range                                                156
+preproc_macro_definition                               2
+preproc_macro_instance                                60
+range                                                339
 ref_module                                             6
-ref_obj                                              312
-ref_typespec                                         196
+ref_obj                                              266
+ref_typespec                                         142
 ref_var                                               10
+source_file                                            2
 task                                                   9
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/YosysRiscv/slpp_unit/surelog.uhdm ...
@@ -82,3 +86,8 @@ task                                                   9
 [  ERROR] : 0
 [WARNING] : 9
 [   NOTE] : 8
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysRiscv/shifter64.v    | ${SURELOG_DIR}/build/regression/YosysRiscv/roundtrip/shifter64_000.v    | 75 | 121 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysRiscv/smartbextdep.v | ${SURELOG_DIR}/build/regression/YosysRiscv/roundtrip/smartbextdep_000.v | 319 | 373 |
+============================== End RoundTrip Results ==============================

@@ -62,33 +62,28 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assert_stmt                                            1
 design                                                 1
-logic_net                                              1
 module_inst                                            1
 operation                                              1
 property_spec                                          1
 ref_obj                                                1
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Assert/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/Assert/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/Assert/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/Assert/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/Assert/dut.sv, line:1:1, endln:7:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@dut
-  |vpiDefName:work@dut
-  |vpiNet:
-  \_logic_net: (work@dut.Clock), line:4:29, endln:4:34
-    |vpiParent:
-    \_operation: , line:4:21, endln:4:34
-    |vpiName:Clock
-    |vpiFullName:work@dut.Clock
-    |vpiNetType:1
-  |vpiAssertion:
+  |vpiName:work@dut
+  |vpiConcurrentAssertions:
   \_assert_stmt: (work@dut), line:4:1, endln:4:73
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/Assert/dut.sv, line:1:1, endln:7:10
@@ -110,6 +105,18 @@ design: (unnamed)
           |vpiFullName:work@dut.Clock
           |vpiActual:
           \_logic_net: (work@dut.Clock), line:4:29, endln:4:34
+  |vpiImportTypespec:
+  \_assert_stmt: (work@dut), line:4:1, endln:4:73
+  |vpiImportTypespec:
+  \_logic_net: (work@dut.Clock), line:4:29, endln:4:34
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/Assert/dut.sv, line:1:1, endln:7:10
+    |vpiName:Clock
+    |vpiFullName:work@dut.Clock
+    |vpiNetType:1
+  |vpiDefName:work@dut
+  |vpiNet:
+  \_logic_net: (work@dut.Clock), line:4:29, endln:4:34
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -122,5 +129,5 @@ design: (unnamed)
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/Assert/dut.sv | ${SURELOG_DIR}/build/regression/Assert/roundtrip/dut_000.sv | 1 | 7 |
+[roundtrip]: ${SURELOG_DIR}/tests/Assert/dut.sv | ${SURELOG_DIR}/build/regression/Assert/roundtrip/dut_000.sv | 3 | 7 |
 ============================== End RoundTrip Results ==============================

@@ -12,20 +12,21 @@
 [INF:CP0303] ${SURELOG_DIR}/third_party/tests/YosysSmall/latch.v:7:1: Compile module "work@latch".
 [INF:CP0303] ${SURELOG_DIR}/third_party/tests/YosysSmall/pwm256.v:6:1: Compile module "work@pwm256".
 [INF:CP0303] ${SURELOG_DIR}/third_party/tests/YosysSmall/cic5_tb.v:8:1: Compile module "work@tb".
-[INF:CP0302] Compile class "work@mailbox".
-[INF:CP0302] Compile class "work@process".
-[INF:CP0302] Compile class "work@semaphore".
-[NTE:CP0309] ${SURELOG_DIR}/third_party/tests/YosysSmall/crc32.v:8:70: Implicit port type (wire) for "dout".
+[INF:CP0302] Compile class "builtin::mailbox".
+[INF:CP0302] Compile class "builtin::process".
+[INF:CP0302] Compile class "builtin::semaphore".
+[NTE:CP0309] ${SURELOG_DIR}/third_party/tests/YosysSmall/crc32.v:8:56: Implicit port type (wire) for "dout".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 always                                                 5
+array_net                                              4
 assignment                                           290
 begin                                                 15
 bit_select                                           275
 class_defn                                             8
-class_typespec                                         4
-class_var                                              3
-constant                                             598
+class_typespec                                         1
+class_var                                              1
+constant                                             655
 cont_assign                                            1
 delay_control                                          4
 design                                                 1
@@ -37,24 +38,25 @@ for_stmt                                               3
 function                                               9
 if_else                                                4
 if_stmt                                                2
-include_file_info                                      1
 initial                                                2
 int_typespec                                           9
 int_var                                                4
 integer_typespec                                       1
+integer_var                                            1
 io_decl                                               11
-logic_net                                             30
-logic_typespec                                        29
+logic_net                                             29
+logic_typespec                                        21
 logic_var                                              1
-module_inst                                            5
+module_inst                                            7
 operation                                             32
 package                                                1
 part_select                                            1
 port                                                  16
-range                                                 17
-ref_obj                                               77
-ref_typespec                                          43
+range                                                 44
+ref_obj                                               61
+ref_typespec                                          33
 ref_var                                                3
+source_file                                            8
 sys_func_call                                          3
 task                                                   9
 === UHDM Object Stats End ===
@@ -71,3 +73,11 @@ task                                                   9
 [LINT]: ${SURELOG_DIR}/third_party/tests/YosysSmall/cic5_tb.v:28:5: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/third_party/tests/YosysSmall/cic5_tb.v:29:5: Non synthesizable construct,
 ============================== End Linting Results ==============================
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysSmall/cic5.v    | ${SURELOG_DIR}/build/regression/YosysSmall/roundtrip/cic5_000.v    | 27 | 65 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysSmall/cic5_tb.v | ${SURELOG_DIR}/build/regression/YosysSmall/roundtrip/cic5_tb_000.v | 9 | 32 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysSmall/crc32.v   | ${SURELOG_DIR}/build/regression/YosysSmall/roundtrip/crc32_000.v   | 268 | 283 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysSmall/latch.v   | ${SURELOG_DIR}/build/regression/YosysSmall/roundtrip/latch_000.v   | 8 | 19 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysSmall/pwm256.v  | ${SURELOG_DIR}/build/regression/YosysSmall/roundtrip/pwm256_000.v  | 10 | 32 |
+============================== End RoundTrip Results ==============================

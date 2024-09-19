@@ -73,40 +73,54 @@ constant                                               3
 cont_assign                                            2
 design                                                 1
 integer_typespec                                       1
-logic_net                                              2
 module_inst                                            1
 operation                                              3
 ref_obj                                                2
 ref_typespec                                           1
+source_file                                            1
 tagged_pattern                                         1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/AssignPattern/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/AssignPattern/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/AssignPattern/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/AssignPattern/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssignPattern/dut.sv, line:1:1, endln:4:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiNet:
+  |vpiName:work@top
+  |vpiTypedef:
+  \_integer_typespec: , line:2:18, endln:2:19
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssignPattern/dut.sv, line:1:1, endln:4:10
+    |INT:8
+  |vpiImportTypespec:
+  \_integer_typespec: , line:2:18, endln:2:19
+  |vpiImportTypespec:
   \_logic_net: (work@top.oo), line:2:11, endln:2:13
     |vpiParent:
-    \_cont_assign: , line:2:11, endln:2:22
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssignPattern/dut.sv, line:1:1, endln:4:10
     |vpiName:oo
     |vpiFullName:work@top.oo
     |vpiNetType:1
-  |vpiNet:
+  |vpiImportTypespec:
   \_logic_net: (work@top.uu), line:3:11, endln:3:13
     |vpiParent:
-    \_cont_assign: , line:3:11, endln:3:23
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssignPattern/dut.sv, line:1:1, endln:4:10
     |vpiName:uu
     |vpiFullName:work@top.uu
     |vpiNetType:1
+  |vpiDefName:work@top
+  |vpiNet:
+  \_logic_net: (work@top.oo), line:2:11, endln:2:13
+  |vpiNet:
+  \_logic_net: (work@top.uu), line:3:11, endln:3:13
   |vpiContAssign:
   \_cont_assign: , line:2:11, endln:2:22
     |vpiParent:
@@ -117,26 +131,28 @@ design: (unnamed)
       \_cont_assign: , line:2:11, endln:2:22
       |vpiOpType:75
       |vpiOperand:
-      \_tagged_pattern: , line:2:20, endln:2:21
+      \_tagged_pattern: , line:2:18, endln:2:19
         |vpiParent:
         \_operation: , line:2:16, endln:2:22
         |vpiPattern:
         \_constant: , line:2:20, endln:2:21
+          |vpiParent:
+          \_operation: , line:2:16, endln:2:22
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
           |vpiConstType:9
         |vpiTypespec:
-        \_ref_typespec: (work@top)
+        \_ref_typespec: (work@top), line:2:18, endln:2:19
           |vpiParent:
-          \_tagged_pattern: , line:2:20, endln:2:21
+          \_tagged_pattern: , line:2:18, endln:2:19
           |vpiFullName:work@top
           |vpiActual:
           \_integer_typespec: , line:2:18, endln:2:19
     |vpiLhs:
     \_ref_obj: (work@top.oo), line:2:11, endln:2:13
       |vpiParent:
-      \_cont_assign: , line:2:11, endln:2:22
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssignPattern/dut.sv, line:1:1, endln:4:10
       |vpiName:oo
       |vpiFullName:work@top.oo
       |vpiActual:
@@ -152,6 +168,8 @@ design: (unnamed)
       |vpiOpType:76
       |vpiOperand:
       \_constant: , line:3:18, endln:3:19
+        |vpiParent:
+        \_operation: , line:3:16, endln:3:23
         |vpiDecompile:8
         |vpiSize:64
         |UINT:8
@@ -163,6 +181,8 @@ design: (unnamed)
         |vpiOpType:33
         |vpiOperand:
         \_constant: , line:3:20, endln:3:21
+          |vpiParent:
+          \_operation: , line:3:20, endln:3:21
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
@@ -170,14 +190,11 @@ design: (unnamed)
     |vpiLhs:
     \_ref_obj: (work@top.uu), line:3:11, endln:3:13
       |vpiParent:
-      \_cont_assign: , line:3:11, endln:3:23
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssignPattern/dut.sv, line:1:1, endln:4:10
       |vpiName:uu
       |vpiFullName:work@top.uu
       |vpiActual:
       \_logic_net: (work@top.uu), line:3:11, endln:3:13
-\_weaklyReferenced:
-\_integer_typespec: , line:2:18, endln:2:19
-  |INT:8
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -186,5 +203,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/AssignPattern/dut.sv | ${SURELOG_DIR}/build/regression/AssignPattern/roundtrip/dut_000.sv | 1 | 4 |
+[roundtrip]: ${SURELOG_DIR}/tests/AssignPattern/dut.sv | ${SURELOG_DIR}/build/regression/AssignPattern/roundtrip/dut_000.sv | 4 | 4 |
 ============================== End RoundTrip Results ==============================

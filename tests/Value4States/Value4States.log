@@ -85,43 +85,47 @@ module_inst                                            1
 param_assign                                           2
 parameter                                              2
 range                                                  2
-ref_typespec                                           4
+ref_typespec                                           2
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Value4States/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/Value4States/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/Value4States/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/Value4States/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/Value4States/dut.sv, line:1:1, endln:4:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
+  |vpiName:work@top
   |vpiParameter:
-  \_parameter: (work@top.P1), line:2:27, endln:2:29
+  \_parameter: (work@top.P1), line:2:27, endln:2:34
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/Value4States/dut.sv, line:1:1, endln:4:10
     |BIN:X
     |vpiTypespec:
-    \_ref_typespec: (work@top.P1)
+    \_ref_typespec: (work@top.P1), line:2:14, endln:2:19
       |vpiParent:
-      \_parameter: (work@top.P1), line:2:27, endln:2:29
+      \_parameter: (work@top.P1), line:2:27, endln:2:34
       |vpiFullName:work@top.P1
       |vpiActual:
       \_logic_typespec: , line:2:14, endln:2:26
     |vpiName:P1
     |vpiFullName:work@top.P1
   |vpiParameter:
-  \_parameter: (work@top.P2), line:3:27, endln:3:29
+  \_parameter: (work@top.P2), line:3:27, endln:3:34
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/Value4States/dut.sv, line:1:1, endln:4:10
     |BIN:Z
     |vpiTypespec:
-    \_ref_typespec: (work@top.P2)
+    \_ref_typespec: (work@top.P2), line:3:14, endln:3:19
       |vpiParent:
-      \_parameter: (work@top.P2), line:3:27, endln:3:29
+      \_parameter: (work@top.P2), line:3:27, endln:3:34
       |vpiFullName:work@top.P2
       |vpiActual:
       \_logic_typespec: , line:3:14, endln:3:26
@@ -138,16 +142,9 @@ design: (unnamed)
       |vpiDecompile:'X
       |vpiSize:-1
       |BIN:X
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:2:32, endln:2:34
-        |vpiFullName:work@top
-        |vpiActual:
-        \_logic_typespec: , line:2:14, endln:2:26
       |vpiConstType:3
     |vpiLhs:
-    \_parameter: (work@top.P1), line:2:27, endln:2:29
+    \_parameter: (work@top.P1), line:2:27, endln:2:34
   |vpiParamAssign:
   \_param_assign: , line:3:27, endln:3:34
     |vpiParent:
@@ -159,64 +156,62 @@ design: (unnamed)
       |vpiDecompile:'Z
       |vpiSize:-1
       |BIN:Z
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:3:32, endln:3:34
-        |vpiFullName:work@top
-        |vpiActual:
-        \_logic_typespec: , line:3:14, endln:3:26
       |vpiConstType:3
     |vpiLhs:
-    \_parameter: (work@top.P2), line:3:27, endln:3:29
+    \_parameter: (work@top.P2), line:3:27, endln:3:34
+  |vpiTypedef:
+  \_logic_typespec: , line:2:14, endln:2:26
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/Value4States/dut.sv, line:1:1, endln:4:10
+    |vpiRange:
+    \_range: , line:2:20, endln:2:26
+      |vpiParent:
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/Value4States/dut.sv, line:1:1, endln:4:10
+      |vpiLeftRange:
+      \_constant: , line:2:21, endln:2:23
+        |vpiParent:
+        \_range: , line:2:20, endln:2:26
+        |vpiDecompile:31
+        |vpiSize:64
+        |UINT:31
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:2:24, endln:2:25
+        |vpiParent:
+        \_range: , line:2:20, endln:2:26
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_logic_typespec: , line:3:14, endln:3:26
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/Value4States/dut.sv, line:1:1, endln:4:10
+    |vpiRange:
+    \_range: , line:3:20, endln:3:26
+      |vpiParent:
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/Value4States/dut.sv, line:1:1, endln:4:10
+      |vpiLeftRange:
+      \_constant: , line:3:21, endln:3:23
+        |vpiParent:
+        \_range: , line:3:20, endln:3:26
+        |vpiDecompile:31
+        |vpiSize:64
+        |UINT:31
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:3:24, endln:3:25
+        |vpiParent:
+        \_range: , line:3:20, endln:3:26
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_logic_typespec: , line:2:14, endln:2:26
+  |vpiImportTypespec:
+  \_logic_typespec: , line:3:14, endln:3:26
   |vpiDefName:work@top
-\_weaklyReferenced:
-\_logic_typespec: , line:2:14, endln:2:26
-  |vpiParent:
-  \_parameter: (work@top.P1), line:2:27, endln:2:29
-  |vpiRange:
-  \_range: , line:2:20, endln:2:26
-    |vpiParent:
-    \_logic_typespec: , line:2:14, endln:2:26
-    |vpiLeftRange:
-    \_constant: , line:2:21, endln:2:23
-      |vpiParent:
-      \_range: , line:2:20, endln:2:26
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:24, endln:2:25
-      |vpiParent:
-      \_range: , line:2:20, endln:2:26
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:3:14, endln:3:26
-  |vpiParent:
-  \_parameter: (work@top.P2), line:3:27, endln:3:29
-  |vpiRange:
-  \_range: , line:3:20, endln:3:26
-    |vpiParent:
-    \_logic_typespec: , line:3:14, endln:3:26
-    |vpiLeftRange:
-    \_constant: , line:3:21, endln:3:23
-      |vpiParent:
-      \_range: , line:3:20, endln:3:26
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:24, endln:3:25
-      |vpiParent:
-      \_range: , line:3:20, endln:3:26
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -225,5 +220,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/Value4States/dut.sv | ${SURELOG_DIR}/build/regression/Value4States/roundtrip/dut_000.sv | 2 | 4 |
+[roundtrip]: ${SURELOG_DIR}/tests/Value4States/dut.sv | ${SURELOG_DIR}/build/regression/Value4States/roundtrip/dut_000.sv | 4 | 4 |
 ============================== End RoundTrip Results ==============================

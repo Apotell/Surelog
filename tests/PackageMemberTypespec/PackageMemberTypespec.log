@@ -55,7 +55,7 @@ n<> u<49> t<Constant_primary> p<50> c<48> l<27:37> el<27:38>
 n<> u<50> t<Constant_expression> p<51> c<49> l<27:37> el<27:38>
 n<> u<51> t<Constant_range> p<52> c<46> l<27:35> el<27:38>
 n<> u<52> t<Packed_dimension> p<53> c<51> l<27:34> el<27:39>
-n<> u<53> t<Data_type> p<54> c<31> l<27:2> el<27:39>
+n<foo_flags::common_flags_t[3:0][7:0]> u<53> t<Data_type> p<54> c<31> l<27:2> el<27:39>
 n<> u<54> t<Data_type_or_void> p<58> c<53> s<57> l<27:2> el<27:39>
 n<atype_t> u<55> t<StringConst> p<56> l<27:40> el<27:47>
 n<> u<56> t<Variable_decl_assignment> p<57> c<55> l<27:40> el<27:47>
@@ -86,17 +86,21 @@ package                                                2
 packed_array_typespec                                  1
 range                                                  2
 ref_typespec                                           3
+source_file                                            1
 struct_typespec                                        1
 typespec_member                                        2
 union_typespec                                         1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageMemberTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PackageMemberTypespec/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/PackageMemberTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/PackageMemberTypespec/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallPackages:
 \_package: foo_flags (foo_flags::), file:${SURELOG_DIR}/tests/PackageMemberTypespec/dut.sv, line:1:1, endln:5:23
   |vpiParent:
@@ -108,26 +112,27 @@ design: (unnamed)
     |vpiParent:
     \_package: foo_flags (foo_flags::), file:${SURELOG_DIR}/tests/PackageMemberTypespec/dut.sv, line:1:1, endln:5:23
     |vpiName:foo_flags::common_flags_t
-    |vpiInstance:
-    \_package: foo_flags (foo_flags::), file:${SURELOG_DIR}/tests/PackageMemberTypespec/dut.sv, line:1:1, endln:5:23
     |vpiPacked:1
     |vpiTypespecMember:
-    \_typespec_member: (a), line:3:11, endln:3:12
+    \_typespec_member: (a), line:3:5, endln:3:13
       |vpiParent:
       \_struct_typespec: (foo_flags::common_flags_t), line:2:11, endln:4:4
       |vpiName:a
       |vpiTypespec:
-      \_ref_typespec: (foo_flags::foo_flags::common_flags_t::a)
+      \_ref_typespec: (foo_flags::common_flags_t::a), line:3:5, endln:3:10
         |vpiParent:
-        \_typespec_member: (a), line:3:11, endln:3:12
-        |vpiFullName:foo_flags::foo_flags::common_flags_t::a
+        \_typespec_member: (a), line:3:5, endln:3:13
+        |vpiFullName:foo_flags::common_flags_t::a
         |vpiActual:
         \_logic_typespec: , line:3:5, endln:3:10
-      |vpiRefFile:${SURELOG_DIR}/tests/PackageMemberTypespec/dut.sv
-      |vpiRefLineNo:3
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:3
-      |vpiRefEndColumnNo:10
+  |vpiTypedef:
+  \_logic_typespec: , line:3:5, endln:3:10
+    |vpiParent:
+    \_package: foo_flags (foo_flags::), file:${SURELOG_DIR}/tests/PackageMemberTypespec/dut.sv, line:1:1, endln:5:23
+  |vpiImportTypespec:
+  \_struct_typespec: (foo_flags::common_flags_t), line:2:11, endln:4:4
+  |vpiImportTypespec:
+  \_logic_typespec: , line:3:5, endln:3:10
   |vpiDefName:foo_flags
   |vpiEndLabel:foo_flags
 |uhdmallPackages:
@@ -137,85 +142,80 @@ design: (unnamed)
   |vpiName:goog
   |vpiFullName:goog::
   |vpiTypedef:
-  \_union_typespec: (goog::top_flag_t), line:26:9, endln:29:2
+  \_union_typespec: (goog::top_flag_t), line:26:9, endln:29:13
     |vpiParent:
     \_package: goog (goog::), file:${SURELOG_DIR}/tests/PackageMemberTypespec/dut.sv, line:17:1, endln:31:17
     |vpiName:goog::top_flag_t
-    |vpiInstance:
-    \_package: goog (goog::), file:${SURELOG_DIR}/tests/PackageMemberTypespec/dut.sv, line:17:1, endln:31:17
     |vpiPacked:1
     |vpiTypespecMember:
-    \_typespec_member: (atype_t), line:27:40, endln:27:47
+    \_typespec_member: (atype_t), line:27:2, endln:27:48
       |vpiParent:
-      \_union_typespec: (goog::top_flag_t), line:26:9, endln:29:2
+      \_union_typespec: (goog::top_flag_t), line:26:9, endln:29:13
       |vpiName:atype_t
       |vpiTypespec:
-      \_ref_typespec: (goog::goog::top_flag_t::atype_t)
+      \_ref_typespec: (goog::top_flag_t::atype_t), line:27:2, endln:27:39
         |vpiParent:
-        \_typespec_member: (atype_t), line:27:40, endln:27:47
-        |vpiFullName:goog::goog::top_flag_t::atype_t
+        \_typespec_member: (atype_t), line:27:2, endln:27:48
+        |vpiFullName:goog::top_flag_t::atype_t
         |vpiActual:
-        \_packed_array_typespec: 
-      |vpiRefFile:${SURELOG_DIR}/tests/PackageMemberTypespec/dut.sv
-      |vpiRefLineNo:27
-      |vpiRefColumnNo:2
-      |vpiRefEndLineNo:27
-      |vpiRefEndColumnNo:39
+        \_packed_array_typespec: , line:27:29, endln:27:39
+  |vpiTypedef:
+  \_packed_array_typespec: , line:27:29, endln:27:39
+    |vpiParent:
+    \_package: goog (goog::), file:${SURELOG_DIR}/tests/PackageMemberTypespec/dut.sv, line:17:1, endln:31:17
+    |vpiRange:
+    \_range: , line:27:29, endln:27:34
+      |vpiParent:
+      \_union_typespec: (goog::top_flag_t), line:26:9, endln:29:13
+      |vpiLeftRange:
+      \_constant: , line:27:30, endln:27:31
+        |vpiParent:
+        \_range: , line:27:29, endln:27:34
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:27:32, endln:27:33
+        |vpiParent:
+        \_range: , line:27:29, endln:27:34
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiRange:
+    \_range: , line:27:34, endln:27:39
+      |vpiParent:
+      \_union_typespec: (goog::top_flag_t), line:26:9, endln:29:13
+      |vpiLeftRange:
+      \_constant: , line:27:35, endln:27:36
+        |vpiParent:
+        \_range: , line:27:34, endln:27:39
+        |vpiDecompile:7
+        |vpiSize:64
+        |UINT:7
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:27:37, endln:27:38
+        |vpiParent:
+        \_range: , line:27:34, endln:27:39
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_ref_typespec: (goog), line:27:2, endln:27:13
+      |vpiParent:
+      \_packed_array_typespec: , line:27:29, endln:27:39
+      |vpiFullName:goog
+      |vpiActual:
+      \_struct_typespec: (foo_flags::common_flags_t), line:2:11, endln:4:4
+  |vpiImportTypespec:
+  \_union_typespec: (goog::top_flag_t), line:26:9, endln:29:13
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:27:29, endln:27:39
   |vpiDefName:goog
   |vpiEndLabel:goog
-\_weaklyReferenced:
-\_logic_typespec: , line:3:5, endln:3:10
-  |vpiInstance:
-  \_package: foo_flags (foo_flags::), file:${SURELOG_DIR}/tests/PackageMemberTypespec/dut.sv, line:1:1, endln:5:23
-\_packed_array_typespec: 
-  |vpiInstance:
-  \_package: goog (goog::), file:${SURELOG_DIR}/tests/PackageMemberTypespec/dut.sv, line:17:1, endln:31:17
-  |vpiRange:
-  \_range: , line:27:29, endln:27:34
-    |vpiParent:
-    \_packed_array_typespec: 
-    |vpiLeftRange:
-    \_constant: , line:27:30, endln:27:31
-      |vpiParent:
-      \_range: , line:27:29, endln:27:34
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:27:32, endln:27:33
-      |vpiParent:
-      \_range: , line:27:29, endln:27:34
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiRange:
-  \_range: , line:27:34, endln:27:39
-    |vpiParent:
-    \_packed_array_typespec: 
-    |vpiLeftRange:
-    \_constant: , line:27:35, endln:27:36
-      |vpiParent:
-      \_range: , line:27:34, endln:27:39
-      |vpiDecompile:7
-      |vpiSize:64
-      |UINT:7
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:27:37, endln:27:38
-      |vpiParent:
-      \_range: , line:27:34, endln:27:39
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiElemTypespec:
-  \_ref_typespec: 
-    |vpiParent:
-    \_packed_array_typespec: 
-    |vpiActual:
-    \_struct_typespec: (foo_flags::common_flags_t), line:2:11, endln:4:4
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -224,5 +224,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PackageMemberTypespec/dut.sv | ${SURELOG_DIR}/build/regression/PackageMemberTypespec/roundtrip/dut_000.sv | 18 | 31 |
+[roundtrip]: ${SURELOG_DIR}/tests/PackageMemberTypespec/dut.sv | ${SURELOG_DIR}/build/regression/PackageMemberTypespec/roundtrip/dut_000.sv | 17 | 31 |
 ============================== End RoundTrip Results ==============================

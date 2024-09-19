@@ -103,76 +103,64 @@ array_var                                              1
 assignment                                             1
 begin                                                  1
 bit_select                                             1
-constant                                               6
+constant                                               4
 cont_assign                                            1
 design                                                 1
 func_call                                              1
 function                                               1
-int_typespec                                           3
-int_var                                                2
-logic_net                                              1
+int_typespec                                           4
+int_var                                                3
 module_inst                                            1
 operation                                              2
 port                                                   1
 range                                                  1
-ref_obj                                                2
-ref_typespec                                           5
+ref_obj                                                1
+ref_typespec                                           6
 return_stmt                                            1
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ArrayVarName/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ArrayVarName/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ArrayVarName/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/ArrayVarName/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayVarName/dut.sv, line:1:1, endln:8:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiTaskFunc:
+  |vpiName:work@top
+  |vpiVariables:
+  \_int_var: (work@top.o), line:1:23, endln:1:24
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayVarName/dut.sv, line:1:1, endln:8:10
+    |vpiTypespec:
+    \_ref_typespec: (work@top.o), line:1:19, endln:1:22
+      |vpiParent:
+      \_int_var: (work@top.o), line:1:23, endln:1:24
+      |vpiFullName:work@top.o
+      |vpiActual:
+      \_int_typespec: , line:1:19, endln:1:22
+    |vpiName:o
+    |vpiFullName:work@top.o
+    |vpiSigned:1
+    |vpiVisibility:1
+  |vpiInternalScope:
   \_function: (work@top.get_a1), line:4:4, endln:7:15
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayVarName/dut.sv, line:1:1, endln:8:10
     |vpiName:get_a1
     |vpiFullName:work@top.get_a1
     |vpiVariables:
-    \_array_var: (work@top.get_a1.a), line:5:11, endln:5:12
-      |vpiParent:
-      \_assignment: , line:5:11, endln:5:26
-      |vpiTypespec:
-      \_ref_typespec: (work@top.get_a1.a)
-        |vpiParent:
-        \_array_var: (work@top.get_a1.a), line:5:11, endln:5:12
-        |vpiFullName:work@top.get_a1.a
-        |vpiActual:
-        \_array_typespec: , line:5:11, endln:5:15
-      |vpiName:a
-      |vpiFullName:work@top.get_a1.a
-      |vpiArrayType:1
-      |vpiReg:
-      \_int_var: (work@top.get_a1.a), line:5:11, endln:5:12
-        |vpiParent:
-        \_array_var: (work@top.get_a1.a), line:5:11, endln:5:12
-        |vpiTypespec:
-        \_ref_typespec: (work@top.get_a1.a)
-          |vpiParent:
-          \_int_var: (work@top.get_a1.a), line:5:11, endln:5:12
-          |vpiFullName:work@top.get_a1.a
-          |vpiActual:
-          \_int_typespec: , line:5:7, endln:5:10
-        |vpiFullName:work@top.get_a1.a
-        |vpiSigned:1
-    |vpiVisibility:1
-    |vpiAutomatic:1
-    |vpiReturn:
     \_int_var: (work@top.get_a1), line:4:23, endln:4:26
       |vpiParent:
       \_function: (work@top.get_a1), line:4:4, endln:7:15
       |vpiTypespec:
-      \_ref_typespec: (work@top.get_a1)
+      \_ref_typespec: (work@top.get_a1), line:4:23, endln:4:26
         |vpiParent:
         \_int_var: (work@top.get_a1), line:4:23, endln:4:26
         |vpiFullName:work@top.get_a1
@@ -180,19 +168,85 @@ design: (unnamed)
         \_int_typespec: , line:4:23, endln:4:26
       |vpiFullName:work@top.get_a1
       |vpiSigned:1
-    |vpiStmt:
-    \_begin: (work@top.get_a1), line:6:7, endln:6:19
+    |vpiInternalScope:
+    \_begin: (work@top.get_a1)
       |vpiParent:
       \_function: (work@top.get_a1), line:4:4, endln:7:15
       |vpiFullName:work@top.get_a1
       |vpiVariables:
-      \_int_var: (work@top.get_a1.a), line:5:11, endln:5:12
+      \_int_var: (work@top.get_a1), line:5:7, endln:5:10
+        |vpiParent:
+        \_begin: (work@top.get_a1)
+        |vpiTypespec:
+        \_ref_typespec: (work@top.get_a1), line:5:7, endln:5:10
+          |vpiParent:
+          \_int_var: (work@top.get_a1), line:5:7, endln:5:10
+          |vpiFullName:work@top.get_a1
+          |vpiActual:
+          \_int_typespec: , line:5:7, endln:5:10
+        |vpiFullName:work@top.get_a1
+        |vpiSigned:1
       |vpiVariables:
+      \_array_var: (work@top.get_a1.a), line:5:11, endln:5:12
+        |vpiParent:
+        \_begin: (work@top.get_a1)
+        |vpiTypespec:
+        \_ref_typespec: (work@top.get_a1.a), line:5:7, endln:5:10
+          |vpiParent:
+          \_array_var: (work@top.get_a1.a), line:5:11, endln:5:12
+          |vpiFullName:work@top.get_a1.a
+          |vpiActual:
+          \_array_typespec: , line:5:11, endln:5:15
+        |vpiName:a
+        |vpiFullName:work@top.get_a1.a
+        |vpiArrayType:1
+      |vpiRegArray:
+      \_array_var: (work@top.get_a1.a), line:5:11, endln:5:12
+      |vpiTypedef:
+      \_int_typespec: , line:5:7, endln:5:10
+        |vpiParent:
+        \_begin: (work@top.get_a1)
+        |vpiSigned:1
+      |vpiTypedef:
+      \_array_typespec: , line:5:11, endln:5:15
+        |vpiParent:
+        \_begin: (work@top.get_a1)
+        |vpiRange:
+        \_range: , line:5:14, endln:5:15
+          |vpiParent:
+          \_array_typespec: , line:5:11, endln:5:15
+          |vpiRightRange:
+          \_operation: , line:5:14, endln:5:15
+            |vpiParent:
+            \_range: , line:5:14, endln:5:15
+            |vpiOpType:11
+            |vpiOperand:
+            \_constant: , line:5:14, endln:5:15
+              |vpiParent:
+              \_range: , line:5:14, endln:5:15
+              |vpiDecompile:2
+              |vpiSize:64
+              |UINT:2
+              |vpiConstType:9
+        |vpiElemTypespec:
+        \_ref_typespec: (work@top.get_a1), line:5:7, endln:5:10
+          |vpiParent:
+          \_array_typespec: , line:5:11, endln:5:15
+          |vpiFullName:work@top.get_a1
+          |vpiActual:
+          \_int_typespec: , line:5:7, endln:5:10
+      |vpiImportTypespec:
+      \_int_typespec: , line:5:7, endln:5:10
+      |vpiImportTypespec:
+      \_int_var: (work@top.get_a1), line:5:7, endln:5:10
+      |vpiImportTypespec:
+      \_array_typespec: , line:5:11, endln:5:15
+      |vpiImportTypespec:
       \_array_var: (work@top.get_a1.a), line:5:11, endln:5:12
       |vpiStmt:
       \_assignment: , line:5:11, endln:5:26
         |vpiParent:
-        \_begin: (work@top.get_a1), line:6:7, endln:6:19
+        \_begin: (work@top.get_a1)
         |vpiOpType:82
         |vpiBlocking:1
         |vpiRhs:
@@ -202,12 +256,16 @@ design: (unnamed)
           |vpiOpType:75
           |vpiOperand:
           \_constant: , line:5:21, endln:5:22
+            |vpiParent:
+            \_operation: , line:5:19, endln:5:26
             |vpiDecompile:0
             |vpiSize:64
             |UINT:0
             |vpiConstType:9
           |vpiOperand:
           \_constant: , line:5:24, endln:5:25
+            |vpiParent:
+            \_operation: , line:5:19, endln:5:26
             |vpiDecompile:1
             |vpiSize:64
             |UINT:1
@@ -215,49 +273,71 @@ design: (unnamed)
         |vpiLhs:
         \_array_var: (work@top.get_a1.a), line:5:11, endln:5:12
       |vpiStmt:
-      \_return_stmt: , line:6:7, endln:6:13
+      \_return_stmt: , line:6:7, endln:6:18
         |vpiParent:
-        \_begin: (work@top.get_a1), line:6:7, endln:6:19
+        \_begin: (work@top.get_a1)
         |vpiCondition:
-        \_bit_select: (work@top.get_a1.a), line:6:16, endln:6:17
+        \_bit_select: (work@top.get_a1.a), line:6:15, endln:6:18
           |vpiParent:
-          \_return_stmt: , line:6:7, endln:6:13
+          \_return_stmt: , line:6:7, endln:6:18
           |vpiName:a
           |vpiFullName:work@top.get_a1.a
+          |vpiActual:
+          \_array_var: (work@top.get_a1.a), line:5:11, endln:5:12
           |vpiIndex:
           \_constant: , line:6:16, endln:6:17
             |vpiParent:
-            \_bit_select: (work@top.get_a1.a), line:6:16, endln:6:17
+            \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayVarName/dut.sv, line:1:1, endln:8:10
             |vpiDecompile:1
             |vpiSize:64
             |UINT:1
             |vpiConstType:9
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayVarName/dut.sv, line:1:1, endln:8:10
-  |vpiNet:
-  \_logic_net: (work@top.o), line:1:23, endln:1:24
+    |vpiTypedef:
+    \_int_typespec: , line:4:23, endln:4:26
+      |vpiParent:
+      \_function: (work@top.get_a1), line:4:4, endln:7:15
+      |vpiSigned:1
+    |vpiImportTypespec:
+    \_int_typespec: , line:4:23, endln:4:26
+    |vpiImportTypespec:
+    \_int_var: (work@top.get_a1), line:4:23, endln:4:26
+    |vpiVisibility:1
+    |vpiAutomatic:1
+    |vpiReturn:
+    \_int_var: (work@top.get_a1), line:4:23, endln:4:26
+    |vpiStmt:
+    \_begin: (work@top.get_a1)
+  |vpiTypedef:
+  \_int_typespec: , line:1:19, endln:1:22
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayVarName/dut.sv, line:1:1, endln:8:10
-    |vpiName:o
-    |vpiFullName:work@top.o
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:1:19, endln:1:22
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayVarName/dut.sv, line:1:1, endln:8:10
+    |vpiSigned:1
+  |vpiImportTypespec:
+  \_function: (work@top.get_a1), line:4:4, endln:7:15
+  |vpiImportTypespec:
+  \_int_typespec: , line:1:19, endln:1:22
+  |vpiImportTypespec:
+  \_int_var: (work@top.o), line:1:23, endln:1:24
+  |vpiImportTypespec:
+  \_int_typespec: , line:1:19, endln:1:22
+  |vpiDefName:work@top
+  |vpiTaskFunc:
+  \_function: (work@top.get_a1), line:4:4, endln:7:15
   |vpiPort:
-  \_port: (o), line:1:23, endln:1:24
+  \_port: (o), line:1:12, endln:1:24
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayVarName/dut.sv, line:1:1, endln:8:10
     |vpiName:o
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@top.o.o), line:1:23, endln:1:24
-      |vpiParent:
-      \_port: (o), line:1:23, endln:1:24
-      |vpiName:o
-      |vpiFullName:work@top.o.o
-      |vpiActual:
-      \_logic_net: (work@top.o), line:1:23, endln:1:24
     |vpiTypedef:
-    \_ref_typespec: (work@top.o)
+    \_ref_typespec: (work@top.o), line:1:19, endln:1:22
       |vpiParent:
-      \_port: (o), line:1:23, endln:1:24
+      \_port: (o), line:1:12, endln:1:24
       |vpiFullName:work@top.o
       |vpiActual:
       \_int_typespec: , line:1:19, endln:1:22
@@ -275,58 +355,18 @@ design: (unnamed)
     |vpiLhs:
     \_ref_obj: (work@top.o), line:2:11, endln:2:12
       |vpiParent:
-      \_cont_assign: , line:2:11, endln:2:23
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayVarName/dut.sv, line:1:1, endln:8:10
       |vpiName:o
       |vpiFullName:work@top.o
       |vpiActual:
-      \_logic_net: (work@top.o), line:1:23, endln:1:24
-\_weaklyReferenced:
-\_int_typespec: , line:4:23, endln:4:26
-  |vpiSigned:1
-\_int_typespec: , line:5:7, endln:5:10
-  |vpiSigned:1
-\_array_typespec: , line:5:11, endln:5:15
-  |vpiRange:
-  \_range: , line:5:14, endln:5:15
-    |vpiParent:
-    \_array_typespec: , line:5:11, endln:5:15
-    |vpiLeftRange:
-    \_constant: 
-      |vpiParent:
-      \_range: , line:5:14, endln:5:15
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-    |vpiRightRange:
-    \_operation: , line:5:14, endln:5:15
-      |vpiParent:
-      \_range: , line:5:14, endln:5:15
-      |vpiOpType:11
-      |vpiOperand:
-      \_constant: , line:5:14, endln:5:15
-        |vpiParent:
-        \_operation: , line:5:14, endln:5:15
-        |vpiDecompile:2
-        |vpiSize:64
-        |UINT:2
-        |vpiConstType:9
-      |vpiOperand:
-      \_constant: 
-        |vpiSize:64
-        |INT:1
-        |vpiConstType:7
-  |vpiElemTypespec:
-  \_ref_typespec: 
-    |vpiParent:
-    \_array_typespec: , line:5:11, endln:5:15
-    |vpiActual:
-    \_int_typespec: , line:5:7, endln:5:10
-\_int_typespec: , line:1:19, endln:1:22
-  |vpiSigned:1
+      \_int_var: (work@top.o), line:1:23, endln:1:24
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/ArrayVarName/dut.sv | ${SURELOG_DIR}/build/regression/ArrayVarName/roundtrip/dut_000.sv | 4 | 8 |
+============================== End RoundTrip Results ==============================

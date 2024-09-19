@@ -99,69 +99,80 @@ module_inst                                            1
 operation                                              1
 ref_obj                                                3
 ref_typespec                                           1
+source_file                                            1
 sys_func_call                                          1
 task                                                   1
 task_call                                              1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/StaticTask/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/StaticTask/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/StaticTask/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/StaticTask/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@tb (work@tb), file:${SURELOG_DIR}/tests/StaticTask/dut.sv, line:1:1, endln:10:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@tb
-  |vpiDefName:work@tb
-  |vpiTaskFunc:
+  |vpiName:work@tb
+  |vpiInternalScope:
   \_task: (work@tb.display), line:5:2, endln:9:9
     |vpiParent:
     \_module_inst: work@tb (work@tb), file:${SURELOG_DIR}/tests/StaticTask/dut.sv, line:1:1, endln:10:10
     |vpiName:display
     |vpiFullName:work@tb.display
-    |vpiVariables:
-    \_integer_var: (work@tb.display.i), line:6:10, endln:6:11
-      |vpiParent:
-      \_assignment: , line:6:10, endln:6:15
-      |vpiTypespec:
-      \_ref_typespec: (work@tb.display.i)
-        |vpiParent:
-        \_integer_var: (work@tb.display.i), line:6:10, endln:6:11
-        |vpiFullName:work@tb.display.i
-        |vpiActual:
-        \_integer_typespec: , line:6:2, endln:6:9
-      |vpiName:i
-      |vpiFullName:work@tb.display.i
-      |vpiSigned:1
-    |vpiVisibility:1
-    |vpiStmt:
-    \_begin: (work@tb.display), line:7:2, endln:7:12
+    |vpiInternalScope:
+    \_begin: (work@tb.display), line:6:2, endln:8:23
       |vpiParent:
       \_task: (work@tb.display), line:5:2, endln:9:9
       |vpiFullName:work@tb.display
       |vpiVariables:
-      \_integer_var: (work@tb.display.i), line:6:10, endln:6:11
+      \_integer_var: (work@tb.display.i), line:6:2, endln:6:9
+        |vpiParent:
+        \_begin: (work@tb.display), line:6:2, endln:8:23
+        |vpiTypespec:
+        \_ref_typespec: (work@tb.display.i), line:6:2, endln:6:9
+          |vpiParent:
+          \_integer_var: (work@tb.display.i), line:6:2, endln:6:9
+          |vpiFullName:work@tb.display.i
+          |vpiActual:
+          \_integer_typespec: , line:6:2, endln:6:9
+        |vpiName:i
+        |vpiFullName:work@tb.display.i
+        |vpiSigned:1
+      |vpiTypedef:
+      \_integer_typespec: , line:6:2, endln:6:9
+        |vpiParent:
+        \_begin: (work@tb.display), line:6:2, endln:8:23
+        |vpiSigned:1
+      |vpiImportTypespec:
+      \_integer_typespec: , line:6:2, endln:6:9
+      |vpiImportTypespec:
+      \_integer_var: (work@tb.display.i), line:6:2, endln:6:9
       |vpiStmt:
       \_assignment: , line:6:10, endln:6:15
         |vpiParent:
-        \_begin: (work@tb.display), line:7:2, endln:7:12
+        \_begin: (work@tb.display), line:6:2, endln:8:23
         |vpiOpType:82
         |vpiBlocking:1
         |vpiRhs:
         \_constant: , line:6:14, endln:6:15
+          |vpiParent:
+          \_assignment: , line:6:10, endln:6:15
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
           |vpiConstType:9
         |vpiLhs:
-        \_integer_var: (work@tb.display.i), line:6:10, endln:6:11
+        \_integer_var: (work@tb.display.i), line:6:2, endln:6:9
       |vpiStmt:
       \_assignment: , line:7:2, endln:7:11
         |vpiParent:
-        \_begin: (work@tb.display), line:7:2, endln:7:12
+        \_begin: (work@tb.display), line:6:2, endln:8:23
         |vpiOpType:82
         |vpiBlocking:1
         |vpiRhs:
@@ -176,7 +187,7 @@ design: (unnamed)
             |vpiName:i
             |vpiFullName:work@tb.display.i
             |vpiActual:
-            \_integer_var: (work@tb.display.i), line:6:10, endln:6:11
+            \_integer_var: (work@tb.display.i), line:6:2, endln:6:9
           |vpiOperand:
           \_constant: , line:7:10, endln:7:11
             |vpiParent:
@@ -192,11 +203,11 @@ design: (unnamed)
           |vpiName:i
           |vpiFullName:work@tb.display.i
           |vpiActual:
-          \_integer_var: (work@tb.display.i), line:6:10, endln:6:11
+          \_integer_var: (work@tb.display.i), line:6:2, endln:6:9
       |vpiStmt:
       \_sys_func_call: ($display), line:8:2, endln:8:22
         |vpiParent:
-        \_begin: (work@tb.display), line:7:2, endln:7:12
+        \_begin: (work@tb.display), line:6:2, endln:8:23
         |vpiArgument:
         \_constant: , line:8:11, endln:8:18
           |vpiParent:
@@ -212,10 +223,16 @@ design: (unnamed)
           |vpiName:i
           |vpiFullName:work@tb.display.i
           |vpiActual:
-          \_integer_var: (work@tb.display.i), line:6:10, endln:6:11
+          \_integer_var: (work@tb.display.i), line:6:2, endln:6:9
         |vpiName:$display
-    |vpiInstance:
-    \_module_inst: work@tb (work@tb), file:${SURELOG_DIR}/tests/StaticTask/dut.sv, line:1:1, endln:10:10
+    |vpiVisibility:1
+    |vpiStmt:
+    \_begin: (work@tb.display), line:6:2, endln:8:23
+  |vpiImportTypespec:
+  \_task: (work@tb.display), line:5:2, endln:9:9
+  |vpiDefName:work@tb
+  |vpiTaskFunc:
+  \_task: (work@tb.display), line:5:2, endln:9:9
   |vpiProcess:
   \_initial: , line:3:2, endln:3:20
     |vpiParent:
@@ -227,9 +244,6 @@ design: (unnamed)
       |vpiName:display
       |vpiTask:
       \_task: (work@tb.display), line:5:2, endln:9:9
-\_weaklyReferenced:
-\_integer_typespec: , line:6:2, endln:6:9
-  |vpiSigned:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -238,5 +252,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/StaticTask/dut.sv | ${SURELOG_DIR}/build/regression/StaticTask/roundtrip/dut_000.sv | 1 | 10 |
+[roundtrip]: ${SURELOG_DIR}/tests/StaticTask/dut.sv | ${SURELOG_DIR}/build/regression/StaticTask/roundtrip/dut_000.sv | 3 | 10 |
 ============================== End RoundTrip Results ==============================

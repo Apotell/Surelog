@@ -162,7 +162,7 @@ n<top_pkg> u<156> t<StringConst> p<157> l<18:18> el<18:25>
 n<> u<157> t<Package_scope> p<159> c<156> s<158> l<18:18> el<18:27>
 n<TL_SZW> u<158> t<StringConst> p<159> l<18:27> el<18:33>
 n<> u<159> t<Ps_type_identifier> p<160> c<157> l<18:18> el<18:33>
-n<> u<160> t<Simple_type> p<161> c<159> l<18:18> el<18:33>
+n<top_pkg::TL_SZW> u<160> t<Simple_type> p<161> c<159> l<18:18> el<18:33>
 n<> u<161> t<Casting_type> p<166> c<160> s<165> l<18:18> el<18:33>
 n<WordSize> u<162> t<StringConst> p<163> l<18:35> el<18:43>
 n<> u<163> t<Primary_literal> p<164> c<162> l<18:35> el<18:43>
@@ -709,20 +709,20 @@ n<> u<247> t<Description> p<248> c<246> f<0> l<55:3> el<69:11>
 n<> u<248> t<Source_text> p<249> c<105> f<0> l<1:3> el<69:11>
 n<> u<249> t<Top_level_rule> c<1> f<0> l<1:3> el<71:9>
 AST_DEBUG_END
-[INF:CP0302] Compile class "work@mailbox".
-[INF:CP0302] Compile class "work@process".
-[INF:CP0302] Compile class "work@semaphore".
+[INF:CP0302] Compile class "builtin::mailbox".
+[INF:CP0302] Compile class "builtin::process".
+[INF:CP0302] Compile class "builtin::semaphore".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 always                                                 1
 array_typespec                                         2
 array_var                                              1
 assignment                                             3
-begin                                                  2
+begin                                                  3
 class_defn                                             8
-class_typespec                                         4
-class_var                                              3
-constant                                              39
+class_typespec                                         1
+class_var                                              1
+constant                                              38
 cont_assign                                            1
 design                                                 1
 enum_const                                             5
@@ -732,73 +732,634 @@ function                                               9
 hier_path                                              1
 if_stmt                                                1
 initial                                                1
-int_typespec                                          33
-int_var                                                4
-integer_typespec                                       1
+int_typespec                                          24
+int_var                                                7
 io_decl                                               11
-logic_net                                              9
 logic_var                                              1
-module_inst                                            3
-named_begin                                            1
-operation                                             19
+module_inst                                            4
+operation                                             20
 package                                                2
-param_assign                                          15
-parameter                                             15
+param_assign                                           8
+parameter                                              8
 range                                                  3
-ref_obj                                               18
-ref_typespec                                          58
+ref_obj                                               17
+ref_typespec                                          40
+source_file                                            1
 string_typespec                                        2
 struct_typespec                                        2
-struct_var                                             1
+struct_var                                             2
 sys_func_call                                          6
 tagged_pattern                                         2
 task                                                   9
 typespec_member                                        5
 === UHDM Object Stats End ===
+[ERR:IG0807] ${SURELOG_DIR}/tests/CastTypespec/dut.sv:32:30: Child 137 is not entirely in parent's scope.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CastTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/CastTypespec/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/CastTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/CastTypespec/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallPackages:
 \_package: builtin (builtin::)
   |vpiParent:
   \_design: (unnamed)
   |vpiName:builtin
   |vpiFullName:builtin::
-  |vpiDefName:builtin
-  |vpiClassDefn:
-  \_class_defn: (builtin::any_sverilog_class)
-    |vpiParent:
-    \_package: builtin (builtin::)
-    |vpiName:any_sverilog_class
-    |vpiFullName:builtin::any_sverilog_class
-  |vpiClassDefn:
+  |vpiInternalScope:
   \_class_defn: (builtin::array)
     |vpiParent:
     \_package: builtin (builtin::)
     |vpiName:array
     |vpiFullName:builtin::array
-  |vpiClassDefn:
+  |vpiInternalScope:
   \_class_defn: (builtin::queue)
     |vpiParent:
     \_package: builtin (builtin::)
     |vpiName:queue
     |vpiFullName:builtin::queue
-  |vpiClassDefn:
+  |vpiInternalScope:
   \_class_defn: (builtin::string)
     |vpiParent:
     \_package: builtin (builtin::)
     |vpiName:string
     |vpiFullName:builtin::string
-  |vpiClassDefn:
+  |vpiInternalScope:
   \_class_defn: (builtin::system)
     |vpiParent:
     \_package: builtin (builtin::)
     |vpiName:system
     |vpiFullName:builtin::system
+  |vpiInternalScope:
+  \_class_defn: (builtin::any_sverilog_class)
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:any_sverilog_class
+    |vpiFullName:builtin::any_sverilog_class
+  |vpiInternalScope:
+  \_class_defn: (builtin::mailbox), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:1:3, endln:27:11
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:mailbox
+    |vpiFullName:builtin::mailbox
+    |vpiInternalScope:
+    \_function: (builtin::mailbox::num), line:6:5, endln:7:16
+      |vpiParent:
+      \_class_defn: (builtin::mailbox), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:1:3, endln:27:11
+      |vpiName:num
+      |vpiFullName:builtin::mailbox::num
+      |vpiVariables:
+      \_int_var: (builtin::mailbox::num), line:6:14, endln:6:17
+        |vpiParent:
+        \_function: (builtin::mailbox::num), line:6:5, endln:7:16
+        |vpiTypespec:
+        \_ref_typespec: (builtin::mailbox::num), line:6:14, endln:6:17
+          |vpiParent:
+          \_int_var: (builtin::mailbox::num), line:6:14, endln:6:17
+          |vpiFullName:builtin::mailbox::num
+          |vpiActual:
+          \_int_typespec: , line:6:14, endln:6:17
+        |vpiFullName:builtin::mailbox::num
+        |vpiSigned:1
+      |vpiTypedef:
+      \_int_typespec: , line:6:14, endln:6:17
+        |vpiParent:
+        \_function: (builtin::mailbox::num), line:6:5, endln:7:16
+        |vpiSigned:1
+      |vpiImportTypespec:
+      \_int_typespec: , line:6:14, endln:6:17
+      |vpiImportTypespec:
+      \_int_var: (builtin::mailbox::num), line:6:14, endln:6:17
+      |vpiMethod:1
+      |vpiVisibility:1
+      |vpiReturn:
+      \_int_var: (builtin::mailbox::num), line:6:14, endln:6:17
+    |vpiInternalScope:
+    \_task: (builtin::mailbox::put), line:9:5, endln:10:12
+      |vpiParent:
+      \_class_defn: (builtin::mailbox), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:1:3, endln:27:11
+      |vpiName:put
+      |vpiFullName:builtin::mailbox::put
+      |vpiMethod:1
+      |vpiVisibility:1
+      |vpiIODecl:
+      \_io_decl: (message), line:9:15, endln:9:22
+        |vpiParent:
+        \_task: (builtin::mailbox::put), line:9:5, endln:10:12
+        |vpiDirection:1
+        |vpiName:message
+    |vpiInternalScope:
+    \_function: (builtin::mailbox::try_put), line:12:5, endln:13:16
+      |vpiParent:
+      \_class_defn: (builtin::mailbox), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:1:3, endln:27:11
+      |vpiName:try_put
+      |vpiFullName:builtin::mailbox::try_put
+      |vpiVariables:
+      \_logic_var: (builtin::mailbox::try_put), line:12:14, endln:12:21
+        |vpiParent:
+        \_function: (builtin::mailbox::try_put), line:12:5, endln:13:16
+        |vpiFullName:builtin::mailbox::try_put
+      |vpiReg:
+      \_logic_var: (builtin::mailbox::try_put), line:12:14, endln:12:21
+      |vpiImportTypespec:
+      \_logic_var: (builtin::mailbox::try_put), line:12:14, endln:12:21
+      |vpiMethod:1
+      |vpiVisibility:1
+      |vpiReturn:
+      \_logic_var: (builtin::mailbox::try_put), line:12:14, endln:12:21
+      |vpiIODecl:
+      \_io_decl: (message), line:12:23, endln:12:30
+        |vpiParent:
+        \_function: (builtin::mailbox::try_put), line:12:5, endln:13:16
+        |vpiDirection:1
+        |vpiName:message
+    |vpiInternalScope:
+    \_task: (builtin::mailbox::get), line:15:5, endln:16:12
+      |vpiParent:
+      \_class_defn: (builtin::mailbox), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:1:3, endln:27:11
+      |vpiName:get
+      |vpiFullName:builtin::mailbox::get
+      |vpiMethod:1
+      |vpiVisibility:1
+      |vpiIODecl:
+      \_io_decl: (message), line:15:15, endln:15:26
+        |vpiParent:
+        \_task: (builtin::mailbox::get), line:15:5, endln:16:12
+        |vpiDirection:6
+        |vpiName:message
+    |vpiInternalScope:
+    \_function: (builtin::mailbox::try_get), line:18:5, endln:19:16
+      |vpiParent:
+      \_class_defn: (builtin::mailbox), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:1:3, endln:27:11
+      |vpiName:try_get
+      |vpiFullName:builtin::mailbox::try_get
+      |vpiVariables:
+      \_int_var: (builtin::mailbox::try_get), line:18:14, endln:18:17
+        |vpiParent:
+        \_function: (builtin::mailbox::try_get), line:18:5, endln:19:16
+        |vpiTypespec:
+        \_ref_typespec: (builtin::mailbox::try_get), line:18:14, endln:18:17
+          |vpiParent:
+          \_int_var: (builtin::mailbox::try_get), line:18:14, endln:18:17
+          |vpiFullName:builtin::mailbox::try_get
+          |vpiActual:
+          \_int_typespec: , line:18:14, endln:18:17
+        |vpiFullName:builtin::mailbox::try_get
+        |vpiSigned:1
+      |vpiTypedef:
+      \_int_typespec: , line:18:14, endln:18:17
+        |vpiParent:
+        \_function: (builtin::mailbox::try_get), line:18:5, endln:19:16
+        |vpiSigned:1
+      |vpiImportTypespec:
+      \_int_typespec: , line:18:14, endln:18:17
+      |vpiImportTypespec:
+      \_int_var: (builtin::mailbox::try_get), line:18:14, endln:18:17
+      |vpiMethod:1
+      |vpiVisibility:1
+      |vpiReturn:
+      \_int_var: (builtin::mailbox::try_get), line:18:14, endln:18:17
+      |vpiIODecl:
+      \_io_decl: (message), line:18:27, endln:18:38
+        |vpiParent:
+        \_function: (builtin::mailbox::try_get), line:18:5, endln:19:16
+        |vpiDirection:6
+        |vpiName:message
+    |vpiInternalScope:
+    \_task: (builtin::mailbox::peek), line:21:5, endln:22:12
+      |vpiParent:
+      \_class_defn: (builtin::mailbox), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:1:3, endln:27:11
+      |vpiName:peek
+      |vpiFullName:builtin::mailbox::peek
+      |vpiMethod:1
+      |vpiVisibility:1
+      |vpiIODecl:
+      \_io_decl: (message), line:21:16, endln:21:27
+        |vpiParent:
+        \_task: (builtin::mailbox::peek), line:21:5, endln:22:12
+        |vpiDirection:6
+        |vpiName:message
+    |vpiInternalScope:
+    \_function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
+      |vpiParent:
+      \_class_defn: (builtin::mailbox), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:1:3, endln:27:11
+      |vpiName:try_peek
+      |vpiFullName:builtin::mailbox::try_peek
+      |vpiVariables:
+      \_int_var: (builtin::mailbox::try_peek), line:24:14, endln:24:17
+        |vpiParent:
+        \_function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
+        |vpiTypespec:
+        \_ref_typespec: (builtin::mailbox::try_peek), line:24:14, endln:24:17
+          |vpiParent:
+          \_int_var: (builtin::mailbox::try_peek), line:24:14, endln:24:17
+          |vpiFullName:builtin::mailbox::try_peek
+          |vpiActual:
+          \_int_typespec: , line:24:14, endln:24:17
+        |vpiFullName:builtin::mailbox::try_peek
+        |vpiSigned:1
+      |vpiTypedef:
+      \_int_typespec: , line:24:14, endln:24:17
+        |vpiParent:
+        \_function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
+        |vpiSigned:1
+      |vpiImportTypespec:
+      \_int_typespec: , line:24:14, endln:24:17
+      |vpiImportTypespec:
+      \_int_var: (builtin::mailbox::try_peek), line:24:14, endln:24:17
+      |vpiMethod:1
+      |vpiVisibility:1
+      |vpiReturn:
+      \_int_var: (builtin::mailbox::try_peek), line:24:14, endln:24:17
+      |vpiIODecl:
+      \_io_decl: (message), line:24:27, endln:24:38
+        |vpiParent:
+        \_function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
+        |vpiDirection:6
+        |vpiName:message
+    |vpiImportTypespec:
+    \_function: (builtin::mailbox::num), line:6:5, endln:7:16
+    |vpiImportTypespec:
+    \_task: (builtin::mailbox::put), line:9:5, endln:10:12
+    |vpiImportTypespec:
+    \_function: (builtin::mailbox::try_put), line:12:5, endln:13:16
+    |vpiImportTypespec:
+    \_task: (builtin::mailbox::get), line:15:5, endln:16:12
+    |vpiImportTypespec:
+    \_function: (builtin::mailbox::try_get), line:18:5, endln:19:16
+    |vpiImportTypespec:
+    \_task: (builtin::mailbox::peek), line:21:5, endln:22:12
+    |vpiImportTypespec:
+    \_function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
+    |vpiMethod:
+    \_function: (builtin::mailbox::num), line:6:5, endln:7:16
+    |vpiMethod:
+    \_task: (builtin::mailbox::put), line:9:5, endln:10:12
+    |vpiMethod:
+    \_function: (builtin::mailbox::try_put), line:12:5, endln:13:16
+    |vpiMethod:
+    \_task: (builtin::mailbox::get), line:15:5, endln:16:12
+    |vpiMethod:
+    \_function: (builtin::mailbox::try_get), line:18:5, endln:19:16
+    |vpiMethod:
+    \_task: (builtin::mailbox::peek), line:21:5, endln:22:12
+    |vpiMethod:
+    \_function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
+  |vpiInternalScope:
+  \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:30:3, endln:52:11
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:process
+    |vpiFullName:builtin::process
+    |vpiInternalScope:
+    \_function: (builtin::process::self), line:34:5, endln:35:16
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:30:3, endln:52:11
+      |vpiName:self
+      |vpiFullName:builtin::process::self
+      |vpiVariables:
+      \_class_var: (builtin::process::self), line:34:21, endln:34:28
+        |vpiParent:
+        \_function: (builtin::process::self), line:34:5, endln:35:16
+        |vpiTypespec:
+        \_ref_typespec: (builtin::process::self::builtin::process), line:34:21, endln:34:28
+          |vpiParent:
+          \_class_var: (builtin::process::self), line:34:21, endln:34:28
+          |vpiName:builtin::process
+          |vpiFullName:builtin::process::self::builtin::process
+          |vpiActual:
+          \_class_typespec: (process), line:34:21, endln:34:28
+        |vpiFullName:builtin::process::self
+      |vpiTypedef:
+      \_class_typespec: (process), line:34:21, endln:34:28
+        |vpiParent:
+        \_function: (builtin::process::self), line:34:5, endln:35:16
+        |vpiName:process
+        |vpiClassDefn:
+        \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:30:3, endln:52:11
+      |vpiImportTypespec:
+      \_class_typespec: (process), line:34:21, endln:34:28
+      |vpiImportTypespec:
+      \_class_var: (builtin::process::self), line:34:21, endln:34:28
+      |vpiMethod:1
+      |vpiVisibility:1
+      |vpiReturn:
+      \_class_var: (builtin::process::self), line:34:21, endln:34:28
+    |vpiInternalScope:
+    \_function: (builtin::process::status), line:37:5, endln:38:16
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:30:3, endln:52:11
+      |vpiName:status
+      |vpiFullName:builtin::process::status
+      |vpiVariables:
+      \_enum_var: (builtin::process::status), line:37:14, endln:37:19
+        |vpiParent:
+        \_function: (builtin::process::status), line:37:5, endln:38:16
+        |vpiTypespec:
+        \_ref_typespec: (builtin::process::status::state), line:37:14, endln:37:19
+          |vpiParent:
+          \_enum_var: (builtin::process::status), line:37:14, endln:37:19
+          |vpiName:state
+          |vpiFullName:builtin::process::status::state
+          |vpiActual:
+          \_enum_typespec: (state), line:32:13, endln:32:74
+        |vpiFullName:builtin::process::status
+      |vpiImportTypespec:
+      \_enum_var: (builtin::process::status), line:37:14, endln:37:19
+      |vpiMethod:1
+      |vpiVisibility:1
+      |vpiReturn:
+      \_enum_var: (builtin::process::status), line:37:14, endln:37:19
+    |vpiInternalScope:
+    \_task: (builtin::process::kill), line:40:5, endln:41:12
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:30:3, endln:52:11
+      |vpiName:kill
+      |vpiFullName:builtin::process::kill
+      |vpiMethod:1
+      |vpiVisibility:1
+    |vpiInternalScope:
+    \_task: (builtin::process::await), line:43:5, endln:44:12
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:30:3, endln:52:11
+      |vpiName:await
+      |vpiFullName:builtin::process::await
+      |vpiMethod:1
+      |vpiVisibility:1
+    |vpiInternalScope:
+    \_task: (builtin::process::suspend), line:46:5, endln:47:12
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:30:3, endln:52:11
+      |vpiName:suspend
+      |vpiFullName:builtin::process::suspend
+      |vpiMethod:1
+      |vpiVisibility:1
+    |vpiInternalScope:
+    \_task: (builtin::process::resume), line:49:5, endln:50:12
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:30:3, endln:52:11
+      |vpiName:resume
+      |vpiFullName:builtin::process::resume
+      |vpiMethod:1
+      |vpiVisibility:1
+    |vpiTypedef:
+    \_enum_typespec: (state), line:32:13, endln:32:74
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiEnumConst:
+      \_enum_const: (FINISHED), line:32:20, endln:32:28
+        |vpiParent:
+        \_enum_typespec: (state), line:32:13, endln:32:74
+        |vpiName:FINISHED
+        |INT:0
+        |vpiDecompile:0
+        |vpiSize:64
+      |vpiEnumConst:
+      \_enum_const: (RUNNING), line:32:30, endln:32:37
+        |vpiParent:
+        \_enum_typespec: (state), line:32:13, endln:32:74
+        |vpiName:RUNNING
+        |INT:1
+        |vpiDecompile:1
+        |vpiSize:64
+      |vpiEnumConst:
+      \_enum_const: (WAITING), line:32:39, endln:32:46
+        |vpiParent:
+        \_enum_typespec: (state), line:32:13, endln:32:74
+        |vpiName:WAITING
+        |INT:2
+        |vpiDecompile:2
+        |vpiSize:64
+      |vpiEnumConst:
+      \_enum_const: (SUSPENDED), line:32:48, endln:32:57
+        |vpiParent:
+        \_enum_typespec: (state), line:32:13, endln:32:74
+        |vpiName:SUSPENDED
+        |INT:3
+        |vpiDecompile:3
+        |vpiSize:64
+      |vpiEnumConst:
+      \_enum_const: (KILLED), line:32:59, endln:32:65
+        |vpiParent:
+        \_enum_typespec: (state), line:32:13, endln:32:74
+        |vpiName:KILLED
+        |INT:4
+        |vpiDecompile:4
+        |vpiSize:64
+    |vpiImportTypespec:
+    \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_function: (builtin::process::self), line:34:5, endln:35:16
+    |vpiImportTypespec:
+    \_function: (builtin::process::status), line:37:5, endln:38:16
+    |vpiImportTypespec:
+    \_task: (builtin::process::kill), line:40:5, endln:41:12
+    |vpiImportTypespec:
+    \_task: (builtin::process::await), line:43:5, endln:44:12
+    |vpiImportTypespec:
+    \_task: (builtin::process::suspend), line:46:5, endln:47:12
+    |vpiImportTypespec:
+    \_task: (builtin::process::resume), line:49:5, endln:50:12
+    |vpiMethod:
+    \_function: (builtin::process::self), line:34:5, endln:35:16
+    |vpiMethod:
+    \_function: (builtin::process::status), line:37:5, endln:38:16
+    |vpiMethod:
+    \_task: (builtin::process::kill), line:40:5, endln:41:12
+    |vpiMethod:
+    \_task: (builtin::process::await), line:43:5, endln:44:12
+    |vpiMethod:
+    \_task: (builtin::process::suspend), line:46:5, endln:47:12
+    |vpiMethod:
+    \_task: (builtin::process::resume), line:49:5, endln:50:12
+  |vpiInternalScope:
+  \_class_defn: (builtin::semaphore), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:55:3, endln:69:11
+    |vpiParent:
+    \_package: builtin (builtin::)
+    |vpiName:semaphore
+    |vpiFullName:builtin::semaphore
+    |vpiInternalScope:
+    \_task: (builtin::semaphore::put), line:60:5, endln:61:12
+      |vpiParent:
+      \_class_defn: (builtin::semaphore), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:55:3, endln:69:11
+      |vpiName:put
+      |vpiFullName:builtin::semaphore::put
+      |vpiTypedef:
+      \_int_typespec: , line:60:14, endln:60:17
+        |vpiParent:
+        \_task: (builtin::semaphore::put), line:60:5, endln:61:12
+        |vpiSigned:1
+      |vpiImportTypespec:
+      \_int_typespec: , line:60:14, endln:60:17
+      |vpiMethod:1
+      |vpiVisibility:1
+      |vpiIODecl:
+      \_io_decl: (keyCount), line:60:14, endln:60:26
+        |vpiParent:
+        \_task: (builtin::semaphore::put), line:60:5, endln:61:12
+        |vpiDirection:1
+        |vpiName:keyCount
+        |vpiExpr:
+        \_constant: , line:60:29, endln:60:30
+          |vpiParent:
+          \_io_decl: (keyCount), line:60:14, endln:60:26
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+        |vpiTypedef:
+        \_ref_typespec: (builtin::semaphore::put::keyCount), line:60:14, endln:60:17
+          |vpiParent:
+          \_io_decl: (keyCount), line:60:14, endln:60:26
+          |vpiFullName:builtin::semaphore::put::keyCount
+          |vpiActual:
+          \_int_typespec: , line:60:14, endln:60:17
+    |vpiInternalScope:
+    \_task: (builtin::semaphore::get), line:63:5, endln:64:12
+      |vpiParent:
+      \_class_defn: (builtin::semaphore), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:55:3, endln:69:11
+      |vpiName:get
+      |vpiFullName:builtin::semaphore::get
+      |vpiTypedef:
+      \_int_typespec: , line:63:14, endln:63:17
+        |vpiParent:
+        \_task: (builtin::semaphore::get), line:63:5, endln:64:12
+        |vpiSigned:1
+      |vpiImportTypespec:
+      \_int_typespec: , line:63:14, endln:63:17
+      |vpiMethod:1
+      |vpiVisibility:1
+      |vpiIODecl:
+      \_io_decl: (keyCount), line:63:14, endln:63:26
+        |vpiParent:
+        \_task: (builtin::semaphore::get), line:63:5, endln:64:12
+        |vpiDirection:1
+        |vpiName:keyCount
+        |vpiExpr:
+        \_constant: , line:63:29, endln:63:30
+          |vpiParent:
+          \_io_decl: (keyCount), line:63:14, endln:63:26
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+        |vpiTypedef:
+        \_ref_typespec: (builtin::semaphore::get::keyCount), line:63:14, endln:63:17
+          |vpiParent:
+          \_io_decl: (keyCount), line:63:14, endln:63:26
+          |vpiFullName:builtin::semaphore::get::keyCount
+          |vpiActual:
+          \_int_typespec: , line:63:14, endln:63:17
+    |vpiInternalScope:
+    \_function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+      |vpiParent:
+      \_class_defn: (builtin::semaphore), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:55:3, endln:69:11
+      |vpiName:try_get
+      |vpiFullName:builtin::semaphore::try_get
+      |vpiVariables:
+      \_int_var: (builtin::semaphore::try_get), line:66:14, endln:66:17
+        |vpiParent:
+        \_function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+        |vpiTypespec:
+        \_ref_typespec: (builtin::semaphore::try_get), line:66:14, endln:66:17
+          |vpiParent:
+          \_int_var: (builtin::semaphore::try_get), line:66:14, endln:66:17
+          |vpiFullName:builtin::semaphore::try_get
+          |vpiActual:
+          \_int_typespec: , line:66:14, endln:66:17
+        |vpiFullName:builtin::semaphore::try_get
+        |vpiSigned:1
+      |vpiTypedef:
+      \_int_typespec: , line:66:14, endln:66:17
+        |vpiParent:
+        \_function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+        |vpiSigned:1
+      |vpiTypedef:
+      \_int_typespec: , line:66:26, endln:66:29
+        |vpiParent:
+        \_function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+        |vpiSigned:1
+      |vpiImportTypespec:
+      \_int_typespec: , line:66:14, endln:66:17
+      |vpiImportTypespec:
+      \_int_var: (builtin::semaphore::try_get), line:66:14, endln:66:17
+      |vpiImportTypespec:
+      \_int_typespec: , line:66:26, endln:66:29
+      |vpiMethod:1
+      |vpiVisibility:1
+      |vpiReturn:
+      \_int_var: (builtin::semaphore::try_get), line:66:14, endln:66:17
+      |vpiIODecl:
+      \_io_decl: (keyCount), line:66:26, endln:66:38
+        |vpiParent:
+        \_function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+        |vpiDirection:1
+        |vpiName:keyCount
+        |vpiExpr:
+        \_constant: , line:66:41, endln:66:42
+          |vpiParent:
+          \_io_decl: (keyCount), line:66:26, endln:66:38
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+        |vpiTypedef:
+        \_ref_typespec: (builtin::semaphore::try_get::keyCount), line:66:26, endln:66:29
+          |vpiParent:
+          \_io_decl: (keyCount), line:66:26, endln:66:38
+          |vpiFullName:builtin::semaphore::try_get::keyCount
+          |vpiActual:
+          \_int_typespec: , line:66:26, endln:66:29
+    |vpiImportTypespec:
+    \_task: (builtin::semaphore::put), line:60:5, endln:61:12
+    |vpiImportTypespec:
+    \_task: (builtin::semaphore::get), line:63:5, endln:64:12
+    |vpiImportTypespec:
+    \_function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+    |vpiMethod:
+    \_task: (builtin::semaphore::put), line:60:5, endln:61:12
+    |vpiMethod:
+    \_task: (builtin::semaphore::get), line:63:5, endln:64:12
+    |vpiMethod:
+    \_function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+  |vpiImportTypespec:
+  \_class_defn: (builtin::array)
+  |vpiImportTypespec:
+  \_class_defn: (builtin::queue)
+  |vpiImportTypespec:
+  \_class_defn: (builtin::string)
+  |vpiImportTypespec:
+  \_class_defn: (builtin::system)
+  |vpiImportTypespec:
+  \_class_defn: (builtin::any_sverilog_class)
+  |vpiImportTypespec:
+  \_class_defn: (builtin::mailbox), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:1:3, endln:27:11
+  |vpiImportTypespec:
+  \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:30:3, endln:52:11
+  |vpiImportTypespec:
+  \_class_defn: (builtin::semaphore), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:55:3, endln:69:11
+  |vpiDefName:builtin
+  |vpiClassDefn:
+  \_class_defn: (builtin::array)
+  |vpiClassDefn:
+  \_class_defn: (builtin::queue)
+  |vpiClassDefn:
+  \_class_defn: (builtin::string)
+  |vpiClassDefn:
+  \_class_defn: (builtin::system)
+  |vpiClassDefn:
+  \_class_defn: (builtin::any_sverilog_class)
+  |vpiClassDefn:
+  \_class_defn: (builtin::mailbox), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:1:3, endln:27:11
+  |vpiClassDefn:
+  \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:30:3, endln:52:11
+  |vpiClassDefn:
+  \_class_defn: (builtin::semaphore), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:55:3, endln:69:11
 |uhdmallPackages:
 \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:2:1, endln:12:13
   |vpiParent:
@@ -806,14 +1367,14 @@ design: (unnamed)
   |vpiName:top_pkg
   |vpiFullName:top_pkg::
   |vpiParameter:
-  \_parameter: (top_pkg::TL_AW), line:4:18, endln:4:23
+  \_parameter: (top_pkg::TL_AW), line:4:18, endln:4:26
     |vpiParent:
     \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:2:1, endln:12:13
     |UINT:32
     |vpiTypespec:
-    \_ref_typespec: (top_pkg::TL_AW)
+    \_ref_typespec: (top_pkg::TL_AW), line:4:14, endln:4:17
       |vpiParent:
-      \_parameter: (top_pkg::TL_AW), line:4:18, endln:4:23
+      \_parameter: (top_pkg::TL_AW), line:4:18, endln:4:26
       |vpiFullName:top_pkg::TL_AW
       |vpiActual:
       \_int_typespec: , line:4:14, endln:4:17
@@ -822,14 +1383,14 @@ design: (unnamed)
     |vpiName:TL_AW
     |vpiFullName:top_pkg::TL_AW
   |vpiParameter:
-  \_parameter: (top_pkg::TL_DW), line:5:18, endln:5:23
+  \_parameter: (top_pkg::TL_DW), line:5:18, endln:5:26
     |vpiParent:
     \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:2:1, endln:12:13
     |UINT:32
     |vpiTypespec:
-    \_ref_typespec: (top_pkg::TL_DW)
+    \_ref_typespec: (top_pkg::TL_DW), line:5:14, endln:5:17
       |vpiParent:
-      \_parameter: (top_pkg::TL_DW), line:5:18, endln:5:23
+      \_parameter: (top_pkg::TL_DW), line:5:18, endln:5:26
       |vpiFullName:top_pkg::TL_DW
       |vpiActual:
       \_int_typespec: , line:5:14, endln:5:17
@@ -838,14 +1399,14 @@ design: (unnamed)
     |vpiName:TL_DW
     |vpiFullName:top_pkg::TL_DW
   |vpiParameter:
-  \_parameter: (top_pkg::TL_AIW), line:6:18, endln:6:24
+  \_parameter: (top_pkg::TL_AIW), line:6:18, endln:6:26
     |vpiParent:
     \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:2:1, endln:12:13
     |UINT:8
     |vpiTypespec:
-    \_ref_typespec: (top_pkg::TL_AIW)
+    \_ref_typespec: (top_pkg::TL_AIW), line:6:14, endln:6:17
       |vpiParent:
-      \_parameter: (top_pkg::TL_AIW), line:6:18, endln:6:24
+      \_parameter: (top_pkg::TL_AIW), line:6:18, endln:6:26
       |vpiFullName:top_pkg::TL_AIW
       |vpiActual:
       \_int_typespec: , line:6:14, endln:6:17
@@ -854,14 +1415,14 @@ design: (unnamed)
     |vpiName:TL_AIW
     |vpiFullName:top_pkg::TL_AIW
   |vpiParameter:
-  \_parameter: (top_pkg::TL_DIW), line:7:18, endln:7:24
+  \_parameter: (top_pkg::TL_DIW), line:7:18, endln:7:26
     |vpiParent:
     \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:2:1, endln:12:13
     |UINT:1
     |vpiTypespec:
-    \_ref_typespec: (top_pkg::TL_DIW)
+    \_ref_typespec: (top_pkg::TL_DIW), line:7:14, endln:7:17
       |vpiParent:
-      \_parameter: (top_pkg::TL_DIW), line:7:18, endln:7:24
+      \_parameter: (top_pkg::TL_DIW), line:7:18, endln:7:26
       |vpiFullName:top_pkg::TL_DIW
       |vpiActual:
       \_int_typespec: , line:7:14, endln:7:17
@@ -870,14 +1431,14 @@ design: (unnamed)
     |vpiName:TL_DIW
     |vpiFullName:top_pkg::TL_DIW
   |vpiParameter:
-  \_parameter: (top_pkg::TL_DUW), line:8:18, endln:8:24
+  \_parameter: (top_pkg::TL_DUW), line:8:18, endln:8:27
     |vpiParent:
     \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:2:1, endln:12:13
     |UINT:16
     |vpiTypespec:
-    \_ref_typespec: (top_pkg::TL_DUW)
+    \_ref_typespec: (top_pkg::TL_DUW), line:8:14, endln:8:17
       |vpiParent:
-      \_parameter: (top_pkg::TL_DUW), line:8:18, endln:8:24
+      \_parameter: (top_pkg::TL_DUW), line:8:18, endln:8:27
       |vpiFullName:top_pkg::TL_DUW
       |vpiActual:
       \_int_typespec: , line:8:14, endln:8:17
@@ -886,13 +1447,13 @@ design: (unnamed)
     |vpiName:TL_DUW
     |vpiFullName:top_pkg::TL_DUW
   |vpiParameter:
-  \_parameter: (top_pkg::TL_DBW), line:9:18, endln:9:24
+  \_parameter: (top_pkg::TL_DBW), line:9:18, endln:9:35
     |vpiParent:
     \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:2:1, endln:12:13
     |vpiTypespec:
-    \_ref_typespec: (top_pkg::TL_DBW)
+    \_ref_typespec: (top_pkg::TL_DBW), line:9:14, endln:9:17
       |vpiParent:
-      \_parameter: (top_pkg::TL_DBW), line:9:18, endln:9:24
+      \_parameter: (top_pkg::TL_DBW), line:9:18, endln:9:35
       |vpiFullName:top_pkg::TL_DBW
       |vpiActual:
       \_int_typespec: , line:9:14, endln:9:17
@@ -901,13 +1462,13 @@ design: (unnamed)
     |vpiName:TL_DBW
     |vpiFullName:top_pkg::TL_DBW
   |vpiParameter:
-  \_parameter: (top_pkg::TL_SZW), line:10:18, endln:10:24
+  \_parameter: (top_pkg::TL_SZW), line:10:18, endln:10:49
     |vpiParent:
     \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:2:1, endln:12:13
     |vpiTypespec:
-    \_ref_typespec: (top_pkg::TL_SZW)
+    \_ref_typespec: (top_pkg::TL_SZW), line:10:14, endln:10:17
       |vpiParent:
-      \_parameter: (top_pkg::TL_SZW), line:10:18, endln:10:24
+      \_parameter: (top_pkg::TL_SZW), line:10:18, endln:10:49
       |vpiFullName:top_pkg::TL_SZW
       |vpiActual:
       \_int_typespec: , line:10:14, endln:10:17
@@ -926,16 +1487,9 @@ design: (unnamed)
       |vpiDecompile:32
       |vpiSize:64
       |UINT:32
-      |vpiTypespec:
-      \_ref_typespec: (top_pkg)
-        |vpiParent:
-        \_constant: , line:4:24, endln:4:26
-        |vpiFullName:top_pkg
-        |vpiActual:
-        \_int_typespec: , line:4:14, endln:4:17
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (top_pkg::TL_AW), line:4:18, endln:4:23
+    \_parameter: (top_pkg::TL_AW), line:4:18, endln:4:26
   |vpiParamAssign:
   \_param_assign: , line:5:18, endln:5:26
     |vpiParent:
@@ -947,16 +1501,9 @@ design: (unnamed)
       |vpiDecompile:32
       |vpiSize:64
       |UINT:32
-      |vpiTypespec:
-      \_ref_typespec: (top_pkg)
-        |vpiParent:
-        \_constant: , line:5:24, endln:5:26
-        |vpiFullName:top_pkg
-        |vpiActual:
-        \_int_typespec: , line:5:14, endln:5:17
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (top_pkg::TL_DW), line:5:18, endln:5:23
+    \_parameter: (top_pkg::TL_DW), line:5:18, endln:5:26
   |vpiParamAssign:
   \_param_assign: , line:6:18, endln:6:26
     |vpiParent:
@@ -968,16 +1515,9 @@ design: (unnamed)
       |vpiDecompile:8
       |vpiSize:64
       |UINT:8
-      |vpiTypespec:
-      \_ref_typespec: (top_pkg)
-        |vpiParent:
-        \_constant: , line:6:25, endln:6:26
-        |vpiFullName:top_pkg
-        |vpiActual:
-        \_int_typespec: , line:6:14, endln:6:17
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (top_pkg::TL_AIW), line:6:18, endln:6:24
+    \_parameter: (top_pkg::TL_AIW), line:6:18, endln:6:26
   |vpiParamAssign:
   \_param_assign: , line:7:18, endln:7:26
     |vpiParent:
@@ -989,16 +1529,9 @@ design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
-      |vpiTypespec:
-      \_ref_typespec: (top_pkg)
-        |vpiParent:
-        \_constant: , line:7:25, endln:7:26
-        |vpiFullName:top_pkg
-        |vpiActual:
-        \_int_typespec: , line:7:14, endln:7:17
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (top_pkg::TL_DIW), line:7:18, endln:7:24
+    \_parameter: (top_pkg::TL_DIW), line:7:18, endln:7:26
   |vpiParamAssign:
   \_param_assign: , line:8:18, endln:8:27
     |vpiParent:
@@ -1010,16 +1543,9 @@ design: (unnamed)
       |vpiDecompile:16
       |vpiSize:64
       |UINT:16
-      |vpiTypespec:
-      \_ref_typespec: (top_pkg)
-        |vpiParent:
-        \_constant: , line:8:25, endln:8:27
-        |vpiFullName:top_pkg
-        |vpiActual:
-        \_int_typespec: , line:8:14, endln:8:17
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (top_pkg::TL_DUW), line:8:18, endln:8:24
+    \_parameter: (top_pkg::TL_DUW), line:8:18, endln:8:27
   |vpiParamAssign:
   \_param_assign: , line:9:18, endln:9:35
     |vpiParent:
@@ -1035,6 +1561,8 @@ design: (unnamed)
         \_operation: , line:9:26, endln:9:34
         |vpiName:TL_DW
         |vpiFullName:top_pkg::TL_DW
+        |vpiActual:
+        \_parameter: (top_pkg::TL_DW), line:5:18, endln:5:26
       |vpiOperand:
       \_constant: , line:9:33, endln:9:34
         |vpiParent:
@@ -1044,7 +1572,7 @@ design: (unnamed)
         |UINT:3
         |vpiConstType:9
     |vpiLhs:
-    \_parameter: (top_pkg::TL_DBW), line:9:18, endln:9:24
+    \_parameter: (top_pkg::TL_DBW), line:9:18, endln:9:35
   |vpiParamAssign:
   \_param_assign: , line:10:18, endln:10:49
     |vpiParent:
@@ -1068,6 +1596,8 @@ design: (unnamed)
             \_sys_func_call: ($clog2), line:10:32, endln:10:46
             |vpiName:TL_DBW
             |vpiFullName:top_pkg::TL_DBW
+            |vpiActual:
+            \_parameter: (top_pkg::TL_DBW), line:9:18, endln:9:35
           |vpiName:$clog2
         |vpiOperand:
         \_constant: , line:10:47, endln:10:48
@@ -1079,466 +1609,95 @@ design: (unnamed)
           |vpiConstType:9
       |vpiName:$clog2
     |vpiLhs:
-    \_parameter: (top_pkg::TL_SZW), line:10:18, endln:10:24
-  |vpiDefName:top_pkg
-|uhdmallClasses:
-\_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:1:3, endln:27:11
-  |vpiParent:
-  \_design: (unnamed)
-  |vpiName:work@mailbox
-  |vpiMethod:
-  \_function: (work@mailbox::new), line:3:5, endln:4:16
-    |vpiParent:
-    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:1:3, endln:27:11
-    |vpiName:new
-    |vpiFullName:work@mailbox::new
-    |vpiMethod:1
-    |vpiReturn:
-    \_class_var: (work@mailbox::new), line:3:23, endln:3:28
-      |vpiParent:
-      \_function: (work@mailbox::new), line:3:5, endln:4:16
-      |vpiTypespec:
-      \_ref_typespec: (work@mailbox::new)
-        |vpiParent:
-        \_class_var: (work@mailbox::new), line:3:23, endln:3:28
-        |vpiFullName:work@mailbox::new
-        |vpiActual:
-        \_class_typespec: 
-      |vpiFullName:work@mailbox::new
-    |vpiIODecl:
-    \_io_decl: (bound), line:3:23, endln:3:28
-      |vpiParent:
-      \_function: (work@mailbox::new), line:3:5, endln:4:16
-      |vpiDirection:1
-      |vpiName:bound
-      |vpiExpr:
-      \_constant: , line:3:31, endln:3:32
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-      |vpiTypedef:
-      \_ref_typespec: (work@mailbox::new::bound)
-        |vpiParent:
-        \_io_decl: (bound), line:3:23, endln:3:28
-        |vpiFullName:work@mailbox::new::bound
-        |vpiActual:
-        \_int_typespec: , line:3:19, endln:3:22
-  |vpiMethod:
-  \_function: (work@mailbox::num), line:6:5, endln:7:16
-    |vpiParent:
-    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:1:3, endln:27:11
-    |vpiName:num
-    |vpiFullName:work@mailbox::num
-    |vpiMethod:1
-    |vpiVisibility:1
-    |vpiReturn:
-    \_int_var: (work@mailbox::num), line:6:14, endln:6:17
-      |vpiParent:
-      \_function: (work@mailbox::num), line:6:5, endln:7:16
-      |vpiTypespec:
-      \_ref_typespec: (work@mailbox::num)
-        |vpiParent:
-        \_int_var: (work@mailbox::num), line:6:14, endln:6:17
-        |vpiFullName:work@mailbox::num
-        |vpiActual:
-        \_int_typespec: , line:6:14, endln:6:17
-      |vpiFullName:work@mailbox::num
-      |vpiSigned:1
-  |vpiMethod:
-  \_task: (work@mailbox::put), line:9:5, endln:10:12
-    |vpiParent:
-    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:1:3, endln:27:11
-    |vpiName:put
-    |vpiFullName:work@mailbox::put
-    |vpiMethod:1
-    |vpiVisibility:1
-    |vpiIODecl:
-    \_io_decl: (message), line:9:15, endln:9:22
-      |vpiParent:
-      \_task: (work@mailbox::put), line:9:5, endln:10:12
-      |vpiDirection:1
-      |vpiName:message
-  |vpiMethod:
-  \_function: (work@mailbox::try_put), line:12:5, endln:13:16
-    |vpiParent:
-    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:1:3, endln:27:11
-    |vpiName:try_put
-    |vpiFullName:work@mailbox::try_put
-    |vpiMethod:1
-    |vpiVisibility:1
-    |vpiReturn:
-    \_logic_var: (work@mailbox::try_put)
-      |vpiParent:
-      \_function: (work@mailbox::try_put), line:12:5, endln:13:16
-      |vpiFullName:work@mailbox::try_put
-    |vpiIODecl:
-    \_io_decl: (message), line:12:23, endln:12:30
-      |vpiParent:
-      \_function: (work@mailbox::try_put), line:12:5, endln:13:16
-      |vpiDirection:1
-      |vpiName:message
-  |vpiMethod:
-  \_task: (work@mailbox::get), line:15:5, endln:16:12
-    |vpiParent:
-    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:1:3, endln:27:11
-    |vpiName:get
-    |vpiFullName:work@mailbox::get
-    |vpiMethod:1
-    |vpiVisibility:1
-    |vpiIODecl:
-    \_io_decl: (message), line:15:19, endln:15:26
-      |vpiParent:
-      \_task: (work@mailbox::get), line:15:5, endln:16:12
-      |vpiDirection:6
-      |vpiName:message
-  |vpiMethod:
-  \_function: (work@mailbox::try_get), line:18:5, endln:19:16
-    |vpiParent:
-    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:1:3, endln:27:11
-    |vpiName:try_get
-    |vpiFullName:work@mailbox::try_get
-    |vpiMethod:1
-    |vpiVisibility:1
-    |vpiReturn:
-    \_int_var: (work@mailbox::try_get), line:18:14, endln:18:17
-      |vpiParent:
-      \_function: (work@mailbox::try_get), line:18:5, endln:19:16
-      |vpiTypespec:
-      \_ref_typespec: (work@mailbox::try_get)
-        |vpiParent:
-        \_int_var: (work@mailbox::try_get), line:18:14, endln:18:17
-        |vpiFullName:work@mailbox::try_get
-        |vpiActual:
-        \_int_typespec: , line:18:14, endln:18:17
-      |vpiFullName:work@mailbox::try_get
-      |vpiSigned:1
-    |vpiIODecl:
-    \_io_decl: (message), line:18:31, endln:18:38
-      |vpiParent:
-      \_function: (work@mailbox::try_get), line:18:5, endln:19:16
-      |vpiDirection:6
-      |vpiName:message
-  |vpiMethod:
-  \_task: (work@mailbox::peek), line:21:5, endln:22:12
-    |vpiParent:
-    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:1:3, endln:27:11
-    |vpiName:peek
-    |vpiFullName:work@mailbox::peek
-    |vpiMethod:1
-    |vpiVisibility:1
-    |vpiIODecl:
-    \_io_decl: (message), line:21:20, endln:21:27
-      |vpiParent:
-      \_task: (work@mailbox::peek), line:21:5, endln:22:12
-      |vpiDirection:6
-      |vpiName:message
-  |vpiMethod:
-  \_function: (work@mailbox::try_peek), line:24:5, endln:25:16
-    |vpiParent:
-    \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:1:3, endln:27:11
-    |vpiName:try_peek
-    |vpiFullName:work@mailbox::try_peek
-    |vpiMethod:1
-    |vpiVisibility:1
-    |vpiReturn:
-    \_int_var: (work@mailbox::try_peek), line:24:14, endln:24:17
-      |vpiParent:
-      \_function: (work@mailbox::try_peek), line:24:5, endln:25:16
-      |vpiTypespec:
-      \_ref_typespec: (work@mailbox::try_peek)
-        |vpiParent:
-        \_int_var: (work@mailbox::try_peek), line:24:14, endln:24:17
-        |vpiFullName:work@mailbox::try_peek
-        |vpiActual:
-        \_int_typespec: , line:24:14, endln:24:17
-      |vpiFullName:work@mailbox::try_peek
-      |vpiSigned:1
-    |vpiIODecl:
-    \_io_decl: (message), line:24:31, endln:24:38
-      |vpiParent:
-      \_function: (work@mailbox::try_peek), line:24:5, endln:25:16
-      |vpiDirection:6
-      |vpiName:message
-|uhdmallClasses:
-\_class_defn: (work@process), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:30:3, endln:52:11
-  |vpiParent:
-  \_design: (unnamed)
-  |vpiName:work@process
+    \_parameter: (top_pkg::TL_SZW), line:10:18, endln:10:49
   |vpiTypedef:
-  \_enum_typespec: (state), line:32:5, endln:32:74
+  \_int_typespec: , line:4:14, endln:4:17
     |vpiParent:
-    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:30:3, endln:52:11
-    |vpiName:state
-    |vpiEnumConst:
-    \_enum_const: (FINISHED), line:32:20, endln:32:28
-      |vpiParent:
-      \_enum_typespec: (state), line:32:5, endln:32:74
-      |vpiName:FINISHED
-      |INT:0
-      |vpiDecompile:0
-      |vpiSize:64
-    |vpiEnumConst:
-    \_enum_const: (RUNNING), line:32:30, endln:32:37
-      |vpiParent:
-      \_enum_typespec: (state), line:32:5, endln:32:74
-      |vpiName:RUNNING
-      |INT:1
-      |vpiDecompile:1
-      |vpiSize:64
-    |vpiEnumConst:
-    \_enum_const: (WAITING), line:32:39, endln:32:46
-      |vpiParent:
-      \_enum_typespec: (state), line:32:5, endln:32:74
-      |vpiName:WAITING
-      |INT:2
-      |vpiDecompile:2
-      |vpiSize:64
-    |vpiEnumConst:
-    \_enum_const: (SUSPENDED), line:32:48, endln:32:57
-      |vpiParent:
-      \_enum_typespec: (state), line:32:5, endln:32:74
-      |vpiName:SUSPENDED
-      |INT:3
-      |vpiDecompile:3
-      |vpiSize:64
-    |vpiEnumConst:
-    \_enum_const: (KILLED), line:32:59, endln:32:65
-      |vpiParent:
-      \_enum_typespec: (state), line:32:5, endln:32:74
-      |vpiName:KILLED
-      |INT:4
-      |vpiDecompile:4
-      |vpiSize:64
-  |vpiMethod:
-  \_function: (work@process::self), line:34:5, endln:34:11
+    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:2:1, endln:12:13
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:5:14, endln:5:17
     |vpiParent:
-    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:30:3, endln:52:11
-    |vpiName:self
-    |vpiFullName:work@process::self
-    |vpiMethod:1
-    |vpiVisibility:1
-    |vpiReturn:
-    \_class_var: (work@process::self), line:34:21, endln:34:28
-      |vpiParent:
-      \_function: (work@process::self), line:34:5, endln:34:11
-      |vpiTypespec:
-      \_ref_typespec: (work@process::self)
-        |vpiParent:
-        \_class_var: (work@process::self), line:34:21, endln:34:28
-        |vpiFullName:work@process::self
-        |vpiActual:
-        \_class_typespec: , line:34:21, endln:34:28
-      |vpiFullName:work@process::self
-  |vpiMethod:
-  \_function: (work@process::status), line:37:5, endln:38:16
+    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:2:1, endln:12:13
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:6:14, endln:6:17
     |vpiParent:
-    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:30:3, endln:52:11
-    |vpiName:status
-    |vpiFullName:work@process::status
-    |vpiMethod:1
-    |vpiVisibility:1
-    |vpiReturn:
-    \_enum_var: (work@process::status), line:37:14, endln:37:19
-      |vpiParent:
-      \_function: (work@process::status), line:37:5, endln:38:16
-      |vpiTypespec:
-      \_ref_typespec: (work@process::status)
-        |vpiParent:
-        \_enum_var: (work@process::status), line:37:14, endln:37:19
-        |vpiFullName:work@process::status
-        |vpiActual:
-        \_enum_typespec: (state), line:32:5, endln:32:74
-      |vpiFullName:work@process::status
-  |vpiMethod:
-  \_task: (work@process::kill), line:40:5, endln:41:12
+    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:2:1, endln:12:13
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:7:14, endln:7:17
     |vpiParent:
-    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:30:3, endln:52:11
-    |vpiName:kill
-    |vpiFullName:work@process::kill
-    |vpiMethod:1
-    |vpiVisibility:1
-  |vpiMethod:
-  \_task: (work@process::await), line:43:5, endln:44:12
+    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:2:1, endln:12:13
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:8:14, endln:8:17
     |vpiParent:
-    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:30:3, endln:52:11
-    |vpiName:await
-    |vpiFullName:work@process::await
-    |vpiMethod:1
-    |vpiVisibility:1
-  |vpiMethod:
-  \_task: (work@process::suspend), line:46:5, endln:47:12
+    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:2:1, endln:12:13
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:9:14, endln:9:17
     |vpiParent:
-    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:30:3, endln:52:11
-    |vpiName:suspend
-    |vpiFullName:work@process::suspend
-    |vpiMethod:1
-    |vpiVisibility:1
-  |vpiMethod:
-  \_task: (work@process::resume), line:49:5, endln:50:12
+    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:2:1, endln:12:13
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:10:14, endln:10:17
     |vpiParent:
-    \_class_defn: (work@process), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:30:3, endln:52:11
-    |vpiName:resume
-    |vpiFullName:work@process::resume
-    |vpiMethod:1
-    |vpiVisibility:1
-|uhdmallClasses:
-\_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:55:3, endln:69:11
-  |vpiParent:
-  \_design: (unnamed)
-  |vpiName:work@semaphore
-  |vpiMethod:
-  \_function: (work@semaphore::new), line:57:5, endln:58:16
-    |vpiParent:
-    \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:55:3, endln:69:11
-    |vpiName:new
-    |vpiFullName:work@semaphore::new
-    |vpiMethod:1
-    |vpiReturn:
-    \_class_var: (work@semaphore::new), line:57:22, endln:57:30
-      |vpiParent:
-      \_function: (work@semaphore::new), line:57:5, endln:58:16
-      |vpiTypespec:
-      \_ref_typespec: (work@semaphore::new)
-        |vpiParent:
-        \_class_var: (work@semaphore::new), line:57:22, endln:57:30
-        |vpiFullName:work@semaphore::new
-        |vpiActual:
-        \_class_typespec: 
-      |vpiFullName:work@semaphore::new
-    |vpiIODecl:
-    \_io_decl: (keyCount), line:57:22, endln:57:30
-      |vpiParent:
-      \_function: (work@semaphore::new), line:57:5, endln:58:16
-      |vpiDirection:1
-      |vpiName:keyCount
-      |vpiExpr:
-      \_constant: , line:57:33, endln:57:34
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-      |vpiTypedef:
-      \_ref_typespec: (work@semaphore::new::keyCount)
-        |vpiParent:
-        \_io_decl: (keyCount), line:57:22, endln:57:30
-        |vpiFullName:work@semaphore::new::keyCount
-        |vpiActual:
-        \_int_typespec: , line:57:18, endln:57:21
-  |vpiMethod:
-  \_task: (work@semaphore::put), line:60:5, endln:61:12
-    |vpiParent:
-    \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:55:3, endln:69:11
-    |vpiName:put
-    |vpiFullName:work@semaphore::put
-    |vpiMethod:1
-    |vpiVisibility:1
-    |vpiIODecl:
-    \_io_decl: (keyCount), line:60:18, endln:60:26
-      |vpiParent:
-      \_task: (work@semaphore::put), line:60:5, endln:61:12
-      |vpiDirection:1
-      |vpiName:keyCount
-      |vpiExpr:
-      \_constant: , line:60:29, endln:60:30
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-      |vpiTypedef:
-      \_ref_typespec: (work@semaphore::put::keyCount)
-        |vpiParent:
-        \_io_decl: (keyCount), line:60:18, endln:60:26
-        |vpiFullName:work@semaphore::put::keyCount
-        |vpiActual:
-        \_int_typespec: , line:60:14, endln:60:17
-  |vpiMethod:
-  \_task: (work@semaphore::get), line:63:5, endln:64:12
-    |vpiParent:
-    \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:55:3, endln:69:11
-    |vpiName:get
-    |vpiFullName:work@semaphore::get
-    |vpiMethod:1
-    |vpiVisibility:1
-    |vpiIODecl:
-    \_io_decl: (keyCount), line:63:18, endln:63:26
-      |vpiParent:
-      \_task: (work@semaphore::get), line:63:5, endln:64:12
-      |vpiDirection:1
-      |vpiName:keyCount
-      |vpiExpr:
-      \_constant: , line:63:29, endln:63:30
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-      |vpiTypedef:
-      \_ref_typespec: (work@semaphore::get::keyCount)
-        |vpiParent:
-        \_io_decl: (keyCount), line:63:18, endln:63:26
-        |vpiFullName:work@semaphore::get::keyCount
-        |vpiActual:
-        \_int_typespec: , line:63:14, endln:63:17
-  |vpiMethod:
-  \_function: (work@semaphore::try_get), line:66:5, endln:67:16
-    |vpiParent:
-    \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:55:3, endln:69:11
-    |vpiName:try_get
-    |vpiFullName:work@semaphore::try_get
-    |vpiMethod:1
-    |vpiVisibility:1
-    |vpiReturn:
-    \_int_var: (work@semaphore::try_get), line:66:14, endln:66:17
-      |vpiParent:
-      \_function: (work@semaphore::try_get), line:66:5, endln:67:16
-      |vpiTypespec:
-      \_ref_typespec: (work@semaphore::try_get)
-        |vpiParent:
-        \_int_var: (work@semaphore::try_get), line:66:14, endln:66:17
-        |vpiFullName:work@semaphore::try_get
-        |vpiActual:
-        \_int_typespec: , line:66:14, endln:66:17
-      |vpiFullName:work@semaphore::try_get
-      |vpiSigned:1
-    |vpiIODecl:
-    \_io_decl: (keyCount), line:66:30, endln:66:38
-      |vpiParent:
-      \_function: (work@semaphore::try_get), line:66:5, endln:67:16
-      |vpiDirection:1
-      |vpiName:keyCount
-      |vpiExpr:
-      \_constant: , line:66:41, endln:66:42
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-      |vpiTypedef:
-      \_ref_typespec: (work@semaphore::try_get::keyCount)
-        |vpiParent:
-        \_io_decl: (keyCount), line:66:30, endln:66:38
-        |vpiFullName:work@semaphore::try_get::keyCount
-        |vpiActual:
-        \_int_typespec: , line:66:26, endln:66:29
+    \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:2:1, endln:12:13
+    |vpiSigned:1
+  |vpiImportTypespec:
+  \_int_typespec: , line:4:14, endln:4:17
+  |vpiImportTypespec:
+  \_int_typespec: , line:5:14, endln:5:17
+  |vpiImportTypespec:
+  \_int_typespec: , line:6:14, endln:6:17
+  |vpiImportTypespec:
+  \_int_typespec: , line:7:14, endln:7:17
+  |vpiImportTypespec:
+  \_int_typespec: , line:8:14, endln:8:17
+  |vpiImportTypespec:
+  \_int_typespec: , line:9:14, endln:9:17
+  |vpiImportTypespec:
+  \_int_typespec: , line:10:14, endln:10:17
+  |vpiDefName:top_pkg
 |uhdmallModules:
 \_module_inst: work@tlul_adapter_host (work@tlul_adapter_host), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:14:3, endln:23:12
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@tlul_adapter_host
-  |vpiDefName:work@tlul_adapter_host
-  |vpiNet:
-  \_logic_net: (work@tlul_adapter_host.tl_o), line:16:12, endln:16:16
+  |vpiName:work@tlul_adapter_host
+  |vpiTypedef:
+  \_string_typespec: (a_param), line:17:7, endln:17:14
     |vpiParent:
-    \_cont_assign: , line:16:12, endln:19:6
-    |vpiName:tl_o
-    |vpiFullName:work@tlul_adapter_host.tl_o
-    |vpiNetType:1
-  |vpiNet:
+    \_module_inst: work@tlul_adapter_host (work@tlul_adapter_host), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:14:3, endln:23:12
+    |vpiName:a_param
+  |vpiTypedef:
+  \_string_typespec: (a_size), line:18:7, endln:18:13
+    |vpiParent:
+    \_module_inst: work@tlul_adapter_host (work@tlul_adapter_host), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:14:3, endln:23:12
+    |vpiName:a_size
+  |vpiImportTypespec:
+  \_string_typespec: (a_param), line:17:7, endln:17:14
+  |vpiImportTypespec:
+  \_string_typespec: (a_size), line:18:7, endln:18:13
+  |vpiImportTypespec:
   \_logic_net: (work@tlul_adapter_host.WordSize), line:18:35, endln:18:43
     |vpiParent:
-    \_operation: , line:18:18, endln:18:44
+    \_module_inst: work@tlul_adapter_host (work@tlul_adapter_host), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:14:3, endln:23:12
     |vpiName:WordSize
     |vpiFullName:work@tlul_adapter_host.WordSize
     |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@tlul_adapter_host.tl_o), line:16:12, endln:16:16
+    |vpiParent:
+    \_module_inst: work@tlul_adapter_host (work@tlul_adapter_host), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:14:3, endln:23:12
+    |vpiName:tl_o
+    |vpiFullName:work@tlul_adapter_host.tl_o
+    |vpiNetType:1
+  |vpiDefName:work@tlul_adapter_host
+  |vpiNet:
+  \_logic_net: (work@tlul_adapter_host.WordSize), line:18:35, endln:18:43
+  |vpiNet:
+  \_logic_net: (work@tlul_adapter_host.tl_o), line:16:12, endln:16:16
   |vpiContAssign:
   \_cont_assign: , line:16:12, endln:19:6
     |vpiParent:
@@ -1549,57 +1708,54 @@ design: (unnamed)
       \_cont_assign: , line:16:12, endln:19:6
       |vpiOpType:75
       |vpiOperand:
-      \_tagged_pattern: , line:17:18, endln:17:22
+      \_tagged_pattern: , line:17:7, endln:17:22
         |vpiParent:
         \_operation: , line:16:19, endln:19:6
         |vpiPattern:
         \_constant: , line:17:18, endln:17:22
+          |vpiParent:
+          \_operation: , line:16:19, endln:19:6
           |vpiDecompile:3'h0
           |vpiSize:3
           |HEX:0
           |vpiConstType:5
         |vpiTypespec:
-        \_ref_typespec: (work@tlul_adapter_host)
+        \_ref_typespec: (work@tlul_adapter_host.a_param), line:17:7, endln:17:14
           |vpiParent:
-          \_tagged_pattern: , line:17:18, endln:17:22
-          |vpiFullName:work@tlul_adapter_host
+          \_tagged_pattern: , line:17:7, endln:17:22
+          |vpiName:a_param
+          |vpiFullName:work@tlul_adapter_host.a_param
           |vpiActual:
           \_string_typespec: (a_param), line:17:7, endln:17:14
       |vpiOperand:
-      \_tagged_pattern: , line:18:18, endln:18:44
+      \_tagged_pattern: , line:18:7, endln:18:44
         |vpiParent:
         \_operation: , line:16:19, endln:19:6
         |vpiPattern:
         \_operation: , line:18:18, endln:18:44
           |vpiParent:
           \_operation: , line:16:19, endln:19:6
-          |vpiTypespec:
-          \_ref_typespec: (work@tlul_adapter_host)
-            |vpiParent:
-            \_operation: , line:18:18, endln:18:44
-            |vpiFullName:work@tlul_adapter_host
-            |vpiActual:
-            \_int_typespec: 
           |vpiOpType:67
           |vpiOperand:
           \_ref_obj: (work@tlul_adapter_host.WordSize), line:18:35, endln:18:43
             |vpiParent:
-            \_operation: , line:18:18, endln:18:44
+            \_module_inst: work@tlul_adapter_host (work@tlul_adapter_host), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:14:3, endln:23:12
             |vpiName:WordSize
             |vpiFullName:work@tlul_adapter_host.WordSize
             |vpiActual:
             \_logic_net: (work@tlul_adapter_host.WordSize), line:18:35, endln:18:43
         |vpiTypespec:
-        \_ref_typespec: (work@tlul_adapter_host)
+        \_ref_typespec: (work@tlul_adapter_host.a_size), line:18:7, endln:18:13
           |vpiParent:
-          \_tagged_pattern: , line:18:18, endln:18:44
-          |vpiFullName:work@tlul_adapter_host
+          \_tagged_pattern: , line:18:7, endln:18:44
+          |vpiName:a_size
+          |vpiFullName:work@tlul_adapter_host.a_size
           |vpiActual:
           \_string_typespec: (a_size), line:18:7, endln:18:13
     |vpiLhs:
     \_ref_obj: (work@tlul_adapter_host.tl_o), line:16:12, endln:16:16
       |vpiParent:
-      \_cont_assign: , line:16:12, endln:19:6
+      \_module_inst: work@tlul_adapter_host (work@tlul_adapter_host), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:14:3, endln:23:12
       |vpiName:tl_o
       |vpiFullName:work@tlul_adapter_host.tl_o
       |vpiActual:
@@ -1608,19 +1764,97 @@ design: (unnamed)
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
+  |vpiName:work@top
+  |vpiVariables:
+  \_struct_var: (work@top.XYZ), line:26:25, endln:26:28
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
+    |vpiTypespec:
+    \_ref_typespec: (work@top.XYZ), line:26:5, endln:26:24
+      |vpiParent:
+      \_struct_var: (work@top.XYZ), line:26:25, endln:26:28
+      |vpiFullName:work@top.XYZ
+      |vpiActual:
+      \_struct_typespec: , line:26:5, endln:26:24
+    |vpiName:XYZ
+    |vpiFullName:work@top.XYZ
+    |vpiVisibility:1
+    |vpiExpr:
+    \_operation: , line:26:31, endln:26:38
+      |vpiParent:
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
+      |vpiOpType:76
+      |vpiOperand:
+      \_constant: , line:26:33, endln:26:34
+        |vpiParent:
+        \_operation: , line:26:31, endln:26:38
+        |vpiDecompile:3
+        |vpiSize:96
+        |UINT:3
+        |vpiConstType:9
+      |vpiOperand:
+      \_operation: , line:26:35, endln:26:36
+        |vpiParent:
+        \_operation: , line:26:31, endln:26:38
+        |vpiOpType:33
+        |vpiOperand:
+        \_constant: , line:26:35, endln:26:36
+          |vpiParent:
+          \_operation: , line:26:35, endln:26:36
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+  |vpiVariables:
+  \_int_var: (work@top.a), line:28:9, endln:28:10
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
+    |vpiTypespec:
+    \_ref_typespec: (work@top.a), line:28:5, endln:28:8
+      |vpiParent:
+      \_int_var: (work@top.a), line:28:9, endln:28:10
+      |vpiFullName:work@top.a
+      |vpiActual:
+      \_int_typespec: , line:28:5, endln:28:8
+    |vpiName:a
+    |vpiFullName:work@top.a
+    |vpiSigned:1
+    |vpiVisibility:1
+  |vpiVariables:
+  \_int_var: (work@top.b), line:28:11, endln:28:12
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
+    |vpiTypespec:
+    \_ref_typespec: (work@top.b), line:28:5, endln:28:8
+      |vpiParent:
+      \_int_var: (work@top.b), line:28:11, endln:28:12
+      |vpiFullName:work@top.b
+      |vpiActual:
+      \_int_typespec: , line:28:5, endln:28:8
+    |vpiName:b
+    |vpiFullName:work@top.b
+    |vpiSigned:1
+    |vpiVisibility:1
+  |vpiVariables:
+  \_int_var: (work@top.c), line:28:13, endln:28:14
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
+    |vpiTypespec:
+    \_ref_typespec: (work@top.c), line:28:5, endln:28:8
+      |vpiParent:
+      \_int_var: (work@top.c), line:28:13, endln:28:14
+      |vpiFullName:work@top.c
+      |vpiActual:
+      \_int_typespec: , line:28:5, endln:28:8
+    |vpiName:c
+    |vpiFullName:work@top.c
+    |vpiSigned:1
+    |vpiVisibility:1
   |vpiParameter:
-  \_parameter: (work@top.HartSelLen), line:35:14, endln:35:24
+  \_parameter: (work@top.HartSelLen), line:35:14, endln:35:28
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
     |UINT:2
-    |vpiTypespec:
-    \_ref_typespec: (work@top.HartSelLen)
-      |vpiParent:
-      \_parameter: (work@top.HartSelLen), line:35:14, endln:35:24
-      |vpiFullName:work@top.HartSelLen
-      |vpiActual:
-      \_int_typespec: , line:35:3, endln:35:28
     |vpiLocalParam:1
     |vpiName:HartSelLen
     |vpiFullName:work@top.HartSelLen
@@ -1635,131 +1869,222 @@ design: (unnamed)
       |vpiDecompile:2
       |vpiSize:64
       |UINT:2
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:35:27, endln:35:28
-        |vpiFullName:work@top
-        |vpiActual:
-        \_int_typespec: , line:35:3, endln:35:28
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@top.HartSelLen), line:35:14, endln:35:24
+    \_parameter: (work@top.HartSelLen), line:35:14, endln:35:28
   |vpiTypedef:
   \_struct_typespec: (ab_t), line:27:13, endln:27:33
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
     |vpiName:ab_t
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
     |vpiTypespecMember:
-    \_typespec_member: (a), line:27:25, endln:27:26
+    \_typespec_member: (a), line:27:21, endln:27:32
       |vpiParent:
       \_struct_typespec: (ab_t), line:27:13, endln:27:33
       |vpiName:a
       |vpiTypespec:
-      \_ref_typespec: (work@top.ab_t.a)
+      \_ref_typespec: (work@top.ab_t.a), line:27:21, endln:27:24
         |vpiParent:
-        \_typespec_member: (a), line:27:25, endln:27:26
+        \_typespec_member: (a), line:27:21, endln:27:32
         |vpiFullName:work@top.ab_t.a
         |vpiActual:
         \_int_typespec: , line:27:21, endln:27:24
-      |vpiRefFile:${SURELOG_DIR}/tests/CastTypespec/dut.sv
-      |vpiRefLineNo:27
-      |vpiRefColumnNo:21
-      |vpiRefEndLineNo:27
-      |vpiRefEndColumnNo:24
     |vpiTypespecMember:
-    \_typespec_member: (b), line:27:27, endln:27:31
+    \_typespec_member: (b), line:27:21, endln:27:32
       |vpiParent:
       \_struct_typespec: (ab_t), line:27:13, endln:27:33
       |vpiName:b
       |vpiTypespec:
-      \_ref_typespec: (work@top.ab_t.b)
+      \_ref_typespec: (work@top.ab_t.b), line:27:21, endln:27:24
         |vpiParent:
-        \_typespec_member: (b), line:27:27, endln:27:31
+        \_typespec_member: (b), line:27:21, endln:27:32
         |vpiFullName:work@top.ab_t.b
         |vpiActual:
-        \_array_typespec: 
-      |vpiRefFile:${SURELOG_DIR}/tests/CastTypespec/dut.sv
-      |vpiRefLineNo:27
-      |vpiRefColumnNo:21
-      |vpiRefEndLineNo:27
-      |vpiRefEndColumnNo:24
+        \_array_typespec: , line:27:28, endln:27:31
+  |vpiTypedef:
+  \_int_typespec: , line:27:21, endln:27:24
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:27:21, endln:27:24
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
+    |vpiSigned:1
+  |vpiTypedef:
+  \_array_typespec: , line:27:28, endln:27:31
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
+    |vpiRange:
+    \_range: , line:27:29, endln:27:30
+      |vpiParent:
+      \_array_typespec: , line:27:28, endln:27:31
+      |vpiRightRange:
+      \_operation: , line:27:29, endln:27:30
+        |vpiParent:
+        \_range: , line:27:29, endln:27:30
+        |vpiOpType:11
+        |vpiOperand:
+        \_constant: , line:27:29, endln:27:30
+          |vpiParent:
+          \_range: , line:27:29, endln:27:30
+          |vpiDecompile:4
+          |vpiSize:64
+          |UINT:4
+          |vpiConstType:9
+    |vpiElemTypespec:
+    \_ref_typespec: (work@top.ab_t.b), line:27:21, endln:27:24
+      |vpiParent:
+      \_typespec_member: (b), line:27:21, endln:27:32
+      |vpiFullName:work@top.ab_t.b
+      |vpiActual:
+      \_int_typespec: , line:27:21, endln:27:24
+  |vpiTypedef:
+  \_struct_typespec: , line:26:5, endln:26:24
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
+    |vpiTypespecMember:
+    \_typespec_member: (X), line:26:13, endln:26:23
+      |vpiParent:
+      \_struct_typespec: , line:26:5, endln:26:24
+      |vpiName:X
+      |vpiTypespec:
+      \_ref_typespec: (work@top.X), line:26:13, endln:26:16
+        |vpiParent:
+        \_typespec_member: (X), line:26:13, endln:26:23
+        |vpiFullName:work@top.X
+        |vpiActual:
+        \_int_typespec: , line:26:13, endln:26:16
+    |vpiTypespecMember:
+    \_typespec_member: (Y), line:26:13, endln:26:23
+      |vpiParent:
+      \_struct_typespec: , line:26:5, endln:26:24
+      |vpiName:Y
+      |vpiTypespec:
+      \_ref_typespec: (work@top.Y), line:26:13, endln:26:16
+        |vpiParent:
+        \_typespec_member: (Y), line:26:13, endln:26:23
+        |vpiFullName:work@top.Y
+        |vpiActual:
+        \_int_typespec: , line:26:13, endln:26:16
+    |vpiTypespecMember:
+    \_typespec_member: (Z), line:26:13, endln:26:23
+      |vpiParent:
+      \_struct_typespec: , line:26:5, endln:26:24
+      |vpiName:Z
+      |vpiTypespec:
+      \_ref_typespec: (work@top.Z), line:26:13, endln:26:16
+        |vpiParent:
+        \_typespec_member: (Z), line:26:13, endln:26:23
+        |vpiFullName:work@top.Z
+        |vpiActual:
+        \_int_typespec: , line:26:13, endln:26:16
+  |vpiTypedef:
+  \_int_typespec: , line:26:13, endln:26:16
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:26:13, endln:26:16
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:26:13, endln:26:16
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:28:5, endln:28:8
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:28:5, endln:28:8
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:28:5, endln:28:8
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
+    |vpiSigned:1
+  |vpiImportTypespec:
+  \_struct_typespec: (ab_t), line:27:13, endln:27:33
+  |vpiImportTypespec:
+  \_int_typespec: , line:27:21, endln:27:24
+  |vpiImportTypespec:
+  \_int_typespec: , line:27:21, endln:27:24
+  |vpiImportTypespec:
+  \_array_typespec: , line:27:28, endln:27:31
+  |vpiImportTypespec:
+  \_struct_typespec: , line:26:5, endln:26:24
+  |vpiImportTypespec:
+  \_int_typespec: , line:26:13, endln:26:16
+  |vpiImportTypespec:
+  \_int_typespec: , line:26:13, endln:26:16
+  |vpiImportTypespec:
+  \_int_typespec: , line:26:13, endln:26:16
+  |vpiImportTypespec:
+  \_struct_var: (work@top.XYZ), line:26:25, endln:26:28
+  |vpiImportTypespec:
+  \_int_typespec: , line:28:5, endln:28:8
+  |vpiImportTypespec:
+  \_int_var: (work@top.a), line:28:9, endln:28:10
+  |vpiImportTypespec:
+  \_int_typespec: , line:28:5, endln:28:8
+  |vpiImportTypespec:
+  \_int_var: (work@top.b), line:28:11, endln:28:12
+  |vpiImportTypespec:
+  \_int_typespec: , line:28:5, endln:28:8
+  |vpiImportTypespec:
+  \_int_var: (work@top.c), line:28:13, endln:28:14
+  |vpiImportTypespec:
+  \_logic_net: (work@top.selected_hart), line:37:9, endln:37:22
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
+    |vpiName:selected_hart
+    |vpiFullName:work@top.selected_hart
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@top.NrHarts), line:37:41, endln:37:48
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
+    |vpiName:NrHarts
+    |vpiFullName:work@top.NrHarts
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@top.dmcontrol_q), line:38:20, endln:38:31
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
+    |vpiName:dmcontrol_q
+    |vpiFullName:work@top.dmcontrol_q
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@top.resumereq), line:38:32, endln:38:41
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
+    |vpiName:resumereq
+    |vpiFullName:work@top.resumereq
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@top.resumereq_o), line:38:7, endln:38:18
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
+    |vpiName:resumereq_o
+    |vpiFullName:work@top.resumereq_o
+    |vpiNetType:1
   |vpiDefName:work@top
   |vpiNet:
-  \_logic_net: (work@top.XYZ), line:26:25, endln:26:28
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
-    |vpiTypespec:
-    \_ref_typespec: (work@top.XYZ)
-      |vpiParent:
-      \_logic_net: (work@top.XYZ), line:26:25, endln:26:28
-      |vpiFullName:work@top.XYZ
-      |vpiActual:
-      \_struct_typespec: , line:26:5, endln:26:38
-    |vpiName:XYZ
-    |vpiFullName:work@top.XYZ
+  \_logic_net: (work@top.selected_hart), line:37:9, endln:37:22
   |vpiNet:
-  \_logic_net: (work@top.a), line:28:9, endln:28:10
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
-    |vpiTypespec:
-    \_ref_typespec: (work@top.a)
-      |vpiParent:
-      \_logic_net: (work@top.a), line:28:9, endln:28:10
-      |vpiFullName:work@top.a
-      |vpiActual:
-      \_int_typespec: , line:28:5, endln:28:8
-    |vpiName:a
-    |vpiFullName:work@top.a
+  \_logic_net: (work@top.NrHarts), line:37:41, endln:37:48
   |vpiNet:
-  \_logic_net: (work@top.b), line:28:11, endln:28:12
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
-    |vpiTypespec:
-    \_ref_typespec: (work@top.b)
-      |vpiParent:
-      \_logic_net: (work@top.b), line:28:11, endln:28:12
-      |vpiFullName:work@top.b
-      |vpiActual:
-      \_int_typespec: , line:28:5, endln:28:8
-    |vpiName:b
-    |vpiFullName:work@top.b
+  \_logic_net: (work@top.dmcontrol_q), line:38:20, endln:38:31
   |vpiNet:
-  \_logic_net: (work@top.c), line:28:13, endln:28:14
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
-    |vpiTypespec:
-    \_ref_typespec: (work@top.c)
-      |vpiParent:
-      \_logic_net: (work@top.c), line:28:13, endln:28:14
-      |vpiFullName:work@top.c
-      |vpiActual:
-      \_int_typespec: , line:28:5, endln:28:8
-    |vpiName:c
-    |vpiFullName:work@top.c
+  \_logic_net: (work@top.resumereq), line:38:32, endln:38:41
   |vpiNet:
-  \_logic_net: (work@top.p_outmux.selected_hart), line:37:9, endln:37:22
-    |vpiParent:
-    \_operation: , line:37:9, endln:37:49
-    |vpiName:selected_hart
-    |vpiFullName:work@top.p_outmux.selected_hart
-    |vpiNetType:1
-  |vpiNet:
-  \_logic_net: (work@top.p_outmux.NrHarts), line:37:41, endln:37:48
-    |vpiParent:
-    \_operation: , line:37:25, endln:37:49
-    |vpiName:NrHarts
-    |vpiFullName:work@top.p_outmux.NrHarts
-    |vpiNetType:1
-  |vpiNet:
-  \_logic_net: (work@top.p_outmux.resumereq_o), line:38:7, endln:38:18
-    |vpiParent:
-    \_assignment: , line:38:7, endln:38:41
-    |vpiName:resumereq_o
-    |vpiFullName:work@top.p_outmux.resumereq_o
-    |vpiNetType:1
+  \_logic_net: (work@top.resumereq_o), line:38:7, endln:38:18
   |vpiProcess:
   \_initial: , line:30:5, endln:33:8
     |vpiParent:
@@ -1770,23 +2095,24 @@ design: (unnamed)
       \_initial: , line:30:5, endln:33:8
       |vpiFullName:work@top
       |vpiVariables:
-      \_struct_var: (work@top.v1), line:31:12, endln:31:14
+      \_struct_var: (work@top), line:31:7, endln:31:11
         |vpiParent:
-        \_array_var: (work@top.v1), line:31:12, endln:31:14
+        \_begin: (work@top), line:30:13, endln:33:8
         |vpiTypespec:
-        \_ref_typespec: (work@top.v1)
+        \_ref_typespec: (work@top.ab_t), line:31:7, endln:31:11
           |vpiParent:
-          \_struct_var: (work@top.v1), line:31:12, endln:31:14
-          |vpiFullName:work@top.v1
+          \_struct_var: (work@top), line:31:7, endln:31:11
+          |vpiName:ab_t
+          |vpiFullName:work@top.ab_t
           |vpiActual:
           \_struct_typespec: (ab_t), line:27:13, endln:27:33
-        |vpiFullName:work@top.v1
+        |vpiFullName:work@top
       |vpiVariables:
       \_array_var: (work@top.v1), line:31:12, endln:31:14
         |vpiParent:
         \_begin: (work@top), line:30:13, endln:33:8
         |vpiTypespec:
-        \_ref_typespec: (work@top.v1)
+        \_ref_typespec: (work@top.v1), line:31:7, endln:31:11
           |vpiParent:
           \_array_var: (work@top.v1), line:31:12, endln:31:14
           |vpiFullName:work@top.v1
@@ -1795,8 +2121,66 @@ design: (unnamed)
         |vpiName:v1
         |vpiFullName:work@top.v1
         |vpiArrayType:1
-        |vpiReg:
-        \_struct_var: (work@top.v1), line:31:12, endln:31:14
+      |vpiRegArray:
+      \_array_var: (work@top.v1), line:31:12, endln:31:14
+      |vpiTypedef:
+      \_array_typespec: , line:31:12, endln:31:25
+        |vpiParent:
+        \_begin: (work@top), line:30:13, endln:33:8
+        |vpiRange:
+        \_range: , line:31:14, endln:31:19
+          |vpiParent:
+          \_array_typespec: , line:31:12, endln:31:25
+          |vpiLeftRange:
+          \_constant: , line:31:15, endln:31:16
+            |vpiParent:
+            \_range: , line:31:14, endln:31:19
+            |vpiDecompile:1
+            |vpiSize:64
+            |UINT:1
+            |vpiConstType:9
+          |vpiRightRange:
+          \_constant: , line:31:17, endln:31:18
+            |vpiParent:
+            \_range: , line:31:14, endln:31:19
+            |vpiDecompile:0
+            |vpiSize:64
+            |UINT:0
+            |vpiConstType:9
+        |vpiRange:
+        \_range: , line:31:20, endln:31:25
+          |vpiParent:
+          \_array_typespec: , line:31:12, endln:31:25
+          |vpiLeftRange:
+          \_constant: , line:31:21, endln:31:22
+            |vpiParent:
+            \_range: , line:31:20, endln:31:25
+            |vpiDecompile:2
+            |vpiSize:64
+            |UINT:2
+            |vpiConstType:9
+          |vpiRightRange:
+          \_constant: , line:31:23, endln:31:24
+            |vpiParent:
+            \_range: , line:31:20, endln:31:25
+            |vpiDecompile:0
+            |vpiSize:64
+            |UINT:0
+            |vpiConstType:9
+        |vpiElemTypespec:
+        \_ref_typespec: (work@top.ab_t), line:31:7, endln:31:11
+          |vpiParent:
+          \_array_typespec: , line:31:12, endln:31:25
+          |vpiName:ab_t
+          |vpiFullName:work@top.ab_t
+          |vpiActual:
+          \_struct_typespec: (ab_t), line:27:13, endln:27:33
+      |vpiImportTypespec:
+      \_struct_var: (work@top), line:31:7, endln:31:11
+      |vpiImportTypespec:
+      \_array_typespec: , line:31:12, endln:31:25
+      |vpiImportTypespec:
+      \_array_var: (work@top.v1), line:31:12, endln:31:14
       |vpiStmt:
       \_assignment: , line:32:7, endln:32:38
         |vpiParent:
@@ -1810,6 +2194,8 @@ design: (unnamed)
           |vpiOpType:76
           |vpiOperand:
           \_constant: , line:32:14, endln:32:15
+            |vpiParent:
+            \_operation: , line:32:12, endln:32:38
             |vpiDecompile:2
             |vpiSize:64
             |UINT:2
@@ -1826,6 +2212,8 @@ design: (unnamed)
               |vpiOpType:76
               |vpiOperand:
               \_constant: , line:32:18, endln:32:19
+                |vpiParent:
+                \_operation: , line:32:16, endln:32:36
                 |vpiDecompile:3
                 |vpiSize:64
                 |UINT:3
@@ -1847,7 +2235,7 @@ design: (unnamed)
                     |vpiName:a
                     |vpiFullName:work@top.a
                     |vpiActual:
-                    \_logic_net: (work@top.a), line:28:9, endln:28:10
+                    \_int_var: (work@top.a), line:28:9, endln:28:10
                   |vpiOperand:
                   \_operation: , line:32:24, endln:32:33
                     |vpiParent:
@@ -1855,6 +2243,8 @@ design: (unnamed)
                     |vpiOpType:76
                     |vpiOperand:
                     \_constant: , line:32:26, endln:32:27
+                      |vpiParent:
+                      \_operation: , line:32:24, endln:32:33
                       |vpiDecompile:2
                       |vpiSize:64
                       |UINT:2
@@ -1871,7 +2261,7 @@ design: (unnamed)
                         |vpiName:b
                         |vpiFullName:work@top.b
                         |vpiActual:
-                        \_logic_net: (work@top.b), line:28:11, endln:28:12
+                        \_int_var: (work@top.b), line:28:11, endln:28:12
                       |vpiOperand:
                       \_ref_obj: (work@top.c), line:32:30, endln:32:31
                         |vpiParent:
@@ -1879,7 +2269,7 @@ design: (unnamed)
                         |vpiName:c
                         |vpiFullName:work@top.c
                         |vpiActual:
-                        \_logic_net: (work@top.c), line:28:13, endln:28:14
+                        \_int_var: (work@top.c), line:28:13, endln:28:14
         |vpiLhs:
         \_ref_obj: (work@top.v1), line:32:7, endln:32:9
           |vpiParent:
@@ -1893,7 +2283,7 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
     |vpiStmt:
-    \_named_begin: (work@top.p_outmux), line:36:23, endln:36:31
+    \_begin: (work@top.p_outmux), line:36:15, endln:40:6
       |vpiParent:
       \_always: , line:36:3, endln:40:6
       |vpiName:p_outmux
@@ -1901,11 +2291,11 @@ design: (unnamed)
       |vpiStmt:
       \_if_stmt: , line:37:5, endln:39:8
         |vpiParent:
-        \_named_begin: (work@top.p_outmux), line:36:23, endln:36:31
+        \_begin: (work@top.p_outmux), line:36:15, endln:40:6
         |vpiCondition:
         \_operation: , line:37:9, endln:37:49
           |vpiParent:
-          \_named_begin: (work@top.p_outmux), line:36:23, endln:36:31
+          \_begin: (work@top.p_outmux), line:36:15, endln:40:6
           |vpiOpType:20
           |vpiOperand:
           \_ref_obj: (work@top.p_outmux.selected_hart), line:37:9, endln:37:22
@@ -1914,27 +2304,20 @@ design: (unnamed)
             |vpiName:selected_hart
             |vpiFullName:work@top.p_outmux.selected_hart
             |vpiActual:
-            \_logic_net: (work@top.p_outmux.selected_hart), line:37:9, endln:37:22
+            \_logic_net: (work@top.selected_hart), line:37:9, endln:37:22
           |vpiOperand:
           \_operation: , line:37:25, endln:37:49
             |vpiParent:
             \_operation: , line:37:9, endln:37:49
-            |vpiTypespec:
-            \_ref_typespec: (work@top.p_outmux)
-              |vpiParent:
-              \_operation: , line:37:25, endln:37:49
-              |vpiFullName:work@top.p_outmux
-              |vpiActual:
-              \_integer_typespec: , line:37:26, endln:37:38
             |vpiOpType:67
             |vpiOperand:
-            \_ref_obj: (work@top.p_outmux.NrHarts), line:37:41, endln:37:48
+            \_ref_obj: (work@top.NrHarts), line:37:41, endln:37:48
               |vpiParent:
-              \_operation: , line:37:25, endln:37:49
+              \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
               |vpiName:NrHarts
-              |vpiFullName:work@top.p_outmux.NrHarts
+              |vpiFullName:work@top.NrHarts
               |vpiActual:
-              \_logic_net: (work@top.p_outmux.NrHarts), line:37:41, endln:37:48
+              \_logic_net: (work@top.NrHarts), line:37:41, endln:37:48
         |vpiStmt:
         \_begin: (work@top.p_outmux), line:37:51, endln:39:8
           |vpiParent:
@@ -1955,12 +2338,16 @@ design: (unnamed)
                 |vpiParent:
                 \_hier_path: (dmcontrol_q.resumereq), line:38:20, endln:38:41
                 |vpiName:dmcontrol_q
+                |vpiActual:
+                \_logic_net: (work@top.dmcontrol_q), line:38:20, endln:38:31
               |vpiActual:
               \_ref_obj: (work@top.p_outmux.resumereq), line:38:32, endln:38:41
                 |vpiParent:
                 \_hier_path: (dmcontrol_q.resumereq), line:38:20, endln:38:41
                 |vpiName:resumereq
                 |vpiFullName:work@top.p_outmux.resumereq
+                |vpiActual:
+                \_logic_net: (work@top.resumereq), line:38:32, endln:38:41
               |vpiName:dmcontrol_q.resumereq
             |vpiLhs:
             \_ref_obj: (work@top.p_outmux.resumereq_o), line:38:7, endln:38:18
@@ -1969,259 +2356,15 @@ design: (unnamed)
               |vpiName:resumereq_o
               |vpiFullName:work@top.p_outmux.resumereq_o
               |vpiActual:
-              \_logic_net: (work@top.p_outmux.resumereq_o), line:38:7, endln:38:18
+              \_logic_net: (work@top.resumereq_o), line:38:7, endln:38:18
     |vpiAlwaysType:2
-\_weaklyReferenced:
-\_int_typespec: , line:4:14, endln:4:17
-  |vpiParent:
-  \_parameter: (top_pkg::TL_AW), line:4:18, endln:4:23
-  |vpiInstance:
-  \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:2:1, endln:12:13
-  |vpiSigned:1
-\_int_typespec: , line:5:14, endln:5:17
-  |vpiParent:
-  \_parameter: (top_pkg::TL_DW), line:5:18, endln:5:23
-  |vpiInstance:
-  \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:2:1, endln:12:13
-  |vpiSigned:1
-\_int_typespec: , line:6:14, endln:6:17
-  |vpiParent:
-  \_parameter: (top_pkg::TL_AIW), line:6:18, endln:6:24
-  |vpiInstance:
-  \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:2:1, endln:12:13
-  |vpiSigned:1
-\_int_typespec: , line:7:14, endln:7:17
-  |vpiParent:
-  \_parameter: (top_pkg::TL_DIW), line:7:18, endln:7:24
-  |vpiInstance:
-  \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:2:1, endln:12:13
-  |vpiSigned:1
-\_int_typespec: , line:8:14, endln:8:17
-  |vpiParent:
-  \_parameter: (top_pkg::TL_DUW), line:8:18, endln:8:24
-  |vpiInstance:
-  \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:2:1, endln:12:13
-  |vpiSigned:1
-\_int_typespec: , line:9:14, endln:9:17
-  |vpiParent:
-  \_parameter: (top_pkg::TL_DBW), line:9:18, endln:9:24
-  |vpiInstance:
-  \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:2:1, endln:12:13
-  |vpiSigned:1
-\_int_typespec: , line:10:14, endln:10:17
-  |vpiParent:
-  \_parameter: (top_pkg::TL_SZW), line:10:18, endln:10:24
-  |vpiInstance:
-  \_package: top_pkg (top_pkg::), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:2:1, endln:12:13
-  |vpiSigned:1
-\_string_typespec: (a_param), line:17:7, endln:17:14
-  |vpiParent:
-  \_tagged_pattern: , line:17:18, endln:17:22
-  |vpiName:a_param
-\_int_typespec: 
-\_string_typespec: (a_size), line:18:7, endln:18:13
-  |vpiParent:
-  \_tagged_pattern: , line:18:18, endln:18:44
-  |vpiName:a_size
-\_int_typespec: , line:27:21, endln:27:24
-  |vpiSigned:1
-\_array_typespec: 
-  |vpiRange:
-  \_range: , line:27:29, endln:27:30
-    |vpiLeftRange:
-    \_constant: 
-      |vpiParent:
-      \_range: , line:27:29, endln:27:30
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-    |vpiRightRange:
-    \_operation: , line:27:29, endln:27:30
-      |vpiParent:
-      \_range: , line:27:29, endln:27:30
-      |vpiOpType:11
-      |vpiOperand:
-      \_constant: , line:27:29, endln:27:30
-        |vpiParent:
-        \_operation: , line:27:29, endln:27:30
-        |vpiDecompile:4
-        |vpiSize:64
-        |UINT:4
-        |vpiConstType:9
-      |vpiOperand:
-      \_constant: 
-        |vpiSize:64
-        |INT:1
-        |vpiConstType:7
-  |vpiElemTypespec:
-  \_ref_typespec: 
-    |vpiActual:
-    \_int_typespec: , line:27:21, endln:27:24
-\_int_typespec: , line:27:21, endln:27:24
-  |vpiSigned:1
-\_int_typespec: , line:35:3, endln:35:28
-\_array_typespec: , line:31:12, endln:31:25
-  |vpiRange:
-  \_range: , line:31:14, endln:31:19
-    |vpiParent:
-    \_array_typespec: , line:31:12, endln:31:25
-    |vpiLeftRange:
-    \_constant: , line:31:15, endln:31:16
-      |vpiParent:
-      \_range: , line:31:14, endln:31:19
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:31:17, endln:31:18
-      |vpiParent:
-      \_range: , line:31:14, endln:31:19
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiRange:
-  \_range: , line:31:20, endln:31:25
-    |vpiParent:
-    \_array_typespec: , line:31:12, endln:31:25
-    |vpiLeftRange:
-    \_constant: , line:31:21, endln:31:22
-      |vpiParent:
-      \_range: , line:31:20, endln:31:25
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:31:23, endln:31:24
-      |vpiParent:
-      \_range: , line:31:20, endln:31:25
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiElemTypespec:
-  \_ref_typespec: 
-    |vpiParent:
-    \_array_typespec: , line:31:12, endln:31:25
-    |vpiActual:
-    \_struct_typespec: (ab_t), line:27:13, endln:27:33
-\_integer_typespec: , line:37:26, endln:37:38
-  |vpiExpr:
-  \_operation: , line:37:26, endln:37:38
-    |vpiParent:
-    \_operation: , line:37:25, endln:37:49
-    |vpiOpType:24
-    |vpiOperand:
-    \_ref_obj: (work@top.p_outmux.HartSelLen), line:37:26, endln:37:36
-      |vpiParent:
-      \_operation: , line:37:26, endln:37:38
-      |vpiName:HartSelLen
-      |vpiFullName:work@top.p_outmux.HartSelLen
-    |vpiOperand:
-    \_constant: , line:37:37, endln:37:38
-      |vpiParent:
-      \_operation: , line:37:26, endln:37:38
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-\_class_typespec: 
-  |vpiClassDefn:
-  \_class_defn: (work@mailbox), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:1:3, endln:27:11
-\_int_typespec: , line:3:19, endln:3:22
-  |vpiSigned:1
-\_int_typespec: , line:6:14, endln:6:17
-  |vpiSigned:1
-\_int_typespec: , line:18:14, endln:18:17
-  |vpiSigned:1
-\_int_typespec: , line:24:14, endln:24:17
-  |vpiSigned:1
-\_class_typespec: , line:34:21, endln:34:28
-  |vpiClassDefn:
-  \_class_defn: (work@process), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:30:3, endln:52:11
-\_class_typespec: 
-  |vpiClassDefn:
-  \_class_defn: (work@semaphore), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:55:3, endln:69:11
-\_int_typespec: , line:57:18, endln:57:21
-  |vpiSigned:1
-\_int_typespec: , line:60:14, endln:60:17
-  |vpiSigned:1
-\_int_typespec: , line:63:14, endln:63:17
-  |vpiSigned:1
-\_int_typespec: , line:66:14, endln:66:17
-  |vpiSigned:1
-\_int_typespec: , line:66:26, endln:66:29
-  |vpiSigned:1
-\_struct_typespec: , line:26:5, endln:26:38
-  |vpiTypespecMember:
-  \_typespec_member: (X), line:26:17, endln:26:18
-    |vpiParent:
-    \_struct_typespec: , line:26:5, endln:26:38
-    |vpiName:X
-    |vpiTypespec:
-    \_ref_typespec: (X)
-      |vpiParent:
-      \_typespec_member: (X), line:26:17, endln:26:18
-      |vpiFullName:X
-      |vpiActual:
-      \_int_typespec: , line:26:13, endln:26:16
-    |vpiRefFile:${SURELOG_DIR}/tests/CastTypespec/dut.sv
-    |vpiRefLineNo:26
-    |vpiRefColumnNo:13
-    |vpiRefEndLineNo:26
-    |vpiRefEndColumnNo:16
-  |vpiTypespecMember:
-  \_typespec_member: (Y), line:26:19, endln:26:20
-    |vpiParent:
-    \_struct_typespec: , line:26:5, endln:26:38
-    |vpiName:Y
-    |vpiTypespec:
-    \_ref_typespec: (Y)
-      |vpiParent:
-      \_typespec_member: (Y), line:26:19, endln:26:20
-      |vpiFullName:Y
-      |vpiActual:
-      \_int_typespec: , line:26:13, endln:26:16
-    |vpiRefFile:${SURELOG_DIR}/tests/CastTypespec/dut.sv
-    |vpiRefLineNo:26
-    |vpiRefColumnNo:13
-    |vpiRefEndLineNo:26
-    |vpiRefEndColumnNo:16
-  |vpiTypespecMember:
-  \_typespec_member: (Z), line:26:21, endln:26:22
-    |vpiParent:
-    \_struct_typespec: , line:26:5, endln:26:38
-    |vpiName:Z
-    |vpiTypespec:
-    \_ref_typespec: (Z)
-      |vpiParent:
-      \_typespec_member: (Z), line:26:21, endln:26:22
-      |vpiFullName:Z
-      |vpiActual:
-      \_int_typespec: , line:26:13, endln:26:16
-    |vpiRefFile:${SURELOG_DIR}/tests/CastTypespec/dut.sv
-    |vpiRefLineNo:26
-    |vpiRefColumnNo:13
-    |vpiRefEndLineNo:26
-    |vpiRefEndColumnNo:16
-\_int_typespec: , line:26:13, endln:26:16
-  |vpiSigned:1
-\_int_typespec: , line:26:13, endln:26:16
-  |vpiSigned:1
-\_int_typespec: , line:26:13, endln:26:16
-  |vpiSigned:1
-\_int_typespec: , line:28:5, endln:28:8
-  |vpiSigned:1
-\_int_typespec: , line:28:5, endln:28:8
-  |vpiSigned:1
-\_int_typespec: , line:28:5, endln:28:8
-  |vpiSigned:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 3
 [   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/CastTypespec/dut.sv | ${SURELOG_DIR}/build/regression/CastTypespec/roundtrip/dut_000.sv | 24 | 42 |
+============================== End RoundTrip Results ==============================

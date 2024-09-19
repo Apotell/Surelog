@@ -216,49 +216,55 @@ parameter                                              2
 range                                                  2
 ref_module                                             4
 ref_obj                                                2
-ref_typespec                                           4
+ref_typespec                                           2
+source_file                                            1
 === UHDM Object Stats End ===
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv:16:5: Object 38 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv:20:5: Object 44 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnsizedElabComp/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/UnsizedElabComp/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/UnsizedElabComp/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv, line:1:1, endln:2:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@GOOD
+  |vpiName:work@GOOD
   |vpiDefName:work@GOOD
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv, line:4:1, endln:23:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
+  |vpiName:work@top
   |vpiParameter:
-  \_parameter: (work@top.P1), line:5:25, endln:5:27
+  \_parameter: (work@top.P1), line:5:25, endln:5:36
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv, line:4:1, endln:23:10
     |BIN:111
     |vpiTypespec:
-    \_ref_typespec: (work@top.P1)
+    \_ref_typespec: (work@top.P1), line:5:13, endln:5:18
       |vpiParent:
-      \_parameter: (work@top.P1), line:5:25, endln:5:27
+      \_parameter: (work@top.P1), line:5:25, endln:5:36
       |vpiFullName:work@top.P1
       |vpiActual:
       \_logic_typespec: , line:5:13, endln:5:24
     |vpiName:P1
     |vpiFullName:work@top.P1
   |vpiParameter:
-  \_parameter: (work@top.P2), line:6:25, endln:6:27
+  \_parameter: (work@top.P2), line:6:25, endln:6:36
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv, line:4:1, endln:23:10
     |BIN:110
     |vpiTypespec:
-    \_ref_typespec: (work@top.P2)
+    \_ref_typespec: (work@top.P2), line:6:13, endln:6:18
       |vpiParent:
-      \_parameter: (work@top.P2), line:6:25, endln:6:27
+      \_parameter: (work@top.P2), line:6:25, endln:6:36
       |vpiFullName:work@top.P2
       |vpiActual:
       \_logic_typespec: , line:6:13, endln:6:24
@@ -275,16 +281,9 @@ design: (unnamed)
       |vpiDecompile:3'b111
       |vpiSize:3
       |BIN:111
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:5:30, endln:5:36
-        |vpiFullName:work@top
-        |vpiActual:
-        \_logic_typespec: , line:5:13, endln:5:24
       |vpiConstType:3
     |vpiLhs:
-    \_parameter: (work@top.P1), line:5:25, endln:5:27
+    \_parameter: (work@top.P1), line:5:25, endln:5:36
   |vpiParamAssign:
   \_param_assign: , line:6:25, endln:6:36
     |vpiParent:
@@ -296,25 +295,98 @@ design: (unnamed)
       |vpiDecompile:3'b110
       |vpiSize:3
       |BIN:110
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:6:30, endln:6:36
-        |vpiFullName:work@top
-        |vpiActual:
-        \_logic_typespec: , line:6:13, endln:6:24
       |vpiConstType:3
     |vpiLhs:
-    \_parameter: (work@top.P2), line:6:25, endln:6:27
+    \_parameter: (work@top.P2), line:6:25, endln:6:36
+  |vpiTypedef:
+  \_logic_typespec: , line:5:13, endln:5:24
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv, line:4:1, endln:23:10
+    |vpiRange:
+    \_range: , line:5:19, endln:5:24
+      |vpiParent:
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv, line:4:1, endln:23:10
+      |vpiLeftRange:
+      \_constant: , line:5:20, endln:5:21
+        |vpiParent:
+        \_range: , line:5:19, endln:5:24
+        |vpiDecompile:2
+        |vpiSize:64
+        |UINT:2
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:5:22, endln:5:23
+        |vpiParent:
+        \_range: , line:5:19, endln:5:24
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_logic_typespec: , line:6:13, endln:6:24
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv, line:4:1, endln:23:10
+    |vpiRange:
+    \_range: , line:6:19, endln:6:24
+      |vpiParent:
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv, line:4:1, endln:23:10
+      |vpiLeftRange:
+      \_constant: , line:6:20, endln:6:21
+        |vpiParent:
+        \_range: , line:6:19, endln:6:24
+        |vpiDecompile:2
+        |vpiSize:64
+        |UINT:2
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:6:22, endln:6:23
+        |vpiParent:
+        \_range: , line:6:19, endln:6:24
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_logic_typespec: , line:5:13, endln:5:24
+  |vpiImportTypespec:
+  \_logic_typespec: , line:6:13, endln:6:24
   |vpiDefName:work@top
+  |vpiRefModule:
+  \_ref_module: work@GOOD (good1), line:8:5, endln:8:18
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv, line:4:1, endln:23:10
+    |vpiName:good1
+    |vpiDefName:work@GOOD
+    |vpiActual:
+    \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv, line:1:1, endln:2:10
+  |vpiRefModule:
+  \_ref_module: work@GOOD (good2), line:12:5, endln:12:18
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv, line:4:1, endln:23:10
+    |vpiName:good2
+    |vpiDefName:work@GOOD
+    |vpiActual:
+    \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv, line:1:1, endln:2:10
+  |vpiRefModule:
+  \_ref_module: work@BAD (bad), line:16:5, endln:16:15
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv, line:4:1, endln:23:10
+    |vpiName:bad
+    |vpiDefName:work@BAD
+  |vpiRefModule:
+  \_ref_module: work@BAD (bad), line:20:5, endln:20:15
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv, line:4:1, endln:23:10
+    |vpiName:bad
+    |vpiDefName:work@BAD
   |vpiGenStmt:
-  \_gen_if: , line:7:3, endln:7:5
+  \_gen_if: , line:7:3, endln:9:6
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv, line:4:1, endln:23:10
     |vpiCondition:
     \_operation: , line:7:8, endln:7:20
       |vpiParent:
-      \_gen_if: , line:7:3, endln:7:5
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv, line:4:1, endln:23:10
       |vpiOpType:14
       |vpiOperand:
       \_constant: , line:7:8, endln:7:14
@@ -333,24 +405,20 @@ design: (unnamed)
         |BIN:1
         |vpiConstType:3
     |vpiStmt:
-    \_begin: (work@top)
+    \_begin: (work@top), line:7:22, endln:9:6
       |vpiParent:
-      \_gen_if: , line:7:3, endln:7:5
+      \_gen_if: , line:7:3, endln:9:6
       |vpiFullName:work@top
       |vpiStmt:
-      \_ref_module: work@GOOD (good1), line:8:10, endln:8:15
-        |vpiParent:
-        \_begin: (work@top)
-        |vpiName:good1
-        |vpiDefName:work@GOOD
+      \_ref_module: work@GOOD (good1), line:8:5, endln:8:18
   |vpiGenStmt:
-  \_gen_if: , line:11:3, endln:11:5
+  \_gen_if: , line:11:3, endln:13:6
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv, line:4:1, endln:23:10
     |vpiCondition:
     \_operation: , line:11:8, endln:11:16
       |vpiParent:
-      \_gen_if: , line:11:3, endln:11:5
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv, line:4:1, endln:23:10
       |vpiOpType:14
       |vpiOperand:
       \_ref_obj: (work@top.P1), line:11:8, endln:11:10
@@ -358,6 +426,8 @@ design: (unnamed)
         \_operation: , line:11:8, endln:11:16
         |vpiName:P1
         |vpiFullName:work@top.P1
+        |vpiActual:
+        \_parameter: (work@top.P1), line:5:25, endln:5:36
       |vpiOperand:
       \_constant: , line:11:14, endln:11:16
         |vpiParent:
@@ -367,24 +437,20 @@ design: (unnamed)
         |BIN:1
         |vpiConstType:3
     |vpiStmt:
-    \_begin: (work@top)
+    \_begin: (work@top), line:11:18, endln:13:6
       |vpiParent:
-      \_gen_if: , line:11:3, endln:11:5
+      \_gen_if: , line:11:3, endln:13:6
       |vpiFullName:work@top
       |vpiStmt:
-      \_ref_module: work@GOOD (good2), line:12:10, endln:12:15
-        |vpiParent:
-        \_begin: (work@top)
-        |vpiName:good2
-        |vpiDefName:work@GOOD
+      \_ref_module: work@GOOD (good2), line:12:5, endln:12:18
   |vpiGenStmt:
-  \_gen_if: , line:15:3, endln:15:5
+  \_gen_if: , line:15:3, endln:17:6
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv, line:4:1, endln:23:10
     |vpiCondition:
     \_operation: , line:15:8, endln:15:20
       |vpiParent:
-      \_gen_if: , line:15:3, endln:15:5
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv, line:4:1, endln:23:10
       |vpiOpType:14
       |vpiOperand:
       \_constant: , line:15:8, endln:15:14
@@ -403,24 +469,20 @@ design: (unnamed)
         |BIN:1
         |vpiConstType:3
     |vpiStmt:
-    \_begin: (work@top)
+    \_begin: (work@top), line:15:22, endln:17:6
       |vpiParent:
-      \_gen_if: , line:15:3, endln:15:5
+      \_gen_if: , line:15:3, endln:17:6
       |vpiFullName:work@top
       |vpiStmt:
-      \_ref_module: work@BAD (bad), line:16:9, endln:16:12
-        |vpiParent:
-        \_begin: (work@top)
-        |vpiName:bad
-        |vpiDefName:work@BAD
+      \_ref_module: work@BAD (bad), line:16:5, endln:16:15
   |vpiGenStmt:
-  \_gen_if: , line:19:3, endln:19:5
+  \_gen_if: , line:19:3, endln:21:6
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv, line:4:1, endln:23:10
     |vpiCondition:
     \_operation: , line:19:8, endln:19:16
       |vpiParent:
-      \_gen_if: , line:19:3, endln:19:5
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv, line:4:1, endln:23:10
       |vpiOpType:14
       |vpiOperand:
       \_ref_obj: (work@top.P2), line:19:8, endln:19:10
@@ -428,6 +490,8 @@ design: (unnamed)
         \_operation: , line:19:8, endln:19:16
         |vpiName:P2
         |vpiFullName:work@top.P2
+        |vpiActual:
+        \_parameter: (work@top.P2), line:6:25, endln:6:36
       |vpiOperand:
       \_constant: , line:19:14, endln:19:16
         |vpiParent:
@@ -437,70 +501,19 @@ design: (unnamed)
         |BIN:1
         |vpiConstType:3
     |vpiStmt:
-    \_begin: (work@top)
+    \_begin: (work@top), line:19:18, endln:21:6
       |vpiParent:
-      \_gen_if: , line:19:3, endln:19:5
+      \_gen_if: , line:19:3, endln:21:6
       |vpiFullName:work@top
       |vpiStmt:
-      \_ref_module: work@BAD (bad), line:20:9, endln:20:12
-        |vpiParent:
-        \_begin: (work@top)
-        |vpiName:bad
-        |vpiDefName:work@BAD
-\_weaklyReferenced:
-\_logic_typespec: , line:5:13, endln:5:24
-  |vpiParent:
-  \_parameter: (work@top.P1), line:5:25, endln:5:27
-  |vpiRange:
-  \_range: , line:5:19, endln:5:24
-    |vpiParent:
-    \_logic_typespec: , line:5:13, endln:5:24
-    |vpiLeftRange:
-    \_constant: , line:5:20, endln:5:21
-      |vpiParent:
-      \_range: , line:5:19, endln:5:24
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:5:22, endln:5:23
-      |vpiParent:
-      \_range: , line:5:19, endln:5:24
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:6:13, endln:6:24
-  |vpiParent:
-  \_parameter: (work@top.P2), line:6:25, endln:6:27
-  |vpiRange:
-  \_range: , line:6:19, endln:6:24
-    |vpiParent:
-    \_logic_typespec: , line:6:13, endln:6:24
-    |vpiLeftRange:
-    \_constant: , line:6:20, endln:6:21
-      |vpiParent:
-      \_range: , line:6:19, endln:6:24
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:6:22, endln:6:23
-      |vpiParent:
-      \_range: , line:6:19, endln:6:24
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
+      \_ref_module: work@BAD (bad), line:20:5, endln:20:15
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 2
 [WARNING] : 2
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv | ${SURELOG_DIR}/build/regression/UnsizedElabComp/roundtrip/dut_000.sv | 12 | 23 |
+[roundtrip]: ${SURELOG_DIR}/tests/UnsizedElabComp/dut.sv | ${SURELOG_DIR}/build/regression/UnsizedElabComp/roundtrip/dut_000.sv | 18 | 23 |
 ============================== End RoundTrip Results ==============================

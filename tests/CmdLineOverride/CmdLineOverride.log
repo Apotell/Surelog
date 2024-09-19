@@ -50,35 +50,39 @@ int_typespec                                           1
 module_inst                                            2
 param_assign                                           1
 parameter                                              1
-ref_typespec                                           2
+ref_typespec                                           1
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CmdLineOverride/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/CmdLineOverride/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/CmdLineOverride/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/CmdLineOverride/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@baz (work@baz), file:${SURELOG_DIR}/tests/CmdLineOverride/dut.sv, line:5:1, endln:6:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@baz
+  |vpiName:work@baz
   |vpiDefName:work@baz
 |uhdmallModules:
 \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/CmdLineOverride/dut.sv, line:1:1, endln:3:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@foo
+  |vpiName:work@foo
   |vpiParameter:
-  \_parameter: (work@foo.bar), line:2:17, endln:2:20
+  \_parameter: (work@foo.bar), line:2:17, endln:2:24
     |vpiParent:
     \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/CmdLineOverride/dut.sv, line:1:1, endln:3:10
     |UINT:0
     |vpiTypespec:
-    \_ref_typespec: (work@foo.bar)
+    \_ref_typespec: (work@foo.bar), line:2:13, endln:2:16
       |vpiParent:
-      \_parameter: (work@foo.bar), line:2:17, endln:2:20
+      \_parameter: (work@foo.bar), line:2:17, endln:2:24
       |vpiFullName:work@foo.bar
       |vpiActual:
       \_int_typespec: , line:2:13, endln:2:16
@@ -96,22 +100,17 @@ design: (unnamed)
       |vpiDecompile:0
       |vpiSize:64
       |UINT:0
-      |vpiTypespec:
-      \_ref_typespec: (work@foo)
-        |vpiParent:
-        \_constant: , line:2:23, endln:2:24
-        |vpiFullName:work@foo
-        |vpiActual:
-        \_int_typespec: , line:2:13, endln:2:16
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@foo.bar), line:2:17, endln:2:20
+    \_parameter: (work@foo.bar), line:2:17, endln:2:24
+  |vpiTypedef:
+  \_int_typespec: , line:2:13, endln:2:16
+    |vpiParent:
+    \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/CmdLineOverride/dut.sv, line:1:1, endln:3:10
+    |vpiSigned:1
+  |vpiImportTypespec:
+  \_int_typespec: , line:2:13, endln:2:16
   |vpiDefName:work@foo
-\_weaklyReferenced:
-\_int_typespec: , line:2:13, endln:2:16
-  |vpiParent:
-  \_parameter: (work@foo.bar), line:2:17, endln:2:20
-  |vpiSigned:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -120,5 +119,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/CmdLineOverride/dut.sv | ${SURELOG_DIR}/build/regression/CmdLineOverride/roundtrip/dut_000.sv | 0 | 6 |
+[roundtrip]: ${SURELOG_DIR}/tests/CmdLineOverride/dut.sv | ${SURELOG_DIR}/build/regression/CmdLineOverride/roundtrip/dut_000.sv | 5 | 6 |
 ============================== End RoundTrip Results ==============================

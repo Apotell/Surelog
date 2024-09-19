@@ -48,37 +48,49 @@ there are 1 more instances of this message.
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 design                                                 1
 logic_net                                              3
-logic_typespec                                         2
 module_inst                                            1
 port                                                   3
-ref_obj                                                2
-ref_typespec                                           2
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PortExpr/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PortExpr/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/PortExpr/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/PortExpr/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PortExpr/dut.sv, line:1:1, endln:6:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiNet:
+  |vpiName:work@top
+  |vpiImportTypespec:
   \_logic_net: (work@top.op[79]), line:4:11, endln:4:23
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PortExpr/dut.sv, line:1:1, endln:6:10
     |vpiName:op[79]
     |vpiFullName:work@top.op[79]
-  |vpiNet:
+  |vpiImportTypespec:
   \_logic_net: (work@top.op[78]), line:5:11, endln:5:23
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PortExpr/dut.sv, line:1:1, endln:6:10
     |vpiName:op[78]
     |vpiFullName:work@top.op[78]
+  |vpiImportTypespec:
+  \_logic_net: (work@top), line:2:4, endln:2:36
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PortExpr/dut.sv, line:1:1, endln:6:10
+    |vpiFullName:work@top
+  |vpiDefName:work@top
+  |vpiNet:
+  \_logic_net: (work@top.op[79]), line:4:11, endln:4:23
+  |vpiNet:
+  \_logic_net: (work@top.op[78]), line:5:11, endln:5:23
+  |vpiNet:
+  \_logic_net: (work@top), line:2:4, endln:2:36
   |vpiPort:
   \_port: , line:2:4, endln:2:36
     |vpiParent:
@@ -90,45 +102,12 @@ design: (unnamed)
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PortExpr/dut.sv, line:1:1, endln:6:10
     |vpiName:op[79]
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@top.op[79].op[79]), line:4:11, endln:4:23
-      |vpiParent:
-      \_port: (op[79]), line:4:11, endln:4:23
-      |vpiName:op[79]
-      |vpiFullName:work@top.op[79].op[79]
-      |vpiActual:
-      \_logic_net: (work@top.op[79]), line:4:11, endln:4:23
-    |vpiTypedef:
-    \_ref_typespec: (work@top.op[79])
-      |vpiParent:
-      \_port: (op[79]), line:4:11, endln:4:23
-      |vpiFullName:work@top.op[79]
-      |vpiActual:
-      \_logic_typespec: , line:4:11, endln:4:11
   |vpiPort:
   \_port: (op[78]), line:5:11, endln:5:23
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PortExpr/dut.sv, line:1:1, endln:6:10
     |vpiName:op[78]
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@top.op[78].op[78]), line:5:11, endln:5:23
-      |vpiParent:
-      \_port: (op[78]), line:5:11, endln:5:23
-      |vpiName:op[78]
-      |vpiFullName:work@top.op[78].op[78]
-      |vpiActual:
-      \_logic_net: (work@top.op[78]), line:5:11, endln:5:23
-    |vpiTypedef:
-    \_ref_typespec: (work@top.op[78])
-      |vpiParent:
-      \_port: (op[78]), line:5:11, endln:5:23
-      |vpiFullName:work@top.op[78]
-      |vpiActual:
-      \_logic_typespec: , line:5:11, endln:5:11
-\_weaklyReferenced:
-\_logic_typespec: , line:4:11, endln:4:11
-\_logic_typespec: , line:5:11, endln:5:11
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -137,5 +116,5 @@ design: (unnamed)
 [   NOTE] : 1
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PortExpr/dut.sv | ${SURELOG_DIR}/build/regression/PortExpr/roundtrip/dut_000.sv | 4 | 6 |
+[roundtrip]: ${SURELOG_DIR}/tests/PortExpr/dut.sv | ${SURELOG_DIR}/build/regression/PortExpr/roundtrip/dut_000.sv | 5 | 6 |
 ============================== End RoundTrip Results ==============================

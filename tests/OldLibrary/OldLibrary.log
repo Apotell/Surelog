@@ -1,29 +1,29 @@
 [INF:CM0023] Creating log file "${SURELOG_DIR}/build/regression/OldLibrary/slpp_all/surelog.log".
 [INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/OldLibrary/top.v".
-[INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/OldLibrary/lib/CELL1.v".
-[INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/OldLibrary/lib/CELL2.v".
 [INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/OldLibrary/lib/CELL3.v".
+[INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/OldLibrary/lib/CELL2.v".
+[INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/OldLibrary/lib/CELL1.v".
 [INF:PA0201] Parsing source file "${SURELOG_DIR}/tests/OldLibrary/top.v".
-[INF:PA0201] Parsing source file "${SURELOG_DIR}/tests/OldLibrary/lib/CELL1.v".
-[INF:PA0201] Parsing source file "${SURELOG_DIR}/tests/OldLibrary/lib/CELL2.v".
 [INF:PA0201] Parsing source file "${SURELOG_DIR}/tests/OldLibrary/lib/CELL3.v".
+[INF:PA0201] Parsing source file "${SURELOG_DIR}/tests/OldLibrary/lib/CELL2.v".
+[INF:PA0201] Parsing source file "${SURELOG_DIR}/tests/OldLibrary/lib/CELL1.v".
 [WRN:PA0205] ${SURELOG_DIR}/tests/OldLibrary/top.v:1:1: No timescale set for "top".
-[WRN:PA0205] ${SURELOG_DIR}/tests/OldLibrary/lib/CELL1.v:1:1: No timescale set for "CELL1".
-[WRN:PA0205] ${SURELOG_DIR}/tests/OldLibrary/lib/CELL2.v:1:1: No timescale set for "CELL2".
 [WRN:PA0205] ${SURELOG_DIR}/tests/OldLibrary/lib/CELL3.v:1:1: No timescale set for "CELL3".
+[WRN:PA0205] ${SURELOG_DIR}/tests/OldLibrary/lib/CELL2.v:1:1: No timescale set for "CELL2".
+[WRN:PA0205] ${SURELOG_DIR}/tests/OldLibrary/lib/CELL1.v:1:1: No timescale set for "CELL1".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/OldLibrary/lib/CELL1.v:1:1: Compile module "work@CELL1".
 [INF:CP0305] ${SURELOG_DIR}/tests/OldLibrary/lib/CELL2.v:1:1: Compile udp "work@CELL2".
 [INF:CP0305] ${SURELOG_DIR}/tests/OldLibrary/lib/CELL3.v:1:1: Compile udp "work@CELL3".
 [INF:CP0303] ${SURELOG_DIR}/tests/OldLibrary/top.v:1:1: Compile module "work@top".
-[INF:CP0302] Compile class "work@mailbox".
-[INF:CP0302] Compile class "work@process".
-[INF:CP0302] Compile class "work@semaphore".
+[INF:CP0302] Compile class "builtin::mailbox".
+[INF:CP0302] Compile class "builtin::process".
+[INF:CP0302] Compile class "builtin::semaphore".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 class_defn                                             8
-class_typespec                                         4
-class_var                                              3
+class_typespec                                         1
+class_var                                              1
 constant                                               5
 design                                                 1
 enum_const                                             5
@@ -38,15 +38,17 @@ logic_var                                              1
 module_inst                                            2
 package                                                1
 ref_module                                             1
-ref_typespec                                          13
+ref_typespec                                          11
+source_file                                            4
 table_entry                                            6
 task                                                   9
 udp_defn                                               2
 === UHDM Object Stats End ===
+[ERR:IG0809] ${SURELOG_DIR}/tests/OldLibrary/top.v:3:4: Object 28 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/OldLibrary/slpp_all/surelog.uhdm ...
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 4
 [   NOTE] : 0
 
@@ -60,3 +62,9 @@ udp_defn                                               2
 [LINT]: ${SURELOG_DIR}/tests/OldLibrary/lib/CELL3.v:15:7: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/OldLibrary/lib/CELL3.v:1:1: Non synthesizable construct,
 ============================== End Linting Results ==============================
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/OldLibrary/lib/CELL2.v | ${SURELOG_DIR}/build/regression/OldLibrary/roundtrip/CELL2_000.v | 8 | 17 |
+[roundtrip]: ${SURELOG_DIR}/tests/OldLibrary/lib/CELL3.v | ${SURELOG_DIR}/build/regression/OldLibrary/roundtrip/CELL3_000.v | 8 | 17 |
+[roundtrip]: ${SURELOG_DIR}/tests/OldLibrary/top.v       | ${SURELOG_DIR}/build/regression/OldLibrary/roundtrip/top_000.v   | 4 | 7 |
+============================== End RoundTrip Results ==============================

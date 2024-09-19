@@ -280,120 +280,238 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 always                                                 2
-array_typespec                                         2
+array_net                                              1
+array_typespec                                         3
+array_var                                              1
 assignment                                             3
 begin                                                  3
-bit_typespec                                           1
-constant                                              20
+bit_typespec                                           2
+bit_var                                                1
+constant                                              31
 design                                                 1
 event_control                                          2
 foreach_stmt                                           3
-logic_net                                              9
-logic_typespec                                         3
+logic_net                                              3
+logic_typespec                                         2
 module_inst                                            2
-operation                                              7
+operation                                             10
 port                                                   4
-range                                                  7
-ref_obj                                               17
-ref_typespec                                          15
+range                                                 17
+ref_obj                                               13
+ref_typespec                                          16
 ref_var                                                9
+source_file                                            1
 unsupported_typespec                                   9
 var_select                                             3
 === UHDM Object Stats End ===
+[ERR:IG0807] ${SURELOG_DIR}/tests/SynthForeach/dut.sv:1:51: Child 115 is not entirely in parent's scope.
+[ERR:IG0807] ${SURELOG_DIR}/tests/SynthForeach/dut.sv:1:36: Child 120 is not entirely in parent's scope.
+[ERR:IG0807] ${SURELOG_DIR}/tests/SynthForeach/dut.sv:9:53: Child 130 is not entirely in parent's scope.
+[ERR:IG0807] ${SURELOG_DIR}/tests/SynthForeach/dut.sv:9:34: Child 135 is not entirely in parent's scope.
+[ERR:IG0807] ${SURELOG_DIR}/tests/SynthForeach/dut.sv:9:39: Child 138 is not entirely in parent's scope.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SynthForeach/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/SynthForeach/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/SynthForeach/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/SynthForeach/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:1:1, endln:7:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@dut
-  |vpiDefName:work@dut
-  |vpiNet:
+  |vpiName:work@dut
+  |vpiTypedef:
+  \_unsupported_typespec: (data), line:3:17, endln:3:21
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:1:1, endln:7:10
+    |vpiName:data
+  |vpiTypedef:
+  \_unsupported_typespec: (data), line:4:21, endln:4:25
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:1:1, endln:7:10
+    |vpiName:data
+  |vpiTypedef:
+  \_logic_typespec: , line:1:30, endln:1:42
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:1:1, endln:7:10
+    |vpiRange:
+    \_range: , line:1:36, endln:1:42
+      |vpiParent:
+      \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:1:1, endln:7:10
+      |vpiLeftRange:
+      \_constant: , line:1:37, endln:1:39
+        |vpiParent:
+        \_range: , line:1:36, endln:1:42
+        |vpiDecompile:31
+        |vpiSize:64
+        |UINT:31
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:1:40, endln:1:41
+        |vpiParent:
+        \_range: , line:1:36, endln:1:42
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_array_typespec: , line:1:47, endln:1:50
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:1:1, endln:7:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_range: , line:1:48, endln:1:49
+      |vpiParent:
+      \_array_typespec: , line:1:47, endln:1:50
+      |vpiRightRange:
+      \_operation: , line:1:48, endln:1:49
+        |vpiParent:
+        \_range: , line:1:48, endln:1:49
+        |vpiOpType:11
+        |vpiOperand:
+        \_constant: , line:1:48, endln:1:49
+          |vpiParent:
+          \_range: , line:1:48, endln:1:49
+          |vpiDecompile:4
+          |vpiSize:64
+          |UINT:4
+          |vpiConstType:9
+    |vpiRange:
+    \_range: , line:1:51, endln:1:52
+      |vpiParent:
+      \_array_typespec: , line:1:47, endln:1:50
+      |vpiRightRange:
+      \_operation: , line:1:51, endln:1:52
+        |vpiParent:
+        \_range: , line:1:51, endln:1:52
+        |vpiOpType:11
+        |vpiOperand:
+        \_constant: , line:1:51, endln:1:52
+          |vpiParent:
+          \_range: , line:1:51, endln:1:52
+          |vpiDecompile:4
+          |vpiSize:64
+          |UINT:4
+          |vpiConstType:9
+    |vpiElemTypespec:
+    \_ref_typespec: (work@dut), line:1:43, endln:1:42
+      |vpiParent:
+      \_array_typespec: , line:1:47, endln:1:50
+      |vpiFullName:work@dut
+      |vpiActual:
+      \_logic_typespec: , line:1:30, endln:1:42
+  |vpiTypedef:
+  \_logic_typespec: , line:1:30, endln:1:42
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:1:1, endln:7:10
+    |vpiRange:
+    \_range: , line:1:36, endln:1:42
+      |vpiParent:
+      \_array_typespec: , line:1:47, endln:1:50
+      |vpiLeftRange:
+      \_constant: , line:1:37, endln:1:39
+        |vpiParent:
+        \_range: , line:1:36, endln:1:42
+        |vpiDecompile:31
+        |vpiSize:64
+        |UINT:31
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:1:40, endln:1:41
+        |vpiParent:
+        \_range: , line:1:36, endln:1:42
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_unsupported_typespec: (data), line:3:17, endln:3:21
+  |vpiImportTypespec:
+  \_unsupported_typespec: (data), line:4:21, endln:4:25
+  |vpiImportTypespec:
   \_logic_net: (work@dut.clk), line:1:18, endln:1:21
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:1:1, endln:7:10
     |vpiName:clk
     |vpiFullName:work@dut.clk
-  |vpiNet:
-  \_logic_net: (work@dut.data), line:1:43, endln:1:47
+  |vpiImportTypespec:
+  \_logic_typespec: , line:1:30, endln:1:42
+  |vpiImportTypespec:
+  \_logic_net: (work@dut), line:1:23, endln:1:53
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:1:1, endln:7:10
-    |vpiName:data
-    |vpiFullName:work@dut.data
+    |vpiTypespec:
+    \_ref_typespec: (work@dut.data), line:1:30, endln:1:35
+      |vpiParent:
+      \_logic_net: (work@dut), line:1:23, endln:1:53
+      |vpiName:data
+      |vpiFullName:work@dut.data
+      |vpiActual:
+      \_logic_typespec: , line:1:30, endln:1:42
+    |vpiFullName:work@dut
     |vpiNetType:36
-  |vpiNet:
-  \_logic_net: (work@dut.data.i), line:5:22, endln:5:23
+  |vpiImportTypespec:
+  \_array_typespec: , line:1:47, endln:1:50
+  |vpiImportTypespec:
+  \_logic_typespec: , line:1:30, endln:1:42
+  |vpiImportTypespec:
+  \_logic_net: (work@dut.i), line:5:22, endln:5:23
     |vpiParent:
-    \_var_select: (work@dut.data), line:5:17, endln:5:27
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:1:1, endln:7:10
     |vpiName:i
-    |vpiFullName:work@dut.data.i
+    |vpiFullName:work@dut.i
     |vpiNetType:1
-  |vpiNet:
-  \_logic_net: (work@dut.data.j), line:5:25, endln:5:26
+  |vpiImportTypespec:
+  \_logic_net: (work@dut.j), line:5:25, endln:5:26
     |vpiParent:
-    \_var_select: (work@dut.data), line:5:17, endln:5:27
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:1:1, endln:7:10
     |vpiName:j
-    |vpiFullName:work@dut.data.j
+    |vpiFullName:work@dut.j
     |vpiNetType:1
+  |vpiDefName:work@dut
+  |vpiNet:
+  \_logic_net: (work@dut.clk), line:1:18, endln:1:21
+  |vpiNet:
+  \_logic_net: (work@dut), line:1:23, endln:1:53
+  |vpiNet:
+  \_logic_net: (work@dut.i), line:5:22, endln:5:23
+  |vpiNet:
+  \_logic_net: (work@dut.j), line:5:25, endln:5:26
   |vpiPort:
-  \_port: (clk), line:1:18, endln:1:21
+  \_port: (clk), line:1:12, endln:1:21
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:1:1, endln:7:10
     |vpiName:clk
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@dut.clk.clk), line:1:18, endln:1:21
-      |vpiParent:
-      \_port: (clk), line:1:18, endln:1:21
-      |vpiName:clk
-      |vpiFullName:work@dut.clk.clk
-      |vpiActual:
-      \_logic_net: (work@dut.clk), line:1:18, endln:1:21
-    |vpiTypedef:
-    \_ref_typespec: (work@dut.clk)
-      |vpiParent:
-      \_port: (clk), line:1:18, endln:1:21
-      |vpiFullName:work@dut.clk
-      |vpiActual:
-      \_logic_typespec: , line:1:18, endln:1:18
   |vpiPort:
-  \_port: (data), line:1:43, endln:1:47
+  \_port: (data), line:1:23, endln:1:47
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:1:1, endln:7:10
     |vpiName:data
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@dut.data.data), line:1:43, endln:1:47
-      |vpiParent:
-      \_port: (data), line:1:43, endln:1:47
-      |vpiName:data
-      |vpiFullName:work@dut.data.data
-      |vpiActual:
-      \_logic_net: (work@dut.data), line:1:43, endln:1:47
     |vpiTypedef:
-    \_ref_typespec: (work@dut.data)
+    \_ref_typespec: (work@dut.data), line:1:43, endln:1:42
       |vpiParent:
-      \_port: (data), line:1:43, endln:1:47
+      \_port: (data), line:1:23, endln:1:47
       |vpiFullName:work@dut.data
       |vpiActual:
-      \_array_typespec: , line:1:30, endln:1:52
+      \_array_typespec: , line:1:47, endln:1:50
   |vpiProcess:
   \_always: , line:2:5, endln:6:8
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:1:1, endln:7:10
     |vpiStmt:
-    \_event_control: , line:2:12, endln:2:26
+    \_event_control: , line:2:12, endln:6:8
       |vpiParent:
       \_always: , line:2:5, endln:6:8
       |vpiCondition:
       \_operation: , line:2:14, endln:2:25
         |vpiParent:
-        \_event_control: , line:2:12, endln:2:26
+        \_event_control: , line:2:12, endln:6:8
         |vpiOpType:39
         |vpiOperand:
         \_ref_obj: (work@dut.clk), line:2:22, endln:2:25
@@ -406,63 +524,38 @@ design: (unnamed)
       |vpiStmt:
       \_begin: (work@dut), line:2:27, endln:6:8
         |vpiParent:
-        \_event_control: , line:2:12, endln:2:26
+        \_event_control: , line:2:12, endln:6:8
         |vpiFullName:work@dut
-        |vpiStmt:
-        \_foreach_stmt: (work@dut), line:3:9, endln:3:16
+        |vpiInternalScope:
+        \_foreach_stmt: (work@dut), line:3:9, endln:5:35
           |vpiParent:
           \_begin: (work@dut), line:2:27, endln:6:8
           |vpiFullName:work@dut
-          |vpiVariables:
-          \_ref_var: (work@dut.data), line:3:17, endln:3:21
+          |vpiInternalScope:
+          \_foreach_stmt: (work@dut), line:4:13, endln:5:35
             |vpiParent:
-            \_foreach_stmt: (work@dut), line:3:9, endln:3:16
-            |vpiTypespec:
-            \_ref_typespec: (work@dut.data)
-              |vpiParent:
-              \_ref_var: (work@dut.data), line:3:17, endln:3:21
-              |vpiFullName:work@dut.data
-              |vpiActual:
-              \_unsupported_typespec: (data), line:3:17, endln:3:21
-            |vpiName:data
-            |vpiFullName:work@dut.data
-          |vpiLoopVars:
-          \_ref_var: (work@dut.i), line:3:22, endln:3:23
-            |vpiParent:
-            \_foreach_stmt: (work@dut), line:3:9, endln:3:16
-            |vpiTypespec:
-            \_ref_typespec: (work@dut.i)
-              |vpiParent:
-              \_ref_var: (work@dut.i), line:3:22, endln:3:23
-              |vpiFullName:work@dut.i
-              |vpiActual:
-              \_unsupported_typespec: (i), line:3:22, endln:3:23
-            |vpiName:i
-            |vpiFullName:work@dut.i
-          |vpiStmt:
-          \_foreach_stmt: (work@dut), line:4:13, endln:4:20
-            |vpiParent:
-            \_foreach_stmt: (work@dut), line:3:9, endln:3:16
+            \_foreach_stmt: (work@dut), line:3:9, endln:5:35
             |vpiFullName:work@dut
-            |vpiVariables:
+            |vpiImportTypespec:
             \_ref_var: (work@dut.data), line:4:21, endln:4:25
               |vpiParent:
-              \_foreach_stmt: (work@dut), line:4:13, endln:4:20
+              \_foreach_stmt: (work@dut), line:4:13, endln:5:35
               |vpiTypespec:
-              \_ref_typespec: (work@dut.data)
+              \_ref_typespec: (work@dut.data.data), line:4:21, endln:4:25
                 |vpiParent:
                 \_ref_var: (work@dut.data), line:4:21, endln:4:25
-                |vpiFullName:work@dut.data
+                |vpiName:data
+                |vpiFullName:work@dut.data.data
                 |vpiActual:
                 \_unsupported_typespec: (data), line:4:21, endln:4:25
               |vpiName:data
               |vpiFullName:work@dut.data
-            |vpiLoopVars:
+            |vpiImportTypespec:
             \_ref_var: (work@dut.i), line:4:26, endln:4:27
               |vpiParent:
-              \_foreach_stmt: (work@dut), line:4:13, endln:4:20
+              \_foreach_stmt: (work@dut), line:4:13, endln:5:35
               |vpiTypespec:
-              \_ref_typespec: (work@dut.i)
+              \_ref_typespec: (work@dut.i), line:4:26, endln:4:27
                 |vpiParent:
                 \_ref_var: (work@dut.i), line:4:26, endln:4:27
                 |vpiFullName:work@dut.i
@@ -470,12 +563,12 @@ design: (unnamed)
                 \_unsupported_typespec: (i), line:4:26, endln:4:27
               |vpiName:i
               |vpiFullName:work@dut.i
-            |vpiLoopVars:
+            |vpiImportTypespec:
             \_ref_var: (work@dut.j), line:4:29, endln:4:30
               |vpiParent:
-              \_foreach_stmt: (work@dut), line:4:13, endln:4:20
+              \_foreach_stmt: (work@dut), line:4:13, endln:5:35
               |vpiTypespec:
-              \_ref_typespec: (work@dut.j)
+              \_ref_typespec: (work@dut.j), line:4:29, endln:4:30
                 |vpiParent:
                 \_ref_var: (work@dut.j), line:4:29, endln:4:30
                 |vpiFullName:work@dut.j
@@ -483,10 +576,16 @@ design: (unnamed)
                 \_unsupported_typespec: (j), line:4:29, endln:4:30
               |vpiName:j
               |vpiFullName:work@dut.j
+            |vpiVariables:
+            \_ref_var: (work@dut.data), line:4:21, endln:4:25
+            |vpiLoopVars:
+            \_ref_var: (work@dut.i), line:4:26, endln:4:27
+            |vpiLoopVars:
+            \_ref_var: (work@dut.j), line:4:29, endln:4:30
             |vpiStmt:
             \_assignment: , line:5:17, endln:5:35
               |vpiParent:
-              \_foreach_stmt: (work@dut), line:4:13, endln:4:20
+              \_foreach_stmt: (work@dut), line:4:13, endln:5:35
               |vpiOpType:82
               |vpiBlocking:1
               |vpiRhs:
@@ -501,7 +600,7 @@ design: (unnamed)
                   |vpiName:i
                   |vpiFullName:work@dut.i
                   |vpiActual:
-                  \_logic_net: (work@dut.data.i), line:5:22, endln:5:23
+                  \_ref_var: (work@dut.i), line:4:26, endln:4:27
                 |vpiOperand:
                 \_ref_obj: (work@dut.j), line:5:34, endln:5:35
                   |vpiParent:
@@ -509,7 +608,7 @@ design: (unnamed)
                   |vpiName:j
                   |vpiFullName:work@dut.j
                   |vpiActual:
-                  \_logic_net: (work@dut.data.j), line:5:25, endln:5:26
+                  \_ref_var: (work@dut.j), line:4:29, endln:4:30
               |vpiLhs:
               \_var_select: (work@dut.data), line:5:17, endln:5:27
                 |vpiParent:
@@ -517,115 +616,380 @@ design: (unnamed)
                 |vpiName:data
                 |vpiFullName:work@dut.data
                 |vpiIndex:
-                \_ref_obj: (work@dut.data.i), line:5:22, endln:5:23
+                \_ref_obj: (work@dut.i), line:5:22, endln:5:23
                   |vpiParent:
-                  \_var_select: (work@dut.data), line:5:17, endln:5:27
+                  \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:1:1, endln:7:10
                   |vpiName:i
-                  |vpiFullName:work@dut.data.i
+                  |vpiFullName:work@dut.i
                   |vpiActual:
-                  \_logic_net: (work@dut.data.i), line:5:22, endln:5:23
+                  \_logic_net: (work@dut.i), line:5:22, endln:5:23
                 |vpiIndex:
-                \_ref_obj: (work@dut.data.j), line:5:25, endln:5:26
+                \_ref_obj: (work@dut.j), line:5:25, endln:5:26
                   |vpiParent:
-                  \_var_select: (work@dut.data), line:5:17, endln:5:27
+                  \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:1:1, endln:7:10
                   |vpiName:j
-                  |vpiFullName:work@dut.data.j
+                  |vpiFullName:work@dut.j
                   |vpiActual:
-                  \_logic_net: (work@dut.data.j), line:5:25, endln:5:26
+                  \_logic_net: (work@dut.j), line:5:25, endln:5:26
+          |vpiImportTypespec:
+          \_ref_var: (work@dut.data), line:3:17, endln:3:21
+            |vpiParent:
+            \_foreach_stmt: (work@dut), line:3:9, endln:5:35
+            |vpiTypespec:
+            \_ref_typespec: (work@dut.data.data), line:3:17, endln:3:21
+              |vpiParent:
+              \_ref_var: (work@dut.data), line:3:17, endln:3:21
+              |vpiName:data
+              |vpiFullName:work@dut.data.data
+              |vpiActual:
+              \_unsupported_typespec: (data), line:3:17, endln:3:21
+            |vpiName:data
+            |vpiFullName:work@dut.data
+          |vpiImportTypespec:
+          \_ref_var: (work@dut.i), line:3:22, endln:3:23
+            |vpiParent:
+            \_foreach_stmt: (work@dut), line:3:9, endln:5:35
+            |vpiTypespec:
+            \_ref_typespec: (work@dut.i), line:3:22, endln:3:23
+              |vpiParent:
+              \_ref_var: (work@dut.i), line:3:22, endln:3:23
+              |vpiFullName:work@dut.i
+              |vpiActual:
+              \_unsupported_typespec: (i), line:3:22, endln:3:23
+            |vpiName:i
+            |vpiFullName:work@dut.i
+          |vpiVariables:
+          \_ref_var: (work@dut.data), line:3:17, endln:3:21
+          |vpiLoopVars:
+          \_ref_var: (work@dut.i), line:3:22, endln:3:23
+          |vpiStmt:
+          \_foreach_stmt: (work@dut), line:4:13, endln:5:35
+        |vpiTypedef:
+        \_unsupported_typespec: (i), line:3:22, endln:3:23
+          |vpiParent:
+          \_begin: (work@dut), line:2:27, endln:6:8
+          |vpiName:i
+        |vpiTypedef:
+        \_unsupported_typespec: (i), line:4:26, endln:4:27
+          |vpiParent:
+          \_begin: (work@dut), line:2:27, endln:6:8
+          |vpiName:i
+        |vpiTypedef:
+        \_unsupported_typespec: (j), line:4:29, endln:4:30
+          |vpiParent:
+          \_begin: (work@dut), line:2:27, endln:6:8
+          |vpiName:j
+        |vpiImportTypespec:
+        \_unsupported_typespec: (i), line:3:22, endln:3:23
+        |vpiImportTypespec:
+        \_unsupported_typespec: (i), line:4:26, endln:4:27
+        |vpiImportTypespec:
+        \_unsupported_typespec: (j), line:4:29, endln:4:30
+        |vpiStmt:
+        \_foreach_stmt: (work@dut), line:3:9, endln:5:35
     |vpiAlwaysType:1
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiNet:
+  |vpiName:work@top
+  |vpiVariables:
+  \_bit_var: (work@top), line:9:23, endln:9:55
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
+    |vpiTypespec:
+    \_ref_typespec: (work@top), line:9:30, endln:9:33
+      |vpiParent:
+      \_bit_var: (work@top), line:9:23, endln:9:55
+      |vpiFullName:work@top
+      |vpiActual:
+      \_bit_typespec: , line:9:30, endln:9:44
+    |vpiFullName:work@top
+  |vpiVariables:
+  \_array_var: (work@top.B), line:9:45, endln:9:54
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
+    |vpiSize:1
+    |vpiTypespec:
+    \_ref_typespec: (work@top.B), line:9:45, endln:9:46
+      |vpiParent:
+      \_array_var: (work@top.B), line:9:45, endln:9:54
+      |vpiFullName:work@top.B
+      |vpiActual:
+      \_array_typespec: , line:9:45, endln:9:46
+    |vpiName:B
+    |vpiFullName:work@top.B
+    |vpiRandType:1
+    |vpiVisibility:1
+    |vpiArrayType:1
+    |vpiRange:
+    \_range: , line:9:47, endln:9:52
+      |vpiParent:
+      \_array_var: (work@top.B), line:9:45, endln:9:54
+      |vpiLeftRange:
+      \_constant: , line:9:48, endln:9:49
+        |vpiParent:
+        \_range: , line:9:47, endln:9:52
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:9:50, endln:9:51
+        |vpiParent:
+        \_range: , line:9:47, endln:9:52
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiRange:
+    \_range: , line:9:53, endln:9:54
+      |vpiParent:
+      \_array_var: (work@top.B), line:9:45, endln:9:54
+      |vpiRightRange:
+      \_operation: , line:9:53, endln:9:54
+        |vpiParent:
+        \_range: , line:9:53, endln:9:54
+        |vpiOpType:11
+        |vpiOperand:
+        \_constant: , line:9:53, endln:9:54
+          |vpiParent:
+          \_range: , line:9:53, endln:9:54
+          |vpiDecompile:2
+          |vpiSize:64
+          |UINT:2
+          |vpiConstType:9
+    |vpiReg:
+    \_bit_var: (work@top), line:9:23, endln:9:55
+  |vpiRegArray:
+  \_array_var: (work@top.B), line:9:45, endln:9:54
+  |vpiTypedef:
+  \_unsupported_typespec: (B), line:11:17, endln:11:18
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
+    |vpiName:B
+  |vpiTypedef:
+  \_bit_typespec: , line:9:30, endln:9:44
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
+    |vpiRange:
+    \_range: , line:9:34, endln:9:39
+      |vpiParent:
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
+      |vpiLeftRange:
+      \_constant: , line:9:35, endln:9:36
+        |vpiParent:
+        \_range: , line:9:34, endln:9:39
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:9:37, endln:9:38
+        |vpiParent:
+        \_range: , line:9:34, endln:9:39
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiRange:
+    \_range: , line:9:39, endln:9:44
+      |vpiParent:
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
+      |vpiLeftRange:
+      \_constant: , line:9:40, endln:9:41
+        |vpiParent:
+        \_range: , line:9:39, endln:9:44
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:9:42, endln:9:43
+        |vpiParent:
+        \_range: , line:9:39, endln:9:44
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_array_typespec: , line:9:45, endln:9:46
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
+  |vpiTypedef:
+  \_array_typespec: , line:9:47, endln:9:52
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_range: , line:9:47, endln:9:52
+      |vpiParent:
+      \_array_typespec: , line:9:47, endln:9:52
+      |vpiLeftRange:
+      \_constant: , line:9:48, endln:9:49
+        |vpiParent:
+        \_range: , line:9:47, endln:9:52
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:9:50, endln:9:51
+        |vpiParent:
+        \_range: , line:9:47, endln:9:52
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiRange:
+    \_range: , line:9:53, endln:9:54
+      |vpiParent:
+      \_array_typespec: , line:9:47, endln:9:52
+      |vpiRightRange:
+      \_operation: , line:9:53, endln:9:54
+        |vpiParent:
+        \_range: , line:9:53, endln:9:54
+        |vpiOpType:11
+        |vpiOperand:
+        \_constant: , line:9:53, endln:9:54
+          |vpiParent:
+          \_range: , line:9:53, endln:9:54
+          |vpiDecompile:2
+          |vpiSize:64
+          |UINT:2
+          |vpiConstType:9
+    |vpiElemTypespec:
+    \_ref_typespec: (work@top), line:9:45, endln:9:39
+      |vpiParent:
+      \_array_typespec: , line:9:47, endln:9:52
+      |vpiFullName:work@top
+      |vpiActual:
+      \_bit_typespec: , line:9:30, endln:9:44
+  |vpiTypedef:
+  \_bit_typespec: , line:9:30, endln:9:44
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
+    |vpiRange:
+    \_range: , line:9:34, endln:9:39
+      |vpiParent:
+      \_array_typespec: , line:9:47, endln:9:52
+      |vpiLeftRange:
+      \_constant: , line:9:35, endln:9:36
+        |vpiParent:
+        \_range: , line:9:34, endln:9:39
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:9:37, endln:9:38
+        |vpiParent:
+        \_range: , line:9:34, endln:9:39
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiRange:
+    \_range: , line:9:39, endln:9:44
+      |vpiParent:
+      \_array_typespec: , line:9:47, endln:9:52
+      |vpiLeftRange:
+      \_constant: , line:9:40, endln:9:41
+        |vpiParent:
+        \_range: , line:9:39, endln:9:44
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:9:42, endln:9:43
+        |vpiParent:
+        \_range: , line:9:39, endln:9:44
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_unsupported_typespec: (B), line:11:17, endln:11:18
+  |vpiImportTypespec:
   \_logic_net: (work@top.clk), line:9:18, endln:9:21
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
     |vpiName:clk
     |vpiFullName:work@top.clk
-  |vpiNet:
-  \_logic_net: (work@top.B), line:9:45, endln:9:46
+  |vpiImportTypespec:
+  \_bit_typespec: , line:9:30, endln:9:44
+  |vpiImportTypespec:
+  \_bit_var: (work@top), line:9:23, endln:9:55
+  |vpiImportTypespec:
+  \_array_var: (work@top.B), line:9:45, endln:9:54
+  |vpiImportTypespec:
+  \_array_typespec: , line:9:45, endln:9:46
+  |vpiImportTypespec:
+  \_array_typespec: , line:9:47, endln:9:52
+  |vpiImportTypespec:
+  \_bit_typespec: , line:9:30, endln:9:44
+  |vpiImportTypespec:
+  \_logic_net: (work@top.q), line:12:15, endln:12:16
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
-    |vpiName:B
-    |vpiFullName:work@top.B
-  |vpiNet:
-  \_logic_net: (work@top.B.q), line:12:15, endln:12:16
-    |vpiParent:
-    \_var_select: (work@top.B), line:12:13, endln:12:26
     |vpiName:q
-    |vpiFullName:work@top.B.q
+    |vpiFullName:work@top.q
     |vpiNetType:1
-  |vpiNet:
-  \_logic_net: (work@top.B.r), line:12:18, endln:12:19
+  |vpiImportTypespec:
+  \_logic_net: (work@top.r), line:12:18, endln:12:19
     |vpiParent:
-    \_var_select: (work@top.B), line:12:13, endln:12:26
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
     |vpiName:r
-    |vpiFullName:work@top.B.r
+    |vpiFullName:work@top.r
     |vpiNetType:1
-  |vpiNet:
-  \_logic_net: (work@top.B.s), line:12:24, endln:12:25
+  |vpiImportTypespec:
+  \_logic_net: (work@top.s), line:12:24, endln:12:25
     |vpiParent:
-    \_var_select: (work@top.B), line:12:13, endln:12:26
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
     |vpiName:s
-    |vpiFullName:work@top.B.s
+    |vpiFullName:work@top.s
     |vpiNetType:1
+  |vpiDefName:work@top
+  |vpiNet:
+  \_logic_net: (work@top.clk), line:9:18, endln:9:21
+  |vpiNet:
+  \_logic_net: (work@top.q), line:12:15, endln:12:16
+  |vpiNet:
+  \_logic_net: (work@top.r), line:12:18, endln:12:19
+  |vpiNet:
+  \_logic_net: (work@top.s), line:12:24, endln:12:25
   |vpiPort:
-  \_port: (clk), line:9:18, endln:9:21
+  \_port: (clk), line:9:12, endln:9:21
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
     |vpiName:clk
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@top.clk.clk), line:9:18, endln:9:21
-      |vpiParent:
-      \_port: (clk), line:9:18, endln:9:21
-      |vpiName:clk
-      |vpiFullName:work@top.clk.clk
-      |vpiActual:
-      \_logic_net: (work@top.clk), line:9:18, endln:9:21
-    |vpiTypedef:
-    \_ref_typespec: (work@top.clk)
-      |vpiParent:
-      \_port: (clk), line:9:18, endln:9:21
-      |vpiFullName:work@top.clk
-      |vpiActual:
-      \_logic_typespec: , line:9:18, endln:9:18
   |vpiPort:
-  \_port: (B), line:9:45, endln:9:46
+  \_port: (B), line:9:23, endln:9:46
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
     |vpiName:B
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@top.B.B), line:9:45, endln:9:46
-      |vpiParent:
-      \_port: (B), line:9:45, endln:9:46
-      |vpiName:B
-      |vpiFullName:work@top.B.B
-      |vpiActual:
-      \_logic_net: (work@top.B), line:9:45, endln:9:46
     |vpiTypedef:
-    \_ref_typespec: (work@top.B)
+    \_ref_typespec: (work@top.B), line:9:45, endln:9:39
       |vpiParent:
-      \_port: (B), line:9:45, endln:9:46
+      \_port: (B), line:9:23, endln:9:46
       |vpiFullName:work@top.B
       |vpiActual:
-      \_array_typespec: , line:9:30, endln:9:54
+      \_array_typespec: , line:9:47, endln:9:52
   |vpiProcess:
   \_always: , line:10:5, endln:15:8
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
     |vpiStmt:
-    \_event_control: , line:10:12, endln:10:26
+    \_event_control: , line:10:12, endln:15:8
       |vpiParent:
       \_always: , line:10:5, endln:15:8
       |vpiCondition:
       \_operation: , line:10:14, endln:10:25
         |vpiParent:
-        \_event_control: , line:10:12, endln:10:26
+        \_event_control: , line:10:12, endln:15:8
         |vpiOpType:39
         |vpiOperand:
         \_ref_obj: (work@top.clk), line:10:22, endln:10:25
@@ -638,72 +1002,17 @@ design: (unnamed)
       |vpiStmt:
       \_begin: (work@top), line:10:27, endln:15:8
         |vpiParent:
-        \_event_control: , line:10:12, endln:10:26
+        \_event_control: , line:10:12, endln:15:8
         |vpiFullName:work@top
-        |vpiStmt:
-        \_foreach_stmt: (work@top), line:11:9, endln:11:16
+        |vpiInternalScope:
+        \_foreach_stmt: (work@top), line:11:9, endln:14:12
           |vpiParent:
           \_begin: (work@top), line:10:27, endln:15:8
           |vpiFullName:work@top
-          |vpiVariables:
-          \_ref_var: (work@top.B), line:11:17, endln:11:18
-            |vpiParent:
-            \_foreach_stmt: (work@top), line:11:9, endln:11:16
-            |vpiTypespec:
-            \_ref_typespec: (work@top.B)
-              |vpiParent:
-              \_ref_var: (work@top.B), line:11:17, endln:11:18
-              |vpiFullName:work@top.B
-              |vpiActual:
-              \_unsupported_typespec: (B), line:11:17, endln:11:18
-            |vpiName:B
-            |vpiFullName:work@top.B
-          |vpiLoopVars:
-          \_ref_var: (work@top.q), line:11:19, endln:11:20
-            |vpiParent:
-            \_foreach_stmt: (work@top), line:11:9, endln:11:16
-            |vpiTypespec:
-            \_ref_typespec: (work@top.q)
-              |vpiParent:
-              \_ref_var: (work@top.q), line:11:19, endln:11:20
-              |vpiFullName:work@top.q
-              |vpiActual:
-              \_unsupported_typespec: (q), line:11:19, endln:11:20
-            |vpiName:q
-            |vpiFullName:work@top.q
-          |vpiLoopVars:
-          \_ref_var: (work@top.r), line:11:22, endln:11:23
-            |vpiParent:
-            \_foreach_stmt: (work@top), line:11:9, endln:11:16
-            |vpiTypespec:
-            \_ref_typespec: (work@top.r)
-              |vpiParent:
-              \_ref_var: (work@top.r), line:11:22, endln:11:23
-              |vpiFullName:work@top.r
-              |vpiActual:
-              \_unsupported_typespec: (r), line:11:22, endln:11:23
-            |vpiName:r
-            |vpiFullName:work@top.r
-          |vpiLoopVars:
-          \_operation: , line:11:23, endln:11:24
-            |vpiOpType:36
-          |vpiLoopVars:
-          \_ref_var: (work@top.s), line:11:27, endln:11:28
-            |vpiParent:
-            \_foreach_stmt: (work@top), line:11:9, endln:11:16
-            |vpiTypespec:
-            \_ref_typespec: (work@top.s)
-              |vpiParent:
-              \_ref_var: (work@top.s), line:11:27, endln:11:28
-              |vpiFullName:work@top.s
-              |vpiActual:
-              \_unsupported_typespec: (s), line:11:27, endln:11:28
-            |vpiName:s
-            |vpiFullName:work@top.s
-          |vpiStmt:
+          |vpiInternalScope:
           \_begin: (work@top), line:11:31, endln:14:12
             |vpiParent:
-            \_foreach_stmt: (work@top), line:11:9, endln:11:16
+            \_foreach_stmt: (work@top), line:11:9, endln:14:12
             |vpiFullName:work@top
             |vpiStmt:
             \_assignment: , line:12:13, endln:12:30
@@ -718,7 +1027,7 @@ design: (unnamed)
                 |vpiName:r
                 |vpiFullName:work@top.r
                 |vpiActual:
-                \_logic_net: (work@top.B.r), line:12:18, endln:12:19
+                \_ref_var: (work@top.r), line:11:22, endln:11:23
               |vpiLhs:
               \_var_select: (work@top.B), line:12:13, endln:12:26
                 |vpiParent:
@@ -726,37 +1035,37 @@ design: (unnamed)
                 |vpiName:B
                 |vpiFullName:work@top.B
                 |vpiIndex:
-                \_ref_obj: (work@top.B.q), line:12:15, endln:12:16
+                \_ref_obj: (work@top.q), line:12:15, endln:12:16
                   |vpiParent:
-                  \_var_select: (work@top.B), line:12:13, endln:12:26
+                  \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
                   |vpiName:q
-                  |vpiFullName:work@top.B.q
+                  |vpiFullName:work@top.q
                   |vpiActual:
-                  \_logic_net: (work@top.B.q), line:12:15, endln:12:16
+                  \_logic_net: (work@top.q), line:12:15, endln:12:16
                 |vpiIndex:
-                \_ref_obj: (work@top.B.r), line:12:18, endln:12:19
+                \_ref_obj: (work@top.r), line:12:18, endln:12:19
                   |vpiParent:
-                  \_var_select: (work@top.B), line:12:13, endln:12:26
+                  \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
                   |vpiName:r
-                  |vpiFullName:work@top.B.r
+                  |vpiFullName:work@top.r
                   |vpiActual:
-                  \_logic_net: (work@top.B.r), line:12:18, endln:12:19
+                  \_logic_net: (work@top.r), line:12:18, endln:12:19
                 |vpiIndex:
                 \_constant: , line:12:21, endln:12:22
                   |vpiParent:
-                  \_var_select: (work@top.B), line:12:13, endln:12:26
+                  \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
                   |vpiDecompile:0
                   |vpiSize:64
                   |UINT:0
                   |vpiConstType:9
                 |vpiIndex:
-                \_ref_obj: (work@top.B.s), line:12:24, endln:12:25
+                \_ref_obj: (work@top.s), line:12:24, endln:12:25
                   |vpiParent:
-                  \_var_select: (work@top.B), line:12:13, endln:12:26
+                  \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
                   |vpiName:s
-                  |vpiFullName:work@top.B.s
+                  |vpiFullName:work@top.s
                   |vpiActual:
-                  \_logic_net: (work@top.B.s), line:12:24, endln:12:25
+                  \_logic_net: (work@top.s), line:12:24, endln:12:25
             |vpiStmt:
             \_assignment: , line:13:13, endln:13:30
               |vpiParent:
@@ -765,6 +1074,8 @@ design: (unnamed)
               |vpiBlocking:1
               |vpiRhs:
               \_constant: , line:13:29, endln:13:30
+                |vpiParent:
+                \_assignment: , line:13:13, endln:13:30
                 |vpiDecompile:0
                 |vpiSize:64
                 |UINT:0
@@ -776,272 +1087,136 @@ design: (unnamed)
                 |vpiName:B
                 |vpiFullName:work@top.B
                 |vpiIndex:
-                \_ref_obj: (work@top.B.q), line:13:15, endln:13:16
+                \_ref_obj: (work@top.q), line:13:15, endln:13:16
                   |vpiParent:
-                  \_var_select: (work@top.B), line:13:13, endln:13:26
+                  \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
                   |vpiName:q
-                  |vpiFullName:work@top.B.q
+                  |vpiFullName:work@top.q
                   |vpiActual:
-                  \_logic_net: (work@top.B.q), line:12:15, endln:12:16
+                  \_logic_net: (work@top.q), line:12:15, endln:12:16
                 |vpiIndex:
-                \_ref_obj: (work@top.B.r), line:13:18, endln:13:19
+                \_ref_obj: (work@top.r), line:13:18, endln:13:19
                   |vpiParent:
-                  \_var_select: (work@top.B), line:13:13, endln:13:26
+                  \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
                   |vpiName:r
-                  |vpiFullName:work@top.B.r
+                  |vpiFullName:work@top.r
                   |vpiActual:
-                  \_logic_net: (work@top.B.r), line:12:18, endln:12:19
+                  \_logic_net: (work@top.r), line:12:18, endln:12:19
                 |vpiIndex:
                 \_constant: , line:13:21, endln:13:22
                   |vpiParent:
-                  \_var_select: (work@top.B), line:13:13, endln:13:26
+                  \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
                   |vpiDecompile:1
                   |vpiSize:64
                   |UINT:1
                   |vpiConstType:9
                 |vpiIndex:
-                \_ref_obj: (work@top.B.s), line:13:24, endln:13:25
+                \_ref_obj: (work@top.s), line:13:24, endln:13:25
                   |vpiParent:
-                  \_var_select: (work@top.B), line:13:13, endln:13:26
+                  \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
                   |vpiName:s
-                  |vpiFullName:work@top.B.s
+                  |vpiFullName:work@top.s
                   |vpiActual:
-                  \_logic_net: (work@top.B.s), line:12:24, endln:12:25
+                  \_logic_net: (work@top.s), line:12:24, endln:12:25
+          |vpiImportTypespec:
+          \_ref_var: (work@top.B), line:11:17, endln:11:18
+            |vpiParent:
+            \_foreach_stmt: (work@top), line:11:9, endln:14:12
+            |vpiTypespec:
+            \_ref_typespec: (work@top.B.B), line:11:17, endln:11:18
+              |vpiParent:
+              \_ref_var: (work@top.B), line:11:17, endln:11:18
+              |vpiName:B
+              |vpiFullName:work@top.B.B
+              |vpiActual:
+              \_unsupported_typespec: (B), line:11:17, endln:11:18
+            |vpiName:B
+            |vpiFullName:work@top.B
+          |vpiImportTypespec:
+          \_ref_var: (work@top.q), line:11:19, endln:11:20
+            |vpiParent:
+            \_foreach_stmt: (work@top), line:11:9, endln:14:12
+            |vpiTypespec:
+            \_ref_typespec: (work@top.q), line:11:19, endln:11:20
+              |vpiParent:
+              \_ref_var: (work@top.q), line:11:19, endln:11:20
+              |vpiFullName:work@top.q
+              |vpiActual:
+              \_unsupported_typespec: (q), line:11:19, endln:11:20
+            |vpiName:q
+            |vpiFullName:work@top.q
+          |vpiImportTypespec:
+          \_ref_var: (work@top.r), line:11:22, endln:11:23
+            |vpiParent:
+            \_foreach_stmt: (work@top), line:11:9, endln:14:12
+            |vpiTypespec:
+            \_ref_typespec: (work@top.r), line:11:22, endln:11:23
+              |vpiParent:
+              \_ref_var: (work@top.r), line:11:22, endln:11:23
+              |vpiFullName:work@top.r
+              |vpiActual:
+              \_unsupported_typespec: (r), line:11:22, endln:11:23
+            |vpiName:r
+            |vpiFullName:work@top.r
+          |vpiImportTypespec:
+          \_ref_var: (work@top.s), line:11:27, endln:11:28
+            |vpiParent:
+            \_foreach_stmt: (work@top), line:11:9, endln:14:12
+            |vpiTypespec:
+            \_ref_typespec: (work@top.s), line:11:27, endln:11:28
+              |vpiParent:
+              \_ref_var: (work@top.s), line:11:27, endln:11:28
+              |vpiFullName:work@top.s
+              |vpiActual:
+              \_unsupported_typespec: (s), line:11:27, endln:11:28
+            |vpiName:s
+            |vpiFullName:work@top.s
+          |vpiVariables:
+          \_ref_var: (work@top.B), line:11:17, endln:11:18
+          |vpiLoopVars:
+          \_ref_var: (work@top.q), line:11:19, endln:11:20
+          |vpiLoopVars:
+          \_ref_var: (work@top.r), line:11:22, endln:11:23
+          |vpiLoopVars:
+          \_operation: , line:11:23, endln:11:24
+            |vpiParent:
+            \_foreach_stmt: (work@top), line:11:9, endln:14:12
+            |vpiOpType:36
+          |vpiLoopVars:
+          \_ref_var: (work@top.s), line:11:27, endln:11:28
+          |vpiStmt:
+          \_begin: (work@top), line:11:31, endln:14:12
+        |vpiTypedef:
+        \_unsupported_typespec: (q), line:11:19, endln:11:20
+          |vpiParent:
+          \_begin: (work@top), line:10:27, endln:15:8
+          |vpiName:q
+        |vpiTypedef:
+        \_unsupported_typespec: (r), line:11:22, endln:11:23
+          |vpiParent:
+          \_begin: (work@top), line:10:27, endln:15:8
+          |vpiName:r
+        |vpiTypedef:
+        \_unsupported_typespec: (s), line:11:27, endln:11:28
+          |vpiParent:
+          \_begin: (work@top), line:10:27, endln:15:8
+          |vpiName:s
+        |vpiImportTypespec:
+        \_unsupported_typespec: (q), line:11:19, endln:11:20
+        |vpiImportTypespec:
+        \_unsupported_typespec: (r), line:11:22, endln:11:23
+        |vpiImportTypespec:
+        \_unsupported_typespec: (s), line:11:27, endln:11:28
+        |vpiStmt:
+        \_foreach_stmt: (work@top), line:11:9, endln:14:12
     |vpiAlwaysType:1
-\_weaklyReferenced:
-\_unsupported_typespec: (data), line:3:17, endln:3:21
-  |vpiName:data
-\_unsupported_typespec: (i), line:3:22, endln:3:23
-  |vpiParent:
-  \_ref_var: (work@dut.i), line:3:22, endln:3:23
-  |vpiName:i
-\_unsupported_typespec: (data), line:4:21, endln:4:25
-  |vpiName:data
-\_unsupported_typespec: (i), line:4:26, endln:4:27
-  |vpiParent:
-  \_ref_var: (work@dut.i), line:4:26, endln:4:27
-  |vpiName:i
-\_unsupported_typespec: (j), line:4:29, endln:4:30
-  |vpiParent:
-  \_ref_var: (work@dut.j), line:4:29, endln:4:30
-  |vpiName:j
-\_unsupported_typespec: (B), line:11:17, endln:11:18
-  |vpiName:B
-\_unsupported_typespec: (q), line:11:19, endln:11:20
-  |vpiParent:
-  \_ref_var: (work@top.q), line:11:19, endln:11:20
-  |vpiName:q
-\_unsupported_typespec: (r), line:11:22, endln:11:23
-  |vpiParent:
-  \_ref_var: (work@top.r), line:11:22, endln:11:23
-  |vpiName:r
-\_unsupported_typespec: (s), line:11:27, endln:11:28
-  |vpiParent:
-  \_ref_var: (work@top.s), line:11:27, endln:11:28
-  |vpiName:s
-\_logic_typespec: , line:1:18, endln:1:18
-\_array_typespec: , line:1:30, endln:1:52
-  |vpiParent:
-  \_port: (data), line:1:43, endln:1:47
-  |vpiArrayType:1
-  |vpiRange:
-  \_range: , line:1:48, endln:1:49
-    |vpiParent:
-    \_array_typespec: , line:1:30, endln:1:52
-    |vpiLeftRange:
-    \_constant: 
-      |vpiParent:
-      \_range: , line:1:48, endln:1:49
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-    |vpiRightRange:
-    \_operation: , line:1:48, endln:1:49
-      |vpiParent:
-      \_range: , line:1:48, endln:1:49
-      |vpiOpType:11
-      |vpiOperand:
-      \_constant: , line:1:48, endln:1:49
-        |vpiParent:
-        \_operation: , line:1:48, endln:1:49
-        |vpiDecompile:4
-        |vpiSize:64
-        |UINT:4
-        |vpiConstType:9
-      |vpiOperand:
-      \_constant: 
-        |vpiSize:64
-        |INT:1
-        |vpiConstType:7
-  |vpiRange:
-  \_range: , line:1:51, endln:1:52
-    |vpiParent:
-    \_array_typespec: , line:1:30, endln:1:52
-    |vpiLeftRange:
-    \_constant: 
-      |vpiParent:
-      \_range: , line:1:51, endln:1:52
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-    |vpiRightRange:
-    \_operation: , line:1:51, endln:1:52
-      |vpiParent:
-      \_range: , line:1:51, endln:1:52
-      |vpiOpType:11
-      |vpiOperand:
-      \_constant: , line:1:51, endln:1:52
-        |vpiParent:
-        \_operation: , line:1:51, endln:1:52
-        |vpiDecompile:4
-        |vpiSize:64
-        |UINT:4
-        |vpiConstType:9
-      |vpiOperand:
-      \_constant: 
-        |vpiSize:64
-        |INT:1
-        |vpiConstType:7
-  |vpiElemTypespec:
-  \_ref_typespec: (work@dut.data)
-    |vpiParent:
-    \_array_typespec: , line:1:30, endln:1:52
-    |vpiFullName:work@dut.data
-    |vpiActual:
-    \_logic_typespec: , line:1:30, endln:1:42
-\_logic_typespec: , line:1:30, endln:1:42
-  |vpiRange:
-  \_range: , line:1:36, endln:1:42
-    |vpiParent:
-    \_logic_typespec: , line:1:30, endln:1:42
-    |vpiLeftRange:
-    \_constant: , line:1:37, endln:1:39
-      |vpiParent:
-      \_range: , line:1:36, endln:1:42
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:1:40, endln:1:41
-      |vpiParent:
-      \_range: , line:1:36, endln:1:42
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:9:18, endln:9:18
-\_array_typespec: , line:9:30, endln:9:54
-  |vpiParent:
-  \_port: (B), line:9:45, endln:9:46
-  |vpiArrayType:1
-  |vpiRange:
-  \_range: , line:9:47, endln:9:52
-    |vpiParent:
-    \_array_typespec: , line:9:30, endln:9:54
-    |vpiLeftRange:
-    \_constant: , line:9:48, endln:9:49
-      |vpiParent:
-      \_range: , line:9:47, endln:9:52
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:9:50, endln:9:51
-      |vpiParent:
-      \_range: , line:9:47, endln:9:52
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiRange:
-  \_range: , line:9:53, endln:9:54
-    |vpiParent:
-    \_array_typespec: , line:9:30, endln:9:54
-    |vpiLeftRange:
-    \_constant: 
-      |vpiParent:
-      \_range: , line:9:53, endln:9:54
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-    |vpiRightRange:
-    \_operation: , line:9:53, endln:9:54
-      |vpiParent:
-      \_range: , line:9:53, endln:9:54
-      |vpiOpType:11
-      |vpiOperand:
-      \_constant: , line:9:53, endln:9:54
-        |vpiParent:
-        \_operation: , line:9:53, endln:9:54
-        |vpiDecompile:2
-        |vpiSize:64
-        |UINT:2
-        |vpiConstType:9
-      |vpiOperand:
-      \_constant: 
-        |vpiSize:64
-        |INT:1
-        |vpiConstType:7
-  |vpiElemTypespec:
-  \_ref_typespec: (work@top.B)
-    |vpiParent:
-    \_array_typespec: , line:9:30, endln:9:54
-    |vpiFullName:work@top.B
-    |vpiActual:
-    \_bit_typespec: , line:9:30, endln:9:44
-\_bit_typespec: , line:9:30, endln:9:44
-  |vpiRange:
-  \_range: , line:9:34, endln:9:39
-    |vpiParent:
-    \_bit_typespec: , line:9:30, endln:9:44
-    |vpiLeftRange:
-    \_constant: , line:9:35, endln:9:36
-      |vpiParent:
-      \_range: , line:9:34, endln:9:39
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:9:37, endln:9:38
-      |vpiParent:
-      \_range: , line:9:34, endln:9:39
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiRange:
-  \_range: , line:9:39, endln:9:44
-    |vpiParent:
-    \_bit_typespec: , line:9:30, endln:9:44
-    |vpiLeftRange:
-    \_constant: , line:9:40, endln:9:41
-      |vpiParent:
-      \_range: , line:9:39, endln:9:44
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:9:42, endln:9:43
-      |vpiParent:
-      \_range: , line:9:39, endln:9:44
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 5
 [WARNING] : 2
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/SynthForeach/dut.sv | ${SURELOG_DIR}/build/regression/SynthForeach/roundtrip/dut_000.sv | 8 | 16 |
+[roundtrip]: ${SURELOG_DIR}/tests/SynthForeach/dut.sv | ${SURELOG_DIR}/build/regression/SynthForeach/roundtrip/dut_000.sv | 14 | 16 |
 ============================== End RoundTrip Results ==============================

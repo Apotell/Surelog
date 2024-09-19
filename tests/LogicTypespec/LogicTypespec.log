@@ -56,7 +56,7 @@ n<> u<50> t<Constant_primary> p<51> c<49> l<7:47> el<7:48>
 n<> u<51> t<Constant_expression> p<52> c<50> l<7:47> el<7:48>
 n<> u<52> t<Constant_range> p<53> c<47> l<7:45> el<7:48>
 n<> u<53> t<Packed_dimension> p<54> c<52> l<7:44> el<7:49>
-n<> u<54> t<Data_type> p<58> c<32> s<57> l<7:1> el<7:49>
+n<my_package::typedef_logic_typespec[1:0][7:0]> u<54> t<Data_type> p<58> c<32> s<57> l<7:1> el<7:49>
 n<my_instance> u<55> t<StringConst> p<56> l<7:50> el<7:61>
 n<> u<56> t<Variable_decl_assignment> p<57> c<55> l<7:50> el<7:61>
 n<> u<57> t<List_of_variable_decl_assignments> p<58> c<56> l<7:50> el<7:61>
@@ -81,23 +81,28 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/LogicTypespec/dut.sv:5:1: Compile module "work@logic_typespec".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                               8
+constant                                              12
 design                                                 1
-logic_net                                              1
 logic_typespec                                         1
+logic_var                                              1
 module_inst                                            1
 package                                                1
 packed_array_typespec                                  1
-range                                                  4
+range                                                  6
 ref_typespec                                           1
+source_file                                            1
 === UHDM Object Stats End ===
+[ERR:IG0807] ${SURELOG_DIR}/tests/LogicTypespec/dut.sv:2:9: Child 12 is not entirely in parent's scope.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LogicTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/LogicTypespec/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/LogicTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/LogicTypespec/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallPackages:
 \_package: my_package (my_package::), file:${SURELOG_DIR}/tests/LogicTypespec/dut.sv, line:1:1, endln:3:23
   |vpiParent:
@@ -105,16 +110,14 @@ design: (unnamed)
   |vpiName:my_package
   |vpiFullName:my_package::
   |vpiTypedef:
-  \_logic_typespec: (my_package::typedef_logic_typespec), line:2:9, endln:7:44
+  \_logic_typespec: (typedef_logic_typespec), line:2:9, endln:7:49
     |vpiParent:
     \_package: my_package (my_package::), file:${SURELOG_DIR}/tests/LogicTypespec/dut.sv, line:1:1, endln:3:23
-    |vpiName:my_package::typedef_logic_typespec
-    |vpiInstance:
-    \_package: my_package (my_package::), file:${SURELOG_DIR}/tests/LogicTypespec/dut.sv, line:1:1, endln:3:23
+    |vpiName:typedef_logic_typespec
     |vpiRange:
     \_range: , line:2:15, endln:2:20
       |vpiParent:
-      \_logic_typespec: (my_package::typedef_logic_typespec), line:2:9, endln:7:44
+      \_package: my_package (my_package::), file:${SURELOG_DIR}/tests/LogicTypespec/dut.sv, line:1:1, endln:3:23
       |vpiLeftRange:
       \_constant: , line:2:16, endln:2:17
         |vpiParent:
@@ -131,35 +134,43 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiImportTypespec:
+  \_logic_typespec: (typedef_logic_typespec), line:2:9, endln:7:49
   |vpiDefName:my_package
   |vpiEndLabel:my_package
 |uhdmallModules:
 \_module_inst: work@logic_typespec (work@logic_typespec), file:${SURELOG_DIR}/tests/LogicTypespec/dut.sv, line:5:1, endln:9:27
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@logic_typespec
-  |vpiDefName:work@logic_typespec
-  |vpiNet:
-  \_logic_net: (work@logic_typespec.my_instance), line:7:50, endln:7:61
+  |vpiName:work@logic_typespec
+  |vpiVariables:
+  \_logic_var: (work@logic_typespec.my_instance), line:7:50, endln:7:61
     |vpiParent:
     \_module_inst: work@logic_typespec (work@logic_typespec), file:${SURELOG_DIR}/tests/LogicTypespec/dut.sv, line:5:1, endln:9:27
     |vpiTypespec:
-    \_ref_typespec: (work@logic_typespec.my_instance)
+    \_ref_typespec: (work@logic_typespec.my_instance.my_package::typedef_logic_typespec[1:0][7:0]), line:7:1, endln:7:49
       |vpiParent:
-      \_logic_net: (work@logic_typespec.my_instance), line:7:50, endln:7:61
-      |vpiFullName:work@logic_typespec.my_instance
+      \_logic_var: (work@logic_typespec.my_instance), line:7:50, endln:7:61
+      |vpiName:my_package::typedef_logic_typespec[1:0][7:0]
+      |vpiFullName:work@logic_typespec.my_instance.my_package::typedef_logic_typespec[1:0][7:0]
       |vpiActual:
-      \_logic_typespec: (my_package::typedef_logic_typespec), line:2:9, endln:7:44
+      \_logic_typespec: (typedef_logic_typespec), line:2:9, endln:7:49
     |vpiName:my_instance
     |vpiFullName:work@logic_typespec.my_instance
+    |vpiVisibility:1
+  |vpiReg:
+  \_logic_var: (work@logic_typespec.my_instance), line:7:50, endln:7:61
+  |vpiImportTypespec:
+  \_logic_var: (work@logic_typespec.my_instance), line:7:50, endln:7:61
+  |vpiDefName:work@logic_typespec
   |vpiEndLabel:logic_typespec
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 2
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/LogicTypespec/dut.sv | ${SURELOG_DIR}/build/regression/LogicTypespec/roundtrip/dut_000.sv | 4 | 9 |
+[roundtrip]: ${SURELOG_DIR}/tests/LogicTypespec/dut.sv | ${SURELOG_DIR}/build/regression/LogicTypespec/roundtrip/dut_000.sv | 5 | 9 |
 ============================== End RoundTrip Results ==============================

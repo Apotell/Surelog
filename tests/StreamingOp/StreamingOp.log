@@ -107,59 +107,77 @@ AST_DEBUG_END
 constant                                               3
 cont_assign                                            3
 design                                                 1
-logic_net                                              5
 module_inst                                            1
 operation                                              6
 ref_obj                                                7
+source_file                                            1
 === UHDM Object Stats End ===
+[ERR:IG0807] ${SURELOG_DIR}/tests/StreamingOp/dut.sv:2:19: Child 7 is not entirely in parent's scope.
+[ERR:IG0807] ${SURELOG_DIR}/tests/StreamingOp/dut.sv:2:14: Child 8 is not entirely in parent's scope.
+[ERR:IG0807] ${SURELOG_DIR}/tests/StreamingOp/dut.sv:3:14: Child 14 is not entirely in parent's scope.
+[ERR:IG0807] ${SURELOG_DIR}/tests/StreamingOp/dut.sv:4:27: Child 20 is not entirely in parent's scope.
+[ERR:IG0807] ${SURELOG_DIR}/tests/StreamingOp/dut.sv:4:22: Child 21 is not entirely in parent's scope.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/StreamingOp/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/StreamingOp/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/StreamingOp/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/StreamingOp/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/StreamingOp/dut.sv, line:1:1, endln:5:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@dut
-  |vpiDefName:work@dut
-  |vpiNet:
-  \_logic_net: (work@dut.z), line:2:10, endln:2:11
-    |vpiParent:
-    \_cont_assign: , line:2:10, endln:2:29
-    |vpiName:z
-    |vpiFullName:work@dut.z
-    |vpiNetType:1
-  |vpiNet:
+  |vpiName:work@dut
+  |vpiImportTypespec:
   \_logic_net: (work@dut.x), line:2:22, endln:2:23
     |vpiParent:
-    \_operation: , line:2:14, endln:2:29
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/StreamingOp/dut.sv, line:1:1, endln:5:10
     |vpiName:x
     |vpiFullName:work@dut.x
     |vpiNetType:1
-  |vpiNet:
+  |vpiImportTypespec:
   \_logic_net: (work@dut.y), line:2:25, endln:2:26
     |vpiParent:
-    \_operation: , line:2:14, endln:2:29
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/StreamingOp/dut.sv, line:1:1, endln:5:10
     |vpiName:y
     |vpiFullName:work@dut.y
     |vpiNetType:1
-  |vpiNet:
-  \_logic_net: (work@dut.conv_data), line:4:10, endln:4:19
+  |vpiImportTypespec:
+  \_logic_net: (work@dut.z), line:2:10, endln:2:11
     |vpiParent:
-    \_cont_assign: , line:4:10, endln:4:33
-    |vpiName:conv_data
-    |vpiFullName:work@dut.conv_data
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/StreamingOp/dut.sv, line:1:1, endln:5:10
+    |vpiName:z
+    |vpiFullName:work@dut.z
     |vpiNetType:1
-  |vpiNet:
+  |vpiImportTypespec:
   \_logic_net: (work@dut.v), line:4:30, endln:4:31
     |vpiParent:
-    \_operation: , line:4:22, endln:4:33
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/StreamingOp/dut.sv, line:1:1, endln:5:10
     |vpiName:v
     |vpiFullName:work@dut.v
     |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@dut.conv_data), line:4:10, endln:4:19
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/StreamingOp/dut.sv, line:1:1, endln:5:10
+    |vpiName:conv_data
+    |vpiFullName:work@dut.conv_data
+    |vpiNetType:1
+  |vpiDefName:work@dut
+  |vpiNet:
+  \_logic_net: (work@dut.x), line:2:22, endln:2:23
+  |vpiNet:
+  \_logic_net: (work@dut.y), line:2:25, endln:2:26
+  |vpiNet:
+  \_logic_net: (work@dut.z), line:2:10, endln:2:11
+  |vpiNet:
+  \_logic_net: (work@dut.v), line:4:30, endln:4:31
+  |vpiNet:
+  \_logic_net: (work@dut.conv_data), line:4:10, endln:4:19
   |vpiContAssign:
   \_cont_assign: , line:2:10, endln:2:29
     |vpiParent:
@@ -171,6 +189,8 @@ design: (unnamed)
       |vpiOpType:72
       |vpiOperand:
       \_constant: , line:2:19, endln:2:20
+        |vpiParent:
+        \_operation: , line:2:21, endln:2:27
         |vpiDecompile:4
         |vpiSize:64
         |UINT:4
@@ -199,7 +219,7 @@ design: (unnamed)
     |vpiLhs:
     \_ref_obj: (work@dut.z), line:2:10, endln:2:11
       |vpiParent:
-      \_cont_assign: , line:2:10, endln:2:29
+      \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/StreamingOp/dut.sv, line:1:1, endln:5:10
       |vpiName:z
       |vpiFullName:work@dut.z
       |vpiActual:
@@ -220,6 +240,8 @@ design: (unnamed)
         |vpiOpType:33
         |vpiOperand:
         \_constant: , line:3:20, endln:3:30
+          |vpiParent:
+          \_operation: , line:3:14, endln:3:36
           |vpiDecompile:32'd123456
           |vpiSize:32
           |DEC:123456
@@ -235,7 +257,7 @@ design: (unnamed)
     |vpiLhs:
     \_ref_obj: (work@dut.y), line:3:10, endln:3:11
       |vpiParent:
-      \_cont_assign: , line:3:10, endln:3:36
+      \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/StreamingOp/dut.sv, line:1:1, endln:5:10
       |vpiName:y
       |vpiFullName:work@dut.y
       |vpiActual:
@@ -251,6 +273,8 @@ design: (unnamed)
       |vpiOpType:71
       |vpiOperand:
       \_constant: , line:4:27, endln:4:28
+        |vpiParent:
+        \_operation: , line:4:29, endln:4:32
         |vpiDecompile:8
         |vpiSize:64
         |UINT:8
@@ -271,7 +295,7 @@ design: (unnamed)
     |vpiLhs:
     \_ref_obj: (work@dut.conv_data), line:4:10, endln:4:19
       |vpiParent:
-      \_cont_assign: , line:4:10, endln:4:33
+      \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/StreamingOp/dut.sv, line:1:1, endln:5:10
       |vpiName:conv_data
       |vpiFullName:work@dut.conv_data
       |vpiActual:
@@ -279,10 +303,10 @@ design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 5
 [WARNING] : 1
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/StreamingOp/dut.sv | ${SURELOG_DIR}/build/regression/StreamingOp/roundtrip/dut_000.sv | 3 | 5 |
+[roundtrip]: ${SURELOG_DIR}/tests/StreamingOp/dut.sv | ${SURELOG_DIR}/build/regression/StreamingOp/roundtrip/dut_000.sv | 5 | 5 |
 ============================== End RoundTrip Results ==============================

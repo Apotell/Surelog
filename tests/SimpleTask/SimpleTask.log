@@ -32,19 +32,20 @@
 [WRN:PA0205] ${SURELOG_DIR}/tests/SimpleTask/top_1.v:2:1: No timescale set for "bus_wr_rd_task".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/SimpleTask/top_1.v:2:1: Compile module "work@bus_wr_rd_task".
-[INF:CP0302] Compile class "work@mailbox".
-[INF:CP0302] Compile class "work@process".
-[INF:CP0302] Compile class "work@semaphore".
+[INF:CP0302] Compile class "builtin::mailbox".
+[INF:CP0302] Compile class "builtin::process".
+[INF:CP0302] Compile class "builtin::semaphore".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 always                                                 2
+array_net                                              1
 assignment                                            25
 begin                                                  6
 bit_select                                             2
 class_defn                                             8
-class_typespec                                         4
-class_var                                              3
-constant                                              60
+class_typespec                                         1
+class_var                                              1
+constant                                              72
 delay_control                                          8
 design                                                 1
 enum_const                                             5
@@ -60,12 +61,15 @@ io_decl                                               15
 logic_net                                              9
 logic_typespec                                        13
 logic_var                                              1
-module_inst                                            1
+module_inst                                            6
 operation                                             10
 package                                                1
-range                                                  9
+preproc_macro_definition                              17
+preproc_macro_instance                                 6
+range                                                 15
 ref_obj                                               52
-ref_typespec                                          26
+ref_typespec                                          24
+source_file                                            6
 sys_func_call                                         14
 task                                                  11
 task_call                                              6
@@ -78,6 +82,7 @@ task_call                                              6
 [   NOTE] : 15
 
 ============================== Begin Linting Results ==============================
+[LINT]: ${SURELOG_DIR}/tests/SimpleTask/top_1.v:36:6: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/SimpleTask/top_1.v:26:6: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/SimpleTask/top_1.v:27:6: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/SimpleTask/top_1.v:28:6: Non synthesizable construct,
@@ -85,5 +90,8 @@ task_call                                              6
 [LINT]: ${SURELOG_DIR}/tests/SimpleTask/top_1.v:30:6: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/SimpleTask/top_1.v:31:6: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/SimpleTask/top_1.v:32:6: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/SimpleTask/top_1.v:36:6: Non synthesizable construct,
 ============================== End Linting Results ==============================
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/SimpleTask/top_1.v | ${SURELOG_DIR}/build/regression/SimpleTask/roundtrip/top_1_000.v | 27 | 93 |
+============================== End RoundTrip Results ==============================

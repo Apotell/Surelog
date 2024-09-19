@@ -16,12 +16,13 @@
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 always                                                16
+array_net                                              1
 assignment                                          2217
 begin                                                 52
 bit_select                                            10
 case_item                                           2075
 case_stmt                                              4
-constant                                            4553
+constant                                            4751
 cont_assign                                           37
 delay_control                                          2
 design                                                 1
@@ -31,38 +32,57 @@ forever_stmt                                           1
 if_else                                               28
 if_stmt                                               18
 initial                                                4
-int_typespec                                          21
 integer_typespec                                       5
-logic_net                                            133
-logic_typespec                                       126
-module_inst                                            7
-operation                                            226
+integer_var                                            5
+logic_net                                            126
+logic_typespec                                       170
+module_inst                                            8
+operation                                            230
 param_assign                                          23
 parameter                                             23
 part_select                                           26
 port                                                  78
-range                                                 78
+preproc_macro_definition                               1
+preproc_macro_instance                                 1
+range                                                175
 ref_module                                             4
-ref_obj                                             2592
-ref_typespec                                         173
+ref_obj                                             2548
+ref_typespec                                         175
 ref_var                                                3
 repeat                                                 2
+source_file                                            8
 sys_func_call                                          7
 === UHDM Object Stats End ===
+[ERR:IG0807] ${SURELOG_DIR}/third_party/tests/YosysBigSim/verilog-pong/rtl/pong_graph.v:6:14: Child 12711 is not entirely in parent's scope.
+[ERR:IG0807] ${SURELOG_DIR}/third_party/tests/YosysBigSim/verilog-pong/rtl/pong_graph.v:11:14: Child 12744 is not entirely in parent's scope.
+[ERR:IG0807] ${SURELOG_DIR}/third_party/tests/YosysBigSim/verilog-pong/rtl/text_graph.v:3:14: Child 12759 is not entirely in parent's scope.
+[ERR:IG0807] ${SURELOG_DIR}/third_party/tests/YosysBigSim/verilog-pong/rtl/text_graph.v:4:14: Child 12771 is not entirely in parent's scope.
+[ERR:IG0807] ${SURELOG_DIR}/third_party/tests/YosysBigSim/verilog-pong/rtl/text_graph.v:5:14: Child 12783 is not entirely in parent's scope.
+[ERR:IG0807] ${SURELOG_DIR}/third_party/tests/YosysBigSim/verilog-pong/rtl/vga_sync.v:5:17: Child 12852 is not entirely in parent's scope.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/YosysBigSimPong/slpp_unit/surelog.uhdm ...
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 6
 [WARNING] : 5
 [   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
-[LINT]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/verilog-pong/sim/bench.v:28:2: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/verilog-pong/sim/bench.v:31:3: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/verilog-pong/sim/bench.v:66:5: Non synthesizable construct, $write
 [LINT]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/verilog-pong/sim/bench.v:68:5: Non synthesizable construct, $write
 [LINT]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/verilog-pong/sim/bench.v:70:5: Non synthesizable construct, $write
 [LINT]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/verilog-pong/sim/bench.v:71:5: Non synthesizable construct, $fflush
 [LINT]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/verilog-pong/sim/bench.v:81:4: Non synthesizable construct, $write
 [LINT]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/verilog-pong/sim/bench.v:97:4: Non synthesizable construct, $write
+[LINT]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/verilog-pong/sim/bench.v:28:2: Non synthesizable construct,
+[LINT]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/verilog-pong/sim/bench.v:31:3: Non synthesizable construct,
 ============================== End Linting Results ==============================
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/verilog-pong/rtl/data.v       | ${SURELOG_DIR}/build/regression/YosysBigSimPong/roundtrip/data_000.v       | 973 | 2192 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/verilog-pong/rtl/debounce.v   | ${SURELOG_DIR}/build/regression/YosysBigSimPong/roundtrip/debounce_000.v   | 12 | 32 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/verilog-pong/rtl/pong_graph.v | ${SURELOG_DIR}/build/regression/YosysBigSimPong/roundtrip/pong_graph_000.v | 76 | 248 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/verilog-pong/rtl/text_graph.v | ${SURELOG_DIR}/build/regression/YosysBigSimPong/roundtrip/text_graph_000.v | 23 | 51 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/verilog-pong/rtl/top.v        | ${SURELOG_DIR}/build/regression/YosysBigSimPong/roundtrip/top_000.v        | 55 | 118 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/verilog-pong/rtl/vga_sync.v   | ${SURELOG_DIR}/build/regression/YosysBigSimPong/roundtrip/vga_sync_000.v   | 30 | 84 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/verilog-pong/sim/bench.v      | ${SURELOG_DIR}/build/regression/YosysBigSimPong/roundtrip/bench_000.v      | 51 | 122 |
+============================== End RoundTrip Results ==============================

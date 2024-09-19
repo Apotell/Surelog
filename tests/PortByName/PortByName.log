@@ -7,131 +7,445 @@
 [INF:CP0303] ${SURELOG_DIR}/tests/PortByName/dut.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-array_typespec                                         2
-constant                                              20
+array_net                                              2
+array_typespec                                         5
+array_var                                              3
+constant                                              41
 cont_assign                                            1
 design                                                 1
-logic_net                                              7
-logic_typespec                                         7
+logic_net                                              3
+logic_typespec                                        10
+logic_var                                              4
 module_inst                                            2
-operation                                              2
+operation                                              7
 port                                                   6
-range                                                  9
+range                                                 24
 ref_module                                             1
-ref_obj                                                8
-ref_typespec                                           9
+ref_obj                                                5
+ref_typespec                                          15
+source_file                                            1
 === UHDM Object Stats End ===
+[ERR:IG0807] ${SURELOG_DIR}/tests/PortByName/dut.sv:14:18: Child 116 is not entirely in parent's scope.
+[ERR:IG0807] ${SURELOG_DIR}/tests/PortByName/dut.sv:15:18: Child 127 is not entirely in parent's scope.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PortByName/slpp_unit/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PortByName/slpp_unit/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/PortByName/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/PortByName/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@ibex_id_stage (work@ibex_id_stage), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:12:1, endln:20:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@ibex_id_stage
-  |vpiDefName:work@ibex_id_stage
-  |vpiNet:
+  |vpiName:work@ibex_id_stage
+  |vpiVariables:
+  \_logic_var: (work@ibex_id_stage), line:17:3, endln:17:26
+    |vpiParent:
+    \_module_inst: work@ibex_id_stage (work@ibex_id_stage), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:12:1, endln:20:10
+    |vpiTypespec:
+    \_ref_typespec: (work@ibex_id_stage), line:17:3, endln:17:15
+      |vpiParent:
+      \_logic_var: (work@ibex_id_stage), line:17:3, endln:17:26
+      |vpiFullName:work@ibex_id_stage
+      |vpiActual:
+      \_logic_typespec: , line:17:3, endln:17:15
+    |vpiFullName:work@ibex_id_stage
+  |vpiVariables:
+  \_array_var: (work@ibex_id_stage.fourth), line:17:16, endln:17:26
+    |vpiParent:
+    \_module_inst: work@ibex_id_stage (work@ibex_id_stage), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:12:1, endln:20:10
+    |vpiSize:1
+    |vpiTypespec:
+    \_ref_typespec: (work@ibex_id_stage.fourth), line:17:16, endln:17:22
+      |vpiParent:
+      \_array_var: (work@ibex_id_stage.fourth), line:17:16, endln:17:26
+      |vpiFullName:work@ibex_id_stage.fourth
+      |vpiActual:
+      \_array_typespec: , line:17:16, endln:17:22
+    |vpiName:fourth
+    |vpiFullName:work@ibex_id_stage.fourth
+    |vpiRandType:1
+    |vpiVisibility:1
+    |vpiArrayType:1
+    |vpiRange:
+    \_range: , line:17:23, endln:17:24
+      |vpiParent:
+      \_array_var: (work@ibex_id_stage.fourth), line:17:16, endln:17:26
+      |vpiRightRange:
+      \_operation: , line:17:23, endln:17:24
+        |vpiParent:
+        \_range: , line:17:23, endln:17:24
+        |vpiOpType:11
+        |vpiOperand:
+        \_constant: , line:17:23, endln:17:24
+          |vpiParent:
+          \_range: , line:17:23, endln:17:24
+          |vpiDecompile:2
+          |vpiSize:64
+          |UINT:2
+          |vpiConstType:9
+    |vpiReg:
+    \_logic_var: (work@ibex_id_stage), line:17:3, endln:17:26
+  |vpiReg:
+  \_logic_var: (work@ibex_id_stage), line:17:3, endln:17:26
+  |vpiRegArray:
+  \_array_var: (work@ibex_id_stage.fourth), line:17:16, endln:17:26
+  |vpiTypedef:
+  \_logic_typespec: , line:13:12, endln:13:23
+    |vpiParent:
+    \_module_inst: work@ibex_id_stage (work@ibex_id_stage), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:12:1, endln:20:10
+    |vpiRange:
+    \_range: , line:13:18, endln:13:23
+      |vpiParent:
+      \_module_inst: work@ibex_id_stage (work@ibex_id_stage), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:12:1, endln:20:10
+      |vpiLeftRange:
+      \_constant: , line:13:19, endln:13:20
+        |vpiParent:
+        \_range: , line:13:18, endln:13:23
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:13:21, endln:13:22
+        |vpiParent:
+        \_range: , line:13:18, endln:13:23
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_logic_typespec: , line:14:12, endln:14:24
+    |vpiParent:
+    \_module_inst: work@ibex_id_stage (work@ibex_id_stage), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:12:1, endln:20:10
+    |vpiRange:
+    \_range: , line:14:18, endln:14:24
+      |vpiParent:
+      \_module_inst: work@ibex_id_stage (work@ibex_id_stage), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:12:1, endln:20:10
+      |vpiLeftRange:
+      \_constant: , line:14:19, endln:14:21
+        |vpiParent:
+        \_range: , line:14:18, endln:14:24
+        |vpiDecompile:33
+        |vpiSize:64
+        |UINT:33
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:14:22, endln:14:23
+        |vpiParent:
+        \_range: , line:14:18, endln:14:24
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_logic_typespec: , line:15:12, endln:15:24
+    |vpiParent:
+    \_module_inst: work@ibex_id_stage (work@ibex_id_stage), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:12:1, endln:20:10
+    |vpiRange:
+    \_range: , line:15:18, endln:15:24
+      |vpiParent:
+      \_module_inst: work@ibex_id_stage (work@ibex_id_stage), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:12:1, endln:20:10
+      |vpiLeftRange:
+      \_constant: , line:15:19, endln:15:21
+        |vpiParent:
+        \_range: , line:15:18, endln:15:24
+        |vpiDecompile:33
+        |vpiSize:64
+        |UINT:33
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:15:22, endln:15:23
+        |vpiParent:
+        \_range: , line:15:18, endln:15:24
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_logic_typespec: , line:17:3, endln:17:15
+    |vpiParent:
+    \_module_inst: work@ibex_id_stage (work@ibex_id_stage), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:12:1, endln:20:10
+    |vpiRange:
+    \_range: , line:17:9, endln:17:15
+      |vpiParent:
+      \_module_inst: work@ibex_id_stage (work@ibex_id_stage), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:12:1, endln:20:10
+      |vpiLeftRange:
+      \_constant: , line:17:10, endln:17:12
+        |vpiParent:
+        \_range: , line:17:9, endln:17:15
+        |vpiDecompile:33
+        |vpiSize:64
+        |UINT:33
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:17:13, endln:17:14
+        |vpiParent:
+        \_range: , line:17:9, endln:17:15
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_array_typespec: , line:17:16, endln:17:22
+    |vpiParent:
+    \_module_inst: work@ibex_id_stage (work@ibex_id_stage), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:12:1, endln:20:10
+  |vpiTypedef:
+  \_logic_typespec: , line:13:12, endln:13:23
+    |vpiParent:
+    \_module_inst: work@ibex_id_stage (work@ibex_id_stage), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:12:1, endln:20:10
+    |vpiRange:
+    \_range: , line:13:18, endln:13:23
+      |vpiParent:
+      \_port: (first), line:13:5, endln:13:44
+      |vpiLeftRange:
+      \_constant: , line:13:19, endln:13:20
+        |vpiParent:
+        \_range: , line:13:18, endln:13:23
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:13:21, endln:13:22
+        |vpiParent:
+        \_range: , line:13:18, endln:13:23
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_array_typespec: , line:14:45, endln:14:48
+    |vpiParent:
+    \_module_inst: work@ibex_id_stage (work@ibex_id_stage), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:12:1, endln:20:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_range: , line:14:46, endln:14:47
+      |vpiParent:
+      \_array_typespec: , line:14:45, endln:14:48
+      |vpiRightRange:
+      \_operation: , line:14:46, endln:14:47
+        |vpiParent:
+        \_range: , line:14:46, endln:14:47
+        |vpiOpType:11
+        |vpiOperand:
+        \_constant: , line:14:46, endln:14:47
+          |vpiParent:
+          \_range: , line:14:46, endln:14:47
+          |vpiDecompile:2
+          |vpiSize:64
+          |UINT:2
+          |vpiConstType:9
+    |vpiElemTypespec:
+    \_ref_typespec: (work@ibex_id_stage), line:14:39, endln:14:24
+      |vpiParent:
+      \_array_typespec: , line:14:45, endln:14:48
+      |vpiFullName:work@ibex_id_stage
+      |vpiActual:
+      \_logic_typespec: , line:14:12, endln:14:24
+  |vpiTypedef:
+  \_logic_typespec: , line:14:12, endln:14:24
+    |vpiParent:
+    \_module_inst: work@ibex_id_stage (work@ibex_id_stage), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:12:1, endln:20:10
+    |vpiRange:
+    \_range: , line:14:18, endln:14:24
+      |vpiParent:
+      \_array_typespec: , line:14:45, endln:14:48
+      |vpiLeftRange:
+      \_constant: , line:14:19, endln:14:21
+        |vpiParent:
+        \_range: , line:14:18, endln:14:24
+        |vpiDecompile:33
+        |vpiSize:64
+        |UINT:33
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:14:22, endln:14:23
+        |vpiParent:
+        \_range: , line:14:18, endln:14:24
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_array_typespec: , line:15:44, endln:15:47
+    |vpiParent:
+    \_module_inst: work@ibex_id_stage (work@ibex_id_stage), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:12:1, endln:20:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_range: , line:15:45, endln:15:46
+      |vpiParent:
+      \_array_typespec: , line:15:44, endln:15:47
+      |vpiRightRange:
+      \_operation: , line:15:45, endln:15:46
+        |vpiParent:
+        \_range: , line:15:45, endln:15:46
+        |vpiOpType:11
+        |vpiOperand:
+        \_constant: , line:15:45, endln:15:46
+          |vpiParent:
+          \_range: , line:15:45, endln:15:46
+          |vpiDecompile:2
+          |vpiSize:64
+          |UINT:2
+          |vpiConstType:9
+    |vpiElemTypespec:
+    \_ref_typespec: (work@ibex_id_stage), line:15:39, endln:15:24
+      |vpiParent:
+      \_array_typespec: , line:15:44, endln:15:47
+      |vpiFullName:work@ibex_id_stage
+      |vpiActual:
+      \_logic_typespec: , line:15:12, endln:15:24
+  |vpiTypedef:
+  \_logic_typespec: , line:15:12, endln:15:24
+    |vpiParent:
+    \_module_inst: work@ibex_id_stage (work@ibex_id_stage), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:12:1, endln:20:10
+    |vpiRange:
+    \_range: , line:15:18, endln:15:24
+      |vpiParent:
+      \_array_typespec: , line:15:44, endln:15:47
+      |vpiLeftRange:
+      \_constant: , line:15:19, endln:15:21
+        |vpiParent:
+        \_range: , line:15:18, endln:15:24
+        |vpiDecompile:33
+        |vpiSize:64
+        |UINT:33
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:15:22, endln:15:23
+        |vpiParent:
+        \_range: , line:15:18, endln:15:24
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_logic_typespec: , line:13:12, endln:13:23
+  |vpiImportTypespec:
   \_logic_net: (work@ibex_id_stage.first), line:13:39, endln:13:44
     |vpiParent:
     \_module_inst: work@ibex_id_stage (work@ibex_id_stage), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:12:1, endln:20:10
+    |vpiTypespec:
+    \_ref_typespec: (work@ibex_id_stage.first.first), line:13:12, endln:13:17
+      |vpiParent:
+      \_logic_net: (work@ibex_id_stage.first), line:13:39, endln:13:44
+      |vpiName:first
+      |vpiFullName:work@ibex_id_stage.first.first
+      |vpiActual:
+      \_logic_typespec: , line:13:12, endln:13:23
     |vpiName:first
     |vpiFullName:work@ibex_id_stage.first
     |vpiNetType:36
-  |vpiNet:
-  \_logic_net: (work@ibex_id_stage.second), line:14:39, endln:14:45
+  |vpiImportTypespec:
+  \_logic_typespec: , line:14:12, endln:14:24
+  |vpiImportTypespec:
+  \_logic_net: (work@ibex_id_stage), line:14:5, endln:14:48
     |vpiParent:
     \_module_inst: work@ibex_id_stage (work@ibex_id_stage), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:12:1, endln:20:10
-    |vpiName:second
-    |vpiFullName:work@ibex_id_stage.second
+    |vpiTypespec:
+    \_ref_typespec: (work@ibex_id_stage.second), line:14:12, endln:14:17
+      |vpiParent:
+      \_logic_net: (work@ibex_id_stage), line:14:5, endln:14:48
+      |vpiName:second
+      |vpiFullName:work@ibex_id_stage.second
+      |vpiActual:
+      \_logic_typespec: , line:14:12, endln:14:24
+    |vpiFullName:work@ibex_id_stage
     |vpiNetType:36
-  |vpiNet:
-  \_logic_net: (work@ibex_id_stage.third), line:15:39, endln:15:44
+  |vpiImportTypespec:
+  \_logic_typespec: , line:15:12, endln:15:24
+  |vpiImportTypespec:
+  \_logic_net: (work@ibex_id_stage), line:15:5, endln:15:47
+    |vpiParent:
+    \_module_inst: work@ibex_id_stage (work@ibex_id_stage), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:12:1, endln:20:10
+    |vpiTypespec:
+    \_ref_typespec: (work@ibex_id_stage.third), line:15:12, endln:15:17
+      |vpiParent:
+      \_logic_net: (work@ibex_id_stage), line:15:5, endln:15:47
+      |vpiName:third
+      |vpiFullName:work@ibex_id_stage.third
+      |vpiActual:
+      \_logic_typespec: , line:15:12, endln:15:24
+    |vpiFullName:work@ibex_id_stage
+    |vpiNetType:36
+  |vpiImportTypespec:
+  \_logic_typespec: , line:17:3, endln:17:15
+  |vpiImportTypespec:
+  \_logic_var: (work@ibex_id_stage), line:17:3, endln:17:26
+  |vpiImportTypespec:
+  \_array_var: (work@ibex_id_stage.fourth), line:17:16, endln:17:26
+  |vpiImportTypespec:
+  \_array_typespec: , line:17:16, endln:17:22
+  |vpiImportTypespec:
+  \_logic_typespec: , line:13:12, endln:13:23
+  |vpiImportTypespec:
+  \_array_typespec: , line:14:45, endln:14:48
+  |vpiImportTypespec:
+  \_logic_typespec: , line:14:12, endln:14:24
+  |vpiImportTypespec:
+  \_array_typespec: , line:15:44, endln:15:47
+  |vpiImportTypespec:
+  \_logic_typespec: , line:15:12, endln:15:24
+  |vpiImportTypespec:
+  \_logic_net: (work@ibex_id_stage.third), line:18:10, endln:18:15
     |vpiParent:
     \_module_inst: work@ibex_id_stage (work@ibex_id_stage), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:12:1, endln:20:10
     |vpiName:third
     |vpiFullName:work@ibex_id_stage.third
-    |vpiNetType:36
+    |vpiNetType:1
+  |vpiDefName:work@ibex_id_stage
   |vpiNet:
-  \_logic_net: (work@ibex_id_stage.fourth), line:17:16, endln:17:22
-    |vpiParent:
-    \_module_inst: work@ibex_id_stage (work@ibex_id_stage), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:12:1, endln:20:10
-    |vpiTypespec:
-    \_ref_typespec: (work@ibex_id_stage.fourth)
-      |vpiParent:
-      \_logic_net: (work@ibex_id_stage.fourth), line:17:16, endln:17:22
-      |vpiFullName:work@ibex_id_stage.fourth
-      |vpiActual:
-      \_logic_typespec: , line:17:3, endln:17:25
-    |vpiName:fourth
-    |vpiFullName:work@ibex_id_stage.fourth
-    |vpiNetType:36
+  \_logic_net: (work@ibex_id_stage.first), line:13:39, endln:13:44
+  |vpiNet:
+  \_logic_net: (work@ibex_id_stage), line:14:5, endln:14:48
+  |vpiNet:
+  \_logic_net: (work@ibex_id_stage), line:15:5, endln:15:47
+  |vpiNet:
+  \_logic_net: (work@ibex_id_stage.third), line:18:10, endln:18:15
   |vpiPort:
-  \_port: (first), line:13:39, endln:13:44
+  \_port: (first), line:13:5, endln:13:44
     |vpiParent:
     \_module_inst: work@ibex_id_stage (work@ibex_id_stage), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:12:1, endln:20:10
     |vpiName:first
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@ibex_id_stage.first.first), line:13:39, endln:13:44
-      |vpiParent:
-      \_port: (first), line:13:39, endln:13:44
-      |vpiName:first
-      |vpiFullName:work@ibex_id_stage.first.first
-      |vpiActual:
-      \_logic_net: (work@ibex_id_stage.first), line:13:39, endln:13:44
     |vpiTypedef:
-    \_ref_typespec: (work@ibex_id_stage.first)
+    \_ref_typespec: (work@ibex_id_stage.first), line:13:12, endln:13:17
       |vpiParent:
-      \_port: (first), line:13:39, endln:13:44
+      \_port: (first), line:13:5, endln:13:44
       |vpiFullName:work@ibex_id_stage.first
       |vpiActual:
       \_logic_typespec: , line:13:12, endln:13:23
   |vpiPort:
-  \_port: (second), line:14:39, endln:14:45
+  \_port: (second), line:14:5, endln:14:45
     |vpiParent:
     \_module_inst: work@ibex_id_stage (work@ibex_id_stage), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:12:1, endln:20:10
     |vpiName:second
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@ibex_id_stage.second.second), line:14:39, endln:14:45
-      |vpiParent:
-      \_port: (second), line:14:39, endln:14:45
-      |vpiName:second
-      |vpiFullName:work@ibex_id_stage.second.second
-      |vpiActual:
-      \_logic_net: (work@ibex_id_stage.second), line:14:39, endln:14:45
     |vpiTypedef:
-    \_ref_typespec: (work@ibex_id_stage.second)
+    \_ref_typespec: (work@ibex_id_stage.second), line:14:39, endln:14:24
       |vpiParent:
-      \_port: (second), line:14:39, endln:14:45
+      \_port: (second), line:14:5, endln:14:45
       |vpiFullName:work@ibex_id_stage.second
       |vpiActual:
-      \_array_typespec: , line:14:12, endln:14:47
+      \_array_typespec: , line:14:45, endln:14:48
   |vpiPort:
-  \_port: (third), line:15:39, endln:15:44
+  \_port: (third), line:15:5, endln:15:44
     |vpiParent:
     \_module_inst: work@ibex_id_stage (work@ibex_id_stage), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:12:1, endln:20:10
     |vpiName:third
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@ibex_id_stage.third.third), line:15:39, endln:15:44
-      |vpiParent:
-      \_port: (third), line:15:39, endln:15:44
-      |vpiName:third
-      |vpiFullName:work@ibex_id_stage.third.third
-      |vpiActual:
-      \_logic_net: (work@ibex_id_stage.third), line:15:39, endln:15:44
     |vpiTypedef:
-    \_ref_typespec: (work@ibex_id_stage.third)
+    \_ref_typespec: (work@ibex_id_stage.third), line:15:39, endln:15:24
       |vpiParent:
-      \_port: (third), line:15:39, endln:15:44
+      \_port: (third), line:15:5, endln:15:44
       |vpiFullName:work@ibex_id_stage.third
       |vpiActual:
-      \_array_typespec: , line:15:12, endln:15:46
+      \_array_typespec: , line:15:44, endln:15:47
   |vpiContAssign:
   \_cont_assign: , line:18:10, endln:18:24
     |vpiParent:
@@ -143,65 +457,282 @@ design: (unnamed)
       |vpiName:fourth
       |vpiFullName:work@ibex_id_stage.fourth
       |vpiActual:
-      \_logic_net: (work@ibex_id_stage.fourth), line:17:16, endln:17:22
+      \_array_var: (work@ibex_id_stage.fourth), line:17:16, endln:17:26
     |vpiLhs:
     \_ref_obj: (work@ibex_id_stage.third), line:18:10, endln:18:15
       |vpiParent:
-      \_cont_assign: , line:18:10, endln:18:24
+      \_module_inst: work@ibex_id_stage (work@ibex_id_stage), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:12:1, endln:20:10
       |vpiName:third
       |vpiFullName:work@ibex_id_stage.third
       |vpiActual:
-      \_logic_net: (work@ibex_id_stage.third), line:15:39, endln:15:44
+      \_logic_net: (work@ibex_id_stage.third), line:18:10, endln:18:15
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:1:1, endln:11:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiNet:
-  \_logic_net: (work@top.top_second), line:2:16, endln:2:26
+  |vpiName:work@top
+  |vpiVariables:
+  \_logic_var: (work@top), line:2:3, endln:2:30
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:1:1, endln:11:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.top_second)
+    \_ref_typespec: (work@top), line:2:3, endln:2:15
       |vpiParent:
-      \_logic_net: (work@top.top_second), line:2:16, endln:2:26
+      \_logic_var: (work@top), line:2:3, endln:2:30
+      |vpiFullName:work@top
+      |vpiActual:
+      \_logic_typespec: , line:2:3, endln:2:15
+    |vpiFullName:work@top
+  |vpiVariables:
+  \_array_var: (work@top.top_second), line:2:16, endln:2:30
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:1:1, endln:11:10
+    |vpiSize:1
+    |vpiTypespec:
+    \_ref_typespec: (work@top.top_second), line:2:16, endln:2:26
+      |vpiParent:
+      \_array_var: (work@top.top_second), line:2:16, endln:2:30
       |vpiFullName:work@top.top_second
       |vpiActual:
-      \_logic_typespec: , line:2:3, endln:2:29
+      \_array_typespec: , line:2:16, endln:2:26
     |vpiName:top_second
     |vpiFullName:work@top.top_second
-    |vpiNetType:36
-  |vpiNet:
-  \_logic_net: (work@top.top_third), line:3:16, endln:3:25
+    |vpiRandType:1
+    |vpiVisibility:1
+    |vpiArrayType:1
+    |vpiRange:
+    \_range: , line:2:27, endln:2:28
+      |vpiParent:
+      \_array_var: (work@top.top_second), line:2:16, endln:2:30
+      |vpiRightRange:
+      \_operation: , line:2:27, endln:2:28
+        |vpiParent:
+        \_range: , line:2:27, endln:2:28
+        |vpiOpType:11
+        |vpiOperand:
+        \_constant: , line:2:27, endln:2:28
+          |vpiParent:
+          \_range: , line:2:27, endln:2:28
+          |vpiDecompile:2
+          |vpiSize:64
+          |UINT:2
+          |vpiConstType:9
+    |vpiReg:
+    \_logic_var: (work@top), line:2:3, endln:2:30
+  |vpiVariables:
+  \_logic_var: (work@top), line:3:3, endln:3:29
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:1:1, endln:11:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.top_third)
+    \_ref_typespec: (work@top), line:3:3, endln:3:15
       |vpiParent:
-      \_logic_net: (work@top.top_third), line:3:16, endln:3:25
+      \_logic_var: (work@top), line:3:3, endln:3:29
+      |vpiFullName:work@top
+      |vpiActual:
+      \_logic_typespec: , line:3:3, endln:3:15
+    |vpiFullName:work@top
+  |vpiVariables:
+  \_array_var: (work@top.top_third), line:3:16, endln:3:29
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:1:1, endln:11:10
+    |vpiSize:1
+    |vpiTypespec:
+    \_ref_typespec: (work@top.top_third), line:3:16, endln:3:25
+      |vpiParent:
+      \_array_var: (work@top.top_third), line:3:16, endln:3:29
       |vpiFullName:work@top.top_third
       |vpiActual:
-      \_logic_typespec: , line:3:3, endln:3:28
+      \_array_typespec: , line:3:16, endln:3:25
     |vpiName:top_third
     |vpiFullName:work@top.top_third
-    |vpiNetType:36
-  |vpiNet:
-  \_logic_net: (work@top.top_first), line:4:16, endln:4:25
+    |vpiRandType:1
+    |vpiVisibility:1
+    |vpiArrayType:1
+    |vpiRange:
+    \_range: , line:3:26, endln:3:27
+      |vpiParent:
+      \_array_var: (work@top.top_third), line:3:16, endln:3:29
+      |vpiRightRange:
+      \_operation: , line:3:26, endln:3:27
+        |vpiParent:
+        \_range: , line:3:26, endln:3:27
+        |vpiOpType:11
+        |vpiOperand:
+        \_constant: , line:3:26, endln:3:27
+          |vpiParent:
+          \_range: , line:3:26, endln:3:27
+          |vpiDecompile:2
+          |vpiSize:64
+          |UINT:2
+          |vpiConstType:9
+    |vpiReg:
+    \_logic_var: (work@top), line:3:3, endln:3:29
+  |vpiVariables:
+  \_logic_var: (work@top.top_first), line:4:16, endln:4:25
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:1:1, endln:11:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.top_first)
+    \_ref_typespec: (work@top.top_first), line:4:3, endln:4:14
       |vpiParent:
-      \_logic_net: (work@top.top_first), line:4:16, endln:4:25
+      \_logic_var: (work@top.top_first), line:4:16, endln:4:25
       |vpiFullName:work@top.top_first
       |vpiActual:
       \_logic_typespec: , line:4:3, endln:4:14
     |vpiName:top_first
     |vpiFullName:work@top.top_first
-    |vpiNetType:36
+    |vpiVisibility:1
+  |vpiReg:
+  \_logic_var: (work@top), line:2:3, endln:2:30
+  |vpiReg:
+  \_logic_var: (work@top), line:3:3, endln:3:29
+  |vpiReg:
+  \_logic_var: (work@top.top_first), line:4:16, endln:4:25
+  |vpiRegArray:
+  \_array_var: (work@top.top_second), line:2:16, endln:2:30
+  |vpiRegArray:
+  \_array_var: (work@top.top_third), line:3:16, endln:3:29
+  |vpiTypedef:
+  \_logic_typespec: , line:2:3, endln:2:15
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:1:1, endln:11:10
+    |vpiRange:
+    \_range: , line:2:9, endln:2:15
+      |vpiParent:
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:1:1, endln:11:10
+      |vpiLeftRange:
+      \_constant: , line:2:10, endln:2:12
+        |vpiParent:
+        \_range: , line:2:9, endln:2:15
+        |vpiDecompile:33
+        |vpiSize:64
+        |UINT:33
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:2:13, endln:2:14
+        |vpiParent:
+        \_range: , line:2:9, endln:2:15
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_array_typespec: , line:2:16, endln:2:26
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:1:1, endln:11:10
+  |vpiTypedef:
+  \_logic_typespec: , line:3:3, endln:3:15
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:1:1, endln:11:10
+    |vpiRange:
+    \_range: , line:3:9, endln:3:15
+      |vpiParent:
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:1:1, endln:11:10
+      |vpiLeftRange:
+      \_constant: , line:3:10, endln:3:12
+        |vpiParent:
+        \_range: , line:3:9, endln:3:15
+        |vpiDecompile:33
+        |vpiSize:64
+        |UINT:33
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:3:13, endln:3:14
+        |vpiParent:
+        \_range: , line:3:9, endln:3:15
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_array_typespec: , line:3:16, endln:3:25
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:1:1, endln:11:10
+  |vpiTypedef:
+  \_logic_typespec: , line:4:3, endln:4:14
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:1:1, endln:11:10
+    |vpiRange:
+    \_range: , line:4:9, endln:4:14
+      |vpiParent:
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:1:1, endln:11:10
+      |vpiLeftRange:
+      \_constant: , line:4:10, endln:4:11
+        |vpiParent:
+        \_range: , line:4:9, endln:4:14
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:4:12, endln:4:13
+        |vpiParent:
+        \_range: , line:4:9, endln:4:14
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_logic_typespec: , line:2:3, endln:2:15
+  |vpiImportTypespec:
+  \_logic_var: (work@top), line:2:3, endln:2:30
+  |vpiImportTypespec:
+  \_array_var: (work@top.top_second), line:2:16, endln:2:30
+  |vpiImportTypespec:
+  \_array_typespec: , line:2:16, endln:2:26
+  |vpiImportTypespec:
+  \_logic_typespec: , line:3:3, endln:3:15
+  |vpiImportTypespec:
+  \_logic_var: (work@top), line:3:3, endln:3:29
+  |vpiImportTypespec:
+  \_array_var: (work@top.top_third), line:3:16, endln:3:29
+  |vpiImportTypespec:
+  \_array_typespec: , line:3:16, endln:3:25
+  |vpiImportTypespec:
+  \_logic_typespec: , line:4:3, endln:4:14
+  |vpiImportTypespec:
+  \_logic_var: (work@top.top_first), line:4:16, endln:4:25
+  |vpiDefName:work@top
+  |vpiPort:
+  \_port: (third), line:6:7, endln:6:51
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:1:1, endln:11:10
+    |vpiName:third
+    |vpiHighConn:
+    \_ref_obj: (work@top.third.top_third), line:6:29, endln:6:38
+      |vpiParent:
+      \_port: (third), line:6:7, endln:6:51
+      |vpiName:top_third
+      |vpiFullName:work@top.third.top_third
+      |vpiActual:
+      \_array_var: (work@top.top_third), line:3:16, endln:3:29
+  |vpiPort:
+  \_port: (first), line:7:7, endln:7:51
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:1:1, endln:11:10
+    |vpiName:first
+    |vpiHighConn:
+    \_ref_obj: (work@top.first.top_first), line:7:29, endln:7:38
+      |vpiParent:
+      \_port: (first), line:7:7, endln:7:51
+      |vpiName:top_first
+      |vpiFullName:work@top.first.top_first
+      |vpiActual:
+      \_logic_var: (work@top.top_first), line:4:16, endln:4:25
+  |vpiPort:
+  \_port: (second), line:8:7, endln:8:51
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:1:1, endln:11:10
+    |vpiName:second
+    |vpiHighConn:
+    \_ref_obj: (work@top.second.top_second), line:8:29, endln:8:39
+      |vpiParent:
+      \_port: (second), line:8:7, endln:8:51
+      |vpiName:top_second
+      |vpiFullName:work@top.second.top_second
+      |vpiActual:
+      \_array_var: (work@top.top_second), line:2:16, endln:2:30
   |vpiRefModule:
-  \_ref_module: work@ibex_id_stage (id_stage_i), line:5:17, endln:5:27
+  \_ref_module: work@ibex_id_stage (id_stage_i), line:5:3, endln:9:5
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:1:1, endln:11:10
     |vpiName:id_stage_i
@@ -210,280 +741,17 @@ design: (unnamed)
     \_module_inst: work@ibex_id_stage (work@ibex_id_stage), file:${SURELOG_DIR}/tests/PortByName/dut.sv, line:12:1, endln:20:10
     |vpiPort:
     \_port: (third), line:6:7, endln:6:51
-      |vpiParent:
-      \_ref_module: work@ibex_id_stage (id_stage_i), line:5:17, endln:5:27
-      |vpiName:third
-      |vpiHighConn:
-      \_ref_obj: (work@top.id_stage_i.third.top_third), line:6:29, endln:6:38
-        |vpiParent:
-        \_port: (third), line:6:7, endln:6:51
-        |vpiName:top_third
-        |vpiFullName:work@top.id_stage_i.third.top_third
-        |vpiActual:
-        \_logic_net: (work@top.top_third), line:3:16, endln:3:25
     |vpiPort:
     \_port: (first), line:7:7, endln:7:51
-      |vpiParent:
-      \_ref_module: work@ibex_id_stage (id_stage_i), line:5:17, endln:5:27
-      |vpiName:first
-      |vpiHighConn:
-      \_ref_obj: (work@top.id_stage_i.first.top_first), line:7:29, endln:7:38
-        |vpiParent:
-        \_port: (first), line:7:7, endln:7:51
-        |vpiName:top_first
-        |vpiFullName:work@top.id_stage_i.first.top_first
-        |vpiActual:
-        \_logic_net: (work@top.top_first), line:4:16, endln:4:25
     |vpiPort:
     \_port: (second), line:8:7, endln:8:51
-      |vpiParent:
-      \_ref_module: work@ibex_id_stage (id_stage_i), line:5:17, endln:5:27
-      |vpiName:second
-      |vpiHighConn:
-      \_ref_obj: (work@top.id_stage_i.second.top_second), line:8:29, endln:8:39
-        |vpiParent:
-        \_port: (second), line:8:7, endln:8:51
-        |vpiName:top_second
-        |vpiFullName:work@top.id_stage_i.second.top_second
-        |vpiActual:
-        \_logic_net: (work@top.top_second), line:2:16, endln:2:26
-\_weaklyReferenced:
-\_logic_typespec: , line:13:12, endln:13:23
-  |vpiRange:
-  \_range: , line:13:18, endln:13:23
-    |vpiParent:
-    \_logic_typespec: , line:13:12, endln:13:23
-    |vpiLeftRange:
-    \_constant: , line:13:19, endln:13:20
-      |vpiParent:
-      \_range: , line:13:18, endln:13:23
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:13:21, endln:13:22
-      |vpiParent:
-      \_range: , line:13:18, endln:13:23
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_array_typespec: , line:14:12, endln:14:47
-  |vpiParent:
-  \_port: (second), line:14:39, endln:14:45
-  |vpiArrayType:1
-  |vpiRange:
-  \_range: , line:14:46, endln:14:47
-    |vpiParent:
-    \_array_typespec: , line:14:12, endln:14:47
-    |vpiLeftRange:
-    \_constant: 
-      |vpiParent:
-      \_range: , line:14:46, endln:14:47
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-    |vpiRightRange:
-    \_operation: , line:14:46, endln:14:47
-      |vpiParent:
-      \_range: , line:14:46, endln:14:47
-      |vpiOpType:11
-      |vpiOperand:
-      \_constant: , line:14:46, endln:14:47
-        |vpiParent:
-        \_operation: , line:14:46, endln:14:47
-        |vpiDecompile:2
-        |vpiSize:64
-        |UINT:2
-        |vpiConstType:9
-      |vpiOperand:
-      \_constant: 
-        |vpiSize:64
-        |INT:1
-        |vpiConstType:7
-  |vpiElemTypespec:
-  \_ref_typespec: (work@ibex_id_stage.second)
-    |vpiParent:
-    \_array_typespec: , line:14:12, endln:14:47
-    |vpiFullName:work@ibex_id_stage.second
-    |vpiActual:
-    \_logic_typespec: , line:14:12, endln:14:24
-\_logic_typespec: , line:14:12, endln:14:24
-  |vpiRange:
-  \_range: , line:14:18, endln:14:24
-    |vpiParent:
-    \_logic_typespec: , line:14:12, endln:14:24
-    |vpiLeftRange:
-    \_constant: , line:14:19, endln:14:21
-      |vpiParent:
-      \_range: , line:14:18, endln:14:24
-      |vpiDecompile:33
-      |vpiSize:64
-      |UINT:33
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:14:22, endln:14:23
-      |vpiParent:
-      \_range: , line:14:18, endln:14:24
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_array_typespec: , line:15:12, endln:15:46
-  |vpiParent:
-  \_port: (third), line:15:39, endln:15:44
-  |vpiArrayType:1
-  |vpiRange:
-  \_range: , line:15:45, endln:15:46
-    |vpiParent:
-    \_array_typespec: , line:15:12, endln:15:46
-    |vpiLeftRange:
-    \_constant: 
-      |vpiParent:
-      \_range: , line:15:45, endln:15:46
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-    |vpiRightRange:
-    \_operation: , line:15:45, endln:15:46
-      |vpiParent:
-      \_range: , line:15:45, endln:15:46
-      |vpiOpType:11
-      |vpiOperand:
-      \_constant: , line:15:45, endln:15:46
-        |vpiParent:
-        \_operation: , line:15:45, endln:15:46
-        |vpiDecompile:2
-        |vpiSize:64
-        |UINT:2
-        |vpiConstType:9
-      |vpiOperand:
-      \_constant: 
-        |vpiSize:64
-        |INT:1
-        |vpiConstType:7
-  |vpiElemTypespec:
-  \_ref_typespec: (work@ibex_id_stage.third)
-    |vpiParent:
-    \_array_typespec: , line:15:12, endln:15:46
-    |vpiFullName:work@ibex_id_stage.third
-    |vpiActual:
-    \_logic_typespec: , line:15:12, endln:15:24
-\_logic_typespec: , line:15:12, endln:15:24
-  |vpiRange:
-  \_range: , line:15:18, endln:15:24
-    |vpiParent:
-    \_logic_typespec: , line:15:12, endln:15:24
-    |vpiLeftRange:
-    \_constant: , line:15:19, endln:15:21
-      |vpiParent:
-      \_range: , line:15:18, endln:15:24
-      |vpiDecompile:33
-      |vpiSize:64
-      |UINT:33
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:15:22, endln:15:23
-      |vpiParent:
-      \_range: , line:15:18, endln:15:24
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:17:3, endln:17:25
-  |vpiRange:
-  \_range: , line:17:9, endln:17:15
-    |vpiParent:
-    \_logic_typespec: , line:17:3, endln:17:25
-    |vpiLeftRange:
-    \_constant: , line:17:10, endln:17:12
-      |vpiParent:
-      \_range: , line:17:9, endln:17:15
-      |vpiDecompile:33
-      |vpiSize:64
-      |UINT:33
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:17:13, endln:17:14
-      |vpiParent:
-      \_range: , line:17:9, endln:17:15
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:2:3, endln:2:29
-  |vpiRange:
-  \_range: , line:2:9, endln:2:15
-    |vpiParent:
-    \_logic_typespec: , line:2:3, endln:2:29
-    |vpiLeftRange:
-    \_constant: , line:2:10, endln:2:12
-      |vpiParent:
-      \_range: , line:2:9, endln:2:15
-      |vpiDecompile:33
-      |vpiSize:64
-      |UINT:33
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:13, endln:2:14
-      |vpiParent:
-      \_range: , line:2:9, endln:2:15
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:3:3, endln:3:28
-  |vpiRange:
-  \_range: , line:3:9, endln:3:15
-    |vpiParent:
-    \_logic_typespec: , line:3:3, endln:3:28
-    |vpiLeftRange:
-    \_constant: , line:3:10, endln:3:12
-      |vpiParent:
-      \_range: , line:3:9, endln:3:15
-      |vpiDecompile:33
-      |vpiSize:64
-      |UINT:33
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:13, endln:3:14
-      |vpiParent:
-      \_range: , line:3:9, endln:3:15
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:4:3, endln:4:14
-  |vpiRange:
-  \_range: , line:4:9, endln:4:14
-    |vpiParent:
-    \_logic_typespec: , line:4:3, endln:4:14
-    |vpiLeftRange:
-    \_constant: , line:4:10, endln:4:11
-      |vpiParent:
-      \_range: , line:4:9, endln:4:14
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:4:12, endln:4:13
-      |vpiParent:
-      \_range: , line:4:9, endln:4:14
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 2
 [WARNING] : 2
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PortByName/dut.sv | ${SURELOG_DIR}/build/regression/PortByName/roundtrip/dut_000.sv | 12 | 20 |
+[roundtrip]: ${SURELOG_DIR}/tests/PortByName/dut.sv | ${SURELOG_DIR}/build/regression/PortByName/roundtrip/dut_000.sv | 16 | 20 |
 ============================== End RoundTrip Results ==============================

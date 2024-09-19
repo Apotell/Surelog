@@ -59,99 +59,67 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/PortDefaultValue/dut.sv:2:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                               3
+constant                                               7
 design                                                 1
 logic_net                                              1
-logic_typespec                                         1
 module_inst                                            2
 port                                                   1
-range                                                  1
+range                                                  3
 ref_module                                             1
-ref_obj                                                1
-ref_typespec                                           1
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PortDefaultValue/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PortDefaultValue/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/PortDefaultValue/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/PortDefaultValue/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@bus_conn (work@bus_conn), file:${SURELOG_DIR}/tests/PortDefaultValue/dut.sv, line:6:1, endln:8:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@bus_conn
-  |vpiDefName:work@bus_conn
-  |vpiNet:
+  |vpiName:work@bus_conn
+  |vpiImportTypespec:
   \_logic_net: (work@bus_conn.datain), line:7:13, endln:7:19
     |vpiParent:
     \_module_inst: work@bus_conn (work@bus_conn), file:${SURELOG_DIR}/tests/PortDefaultValue/dut.sv, line:6:1, endln:8:10
     |vpiName:datain
     |vpiFullName:work@bus_conn.datain
+  |vpiDefName:work@bus_conn
+  |vpiNet:
+  \_logic_net: (work@bus_conn.datain), line:7:13, endln:7:19
   |vpiPort:
-  \_port: (datain), line:7:13, endln:7:19
+  \_port: (datain), line:7:1, endln:7:19
     |vpiParent:
     \_module_inst: work@bus_conn (work@bus_conn), file:${SURELOG_DIR}/tests/PortDefaultValue/dut.sv, line:6:1, endln:8:10
     |vpiName:datain
     |vpiDirection:1
     |vpiHighConn:
     \_constant: , line:7:22, endln:7:27
+      |vpiParent:
+      \_port: (datain), line:7:1, endln:7:19
       |vpiDecompile:8'hFF
       |vpiSize:8
       |HEX:FF
       |vpiConstType:5
-    |vpiLowConn:
-    \_ref_obj: (work@bus_conn.datain.datain), line:7:13, endln:7:19
-      |vpiParent:
-      \_port: (datain), line:7:13, endln:7:19
-      |vpiName:datain
-      |vpiFullName:work@bus_conn.datain.datain
-      |vpiActual:
-      \_logic_net: (work@bus_conn.datain), line:7:13, endln:7:19
-    |vpiTypedef:
-    \_ref_typespec: (work@bus_conn.datain)
-      |vpiParent:
-      \_port: (datain), line:7:13, endln:7:19
-      |vpiFullName:work@bus_conn.datain
-      |vpiActual:
-      \_logic_typespec: , line:7:7, endln:7:12
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PortDefaultValue/dut.sv, line:2:1, endln:4:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
+  |vpiName:work@top
   |vpiDefName:work@top
   |vpiRefModule:
-  \_ref_module: work@bus_conn (u1), line:3:10, endln:3:12
+  \_ref_module: work@bus_conn (u1), line:3:1, endln:3:15
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PortDefaultValue/dut.sv, line:2:1, endln:4:10
     |vpiName:u1
     |vpiDefName:work@bus_conn
     |vpiActual:
     \_module_inst: work@bus_conn (work@bus_conn), file:${SURELOG_DIR}/tests/PortDefaultValue/dut.sv, line:6:1, endln:8:10
-\_weaklyReferenced:
-\_logic_typespec: , line:7:7, endln:7:12
-  |vpiRange:
-  \_range: , line:7:7, endln:7:12
-    |vpiParent:
-    \_logic_typespec: , line:7:7, endln:7:12
-    |vpiLeftRange:
-    \_constant: , line:7:8, endln:7:9
-      |vpiParent:
-      \_range: , line:7:7, endln:7:12
-      |vpiDecompile:7
-      |vpiSize:64
-      |UINT:7
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:7:10, endln:7:11
-      |vpiParent:
-      \_range: , line:7:7, endln:7:12
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -160,5 +128,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PortDefaultValue/dut.sv | ${SURELOG_DIR}/build/regression/PortDefaultValue/roundtrip/dut_000.sv | 2 | 8 |
+[roundtrip]: ${SURELOG_DIR}/tests/PortDefaultValue/dut.sv | ${SURELOG_DIR}/build/regression/PortDefaultValue/roundtrip/dut_000.sv | 6 | 8 |
 ============================== End RoundTrip Results ==============================

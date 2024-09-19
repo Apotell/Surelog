@@ -50,56 +50,68 @@ logic_typespec                                         1
 module_inst                                            1
 range                                                  1
 ref_typespec                                           1
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SignedWire/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/SignedWire/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/SignedWire/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/SignedWire/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SignedWire/dut.sv, line:1:1, endln:3:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiNet:
+  |vpiName:work@top
+  |vpiTypedef:
+  \_logic_typespec: , line:2:1, endln:2:19
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SignedWire/dut.sv, line:1:1, endln:3:10
+    |vpiRange:
+    \_range: , line:2:13, endln:2:19
+      |vpiParent:
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SignedWire/dut.sv, line:1:1, endln:3:10
+      |vpiLeftRange:
+      \_constant: , line:2:14, endln:2:16
+        |vpiParent:
+        \_range: , line:2:13, endln:2:19
+        |vpiDecompile:15
+        |vpiSize:64
+        |UINT:15
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:2:17, endln:2:18
+        |vpiParent:
+        \_range: , line:2:13, endln:2:19
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_logic_typespec: , line:2:1, endln:2:19
+  |vpiImportTypespec:
   \_logic_net: (work@top.wire_merged), line:2:20, endln:2:31
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SignedWire/dut.sv, line:1:1, endln:3:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.wire_merged)
+    \_ref_typespec: (work@top.wire_merged.wire_merged), line:2:1, endln:2:5
       |vpiParent:
       \_logic_net: (work@top.wire_merged), line:2:20, endln:2:31
-      |vpiFullName:work@top.wire_merged
+      |vpiName:wire_merged
+      |vpiFullName:work@top.wire_merged.wire_merged
       |vpiActual:
-      \_logic_typespec: , line:2:1, endln:2:12
+      \_logic_typespec: , line:2:1, endln:2:19
     |vpiName:wire_merged
     |vpiFullName:work@top.wire_merged
     |vpiNetType:1
-\_weaklyReferenced:
-\_logic_typespec: , line:2:1, endln:2:12
-  |vpiRange:
-  \_range: , line:2:13, endln:2:19
-    |vpiParent:
-    \_logic_typespec: , line:2:1, endln:2:12
-    |vpiLeftRange:
-    \_constant: , line:2:14, endln:2:16
-      |vpiParent:
-      \_range: , line:2:13, endln:2:19
-      |vpiDecompile:15
-      |vpiSize:64
-      |UINT:15
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:17, endln:2:18
-      |vpiParent:
-      \_range: , line:2:13, endln:2:19
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
+    |vpiSigned:1
+  |vpiDefName:work@top
+  |vpiNet:
+  \_logic_net: (work@top.wire_merged), line:2:20, endln:2:31
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -108,5 +120,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/SignedWire/dut.sv | ${SURELOG_DIR}/build/regression/SignedWire/roundtrip/dut_000.sv | 1 | 3 |
+[roundtrip]: ${SURELOG_DIR}/tests/SignedWire/dut.sv | ${SURELOG_DIR}/build/regression/SignedWire/roundtrip/dut_000.sv | 3 | 3 |
 ============================== End RoundTrip Results ==============================

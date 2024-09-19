@@ -101,87 +101,113 @@ AST_DEBUG_END
 cont_assign                                            1
 design                                                 1
 hier_path                                              1
-int_typespec                                           2
+int_typespec                                           1
 interface_inst                                         1
-interface_typespec                                     2
+interface_typespec                                     3
 io_decl                                                1
-logic_net                                              3
+logic_net                                              1
 modport                                                1
 module_inst                                            1
 port                                                   1
-ref_obj                                                5
+ref_obj                                                4
 ref_typespec                                           3
+source_file                                            1
 struct_typespec                                        1
+struct_var                                             1
 typespec_member                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/NameCollisionBind/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/NameCollisionBind/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/NameCollisionBind/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallInterfaces:
 \_interface_inst: work@PerformanceCounterIF (work@PerformanceCounterIF), file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv, line:11:1, endln:18:13
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@PerformanceCounterIF
-  |vpiDefName:work@PerformanceCounterIF
-  |vpiNet:
+  |vpiName:work@PerformanceCounterIF
+  |vpiVariables:
+  \_struct_var: (work@PerformanceCounterIF.perfCounter), line:13:21, endln:13:32
+    |vpiParent:
+    \_interface_inst: work@PerformanceCounterIF (work@PerformanceCounterIF), file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv, line:11:1, endln:18:13
+    |vpiTypespec:
+    \_ref_typespec: (work@PerformanceCounterIF.perfCounter.PerfCounterPath), line:13:5, endln:13:20
+      |vpiParent:
+      \_struct_var: (work@PerformanceCounterIF.perfCounter), line:13:21, endln:13:32
+      |vpiName:PerfCounterPath
+      |vpiFullName:work@PerformanceCounterIF.perfCounter.PerfCounterPath
+      |vpiActual:
+      \_struct_typespec: (PerfCounterPath), line:4:9, endln:8:2
+    |vpiName:perfCounter
+    |vpiFullName:work@PerformanceCounterIF.perfCounter
+    |vpiVisibility:1
+  |vpiImportTypespec:
+  \_struct_var: (work@PerformanceCounterIF.perfCounter), line:13:21, endln:13:32
+  |vpiImportTypespec:
   \_logic_net: (work@PerformanceCounterIF.perfCounter), line:13:21, endln:13:32
     |vpiParent:
     \_interface_inst: work@PerformanceCounterIF (work@PerformanceCounterIF), file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv, line:11:1, endln:18:13
     |vpiName:perfCounter
     |vpiFullName:work@PerformanceCounterIF.perfCounter
+  |vpiDefName:work@PerformanceCounterIF
+  |vpiNet:
+  \_logic_net: (work@PerformanceCounterIF.perfCounter), line:13:21, endln:13:32
   |vpiModport:
   \_modport: (CSR), line:14:13, endln:14:16
     |vpiParent:
     \_interface_inst: work@PerformanceCounterIF (work@PerformanceCounterIF), file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv, line:11:1, endln:18:13
     |vpiName:CSR
-    |vpiIODecl:
-    \_io_decl: (perfCounter), line:16:5, endln:16:16
-      |vpiParent:
-      \_modport: (CSR), line:14:13, endln:14:16
-      |vpiDirection:1
-      |vpiName:perfCounter
 |uhdmallModules:
 \_module_inst: work@CSR_Unit (work@CSR_Unit), file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv, line:20:1, endln:27:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@CSR_Unit
-  |vpiDefName:work@CSR_Unit
-  |vpiNet:
-  \_logic_net: (work@CSR_Unit.perfCounter), line:21:30, endln:21:41
+  |vpiName:work@CSR_Unit
+  |vpiTypedef:
+  \_interface_typespec: (PerformanceCounterIF), line:21:5, endln:21:25
     |vpiParent:
     \_module_inst: work@CSR_Unit (work@CSR_Unit), file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv, line:20:1, endln:27:10
-    |vpiName:perfCounter
-    |vpiFullName:work@CSR_Unit.perfCounter
-  |vpiNet:
+    |vpiName:PerformanceCounterIF
+    |vpiInterface:
+    \_interface_inst: work@PerformanceCounterIF (work@PerformanceCounterIF), file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv, line:11:1, endln:18:13
+  |vpiTypedef:
+  \_interface_typespec: (CSR), line:21:26, endln:21:29
+    |vpiParent:
+    \_module_inst: work@CSR_Unit (work@CSR_Unit), file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv, line:20:1, endln:27:10
+    |vpiName:CSR
+    |vpiIsModPort:1
+    |vpiInterface:
+    \_interface_inst: work@PerformanceCounterIF (work@PerformanceCounterIF), file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv, line:11:1, endln:18:13
+  |vpiImportTypespec:
+  \_interface_typespec: (PerformanceCounterIF), line:21:5, endln:21:25
+  |vpiImportTypespec:
+  \_interface_typespec: (CSR), line:21:26, endln:21:29
+  |vpiImportTypespec:
   \_logic_net: (work@CSR_Unit.mshrID), line:25:9, endln:25:15
     |vpiParent:
-    \_cont_assign: , line:25:9, endln:25:53
+    \_module_inst: work@CSR_Unit (work@CSR_Unit), file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv, line:20:1, endln:27:10
     |vpiName:mshrID
     |vpiFullName:work@CSR_Unit.mshrID
     |vpiNetType:1
+  |vpiDefName:work@CSR_Unit
+  |vpiNet:
+  \_logic_net: (work@CSR_Unit.mshrID), line:25:9, endln:25:15
   |vpiPort:
-  \_port: (perfCounter), line:21:30, endln:21:41
+  \_port: (perfCounter), line:21:5, endln:21:41
     |vpiParent:
     \_module_inst: work@CSR_Unit (work@CSR_Unit), file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv, line:20:1, endln:27:10
     |vpiName:perfCounter
     |vpiDirection:3
-    |vpiLowConn:
-    \_ref_obj: (work@CSR_Unit.perfCounter.perfCounter), line:21:30, endln:21:41
-      |vpiParent:
-      \_port: (perfCounter), line:21:30, endln:21:41
-      |vpiName:perfCounter
-      |vpiFullName:work@CSR_Unit.perfCounter.perfCounter
-      |vpiActual:
-      \_logic_net: (work@CSR_Unit.perfCounter), line:21:30, endln:21:41
     |vpiTypedef:
-    \_ref_typespec: (work@CSR_Unit.perfCounter)
+    \_ref_typespec: (work@CSR_Unit.perfCounter.CSR), line:21:5, endln:21:25
       |vpiParent:
-      \_port: (perfCounter), line:21:30, endln:21:41
-      |vpiFullName:work@CSR_Unit.perfCounter
+      \_port: (perfCounter), line:21:5, endln:21:41
+      |vpiName:CSR
+      |vpiFullName:work@CSR_Unit.perfCounter.CSR
       |vpiActual:
       \_interface_typespec: (CSR), line:21:26, endln:21:29
   |vpiContAssign:
@@ -197,22 +223,28 @@ design: (unnamed)
         |vpiParent:
         \_hier_path: (perfCounter.perfCounter.numLoadMiss), line:25:18, endln:25:53
         |vpiName:perfCounter
+        |vpiActual:
+        \_logic_net: (work@PerformanceCounterIF.perfCounter), line:13:21, endln:13:32
       |vpiActual:
       \_ref_obj: (perfCounter), line:25:30, endln:25:41
         |vpiParent:
         \_hier_path: (perfCounter.perfCounter.numLoadMiss), line:25:18, endln:25:53
         |vpiName:perfCounter
+        |vpiActual:
+        \_logic_net: (work@PerformanceCounterIF.perfCounter), line:13:21, endln:13:32
       |vpiActual:
       \_ref_obj: (work@CSR_Unit.numLoadMiss), line:25:42, endln:25:53
         |vpiParent:
         \_hier_path: (perfCounter.perfCounter.numLoadMiss), line:25:18, endln:25:53
         |vpiName:numLoadMiss
         |vpiFullName:work@CSR_Unit.numLoadMiss
+        |vpiActual:
+        \_typespec_member: (numLoadMiss), line:6:1, endln:6:22
       |vpiName:perfCounter.perfCounter.numLoadMiss
     |vpiLhs:
     \_ref_obj: (work@CSR_Unit.mshrID), line:25:9, endln:25:15
       |vpiParent:
-      \_cont_assign: , line:25:9, endln:25:53
+      \_module_inst: work@CSR_Unit (work@CSR_Unit), file:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv, line:20:1, endln:27:10
       |vpiName:mshrID
       |vpiFullName:work@CSR_Unit.mshrID
       |vpiActual:
@@ -222,52 +254,26 @@ design: (unnamed)
   |vpiParent:
   \_design: (unnamed)
   |vpiName:DataPath
-  |vpiInstance:
-  \_design: (unnamed)
   |vpiSigned:1
 |vpiTypedef:
 \_struct_typespec: (PerfCounterPath), line:4:9, endln:8:2
   |vpiParent:
   \_design: (unnamed)
   |vpiName:PerfCounterPath
-  |vpiInstance:
-  \_design: (unnamed)
   |vpiPacked:1
   |vpiTypespecMember:
-  \_typespec_member: (numLoadMiss), line:6:10, endln:6:21
+  \_typespec_member: (numLoadMiss), line:6:1, endln:6:22
     |vpiParent:
     \_struct_typespec: (PerfCounterPath), line:4:9, endln:8:2
     |vpiName:numLoadMiss
     |vpiTypespec:
-    \_ref_typespec: (PerfCounterPath.numLoadMiss)
+    \_ref_typespec: (PerfCounterPath.numLoadMiss.DataPath), line:6:1, endln:6:9
       |vpiParent:
-      \_typespec_member: (numLoadMiss), line:6:10, endln:6:21
-      |vpiFullName:PerfCounterPath.numLoadMiss
+      \_typespec_member: (numLoadMiss), line:6:1, endln:6:22
+      |vpiName:DataPath
+      |vpiFullName:PerfCounterPath.numLoadMiss.DataPath
       |vpiActual:
       \_int_typespec: (DataPath), line:2:9, endln:2:12
-    |vpiRefFile:${SURELOG_DIR}/tests/NameCollisionBind/dut.sv
-    |vpiRefLineNo:6
-    |vpiRefColumnNo:1
-    |vpiRefEndLineNo:6
-    |vpiRefEndColumnNo:9
-\_weaklyReferenced:
-\_int_typespec: (DataPath), line:2:9, endln:2:12
-  |vpiName:DataPath
-  |vpiTypedefAlias:
-  \_ref_typespec: (DataPath)
-    |vpiParent:
-    \_int_typespec: (DataPath), line:2:9, endln:2:12
-    |vpiFullName:DataPath
-    |vpiActual:
-    \_int_typespec: (DataPath), line:2:9, endln:2:12
-  |vpiSigned:1
-\_interface_typespec: (CSR), line:21:26, endln:21:29
-  |vpiParent:
-  \_interface_typespec: (PerformanceCounterIF), line:21:5, endln:21:25
-  |vpiName:CSR
-  |vpiIsModPort:1
-\_interface_typespec: (PerformanceCounterIF), line:21:5, endln:21:25
-  |vpiName:PerformanceCounterIF
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -276,5 +282,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/NameCollisionBind/dut.sv | ${SURELOG_DIR}/build/regression/NameCollisionBind/roundtrip/dut_000.sv | 11 | 27 |
+[roundtrip]: ${SURELOG_DIR}/tests/NameCollisionBind/dut.sv | ${SURELOG_DIR}/build/regression/NameCollisionBind/roundtrip/dut_000.sv | 13 | 27 |
 ============================== End RoundTrip Results ==============================

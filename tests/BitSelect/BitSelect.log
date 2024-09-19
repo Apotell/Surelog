@@ -183,47 +183,50 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             1
+begin                                                  1
 bit_select                                             1
 bit_typespec                                           1
 constant                                               7
 design                                                 1
 gen_for                                                1
 int_typespec                                           1
-logic_net                                              1
 logic_typespec                                         1
 module_inst                                            2
-named_begin                                            1
 operation                                              5
 param_assign                                           4
 parameter                                              4
 range                                                  1
 ref_module                                             1
 ref_obj                                                5
-ref_typespec                                           6
+ref_typespec                                           4
 ref_var                                                1
+source_file                                            1
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BitSelect/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/BitSelect/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/BitSelect/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/BitSelect/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@alert_sender (work@alert_sender), file:${SURELOG_DIR}/tests/BitSelect/dut.sv, line:1:1, endln:5:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@alert_sender
+  |vpiName:work@alert_sender
   |vpiParameter:
-  \_parameter: (work@alert_sender.AsyncOn), line:3:17, endln:3:24
+  \_parameter: (work@alert_sender.AsyncOn), line:3:17, endln:3:31
     |vpiParent:
     \_module_inst: work@alert_sender (work@alert_sender), file:${SURELOG_DIR}/tests/BitSelect/dut.sv, line:1:1, endln:5:10
     |BIN:0
     |vpiTypespec:
-    \_ref_typespec: (work@alert_sender.AsyncOn)
+    \_ref_typespec: (work@alert_sender.AsyncOn), line:3:13, endln:3:16
       |vpiParent:
-      \_parameter: (work@alert_sender.AsyncOn), line:3:17, endln:3:24
+      \_parameter: (work@alert_sender.AsyncOn), line:3:17, endln:3:31
       |vpiFullName:work@alert_sender.AsyncOn
       |vpiActual:
       \_bit_typespec: , line:3:13, endln:3:16
@@ -240,31 +243,30 @@ design: (unnamed)
       |vpiDecompile:1'b0
       |vpiSize:1
       |BIN:0
-      |vpiTypespec:
-      \_ref_typespec: (work@alert_sender)
-        |vpiParent:
-        \_constant: , line:3:27, endln:3:31
-        |vpiFullName:work@alert_sender
-        |vpiActual:
-        \_bit_typespec: , line:3:13, endln:3:16
       |vpiConstType:3
     |vpiLhs:
-    \_parameter: (work@alert_sender.AsyncOn), line:3:17, endln:3:24
+    \_parameter: (work@alert_sender.AsyncOn), line:3:17, endln:3:31
+  |vpiTypedef:
+  \_bit_typespec: , line:3:13, endln:3:16
+    |vpiParent:
+    \_module_inst: work@alert_sender (work@alert_sender), file:${SURELOG_DIR}/tests/BitSelect/dut.sv, line:1:1, endln:5:10
+  |vpiImportTypespec:
+  \_bit_typespec: , line:3:13, endln:3:16
   |vpiDefName:work@alert_sender
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitSelect/dut.sv, line:6:1, endln:15:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@dut
+  |vpiName:work@dut
   |vpiParameter:
-  \_parameter: (work@dut.NumAlerts), line:7:33, endln:7:42
+  \_parameter: (work@dut.NumAlerts), line:7:33, endln:7:46
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitSelect/dut.sv, line:6:1, endln:15:10
     |UINT:3
     |vpiTypespec:
-    \_ref_typespec: (work@dut.NumAlerts)
+    \_ref_typespec: (work@dut.NumAlerts), line:7:11, endln:7:14
       |vpiParent:
-      \_parameter: (work@dut.NumAlerts), line:7:33, endln:7:42
+      \_parameter: (work@dut.NumAlerts), line:7:33, endln:7:46
       |vpiFullName:work@dut.NumAlerts
       |vpiActual:
       \_int_typespec: , line:7:11, endln:7:14
@@ -272,20 +274,20 @@ design: (unnamed)
     |vpiName:NumAlerts
     |vpiFullName:work@dut.NumAlerts
   |vpiParameter:
-  \_parameter: (work@dut.AlertAsyncOn), line:8:33, endln:8:45
+  \_parameter: (work@dut.AlertAsyncOn), line:8:33, endln:8:65
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitSelect/dut.sv, line:6:1, endln:15:10
     |vpiTypespec:
-    \_ref_typespec: (work@dut.AlertAsyncOn)
+    \_ref_typespec: (work@dut.AlertAsyncOn), line:8:11, endln:8:16
       |vpiParent:
-      \_parameter: (work@dut.AlertAsyncOn), line:8:33, endln:8:45
+      \_parameter: (work@dut.AlertAsyncOn), line:8:33, endln:8:65
       |vpiFullName:work@dut.AlertAsyncOn
       |vpiActual:
       \_logic_typespec: , line:8:11, endln:8:32
     |vpiName:AlertAsyncOn
     |vpiFullName:work@dut.AlertAsyncOn
   |vpiParameter:
-  \_parameter: (work@dut.res), line:9:11, endln:9:14
+  \_parameter: (work@dut.res), line:9:11, endln:9:33
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitSelect/dut.sv, line:6:1, endln:15:10
     |vpiName:res
@@ -301,16 +303,9 @@ design: (unnamed)
       |vpiDecompile:3
       |vpiSize:64
       |UINT:3
-      |vpiTypespec:
-      \_ref_typespec: (work@dut)
-        |vpiParent:
-        \_constant: , line:7:45, endln:7:46
-        |vpiFullName:work@dut
-        |vpiActual:
-        \_int_typespec: , line:7:11, endln:7:14
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@dut.NumAlerts), line:7:33, endln:7:42
+    \_parameter: (work@dut.NumAlerts), line:7:33, endln:7:46
   |vpiParamAssign:
   \_param_assign: , line:8:33, endln:8:65
     |vpiParent:
@@ -326,6 +321,8 @@ design: (unnamed)
         \_operation: , line:8:48, endln:8:65
         |vpiName:NumAlerts
         |vpiFullName:work@dut.NumAlerts
+        |vpiActual:
+        \_parameter: (work@dut.NumAlerts), line:7:33, endln:7:46
       |vpiOperand:
       \_operation: , line:8:58, endln:8:64
         |vpiParent:
@@ -333,71 +330,89 @@ design: (unnamed)
         |vpiOpType:33
         |vpiOperand:
         \_constant: , line:8:59, endln:8:63
+          |vpiParent:
+          \_operation: , line:8:58, endln:8:64
           |vpiDecompile:1'b1
           |vpiSize:1
           |BIN:1
           |vpiConstType:3
     |vpiLhs:
-    \_parameter: (work@dut.AlertAsyncOn), line:8:33, endln:8:45
+    \_parameter: (work@dut.AlertAsyncOn), line:8:33, endln:8:65
   |vpiParamAssign:
   \_param_assign: , line:9:11, endln:9:33
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitSelect/dut.sv, line:6:1, endln:15:10
     |vpiRhs:
-    \_bit_select: (work@dut.AlertAsyncOn), line:9:18, endln:9:33
+    \_bit_select: (work@dut.AlertAsyncOn), line:9:30, endln:9:33
       |vpiParent:
       \_param_assign: , line:9:11, endln:9:33
       |vpiName:AlertAsyncOn
       |vpiFullName:work@dut.AlertAsyncOn
+      |vpiActual:
+      \_parameter: (work@dut.AlertAsyncOn), line:8:33, endln:8:65
       |vpiIndex:
       \_constant: , line:9:31, endln:9:32
         |vpiParent:
-        \_bit_select: (work@dut.AlertAsyncOn), line:9:18, endln:9:33
+        \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitSelect/dut.sv, line:6:1, endln:15:10
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@dut.res), line:9:11, endln:9:14
-  |vpiDefName:work@dut
-  |vpiNet:
-  \_logic_net: (work@dut.i), line:10:20, endln:10:21
-    |vpiParent:
-    \_operation: , line:10:20, endln:10:33
-    |vpiName:i
-    |vpiFullName:work@dut.i
-    |vpiNetType:1
-  |vpiGenStmt:
-  \_gen_for: 
+    \_parameter: (work@dut.res), line:9:11, endln:9:33
+  |vpiInternalScope:
+  \_gen_for: (work@dut), line:10:1, endln:14:4
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitSelect/dut.sv, line:6:1, endln:15:10
+    |vpiFullName:work@dut
+    |vpiVariables:
+    \_ref_var: (work@dut.i), line:10:13, endln:10:14
+      |vpiParent:
+      \_gen_for: (work@dut), line:10:1, endln:14:4
+      |vpiTypespec:
+      \_ref_typespec: (work@dut.i.i), line:10:13, endln:10:14
+        |vpiParent:
+        \_ref_var: (work@dut.i), line:10:13, endln:10:14
+        |vpiName:i
+        |vpiFullName:work@dut.i.i
+        |vpiActual:
+        \_unsupported_typespec: (i), line:10:13, endln:10:14
+      |vpiName:i
+      |vpiFullName:work@dut.i
+    |vpiInternalScope:
+    \_begin: (work@dut.gen_alert_tx), line:10:40, endln:14:4
+      |vpiParent:
+      \_gen_for: (work@dut), line:10:1, endln:14:4
+      |vpiName:gen_alert_tx
+      |vpiFullName:work@dut.gen_alert_tx
+      |vpiStmt:
+      \_ref_module: work@alert_sender (i_alert_sender), line:11:3, endln:13:23
+        |vpiParent:
+        \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitSelect/dut.sv, line:6:1, endln:15:10
+        |vpiName:i_alert_sender
+        |vpiDefName:work@alert_sender
+        |vpiActual:
+        \_module_inst: work@alert_sender (work@alert_sender), file:${SURELOG_DIR}/tests/BitSelect/dut.sv, line:1:1, endln:5:10
+    |vpiImportTypespec:
+    \_ref_var: (work@dut.i), line:10:13, endln:10:14
     |vpiForInitStmt:
     \_assignment: , line:10:6, endln:10:18
       |vpiParent:
-      \_gen_for: 
+      \_gen_for: (work@dut), line:10:1, endln:14:4
       |vpiRhs:
       \_constant: , line:10:17, endln:10:18
+        |vpiParent:
+        \_assignment: , line:10:6, endln:10:18
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
       |vpiLhs:
       \_ref_var: (work@dut.i), line:10:13, endln:10:14
-        |vpiParent:
-        \_assignment: , line:10:6, endln:10:18
-        |vpiTypespec:
-        \_ref_typespec: (work@dut.i)
-          |vpiParent:
-          \_ref_var: (work@dut.i), line:10:13, endln:10:14
-          |vpiFullName:work@dut.i
-          |vpiActual:
-          \_unsupported_typespec: (i), line:10:13, endln:10:14
-        |vpiName:i
-        |vpiFullName:work@dut.i
     |vpiCondition:
     \_operation: , line:10:20, endln:10:33
       |vpiParent:
-      \_gen_for: 
+      \_gen_for: (work@dut), line:10:1, endln:14:4
       |vpiOpType:20
       |vpiOperand:
       \_ref_obj: (work@dut.i), line:10:20, endln:10:21
@@ -413,75 +428,88 @@ design: (unnamed)
         \_operation: , line:10:20, endln:10:33
         |vpiName:NumAlerts
         |vpiFullName:work@dut.NumAlerts
+        |vpiActual:
+        \_parameter: (work@dut.NumAlerts), line:7:33, endln:7:46
     |vpiForIncStmt:
     \_operation: , line:10:35, endln:10:36
       |vpiParent:
-      \_gen_for: 
+      \_gen_for: (work@dut), line:10:1, endln:14:4
       |vpiOpType:62
       |vpiOperand:
-      \_ref_obj: (work@dut.i)
+      \_ref_obj: (work@dut.i), line:10:35, endln:10:38
         |vpiParent:
-        \_gen_for: 
+        \_gen_for: (work@dut), line:10:1, endln:14:4
         |vpiName:i
         |vpiFullName:work@dut.i
         |vpiActual:
         \_logic_net: (work@dut.i), line:10:20, endln:10:21
     |vpiStmt:
-    \_named_begin: (work@dut.gen_alert_tx)
-      |vpiParent:
-      \_gen_for: 
-      |vpiName:gen_alert_tx
-      |vpiFullName:work@dut.gen_alert_tx
-      |vpiStmt:
-      \_ref_module: work@alert_sender (i_alert_sender), line:13:5, endln:13:19
-        |vpiParent:
-        \_named_begin: (work@dut.gen_alert_tx)
-        |vpiName:i_alert_sender
-        |vpiDefName:work@alert_sender
-\_weaklyReferenced:
-\_bit_typespec: , line:3:13, endln:3:16
-  |vpiParent:
-  \_parameter: (work@alert_sender.AsyncOn), line:3:17, endln:3:24
-\_int_typespec: , line:7:11, endln:7:14
-  |vpiParent:
-  \_parameter: (work@dut.NumAlerts), line:7:33, endln:7:42
-  |vpiSigned:1
-\_logic_typespec: , line:8:11, endln:8:32
-  |vpiParent:
-  \_parameter: (work@dut.AlertAsyncOn), line:8:33, endln:8:45
-  |vpiRange:
-  \_range: , line:8:17, endln:8:32
+    \_begin: (work@dut.gen_alert_tx), line:10:40, endln:14:4
+  |vpiTypedef:
+  \_int_typespec: , line:7:11, endln:7:14
     |vpiParent:
-    \_logic_typespec: , line:8:11, endln:8:32
-    |vpiLeftRange:
-    \_operation: , line:8:18, endln:8:29
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitSelect/dut.sv, line:6:1, endln:15:10
+    |vpiSigned:1
+  |vpiTypedef:
+  \_logic_typespec: , line:8:11, endln:8:32
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitSelect/dut.sv, line:6:1, endln:15:10
+    |vpiRange:
+    \_range: , line:8:17, endln:8:32
       |vpiParent:
-      \_range: , line:8:17, endln:8:32
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@dut.AlertAsyncOn.NumAlerts), line:8:18, endln:8:27
+      \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitSelect/dut.sv, line:6:1, endln:15:10
+      |vpiLeftRange:
+      \_operation: , line:8:18, endln:8:29
         |vpiParent:
-        \_operation: , line:8:18, endln:8:29
-        |vpiName:NumAlerts
-        |vpiFullName:work@dut.AlertAsyncOn.NumAlerts
-      |vpiOperand:
-      \_constant: , line:8:28, endln:8:29
+        \_range: , line:8:17, endln:8:32
+        |vpiOpType:11
+        |vpiOperand:
+        \_ref_obj: (work@dut.NumAlerts), line:8:18, endln:8:27
+          |vpiParent:
+          \_operation: , line:8:18, endln:8:29
+          |vpiName:NumAlerts
+          |vpiFullName:work@dut.NumAlerts
+          |vpiActual:
+          \_parameter: (work@dut.NumAlerts), line:7:33, endln:7:46
+        |vpiOperand:
+        \_constant: , line:8:28, endln:8:29
+          |vpiParent:
+          \_operation: , line:8:18, endln:8:29
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:8:30, endln:8:31
         |vpiParent:
-        \_operation: , line:8:18, endln:8:29
-        |vpiDecompile:1
+        \_range: , line:8:17, endln:8:32
+        |vpiDecompile:0
         |vpiSize:64
-        |UINT:1
+        |UINT:0
         |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:8:30, endln:8:31
-      |vpiParent:
-      \_range: , line:8:17, endln:8:32
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_unsupported_typespec: (i), line:10:13, endln:10:14
-  |vpiName:i
+  |vpiTypedef:
+  \_unsupported_typespec: (i), line:10:13, endln:10:14
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitSelect/dut.sv, line:6:1, endln:15:10
+    |vpiName:i
+  |vpiImportTypespec:
+  \_int_typespec: , line:7:11, endln:7:14
+  |vpiImportTypespec:
+  \_logic_typespec: , line:8:11, endln:8:32
+  |vpiImportTypespec:
+  \_unsupported_typespec: (i), line:10:13, endln:10:14
+  |vpiImportTypespec:
+  \_logic_net: (work@dut.i), line:10:20, endln:10:21
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/BitSelect/dut.sv, line:6:1, endln:15:10
+    |vpiName:i
+    |vpiFullName:work@dut.i
+    |vpiNetType:1
+  |vpiDefName:work@dut
+  |vpiNet:
+  \_logic_net: (work@dut.i), line:10:20, endln:10:21
+  |vpiRefModule:
+  \_ref_module: work@alert_sender (i_alert_sender), line:11:3, endln:13:23
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -490,5 +518,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/BitSelect/dut.sv | ${SURELOG_DIR}/build/regression/BitSelect/roundtrip/dut_000.sv | 8 | 15 |
+[roundtrip]: ${SURELOG_DIR}/tests/BitSelect/dut.sv | ${SURELOG_DIR}/build/regression/BitSelect/roundtrip/dut_000.sv | 15 | 15 |
 ============================== End RoundTrip Results ==============================

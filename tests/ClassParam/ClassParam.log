@@ -7,56 +7,50 @@
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 class_defn                                             2
-class_typespec                                         1
-class_var                                              1
 constant                                               3
 design                                                 1
 function                                               1
-int_typespec                                           2
+int_typespec                                           1
 io_decl                                                1
 operation                                              1
 package                                                1
 param_assign                                           2
 parameter                                              2
 ref_obj                                                1
-ref_typespec                                           4
+ref_typespec                                           1
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassParam/slpp_unit/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ClassParam/slpp_unit/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ClassParam/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/ClassParam/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallPackages:
 \_package: pack (pack::), file:${SURELOG_DIR}/tests/ClassParam/dut.sv, line:1:1, endln:14:11
   |vpiParent:
   \_design: (unnamed)
   |vpiName:pack
   |vpiFullName:pack::
-  |vpiDefName:pack
-  |vpiClassDefn:
+  |vpiInternalScope:
   \_class_defn: (pack::uvm_port_base), file:${SURELOG_DIR}/tests/ClassParam/dut.sv, line:3:1, endln:12:9
     |vpiParent:
     \_package: pack (pack::), file:${SURELOG_DIR}/tests/ClassParam/dut.sv, line:1:1, endln:14:11
     |vpiName:uvm_port_base
     |vpiFullName:pack::uvm_port_base
     |vpiParameter:
-    \_parameter: (pack::uvm_port_base::p1), line:4:11, endln:4:13
+    \_parameter: (pack::uvm_port_base::p1), line:4:11, endln:4:18
       |vpiParent:
       \_class_defn: (pack::uvm_port_base), file:${SURELOG_DIR}/tests/ClassParam/dut.sv, line:3:1, endln:12:9
       |UINT:10
-      |vpiTypespec:
-      \_ref_typespec: (pack::uvm_port_base::p1)
-        |vpiParent:
-        \_parameter: (pack::uvm_port_base::p1), line:4:11, endln:4:13
-        |vpiFullName:pack::uvm_port_base::p1
-        |vpiActual:
-        \_int_typespec: , line:4:1, endln:4:18
       |vpiName:p1
       |vpiFullName:pack::uvm_port_base::p1
     |vpiParameter:
-    \_parameter: (pack::uvm_port_base::p2), line:5:12, endln:5:14
+    \_parameter: (pack::uvm_port_base::p2), line:5:12, endln:5:23
       |vpiParent:
       \_class_defn: (pack::uvm_port_base), file:${SURELOG_DIR}/tests/ClassParam/dut.sv, line:3:1, endln:12:9
       |vpiLocalParam:1
@@ -73,16 +67,9 @@ design: (unnamed)
         |vpiDecompile:10
         |vpiSize:64
         |UINT:10
-        |vpiTypespec:
-        \_ref_typespec: (pack::uvm_port_base)
-          |vpiParent:
-          \_constant: , line:4:16, endln:4:18
-          |vpiFullName:pack::uvm_port_base
-          |vpiActual:
-          \_int_typespec: , line:4:1, endln:4:18
         |vpiConstType:9
       |vpiLhs:
-      \_parameter: (pack::uvm_port_base::p1), line:4:11, endln:4:13
+      \_parameter: (pack::uvm_port_base::p1), line:4:11, endln:4:18
     |vpiParamAssign:
     \_param_assign: , line:5:12, endln:5:23
       |vpiParent:
@@ -106,60 +93,25 @@ design: (unnamed)
           \_operation: , line:5:17, endln:5:23
           |vpiName:p1
           |vpiFullName:pack::uvm_port_base::p1
+          |vpiActual:
+          \_parameter: (pack::uvm_port_base::p1), line:4:11, endln:4:18
       |vpiLhs:
-      \_parameter: (pack::uvm_port_base::p2), line:5:12, endln:5:14
-    |vpiInternalScope:
-    \_class_defn: (pack::uvm_port_base::embedded), file:${SURELOG_DIR}/tests/ClassParam/dut.sv, line:7:4, endln:10:12
-      |vpiParent:
-      \_class_defn: (pack::uvm_port_base), file:${SURELOG_DIR}/tests/ClassParam/dut.sv, line:3:1, endln:12:9
-      |vpiName:embedded
-      |vpiFullName:pack::uvm_port_base::embedded
-      |vpiMethod:
-      \_function: (pack::uvm_port_base::embedded::new), line:8:6, endln:9:17
-        |vpiParent:
-        \_class_defn: (pack::uvm_port_base::embedded), file:${SURELOG_DIR}/tests/ClassParam/dut.sv, line:7:4, endln:10:12
-        |vpiName:new
-        |vpiFullName:pack::uvm_port_base::embedded::new
-        |vpiMethod:1
-        |vpiReturn:
-        \_class_var: (pack::uvm_port_base::embedded::new), line:8:24, endln:8:29
-          |vpiParent:
-          \_function: (pack::uvm_port_base::embedded::new), line:8:6, endln:9:17
-          |vpiTypespec:
-          \_ref_typespec: (pack::uvm_port_base::embedded::new)
-            |vpiParent:
-            \_class_var: (pack::uvm_port_base::embedded::new), line:8:24, endln:8:29
-            |vpiFullName:pack::uvm_port_base::embedded::new
-            |vpiActual:
-            \_class_typespec: (embedded)
-          |vpiFullName:pack::uvm_port_base::embedded::new
-        |vpiIODecl:
-        \_io_decl: (bound), line:8:24, endln:8:29
-          |vpiParent:
-          \_function: (pack::uvm_port_base::embedded::new), line:8:6, endln:9:17
-          |vpiDirection:1
-          |vpiName:bound
-          |vpiExpr:
-          \_constant: , line:8:32, endln:8:33
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
-            |vpiConstType:9
-          |vpiTypedef:
-          \_ref_typespec: (pack::uvm_port_base::embedded::new::bound)
-            |vpiParent:
-            \_io_decl: (bound), line:8:24, endln:8:29
-            |vpiFullName:pack::uvm_port_base::embedded::new::bound
-            |vpiActual:
-            \_int_typespec: , line:8:20, endln:8:23
-\_weaklyReferenced:
-\_int_typespec: , line:4:1, endln:4:18
-\_class_typespec: (embedded)
-  |vpiName:embedded
+      \_parameter: (pack::uvm_port_base::p2), line:5:12, endln:5:23
+  |vpiInternalScope:
+  \_class_defn: (pack::uvm_port_base::embedded), file:${SURELOG_DIR}/tests/ClassParam/dut.sv, line:7:4, endln:10:12
+    |vpiParent:
+    \_package: pack (pack::), file:${SURELOG_DIR}/tests/ClassParam/dut.sv, line:1:1, endln:14:11
+    |vpiName:embedded
+    |vpiFullName:pack::uvm_port_base::embedded
+  |vpiImportTypespec:
+  \_class_defn: (pack::uvm_port_base), file:${SURELOG_DIR}/tests/ClassParam/dut.sv, line:3:1, endln:12:9
+  |vpiImportTypespec:
+  \_class_defn: (pack::uvm_port_base::embedded), file:${SURELOG_DIR}/tests/ClassParam/dut.sv, line:7:4, endln:10:12
+  |vpiDefName:pack
+  |vpiClassDefn:
+  \_class_defn: (pack::uvm_port_base), file:${SURELOG_DIR}/tests/ClassParam/dut.sv, line:3:1, endln:12:9
   |vpiClassDefn:
   \_class_defn: (pack::uvm_port_base::embedded), file:${SURELOG_DIR}/tests/ClassParam/dut.sv, line:7:4, endln:10:12
-\_int_typespec: , line:8:20, endln:8:23
-  |vpiSigned:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -168,6 +120,10 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
-[LINT]: ${SURELOG_DIR}/tests/ClassParam/dut.sv:7:4: Non synthesizable construct, embedded
 [LINT]: ${SURELOG_DIR}/tests/ClassParam/dut.sv:3:1: Non synthesizable construct, uvm_port_base
+[LINT]: ${SURELOG_DIR}/tests/ClassParam/dut.sv:7:4: Non synthesizable construct, embedded
 ============================== End Linting Results ==============================
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/ClassParam/dut.sv | ${SURELOG_DIR}/build/regression/ClassParam/roundtrip/dut_000.sv | 4 | 14 |
+============================== End RoundTrip Results ==============================

@@ -124,7 +124,6 @@ cont_assign                                            1
 design                                                 1
 gen_for                                                1
 int_typespec                                           1
-logic_net                                              1
 module_inst                                            1
 operation                                              6
 param_assign                                           1
@@ -132,28 +131,32 @@ parameter                                              1
 ref_obj                                                8
 ref_typespec                                           2
 ref_var                                                1
+source_file                                            1
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/NegInt/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/NegInt/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/NegInt/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/NegInt/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@find_first_one (work@find_first_one), file:${SURELOG_DIR}/tests/NegInt/dut.sv, line:1:1, endln:5:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@find_first_one
+  |vpiName:work@find_first_one
   |vpiParameter:
-  \_parameter: (work@find_first_one.WIDTH), line:1:40, endln:1:45
+  \_parameter: (work@find_first_one.WIDTH), line:1:40, endln:1:50
     |vpiParent:
     \_module_inst: work@find_first_one (work@find_first_one), file:${SURELOG_DIR}/tests/NegInt/dut.sv, line:1:1, endln:5:10
     |vpiTypespec:
-    \_ref_typespec: (work@find_first_one.WIDTH)
+    \_ref_typespec: (work@find_first_one.WIDTH), line:1:36, endln:1:39
       |vpiParent:
-      \_parameter: (work@find_first_one.WIDTH), line:1:40, endln:1:45
+      \_parameter: (work@find_first_one.WIDTH), line:1:40, endln:1:50
       |vpiFullName:work@find_first_one.WIDTH
       |vpiActual:
       \_int_typespec: , line:1:36, endln:1:39
@@ -171,88 +174,42 @@ design: (unnamed)
       |vpiOpType:1
       |vpiOperand:
       \_constant: , line:1:49, endln:1:50
+        |vpiParent:
+        \_operation: , line:1:48, endln:1:50
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
         |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@find_first_one.WIDTH), line:1:40, endln:1:45
-  |vpiDefName:work@find_first_one
-  |vpiNet:
-  \_logic_net: (work@find_first_one.i), line:2:24, endln:2:25
-    |vpiParent:
-    \_operation: , line:2:24, endln:2:33
-    |vpiName:i
-    |vpiFullName:work@find_first_one.i
-    |vpiNetType:1
-  |vpiGenStmt:
-  \_gen_for: 
+    \_parameter: (work@find_first_one.WIDTH), line:1:40, endln:1:50
+  |vpiInternalScope:
+  \_gen_for: (work@find_first_one), line:2:5, endln:4:8
     |vpiParent:
     \_module_inst: work@find_first_one (work@find_first_one), file:${SURELOG_DIR}/tests/NegInt/dut.sv, line:1:1, endln:5:10
-    |vpiForInitStmt:
-    \_assignment: , line:2:10, endln:2:22
+    |vpiFullName:work@find_first_one
+    |vpiVariables:
+    \_ref_var: (work@find_first_one.i), line:2:17, endln:2:18
       |vpiParent:
-      \_gen_for: 
-      |vpiRhs:
-      \_constant: , line:2:21, endln:2:22
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-      |vpiLhs:
-      \_ref_var: (work@find_first_one.i), line:2:17, endln:2:18
+      \_gen_for: (work@find_first_one), line:2:5, endln:4:8
+      |vpiTypespec:
+      \_ref_typespec: (work@find_first_one.i.i), line:2:17, endln:2:18
         |vpiParent:
-        \_assignment: , line:2:10, endln:2:22
-        |vpiTypespec:
-        \_ref_typespec: (work@find_first_one.i)
-          |vpiParent:
-          \_ref_var: (work@find_first_one.i), line:2:17, endln:2:18
-          |vpiFullName:work@find_first_one.i
-          |vpiActual:
-          \_unsupported_typespec: (i), line:2:17, endln:2:18
+        \_ref_var: (work@find_first_one.i), line:2:17, endln:2:18
         |vpiName:i
-        |vpiFullName:work@find_first_one.i
-    |vpiCondition:
-    \_operation: , line:2:24, endln:2:33
-      |vpiParent:
-      \_gen_for: 
-      |vpiOpType:20
-      |vpiOperand:
-      \_ref_obj: (work@find_first_one.i), line:2:24, endln:2:25
-        |vpiParent:
-        \_operation: , line:2:24, endln:2:33
-        |vpiName:i
-        |vpiFullName:work@find_first_one.i
+        |vpiFullName:work@find_first_one.i.i
         |vpiActual:
-        \_logic_net: (work@find_first_one.i), line:2:24, endln:2:25
-      |vpiOperand:
-      \_ref_obj: (work@find_first_one.WIDTH), line:2:28, endln:2:33
-        |vpiParent:
-        \_operation: , line:2:24, endln:2:33
-        |vpiName:WIDTH
-        |vpiFullName:work@find_first_one.WIDTH
-    |vpiForIncStmt:
-    \_operation: , line:2:35, endln:2:36
+        \_unsupported_typespec: (i), line:2:17, endln:2:18
+      |vpiName:i
+      |vpiFullName:work@find_first_one.i
+    |vpiInternalScope:
+    \_begin: (work@find_first_one), line:2:40, endln:4:8
       |vpiParent:
-      \_gen_for: 
-      |vpiOpType:62
-      |vpiOperand:
-      \_ref_obj: (work@find_first_one.i)
-        |vpiParent:
-        \_gen_for: 
-        |vpiName:i
-        |vpiFullName:work@find_first_one.i
-        |vpiActual:
-        \_logic_net: (work@find_first_one.i), line:2:24, endln:2:25
-    |vpiStmt:
-    \_begin: (work@find_first_one)
-      |vpiParent:
-      \_gen_for: 
+      \_gen_for: (work@find_first_one), line:2:5, endln:4:8
       |vpiFullName:work@find_first_one
       |vpiStmt:
       \_cont_assign: , line:3:16, endln:3:60
         |vpiParent:
-        \_begin: (work@find_first_one)
+        \_module_inst: work@find_first_one (work@find_first_one), file:${SURELOG_DIR}/tests/NegInt/dut.sv, line:1:1, endln:5:10
         |vpiRhs:
         \_operation: , line:3:28, endln:3:60
           |vpiParent:
@@ -264,16 +221,20 @@ design: (unnamed)
             \_operation: , line:3:28, endln:3:60
             |vpiName:FLIP
             |vpiFullName:work@find_first_one.FLIP
+            |vpiActual:
+            \_logic_net: (work@find_first_one.FLIP), line:3:28, endln:3:32
           |vpiOperand:
-          \_bit_select: (work@find_first_one.in_i), line:3:40, endln:3:49
+          \_bit_select: (work@find_first_one.in_i), line:3:39, endln:3:50
             |vpiParent:
             \_operation: , line:3:28, endln:3:60
             |vpiName:in_i
             |vpiFullName:work@find_first_one.in_i
+            |vpiActual:
+            \_logic_net: (work@find_first_one.in_i), line:3:39, endln:3:50
             |vpiIndex:
             \_operation: , line:3:40, endln:3:49
               |vpiParent:
-              \_bit_select: (work@find_first_one.in_i), line:3:40, endln:3:49
+              \_module_inst: work@find_first_one (work@find_first_one), file:${SURELOG_DIR}/tests/NegInt/dut.sv, line:1:1, endln:5:10
               |vpiOpType:11
               |vpiOperand:
               \_operation: , line:3:40, endln:3:47
@@ -281,11 +242,13 @@ design: (unnamed)
                 \_operation: , line:3:40, endln:3:49
                 |vpiOpType:11
                 |vpiOperand:
-                \_ref_obj: (work@find_first_one.in_i.WIDTH), line:3:40, endln:3:45
+                \_ref_obj: (work@find_first_one.WIDTH), line:3:40, endln:3:45
                   |vpiParent:
                   \_operation: , line:3:40, endln:3:47
                   |vpiName:WIDTH
-                  |vpiFullName:work@find_first_one.in_i.WIDTH
+                  |vpiFullName:work@find_first_one.WIDTH
+                  |vpiActual:
+                  \_parameter: (work@find_first_one.WIDTH), line:1:40, endln:1:50
                 |vpiOperand:
                 \_constant: , line:3:46, endln:3:47
                   |vpiParent:
@@ -295,45 +258,157 @@ design: (unnamed)
                   |UINT:1
                   |vpiConstType:9
               |vpiOperand:
-              \_ref_obj: (work@find_first_one.in_i.i), line:3:48, endln:3:49
+              \_ref_obj: (work@find_first_one.i), line:3:48, endln:3:49
                 |vpiParent:
                 \_operation: , line:3:40, endln:3:49
                 |vpiName:i
-                |vpiFullName:work@find_first_one.in_i.i
+                |vpiFullName:work@find_first_one.i
+                |vpiActual:
+                \_logic_net: (work@find_first_one.i), line:3:48, endln:3:49
           |vpiOperand:
-          \_bit_select: (work@find_first_one.in_i), line:3:58, endln:3:59
+          \_bit_select: (work@find_first_one.in_i), line:3:57, endln:3:60
             |vpiParent:
             \_operation: , line:3:28, endln:3:60
             |vpiName:in_i
             |vpiFullName:work@find_first_one.in_i
+            |vpiActual:
+            \_logic_net: (work@find_first_one.in_i), line:3:39, endln:3:50
             |vpiIndex:
             \_ref_obj: (work@find_first_one.i), line:3:58, endln:3:59
               |vpiParent:
-              \_bit_select: (work@find_first_one.in_i), line:3:58, endln:3:59
+              \_module_inst: work@find_first_one (work@find_first_one), file:${SURELOG_DIR}/tests/NegInt/dut.sv, line:1:1, endln:5:10
               |vpiName:i
               |vpiFullName:work@find_first_one.i
+              |vpiActual:
+              \_logic_net: (work@find_first_one.i), line:3:48, endln:3:49
         |vpiLhs:
-        \_bit_select: (work@find_first_one.in_tmp), line:3:16, endln:3:25
+        \_bit_select: (work@find_first_one.in_tmp), line:3:22, endln:3:25
           |vpiParent:
-          \_cont_assign: , line:3:16, endln:3:60
+          \_module_inst: work@find_first_one (work@find_first_one), file:${SURELOG_DIR}/tests/NegInt/dut.sv, line:1:1, endln:5:10
           |vpiName:in_tmp
           |vpiFullName:work@find_first_one.in_tmp
+          |vpiActual:
+          \_logic_net: (work@find_first_one.in_tmp), line:3:22, endln:3:25
           |vpiIndex:
           \_ref_obj: (work@find_first_one.i), line:3:23, endln:3:24
             |vpiParent:
-            \_bit_select: (work@find_first_one.in_tmp), line:3:16, endln:3:25
+            \_module_inst: work@find_first_one (work@find_first_one), file:${SURELOG_DIR}/tests/NegInt/dut.sv, line:1:1, endln:5:10
             |vpiName:i
             |vpiFullName:work@find_first_one.i
-\_weaklyReferenced:
-\_int_typespec: , line:1:36, endln:1:39
-  |vpiParent:
-  \_parameter: (work@find_first_one.WIDTH), line:1:40, endln:1:45
-  |vpiSigned:1
-\_unsupported_typespec: (i), line:2:17, endln:2:18
-  |vpiName:i
+            |vpiActual:
+            \_logic_net: (work@find_first_one.i), line:3:48, endln:3:49
+    |vpiImportTypespec:
+    \_ref_var: (work@find_first_one.i), line:2:17, endln:2:18
+    |vpiForInitStmt:
+    \_assignment: , line:2:10, endln:2:22
+      |vpiParent:
+      \_gen_for: (work@find_first_one), line:2:5, endln:4:8
+      |vpiRhs:
+      \_constant: , line:2:21, endln:2:22
+        |vpiParent:
+        \_assignment: , line:2:10, endln:2:22
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+      |vpiLhs:
+      \_ref_var: (work@find_first_one.i), line:2:17, endln:2:18
+    |vpiCondition:
+    \_operation: , line:2:24, endln:2:33
+      |vpiParent:
+      \_gen_for: (work@find_first_one), line:2:5, endln:4:8
+      |vpiOpType:20
+      |vpiOperand:
+      \_ref_obj: (work@find_first_one.i), line:2:24, endln:2:25
+        |vpiParent:
+        \_operation: , line:2:24, endln:2:33
+        |vpiName:i
+        |vpiFullName:work@find_first_one.i
+        |vpiActual:
+        \_logic_net: (work@find_first_one.i), line:3:48, endln:3:49
+      |vpiOperand:
+      \_ref_obj: (work@find_first_one.WIDTH), line:2:28, endln:2:33
+        |vpiParent:
+        \_operation: , line:2:24, endln:2:33
+        |vpiName:WIDTH
+        |vpiFullName:work@find_first_one.WIDTH
+        |vpiActual:
+        \_parameter: (work@find_first_one.WIDTH), line:1:40, endln:1:50
+    |vpiForIncStmt:
+    \_operation: , line:2:35, endln:2:36
+      |vpiParent:
+      \_gen_for: (work@find_first_one), line:2:5, endln:4:8
+      |vpiOpType:62
+      |vpiOperand:
+      \_ref_obj: (work@find_first_one.i), line:2:35, endln:2:38
+        |vpiParent:
+        \_gen_for: (work@find_first_one), line:2:5, endln:4:8
+        |vpiName:i
+        |vpiFullName:work@find_first_one.i
+        |vpiActual:
+        \_logic_net: (work@find_first_one.i), line:3:48, endln:3:49
+    |vpiStmt:
+    \_begin: (work@find_first_one), line:2:40, endln:4:8
+  |vpiTypedef:
+  \_int_typespec: , line:1:36, endln:1:39
+    |vpiParent:
+    \_module_inst: work@find_first_one (work@find_first_one), file:${SURELOG_DIR}/tests/NegInt/dut.sv, line:1:1, endln:5:10
+    |vpiSigned:1
+  |vpiTypedef:
+  \_unsupported_typespec: (i), line:2:17, endln:2:18
+    |vpiParent:
+    \_module_inst: work@find_first_one (work@find_first_one), file:${SURELOG_DIR}/tests/NegInt/dut.sv, line:1:1, endln:5:10
+    |vpiName:i
+  |vpiImportTypespec:
+  \_int_typespec: , line:1:36, endln:1:39
+  |vpiImportTypespec:
+  \_unsupported_typespec: (i), line:2:17, endln:2:18
+  |vpiImportTypespec:
+  \_logic_net: (work@find_first_one.FLIP), line:3:28, endln:3:32
+    |vpiParent:
+    \_module_inst: work@find_first_one (work@find_first_one), file:${SURELOG_DIR}/tests/NegInt/dut.sv, line:1:1, endln:5:10
+    |vpiName:FLIP
+    |vpiFullName:work@find_first_one.FLIP
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@find_first_one.in_i), line:3:39, endln:3:50
+    |vpiParent:
+    \_module_inst: work@find_first_one (work@find_first_one), file:${SURELOG_DIR}/tests/NegInt/dut.sv, line:1:1, endln:5:10
+    |vpiName:in_i
+    |vpiFullName:work@find_first_one.in_i
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@find_first_one.i), line:3:48, endln:3:49
+    |vpiParent:
+    \_module_inst: work@find_first_one (work@find_first_one), file:${SURELOG_DIR}/tests/NegInt/dut.sv, line:1:1, endln:5:10
+    |vpiName:i
+    |vpiFullName:work@find_first_one.i
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@find_first_one.in_tmp), line:3:22, endln:3:25
+    |vpiParent:
+    \_module_inst: work@find_first_one (work@find_first_one), file:${SURELOG_DIR}/tests/NegInt/dut.sv, line:1:1, endln:5:10
+    |vpiName:in_tmp
+    |vpiFullName:work@find_first_one.in_tmp
+    |vpiNetType:1
+  |vpiDefName:work@find_first_one
+  |vpiNet:
+  \_logic_net: (work@find_first_one.FLIP), line:3:28, endln:3:32
+  |vpiNet:
+  \_logic_net: (work@find_first_one.in_i), line:3:39, endln:3:50
+  |vpiNet:
+  \_logic_net: (work@find_first_one.i), line:3:48, endln:3:49
+  |vpiNet:
+  \_logic_net: (work@find_first_one.in_tmp), line:3:22, endln:3:25
+  |vpiContAssign:
+  \_cont_assign: , line:3:16, endln:3:60
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/NegInt/dut.sv | ${SURELOG_DIR}/build/regression/NegInt/roundtrip/dut_000.sv | 5 | 5 |
+============================== End RoundTrip Results ==============================

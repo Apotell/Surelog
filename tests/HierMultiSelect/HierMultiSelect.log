@@ -215,68 +215,279 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/HierMultiSelect/dut.sv:1:1: Compile module "work@dm_csrs".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-bit_select                                             2
+bit_select                                             3
 byte_typespec                                          1
-constant                                              10
+byte_var                                               1
+constant                                              13
 cont_assign                                            4
 design                                                 1
-hier_path                                              5
-indexed_part_select                                    2
-logic_net                                              3
+hier_path                                              7
+indexed_part_select                                    3
 logic_typespec                                         1
+logic_var                                              1
+method_func_call                                       1
 module_inst                                            1
 operation                                              5
-ref_obj                                               10
+ref_obj                                               11
 ref_typespec                                           2
+source_file                                            1
 var_select                                             1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierMultiSelect/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/HierMultiSelect/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/HierMultiSelect/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@dm_csrs
-  |vpiDefName:work@dm_csrs
-  |vpiNet:
-  \_logic_net: (work@dm_csrs.c), line:6:9, endln:6:10
+  |vpiName:work@dm_csrs
+  |vpiVariables:
+  \_logic_var: (work@dm_csrs.c), line:6:9, endln:6:10
     |vpiParent:
     \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
     |vpiTypespec:
-    \_ref_typespec: (work@dm_csrs.c)
+    \_ref_typespec: (work@dm_csrs.c), line:6:3, endln:6:8
       |vpiParent:
-      \_logic_net: (work@dm_csrs.c), line:6:9, endln:6:10
+      \_logic_var: (work@dm_csrs.c), line:6:9, endln:6:10
       |vpiFullName:work@dm_csrs.c
       |vpiActual:
-      \_logic_typespec: , line:6:3, endln:6:32
+      \_logic_typespec: , line:6:3, endln:6:8
     |vpiName:c
     |vpiFullName:work@dm_csrs.c
-    |vpiNetType:36
-  |vpiNet:
-  \_logic_net: (work@dm_csrs.o), line:7:8, endln:7:9
+    |vpiVisibility:1
+    |vpiExpr:
+    \_hier_path: (a[0].source[6-:2]), line:6:13, endln:6:31
+      |vpiParent:
+      \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
+      |vpiActual:
+      \_bit_select: (a[0]), line:6:13, endln:6:14
+        |vpiParent:
+        \_hier_path: (a[0].source[6-:2]), line:6:13, endln:6:31
+        |vpiName:a
+        |vpiFullName:a[0]
+        |vpiActual:
+        \_logic_net: (work@dm_csrs.a), line:6:13, endln:6:14
+        |vpiIndex:
+        \_constant: , line:6:15, endln:6:16
+          |vpiParent:
+          \_hier_path: (a[0].source[6-:2]), line:6:13, endln:6:31
+          |vpiDecompile:0
+          |vpiSize:64
+          |UINT:0
+          |vpiConstType:9
+      |vpiActual:
+      \_indexed_part_select: (a[0].source[6-:2]), line:6:18, endln:6:31
+        |vpiParent:
+        \_hier_path: (a[0].source[6-:2]), line:6:13, endln:6:31
+        |vpiName:source
+        |vpiFullName:a[0].source[6-:2]
+        |vpiActual:
+        \_logic_net: (work@dm_csrs.source), line:6:18, endln:6:31
+        |vpiConstantSelect:1
+        |vpiIndexedPartSelectType:2
+        |vpiBaseExpr:
+        \_constant: , line:6:25, endln:6:26
+          |vpiParent:
+          \_indexed_part_select: (a[0].source[6-:2]), line:6:18, endln:6:31
+          |vpiDecompile:6
+          |vpiSize:64
+          |UINT:6
+          |vpiConstType:9
+        |vpiWidthExpr:
+        \_constant: , line:6:30, endln:6:31
+          |vpiParent:
+          \_indexed_part_select: (a[0].source[6-:2]), line:6:18, endln:6:31
+          |vpiDecompile:2
+          |vpiSize:64
+          |UINT:2
+          |vpiConstType:9
+      |vpiName:a[0].source[6-:2]
+  |vpiVariables:
+  \_byte_var: (work@dm_csrs.o), line:7:8, endln:7:9
     |vpiParent:
     \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
     |vpiTypespec:
-    \_ref_typespec: (work@dm_csrs.o)
+    \_ref_typespec: (work@dm_csrs.o), line:7:3, endln:7:7
       |vpiParent:
-      \_logic_net: (work@dm_csrs.o), line:7:8, endln:7:9
+      \_byte_var: (work@dm_csrs.o), line:7:8, endln:7:9
       |vpiFullName:work@dm_csrs.o
       |vpiActual:
-      \_byte_typespec: , line:7:3, endln:7:17
+      \_byte_typespec: , line:7:3, endln:7:7
     |vpiName:o
     |vpiFullName:work@dm_csrs.o
-  |vpiNet:
-  \_logic_net: (work@dm_csrs.kmac_mask_o.i), line:3:24, endln:3:25
+    |vpiSigned:1
+    |vpiVisibility:1
+    |vpiExpr:
+    \_hier_path: (b), line:7:12, endln:7:17
+      |vpiParent:
+      \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
+      |vpiActual:
+      \_ref_obj: (work@dm_csrs.b), line:7:12, endln:7:13
+        |vpiParent:
+        \_hier_path: (b), line:7:12, endln:7:17
+        |vpiName:b
+        |vpiFullName:work@dm_csrs.b
+        |vpiActual:
+        \_logic_net: (work@dm_csrs.b), line:7:12, endln:7:13
+      |vpiActual:
+      \_method_func_call: (and), line:7:14, endln:7:17
+        |vpiParent:
+        \_hier_path: (b), line:7:12, endln:7:17
+        |vpiName:and
+      |vpiName:b
+  |vpiReg:
+  \_logic_var: (work@dm_csrs.c), line:6:9, endln:6:10
+  |vpiTypedef:
+  \_logic_typespec: , line:6:3, endln:6:8
     |vpiParent:
-    \_operation: , line:3:22, endln:3:25
-    |vpiName:i
-    |vpiFullName:work@dm_csrs.kmac_mask_o.i
+    \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
+  |vpiTypedef:
+  \_byte_typespec: , line:7:3, endln:7:7
+    |vpiParent:
+    \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
+    |vpiSigned:1
+  |vpiImportTypespec:
+  \_logic_typespec: , line:6:3, endln:6:8
+  |vpiImportTypespec:
+  \_logic_var: (work@dm_csrs.c), line:6:9, endln:6:10
+  |vpiImportTypespec:
+  \_byte_typespec: , line:7:3, endln:7:7
+  |vpiImportTypespec:
+  \_byte_var: (work@dm_csrs.o), line:7:8, endln:7:9
+  |vpiImportTypespec:
+  \_logic_net: (work@dm_csrs.a), line:6:13, endln:6:14
+    |vpiParent:
+    \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
+    |vpiName:a
+    |vpiFullName:work@dm_csrs.a
     |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@dm_csrs.source), line:6:18, endln:6:31
+    |vpiParent:
+    \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
+    |vpiName:source
+    |vpiFullName:work@dm_csrs.source
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@dm_csrs.b), line:7:12, endln:7:13
+    |vpiParent:
+    \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
+    |vpiName:b
+    |vpiFullName:work@dm_csrs.b
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@dm_csrs.dmi_req_i), line:2:28, endln:2:37
+    |vpiParent:
+    \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
+    |vpiName:dmi_req_i
+    |vpiFullName:work@dm_csrs.dmi_req_i
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@dm_csrs.addr2), line:2:38, endln:2:43
+    |vpiParent:
+    \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
+    |vpiName:addr2
+    |vpiFullName:work@dm_csrs.addr2
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@dm_csrs.addr1), line:2:20, endln:2:25
+    |vpiParent:
+    \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
+    |vpiName:addr1
+    |vpiFullName:work@dm_csrs.addr1
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@dm_csrs.keymgr_data_i), line:3:35, endln:3:48
+    |vpiParent:
+    \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
+    |vpiName:keymgr_data_i
+    |vpiFullName:work@dm_csrs.keymgr_data_i
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@dm_csrs.strb), line:3:53, endln:3:56
+    |vpiParent:
+    \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
+    |vpiName:strb
+    |vpiFullName:work@dm_csrs.strb
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@dm_csrs.i), line:3:54, endln:3:55
+    |vpiParent:
+    \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
+    |vpiName:i
+    |vpiFullName:work@dm_csrs.i
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@dm_csrs.kmac_mask_o), line:3:22, endln:3:28
+    |vpiParent:
+    \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
+    |vpiName:kmac_mask_o
+    |vpiFullName:work@dm_csrs.kmac_mask_o
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@dm_csrs.keymgr_key_i), line:4:14, endln:4:26
+    |vpiParent:
+    \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
+    |vpiName:keymgr_key_i
+    |vpiFullName:work@dm_csrs.keymgr_key_i
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@dm_csrs.key), line:4:34, endln:4:46
+    |vpiParent:
+    \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
+    |vpiName:key
+    |vpiFullName:work@dm_csrs.key
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@dm_csrs.sram_otp_key_o), line:5:10, endln:5:24
+    |vpiParent:
+    \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
+    |vpiName:sram_otp_key_o
+    |vpiFullName:work@dm_csrs.sram_otp_key_o
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@dm_csrs.nonce), line:5:30, endln:5:35
+    |vpiParent:
+    \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
+    |vpiName:nonce
+    |vpiFullName:work@dm_csrs.nonce
+    |vpiNetType:1
+  |vpiDefName:work@dm_csrs
+  |vpiNet:
+  \_logic_net: (work@dm_csrs.a), line:6:13, endln:6:14
+  |vpiNet:
+  \_logic_net: (work@dm_csrs.source), line:6:18, endln:6:31
+  |vpiNet:
+  \_logic_net: (work@dm_csrs.b), line:7:12, endln:7:13
+  |vpiNet:
+  \_logic_net: (work@dm_csrs.dmi_req_i), line:2:28, endln:2:37
+  |vpiNet:
+  \_logic_net: (work@dm_csrs.addr2), line:2:38, endln:2:43
+  |vpiNet:
+  \_logic_net: (work@dm_csrs.addr1), line:2:20, endln:2:25
+  |vpiNet:
+  \_logic_net: (work@dm_csrs.keymgr_data_i), line:3:35, endln:3:48
+  |vpiNet:
+  \_logic_net: (work@dm_csrs.strb), line:3:53, endln:3:56
+  |vpiNet:
+  \_logic_net: (work@dm_csrs.i), line:3:54, endln:3:55
+  |vpiNet:
+  \_logic_net: (work@dm_csrs.kmac_mask_o), line:3:22, endln:3:28
+  |vpiNet:
+  \_logic_net: (work@dm_csrs.keymgr_key_i), line:4:14, endln:4:26
+  |vpiNet:
+  \_logic_net: (work@dm_csrs.key), line:4:34, endln:4:46
+  |vpiNet:
+  \_logic_net: (work@dm_csrs.sram_otp_key_o), line:5:10, endln:5:24
+  |vpiNet:
+  \_logic_net: (work@dm_csrs.nonce), line:5:30, endln:5:35
   |vpiContAssign:
   \_cont_assign: , line:2:10, endln:2:43
     |vpiParent:
@@ -290,27 +501,35 @@ design: (unnamed)
         |vpiParent:
         \_hier_path: (dmi_req_i.addr2), line:2:28, endln:2:43
         |vpiName:dmi_req_i
+        |vpiActual:
+        \_logic_net: (work@dm_csrs.dmi_req_i), line:2:28, endln:2:37
       |vpiActual:
       \_ref_obj: (work@dm_csrs.addr2), line:2:38, endln:2:43
         |vpiParent:
         \_hier_path: (dmi_req_i.addr2), line:2:28, endln:2:43
         |vpiName:addr2
         |vpiFullName:work@dm_csrs.addr2
+        |vpiActual:
+        \_logic_net: (work@dm_csrs.addr2), line:2:38, endln:2:43
       |vpiName:dmi_req_i.addr2
     |vpiLhs:
-    \_hier_path: (dmi_req_i.addr1), line:2:10, endln:2:25
+    \_hier_path: (dmi_req_i.addr1), line:2:19, endln:2:25
       |vpiParent:
-      \_cont_assign: , line:2:10, endln:2:43
+      \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
       |vpiActual:
-      \_ref_obj: (dmi_req_i), line:2:20, endln:2:25
+      \_ref_obj: (dmi_req_i), line:2:19, endln:2:25
         |vpiParent:
-        \_hier_path: (dmi_req_i.addr1), line:2:10, endln:2:25
+        \_hier_path: (dmi_req_i.addr1), line:2:19, endln:2:25
         |vpiName:dmi_req_i
+        |vpiActual:
+        \_logic_net: (work@dm_csrs.dmi_req_i), line:2:28, endln:2:37
       |vpiActual:
       \_ref_obj: (addr1), line:2:20, endln:2:25
         |vpiParent:
-        \_hier_path: (dmi_req_i.addr1), line:2:10, endln:2:25
+        \_hier_path: (dmi_req_i.addr1), line:2:19, endln:2:25
         |vpiName:addr1
+        |vpiActual:
+        \_logic_net: (work@dm_csrs.addr1), line:2:20, endln:2:25
       |vpiName:dmi_req_i.addr1
   |vpiContAssign:
   \_cont_assign: , line:3:10, endln:3:58
@@ -323,6 +542,8 @@ design: (unnamed)
       |vpiOpType:34
       |vpiOperand:
       \_constant: , line:3:33, endln:3:34
+        |vpiParent:
+        \_operation: , line:3:32, endln:3:58
         |vpiDecompile:8
         |vpiSize:64
         |UINT:8
@@ -341,34 +562,40 @@ design: (unnamed)
             |vpiParent:
             \_hier_path: (keymgr_data_i.strb[i]), line:3:35, endln:3:56
             |vpiName:keymgr_data_i
+            |vpiActual:
+            \_logic_net: (work@dm_csrs.keymgr_data_i), line:3:35, endln:3:48
           |vpiActual:
-          \_bit_select: (work@dm_csrs.keymgr_data_i.strb[i].strb), line:3:54, endln:3:55
+          \_bit_select: (work@dm_csrs.keymgr_data_i.strb[i].strb), line:3:53, endln:3:56
             |vpiParent:
             \_hier_path: (keymgr_data_i.strb[i]), line:3:35, endln:3:56
             |vpiName:strb
             |vpiFullName:work@dm_csrs.keymgr_data_i.strb[i].strb
+            |vpiActual:
+            \_logic_net: (work@dm_csrs.strb), line:3:53, endln:3:56
             |vpiIndex:
-            \_ref_obj: (work@dm_csrs.keymgr_data_i.strb[i].i), line:3:54, endln:3:55
+            \_ref_obj: (work@dm_csrs.i), line:3:54, endln:3:55
               |vpiParent:
-              \_bit_select: (work@dm_csrs.keymgr_data_i.strb[i].strb), line:3:54, endln:3:55
+              \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
               |vpiName:i
-              |vpiFullName:work@dm_csrs.keymgr_data_i.strb[i].i
+              |vpiFullName:work@dm_csrs.i
               |vpiActual:
-              \_logic_net: (work@dm_csrs.kmac_mask_o.i), line:3:24, endln:3:25
+              \_logic_net: (work@dm_csrs.i), line:3:54, endln:3:55
           |vpiName:keymgr_data_i.strb[i]
     |vpiLhs:
-    \_indexed_part_select: kmac_mask_o (work@dm_csrs.kmac_mask_o), line:3:10, endln:3:29
+    \_indexed_part_select: kmac_mask_o (work@dm_csrs.kmac_mask_o), line:3:22, endln:3:28
       |vpiParent:
-      \_cont_assign: , line:3:10, endln:3:58
+      \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
       |vpiName:kmac_mask_o
       |vpiFullName:work@dm_csrs.kmac_mask_o
       |vpiDefName:kmac_mask_o
+      |vpiActual:
+      \_logic_net: (work@dm_csrs.kmac_mask_o), line:3:22, endln:3:28
       |vpiConstantSelect:1
       |vpiIndexedPartSelectType:1
       |vpiBaseExpr:
       \_operation: , line:3:22, endln:3:25
         |vpiParent:
-        \_indexed_part_select: kmac_mask_o (work@dm_csrs.kmac_mask_o), line:3:10, endln:3:29
+        \_indexed_part_select: kmac_mask_o (work@dm_csrs.kmac_mask_o), line:3:22, endln:3:28
         |vpiOpType:25
         |vpiOperand:
         \_constant: , line:3:22, endln:3:23
@@ -385,9 +612,11 @@ design: (unnamed)
           |vpiName:i
           |vpiFullName:work@dm_csrs.kmac_mask_o.i
           |vpiActual:
-          \_logic_net: (work@dm_csrs.kmac_mask_o.i), line:3:24, endln:3:25
+          \_logic_net: (work@dm_csrs.i), line:3:54, endln:3:55
       |vpiWidthExpr:
       \_constant: , line:3:27, endln:3:28
+        |vpiParent:
+        \_indexed_part_select: kmac_mask_o (work@dm_csrs.kmac_mask_o), line:3:22, endln:3:28
         |vpiDecompile:8
         |vpiSize:64
         |UINT:8
@@ -405,6 +634,8 @@ design: (unnamed)
         |vpiParent:
         \_hier_path: (keymgr_key_i.key[0][1 * 32+:32]), line:4:14, endln:4:47
         |vpiName:keymgr_key_i
+        |vpiActual:
+        \_logic_net: (work@dm_csrs.keymgr_key_i), line:4:14, endln:4:26
       |vpiActual:
       \_var_select: (work@dm_csrs.keymgr_key_i.key[0][1 * 32+:32].key), line:4:27, endln:4:47
         |vpiParent:
@@ -414,24 +645,26 @@ design: (unnamed)
         |vpiIndex:
         \_constant: , line:4:31, endln:4:32
           |vpiParent:
-          \_var_select: (work@dm_csrs.keymgr_key_i.key[0][1 * 32+:32].key), line:4:27, endln:4:47
+          \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
           |vpiConstType:9
         |vpiIndex:
-        \_indexed_part_select: key (work@dm_csrs.keymgr_key_i.key[0][1 * 32+:32].key.key), line:4:34, endln:4:46
+        \_indexed_part_select: key (work@dm_csrs.keymgr_key_i.key[0][1 * 32+:32].key), line:4:34, endln:4:46
           |vpiParent:
-          \_var_select: (work@dm_csrs.keymgr_key_i.key[0][1 * 32+:32].key), line:4:27, endln:4:47
+          \_hier_path: (keymgr_key_i.key[0][1 * 32+:32]), line:4:14, endln:4:47
           |vpiName:key
-          |vpiFullName:work@dm_csrs.keymgr_key_i.key[0][1 * 32+:32].key.key
+          |vpiFullName:work@dm_csrs.keymgr_key_i.key[0][1 * 32+:32].key
           |vpiDefName:key
+          |vpiActual:
+          \_logic_net: (work@dm_csrs.key), line:4:34, endln:4:46
           |vpiConstantSelect:1
           |vpiIndexedPartSelectType:1
           |vpiBaseExpr:
           \_operation: , line:4:34, endln:4:40
             |vpiParent:
-            \_indexed_part_select: key (work@dm_csrs.keymgr_key_i.key[0][1 * 32+:32].key.key), line:4:34, endln:4:46
+            \_indexed_part_select: key (work@dm_csrs.keymgr_key_i.key[0][1 * 32+:32].key), line:4:34, endln:4:46
             |vpiOpType:25
             |vpiOperand:
             \_constant: , line:4:34, endln:4:35
@@ -451,6 +684,8 @@ design: (unnamed)
               |vpiConstType:9
           |vpiWidthExpr:
           \_constant: , line:4:44, endln:4:46
+            |vpiParent:
+            \_indexed_part_select: key (work@dm_csrs.keymgr_key_i.key[0][1 * 32+:32].key), line:4:34, endln:4:46
             |vpiDecompile:32
             |vpiSize:64
             |UINT:32
@@ -459,11 +694,11 @@ design: (unnamed)
     |vpiLhs:
     \_ref_obj: (work@dm_csrs.o), line:4:10, endln:4:11
       |vpiParent:
-      \_cont_assign: , line:4:10, endln:4:47
+      \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
       |vpiName:o
       |vpiFullName:work@dm_csrs.o
       |vpiActual:
-      \_logic_net: (work@dm_csrs.o), line:7:8, endln:7:9
+      \_byte_var: (work@dm_csrs.o), line:7:8, endln:7:9
   |vpiContAssign:
   \_cont_assign: , line:5:10, endln:5:39
     |vpiParent:
@@ -477,19 +712,21 @@ design: (unnamed)
       |UINT:1
       |vpiConstType:9
     |vpiLhs:
-    \_hier_path: (sram_otp_key_o[2 - 2].nonce), line:5:10, endln:5:24
+    \_hier_path: (sram_otp_key_o[2 - 2].nonce), line:5:10, endln:5:35
       |vpiParent:
-      \_cont_assign: , line:5:10, endln:5:39
+      \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
       |vpiActual:
       \_bit_select: (sram_otp_key_o[2 - 2]), line:5:10, endln:5:24
         |vpiParent:
-        \_hier_path: (sram_otp_key_o[2 - 2].nonce), line:5:10, endln:5:24
+        \_hier_path: (sram_otp_key_o[2 - 2].nonce), line:5:10, endln:5:35
         |vpiName:sram_otp_key_o
         |vpiFullName:sram_otp_key_o[2 - 2]
+        |vpiActual:
+        \_logic_net: (work@dm_csrs.sram_otp_key_o), line:5:10, endln:5:24
         |vpiIndex:
         \_operation: , line:5:25, endln:5:28
           |vpiParent:
-          \_hier_path: (sram_otp_key_o[2 - 2].nonce), line:5:10, endln:5:24
+          \_hier_path: (sram_otp_key_o[2 - 2].nonce), line:5:10, endln:5:35
           |vpiOpType:11
           |vpiOperand:
           \_constant: , line:5:25, endln:5:26
@@ -510,17 +747,23 @@ design: (unnamed)
       |vpiActual:
       \_ref_obj: (sram_otp_key_o[2 - 2].nonce), line:5:30, endln:5:35
         |vpiParent:
-        \_hier_path: (sram_otp_key_o[2 - 2].nonce), line:5:10, endln:5:24
+        \_hier_path: (sram_otp_key_o[2 - 2].nonce), line:5:10, endln:5:35
         |vpiName:nonce
         |vpiFullName:sram_otp_key_o[2 - 2].nonce
+        |vpiActual:
+        \_logic_net: (work@dm_csrs.nonce), line:5:30, endln:5:35
       |vpiName:sram_otp_key_o[2 - 2].nonce
-\_weaklyReferenced:
-\_logic_typespec: , line:6:3, endln:6:32
-\_byte_typespec: , line:7:3, endln:7:17
-  |vpiSigned:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
+
+============================== Begin Linting Results ==============================
+[LINT]: ${SURELOG_DIR}/tests/HierMultiSelect/dut.sv:7:14: Non synthesizable construct, and
+============================== End Linting Results ==============================
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/HierMultiSelect/dut.sv | ${SURELOG_DIR}/build/regression/HierMultiSelect/roundtrip/dut_000.sv | 7 | 8 |
+============================== End RoundTrip Results ==============================

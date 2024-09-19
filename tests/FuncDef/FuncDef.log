@@ -181,44 +181,45 @@ constant                                               5
 design                                                 1
 for_stmt                                               1
 function                                               1
-integer_typespec                                       4
-integer_var                                            3
+integer_typespec                                       2
+integer_var                                            1
 io_decl                                                1
-logic_net                                              2
 module_inst                                            1
 operation                                              4
 prim_term                                              2
 ref_obj                                                9
-ref_typespec                                           4
+ref_typespec                                           2
 ref_var                                                1
+source_file                                            1
 udp                                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FuncDef/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/FuncDef/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/FuncDef/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/FuncDef/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@mulAddRecFNToRaw_preMul (work@mulAddRecFNToRaw_preMul), file:${SURELOG_DIR}/tests/FuncDef/dut.sv, line:1:1, endln:16:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@mulAddRecFNToRaw_preMul
-  |vpiDefName:work@mulAddRecFNToRaw_preMul
-  |vpiTaskFunc:
+  |vpiName:work@mulAddRecFNToRaw_preMul
+  |vpiInternalScope:
   \_function: (work@mulAddRecFNToRaw_preMul.clog2), line:3:1, endln:11:12
     |vpiParent:
     \_module_inst: work@mulAddRecFNToRaw_preMul (work@mulAddRecFNToRaw_preMul), file:${SURELOG_DIR}/tests/FuncDef/dut.sv, line:1:1, endln:16:10
     |vpiName:clog2
     |vpiFullName:work@mulAddRecFNToRaw_preMul.clog2
-    |vpiVisibility:1
-    |vpiReturn:
+    |vpiVariables:
     \_integer_var: (work@mulAddRecFNToRaw_preMul.clog2), line:3:10, endln:3:17
       |vpiParent:
       \_function: (work@mulAddRecFNToRaw_preMul.clog2), line:3:1, endln:11:12
       |vpiTypespec:
-      \_ref_typespec: (work@mulAddRecFNToRaw_preMul.clog2)
+      \_ref_typespec: (work@mulAddRecFNToRaw_preMul.clog2), line:3:10, endln:3:17
         |vpiParent:
         \_integer_var: (work@mulAddRecFNToRaw_preMul.clog2), line:3:10, endln:3:17
         |vpiFullName:work@mulAddRecFNToRaw_preMul.clog2
@@ -226,24 +227,129 @@ design: (unnamed)
         \_integer_typespec: , line:3:10, endln:3:17
       |vpiFullName:work@mulAddRecFNToRaw_preMul.clog2
       |vpiSigned:1
-    |vpiIODecl:
-    \_io_decl: (a), line:4:19, endln:4:20
-      |vpiParent:
-      \_function: (work@mulAddRecFNToRaw_preMul.clog2), line:3:1, endln:11:12
-      |vpiDirection:1
-      |vpiName:a
-      |vpiTypedef:
-      \_ref_typespec: (work@mulAddRecFNToRaw_preMul.clog2.a)
-        |vpiParent:
-        \_io_decl: (a), line:4:19, endln:4:20
-        |vpiFullName:work@mulAddRecFNToRaw_preMul.clog2.a
-        |vpiActual:
-        \_integer_typespec: , line:4:11, endln:4:18
-    |vpiStmt:
+    |vpiInternalScope:
     \_begin: (work@mulAddRecFNToRaw_preMul.clog2), line:6:5, endln:9:8
       |vpiParent:
       \_function: (work@mulAddRecFNToRaw_preMul.clog2), line:3:1, endln:11:12
       |vpiFullName:work@mulAddRecFNToRaw_preMul.clog2
+      |vpiVariables:
+      \_ref_var: (work@mulAddRecFNToRaw_preMul.clog2.clog2), line:8:14, endln:8:19
+        |vpiParent:
+        \_begin: (work@mulAddRecFNToRaw_preMul.clog2), line:6:5, endln:9:8
+        |vpiName:clog2
+        |vpiFullName:work@mulAddRecFNToRaw_preMul.clog2.clog2
+      |vpiInternalScope:
+      \_for_stmt: (work@mulAddRecFNToRaw_preMul.clog2), line:8:9, endln:8:60
+        |vpiParent:
+        \_begin: (work@mulAddRecFNToRaw_preMul.clog2), line:6:5, endln:9:8
+        |vpiFullName:work@mulAddRecFNToRaw_preMul.clog2
+        |vpiForInitStmt:
+        \_assignment: , line:8:14, endln:8:23
+          |vpiParent:
+          \_for_stmt: (work@mulAddRecFNToRaw_preMul.clog2), line:8:9, endln:8:60
+          |vpiRhs:
+          \_constant: , line:8:22, endln:8:23
+            |vpiParent:
+            \_module_inst: work@mulAddRecFNToRaw_preMul (work@mulAddRecFNToRaw_preMul), file:${SURELOG_DIR}/tests/FuncDef/dut.sv, line:1:1, endln:16:10
+            |vpiDecompile:0
+            |vpiSize:64
+            |UINT:0
+            |vpiConstType:9
+          |vpiLhs:
+          \_ref_var: (work@mulAddRecFNToRaw_preMul.clog2.clog2), line:8:14, endln:8:19
+        |vpiForIncStmt:
+        \_assignment: , line:8:32, endln:8:49
+          |vpiParent:
+          \_for_stmt: (work@mulAddRecFNToRaw_preMul.clog2), line:8:9, endln:8:60
+          |vpiOpType:82
+          |vpiBlocking:1
+          |vpiRhs:
+          \_operation: , line:8:40, endln:8:49
+            |vpiParent:
+            \_assignment: , line:8:32, endln:8:49
+            |vpiOpType:24
+            |vpiOperand:
+            \_ref_obj: (work@mulAddRecFNToRaw_preMul.clog2.clog2), line:8:40, endln:8:45
+              |vpiParent:
+              \_operation: , line:8:40, endln:8:49
+              |vpiName:clog2
+              |vpiFullName:work@mulAddRecFNToRaw_preMul.clog2.clog2
+              |vpiActual:
+              \_ref_var: (work@mulAddRecFNToRaw_preMul.clog2.clog2), line:8:14, endln:8:19
+            |vpiOperand:
+            \_constant: , line:8:48, endln:8:49
+              |vpiParent:
+              \_operation: , line:8:40, endln:8:49
+              |vpiDecompile:1
+              |vpiSize:64
+              |UINT:1
+              |vpiConstType:9
+          |vpiLhs:
+          \_ref_obj: (work@mulAddRecFNToRaw_preMul.clog2.clog2), line:8:32, endln:8:37
+            |vpiParent:
+            \_assignment: , line:8:32, endln:8:49
+            |vpiName:clog2
+            |vpiFullName:work@mulAddRecFNToRaw_preMul.clog2.clog2
+            |vpiActual:
+            \_ref_var: (work@mulAddRecFNToRaw_preMul.clog2.clog2), line:8:14, endln:8:19
+        |vpiCondition:
+        \_operation: , line:8:25, endln:8:30
+          |vpiParent:
+          \_for_stmt: (work@mulAddRecFNToRaw_preMul.clog2), line:8:9, endln:8:60
+          |vpiOpType:18
+          |vpiOperand:
+          \_ref_obj: (work@mulAddRecFNToRaw_preMul.clog2.a), line:8:25, endln:8:26
+            |vpiParent:
+            \_operation: , line:8:25, endln:8:30
+            |vpiName:a
+            |vpiFullName:work@mulAddRecFNToRaw_preMul.clog2.a
+            |vpiActual:
+            \_io_decl: (a), line:4:19, endln:4:20
+          |vpiOperand:
+          \_constant: , line:8:29, endln:8:30
+            |vpiParent:
+            \_operation: , line:8:25, endln:8:30
+            |vpiDecompile:0
+            |vpiSize:64
+            |UINT:0
+            |vpiConstType:9
+        |vpiStmt:
+        \_assignment: , line:8:51, endln:8:59
+          |vpiParent:
+          \_for_stmt: (work@mulAddRecFNToRaw_preMul.clog2), line:8:9, endln:8:60
+          |vpiOpType:82
+          |vpiBlocking:1
+          |vpiRhs:
+          \_operation: , line:8:55, endln:8:59
+            |vpiParent:
+            \_assignment: , line:8:51, endln:8:59
+            |vpiOpType:23
+            |vpiOperand:
+            \_ref_obj: (work@mulAddRecFNToRaw_preMul.clog2.a), line:8:55, endln:8:56
+              |vpiParent:
+              \_operation: , line:8:55, endln:8:59
+              |vpiName:a
+              |vpiFullName:work@mulAddRecFNToRaw_preMul.clog2.a
+              |vpiActual:
+              \_io_decl: (a), line:4:19, endln:4:20
+            |vpiOperand:
+            \_constant: , line:8:58, endln:8:59
+              |vpiParent:
+              \_operation: , line:8:55, endln:8:59
+              |vpiDecompile:1
+              |vpiSize:64
+              |UINT:1
+              |vpiConstType:9
+          |vpiLhs:
+          \_ref_obj: (work@mulAddRecFNToRaw_preMul.clog2.a), line:8:51, endln:8:52
+            |vpiParent:
+            \_assignment: , line:8:51, endln:8:59
+            |vpiName:a
+            |vpiFullName:work@mulAddRecFNToRaw_preMul.clog2.a
+            |vpiActual:
+            \_io_decl: (a), line:4:19, endln:4:20
+      |vpiImportTypespec:
+      \_ref_var: (work@mulAddRecFNToRaw_preMul.clog2.clog2), line:8:14, endln:8:19
       |vpiStmt:
       \_assignment: , line:7:9, endln:7:18
         |vpiParent:
@@ -280,135 +386,64 @@ design: (unnamed)
           |vpiActual:
           \_io_decl: (a), line:4:19, endln:4:20
       |vpiStmt:
-      \_for_stmt: (work@mulAddRecFNToRaw_preMul.clog2), line:8:9, endln:8:12
+      \_for_stmt: (work@mulAddRecFNToRaw_preMul.clog2), line:8:9, endln:8:60
+    |vpiTypedef:
+    \_integer_typespec: , line:3:10, endln:3:17
+      |vpiParent:
+      \_function: (work@mulAddRecFNToRaw_preMul.clog2), line:3:1, endln:11:12
+      |vpiSigned:1
+    |vpiTypedef:
+    \_integer_typespec: , line:4:11, endln:4:18
+      |vpiParent:
+      \_function: (work@mulAddRecFNToRaw_preMul.clog2), line:3:1, endln:11:12
+      |vpiSigned:1
+    |vpiImportTypespec:
+    \_integer_typespec: , line:3:10, endln:3:17
+    |vpiImportTypespec:
+    \_integer_var: (work@mulAddRecFNToRaw_preMul.clog2), line:3:10, endln:3:17
+    |vpiImportTypespec:
+    \_integer_typespec: , line:4:11, endln:4:18
+    |vpiVisibility:1
+    |vpiReturn:
+    \_integer_var: (work@mulAddRecFNToRaw_preMul.clog2), line:3:10, endln:3:17
+    |vpiIODecl:
+    \_io_decl: (a), line:4:19, endln:4:20
+      |vpiParent:
+      \_function: (work@mulAddRecFNToRaw_preMul.clog2), line:3:1, endln:11:12
+      |vpiDirection:1
+      |vpiName:a
+      |vpiTypedef:
+      \_ref_typespec: (work@mulAddRecFNToRaw_preMul.clog2.a), line:4:19, endln:4:20
         |vpiParent:
-        \_begin: (work@mulAddRecFNToRaw_preMul.clog2), line:6:5, endln:9:8
-        |vpiFullName:work@mulAddRecFNToRaw_preMul.clog2
-        |vpiForInitStmt:
-        \_assignment: , line:8:14, endln:8:23
-          |vpiParent:
-          \_for_stmt: (work@mulAddRecFNToRaw_preMul.clog2), line:8:9, endln:8:12
-          |vpiRhs:
-          \_constant: , line:8:22, endln:8:23
-            |vpiParent:
-            \_assignment: , line:8:14, endln:8:23
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
-            |vpiConstType:9
-          |vpiLhs:
-          \_ref_var: (work@mulAddRecFNToRaw_preMul.clog2.clog2), line:8:14, endln:8:19
-            |vpiParent:
-            \_assignment: , line:8:14, endln:8:23
-            |vpiName:clog2
-            |vpiFullName:work@mulAddRecFNToRaw_preMul.clog2.clog2
-        |vpiForIncStmt:
-        \_assignment: , line:8:32, endln:8:49
-          |vpiParent:
-          \_for_stmt: (work@mulAddRecFNToRaw_preMul.clog2), line:8:9, endln:8:12
-          |vpiOpType:82
-          |vpiBlocking:1
-          |vpiRhs:
-          \_operation: , line:8:40, endln:8:49
-            |vpiParent:
-            \_assignment: , line:8:32, endln:8:49
-            |vpiOpType:24
-            |vpiOperand:
-            \_ref_obj: (work@mulAddRecFNToRaw_preMul.clog2.clog2), line:8:40, endln:8:45
-              |vpiParent:
-              \_operation: , line:8:40, endln:8:49
-              |vpiName:clog2
-              |vpiFullName:work@mulAddRecFNToRaw_preMul.clog2.clog2
-              |vpiActual:
-              \_integer_var: (work@mulAddRecFNToRaw_preMul.clog2.clog2), line:3:10, endln:3:17
-            |vpiOperand:
-            \_constant: , line:8:48, endln:8:49
-              |vpiParent:
-              \_operation: , line:8:40, endln:8:49
-              |vpiDecompile:1
-              |vpiSize:64
-              |UINT:1
-              |vpiConstType:9
-          |vpiLhs:
-          \_ref_obj: (work@mulAddRecFNToRaw_preMul.clog2.clog2), line:8:32, endln:8:37
-            |vpiParent:
-            \_assignment: , line:8:32, endln:8:49
-            |vpiName:clog2
-            |vpiFullName:work@mulAddRecFNToRaw_preMul.clog2.clog2
-            |vpiActual:
-            \_integer_var: (work@mulAddRecFNToRaw_preMul.clog2.clog2), line:3:10, endln:3:17
-        |vpiCondition:
-        \_operation: , line:8:25, endln:8:30
-          |vpiParent:
-          \_for_stmt: (work@mulAddRecFNToRaw_preMul.clog2), line:8:9, endln:8:12
-          |vpiOpType:18
-          |vpiOperand:
-          \_ref_obj: (work@mulAddRecFNToRaw_preMul.clog2.a), line:8:25, endln:8:26
-            |vpiParent:
-            \_operation: , line:8:25, endln:8:30
-            |vpiName:a
-            |vpiFullName:work@mulAddRecFNToRaw_preMul.clog2.a
-            |vpiActual:
-            \_io_decl: (a), line:4:19, endln:4:20
-          |vpiOperand:
-          \_constant: , line:8:29, endln:8:30
-            |vpiParent:
-            \_operation: , line:8:25, endln:8:30
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
-            |vpiConstType:9
-        |vpiStmt:
-        \_assignment: , line:8:51, endln:8:59
-          |vpiParent:
-          \_for_stmt: (work@mulAddRecFNToRaw_preMul.clog2), line:8:9, endln:8:12
-          |vpiOpType:82
-          |vpiBlocking:1
-          |vpiRhs:
-          \_operation: , line:8:55, endln:8:59
-            |vpiParent:
-            \_assignment: , line:8:51, endln:8:59
-            |vpiOpType:23
-            |vpiOperand:
-            \_ref_obj: (work@mulAddRecFNToRaw_preMul.clog2.a), line:8:55, endln:8:56
-              |vpiParent:
-              \_operation: , line:8:55, endln:8:59
-              |vpiName:a
-              |vpiFullName:work@mulAddRecFNToRaw_preMul.clog2.a
-              |vpiActual:
-              \_io_decl: (a), line:4:19, endln:4:20
-            |vpiOperand:
-            \_constant: , line:8:58, endln:8:59
-              |vpiParent:
-              \_operation: , line:8:55, endln:8:59
-              |vpiDecompile:1
-              |vpiSize:64
-              |UINT:1
-              |vpiConstType:9
-          |vpiLhs:
-          \_ref_obj: (work@mulAddRecFNToRaw_preMul.clog2.a), line:8:51, endln:8:52
-            |vpiParent:
-            \_assignment: , line:8:51, endln:8:59
-            |vpiName:a
-            |vpiFullName:work@mulAddRecFNToRaw_preMul.clog2.a
-            |vpiActual:
-            \_io_decl: (a), line:4:19, endln:4:20
-    |vpiInstance:
+        \_io_decl: (a), line:4:19, endln:4:20
+        |vpiFullName:work@mulAddRecFNToRaw_preMul.clog2.a
+        |vpiActual:
+        \_integer_typespec: , line:4:11, endln:4:18
+    |vpiStmt:
+    \_begin: (work@mulAddRecFNToRaw_preMul.clog2), line:6:5, endln:9:8
+  |vpiImportTypespec:
+  \_function: (work@mulAddRecFNToRaw_preMul.clog2), line:3:1, endln:11:12
+  |vpiImportTypespec:
+  \_logic_net: (work@mulAddRecFNToRaw_preMul.notCDom_reduced2AbsSigSum), line:15:13, endln:15:38
+    |vpiParent:
     \_module_inst: work@mulAddRecFNToRaw_preMul (work@mulAddRecFNToRaw_preMul), file:${SURELOG_DIR}/tests/FuncDef/dut.sv, line:1:1, endln:16:10
-  |vpiNet:
-  \_logic_net: (work@mulAddRecFNToRaw_preMul.countLeadingZeros_notCDom.notCDom_reduced2AbsSigSum), line:15:13, endln:15:38
-    |vpiParent:
-    \_udp: countLeadingZeros (work@mulAddRecFNToRaw_preMul.countLeadingZeros_notCDom), file:${SURELOG_DIR}/tests/FuncDef/dut.sv, line:13:5, endln:15:66
     |vpiName:notCDom_reduced2AbsSigSum
-    |vpiFullName:work@mulAddRecFNToRaw_preMul.countLeadingZeros_notCDom.notCDom_reduced2AbsSigSum
+    |vpiFullName:work@mulAddRecFNToRaw_preMul.notCDom_reduced2AbsSigSum
     |vpiNetType:1
-  |vpiNet:
-  \_logic_net: (work@mulAddRecFNToRaw_preMul.countLeadingZeros_notCDom.notCDom_normDistReduced2), line:15:40, endln:15:64
+  |vpiImportTypespec:
+  \_logic_net: (work@mulAddRecFNToRaw_preMul.notCDom_normDistReduced2), line:15:40, endln:15:64
     |vpiParent:
-    \_udp: countLeadingZeros (work@mulAddRecFNToRaw_preMul.countLeadingZeros_notCDom), file:${SURELOG_DIR}/tests/FuncDef/dut.sv, line:13:5, endln:15:66
+    \_module_inst: work@mulAddRecFNToRaw_preMul (work@mulAddRecFNToRaw_preMul), file:${SURELOG_DIR}/tests/FuncDef/dut.sv, line:1:1, endln:16:10
     |vpiName:notCDom_normDistReduced2
-    |vpiFullName:work@mulAddRecFNToRaw_preMul.countLeadingZeros_notCDom.notCDom_normDistReduced2
+    |vpiFullName:work@mulAddRecFNToRaw_preMul.notCDom_normDistReduced2
     |vpiNetType:1
+  |vpiDefName:work@mulAddRecFNToRaw_preMul
+  |vpiTaskFunc:
+  \_function: (work@mulAddRecFNToRaw_preMul.clog2), line:3:1, endln:11:12
+  |vpiNet:
+  \_logic_net: (work@mulAddRecFNToRaw_preMul.notCDom_reduced2AbsSigSum), line:15:13, endln:15:38
+  |vpiNet:
+  \_logic_net: (work@mulAddRecFNToRaw_preMul.notCDom_normDistReduced2), line:15:40, endln:15:64
   |vpiPrimitive:
   \_udp: countLeadingZeros (work@mulAddRecFNToRaw_preMul.countLeadingZeros_notCDom), file:${SURELOG_DIR}/tests/FuncDef/dut.sv, line:13:5, endln:15:66
     |vpiParent:
@@ -422,13 +457,13 @@ design: (unnamed)
       \_udp: countLeadingZeros (work@mulAddRecFNToRaw_preMul.countLeadingZeros_notCDom), file:${SURELOG_DIR}/tests/FuncDef/dut.sv, line:13:5, endln:15:66
       |vpiDirection:2
       |vpiExpr:
-      \_ref_obj: (work@mulAddRecFNToRaw_preMul.countLeadingZeros_notCDom.notCDom_reduced2AbsSigSum), line:15:13, endln:15:38
+      \_ref_obj: (work@mulAddRecFNToRaw_preMul.notCDom_reduced2AbsSigSum), line:15:13, endln:15:38
         |vpiParent:
-        \_udp: countLeadingZeros (work@mulAddRecFNToRaw_preMul.countLeadingZeros_notCDom), file:${SURELOG_DIR}/tests/FuncDef/dut.sv, line:13:5, endln:15:66
+        \_module_inst: work@mulAddRecFNToRaw_preMul (work@mulAddRecFNToRaw_preMul), file:${SURELOG_DIR}/tests/FuncDef/dut.sv, line:1:1, endln:16:10
         |vpiName:notCDom_reduced2AbsSigSum
-        |vpiFullName:work@mulAddRecFNToRaw_preMul.countLeadingZeros_notCDom.notCDom_reduced2AbsSigSum
+        |vpiFullName:work@mulAddRecFNToRaw_preMul.notCDom_reduced2AbsSigSum
         |vpiActual:
-        \_logic_net: (work@mulAddRecFNToRaw_preMul.countLeadingZeros_notCDom.notCDom_reduced2AbsSigSum), line:15:13, endln:15:38
+        \_logic_net: (work@mulAddRecFNToRaw_preMul.notCDom_reduced2AbsSigSum), line:15:13, endln:15:38
     |vpiPrimTerm:
     \_prim_term: , line:15:40, endln:15:64
       |vpiParent:
@@ -436,52 +471,13 @@ design: (unnamed)
       |vpiDirection:1
       |vpiTermIndex:1
       |vpiExpr:
-      \_ref_obj: (work@mulAddRecFNToRaw_preMul.countLeadingZeros_notCDom.notCDom_normDistReduced2), line:15:40, endln:15:64
+      \_ref_obj: (work@mulAddRecFNToRaw_preMul.notCDom_normDistReduced2), line:15:40, endln:15:64
         |vpiParent:
-        \_udp: countLeadingZeros (work@mulAddRecFNToRaw_preMul.countLeadingZeros_notCDom), file:${SURELOG_DIR}/tests/FuncDef/dut.sv, line:13:5, endln:15:66
+        \_module_inst: work@mulAddRecFNToRaw_preMul (work@mulAddRecFNToRaw_preMul), file:${SURELOG_DIR}/tests/FuncDef/dut.sv, line:1:1, endln:16:10
         |vpiName:notCDom_normDistReduced2
-        |vpiFullName:work@mulAddRecFNToRaw_preMul.countLeadingZeros_notCDom.notCDom_normDistReduced2
+        |vpiFullName:work@mulAddRecFNToRaw_preMul.notCDom_normDistReduced2
         |vpiActual:
-        \_logic_net: (work@mulAddRecFNToRaw_preMul.countLeadingZeros_notCDom.notCDom_normDistReduced2), line:15:40, endln:15:64
-\_weaklyReferenced:
-\_integer_typespec: , line:3:10, endln:3:17
-  |vpiSigned:1
-\_integer_typespec: , line:4:11, endln:4:18
-  |vpiSigned:1
-\_integer_var: (work@mulAddRecFNToRaw_preMul.clog2.clog2), line:3:10, endln:3:17
-  |vpiParent:
-  \_ref_obj: (work@mulAddRecFNToRaw_preMul.clog2.clog2), line:8:32, endln:8:37
-  |vpiTypespec:
-  \_ref_typespec: (work@mulAddRecFNToRaw_preMul.clog2.clog2)
-    |vpiParent:
-    \_integer_var: (work@mulAddRecFNToRaw_preMul.clog2.clog2), line:3:10, endln:3:17
-    |vpiFullName:work@mulAddRecFNToRaw_preMul.clog2.clog2
-    |vpiActual:
-    \_integer_typespec: , line:3:10, endln:3:17
-  |vpiName:clog2
-  |vpiFullName:work@mulAddRecFNToRaw_preMul.clog2.clog2
-  |vpiSigned:1
-\_integer_typespec: , line:3:10, endln:3:17
-  |vpiParent:
-  \_ref_typespec: (work@mulAddRecFNToRaw_preMul.clog2.clog2)
-  |vpiSigned:1
-\_integer_var: (work@mulAddRecFNToRaw_preMul.clog2.clog2), line:3:10, endln:3:17
-  |vpiParent:
-  \_ref_obj: (work@mulAddRecFNToRaw_preMul.clog2.clog2), line:8:40, endln:8:45
-  |vpiTypespec:
-  \_ref_typespec: (work@mulAddRecFNToRaw_preMul.clog2.clog2)
-    |vpiParent:
-    \_integer_var: (work@mulAddRecFNToRaw_preMul.clog2.clog2), line:3:10, endln:3:17
-    |vpiFullName:work@mulAddRecFNToRaw_preMul.clog2.clog2
-    |vpiActual:
-    \_integer_typespec: , line:3:10, endln:3:17
-  |vpiName:clog2
-  |vpiFullName:work@mulAddRecFNToRaw_preMul.clog2.clog2
-  |vpiSigned:1
-\_integer_typespec: , line:3:10, endln:3:17
-  |vpiParent:
-  \_ref_typespec: (work@mulAddRecFNToRaw_preMul.clog2.clog2)
-  |vpiSigned:1
+        \_logic_net: (work@mulAddRecFNToRaw_preMul.notCDom_normDistReduced2), line:15:40, endln:15:64
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -494,5 +490,5 @@ design: (unnamed)
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/FuncDef/dut.sv | ${SURELOG_DIR}/build/regression/FuncDef/roundtrip/dut_000.sv | 6 | 16 |
+[roundtrip]: ${SURELOG_DIR}/tests/FuncDef/dut.sv | ${SURELOG_DIR}/build/regression/FuncDef/roundtrip/dut_000.sv | 10 | 16 |
 ============================== End RoundTrip Results ==============================

@@ -47,37 +47,32 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/Disable/dut.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-begin                                                  1
+begin                                                  2
 design                                                 1
 disable                                                1
 disable_fork                                           1
 forever_stmt                                           1
 initial                                                1
-logic_net                                              1
 module_inst                                            1
-named_begin                                            1
 ref_obj                                                1
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Disable/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/Disable/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/Disable/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/Disable/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/Disable/dut.sv, line:1:1, endln:8:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
+  |vpiName:work@top
   |vpiDefName:work@top
-  |vpiNet:
-  \_logic_net: (work@top.loop.loop), line:4:18, endln:4:22
-    |vpiParent:
-    \_disable: , line:4:10, endln:4:23
-    |vpiName:loop
-    |vpiFullName:work@top.loop.loop
-    |vpiNetType:1
   |vpiProcess:
   \_initial: , line:2:4, endln:7:7
     |vpiParent:
@@ -88,25 +83,25 @@ design: (unnamed)
       \_initial: , line:2:4, endln:7:7
       |vpiFullName:work@top
       |vpiStmt:
-      \_forever_stmt: , line:3:7, endln:3:14
+      \_forever_stmt: , line:3:7, endln:6:10
         |vpiParent:
         \_begin: (work@top), line:2:12, endln:7:7
         |vpiStmt:
-        \_named_begin: (work@top.loop), line:3:23, endln:3:27
+        \_begin: (work@top.loop), line:3:15, endln:6:10
           |vpiParent:
-          \_forever_stmt: , line:3:7, endln:3:14
+          \_forever_stmt: , line:3:7, endln:6:10
           |vpiName:loop
           |vpiFullName:work@top.loop
           |vpiStmt:
           \_disable: , line:4:10, endln:4:23
             |vpiParent:
-            \_named_begin: (work@top.loop), line:3:23, endln:3:27
+            \_begin: (work@top.loop), line:3:15, endln:6:10
             |vpiExpr:
-            \_named_begin: (work@top.loop), line:3:23, endln:3:27
+            \_begin: (work@top.loop), line:3:15, endln:6:10
           |vpiStmt:
           \_disable_fork: , line:5:10, endln:5:23
             |vpiParent:
-            \_named_begin: (work@top.loop), line:3:23, endln:3:27
+            \_begin: (work@top.loop), line:3:15, endln:6:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -120,5 +115,5 @@ design: (unnamed)
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/Disable/dut.sv | ${SURELOG_DIR}/build/regression/Disable/roundtrip/dut_000.sv | 2 | 8 |
+[roundtrip]: ${SURELOG_DIR}/tests/Disable/dut.sv | ${SURELOG_DIR}/build/regression/Disable/roundtrip/dut_000.sv | 5 | 8 |
 ============================== End RoundTrip Results ==============================

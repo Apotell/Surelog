@@ -66,165 +66,285 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/BitRanges/dut.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-array_typespec                                         1
-bit_typespec                                           2
-constant                                               6
+array_typespec                                         2
+array_var                                              1
+bit_typespec                                           4
+bit_var                                                2
+constant                                              16
 design                                                 1
-logic_net                                              2
 module_inst                                            1
 port                                                   2
-range                                                  3
-ref_obj                                                2
-ref_typespec                                           3
+range                                                  8
+ref_typespec                                           6
+source_file                                            1
 === UHDM Object Stats End ===
+[ERR:IG0807] ${SURELOG_DIR}/tests/BitRanges/dut.sv:3:14: Child 34 is not entirely in parent's scope.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BitRanges/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/BitRanges/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/BitRanges/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/BitRanges/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitRanges/dut.sv, line:1:1, endln:6:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiNet:
-  \_logic_net: (work@top.dmi_req_ram), line:3:21, endln:3:32
+  |vpiName:work@top
+  |vpiVariables:
+  \_bit_var: (work@top), line:3:3, endln:3:40
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitRanges/dut.sv, line:1:1, endln:6:10
-    |vpiName:dmi_req_ram
-    |vpiFullName:work@top.dmi_req_ram
-  |vpiNet:
-  \_logic_net: (work@top.dmi_req_addr), line:4:21, endln:4:33
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitRanges/dut.sv, line:1:1, endln:6:10
-    |vpiName:dmi_req_addr
-    |vpiFullName:work@top.dmi_req_addr
-  |vpiPort:
-  \_port: (dmi_req_ram), line:3:21, endln:3:32
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitRanges/dut.sv, line:1:1, endln:6:10
-    |vpiName:dmi_req_ram
-    |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@top.dmi_req_ram.dmi_req_ram), line:3:21, endln:3:32
+    |vpiTypespec:
+    \_ref_typespec: (work@top), line:3:10, endln:3:13
       |vpiParent:
-      \_port: (dmi_req_ram), line:3:21, endln:3:32
-      |vpiName:dmi_req_ram
-      |vpiFullName:work@top.dmi_req_ram.dmi_req_ram
+      \_bit_var: (work@top), line:3:3, endln:3:40
+      |vpiFullName:work@top
       |vpiActual:
-      \_logic_net: (work@top.dmi_req_ram), line:3:21, endln:3:32
-    |vpiTypedef:
-    \_ref_typespec: (work@top.dmi_req_ram)
+      \_bit_typespec: , line:3:10, endln:3:19
+    |vpiFullName:work@top
+  |vpiVariables:
+  \_array_var: (work@top.dmi_req_ram), line:3:21, endln:3:40
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitRanges/dut.sv, line:1:1, endln:6:10
+    |vpiSize:1
+    |vpiTypespec:
+    \_ref_typespec: (work@top.dmi_req_ram), line:3:21, endln:3:32
       |vpiParent:
-      \_port: (dmi_req_ram), line:3:21, endln:3:32
+      \_array_var: (work@top.dmi_req_ram), line:3:21, endln:3:40
       |vpiFullName:work@top.dmi_req_ram
       |vpiActual:
-      \_array_typespec: , line:3:10, endln:3:40
-  |vpiPort:
-  \_port: (dmi_req_addr), line:4:21, endln:4:33
+      \_array_typespec: , line:3:21, endln:3:32
+    |vpiName:dmi_req_ram
+    |vpiFullName:work@top.dmi_req_ram
+    |vpiRandType:1
+    |vpiVisibility:1
+    |vpiArrayType:1
+    |vpiRange:
+    \_range: , line:3:33, endln:3:40
+      |vpiParent:
+      \_array_var: (work@top.dmi_req_ram), line:3:21, endln:3:40
+      |vpiLeftRange:
+      \_constant: , line:3:34, endln:3:36
+        |vpiParent:
+        \_range: , line:3:33, endln:3:40
+        |vpiDecompile:23
+        |vpiSize:64
+        |UINT:23
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:3:37, endln:3:39
+        |vpiParent:
+        \_range: , line:3:33, endln:3:40
+        |vpiDecompile:24
+        |vpiSize:64
+        |UINT:24
+        |vpiConstType:9
+    |vpiReg:
+    \_bit_var: (work@top), line:3:3, endln:3:40
+  |vpiVariables:
+  \_bit_var: (work@top.dmi_req_addr), line:4:21, endln:4:33
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitRanges/dut.sv, line:1:1, endln:6:10
-    |vpiName:dmi_req_addr
-    |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@top.dmi_req_addr.dmi_req_addr), line:4:21, endln:4:33
+    |vpiTypespec:
+    \_ref_typespec: (work@top.dmi_req_addr), line:4:10, endln:4:13
       |vpiParent:
-      \_port: (dmi_req_addr), line:4:21, endln:4:33
-      |vpiName:dmi_req_addr
-      |vpiFullName:work@top.dmi_req_addr.dmi_req_addr
-      |vpiActual:
-      \_logic_net: (work@top.dmi_req_addr), line:4:21, endln:4:33
-    |vpiTypedef:
-    \_ref_typespec: (work@top.dmi_req_addr)
-      |vpiParent:
-      \_port: (dmi_req_addr), line:4:21, endln:4:33
+      \_bit_var: (work@top.dmi_req_addr), line:4:21, endln:4:33
       |vpiFullName:work@top.dmi_req_addr
       |vpiActual:
       \_bit_typespec: , line:4:10, endln:4:19
-\_weaklyReferenced:
-\_array_typespec: , line:3:10, endln:3:40
-  |vpiParent:
-  \_port: (dmi_req_ram), line:3:21, endln:3:32
-  |vpiArrayType:1
-  |vpiRange:
-  \_range: , line:3:33, endln:3:40
+    |vpiName:dmi_req_addr
+    |vpiFullName:work@top.dmi_req_addr
+    |vpiVisibility:1
+  |vpiRegArray:
+  \_array_var: (work@top.dmi_req_ram), line:3:21, endln:3:40
+  |vpiTypedef:
+  \_bit_typespec: , line:3:10, endln:3:19
     |vpiParent:
-    \_array_typespec: , line:3:10, endln:3:40
-    |vpiLeftRange:
-    \_constant: , line:3:34, endln:3:36
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitRanges/dut.sv, line:1:1, endln:6:10
+    |vpiRange:
+    \_range: , line:3:14, endln:3:19
       |vpiParent:
-      \_range: , line:3:33, endln:3:40
-      |vpiDecompile:23
-      |vpiSize:64
-      |UINT:23
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:37, endln:3:39
-      |vpiParent:
-      \_range: , line:3:33, endln:3:40
-      |vpiDecompile:24
-      |vpiSize:64
-      |UINT:24
-      |vpiConstType:9
-  |vpiElemTypespec:
-  \_ref_typespec: (work@top.dmi_req_ram)
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitRanges/dut.sv, line:1:1, endln:6:10
+      |vpiLeftRange:
+      \_constant: , line:3:15, endln:3:16
+        |vpiParent:
+        \_range: , line:3:14, endln:3:19
+        |vpiDecompile:6
+        |vpiSize:64
+        |UINT:6
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:3:17, endln:3:18
+        |vpiParent:
+        \_range: , line:3:14, endln:3:19
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_array_typespec: , line:3:21, endln:3:32
     |vpiParent:
-    \_array_typespec: , line:3:10, endln:3:40
-    |vpiFullName:work@top.dmi_req_ram
-    |vpiActual:
-    \_bit_typespec: , line:3:10, endln:3:19
-\_bit_typespec: , line:3:10, endln:3:19
-  |vpiRange:
-  \_range: , line:3:14, endln:3:19
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitRanges/dut.sv, line:1:1, endln:6:10
+  |vpiTypedef:
+  \_bit_typespec: , line:4:10, endln:4:19
     |vpiParent:
-    \_bit_typespec: , line:3:10, endln:3:19
-    |vpiLeftRange:
-    \_constant: , line:3:15, endln:3:16
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitRanges/dut.sv, line:1:1, endln:6:10
+    |vpiRange:
+    \_range: , line:4:14, endln:4:19
       |vpiParent:
-      \_range: , line:3:14, endln:3:19
-      |vpiDecompile:6
-      |vpiSize:64
-      |UINT:6
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:17, endln:3:18
-      |vpiParent:
-      \_range: , line:3:14, endln:3:19
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_bit_typespec: , line:4:10, endln:4:19
-  |vpiRange:
-  \_range: , line:4:14, endln:4:19
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitRanges/dut.sv, line:1:1, endln:6:10
+      |vpiLeftRange:
+      \_constant: , line:4:15, endln:4:16
+        |vpiParent:
+        \_range: , line:4:14, endln:4:19
+        |vpiDecompile:6
+        |vpiSize:64
+        |UINT:6
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:4:17, endln:4:18
+        |vpiParent:
+        \_range: , line:4:14, endln:4:19
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_array_typespec: , line:3:33, endln:3:40
     |vpiParent:
-    \_bit_typespec: , line:4:10, endln:4:19
-    |vpiLeftRange:
-    \_constant: , line:4:15, endln:4:16
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitRanges/dut.sv, line:1:1, endln:6:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_range: , line:3:33, endln:3:40
       |vpiParent:
-      \_range: , line:4:14, endln:4:19
-      |vpiDecompile:6
-      |vpiSize:64
-      |UINT:6
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:4:17, endln:4:18
+      \_array_typespec: , line:3:33, endln:3:40
+      |vpiLeftRange:
+      \_constant: , line:3:34, endln:3:36
+        |vpiParent:
+        \_range: , line:3:33, endln:3:40
+        |vpiDecompile:23
+        |vpiSize:64
+        |UINT:23
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:3:37, endln:3:39
+        |vpiParent:
+        \_range: , line:3:33, endln:3:40
+        |vpiDecompile:24
+        |vpiSize:64
+        |UINT:24
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_ref_typespec: (work@top), line:3:21, endln:3:19
       |vpiParent:
-      \_range: , line:4:14, endln:4:19
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
+      \_array_typespec: , line:3:33, endln:3:40
+      |vpiFullName:work@top
+      |vpiActual:
+      \_bit_typespec: , line:3:10, endln:3:19
+  |vpiTypedef:
+  \_bit_typespec: , line:3:10, endln:3:19
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitRanges/dut.sv, line:1:1, endln:6:10
+    |vpiRange:
+    \_range: , line:3:14, endln:3:19
+      |vpiParent:
+      \_array_typespec: , line:3:33, endln:3:40
+      |vpiLeftRange:
+      \_constant: , line:3:15, endln:3:16
+        |vpiParent:
+        \_range: , line:3:14, endln:3:19
+        |vpiDecompile:6
+        |vpiSize:64
+        |UINT:6
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:3:17, endln:3:18
+        |vpiParent:
+        \_range: , line:3:14, endln:3:19
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_bit_typespec: , line:4:10, endln:4:19
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitRanges/dut.sv, line:1:1, endln:6:10
+    |vpiRange:
+    \_range: , line:4:14, endln:4:19
+      |vpiParent:
+      \_port: (dmi_req_addr), line:4:3, endln:4:33
+      |vpiLeftRange:
+      \_constant: , line:4:15, endln:4:16
+        |vpiParent:
+        \_range: , line:4:14, endln:4:19
+        |vpiDecompile:6
+        |vpiSize:64
+        |UINT:6
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:4:17, endln:4:18
+        |vpiParent:
+        \_range: , line:4:14, endln:4:19
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_bit_typespec: , line:3:10, endln:3:19
+  |vpiImportTypespec:
+  \_bit_var: (work@top), line:3:3, endln:3:40
+  |vpiImportTypespec:
+  \_array_var: (work@top.dmi_req_ram), line:3:21, endln:3:40
+  |vpiImportTypespec:
+  \_array_typespec: , line:3:21, endln:3:32
+  |vpiImportTypespec:
+  \_bit_typespec: , line:4:10, endln:4:19
+  |vpiImportTypespec:
+  \_bit_var: (work@top.dmi_req_addr), line:4:21, endln:4:33
+  |vpiImportTypespec:
+  \_array_typespec: , line:3:33, endln:3:40
+  |vpiImportTypespec:
+  \_bit_typespec: , line:3:10, endln:3:19
+  |vpiImportTypespec:
+  \_bit_typespec: , line:4:10, endln:4:19
+  |vpiDefName:work@top
+  |vpiPort:
+  \_port: (dmi_req_ram), line:3:3, endln:3:32
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitRanges/dut.sv, line:1:1, endln:6:10
+    |vpiName:dmi_req_ram
+    |vpiDirection:2
+    |vpiTypedef:
+    \_ref_typespec: (work@top.dmi_req_ram), line:3:21, endln:3:19
+      |vpiParent:
+      \_port: (dmi_req_ram), line:3:3, endln:3:32
+      |vpiFullName:work@top.dmi_req_ram
+      |vpiActual:
+      \_array_typespec: , line:3:33, endln:3:40
+  |vpiPort:
+  \_port: (dmi_req_addr), line:4:3, endln:4:33
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitRanges/dut.sv, line:1:1, endln:6:10
+    |vpiName:dmi_req_addr
+    |vpiDirection:2
+    |vpiTypedef:
+    \_ref_typespec: (work@top.dmi_req_addr), line:4:10, endln:4:13
+      |vpiParent:
+      \_port: (dmi_req_addr), line:4:3, endln:4:33
+      |vpiFullName:work@top.dmi_req_addr
+      |vpiActual:
+      \_bit_typespec: , line:4:10, endln:4:19
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 1
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/BitRanges/dut.sv | ${SURELOG_DIR}/build/regression/BitRanges/roundtrip/dut_000.sv | 5 | 6 |
+[roundtrip]: ${SURELOG_DIR}/tests/BitRanges/dut.sv | ${SURELOG_DIR}/build/regression/BitRanges/roundtrip/dut_000.sv | 6 | 6 |
 ============================== End RoundTrip Results ==============================

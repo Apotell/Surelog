@@ -106,7 +106,7 @@ n<> u<100> t<Constant_primary> p<101> c<99> l<14:50> el<14:51>
 n<> u<101> t<Constant_expression> p<102> c<100> l<14:50> el<14:51>
 n<> u<102> t<Constant_range> p<103> c<97> l<14:32> el<14:51>
 n<> u<103> t<Packed_dimension> p<104> c<102> l<14:31> el<14:52>
-n<> u<104> t<Data_type> p<105> c<86> l<14:9> el<14:52>
+n<rvfi_pkg::rvfi_instr_t[NR_COMMIT_PORTS-1:0]> u<104> t<Data_type> p<105> c<86> l<14:9> el<14:52>
 n<> u<105> t<Data_type_or_implicit> p<106> c<104> l<14:9> el<14:52>
 n<> u<106> t<Net_port_type> p<107> c<105> l<14:9> el<14:52>
 n<> u<107> t<Net_port_header> p<109> c<83> s<108> l<14:3> el<14:52>
@@ -211,36 +211,40 @@ always                                                 1
 assignment                                             1
 begin                                                  3
 bit_select                                             1
-constant                                              12
+constant                                              16
 design                                                 1
 event_control                                          1
 for_stmt                                               1
 hier_path                                              1
 if_stmt                                                1
-int_typespec                                           4
+int_typespec                                           2
 int_var                                                1
-logic_net                                              2
 logic_typespec                                         1
 module_inst                                            1
-operation                                              5
+operation                                              7
 package                                                1
-packed_array_typespec                                  1
-param_assign                                           5
-parameter                                              5
+packed_array_typespec                                  2
+packed_array_var                                       1
+param_assign                                           3
+parameter                                              3
 port                                                   1
-range                                                  2
-ref_obj                                                9
-ref_typespec                                          12
+range                                                  4
+ref_obj                                               10
+ref_typespec                                           9
+source_file                                            1
 struct_typespec                                        1
 typespec_member                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathPackedArrayNet/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/HierPathPackedArrayNet/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/HierPathPackedArrayNet/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/HierPathPackedArrayNet/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallPackages:
 \_package: rvfi_pkg (rvfi_pkg::), file:${SURELOG_DIR}/tests/HierPathPackedArrayNet/dut.sv, line:1:1, endln:9:11
   |vpiParent:
@@ -248,32 +252,18 @@ design: (unnamed)
   |vpiName:rvfi_pkg
   |vpiFullName:rvfi_pkg::
   |vpiParameter:
-  \_parameter: (rvfi_pkg::NRET), line:2:12, endln:2:16
+  \_parameter: (rvfi_pkg::NRET), line:2:12, endln:2:20
     |vpiParent:
     \_package: rvfi_pkg (rvfi_pkg::), file:${SURELOG_DIR}/tests/HierPathPackedArrayNet/dut.sv, line:1:1, endln:9:11
     |UINT:1
-    |vpiTypespec:
-    \_ref_typespec: (rvfi_pkg::NRET)
-      |vpiParent:
-      \_parameter: (rvfi_pkg::NRET), line:2:12, endln:2:16
-      |vpiFullName:rvfi_pkg::NRET
-      |vpiActual:
-      \_int_typespec: , line:2:1, endln:2:20
     |vpiLocalParam:1
     |vpiName:NRET
     |vpiFullName:rvfi_pkg::NRET
   |vpiParameter:
-  \_parameter: (rvfi_pkg::ILEN), line:3:12, endln:3:16
+  \_parameter: (rvfi_pkg::ILEN), line:3:12, endln:3:21
     |vpiParent:
     \_package: rvfi_pkg (rvfi_pkg::), file:${SURELOG_DIR}/tests/HierPathPackedArrayNet/dut.sv, line:1:1, endln:9:11
     |UINT:32
-    |vpiTypespec:
-    \_ref_typespec: (rvfi_pkg::ILEN)
-      |vpiParent:
-      \_parameter: (rvfi_pkg::ILEN), line:3:12, endln:3:16
-      |vpiFullName:rvfi_pkg::ILEN
-      |vpiActual:
-      \_int_typespec: , line:3:1, endln:3:21
     |vpiLocalParam:1
     |vpiName:ILEN
     |vpiFullName:rvfi_pkg::ILEN
@@ -288,16 +278,9 @@ design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
-      |vpiTypespec:
-      \_ref_typespec: (rvfi_pkg)
-        |vpiParent:
-        \_constant: , line:2:19, endln:2:20
-        |vpiFullName:rvfi_pkg
-        |vpiActual:
-        \_int_typespec: , line:2:1, endln:2:20
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (rvfi_pkg::NRET), line:2:12, endln:2:16
+    \_parameter: (rvfi_pkg::NRET), line:2:12, endln:2:20
   |vpiParamAssign:
   \_param_assign: , line:3:12, endln:3:21
     |vpiParent:
@@ -309,56 +292,98 @@ design: (unnamed)
       |vpiDecompile:32
       |vpiSize:64
       |UINT:32
-      |vpiTypespec:
-      \_ref_typespec: (rvfi_pkg)
-        |vpiParent:
-        \_constant: , line:3:19, endln:3:21
-        |vpiFullName:rvfi_pkg
-        |vpiActual:
-        \_int_typespec: , line:3:1, endln:3:21
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (rvfi_pkg::ILEN), line:3:12, endln:3:16
+    \_parameter: (rvfi_pkg::ILEN), line:3:12, endln:3:21
   |vpiTypedef:
   \_struct_typespec: (rvfi_pkg::rvfi_instr_t), line:5:9, endln:7:2
     |vpiParent:
     \_package: rvfi_pkg (rvfi_pkg::), file:${SURELOG_DIR}/tests/HierPathPackedArrayNet/dut.sv, line:1:1, endln:9:11
     |vpiName:rvfi_pkg::rvfi_instr_t
-    |vpiInstance:
-    \_package: rvfi_pkg (rvfi_pkg::), file:${SURELOG_DIR}/tests/HierPathPackedArrayNet/dut.sv, line:1:1, endln:9:11
     |vpiPacked:1
     |vpiTypespecMember:
-    \_typespec_member: (trap), line:6:36, endln:6:40
+    \_typespec_member: (trap), line:6:3, endln:6:41
       |vpiParent:
       \_struct_typespec: (rvfi_pkg::rvfi_instr_t), line:5:9, endln:7:2
       |vpiName:trap
       |vpiTypespec:
-      \_ref_typespec: (rvfi_pkg::rvfi_pkg::rvfi_instr_t::trap)
+      \_ref_typespec: (rvfi_pkg::rvfi_instr_t::trap), line:6:3, endln:6:19
         |vpiParent:
-        \_typespec_member: (trap), line:6:36, endln:6:40
-        |vpiFullName:rvfi_pkg::rvfi_pkg::rvfi_instr_t::trap
+        \_typespec_member: (trap), line:6:3, endln:6:41
+        |vpiFullName:rvfi_pkg::rvfi_instr_t::trap
         |vpiActual:
         \_logic_typespec: , line:6:3, endln:6:19
-      |vpiRefFile:${SURELOG_DIR}/tests/HierPathPackedArrayNet/dut.sv
-      |vpiRefLineNo:6
-      |vpiRefColumnNo:3
-      |vpiRefEndLineNo:6
-      |vpiRefEndColumnNo:19
+  |vpiTypedef:
+  \_logic_typespec: , line:6:3, endln:6:19
+    |vpiParent:
+    \_package: rvfi_pkg (rvfi_pkg::), file:${SURELOG_DIR}/tests/HierPathPackedArrayNet/dut.sv, line:1:1, endln:9:11
+    |vpiRange:
+    \_range: , line:6:9, endln:6:19
+      |vpiParent:
+      \_struct_typespec: (rvfi_pkg::rvfi_instr_t), line:5:9, endln:7:2
+      |vpiLeftRange:
+      \_operation: , line:6:10, endln:6:16
+        |vpiParent:
+        \_range: , line:6:9, endln:6:19
+        |vpiOpType:11
+        |vpiOperand:
+        \_ref_obj: (rvfi_pkg::rvfi_instr_t::NRET), line:6:10, endln:6:14
+          |vpiParent:
+          \_operation: , line:6:10, endln:6:16
+          |vpiName:NRET
+          |vpiFullName:rvfi_pkg::rvfi_instr_t::NRET
+          |vpiActual:
+          \_parameter: (rvfi_pkg::NRET), line:2:12, endln:2:20
+        |vpiOperand:
+        \_constant: , line:6:15, endln:6:16
+          |vpiParent:
+          \_operation: , line:6:10, endln:6:16
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:6:17, endln:6:18
+        |vpiParent:
+        \_range: , line:6:9, endln:6:19
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_struct_typespec: (rvfi_pkg::rvfi_instr_t), line:5:9, endln:7:2
+  |vpiImportTypespec:
+  \_logic_typespec: , line:6:3, endln:6:19
   |vpiDefName:rvfi_pkg
 |uhdmallModules:
 \_module_inst: work@rvfi_tracer (work@rvfi_tracer), file:${SURELOG_DIR}/tests/HierPathPackedArrayNet/dut.sv, line:11:1, endln:22:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@rvfi_tracer
+  |vpiName:work@rvfi_tracer
+  |vpiVariables:
+  \_packed_array_var: (work@rvfi_tracer.rvfi_i), line:14:63, endln:14:69
+    |vpiParent:
+    \_module_inst: work@rvfi_tracer (work@rvfi_tracer), file:${SURELOG_DIR}/tests/HierPathPackedArrayNet/dut.sv, line:11:1, endln:22:10
+    |vpiTypespec:
+    \_ref_typespec: (work@rvfi_tracer.rvfi_i.rvfi_pkg::rvfi_instr_t[NR_COMMIT_PORTS-1:0]), line:14:9, endln:14:52
+      |vpiParent:
+      \_packed_array_var: (work@rvfi_tracer.rvfi_i), line:14:63, endln:14:69
+      |vpiName:rvfi_pkg::rvfi_instr_t[NR_COMMIT_PORTS-1:0]
+      |vpiFullName:work@rvfi_tracer.rvfi_i.rvfi_pkg::rvfi_instr_t[NR_COMMIT_PORTS-1:0]
+      |vpiActual:
+      \_packed_array_typespec: , line:14:31, endln:14:52
+    |vpiName:rvfi_i
+    |vpiFullName:work@rvfi_tracer.rvfi_i
+    |vpiVisibility:1
   |vpiParameter:
-  \_parameter: (work@rvfi_tracer.NR_COMMIT_PORTS), line:12:26, endln:12:41
+  \_parameter: (work@rvfi_tracer.NR_COMMIT_PORTS), line:12:26, endln:12:45
     |vpiParent:
     \_module_inst: work@rvfi_tracer (work@rvfi_tracer), file:${SURELOG_DIR}/tests/HierPathPackedArrayNet/dut.sv, line:11:1, endln:22:10
     |UINT:2
     |vpiTypespec:
-    \_ref_typespec: (work@rvfi_tracer.NR_COMMIT_PORTS)
+    \_ref_typespec: (work@rvfi_tracer.NR_COMMIT_PORTS), line:12:13, endln:12:16
       |vpiParent:
-      \_parameter: (work@rvfi_tracer.NR_COMMIT_PORTS), line:12:26, endln:12:41
+      \_parameter: (work@rvfi_tracer.NR_COMMIT_PORTS), line:12:26, endln:12:45
       |vpiFullName:work@rvfi_tracer.NR_COMMIT_PORTS
       |vpiActual:
       \_int_typespec: , line:12:13, endln:12:25
@@ -375,63 +400,153 @@ design: (unnamed)
       |vpiDecompile:2
       |vpiSize:64
       |UINT:2
-      |vpiTypespec:
-      \_ref_typespec: (work@rvfi_tracer)
-        |vpiParent:
-        \_constant: , line:12:44, endln:12:45
-        |vpiFullName:work@rvfi_tracer
-        |vpiActual:
-        \_int_typespec: , line:12:13, endln:12:25
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@rvfi_tracer.NR_COMMIT_PORTS), line:12:26, endln:12:41
-  |vpiDefName:work@rvfi_tracer
-  |vpiNet:
-  \_logic_net: (work@rvfi_tracer.rvfi_i), line:14:63, endln:14:69
+    \_parameter: (work@rvfi_tracer.NR_COMMIT_PORTS), line:12:26, endln:12:45
+  |vpiTypedef:
+  \_int_typespec: , line:12:13, endln:12:25
     |vpiParent:
     \_module_inst: work@rvfi_tracer (work@rvfi_tracer), file:${SURELOG_DIR}/tests/HierPathPackedArrayNet/dut.sv, line:11:1, endln:22:10
-    |vpiName:rvfi_i
-    |vpiFullName:work@rvfi_tracer.rvfi_i
-  |vpiNet:
+  |vpiTypedef:
+  \_packed_array_typespec: , line:14:31, endln:14:52
+    |vpiParent:
+    \_module_inst: work@rvfi_tracer (work@rvfi_tracer), file:${SURELOG_DIR}/tests/HierPathPackedArrayNet/dut.sv, line:11:1, endln:22:10
+    |vpiRange:
+    \_range: , line:14:31, endln:14:52
+      |vpiParent:
+      \_module_inst: work@rvfi_tracer (work@rvfi_tracer), file:${SURELOG_DIR}/tests/HierPathPackedArrayNet/dut.sv, line:11:1, endln:22:10
+      |vpiLeftRange:
+      \_operation: , line:14:32, endln:14:49
+        |vpiParent:
+        \_range: , line:14:31, endln:14:52
+        |vpiOpType:11
+        |vpiOperand:
+        \_ref_obj: (work@rvfi_tracer.NR_COMMIT_PORTS), line:14:32, endln:14:47
+          |vpiParent:
+          \_operation: , line:14:32, endln:14:49
+          |vpiName:NR_COMMIT_PORTS
+          |vpiFullName:work@rvfi_tracer.NR_COMMIT_PORTS
+          |vpiActual:
+          \_parameter: (work@rvfi_tracer.NR_COMMIT_PORTS), line:12:26, endln:12:45
+        |vpiOperand:
+        \_constant: , line:14:48, endln:14:49
+          |vpiParent:
+          \_operation: , line:14:32, endln:14:49
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:14:50, endln:14:51
+        |vpiParent:
+        \_range: , line:14:31, endln:14:52
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_ref_typespec: (work@rvfi_tracer), line:14:9, endln:14:19
+      |vpiParent:
+      \_packed_array_typespec: , line:14:31, endln:14:52
+      |vpiFullName:work@rvfi_tracer
+      |vpiActual:
+      \_struct_typespec: (rvfi_pkg::rvfi_instr_t), line:5:9, endln:7:2
+  |vpiTypedef:
+  \_packed_array_typespec: , line:14:31, endln:14:52
+    |vpiParent:
+    \_module_inst: work@rvfi_tracer (work@rvfi_tracer), file:${SURELOG_DIR}/tests/HierPathPackedArrayNet/dut.sv, line:11:1, endln:22:10
+    |vpiRange:
+    \_range: , line:14:31, endln:14:52
+      |vpiParent:
+      \_port: (rvfi_i), line:14:3, endln:14:69
+      |vpiLeftRange:
+      \_operation: , line:14:32, endln:14:49
+        |vpiParent:
+        \_range: , line:14:31, endln:14:52
+        |vpiOpType:11
+        |vpiOperand:
+        \_ref_obj: (work@rvfi_tracer.rvfi_i.NR_COMMIT_PORTS), line:14:32, endln:14:47
+          |vpiParent:
+          \_operation: , line:14:32, endln:14:49
+          |vpiName:NR_COMMIT_PORTS
+          |vpiFullName:work@rvfi_tracer.rvfi_i.NR_COMMIT_PORTS
+          |vpiActual:
+          \_parameter: (work@rvfi_tracer.NR_COMMIT_PORTS), line:12:26, endln:12:45
+        |vpiOperand:
+        \_constant: , line:14:48, endln:14:49
+          |vpiParent:
+          \_operation: , line:14:32, endln:14:49
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:14:50, endln:14:51
+        |vpiParent:
+        \_range: , line:14:31, endln:14:52
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_ref_typespec: (work@rvfi_tracer), line:14:9, endln:14:19
+      |vpiParent:
+      \_packed_array_typespec: , line:14:31, endln:14:52
+      |vpiFullName:work@rvfi_tracer
+      |vpiActual:
+      \_struct_typespec: (rvfi_pkg::rvfi_instr_t), line:5:9, endln:7:2
+  |vpiImportTypespec:
+  \_int_typespec: , line:12:13, endln:12:25
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:14:31, endln:14:52
+  |vpiImportTypespec:
+  \_packed_array_var: (work@rvfi_tracer.rvfi_i), line:14:63, endln:14:69
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:14:31, endln:14:52
+  |vpiImportTypespec:
   \_logic_net: (work@rvfi_tracer.clk_i), line:16:21, endln:16:26
     |vpiParent:
-    \_operation: , line:16:13, endln:16:26
+    \_module_inst: work@rvfi_tracer (work@rvfi_tracer), file:${SURELOG_DIR}/tests/HierPathPackedArrayNet/dut.sv, line:11:1, endln:22:10
     |vpiName:clk_i
     |vpiFullName:work@rvfi_tracer.clk_i
     |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@rvfi_tracer.trap), line:18:19, endln:18:23
+    |vpiParent:
+    \_module_inst: work@rvfi_tracer (work@rvfi_tracer), file:${SURELOG_DIR}/tests/HierPathPackedArrayNet/dut.sv, line:11:1, endln:22:10
+    |vpiName:trap
+    |vpiFullName:work@rvfi_tracer.trap
+    |vpiNetType:1
+  |vpiDefName:work@rvfi_tracer
+  |vpiNet:
+  \_logic_net: (work@rvfi_tracer.clk_i), line:16:21, endln:16:26
+  |vpiNet:
+  \_logic_net: (work@rvfi_tracer.trap), line:18:19, endln:18:23
   |vpiPort:
-  \_port: (rvfi_i), line:14:63, endln:14:69
+  \_port: (rvfi_i), line:14:3, endln:14:69
     |vpiParent:
     \_module_inst: work@rvfi_tracer (work@rvfi_tracer), file:${SURELOG_DIR}/tests/HierPathPackedArrayNet/dut.sv, line:11:1, endln:22:10
     |vpiName:rvfi_i
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@rvfi_tracer.rvfi_i.rvfi_i), line:14:63, endln:14:69
-      |vpiParent:
-      \_port: (rvfi_i), line:14:63, endln:14:69
-      |vpiName:rvfi_i
-      |vpiFullName:work@rvfi_tracer.rvfi_i.rvfi_i
-      |vpiActual:
-      \_logic_net: (work@rvfi_tracer.rvfi_i), line:14:63, endln:14:69
     |vpiTypedef:
-    \_ref_typespec: (work@rvfi_tracer.rvfi_i)
+    \_ref_typespec: (work@rvfi_tracer.rvfi_i), line:14:9, endln:14:52
       |vpiParent:
-      \_port: (rvfi_i), line:14:63, endln:14:69
+      \_port: (rvfi_i), line:14:3, endln:14:69
       |vpiFullName:work@rvfi_tracer.rvfi_i
       |vpiActual:
-      \_packed_array_typespec: 
+      \_packed_array_typespec: , line:14:31, endln:14:52
   |vpiProcess:
   \_always: , line:16:1, endln:21:4
     |vpiParent:
     \_module_inst: work@rvfi_tracer (work@rvfi_tracer), file:${SURELOG_DIR}/tests/HierPathPackedArrayNet/dut.sv, line:11:1, endln:22:10
     |vpiStmt:
-    \_event_control: , line:16:11, endln:16:27
+    \_event_control: , line:16:11, endln:21:4
       |vpiParent:
       \_always: , line:16:1, endln:21:4
       |vpiCondition:
       \_operation: , line:16:13, endln:16:26
         |vpiParent:
-        \_event_control: , line:16:11, endln:16:27
+        \_event_control: , line:16:11, endln:21:4
         |vpiOpType:39
         |vpiOperand:
         \_ref_obj: (work@rvfi_tracer.clk_i), line:16:21, endln:16:26
@@ -444,75 +559,31 @@ design: (unnamed)
       |vpiStmt:
       \_begin: (work@rvfi_tracer), line:16:28, endln:21:4
         |vpiParent:
-        \_event_control: , line:16:11, endln:16:27
+        \_event_control: , line:16:11, endln:21:4
         |vpiFullName:work@rvfi_tracer
-        |vpiStmt:
-        \_for_stmt: (work@rvfi_tracer), line:17:3, endln:17:6
+        |vpiVariables:
+        \_int_var: (work@rvfi_tracer.i), line:17:12, endln:17:13
+          |vpiParent:
+          \_begin: (work@rvfi_tracer), line:16:28, endln:21:4
+          |vpiTypespec:
+          \_ref_typespec: (work@rvfi_tracer.i), line:17:8, endln:17:11
+            |vpiParent:
+            \_int_var: (work@rvfi_tracer.i), line:17:12, endln:17:13
+            |vpiFullName:work@rvfi_tracer.i
+            |vpiActual:
+            \_int_typespec: , line:17:8, endln:17:11
+          |vpiName:i
+          |vpiFullName:work@rvfi_tracer.i
+          |vpiSigned:1
+        |vpiInternalScope:
+        \_for_stmt: (work@rvfi_tracer), line:17:3, endln:20:6
           |vpiParent:
           \_begin: (work@rvfi_tracer), line:16:28, endln:21:4
           |vpiFullName:work@rvfi_tracer
-          |vpiForInitStmt:
-          \_assignment: , line:17:8, endln:17:17
-            |vpiParent:
-            \_for_stmt: (work@rvfi_tracer), line:17:3, endln:17:6
-            |vpiRhs:
-            \_constant: , line:17:16, endln:17:17
-              |vpiParent:
-              \_assignment: , line:17:8, endln:17:17
-              |vpiDecompile:0
-              |vpiSize:64
-              |UINT:0
-              |vpiConstType:9
-            |vpiLhs:
-            \_int_var: (work@rvfi_tracer.i), line:17:12, endln:17:13
-              |vpiParent:
-              \_assignment: , line:17:8, endln:17:17
-              |vpiTypespec:
-              \_ref_typespec: (work@rvfi_tracer.i)
-                |vpiParent:
-                \_int_var: (work@rvfi_tracer.i), line:17:12, endln:17:13
-                |vpiFullName:work@rvfi_tracer.i
-                |vpiActual:
-                \_int_typespec: , line:17:8, endln:17:11
-              |vpiName:i
-              |vpiFullName:work@rvfi_tracer.i
-              |vpiSigned:1
-          |vpiForIncStmt:
-          \_operation: , line:17:40, endln:17:43
-            |vpiParent:
-            \_for_stmt: (work@rvfi_tracer), line:17:3, endln:17:6
-            |vpiOpType:62
-            |vpiOperand:
-            \_ref_obj: (work@rvfi_tracer.i), line:17:40, endln:17:41
-              |vpiParent:
-              \_operation: , line:17:40, endln:17:43
-              |vpiName:i
-              |vpiFullName:work@rvfi_tracer.i
-              |vpiActual:
-              \_int_var: (work@rvfi_tracer.i), line:17:12, endln:17:13
-          |vpiCondition:
-          \_operation: , line:17:19, endln:17:38
-            |vpiParent:
-            \_for_stmt: (work@rvfi_tracer), line:17:3, endln:17:6
-            |vpiOpType:20
-            |vpiOperand:
-            \_ref_obj: (work@rvfi_tracer.i), line:17:19, endln:17:20
-              |vpiParent:
-              \_operation: , line:17:19, endln:17:38
-              |vpiName:i
-              |vpiFullName:work@rvfi_tracer.i
-              |vpiActual:
-              \_int_var: (work@rvfi_tracer.i), line:17:12, endln:17:13
-            |vpiOperand:
-            \_ref_obj: (work@rvfi_tracer.NR_COMMIT_PORTS), line:17:23, endln:17:38
-              |vpiParent:
-              \_operation: , line:17:19, endln:17:38
-              |vpiName:NR_COMMIT_PORTS
-              |vpiFullName:work@rvfi_tracer.NR_COMMIT_PORTS
-          |vpiStmt:
+          |vpiInternalScope:
           \_begin: (work@rvfi_tracer), line:17:45, endln:20:6
             |vpiParent:
-            \_for_stmt: (work@rvfi_tracer), line:17:3, endln:17:6
+            \_for_stmt: (work@rvfi_tracer), line:17:3, endln:20:6
             |vpiFullName:work@rvfi_tracer
             |vpiStmt:
             \_if_stmt: , line:18:5, endln:19:8
@@ -528,6 +599,8 @@ design: (unnamed)
                   \_hier_path: (rvfi_i[i].trap), line:18:9, endln:18:23
                   |vpiName:rvfi_i
                   |vpiFullName:rvfi_i[i]
+                  |vpiActual:
+                  \_packed_array_var: (work@rvfi_tracer.rvfi_i), line:14:63, endln:14:69
                   |vpiIndex:
                   \_ref_obj: (work@rvfi_tracer.i), line:18:16, endln:18:17
                     |vpiParent:
@@ -542,94 +615,83 @@ design: (unnamed)
                   \_hier_path: (rvfi_i[i].trap), line:18:9, endln:18:23
                   |vpiName:trap
                   |vpiFullName:work@rvfi_tracer.trap
+                  |vpiActual:
+                  \_logic_net: (work@rvfi_tracer.trap), line:18:19, endln:18:23
                 |vpiName:rvfi_i[i].trap
               |vpiStmt:
               \_begin: (work@rvfi_tracer), line:18:25, endln:19:8
                 |vpiParent:
                 \_if_stmt: , line:18:5, endln:19:8
                 |vpiFullName:work@rvfi_tracer
+          |vpiForInitStmt:
+          \_assignment: , line:17:8, endln:17:17
+            |vpiParent:
+            \_for_stmt: (work@rvfi_tracer), line:17:3, endln:20:6
+            |vpiRhs:
+            \_constant: , line:17:16, endln:17:17
+              |vpiParent:
+              \_for_stmt: (work@rvfi_tracer), line:17:3, endln:20:6
+              |vpiDecompile:0
+              |vpiSize:64
+              |UINT:0
+              |vpiConstType:9
+            |vpiLhs:
+            \_int_var: (work@rvfi_tracer.i), line:17:12, endln:17:13
+          |vpiForIncStmt:
+          \_operation: , line:17:40, endln:17:43
+            |vpiParent:
+            \_for_stmt: (work@rvfi_tracer), line:17:3, endln:20:6
+            |vpiOpType:62
+            |vpiOperand:
+            \_ref_obj: (work@rvfi_tracer.i), line:17:40, endln:17:41
+              |vpiParent:
+              \_for_stmt: (work@rvfi_tracer), line:17:3, endln:20:6
+              |vpiName:i
+              |vpiFullName:work@rvfi_tracer.i
+              |vpiActual:
+              \_int_var: (work@rvfi_tracer.i), line:17:12, endln:17:13
+          |vpiCondition:
+          \_operation: , line:17:19, endln:17:38
+            |vpiParent:
+            \_for_stmt: (work@rvfi_tracer), line:17:3, endln:20:6
+            |vpiOpType:20
+            |vpiOperand:
+            \_ref_obj: (work@rvfi_tracer.i), line:17:19, endln:17:20
+              |vpiParent:
+              \_operation: , line:17:19, endln:17:38
+              |vpiName:i
+              |vpiFullName:work@rvfi_tracer.i
+              |vpiActual:
+              \_int_var: (work@rvfi_tracer.i), line:17:12, endln:17:13
+            |vpiOperand:
+            \_ref_obj: (work@rvfi_tracer.NR_COMMIT_PORTS), line:17:23, endln:17:38
+              |vpiParent:
+              \_operation: , line:17:19, endln:17:38
+              |vpiName:NR_COMMIT_PORTS
+              |vpiFullName:work@rvfi_tracer.NR_COMMIT_PORTS
+              |vpiActual:
+              \_parameter: (work@rvfi_tracer.NR_COMMIT_PORTS), line:12:26, endln:12:45
+          |vpiStmt:
+          \_begin: (work@rvfi_tracer), line:17:45, endln:20:6
+        |vpiTypedef:
+        \_int_typespec: , line:17:8, endln:17:11
+          |vpiParent:
+          \_begin: (work@rvfi_tracer), line:16:28, endln:21:4
+          |vpiSigned:1
+        |vpiImportTypespec:
+        \_int_typespec: , line:17:8, endln:17:11
+        |vpiImportTypespec:
+        \_int_var: (work@rvfi_tracer.i), line:17:12, endln:17:13
+        |vpiStmt:
+        \_for_stmt: (work@rvfi_tracer), line:17:3, endln:20:6
     |vpiAlwaysType:3
-\_weaklyReferenced:
-\_int_typespec: , line:2:1, endln:2:20
-\_int_typespec: , line:3:1, endln:3:21
-\_logic_typespec: , line:6:3, endln:6:19
-  |vpiInstance:
-  \_package: rvfi_pkg (rvfi_pkg::), file:${SURELOG_DIR}/tests/HierPathPackedArrayNet/dut.sv, line:1:1, endln:9:11
-  |vpiRange:
-  \_range: , line:6:9, endln:6:19
-    |vpiParent:
-    \_logic_typespec: , line:6:3, endln:6:19
-    |vpiLeftRange:
-    \_operation: , line:6:10, endln:6:16
-      |vpiParent:
-      \_range: , line:6:9, endln:6:19
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (NRET), line:6:10, endln:6:14
-        |vpiParent:
-        \_operation: , line:6:10, endln:6:16
-        |vpiName:NRET
-      |vpiOperand:
-      \_constant: , line:6:15, endln:6:16
-        |vpiParent:
-        \_operation: , line:6:10, endln:6:16
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:6:17, endln:6:18
-      |vpiParent:
-      \_range: , line:6:9, endln:6:19
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_int_typespec: , line:12:13, endln:12:25
-  |vpiParent:
-  \_parameter: (work@rvfi_tracer.NR_COMMIT_PORTS), line:12:26, endln:12:41
-\_int_typespec: , line:17:8, endln:17:11
-  |vpiSigned:1
-\_packed_array_typespec: 
-  |vpiRange:
-  \_range: , line:14:31, endln:14:52
-    |vpiParent:
-    \_packed_array_typespec: 
-    |vpiLeftRange:
-    \_operation: , line:14:32, endln:14:49
-      |vpiParent:
-      \_range: , line:14:31, endln:14:52
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (NR_COMMIT_PORTS), line:14:32, endln:14:47
-        |vpiParent:
-        \_operation: , line:14:32, endln:14:49
-        |vpiName:NR_COMMIT_PORTS
-      |vpiOperand:
-      \_constant: , line:14:48, endln:14:49
-        |vpiParent:
-        \_operation: , line:14:32, endln:14:49
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:14:50, endln:14:51
-      |vpiParent:
-      \_range: , line:14:31, endln:14:52
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiElemTypespec:
-  \_ref_typespec: 
-    |vpiParent:
-    \_packed_array_typespec: 
-    |vpiActual:
-    \_struct_typespec: (rvfi_pkg::rvfi_instr_t), line:5:9, endln:7:2
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/HierPathPackedArrayNet/dut.sv | ${SURELOG_DIR}/build/regression/HierPathPackedArrayNet/roundtrip/dut_000.sv | 15 | 22 |
+============================== End RoundTrip Results ==============================

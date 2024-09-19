@@ -107,56 +107,94 @@ range                                                  1
 ref_module                                             1
 ref_obj                                                1
 ref_typespec                                           1
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EnumConcat/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/EnumConcat/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/EnumConcat/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/EnumConcat/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/EnumConcat/dut.sv, line:2:1, endln:3:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@GOOD
+  |vpiName:work@GOOD
   |vpiDefName:work@GOOD
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/EnumConcat/dut.sv, line:6:1, endln:15:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@dut
+  |vpiName:work@dut
   |vpiTypedef:
-  \_enum_typespec: (exc_cause_e), line:7:1, endln:9:15
+  \_logic_typespec: , line:7:14, endln:7:25
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/EnumConcat/dut.sv, line:6:1, endln:15:10
+    |vpiRange:
+    \_range: , line:7:20, endln:7:25
+      |vpiParent:
+      \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/EnumConcat/dut.sv, line:6:1, endln:15:10
+      |vpiLeftRange:
+      \_constant: , line:7:21, endln:7:22
+        |vpiParent:
+        \_range: , line:7:20, endln:7:25
+        |vpiDecompile:5
+        |vpiSize:64
+        |UINT:5
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:7:23, endln:7:24
+        |vpiParent:
+        \_range: , line:7:20, endln:7:25
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_enum_typespec: (exc_cause_e), line:7:9, endln:9:15
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/EnumConcat/dut.sv, line:6:1, endln:15:10
     |vpiName:exc_cause_e
-    |vpiInstance:
-    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/EnumConcat/dut.sv, line:6:1, endln:15:10
     |vpiBaseTypespec:
-    \_ref_typespec: (work@dut.exc_cause_e)
+    \_ref_typespec: (work@dut.exc_cause_e), line:7:9, endln:9:15
       |vpiParent:
-      \_enum_typespec: (exc_cause_e), line:7:1, endln:9:15
+      \_enum_typespec: (exc_cause_e), line:7:9, endln:9:15
       |vpiFullName:work@dut.exc_cause_e
       |vpiActual:
       \_logic_typespec: , line:7:14, endln:7:25
     |vpiEnumConst:
     \_enum_const: (EXC_CAUSE_IRQ_SOFTWARE_M), line:8:3, endln:8:47
       |vpiParent:
-      \_enum_typespec: (exc_cause_e), line:7:1, endln:9:15
+      \_enum_typespec: (exc_cause_e), line:7:9, endln:9:15
       |vpiName:EXC_CAUSE_IRQ_SOFTWARE_M
       |BIN:100011
       |vpiDecompile:{1'b1,5'd03}
       |vpiSize:6
+  |vpiImportTypespec:
+  \_logic_typespec: , line:7:14, endln:7:25
+  |vpiImportTypespec:
+  \_enum_typespec: (exc_cause_e), line:7:9, endln:9:15
   |vpiDefName:work@dut
+  |vpiRefModule:
+  \_ref_module: work@GOOD (good), line:12:5, endln:12:17
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/EnumConcat/dut.sv, line:6:1, endln:15:10
+    |vpiName:good
+    |vpiDefName:work@GOOD
+    |vpiActual:
+    \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/EnumConcat/dut.sv, line:2:1, endln:3:10
   |vpiGenStmt:
-  \_gen_if: , line:11:3, endln:11:5
+  \_gen_if: , line:11:3, endln:13:6
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/EnumConcat/dut.sv, line:6:1, endln:15:10
     |vpiCondition:
     \_operation: , line:11:7, endln:11:44
       |vpiParent:
-      \_gen_if: , line:11:3, endln:11:5
+      \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/EnumConcat/dut.sv, line:6:1, endln:15:10
       |vpiOpType:14
       |vpiOperand:
       \_ref_obj: (work@dut.EXC_CAUSE_IRQ_SOFTWARE_M), line:11:7, endln:11:31
@@ -175,38 +213,12 @@ design: (unnamed)
         |BIN:100011
         |vpiConstType:3
     |vpiStmt:
-    \_begin: (work@dut)
+    \_begin: (work@dut), line:11:46, endln:13:6
       |vpiParent:
-      \_gen_if: , line:11:3, endln:11:5
+      \_gen_if: , line:11:3, endln:13:6
       |vpiFullName:work@dut
       |vpiStmt:
-      \_ref_module: work@GOOD (good), line:12:10, endln:12:14
-        |vpiParent:
-        \_begin: (work@dut)
-        |vpiName:good
-        |vpiDefName:work@GOOD
-\_weaklyReferenced:
-\_logic_typespec: , line:7:14, endln:7:25
-  |vpiRange:
-  \_range: , line:7:20, endln:7:25
-    |vpiParent:
-    \_logic_typespec: , line:7:14, endln:7:25
-    |vpiLeftRange:
-    \_constant: , line:7:21, endln:7:22
-      |vpiParent:
-      \_range: , line:7:20, endln:7:25
-      |vpiDecompile:5
-      |vpiSize:64
-      |UINT:5
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:7:23, endln:7:24
-      |vpiParent:
-      \_range: , line:7:20, endln:7:25
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
+      \_ref_module: work@GOOD (good), line:12:5, endln:12:17
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -215,5 +227,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/EnumConcat/dut.sv | ${SURELOG_DIR}/build/regression/EnumConcat/roundtrip/dut_000.sv | 3 | 15 |
+[roundtrip]: ${SURELOG_DIR}/tests/EnumConcat/dut.sv | ${SURELOG_DIR}/build/regression/EnumConcat/roundtrip/dut_000.sv | 8 | 15 |
 ============================== End RoundTrip Results ==============================

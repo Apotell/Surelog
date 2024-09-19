@@ -361,45 +361,39 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 begin                                                  1
-constant                                               7
+constant                                              19
 design                                                 1
 gen_region                                             1
-int_typespec                                           1
 logic_net                                              3
-logic_typespec                                         3
 module_inst                                            1
-operation                                              3
+operation                                              9
 param_assign                                           1
 parameter                                              1
 port                                                   3
-range                                                  3
-ref_obj                                                6
-ref_typespec                                           5
+range                                                  9
+ref_obj                                                9
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CarryAdd/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/CarryAdd/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/CarryAdd/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/CarryAdd/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@carryadd (work@carryadd), file:${SURELOG_DIR}/tests/CarryAdd/dut.sv, line:1:1, endln:24:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@carryadd
+  |vpiName:work@carryadd
   |vpiParameter:
-  \_parameter: (work@carryadd.WIDTH), line:3:11, endln:3:16
+  \_parameter: (work@carryadd.WIDTH), line:3:11, endln:3:20
     |vpiParent:
     \_module_inst: work@carryadd (work@carryadd), file:${SURELOG_DIR}/tests/CarryAdd/dut.sv, line:1:1, endln:24:10
     |UINT:2
-    |vpiTypespec:
-    \_ref_typespec: (work@carryadd.WIDTH)
-      |vpiParent:
-      \_parameter: (work@carryadd.WIDTH), line:3:11, endln:3:16
-      |vpiFullName:work@carryadd.WIDTH
-      |vpiActual:
-      \_int_typespec: , line:3:1, endln:3:20
     |vpiName:WIDTH
     |vpiFullName:work@carryadd.WIDTH
   |vpiParamAssign:
@@ -413,205 +407,71 @@ design: (unnamed)
       |vpiDecompile:2
       |vpiSize:64
       |UINT:2
-      |vpiTypespec:
-      \_ref_typespec: (work@carryadd)
-        |vpiParent:
-        \_constant: , line:3:19, endln:3:20
-        |vpiFullName:work@carryadd
-        |vpiActual:
-        \_int_typespec: , line:3:1, endln:3:20
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@carryadd.WIDTH), line:3:11, endln:3:16
-  |vpiDefName:work@carryadd
-  |vpiNet:
+    \_parameter: (work@carryadd.WIDTH), line:3:11, endln:3:20
+  |vpiInternalScope:
+  \_gen_region: (work@carryadd), line:9:1, endln:20:12
+    |vpiParent:
+    \_module_inst: work@carryadd (work@carryadd), file:${SURELOG_DIR}/tests/CarryAdd/dut.sv, line:1:1, endln:24:10
+    |vpiFullName:work@carryadd
+    |vpiInternalScope:
+    \_begin: (work@carryadd), line:10:9, endln:19:12
+      |vpiParent:
+      \_gen_region: (work@carryadd), line:9:1, endln:20:12
+      |vpiFullName:work@carryadd
+    |vpiStmt:
+    \_begin: (work@carryadd), line:10:9, endln:19:12
+  |vpiImportTypespec:
   \_logic_net: (work@carryadd.a), line:1:17, endln:1:18
     |vpiParent:
     \_module_inst: work@carryadd (work@carryadd), file:${SURELOG_DIR}/tests/CarryAdd/dut.sv, line:1:1, endln:24:10
     |vpiName:a
     |vpiFullName:work@carryadd.a
-  |vpiNet:
+  |vpiImportTypespec:
   \_logic_net: (work@carryadd.b), line:1:20, endln:1:21
     |vpiParent:
     \_module_inst: work@carryadd (work@carryadd), file:${SURELOG_DIR}/tests/CarryAdd/dut.sv, line:1:1, endln:24:10
     |vpiName:b
     |vpiFullName:work@carryadd.b
-  |vpiNet:
+  |vpiImportTypespec:
   \_logic_net: (work@carryadd.y), line:1:23, endln:1:24
     |vpiParent:
     \_module_inst: work@carryadd (work@carryadd), file:${SURELOG_DIR}/tests/CarryAdd/dut.sv, line:1:1, endln:24:10
     |vpiName:y
     |vpiFullName:work@carryadd.y
+  |vpiDefName:work@carryadd
+  |vpiNet:
+  \_logic_net: (work@carryadd.a), line:1:17, endln:1:18
+  |vpiNet:
+  \_logic_net: (work@carryadd.b), line:1:20, endln:1:21
+  |vpiNet:
+  \_logic_net: (work@carryadd.y), line:1:23, endln:1:24
   |vpiPort:
   \_port: (a), line:1:17, endln:1:18
     |vpiParent:
     \_module_inst: work@carryadd (work@carryadd), file:${SURELOG_DIR}/tests/CarryAdd/dut.sv, line:1:1, endln:24:10
     |vpiName:a
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@carryadd.a.a), line:1:17, endln:1:18
-      |vpiParent:
-      \_port: (a), line:1:17, endln:1:18
-      |vpiName:a
-      |vpiFullName:work@carryadd.a.a
-      |vpiActual:
-      \_logic_net: (work@carryadd.a), line:1:17, endln:1:18
-    |vpiTypedef:
-    \_ref_typespec: (work@carryadd.a)
-      |vpiParent:
-      \_port: (a), line:1:17, endln:1:18
-      |vpiFullName:work@carryadd.a
-      |vpiActual:
-      \_logic_typespec: , line:5:7, endln:5:18
   |vpiPort:
   \_port: (b), line:1:20, endln:1:21
     |vpiParent:
     \_module_inst: work@carryadd (work@carryadd), file:${SURELOG_DIR}/tests/CarryAdd/dut.sv, line:1:1, endln:24:10
     |vpiName:b
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@carryadd.b.b), line:1:20, endln:1:21
-      |vpiParent:
-      \_port: (b), line:1:20, endln:1:21
-      |vpiName:b
-      |vpiFullName:work@carryadd.b.b
-      |vpiActual:
-      \_logic_net: (work@carryadd.b), line:1:20, endln:1:21
-    |vpiTypedef:
-    \_ref_typespec: (work@carryadd.b)
-      |vpiParent:
-      \_port: (b), line:1:20, endln:1:21
-      |vpiFullName:work@carryadd.b
-      |vpiActual:
-      \_logic_typespec: , line:5:7, endln:5:18
   |vpiPort:
   \_port: (y), line:1:23, endln:1:24
     |vpiParent:
     \_module_inst: work@carryadd (work@carryadd), file:${SURELOG_DIR}/tests/CarryAdd/dut.sv, line:1:1, endln:24:10
     |vpiName:y
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@carryadd.y.y), line:1:23, endln:1:24
-      |vpiParent:
-      \_port: (y), line:1:23, endln:1:24
-      |vpiName:y
-      |vpiFullName:work@carryadd.y.y
-      |vpiActual:
-      \_logic_net: (work@carryadd.y), line:1:23, endln:1:24
-    |vpiTypedef:
-    \_ref_typespec: (work@carryadd.y)
-      |vpiParent:
-      \_port: (y), line:1:23, endln:1:24
-      |vpiFullName:work@carryadd.y
-      |vpiActual:
-      \_logic_typespec: , line:6:8, endln:6:19
-  |vpiGenStmt:
-  \_gen_region: 
-    |vpiParent:
-    \_module_inst: work@carryadd (work@carryadd), file:${SURELOG_DIR}/tests/CarryAdd/dut.sv, line:1:1, endln:24:10
-    |vpiStmt:
-    \_begin: (work@carryadd)
-      |vpiParent:
-      \_gen_region: 
-      |vpiFullName:work@carryadd
-\_weaklyReferenced:
-\_int_typespec: , line:3:1, endln:3:20
-\_logic_typespec: , line:5:7, endln:5:18
-  |vpiRange:
-  \_range: , line:5:7, endln:5:18
-    |vpiParent:
-    \_logic_typespec: , line:5:7, endln:5:18
-    |vpiLeftRange:
-    \_operation: , line:5:8, endln:5:15
-      |vpiParent:
-      \_range: , line:5:7, endln:5:18
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (WIDTH), line:5:8, endln:5:13
-        |vpiParent:
-        \_operation: , line:5:8, endln:5:15
-        |vpiName:WIDTH
-      |vpiOperand:
-      \_constant: , line:5:14, endln:5:15
-        |vpiParent:
-        \_operation: , line:5:8, endln:5:15
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:5:16, endln:5:17
-      |vpiParent:
-      \_range: , line:5:7, endln:5:18
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:5:7, endln:5:18
-  |vpiRange:
-  \_range: , line:5:7, endln:5:18
-    |vpiParent:
-    \_logic_typespec: , line:5:7, endln:5:18
-    |vpiLeftRange:
-    \_operation: , line:5:8, endln:5:15
-      |vpiParent:
-      \_range: , line:5:7, endln:5:18
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (WIDTH), line:5:8, endln:5:13
-        |vpiParent:
-        \_operation: , line:5:8, endln:5:15
-        |vpiName:WIDTH
-      |vpiOperand:
-      \_constant: , line:5:14, endln:5:15
-        |vpiParent:
-        \_operation: , line:5:8, endln:5:15
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:5:16, endln:5:17
-      |vpiParent:
-      \_range: , line:5:7, endln:5:18
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:6:8, endln:6:19
-  |vpiRange:
-  \_range: , line:6:8, endln:6:19
-    |vpiParent:
-    \_logic_typespec: , line:6:8, endln:6:19
-    |vpiLeftRange:
-    \_operation: , line:6:9, endln:6:16
-      |vpiParent:
-      \_range: , line:6:8, endln:6:19
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (WIDTH), line:6:9, endln:6:14
-        |vpiParent:
-        \_operation: , line:6:9, endln:6:16
-        |vpiName:WIDTH
-      |vpiOperand:
-      \_constant: , line:6:15, endln:6:16
-        |vpiParent:
-        \_operation: , line:6:9, endln:6:16
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:6:17, endln:6:18
-      |vpiParent:
-      \_range: , line:6:8, endln:6:19
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 1
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/CarryAdd/dut.sv | ${SURELOG_DIR}/build/regression/CarryAdd/roundtrip/dut_000.sv | 18 | 24 |
+============================== End RoundTrip Results ==============================

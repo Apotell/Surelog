@@ -165,25 +165,29 @@ design                                                 1
 enum_const                                             3
 enum_typespec                                          2
 gen_if                                                 1
-int_typespec                                           2
+int_typespec                                           1
 logic_typespec                                         2
 module_inst                                            4
 operation                                              4
 package                                                2
-param_assign                                           2
-parameter                                              2
+param_assign                                           1
+parameter                                              1
 range                                                  2
 ref_module                                             1
 ref_obj                                                4
-ref_typespec                                           6
+ref_typespec                                           4
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EnumConstConcat/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/EnumConstConcat/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/EnumConstConcat/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallPackages:
 \_package: prim_mubi_pkg (prim_mubi_pkg::), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:2:1, endln:9:11
   |vpiParent:
@@ -191,14 +195,14 @@ design: (unnamed)
   |vpiName:prim_mubi_pkg
   |vpiFullName:prim_mubi_pkg::
   |vpiParameter:
-  \_parameter: (prim_mubi_pkg::MuBi4Width), line:3:15, endln:3:25
+  \_parameter: (prim_mubi_pkg::MuBi4Width), line:3:15, endln:3:29
     |vpiParent:
     \_package: prim_mubi_pkg (prim_mubi_pkg::), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:2:1, endln:9:11
     |UINT:4
     |vpiTypespec:
-    \_ref_typespec: (prim_mubi_pkg::MuBi4Width)
+    \_ref_typespec: (prim_mubi_pkg::MuBi4Width), line:3:11, endln:3:14
       |vpiParent:
-      \_parameter: (prim_mubi_pkg::MuBi4Width), line:3:15, endln:3:25
+      \_parameter: (prim_mubi_pkg::MuBi4Width), line:3:15, endln:3:29
       |vpiFullName:prim_mubi_pkg::MuBi4Width
       |vpiActual:
       \_int_typespec: , line:3:11, endln:3:14
@@ -216,34 +220,67 @@ design: (unnamed)
       |vpiDecompile:4
       |vpiSize:64
       |UINT:4
-      |vpiTypespec:
-      \_ref_typespec: (prim_mubi_pkg)
-        |vpiParent:
-        \_constant: , line:3:28, endln:3:29
-        |vpiFullName:prim_mubi_pkg
-        |vpiActual:
-        \_int_typespec: , line:3:11, endln:3:14
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (prim_mubi_pkg::MuBi4Width), line:3:15, endln:3:25
+    \_parameter: (prim_mubi_pkg::MuBi4Width), line:3:15, endln:3:29
   |vpiTypedef:
-  \_enum_typespec: (prim_mubi_pkg::mubi4_t), line:4:1, endln:7:11
+  \_int_typespec: , line:3:11, endln:3:14
+    |vpiParent:
+    \_package: prim_mubi_pkg (prim_mubi_pkg::), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:2:1, endln:9:11
+    |vpiSigned:1
+  |vpiTypedef:
+  \_logic_typespec: , line:4:14, endln:4:36
+    |vpiParent:
+    \_package: prim_mubi_pkg (prim_mubi_pkg::), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:2:1, endln:9:11
+    |vpiRange:
+    \_range: , line:4:20, endln:4:36
+      |vpiParent:
+      \_package: prim_mubi_pkg (prim_mubi_pkg::), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:2:1, endln:9:11
+      |vpiLeftRange:
+      \_operation: , line:4:21, endln:4:33
+        |vpiParent:
+        \_range: , line:4:20, endln:4:36
+        |vpiOpType:11
+        |vpiOperand:
+        \_ref_obj: (prim_mubi_pkg::MuBi4Width), line:4:21, endln:4:31
+          |vpiParent:
+          \_operation: , line:4:21, endln:4:33
+          |vpiName:MuBi4Width
+          |vpiFullName:prim_mubi_pkg::MuBi4Width
+          |vpiActual:
+          \_parameter: (prim_mubi_pkg::MuBi4Width), line:3:15, endln:3:29
+        |vpiOperand:
+        \_constant: , line:4:32, endln:4:33
+          |vpiParent:
+          \_operation: , line:4:21, endln:4:33
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:4:34, endln:4:35
+        |vpiParent:
+        \_range: , line:4:20, endln:4:36
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_enum_typespec: (prim_mubi_pkg::mubi4_t), line:4:9, endln:7:11
     |vpiParent:
     \_package: prim_mubi_pkg (prim_mubi_pkg::), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:2:1, endln:9:11
     |vpiName:prim_mubi_pkg::mubi4_t
-    |vpiInstance:
-    \_package: prim_mubi_pkg (prim_mubi_pkg::), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:2:1, endln:9:11
     |vpiBaseTypespec:
-    \_ref_typespec: (prim_mubi_pkg::prim_mubi_pkg::mubi4_t)
+    \_ref_typespec: (prim_mubi_pkg::mubi4_t), line:4:9, endln:7:11
       |vpiParent:
-      \_enum_typespec: (prim_mubi_pkg::mubi4_t), line:4:1, endln:7:11
-      |vpiFullName:prim_mubi_pkg::prim_mubi_pkg::mubi4_t
+      \_enum_typespec: (prim_mubi_pkg::mubi4_t), line:4:9, endln:7:11
+      |vpiFullName:prim_mubi_pkg::mubi4_t
       |vpiActual:
       \_logic_typespec: , line:4:14, endln:4:36
     |vpiEnumConst:
     \_enum_const: (MuBi4True), line:5:3, endln:5:19
       |vpiParent:
-      \_enum_typespec: (prim_mubi_pkg::mubi4_t), line:4:1, endln:7:11
+      \_enum_typespec: (prim_mubi_pkg::mubi4_t), line:4:9, endln:7:11
       |vpiName:MuBi4True
       |HEX:A
       |vpiDecompile:4'hA
@@ -251,11 +288,17 @@ design: (unnamed)
     |vpiEnumConst:
     \_enum_const: (MuBi4False), line:6:3, endln:6:20
       |vpiParent:
-      \_enum_typespec: (prim_mubi_pkg::mubi4_t), line:4:1, endln:7:11
+      \_enum_typespec: (prim_mubi_pkg::mubi4_t), line:4:9, endln:7:11
       |vpiName:MuBi4False
       |HEX:5
       |vpiDecompile:4'h5
       |vpiSize:4
+  |vpiImportTypespec:
+  \_int_typespec: , line:3:11, endln:3:14
+  |vpiImportTypespec:
+  \_logic_typespec: , line:4:14, endln:4:36
+  |vpiImportTypespec:
+  \_enum_typespec: (prim_mubi_pkg::mubi4_t), line:4:9, endln:7:11
   |vpiDefName:prim_mubi_pkg
 |uhdmallPackages:
 \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:11:1, endln:17:11
@@ -264,48 +307,82 @@ design: (unnamed)
   |vpiName:pkg
   |vpiFullName:pkg::
   |vpiTypedef:
-  \_enum_typespec: (pkg::fsm_state_e), line:13:1, endln:15:15
+  \_logic_typespec: , line:13:14, endln:13:25
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:11:1, endln:17:11
+    |vpiRange:
+    \_range: , line:13:20, endln:13:25
+      |vpiParent:
+      \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:11:1, endln:17:11
+      |vpiLeftRange:
+      \_constant: , line:13:21, endln:13:22
+        |vpiParent:
+        \_range: , line:13:20, endln:13:25
+        |vpiDecompile:9
+        |vpiSize:64
+        |UINT:9
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:13:23, endln:13:24
+        |vpiParent:
+        \_range: , line:13:20, endln:13:25
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_enum_typespec: (pkg::fsm_state_e), line:13:9, endln:15:15
     |vpiParent:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:11:1, endln:17:11
     |vpiName:pkg::fsm_state_e
-    |vpiInstance:
-    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:11:1, endln:17:11
     |vpiBaseTypespec:
-    \_ref_typespec: (pkg::pkg::fsm_state_e)
+    \_ref_typespec: (pkg::fsm_state_e), line:13:9, endln:15:15
       |vpiParent:
-      \_enum_typespec: (pkg::fsm_state_e), line:13:1, endln:15:15
-      |vpiFullName:pkg::pkg::fsm_state_e
+      \_enum_typespec: (pkg::fsm_state_e), line:13:9, endln:15:15
+      |vpiFullName:pkg::fsm_state_e
       |vpiActual:
       \_logic_typespec: , line:13:14, endln:13:25
     |vpiEnumConst:
     \_enum_const: (ReadingLow), line:14:3, endln:14:55
       |vpiParent:
-      \_enum_typespec: (pkg::fsm_state_e), line:13:1, endln:15:15
+      \_enum_typespec: (pkg::fsm_state_e), line:13:9, endln:15:15
       |vpiName:ReadingLow
       |BIN:0011000101
       |vpiDecompile:{6'b001100,prim_mubi_pkg::MuBi4False}
       |vpiSize:10
+  |vpiImportTypespec:
+  \_logic_typespec: , line:13:14, endln:13:25
+  |vpiImportTypespec:
+  \_enum_typespec: (pkg::fsm_state_e), line:13:9, endln:15:15
   |vpiDefName:pkg
 |uhdmallModules:
 \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:19:1, endln:20:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@GOOD
+  |vpiName:work@GOOD
   |vpiDefName:work@GOOD
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:22:1, endln:28:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
+  |vpiName:work@top
   |vpiDefName:work@top
+  |vpiRefModule:
+  \_ref_module: work@GOOD (good), line:25:7, endln:25:19
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:22:1, endln:28:10
+    |vpiName:good
+    |vpiDefName:work@GOOD
+    |vpiActual:
+    \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:19:1, endln:20:10
   |vpiGenStmt:
-  \_gen_if: , line:24:4, endln:24:6
+  \_gen_if: , line:24:4, endln:26:7
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:22:1, endln:28:10
     |vpiCondition:
     \_operation: , line:24:8, endln:24:30
       |vpiParent:
-      \_gen_if: , line:24:4, endln:24:6
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:22:1, endln:28:10
       |vpiOpType:14
       |vpiOperand:
       \_ref_obj: (work@top.pkg::ReadingLow), line:24:8, endln:24:23
@@ -313,6 +390,8 @@ design: (unnamed)
         \_operation: , line:24:8, endln:24:30
         |vpiName:pkg::ReadingLow
         |vpiFullName:work@top.pkg::ReadingLow
+        |vpiActual:
+        \_enum_const: (ReadingLow), line:14:3, endln:14:55
       |vpiOperand:
       \_constant: , line:24:27, endln:24:30
         |vpiParent:
@@ -322,79 +401,12 @@ design: (unnamed)
         |UINT:197
         |vpiConstType:9
     |vpiStmt:
-    \_begin: (work@top)
+    \_begin: (work@top), line:24:32, endln:26:7
       |vpiParent:
-      \_gen_if: , line:24:4, endln:24:6
+      \_gen_if: , line:24:4, endln:26:7
       |vpiFullName:work@top
       |vpiStmt:
-      \_ref_module: work@GOOD (good), line:25:12, endln:25:16
-        |vpiParent:
-        \_begin: (work@top)
-        |vpiName:good
-        |vpiDefName:work@GOOD
-\_weaklyReferenced:
-\_int_typespec: , line:3:11, endln:3:14
-  |vpiParent:
-  \_parameter: (prim_mubi_pkg::MuBi4Width), line:3:15, endln:3:25
-  |vpiInstance:
-  \_package: prim_mubi_pkg (prim_mubi_pkg::), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:2:1, endln:9:11
-  |vpiSigned:1
-\_logic_typespec: , line:4:14, endln:4:36
-  |vpiInstance:
-  \_package: prim_mubi_pkg (prim_mubi_pkg::), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:2:1, endln:9:11
-  |vpiRange:
-  \_range: , line:4:20, endln:4:36
-    |vpiParent:
-    \_logic_typespec: , line:4:14, endln:4:36
-    |vpiLeftRange:
-    \_operation: , line:4:21, endln:4:33
-      |vpiParent:
-      \_range: , line:4:20, endln:4:36
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (MuBi4Width), line:4:21, endln:4:31
-        |vpiParent:
-        \_operation: , line:4:21, endln:4:33
-        |vpiName:MuBi4Width
-      |vpiOperand:
-      \_constant: , line:4:32, endln:4:33
-        |vpiParent:
-        \_operation: , line:4:21, endln:4:33
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:4:34, endln:4:35
-      |vpiParent:
-      \_range: , line:4:20, endln:4:36
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:13:14, endln:13:25
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/EnumConstConcat/dut.sv, line:11:1, endln:17:11
-  |vpiRange:
-  \_range: , line:13:20, endln:13:25
-    |vpiParent:
-    \_logic_typespec: , line:13:14, endln:13:25
-    |vpiLeftRange:
-    \_constant: , line:13:21, endln:13:22
-      |vpiParent:
-      \_range: , line:13:20, endln:13:25
-      |vpiDecompile:9
-      |vpiSize:64
-      |UINT:9
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:13:23, endln:13:24
-      |vpiParent:
-      \_range: , line:13:20, endln:13:25
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
+      \_ref_module: work@GOOD (good), line:25:7, endln:25:19
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -403,5 +415,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/EnumConstConcat/dut.sv | ${SURELOG_DIR}/build/regression/EnumConstConcat/roundtrip/dut_000.sv | 3 | 28 |
+[roundtrip]: ${SURELOG_DIR}/tests/EnumConstConcat/dut.sv | ${SURELOG_DIR}/build/regression/EnumConstConcat/roundtrip/dut_000.sv | 10 | 28 |
 ============================== End RoundTrip Results ==============================

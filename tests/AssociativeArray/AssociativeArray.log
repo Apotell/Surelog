@@ -45,8 +45,8 @@ n<> u<39> t<Non_port_module_item> p<76> c<38> s<55> l<3:4> el<3:20>
 n<> u<40> t<IntegerAtomType_Int> p<41> l<5:4> el<5:7>
 n<> u<41> t<Data_type> p<49> c<40> s<48> l<5:4> el<5:7>
 n<b> u<42> t<StringConst> p<47> s<46> l<5:8> el<5:9>
-n<> u<43> t<String_type> p<44> l<5:11> el<5:17>
-n<> u<44> t<Data_type> p<45> c<43> l<5:11> el<5:17>
+n<string> u<43> t<String_type> p<44> l<5:11> el<5:17>
+n<string> u<44> t<Data_type> p<45> c<43> l<5:11> el<5:17>
 n<> u<45> t<Associative_dimension> p<46> c<44> l<5:10> el<5:18>
 n<> u<46> t<Variable_dimension> p<47> c<45> l<5:10> el<5:18>
 n<> u<47> t<Variable_decl_assignment> p<48> c<42> l<5:8> el<5:18>
@@ -88,54 +88,165 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/AssociativeArray/dut.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+array_typespec                                         2
+array_var                                              2
 bit_select                                             2
-constant                                               4
+constant                                               8
 cont_assign                                            2
 design                                                 1
-int_typespec                                           2
-logic_net                                              2
+int_typespec                                           3
+int_var                                                2
 module_inst                                            1
-ref_typespec                                           2
+range                                                  2
+ref_typespec                                           8
+source_file                                            1
+string_typespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/AssociativeArray/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/AssociativeArray/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/AssociativeArray/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/AssociativeArray/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssociativeArray/dut.sv, line:1:1, endln:7:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiNet:
-  \_logic_net: (work@top.a), line:2:8, endln:2:9
+  |vpiName:work@top
+  |vpiVariables:
+  \_int_var: (work@top), line:2:4, endln:2:16
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssociativeArray/dut.sv, line:1:1, endln:7:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.a)
+    \_ref_typespec: (work@top), line:2:4, endln:2:7
       |vpiParent:
-      \_logic_net: (work@top.a), line:2:8, endln:2:9
+      \_int_var: (work@top), line:2:4, endln:2:16
+      |vpiFullName:work@top
+      |vpiActual:
+      \_int_typespec: , line:2:4, endln:2:7
+    |vpiFullName:work@top
+  |vpiVariables:
+  \_array_var: (work@top.a), line:2:8, endln:2:16
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssociativeArray/dut.sv, line:1:1, endln:7:10
+    |vpiSize:1
+    |vpiTypespec:
+    \_ref_typespec: (work@top.a), line:2:4, endln:2:7
+      |vpiParent:
+      \_array_var: (work@top.a), line:2:8, endln:2:16
       |vpiFullName:work@top.a
       |vpiActual:
-      \_int_typespec: , line:2:4, endln:2:15
+      \_array_typespec: , line:2:4, endln:2:15
     |vpiName:a
     |vpiFullName:work@top.a
-  |vpiNet:
-  \_logic_net: (work@top.b), line:5:8, endln:5:9
+    |vpiSigned:1
+    |vpiRandType:1
+    |vpiVisibility:1
+    |vpiArrayType:3
+    |vpiReg:
+    \_int_var: (work@top), line:2:4, endln:2:16
+  |vpiVariables:
+  \_int_var: (work@top), line:5:4, endln:5:19
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssociativeArray/dut.sv, line:1:1, endln:7:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.b)
+    \_ref_typespec: (work@top), line:5:4, endln:5:7
       |vpiParent:
-      \_logic_net: (work@top.b), line:5:8, endln:5:9
+      \_int_var: (work@top), line:5:4, endln:5:19
+      |vpiFullName:work@top
+      |vpiActual:
+      \_int_typespec: , line:5:4, endln:5:7
+    |vpiFullName:work@top
+  |vpiVariables:
+  \_array_var: (work@top.b), line:5:8, endln:5:19
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssociativeArray/dut.sv, line:1:1, endln:7:10
+    |vpiSize:1
+    |vpiTypespec:
+    \_ref_typespec: (work@top.b), line:5:4, endln:5:7
+      |vpiParent:
+      \_array_var: (work@top.b), line:5:8, endln:5:19
       |vpiFullName:work@top.b
       |vpiActual:
-      \_int_typespec: , line:5:4, endln:5:18
+      \_array_typespec: , line:5:4, endln:5:18
     |vpiName:b
     |vpiFullName:work@top.b
+    |vpiSigned:1
+    |vpiRandType:1
+    |vpiVisibility:1
+    |vpiArrayType:3
+    |vpiReg:
+    \_int_var: (work@top), line:5:4, endln:5:19
+  |vpiRegArray:
+  \_array_var: (work@top.a), line:2:8, endln:2:16
+  |vpiRegArray:
+  \_array_var: (work@top.b), line:5:8, endln:5:19
+  |vpiTypedef:
+  \_int_typespec: , line:2:4, endln:2:7
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssociativeArray/dut.sv, line:1:1, endln:7:10
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:2:11, endln:2:14
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssociativeArray/dut.sv, line:1:1, endln:7:10
+    |vpiSigned:1
+  |vpiTypedef:
+  \_array_typespec: , line:2:4, endln:2:15
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssociativeArray/dut.sv, line:1:1, endln:7:10
+    |vpiIndexTypespec:
+    \_ref_typespec: (work@top), line:2:4, endln:2:7
+      |vpiParent:
+      \_array_typespec: , line:2:4, endln:2:15
+      |vpiFullName:work@top
+      |vpiActual:
+      \_int_typespec: , line:2:11, endln:2:14
+  |vpiTypedef:
+  \_int_typespec: , line:5:4, endln:5:7
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssociativeArray/dut.sv, line:1:1, endln:7:10
+    |vpiSigned:1
+  |vpiTypedef:
+  \_string_typespec: , line:5:11, endln:5:17
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssociativeArray/dut.sv, line:1:1, endln:7:10
+  |vpiTypedef:
+  \_array_typespec: , line:5:4, endln:5:18
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssociativeArray/dut.sv, line:1:1, endln:7:10
+    |vpiIndexTypespec:
+    \_ref_typespec: (work@top), line:5:4, endln:5:7
+      |vpiParent:
+      \_array_typespec: , line:5:4, endln:5:18
+      |vpiFullName:work@top
+      |vpiActual:
+      \_string_typespec: , line:5:11, endln:5:17
+  |vpiImportTypespec:
+  \_int_typespec: , line:2:4, endln:2:7
+  |vpiImportTypespec:
+  \_int_typespec: , line:2:11, endln:2:14
+  |vpiImportTypespec:
+  \_int_var: (work@top), line:2:4, endln:2:16
+  |vpiImportTypespec:
+  \_array_var: (work@top.a), line:2:8, endln:2:16
+  |vpiImportTypespec:
+  \_array_typespec: , line:2:4, endln:2:15
+  |vpiImportTypespec:
+  \_int_typespec: , line:5:4, endln:5:7
+  |vpiImportTypespec:
+  \_string_typespec: , line:5:11, endln:5:17
+  |vpiImportTypespec:
+  \_int_var: (work@top), line:5:4, endln:5:19
+  |vpiImportTypespec:
+  \_array_var: (work@top.b), line:5:8, endln:5:19
+  |vpiImportTypespec:
+  \_array_typespec: , line:5:4, endln:5:18
+  |vpiDefName:work@top
   |vpiContAssign:
   \_cont_assign: , line:3:11, endln:3:19
     |vpiParent:
@@ -149,15 +260,17 @@ design: (unnamed)
       |UINT:5
       |vpiConstType:9
     |vpiLhs:
-    \_bit_select: (work@top.a), line:3:11, endln:3:15
+    \_bit_select: (work@top.a), line:3:12, endln:3:15
       |vpiParent:
-      \_cont_assign: , line:3:11, endln:3:19
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssociativeArray/dut.sv, line:1:1, endln:7:10
       |vpiName:a
       |vpiFullName:work@top.a
+      |vpiActual:
+      \_array_var: (work@top.a), line:2:8, endln:2:16
       |vpiIndex:
       \_constant: , line:3:13, endln:3:14
         |vpiParent:
-        \_bit_select: (work@top.a), line:3:11, endln:3:15
+        \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssociativeArray/dut.sv, line:1:1, endln:7:10
         |vpiDecompile:5
         |vpiSize:64
         |UINT:5
@@ -175,24 +288,21 @@ design: (unnamed)
       |UINT:5
       |vpiConstType:9
     |vpiLhs:
-    \_bit_select: (work@top.b), line:6:11, endln:6:20
+    \_bit_select: (work@top.b), line:6:12, endln:6:20
       |vpiParent:
-      \_cont_assign: , line:6:11, endln:6:24
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssociativeArray/dut.sv, line:1:1, endln:7:10
       |vpiName:b
       |vpiFullName:work@top.b
+      |vpiActual:
+      \_array_var: (work@top.b), line:5:8, endln:5:19
       |vpiIndex:
       \_constant: , line:6:13, endln:6:19
         |vpiParent:
-        \_bit_select: (work@top.b), line:6:11, endln:6:20
+        \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssociativeArray/dut.sv, line:1:1, endln:7:10
         |vpiDecompile:"HERE"
         |vpiSize:32
         |STRING:HERE
         |vpiConstType:6
-\_weaklyReferenced:
-\_int_typespec: , line:2:4, endln:2:15
-  |vpiSigned:1
-\_int_typespec: , line:5:4, endln:5:18
-  |vpiSigned:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -201,5 +311,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/AssociativeArray/dut.sv | ${SURELOG_DIR}/build/regression/AssociativeArray/roundtrip/dut_000.sv | 2 | 7 |
+[roundtrip]: ${SURELOG_DIR}/tests/AssociativeArray/dut.sv | ${SURELOG_DIR}/build/regression/AssociativeArray/roundtrip/dut_000.sv | 6 | 7 |
 ============================== End RoundTrip Results ==============================

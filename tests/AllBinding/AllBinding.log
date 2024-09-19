@@ -86,111 +86,90 @@ constant                                               8
 design                                                 1
 enum_const                                             3
 enum_typespec                                          1
-logic_net                                              2
+enum_var                                               2
 logic_typespec                                         1
 module_inst                                            2
 port                                                   1
 range                                                  1
-ref_obj                                                1
-ref_typespec                                           3
+ref_typespec                                           4
+source_file                                            2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/AllBinding/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/AllBinding/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/AllBinding/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/AllBinding/enum.sv
+  |vpiParent:
+  \_design: (unnamed)
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/AllBinding/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AllBinding/dut.sv, line:1:1, endln:5:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiNet:
-  \_logic_net: (work@top.dmem2exu_resp_i), line:1:57, endln:1:72
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AllBinding/dut.sv, line:1:1, endln:5:10
-    |vpiName:dmem2exu_resp_i
-    |vpiFullName:work@top.dmem2exu_resp_i
-  |vpiNet:
-  \_logic_net: (work@top.dmem2exu_resp_ii), line:3:37, endln:3:53
+  |vpiName:work@top
+  |vpiVariables:
+  \_enum_var: (work@top.dmem2exu_resp_i), line:1:57, endln:1:72
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AllBinding/dut.sv, line:1:1, endln:5:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.dmem2exu_resp_ii)
+    \_ref_typespec: (work@top.dmem2exu_resp_i.type_scr1_mem_resp_e), line:1:21, endln:1:41
       |vpiParent:
-      \_logic_net: (work@top.dmem2exu_resp_ii), line:3:37, endln:3:53
-      |vpiFullName:work@top.dmem2exu_resp_ii
+      \_enum_var: (work@top.dmem2exu_resp_i), line:1:57, endln:1:72
+      |vpiName:type_scr1_mem_resp_e
+      |vpiFullName:work@top.dmem2exu_resp_i.type_scr1_mem_resp_e
       |vpiActual:
-      \_enum_typespec: (type_scr1_mem_resp_e), line:1:1, endln:5:24
+      \_enum_typespec: (type_scr1_mem_resp_e), line:1:9, endln:5:24
+    |vpiName:dmem2exu_resp_i
+    |vpiFullName:work@top.dmem2exu_resp_i
+    |vpiVisibility:1
+  |vpiVariables:
+  \_enum_var: (work@top.dmem2exu_resp_ii), line:3:37, endln:3:53
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AllBinding/dut.sv, line:1:1, endln:5:10
+    |vpiTypespec:
+    \_ref_typespec: (work@top.dmem2exu_resp_ii.type_scr1_mem_resp_e), line:3:1, endln:3:21
+      |vpiParent:
+      \_enum_var: (work@top.dmem2exu_resp_ii), line:3:37, endln:3:53
+      |vpiName:type_scr1_mem_resp_e
+      |vpiFullName:work@top.dmem2exu_resp_ii.type_scr1_mem_resp_e
+      |vpiActual:
+      \_enum_typespec: (type_scr1_mem_resp_e), line:1:9, endln:5:24
     |vpiName:dmem2exu_resp_ii
     |vpiFullName:work@top.dmem2exu_resp_ii
+    |vpiVisibility:1
+  |vpiImportTypespec:
+  \_enum_var: (work@top.dmem2exu_resp_i), line:1:57, endln:1:72
+  |vpiImportTypespec:
+  \_enum_var: (work@top.dmem2exu_resp_ii), line:3:37, endln:3:53
+  |vpiDefName:work@top
   |vpiPort:
-  \_port: (dmem2exu_resp_i), line:1:57, endln:1:72
+  \_port: (dmem2exu_resp_i), line:1:13, endln:1:72
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AllBinding/dut.sv, line:1:1, endln:5:10
     |vpiName:dmem2exu_resp_i
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@top.dmem2exu_resp_i.dmem2exu_resp_i), line:1:57, endln:1:72
-      |vpiParent:
-      \_port: (dmem2exu_resp_i), line:1:57, endln:1:72
-      |vpiName:dmem2exu_resp_i
-      |vpiFullName:work@top.dmem2exu_resp_i.dmem2exu_resp_i
-      |vpiActual:
-      \_logic_net: (work@top.dmem2exu_resp_i), line:1:57, endln:1:72
     |vpiTypedef:
-    \_ref_typespec: (work@top.dmem2exu_resp_i)
+    \_ref_typespec: (work@top.dmem2exu_resp_i.type_scr1_mem_resp_e), line:1:21, endln:1:41
       |vpiParent:
-      \_port: (dmem2exu_resp_i), line:1:57, endln:1:72
-      |vpiFullName:work@top.dmem2exu_resp_i
+      \_port: (dmem2exu_resp_i), line:1:13, endln:1:72
+      |vpiName:type_scr1_mem_resp_e
+      |vpiFullName:work@top.dmem2exu_resp_i.type_scr1_mem_resp_e
       |vpiActual:
-      \_enum_typespec: (type_scr1_mem_resp_e), line:1:1, endln:5:24
+      \_enum_typespec: (type_scr1_mem_resp_e), line:1:9, endln:5:24
 |vpiTypedef:
-\_enum_typespec: (type_scr1_mem_resp_e), line:1:1, endln:5:24
+\_logic_typespec: , line:1:14, endln:1:24
   |vpiParent:
   \_design: (unnamed)
-  |vpiName:type_scr1_mem_resp_e
-  |vpiInstance:
-  \_design: (unnamed)
-  |vpiBaseTypespec:
-  \_ref_typespec: (type_scr1_mem_resp_e)
-    |vpiParent:
-    \_enum_typespec: (type_scr1_mem_resp_e), line:1:1, endln:5:24
-    |vpiFullName:type_scr1_mem_resp_e
-    |vpiActual:
-    \_logic_typespec: , line:1:14, endln:1:24
-  |vpiEnumConst:
-  \_enum_const: (SCR1_MEM_RESP_NOTRDY), line:2:5, endln:2:36
-    |vpiParent:
-    \_enum_typespec: (type_scr1_mem_resp_e), line:1:1, endln:5:24
-    |vpiName:SCR1_MEM_RESP_NOTRDY
-    |BIN:00
-    |vpiDecompile:2'b00
-    |vpiSize:2
-  |vpiEnumConst:
-  \_enum_const: (SCR1_MEM_RESP_RDY_OK), line:3:5, endln:3:36
-    |vpiParent:
-    \_enum_typespec: (type_scr1_mem_resp_e), line:1:1, endln:5:24
-    |vpiName:SCR1_MEM_RESP_RDY_OK
-    |BIN:01
-    |vpiDecompile:2'b01
-    |vpiSize:2
-  |vpiEnumConst:
-  \_enum_const: (SCR1_MEM_RESP_RDY_ER), line:4:5, endln:4:36
-    |vpiParent:
-    \_enum_typespec: (type_scr1_mem_resp_e), line:1:1, endln:5:24
-    |vpiName:SCR1_MEM_RESP_RDY_ER
-    |BIN:10
-    |vpiDecompile:2'b10
-    |vpiSize:2
-\_weaklyReferenced:
-\_logic_typespec: , line:1:14, endln:1:24
   |vpiRange:
   \_range: , line:1:19, endln:1:24
     |vpiParent:
-    \_logic_typespec: , line:1:14, endln:1:24
+    \_design: (unnamed)
     |vpiLeftRange:
     \_constant: , line:1:20, endln:1:21
       |vpiParent:
@@ -207,6 +186,42 @@ design: (unnamed)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
+|vpiTypedef:
+\_enum_typespec: (type_scr1_mem_resp_e), line:1:9, endln:5:24
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:type_scr1_mem_resp_e
+  |vpiBaseTypespec:
+  \_ref_typespec: (type_scr1_mem_resp_e), line:1:9, endln:5:24
+    |vpiParent:
+    \_enum_typespec: (type_scr1_mem_resp_e), line:1:9, endln:5:24
+    |vpiFullName:type_scr1_mem_resp_e
+    |vpiActual:
+    \_logic_typespec: , line:1:14, endln:1:24
+  |vpiEnumConst:
+  \_enum_const: (SCR1_MEM_RESP_NOTRDY), line:2:5, endln:2:36
+    |vpiParent:
+    \_enum_typespec: (type_scr1_mem_resp_e), line:1:9, endln:5:24
+    |vpiName:SCR1_MEM_RESP_NOTRDY
+    |BIN:00
+    |vpiDecompile:2'b00
+    |vpiSize:2
+  |vpiEnumConst:
+  \_enum_const: (SCR1_MEM_RESP_RDY_OK), line:3:5, endln:3:36
+    |vpiParent:
+    \_enum_typespec: (type_scr1_mem_resp_e), line:1:9, endln:5:24
+    |vpiName:SCR1_MEM_RESP_RDY_OK
+    |BIN:01
+    |vpiDecompile:2'b01
+    |vpiSize:2
+  |vpiEnumConst:
+  \_enum_const: (SCR1_MEM_RESP_RDY_ER), line:4:5, endln:4:36
+    |vpiParent:
+    \_enum_typespec: (type_scr1_mem_resp_e), line:1:9, endln:5:24
+    |vpiName:SCR1_MEM_RESP_RDY_ER
+    |BIN:10
+    |vpiDecompile:2'b10
+    |vpiSize:2
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -215,6 +230,6 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/AllBinding/dut.sv  | ${SURELOG_DIR}/build/regression/AllBinding/roundtrip/dut_000.sv  | 2 | 5 |
-[roundtrip]: ${SURELOG_DIR}/tests/AllBinding/enum.sv | ${SURELOG_DIR}/build/regression/AllBinding/roundtrip/enum_000.sv | 0 | 5 |
+[roundtrip]: ${SURELOG_DIR}/tests/AllBinding/dut.sv  | ${SURELOG_DIR}/build/regression/AllBinding/roundtrip/dut_000.sv  | 4 | 5 |
+[roundtrip]: ${SURELOG_DIR}/tests/AllBinding/enum.sv | ${SURELOG_DIR}/build/regression/AllBinding/roundtrip/enum_000.sv | 3 | 4 |
 ============================== End RoundTrip Results ==============================

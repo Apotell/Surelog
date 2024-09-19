@@ -257,31 +257,36 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv:21:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              69
+constant                                              31
 design                                                 1
 import_typespec                                        1
-int_typespec                                           6
-logic_typespec                                        21
+int_typespec                                           2
+logic_typespec                                         3
 module_inst                                            3
-operation                                             23
+operation                                              5
 package                                                1
 packed_array_typespec                                  2
-param_assign                                          10
-parameter                                             12
-range                                                 23
+param_assign                                           6
+parameter                                              6
+range                                                  5
 ref_module                                             1
-ref_obj                                               25
-ref_typespec                                          39
-struct_typespec                                        5
-typespec_member                                       10
+ref_obj                                                7
+ref_typespec                                           9
+source_file                                            1
+struct_typespec                                        1
+typespec_member                                        2
+unsupported_typespec                                   1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LargeValue2Struct/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/LargeValue2Struct/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/LargeValue2Struct/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallPackages:
 \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
   |vpiParent:
@@ -289,14 +294,14 @@ design: (unnamed)
   |vpiName:pack
   |vpiFullName:pack::
   |vpiParameter:
-  \_parameter: (pack::SramKeyWidth), line:2:17, endln:2:29
+  \_parameter: (pack::SramKeyWidth), line:2:17, endln:2:40
     |vpiParent:
     \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
     |UINT:128
     |vpiTypespec:
-    \_ref_typespec: (pack::SramKeyWidth)
+    \_ref_typespec: (pack::SramKeyWidth), line:2:13, endln:2:16
       |vpiParent:
-      \_parameter: (pack::SramKeyWidth), line:2:17, endln:2:29
+      \_parameter: (pack::SramKeyWidth), line:2:17, endln:2:40
       |vpiFullName:pack::SramKeyWidth
       |vpiActual:
       \_int_typespec: , line:2:13, endln:2:16
@@ -304,14 +309,14 @@ design: (unnamed)
     |vpiName:SramKeyWidth
     |vpiFullName:pack::SramKeyWidth
   |vpiParameter:
-  \_parameter: (pack::RndCnstScrmblKeyInitDefault), line:12:30, endln:12:57
+  \_parameter: (pack::RndCnstScrmblKeyInitDefault), line:12:30, endln:13:76
     |vpiParent:
     \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
     |HEX:cebeb96ffe0eced795f8b2cfe23c1e519e4fa08047a6bcfb811b04f0a479006e
     |vpiTypespec:
-    \_ref_typespec: (pack::RndCnstScrmblKeyInitDefault)
+    \_ref_typespec: (pack::RndCnstScrmblKeyInitDefault), line:12:12, endln:12:29
       |vpiParent:
-      \_parameter: (pack::RndCnstScrmblKeyInitDefault), line:12:30, endln:12:57
+      \_parameter: (pack::RndCnstScrmblKeyInitDefault), line:12:30, endln:13:76
       |vpiFullName:pack::RndCnstScrmblKeyInitDefault
       |vpiActual:
       \_struct_typespec: (pack::scrmbl_key_init_t), line:7:9, endln:10:4
@@ -329,16 +334,9 @@ design: (unnamed)
       |vpiDecompile:128
       |vpiSize:64
       |UINT:128
-      |vpiTypespec:
-      \_ref_typespec: (pack)
-        |vpiParent:
-        \_constant: , line:2:37, endln:2:40
-        |vpiFullName:pack
-        |vpiActual:
-        \_int_typespec: , line:2:13, endln:2:16
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (pack::SramKeyWidth), line:2:17, endln:2:29
+    \_parameter: (pack::SramKeyWidth), line:2:17, endln:2:40
   |vpiParamAssign:
   \_param_assign: , line:12:30, endln:13:76
     |vpiParent:
@@ -350,80 +348,36 @@ design: (unnamed)
       |vpiDecompile:256'hcebeb96ffe0eced795f8b2cfe23c1e519e4fa08047a6bcfb811b04f0a479006e
       |vpiSize:256
       |HEX:cebeb96ffe0eced795f8b2cfe23c1e519e4fa08047a6bcfb811b04f0a479006e
-      |vpiTypespec:
-      \_ref_typespec: (pack)
-        |vpiParent:
-        \_constant: , line:13:7, endln:13:76
-        |vpiFullName:pack
-        |vpiActual:
-        \_struct_typespec: (pack::scrmbl_key_init_t), line:7:9, endln:10:4
       |vpiConstType:5
     |vpiLhs:
-    \_parameter: (pack::RndCnstScrmblKeyInitDefault), line:12:30, endln:12:57
+    \_parameter: (pack::RndCnstScrmblKeyInitDefault), line:12:30, endln:13:76
   |vpiTypedef:
-  \_struct_typespec: (pack::scrmbl_key_init_t), line:7:9, endln:10:4
-    |vpiParent:
-    \_parameter: (work@top.RndCnstScrmblKeyInit), line:23:29, endln:23:49
-    |vpiName:pack::scrmbl_key_init_t
-    |vpiInstance:
-    \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
-    |vpiPacked:1
-    |vpiTypespecMember:
-    \_typespec_member: (key), line:8:18, endln:8:21
-      |vpiParent:
-      \_struct_typespec: (pack::scrmbl_key_init_t), line:7:9, endln:10:4
-      |vpiName:key
-      |vpiTypespec:
-      \_ref_typespec: (work@top.RndCnstScrmblKeyInit.pack::scrmbl_key_init_t.key)
-        |vpiParent:
-        \_typespec_member: (key), line:8:18, endln:8:21
-        |vpiFullName:work@top.RndCnstScrmblKeyInit.pack::scrmbl_key_init_t.key
-        |vpiActual:
-        \_logic_typespec: (sram_key_t), line:4:11, endln:4:35
-      |vpiRefFile:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv
-      |vpiRefLineNo:8
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:8
-      |vpiRefEndColumnNo:15
-    |vpiTypespecMember:
-    \_typespec_member: (nonce), line:9:18, endln:9:23
-      |vpiParent:
-      \_struct_typespec: (pack::scrmbl_key_init_t), line:7:9, endln:10:4
-      |vpiName:nonce
-      |vpiTypespec:
-      \_ref_typespec: (work@top.RndCnstScrmblKeyInit.pack::scrmbl_key_init_t.nonce)
-        |vpiParent:
-        \_typespec_member: (nonce), line:9:18, endln:9:23
-        |vpiFullName:work@top.RndCnstScrmblKeyInit.pack::scrmbl_key_init_t.nonce
-        |vpiActual:
-        \_logic_typespec: (sram_nonce_t), line:5:11, endln:5:35
-      |vpiRefFile:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv
-      |vpiRefLineNo:9
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:9
-      |vpiRefEndColumnNo:17
-  |vpiTypedef:
-  \_logic_typespec: (pack::sram_key_t), line:4:11, endln:4:35
+  \_int_typespec: , line:2:13, endln:2:16
     |vpiParent:
     \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
-    |vpiName:pack::sram_key_t
-    |vpiInstance:
+    |vpiSigned:1
+  |vpiTypedef:
+  \_logic_typespec: (sram_key_t), line:4:11, endln:4:35
+    |vpiParent:
     \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
+    |vpiName:sram_key_t
     |vpiRange:
     \_range: , line:4:17, endln:4:35
       |vpiParent:
-      \_logic_typespec: (pack::sram_key_t), line:4:11, endln:4:35
+      \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
       |vpiLeftRange:
       \_operation: , line:4:18, endln:4:32
         |vpiParent:
         \_range: , line:4:17, endln:4:35
         |vpiOpType:11
         |vpiOperand:
-        \_ref_obj: (pack::pack::sram_key_t::SramKeyWidth), line:4:18, endln:4:30
+        \_ref_obj: (pack::SramKeyWidth), line:4:18, endln:4:30
           |vpiParent:
           \_operation: , line:4:18, endln:4:32
           |vpiName:SramKeyWidth
-          |vpiFullName:pack::pack::sram_key_t::SramKeyWidth
+          |vpiFullName:pack::SramKeyWidth
+          |vpiActual:
+          \_parameter: (pack::SramKeyWidth), line:2:17, endln:2:40
         |vpiOperand:
         \_constant: , line:4:31, endln:4:32
           |vpiParent:
@@ -441,27 +395,27 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_logic_typespec: (pack::sram_nonce_t), line:5:11, endln:5:35
+  \_logic_typespec: (sram_nonce_t), line:5:11, endln:5:35
     |vpiParent:
     \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
-    |vpiName:pack::sram_nonce_t
-    |vpiInstance:
-    \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
+    |vpiName:sram_nonce_t
     |vpiRange:
     \_range: , line:5:17, endln:5:35
       |vpiParent:
-      \_logic_typespec: (pack::sram_nonce_t), line:5:11, endln:5:35
+      \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
       |vpiLeftRange:
       \_operation: , line:5:18, endln:5:32
         |vpiParent:
         \_range: , line:5:17, endln:5:35
         |vpiOpType:11
         |vpiOperand:
-        \_ref_obj: (pack::pack::sram_nonce_t::SramKeyWidth), line:5:18, endln:5:30
+        \_ref_obj: (pack::SramKeyWidth), line:5:18, endln:5:30
           |vpiParent:
           \_operation: , line:5:18, endln:5:32
           |vpiName:SramKeyWidth
-          |vpiFullName:pack::pack::sram_nonce_t::SramKeyWidth
+          |vpiFullName:pack::SramKeyWidth
+          |vpiActual:
+          \_parameter: (pack::SramKeyWidth), line:2:17, endln:2:40
         |vpiOperand:
         \_constant: , line:5:31, endln:5:32
           |vpiParent:
@@ -478,21 +432,61 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_struct_typespec: (pack::scrmbl_key_init_t), line:7:9, endln:10:4
+    |vpiParent:
+    \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
+    |vpiName:pack::scrmbl_key_init_t
+    |vpiPacked:1
+    |vpiTypespecMember:
+    \_typespec_member: (key), line:8:5, endln:8:22
+      |vpiParent:
+      \_struct_typespec: (pack::scrmbl_key_init_t), line:7:9, endln:10:4
+      |vpiName:key
+      |vpiTypespec:
+      \_ref_typespec: (pack::scrmbl_key_init_t::key::sram_key_t), line:8:5, endln:8:15
+        |vpiParent:
+        \_typespec_member: (key), line:8:5, endln:8:22
+        |vpiName:sram_key_t
+        |vpiFullName:pack::scrmbl_key_init_t::key::sram_key_t
+        |vpiActual:
+        \_logic_typespec: (sram_key_t), line:4:11, endln:4:35
+    |vpiTypespecMember:
+    \_typespec_member: (nonce), line:9:5, endln:9:24
+      |vpiParent:
+      \_struct_typespec: (pack::scrmbl_key_init_t), line:7:9, endln:10:4
+      |vpiName:nonce
+      |vpiTypespec:
+      \_ref_typespec: (pack::scrmbl_key_init_t::nonce::sram_nonce_t), line:9:5, endln:9:17
+        |vpiParent:
+        \_typespec_member: (nonce), line:9:5, endln:9:24
+        |vpiName:sram_nonce_t
+        |vpiFullName:pack::scrmbl_key_init_t::nonce::sram_nonce_t
+        |vpiActual:
+        \_logic_typespec: (sram_nonce_t), line:5:11, endln:5:35
+  |vpiImportTypespec:
+  \_int_typespec: , line:2:13, endln:2:16
+  |vpiImportTypespec:
+  \_logic_typespec: (sram_key_t), line:4:11, endln:4:35
+  |vpiImportTypespec:
+  \_logic_typespec: (sram_nonce_t), line:5:11, endln:5:35
+  |vpiImportTypespec:
+  \_struct_typespec: (pack::scrmbl_key_init_t), line:7:9, endln:10:4
   |vpiDefName:pack
 |uhdmallModules:
 \_module_inst: work@prim_sec_anchor_flop (work@prim_sec_anchor_flop), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:16:1, endln:19:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@prim_sec_anchor_flop
+  |vpiName:work@prim_sec_anchor_flop
   |vpiParameter:
-  \_parameter: (work@prim_sec_anchor_flop.Width), line:17:31, endln:17:36
+  \_parameter: (work@prim_sec_anchor_flop.Width), line:17:31, endln:17:45
     |vpiParent:
     \_module_inst: work@prim_sec_anchor_flop (work@prim_sec_anchor_flop), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:16:1, endln:19:10
     |UINT:1
     |vpiTypespec:
-    \_ref_typespec: (work@prim_sec_anchor_flop.Width)
+    \_ref_typespec: (work@prim_sec_anchor_flop.Width), line:17:13, endln:17:16
       |vpiParent:
-      \_parameter: (work@prim_sec_anchor_flop.Width), line:17:31, endln:17:36
+      \_parameter: (work@prim_sec_anchor_flop.Width), line:17:31, endln:17:45
       |vpiFullName:work@prim_sec_anchor_flop.Width
       |vpiActual:
       \_int_typespec: , line:17:13, endln:17:16
@@ -500,14 +494,14 @@ design: (unnamed)
     |vpiName:Width
     |vpiFullName:work@prim_sec_anchor_flop.Width
   |vpiParameter:
-  \_parameter: (work@prim_sec_anchor_flop.ResetValue), line:18:31, endln:18:41
+  \_parameter: (work@prim_sec_anchor_flop.ResetValue), line:18:31, endln:18:45
     |vpiParent:
     \_module_inst: work@prim_sec_anchor_flop (work@prim_sec_anchor_flop), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:16:1, endln:19:10
     |UINT:0
     |vpiTypespec:
-    \_ref_typespec: (work@prim_sec_anchor_flop.ResetValue)
+    \_ref_typespec: (work@prim_sec_anchor_flop.ResetValue), line:18:13, endln:18:18
       |vpiParent:
-      \_parameter: (work@prim_sec_anchor_flop.ResetValue), line:18:31, endln:18:41
+      \_parameter: (work@prim_sec_anchor_flop.ResetValue), line:18:31, endln:18:45
       |vpiFullName:work@prim_sec_anchor_flop.ResetValue
       |vpiActual:
       \_logic_typespec: , line:18:13, endln:18:30
@@ -524,16 +518,9 @@ design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
-      |vpiTypespec:
-      \_ref_typespec: (work@prim_sec_anchor_flop)
-        |vpiParent:
-        \_constant: , line:17:44, endln:17:45
-        |vpiFullName:work@prim_sec_anchor_flop
-        |vpiActual:
-        \_int_typespec: , line:17:13, endln:17:16
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@prim_sec_anchor_flop.Width), line:17:31, endln:17:36
+    \_parameter: (work@prim_sec_anchor_flop.Width), line:17:31, endln:17:45
   |vpiParamAssign:
   \_param_assign: , line:18:31, endln:18:45
     |vpiParent:
@@ -545,143 +532,80 @@ design: (unnamed)
       |vpiDecompile:0
       |vpiSize:64
       |UINT:0
-      |vpiTypespec:
-      \_ref_typespec: (work@prim_sec_anchor_flop)
-        |vpiParent:
-        \_constant: , line:18:44, endln:18:45
-        |vpiFullName:work@prim_sec_anchor_flop
-        |vpiActual:
-        \_logic_typespec: , line:18:13, endln:18:30
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@prim_sec_anchor_flop.ResetValue), line:18:31, endln:18:41
+    \_parameter: (work@prim_sec_anchor_flop.ResetValue), line:18:31, endln:18:45
+  |vpiTypedef:
+  \_int_typespec: , line:17:13, endln:17:16
+    |vpiParent:
+    \_module_inst: work@prim_sec_anchor_flop (work@prim_sec_anchor_flop), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:16:1, endln:19:10
+    |vpiSigned:1
+  |vpiTypedef:
+  \_logic_typespec: , line:18:13, endln:18:30
+    |vpiParent:
+    \_module_inst: work@prim_sec_anchor_flop (work@prim_sec_anchor_flop), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:16:1, endln:19:10
+    |vpiRange:
+    \_range: , line:18:19, endln:18:30
+      |vpiParent:
+      \_module_inst: work@prim_sec_anchor_flop (work@prim_sec_anchor_flop), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:16:1, endln:19:10
+      |vpiLeftRange:
+      \_operation: , line:18:20, endln:18:27
+        |vpiParent:
+        \_range: , line:18:19, endln:18:30
+        |vpiOpType:11
+        |vpiOperand:
+        \_ref_obj: (work@prim_sec_anchor_flop.Width), line:18:20, endln:18:25
+          |vpiParent:
+          \_operation: , line:18:20, endln:18:27
+          |vpiName:Width
+          |vpiFullName:work@prim_sec_anchor_flop.Width
+          |vpiActual:
+          \_parameter: (work@prim_sec_anchor_flop.Width), line:17:31, endln:17:45
+        |vpiOperand:
+        \_constant: , line:18:26, endln:18:27
+          |vpiParent:
+          \_operation: , line:18:20, endln:18:27
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:18:28, endln:18:29
+        |vpiParent:
+        \_range: , line:18:19, endln:18:30
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_int_typespec: , line:17:13, endln:17:16
+  |vpiImportTypespec:
+  \_logic_typespec: , line:18:13, endln:18:30
   |vpiDefName:work@prim_sec_anchor_flop
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:21:1, endln:30:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
+  |vpiName:work@top
   |vpiParameter:
-  \_parameter: (work@top.RndCnstScrmblKeyInitDefault), line:12:30, endln:12:57
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:21:1, endln:30:10
-    |HEX:cebeb96ffe0eced795f8b2cfe23c1e519e4fa08047a6bcfb811b04f0a479006e
-    |vpiTypespec:
-    \_ref_typespec: (work@top.RndCnstScrmblKeyInitDefault)
-      |vpiParent:
-      \_parameter: (work@top.RndCnstScrmblKeyInitDefault), line:12:30, endln:12:57
-      |vpiFullName:work@top.RndCnstScrmblKeyInitDefault
-      |vpiActual:
-      \_struct_typespec: (pack::scrmbl_key_init_t), line:7:9, endln:10:4
-    |vpiLocalParam:1
-    |vpiName:RndCnstScrmblKeyInitDefault
-    |vpiFullName:work@top.RndCnstScrmblKeyInitDefault
-    |vpiImported:pack
-  |vpiParameter:
-  \_parameter: (work@top.SramKeyWidth), line:2:17, endln:2:29
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:21:1, endln:30:10
-    |UINT:128
-    |vpiTypespec:
-    \_ref_typespec: (work@top.SramKeyWidth)
-      |vpiParent:
-      \_parameter: (work@top.SramKeyWidth), line:2:17, endln:2:29
-      |vpiFullName:work@top.SramKeyWidth
-      |vpiActual:
-      \_int_typespec: , line:2:13, endln:2:16
-    |vpiSigned:1
-    |vpiName:SramKeyWidth
-    |vpiFullName:work@top.SramKeyWidth
-    |vpiImported:pack
-  |vpiParameter:
-  \_parameter: (work@top.RndCnstScrmblKeyInit), line:23:29, endln:23:49
+  \_parameter: (work@top.RndCnstScrmblKeyInit), line:23:29, endln:23:79
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:21:1, endln:30:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.RndCnstScrmblKeyInit)
+    \_ref_typespec: (work@top.RndCnstScrmblKeyInit), line:23:11, endln:23:28
       |vpiParent:
-      \_parameter: (work@top.RndCnstScrmblKeyInit), line:23:29, endln:23:49
+      \_parameter: (work@top.RndCnstScrmblKeyInit), line:23:29, endln:23:79
       |vpiFullName:work@top.RndCnstScrmblKeyInit
       |vpiActual:
-      \_struct_typespec: (pack::scrmbl_key_init_t), line:7:9, endln:10:4
+      \_unsupported_typespec: (scrmbl_key_init_t), line:23:11, endln:23:28
     |vpiName:RndCnstScrmblKeyInit
     |vpiFullName:work@top.RndCnstScrmblKeyInit
   |vpiParameter:
-  \_parameter: (work@top.Width), line:24:11, endln:24:16
+  \_parameter: (work@top.Width), line:24:11, endln:24:31
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:21:1, endln:30:10
     |vpiName:Width
     |vpiFullName:work@top.Width
-  |vpiParamAssign:
-  \_param_assign: , line:2:17, endln:2:40
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:21:1, endln:30:10
-    |vpiRhs:
-    \_constant: , line:2:37, endln:2:40
-      |vpiParent:
-      \_param_assign: , line:2:17, endln:2:40
-      |vpiDecompile:128
-      |vpiSize:64
-      |UINT:128
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:2:37, endln:2:40
-        |vpiFullName:work@top
-        |vpiActual:
-        \_int_typespec: , line:2:13, endln:2:16
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@top.SramKeyWidth), line:2:17, endln:2:29
-      |vpiParent:
-      \_param_assign: , line:2:17, endln:2:40
-      |UINT:128
-      |vpiTypespec:
-      \_ref_typespec: (work@top.SramKeyWidth)
-        |vpiParent:
-        \_parameter: (work@top.SramKeyWidth), line:2:17, endln:2:29
-        |vpiFullName:work@top.SramKeyWidth
-        |vpiActual:
-        \_int_typespec: , line:2:13, endln:2:16
-      |vpiSigned:1
-      |vpiName:SramKeyWidth
-      |vpiFullName:work@top.SramKeyWidth
-      |vpiImported:pack
-  |vpiParamAssign:
-  \_param_assign: , line:12:30, endln:13:76
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:21:1, endln:30:10
-    |vpiRhs:
-    \_constant: , line:13:7, endln:13:76
-      |vpiParent:
-      \_param_assign: , line:12:30, endln:13:76
-      |vpiDecompile:256'hcebeb96ffe0eced795f8b2cfe23c1e519e4fa08047a6bcfb811b04f0a479006e
-      |vpiSize:256
-      |HEX:cebeb96ffe0eced795f8b2cfe23c1e519e4fa08047a6bcfb811b04f0a479006e
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:13:7, endln:13:76
-        |vpiFullName:work@top
-        |vpiActual:
-        \_struct_typespec: (pack::scrmbl_key_init_t), line:7:9, endln:10:4
-      |vpiConstType:5
-    |vpiLhs:
-    \_parameter: (work@top.RndCnstScrmblKeyInitDefault), line:12:30, endln:12:57
-      |vpiParent:
-      \_param_assign: , line:12:30, endln:13:76
-      |HEX:cebeb96ffe0eced795f8b2cfe23c1e519e4fa08047a6bcfb811b04f0a479006e
-      |vpiTypespec:
-      \_ref_typespec: (work@top.RndCnstScrmblKeyInitDefault)
-        |vpiParent:
-        \_parameter: (work@top.RndCnstScrmblKeyInitDefault), line:12:30, endln:12:57
-        |vpiFullName:work@top.RndCnstScrmblKeyInitDefault
-        |vpiActual:
-        \_struct_typespec: (pack::scrmbl_key_init_t), line:7:9, endln:10:4
-      |vpiLocalParam:1
-      |vpiName:RndCnstScrmblKeyInitDefault
-      |vpiFullName:work@top.RndCnstScrmblKeyInitDefault
-      |vpiImported:pack
   |vpiParamAssign:
   \_param_assign: , line:23:29, endln:23:79
     |vpiParent:
@@ -692,8 +616,10 @@ design: (unnamed)
       \_param_assign: , line:23:29, endln:23:79
       |vpiName:RndCnstScrmblKeyInitDefault
       |vpiFullName:work@top.RndCnstScrmblKeyInitDefault
+      |vpiActual:
+      \_parameter: (pack::RndCnstScrmblKeyInitDefault), line:12:30, endln:13:76
     |vpiLhs:
-    \_parameter: (work@top.RndCnstScrmblKeyInit), line:23:29, endln:23:49
+    \_parameter: (work@top.RndCnstScrmblKeyInit), line:23:29, endln:23:79
   |vpiParamAssign:
   \_param_assign: , line:24:11, endln:24:31
     |vpiParent:
@@ -704,781 +630,30 @@ design: (unnamed)
       \_param_assign: , line:24:11, endln:24:31
       |vpiName:SramKeyWidth
       |vpiFullName:work@top.SramKeyWidth
+      |vpiActual:
+      \_parameter: (pack::SramKeyWidth), line:2:17, endln:2:40
     |vpiLhs:
-    \_parameter: (work@top.Width), line:24:11, endln:24:16
-  |vpiTypedef:
-  \_struct_typespec: (pack::scrmbl_key_init_t), line:7:9, endln:10:4
-  |vpiTypedef:
-  \_logic_typespec: (pack::sram_key_t), line:4:11, endln:4:35
-  |vpiTypedef:
-  \_logic_typespec: (pack::sram_nonce_t), line:5:11, endln:5:35
+    \_parameter: (work@top.Width), line:24:11, endln:24:31
   |vpiTypedef:
   \_import_typespec: (pack), line:22:8, endln:22:15
+  |vpiTypedef:
+  \_unsupported_typespec: (scrmbl_key_init_t), line:23:11, endln:23:28
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:21:1, endln:30:10
+    |vpiName:scrmbl_key_init_t
+  |vpiImportTypespec:
+  \_import_typespec: (pack), line:22:8, endln:22:15
+  |vpiImportTypespec:
+  \_unsupported_typespec: (scrmbl_key_init_t), line:23:11, endln:23:28
   |vpiDefName:work@top
   |vpiRefModule:
-  \_ref_module: work@prim_sec_anchor_flop (u_key_out_anchor), line:28:5, endln:28:21
+  \_ref_module: work@prim_sec_anchor_flop (u_key_out_anchor), line:25:1, endln:29:5
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:21:1, endln:30:10
     |vpiName:u_key_out_anchor
     |vpiDefName:work@prim_sec_anchor_flop
     |vpiActual:
     \_module_inst: work@prim_sec_anchor_flop (work@prim_sec_anchor_flop), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:16:1, endln:19:10
-\_weaklyReferenced:
-\_int_typespec: , line:2:13, endln:2:16
-  |vpiParent:
-  \_parameter: (pack::SramKeyWidth), line:2:17, endln:2:29
-  |vpiInstance:
-  \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
-  |vpiSigned:1
-\_logic_typespec: (sram_key_t), line:4:11, endln:4:35
-  |vpiName:sram_key_t
-  |vpiTypedefAlias:
-  \_ref_typespec: (sram_key_t)
-    |vpiParent:
-    \_logic_typespec: (sram_key_t), line:4:11, endln:4:35
-    |vpiFullName:sram_key_t
-    |vpiActual:
-    \_logic_typespec: (pack::sram_key_t), line:4:11, endln:4:35
-  |vpiInstance:
-  \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
-  |vpiRange:
-  \_range: , line:4:17, endln:4:35
-    |vpiParent:
-    \_logic_typespec: (sram_key_t), line:4:11, endln:4:35
-    |vpiLeftRange:
-    \_operation: , line:4:18, endln:4:32
-      |vpiParent:
-      \_range: , line:4:17, endln:4:35
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (sram_key_t.SramKeyWidth), line:4:18, endln:4:30
-        |vpiParent:
-        \_operation: , line:4:18, endln:4:32
-        |vpiName:SramKeyWidth
-        |vpiFullName:sram_key_t.SramKeyWidth
-      |vpiOperand:
-      \_constant: , line:4:31, endln:4:32
-        |vpiParent:
-        \_operation: , line:4:18, endln:4:32
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:4:33, endln:4:34
-      |vpiParent:
-      \_range: , line:4:17, endln:4:35
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: (sram_nonce_t), line:5:11, endln:5:35
-  |vpiName:sram_nonce_t
-  |vpiTypedefAlias:
-  \_ref_typespec: (sram_nonce_t)
-    |vpiParent:
-    \_logic_typespec: (sram_nonce_t), line:5:11, endln:5:35
-    |vpiFullName:sram_nonce_t
-    |vpiActual:
-    \_logic_typespec: (pack::sram_nonce_t), line:5:11, endln:5:35
-  |vpiInstance:
-  \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
-  |vpiRange:
-  \_range: , line:5:17, endln:5:35
-    |vpiParent:
-    \_logic_typespec: (sram_nonce_t), line:5:11, endln:5:35
-    |vpiLeftRange:
-    \_operation: , line:5:18, endln:5:32
-      |vpiParent:
-      \_range: , line:5:17, endln:5:35
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (sram_nonce_t.SramKeyWidth), line:5:18, endln:5:30
-        |vpiParent:
-        \_operation: , line:5:18, endln:5:32
-        |vpiName:SramKeyWidth
-        |vpiFullName:sram_nonce_t.SramKeyWidth
-      |vpiOperand:
-      \_constant: , line:5:31, endln:5:32
-        |vpiParent:
-        \_operation: , line:5:18, endln:5:32
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:5:33, endln:5:34
-      |vpiParent:
-      \_range: , line:5:17, endln:5:35
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_int_typespec: , line:17:13, endln:17:16
-  |vpiParent:
-  \_parameter: (work@prim_sec_anchor_flop.Width), line:17:31, endln:17:36
-  |vpiSigned:1
-\_logic_typespec: , line:18:13, endln:18:30
-  |vpiParent:
-  \_parameter: (work@prim_sec_anchor_flop.ResetValue), line:18:31, endln:18:41
-  |vpiRange:
-  \_range: , line:18:19, endln:18:30
-    |vpiParent:
-    \_logic_typespec: , line:18:13, endln:18:30
-    |vpiLeftRange:
-    \_operation: , line:18:20, endln:18:27
-      |vpiParent:
-      \_range: , line:18:19, endln:18:30
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@prim_sec_anchor_flop.ResetValue.Width), line:18:20, endln:18:25
-        |vpiParent:
-        \_operation: , line:18:20, endln:18:27
-        |vpiName:Width
-        |vpiFullName:work@prim_sec_anchor_flop.ResetValue.Width
-      |vpiOperand:
-      \_constant: , line:18:26, endln:18:27
-        |vpiParent:
-        \_operation: , line:18:20, endln:18:27
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:18:28, endln:18:29
-      |vpiParent:
-      \_range: , line:18:19, endln:18:30
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_struct_typespec: (pack::scrmbl_key_init_t), line:7:9, endln:10:4
-  |vpiParent:
-  \_ref_typespec: (work@top.RndCnstScrmblKeyInitDefault)
-  |vpiName:pack::scrmbl_key_init_t
-  |vpiInstance:
-  \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (key), line:8:18, endln:8:21
-    |vpiParent:
-    \_struct_typespec: (pack::scrmbl_key_init_t), line:7:9, endln:10:4
-    |vpiName:key
-    |vpiTypespec:
-    \_ref_typespec: (work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.key)
-      |vpiParent:
-      \_typespec_member: (key), line:8:18, endln:8:21
-      |vpiFullName:work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.key
-      |vpiActual:
-      \_logic_typespec: (sram_key_t), line:4:11, endln:4:35
-    |vpiRefFile:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv
-    |vpiRefLineNo:8
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:8
-    |vpiRefEndColumnNo:15
-  |vpiTypespecMember:
-  \_typespec_member: (nonce), line:9:18, endln:9:23
-    |vpiParent:
-    \_struct_typespec: (pack::scrmbl_key_init_t), line:7:9, endln:10:4
-    |vpiName:nonce
-    |vpiTypespec:
-    \_ref_typespec: (work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.nonce)
-      |vpiParent:
-      \_typespec_member: (nonce), line:9:18, endln:9:23
-      |vpiFullName:work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.nonce
-      |vpiActual:
-      \_logic_typespec: (sram_nonce_t), line:5:11, endln:5:35
-    |vpiRefFile:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv
-    |vpiRefLineNo:9
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:9
-    |vpiRefEndColumnNo:17
-\_logic_typespec: (sram_key_t), line:4:11, endln:4:35
-  |vpiParent:
-  \_ref_typespec: (work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.key)
-  |vpiName:sram_key_t
-  |vpiTypedefAlias:
-  \_ref_typespec: (work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.key.sram_key_t)
-    |vpiParent:
-    \_logic_typespec: (sram_key_t), line:4:11, endln:4:35
-    |vpiFullName:work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.key.sram_key_t
-    |vpiActual:
-    \_logic_typespec: (sram_key_t), line:4:11, endln:4:35
-  |vpiInstance:
-  \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
-  |vpiRange:
-  \_range: , line:4:17, endln:4:35
-    |vpiParent:
-    \_logic_typespec: (sram_key_t), line:4:11, endln:4:35
-    |vpiLeftRange:
-    \_operation: , line:4:18, endln:4:32
-      |vpiParent:
-      \_range: , line:4:17, endln:4:35
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.key.sram_key_t.SramKeyWidth), line:4:18, endln:4:30
-        |vpiParent:
-        \_operation: , line:4:18, endln:4:32
-        |vpiName:SramKeyWidth
-        |vpiFullName:work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.key.sram_key_t.SramKeyWidth
-      |vpiOperand:
-      \_constant: , line:4:31, endln:4:32
-        |vpiParent:
-        \_operation: , line:4:18, endln:4:32
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:4:33, endln:4:34
-      |vpiParent:
-      \_range: , line:4:17, endln:4:35
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: (sram_key_t), line:4:11, endln:4:35
-  |vpiParent:
-  \_ref_typespec: (work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.key.sram_key_t)
-  |vpiName:sram_key_t
-  |vpiInstance:
-  \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
-  |vpiRange:
-  \_range: , line:4:17, endln:4:35
-    |vpiParent:
-    \_logic_typespec: (sram_key_t), line:4:11, endln:4:35
-    |vpiLeftRange:
-    \_operation: , line:4:18, endln:4:32
-      |vpiParent:
-      \_range: , line:4:17, endln:4:35
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.key.sram_key_t.sram_key_t.SramKeyWidth), line:4:18, endln:4:30
-        |vpiParent:
-        \_operation: , line:4:18, endln:4:32
-        |vpiName:SramKeyWidth
-        |vpiFullName:work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.key.sram_key_t.sram_key_t.SramKeyWidth
-      |vpiOperand:
-      \_constant: , line:4:31, endln:4:32
-        |vpiParent:
-        \_operation: , line:4:18, endln:4:32
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:4:33, endln:4:34
-      |vpiParent:
-      \_range: , line:4:17, endln:4:35
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: (sram_nonce_t), line:5:11, endln:5:35
-  |vpiParent:
-  \_ref_typespec: (work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.nonce)
-  |vpiName:sram_nonce_t
-  |vpiTypedefAlias:
-  \_ref_typespec: (work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.nonce.sram_nonce_t)
-    |vpiParent:
-    \_logic_typespec: (sram_nonce_t), line:5:11, endln:5:35
-    |vpiFullName:work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.nonce.sram_nonce_t
-    |vpiActual:
-    \_logic_typespec: (sram_nonce_t), line:5:11, endln:5:35
-  |vpiInstance:
-  \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
-  |vpiRange:
-  \_range: , line:5:17, endln:5:35
-    |vpiParent:
-    \_logic_typespec: (sram_nonce_t), line:5:11, endln:5:35
-    |vpiLeftRange:
-    \_operation: , line:5:18, endln:5:32
-      |vpiParent:
-      \_range: , line:5:17, endln:5:35
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.nonce.sram_nonce_t.SramKeyWidth), line:5:18, endln:5:30
-        |vpiParent:
-        \_operation: , line:5:18, endln:5:32
-        |vpiName:SramKeyWidth
-        |vpiFullName:work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.nonce.sram_nonce_t.SramKeyWidth
-      |vpiOperand:
-      \_constant: , line:5:31, endln:5:32
-        |vpiParent:
-        \_operation: , line:5:18, endln:5:32
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:5:33, endln:5:34
-      |vpiParent:
-      \_range: , line:5:17, endln:5:35
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: (sram_nonce_t), line:5:11, endln:5:35
-  |vpiParent:
-  \_ref_typespec: (work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.nonce.sram_nonce_t)
-  |vpiName:sram_nonce_t
-  |vpiInstance:
-  \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
-  |vpiRange:
-  \_range: , line:5:17, endln:5:35
-    |vpiParent:
-    \_logic_typespec: (sram_nonce_t), line:5:11, endln:5:35
-    |vpiLeftRange:
-    \_operation: , line:5:18, endln:5:32
-      |vpiParent:
-      \_range: , line:5:17, endln:5:35
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.nonce.sram_nonce_t.sram_nonce_t.SramKeyWidth), line:5:18, endln:5:30
-        |vpiParent:
-        \_operation: , line:5:18, endln:5:32
-        |vpiName:SramKeyWidth
-        |vpiFullName:work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.nonce.sram_nonce_t.sram_nonce_t.SramKeyWidth
-      |vpiOperand:
-      \_constant: , line:5:31, endln:5:32
-        |vpiParent:
-        \_operation: , line:5:18, endln:5:32
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:5:33, endln:5:34
-      |vpiParent:
-      \_range: , line:5:17, endln:5:35
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_int_typespec: , line:2:13, endln:2:16
-  |vpiParent:
-  \_ref_typespec: (work@top.SramKeyWidth)
-  |vpiInstance:
-  \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
-  |vpiSigned:1
-\_int_typespec: , line:2:13, endln:2:16
-  |vpiParent:
-  \_ref_typespec: (work@top)
-  |vpiInstance:
-  \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
-  |vpiSigned:1
-\_int_typespec: , line:2:13, endln:2:16
-  |vpiParent:
-  \_ref_typespec: (work@top.SramKeyWidth)
-  |vpiInstance:
-  \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
-  |vpiSigned:1
-\_struct_typespec: (pack::scrmbl_key_init_t), line:7:9, endln:10:4
-  |vpiParent:
-  \_ref_typespec: (work@top)
-  |vpiName:pack::scrmbl_key_init_t
-  |vpiInstance:
-  \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (key), line:8:18, endln:8:21
-    |vpiParent:
-    \_struct_typespec: (pack::scrmbl_key_init_t), line:7:9, endln:10:4
-    |vpiName:key
-    |vpiTypespec:
-    \_ref_typespec: (work@top.pack::scrmbl_key_init_t.key)
-      |vpiParent:
-      \_typespec_member: (key), line:8:18, endln:8:21
-      |vpiFullName:work@top.pack::scrmbl_key_init_t.key
-      |vpiActual:
-      \_logic_typespec: (sram_key_t), line:4:11, endln:4:35
-    |vpiRefFile:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv
-    |vpiRefLineNo:8
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:8
-    |vpiRefEndColumnNo:15
-  |vpiTypespecMember:
-  \_typespec_member: (nonce), line:9:18, endln:9:23
-    |vpiParent:
-    \_struct_typespec: (pack::scrmbl_key_init_t), line:7:9, endln:10:4
-    |vpiName:nonce
-    |vpiTypespec:
-    \_ref_typespec: (work@top.pack::scrmbl_key_init_t.nonce)
-      |vpiParent:
-      \_typespec_member: (nonce), line:9:18, endln:9:23
-      |vpiFullName:work@top.pack::scrmbl_key_init_t.nonce
-      |vpiActual:
-      \_logic_typespec: (sram_nonce_t), line:5:11, endln:5:35
-    |vpiRefFile:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv
-    |vpiRefLineNo:9
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:9
-    |vpiRefEndColumnNo:17
-\_logic_typespec: (sram_key_t), line:4:11, endln:4:35
-  |vpiParent:
-  \_ref_typespec: (work@top.pack::scrmbl_key_init_t.key)
-  |vpiName:sram_key_t
-  |vpiTypedefAlias:
-  \_ref_typespec: (work@top.pack::scrmbl_key_init_t.key.sram_key_t)
-    |vpiParent:
-    \_logic_typespec: (sram_key_t), line:4:11, endln:4:35
-    |vpiFullName:work@top.pack::scrmbl_key_init_t.key.sram_key_t
-    |vpiActual:
-    \_logic_typespec: (sram_key_t), line:4:11, endln:4:35
-  |vpiInstance:
-  \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
-  |vpiRange:
-  \_range: , line:4:17, endln:4:35
-    |vpiParent:
-    \_logic_typespec: (sram_key_t), line:4:11, endln:4:35
-    |vpiLeftRange:
-    \_operation: , line:4:18, endln:4:32
-      |vpiParent:
-      \_range: , line:4:17, endln:4:35
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@top.pack::scrmbl_key_init_t.key.sram_key_t.SramKeyWidth), line:4:18, endln:4:30
-        |vpiParent:
-        \_operation: , line:4:18, endln:4:32
-        |vpiName:SramKeyWidth
-        |vpiFullName:work@top.pack::scrmbl_key_init_t.key.sram_key_t.SramKeyWidth
-      |vpiOperand:
-      \_constant: , line:4:31, endln:4:32
-        |vpiParent:
-        \_operation: , line:4:18, endln:4:32
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:4:33, endln:4:34
-      |vpiParent:
-      \_range: , line:4:17, endln:4:35
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: (sram_key_t), line:4:11, endln:4:35
-  |vpiParent:
-  \_ref_typespec: (work@top.pack::scrmbl_key_init_t.key.sram_key_t)
-  |vpiName:sram_key_t
-  |vpiInstance:
-  \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
-  |vpiRange:
-  \_range: , line:4:17, endln:4:35
-    |vpiParent:
-    \_logic_typespec: (sram_key_t), line:4:11, endln:4:35
-    |vpiLeftRange:
-    \_operation: , line:4:18, endln:4:32
-      |vpiParent:
-      \_range: , line:4:17, endln:4:35
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@top.pack::scrmbl_key_init_t.key.sram_key_t.sram_key_t.SramKeyWidth), line:4:18, endln:4:30
-        |vpiParent:
-        \_operation: , line:4:18, endln:4:32
-        |vpiName:SramKeyWidth
-        |vpiFullName:work@top.pack::scrmbl_key_init_t.key.sram_key_t.sram_key_t.SramKeyWidth
-      |vpiOperand:
-      \_constant: , line:4:31, endln:4:32
-        |vpiParent:
-        \_operation: , line:4:18, endln:4:32
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:4:33, endln:4:34
-      |vpiParent:
-      \_range: , line:4:17, endln:4:35
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: (sram_nonce_t), line:5:11, endln:5:35
-  |vpiParent:
-  \_ref_typespec: (work@top.pack::scrmbl_key_init_t.nonce)
-  |vpiName:sram_nonce_t
-  |vpiTypedefAlias:
-  \_ref_typespec: (work@top.pack::scrmbl_key_init_t.nonce.sram_nonce_t)
-    |vpiParent:
-    \_logic_typespec: (sram_nonce_t), line:5:11, endln:5:35
-    |vpiFullName:work@top.pack::scrmbl_key_init_t.nonce.sram_nonce_t
-    |vpiActual:
-    \_logic_typespec: (sram_nonce_t), line:5:11, endln:5:35
-  |vpiInstance:
-  \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
-  |vpiRange:
-  \_range: , line:5:17, endln:5:35
-    |vpiParent:
-    \_logic_typespec: (sram_nonce_t), line:5:11, endln:5:35
-    |vpiLeftRange:
-    \_operation: , line:5:18, endln:5:32
-      |vpiParent:
-      \_range: , line:5:17, endln:5:35
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@top.pack::scrmbl_key_init_t.nonce.sram_nonce_t.SramKeyWidth), line:5:18, endln:5:30
-        |vpiParent:
-        \_operation: , line:5:18, endln:5:32
-        |vpiName:SramKeyWidth
-        |vpiFullName:work@top.pack::scrmbl_key_init_t.nonce.sram_nonce_t.SramKeyWidth
-      |vpiOperand:
-      \_constant: , line:5:31, endln:5:32
-        |vpiParent:
-        \_operation: , line:5:18, endln:5:32
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:5:33, endln:5:34
-      |vpiParent:
-      \_range: , line:5:17, endln:5:35
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: (sram_nonce_t), line:5:11, endln:5:35
-  |vpiParent:
-  \_ref_typespec: (work@top.pack::scrmbl_key_init_t.nonce.sram_nonce_t)
-  |vpiName:sram_nonce_t
-  |vpiInstance:
-  \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
-  |vpiRange:
-  \_range: , line:5:17, endln:5:35
-    |vpiParent:
-    \_logic_typespec: (sram_nonce_t), line:5:11, endln:5:35
-    |vpiLeftRange:
-    \_operation: , line:5:18, endln:5:32
-      |vpiParent:
-      \_range: , line:5:17, endln:5:35
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@top.pack::scrmbl_key_init_t.nonce.sram_nonce_t.sram_nonce_t.SramKeyWidth), line:5:18, endln:5:30
-        |vpiParent:
-        \_operation: , line:5:18, endln:5:32
-        |vpiName:SramKeyWidth
-        |vpiFullName:work@top.pack::scrmbl_key_init_t.nonce.sram_nonce_t.sram_nonce_t.SramKeyWidth
-      |vpiOperand:
-      \_constant: , line:5:31, endln:5:32
-        |vpiParent:
-        \_operation: , line:5:18, endln:5:32
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:5:33, endln:5:34
-      |vpiParent:
-      \_range: , line:5:17, endln:5:35
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_struct_typespec: (pack::scrmbl_key_init_t), line:7:9, endln:10:4
-  |vpiParent:
-  \_ref_typespec: (work@top.RndCnstScrmblKeyInitDefault)
-  |vpiName:pack::scrmbl_key_init_t
-  |vpiInstance:
-  \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (key), line:8:18, endln:8:21
-    |vpiParent:
-    \_struct_typespec: (pack::scrmbl_key_init_t), line:7:9, endln:10:4
-    |vpiName:key
-    |vpiTypespec:
-    \_ref_typespec: (work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.key)
-      |vpiParent:
-      \_typespec_member: (key), line:8:18, endln:8:21
-      |vpiFullName:work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.key
-      |vpiActual:
-      \_logic_typespec: (sram_key_t), line:4:11, endln:4:35
-    |vpiRefFile:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv
-    |vpiRefLineNo:8
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:8
-    |vpiRefEndColumnNo:15
-  |vpiTypespecMember:
-  \_typespec_member: (nonce), line:9:18, endln:9:23
-    |vpiParent:
-    \_struct_typespec: (pack::scrmbl_key_init_t), line:7:9, endln:10:4
-    |vpiName:nonce
-    |vpiTypespec:
-    \_ref_typespec: (work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.nonce)
-      |vpiParent:
-      \_typespec_member: (nonce), line:9:18, endln:9:23
-      |vpiFullName:work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.nonce
-      |vpiActual:
-      \_logic_typespec: (sram_nonce_t), line:5:11, endln:5:35
-    |vpiRefFile:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv
-    |vpiRefLineNo:9
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:9
-    |vpiRefEndColumnNo:17
-\_logic_typespec: (sram_key_t), line:4:11, endln:4:35
-  |vpiParent:
-  \_ref_typespec: (work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.key)
-  |vpiName:sram_key_t
-  |vpiTypedefAlias:
-  \_ref_typespec: (work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.key.sram_key_t)
-    |vpiParent:
-    \_logic_typespec: (sram_key_t), line:4:11, endln:4:35
-    |vpiFullName:work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.key.sram_key_t
-    |vpiActual:
-    \_logic_typespec: (sram_key_t), line:4:11, endln:4:35
-  |vpiInstance:
-  \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
-  |vpiRange:
-  \_range: , line:4:17, endln:4:35
-    |vpiParent:
-    \_logic_typespec: (sram_key_t), line:4:11, endln:4:35
-    |vpiLeftRange:
-    \_operation: , line:4:18, endln:4:32
-      |vpiParent:
-      \_range: , line:4:17, endln:4:35
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.key.sram_key_t.SramKeyWidth), line:4:18, endln:4:30
-        |vpiParent:
-        \_operation: , line:4:18, endln:4:32
-        |vpiName:SramKeyWidth
-        |vpiFullName:work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.key.sram_key_t.SramKeyWidth
-      |vpiOperand:
-      \_constant: , line:4:31, endln:4:32
-        |vpiParent:
-        \_operation: , line:4:18, endln:4:32
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:4:33, endln:4:34
-      |vpiParent:
-      \_range: , line:4:17, endln:4:35
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: (sram_key_t), line:4:11, endln:4:35
-  |vpiParent:
-  \_ref_typespec: (work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.key.sram_key_t)
-  |vpiName:sram_key_t
-  |vpiInstance:
-  \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
-  |vpiRange:
-  \_range: , line:4:17, endln:4:35
-    |vpiParent:
-    \_logic_typespec: (sram_key_t), line:4:11, endln:4:35
-    |vpiLeftRange:
-    \_operation: , line:4:18, endln:4:32
-      |vpiParent:
-      \_range: , line:4:17, endln:4:35
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.key.sram_key_t.sram_key_t.SramKeyWidth), line:4:18, endln:4:30
-        |vpiParent:
-        \_operation: , line:4:18, endln:4:32
-        |vpiName:SramKeyWidth
-        |vpiFullName:work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.key.sram_key_t.sram_key_t.SramKeyWidth
-      |vpiOperand:
-      \_constant: , line:4:31, endln:4:32
-        |vpiParent:
-        \_operation: , line:4:18, endln:4:32
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:4:33, endln:4:34
-      |vpiParent:
-      \_range: , line:4:17, endln:4:35
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: (sram_nonce_t), line:5:11, endln:5:35
-  |vpiParent:
-  \_ref_typespec: (work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.nonce)
-  |vpiName:sram_nonce_t
-  |vpiTypedefAlias:
-  \_ref_typespec: (work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.nonce.sram_nonce_t)
-    |vpiParent:
-    \_logic_typespec: (sram_nonce_t), line:5:11, endln:5:35
-    |vpiFullName:work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.nonce.sram_nonce_t
-    |vpiActual:
-    \_logic_typespec: (sram_nonce_t), line:5:11, endln:5:35
-  |vpiInstance:
-  \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
-  |vpiRange:
-  \_range: , line:5:17, endln:5:35
-    |vpiParent:
-    \_logic_typespec: (sram_nonce_t), line:5:11, endln:5:35
-    |vpiLeftRange:
-    \_operation: , line:5:18, endln:5:32
-      |vpiParent:
-      \_range: , line:5:17, endln:5:35
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.nonce.sram_nonce_t.SramKeyWidth), line:5:18, endln:5:30
-        |vpiParent:
-        \_operation: , line:5:18, endln:5:32
-        |vpiName:SramKeyWidth
-        |vpiFullName:work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.nonce.sram_nonce_t.SramKeyWidth
-      |vpiOperand:
-      \_constant: , line:5:31, endln:5:32
-        |vpiParent:
-        \_operation: , line:5:18, endln:5:32
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:5:33, endln:5:34
-      |vpiParent:
-      \_range: , line:5:17, endln:5:35
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: (sram_nonce_t), line:5:11, endln:5:35
-  |vpiParent:
-  \_ref_typespec: (work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.nonce.sram_nonce_t)
-  |vpiName:sram_nonce_t
-  |vpiInstance:
-  \_package: pack (pack::), file:${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv, line:1:1, endln:14:11
-  |vpiRange:
-  \_range: , line:5:17, endln:5:35
-    |vpiParent:
-    \_logic_typespec: (sram_nonce_t), line:5:11, endln:5:35
-    |vpiLeftRange:
-    \_operation: , line:5:18, endln:5:32
-      |vpiParent:
-      \_range: , line:5:17, endln:5:35
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.nonce.sram_nonce_t.sram_nonce_t.SramKeyWidth), line:5:18, endln:5:30
-        |vpiParent:
-        \_operation: , line:5:18, endln:5:32
-        |vpiName:SramKeyWidth
-        |vpiFullName:work@top.RndCnstScrmblKeyInitDefault.pack::scrmbl_key_init_t.nonce.sram_nonce_t.sram_nonce_t.SramKeyWidth
-      |vpiOperand:
-      \_constant: , line:5:31, endln:5:32
-        |vpiParent:
-        \_operation: , line:5:18, endln:5:32
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:5:33, endln:5:34
-      |vpiParent:
-      \_range: , line:5:17, endln:5:35
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -1487,5 +662,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv | ${SURELOG_DIR}/build/regression/LargeValue2Struct/roundtrip/dut_000.sv | 10 | 30 |
+[roundtrip]: ${SURELOG_DIR}/tests/LargeValue2Struct/dut.sv | ${SURELOG_DIR}/build/regression/LargeValue2Struct/roundtrip/dut_000.sv | 19 | 30 |
 ============================== End RoundTrip Results ==============================

@@ -250,43 +250,45 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             2
-begin                                                  1
-constant                                              15
+begin                                                  3
+constant                                              19
 cont_assign                                            2
 design                                                 1
 gen_if                                                 1
 gen_if_else                                            1
 int_typespec                                           1
 logic_net                                              1
-logic_typespec                                         3
+logic_typespec                                         2
 logic_var                                              2
 module_inst                                            2
-named_begin                                            2
-operation                                              9
+operation                                             11
 param_assign                                           2
 parameter                                              2
 port                                                   1
-range                                                  5
+range                                                  7
 ref_module                                             1
-ref_obj                                               13
-ref_typespec                                           7
-string_typespec                                        1
+ref_obj                                               14
+ref_typespec                                           3
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/GenNet/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/GenNet/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/GenNet/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/GenNet/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/GenNet/dut.sv, line:17:1, endln:23:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@dut
+  |vpiName:work@dut
   |vpiDefName:work@dut
   |vpiRefModule:
-  \_ref_module: work@prim_subreg_arb (m1), line:22:4, endln:22:6
+  \_ref_module: work@prim_subreg_arb (m1), line:19:2, endln:22:9
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/GenNet/dut.sv, line:17:1, endln:23:10
     |vpiName:m1
@@ -297,16 +299,16 @@ design: (unnamed)
 \_module_inst: work@prim_subreg_arb (work@prim_subreg_arb), file:${SURELOG_DIR}/tests/GenNet/dut.sv, line:1:1, endln:15:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@prim_subreg_arb
+  |vpiName:work@prim_subreg_arb
   |vpiParameter:
-  \_parameter: (work@prim_subreg_arb.DW), line:2:17, endln:2:19
+  \_parameter: (work@prim_subreg_arb.DW), line:2:17, endln:2:30
     |vpiParent:
     \_module_inst: work@prim_subreg_arb (work@prim_subreg_arb), file:${SURELOG_DIR}/tests/GenNet/dut.sv, line:1:1, endln:15:10
     |UINT:32
     |vpiTypespec:
-    \_ref_typespec: (work@prim_subreg_arb.DW)
+    \_ref_typespec: (work@prim_subreg_arb.DW), line:2:13, endln:2:16
       |vpiParent:
-      \_parameter: (work@prim_subreg_arb.DW), line:2:17, endln:2:19
+      \_parameter: (work@prim_subreg_arb.DW), line:2:17, endln:2:30
       |vpiFullName:work@prim_subreg_arb.DW
       |vpiActual:
       \_int_typespec: , line:2:13, endln:2:16
@@ -314,17 +316,10 @@ design: (unnamed)
     |vpiName:DW
     |vpiFullName:work@prim_subreg_arb.DW
   |vpiParameter:
-  \_parameter: (work@prim_subreg_arb.SWACCESS), line:3:17, endln:3:25
+  \_parameter: (work@prim_subreg_arb.SWACCESS), line:3:17, endln:3:32
     |vpiParent:
     \_module_inst: work@prim_subreg_arb (work@prim_subreg_arb), file:${SURELOG_DIR}/tests/GenNet/dut.sv, line:1:1, endln:15:10
     |STRING:RW
-    |vpiTypespec:
-    \_ref_typespec: (work@prim_subreg_arb.SWACCESS)
-      |vpiParent:
-      \_parameter: (work@prim_subreg_arb.SWACCESS), line:3:17, endln:3:25
-      |vpiFullName:work@prim_subreg_arb.SWACCESS
-      |vpiActual:
-      \_string_typespec: 
     |vpiName:SWACCESS
     |vpiFullName:work@prim_subreg_arb.SWACCESS
   |vpiParamAssign:
@@ -338,16 +333,9 @@ design: (unnamed)
       |vpiDecompile:32
       |vpiSize:64
       |UINT:32
-      |vpiTypespec:
-      \_ref_typespec: (work@prim_subreg_arb)
-        |vpiParent:
-        \_constant: , line:2:28, endln:2:30
-        |vpiFullName:work@prim_subreg_arb
-        |vpiActual:
-        \_int_typespec: , line:2:13, endln:2:16
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@prim_subreg_arb.DW), line:2:17, endln:2:19
+    \_parameter: (work@prim_subreg_arb.DW), line:2:17, endln:2:30
   |vpiParamAssign:
   \_param_assign: , line:3:17, endln:3:32
     |vpiParent:
@@ -359,52 +347,97 @@ design: (unnamed)
       |vpiDecompile:"RW"
       |vpiSize:16
       |STRING:RW
-      |vpiTypespec:
-      \_ref_typespec: (work@prim_subreg_arb)
-        |vpiParent:
-        \_constant: , line:3:28, endln:3:32
-        |vpiFullName:work@prim_subreg_arb
-        |vpiActual:
-        \_string_typespec: 
       |vpiConstType:6
     |vpiLhs:
-    \_parameter: (work@prim_subreg_arb.SWACCESS), line:3:17, endln:3:25
-  |vpiDefName:work@prim_subreg_arb
-  |vpiNet:
+    \_parameter: (work@prim_subreg_arb.SWACCESS), line:3:17, endln:3:32
+  |vpiTypedef:
+  \_int_typespec: , line:2:13, endln:2:16
+    |vpiParent:
+    \_module_inst: work@prim_subreg_arb (work@prim_subreg_arb), file:${SURELOG_DIR}/tests/GenNet/dut.sv, line:1:1, endln:15:10
+    |vpiSigned:1
+  |vpiImportTypespec:
+  \_int_typespec: , line:2:13, endln:2:16
+  |vpiImportTypespec:
   \_logic_net: (work@prim_subreg_arb.q), line:5:18, endln:5:19
     |vpiParent:
     \_module_inst: work@prim_subreg_arb (work@prim_subreg_arb), file:${SURELOG_DIR}/tests/GenNet/dut.sv, line:1:1, endln:15:10
     |vpiName:q
     |vpiFullName:work@prim_subreg_arb.q
+  |vpiImportTypespec:
+  \_logic_net: (work@prim_subreg_arb.unused_q_wo), line:10:12, endln:10:23
+    |vpiParent:
+    \_module_inst: work@prim_subreg_arb (work@prim_subreg_arb), file:${SURELOG_DIR}/tests/GenNet/dut.sv, line:1:1, endln:15:10
+    |vpiName:unused_q_wo
+    |vpiFullName:work@prim_subreg_arb.unused_q_wo
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@prim_subreg_arb.unused_q_ro), line:13:12, endln:13:23
+    |vpiParent:
+    \_module_inst: work@prim_subreg_arb (work@prim_subreg_arb), file:${SURELOG_DIR}/tests/GenNet/dut.sv, line:1:1, endln:15:10
+    |vpiName:unused_q_ro
+    |vpiFullName:work@prim_subreg_arb.unused_q_ro
+    |vpiNetType:1
+  |vpiDefName:work@prim_subreg_arb
+  |vpiNet:
+  \_logic_net: (work@prim_subreg_arb.q), line:5:18, endln:5:19
+  |vpiNet:
+  \_logic_net: (work@prim_subreg_arb.unused_q_wo), line:10:12, endln:10:23
+  |vpiNet:
+  \_logic_net: (work@prim_subreg_arb.unused_q_ro), line:13:12, endln:13:23
   |vpiPort:
-  \_port: (q), line:5:18, endln:5:19
+  \_port: (q), line:5:3, endln:5:19
     |vpiParent:
     \_module_inst: work@prim_subreg_arb (work@prim_subreg_arb), file:${SURELOG_DIR}/tests/GenNet/dut.sv, line:1:1, endln:15:10
     |vpiName:q
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@prim_subreg_arb.q.q), line:5:18, endln:5:19
+  |vpiContAssign:
+  \_cont_assign: , line:10:12, endln:10:27
+    |vpiParent:
+    \_module_inst: work@prim_subreg_arb (work@prim_subreg_arb), file:${SURELOG_DIR}/tests/GenNet/dut.sv, line:1:1, endln:15:10
+    |vpiRhs:
+    \_ref_obj: (work@prim_subreg_arb.q), line:10:26, endln:10:27
       |vpiParent:
-      \_port: (q), line:5:18, endln:5:19
+      \_cont_assign: , line:10:12, endln:10:27
       |vpiName:q
-      |vpiFullName:work@prim_subreg_arb.q.q
-      |vpiActual:
-      \_logic_net: (work@prim_subreg_arb.q), line:5:18, endln:5:19
-    |vpiTypedef:
-    \_ref_typespec: (work@prim_subreg_arb.q)
-      |vpiParent:
-      \_port: (q), line:5:18, endln:5:19
       |vpiFullName:work@prim_subreg_arb.q
       |vpiActual:
-      \_logic_typespec: , line:5:9, endln:5:17
+      \_logic_net: (work@prim_subreg_arb.q), line:5:18, endln:5:19
+    |vpiLhs:
+    \_ref_obj: (work@prim_subreg_arb.unused_q_wo), line:10:12, endln:10:23
+      |vpiParent:
+      \_module_inst: work@prim_subreg_arb (work@prim_subreg_arb), file:${SURELOG_DIR}/tests/GenNet/dut.sv, line:1:1, endln:15:10
+      |vpiName:unused_q_wo
+      |vpiFullName:work@prim_subreg_arb.unused_q_wo
+      |vpiActual:
+      \_logic_net: (work@prim_subreg_arb.unused_q_wo), line:10:12, endln:10:23
+  |vpiContAssign:
+  \_cont_assign: , line:13:12, endln:13:28
+    |vpiParent:
+    \_module_inst: work@prim_subreg_arb (work@prim_subreg_arb), file:${SURELOG_DIR}/tests/GenNet/dut.sv, line:1:1, endln:15:10
+    |vpiRhs:
+    \_ref_obj: (work@prim_subreg_arb.q), line:13:27, endln:13:28
+      |vpiParent:
+      \_cont_assign: , line:13:12, endln:13:28
+      |vpiName:q
+      |vpiFullName:work@prim_subreg_arb.q
+      |vpiActual:
+      \_logic_net: (work@prim_subreg_arb.q), line:5:18, endln:5:19
+    |vpiLhs:
+    \_ref_obj: (work@prim_subreg_arb.unused_q_ro), line:13:12, endln:13:23
+      |vpiParent:
+      \_module_inst: work@prim_subreg_arb (work@prim_subreg_arb), file:${SURELOG_DIR}/tests/GenNet/dut.sv, line:1:1, endln:15:10
+      |vpiName:unused_q_ro
+      |vpiFullName:work@prim_subreg_arb.unused_q_ro
+      |vpiActual:
+      \_logic_net: (work@prim_subreg_arb.unused_q_ro), line:13:12, endln:13:23
   |vpiGenStmt:
-  \_gen_if_else: 
+  \_gen_if_else: , line:8:3, endln:14:6
     |vpiParent:
     \_module_inst: work@prim_subreg_arb (work@prim_subreg_arb), file:${SURELOG_DIR}/tests/GenNet/dut.sv, line:1:1, endln:15:10
     |vpiCondition:
     \_operation: , line:8:7, endln:8:47
       |vpiParent:
-      \_gen_if_else: 
+      \_module_inst: work@prim_subreg_arb (work@prim_subreg_arb), file:${SURELOG_DIR}/tests/GenNet/dut.sv, line:1:1, endln:15:10
       |vpiOpType:27
       |vpiOperand:
       \_operation: , line:8:8, endln:8:24
@@ -417,6 +450,8 @@ design: (unnamed)
           \_operation: , line:8:8, endln:8:24
           |vpiName:SWACCESS
           |vpiFullName:work@prim_subreg_arb.SWACCESS
+          |vpiActual:
+          \_parameter: (work@prim_subreg_arb.SWACCESS), line:3:17, endln:3:32
         |vpiOperand:
         \_constant: , line:8:20, endln:8:24
           |vpiParent:
@@ -436,6 +471,8 @@ design: (unnamed)
           \_operation: , line:8:30, endln:8:46
           |vpiName:SWACCESS
           |vpiFullName:work@prim_subreg_arb.SWACCESS
+          |vpiActual:
+          \_parameter: (work@prim_subreg_arb.SWACCESS), line:3:17, endln:3:32
         |vpiOperand:
         \_constant: , line:8:42, endln:8:46
           |vpiParent:
@@ -445,59 +482,90 @@ design: (unnamed)
           |STRING:WO
           |vpiConstType:6
     |vpiStmt:
-    \_named_begin: (work@prim_subreg_arb.gen_w)
+    \_begin: (work@prim_subreg_arb.gen_w), line:8:49, endln:11:6
       |vpiParent:
-      \_gen_if_else: 
+      \_gen_if_else: , line:8:3, endln:14:6
       |vpiName:gen_w
       |vpiFullName:work@prim_subreg_arb.gen_w
+      |vpiVariables:
+      \_logic_var: (work@prim_subreg_arb.gen_w.unused_q_wo), line:9:5, endln:9:19
+        |vpiParent:
+        \_begin: (work@prim_subreg_arb.gen_w), line:8:49, endln:11:6
+        |vpiTypespec:
+        \_ref_typespec: (work@prim_subreg_arb.gen_w.unused_q_wo), line:9:5, endln:9:19
+          |vpiParent:
+          \_logic_var: (work@prim_subreg_arb.gen_w.unused_q_wo), line:9:5, endln:9:19
+          |vpiFullName:work@prim_subreg_arb.gen_w.unused_q_wo
+          |vpiActual:
+          \_logic_typespec: , line:9:5, endln:9:19
+        |vpiName:unused_q_wo
+        |vpiFullName:work@prim_subreg_arb.gen_w.unused_q_wo
+      |vpiReg:
+      \_logic_var: (work@prim_subreg_arb.gen_w.unused_q_wo), line:9:5, endln:9:19
+      |vpiTypedef:
+      \_logic_typespec: , line:9:5, endln:9:19
+        |vpiParent:
+        \_begin: (work@prim_subreg_arb.gen_w), line:8:49, endln:11:6
+        |vpiRange:
+        \_range: , line:9:11, endln:9:19
+          |vpiParent:
+          \_begin: (work@prim_subreg_arb.gen_w), line:8:49, endln:11:6
+          |vpiLeftRange:
+          \_operation: , line:9:12, endln:9:16
+            |vpiParent:
+            \_range: , line:9:11, endln:9:19
+            |vpiOpType:11
+            |vpiOperand:
+            \_ref_obj: (work@prim_subreg_arb.gen_w.DW), line:9:12, endln:9:14
+              |vpiParent:
+              \_operation: , line:9:12, endln:9:16
+              |vpiName:DW
+              |vpiFullName:work@prim_subreg_arb.gen_w.DW
+              |vpiActual:
+              \_parameter: (work@prim_subreg_arb.DW), line:2:17, endln:2:30
+            |vpiOperand:
+            \_constant: , line:9:15, endln:9:16
+              |vpiParent:
+              \_operation: , line:9:12, endln:9:16
+              |vpiDecompile:1
+              |vpiSize:64
+              |UINT:1
+              |vpiConstType:9
+          |vpiRightRange:
+          \_constant: , line:9:17, endln:9:18
+            |vpiParent:
+            \_range: , line:9:11, endln:9:19
+            |vpiDecompile:0
+            |vpiSize:64
+            |UINT:0
+            |vpiConstType:9
+      |vpiImportTypespec:
+      \_logic_typespec: , line:9:5, endln:9:19
+      |vpiImportTypespec:
+      \_logic_var: (work@prim_subreg_arb.gen_w.unused_q_wo), line:9:5, endln:9:19
       |vpiStmt:
       \_assignment: , line:9:20, endln:9:31
         |vpiParent:
-        \_named_begin: (work@prim_subreg_arb.gen_w)
+        \_begin: (work@prim_subreg_arb.gen_w), line:8:49, endln:11:6
         |vpiOpType:82
         |vpiBlocking:1
         |vpiLhs:
-        \_logic_var: (work@prim_subreg_arb.gen_w.unused_q_wo), line:9:20, endln:9:31
-          |vpiParent:
-          \_assignment: , line:9:20, endln:9:31
-          |vpiTypespec:
-          \_ref_typespec: (work@prim_subreg_arb.gen_w.unused_q_wo)
-            |vpiParent:
-            \_logic_var: (work@prim_subreg_arb.gen_w.unused_q_wo), line:9:20, endln:9:31
-            |vpiFullName:work@prim_subreg_arb.gen_w.unused_q_wo
-            |vpiActual:
-            \_logic_typespec: , line:9:5, endln:9:19
-          |vpiName:unused_q_wo
-          |vpiFullName:work@prim_subreg_arb.gen_w.unused_q_wo
+        \_logic_var: (work@prim_subreg_arb.gen_w.unused_q_wo), line:9:5, endln:9:19
       |vpiStmt:
       \_cont_assign: , line:10:12, endln:10:27
-        |vpiParent:
-        \_named_begin: (work@prim_subreg_arb.gen_w)
-        |vpiRhs:
-        \_ref_obj: (work@prim_subreg_arb.gen_w.q), line:10:26, endln:10:27
-          |vpiParent:
-          \_cont_assign: , line:10:12, endln:10:27
-          |vpiName:q
-          |vpiFullName:work@prim_subreg_arb.gen_w.q
-        |vpiLhs:
-        \_ref_obj: (work@prim_subreg_arb.gen_w.unused_q_wo), line:10:12, endln:10:23
-          |vpiParent:
-          \_cont_assign: , line:10:12, endln:10:27
-          |vpiName:unused_q_wo
-          |vpiFullName:work@prim_subreg_arb.gen_w.unused_q_wo
     |vpiElseStmt:
-    \_begin: (work@prim_subreg_arb)
+    \_begin: (work@prim_subreg_arb), line:11:12, endln:14:6
       |vpiParent:
-      \_gen_if_else: 
+      \_gen_if_else: , line:8:3, endln:14:6
       |vpiFullName:work@prim_subreg_arb
       |vpiStmt:
-      \_gen_if: , line:11:12, endln:11:14
+      \_gen_if: , line:11:12, endln:14:6
         |vpiParent:
-        \_begin: (work@prim_subreg_arb)
+        \_begin: (work@prim_subreg_arb), line:11:12, endln:14:6
         |vpiCondition:
         \_operation: , line:11:16, endln:11:32
           |vpiParent:
-          \_gen_if: , line:11:12, endln:11:14
+          \_module_inst: work@prim_subreg_arb (work@prim_subreg_arb), file:${SURELOG_DIR}/tests/GenNet/dut.sv, line:1:1, endln:15:10
           |vpiOpType:14
           |vpiOperand:
           \_ref_obj: (work@prim_subreg_arb.SWACCESS), line:11:16, endln:11:24
@@ -505,6 +573,8 @@ design: (unnamed)
             \_operation: , line:11:16, endln:11:32
             |vpiName:SWACCESS
             |vpiFullName:work@prim_subreg_arb.SWACCESS
+            |vpiActual:
+            \_parameter: (work@prim_subreg_arb.SWACCESS), line:3:17, endln:3:32
           |vpiOperand:
           \_constant: , line:11:28, endln:11:32
             |vpiParent:
@@ -514,148 +584,84 @@ design: (unnamed)
             |STRING:RO
             |vpiConstType:6
         |vpiStmt:
-        \_named_begin: (work@prim_subreg_arb.gen_ro)
+        \_begin: (work@prim_subreg_arb.gen_ro), line:11:34, endln:14:6
           |vpiParent:
-          \_gen_if: , line:11:12, endln:11:14
+          \_gen_if: , line:11:12, endln:14:6
           |vpiName:gen_ro
           |vpiFullName:work@prim_subreg_arb.gen_ro
+          |vpiVariables:
+          \_logic_var: (work@prim_subreg_arb.gen_ro.unused_q_ro), line:12:5, endln:12:19
+            |vpiParent:
+            \_begin: (work@prim_subreg_arb.gen_ro), line:11:34, endln:14:6
+            |vpiTypespec:
+            \_ref_typespec: (work@prim_subreg_arb.gen_ro.unused_q_ro), line:12:5, endln:12:19
+              |vpiParent:
+              \_logic_var: (work@prim_subreg_arb.gen_ro.unused_q_ro), line:12:5, endln:12:19
+              |vpiFullName:work@prim_subreg_arb.gen_ro.unused_q_ro
+              |vpiActual:
+              \_logic_typespec: , line:12:5, endln:12:19
+            |vpiName:unused_q_ro
+            |vpiFullName:work@prim_subreg_arb.gen_ro.unused_q_ro
+          |vpiReg:
+          \_logic_var: (work@prim_subreg_arb.gen_ro.unused_q_ro), line:12:5, endln:12:19
+          |vpiTypedef:
+          \_logic_typespec: , line:12:5, endln:12:19
+            |vpiParent:
+            \_begin: (work@prim_subreg_arb.gen_ro), line:11:34, endln:14:6
+            |vpiRange:
+            \_range: , line:12:11, endln:12:19
+              |vpiParent:
+              \_begin: (work@prim_subreg_arb.gen_ro), line:11:34, endln:14:6
+              |vpiLeftRange:
+              \_operation: , line:12:12, endln:12:16
+                |vpiParent:
+                \_range: , line:12:11, endln:12:19
+                |vpiOpType:11
+                |vpiOperand:
+                \_ref_obj: (work@prim_subreg_arb.gen_ro.DW), line:12:12, endln:12:14
+                  |vpiParent:
+                  \_operation: , line:12:12, endln:12:16
+                  |vpiName:DW
+                  |vpiFullName:work@prim_subreg_arb.gen_ro.DW
+                  |vpiActual:
+                  \_parameter: (work@prim_subreg_arb.DW), line:2:17, endln:2:30
+                |vpiOperand:
+                \_constant: , line:12:15, endln:12:16
+                  |vpiParent:
+                  \_operation: , line:12:12, endln:12:16
+                  |vpiDecompile:1
+                  |vpiSize:64
+                  |UINT:1
+                  |vpiConstType:9
+              |vpiRightRange:
+              \_constant: , line:12:17, endln:12:18
+                |vpiParent:
+                \_range: , line:12:11, endln:12:19
+                |vpiDecompile:0
+                |vpiSize:64
+                |UINT:0
+                |vpiConstType:9
+          |vpiImportTypespec:
+          \_logic_typespec: , line:12:5, endln:12:19
+          |vpiImportTypespec:
+          \_logic_var: (work@prim_subreg_arb.gen_ro.unused_q_ro), line:12:5, endln:12:19
           |vpiStmt:
           \_assignment: , line:12:20, endln:12:31
             |vpiParent:
-            \_named_begin: (work@prim_subreg_arb.gen_ro)
+            \_begin: (work@prim_subreg_arb.gen_ro), line:11:34, endln:14:6
             |vpiOpType:82
             |vpiBlocking:1
             |vpiLhs:
-            \_logic_var: (work@prim_subreg_arb.gen_ro.unused_q_ro), line:12:20, endln:12:31
-              |vpiParent:
-              \_assignment: , line:12:20, endln:12:31
-              |vpiTypespec:
-              \_ref_typespec: (work@prim_subreg_arb.gen_ro.unused_q_ro)
-                |vpiParent:
-                \_logic_var: (work@prim_subreg_arb.gen_ro.unused_q_ro), line:12:20, endln:12:31
-                |vpiFullName:work@prim_subreg_arb.gen_ro.unused_q_ro
-                |vpiActual:
-                \_logic_typespec: , line:12:5, endln:12:19
-              |vpiName:unused_q_ro
-              |vpiFullName:work@prim_subreg_arb.gen_ro.unused_q_ro
+            \_logic_var: (work@prim_subreg_arb.gen_ro.unused_q_ro), line:12:5, endln:12:19
           |vpiStmt:
           \_cont_assign: , line:13:12, endln:13:28
-            |vpiParent:
-            \_named_begin: (work@prim_subreg_arb.gen_ro)
-            |vpiRhs:
-            \_ref_obj: (work@prim_subreg_arb.gen_ro.q), line:13:27, endln:13:28
-              |vpiParent:
-              \_cont_assign: , line:13:12, endln:13:28
-              |vpiName:q
-              |vpiFullName:work@prim_subreg_arb.gen_ro.q
-            |vpiLhs:
-            \_ref_obj: (work@prim_subreg_arb.gen_ro.unused_q_ro), line:13:12, endln:13:23
-              |vpiParent:
-              \_cont_assign: , line:13:12, endln:13:28
-              |vpiName:unused_q_ro
-              |vpiFullName:work@prim_subreg_arb.gen_ro.unused_q_ro
-\_weaklyReferenced:
-\_int_typespec: , line:2:13, endln:2:16
-  |vpiParent:
-  \_parameter: (work@prim_subreg_arb.DW), line:2:17, endln:2:19
-  |vpiSigned:1
-\_string_typespec: 
-\_logic_typespec: , line:9:5, endln:9:19
-  |vpiRange:
-  \_range: , line:9:11, endln:9:19
-    |vpiParent:
-    \_logic_typespec: , line:9:5, endln:9:19
-    |vpiLeftRange:
-    \_operation: , line:9:12, endln:9:16
-      |vpiParent:
-      \_range: , line:9:11, endln:9:19
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (DW), line:9:12, endln:9:14
-        |vpiParent:
-        \_operation: , line:9:12, endln:9:16
-        |vpiName:DW
-      |vpiOperand:
-      \_constant: , line:9:15, endln:9:16
-        |vpiParent:
-        \_operation: , line:9:12, endln:9:16
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:9:17, endln:9:18
-      |vpiParent:
-      \_range: , line:9:11, endln:9:19
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:12:5, endln:12:19
-  |vpiRange:
-  \_range: , line:12:11, endln:12:19
-    |vpiParent:
-    \_logic_typespec: , line:12:5, endln:12:19
-    |vpiLeftRange:
-    \_operation: , line:12:12, endln:12:16
-      |vpiParent:
-      \_range: , line:12:11, endln:12:19
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (DW), line:12:12, endln:12:14
-        |vpiParent:
-        \_operation: , line:12:12, endln:12:16
-        |vpiName:DW
-      |vpiOperand:
-      \_constant: , line:12:15, endln:12:16
-        |vpiParent:
-        \_operation: , line:12:12, endln:12:16
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:12:17, endln:12:18
-      |vpiParent:
-      \_range: , line:12:11, endln:12:19
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:5:9, endln:5:17
-  |vpiRange:
-  \_range: , line:5:9, endln:5:17
-    |vpiParent:
-    \_logic_typespec: , line:5:9, endln:5:17
-    |vpiLeftRange:
-    \_operation: , line:5:10, endln:5:14
-      |vpiParent:
-      \_range: , line:5:9, endln:5:17
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (DW), line:5:10, endln:5:12
-        |vpiParent:
-        \_operation: , line:5:10, endln:5:14
-        |vpiName:DW
-      |vpiOperand:
-      \_constant: , line:5:13, endln:5:14
-        |vpiParent:
-        \_operation: , line:5:10, endln:5:14
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:5:15, endln:5:16
-      |vpiParent:
-      \_range: , line:5:9, endln:5:17
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/GenNet/dut.sv | ${SURELOG_DIR}/build/regression/GenNet/roundtrip/dut_000.sv | 17 | 23 |
+============================== End RoundTrip Results ==============================

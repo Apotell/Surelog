@@ -36,9 +36,9 @@
 [INF:CP0303] ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/rtl/omsp_watchdog.v:48:1: Compile module "work@omsp_watchdog".
 [INF:CP0303] ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/rtl/openMSP430.v:48:1: Compile module "work@openMSP430".
 [INF:CP0303] ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/sim/bench.v:7:1: Compile module "work@testbench".
-[INF:CP0302] Compile class "work@mailbox".
-[INF:CP0302] Compile class "work@process".
-[INF:CP0302] Compile class "work@semaphore".
+[INF:CP0302] Compile class "builtin::mailbox".
+[INF:CP0302] Compile class "builtin::process".
+[INF:CP0302] Compile class "builtin::semaphore".
 [NTE:CP0309] ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/rtl/omsp_alu.v:51:5: Implicit port type (wire) for "alu_out",
 there are 3 more instances of this message.
 [NTE:CP0309] ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/rtl/omsp_clock_module.v:51:5: Implicit port type (wire) for "aclk",
@@ -62,15 +62,16 @@ there are 25 more instances of this message.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 always                                               113
+array_net                                              4
 assignment                                           486
 begin                                                 23
 bit_select                                           272
 case_item                                             70
 case_stmt                                             13
 class_defn                                             8
-class_typespec                                         4
-class_var                                              3
-constant                                            1973
+class_typespec                                         1
+class_var                                              1
+constant                                            3001
 cont_assign                                          111
 delay_control                                          6
 design                                                 1
@@ -85,27 +86,31 @@ forever_stmt                                           1
 function                                              12
 if_else                                              165
 if_stmt                                               78
-include_file_info                                     39
 initial                                                3
-int_typespec                                         101
+int_typespec                                           9
 int_var                                                4
 integer_typespec                                       3
+integer_var                                            3
 io_decl                                               16
-logic_net                                            957
-logic_typespec                                       964
-logic_var                                              7
+logic_net                                            953
+logic_typespec                                       683
+logic_var                                              2
 module_inst                                           15
-operation                                            965
+named_event                                            1
+operation                                           1006
 package                                                1
 param_assign                                         107
 parameter                                            107
 part_select                                           45
 port                                                 644
-range                                                513
+preproc_macro_definition                            1729
+preproc_macro_instance                               387
+range                                               1017
 ref_module                                            16
-ref_obj                                             2315
-ref_typespec                                        1142
+ref_obj                                             1936
+ref_typespec                                         696
 ref_var                                                2
+source_file                                           54
 sys_func_call                                         12
 task                                                   9
 while_stmt                                             1
@@ -119,11 +124,31 @@ while_stmt                                             1
 
 ============================== Begin Linting Results ==============================
 [LINT]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/sim/bench.v:160:1: Non synthesizable construct,
+[LINT]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/sim/bench.v:208:5: Non synthesizable construct, output_eof
+[LINT]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/sim/bench.v:218:2: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/sim/bench.v:122:3: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/sim/bench.v:124:3: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/sim/bench.v:126:9: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/sim/bench.v:128:3: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/sim/bench.v:130:3: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/sim/bench.v:208:5: Non synthesizable construct, output_eof
-[LINT]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/sim/bench.v:218:2: Non synthesizable construct,
 ============================== End Linting Results ==============================
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/rtl/omsp_alu.v            | ${SURELOG_DIR}/build/regression/YosysBigSimOpenMsp/roundtrip/omsp_alu_000.v            | 112 | 253 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/rtl/omsp_clock_module.v   | ${SURELOG_DIR}/build/regression/YosysBigSimOpenMsp/roundtrip/omsp_clock_module_000.v   | 629 | 1053 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/rtl/omsp_dbg.v            | ${SURELOG_DIR}/build/regression/YosysBigSimOpenMsp/roundtrip/omsp_dbg_000.v            | 466 | 859 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/rtl/omsp_dbg_uart.v       | ${SURELOG_DIR}/build/regression/YosysBigSimOpenMsp/roundtrip/omsp_dbg_uart_000.v       | 129 | 293 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/rtl/omsp_execution_unit.v | ${SURELOG_DIR}/build/regression/YosysBigSimOpenMsp/roundtrip/omsp_execution_unit_000.v | 244 | 418 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/rtl/omsp_frontend.v       | ${SURELOG_DIR}/build/regression/YosysBigSimOpenMsp/roundtrip/omsp_frontend_000.v       | 459 | 961 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/rtl/omsp_mem_backbone.v   | ${SURELOG_DIR}/build/regression/YosysBigSimOpenMsp/roundtrip/omsp_mem_backbone_000.v   | 138 | 270 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/rtl/omsp_multiplier.v     | ${SURELOG_DIR}/build/regression/YosysBigSimOpenMsp/roundtrip/omsp_multiplier_000.v     | 196 | 417 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/rtl/omsp_register_file.v  | ${SURELOG_DIR}/build/regression/YosysBigSimOpenMsp/roundtrip/omsp_register_file_000.v  | 387 | 613 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/rtl/omsp_sfr.v            | ${SURELOG_DIR}/build/regression/YosysBigSimOpenMsp/roundtrip/omsp_sfr_000.v            | 180 | 368 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/rtl/omsp_sync_cell.v      | ${SURELOG_DIR}/build/regression/YosysBigSimOpenMsp/roundtrip/omsp_sync_cell_000.v      | 20 | 79 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/rtl/omsp_sync_reset.v     | ${SURELOG_DIR}/build/regression/YosysBigSimOpenMsp/roundtrip/omsp_sync_reset_000.v     | 18 | 77 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/rtl/omsp_watchdog.v       | ${SURELOG_DIR}/build/regression/YosysBigSimOpenMsp/roundtrip/omsp_watchdog_000.v       | 293 | 551 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/rtl/openMSP430.v          | ${SURELOG_DIR}/build/regression/YosysBigSimOpenMsp/roundtrip/openMSP430_000.v          | 453 | 602 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/rtl/openMSP430_defines.v  | ${SURELOG_DIR}/build/regression/YosysBigSimOpenMsp/roundtrip/openMSP430_defines_000.v  | 11 | 46 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/sim/bench.v               | ${SURELOG_DIR}/build/regression/YosysBigSimOpenMsp/roundtrip/bench_000.v               | 135 | 230 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysBigSim/openmsp430/sim/sieve.v               | ${SURELOG_DIR}/build/regression/YosysBigSimOpenMsp/roundtrip/sieve_000.v               | 118 | 118 |
+============================== End RoundTrip Results ==============================

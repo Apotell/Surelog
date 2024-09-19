@@ -206,72 +206,129 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-array_typespec                                         4
-constant                                              20
+array_typespec                                         3
+constant                                              18
 design                                                 1
 enum_const                                             3
 enum_typespec                                          1
-int_typespec                                           2
+int_typespec                                           1
 logic_net                                              1
 logic_typespec                                         2
 module_inst                                            2
 packed_array_typespec                                  4
-range                                                 10
-ref_typespec                                           6
+range                                                  9
+ref_typespec                                           4
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnpackedTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/UnpackedTypespec/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/UnpackedTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv, line:1:1, endln:23:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
+  |vpiName:work@top
   |vpiTypedef:
-  \_array_typespec: (logic_7_0_t), line:7:11, endln:7:40
+  \_int_typespec: , line:4:11, endln:4:14
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv, line:1:1, endln:23:10
-    |vpiName:logic_7_0_t
-    |vpiInstance:
+    |vpiSigned:1
+  |vpiTypedef:
+  \_logic_typespec: , line:7:11, endln:7:22
+    |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv, line:1:1, endln:23:10
     |vpiRange:
-    \_range: , line:7:35, endln:7:40
+    \_range: , line:7:17, endln:7:22
       |vpiParent:
-      \_array_typespec: (logic_7_0_t), line:7:11, endln:7:40
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv, line:1:1, endln:23:10
       |vpiLeftRange:
-      \_constant: , line:7:36, endln:7:37
+      \_constant: , line:7:18, endln:7:19
         |vpiParent:
-        \_range: , line:7:35, endln:7:40
-        |vpiDecompile:7
+        \_range: , line:7:17, endln:7:22
+        |vpiDecompile:1
         |vpiSize:64
-        |UINT:7
+        |UINT:1
         |vpiConstType:9
       |vpiRightRange:
-      \_constant: , line:7:38, endln:7:39
+      \_constant: , line:7:20, endln:7:21
         |vpiParent:
-        \_range: , line:7:35, endln:7:40
+        \_range: , line:7:17, endln:7:22
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-    |vpiElemTypespec:
-    \_ref_typespec: (work@top.logic_7_0_t)
+  |vpiTypedef:
+  \_logic_typespec: , line:10:17, endln:10:28
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv, line:1:1, endln:23:10
+    |vpiRange:
+    \_range: , line:10:23, endln:10:28
       |vpiParent:
-      \_array_typespec: (logic_7_0_t), line:7:11, endln:7:40
-      |vpiFullName:work@top.logic_7_0_t
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv, line:1:1, endln:23:10
+      |vpiLeftRange:
+      \_constant: , line:10:24, endln:10:25
+        |vpiParent:
+        \_range: , line:10:23, endln:10:28
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:10:26, endln:10:27
+        |vpiParent:
+        \_range: , line:10:23, endln:10:28
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_enum_typespec: (unit_type_t), line:10:12, endln:14:17
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv, line:1:1, endln:23:10
+    |vpiName:unit_type_t
+    |vpiBaseTypespec:
+    \_ref_typespec: (work@top.unit_type_t), line:10:12, endln:14:17
+      |vpiParent:
+      \_enum_typespec: (unit_type_t), line:10:12, endln:14:17
+      |vpiFullName:work@top.unit_type_t
       |vpiActual:
-      \_logic_typespec: , line:7:11, endln:7:22
+      \_logic_typespec: , line:10:17, endln:10:28
+    |vpiEnumConst:
+    \_enum_const: (DISABLED), line:11:5, endln:11:13
+      |vpiParent:
+      \_enum_typespec: (unit_type_t), line:10:12, endln:14:17
+      |vpiName:DISABLED
+      |INT:0
+      |vpiDecompile:0
+      |vpiSize:2
+    |vpiEnumConst:
+    \_enum_const: (PARALLEL), line:12:5, endln:12:13
+      |vpiParent:
+      \_enum_typespec: (unit_type_t), line:10:12, endln:14:17
+      |vpiName:PARALLEL
+      |INT:1
+      |vpiDecompile:1
+      |vpiSize:2
+    |vpiEnumConst:
+    \_enum_const: (MERGED), line:13:5, endln:13:11
+      |vpiParent:
+      \_enum_typespec: (unit_type_t), line:10:12, endln:14:17
+      |vpiName:MERGED
+      |INT:2
+      |vpiDecompile:2
+      |vpiSize:2
   |vpiTypedef:
   \_array_typespec: (triple), line:4:11, endln:4:27
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv, line:1:1, endln:23:10
     |vpiName:triple
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv, line:1:1, endln:23:10
     |vpiRange:
     \_range: , line:4:22, endln:4:27
       |vpiParent:
@@ -293,151 +350,39 @@ design: (unnamed)
         |UINT:3
         |vpiConstType:9
     |vpiElemTypespec:
-    \_ref_typespec: (work@top.triple)
+    \_ref_typespec: (work@top.triple), line:4:11, endln:4:14
       |vpiParent:
       \_array_typespec: (triple), line:4:11, endln:4:27
       |vpiFullName:work@top.triple
       |vpiActual:
       \_int_typespec: , line:4:11, endln:4:14
-  |vpiTypedef:
-  \_enum_typespec: (unit_type_t), line:10:4, endln:14:17
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv, line:1:1, endln:23:10
-    |vpiName:unit_type_t
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv, line:1:1, endln:23:10
-    |vpiBaseTypespec:
-    \_ref_typespec: (work@top.unit_type_t)
-      |vpiParent:
-      \_enum_typespec: (unit_type_t), line:10:4, endln:14:17
-      |vpiFullName:work@top.unit_type_t
-      |vpiActual:
-      \_logic_typespec: , line:10:17, endln:10:28
-    |vpiEnumConst:
-    \_enum_const: (DISABLED), line:11:5, endln:11:13
-      |vpiParent:
-      \_enum_typespec: (unit_type_t), line:10:4, endln:14:17
-      |vpiName:DISABLED
-      |INT:0
-      |vpiDecompile:0
-      |vpiSize:2
-    |vpiEnumConst:
-    \_enum_const: (PARALLEL), line:12:5, endln:12:13
-      |vpiParent:
-      \_enum_typespec: (unit_type_t), line:10:4, endln:14:17
-      |vpiName:PARALLEL
-      |INT:1
-      |vpiDecompile:1
-      |vpiSize:2
-    |vpiEnumConst:
-    \_enum_const: (MERGED), line:13:5, endln:13:11
-      |vpiParent:
-      \_enum_typespec: (unit_type_t), line:10:4, endln:14:17
-      |vpiName:MERGED
-      |INT:2
-      |vpiDecompile:2
-      |vpiSize:2
-  |vpiDefName:work@top
-  |vpiNet:
+  |vpiImportTypespec:
+  \_int_typespec: , line:4:11, endln:4:14
+  |vpiImportTypespec:
+  \_logic_typespec: , line:7:11, endln:7:22
+  |vpiImportTypespec:
+  \_logic_typespec: , line:10:17, endln:10:28
+  |vpiImportTypespec:
+  \_enum_typespec: (unit_type_t), line:10:12, endln:14:17
+  |vpiImportTypespec:
+  \_array_typespec: (triple), line:4:11, endln:4:27
+  |vpiImportTypespec:
   \_logic_net: (work@top.b), line:5:10, endln:5:11
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv, line:1:1, endln:23:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.b)
+    \_ref_typespec: (work@top.b.b), line:5:3, endln:5:9
       |vpiParent:
       \_logic_net: (work@top.b), line:5:10, endln:5:11
-      |vpiFullName:work@top.b
+      |vpiName:b
+      |vpiFullName:work@top.b.b
       |vpiActual:
       \_array_typespec: (triple), line:4:11, endln:4:27
     |vpiName:b
     |vpiFullName:work@top.b
-\_weaklyReferenced:
-\_int_typespec: , line:4:11, endln:4:14
-  |vpiSigned:1
-\_logic_typespec: , line:7:11, endln:7:22
-  |vpiRange:
-  \_range: , line:7:17, endln:7:22
-    |vpiParent:
-    \_logic_typespec: , line:7:11, endln:7:22
-    |vpiLeftRange:
-    \_constant: , line:7:18, endln:7:19
-      |vpiParent:
-      \_range: , line:7:17, endln:7:22
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:7:20, endln:7:21
-      |vpiParent:
-      \_range: , line:7:17, endln:7:22
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:10:17, endln:10:28
-  |vpiRange:
-  \_range: , line:10:23, endln:10:28
-    |vpiParent:
-    \_logic_typespec: , line:10:17, endln:10:28
-    |vpiLeftRange:
-    \_constant: , line:10:24, endln:10:25
-      |vpiParent:
-      \_range: , line:10:23, endln:10:28
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:10:26, endln:10:27
-      |vpiParent:
-      \_range: , line:10:23, endln:10:28
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_array_typespec: (triple), line:4:11, endln:4:27
-  |vpiName:triple
-  |vpiTypedefAlias:
-  \_ref_typespec: (triple)
-    |vpiParent:
-    \_array_typespec: (triple), line:4:11, endln:4:27
-    |vpiFullName:triple
-    |vpiActual:
-    \_array_typespec: (triple), line:4:11, endln:4:27
-  |vpiInstance:
-  \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv, line:1:1, endln:23:10
-  |vpiRange:
-  \_range: , line:4:22, endln:4:27
-    |vpiParent:
-    \_array_typespec: (triple), line:4:11, endln:4:27
-    |vpiLeftRange:
-    \_constant: , line:4:23, endln:4:24
-      |vpiParent:
-      \_range: , line:4:22, endln:4:27
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:4:25, endln:4:26
-      |vpiParent:
-      \_range: , line:4:22, endln:4:27
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-  |vpiElemTypespec:
-  \_ref_typespec: (triple)
-    |vpiParent:
-    \_array_typespec: (triple), line:4:11, endln:4:27
-    |vpiFullName:triple
-    |vpiActual:
-    \_int_typespec: , line:4:11, endln:4:14
-\_int_typespec: , line:4:11, endln:4:14
-  |vpiParent:
-  \_ref_typespec: (triple)
-  |vpiSigned:1
+  |vpiDefName:work@top
+  |vpiNet:
+  \_logic_net: (work@top.b), line:5:10, endln:5:11
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -446,5 +391,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv | ${SURELOG_DIR}/build/regression/UnpackedTypespec/roundtrip/dut_000.sv | 6 | 23 |
+[roundtrip]: ${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv | ${SURELOG_DIR}/build/regression/UnpackedTypespec/roundtrip/dut_000.sv | 9 | 23 |
 ============================== End RoundTrip Results ==============================

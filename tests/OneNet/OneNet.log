@@ -8,78 +8,110 @@
 cont_assign                                            1
 design                                                 1
 logic_net                                              2
-logic_typespec                                         2
+logic_typespec                                         4
 module_inst                                            1
 port                                                   2
-ref_obj                                                4
-ref_typespec                                           2
+ref_obj                                                2
+ref_typespec                                           4
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/OneNet/slpp_unit/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/OneNet/slpp_unit/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/OneNet/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/OneNet/dut.v
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNet/dut.v, line:1:1, endln:3:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@dut
-  |vpiDefName:work@dut
-  |vpiNet:
+  |vpiName:work@dut
+  |vpiTypedef:
+  \_logic_typespec: , line:1:19, endln:1:23
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNet/dut.v, line:1:1, endln:3:10
+  |vpiTypedef:
+  \_logic_typespec: , line:1:34, endln:1:37
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNet/dut.v, line:1:1, endln:3:10
+  |vpiTypedef:
+  \_logic_typespec: , line:1:19, endln:1:23
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNet/dut.v, line:1:1, endln:3:10
+  |vpiTypedef:
+  \_logic_typespec: , line:1:34, endln:1:37
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNet/dut.v, line:1:1, endln:3:10
+  |vpiImportTypespec:
+  \_logic_typespec: , line:1:19, endln:1:23
+  |vpiImportTypespec:
   \_logic_net: (work@dut.i), line:1:24, endln:1:25
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNet/dut.v, line:1:1, endln:3:10
+    |vpiTypespec:
+    \_ref_typespec: (work@dut.i.i), line:1:19, endln:1:23
+      |vpiParent:
+      \_logic_net: (work@dut.i), line:1:24, endln:1:25
+      |vpiName:i
+      |vpiFullName:work@dut.i.i
+      |vpiActual:
+      \_logic_typespec: , line:1:19, endln:1:23
     |vpiName:i
     |vpiFullName:work@dut.i
     |vpiNetType:1
-  |vpiNet:
+  |vpiImportTypespec:
+  \_logic_typespec: , line:1:34, endln:1:37
+  |vpiImportTypespec:
   \_logic_net: (work@dut.o), line:1:38, endln:1:39
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNet/dut.v, line:1:1, endln:3:10
+    |vpiTypespec:
+    \_ref_typespec: (work@dut.o.o), line:1:34, endln:1:37
+      |vpiParent:
+      \_logic_net: (work@dut.o), line:1:38, endln:1:39
+      |vpiName:o
+      |vpiFullName:work@dut.o.o
+      |vpiActual:
+      \_logic_typespec: , line:1:34, endln:1:37
     |vpiName:o
     |vpiFullName:work@dut.o
     |vpiNetType:48
+  |vpiImportTypespec:
+  \_logic_typespec: , line:1:19, endln:1:23
+  |vpiImportTypespec:
+  \_logic_typespec: , line:1:34, endln:1:37
+  |vpiDefName:work@dut
+  |vpiNet:
+  \_logic_net: (work@dut.i), line:1:24, endln:1:25
+  |vpiNet:
+  \_logic_net: (work@dut.o), line:1:38, endln:1:39
   |vpiPort:
-  \_port: (i), line:1:24, endln:1:25
+  \_port: (i), line:1:13, endln:1:25
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNet/dut.v, line:1:1, endln:3:10
     |vpiName:i
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@dut.i.i), line:1:24, endln:1:25
-      |vpiParent:
-      \_port: (i), line:1:24, endln:1:25
-      |vpiName:i
-      |vpiFullName:work@dut.i.i
-      |vpiActual:
-      \_logic_net: (work@dut.i), line:1:24, endln:1:25
     |vpiTypedef:
-    \_ref_typespec: (work@dut.i)
+    \_ref_typespec: (work@dut.i), line:1:19, endln:1:23
       |vpiParent:
-      \_port: (i), line:1:24, endln:1:25
+      \_port: (i), line:1:13, endln:1:25
       |vpiFullName:work@dut.i
       |vpiActual:
       \_logic_typespec: , line:1:19, endln:1:23
   |vpiPort:
-  \_port: (o), line:1:38, endln:1:39
+  \_port: (o), line:1:27, endln:1:39
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNet/dut.v, line:1:1, endln:3:10
     |vpiName:o
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@dut.o.o), line:1:38, endln:1:39
-      |vpiParent:
-      \_port: (o), line:1:38, endln:1:39
-      |vpiName:o
-      |vpiFullName:work@dut.o.o
-      |vpiActual:
-      \_logic_net: (work@dut.o), line:1:38, endln:1:39
     |vpiTypedef:
-    \_ref_typespec: (work@dut.o)
+    \_ref_typespec: (work@dut.o), line:1:34, endln:1:37
       |vpiParent:
-      \_port: (o), line:1:38, endln:1:39
+      \_port: (o), line:1:27, endln:1:39
       |vpiFullName:work@dut.o
       |vpiActual:
       \_logic_typespec: , line:1:34, endln:1:37
@@ -98,14 +130,11 @@ design: (unnamed)
     |vpiLhs:
     \_ref_obj: (work@dut.o), line:2:10, endln:2:11
       |vpiParent:
-      \_cont_assign: , line:2:10, endln:2:15
+      \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNet/dut.v, line:1:1, endln:3:10
       |vpiName:o
       |vpiFullName:work@dut.o
       |vpiActual:
       \_logic_net: (work@dut.o), line:1:38, endln:1:39
-\_weaklyReferenced:
-\_logic_typespec: , line:1:19, endln:1:23
-\_logic_typespec: , line:1:34, endln:1:37
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -114,5 +143,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/OneNet/dut.v | ${SURELOG_DIR}/build/regression/OneNet/roundtrip/dut_000.v | 1 | 3 |
+[roundtrip]: ${SURELOG_DIR}/tests/OneNet/dut.v | ${SURELOG_DIR}/build/regression/OneNet/roundtrip/dut_000.v | 2 | 3 |
 ============================== End RoundTrip Results ==============================

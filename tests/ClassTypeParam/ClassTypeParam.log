@@ -9,28 +9,34 @@
 [INF:CP0302] ${SURELOG_DIR}/tests/ClassTypeParam/dut.sv:7:1: Compile class "work@uvm_resource_db".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-class_defn                                             5
-class_typespec                                         2
+class_defn                                             4
+class_typespec                                         1
+class_var                                              1
 design                                                 1
+extends                                                1
 function                                               1
 int_typespec                                           4
 io_decl                                                1
-logic_net                                              3
+logic_var                                              2
+method_func_call                                       2
 module_inst                                            1
-param_assign                                           2
-ref_obj                                                1
-ref_typespec                                           9
-string_typespec                                        2
-type_parameter                                         6
-unsupported_typespec                                   1
+ref_typespec                                           7
+source_file                                            1
+string_typespec                                        1
+type_parameter                                         4
+unsupported_typespec                                   2
 === UHDM Object Stats End ===
+[ERR:IG0809] ${SURELOG_DIR}/tests/ClassTypeParam/dut.sv:16:55: Object 22 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassTypeParam/slpp_unit/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ClassTypeParam/slpp_unit/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ClassTypeParam/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallClasses:
 \_class_defn: (work@uvm_config_db), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:16:1, endln:17:9
   |vpiParent:
@@ -43,7 +49,7 @@ design: (unnamed)
     |vpiName:T
     |vpiFullName:work@uvm_config_db::T
     |vpiTypespec:
-    \_ref_typespec: (work@uvm_config_db::T)
+    \_ref_typespec: (work@uvm_config_db::T), line:16:29, endln:16:32
       |vpiParent:
       \_type_parameter: (work@uvm_config_db::T), line:16:27, endln:16:28
       |vpiFullName:work@uvm_config_db::T
@@ -56,14 +62,46 @@ design: (unnamed)
     |vpiName:T2
     |vpiFullName:work@uvm_config_db::T2
     |vpiTypespec:
-    \_ref_typespec: (work@uvm_config_db::T2)
+    \_ref_typespec: (work@uvm_config_db::T2), line:16:42, endln:16:45
       |vpiParent:
       \_type_parameter: (work@uvm_config_db::T2), line:16:39, endln:16:41
       |vpiFullName:work@uvm_config_db::T2
       |vpiActual:
       \_int_typespec: , line:16:42, endln:16:45
+  |vpiTypedef:
+  \_int_typespec: , line:16:29, endln:16:32
+    |vpiParent:
+    \_class_defn: (work@uvm_config_db), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:16:1, endln:17:9
+    |vpiSigned:1
+  |vpiTypedef:
+  \_type_parameter: (work@uvm_config_db::T), line:16:27, endln:16:28
+  |vpiTypedef:
+  \_int_typespec: , line:16:42, endln:16:45
+    |vpiParent:
+    \_class_defn: (work@uvm_config_db), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:16:1, endln:17:9
+    |vpiSigned:1
+  |vpiTypedef:
+  \_type_parameter: (work@uvm_config_db::T2), line:16:39, endln:16:41
+  |vpiImportTypespec:
+  \_int_typespec: , line:16:29, endln:16:32
+  |vpiImportTypespec:
+  \_type_parameter: (work@uvm_config_db::T), line:16:27, endln:16:28
+  |vpiImportTypespec:
+  \_int_typespec: , line:16:42, endln:16:45
+  |vpiImportTypespec:
+  \_type_parameter: (work@uvm_config_db::T2), line:16:39, endln:16:41
+  |vpiExtends:
+  \_extends: , line:16:55, endln:16:70
+    |vpiParent:
+    \_class_defn: (work@uvm_config_db), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:16:1, endln:17:9
+    |vpiClassTypespec:
+    \_ref_typespec: (work@uvm_config_db::uvm_resource_db), line:16:55, endln:16:70
+      |vpiParent:
+      \_extends: , line:16:55, endln:16:70
+      |vpiName:uvm_resource_db
+      |vpiFullName:work@uvm_config_db::uvm_resource_db
 |uhdmallClasses:
-\_class_defn: (work@uvm_object), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:1:9, endln:2:9
+\_class_defn: (work@uvm_object), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:1:1, endln:2:9
   |vpiParent:
   \_design: (unnamed)
   |vpiName:work@uvm_object
@@ -80,17 +118,38 @@ design: (unnamed)
     |vpiName:T
     |vpiFullName:work@uvm_resource::T
     |vpiTypespec:
-    \_ref_typespec: (work@uvm_resource::T)
+    \_ref_typespec: (work@uvm_resource::T), line:4:29, endln:4:32
       |vpiParent:
       \_type_parameter: (work@uvm_resource::T), line:4:27, endln:4:28
       |vpiFullName:work@uvm_resource::T
       |vpiActual:
       \_int_typespec: , line:4:29, endln:4:32
+  |vpiTypedef:
+  \_int_typespec: , line:4:29, endln:4:32
+    |vpiParent:
+    \_class_defn: (work@uvm_resource), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:4:1, endln:5:9
+    |vpiSigned:1
+  |vpiTypedef:
+  \_type_parameter: (work@uvm_resource::T), line:4:27, endln:4:28
+  |vpiImportTypespec:
+  \_int_typespec: , line:4:29, endln:4:32
+  |vpiImportTypespec:
+  \_type_parameter: (work@uvm_resource::T), line:4:27, endln:4:28
 |uhdmallClasses:
 \_class_defn: (work@uvm_resource_db), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:7:1, endln:14:9
   |vpiParent:
   \_design: (unnamed)
   |vpiName:work@uvm_resource_db
+  |vpiVariables:
+  \_logic_var: (work@uvm_resource_db::rsrc), line:10:9, endln:10:13
+    |vpiParent:
+    \_class_defn: (work@uvm_resource_db), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:7:1, endln:14:9
+    |vpiName:rsrc
+    |vpiFullName:work@uvm_resource_db::rsrc
+    |vpiAutomatic:1
+    |vpiVisibility:1
+  |vpiReg:
+  \_logic_var: (work@uvm_resource_db::rsrc), line:10:9, endln:10:13
   |vpiParameter:
   \_type_parameter: (work@uvm_resource_db::T), line:7:30, endln:7:31
     |vpiParent:
@@ -98,159 +157,146 @@ design: (unnamed)
     |vpiName:T
     |vpiFullName:work@uvm_resource_db::T
     |vpiTypespec:
-    \_ref_typespec: (work@uvm_resource_db::T)
+    \_ref_typespec: (work@uvm_resource_db::T), line:7:32, endln:7:35
       |vpiParent:
       \_type_parameter: (work@uvm_resource_db::T), line:7:30, endln:7:31
       |vpiFullName:work@uvm_resource_db::T
       |vpiActual:
       \_int_typespec: , line:7:32, endln:7:35
-  |vpiMethod:
-  \_function: (work@uvm_resource_db::check_all_sva_passed), line:11:2, endln:11:9
+  |vpiInternalScope:
+  \_function: (work@uvm_resource_db::check_all_sva_passed), line:11:2, endln:12:13
     |vpiParent:
     \_class_defn: (work@uvm_resource_db), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:7:1, endln:14:9
     |vpiName:check_all_sva_passed
     |vpiFullName:work@uvm_resource_db::check_all_sva_passed
+    |vpiTypedef:
+    \_string_typespec: , line:11:45, endln:11:51
+      |vpiParent:
+      \_function: (work@uvm_resource_db::check_all_sva_passed), line:11:2, endln:12:13
+    |vpiImportTypespec:
+    \_string_typespec: , line:11:45, endln:11:51
     |vpiMethod:1
     |vpiVisibility:1
     |vpiVirtual:1
     |vpiIODecl:
-    \_io_decl: (a_error_msg), line:11:52, endln:11:63
+    \_io_decl: (a_error_msg), line:11:45, endln:11:63
       |vpiParent:
-      \_function: (work@uvm_resource_db::check_all_sva_passed), line:11:2, endln:11:9
+      \_function: (work@uvm_resource_db::check_all_sva_passed), line:11:2, endln:12:13
       |vpiDirection:1
       |vpiName:a_error_msg
       |vpiTypedef:
-      \_ref_typespec: (work@uvm_resource_db::check_all_sva_passed::a_error_msg)
+      \_ref_typespec: (work@uvm_resource_db::check_all_sva_passed::a_error_msg::string), line:11:45, endln:11:51
         |vpiParent:
-        \_io_decl: (a_error_msg), line:11:52, endln:11:63
-        |vpiFullName:work@uvm_resource_db::check_all_sva_passed::a_error_msg
+        \_io_decl: (a_error_msg), line:11:45, endln:11:63
+        |vpiName:string
+        |vpiFullName:work@uvm_resource_db::check_all_sva_passed::a_error_msg::string
         |vpiActual:
         \_string_typespec: , line:11:45, endln:11:51
+  |vpiTypedef:
+  \_int_typespec: , line:7:32, endln:7:35
+    |vpiParent:
+    \_class_defn: (work@uvm_resource_db), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:7:1, endln:14:9
+    |vpiSigned:1
+  |vpiTypedef:
+  \_type_parameter: (work@uvm_resource_db::T), line:7:30, endln:7:31
+  |vpiTypedef:
+  \_unsupported_typespec: (rsrc_t), line:10:2, endln:10:8
+    |vpiParent:
+    \_class_defn: (work@uvm_resource_db), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:7:1, endln:14:9
+    |vpiName:rsrc_t
+  |vpiImportTypespec:
+  \_int_typespec: , line:7:32, endln:7:35
+  |vpiImportTypespec:
+  \_type_parameter: (work@uvm_resource_db::T), line:7:30, endln:7:31
+  |vpiImportTypespec:
+  \_function: (work@uvm_resource_db::check_all_sva_passed), line:11:2, endln:12:13
+  |vpiImportTypespec:
+  \_unsupported_typespec: (rsrc_t), line:10:2, endln:10:8
+  |vpiImportTypespec:
+  \_logic_var: (work@uvm_resource_db::rsrc), line:10:9, endln:10:13
+  |vpiMethod:
+  \_function: (work@uvm_resource_db::check_all_sva_passed), line:11:2, endln:12:13
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:22:1, endln:27:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiNet:
-  \_logic_net: (work@top.misc1), line:24:25, endln:24:30
+  |vpiName:work@top
+  |vpiVariables:
+  \_logic_var: (work@top.misc1), line:24:25, endln:24:30
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:22:1, endln:27:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.misc1)
-      |vpiParent:
-      \_logic_net: (work@top.misc1), line:24:25, endln:24:30
-      |vpiFullName:work@top.misc1
-      |vpiActual:
-      \_unsupported_typespec: (m_uvm_config_obj_misc), line:24:3, endln:24:36
     |vpiName:misc1
     |vpiFullName:work@top.misc1
-  |vpiNet:
-  \_logic_net: (work@top.misc2), line:26:38, endln:26:43
+    |vpiVisibility:1
+    |vpiExpr:
+    \_method_func_call: (new), line:24:33, endln:24:36
+      |vpiParent:
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:22:1, endln:27:10
+      |vpiName:new
+  |vpiVariables:
+  \_class_var: (work@top.misc2), line:26:38, endln:26:43
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:22:1, endln:27:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.misc2)
+    \_ref_typespec: (work@top.misc2.uvm_config_db), line:26:3, endln:26:37
       |vpiParent:
-      \_logic_net: (work@top.misc2), line:26:38, endln:26:43
-      |vpiFullName:work@top.misc2
+      \_class_var: (work@top.misc2), line:26:38, endln:26:43
+      |vpiName:uvm_config_db
+      |vpiFullName:work@top.misc2.uvm_config_db
       |vpiActual:
-      \_class_typespec: (uvm_config_db), line:26:3, endln:26:49
+      \_class_typespec: (uvm_config_db), line:26:3, endln:26:16
     |vpiName:misc2
     |vpiFullName:work@top.misc2
-  |vpiNet:
-  \_logic_net: (uvm_object), line:26:18, endln:26:28
-    |vpiName:uvm_object
-    |vpiNetType:1
-\_weaklyReferenced:
-\_int_typespec: , line:16:29, endln:16:32
-  |vpiParent:
-  \_type_parameter: (work@uvm_config_db::T), line:16:27, endln:16:28
-  |vpiSigned:1
-\_int_typespec: , line:16:42, endln:16:45
-  |vpiParent:
-  \_type_parameter: (work@uvm_config_db::T2), line:16:39, endln:16:41
-  |vpiSigned:1
-\_int_typespec: , line:4:29, endln:4:32
-  |vpiParent:
-  \_type_parameter: (work@uvm_resource::T), line:4:27, endln:4:28
-  |vpiSigned:1
-\_int_typespec: , line:7:32, endln:7:35
-  |vpiParent:
-  \_type_parameter: (work@uvm_resource_db::T), line:7:30, endln:7:31
-  |vpiSigned:1
-\_string_typespec: , line:11:45, endln:11:51
-\_unsupported_typespec: (m_uvm_config_obj_misc), line:24:3, endln:24:36
-  |vpiName:m_uvm_config_obj_misc
-\_class_typespec: (uvm_config_db), line:26:3, endln:26:49
-  |vpiName:uvm_config_db
-  |vpiParameter:
-  \_type_parameter: (uvm_config_db.T)
-    |vpiParent:
-    \_class_typespec: (uvm_config_db), line:26:3, endln:26:49
-    |vpiName:T
-    |vpiFullName:uvm_config_db.T
-    |vpiTypespec:
-    \_ref_typespec: (uvm_config_db.T)
+    |vpiVisibility:1
+    |vpiExpr:
+    \_method_func_call: (new), line:26:46, endln:26:49
       |vpiParent:
-      \_type_parameter: (uvm_config_db.T)
-      |vpiFullName:uvm_config_db.T
-      |vpiActual:
-      \_class_typespec: (uvm_object), line:26:16, endln:26:37
-  |vpiParameter:
-  \_type_parameter: (uvm_config_db.T2), line:16:39, endln:16:41
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:22:1, endln:27:10
+      |vpiName:new
+  |vpiReg:
+  \_logic_var: (work@top.misc1), line:24:25, endln:24:30
+  |vpiTypedef:
+  \_unsupported_typespec: (m_uvm_config_obj_misc), line:24:3, endln:24:24
     |vpiParent:
-    \_class_typespec: (uvm_config_db), line:26:3, endln:26:49
-    |vpiName:T2
-    |vpiFullName:uvm_config_db.T2
-    |vpiTypespec:
-    \_ref_typespec: (uvm_config_db.T2)
-      |vpiParent:
-      \_type_parameter: (uvm_config_db.T2), line:16:39, endln:16:41
-      |vpiFullName:uvm_config_db.T2
-      |vpiActual:
-      \_string_typespec: , line:26:30, endln:26:36
-  |vpiParamAssign:
-  \_param_assign: 
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:22:1, endln:27:10
+    |vpiName:m_uvm_config_obj_misc
+  |vpiTypedef:
+  \_class_typespec: (uvm_config_db), line:26:3, endln:26:16
     |vpiParent:
-    \_class_typespec: (uvm_config_db), line:26:3, endln:26:49
-    |vpiRhs:
-    \_type_parameter: (uvm_config_db.T)
-    |vpiLhs:
-    \_type_parameter: (work@uvm_config_db::T), line:16:27, endln:16:28
-  |vpiParamAssign:
-  \_param_assign: , line:16:39, endln:16:41
-    |vpiParent:
-    \_class_typespec: (uvm_config_db), line:26:3, endln:26:49
-    |vpiRhs:
-    \_type_parameter: (uvm_config_db.T2), line:16:39, endln:16:41
-    |vpiLhs:
-    \_type_parameter: (work@uvm_config_db::T2), line:16:39, endln:16:41
-  |vpiClassDefn:
-  \_class_defn: (work@uvm_config_db), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:16:1, endln:17:9
-\_class_typespec: (uvm_object), line:26:16, endln:26:37
-  |vpiParent:
-  \_type_parameter: (uvm_config_db.T)
-  |vpiName:uvm_object
-  |vpiClassDefn:
-  \_class_defn: (work@uvm_object), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:1:9, endln:2:9
-\_string_typespec: , line:26:30, endln:26:36
-  |vpiParent:
-  \_type_parameter: (uvm_config_db.T2), line:16:39, endln:16:41
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:22:1, endln:27:10
+    |vpiName:uvm_config_db
+    |vpiClassDefn:
+    \_class_defn: (work@uvm_config_db), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:16:1, endln:17:9
+  |vpiImportTypespec:
+  \_unsupported_typespec: (m_uvm_config_obj_misc), line:24:3, endln:24:24
+  |vpiImportTypespec:
+  \_logic_var: (work@top.misc1), line:24:25, endln:24:30
+  |vpiImportTypespec:
+  \_class_typespec: (uvm_config_db), line:26:3, endln:26:16
+  |vpiImportTypespec:
+  \_class_var: (work@top.misc2), line:26:38, endln:26:43
+  |vpiDefName:work@top
+  |vpiSysTaskCall:
+  \_method_func_call: (new), line:24:33, endln:24:36
+  |vpiSysTaskCall:
+  \_method_func_call: (new), line:26:46, endln:26:49
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 1
 [   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
-[LINT]: ${SURELOG_DIR}/tests/ClassTypeParam/dut.sv:16:1: Non synthesizable construct, work@uvm_config_db
-[LINT]: ${SURELOG_DIR}/tests/ClassTypeParam/dut.sv:1:9: Non synthesizable construct, work@uvm_object
+[LINT]: ${SURELOG_DIR}/tests/ClassTypeParam/dut.sv:1:1: Non synthesizable construct, work@uvm_object
 [LINT]: ${SURELOG_DIR}/tests/ClassTypeParam/dut.sv:4:1: Non synthesizable construct, work@uvm_resource
 [LINT]: ${SURELOG_DIR}/tests/ClassTypeParam/dut.sv:7:1: Non synthesizable construct, work@uvm_resource_db
+[LINT]: ${SURELOG_DIR}/tests/ClassTypeParam/dut.sv:16:55: Non synthesizable construct,
+[LINT]: ${SURELOG_DIR}/tests/ClassTypeParam/dut.sv:16:1: Non synthesizable construct, work@uvm_config_db
+[LINT]: ${SURELOG_DIR}/tests/ClassTypeParam/dut.sv:26:46: Non synthesizable construct, new
+[LINT]: ${SURELOG_DIR}/tests/ClassTypeParam/dut.sv:24:33: Non synthesizable construct, new
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ClassTypeParam/dut.sv | ${SURELOG_DIR}/build/regression/ClassTypeParam/roundtrip/dut_000.sv | 11 | 27 |
+[roundtrip]: ${SURELOG_DIR}/tests/ClassTypeParam/dut.sv | ${SURELOG_DIR}/build/regression/ClassTypeParam/roundtrip/dut_000.sv | 12 | 27 |
 ============================== End RoundTrip Results ==============================

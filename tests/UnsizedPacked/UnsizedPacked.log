@@ -49,78 +49,97 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/UnsizedPacked/dut.sv:1:1: Compile module "work@test".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                               2
+array_net                                              1
+constant                                               6
 design                                                 1
 logic_net                                              2
 logic_typespec                                         2
 module_inst                                            1
-range                                                  1
+range                                                  3
 ref_typespec                                           2
+source_file                                            1
 === UHDM Object Stats End ===
 [ERR:UH0719] ${SURELOG_DIR}/tests/UnsizedPacked/dut.sv:5:5: Illegal dynamic packed dimension "illegal".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnsizedPacked/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/UnsizedPacked/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/UnsizedPacked/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/UnsizedPacked/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/UnsizedPacked/dut.sv, line:1:1, endln:7:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@test
-  |vpiDefName:work@test
-  |vpiNet:
-  \_logic_net: (work@test.legal), line:3:5, endln:3:10
+  |vpiName:work@test
+  |vpiTypedef:
+  \_logic_typespec: , line:3:1, endln:3:4
+    |vpiParent:
+    \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/UnsizedPacked/dut.sv, line:1:1, endln:7:10
+  |vpiTypedef:
+  \_logic_typespec: , line:5:1, endln:5:7
+    |vpiParent:
+    \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/UnsizedPacked/dut.sv, line:1:1, endln:7:10
+    |vpiRange:
+    \_range: , line:5:5, endln:5:7
+      |vpiParent:
+      \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/UnsizedPacked/dut.sv, line:1:1, endln:7:10
+      |vpiLeftRange:
+      \_constant: , line:5:5, endln:5:6
+        |vpiParent:
+        \_range: , line:5:5, endln:5:7
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:5:5, endln:5:6
+        |vpiParent:
+        \_range: , line:5:5, endln:5:7
+        |vpiDecompile:unsized
+        |STRING:unsized
+        |vpiConstType:6
+  |vpiImportTypespec:
+  \_logic_typespec: , line:3:1, endln:3:4
+  |vpiImportTypespec:
+  \_logic_net: (work@test), line:3:1, endln:3:14
     |vpiParent:
     \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/UnsizedPacked/dut.sv, line:1:1, endln:7:10
     |vpiTypespec:
-    \_ref_typespec: (work@test.legal)
+    \_ref_typespec: (work@test.legal), line:3:1, endln:3:4
       |vpiParent:
-      \_logic_net: (work@test.legal), line:3:5, endln:3:10
+      \_logic_net: (work@test), line:3:1, endln:3:14
+      |vpiName:legal
       |vpiFullName:work@test.legal
       |vpiActual:
-      \_logic_typespec: , line:3:1, endln:3:13
-    |vpiName:legal
-    |vpiFullName:work@test.legal
+      \_logic_typespec: , line:3:1, endln:3:4
+    |vpiFullName:work@test
     |vpiNetType:48
-  |vpiNet:
+  |vpiImportTypespec:
+  \_logic_typespec: , line:5:1, endln:5:7
+  |vpiImportTypespec:
   \_logic_net: (work@test.illegal), line:5:8, endln:5:15
     |vpiParent:
     \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/UnsizedPacked/dut.sv, line:1:1, endln:7:10
     |vpiTypespec:
-    \_ref_typespec: (work@test.illegal)
+    \_ref_typespec: (work@test.illegal.illegal), line:5:1, endln:5:7
       |vpiParent:
       \_logic_net: (work@test.illegal), line:5:8, endln:5:15
-      |vpiFullName:work@test.illegal
+      |vpiName:illegal
+      |vpiFullName:work@test.illegal.illegal
       |vpiActual:
       \_logic_typespec: , line:5:1, endln:5:7
     |vpiName:illegal
     |vpiFullName:work@test.illegal
     |vpiNetType:48
-\_weaklyReferenced:
-\_logic_typespec: , line:3:1, endln:3:13
-\_logic_typespec: , line:5:1, endln:5:7
-  |vpiRange:
-  \_range: , line:5:5, endln:5:7
-    |vpiParent:
-    \_logic_typespec: , line:5:1, endln:5:7
-    |vpiLeftRange:
-    \_constant: , line:5:5, endln:5:6
-      |vpiParent:
-      \_range: , line:5:5, endln:5:7
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:5:5, endln:5:6
-      |vpiParent:
-      \_range: , line:5:5, endln:5:7
-      |vpiDecompile:unsized
-      |STRING:unsized
-      |vpiConstType:6
+  |vpiDefName:work@test
+  |vpiNet:
+  \_logic_net: (work@test), line:3:1, endln:3:14
+  |vpiNet:
+  \_logic_net: (work@test.illegal), line:5:8, endln:5:15
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -130,8 +149,9 @@ design: (unnamed)
 
 ============================== Begin Linting Results ==============================
 [LINT]: ${SURELOG_DIR}/tests/UnsizedPacked/dut.sv:5:5: Illegal Packed dimension, illegal
+[LINT]: ${SURELOG_DIR}/tests/UnsizedPacked/dut.sv:5:5: Illegal Packed dimension, illegal
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/UnsizedPacked/dut.sv | ${SURELOG_DIR}/build/regression/UnsizedPacked/roundtrip/dut_000.sv | 2 | 7 |
+[roundtrip]: ${SURELOG_DIR}/tests/UnsizedPacked/dut.sv | ${SURELOG_DIR}/build/regression/UnsizedPacked/roundtrip/dut_000.sv | 4 | 7 |
 ============================== End RoundTrip Results ==============================

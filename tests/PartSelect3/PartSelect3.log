@@ -97,44 +97,118 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/PartSelect3/dut.sv:1:1: Compile module "work@t".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              11
+constant                                              17
 cont_assign                                            1
 design                                                 1
-logic_net                                              1
 logic_typespec                                         1
+logic_var                                              1
 module_inst                                            1
 part_select                                            1
-range                                                  3
+range                                                  6
 ref_typespec                                           1
+source_file                                            1
 var_select                                             1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PartSelect3/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PartSelect3/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/PartSelect3/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/PartSelect3/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@t (work@t), file:${SURELOG_DIR}/tests/PartSelect3/dut.sv, line:1:1, endln:4:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@t
-  |vpiDefName:work@t
-  |vpiNet:
-  \_logic_net: (work@t.state_d), line:2:23, endln:2:30
+  |vpiName:work@t
+  |vpiVariables:
+  \_logic_var: (work@t.state_d), line:2:23, endln:2:30
     |vpiParent:
     \_module_inst: work@t (work@t), file:${SURELOG_DIR}/tests/PartSelect3/dut.sv, line:1:1, endln:4:10
     |vpiTypespec:
-    \_ref_typespec: (work@t.state_d)
+    \_ref_typespec: (work@t.state_d), line:2:1, endln:2:22
       |vpiParent:
-      \_logic_net: (work@t.state_d), line:2:23, endln:2:30
+      \_logic_var: (work@t.state_d), line:2:23, endln:2:30
       |vpiFullName:work@t.state_d
       |vpiActual:
-      \_logic_typespec: , line:2:1, endln:2:12
+      \_logic_typespec: , line:2:1, endln:2:22
     |vpiName:state_d
     |vpiFullName:work@t.state_d
-    |vpiNetType:36
+    |vpiVisibility:1
+  |vpiReg:
+  \_logic_var: (work@t.state_d), line:2:23, endln:2:30
+  |vpiTypedef:
+  \_logic_typespec: , line:2:1, endln:2:22
+    |vpiParent:
+    \_module_inst: work@t (work@t), file:${SURELOG_DIR}/tests/PartSelect3/dut.sv, line:1:1, endln:4:10
+    |vpiRange:
+    \_range: , line:2:7, endln:2:12
+      |vpiParent:
+      \_module_inst: work@t (work@t), file:${SURELOG_DIR}/tests/PartSelect3/dut.sv, line:1:1, endln:4:10
+      |vpiLeftRange:
+      \_constant: , line:2:8, endln:2:9
+        |vpiParent:
+        \_range: , line:2:7, endln:2:12
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:2:10, endln:2:11
+        |vpiParent:
+        \_range: , line:2:7, endln:2:12
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiRange:
+    \_range: , line:2:12, endln:2:17
+      |vpiParent:
+      \_module_inst: work@t (work@t), file:${SURELOG_DIR}/tests/PartSelect3/dut.sv, line:1:1, endln:4:10
+      |vpiLeftRange:
+      \_constant: , line:2:13, endln:2:14
+        |vpiParent:
+        \_range: , line:2:12, endln:2:17
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:2:15, endln:2:16
+        |vpiParent:
+        \_range: , line:2:12, endln:2:17
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiRange:
+    \_range: , line:2:17, endln:2:22
+      |vpiParent:
+      \_module_inst: work@t (work@t), file:${SURELOG_DIR}/tests/PartSelect3/dut.sv, line:1:1, endln:4:10
+      |vpiLeftRange:
+      \_constant: , line:2:18, endln:2:19
+        |vpiParent:
+        \_range: , line:2:17, endln:2:22
+        |vpiDecompile:7
+        |vpiSize:64
+        |UINT:7
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:2:20, endln:2:21
+        |vpiParent:
+        \_range: , line:2:17, endln:2:22
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_logic_typespec: , line:2:1, endln:2:22
+  |vpiImportTypespec:
+  \_logic_var: (work@t.state_d), line:2:23, endln:2:30
+  |vpiDefName:work@t
   |vpiContAssign:
   \_cont_assign: , line:3:8, endln:3:40
     |vpiParent:
@@ -150,13 +224,13 @@ design: (unnamed)
     |vpiLhs:
     \_var_select: (work@t.state_d), line:3:8, endln:3:26
       |vpiParent:
-      \_cont_assign: , line:3:8, endln:3:40
+      \_module_inst: work@t (work@t), file:${SURELOG_DIR}/tests/PartSelect3/dut.sv, line:1:1, endln:4:10
       |vpiName:state_d
       |vpiFullName:work@t.state_d
       |vpiIndex:
       \_constant: , line:3:16, endln:3:17
         |vpiParent:
-        \_var_select: (work@t.state_d), line:3:8, endln:3:26
+        \_module_inst: work@t (work@t), file:${SURELOG_DIR}/tests/PartSelect3/dut.sv, line:1:1, endln:4:10
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
@@ -164,93 +238,37 @@ design: (unnamed)
       |vpiIndex:
       \_constant: , line:3:19, endln:3:20
         |vpiParent:
-        \_var_select: (work@t.state_d), line:3:8, endln:3:26
+        \_module_inst: work@t (work@t), file:${SURELOG_DIR}/tests/PartSelect3/dut.sv, line:1:1, endln:4:10
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
         |vpiConstType:9
       |vpiIndex:
-      \_part_select: state_d (work@t.state_d.state_d), line:3:22, endln:3:25
+      \_part_select: state_d (work@t.state_d), line:3:22, endln:3:25
         |vpiParent:
-        \_var_select: (work@t.state_d), line:3:8, endln:3:26
+        \_module_inst: work@t (work@t), file:${SURELOG_DIR}/tests/PartSelect3/dut.sv, line:1:1, endln:4:10
         |vpiName:state_d
-        |vpiFullName:work@t.state_d.state_d
+        |vpiFullName:work@t.state_d
         |vpiDefName:state_d
+        |vpiActual:
+        \_logic_var: (work@t.state_d), line:2:23, endln:2:30
         |vpiConstantSelect:1
         |vpiLeftRange:
         \_constant: , line:3:22, endln:3:23
+          |vpiParent:
+          \_part_select: state_d (work@t.state_d), line:3:22, endln:3:25
           |vpiDecompile:7
           |vpiSize:64
           |UINT:7
           |vpiConstType:9
         |vpiRightRange:
         \_constant: , line:3:24, endln:3:25
+          |vpiParent:
+          \_part_select: state_d (work@t.state_d), line:3:22, endln:3:25
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
           |vpiConstType:9
-\_weaklyReferenced:
-\_logic_typespec: , line:2:1, endln:2:12
-  |vpiRange:
-  \_range: , line:2:7, endln:2:12
-    |vpiParent:
-    \_logic_typespec: , line:2:1, endln:2:12
-    |vpiLeftRange:
-    \_constant: , line:2:8, endln:2:9
-      |vpiParent:
-      \_range: , line:2:7, endln:2:12
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:10, endln:2:11
-      |vpiParent:
-      \_range: , line:2:7, endln:2:12
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiRange:
-  \_range: , line:2:12, endln:2:17
-    |vpiParent:
-    \_logic_typespec: , line:2:1, endln:2:12
-    |vpiLeftRange:
-    \_constant: , line:2:13, endln:2:14
-      |vpiParent:
-      \_range: , line:2:12, endln:2:17
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:15, endln:2:16
-      |vpiParent:
-      \_range: , line:2:12, endln:2:17
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiRange:
-  \_range: , line:2:17, endln:2:22
-    |vpiParent:
-    \_logic_typespec: , line:2:1, endln:2:12
-    |vpiLeftRange:
-    \_constant: , line:2:18, endln:2:19
-      |vpiParent:
-      \_range: , line:2:17, endln:2:22
-      |vpiDecompile:7
-      |vpiSize:64
-      |UINT:7
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:20, endln:2:21
-      |vpiParent:
-      \_range: , line:2:17, endln:2:22
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -259,5 +277,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PartSelect3/dut.sv | ${SURELOG_DIR}/build/regression/PartSelect3/roundtrip/dut_000.sv | 1 | 4 |
+[roundtrip]: ${SURELOG_DIR}/tests/PartSelect3/dut.sv | ${SURELOG_DIR}/build/regression/PartSelect3/roundtrip/dut_000.sv | 3 | 4 |
 ============================== End RoundTrip Results ==============================

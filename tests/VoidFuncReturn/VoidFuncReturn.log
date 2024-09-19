@@ -125,64 +125,40 @@ operation                                              1
 ref_obj                                                4
 ref_typespec                                           2
 return_stmt                                            1
+source_file                                            1
 sys_func_call                                          2
 === UHDM Object Stats End ===
 [ERR:UH0715] ${SURELOG_DIR}/tests/VoidFuncReturn/dut.sv:5:8: Void function "add" returns a value.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/VoidFuncReturn/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/VoidFuncReturn/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/VoidFuncReturn/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/VoidFuncReturn/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/VoidFuncReturn/dut.sv, line:1:1, endln:11:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiTaskFunc:
+  |vpiName:work@top
+  |vpiInternalScope:
   \_function: (work@top.add), line:3:1, endln:6:12
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/VoidFuncReturn/dut.sv, line:1:1, endln:11:10
     |vpiName:add
     |vpiFullName:work@top.add
-    |vpiVisibility:1
-    |vpiIODecl:
-    \_io_decl: (a), line:3:23, endln:3:24
-      |vpiParent:
-      \_function: (work@top.add), line:3:1, endln:6:12
-      |vpiDirection:1
-      |vpiName:a
-      |vpiTypedef:
-      \_ref_typespec: (work@top.add.a)
-        |vpiParent:
-        \_io_decl: (a), line:3:23, endln:3:24
-        |vpiFullName:work@top.add.a
-        |vpiActual:
-        \_int_typespec: , line:3:19, endln:3:22
-    |vpiIODecl:
-    \_io_decl: (b), line:3:30, endln:3:31
-      |vpiParent:
-      \_function: (work@top.add), line:3:1, endln:6:12
-      |vpiDirection:1
-      |vpiName:b
-      |vpiTypedef:
-      \_ref_typespec: (work@top.add.b)
-        |vpiParent:
-        \_io_decl: (b), line:3:30, endln:3:31
-        |vpiFullName:work@top.add.b
-        |vpiActual:
-        \_int_typespec: , line:3:26, endln:3:29
-    |vpiStmt:
-    \_begin: (work@top.add), line:5:1, endln:5:14
+    |vpiInternalScope:
+    \_begin: (work@top.add)
       |vpiParent:
       \_function: (work@top.add), line:3:1, endln:6:12
       |vpiFullName:work@top.add
       |vpiStmt:
       \_sys_func_call: ($display), line:4:1, endln:4:25
         |vpiParent:
-        \_begin: (work@top.add), line:5:1, endln:5:14
+        \_begin: (work@top.add)
         |vpiArgument:
         \_constant: , line:4:10, endln:4:18
           |vpiParent:
@@ -198,7 +174,7 @@ design: (unnamed)
           |vpiName:a
           |vpiFullName:work@top.add.a
           |vpiActual:
-          \_io_decl: (a), line:3:23, endln:3:24
+          \_io_decl: (a), line:3:19, endln:3:24
         |vpiArgument:
         \_ref_obj: (work@top.add.b), line:4:23, endln:4:24
           |vpiParent:
@@ -206,16 +182,16 @@ design: (unnamed)
           |vpiName:b
           |vpiFullName:work@top.add.b
           |vpiActual:
-          \_io_decl: (b), line:3:30, endln:3:31
+          \_io_decl: (b), line:3:26, endln:3:31
         |vpiName:$display
       |vpiStmt:
-      \_return_stmt: , line:5:1, endln:5:7
+      \_return_stmt: , line:5:1, endln:5:13
         |vpiParent:
-        \_begin: (work@top.add), line:5:1, endln:5:14
+        \_begin: (work@top.add)
         |vpiCondition:
         \_operation: , line:5:8, endln:5:13
           |vpiParent:
-          \_return_stmt: , line:5:1, endln:5:7
+          \_return_stmt: , line:5:1, endln:5:13
           |vpiOpType:24
           |vpiOperand:
           \_ref_obj: (work@top.add.a), line:5:8, endln:5:9
@@ -224,7 +200,7 @@ design: (unnamed)
             |vpiName:a
             |vpiFullName:work@top.add.a
             |vpiActual:
-            \_io_decl: (a), line:3:23, endln:3:24
+            \_io_decl: (a), line:3:19, endln:3:24
           |vpiOperand:
           \_ref_obj: (work@top.add.b), line:5:12, endln:5:13
             |vpiParent:
@@ -232,9 +208,55 @@ design: (unnamed)
             |vpiName:b
             |vpiFullName:work@top.add.b
             |vpiActual:
-            \_io_decl: (b), line:3:30, endln:3:31
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/VoidFuncReturn/dut.sv, line:1:1, endln:11:10
+            \_io_decl: (b), line:3:26, endln:3:31
+    |vpiTypedef:
+    \_int_typespec: , line:3:19, endln:3:22
+      |vpiParent:
+      \_function: (work@top.add), line:3:1, endln:6:12
+      |vpiSigned:1
+    |vpiTypedef:
+    \_int_typespec: , line:3:26, endln:3:29
+      |vpiParent:
+      \_function: (work@top.add), line:3:1, endln:6:12
+      |vpiSigned:1
+    |vpiImportTypespec:
+    \_int_typespec: , line:3:19, endln:3:22
+    |vpiImportTypespec:
+    \_int_typespec: , line:3:26, endln:3:29
+    |vpiVisibility:1
+    |vpiIODecl:
+    \_io_decl: (a), line:3:19, endln:3:24
+      |vpiParent:
+      \_function: (work@top.add), line:3:1, endln:6:12
+      |vpiDirection:1
+      |vpiName:a
+      |vpiTypedef:
+      \_ref_typespec: (work@top.add.a), line:3:19, endln:3:22
+        |vpiParent:
+        \_io_decl: (a), line:3:19, endln:3:24
+        |vpiFullName:work@top.add.a
+        |vpiActual:
+        \_int_typespec: , line:3:19, endln:3:22
+    |vpiIODecl:
+    \_io_decl: (b), line:3:26, endln:3:31
+      |vpiParent:
+      \_function: (work@top.add), line:3:1, endln:6:12
+      |vpiDirection:1
+      |vpiName:b
+      |vpiTypedef:
+      \_ref_typespec: (work@top.add.b), line:3:26, endln:3:29
+        |vpiParent:
+        \_io_decl: (b), line:3:26, endln:3:31
+        |vpiFullName:work@top.add.b
+        |vpiActual:
+        \_int_typespec: , line:3:26, endln:3:29
+    |vpiStmt:
+    \_begin: (work@top.add)
+  |vpiImportTypespec:
+  \_function: (work@top.add), line:3:1, endln:6:12
+  |vpiDefName:work@top
+  |vpiTaskFunc:
+  \_function: (work@top.add), line:3:1, endln:6:12
   |vpiProcess:
   \_initial: , line:8:1, endln:9:29
     |vpiParent:
@@ -275,11 +297,6 @@ design: (unnamed)
         |vpiFunction:
         \_function: (work@top.add), line:3:1, endln:6:12
       |vpiName:$display
-\_weaklyReferenced:
-\_int_typespec: , line:3:19, endln:3:22
-  |vpiSigned:1
-\_int_typespec: , line:3:26, endln:3:29
-  |vpiSigned:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -289,8 +306,10 @@ design: (unnamed)
 
 ============================== Begin Linting Results ==============================
 [LINT]: ${SURELOG_DIR}/tests/VoidFuncReturn/dut.sv:5:8: Return value void function, add
+[LINT]: ${SURELOG_DIR}/tests/VoidFuncReturn/dut.sv:5:8: Return value void function, add
+[LINT]: ${SURELOG_DIR}/tests/VoidFuncReturn/dut.sv:5:8: Return value void function, add
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/VoidFuncReturn/dut.sv | ${SURELOG_DIR}/build/regression/VoidFuncReturn/roundtrip/dut_000.sv | 1 | 11 |
+[roundtrip]: ${SURELOG_DIR}/tests/VoidFuncReturn/dut.sv | ${SURELOG_DIR}/build/regression/VoidFuncReturn/roundtrip/dut_000.sv | 3 | 11 |
 ============================== End RoundTrip Results ==============================

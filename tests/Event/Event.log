@@ -32,38 +32,32 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 design                                                 1
 event_typespec                                         1
-logic_net                                              1
 module_inst                                            1
-ref_typespec                                           1
+named_event                                            1
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Event/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/Event/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/Event/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/Event/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@t (work@t), file:${SURELOG_DIR}/tests/Event/dut.sv, line:1:1, endln:3:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@t
-  |vpiDefName:work@t
-  |vpiNet:
-  \_logic_net: (work@t.e), line:2:11, endln:2:12
+  |vpiName:work@t
+  |vpiTypedef:
+  \_event_typespec: , line:2:5, endln:2:10
     |vpiParent:
     \_module_inst: work@t (work@t), file:${SURELOG_DIR}/tests/Event/dut.sv, line:1:1, endln:3:10
-    |vpiTypespec:
-    \_ref_typespec: (work@t.e)
-      |vpiParent:
-      \_logic_net: (work@t.e), line:2:11, endln:2:12
-      |vpiFullName:work@t.e
-      |vpiActual:
-      \_event_typespec: , line:2:5, endln:2:10
-    |vpiName:e
-    |vpiFullName:work@t.e
-\_weaklyReferenced:
-\_event_typespec: , line:2:5, endln:2:10
+  |vpiImportTypespec:
+  \_event_typespec: , line:2:5, endln:2:10
+  |vpiDefName:work@t
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -76,5 +70,5 @@ design: (unnamed)
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/Event/dut.sv | ${SURELOG_DIR}/build/regression/Event/roundtrip/dut_000.sv | 1 | 3 |
+[roundtrip]: ${SURELOG_DIR}/tests/Event/dut.sv | ${SURELOG_DIR}/build/regression/Event/roundtrip/dut_000.sv | 3 | 3 |
 ============================== End RoundTrip Results ==============================

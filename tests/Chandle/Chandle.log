@@ -31,50 +31,55 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 chandle_typespec                                       1
+chandle_var                                            1
 design                                                 1
-logic_net                                              1
 module_inst                                            1
-ref_typespec                                           1
+source_file                                            1
 === UHDM Object Stats End ===
+[ERR:IG0809] ${SURELOG_DIR}/tests/Chandle/dut.sv:2:12: Object 5 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Chandle/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/Chandle/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/Chandle/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/Chandle/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/Chandle/dut.sv, line:1:1, endln:3:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@dut
-  |vpiDefName:work@dut
-  |vpiNet:
-  \_logic_net: (work@dut.c), line:2:12, endln:2:13
+  |vpiName:work@dut
+  |vpiVariables:
+  \_chandle_var: (work@dut.c), line:2:12, endln:2:13
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/Chandle/dut.sv, line:1:1, endln:3:10
-    |vpiTypespec:
-    \_ref_typespec: (work@dut.c)
-      |vpiParent:
-      \_logic_net: (work@dut.c), line:2:12, endln:2:13
-      |vpiFullName:work@dut.c
-      |vpiActual:
-      \_chandle_typespec: , line:2:4, endln:2:11
     |vpiName:c
     |vpiFullName:work@dut.c
-\_weaklyReferenced:
-\_chandle_typespec: , line:2:4, endln:2:11
+    |vpiVisibility:1
+  |vpiTypedef:
+  \_chandle_typespec: , line:2:4, endln:2:11
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/Chandle/dut.sv, line:1:1, endln:3:10
+  |vpiImportTypespec:
+  \_chandle_typespec: , line:2:4, endln:2:11
+  |vpiImportTypespec:
+  \_chandle_var: (work@dut.c), line:2:12, endln:2:13
+  |vpiDefName:work@dut
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 1
 [   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
+[LINT]: ${SURELOG_DIR}/tests/Chandle/dut.sv:2:12: Non synthesizable construct, c
 [LINT]: ${SURELOG_DIR}/tests/Chandle/dut.sv:2:4: Non synthesizable construct,
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/Chandle/dut.sv | ${SURELOG_DIR}/build/regression/Chandle/roundtrip/dut_000.sv | 1 | 3 |
+[roundtrip]: ${SURELOG_DIR}/tests/Chandle/dut.sv | ${SURELOG_DIR}/build/regression/Chandle/roundtrip/dut_000.sv | 3 | 3 |
 ============================== End RoundTrip Results ==============================

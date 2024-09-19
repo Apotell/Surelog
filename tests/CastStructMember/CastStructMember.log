@@ -31,7 +31,7 @@ n<> u<25> t<Data_type_or_implicit> p<43> c<24> s<42> l<7:14> el<7:21>
 n<w> u<26> t<StringConst> p<41> s<40> l<7:22> el<7:23>
 n<width_t> u<27> t<StringConst> p<28> l<7:26> el<7:33>
 n<> u<28> t<Ps_type_identifier> p<29> c<27> l<7:26> el<7:33>
-n<> u<29> t<Simple_type> p<30> c<28> l<7:26> el<7:33>
+n<width_t> u<29> t<Simple_type> p<30> c<28> l<7:26> el<7:33>
 n<> u<30> t<Casting_type> p<36> c<29> s<35> l<7:26> el<7:33>
 n<32> u<31> t<IntConst> p<32> l<7:35> el<7:37>
 n<> u<32> t<Primary_literal> p<33> c<31> l<7:35> el<7:37>
@@ -101,7 +101,7 @@ n<> u<95> t<Data_type_or_implicit> p<110> c<94> s<109> l<9:8> el<9:14>
 n<t2> u<96> t<StringConst> p<108> s<107> l<9:15> el<9:17>
 n<w> u<97> t<StringConst> p<98> l<9:20> el<9:21>
 n<> u<98> t<Ps_type_identifier> p<99> c<97> l<9:20> el<9:21>
-n<> u<99> t<Simple_type> p<100> c<98> l<9:20> el<9:21>
+n<w> u<99> t<Simple_type> p<100> c<98> l<9:20> el<9:21>
 n<> u<100> t<Casting_type> p<105> c<99> s<104> l<9:20> el<9:21>
 n<0> u<101> t<IntConst> p<102> l<9:23> el<9:24>
 n<> u<102> t<Primary_literal> p<103> c<101> l<9:23> el<9:24>
@@ -130,7 +130,7 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/CastStructMember/dut.sv:6:1: Compile module "work@Foo".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                               5
+constant                                               9
 design                                                 1
 int_typespec                                           1
 logic_net                                              2
@@ -139,31 +139,35 @@ module_inst                                            1
 operation                                              2
 param_assign                                           1
 parameter                                              1
-range                                                  2
-ref_typespec                                           5
+range                                                  4
+ref_typespec                                           4
+source_file                                            1
 struct_typespec                                        1
 typespec_member                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CastStructMember/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/CastStructMember/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/CastStructMember/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/CastStructMember/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@Foo (work@Foo), file:${SURELOG_DIR}/tests/CastStructMember/dut.sv, line:6:1, endln:10:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@Foo
+  |vpiName:work@Foo
   |vpiParameter:
-  \_parameter: (work@Foo.w), line:7:22, endln:7:23
+  \_parameter: (work@Foo.w), line:7:22, endln:7:38
     |vpiParent:
     \_module_inst: work@Foo (work@Foo), file:${SURELOG_DIR}/tests/CastStructMember/dut.sv, line:6:1, endln:10:10
     |vpiTypespec:
-    \_ref_typespec: (work@Foo.w)
+    \_ref_typespec: (work@Foo.w), line:7:14, endln:7:21
       |vpiParent:
-      \_parameter: (work@Foo.w), line:7:22, endln:7:23
+      \_parameter: (work@Foo.w), line:7:22, endln:7:38
       |vpiFullName:work@Foo.w
       |vpiActual:
       \_struct_typespec: (width_t), line:2:9, endln:4:2
@@ -178,125 +182,131 @@ design: (unnamed)
     \_operation: , line:7:26, endln:7:38
       |vpiParent:
       \_param_assign: , line:7:22, endln:7:38
-      |vpiTypespec:
-      \_ref_typespec: (work@Foo)
-        |vpiParent:
-        \_operation: , line:7:26, endln:7:38
-        |vpiFullName:work@Foo
-        |vpiActual:
-        \_struct_typespec: (width_t), line:2:9, endln:4:2
       |vpiOpType:67
       |vpiOperand:
       \_operation: , line:7:34, endln:7:38
         |vpiParent:
-        \_operation: , line:7:26, endln:7:38
+        \_module_inst: work@Foo (work@Foo), file:${SURELOG_DIR}/tests/CastStructMember/dut.sv, line:6:1, endln:10:10
         |vpiOpType:33
         |vpiOperand:
         \_constant: , line:7:35, endln:7:37
+          |vpiParent:
+          \_operation: , line:7:34, endln:7:38
           |vpiDecompile:32
           |vpiSize:64
           |UINT:32
           |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@Foo.w), line:7:22, endln:7:23
-  |vpiDefName:work@Foo
-  |vpiNet:
+    \_parameter: (work@Foo.w), line:7:22, endln:7:38
+  |vpiTypedef:
+  \_logic_typespec: , line:8:3, endln:8:14
+    |vpiParent:
+    \_module_inst: work@Foo (work@Foo), file:${SURELOG_DIR}/tests/CastStructMember/dut.sv, line:6:1, endln:10:10
+    |vpiRange:
+    \_range: , line:8:8, endln:8:14
+      |vpiParent:
+      \_module_inst: work@Foo (work@Foo), file:${SURELOG_DIR}/tests/CastStructMember/dut.sv, line:6:1, endln:10:10
+      |vpiLeftRange:
+      \_constant: , line:8:9, endln:8:11
+        |vpiParent:
+        \_range: , line:8:8, endln:8:14
+        |vpiDecompile:31
+        |vpiSize:64
+        |UINT:31
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:8:12, endln:8:13
+        |vpiParent:
+        \_range: , line:8:8, endln:8:14
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_logic_typespec: , line:9:3, endln:9:14
+    |vpiParent:
+    \_module_inst: work@Foo (work@Foo), file:${SURELOG_DIR}/tests/CastStructMember/dut.sv, line:6:1, endln:10:10
+    |vpiRange:
+    \_range: , line:9:8, endln:9:14
+      |vpiParent:
+      \_module_inst: work@Foo (work@Foo), file:${SURELOG_DIR}/tests/CastStructMember/dut.sv, line:6:1, endln:10:10
+      |vpiLeftRange:
+      \_constant: , line:9:9, endln:9:11
+        |vpiParent:
+        \_range: , line:9:8, endln:9:14
+        |vpiDecompile:31
+        |vpiSize:64
+        |UINT:31
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:9:12, endln:9:13
+        |vpiParent:
+        \_range: , line:9:8, endln:9:14
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_logic_typespec: , line:8:3, endln:8:14
+  |vpiImportTypespec:
   \_logic_net: (work@Foo.t1), line:8:15, endln:8:17
     |vpiParent:
     \_module_inst: work@Foo (work@Foo), file:${SURELOG_DIR}/tests/CastStructMember/dut.sv, line:6:1, endln:10:10
     |vpiTypespec:
-    \_ref_typespec: (work@Foo.t1)
+    \_ref_typespec: (work@Foo.t1.t1), line:8:3, endln:8:7
       |vpiParent:
       \_logic_net: (work@Foo.t1), line:8:15, endln:8:17
-      |vpiFullName:work@Foo.t1
+      |vpiName:t1
+      |vpiFullName:work@Foo.t1.t1
       |vpiActual:
       \_logic_typespec: , line:8:3, endln:8:14
     |vpiName:t1
     |vpiFullName:work@Foo.t1
     |vpiNetType:1
-  |vpiNet:
+  |vpiImportTypespec:
+  \_logic_typespec: , line:9:3, endln:9:14
+  |vpiImportTypespec:
   \_logic_net: (work@Foo.t2), line:9:15, endln:9:17
     |vpiParent:
     \_module_inst: work@Foo (work@Foo), file:${SURELOG_DIR}/tests/CastStructMember/dut.sv, line:6:1, endln:10:10
     |vpiTypespec:
-    \_ref_typespec: (work@Foo.t2)
+    \_ref_typespec: (work@Foo.t2.t2), line:9:3, endln:9:7
       |vpiParent:
       \_logic_net: (work@Foo.t2), line:9:15, endln:9:17
-      |vpiFullName:work@Foo.t2
+      |vpiName:t2
+      |vpiFullName:work@Foo.t2.t2
       |vpiActual:
       \_logic_typespec: , line:9:3, endln:9:14
     |vpiName:t2
     |vpiFullName:work@Foo.t2
     |vpiNetType:1
+  |vpiDefName:work@Foo
+  |vpiNet:
+  \_logic_net: (work@Foo.t1), line:8:15, endln:8:17
+  |vpiNet:
+  \_logic_net: (work@Foo.t2), line:9:15, endln:9:17
 |vpiTypedef:
 \_struct_typespec: (width_t), line:2:9, endln:4:2
   |vpiParent:
-  \_parameter: (work@Foo.w), line:7:22, endln:7:23
-  |vpiName:width_t
-  |vpiInstance:
   \_design: (unnamed)
+  |vpiName:width_t
   |vpiTypespecMember:
-  \_typespec_member: (WIDTH), line:3:7, endln:3:12
+  \_typespec_member: (WIDTH), line:3:3, endln:3:13
     |vpiParent:
     \_struct_typespec: (width_t), line:2:9, endln:4:2
     |vpiName:WIDTH
     |vpiTypespec:
-    \_ref_typespec: (work@Foo.w.width_t.WIDTH)
+    \_ref_typespec: (width_t.WIDTH), line:3:3, endln:3:6
       |vpiParent:
-      \_typespec_member: (WIDTH), line:3:7, endln:3:12
-      |vpiFullName:work@Foo.w.width_t.WIDTH
+      \_typespec_member: (WIDTH), line:3:3, endln:3:13
+      |vpiFullName:width_t.WIDTH
       |vpiActual:
       \_int_typespec: , line:3:3, endln:3:6
-    |vpiRefFile:${SURELOG_DIR}/tests/CastStructMember/dut.sv
-    |vpiRefLineNo:3
-    |vpiRefColumnNo:3
-    |vpiRefEndLineNo:3
-    |vpiRefEndColumnNo:6
-\_weaklyReferenced:
+|vpiTypedef:
 \_int_typespec: , line:3:3, endln:3:6
+  |vpiParent:
+  \_design: (unnamed)
   |vpiSigned:1
-\_logic_typespec: , line:8:3, endln:8:14
-  |vpiRange:
-  \_range: , line:8:8, endln:8:14
-    |vpiParent:
-    \_logic_typespec: , line:8:3, endln:8:14
-    |vpiLeftRange:
-    \_constant: , line:8:9, endln:8:11
-      |vpiParent:
-      \_range: , line:8:8, endln:8:14
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:8:12, endln:8:13
-      |vpiParent:
-      \_range: , line:8:8, endln:8:14
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:9:3, endln:9:14
-  |vpiRange:
-  \_range: , line:9:8, endln:9:14
-    |vpiParent:
-    \_logic_typespec: , line:9:3, endln:9:14
-    |vpiLeftRange:
-    \_constant: , line:9:9, endln:9:11
-      |vpiParent:
-      \_range: , line:9:8, endln:9:14
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:9:12, endln:9:13
-      |vpiParent:
-      \_range: , line:9:8, endln:9:14
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -305,5 +315,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/CastStructMember/dut.sv | ${SURELOG_DIR}/build/regression/CastStructMember/roundtrip/dut_000.sv | 3 | 10 |
+[roundtrip]: ${SURELOG_DIR}/tests/CastStructMember/dut.sv | ${SURELOG_DIR}/build/regression/CastStructMember/roundtrip/dut_000.sv | 5 | 10 |
 ============================== End RoundTrip Results ==============================

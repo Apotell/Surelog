@@ -128,29 +128,33 @@ operation                                              6
 param_assign                                           3
 parameter                                              3
 ref_obj                                                4
-ref_typespec                                           4
+ref_typespec                                           3
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CondOpLazyEval/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/CondOpLazyEval/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/CondOpLazyEval/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/CondOpLazyEval/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CondOpLazyEval/dut.sv, line:1:1, endln:5:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
+  |vpiName:work@top
   |vpiParameter:
-  \_parameter: (work@top.A), line:2:23, endln:2:24
+  \_parameter: (work@top.A), line:2:23, endln:2:28
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CondOpLazyEval/dut.sv, line:1:1, endln:5:10
     |UINT:0
     |vpiTypespec:
-    \_ref_typespec: (work@top.A)
+    \_ref_typespec: (work@top.A), line:2:15, endln:2:22
       |vpiParent:
-      \_parameter: (work@top.A), line:2:23, endln:2:24
+      \_parameter: (work@top.A), line:2:23, endln:2:28
       |vpiFullName:work@top.A
       |vpiActual:
       \_integer_typespec: , line:2:15, endln:2:22
@@ -158,13 +162,13 @@ design: (unnamed)
     |vpiName:A
     |vpiFullName:work@top.A
   |vpiParameter:
-  \_parameter: (work@top.B), line:3:23, endln:3:24
+  \_parameter: (work@top.B), line:3:23, endln:3:45
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CondOpLazyEval/dut.sv, line:1:1, endln:5:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.B)
+    \_ref_typespec: (work@top.B), line:3:15, endln:3:22
       |vpiParent:
-      \_parameter: (work@top.B), line:3:23, endln:3:24
+      \_parameter: (work@top.B), line:3:23, endln:3:45
       |vpiFullName:work@top.B
       |vpiActual:
       \_integer_typespec: , line:3:15, endln:3:22
@@ -172,13 +176,13 @@ design: (unnamed)
     |vpiName:B
     |vpiFullName:work@top.B
   |vpiParameter:
-  \_parameter: (work@top.C), line:4:23, endln:4:24
+  \_parameter: (work@top.C), line:4:23, endln:4:44
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CondOpLazyEval/dut.sv, line:1:1, endln:5:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.C)
+    \_ref_typespec: (work@top.C), line:4:15, endln:4:22
       |vpiParent:
-      \_parameter: (work@top.C), line:4:23, endln:4:24
+      \_parameter: (work@top.C), line:4:23, endln:4:44
       |vpiFullName:work@top.C
       |vpiActual:
       \_integer_typespec: , line:4:15, endln:4:22
@@ -196,16 +200,9 @@ design: (unnamed)
       |vpiDecompile:0
       |vpiSize:64
       |UINT:0
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:2:27, endln:2:28
-        |vpiFullName:work@top
-        |vpiActual:
-        \_integer_typespec: , line:2:15, endln:2:22
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@top.A), line:2:23, endln:2:24
+    \_parameter: (work@top.A), line:2:23, endln:2:28
   |vpiParamAssign:
   \_param_assign: , line:3:23, endln:3:45
     |vpiParent:
@@ -226,6 +223,8 @@ design: (unnamed)
           \_operation: , line:3:28, endln:3:34
           |vpiName:A
           |vpiFullName:work@top.A
+          |vpiActual:
+          \_parameter: (work@top.A), line:2:23, endln:2:28
         |vpiOperand:
         \_constant: , line:3:33, endln:3:34
           |vpiParent:
@@ -253,6 +252,8 @@ design: (unnamed)
           \_operation: , line:3:38, endln:3:41
           |vpiName:A
           |vpiFullName:work@top.A
+          |vpiActual:
+          \_parameter: (work@top.A), line:2:23, endln:2:28
       |vpiOperand:
       \_constant: , line:3:44, endln:3:45
         |vpiParent:
@@ -262,7 +263,7 @@ design: (unnamed)
         |UINT:1
         |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@top.B), line:3:23, endln:3:24
+    \_parameter: (work@top.B), line:3:23, endln:3:45
   |vpiParamAssign:
   \_param_assign: , line:4:23, endln:4:44
     |vpiParent:
@@ -283,6 +284,8 @@ design: (unnamed)
           \_operation: , line:4:28, endln:4:33
           |vpiName:A
           |vpiFullName:work@top.A
+          |vpiActual:
+          \_parameter: (work@top.A), line:2:23, endln:2:28
         |vpiOperand:
         \_constant: , line:4:32, endln:4:33
           |vpiParent:
@@ -310,6 +313,8 @@ design: (unnamed)
           \_operation: , line:4:37, endln:4:40
           |vpiName:A
           |vpiFullName:work@top.A
+          |vpiActual:
+          \_parameter: (work@top.A), line:2:23, endln:2:28
       |vpiOperand:
       \_constant: , line:4:43, endln:4:44
         |vpiParent:
@@ -319,21 +324,29 @@ design: (unnamed)
         |UINT:1
         |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@top.C), line:4:23, endln:4:24
+    \_parameter: (work@top.C), line:4:23, endln:4:44
+  |vpiTypedef:
+  \_integer_typespec: , line:2:15, endln:2:22
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CondOpLazyEval/dut.sv, line:1:1, endln:5:10
+    |vpiSigned:1
+  |vpiTypedef:
+  \_integer_typespec: , line:3:15, endln:3:22
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CondOpLazyEval/dut.sv, line:1:1, endln:5:10
+    |vpiSigned:1
+  |vpiTypedef:
+  \_integer_typespec: , line:4:15, endln:4:22
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CondOpLazyEval/dut.sv, line:1:1, endln:5:10
+    |vpiSigned:1
+  |vpiImportTypespec:
+  \_integer_typespec: , line:2:15, endln:2:22
+  |vpiImportTypespec:
+  \_integer_typespec: , line:3:15, endln:3:22
+  |vpiImportTypespec:
+  \_integer_typespec: , line:4:15, endln:4:22
   |vpiDefName:work@top
-\_weaklyReferenced:
-\_integer_typespec: , line:2:15, endln:2:22
-  |vpiParent:
-  \_parameter: (work@top.A), line:2:23, endln:2:24
-  |vpiSigned:1
-\_integer_typespec: , line:3:15, endln:3:22
-  |vpiParent:
-  \_parameter: (work@top.B), line:3:23, endln:3:24
-  |vpiSigned:1
-\_integer_typespec: , line:4:15, endln:4:22
-  |vpiParent:
-  \_parameter: (work@top.C), line:4:23, endln:4:24
-  |vpiSigned:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -342,5 +355,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/CondOpLazyEval/dut.sv | ${SURELOG_DIR}/build/regression/CondOpLazyEval/roundtrip/dut_000.sv | 2 | 5 |
+[roundtrip]: ${SURELOG_DIR}/tests/CondOpLazyEval/dut.sv | ${SURELOG_DIR}/build/regression/CondOpLazyEval/roundtrip/dut_000.sv | 5 | 5 |
 ============================== End RoundTrip Results ==============================

@@ -7,8 +7,8 @@ n<> u<1> t<Null_rule> p<81> s<80> l<1:1> el<1:0>
 n<module> u<2> t<Module_keyword> p<13> s<3> l<1:1> el<1:7>
 n<top> u<3> t<StringConst> p<13> s<12> l<1:8> el<1:11>
 n<> u<4> t<PortDir_Out> p<9> s<8> l<1:12> el<1:18>
-n<> u<5> t<String_type> p<6> l<1:19> el<1:25>
-n<> u<6> t<Data_type> p<7> c<5> l<1:19> el<1:25>
+n<string> u<5> t<String_type> p<6> l<1:19> el<1:25>
+n<string> u<6> t<Data_type> p<7> c<5> l<1:19> el<1:25>
 n<> u<7> t<Data_type_or_implicit> p<8> c<6> l<1:19> el<1:25>
 n<> u<8> t<Net_port_type> p<9> c<7> l<1:19> el<1:25>
 n<> u<9> t<Net_port_header> p<11> c<4> s<10> l<1:12> el<1:25>
@@ -46,8 +46,8 @@ n<> u<40> t<Description> p<80> c<39> s<79> l<1:1> el<5:10>
 n<module> u<41> t<Module_keyword> p<52> s<42> l<6:1> el<6:7>
 n<top> u<42> t<StringConst> p<52> s<51> l<6:8> el<6:11>
 n<> u<43> t<PortDir_Out> p<48> s<47> l<6:12> el<6:18>
-n<> u<44> t<String_type> p<45> l<6:19> el<6:25>
-n<> u<45> t<Data_type> p<46> c<44> l<6:19> el<6:25>
+n<string> u<44> t<String_type> p<45> l<6:19> el<6:25>
+n<string> u<45> t<Data_type> p<46> c<44> l<6:19> el<6:25>
 n<> u<46> t<Data_type_or_implicit> p<47> c<45> l<6:19> el<6:25>
 n<> u<47> t<Net_port_type> p<48> c<46> l<6:19> el<6:25>
 n<> u<48> t<Net_port_header> p<50> c<43> s<49> l<6:12> el<6:25>
@@ -97,50 +97,69 @@ begin                                                  1
 constant                                               1
 design                                                 1
 initial                                                1
-logic_net                                              1
-module_inst                                            1
+module_inst                                            2
 port                                                   1
-ref_obj                                                2
-ref_typespec                                           1
-string_typespec                                        1
+ref_obj                                                1
+ref_typespec                                           2
+source_file                                            1
+string_typespec                                        2
+string_var                                             1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ComplexEscaped/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ComplexEscaped/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ComplexEscaped/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/ComplexEscaped/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ComplexEscaped/dut.sv, line:1:1, endln:5:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiNet:
-  \_logic_net: (work@top.o), line:1:26, endln:1:27
+  |vpiName:work@top
+  |vpiVariables:
+  \_string_var: (work@top.o), line:1:26, endln:1:27
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ComplexEscaped/dut.sv, line:1:1, endln:5:10
+    |vpiTypespec:
+    \_ref_typespec: (work@top.o.string), line:1:19, endln:1:25
+      |vpiParent:
+      \_string_var: (work@top.o), line:1:26, endln:1:27
+      |vpiName:string
+      |vpiFullName:work@top.o.string
+      |vpiActual:
+      \_string_typespec: , line:1:19, endln:1:25
     |vpiName:o
     |vpiFullName:work@top.o
+    |vpiVisibility:1
+  |vpiTypedef:
+  \_string_typespec: , line:1:19, endln:1:25
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ComplexEscaped/dut.sv, line:1:1, endln:5:10
+  |vpiTypedef:
+  \_string_typespec: , line:1:19, endln:1:25
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ComplexEscaped/dut.sv, line:1:1, endln:5:10
+  |vpiImportTypespec:
+  \_string_typespec: , line:1:19, endln:1:25
+  |vpiImportTypespec:
+  \_string_var: (work@top.o), line:1:26, endln:1:27
+  |vpiImportTypespec:
+  \_string_typespec: , line:1:19, endln:1:25
+  |vpiDefName:work@top
   |vpiPort:
-  \_port: (o), line:1:26, endln:1:27
+  \_port: (o), line:1:12, endln:1:27
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ComplexEscaped/dut.sv, line:1:1, endln:5:10
     |vpiName:o
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@top.o.o), line:1:26, endln:1:27
-      |vpiParent:
-      \_port: (o), line:1:26, endln:1:27
-      |vpiName:o
-      |vpiFullName:work@top.o.o
-      |vpiActual:
-      \_logic_net: (work@top.o), line:1:26, endln:1:27
     |vpiTypedef:
-    \_ref_typespec: (work@top.o)
+    \_ref_typespec: (work@top.o), line:1:19, endln:1:25
       |vpiParent:
-      \_port: (o), line:1:26, endln:1:27
+      \_port: (o), line:1:12, endln:1:27
       |vpiFullName:work@top.o
       |vpiActual:
       \_string_typespec: , line:1:19, endln:1:25
@@ -161,6 +180,8 @@ design: (unnamed)
         |vpiBlocking:1
         |vpiRhs:
         \_constant: , line:3:11, endln:3:47
+          |vpiParent:
+          \_assignment: , line:3:7, endln:3:47
           |vpiDecompile:"\\/ _| __| | '_ \\ / _` / "
           |vpiSize:208
           |STRING:\\/ _| __| | '_ \\ / _` / 
@@ -172,9 +193,7 @@ design: (unnamed)
           |vpiName:o
           |vpiFullName:work@top.o
           |vpiActual:
-          \_logic_net: (work@top.o), line:1:26, endln:1:27
-\_weaklyReferenced:
-\_string_typespec: , line:1:19, endln:1:25
+          \_string_var: (work@top.o), line:1:26, endln:1:27
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -183,5 +202,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ComplexEscaped/dut.sv | ${SURELOG_DIR}/build/regression/ComplexEscaped/roundtrip/dut_000.sv | 1 | 5 |
+[roundtrip]: ${SURELOG_DIR}/tests/ComplexEscaped/dut.sv | ${SURELOG_DIR}/build/regression/ComplexEscaped/roundtrip/dut_000.sv | 4 | 5 |
 ============================== End RoundTrip Results ==============================

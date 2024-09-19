@@ -54,75 +54,92 @@ constant                                               3
 design                                                 1
 enum_const                                             1
 enum_typespec                                          1
-logic_net                                              1
+enum_var                                               1
 logic_typespec                                         1
 module_inst                                            2
 range                                                  1
 ref_typespec                                           2
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EnumVarNoTypedef/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/EnumVarNoTypedef/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/EnumVarNoTypedef/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/EnumVarNoTypedef/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/EnumVarNoTypedef/dut.sv, line:1:1, endln:7:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiNet:
-  \_logic_net: (work@top.myenum), line:5:4, endln:5:10
+  |vpiName:work@top
+  |vpiVariables:
+  \_enum_var: (work@top.myenum), line:5:4, endln:5:10
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/EnumVarNoTypedef/dut.sv, line:1:1, endln:7:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.myenum)
+    \_ref_typespec: (work@top.myenum), line:3:2, endln:5:3
       |vpiParent:
-      \_logic_net: (work@top.myenum), line:5:4, endln:5:10
+      \_enum_var: (work@top.myenum), line:5:4, endln:5:10
       |vpiFullName:work@top.myenum
       |vpiActual:
-      \_enum_typespec: 
+      \_enum_typespec: , line:3:2, endln:5:3
     |vpiName:myenum
     |vpiFullName:work@top.myenum
-\_weaklyReferenced:
-\_enum_typespec: 
-  |vpiBaseTypespec:
-  \_ref_typespec: 
+    |vpiVisibility:1
+  |vpiTypedef:
+  \_logic_typespec: , line:3:7, endln:3:18
     |vpiParent:
-    \_enum_typespec: 
-    |vpiActual:
-    \_logic_typespec: , line:3:7, endln:3:18
-  |vpiEnumConst:
-  \_enum_const: (Global), line:4:4, endln:4:17
-    |vpiParent:
-    \_enum_typespec: 
-    |vpiName:Global
-    |UINT:2
-    |vpiDecompile:4'h2
-    |vpiSize:4
-\_logic_typespec: , line:3:7, endln:3:18
-  |vpiRange:
-  \_range: , line:3:13, endln:3:18
-    |vpiParent:
-    \_logic_typespec: , line:3:7, endln:3:18
-    |vpiLeftRange:
-    \_constant: , line:3:14, endln:3:15
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/EnumVarNoTypedef/dut.sv, line:1:1, endln:7:10
+    |vpiRange:
+    \_range: , line:3:13, endln:3:18
       |vpiParent:
-      \_range: , line:3:13, endln:3:18
-      |vpiDecompile:2
-      |vpiSize:64
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/EnumVarNoTypedef/dut.sv, line:1:1, endln:7:10
+      |vpiLeftRange:
+      \_constant: , line:3:14, endln:3:15
+        |vpiParent:
+        \_range: , line:3:13, endln:3:18
+        |vpiDecompile:2
+        |vpiSize:64
+        |UINT:2
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:3:16, endln:3:17
+        |vpiParent:
+        \_range: , line:3:13, endln:3:18
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_enum_typespec: , line:3:2, endln:5:3
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/EnumVarNoTypedef/dut.sv, line:1:1, endln:7:10
+    |vpiBaseTypespec:
+    \_ref_typespec: (work@top), line:3:7, endln:3:18
+      |vpiParent:
+      \_enum_typespec: , line:3:2, endln:5:3
+      |vpiFullName:work@top
+      |vpiActual:
+      \_logic_typespec: , line:3:7, endln:3:18
+    |vpiEnumConst:
+    \_enum_const: (Global), line:4:4, endln:4:17
+      |vpiParent:
+      \_enum_typespec: , line:3:2, endln:5:3
+      |vpiName:Global
       |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:16, endln:3:17
-      |vpiParent:
-      \_range: , line:3:13, endln:3:18
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
+      |vpiDecompile:4'h2
+      |vpiSize:4
+  |vpiImportTypespec:
+  \_logic_typespec: , line:3:7, endln:3:18
+  |vpiImportTypespec:
+  \_enum_typespec: , line:3:2, endln:5:3
+  |vpiImportTypespec:
+  \_enum_var: (work@top.myenum), line:5:4, endln:5:10
+  |vpiDefName:work@top
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

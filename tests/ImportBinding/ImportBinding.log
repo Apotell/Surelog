@@ -109,30 +109,34 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/ImportBinding/dut.sv:15:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              14
+constant                                              13
 design                                                 1
 enum_const                                             2
 enum_typespec                                          1
 import_typespec                                        1
-int_typespec                                           5
+int_typespec                                           1
 logic_typespec                                         1
 module_inst                                            2
 operation                                              1
 package                                                1
-param_assign                                           6
-parameter                                              8
+param_assign                                           2
+parameter                                              2
 range                                                  1
-ref_obj                                                5
-ref_typespec                                          12
-unsupported_typespec                                   4
+ref_obj                                                4
+ref_typespec                                           4
+source_file                                            1
+unsupported_typespec                                   1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ImportBinding/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ImportBinding/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ImportBinding/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/ImportBinding/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallPackages:
 \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/ImportBinding/dut.sv, line:1:1, endln:13:11
   |vpiParent:
@@ -140,14 +144,14 @@ design: (unnamed)
   |vpiName:lc_ctrl_pkg
   |vpiFullName:lc_ctrl_pkg::
   |vpiParameter:
-  \_parameter: (lc_ctrl_pkg::TxWidth), line:3:18, endln:3:25
+  \_parameter: (lc_ctrl_pkg::TxWidth), line:3:18, endln:3:29
     |vpiParent:
     \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/ImportBinding/dut.sv, line:1:1, endln:13:11
     |UINT:4
     |vpiTypespec:
-    \_ref_typespec: (lc_ctrl_pkg::TxWidth)
+    \_ref_typespec: (lc_ctrl_pkg::TxWidth), line:3:14, endln:3:17
       |vpiParent:
-      \_parameter: (lc_ctrl_pkg::TxWidth), line:3:18, endln:3:25
+      \_parameter: (lc_ctrl_pkg::TxWidth), line:3:18, endln:3:29
       |vpiFullName:lc_ctrl_pkg::TxWidth
       |vpiActual:
       \_int_typespec: , line:3:14, endln:3:17
@@ -155,13 +159,13 @@ design: (unnamed)
     |vpiName:TxWidth
     |vpiFullName:lc_ctrl_pkg::TxWidth
   |vpiParameter:
-  \_parameter: (lc_ctrl_pkg::LC_TX_DEFAULT), line:11:23, endln:11:36
+  \_parameter: (lc_ctrl_pkg::LC_TX_DEFAULT), line:11:23, endln:11:42
     |vpiParent:
     \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/ImportBinding/dut.sv, line:1:1, endln:13:11
     |vpiTypespec:
-    \_ref_typespec: (lc_ctrl_pkg::LC_TX_DEFAULT)
+    \_ref_typespec: (lc_ctrl_pkg::LC_TX_DEFAULT), line:11:15, endln:11:22
       |vpiParent:
-      \_parameter: (lc_ctrl_pkg::LC_TX_DEFAULT), line:11:23, endln:11:36
+      \_parameter: (lc_ctrl_pkg::LC_TX_DEFAULT), line:11:23, endln:11:42
       |vpiFullName:lc_ctrl_pkg::LC_TX_DEFAULT
       |vpiActual:
       \_unsupported_typespec: (lc_tx_t), line:11:15, endln:11:22
@@ -178,16 +182,9 @@ design: (unnamed)
       |vpiDecompile:4
       |vpiSize:64
       |UINT:4
-      |vpiTypespec:
-      \_ref_typespec: (lc_ctrl_pkg)
-        |vpiParent:
-        \_constant: , line:3:28, endln:3:29
-        |vpiFullName:lc_ctrl_pkg
-        |vpiActual:
-        \_int_typespec: , line:3:14, endln:3:17
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (lc_ctrl_pkg::TxWidth), line:3:18, endln:3:25
+    \_parameter: (lc_ctrl_pkg::TxWidth), line:3:18, endln:3:29
   |vpiParamAssign:
   \_param_assign: , line:11:23, endln:11:42
     |vpiParent:
@@ -201,25 +198,65 @@ design: (unnamed)
       |vpiActual:
       \_enum_const: (Off), line:6:6, endln:6:19
     |vpiLhs:
-    \_parameter: (lc_ctrl_pkg::LC_TX_DEFAULT), line:11:23, endln:11:36
+    \_parameter: (lc_ctrl_pkg::LC_TX_DEFAULT), line:11:23, endln:11:42
   |vpiTypedef:
-  \_enum_typespec: (lc_ctrl_pkg::lc_tx_e), line:4:4, endln:7:15
+  \_int_typespec: , line:3:14, endln:3:17
+    |vpiParent:
+    \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/ImportBinding/dut.sv, line:1:1, endln:13:11
+    |vpiSigned:1
+  |vpiTypedef:
+  \_logic_typespec: , line:4:17, endln:4:36
+    |vpiParent:
+    \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/ImportBinding/dut.sv, line:1:1, endln:13:11
+    |vpiRange:
+    \_range: , line:4:23, endln:4:36
+      |vpiParent:
+      \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/ImportBinding/dut.sv, line:1:1, endln:13:11
+      |vpiLeftRange:
+      \_operation: , line:4:24, endln:4:33
+        |vpiParent:
+        \_range: , line:4:23, endln:4:36
+        |vpiOpType:11
+        |vpiOperand:
+        \_ref_obj: (lc_ctrl_pkg::TxWidth), line:4:24, endln:4:31
+          |vpiParent:
+          \_operation: , line:4:24, endln:4:33
+          |vpiName:TxWidth
+          |vpiFullName:lc_ctrl_pkg::TxWidth
+          |vpiActual:
+          \_parameter: (lc_ctrl_pkg::TxWidth), line:3:18, endln:3:29
+        |vpiOperand:
+        \_constant: , line:4:32, endln:4:33
+          |vpiParent:
+          \_operation: , line:4:24, endln:4:33
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:4:34, endln:4:35
+        |vpiParent:
+        \_range: , line:4:23, endln:4:36
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_enum_typespec: (lc_ctrl_pkg::lc_tx_e), line:4:12, endln:7:15
     |vpiParent:
     \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/ImportBinding/dut.sv, line:1:1, endln:13:11
     |vpiName:lc_ctrl_pkg::lc_tx_e
-    |vpiInstance:
-    \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/ImportBinding/dut.sv, line:1:1, endln:13:11
     |vpiBaseTypespec:
-    \_ref_typespec: (lc_ctrl_pkg::lc_ctrl_pkg::lc_tx_e)
+    \_ref_typespec: (lc_ctrl_pkg::lc_tx_e), line:4:12, endln:7:15
       |vpiParent:
-      \_enum_typespec: (lc_ctrl_pkg::lc_tx_e), line:4:4, endln:7:15
-      |vpiFullName:lc_ctrl_pkg::lc_ctrl_pkg::lc_tx_e
+      \_enum_typespec: (lc_ctrl_pkg::lc_tx_e), line:4:12, endln:7:15
+      |vpiFullName:lc_ctrl_pkg::lc_tx_e
       |vpiActual:
       \_logic_typespec: , line:4:17, endln:4:36
     |vpiEnumConst:
     \_enum_const: (On), line:5:7, endln:5:20
       |vpiParent:
-      \_enum_typespec: (lc_ctrl_pkg::lc_tx_e), line:4:4, endln:7:15
+      \_enum_typespec: (lc_ctrl_pkg::lc_tx_e), line:4:12, endln:7:15
       |vpiName:On
       |BIN:1010
       |vpiDecompile:4'b1010
@@ -227,187 +264,35 @@ design: (unnamed)
     |vpiEnumConst:
     \_enum_const: (Off), line:6:6, endln:6:19
       |vpiParent:
-      \_enum_typespec: (lc_ctrl_pkg::lc_tx_e), line:4:4, endln:7:15
+      \_enum_typespec: (lc_ctrl_pkg::lc_tx_e), line:4:12, endln:7:15
       |vpiName:Off
       |BIN:0101
       |vpiDecompile:4'b0101
       |vpiSize:4
+  |vpiTypedef:
+  \_unsupported_typespec: (lc_tx_t), line:11:15, endln:11:22
+    |vpiParent:
+    \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/ImportBinding/dut.sv, line:1:1, endln:13:11
+    |vpiName:lc_tx_t
+  |vpiImportTypespec:
+  \_int_typespec: , line:3:14, endln:3:17
+  |vpiImportTypespec:
+  \_logic_typespec: , line:4:17, endln:4:36
+  |vpiImportTypespec:
+  \_enum_typespec: (lc_ctrl_pkg::lc_tx_e), line:4:12, endln:7:15
+  |vpiImportTypespec:
+  \_unsupported_typespec: (lc_tx_t), line:11:15, endln:11:22
   |vpiDefName:lc_ctrl_pkg
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ImportBinding/dut.sv, line:15:1, endln:19:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiParameter:
-  \_parameter: (work@top.LC_TX_DEFAULT), line:11:23, endln:11:36
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ImportBinding/dut.sv, line:15:1, endln:19:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.LC_TX_DEFAULT)
-      |vpiParent:
-      \_parameter: (work@top.LC_TX_DEFAULT), line:11:23, endln:11:36
-      |vpiFullName:work@top.LC_TX_DEFAULT
-      |vpiActual:
-      \_unsupported_typespec: (lc_tx_t), line:11:15, endln:11:22
-    |vpiName:LC_TX_DEFAULT
-    |vpiFullName:work@top.LC_TX_DEFAULT
-    |vpiImported:lc_ctrl_pkg
-  |vpiParameter:
-  \_parameter: (work@top.TxWidth), line:3:18, endln:3:25
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ImportBinding/dut.sv, line:15:1, endln:19:10
-    |UINT:4
-    |vpiTypespec:
-    \_ref_typespec: (work@top.TxWidth)
-      |vpiParent:
-      \_parameter: (work@top.TxWidth), line:3:18, endln:3:25
-      |vpiFullName:work@top.TxWidth
-      |vpiActual:
-      \_int_typespec: , line:3:14, endln:3:17
-    |vpiSigned:1
-    |vpiName:TxWidth
-    |vpiFullName:work@top.TxWidth
-    |vpiImported:lc_ctrl_pkg
-  |vpiParamAssign:
-  \_param_assign: , line:3:18, endln:3:29
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ImportBinding/dut.sv, line:15:1, endln:19:10
-    |vpiRhs:
-    \_constant: , line:3:28, endln:3:29
-      |vpiParent:
-      \_param_assign: , line:3:18, endln:3:29
-      |vpiDecompile:4
-      |vpiSize:64
-      |UINT:4
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:3:28, endln:3:29
-        |vpiFullName:work@top
-        |vpiActual:
-        \_int_typespec: , line:3:14, endln:3:17
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@top.TxWidth), line:3:18, endln:3:25
-      |vpiParent:
-      \_param_assign: , line:3:18, endln:3:29
-      |UINT:4
-      |vpiTypespec:
-      \_ref_typespec: (work@top.TxWidth)
-        |vpiParent:
-        \_parameter: (work@top.TxWidth), line:3:18, endln:3:25
-        |vpiFullName:work@top.TxWidth
-        |vpiActual:
-        \_int_typespec: , line:3:14, endln:3:17
-      |vpiSigned:1
-      |vpiName:TxWidth
-      |vpiFullName:work@top.TxWidth
-      |vpiImported:lc_ctrl_pkg
-  |vpiParamAssign:
-  \_param_assign: , line:11:23, endln:11:42
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ImportBinding/dut.sv, line:15:1, endln:19:10
-    |vpiRhs:
-    \_ref_obj: (work@top.Off), line:11:39, endln:11:42
-      |vpiParent:
-      \_param_assign: , line:11:23, endln:11:42
-      |vpiName:Off
-      |vpiFullName:work@top.Off
-    |vpiLhs:
-    \_parameter: (work@top.LC_TX_DEFAULT), line:11:23, endln:11:36
-      |vpiParent:
-      \_param_assign: , line:11:23, endln:11:42
-      |vpiTypespec:
-      \_ref_typespec: (work@top.LC_TX_DEFAULT)
-        |vpiParent:
-        \_parameter: (work@top.LC_TX_DEFAULT), line:11:23, endln:11:36
-        |vpiFullName:work@top.LC_TX_DEFAULT
-        |vpiActual:
-        \_unsupported_typespec: (lc_tx_t), line:11:15, endln:11:22
-      |vpiName:LC_TX_DEFAULT
-      |vpiFullName:work@top.LC_TX_DEFAULT
-      |vpiImported:lc_ctrl_pkg
-  |vpiTypedef:
-  \_enum_typespec: (lc_ctrl_pkg::lc_tx_e), line:4:4, endln:7:15
+  |vpiName:work@top
   |vpiTypedef:
   \_import_typespec: (lc_ctrl_pkg), line:16:8, endln:16:22
+  |vpiImportTypespec:
+  \_import_typespec: (lc_ctrl_pkg), line:16:8, endln:16:22
   |vpiDefName:work@top
-\_weaklyReferenced:
-\_int_typespec: , line:3:14, endln:3:17
-  |vpiParent:
-  \_parameter: (lc_ctrl_pkg::TxWidth), line:3:18, endln:3:25
-  |vpiInstance:
-  \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/ImportBinding/dut.sv, line:1:1, endln:13:11
-  |vpiSigned:1
-\_logic_typespec: , line:4:17, endln:4:36
-  |vpiInstance:
-  \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/ImportBinding/dut.sv, line:1:1, endln:13:11
-  |vpiRange:
-  \_range: , line:4:23, endln:4:36
-    |vpiParent:
-    \_logic_typespec: , line:4:17, endln:4:36
-    |vpiLeftRange:
-    \_operation: , line:4:24, endln:4:33
-      |vpiParent:
-      \_range: , line:4:23, endln:4:36
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (TxWidth), line:4:24, endln:4:31
-        |vpiParent:
-        \_operation: , line:4:24, endln:4:33
-        |vpiName:TxWidth
-      |vpiOperand:
-      \_constant: , line:4:32, endln:4:33
-        |vpiParent:
-        \_operation: , line:4:24, endln:4:33
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:4:34, endln:4:35
-      |vpiParent:
-      \_range: , line:4:23, endln:4:36
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_unsupported_typespec: (lc_tx_t), line:11:15, endln:11:22
-  |vpiParent:
-  \_parameter: (lc_ctrl_pkg::LC_TX_DEFAULT), line:11:23, endln:11:36
-  |vpiName:lc_tx_t
-  |vpiInstance:
-  \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/ImportBinding/dut.sv, line:1:1, endln:13:11
-\_unsupported_typespec: (lc_tx_t), line:11:15, endln:11:22
-  |vpiParent:
-  \_ref_typespec: (work@top.LC_TX_DEFAULT)
-  |vpiName:lc_tx_t
-  |vpiInstance:
-  \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/ImportBinding/dut.sv, line:1:1, endln:13:11
-\_int_typespec: , line:3:14, endln:3:17
-  |vpiParent:
-  \_ref_typespec: (work@top.TxWidth)
-  |vpiInstance:
-  \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/ImportBinding/dut.sv, line:1:1, endln:13:11
-  |vpiSigned:1
-\_int_typespec: , line:3:14, endln:3:17
-  |vpiParent:
-  \_ref_typespec: (work@top)
-  |vpiInstance:
-  \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/ImportBinding/dut.sv, line:1:1, endln:13:11
-  |vpiSigned:1
-\_int_typespec: , line:3:14, endln:3:17
-  |vpiParent:
-  \_ref_typespec: (work@top.TxWidth)
-  |vpiInstance:
-  \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/ImportBinding/dut.sv, line:1:1, endln:13:11
-  |vpiSigned:1
-\_unsupported_typespec: (lc_tx_t), line:11:15, endln:11:22
-  |vpiParent:
-  \_ref_typespec: (work@top.LC_TX_DEFAULT)
-  |vpiName:lc_tx_t
-  |vpiInstance:
-  \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/ImportBinding/dut.sv, line:1:1, endln:13:11
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -416,5 +301,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ImportBinding/dut.sv | ${SURELOG_DIR}/build/regression/ImportBinding/roundtrip/dut_000.sv | 1 | 19 |
+[roundtrip]: ${SURELOG_DIR}/tests/ImportBinding/dut.sv | ${SURELOG_DIR}/build/regression/ImportBinding/roundtrip/dut_000.sv | 7 | 19 |
 ============================== End RoundTrip Results ==============================

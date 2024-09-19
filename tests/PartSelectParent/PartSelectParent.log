@@ -109,52 +109,73 @@ constant                                               7
 cont_assign                                            1
 design                                                 1
 initial                                                1
-int_typespec                                           1
-logic_net                                              1
+int_typespec                                           2
+int_var                                                1
 module_inst                                            1
 operation                                              2
 part_select                                            2
 port                                                   1
-ref_obj                                                2
-ref_typespec                                           1
+ref_obj                                                1
+ref_typespec                                           2
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PartSelectParent/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PartSelectParent/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/PartSelectParent/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/PartSelectParent/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PartSelectParent/dut.sv, line:1:1, endln:8:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiNet:
-  \_logic_net: (work@top.o), line:1:23, endln:1:24
+  |vpiName:work@top
+  |vpiVariables:
+  \_int_var: (work@top.o), line:1:23, endln:1:24
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PartSelectParent/dut.sv, line:1:1, endln:8:10
+    |vpiTypespec:
+    \_ref_typespec: (work@top.o), line:1:19, endln:1:22
+      |vpiParent:
+      \_int_var: (work@top.o), line:1:23, endln:1:24
+      |vpiFullName:work@top.o
+      |vpiActual:
+      \_int_typespec: , line:1:19, endln:1:22
     |vpiName:o
     |vpiFullName:work@top.o
+    |vpiSigned:1
+    |vpiVisibility:1
+  |vpiTypedef:
+  \_int_typespec: , line:1:19, endln:1:22
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PartSelectParent/dut.sv, line:1:1, endln:8:10
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:1:19, endln:1:22
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PartSelectParent/dut.sv, line:1:1, endln:8:10
+    |vpiSigned:1
+  |vpiImportTypespec:
+  \_int_typespec: , line:1:19, endln:1:22
+  |vpiImportTypespec:
+  \_int_var: (work@top.o), line:1:23, endln:1:24
+  |vpiImportTypespec:
+  \_int_typespec: , line:1:19, endln:1:22
+  |vpiDefName:work@top
   |vpiPort:
-  \_port: (o), line:1:23, endln:1:24
+  \_port: (o), line:1:12, endln:1:24
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PartSelectParent/dut.sv, line:1:1, endln:8:10
     |vpiName:o
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@top.o.o), line:1:23, endln:1:24
-      |vpiParent:
-      \_port: (o), line:1:23, endln:1:24
-      |vpiName:o
-      |vpiFullName:work@top.o.o
-      |vpiActual:
-      \_logic_net: (work@top.o), line:1:23, endln:1:24
     |vpiTypedef:
-    \_ref_typespec: (work@top.o)
+    \_ref_typespec: (work@top.o), line:1:19, endln:1:22
       |vpiParent:
-      \_port: (o), line:1:23, endln:1:24
+      \_port: (o), line:1:12, endln:1:24
       |vpiFullName:work@top.o
       |vpiActual:
       \_int_typespec: , line:1:19, endln:1:22
@@ -175,6 +196,8 @@ design: (unnamed)
         |vpiBlocking:1
         |vpiRhs:
         \_constant: , line:3:11, endln:3:12
+          |vpiParent:
+          \_assignment: , line:3:7, endln:3:12
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
@@ -186,7 +209,7 @@ design: (unnamed)
           |vpiName:o
           |vpiFullName:work@top.o
           |vpiActual:
-          \_logic_net: (work@top.o), line:1:23, endln:1:24
+          \_int_var: (work@top.o), line:1:23, endln:1:24
       |vpiStmt:
       \_assignment: , line:4:7, endln:4:23
         |vpiParent:
@@ -195,6 +218,8 @@ design: (unnamed)
         |vpiBlocking:1
         |vpiRhs:
         \_constant: , line:4:18, endln:4:23
+          |vpiParent:
+          \_assignment: , line:4:7, endln:4:23
           |vpiDecompile:2'b11
           |vpiSize:2
           |BIN:11
@@ -205,21 +230,27 @@ design: (unnamed)
           \_assignment: , line:4:7, endln:4:23
           |vpiOpType:33
           |vpiOperand:
-          \_part_select: o (work@top.o), line:4:8, endln:4:14
+          \_part_select: o (work@top.o), line:4:10, endln:4:13
             |vpiParent:
             \_operation: , line:4:7, endln:4:15
             |vpiName:o
             |vpiFullName:work@top.o
             |vpiDefName:o
+            |vpiActual:
+            \_int_var: (work@top.o), line:1:23, endln:1:24
             |vpiConstantSelect:1
             |vpiLeftRange:
             \_constant: , line:4:10, endln:4:11
+              |vpiParent:
+              \_part_select: o (work@top.o), line:4:10, endln:4:13
               |vpiDecompile:1
               |vpiSize:64
               |UINT:1
               |vpiConstType:9
             |vpiRightRange:
             \_constant: , line:4:12, endln:4:13
+              |vpiParent:
+              \_part_select: o (work@top.o), line:4:10, endln:4:13
               |vpiDecompile:0
               |vpiSize:64
               |UINT:0
@@ -237,33 +268,36 @@ design: (unnamed)
       |BIN:11
       |vpiConstType:3
     |vpiLhs:
-    \_operation: , line:7:14, endln:7:20
+    \_operation: , line:7:13, endln:7:21
       |vpiParent:
-      \_cont_assign: , line:7:13, endln:7:29
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PartSelectParent/dut.sv, line:1:1, endln:8:10
       |vpiOpType:33
       |vpiOperand:
-      \_part_select: o (work@top.o), line:7:14, endln:7:20
+      \_part_select: o (work@top.o), line:7:16, endln:7:19
         |vpiParent:
-        \_operation: , line:7:14, endln:7:20
+        \_operation: , line:7:13, endln:7:21
         |vpiName:o
         |vpiFullName:work@top.o
         |vpiDefName:o
+        |vpiActual:
+        \_int_var: (work@top.o), line:1:23, endln:1:24
         |vpiConstantSelect:1
         |vpiLeftRange:
         \_constant: , line:7:16, endln:7:17
+          |vpiParent:
+          \_part_select: o (work@top.o), line:7:16, endln:7:19
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
           |vpiConstType:9
         |vpiRightRange:
         \_constant: , line:7:18, endln:7:19
+          |vpiParent:
+          \_part_select: o (work@top.o), line:7:16, endln:7:19
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
           |vpiConstType:9
-\_weaklyReferenced:
-\_int_typespec: , line:1:19, endln:1:22
-  |vpiSigned:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -272,5 +306,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PartSelectParent/dut.sv | ${SURELOG_DIR}/build/regression/PartSelectParent/roundtrip/dut_000.sv | 3 | 8 |
+[roundtrip]: ${SURELOG_DIR}/tests/PartSelectParent/dut.sv | ${SURELOG_DIR}/build/regression/PartSelectParent/roundtrip/dut_000.sv | 4 | 8 |
 ============================== End RoundTrip Results ==============================

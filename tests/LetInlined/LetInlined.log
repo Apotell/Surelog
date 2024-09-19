@@ -190,8 +190,8 @@ design                                                 1
 immediate_assert                                       3
 io_decl                                                3
 let_decl                                               3
-logic_net                                              1
 logic_typespec                                         1
+logic_var                                              1
 module_inst                                            4
 operation                                              1
 param_assign                                           3
@@ -199,20 +199,62 @@ parameter                                              3
 ref_obj                                                7
 ref_typespec                                           1
 seq_formal_decl                                        3
+source_file                                            1
 sys_func_call                                          3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LetInlined/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/LetInlined/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/LetInlined/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/LetInlined/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/LetInlined/dut.sv, line:2:1, endln:16:14
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@m
+  |vpiName:work@m
+  |vpiVariables:
+  \_logic_var: (work@m.a), line:3:7, endln:3:8
+    |vpiParent:
+    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/LetInlined/dut.sv, line:2:1, endln:16:14
+    |vpiTypespec:
+    \_ref_typespec: (work@m.a), line:3:1, endln:3:6
+      |vpiParent:
+      \_logic_var: (work@m.a), line:3:7, endln:3:8
+      |vpiFullName:work@m.a
+      |vpiActual:
+      \_logic_typespec: , line:3:1, endln:3:6
+    |vpiName:a
+    |vpiFullName:work@m.a
+    |vpiVisibility:1
+  |vpiReg:
+  \_logic_var: (work@m.a), line:3:7, endln:3:8
+  |vpiTypedef:
+  \_logic_typespec: , line:3:1, endln:3:6
+    |vpiParent:
+    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/LetInlined/dut.sv, line:2:1, endln:16:14
+  |vpiImportTypespec:
+  \_logic_typespec: , line:3:1, endln:3:6
+  |vpiImportTypespec:
+  \_logic_var: (work@m.a), line:3:7, endln:3:8
+  |vpiImportTypespec:
+  \_logic_net: (work@m.x), line:4:19, endln:4:20
+    |vpiParent:
+    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/LetInlined/dut.sv, line:2:1, endln:16:14
+    |vpiName:x
+    |vpiFullName:work@m.x
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@m.clock), line:6:33, endln:6:38
+    |vpiParent:
+    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/LetInlined/dut.sv, line:2:1, endln:16:14
+    |vpiName:clock
+    |vpiFullName:work@m.clock
+    |vpiNetType:1
   |vpiLetDecl:
   \_let_decl: (p1), line:4:1, endln:4:22
     |vpiParent:
@@ -220,13 +262,15 @@ design: (unnamed)
     |vpiExpr:
     \_sys_func_call: ($past), line:4:13, endln:4:21
       |vpiParent:
-      \_immediate_assert: (a1), line:10:1, endln:10:19
+      \_let_decl: (p1), line:4:1, endln:4:22
       |vpiArgument:
-      \_ref_obj: (work@m.a1.x), line:4:19, endln:4:20
+      \_ref_obj: (work@m.p1.x), line:4:19, endln:4:20
         |vpiParent:
         \_sys_func_call: ($past), line:4:13, endln:4:21
         |vpiName:x
-        |vpiFullName:work@m.a1.x
+        |vpiFullName:work@m.p1.x
+        |vpiActual:
+        \_logic_net: (work@m.x), line:4:19, endln:4:20
       |vpiName:$past
     |vpiName:p1
   |vpiLetDecl:
@@ -234,23 +278,29 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/LetInlined/dut.sv, line:2:1, endln:16:14
     |vpiExpr:
-    \_sys_func_call: ($past), line:6:13, endln:6:18
+    \_sys_func_call: ($past), line:6:13, endln:6:40
       |vpiParent:
-      \_immediate_assert: (a2), line:11:1, endln:11:19
+      \_let_decl: (p2), line:6:1, endln:6:41
       |vpiArgument:
-      \_ref_obj: (work@m.a2.x), line:6:19, endln:6:20
+      \_ref_obj: (work@m.p2.x), line:6:19, endln:6:20
         |vpiParent:
-        \_sys_func_call: ($past), line:6:13, endln:6:18
+        \_sys_func_call: ($past), line:6:13, endln:6:40
         |vpiName:x
-        |vpiFullName:work@m.a2.x
+        |vpiFullName:work@m.p2.x
+        |vpiActual:
+        \_logic_net: (work@m.x), line:4:19, endln:4:20
       |vpiArgument:
       \_constant: , line:6:21, endln:6:21
+        |vpiParent:
+        \_sys_func_call: ($past), line:6:13, endln:6:40
         |vpiDecompile:0
         |vpiSize:64
         |INT:0
         |vpiConstType:7
       |vpiArgument:
       \_constant: , line:6:22, endln:6:22
+        |vpiParent:
+        \_sys_func_call: ($past), line:6:13, endln:6:40
         |vpiDecompile:0
         |vpiSize:64
         |INT:0
@@ -258,14 +308,16 @@ design: (unnamed)
       |vpiArgument:
       \_operation: , line:6:25, endln:6:38
         |vpiParent:
-        \_sys_func_call: ($past), line:6:13, endln:6:18
+        \_sys_func_call: ($past), line:6:13, endln:6:40
         |vpiOpType:39
         |vpiOperand:
-        \_ref_obj: (work@m.a2.clock), line:6:33, endln:6:38
+        \_ref_obj: (work@m.p2.clock), line:6:33, endln:6:38
           |vpiParent:
           \_operation: , line:6:25, endln:6:38
           |vpiName:clock
-          |vpiFullName:work@m.a2.clock
+          |vpiFullName:work@m.p2.clock
+          |vpiActual:
+          \_logic_net: (work@m.clock), line:6:33, endln:6:38
       |vpiName:$past
     |vpiName:p2
   |vpiLetDecl:
@@ -275,30 +327,22 @@ design: (unnamed)
     |vpiExpr:
     \_sys_func_call: ($sampled), line:7:12, endln:7:23
       |vpiParent:
-      \_immediate_assert: (a3), line:12:1, endln:12:18
+      \_let_decl: (s), line:7:1, endln:7:24
       |vpiArgument:
-      \_ref_obj: (work@m.a3.x), line:7:21, endln:7:22
+      \_ref_obj: (work@m.s.x), line:7:21, endln:7:22
         |vpiParent:
         \_sys_func_call: ($sampled), line:7:12, endln:7:23
         |vpiName:x
-        |vpiFullName:work@m.a3.x
+        |vpiFullName:work@m.s.x
+        |vpiActual:
+        \_logic_net: (work@m.x), line:4:19, endln:4:20
       |vpiName:$sampled
     |vpiName:s
   |vpiDefName:work@m
   |vpiNet:
-  \_logic_net: (work@m.a), line:3:7, endln:3:8
-    |vpiParent:
-    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/LetInlined/dut.sv, line:2:1, endln:16:14
-    |vpiTypespec:
-    \_ref_typespec: (work@m.a)
-      |vpiParent:
-      \_logic_net: (work@m.a), line:3:7, endln:3:8
-      |vpiFullName:work@m.a
-      |vpiActual:
-      \_logic_typespec: , line:3:1, endln:3:6
-    |vpiName:a
-    |vpiFullName:work@m.a
-    |vpiNetType:36
+  \_logic_net: (work@m.x), line:4:19, endln:4:20
+  |vpiNet:
+  \_logic_net: (work@m.clock), line:6:33, endln:6:38
   |vpiProcess:
   \_always: , line:9:1, endln:13:4
     |vpiParent:
@@ -308,31 +352,35 @@ design: (unnamed)
       |vpiParent:
       \_always: , line:9:1, endln:13:4
       |vpiFullName:work@m
-      |vpiStmt:
-      \_immediate_assert: (a1), line:10:1, endln:10:19
+      |vpiImportTypespec:
+      \_immediate_assert: (a1), line:10:5, endln:10:19
         |vpiParent:
         \_begin: (work@m), line:9:13, endln:13:4
         |vpiName:a1
         |vpiExpr:
         \_sys_func_call: ($past), line:4:13, endln:4:21
-      |vpiStmt:
-      \_immediate_assert: (a2), line:11:1, endln:11:19
+      |vpiImportTypespec:
+      \_immediate_assert: (a2), line:11:5, endln:11:19
         |vpiParent:
         \_begin: (work@m), line:9:13, endln:13:4
         |vpiName:a2
         |vpiExpr:
-        \_sys_func_call: ($past), line:6:13, endln:6:18
-      |vpiStmt:
-      \_immediate_assert: (a3), line:12:1, endln:12:18
+        \_sys_func_call: ($past), line:6:13, endln:6:40
+      |vpiImportTypespec:
+      \_immediate_assert: (a3), line:12:5, endln:12:18
         |vpiParent:
         \_begin: (work@m), line:9:13, endln:13:4
         |vpiName:a3
         |vpiExpr:
         \_sys_func_call: ($sampled), line:7:12, endln:7:23
+      |vpiStmt:
+      \_immediate_assert: (a1), line:10:5, endln:10:19
+      |vpiStmt:
+      \_immediate_assert: (a2), line:11:5, endln:11:19
+      |vpiStmt:
+      \_immediate_assert: (a3), line:12:5, endln:12:18
     |vpiAlwaysType:2
   |vpiEndLabel:m
-\_weaklyReferenced:
-\_logic_typespec: , line:3:1, endln:3:6
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -347,5 +395,5 @@ design: (unnamed)
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/LetInlined/dut.sv | ${SURELOG_DIR}/build/regression/LetInlined/roundtrip/dut_000.sv | 7 | 16 |
+[roundtrip]: ${SURELOG_DIR}/tests/LetInlined/dut.sv | ${SURELOG_DIR}/build/regression/LetInlined/roundtrip/dut_000.sv | 8 | 16 |
 ============================== End RoundTrip Results ==============================

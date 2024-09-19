@@ -60,21 +60,25 @@ constant                                               3
 design                                                 1
 enum_const                                             1
 enum_typespec                                          1
-int_typespec                                           3
+int_typespec                                           2
 module_inst                                            2
 package                                                2
-param_assign                                           2
-parameter                                              2
+param_assign                                           1
+parameter                                              1
 ref_obj                                                2
-ref_typespec                                           5
+ref_typespec                                           3
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageConst/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PackageConst/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/PackageConst/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/PackageConst/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallPackages:
 \_package: spi_device_reg_pkg (spi_device_reg_pkg::), file:${SURELOG_DIR}/tests/PackageConst/dut.sv, line:1:1, endln:3:11
   |vpiParent:
@@ -82,14 +86,14 @@ design: (unnamed)
   |vpiName:spi_device_reg_pkg
   |vpiFullName:spi_device_reg_pkg::
   |vpiParameter:
-  \_parameter: (spi_device_reg_pkg::NumCmdInfo), line:2:27, endln:2:37
+  \_parameter: (spi_device_reg_pkg::NumCmdInfo), line:2:27, endln:2:42
     |vpiParent:
     \_package: spi_device_reg_pkg (spi_device_reg_pkg::), file:${SURELOG_DIR}/tests/PackageConst/dut.sv, line:1:1, endln:3:11
     |UINT:24
     |vpiTypespec:
-    \_ref_typespec: (spi_device_reg_pkg::NumCmdInfo)
+    \_ref_typespec: (spi_device_reg_pkg::NumCmdInfo), line:2:14, endln:2:17
       |vpiParent:
-      \_parameter: (spi_device_reg_pkg::NumCmdInfo), line:2:27, endln:2:37
+      \_parameter: (spi_device_reg_pkg::NumCmdInfo), line:2:27, endln:2:42
       |vpiFullName:spi_device_reg_pkg::NumCmdInfo
       |vpiActual:
       \_int_typespec: , line:2:14, endln:2:26
@@ -106,16 +110,15 @@ design: (unnamed)
       |vpiDecompile:24
       |vpiSize:64
       |UINT:24
-      |vpiTypespec:
-      \_ref_typespec: (spi_device_reg_pkg)
-        |vpiParent:
-        \_constant: , line:2:40, endln:2:42
-        |vpiFullName:spi_device_reg_pkg
-        |vpiActual:
-        \_int_typespec: , line:2:14, endln:2:26
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (spi_device_reg_pkg::NumCmdInfo), line:2:27, endln:2:37
+    \_parameter: (spi_device_reg_pkg::NumCmdInfo), line:2:27, endln:2:42
+  |vpiTypedef:
+  \_int_typespec: , line:2:14, endln:2:26
+    |vpiParent:
+    \_package: spi_device_reg_pkg (spi_device_reg_pkg::), file:${SURELOG_DIR}/tests/PackageConst/dut.sv, line:1:1, endln:3:11
+  |vpiImportTypespec:
+  \_int_typespec: , line:2:14, endln:2:26
   |vpiDefName:spi_device_reg_pkg
 |uhdmallPackages:
 \_package: spi_device_pkg (spi_device_pkg::), file:${SURELOG_DIR}/tests/PackageConst/dut.sv, line:5:1, endln:9:11
@@ -124,37 +127,34 @@ design: (unnamed)
   |vpiName:spi_device_pkg
   |vpiFullName:spi_device_pkg::
   |vpiTypedef:
-  \_enum_typespec: (spi_device_pkg::cmd_info_index_e), line:6:4, endln:8:23
+  \_int_typespec: , line:6:17, endln:6:29
+    |vpiParent:
+    \_package: spi_device_pkg (spi_device_pkg::), file:${SURELOG_DIR}/tests/PackageConst/dut.sv, line:5:1, endln:9:11
+  |vpiTypedef:
+  \_enum_typespec: (spi_device_pkg::cmd_info_index_e), line:6:12, endln:8:23
     |vpiParent:
     \_package: spi_device_pkg (spi_device_pkg::), file:${SURELOG_DIR}/tests/PackageConst/dut.sv, line:5:1, endln:9:11
     |vpiName:spi_device_pkg::cmd_info_index_e
-    |vpiInstance:
-    \_package: spi_device_pkg (spi_device_pkg::), file:${SURELOG_DIR}/tests/PackageConst/dut.sv, line:5:1, endln:9:11
     |vpiBaseTypespec:
-    \_ref_typespec: (spi_device_pkg::spi_device_pkg::cmd_info_index_e)
+    \_ref_typespec: (spi_device_pkg::cmd_info_index_e), line:6:12, endln:8:23
       |vpiParent:
-      \_enum_typespec: (spi_device_pkg::cmd_info_index_e), line:6:4, endln:8:23
-      |vpiFullName:spi_device_pkg::spi_device_pkg::cmd_info_index_e
+      \_enum_typespec: (spi_device_pkg::cmd_info_index_e), line:6:12, endln:8:23
+      |vpiFullName:spi_device_pkg::cmd_info_index_e
       |vpiActual:
       \_int_typespec: , line:6:17, endln:6:29
     |vpiEnumConst:
     \_enum_const: (CmdInfoReserveEnd), line:7:7, endln:7:57
       |vpiParent:
-      \_enum_typespec: (spi_device_pkg::cmd_info_index_e), line:6:4, endln:8:23
+      \_enum_typespec: (spi_device_pkg::cmd_info_index_e), line:6:12, endln:8:23
       |vpiName:CmdInfoReserveEnd
       |UINT:24
       |vpiDecompile:spi_device_reg_pkg::NumCmdInfo
       |vpiSize:32
+  |vpiImportTypespec:
+  \_int_typespec: , line:6:17, endln:6:29
+  |vpiImportTypespec:
+  \_enum_typespec: (spi_device_pkg::cmd_info_index_e), line:6:12, endln:8:23
   |vpiDefName:spi_device_pkg
-\_weaklyReferenced:
-\_int_typespec: , line:2:14, endln:2:26
-  |vpiParent:
-  \_parameter: (spi_device_reg_pkg::NumCmdInfo), line:2:27, endln:2:37
-  |vpiInstance:
-  \_package: spi_device_reg_pkg (spi_device_reg_pkg::), file:${SURELOG_DIR}/tests/PackageConst/dut.sv, line:1:1, endln:3:11
-\_int_typespec: , line:6:17, endln:6:29
-  |vpiInstance:
-  \_package: spi_device_pkg (spi_device_pkg::), file:${SURELOG_DIR}/tests/PackageConst/dut.sv, line:5:1, endln:9:11
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -163,5 +163,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PackageConst/dut.sv | ${SURELOG_DIR}/build/regression/PackageConst/roundtrip/dut_000.sv | 0 | 9 |
+[roundtrip]: ${SURELOG_DIR}/tests/PackageConst/dut.sv | ${SURELOG_DIR}/build/regression/PackageConst/roundtrip/dut_000.sv | 2 | 9 |
 ============================== End RoundTrip Results ==============================

@@ -78,32 +78,61 @@ AST_DEBUG_END
 constant                                               3
 cont_assign                                            2
 design                                                 1
-logic_net                                              2
 module_inst                                            2
 operation                                              1
+preproc_macro_definition                               2
+preproc_macro_instance                                 2
 ref_obj                                                2
+source_file                                            1
 sys_func_call                                          1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PPMacro/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PPMacro/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/PPMacro/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/PPMacro/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiPreprocMacroDefinitions:
+  \_preproc_macro_definition: (FOO1), line:1:9, endln:1:13
+    |vpiParent:
+    \_source_file: , file:${SURELOG_DIR}/tests/PPMacro/dut.sv
+    |vpiName:FOO1
+  |vpiPreprocMacroDefinitions:
+  \_preproc_macro_definition: (FOO2), line:6:9, endln:6:13
+    |vpiParent:
+    \_source_file: , file:${SURELOG_DIR}/tests/PPMacro/dut.sv
+    |vpiName:FOO2
+  |vpiPreprocMacroInstances:
+  \_preproc_macro_instance: , file:${SURELOG_DIR}/tests/PPMacro/dut.sv, line:3:14, endln:3:24
+    |vpiParent:
+    \_source_file: , file:${SURELOG_DIR}/tests/PPMacro/dut.sv
+    |vpiPreprocMacroDefinition:
+    \_preproc_macro_definition: (FOO1), line:1:9, endln:1:13
+  |vpiPreprocMacroInstances:
+  \_preproc_macro_instance: , file:${SURELOG_DIR}/tests/PPMacro/dut.sv
+    |vpiParent:
+    \_source_file: , file:${SURELOG_DIR}/tests/PPMacro/dut.sv
+    |vpiPreprocMacroDefinition:
+    \_preproc_macro_definition: (FOO2), line:6:9, endln:6:13
 |uhdmallModules:
 \_module_inst: work@top1 (work@top1), file:${SURELOG_DIR}/tests/PPMacro/dut.sv, line:2:1, endln:4:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top1
-  |vpiDefName:work@top1
-  |vpiNet:
+  |vpiName:work@top1
+  |vpiImportTypespec:
   \_logic_net: (work@top1.a), line:3:10, endln:3:11
     |vpiParent:
-    \_cont_assign: , line:3:10, endln:3:25
+    \_module_inst: work@top1 (work@top1), file:${SURELOG_DIR}/tests/PPMacro/dut.sv, line:2:1, endln:4:10
     |vpiName:a
     |vpiFullName:work@top1.a
     |vpiNetType:1
+  |vpiDefName:work@top1
+  |vpiNet:
+  \_logic_net: (work@top1.a), line:3:10, endln:3:11
   |vpiContAssign:
   \_cont_assign: , line:3:10, endln:3:25
     |vpiParent:
@@ -124,7 +153,7 @@ design: (unnamed)
     |vpiLhs:
     \_ref_obj: (work@top1.a), line:3:10, endln:3:11
       |vpiParent:
-      \_cont_assign: , line:3:10, endln:3:25
+      \_module_inst: work@top1 (work@top1), file:${SURELOG_DIR}/tests/PPMacro/dut.sv, line:2:1, endln:4:10
       |vpiName:a
       |vpiFullName:work@top1.a
       |vpiActual:
@@ -133,15 +162,17 @@ design: (unnamed)
 \_module_inst: work@top2 (work@top2), file:${SURELOG_DIR}/tests/PPMacro/dut.sv, line:7:1, endln:9:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top2
-  |vpiDefName:work@top2
-  |vpiNet:
+  |vpiName:work@top2
+  |vpiImportTypespec:
   \_logic_net: (work@top2.a), line:8:10, endln:8:11
     |vpiParent:
-    \_cont_assign: , line:8:10, endln:8:24
+    \_module_inst: work@top2 (work@top2), file:${SURELOG_DIR}/tests/PPMacro/dut.sv, line:7:1, endln:9:10
     |vpiName:a
     |vpiFullName:work@top2.a
     |vpiNetType:1
+  |vpiDefName:work@top2
+  |vpiNet:
+  \_logic_net: (work@top2.a), line:8:10, endln:8:11
   |vpiContAssign:
   \_cont_assign: , line:8:10, endln:8:24
     |vpiParent:
@@ -170,7 +201,7 @@ design: (unnamed)
     |vpiLhs:
     \_ref_obj: (work@top2.a), line:8:10, endln:8:11
       |vpiParent:
-      \_cont_assign: , line:8:10, endln:8:24
+      \_module_inst: work@top2 (work@top2), file:${SURELOG_DIR}/tests/PPMacro/dut.sv, line:7:1, endln:9:10
       |vpiName:a
       |vpiFullName:work@top2.a
       |vpiActual:
@@ -183,5 +214,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PPMacro/dut.sv | ${SURELOG_DIR}/build/regression/PPMacro/roundtrip/dut_000.sv | 4 | 9 |
+[roundtrip]: ${SURELOG_DIR}/tests/PPMacro/dut.sv | ${SURELOG_DIR}/build/regression/PPMacro/roundtrip/dut_000.sv | 8 | 9 |
 ============================== End RoundTrip Results ==============================

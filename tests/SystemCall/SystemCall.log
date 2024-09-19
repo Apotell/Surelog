@@ -87,25 +87,49 @@ cont_assign                                            1
 design                                                 1
 io_decl                                                1
 let_decl                                               1
-logic_net                                              3
 module_inst                                            1
 operation                                              1
 ref_obj                                                5
 seq_formal_decl                                        1
+source_file                                            1
 sys_func_call                                          2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SystemCall/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/SystemCall/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/SystemCall/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/SystemCall/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@m2 (work@m2), file:${SURELOG_DIR}/tests/SystemCall/dut.sv, line:1:1, endln:6:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@m2
+  |vpiName:work@m2
+  |vpiImportTypespec:
+  \_logic_net: (work@m2.x), line:3:19, endln:3:20
+    |vpiParent:
+    \_module_inst: work@m2 (work@m2), file:${SURELOG_DIR}/tests/SystemCall/dut.sv, line:1:1, endln:6:10
+    |vpiName:x
+    |vpiFullName:work@m2.x
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@m2.clock), line:3:23, endln:3:28
+    |vpiParent:
+    \_module_inst: work@m2 (work@m2), file:${SURELOG_DIR}/tests/SystemCall/dut.sv, line:1:1, endln:6:10
+    |vpiName:clock
+    |vpiFullName:work@m2.clock
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@m2.a), line:4:8, endln:4:9
+    |vpiParent:
+    \_module_inst: work@m2 (work@m2), file:${SURELOG_DIR}/tests/SystemCall/dut.sv, line:1:1, endln:6:10
+    |vpiName:a
+    |vpiFullName:work@m2.a
+    |vpiNetType:1
   |vpiLetDecl:
   \_let_decl: (p2), line:3:1, endln:3:30
     |vpiParent:
@@ -120,14 +144,20 @@ design: (unnamed)
         \_sys_func_call: ($past), line:3:13, endln:3:29
         |vpiName:x
         |vpiFullName:work@m2.p2.x
+        |vpiActual:
+        \_logic_net: (work@m2.x), line:3:19, endln:3:20
       |vpiArgument:
       \_constant: , line:3:21, endln:3:21
+        |vpiParent:
+        \_sys_func_call: ($past), line:3:13, endln:3:29
         |vpiDecompile:0
         |vpiSize:64
         |INT:0
         |vpiConstType:7
       |vpiArgument:
       \_constant: , line:3:22, endln:3:22
+        |vpiParent:
+        \_sys_func_call: ($past), line:3:13, endln:3:29
         |vpiDecompile:0
         |vpiSize:64
         |INT:0
@@ -138,54 +168,45 @@ design: (unnamed)
         \_sys_func_call: ($past), line:3:13, endln:3:29
         |vpiName:clock
         |vpiFullName:work@m2.p2.clock
+        |vpiActual:
+        \_logic_net: (work@m2.clock), line:3:23, endln:3:28
       |vpiName:$past
     |vpiName:p2
   |vpiDefName:work@m2
   |vpiNet:
+  \_logic_net: (work@m2.x), line:3:19, endln:3:20
+  |vpiNet:
+  \_logic_net: (work@m2.clock), line:3:23, endln:3:28
+  |vpiNet:
   \_logic_net: (work@m2.a), line:4:8, endln:4:9
-    |vpiParent:
-    \_cont_assign: , line:4:8, endln:4:39
-    |vpiName:a
-    |vpiFullName:work@m2.a
-    |vpiNetType:1
-  |vpiNet:
-  \_logic_net: (work@m2.x), line:4:18, endln:4:19
-    |vpiParent:
-    \_sys_func_call: ($past), line:4:12, endln:4:17
-    |vpiName:x
-    |vpiFullName:work@m2.x
-    |vpiNetType:1
-  |vpiNet:
-  \_logic_net: (work@m2.clock), line:4:32, endln:4:37
-    |vpiParent:
-    \_operation: , line:4:24, endln:4:37
-    |vpiName:clock
-    |vpiFullName:work@m2.clock
-    |vpiNetType:1
   |vpiContAssign:
   \_cont_assign: , line:4:8, endln:4:39
     |vpiParent:
     \_module_inst: work@m2 (work@m2), file:${SURELOG_DIR}/tests/SystemCall/dut.sv, line:1:1, endln:6:10
     |vpiRhs:
-    \_sys_func_call: ($past), line:4:12, endln:4:17
+    \_sys_func_call: ($past), line:4:12, endln:4:39
       |vpiParent:
       \_cont_assign: , line:4:8, endln:4:39
       |vpiArgument:
       \_ref_obj: (work@m2.x), line:4:18, endln:4:19
         |vpiParent:
-        \_sys_func_call: ($past), line:4:12, endln:4:17
+        \_sys_func_call: ($past), line:4:12, endln:4:39
         |vpiName:x
         |vpiFullName:work@m2.x
         |vpiActual:
-        \_logic_net: (work@m2.x), line:4:18, endln:4:19
+        \_logic_net: (work@m2.x), line:3:19, endln:3:20
       |vpiArgument:
       \_constant: , line:4:20, endln:4:20
+        |vpiParent:
+        \_sys_func_call: ($past), line:4:12, endln:4:39
         |vpiDecompile:0
         |vpiSize:64
         |INT:0
         |vpiConstType:7
       |vpiArgument:
       \_constant: , line:4:21, endln:4:21
+        |vpiParent:
+        \_sys_func_call: ($past), line:4:12, endln:4:39
         |vpiDecompile:0
         |vpiSize:64
         |INT:0
@@ -193,7 +214,7 @@ design: (unnamed)
       |vpiArgument:
       \_operation: , line:4:24, endln:4:37
         |vpiParent:
-        \_sys_func_call: ($past), line:4:12, endln:4:17
+        \_sys_func_call: ($past), line:4:12, endln:4:39
         |vpiOpType:39
         |vpiOperand:
         \_ref_obj: (work@m2.clock), line:4:32, endln:4:37
@@ -202,12 +223,12 @@ design: (unnamed)
           |vpiName:clock
           |vpiFullName:work@m2.clock
           |vpiActual:
-          \_logic_net: (work@m2.clock), line:4:32, endln:4:37
+          \_logic_net: (work@m2.clock), line:3:23, endln:3:28
       |vpiName:$past
     |vpiLhs:
     \_ref_obj: (work@m2.a), line:4:8, endln:4:9
       |vpiParent:
-      \_cont_assign: , line:4:8, endln:4:39
+      \_module_inst: work@m2 (work@m2), file:${SURELOG_DIR}/tests/SystemCall/dut.sv, line:1:1, endln:6:10
       |vpiName:a
       |vpiFullName:work@m2.a
       |vpiActual:
@@ -225,5 +246,5 @@ design: (unnamed)
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/SystemCall/dut.sv | ${SURELOG_DIR}/build/regression/SystemCall/roundtrip/dut_000.sv | 2 | 6 |
+[roundtrip]: ${SURELOG_DIR}/tests/SystemCall/dut.sv | ${SURELOG_DIR}/build/regression/SystemCall/roundtrip/dut_000.sv | 4 | 6 |
 ============================== End RoundTrip Results ==============================

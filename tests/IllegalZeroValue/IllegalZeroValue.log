@@ -39,41 +39,55 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/IllegalZeroValue/dut.sv:1:1: Compile module "work@test".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+array_net                                              1
+constant                                               1
 design                                                 1
 logic_net                                              1
 logic_typespec                                         1
 module_inst                                            1
+operation                                              1
+range                                                  1
 ref_typespec                                           1
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/IllegalZeroValue/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/IllegalZeroValue/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/IllegalZeroValue/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/IllegalZeroValue/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/IllegalZeroValue/dut.sv, line:1:1, endln:5:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@test
-  |vpiDefName:work@test
-  |vpiNet:
-  \_logic_net: (work@test.illegal), line:3:5, endln:3:12
+  |vpiName:work@test
+  |vpiTypedef:
+  \_logic_typespec: , line:3:1, endln:3:4
+    |vpiParent:
+    \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/IllegalZeroValue/dut.sv, line:1:1, endln:5:10
+  |vpiImportTypespec:
+  \_logic_typespec: , line:3:1, endln:3:4
+  |vpiImportTypespec:
+  \_logic_net: (work@test), line:3:1, endln:3:16
     |vpiParent:
     \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/IllegalZeroValue/dut.sv, line:1:1, endln:5:10
     |vpiTypespec:
-    \_ref_typespec: (work@test.illegal)
+    \_ref_typespec: (work@test.illegal), line:3:1, endln:3:4
       |vpiParent:
-      \_logic_net: (work@test.illegal), line:3:5, endln:3:12
+      \_logic_net: (work@test), line:3:1, endln:3:16
+      |vpiName:illegal
       |vpiFullName:work@test.illegal
       |vpiActual:
-      \_logic_typespec: , line:3:1, endln:3:15
-    |vpiName:illegal
-    |vpiFullName:work@test.illegal
+      \_logic_typespec: , line:3:1, endln:3:4
+    |vpiFullName:work@test
     |vpiNetType:48
-\_weaklyReferenced:
-\_logic_typespec: , line:3:1, endln:3:15
+  |vpiDefName:work@test
+  |vpiNet:
+  \_logic_net: (work@test), line:3:1, endln:3:16
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -82,5 +96,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/IllegalZeroValue/dut.sv | ${SURELOG_DIR}/build/regression/IllegalZeroValue/roundtrip/dut_000.sv | 1 | 5 |
+[roundtrip]: ${SURELOG_DIR}/tests/IllegalZeroValue/dut.sv | ${SURELOG_DIR}/build/regression/IllegalZeroValue/roundtrip/dut_000.sv | 3 | 5 |
 ============================== End RoundTrip Results ==============================

@@ -5,14 +5,14 @@
 [WRN:PA0205] ${SURELOG_DIR}/tests/AaFirstTest/dut.sv:3:1: No timescale set for "top".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/AaFirstTest/dut.sv:3:1: Compile module "work@top".
-[INF:CP0302] Compile class "work@mailbox".
-[INF:CP0302] Compile class "work@process".
-[INF:CP0302] Compile class "work@semaphore".
+[INF:CP0302] Compile class "builtin::mailbox".
+[INF:CP0302] Compile class "builtin::process".
+[INF:CP0302] Compile class "builtin::semaphore".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 class_defn                                             8
-class_typespec                                         4
-class_var                                              3
+class_typespec                                         1
+class_var                                              1
 constant                                               5
 design                                                 1
 enum_const                                             5
@@ -23,24 +23,25 @@ int_typespec                                           9
 int_var                                                4
 io_decl                                               11
 logic_net                                              1
-logic_typespec                                         1
+logic_typespec                                         2
 logic_var                                              1
 module_inst                                            1
 package                                                1
 port                                                   2
 ref_module                                             1
-ref_obj                                                2
-ref_typespec                                          14
+ref_obj                                                1
+ref_typespec                                          13
+source_file                                            1
 task                                                   9
 === UHDM Object Stats End ===
+[ERR:IG0809] ${SURELOG_DIR}/tests/AaFirstTest/dut.sv:5:3: Object 4 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/AaFirstTest/slpp_unit/surelog.uhdm ...
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 1
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/AaFirstTest/builtin.sv | ${SURELOG_DIR}/build/regression/AaFirstTest/roundtrip/builtin_000.sv | 0 | 0 |
-[roundtrip]: ${SURELOG_DIR}/tests/AaFirstTest/dut.sv     | ${SURELOG_DIR}/build/regression/AaFirstTest/roundtrip/dut_000.sv     | 2 | 7 |
+[roundtrip]: ${SURELOG_DIR}/tests/AaFirstTest/dut.sv | ${SURELOG_DIR}/build/regression/AaFirstTest/roundtrip/dut_000.sv | 3 | 7 |
 ============================== End RoundTrip Results ==============================

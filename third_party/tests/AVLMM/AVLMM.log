@@ -8,24 +8,26 @@
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/third_party/tests/AVLMM/tb.sv:3:1: Compile module "work@tb".
 [INF:CP0303] ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:13:1: Compile module "work@test_program".
-[INF:CP0302] Compile class "work@mailbox".
-[INF:CP0302] Compile class "work@process".
-[INF:CP0302] Compile class "work@semaphore".
+[INF:CP0302] Compile class "builtin::mailbox".
+[INF:CP0302] Compile class "builtin::process".
+[INF:CP0302] Compile class "builtin::semaphore".
 [ERR:CP0316] ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:15:11: Undefined package "verbosity_pkg".
 [ERR:CP0316] ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:16:11: Undefined package "avalon_mm_pkg".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 always                                                 9
-array_typespec                                         5
+array_typespec                                        15
+array_var                                              5
 assignment                                           120
 begin                                                 85
 bit_select                                            41
 bit_typespec                                           6
+bit_var                                                1
 break_stmt                                             2
 class_defn                                             8
-class_typespec                                         4
-class_var                                              3
-constant                                             168
+class_typespec                                         1
+class_var                                              1
+constant                                             171
 delay_control                                          1
 design                                                 1
 enum_const                                             9
@@ -43,72 +45,82 @@ if_else                                               13
 if_stmt                                               10
 import_typespec                                        2
 initial                                                2
-int_typespec                                          55
-int_var                                               28
+int_typespec                                          44
+int_var                                               30
 io_decl                                               43
-logic_net                                             16
-logic_typespec                                        21
+logic_net                                              2
+logic_typespec                                        16
 logic_var                                              9
 method_func_call                                      13
 module_inst                                            3
+named_event                                            1
 operation                                            115
 package                                                1
 packed_array_typespec                                  1
 param_assign                                          12
 parameter                                             12
 port                                                   2
-range                                                 35
+preproc_macro_definition                              14
+preproc_macro_instance                                86
+range                                                 39
 ref_module                                             2
-ref_obj                                              577
-ref_typespec                                         165
+ref_obj                                              572
+ref_typespec                                         155
 ref_var                                                6
 repeat                                                 1
 return_stmt                                           11
+source_file                                            2
 string_typespec                                        2
 string_var                                             1
 struct_typespec                                        2
-struct_var                                            31
+struct_var                                            36
 sys_func_call                                         19
 task                                                  21
 task_call                                             22
 typespec_member                                       10
-unsupported_typespec                                   6
+unsupported_typespec                                  11
 var_select                                             2
 wait_stmt                                              1
 === UHDM Object Stats End ===
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/AVLMM/tb.sv:11:4: Object 112 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/AVLMM/slpp_unit/surelog.uhdm ...
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 2
+[  ERROR] : 3
 [WARNING] : 1
 [   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
 [LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/tb.sv:20:7: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:301:24: Non synthesizable construct, $urandom_range
-[LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:302:24: Non synthesizable construct, $urandom_range
 [LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:330:36: Non synthesizable construct, $urandom_range
 [LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:336:36: Non synthesizable construct, $urandom_range
 [LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:339:36: Non synthesizable construct, $urandom_range
 [LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:349:20: Non synthesizable construct, $urandom_range
-[LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:381:51: Non synthesizable construct, push_back
-[LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:383:50: Non synthesizable construct, push_back
-[LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:395:46: Non synthesizable construct, push_back
-[LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:397:45: Non synthesizable construct, push_back
-[LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:438:52: Non synthesizable construct, delete
+[LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:438:16: Non synthesizable construct, delete
 [LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:444:59: Non synthesizable construct, pop_front
-[LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:450:51: Non synthesizable construct, delete
+[LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:450:16: Non synthesizable construct, delete
 [LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:456:58: Non synthesizable construct, pop_front
-[LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:492:13: Non synthesizable construct, $sformat
-[LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:498:13: Non synthesizable construct, assert_fail
 [LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:512:30: Non synthesizable construct, $urandom_range
 [LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:525:49: Non synthesizable construct, pop_front
+[LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:301:24: Non synthesizable construct, $urandom_range
+[LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:302:24: Non synthesizable construct, $urandom_range
+[LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:381:13: Non synthesizable construct, push_back
+[LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:383:13: Non synthesizable construct, push_back
+[LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:395:10: Non synthesizable construct, push_back
+[LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:397:10: Non synthesizable construct, push_back
+[LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:492:13: Non synthesizable construct, $sformat
+[LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:498:13: Non synthesizable construct, assert_fail
 [LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:261:1: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:202:42: Non synthesizable construct, pop_front
 [LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:124:32: Non synthesizable construct, $urandom_range
-[LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:136:39: Non synthesizable construct, push_back
+[LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:136:10: Non synthesizable construct, push_back
 [LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:202:42: Non synthesizable construct, pop_front
 [LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:124:32: Non synthesizable construct, $urandom_range
-[LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:136:39: Non synthesizable construct, push_back
+[LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:136:10: Non synthesizable construct, push_back
 [LINT]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv:270:7: Non synthesizable construct,
 ============================== End Linting Results ==============================
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/AVLMM/tb.sv           | ${SURELOG_DIR}/build/regression/AVLMM/roundtrip/tb_000.sv           | 13 | 30 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/AVLMM/test_program.sv | ${SURELOG_DIR}/build/regression/AVLMM/roundtrip/test_program_000.sv | 311 | 541 |
+============================== End RoundTrip Results ==============================

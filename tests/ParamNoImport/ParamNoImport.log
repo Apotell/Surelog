@@ -122,30 +122,33 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamNoImport/dut.sv:1:1: Compile module "work@test".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                               8
+constant                                               6
 design                                                 1
-int_typespec                                           1
-logic_typespec                                         2
+logic_typespec                                         1
 module_inst                                            2
 operation                                              3
 package                                                1
-param_assign                                           3
-parameter                                              3
-range                                                  2
+param_assign                                           2
+parameter                                              2
+range                                                  1
 ref_module                                             1
-ref_typespec                                           9
+ref_typespec                                           6
+source_file                                            1
 string_typespec                                        3
-struct_typespec                                        2
+struct_typespec                                        1
 tagged_pattern                                         3
-typespec_member                                        2
+typespec_member                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamNoImport/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ParamNoImport/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ParamNoImport/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallPackages:
 \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
   |vpiParent:
@@ -153,13 +156,13 @@ design: (unnamed)
   |vpiName:pkg
   |vpiFullName:pkg::
   |vpiParameter:
-  \_parameter: (pkg::PWR_AST_RSP_DEFAULT), line:9:25, endln:9:44
+  \_parameter: (pkg::PWR_AST_RSP_DEFAULT), line:9:25, endln:11:2
     |vpiParent:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
     |vpiTypespec:
-    \_ref_typespec: (pkg::PWR_AST_RSP_DEFAULT)
+    \_ref_typespec: (pkg::PWR_AST_RSP_DEFAULT), line:9:11, endln:9:24
       |vpiParent:
-      \_parameter: (pkg::PWR_AST_RSP_DEFAULT), line:9:25, endln:9:44
+      \_parameter: (pkg::PWR_AST_RSP_DEFAULT), line:9:25, endln:11:2
       |vpiFullName:pkg::PWR_AST_RSP_DEFAULT
       |vpiActual:
       \_struct_typespec: (pkg::pwr_ast_rsp_t), line:6:9, endln:8:2
@@ -175,58 +178,103 @@ design: (unnamed)
       \_param_assign: , line:9:25, endln:11:2
       |vpiOpType:75
       |vpiOperand:
-      \_tagged_pattern: , line:10:17, endln:10:22
+      \_tagged_pattern: , line:10:3, endln:10:22
         |vpiParent:
         \_operation: , line:9:47, endln:11:2
         |vpiPattern:
         \_constant: , line:10:17, endln:10:22
+          |vpiParent:
+          \_operation: , line:9:47, endln:11:2
           |vpiDecompile:2'b10
           |vpiSize:2
           |BIN:10
           |vpiConstType:3
         |vpiTypespec:
-        \_ref_typespec: (pkg)
+        \_ref_typespec: (pkg::slow_clk_val), line:10:3, endln:10:15
           |vpiParent:
-          \_tagged_pattern: , line:10:17, endln:10:22
-          |vpiFullName:pkg
+          \_tagged_pattern: , line:10:3, endln:10:22
+          |vpiName:slow_clk_val
+          |vpiFullName:pkg::slow_clk_val
           |vpiActual:
           \_string_typespec: (slow_clk_val), line:10:3, endln:10:15
     |vpiLhs:
-    \_parameter: (pkg::PWR_AST_RSP_DEFAULT), line:9:25, endln:9:44
+    \_parameter: (pkg::PWR_AST_RSP_DEFAULT), line:9:25, endln:11:2
   |vpiTypedef:
   \_struct_typespec: (pkg::pwr_ast_rsp_t), line:6:9, endln:8:2
     |vpiParent:
-    \_parameter: (pkg::PWR_AST_RSP_DEFAULT), line:9:25, endln:9:44
-    |vpiName:pkg::pwr_ast_rsp_t
-    |vpiInstance:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
+    |vpiName:pkg::pwr_ast_rsp_t
     |vpiPacked:1
     |vpiTypespecMember:
-    \_typespec_member: (slow_clk_val), line:7:15, endln:7:27
+    \_typespec_member: (slow_clk_val), line:7:3, endln:7:28
       |vpiParent:
       \_struct_typespec: (pkg::pwr_ast_rsp_t), line:6:9, endln:8:2
       |vpiName:slow_clk_val
       |vpiTypespec:
-      \_ref_typespec: (pkg::PWR_AST_RSP_DEFAULT::pkg::pwr_ast_rsp_t::slow_clk_val)
+      \_ref_typespec: (pkg::pwr_ast_rsp_t::slow_clk_val), line:7:3, endln:7:14
         |vpiParent:
-        \_typespec_member: (slow_clk_val), line:7:15, endln:7:27
-        |vpiFullName:pkg::PWR_AST_RSP_DEFAULT::pkg::pwr_ast_rsp_t::slow_clk_val
+        \_typespec_member: (slow_clk_val), line:7:3, endln:7:28
+        |vpiFullName:pkg::pwr_ast_rsp_t::slow_clk_val
         |vpiActual:
         \_logic_typespec: , line:7:3, endln:7:14
-      |vpiRefFile:${SURELOG_DIR}/tests/ParamNoImport/dut.sv
-      |vpiRefLineNo:7
-      |vpiRefColumnNo:3
-      |vpiRefEndLineNo:7
-      |vpiRefEndColumnNo:14
+  |vpiTypedef:
+  \_logic_typespec: , line:7:3, endln:7:14
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
+    |vpiRange:
+    \_range: , line:7:9, endln:7:14
+      |vpiParent:
+      \_struct_typespec: (pkg::pwr_ast_rsp_t), line:6:9, endln:8:2
+      |vpiLeftRange:
+      \_constant: , line:7:10, endln:7:11
+        |vpiParent:
+        \_range: , line:7:9, endln:7:14
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:7:12, endln:7:13
+        |vpiParent:
+        \_range: , line:7:9, endln:7:14
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_string_typespec: (slow_clk_val), line:10:3, endln:10:15
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
+    |vpiName:slow_clk_val
+  |vpiTypedef:
+  \_string_typespec: (slow_clk_val), line:10:3, endln:10:15
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
+    |vpiName:slow_clk_val
+  |vpiTypedef:
+  \_string_typespec: (slow_clk_val), line:10:3, endln:10:15
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
+    |vpiName:slow_clk_val
+  |vpiImportTypespec:
+  \_struct_typespec: (pkg::pwr_ast_rsp_t), line:6:9, endln:8:2
+  |vpiImportTypespec:
+  \_logic_typespec: , line:7:3, endln:7:14
+  |vpiImportTypespec:
+  \_string_typespec: (slow_clk_val), line:10:3, endln:10:15
+  |vpiImportTypespec:
+  \_string_typespec: (slow_clk_val), line:10:3, endln:10:15
+  |vpiImportTypespec:
+  \_string_typespec: (slow_clk_val), line:10:3, endln:10:15
   |vpiDefName:pkg
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:14:1, endln:18:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@dut
+  |vpiName:work@dut
   |vpiDefName:work@dut
   |vpiRefModule:
-  \_ref_module: work@test (t), line:16:48, endln:16:49
+  \_ref_module: work@test (t), line:16:1, endln:16:52
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:14:1, endln:18:10
     |vpiName:t
@@ -237,9 +285,9 @@ design: (unnamed)
 \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:1:1, endln:3:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@test
+  |vpiName:work@test
   |vpiParameter:
-  \_parameter: (work@test.PWR_AST_RSP), line:1:26, endln:1:37
+  \_parameter: (work@test.PWR_AST_RSP), line:1:26, endln:1:42
     |vpiParent:
     \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:1:1, endln:3:10
     |BIN:0
@@ -256,43 +304,10 @@ design: (unnamed)
       |vpiDecompile:'0
       |vpiSize:-1
       |BIN:0
-      |vpiTypespec:
-      \_ref_typespec: (work@test)
-        |vpiParent:
-        \_constant: , line:1:40, endln:1:42
-        |vpiFullName:work@test
       |vpiConstType:3
     |vpiLhs:
-    \_parameter: (work@test.PWR_AST_RSP), line:1:26, endln:1:37
+    \_parameter: (work@test.PWR_AST_RSP), line:1:26, endln:1:42
   |vpiDefName:work@test
-\_weaklyReferenced:
-\_logic_typespec: , line:7:3, endln:7:14
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
-  |vpiRange:
-  \_range: , line:7:9, endln:7:14
-    |vpiParent:
-    \_logic_typespec: , line:7:3, endln:7:14
-    |vpiLeftRange:
-    \_constant: , line:7:10, endln:7:11
-      |vpiParent:
-      \_range: , line:7:9, endln:7:14
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:7:12, endln:7:13
-      |vpiParent:
-      \_range: , line:7:9, endln:7:14
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_string_typespec: (slow_clk_val), line:10:3, endln:10:15
-  |vpiParent:
-  \_tagged_pattern: , line:10:17, endln:10:22
-  |vpiName:slow_clk_val
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -301,5 +316,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ParamNoImport/dut.sv | ${SURELOG_DIR}/build/regression/ParamNoImport/roundtrip/dut_000.sv | 2 | 18 |
+[roundtrip]: ${SURELOG_DIR}/tests/ParamNoImport/dut.sv | ${SURELOG_DIR}/build/regression/ParamNoImport/roundtrip/dut_000.sv | 6 | 18 |
 ============================== End RoundTrip Results ==============================

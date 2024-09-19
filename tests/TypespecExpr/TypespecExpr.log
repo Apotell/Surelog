@@ -187,20 +187,22 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/TypespecExpr/dut.sv:5:1: Compile module "work@Mod2".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              10
+constant                                              16
 cont_assign                                            1
 design                                                 1
-logic_net                                              2
-logic_typespec                                         4
+logic_net                                              1
+logic_typespec                                         5
+logic_var                                              1
 module_inst                                            2
 operation                                              1
 param_assign                                           2
 parameter                                              2
 port                                                   2
-range                                                  4
+range                                                  7
 ref_module                                             1
-ref_obj                                                4
+ref_obj                                                3
 ref_typespec                                           7
+source_file                                            1
 string_typespec                                        1
 struct_typespec                                        1
 tagged_pattern                                         1
@@ -208,25 +210,28 @@ typespec_member                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypespecExpr/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/TypespecExpr/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/TypespecExpr/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/TypespecExpr/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@Mod1 (work@Mod1), file:${SURELOG_DIR}/tests/TypespecExpr/dut.sv, line:1:1, endln:3:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@Mod1
+  |vpiName:work@Mod1
   |vpiParameter:
-  \_parameter: (work@Mod1.PARAM), line:1:38, endln:1:43
+  \_parameter: (work@Mod1.PARAM), line:1:38, endln:1:48
     |vpiParent:
     \_module_inst: work@Mod1 (work@Mod1), file:${SURELOG_DIR}/tests/TypespecExpr/dut.sv, line:1:1, endln:3:10
     |BIN:0
     |vpiTypespec:
-    \_ref_typespec: (work@Mod1.PARAM)
+    \_ref_typespec: (work@Mod1.PARAM), line:1:25, endln:1:30
       |vpiParent:
-      \_parameter: (work@Mod1.PARAM), line:1:38, endln:1:43
+      \_parameter: (work@Mod1.PARAM), line:1:38, endln:1:48
       |vpiFullName:work@Mod1.PARAM
       |vpiActual:
       \_logic_typespec: , line:1:25, endln:1:37
@@ -243,42 +248,115 @@ design: (unnamed)
       |vpiDecompile:'0
       |vpiSize:-1
       |BIN:0
-      |vpiTypespec:
-      \_ref_typespec: (work@Mod1)
-        |vpiParent:
-        \_constant: , line:1:46, endln:1:48
-        |vpiFullName:work@Mod1
-        |vpiActual:
-        \_logic_typespec: , line:1:25, endln:1:37
       |vpiConstType:3
     |vpiLhs:
-    \_parameter: (work@Mod1.PARAM), line:1:38, endln:1:43
-  |vpiDefName:work@Mod1
-  |vpiNet:
+    \_parameter: (work@Mod1.PARAM), line:1:38, endln:1:48
+  |vpiTypedef:
+  \_logic_typespec: , line:1:25, endln:1:37
+    |vpiParent:
+    \_module_inst: work@Mod1 (work@Mod1), file:${SURELOG_DIR}/tests/TypespecExpr/dut.sv, line:1:1, endln:3:10
+    |vpiRange:
+    \_range: , line:1:31, endln:1:37
+      |vpiParent:
+      \_module_inst: work@Mod1 (work@Mod1), file:${SURELOG_DIR}/tests/TypespecExpr/dut.sv, line:1:1, endln:3:10
+      |vpiLeftRange:
+      \_constant: , line:1:32, endln:1:34
+        |vpiParent:
+        \_range: , line:1:31, endln:1:37
+        |vpiDecompile:31
+        |vpiSize:64
+        |UINT:31
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:1:35, endln:1:36
+        |vpiParent:
+        \_range: , line:1:31, endln:1:37
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_logic_typespec: , line:1:58, endln:1:70
+    |vpiParent:
+    \_module_inst: work@Mod1 (work@Mod1), file:${SURELOG_DIR}/tests/TypespecExpr/dut.sv, line:1:1, endln:3:10
+    |vpiRange:
+    \_range: , line:1:64, endln:1:70
+      |vpiParent:
+      \_module_inst: work@Mod1 (work@Mod1), file:${SURELOG_DIR}/tests/TypespecExpr/dut.sv, line:1:1, endln:3:10
+      |vpiLeftRange:
+      \_constant: , line:1:65, endln:1:67
+        |vpiParent:
+        \_range: , line:1:64, endln:1:70
+        |vpiDecompile:31
+        |vpiSize:64
+        |UINT:31
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:1:68, endln:1:69
+        |vpiParent:
+        \_range: , line:1:64, endln:1:70
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_logic_typespec: , line:1:58, endln:1:70
+    |vpiParent:
+    \_module_inst: work@Mod1 (work@Mod1), file:${SURELOG_DIR}/tests/TypespecExpr/dut.sv, line:1:1, endln:3:10
+    |vpiRange:
+    \_range: , line:1:64, endln:1:70
+      |vpiParent:
+      \_port: (x), line:1:51, endln:1:72
+      |vpiLeftRange:
+      \_constant: , line:1:65, endln:1:67
+        |vpiParent:
+        \_range: , line:1:64, endln:1:70
+        |vpiDecompile:31
+        |vpiSize:64
+        |UINT:31
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:1:68, endln:1:69
+        |vpiParent:
+        \_range: , line:1:64, endln:1:70
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_logic_typespec: , line:1:25, endln:1:37
+  |vpiImportTypespec:
+  \_logic_typespec: , line:1:58, endln:1:70
+  |vpiImportTypespec:
   \_logic_net: (work@Mod1.x), line:1:71, endln:1:72
     |vpiParent:
     \_module_inst: work@Mod1 (work@Mod1), file:${SURELOG_DIR}/tests/TypespecExpr/dut.sv, line:1:1, endln:3:10
+    |vpiTypespec:
+    \_ref_typespec: (work@Mod1.x.x), line:1:58, endln:1:63
+      |vpiParent:
+      \_logic_net: (work@Mod1.x), line:1:71, endln:1:72
+      |vpiName:x
+      |vpiFullName:work@Mod1.x.x
+      |vpiActual:
+      \_logic_typespec: , line:1:58, endln:1:70
     |vpiName:x
     |vpiFullName:work@Mod1.x
     |vpiNetType:36
+  |vpiImportTypespec:
+  \_logic_typespec: , line:1:58, endln:1:70
+  |vpiDefName:work@Mod1
+  |vpiNet:
+  \_logic_net: (work@Mod1.x), line:1:71, endln:1:72
   |vpiPort:
-  \_port: (x), line:1:71, endln:1:72
+  \_port: (x), line:1:51, endln:1:72
     |vpiParent:
     \_module_inst: work@Mod1 (work@Mod1), file:${SURELOG_DIR}/tests/TypespecExpr/dut.sv, line:1:1, endln:3:10
     |vpiName:x
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@Mod1.x.x), line:1:71, endln:1:72
-      |vpiParent:
-      \_port: (x), line:1:71, endln:1:72
-      |vpiName:x
-      |vpiFullName:work@Mod1.x.x
-      |vpiActual:
-      \_logic_net: (work@Mod1.x), line:1:71, endln:1:72
     |vpiTypedef:
-    \_ref_typespec: (work@Mod1.x)
+    \_ref_typespec: (work@Mod1.x), line:1:58, endln:1:63
       |vpiParent:
-      \_port: (x), line:1:71, endln:1:72
+      \_port: (x), line:1:51, endln:1:72
       |vpiFullName:work@Mod1.x
       |vpiActual:
       \_logic_typespec: , line:1:58, endln:1:70
@@ -292,10 +370,12 @@ design: (unnamed)
       \_cont_assign: , line:2:11, endln:2:20
       |vpiName:PARAM
       |vpiFullName:work@Mod1.PARAM
+      |vpiActual:
+      \_parameter: (work@Mod1.PARAM), line:1:38, endln:1:48
     |vpiLhs:
     \_ref_obj: (work@Mod1.x), line:2:11, endln:2:12
       |vpiParent:
-      \_cont_assign: , line:2:11, endln:2:20
+      \_module_inst: work@Mod1 (work@Mod1), file:${SURELOG_DIR}/tests/TypespecExpr/dut.sv, line:1:1, endln:3:10
       |vpiName:x
       |vpiFullName:work@Mod1.x
       |vpiActual:
@@ -304,15 +384,31 @@ design: (unnamed)
 \_module_inst: work@Mod2 (work@Mod2), file:${SURELOG_DIR}/tests/TypespecExpr/dut.sv, line:5:1, endln:10:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@Mod2
-  |vpiParameter:
-  \_parameter: (work@Mod2.STRUCT), line:7:21, endln:7:27
+  |vpiName:work@Mod2
+  |vpiVariables:
+  \_logic_var: (work@Mod2.x), line:8:16, endln:8:17
     |vpiParent:
     \_module_inst: work@Mod2 (work@Mod2), file:${SURELOG_DIR}/tests/TypespecExpr/dut.sv, line:5:1, endln:10:10
     |vpiTypespec:
-    \_ref_typespec: (work@Mod2.STRUCT)
+    \_ref_typespec: (work@Mod2.x), line:8:4, endln:8:15
       |vpiParent:
-      \_parameter: (work@Mod2.STRUCT), line:7:21, endln:7:27
+      \_logic_var: (work@Mod2.x), line:8:16, endln:8:17
+      |vpiFullName:work@Mod2.x
+      |vpiActual:
+      \_logic_typespec: , line:8:4, endln:8:15
+    |vpiName:x
+    |vpiFullName:work@Mod2.x
+    |vpiVisibility:1
+  |vpiReg:
+  \_logic_var: (work@Mod2.x), line:8:16, endln:8:17
+  |vpiParameter:
+  \_parameter: (work@Mod2.STRUCT), line:7:21, endln:7:40
+    |vpiParent:
+    \_module_inst: work@Mod2 (work@Mod2), file:${SURELOG_DIR}/tests/TypespecExpr/dut.sv, line:5:1, endln:10:10
+    |vpiTypespec:
+    \_ref_typespec: (work@Mod2.STRUCT), line:7:14, endln:7:20
+      |vpiParent:
+      \_parameter: (work@Mod2.STRUCT), line:7:21, endln:7:40
       |vpiFullName:work@Mod2.STRUCT
       |vpiActual:
       \_struct_typespec: (Struct), line:6:12, endln:6:44
@@ -328,66 +424,124 @@ design: (unnamed)
       \_param_assign: , line:7:21, endln:7:40
       |vpiOpType:75
       |vpiOperand:
-      \_tagged_pattern: , line:7:36, endln:7:38
+      \_tagged_pattern: , line:7:33, endln:7:38
         |vpiParent:
         \_operation: , line:7:30, endln:7:40
         |vpiPattern:
         \_constant: , line:7:36, endln:7:38
+          |vpiParent:
+          \_operation: , line:7:30, endln:7:40
           |vpiDecompile:'0
           |vpiSize:-1
           |BIN:0
           |vpiConstType:3
         |vpiTypespec:
-        \_ref_typespec: (work@Mod2)
+        \_ref_typespec: (work@Mod2.x), line:7:33, endln:7:34
           |vpiParent:
-          \_tagged_pattern: , line:7:36, endln:7:38
-          |vpiFullName:work@Mod2
+          \_tagged_pattern: , line:7:33, endln:7:38
+          |vpiName:x
+          |vpiFullName:work@Mod2.x
           |vpiActual:
           \_string_typespec: (x), line:7:33, endln:7:34
     |vpiLhs:
-    \_parameter: (work@Mod2.STRUCT), line:7:21, endln:7:27
+    \_parameter: (work@Mod2.STRUCT), line:7:21, endln:7:40
   |vpiTypedef:
   \_struct_typespec: (Struct), line:6:12, endln:6:44
     |vpiParent:
-    \_parameter: (work@Mod2.STRUCT), line:7:21, endln:7:27
-    |vpiName:Struct
-    |vpiInstance:
     \_module_inst: work@Mod2 (work@Mod2), file:${SURELOG_DIR}/tests/TypespecExpr/dut.sv, line:5:1, endln:10:10
+    |vpiName:Struct
     |vpiPacked:1
     |vpiTypespecMember:
-    \_typespec_member: (x), line:6:40, endln:6:41
+    \_typespec_member: (x), line:6:28, endln:6:42
       |vpiParent:
       \_struct_typespec: (Struct), line:6:12, endln:6:44
       |vpiName:x
       |vpiTypespec:
-      \_ref_typespec: (work@Mod2.STRUCT.Struct.x)
+      \_ref_typespec: (work@Mod2.Struct.x), line:6:28, endln:6:39
         |vpiParent:
-        \_typespec_member: (x), line:6:40, endln:6:41
-        |vpiFullName:work@Mod2.STRUCT.Struct.x
+        \_typespec_member: (x), line:6:28, endln:6:42
+        |vpiFullName:work@Mod2.Struct.x
         |vpiActual:
         \_logic_typespec: , line:6:28, endln:6:39
-      |vpiRefFile:${SURELOG_DIR}/tests/TypespecExpr/dut.sv
-      |vpiRefLineNo:6
-      |vpiRefColumnNo:28
-      |vpiRefEndLineNo:6
-      |vpiRefEndColumnNo:39
-  |vpiDefName:work@Mod2
-  |vpiNet:
-  \_logic_net: (work@Mod2.x), line:8:16, endln:8:17
+  |vpiTypedef:
+  \_logic_typespec: , line:6:28, endln:6:39
     |vpiParent:
     \_module_inst: work@Mod2 (work@Mod2), file:${SURELOG_DIR}/tests/TypespecExpr/dut.sv, line:5:1, endln:10:10
-    |vpiTypespec:
-    \_ref_typespec: (work@Mod2.x)
+    |vpiRange:
+    \_range: , line:6:33, endln:6:39
       |vpiParent:
-      \_logic_net: (work@Mod2.x), line:8:16, endln:8:17
-      |vpiFullName:work@Mod2.x
-      |vpiActual:
-      \_logic_typespec: , line:8:4, endln:8:15
+      \_struct_typespec: (Struct), line:6:12, endln:6:44
+      |vpiLeftRange:
+      \_constant: , line:6:34, endln:6:36
+        |vpiParent:
+        \_range: , line:6:33, endln:6:39
+        |vpiDecompile:31
+        |vpiSize:64
+        |UINT:31
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:6:37, endln:6:38
+        |vpiParent:
+        \_range: , line:6:33, endln:6:39
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_string_typespec: (x), line:7:33, endln:7:34
+    |vpiParent:
+    \_module_inst: work@Mod2 (work@Mod2), file:${SURELOG_DIR}/tests/TypespecExpr/dut.sv, line:5:1, endln:10:10
     |vpiName:x
-    |vpiFullName:work@Mod2.x
-    |vpiNetType:36
+  |vpiTypedef:
+  \_logic_typespec: , line:8:4, endln:8:15
+    |vpiParent:
+    \_module_inst: work@Mod2 (work@Mod2), file:${SURELOG_DIR}/tests/TypespecExpr/dut.sv, line:5:1, endln:10:10
+    |vpiRange:
+    \_range: , line:8:9, endln:8:15
+      |vpiParent:
+      \_module_inst: work@Mod2 (work@Mod2), file:${SURELOG_DIR}/tests/TypespecExpr/dut.sv, line:5:1, endln:10:10
+      |vpiLeftRange:
+      \_constant: , line:8:10, endln:8:12
+        |vpiParent:
+        \_range: , line:8:9, endln:8:15
+        |vpiDecompile:31
+        |vpiSize:64
+        |UINT:31
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:8:13, endln:8:14
+        |vpiParent:
+        \_range: , line:8:9, endln:8:15
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_struct_typespec: (Struct), line:6:12, endln:6:44
+  |vpiImportTypespec:
+  \_logic_typespec: , line:6:28, endln:6:39
+  |vpiImportTypespec:
+  \_string_typespec: (x), line:7:33, endln:7:34
+  |vpiImportTypespec:
+  \_logic_typespec: , line:8:4, endln:8:15
+  |vpiImportTypespec:
+  \_logic_var: (work@Mod2.x), line:8:16, endln:8:17
+  |vpiDefName:work@Mod2
+  |vpiPort:
+  \_port: (x), line:9:32, endln:9:37
+    |vpiParent:
+    \_module_inst: work@Mod2 (work@Mod2), file:${SURELOG_DIR}/tests/TypespecExpr/dut.sv, line:5:1, endln:10:10
+    |vpiName:x
+    |vpiHighConn:
+    \_ref_obj: (work@Mod2.x.x), line:9:35, endln:9:36
+      |vpiParent:
+      \_port: (x), line:9:32, endln:9:37
+      |vpiName:x
+      |vpiFullName:work@Mod2.x.x
+      |vpiActual:
+      \_logic_var: (work@Mod2.x), line:8:16, endln:8:17
   |vpiRefModule:
-  \_ref_module: work@Mod1 (mod1), line:9:27, endln:9:31
+  \_ref_module: work@Mod1 (mod1), line:9:4, endln:9:39
     |vpiParent:
     \_module_inst: work@Mod2 (work@Mod2), file:${SURELOG_DIR}/tests/TypespecExpr/dut.sv, line:5:1, endln:10:10
     |vpiName:mod1
@@ -396,108 +550,6 @@ design: (unnamed)
     \_module_inst: work@Mod1 (work@Mod1), file:${SURELOG_DIR}/tests/TypespecExpr/dut.sv, line:1:1, endln:3:10
     |vpiPort:
     \_port: (x), line:9:32, endln:9:37
-      |vpiParent:
-      \_ref_module: work@Mod1 (mod1), line:9:27, endln:9:31
-      |vpiName:x
-      |vpiHighConn:
-      \_ref_obj: (work@Mod2.mod1.x.x), line:9:35, endln:9:36
-        |vpiParent:
-        \_port: (x), line:9:32, endln:9:37
-        |vpiName:x
-        |vpiFullName:work@Mod2.mod1.x.x
-        |vpiActual:
-        \_logic_net: (work@Mod2.x), line:8:16, endln:8:17
-\_weaklyReferenced:
-\_logic_typespec: , line:1:25, endln:1:37
-  |vpiParent:
-  \_parameter: (work@Mod1.PARAM), line:1:38, endln:1:43
-  |vpiRange:
-  \_range: , line:1:31, endln:1:37
-    |vpiParent:
-    \_logic_typespec: , line:1:25, endln:1:37
-    |vpiLeftRange:
-    \_constant: , line:1:32, endln:1:34
-      |vpiParent:
-      \_range: , line:1:31, endln:1:37
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:1:35, endln:1:36
-      |vpiParent:
-      \_range: , line:1:31, endln:1:37
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:6:28, endln:6:39
-  |vpiRange:
-  \_range: , line:6:33, endln:6:39
-    |vpiParent:
-    \_logic_typespec: , line:6:28, endln:6:39
-    |vpiLeftRange:
-    \_constant: , line:6:34, endln:6:36
-      |vpiParent:
-      \_range: , line:6:33, endln:6:39
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:6:37, endln:6:38
-      |vpiParent:
-      \_range: , line:6:33, endln:6:39
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_string_typespec: (x), line:7:33, endln:7:34
-  |vpiParent:
-  \_tagged_pattern: , line:7:36, endln:7:38
-  |vpiName:x
-\_logic_typespec: , line:1:58, endln:1:70
-  |vpiRange:
-  \_range: , line:1:64, endln:1:70
-    |vpiParent:
-    \_logic_typespec: , line:1:58, endln:1:70
-    |vpiLeftRange:
-    \_constant: , line:1:65, endln:1:67
-      |vpiParent:
-      \_range: , line:1:64, endln:1:70
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:1:68, endln:1:69
-      |vpiParent:
-      \_range: , line:1:64, endln:1:70
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:8:4, endln:8:15
-  |vpiRange:
-  \_range: , line:8:9, endln:8:15
-    |vpiParent:
-    \_logic_typespec: , line:8:4, endln:8:15
-    |vpiLeftRange:
-    \_constant: , line:8:10, endln:8:12
-      |vpiParent:
-      \_range: , line:8:9, endln:8:15
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:8:13, endln:8:14
-      |vpiParent:
-      \_range: , line:8:9, endln:8:15
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -506,5 +558,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/TypespecExpr/dut.sv | ${SURELOG_DIR}/build/regression/TypespecExpr/roundtrip/dut_000.sv | 4 | 10 |
+[roundtrip]: ${SURELOG_DIR}/tests/TypespecExpr/dut.sv | ${SURELOG_DIR}/build/regression/TypespecExpr/roundtrip/dut_000.sv | 7 | 10 |
 ============================== End RoundTrip Results ==============================

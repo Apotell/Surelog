@@ -312,36 +312,41 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv:40:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                              59
+constant                                              25
 design                                                 1
-enum_const                                            36
-enum_typespec                                         12
+enum_const                                             6
+enum_typespec                                          2
 import_typespec                                        2
-int_typespec                                          32
-logic_net                                              1
-logic_typespec                                        12
+int_typespec                                           6
+logic_typespec                                         2
+logic_var                                              1
 module_inst                                            4
-operation                                             16
+operation                                              7
 package                                                2
-param_assign                                          24
-parameter                                             34
+param_assign                                           7
+parameter                                              7
 port                                                   2
-range                                                 12
+range                                                  2
 ref_module                                             1
-ref_obj                                               24
-ref_typespec                                          93
-string_typespec                                       15
-struct_typespec                                       12
-tagged_pattern                                        15
-typespec_member                                       18
+ref_obj                                               14
+ref_typespec                                          27
+source_file                                            1
+string_typespec                                        9
+struct_typespec                                        2
+tagged_pattern                                         9
+typespec_member                                        3
+unsupported_typespec                                   2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/AssignmentPatternInAssignmentPattern/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/AssignmentPatternInAssignmentPattern/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/AssignmentPatternInAssignmentPattern/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallPackages:
 \_package: ctrl_pkg (ctrl_pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:1:1, endln:4:11
   |vpiParent:
@@ -349,14 +354,14 @@ design: (unnamed)
   |vpiName:ctrl_pkg
   |vpiFullName:ctrl_pkg::
   |vpiParameter:
-  \_parameter: (ctrl_pkg::RegNumBanks), line:2:17, endln:2:28
+  \_parameter: (ctrl_pkg::RegNumBanks), line:2:17, endln:2:32
     |vpiParent:
     \_package: ctrl_pkg (ctrl_pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:1:1, endln:4:11
     |UINT:2
     |vpiTypespec:
-    \_ref_typespec: (ctrl_pkg::RegNumBanks)
+    \_ref_typespec: (ctrl_pkg::RegNumBanks), line:2:13, endln:2:16
       |vpiParent:
-      \_parameter: (ctrl_pkg::RegNumBanks), line:2:17, endln:2:28
+      \_parameter: (ctrl_pkg::RegNumBanks), line:2:17, endln:2:32
       |vpiFullName:ctrl_pkg::RegNumBanks
       |vpiActual:
       \_int_typespec: , line:2:13, endln:2:16
@@ -364,14 +369,14 @@ design: (unnamed)
     |vpiName:RegNumBanks
     |vpiFullName:ctrl_pkg::RegNumBanks
   |vpiParameter:
-  \_parameter: (ctrl_pkg::RegPagesPerBank), line:3:17, endln:3:32
+  \_parameter: (ctrl_pkg::RegPagesPerBank), line:3:17, endln:3:37
     |vpiParent:
     \_package: ctrl_pkg (ctrl_pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:1:1, endln:4:11
     |UINT:64
     |vpiTypespec:
-    \_ref_typespec: (ctrl_pkg::RegPagesPerBank)
+    \_ref_typespec: (ctrl_pkg::RegPagesPerBank), line:3:13, endln:3:16
       |vpiParent:
-      \_parameter: (ctrl_pkg::RegPagesPerBank), line:3:17, endln:3:32
+      \_parameter: (ctrl_pkg::RegPagesPerBank), line:3:17, endln:3:37
       |vpiFullName:ctrl_pkg::RegPagesPerBank
       |vpiActual:
       \_int_typespec: , line:3:13, endln:3:16
@@ -389,16 +394,9 @@ design: (unnamed)
       |vpiDecompile:2
       |vpiSize:64
       |UINT:2
-      |vpiTypespec:
-      \_ref_typespec: (ctrl_pkg)
-        |vpiParent:
-        \_constant: , line:2:31, endln:2:32
-        |vpiFullName:ctrl_pkg
-        |vpiActual:
-        \_int_typespec: , line:2:13, endln:2:16
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (ctrl_pkg::RegNumBanks), line:2:17, endln:2:28
+    \_parameter: (ctrl_pkg::RegNumBanks), line:2:17, endln:2:32
   |vpiParamAssign:
   \_param_assign: , line:3:17, endln:3:37
     |vpiParent:
@@ -410,16 +408,23 @@ design: (unnamed)
       |vpiDecompile:64
       |vpiSize:64
       |UINT:64
-      |vpiTypespec:
-      \_ref_typespec: (ctrl_pkg)
-        |vpiParent:
-        \_constant: , line:3:35, endln:3:37
-        |vpiFullName:ctrl_pkg
-        |vpiActual:
-        \_int_typespec: , line:3:13, endln:3:16
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (ctrl_pkg::RegPagesPerBank), line:3:17, endln:3:32
+    \_parameter: (ctrl_pkg::RegPagesPerBank), line:3:17, endln:3:37
+  |vpiTypedef:
+  \_int_typespec: , line:2:13, endln:2:16
+    |vpiParent:
+    \_package: ctrl_pkg (ctrl_pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:1:1, endln:4:11
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:3:13, endln:3:16
+    |vpiParent:
+    \_package: ctrl_pkg (ctrl_pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:1:1, endln:4:11
+    |vpiSigned:1
+  |vpiImportTypespec:
+  \_int_typespec: , line:2:13, endln:2:16
+  |vpiImportTypespec:
+  \_int_typespec: , line:3:13, endln:3:16
   |vpiDefName:ctrl_pkg
 |uhdmallPackages:
 \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
@@ -428,40 +433,40 @@ design: (unnamed)
   |vpiName:pkg
   |vpiFullName:pkg::
   |vpiParameter:
-  \_parameter: (pkg::NumBanks), line:7:26, endln:7:34
+  \_parameter: (pkg::NumBanks), line:7:26, endln:7:65
     |vpiParent:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
     |vpiTypespec:
-    \_ref_typespec: (pkg::NumBanks)
+    \_ref_typespec: (pkg::NumBanks), line:7:13, endln:7:16
       |vpiParent:
-      \_parameter: (pkg::NumBanks), line:7:26, endln:7:34
+      \_parameter: (pkg::NumBanks), line:7:26, endln:7:65
       |vpiFullName:pkg::NumBanks
       |vpiActual:
       \_int_typespec: , line:7:13, endln:7:25
     |vpiName:NumBanks
     |vpiFullName:pkg::NumBanks
   |vpiParameter:
-  \_parameter: (pkg::PagesPerBank), line:8:26, endln:8:38
+  \_parameter: (pkg::PagesPerBank), line:8:26, endln:8:69
     |vpiParent:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
     |vpiTypespec:
-    \_ref_typespec: (pkg::PagesPerBank)
+    \_ref_typespec: (pkg::PagesPerBank), line:8:13, endln:8:16
       |vpiParent:
-      \_parameter: (pkg::PagesPerBank), line:8:26, endln:8:38
+      \_parameter: (pkg::PagesPerBank), line:8:26, endln:8:69
       |vpiFullName:pkg::PagesPerBank
       |vpiActual:
       \_int_typespec: , line:8:13, endln:8:25
     |vpiName:PagesPerBank
     |vpiFullName:pkg::PagesPerBank
   |vpiParameter:
-  \_parameter: (pkg::HwDataRules), line:9:17, endln:9:28
+  \_parameter: (pkg::HwDataRules), line:9:17, endln:9:32
     |vpiParent:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
     |UINT:2
     |vpiTypespec:
-    \_ref_typespec: (pkg::HwDataRules)
+    \_ref_typespec: (pkg::HwDataRules), line:9:13, endln:9:16
       |vpiParent:
-      \_parameter: (pkg::HwDataRules), line:9:17, endln:9:28
+      \_parameter: (pkg::HwDataRules), line:9:17, endln:9:32
       |vpiFullName:pkg::HwDataRules
       |vpiActual:
       \_int_typespec: , line:9:13, endln:9:16
@@ -469,14 +474,14 @@ design: (unnamed)
     |vpiName:HwDataRules
     |vpiFullName:pkg::HwDataRules
   |vpiParameter:
-  \_parameter: (pkg::MuBi4Width), line:10:17, endln:10:27
+  \_parameter: (pkg::MuBi4Width), line:10:17, endln:10:31
     |vpiParent:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
     |UINT:4
     |vpiTypespec:
-    \_ref_typespec: (pkg::MuBi4Width)
+    \_ref_typespec: (pkg::MuBi4Width), line:10:13, endln:10:16
       |vpiParent:
-      \_parameter: (pkg::MuBi4Width), line:10:17, endln:10:27
+      \_parameter: (pkg::MuBi4Width), line:10:17, endln:10:31
       |vpiFullName:pkg::MuBi4Width
       |vpiActual:
       \_int_typespec: , line:10:13, endln:10:16
@@ -484,13 +489,13 @@ design: (unnamed)
     |vpiName:MuBi4Width
     |vpiFullName:pkg::MuBi4Width
   |vpiParameter:
-  \_parameter: (pkg::HwDataAttr), line:28:32, endln:28:42
+  \_parameter: (pkg::HwDataAttr), line:28:32, endln:31:4
     |vpiParent:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
     |vpiTypespec:
-    \_ref_typespec: (pkg::HwDataAttr)
+    \_ref_typespec: (pkg::HwDataAttr), line:28:13, endln:28:31
       |vpiParent:
-      \_parameter: (pkg::HwDataAttr), line:28:32, endln:28:42
+      \_parameter: (pkg::HwDataAttr), line:28:32, endln:31:4
       |vpiFullName:pkg::HwDataAttr
       |vpiActual:
       \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
@@ -507,9 +512,9 @@ design: (unnamed)
       |vpiName:ctrl_pkg::RegNumBanks
       |vpiFullName:pkg::ctrl_pkg::RegNumBanks
       |vpiActual:
-      \_parameter: (ctrl_pkg::RegNumBanks), line:2:17, endln:2:28
+      \_parameter: (ctrl_pkg::RegNumBanks), line:2:17, endln:2:32
     |vpiLhs:
-    \_parameter: (pkg::NumBanks), line:7:26, endln:7:34
+    \_parameter: (pkg::NumBanks), line:7:26, endln:7:65
   |vpiParamAssign:
   \_param_assign: , line:8:26, endln:8:69
     |vpiParent:
@@ -521,9 +526,9 @@ design: (unnamed)
       |vpiName:ctrl_pkg::RegPagesPerBank
       |vpiFullName:pkg::ctrl_pkg::RegPagesPerBank
       |vpiActual:
-      \_parameter: (ctrl_pkg::RegPagesPerBank), line:3:17, endln:3:32
+      \_parameter: (ctrl_pkg::RegPagesPerBank), line:3:17, endln:3:37
     |vpiLhs:
-    \_parameter: (pkg::PagesPerBank), line:8:26, endln:8:38
+    \_parameter: (pkg::PagesPerBank), line:8:26, endln:8:69
   |vpiParamAssign:
   \_param_assign: , line:9:17, endln:9:32
     |vpiParent:
@@ -535,16 +540,9 @@ design: (unnamed)
       |vpiDecompile:2
       |vpiSize:64
       |UINT:2
-      |vpiTypespec:
-      \_ref_typespec: (pkg)
-        |vpiParent:
-        \_constant: , line:9:31, endln:9:32
-        |vpiFullName:pkg
-        |vpiActual:
-        \_int_typespec: , line:9:13, endln:9:16
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (pkg::HwDataRules), line:9:17, endln:9:28
+    \_parameter: (pkg::HwDataRules), line:9:17, endln:9:32
   |vpiParamAssign:
   \_param_assign: , line:10:17, endln:10:31
     |vpiParent:
@@ -556,16 +554,9 @@ design: (unnamed)
       |vpiDecompile:4
       |vpiSize:64
       |UINT:4
-      |vpiTypespec:
-      \_ref_typespec: (pkg)
-        |vpiParent:
-        \_constant: , line:10:30, endln:10:31
-        |vpiFullName:pkg
-        |vpiActual:
-        \_int_typespec: , line:10:13, endln:10:16
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (pkg::MuBi4Width), line:10:17, endln:10:27
+    \_parameter: (pkg::MuBi4Width), line:10:17, endln:10:31
   |vpiParamAssign:
   \_param_assign: , line:28:32, endln:31:4
     |vpiParent:
@@ -576,24 +567,27 @@ design: (unnamed)
       \_param_assign: , line:28:32, endln:31:4
       |vpiOpType:75
       |vpiOperand:
-      \_tagged_pattern: , line:29:15, endln:29:24
+      \_tagged_pattern: , line:29:8, endln:29:24
         |vpiParent:
         \_operation: , line:28:45, endln:31:4
         |vpiPattern:
-        \_constant: , line:29:15, endln:29:24
-          |vpiDecompile:0
-          |vpiSize:2
-          |INT:0
-          |vpiConstType:7
-        |vpiTypespec:
-        \_ref_typespec: (pkg)
+        \_ref_obj: (pkg::PhaseSeed), line:29:15, endln:29:24
           |vpiParent:
-          \_tagged_pattern: , line:29:15, endln:29:24
-          |vpiFullName:pkg
+          \_operation: , line:28:45, endln:31:4
+          |vpiName:PhaseSeed
+          |vpiFullName:pkg::PhaseSeed
+          |vpiActual:
+          \_enum_const: (PhaseSeed), line:16:5, endln:16:14
+        |vpiTypespec:
+        \_ref_typespec: (pkg::phase), line:29:8, endln:29:13
+          |vpiParent:
+          \_tagged_pattern: , line:29:8, endln:29:24
+          |vpiName:phase
+          |vpiFullName:pkg::phase
           |vpiActual:
           \_string_typespec: (phase), line:29:8, endln:29:13
       |vpiOperand:
-      \_tagged_pattern: , line:30:15, endln:30:42
+      \_tagged_pattern: , line:30:8, endln:30:42
         |vpiParent:
         \_operation: , line:28:45, endln:31:4
         |vpiPattern:
@@ -602,91 +596,158 @@ design: (unnamed)
           \_operation: , line:28:45, endln:31:4
           |vpiOpType:75
           |vpiOperand:
-          \_tagged_pattern: , line:30:31, endln:30:40
+          \_tagged_pattern: , line:30:18, endln:30:40
             |vpiParent:
             \_operation: , line:30:15, endln:30:42
             |vpiPattern:
-            \_constant: , line:30:31, endln:30:40
-              |vpiDecompile:4'h6
-              |vpiSize:4
-              |HEX:6
-              |vpiConstType:5
-            |vpiTypespec:
-            \_ref_typespec: (pkg)
+            \_ref_obj: (pkg::MuBi4True), line:30:31, endln:30:40
               |vpiParent:
-              \_tagged_pattern: , line:30:31, endln:30:40
-              |vpiFullName:pkg
+              \_operation: , line:30:15, endln:30:42
+              |vpiName:MuBi4True
+              |vpiFullName:pkg::MuBi4True
+              |vpiActual:
+              \_enum_const: (MuBi4True), line:12:5, endln:12:21
+            |vpiTypespec:
+            \_ref_typespec: (pkg::en), line:30:18, endln:30:20
+              |vpiParent:
+              \_tagged_pattern: , line:30:18, endln:30:40
+              |vpiName:en
+              |vpiFullName:pkg::en
               |vpiActual:
               \_string_typespec: (en), line:30:18, endln:30:20
         |vpiTypespec:
-        \_ref_typespec: (pkg)
+        \_ref_typespec: (pkg::cfg), line:30:8, endln:30:11
           |vpiParent:
-          \_tagged_pattern: , line:30:15, endln:30:42
-          |vpiFullName:pkg
+          \_tagged_pattern: , line:30:8, endln:30:42
+          |vpiName:cfg
+          |vpiFullName:pkg::cfg
           |vpiActual:
           \_string_typespec: (cfg), line:30:8, endln:30:11
     |vpiLhs:
-    \_parameter: (pkg::HwDataAttr), line:28:32, endln:28:42
+    \_parameter: (pkg::HwDataAttr), line:28:32, endln:31:4
   |vpiTypedef:
-  \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
+  \_int_typespec: , line:7:13, endln:7:25
     |vpiParent:
-    \_parameter: (pkg::HwDataAttr), line:28:32, endln:28:42
-    |vpiName:pkg::data_region_attr_t
-    |vpiInstance:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-    |vpiPacked:1
-    |vpiTypespecMember:
-    \_typespec_member: (phase), line:25:27, endln:25:32
-      |vpiParent:
-      \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
-      |vpiName:phase
-      |vpiTypespec:
-      \_ref_typespec: (pkg::HwDataAttr::pkg::data_region_attr_t::phase)
-        |vpiParent:
-        \_typespec_member: (phase), line:25:27, endln:25:32
-        |vpiFullName:pkg::HwDataAttr::pkg::data_region_attr_t::phase
-        |vpiActual:
-        \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-      |vpiRefFile:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv
-      |vpiRefLineNo:25
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:25
-      |vpiRefEndColumnNo:24
-    |vpiTypespecMember:
-    \_typespec_member: (cfg), line:26:21, endln:26:24
-      |vpiParent:
-      \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
-      |vpiName:cfg
-      |vpiTypespec:
-      \_ref_typespec: (pkg::HwDataAttr::pkg::data_region_attr_t::cfg)
-        |vpiParent:
-        \_typespec_member: (cfg), line:26:21, endln:26:24
-        |vpiFullName:pkg::HwDataAttr::pkg::data_region_attr_t::cfg
-        |vpiActual:
-        \_struct_typespec: (pkg::mp_region_cfg_t), line:21:11, endln:23:4
-      |vpiRefFile:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv
-      |vpiRefLineNo:26
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:26
-      |vpiRefEndColumnNo:20
   |vpiTypedef:
-  \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
+  \_int_typespec: , line:8:13, endln:8:25
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
+  |vpiTypedef:
+  \_int_typespec: , line:9:13, endln:9:16
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:10:13, endln:10:16
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
+    |vpiSigned:1
+  |vpiTypedef:
+  \_logic_typespec: , line:11:16, endln:11:38
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
+    |vpiRange:
+    \_range: , line:11:22, endln:11:38
+      |vpiParent:
+      \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
+      |vpiLeftRange:
+      \_operation: , line:11:23, endln:11:35
+        |vpiParent:
+        \_range: , line:11:22, endln:11:38
+        |vpiOpType:11
+        |vpiOperand:
+        \_ref_obj: (pkg::MuBi4Width), line:11:23, endln:11:33
+          |vpiParent:
+          \_operation: , line:11:23, endln:11:35
+          |vpiName:MuBi4Width
+          |vpiFullName:pkg::MuBi4Width
+          |vpiActual:
+          \_parameter: (pkg::MuBi4Width), line:10:17, endln:10:31
+        |vpiOperand:
+        \_constant: , line:11:34, endln:11:35
+          |vpiParent:
+          \_operation: , line:11:23, endln:11:35
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:11:36, endln:11:37
+        |vpiParent:
+        \_range: , line:11:22, endln:11:38
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_enum_typespec: (pkg::mubi4_t), line:11:11, endln:14:13
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
+    |vpiName:pkg::mubi4_t
+    |vpiBaseTypespec:
+    \_ref_typespec: (pkg::mubi4_t), line:11:11, endln:14:13
+      |vpiParent:
+      \_enum_typespec: (pkg::mubi4_t), line:11:11, endln:14:13
+      |vpiFullName:pkg::mubi4_t
+      |vpiActual:
+      \_logic_typespec: , line:11:16, endln:11:38
+    |vpiEnumConst:
+    \_enum_const: (MuBi4True), line:12:5, endln:12:21
+      |vpiParent:
+      \_enum_typespec: (pkg::mubi4_t), line:11:11, endln:14:13
+      |vpiName:MuBi4True
+      |HEX:6
+      |vpiDecompile:4'h6
+      |vpiSize:4
+    |vpiEnumConst:
+    \_enum_const: (MuBi4False), line:13:5, endln:13:22
+      |vpiParent:
+      \_enum_typespec: (pkg::mubi4_t), line:11:11, endln:14:13
+      |vpiName:MuBi4False
+      |HEX:9
+      |vpiDecompile:4'h9
+      |vpiSize:4
+  |vpiTypedef:
+  \_logic_typespec: , line:15:16, endln:15:27
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
+    |vpiRange:
+    \_range: , line:15:22, endln:15:27
+      |vpiParent:
+      \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
+      |vpiLeftRange:
+      \_constant: , line:15:23, endln:15:24
+        |vpiParent:
+        \_range: , line:15:22, endln:15:27
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:15:25, endln:15:26
+        |vpiParent:
+        \_range: , line:15:22, endln:15:27
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:11, endln:20:25
     |vpiParent:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
     |vpiName:pkg::flash_lcmgr_phase_e
-    |vpiInstance:
-    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
     |vpiBaseTypespec:
-    \_ref_typespec: (pkg::pkg::flash_lcmgr_phase_e)
+    \_ref_typespec: (pkg::flash_lcmgr_phase_e), line:15:11, endln:20:25
       |vpiParent:
-      \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-      |vpiFullName:pkg::pkg::flash_lcmgr_phase_e
+      \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:11, endln:20:25
+      |vpiFullName:pkg::flash_lcmgr_phase_e
       |vpiActual:
       \_logic_typespec: , line:15:16, endln:15:27
     |vpiEnumConst:
     \_enum_const: (PhaseSeed), line:16:5, endln:16:14
       |vpiParent:
-      \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
+      \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:11, endln:20:25
       |vpiName:PhaseSeed
       |INT:0
       |vpiDecompile:0
@@ -694,7 +755,7 @@ design: (unnamed)
     |vpiEnumConst:
     \_enum_const: (PhaseRma), line:17:5, endln:17:13
       |vpiParent:
-      \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
+      \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:11, endln:20:25
       |vpiName:PhaseRma
       |INT:1
       |vpiDecompile:1
@@ -702,7 +763,7 @@ design: (unnamed)
     |vpiEnumConst:
     \_enum_const: (PhaseNone), line:18:5, endln:18:14
       |vpiParent:
-      \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
+      \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:11, endln:20:25
       |vpiName:PhaseNone
       |INT:2
       |vpiDecompile:2
@@ -710,7 +771,7 @@ design: (unnamed)
     |vpiEnumConst:
     \_enum_const: (PhaseInvalid), line:19:5, endln:19:17
       |vpiParent:
-      \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
+      \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:11, endln:20:25
       |vpiName:PhaseInvalid
       |INT:3
       |vpiDecompile:3
@@ -720,656 +781,210 @@ design: (unnamed)
     |vpiParent:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
     |vpiName:pkg::mp_region_cfg_t
-    |vpiInstance:
-    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
     |vpiPacked:1
     |vpiTypespecMember:
-    \_typespec_member: (en), line:22:13, endln:22:15
+    \_typespec_member: (en), line:22:5, endln:22:16
       |vpiParent:
       \_struct_typespec: (pkg::mp_region_cfg_t), line:21:11, endln:23:4
       |vpiName:en
       |vpiTypespec:
-      \_ref_typespec: (pkg::pkg::mp_region_cfg_t::en)
+      \_ref_typespec: (pkg::mp_region_cfg_t::en::mubi4_t), line:22:5, endln:22:12
         |vpiParent:
-        \_typespec_member: (en), line:22:13, endln:22:15
-        |vpiFullName:pkg::pkg::mp_region_cfg_t::en
+        \_typespec_member: (en), line:22:5, endln:22:16
+        |vpiName:mubi4_t
+        |vpiFullName:pkg::mp_region_cfg_t::en::mubi4_t
         |vpiActual:
-        \_enum_typespec: (pkg::mubi4_t), line:11:3, endln:14:13
-      |vpiRefFile:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv
-      |vpiRefLineNo:22
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:22
-      |vpiRefEndColumnNo:12
+        \_enum_typespec: (pkg::mubi4_t), line:11:11, endln:14:13
   |vpiTypedef:
-  \_enum_typespec: (pkg::mubi4_t), line:11:3, endln:14:13
+  \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
     |vpiParent:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-    |vpiName:pkg::mubi4_t
-    |vpiInstance:
+    |vpiName:pkg::data_region_attr_t
+    |vpiPacked:1
+    |vpiTypespecMember:
+    \_typespec_member: (phase), line:25:5, endln:25:33
+      |vpiParent:
+      \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
+      |vpiName:phase
+      |vpiTypespec:
+      \_ref_typespec: (pkg::data_region_attr_t::phase::flash_lcmgr_phase_e), line:25:5, endln:25:24
+        |vpiParent:
+        \_typespec_member: (phase), line:25:5, endln:25:33
+        |vpiName:flash_lcmgr_phase_e
+        |vpiFullName:pkg::data_region_attr_t::phase::flash_lcmgr_phase_e
+        |vpiActual:
+        \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:11, endln:20:25
+    |vpiTypespecMember:
+    \_typespec_member: (cfg), line:26:5, endln:26:25
+      |vpiParent:
+      \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
+      |vpiName:cfg
+      |vpiTypespec:
+      \_ref_typespec: (pkg::data_region_attr_t::cfg::mp_region_cfg_t), line:26:5, endln:26:20
+        |vpiParent:
+        \_typespec_member: (cfg), line:26:5, endln:26:25
+        |vpiName:mp_region_cfg_t
+        |vpiFullName:pkg::data_region_attr_t::cfg::mp_region_cfg_t
+        |vpiActual:
+        \_struct_typespec: (pkg::mp_region_cfg_t), line:21:11, endln:23:4
+  |vpiTypedef:
+  \_string_typespec: (phase), line:29:8, endln:29:13
+    |vpiParent:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-    |vpiBaseTypespec:
-    \_ref_typespec: (pkg::pkg::mubi4_t)
-      |vpiParent:
-      \_enum_typespec: (pkg::mubi4_t), line:11:3, endln:14:13
-      |vpiFullName:pkg::pkg::mubi4_t
-      |vpiActual:
-      \_logic_typespec: , line:11:16, endln:11:38
-    |vpiEnumConst:
-    \_enum_const: (MuBi4True), line:12:5, endln:12:21
-      |vpiParent:
-      \_enum_typespec: (pkg::mubi4_t), line:11:3, endln:14:13
-      |vpiName:MuBi4True
-      |HEX:6
-      |vpiDecompile:4'h6
-      |vpiSize:4
-    |vpiEnumConst:
-    \_enum_const: (MuBi4False), line:13:5, endln:13:22
-      |vpiParent:
-      \_enum_typespec: (pkg::mubi4_t), line:11:3, endln:14:13
-      |vpiName:MuBi4False
-      |HEX:9
-      |vpiDecompile:4'h9
-      |vpiSize:4
+    |vpiName:phase
+  |vpiTypedef:
+  \_string_typespec: (en), line:30:18, endln:30:20
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
+    |vpiName:en
+  |vpiTypedef:
+  \_string_typespec: (cfg), line:30:8, endln:30:11
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
+    |vpiName:cfg
+  |vpiTypedef:
+  \_string_typespec: (phase), line:29:8, endln:29:13
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
+    |vpiName:phase
+  |vpiTypedef:
+  \_string_typespec: (en), line:30:18, endln:30:20
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
+    |vpiName:en
+  |vpiTypedef:
+  \_string_typespec: (cfg), line:30:8, endln:30:11
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
+    |vpiName:cfg
+  |vpiTypedef:
+  \_string_typespec: (phase), line:29:8, endln:29:13
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
+    |vpiName:phase
+  |vpiTypedef:
+  \_string_typespec: (en), line:30:18, endln:30:20
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
+    |vpiName:en
+  |vpiTypedef:
+  \_string_typespec: (cfg), line:30:8, endln:30:11
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
+    |vpiName:cfg
+  |vpiImportTypespec:
+  \_int_typespec: , line:7:13, endln:7:25
+  |vpiImportTypespec:
+  \_int_typespec: , line:8:13, endln:8:25
+  |vpiImportTypespec:
+  \_int_typespec: , line:9:13, endln:9:16
+  |vpiImportTypespec:
+  \_int_typespec: , line:10:13, endln:10:16
+  |vpiImportTypespec:
+  \_logic_typespec: , line:11:16, endln:11:38
+  |vpiImportTypespec:
+  \_enum_typespec: (pkg::mubi4_t), line:11:11, endln:14:13
+  |vpiImportTypespec:
+  \_logic_typespec: , line:15:16, endln:15:27
+  |vpiImportTypespec:
+  \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:11, endln:20:25
+  |vpiImportTypespec:
+  \_struct_typespec: (pkg::mp_region_cfg_t), line:21:11, endln:23:4
+  |vpiImportTypespec:
+  \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
+  |vpiImportTypespec:
+  \_string_typespec: (phase), line:29:8, endln:29:13
+  |vpiImportTypespec:
+  \_string_typespec: (en), line:30:18, endln:30:20
+  |vpiImportTypespec:
+  \_string_typespec: (cfg), line:30:8, endln:30:11
+  |vpiImportTypespec:
+  \_string_typespec: (phase), line:29:8, endln:29:13
+  |vpiImportTypespec:
+  \_string_typespec: (en), line:30:18, endln:30:20
+  |vpiImportTypespec:
+  \_string_typespec: (cfg), line:30:8, endln:30:11
+  |vpiImportTypespec:
+  \_string_typespec: (phase), line:29:8, endln:29:13
+  |vpiImportTypespec:
+  \_string_typespec: (en), line:30:18, endln:30:20
+  |vpiImportTypespec:
+  \_string_typespec: (cfg), line:30:8, endln:30:11
   |vpiDefName:pkg
 |uhdmallModules:
 \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:35:1, endln:39:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@foo
-  |vpiParameter:
-  \_parameter: (work@foo.HwDataAttr), line:28:32, endln:28:42
-    |vpiParent:
-    \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:35:1, endln:39:10
-    |vpiTypespec:
-    \_ref_typespec: (work@foo.HwDataAttr)
-      |vpiParent:
-      \_parameter: (work@foo.HwDataAttr), line:28:32, endln:28:42
-      |vpiFullName:work@foo.HwDataAttr
-      |vpiActual:
-      \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
-    |vpiName:HwDataAttr
-    |vpiFullName:work@foo.HwDataAttr
-    |vpiImported:pkg
-  |vpiParameter:
-  \_parameter: (work@foo.HwDataRules), line:9:17, endln:9:28
-    |vpiParent:
-    \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:35:1, endln:39:10
-    |UINT:2
-    |vpiTypespec:
-    \_ref_typespec: (work@foo.HwDataRules)
-      |vpiParent:
-      \_parameter: (work@foo.HwDataRules), line:9:17, endln:9:28
-      |vpiFullName:work@foo.HwDataRules
-      |vpiActual:
-      \_int_typespec: , line:9:13, endln:9:16
-    |vpiSigned:1
-    |vpiName:HwDataRules
-    |vpiFullName:work@foo.HwDataRules
-    |vpiImported:pkg
-  |vpiParameter:
-  \_parameter: (work@foo.MuBi4Width), line:10:17, endln:10:27
-    |vpiParent:
-    \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:35:1, endln:39:10
-    |UINT:4
-    |vpiTypespec:
-    \_ref_typespec: (work@foo.MuBi4Width)
-      |vpiParent:
-      \_parameter: (work@foo.MuBi4Width), line:10:17, endln:10:27
-      |vpiFullName:work@foo.MuBi4Width
-      |vpiActual:
-      \_int_typespec: , line:10:13, endln:10:16
-    |vpiSigned:1
-    |vpiName:MuBi4Width
-    |vpiFullName:work@foo.MuBi4Width
-    |vpiImported:pkg
-  |vpiParameter:
-  \_parameter: (work@foo.NumBanks), line:7:26, endln:7:34
-    |vpiParent:
-    \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:35:1, endln:39:10
-    |vpiTypespec:
-    \_ref_typespec: (work@foo.NumBanks)
-      |vpiParent:
-      \_parameter: (work@foo.NumBanks), line:7:26, endln:7:34
-      |vpiFullName:work@foo.NumBanks
-      |vpiActual:
-      \_int_typespec: , line:7:13, endln:7:25
-    |vpiName:NumBanks
-    |vpiFullName:work@foo.NumBanks
-    |vpiImported:pkg
-  |vpiParameter:
-  \_parameter: (work@foo.PagesPerBank), line:8:26, endln:8:38
-    |vpiParent:
-    \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:35:1, endln:39:10
-    |vpiTypespec:
-    \_ref_typespec: (work@foo.PagesPerBank)
-      |vpiParent:
-      \_parameter: (work@foo.PagesPerBank), line:8:26, endln:8:38
-      |vpiFullName:work@foo.PagesPerBank
-      |vpiActual:
-      \_int_typespec: , line:8:13, endln:8:25
-    |vpiName:PagesPerBank
-    |vpiFullName:work@foo.PagesPerBank
-    |vpiImported:pkg
-  |vpiParamAssign:
-  \_param_assign: , line:7:26, endln:7:65
-    |vpiParent:
-    \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:35:1, endln:39:10
-    |vpiRhs:
-    \_ref_obj: (work@foo.ctrl_pkg::RegNumBanks), line:7:44, endln:7:65
-      |vpiParent:
-      \_param_assign: , line:7:26, endln:7:65
-      |vpiName:ctrl_pkg::RegNumBanks
-      |vpiFullName:work@foo.ctrl_pkg::RegNumBanks
-    |vpiLhs:
-    \_parameter: (work@foo.NumBanks), line:7:26, endln:7:34
-      |vpiParent:
-      \_param_assign: , line:7:26, endln:7:65
-      |vpiTypespec:
-      \_ref_typespec: (work@foo.NumBanks)
-        |vpiParent:
-        \_parameter: (work@foo.NumBanks), line:7:26, endln:7:34
-        |vpiFullName:work@foo.NumBanks
-        |vpiActual:
-        \_int_typespec: , line:7:13, endln:7:25
-      |vpiName:NumBanks
-      |vpiFullName:work@foo.NumBanks
-      |vpiImported:pkg
-  |vpiParamAssign:
-  \_param_assign: , line:8:26, endln:8:69
-    |vpiParent:
-    \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:35:1, endln:39:10
-    |vpiRhs:
-    \_ref_obj: (work@foo.ctrl_pkg::RegPagesPerBank), line:8:44, endln:8:69
-      |vpiParent:
-      \_param_assign: , line:8:26, endln:8:69
-      |vpiName:ctrl_pkg::RegPagesPerBank
-      |vpiFullName:work@foo.ctrl_pkg::RegPagesPerBank
-    |vpiLhs:
-    \_parameter: (work@foo.PagesPerBank), line:8:26, endln:8:38
-      |vpiParent:
-      \_param_assign: , line:8:26, endln:8:69
-      |vpiTypespec:
-      \_ref_typespec: (work@foo.PagesPerBank)
-        |vpiParent:
-        \_parameter: (work@foo.PagesPerBank), line:8:26, endln:8:38
-        |vpiFullName:work@foo.PagesPerBank
-        |vpiActual:
-        \_int_typespec: , line:8:13, endln:8:25
-      |vpiName:PagesPerBank
-      |vpiFullName:work@foo.PagesPerBank
-      |vpiImported:pkg
-  |vpiParamAssign:
-  \_param_assign: , line:9:17, endln:9:32
-    |vpiParent:
-    \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:35:1, endln:39:10
-    |vpiRhs:
-    \_constant: , line:9:31, endln:9:32
-      |vpiParent:
-      \_param_assign: , line:9:17, endln:9:32
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiTypespec:
-      \_ref_typespec: (work@foo)
-        |vpiParent:
-        \_constant: , line:9:31, endln:9:32
-        |vpiFullName:work@foo
-        |vpiActual:
-        \_int_typespec: , line:9:13, endln:9:16
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@foo.HwDataRules), line:9:17, endln:9:28
-      |vpiParent:
-      \_param_assign: , line:9:17, endln:9:32
-      |UINT:2
-      |vpiTypespec:
-      \_ref_typespec: (work@foo.HwDataRules)
-        |vpiParent:
-        \_parameter: (work@foo.HwDataRules), line:9:17, endln:9:28
-        |vpiFullName:work@foo.HwDataRules
-        |vpiActual:
-        \_int_typespec: , line:9:13, endln:9:16
-      |vpiSigned:1
-      |vpiName:HwDataRules
-      |vpiFullName:work@foo.HwDataRules
-      |vpiImported:pkg
-  |vpiParamAssign:
-  \_param_assign: , line:10:17, endln:10:31
-    |vpiParent:
-    \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:35:1, endln:39:10
-    |vpiRhs:
-    \_constant: , line:10:30, endln:10:31
-      |vpiParent:
-      \_param_assign: , line:10:17, endln:10:31
-      |vpiDecompile:4
-      |vpiSize:64
-      |UINT:4
-      |vpiTypespec:
-      \_ref_typespec: (work@foo)
-        |vpiParent:
-        \_constant: , line:10:30, endln:10:31
-        |vpiFullName:work@foo
-        |vpiActual:
-        \_int_typespec: , line:10:13, endln:10:16
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@foo.MuBi4Width), line:10:17, endln:10:27
-      |vpiParent:
-      \_param_assign: , line:10:17, endln:10:31
-      |UINT:4
-      |vpiTypespec:
-      \_ref_typespec: (work@foo.MuBi4Width)
-        |vpiParent:
-        \_parameter: (work@foo.MuBi4Width), line:10:17, endln:10:27
-        |vpiFullName:work@foo.MuBi4Width
-        |vpiActual:
-        \_int_typespec: , line:10:13, endln:10:16
-      |vpiSigned:1
-      |vpiName:MuBi4Width
-      |vpiFullName:work@foo.MuBi4Width
-      |vpiImported:pkg
-  |vpiParamAssign:
-  \_param_assign: , line:28:32, endln:31:4
-    |vpiParent:
-    \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:35:1, endln:39:10
-    |vpiRhs:
-    \_operation: , line:28:45, endln:31:4
-      |vpiParent:
-      \_param_assign: , line:28:32, endln:31:4
-      |vpiOpType:75
-      |vpiOperand:
-      \_tagged_pattern: , line:29:15, endln:29:24
-        |vpiParent:
-        \_operation: , line:28:45, endln:31:4
-        |vpiPattern:
-        \_constant: , line:29:15, endln:29:24
-          |vpiParent:
-          \_tagged_pattern: , line:29:15, endln:29:24
-          |vpiDecompile:0
-          |vpiSize:2
-          |INT:0
-          |vpiConstType:7
-        |vpiTypespec:
-        \_ref_typespec: (work@foo)
-          |vpiParent:
-          \_tagged_pattern: , line:29:15, endln:29:24
-          |vpiFullName:work@foo
-          |vpiActual:
-          \_string_typespec: (phase), line:29:8, endln:29:13
-      |vpiOperand:
-      \_tagged_pattern: , line:30:15, endln:30:42
-        |vpiParent:
-        \_operation: , line:28:45, endln:31:4
-        |vpiPattern:
-        \_operation: , line:30:15, endln:30:42
-          |vpiParent:
-          \_tagged_pattern: , line:30:15, endln:30:42
-          |vpiOpType:75
-          |vpiOperand:
-          \_tagged_pattern: , line:30:31, endln:30:40
-            |vpiParent:
-            \_operation: , line:30:15, endln:30:42
-            |vpiPattern:
-            \_constant: , line:30:31, endln:30:40
-              |vpiParent:
-              \_tagged_pattern: , line:30:31, endln:30:40
-              |vpiDecompile:4'h6
-              |vpiSize:4
-              |HEX:6
-              |vpiConstType:5
-            |vpiTypespec:
-            \_ref_typespec: (work@foo)
-              |vpiParent:
-              \_tagged_pattern: , line:30:31, endln:30:40
-              |vpiFullName:work@foo
-              |vpiActual:
-              \_string_typespec: (en), line:30:18, endln:30:20
-        |vpiTypespec:
-        \_ref_typespec: (work@foo)
-          |vpiParent:
-          \_tagged_pattern: , line:30:15, endln:30:42
-          |vpiFullName:work@foo
-          |vpiActual:
-          \_string_typespec: (cfg), line:30:8, endln:30:11
-    |vpiLhs:
-    \_parameter: (work@foo.HwDataAttr), line:28:32, endln:28:42
-      |vpiParent:
-      \_param_assign: , line:28:32, endln:31:4
-      |vpiTypespec:
-      \_ref_typespec: (work@foo.HwDataAttr)
-        |vpiParent:
-        \_parameter: (work@foo.HwDataAttr), line:28:32, endln:28:42
-        |vpiFullName:work@foo.HwDataAttr
-        |vpiActual:
-        \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
-      |vpiName:HwDataAttr
-      |vpiFullName:work@foo.HwDataAttr
-      |vpiImported:pkg
-  |vpiTypedef:
-  \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
-  |vpiTypedef:
-  \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-  |vpiTypedef:
-  \_struct_typespec: (pkg::mp_region_cfg_t), line:21:11, endln:23:4
-  |vpiTypedef:
-  \_enum_typespec: (pkg::mubi4_t), line:11:3, endln:14:13
-  |vpiTypedef:
-  \_import_typespec: (pkg), line:36:8, endln:36:14
-  |vpiDefName:work@foo
-  |vpiNet:
-  \_logic_net: (work@foo.DATA_REG), line:38:28, endln:38:36
+  |vpiName:work@foo
+  |vpiVariables:
+  \_logic_var: (work@foo.DATA_REG), line:38:28, endln:38:36
     |vpiParent:
     \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:35:1, endln:39:10
     |vpiName:DATA_REG
     |vpiFullName:work@foo.DATA_REG
+    |vpiVisibility:1
+  |vpiReg:
+  \_logic_var: (work@foo.DATA_REG), line:38:28, endln:38:36
+  |vpiTypedef:
+  \_import_typespec: (pkg), line:36:8, endln:36:14
+  |vpiTypedef:
+  \_unsupported_typespec: (data_region_attr_t), line:38:9, endln:38:27
+    |vpiParent:
+    \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:35:1, endln:39:10
+    |vpiName:data_region_attr_t
+  |vpiTypedef:
+  \_unsupported_typespec: (data_region_attr_t), line:38:9, endln:38:27
+    |vpiParent:
+    \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:35:1, endln:39:10
+    |vpiName:data_region_attr_t
+  |vpiImportTypespec:
+  \_import_typespec: (pkg), line:36:8, endln:36:14
+  |vpiImportTypespec:
+  \_unsupported_typespec: (data_region_attr_t), line:38:9, endln:38:27
+  |vpiImportTypespec:
+  \_logic_var: (work@foo.DATA_REG), line:38:28, endln:38:36
+  |vpiImportTypespec:
+  \_unsupported_typespec: (data_region_attr_t), line:38:9, endln:38:27
+  |vpiDefName:work@foo
   |vpiPort:
-  \_port: (DATA_REG), line:38:28, endln:38:36
+  \_port: (DATA_REG), line:38:3, endln:38:36
     |vpiParent:
     \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:35:1, endln:39:10
     |vpiName:DATA_REG
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@foo.DATA_REG.DATA_REG), line:38:28, endln:38:36
-      |vpiParent:
-      \_port: (DATA_REG), line:38:28, endln:38:36
-      |vpiName:DATA_REG
-      |vpiFullName:work@foo.DATA_REG.DATA_REG
-      |vpiActual:
-      \_logic_net: (work@foo.DATA_REG), line:38:28, endln:38:36
     |vpiTypedef:
-    \_ref_typespec: (work@foo.DATA_REG)
+    \_ref_typespec: (work@foo.DATA_REG.data_region_attr_t), line:38:9, endln:38:27
       |vpiParent:
-      \_port: (DATA_REG), line:38:28, endln:38:36
-      |vpiFullName:work@foo.DATA_REG
+      \_port: (DATA_REG), line:38:3, endln:38:36
+      |vpiName:data_region_attr_t
+      |vpiFullName:work@foo.DATA_REG.data_region_attr_t
       |vpiActual:
       \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:40:1, endln:44:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiParameter:
-  \_parameter: (work@top.HwDataAttr), line:28:32, endln:28:42
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:40:1, endln:44:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.HwDataAttr)
-      |vpiParent:
-      \_parameter: (work@top.HwDataAttr), line:28:32, endln:28:42
-      |vpiFullName:work@top.HwDataAttr
-      |vpiActual:
-      \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
-    |vpiName:HwDataAttr
-    |vpiFullName:work@top.HwDataAttr
-    |vpiImported:pkg
-  |vpiParameter:
-  \_parameter: (work@top.HwDataRules), line:9:17, endln:9:28
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:40:1, endln:44:10
-    |UINT:2
-    |vpiTypespec:
-    \_ref_typespec: (work@top.HwDataRules)
-      |vpiParent:
-      \_parameter: (work@top.HwDataRules), line:9:17, endln:9:28
-      |vpiFullName:work@top.HwDataRules
-      |vpiActual:
-      \_int_typespec: , line:9:13, endln:9:16
-    |vpiSigned:1
-    |vpiName:HwDataRules
-    |vpiFullName:work@top.HwDataRules
-    |vpiImported:pkg
-  |vpiParameter:
-  \_parameter: (work@top.MuBi4Width), line:10:17, endln:10:27
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:40:1, endln:44:10
-    |UINT:4
-    |vpiTypespec:
-    \_ref_typespec: (work@top.MuBi4Width)
-      |vpiParent:
-      \_parameter: (work@top.MuBi4Width), line:10:17, endln:10:27
-      |vpiFullName:work@top.MuBi4Width
-      |vpiActual:
-      \_int_typespec: , line:10:13, endln:10:16
-    |vpiSigned:1
-    |vpiName:MuBi4Width
-    |vpiFullName:work@top.MuBi4Width
-    |vpiImported:pkg
-  |vpiParameter:
-  \_parameter: (work@top.NumBanks), line:7:26, endln:7:34
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:40:1, endln:44:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.NumBanks)
-      |vpiParent:
-      \_parameter: (work@top.NumBanks), line:7:26, endln:7:34
-      |vpiFullName:work@top.NumBanks
-      |vpiActual:
-      \_int_typespec: , line:7:13, endln:7:25
-    |vpiName:NumBanks
-    |vpiFullName:work@top.NumBanks
-    |vpiImported:pkg
-  |vpiParameter:
-  \_parameter: (work@top.PagesPerBank), line:8:26, endln:8:38
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:40:1, endln:44:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.PagesPerBank)
-      |vpiParent:
-      \_parameter: (work@top.PagesPerBank), line:8:26, endln:8:38
-      |vpiFullName:work@top.PagesPerBank
-      |vpiActual:
-      \_int_typespec: , line:8:13, endln:8:25
-    |vpiName:PagesPerBank
-    |vpiFullName:work@top.PagesPerBank
-    |vpiImported:pkg
-  |vpiParamAssign:
-  \_param_assign: , line:7:26, endln:7:65
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:40:1, endln:44:10
-    |vpiRhs:
-    \_ref_obj: (work@top.ctrl_pkg::RegNumBanks), line:7:44, endln:7:65
-      |vpiParent:
-      \_param_assign: , line:7:26, endln:7:65
-      |vpiName:ctrl_pkg::RegNumBanks
-      |vpiFullName:work@top.ctrl_pkg::RegNumBanks
-    |vpiLhs:
-    \_parameter: (work@top.NumBanks), line:7:26, endln:7:34
-      |vpiParent:
-      \_param_assign: , line:7:26, endln:7:65
-      |vpiTypespec:
-      \_ref_typespec: (work@top.NumBanks)
-        |vpiParent:
-        \_parameter: (work@top.NumBanks), line:7:26, endln:7:34
-        |vpiFullName:work@top.NumBanks
-        |vpiActual:
-        \_int_typespec: , line:7:13, endln:7:25
-      |vpiName:NumBanks
-      |vpiFullName:work@top.NumBanks
-      |vpiImported:pkg
-  |vpiParamAssign:
-  \_param_assign: , line:8:26, endln:8:69
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:40:1, endln:44:10
-    |vpiRhs:
-    \_ref_obj: (work@top.ctrl_pkg::RegPagesPerBank), line:8:44, endln:8:69
-      |vpiParent:
-      \_param_assign: , line:8:26, endln:8:69
-      |vpiName:ctrl_pkg::RegPagesPerBank
-      |vpiFullName:work@top.ctrl_pkg::RegPagesPerBank
-    |vpiLhs:
-    \_parameter: (work@top.PagesPerBank), line:8:26, endln:8:38
-      |vpiParent:
-      \_param_assign: , line:8:26, endln:8:69
-      |vpiTypespec:
-      \_ref_typespec: (work@top.PagesPerBank)
-        |vpiParent:
-        \_parameter: (work@top.PagesPerBank), line:8:26, endln:8:38
-        |vpiFullName:work@top.PagesPerBank
-        |vpiActual:
-        \_int_typespec: , line:8:13, endln:8:25
-      |vpiName:PagesPerBank
-      |vpiFullName:work@top.PagesPerBank
-      |vpiImported:pkg
-  |vpiParamAssign:
-  \_param_assign: , line:9:17, endln:9:32
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:40:1, endln:44:10
-    |vpiRhs:
-    \_constant: , line:9:31, endln:9:32
-      |vpiParent:
-      \_param_assign: , line:9:17, endln:9:32
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:9:31, endln:9:32
-        |vpiFullName:work@top
-        |vpiActual:
-        \_int_typespec: , line:9:13, endln:9:16
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@top.HwDataRules), line:9:17, endln:9:28
-      |vpiParent:
-      \_param_assign: , line:9:17, endln:9:32
-      |UINT:2
-      |vpiTypespec:
-      \_ref_typespec: (work@top.HwDataRules)
-        |vpiParent:
-        \_parameter: (work@top.HwDataRules), line:9:17, endln:9:28
-        |vpiFullName:work@top.HwDataRules
-        |vpiActual:
-        \_int_typespec: , line:9:13, endln:9:16
-      |vpiSigned:1
-      |vpiName:HwDataRules
-      |vpiFullName:work@top.HwDataRules
-      |vpiImported:pkg
-  |vpiParamAssign:
-  \_param_assign: , line:10:17, endln:10:31
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:40:1, endln:44:10
-    |vpiRhs:
-    \_constant: , line:10:30, endln:10:31
-      |vpiParent:
-      \_param_assign: , line:10:17, endln:10:31
-      |vpiDecompile:4
-      |vpiSize:64
-      |UINT:4
-      |vpiTypespec:
-      \_ref_typespec: (work@top)
-        |vpiParent:
-        \_constant: , line:10:30, endln:10:31
-        |vpiFullName:work@top
-        |vpiActual:
-        \_int_typespec: , line:10:13, endln:10:16
-      |vpiConstType:9
-    |vpiLhs:
-    \_parameter: (work@top.MuBi4Width), line:10:17, endln:10:27
-      |vpiParent:
-      \_param_assign: , line:10:17, endln:10:31
-      |UINT:4
-      |vpiTypespec:
-      \_ref_typespec: (work@top.MuBi4Width)
-        |vpiParent:
-        \_parameter: (work@top.MuBi4Width), line:10:17, endln:10:27
-        |vpiFullName:work@top.MuBi4Width
-        |vpiActual:
-        \_int_typespec: , line:10:13, endln:10:16
-      |vpiSigned:1
-      |vpiName:MuBi4Width
-      |vpiFullName:work@top.MuBi4Width
-      |vpiImported:pkg
-  |vpiParamAssign:
-  \_param_assign: , line:28:32, endln:31:4
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:40:1, endln:44:10
-    |vpiRhs:
-    \_operation: , line:28:45, endln:31:4
-      |vpiParent:
-      \_param_assign: , line:28:32, endln:31:4
-      |vpiOpType:75
-      |vpiOperand:
-      \_tagged_pattern: , line:29:15, endln:29:24
-        |vpiParent:
-        \_operation: , line:28:45, endln:31:4
-        |vpiPattern:
-        \_constant: , line:29:15, endln:29:24
-          |vpiParent:
-          \_tagged_pattern: , line:29:15, endln:29:24
-          |vpiDecompile:0
-          |vpiSize:2
-          |INT:0
-          |vpiConstType:7
-        |vpiTypespec:
-        \_ref_typespec: (work@top)
-          |vpiParent:
-          \_tagged_pattern: , line:29:15, endln:29:24
-          |vpiFullName:work@top
-          |vpiActual:
-          \_string_typespec: (phase), line:29:8, endln:29:13
-      |vpiOperand:
-      \_tagged_pattern: , line:30:15, endln:30:42
-        |vpiParent:
-        \_operation: , line:28:45, endln:31:4
-        |vpiPattern:
-        \_operation: , line:30:15, endln:30:42
-          |vpiParent:
-          \_tagged_pattern: , line:30:15, endln:30:42
-          |vpiOpType:75
-          |vpiOperand:
-          \_tagged_pattern: , line:30:31, endln:30:40
-            |vpiParent:
-            \_operation: , line:30:15, endln:30:42
-            |vpiPattern:
-            \_constant: , line:30:31, endln:30:40
-              |vpiParent:
-              \_tagged_pattern: , line:30:31, endln:30:40
-              |vpiDecompile:4'h6
-              |vpiSize:4
-              |HEX:6
-              |vpiConstType:5
-            |vpiTypespec:
-            \_ref_typespec: (work@top)
-              |vpiParent:
-              \_tagged_pattern: , line:30:31, endln:30:40
-              |vpiFullName:work@top
-              |vpiActual:
-              \_string_typespec: (en), line:30:18, endln:30:20
-        |vpiTypespec:
-        \_ref_typespec: (work@top)
-          |vpiParent:
-          \_tagged_pattern: , line:30:15, endln:30:42
-          |vpiFullName:work@top
-          |vpiActual:
-          \_string_typespec: (cfg), line:30:8, endln:30:11
-    |vpiLhs:
-    \_parameter: (work@top.HwDataAttr), line:28:32, endln:28:42
-      |vpiParent:
-      \_param_assign: , line:28:32, endln:31:4
-      |vpiTypespec:
-      \_ref_typespec: (work@top.HwDataAttr)
-        |vpiParent:
-        \_parameter: (work@top.HwDataAttr), line:28:32, endln:28:42
-        |vpiFullName:work@top.HwDataAttr
-        |vpiActual:
-        \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
-      |vpiName:HwDataAttr
-      |vpiFullName:work@top.HwDataAttr
-      |vpiImported:pkg
-  |vpiTypedef:
-  \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
-  |vpiTypedef:
-  \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-  |vpiTypedef:
-  \_struct_typespec: (pkg::mp_region_cfg_t), line:21:11, endln:23:4
-  |vpiTypedef:
-  \_enum_typespec: (pkg::mubi4_t), line:11:3, endln:14:13
+  |vpiName:work@top
   |vpiTypedef:
   \_import_typespec: (pkg), line:41:8, endln:41:14
+  |vpiImportTypespec:
+  \_import_typespec: (pkg), line:41:8, endln:41:14
   |vpiDefName:work@top
+  |vpiPort:
+  \_port: (DATA_REG), line:42:7, endln:42:28
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:40:1, endln:44:10
+    |vpiName:DATA_REG
+    |vpiHighConn:
+    \_ref_obj: (work@top.DATA_REG.HwDataAttr), line:42:17, endln:42:27
+      |vpiParent:
+      \_port: (DATA_REG), line:42:7, endln:42:28
+      |vpiName:HwDataAttr
+      |vpiFullName:work@top.DATA_REG.HwDataAttr
+      |vpiActual:
+      \_parameter: (pkg::HwDataAttr), line:28:32, endln:31:4
   |vpiRefModule:
-  \_ref_module: work@foo (f), line:42:5, endln:42:6
+  \_ref_module: work@foo (f), line:42:1, endln:42:30
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:40:1, endln:44:10
     |vpiName:f
@@ -1378,1054 +993,6 @@ design: (unnamed)
     \_module_inst: work@foo (work@foo), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:35:1, endln:39:10
     |vpiPort:
     \_port: (DATA_REG), line:42:7, endln:42:28
-      |vpiParent:
-      \_ref_module: work@foo (f), line:42:5, endln:42:6
-      |vpiName:DATA_REG
-      |vpiHighConn:
-      \_ref_obj: (work@top.f.DATA_REG.HwDataAttr), line:42:17, endln:42:27
-        |vpiParent:
-        \_port: (DATA_REG), line:42:7, endln:42:28
-        |vpiName:HwDataAttr
-        |vpiFullName:work@top.f.DATA_REG.HwDataAttr
-\_weaklyReferenced:
-\_int_typespec: , line:2:13, endln:2:16
-  |vpiParent:
-  \_parameter: (ctrl_pkg::RegNumBanks), line:2:17, endln:2:28
-  |vpiInstance:
-  \_package: ctrl_pkg (ctrl_pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:1:1, endln:4:11
-  |vpiSigned:1
-\_int_typespec: , line:3:13, endln:3:16
-  |vpiParent:
-  \_parameter: (ctrl_pkg::RegPagesPerBank), line:3:17, endln:3:32
-  |vpiInstance:
-  \_package: ctrl_pkg (ctrl_pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:1:1, endln:4:11
-  |vpiSigned:1
-\_int_typespec: , line:7:13, endln:7:25
-  |vpiParent:
-  \_parameter: (pkg::NumBanks), line:7:26, endln:7:34
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-\_int_typespec: , line:8:13, endln:8:25
-  |vpiParent:
-  \_parameter: (pkg::PagesPerBank), line:8:26, endln:8:38
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-\_int_typespec: , line:9:13, endln:9:16
-  |vpiParent:
-  \_parameter: (pkg::HwDataRules), line:9:17, endln:9:28
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiSigned:1
-\_int_typespec: , line:10:13, endln:10:16
-  |vpiParent:
-  \_parameter: (pkg::MuBi4Width), line:10:17, endln:10:27
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiSigned:1
-\_logic_typespec: , line:11:16, endln:11:38
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiRange:
-  \_range: , line:11:22, endln:11:38
-    |vpiParent:
-    \_logic_typespec: , line:11:16, endln:11:38
-    |vpiLeftRange:
-    \_operation: , line:11:23, endln:11:35
-      |vpiParent:
-      \_range: , line:11:22, endln:11:38
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (MuBi4Width), line:11:23, endln:11:33
-        |vpiParent:
-        \_operation: , line:11:23, endln:11:35
-        |vpiName:MuBi4Width
-      |vpiOperand:
-      \_constant: , line:11:34, endln:11:35
-        |vpiParent:
-        \_operation: , line:11:23, endln:11:35
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:11:36, endln:11:37
-      |vpiParent:
-      \_range: , line:11:22, endln:11:38
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:15:16, endln:15:27
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiRange:
-  \_range: , line:15:22, endln:15:27
-    |vpiParent:
-    \_logic_typespec: , line:15:16, endln:15:27
-    |vpiLeftRange:
-    \_constant: , line:15:23, endln:15:24
-      |vpiParent:
-      \_range: , line:15:22, endln:15:27
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:15:25, endln:15:26
-      |vpiParent:
-      \_range: , line:15:22, endln:15:27
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_string_typespec: (phase), line:29:8, endln:29:13
-  |vpiParent:
-  \_tagged_pattern: , line:29:15, endln:29:24
-  |vpiName:phase
-\_string_typespec: (en), line:30:18, endln:30:20
-  |vpiParent:
-  \_tagged_pattern: , line:30:31, endln:30:40
-  |vpiName:en
-\_string_typespec: (cfg), line:30:8, endln:30:11
-  |vpiParent:
-  \_tagged_pattern: , line:30:15, endln:30:42
-  |vpiName:cfg
-\_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
-  |vpiParent:
-  \_ref_typespec: (work@foo.HwDataAttr)
-  |vpiName:pkg::data_region_attr_t
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (phase), line:25:27, endln:25:32
-    |vpiParent:
-    \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
-    |vpiName:phase
-    |vpiTypespec:
-    \_ref_typespec: (work@foo.HwDataAttr.pkg::data_region_attr_t.phase)
-      |vpiParent:
-      \_typespec_member: (phase), line:25:27, endln:25:32
-      |vpiFullName:work@foo.HwDataAttr.pkg::data_region_attr_t.phase
-      |vpiActual:
-      \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-    |vpiRefFile:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv
-    |vpiRefLineNo:25
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:25
-    |vpiRefEndColumnNo:24
-  |vpiTypespecMember:
-  \_typespec_member: (cfg), line:26:21, endln:26:24
-    |vpiParent:
-    \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
-    |vpiName:cfg
-    |vpiTypespec:
-    \_ref_typespec: (work@foo.HwDataAttr.pkg::data_region_attr_t.cfg)
-      |vpiParent:
-      \_typespec_member: (cfg), line:26:21, endln:26:24
-      |vpiFullName:work@foo.HwDataAttr.pkg::data_region_attr_t.cfg
-      |vpiActual:
-      \_struct_typespec: (pkg::mp_region_cfg_t), line:21:11, endln:23:4
-    |vpiRefFile:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv
-    |vpiRefLineNo:26
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:26
-    |vpiRefEndColumnNo:20
-\_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-  |vpiParent:
-  \_ref_typespec: (work@foo.HwDataAttr.pkg::data_region_attr_t.phase)
-  |vpiName:pkg::flash_lcmgr_phase_e
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiBaseTypespec:
-  \_ref_typespec: (work@foo.HwDataAttr.pkg::data_region_attr_t.phase.pkg::flash_lcmgr_phase_e)
-    |vpiParent:
-    \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-    |vpiFullName:work@foo.HwDataAttr.pkg::data_region_attr_t.phase.pkg::flash_lcmgr_phase_e
-    |vpiActual:
-    \_logic_typespec: , line:15:16, endln:15:27
-  |vpiEnumConst:
-  \_enum_const: (PhaseSeed), line:16:5, endln:16:14
-    |vpiParent:
-    \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-    |vpiName:PhaseSeed
-    |INT:0
-    |vpiDecompile:0
-    |vpiSize:2
-  |vpiEnumConst:
-  \_enum_const: (PhaseRma), line:17:5, endln:17:13
-    |vpiParent:
-    \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-    |vpiName:PhaseRma
-    |INT:1
-    |vpiDecompile:1
-    |vpiSize:2
-  |vpiEnumConst:
-  \_enum_const: (PhaseNone), line:18:5, endln:18:14
-    |vpiParent:
-    \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-    |vpiName:PhaseNone
-    |INT:2
-    |vpiDecompile:2
-    |vpiSize:2
-  |vpiEnumConst:
-  \_enum_const: (PhaseInvalid), line:19:5, endln:19:17
-    |vpiParent:
-    \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-    |vpiName:PhaseInvalid
-    |INT:3
-    |vpiDecompile:3
-    |vpiSize:2
-\_logic_typespec: , line:15:16, endln:15:27
-  |vpiParent:
-  \_ref_typespec: (work@foo.HwDataAttr.pkg::data_region_attr_t.phase.pkg::flash_lcmgr_phase_e)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiRange:
-  \_range: , line:15:22, endln:15:27
-    |vpiParent:
-    \_logic_typespec: , line:15:16, endln:15:27
-    |vpiLeftRange:
-    \_constant: , line:15:23, endln:15:24
-      |vpiParent:
-      \_range: , line:15:22, endln:15:27
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:15:25, endln:15:26
-      |vpiParent:
-      \_range: , line:15:22, endln:15:27
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_struct_typespec: (pkg::mp_region_cfg_t), line:21:11, endln:23:4
-  |vpiParent:
-  \_ref_typespec: (work@foo.HwDataAttr.pkg::data_region_attr_t.cfg)
-  |vpiName:pkg::mp_region_cfg_t
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (en), line:22:13, endln:22:15
-    |vpiParent:
-    \_struct_typespec: (pkg::mp_region_cfg_t), line:21:11, endln:23:4
-    |vpiName:en
-    |vpiTypespec:
-    \_ref_typespec: (work@foo.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en)
-      |vpiParent:
-      \_typespec_member: (en), line:22:13, endln:22:15
-      |vpiFullName:work@foo.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en
-      |vpiActual:
-      \_enum_typespec: (pkg::mubi4_t), line:11:3, endln:14:13
-    |vpiRefFile:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv
-    |vpiRefLineNo:22
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:22
-    |vpiRefEndColumnNo:12
-\_enum_typespec: (pkg::mubi4_t), line:11:3, endln:14:13
-  |vpiParent:
-  \_ref_typespec: (work@foo.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en)
-  |vpiName:pkg::mubi4_t
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiBaseTypespec:
-  \_ref_typespec: (work@foo.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en.pkg::mubi4_t)
-    |vpiParent:
-    \_enum_typespec: (pkg::mubi4_t), line:11:3, endln:14:13
-    |vpiFullName:work@foo.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en.pkg::mubi4_t
-    |vpiActual:
-    \_logic_typespec: , line:11:16, endln:11:38
-  |vpiEnumConst:
-  \_enum_const: (MuBi4True), line:12:5, endln:12:21
-    |vpiParent:
-    \_enum_typespec: (pkg::mubi4_t), line:11:3, endln:14:13
-    |vpiName:MuBi4True
-    |HEX:6
-    |vpiDecompile:4'h6
-    |vpiSize:4
-  |vpiEnumConst:
-  \_enum_const: (MuBi4False), line:13:5, endln:13:22
-    |vpiParent:
-    \_enum_typespec: (pkg::mubi4_t), line:11:3, endln:14:13
-    |vpiName:MuBi4False
-    |HEX:9
-    |vpiDecompile:4'h9
-    |vpiSize:4
-\_logic_typespec: , line:11:16, endln:11:38
-  |vpiParent:
-  \_ref_typespec: (work@foo.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en.pkg::mubi4_t)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiRange:
-  \_range: , line:11:22, endln:11:38
-    |vpiParent:
-    \_logic_typespec: , line:11:16, endln:11:38
-    |vpiLeftRange:
-    \_operation: , line:11:23, endln:11:35
-      |vpiParent:
-      \_range: , line:11:22, endln:11:38
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@foo.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en.pkg::mubi4_t.MuBi4Width), line:11:23, endln:11:33
-        |vpiParent:
-        \_operation: , line:11:23, endln:11:35
-        |vpiName:MuBi4Width
-        |vpiFullName:work@foo.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en.pkg::mubi4_t.MuBi4Width
-      |vpiOperand:
-      \_constant: , line:11:34, endln:11:35
-        |vpiParent:
-        \_operation: , line:11:23, endln:11:35
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:11:36, endln:11:37
-      |vpiParent:
-      \_range: , line:11:22, endln:11:38
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_int_typespec: , line:9:13, endln:9:16
-  |vpiParent:
-  \_ref_typespec: (work@foo.HwDataRules)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiSigned:1
-\_int_typespec: , line:10:13, endln:10:16
-  |vpiParent:
-  \_ref_typespec: (work@foo.MuBi4Width)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiSigned:1
-\_int_typespec: , line:7:13, endln:7:25
-  |vpiParent:
-  \_ref_typespec: (work@foo.NumBanks)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-\_int_typespec: , line:8:13, endln:8:25
-  |vpiParent:
-  \_ref_typespec: (work@foo.PagesPerBank)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-\_int_typespec: , line:7:13, endln:7:25
-  |vpiParent:
-  \_ref_typespec: (work@foo.NumBanks)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-\_int_typespec: , line:8:13, endln:8:25
-  |vpiParent:
-  \_ref_typespec: (work@foo.PagesPerBank)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-\_int_typespec: , line:9:13, endln:9:16
-  |vpiParent:
-  \_ref_typespec: (work@foo)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiSigned:1
-\_int_typespec: , line:9:13, endln:9:16
-  |vpiParent:
-  \_ref_typespec: (work@foo.HwDataRules)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiSigned:1
-\_int_typespec: , line:10:13, endln:10:16
-  |vpiParent:
-  \_ref_typespec: (work@foo)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiSigned:1
-\_int_typespec: , line:10:13, endln:10:16
-  |vpiParent:
-  \_ref_typespec: (work@foo.MuBi4Width)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiSigned:1
-\_string_typespec: (phase), line:29:8, endln:29:13
-  |vpiParent:
-  \_ref_typespec: (work@foo)
-  |vpiName:phase
-\_string_typespec: (cfg), line:30:8, endln:30:11
-  |vpiParent:
-  \_ref_typespec: (work@foo)
-  |vpiName:cfg
-\_string_typespec: (en), line:30:18, endln:30:20
-  |vpiParent:
-  \_ref_typespec: (work@foo)
-  |vpiName:en
-\_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
-  |vpiParent:
-  \_ref_typespec: (work@foo.HwDataAttr)
-  |vpiName:pkg::data_region_attr_t
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (phase), line:25:27, endln:25:32
-    |vpiParent:
-    \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
-    |vpiName:phase
-    |vpiTypespec:
-    \_ref_typespec: (work@foo.HwDataAttr.pkg::data_region_attr_t.phase)
-      |vpiParent:
-      \_typespec_member: (phase), line:25:27, endln:25:32
-      |vpiFullName:work@foo.HwDataAttr.pkg::data_region_attr_t.phase
-      |vpiActual:
-      \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-    |vpiRefFile:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv
-    |vpiRefLineNo:25
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:25
-    |vpiRefEndColumnNo:24
-  |vpiTypespecMember:
-  \_typespec_member: (cfg), line:26:21, endln:26:24
-    |vpiParent:
-    \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
-    |vpiName:cfg
-    |vpiTypespec:
-    \_ref_typespec: (work@foo.HwDataAttr.pkg::data_region_attr_t.cfg)
-      |vpiParent:
-      \_typespec_member: (cfg), line:26:21, endln:26:24
-      |vpiFullName:work@foo.HwDataAttr.pkg::data_region_attr_t.cfg
-      |vpiActual:
-      \_struct_typespec: (pkg::mp_region_cfg_t), line:21:11, endln:23:4
-    |vpiRefFile:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv
-    |vpiRefLineNo:26
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:26
-    |vpiRefEndColumnNo:20
-\_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-  |vpiParent:
-  \_ref_typespec: (work@foo.HwDataAttr.pkg::data_region_attr_t.phase)
-  |vpiName:pkg::flash_lcmgr_phase_e
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiBaseTypespec:
-  \_ref_typespec: (work@foo.HwDataAttr.pkg::data_region_attr_t.phase.pkg::flash_lcmgr_phase_e)
-    |vpiParent:
-    \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-    |vpiFullName:work@foo.HwDataAttr.pkg::data_region_attr_t.phase.pkg::flash_lcmgr_phase_e
-    |vpiActual:
-    \_logic_typespec: , line:15:16, endln:15:27
-  |vpiEnumConst:
-  \_enum_const: (PhaseSeed), line:16:5, endln:16:14
-    |vpiParent:
-    \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-    |vpiName:PhaseSeed
-    |INT:0
-    |vpiDecompile:0
-    |vpiSize:2
-  |vpiEnumConst:
-  \_enum_const: (PhaseRma), line:17:5, endln:17:13
-    |vpiParent:
-    \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-    |vpiName:PhaseRma
-    |INT:1
-    |vpiDecompile:1
-    |vpiSize:2
-  |vpiEnumConst:
-  \_enum_const: (PhaseNone), line:18:5, endln:18:14
-    |vpiParent:
-    \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-    |vpiName:PhaseNone
-    |INT:2
-    |vpiDecompile:2
-    |vpiSize:2
-  |vpiEnumConst:
-  \_enum_const: (PhaseInvalid), line:19:5, endln:19:17
-    |vpiParent:
-    \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-    |vpiName:PhaseInvalid
-    |INT:3
-    |vpiDecompile:3
-    |vpiSize:2
-\_logic_typespec: , line:15:16, endln:15:27
-  |vpiParent:
-  \_ref_typespec: (work@foo.HwDataAttr.pkg::data_region_attr_t.phase.pkg::flash_lcmgr_phase_e)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiRange:
-  \_range: , line:15:22, endln:15:27
-    |vpiParent:
-    \_logic_typespec: , line:15:16, endln:15:27
-    |vpiLeftRange:
-    \_constant: , line:15:23, endln:15:24
-      |vpiParent:
-      \_range: , line:15:22, endln:15:27
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:15:25, endln:15:26
-      |vpiParent:
-      \_range: , line:15:22, endln:15:27
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_struct_typespec: (pkg::mp_region_cfg_t), line:21:11, endln:23:4
-  |vpiParent:
-  \_ref_typespec: (work@foo.HwDataAttr.pkg::data_region_attr_t.cfg)
-  |vpiName:pkg::mp_region_cfg_t
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (en), line:22:13, endln:22:15
-    |vpiParent:
-    \_struct_typespec: (pkg::mp_region_cfg_t), line:21:11, endln:23:4
-    |vpiName:en
-    |vpiTypespec:
-    \_ref_typespec: (work@foo.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en)
-      |vpiParent:
-      \_typespec_member: (en), line:22:13, endln:22:15
-      |vpiFullName:work@foo.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en
-      |vpiActual:
-      \_enum_typespec: (pkg::mubi4_t), line:11:3, endln:14:13
-    |vpiRefFile:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv
-    |vpiRefLineNo:22
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:22
-    |vpiRefEndColumnNo:12
-\_enum_typespec: (pkg::mubi4_t), line:11:3, endln:14:13
-  |vpiParent:
-  \_ref_typespec: (work@foo.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en)
-  |vpiName:pkg::mubi4_t
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiBaseTypespec:
-  \_ref_typespec: (work@foo.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en.pkg::mubi4_t)
-    |vpiParent:
-    \_enum_typespec: (pkg::mubi4_t), line:11:3, endln:14:13
-    |vpiFullName:work@foo.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en.pkg::mubi4_t
-    |vpiActual:
-    \_logic_typespec: , line:11:16, endln:11:38
-  |vpiEnumConst:
-  \_enum_const: (MuBi4True), line:12:5, endln:12:21
-    |vpiParent:
-    \_enum_typespec: (pkg::mubi4_t), line:11:3, endln:14:13
-    |vpiName:MuBi4True
-    |HEX:6
-    |vpiDecompile:4'h6
-    |vpiSize:4
-  |vpiEnumConst:
-  \_enum_const: (MuBi4False), line:13:5, endln:13:22
-    |vpiParent:
-    \_enum_typespec: (pkg::mubi4_t), line:11:3, endln:14:13
-    |vpiName:MuBi4False
-    |HEX:9
-    |vpiDecompile:4'h9
-    |vpiSize:4
-\_logic_typespec: , line:11:16, endln:11:38
-  |vpiParent:
-  \_ref_typespec: (work@foo.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en.pkg::mubi4_t)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiRange:
-  \_range: , line:11:22, endln:11:38
-    |vpiParent:
-    \_logic_typespec: , line:11:16, endln:11:38
-    |vpiLeftRange:
-    \_operation: , line:11:23, endln:11:35
-      |vpiParent:
-      \_range: , line:11:22, endln:11:38
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@foo.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en.pkg::mubi4_t.MuBi4Width), line:11:23, endln:11:33
-        |vpiParent:
-        \_operation: , line:11:23, endln:11:35
-        |vpiName:MuBi4Width
-        |vpiFullName:work@foo.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en.pkg::mubi4_t.MuBi4Width
-      |vpiOperand:
-      \_constant: , line:11:34, endln:11:35
-        |vpiParent:
-        \_operation: , line:11:23, endln:11:35
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:11:36, endln:11:37
-      |vpiParent:
-      \_range: , line:11:22, endln:11:38
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
-  |vpiParent:
-  \_ref_typespec: (work@top.HwDataAttr)
-  |vpiName:pkg::data_region_attr_t
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (phase), line:25:27, endln:25:32
-    |vpiParent:
-    \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
-    |vpiName:phase
-    |vpiTypespec:
-    \_ref_typespec: (work@top.HwDataAttr.pkg::data_region_attr_t.phase)
-      |vpiParent:
-      \_typespec_member: (phase), line:25:27, endln:25:32
-      |vpiFullName:work@top.HwDataAttr.pkg::data_region_attr_t.phase
-      |vpiActual:
-      \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-    |vpiRefFile:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv
-    |vpiRefLineNo:25
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:25
-    |vpiRefEndColumnNo:24
-  |vpiTypespecMember:
-  \_typespec_member: (cfg), line:26:21, endln:26:24
-    |vpiParent:
-    \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
-    |vpiName:cfg
-    |vpiTypespec:
-    \_ref_typespec: (work@top.HwDataAttr.pkg::data_region_attr_t.cfg)
-      |vpiParent:
-      \_typespec_member: (cfg), line:26:21, endln:26:24
-      |vpiFullName:work@top.HwDataAttr.pkg::data_region_attr_t.cfg
-      |vpiActual:
-      \_struct_typespec: (pkg::mp_region_cfg_t), line:21:11, endln:23:4
-    |vpiRefFile:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv
-    |vpiRefLineNo:26
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:26
-    |vpiRefEndColumnNo:20
-\_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-  |vpiParent:
-  \_ref_typespec: (work@top.HwDataAttr.pkg::data_region_attr_t.phase)
-  |vpiName:pkg::flash_lcmgr_phase_e
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiBaseTypespec:
-  \_ref_typespec: (work@top.HwDataAttr.pkg::data_region_attr_t.phase.pkg::flash_lcmgr_phase_e)
-    |vpiParent:
-    \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-    |vpiFullName:work@top.HwDataAttr.pkg::data_region_attr_t.phase.pkg::flash_lcmgr_phase_e
-    |vpiActual:
-    \_logic_typespec: , line:15:16, endln:15:27
-  |vpiEnumConst:
-  \_enum_const: (PhaseSeed), line:16:5, endln:16:14
-    |vpiParent:
-    \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-    |vpiName:PhaseSeed
-    |INT:0
-    |vpiDecompile:0
-    |vpiSize:2
-  |vpiEnumConst:
-  \_enum_const: (PhaseRma), line:17:5, endln:17:13
-    |vpiParent:
-    \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-    |vpiName:PhaseRma
-    |INT:1
-    |vpiDecompile:1
-    |vpiSize:2
-  |vpiEnumConst:
-  \_enum_const: (PhaseNone), line:18:5, endln:18:14
-    |vpiParent:
-    \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-    |vpiName:PhaseNone
-    |INT:2
-    |vpiDecompile:2
-    |vpiSize:2
-  |vpiEnumConst:
-  \_enum_const: (PhaseInvalid), line:19:5, endln:19:17
-    |vpiParent:
-    \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-    |vpiName:PhaseInvalid
-    |INT:3
-    |vpiDecompile:3
-    |vpiSize:2
-\_logic_typespec: , line:15:16, endln:15:27
-  |vpiParent:
-  \_ref_typespec: (work@top.HwDataAttr.pkg::data_region_attr_t.phase.pkg::flash_lcmgr_phase_e)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiRange:
-  \_range: , line:15:22, endln:15:27
-    |vpiParent:
-    \_logic_typespec: , line:15:16, endln:15:27
-    |vpiLeftRange:
-    \_constant: , line:15:23, endln:15:24
-      |vpiParent:
-      \_range: , line:15:22, endln:15:27
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:15:25, endln:15:26
-      |vpiParent:
-      \_range: , line:15:22, endln:15:27
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_struct_typespec: (pkg::mp_region_cfg_t), line:21:11, endln:23:4
-  |vpiParent:
-  \_ref_typespec: (work@top.HwDataAttr.pkg::data_region_attr_t.cfg)
-  |vpiName:pkg::mp_region_cfg_t
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (en), line:22:13, endln:22:15
-    |vpiParent:
-    \_struct_typespec: (pkg::mp_region_cfg_t), line:21:11, endln:23:4
-    |vpiName:en
-    |vpiTypespec:
-    \_ref_typespec: (work@top.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en)
-      |vpiParent:
-      \_typespec_member: (en), line:22:13, endln:22:15
-      |vpiFullName:work@top.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en
-      |vpiActual:
-      \_enum_typespec: (pkg::mubi4_t), line:11:3, endln:14:13
-    |vpiRefFile:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv
-    |vpiRefLineNo:22
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:22
-    |vpiRefEndColumnNo:12
-\_enum_typespec: (pkg::mubi4_t), line:11:3, endln:14:13
-  |vpiParent:
-  \_ref_typespec: (work@top.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en)
-  |vpiName:pkg::mubi4_t
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiBaseTypespec:
-  \_ref_typespec: (work@top.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en.pkg::mubi4_t)
-    |vpiParent:
-    \_enum_typespec: (pkg::mubi4_t), line:11:3, endln:14:13
-    |vpiFullName:work@top.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en.pkg::mubi4_t
-    |vpiActual:
-    \_logic_typespec: , line:11:16, endln:11:38
-  |vpiEnumConst:
-  \_enum_const: (MuBi4True), line:12:5, endln:12:21
-    |vpiParent:
-    \_enum_typespec: (pkg::mubi4_t), line:11:3, endln:14:13
-    |vpiName:MuBi4True
-    |HEX:6
-    |vpiDecompile:4'h6
-    |vpiSize:4
-  |vpiEnumConst:
-  \_enum_const: (MuBi4False), line:13:5, endln:13:22
-    |vpiParent:
-    \_enum_typespec: (pkg::mubi4_t), line:11:3, endln:14:13
-    |vpiName:MuBi4False
-    |HEX:9
-    |vpiDecompile:4'h9
-    |vpiSize:4
-\_logic_typespec: , line:11:16, endln:11:38
-  |vpiParent:
-  \_ref_typespec: (work@top.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en.pkg::mubi4_t)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiRange:
-  \_range: , line:11:22, endln:11:38
-    |vpiParent:
-    \_logic_typespec: , line:11:16, endln:11:38
-    |vpiLeftRange:
-    \_operation: , line:11:23, endln:11:35
-      |vpiParent:
-      \_range: , line:11:22, endln:11:38
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@top.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en.pkg::mubi4_t.MuBi4Width), line:11:23, endln:11:33
-        |vpiParent:
-        \_operation: , line:11:23, endln:11:35
-        |vpiName:MuBi4Width
-        |vpiFullName:work@top.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en.pkg::mubi4_t.MuBi4Width
-      |vpiOperand:
-      \_constant: , line:11:34, endln:11:35
-        |vpiParent:
-        \_operation: , line:11:23, endln:11:35
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:11:36, endln:11:37
-      |vpiParent:
-      \_range: , line:11:22, endln:11:38
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_int_typespec: , line:9:13, endln:9:16
-  |vpiParent:
-  \_ref_typespec: (work@top.HwDataRules)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiSigned:1
-\_int_typespec: , line:10:13, endln:10:16
-  |vpiParent:
-  \_ref_typespec: (work@top.MuBi4Width)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiSigned:1
-\_int_typespec: , line:7:13, endln:7:25
-  |vpiParent:
-  \_ref_typespec: (work@top.NumBanks)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-\_int_typespec: , line:8:13, endln:8:25
-  |vpiParent:
-  \_ref_typespec: (work@top.PagesPerBank)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-\_int_typespec: , line:7:13, endln:7:25
-  |vpiParent:
-  \_ref_typespec: (work@top.NumBanks)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-\_int_typespec: , line:8:13, endln:8:25
-  |vpiParent:
-  \_ref_typespec: (work@top.PagesPerBank)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-\_int_typespec: , line:9:13, endln:9:16
-  |vpiParent:
-  \_ref_typespec: (work@top)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiSigned:1
-\_int_typespec: , line:9:13, endln:9:16
-  |vpiParent:
-  \_ref_typespec: (work@top.HwDataRules)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiSigned:1
-\_int_typespec: , line:10:13, endln:10:16
-  |vpiParent:
-  \_ref_typespec: (work@top)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiSigned:1
-\_int_typespec: , line:10:13, endln:10:16
-  |vpiParent:
-  \_ref_typespec: (work@top.MuBi4Width)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiSigned:1
-\_string_typespec: (phase), line:29:8, endln:29:13
-  |vpiParent:
-  \_ref_typespec: (work@top)
-  |vpiName:phase
-\_string_typespec: (cfg), line:30:8, endln:30:11
-  |vpiParent:
-  \_ref_typespec: (work@top)
-  |vpiName:cfg
-\_string_typespec: (en), line:30:18, endln:30:20
-  |vpiParent:
-  \_ref_typespec: (work@top)
-  |vpiName:en
-\_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
-  |vpiParent:
-  \_ref_typespec: (work@top.HwDataAttr)
-  |vpiName:pkg::data_region_attr_t
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (phase), line:25:27, endln:25:32
-    |vpiParent:
-    \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
-    |vpiName:phase
-    |vpiTypespec:
-    \_ref_typespec: (work@top.HwDataAttr.pkg::data_region_attr_t.phase)
-      |vpiParent:
-      \_typespec_member: (phase), line:25:27, endln:25:32
-      |vpiFullName:work@top.HwDataAttr.pkg::data_region_attr_t.phase
-      |vpiActual:
-      \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-    |vpiRefFile:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv
-    |vpiRefLineNo:25
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:25
-    |vpiRefEndColumnNo:24
-  |vpiTypespecMember:
-  \_typespec_member: (cfg), line:26:21, endln:26:24
-    |vpiParent:
-    \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
-    |vpiName:cfg
-    |vpiTypespec:
-    \_ref_typespec: (work@top.HwDataAttr.pkg::data_region_attr_t.cfg)
-      |vpiParent:
-      \_typespec_member: (cfg), line:26:21, endln:26:24
-      |vpiFullName:work@top.HwDataAttr.pkg::data_region_attr_t.cfg
-      |vpiActual:
-      \_struct_typespec: (pkg::mp_region_cfg_t), line:21:11, endln:23:4
-    |vpiRefFile:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv
-    |vpiRefLineNo:26
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:26
-    |vpiRefEndColumnNo:20
-\_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-  |vpiParent:
-  \_ref_typespec: (work@top.HwDataAttr.pkg::data_region_attr_t.phase)
-  |vpiName:pkg::flash_lcmgr_phase_e
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiBaseTypespec:
-  \_ref_typespec: (work@top.HwDataAttr.pkg::data_region_attr_t.phase.pkg::flash_lcmgr_phase_e)
-    |vpiParent:
-    \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-    |vpiFullName:work@top.HwDataAttr.pkg::data_region_attr_t.phase.pkg::flash_lcmgr_phase_e
-    |vpiActual:
-    \_logic_typespec: , line:15:16, endln:15:27
-  |vpiEnumConst:
-  \_enum_const: (PhaseSeed), line:16:5, endln:16:14
-    |vpiParent:
-    \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-    |vpiName:PhaseSeed
-    |INT:0
-    |vpiDecompile:0
-    |vpiSize:2
-  |vpiEnumConst:
-  \_enum_const: (PhaseRma), line:17:5, endln:17:13
-    |vpiParent:
-    \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-    |vpiName:PhaseRma
-    |INT:1
-    |vpiDecompile:1
-    |vpiSize:2
-  |vpiEnumConst:
-  \_enum_const: (PhaseNone), line:18:5, endln:18:14
-    |vpiParent:
-    \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-    |vpiName:PhaseNone
-    |INT:2
-    |vpiDecompile:2
-    |vpiSize:2
-  |vpiEnumConst:
-  \_enum_const: (PhaseInvalid), line:19:5, endln:19:17
-    |vpiParent:
-    \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:3, endln:20:25
-    |vpiName:PhaseInvalid
-    |INT:3
-    |vpiDecompile:3
-    |vpiSize:2
-\_logic_typespec: , line:15:16, endln:15:27
-  |vpiParent:
-  \_ref_typespec: (work@top.HwDataAttr.pkg::data_region_attr_t.phase.pkg::flash_lcmgr_phase_e)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiRange:
-  \_range: , line:15:22, endln:15:27
-    |vpiParent:
-    \_logic_typespec: , line:15:16, endln:15:27
-    |vpiLeftRange:
-    \_constant: , line:15:23, endln:15:24
-      |vpiParent:
-      \_range: , line:15:22, endln:15:27
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:15:25, endln:15:26
-      |vpiParent:
-      \_range: , line:15:22, endln:15:27
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_struct_typespec: (pkg::mp_region_cfg_t), line:21:11, endln:23:4
-  |vpiParent:
-  \_ref_typespec: (work@top.HwDataAttr.pkg::data_region_attr_t.cfg)
-  |vpiName:pkg::mp_region_cfg_t
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (en), line:22:13, endln:22:15
-    |vpiParent:
-    \_struct_typespec: (pkg::mp_region_cfg_t), line:21:11, endln:23:4
-    |vpiName:en
-    |vpiTypespec:
-    \_ref_typespec: (work@top.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en)
-      |vpiParent:
-      \_typespec_member: (en), line:22:13, endln:22:15
-      |vpiFullName:work@top.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en
-      |vpiActual:
-      \_enum_typespec: (pkg::mubi4_t), line:11:3, endln:14:13
-    |vpiRefFile:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv
-    |vpiRefLineNo:22
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:22
-    |vpiRefEndColumnNo:12
-\_enum_typespec: (pkg::mubi4_t), line:11:3, endln:14:13
-  |vpiParent:
-  \_ref_typespec: (work@top.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en)
-  |vpiName:pkg::mubi4_t
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiBaseTypespec:
-  \_ref_typespec: (work@top.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en.pkg::mubi4_t)
-    |vpiParent:
-    \_enum_typespec: (pkg::mubi4_t), line:11:3, endln:14:13
-    |vpiFullName:work@top.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en.pkg::mubi4_t
-    |vpiActual:
-    \_logic_typespec: , line:11:16, endln:11:38
-  |vpiEnumConst:
-  \_enum_const: (MuBi4True), line:12:5, endln:12:21
-    |vpiParent:
-    \_enum_typespec: (pkg::mubi4_t), line:11:3, endln:14:13
-    |vpiName:MuBi4True
-    |HEX:6
-    |vpiDecompile:4'h6
-    |vpiSize:4
-  |vpiEnumConst:
-  \_enum_const: (MuBi4False), line:13:5, endln:13:22
-    |vpiParent:
-    \_enum_typespec: (pkg::mubi4_t), line:11:3, endln:14:13
-    |vpiName:MuBi4False
-    |HEX:9
-    |vpiDecompile:4'h9
-    |vpiSize:4
-\_logic_typespec: , line:11:16, endln:11:38
-  |vpiParent:
-  \_ref_typespec: (work@top.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en.pkg::mubi4_t)
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
-  |vpiRange:
-  \_range: , line:11:22, endln:11:38
-    |vpiParent:
-    \_logic_typespec: , line:11:16, endln:11:38
-    |vpiLeftRange:
-    \_operation: , line:11:23, endln:11:35
-      |vpiParent:
-      \_range: , line:11:22, endln:11:38
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (work@top.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en.pkg::mubi4_t.MuBi4Width), line:11:23, endln:11:33
-        |vpiParent:
-        \_operation: , line:11:23, endln:11:35
-        |vpiName:MuBi4Width
-        |vpiFullName:work@top.HwDataAttr.pkg::data_region_attr_t.cfg.pkg::mp_region_cfg_t.en.pkg::mubi4_t.MuBi4Width
-      |vpiOperand:
-      \_constant: , line:11:34, endln:11:35
-        |vpiParent:
-        \_operation: , line:11:23, endln:11:35
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:11:36, endln:11:37
-      |vpiParent:
-      \_range: , line:11:22, endln:11:38
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -2434,5 +1001,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv | ${SURELOG_DIR}/build/regression/AssignmentPatternInAssignmentPattern/roundtrip/dut_000.sv | 10 | 44 |
+[roundtrip]: ${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv | ${SURELOG_DIR}/build/regression/AssignmentPatternInAssignmentPattern/roundtrip/dut_000.sv | 18 | 44 |
 ============================== End RoundTrip Results ==============================

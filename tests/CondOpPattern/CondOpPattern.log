@@ -124,102 +124,162 @@ AST_DEBUG_END
 constant                                               4
 cont_assign                                            1
 design                                                 1
-logic_net                                              2
-logic_typespec                                         3
+logic_net                                              1
+logic_typespec                                         4
 module_inst                                            1
 operation                                              3
 port                                                   2
-ref_obj                                                4
-ref_typespec                                           8
+ref_obj                                                2
+ref_typespec                                          10
+source_file                                            1
 string_typespec                                        4
+struct_net                                             1
 struct_typespec                                        1
 tagged_pattern                                         4
 typespec_member                                        2
 === UHDM Object Stats End ===
+[ERR:IG0807] ${SURELOG_DIR}/tests/CondOpPattern/dut.sv:6:7: Child 35 is not entirely in parent's scope.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CondOpPattern/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/CondOpPattern/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/CondOpPattern/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/CondOpPattern/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@Example (work@Example), file:${SURELOG_DIR}/tests/CondOpPattern/dut.sv, line:1:1, endln:12:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@Example
+  |vpiName:work@Example
   |vpiTypedef:
   \_struct_typespec: (T), line:2:9, endln:4:2
     |vpiParent:
     \_module_inst: work@Example (work@Example), file:${SURELOG_DIR}/tests/CondOpPattern/dut.sv, line:1:1, endln:12:10
     |vpiName:T
-    |vpiInstance:
-    \_module_inst: work@Example (work@Example), file:${SURELOG_DIR}/tests/CondOpPattern/dut.sv, line:1:1, endln:12:10
     |vpiPacked:1
     |vpiTypespecMember:
-    \_typespec_member: (a), line:3:11, endln:3:12
+    \_typespec_member: (a), line:3:5, endln:3:16
       |vpiParent:
       \_struct_typespec: (T), line:2:9, endln:4:2
       |vpiName:a
       |vpiTypespec:
-      \_ref_typespec: (work@Example.T.a)
+      \_ref_typespec: (work@Example.T.a), line:3:5, endln:3:10
         |vpiParent:
-        \_typespec_member: (a), line:3:11, endln:3:12
+        \_typespec_member: (a), line:3:5, endln:3:16
         |vpiFullName:work@Example.T.a
         |vpiActual:
         \_logic_typespec: , line:3:5, endln:3:10
-      |vpiRefFile:${SURELOG_DIR}/tests/CondOpPattern/dut.sv
-      |vpiRefLineNo:3
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:3
-      |vpiRefEndColumnNo:10
     |vpiTypespecMember:
-    \_typespec_member: (b), line:3:14, endln:3:15
+    \_typespec_member: (b), line:3:5, endln:3:16
       |vpiParent:
       \_struct_typespec: (T), line:2:9, endln:4:2
       |vpiName:b
       |vpiTypespec:
-      \_ref_typespec: (work@Example.T.b)
+      \_ref_typespec: (work@Example.T.b), line:3:5, endln:3:10
         |vpiParent:
-        \_typespec_member: (b), line:3:14, endln:3:15
+        \_typespec_member: (b), line:3:5, endln:3:16
         |vpiFullName:work@Example.T.b
         |vpiActual:
         \_logic_typespec: , line:3:5, endln:3:10
-      |vpiRefFile:${SURELOG_DIR}/tests/CondOpPattern/dut.sv
-      |vpiRefLineNo:3
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:3
-      |vpiRefEndColumnNo:10
-  |vpiDefName:work@Example
-  |vpiNet:
+  |vpiTypedef:
+  \_logic_typespec: , line:3:5, endln:3:10
+    |vpiParent:
+    \_module_inst: work@Example (work@Example), file:${SURELOG_DIR}/tests/CondOpPattern/dut.sv, line:1:1, endln:12:10
+  |vpiTypedef:
+  \_logic_typespec: , line:3:5, endln:3:10
+    |vpiParent:
+    \_module_inst: work@Example (work@Example), file:${SURELOG_DIR}/tests/CondOpPattern/dut.sv, line:1:1, endln:12:10
+  |vpiTypedef:
+  \_string_typespec: (a), line:9:10, endln:9:11
+    |vpiParent:
+    \_module_inst: work@Example (work@Example), file:${SURELOG_DIR}/tests/CondOpPattern/dut.sv, line:1:1, endln:12:10
+    |vpiName:a
+  |vpiTypedef:
+  \_string_typespec: (b), line:9:19, endln:9:20
+    |vpiParent:
+    \_module_inst: work@Example (work@Example), file:${SURELOG_DIR}/tests/CondOpPattern/dut.sv, line:1:1, endln:12:10
+    |vpiName:b
+  |vpiTypedef:
+  \_string_typespec: (a), line:10:10, endln:10:11
+    |vpiParent:
+    \_module_inst: work@Example (work@Example), file:${SURELOG_DIR}/tests/CondOpPattern/dut.sv, line:1:1, endln:12:10
+    |vpiName:a
+  |vpiTypedef:
+  \_string_typespec: (b), line:10:19, endln:10:20
+    |vpiParent:
+    \_module_inst: work@Example (work@Example), file:${SURELOG_DIR}/tests/CondOpPattern/dut.sv, line:1:1, endln:12:10
+    |vpiName:b
+  |vpiTypedef:
+  \_logic_typespec: , line:6:7, endln:6:12
+    |vpiParent:
+    \_module_inst: work@Example (work@Example), file:${SURELOG_DIR}/tests/CondOpPattern/dut.sv, line:1:1, endln:12:10
+  |vpiTypedef:
+  \_logic_typespec: , line:6:7, endln:6:12
+    |vpiParent:
+    \_module_inst: work@Example (work@Example), file:${SURELOG_DIR}/tests/CondOpPattern/dut.sv, line:1:1, endln:12:10
+  |vpiImportTypespec:
+  \_struct_typespec: (T), line:2:9, endln:4:2
+  |vpiImportTypespec:
+  \_logic_typespec: , line:3:5, endln:3:10
+  |vpiImportTypespec:
+  \_logic_typespec: , line:3:5, endln:3:10
+  |vpiImportTypespec:
+  \_string_typespec: (a), line:9:10, endln:9:11
+  |vpiImportTypespec:
+  \_string_typespec: (b), line:9:19, endln:9:20
+  |vpiImportTypespec:
+  \_string_typespec: (a), line:10:10, endln:10:11
+  |vpiImportTypespec:
+  \_string_typespec: (b), line:10:19, endln:10:20
+  |vpiImportTypespec:
+  \_logic_typespec: , line:6:7, endln:6:12
+  |vpiImportTypespec:
   \_logic_net: (work@Example.flag), line:1:16, endln:1:20
     |vpiParent:
     \_module_inst: work@Example (work@Example), file:${SURELOG_DIR}/tests/CondOpPattern/dut.sv, line:1:1, endln:12:10
+    |vpiTypespec:
+    \_ref_typespec: (work@Example.flag.flag), line:6:7, endln:6:12
+      |vpiParent:
+      \_logic_net: (work@Example.flag), line:1:16, endln:1:20
+      |vpiName:flag
+      |vpiFullName:work@Example.flag.flag
+      |vpiActual:
+      \_logic_typespec: , line:6:7, endln:6:12
     |vpiName:flag
     |vpiFullName:work@Example.flag
     |vpiNetType:36
-  |vpiNet:
-  \_logic_net: (work@Example.out), line:1:22, endln:1:25
+  |vpiImportTypespec:
+  \_struct_net: (work@Example.out), line:1:22, endln:1:25
     |vpiParent:
     \_module_inst: work@Example (work@Example), file:${SURELOG_DIR}/tests/CondOpPattern/dut.sv, line:1:1, endln:12:10
+    |vpiTypespec:
+    \_ref_typespec: (work@Example.out.out), line:1:22, endln:1:25
+      |vpiParent:
+      \_struct_net: (work@Example.out), line:1:22, endln:1:25
+      |vpiName:out
+      |vpiFullName:work@Example.out.out
+      |vpiActual:
+      \_struct_typespec: (T), line:2:9, endln:4:2
     |vpiName:out
     |vpiFullName:work@Example.out
+  |vpiImportTypespec:
+  \_logic_typespec: , line:6:7, endln:6:12
+  |vpiDefName:work@Example
+  |vpiNet:
+  \_logic_net: (work@Example.flag), line:1:16, endln:1:20
+  |vpiNet:
+  \_struct_net: (work@Example.out), line:1:22, endln:1:25
   |vpiPort:
   \_port: (flag), line:1:16, endln:1:20
     |vpiParent:
     \_module_inst: work@Example (work@Example), file:${SURELOG_DIR}/tests/CondOpPattern/dut.sv, line:1:1, endln:12:10
     |vpiName:flag
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@Example.flag.flag), line:1:16, endln:1:20
-      |vpiParent:
-      \_port: (flag), line:1:16, endln:1:20
-      |vpiName:flag
-      |vpiFullName:work@Example.flag.flag
-      |vpiActual:
-      \_logic_net: (work@Example.flag), line:1:16, endln:1:20
     |vpiTypedef:
-    \_ref_typespec: (work@Example.flag)
+    \_ref_typespec: (work@Example.flag), line:6:7, endln:6:12
       |vpiParent:
       \_port: (flag), line:1:16, endln:1:20
       |vpiFullName:work@Example.flag
@@ -231,19 +291,12 @@ design: (unnamed)
     \_module_inst: work@Example (work@Example), file:${SURELOG_DIR}/tests/CondOpPattern/dut.sv, line:1:1, endln:12:10
     |vpiName:out
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@Example.out.out), line:1:22, endln:1:25
-      |vpiParent:
-      \_port: (out), line:1:22, endln:1:25
-      |vpiName:out
-      |vpiFullName:work@Example.out.out
-      |vpiActual:
-      \_logic_net: (work@Example.out), line:1:22, endln:1:25
     |vpiTypedef:
-    \_ref_typespec: (work@Example.out)
+    \_ref_typespec: (work@Example.out.T), line:5:8, endln:5:9
       |vpiParent:
       \_port: (out), line:1:22, endln:1:25
-      |vpiFullName:work@Example.out
+      |vpiName:T
+      |vpiFullName:work@Example.out.T
       |vpiActual:
       \_struct_typespec: (T), line:2:9, endln:4:2
   |vpiContAssign:
@@ -269,37 +322,43 @@ design: (unnamed)
         \_operation: , line:8:5, endln:10:28
         |vpiOpType:75
         |vpiOperand:
-        \_tagged_pattern: , line:9:13, endln:9:17
+        \_tagged_pattern: , line:9:10, endln:9:17
           |vpiParent:
           \_operation: , line:9:7, endln:9:28
           |vpiPattern:
           \_constant: , line:9:13, endln:9:17
+            |vpiParent:
+            \_operation: , line:9:7, endln:9:28
             |vpiDecompile:1'b1
             |vpiSize:1
             |BIN:1
             |vpiConstType:3
           |vpiTypespec:
-          \_ref_typespec: (work@Example)
+          \_ref_typespec: (work@Example.a), line:9:10, endln:9:11
             |vpiParent:
-            \_tagged_pattern: , line:9:13, endln:9:17
-            |vpiFullName:work@Example
+            \_tagged_pattern: , line:9:10, endln:9:17
+            |vpiName:a
+            |vpiFullName:work@Example.a
             |vpiActual:
             \_string_typespec: (a), line:9:10, endln:9:11
         |vpiOperand:
-        \_tagged_pattern: , line:9:22, endln:9:26
+        \_tagged_pattern: , line:9:19, endln:9:26
           |vpiParent:
           \_operation: , line:9:7, endln:9:28
           |vpiPattern:
           \_constant: , line:9:22, endln:9:26
+            |vpiParent:
+            \_operation: , line:9:7, endln:9:28
             |vpiDecompile:1'b0
             |vpiSize:1
             |BIN:0
             |vpiConstType:3
           |vpiTypespec:
-          \_ref_typespec: (work@Example)
+          \_ref_typespec: (work@Example.b), line:9:19, endln:9:20
             |vpiParent:
-            \_tagged_pattern: , line:9:22, endln:9:26
-            |vpiFullName:work@Example
+            \_tagged_pattern: , line:9:19, endln:9:26
+            |vpiName:b
+            |vpiFullName:work@Example.b
             |vpiActual:
             \_string_typespec: (b), line:9:19, endln:9:20
       |vpiOperand:
@@ -308,74 +367,60 @@ design: (unnamed)
         \_operation: , line:8:5, endln:10:28
         |vpiOpType:75
         |vpiOperand:
-        \_tagged_pattern: , line:10:13, endln:10:17
+        \_tagged_pattern: , line:10:10, endln:10:17
           |vpiParent:
           \_operation: , line:10:7, endln:10:28
           |vpiPattern:
           \_constant: , line:10:13, endln:10:17
+            |vpiParent:
+            \_operation: , line:10:7, endln:10:28
             |vpiDecompile:1'b1
             |vpiSize:1
             |BIN:1
             |vpiConstType:3
           |vpiTypespec:
-          \_ref_typespec: (work@Example)
+          \_ref_typespec: (work@Example.a), line:10:10, endln:10:11
             |vpiParent:
-            \_tagged_pattern: , line:10:13, endln:10:17
-            |vpiFullName:work@Example
+            \_tagged_pattern: , line:10:10, endln:10:17
+            |vpiName:a
+            |vpiFullName:work@Example.a
             |vpiActual:
             \_string_typespec: (a), line:10:10, endln:10:11
         |vpiOperand:
-        \_tagged_pattern: , line:10:22, endln:10:26
+        \_tagged_pattern: , line:10:19, endln:10:26
           |vpiParent:
           \_operation: , line:10:7, endln:10:28
           |vpiPattern:
           \_constant: , line:10:22, endln:10:26
+            |vpiParent:
+            \_operation: , line:10:7, endln:10:28
             |vpiDecompile:1'b1
             |vpiSize:1
             |BIN:1
             |vpiConstType:3
           |vpiTypespec:
-          \_ref_typespec: (work@Example)
+          \_ref_typespec: (work@Example.b), line:10:19, endln:10:20
             |vpiParent:
-            \_tagged_pattern: , line:10:22, endln:10:26
-            |vpiFullName:work@Example
+            \_tagged_pattern: , line:10:19, endln:10:26
+            |vpiName:b
+            |vpiFullName:work@Example.b
             |vpiActual:
             \_string_typespec: (b), line:10:19, endln:10:20
     |vpiLhs:
     \_ref_obj: (work@Example.out), line:7:8, endln:7:11
       |vpiParent:
-      \_cont_assign: , line:7:8, endln:10:28
+      \_module_inst: work@Example (work@Example), file:${SURELOG_DIR}/tests/CondOpPattern/dut.sv, line:1:1, endln:12:10
       |vpiName:out
       |vpiFullName:work@Example.out
       |vpiActual:
-      \_logic_net: (work@Example.out), line:1:22, endln:1:25
-\_weaklyReferenced:
-\_logic_typespec: , line:3:5, endln:3:10
-\_logic_typespec: , line:3:5, endln:3:10
-\_string_typespec: (a), line:9:10, endln:9:11
-  |vpiParent:
-  \_tagged_pattern: , line:9:13, endln:9:17
-  |vpiName:a
-\_string_typespec: (b), line:9:19, endln:9:20
-  |vpiParent:
-  \_tagged_pattern: , line:9:22, endln:9:26
-  |vpiName:b
-\_string_typespec: (a), line:10:10, endln:10:11
-  |vpiParent:
-  \_tagged_pattern: , line:10:13, endln:10:17
-  |vpiName:a
-\_string_typespec: (b), line:10:19, endln:10:20
-  |vpiParent:
-  \_tagged_pattern: , line:10:22, endln:10:26
-  |vpiName:b
-\_logic_typespec: , line:6:7, endln:6:12
+      \_struct_net: (work@Example.out), line:1:22, endln:1:25
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 1
 [WARNING] : 1
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/CondOpPattern/dut.sv | ${SURELOG_DIR}/build/regression/CondOpPattern/roundtrip/dut_000.sv | 6 | 12 |
+[roundtrip]: ${SURELOG_DIR}/tests/CondOpPattern/dut.sv | ${SURELOG_DIR}/build/regression/CondOpPattern/roundtrip/dut_000.sv | 8 | 12 |
 ============================== End RoundTrip Results ==============================

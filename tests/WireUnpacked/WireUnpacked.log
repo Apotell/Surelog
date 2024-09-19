@@ -84,44 +84,86 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/WireUnpacked/dut.sv:1:1: Compile module "work@dut".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                               6
+array_net                                              1
+constant                                              10
 cont_assign                                            1
 design                                                 1
 indexed_part_select                                    1
 logic_net                                              1
 logic_typespec                                         1
 module_inst                                            1
-range                                                  1
+range                                                  3
 ref_typespec                                           1
+source_file                                            1
 var_select                                             1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/WireUnpacked/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/WireUnpacked/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/WireUnpacked/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/WireUnpacked/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/WireUnpacked/dut.sv, line:1:1, endln:4:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@dut
-  |vpiDefName:work@dut
-  |vpiNet:
-  \_logic_net: (work@dut.read_buf), line:2:12, endln:2:20
+  |vpiName:work@dut
+  |vpiTypedef:
+  \_logic_typespec: , line:2:1, endln:2:11
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/WireUnpacked/dut.sv, line:1:1, endln:4:10
+    |vpiRange:
+    \_range: , line:2:6, endln:2:11
+      |vpiParent:
+      \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/WireUnpacked/dut.sv, line:1:1, endln:4:10
+      |vpiLeftRange:
+      \_constant: , line:2:7, endln:2:8
+        |vpiParent:
+        \_range: , line:2:6, endln:2:11
+        |vpiDecompile:5
+        |vpiSize:64
+        |UINT:5
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:2:9, endln:2:10
+        |vpiParent:
+        \_range: , line:2:6, endln:2:11
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_logic_typespec: , line:2:1, endln:2:11
+  |vpiImportTypespec:
+  \_logic_net: (work@dut), line:2:12, endln:2:28
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/WireUnpacked/dut.sv, line:1:1, endln:4:10
     |vpiTypespec:
-    \_ref_typespec: (work@dut.read_buf)
+    \_ref_typespec: (work@dut.read_buf), line:2:1, endln:2:5
       |vpiParent:
-      \_logic_net: (work@dut.read_buf), line:2:12, endln:2:20
+      \_logic_net: (work@dut), line:2:12, endln:2:28
+      |vpiName:read_buf
       |vpiFullName:work@dut.read_buf
       |vpiActual:
-      \_logic_typespec: , line:2:1, endln:2:28
+      \_logic_typespec: , line:2:1, endln:2:11
+    |vpiFullName:work@dut
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@dut.read_buf), line:3:20, endln:3:24
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/WireUnpacked/dut.sv, line:1:1, endln:4:10
     |vpiName:read_buf
     |vpiFullName:work@dut.read_buf
     |vpiNetType:1
+  |vpiDefName:work@dut
+  |vpiNet:
+  \_logic_net: (work@dut), line:2:12, endln:2:28
+  |vpiNet:
+  \_logic_net: (work@dut.read_buf), line:3:20, endln:3:24
   |vpiContAssign:
   \_cont_assign: , line:3:8, endln:3:32
     |vpiParent:
@@ -137,60 +179,44 @@ design: (unnamed)
     |vpiLhs:
     \_var_select: (work@dut.read_buf), line:3:8, endln:3:25
       |vpiParent:
-      \_cont_assign: , line:3:8, endln:3:32
+      \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/WireUnpacked/dut.sv, line:1:1, endln:4:10
       |vpiName:read_buf
       |vpiFullName:work@dut.read_buf
       |vpiIndex:
       \_constant: , line:3:17, endln:3:18
         |vpiParent:
-        \_var_select: (work@dut.read_buf), line:3:8, endln:3:25
+        \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/WireUnpacked/dut.sv, line:1:1, endln:4:10
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
       |vpiIndex:
-      \_indexed_part_select: read_buf (work@dut.read_buf.read_buf), line:3:20, endln:3:24
+      \_indexed_part_select: read_buf (work@dut.read_buf), line:3:20, endln:3:24
         |vpiParent:
-        \_var_select: (work@dut.read_buf), line:3:8, endln:3:25
+        \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/WireUnpacked/dut.sv, line:1:1, endln:4:10
         |vpiName:read_buf
-        |vpiFullName:work@dut.read_buf.read_buf
+        |vpiFullName:work@dut.read_buf
         |vpiDefName:read_buf
+        |vpiActual:
+        \_logic_net: (work@dut.read_buf), line:3:20, endln:3:24
         |vpiConstantSelect:1
         |vpiIndexedPartSelectType:2
         |vpiBaseExpr:
         \_constant: , line:3:20, endln:3:21
+          |vpiParent:
+          \_indexed_part_select: read_buf (work@dut.read_buf), line:3:20, endln:3:24
           |vpiDecompile:1
           |vpiSize:64
           |UINT:1
           |vpiConstType:9
         |vpiWidthExpr:
         \_constant: , line:3:23, endln:3:24
+          |vpiParent:
+          \_indexed_part_select: read_buf (work@dut.read_buf), line:3:20, endln:3:24
           |vpiDecompile:2
           |vpiSize:64
           |UINT:2
           |vpiConstType:9
-\_weaklyReferenced:
-\_logic_typespec: , line:2:1, endln:2:28
-  |vpiRange:
-  \_range: , line:2:6, endln:2:11
-    |vpiParent:
-    \_logic_typespec: , line:2:1, endln:2:28
-    |vpiLeftRange:
-    \_constant: , line:2:7, endln:2:8
-      |vpiParent:
-      \_range: , line:2:6, endln:2:11
-      |vpiDecompile:5
-      |vpiSize:64
-      |UINT:5
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:9, endln:2:10
-      |vpiParent:
-      \_range: , line:2:6, endln:2:11
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -199,5 +225,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/WireUnpacked/dut.sv | ${SURELOG_DIR}/build/regression/WireUnpacked/roundtrip/dut_000.sv | 3 | 4 |
+[roundtrip]: ${SURELOG_DIR}/tests/WireUnpacked/dut.sv | ${SURELOG_DIR}/build/regression/WireUnpacked/roundtrip/dut_000.sv | 4 | 4 |
 ============================== End RoundTrip Results ==============================

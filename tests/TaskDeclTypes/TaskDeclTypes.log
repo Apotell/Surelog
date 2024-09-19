@@ -9,8 +9,8 @@ n<top> u<3> t<StringConst> p<4> l<1:8> el<1:11>
 n<> u<4> t<Module_ansi_header> p<58> c<2> s<56> l<1:1> el<1:12>
 n<simutil_memload> u<5> t<StringConst> p<50> s<13> l<2:8> el<2:23>
 n<> u<6> t<TfPortDir_Inp> p<12> s<9> l<3:5> el<3:10>
-n<> u<7> t<String_type> p<8> l<3:11> el<3:17>
-n<> u<8> t<Data_type> p<9> c<7> l<3:11> el<3:17>
+n<string> u<7> t<String_type> p<8> l<3:11> el<3:17>
+n<string> u<8> t<Data_type> p<9> c<7> l<3:11> el<3:17>
 n<> u<9> t<Data_type_or_implicit> p<12> c<8> s<11> l<3:11> el<3:17>
 n<file> u<10> t<StringConst> p<11> l<3:18> el<3:22>
 n<> u<11> t<List_of_tf_variable_identifiers> p<12> c<10> l<3:18> el<3:22>
@@ -78,28 +78,70 @@ logic_typespec                                         1
 module_inst                                            1
 range                                                  2
 ref_typespec                                           3
+source_file                                            1
 string_typespec                                        1
 task                                                   1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TaskDeclTypes/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/TaskDeclTypes/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/TaskDeclTypes/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/TaskDeclTypes/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TaskDeclTypes/dut.sv, line:1:1, endln:7:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiTaskFunc:
+  |vpiName:work@top
+  |vpiInternalScope:
   \_task: (work@top.simutil_memload), line:2:3, endln:6:10
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TaskDeclTypes/dut.sv, line:1:1, endln:7:10
     |vpiName:simutil_memload
     |vpiFullName:work@top.simutil_memload
+    |vpiTypedef:
+    \_string_typespec: , line:3:11, endln:3:17
+      |vpiParent:
+      \_task: (work@top.simutil_memload), line:2:3, endln:6:10
+    |vpiTypedef:
+    \_int_typespec: , line:4:11, endln:4:14
+      |vpiParent:
+      \_task: (work@top.simutil_memload), line:2:3, endln:6:10
+      |vpiSigned:1
+    |vpiTypedef:
+    \_logic_typespec: , line:5:11, endln:5:16
+      |vpiParent:
+      \_task: (work@top.simutil_memload), line:2:3, endln:6:10
+      |vpiRange:
+      \_range: , line:5:11, endln:5:16
+        |vpiParent:
+        \_logic_typespec: , line:5:11, endln:5:16
+        |vpiLeftRange:
+        \_constant: , line:5:12, endln:5:13
+          |vpiParent:
+          \_range: , line:5:11, endln:5:16
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+        |vpiRightRange:
+        \_constant: , line:5:14, endln:5:15
+          |vpiParent:
+          \_range: , line:5:11, endln:5:16
+          |vpiDecompile:0
+          |vpiSize:64
+          |UINT:0
+          |vpiConstType:9
+    |vpiImportTypespec:
+    \_string_typespec: , line:3:11, endln:3:17
+    |vpiImportTypespec:
+    \_int_typespec: , line:4:11, endln:4:14
+    |vpiImportTypespec:
+    \_logic_typespec: , line:5:11, endln:5:16
     |vpiVisibility:1
     |vpiIODecl:
     \_io_decl: (file), line:3:18, endln:3:22
@@ -108,7 +150,7 @@ design: (unnamed)
       |vpiDirection:1
       |vpiName:file
       |vpiTypedef:
-      \_ref_typespec: (work@top.simutil_memload.file)
+      \_ref_typespec: (work@top.simutil_memload.file), line:3:18, endln:3:22
         |vpiParent:
         \_io_decl: (file), line:3:18, endln:3:22
         |vpiFullName:work@top.simutil_memload.file
@@ -141,7 +183,7 @@ design: (unnamed)
           |UINT:0
           |vpiConstType:9
       |vpiTypedef:
-      \_ref_typespec: (work@top.simutil_memload.files)
+      \_ref_typespec: (work@top.simutil_memload.files), line:4:15, endln:4:20
         |vpiParent:
         \_io_decl: (files), line:4:15, endln:4:20
         |vpiFullName:work@top.simutil_memload.files
@@ -154,39 +196,17 @@ design: (unnamed)
       |vpiDirection:1
       |vpiName:implic
       |vpiTypedef:
-      \_ref_typespec: (work@top.simutil_memload.implic)
+      \_ref_typespec: (work@top.simutil_memload.implic), line:5:18, endln:5:24
         |vpiParent:
         \_io_decl: (implic), line:5:18, endln:5:24
         |vpiFullName:work@top.simutil_memload.implic
         |vpiActual:
         \_logic_typespec: , line:5:11, endln:5:16
-    |vpiInstance:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TaskDeclTypes/dut.sv, line:1:1, endln:7:10
-\_weaklyReferenced:
-\_string_typespec: , line:3:11, endln:3:17
-\_int_typespec: , line:4:11, endln:4:14
-  |vpiSigned:1
-\_logic_typespec: , line:5:11, endln:5:16
-  |vpiRange:
-  \_range: , line:5:11, endln:5:16
-    |vpiParent:
-    \_logic_typespec: , line:5:11, endln:5:16
-    |vpiLeftRange:
-    \_constant: , line:5:12, endln:5:13
-      |vpiParent:
-      \_range: , line:5:11, endln:5:16
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:5:14, endln:5:15
-      |vpiParent:
-      \_range: , line:5:11, endln:5:16
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
+  |vpiImportTypespec:
+  \_task: (work@top.simutil_memload), line:2:3, endln:6:10
+  |vpiDefName:work@top
+  |vpiTaskFunc:
+  \_task: (work@top.simutil_memload), line:2:3, endln:6:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -195,5 +215,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/TaskDeclTypes/dut.sv | ${SURELOG_DIR}/build/regression/TaskDeclTypes/roundtrip/dut_000.sv | 4 | 7 |
+[roundtrip]: ${SURELOG_DIR}/tests/TaskDeclTypes/dut.sv | ${SURELOG_DIR}/build/regression/TaskDeclTypes/roundtrip/dut_000.sv | 6 | 7 |
 ============================== End RoundTrip Results ==============================

@@ -83,65 +83,101 @@ constant                                               4
 cont_assign                                            1
 design                                                 1
 gen_for                                                1
-logic_net                                              1
 module_inst                                            1
 operation                                              2
 ref_obj                                                4
 ref_typespec                                           1
 ref_var                                                1
+source_file                                            1
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/GenFor/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/GenFor/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/GenFor/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/GenFor/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenFor/dut.sv, line:2:1, endln:8:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiNet:
-  \_logic_net: (work@top.i), line:4:16, endln:4:17
-    |vpiParent:
-    \_operation: , line:4:16, endln:4:21
-    |vpiName:i
-    |vpiFullName:work@top.i
-    |vpiNetType:1
-  |vpiGenStmt:
-  \_gen_for: 
+  |vpiName:work@top
+  |vpiInternalScope:
+  \_gen_for: (work@top), line:4:4, endln:6:7
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenFor/dut.sv, line:2:1, endln:8:10
+    |vpiFullName:work@top
+    |vpiVariables:
+    \_ref_var: (work@top.i), line:4:9, endln:4:10
+      |vpiParent:
+      \_gen_for: (work@top), line:4:4, endln:6:7
+      |vpiTypespec:
+      \_ref_typespec: (work@top.i.i), line:4:9, endln:4:10
+        |vpiParent:
+        \_ref_var: (work@top.i), line:4:9, endln:4:10
+        |vpiName:i
+        |vpiFullName:work@top.i.i
+        |vpiActual:
+        \_unsupported_typespec: (i), line:4:9, endln:4:10
+      |vpiName:i
+      |vpiFullName:work@top.i
+    |vpiInternalScope:
+    \_begin: (work@top), line:4:35, endln:6:7
+      |vpiParent:
+      \_gen_for: (work@top), line:4:4, endln:6:7
+      |vpiFullName:work@top
+      |vpiStmt:
+      \_cont_assign: , line:5:14, endln:5:27
+        |vpiParent:
+        \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenFor/dut.sv, line:2:1, endln:8:10
+        |vpiRhs:
+        \_constant: , line:5:23, endln:5:27
+          |vpiParent:
+          \_cont_assign: , line:5:14, endln:5:27
+          |vpiDecompile:1'b1
+          |vpiSize:1
+          |BIN:1
+          |vpiConstType:3
+        |vpiLhs:
+        \_bit_select: (work@top.tmp), line:5:17, endln:5:20
+          |vpiParent:
+          \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenFor/dut.sv, line:2:1, endln:8:10
+          |vpiName:tmp
+          |vpiFullName:work@top.tmp
+          |vpiActual:
+          \_logic_net: (work@top.tmp), line:5:17, endln:5:20
+          |vpiIndex:
+          \_ref_obj: (work@top.i), line:5:18, endln:5:19
+            |vpiParent:
+            \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenFor/dut.sv, line:2:1, endln:8:10
+            |vpiName:i
+            |vpiFullName:work@top.i
+            |vpiActual:
+            \_logic_net: (work@top.i), line:5:18, endln:5:19
+    |vpiImportTypespec:
+    \_ref_var: (work@top.i), line:4:9, endln:4:10
     |vpiForInitStmt:
     \_assignment: , line:4:9, endln:4:14
       |vpiParent:
-      \_gen_for: 
+      \_gen_for: (work@top), line:4:4, endln:6:7
       |vpiRhs:
       \_constant: , line:4:13, endln:4:14
+        |vpiParent:
+        \_assignment: , line:4:9, endln:4:14
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
       |vpiLhs:
       \_ref_var: (work@top.i), line:4:9, endln:4:10
-        |vpiParent:
-        \_assignment: , line:4:9, endln:4:14
-        |vpiTypespec:
-        \_ref_typespec: (work@top.i)
-          |vpiParent:
-          \_ref_var: (work@top.i), line:4:9, endln:4:10
-          |vpiFullName:work@top.i
-          |vpiActual:
-          \_unsupported_typespec: (i), line:4:9, endln:4:10
-        |vpiName:i
-        |vpiFullName:work@top.i
     |vpiCondition:
     \_operation: , line:4:16, endln:4:21
       |vpiParent:
-      \_gen_for: 
+      \_gen_for: (work@top), line:4:4, endln:6:7
       |vpiOpType:20
       |vpiOperand:
       \_ref_obj: (work@top.i), line:4:16, endln:4:17
@@ -150,7 +186,7 @@ design: (unnamed)
         |vpiName:i
         |vpiFullName:work@top.i
         |vpiActual:
-        \_logic_net: (work@top.i), line:4:16, endln:4:17
+        \_logic_net: (work@top.i), line:5:18, endln:5:19
       |vpiOperand:
       \_constant: , line:4:20, endln:4:21
         |vpiParent:
@@ -162,7 +198,7 @@ design: (unnamed)
     |vpiForIncStmt:
     \_assignment: , line:4:24, endln:4:33
       |vpiParent:
-      \_gen_for: 
+      \_gen_for: (work@top), line:4:4, endln:6:7
       |vpiOpType:82
       |vpiRhs:
       \_operation: , line:4:28, endln:4:33
@@ -176,7 +212,7 @@ design: (unnamed)
           |vpiName:i
           |vpiFullName:work@top.i
           |vpiActual:
-          \_logic_net: (work@top.i), line:4:16, endln:4:17
+          \_logic_net: (work@top.i), line:5:18, endln:5:19
         |vpiOperand:
         \_constant: , line:4:32, endln:4:33
           |vpiParent:
@@ -192,39 +228,37 @@ design: (unnamed)
         |vpiName:i
         |vpiFullName:work@top.i
         |vpiActual:
-        \_logic_net: (work@top.i), line:4:16, endln:4:17
+        \_logic_net: (work@top.i), line:5:18, endln:5:19
     |vpiStmt:
-    \_begin: (work@top)
-      |vpiParent:
-      \_gen_for: 
-      |vpiFullName:work@top
-      |vpiStmt:
-      \_cont_assign: , line:5:14, endln:5:27
-        |vpiParent:
-        \_begin: (work@top)
-        |vpiRhs:
-        \_constant: , line:5:23, endln:5:27
-          |vpiParent:
-          \_cont_assign: , line:5:14, endln:5:27
-          |vpiDecompile:1'b1
-          |vpiSize:1
-          |BIN:1
-          |vpiConstType:3
-        |vpiLhs:
-        \_bit_select: (work@top.tmp), line:5:14, endln:5:20
-          |vpiParent:
-          \_cont_assign: , line:5:14, endln:5:27
-          |vpiName:tmp
-          |vpiFullName:work@top.tmp
-          |vpiIndex:
-          \_ref_obj: (work@top.i), line:5:18, endln:5:19
-            |vpiParent:
-            \_bit_select: (work@top.tmp), line:5:14, endln:5:20
-            |vpiName:i
-            |vpiFullName:work@top.i
-\_weaklyReferenced:
-\_unsupported_typespec: (i), line:4:9, endln:4:10
-  |vpiName:i
+    \_begin: (work@top), line:4:35, endln:6:7
+  |vpiTypedef:
+  \_unsupported_typespec: (i), line:4:9, endln:4:10
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenFor/dut.sv, line:2:1, endln:8:10
+    |vpiName:i
+  |vpiImportTypespec:
+  \_unsupported_typespec: (i), line:4:9, endln:4:10
+  |vpiImportTypespec:
+  \_logic_net: (work@top.tmp), line:5:17, endln:5:20
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenFor/dut.sv, line:2:1, endln:8:10
+    |vpiName:tmp
+    |vpiFullName:work@top.tmp
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@top.i), line:5:18, endln:5:19
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/GenFor/dut.sv, line:2:1, endln:8:10
+    |vpiName:i
+    |vpiFullName:work@top.i
+    |vpiNetType:1
+  |vpiDefName:work@top
+  |vpiNet:
+  \_logic_net: (work@top.tmp), line:5:17, endln:5:20
+  |vpiNet:
+  \_logic_net: (work@top.i), line:5:18, endln:5:19
+  |vpiContAssign:
+  \_cont_assign: , line:5:14, endln:5:27
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -233,5 +267,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/GenFor/dut.sv | ${SURELOG_DIR}/build/regression/GenFor/roundtrip/dut_000.sv | 2 | 8 |
+[roundtrip]: ${SURELOG_DIR}/tests/GenFor/dut.sv | ${SURELOG_DIR}/build/regression/GenFor/roundtrip/dut_000.sv | 5 | 8 |
 ============================== End RoundTrip Results ==============================

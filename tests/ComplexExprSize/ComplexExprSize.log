@@ -81,55 +81,115 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/ComplexExprSize/dut.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-constant                                               3
+constant                                               7
 cont_assign                                            1
 design                                                 1
 logic_net                                              1
-logic_typespec                                         1
+logic_typespec                                         2
 module_inst                                            1
 operation                                              3
 port                                                   1
-range                                                  1
-ref_obj                                                2
-ref_typespec                                           1
+range                                                  3
+ref_obj                                                1
+ref_typespec                                           2
+source_file                                            1
 sys_func_call                                          2
 === UHDM Object Stats End ===
+[ERR:IG0807] ${SURELOG_DIR}/tests/ComplexExprSize/dut.sv:2:15: Child 22 is not entirely in parent's scope.
+[ERR:IG0807] ${SURELOG_DIR}/tests/ComplexExprSize/dut.sv:2:10: Child 20 is not entirely in parent's scope.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ComplexExprSize/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ComplexExprSize/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ComplexExprSize/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/ComplexExprSize/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ComplexExprSize/dut.sv, line:1:1, endln:5:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiNet:
+  |vpiName:work@top
+  |vpiTypedef:
+  \_logic_typespec: , line:2:10, endln:2:21
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ComplexExprSize/dut.sv, line:1:1, endln:5:10
+    |vpiRange:
+    \_range: , line:2:15, endln:2:21
+      |vpiParent:
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ComplexExprSize/dut.sv, line:1:1, endln:5:10
+      |vpiLeftRange:
+      \_constant: , line:2:16, endln:2:18
+        |vpiParent:
+        \_range: , line:2:15, endln:2:21
+        |vpiDecompile:31
+        |vpiSize:64
+        |UINT:31
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:2:19, endln:2:20
+        |vpiParent:
+        \_range: , line:2:15, endln:2:21
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_logic_typespec: , line:2:10, endln:2:21
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ComplexExprSize/dut.sv, line:1:1, endln:5:10
+    |vpiRange:
+    \_range: , line:2:15, endln:2:21
+      |vpiParent:
+      \_port: (out), line:1:13, endln:1:16
+      |vpiLeftRange:
+      \_constant: , line:2:16, endln:2:18
+        |vpiParent:
+        \_range: , line:2:15, endln:2:21
+        |vpiDecompile:31
+        |vpiSize:64
+        |UINT:31
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:2:19, endln:2:20
+        |vpiParent:
+        \_range: , line:2:15, endln:2:21
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_logic_typespec: , line:2:10, endln:2:21
+  |vpiImportTypespec:
   \_logic_net: (work@top.out), line:1:13, endln:1:16
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ComplexExprSize/dut.sv, line:1:1, endln:5:10
+    |vpiTypespec:
+    \_ref_typespec: (work@top.out.out), line:2:10, endln:2:14
+      |vpiParent:
+      \_logic_net: (work@top.out), line:1:13, endln:1:16
+      |vpiName:out
+      |vpiFullName:work@top.out.out
+      |vpiActual:
+      \_logic_typespec: , line:2:10, endln:2:21
     |vpiName:out
     |vpiFullName:work@top.out
     |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_typespec: , line:2:10, endln:2:21
+  |vpiDefName:work@top
+  |vpiNet:
+  \_logic_net: (work@top.out), line:1:13, endln:1:16
   |vpiPort:
   \_port: (out), line:1:13, endln:1:16
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ComplexExprSize/dut.sv, line:1:1, endln:5:10
     |vpiName:out
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@top.out.out), line:1:13, endln:1:16
-      |vpiParent:
-      \_port: (out), line:1:13, endln:1:16
-      |vpiName:out
-      |vpiFullName:work@top.out.out
-      |vpiActual:
-      \_logic_net: (work@top.out), line:1:13, endln:1:16
     |vpiTypedef:
-    \_ref_typespec: (work@top.out)
+    \_ref_typespec: (work@top.out), line:2:10, endln:2:14
       |vpiParent:
       \_port: (out), line:1:13, endln:1:16
       |vpiFullName:work@top.out
@@ -140,13 +200,13 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ComplexExprSize/dut.sv, line:1:1, endln:5:10
     |vpiRhs:
-    \_sys_func_call: ($unsigned), line:4:16, endln:4:25
+    \_sys_func_call: ($unsigned), line:4:16, endln:4:55
       |vpiParent:
       \_cont_assign: , line:4:10, endln:4:55
       |vpiArgument:
       \_operation: , line:4:26, endln:4:54
         |vpiParent:
-        \_sys_func_call: ($unsigned), line:4:16, endln:4:25
+        \_sys_func_call: ($unsigned), line:4:16, endln:4:55
         |vpiOpType:33
         |vpiOperand:
         \_operation: , line:4:28, endln:4:52
@@ -154,16 +214,18 @@ design: (unnamed)
           \_operation: , line:4:26, endln:4:54
           |vpiOpType:10
           |vpiOperand:
-          \_sys_func_call: ($unsigned), line:4:30, endln:4:39
+          \_sys_func_call: ($unsigned), line:4:30, endln:4:52
             |vpiParent:
             \_operation: , line:4:28, endln:4:52
             |vpiArgument:
             \_operation: , line:4:41, endln:4:50
               |vpiParent:
-              \_sys_func_call: ($unsigned), line:4:30, endln:4:39
+              \_sys_func_call: ($unsigned), line:4:30, endln:4:52
               |vpiOpType:6
               |vpiOperand:
               \_constant: , line:4:44, endln:4:49
+                |vpiParent:
+                \_operation: , line:4:41, endln:4:50
                 |vpiDecompile:8'ha4
                 |vpiSize:8
                 |HEX:a4
@@ -173,40 +235,18 @@ design: (unnamed)
     |vpiLhs:
     \_ref_obj: (work@top.out), line:4:10, endln:4:13
       |vpiParent:
-      \_cont_assign: , line:4:10, endln:4:55
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ComplexExprSize/dut.sv, line:1:1, endln:5:10
       |vpiName:out
       |vpiFullName:work@top.out
       |vpiActual:
       \_logic_net: (work@top.out), line:1:13, endln:1:16
-\_weaklyReferenced:
-\_logic_typespec: , line:2:10, endln:2:21
-  |vpiRange:
-  \_range: , line:2:15, endln:2:21
-    |vpiParent:
-    \_logic_typespec: , line:2:10, endln:2:21
-    |vpiLeftRange:
-    \_constant: , line:2:16, endln:2:18
-      |vpiParent:
-      \_range: , line:2:15, endln:2:21
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:19, endln:2:20
-      |vpiParent:
-      \_range: , line:2:15, endln:2:21
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 2
 [WARNING] : 1
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ComplexExprSize/dut.sv | ${SURELOG_DIR}/build/regression/ComplexExprSize/roundtrip/dut_000.sv | 2 | 5 |
+[roundtrip]: ${SURELOG_DIR}/tests/ComplexExprSize/dut.sv | ${SURELOG_DIR}/build/regression/ComplexExprSize/roundtrip/dut_000.sv | 4 | 5 |
 ============================== End RoundTrip Results ==============================

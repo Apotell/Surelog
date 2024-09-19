@@ -64,24 +64,27 @@ delay_control                                          1
 design                                                 1
 initial                                                1
 module_inst                                            1
+source_file                                            1
 sys_func_call                                          1
 task                                                   1
 task_call                                              1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PoundDelayTask/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PoundDelayTask/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/PoundDelayTask/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/PoundDelayTask/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/PoundDelayTask/dut.sv, line:1:1, endln:9:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@m
-  |vpiDefName:work@m
-  |vpiTaskFunc:
+  |vpiName:work@m
+  |vpiInternalScope:
   \_task: (work@m.t), line:2:5, endln:4:12
     |vpiParent:
     \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/PoundDelayTask/dut.sv, line:1:1, endln:9:10
@@ -101,8 +104,11 @@ design: (unnamed)
         |STRING:I'm task t!
         |vpiConstType:6
       |vpiName:$display
-    |vpiInstance:
-    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/PoundDelayTask/dut.sv, line:1:1, endln:9:10
+  |vpiImportTypespec:
+  \_task: (work@m.t), line:2:5, endln:4:12
+  |vpiDefName:work@m
+  |vpiTaskFunc:
+  \_task: (work@m.t), line:2:5, endln:4:12
   |vpiProcess:
   \_initial: , line:6:5, endln:8:8
     |vpiParent:
@@ -118,7 +124,7 @@ design: (unnamed)
         \_begin: (work@m), line:6:13, endln:8:8
         |#1
         |vpiStmt:
-        \_task_call: 
+        \_task_call: , line:7:12, endln:7:13
           |vpiParent:
           \_delay_control: , line:7:9, endln:7:13
           |vpiTask:
@@ -135,5 +141,5 @@ design: (unnamed)
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PoundDelayTask/dut.sv | ${SURELOG_DIR}/build/regression/PoundDelayTask/roundtrip/dut_000.sv | 1 | 9 |
+[roundtrip]: ${SURELOG_DIR}/tests/PoundDelayTask/dut.sv | ${SURELOG_DIR}/build/regression/PoundDelayTask/roundtrip/dut_000.sv | 5 | 9 |
 ============================== End RoundTrip Results ==============================

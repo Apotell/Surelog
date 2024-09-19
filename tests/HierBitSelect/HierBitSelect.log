@@ -9,21 +9,43 @@ cont_assign                                            3
 design                                                 1
 module_inst                                            1
 part_select                                            2
+source_file                                            1
 var_select                                             2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierBitSelect/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/HierBitSelect/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/HierBitSelect/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/HierBitSelect/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/HierBitSelect/dut.sv, line:1:1, endln:6:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@dut
+  |vpiName:work@dut
+  |vpiImportTypespec:
+  \_logic_net: (work@dut.state_d), line:4:25, endln:4:28
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/HierBitSelect/dut.sv, line:1:1, endln:6:10
+    |vpiName:state_d
+    |vpiFullName:work@dut.state_d
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@dut.state_d1), line:5:17, endln:5:22
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/HierBitSelect/dut.sv, line:1:1, endln:6:10
+    |vpiName:state_d1
+    |vpiFullName:work@dut.state_d1
+    |vpiNetType:1
   |vpiDefName:work@dut
+  |vpiNet:
+  \_logic_net: (work@dut.state_d), line:4:25, endln:4:28
+  |vpiNet:
+  \_logic_net: (work@dut.state_d1), line:5:17, endln:5:22
   |vpiContAssign:
   \_cont_assign: , line:3:8, endln:3:37
     |vpiParent:
@@ -39,13 +61,13 @@ design: (unnamed)
     |vpiLhs:
     \_var_select: (work@dut.mido_bytes_in), line:3:8, endln:3:30
       |vpiParent:
-      \_cont_assign: , line:3:8, endln:3:37
+      \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/HierBitSelect/dut.sv, line:1:1, endln:6:10
       |vpiName:mido_bytes_in
       |vpiFullName:work@dut.mido_bytes_in
       |vpiIndex:
       \_constant: , line:3:22, endln:3:23
         |vpiParent:
-        \_var_select: (work@dut.mido_bytes_in), line:3:8, endln:3:30
+        \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/HierBitSelect/dut.sv, line:1:1, endln:6:10
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
@@ -53,7 +75,7 @@ design: (unnamed)
       |vpiIndex:
       \_constant: , line:3:25, endln:3:26
         |vpiParent:
-        \_var_select: (work@dut.mido_bytes_in), line:3:8, endln:3:30
+        \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/HierBitSelect/dut.sv, line:1:1, endln:6:10
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
@@ -61,7 +83,7 @@ design: (unnamed)
       |vpiIndex:
       \_constant: , line:3:28, endln:3:29
         |vpiParent:
-        \_var_select: (work@dut.mido_bytes_in), line:3:8, endln:3:30
+        \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/HierBitSelect/dut.sv, line:1:1, endln:6:10
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
@@ -81,13 +103,13 @@ design: (unnamed)
     |vpiLhs:
     \_var_select: (work@dut.state_d), line:4:8, endln:4:29
       |vpiParent:
-      \_cont_assign: , line:4:8, endln:4:43
+      \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/HierBitSelect/dut.sv, line:1:1, endln:6:10
       |vpiName:state_d
       |vpiFullName:work@dut.state_d
       |vpiIndex:
       \_constant: , line:4:16, endln:4:17
         |vpiParent:
-        \_var_select: (work@dut.state_d), line:4:8, endln:4:29
+        \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/HierBitSelect/dut.sv, line:1:1, endln:6:10
         |vpiDecompile:2
         |vpiSize:64
         |UINT:2
@@ -95,7 +117,7 @@ design: (unnamed)
       |vpiIndex:
       \_constant: , line:4:19, endln:4:20
         |vpiParent:
-        \_var_select: (work@dut.state_d), line:4:8, endln:4:29
+        \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/HierBitSelect/dut.sv, line:1:1, endln:6:10
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
@@ -103,27 +125,33 @@ design: (unnamed)
       |vpiIndex:
       \_constant: , line:4:22, endln:4:23
         |vpiParent:
-        \_var_select: (work@dut.state_d), line:4:8, endln:4:29
+        \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/HierBitSelect/dut.sv, line:1:1, endln:6:10
         |vpiDecompile:4
         |vpiSize:64
         |UINT:4
         |vpiConstType:9
       |vpiIndex:
-      \_part_select: state_d (work@dut.state_d.state_d), line:4:25, endln:4:28
+      \_part_select: state_d (work@dut.state_d), line:4:25, endln:4:28
         |vpiParent:
-        \_var_select: (work@dut.state_d), line:4:8, endln:4:29
+        \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/HierBitSelect/dut.sv, line:1:1, endln:6:10
         |vpiName:state_d
-        |vpiFullName:work@dut.state_d.state_d
+        |vpiFullName:work@dut.state_d
         |vpiDefName:state_d
+        |vpiActual:
+        \_logic_net: (work@dut.state_d), line:4:25, endln:4:28
         |vpiConstantSelect:1
         |vpiLeftRange:
         \_constant: , line:4:25, endln:4:26
+          |vpiParent:
+          \_part_select: state_d (work@dut.state_d), line:4:25, endln:4:28
           |vpiDecompile:5
           |vpiSize:64
           |UINT:5
           |vpiConstType:9
         |vpiRightRange:
         \_constant: , line:4:27, endln:4:28
+          |vpiParent:
+          \_part_select: state_d (work@dut.state_d), line:4:25, endln:4:28
           |vpiDecompile:6
           |vpiSize:64
           |UINT:6
@@ -141,21 +169,27 @@ design: (unnamed)
       |BIN:10101010
       |vpiConstType:3
     |vpiLhs:
-    \_part_select: state_d1 (work@dut.state_d1), line:5:8, endln:5:23
+    \_part_select: state_d1 (work@dut.state_d1), line:5:17, endln:5:22
       |vpiParent:
-      \_cont_assign: , line:5:8, endln:5:37
+      \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/HierBitSelect/dut.sv, line:1:1, endln:6:10
       |vpiName:state_d1
       |vpiFullName:work@dut.state_d1
       |vpiDefName:state_d1
+      |vpiActual:
+      \_logic_net: (work@dut.state_d1), line:5:17, endln:5:22
       |vpiConstantSelect:1
       |vpiLeftRange:
       \_constant: , line:5:17, endln:5:19
+        |vpiParent:
+        \_part_select: state_d1 (work@dut.state_d1), line:5:17, endln:5:22
         |vpiDecompile:10
         |vpiSize:64
         |UINT:10
         |vpiConstType:9
       |vpiRightRange:
       \_constant: , line:5:20, endln:5:22
+        |vpiParent:
+        \_part_select: state_d1 (work@dut.state_d1), line:5:17, endln:5:22
         |vpiDecompile:11
         |vpiSize:64
         |UINT:11
@@ -168,5 +202,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/HierBitSelect/dut.sv | ${SURELOG_DIR}/build/regression/HierBitSelect/roundtrip/dut_000.sv | 3 | 6 |
+[roundtrip]: ${SURELOG_DIR}/tests/HierBitSelect/dut.sv | ${SURELOG_DIR}/build/regression/HierBitSelect/roundtrip/dut_000.sv | 5 | 6 |
 ============================== End RoundTrip Results ==============================

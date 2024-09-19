@@ -211,8 +211,8 @@ AST_DEBUG_END
 clocked_seq                                            1
 constant                                               2
 design                                                 1
-logic_net                                              3
 logic_typespec                                         3
+logic_var                                              3
 module_inst                                            1
 multiclock_sequence_expr                               1
 operation                                             11
@@ -221,21 +221,25 @@ property_spec                                          4
 ref_obj                                               14
 ref_typespec                                           3
 sequence_decl                                          1
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SeqUseNonTemp/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/SeqUseNonTemp/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/SeqUseNonTemp/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv, line:2:1, endln:29:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
+  |vpiName:work@top
   |vpiPropertyDecl:
-  \_property_decl: (work@top.p1_count_increment), line:10:10, endln:10:28
+  \_property_decl: (work@top.p1_count_increment), line:10:1, endln:12:12
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv, line:2:1, endln:29:10
     |vpiName:p1_count_increment
@@ -243,7 +247,7 @@ design: (unnamed)
     |vpiPropertySpec:
     \_property_spec: , line:11:3, endln:11:32
       |vpiParent:
-      \_property_decl: (work@top.p1_count_increment), line:10:10, endln:10:28
+      \_property_decl: (work@top.p1_count_increment), line:10:1, endln:12:12
       |vpiPropertyExpr:
       \_operation: , line:11:3, endln:11:32
         |vpiParent:
@@ -252,11 +256,11 @@ design: (unnamed)
         |vpiOperand:
         \_ref_obj: (work@top.p1_count_increment.seq_count_increment), line:11:3, endln:11:22
           |vpiParent:
-          \_operation: , line:11:3, endln:11:32
+          \_property_spec: , line:11:3, endln:11:32
           |vpiName:seq_count_increment
           |vpiFullName:work@top.p1_count_increment.seq_count_increment
           |vpiActual:
-          \_sequence_decl: (work@top.seq_count_increment), line:5:10, endln:5:29
+          \_logic_net: (work@top.seq_count_increment), line:11:3, endln:11:22
         |vpiOperand:
         \_ref_obj: (work@top.p1_count_increment.count), line:11:27, endln:11:32
           |vpiParent:
@@ -264,9 +268,9 @@ design: (unnamed)
           |vpiName:count
           |vpiFullName:work@top.p1_count_increment.count
           |vpiActual:
-          \_logic_net: (work@top.count), line:3:7, endln:3:12
+          \_logic_var: (work@top.count), line:3:7, endln:3:12
   |vpiPropertyDecl:
-  \_property_decl: (work@top.p1_count_increment), line:15:10, endln:15:28
+  \_property_decl: (work@top.p1_count_increment), line:15:1, endln:17:12
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv, line:2:1, endln:29:10
     |vpiName:p1_count_increment
@@ -274,7 +278,7 @@ design: (unnamed)
     |vpiPropertySpec:
     \_property_spec: , line:16:3, endln:16:47
       |vpiParent:
-      \_property_decl: (work@top.p1_count_increment), line:15:10, endln:15:28
+      \_property_decl: (work@top.p1_count_increment), line:15:1, endln:17:12
       |vpiClockingEvent:
       \_operation: , line:16:5, endln:16:16
         |vpiParent:
@@ -287,7 +291,7 @@ design: (unnamed)
           |vpiName:clk
           |vpiFullName:work@top.p1_count_increment.clk
           |vpiActual:
-          \_logic_net: (work@top.clk), line:3:14, endln:3:17
+          \_logic_var: (work@top.clk), line:3:14, endln:3:17
       |vpiPropertyExpr:
       \_operation: , line:16:18, endln:16:47
         |vpiParent:
@@ -296,11 +300,11 @@ design: (unnamed)
         |vpiOperand:
         \_ref_obj: (work@top.p1_count_increment.seq_count_increment), line:16:18, endln:16:37
           |vpiParent:
-          \_operation: , line:16:18, endln:16:47
+          \_property_spec: , line:16:3, endln:16:47
           |vpiName:seq_count_increment
           |vpiFullName:work@top.p1_count_increment.seq_count_increment
           |vpiActual:
-          \_sequence_decl: (work@top.seq_count_increment), line:5:10, endln:5:29
+          \_logic_net: (work@top.seq_count_increment), line:11:3, endln:11:22
         |vpiOperand:
         \_ref_obj: (work@top.p1_count_increment.count), line:16:42, endln:16:47
           |vpiParent:
@@ -308,9 +312,9 @@ design: (unnamed)
           |vpiName:count
           |vpiFullName:work@top.p1_count_increment.count
           |vpiActual:
-          \_logic_net: (work@top.count), line:3:7, endln:3:12
+          \_logic_var: (work@top.count), line:3:7, endln:3:12
   |vpiPropertyDecl:
-  \_property_decl: (work@top.p2_count_increment), line:20:10, endln:20:28
+  \_property_decl: (work@top.p2_count_increment), line:20:1, endln:22:12
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv, line:2:1, endln:29:10
     |vpiName:p2_count_increment
@@ -318,7 +322,7 @@ design: (unnamed)
     |vpiPropertySpec:
     \_property_spec: , line:21:3, endln:21:47
       |vpiParent:
-      \_property_decl: (work@top.p2_count_increment), line:20:10, endln:20:28
+      \_property_decl: (work@top.p2_count_increment), line:20:1, endln:22:12
       |vpiClockingEvent:
       \_operation: , line:21:5, endln:21:16
         |vpiParent:
@@ -331,7 +335,7 @@ design: (unnamed)
           |vpiName:clk
           |vpiFullName:work@top.p2_count_increment.clk
           |vpiActual:
-          \_logic_net: (work@top.clk), line:3:14, endln:3:17
+          \_logic_var: (work@top.clk), line:3:14, endln:3:17
       |vpiPropertyExpr:
       \_operation: , line:21:18, endln:21:47
         |vpiParent:
@@ -340,11 +344,11 @@ design: (unnamed)
         |vpiOperand:
         \_ref_obj: (work@top.p2_count_increment.count), line:21:18, endln:21:23
           |vpiParent:
-          \_operation: , line:21:18, endln:21:47
+          \_property_spec: , line:21:3, endln:21:47
           |vpiName:count
           |vpiFullName:work@top.p2_count_increment.count
           |vpiActual:
-          \_logic_net: (work@top.count), line:3:7, endln:3:12
+          \_logic_var: (work@top.count), line:3:7, endln:3:12
         |vpiOperand:
         \_ref_obj: (work@top.p2_count_increment.seq_count_increment), line:21:28, endln:21:47
           |vpiParent:
@@ -352,9 +356,9 @@ design: (unnamed)
           |vpiName:seq_count_increment
           |vpiFullName:work@top.p2_count_increment.seq_count_increment
           |vpiActual:
-          \_sequence_decl: (work@top.seq_count_increment), line:5:10, endln:5:29
+          \_logic_net: (work@top.seq_count_increment), line:11:3, endln:11:22
   |vpiPropertyDecl:
-  \_property_decl: (work@top.p3_count_increment), line:25:10, endln:25:28
+  \_property_decl: (work@top.p3_count_increment), line:25:1, endln:27:12
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv, line:2:1, endln:29:10
     |vpiName:p3_count_increment
@@ -362,7 +366,7 @@ design: (unnamed)
     |vpiPropertySpec:
     \_property_spec: , line:26:3, endln:26:61
       |vpiParent:
-      \_property_decl: (work@top.p3_count_increment), line:25:10, endln:25:28
+      \_property_decl: (work@top.p3_count_increment), line:25:1, endln:27:12
       |vpiClockingEvent:
       \_operation: , line:26:5, endln:26:16
         |vpiParent:
@@ -375,7 +379,7 @@ design: (unnamed)
           |vpiName:clk
           |vpiFullName:work@top.p3_count_increment.clk
           |vpiActual:
-          \_logic_net: (work@top.clk), line:3:14, endln:3:17
+          \_logic_var: (work@top.clk), line:3:14, endln:3:17
       |vpiPropertyExpr:
       \_operation: , line:26:18, endln:26:61
         |vpiParent:
@@ -384,11 +388,11 @@ design: (unnamed)
         |vpiOperand:
         \_ref_obj: (work@top.p3_count_increment.seq_count_increment), line:26:18, endln:26:37
           |vpiParent:
-          \_operation: , line:26:18, endln:26:61
+          \_property_spec: , line:26:3, endln:26:61
           |vpiName:seq_count_increment
           |vpiFullName:work@top.p3_count_increment.seq_count_increment
           |vpiActual:
-          \_sequence_decl: (work@top.seq_count_increment), line:5:10, endln:5:29
+          \_logic_net: (work@top.seq_count_increment), line:11:3, endln:11:22
         |vpiOperand:
         \_ref_obj: (work@top.p3_count_increment.seq_count_increment), line:26:42, endln:26:61
           |vpiParent:
@@ -396,21 +400,25 @@ design: (unnamed)
           |vpiName:seq_count_increment
           |vpiFullName:work@top.p3_count_increment.seq_count_increment
           |vpiActual:
-          \_sequence_decl: (work@top.seq_count_increment), line:5:10, endln:5:29
+          \_logic_net: (work@top.seq_count_increment), line:11:3, endln:11:22
   |vpiSequenceDecl:
-  \_sequence_decl: (work@top.seq_count_increment), line:5:10, endln:5:29
+  \_sequence_decl: (work@top.seq_count_increment), line:5:1, endln:7:12
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv, line:2:1, endln:29:10
     |vpiName:seq_count_increment
     |vpiFullName:work@top.seq_count_increment
     |vpiExpr:
     \_multiclock_sequence_expr: , line:6:1, endln:6:52
+      |vpiParent:
+      \_sequence_decl: (work@top.seq_count_increment), line:5:1, endln:7:12
       |vpiClockedSeq:
-      \_clocked_seq: 
+      \_clocked_seq: , line:6:1, endln:6:15
+        |vpiParent:
+        \_multiclock_sequence_expr: , line:6:1, endln:6:52
         |vpiClockingEvent:
         \_operation: , line:6:3, endln:6:14
           |vpiParent:
-          \_sequence_decl: (work@top.seq_count_increment), line:5:10, endln:5:29
+          \_sequence_decl: (work@top.seq_count_increment), line:5:1, endln:7:12
           |vpiOpType:39
           |vpiOperand:
           \_ref_obj: (work@top.seq_count_increment.clk), line:6:11, endln:6:14
@@ -419,16 +427,16 @@ design: (unnamed)
             |vpiName:clk
             |vpiFullName:work@top.seq_count_increment.clk
             |vpiActual:
-            \_logic_net: (work@top.clk), line:3:14, endln:3:17
+            \_logic_var: (work@top.clk), line:3:14, endln:3:17
         |vpiSequenceExpr:
         \_operation: , line:6:16, endln:6:52
           |vpiParent:
-          \_sequence_decl: (work@top.seq_count_increment), line:5:10, endln:5:29
+          \_sequence_decl: (work@top.seq_count_increment), line:5:1, endln:7:12
           |vpiOpType:27
           |vpiOperand:
           \_operation: , line:6:17, endln:6:29
             |vpiParent:
-            \_operation: , line:6:16, endln:6:52
+            \_sequence_decl: (work@top.seq_count_increment), line:5:1, endln:7:12
             |vpiOpType:24
             |vpiOperand:
             \_ref_obj: (work@top.seq_count_increment.count), line:6:17, endln:6:22
@@ -437,7 +445,7 @@ design: (unnamed)
               |vpiName:count
               |vpiFullName:work@top.seq_count_increment.count
               |vpiActual:
-              \_logic_net: (work@top.count), line:3:7, endln:3:12
+              \_logic_var: (work@top.count), line:3:7, endln:3:12
             |vpiOperand:
             \_constant: , line:6:25, endln:6:29
               |vpiParent:
@@ -458,7 +466,7 @@ design: (unnamed)
               |vpiName:count
               |vpiFullName:work@top.seq_count_increment.count
               |vpiActual:
-              \_logic_net: (work@top.count), line:3:7, endln:3:12
+              \_logic_var: (work@top.count), line:3:7, endln:3:12
             |vpiOperand:
             \_constant: , line:6:44, endln:6:51
               |vpiParent:
@@ -467,53 +475,88 @@ design: (unnamed)
               |vpiSize:4
               |BIN:1111
               |vpiConstType:3
-  |vpiDefName:work@top
-  |vpiNet:
-  \_logic_net: (work@top.count), line:3:7, endln:3:12
+  |vpiVariables:
+  \_logic_var: (work@top.count), line:3:7, endln:3:12
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv, line:2:1, endln:29:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.count)
+    \_ref_typespec: (work@top.count), line:3:1, endln:3:6
       |vpiParent:
-      \_logic_net: (work@top.count), line:3:7, endln:3:12
+      \_logic_var: (work@top.count), line:3:7, endln:3:12
       |vpiFullName:work@top.count
       |vpiActual:
       \_logic_typespec: , line:3:1, endln:3:6
     |vpiName:count
     |vpiFullName:work@top.count
-    |vpiNetType:36
-  |vpiNet:
-  \_logic_net: (work@top.clk), line:3:14, endln:3:17
+    |vpiVisibility:1
+  |vpiVariables:
+  \_logic_var: (work@top.clk), line:3:14, endln:3:17
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv, line:2:1, endln:29:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.clk)
+    \_ref_typespec: (work@top.clk), line:3:1, endln:3:6
       |vpiParent:
-      \_logic_net: (work@top.clk), line:3:14, endln:3:17
+      \_logic_var: (work@top.clk), line:3:14, endln:3:17
       |vpiFullName:work@top.clk
       |vpiActual:
       \_logic_typespec: , line:3:1, endln:3:6
     |vpiName:clk
     |vpiFullName:work@top.clk
-    |vpiNetType:36
-  |vpiNet:
-  \_logic_net: (work@top.reset), line:3:19, endln:3:24
+    |vpiVisibility:1
+  |vpiVariables:
+  \_logic_var: (work@top.reset), line:3:19, endln:3:24
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv, line:2:1, endln:29:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.reset)
+    \_ref_typespec: (work@top.reset), line:3:1, endln:3:6
       |vpiParent:
-      \_logic_net: (work@top.reset), line:3:19, endln:3:24
+      \_logic_var: (work@top.reset), line:3:19, endln:3:24
       |vpiFullName:work@top.reset
       |vpiActual:
       \_logic_typespec: , line:3:1, endln:3:6
     |vpiName:reset
     |vpiFullName:work@top.reset
-    |vpiNetType:36
-\_weaklyReferenced:
-\_logic_typespec: , line:3:1, endln:3:6
-\_logic_typespec: , line:3:1, endln:3:6
-\_logic_typespec: , line:3:1, endln:3:6
+    |vpiVisibility:1
+  |vpiReg:
+  \_logic_var: (work@top.count), line:3:7, endln:3:12
+  |vpiReg:
+  \_logic_var: (work@top.clk), line:3:14, endln:3:17
+  |vpiReg:
+  \_logic_var: (work@top.reset), line:3:19, endln:3:24
+  |vpiTypedef:
+  \_logic_typespec: , line:3:1, endln:3:6
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv, line:2:1, endln:29:10
+  |vpiTypedef:
+  \_logic_typespec: , line:3:1, endln:3:6
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv, line:2:1, endln:29:10
+  |vpiTypedef:
+  \_logic_typespec: , line:3:1, endln:3:6
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv, line:2:1, endln:29:10
+  |vpiImportTypespec:
+  \_logic_typespec: , line:3:1, endln:3:6
+  |vpiImportTypespec:
+  \_logic_var: (work@top.count), line:3:7, endln:3:12
+  |vpiImportTypespec:
+  \_logic_typespec: , line:3:1, endln:3:6
+  |vpiImportTypespec:
+  \_logic_var: (work@top.clk), line:3:14, endln:3:17
+  |vpiImportTypespec:
+  \_logic_typespec: , line:3:1, endln:3:6
+  |vpiImportTypespec:
+  \_logic_var: (work@top.reset), line:3:19, endln:3:24
+  |vpiImportTypespec:
+  \_logic_net: (work@top.seq_count_increment), line:11:3, endln:11:22
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv, line:2:1, endln:29:10
+    |vpiName:seq_count_increment
+    |vpiFullName:work@top.seq_count_increment
+    |vpiNetType:1
+  |vpiDefName:work@top
+  |vpiNet:
+  \_logic_net: (work@top.seq_count_increment), line:11:3, endln:11:22
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -522,14 +565,19 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
-[LINT]: ${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv:6:1: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv:5:10: Non synthesizable construct, seq_count_increment
 [LINT]: ${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv:11:3: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv:10:10: Non synthesizable construct, p1_count_increment
+[LINT]: ${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv:10:1: Non synthesizable construct, p1_count_increment
 [LINT]: ${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv:16:3: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv:15:10: Non synthesizable construct, p1_count_increment
+[LINT]: ${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv:15:1: Non synthesizable construct, p1_count_increment
 [LINT]: ${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv:21:3: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv:20:10: Non synthesizable construct, p2_count_increment
+[LINT]: ${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv:20:1: Non synthesizable construct, p2_count_increment
 [LINT]: ${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv:26:3: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv:25:10: Non synthesizable construct, p3_count_increment
+[LINT]: ${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv:25:1: Non synthesizable construct, p3_count_increment
+[LINT]: ${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv:6:1: Non synthesizable construct,
+[LINT]: ${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv:6:1: Non synthesizable construct,
+[LINT]: ${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv:5:1: Non synthesizable construct, seq_count_increment
 ============================== End Linting Results ==============================
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv | ${SURELOG_DIR}/build/regression/SeqUseNonTemp/roundtrip/dut_000.sv | 14 | 29 |
+============================== End RoundTrip Results ==============================

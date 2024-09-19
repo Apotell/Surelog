@@ -97,49 +97,30 @@ assume                                                 1
 constant                                               2
 design                                                 1
 hier_path                                              1
-logic_net                                              3
 module_inst                                            1
 operation                                              3
 property_spec                                          1
 ref_obj                                                7
+source_file                                            1
 sys_func_call                                          1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/AssumeProp/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/AssumeProp/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/AssumeProp/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/AssumeProp/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/AssumeProp/dut.sv, line:1:1, endln:10:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@dut
-  |vpiDefName:work@dut
-  |vpiNet:
-  \_logic_net: (work@dut.aw_select.slv_aw_select_i), line:7:35, endln:7:50
-    |vpiParent:
-    \_sys_func_call: ($fatal), line:6:7, endln:7:63
-    |vpiName:slv_aw_select_i
-    |vpiFullName:work@dut.aw_select.slv_aw_select_i
-    |vpiNetType:1
-  |vpiNet:
-  \_logic_net: (work@dut.aw_select.NoMstPorts), line:7:52, endln:7:62
-    |vpiParent:
-    \_sys_func_call: ($fatal), line:6:7, endln:7:63
-    |vpiName:NoMstPorts
-    |vpiFullName:work@dut.aw_select.NoMstPorts
-    |vpiNetType:1
-  |vpiNet:
-  \_logic_net: (work@dut.aw_select.clk_i), line:4:43, endln:4:48
-    |vpiParent:
-    \_operation: , line:4:35, endln:4:48
-    |vpiName:clk_i
-    |vpiFullName:work@dut.aw_select.clk_i
-    |vpiNetType:1
-  |vpiAssertion:
-  \_assume: (work@dut.aw_select), line:4:5, endln:7:64
+  |vpiName:work@dut
+  |vpiConcurrentAssertions:
+  \_assume: (work@dut.aw_select), line:4:16, endln:7:64
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/AssumeProp/dut.sv, line:1:1, endln:10:10
     |vpiName:aw_select
@@ -147,7 +128,7 @@ design: (unnamed)
     |vpiStmt:
     \_sys_func_call: ($fatal), line:6:7, endln:7:63
       |vpiParent:
-      \_assume: (work@dut.aw_select), line:4:5, endln:7:64
+      \_assume: (work@dut.aw_select), line:4:16, endln:7:64
       |vpiArgument:
       \_constant: , line:6:14, endln:6:15
         |vpiParent:
@@ -173,7 +154,7 @@ design: (unnamed)
         |vpiName:slv_aw_select_i
         |vpiFullName:work@dut.aw_select.slv_aw_select_i
         |vpiActual:
-        \_logic_net: (work@dut.aw_select.slv_aw_select_i), line:7:35, endln:7:50
+        \_logic_net: (work@dut.slv_aw_select_i), line:7:35, endln:7:50
       |vpiArgument:
       \_ref_obj: (work@dut.aw_select.NoMstPorts), line:7:52, endln:7:62
         |vpiParent:
@@ -181,12 +162,12 @@ design: (unnamed)
         |vpiName:NoMstPorts
         |vpiFullName:work@dut.aw_select.NoMstPorts
         |vpiActual:
-        \_logic_net: (work@dut.aw_select.NoMstPorts), line:7:52, endln:7:62
+        \_logic_net: (work@dut.NoMstPorts), line:7:52, endln:7:62
       |vpiName:$fatal
     |vpiProperty:
     \_property_spec: , line:4:33, endln:5:81
       |vpiParent:
-      \_assume: (work@dut.aw_select), line:4:5, endln:7:64
+      \_assume: (work@dut.aw_select), line:4:16, endln:7:64
       |vpiClockingEvent:
       \_operation: , line:4:35, endln:4:48
         |vpiParent:
@@ -199,7 +180,7 @@ design: (unnamed)
           |vpiName:clk_i
           |vpiFullName:work@dut.aw_select.clk_i
           |vpiActual:
-          \_logic_net: (work@dut.aw_select.clk_i), line:4:43, endln:4:48
+          \_logic_net: (work@dut.clk_i), line:4:43, endln:4:48
       |vpiPropertyExpr:
       \_operation: , line:4:51, endln:5:80
         |vpiParent:
@@ -208,18 +189,22 @@ design: (unnamed)
         |vpiOperand:
         \_hier_path: (slv_req_i.aw_valid), line:4:51, endln:4:69
           |vpiParent:
-          \_operation: , line:4:51, endln:5:80
+          \_property_spec: , line:4:33, endln:5:81
           |vpiActual:
           \_ref_obj: (slv_req_i), line:4:51, endln:4:60
             |vpiParent:
             \_hier_path: (slv_req_i.aw_valid), line:4:51, endln:4:69
             |vpiName:slv_req_i
+            |vpiActual:
+            \_logic_net: (work@dut.slv_req_i), line:4:51, endln:4:60
           |vpiActual:
           \_ref_obj: (work@dut.aw_select.aw_valid), line:4:61, endln:4:69
             |vpiParent:
             \_hier_path: (slv_req_i.aw_valid), line:4:51, endln:4:69
             |vpiName:aw_valid
             |vpiFullName:work@dut.aw_select.aw_valid
+            |vpiActual:
+            \_logic_net: (work@dut.aw_valid), line:4:61, endln:4:69
           |vpiName:slv_req_i.aw_valid
         |vpiOperand:
         \_operation: , line:5:51, endln:5:79
@@ -233,7 +218,7 @@ design: (unnamed)
             |vpiName:slv_aw_select_i
             |vpiFullName:work@dut.aw_select.slv_aw_select_i
             |vpiActual:
-            \_logic_net: (work@dut.aw_select.slv_aw_select_i), line:7:35, endln:7:50
+            \_logic_net: (work@dut.slv_aw_select_i), line:7:35, endln:7:50
           |vpiOperand:
           \_ref_obj: (work@dut.aw_select.NoMstPorts), line:5:69, endln:5:79
             |vpiParent:
@@ -241,7 +226,55 @@ design: (unnamed)
             |vpiName:NoMstPorts
             |vpiFullName:work@dut.aw_select.NoMstPorts
             |vpiActual:
-            \_logic_net: (work@dut.aw_select.NoMstPorts), line:7:52, endln:7:62
+            \_logic_net: (work@dut.NoMstPorts), line:7:52, endln:7:62
+  |vpiImportTypespec:
+  \_assume: (work@dut.aw_select), line:4:16, endln:7:64
+  |vpiImportTypespec:
+  \_logic_net: (work@dut.slv_aw_select_i), line:7:35, endln:7:50
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/AssumeProp/dut.sv, line:1:1, endln:10:10
+    |vpiName:slv_aw_select_i
+    |vpiFullName:work@dut.slv_aw_select_i
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@dut.NoMstPorts), line:7:52, endln:7:62
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/AssumeProp/dut.sv, line:1:1, endln:10:10
+    |vpiName:NoMstPorts
+    |vpiFullName:work@dut.NoMstPorts
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@dut.clk_i), line:4:43, endln:4:48
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/AssumeProp/dut.sv, line:1:1, endln:10:10
+    |vpiName:clk_i
+    |vpiFullName:work@dut.clk_i
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@dut.slv_req_i), line:4:51, endln:4:60
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/AssumeProp/dut.sv, line:1:1, endln:10:10
+    |vpiName:slv_req_i
+    |vpiFullName:work@dut.slv_req_i
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@dut.aw_valid), line:4:61, endln:4:69
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/AssumeProp/dut.sv, line:1:1, endln:10:10
+    |vpiName:aw_valid
+    |vpiFullName:work@dut.aw_valid
+    |vpiNetType:1
+  |vpiDefName:work@dut
+  |vpiNet:
+  \_logic_net: (work@dut.slv_aw_select_i), line:7:35, endln:7:50
+  |vpiNet:
+  \_logic_net: (work@dut.NoMstPorts), line:7:52, endln:7:62
+  |vpiNet:
+  \_logic_net: (work@dut.clk_i), line:4:43, endln:4:48
+  |vpiNet:
+  \_logic_net: (work@dut.slv_req_i), line:4:51, endln:4:60
+  |vpiNet:
+  \_logic_net: (work@dut.aw_valid), line:4:61, endln:4:69
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -252,3 +285,7 @@ design: (unnamed)
 ============================== Begin Linting Results ==============================
 [LINT]: ${SURELOG_DIR}/tests/AssumeProp/dut.sv:4:33: Non synthesizable construct,
 ============================== End Linting Results ==============================
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/AssumeProp/dut.sv | ${SURELOG_DIR}/build/regression/AssumeProp/roundtrip/dut_000.sv | 6 | 10 |
+============================== End RoundTrip Results ==============================

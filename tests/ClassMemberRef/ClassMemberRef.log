@@ -100,7 +100,7 @@ n<pkg> u<94> t<StringConst> p<95> l<24:1> el<24:4>
 n<> u<95> t<Class_type> p<96> c<94> l<24:1> el<24:4>
 n<> u<96> t<Class_scope> p<98> c<95> s<97> l<24:1> el<24:6>
 n<uvm_printer> u<97> t<StringConst> p<98> l<24:6> el<24:17>
-n<> u<98> t<Data_type> p<102> c<96> s<101> l<24:1> el<24:17>
+n<pkg::uvm_printer> u<98> t<Data_type> p<102> c<96> s<101> l<24:1> el<24:17>
 n<printer> u<99> t<StringConst> p<100> l<24:18> el<24:25>
 n<> u<100> t<Variable_decl_assignment> p<101> c<99> l<24:18> el<24:25>
 n<> u<101> t<List_of_variable_decl_assignments> p<102> c<100> l<24:18> el<24:25>
@@ -159,87 +159,152 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             2
 begin                                                  1
-bit_typespec                                           2
+bit_typespec                                           3
+bit_var                                                1
 class_defn                                             2
-class_typespec                                         1
+class_typespec                                         2
+class_var                                              2
+constant                                               1
 design                                                 1
 function                                               2
+function_decl                                          1
 hier_path                                              2
 initial                                                1
 io_decl                                                2
-logic_net                                              2
 method_func_call                                       2
-module_inst                                            1
+module_inst                                            2
 package                                                1
 ref_obj                                                6
-ref_typespec                                           3
+ref_typespec                                           5
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassMemberRef/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ClassMemberRef/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ClassMemberRef/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallPackages:
 \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:1:1, endln:20:11
   |vpiParent:
   \_design: (unnamed)
   |vpiName:pkg
   |vpiFullName:pkg::
-  |vpiDefName:pkg
-  |vpiClassDefn:
+  |vpiInternalScope:
   \_class_defn: (pkg::m_uvm_printer_knobs), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:3:1, endln:7:9
     |vpiParent:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:1:1, endln:20:11
     |vpiName:m_uvm_printer_knobs
     |vpiFullName:pkg::m_uvm_printer_knobs
-  |vpiClassDefn:
+    |vpiVariables:
+    \_bit_var: (pkg::m_uvm_printer_knobs::identifier), line:5:7, endln:5:17
+      |vpiParent:
+      \_class_defn: (pkg::m_uvm_printer_knobs), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:3:1, endln:7:9
+      |vpiTypespec:
+      \_ref_typespec: (pkg::m_uvm_printer_knobs::identifier), line:5:3, endln:5:6
+        |vpiParent:
+        \_bit_var: (pkg::m_uvm_printer_knobs::identifier), line:5:7, endln:5:17
+        |vpiFullName:pkg::m_uvm_printer_knobs::identifier
+        |vpiActual:
+        \_bit_typespec: , line:5:3, endln:5:6
+      |vpiName:identifier
+      |vpiFullName:pkg::m_uvm_printer_knobs::identifier
+      |vpiAutomatic:1
+      |vpiVisibility:1
+      |vpiExpr:
+      \_constant: , line:5:20, endln:5:21
+        |vpiParent:
+        \_class_defn: (pkg::m_uvm_printer_knobs), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:3:1, endln:7:9
+        |vpiDecompile:1
+        |vpiSize:1
+        |UINT:1
+        |vpiConstType:9
+    |vpiTypedef:
+    \_bit_typespec: , line:5:3, endln:5:6
+      |vpiParent:
+      \_class_defn: (pkg::m_uvm_printer_knobs), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:3:1, endln:7:9
+    |vpiImportTypespec:
+    \_bit_typespec: , line:5:3, endln:5:6
+    |vpiImportTypespec:
+    \_bit_var: (pkg::m_uvm_printer_knobs::identifier), line:5:7, endln:5:17
+  |vpiInternalScope:
   \_class_defn: (pkg::uvm_printer), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:9:1, endln:14:9
     |vpiParent:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:1:1, endln:20:11
     |vpiName:uvm_printer
     |vpiFullName:pkg::uvm_printer
-    |vpiMethod:
-    \_function: (pkg::uvm_printer::set_name_enabled), line:11:3, endln:11:9
+    |vpiVariables:
+    \_class_var: (pkg::uvm_printer::knobs), line:12:23, endln:12:28
+      |vpiParent:
+      \_class_defn: (pkg::uvm_printer), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:9:1, endln:14:9
+      |vpiTypespec:
+      \_ref_typespec: (pkg::uvm_printer::knobs::m_uvm_printer_knobs), line:12:3, endln:12:22
+        |vpiParent:
+        \_class_var: (pkg::uvm_printer::knobs), line:12:23, endln:12:28
+        |vpiName:m_uvm_printer_knobs
+        |vpiFullName:pkg::uvm_printer::knobs::m_uvm_printer_knobs
+        |vpiActual:
+        \_class_typespec: (m_uvm_printer_knobs), line:12:3, endln:12:22
+      |vpiName:knobs
+      |vpiFullName:pkg::uvm_printer::knobs
+      |vpiAutomatic:1
+      |vpiVisibility:1
+    |vpiInternalScope:
+    \_function: (pkg::uvm_printer::set_name_enabled), line:11:3, endln:11:63
       |vpiParent:
       \_class_defn: (pkg::uvm_printer), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:9:1, endln:14:9
       |vpiName:set_name_enabled
       |vpiFullName:pkg::uvm_printer::set_name_enabled
+      |vpiTypedef:
+      \_bit_typespec: , line:11:50, endln:11:53
+        |vpiParent:
+        \_function: (pkg::uvm_printer::set_name_enabled), line:11:3, endln:11:63
+      |vpiImportTypespec:
+      \_bit_typespec: , line:11:50, endln:11:53
       |vpiMethod:1
       |vpiAccessType:2
       |vpiVisibility:1
       |vpiVirtual:1
       |vpiIODecl:
-      \_io_decl: (enabled), line:11:54, endln:11:61
+      \_io_decl: (enabled), line:11:50, endln:11:61
         |vpiParent:
-        \_function: (pkg::uvm_printer::set_name_enabled), line:11:3, endln:11:9
+        \_function: (pkg::uvm_printer::set_name_enabled), line:11:3, endln:11:63
         |vpiDirection:1
         |vpiName:enabled
         |vpiTypedef:
-        \_ref_typespec: (pkg::uvm_printer::set_name_enabled::enabled)
+        \_ref_typespec: (pkg::uvm_printer::set_name_enabled::enabled), line:11:50, endln:11:53
           |vpiParent:
-          \_io_decl: (enabled), line:11:54, endln:11:61
+          \_io_decl: (enabled), line:11:50, endln:11:61
           |vpiFullName:pkg::uvm_printer::set_name_enabled::enabled
           |vpiActual:
           \_bit_typespec: , line:11:50, endln:11:53
-    |vpiMethod:
+    |vpiInternalScope:
     \_function: (pkg::uvm_printer::set_name_enabled), line:16:1, endln:18:12
       |vpiParent:
       \_class_defn: (pkg::uvm_printer), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:9:1, endln:14:9
       |vpiName:set_name_enabled
       |vpiFullName:pkg::uvm_printer::set_name_enabled
+      |vpiTypedef:
+      \_bit_typespec: , line:16:46, endln:16:49
+        |vpiParent:
+        \_function: (pkg::uvm_printer::set_name_enabled), line:16:1, endln:18:12
+      |vpiImportTypespec:
+      \_bit_typespec: , line:16:46, endln:16:49
       |vpiVisibility:1
       |vpiIODecl:
-      \_io_decl: (enabled), line:16:50, endln:16:57
+      \_io_decl: (enabled), line:16:46, endln:16:57
         |vpiParent:
         \_function: (pkg::uvm_printer::set_name_enabled), line:16:1, endln:18:12
         |vpiDirection:1
         |vpiName:enabled
         |vpiTypedef:
-        \_ref_typespec: (pkg::uvm_printer::set_name_enabled::enabled)
+        \_ref_typespec: (pkg::uvm_printer::set_name_enabled::enabled), line:16:46, endln:16:49
           |vpiParent:
-          \_io_decl: (enabled), line:16:50, endln:16:57
+          \_io_decl: (enabled), line:16:46, endln:16:57
           |vpiFullName:pkg::uvm_printer::set_name_enabled::enabled
           |vpiActual:
           \_bit_typespec: , line:16:46, endln:16:49
@@ -256,50 +321,107 @@ design: (unnamed)
           |vpiName:enabled
           |vpiFullName:pkg::uvm_printer::set_name_enabled::enabled
           |vpiActual:
-          \_io_decl: (enabled), line:16:50, endln:16:57
+          \_io_decl: (enabled), line:16:46, endln:16:57
         |vpiLhs:
-        \_hier_path: (knobs.identifier), line:17:1, endln:17:17
+        \_hier_path: (knobs.identifier), line:17:6, endln:17:17
           |vpiParent:
           \_assignment: , line:17:1, endln:17:27
           |vpiActual:
-          \_ref_obj: (knobs), line:17:7, endln:17:17
+          \_ref_obj: (knobs), line:17:6, endln:17:17
             |vpiParent:
-            \_hier_path: (knobs.identifier), line:17:1, endln:17:17
+            \_hier_path: (knobs.identifier), line:17:6, endln:17:17
             |vpiName:knobs
+            |vpiActual:
+            \_class_var: (pkg::uvm_printer::knobs), line:12:23, endln:12:28
           |vpiActual:
           \_ref_obj: (identifier), line:17:7, endln:17:17
             |vpiParent:
-            \_hier_path: (knobs.identifier), line:17:1, endln:17:17
+            \_hier_path: (knobs.identifier), line:17:6, endln:17:17
             |vpiName:identifier
+            |vpiActual:
+            \_bit_var: (pkg::m_uvm_printer_knobs::identifier), line:5:7, endln:5:17
           |vpiName:knobs.identifier
       |vpiInstance:
       \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:1:1, endln:20:11
+    |vpiTypedef:
+    \_class_typespec: (m_uvm_printer_knobs), line:12:3, endln:12:22
+      |vpiParent:
+      \_class_defn: (pkg::uvm_printer), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:9:1, endln:14:9
+      |vpiName:m_uvm_printer_knobs
+      |vpiClassDefn:
+      \_class_defn: (pkg::m_uvm_printer_knobs), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:3:1, endln:7:9
+    |vpiImportTypespec:
+    \_function: (pkg::uvm_printer::set_name_enabled), line:11:3, endln:11:63
+    |vpiImportTypespec:
+    \_class_typespec: (m_uvm_printer_knobs), line:12:3, endln:12:22
+    |vpiImportTypespec:
+    \_class_var: (pkg::uvm_printer::knobs), line:12:23, endln:12:28
+    |vpiImportTypespec:
+    \_function: (pkg::uvm_printer::set_name_enabled), line:16:1, endln:18:12
+    |vpiMethod:
+    \_function: (pkg::uvm_printer::set_name_enabled), line:11:3, endln:11:63
+    |vpiMethod:
+    \_function: (pkg::uvm_printer::set_name_enabled), line:16:1, endln:18:12
+    |vpiTaskFuncDecl:
+    \_function_decl: (pkg::uvm_printer::set_name_enabled), line:11:3, endln:11:63
+      |vpiParent:
+      \_class_defn: (pkg::uvm_printer), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:9:1, endln:14:9
+      |vpiName:set_name_enabled
+      |vpiFullName:pkg::uvm_printer::set_name_enabled
+      |vpiTaskFunc:
+      \_function: (pkg::uvm_printer::set_name_enabled), line:11:3, endln:11:63
+    |vpiClassTypespec:
+    \_class_typespec: (m_uvm_printer_knobs), line:12:3, endln:12:22
+  |vpiImportTypespec:
+  \_class_defn: (pkg::m_uvm_printer_knobs), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:3:1, endln:7:9
+  |vpiImportTypespec:
+  \_class_defn: (pkg::uvm_printer), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:9:1, endln:14:9
+  |vpiDefName:pkg
+  |vpiClassDefn:
+  \_class_defn: (pkg::m_uvm_printer_knobs), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:3:1, endln:7:9
+  |vpiClassDefn:
+  \_class_defn: (pkg::uvm_printer), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:9:1, endln:14:9
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:22:1, endln:29:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiNet:
-  \_logic_net: (work@top.printer), line:24:18, endln:24:25
+  |vpiName:work@top
+  |vpiVariables:
+  \_class_var: (work@top.printer), line:24:18, endln:24:25
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:22:1, endln:29:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.printer)
+    \_ref_typespec: (work@top.printer.pkg::uvm_printer), line:24:1, endln:24:17
       |vpiParent:
-      \_logic_net: (work@top.printer), line:24:18, endln:24:25
-      |vpiFullName:work@top.printer
+      \_class_var: (work@top.printer), line:24:18, endln:24:25
+      |vpiName:pkg::uvm_printer
+      |vpiFullName:work@top.printer.pkg::uvm_printer
       |vpiActual:
       \_class_typespec: (pkg::uvm_printer), line:24:1, endln:24:6
     |vpiName:printer
     |vpiFullName:work@top.printer
-  |vpiNet:
+    |vpiVisibility:1
+  |vpiTypedef:
+  \_class_typespec: (pkg::uvm_printer), line:24:1, endln:24:6
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:22:1, endln:29:10
+    |vpiName:pkg::uvm_printer
+    |vpiClassDefn:
+    \_class_defn: (pkg::uvm_printer), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:9:1, endln:14:9
+  |vpiImportTypespec:
+  \_class_typespec: (pkg::uvm_printer), line:24:1, endln:24:6
+  |vpiImportTypespec:
+  \_class_var: (work@top.printer), line:24:18, endln:24:25
+  |vpiImportTypespec:
   \_logic_net: (work@top.en), line:27:27, endln:27:29
     |vpiParent:
-    \_method_func_call: (set_name_enabled), line:27:9, endln:27:25
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:22:1, endln:29:10
     |vpiName:en
     |vpiFullName:work@top.en
     |vpiNetType:1
+  |vpiDefName:work@top
+  |vpiNet:
+  \_logic_net: (work@top.en), line:27:27, endln:27:29
   |vpiProcess:
   \_initial: , line:25:1, endln:28:4
     |vpiParent:
@@ -316,24 +438,26 @@ design: (unnamed)
         |vpiOpType:82
         |vpiBlocking:1
         |vpiRhs:
-        \_method_func_call: (new)
+        \_method_func_call: (new), line:26:15, endln:26:18
           |vpiParent:
           \_assignment: , line:26:5, endln:26:18
           |vpiName:new
         |vpiLhs:
         \_ref_obj: (work@top.printer), line:26:5, endln:26:12
           |vpiParent:
-          \_hier_path: (printer)
+          \_assignment: , line:26:5, endln:26:18
           |vpiName:printer
           |vpiFullName:work@top.printer
+          |vpiActual:
+          \_class_var: (work@top.printer), line:24:18, endln:24:25
       |vpiStmt:
-      \_method_func_call: (set_name_enabled), line:27:9, endln:27:25
+      \_method_func_call: (set_name_enabled), line:27:1, endln:27:29
         |vpiParent:
         \_begin: (work@top), line:25:9, endln:28:4
         |vpiArgument:
         \_ref_obj: (work@top.en), line:27:27, endln:27:29
           |vpiParent:
-          \_method_func_call: (set_name_enabled), line:27:9, endln:27:25
+          \_method_func_call: (set_name_enabled), line:27:1, endln:27:29
           |vpiName:en
           |vpiFullName:work@top.en
           |vpiActual:
@@ -342,24 +466,11 @@ design: (unnamed)
         |vpiPrefix:
         \_ref_obj: (work@top.printer), line:27:1, endln:27:8
           |vpiParent:
-          \_method_func_call: (set_name_enabled), line:27:9, endln:27:25
+          \_method_func_call: (set_name_enabled), line:27:1, endln:27:29
           |vpiName:printer
           |vpiFullName:work@top.printer
-\_weaklyReferenced:
-\_bit_typespec: , line:16:46, endln:16:49
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:1:1, endln:20:11
-\_hier_path: (printer)
-  |vpiParent:
-  \_assignment: , line:26:5, endln:26:18
-  |vpiActual:
-  \_ref_obj: (work@top.printer), line:26:5, endln:26:12
-  |vpiName:printer
-\_bit_typespec: , line:11:50, endln:11:53
-\_class_typespec: (pkg::uvm_printer), line:24:1, endln:24:6
-  |vpiName:pkg::uvm_printer
-  |vpiClassDefn:
-  \_class_defn: (pkg::uvm_printer), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:9:1, endln:14:9
+          |vpiActual:
+          \_class_var: (work@top.printer), line:24:18, endln:24:25
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -370,10 +481,10 @@ design: (unnamed)
 ============================== Begin Linting Results ==============================
 [LINT]: ${SURELOG_DIR}/tests/ClassMemberRef/dut.sv:3:1: Non synthesizable construct, m_uvm_printer_knobs
 [LINT]: ${SURELOG_DIR}/tests/ClassMemberRef/dut.sv:9:1: Non synthesizable construct, uvm_printer
-[LINT]: ${SURELOG_DIR}/tests/ClassMemberRef/dut.sv:26:5: Non synthesizable construct,
-[LINT]: ${SURELOG_DIR}/tests/ClassMemberRef/dut.sv:27:9: Non synthesizable construct, set_name_enabled
+[LINT]: ${SURELOG_DIR}/tests/ClassMemberRef/dut.sv:26:15: Non synthesizable construct, new
+[LINT]: ${SURELOG_DIR}/tests/ClassMemberRef/dut.sv:27:1: Non synthesizable construct, set_name_enabled
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ClassMemberRef/dut.sv | ${SURELOG_DIR}/build/regression/ClassMemberRef/roundtrip/dut_000.sv | 7 | 29 |
+[roundtrip]: ${SURELOG_DIR}/tests/ClassMemberRef/dut.sv | ${SURELOG_DIR}/build/regression/ClassMemberRef/roundtrip/dut_000.sv | 8 | 29 |
 ============================== End RoundTrip Results ==============================

@@ -116,39 +116,42 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 begin                                                  1
-constant                                               6
+constant                                               5
 design                                                 1
 gen_if                                                 1
-int_typespec                                           3
 module_inst                                            2
 operation                                              4
-param_assign                                           5
-parameter                                              5
-range                                                  2
+param_assign                                           3
+parameter                                              3
+range                                                  1
 ref_module                                             1
-ref_obj                                                7
-ref_typespec                                           6
+ref_obj                                                6
+ref_typespec                                           2
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FileLocalParam/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/FileLocalParam/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/FileLocalParam/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/FileLocalParam/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/FileLocalParam/dut.sv, line:7:1, endln:9:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@GOOD
+  |vpiName:work@GOOD
   |vpiDefName:work@GOOD
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/FileLocalParam/dut.sv, line:11:1, endln:19:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
+  |vpiName:work@top
   |vpiParameter:
-  \_parameter: (work@top.D), line:13:13, endln:13:14
+  \_parameter: (work@top.D), line:13:13, endln:13:19
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/FileLocalParam/dut.sv, line:11:1, endln:19:10
     |vpiName:D
@@ -164,18 +167,26 @@ design: (unnamed)
       |vpiName:MAP
       |vpiFullName:work@top.MAP
       |vpiActual:
-      \_parameter: (MAP), line:3:23, endln:3:26
+      \_parameter: (MAP), line:3:23, endln:5:48
     |vpiLhs:
-    \_parameter: (work@top.D), line:13:13, endln:13:14
+    \_parameter: (work@top.D), line:13:13, endln:13:19
   |vpiDefName:work@top
+  |vpiRefModule:
+  \_ref_module: work@GOOD (good), line:16:6, endln:16:18
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/FileLocalParam/dut.sv, line:11:1, endln:19:10
+    |vpiName:good
+    |vpiDefName:work@GOOD
+    |vpiActual:
+    \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/FileLocalParam/dut.sv, line:7:1, endln:9:10
   |vpiGenStmt:
-  \_gen_if: , line:15:3, endln:15:5
+  \_gen_if: , line:15:3, endln:17:6
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/FileLocalParam/dut.sv, line:11:1, endln:19:10
     |vpiCondition:
     \_operation: , line:15:7, endln:15:48
       |vpiParent:
-      \_gen_if: , line:15:3, endln:15:5
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/FileLocalParam/dut.sv, line:11:1, endln:19:10
       |vpiOpType:14
       |vpiOperand:
       \_ref_obj: (work@top.D), line:15:7, endln:15:8
@@ -183,6 +194,8 @@ design: (unnamed)
         \_operation: , line:15:7, endln:15:48
         |vpiName:D
         |vpiFullName:work@top.D
+        |vpiActual:
+        \_parameter: (work@top.D), line:13:13, endln:13:19
       |vpiOperand:
       \_constant: , line:15:12, endln:15:48
         |vpiParent:
@@ -192,105 +205,32 @@ design: (unnamed)
         |BIN:00000000000000000000000000010000
         |vpiConstType:3
     |vpiStmt:
-    \_begin: (work@top)
+    \_begin: (work@top), line:15:50, endln:17:6
       |vpiParent:
-      \_gen_if: , line:15:3, endln:15:5
+      \_gen_if: , line:15:3, endln:17:6
       |vpiFullName:work@top
       |vpiStmt:
-      \_ref_module: work@GOOD (good), line:16:11, endln:16:15
-        |vpiParent:
-        \_begin: (work@top)
-        |vpiName:good
-        |vpiDefName:work@GOOD
+      \_ref_module: work@GOOD (good), line:16:6, endln:16:18
 |vpiParameter:
-\_parameter: (AWIDTH), line:1:25, endln:1:31
+\_parameter: (AWIDTH), line:1:25, endln:1:58
   |vpiParent:
   \_design: (unnamed)
   |UINT:16
-  |vpiTypespec:
-  \_ref_typespec: (AWIDTH)
-    |vpiParent:
-    \_parameter: (AWIDTH), line:1:25, endln:1:31
-    |vpiFullName:AWIDTH
-    |vpiActual:
-    \_int_typespec: , line:1:1, endln:1:58
   |vpiLocalParam:1
   |vpiName:AWIDTH
 |vpiParameter:
-\_parameter: (MAP), line:3:23, endln:3:26
+\_parameter: (MAP), line:3:23, endln:5:48
   |vpiParent:
   \_design: (unnamed)
-  |vpiTypespec:
-  \_ref_typespec: (MAP)
-    |vpiParent:
-    \_parameter: (MAP), line:3:23, endln:3:26
-    |vpiFullName:MAP
-    |vpiActual:
-    \_int_typespec: , line:3:12, endln:3:22
   |vpiLocalParam:1
   |vpiName:MAP
-|vpiParamAssign:
-\_param_assign: , line:1:25, endln:1:58
-  |vpiParent:
-  \_design: (unnamed)
-  |vpiRhs:
-  \_constant: , line:1:56, endln:1:58
-    |vpiParent:
-    \_param_assign: , line:1:25, endln:1:58
-    |vpiDecompile:16
-    |vpiSize:64
-    |UINT:16
-    |vpiTypespec:
-    \_ref_typespec: 
-      |vpiParent:
-      \_constant: , line:1:56, endln:1:58
-      |vpiActual:
-      \_int_typespec: , line:1:1, endln:1:58
-    |vpiConstType:9
-  |vpiLhs:
-  \_parameter: (AWIDTH), line:1:25, endln:1:31
-|vpiParamAssign:
-\_param_assign: , line:3:23, endln:5:48
-  |vpiParent:
-  \_design: (unnamed)
-  |vpiRhs:
-  \_operation: , line:3:33, endln:5:48
-    |vpiParent:
-    \_param_assign: , line:3:23, endln:5:48
-    |vpiOpType:33
-    |vpiOperand:
-    \_ref_obj: (AWIDTH), line:4:3, endln:4:9
-      |vpiParent:
-      \_operation: , line:3:33, endln:5:48
-      |vpiName:AWIDTH
-  |vpiLhs:
-  \_parameter: (MAP), line:3:23, endln:3:26
-\_weaklyReferenced:
-\_int_typespec: , line:1:1, endln:1:58
-\_int_typespec: , line:3:12, endln:3:22
-  |vpiParent:
-  \_parameter: (MAP), line:3:23, endln:3:26
-  |vpiRange:
-  \_range: , line:3:12, endln:3:22
-    |vpiParent:
-    \_int_typespec: , line:3:12, endln:3:22
-    |vpiLeftRange:
-    \_ref_obj: (MAP.AWIDTH), line:3:13, endln:3:19
-      |vpiParent:
-      \_range: , line:3:12, endln:3:22
-      |vpiName:AWIDTH
-      |vpiFullName:MAP.AWIDTH
-    |vpiRightRange:
-    \_constant: , line:3:20, endln:3:21
-      |vpiParent:
-      \_range: , line:3:12, endln:3:22
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 0
 [   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/FileLocalParam/dut.sv | ${SURELOG_DIR}/build/regression/FileLocalParam/roundtrip/dut_000.sv | 12 | 19 |
+============================== End RoundTrip Results ==============================

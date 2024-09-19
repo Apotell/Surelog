@@ -87,82 +87,104 @@ AST_DEBUG_END
 constant                                               3
 cont_assign                                            1
 design                                                 1
-logic_net                                              2
-logic_typespec                                         2
+logic_net                                              1
+logic_typespec                                         3
 module_inst                                            1
 operation                                              1
 port                                                   2
 range                                                  1
-ref_obj                                                4
-ref_typespec                                           3
+ref_obj                                                2
+ref_typespec                                           5
+source_file                                            1
+struct_net                                             1
 struct_typespec                                        1
 typespec_member                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConstantWithElabUhdm/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ConstantWithElabUhdm/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ConstantWithElabUhdm/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/ConstantWithElabUhdm/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstantWithElabUhdm/dut.sv, line:3:1, endln:8:16
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiNet:
-  \_logic_net: (work@top.out3), line:4:31, endln:4:35
+  |vpiName:work@top
+  |vpiTypedef:
+  \_logic_typespec: , line:5:12, endln:5:16
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstantWithElabUhdm/dut.sv, line:3:1, endln:8:16
-    |vpiName:out3
-    |vpiFullName:work@top.out3
-  |vpiNet:
-  \_logic_net: (work@top.out4), line:5:17, endln:5:21
+  |vpiTypedef:
+  \_logic_typespec: , line:5:12, endln:5:16
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstantWithElabUhdm/dut.sv, line:3:1, endln:8:16
-    |vpiName:out4
-    |vpiFullName:work@top.out4
-    |vpiNetType:1
-  |vpiPort:
-  \_port: (out3), line:4:31, endln:4:35
+  |vpiImportTypespec:
+  \_struct_net: (work@top.out3), line:4:31, endln:4:35
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstantWithElabUhdm/dut.sv, line:3:1, endln:8:16
-    |vpiName:out3
-    |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@top.out3.out3), line:4:31, endln:4:35
+    |vpiTypespec:
+    \_ref_typespec: (work@top.out3.out3), line:4:31, endln:4:35
       |vpiParent:
-      \_port: (out3), line:4:31, endln:4:35
+      \_struct_net: (work@top.out3), line:4:31, endln:4:35
       |vpiName:out3
       |vpiFullName:work@top.out3.out3
       |vpiActual:
-      \_logic_net: (work@top.out3), line:4:31, endln:4:35
-    |vpiTypedef:
-    \_ref_typespec: (work@top.out3)
+      \_struct_typespec: (my_struct_packed_t), line:2:9, endln:2:39
+    |vpiName:out3
+    |vpiFullName:work@top.out3
+  |vpiImportTypespec:
+  \_logic_typespec: , line:5:12, endln:5:16
+  |vpiImportTypespec:
+  \_logic_net: (work@top.out4), line:5:17, endln:5:21
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstantWithElabUhdm/dut.sv, line:3:1, endln:8:16
+    |vpiTypespec:
+    \_ref_typespec: (work@top.out4.out4), line:5:12, endln:5:16
       |vpiParent:
-      \_port: (out3), line:4:31, endln:4:35
-      |vpiFullName:work@top.out3
+      \_logic_net: (work@top.out4), line:5:17, endln:5:21
+      |vpiName:out4
+      |vpiFullName:work@top.out4.out4
+      |vpiActual:
+      \_logic_typespec: , line:5:12, endln:5:16
+    |vpiName:out4
+    |vpiFullName:work@top.out4
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_typespec: , line:5:12, endln:5:16
+  |vpiDefName:work@top
+  |vpiNet:
+  \_struct_net: (work@top.out3), line:4:31, endln:4:35
+  |vpiNet:
+  \_logic_net: (work@top.out4), line:5:17, endln:5:21
+  |vpiPort:
+  \_port: (out3), line:4:5, endln:4:35
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstantWithElabUhdm/dut.sv, line:3:1, endln:8:16
+    |vpiName:out3
+    |vpiDirection:2
+    |vpiTypedef:
+    \_ref_typespec: (work@top.out3.my_struct_packed_t), line:4:12, endln:4:30
+      |vpiParent:
+      \_port: (out3), line:4:5, endln:4:35
+      |vpiName:my_struct_packed_t
+      |vpiFullName:work@top.out3.my_struct_packed_t
       |vpiActual:
       \_struct_typespec: (my_struct_packed_t), line:2:9, endln:2:39
   |vpiPort:
-  \_port: (out4), line:5:17, endln:5:21
+  \_port: (out4), line:5:5, endln:5:21
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstantWithElabUhdm/dut.sv, line:3:1, endln:8:16
     |vpiName:out4
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@top.out4.out4), line:5:17, endln:5:21
-      |vpiParent:
-      \_port: (out4), line:5:17, endln:5:21
-      |vpiName:out4
-      |vpiFullName:work@top.out4.out4
-      |vpiActual:
-      \_logic_net: (work@top.out4), line:5:17, endln:5:21
     |vpiTypedef:
-    \_ref_typespec: (work@top.out4)
+    \_ref_typespec: (work@top.out4), line:5:12, endln:5:16
       |vpiParent:
-      \_port: (out4), line:5:17, endln:5:21
+      \_port: (out4), line:5:5, endln:5:21
       |vpiFullName:work@top.out4
       |vpiActual:
       \_logic_typespec: , line:5:12, endln:5:16
@@ -182,7 +204,7 @@ design: (unnamed)
         |vpiName:out3
         |vpiFullName:work@top.out3
         |vpiActual:
-        \_logic_net: (work@top.out3), line:4:31, endln:4:35
+        \_struct_net: (work@top.out3), line:4:31, endln:4:35
       |vpiOperand:
       \_constant: , line:7:29, endln:7:31
         |vpiParent:
@@ -194,7 +216,7 @@ design: (unnamed)
     |vpiLhs:
     \_ref_obj: (work@top.out4), line:7:10, endln:7:14
       |vpiParent:
-      \_cont_assign: , line:7:10, endln:7:32
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstantWithElabUhdm/dut.sv, line:3:1, endln:8:16
       |vpiName:out4
       |vpiFullName:work@top.out4
       |vpiActual:
@@ -205,32 +227,27 @@ design: (unnamed)
   |vpiParent:
   \_design: (unnamed)
   |vpiName:my_struct_packed_t
-  |vpiInstance:
-  \_design: (unnamed)
   |vpiPacked:1
   |vpiTypespecMember:
-  \_typespec_member: (a), line:2:36, endln:2:37
+  \_typespec_member: (a), line:2:24, endln:2:38
     |vpiParent:
     \_struct_typespec: (my_struct_packed_t), line:2:9, endln:2:39
     |vpiName:a
     |vpiTypespec:
-    \_ref_typespec: (my_struct_packed_t.a)
+    \_ref_typespec: (my_struct_packed_t.a), line:2:24, endln:2:35
       |vpiParent:
-      \_typespec_member: (a), line:2:36, endln:2:37
+      \_typespec_member: (a), line:2:24, endln:2:38
       |vpiFullName:my_struct_packed_t.a
       |vpiActual:
       \_logic_typespec: , line:2:24, endln:2:35
-    |vpiRefFile:${SURELOG_DIR}/tests/ConstantWithElabUhdm/dut.sv
-    |vpiRefLineNo:2
-    |vpiRefColumnNo:24
-    |vpiRefEndLineNo:2
-    |vpiRefEndColumnNo:35
-\_weaklyReferenced:
+|vpiTypedef:
 \_logic_typespec: , line:2:24, endln:2:35
+  |vpiParent:
+  \_design: (unnamed)
   |vpiRange:
   \_range: , line:2:30, endln:2:35
     |vpiParent:
-    \_logic_typespec: , line:2:24, endln:2:35
+    \_struct_typespec: (my_struct_packed_t), line:2:9, endln:2:39
     |vpiLeftRange:
     \_constant: , line:2:31, endln:2:32
       |vpiParent:
@@ -247,7 +264,6 @@ design: (unnamed)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
-\_logic_typespec: , line:5:12, endln:5:16
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

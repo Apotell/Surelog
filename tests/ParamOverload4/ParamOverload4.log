@@ -159,70 +159,73 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             1
+begin                                                  1
 constant                                               4
 design                                                 1
 gen_for                                                1
 int_typespec                                           3
-logic_net                                              1
 module_inst                                            1
-named_begin                                            1
 operation                                              2
 param_assign                                           3
 parameter                                              3
 ref_obj                                                3
-ref_typespec                                           7
+ref_typespec                                           4
 ref_var                                                1
+source_file                                            1
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamOverload4/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ParamOverload4/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/ParamOverload4/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/ParamOverload4/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@ibex_pmp (work@ibex_pmp), file:${SURELOG_DIR}/tests/ParamOverload4/dut.sv, line:2:1, endln:34:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@ibex_pmp
+  |vpiName:work@ibex_pmp
   |vpiParameter:
-  \_parameter: (work@ibex_pmp.PMPGranularity), line:5:28, endln:5:42
+  \_parameter: (work@ibex_pmp.PMPGranularity), line:5:28, endln:5:46
     |vpiParent:
     \_module_inst: work@ibex_pmp (work@ibex_pmp), file:${SURELOG_DIR}/tests/ParamOverload4/dut.sv, line:2:1, endln:34:10
     |UINT:0
     |vpiTypespec:
-    \_ref_typespec: (work@ibex_pmp.PMPGranularity)
+    \_ref_typespec: (work@ibex_pmp.PMPGranularity), line:5:15, endln:5:18
       |vpiParent:
-      \_parameter: (work@ibex_pmp.PMPGranularity), line:5:28, endln:5:42
+      \_parameter: (work@ibex_pmp.PMPGranularity), line:5:28, endln:5:46
       |vpiFullName:work@ibex_pmp.PMPGranularity
       |vpiActual:
       \_int_typespec: , line:5:15, endln:5:27
     |vpiName:PMPGranularity
     |vpiFullName:work@ibex_pmp.PMPGranularity
   |vpiParameter:
-  \_parameter: (work@ibex_pmp.PMPNumChan), line:7:28, endln:7:38
+  \_parameter: (work@ibex_pmp.PMPNumChan), line:7:28, endln:7:46
     |vpiParent:
     \_module_inst: work@ibex_pmp (work@ibex_pmp), file:${SURELOG_DIR}/tests/ParamOverload4/dut.sv, line:2:1, endln:34:10
     |UINT:2
     |vpiTypespec:
-    \_ref_typespec: (work@ibex_pmp.PMPNumChan)
+    \_ref_typespec: (work@ibex_pmp.PMPNumChan), line:7:15, endln:7:18
       |vpiParent:
-      \_parameter: (work@ibex_pmp.PMPNumChan), line:7:28, endln:7:38
+      \_parameter: (work@ibex_pmp.PMPNumChan), line:7:28, endln:7:46
       |vpiFullName:work@ibex_pmp.PMPNumChan
       |vpiActual:
       \_int_typespec: , line:7:15, endln:7:27
     |vpiName:PMPNumChan
     |vpiFullName:work@ibex_pmp.PMPNumChan
   |vpiParameter:
-  \_parameter: (work@ibex_pmp.PMPNumRegions), line:9:28, endln:9:41
+  \_parameter: (work@ibex_pmp.PMPNumRegions), line:9:28, endln:9:46
     |vpiParent:
     \_module_inst: work@ibex_pmp (work@ibex_pmp), file:${SURELOG_DIR}/tests/ParamOverload4/dut.sv, line:2:1, endln:34:10
     |UINT:4
     |vpiTypespec:
-    \_ref_typespec: (work@ibex_pmp.PMPNumRegions)
+    \_ref_typespec: (work@ibex_pmp.PMPNumRegions), line:9:15, endln:9:18
       |vpiParent:
-      \_parameter: (work@ibex_pmp.PMPNumRegions), line:9:28, endln:9:41
+      \_parameter: (work@ibex_pmp.PMPNumRegions), line:9:28, endln:9:46
       |vpiFullName:work@ibex_pmp.PMPNumRegions
       |vpiActual:
       \_int_typespec: , line:9:15, endln:9:27
@@ -239,16 +242,9 @@ design: (unnamed)
       |vpiDecompile:0
       |vpiSize:64
       |UINT:0
-      |vpiTypespec:
-      \_ref_typespec: (work@ibex_pmp)
-        |vpiParent:
-        \_constant: , line:5:45, endln:5:46
-        |vpiFullName:work@ibex_pmp
-        |vpiActual:
-        \_int_typespec: , line:5:15, endln:5:27
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@ibex_pmp.PMPGranularity), line:5:28, endln:5:42
+    \_parameter: (work@ibex_pmp.PMPGranularity), line:5:28, endln:5:46
   |vpiParamAssign:
   \_param_assign: , line:7:28, endln:7:46
     |vpiParent:
@@ -260,16 +256,9 @@ design: (unnamed)
       |vpiDecompile:2
       |vpiSize:64
       |UINT:2
-      |vpiTypespec:
-      \_ref_typespec: (work@ibex_pmp)
-        |vpiParent:
-        \_constant: , line:7:45, endln:7:46
-        |vpiFullName:work@ibex_pmp
-        |vpiActual:
-        \_int_typespec: , line:7:15, endln:7:27
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@ibex_pmp.PMPNumChan), line:7:28, endln:7:38
+    \_parameter: (work@ibex_pmp.PMPNumChan), line:7:28, endln:7:46
   |vpiParamAssign:
   \_param_assign: , line:9:28, endln:9:46
     |vpiParent:
@@ -281,55 +270,54 @@ design: (unnamed)
       |vpiDecompile:4
       |vpiSize:64
       |UINT:4
-      |vpiTypespec:
-      \_ref_typespec: (work@ibex_pmp)
-        |vpiParent:
-        \_constant: , line:9:45, endln:9:46
-        |vpiFullName:work@ibex_pmp
-        |vpiActual:
-        \_int_typespec: , line:9:15, endln:9:27
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@ibex_pmp.PMPNumRegions), line:9:28, endln:9:41
-  |vpiDefName:work@ibex_pmp
-  |vpiNet:
-  \_logic_net: (work@ibex_pmp.r), line:20:22, endln:20:23
-    |vpiParent:
-    \_operation: , line:20:22, endln:20:39
-    |vpiName:r
-    |vpiFullName:work@ibex_pmp.r
-    |vpiNetType:1
-  |vpiGenStmt:
-  \_gen_for: 
+    \_parameter: (work@ibex_pmp.PMPNumRegions), line:9:28, endln:9:46
+  |vpiInternalScope:
+  \_gen_for: (work@ibex_pmp), line:20:3, endln:30:6
     |vpiParent:
     \_module_inst: work@ibex_pmp (work@ibex_pmp), file:${SURELOG_DIR}/tests/ParamOverload4/dut.sv, line:2:1, endln:34:10
+    |vpiFullName:work@ibex_pmp
+    |vpiVariables:
+    \_ref_var: (work@ibex_pmp.r), line:20:15, endln:20:16
+      |vpiParent:
+      \_gen_for: (work@ibex_pmp), line:20:3, endln:30:6
+      |vpiTypespec:
+      \_ref_typespec: (work@ibex_pmp.r.r), line:20:15, endln:20:16
+        |vpiParent:
+        \_ref_var: (work@ibex_pmp.r), line:20:15, endln:20:16
+        |vpiName:r
+        |vpiFullName:work@ibex_pmp.r.r
+        |vpiActual:
+        \_unsupported_typespec: (r), line:20:15, endln:20:16
+      |vpiName:r
+      |vpiFullName:work@ibex_pmp.r
+    |vpiInternalScope:
+    \_begin: (work@ibex_pmp.g_addr_exp), line:20:46, endln:30:6
+      |vpiParent:
+      \_gen_for: (work@ibex_pmp), line:20:3, endln:30:6
+      |vpiName:g_addr_exp
+      |vpiFullName:work@ibex_pmp.g_addr_exp
+    |vpiImportTypespec:
+    \_ref_var: (work@ibex_pmp.r), line:20:15, endln:20:16
     |vpiForInitStmt:
     \_assignment: , line:20:8, endln:20:20
       |vpiParent:
-      \_gen_for: 
+      \_gen_for: (work@ibex_pmp), line:20:3, endln:30:6
       |vpiRhs:
       \_constant: , line:20:19, endln:20:20
+        |vpiParent:
+        \_assignment: , line:20:8, endln:20:20
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
       |vpiLhs:
       \_ref_var: (work@ibex_pmp.r), line:20:15, endln:20:16
-        |vpiParent:
-        \_assignment: , line:20:8, endln:20:20
-        |vpiTypespec:
-        \_ref_typespec: (work@ibex_pmp.r)
-          |vpiParent:
-          \_ref_var: (work@ibex_pmp.r), line:20:15, endln:20:16
-          |vpiFullName:work@ibex_pmp.r
-          |vpiActual:
-          \_unsupported_typespec: (r), line:20:15, endln:20:16
-        |vpiName:r
-        |vpiFullName:work@ibex_pmp.r
     |vpiCondition:
     \_operation: , line:20:22, endln:20:39
       |vpiParent:
-      \_gen_for: 
+      \_gen_for: (work@ibex_pmp), line:20:3, endln:30:6
       |vpiOpType:20
       |vpiOperand:
       \_ref_obj: (work@ibex_pmp.r), line:20:22, endln:20:23
@@ -345,37 +333,58 @@ design: (unnamed)
         \_operation: , line:20:22, endln:20:39
         |vpiName:PMPNumRegions
         |vpiFullName:work@ibex_pmp.PMPNumRegions
+        |vpiActual:
+        \_parameter: (work@ibex_pmp.PMPNumRegions), line:9:28, endln:9:46
     |vpiForIncStmt:
     \_operation: , line:20:41, endln:20:42
       |vpiParent:
-      \_gen_for: 
+      \_gen_for: (work@ibex_pmp), line:20:3, endln:30:6
       |vpiOpType:62
       |vpiOperand:
-      \_ref_obj: (work@ibex_pmp.r)
+      \_ref_obj: (work@ibex_pmp.r), line:20:41, endln:20:44
         |vpiParent:
-        \_gen_for: 
+        \_gen_for: (work@ibex_pmp), line:20:3, endln:30:6
         |vpiName:r
         |vpiFullName:work@ibex_pmp.r
         |vpiActual:
         \_logic_net: (work@ibex_pmp.r), line:20:22, endln:20:23
     |vpiStmt:
-    \_named_begin: (work@ibex_pmp.g_addr_exp)
-      |vpiParent:
-      \_gen_for: 
-      |vpiName:g_addr_exp
-      |vpiFullName:work@ibex_pmp.g_addr_exp
-\_weaklyReferenced:
-\_int_typespec: , line:5:15, endln:5:27
-  |vpiParent:
-  \_parameter: (work@ibex_pmp.PMPGranularity), line:5:28, endln:5:42
-\_int_typespec: , line:7:15, endln:7:27
-  |vpiParent:
-  \_parameter: (work@ibex_pmp.PMPNumChan), line:7:28, endln:7:38
-\_int_typespec: , line:9:15, endln:9:27
-  |vpiParent:
-  \_parameter: (work@ibex_pmp.PMPNumRegions), line:9:28, endln:9:41
-\_unsupported_typespec: (r), line:20:15, endln:20:16
-  |vpiName:r
+    \_begin: (work@ibex_pmp.g_addr_exp), line:20:46, endln:30:6
+  |vpiTypedef:
+  \_int_typespec: , line:5:15, endln:5:27
+    |vpiParent:
+    \_module_inst: work@ibex_pmp (work@ibex_pmp), file:${SURELOG_DIR}/tests/ParamOverload4/dut.sv, line:2:1, endln:34:10
+  |vpiTypedef:
+  \_int_typespec: , line:7:15, endln:7:27
+    |vpiParent:
+    \_module_inst: work@ibex_pmp (work@ibex_pmp), file:${SURELOG_DIR}/tests/ParamOverload4/dut.sv, line:2:1, endln:34:10
+  |vpiTypedef:
+  \_int_typespec: , line:9:15, endln:9:27
+    |vpiParent:
+    \_module_inst: work@ibex_pmp (work@ibex_pmp), file:${SURELOG_DIR}/tests/ParamOverload4/dut.sv, line:2:1, endln:34:10
+  |vpiTypedef:
+  \_unsupported_typespec: (r), line:20:15, endln:20:16
+    |vpiParent:
+    \_module_inst: work@ibex_pmp (work@ibex_pmp), file:${SURELOG_DIR}/tests/ParamOverload4/dut.sv, line:2:1, endln:34:10
+    |vpiName:r
+  |vpiImportTypespec:
+  \_int_typespec: , line:5:15, endln:5:27
+  |vpiImportTypespec:
+  \_int_typespec: , line:7:15, endln:7:27
+  |vpiImportTypespec:
+  \_int_typespec: , line:9:15, endln:9:27
+  |vpiImportTypespec:
+  \_unsupported_typespec: (r), line:20:15, endln:20:16
+  |vpiImportTypespec:
+  \_logic_net: (work@ibex_pmp.r), line:20:22, endln:20:23
+    |vpiParent:
+    \_module_inst: work@ibex_pmp (work@ibex_pmp), file:${SURELOG_DIR}/tests/ParamOverload4/dut.sv, line:2:1, endln:34:10
+    |vpiName:r
+    |vpiFullName:work@ibex_pmp.r
+    |vpiNetType:1
+  |vpiDefName:work@ibex_pmp
+  |vpiNet:
+  \_logic_net: (work@ibex_pmp.r), line:20:22, endln:20:23
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -384,5 +393,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ParamOverload4/dut.sv | ${SURELOG_DIR}/build/regression/ParamOverload4/roundtrip/dut_000.sv | 12 | 34 |
+[roundtrip]: ${SURELOG_DIR}/tests/ParamOverload4/dut.sv | ${SURELOG_DIR}/build/regression/ParamOverload4/roundtrip/dut_000.sv | 14 | 34 |
 ============================== End RoundTrip Results ==============================

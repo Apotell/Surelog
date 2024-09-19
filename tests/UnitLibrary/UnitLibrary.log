@@ -93,14 +93,14 @@ LIB: libw
 [INF:CP0303] ${SURELOG_DIR}/tests/UnitLibrary/configs.cfg:28:1: Compile module "work@cfg3".
 [INF:CP0303] ${SURELOG_DIR}/tests/UnitLibrary/configs.cfg:9:1: Compile module "work@top".
 [INF:CP0303] ${SURELOG_DIR}/tests/UnitLibrary/configs.cfg:34:1: Compile module "work@top3".
-[INF:CP0302] Compile class "work@mailbox".
-[INF:CP0302] Compile class "work@process".
-[INF:CP0302] Compile class "work@semaphore".
+[INF:CP0302] Compile class "builtin::mailbox".
+[INF:CP0302] Compile class "builtin::process".
+[INF:CP0302] Compile class "builtin::semaphore".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 class_defn                                             8
-class_typespec                                         4
-class_var                                              3
+class_typespec                                         1
+class_var                                              1
 constant                                               5
 design                                                 1
 enum_const                                             5
@@ -111,29 +111,35 @@ int_typespec                                           9
 int_var                                                4
 io_decl                                               11
 logic_var                                              1
-module_inst                                           12
+module_inst                                           18
 package                                                1
 ref_module                                            14
-ref_typespec                                          13
+ref_typespec                                          11
+source_file                                           12
 task                                                   9
 === UHDM Object Stats End ===
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitLibrary/gate/adder.vg:9:1: Object 34 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitLibrary/gate/adder.vg:10:1: Object 35 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitLibrary/libwconfig/wtop.v:2:1: Object 38 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitLibrary/libwconfig/wtop.v:3:1: Object 39 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitLibrary/libwconfig/wtop.v:4:1: Object 40 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitLibrary/top.v:5:1: Object 45 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnitLibrary/slpp_unit/surelog.uhdm ...
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 6
 [WARNING] : 7
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/UnitLibrary/builtin.sv              | ${SURELOG_DIR}/build/regression/UnitLibrary/roundtrip/builtin_000.sv | 0 | 0 |
-[roundtrip]: ${SURELOG_DIR}/tests/UnitLibrary/gate/adder.vg           | ${SURELOG_DIR}/build/regression/UnitLibrary/roundtrip/adder_000.vg   | 6 | 11 |
-[roundtrip]: ${SURELOG_DIR}/tests/UnitLibrary/lib1/bot.sv             | ${SURELOG_DIR}/build/regression/UnitLibrary/roundtrip/bot_000.sv     | 1 | 2 |
-[roundtrip]: ${SURELOG_DIR}/tests/UnitLibrary/lib2/bot.sv             | ${SURELOG_DIR}/build/regression/UnitLibrary/roundtrip/bot_001.sv     | 3 | 4 |
-[roundtrip]: ${SURELOG_DIR}/tests/UnitLibrary/lib2/sub.v              | ${SURELOG_DIR}/build/regression/UnitLibrary/roundtrip/sub_000.v      | 1 | 2 |
-[roundtrip]: ${SURELOG_DIR}/tests/UnitLibrary/lib3/sub.v              | ${SURELOG_DIR}/build/regression/UnitLibrary/roundtrip/sub_001.v      | 1 | 2 |
-[roundtrip]: ${SURELOG_DIR}/tests/UnitLibrary/libwconfig/libw1/wsub.v | ${SURELOG_DIR}/build/regression/UnitLibrary/roundtrip/wsub_000.v     | 1 | 2 |
-[roundtrip]: ${SURELOG_DIR}/tests/UnitLibrary/libwconfig/libw2/wsub.v | ${SURELOG_DIR}/build/regression/UnitLibrary/roundtrip/wsub_001.v     | 1 | 2 |
-[roundtrip]: ${SURELOG_DIR}/tests/UnitLibrary/libwconfig/wtop.v       | ${SURELOG_DIR}/build/regression/UnitLibrary/roundtrip/wtop_000.v     | 4 | 5 |
-[roundtrip]: ${SURELOG_DIR}/tests/UnitLibrary/rtl/adder.v             | ${SURELOG_DIR}/build/regression/UnitLibrary/roundtrip/adder_000.v    | 3 | 5 |
-[roundtrip]: ${SURELOG_DIR}/tests/UnitLibrary/top.v                   | ${SURELOG_DIR}/build/regression/UnitLibrary/roundtrip/top_000.v      | 5 | 11 |
+[roundtrip]: ${SURELOG_DIR}/tests/UnitLibrary/gate/adder.vg           | ${SURELOG_DIR}/build/regression/UnitLibrary/roundtrip/adder_000.vg | 8 | 11 |
+[roundtrip]: ${SURELOG_DIR}/tests/UnitLibrary/lib1/bot.sv             | ${SURELOG_DIR}/build/regression/UnitLibrary/roundtrip/bot_000.sv   | 2 | 2 |
+[roundtrip]: ${SURELOG_DIR}/tests/UnitLibrary/lib2/bot.sv             | ${SURELOG_DIR}/build/regression/UnitLibrary/roundtrip/bot_001.sv   | 4 | 4 |
+[roundtrip]: ${SURELOG_DIR}/tests/UnitLibrary/lib2/sub.v              | ${SURELOG_DIR}/build/regression/UnitLibrary/roundtrip/sub_000.v    | 2 | 2 |
+[roundtrip]: ${SURELOG_DIR}/tests/UnitLibrary/lib3/sub.v              | ${SURELOG_DIR}/build/regression/UnitLibrary/roundtrip/sub_001.v    | 2 | 2 |
+[roundtrip]: ${SURELOG_DIR}/tests/UnitLibrary/libwconfig/libw1/wsub.v | ${SURELOG_DIR}/build/regression/UnitLibrary/roundtrip/wsub_000.v   | 2 | 2 |
+[roundtrip]: ${SURELOG_DIR}/tests/UnitLibrary/libwconfig/libw2/wsub.v | ${SURELOG_DIR}/build/regression/UnitLibrary/roundtrip/wsub_001.v   | 2 | 2 |
+[roundtrip]: ${SURELOG_DIR}/tests/UnitLibrary/libwconfig/wtop.v       | ${SURELOG_DIR}/build/regression/UnitLibrary/roundtrip/wtop_000.v   | 5 | 5 |
+[roundtrip]: ${SURELOG_DIR}/tests/UnitLibrary/rtl/adder.v             | ${SURELOG_DIR}/build/regression/UnitLibrary/roundtrip/adder_000.v  | 4 | 5 |
+[roundtrip]: ${SURELOG_DIR}/tests/UnitLibrary/top.v                   | ${SURELOG_DIR}/build/regression/UnitLibrary/roundtrip/top_000.v    | 7 | 11 |
 ============================== End RoundTrip Results ==============================

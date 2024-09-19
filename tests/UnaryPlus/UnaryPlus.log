@@ -46,69 +46,78 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             1
+begin                                                  1
 constant                                               2
 design                                                 1
 gen_for                                                1
-logic_net                                              1
 module_inst                                            1
-named_begin                                            1
 operation                                              2
 ref_obj                                                2
 ref_typespec                                           1
 ref_var                                                1
+source_file                                            1
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnaryPlus/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/UnaryPlus/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/UnaryPlus/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/UnaryPlus/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@alert_handler_reg_wrap (work@alert_handler_reg_wrap), file:${SURELOG_DIR}/tests/UnaryPlus/dut.sv, line:1:1, endln:4:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@alert_handler_reg_wrap
-  |vpiDefName:work@alert_handler_reg_wrap
-  |vpiNet:
-  \_logic_net: (work@alert_handler_reg_wrap.i_word), line:2:26, endln:2:32
-    |vpiParent:
-    \_operation: , line:2:26, endln:2:36
-    |vpiName:i_word
-    |vpiFullName:work@alert_handler_reg_wrap.i_word
-    |vpiNetType:1
-  |vpiGenStmt:
-  \_gen_for: 
+  |vpiName:work@alert_handler_reg_wrap
+  |vpiInternalScope:
+  \_gen_for: (work@alert_handler_reg_wrap), line:2:2, endln:3:6
     |vpiParent:
     \_module_inst: work@alert_handler_reg_wrap (work@alert_handler_reg_wrap), file:${SURELOG_DIR}/tests/UnaryPlus/dut.sv, line:1:1, endln:4:10
+    |vpiFullName:work@alert_handler_reg_wrap
+    |vpiVariables:
+    \_ref_var: (work@alert_handler_reg_wrap.i_word), line:2:14, endln:2:20
+      |vpiParent:
+      \_gen_for: (work@alert_handler_reg_wrap), line:2:2, endln:3:6
+      |vpiTypespec:
+      \_ref_typespec: (work@alert_handler_reg_wrap.i_word.i_word), line:2:14, endln:2:20
+        |vpiParent:
+        \_ref_var: (work@alert_handler_reg_wrap.i_word), line:2:14, endln:2:20
+        |vpiName:i_word
+        |vpiFullName:work@alert_handler_reg_wrap.i_word.i_word
+        |vpiActual:
+        \_unsupported_typespec: (i_word), line:2:14, endln:2:20
+      |vpiName:i_word
+      |vpiFullName:work@alert_handler_reg_wrap.i_word
+    |vpiInternalScope:
+    \_begin: (work@alert_handler_reg_wrap.g_dmem_intg_check), line:2:48, endln:3:6
+      |vpiParent:
+      \_gen_for: (work@alert_handler_reg_wrap), line:2:2, endln:3:6
+      |vpiName:g_dmem_intg_check
+      |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check
+    |vpiImportTypespec:
+    \_ref_var: (work@alert_handler_reg_wrap.i_word), line:2:14, endln:2:20
     |vpiForInitStmt:
     \_assignment: , line:2:7, endln:2:24
       |vpiParent:
-      \_gen_for: 
+      \_gen_for: (work@alert_handler_reg_wrap), line:2:2, endln:3:6
       |vpiRhs:
       \_constant: , line:2:23, endln:2:24
+        |vpiParent:
+        \_assignment: , line:2:7, endln:2:24
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
       |vpiLhs:
       \_ref_var: (work@alert_handler_reg_wrap.i_word), line:2:14, endln:2:20
-        |vpiParent:
-        \_assignment: , line:2:7, endln:2:24
-        |vpiTypespec:
-        \_ref_typespec: (work@alert_handler_reg_wrap.i_word)
-          |vpiParent:
-          \_ref_var: (work@alert_handler_reg_wrap.i_word), line:2:14, endln:2:20
-          |vpiFullName:work@alert_handler_reg_wrap.i_word
-          |vpiActual:
-          \_unsupported_typespec: (i_word), line:2:14, endln:2:20
-        |vpiName:i_word
-        |vpiFullName:work@alert_handler_reg_wrap.i_word
     |vpiCondition:
     \_operation: , line:2:26, endln:2:36
       |vpiParent:
-      \_gen_for: 
+      \_gen_for: (work@alert_handler_reg_wrap), line:2:2, endln:3:6
       |vpiOpType:20
       |vpiOperand:
       \_ref_obj: (work@alert_handler_reg_wrap.i_word), line:2:26, endln:2:32
@@ -129,7 +138,7 @@ design: (unnamed)
     |vpiForIncStmt:
     \_operation: , line:2:38, endln:2:46
       |vpiParent:
-      \_gen_for: 
+      \_gen_for: (work@alert_handler_reg_wrap), line:2:2, endln:3:6
       |vpiOpType:62
       |vpiOperand:
       \_ref_obj: (work@alert_handler_reg_wrap.i_word), line:2:40, endln:2:46
@@ -140,14 +149,24 @@ design: (unnamed)
         |vpiActual:
         \_logic_net: (work@alert_handler_reg_wrap.i_word), line:2:26, endln:2:32
     |vpiStmt:
-    \_named_begin: (work@alert_handler_reg_wrap.g_dmem_intg_check)
-      |vpiParent:
-      \_gen_for: 
-      |vpiName:g_dmem_intg_check
-      |vpiFullName:work@alert_handler_reg_wrap.g_dmem_intg_check
-\_weaklyReferenced:
-\_unsupported_typespec: (i_word), line:2:14, endln:2:20
-  |vpiName:i_word
+    \_begin: (work@alert_handler_reg_wrap.g_dmem_intg_check), line:2:48, endln:3:6
+  |vpiTypedef:
+  \_unsupported_typespec: (i_word), line:2:14, endln:2:20
+    |vpiParent:
+    \_module_inst: work@alert_handler_reg_wrap (work@alert_handler_reg_wrap), file:${SURELOG_DIR}/tests/UnaryPlus/dut.sv, line:1:1, endln:4:10
+    |vpiName:i_word
+  |vpiImportTypespec:
+  \_unsupported_typespec: (i_word), line:2:14, endln:2:20
+  |vpiImportTypespec:
+  \_logic_net: (work@alert_handler_reg_wrap.i_word), line:2:26, endln:2:32
+    |vpiParent:
+    \_module_inst: work@alert_handler_reg_wrap (work@alert_handler_reg_wrap), file:${SURELOG_DIR}/tests/UnaryPlus/dut.sv, line:1:1, endln:4:10
+    |vpiName:i_word
+    |vpiFullName:work@alert_handler_reg_wrap.i_word
+    |vpiNetType:1
+  |vpiDefName:work@alert_handler_reg_wrap
+  |vpiNet:
+  \_logic_net: (work@alert_handler_reg_wrap.i_word), line:2:26, endln:2:32
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -156,5 +175,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/UnaryPlus/dut.sv | ${SURELOG_DIR}/build/regression/UnaryPlus/roundtrip/dut_000.sv | 2 | 4 |
+[roundtrip]: ${SURELOG_DIR}/tests/UnaryPlus/dut.sv | ${SURELOG_DIR}/build/regression/UnaryPlus/roundtrip/dut_000.sv | 4 | 4 |
 ============================== End RoundTrip Results ==============================

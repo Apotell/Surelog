@@ -130,28 +130,32 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 always                                                 1
 assignment                                             1
+begin                                                  1
 constant                                               1
 design                                                 1
 hier_path                                              1
 logic_net                                              1
 logic_typespec                                         3
 module_inst                                            2
-named_begin                                            1
 package                                                1
 ref_module                                             1
 ref_obj                                                2
 ref_typespec                                           4
+source_file                                            1
 struct_typespec                                        1
 type_parameter                                         1
 typespec_member                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypeParamOverride/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/TypeParamOverride/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/TypeParamOverride/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/TypeParamOverride/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallPackages:
 \_package: ariane_axi_soc (ariane_axi_soc::), file:${SURELOG_DIR}/tests/TypeParamOverride/dut.sv, line:1:1, endln:8:11
   |vpiParent:
@@ -163,52 +167,54 @@ design: (unnamed)
     |vpiParent:
     \_package: ariane_axi_soc (ariane_axi_soc::), file:${SURELOG_DIR}/tests/TypeParamOverride/dut.sv, line:1:1, endln:8:11
     |vpiName:ariane_axi_soc::resp_slv_t
-    |vpiInstance:
-    \_package: ariane_axi_soc (ariane_axi_soc::), file:${SURELOG_DIR}/tests/TypeParamOverride/dut.sv, line:1:1, endln:8:11
     |vpiPacked:1
     |vpiTypespecMember:
-    \_typespec_member: (w_ready), line:4:19, endln:4:26
+    \_typespec_member: (w_ready), line:4:5, endln:4:27
       |vpiParent:
       \_struct_typespec: (ariane_axi_soc::resp_slv_t), line:3:9, endln:6:2
       |vpiName:w_ready
       |vpiTypespec:
-      \_ref_typespec: (ariane_axi_soc::ariane_axi_soc::resp_slv_t::w_ready)
+      \_ref_typespec: (ariane_axi_soc::resp_slv_t::w_ready), line:4:5, endln:4:10
         |vpiParent:
-        \_typespec_member: (w_ready), line:4:19, endln:4:26
-        |vpiFullName:ariane_axi_soc::ariane_axi_soc::resp_slv_t::w_ready
+        \_typespec_member: (w_ready), line:4:5, endln:4:27
+        |vpiFullName:ariane_axi_soc::resp_slv_t::w_ready
         |vpiActual:
         \_logic_typespec: , line:4:5, endln:4:10
-      |vpiRefFile:${SURELOG_DIR}/tests/TypeParamOverride/dut.sv
-      |vpiRefLineNo:4
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:4
-      |vpiRefEndColumnNo:10
     |vpiTypespecMember:
-    \_typespec_member: (b_valid), line:5:19, endln:5:26
+    \_typespec_member: (b_valid), line:5:5, endln:5:27
       |vpiParent:
       \_struct_typespec: (ariane_axi_soc::resp_slv_t), line:3:9, endln:6:2
       |vpiName:b_valid
       |vpiTypespec:
-      \_ref_typespec: (ariane_axi_soc::ariane_axi_soc::resp_slv_t::b_valid)
+      \_ref_typespec: (ariane_axi_soc::resp_slv_t::b_valid), line:5:5, endln:5:10
         |vpiParent:
-        \_typespec_member: (b_valid), line:5:19, endln:5:26
-        |vpiFullName:ariane_axi_soc::ariane_axi_soc::resp_slv_t::b_valid
+        \_typespec_member: (b_valid), line:5:5, endln:5:27
+        |vpiFullName:ariane_axi_soc::resp_slv_t::b_valid
         |vpiActual:
         \_logic_typespec: , line:5:5, endln:5:10
-      |vpiRefFile:${SURELOG_DIR}/tests/TypeParamOverride/dut.sv
-      |vpiRefLineNo:5
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:5
-      |vpiRefEndColumnNo:10
+  |vpiTypedef:
+  \_logic_typespec: , line:4:5, endln:4:10
+    |vpiParent:
+    \_package: ariane_axi_soc (ariane_axi_soc::), file:${SURELOG_DIR}/tests/TypeParamOverride/dut.sv, line:1:1, endln:8:11
+  |vpiTypedef:
+  \_logic_typespec: , line:5:5, endln:5:10
+    |vpiParent:
+    \_package: ariane_axi_soc (ariane_axi_soc::), file:${SURELOG_DIR}/tests/TypeParamOverride/dut.sv, line:1:1, endln:8:11
+  |vpiImportTypespec:
+  \_struct_typespec: (ariane_axi_soc::resp_slv_t), line:3:9, endln:6:2
+  |vpiImportTypespec:
+  \_logic_typespec: , line:4:5, endln:4:10
+  |vpiImportTypespec:
+  \_logic_typespec: , line:5:5, endln:5:10
   |vpiDefName:ariane_axi_soc
 |uhdmallModules:
 \_module_inst: work@ariane_testharness (work@ariane_testharness), file:${SURELOG_DIR}/tests/TypeParamOverride/dut.sv, line:23:1, endln:31:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@ariane_testharness
+  |vpiName:work@ariane_testharness
   |vpiDefName:work@ariane_testharness
   |vpiRefModule:
-  \_ref_module: work@axi_err_slv (i_gpio_err_slv), line:27:3, endln:27:17
+  \_ref_module: work@axi_err_slv (i_gpio_err_slv), line:25:1, endln:28:3
     |vpiParent:
     \_module_inst: work@ariane_testharness (work@ariane_testharness), file:${SURELOG_DIR}/tests/TypeParamOverride/dut.sv, line:23:1, endln:31:10
     |vpiName:i_gpio_err_slv
@@ -219,40 +225,62 @@ design: (unnamed)
 \_module_inst: work@axi_err_slv (work@axi_err_slv), file:${SURELOG_DIR}/tests/TypeParamOverride/dut.sv, line:10:1, endln:20:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@axi_err_slv
+  |vpiName:work@axi_err_slv
   |vpiParameter:
-  \_type_parameter: (work@axi_err_slv.resp_t), line:11:19, endln:11:25
+  \_type_parameter: (work@axi_err_slv.resp_t), line:11:13, endln:11:25
     |vpiParent:
     \_module_inst: work@axi_err_slv (work@axi_err_slv), file:${SURELOG_DIR}/tests/TypeParamOverride/dut.sv, line:10:1, endln:20:10
     |vpiName:resp_t
     |vpiFullName:work@axi_err_slv.resp_t
     |vpiTypespec:
-    \_ref_typespec: (work@axi_err_slv.resp_t)
+    \_ref_typespec: (work@axi_err_slv.resp_t), line:11:33, endln:11:38
       |vpiParent:
-      \_type_parameter: (work@axi_err_slv.resp_t), line:11:19, endln:11:25
+      \_type_parameter: (work@axi_err_slv.resp_t), line:11:13, endln:11:25
       |vpiFullName:work@axi_err_slv.resp_t
       |vpiActual:
       \_logic_typespec: , line:11:33, endln:11:38
-  |vpiDefName:work@axi_err_slv
-  |vpiNet:
+  |vpiTypedef:
+  \_type_parameter: (work@axi_err_slv.resp_t), line:11:13, endln:11:25
+  |vpiTypedef:
+  \_logic_typespec: , line:11:33, endln:11:38
+    |vpiParent:
+    \_module_inst: work@axi_err_slv (work@axi_err_slv), file:${SURELOG_DIR}/tests/TypeParamOverride/dut.sv, line:10:1, endln:20:10
+  |vpiImportTypespec:
+  \_type_parameter: (work@axi_err_slv.resp_t), line:11:13, endln:11:25
+  |vpiImportTypespec:
+  \_logic_typespec: , line:11:33, endln:11:38
+  |vpiImportTypespec:
   \_logic_net: (work@axi_err_slv.err_resp), line:14:11, endln:14:19
     |vpiParent:
     \_module_inst: work@axi_err_slv (work@axi_err_slv), file:${SURELOG_DIR}/tests/TypeParamOverride/dut.sv, line:10:1, endln:20:10
     |vpiTypespec:
-    \_ref_typespec: (work@axi_err_slv.err_resp)
+    \_ref_typespec: (work@axi_err_slv.err_resp.err_resp), line:14:3, endln:14:9
       |vpiParent:
       \_logic_net: (work@axi_err_slv.err_resp), line:14:11, endln:14:19
-      |vpiFullName:work@axi_err_slv.err_resp
+      |vpiName:err_resp
+      |vpiFullName:work@axi_err_slv.err_resp.err_resp
       |vpiActual:
-      \_logic_typespec: , line:11:33, endln:11:38
+      \_type_parameter: (work@axi_err_slv.resp_t), line:11:13, endln:11:25
     |vpiName:err_resp
     |vpiFullName:work@axi_err_slv.err_resp
+  |vpiImportTypespec:
+  \_logic_net: (work@axi_err_slv.w_ready), line:17:14, endln:17:21
+    |vpiParent:
+    \_module_inst: work@axi_err_slv (work@axi_err_slv), file:${SURELOG_DIR}/tests/TypeParamOverride/dut.sv, line:10:1, endln:20:10
+    |vpiName:w_ready
+    |vpiFullName:work@axi_err_slv.w_ready
+    |vpiNetType:1
+  |vpiDefName:work@axi_err_slv
+  |vpiNet:
+  \_logic_net: (work@axi_err_slv.err_resp), line:14:11, endln:14:19
+  |vpiNet:
+  \_logic_net: (work@axi_err_slv.w_ready), line:17:14, endln:17:21
   |vpiProcess:
   \_always: , line:16:3, endln:19:6
     |vpiParent:
     \_module_inst: work@axi_err_slv (work@axi_err_slv), file:${SURELOG_DIR}/tests/TypeParamOverride/dut.sv, line:10:1, endln:20:10
     |vpiStmt:
-    \_named_begin: (work@axi_err_slv.proc_w_channel), line:16:23, endln:16:37
+    \_begin: (work@axi_err_slv.proc_w_channel), line:16:15, endln:19:6
       |vpiParent:
       \_always: , line:16:3, endln:19:6
       |vpiName:proc_w_channel
@@ -260,41 +288,37 @@ design: (unnamed)
       |vpiStmt:
       \_assignment: , line:17:5, endln:17:29
         |vpiParent:
-        \_named_begin: (work@axi_err_slv.proc_w_channel), line:16:23, endln:16:37
+        \_begin: (work@axi_err_slv.proc_w_channel), line:16:15, endln:19:6
         |vpiOpType:82
         |vpiBlocking:1
         |vpiRhs:
         \_constant: , line:17:25, endln:17:29
+          |vpiParent:
+          \_assignment: , line:17:5, endln:17:29
           |vpiDecompile:1'b0
           |vpiSize:1
           |BIN:0
           |vpiConstType:3
         |vpiLhs:
-        \_hier_path: (err_resp.w_ready), line:17:5, endln:17:21
+        \_hier_path: (err_resp.w_ready), line:17:13, endln:17:21
           |vpiParent:
           \_assignment: , line:17:5, endln:17:29
           |vpiActual:
-          \_ref_obj: (err_resp), line:17:14, endln:17:21
+          \_ref_obj: (err_resp), line:17:13, endln:17:21
             |vpiParent:
-            \_hier_path: (err_resp.w_ready), line:17:5, endln:17:21
+            \_hier_path: (err_resp.w_ready), line:17:13, endln:17:21
             |vpiName:err_resp
+            |vpiActual:
+            \_logic_net: (work@axi_err_slv.err_resp), line:14:11, endln:14:19
           |vpiActual:
           \_ref_obj: (w_ready), line:17:14, endln:17:21
             |vpiParent:
-            \_hier_path: (err_resp.w_ready), line:17:5, endln:17:21
+            \_hier_path: (err_resp.w_ready), line:17:13, endln:17:21
             |vpiName:w_ready
+            |vpiActual:
+            \_logic_net: (work@axi_err_slv.w_ready), line:17:14, endln:17:21
           |vpiName:err_resp.w_ready
     |vpiAlwaysType:2
-\_weaklyReferenced:
-\_logic_typespec: , line:4:5, endln:4:10
-  |vpiInstance:
-  \_package: ariane_axi_soc (ariane_axi_soc::), file:${SURELOG_DIR}/tests/TypeParamOverride/dut.sv, line:1:1, endln:8:11
-\_logic_typespec: , line:5:5, endln:5:10
-  |vpiInstance:
-  \_package: ariane_axi_soc (ariane_axi_soc::), file:${SURELOG_DIR}/tests/TypeParamOverride/dut.sv, line:1:1, endln:8:11
-\_logic_typespec: , line:11:33, endln:11:38
-  |vpiParent:
-  \_type_parameter: (work@axi_err_slv.resp_t), line:11:19, endln:11:25
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -303,5 +327,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/TypeParamOverride/dut.sv | ${SURELOG_DIR}/build/regression/TypeParamOverride/roundtrip/dut_000.sv | 11 | 31 |
+[roundtrip]: ${SURELOG_DIR}/tests/TypeParamOverride/dut.sv | ${SURELOG_DIR}/build/regression/TypeParamOverride/roundtrip/dut_000.sv | 13 | 31 |
 ============================== End RoundTrip Results ==============================

@@ -145,43 +145,60 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 bit_select                                             1
-constant                                               9
+constant                                               7
 cont_assign                                            1
 design                                                 1
 hier_path                                              1
-logic_net                                              2
-logic_typespec                                         2
+logic_typespec                                         1
 module_inst                                            1
 packed_array_typespec                                  2
-range                                                  4
+range                                                  3
 ref_obj                                                4
 ref_typespec                                           5
+source_file                                            1
 struct_typespec                                        3
+struct_var                                             1
 typespec_member                                        3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedArrayBind/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PackedArrayBind/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/PackedArrayBind/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/PackedArrayBind/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/PackedArrayBind/dut.sv, line:1:1, endln:26:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@PreDecodeStage
+  |vpiName:work@PreDecodeStage
+  |vpiVariables:
+  \_struct_var: (work@PreDecodeStage.replayEntryOut), line:22:18, endln:22:32
+    |vpiParent:
+    \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/PackedArrayBind/dut.sv, line:1:1, endln:26:10
+    |vpiTypespec:
+    \_ref_typespec: (work@PreDecodeStage.replayEntryOut.ReplayQueueEntry), line:22:1, endln:22:17
+      |vpiParent:
+      \_struct_var: (work@PreDecodeStage.replayEntryOut), line:22:18, endln:22:32
+      |vpiName:ReplayQueueEntry
+      |vpiFullName:work@PreDecodeStage.replayEntryOut.ReplayQueueEntry
+      |vpiActual:
+      \_struct_typespec: (ReplayQueueEntry), line:15:9, endln:19:6
+    |vpiName:replayEntryOut
+    |vpiFullName:work@PreDecodeStage.replayEntryOut
+    |vpiVisibility:1
   |vpiTypedef:
   \_logic_typespec: (MSHR_IndexPath), line:3:9, endln:3:20
     |vpiParent:
     \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/PackedArrayBind/dut.sv, line:1:1, endln:26:10
     |vpiName:MSHR_IndexPath
-    |vpiInstance:
-    \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/PackedArrayBind/dut.sv, line:1:1, endln:26:10
     |vpiRange:
     \_range: , line:3:15, endln:3:20
       |vpiParent:
-      \_logic_typespec: (MSHR_IndexPath), line:3:9, endln:3:20
+      \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/PackedArrayBind/dut.sv, line:1:1, endln:26:10
       |vpiLeftRange:
       \_constant: , line:3:16, endln:3:17
         |vpiParent:
@@ -199,94 +216,107 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_struct_typespec: (MemIssueQueueEntry), line:10:9, endln:13:2
-    |vpiParent:
-    \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/PackedArrayBind/dut.sv, line:1:1, endln:26:10
-    |vpiName:MemIssueQueueEntry
-    |vpiInstance:
-    \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/PackedArrayBind/dut.sv, line:1:1, endln:26:10
-    |vpiPacked:1
-    |vpiTypespecMember:
-    \_typespec_member: (memOpInfo), line:12:15, endln:12:24
-      |vpiParent:
-      \_struct_typespec: (MemIssueQueueEntry), line:10:9, endln:13:2
-      |vpiName:memOpInfo
-      |vpiTypespec:
-      \_ref_typespec: (work@PreDecodeStage.MemIssueQueueEntry.memOpInfo)
-        |vpiParent:
-        \_typespec_member: (memOpInfo), line:12:15, endln:12:24
-        |vpiFullName:work@PreDecodeStage.MemIssueQueueEntry.memOpInfo
-        |vpiActual:
-        \_struct_typespec: (MemOpInfo), line:5:9, endln:8:2
-      |vpiRefFile:${SURELOG_DIR}/tests/PackedArrayBind/dut.sv
-      |vpiRefLineNo:12
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:12
-      |vpiRefEndColumnNo:14
-  |vpiTypedef:
   \_struct_typespec: (MemOpInfo), line:5:9, endln:8:2
     |vpiParent:
     \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/PackedArrayBind/dut.sv, line:1:1, endln:26:10
     |vpiName:MemOpInfo
-    |vpiInstance:
-    \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/PackedArrayBind/dut.sv, line:1:1, endln:26:10
     |vpiPacked:1
     |vpiTypespecMember:
-    \_typespec_member: (mshrID), line:7:20, endln:7:26
+    \_typespec_member: (mshrID), line:7:5, endln:7:27
       |vpiParent:
       \_struct_typespec: (MemOpInfo), line:5:9, endln:8:2
       |vpiName:mshrID
       |vpiTypespec:
-      \_ref_typespec: (work@PreDecodeStage.MemOpInfo.mshrID)
+      \_ref_typespec: (work@PreDecodeStage.MemOpInfo.mshrID.MSHR_IndexPath), line:7:5, endln:7:19
         |vpiParent:
-        \_typespec_member: (mshrID), line:7:20, endln:7:26
-        |vpiFullName:work@PreDecodeStage.MemOpInfo.mshrID
+        \_typespec_member: (mshrID), line:7:5, endln:7:27
+        |vpiName:MSHR_IndexPath
+        |vpiFullName:work@PreDecodeStage.MemOpInfo.mshrID.MSHR_IndexPath
         |vpiActual:
         \_logic_typespec: (MSHR_IndexPath), line:3:9, endln:3:20
-      |vpiRefFile:${SURELOG_DIR}/tests/PackedArrayBind/dut.sv
-      |vpiRefLineNo:7
-      |vpiRefColumnNo:5
-      |vpiRefEndLineNo:7
-      |vpiRefEndColumnNo:19
+  |vpiTypedef:
+  \_struct_typespec: (MemIssueQueueEntry), line:10:9, endln:13:2
+    |vpiParent:
+    \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/PackedArrayBind/dut.sv, line:1:1, endln:26:10
+    |vpiName:MemIssueQueueEntry
+    |vpiPacked:1
+    |vpiTypespecMember:
+    \_typespec_member: (memOpInfo), line:12:5, endln:12:25
+      |vpiParent:
+      \_struct_typespec: (MemIssueQueueEntry), line:10:9, endln:13:2
+      |vpiName:memOpInfo
+      |vpiTypespec:
+      \_ref_typespec: (work@PreDecodeStage.MemIssueQueueEntry.memOpInfo.MemOpInfo), line:12:5, endln:12:14
+        |vpiParent:
+        \_typespec_member: (memOpInfo), line:12:5, endln:12:25
+        |vpiName:MemOpInfo
+        |vpiFullName:work@PreDecodeStage.MemIssueQueueEntry.memOpInfo.MemOpInfo
+        |vpiActual:
+        \_struct_typespec: (MemOpInfo), line:5:9, endln:8:2
   |vpiTypedef:
   \_struct_typespec: (ReplayQueueEntry), line:15:9, endln:19:6
     |vpiParent:
     \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/PackedArrayBind/dut.sv, line:1:1, endln:26:10
     |vpiName:ReplayQueueEntry
-    |vpiInstance:
-    \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/PackedArrayBind/dut.sv, line:1:1, endln:26:10
     |vpiPacked:1
     |vpiTypespecMember:
-    \_typespec_member: (memData), line:17:36, endln:17:43
+    \_typespec_member: (memData), line:17:9, endln:17:44
       |vpiParent:
       \_struct_typespec: (ReplayQueueEntry), line:15:9, endln:19:6
       |vpiName:memData
       |vpiTypespec:
-      \_ref_typespec: (work@PreDecodeStage.ReplayQueueEntry.memData)
+      \_ref_typespec: (work@PreDecodeStage.ReplayQueueEntry.memData.MemIssueQueueEntry), line:17:9, endln:17:35
         |vpiParent:
-        \_typespec_member: (memData), line:17:36, endln:17:43
-        |vpiFullName:work@PreDecodeStage.ReplayQueueEntry.memData
+        \_typespec_member: (memData), line:17:9, endln:17:44
+        |vpiName:MemIssueQueueEntry
+        |vpiFullName:work@PreDecodeStage.ReplayQueueEntry.memData.MemIssueQueueEntry
         |vpiActual:
         \_packed_array_typespec: , line:17:9, endln:17:35
-      |vpiRefFile:${SURELOG_DIR}/tests/PackedArrayBind/dut.sv
-      |vpiRefLineNo:17
-      |vpiRefColumnNo:9
-      |vpiRefEndLineNo:17
-      |vpiRefEndColumnNo:35
-  |vpiDefName:work@PreDecodeStage
-  |vpiNet:
-  \_logic_net: (work@PreDecodeStage.replayEntryOut), line:22:18, endln:22:32
+  |vpiTypedef:
+  \_packed_array_typespec: , line:17:9, endln:17:35
     |vpiParent:
     \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/PackedArrayBind/dut.sv, line:1:1, endln:26:10
-    |vpiName:replayEntryOut
-    |vpiFullName:work@PreDecodeStage.replayEntryOut
-  |vpiNet:
-  \_logic_net: (work@PreDecodeStage.mshrID), line:24:9, endln:24:15
-    |vpiParent:
-    \_cont_assign: , line:24:9, endln:24:60
-    |vpiName:mshrID
-    |vpiFullName:work@PreDecodeStage.mshrID
-    |vpiNetType:1
+    |vpiRange:
+    \_range: , line:17:28, endln:17:35
+      |vpiParent:
+      \_struct_typespec: (ReplayQueueEntry), line:15:9, endln:19:6
+      |vpiLeftRange:
+      \_constant: , line:17:29, endln:17:30
+        |vpiParent:
+        \_range: , line:17:28, endln:17:35
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:17:33, endln:17:34
+        |vpiParent:
+        \_range: , line:17:28, endln:17:35
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_ref_typespec: (work@PreDecodeStage.MemIssueQueueEntry), line:17:9, endln:17:27
+      |vpiParent:
+      \_packed_array_typespec: , line:17:9, endln:17:35
+      |vpiName:MemIssueQueueEntry
+      |vpiFullName:work@PreDecodeStage.MemIssueQueueEntry
+      |vpiActual:
+      \_struct_typespec: (MemIssueQueueEntry), line:10:9, endln:13:2
+  |vpiImportTypespec:
+  \_logic_typespec: (MSHR_IndexPath), line:3:9, endln:3:20
+  |vpiImportTypespec:
+  \_struct_typespec: (MemOpInfo), line:5:9, endln:8:2
+  |vpiImportTypespec:
+  \_struct_typespec: (MemIssueQueueEntry), line:10:9, endln:13:2
+  |vpiImportTypespec:
+  \_struct_typespec: (ReplayQueueEntry), line:15:9, endln:19:6
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:17:9, endln:17:35
+  |vpiImportTypespec:
+  \_struct_var: (work@PreDecodeStage.replayEntryOut), line:22:18, endln:22:32
+  |vpiDefName:work@PreDecodeStage
   |vpiContAssign:
   \_cont_assign: , line:24:9, endln:24:60
     |vpiParent:
@@ -300,14 +330,20 @@ design: (unnamed)
         |vpiParent:
         \_hier_path: (replayEntryOut.memData[0].memOpInfo.mshrID), line:24:18, endln:24:60
         |vpiName:replayEntryOut
+        |vpiActual:
+        \_struct_var: (work@PreDecodeStage.replayEntryOut), line:22:18, endln:22:32
       |vpiActual:
       \_bit_select: (replayEntryOut.memData[0]), line:24:33, endln:24:40
         |vpiParent:
         \_hier_path: (replayEntryOut.memData[0].memOpInfo.mshrID), line:24:18, endln:24:60
         |vpiName:memData
         |vpiFullName:replayEntryOut.memData[0]
+        |vpiActual:
+        \_typespec_member: (memData), line:17:9, endln:17:44
         |vpiIndex:
         \_constant: , line:24:41, endln:24:42
+          |vpiParent:
+          \_hier_path: (replayEntryOut.memData[0].memOpInfo.mshrID), line:24:18, endln:24:60
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
@@ -317,78 +353,25 @@ design: (unnamed)
         |vpiParent:
         \_hier_path: (replayEntryOut.memData[0].memOpInfo.mshrID), line:24:18, endln:24:60
         |vpiName:memOpInfo
+        |vpiActual:
+        \_typespec_member: (memOpInfo), line:12:5, endln:12:25
       |vpiActual:
       \_ref_obj: (work@PreDecodeStage.mshrID), line:24:54, endln:24:60
         |vpiParent:
         \_hier_path: (replayEntryOut.memData[0].memOpInfo.mshrID), line:24:18, endln:24:60
         |vpiName:mshrID
         |vpiFullName:work@PreDecodeStage.mshrID
+        |vpiActual:
+        \_typespec_member: (mshrID), line:7:5, endln:7:27
       |vpiName:replayEntryOut.memData[0].memOpInfo.mshrID
     |vpiLhs:
     \_ref_obj: (work@PreDecodeStage.mshrID), line:24:9, endln:24:15
       |vpiParent:
-      \_cont_assign: , line:24:9, endln:24:60
+      \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/PackedArrayBind/dut.sv, line:1:1, endln:26:10
       |vpiName:mshrID
       |vpiFullName:work@PreDecodeStage.mshrID
       |vpiActual:
-      \_logic_net: (work@PreDecodeStage.mshrID), line:24:9, endln:24:15
-\_weaklyReferenced:
-\_logic_typespec: (MSHR_IndexPath), line:3:9, endln:3:20
-  |vpiName:MSHR_IndexPath
-  |vpiTypedefAlias:
-  \_ref_typespec: (MSHR_IndexPath)
-    |vpiParent:
-    \_logic_typespec: (MSHR_IndexPath), line:3:9, endln:3:20
-    |vpiFullName:MSHR_IndexPath
-    |vpiActual:
-    \_logic_typespec: (MSHR_IndexPath), line:3:9, endln:3:20
-  |vpiRange:
-  \_range: , line:3:15, endln:3:20
-    |vpiParent:
-    \_logic_typespec: (MSHR_IndexPath), line:3:9, endln:3:20
-    |vpiLeftRange:
-    \_constant: , line:3:16, endln:3:17
-      |vpiParent:
-      \_range: , line:3:15, endln:3:20
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:18, endln:3:19
-      |vpiParent:
-      \_range: , line:3:15, endln:3:20
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_packed_array_typespec: , line:17:9, endln:17:35
-  |vpiRange:
-  \_range: , line:17:28, endln:17:35
-    |vpiParent:
-    \_packed_array_typespec: , line:17:9, endln:17:35
-    |vpiLeftRange:
-    \_constant: , line:17:29, endln:17:30
-      |vpiParent:
-      \_range: , line:17:28, endln:17:35
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:17:33, endln:17:34
-      |vpiParent:
-      \_range: , line:17:28, endln:17:35
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-  |vpiElemTypespec:
-  \_ref_typespec: 
-    |vpiParent:
-    \_packed_array_typespec: , line:17:9, endln:17:35
-    |vpiActual:
-    \_struct_typespec: (MemIssueQueueEntry), line:10:9, endln:13:2
+      \_typespec_member: (mshrID), line:7:5, endln:7:27
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -397,5 +380,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PackedArrayBind/dut.sv | ${SURELOG_DIR}/build/regression/PackedArrayBind/roundtrip/dut_000.sv | 8 | 26 |
+[roundtrip]: ${SURELOG_DIR}/tests/PackedArrayBind/dut.sv | ${SURELOG_DIR}/build/regression/PackedArrayBind/roundtrip/dut_000.sv | 10 | 26 |
 ============================== End RoundTrip Results ==============================

@@ -281,7 +281,7 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/HierPathInterfBlock/dut.sv:12:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-begin                                                  1
+begin                                                  3
 constant                                               4
 design                                                 1
 func_call                                              1
@@ -294,40 +294,40 @@ integer_var                                            2
 interface_inst                                         1
 method_func_call                                       7
 module_inst                                            1
-named_begin                                            2
 ref_module                                             1
 ref_obj                                               12
 ref_typespec                                           2
 return_stmt                                            2
+source_file                                            1
 sys_func_call                                          8
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathInterfBlock/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/HierPathInterfBlock/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/HierPathInterfBlock/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/HierPathInterfBlock/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallInterfaces:
 \_interface_inst: work@intf (work@intf), file:${SURELOG_DIR}/tests/HierPathInterfBlock/dut.sv, line:1:1, endln:10:13
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@intf
-  |vpiDefName:work@intf
-  |vpiTaskFunc:
+  |vpiName:work@intf
+  |vpiInternalScope:
   \_function: (work@intf.f), line:2:5, endln:4:16
     |vpiParent:
     \_interface_inst: work@intf (work@intf), file:${SURELOG_DIR}/tests/HierPathInterfBlock/dut.sv, line:1:1, endln:10:13
     |vpiName:f
     |vpiFullName:work@intf.f
-    |vpiVisibility:1
-    |vpiAutomatic:1
-    |vpiReturn:
+    |vpiVariables:
     \_integer_var: (work@intf.f), line:2:24, endln:2:31
       |vpiParent:
       \_function: (work@intf.f), line:2:5, endln:4:16
       |vpiTypespec:
-      \_ref_typespec: (work@intf.f)
+      \_ref_typespec: (work@intf.f), line:2:24, endln:2:31
         |vpiParent:
         \_integer_var: (work@intf.f), line:2:24, endln:2:31
         |vpiFullName:work@intf.f
@@ -335,56 +335,71 @@ design: (unnamed)
         \_integer_typespec: , line:2:24, endln:2:31
       |vpiFullName:work@intf.f
       |vpiSigned:1
+    |vpiTypedef:
+    \_integer_typespec: , line:2:24, endln:2:31
+      |vpiParent:
+      \_function: (work@intf.f), line:2:5, endln:4:16
+      |vpiSigned:1
+    |vpiImportTypespec:
+    \_integer_typespec: , line:2:24, endln:2:31
+    |vpiImportTypespec:
+    \_integer_var: (work@intf.f), line:2:24, endln:2:31
+    |vpiVisibility:1
+    |vpiAutomatic:1
+    |vpiReturn:
+    \_integer_var: (work@intf.f), line:2:24, endln:2:31
     |vpiStmt:
-    \_return_stmt: , line:3:9, endln:3:15
+    \_return_stmt: , line:3:9, endln:3:17
       |vpiParent:
       \_function: (work@intf.f), line:2:5, endln:4:16
       |vpiCondition:
       \_constant: , line:3:16, endln:3:17
+        |vpiParent:
+        \_return_stmt: , line:3:9, endln:3:17
         |vpiDecompile:1
         |vpiSize:64
         |UINT:1
         |vpiConstType:9
-    |vpiInstance:
-    \_interface_inst: work@intf (work@intf), file:${SURELOG_DIR}/tests/HierPathInterfBlock/dut.sv, line:1:1, endln:10:13
+  |vpiImportTypespec:
+  \_function: (work@intf.f), line:2:5, endln:4:16
+  |vpiDefName:work@intf
+  |vpiTaskFunc:
+  \_function: (work@intf.f), line:2:5, endln:4:16
   |vpiGenStmt:
-  \_gen_if: , line:5:5, endln:5:7
+  \_gen_if: , line:5:5, endln:9:8
     |vpiParent:
     \_interface_inst: work@intf (work@intf), file:${SURELOG_DIR}/tests/HierPathInterfBlock/dut.sv, line:1:1, endln:10:13
     |vpiCondition:
     \_constant: , line:5:9, endln:5:10
       |vpiParent:
-      \_gen_if: , line:5:5, endln:5:7
+      \_interface_inst: work@intf (work@intf), file:${SURELOG_DIR}/tests/HierPathInterfBlock/dut.sv, line:1:1, endln:10:13
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
       |vpiConstType:9
     |vpiStmt:
-    \_named_begin: (work@intf.blk)
+    \_begin: (work@intf.blk), line:5:12, endln:9:8
       |vpiParent:
-      \_gen_if: , line:5:5, endln:5:7
+      \_gen_if: , line:5:5, endln:9:8
       |vpiName:blk
       |vpiFullName:work@intf.blk
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathInterfBlock/dut.sv, line:12:1, endln:32:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiTaskFunc:
+  |vpiName:work@top
+  |vpiInternalScope:
   \_function: (work@top.f), line:14:5, endln:16:16
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathInterfBlock/dut.sv, line:12:1, endln:32:10
     |vpiName:f
     |vpiFullName:work@top.f
-    |vpiVisibility:1
-    |vpiAutomatic:1
-    |vpiReturn:
+    |vpiVariables:
     \_integer_var: (work@top.f), line:14:24, endln:14:31
       |vpiParent:
       \_function: (work@top.f), line:14:5, endln:16:16
       |vpiTypespec:
-      \_ref_typespec: (work@top.f)
+      \_ref_typespec: (work@top.f), line:14:24, endln:14:31
         |vpiParent:
         \_integer_var: (work@top.f), line:14:24, endln:14:31
         |vpiFullName:work@top.f
@@ -392,18 +407,54 @@ design: (unnamed)
         \_integer_typespec: , line:14:24, endln:14:31
       |vpiFullName:work@top.f
       |vpiSigned:1
+    |vpiTypedef:
+    \_integer_typespec: , line:14:24, endln:14:31
+      |vpiParent:
+      \_function: (work@top.f), line:14:5, endln:16:16
+      |vpiSigned:1
+    |vpiImportTypespec:
+    \_integer_typespec: , line:14:24, endln:14:31
+    |vpiImportTypespec:
+    \_integer_var: (work@top.f), line:14:24, endln:14:31
+    |vpiVisibility:1
+    |vpiAutomatic:1
+    |vpiReturn:
+    \_integer_var: (work@top.f), line:14:24, endln:14:31
     |vpiStmt:
-    \_return_stmt: , line:15:9, endln:15:15
+    \_return_stmt: , line:15:9, endln:15:17
       |vpiParent:
       \_function: (work@top.f), line:14:5, endln:16:16
       |vpiCondition:
       \_constant: , line:15:16, endln:15:17
+        |vpiParent:
+        \_return_stmt: , line:15:9, endln:15:17
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
         |vpiConstType:9
-    |vpiInstance:
+  |vpiImportTypespec:
+  \_function: (work@top.f), line:14:5, endln:16:16
+  |vpiImportTypespec:
+  \_logic_net: (work@top.blk), line:24:18, endln:24:21
+    |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathInterfBlock/dut.sv, line:12:1, endln:32:10
+    |vpiName:blk
+    |vpiFullName:work@top.blk
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@top.i), line:25:18, endln:25:19
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathInterfBlock/dut.sv, line:12:1, endln:32:10
+    |vpiName:i
+    |vpiFullName:work@top.i
+    |vpiNetType:1
+  |vpiDefName:work@top
+  |vpiTaskFunc:
+  \_function: (work@top.f), line:14:5, endln:16:16
+  |vpiNet:
+  \_logic_net: (work@top.blk), line:24:18, endln:24:21
+  |vpiNet:
+  \_logic_net: (work@top.i), line:25:18, endln:25:19
   |vpiProcess:
   \_initial: , line:22:5, endln:31:8
     |vpiParent:
@@ -438,8 +489,10 @@ design: (unnamed)
             |vpiParent:
             \_hier_path: (blk.f), line:24:18, endln:24:25
             |vpiName:blk
+            |vpiActual:
+            \_logic_net: (work@top.blk), line:24:18, endln:24:21
           |vpiActual:
-          \_method_func_call: (f), line:24:22, endln:24:23
+          \_method_func_call: (f), line:24:22, endln:24:25
             |vpiParent:
             \_hier_path: (blk.f), line:24:18, endln:24:25
             |vpiName:f
@@ -458,8 +511,10 @@ design: (unnamed)
             |vpiParent:
             \_hier_path: (i.f), line:25:18, endln:25:23
             |vpiName:i
+            |vpiActual:
+            \_logic_net: (work@top.i), line:25:18, endln:25:19
           |vpiActual:
-          \_method_func_call: (f), line:25:20, endln:25:21
+          \_method_func_call: (f), line:25:20, endln:25:23
             |vpiParent:
             \_hier_path: (i.f), line:25:18, endln:25:23
             |vpiName:f
@@ -478,13 +533,17 @@ design: (unnamed)
             |vpiParent:
             \_hier_path: (i.blk.f), line:26:18, endln:26:27
             |vpiName:i
+            |vpiActual:
+            \_logic_net: (work@top.i), line:25:18, endln:25:19
           |vpiActual:
           \_ref_obj: (blk), line:26:20, endln:26:23
             |vpiParent:
             \_hier_path: (i.blk.f), line:26:18, endln:26:27
             |vpiName:blk
+            |vpiActual:
+            \_logic_net: (work@top.blk), line:24:18, endln:24:21
           |vpiActual:
-          \_method_func_call: (f), line:26:24, endln:26:25
+          \_method_func_call: (f), line:26:24, endln:26:27
             |vpiParent:
             \_hier_path: (i.blk.f), line:26:18, endln:26:27
             |vpiName:f
@@ -503,8 +562,10 @@ design: (unnamed)
             |vpiParent:
             \_hier_path: (top.f), line:27:18, endln:27:25
             |vpiName:top
+            |vpiActual:
+            \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathInterfBlock/dut.sv, line:12:1, endln:32:10
           |vpiActual:
-          \_method_func_call: (f), line:27:22, endln:27:23
+          \_method_func_call: (f), line:27:22, endln:27:25
             |vpiParent:
             \_hier_path: (top.f), line:27:18, endln:27:25
             |vpiName:f
@@ -523,13 +584,17 @@ design: (unnamed)
             |vpiParent:
             \_hier_path: (top.blk.f), line:28:18, endln:28:29
             |vpiName:top
+            |vpiActual:
+            \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathInterfBlock/dut.sv, line:12:1, endln:32:10
           |vpiActual:
           \_ref_obj: (blk), line:28:22, endln:28:25
             |vpiParent:
             \_hier_path: (top.blk.f), line:28:18, endln:28:29
             |vpiName:blk
+            |vpiActual:
+            \_logic_net: (work@top.blk), line:24:18, endln:24:21
           |vpiActual:
-          \_method_func_call: (f), line:28:26, endln:28:27
+          \_method_func_call: (f), line:28:26, endln:28:29
             |vpiParent:
             \_hier_path: (top.blk.f), line:28:18, endln:28:29
             |vpiName:f
@@ -548,13 +613,17 @@ design: (unnamed)
             |vpiParent:
             \_hier_path: (top.i.f), line:29:18, endln:29:27
             |vpiName:top
+            |vpiActual:
+            \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathInterfBlock/dut.sv, line:12:1, endln:32:10
           |vpiActual:
           \_ref_obj: (i), line:29:22, endln:29:23
             |vpiParent:
             \_hier_path: (top.i.f), line:29:18, endln:29:27
             |vpiName:i
+            |vpiActual:
+            \_logic_net: (work@top.i), line:25:18, endln:25:19
           |vpiActual:
-          \_method_func_call: (f), line:29:24, endln:29:25
+          \_method_func_call: (f), line:29:24, endln:29:27
             |vpiParent:
             \_hier_path: (top.i.f), line:29:18, endln:29:27
             |vpiName:f
@@ -573,25 +642,31 @@ design: (unnamed)
             |vpiParent:
             \_hier_path: (top.i.blk.f), line:30:18, endln:30:31
             |vpiName:top
+            |vpiActual:
+            \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathInterfBlock/dut.sv, line:12:1, endln:32:10
           |vpiActual:
           \_ref_obj: (i), line:30:22, endln:30:23
             |vpiParent:
             \_hier_path: (top.i.blk.f), line:30:18, endln:30:31
             |vpiName:i
+            |vpiActual:
+            \_logic_net: (work@top.i), line:25:18, endln:25:19
           |vpiActual:
           \_ref_obj: (blk), line:30:24, endln:30:27
             |vpiParent:
             \_hier_path: (top.i.blk.f), line:30:18, endln:30:31
             |vpiName:blk
+            |vpiActual:
+            \_logic_net: (work@top.blk), line:24:18, endln:24:21
           |vpiActual:
-          \_method_func_call: (f), line:30:28, endln:30:29
+          \_method_func_call: (f), line:30:28, endln:30:31
             |vpiParent:
             \_hier_path: (top.i.blk.f), line:30:18, endln:30:31
             |vpiName:f
           |vpiName:top.i.blk.f
         |vpiName:$display
   |vpiRefModule:
-  \_ref_module: work@intf (i), line:13:10, endln:13:11
+  \_ref_module: work@intf (i), line:13:5, endln:13:14
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathInterfBlock/dut.sv, line:12:1, endln:32:10
     |vpiName:i
@@ -599,28 +674,23 @@ design: (unnamed)
     |vpiActual:
     \_interface_inst: work@intf (work@intf), file:${SURELOG_DIR}/tests/HierPathInterfBlock/dut.sv, line:1:1, endln:10:13
   |vpiGenStmt:
-  \_gen_if: , line:17:5, endln:17:7
+  \_gen_if: , line:17:5, endln:21:8
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathInterfBlock/dut.sv, line:12:1, endln:32:10
     |vpiCondition:
     \_constant: , line:17:9, endln:17:10
       |vpiParent:
-      \_gen_if: , line:17:5, endln:17:7
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathInterfBlock/dut.sv, line:12:1, endln:32:10
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
       |vpiConstType:9
     |vpiStmt:
-    \_named_begin: (work@top.blk)
+    \_begin: (work@top.blk), line:17:12, endln:21:8
       |vpiParent:
-      \_gen_if: , line:17:5, endln:17:7
+      \_gen_if: , line:17:5, endln:21:8
       |vpiName:blk
       |vpiFullName:work@top.blk
-\_weaklyReferenced:
-\_integer_typespec: , line:2:24, endln:2:31
-  |vpiSigned:1
-\_integer_typespec: , line:14:24, endln:14:31
-  |vpiSigned:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -639,5 +709,5 @@ design: (unnamed)
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/HierPathInterfBlock/dut.sv | ${SURELOG_DIR}/build/regression/HierPathInterfBlock/roundtrip/dut_000.sv | 14 | 32 |
+[roundtrip]: ${SURELOG_DIR}/tests/HierPathInterfBlock/dut.sv | ${SURELOG_DIR}/build/regression/HierPathInterfBlock/roundtrip/dut_000.sv | 25 | 32 |
 ============================== End RoundTrip Results ==============================

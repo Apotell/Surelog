@@ -17,24 +17,25 @@
 [INF:CP0303] ${SURELOG_DIR}/tests/Escape/top1.v:36:3: Compile module "work@middle::nested".
 [INF:CP0304] ${SURELOG_DIR}/tests/Escape/top1.v:2:1: Compile interface "work@my_interface".
 [INF:CP0303] ${SURELOG_DIR}/tests/Escape/top.v:2:1: Compile module "work@top".
-[INF:CP0302] Compile class "work@mailbox".
-[INF:CP0302] Compile class "work@process".
-[INF:CP0302] Compile class "work@semaphore".
+[INF:CP0302] Compile class "builtin::mailbox".
+[INF:CP0302] Compile class "builtin::process".
+[INF:CP0302] Compile class "builtin::semaphore".
 [INF:CP0302] ${SURELOG_DIR}/tests/Escape/top.v:8:1: Compile class "work@env".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-class_defn                                            10
-class_typespec                                         4
-class_var                                              3
+class_defn                                             9
+class_typespec                                         1
+class_var                                              1
 clocking_block                                         1
 clocking_io_decl                                       2
-constant                                               6
+constant                                              12
 cont_assign                                            1
 design                                                 1
 enum_const                                             5
 enum_typespec                                          1
 enum_var                                               1
 event_control                                          1
+extends                                                1
 function                                              10
 gate                                                   1
 immediate_assert                                       1
@@ -42,28 +43,37 @@ int_typespec                                           9
 int_var                                                4
 interface_inst                                         1
 io_decl                                               12
-logic_net                                             12
-logic_typespec                                         7
+logic_net                                             13
+logic_typespec                                         3
 logic_var                                              1
-module_inst                                            6
+module_inst                                           10
 operation                                              2
 package                                                1
 port                                                  10
+preproc_macro_definition                               2
 prim_term                                              1
+range                                                  3
 ref_module                                             2
-ref_obj                                               15
-ref_typespec                                          21
+ref_obj                                               11
+ref_typespec                                          16
+source_file                                            2
 task                                                   9
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
+[ERR:UH0734] ${SURELOG_DIR}/tests/Escape/top.v:13:12: Failed to bind object: "id: 145, name: uvm_resource_db::read_by_name".
+[ERR:EL0535] ${SURELOG_DIR}/tests/Escape/top.v:13:12: Illegal implicit net "id:145, name: uvm_resource_db::read_by_name".
+[ERR:IG0809] ${SURELOG_DIR}/tests/Escape/top.v:13:12: Object 145 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/tests/Escape/top.v:8:19: Object 140 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/tests/Escape/top.v:62:2: Object 28 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Escape/slpp_unit/surelog.uhdm ...
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 5
 [WARNING] : 5
 [   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
+[LINT]: ${SURELOG_DIR}/tests/Escape/top.v:8:19: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/Escape/top.v:8:1: Non synthesizable construct, work@env
 [LINT]: ${SURELOG_DIR}/tests/Escape/top1.v:8:11: Non synthesizable construct, select
 [LINT]: ${SURELOG_DIR}/tests/Escape/top1.v:8:19: Non synthesizable construct, data
@@ -71,7 +81,6 @@ unsupported_typespec                                   1
 ============================== End Linting Results ==============================
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/Escape/builtin.sv | ${SURELOG_DIR}/build/regression/Escape/roundtrip/builtin_000.sv | 0 | 0 |
-[roundtrip]: ${SURELOG_DIR}/tests/Escape/top.v      | ${SURELOG_DIR}/build/regression/Escape/roundtrip/top_000.v      | 42 | 70 |
-[roundtrip]: ${SURELOG_DIR}/tests/Escape/top1.v     | ${SURELOG_DIR}/build/regression/Escape/roundtrip/top1_000.v     | 22 | 39 |
+[roundtrip]: ${SURELOG_DIR}/tests/Escape/top.v  | ${SURELOG_DIR}/build/regression/Escape/roundtrip/top_000.v  | 49 | 70 |
+[roundtrip]: ${SURELOG_DIR}/tests/Escape/top1.v | ${SURELOG_DIR}/build/regression/Escape/roundtrip/top1_000.v | 25 | 39 |
 ============================== End RoundTrip Results ==============================

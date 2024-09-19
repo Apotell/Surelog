@@ -2501,7 +2501,7 @@ n<> u<2495> t<Constant_select> p<2496> c<2494> l<210:27> el<210:27>
 n<> u<2496> t<Net_lvalue> p<2541> c<2493> s<2540> l<210:20> el<210:26>
 n<scalar_t> u<2497> t<StringConst> p<2498> l<210:29> el<210:37>
 n<> u<2498> t<Ps_type_identifier> p<2499> c<2497> l<210:29> el<210:37>
-n<> u<2499> t<Simple_type> p<2500> c<2498> l<210:29> el<210:37>
+n<scalar_t> u<2499> t<Simple_type> p<2500> c<2498> l<210:29> el<210:37>
 n<> u<2500> t<Casting_type> p<2538> c<2499> s<2537> l<210:29> el<210:37>
 n<32> u<2501> t<IntConst> p<2502> l<210:41> el<210:43>
 n<> u<2502> t<Primary_literal> p<2503> c<2501> l<210:41> el<210:43>
@@ -2974,7 +2974,7 @@ n<> u<2968> t<Variable_lvalue> p<2981> c<2965> s<2969> l<248:29> el<248:40>
 n<> u<2969> t<AssignOp_Assign> p<2981> s<2980> l<248:41> el<248:42>
 n<scalar_t> u<2970> t<StringConst> p<2971> l<248:43> el<248:51>
 n<> u<2971> t<Ps_type_identifier> p<2972> c<2970> l<248:43> el<248:51>
-n<> u<2972> t<Simple_type> p<2973> c<2971> l<248:43> el<248:51>
+n<scalar_t> u<2972> t<Simple_type> p<2973> c<2971> l<248:43> el<248:51>
 n<> u<2973> t<Casting_type> p<2978> c<2972> s<2977> l<248:43> el<248:51>
 n<lz> u<2974> t<StringConst> p<2975> l<248:53> el<248:55>
 n<> u<2975> t<Primary_literal> p<2976> c<2974> l<248:53> el<248:55>
@@ -3001,7 +3001,7 @@ n<> u<2995> t<Variable_lvalue> p<3008> c<2992> s<2996> l<249:29> el<249:40>
 n<> u<2996> t<AssignOp_Assign> p<3008> s<3007> l<249:41> el<249:42>
 n<scalar_t> u<2997> t<StringConst> p<2998> l<249:43> el<249:51>
 n<> u<2998> t<Ps_type_identifier> p<2999> c<2997> l<249:43> el<249:51>
-n<> u<2999> t<Simple_type> p<3000> c<2998> l<249:43> el<249:51>
+n<scalar_t> u<2999> t<Simple_type> p<3000> c<2998> l<249:43> el<249:51>
 n<> u<3000> t<Casting_type> p<3005> c<2999> s<3004> l<249:43> el<249:51>
 n<tz> u<3001> t<StringConst> p<3002> l<249:53> el<249:55>
 n<> u<3002> t<Primary_literal> p<3003> c<3001> l<249:53> el<249:55>
@@ -3542,7 +3542,7 @@ n<> u<3536> t<Variable_lvalue> p<3567> c<3533> s<3537> l<264:31> el<264:42>
 n<> u<3537> t<AssignOp_Assign> p<3567> s<3566> l<264:43> el<264:44>
 n<scalar_t> u<3538> t<StringConst> p<3539> l<264:45> el<264:53>
 n<> u<3539> t<Ps_type_identifier> p<3540> c<3538> l<264:45> el<264:53>
-n<> u<3540> t<Simple_type> p<3541> c<3539> l<264:45> el<264:53>
+n<scalar_t> u<3540> t<Simple_type> p<3541> c<3539> l<264:45> el<264:53>
 n<> u<3541> t<Casting_type> p<3564> c<3540> s<3563> l<264:45> el<264:53>
 n<$signed> u<3542> t<StringConst> p<3543> l<264:56> el<264:62>
 n<> u<3543> t<System_task_names> p<3561> c<3542> s<3560> l<264:55> el<264:62>
@@ -3587,7 +3587,7 @@ n<> u<3581> t<Variable_lvalue> p<3612> c<3578> s<3582> l<265:32> el<265:43>
 n<> u<3582> t<AssignOp_Assign> p<3612> s<3611> l<265:44> el<265:45>
 n<scalar_t> u<3583> t<StringConst> p<3584> l<265:46> el<265:54>
 n<> u<3584> t<Ps_type_identifier> p<3585> c<3583> l<265:46> el<265:54>
-n<> u<3585> t<Simple_type> p<3586> c<3584> l<265:46> el<265:54>
+n<scalar_t> u<3585> t<Simple_type> p<3586> c<3584> l<265:46> el<265:54>
 n<> u<3586> t<Casting_type> p<3609> c<3585> s<3608> l<265:46> el<265:54>
 n<$signed> u<3587> t<StringConst> p<3588> l<265:57> el<265:63>
 n<> u<3588> t<System_task_names> p<3606> c<3587> s<3605> l<265:56> el<265:63>
@@ -4548,13 +4548,15 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 always                                                 3
-array_typespec                                         2
+array_net                                              1
+array_typespec                                         3
+array_var                                              1
 assignment                                            29
 begin                                                 12
 bit_select                                             5
 case_item                                              7
 case_stmt                                              2
-constant                                              39
+constant                                              33
 cont_assign                                            3
 design                                                 1
 event_control                                          2
@@ -4562,850 +4564,1250 @@ gen_region                                             1
 hier_path                                              8
 if_else                                                2
 if_stmt                                                1
-logic_net                                             39
-logic_typespec                                        37
+logic_net                                             12
+logic_typespec                                        38
+logic_var                                             17
 module_inst                                            1
-operation                                             31
+operation                                             33
 packed_array_typespec                                  2
 port                                                  25
 range                                                  9
-ref_obj                                              116
-ref_typespec                                          71
+ref_obj                                               91
+ref_typespec                                          77
+source_file                                            1
 struct_typespec                                        2
+struct_var                                             2
 typespec_member                                       36
-unsupported_typespec                                  29
+unsupported_typespec                                  39
 === UHDM Object Stats End ===
+[ERR:UH0734] ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:4:9: Failed to bind object: "id: 9, name: FLOAT32_EXP_WIDTH".
+[ERR:EL0535] ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:4:9: Illegal implicit net "id:9, name: FLOAT32_EXP_WIDTH".
+[ERR:UH0734] ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:5:9: Failed to bind object: "id: 17, name: FLOAT32_SIG_WIDTH".
+[ERR:EL0535] ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:5:9: Illegal implicit net "id:17, name: FLOAT32_SIG_WIDTH".
+[ERR:IG0809] ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:4:9: Object 9 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:5:9: Object 17 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierBitSlice/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/HierBitSlice/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/HierBitSlice/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@int_execute_stage
-  |vpiDefName:work@int_execute_stage
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.clk), line:54:39, endln:54:42
-    |vpiParent:
-    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
-    |vpiName:clk
-    |vpiFullName:work@int_execute_stage.clk
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.reset), line:55:39, endln:55:44
-    |vpiParent:
-    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
-    |vpiName:reset
-    |vpiFullName:work@int_execute_stage.reset
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.of_operand1), line:58:39, endln:58:50
+  |vpiName:work@int_execute_stage
+  |vpiVariables:
+  \_logic_var: (work@int_execute_stage.of_operand1), line:58:39, endln:58:50
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:of_operand1
     |vpiFullName:work@int_execute_stage.of_operand1
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.of_operand2), line:59:39, endln:59:50
+    |vpiVisibility:1
+  |vpiVariables:
+  \_logic_var: (work@int_execute_stage.of_operand2), line:59:39, endln:59:50
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:of_operand2
     |vpiFullName:work@int_execute_stage.of_operand2
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.of_mask_value), line:60:39, endln:60:52
+    |vpiVisibility:1
+  |vpiVariables:
+  \_logic_var: (work@int_execute_stage.of_mask_value), line:60:39, endln:60:52
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:of_mask_value
     |vpiFullName:work@int_execute_stage.of_mask_value
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.of_instruction_valid), line:61:39, endln:61:59
+    |vpiVisibility:1
+  |vpiVariables:
+  \_struct_var: (work@int_execute_stage.of_instruction), line:62:39, endln:62:53
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
-    |vpiName:of_instruction_valid
-    |vpiFullName:work@int_execute_stage.of_instruction_valid
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.of_instruction), line:62:39, endln:62:53
-    |vpiParent:
-    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiTypespec:
+    \_ref_typespec: (work@int_execute_stage.of_instruction.decoded_instruction_t), line:62:11, endln:62:32
+      |vpiParent:
+      \_struct_var: (work@int_execute_stage.of_instruction), line:62:39, endln:62:53
+      |vpiName:decoded_instruction_t
+      |vpiFullName:work@int_execute_stage.of_instruction.decoded_instruction_t
+      |vpiActual:
+      \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
     |vpiName:of_instruction
     |vpiFullName:work@int_execute_stage.of_instruction
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.of_thread_idx), line:63:39, endln:63:52
+    |vpiVisibility:1
+  |vpiVariables:
+  \_logic_var: (work@int_execute_stage.of_thread_idx), line:63:39, endln:63:52
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:of_thread_idx
     |vpiFullName:work@int_execute_stage.of_thread_idx
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.of_subcycle), line:64:39, endln:64:50
+    |vpiVisibility:1
+  |vpiVariables:
+  \_logic_var: (work@int_execute_stage.of_subcycle), line:64:39, endln:64:50
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:of_subcycle
     |vpiFullName:work@int_execute_stage.of_subcycle
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.wb_rollback_en), line:67:39, endln:67:53
-    |vpiParent:
-    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
-    |vpiName:wb_rollback_en
-    |vpiFullName:work@int_execute_stage.wb_rollback_en
-    |vpiNetType:36
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.wb_rollback_thread_idx), line:68:39, endln:68:61
+    |vpiVisibility:1
+  |vpiVariables:
+  \_logic_var: (work@int_execute_stage.wb_rollback_thread_idx), line:68:39, endln:68:61
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:wb_rollback_thread_idx
     |vpiFullName:work@int_execute_stage.wb_rollback_thread_idx
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.ix_instruction_valid), line:71:39, endln:71:59
+    |vpiVisibility:1
+  |vpiVariables:
+  \_struct_var: (work@int_execute_stage.ix_instruction), line:72:39, endln:72:53
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
-    |vpiName:ix_instruction_valid
-    |vpiFullName:work@int_execute_stage.ix_instruction_valid
-    |vpiNetType:36
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.ix_instruction), line:72:39, endln:72:53
-    |vpiParent:
-    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiTypespec:
+    \_ref_typespec: (work@int_execute_stage.ix_instruction.decoded_instruction_t), line:72:12, endln:72:33
+      |vpiParent:
+      \_struct_var: (work@int_execute_stage.ix_instruction), line:72:39, endln:72:53
+      |vpiName:decoded_instruction_t
+      |vpiFullName:work@int_execute_stage.ix_instruction.decoded_instruction_t
+      |vpiActual:
+      \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
     |vpiName:ix_instruction
     |vpiFullName:work@int_execute_stage.ix_instruction
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.ix_result), line:73:39, endln:73:48
+    |vpiVisibility:1
+  |vpiVariables:
+  \_logic_var: (work@int_execute_stage.ix_result), line:73:39, endln:73:48
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:ix_result
     |vpiFullName:work@int_execute_stage.ix_result
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.ix_mask_value), line:74:39, endln:74:52
+    |vpiVisibility:1
+  |vpiVariables:
+  \_logic_var: (work@int_execute_stage.ix_mask_value), line:74:39, endln:74:52
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:ix_mask_value
     |vpiFullName:work@int_execute_stage.ix_mask_value
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.ix_thread_idx), line:75:39, endln:75:52
+    |vpiVisibility:1
+  |vpiVariables:
+  \_logic_var: (work@int_execute_stage.ix_thread_idx), line:75:39, endln:75:52
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:ix_thread_idx
     |vpiFullName:work@int_execute_stage.ix_thread_idx
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.ix_rollback_en), line:76:39, endln:76:53
+    |vpiVisibility:1
+  |vpiVariables:
+  \_logic_var: (work@int_execute_stage.ix_rollback_pc), line:77:39, endln:77:53
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
-    |vpiName:ix_rollback_en
-    |vpiFullName:work@int_execute_stage.ix_rollback_en
-    |vpiNetType:36
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.ix_rollback_pc), line:77:39, endln:77:53
-    |vpiParent:
-    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiTypespec:
+    \_ref_typespec: (work@int_execute_stage.ix_rollback_pc.scalar_t), line:77:12, endln:77:20
+      |vpiParent:
+      \_logic_var: (work@int_execute_stage.ix_rollback_pc), line:77:39, endln:77:53
+      |vpiName:scalar_t
+      |vpiFullName:work@int_execute_stage.ix_rollback_pc.scalar_t
+      |vpiActual:
+      \_logic_typespec: (scalar_t), line:50:9, endln:50:20
     |vpiName:ix_rollback_pc
     |vpiFullName:work@int_execute_stage.ix_rollback_pc
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.ix_subcycle), line:78:39, endln:78:50
+    |vpiVisibility:1
+  |vpiVariables:
+  \_logic_var: (work@int_execute_stage.ix_subcycle), line:78:39, endln:78:50
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:ix_subcycle
     |vpiFullName:work@int_execute_stage.ix_subcycle
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.ix_privileged_op_fault), line:79:39, endln:79:61
+    |vpiVisibility:1
+  |vpiVariables:
+  \_logic_var: (work@int_execute_stage), line:82:5, endln:82:57
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
-    |vpiName:ix_privileged_op_fault
-    |vpiFullName:work@int_execute_stage.ix_privileged_op_fault
-    |vpiNetType:36
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.cr_eret_address), line:82:39, endln:82:54
+    |vpiTypespec:
+    \_ref_typespec: (work@int_execute_stage.scalar_t), line:82:11, endln:82:19
+      |vpiParent:
+      \_logic_var: (work@int_execute_stage), line:82:5, endln:82:57
+      |vpiName:scalar_t
+      |vpiFullName:work@int_execute_stage.scalar_t
+      |vpiActual:
+      \_logic_typespec: (scalar_t), line:50:9, endln:50:20
+    |vpiFullName:work@int_execute_stage
+  |vpiVariables:
+  \_array_var: (work@int_execute_stage.cr_eret_address), line:82:39, endln:82:57
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiSize:1
+    |vpiTypespec:
+    \_ref_typespec: (work@int_execute_stage.cr_eret_address), line:82:39, endln:82:54
+      |vpiParent:
+      \_array_var: (work@int_execute_stage.cr_eret_address), line:82:39, endln:82:57
+      |vpiFullName:work@int_execute_stage.cr_eret_address
+      |vpiActual:
+      \_array_typespec: , line:82:39, endln:82:54
     |vpiName:cr_eret_address
     |vpiFullName:work@int_execute_stage.cr_eret_address
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.cr_supervisor_en), line:83:39, endln:83:55
-    |vpiParent:
-    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
-    |vpiName:cr_supervisor_en
-    |vpiFullName:work@int_execute_stage.cr_supervisor_en
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.ix_perf_uncond_branch), line:86:39, endln:86:60
-    |vpiParent:
-    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
-    |vpiName:ix_perf_uncond_branch
-    |vpiFullName:work@int_execute_stage.ix_perf_uncond_branch
-    |vpiNetType:36
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.ix_perf_cond_branch_taken), line:87:39, endln:87:64
-    |vpiParent:
-    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
-    |vpiName:ix_perf_cond_branch_taken
-    |vpiFullName:work@int_execute_stage.ix_perf_cond_branch_taken
-    |vpiNetType:36
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.ix_perf_cond_branch_not_taken), line:88:39, endln:88:68
-    |vpiParent:
-    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
-    |vpiName:ix_perf_cond_branch_not_taken
-    |vpiFullName:work@int_execute_stage.ix_perf_cond_branch_not_taken
-    |vpiNetType:36
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.vector_result), line:90:14, endln:90:27
+    |vpiRandType:1
+    |vpiVisibility:1
+    |vpiArrayType:1
+    |vpiRange:
+    \_range: , line:82:55, endln:82:56
+      |vpiParent:
+      \_array_var: (work@int_execute_stage.cr_eret_address), line:82:39, endln:82:57
+      |vpiRightRange:
+      \_operation: , line:82:55, endln:82:56
+        |vpiParent:
+        \_range: , line:82:55, endln:82:56
+        |vpiOpType:11
+        |vpiOperand:
+        \_constant: , line:82:55, endln:82:56
+          |vpiParent:
+          \_range: , line:82:55, endln:82:56
+          |vpiDecompile:8
+          |vpiSize:64
+          |UINT:8
+          |vpiConstType:9
+    |vpiReg:
+    \_logic_var: (work@int_execute_stage), line:82:5, endln:82:57
+  |vpiVariables:
+  \_logic_var: (work@int_execute_stage.eret), line:91:11, endln:91:15
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiTypespec:
-    \_ref_typespec: (work@int_execute_stage.vector_result)
+    \_ref_typespec: (work@int_execute_stage.eret), line:91:5, endln:91:10
       |vpiParent:
-      \_logic_net: (work@int_execute_stage.vector_result), line:90:14, endln:90:27
-      |vpiFullName:work@int_execute_stage.vector_result
-      |vpiActual:
-      \_unsupported_typespec: (vector_t), line:90:5, endln:90:13
-    |vpiName:vector_result
-    |vpiFullName:work@int_execute_stage.vector_result
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.eret), line:91:11, endln:91:15
-    |vpiParent:
-    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
-    |vpiTypespec:
-    \_ref_typespec: (work@int_execute_stage.eret)
-      |vpiParent:
-      \_logic_net: (work@int_execute_stage.eret), line:91:11, endln:91:15
+      \_logic_var: (work@int_execute_stage.eret), line:91:11, endln:91:15
       |vpiFullName:work@int_execute_stage.eret
       |vpiActual:
       \_logic_typespec: , line:91:5, endln:91:10
     |vpiName:eret
     |vpiFullName:work@int_execute_stage.eret
-    |vpiNetType:36
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.privileged_op_fault), line:92:11, endln:92:30
+    |vpiVisibility:1
+  |vpiVariables:
+  \_logic_var: (work@int_execute_stage.privileged_op_fault), line:92:11, endln:92:30
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiTypespec:
-    \_ref_typespec: (work@int_execute_stage.privileged_op_fault)
+    \_ref_typespec: (work@int_execute_stage.privileged_op_fault), line:92:5, endln:92:10
       |vpiParent:
-      \_logic_net: (work@int_execute_stage.privileged_op_fault), line:92:11, endln:92:30
+      \_logic_var: (work@int_execute_stage.privileged_op_fault), line:92:11, endln:92:30
       |vpiFullName:work@int_execute_stage.privileged_op_fault
       |vpiActual:
       \_logic_typespec: , line:92:5, endln:92:10
     |vpiName:privileged_op_fault
     |vpiFullName:work@int_execute_stage.privileged_op_fault
-    |vpiNetType:36
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.branch_taken), line:93:11, endln:93:23
+    |vpiVisibility:1
+  |vpiVariables:
+  \_logic_var: (work@int_execute_stage.branch_taken), line:93:11, endln:93:23
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiTypespec:
-    \_ref_typespec: (work@int_execute_stage.branch_taken)
+    \_ref_typespec: (work@int_execute_stage.branch_taken), line:93:5, endln:93:10
       |vpiParent:
-      \_logic_net: (work@int_execute_stage.branch_taken), line:93:11, endln:93:23
+      \_logic_var: (work@int_execute_stage.branch_taken), line:93:11, endln:93:23
       |vpiFullName:work@int_execute_stage.branch_taken
       |vpiActual:
       \_logic_typespec: , line:93:5, endln:93:10
     |vpiName:branch_taken
     |vpiFullName:work@int_execute_stage.branch_taken
-    |vpiNetType:36
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.conditional_branch), line:94:11, endln:94:29
+    |vpiVisibility:1
+  |vpiVariables:
+  \_logic_var: (work@int_execute_stage.conditional_branch), line:94:11, endln:94:29
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiTypespec:
-    \_ref_typespec: (work@int_execute_stage.conditional_branch)
+    \_ref_typespec: (work@int_execute_stage.conditional_branch), line:94:5, endln:94:10
       |vpiParent:
-      \_logic_net: (work@int_execute_stage.conditional_branch), line:94:11, endln:94:29
+      \_logic_var: (work@int_execute_stage.conditional_branch), line:94:11, endln:94:29
       |vpiFullName:work@int_execute_stage.conditional_branch
       |vpiActual:
       \_logic_typespec: , line:94:5, endln:94:10
     |vpiName:conditional_branch
     |vpiFullName:work@int_execute_stage.conditional_branch
-    |vpiNetType:36
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.valid_instruction), line:95:11, endln:95:28
+    |vpiVisibility:1
+  |vpiVariables:
+  \_logic_var: (work@int_execute_stage.valid_instruction), line:95:11, endln:95:28
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiTypespec:
-    \_ref_typespec: (work@int_execute_stage.valid_instruction)
+    \_ref_typespec: (work@int_execute_stage.valid_instruction), line:95:5, endln:95:10
       |vpiParent:
-      \_logic_net: (work@int_execute_stage.valid_instruction), line:95:11, endln:95:28
+      \_logic_var: (work@int_execute_stage.valid_instruction), line:95:11, endln:95:28
       |vpiFullName:work@int_execute_stage.valid_instruction
       |vpiActual:
       \_logic_typespec: , line:95:5, endln:95:10
     |vpiName:valid_instruction
     |vpiFullName:work@int_execute_stage.valid_instruction
+    |vpiVisibility:1
+  |vpiReg:
+  \_logic_var: (work@int_execute_stage.of_operand1), line:58:39, endln:58:50
+  |vpiReg:
+  \_logic_var: (work@int_execute_stage.of_operand2), line:59:39, endln:59:50
+  |vpiReg:
+  \_logic_var: (work@int_execute_stage.of_mask_value), line:60:39, endln:60:52
+  |vpiReg:
+  \_logic_var: (work@int_execute_stage.of_thread_idx), line:63:39, endln:63:52
+  |vpiReg:
+  \_logic_var: (work@int_execute_stage.of_subcycle), line:64:39, endln:64:50
+  |vpiReg:
+  \_logic_var: (work@int_execute_stage.wb_rollback_thread_idx), line:68:39, endln:68:61
+  |vpiReg:
+  \_logic_var: (work@int_execute_stage.ix_result), line:73:39, endln:73:48
+  |vpiReg:
+  \_logic_var: (work@int_execute_stage.ix_mask_value), line:74:39, endln:74:52
+  |vpiReg:
+  \_logic_var: (work@int_execute_stage.ix_thread_idx), line:75:39, endln:75:52
+  |vpiReg:
+  \_logic_var: (work@int_execute_stage.ix_rollback_pc), line:77:39, endln:77:53
+  |vpiReg:
+  \_logic_var: (work@int_execute_stage.ix_subcycle), line:78:39, endln:78:50
+  |vpiReg:
+  \_logic_var: (work@int_execute_stage), line:82:5, endln:82:57
+  |vpiReg:
+  \_logic_var: (work@int_execute_stage.eret), line:91:11, endln:91:15
+  |vpiReg:
+  \_logic_var: (work@int_execute_stage.privileged_op_fault), line:92:11, endln:92:30
+  |vpiReg:
+  \_logic_var: (work@int_execute_stage.branch_taken), line:93:11, endln:93:23
+  |vpiReg:
+  \_logic_var: (work@int_execute_stage.conditional_branch), line:94:11, endln:94:29
+  |vpiReg:
+  \_logic_var: (work@int_execute_stage.valid_instruction), line:95:11, endln:95:28
+  |vpiRegArray:
+  \_array_var: (work@int_execute_stage.cr_eret_address), line:82:39, endln:82:57
+  |vpiInternalScope:
+  \_gen_region: (work@int_execute_stage), line:98:5, endln:275:16
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiFullName:work@int_execute_stage
+    |vpiInternalScope:
+    \_begin: (work@int_execute_stage), line:99:9, endln:274:12
+      |vpiParent:
+      \_gen_region: (work@int_execute_stage), line:98:5, endln:275:16
+      |vpiFullName:work@int_execute_stage
+    |vpiStmt:
+    \_begin: (work@int_execute_stage), line:99:9, endln:274:12
+  |vpiTypedef:
+  \_unsupported_typespec: (vector_t), line:58:11, endln:58:19
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiName:vector_t
+  |vpiTypedef:
+  \_unsupported_typespec: (vector_t), line:59:11, endln:59:19
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiName:vector_t
+  |vpiTypedef:
+  \_unsupported_typespec: (vector_mask_t), line:60:11, endln:60:24
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiName:vector_mask_t
+  |vpiTypedef:
+  \_unsupported_typespec: (local_thread_idx_t), line:63:11, endln:63:29
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiName:local_thread_idx_t
+  |vpiTypedef:
+  \_unsupported_typespec: (subcycle_t), line:64:11, endln:64:21
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiName:subcycle_t
+  |vpiTypedef:
+  \_logic_typespec: , line:67:11, endln:67:16
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+  |vpiTypedef:
+  \_unsupported_typespec: (local_thread_idx_t), line:68:11, endln:68:29
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiName:local_thread_idx_t
+  |vpiTypedef:
+  \_logic_typespec: , line:71:12, endln:71:17
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+  |vpiTypedef:
+  \_unsupported_typespec: (vector_t), line:73:12, endln:73:20
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiName:vector_t
+  |vpiTypedef:
+  \_unsupported_typespec: (vector_mask_t), line:74:12, endln:74:25
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiName:vector_mask_t
+  |vpiTypedef:
+  \_unsupported_typespec: (local_thread_idx_t), line:75:12, endln:75:30
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiName:local_thread_idx_t
+  |vpiTypedef:
+  \_logic_typespec: , line:76:12, endln:76:17
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+  |vpiTypedef:
+  \_unsupported_typespec: (subcycle_t), line:78:12, endln:78:22
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiName:subcycle_t
+  |vpiTypedef:
+  \_logic_typespec: , line:79:12, endln:79:17
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+  |vpiTypedef:
+  \_array_typespec: , line:82:39, endln:82:54
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+  |vpiTypedef:
+  \_logic_typespec: , line:86:12, endln:86:17
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+  |vpiTypedef:
+  \_logic_typespec: , line:87:12, endln:87:17
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+  |vpiTypedef:
+  \_logic_typespec: , line:88:12, endln:88:17
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+  |vpiTypedef:
+  \_unsupported_typespec: (vector_t), line:90:5, endln:90:13
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiName:vector_t
+  |vpiTypedef:
+  \_logic_typespec: , line:91:5, endln:91:10
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+  |vpiTypedef:
+  \_logic_typespec: , line:92:5, endln:92:10
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+  |vpiTypedef:
+  \_logic_typespec: , line:93:5, endln:93:10
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+  |vpiTypedef:
+  \_logic_typespec: , line:94:5, endln:94:10
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+  |vpiTypedef:
+  \_logic_typespec: , line:95:5, endln:95:10
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+  |vpiTypedef:
+  \_unsupported_typespec: (vector_t), line:58:11, endln:58:19
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiName:vector_t
+  |vpiTypedef:
+  \_unsupported_typespec: (vector_t), line:59:11, endln:59:19
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiName:vector_t
+  |vpiTypedef:
+  \_unsupported_typespec: (vector_mask_t), line:60:11, endln:60:24
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiName:vector_mask_t
+  |vpiTypedef:
+  \_unsupported_typespec: (local_thread_idx_t), line:63:11, endln:63:29
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiName:local_thread_idx_t
+  |vpiTypedef:
+  \_unsupported_typespec: (subcycle_t), line:64:11, endln:64:21
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiName:subcycle_t
+  |vpiTypedef:
+  \_logic_typespec: , line:67:11, endln:67:16
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+  |vpiTypedef:
+  \_unsupported_typespec: (local_thread_idx_t), line:68:11, endln:68:29
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiName:local_thread_idx_t
+  |vpiTypedef:
+  \_logic_typespec: , line:71:12, endln:71:17
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+  |vpiTypedef:
+  \_unsupported_typespec: (vector_t), line:73:12, endln:73:20
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiName:vector_t
+  |vpiTypedef:
+  \_unsupported_typespec: (vector_mask_t), line:74:12, endln:74:25
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiName:vector_mask_t
+  |vpiTypedef:
+  \_unsupported_typespec: (local_thread_idx_t), line:75:12, endln:75:30
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiName:local_thread_idx_t
+  |vpiTypedef:
+  \_logic_typespec: , line:76:12, endln:76:17
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+  |vpiTypedef:
+  \_unsupported_typespec: (subcycle_t), line:78:12, endln:78:22
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiName:subcycle_t
+  |vpiTypedef:
+  \_logic_typespec: , line:79:12, endln:79:17
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+  |vpiTypedef:
+  \_array_typespec: , line:82:54, endln:82:57
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_range: , line:82:55, endln:82:56
+      |vpiParent:
+      \_array_typespec: , line:82:54, endln:82:57
+      |vpiRightRange:
+      \_operation: , line:82:55, endln:82:56
+        |vpiParent:
+        \_range: , line:82:55, endln:82:56
+        |vpiOpType:11
+        |vpiOperand:
+        \_constant: , line:82:55, endln:82:56
+          |vpiParent:
+          \_range: , line:82:55, endln:82:56
+          |vpiDecompile:8
+          |vpiSize:64
+          |UINT:8
+          |vpiConstType:9
+    |vpiElemTypespec:
+    \_ref_typespec: (work@int_execute_stage.scalar_t), line:82:39, endln:82:54
+      |vpiParent:
+      \_array_typespec: , line:82:54, endln:82:57
+      |vpiName:scalar_t
+      |vpiFullName:work@int_execute_stage.scalar_t
+      |vpiActual:
+      \_logic_typespec: (scalar_t), line:50:9, endln:50:20
+  |vpiTypedef:
+  \_array_typespec: , line:83:55, endln:83:58
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_range: , line:83:56, endln:83:57
+      |vpiParent:
+      \_array_typespec: , line:83:55, endln:83:58
+      |vpiRightRange:
+      \_operation: , line:83:56, endln:83:57
+        |vpiParent:
+        \_range: , line:83:56, endln:83:57
+        |vpiOpType:11
+        |vpiOperand:
+        \_constant: , line:83:56, endln:83:57
+          |vpiParent:
+          \_range: , line:83:56, endln:83:57
+          |vpiDecompile:8
+          |vpiSize:64
+          |UINT:8
+          |vpiConstType:9
+  |vpiTypedef:
+  \_logic_typespec: , line:86:12, endln:86:17
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+  |vpiTypedef:
+  \_logic_typespec: , line:87:12, endln:87:17
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+  |vpiTypedef:
+  \_logic_typespec: , line:88:12, endln:88:17
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+  |vpiImportTypespec:
+  \_logic_net: (work@int_execute_stage.clk), line:54:39, endln:54:42
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiName:clk
+    |vpiFullName:work@int_execute_stage.clk
+  |vpiImportTypespec:
+  \_logic_net: (work@int_execute_stage.reset), line:55:39, endln:55:44
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiName:reset
+    |vpiFullName:work@int_execute_stage.reset
+  |vpiImportTypespec:
+  \_unsupported_typespec: (vector_t), line:58:11, endln:58:19
+  |vpiImportTypespec:
+  \_logic_var: (work@int_execute_stage.of_operand1), line:58:39, endln:58:50
+  |vpiImportTypespec:
+  \_unsupported_typespec: (vector_t), line:59:11, endln:59:19
+  |vpiImportTypespec:
+  \_logic_var: (work@int_execute_stage.of_operand2), line:59:39, endln:59:50
+  |vpiImportTypespec:
+  \_unsupported_typespec: (vector_mask_t), line:60:11, endln:60:24
+  |vpiImportTypespec:
+  \_logic_var: (work@int_execute_stage.of_mask_value), line:60:39, endln:60:52
+  |vpiImportTypespec:
+  \_logic_net: (work@int_execute_stage.of_instruction_valid), line:61:39, endln:61:59
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiName:of_instruction_valid
+    |vpiFullName:work@int_execute_stage.of_instruction_valid
+  |vpiImportTypespec:
+  \_struct_var: (work@int_execute_stage.of_instruction), line:62:39, endln:62:53
+  |vpiImportTypespec:
+  \_unsupported_typespec: (local_thread_idx_t), line:63:11, endln:63:29
+  |vpiImportTypespec:
+  \_logic_var: (work@int_execute_stage.of_thread_idx), line:63:39, endln:63:52
+  |vpiImportTypespec:
+  \_unsupported_typespec: (subcycle_t), line:64:11, endln:64:21
+  |vpiImportTypespec:
+  \_logic_var: (work@int_execute_stage.of_subcycle), line:64:39, endln:64:50
+  |vpiImportTypespec:
+  \_logic_typespec: , line:67:11, endln:67:16
+  |vpiImportTypespec:
+  \_logic_net: (work@int_execute_stage.wb_rollback_en), line:67:39, endln:67:53
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiTypespec:
+    \_ref_typespec: (work@int_execute_stage.wb_rollback_en.wb_rollback_en), line:67:11, endln:67:16
+      |vpiParent:
+      \_logic_net: (work@int_execute_stage.wb_rollback_en), line:67:39, endln:67:53
+      |vpiName:wb_rollback_en
+      |vpiFullName:work@int_execute_stage.wb_rollback_en.wb_rollback_en
+      |vpiActual:
+      \_logic_typespec: , line:67:11, endln:67:16
+    |vpiName:wb_rollback_en
+    |vpiFullName:work@int_execute_stage.wb_rollback_en
     |vpiNetType:36
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.PIPE_INT_ARITH), line:279:43, endln:279:57
+  |vpiImportTypespec:
+  \_unsupported_typespec: (local_thread_idx_t), line:68:11, endln:68:29
+  |vpiImportTypespec:
+  \_logic_var: (work@int_execute_stage.wb_rollback_thread_idx), line:68:39, endln:68:61
+  |vpiImportTypespec:
+  \_logic_typespec: , line:71:12, endln:71:17
+  |vpiImportTypespec:
+  \_logic_net: (work@int_execute_stage.ix_instruction_valid), line:71:39, endln:71:59
     |vpiParent:
-    \_operation: , line:279:12, endln:279:57
-    |vpiName:PIPE_INT_ARITH
-    |vpiFullName:work@int_execute_stage.PIPE_INT_ARITH
-    |vpiNetType:1
-  |vpiNet:
-  \_logic_net: (work@int_execute_stage.BRANCH_ERET), line:282:42, endln:282:53
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiTypespec:
+    \_ref_typespec: (work@int_execute_stage.ix_instruction_valid.ix_instruction_valid), line:71:12, endln:71:17
+      |vpiParent:
+      \_logic_net: (work@int_execute_stage.ix_instruction_valid), line:71:39, endln:71:59
+      |vpiName:ix_instruction_valid
+      |vpiFullName:work@int_execute_stage.ix_instruction_valid.ix_instruction_valid
+      |vpiActual:
+      \_logic_typespec: , line:71:12, endln:71:17
+    |vpiName:ix_instruction_valid
+    |vpiFullName:work@int_execute_stage.ix_instruction_valid
+    |vpiNetType:36
+  |vpiImportTypespec:
+  \_struct_var: (work@int_execute_stage.ix_instruction), line:72:39, endln:72:53
+  |vpiImportTypespec:
+  \_unsupported_typespec: (vector_t), line:73:12, endln:73:20
+  |vpiImportTypespec:
+  \_logic_var: (work@int_execute_stage.ix_result), line:73:39, endln:73:48
+  |vpiImportTypespec:
+  \_unsupported_typespec: (vector_mask_t), line:74:12, endln:74:25
+  |vpiImportTypespec:
+  \_logic_var: (work@int_execute_stage.ix_mask_value), line:74:39, endln:74:52
+  |vpiImportTypespec:
+  \_unsupported_typespec: (local_thread_idx_t), line:75:12, endln:75:30
+  |vpiImportTypespec:
+  \_logic_var: (work@int_execute_stage.ix_thread_idx), line:75:39, endln:75:52
+  |vpiImportTypespec:
+  \_logic_typespec: , line:76:12, endln:76:17
+  |vpiImportTypespec:
+  \_logic_net: (work@int_execute_stage.ix_rollback_en), line:76:39, endln:76:53
     |vpiParent:
-    \_operation: , line:282:12, endln:282:53
-    |vpiName:BRANCH_ERET
-    |vpiFullName:work@int_execute_stage.BRANCH_ERET
-    |vpiNetType:1
-  |vpiNet:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiTypespec:
+    \_ref_typespec: (work@int_execute_stage.ix_rollback_en.ix_rollback_en), line:76:12, endln:76:17
+      |vpiParent:
+      \_logic_net: (work@int_execute_stage.ix_rollback_en), line:76:39, endln:76:53
+      |vpiName:ix_rollback_en
+      |vpiFullName:work@int_execute_stage.ix_rollback_en.ix_rollback_en
+      |vpiActual:
+      \_logic_typespec: , line:76:12, endln:76:17
+    |vpiName:ix_rollback_en
+    |vpiFullName:work@int_execute_stage.ix_rollback_en
+    |vpiNetType:36
+  |vpiImportTypespec:
+  \_logic_var: (work@int_execute_stage.ix_rollback_pc), line:77:39, endln:77:53
+  |vpiImportTypespec:
+  \_unsupported_typespec: (subcycle_t), line:78:12, endln:78:22
+  |vpiImportTypespec:
+  \_logic_var: (work@int_execute_stage.ix_subcycle), line:78:39, endln:78:50
+  |vpiImportTypespec:
+  \_logic_typespec: , line:79:12, endln:79:17
+  |vpiImportTypespec:
+  \_logic_net: (work@int_execute_stage.ix_privileged_op_fault), line:79:39, endln:79:61
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiTypespec:
+    \_ref_typespec: (work@int_execute_stage.ix_privileged_op_fault.ix_privileged_op_fault), line:79:12, endln:79:17
+      |vpiParent:
+      \_logic_net: (work@int_execute_stage.ix_privileged_op_fault), line:79:39, endln:79:61
+      |vpiName:ix_privileged_op_fault
+      |vpiFullName:work@int_execute_stage.ix_privileged_op_fault.ix_privileged_op_fault
+      |vpiActual:
+      \_logic_typespec: , line:79:12, endln:79:17
+    |vpiName:ix_privileged_op_fault
+    |vpiFullName:work@int_execute_stage.ix_privileged_op_fault
+    |vpiNetType:36
+  |vpiImportTypespec:
+  \_logic_var: (work@int_execute_stage), line:82:5, endln:82:57
+  |vpiImportTypespec:
+  \_array_var: (work@int_execute_stage.cr_eret_address), line:82:39, endln:82:57
+  |vpiImportTypespec:
+  \_array_typespec: , line:82:39, endln:82:54
+  |vpiImportTypespec:
+  \_logic_net: (work@int_execute_stage), line:83:5, endln:83:58
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiFullName:work@int_execute_stage
+  |vpiImportTypespec:
+  \_logic_typespec: , line:86:12, endln:86:17
+  |vpiImportTypespec:
+  \_logic_net: (work@int_execute_stage.ix_perf_uncond_branch), line:86:39, endln:86:60
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiTypespec:
+    \_ref_typespec: (work@int_execute_stage.ix_perf_uncond_branch.ix_perf_uncond_branch), line:86:12, endln:86:17
+      |vpiParent:
+      \_logic_net: (work@int_execute_stage.ix_perf_uncond_branch), line:86:39, endln:86:60
+      |vpiName:ix_perf_uncond_branch
+      |vpiFullName:work@int_execute_stage.ix_perf_uncond_branch.ix_perf_uncond_branch
+      |vpiActual:
+      \_logic_typespec: , line:86:12, endln:86:17
+    |vpiName:ix_perf_uncond_branch
+    |vpiFullName:work@int_execute_stage.ix_perf_uncond_branch
+    |vpiNetType:36
+  |vpiImportTypespec:
+  \_logic_typespec: , line:87:12, endln:87:17
+  |vpiImportTypespec:
+  \_logic_net: (work@int_execute_stage.ix_perf_cond_branch_taken), line:87:39, endln:87:64
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiTypespec:
+    \_ref_typespec: (work@int_execute_stage.ix_perf_cond_branch_taken.ix_perf_cond_branch_taken), line:87:12, endln:87:17
+      |vpiParent:
+      \_logic_net: (work@int_execute_stage.ix_perf_cond_branch_taken), line:87:39, endln:87:64
+      |vpiName:ix_perf_cond_branch_taken
+      |vpiFullName:work@int_execute_stage.ix_perf_cond_branch_taken.ix_perf_cond_branch_taken
+      |vpiActual:
+      \_logic_typespec: , line:87:12, endln:87:17
+    |vpiName:ix_perf_cond_branch_taken
+    |vpiFullName:work@int_execute_stage.ix_perf_cond_branch_taken
+    |vpiNetType:36
+  |vpiImportTypespec:
+  \_logic_typespec: , line:88:12, endln:88:17
+  |vpiImportTypespec:
+  \_logic_net: (work@int_execute_stage.ix_perf_cond_branch_not_taken), line:88:39, endln:88:68
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiTypespec:
+    \_ref_typespec: (work@int_execute_stage.ix_perf_cond_branch_not_taken.ix_perf_cond_branch_not_taken), line:88:12, endln:88:17
+      |vpiParent:
+      \_logic_net: (work@int_execute_stage.ix_perf_cond_branch_not_taken), line:88:39, endln:88:68
+      |vpiName:ix_perf_cond_branch_not_taken
+      |vpiFullName:work@int_execute_stage.ix_perf_cond_branch_not_taken.ix_perf_cond_branch_not_taken
+      |vpiActual:
+      \_logic_typespec: , line:88:12, endln:88:17
+    |vpiName:ix_perf_cond_branch_not_taken
+    |vpiFullName:work@int_execute_stage.ix_perf_cond_branch_not_taken
+    |vpiNetType:36
+  |vpiImportTypespec:
+  \_unsupported_typespec: (vector_t), line:90:5, endln:90:13
+  |vpiImportTypespec:
+  \_logic_net: (work@int_execute_stage.vector_result), line:90:14, endln:90:27
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiTypespec:
+    \_ref_typespec: (work@int_execute_stage.vector_result.vector_result), line:90:5, endln:90:13
+      |vpiParent:
+      \_logic_net: (work@int_execute_stage.vector_result), line:90:14, endln:90:27
+      |vpiName:vector_result
+      |vpiFullName:work@int_execute_stage.vector_result.vector_result
+      |vpiActual:
+      \_unsupported_typespec: (vector_t), line:90:5, endln:90:13
+    |vpiName:vector_result
+    |vpiFullName:work@int_execute_stage.vector_result
+  |vpiImportTypespec:
+  \_logic_typespec: , line:91:5, endln:91:10
+  |vpiImportTypespec:
+  \_logic_var: (work@int_execute_stage.eret), line:91:11, endln:91:15
+  |vpiImportTypespec:
+  \_logic_typespec: , line:92:5, endln:92:10
+  |vpiImportTypespec:
+  \_logic_var: (work@int_execute_stage.privileged_op_fault), line:92:11, endln:92:30
+  |vpiImportTypespec:
+  \_logic_typespec: , line:93:5, endln:93:10
+  |vpiImportTypespec:
+  \_logic_var: (work@int_execute_stage.branch_taken), line:93:11, endln:93:23
+  |vpiImportTypespec:
+  \_logic_typespec: , line:94:5, endln:94:10
+  |vpiImportTypespec:
+  \_logic_var: (work@int_execute_stage.conditional_branch), line:94:11, endln:94:29
+  |vpiImportTypespec:
+  \_logic_typespec: , line:95:5, endln:95:10
+  |vpiImportTypespec:
+  \_logic_var: (work@int_execute_stage.valid_instruction), line:95:11, endln:95:28
+  |vpiImportTypespec:
+  \_unsupported_typespec: (vector_t), line:58:11, endln:58:19
+  |vpiImportTypespec:
+  \_unsupported_typespec: (vector_t), line:59:11, endln:59:19
+  |vpiImportTypespec:
+  \_unsupported_typespec: (vector_mask_t), line:60:11, endln:60:24
+  |vpiImportTypespec:
+  \_unsupported_typespec: (local_thread_idx_t), line:63:11, endln:63:29
+  |vpiImportTypespec:
+  \_unsupported_typespec: (subcycle_t), line:64:11, endln:64:21
+  |vpiImportTypespec:
+  \_logic_typespec: , line:67:11, endln:67:16
+  |vpiImportTypespec:
+  \_unsupported_typespec: (local_thread_idx_t), line:68:11, endln:68:29
+  |vpiImportTypespec:
+  \_logic_typespec: , line:71:12, endln:71:17
+  |vpiImportTypespec:
+  \_unsupported_typespec: (vector_t), line:73:12, endln:73:20
+  |vpiImportTypespec:
+  \_unsupported_typespec: (vector_mask_t), line:74:12, endln:74:25
+  |vpiImportTypespec:
+  \_unsupported_typespec: (local_thread_idx_t), line:75:12, endln:75:30
+  |vpiImportTypespec:
+  \_logic_typespec: , line:76:12, endln:76:17
+  |vpiImportTypespec:
+  \_unsupported_typespec: (subcycle_t), line:78:12, endln:78:22
+  |vpiImportTypespec:
+  \_logic_typespec: , line:79:12, endln:79:17
+  |vpiImportTypespec:
+  \_array_typespec: , line:82:54, endln:82:57
+  |vpiImportTypespec:
+  \_array_typespec: , line:83:55, endln:83:58
+  |vpiImportTypespec:
+  \_logic_typespec: , line:86:12, endln:86:17
+  |vpiImportTypespec:
+  \_logic_typespec: , line:87:12, endln:87:17
+  |vpiImportTypespec:
+  \_logic_typespec: , line:88:12, endln:88:17
+  |vpiImportTypespec:
   \_logic_net: (work@int_execute_stage.BRANCH_ZERO), line:295:17, endln:295:28
     |vpiParent:
-    \_begin: (work@int_execute_stage), line:293:9, endln:319:12
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:BRANCH_ZERO
     |vpiFullName:work@int_execute_stage.BRANCH_ZERO
     |vpiNetType:1
-  |vpiNet:
+  |vpiImportTypespec:
   \_logic_net: (work@int_execute_stage.BRANCH_NOT_ZERO), line:301:17, endln:301:32
     |vpiParent:
-    \_begin: (work@int_execute_stage), line:293:9, endln:319:12
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:BRANCH_NOT_ZERO
     |vpiFullName:work@int_execute_stage.BRANCH_NOT_ZERO
     |vpiNetType:1
-  |vpiNet:
+  |vpiImportTypespec:
   \_logic_net: (work@int_execute_stage.BRANCH_ALWAYS), line:307:17, endln:307:30
     |vpiParent:
-    \_begin: (work@int_execute_stage), line:293:9, endln:319:12
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:BRANCH_ALWAYS
     |vpiFullName:work@int_execute_stage.BRANCH_ALWAYS
     |vpiNetType:1
-  |vpiNet:
+  |vpiImportTypespec:
   \_logic_net: (work@int_execute_stage.BRANCH_CALL_OFFSET), line:308:17, endln:308:35
     |vpiParent:
-    \_begin: (work@int_execute_stage), line:293:9, endln:319:12
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:BRANCH_CALL_OFFSET
     |vpiFullName:work@int_execute_stage.BRANCH_CALL_OFFSET
     |vpiNetType:1
-  |vpiNet:
+  |vpiImportTypespec:
   \_logic_net: (work@int_execute_stage.BRANCH_CALL_REGISTER), line:309:17, endln:309:37
     |vpiParent:
-    \_begin: (work@int_execute_stage), line:293:9, endln:319:12
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:BRANCH_CALL_REGISTER
     |vpiFullName:work@int_execute_stage.BRANCH_CALL_REGISTER
     |vpiNetType:1
-  |vpiNet:
+  |vpiImportTypespec:
   \_logic_net: (work@int_execute_stage.BRANCH_REGISTER), line:310:17, endln:310:32
     |vpiParent:
-    \_begin: (work@int_execute_stage), line:293:9, endln:319:12
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:BRANCH_REGISTER
     |vpiFullName:work@int_execute_stage.BRANCH_REGISTER
     |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@int_execute_stage.BRANCH_ERET), line:311:17, endln:311:28
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiName:BRANCH_ERET
+    |vpiFullName:work@int_execute_stage.BRANCH_ERET
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@int_execute_stage.PIPE_INT_ARITH), line:279:43, endln:279:57
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiName:PIPE_INT_ARITH
+    |vpiFullName:work@int_execute_stage.PIPE_INT_ARITH
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_logic_net: (work@int_execute_stage.cr_supervisor_en), line:283:59, endln:283:74
+    |vpiParent:
+    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
+    |vpiName:cr_supervisor_en
+    |vpiFullName:work@int_execute_stage.cr_supervisor_en
+    |vpiNetType:1
+  |vpiDefName:work@int_execute_stage
+  |vpiNet:
+  \_logic_net: (work@int_execute_stage.clk), line:54:39, endln:54:42
+  |vpiNet:
+  \_logic_net: (work@int_execute_stage.reset), line:55:39, endln:55:44
+  |vpiNet:
+  \_logic_net: (work@int_execute_stage.of_instruction_valid), line:61:39, endln:61:59
+  |vpiNet:
+  \_logic_net: (work@int_execute_stage.wb_rollback_en), line:67:39, endln:67:53
+  |vpiNet:
+  \_logic_net: (work@int_execute_stage.ix_instruction_valid), line:71:39, endln:71:59
+  |vpiNet:
+  \_logic_net: (work@int_execute_stage.ix_rollback_en), line:76:39, endln:76:53
+  |vpiNet:
+  \_logic_net: (work@int_execute_stage.ix_privileged_op_fault), line:79:39, endln:79:61
+  |vpiNet:
+  \_logic_net: (work@int_execute_stage), line:83:5, endln:83:58
+  |vpiNet:
+  \_logic_net: (work@int_execute_stage.ix_perf_uncond_branch), line:86:39, endln:86:60
+  |vpiNet:
+  \_logic_net: (work@int_execute_stage.ix_perf_cond_branch_taken), line:87:39, endln:87:64
+  |vpiNet:
+  \_logic_net: (work@int_execute_stage.ix_perf_cond_branch_not_taken), line:88:39, endln:88:68
+  |vpiNet:
+  \_logic_net: (work@int_execute_stage.vector_result), line:90:14, endln:90:27
+  |vpiNet:
+  \_logic_net: (work@int_execute_stage.BRANCH_ZERO), line:295:17, endln:295:28
+  |vpiNet:
+  \_logic_net: (work@int_execute_stage.BRANCH_NOT_ZERO), line:301:17, endln:301:32
+  |vpiNet:
+  \_logic_net: (work@int_execute_stage.BRANCH_ALWAYS), line:307:17, endln:307:30
+  |vpiNet:
+  \_logic_net: (work@int_execute_stage.BRANCH_CALL_OFFSET), line:308:17, endln:308:35
+  |vpiNet:
+  \_logic_net: (work@int_execute_stage.BRANCH_CALL_REGISTER), line:309:17, endln:309:37
+  |vpiNet:
+  \_logic_net: (work@int_execute_stage.BRANCH_REGISTER), line:310:17, endln:310:32
+  |vpiNet:
+  \_logic_net: (work@int_execute_stage.BRANCH_ERET), line:311:17, endln:311:28
+  |vpiNet:
+  \_logic_net: (work@int_execute_stage.PIPE_INT_ARITH), line:279:43, endln:279:57
+  |vpiNet:
+  \_logic_net: (work@int_execute_stage.cr_supervisor_en), line:283:59, endln:283:74
   |vpiPort:
-  \_port: (clk), line:54:39, endln:54:42
+  \_port: (clk), line:54:5, endln:54:42
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:clk
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@int_execute_stage.clk.clk), line:54:39, endln:54:42
-      |vpiParent:
-      \_port: (clk), line:54:39, endln:54:42
-      |vpiName:clk
-      |vpiFullName:work@int_execute_stage.clk.clk
-      |vpiActual:
-      \_logic_net: (work@int_execute_stage.clk), line:54:39, endln:54:42
-    |vpiTypedef:
-    \_ref_typespec: (work@int_execute_stage.clk)
-      |vpiParent:
-      \_port: (clk), line:54:39, endln:54:42
-      |vpiFullName:work@int_execute_stage.clk
-      |vpiActual:
-      \_logic_typespec: , line:54:39, endln:54:39
   |vpiPort:
-  \_port: (reset), line:55:39, endln:55:44
+  \_port: (reset), line:55:5, endln:55:44
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:reset
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@int_execute_stage.reset.reset), line:55:39, endln:55:44
-      |vpiParent:
-      \_port: (reset), line:55:39, endln:55:44
-      |vpiName:reset
-      |vpiFullName:work@int_execute_stage.reset.reset
-      |vpiActual:
-      \_logic_net: (work@int_execute_stage.reset), line:55:39, endln:55:44
-    |vpiTypedef:
-    \_ref_typespec: (work@int_execute_stage.reset)
-      |vpiParent:
-      \_port: (reset), line:55:39, endln:55:44
-      |vpiFullName:work@int_execute_stage.reset
-      |vpiActual:
-      \_logic_typespec: , line:55:39, endln:55:39
   |vpiPort:
-  \_port: (of_operand1), line:58:39, endln:58:50
+  \_port: (of_operand1), line:58:5, endln:58:50
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:of_operand1
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@int_execute_stage.of_operand1.of_operand1), line:58:39, endln:58:50
-      |vpiParent:
-      \_port: (of_operand1), line:58:39, endln:58:50
-      |vpiName:of_operand1
-      |vpiFullName:work@int_execute_stage.of_operand1.of_operand1
-      |vpiActual:
-      \_logic_net: (work@int_execute_stage.of_operand1), line:58:39, endln:58:50
     |vpiTypedef:
-    \_ref_typespec: (work@int_execute_stage.of_operand1)
+    \_ref_typespec: (work@int_execute_stage.of_operand1.vector_t), line:58:11, endln:58:19
       |vpiParent:
-      \_port: (of_operand1), line:58:39, endln:58:50
-      |vpiFullName:work@int_execute_stage.of_operand1
+      \_port: (of_operand1), line:58:5, endln:58:50
+      |vpiName:vector_t
+      |vpiFullName:work@int_execute_stage.of_operand1.vector_t
       |vpiActual:
       \_unsupported_typespec: (vector_t), line:58:11, endln:58:19
   |vpiPort:
-  \_port: (of_operand2), line:59:39, endln:59:50
+  \_port: (of_operand2), line:59:5, endln:59:50
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:of_operand2
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@int_execute_stage.of_operand2.of_operand2), line:59:39, endln:59:50
-      |vpiParent:
-      \_port: (of_operand2), line:59:39, endln:59:50
-      |vpiName:of_operand2
-      |vpiFullName:work@int_execute_stage.of_operand2.of_operand2
-      |vpiActual:
-      \_logic_net: (work@int_execute_stage.of_operand2), line:59:39, endln:59:50
     |vpiTypedef:
-    \_ref_typespec: (work@int_execute_stage.of_operand2)
+    \_ref_typespec: (work@int_execute_stage.of_operand2.vector_t), line:59:11, endln:59:19
       |vpiParent:
-      \_port: (of_operand2), line:59:39, endln:59:50
-      |vpiFullName:work@int_execute_stage.of_operand2
+      \_port: (of_operand2), line:59:5, endln:59:50
+      |vpiName:vector_t
+      |vpiFullName:work@int_execute_stage.of_operand2.vector_t
       |vpiActual:
       \_unsupported_typespec: (vector_t), line:59:11, endln:59:19
   |vpiPort:
-  \_port: (of_mask_value), line:60:39, endln:60:52
+  \_port: (of_mask_value), line:60:5, endln:60:52
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:of_mask_value
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@int_execute_stage.of_mask_value.of_mask_value), line:60:39, endln:60:52
-      |vpiParent:
-      \_port: (of_mask_value), line:60:39, endln:60:52
-      |vpiName:of_mask_value
-      |vpiFullName:work@int_execute_stage.of_mask_value.of_mask_value
-      |vpiActual:
-      \_logic_net: (work@int_execute_stage.of_mask_value), line:60:39, endln:60:52
     |vpiTypedef:
-    \_ref_typespec: (work@int_execute_stage.of_mask_value)
+    \_ref_typespec: (work@int_execute_stage.of_mask_value.vector_mask_t), line:60:11, endln:60:24
       |vpiParent:
-      \_port: (of_mask_value), line:60:39, endln:60:52
-      |vpiFullName:work@int_execute_stage.of_mask_value
+      \_port: (of_mask_value), line:60:5, endln:60:52
+      |vpiName:vector_mask_t
+      |vpiFullName:work@int_execute_stage.of_mask_value.vector_mask_t
       |vpiActual:
       \_unsupported_typespec: (vector_mask_t), line:60:11, endln:60:24
   |vpiPort:
-  \_port: (of_instruction_valid), line:61:39, endln:61:59
+  \_port: (of_instruction_valid), line:61:5, endln:61:59
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:of_instruction_valid
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@int_execute_stage.of_instruction_valid.of_instruction_valid), line:61:39, endln:61:59
-      |vpiParent:
-      \_port: (of_instruction_valid), line:61:39, endln:61:59
-      |vpiName:of_instruction_valid
-      |vpiFullName:work@int_execute_stage.of_instruction_valid.of_instruction_valid
-      |vpiActual:
-      \_logic_net: (work@int_execute_stage.of_instruction_valid), line:61:39, endln:61:59
-    |vpiTypedef:
-    \_ref_typespec: (work@int_execute_stage.of_instruction_valid)
-      |vpiParent:
-      \_port: (of_instruction_valid), line:61:39, endln:61:59
-      |vpiFullName:work@int_execute_stage.of_instruction_valid
-      |vpiActual:
-      \_logic_typespec: , line:61:39, endln:61:39
   |vpiPort:
-  \_port: (of_instruction), line:62:39, endln:62:53
+  \_port: (of_instruction), line:62:5, endln:62:53
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:of_instruction
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@int_execute_stage.of_instruction.of_instruction), line:62:39, endln:62:53
-      |vpiParent:
-      \_port: (of_instruction), line:62:39, endln:62:53
-      |vpiName:of_instruction
-      |vpiFullName:work@int_execute_stage.of_instruction.of_instruction
-      |vpiActual:
-      \_logic_net: (work@int_execute_stage.of_instruction), line:62:39, endln:62:53
     |vpiTypedef:
-    \_ref_typespec: (work@int_execute_stage.of_instruction)
+    \_ref_typespec: (work@int_execute_stage.of_instruction.decoded_instruction_t), line:62:11, endln:62:32
       |vpiParent:
-      \_port: (of_instruction), line:62:39, endln:62:53
-      |vpiFullName:work@int_execute_stage.of_instruction
+      \_port: (of_instruction), line:62:5, endln:62:53
+      |vpiName:decoded_instruction_t
+      |vpiFullName:work@int_execute_stage.of_instruction.decoded_instruction_t
       |vpiActual:
       \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
   |vpiPort:
-  \_port: (of_thread_idx), line:63:39, endln:63:52
+  \_port: (of_thread_idx), line:63:5, endln:63:52
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:of_thread_idx
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@int_execute_stage.of_thread_idx.of_thread_idx), line:63:39, endln:63:52
-      |vpiParent:
-      \_port: (of_thread_idx), line:63:39, endln:63:52
-      |vpiName:of_thread_idx
-      |vpiFullName:work@int_execute_stage.of_thread_idx.of_thread_idx
-      |vpiActual:
-      \_logic_net: (work@int_execute_stage.of_thread_idx), line:63:39, endln:63:52
     |vpiTypedef:
-    \_ref_typespec: (work@int_execute_stage.of_thread_idx)
+    \_ref_typespec: (work@int_execute_stage.of_thread_idx.local_thread_idx_t), line:63:11, endln:63:29
       |vpiParent:
-      \_port: (of_thread_idx), line:63:39, endln:63:52
-      |vpiFullName:work@int_execute_stage.of_thread_idx
+      \_port: (of_thread_idx), line:63:5, endln:63:52
+      |vpiName:local_thread_idx_t
+      |vpiFullName:work@int_execute_stage.of_thread_idx.local_thread_idx_t
       |vpiActual:
       \_unsupported_typespec: (local_thread_idx_t), line:63:11, endln:63:29
   |vpiPort:
-  \_port: (of_subcycle), line:64:39, endln:64:50
+  \_port: (of_subcycle), line:64:5, endln:64:50
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:of_subcycle
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@int_execute_stage.of_subcycle.of_subcycle), line:64:39, endln:64:50
-      |vpiParent:
-      \_port: (of_subcycle), line:64:39, endln:64:50
-      |vpiName:of_subcycle
-      |vpiFullName:work@int_execute_stage.of_subcycle.of_subcycle
-      |vpiActual:
-      \_logic_net: (work@int_execute_stage.of_subcycle), line:64:39, endln:64:50
     |vpiTypedef:
-    \_ref_typespec: (work@int_execute_stage.of_subcycle)
+    \_ref_typespec: (work@int_execute_stage.of_subcycle.subcycle_t), line:64:11, endln:64:21
       |vpiParent:
-      \_port: (of_subcycle), line:64:39, endln:64:50
-      |vpiFullName:work@int_execute_stage.of_subcycle
+      \_port: (of_subcycle), line:64:5, endln:64:50
+      |vpiName:subcycle_t
+      |vpiFullName:work@int_execute_stage.of_subcycle.subcycle_t
       |vpiActual:
       \_unsupported_typespec: (subcycle_t), line:64:11, endln:64:21
   |vpiPort:
-  \_port: (wb_rollback_en), line:67:39, endln:67:53
+  \_port: (wb_rollback_en), line:67:5, endln:67:53
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:wb_rollback_en
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@int_execute_stage.wb_rollback_en.wb_rollback_en), line:67:39, endln:67:53
-      |vpiParent:
-      \_port: (wb_rollback_en), line:67:39, endln:67:53
-      |vpiName:wb_rollback_en
-      |vpiFullName:work@int_execute_stage.wb_rollback_en.wb_rollback_en
-      |vpiActual:
-      \_logic_net: (work@int_execute_stage.wb_rollback_en), line:67:39, endln:67:53
     |vpiTypedef:
-    \_ref_typespec: (work@int_execute_stage.wb_rollback_en)
+    \_ref_typespec: (work@int_execute_stage.wb_rollback_en), line:67:11, endln:67:16
       |vpiParent:
-      \_port: (wb_rollback_en), line:67:39, endln:67:53
+      \_port: (wb_rollback_en), line:67:5, endln:67:53
       |vpiFullName:work@int_execute_stage.wb_rollback_en
       |vpiActual:
       \_logic_typespec: , line:67:11, endln:67:16
   |vpiPort:
-  \_port: (wb_rollback_thread_idx), line:68:39, endln:68:61
+  \_port: (wb_rollback_thread_idx), line:68:5, endln:68:61
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:wb_rollback_thread_idx
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@int_execute_stage.wb_rollback_thread_idx.wb_rollback_thread_idx), line:68:39, endln:68:61
-      |vpiParent:
-      \_port: (wb_rollback_thread_idx), line:68:39, endln:68:61
-      |vpiName:wb_rollback_thread_idx
-      |vpiFullName:work@int_execute_stage.wb_rollback_thread_idx.wb_rollback_thread_idx
-      |vpiActual:
-      \_logic_net: (work@int_execute_stage.wb_rollback_thread_idx), line:68:39, endln:68:61
     |vpiTypedef:
-    \_ref_typespec: (work@int_execute_stage.wb_rollback_thread_idx)
+    \_ref_typespec: (work@int_execute_stage.wb_rollback_thread_idx.local_thread_idx_t), line:68:11, endln:68:29
       |vpiParent:
-      \_port: (wb_rollback_thread_idx), line:68:39, endln:68:61
-      |vpiFullName:work@int_execute_stage.wb_rollback_thread_idx
+      \_port: (wb_rollback_thread_idx), line:68:5, endln:68:61
+      |vpiName:local_thread_idx_t
+      |vpiFullName:work@int_execute_stage.wb_rollback_thread_idx.local_thread_idx_t
       |vpiActual:
       \_unsupported_typespec: (local_thread_idx_t), line:68:11, endln:68:29
   |vpiPort:
-  \_port: (ix_instruction_valid), line:71:39, endln:71:59
+  \_port: (ix_instruction_valid), line:71:5, endln:71:59
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:ix_instruction_valid
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@int_execute_stage.ix_instruction_valid.ix_instruction_valid), line:71:39, endln:71:59
-      |vpiParent:
-      \_port: (ix_instruction_valid), line:71:39, endln:71:59
-      |vpiName:ix_instruction_valid
-      |vpiFullName:work@int_execute_stage.ix_instruction_valid.ix_instruction_valid
-      |vpiActual:
-      \_logic_net: (work@int_execute_stage.ix_instruction_valid), line:71:39, endln:71:59
     |vpiTypedef:
-    \_ref_typespec: (work@int_execute_stage.ix_instruction_valid)
+    \_ref_typespec: (work@int_execute_stage.ix_instruction_valid), line:71:12, endln:71:17
       |vpiParent:
-      \_port: (ix_instruction_valid), line:71:39, endln:71:59
+      \_port: (ix_instruction_valid), line:71:5, endln:71:59
       |vpiFullName:work@int_execute_stage.ix_instruction_valid
       |vpiActual:
       \_logic_typespec: , line:71:12, endln:71:17
   |vpiPort:
-  \_port: (ix_instruction), line:72:39, endln:72:53
+  \_port: (ix_instruction), line:72:5, endln:72:53
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:ix_instruction
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@int_execute_stage.ix_instruction.ix_instruction), line:72:39, endln:72:53
-      |vpiParent:
-      \_port: (ix_instruction), line:72:39, endln:72:53
-      |vpiName:ix_instruction
-      |vpiFullName:work@int_execute_stage.ix_instruction.ix_instruction
-      |vpiActual:
-      \_logic_net: (work@int_execute_stage.ix_instruction), line:72:39, endln:72:53
     |vpiTypedef:
-    \_ref_typespec: (work@int_execute_stage.ix_instruction)
+    \_ref_typespec: (work@int_execute_stage.ix_instruction.decoded_instruction_t), line:72:12, endln:72:33
       |vpiParent:
-      \_port: (ix_instruction), line:72:39, endln:72:53
-      |vpiFullName:work@int_execute_stage.ix_instruction
+      \_port: (ix_instruction), line:72:5, endln:72:53
+      |vpiName:decoded_instruction_t
+      |vpiFullName:work@int_execute_stage.ix_instruction.decoded_instruction_t
       |vpiActual:
       \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
   |vpiPort:
-  \_port: (ix_result), line:73:39, endln:73:48
+  \_port: (ix_result), line:73:5, endln:73:48
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:ix_result
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@int_execute_stage.ix_result.ix_result), line:73:39, endln:73:48
-      |vpiParent:
-      \_port: (ix_result), line:73:39, endln:73:48
-      |vpiName:ix_result
-      |vpiFullName:work@int_execute_stage.ix_result.ix_result
-      |vpiActual:
-      \_logic_net: (work@int_execute_stage.ix_result), line:73:39, endln:73:48
     |vpiTypedef:
-    \_ref_typespec: (work@int_execute_stage.ix_result)
+    \_ref_typespec: (work@int_execute_stage.ix_result.vector_t), line:73:12, endln:73:20
       |vpiParent:
-      \_port: (ix_result), line:73:39, endln:73:48
-      |vpiFullName:work@int_execute_stage.ix_result
+      \_port: (ix_result), line:73:5, endln:73:48
+      |vpiName:vector_t
+      |vpiFullName:work@int_execute_stage.ix_result.vector_t
       |vpiActual:
       \_unsupported_typespec: (vector_t), line:73:12, endln:73:20
   |vpiPort:
-  \_port: (ix_mask_value), line:74:39, endln:74:52
+  \_port: (ix_mask_value), line:74:5, endln:74:52
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:ix_mask_value
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@int_execute_stage.ix_mask_value.ix_mask_value), line:74:39, endln:74:52
-      |vpiParent:
-      \_port: (ix_mask_value), line:74:39, endln:74:52
-      |vpiName:ix_mask_value
-      |vpiFullName:work@int_execute_stage.ix_mask_value.ix_mask_value
-      |vpiActual:
-      \_logic_net: (work@int_execute_stage.ix_mask_value), line:74:39, endln:74:52
     |vpiTypedef:
-    \_ref_typespec: (work@int_execute_stage.ix_mask_value)
+    \_ref_typespec: (work@int_execute_stage.ix_mask_value.vector_mask_t), line:74:12, endln:74:25
       |vpiParent:
-      \_port: (ix_mask_value), line:74:39, endln:74:52
-      |vpiFullName:work@int_execute_stage.ix_mask_value
+      \_port: (ix_mask_value), line:74:5, endln:74:52
+      |vpiName:vector_mask_t
+      |vpiFullName:work@int_execute_stage.ix_mask_value.vector_mask_t
       |vpiActual:
       \_unsupported_typespec: (vector_mask_t), line:74:12, endln:74:25
   |vpiPort:
-  \_port: (ix_thread_idx), line:75:39, endln:75:52
+  \_port: (ix_thread_idx), line:75:5, endln:75:52
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:ix_thread_idx
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@int_execute_stage.ix_thread_idx.ix_thread_idx), line:75:39, endln:75:52
-      |vpiParent:
-      \_port: (ix_thread_idx), line:75:39, endln:75:52
-      |vpiName:ix_thread_idx
-      |vpiFullName:work@int_execute_stage.ix_thread_idx.ix_thread_idx
-      |vpiActual:
-      \_logic_net: (work@int_execute_stage.ix_thread_idx), line:75:39, endln:75:52
     |vpiTypedef:
-    \_ref_typespec: (work@int_execute_stage.ix_thread_idx)
+    \_ref_typespec: (work@int_execute_stage.ix_thread_idx.local_thread_idx_t), line:75:12, endln:75:30
       |vpiParent:
-      \_port: (ix_thread_idx), line:75:39, endln:75:52
-      |vpiFullName:work@int_execute_stage.ix_thread_idx
+      \_port: (ix_thread_idx), line:75:5, endln:75:52
+      |vpiName:local_thread_idx_t
+      |vpiFullName:work@int_execute_stage.ix_thread_idx.local_thread_idx_t
       |vpiActual:
       \_unsupported_typespec: (local_thread_idx_t), line:75:12, endln:75:30
   |vpiPort:
-  \_port: (ix_rollback_en), line:76:39, endln:76:53
+  \_port: (ix_rollback_en), line:76:5, endln:76:53
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:ix_rollback_en
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@int_execute_stage.ix_rollback_en.ix_rollback_en), line:76:39, endln:76:53
-      |vpiParent:
-      \_port: (ix_rollback_en), line:76:39, endln:76:53
-      |vpiName:ix_rollback_en
-      |vpiFullName:work@int_execute_stage.ix_rollback_en.ix_rollback_en
-      |vpiActual:
-      \_logic_net: (work@int_execute_stage.ix_rollback_en), line:76:39, endln:76:53
     |vpiTypedef:
-    \_ref_typespec: (work@int_execute_stage.ix_rollback_en)
+    \_ref_typespec: (work@int_execute_stage.ix_rollback_en), line:76:12, endln:76:17
       |vpiParent:
-      \_port: (ix_rollback_en), line:76:39, endln:76:53
+      \_port: (ix_rollback_en), line:76:5, endln:76:53
       |vpiFullName:work@int_execute_stage.ix_rollback_en
       |vpiActual:
       \_logic_typespec: , line:76:12, endln:76:17
   |vpiPort:
-  \_port: (ix_rollback_pc), line:77:39, endln:77:53
+  \_port: (ix_rollback_pc), line:77:5, endln:77:53
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:ix_rollback_pc
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@int_execute_stage.ix_rollback_pc.ix_rollback_pc), line:77:39, endln:77:53
-      |vpiParent:
-      \_port: (ix_rollback_pc), line:77:39, endln:77:53
-      |vpiName:ix_rollback_pc
-      |vpiFullName:work@int_execute_stage.ix_rollback_pc.ix_rollback_pc
-      |vpiActual:
-      \_logic_net: (work@int_execute_stage.ix_rollback_pc), line:77:39, endln:77:53
     |vpiTypedef:
-    \_ref_typespec: (work@int_execute_stage.ix_rollback_pc)
+    \_ref_typespec: (work@int_execute_stage.ix_rollback_pc.scalar_t), line:77:12, endln:77:20
       |vpiParent:
-      \_port: (ix_rollback_pc), line:77:39, endln:77:53
-      |vpiFullName:work@int_execute_stage.ix_rollback_pc
+      \_port: (ix_rollback_pc), line:77:5, endln:77:53
+      |vpiName:scalar_t
+      |vpiFullName:work@int_execute_stage.ix_rollback_pc.scalar_t
       |vpiActual:
       \_logic_typespec: (scalar_t), line:50:9, endln:50:20
   |vpiPort:
-  \_port: (ix_subcycle), line:78:39, endln:78:50
+  \_port: (ix_subcycle), line:78:5, endln:78:50
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:ix_subcycle
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@int_execute_stage.ix_subcycle.ix_subcycle), line:78:39, endln:78:50
-      |vpiParent:
-      \_port: (ix_subcycle), line:78:39, endln:78:50
-      |vpiName:ix_subcycle
-      |vpiFullName:work@int_execute_stage.ix_subcycle.ix_subcycle
-      |vpiActual:
-      \_logic_net: (work@int_execute_stage.ix_subcycle), line:78:39, endln:78:50
     |vpiTypedef:
-    \_ref_typespec: (work@int_execute_stage.ix_subcycle)
+    \_ref_typespec: (work@int_execute_stage.ix_subcycle.subcycle_t), line:78:12, endln:78:22
       |vpiParent:
-      \_port: (ix_subcycle), line:78:39, endln:78:50
-      |vpiFullName:work@int_execute_stage.ix_subcycle
+      \_port: (ix_subcycle), line:78:5, endln:78:50
+      |vpiName:subcycle_t
+      |vpiFullName:work@int_execute_stage.ix_subcycle.subcycle_t
       |vpiActual:
       \_unsupported_typespec: (subcycle_t), line:78:12, endln:78:22
   |vpiPort:
-  \_port: (ix_privileged_op_fault), line:79:39, endln:79:61
+  \_port: (ix_privileged_op_fault), line:79:5, endln:79:61
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:ix_privileged_op_fault
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@int_execute_stage.ix_privileged_op_fault.ix_privileged_op_fault), line:79:39, endln:79:61
-      |vpiParent:
-      \_port: (ix_privileged_op_fault), line:79:39, endln:79:61
-      |vpiName:ix_privileged_op_fault
-      |vpiFullName:work@int_execute_stage.ix_privileged_op_fault.ix_privileged_op_fault
-      |vpiActual:
-      \_logic_net: (work@int_execute_stage.ix_privileged_op_fault), line:79:39, endln:79:61
     |vpiTypedef:
-    \_ref_typespec: (work@int_execute_stage.ix_privileged_op_fault)
+    \_ref_typespec: (work@int_execute_stage.ix_privileged_op_fault), line:79:12, endln:79:17
       |vpiParent:
-      \_port: (ix_privileged_op_fault), line:79:39, endln:79:61
+      \_port: (ix_privileged_op_fault), line:79:5, endln:79:61
       |vpiFullName:work@int_execute_stage.ix_privileged_op_fault
       |vpiActual:
       \_logic_typespec: , line:79:12, endln:79:17
   |vpiPort:
-  \_port: (cr_eret_address), line:82:39, endln:82:54
+  \_port: (cr_eret_address), line:82:5, endln:82:54
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:cr_eret_address
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@int_execute_stage.cr_eret_address.cr_eret_address), line:82:39, endln:82:54
-      |vpiParent:
-      \_port: (cr_eret_address), line:82:39, endln:82:54
-      |vpiName:cr_eret_address
-      |vpiFullName:work@int_execute_stage.cr_eret_address.cr_eret_address
-      |vpiActual:
-      \_logic_net: (work@int_execute_stage.cr_eret_address), line:82:39, endln:82:54
     |vpiTypedef:
-    \_ref_typespec: (work@int_execute_stage.cr_eret_address)
+    \_ref_typespec: (work@int_execute_stage.cr_eret_address), line:82:39, endln:82:54
       |vpiParent:
-      \_port: (cr_eret_address), line:82:39, endln:82:54
+      \_port: (cr_eret_address), line:82:5, endln:82:54
       |vpiFullName:work@int_execute_stage.cr_eret_address
       |vpiActual:
-      \_array_typespec: , line:82:11, endln:82:56
+      \_array_typespec: , line:82:54, endln:82:57
   |vpiPort:
-  \_port: (cr_supervisor_en), line:83:39, endln:83:55
+  \_port: (cr_supervisor_en), line:83:5, endln:83:55
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:cr_supervisor_en
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@int_execute_stage.cr_supervisor_en.cr_supervisor_en), line:83:39, endln:83:55
-      |vpiParent:
-      \_port: (cr_supervisor_en), line:83:39, endln:83:55
-      |vpiName:cr_supervisor_en
-      |vpiFullName:work@int_execute_stage.cr_supervisor_en.cr_supervisor_en
-      |vpiActual:
-      \_logic_net: (work@int_execute_stage.cr_supervisor_en), line:83:39, endln:83:55
     |vpiTypedef:
-    \_ref_typespec: (work@int_execute_stage.cr_supervisor_en)
+    \_ref_typespec: (work@int_execute_stage.cr_supervisor_en), line:83:39, endln:83:55
       |vpiParent:
-      \_port: (cr_supervisor_en), line:83:39, endln:83:55
+      \_port: (cr_supervisor_en), line:83:5, endln:83:55
       |vpiFullName:work@int_execute_stage.cr_supervisor_en
       |vpiActual:
-      \_array_typespec: , line:83:39, endln:83:57
+      \_array_typespec: , line:83:55, endln:83:58
   |vpiPort:
-  \_port: (ix_perf_uncond_branch), line:86:39, endln:86:60
+  \_port: (ix_perf_uncond_branch), line:86:5, endln:86:60
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:ix_perf_uncond_branch
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@int_execute_stage.ix_perf_uncond_branch.ix_perf_uncond_branch), line:86:39, endln:86:60
-      |vpiParent:
-      \_port: (ix_perf_uncond_branch), line:86:39, endln:86:60
-      |vpiName:ix_perf_uncond_branch
-      |vpiFullName:work@int_execute_stage.ix_perf_uncond_branch.ix_perf_uncond_branch
-      |vpiActual:
-      \_logic_net: (work@int_execute_stage.ix_perf_uncond_branch), line:86:39, endln:86:60
     |vpiTypedef:
-    \_ref_typespec: (work@int_execute_stage.ix_perf_uncond_branch)
+    \_ref_typespec: (work@int_execute_stage.ix_perf_uncond_branch), line:86:12, endln:86:17
       |vpiParent:
-      \_port: (ix_perf_uncond_branch), line:86:39, endln:86:60
+      \_port: (ix_perf_uncond_branch), line:86:5, endln:86:60
       |vpiFullName:work@int_execute_stage.ix_perf_uncond_branch
       |vpiActual:
       \_logic_typespec: , line:86:12, endln:86:17
   |vpiPort:
-  \_port: (ix_perf_cond_branch_taken), line:87:39, endln:87:64
+  \_port: (ix_perf_cond_branch_taken), line:87:5, endln:87:64
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:ix_perf_cond_branch_taken
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@int_execute_stage.ix_perf_cond_branch_taken.ix_perf_cond_branch_taken), line:87:39, endln:87:64
-      |vpiParent:
-      \_port: (ix_perf_cond_branch_taken), line:87:39, endln:87:64
-      |vpiName:ix_perf_cond_branch_taken
-      |vpiFullName:work@int_execute_stage.ix_perf_cond_branch_taken.ix_perf_cond_branch_taken
-      |vpiActual:
-      \_logic_net: (work@int_execute_stage.ix_perf_cond_branch_taken), line:87:39, endln:87:64
     |vpiTypedef:
-    \_ref_typespec: (work@int_execute_stage.ix_perf_cond_branch_taken)
+    \_ref_typespec: (work@int_execute_stage.ix_perf_cond_branch_taken), line:87:12, endln:87:17
       |vpiParent:
-      \_port: (ix_perf_cond_branch_taken), line:87:39, endln:87:64
+      \_port: (ix_perf_cond_branch_taken), line:87:5, endln:87:64
       |vpiFullName:work@int_execute_stage.ix_perf_cond_branch_taken
       |vpiActual:
       \_logic_typespec: , line:87:12, endln:87:17
   |vpiPort:
-  \_port: (ix_perf_cond_branch_not_taken), line:88:39, endln:88:68
+  \_port: (ix_perf_cond_branch_not_taken), line:88:5, endln:88:68
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:ix_perf_cond_branch_not_taken
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@int_execute_stage.ix_perf_cond_branch_not_taken.ix_perf_cond_branch_not_taken), line:88:39, endln:88:68
-      |vpiParent:
-      \_port: (ix_perf_cond_branch_not_taken), line:88:39, endln:88:68
-      |vpiName:ix_perf_cond_branch_not_taken
-      |vpiFullName:work@int_execute_stage.ix_perf_cond_branch_not_taken.ix_perf_cond_branch_not_taken
-      |vpiActual:
-      \_logic_net: (work@int_execute_stage.ix_perf_cond_branch_not_taken), line:88:39, endln:88:68
     |vpiTypedef:
-    \_ref_typespec: (work@int_execute_stage.ix_perf_cond_branch_not_taken)
+    \_ref_typespec: (work@int_execute_stage.ix_perf_cond_branch_not_taken), line:88:12, endln:88:17
       |vpiParent:
-      \_port: (ix_perf_cond_branch_not_taken), line:88:39, endln:88:68
+      \_port: (ix_perf_cond_branch_not_taken), line:88:5, endln:88:68
       |vpiFullName:work@int_execute_stage.ix_perf_cond_branch_not_taken
       |vpiActual:
       \_logic_typespec: , line:88:12, endln:88:17
@@ -5426,6 +5828,8 @@ design: (unnamed)
         |vpiBlocking:1
         |vpiRhs:
         \_constant: , line:287:24, endln:287:25
+          |vpiParent:
+          \_assignment: , line:287:9, endln:287:25
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
@@ -5437,7 +5841,7 @@ design: (unnamed)
           |vpiName:branch_taken
           |vpiFullName:work@int_execute_stage.branch_taken
           |vpiActual:
-          \_logic_net: (work@int_execute_stage.branch_taken), line:93:11, endln:93:23
+          \_logic_var: (work@int_execute_stage.branch_taken), line:93:11, endln:93:23
       |vpiStmt:
       \_assignment: , line:288:9, endln:288:31
         |vpiParent:
@@ -5446,6 +5850,8 @@ design: (unnamed)
         |vpiBlocking:1
         |vpiRhs:
         \_constant: , line:288:30, endln:288:31
+          |vpiParent:
+          \_assignment: , line:288:9, endln:288:31
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
@@ -5457,7 +5863,7 @@ design: (unnamed)
           |vpiName:conditional_branch
           |vpiFullName:work@int_execute_stage.conditional_branch
           |vpiActual:
-          \_logic_net: (work@int_execute_stage.conditional_branch), line:94:11, endln:94:29
+          \_logic_var: (work@int_execute_stage.conditional_branch), line:94:11, endln:94:29
       |vpiStmt:
       \_if_stmt: , line:290:9, endln:319:12
         |vpiParent:
@@ -5479,7 +5885,7 @@ design: (unnamed)
               |vpiName:valid_instruction
               |vpiFullName:work@int_execute_stage.valid_instruction
               |vpiActual:
-              \_logic_net: (work@int_execute_stage.valid_instruction), line:95:11, endln:95:28
+              \_logic_var: (work@int_execute_stage.valid_instruction), line:95:11, endln:95:28
             |vpiOperand:
             \_hier_path: (of_instruction.branch), line:291:16, endln:291:37
               |vpiParent:
@@ -5489,12 +5895,16 @@ design: (unnamed)
                 |vpiParent:
                 \_hier_path: (of_instruction.branch), line:291:16, endln:291:37
                 |vpiName:of_instruction
+                |vpiActual:
+                \_struct_var: (work@int_execute_stage.of_instruction), line:62:39, endln:62:53
               |vpiActual:
               \_ref_obj: (work@int_execute_stage.branch), line:291:31, endln:291:37
                 |vpiParent:
                 \_hier_path: (of_instruction.branch), line:291:16, endln:291:37
                 |vpiName:branch
                 |vpiFullName:work@int_execute_stage.branch
+                |vpiActual:
+                \_typespec_member: (branch), line:36:5, endln:36:18
               |vpiName:of_instruction.branch
           |vpiOperand:
           \_operation: , line:292:16, endln:292:36
@@ -5508,7 +5918,7 @@ design: (unnamed)
               |vpiName:privileged_op_fault
               |vpiFullName:work@int_execute_stage.privileged_op_fault
               |vpiActual:
-              \_logic_net: (work@int_execute_stage.privileged_op_fault), line:92:11, endln:92:30
+              \_logic_var: (work@int_execute_stage.privileged_op_fault), line:92:11, endln:92:30
         |vpiStmt:
         \_begin: (work@int_execute_stage), line:293:9, endln:319:12
           |vpiParent:
@@ -5529,12 +5939,16 @@ design: (unnamed)
                 |vpiParent:
                 \_hier_path: (of_instruction.branch_type), line:294:26, endln:294:52
                 |vpiName:of_instruction
+                |vpiActual:
+                \_struct_var: (work@int_execute_stage.of_instruction), line:62:39, endln:62:53
               |vpiActual:
               \_ref_obj: (work@int_execute_stage.branch_type), line:294:41, endln:294:52
                 |vpiParent:
                 \_hier_path: (of_instruction.branch_type), line:294:26, endln:294:52
                 |vpiName:branch_type
                 |vpiFullName:work@int_execute_stage.branch_type
+                |vpiActual:
+                \_typespec_member: (branch_type), line:37:5, endln:37:31
               |vpiName:of_instruction.branch_type
             |vpiCaseItem:
             \_case_item: , line:295:17, endln:299:20
@@ -5565,15 +5979,17 @@ design: (unnamed)
                     \_assignment: , line:297:21, endln:297:55
                     |vpiOpType:14
                     |vpiOperand:
-                    \_bit_select: (work@int_execute_stage.of_operand1), line:297:48, endln:297:49
+                    \_bit_select: (work@int_execute_stage.of_operand1), line:297:47, endln:297:50
                       |vpiParent:
                       \_operation: , line:297:36, endln:297:55
                       |vpiName:of_operand1
                       |vpiFullName:work@int_execute_stage.of_operand1
+                      |vpiActual:
+                      \_logic_var: (work@int_execute_stage.of_operand1), line:58:39, endln:58:50
                       |vpiIndex:
                       \_constant: , line:297:48, endln:297:49
                         |vpiParent:
-                        \_bit_select: (work@int_execute_stage.of_operand1), line:297:48, endln:297:49
+                        \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
                         |vpiDecompile:0
                         |vpiSize:64
                         |UINT:0
@@ -5593,7 +6009,7 @@ design: (unnamed)
                     |vpiName:branch_taken
                     |vpiFullName:work@int_execute_stage.branch_taken
                     |vpiActual:
-                    \_logic_net: (work@int_execute_stage.branch_taken), line:93:11, endln:93:23
+                    \_logic_var: (work@int_execute_stage.branch_taken), line:93:11, endln:93:23
                 |vpiStmt:
                 \_assignment: , line:298:21, endln:298:43
                   |vpiParent:
@@ -5602,6 +6018,8 @@ design: (unnamed)
                   |vpiBlocking:1
                   |vpiRhs:
                   \_constant: , line:298:42, endln:298:43
+                    |vpiParent:
+                    \_assignment: , line:298:21, endln:298:43
                     |vpiDecompile:1
                     |vpiSize:64
                     |UINT:1
@@ -5613,7 +6031,7 @@ design: (unnamed)
                     |vpiName:conditional_branch
                     |vpiFullName:work@int_execute_stage.conditional_branch
                     |vpiActual:
-                    \_logic_net: (work@int_execute_stage.conditional_branch), line:94:11, endln:94:29
+                    \_logic_var: (work@int_execute_stage.conditional_branch), line:94:11, endln:94:29
             |vpiCaseItem:
             \_case_item: , line:301:17, endln:305:20
               |vpiParent:
@@ -5643,15 +6061,17 @@ design: (unnamed)
                     \_assignment: , line:303:21, endln:303:55
                     |vpiOpType:15
                     |vpiOperand:
-                    \_bit_select: (work@int_execute_stage.of_operand1), line:303:48, endln:303:49
+                    \_bit_select: (work@int_execute_stage.of_operand1), line:303:47, endln:303:50
                       |vpiParent:
                       \_operation: , line:303:36, endln:303:55
                       |vpiName:of_operand1
                       |vpiFullName:work@int_execute_stage.of_operand1
+                      |vpiActual:
+                      \_logic_var: (work@int_execute_stage.of_operand1), line:58:39, endln:58:50
                       |vpiIndex:
                       \_constant: , line:303:48, endln:303:49
                         |vpiParent:
-                        \_bit_select: (work@int_execute_stage.of_operand1), line:303:48, endln:303:49
+                        \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
                         |vpiDecompile:0
                         |vpiSize:64
                         |UINT:0
@@ -5671,7 +6091,7 @@ design: (unnamed)
                     |vpiName:branch_taken
                     |vpiFullName:work@int_execute_stage.branch_taken
                     |vpiActual:
-                    \_logic_net: (work@int_execute_stage.branch_taken), line:93:11, endln:93:23
+                    \_logic_var: (work@int_execute_stage.branch_taken), line:93:11, endln:93:23
                 |vpiStmt:
                 \_assignment: , line:304:21, endln:304:43
                   |vpiParent:
@@ -5680,6 +6100,8 @@ design: (unnamed)
                   |vpiBlocking:1
                   |vpiRhs:
                   \_constant: , line:304:42, endln:304:43
+                    |vpiParent:
+                    \_assignment: , line:304:21, endln:304:43
                     |vpiDecompile:1
                     |vpiSize:64
                     |UINT:1
@@ -5691,7 +6113,7 @@ design: (unnamed)
                     |vpiName:conditional_branch
                     |vpiFullName:work@int_execute_stage.conditional_branch
                     |vpiActual:
-                    \_logic_net: (work@int_execute_stage.conditional_branch), line:94:11, endln:94:29
+                    \_logic_var: (work@int_execute_stage.conditional_branch), line:94:11, endln:94:29
             |vpiCaseItem:
             \_case_item: , line:307:17, endln:314:20
               |vpiParent:
@@ -5735,7 +6157,7 @@ design: (unnamed)
                 |vpiName:BRANCH_ERET
                 |vpiFullName:work@int_execute_stage.BRANCH_ERET
                 |vpiActual:
-                \_logic_net: (work@int_execute_stage.BRANCH_ERET), line:282:42, endln:282:53
+                \_logic_net: (work@int_execute_stage.BRANCH_ERET), line:311:17, endln:311:28
               |vpiStmt:
               \_begin: (work@int_execute_stage), line:312:17, endln:314:20
                 |vpiParent:
@@ -5749,6 +6171,8 @@ design: (unnamed)
                   |vpiBlocking:1
                   |vpiRhs:
                   \_constant: , line:313:36, endln:313:37
+                    |vpiParent:
+                    \_assignment: , line:313:21, endln:313:37
                     |vpiDecompile:1
                     |vpiSize:64
                     |UINT:1
@@ -5760,7 +6184,7 @@ design: (unnamed)
                     |vpiName:branch_taken
                     |vpiFullName:work@int_execute_stage.branch_taken
                     |vpiActual:
-                    \_logic_net: (work@int_execute_stage.branch_taken), line:93:11, endln:93:23
+                    \_logic_var: (work@int_execute_stage.branch_taken), line:93:11, endln:93:23
             |vpiCaseItem:
             \_case_item: , line:316:17, endln:317:22
               |vpiParent:
@@ -5771,13 +6195,13 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiStmt:
-    \_event_control: , line:323:15, endln:323:29
+    \_event_control: , line:323:15, endln:339:8
       |vpiParent:
       \_always: , line:323:5, endln:339:8
       |vpiCondition:
       \_operation: , line:323:17, endln:323:28
         |vpiParent:
-        \_event_control: , line:323:15, endln:323:29
+        \_event_control: , line:323:15, endln:339:8
         |vpiOpType:39
         |vpiOperand:
         \_ref_obj: (work@int_execute_stage.clk), line:323:25, endln:323:28
@@ -5790,7 +6214,7 @@ design: (unnamed)
       |vpiStmt:
       \_begin: (work@int_execute_stage), line:324:5, endln:339:8
         |vpiParent:
-        \_event_control: , line:323:15, endln:323:29
+        \_event_control: , line:323:15, endln:339:8
         |vpiFullName:work@int_execute_stage
         |vpiStmt:
         \_assignment: , line:325:9, endln:325:41
@@ -5804,7 +6228,7 @@ design: (unnamed)
             |vpiName:of_instruction
             |vpiFullName:work@int_execute_stage.of_instruction
             |vpiActual:
-            \_logic_net: (work@int_execute_stage.of_instruction), line:62:39, endln:62:53
+            \_struct_var: (work@int_execute_stage.of_instruction), line:62:39, endln:62:53
           |vpiLhs:
           \_ref_obj: (work@int_execute_stage.ix_instruction), line:325:9, endln:325:23
             |vpiParent:
@@ -5812,7 +6236,7 @@ design: (unnamed)
             |vpiName:ix_instruction
             |vpiFullName:work@int_execute_stage.ix_instruction
             |vpiActual:
-            \_logic_net: (work@int_execute_stage.ix_instruction), line:72:39, endln:72:53
+            \_struct_var: (work@int_execute_stage.ix_instruction), line:72:39, endln:72:53
         |vpiStmt:
         \_assignment: , line:326:9, endln:326:35
           |vpiParent:
@@ -5833,7 +6257,7 @@ design: (unnamed)
             |vpiName:ix_result
             |vpiFullName:work@int_execute_stage.ix_result
             |vpiActual:
-            \_logic_net: (work@int_execute_stage.ix_result), line:73:39, endln:73:48
+            \_logic_var: (work@int_execute_stage.ix_result), line:73:39, endln:73:48
         |vpiStmt:
         \_assignment: , line:327:9, endln:327:39
           |vpiParent:
@@ -5846,7 +6270,7 @@ design: (unnamed)
             |vpiName:of_mask_value
             |vpiFullName:work@int_execute_stage.of_mask_value
             |vpiActual:
-            \_logic_net: (work@int_execute_stage.of_mask_value), line:60:39, endln:60:52
+            \_logic_var: (work@int_execute_stage.of_mask_value), line:60:39, endln:60:52
           |vpiLhs:
           \_ref_obj: (work@int_execute_stage.ix_mask_value), line:327:9, endln:327:22
             |vpiParent:
@@ -5854,7 +6278,7 @@ design: (unnamed)
             |vpiName:ix_mask_value
             |vpiFullName:work@int_execute_stage.ix_mask_value
             |vpiActual:
-            \_logic_net: (work@int_execute_stage.ix_mask_value), line:74:39, endln:74:52
+            \_logic_var: (work@int_execute_stage.ix_mask_value), line:74:39, endln:74:52
         |vpiStmt:
         \_assignment: , line:328:9, endln:328:39
           |vpiParent:
@@ -5867,7 +6291,7 @@ design: (unnamed)
             |vpiName:of_thread_idx
             |vpiFullName:work@int_execute_stage.of_thread_idx
             |vpiActual:
-            \_logic_net: (work@int_execute_stage.of_thread_idx), line:63:39, endln:63:52
+            \_logic_var: (work@int_execute_stage.of_thread_idx), line:63:39, endln:63:52
           |vpiLhs:
           \_ref_obj: (work@int_execute_stage.ix_thread_idx), line:328:9, endln:328:22
             |vpiParent:
@@ -5875,7 +6299,7 @@ design: (unnamed)
             |vpiName:ix_thread_idx
             |vpiFullName:work@int_execute_stage.ix_thread_idx
             |vpiActual:
-            \_logic_net: (work@int_execute_stage.ix_thread_idx), line:75:39, endln:75:52
+            \_logic_var: (work@int_execute_stage.ix_thread_idx), line:75:39, endln:75:52
         |vpiStmt:
         \_assignment: , line:329:9, endln:329:35
           |vpiParent:
@@ -5888,7 +6312,7 @@ design: (unnamed)
             |vpiName:of_subcycle
             |vpiFullName:work@int_execute_stage.of_subcycle
             |vpiActual:
-            \_logic_net: (work@int_execute_stage.of_subcycle), line:64:39, endln:64:50
+            \_logic_var: (work@int_execute_stage.of_subcycle), line:64:39, endln:64:50
           |vpiLhs:
           \_ref_obj: (work@int_execute_stage.ix_subcycle), line:329:9, endln:329:20
             |vpiParent:
@@ -5896,7 +6320,7 @@ design: (unnamed)
             |vpiName:ix_subcycle
             |vpiFullName:work@int_execute_stage.ix_subcycle
             |vpiActual:
-            \_logic_net: (work@int_execute_stage.ix_subcycle), line:78:39, endln:78:50
+            \_logic_var: (work@int_execute_stage.ix_subcycle), line:78:39, endln:78:50
         |vpiStmt:
         \_case_stmt: , line:332:9, endln:338:16
           |vpiParent:
@@ -5912,12 +6336,16 @@ design: (unnamed)
               |vpiParent:
               \_hier_path: (of_instruction.branch_type), line:332:22, endln:332:48
               |vpiName:of_instruction
+              |vpiActual:
+              \_struct_var: (work@int_execute_stage.of_instruction), line:62:39, endln:62:53
             |vpiActual:
             \_ref_obj: (work@int_execute_stage.branch_type), line:332:37, endln:332:48
               |vpiParent:
               \_hier_path: (of_instruction.branch_type), line:332:22, endln:332:48
               |vpiName:branch_type
               |vpiFullName:work@int_execute_stage.branch_type
+              |vpiActual:
+              \_typespec_member: (branch_type), line:37:5, endln:37:31
             |vpiName:of_instruction.branch_type
           |vpiCaseItem:
           \_case_item: , line:333:13, endln:334:63
@@ -5945,15 +6373,17 @@ design: (unnamed)
               \_case_item: , line:333:13, endln:334:63
               |vpiOpType:82
               |vpiRhs:
-              \_bit_select: (work@int_execute_stage.of_operand1), line:334:60, endln:334:61
+              \_bit_select: (work@int_execute_stage.of_operand1), line:334:59, endln:334:62
                 |vpiParent:
                 \_assignment: , line:334:30, endln:334:62
                 |vpiName:of_operand1
                 |vpiFullName:work@int_execute_stage.of_operand1
+                |vpiActual:
+                \_logic_var: (work@int_execute_stage.of_operand1), line:58:39, endln:58:50
                 |vpiIndex:
                 \_constant: , line:334:60, endln:334:61
                   |vpiParent:
-                  \_bit_select: (work@int_execute_stage.of_operand1), line:334:60, endln:334:61
+                  \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
                   |vpiDecompile:0
                   |vpiSize:64
                   |UINT:0
@@ -5965,7 +6395,7 @@ design: (unnamed)
                 |vpiName:ix_rollback_pc
                 |vpiFullName:work@int_execute_stage.ix_rollback_pc
                 |vpiActual:
-                \_logic_net: (work@int_execute_stage.ix_rollback_pc), line:77:39, endln:77:53
+                \_logic_var: (work@int_execute_stage.ix_rollback_pc), line:77:39, endln:77:53
           |vpiCaseItem:
           \_case_item: , line:335:13, endln:335:75
             |vpiParent:
@@ -5977,26 +6407,28 @@ design: (unnamed)
               |vpiName:BRANCH_ERET
               |vpiFullName:work@int_execute_stage.BRANCH_ERET
               |vpiActual:
-              \_logic_net: (work@int_execute_stage.BRANCH_ERET), line:282:42, endln:282:53
+              \_logic_net: (work@int_execute_stage.BRANCH_ERET), line:311:17, endln:311:28
             |vpiStmt:
             \_assignment: , line:335:26, endln:335:74
               |vpiParent:
               \_case_item: , line:335:13, endln:335:75
               |vpiOpType:82
               |vpiRhs:
-              \_bit_select: (work@int_execute_stage.cr_eret_address), line:335:60, endln:335:73
+              \_bit_select: (work@int_execute_stage.cr_eret_address), line:335:59, endln:335:74
                 |vpiParent:
                 \_assignment: , line:335:26, endln:335:74
                 |vpiName:cr_eret_address
                 |vpiFullName:work@int_execute_stage.cr_eret_address
+                |vpiActual:
+                \_array_var: (work@int_execute_stage.cr_eret_address), line:82:39, endln:82:57
                 |vpiIndex:
                 \_ref_obj: (work@int_execute_stage.of_thread_idx), line:335:60, endln:335:73
                   |vpiParent:
-                  \_bit_select: (work@int_execute_stage.cr_eret_address), line:335:60, endln:335:73
+                  \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
                   |vpiName:of_thread_idx
                   |vpiFullName:work@int_execute_stage.of_thread_idx
                   |vpiActual:
-                  \_logic_net: (work@int_execute_stage.of_thread_idx), line:63:39, endln:63:52
+                  \_logic_var: (work@int_execute_stage.of_thread_idx), line:63:39, endln:63:52
               |vpiLhs:
               \_ref_obj: (work@int_execute_stage.ix_rollback_pc), line:335:26, endln:335:40
                 |vpiParent:
@@ -6004,7 +6436,7 @@ design: (unnamed)
                 |vpiName:ix_rollback_pc
                 |vpiFullName:work@int_execute_stage.ix_rollback_pc
                 |vpiActual:
-                \_logic_net: (work@int_execute_stage.ix_rollback_pc), line:77:39, endln:77:53
+                \_logic_var: (work@int_execute_stage.ix_rollback_pc), line:77:39, endln:77:53
           |vpiCaseItem:
           \_case_item: , line:336:13, endln:337:86
             |vpiParent:
@@ -6028,12 +6460,16 @@ design: (unnamed)
                     |vpiParent:
                     \_hier_path: (of_instruction.pc), line:337:35, endln:337:52
                     |vpiName:of_instruction
+                    |vpiActual:
+                    \_struct_var: (work@int_execute_stage.of_instruction), line:62:39, endln:62:53
                   |vpiActual:
                   \_ref_obj: (work@int_execute_stage.pc), line:337:50, endln:337:52
                     |vpiParent:
                     \_hier_path: (of_instruction.pc), line:337:35, endln:337:52
                     |vpiName:pc
                     |vpiFullName:work@int_execute_stage.pc
+                    |vpiActual:
+                    \_typespec_member: (pc), line:9:5, endln:9:17
                   |vpiName:of_instruction.pc
                 |vpiOperand:
                 \_hier_path: (of_instruction.immediate_value), line:337:55, endln:337:85
@@ -6044,12 +6480,16 @@ design: (unnamed)
                     |vpiParent:
                     \_hier_path: (of_instruction.immediate_value), line:337:55, endln:337:85
                     |vpiName:of_instruction
+                    |vpiActual:
+                    \_struct_var: (work@int_execute_stage.of_instruction), line:62:39, endln:62:53
                   |vpiActual:
                   \_ref_obj: (work@int_execute_stage.immediate_value), line:337:70, endln:337:85
                     |vpiParent:
                     \_hier_path: (of_instruction.immediate_value), line:337:55, endln:337:85
                     |vpiName:immediate_value
                     |vpiFullName:work@int_execute_stage.immediate_value
+                    |vpiActual:
+                    \_typespec_member: (immediate_value), line:35:5, endln:35:30
                   |vpiName:of_instruction.immediate_value
               |vpiLhs:
               \_ref_obj: (work@int_execute_stage.ix_rollback_pc), line:337:17, endln:337:31
@@ -6058,25 +6498,25 @@ design: (unnamed)
                 |vpiName:ix_rollback_pc
                 |vpiFullName:work@int_execute_stage.ix_rollback_pc
                 |vpiActual:
-                \_logic_net: (work@int_execute_stage.ix_rollback_pc), line:77:39, endln:77:53
+                \_logic_var: (work@int_execute_stage.ix_rollback_pc), line:77:39, endln:77:53
     |vpiAlwaysType:3
   |vpiProcess:
   \_always: , line:341:5, endln:373:8
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiStmt:
-    \_event_control: , line:341:15, endln:341:44
+    \_event_control: , line:341:15, endln:373:8
       |vpiParent:
       \_always: , line:341:5, endln:373:8
       |vpiCondition:
       \_operation: , line:341:17, endln:341:43
         |vpiParent:
-        \_event_control: , line:341:15, endln:341:44
+        \_event_control: , line:341:15, endln:373:8
         |vpiOpType:37
         |vpiOperand:
         \_operation: , line:341:17, endln:341:28
           |vpiParent:
-          \_operation: , line:341:17, endln:341:43
+          \_event_control: , line:341:15, endln:373:8
           |vpiOpType:39
           |vpiOperand:
           \_ref_obj: (work@int_execute_stage.clk), line:341:25, endln:341:28
@@ -6102,7 +6542,7 @@ design: (unnamed)
       |vpiStmt:
       \_begin: (work@int_execute_stage), line:342:5, endln:373:8
         |vpiParent:
-        \_event_control: , line:341:15, endln:341:44
+        \_event_control: , line:341:15, endln:373:8
         |vpiFullName:work@int_execute_stage
         |vpiStmt:
         \_if_else: , line:343:9, endln:372:12
@@ -6128,6 +6568,8 @@ design: (unnamed)
               |vpiOpType:82
               |vpiRhs:
               \_constant: , line:347:37, endln:347:39
+                |vpiParent:
+                \_assignment: , line:347:13, endln:347:39
                 |vpiDecompile:'0
                 |vpiSize:-1
                 |BIN:0
@@ -6147,6 +6589,8 @@ design: (unnamed)
               |vpiOpType:82
               |vpiRhs:
               \_constant: , line:348:46, endln:348:48
+                |vpiParent:
+                \_assignment: , line:348:13, endln:348:48
                 |vpiDecompile:'0
                 |vpiSize:-1
                 |BIN:0
@@ -6166,6 +6610,8 @@ design: (unnamed)
               |vpiOpType:82
               |vpiRhs:
               \_constant: , line:349:42, endln:349:44
+                |vpiParent:
+                \_assignment: , line:349:13, endln:349:44
                 |vpiDecompile:'0
                 |vpiSize:-1
                 |BIN:0
@@ -6185,6 +6631,8 @@ design: (unnamed)
               |vpiOpType:82
               |vpiRhs:
               \_constant: , line:350:38, endln:350:40
+                |vpiParent:
+                \_assignment: , line:350:13, endln:350:40
                 |vpiDecompile:'0
                 |vpiSize:-1
                 |BIN:0
@@ -6204,6 +6652,8 @@ design: (unnamed)
               |vpiOpType:82
               |vpiRhs:
               \_constant: , line:351:39, endln:351:41
+                |vpiParent:
+                \_assignment: , line:351:13, endln:351:41
                 |vpiDecompile:'0
                 |vpiSize:-1
                 |BIN:0
@@ -6223,6 +6673,8 @@ design: (unnamed)
               |vpiOpType:82
               |vpiRhs:
               \_constant: , line:352:31, endln:352:33
+                |vpiParent:
+                \_assignment: , line:352:13, endln:352:33
                 |vpiDecompile:'0
                 |vpiSize:-1
                 |BIN:0
@@ -6251,7 +6703,7 @@ design: (unnamed)
                 |vpiName:valid_instruction
                 |vpiFullName:work@int_execute_stage.valid_instruction
                 |vpiActual:
-                \_logic_net: (work@int_execute_stage.valid_instruction), line:95:11, endln:95:28
+                \_logic_var: (work@int_execute_stage.valid_instruction), line:95:11, endln:95:28
               |vpiStmt:
               \_begin: (work@int_execute_stage), line:358:13, endln:362:16
                 |vpiParent:
@@ -6264,6 +6716,8 @@ design: (unnamed)
                   |vpiOpType:82
                   |vpiRhs:
                   \_constant: , line:359:41, endln:359:42
+                    |vpiParent:
+                    \_assignment: , line:359:17, endln:359:42
                     |vpiDecompile:1
                     |vpiSize:64
                     |UINT:1
@@ -6288,7 +6742,7 @@ design: (unnamed)
                     |vpiName:privileged_op_fault
                     |vpiFullName:work@int_execute_stage.privileged_op_fault
                     |vpiActual:
-                    \_logic_net: (work@int_execute_stage.privileged_op_fault), line:92:11, endln:92:30
+                    \_logic_var: (work@int_execute_stage.privileged_op_fault), line:92:11, endln:92:30
                   |vpiLhs:
                   \_ref_obj: (work@int_execute_stage.ix_privileged_op_fault), line:360:17, endln:360:39
                     |vpiParent:
@@ -6309,7 +6763,7 @@ design: (unnamed)
                     |vpiName:branch_taken
                     |vpiFullName:work@int_execute_stage.branch_taken
                     |vpiActual:
-                    \_logic_net: (work@int_execute_stage.branch_taken), line:93:11, endln:93:23
+                    \_logic_var: (work@int_execute_stage.branch_taken), line:93:11, endln:93:23
                   |vpiLhs:
                   \_ref_obj: (work@int_execute_stage.ix_rollback_en), line:361:17, endln:361:31
                     |vpiParent:
@@ -6330,6 +6784,8 @@ design: (unnamed)
                   |vpiOpType:82
                   |vpiRhs:
                   \_constant: , line:365:41, endln:365:42
+                    |vpiParent:
+                    \_assignment: , line:365:17, endln:365:42
                     |vpiDecompile:0
                     |vpiSize:64
                     |UINT:0
@@ -6349,6 +6805,8 @@ design: (unnamed)
                   |vpiOpType:82
                   |vpiRhs:
                   \_constant: , line:366:35, endln:366:36
+                    |vpiParent:
+                    \_assignment: , line:366:17, endln:366:36
                     |vpiDecompile:0
                     |vpiSize:64
                     |UINT:0
@@ -6383,7 +6841,7 @@ design: (unnamed)
                     |vpiName:conditional_branch
                     |vpiFullName:work@int_execute_stage.conditional_branch
                     |vpiActual:
-                    \_logic_net: (work@int_execute_stage.conditional_branch), line:94:11, endln:94:29
+                    \_logic_var: (work@int_execute_stage.conditional_branch), line:94:11, endln:94:29
                 |vpiOperand:
                 \_ref_obj: (work@int_execute_stage.branch_taken), line:369:61, endln:369:73
                   |vpiParent:
@@ -6391,7 +6849,7 @@ design: (unnamed)
                   |vpiName:branch_taken
                   |vpiFullName:work@int_execute_stage.branch_taken
                   |vpiActual:
-                  \_logic_net: (work@int_execute_stage.branch_taken), line:93:11, endln:93:23
+                  \_logic_var: (work@int_execute_stage.branch_taken), line:93:11, endln:93:23
               |vpiLhs:
               \_ref_obj: (work@int_execute_stage.ix_perf_uncond_branch), line:369:13, endln:369:34
                 |vpiParent:
@@ -6417,7 +6875,7 @@ design: (unnamed)
                   |vpiName:conditional_branch
                   |vpiFullName:work@int_execute_stage.conditional_branch
                   |vpiActual:
-                  \_logic_net: (work@int_execute_stage.conditional_branch), line:94:11, endln:94:29
+                  \_logic_var: (work@int_execute_stage.conditional_branch), line:94:11, endln:94:29
                 |vpiOperand:
                 \_ref_obj: (work@int_execute_stage.branch_taken), line:370:64, endln:370:76
                   |vpiParent:
@@ -6425,7 +6883,7 @@ design: (unnamed)
                   |vpiName:branch_taken
                   |vpiFullName:work@int_execute_stage.branch_taken
                   |vpiActual:
-                  \_logic_net: (work@int_execute_stage.branch_taken), line:93:11, endln:93:23
+                  \_logic_var: (work@int_execute_stage.branch_taken), line:93:11, endln:93:23
               |vpiLhs:
               \_ref_obj: (work@int_execute_stage.ix_perf_cond_branch_taken), line:370:13, endln:370:38
                 |vpiParent:
@@ -6451,7 +6909,7 @@ design: (unnamed)
                   |vpiName:conditional_branch
                   |vpiFullName:work@int_execute_stage.conditional_branch
                   |vpiActual:
-                  \_logic_net: (work@int_execute_stage.conditional_branch), line:94:11, endln:94:29
+                  \_logic_var: (work@int_execute_stage.conditional_branch), line:94:11, endln:94:29
                 |vpiOperand:
                 \_operation: , line:371:68, endln:371:81
                   |vpiParent:
@@ -6464,7 +6922,7 @@ design: (unnamed)
                     |vpiName:branch_taken
                     |vpiFullName:work@int_execute_stage.branch_taken
                     |vpiActual:
-                    \_logic_net: (work@int_execute_stage.branch_taken), line:93:11, endln:93:23
+                    \_logic_var: (work@int_execute_stage.branch_taken), line:93:11, endln:93:23
               |vpiLhs:
               \_ref_obj: (work@int_execute_stage.ix_perf_cond_branch_not_taken), line:371:13, endln:371:42
                 |vpiParent:
@@ -6526,7 +6984,7 @@ design: (unnamed)
               |vpiName:wb_rollback_thread_idx
               |vpiFullName:work@int_execute_stage.wb_rollback_thread_idx
               |vpiActual:
-              \_logic_net: (work@int_execute_stage.wb_rollback_thread_idx), line:68:39, endln:68:61
+              \_logic_var: (work@int_execute_stage.wb_rollback_thread_idx), line:68:39, endln:68:61
             |vpiOperand:
             \_ref_obj: (work@int_execute_stage.of_thread_idx), line:278:58, endln:278:71
               |vpiParent:
@@ -6534,7 +6992,7 @@ design: (unnamed)
               |vpiName:of_thread_idx
               |vpiFullName:work@int_execute_stage.of_thread_idx
               |vpiActual:
-              \_logic_net: (work@int_execute_stage.of_thread_idx), line:63:39, endln:63:52
+              \_logic_var: (work@int_execute_stage.of_thread_idx), line:63:39, endln:63:52
       |vpiOperand:
       \_operation: , line:279:12, endln:279:57
         |vpiParent:
@@ -6549,12 +7007,16 @@ design: (unnamed)
             |vpiParent:
             \_hier_path: (of_instruction.pipeline_sel), line:279:12, endln:279:39
             |vpiName:of_instruction
+            |vpiActual:
+            \_struct_var: (work@int_execute_stage.of_instruction), line:62:39, endln:62:53
           |vpiActual:
           \_ref_obj: (work@int_execute_stage.pipeline_sel), line:279:27, endln:279:39
             |vpiParent:
             \_hier_path: (of_instruction.pipeline_sel), line:279:12, endln:279:39
             |vpiName:pipeline_sel
             |vpiFullName:work@int_execute_stage.pipeline_sel
+            |vpiActual:
+            \_typespec_member: (pipeline_sel), line:39:5, endln:39:33
           |vpiName:of_instruction.pipeline_sel
         |vpiOperand:
         \_ref_obj: (work@int_execute_stage.PIPE_INT_ARITH), line:279:43, endln:279:57
@@ -6567,11 +7029,11 @@ design: (unnamed)
     |vpiLhs:
     \_ref_obj: (work@int_execute_stage.valid_instruction), line:277:12, endln:277:29
       |vpiParent:
-      \_cont_assign: , line:277:12, endln:279:57
+      \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
       |vpiName:valid_instruction
       |vpiFullName:work@int_execute_stage.valid_instruction
       |vpiActual:
-      \_logic_net: (work@int_execute_stage.valid_instruction), line:95:11, endln:95:28
+      \_logic_var: (work@int_execute_stage.valid_instruction), line:95:11, endln:95:28
   |vpiContAssign:
   \_cont_assign: , line:280:12, endln:282:53
     |vpiParent:
@@ -6593,7 +7055,7 @@ design: (unnamed)
           |vpiName:valid_instruction
           |vpiFullName:work@int_execute_stage.valid_instruction
           |vpiActual:
-          \_logic_net: (work@int_execute_stage.valid_instruction), line:95:11, endln:95:28
+          \_logic_var: (work@int_execute_stage.valid_instruction), line:95:11, endln:95:28
         |vpiOperand:
         \_hier_path: (of_instruction.branch), line:281:12, endln:281:33
           |vpiParent:
@@ -6603,12 +7065,16 @@ design: (unnamed)
             |vpiParent:
             \_hier_path: (of_instruction.branch), line:281:12, endln:281:33
             |vpiName:of_instruction
+            |vpiActual:
+            \_struct_var: (work@int_execute_stage.of_instruction), line:62:39, endln:62:53
           |vpiActual:
           \_ref_obj: (work@int_execute_stage.branch), line:281:27, endln:281:33
             |vpiParent:
             \_hier_path: (of_instruction.branch), line:281:12, endln:281:33
             |vpiName:branch
             |vpiFullName:work@int_execute_stage.branch
+            |vpiActual:
+            \_typespec_member: (branch), line:36:5, endln:36:18
           |vpiName:of_instruction.branch
       |vpiOperand:
       \_operation: , line:282:12, endln:282:53
@@ -6624,12 +7090,16 @@ design: (unnamed)
             |vpiParent:
             \_hier_path: (of_instruction.branch_type), line:282:12, endln:282:38
             |vpiName:of_instruction
+            |vpiActual:
+            \_struct_var: (work@int_execute_stage.of_instruction), line:62:39, endln:62:53
           |vpiActual:
           \_ref_obj: (work@int_execute_stage.branch_type), line:282:27, endln:282:38
             |vpiParent:
             \_hier_path: (of_instruction.branch_type), line:282:12, endln:282:38
             |vpiName:branch_type
             |vpiFullName:work@int_execute_stage.branch_type
+            |vpiActual:
+            \_typespec_member: (branch_type), line:37:5, endln:37:31
           |vpiName:of_instruction.branch_type
         |vpiOperand:
         \_ref_obj: (work@int_execute_stage.BRANCH_ERET), line:282:42, endln:282:53
@@ -6638,15 +7108,15 @@ design: (unnamed)
           |vpiName:BRANCH_ERET
           |vpiFullName:work@int_execute_stage.BRANCH_ERET
           |vpiActual:
-          \_logic_net: (work@int_execute_stage.BRANCH_ERET), line:282:42, endln:282:53
+          \_logic_net: (work@int_execute_stage.BRANCH_ERET), line:311:17, endln:311:28
     |vpiLhs:
     \_ref_obj: (work@int_execute_stage.eret), line:280:12, endln:280:16
       |vpiParent:
-      \_cont_assign: , line:280:12, endln:282:53
+      \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
       |vpiName:eret
       |vpiFullName:work@int_execute_stage.eret
       |vpiActual:
-      \_logic_net: (work@int_execute_stage.eret), line:91:11, endln:91:15
+      \_logic_var: (work@int_execute_stage.eret), line:91:11, endln:91:15
   |vpiContAssign:
   \_cont_assign: , line:283:12, endln:283:74
     |vpiParent:
@@ -6663,715 +7133,101 @@ design: (unnamed)
         |vpiName:eret
         |vpiFullName:work@int_execute_stage.eret
         |vpiActual:
-        \_logic_net: (work@int_execute_stage.eret), line:91:11, endln:91:15
+        \_logic_var: (work@int_execute_stage.eret), line:91:11, endln:91:15
       |vpiOperand:
       \_operation: , line:283:42, endln:283:74
         |vpiParent:
         \_operation: , line:283:34, endln:283:74
         |vpiOpType:3
         |vpiOperand:
-        \_bit_select: (work@int_execute_stage.cr_supervisor_en), line:283:60, endln:283:73
+        \_bit_select: (work@int_execute_stage.cr_supervisor_en), line:283:59, endln:283:74
           |vpiParent:
           \_operation: , line:283:42, endln:283:74
           |vpiName:cr_supervisor_en
           |vpiFullName:work@int_execute_stage.cr_supervisor_en
+          |vpiActual:
+          \_logic_net: (work@int_execute_stage.cr_supervisor_en), line:283:59, endln:283:74
           |vpiIndex:
           \_ref_obj: (work@int_execute_stage.of_thread_idx), line:283:60, endln:283:73
             |vpiParent:
-            \_bit_select: (work@int_execute_stage.cr_supervisor_en), line:283:60, endln:283:73
+            \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
             |vpiName:of_thread_idx
             |vpiFullName:work@int_execute_stage.of_thread_idx
             |vpiActual:
-            \_logic_net: (work@int_execute_stage.of_thread_idx), line:63:39, endln:63:52
+            \_logic_var: (work@int_execute_stage.of_thread_idx), line:63:39, endln:63:52
     |vpiLhs:
     \_ref_obj: (work@int_execute_stage.privileged_op_fault), line:283:12, endln:283:31
       |vpiParent:
-      \_cont_assign: , line:283:12, endln:283:74
+      \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
       |vpiName:privileged_op_fault
       |vpiFullName:work@int_execute_stage.privileged_op_fault
       |vpiActual:
-      \_logic_net: (work@int_execute_stage.privileged_op_fault), line:92:11, endln:92:30
-  |vpiGenStmt:
-  \_gen_region: 
-    |vpiParent:
-    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
-    |vpiStmt:
-    \_begin: (work@int_execute_stage)
-      |vpiParent:
-      \_gen_region: 
-      |vpiFullName:work@int_execute_stage
-|vpiTypedef:
-\_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-  |vpiParent:
-  \_design: (unnamed)
-  |vpiName:decoded_instruction_t
-  |vpiInstance:
-  \_design: (unnamed)
-  |vpiPacked:1
-  |vpiTypespecMember:
-  \_typespec_member: (pc), line:9:14, endln:9:16
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:pc
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.pc)
-      |vpiParent:
-      \_typespec_member: (pc), line:9:14, endln:9:16
-      |vpiFullName:decoded_instruction_t.pc
-      |vpiActual:
-      \_unsupported_typespec: (scalar_t), line:9:5, endln:9:13
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:9
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:9
-    |vpiRefEndColumnNo:13
-  |vpiTypespecMember:
-  \_typespec_member: (injected), line:12:11, endln:12:19
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:injected
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.injected)
-      |vpiParent:
-      \_typespec_member: (injected), line:12:11, endln:12:19
-      |vpiFullName:decoded_instruction_t.injected
-      |vpiActual:
-      \_logic_typespec: , line:12:5, endln:12:10
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:12
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:12
-    |vpiRefEndColumnNo:10
-  |vpiTypespecMember:
-  \_typespec_member: (has_trap), line:15:11, endln:15:19
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:has_trap
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.has_trap)
-      |vpiParent:
-      \_typespec_member: (has_trap), line:15:11, endln:15:19
-      |vpiFullName:decoded_instruction_t.has_trap
-      |vpiActual:
-      \_logic_typespec: , line:15:5, endln:15:10
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:15
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:15
-    |vpiRefEndColumnNo:10
-  |vpiTypespecMember:
-  \_typespec_member: (trap_cause), line:16:18, endln:16:28
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:trap_cause
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.trap_cause)
-      |vpiParent:
-      \_typespec_member: (trap_cause), line:16:18, endln:16:28
-      |vpiFullName:decoded_instruction_t.trap_cause
-      |vpiActual:
-      \_unsupported_typespec: (trap_cause_t), line:16:5, endln:16:17
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:16
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:16
-    |vpiRefEndColumnNo:17
-  |vpiTypespecMember:
-  \_typespec_member: (has_scalar1), line:19:11, endln:19:22
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:has_scalar1
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.has_scalar1)
-      |vpiParent:
-      \_typespec_member: (has_scalar1), line:19:11, endln:19:22
-      |vpiFullName:decoded_instruction_t.has_scalar1
-      |vpiActual:
-      \_logic_typespec: , line:19:5, endln:19:10
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:19
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:19
-    |vpiRefEndColumnNo:10
-  |vpiTypespecMember:
-  \_typespec_member: (scalar_sel1), line:20:20, endln:20:31
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:scalar_sel1
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.scalar_sel1)
-      |vpiParent:
-      \_typespec_member: (scalar_sel1), line:20:20, endln:20:31
-      |vpiFullName:decoded_instruction_t.scalar_sel1
-      |vpiActual:
-      \_unsupported_typespec: (register_idx_t), line:20:5, endln:20:19
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:20
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:20
-    |vpiRefEndColumnNo:19
-  |vpiTypespecMember:
-  \_typespec_member: (has_scalar2), line:21:11, endln:21:22
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:has_scalar2
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.has_scalar2)
-      |vpiParent:
-      \_typespec_member: (has_scalar2), line:21:11, endln:21:22
-      |vpiFullName:decoded_instruction_t.has_scalar2
-      |vpiActual:
-      \_logic_typespec: , line:21:5, endln:21:10
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:21
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:21
-    |vpiRefEndColumnNo:10
-  |vpiTypespecMember:
-  \_typespec_member: (scalar_sel2), line:22:20, endln:22:31
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:scalar_sel2
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.scalar_sel2)
-      |vpiParent:
-      \_typespec_member: (scalar_sel2), line:22:20, endln:22:31
-      |vpiFullName:decoded_instruction_t.scalar_sel2
-      |vpiActual:
-      \_unsupported_typespec: (register_idx_t), line:22:5, endln:22:19
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:22
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:22
-    |vpiRefEndColumnNo:19
-  |vpiTypespecMember:
-  \_typespec_member: (has_vector1), line:23:11, endln:23:22
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:has_vector1
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.has_vector1)
-      |vpiParent:
-      \_typespec_member: (has_vector1), line:23:11, endln:23:22
-      |vpiFullName:decoded_instruction_t.has_vector1
-      |vpiActual:
-      \_logic_typespec: , line:23:5, endln:23:10
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:23
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:23
-    |vpiRefEndColumnNo:10
-  |vpiTypespecMember:
-  \_typespec_member: (vector_sel1), line:24:20, endln:24:31
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:vector_sel1
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.vector_sel1)
-      |vpiParent:
-      \_typespec_member: (vector_sel1), line:24:20, endln:24:31
-      |vpiFullName:decoded_instruction_t.vector_sel1
-      |vpiActual:
-      \_unsupported_typespec: (register_idx_t), line:24:5, endln:24:19
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:24
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:24
-    |vpiRefEndColumnNo:19
-  |vpiTypespecMember:
-  \_typespec_member: (has_vector2), line:25:11, endln:25:22
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:has_vector2
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.has_vector2)
-      |vpiParent:
-      \_typespec_member: (has_vector2), line:25:11, endln:25:22
-      |vpiFullName:decoded_instruction_t.has_vector2
-      |vpiActual:
-      \_logic_typespec: , line:25:5, endln:25:10
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:25
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:25
-    |vpiRefEndColumnNo:10
-  |vpiTypespecMember:
-  \_typespec_member: (vector_sel2), line:26:20, endln:26:31
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:vector_sel2
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.vector_sel2)
-      |vpiParent:
-      \_typespec_member: (vector_sel2), line:26:20, endln:26:31
-      |vpiFullName:decoded_instruction_t.vector_sel2
-      |vpiActual:
-      \_unsupported_typespec: (register_idx_t), line:26:5, endln:26:19
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:26
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:26
-    |vpiRefEndColumnNo:19
-  |vpiTypespecMember:
-  \_typespec_member: (has_dest), line:27:11, endln:27:19
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:has_dest
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.has_dest)
-      |vpiParent:
-      \_typespec_member: (has_dest), line:27:11, endln:27:19
-      |vpiFullName:decoded_instruction_t.has_dest
-      |vpiActual:
-      \_logic_typespec: , line:27:5, endln:27:10
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:27
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:27
-    |vpiRefEndColumnNo:10
-  |vpiTypespecMember:
-  \_typespec_member: (dest_vector), line:28:11, endln:28:22
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:dest_vector
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.dest_vector)
-      |vpiParent:
-      \_typespec_member: (dest_vector), line:28:11, endln:28:22
-      |vpiFullName:decoded_instruction_t.dest_vector
-      |vpiActual:
-      \_logic_typespec: , line:28:5, endln:28:10
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:28
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:28
-    |vpiRefEndColumnNo:10
-  |vpiTypespecMember:
-  \_typespec_member: (dest_reg), line:29:20, endln:29:28
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:dest_reg
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.dest_reg)
-      |vpiParent:
-      \_typespec_member: (dest_reg), line:29:20, endln:29:28
-      |vpiFullName:decoded_instruction_t.dest_reg
-      |vpiActual:
-      \_unsupported_typespec: (register_idx_t), line:29:5, endln:29:19
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:29
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:29
-    |vpiRefEndColumnNo:19
-  |vpiTypespecMember:
-  \_typespec_member: (alu_op), line:30:14, endln:30:20
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:alu_op
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.alu_op)
-      |vpiParent:
-      \_typespec_member: (alu_op), line:30:14, endln:30:20
-      |vpiFullName:decoded_instruction_t.alu_op
-      |vpiActual:
-      \_unsupported_typespec: (alu_op_t), line:30:5, endln:30:13
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:30
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:30
-    |vpiRefEndColumnNo:13
-  |vpiTypespecMember:
-  \_typespec_member: (mask_src), line:31:16, endln:31:24
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:mask_src
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.mask_src)
-      |vpiParent:
-      \_typespec_member: (mask_src), line:31:16, endln:31:24
-      |vpiFullName:decoded_instruction_t.mask_src
-      |vpiActual:
-      \_unsupported_typespec: (mask_src_t), line:31:5, endln:31:15
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:31
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:31
-    |vpiRefEndColumnNo:15
-  |vpiTypespecMember:
-  \_typespec_member: (op1_src), line:32:15, endln:32:22
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:op1_src
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.op1_src)
-      |vpiParent:
-      \_typespec_member: (op1_src), line:32:15, endln:32:22
-      |vpiFullName:decoded_instruction_t.op1_src
-      |vpiActual:
-      \_unsupported_typespec: (op1_src_t), line:32:5, endln:32:14
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:32
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:32
-    |vpiRefEndColumnNo:14
-  |vpiTypespecMember:
-  \_typespec_member: (op2_src), line:33:15, endln:33:22
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:op2_src
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.op2_src)
-      |vpiParent:
-      \_typespec_member: (op2_src), line:33:15, endln:33:22
-      |vpiFullName:decoded_instruction_t.op2_src
-      |vpiActual:
-      \_unsupported_typespec: (op2_src_t), line:33:5, endln:33:14
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:33
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:33
-    |vpiRefEndColumnNo:14
-  |vpiTypespecMember:
-  \_typespec_member: (store_value_vector), line:34:11, endln:34:29
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:store_value_vector
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.store_value_vector)
-      |vpiParent:
-      \_typespec_member: (store_value_vector), line:34:11, endln:34:29
-      |vpiFullName:decoded_instruction_t.store_value_vector
-      |vpiActual:
-      \_logic_typespec: , line:34:5, endln:34:10
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:34
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:34
-    |vpiRefEndColumnNo:10
-  |vpiTypespecMember:
-  \_typespec_member: (immediate_value), line:35:14, endln:35:29
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:immediate_value
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.immediate_value)
-      |vpiParent:
-      \_typespec_member: (immediate_value), line:35:14, endln:35:29
-      |vpiFullName:decoded_instruction_t.immediate_value
-      |vpiActual:
-      \_unsupported_typespec: (scalar_t), line:35:5, endln:35:13
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:35
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:35
-    |vpiRefEndColumnNo:13
-  |vpiTypespecMember:
-  \_typespec_member: (branch), line:36:11, endln:36:17
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:branch
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.branch)
-      |vpiParent:
-      \_typespec_member: (branch), line:36:11, endln:36:17
-      |vpiFullName:decoded_instruction_t.branch
-      |vpiActual:
-      \_logic_typespec: , line:36:5, endln:36:10
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:36
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:36
-    |vpiRefEndColumnNo:10
-  |vpiTypespecMember:
-  \_typespec_member: (branch_type), line:37:19, endln:37:30
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:branch_type
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.branch_type)
-      |vpiParent:
-      \_typespec_member: (branch_type), line:37:19, endln:37:30
-      |vpiFullName:decoded_instruction_t.branch_type
-      |vpiActual:
-      \_unsupported_typespec: (branch_type_t), line:37:5, endln:37:18
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:37
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:37
-    |vpiRefEndColumnNo:18
-  |vpiTypespecMember:
-  \_typespec_member: (call), line:38:11, endln:38:15
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:call
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.call)
-      |vpiParent:
-      \_typespec_member: (call), line:38:11, endln:38:15
-      |vpiFullName:decoded_instruction_t.call
-      |vpiActual:
-      \_logic_typespec: , line:38:5, endln:38:10
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:38
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:38
-    |vpiRefEndColumnNo:10
-  |vpiTypespecMember:
-  \_typespec_member: (pipeline_sel), line:39:20, endln:39:32
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:pipeline_sel
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.pipeline_sel)
-      |vpiParent:
-      \_typespec_member: (pipeline_sel), line:39:20, endln:39:32
-      |vpiFullName:decoded_instruction_t.pipeline_sel
-      |vpiActual:
-      \_unsupported_typespec: (pipeline_sel_t), line:39:5, endln:39:19
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:39
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:39
-    |vpiRefEndColumnNo:19
-  |vpiTypespecMember:
-  \_typespec_member: (memory_access), line:40:11, endln:40:24
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:memory_access
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.memory_access)
-      |vpiParent:
-      \_typespec_member: (memory_access), line:40:11, endln:40:24
-      |vpiFullName:decoded_instruction_t.memory_access
-      |vpiActual:
-      \_logic_typespec: , line:40:5, endln:40:10
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:40
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:40
-    |vpiRefEndColumnNo:10
-  |vpiTypespecMember:
-  \_typespec_member: (memory_access_type), line:41:17, endln:41:35
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:memory_access_type
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.memory_access_type)
-      |vpiParent:
-      \_typespec_member: (memory_access_type), line:41:17, endln:41:35
-      |vpiFullName:decoded_instruction_t.memory_access_type
-      |vpiActual:
-      \_unsupported_typespec: (memory_op_t), line:41:5, endln:41:16
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:41
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:41
-    |vpiRefEndColumnNo:16
-  |vpiTypespecMember:
-  \_typespec_member: (load), line:42:11, endln:42:15
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:load
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.load)
-      |vpiParent:
-      \_typespec_member: (load), line:42:11, endln:42:15
-      |vpiFullName:decoded_instruction_t.load
-      |vpiActual:
-      \_logic_typespec: , line:42:5, endln:42:10
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:42
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:42
-    |vpiRefEndColumnNo:10
-  |vpiTypespecMember:
-  \_typespec_member: (compare), line:43:11, endln:43:18
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:compare
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.compare)
-      |vpiParent:
-      \_typespec_member: (compare), line:43:11, endln:43:18
-      |vpiFullName:decoded_instruction_t.compare
-      |vpiActual:
-      \_logic_typespec: , line:43:5, endln:43:10
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:43
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:43
-    |vpiRefEndColumnNo:10
-  |vpiTypespecMember:
-  \_typespec_member: (last_subcycle), line:44:16, endln:44:29
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:last_subcycle
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.last_subcycle)
-      |vpiParent:
-      \_typespec_member: (last_subcycle), line:44:16, endln:44:29
-      |vpiFullName:decoded_instruction_t.last_subcycle
-      |vpiActual:
-      \_unsupported_typespec: (subcycle_t), line:44:5, endln:44:15
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:44
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:44
-    |vpiRefEndColumnNo:15
-  |vpiTypespecMember:
-  \_typespec_member: (creg_index), line:45:24, endln:45:34
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:creg_index
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.creg_index)
-      |vpiParent:
-      \_typespec_member: (creg_index), line:45:24, endln:45:34
-      |vpiFullName:decoded_instruction_t.creg_index
-      |vpiActual:
-      \_unsupported_typespec: (control_register_t), line:45:5, endln:45:23
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:45
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:45
-    |vpiRefEndColumnNo:23
-  |vpiTypespecMember:
-  \_typespec_member: (cache_control), line:46:11, endln:46:24
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:cache_control
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.cache_control)
-      |vpiParent:
-      \_typespec_member: (cache_control), line:46:11, endln:46:24
-      |vpiFullName:decoded_instruction_t.cache_control
-      |vpiActual:
-      \_logic_typespec: , line:46:5, endln:46:10
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:46
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:46
-    |vpiRefEndColumnNo:10
-  |vpiTypespecMember:
-  \_typespec_member: (cache_control_op), line:47:16, endln:47:32
-    |vpiParent:
-    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
-    |vpiName:cache_control_op
-    |vpiTypespec:
-    \_ref_typespec: (decoded_instruction_t.cache_control_op)
-      |vpiParent:
-      \_typespec_member: (cache_control_op), line:47:16, endln:47:32
-      |vpiFullName:decoded_instruction_t.cache_control_op
-      |vpiActual:
-      \_unsupported_typespec: (cache_op_t), line:47:5, endln:47:15
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:47
-    |vpiRefColumnNo:5
-    |vpiRefEndLineNo:47
-    |vpiRefEndColumnNo:15
+      \_logic_var: (work@int_execute_stage.privileged_op_fault), line:92:11, endln:92:30
 |vpiTypedef:
 \_struct_typespec: (float32_t), line:2:9, endln:6:2
   |vpiParent:
   \_design: (unnamed)
   |vpiName:float32_t
-  |vpiInstance:
-  \_design: (unnamed)
   |vpiPacked:1
   |vpiTypespecMember:
-  \_typespec_member: (sign), line:3:9, endln:3:13
+  \_typespec_member: (sign), line:3:3, endln:3:14
     |vpiParent:
     \_struct_typespec: (float32_t), line:2:9, endln:6:2
     |vpiName:sign
     |vpiTypespec:
-    \_ref_typespec: (float32_t.sign)
+    \_ref_typespec: (float32_t.sign), line:3:3, endln:3:8
       |vpiParent:
-      \_typespec_member: (sign), line:3:9, endln:3:13
+      \_typespec_member: (sign), line:3:3, endln:3:14
       |vpiFullName:float32_t.sign
       |vpiActual:
       \_logic_typespec: , line:3:3, endln:3:8
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:3
-    |vpiRefColumnNo:3
-    |vpiRefEndLineNo:3
-    |vpiRefEndColumnNo:8
   |vpiTypespecMember:
-  \_typespec_member: (exponent), line:4:34, endln:4:42
+  \_typespec_member: (exponent), line:4:3, endln:4:43
     |vpiParent:
     \_struct_typespec: (float32_t), line:2:9, endln:6:2
     |vpiName:exponent
     |vpiTypespec:
-    \_ref_typespec: (float32_t.exponent)
+    \_ref_typespec: (float32_t.exponent), line:4:3, endln:4:33
       |vpiParent:
-      \_typespec_member: (exponent), line:4:34, endln:4:42
+      \_typespec_member: (exponent), line:4:3, endln:4:43
       |vpiFullName:float32_t.exponent
       |vpiActual:
       \_logic_typespec: , line:4:3, endln:4:33
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:4
-    |vpiRefColumnNo:3
-    |vpiRefEndLineNo:4
-    |vpiRefEndColumnNo:33
   |vpiTypespecMember:
-  \_typespec_member: (significand), line:5:34, endln:5:45
+  \_typespec_member: (significand), line:5:3, endln:5:46
     |vpiParent:
     \_struct_typespec: (float32_t), line:2:9, endln:6:2
     |vpiName:significand
     |vpiTypespec:
-    \_ref_typespec: (float32_t.significand)
+    \_ref_typespec: (float32_t.significand), line:5:3, endln:5:33
       |vpiParent:
-      \_typespec_member: (significand), line:5:34, endln:5:45
+      \_typespec_member: (significand), line:5:3, endln:5:46
       |vpiFullName:float32_t.significand
       |vpiActual:
       \_logic_typespec: , line:5:3, endln:5:33
-    |vpiRefFile:${SURELOG_DIR}/tests/HierBitSlice/dut.sv
-    |vpiRefLineNo:5
-    |vpiRefColumnNo:3
-    |vpiRefEndLineNo:5
-    |vpiRefEndColumnNo:33
 |vpiTypedef:
-\_logic_typespec: (scalar_t), line:50:9, endln:50:20
+\_logic_typespec: , line:3:3, endln:3:8
   |vpiParent:
   \_design: (unnamed)
-  |vpiName:scalar_t
-  |vpiInstance:
-  \_design: (unnamed)
-  |vpiRange:
-  \_range: , line:50:14, endln:50:20
-    |vpiParent:
-    \_logic_typespec: (scalar_t), line:50:9, endln:50:20
-    |vpiLeftRange:
-    \_constant: , line:50:15, endln:50:17
-      |vpiParent:
-      \_range: , line:50:14, endln:50:20
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:50:18, endln:50:19
-      |vpiParent:
-      \_range: , line:50:14, endln:50:20
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_weaklyReferenced:
-\_logic_typespec: , line:3:3, endln:3:8
+|vpiTypedef:
 \_logic_typespec: , line:4:3, endln:4:33
+  |vpiParent:
+  \_design: (unnamed)
   |vpiRange:
   \_range: , line:4:8, endln:4:33
     |vpiParent:
-    \_logic_typespec: , line:4:3, endln:4:33
+    \_struct_typespec: (float32_t), line:2:9, endln:6:2
     |vpiLeftRange:
     \_operation: , line:4:9, endln:4:30
       |vpiParent:
       \_range: , line:4:8, endln:4:33
       |vpiOpType:11
       |vpiOperand:
-      \_ref_obj: (FLOAT32_EXP_WIDTH), line:4:9, endln:4:26
+      \_ref_obj: (float32_t.FLOAT32_EXP_WIDTH), line:4:9, endln:4:26
         |vpiParent:
         \_operation: , line:4:9, endln:4:30
         |vpiName:FLOAT32_EXP_WIDTH
+        |vpiFullName:float32_t.FLOAT32_EXP_WIDTH
       |vpiOperand:
       \_constant: , line:4:29, endln:4:30
         |vpiParent:
@@ -7388,21 +7244,25 @@ design: (unnamed)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
+|vpiTypedef:
 \_logic_typespec: , line:5:3, endln:5:33
+  |vpiParent:
+  \_design: (unnamed)
   |vpiRange:
   \_range: , line:5:8, endln:5:33
     |vpiParent:
-    \_logic_typespec: , line:5:3, endln:5:33
+    \_struct_typespec: (float32_t), line:2:9, endln:6:2
     |vpiLeftRange:
     \_operation: , line:5:9, endln:5:30
       |vpiParent:
       \_range: , line:5:8, endln:5:33
       |vpiOpType:11
       |vpiOperand:
-      \_ref_obj: (FLOAT32_SIG_WIDTH), line:5:9, endln:5:26
+      \_ref_obj: (float32_t.FLOAT32_SIG_WIDTH), line:5:9, endln:5:26
         |vpiParent:
         \_operation: , line:5:9, endln:5:30
         |vpiName:FLOAT32_SIG_WIDTH
+        |vpiFullName:float32_t.FLOAT32_SIG_WIDTH
       |vpiOperand:
       \_constant: , line:5:29, endln:5:30
         |vpiParent:
@@ -7419,96 +7279,585 @@ design: (unnamed)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
+|vpiTypedef:
+\_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:decoded_instruction_t
+  |vpiPacked:1
+  |vpiTypespecMember:
+  \_typespec_member: (pc), line:9:5, endln:9:17
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:pc
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.pc.scalar_t), line:9:5, endln:9:13
+      |vpiParent:
+      \_typespec_member: (pc), line:9:5, endln:9:17
+      |vpiName:scalar_t
+      |vpiFullName:decoded_instruction_t.pc.scalar_t
+      |vpiActual:
+      \_unsupported_typespec: (scalar_t), line:9:5, endln:9:13
+  |vpiTypespecMember:
+  \_typespec_member: (injected), line:12:5, endln:12:20
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:injected
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.injected), line:12:5, endln:12:10
+      |vpiParent:
+      \_typespec_member: (injected), line:12:5, endln:12:20
+      |vpiFullName:decoded_instruction_t.injected
+      |vpiActual:
+      \_logic_typespec: , line:12:5, endln:12:10
+  |vpiTypespecMember:
+  \_typespec_member: (has_trap), line:15:5, endln:15:20
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:has_trap
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.has_trap), line:15:5, endln:15:10
+      |vpiParent:
+      \_typespec_member: (has_trap), line:15:5, endln:15:20
+      |vpiFullName:decoded_instruction_t.has_trap
+      |vpiActual:
+      \_logic_typespec: , line:15:5, endln:15:10
+  |vpiTypespecMember:
+  \_typespec_member: (trap_cause), line:16:5, endln:16:29
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:trap_cause
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.trap_cause.trap_cause_t), line:16:5, endln:16:17
+      |vpiParent:
+      \_typespec_member: (trap_cause), line:16:5, endln:16:29
+      |vpiName:trap_cause_t
+      |vpiFullName:decoded_instruction_t.trap_cause.trap_cause_t
+      |vpiActual:
+      \_unsupported_typespec: (trap_cause_t), line:16:5, endln:16:17
+  |vpiTypespecMember:
+  \_typespec_member: (has_scalar1), line:19:5, endln:19:23
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:has_scalar1
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.has_scalar1), line:19:5, endln:19:10
+      |vpiParent:
+      \_typespec_member: (has_scalar1), line:19:5, endln:19:23
+      |vpiFullName:decoded_instruction_t.has_scalar1
+      |vpiActual:
+      \_logic_typespec: , line:19:5, endln:19:10
+  |vpiTypespecMember:
+  \_typespec_member: (scalar_sel1), line:20:5, endln:20:32
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:scalar_sel1
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.scalar_sel1.register_idx_t), line:20:5, endln:20:19
+      |vpiParent:
+      \_typespec_member: (scalar_sel1), line:20:5, endln:20:32
+      |vpiName:register_idx_t
+      |vpiFullName:decoded_instruction_t.scalar_sel1.register_idx_t
+      |vpiActual:
+      \_unsupported_typespec: (register_idx_t), line:20:5, endln:20:19
+  |vpiTypespecMember:
+  \_typespec_member: (has_scalar2), line:21:5, endln:21:23
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:has_scalar2
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.has_scalar2), line:21:5, endln:21:10
+      |vpiParent:
+      \_typespec_member: (has_scalar2), line:21:5, endln:21:23
+      |vpiFullName:decoded_instruction_t.has_scalar2
+      |vpiActual:
+      \_logic_typespec: , line:21:5, endln:21:10
+  |vpiTypespecMember:
+  \_typespec_member: (scalar_sel2), line:22:5, endln:22:32
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:scalar_sel2
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.scalar_sel2.register_idx_t), line:22:5, endln:22:19
+      |vpiParent:
+      \_typespec_member: (scalar_sel2), line:22:5, endln:22:32
+      |vpiName:register_idx_t
+      |vpiFullName:decoded_instruction_t.scalar_sel2.register_idx_t
+      |vpiActual:
+      \_unsupported_typespec: (register_idx_t), line:22:5, endln:22:19
+  |vpiTypespecMember:
+  \_typespec_member: (has_vector1), line:23:5, endln:23:23
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:has_vector1
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.has_vector1), line:23:5, endln:23:10
+      |vpiParent:
+      \_typespec_member: (has_vector1), line:23:5, endln:23:23
+      |vpiFullName:decoded_instruction_t.has_vector1
+      |vpiActual:
+      \_logic_typespec: , line:23:5, endln:23:10
+  |vpiTypespecMember:
+  \_typespec_member: (vector_sel1), line:24:5, endln:24:32
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:vector_sel1
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.vector_sel1.register_idx_t), line:24:5, endln:24:19
+      |vpiParent:
+      \_typespec_member: (vector_sel1), line:24:5, endln:24:32
+      |vpiName:register_idx_t
+      |vpiFullName:decoded_instruction_t.vector_sel1.register_idx_t
+      |vpiActual:
+      \_unsupported_typespec: (register_idx_t), line:24:5, endln:24:19
+  |vpiTypespecMember:
+  \_typespec_member: (has_vector2), line:25:5, endln:25:23
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:has_vector2
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.has_vector2), line:25:5, endln:25:10
+      |vpiParent:
+      \_typespec_member: (has_vector2), line:25:5, endln:25:23
+      |vpiFullName:decoded_instruction_t.has_vector2
+      |vpiActual:
+      \_logic_typespec: , line:25:5, endln:25:10
+  |vpiTypespecMember:
+  \_typespec_member: (vector_sel2), line:26:5, endln:26:32
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:vector_sel2
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.vector_sel2.register_idx_t), line:26:5, endln:26:19
+      |vpiParent:
+      \_typespec_member: (vector_sel2), line:26:5, endln:26:32
+      |vpiName:register_idx_t
+      |vpiFullName:decoded_instruction_t.vector_sel2.register_idx_t
+      |vpiActual:
+      \_unsupported_typespec: (register_idx_t), line:26:5, endln:26:19
+  |vpiTypespecMember:
+  \_typespec_member: (has_dest), line:27:5, endln:27:20
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:has_dest
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.has_dest), line:27:5, endln:27:10
+      |vpiParent:
+      \_typespec_member: (has_dest), line:27:5, endln:27:20
+      |vpiFullName:decoded_instruction_t.has_dest
+      |vpiActual:
+      \_logic_typespec: , line:27:5, endln:27:10
+  |vpiTypespecMember:
+  \_typespec_member: (dest_vector), line:28:5, endln:28:23
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:dest_vector
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.dest_vector), line:28:5, endln:28:10
+      |vpiParent:
+      \_typespec_member: (dest_vector), line:28:5, endln:28:23
+      |vpiFullName:decoded_instruction_t.dest_vector
+      |vpiActual:
+      \_logic_typespec: , line:28:5, endln:28:10
+  |vpiTypespecMember:
+  \_typespec_member: (dest_reg), line:29:5, endln:29:29
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:dest_reg
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.dest_reg.register_idx_t), line:29:5, endln:29:19
+      |vpiParent:
+      \_typespec_member: (dest_reg), line:29:5, endln:29:29
+      |vpiName:register_idx_t
+      |vpiFullName:decoded_instruction_t.dest_reg.register_idx_t
+      |vpiActual:
+      \_unsupported_typespec: (register_idx_t), line:29:5, endln:29:19
+  |vpiTypespecMember:
+  \_typespec_member: (alu_op), line:30:5, endln:30:21
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:alu_op
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.alu_op.alu_op_t), line:30:5, endln:30:13
+      |vpiParent:
+      \_typespec_member: (alu_op), line:30:5, endln:30:21
+      |vpiName:alu_op_t
+      |vpiFullName:decoded_instruction_t.alu_op.alu_op_t
+      |vpiActual:
+      \_unsupported_typespec: (alu_op_t), line:30:5, endln:30:13
+  |vpiTypespecMember:
+  \_typespec_member: (mask_src), line:31:5, endln:31:25
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:mask_src
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.mask_src.mask_src_t), line:31:5, endln:31:15
+      |vpiParent:
+      \_typespec_member: (mask_src), line:31:5, endln:31:25
+      |vpiName:mask_src_t
+      |vpiFullName:decoded_instruction_t.mask_src.mask_src_t
+      |vpiActual:
+      \_unsupported_typespec: (mask_src_t), line:31:5, endln:31:15
+  |vpiTypespecMember:
+  \_typespec_member: (op1_src), line:32:5, endln:32:23
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:op1_src
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.op1_src.op1_src_t), line:32:5, endln:32:14
+      |vpiParent:
+      \_typespec_member: (op1_src), line:32:5, endln:32:23
+      |vpiName:op1_src_t
+      |vpiFullName:decoded_instruction_t.op1_src.op1_src_t
+      |vpiActual:
+      \_unsupported_typespec: (op1_src_t), line:32:5, endln:32:14
+  |vpiTypespecMember:
+  \_typespec_member: (op2_src), line:33:5, endln:33:23
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:op2_src
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.op2_src.op2_src_t), line:33:5, endln:33:14
+      |vpiParent:
+      \_typespec_member: (op2_src), line:33:5, endln:33:23
+      |vpiName:op2_src_t
+      |vpiFullName:decoded_instruction_t.op2_src.op2_src_t
+      |vpiActual:
+      \_unsupported_typespec: (op2_src_t), line:33:5, endln:33:14
+  |vpiTypespecMember:
+  \_typespec_member: (store_value_vector), line:34:5, endln:34:30
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:store_value_vector
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.store_value_vector), line:34:5, endln:34:10
+      |vpiParent:
+      \_typespec_member: (store_value_vector), line:34:5, endln:34:30
+      |vpiFullName:decoded_instruction_t.store_value_vector
+      |vpiActual:
+      \_logic_typespec: , line:34:5, endln:34:10
+  |vpiTypespecMember:
+  \_typespec_member: (immediate_value), line:35:5, endln:35:30
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:immediate_value
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.immediate_value.scalar_t), line:35:5, endln:35:13
+      |vpiParent:
+      \_typespec_member: (immediate_value), line:35:5, endln:35:30
+      |vpiName:scalar_t
+      |vpiFullName:decoded_instruction_t.immediate_value.scalar_t
+      |vpiActual:
+      \_unsupported_typespec: (scalar_t), line:35:5, endln:35:13
+  |vpiTypespecMember:
+  \_typespec_member: (branch), line:36:5, endln:36:18
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:branch
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.branch), line:36:5, endln:36:10
+      |vpiParent:
+      \_typespec_member: (branch), line:36:5, endln:36:18
+      |vpiFullName:decoded_instruction_t.branch
+      |vpiActual:
+      \_logic_typespec: , line:36:5, endln:36:10
+  |vpiTypespecMember:
+  \_typespec_member: (branch_type), line:37:5, endln:37:31
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:branch_type
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.branch_type.branch_type_t), line:37:5, endln:37:18
+      |vpiParent:
+      \_typespec_member: (branch_type), line:37:5, endln:37:31
+      |vpiName:branch_type_t
+      |vpiFullName:decoded_instruction_t.branch_type.branch_type_t
+      |vpiActual:
+      \_unsupported_typespec: (branch_type_t), line:37:5, endln:37:18
+  |vpiTypespecMember:
+  \_typespec_member: (call), line:38:5, endln:38:16
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:call
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.call), line:38:5, endln:38:10
+      |vpiParent:
+      \_typespec_member: (call), line:38:5, endln:38:16
+      |vpiFullName:decoded_instruction_t.call
+      |vpiActual:
+      \_logic_typespec: , line:38:5, endln:38:10
+  |vpiTypespecMember:
+  \_typespec_member: (pipeline_sel), line:39:5, endln:39:33
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:pipeline_sel
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.pipeline_sel.pipeline_sel_t), line:39:5, endln:39:19
+      |vpiParent:
+      \_typespec_member: (pipeline_sel), line:39:5, endln:39:33
+      |vpiName:pipeline_sel_t
+      |vpiFullName:decoded_instruction_t.pipeline_sel.pipeline_sel_t
+      |vpiActual:
+      \_unsupported_typespec: (pipeline_sel_t), line:39:5, endln:39:19
+  |vpiTypespecMember:
+  \_typespec_member: (memory_access), line:40:5, endln:40:25
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:memory_access
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.memory_access), line:40:5, endln:40:10
+      |vpiParent:
+      \_typespec_member: (memory_access), line:40:5, endln:40:25
+      |vpiFullName:decoded_instruction_t.memory_access
+      |vpiActual:
+      \_logic_typespec: , line:40:5, endln:40:10
+  |vpiTypespecMember:
+  \_typespec_member: (memory_access_type), line:41:5, endln:41:36
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:memory_access_type
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.memory_access_type.memory_op_t), line:41:5, endln:41:16
+      |vpiParent:
+      \_typespec_member: (memory_access_type), line:41:5, endln:41:36
+      |vpiName:memory_op_t
+      |vpiFullName:decoded_instruction_t.memory_access_type.memory_op_t
+      |vpiActual:
+      \_unsupported_typespec: (memory_op_t), line:41:5, endln:41:16
+  |vpiTypespecMember:
+  \_typespec_member: (load), line:42:5, endln:42:16
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:load
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.load), line:42:5, endln:42:10
+      |vpiParent:
+      \_typespec_member: (load), line:42:5, endln:42:16
+      |vpiFullName:decoded_instruction_t.load
+      |vpiActual:
+      \_logic_typespec: , line:42:5, endln:42:10
+  |vpiTypespecMember:
+  \_typespec_member: (compare), line:43:5, endln:43:19
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:compare
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.compare), line:43:5, endln:43:10
+      |vpiParent:
+      \_typespec_member: (compare), line:43:5, endln:43:19
+      |vpiFullName:decoded_instruction_t.compare
+      |vpiActual:
+      \_logic_typespec: , line:43:5, endln:43:10
+  |vpiTypespecMember:
+  \_typespec_member: (last_subcycle), line:44:5, endln:44:30
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:last_subcycle
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.last_subcycle.subcycle_t), line:44:5, endln:44:15
+      |vpiParent:
+      \_typespec_member: (last_subcycle), line:44:5, endln:44:30
+      |vpiName:subcycle_t
+      |vpiFullName:decoded_instruction_t.last_subcycle.subcycle_t
+      |vpiActual:
+      \_unsupported_typespec: (subcycle_t), line:44:5, endln:44:15
+  |vpiTypespecMember:
+  \_typespec_member: (creg_index), line:45:5, endln:45:35
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:creg_index
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.creg_index.control_register_t), line:45:5, endln:45:23
+      |vpiParent:
+      \_typespec_member: (creg_index), line:45:5, endln:45:35
+      |vpiName:control_register_t
+      |vpiFullName:decoded_instruction_t.creg_index.control_register_t
+      |vpiActual:
+      \_unsupported_typespec: (control_register_t), line:45:5, endln:45:23
+  |vpiTypespecMember:
+  \_typespec_member: (cache_control), line:46:5, endln:46:25
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:cache_control
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.cache_control), line:46:5, endln:46:10
+      |vpiParent:
+      \_typespec_member: (cache_control), line:46:5, endln:46:25
+      |vpiFullName:decoded_instruction_t.cache_control
+      |vpiActual:
+      \_logic_typespec: , line:46:5, endln:46:10
+  |vpiTypespecMember:
+  \_typespec_member: (cache_control_op), line:47:5, endln:47:33
+    |vpiParent:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiName:cache_control_op
+    |vpiTypespec:
+    \_ref_typespec: (decoded_instruction_t.cache_control_op.cache_op_t), line:47:5, endln:47:15
+      |vpiParent:
+      \_typespec_member: (cache_control_op), line:47:5, endln:47:33
+      |vpiName:cache_op_t
+      |vpiFullName:decoded_instruction_t.cache_control_op.cache_op_t
+      |vpiActual:
+      \_unsupported_typespec: (cache_op_t), line:47:5, endln:47:15
+|vpiTypedef:
 \_unsupported_typespec: (scalar_t), line:9:5, endln:9:13
+  |vpiParent:
+  \_design: (unnamed)
   |vpiName:scalar_t
+|vpiTypedef:
 \_logic_typespec: , line:12:5, endln:12:10
+  |vpiParent:
+  \_design: (unnamed)
+|vpiTypedef:
 \_logic_typespec: , line:15:5, endln:15:10
+  |vpiParent:
+  \_design: (unnamed)
+|vpiTypedef:
 \_unsupported_typespec: (trap_cause_t), line:16:5, endln:16:17
+  |vpiParent:
+  \_design: (unnamed)
   |vpiName:trap_cause_t
+|vpiTypedef:
 \_logic_typespec: , line:19:5, endln:19:10
+  |vpiParent:
+  \_design: (unnamed)
+|vpiTypedef:
 \_unsupported_typespec: (register_idx_t), line:20:5, endln:20:19
+  |vpiParent:
+  \_design: (unnamed)
   |vpiName:register_idx_t
+|vpiTypedef:
 \_logic_typespec: , line:21:5, endln:21:10
+  |vpiParent:
+  \_design: (unnamed)
+|vpiTypedef:
 \_unsupported_typespec: (register_idx_t), line:22:5, endln:22:19
+  |vpiParent:
+  \_design: (unnamed)
   |vpiName:register_idx_t
+|vpiTypedef:
 \_logic_typespec: , line:23:5, endln:23:10
+  |vpiParent:
+  \_design: (unnamed)
+|vpiTypedef:
 \_unsupported_typespec: (register_idx_t), line:24:5, endln:24:19
+  |vpiParent:
+  \_design: (unnamed)
   |vpiName:register_idx_t
+|vpiTypedef:
 \_logic_typespec: , line:25:5, endln:25:10
+  |vpiParent:
+  \_design: (unnamed)
+|vpiTypedef:
 \_unsupported_typespec: (register_idx_t), line:26:5, endln:26:19
+  |vpiParent:
+  \_design: (unnamed)
   |vpiName:register_idx_t
+|vpiTypedef:
 \_logic_typespec: , line:27:5, endln:27:10
+  |vpiParent:
+  \_design: (unnamed)
+|vpiTypedef:
 \_logic_typespec: , line:28:5, endln:28:10
+  |vpiParent:
+  \_design: (unnamed)
+|vpiTypedef:
 \_unsupported_typespec: (register_idx_t), line:29:5, endln:29:19
+  |vpiParent:
+  \_design: (unnamed)
   |vpiName:register_idx_t
+|vpiTypedef:
 \_unsupported_typespec: (alu_op_t), line:30:5, endln:30:13
+  |vpiParent:
+  \_design: (unnamed)
   |vpiName:alu_op_t
+|vpiTypedef:
 \_unsupported_typespec: (mask_src_t), line:31:5, endln:31:15
+  |vpiParent:
+  \_design: (unnamed)
   |vpiName:mask_src_t
+|vpiTypedef:
 \_unsupported_typespec: (op1_src_t), line:32:5, endln:32:14
+  |vpiParent:
+  \_design: (unnamed)
   |vpiName:op1_src_t
+|vpiTypedef:
 \_unsupported_typespec: (op2_src_t), line:33:5, endln:33:14
+  |vpiParent:
+  \_design: (unnamed)
   |vpiName:op2_src_t
+|vpiTypedef:
 \_logic_typespec: , line:34:5, endln:34:10
+  |vpiParent:
+  \_design: (unnamed)
+|vpiTypedef:
 \_unsupported_typespec: (scalar_t), line:35:5, endln:35:13
+  |vpiParent:
+  \_design: (unnamed)
   |vpiName:scalar_t
+|vpiTypedef:
 \_logic_typespec: , line:36:5, endln:36:10
+  |vpiParent:
+  \_design: (unnamed)
+|vpiTypedef:
 \_unsupported_typespec: (branch_type_t), line:37:5, endln:37:18
+  |vpiParent:
+  \_design: (unnamed)
   |vpiName:branch_type_t
+|vpiTypedef:
 \_logic_typespec: , line:38:5, endln:38:10
+  |vpiParent:
+  \_design: (unnamed)
+|vpiTypedef:
 \_unsupported_typespec: (pipeline_sel_t), line:39:5, endln:39:19
+  |vpiParent:
+  \_design: (unnamed)
   |vpiName:pipeline_sel_t
+|vpiTypedef:
 \_logic_typespec: , line:40:5, endln:40:10
+  |vpiParent:
+  \_design: (unnamed)
+|vpiTypedef:
 \_unsupported_typespec: (memory_op_t), line:41:5, endln:41:16
+  |vpiParent:
+  \_design: (unnamed)
   |vpiName:memory_op_t
+|vpiTypedef:
 \_logic_typespec: , line:42:5, endln:42:10
+  |vpiParent:
+  \_design: (unnamed)
+|vpiTypedef:
 \_logic_typespec: , line:43:5, endln:43:10
+  |vpiParent:
+  \_design: (unnamed)
+|vpiTypedef:
 \_unsupported_typespec: (subcycle_t), line:44:5, endln:44:15
+  |vpiParent:
+  \_design: (unnamed)
   |vpiName:subcycle_t
+|vpiTypedef:
 \_unsupported_typespec: (control_register_t), line:45:5, endln:45:23
+  |vpiParent:
+  \_design: (unnamed)
   |vpiName:control_register_t
+|vpiTypedef:
 \_logic_typespec: , line:46:5, endln:46:10
+  |vpiParent:
+  \_design: (unnamed)
+|vpiTypedef:
 \_unsupported_typespec: (cache_op_t), line:47:5, endln:47:15
+  |vpiParent:
+  \_design: (unnamed)
   |vpiName:cache_op_t
-\_logic_typespec: , line:54:39, endln:54:39
-\_logic_typespec: , line:55:39, endln:55:39
-\_unsupported_typespec: (vector_t), line:58:11, endln:58:19
-  |vpiName:vector_t
-\_unsupported_typespec: (vector_t), line:59:11, endln:59:19
-  |vpiName:vector_t
-\_unsupported_typespec: (vector_mask_t), line:60:11, endln:60:24
-  |vpiName:vector_mask_t
-\_logic_typespec: , line:61:39, endln:61:39
-\_unsupported_typespec: (local_thread_idx_t), line:63:11, endln:63:29
-  |vpiName:local_thread_idx_t
-\_unsupported_typespec: (subcycle_t), line:64:11, endln:64:21
-  |vpiName:subcycle_t
-\_logic_typespec: , line:67:11, endln:67:16
-\_unsupported_typespec: (local_thread_idx_t), line:68:11, endln:68:29
-  |vpiName:local_thread_idx_t
-\_logic_typespec: , line:71:12, endln:71:17
-\_unsupported_typespec: (vector_t), line:73:12, endln:73:20
-  |vpiName:vector_t
-\_unsupported_typespec: (vector_mask_t), line:74:12, endln:74:25
-  |vpiName:vector_mask_t
-\_unsupported_typespec: (local_thread_idx_t), line:75:12, endln:75:30
-  |vpiName:local_thread_idx_t
-\_logic_typespec: , line:76:12, endln:76:17
+|vpiTypedef:
 \_logic_typespec: (scalar_t), line:50:9, endln:50:20
-  |vpiName:scalar_t
-  |vpiTypedefAlias:
-  \_ref_typespec: (scalar_t)
-    |vpiParent:
-    \_logic_typespec: (scalar_t), line:50:9, endln:50:20
-    |vpiFullName:scalar_t
-    |vpiActual:
-    \_logic_typespec: (scalar_t), line:50:9, endln:50:20
-  |vpiInstance:
+  |vpiParent:
   \_design: (unnamed)
+  |vpiName:scalar_t
   |vpiRange:
   \_range: , line:50:14, endln:50:20
     |vpiParent:
-    \_logic_typespec: (scalar_t), line:50:9, endln:50:20
+    \_design: (unnamed)
     |vpiLeftRange:
     \_constant: , line:50:15, endln:50:17
       |vpiParent:
@@ -7525,157 +7874,124 @@ design: (unnamed)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
-\_unsupported_typespec: (subcycle_t), line:78:12, endln:78:22
-  |vpiName:subcycle_t
-\_logic_typespec: , line:79:12, endln:79:17
-\_array_typespec: , line:82:11, endln:82:56
-  |vpiParent:
-  \_port: (cr_eret_address), line:82:39, endln:82:54
-  |vpiArrayType:1
-  |vpiRange:
-  \_range: , line:82:55, endln:82:56
-    |vpiParent:
-    \_array_typespec: , line:82:11, endln:82:56
-    |vpiLeftRange:
-    \_constant: 
-      |vpiParent:
-      \_range: , line:82:55, endln:82:56
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-    |vpiRightRange:
-    \_operation: , line:82:55, endln:82:56
-      |vpiParent:
-      \_range: , line:82:55, endln:82:56
-      |vpiOpType:11
-      |vpiOperand:
-      \_constant: , line:82:55, endln:82:56
-        |vpiParent:
-        \_operation: , line:82:55, endln:82:56
-        |vpiDecompile:8
-        |vpiSize:64
-        |UINT:8
-        |vpiConstType:9
-      |vpiOperand:
-      \_constant: 
-        |vpiSize:64
-        |INT:1
-        |vpiConstType:7
-  |vpiElemTypespec:
-  \_ref_typespec: (work@int_execute_stage.cr_eret_address)
-    |vpiParent:
-    \_array_typespec: , line:82:11, endln:82:56
-    |vpiFullName:work@int_execute_stage.cr_eret_address
-    |vpiActual:
-    \_logic_typespec: (scalar_t), line:50:9, endln:50:20
-\_logic_typespec: (scalar_t), line:50:9, endln:50:20
-  |vpiName:scalar_t
-  |vpiTypedefAlias:
-  \_ref_typespec: (scalar_t)
-    |vpiParent:
-    \_logic_typespec: (scalar_t), line:50:9, endln:50:20
-    |vpiFullName:scalar_t
-    |vpiActual:
-    \_logic_typespec: (scalar_t), line:50:9, endln:50:20
-  |vpiInstance:
-  \_design: (unnamed)
-  |vpiRange:
-  \_range: , line:50:14, endln:50:20
-    |vpiParent:
-    \_logic_typespec: (scalar_t), line:50:9, endln:50:20
-    |vpiLeftRange:
-    \_constant: , line:50:15, endln:50:17
-      |vpiParent:
-      \_range: , line:50:14, endln:50:20
-      |vpiDecompile:31
-      |vpiSize:64
-      |UINT:31
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:50:18, endln:50:19
-      |vpiParent:
-      \_range: , line:50:14, endln:50:20
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_array_typespec: , line:83:39, endln:83:57
-  |vpiParent:
-  \_port: (cr_supervisor_en), line:83:39, endln:83:55
-  |vpiArrayType:1
-  |vpiRange:
-  \_range: , line:83:56, endln:83:57
-    |vpiParent:
-    \_array_typespec: , line:83:39, endln:83:57
-    |vpiLeftRange:
-    \_constant: 
-      |vpiParent:
-      \_range: , line:83:56, endln:83:57
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-    |vpiRightRange:
-    \_operation: , line:83:56, endln:83:57
-      |vpiParent:
-      \_range: , line:83:56, endln:83:57
-      |vpiOpType:11
-      |vpiOperand:
-      \_constant: , line:83:56, endln:83:57
-        |vpiParent:
-        \_operation: , line:83:56, endln:83:57
-        |vpiDecompile:8
-        |vpiSize:64
-        |UINT:8
-        |vpiConstType:9
-      |vpiOperand:
-      \_constant: 
-        |vpiSize:64
-        |INT:1
-        |vpiConstType:7
-  |vpiElemTypespec:
-  \_ref_typespec: (work@int_execute_stage.cr_supervisor_en)
-    |vpiParent:
-    \_array_typespec: , line:83:39, endln:83:57
-    |vpiFullName:work@int_execute_stage.cr_supervisor_en
-    |vpiActual:
-    \_logic_typespec: , line:83:39, endln:83:39
-\_logic_typespec: , line:83:39, endln:83:39
-\_logic_typespec: , line:86:12, endln:86:17
-\_logic_typespec: , line:87:12, endln:87:17
-\_logic_typespec: , line:88:12, endln:88:17
-\_unsupported_typespec: (vector_t), line:90:5, endln:90:13
-  |vpiName:vector_t
-\_logic_typespec: , line:91:5, endln:91:10
-\_logic_typespec: , line:92:5, endln:92:10
-\_logic_typespec: , line:93:5, endln:93:10
-\_logic_typespec: , line:94:5, endln:94:10
-\_logic_typespec: , line:95:5, endln:95:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 6
 [WARNING] : 1
 [   NOTE] : 0
 
 ============================== Begin Linting Results ==============================
 [LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:9:5: Unsupported typespec, scalar_t
+[LINT]:   \_ :0:0:
 [LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:16:5: Unsupported typespec, trap_cause_t
+[LINT]:   \_ :0:0:
 [LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:20:5: Unsupported typespec, register_idx_t
+[LINT]:   \_ :0:0:
 [LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:22:5: Unsupported typespec, register_idx_t
+[LINT]:   \_ :0:0:
 [LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:24:5: Unsupported typespec, register_idx_t
+[LINT]:   \_ :0:0:
 [LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:26:5: Unsupported typespec, register_idx_t
+[LINT]:   \_ :0:0:
 [LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:29:5: Unsupported typespec, register_idx_t
+[LINT]:   \_ :0:0:
 [LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:30:5: Unsupported typespec, alu_op_t
+[LINT]:   \_ :0:0:
 [LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:31:5: Unsupported typespec, mask_src_t
+[LINT]:   \_ :0:0:
 [LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:32:5: Unsupported typespec, op1_src_t
+[LINT]:   \_ :0:0:
 [LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:33:5: Unsupported typespec, op2_src_t
+[LINT]:   \_ :0:0:
 [LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:35:5: Unsupported typespec, scalar_t
+[LINT]:   \_ :0:0:
 [LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:37:5: Unsupported typespec, branch_type_t
+[LINT]:   \_ :0:0:
 [LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:39:5: Unsupported typespec, pipeline_sel_t
+[LINT]:   \_ :0:0:
 [LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:41:5: Unsupported typespec, memory_op_t
+[LINT]:   \_ :0:0:
 [LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:44:5: Unsupported typespec, subcycle_t
+[LINT]:   \_ :0:0:
 [LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:45:5: Unsupported typespec, control_register_t
+[LINT]:   \_ :0:0:
 [LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:47:5: Unsupported typespec, cache_op_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:9:5: Unsupported typespec, scalar_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:16:5: Unsupported typespec, trap_cause_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:20:5: Unsupported typespec, register_idx_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:22:5: Unsupported typespec, register_idx_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:24:5: Unsupported typespec, register_idx_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:26:5: Unsupported typespec, register_idx_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:29:5: Unsupported typespec, register_idx_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:30:5: Unsupported typespec, alu_op_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:31:5: Unsupported typespec, mask_src_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:32:5: Unsupported typespec, op1_src_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:33:5: Unsupported typespec, op2_src_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:35:5: Unsupported typespec, scalar_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:37:5: Unsupported typespec, branch_type_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:39:5: Unsupported typespec, pipeline_sel_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:41:5: Unsupported typespec, memory_op_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:44:5: Unsupported typespec, subcycle_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:45:5: Unsupported typespec, control_register_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:47:5: Unsupported typespec, cache_op_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:9:5: Unsupported typespec, scalar_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:16:5: Unsupported typespec, trap_cause_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:20:5: Unsupported typespec, register_idx_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:22:5: Unsupported typespec, register_idx_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:24:5: Unsupported typespec, register_idx_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:26:5: Unsupported typespec, register_idx_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:29:5: Unsupported typespec, register_idx_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:30:5: Unsupported typespec, alu_op_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:31:5: Unsupported typespec, mask_src_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:32:5: Unsupported typespec, op1_src_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:33:5: Unsupported typespec, op2_src_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:35:5: Unsupported typespec, scalar_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:37:5: Unsupported typespec, branch_type_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:39:5: Unsupported typespec, pipeline_sel_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:41:5: Unsupported typespec, memory_op_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:44:5: Unsupported typespec, subcycle_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:45:5: Unsupported typespec, control_register_t
+[LINT]:   \_ :0:0:
+[LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:47:5: Unsupported typespec, cache_op_t
+[LINT]:   \_ :0:0:
 ============================== End Linting Results ==============================
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv | ${SURELOG_DIR}/build/regression/HierBitSlice/roundtrip/dut_000.sv | 209 | 374 |
+============================== End RoundTrip Results ==============================

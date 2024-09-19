@@ -41,9 +41,9 @@
 [INF:CP0303] ${SURELOG_DIR}/third_party/tests/YosysOldTests/openmsp430/rtl/omsp_wakeup_cell.v:44:1: Compile module "work@omsp_wakeup_cell".
 [INF:CP0303] ${SURELOG_DIR}/third_party/tests/YosysOldTests/openmsp430/rtl/omsp_watchdog.v:48:1: Compile module "work@omsp_watchdog".
 [INF:CP0303] ${SURELOG_DIR}/third_party/tests/YosysOldTests/openmsp430/rtl/openMSP430.v:48:1: Compile module "work@openMSP430".
-[INF:CP0302] Compile class "work@mailbox".
-[INF:CP0302] Compile class "work@process".
-[INF:CP0302] Compile class "work@semaphore".
+[INF:CP0302] Compile class "builtin::mailbox".
+[INF:CP0302] Compile class "builtin::process".
+[INF:CP0302] Compile class "builtin::semaphore".
 [NTE:CP0309] ${SURELOG_DIR}/third_party/tests/YosysOldTests/openmsp430/rtl/omsp_alu.v:51:5: Implicit port type (wire) for "alu_out",
 there are 3 more instances of this message.
 [NTE:CP0309] ${SURELOG_DIR}/third_party/tests/YosysOldTests/openmsp430/rtl/omsp_and_gate.v:47:5: Implicit port type (wire) for "y".
@@ -78,9 +78,9 @@ bit_select                                           149
 case_item                                             69
 case_stmt                                             13
 class_defn                                             8
-class_typespec                                         4
-class_var                                              3
-constant                                            1669
+class_typespec                                         1
+class_var                                              1
+constant                                            2669
 cont_assign                                          114
 design                                                 1
 enum_const                                             5
@@ -90,24 +90,26 @@ event_control                                        122
 function                                              12
 if_else                                              177
 if_stmt                                               74
-include_file_info                                     40
-int_typespec                                         100
+int_typespec                                           9
 int_var                                                4
 io_decl                                               16
 logic_net                                            977
-logic_typespec                                       988
-logic_var                                              7
+logic_typespec                                       681
+logic_var                                              2
 module_inst                                           20
-operation                                           1034
+operation                                           1067
 package                                                1
 param_assign                                         105
 parameter                                            105
 part_select                                           38
 port                                                 668
-range                                                496
+preproc_macro_definition                            1862
+preproc_macro_instance                               405
+range                                                990
 ref_module                                            16
-ref_obj                                             2393
-ref_typespec                                        1161
+ref_obj                                             1982
+ref_typespec                                         691
+source_file                                           61
 task                                                   9
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/YosysOldOpen/slpp_unit/surelog.uhdm ...
@@ -116,3 +118,27 @@ task                                                   9
 [  ERROR] : 0
 [WARNING] : 20
 [   NOTE] : 16
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysOldTests/openmsp430/rtl/omsp_alu.v            | ${SURELOG_DIR}/build/regression/YosysOldOpen/roundtrip/omsp_alu_000.v            | 112 | 253 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysOldTests/openmsp430/rtl/omsp_and_gate.v       | ${SURELOG_DIR}/build/regression/YosysOldOpen/roundtrip/omsp_and_gate_000.v       | 19 | 86 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysOldTests/openmsp430/rtl/omsp_clock_gate.v     | ${SURELOG_DIR}/build/regression/YosysOldOpen/roundtrip/omsp_clock_gate_000.v     | 20 | 84 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysOldTests/openmsp430/rtl/omsp_clock_module.v   | ${SURELOG_DIR}/build/regression/YosysOldOpen/roundtrip/omsp_clock_module_000.v   | 629 | 1053 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysOldTests/openmsp430/rtl/omsp_clock_mux.v      | ${SURELOG_DIR}/build/regression/YosysOldOpen/roundtrip/omsp_clock_mux_000.v      | 38 | 189 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysOldTests/openmsp430/rtl/omsp_dbg.v            | ${SURELOG_DIR}/build/regression/YosysOldOpen/roundtrip/omsp_dbg_000.v            | 445 | 822 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysOldTests/openmsp430/rtl/omsp_dbg_hwbrk.v      | ${SURELOG_DIR}/build/regression/YosysOldOpen/roundtrip/omsp_dbg_hwbrk_000.v      | 115 | 277 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysOldTests/openmsp430/rtl/omsp_dbg_uart.v       | ${SURELOG_DIR}/build/regression/YosysOldOpen/roundtrip/omsp_dbg_uart_000.v       | 129 | 293 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysOldTests/openmsp430/rtl/omsp_execution_unit.v | ${SURELOG_DIR}/build/regression/YosysOldOpen/roundtrip/omsp_execution_unit_000.v | 246 | 415 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysOldTests/openmsp430/rtl/omsp_frontend.v       | ${SURELOG_DIR}/build/regression/YosysOldOpen/roundtrip/omsp_frontend_000.v       | 459 | 961 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysOldTests/openmsp430/rtl/omsp_mem_backbone.v   | ${SURELOG_DIR}/build/regression/YosysOldOpen/roundtrip/omsp_mem_backbone_000.v   | 138 | 270 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysOldTests/openmsp430/rtl/omsp_multiplier.v     | ${SURELOG_DIR}/build/regression/YosysOldOpen/roundtrip/omsp_multiplier_000.v     | 195 | 415 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysOldTests/openmsp430/rtl/omsp_register_file.v  | ${SURELOG_DIR}/build/regression/YosysOldOpen/roundtrip/omsp_register_file_000.v  | 387 | 613 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysOldTests/openmsp430/rtl/omsp_scan_mux.v       | ${SURELOG_DIR}/build/regression/YosysOldOpen/roundtrip/omsp_scan_mux_000.v       | 17 | 73 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysOldTests/openmsp430/rtl/omsp_sfr.v            | ${SURELOG_DIR}/build/regression/YosysOldOpen/roundtrip/omsp_sfr_000.v            | 170 | 348 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysOldTests/openmsp430/rtl/omsp_sync_cell.v      | ${SURELOG_DIR}/build/regression/YosysOldOpen/roundtrip/omsp_sync_cell_000.v      | 20 | 79 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysOldTests/openmsp430/rtl/omsp_sync_reset.v     | ${SURELOG_DIR}/build/regression/YosysOldOpen/roundtrip/omsp_sync_reset_000.v     | 18 | 77 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysOldTests/openmsp430/rtl/omsp_wakeup_cell.v    | ${SURELOG_DIR}/build/regression/YosysOldOpen/roundtrip/omsp_wakeup_cell_000.v    | 41 | 104 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysOldTests/openmsp430/rtl/omsp_watchdog.v       | ${SURELOG_DIR}/build/regression/YosysOldOpen/roundtrip/omsp_watchdog_000.v       | 293 | 551 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysOldTests/openmsp430/rtl/openMSP430.v          | ${SURELOG_DIR}/build/regression/YosysOldOpen/roundtrip/openMSP430_000.v          | 433 | 579 |
+[roundtrip]: ${SURELOG_DIR}/third_party/tests/YosysOldTests/openmsp430/rtl/openMSP430_defines.v  | ${SURELOG_DIR}/build/regression/YosysOldOpen/roundtrip/openMSP430_defines_000.v  | 10 | 46 |
+============================== End RoundTrip Results ==============================

@@ -138,17 +138,22 @@ package                                                1
 part_select                                            2
 range                                                  2
 ref_obj                                                1
-ref_typespec                                           2
+ref_typespec                                           3
+source_file                                            1
 struct_typespec                                        1
 typespec_member                                        2
+unsupported_typespec                                   1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PartSelectHierPath/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PartSelectHierPath/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/PartSelectHierPath/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/PartSelectHierPath/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallPackages:
 \_package: swerv_types (swerv_types::), file:${SURELOG_DIR}/tests/PartSelectHierPath/dut.sv, line:1:1, endln:8:11
   |vpiParent:
@@ -160,160 +165,186 @@ design: (unnamed)
     |vpiParent:
     \_package: swerv_types (swerv_types::), file:${SURELOG_DIR}/tests/PartSelectHierPath/dut.sv, line:1:1, endln:8:11
     |vpiName:swerv_types::trace_pkt_t
-    |vpiInstance:
-    \_package: swerv_types (swerv_types::), file:${SURELOG_DIR}/tests/PartSelectHierPath/dut.sv, line:1:1, endln:8:11
     |vpiPacked:1
     |vpiTypespecMember:
-    \_typespec_member: (trace_rv_i_valid_ip), line:4:36, endln:4:55
+    \_typespec_member: (trace_rv_i_valid_ip), line:4:24, endln:4:56
       |vpiParent:
       \_struct_typespec: (swerv_types::trace_pkt_t), line:3:9, endln:6:25
       |vpiName:trace_rv_i_valid_ip
       |vpiTypespec:
-      \_ref_typespec: (swerv_types::swerv_types::trace_pkt_t::trace_rv_i_valid_ip)
+      \_ref_typespec: (swerv_types::trace_pkt_t::trace_rv_i_valid_ip), line:4:24, endln:4:35
         |vpiParent:
-        \_typespec_member: (trace_rv_i_valid_ip), line:4:36, endln:4:55
-        |vpiFullName:swerv_types::swerv_types::trace_pkt_t::trace_rv_i_valid_ip
+        \_typespec_member: (trace_rv_i_valid_ip), line:4:24, endln:4:56
+        |vpiFullName:swerv_types::trace_pkt_t::trace_rv_i_valid_ip
         |vpiActual:
         \_logic_typespec: , line:4:24, endln:4:35
-      |vpiRefFile:${SURELOG_DIR}/tests/PartSelectHierPath/dut.sv
-      |vpiRefLineNo:4
-      |vpiRefColumnNo:24
-      |vpiRefEndLineNo:4
-      |vpiRefEndColumnNo:35
     |vpiTypespecMember:
-    \_typespec_member: (trace_rv_i_insn_ip), line:5:37, endln:5:55
+    \_typespec_member: (trace_rv_i_insn_ip), line:5:24, endln:5:56
       |vpiParent:
       \_struct_typespec: (swerv_types::trace_pkt_t), line:3:9, endln:6:25
       |vpiName:trace_rv_i_insn_ip
       |vpiTypespec:
-      \_ref_typespec: (swerv_types::swerv_types::trace_pkt_t::trace_rv_i_insn_ip)
+      \_ref_typespec: (swerv_types::trace_pkt_t::trace_rv_i_insn_ip), line:5:24, endln:5:36
         |vpiParent:
-        \_typespec_member: (trace_rv_i_insn_ip), line:5:37, endln:5:55
-        |vpiFullName:swerv_types::swerv_types::trace_pkt_t::trace_rv_i_insn_ip
+        \_typespec_member: (trace_rv_i_insn_ip), line:5:24, endln:5:56
+        |vpiFullName:swerv_types::trace_pkt_t::trace_rv_i_insn_ip
         |vpiActual:
         \_logic_typespec: , line:5:24, endln:5:36
-      |vpiRefFile:${SURELOG_DIR}/tests/PartSelectHierPath/dut.sv
-      |vpiRefLineNo:5
-      |vpiRefColumnNo:24
-      |vpiRefEndLineNo:5
-      |vpiRefEndColumnNo:36
+  |vpiTypedef:
+  \_logic_typespec: , line:4:24, endln:4:35
+    |vpiParent:
+    \_package: swerv_types (swerv_types::), file:${SURELOG_DIR}/tests/PartSelectHierPath/dut.sv, line:1:1, endln:8:11
+    |vpiRange:
+    \_range: , line:4:30, endln:4:35
+      |vpiParent:
+      \_struct_typespec: (swerv_types::trace_pkt_t), line:3:9, endln:6:25
+      |vpiLeftRange:
+      \_constant: , line:4:31, endln:4:32
+        |vpiParent:
+        \_range: , line:4:30, endln:4:35
+        |vpiDecompile:2
+        |vpiSize:64
+        |UINT:2
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:4:33, endln:4:34
+        |vpiParent:
+        \_range: , line:4:30, endln:4:35
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_logic_typespec: , line:5:24, endln:5:36
+    |vpiParent:
+    \_package: swerv_types (swerv_types::), file:${SURELOG_DIR}/tests/PartSelectHierPath/dut.sv, line:1:1, endln:8:11
+    |vpiRange:
+    \_range: , line:5:30, endln:5:36
+      |vpiParent:
+      \_struct_typespec: (swerv_types::trace_pkt_t), line:3:9, endln:6:25
+      |vpiLeftRange:
+      \_constant: , line:5:31, endln:5:33
+        |vpiParent:
+        \_range: , line:5:30, endln:5:36
+        |vpiDecompile:95
+        |vpiSize:64
+        |UINT:95
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:5:34, endln:5:35
+        |vpiParent:
+        \_range: , line:5:30, endln:5:36
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_struct_typespec: (swerv_types::trace_pkt_t), line:3:9, endln:6:25
+  |vpiImportTypespec:
+  \_logic_typespec: , line:4:24, endln:4:35
+  |vpiImportTypespec:
+  \_logic_typespec: , line:5:24, endln:5:36
   |vpiDefName:swerv_types
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PartSelectHierPath/dut.sv, line:10:1, endln:14:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiTypedef:
-  \_struct_typespec: (swerv_types::trace_pkt_t), line:3:9, endln:6:25
+  |vpiName:work@top
   |vpiTypedef:
   \_import_typespec: (swerv_types), line:11:10, endln:11:24
-  |vpiDefName:work@top
-  |vpiNet:
+  |vpiTypedef:
+  \_unsupported_typespec: (trace_pkt_t), line:12:3, endln:12:14
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PartSelectHierPath/dut.sv, line:10:1, endln:14:10
+    |vpiName:trace_pkt_t
+  |vpiImportTypespec:
+  \_import_typespec: (swerv_types), line:11:10, endln:11:24
+  |vpiImportTypespec:
+  \_unsupported_typespec: (trace_pkt_t), line:12:3, endln:12:14
+  |vpiImportTypespec:
   \_logic_net: (work@top.trace_rv_trace_pkt), line:12:16, endln:12:34
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PartSelectHierPath/dut.sv, line:10:1, endln:14:10
+    |vpiTypespec:
+    \_ref_typespec: (work@top.trace_rv_trace_pkt.trace_rv_trace_pkt), line:12:3, endln:12:14
+      |vpiParent:
+      \_logic_net: (work@top.trace_rv_trace_pkt), line:12:16, endln:12:34
+      |vpiName:trace_rv_trace_pkt
+      |vpiFullName:work@top.trace_rv_trace_pkt.trace_rv_trace_pkt
+      |vpiActual:
+      \_unsupported_typespec: (trace_pkt_t), line:12:3, endln:12:14
     |vpiName:trace_rv_trace_pkt
     |vpiFullName:work@top.trace_rv_trace_pkt
+  |vpiDefName:work@top
+  |vpiNet:
+  \_logic_net: (work@top.trace_rv_trace_pkt), line:12:16, endln:12:34
   |vpiContAssign:
   \_cont_assign: , line:13:10, endln:13:84
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PartSelectHierPath/dut.sv, line:10:1, endln:14:10
     |vpiRhs:
-    \_hier_path: (trace_rv_trace_pkt.trace_rv_i_insn_ip[63:0]), line:13:41, endln:13:84
+    \_hier_path: (trace_rv_trace_pkt.trace_rv_i_insn_ip[63:0]), line:13:41, endln:13:83
       |vpiParent:
       \_cont_assign: , line:13:10, endln:13:84
       |vpiActual:
       \_ref_obj: (trace_rv_trace_pkt), line:13:41, endln:13:59
         |vpiParent:
-        \_hier_path: (trace_rv_trace_pkt.trace_rv_i_insn_ip[63:0]), line:13:41, endln:13:84
+        \_hier_path: (trace_rv_trace_pkt.trace_rv_i_insn_ip[63:0]), line:13:41, endln:13:83
         |vpiName:trace_rv_trace_pkt
+        |vpiActual:
+        \_logic_net: (work@top.trace_rv_trace_pkt), line:12:16, endln:12:34
       |vpiActual:
       \_part_select: (trace_rv_trace_pkt.trace_rv_i_insn_ip[63:0]), line:13:60, endln:13:83
         |vpiParent:
-        \_hier_path: (trace_rv_trace_pkt.trace_rv_i_insn_ip[63:0]), line:13:41, endln:13:84
+        \_hier_path: (trace_rv_trace_pkt.trace_rv_i_insn_ip[63:0]), line:13:41, endln:13:83
         |vpiName:trace_rv_i_insn_ip
         |vpiFullName:trace_rv_trace_pkt.trace_rv_i_insn_ip[63:0]
+        |vpiActual:
+        \_typespec_member: (trace_rv_i_insn_ip), line:5:24, endln:5:56
         |vpiConstantSelect:1
         |vpiLeftRange:
         \_constant: , line:13:79, endln:13:81
+          |vpiParent:
+          \_part_select: (trace_rv_trace_pkt.trace_rv_i_insn_ip[63:0]), line:13:60, endln:13:83
           |vpiDecompile:63
           |vpiSize:64
           |UINT:63
           |vpiConstType:9
         |vpiRightRange:
         \_constant: , line:13:82, endln:13:83
+          |vpiParent:
+          \_part_select: (trace_rv_trace_pkt.trace_rv_i_insn_ip[63:0]), line:13:60, endln:13:83
           |vpiDecompile:0
           |vpiSize:64
           |UINT:0
           |vpiConstType:9
       |vpiName:trace_rv_trace_pkt.trace_rv_i_insn_ip[63:0]
     |vpiLhs:
-    \_part_select: trace_rv_i_insn_ip (work@top.trace_rv_i_insn_ip), line:13:10, endln:13:34
+    \_part_select: trace_rv_i_insn_ip (work@top.trace_rv_i_insn_ip), line:13:29, endln:13:33
       |vpiParent:
-      \_cont_assign: , line:13:10, endln:13:84
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PartSelectHierPath/dut.sv, line:10:1, endln:14:10
       |vpiName:trace_rv_i_insn_ip
       |vpiFullName:work@top.trace_rv_i_insn_ip
       |vpiDefName:trace_rv_i_insn_ip
+      |vpiActual:
+      \_typespec_member: (trace_rv_i_insn_ip), line:5:24, endln:5:56
       |vpiConstantSelect:1
       |vpiLeftRange:
       \_constant: , line:13:29, endln:13:31
+        |vpiParent:
+        \_part_select: trace_rv_i_insn_ip (work@top.trace_rv_i_insn_ip), line:13:29, endln:13:33
         |vpiDecompile:63
         |vpiSize:64
         |UINT:63
         |vpiConstType:9
       |vpiRightRange:
       \_constant: , line:13:32, endln:13:33
+        |vpiParent:
+        \_part_select: trace_rv_i_insn_ip (work@top.trace_rv_i_insn_ip), line:13:29, endln:13:33
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
-\_weaklyReferenced:
-\_logic_typespec: , line:4:24, endln:4:35
-  |vpiInstance:
-  \_package: swerv_types (swerv_types::), file:${SURELOG_DIR}/tests/PartSelectHierPath/dut.sv, line:1:1, endln:8:11
-  |vpiRange:
-  \_range: , line:4:30, endln:4:35
-    |vpiParent:
-    \_logic_typespec: , line:4:24, endln:4:35
-    |vpiLeftRange:
-    \_constant: , line:4:31, endln:4:32
-      |vpiParent:
-      \_range: , line:4:30, endln:4:35
-      |vpiDecompile:2
-      |vpiSize:64
-      |UINT:2
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:4:33, endln:4:34
-      |vpiParent:
-      \_range: , line:4:30, endln:4:35
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:5:24, endln:5:36
-  |vpiInstance:
-  \_package: swerv_types (swerv_types::), file:${SURELOG_DIR}/tests/PartSelectHierPath/dut.sv, line:1:1, endln:8:11
-  |vpiRange:
-  \_range: , line:5:30, endln:5:36
-    |vpiParent:
-    \_logic_typespec: , line:5:24, endln:5:36
-    |vpiLeftRange:
-    \_constant: , line:5:31, endln:5:33
-      |vpiParent:
-      \_range: , line:5:30, endln:5:36
-      |vpiDecompile:95
-      |vpiSize:64
-      |UINT:95
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:5:34, endln:5:35
-      |vpiParent:
-      \_range: , line:5:30, endln:5:36
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -322,5 +353,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PartSelectHierPath/dut.sv | ${SURELOG_DIR}/build/regression/PartSelectHierPath/roundtrip/dut_000.sv | 2 | 14 |
+[roundtrip]: ${SURELOG_DIR}/tests/PartSelectHierPath/dut.sv | ${SURELOG_DIR}/build/regression/PartSelectHierPath/roundtrip/dut_000.sv | 4 | 14 |
 ============================== End RoundTrip Results ==============================

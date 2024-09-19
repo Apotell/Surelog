@@ -57,16 +57,20 @@ logic_typespec                                         1
 package                                                1
 range                                                  1
 ref_typespec                                           1
+source_file                                            1
 struct_typespec                                        1
 typespec_member                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/VarRangeTypedef/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/VarRangeTypedef/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/VarRangeTypedef/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/VarRangeTypedef/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallPackages:
 \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/VarRangeTypedef/dut.sv, line:1:1, endln:6:11
   |vpiParent:
@@ -78,31 +82,28 @@ design: (unnamed)
     |vpiParent:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/VarRangeTypedef/dut.sv, line:1:1, endln:6:11
     |vpiName:pkg::a
-    |vpiInstance:
-    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/VarRangeTypedef/dut.sv, line:1:1, endln:6:11
     |vpiPacked:1
     |vpiTypespecMember:
-    \_typespec_member: (x), line:3:16, endln:3:17
+    \_typespec_member: (x), line:3:7, endln:3:18
       |vpiParent:
       \_struct_typespec: (pkg::a), line:2:12, endln:4:5
       |vpiName:x
       |vpiTypespec:
-      \_ref_typespec: (pkg::pkg::a::x)
+      \_ref_typespec: (pkg::a::x), line:3:7, endln:3:12
         |vpiParent:
-        \_typespec_member: (x), line:3:16, endln:3:17
-        |vpiFullName:pkg::pkg::a::x
+        \_typespec_member: (x), line:3:7, endln:3:18
+        |vpiFullName:pkg::a::x
         |vpiActual:
         \_logic_typespec: , line:3:7, endln:3:12
-      |vpiRefFile:${SURELOG_DIR}/tests/VarRangeTypedef/dut.sv
-      |vpiRefLineNo:3
-      |vpiRefColumnNo:7
-      |vpiRefEndLineNo:3
-      |vpiRefEndColumnNo:12
+  |vpiTypedef:
+  \_logic_typespec: , line:3:7, endln:3:12
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/VarRangeTypedef/dut.sv, line:1:1, endln:6:11
+  |vpiImportTypespec:
+  \_struct_typespec: (pkg::a), line:2:12, endln:4:5
+  |vpiImportTypespec:
+  \_logic_typespec: , line:3:7, endln:3:12
   |vpiDefName:pkg
-\_weaklyReferenced:
-\_logic_typespec: , line:3:7, endln:3:12
-  |vpiInstance:
-  \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/VarRangeTypedef/dut.sv, line:1:1, endln:6:11
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

@@ -14,28 +14,32 @@ operation                                              1
 param_assign                                           1
 parameter                                              1
 ref_typespec                                           1
+source_file                                            1
 string_typespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/StringConcat/slpp_unit/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/StringConcat/slpp_unit/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/StringConcat/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/StringConcat/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/StringConcat/dut.sv, line:1:1, endln:3:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
+  |vpiName:work@top
   |vpiParameter:
-  \_parameter: (work@top.X), line:2:22, endln:2:23
+  \_parameter: (work@top.X), line:2:22, endln:2:42
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/StringConcat/dut.sv, line:1:1, endln:3:10
     |vpiTypespec:
-    \_ref_typespec: (work@top.X)
+    \_ref_typespec: (work@top.X), line:2:15, endln:2:21
       |vpiParent:
-      \_parameter: (work@top.X), line:2:22, endln:2:23
+      \_parameter: (work@top.X), line:2:22, endln:2:42
       |vpiFullName:work@top.X
       |vpiActual:
       \_string_typespec: , line:2:15, endln:2:21
@@ -53,23 +57,29 @@ design: (unnamed)
       |vpiOpType:33
       |vpiOperand:
       \_constant: , line:2:27, endln:2:33
+        |vpiParent:
+        \_operation: , line:2:26, endln:2:42
         |vpiDecompile:"abcd"
         |vpiSize:32
         |STRING:abcd
         |vpiConstType:6
       |vpiOperand:
       \_constant: , line:2:35, endln:2:41
+        |vpiParent:
+        \_operation: , line:2:26, endln:2:42
         |vpiDecompile:"efgh"
         |vpiSize:32
         |STRING:efgh
         |vpiConstType:6
     |vpiLhs:
-    \_parameter: (work@top.X), line:2:22, endln:2:23
+    \_parameter: (work@top.X), line:2:22, endln:2:42
+  |vpiTypedef:
+  \_string_typespec: , line:2:15, endln:2:21
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/StringConcat/dut.sv, line:1:1, endln:3:10
+  |vpiImportTypespec:
+  \_string_typespec: , line:2:15, endln:2:21
   |vpiDefName:work@top
-\_weaklyReferenced:
-\_string_typespec: , line:2:15, endln:2:21
-  |vpiParent:
-  \_parameter: (work@top.X), line:2:22, endln:2:23
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -78,5 +88,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/StringConcat/dut.sv | ${SURELOG_DIR}/build/regression/StringConcat/roundtrip/dut_000.sv | 0 | 3 |
+[roundtrip]: ${SURELOG_DIR}/tests/StringConcat/dut.sv | ${SURELOG_DIR}/build/regression/StringConcat/roundtrip/dut_000.sv | 3 | 3 |
 ============================== End RoundTrip Results ==============================

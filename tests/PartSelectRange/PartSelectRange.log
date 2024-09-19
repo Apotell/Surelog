@@ -228,16 +228,13 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             2
-begin                                                  1
+begin                                                  4
 constant                                              14
 design                                                 1
 gen_for                                                1
 gen_if                                                 1
 gen_if_else                                            1
-int_typespec                                           2
-logic_net                                              1
 module_inst                                            1
-named_begin                                            3
 operation                                             10
 param_assign                                           2
 parameter                                              2
@@ -245,48 +242,40 @@ part_select                                            2
 range                                                  1
 ref_module                                             2
 ref_obj                                                8
-ref_typespec                                           5
+ref_typespec                                           1
 ref_var                                                1
+source_file                                            1
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
+[ERR:IG0809] ${SURELOG_DIR}/tests/PartSelectRange/dut.sv:11:7: Object 41 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/tests/PartSelectRange/dut.sv:15:7: Object 56 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PartSelectRange/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PartSelectRange/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/PartSelectRange/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/PartSelectRange/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/PartSelectRange/dut.sv, line:1:1, endln:19:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@test
+  |vpiName:work@test
   |vpiParameter:
-  \_parameter: (work@test.MAP), line:3:19, endln:3:22
+  \_parameter: (work@test.MAP), line:3:19, endln:3:33
     |vpiParent:
     \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/PartSelectRange/dut.sv, line:1:1, endln:19:10
     |BIN:0100
-    |vpiTypespec:
-    \_ref_typespec: (work@test.MAP)
-      |vpiParent:
-      \_parameter: (work@test.MAP), line:3:19, endln:3:22
-      |vpiFullName:work@test.MAP
-      |vpiActual:
-      \_int_typespec: , line:3:13, endln:3:18
     |vpiName:MAP
     |vpiFullName:work@test.MAP
   |vpiParameter:
-  \_parameter: (work@test.N), line:4:13, endln:4:14
+  \_parameter: (work@test.N), line:4:13, endln:4:18
     |vpiParent:
     \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/PartSelectRange/dut.sv, line:1:1, endln:19:10
     |UINT:2
-    |vpiTypespec:
-    \_ref_typespec: (work@test.N)
-      |vpiParent:
-      \_parameter: (work@test.N), line:4:13, endln:4:14
-      |vpiFullName:work@test.N
-      |vpiActual:
-      \_int_typespec: , line:4:3, endln:4:18
     |vpiName:N
     |vpiFullName:work@test.N
   |vpiParamAssign:
@@ -300,16 +289,9 @@ design: (unnamed)
       |vpiDecompile:4'b0100
       |vpiSize:4
       |BIN:0100
-      |vpiTypespec:
-      \_ref_typespec: (work@test)
-        |vpiParent:
-        \_constant: , line:3:25, endln:3:33
-        |vpiFullName:work@test
-        |vpiActual:
-        \_int_typespec: , line:3:13, endln:3:18
       |vpiConstType:3
     |vpiLhs:
-    \_parameter: (work@test.MAP), line:3:19, endln:3:22
+    \_parameter: (work@test.MAP), line:3:19, endln:3:33
   |vpiParamAssign:
   \_param_assign: , line:4:13, endln:4:18
     |vpiParent:
@@ -321,131 +303,57 @@ design: (unnamed)
       |vpiDecompile:2
       |vpiSize:64
       |UINT:2
-      |vpiTypespec:
-      \_ref_typespec: (work@test)
-        |vpiParent:
-        \_constant: , line:4:17, endln:4:18
-        |vpiFullName:work@test
-        |vpiActual:
-        \_int_typespec: , line:4:3, endln:4:18
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@test.N), line:4:13, endln:4:14
-  |vpiDefName:work@test
-  |vpiNet:
-  \_logic_net: (work@test.i), line:7:11, endln:7:12
-    |vpiParent:
-    \_operation: , line:7:11, endln:7:14
-    |vpiName:i
-    |vpiFullName:work@test.i
-    |vpiNetType:1
-  |vpiGenStmt:
-  \_gen_for: 
+    \_parameter: (work@test.N), line:4:13, endln:4:18
+  |vpiInternalScope:
+  \_gen_for: (work@test), line:7:3, endln:17:9
     |vpiParent:
     \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/PartSelectRange/dut.sv, line:1:1, endln:19:10
-    |vpiForInitStmt:
-    \_assignment: , line:7:7, endln:7:10
+    |vpiFullName:work@test
+    |vpiVariables:
+    \_ref_var: (work@test.i), line:7:7, endln:7:8
       |vpiParent:
-      \_gen_for: 
-      |vpiRhs:
-      \_constant: , line:7:9, endln:7:10
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-      |vpiLhs:
-      \_ref_var: (work@test.i), line:7:7, endln:7:8
+      \_gen_for: (work@test), line:7:3, endln:17:9
+      |vpiTypespec:
+      \_ref_typespec: (work@test.i.i), line:7:7, endln:7:8
         |vpiParent:
-        \_assignment: , line:7:7, endln:7:10
-        |vpiTypespec:
-        \_ref_typespec: (work@test.i)
-          |vpiParent:
-          \_ref_var: (work@test.i), line:7:7, endln:7:8
-          |vpiFullName:work@test.i
-          |vpiActual:
-          \_unsupported_typespec: (i), line:7:7, endln:7:8
+        \_ref_var: (work@test.i), line:7:7, endln:7:8
         |vpiName:i
-        |vpiFullName:work@test.i
-    |vpiCondition:
-    \_operation: , line:7:11, endln:7:14
-      |vpiParent:
-      \_gen_for: 
-      |vpiOpType:20
-      |vpiOperand:
-      \_ref_obj: (work@test.i), line:7:11, endln:7:12
-        |vpiParent:
-        \_operation: , line:7:11, endln:7:14
-        |vpiName:i
-        |vpiFullName:work@test.i
+        |vpiFullName:work@test.i.i
         |vpiActual:
-        \_logic_net: (work@test.i), line:7:11, endln:7:12
-      |vpiOperand:
-      \_ref_obj: (work@test.N), line:7:13, endln:7:14
-        |vpiParent:
-        \_operation: , line:7:11, endln:7:14
-        |vpiName:N
-        |vpiFullName:work@test.N
-    |vpiForIncStmt:
-    \_assignment: , line:7:15, endln:7:20
+        \_unsupported_typespec: (i), line:7:7, endln:7:8
+      |vpiName:i
+      |vpiFullName:work@test.i
+    |vpiInternalScope:
+    \_begin: (work@test.loop), line:8:6, endln:17:9
       |vpiParent:
-      \_gen_for: 
-      |vpiOpType:82
-      |vpiRhs:
-      \_operation: , line:7:17, endln:7:20
-        |vpiParent:
-        \_assignment: , line:7:15, endln:7:20
-        |vpiOpType:24
-        |vpiOperand:
-        \_ref_obj: (work@test.i), line:7:17, endln:7:18
-          |vpiParent:
-          \_operation: , line:7:17, endln:7:20
-          |vpiName:i
-          |vpiFullName:work@test.i
-          |vpiActual:
-          \_logic_net: (work@test.i), line:7:11, endln:7:12
-        |vpiOperand:
-        \_constant: , line:7:19, endln:7:20
-          |vpiParent:
-          \_operation: , line:7:17, endln:7:20
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiLhs:
-      \_ref_obj: (work@test.i), line:7:15, endln:7:16
-        |vpiParent:
-        \_assignment: , line:7:15, endln:7:20
-        |vpiName:i
-        |vpiFullName:work@test.i
-        |vpiActual:
-        \_logic_net: (work@test.i), line:7:11, endln:7:12
-    |vpiStmt:
-    \_named_begin: (work@test.loop)
-      |vpiParent:
-      \_gen_for: 
+      \_gen_for: (work@test), line:7:3, endln:17:9
       |vpiName:loop
       |vpiFullName:work@test.loop
       |vpiStmt:
       \_gen_if_else: , line:9:2, endln:16:7
         |vpiParent:
-        \_named_begin: (work@test.loop)
+        \_begin: (work@test.loop), line:8:6, endln:17:9
         |vpiCondition:
         \_operation: , line:9:6, endln:9:29
           |vpiParent:
-          \_gen_if_else: , line:9:2, endln:16:7
+          \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/PartSelectRange/dut.sv, line:1:1, endln:19:10
           |vpiOpType:14
           |vpiOperand:
-          \_part_select: MAP (work@test.loop.MAP), line:9:6, endln:9:20
+          \_part_select: MAP (work@test.MAP), line:9:10, endln:9:19
             |vpiParent:
             \_operation: , line:9:6, endln:9:29
             |vpiName:MAP
-            |vpiFullName:work@test.loop.MAP
+            |vpiFullName:work@test.MAP
             |vpiDefName:MAP
+            |vpiActual:
+            \_parameter: (work@test.MAP), line:3:19, endln:3:33
             |vpiConstantSelect:1
             |vpiLeftRange:
             \_operation: , line:9:10, endln:9:15
               |vpiParent:
-              \_part_select: MAP (work@test.loop.MAP), line:9:6, endln:9:20
+              \_part_select: MAP (work@test.MAP), line:9:10, endln:9:19
               |vpiOpType:24
               |vpiOperand:
               \_operation: , line:9:10, endln:9:13
@@ -453,11 +361,13 @@ design: (unnamed)
                 \_operation: , line:9:10, endln:9:15
                 |vpiOpType:25
                 |vpiOperand:
-                \_ref_obj: (work@test.loop.MAP.i), line:9:10, endln:9:11
+                \_ref_obj: (work@test.MAP.i), line:9:10, endln:9:11
                   |vpiParent:
                   \_operation: , line:9:10, endln:9:13
                   |vpiName:i
-                  |vpiFullName:work@test.loop.MAP.i
+                  |vpiFullName:work@test.MAP.i
+                  |vpiActual:
+                  \_logic_net: (work@test.i), line:9:10, endln:9:11
                 |vpiOperand:
                 \_constant: , line:9:12, endln:9:13
                   |vpiParent:
@@ -477,14 +387,16 @@ design: (unnamed)
             |vpiRightRange:
             \_operation: , line:9:16, endln:9:19
               |vpiParent:
-              \_part_select: MAP (work@test.loop.MAP), line:9:6, endln:9:20
+              \_part_select: MAP (work@test.MAP), line:9:10, endln:9:19
               |vpiOpType:25
               |vpiOperand:
-              \_ref_obj: (work@test.loop.MAP.i), line:9:16, endln:9:17
+              \_ref_obj: (work@test.MAP.i), line:9:16, endln:9:17
                 |vpiParent:
                 \_operation: , line:9:16, endln:9:19
                 |vpiName:i
-                |vpiFullName:work@test.loop.MAP.i
+                |vpiFullName:work@test.MAP.i
+                |vpiActual:
+                \_logic_net: (work@test.i), line:9:10, endln:9:11
               |vpiOperand:
               \_constant: , line:9:18, endln:9:19
                 |vpiParent:
@@ -502,43 +414,45 @@ design: (unnamed)
             |BIN:00
             |vpiConstType:3
         |vpiStmt:
-        \_named_begin: (work@test.loop.foo)
+        \_begin: (work@test.loop.foo), line:10:4, endln:12:7
           |vpiParent:
           \_gen_if_else: , line:9:2, endln:16:7
           |vpiName:foo
           |vpiFullName:work@test.loop.foo
           |vpiStmt:
-          \_ref_module: work@foo (i0), line:11:11, endln:11:13
+          \_ref_module: work@foo (i0), line:11:7, endln:11:17
             |vpiParent:
-            \_named_begin: (work@test.loop.foo)
+            \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/PartSelectRange/dut.sv, line:1:1, endln:19:10
             |vpiName:i0
             |vpiDefName:work@foo
         |vpiElseStmt:
-        \_begin: (work@test.loop)
+        \_begin: (work@test.loop), line:13:7, endln:16:7
           |vpiParent:
           \_gen_if_else: , line:9:2, endln:16:7
           |vpiFullName:work@test.loop
           |vpiStmt:
-          \_gen_if: , line:13:7, endln:13:9
+          \_gen_if: , line:13:7, endln:16:7
             |vpiParent:
-            \_begin: (work@test.loop)
+            \_begin: (work@test.loop), line:13:7, endln:16:7
             |vpiCondition:
             \_operation: , line:13:11, endln:13:34
               |vpiParent:
-              \_gen_if: , line:13:7, endln:13:9
+              \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/PartSelectRange/dut.sv, line:1:1, endln:19:10
               |vpiOpType:14
               |vpiOperand:
-              \_part_select: MAP (work@test.loop.MAP), line:13:11, endln:13:25
+              \_part_select: MAP (work@test.MAP), line:13:15, endln:13:24
                 |vpiParent:
                 \_operation: , line:13:11, endln:13:34
                 |vpiName:MAP
-                |vpiFullName:work@test.loop.MAP
+                |vpiFullName:work@test.MAP
                 |vpiDefName:MAP
+                |vpiActual:
+                \_parameter: (work@test.MAP), line:3:19, endln:3:33
                 |vpiConstantSelect:1
                 |vpiLeftRange:
                 \_operation: , line:13:15, endln:13:20
                   |vpiParent:
-                  \_part_select: MAP (work@test.loop.MAP), line:13:11, endln:13:25
+                  \_part_select: MAP (work@test.MAP), line:13:15, endln:13:24
                   |vpiOpType:24
                   |vpiOperand:
                   \_operation: , line:13:15, endln:13:18
@@ -546,11 +460,13 @@ design: (unnamed)
                     \_operation: , line:13:15, endln:13:20
                     |vpiOpType:25
                     |vpiOperand:
-                    \_ref_obj: (work@test.loop.MAP.i), line:13:15, endln:13:16
+                    \_ref_obj: (work@test.MAP.i), line:13:15, endln:13:16
                       |vpiParent:
                       \_operation: , line:13:15, endln:13:18
                       |vpiName:i
-                      |vpiFullName:work@test.loop.MAP.i
+                      |vpiFullName:work@test.MAP.i
+                      |vpiActual:
+                      \_logic_net: (work@test.i), line:9:10, endln:9:11
                     |vpiOperand:
                     \_constant: , line:13:17, endln:13:18
                       |vpiParent:
@@ -570,14 +486,16 @@ design: (unnamed)
                 |vpiRightRange:
                 \_operation: , line:13:21, endln:13:24
                   |vpiParent:
-                  \_part_select: MAP (work@test.loop.MAP), line:13:11, endln:13:25
+                  \_part_select: MAP (work@test.MAP), line:13:15, endln:13:24
                   |vpiOpType:25
                   |vpiOperand:
-                  \_ref_obj: (work@test.loop.MAP.i), line:13:21, endln:13:22
+                  \_ref_obj: (work@test.MAP.i), line:13:21, endln:13:22
                     |vpiParent:
                     \_operation: , line:13:21, endln:13:24
                     |vpiName:i
-                    |vpiFullName:work@test.loop.MAP.i
+                    |vpiFullName:work@test.MAP.i
+                    |vpiActual:
+                    \_logic_net: (work@test.i), line:9:10, endln:9:11
                   |vpiOperand:
                   \_constant: , line:13:23, endln:13:24
                     |vpiParent:
@@ -595,47 +513,118 @@ design: (unnamed)
                 |BIN:01
                 |vpiConstType:3
             |vpiStmt:
-            \_named_begin: (work@test.loop.bar)
+            \_begin: (work@test.loop.bar), line:14:4, endln:16:7
               |vpiParent:
-              \_gen_if: , line:13:7, endln:13:9
+              \_gen_if: , line:13:7, endln:16:7
               |vpiName:bar
               |vpiFullName:work@test.loop.bar
               |vpiStmt:
-              \_ref_module: work@bar (i0), line:15:11, endln:15:13
+              \_ref_module: work@bar (i0), line:15:7, endln:15:17
                 |vpiParent:
-                \_named_begin: (work@test.loop.bar)
+                \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/PartSelectRange/dut.sv, line:1:1, endln:19:10
                 |vpiName:i0
                 |vpiDefName:work@bar
-\_weaklyReferenced:
-\_int_typespec: , line:3:13, endln:3:18
-  |vpiParent:
-  \_parameter: (work@test.MAP), line:3:19, endln:3:22
-  |vpiRange:
-  \_range: , line:3:13, endln:3:18
+    |vpiImportTypespec:
+    \_ref_var: (work@test.i), line:7:7, endln:7:8
+    |vpiForInitStmt:
+    \_assignment: , line:7:7, endln:7:10
+      |vpiParent:
+      \_gen_for: (work@test), line:7:3, endln:17:9
+      |vpiRhs:
+      \_constant: , line:7:9, endln:7:10
+        |vpiParent:
+        \_assignment: , line:7:7, endln:7:10
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+      |vpiLhs:
+      \_ref_var: (work@test.i), line:7:7, endln:7:8
+    |vpiCondition:
+    \_operation: , line:7:11, endln:7:14
+      |vpiParent:
+      \_gen_for: (work@test), line:7:3, endln:17:9
+      |vpiOpType:20
+      |vpiOperand:
+      \_ref_obj: (work@test.i), line:7:11, endln:7:12
+        |vpiParent:
+        \_operation: , line:7:11, endln:7:14
+        |vpiName:i
+        |vpiFullName:work@test.i
+        |vpiActual:
+        \_logic_net: (work@test.i), line:9:10, endln:9:11
+      |vpiOperand:
+      \_ref_obj: (work@test.N), line:7:13, endln:7:14
+        |vpiParent:
+        \_operation: , line:7:11, endln:7:14
+        |vpiName:N
+        |vpiFullName:work@test.N
+        |vpiActual:
+        \_parameter: (work@test.N), line:4:13, endln:4:18
+    |vpiForIncStmt:
+    \_assignment: , line:7:15, endln:7:20
+      |vpiParent:
+      \_gen_for: (work@test), line:7:3, endln:17:9
+      |vpiOpType:82
+      |vpiRhs:
+      \_operation: , line:7:17, endln:7:20
+        |vpiParent:
+        \_assignment: , line:7:15, endln:7:20
+        |vpiOpType:24
+        |vpiOperand:
+        \_ref_obj: (work@test.i), line:7:17, endln:7:18
+          |vpiParent:
+          \_operation: , line:7:17, endln:7:20
+          |vpiName:i
+          |vpiFullName:work@test.i
+          |vpiActual:
+          \_logic_net: (work@test.i), line:9:10, endln:9:11
+        |vpiOperand:
+        \_constant: , line:7:19, endln:7:20
+          |vpiParent:
+          \_operation: , line:7:17, endln:7:20
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiLhs:
+      \_ref_obj: (work@test.i), line:7:15, endln:7:16
+        |vpiParent:
+        \_assignment: , line:7:15, endln:7:20
+        |vpiName:i
+        |vpiFullName:work@test.i
+        |vpiActual:
+        \_logic_net: (work@test.i), line:9:10, endln:9:11
+    |vpiStmt:
+    \_begin: (work@test.loop), line:8:6, endln:17:9
+  |vpiTypedef:
+  \_unsupported_typespec: (i), line:7:7, endln:7:8
     |vpiParent:
-    \_int_typespec: , line:3:13, endln:3:18
-    |vpiLeftRange:
-    \_constant: , line:3:14, endln:3:15
-      |vpiParent:
-      \_range: , line:3:13, endln:3:18
-      |vpiDecompile:3
-      |vpiSize:64
-      |UINT:3
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:3:16, endln:3:17
-      |vpiParent:
-      \_range: , line:3:13, endln:3:18
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_int_typespec: , line:4:3, endln:4:18
-\_unsupported_typespec: (i), line:7:7, endln:7:8
-  |vpiName:i
+    \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/PartSelectRange/dut.sv, line:1:1, endln:19:10
+    |vpiName:i
+  |vpiImportTypespec:
+  \_unsupported_typespec: (i), line:7:7, endln:7:8
+  |vpiImportTypespec:
+  \_logic_net: (work@test.i), line:9:10, endln:9:11
+    |vpiParent:
+    \_module_inst: work@test (work@test), file:${SURELOG_DIR}/tests/PartSelectRange/dut.sv, line:1:1, endln:19:10
+    |vpiName:i
+    |vpiFullName:work@test.i
+    |vpiNetType:1
+  |vpiDefName:work@test
+  |vpiNet:
+  \_logic_net: (work@test.i), line:9:10, endln:9:11
+  |vpiRefModule:
+  \_ref_module: work@foo (i0), line:11:7, endln:11:17
+  |vpiRefModule:
+  \_ref_module: work@bar (i0), line:15:7, endln:15:17
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 2
 [WARNING] : 1
 [   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/PartSelectRange/dut.sv | ${SURELOG_DIR}/build/regression/PartSelectRange/roundtrip/dut_000.sv | 16 | 19 |
+============================== End RoundTrip Results ==============================

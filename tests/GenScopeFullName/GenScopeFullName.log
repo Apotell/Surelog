@@ -111,88 +111,130 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             1
+begin                                                  1
 bit_select                                             1
-constant                                               4
+constant                                               6
 design                                                 1
 gen_for                                                1
-logic_net                                              3
-logic_typespec                                         2
+logic_net                                              1
+logic_typespec                                         3
+logic_var                                              1
 module_inst                                            2
-named_begin                                            1
 operation                                              2
 port                                                   2
-range                                                  1
+range                                                  2
 ref_module                                             1
-ref_obj                                                4
-ref_typespec                                           3
+ref_obj                                                3
+ref_typespec                                           4
 ref_var                                                1
+source_file                                            1
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/GenScopeFullName/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/GenScopeFullName/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/GenScopeFullName/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/GenScopeFullName/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/GenScopeFullName/dut.sv, line:1:1, endln:10:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@dut
-  |vpiDefName:work@dut
-  |vpiNet:
-  \_logic_net: (work@dut.a), line:2:16, endln:2:17
+  |vpiName:work@dut
+  |vpiVariables:
+  \_logic_var: (work@dut.a), line:2:16, endln:2:17
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/GenScopeFullName/dut.sv, line:1:1, endln:10:10
     |vpiTypespec:
-    \_ref_typespec: (work@dut.a)
+    \_ref_typespec: (work@dut.a), line:2:4, endln:2:15
       |vpiParent:
-      \_logic_net: (work@dut.a), line:2:16, endln:2:17
+      \_logic_var: (work@dut.a), line:2:16, endln:2:17
       |vpiFullName:work@dut.a
       |vpiActual:
       \_logic_typespec: , line:2:4, endln:2:15
     |vpiName:a
     |vpiFullName:work@dut.a
-    |vpiNetType:36
-  |vpiNet:
-  \_logic_net: (work@dut.i), line:4:22, endln:4:23
-    |vpiParent:
-    \_operation: , line:4:22, endln:4:27
-    |vpiName:i
-    |vpiFullName:work@dut.i
-    |vpiNetType:1
-  |vpiGenStmt:
-  \_gen_for: 
+    |vpiVisibility:1
+  |vpiReg:
+  \_logic_var: (work@dut.a), line:2:16, endln:2:17
+  |vpiInternalScope:
+  \_gen_for: (work@dut), line:4:4, endln:8:7
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/GenScopeFullName/dut.sv, line:1:1, endln:10:10
+    |vpiFullName:work@dut
+    |vpiVariables:
+    \_ref_var: (work@dut.i), line:4:15, endln:4:16
+      |vpiParent:
+      \_gen_for: (work@dut), line:4:4, endln:8:7
+      |vpiTypespec:
+      \_ref_typespec: (work@dut.i.i), line:4:15, endln:4:16
+        |vpiParent:
+        \_ref_var: (work@dut.i), line:4:15, endln:4:16
+        |vpiName:i
+        |vpiFullName:work@dut.i.i
+        |vpiActual:
+        \_unsupported_typespec: (i), line:4:15, endln:4:16
+      |vpiName:i
+      |vpiFullName:work@dut.i
+    |vpiInternalScope:
+    \_begin: (work@dut.gen_modules), line:4:34, endln:8:7
+      |vpiParent:
+      \_gen_for: (work@dut), line:4:4, endln:8:7
+      |vpiName:gen_modules
+      |vpiFullName:work@dut.gen_modules
+      |vpiStmt:
+      \_ref_module: work@ibex_counter (module_in_genscope), line:5:7, endln:5:49
+        |vpiParent:
+        \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/GenScopeFullName/dut.sv, line:1:1, endln:10:10
+        |vpiName:module_in_genscope
+        |vpiDefName:work@ibex_counter
+        |vpiActual:
+        \_module_inst: work@ibex_counter (work@ibex_counter), file:${SURELOG_DIR}/tests/GenScopeFullName/dut.sv, line:12:1, endln:14:10
+        |vpiPort:
+        \_port: (b), line:5:39, endln:5:47
+          |vpiParent:
+          \_begin: (work@dut.gen_modules), line:4:34, endln:8:7
+          |vpiName:b
+          |vpiHighConn:
+          \_bit_select: (work@dut.gen_modules.a), line:5:43, endln:5:46
+            |vpiParent:
+            \_port: (b), line:5:39, endln:5:47
+            |vpiName:a
+            |vpiFullName:work@dut.gen_modules.a
+            |vpiActual:
+            \_logic_var: (work@dut.a), line:2:16, endln:2:17
+            |vpiIndex:
+            \_ref_obj: (work@dut.i), line:5:44, endln:5:45
+              |vpiParent:
+              \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/GenScopeFullName/dut.sv, line:1:1, endln:10:10
+              |vpiName:i
+              |vpiFullName:work@dut.i
+              |vpiActual:
+              \_logic_net: (work@dut.i), line:5:44, endln:5:45
+    |vpiImportTypespec:
+    \_ref_var: (work@dut.i), line:4:15, endln:4:16
     |vpiForInitStmt:
     \_assignment: , line:4:8, endln:4:20
       |vpiParent:
-      \_gen_for: 
+      \_gen_for: (work@dut), line:4:4, endln:8:7
       |vpiRhs:
       \_constant: , line:4:19, endln:4:20
+        |vpiParent:
+        \_assignment: , line:4:8, endln:4:20
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
       |vpiLhs:
       \_ref_var: (work@dut.i), line:4:15, endln:4:16
-        |vpiParent:
-        \_assignment: , line:4:8, endln:4:20
-        |vpiTypespec:
-        \_ref_typespec: (work@dut.i)
-          |vpiParent:
-          \_ref_var: (work@dut.i), line:4:15, endln:4:16
-          |vpiFullName:work@dut.i
-          |vpiActual:
-          \_unsupported_typespec: (i), line:4:15, endln:4:16
-        |vpiName:i
-        |vpiFullName:work@dut.i
     |vpiCondition:
     \_operation: , line:4:22, endln:4:27
       |vpiParent:
-      \_gen_for: 
+      \_gen_for: (work@dut), line:4:4, endln:8:7
       |vpiOpType:20
       |vpiOperand:
       \_ref_obj: (work@dut.i), line:4:22, endln:4:23
@@ -201,7 +243,7 @@ design: (unnamed)
         |vpiName:i
         |vpiFullName:work@dut.i
         |vpiActual:
-        \_logic_net: (work@dut.i), line:4:22, endln:4:23
+        \_logic_net: (work@dut.i), line:5:44, endln:5:45
       |vpiOperand:
       \_constant: , line:4:26, endln:4:27
         |vpiParent:
@@ -213,107 +255,120 @@ design: (unnamed)
     |vpiForIncStmt:
     \_operation: , line:4:29, endln:4:30
       |vpiParent:
-      \_gen_for: 
+      \_gen_for: (work@dut), line:4:4, endln:8:7
       |vpiOpType:62
       |vpiOperand:
-      \_ref_obj: (work@dut.i)
+      \_ref_obj: (work@dut.i), line:4:29, endln:4:32
         |vpiParent:
-        \_gen_for: 
+        \_gen_for: (work@dut), line:4:4, endln:8:7
         |vpiName:i
         |vpiFullName:work@dut.i
         |vpiActual:
-        \_logic_net: (work@dut.i), line:4:22, endln:4:23
+        \_logic_net: (work@dut.i), line:5:44, endln:5:45
     |vpiStmt:
-    \_named_begin: (work@dut.gen_modules)
+    \_begin: (work@dut.gen_modules), line:4:34, endln:8:7
+  |vpiTypedef:
+  \_unsupported_typespec: (i), line:4:15, endln:4:16
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/GenScopeFullName/dut.sv, line:1:1, endln:10:10
+    |vpiName:i
+  |vpiTypedef:
+  \_logic_typespec: , line:2:4, endln:2:15
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/GenScopeFullName/dut.sv, line:1:1, endln:10:10
+    |vpiRange:
+    \_range: , line:2:10, endln:2:15
       |vpiParent:
-      \_gen_for: 
-      |vpiName:gen_modules
-      |vpiFullName:work@dut.gen_modules
-      |vpiStmt:
-      \_ref_module: work@ibex_counter (module_in_genscope), line:5:20, endln:5:38
+      \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/GenScopeFullName/dut.sv, line:1:1, endln:10:10
+      |vpiLeftRange:
+      \_constant: , line:2:11, endln:2:12
         |vpiParent:
-        \_named_begin: (work@dut.gen_modules)
-        |vpiName:module_in_genscope
-        |vpiDefName:work@ibex_counter
-        |vpiPort:
-        \_port: (b), line:5:39, endln:5:47
-          |vpiParent:
-          \_ref_module: work@ibex_counter (module_in_genscope), line:5:20, endln:5:38
-          |vpiName:b
-          |vpiHighConn:
-          \_bit_select: (work@dut.gen_modules.module_in_genscope.a), line:5:44, endln:5:45
-            |vpiParent:
-            \_port: (b), line:5:39, endln:5:47
-            |vpiName:a
-            |vpiFullName:work@dut.gen_modules.module_in_genscope.a
-            |vpiIndex:
-            \_ref_obj: (work@dut.gen_modules.module_in_genscope.i), line:5:44, endln:5:45
-              |vpiParent:
-              \_bit_select: (work@dut.gen_modules.module_in_genscope.a), line:5:44, endln:5:45
-              |vpiName:i
-              |vpiFullName:work@dut.gen_modules.module_in_genscope.i
+        \_range: , line:2:10, endln:2:15
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:2:13, endln:2:14
+        |vpiParent:
+        \_range: , line:2:10, endln:2:15
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_unsupported_typespec: (i), line:4:15, endln:4:16
+  |vpiImportTypespec:
+  \_logic_typespec: , line:2:4, endln:2:15
+  |vpiImportTypespec:
+  \_logic_var: (work@dut.a), line:2:16, endln:2:17
+  |vpiImportTypespec:
+  \_logic_net: (work@dut.i), line:5:44, endln:5:45
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/GenScopeFullName/dut.sv, line:1:1, endln:10:10
+    |vpiName:i
+    |vpiFullName:work@dut.i
+    |vpiNetType:1
+  |vpiDefName:work@dut
+  |vpiNet:
+  \_logic_net: (work@dut.i), line:5:44, endln:5:45
+  |vpiRefModule:
+  \_ref_module: work@ibex_counter (module_in_genscope), line:5:7, endln:5:49
 |uhdmallModules:
 \_module_inst: work@ibex_counter (work@ibex_counter), file:${SURELOG_DIR}/tests/GenScopeFullName/dut.sv, line:12:1, endln:14:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@ibex_counter
-  |vpiDefName:work@ibex_counter
-  |vpiNet:
+  |vpiName:work@ibex_counter
+  |vpiTypedef:
+  \_logic_typespec: , line:12:27, endln:12:32
+    |vpiParent:
+    \_module_inst: work@ibex_counter (work@ibex_counter), file:${SURELOG_DIR}/tests/GenScopeFullName/dut.sv, line:12:1, endln:14:10
+  |vpiTypedef:
+  \_logic_typespec: , line:12:27, endln:12:32
+    |vpiParent:
+    \_module_inst: work@ibex_counter (work@ibex_counter), file:${SURELOG_DIR}/tests/GenScopeFullName/dut.sv, line:12:1, endln:14:10
+  |vpiImportTypespec:
+  \_logic_typespec: , line:12:27, endln:12:32
+  |vpiImportTypespec:
   \_logic_net: (work@ibex_counter.b), line:12:33, endln:12:34
     |vpiParent:
     \_module_inst: work@ibex_counter (work@ibex_counter), file:${SURELOG_DIR}/tests/GenScopeFullName/dut.sv, line:12:1, endln:14:10
+    |vpiTypespec:
+    \_ref_typespec: (work@ibex_counter.b.b), line:12:27, endln:12:32
+      |vpiParent:
+      \_logic_net: (work@ibex_counter.b), line:12:33, endln:12:34
+      |vpiName:b
+      |vpiFullName:work@ibex_counter.b.b
+      |vpiActual:
+      \_logic_typespec: , line:12:27, endln:12:32
     |vpiName:b
     |vpiFullName:work@ibex_counter.b
     |vpiNetType:36
+  |vpiImportTypespec:
+  \_logic_typespec: , line:12:27, endln:12:32
+  |vpiDefName:work@ibex_counter
+  |vpiNet:
+  \_logic_net: (work@ibex_counter.b), line:12:33, endln:12:34
   |vpiPort:
-  \_port: (b), line:12:33, endln:12:34
+  \_port: (b), line:12:21, endln:12:34
     |vpiParent:
     \_module_inst: work@ibex_counter (work@ibex_counter), file:${SURELOG_DIR}/tests/GenScopeFullName/dut.sv, line:12:1, endln:14:10
     |vpiName:b
     |vpiDirection:1
-    |vpiLowConn:
-    \_ref_obj: (work@ibex_counter.b.b), line:12:33, endln:12:34
-      |vpiParent:
-      \_port: (b), line:12:33, endln:12:34
-      |vpiName:b
-      |vpiFullName:work@ibex_counter.b.b
-      |vpiActual:
-      \_logic_net: (work@ibex_counter.b), line:12:33, endln:12:34
     |vpiTypedef:
-    \_ref_typespec: (work@ibex_counter.b)
+    \_ref_typespec: (work@ibex_counter.b), line:12:27, endln:12:32
       |vpiParent:
-      \_port: (b), line:12:33, endln:12:34
+      \_port: (b), line:12:21, endln:12:34
       |vpiFullName:work@ibex_counter.b
       |vpiActual:
       \_logic_typespec: , line:12:27, endln:12:32
-\_weaklyReferenced:
-\_unsupported_typespec: (i), line:4:15, endln:4:16
-  |vpiName:i
-\_logic_typespec: , line:2:4, endln:2:15
-  |vpiRange:
-  \_range: , line:2:10, endln:2:15
-    |vpiParent:
-    \_logic_typespec: , line:2:4, endln:2:15
-    |vpiLeftRange:
-    \_constant: , line:2:11, endln:2:12
-      |vpiParent:
-      \_range: , line:2:10, endln:2:15
-      |vpiDecompile:1
-      |vpiSize:64
-      |UINT:1
-      |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:2:13, endln:2:14
-      |vpiParent:
-      \_range: , line:2:10, endln:2:15
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:12:27, endln:12:32
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/GenScopeFullName/dut.sv | ${SURELOG_DIR}/build/regression/GenScopeFullName/roundtrip/dut_000.sv | 7 | 14 |
+============================== End RoundTrip Results ==============================

@@ -1,21 +1,22 @@
 [INF:CM0023] Creating log file "${SURELOG_DIR}/build/regression/PragmaProtect/slpp_all/surelog.log".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/PragmaProtect/top.sv:2:1: Compile module "work@sram".
-[INF:CP0302] Compile class "work@mailbox".
-[INF:CP0302] Compile class "work@process".
-[INF:CP0302] Compile class "work@semaphore".
+[INF:CP0302] Compile class "builtin::mailbox".
+[INF:CP0302] Compile class "builtin::process".
+[INF:CP0302] Compile class "builtin::semaphore".
 [WRN:CP0334] ${SURELOG_DIR}/tests/PragmaProtect/top.sv:74:1: Colliding compilation unit name: "sram",
              ${SURELOG_DIR}/tests/PragmaProtect/top.sv:2:1: previous usage.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 always                                                 1
+array_net                                              1
 assignment                                             8
 begin                                                  6
 bit_select                                             3
 class_defn                                             8
-class_typespec                                         4
-class_var                                              3
-constant                                              25
+class_typespec                                         1
+class_var                                              1
+constant                                              39
 delay_control                                          3
 design                                                 1
 enum_const                                             5
@@ -30,18 +31,20 @@ initial                                                1
 int_typespec                                           9
 int_var                                                4
 integer_typespec                                       1
+integer_var                                            1
 io_decl                                               11
-logic_net                                              7
-logic_typespec                                         6
+logic_net                                              6
+logic_typespec                                         3
 logic_var                                              1
-module_inst                                            1
+module_inst                                            2
 operation                                             10
 package                                                1
 port                                                   4
-range                                                  4
-ref_obj                                               28
-ref_typespec                                          20
+range                                                 11
+ref_obj                                               23
+ref_typespec                                          15
 ref_var                                                1
+source_file                                            1
 sys_func_call                                          4
 task                                                   9
 === UHDM Object Stats End ===
@@ -57,3 +60,7 @@ task                                                   9
 [LINT]: ${SURELOG_DIR}/tests/PragmaProtect/top.sv:40:9: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/PragmaProtect/top.sv:46:23: Non synthesizable construct,
 ============================== End Linting Results ==============================
+
+============================== Begin RoundTrip Results ==============================
+[roundtrip]: ${SURELOG_DIR}/tests/PragmaProtect/top.sv | ${SURELOG_DIR}/build/regression/PragmaProtect/roundtrip/top_000.sv | 25 | 50 |
+============================== End RoundTrip Results ==============================

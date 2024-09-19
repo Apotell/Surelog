@@ -69,52 +69,72 @@ cont_assign                                            1
 design                                                 1
 func_call                                              1
 function                                               1
-int_typespec                                           2
-int_var                                                1
-logic_net                                              1
+int_typespec                                           3
+int_var                                                2
 module_inst                                            1
 port                                                   1
-ref_obj                                                2
-ref_typespec                                           2
+ref_obj                                                1
+ref_typespec                                           3
 return_stmt                                            1
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TopFunc/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/TopFunc/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/TopFunc/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/TopFunc/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TopFunc/dut.sv, line:5:1, endln:7:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
-  |vpiDefName:work@top
-  |vpiNet:
-  \_logic_net: (work@top.o), line:5:23, endln:5:24
+  |vpiName:work@top
+  |vpiVariables:
+  \_int_var: (work@top.o), line:5:23, endln:5:24
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TopFunc/dut.sv, line:5:1, endln:7:10
+    |vpiTypespec:
+    \_ref_typespec: (work@top.o), line:5:19, endln:5:22
+      |vpiParent:
+      \_int_var: (work@top.o), line:5:23, endln:5:24
+      |vpiFullName:work@top.o
+      |vpiActual:
+      \_int_typespec: , line:5:19, endln:5:22
     |vpiName:o
     |vpiFullName:work@top.o
+    |vpiSigned:1
+    |vpiVisibility:1
+  |vpiTypedef:
+  \_int_typespec: , line:5:19, endln:5:22
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TopFunc/dut.sv, line:5:1, endln:7:10
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:5:19, endln:5:22
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TopFunc/dut.sv, line:5:1, endln:7:10
+    |vpiSigned:1
+  |vpiImportTypespec:
+  \_int_typespec: , line:5:19, endln:5:22
+  |vpiImportTypespec:
+  \_int_var: (work@top.o), line:5:23, endln:5:24
+  |vpiImportTypespec:
+  \_int_typespec: , line:5:19, endln:5:22
+  |vpiDefName:work@top
   |vpiPort:
-  \_port: (o), line:5:23, endln:5:24
+  \_port: (o), line:5:12, endln:5:24
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TopFunc/dut.sv, line:5:1, endln:7:10
     |vpiName:o
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@top.o.o), line:5:23, endln:5:24
-      |vpiParent:
-      \_port: (o), line:5:23, endln:5:24
-      |vpiName:o
-      |vpiFullName:work@top.o.o
-      |vpiActual:
-      \_logic_net: (work@top.o), line:5:23, endln:5:24
     |vpiTypedef:
-    \_ref_typespec: (work@top.o)
+    \_ref_typespec: (work@top.o), line:5:19, endln:5:22
       |vpiParent:
-      \_port: (o), line:5:23, endln:5:24
+      \_port: (o), line:5:12, endln:5:24
       |vpiFullName:work@top.o
       |vpiActual:
       \_int_typespec: , line:5:19, endln:5:22
@@ -132,25 +152,22 @@ design: (unnamed)
     |vpiLhs:
     \_ref_obj: (work@top.o), line:6:11, endln:6:12
       |vpiParent:
-      \_cont_assign: , line:6:11, endln:6:22
+      \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TopFunc/dut.sv, line:5:1, endln:7:10
       |vpiName:o
       |vpiFullName:work@top.o
       |vpiActual:
-      \_logic_net: (work@top.o), line:5:23, endln:5:24
+      \_int_var: (work@top.o), line:5:23, endln:5:24
 |vpiTaskFunc:
 \_function: (get_1), line:1:1, endln:3:12
   |vpiParent:
   \_design: (unnamed)
   |vpiName:get_1
-  |vpiMethod:1
-  |vpiVisibility:1
-  |vpiAutomatic:1
-  |vpiReturn:
+  |vpiVariables:
   \_int_var: (get_1), line:1:20, endln:1:23
     |vpiParent:
     \_function: (get_1), line:1:1, endln:3:12
     |vpiTypespec:
-    \_ref_typespec: (get_1)
+    \_ref_typespec: (get_1), line:1:20, endln:1:23
       |vpiParent:
       \_int_var: (get_1), line:1:20, endln:1:23
       |vpiFullName:get_1
@@ -158,21 +175,32 @@ design: (unnamed)
       \_int_typespec: , line:1:20, endln:1:23
     |vpiFullName:get_1
     |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:1:20, endln:1:23
+    |vpiParent:
+    \_function: (get_1), line:1:1, endln:3:12
+    |vpiSigned:1
+  |vpiImportTypespec:
+  \_int_typespec: , line:1:20, endln:1:23
+  |vpiImportTypespec:
+  \_int_var: (get_1), line:1:20, endln:1:23
+  |vpiMethod:1
+  |vpiVisibility:1
+  |vpiAutomatic:1
+  |vpiReturn:
+  \_int_var: (get_1), line:1:20, endln:1:23
   |vpiStmt:
-  \_return_stmt: , line:2:4, endln:2:10
+  \_return_stmt: , line:2:4, endln:2:12
     |vpiParent:
     \_function: (get_1), line:1:1, endln:3:12
     |vpiCondition:
     \_constant: , line:2:11, endln:2:12
+      |vpiParent:
+      \_return_stmt: , line:2:4, endln:2:12
       |vpiDecompile:1
       |vpiSize:64
       |UINT:1
       |vpiConstType:9
-\_weaklyReferenced:
-\_int_typespec: , line:1:20, endln:1:23
-  |vpiSigned:1
-\_int_typespec: , line:5:19, endln:5:22
-  |vpiSigned:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -181,5 +209,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/TopFunc/dut.sv | ${SURELOG_DIR}/build/regression/TopFunc/roundtrip/dut_000.sv | 1 | 7 |
+[roundtrip]: ${SURELOG_DIR}/tests/TopFunc/dut.sv | ${SURELOG_DIR}/build/regression/TopFunc/roundtrip/dut_000.sv | 2 | 7 |
 ============================== End RoundTrip Results ==============================

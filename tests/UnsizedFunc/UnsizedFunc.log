@@ -110,7 +110,7 @@ n<> u<104> t<Variable_lvalue> p<118> c<101> s<105> l<11:7> el<11:8>
 n<> u<105> t<AssignOp_Assign> p<118> s<117> l<11:9> el<11:10>
 n<> u<106> t<IntegerAtomType_Int> p<107> l<11:11> el<11:14>
 n<> u<107> t<Integer_type> p<108> c<106> l<11:11> el<11:14>
-n<> u<108> t<Simple_type> p<109> c<107> l<11:11> el<11:14>
+n<int> u<108> t<Simple_type> p<109> c<107> l<11:11> el<11:14>
 n<> u<109> t<Casting_type> p<115> c<108> s<114> l<11:11> el<11:14>
 n<get_1s> u<110> t<StringConst> p<112> s<111> l<11:16> el<11:22>
 n<> u<111> t<List_of_arguments> p<112> l<11:23> el<11:23>
@@ -195,8 +195,8 @@ design                                                 1
 func_call                                              1
 function                                               1
 initial                                                1
-int_typespec                                           4
-logic_net                                              2
+int_typespec                                           5
+int_var                                                2
 logic_typespec                                         2
 logic_var                                              2
 module_inst                                            2
@@ -206,31 +206,50 @@ parameter                                              1
 port                                                   3
 range                                                  4
 ref_module                                             1
-ref_obj                                                9
+ref_obj                                                7
 ref_typespec                                           7
 return_stmt                                            1
+source_file                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnsizedFunc/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/UnsizedFunc/slpp_all/checker/surelog.chk.html ...
-[INF:UH0710] Loading UHDM DB: ${SURELOG_DIR}/build/regression/UnsizedFunc/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/UnsizedFunc/dut.sv
+  |vpiParent:
+  \_design: (unnamed)
 |uhdmallModules:
 \_module_inst: work@prim_lfsr (work@prim_lfsr), file:${SURELOG_DIR}/tests/UnsizedFunc/dut.sv, line:3:1, endln:13:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@prim_lfsr
+  |vpiName:work@prim_lfsr
+  |vpiVariables:
+  \_int_var: (work@prim_lfsr.o), line:3:29, endln:3:30
+    |vpiParent:
+    \_module_inst: work@prim_lfsr (work@prim_lfsr), file:${SURELOG_DIR}/tests/UnsizedFunc/dut.sv, line:3:1, endln:13:10
+    |vpiTypespec:
+    \_ref_typespec: (work@prim_lfsr.o), line:3:25, endln:3:28
+      |vpiParent:
+      \_int_var: (work@prim_lfsr.o), line:3:29, endln:3:30
+      |vpiFullName:work@prim_lfsr.o
+      |vpiActual:
+      \_int_typespec: , line:3:25, endln:3:28
+    |vpiName:o
+    |vpiFullName:work@prim_lfsr.o
+    |vpiSigned:1
+    |vpiVisibility:1
   |vpiParameter:
-  \_parameter: (work@prim_lfsr.LfsrDw), line:4:27, endln:4:33
+  \_parameter: (work@prim_lfsr.LfsrDw), line:4:27, endln:4:38
     |vpiParent:
     \_module_inst: work@prim_lfsr (work@prim_lfsr), file:${SURELOG_DIR}/tests/UnsizedFunc/dut.sv, line:3:1, endln:13:10
     |UINT:12
     |vpiTypespec:
-    \_ref_typespec: (work@prim_lfsr.LfsrDw)
+    \_ref_typespec: (work@prim_lfsr.LfsrDw), line:4:14, endln:4:17
       |vpiParent:
-      \_parameter: (work@prim_lfsr.LfsrDw), line:4:27, endln:4:33
+      \_parameter: (work@prim_lfsr.LfsrDw), line:4:27, endln:4:38
       |vpiFullName:work@prim_lfsr.LfsrDw
       |vpiActual:
       \_int_typespec: , line:4:14, endln:4:26
@@ -247,109 +266,202 @@ design: (unnamed)
       |vpiDecompile:12
       |vpiSize:64
       |UINT:12
-      |vpiTypespec:
-      \_ref_typespec: (work@prim_lfsr)
-        |vpiParent:
-        \_constant: , line:4:36, endln:4:38
-        |vpiFullName:work@prim_lfsr
-        |vpiActual:
-        \_int_typespec: , line:4:14, endln:4:26
       |vpiConstType:9
     |vpiLhs:
-    \_parameter: (work@prim_lfsr.LfsrDw), line:4:27, endln:4:33
-  |vpiDefName:work@prim_lfsr
-  |vpiTaskFunc:
+    \_parameter: (work@prim_lfsr.LfsrDw), line:4:27, endln:4:38
+  |vpiInternalScope:
   \_function: (work@prim_lfsr.get_1s), line:5:4, endln:8:15
     |vpiParent:
     \_module_inst: work@prim_lfsr (work@prim_lfsr), file:${SURELOG_DIR}/tests/UnsizedFunc/dut.sv, line:3:1, endln:13:10
     |vpiName:get_1s
     |vpiFullName:work@prim_lfsr.get_1s
     |vpiVariables:
-    \_logic_var: (work@prim_lfsr.get_1s.a), line:6:26, endln:6:27
-      |vpiParent:
-      \_assignment: , line:6:26, endln:6:32
-      |vpiTypespec:
-      \_ref_typespec: (work@prim_lfsr.get_1s.a)
-        |vpiParent:
-        \_logic_var: (work@prim_lfsr.get_1s.a), line:6:26, endln:6:27
-        |vpiFullName:work@prim_lfsr.get_1s.a
-        |vpiActual:
-        \_logic_typespec: , line:6:7, endln:6:25
-      |vpiName:a
-      |vpiFullName:work@prim_lfsr.get_1s.a
-    |vpiVisibility:1
-    |vpiAutomatic:1
-    |vpiReturn:
     \_logic_var: (work@prim_lfsr.get_1s), line:5:23, endln:5:41
       |vpiParent:
       \_function: (work@prim_lfsr.get_1s), line:5:4, endln:8:15
       |vpiTypespec:
-      \_ref_typespec: (work@prim_lfsr.get_1s)
+      \_ref_typespec: (work@prim_lfsr.get_1s), line:5:23, endln:5:41
         |vpiParent:
         \_logic_var: (work@prim_lfsr.get_1s), line:5:23, endln:5:41
         |vpiFullName:work@prim_lfsr.get_1s
         |vpiActual:
         \_logic_typespec: , line:5:23, endln:5:41
       |vpiFullName:work@prim_lfsr.get_1s
-    |vpiStmt:
-    \_begin: (work@prim_lfsr.get_1s), line:7:7, endln:7:16
+    |vpiReg:
+    \_logic_var: (work@prim_lfsr.get_1s), line:5:23, endln:5:41
+    |vpiInternalScope:
+    \_begin: (work@prim_lfsr.get_1s)
       |vpiParent:
       \_function: (work@prim_lfsr.get_1s), line:5:4, endln:8:15
       |vpiFullName:work@prim_lfsr.get_1s
       |vpiVariables:
-      \_logic_var: (work@prim_lfsr.get_1s.a), line:6:26, endln:6:27
+      \_logic_var: (work@prim_lfsr.get_1s.a), line:6:7, endln:6:25
+        |vpiParent:
+        \_begin: (work@prim_lfsr.get_1s)
+        |vpiTypespec:
+        \_ref_typespec: (work@prim_lfsr.get_1s.a), line:6:7, endln:6:25
+          |vpiParent:
+          \_logic_var: (work@prim_lfsr.get_1s.a), line:6:7, endln:6:25
+          |vpiFullName:work@prim_lfsr.get_1s.a
+          |vpiActual:
+          \_logic_typespec: , line:6:7, endln:6:25
+        |vpiName:a
+        |vpiFullName:work@prim_lfsr.get_1s.a
+      |vpiReg:
+      \_logic_var: (work@prim_lfsr.get_1s.a), line:6:7, endln:6:25
+      |vpiTypedef:
+      \_logic_typespec: , line:6:7, endln:6:25
+        |vpiParent:
+        \_begin: (work@prim_lfsr.get_1s)
+        |vpiRange:
+        \_range: , line:6:13, endln:6:25
+          |vpiParent:
+          \_begin: (work@prim_lfsr.get_1s)
+          |vpiLeftRange:
+          \_operation: , line:6:14, endln:6:22
+            |vpiParent:
+            \_range: , line:6:13, endln:6:25
+            |vpiOpType:11
+            |vpiOperand:
+            \_ref_obj: (work@prim_lfsr.get_1s.LfsrDw), line:6:14, endln:6:20
+              |vpiParent:
+              \_operation: , line:6:14, endln:6:22
+              |vpiName:LfsrDw
+              |vpiFullName:work@prim_lfsr.get_1s.LfsrDw
+              |vpiActual:
+              \_parameter: (work@prim_lfsr.LfsrDw), line:4:27, endln:4:38
+            |vpiOperand:
+            \_constant: , line:6:21, endln:6:22
+              |vpiParent:
+              \_operation: , line:6:14, endln:6:22
+              |vpiDecompile:1
+              |vpiSize:64
+              |UINT:1
+              |vpiConstType:9
+          |vpiRightRange:
+          \_constant: , line:6:23, endln:6:24
+            |vpiParent:
+            \_range: , line:6:13, endln:6:25
+            |vpiDecompile:0
+            |vpiSize:64
+            |UINT:0
+            |vpiConstType:9
+      |vpiImportTypespec:
+      \_logic_typespec: , line:6:7, endln:6:25
+      |vpiImportTypespec:
+      \_logic_var: (work@prim_lfsr.get_1s.a), line:6:7, endln:6:25
       |vpiStmt:
       \_assignment: , line:6:26, endln:6:32
         |vpiParent:
-        \_begin: (work@prim_lfsr.get_1s), line:7:7, endln:7:16
+        \_begin: (work@prim_lfsr.get_1s)
         |vpiOpType:82
         |vpiBlocking:1
         |vpiRhs:
         \_constant: , line:6:30, endln:6:32
+          |vpiParent:
+          \_assignment: , line:6:26, endln:6:32
           |vpiDecompile:'1
           |vpiSize:-1
           |BIN:1
           |vpiConstType:3
         |vpiLhs:
-        \_logic_var: (work@prim_lfsr.get_1s.a), line:6:26, endln:6:27
+        \_logic_var: (work@prim_lfsr.get_1s.a), line:6:7, endln:6:25
       |vpiStmt:
-      \_return_stmt: , line:7:7, endln:7:13
+      \_return_stmt: , line:7:7, endln:7:15
         |vpiParent:
-        \_begin: (work@prim_lfsr.get_1s), line:7:7, endln:7:16
+        \_begin: (work@prim_lfsr.get_1s)
         |vpiCondition:
         \_ref_obj: (work@prim_lfsr.get_1s.a), line:7:14, endln:7:15
           |vpiParent:
-          \_return_stmt: , line:7:7, endln:7:13
+          \_return_stmt: , line:7:7, endln:7:15
           |vpiName:a
           |vpiFullName:work@prim_lfsr.get_1s.a
           |vpiActual:
-          \_logic_var: (work@prim_lfsr.get_1s.a), line:6:26, endln:6:27
-    |vpiInstance:
-    \_module_inst: work@prim_lfsr (work@prim_lfsr), file:${SURELOG_DIR}/tests/UnsizedFunc/dut.sv, line:3:1, endln:13:10
-  |vpiNet:
-  \_logic_net: (work@prim_lfsr.o), line:3:29, endln:3:30
+          \_logic_var: (work@prim_lfsr.get_1s.a), line:6:7, endln:6:25
+    |vpiTypedef:
+    \_logic_typespec: , line:5:23, endln:5:41
+      |vpiParent:
+      \_function: (work@prim_lfsr.get_1s), line:5:4, endln:8:15
+      |vpiRange:
+      \_range: , line:5:29, endln:5:41
+        |vpiParent:
+        \_function: (work@prim_lfsr.get_1s), line:5:4, endln:8:15
+        |vpiLeftRange:
+        \_operation: , line:5:30, endln:5:38
+          |vpiParent:
+          \_range: , line:5:29, endln:5:41
+          |vpiOpType:11
+          |vpiOperand:
+          \_ref_obj: (work@prim_lfsr.get_1s.LfsrDw), line:5:30, endln:5:36
+            |vpiParent:
+            \_operation: , line:5:30, endln:5:38
+            |vpiName:LfsrDw
+            |vpiFullName:work@prim_lfsr.get_1s.LfsrDw
+            |vpiActual:
+            \_parameter: (work@prim_lfsr.LfsrDw), line:4:27, endln:4:38
+          |vpiOperand:
+          \_constant: , line:5:37, endln:5:38
+            |vpiParent:
+            \_operation: , line:5:30, endln:5:38
+            |vpiDecompile:1
+            |vpiSize:64
+            |UINT:1
+            |vpiConstType:9
+        |vpiRightRange:
+        \_constant: , line:5:39, endln:5:40
+          |vpiParent:
+          \_range: , line:5:29, endln:5:41
+          |vpiDecompile:0
+          |vpiSize:64
+          |UINT:0
+          |vpiConstType:9
+    |vpiImportTypespec:
+    \_logic_typespec: , line:5:23, endln:5:41
+    |vpiImportTypespec:
+    \_logic_var: (work@prim_lfsr.get_1s), line:5:23, endln:5:41
+    |vpiVisibility:1
+    |vpiAutomatic:1
+    |vpiReturn:
+    \_logic_var: (work@prim_lfsr.get_1s), line:5:23, endln:5:41
+    |vpiStmt:
+    \_begin: (work@prim_lfsr.get_1s)
+  |vpiTypedef:
+  \_int_typespec: , line:4:14, endln:4:26
     |vpiParent:
     \_module_inst: work@prim_lfsr (work@prim_lfsr), file:${SURELOG_DIR}/tests/UnsizedFunc/dut.sv, line:3:1, endln:13:10
-    |vpiName:o
-    |vpiFullName:work@prim_lfsr.o
+  |vpiTypedef:
+  \_int_typespec: , line:3:25, endln:3:28
+    |vpiParent:
+    \_module_inst: work@prim_lfsr (work@prim_lfsr), file:${SURELOG_DIR}/tests/UnsizedFunc/dut.sv, line:3:1, endln:13:10
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:3:25, endln:3:28
+    |vpiParent:
+    \_module_inst: work@prim_lfsr (work@prim_lfsr), file:${SURELOG_DIR}/tests/UnsizedFunc/dut.sv, line:3:1, endln:13:10
+    |vpiSigned:1
+  |vpiImportTypespec:
+  \_function: (work@prim_lfsr.get_1s), line:5:4, endln:8:15
+  |vpiImportTypespec:
+  \_int_typespec: , line:4:14, endln:4:26
+  |vpiImportTypespec:
+  \_int_typespec: , line:3:25, endln:3:28
+  |vpiImportTypespec:
+  \_int_var: (work@prim_lfsr.o), line:3:29, endln:3:30
+  |vpiImportTypespec:
+  \_int_typespec: , line:3:25, endln:3:28
+  |vpiDefName:work@prim_lfsr
+  |vpiTaskFunc:
+  \_function: (work@prim_lfsr.get_1s), line:5:4, endln:8:15
   |vpiPort:
-  \_port: (o), line:3:29, endln:3:30
+  \_port: (o), line:3:18, endln:3:30
     |vpiParent:
     \_module_inst: work@prim_lfsr (work@prim_lfsr), file:${SURELOG_DIR}/tests/UnsizedFunc/dut.sv, line:3:1, endln:13:10
     |vpiName:o
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@prim_lfsr.o.o), line:3:29, endln:3:30
-      |vpiParent:
-      \_port: (o), line:3:29, endln:3:30
-      |vpiName:o
-      |vpiFullName:work@prim_lfsr.o.o
-      |vpiActual:
-      \_logic_net: (work@prim_lfsr.o), line:3:29, endln:3:30
     |vpiTypedef:
-    \_ref_typespec: (work@prim_lfsr.o)
+    \_ref_typespec: (work@prim_lfsr.o), line:3:25, endln:3:28
       |vpiParent:
-      \_port: (o), line:3:29, endln:3:30
+      \_port: (o), line:3:18, endln:3:30
       |vpiFullName:work@prim_lfsr.o
       |vpiActual:
       \_int_typespec: , line:3:25, endln:3:28
@@ -372,18 +484,11 @@ design: (unnamed)
         \_operation: , line:11:11, endln:11:25
           |vpiParent:
           \_assignment: , line:11:7, endln:11:25
-          |vpiTypespec:
-          \_ref_typespec: (work@prim_lfsr)
-            |vpiParent:
-            \_operation: , line:11:11, endln:11:25
-            |vpiFullName:work@prim_lfsr
-            |vpiActual:
-            \_int_typespec: , line:11:11, endln:11:14
           |vpiOpType:67
           |vpiOperand:
           \_func_call: (get_1s), line:11:16, endln:11:24
             |vpiParent:
-            \_operation: , line:11:11, endln:11:25
+            \_module_inst: work@prim_lfsr (work@prim_lfsr), file:${SURELOG_DIR}/tests/UnsizedFunc/dut.sv, line:3:1, endln:13:10
             |vpiName:get_1s
             |vpiFunction:
             \_function: (work@prim_lfsr.get_1s), line:5:4, endln:8:15
@@ -394,42 +499,74 @@ design: (unnamed)
           |vpiName:o
           |vpiFullName:work@prim_lfsr.o
           |vpiActual:
-          \_logic_net: (work@prim_lfsr.o), line:3:29, endln:3:30
+          \_int_var: (work@prim_lfsr.o), line:3:29, endln:3:30
+  |vpiSysTaskCall:
+  \_func_call: (get_1s), line:11:16, endln:11:24
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedFunc/dut.sv, line:15:1, endln:19:10
   |vpiParent:
   \_design: (unnamed)
-  |vpiFullName:work@top
+  |vpiName:work@top
+  |vpiVariables:
+  \_int_var: (work@top.o), line:15:23, endln:15:24
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedFunc/dut.sv, line:15:1, endln:19:10
+    |vpiTypespec:
+    \_ref_typespec: (work@top.o), line:15:19, endln:15:22
+      |vpiParent:
+      \_int_var: (work@top.o), line:15:23, endln:15:24
+      |vpiFullName:work@top.o
+      |vpiActual:
+      \_int_typespec: , line:15:19, endln:15:22
+    |vpiName:o
+    |vpiFullName:work@top.o
+    |vpiSigned:1
+    |vpiVisibility:1
+  |vpiTypedef:
+  \_int_typespec: , line:15:19, endln:15:22
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedFunc/dut.sv, line:15:1, endln:19:10
+    |vpiSigned:1
+  |vpiTypedef:
+  \_int_typespec: , line:15:19, endln:15:22
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedFunc/dut.sv, line:15:1, endln:19:10
+    |vpiSigned:1
+  |vpiImportTypespec:
+  \_int_typespec: , line:15:19, endln:15:22
+  |vpiImportTypespec:
+  \_int_var: (work@top.o), line:15:23, endln:15:24
+  |vpiImportTypespec:
+  \_int_typespec: , line:15:19, endln:15:22
   |vpiDefName:work@top
-  |vpiNet:
-  \_logic_net: (work@top.o), line:15:23, endln:15:24
+  |vpiPort:
+  \_port: (o), line:18:13, endln:18:18
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedFunc/dut.sv, line:15:1, endln:19:10
     |vpiName:o
-    |vpiFullName:work@top.o
+    |vpiHighConn:
+    \_ref_obj: (work@top.o.o), line:18:16, endln:18:17
+      |vpiParent:
+      \_port: (o), line:18:13, endln:18:18
+      |vpiName:o
+      |vpiFullName:work@top.o.o
+      |vpiActual:
+      \_int_var: (work@top.o), line:15:23, endln:15:24
   |vpiPort:
-  \_port: (o), line:15:23, endln:15:24
+  \_port: (o), line:15:12, endln:15:24
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedFunc/dut.sv, line:15:1, endln:19:10
     |vpiName:o
     |vpiDirection:2
-    |vpiLowConn:
-    \_ref_obj: (work@top.o.o), line:15:23, endln:15:24
-      |vpiParent:
-      \_port: (o), line:15:23, endln:15:24
-      |vpiName:o
-      |vpiFullName:work@top.o.o
-      |vpiActual:
-      \_logic_net: (work@top.o), line:15:23, endln:15:24
     |vpiTypedef:
-    \_ref_typespec: (work@top.o)
+    \_ref_typespec: (work@top.o), line:15:19, endln:15:22
       |vpiParent:
-      \_port: (o), line:15:23, endln:15:24
+      \_port: (o), line:15:12, endln:15:24
       |vpiFullName:work@top.o
       |vpiActual:
       \_int_typespec: , line:15:19, endln:15:22
   |vpiRefModule:
-  \_ref_module: work@prim_lfsr (u_lfsr), line:18:6, endln:18:12
+  \_ref_module: work@prim_lfsr (u_lfsr), line:16:4, endln:18:20
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedFunc/dut.sv, line:15:1, endln:19:10
     |vpiName:u_lfsr
@@ -438,89 +575,6 @@ design: (unnamed)
     \_module_inst: work@prim_lfsr (work@prim_lfsr), file:${SURELOG_DIR}/tests/UnsizedFunc/dut.sv, line:3:1, endln:13:10
     |vpiPort:
     \_port: (o), line:18:13, endln:18:18
-      |vpiParent:
-      \_ref_module: work@prim_lfsr (u_lfsr), line:18:6, endln:18:12
-      |vpiName:o
-      |vpiHighConn:
-      \_ref_obj: (work@top.u_lfsr.o.o), line:18:16, endln:18:17
-        |vpiParent:
-        \_port: (o), line:18:13, endln:18:18
-        |vpiName:o
-        |vpiFullName:work@top.u_lfsr.o.o
-        |vpiActual:
-        \_logic_net: (work@top.o), line:15:23, endln:15:24
-\_weaklyReferenced:
-\_int_typespec: , line:4:14, endln:4:26
-  |vpiParent:
-  \_parameter: (work@prim_lfsr.LfsrDw), line:4:27, endln:4:33
-\_logic_typespec: , line:5:23, endln:5:41
-  |vpiRange:
-  \_range: , line:5:29, endln:5:41
-    |vpiParent:
-    \_logic_typespec: , line:5:23, endln:5:41
-    |vpiLeftRange:
-    \_operation: , line:5:30, endln:5:38
-      |vpiParent:
-      \_range: , line:5:29, endln:5:41
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (LfsrDw), line:5:30, endln:5:36
-        |vpiParent:
-        \_operation: , line:5:30, endln:5:38
-        |vpiName:LfsrDw
-      |vpiOperand:
-      \_constant: , line:5:37, endln:5:38
-        |vpiParent:
-        \_operation: , line:5:30, endln:5:38
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:5:39, endln:5:40
-      |vpiParent:
-      \_range: , line:5:29, endln:5:41
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_logic_typespec: , line:6:7, endln:6:25
-  |vpiRange:
-  \_range: , line:6:13, endln:6:25
-    |vpiParent:
-    \_logic_typespec: , line:6:7, endln:6:25
-    |vpiLeftRange:
-    \_operation: , line:6:14, endln:6:22
-      |vpiParent:
-      \_range: , line:6:13, endln:6:25
-      |vpiOpType:11
-      |vpiOperand:
-      \_ref_obj: (LfsrDw), line:6:14, endln:6:20
-        |vpiParent:
-        \_operation: , line:6:14, endln:6:22
-        |vpiName:LfsrDw
-      |vpiOperand:
-      \_constant: , line:6:21, endln:6:22
-        |vpiParent:
-        \_operation: , line:6:14, endln:6:22
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-    |vpiRightRange:
-    \_constant: , line:6:23, endln:6:24
-      |vpiParent:
-      \_range: , line:6:13, endln:6:25
-      |vpiDecompile:0
-      |vpiSize:64
-      |UINT:0
-      |vpiConstType:9
-\_int_typespec: , line:11:11, endln:11:14
-  |vpiSigned:1
-\_int_typespec: , line:3:25, endln:3:28
-  |vpiSigned:1
-\_int_typespec: , line:15:19, endln:15:22
-  |vpiSigned:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -529,5 +583,5 @@ design: (unnamed)
 [   NOTE] : 0
 
 ============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/UnsizedFunc/dut.sv | ${SURELOG_DIR}/build/regression/UnsizedFunc/roundtrip/dut_000.sv | 7 | 19 |
+[roundtrip]: ${SURELOG_DIR}/tests/UnsizedFunc/dut.sv | ${SURELOG_DIR}/build/regression/UnsizedFunc/roundtrip/dut_000.sv | 12 | 19 |
 ============================== End RoundTrip Results ==============================

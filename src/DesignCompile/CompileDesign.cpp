@@ -110,8 +110,8 @@ bool CompileDesign::compile() {
         }
       };
 
-  //UHDM::Serializer& serializer = m_compiler->getSerializer();
-  //serializer.SetErrorHandler(errHandler);
+  UHDM::Serializer& serializer = m_compiler->getSerializer();
+  serializer.SetErrorHandler(errHandler);
   //m_serializer.SetErrorHandler(errHandler);
 
   Location loc(BadSymbolId);

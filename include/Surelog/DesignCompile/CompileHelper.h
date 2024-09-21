@@ -84,7 +84,7 @@ class CompileHelper final {
   void seterrorReporting(ErrorContainer* errors, SymbolTable* symbols) {
     m_errors = errors;
     m_symbols = symbols;
-    //m_exprBuilder.seterrorReporting(errors, symbols);
+    // m_exprBuilder.seterrorReporting(errors, symbols);
   }
 
   void setDesign(Design* design) { m_exprBuilder.setDesign(design); }
@@ -587,7 +587,7 @@ class CompileHelper final {
                       bool muteErrors = false);
 
   // Parse numeric UHDM constant into int64_t. Returns if successful.
-  static bool parseConstant(const UHDM::constant& constant, int64_t* value);
+  bool parseConstant(const UHDM::constant& constant, int64_t* value);
 
   int64_t getValue(bool& validValue, DesignComponent* component,
                    const FileContent* fC, NodeId nodeId,
@@ -677,9 +677,9 @@ class CompileHelper final {
                                              std::string_view value,
                                              uint32_t line, uint16_t column,
                                              uint32_t eline, uint16_t ecolumn);
-  //std::unordered_map<std::string, UHDM::int_typespec*> m_cache_int_typespec;
-  //std::unordered_map<std::string, UHDM::typespec_member*>
-  //    m_cache_typespec_member;
+  // std::unordered_map<std::string, UHDM::int_typespec*> m_cache_int_typespec;
+  // std::unordered_map<std::string, UHDM::typespec_member*>
+  //     m_cache_typespec_member;
   bool m_checkForLoops = false;
   int32_t m_stackLevel = 0;
   bool m_unwind = false;

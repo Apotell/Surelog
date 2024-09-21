@@ -14,8 +14,8 @@
  limitations under the License.
 */
 
-#include <Surelog/SourceCompile/PreprocessHarness.h>
 #include <Surelog/ErrorReporting/ErrorContainer.h>
+#include <Surelog/SourceCompile/PreprocessHarness.h>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 

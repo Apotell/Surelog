@@ -87,7 +87,7 @@ bool DesignElaboration::setupConfigurations_() {
 
   ConfigSet* configSet =
       m_compileDesign->getCompiler()->getDesign()->getConfigSet();
-  
+
   std::vector<Config>& allConfigs = configSet->getAllMutableConfigs();
   std::vector<SymbolId> selectedConfigIds = clp->getUseConfigs();
   std::set<std::string, std::less<>> selectedConfigs;
@@ -568,8 +568,8 @@ void DesignElaboration::recurseInstanceLoop_(
       }
       StrAppend(&instanceName, "[", index, "]");
     }
-    ModuleInstance* child = new ModuleInstance(m_session, def, fC, subInstanceId,
-                                               parent, instanceName, modName);
+    ModuleInstance* child = new ModuleInstance(
+        m_session, def, fC, subInstanceId, parent, instanceName, modName);
     VObjectType type = fC->Type(subInstanceId);
     if (def && (type != VObjectType::paGate_instantiation)) {
       for (uint32_t i = 0; i < def->getFileContents().size(); i++) {
@@ -620,7 +620,7 @@ ModuleInstance* DesignElaboration::createBindInstance_(BindStmt* bind,
     if (targetDef) {
       instance = new ModuleInstance(m_session, targetDef, fC, bind->getStmtId(),
                                     parent->getParent(), instName, bindModName);
-    } else {      
+    } else {
       Location loc(fC->getFileId(bind->getStmtId()),
                    fC->Line(bind->getStmtId()), fC->Column(bind->getStmtId()),
                    symbols->registerSymbol(bindModName));
@@ -877,7 +877,8 @@ void DesignElaboration::elaborateInstance_(
     }
   }
 
-  NetlistElaboration* nelab = new NetlistElaboration(m_session, m_compileDesign);
+  NetlistElaboration* nelab =
+      new NetlistElaboration(m_session, m_compileDesign);
   nelab->elaborateInstance(parent);
   delete nelab;
 
@@ -974,8 +975,7 @@ void DesignElaboration::elaborateInstance_(
             instName = fC->SymName(identifierId);
           }
           child = new ModuleInstance(m_session, def, fC, instanceId, parent,
-                                     instName,
-                                     modName);
+                                     instName, modName);
           parent->addSubInstance(child);
           bindDataTypes_(parent, def);
           NetlistElaboration* nelab =
@@ -1084,7 +1084,8 @@ void DesignElaboration::elaborateInstance_(
 
             def = design->getComponentDefinition(indexedModName);
             if (def == nullptr) {
-              def = new ModuleDefinition(m_session, indexedModName, fC, genBlock, s);
+              def = new ModuleDefinition(m_session, indexedModName, fC,
+                                         genBlock, s);
               if (DesignComponent* defParent = parent->getDefinition())
                 def->setParentScope(defParent);
               design->addModuleDefinition(indexedModName,
@@ -1847,8 +1848,7 @@ void DesignElaboration::reportElaboration_() {
   Error err3(ErrorDefinition::ELAB_NB_INSTANCES, loc3);
   errors->addError(err3);
 
-  Location loc4(
-      symbols->registerSymbol(std::to_string(numberOfLeafInstances)));
+  Location loc4(symbols->registerSymbol(std::to_string(numberOfLeafInstances)));
   Error err4(ErrorDefinition::ELAB_NB_LEAF_INSTANCES, loc4);
   errors->addError(err4);
 

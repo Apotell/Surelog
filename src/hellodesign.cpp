@@ -91,14 +91,14 @@ int main(int argc, const char **argv) {
   SURELOG::Session session;
   SURELOG::ErrorContainer *const errors = session.getErrorContainer();
   SURELOG::CommandLineParser *const clp = session.getCommandLineParser();
-  
+
   clp->noPython();
   clp->setwritePpOutput(true);
   clp->setParse(true);
   clp->setCompile(true);
   clp->setElaborate(true);  // Request Surelog instance tree elaboration
   clp->setElabUhdm(true);   // Request UHDM Uniquification/Elaboration
-  //bool success = clp->parseCommandLine(argc, argv);
+  // bool success = clp->parseCommandLine(argc, argv);
   bool success = session.parseCommandLine(argc, argv, false, false);
   errors->printMessages(clp->muteStdout());
 
@@ -120,8 +120,8 @@ int main(int argc, const char **argv) {
 
   // Do not delete these objects until you are done with UHDM
   SURELOG::shutdown_compiler(compiler);
-  //delete clp;
-  //delete symbolTable;
-  //delete errors;
+  // delete clp;
+  // delete symbolTable;
+  // delete errors;
   return 0;
 }

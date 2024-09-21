@@ -40,14 +40,16 @@
 namespace SURELOG {
 
 int32_t FunctorCreateLookup::operator()() const {
-  ResolveSymbols* instance = new ResolveSymbols(m_session, m_compileDesign, m_fileData);
+  ResolveSymbols* instance =
+      new ResolveSymbols(m_session, m_compileDesign, m_fileData);
   instance->createFastLookup();
   delete instance;
   return 0;
 }
 
 int32_t FunctorResolve::operator()() const {
-  ResolveSymbols* instance = new ResolveSymbols(m_session, m_compileDesign, m_fileData);
+  ResolveSymbols* instance =
+      new ResolveSymbols(m_session, m_compileDesign, m_fileData);
   instance->resolve();
   delete instance;
   return 0;
@@ -92,7 +94,8 @@ void ResolveSymbols::createFastLookup() {
         case VObjectType::paPackage_declaration: {
           // Package names are not prefixed by Library names!
           const std::string_view pkgname = name;
-          Package* pdef = new Package(m_session, pkgname, lib, m_fileData, object, s);
+          Package* pdef =
+              new Package(m_session, pkgname, lib, m_fileData, object, s);
           UHDM::package* pack = pdef->getUhdmModel<UHDM::package>();
           m_fileData->populateCoreMembers(object, object, pack);
           m_fileData->addPackageDefinition(pkgname, pdef);
@@ -109,8 +112,9 @@ void ResolveSymbols::createFastLookup() {
               const std::string fullSubName = StrCat(pkgname, "::", name);
               m_fileData->insertObjectLookup(fullSubName, subobject, errors);
 
-              ClassDefinition* def = new ClassDefinition(
-                  m_session, name, lib, pdef, m_fileData, subobject, nullptr, s);
+              ClassDefinition* def =
+                  new ClassDefinition(m_session, name, lib, pdef, m_fileData,
+                                      subobject, nullptr, s);
               m_fileData->addClassDefinition(fullSubName, def);
               pdef->addClassDefinition(name, def);
             }
@@ -118,7 +122,8 @@ void ResolveSymbols::createFastLookup() {
           break;
         }
         case VObjectType::paProgram_declaration: {
-          Program* mdef = new Program(m_session, fullName, lib, m_fileData, object, s);
+          Program* mdef =
+              new Program(m_session, fullName, lib, m_fileData, object, s);
           m_fileData->addProgramDefinition(fullName, mdef);
 
           VObjectTypeUnorderedSet subtypes = {VObjectType::paClass_declaration};
@@ -132,8 +137,9 @@ void ResolveSymbols::createFastLookup() {
               const std::string_view name = SymName(stId);
               const std::string fullSubName = StrCat(fullName, "::", name);
               m_fileData->insertObjectLookup(fullSubName, subobject, errors);
-              ClassDefinition* def = new ClassDefinition(
-                  m_session, name, lib, mdef, m_fileData, subobject, nullptr, s);
+              ClassDefinition* def =
+                  new ClassDefinition(m_session, name, lib, mdef, m_fileData,
+                                      subobject, nullptr, s);
               m_fileData->addClassDefinition(fullSubName, def);
               mdef->addClassDefinition(name, def);
             }
@@ -141,8 +147,9 @@ void ResolveSymbols::createFastLookup() {
           break;
         }
         case VObjectType::paClass_declaration: {
-          ClassDefinition* def = new ClassDefinition(
-              m_session, fullName, lib, nullptr, m_fileData, object, nullptr, s);
+          ClassDefinition* def =
+              new ClassDefinition(m_session, fullName, lib, nullptr, m_fileData,
+                                  object, nullptr, s);
           m_fileData->addClassDefinition(fullName, def);
           break;
         }
@@ -170,8 +177,8 @@ void ResolveSymbols::createFastLookup() {
                 ClassDefinition* def = nullptr;
                 def = m_fileData->getClassDefinition(fullSubName);
                 if (def == nullptr) {
-                  def = new ClassDefinition(m_session, name, lib, mdef, m_fileData,
-                                            subobject, nullptr, s);
+                  def = new ClassDefinition(m_session, name, lib, mdef,
+                                            m_fileData, subobject, nullptr, s);
                 } else {
                   def->setNodeId(subobject);
                 }
@@ -179,8 +186,8 @@ void ResolveSymbols::createFastLookup() {
                 m_fileData->addClassDefinition(fullSubName, def);
                 mdef->getUnelabMmodule()->addClassDefinition(name, def);
               } else {
-                ModuleDefinition* def =
-                    new ModuleDefinition(m_session, fullSubName, m_fileData, subobject, s);
+                ModuleDefinition* def = new ModuleDefinition(
+                    m_session, fullSubName, m_fileData, subobject, s);
                 m_fileData->addModuleDefinition(fullSubName, def);
               }
             }

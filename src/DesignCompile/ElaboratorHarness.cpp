@@ -37,8 +37,8 @@ ElaboratorHarness::ElaboratorHarness(Session* session) : m_session(session) {}
 std::tuple<Design*, FileContent*, CompileDesign*> ElaboratorHarness::elaborate(
     std::string_view content) {
   std::tuple<Design*, FileContent*, CompileDesign*> result;
-  //SymbolTable* symbols = m_session->getSymbolTable();
-  //ErrorContainer* errors = m_session->getErrorContainer();
+  // SymbolTable* symbols = m_session->getSymbolTable();
+  // ErrorContainer* errors = m_session->getErrorContainer();
   CommandLineParser* clp = m_session->getCommandLineParser();
   clp->setCacheAllowed(false);
   clp->setParse(true);

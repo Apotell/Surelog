@@ -43,18 +43,16 @@ ErrorContainer::ErrorContainer(Session* session)
   /* Do nothing here */
 }
 
-ErrorContainer::~ErrorContainer() {
-}
+ErrorContainer::~ErrorContainer() {}
 
 void ErrorContainer::init() {
   if (ErrorDefinition::init()) {
-    LogListener* const logListener = m_session->getLogListener();    
+    LogListener* const logListener = m_session->getLogListener();
     if (LogListener::failed(logListener->initialize())) {
       FileSystem* const fileSystem = m_session->getFileSystem();
       CommandLineParser* const clp = m_session->getCommandLineParser();
       std::cerr << "[FTL:LG0001] Cannot create log file \""
-                << fileSystem->toPath(clp->getLogFileId()) << "\""
-                << std::endl;
+                << fileSystem->toPath(clp->getLogFileId()) << "\"" << std::endl;
     }
   }
 }
@@ -119,8 +117,8 @@ void ErrorContainer::appendErrors(ErrorContainer& rhs) {
         if (loc.m_fileId)
           loc.m_fileId = fileSystem->copy(loc.m_fileId, symbolTable);
         if (loc.m_object) {
-          loc.m_object =
-              symbolTable->copyFrom(loc.m_object, rhs.m_session->getSymbolTable());
+          loc.m_object = symbolTable->copyFrom(loc.m_object,
+                                               rhs.m_session->getSymbolTable());
         }
       }
       addError(err);
@@ -177,8 +175,7 @@ std::tuple<std::string, bool, bool> ErrorContainer::createErrorMessage(
       const Location& loc = msg.m_locations[0];
       /* Object */
       std::string text = info.m_errorText;
-      const std::string_view objectName =
-          symbolTable->getSymbol(loc.m_object);
+      const std::string_view objectName = symbolTable->getSymbol(loc.m_object);
       if (objectName != SymbolTable::getBadSymbol()) {
         size_t objectOffset = text.find("%s");
         if (objectOffset != std::string::npos) {

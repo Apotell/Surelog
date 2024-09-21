@@ -63,15 +63,15 @@ using namespace UHDM;  // NOLINT (using a bunch of these)
 NetlistElaboration::NetlistElaboration(Session* session,
                                        CompileDesign* compileDesign)
     : TestbenchElaboration(session, compileDesign) {
-  //m_exprBuilder.seterrorReporting(
-  //    m_compileDesign->getCompiler()->getErrorContainer(),
-  //    m_compileDesign->getCompiler()->getSymbolTable());
+  // m_exprBuilder.seterrorReporting(
+  //     m_compileDesign->getCompiler()->getErrorContainer(),
+  //     m_compileDesign->getCompiler()->getSymbolTable());
   m_exprBuilder.setDesign(m_compileDesign->getCompiler()->getDesign());
-  //m_helper.seterrorReporting(
-  //    m_compileDesign->getCompiler()->getErrorContainer(),
-  //    m_compileDesign->getCompiler()->getSymbolTable());
-  //m_symbols = m_compileDesign->getCompiler()->getSymbolTable();
-  //m_errors = m_compileDesign->getCompiler()->getErrorContainer();
+  // m_helper.seterrorReporting(
+  //     m_compileDesign->getCompiler()->getErrorContainer(),
+  //     m_compileDesign->getCompiler()->getSymbolTable());
+  // m_symbols = m_compileDesign->getCompiler()->getSymbolTable();
+  // m_errors = m_compileDesign->getCompiler()->getErrorContainer();
 }
 
 NetlistElaboration::~NetlistElaboration() {}
@@ -416,8 +416,7 @@ bool NetlistElaboration::elab_parameters_(ModuleInstance* instance,
           m_helper.checkForLoops(true);
           if (expr* tmp = m_helper.reduceExpr(
                   exp, invalidValue, mod, m_compileDesign, instance,
-                  fileSystem->toPathId(
-                      exp->VpiFile(), symbols),
+                  fileSystem->toPathId(exp->VpiFile(), symbols),
                   exp->VpiLineNo(), nullptr, true)) {
             if (!invalidValue) exp = tmp;
           }
@@ -438,8 +437,7 @@ bool NetlistElaboration::elab_parameters_(ModuleInstance* instance,
                 m_helper.checkForLoops(true);
                 if (expr* tmp = m_helper.reduceExpr(
                         exp, invalidValue, mod, m_compileDesign, instance,
-                        fileSystem->toPathId(
-                            exp->VpiFile(),symbols),
+                        fileSystem->toPathId(exp->VpiFile(), symbols),
                         exp->VpiLineNo(), nullptr, true)) {
                   if (!invalidValue) exp = tmp;
                 }
@@ -573,11 +571,10 @@ bool NetlistElaboration::elaborate_(ModuleInstance* instance, bool recurse) {
           valuedcomponenti_cast<ModuleDefinition*>(childDef)) {
     VObjectType insttype = instance->getType();
     if (insttype == VObjectType::paInterface_instantiation) {
-      elab_interface_(
-          instance->getParent(), instance, instance->getInstanceName(),
-          instance->getModuleName(), mm,
-          fileSystem->copy(instance->getFileId(), symbols),
-          instance->getLineNb(), nullptr, "");
+      elab_interface_(instance->getParent(), instance,
+                      instance->getInstanceName(), instance->getModuleName(),
+                      mm, fileSystem->copy(instance->getFileId(), symbols),
+                      instance->getLineNb(), nullptr, "");
     }
   }
 
@@ -1189,11 +1186,9 @@ bool NetlistElaboration::high_conn_(ModuleInstance* instance) {
                   if (!allSignalsConst.empty()) {
                     auto found = allSignalsConst.find(p->VpiName());
                     if (found == allSignalsConst.end()) {
-                      Location loc(
-                          fileSystem->toPathId(
-                              p->VpiFile(), symbols),
-                          p->VpiLineNo(), p->VpiColumnNo(),
-                          symbols->registerSymbol(p->VpiName()));
+                      Location loc(fileSystem->toPathId(p->VpiFile(), symbols),
+                                   p->VpiLineNo(), p->VpiColumnNo(),
+                                   symbols->registerSymbol(p->VpiName()));
                       Error err(ErrorDefinition::ELAB_UNKNOWN_PORT, loc);
                       errors->addError(err);
                     }
@@ -1387,17 +1382,16 @@ bool NetlistElaboration::high_conn_(ModuleInstance* instance) {
               ModuleDefinition* orig_interf = orig_modport->getParent();
 
               ModuleInstance* interfaceInstance =
-                  new ModuleInstance(m_session, orig_interf, fC, sigId, instance, sigName,
-                                     orig_interf->getName());
-              Netlist* netlistInterf = new Netlist(m_session, interfaceInstance);
+                  new ModuleInstance(m_session, orig_interf, fC, sigId,
+                                     instance, sigName, orig_interf->getName());
+              Netlist* netlistInterf =
+                  new Netlist(m_session, interfaceInstance);
               interfaceInstance->setNetlist(netlistInterf);
 
-              mp = elab_modport_(
-                  instance, interfaceInstance, formalName,
-                  orig_interf->getName(), orig_interf,
-                  fileSystem->toPathId(
-                      p->VpiFile(), symbols),
-                  p->VpiLineNo(), selectName, nullptr);
+              mp = elab_modport_(instance, interfaceInstance, formalName,
+                                 orig_interf->getName(), orig_interf,
+                                 fileSystem->toPathId(p->VpiFile(), symbols),
+                                 p->VpiLineNo(), selectName, nullptr);
             }
           }
           if (mp) {
@@ -1430,9 +1424,7 @@ bool NetlistElaboration::high_conn_(ModuleInstance* instance) {
                   (ModuleDefinition*)orig_instance->getDefinition();
               sm = elab_interface_(
                   instance, orig_instance, formalName, orig_interf->getName(),
-                  orig_interf,
-                  fileSystem->copy(
-                      instance->getFileId(), symbols),
+                  orig_interf, fileSystem->copy(instance->getFileId(), symbols),
                   instance->getLineNb(), nullptr, "");
             }
           }
@@ -1794,7 +1786,8 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
                                     std::string_view prefix, bool signalIsPort,
                                     TypespecCache& tscache, Reduce reduce) {
   SymbolTable* const symbols = m_session->getSymbolTable();
-  ErrorContainer* const errors = m_session->getErrorContainer();  Serializer& s = m_compileDesign->getSerializer();
+  ErrorContainer* const errors = m_session->getErrorContainer();
+  Serializer& s = m_compileDesign->getSerializer();
   std::vector<net*>* nets = netlist->nets();
   std::vector<variables*>* vars = netlist->variables();
   std::vector<array_net*>* array_nets = netlist->array_nets();
@@ -2580,9 +2573,11 @@ bool NetlistElaboration::elab_ports_nets_(
                     getInterfaceInstance_(instance, sigName);
                 StrAppend(&sigName, "[", index, "]");
                 ModuleInstance* interfaceInstance = new ModuleInstance(
-                    m_session, orig_interf, sig->getFileContent(), sig->getNodeId(),
-                    instance, sigName, orig_interf->getName());
-                Netlist* netlistInterf = new Netlist(m_session, interfaceInstance);
+                    m_session, orig_interf, sig->getFileContent(),
+                    sig->getNodeId(), instance, sigName,
+                    orig_interf->getName());
+                Netlist* netlistInterf =
+                    new Netlist(m_session, interfaceInstance);
                 interfaceInstance->setNetlist(netlistInterf);
                 if (interfaceRefInstance) {
                   for (auto& itr : interfaceRefInstance->getMappedValues()) {
@@ -2603,9 +2598,10 @@ bool NetlistElaboration::elab_ports_nets_(
                   getInterfaceInstance_(instance, sigName);
 
               ModuleInstance* interfaceInstance = new ModuleInstance(
-                  m_session, orig_interf, sig->getFileContent(), sig->getNodeId(),
-                  instance, signame, orig_interf->getName());
-              Netlist* netlistInterf = new Netlist(m_session, interfaceInstance);
+                  m_session, orig_interf, sig->getFileContent(),
+                  sig->getNodeId(), instance, signame, orig_interf->getName());
+              Netlist* netlistInterf =
+                  new Netlist(m_session, interfaceInstance);
               interfaceInstance->setNetlist(netlistInterf);
               if (interfaceRefInstance) {
                 for (auto& itr : interfaceRefInstance->getMappedValues()) {
@@ -2636,8 +2632,8 @@ bool NetlistElaboration::elab_ports_nets_(
               netlist->getInstanceMap().find(signame);
           if (itr == netlist->getInstanceMap().end()) {
             ModuleInstance* interfaceInstance = new ModuleInstance(
-                m_session, orig_interf, sig->getFileContent(), sig->getNodeId(), instance,
-                signame, orig_interf->getName());
+                m_session, orig_interf, sig->getFileContent(), sig->getNodeId(),
+                instance, signame, orig_interf->getName());
             Netlist* netlistInterf = new Netlist(m_session, interfaceInstance);
             interfaceInstance->setNetlist(netlistInterf);
 

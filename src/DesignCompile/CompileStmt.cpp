@@ -315,7 +315,7 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
       const UHDM::ScopedScope scopedScope(scope);
       scope->VpiParent(pstmt);
       fC->populateCoreMembers(the_stmt, the_stmt, scope);
-      if (labelId && endLabelId && (label != endLabel)) {        
+      if (labelId && endLabelId && (label != endLabel)) {
         Location loc(fC->getFileId(), fC->Line(labelId), fC->Column(labelId),
                      symbols->registerSymbol(label));
         Location loc2(fC->getFileId(), fC->Line(endLabelId),
@@ -426,7 +426,7 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
               jointype == VObjectType::paJoin_none_keyword) {
             if (NodeId endLabel = fC->Sibling(item)) {
               const std::string_view endlabel = fC->SymName(endLabel);
-              if (endlabel != label) {                
+              if (endlabel != label) {
                 Location loc(fC->getFileId(), fC->Line(labelId),
                              fC->Column(labelId),
                              symbols->registerSymbol(label));

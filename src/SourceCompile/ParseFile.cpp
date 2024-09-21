@@ -75,8 +75,7 @@ ParseFile::ParseFile(Session* session, PathId fileId, CompileSourceFile* csf,
       debug_AstModel(false),
       m_parent(nullptr),
       m_offsetLine(0) {
-  debug_AstModel =
-      m_session->getCommandLineParser()->getDebugAstModel();
+  debug_AstModel = m_session->getCommandLineParser()->getDebugAstModel();
 }
 
 ParseFile::ParseFile(Session* session, CompileSourceFile* compileSourceFile,
@@ -114,8 +113,7 @@ ParseFile::ParseFile(Session* session, std::string_view text,
       m_parent(nullptr),
       m_offsetLine(0),
       m_sourceText(text) {
-  debug_AstModel =
-      m_session->getCommandLineParser()->getDebugAstModel();
+  debug_AstModel = m_session->getCommandLineParser()->getDebugAstModel();
 }
 
 ParseFile::~ParseFile() {
@@ -123,13 +121,14 @@ ParseFile::~ParseFile() {
   delete m_listener;
 }
 
-//SymbolTable* ParseFile::getSymbolTable() {
-//  return m_symbolTable ? m_symbolTable : m_compileSourceFile->getSymbolTable();
-//}
+// SymbolTable* ParseFile::getSymbolTable() {
+//   return m_symbolTable ? m_symbolTable :
+//   m_compileSourceFile->getSymbolTable();
+// }
 
-//ErrorContainer* ParseFile::getErrorContainer() {
-//  return m_errors ? m_errors : m_compileSourceFile->getErrorContainer();
-//}
+// ErrorContainer* ParseFile::getErrorContainer() {
+//   return m_errors ? m_errors : m_compileSourceFile->getErrorContainer();
+// }
 
 SymbolId ParseFile::registerSymbol(std::string_view symbol) {
   return m_session->getSymbolTable()->registerSymbol(symbol);
@@ -316,8 +315,7 @@ bool ParseFile::parseOneFile_(PathId fileId, uint32_t lineOffset) {
         break;
     }
   } else {
-    std::string_view type = std::get<1>(
-        fileSystem->getType(fileId, symbols));
+    std::string_view type = std::get<1>(fileSystem->getType(fileId, symbols));
     m_antlrParserHandler->m_lexer->sverilog =
         (type == ".sv") || clp->fullSVMode() || clp->isSVFile(fileId);
   }
@@ -450,8 +448,7 @@ bool ParseFile::parse() {
   FileSystem* const fileSystem = m_session->getFileSystem();
   CommandLineParser* const clp = m_session->getCommandLineParser();
   Precompiled* const precompiled = m_session->getPrecompiled();
-  const bool isPrecompiled =
-      precompiled->isFilePrecompiled(m_ppFileId);
+  const bool isPrecompiled = precompiled->isFilePrecompiled(m_ppFileId);
 
   if (m_children.empty()) {
     ParseCache cache(m_session, this);
@@ -544,9 +541,9 @@ bool ParseFile::parse() {
           // Only visit the chunks that got re-parsed
           // TODO: Incrementally regenerate the FileContent
           child->m_fileContent->setParent(m_fileContent);
-          //child->m_listener = new SV3_1aTreeShapeListener(
-          //    m_session, child, child->m_antlrParserHandler->m_tokens,
-          //    child->m_offsetLine);
+          // child->m_listener = new SV3_1aTreeShapeListener(
+          //     m_session, child, child->m_antlrParserHandler->m_tokens,
+          //     child->m_offsetLine);
 
           Timer tmr;
           antlr4::tree::ParseTreeWalker::DEFAULT.walk(

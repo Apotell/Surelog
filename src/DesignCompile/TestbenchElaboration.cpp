@@ -144,7 +144,8 @@ std::vector<std::string_view> computeVarChain(const FileContent* fC,
 
 TestbenchElaboration::TestbenchElaboration(Session* session,
                                            CompileDesign* compileDesign)
-    : ElaborationStep(session, compileDesign) {}bool TestbenchElaboration::bindClasses_() {
+    : ElaborationStep(session, compileDesign) {}
+bool TestbenchElaboration::bindClasses_() {
   checkForMultipleDefinition_();
   bindBaseClasses_();
   bindDataTypes_();
@@ -413,7 +414,8 @@ bool TestbenchElaboration::bindFunctionReturnTypesAndParamaters_() {
 }
 
 bool TestbenchElaboration::bindSubRoutineCall_(ClassDefinition* classDefinition,
-                                               Statement* stmt, Design* design) {
+                                               Statement* stmt,
+                                               Design* design) {
   SymbolTable* const symbols = m_session->getSymbolTable();
   ErrorContainer* const errors = m_session->getErrorContainer();
   std::string datatypeName;

@@ -42,7 +42,7 @@ PreprocessHarness::~PreprocessHarness() {
 std::string PreprocessHarness::preprocess(std::string_view content,
                                           CompilationUnit* compUnit,
                                           PathId fileId) {
-  //std::string result;
+  // std::string result;
   PreprocessFile::SpecialInstructions instructions(
       PreprocessFile::SpecialInstructions::DontMute,
       PreprocessFile::SpecialInstructions::DontMark,
@@ -76,7 +76,7 @@ std::string PreprocessHarness::preprocess(std::string_view content,
   return result;
 }
 
-
 const ErrorContainer& PreprocessHarness::collectedErrors() const {
   return *m_session->getErrorContainer();
-}}  // namespace SURELOG
+}
+}  // namespace SURELOG

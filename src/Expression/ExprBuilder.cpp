@@ -64,7 +64,8 @@ Value* ExprBuilder::clone(Value* val) {
 Value* ExprBuilder::evalExpr(const FileContent* fC, NodeId parent,
                              ValuedComponentI* instance, bool muteErrors) {
   SymbolTable* const symbols = m_session->getSymbolTable();
-  ErrorContainer* const errors = m_session->getErrorContainer();  Value* value = m_valueFactory.newLValue();
+  ErrorContainer* const errors = m_session->getErrorContainer();
+  Value* value = m_valueFactory.newLValue();
   NodeId child = fC->Child(parent);
   VObjectType type = fC->Type(parent);
   switch (type) {
@@ -541,8 +542,7 @@ Value* ExprBuilder::evalExpr(const FileContent* fC, NodeId parent,
         if (sval == nullptr) {
           if (muteErrors == false) {
             Location loc(fC->getFileId(child), fC->Line(child),
-                         fC->Column(child),
-                         symbols->registerSymbol(fullName));
+                         fC->Column(child), symbols->registerSymbol(fullName));
             Error err(ErrorDefinition::ELAB_UNDEF_VARIABLE, loc);
             errors->addError(err);
           }
@@ -762,8 +762,7 @@ Value* ExprBuilder::evalExpr(const FileContent* fC, NodeId parent,
         if (sval == nullptr) {
           if (muteErrors == false) {
             Location loc(fC->getFileId(parent), fC->Line(parent),
-                         fC->Column(parent),
-                         symbols->registerSymbol(fullName));
+                         fC->Column(parent), symbols->registerSymbol(fullName));
             Error err(ErrorDefinition::ELAB_UNDEF_VARIABLE, loc);
             errors->addError(err);
           }

@@ -80,8 +80,7 @@ PathId PPCache::getCacheFileId(PathId sourceFileId) const {
   }
 
   Precompiled* const precompiled = m_session->getPrecompiled();
-  const bool isPrecompiled =
-      precompiled->isFilePrecompiled(sourceFileId);
+  const bool isPrecompiled = precompiled->isFilePrecompiled(sourceFileId);
 
   return fileSystem->getPpCacheFile(clp->fileunit(), sourceFileId, libName,
                                     isPrecompiled, symbols);

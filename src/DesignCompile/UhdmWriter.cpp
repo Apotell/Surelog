@@ -1727,8 +1727,7 @@ void UhdmWriter::writeCont_assign(Netlist* netlist, Serializer& s,
               any* rhstmp = m_helper.reduceExpr(
                   (expr*)rhs, invalidValue, mod, m_compileDesign,
                   netlist->getParent(),
-                  fileSystem->toPathId(
-                      rhs->VpiFile(), symbols),
+                  fileSystem->toPathId(rhs->VpiFile(), symbols),
                   rhs->VpiLineNo(), assign, true);
               m_helper.checkForLoops(false);
               if (const ref_typespec* rt = lhs->Typespec()) {
@@ -1846,9 +1845,7 @@ void UhdmWriter::writeCont_assign(Netlist* netlist, Serializer& s,
         m_helper.checkForLoops(true);
         any* res = m_helper.reduceExpr(
             (expr*)rhs, invalidValue, mod, m_compileDesign,
-            netlist->getParent(),
-            fileSystem->toPathId(
-                rhs->VpiFile(),symbols),
+            netlist->getParent(), fileSystem->toPathId(rhs->VpiFile(), symbols),
             rhs->VpiLineNo(), assign, true);
         m_helper.checkForLoops(false);
         if (!invalidValue && res && (res->UhdmType() == uhdmconstant)) {
@@ -2067,8 +2064,8 @@ UHDM::any* UhdmWriter::swapForSpecifiedVar(UHDM::Serializer& s,
         if (lvariables) {
           for (auto var : *lvariables) {
             if (var->UhdmType() == uhdmhier_path) {
-              PathId parentFileId = fileSystem->toPathId(
-                  parent->VpiFile(), symbols);
+              PathId parentFileId =
+                  fileSystem->toPathId(parent->VpiFile(), symbols);
               bool invalidValue = false;
               indexTypespec = (typespec*)m_helper.decodeHierPath(
                   (hier_path*)var, invalidValue, mod, m_compileDesign,
@@ -2078,8 +2075,8 @@ UHDM::any* UhdmWriter::swapForSpecifiedVar(UHDM::Serializer& s,
           }
         } else if (const variables* var = lvariable) {
           if (var->UhdmType() == uhdmhier_path) {
-            PathId parentFileId = fileSystem->toPathId(
-                parent->VpiFile(), symbols);
+            PathId parentFileId =
+                fileSystem->toPathId(parent->VpiFile(), symbols);
             bool invalidValue = false;
             indexTypespec = (typespec*)m_helper.decodeHierPath(
                 (hier_path*)var, invalidValue, mod, m_compileDesign,
@@ -2093,8 +2090,8 @@ UHDM::any* UhdmWriter::swapForSpecifiedVar(UHDM::Serializer& s,
             elems->push_back(ref);
             ref->VpiName(var->VpiName());
             path->VpiFullName(var->VpiName());
-            PathId parentFileId = fileSystem->toPathId(
-                parent->VpiFile(), symbols);
+            PathId parentFileId =
+                fileSystem->toPathId(parent->VpiFile(), symbols);
             indexTypespec = (typespec*)m_helper.decodeHierPath(
                 path, invalidValue, mod, m_compileDesign, Reduce::Yes, nullptr,
                 parentFileId, parent->VpiLineNo(), (any*)parent,
@@ -2136,8 +2133,8 @@ void UhdmWriter::bind(UHDM::Serializer& s,
   ErrorContainer* const errorContainer = m_session->getErrorContainer();
   CommandLineParser* commandLineParser = m_session->getCommandLineParser();
   if (ObjectBinder* const listener =
-          new ObjectBinder(m_session, m_componentMap, s, symbolTable, errorContainer,
-                           commandLineParser->muteStdout())) {
+          new ObjectBinder(m_session, m_componentMap, s, symbolTable,
+                           errorContainer, commandLineParser->muteStdout())) {
     for (auto h : designs) {
       const design* const d =
           static_cast<const design*>(((const uhdm_handle*)h)->object);
@@ -2969,9 +2966,9 @@ bool UhdmWriter::write(PathId uhdmFileId) {
   ModuleMap moduleMap;
   Serializer& s = m_compileDesign->getSerializer();
   ExprBuilder exprBuilder(m_session);
-  //exprBuilder.seterrorReporting(
-   //   errors,
-   //   symbols);
+  // exprBuilder.seterrorReporting(
+  //    errors,
+  //    symbols);
 
   Location loc(uhdmFileId);
   Error err(ErrorDefinition::UHDM_CREATING_MODEL, loc);
@@ -3160,8 +3157,7 @@ bool UhdmWriter::write(PathId uhdmFileId) {
       } else if (mod->getType() == VObjectType::paModule_declaration) {
         const FileContent* fC = mod->getFileContents()[0];
         module_inst* m = mod->getUhdmModel<module_inst>();
-        if (compiler->isLibraryFile(
-                mod->getFileContents()[0]->getFileId())) {
+        if (compiler->isLibraryFile(mod->getFileContents()[0]->getFileId())) {
           m->VpiCellInstance(true);
           // Don't list library cells unused in the design
           if (mod && (designComponents.find(mod) == designComponents.end()))
@@ -3309,10 +3305,10 @@ bool UhdmWriter::write(PathId uhdmFileId) {
     bind(s, designs);
   }
 
-  //CommandLineParser* const clp =
-   //   clp;
-  if (IntegrityChecker* const checker = new IntegrityChecker(
-          fileSystem, symbols, errors)) {
+  // CommandLineParser* const clp =
+  //    clp;
+  if (IntegrityChecker* const checker =
+          new IntegrityChecker(fileSystem, symbols, errors)) {
     for (auto h : designs) {
       const design* const d =
           static_cast<const design*>(((const uhdm_handle*)h)->object);
@@ -3353,45 +3349,36 @@ bool UhdmWriter::write(PathId uhdmFileId) {
   if (clp->writeUhdm()) {
     Error err(ErrorDefinition::UHDM_WRITE_DB, loc);
     errors->addError(err);
-    errors->printMessages(
-        clp->muteStdout());
-    s.SetGCEnabled(
-        clp->gc());
+    errors->printMessages(clp->muteStdout());
+    s.SetGCEnabled(clp->gc());
     s.Save(uhdmFile);
   }
 
-  if (clp->getDebugUhdm() ||
-      clp->getCoverUhdm()) {
+  if (clp->getDebugUhdm() || clp->getCoverUhdm()) {
     // Check before restore
-    Location loc(fileSystem->getCheckerHtmlFile(
-        uhdmFileId, symbols));
+    Location loc(fileSystem->getCheckerHtmlFile(uhdmFileId, symbols));
     Error err(ErrorDefinition::UHDM_WRITE_HTML_COVERAGE, loc);
     errors->addError(err);
-    errors->printMessages(
-        clp->muteStdout());
+    errors->printMessages(clp->muteStdout());
 
-    if (UhdmChecker* uhdmchecker = new UhdmChecker(m_session, m_compileDesign, m_design)) {
+    if (UhdmChecker* uhdmchecker =
+            new UhdmChecker(m_session, m_compileDesign, m_design)) {
       uhdmchecker->check(uhdmFileId);
       delete uhdmchecker;
     }
   }
 
   if (clp->getDebugUhdm()) {
-    Location loc(
-        symbols->registerSymbol(
-            "in-memory uhdm"));
+    Location loc(symbols->registerSymbol("in-memory uhdm"));
     Error err2(ErrorDefinition::UHDM_VISITOR, loc);
     errors->addError(err2);
-    errors->printMessages(
-        clp->muteStdout());
+    errors->printMessages(clp->muteStdout());
     std::cout << "====== UHDM =======\n";
-    vpi_show_ids(
-        clp->showVpiIds());
+    vpi_show_ids(clp->showVpiIds());
     visit_designs(designs, std::cout);
     std::cout << "===================\n";
   }
-  errors->printMessages(
-      clp->muteStdout());
+  errors->printMessages(clp->muteStdout());
   return true;
 }
 }  // namespace SURELOG

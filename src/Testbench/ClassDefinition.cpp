@@ -34,7 +34,7 @@
 namespace SURELOG {
 
 ClassDefinition::ClassDefinition(Session* session, std::string_view name,
-								 Library* library, DesignComponent* container,
+                                 Library* library, DesignComponent* container,
                                  const FileContent* fC, NodeId nodeId,
                                  ClassDefinition* parent,
                                  UHDM::Serializer& serializer)

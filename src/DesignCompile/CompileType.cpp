@@ -2763,11 +2763,9 @@ UHDM::typespec* CompileHelper::compileTypespec(
               if (const constant* exp = any_cast<const constant*>(rhs)) {
                 int_typespec* its = buildIntTypespec(
                     compileDesign,
-                    fileSystem->toPathId(
-                        param->VpiFile(), symbols),
-                    typeName, exp->VpiValue(), param->VpiLineNo(),
-                    param->VpiColumnNo(), param->VpiLineNo(),
-                    param->VpiColumnNo());
+                    fileSystem->toPathId(param->VpiFile(), symbols), typeName,
+                    exp->VpiValue(), param->VpiLineNo(), param->VpiColumnNo(),
+                    param->VpiLineNo(), param->VpiColumnNo());
                 result = its;
               } else if (const operation* exp =
                              any_cast<const operation*>(rhs)) {
@@ -3094,14 +3092,14 @@ UHDM::typespec* CompileHelper::elabTypespec(DesignComponent* component,
       expr* oldLeft = oldRange->Left_expr();
       expr* oldRight = oldRange->Right_expr();
       bool invalidValue = false;
-      expr* newLeft = reduceExpr(
-          oldLeft, invalidValue, component, compileDesign, instance,
-          fileSystem->toPathId(oldLeft->VpiFile(), symbols),
-          oldLeft->VpiLineNo(), pexpr);
-      expr* newRight = reduceExpr(
-          oldRight, invalidValue, component, compileDesign, instance,
-          fileSystem->toPathId(oldRight->VpiFile(), symbols),
-          oldRight->VpiLineNo(), pexpr);
+      expr* newLeft =
+          reduceExpr(oldLeft, invalidValue, component, compileDesign, instance,
+                     fileSystem->toPathId(oldLeft->VpiFile(), symbols),
+                     oldLeft->VpiLineNo(), pexpr);
+      expr* newRight =
+          reduceExpr(oldRight, invalidValue, component, compileDesign, instance,
+                     fileSystem->toPathId(oldRight->VpiFile(), symbols),
+                     oldRight->VpiLineNo(), pexpr);
       if (!invalidValue) {
         oldRange->Left_expr(newLeft);
         oldRange->Right_expr(newRight);

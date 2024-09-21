@@ -43,19 +43,19 @@ namespace SURELOG {
 
 int32_t FunctorCompilePackage::operator()() const {
   if (CompilePackage* instance =
-          new CompilePackage(m_session, m_compileDesign, m_package->getUnElabPackage(), m_design)) {
+          new CompilePackage(m_session, m_compileDesign,
+                             m_package->getUnElabPackage(), m_design)) {
     instance->compile(Elaborate::No, Reduce::No);
     delete instance;
   }
 
-
-  //if (m_compileDesign->getCompiler()->getCommandLineParser()->elaborate()) {
-  //  if (CompilePackage* instance = new CompilePackage(
-  //          m_session, m_compileDesign, m_package, m_design)) {
-  //    instance->compile(Elaborate::Yes, Reduce::Yes);
-  //    delete instance;
-  //  }
-  //}
+  // if (m_compileDesign->getCompiler()->getCommandLineParser()->elaborate()) {
+  //   if (CompilePackage* instance = new CompilePackage(
+  //           m_session, m_compileDesign, m_package, m_design)) {
+  //     instance->compile(Elaborate::Yes, Reduce::Yes);
+  //     delete instance;
+  //   }
+  // }
 
   return 0;
 }
@@ -70,7 +70,7 @@ bool CompilePackage::compile(Elaborate elaborate, Reduce reduce) {
   m_helper.setReduce(reduce);
   fC->populateCoreMembers(packId, packId, pack);
 
-  //m_package->m_exprBuilder.seterrorReporting(m_errors, m_symbols);
+  // m_package->m_exprBuilder.seterrorReporting(m_errors, m_symbols);
   m_package->m_exprBuilder.setDesign(
       m_compileDesign->getCompiler()->getDesign());
   if (reduce == Reduce::Yes) {

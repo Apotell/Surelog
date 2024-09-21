@@ -44,13 +44,15 @@ SV3_1aTreeShapeHelper::SV3_1aTreeShapeHelper(Session* session, ParseFile* pf,
       m_currentElement(nullptr),
       m_lineOffset(lineOffset) {
   if (pf->getCompileSourceFile()) {
-    m_ppOutputFileLocation = session->getCommandLineParser()->usePPOutputFileLocation();
+    m_ppOutputFileLocation =
+        session->getCommandLineParser()->usePPOutputFileLocation();
   } else {
     m_ppOutputFileLocation = false;
   }
 }
 
-SV3_1aTreeShapeHelper::SV3_1aTreeShapeHelper(Session* session, ParseLibraryDef* pf,
+SV3_1aTreeShapeHelper::SV3_1aTreeShapeHelper(Session* session,
+                                             ParseLibraryDef* pf,
                                              antlr4::CommonTokenStream* tokens)
     : CommonListenerHelper(session, nullptr, tokens),
       m_pf(nullptr),
@@ -64,11 +66,10 @@ void SV3_1aTreeShapeHelper::logError(ErrorDefinition::ErrorType error,
                                      bool printColumn) {
   ParseUtils::LineColumn lineCol = ParseUtils::getLineColumn(m_tokens, ctx);
 
-  Location loc(
-      m_pf->getFileId(lineCol.first /*+ m_lineOffset*/),
-      m_pf->getLineNb(lineCol.first /*+ m_lineOffset*/),
-      printColumn ? lineCol.second : 0,
-      m_session->getSymbolTable()->registerSymbol(object));
+  Location loc(m_pf->getFileId(lineCol.first /*+ m_lineOffset*/),
+               m_pf->getLineNb(lineCol.first /*+ m_lineOffset*/),
+               printColumn ? lineCol.second : 0,
+               m_session->getSymbolTable()->registerSymbol(object));
   Error err(error, loc);
   m_pf->addError(err);
 }

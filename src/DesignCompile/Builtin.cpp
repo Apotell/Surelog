@@ -60,8 +60,7 @@ static VObjectType convert(std::string_view type) {
 }
 
 Builtin::Builtin(Session* session, CompileDesign* compileDesign, Design* design)
-    : m_session(session), m_compileDesign(compileDesign),
-      m_design(design) {}
+    : m_session(session), m_compileDesign(compileDesign), m_design(design) {}
 
 void Builtin::addBuiltinTypes() const {
   struct FunctionDefinition {
@@ -249,9 +248,8 @@ void Builtin::addBuiltinTypes() const {
     const std::string fullClassName = StrCat(f.packageName, "::", f.className);
     ClassDefinition* classDef = m_design->getClassDefinition(fullClassName);
     if (classDef == nullptr) {
-      classDef =
-          new ClassDefinition(m_session, f.className, nullptr, package, nullptr,
-                              InvalidNodeId, nullptr, s);
+      classDef = new ClassDefinition(m_session, f.className, nullptr, package,
+                                     nullptr, InvalidNodeId, nullptr, s);
       m_design->addClassDefinition(fullClassName, classDef);
       package->addClassDefinition(f.className, classDef);
     }
@@ -393,8 +391,7 @@ void Builtin::addBuiltinClasses() const {
       if (classDef == nullptr) {
         classDef =
             new ClassDefinition(m_session, name, fC1->getLibrary(),
-                             builtinPackage,
-                            fC1, classId, nullptr, s);
+                                builtinPackage, fC1, classId, nullptr, s);
         m_design->addClassDefinition(fullClassName, classDef);
         builtinPackage->addClassDefinition(name, classDef);
       } else {

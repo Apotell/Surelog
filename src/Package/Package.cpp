@@ -29,8 +29,9 @@
 
 namespace SURELOG {
 
-Package::Package(Session* session, std::string_view name, Library* library, const FileContent* fC,
-                 NodeId nodeId, UHDM::Serializer& serializer)
+Package::Package(Session* session, std::string_view name, Library* library,
+                 const FileContent* fC, NodeId nodeId,
+                 UHDM::Serializer& serializer)
     : DesignComponent(session, fC, nullptr),
       m_name(name),
       m_library(library),

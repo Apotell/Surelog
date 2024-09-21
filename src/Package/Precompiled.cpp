@@ -29,7 +29,7 @@
 
 namespace SURELOG {
 
-  Precompiled::Precompiled(Session *session) : m_session(session) {
+Precompiled::Precompiled(Session *session) : m_session(session) {
   addPrecompiled("uvm_pkg", "uvm_pkg.sv");
   addPrecompiled("ovm_pkg", "ovm_pkg.sv");
 }

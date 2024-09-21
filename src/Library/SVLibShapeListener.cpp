@@ -37,14 +37,15 @@
 #include <regex>
 
 namespace SURELOG {
-SVLibShapeListener::SVLibShapeListener(Session *session, ParseLibraryDef *parser,
+SVLibShapeListener::SVLibShapeListener(Session *session,
+                                       ParseLibraryDef *parser,
                                        antlr4::CommonTokenStream *tokens)
     : SV3_1aTreeShapeHelper(
           session, new ParseFile(session, parser->getFileId()), tokens, 0),
       m_parser(parser),
       m_tokens(tokens) {
-  m_fileContent = new FileContent(m_session, m_parser->getFileId(), nullptr, 
-								 nullptr, BadPathId);
+  m_fileContent = new FileContent(m_session, m_parser->getFileId(), nullptr,
+                                  nullptr, BadPathId);
   m_pf->setFileContent(m_fileContent);
   m_includeFileInfo.emplace(IncludeFileInfo::Context::NONE, 1, BadSymbolId,
                             m_pf->getFileId(0), 0, 0, 0, 0,

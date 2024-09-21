@@ -98,8 +98,8 @@ bool CompileClass::compile(Elaborate elaborate, Reduce reduce) {
   const UHDM::ScopedScope scopedScope(defn);
 
   if (defn->VpiFullName().empty()) defn->VpiFullName(fullName);
-  //if (m_class->m_uhdm_definition->VpiFullName().empty())
-  //  m_class->m_uhdm_definition->VpiFullName(fullName);
+  // if (m_class->m_uhdm_definition->VpiFullName().empty())
+  //   m_class->m_uhdm_definition->VpiFullName(fullName);
   SymbolTable* const symbols = m_session->getSymbolTable();
   CommandLineParser* const clp = m_session->getCommandLineParser();
   Location loc(fC->getFileId(nodeId), fC->Line(nodeId), fC->Column(nodeId),
@@ -892,8 +892,7 @@ bool CompileClass::compile_local_parameter_declaration_(const FileContent* fC,
       const FileContent* prevFile = prevDef->first.fC;
       NodeId prevNode = prevDef->first.nodeId;
       Location loc2(prevFile->getFileId(prevNode), prevFile->Line(prevNode),
-                    prevFile->Column(prevNode),
-                    symbols->registerSymbol(name));
+                    prevFile->Column(prevNode), symbols->registerSymbol(name));
       Error err(ErrorDefinition::COMP_MULTIPLY_DEFINED_PARAMETER, loc1, loc2);
       errors->addError(err);
     }
@@ -941,8 +940,7 @@ bool CompileClass::compile_parameter_declaration_(const FileContent* fC,
       const FileContent* prevFile = prevDef->first.fC;
       NodeId prevNode = prevDef->first.nodeId;
       Location loc2(prevFile->getFileId(prevNode), prevFile->Line(prevNode),
-                    prevFile->Column(prevNode),
-                    symbols->registerSymbol(name));
+                    prevFile->Column(prevNode), symbols->registerSymbol(name));
       Error err(ErrorDefinition::COMP_MULTIPLY_DEFINED_PARAMETER, loc1, loc2);
       errors->addError(err);
     }

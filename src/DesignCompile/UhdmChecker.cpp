@@ -59,7 +59,7 @@ using UHDM::uhdmunsupported_typespec;
 
 bool UhdmChecker::registerFile(const FileContent* fC,
                                std::set<std::string_view>& moduleNames) {
-  //FileSystem* const fileSystem = m_session->getFileSystem();
+  // FileSystem* const fileSystem = m_session->getFileSystem();
   const VObject& current = fC->Object(NodeId(fC->getSize() - 2));
   NodeId id = current.m_child;
   PathId fileId = fC->getFileId();
@@ -512,8 +512,8 @@ float UhdmChecker::reportCoverage(PathId uhdmFileId) {
       coverage = (lineNb - uncovered) * 100.0f / lineNb;
     if (uncovered) {
       report << "File coverage: " << std::setprecision(3) << coverage << "%\n";
-      m_coverageMap.emplace(coverage,
-                          std::make_pair(fC->getFileId(), firstUncoveredLine));
+      m_coverageMap.emplace(
+          coverage, std::make_pair(fC->getFileId(), firstUncoveredLine));
     }
     m_fileCoverageMap.emplace(fC->getFileId(), coverage);
   }
@@ -548,8 +548,7 @@ void UhdmChecker::annotate() {
     if ((ot == uhdmunsupported_expr) || (ot == uhdmunsupported_stmt) ||
         (ot == uhdmunsupported_typespec))
       unsupported = true;
-    PathId fnId = fileSystem->toPathId(
-        bc->VpiFile(), symbols);
+    PathId fnId = fileSystem->toPathId(bc->VpiFile(), symbols);
     const auto& fItr = m_fileMap.find(fnId);
     if (fItr != m_fileMap.end()) {
       const FileContent* fC = (*fItr).second;
@@ -658,8 +657,8 @@ bool UhdmChecker::check(PathId uhdmFileId) {
 
   for (const FileContent* fC : files) {
     if (!clp->createCache()) {
-      std::string_view fileName = std::get<1>(
-          fileSystem->getLeaf(fC->getFileId(), symbols));
+      std::string_view fileName =
+          std::get<1>(fileSystem->getLeaf(fC->getFileId(), symbols));
       if ((fileName == "uvm_pkg.sv") || (fileName == "ovm_pkg.sv")) {
         continue;
       }

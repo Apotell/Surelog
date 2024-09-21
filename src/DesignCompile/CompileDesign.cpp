@@ -52,7 +52,7 @@
 #include <Surelog/Utils/ContainerUtils.h>
 
 // UHDM
-//#include <uhdm/include_file_info.h>
+// #include <uhdm/include_file_info.h>
 #include <uhdm/param_assign.h>
 #include <uhdm/vpi_visitor.h>
 
@@ -112,7 +112,7 @@ bool CompileDesign::compile() {
 
   UHDM::Serializer& serializer = m_compiler->getSerializer();
   serializer.SetErrorHandler(errHandler);
-  //m_serializer.SetErrorHandler(errHandler);
+  // m_serializer.SetErrorHandler(errHandler);
 
   Location loc(BadSymbolId);
   Error err1(ErrorDefinition::COMP_COMPILE, loc);
@@ -186,7 +186,7 @@ void CompileDesign::collectObjects_(Design::FileIdDesignContentMap& all_files,
                                     Design* design, bool finalCollection) {
   typedef std::map<std::string, std::vector<Package*>> FileNamePackageMap;
   FileNamePackageMap fileNamePackageMap;
-  //FileSystem* const fileSystem = m_session->getFileSystem();
+  // FileSystem* const fileSystem = m_session->getFileSystem();
   SymbolTable* const symbols = m_session->getSymbolTable();
   ErrorContainer* const errors = m_session->getErrorContainer();
   // Collect all packages and module definitions

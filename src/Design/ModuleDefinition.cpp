@@ -37,11 +37,9 @@ VObjectType ModuleDefinition::getType() const {
 }
 
 ModuleDefinition::ModuleDefinition(Session* session, std::string_view name,
-                                   const FileContent* fC,
-                                   NodeId nodeId, UHDM::Serializer& serializer)
-    : DesignComponent(session, fC, nullptr),
-      m_name(name),
-      m_udpDefn(nullptr) {
+                                   const FileContent* fC, NodeId nodeId,
+                                   UHDM::Serializer& serializer)
+    : DesignComponent(session, fC, nullptr), m_name(name), m_udpDefn(nullptr) {
   addFileContent(fC, nodeId);
   m_unelabModule = this;
   switch (fC->Type(nodeId)) {

@@ -34,7 +34,7 @@
 namespace SURELOG {
 
 SV3_1aPpTreeShapeListener::SV3_1aPpTreeShapeListener(
-     Session *session, PreprocessFile *pp, antlr4::CommonTokenStream *tokens,
+    Session *session, PreprocessFile *pp, antlr4::CommonTokenStream *tokens,
     PreprocessFile::SpecialInstructions &instructions)
     : SV3_1aPpTreeListenerHelper::SV3_1aPpTreeListenerHelper(
           session, pp, instructions, tokens) {}
@@ -248,7 +248,8 @@ void SV3_1aPpTreeShapeListener::enterInclude_directive(
     if (m_pp->m_debugPP)
       std::cout << "PP INCLUDE DIRECTIVE " << fileName << std::endl;
 
-    PathId fileId = fileSystem->locate(fileName, clp->getIncludePaths(), symbols);
+    PathId fileId =
+        fileSystem->locate(fileName, clp->getIncludePaths(), symbols);
     if (!fileId) {
       // If failed to locate, then assume the same folder as the includer file
       // and let it fail down the stream.
@@ -289,9 +290,9 @@ void SV3_1aPpTreeShapeListener::enterInclude_directive(
         /* action */ IncludeFileInfo::Action::PUSH);
 
     PreprocessFile *pp =
-        new PreprocessFile(m_session, fileId, m_pp->getCompileSourceFile(), m_instructions,
-                           m_pp->getCompilationUnit(), m_pp->getLibrary(), m_pp,
-                           startLineCol.first);
+        new PreprocessFile(m_session, fileId, m_pp->getCompileSourceFile(),
+                           m_instructions, m_pp->getCompilationUnit(),
+                           m_pp->getLibrary(), m_pp, startLineCol.first);
     m_pp->getCompileSourceFile()->registerPP(pp);
     if (!pp->preprocess()) {
       return;
@@ -799,9 +800,8 @@ void SV3_1aPpTreeShapeListener::enterLine_directive(
     if (!newFileId) {
       // If failed to locate, then assume the same folder as the includer file
       // and let it fail down the stream.
-      newFileId =
-          fileSystem->getSibling(m_pp->getCompileSourceFile()->getFileId(),
-                                 fileName, symbols);
+      newFileId = fileSystem->getSibling(
+          m_pp->getCompileSourceFile()->getFileId(), fileName, symbols);
     }
   }
   std::string number;

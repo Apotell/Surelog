@@ -57,7 +57,7 @@ int main(int argc, const char** argv) {
   clp->setCompile(true);
   clp->setElaborate(true);  // Request Surelog instance tree Elaboration
   // clp->setElabUhdm(true);  // Request UHDM Uniquification/Elaboration
-  //bool success = clp->parseCommandLine(argc, argv);
+  // bool success = clp->parseCommandLine(argc, argv);
   errors->printMessages(clp->muteStdout());
   vpiHandle the_design = 0;
   SURELOG::scompiler* compiler = nullptr;

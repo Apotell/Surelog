@@ -86,7 +86,7 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
   const FileContent* fC = m_program->m_fileContents[0];
   SymbolTable* const symbols = m_session->getSymbolTable();
   ErrorContainer* const errors = m_session->getErrorContainer();
-  
+
   NodeId nodeId = m_program->m_nodeIds[0];
   std::vector<VObjectType> stopPoints = {
       VObjectType::paClass_declaration,

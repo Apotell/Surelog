@@ -996,7 +996,6 @@ TEST(Elaboration, PartSelect) {
   CompileHelper helper(&session);
   ElaboratorHarness eharness(&session);
 
-
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
   FileContent* fC;

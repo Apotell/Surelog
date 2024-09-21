@@ -60,8 +60,8 @@ void SV3_1aTreeShapeListener::enterTop_level_rule(
 void SV3_1aTreeShapeListener::enterTop_level_library_rule(
     SV3_1aParser::Top_level_library_ruleContext * /*ctx*/) {
   // Visited from Library/SVLibShapeListener.h
-  m_fileContent = new FileContent(m_session, 
-      m_pf->getFileId(0), m_pf->getLibrary(), nullptr, BadPathId);
+  m_fileContent = new FileContent(m_session, m_pf->getFileId(0),
+                                  m_pf->getLibrary(), nullptr, BadPathId);
   m_pf->setFileContent(m_fileContent);
 }
 
@@ -205,10 +205,9 @@ void SV3_1aTreeShapeListener::exitSlline(SV3_1aParser::SllineContext *ctx) {
     // Push
     m_includeFileInfo.emplace(
         IncludeFileInfo::Context::INCLUDE, startLine,
-        symbols->registerSymbol(symbol),
-        fileSystem->toPathId(file, symbols), startLineCol.first,
-        startLineCol.second, endLineCol.first, endLineCol.second,
-        IncludeFileInfo::Action::PUSH);
+        symbols->registerSymbol(symbol), fileSystem->toPathId(file, symbols),
+        startLineCol.first, startLineCol.second, endLineCol.first,
+        endLineCol.second, IncludeFileInfo::Action::PUSH);
   } else if (action == IncludeFileInfo::Action::POP) {
     // Pop
     if (!m_includeFileInfo.empty()) m_includeFileInfo.pop();
@@ -638,7 +637,8 @@ void SV3_1aTreeShapeListener::enterClass_declaration(
 }
 
 SV3_1aTreeShapeListener::SV3_1aTreeShapeListener(
-    Session *session, ParseFile *pf, antlr4::CommonTokenStream *tokens, uint32_t lineOffset)
+    Session *session, ParseFile *pf, antlr4::CommonTokenStream *tokens,
+    uint32_t lineOffset)
     : SV3_1aTreeShapeHelper(session, pf, tokens, lineOffset) {}
 
 SV3_1aTreeShapeListener::~SV3_1aTreeShapeListener() {}

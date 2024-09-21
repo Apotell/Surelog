@@ -574,16 +574,14 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
   if (scope) {
     const TypeDef* prevDef = scope->getTypeDef(name);
     if (prevDef && !prevDef->isForwardDeclaration()) {
-	  SymbolTable* const symbols = m_session->getSymbolTable();
+      SymbolTable* const symbols = m_session->getSymbolTable();
       ErrorContainer* const errors = m_session->getErrorContainer();
       Location loc1(fC->getFileId(data_type), fC->Line(data_type),
-                    fC->Column(data_type),
-                    symbols->registerSymbol(name));
+                    fC->Column(data_type), symbols->registerSymbol(name));
       const FileContent* prevFile = prevDef->getFileContent();
       NodeId prevNode = prevDef->getNodeId();
       Location loc2(prevFile->getFileId(prevNode), prevFile->Line(prevNode),
-                    prevFile->Column(prevNode),
-                    symbols->registerSymbol(name));
+                    prevFile->Column(prevNode), symbols->registerSymbol(name));
       Error err(ErrorDefinition::COMP_MULTIPLY_DEFINED_TYPEDEF, loc1, loc2);
       errors->addError(err);
     }
@@ -1942,8 +1940,7 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
     } else if (ttmp == uhdminterface_typespec) {
       if (!signalIsPort) {
         SymbolTable* symbols = m_session->getSymbolTable();
-        ErrorContainer* errors =
-            m_session->getErrorContainer();
+        ErrorContainer* errors = m_session->getErrorContainer();
         Location loc1(fC->getFileId(), fC->Line(id), fC->Column(id),
                       symbols->registerSymbol(sig->getName()));
         Error err(ErrorDefinition::ELAB_USE_INTERFACE_AS_SIGNAL_TYPE, loc1);
@@ -3834,10 +3831,9 @@ UHDM::any* CompileHelper::defaultPatternAssignment(
       if (lts->Ranges() && !lts->Ranges()->empty()) {
         r = (*lts->Ranges())[0];
       }
-      ncsize = Bits(
-          ets, invalidValue, component, compileDesign, Reduce::Yes, instance,
-          fileSystem->toPathId(ets->VpiFile(), symbols),
-          ets->VpiLineNo(), false);
+      ncsize = Bits(ets, invalidValue, component, compileDesign, Reduce::Yes,
+                    instance, fileSystem->toPathId(ets->VpiFile(), symbols),
+                    ets->VpiLineNo(), false);
     }
   } else if (ttps == uhdmpacked_array_typespec) {
     packed_array_typespec* lts = (packed_array_typespec*)tps;
@@ -3850,10 +3846,9 @@ UHDM::any* CompileHelper::defaultPatternAssignment(
       if (lts->Ranges() && !lts->Ranges()->empty()) {
         r = (*lts->Ranges())[0];
       }
-      ncsize = Bits(
-          ets, invalidValue, component, compileDesign, Reduce::Yes, instance,
-          fileSystem->toPathId(ets->VpiFile(), symbols),
-          ets->VpiLineNo(), false);
+      ncsize = Bits(ets, invalidValue, component, compileDesign, Reduce::Yes,
+                    instance, fileSystem->toPathId(ets->VpiFile(), symbols),
+                    ets->VpiLineNo(), false);
     }
   } else if (ttps == uhdmbit_typespec) {
     bit_typespec* lts = (bit_typespec*)tps;
@@ -3958,16 +3953,13 @@ UHDM::any* CompileHelper::defaultPatternAssignment(
               bool invalidValue = false;
               expr* lexp = reduceExpr(
                   (expr*)r->Left_expr(), invalidValue, component, compileDesign,
-                  instance,
-                  fileSystem->toPathId(
-                      r->VpiFile(), symbols),
+                  instance, fileSystem->toPathId(r->VpiFile(), symbols),
                   r->VpiLineNo(), nullptr);
-              expr* rexp = reduceExpr(
-                  (expr*)r->Right_expr(), invalidValue, component,
-                  compileDesign, instance,
-                  fileSystem->toPathId(
-                      r->VpiFile(), symbols),
-                  r->VpiLineNo(), nullptr);
+              expr* rexp =
+                  reduceExpr((expr*)r->Right_expr(), invalidValue, component,
+                             compileDesign, instance,
+                             fileSystem->toPathId(r->VpiFile(), symbols),
+                             r->VpiLineNo(), nullptr);
               UHDM::ExprEval eval;
               uint64_t lv = eval.get_uvalue(invalidValue, lexp);
               uint64_t rv = eval.get_uvalue(invalidValue, rexp);
@@ -4567,9 +4559,9 @@ UHDM::constant* CompileHelper::adjustSize(const UHDM::typespec* ts,
   int32_t orig_size = c->VpiSize();
 
   bool invalidValue = false;
-  int32_t sizetmp =
-      Bits(ts, invalidValue, component, compileDesign, Reduce::Yes, instance,
-           fileSystem->toPathId(c->VpiFile(), symbols), c->VpiLineNo(), sizeMode);
+  int32_t sizetmp = Bits(
+      ts, invalidValue, component, compileDesign, Reduce::Yes, instance,
+      fileSystem->toPathId(c->VpiFile(), symbols), c->VpiLineNo(), sizeMode);
 
   int32_t size = orig_size;
   if (c->VpiConstType() != vpiDecConst) {
@@ -5521,9 +5513,10 @@ int32_t CompileHelper::adjustOpSize(const typespec* tps, expr* cop,
   bool invalidValue = false;
   int32_t csize = cop->VpiSize();
   if (csize == 0) {
-    expr* vexp = reduceExpr(
-        cop, invalidValue, component, compileDesign, instance,
-        fileSystem->toPathId(cop->VpiFile(), symbols), cop->VpiLineNo(), nullptr);
+    expr* vexp =
+        reduceExpr(cop, invalidValue, component, compileDesign, instance,
+                   fileSystem->toPathId(cop->VpiFile(), symbols),
+                   cop->VpiLineNo(), nullptr);
     if (invalidValue == false && vexp) csize = vexp->VpiSize();
   }
 
@@ -5543,11 +5536,10 @@ int32_t CompileHelper::adjustOpSize(const typespec* tps, expr* cop,
         if (const UHDM::ref_typespec* rt = member->Typespec()) {
           mtps = rt->Actual_typespec();
         }
-        int32_t ncsize = Bits(
-            mtps, invalidValue, component, compileDesign, Reduce::Yes, instance,
-            fileSystem->toPathId(
-                member->VpiFile(),symbols),
-            member->VpiLineNo(), false);
+        int32_t ncsize =
+            Bits(mtps, invalidValue, component, compileDesign, Reduce::Yes,
+                 instance, fileSystem->toPathId(member->VpiFile(), symbols),
+                 member->VpiLineNo(), false);
         // Fix the size of the member:
         adjustUnsized(any_cast<constant*>(cop), ncsize);
         cop->VpiSize(ncsize);
@@ -5558,33 +5550,32 @@ int32_t CompileHelper::adjustOpSize(const typespec* tps, expr* cop,
   } else if (rtps->UhdmType() == uhdmarray_typespec) {
     array_typespec* atps = (array_typespec*)rtps;
     if (const ref_typespec* ert = atps->Elem_typespec()) {
-      int32_t ncsize = Bits(
-          ert->Actual_typespec(), invalidValue, component, compileDesign,
-          Reduce::Yes, instance,
-          fileSystem->toPathId(rtps->VpiFile(), symbols),
-          rtps->VpiLineNo(), false);
+      int32_t ncsize = Bits(ert->Actual_typespec(), invalidValue, component,
+                            compileDesign, Reduce::Yes, instance,
+                            fileSystem->toPathId(rtps->VpiFile(), symbols),
+                            rtps->VpiLineNo(), false);
       // Fix the size of the member:
       adjustUnsized(any_cast<constant*>(cop), ncsize);
       cop->VpiSize(ncsize);
     }
   } else if (rtps->UhdmType() == uhdmlogic_typespec) {
-    uint64_t fullSize = Bits(
-        rtps, invalidValue, component, compileDesign, Reduce::Yes, instance,
-        fileSystem->toPathId(rtps->VpiFile(), symbols),
-        rtps->VpiLineNo(), false);
-    uint64_t innerSize = Bits(
-        rtps, invalidValue, component, compileDesign, Reduce::Yes, instance,
-        fileSystem->toPathId(rtps->VpiFile(), symbols),
-        rtps->VpiLineNo(), true);
+    uint64_t fullSize =
+        Bits(rtps, invalidValue, component, compileDesign, Reduce::Yes,
+             instance, fileSystem->toPathId(rtps->VpiFile(), symbols),
+             rtps->VpiLineNo(), false);
+    uint64_t innerSize =
+        Bits(rtps, invalidValue, component, compileDesign, Reduce::Yes,
+             instance, fileSystem->toPathId(rtps->VpiFile(), symbols),
+             rtps->VpiLineNo(), true);
     int32_t ncsize = fullSize / innerSize;
     // Fix the size of the member:
     adjustUnsized(any_cast<constant*>(cop), ncsize);
     cop->VpiSize(ncsize);
   } else {
-    int32_t ncsize = Bits(
-        rtps, invalidValue, component, compileDesign, Reduce::Yes, instance,
-        fileSystem->toPathId(rtps->VpiFile(), symbols),
-        rtps->VpiLineNo(), false);
+    int32_t ncsize =
+        Bits(rtps, invalidValue, component, compileDesign, Reduce::Yes,
+             instance, fileSystem->toPathId(rtps->VpiFile(), symbols),
+             rtps->VpiLineNo(), false);
     // Fix the size of the member:
     adjustUnsized(any_cast<constant*>(cop), ncsize);
     cop->VpiSize(ncsize);
@@ -5612,8 +5603,8 @@ UHDM::expr* CompileHelper::expandPatternAssignment(
   bool invalidValue = false;
   uint64_t size =
       Bits(tps, invalidValue, component, compileDesign, Reduce::Yes, instance,
-           fileSystem->toPathId(rhs->VpiFile(), symbolTable),
-           rhs->VpiLineNo(), false);
+           fileSystem->toPathId(rhs->VpiFile(), symbolTable), rhs->VpiLineNo(),
+           false);
   uint64_t patternSize = 0;
 
   UHDM::ExprEval eval(true);
@@ -5648,12 +5639,11 @@ UHDM::expr* CompileHelper::expandPatternAssignment(
                   UHDM::ExprEval eval;
                   defaultval = eval.get_value(
                       invalidValue,
-                      reduceExpr(
-                          (any*)tp->Pattern(), invalidValue, component,
-                          compileDesign, instance,
-                          fileSystem->toPathId(tp->Pattern()->VpiFile(),
+                      reduceExpr((any*)tp->Pattern(), invalidValue, component,
+                                 compileDesign, instance,
+                                 fileSystem->toPathId(tp->Pattern()->VpiFile(),
                                                       symbolTable),
-                          tp->Pattern()->VpiLineNo(), nullptr));
+                                 tp->Pattern()->VpiLineNo(), nullptr));
 
                   break;
                 }
@@ -5674,11 +5664,10 @@ UHDM::expr* CompileHelper::expandPatternAssignment(
             int32_t valIndex = 0;
             // Apply default
             for (typespec_member* member : *stps->Members()) {
-              uint64_t csize =
-                  Bits(member, invalidValue, component, compileDesign,
-                       Reduce::Yes, instance,
-                       fileSystem->toPathId(rhs->VpiFile(), symbolTable),
-                       rhs->VpiLineNo(), false);
+              uint64_t csize = Bits(
+                  member, invalidValue, component, compileDesign, Reduce::Yes,
+                  instance, fileSystem->toPathId(rhs->VpiFile(), symbolTable),
+                  rhs->VpiLineNo(), false);
               patternSize += csize;
               if (invalidValue) {
                 return result;
@@ -5700,11 +5689,10 @@ UHDM::expr* CompileHelper::expandPatternAssignment(
             }
             valIndex = 0;
             for (typespec_member* member : *stps->Members()) {
-              uint64_t csize =
-                  Bits(member, invalidValue, component, compileDesign,
-                       Reduce::Yes, instance,
-                       fileSystem->toPathId(rhs->VpiFile(), symbolTable),
-                       rhs->VpiLineNo(), false);
+              uint64_t csize = Bits(
+                  member, invalidValue, component, compileDesign, Reduce::Yes,
+                  instance, fileSystem->toPathId(rhs->VpiFile(), symbolTable),
+                  rhs->VpiLineNo(), false);
 
               for (any* op : *operands) {
                 bool found = false;
@@ -5719,11 +5707,12 @@ UHDM::expr* CompileHelper::expandPatternAssignment(
                         UHDM::ExprEval eval;
                         val = eval.get_value(
                             invalidValue,
-                            reduceExpr((any*)tp->Pattern(), invalidValue,
-                                       component, compileDesign, instance,
-                                       fileSystem->toPathId(tp->Pattern()->VpiFile(),
+                            reduceExpr(
+                                (any*)tp->Pattern(), invalidValue, component,
+                                compileDesign, instance,
+                                fileSystem->toPathId(tp->Pattern()->VpiFile(),
                                                      symbolTable),
-                                       tp->Pattern()->VpiLineNo(), nullptr));
+                                tp->Pattern()->VpiLineNo(), nullptr));
                         found = true;
                         if (invalidValue) {
                           return result;

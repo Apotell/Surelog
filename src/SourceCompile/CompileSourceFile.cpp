@@ -115,7 +115,7 @@ bool CompileSourceFile::compile(Action action) {
 }
 
 CompileSourceFile::CompileSourceFile(const CompileSourceFile& orig)
-  : m_session(orig.m_session) {}
+    : m_session(orig.m_session) {}
 
 CompileSourceFile::~CompileSourceFile() {
   std::vector<PreprocessFile*>::iterator itr;
@@ -172,10 +172,10 @@ bool CompileSourceFile::pythonAPI_() {
   }
 
   if (m_session->pythonEvalScriptPerFile()) {
-    PythonAPI::evalScriptPerFile(
-        m_session->getFileSystem()->toPath(
-            m_session->pythonEvalScriptPerFileId()),
-        m_errors, m_parser->getFileContent(), m_interpState);
+    PythonAPI::evalScriptPerFile(m_session->getFileSystem()->toPath(
+                                     m_session->pythonEvalScriptPerFileId()),
+                                 m_errors, m_parser->getFileContent(),
+                                 m_interpState);
   }
   return true;
 #else
@@ -212,14 +212,13 @@ bool CompileSourceFile::preprocess_() {
   PreprocessFile::SpecialInstructions instructions(
       PreprocessFile::SpecialInstructions::DontMute,
       PreprocessFile::SpecialInstructions::DontMark,
-      clp->filterFileLine()
-          ? PreprocessFile::SpecialInstructions::Filter
-          : PreprocessFile::SpecialInstructions::DontFilter,
+      clp->filterFileLine() ? PreprocessFile::SpecialInstructions::Filter
+                            : PreprocessFile::SpecialInstructions::DontFilter,
       PreprocessFile::SpecialInstructions::CheckLoop,
       PreprocessFile::SpecialInstructions::ComplainUndefinedMacro);
   if (m_text.empty()) {
-    m_pp = new PreprocessFile(m_session, m_fileId, this, instructions, m_compilationUnit,
-                              m_library);
+    m_pp = new PreprocessFile(m_session, m_fileId, this, instructions,
+                              m_compilationUnit, m_library);
   } else {
     m_pp = new PreprocessFile(m_session, BadSymbolId, this, instructions,
                               m_compilationUnit, m_library,
@@ -236,13 +235,10 @@ bool CompileSourceFile::preprocess_() {
     return false;
   }
 
-  if (clp->getDebugIncludeFileInfo())
-    std::cerr << m_pp->reportIncludeInfo();
+  if (clp->getDebugIncludeFileInfo()) std::cerr << m_pp->reportIncludeInfo();
 
   Precompiled* prec = m_session->getPrecompiled();
-  if ((!clp->createCache()) &&
-      prec->isFilePrecompiled(m_fileId))
-    return true;
+  if ((!clp->createCache()) && prec->isFilePrecompiled(m_fileId)) return true;
 
   m_pp->saveCache();
   return true;
@@ -262,24 +258,22 @@ bool CompileSourceFile::postPreprocess_() {
     m_parser = new ParseFile(m_session, m_pp_result, this, m_compilationUnit,
                              m_library);  // unit test
   }
-  if (!(clp->writePpOutput() ||
-        clp->writePpOutputFileId())) {
+  if (!(clp->writePpOutput() || clp->writePpOutputFileId())) {
     return true;
   }
 
   m_ppResultFileId = clp->writePpOutputFileId();
   if (!m_ppResultFileId) {
     const std::string_view libraryName = m_library->getName();
-    m_ppResultFileId = fileSystem->getPpOutputFile(
-        clp->fileunit(), m_fileId, libraryName, symbols);
+    m_ppResultFileId = fileSystem->getPpOutputFile(clp->fileunit(), m_fileId,
+                                                   libraryName, symbols);
   }
 
   if (clp->lowMem() || clp->link()) {
     return true;
   }
 
-  const PathId ppResultDirId =
-      fileSystem->getParent(m_ppResultFileId, symbols);
+  const PathId ppResultDirId = fileSystem->getParent(m_ppResultFileId, symbols);
   if (!fileSystem->mkdirs(ppResultDirId)) {
     Location loc(ppResultDirId);
     Error err(ErrorDefinition::PP_CANNOT_CREATE_DIRECTORY, loc);
@@ -337,9 +331,9 @@ PreprocessFile::AntlrParserHandler* CompileSourceFile::getAntlrPpHandlerForId(
   return nullptr;
 }
 
-//void CompileSourceFile::setSymbolTable(SymbolTable* symbols) {
-//  m_symbolTable = symbols;
-//}
+// void CompileSourceFile::setSymbolTable(SymbolTable* symbols) {
+//   m_symbolTable = symbols;
+// }
 
 #ifdef SURELOG_WITH_PYTHON
 void CompileSourceFile::setPythonInterp(PyThreadState* interpState) {

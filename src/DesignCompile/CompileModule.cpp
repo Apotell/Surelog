@@ -60,13 +60,13 @@ int32_t FunctorCompileModule::operator()() const {
     delete instance;
   }
 
-  //if (m_compileDesign->getCompiler()->getCommandLineParser()->elaborate()) {
-  //  if (CompileModule* instance = new CompileModule(
-  //          m_session, m_compileDesign, m_module, m_design, m_instance))) {
-  //    instance->compile(Elaborate::Yes, Reduce::Yes);
-  //    delete instance;
-  //  }
-  //}
+  // if (m_compileDesign->getCompiler()->getCommandLineParser()->elaborate()) {
+  //   if (CompileModule* instance = new CompileModule(
+  //           m_session, m_compileDesign, m_module, m_design, m_instance))) {
+  //     instance->compile(Elaborate::Yes, Reduce::Yes);
+  //     delete instance;
+  //   }
+  // }
 
   return 0;
 }
@@ -118,8 +118,8 @@ bool CompileModule::compile(Elaborate elaborate, Reduce reduce) {
   m_helper.setElaborate(elaborate);
   m_helper.setReduce(reduce);
 
-  //CommandLineParser* clp =
-  //    m_compileDesign->getCompiler()->getCommandLineParser();
+  // CommandLineParser* clp =
+  //     m_compileDesign->getCompiler()->getCommandLineParser();
   auto& blackboxModules = clp->getBlackBoxModules();
   bool skipModule = false;
   std::string libName;
@@ -1543,8 +1543,7 @@ bool CompileModule::checkModule_() {
       if (countMissingDirection == 0)
         missingDirectionLoc = new Location(
             fileSystem->copy(
-                port->getFileContent()->getFileId(port->getNodeId()),
-                symbols),
+                port->getFileContent()->getFileId(port->getNodeId()), symbols),
             port->getFileContent()->Line(port->getNodeId()),
             port->getFileContent()->Column(port->getNodeId()),
             symbols->registerSymbol(port->getName()));

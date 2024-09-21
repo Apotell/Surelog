@@ -135,8 +135,10 @@ std::pair<bool, bool> Report::makeDiffCompUnitReport() {
             << "         |" << std::endl;
   std::cout << "|-------|------------------|-------------------|" << std::endl;
   std::cout << std::endl;
-  std::cout << "FILE UNIT LOG: " << PathIdPP(unitLogFileId, fileSystem) << std::endl;
-  std::cout << "ALL FILES LOG: " << PathIdPP(allLogFileId, fileSystem) << std::endl;
+  std::cout << "FILE UNIT LOG: " << PathIdPP(unitLogFileId, fileSystem)
+            << std::endl;
+  std::cout << "ALL FILES LOG: " << PathIdPP(allLogFileId, fileSystem)
+            << std::endl;
 
   const PathId allCompileDirId = fileSystem->getCompileDir(false, st);
   const PathId unitCompileDirId = fileSystem->getCompileDir(true, st);

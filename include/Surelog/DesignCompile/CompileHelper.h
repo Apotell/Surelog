@@ -34,6 +34,7 @@
 #include <unordered_map>
 
 // UHDM
+#include <uhdm/constant.h>
 #include <uhdm/containers.h>
 
 namespace UHDM {
@@ -54,6 +55,7 @@ class NodeId;
 class Parameter;
 class Procedure;
 class Scope;
+class Session;
 class Signal;
 class Statement;
 class SymbolTable;
@@ -64,9 +66,9 @@ typedef std::vector<TfPortItem*> TfPortList;
 class FScope : public ValuedComponentI {
   SURELOG_IMPLEMENT_RTTI(FScope, ValuedComponentI)
  public:
-  FScope(const SURELOG::ValuedComponentI* parent,
+  FScope(Session* session, const SURELOG::ValuedComponentI* parent,
          SURELOG::ValuedComponentI* definition)
-      : ValuedComponentI(parent, definition) {}
+      : ValuedComponentI(session, parent, definition) {}
 
  private:
 };
@@ -77,12 +79,12 @@ enum class Reduce : bool { Yes = true, No = false };
 
 class CompileHelper final {
  public:
-  CompileHelper() {}
+  explicit CompileHelper(Session* session);
 
   void seterrorReporting(ErrorContainer* errors, SymbolTable* symbols) {
     m_errors = errors;
     m_symbols = symbols;
-    m_exprBuilder.seterrorReporting(errors, symbols);
+    // m_exprBuilder.seterrorReporting(errors, symbols);
   }
 
   void setDesign(Design* design) { m_exprBuilder.setDesign(design); }
@@ -658,6 +660,7 @@ class CompileHelper final {
  private:
   CompileHelper(const CompileHelper&) = delete;
 
+  Session* const m_session = nullptr;
   ErrorContainer* m_errors = nullptr;
   SymbolTable* m_symbols = nullptr;
   ExprBuilder m_exprBuilder;
@@ -670,9 +673,6 @@ class CompileHelper final {
                                        uint16_t ecolumn);
   UHDM::typespec_member* buildTypespecMember(CompileDesign* compileDesign,
                                              const FileContent* fC, NodeId id);
-  std::unordered_map<std::string, UHDM::int_typespec*> m_cache_int_typespec;
-  std::unordered_map<std::string, UHDM::typespec_member*>
-      m_cache_typespec_member;
   bool m_checkForLoops = false;
   int32_t m_stackLevel = 0;
   bool m_unwind = false;

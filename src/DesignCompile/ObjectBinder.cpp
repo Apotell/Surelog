@@ -22,6 +22,7 @@
  */
 
 #include <Surelog/Common/FileSystem.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/DataType.h>
 #include <Surelog/Design/DesignComponent.h>
 #include <Surelog/Design/DesignElement.h>
@@ -41,12 +42,13 @@
 #include <uhdm/uhdm.h>
 
 namespace SURELOG {
-ObjectBinder::ObjectBinder(const ComponentMap& componentMap,
+ObjectBinder::ObjectBinder(Session* session, const ComponentMap& componentMap,
                            UHDM::Serializer& serializer,
                            SymbolTable* const symbolTable,
                            ErrorContainer* const errorContainer,
                            bool muteStdout)
-    : m_componentMap(componentMap),
+    : m_session(session),
+      m_componentMap(componentMap),
       m_serializer(serializer),
       m_symbolTable(symbolTable),
       m_errorContainer(errorContainer),
@@ -1192,7 +1194,7 @@ void ObjectBinder::enterClass_defn(const UHDM::class_defn* const object) {
 }
 
 void ObjectBinder::reportErrors() {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  FileSystem* const fileSystem = m_session->getFileSystem();
   for (auto& [object, scope, component] : m_unbounded) {
     bool reportMissingActual = false;
     if (const UHDM::ref_obj* const ro = any_cast<UHDM::ref_obj>(object)) {

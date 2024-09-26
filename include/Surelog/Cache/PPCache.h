@@ -34,7 +34,7 @@ class PreprocessFile;
 
 class PPCache : Cache {
  public:
-  explicit PPCache(PreprocessFile* pp);
+  PPCache(Session* session, PreprocessFile* pp);
 
   bool restore(bool errorsOnly);
   bool save();
@@ -73,7 +73,7 @@ class PPCache : Cache {
                     const SymbolTable& sourceSymbols);
 
   void cacheTimeInfos(::PPCache::Builder builder, SymbolTable& targetSymbols,
-                    const SymbolTable& sourceSymbols);
+                      const SymbolTable& sourceSymbols);
 
   void cacheLineTranslationInfos(::PPCache::Builder builder,
                                  SymbolTable& targetSymbols,

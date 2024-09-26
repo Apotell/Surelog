@@ -49,13 +49,14 @@ class DataType;
 class FileContent;
 class Library;
 class Property;
+class Session;
 
 class ClassDefinition : public DesignComponent, public DataType {
   SURELOG_IMPLEMENT_RTTI_2_BASES(ClassDefinition, DesignComponent, DataType)
   friend class CompileClass;
 
  public:
-  ClassDefinition(std::string_view name, Library* library,
+  ClassDefinition(Session* session, std::string_view name, Library* library,
                   DesignComponent* container, const FileContent* fC,
                   NodeId nodeId, ClassDefinition* parent,
                   UHDM::Serializer& serializer);
@@ -71,6 +72,7 @@ class ClassDefinition : public DesignComponent, public DataType {
   Library* getLibrary() { return m_library; }
   DesignComponent* getContainer() const { return m_container; }
   void setContainer(DesignComponent* container);
+  //UHDM::class_defn* getUhdmDefinition() const { return m_uhdm_definition; }
 
   // Parameter definitions are stored DesignComponent maps
   typedef std::map<std::string, Property*, StringViewCompare> PropertyMap;
@@ -137,6 +139,8 @@ class ClassDefinition : public DesignComponent, public DataType {
   ClassMap m_classes;
   CoverGroupMap m_covergroups;
   BaseClassMap m_baseclasses;
+  UHDM::class_defn* m_uhdm_definition = nullptr;
+
   UHDM::VectorOfattribute* attributes_ = nullptr;
 };
 

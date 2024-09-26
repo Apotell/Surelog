@@ -36,10 +36,12 @@ namespace SURELOG {
 
 class ModuleInstance;
 class ModPort;
+class Session;
 
 class Netlist {
  public:
-  explicit Netlist(ModuleInstance* parent) : m_parent(parent) {}
+  explicit Netlist(Session* session, ModuleInstance* parent)
+      : m_session(session), m_parent(parent) {}
   ~Netlist();
 
   typedef std::map<std::string, std::pair<ModPort*, UHDM::modport*>,
@@ -105,12 +107,14 @@ class Netlist {
   }
 
   std::vector<UHDM::port*>& actualPorts() { return m_actualPorts; }
+
   SymbolTable& getSymbolTable() { return m_symbolTable; }
   ModPortMap& getModPortMap() { return m_modPortMap; }
   InstanceMap& getInstanceMap() { return m_instanceMap; }
   ModuleInstance* getParent() { return m_parent; }
 
  private:
+  Session* const m_session = nullptr;
   ModuleInstance* const m_parent;
 
   // members of the netlist

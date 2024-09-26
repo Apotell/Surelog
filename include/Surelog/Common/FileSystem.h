@@ -105,8 +105,6 @@ class FileSystem {
       filepath_to_working_directories_cache_t;
 
  public:
-  static FileSystem *getInstance();
-  static FileSystem *setInstance(FileSystem *fileSystem);
 
   // Returns the executing binary's path by querying the OS
   static std::filesystem::path getProgramPath();
@@ -350,9 +348,6 @@ class FileSystem {
   std::ostringstream m_nullOutputStream;
 
   filepath_to_working_directories_cache_t m_filepathToWorkingDirectoriesCache;
-
- private:
-  static FileSystem *sInstance;
 
  protected:
   FileSystem() = default;

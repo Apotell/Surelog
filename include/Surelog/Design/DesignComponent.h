@@ -69,9 +69,10 @@ class ExprEval {
 class DesignComponent : public ValuedComponentI, public PortNetHolder {
   SURELOG_IMPLEMENT_RTTI(DesignComponent, ValuedComponentI)
  public:
-  DesignComponent(const DesignComponent* parent, DesignComponent* definition)
-      : ValuedComponentI(parent, definition) {}
-  ~DesignComponent() override {}
+  DesignComponent(Session* session, const DesignComponent* parent,
+                  DesignComponent* definition)
+      : ValuedComponentI(session, parent, definition) {}
+  ~DesignComponent() override = default;
 
   virtual uint32_t getSize() const = 0;
   virtual VObjectType getType() const = 0;

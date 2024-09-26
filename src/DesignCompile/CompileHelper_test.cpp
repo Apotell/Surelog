@@ -13,6 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
+#include <Surelog/Common/Session.h>
 #include <Surelog/DesignCompile/CompileHelper.h>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
@@ -26,7 +27,8 @@ namespace SURELOG {
 TEST(CompileHelper, ParseConstants) {
   UHDM::Serializer s;
   auto tester = [&s](int32_t type, std::string_view value, int64_t* result) {
-    CompileHelper testee;
+    Session session;
+    CompileHelper testee(&session);
     UHDM::constant* val = s.MakeConstant();
     val->VpiConstType(type);
     val->VpiValue(value);

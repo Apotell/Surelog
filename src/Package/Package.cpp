@@ -29,9 +29,13 @@
 
 namespace SURELOG {
 
-Package::Package(std::string_view name, Library* library, const FileContent* fC,
-                 NodeId nodeId, UHDM::Serializer& serializer)
-    : DesignComponent(fC, nullptr), m_name(name), m_library(library) {
+Package::Package(Session* session, std::string_view name, Library* library,
+                 const FileContent* fC, NodeId nodeId,
+                 UHDM::Serializer& serializer)
+    : DesignComponent(session, fC, nullptr),
+      m_name(name),
+      m_library(library),
+      m_exprBuilder(session) {
   addFileContent(fC, nodeId);
   m_unElabPackage = this;
   // if (!name.empty()) {  // avoid loop
@@ -41,10 +45,8 @@ Package::Package(std::string_view name, Library* library, const FileContent* fC,
 
   UHDM::package* const instance = serializer.MakePackage();
   if (!name.empty()) instance->VpiName(name);
-  if (nodeId && (fC != nullptr)) {
-    const NodeId packageId = fC->sl_collect(nodeId, VObjectType::paPACKAGE);
-    fC->populateCoreMembers(packageId, nodeId, instance);
-  }
+  if (nodeId && (fC != nullptr))
+    fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::paPACKAGE), nodeId, instance);
   setUhdmModel(instance);
 }
 

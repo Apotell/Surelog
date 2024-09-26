@@ -40,7 +40,6 @@ class Serializer;
 }  // namespace UHDM
 
 namespace SURELOG {
-
 class AnalyzeFile;
 class BindStmt;
 class Builtin;
@@ -58,6 +57,7 @@ class ParseCache;
 class ParseFile;
 class PPCache;
 class PreprocessFile;
+class Session;
 class SV3_1aPpTreeShapeListener;
 class SV3_1aTreeShapeListener;
 class SVLibShapeListener;
@@ -78,10 +78,8 @@ class Design final {
   friend class SVLibShapeListener;
 
  public:
-  Design(UHDM::Serializer& serializer, ErrorContainer* errors,
-         LibrarySet* librarySet, ConfigSet* configSet);
+  Design(Session* session, UHDM::Serializer& serializer, LibrarySet* librarySet, ConfigSet* configSet);
   Design(const Design& orig) = delete;
-
   ~Design();
 
   typedef std::vector<std::pair<PathId, FileContent*>> FileIdDesignContentMap;
@@ -157,8 +155,6 @@ class Design final {
 
   ClassDefinition* getClassDefinition(std::string_view name) const;
 
-  ErrorContainer* getErrorContainer() { return m_errors; }
-
   typedef std::multimap<std::string, BindStmt*, std::less<>> BindMap;
 
   BindMap& getBindMap() { return m_bindMap; }
@@ -215,11 +211,10 @@ class Design final {
   DefParam* getDefParam_(std::vector<std::string>& path,
                          DefParam* parent) const;
 
+  Session* const m_session = nullptr;
   UHDM::design* const m_uhdmDesign = nullptr;
-  ErrorContainer* const m_errors = nullptr;
-  LibrarySet* const m_librarySet = nullptr;
-  ConfigSet* const m_configSet = nullptr;
-
+  LibrarySet* m_librarySet;
+  ConfigSet* m_configSet;
   FileIdDesignContentMap m_fileContents;
 
   FileIdDesignContentMap m_ppFileContents;

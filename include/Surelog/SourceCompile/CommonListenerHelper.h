@@ -36,6 +36,7 @@ namespace antlr4 {
 class CommonTokenStream;
 class ParserRuleContext;
 class Token;
+
 namespace tree {
 class ParseTree;
 }
@@ -44,6 +45,7 @@ class ParseTree;
 namespace SURELOG {
 
 class FileContent;
+class Session;
 class VObject;
 
 static constexpr char EscapeSequence[] = "#~@";
@@ -85,8 +87,7 @@ class CommonListenerHelper {
 
   NodeId getObjectId(antlr4::ParserRuleContext* ctx) const;
 
-  virtual std::tuple<PathId, uint32_t, uint16_t, uint32_t,
-                     uint16_t>
+  virtual std::tuple<PathId, uint32_t, uint16_t, uint32_t, uint16_t>
   getFileLine(antlr4::ParserRuleContext* ctx, antlr4::Token* token) const = 0;
 
   NodeId& MutableChild(NodeId index);
@@ -94,9 +95,11 @@ class CommonListenerHelper {
   NodeId& MutableParent(NodeId index);
 
  protected:
-  CommonListenerHelper(FileContent* file_content,
+  CommonListenerHelper(Session* session, FileContent* file_content,
                        antlr4::CommonTokenStream* tokens)
-      : m_fileContent(file_content), m_tokens(tokens) {}
+      : m_session(session), m_fileContent(file_content), m_tokens(tokens) {}
+
+  Session* const m_session = nullptr;
 
   // These should be *const, but they are still set in some places.
   // TODO: fix these places.

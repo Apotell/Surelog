@@ -27,9 +27,10 @@
 
 namespace SURELOG {
 
+class CompilationUnit;
 class CompileDesign;
 class Design;
-class CompilationUnit;
+class Session;
 class SymbolTable;
 
 // TODO: this looks like it should probably be more a
@@ -37,16 +38,15 @@ class SymbolTable;
 // SURELOG::addBuiltinsTo(Design *design);
 class Builtin final {
  public:
-  Builtin(CompileDesign* compileDesign, Design* design,
-          SymbolTable* symbolTable);
+  Builtin(Session* session, CompileDesign* compileDesign, Design* design);
   void addBuiltinMacros(CompilationUnit* compUnit) const;
   void addBuiltinTypes() const;
   void addBuiltinClasses() const;
 
  private:
-  CompileDesign* const m_compileDesign;
-  Design* const m_design;
-  SymbolTable* const m_symbolTable;
+  Session* const m_session = nullptr;
+  CompileDesign* const m_compileDesign = nullptr;
+  Design* const m_design = nullptr;
 };
 
 };  // namespace SURELOG

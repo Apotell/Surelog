@@ -35,15 +35,13 @@
 #include <vector>
 
 namespace SURELOG {
-
-class ErrorContainer;
-class SymbolTable;
+class Session;
 
 class CommandLineParser final {
  public:
-  CommandLineParser(ErrorContainer* errors, SymbolTable* symbolTable,
-                    bool diffCompMode = false, bool fileUnit = false);
-  bool parseCommandLine(int32_t argc, const char** argv);
+  explicit CommandLineParser(Session* session);
+  bool parse(int32_t argc, const char** argv, bool diffCompMode = false,
+             bool fileUnit = false);
 
   /* Verilog command line content */
   const PathIdVector& getWorkingDirs() const { return m_workingDirs; }
@@ -129,8 +127,8 @@ class CommandLineParser final {
   bool getUhdmStats() const { return m_uhdmStats; }
   bool getElabUhdm() const { return m_elabUhdm; }
   bool getCoverUhdm() const { return m_coverUhdm; }
-  bool getParametersSubstitution() const { return m_parametersubstitution; }
-  bool getLetExprSubstitution() const { return m_letexprsubstitution; }
+  bool getParametersSubstitution() const { return m_parameterSubstitution; }
+  bool getLetExprSubstitution() const { return m_letExprSubstitution; }
   bool showVpiIds() const { return m_showVpiIDs; }
   bool replay() const { return m_replay; }
   bool getDebugInstanceTree() const { return m_debugInstanceTree; }
@@ -182,8 +180,8 @@ class CommandLineParser final {
   void setGC(bool val) { m_gc = val; }
   void showVpiIds(bool val) { m_showVpiIDs = val; }
   void setDebugAstModel(bool val) { m_debugAstModel = val; }
-  void setParametersSubstitution(bool val) { m_parametersubstitution = val; }
-  void setLetExprSubstitution(bool val) { m_letexprsubstitution = val; }
+  void setParametersSubstitution(bool val) { m_parameterSubstitution = val; }
+  void setLetExprSubstitution(bool val) { m_letExprSubstitution = val; }
   bool pythonListener() const { return m_pythonListener && m_pythonAllowed; }
   bool pythonAllowed() const { return m_pythonAllowed; }
   void noPython() { m_pythonAllowed = false; }
@@ -200,16 +198,11 @@ class CommandLineParser final {
   PathId pythonEvalScriptId() const { return m_pythonEvalScriptId; }
   PathId pythonListenerId() const { return m_pythonListenerFileId; }
 
-  // There are some places that modify the command-line symbol table.
-  SymbolTable* getSymbolTable() { return m_symbolTable; }
-  const SymbolTable* getSymbolTable() const { return m_symbolTable; }
-
   /* Internal */
-  ErrorContainer* getErrorContainer() const { return m_errors; }
-  uint16_t getNbMaxTreads() const { return m_nbMaxTreads; }
-  uint16_t getNbMaxProcesses() const { return m_nbMaxProcesses; }
-  void setNbMaxTreads(uint16_t max) { m_nbMaxTreads = max; }
-  void setNbMaxProcesses(uint16_t max) { m_nbMaxProcesses = max; }
+  uint16_t getNbMaxTreads() const { return m_maxTreads; }
+  uint16_t getNbMaxProcesses() const { return m_maxProcesses; }
+  void setNbMaxTreads(uint16_t max) { m_maxTreads = max; }
+  void setNbMaxProcesses(uint16_t max) { m_maxProcesses = max; }
   uint32_t getNbLinesForFileSpliting() const {
     return m_nbLinesForFileSplitting;
   }
@@ -268,6 +261,7 @@ class CommandLineParser final {
   bool prepareCompilation_(int32_t argc, const char** argv);
   bool setupCache_();
 
+  Session* const m_session = nullptr;
   PathIdVector m_workingDirs;
   PathIdVector m_libraryPaths;  // -y
   PathIdVector m_sourceFiles;   // .v .sv
@@ -289,15 +283,13 @@ class CommandLineParser final {
   bool m_writePpOutput;
   bool m_filterFileLine;
   int32_t m_debugLevel;
-  ErrorContainer* m_errors = nullptr;
-  SymbolTable* m_symbolTable = nullptr;
   PathId m_logFileId;
   SymbolId m_logFileNameId;
   bool m_lineOffsetsAsComments;
-  bool m_liborder;
-  bool m_librescan;
-  bool m_libverbose;
-  bool m_nolibcell;
+  bool m_libOrder;
+  bool m_libRescan;
+  bool m_libVerbose;
+  bool m_noLibCell;
   bool m_muteStdout;
   bool m_verbose;
   bool m_fileUnit;
@@ -308,8 +300,8 @@ class CommandLineParser final {
   bool m_parseOnly;
   bool m_compile;
   bool m_elaborate;
-  bool m_parametersubstitution;
-  bool m_letexprsubstitution;
+  bool m_parameterSubstitution;
+  bool m_letExprSubstitution;
   bool m_diffCompMode;
   bool m_help;
   bool m_cacheAllowed;
@@ -317,8 +309,8 @@ class CommandLineParser final {
   bool m_precompiledCacheAllowed;
   bool m_debugCache;
   bool m_debugFSConfig;
-  uint16_t m_nbMaxTreads;
-  uint16_t m_nbMaxProcesses;
+  uint16_t m_maxTreads;
+  uint16_t m_maxProcesses;
   PathId m_compileUnitDirId;
   PathId m_compileAllDirId;
   PathId m_outputDirId;

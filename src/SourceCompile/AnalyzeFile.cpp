@@ -23,6 +23,7 @@
 
 #include <Surelog/CommandLine/CommandLineParser.h>
 #include <Surelog/Common/FileSystem.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/Design.h>
 #include <Surelog/ErrorReporting/ErrorContainer.h>
 #include <Surelog/SourceCompile/AnalyzeFile.h>
@@ -35,6 +36,9 @@
 namespace SURELOG {
 void AnalyzeFile::checkSLlineDirective_(std::string_view line,
                                         uint32_t lineNb) {
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+
   std::stringstream ss(
       (std::string(line))); /* Storing the whole string into string stream */
   std::string keyword;
@@ -50,9 +54,8 @@ void AnalyzeFile::checkSLlineDirective_(std::string_view line,
     StringUtils::tokenize(text, "^", parts);
     std::string_view symbol = StringUtils::unquoted(parts[0]);
     std::string_view file = StringUtils::unquoted(parts[1]);
-    info.m_sectionSymbolId = m_clp->getSymbolTable()->registerSymbol(symbol);
-    info.m_sectionFileId =
-        FileSystem::getInstance()->toPathId(file, m_clp->getSymbolTable());
+    info.m_sectionSymbolId = symbols->registerSymbol(symbol);
+    info.m_sectionFileId = fileSystem->toPathId(file, symbols);
     uint32_t action = 0;
     ss >> action;
 
@@ -79,14 +82,16 @@ void AnalyzeFile::checkSLlineDirective_(std::string_view line,
 }
 
 std::string AnalyzeFile::setSLlineDirective_(uint32_t lineNb) {
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+
   std::ostringstream result;
   if (!m_includeFileInfo.empty()) {
-    FileSystem* const fileSystem = FileSystem::getInstance();
     const IncludeFileInfo& info = m_includeFileInfo.top();
     uint32_t origFromLine =
         lineNb - info.m_originalStartLine + info.m_sectionStartLine;
     result << "SLline " << origFromLine << " "
-           << m_clp->getSymbolTable()->getSymbol(info.m_sectionSymbolId) << "^"
+           << symbols->getSymbol(info.m_sectionSymbolId) << "^"
            << fileSystem->toPath(m_includeFileInfo.top().m_sectionFileId)
            << " 1" << std::endl;
   } else {
@@ -96,9 +101,10 @@ std::string AnalyzeFile::setSLlineDirective_(uint32_t lineNb) {
 }
 
 void AnalyzeFile::analyze() {
-  FileSystem* const fileSystem = FileSystem::getInstance();
-  SymbolTable* const symbolTable = m_clp->getSymbolTable();
-  ErrorContainer* const errors = m_clp->getErrorContainer();
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  ErrorContainer* const errors = m_session->getErrorContainer();
+  CommandLineParser* const clp = m_session->getCommandLineParser();
 
   std::vector<std::string> allLines;
   allLines.emplace_back("FILLER LINE");
@@ -117,7 +123,7 @@ void AnalyzeFile::analyze() {
   }
   if (allLines.empty()) return;
 
-  uint32_t minNbLineForPartitioning = m_clp->getNbLinesForFileSpliting();
+  uint32_t minNbLineForPartitioning = clp->getNbLinesForFileSpliting();
   std::vector<FileChunk> fileChunks;
   bool inPackage = false;
   int32_t inClass = 0;
@@ -378,7 +384,7 @@ void AnalyzeFile::analyze() {
 
   uint32_t lineSize = lineNb;
 
-  if (m_clp->getNbMaxProcesses() || (lineSize < minNbLineForPartitioning) ||
+  if (clp->getNbMaxProcesses() || (lineSize < minNbLineForPartitioning) ||
       (m_nbChunks < 2)) {
     m_splitFiles.emplace_back(m_ppFileId);
     m_lineOffsets.push_back(0);
@@ -545,7 +551,7 @@ void AnalyzeFile::analyze() {
           StrAppend(&content, "  ", fileLevelImportSection);
 
           const PathId splitFileId =
-              fileSystem->getChunkFile(m_ppFileId, chunkNb, symbolTable);
+              fileSystem->getChunkFile(m_ppFileId, chunkNb, symbols);
           fileSystem->writeContent(splitFileId, content);
           m_splitFiles.emplace_back(splitFileId);
 
@@ -605,7 +611,7 @@ void AnalyzeFile::analyze() {
         }
 
         PathId splitFileId =
-            fileSystem->getChunkFile(m_ppFileId, chunkNb, symbolTable);
+            fileSystem->getChunkFile(m_ppFileId, chunkNb, symbols);
         fileSystem->writeContent(splitFileId, content);
         m_splitFiles.emplace_back(splitFileId);
 
@@ -671,7 +677,7 @@ void AnalyzeFile::analyze() {
       }
 
       PathId splitFileId =
-          fileSystem->getChunkFile(m_ppFileId, chunkNb, symbolTable);
+          fileSystem->getChunkFile(m_ppFileId, chunkNb, symbols);
       fileSystem->writeContent(splitFileId, content);
       m_splitFiles.emplace_back(splitFileId);
 

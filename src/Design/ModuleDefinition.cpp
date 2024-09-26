@@ -36,16 +36,12 @@ VObjectType ModuleDefinition::getType() const {
                                   : m_fileContents[0]->Type(m_nodeIds[0]);
 }
 
-ModuleDefinition::ModuleDefinition(std::string_view name, const FileContent* fC,
-                                   NodeId nodeId, UHDM::Serializer& serializer)
-    : DesignComponent(fC, nullptr), m_name(name), m_unelabModule(nullptr) {
+ModuleDefinition::ModuleDefinition(Session* session, std::string_view name,
+                                   const FileContent* fC, NodeId nodeId,
+                                   UHDM::Serializer& serializer)
+    : DesignComponent(session, fC, nullptr), m_name(name), m_udpDefn(nullptr) {
   addFileContent(fC, nodeId);
   m_unelabModule = this;
-  // if (!name.empty()) {  // avoid loop
-  //   m_unelabModule = new ModuleDefinition(fileContent, nodeId, "");
-  //   m_unelabModule->m_name = name;
-  // }
-
   switch (fC->Type(nodeId)) {
     // case VObjectType::paConfig_declaration:
     case VObjectType::paUdp_declaration: {

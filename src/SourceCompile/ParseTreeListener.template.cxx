@@ -24,6 +24,7 @@
  */
 
 #include <Surelog/Common/FileSystem.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/VObject.h>
 #include <Surelog/SourceCompile/ParseTreeListener.h>
 #include <Surelog/SourceCompile/SymbolTable.h>
@@ -81,7 +82,7 @@ ParseTreeNode ParseTreeListener::getRootNode() const {
 bool ParseTreeListener::getNodeText(const ParseTreeNode& node,
                                     std::string& text) const {
   if (node && node.m_object->m_name) {
-    text = m_symbolTable->getSymbol(node.m_object->m_name);
+    text = m_session->getSymbolTable()->getSymbol(node.m_object->m_name);
     return true;
   }
   return false;
@@ -216,10 +217,9 @@ bool ParseTreeListener::getNodeSiblings(
 }
 
 void ParseTreeListener::listen(PathId fileId, const VObject* objects,
-                               size_t count, const SymbolTable* symbolTable) {
+                               size_t count) {
   m_objects = objects;
   m_count = count;
-  m_symbolTable = symbolTable;
 
   enterSourceFile(fileId);
   listen(getRootNode());
@@ -272,9 +272,9 @@ void ParseTreeListener::listenSiblings(const ParseTreeNode& node,
 
 // clang-format off
 <PRIVATE_LISTEN_IMPLEMENTATIONS>
-// clang-format on
+    // clang-format on
 
-void ParseTreeListener::listen(const ParseTreeNode& node) {
+    void ParseTreeListener::listen(const ParseTreeNode& node) {
   if (!m_visited.insert(node).second) {
     return;
   }

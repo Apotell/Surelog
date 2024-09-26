@@ -38,14 +38,15 @@ namespace SURELOG {
 class CompileProgram;
 class FileContent;
 class Library;
+class Session;
 
 class Program : public DesignComponent, public ClockingBlockHolder {
   SURELOG_IMPLEMENT_RTTI(Program, DesignComponent)
   friend class CompileProgram;
 
  public:
-  Program(std::string_view name, Library* library, FileContent* fC,
-          NodeId nodeId, UHDM::Serializer& serializer);
+  Program(Session* session, std::string_view name, Library* library,
+          FileContent* fC, NodeId nodeId, UHDM::Serializer& serializer);
   ~Program() override = default;
 
   uint32_t getSize() const override;

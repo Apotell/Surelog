@@ -36,6 +36,7 @@ namespace SURELOG {
 
 class ErrorContainer;
 class FileContent;
+class Session;
 class SymbolTable;
 class VObject;
 
@@ -51,7 +52,7 @@ class Cache {
   static constexpr uint64_t Capacity = 0x000000000FFFFFFF;
 
  protected:
-  Cache() = default;
+  explicit Cache(Session* session);
 
   std::string_view getExecutableTimeStamp() const;
 
@@ -94,6 +95,9 @@ class Cache {
   void restoreSymbols(
       SymbolTable& targetSymbols,
       const ::capnp::List<::capnp::Text>::Reader& sourceSymbols);
+
+ protected:
+  Session* const m_session = nullptr;
 
  private:
   Cache(const Cache& orig) = delete;

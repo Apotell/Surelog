@@ -29,9 +29,9 @@
 
 // UHDM
 #include <uhdm/containers.h>
+#include <uhdm/Serializer.h>
 #include <uhdm/sv_vpi_user.h>
 #include <uhdm/uhdm_forward_decl.h>
-
 #include <mutex>
 
 namespace UHDM {
@@ -39,17 +39,17 @@ class Serializer;
 }
 
 namespace SURELOG {
-
 class Compiler;
+class Session;
 class SymbolTable;
 class ValuedComponentI;
 
-void decompile(ValuedComponentI* instance);
+void decompile(Session* session, ValuedComponentI* instance);
 
 class CompileDesign {
  public:
   // Note: takes owernship of compiler
-  explicit CompileDesign(Compiler* compiler);
+  CompileDesign(Session* session, Compiler* compiler);
   virtual ~CompileDesign();  // Used in MockCompileDesign
 
   bool compile();
@@ -57,11 +57,13 @@ class CompileDesign {
   void purgeParsers();
   bool writeUHDM(PathId fileId);
 
+  Session* getSession() { return m_session; }
+  const Session* getSession() const { return m_session; }
+
+  Compiler* getCompiler() const { return m_compiler; }
   UHDM::Serializer& getSerializer();
   void lockSerializer();
   void unlockSerializer();
-
-  Compiler* getCompiler() const { return m_compiler; }
   UHDM::VectorOfsource_file* getUhdmSourceFiles() { return m_uhdmSourcefiles; }
   std::map<const UHDM::typespec*, const UHDM::typespec*>& getSwapedObjects() {
     return m_typespecSwapMap;
@@ -78,9 +80,9 @@ class CompileDesign {
   bool compilation_();
   bool elaboration_();
 
+  Session* const m_session = nullptr;
   Compiler* const m_compiler;
-  std::vector<SymbolTable*> m_symbolTables;
-  std::vector<ErrorContainer*> m_errorContainers;
+  std::vector<Session*> m_sessions;
   UHDM::VectorOfsource_file* m_uhdmSourcefiles = nullptr;
   std::map<const UHDM::typespec*, const UHDM::typespec*> m_typespecSwapMap;
 };

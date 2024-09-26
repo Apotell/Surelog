@@ -497,7 +497,7 @@ bool ErrorDefinition::init() {
   rec(UHDM_FAILED_TO_BIND, ERROR, UHDM, "Failed to bind object: \"%s\"");
 
   rec(INTEGRITY_CHECK_MISSING_LOCATION, ERROR, INTG,
-      "Object %s has invalid location information");
+      "Object %s is missing location information");
   rec(INTEGRITY_CHECK_MISSING_PARENT, ERROR, INTG,
       "Object %s parent cannot be null");
   rec(INTEGRITY_CHECK_MISSING_NAME, ERROR, INTG,
@@ -508,12 +508,13 @@ bool ErrorDefinition::init() {
       "Object %s should be parented to either a scope or design");
   rec(INTEGRITY_CHECK_OBJECT_NOT_IN_PARENT_COLLECTION, ERROR, INTG,
       "Object %s not found in parent (scope|design)'s collection");
-  rec(INTEGRITY_CHECK_CHILD_NOT_ENTIRELY_IN_PARENT_BOUNDARY, ERROR, INTG,
-      "Child %s is not entirely in parent's scope");
+  rec(INTEGRITY_CHECK_BAD_RELATIVE_LOCATION, ERROR, INTG,
+      "Bad relative location, %s");
   rec(INTEGRITY_CHECK_COLLECTION_HAS_DUPLICATES, ERROR, INTG,
       "Object %s has duplicates");
-  rec(INTEGRITY_CHECK_ACTUAL_CANNOT_BE_NULL, ERROR, INTG,
+  rec(INTEGRITY_CHECK_NULL_ACTUAL, ERROR, INTG,
       "Object %s actual cannot be null");
+  rec(INTEGRITY_CHECK_INVALID_LOCATION, ERROR, INTG, "Invalid location %s");
   return true;
 }
 

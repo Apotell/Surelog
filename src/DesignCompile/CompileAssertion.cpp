@@ -448,14 +448,19 @@ UHDM::property_decl* CompileHelper::compilePropertyDeclaration(
   if (fC->Type(Property_spec) == VObjectType::paProperty_port_list) {
     NodeId Property_port_item = fC->Child(Property_spec);
     UHDM::VectorOfprop_formal_decl* ports = result->Prop_formal_decls(true);
+    UHDM::typespec* tps = nullptr;
+    NodeId last_Data_type;
     while (Property_port_item) {
       NodeId Property_formal_type = fC->Child(Property_port_item);
       NodeId SeqFormatType_Data = fC->Child(Property_formal_type);
       NodeId Data_type_or_implicit = fC->Child(SeqFormatType_Data);
       NodeId Data_type = fC->Child(Data_type_or_implicit);
-      UHDM::typespec* tps =
-          compileTypespec(component, fC, Data_type, compileDesign, Reduce::No,
-                          pstmt, instance, false);
+      if (Data_type) {
+        tps = compileTypespec(component, fC, Data_type, compileDesign,
+                              Reduce::No, pstmt, instance, false);
+      } else {
+        Data_type = last_Data_type;
+      }
 
       NodeId Port_name = fC->Sibling(Property_formal_type);
       UHDM::prop_formal_decl* prop_port_decl = s.MakeProp_formal_decl();
@@ -463,13 +468,16 @@ UHDM::property_decl* CompileHelper::compilePropertyDeclaration(
       fC->populateCoreMembers(Port_name, Port_name, prop_port_decl);
       ports->push_back(prop_port_decl);
       prop_port_decl->VpiName(fC->SymName(Port_name));
-      UHDM::ref_typespec* rtps = s.MakeRef_typespec();
-      rtps->Actual_typespec(tps);
-      rtps->VpiName(fC->SymName(Port_name));
-      prop_port_decl->Typespec(rtps);
-      rtps->VpiParent(prop_port_decl);
-      fC->populateCoreMembers(Port_name, Port_name, rtps);
+      if (tps != nullptr) {
+        UHDM::ref_typespec* rtps = s.MakeRef_typespec();
+        rtps->Actual_typespec(tps);
+        rtps->VpiName(fC->SymName(Port_name));
+        prop_port_decl->Typespec(rtps);
+        rtps->VpiParent(prop_port_decl);
+        fC->populateCoreMembers(Data_type, Data_type, rtps);
+      }
       Property_port_item = fC->Sibling(Property_port_item);
+      last_Data_type = Data_type;
     }
     Property_spec = fC->Sibling(Property_spec);
   }

@@ -70,12 +70,12 @@ class UhdmWriter final {
   static std::string builtinGateName(VObjectType type);
 
  private:
-  void writePorts(std::vector<Signal*>& orig_ports, UHDM::BaseClass* parent,
-                  UHDM::Serializer& s, ModPortMap& modPortMap,
-                  SignalBaseClassMap& signalBaseMap, SignalMap& signalMap,
-                  ModuleInstance* instance = nullptr,
+  void writePorts(const std::vector<Signal*>& orig_ports,
+                  UHDM::BaseClass* parent, UHDM::Serializer& s,
+                  ModPortMap& modPortMap, SignalBaseClassMap& signalBaseMap,
+                  SignalMap& signalMap, ModuleInstance* instance = nullptr,
                   DesignComponent* mod = nullptr);
-  void writeNets(DesignComponent* mod, std::vector<Signal*>& orig_nets,
+  void writeNets(DesignComponent* mod, const std::vector<Signal*>& orig_nets,
                  UHDM::BaseClass* parent, UHDM::Serializer& s,
                  SignalBaseClassMap& signalBaseMap, SignalMap& signalMap,
                  SignalMap& portMap, ModuleInstance* instance = nullptr);

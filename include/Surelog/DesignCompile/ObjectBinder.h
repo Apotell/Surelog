@@ -95,7 +95,11 @@ class ObjectBinder final : protected UHDM::UhdmListener {
   void enterClass_defn(const UHDM::class_defn* const object) final;
 
  private:
-  std::string_view suffixName(std::string_view varg) const;
+  bool areSimilarNames(std::string_view name1, std::string_view name2) const;
+  bool areSimilarNames(const UHDM::any* const object1,
+                       std::string_view name2) const;
+  bool areSimilarNames(const UHDM::any* const object1,
+                       const UHDM::any* const object2) const;
   static bool isInElaboratedTree(const UHDM::any* const object);
 
   VObjectType getDefaultNetType(const ValuedComponentI* component) const;
@@ -103,6 +107,11 @@ class ObjectBinder final : protected UHDM::UhdmListener {
 
   const UHDM::package* getPackage(std::string_view name) const;
   const UHDM::module_inst* getModuleInst(std::string_view defname) const;
+  const UHDM::interface_inst* getInterfaceInst(std::string_view defname) const;
+
+  const UHDM::class_defn* getClass_defn(
+      const UHDM::VectorOfclass_defn* const collection,
+      std::string_view name) const;
   const UHDM::class_defn* getClass_defn(std::string_view name) const;
 
   const UHDM::any* findInTypespec(std::string_view name,
@@ -116,38 +125,52 @@ class ObjectBinder final : protected UHDM::UhdmListener {
                                      const UHDM::any* const object,
                                      const std::vector<T*>* const collection,
                                      const UHDM::any* const scope);
-  const UHDM::any* findInScope(const UHDM::any* const object,
+  const UHDM::any* findInScope(std::string_view name,
+                               const UHDM::any* const object,
                                const UHDM::scope* const scope);
-  const UHDM::any* findInInstance(const UHDM::any* const object,
+  const UHDM::any* findInInstance(std::string_view name,
+                                  const UHDM::any* const object,
                                   const UHDM::instance* const scope);
   const UHDM::any* findInInterface_inst(
-      const UHDM::any* const object, const UHDM::interface_inst* const scope);
-  const UHDM::any* findInPackage(const UHDM::any* const object,
+      std::string_view name, const UHDM::any* const object,
+      const UHDM::interface_inst* const scope);
+  const UHDM::any* findInPackage(std::string_view name,
+                                 const UHDM::any* const object,
                                  const UHDM::package* const scope);
-  const UHDM::any* findInUdp_defn(const UHDM::any* const object,
+  const UHDM::any* findInUdp_defn(std::string_view name,
+                                  const UHDM::any* const object,
                                   const UHDM::udp_defn* const scope);
-  const UHDM::any* findInProgram(const UHDM::any* const object,
+  const UHDM::any* findInProgram(std::string_view name,
+                                 const UHDM::any* const object,
                                  const UHDM::program* const scope);
-  const UHDM::any* findInFunction(const UHDM::any* const object,
+  const UHDM::any* findInFunction(std::string_view name,
+                                  const UHDM::any* const object,
                                   const UHDM::function* const scope);
-  const UHDM::any* findInTask(const UHDM::any* const object,
+  const UHDM::any* findInTask(std::string_view name,
+                              const UHDM::any* const object,
                               const UHDM::task* const scope);
-  const UHDM::any* findInFor_stmt(const UHDM::any* const object,
+  const UHDM::any* findInFor_stmt(std::string_view name,
+                                  const UHDM::any* const object,
                                   const UHDM::for_stmt* const scope);
-  const UHDM::any* findInForeach_stmt(const UHDM::any* const object,
+  const UHDM::any* findInForeach_stmt(std::string_view name,
+                                      const UHDM::any* const object,
                                       const UHDM::foreach_stmt* const scope);
   template <typename T>
   const UHDM::any* findInScope_sub(
-      const UHDM::any* const object, const T* const scope,
+      std::string_view name, const UHDM::any* const object,
+      const T* const scope,
       typename std::enable_if<
           std::is_same<UHDM::begin, typename std::decay<T>::type>::value ||
           std::is_same<UHDM::fork_stmt,
                        typename std::decay<T>::type>::value>::type* = 0);
-  const UHDM::any* findInClass_defn(const UHDM::any* const object,
+  const UHDM::any* findInClass_defn(std::string_view name,
+                                    const UHDM::any* const object,
                                     const UHDM::class_defn* const scope);
-  const UHDM::any* findInModule_inst(const UHDM::any* const object,
+  const UHDM::any* findInModule_inst(std::string_view name,
+                                     const UHDM::any* const object,
                                      const UHDM::module_inst* const scope);
-  const UHDM::any* findInDesign(const UHDM::any* const object,
+  const UHDM::any* findInDesign(std::string_view name,
+                                const UHDM::any* const object,
                                 const UHDM::design* const scope);
 
   const UHDM::any* bindObject(const UHDM::any* const object);

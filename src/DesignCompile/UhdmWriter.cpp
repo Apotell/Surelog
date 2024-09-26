@@ -592,8 +592,9 @@ uint32_t UhdmWriter::getVpiNetType(VObjectType type) {
   return nettype;
 }
 
-void UhdmWriter::writePorts(std::vector<Signal*>& orig_ports, BaseClass* parent,
-                            Serializer& s, ModPortMap& modPortMap,
+void UhdmWriter::writePorts(const std::vector<Signal*>& orig_ports,
+                            BaseClass* parent, Serializer& s,
+                            ModPortMap& modPortMap,
                             SignalBaseClassMap& signalBaseMap,
                             SignalMap& signalMap, ModuleInstance* instance,
                             DesignComponent* mod) {
@@ -618,7 +619,7 @@ void UhdmWriter::writePorts(std::vector<Signal*>& orig_ports, BaseClass* parent,
           UhdmWriter::getVpiDirection(orig_port->getDirection());
     dest_port->VpiDirection(lastPortDirection);
     if (const FileContent* const fC = orig_port->getFileContent()) {
-      fC->populateCoreMembers(orig_port->getNodeId(), orig_port->getNameId(),
+      fC->populateCoreMembers(orig_port->getNameId(), orig_port->getNameId(),
                               dest_port);
     }
     dest_port->VpiParent(parent);
@@ -692,10 +693,10 @@ void UhdmWriter::writePorts(std::vector<Signal*>& orig_ports, BaseClass* parent,
           }
           if (dest_port->Typespec() == nullptr) {
             ref_typespec* dest_port_rt = s.MakeRef_typespec();
+            dest_port_rt->VpiName(fC->SymName(orig_port->getTypespecId()));
             dest_port_rt->VpiParent(dest_port);
-            fC->populateCoreMembers(
-                nameId, packedDimensions ? packedDimensions : nameId,
-                dest_port_rt);
+            fC->populateCoreMembers(orig_port->getTypespecId(),
+                                    orig_port->getTypespecId(), dest_port_rt);
             dest_port->Typespec(dest_port_rt);
           }
           dest_port->Typespec()->Actual_typespec(array_ts);
@@ -707,8 +708,8 @@ void UhdmWriter::writePorts(std::vector<Signal*>& orig_ports, BaseClass* parent,
               ref_typespec* array_ts_rt = s.MakeRef_typespec();
               array_ts_rt->VpiParent(array_ts);
               fC->populateCoreMembers(
-                  nameId, packedDimensions ? packedDimensions : nameId,
-                  array_ts_rt);
+                  orig_port->getTypespecId(),
+                  packedDimensions ? packedDimensions : nameId, array_ts_rt);
               array_ts_rt->VpiName(ts->VpiName());
               array_ts->Elem_typespec(array_ts_rt);
             }
@@ -772,8 +773,9 @@ void UhdmWriter::writeDataTypes(const DesignComponent::DataTypeMap& datatypeMap,
 }
 
 void UhdmWriter::writeNets(DesignComponent* mod,
-                           std::vector<Signal*>& orig_nets, BaseClass* parent,
-                           Serializer& s, SignalBaseClassMap& signalBaseMap,
+                           const std::vector<Signal*>& orig_nets,
+                           BaseClass* parent, Serializer& s,
+                           SignalBaseClassMap& signalBaseMap,
                            SignalMap& signalMap, SignalMap& portMap,
                            ModuleInstance* instance /* = nullptr */) {
   for (auto& orig_net : orig_nets) {
@@ -859,7 +861,7 @@ void UhdmWriter::writeNets(DesignComponent* mod,
   }
 }
 
-void mapLowConns(std::vector<Signal*>& orig_ports, Serializer& s,
+void mapLowConns(const std::vector<Signal*>& orig_ports, Serializer& s,
                  UhdmWriter::SignalBaseClassMap& signalBaseMap) {
   for (Signal* orig_port : orig_ports) {
     if (Signal* lowconn = orig_port->getLowConn()) {
@@ -1159,7 +1161,7 @@ void UhdmWriter::writePackage(Package* pack, package* p, Serializer& s,
   SignalBaseClassMap signalBaseMap;
   SignalMap portMap;
   SignalMap netMap;
-  std::vector<Signal*> orig_nets = pack->getSignals();
+  const std::vector<Signal*>& orig_nets = pack->getSignals();
   writeNets(pack, orig_nets, p, s, signalBaseMap, netMap, portMap, nullptr);
 }
 
@@ -1197,7 +1199,7 @@ void UhdmWriter::writeModule(ModuleDefinition* mod, module_inst* m,
   }
 
   // Ports
-  std::vector<Signal*>& orig_ports = mod->getPorts();
+  const std::vector<Signal*>& orig_ports = mod->getPorts();
   writePorts(orig_ports, m, s, modPortMap, signalBaseMap, portMap, instance,
              mod);
   // Nets
@@ -1205,13 +1207,6 @@ void UhdmWriter::writeModule(ModuleDefinition* mod, module_inst* m,
   // Classes
   ClassNameClassDefinitionMultiMap& orig_classes = mod->getClassDefinitions();
   writeClasses(orig_classes, s, m);
-
-  // Cont assigns
-  if (mod->getContAssigns()) {
-    for (auto ps : *m->Cont_assigns()) {
-      ps->VpiParent(m);
-    }
-  }
 
   // Function and tasks
   if ((m_helper.getElaborate() == Elaborate::Yes) && m->Task_funcs()) {
@@ -1351,10 +1346,10 @@ void UhdmWriter::writeInterface(ModuleDefinition* mod, interface_inst* m,
   VectorOftypespec* typespecs = m->Typespecs(true);
   writeDataTypes(mod->getDataTypeMap(), m, typespecs, s, true);
   // Ports
-  std::vector<Signal*>& orig_ports = mod->getPorts();
+  const std::vector<Signal*>& orig_ports = mod->getPorts();
   writePorts(orig_ports, m, s, modPortMap, signalBaseMap, portMap, instance,
              mod);
-  std::vector<Signal*> orig_nets = mod->getSignals();
+  const std::vector<Signal*>& orig_nets = mod->getSignals();
   writeNets(mod, orig_nets, m, s, signalBaseMap, netMap, portMap, instance);
 
   // Modports
@@ -1452,12 +1447,12 @@ void UhdmWriter::writeProgram(Program* mod, program* m, Serializer& s,
   writeDataTypes(mod->getDataTypeMap(), m, typespecs, s, true);
 
   // Ports
-  std::vector<Signal*>& orig_ports = mod->getPorts();
+  const std::vector<Signal*>& orig_ports = mod->getPorts();
   writePorts(orig_ports, m, s, modPortMap, signalBaseMap, portMap, instance,
              mod);
 
   // Nets
-  std::vector<Signal*>& orig_nets = mod->getSignals();
+  const std::vector<Signal*>& orig_nets = mod->getSignals();
   writeNets(mod, orig_nets, m, s, signalBaseMap, netMap, portMap, instance);
   mapLowConns(orig_ports, s, signalBaseMap);
 
@@ -3157,7 +3152,6 @@ bool UhdmWriter::write(PathId uhdmFileId) {
       if (mod->getFileContents().empty()) {
         // Built-in primitive
       } else if (mod->getType() == VObjectType::paModule_declaration) {
-        const FileContent* fC = mod->getFileContents()[0];
         module_inst* m = mod->getUhdmModel<module_inst>();
         if (m_compileDesign->getCompiler()->isLibraryFile(
                 mod->getFileContents()[0]->getFileId())) {
@@ -3188,10 +3182,6 @@ bool UhdmWriter::write(PathId uhdmFileId) {
             a->VpiParent(m);
           }
         }
-        const NodeId modId = mod->getNodeIds()[0];
-        const NodeId startId =
-            fC->sl_collect(modId, VObjectType::paModule_keyword);
-        fC->populateCoreMembers(startId, modId, m);
         writeModule(mod->getUnelabMmodule(), m, s, moduleMap, modPortMap);
       } else if (mod->getType() == VObjectType::paUdp_declaration) {
         const FileContent* fC = mod->getFileContents()[0];
@@ -3327,9 +3317,11 @@ bool UhdmWriter::write(PathId uhdmFileId) {
 
   // ----------------------------------
   // Lint only the elaborated model
-  if (UhdmLint* linter = new UhdmLint(&s, d)) {
-    linter->listenDesigns(designs);
-    delete linter;
+  if (m_compileDesign->getCompiler()->getCommandLineParser()->getElabUhdm()) {
+    if (UhdmLint* linter = new UhdmLint(&s, d)) {
+      linter->listenDesigns(designs);
+      delete linter;
+    }
   }
 
   if (m_compileDesign->getCompiler()->getCommandLineParser()->getElabUhdm() &&

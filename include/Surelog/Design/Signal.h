@@ -54,9 +54,16 @@ class Signal final {
   VObjectType getType() const { return m_type; }
   VObjectType getDirection() const { return m_direction; }
   const FileContent* getFileContent() const { return m_fileContent; }
+
   NodeId getNodeId() const { return m_nodeId; }
   NodeId getNameId() const { return m_nameId; }
   std::string_view getName() const;
+
+  NodeId getNetNodeId() const { return m_netNodeId; }
+  NodeId getNetNameId() const { return m_netNameId; }
+  void setNetNodeId(NodeId nodeId) { m_netNodeId = nodeId; }
+  void setNetNameId(NodeId nameId) { m_netNameId = nameId; }
+
   std::string getInterfaceTypeName() const;
 
   ModuleDefinition* getInterfaceDef() { return m_interfaceDef; }
@@ -113,10 +120,14 @@ class Signal final {
   void uhdmScopeModel(UHDM::any* scopeModel) { m_uhdmScopeModel = scopeModel; }
 
  private:
+  static int32_t s_instId;
+  const int32_t d_instId = 0;
   DesignComponent* const m_component = nullptr;
   const FileContent* const m_fileContent = nullptr;
   const NodeId m_nodeId;
   const NodeId m_nameId;
+  NodeId m_netNodeId;
+  NodeId m_netNameId;
   NodeId m_interfaceTypeNameId;
   NodeId m_packedDimension;
   NodeId m_typespecId;

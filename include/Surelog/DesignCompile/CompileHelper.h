@@ -206,8 +206,8 @@ class CompileHelper final {
                                    ValuedComponentI* m_instance,
                                    bool port_param, bool muteErrors);
 
-  NodeId setFuncTaskQualifiers(const FileContent* fC, NodeId nodeId,
-                               UHDM::task_func* func);
+  template <typename T>
+  NodeId setFuncTaskQualifiers(const FileContent* fC, NodeId nodeId, T* func);
 
   bool compileTask(DesignComponent* component, const FileContent* fC,
                    NodeId nodeId, CompileDesign* compileDesign, Reduce reduce,
@@ -222,15 +222,15 @@ class CompileHelper final {
                             NodeId nodeId, CompileDesign* compileDesign);
 
   std::vector<UHDM::io_decl*>* compileTfPortList(DesignComponent* scope,
-                                                 UHDM::task_func* parent,
+                                                 UHDM::any* parent,
                                                  const FileContent* fC,
                                                  NodeId id,
                                                  CompileDesign* compileDesign);
 
+  template <typename T>
   std::pair<std::vector<UHDM::io_decl*>*, std::vector<UHDM::variables*>*>
-  compileTfPortDecl(DesignComponent* scope, UHDM::task_func* parent,
-                    const FileContent* fC, NodeId id,
-                    CompileDesign* compileDesign);
+  compileTfPortDecl(DesignComponent* scope, T* parent, const FileContent* fC,
+                    NodeId id, CompileDesign* compileDesign);
 
   UHDM::atomic_stmt* compileCaseStmt(DesignComponent* component,
                                      const FileContent* fC, NodeId nodeId,
@@ -669,11 +669,7 @@ class CompileHelper final {
                                        uint16_t column, uint32_t eline,
                                        uint16_t ecolumn);
   UHDM::typespec_member* buildTypespecMember(CompileDesign* compileDesign,
-                                             PathId fileId,
-                                             std::string_view name,
-                                             std::string_view value,
-                                             uint32_t line, uint16_t column,
-                                             uint32_t eline, uint16_t ecolumn);
+                                             const FileContent* fC, NodeId id);
   std::unordered_map<std::string, UHDM::int_typespec*> m_cache_int_typespec;
   std::unordered_map<std::string, UHDM::typespec_member*>
       m_cache_typespec_member;

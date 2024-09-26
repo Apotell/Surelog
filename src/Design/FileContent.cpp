@@ -27,6 +27,7 @@
 #include <Surelog/ErrorReporting/ErrorContainer.h>
 #include <Surelog/Library/Library.h>
 #include <Surelog/SourceCompile/SymbolTable.h>
+#include <Surelog/SourceCompile/VObjectTypes.h>
 #include <Surelog/Utils/StringUtils.h>
 
 #include <iostream>
@@ -672,6 +673,18 @@ void FileContent::populateCoreMembers(NodeId startIndex, NodeId endIndex,
 
   if (endIndex && ((instance->VpiEndLineNo() == 0) || force)) {
     if (endIndex < m_objects.size()) {
+      // For packed/unpacked dimenion, include all ranges!
+      if (instance->UhdmType() != UHDM::uhdmrange) {
+        NodeId siblingId = endIndex;
+        while (siblingId && ((m_objects[siblingId].m_type ==
+                              VObjectType::paPacked_dimension) ||
+                             (m_objects[siblingId].m_type ==
+                              VObjectType::paUnpacked_dimension))) {
+          endIndex = siblingId;
+          siblingId = m_objects[siblingId].m_sibling;
+        }
+      }
+
       const VObject& object = m_objects[endIndex];
       instance->VpiEndLineNo(object.m_endLine);
       instance->VpiEndColumnNo(object.m_endColumn);
@@ -683,39 +696,40 @@ void FileContent::populateCoreMembers(NodeId startIndex, NodeId endIndex,
     }
   }
 
-  PathId fileId;
-  // Issue #3239: Apparently, it's possible that startIndex.m_fileId
-  // & endIndex.m_fileId are differently (for example, including a file
-  // in the middle of a module declaration).
-  //
-  // if (startIndex && endIndex) {
-  //   const VObject& startObject = m_objects[startIndex];
-  //   const VObject& endObject = m_objects[endIndex];
-  //   if (startObject.m_fileId == endObject.m_fileId) {
-  //     fileId = startObject.m_fileId;
-  //   } else {
-  //     Location loc(m_fileId);
-  //     Error err(ErrorDefinition::COMP_INTERNAL_ERROR_OUT_OF_BOUND, loc);
-  //     m_errors->addError(err);
-  //     std::cerr << "\nFILE INDEX MISMATCH\n\n";
-  //   }
-  // } else
-  if (startIndex) {
-    const VObject& object = m_objects[startIndex];
-    fileId = object.m_fileId;
-  } else if (endIndex) {
-    const VObject& object = m_objects[endIndex];
-    fileId = object.m_fileId;
-  } else {
-    fileId = m_fileId;
-  }
+  if (instance->VpiFile().empty() ||
+      (instance->VpiFile() == SymbolTable::getBadSymbol()) || force) {
+    PathId fileId;
+    // Issue #3239: Apparently, it's possible that startIndex.m_fileId
+    // & endIndex.m_fileId are differently (for example, including a file
+    // in the middle of a module declaration).
+    //
+    // if (startIndex && endIndex) {
+    //   const VObject& startObject = m_objects[startIndex];
+    //   const VObject& endObject = m_objects[endIndex];
+    //   if (startObject.m_fileId == endObject.m_fileId) {
+    //     fileId = startObject.m_fileId;
+    //   } else {
+    //     Location loc(m_fileId);
+    //     Error err(ErrorDefinition::COMP_INTERNAL_ERROR_OUT_OF_BOUND, loc);
+    //     m_errors->addError(err);
+    //     std::cerr << "\nFILE INDEX MISMATCH\n\n";
+    //   }
+    // } else
+    if (startIndex) {
+      const VObject& object = m_objects[startIndex];
+      fileId = object.m_fileId;
+    } else if (endIndex) {
+      const VObject& object = m_objects[endIndex];
+      fileId = object.m_fileId;
+    }
 
-  if (!fileId) {
-    fileId = m_fileId;
-  }
+    if (!fileId) {
+      fileId = m_fileId;
+    }
 
-  if (fileId) {
-    instance->VpiFile(FileSystem::getInstance()->toPath(fileId));
+    if (fileId) {
+      instance->VpiFile(FileSystem::getInstance()->toPath(fileId));
+    }
   }
 }
 }  // namespace SURELOG

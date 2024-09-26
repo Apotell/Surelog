@@ -95,15 +95,7 @@ bool NetlistElaboration::elaboratePackages() {
           notSignals.insert(sig);
         }
       }
-      for (auto sig : notSignals) {
-        for (std::vector<Signal*>::iterator itr = pack->getSignals().begin();
-             itr != pack->getSignals().end(); itr++) {
-          if ((*itr) == sig) {
-            pack->getSignals().erase(itr);
-            break;
-          }
-        }
-      }
+      for (auto sig : notSignals) pack->removeSignal(sig);
       reduce = Reduce::Yes;
     }
   }
@@ -777,7 +769,7 @@ bool NetlistElaboration::high_conn_(ModuleInstance* instance) {
   VObjectType inst_type = fC->Type(Udp_instantiation);
   std::vector<UHDM::port*>* ports = netlist->ports();
   DesignComponent* comp = instance->getDefinition();
-  std::vector<Signal*>* signals = nullptr;
+  const std::vector<Signal*>* signals = nullptr;
   std::string instName = instance->getInstanceName();
   bool instanceArray = false;
   int32_t instanceArrayIndex = 0;
@@ -2454,7 +2446,7 @@ bool NetlistElaboration::elab_ports_nets_(
   TypespecCache tscache;
   std::set<std::string_view> portInterf;
   for (int32_t pass = 0; pass < 3; pass++) {
-    std::vector<Signal*>* signals = nullptr;
+    const std::vector<Signal*>* signals = nullptr;
     if (compType == VObjectType::paModule_declaration ||
         compType == VObjectType::paConditional_generate_construct ||
         compType == VObjectType::paLoop_generate_construct ||

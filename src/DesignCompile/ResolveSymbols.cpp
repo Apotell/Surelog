@@ -79,7 +79,7 @@ void ResolveSymbols::createFastLookup() {
   std::vector<NodeId> objects =
       m_fileData->sl_collect_all(m_fileData->getRootNode(), types, stopPoints);
 
-  for (auto object : objects) {
+  for (auto& object : objects) {
     VObjectType type = m_fileData->Type(object);
     NodeId stId = m_fileData->sl_collect(object, VObjectType::slStringConst,
                                          VObjectType::paAttr_spec);

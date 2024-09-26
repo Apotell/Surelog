@@ -47,9 +47,23 @@ class IntegrityChecker final : protected UHDM::UhdmListener {
   void check(const std::vector<const UHDM::design*>& objects);
 
  private:
-  void enterAny(const UHDM::any* const object) final;
-
   bool isBuiltPackageOnStack(const UHDM::any* const object) const;
+  bool isUVMMember(const UHDM::any* const object) const;
+
+  enum class LineColumnRelation {
+    Before,
+    Inside,
+    After,
+    Inconclusive,
+  };
+
+  LineColumnRelation getLineColumnRelation(uint32_t csl, uint16_t csc,
+                                           uint32_t cel, uint16_t cec) const;
+
+  LineColumnRelation getLineColumnRelation(uint32_t csl, uint16_t csc,
+                                           uint32_t cel, uint16_t cec,
+                                           uint32_t psl, uint16_t psc,
+                                           uint32_t pel, uint16_t pec) const;
 
   template <typename T>
   void reportAmbigiousMembership(const std::vector<T*>* const collection,
@@ -76,6 +90,8 @@ class IntegrityChecker final : protected UHDM::UhdmListener {
   void reportInvalidFile(const UHDM::any* const object) const;
 
   void reportNullActual(const UHDM::any* const object) const;
+
+  void enterAny(const UHDM::any* const object) final;
 
   void enterAlias_stmts(const UHDM::any* const object,
                         const UHDM::VectorOfalias_stmt& objects) final;

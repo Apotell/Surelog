@@ -51,21 +51,25 @@ ModuleDefinition::ModuleDefinition(std::string_view name, const FileContent* fC,
     case VObjectType::paUdp_declaration: {
       UHDM::udp_defn* const instance = serializer.MakeUdp_defn();
       if (!name.empty()) instance->VpiDefName(name);
-      fC->populateCoreMembers(nodeId, nodeId, instance);
+      fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::paPRIMITIVE),
+                              nodeId, instance);
       setUhdmModel(instance);
     } break;
 
     case VObjectType::paInterface_declaration: {
       UHDM::interface_inst* const instance = serializer.MakeInterface_inst();
       if (!name.empty()) instance->VpiName(name);
-      fC->populateCoreMembers(nodeId, nodeId, instance);
+      fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::paINTERFACE),
+                              nodeId, instance);
       setUhdmModel(instance);
     } break;
 
     default: {
       UHDM::module_inst* const instance = serializer.MakeModule_inst();
       if (!name.empty()) instance->VpiName(name);
-      fC->populateCoreMembers(nodeId, nodeId, instance);
+      fC->populateCoreMembers(
+          fC->sl_collect(nodeId, VObjectType::paModule_keyword), nodeId,
+          instance);
       setUhdmModel(instance);
     } break;
   }

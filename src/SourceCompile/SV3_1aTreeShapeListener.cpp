@@ -33,6 +33,7 @@
 #include <Surelog/Utils/ParseUtils.h>
 #include <Surelog/Utils/StringUtils.h>
 
+#include <cctype>
 #include <regex>
 
 namespace SURELOG {
@@ -82,7 +83,7 @@ void SV3_1aTreeShapeListener::enterModule_declaration(
   }
   ident = std::regex_replace(ident, std::regex(EscapeSequence), "");
   addNestedDesignElement(ctx, ident, DesignElement::Module,
-                         VObjectType::paMODULE);
+                         VObjectType::paModule_keyword);
 }
 
 void SV3_1aTreeShapeListener::exitModule_declaration(
@@ -897,11 +898,40 @@ void SV3_1aTreeShapeListener::exitData_type(
     addVObject((antlr4::ParserRuleContext *)ctx->VIRTUAL(),
                VObjectType::paVIRTUAL);
   }
+
+  std::string text;
   if ((ctx->class_scope() != nullptr) || (ctx->package_scope() != nullptr) ||
       (ctx->string_type() != nullptr)) {
-    addVObject(ctx, ctx->getText(), VObjectType::paData_type);
+    text = ctx->getText();
   } else {
+    std::vector<SV3_1aParser::IdentifierContext *> idctxs = ctx->identifier();
+    if (idctxs.size() == 1) {
+      text = idctxs.front()->getText();
+    }
+  }
+
+  if (text.empty()) {
     addVObject(ctx, VObjectType::paData_type);
+  } else {
+    // Remove the packed/unpacked dimensions from the name
+    std::string_view stext = text;
+    std::string_view::size_type npos = stext.find_first_of('#');
+    if (npos == std::string_view::npos) npos = stext.find_first_of('[');
+    if (npos != std::string_view::npos)
+      stext.remove_suffix(stext.length() - npos);
+
+    while (!stext.empty() && std::isblank(stext.back())) stext.remove_suffix(1);
+
+    addVObject(ctx, stext, VObjectType::paData_type);
+  }
+}
+
+void SV3_1aTreeShapeListener::exitInterface_identifier(
+    SV3_1aParser::Interface_identifierContext *ctx) {
+  if (ctx->constant_expression().empty()) {
+    addVObject(ctx, ctx->getText(), VObjectType::paInterface_identifier);
+  } else {
+    addVObject(ctx, VObjectType::paInterface_identifier);
   }
 }
 

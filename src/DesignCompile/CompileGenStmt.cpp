@@ -136,11 +136,13 @@ UHDM::VectorOfany* CompileHelper::compileGenStmt(ModuleDefinition* component,
         genif->VpiStmt(stmt1);
 
         checkForLoops(true);
-        const ScopedScope scopedScope1(stmt1);
-        if (VectorOfany* stmts =
-                compileStmt(component, fC, stmtId, compileDesign, Reduce::No,
-                            stmt1, nullptr, true)) {
-          stmt1->Stmts(stmts);
+        {
+          const ScopedScope scopedScope1(stmt1);
+          if (VectorOfany* stmts =
+                  compileStmt(component, fC, stmtId, compileDesign, Reduce::No,
+                              stmt1, nullptr, true)) {
+            stmt1->Stmts(stmts);
+          }
         }
         checkForLoops(false);
 
@@ -158,11 +160,13 @@ UHDM::VectorOfany* CompileHelper::compileGenStmt(ModuleDefinition* component,
         genif->VpiElseStmt(stmt2);
 
         checkForLoops(true);
-        const ScopedScope scopedScope2(stmt2);
-        if (VectorOfany* stmts =
-                compileStmt(component, fC, elseStmtId, compileDesign,
-                            Reduce::No, stmt2, nullptr, true)) {
-          stmt2->Stmts(stmts);
+        {
+          const ScopedScope scopedScope2(stmt2);
+          if (VectorOfany* stmts =
+                  compileStmt(component, fC, elseStmtId, compileDesign,
+                              Reduce::No, stmt2, nullptr, true)) {
+            stmt2->Stmts(stmts);
+          }
         }
         checkForLoops(false);
 

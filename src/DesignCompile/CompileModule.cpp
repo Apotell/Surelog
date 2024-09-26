@@ -1017,7 +1017,7 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
         }
       }
       if (found == false) {
-        m_module->getSignals().push_back(port);
+        m_module->addSignal(port);
       }
     }
   }
@@ -1523,7 +1523,7 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
         }
       }
       if (found == false) {
-        m_module->getSignals().push_back(port);
+        m_module->addSignal(port);
       }
     }
   }

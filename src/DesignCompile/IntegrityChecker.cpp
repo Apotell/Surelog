@@ -25,46 +25,10 @@
 #include <Surelog/DesignCompile/IntegrityChecker.h>
 #include <Surelog/ErrorReporting/ErrorContainer.h>
 #include <Surelog/SourceCompile/SymbolTable.h>
+#include <Surelog/Utils/StringUtils.h>
 
 // uhdm
-#include <uhdm/array_var.h>
-#include <uhdm/begin.h>
-#include <uhdm/bit_select.h>
-#include <uhdm/chandle_var.h>
-#include <uhdm/checker_decl.h>
-#include <uhdm/checker_inst.h>
-#include <uhdm/class_defn.h>
-#include <uhdm/class_obj.h>
-#include <uhdm/concurrent_assertions.h>
-#include <uhdm/constant.h>
-#include <uhdm/design.h>
-#include <uhdm/function.h>
-#include <uhdm/indexed_part_select.h>
-#include <uhdm/instance.h>
-#include <uhdm/int_typespec.h>
-#include <uhdm/interface_inst.h>
-#include <uhdm/let_decl.h>
-#include <uhdm/logic_var.h>
-#include <uhdm/module_inst.h>
-#include <uhdm/multiclock_sequence_expr.h>
-#include <uhdm/named_event.h>
-#include <uhdm/named_event_array.h>
-#include <uhdm/operation.h>
-#include <uhdm/param_assign.h>
-#include <uhdm/parameter.h>
-#include <uhdm/part_select.h>
-#include <uhdm/program.h>
-#include <uhdm/property_decl.h>
-#include <uhdm/range.h>
-#include <uhdm/ref_module.h>
-#include <uhdm/ref_obj.h>
-#include <uhdm/ref_typespec.h>
-#include <uhdm/sequence_decl.h>
-#include <uhdm/type_parameter.h>
-#include <uhdm/typespec.h>
-#include <uhdm/udp_defn.h>
-#include <uhdm/variables.h>
-#include <uhdm/virtual_interface_var.h>
+#include <uhdm/uhdm.h>
 
 namespace SURELOG {
 IntegrityChecker::IntegrityChecker(FileSystem* fileSystem,
@@ -91,6 +55,14 @@ bool IntegrityChecker::isBuiltPackageOnStack(
                       }) != callstack.rend();
 }
 
+bool IntegrityChecker::isUVMMember(const UHDM::any* const object) const {
+  std::string_view filepath = object->VpiFile();
+  return (filepath.find("\\uvm_") != std::string_view::npos) ||
+         (filepath.find("/uvm_") != std::string_view::npos) ||
+         (filepath.find("\\ovm_") != std::string_view::npos) ||
+         (filepath.find("/ovm_") != std::string_view::npos);
+}
+
 template <typename T>
 void IntegrityChecker::reportAmbigiousMembership(
     const std::vector<T*>* const collection, const T* const object) const {
@@ -113,6 +85,8 @@ void IntegrityChecker::reportDuplicates(const UHDM::any* const object,
                                         const std::vector<T*>* const collection,
                                         std::string_view name) const {
   if (collection == nullptr) return;
+  if (isUVMMember(object)) return;
+
   const std::set<T*> unique(collection->cbegin(), collection->cend());
   if (unique.size() != collection->size()) {
     std::string text = std::to_string(object->UhdmId());
@@ -125,50 +99,35 @@ void IntegrityChecker::reportDuplicates(const UHDM::any* const object,
   }
 }
 
-// enum class LocationRelation {
-//   Above,
-//   Below,
-//   InsideAbove,
-//   InsideBelow,
-//   InsideLeft,
-//   InsideRight,
-//   InsideOut,
-//   AboveOverlapped,
-//   BelowOverlapped,
-//   LeftOverlapped,
-//   RightOverlapped,
-//   Inconclusive,
-// };
-//
-// LocationRelation IntegrityChecker::getRelation(
-//   uint32_t oStartLine, uint16_t oStartColumn, uint32_t oEndLine,
-//   uint16_t oEndColumn, uint32_t pStartLine, uint16_t pStartColumn,
-//   uint32_t pEndLine, uint16_t pEndColumn) const {
-//   if ((oStartLine == pStartLine) && (oEndLine == pStartLine)) {
-//     if (oEndColumn < pStartColumn) return LocationRelation::LessThan;
-//     if (oStartColumn > pEndColumn) return LocationRelation::GreaterThan;
-//     if (oEndColumn > pStartColumn) return
-//     LocationRelation::LessThanOrEqualTo; if (oStartColumn < pEndColumn)
-//       return LocationRelation::GreaterThanOrEqualTo;
-//     return LocationRelation::EqualTo;
-//   } else if (oEndLine < pStartLine) {
-//
-//   } else if ((oStartLine < pStartLine) && (oEndLine > pEndLine)) {
-//     return LocationRelation::InsideOut;
-//   } else if (oEndLine <= pStartLine) {
-//     return ((oEndLine == pStartLine) && (oEndColumn < pStartColumn))
-//                ? LocationRelation::AboveOverlapped
-//                : LocationRelation::Above;
-//   } else if (pEndLine <= oStartLine) {
-//     return ((pEndLine == oStartLine) && (pEndColumn < oStartColumn))
-//                ? LocationRelation::BelowOverlapped
-//                : LocationRelation::Below;
-//   } else if ((oStartLine >= pStartLine) && (oEndLine <= pEndLine)) {
-//
-//   }
-//
-//   return LocationRelation::Inconclusive;
-// }
+inline IntegrityChecker::LineColumnRelation
+IntegrityChecker::getLineColumnRelation(uint32_t csl, uint16_t csc,
+                                        uint32_t cel, uint16_t cec) const {
+  if (csl == cel) {
+    if (csc < cec) return LineColumnRelation::Before;
+    if (csc == cec) return LineColumnRelation::Inside;
+    if (csc > cec) return LineColumnRelation::After;
+  }
+
+  return (csl < cel) ? LineColumnRelation::Before : LineColumnRelation::After;
+}
+
+inline IntegrityChecker::LineColumnRelation
+IntegrityChecker::getLineColumnRelation(uint32_t csl, uint16_t csc,
+                                        uint32_t cel, uint16_t cec,
+                                        uint32_t psl, uint16_t psc,
+                                        uint32_t pel, uint16_t pec) const {
+  if (cel < psl) return LineColumnRelation::Before;
+  if (csl > pel) return LineColumnRelation::After;
+
+  if ((csl == pel) && (csc >= pec)) return LineColumnRelation::After;
+  if ((cel == psl) && (cec <= psc)) return LineColumnRelation::Before;
+
+  const bool startIsInside = (csl > psl) || ((csl == psl) && (csc >= psc));
+  const bool endIsInside = (cel < pel) || ((cel == pel) && (cec <= pec));
+  if (startIsInside && endIsInside) return LineColumnRelation::Inside;
+
+  return LineColumnRelation::Inconclusive;
+}
 
 void IntegrityChecker::reportInvalidLocation(
     const UHDM::any* const object) const {
@@ -206,72 +165,263 @@ void IntegrityChecker::reportInvalidLocation(
       (parent->UhdmType() == UHDM::uhdmfunction))
     return;
 
-  // TODO:
-  // if object==constant, parent==io_decl and parent->expr == object,
-  //   object < expr
-
-  UHDM::UHDM_OBJECT_TYPE oType = object->UhdmType();
-  if ((oType == UHDM::uhdmclass_typespec ||
-       oType == UHDM::uhdmstruct_typespec) &&
-      (object->VpiLineNo() == 0) && (object->VpiEndLineNo() == 0) &&
-      (object->VpiColumnNo() == 0) && (object->VpiEndColumnNo() == 0))
+  // REVISIT(HS): Temporarily ignore hier_path issues
+  if ((object->UhdmType() == UHDM::uhdmhier_path) ||
+      (parent->UhdmType() == UHDM::uhdmhier_path))
     return;
 
-  // Ports and Io_decl are declared in two different ways
-  // Io_decl example - TaskDecls
-  const std::map<UHDM::UHDM_OBJECT_TYPE, std::set<UHDM::UHDM_OBJECT_TYPE>>
-      exclusions{{UHDM::uhdmref_typespec, {UHDM::uhdmport, UHDM::uhdmio_decl}},
-                 {UHDM::uhdmconstant, {UHDM::uhdmport}}};
+  const uint32_t csl = object->VpiLineNo();
+  const uint32_t csc = object->VpiColumnNo();
+  const uint32_t cel = object->VpiEndLineNo();
+  const uint32_t cec = object->VpiEndColumnNo();
 
-  if (auto it1 = exclusions.find(object->UhdmType());
-      it1 != exclusions.cend()) {
-    if (auto it2 = it1->second.find(parent->UhdmType());
-        it2 != it1->second.cend())
-      return;
-  }
-
-  const uint32_t childLineNo = object->VpiLineNo();
-  const uint32_t childColumnNo = object->VpiColumnNo();
-  const uint32_t childEndLineNo = object->VpiEndLineNo();
-  const uint32_t childEndColumnNo = object->VpiEndColumnNo();
-
-  const uint32_t parentLineNo = parent->VpiLineNo();
-  const uint32_t parentColumnNo = parent->VpiColumnNo();
-  const uint32_t parentEndLineNo = parent->VpiEndLineNo();
-  const uint32_t parentEndColumnNo = parent->VpiEndColumnNo();
-
-  bool valid = childEndLineNo <= parentEndLineNo;
-  if (any_cast<UHDM::ref_typespec>(object) != nullptr) {
-    valid = valid && (childLineNo <= parentLineNo);
-
-    if (childLineNo == parentEndLineNo) {
-      if (any_cast<UHDM::type_parameter>(parent) == nullptr) {
-        // type i.e. child should be on the left (or overlapping) of the parent
-        valid = valid && (childEndColumnNo <= parentEndColumnNo);
-      } else {
-        valid = valid && (parentEndColumnNo <= childEndColumnNo);
-      }
-    }
-  } else {
-    valid = valid && (childLineNo >= parentLineNo);
-
-    if (childLineNo == parentLineNo) {
-      valid = valid && (childColumnNo >= parentColumnNo);
-    }
-
-    if (childEndLineNo == parentEndLineNo) {
-      valid = valid && (childEndColumnNo <= parentEndColumnNo);
-    }
-  }
-
-  if (!valid) {
+  LineColumnRelation actualRelation = getLineColumnRelation(csl, csc, cel, cec);
+  if ((actualRelation != LineColumnRelation::Before) &&
+      (actualRelation != LineColumnRelation::Inside)) {
     Location loc(
         m_fileSystem->toPathId(object->VpiFile(), m_symbolTable),
         object->VpiLineNo(), object->VpiColumnNo(),
-        m_symbolTable->registerSymbol(std::to_string(object->UhdmId())));
-    Error err(
-        ErrorDefinition::INTEGRITY_CHECK_CHILD_NOT_ENTIRELY_IN_PARENT_BOUNDARY,
-        loc);
+        m_symbolTable->registerSymbol(StrCat("Object: ", object->UhdmId())));
+    Error err(ErrorDefinition::INTEGRITY_CHECK_INVALID_LOCATION, loc);
+    m_errorContainer->addError(err);
+    return;
+  }
+
+  const uint32_t psl = parent->VpiLineNo();
+  const uint32_t psc = parent->VpiColumnNo();
+  const uint32_t pel = parent->VpiEndLineNo();
+  const uint32_t pec = parent->VpiEndColumnNo();
+
+  actualRelation = getLineColumnRelation(psl, psc, pel, pec);
+  if ((actualRelation != LineColumnRelation::Before) &&
+      (actualRelation != LineColumnRelation::Inside))
+    // If parent location is known to be bad, don't bother reporting issues
+    // with the child. Parent is already reported and so when the parent
+    // gets fixed, the child becomes important.
+    return;
+
+  actualRelation =
+      getLineColumnRelation(csl, csc, cel, cec, psl, psc, pel, pec);
+
+  LineColumnRelation expectedRelation = LineColumnRelation::Inside;
+  if (const UHDM::ref_typespec* const objectAsRef_typespec =
+          object->Cast<UHDM::ref_typespec>()) {
+    if (objectAsRef_typespec->Actual_typespec<UHDM::unsupported_typespec>() !=
+        nullptr) {
+      // Ignore issues with unsupported_typespec.
+      // There are known issues with genvar not followed with a type.
+      return;
+    }
+
+    if ((parent->Cast<UHDM::extends>() != nullptr) ||
+        (parent->Cast<UHDM::tf_call>() != nullptr)) {
+      expectedRelation = LineColumnRelation::Inside;
+    } else if (parent->Cast<UHDM::type_parameter>() != nullptr) {
+      expectedRelation = LineColumnRelation::After;
+    } else {
+      expectedRelation = LineColumnRelation::Before;
+    }
+
+    if (const UHDM::enum_typespec* const parentAsEnum_typespec =
+            parent->Cast<UHDM::enum_typespec>()) {
+      if (parentAsEnum_typespec->Base_typespec() == object) {
+        // typedef enum <base_type> { ... }
+        expectedRelation = LineColumnRelation::Inside;
+      }
+    } else if (const UHDM::tagged_pattern* const parentAsTagged_pattern =
+                   parent->Cast<UHDM::tagged_pattern>()) {
+      if (parentAsTagged_pattern->Typespec() == object) {
+        // BlahBlab: constant|operation
+        expectedRelation = LineColumnRelation::Inside;
+      }
+    } else if (const UHDM::packed_array_typespec* const
+                   parentAsPacked_array_typespec =
+                       parent->Cast<UHDM::packed_array_typespec>()) {
+      if (parentAsPacked_array_typespec->Elem_typespec() == object) {
+        // elem_type [0:n] var_name
+        expectedRelation = LineColumnRelation::Before;
+      }
+    } else if (const UHDM::array_var* const parentAsArray_var =
+                   parent->Cast<UHDM::array_var>()) {
+      if (parentAsArray_var->Typespec() == object) {
+        // elem_type var_name[range]
+        // For array_var/Typespec, the range is the location
+        if (parentAsArray_var->VpiArrayType() == vpiQueueArray) {
+          // In the case of declaration, i.e. <type> <var_name[$] it is 'After'
+          // In the case of assignment to empty queue, it is overlapping i.e
+          //    <var_name> = {}
+          expectedRelation =
+              ((csl == psl) && (csc == psc) && (cel == pel) && (cec == pec))
+                  ? LineColumnRelation::Inside
+                  : LineColumnRelation::After;
+        } else {
+          expectedRelation = LineColumnRelation::After;
+        }
+      }
+    } else if (const UHDM::array_typespec* const parentAsArray_typespec =
+                   parent->Cast<UHDM::array_typespec>()) {
+      if (parentAsArray_typespec->Index_typespec() == object) {
+        // Since array_typspec refers to the range, index is basically the
+        // range in case of associative arrays, queues, and dynamic arrays.
+        expectedRelation = LineColumnRelation::Inside;
+      }
+    }
+  } else if (object->UhdmType() == UHDM::uhdmattribute) {
+    expectedRelation = LineColumnRelation::Before;
+  } else if (object->UhdmType() == UHDM::uhdmrange) {
+    if (const UHDM::array_typespec* const parentAsArray_typespec =
+            parent->Cast<UHDM::array_typespec>()) {
+      if (!parentAsArray_typespec->VpiName().empty() &&
+          (parentAsArray_typespec->VpiName() != SymbolTable::getBadSymbol())) {
+        // typedef int var_name[range];
+        expectedRelation = LineColumnRelation::After;
+      }
+    } else if (const UHDM::io_decl* const parentAsIo_decl =
+                   parent->Cast<UHDM::io_decl>()) {
+      // (int var_name[range])
+      expectedRelation = LineColumnRelation::After;
+    } else if (const UHDM::module_array* const parentAsModule_array =
+                   parent->Cast<UHDM::module_array>()) {
+      // (module_type var_name[range])
+      expectedRelation = LineColumnRelation::After;
+    } else if (const UHDM::array_var* const parentAsArray_var =
+                   parent->Cast<UHDM::array_var>()) {
+      // int var_name[range]
+      expectedRelation = LineColumnRelation::After;
+    } else if (const UHDM::array_net* const parentAsArray_net =
+                   parent->Cast<UHDM::array_net>()) {
+      // some_type var_name[range]
+      expectedRelation = LineColumnRelation::After;
+    } else if (const UHDM::packed_array_var* const parentAsPacked_array_var =
+                   parent->Cast<UHDM::packed_array_var>()) {
+      // elem_type [range] var_name
+      expectedRelation = LineColumnRelation::Before;
+    } else if (const UHDM::logic_var* const parentAsLogic_var =
+                   parent->Cast<UHDM::logic_var>()) {
+      // logic [range] var_name
+      expectedRelation = LineColumnRelation::Before;
+    }
+  } else if (object->UhdmType() == UHDM::uhdmattribute) {
+    if (const UHDM::class_defn* const parentAsClass_defn =
+            parent->Cast<UHDM::class_defn>()) {
+      // (* attribute *) class class_name;
+      expectedRelation = LineColumnRelation::Inside;
+    } else if (const UHDM::module_inst* const parentAsModule_inst =
+                   parent->Cast<UHDM::module_inst>()) {
+      // (* attribute *) module module_name;
+      expectedRelation = LineColumnRelation::Inside;
+    } else if (const UHDM::interface_inst* const parentAsInterface_inst =
+                   parent->Cast<UHDM::interface_inst>()) {
+      // (* attribute *) interface interface_name;
+      expectedRelation = LineColumnRelation::Inside;
+    } else if (const UHDM::primitive* const parentAsPrimitive =
+                   parent->Cast<UHDM::primitive>()) {
+      // (* attribute *) primitive primitive_name;
+      expectedRelation = LineColumnRelation::Inside;
+    } else if (const UHDM::package* const parentAsPackage =
+                   parent->Cast<UHDM::package>()) {
+      // (* attribute *) package package_name;
+      expectedRelation = LineColumnRelation::Inside;
+    }
+  } else if (object->UhdmType() == UHDM::uhdmseq_formal_decl) {
+    if (const UHDM::let_decl* const parentAsLet_decl =
+            parent->Cast<UHDM::let_decl>()) {
+      if (const UHDM::VectorOfseq_formal_decl* const decls =
+              parentAsLet_decl->Seq_formal_decls()) {
+        for (const UHDM::seq_formal_decl* const decl : *decls) {
+          if (decl == object) {
+            // let <name>(<..., decl, ...>) = <object>
+            expectedRelation = LineColumnRelation::After;
+            break;
+          }
+        }
+      }
+    }
+  } else if (object->UhdmType() == UHDM::uhdmport) {
+    if ((parent->Cast<UHDM::ref_module>() != nullptr) ||
+        (parent->Cast<UHDM::module_array>() != nullptr)) {
+      // module_type module_name(..., port, ...)
+      expectedRelation = LineColumnRelation::After;
+    }
+  }
+
+  if (const UHDM::event_control* parentAsEvent_control =
+          parent->Cast<UHDM::event_control>()) {
+    if (parentAsEvent_control->Stmt() == object) {
+      // always @(....) begin ... end
+      expectedRelation = LineColumnRelation::After;
+    }
+  } else if (const UHDM::io_decl* const parentAsIo_decl =
+                 parent->Cast<UHDM::io_decl>()) {
+    if (parentAsIo_decl->Expr() == object) {
+      // io_decl::expr represent the default value which is
+      // on the right of the variable!
+      expectedRelation = LineColumnRelation::After;
+    }
+  } else if (const UHDM::port* const parentAsPort =
+                 parent->Cast<UHDM::port>()) {
+    if (parentAsPort->High_conn() == object) {
+      // module modname(..., input type name = object, ... )
+      expectedRelation = LineColumnRelation::After;
+    }
+  } else if (const UHDM::let_decl* const parentAsLet_decl =
+                 parent->Cast<UHDM::let_decl>()) {
+    if (const UHDM::VectorOfexpr* const exprs =
+            parentAsLet_decl->Expressions()) {
+      for (const UHDM::expr* const expr : *exprs) {
+        if (expr == object) {
+          // let <name>(<args>) = <object>
+          expectedRelation = LineColumnRelation::After;
+          break;
+        }
+      }
+    }
+  }
+
+  if (actualRelation != expectedRelation) {
+    if ((actualRelation == LineColumnRelation::After) &&
+        (expectedRelation == LineColumnRelation::Before) &&
+        (object->UhdmType() == UHDM::uhdmref_typespec) &&
+        (parent->UhdmType() == UHDM::uhdmport)) {
+      // typespec for ports *can* be inside the parent module!
+      // module (port_name):
+      //   input int port_name;
+      // endmodule
+      const UHDM::any* const grandParent = parent->VpiParent();
+
+      const uint32_t psl = grandParent->VpiLineNo();
+      const uint32_t psc = grandParent->VpiColumnNo();
+      const uint32_t pel = grandParent->VpiEndLineNo();
+      const uint32_t pec = grandParent->VpiEndColumnNo();
+
+      actualRelation =
+          getLineColumnRelation(csl, csc, cel, cec, psl, psc, pel, pec);
+      expectedRelation = LineColumnRelation::Inside;
+    } else if ((actualRelation == LineColumnRelation::Inside) &&
+               (expectedRelation == LineColumnRelation::After) &&
+               (parent->UhdmType() == UHDM::uhdmport)) {
+      // unnamed port arguments for ref_module
+      // module_type module_name(..., port, ...)
+
+      if ((csl == psl) && (csc == psc) && (cel == pel) && (cec == pec)) {
+        if (const UHDM::port* const parentAsPort = parent->Cast<UHDM::port>()) {
+          if (parentAsPort->High_conn() == object) {
+            expectedRelation = LineColumnRelation::Inside;
+          }
+        }
+      }
+    }
+  }
+
+  if (actualRelation != expectedRelation) {
+    Location loc(
+        m_fileSystem->toPathId(object->VpiFile(), m_symbolTable),
+        object->VpiLineNo(), object->VpiColumnNo(),
+        m_symbolTable->registerSymbol(StrCat(
+            "Child: ", object->UhdmId(), ", ",
+            UHDM::UhdmName(object->UhdmType()), " Parent: ", parent->UhdmId(),
+            ", ", UHDM::UhdmName(parent->UhdmType()))));
+    Error err(ErrorDefinition::INTEGRITY_CHECK_BAD_RELATIVE_LOCATION, loc);
     m_errorContainer->addError(err);
   }
 }
@@ -306,9 +456,9 @@ void IntegrityChecker::reportMissingLocation(
     // is implicit.
     const UHDM::variables* const parentAsVariables =
         parent->Cast<UHDM::variables>();
-    const UHDM::function* const grandParentAsFunction =
+    const UHDM::task_func* const grandParentAsTask_func =
         grandParent->Cast<UHDM::function>();
-    if ((grandParentAsFunction->Return() == parent) &&
+    if ((grandParentAsTask_func->Return() == parent) &&
         (parentAsVariables->Typespec() == object)) {
       return;
     }
@@ -327,13 +477,13 @@ void IntegrityChecker::reportMissingLocation(
         }
       }
     }
-  } else if ((object->Cast<UHDM::variables>() != nullptr) &&
-             (parent->UhdmType() == UHDM::uhdmfunction)) {
+  } else if (object->Cast<UHDM::variables>() != nullptr) {
     // When no explicit return is specific, the function's name
     // is consdiered the return type's name.
-    const UHDM::function* const parentAsFunction =
-        parent->Cast<UHDM::function>();
-    if (parentAsFunction->Return() == object) return;
+    if (const UHDM::task_func* const parentAsTask_func =
+            parent->Cast<UHDM::task_func>()) {
+      if (parentAsTask_func->Return() == object) return;
+    }
   } else if (const UHDM::constant* const objectAsConstant =
                  object->Cast<UHDM::constant>()) {
     if (const UHDM::range* const parentAsRange = parent->Cast<UHDM::range>()) {
@@ -348,9 +498,8 @@ void IntegrityChecker::reportMissingLocation(
     }
   }
 
-  std::string text = std::to_string(object->UhdmId());
-  text.append(", type: ").append(UHDM::UhdmName(object->UhdmType()));
-
+  std::string text =
+      StrCat(object->UhdmId(), ", ", UHDM::UhdmName(object->UhdmType()));
   Location loc(m_fileSystem->toPathId(object->VpiFile(), m_symbolTable),
                object->VpiLineNo(), object->VpiColumnNo(),
                m_symbolTable->registerSymbol(text));
@@ -399,21 +548,22 @@ void IntegrityChecker::reportInvalidNames(const UHDM::any* const object) const {
 
   bool shouldReport = false;
 
-  if (object->UhdmType() == UHDM::uhdmref_obj) {
+  if (const UHDM::ref_obj* const objectAsRef_obj =
+          object->Cast<UHDM::ref_obj>()) {
     shouldReport = (object->VpiName() == SymbolTable::getBadSymbol());
     shouldReport = shouldReport || object->VpiName().empty();
 
-    if (const UHDM::any* const actual =
-            static_cast<const UHDM::ref_obj*>(object)->Actual_group()) {
+    if (const UHDM::any* const actual = objectAsRef_obj->Actual_group()) {
       shouldReport = shouldReport || !areNamedSame(object, actual);
       shouldReport = shouldReport && !isImplicitFunctionReturnType(actual);
-      shouldReport = shouldReport && (object->VpiName() != "super");
-      shouldReport = shouldReport && (object->VpiName() != "this");
     }
-  } else if (object->UhdmType() == UHDM::uhdmref_typespec) {
+
+    shouldReport = shouldReport && (object->VpiName() != "super");
+    shouldReport = shouldReport && (object->VpiName() != "this");
+  } else if (const UHDM::ref_typespec* const objectAsRef_typespec =
+                 object->Cast<const UHDM::ref_typespec*>()) {
     shouldReport = (object->VpiName() == SymbolTable::getBadSymbol());
-    if (const UHDM::any* actual =
-            static_cast<const UHDM::ref_typespec*>(object)->Actual_typespec()) {
+    if (const UHDM::any* actual = objectAsRef_typespec->Actual_typespec()) {
       if ((actual->UhdmType() == UHDM::uhdmstruct_typespec) ||
           (actual->UhdmType() == UHDM::uhdmunion_typespec) ||
           (actual->UhdmType() == UHDM::uhdmenum_typespec)) {
@@ -422,7 +572,8 @@ void IntegrityChecker::reportInvalidNames(const UHDM::any* const object) const {
       } else if ((actual->UhdmType() == UHDM::uhdmclass_typespec) ||
                  (actual->UhdmType() == UHDM::uhdmmodule_typespec) ||
                  (actual->UhdmType() == UHDM::uhdmenum_typespec) ||
-                 (actual->UhdmType() == UHDM::uhdminterface_typespec)) {
+                 (actual->UhdmType() == UHDM::uhdminterface_typespec) ||
+                 (actual->UhdmType() == UHDM::uhdmunsupported_typespec)) {
         shouldReport = shouldReport || object->VpiName().empty();
         shouldReport = shouldReport || !areNamedSame(object, actual);
       }
@@ -514,18 +665,28 @@ void IntegrityChecker::reportNullActual(const UHDM::any* const object) const {
       break;
   }
 
+  if (const UHDM::task_func* const parentAsTask_func =
+          object->VpiParent<UHDM::task_func>()) {
+    if ((parentAsTask_func->Return() == object) &&
+        (parentAsTask_func->VpiAccessType() == vpiDPIImportAcc)) {
+      // Imported functions cannot be bound!
+      shouldReport = false;
+    }
+  }
+
   if (shouldReport) {
-    Location loc(
-        m_fileSystem->toPathId(object->VpiFile(), m_symbolTable),
-        object->VpiLineNo(), object->VpiColumnNo(),
-        m_symbolTable->registerSymbol(std::to_string(object->UhdmId())));
-    Error err(ErrorDefinition::INTEGRITY_CHECK_ACTUAL_CANNOT_BE_NULL, loc);
+    Location loc(m_fileSystem->toPathId(object->VpiFile(), m_symbolTable),
+                 object->VpiLineNo(), object->VpiColumnNo(),
+                 m_symbolTable->registerSymbol(
+                     StrCat(object->UhdmId(), ", ", object->VpiName())));
+    Error err(ErrorDefinition::INTEGRITY_CHECK_NULL_ACTUAL, loc);
     m_errorContainer->addError(err);
   }
 }
 
 void IntegrityChecker::enterAny(const UHDM::any* const object) {
   if (isBuiltPackageOnStack(object)) return;
+  if (isUVMMember(object)) return;
 
   reportNullActual(object);
 

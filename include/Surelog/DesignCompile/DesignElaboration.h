@@ -46,9 +46,10 @@ class DesignElaboration : public TestbenchElaboration {
   bool bindDataTypes_() override;
   bool bindPackagesDataTypes_();
   bool bindDataTypes_(ModuleInstance* instance, DesignComponent* component);
-  void bind_ports_nets_(std::vector<Signal*>& ports,
-                        std::vector<Signal*>& signals, const FileContent* fC,
-                        ModuleInstance* instance, DesignComponent* mod);
+  void bind_ports_nets_(const std::vector<Signal*>& ports,
+                        const std::vector<Signal*>& signals,
+                        const FileContent* fC, ModuleInstance* instance,
+                        DesignComponent* mod);
   bool createBuiltinPrimitives_();
   bool setupConfigurations_();
   bool identifyTopModules_();
@@ -62,8 +63,8 @@ class DesignElaboration : public TestbenchElaboration {
                                                ModuleInstance* instance,
                                                NodeId parentParamOverride);
   void elaborateInstance_(const FileContent* fC, NodeId nodeId,
-                          NodeId parentParamOverride,
-                          ModuleInstance* parent, Config* config,
+                          NodeId parentParamOverride, ModuleInstance* parent,
+                          Config* config,
                           std::vector<ModuleInstance*>& parentSubInstances);
   void recurseInstanceLoop_(std::vector<int32_t>& from,
                             std::vector<int32_t>& to,

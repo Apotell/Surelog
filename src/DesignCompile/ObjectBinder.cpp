@@ -38,53 +38,7 @@
 
 // uhdm
 #include <uhdm/Serializer.h>
-#include <uhdm/array_net.h>
-#include <uhdm/assign_stmt.h>
-#include <uhdm/begin.h>
-#include <uhdm/bit_select.h>
-#include <uhdm/class_defn.h>
-#include <uhdm/class_typespec.h>
-#include <uhdm/class_var.h>
-#include <uhdm/constraint.h>
-#include <uhdm/design.h>
-#include <uhdm/enum_const.h>
-#include <uhdm/enum_typespec.h>
-#include <uhdm/enum_var.h>
-#include <uhdm/extends.h>
-#include <uhdm/for_stmt.h>
-#include <uhdm/foreach_stmt.h>
-#include <uhdm/fork_stmt.h>
-#include <uhdm/function.h>
-#include <uhdm/hier_path.h>
-#include <uhdm/import_typespec.h>
-#include <uhdm/indexed_part_select.h>
-#include <uhdm/instance.h>
-#include <uhdm/interface_array.h>
-#include <uhdm/interface_inst.h>
-#include <uhdm/interface_tf_decl.h>
-#include <uhdm/interface_typespec.h>
-#include <uhdm/io_decl.h>
-#include <uhdm/logic_net.h>
-#include <uhdm/modport.h>
-#include <uhdm/module_inst.h>
-#include <uhdm/package.h>
-#include <uhdm/param_assign.h>
-#include <uhdm/parameter.h>
-#include <uhdm/part_select.h>
-#include <uhdm/port.h>
-#include <uhdm/program.h>
-#include <uhdm/property_decl.h>
-#include <uhdm/ref_module.h>
-#include <uhdm/ref_obj.h>
-#include <uhdm/ref_typespec.h>
-#include <uhdm/struct_typespec.h>
-#include <uhdm/struct_var.h>
-#include <uhdm/sys_func_call.h>
-#include <uhdm/task.h>
-#include <uhdm/typespec.h>
-#include <uhdm/typespec_member.h>
-#include <uhdm/udp_defn.h>
-#include <uhdm/union_typespec.h>
+#include <uhdm/uhdm.h>
 
 namespace SURELOG {
 ObjectBinder::ObjectBinder(const ComponentMap& componentMap,
@@ -102,17 +56,39 @@ ObjectBinder::ObjectBinder(const ComponentMap& componentMap,
   }
 }
 
-inline std::string_view ObjectBinder::suffixName(std::string_view varg) const {
-  size_t pos1 = varg.find("::");
-  if (pos1 != std::string::npos) {
-    varg = varg.substr(pos1 + 2);
+inline bool ObjectBinder::areSimilarNames(std::string_view name1,
+                                          std::string_view name2) const {
+  size_t pos = name1.find("::");
+  if (pos != std::string::npos) {
+    name1 = name1.substr(pos + 2);
   }
 
-  size_t pos2 = varg.find("work@");
-  if (pos2 != std::string::npos) {
-    varg = varg.substr(pos2 + 5);
+  pos = name1.find("work@");
+  if (pos != std::string::npos) {
+    name1 = name1.substr(pos + 5);
   }
-  return varg;
+
+  pos = name2.find("::");
+  if (pos != std::string::npos) {
+    name2 = name2.substr(pos + 2);
+  }
+
+  pos = name2.find("work@");
+  if (pos != std::string::npos) {
+    name2 = name2.substr(pos + 5);
+  }
+
+  return !name1.empty() && name1 == name2;
+}
+
+inline bool ObjectBinder::areSimilarNames(const UHDM::any* const object1,
+                                          std::string_view name2) const {
+  return areSimilarNames(object1->VpiName(), name2);
+}
+
+inline bool ObjectBinder::areSimilarNames(
+    const UHDM::any* const object1, const UHDM::any* const object2) const {
+  return areSimilarNames(object1->VpiName(), object2->VpiName());
 }
 
 bool ObjectBinder::isInElaboratedTree(const UHDM::any* const object) {
@@ -156,7 +132,7 @@ const UHDM::package* ObjectBinder::getPackage(std::string_view name) const {
   const UHDM::design* const d = m_designStack.back();
   if (d->AllPackages() != nullptr) {
     for (const UHDM::package* p : *d->AllPackages()) {
-      if (p->VpiName() == name) {
+      if (areSimilarNames(p, name)) {
         return p;
       }
     }
@@ -181,24 +157,61 @@ const UHDM::module_inst* ObjectBinder::getModuleInst(
   return nullptr;
 }
 
+const UHDM::interface_inst* ObjectBinder::getInterfaceInst(
+    std::string_view defname) const {
+  if (m_designStack.empty()) return nullptr;
+
+  const UHDM::design* const d = m_designStack.back();
+  if (d->AllInterfaces() != nullptr) {
+    for (const UHDM::interface_inst* m : *d->AllInterfaces()) {
+      if (m->VpiDefName() == defname) {
+        return m;
+      }
+    }
+  }
+
+  return nullptr;
+}
+
+const UHDM::class_defn* ObjectBinder::getClass_defn(
+    const UHDM::VectorOfclass_defn* const collection,
+    std::string_view name) const {
+  if (collection != nullptr) {
+    for (const UHDM::class_defn* c : *collection) {
+      if (areSimilarNames(c, name)) {
+        return c;
+      }
+    }
+  }
+  return nullptr;
+}
+
 const UHDM::class_defn* ObjectBinder::getClass_defn(
     std::string_view name) const {
   if (!m_packageStack.empty()) {
     const UHDM::package* const p = m_packageStack.back();
-    if (p->Class_defns() != nullptr) {
-      for (const UHDM::class_defn* c : *p->Class_defns()) {
-        if (c->VpiName() == name) {
-          return c;
-        }
-      }
+    if (const UHDM::class_defn* const c =
+            getClass_defn(p->Class_defns(), name)) {
+      return c;
     }
   }
   if (!m_designStack.empty()) {
     const UHDM::design* const d = m_designStack.back();
-    if (d->AllClasses() != nullptr) {
-      for (const UHDM::class_defn* c : *d->AllClasses()) {
-        if (c->VpiName() == name) {
-          return c;
+    if (const UHDM::class_defn* const c =
+            getClass_defn(d->AllClasses(), name)) {
+      return c;
+    }
+
+    if (d->Typespecs() != nullptr) {
+      for (const UHDM::typespec* const t : *d->Typespecs()) {
+        if (const UHDM::import_typespec* const it =
+                t->Cast<UHDM::import_typespec>()) {
+          if (const UHDM::package* p = getPackage(it->VpiName())) {
+            if (const UHDM::class_defn* const c =
+                    getClass_defn(p->Class_defns(), name)) {
+              return c;
+            }
+          }
         }
       }
     }
@@ -271,7 +284,7 @@ const UHDM::any* ObjectBinder::findInTypespec(
       const UHDM::import_typespec* const it =
           any_cast<UHDM::import_typespec>(scope);
       if (const UHDM::package* const p = getPackage(it->VpiName())) {
-        if (const UHDM::any* const actual = findInPackage(object, p)) {
+        if (const UHDM::any* const actual = findInPackage(name, object, p)) {
           return actual;
         }
       }
@@ -280,7 +293,8 @@ const UHDM::any* ObjectBinder::findInTypespec(
     case UHDM::uhdmclass_typespec: {
       if (const UHDM::class_defn* cd =
               static_cast<const UHDM::class_typespec*>(scope)->Class_defn()) {
-        if (const UHDM::any* const actual = findInClass_defn(object, cd)) {
+        if (const UHDM::any* const actual =
+                findInClass_defn(name, object, cd)) {
           return actual;
         }
       }
@@ -290,7 +304,8 @@ const UHDM::any* ObjectBinder::findInTypespec(
       if (const UHDM::interface_inst* ins =
               static_cast<const UHDM::interface_typespec*>(scope)
                   ->Interface_inst()) {
-        if (const UHDM::any* const actual = findInInterface_inst(object, ins)) {
+        if (const UHDM::any* const actual =
+                findInInterface_inst(name, object, ins)) {
           return actual;
         }
       }
@@ -338,32 +353,32 @@ const UHDM::any* ObjectBinder::findInVectorOfAny(
 
     if (any_cast<UHDM::typespec>(c) == nullptr) {
       if (any_cast<UHDM::ref_obj>(object) != nullptr) {
-        if (c->VpiName() == name) return c;
-        if (c->VpiName() == shortName) return c;
+        if (areSimilarNames(c, name)) return c;
+        if (areSimilarNames(c, shortName)) return c;
       }
     } else {
       if (any_cast<UHDM::ref_typespec>(object) != nullptr) {
-        if (c->VpiName() == name) return c;
-        if (c->VpiName() == shortName) return c;
+        if (areSimilarNames(c, name)) return c;
+        if (areSimilarNames(c, shortName)) return c;
       }
     }
 
     if (any_cast<UHDM::typespec>(c) != nullptr) {
-      if (const UHDM::any* const actual1 = findInTypespec(
+      if (const UHDM::any* const actual = findInTypespec(
               name, object, static_cast<const UHDM::typespec*>(c))) {
-        return actual1;
+        return actual;
       }
     }
 
     if (c->UhdmType() == UHDM::uhdmenum_var) {
-      if (const UHDM::any* const actual1 = findInRefTypespec(
+      if (const UHDM::any* const actual = findInRefTypespec(
               name, object,
               static_cast<const UHDM::enum_var*>(c)->Typespec())) {
-        return actual1;
-      } else if (const UHDM::any* const actual2 = findInRefTypespec(
+        return actual;
+      } else if (const UHDM::any* const actual = findInRefTypespec(
                      shortName, object,
                      static_cast<const UHDM::enum_var*>(c)->Typespec())) {
-        return actual2;
+        return actual;
       }
     }
     // if (c->UhdmType() == UHDM::uhdmstruct_var) {
@@ -374,12 +389,12 @@ const UHDM::any* ObjectBinder::findInVectorOfAny(
     // }
     if (const UHDM::ref_typespec* rt = any_cast<UHDM::ref_typespec>(c)) {
       if (scope != rt->Actual_typespec()) {
-        if (const UHDM::any* const actual1 =
+        if (const UHDM::any* const actual =
                 findInRefTypespec(name, object, rt)) {
-          return actual1;
-        } else if (const UHDM::any* const actual2 =
+          return actual;
+        } else if (const UHDM::any* const actual =
                        findInRefTypespec(shortName, object, rt)) {
-          return actual2;
+          return actual;
         }
       }
     }
@@ -388,118 +403,128 @@ const UHDM::any* ObjectBinder::findInVectorOfAny(
   return nullptr;
 }
 
-const UHDM::any* ObjectBinder::findInScope(const UHDM::any* const object,
+const UHDM::any* ObjectBinder::findInScope(std::string_view name,
+                                           const UHDM::any* const object,
                                            const UHDM::scope* const scope) {
   if (scope == nullptr) return nullptr;
 
-  std::string_view name = object->VpiName();
-  if (const UHDM::any* const actual1 =
+  if (const UHDM::any* const actual =
           findInVectorOfAny(name, object, scope->Variables(), scope)) {
-    return actual1;
-  } else if (const UHDM::any* const actual2 = findInVectorOfAny(
+    return actual;
+  } else if (const UHDM::any* const actual = findInVectorOfAny(
                  name, object, scope->Param_assigns(), scope)) {
-    return actual2;
-  } else if (const UHDM::any* const actual3 =
+    return actual;
+  } else if (const UHDM::any* const actual =
                  findInVectorOfAny(name, object, scope->Parameters(), scope)) {
-    return actual3;
-  } else if (const UHDM::any* const actual3 = findInVectorOfAny(
+    return actual;
+  } else if (const UHDM::any* const actual = findInVectorOfAny(
                  name, object, scope->Property_decls(), scope)) {
-    return actual3;
-  } else if (const UHDM::any* const actual4 =
+    return actual;
+  } else if (const UHDM::any* const actual =
                  findInVectorOfAny(name, object, scope->Typespecs(), scope)) {
-    return actual4;
+    return actual;
+  } else if (const UHDM::any* const actual = findInVectorOfAny(
+                 name, object, scope->Named_events(), scope)) {
+    return actual;
+  } else if (const UHDM::any* const actual =
+                 findInVectorOfAny(name, object, scope->Scopes(), scope)) {
+    return actual;
   } else if (const UHDM::package* const p = any_cast<UHDM::package>(scope)) {
     std::string fullName = StrCat(p->VpiName(), "::", name);
     if (const UHDM::any* const actual =
             findInVectorOfAny(fullName, object, scope->Typespecs(), scope)) {
       return actual;
     }
+  } else if (const UHDM::any* const actual = findInVectorOfAny(
+                 name, object, scope->Instance_items(), scope)) {
+    return actual;
   }
 
   return nullptr;
 }
 
 const UHDM::any* ObjectBinder::findInInstance(
-    const UHDM::any* const object, const UHDM::instance* const scope) {
+    std::string_view name, const UHDM::any* const object,
+    const UHDM::instance* const scope) {
   if (scope == nullptr) return nullptr;
 
-  std::string_view name = object->VpiName();
-  if (scope->VpiName() == name) return scope;
-
-  if (const UHDM::any* const actual1 =
-          findInVectorOfAny(name, object, scope->Nets(), scope)) {
-    return actual1;
-  } else if (const UHDM::any* const actual2 =
+  if (areSimilarNames(scope, name)) {
+    return scope;
+  } else if (const UHDM::any* const actual =
+                 findInVectorOfAny(name, object, scope->Nets(), scope)) {
+    return actual;
+  } else if (const UHDM::any* const actual =
                  findInVectorOfAny(name, object, scope->Array_nets(), scope)) {
-    return actual2;
-  } else if (const UHDM::any* const actual3 =
+    return actual;
+  } else if (const UHDM::any* const actual =
                  findInVectorOfAny(name, object, scope->Task_funcs(), scope)) {
-    return actual3;
-  } else if (const UHDM::any* const actual4 =
+    return actual;
+  } else if (const UHDM::any* const actual =
                  findInVectorOfAny(name, object, scope->Programs(), scope)) {
-    return actual4;
+    return actual;
   }
 
-  return findInScope(object, scope);
+  return findInScope(name, object, scope);
 }
 
 const UHDM::any* ObjectBinder::findInInterface_inst(
-    const UHDM::any* const object, const UHDM::interface_inst* const scope) {
+    std::string_view name, const UHDM::any* const object,
+    const UHDM::interface_inst* const scope) {
   if (scope == nullptr) return nullptr;
   if (!m_searched.emplace(scope).second) return nullptr;
 
-  std::string_view name = object->VpiName();
-  if (scope->VpiName() == name) {
+  if (areSimilarNames(scope, name)) {
     return scope;
-  } else if (const UHDM::any* const actual1 =
+  } else if (const UHDM::any* const actual =
                  findInVectorOfAny(name, object, scope->Modports(), scope)) {
-    return actual1;
-  } else if (const UHDM::any* const actual4 = findInVectorOfAny(
+    return actual;
+  } else if (const UHDM::any* const actual = findInVectorOfAny(
                  name, object, scope->Interface_tf_decls(), scope)) {
-    return actual4;
-  } else if (const UHDM::any* const actual4 =
+    return actual;
+  } else if (const UHDM::any* const actual =
                  findInVectorOfAny(name, object, scope->Ports(), scope)) {
-    return actual4;
+    return actual;
   }
-  return findInInstance(object, scope);
+  return findInInstance(name, object, scope);
 }
 
-const UHDM::any* ObjectBinder::findInPackage(const UHDM::any* const object,
+const UHDM::any* ObjectBinder::findInPackage(std::string_view name,
+                                             const UHDM::any* const object,
                                              const UHDM::package* const scope) {
   if (scope == nullptr) return nullptr;
   if (!m_searched.emplace(scope).second) return nullptr;
 
-  std::string_view name = object->VpiName();
-  if (scope->VpiName() == name) return scope;
-
-  if (const UHDM::any* const actual =
-          findInVectorOfAny(name, object, scope->Parameters(), scope)) {
+  if (areSimilarNames(scope, name)) {
+    return scope;
+  } else if (const UHDM::any* const actual =
+                 findInVectorOfAny(name, object, scope->Parameters(), scope)) {
     return actual;
   }
 
-  return findInInstance(object, scope);
+  return findInInstance(name, object, scope);
 }
 
 const UHDM::any* ObjectBinder::findInUdp_defn(
-    const UHDM::any* const object, const UHDM::udp_defn* const scope) {
+    std::string_view name, const UHDM::any* const object,
+    const UHDM::udp_defn* const scope) {
   if (scope == nullptr) return nullptr;
   if (!m_searched.emplace(scope).second) return nullptr;
 
-  std::string_view name = object->VpiName();
-  if (scope->VpiName() == name) return scope;
+  if (areSimilarNames(scope, name)) return scope;
+
   return findInVectorOfAny(name, object, scope->Io_decls(), scope);
 }
 
-const UHDM::any* ObjectBinder::findInProgram(const UHDM::any* const object,
+const UHDM::any* ObjectBinder::findInProgram(std::string_view name,
+                                             const UHDM::any* const object,
                                              const UHDM::program* const scope) {
   if (scope == nullptr) return nullptr;
   if (!m_searched.emplace(scope).second) return nullptr;
 
-  std::string_view name = object->VpiName();
-  if (scope->VpiName() == name) return scope;
-
-  if (const UHDM::any* const actual =
-          findInVectorOfAny(name, object, scope->Parameters(), scope)) {
+  if (areSimilarNames(scope, name)) {
+    return scope;
+  } else if (const UHDM::any* const actual =
+                 findInVectorOfAny(name, object, scope->Parameters(), scope)) {
     return actual;
   } else if (const UHDM::any* const actual =
                  findInVectorOfAny(name, object, scope->Ports(), scope)) {
@@ -509,65 +534,65 @@ const UHDM::any* ObjectBinder::findInProgram(const UHDM::any* const object,
     return actual;
   }
 
-  return findInInstance(object, scope);
+  return findInInstance(name, object, scope);
 }
 
 const UHDM::any* ObjectBinder::findInFunction(
-    const UHDM::any* const object, const UHDM::function* const scope) {
+    std::string_view name, const UHDM::any* const object,
+    const UHDM::function* const scope) {
   if (scope == nullptr) return nullptr;
   if (!m_searched.emplace(scope).second) return nullptr;
 
-  std::string_view name = object->VpiName();
-  if (scope->VpiName() == name) {
+  if (areSimilarNames(scope, name)) {
     return scope->Return();
-  } else if (const UHDM::any* const actual1 =
+  } else if (const UHDM::any* const actual =
                  findInVectorOfAny(name, object, scope->Io_decls(), scope)) {
-    return actual1;
-  } else if (const UHDM::any* const actual2 =
+    return actual;
+  } else if (const UHDM::any* const actual =
                  findInVectorOfAny(name, object, scope->Variables(), scope)) {
-    return actual2;
-  } else if (const UHDM::any* const actual3 =
+    return actual;
+  } else if (const UHDM::any* const actual =
                  findInVectorOfAny(name, object, scope->Parameters(), scope)) {
-    return actual3;
+    return actual;
   } else if (const UHDM::package* const inst =
                  scope->Instance<UHDM::package>()) {
-    if (const UHDM::any* const actual = findInPackage(object, inst)) {
+    if (const UHDM::any* const actual = findInPackage(name, object, inst)) {
       return actual;
     }
   }
 
-  return findInScope(object, scope);
+  return findInScope(name, object, scope);
 }
 
-const UHDM::any* ObjectBinder::findInTask(const UHDM::any* const object,
+const UHDM::any* ObjectBinder::findInTask(std::string_view name,
+                                          const UHDM::any* const object,
                                           const UHDM::task* const scope) {
   if (scope == nullptr) return nullptr;
   if (!m_searched.emplace(scope).second) return nullptr;
 
-  std::string_view name = object->VpiName();
-  if (scope->VpiName() == name) return scope;
-
-  if (const UHDM::any* const actual1 =
-          findInVectorOfAny(name, object, scope->Io_decls(), scope)) {
-    return actual1;
-  } else if (const UHDM::any* const actual2 =
+  if (areSimilarNames(scope, name)) {
+    return scope;
+  } else if (const UHDM::any* const actual =
+                 findInVectorOfAny(name, object, scope->Io_decls(), scope)) {
+    return actual;
+  } else if (const UHDM::any* const actual =
                  findInVectorOfAny(name, object, scope->Variables(), scope)) {
-    return actual2;
+    return actual;
   } else if (const UHDM::package* const p = scope->Instance<UHDM::package>()) {
-    if (const UHDM::any* const actual = findInPackage(object, p)) {
+    if (const UHDM::any* const actual = findInPackage(name, object, p)) {
       return actual;
     }
   }
 
-  return findInScope(object, scope);
+  return findInScope(name, object, scope);
 }
 
 const UHDM::any* ObjectBinder::findInFor_stmt(
-    const UHDM::any* const object, const UHDM::for_stmt* const scope) {
+    std::string_view name, const UHDM::any* const object,
+    const UHDM::for_stmt* const scope) {
   if (scope == nullptr) return nullptr;
   if (!m_searched.emplace(scope).second) return nullptr;
 
-  const std::string_view name = object->VpiName();
   std::string_view shortName = name;
   if (shortName.find("::") != std::string::npos) {
     std::vector<std::string_view> tokens;
@@ -586,32 +611,32 @@ const UHDM::any* ObjectBinder::findInFor_stmt(
         if (lhs->UhdmType() == UHDM::uhdmref_module) continue;
         if (lhs->UhdmType() == UHDM::uhdmref_obj) continue;
         if (lhs->UhdmType() == UHDM::uhdmvar_select) continue;
-        if (lhs->VpiName() == name) return lhs;
-        if (lhs->VpiName() == shortName) return lhs;
+        if (areSimilarNames(lhs, name)) return lhs;
+        if (areSimilarNames(lhs, shortName)) return lhs;
       }
     }
   }
 
-  return findInScope(object, scope);
+  return findInScope(name, object, scope);
 }
 
 const UHDM::any* ObjectBinder::findInForeach_stmt(
-    const UHDM::any* const object, const UHDM::foreach_stmt* const scope) {
+    std::string_view name, const UHDM::any* const object,
+    const UHDM::foreach_stmt* const scope) {
   if (scope == nullptr) return nullptr;
   if (!m_searched.emplace(scope).second) return nullptr;
 
-  std::string_view name = object->VpiName();
   if (const UHDM::any* const var =
           findInVectorOfAny(name, object, scope->VpiLoopVars(), scope)) {
     return var;
   }
 
-  return findInScope(object, scope);
+  return findInScope(name, object, scope);
 }
 
 template <typename T>
 const UHDM::any* ObjectBinder::findInScope_sub(
-    const UHDM::any* const object, const T* const scope,
+    std::string_view name, const UHDM::any* const object, const T* const scope,
     typename std::enable_if<
         std::is_same<UHDM::begin, typename std::decay<T>::type>::value ||
         std::is_same<UHDM::fork_stmt,
@@ -619,20 +644,21 @@ const UHDM::any* ObjectBinder::findInScope_sub(
   if (scope == nullptr) return nullptr;
   if (!m_searched.emplace(scope).second) return nullptr;
 
-  const std::string_view name = object->VpiName();
-  if (const UHDM::any* const actual1 =
-          findInVectorOfAny(name, object, scope->Variables(), scope)) {
-    return actual1;
-  } else if (const UHDM::any* const actual2 =
-                 findInVectorOfAny(name, object, scope->Parameters(), scope)) {
-    return actual2;
-  }
-
   std::string_view shortName = name;
   if (shortName.find("::") != std::string::npos) {
     std::vector<std::string_view> tokens;
     StringUtils::tokenizeMulti(shortName, "::", tokens);
     if (tokens.size() > 1) shortName = tokens.back();
+  }
+
+  if (areSimilarNames(scope, name) || areSimilarNames(scope, shortName)) {
+    return scope;
+  } else if (const UHDM::any* const actual =
+                 findInVectorOfAny(name, object, scope->Variables(), scope)) {
+    return actual;
+  } else if (const UHDM::any* const actual =
+                 findInVectorOfAny(name, object, scope->Parameters(), scope)) {
+    return actual;
   }
 
   if (const UHDM::VectorOfany* const stmts = scope->Stmts()) {
@@ -646,21 +672,21 @@ const UHDM::any* ObjectBinder::findInScope_sub(
         if (lhs->UhdmType() == UHDM::uhdmref_module) continue;
         if (lhs->UhdmType() == UHDM::uhdmref_obj) continue;
         if (lhs->UhdmType() == UHDM::uhdmvar_select) continue;
-        if (lhs->VpiName() == name) return lhs;
-        if (lhs->VpiName() == shortName) return lhs;
+        if (areSimilarNames(lhs, name)) return lhs;
+        if (areSimilarNames(lhs, shortName)) return lhs;
       }
     }
   }
 
-  return findInScope(object, scope);
+  return findInScope(name, object, scope);
 }
 
 const UHDM::any* ObjectBinder::findInClass_defn(
-    const UHDM::any* const object, const UHDM::class_defn* const scope) {
+    std::string_view name, const UHDM::any* const object,
+    const UHDM::class_defn* const scope) {
   if (scope == nullptr) return nullptr;
   if (!m_searched.emplace(scope).second) return nullptr;
 
-  const std::string_view name = object->VpiName();
   std::string_view shortName = name;
   if (shortName.find("::") != std::string::npos) {
     std::vector<std::string_view> tokens;
@@ -668,9 +694,9 @@ const UHDM::any* ObjectBinder::findInClass_defn(
     if (tokens.size() > 1) shortName = tokens.back();
   }
 
-  if (name == "this") return scope;
-
-  if (name == "super") {
+  if (areSimilarNames(name, "this")) {
+    return scope;
+  } else if (areSimilarNames(name, "super")) {
     if (const UHDM::extends* ext =
             static_cast<const UHDM::class_defn*>(scope)->Extends()) {
       if (const UHDM::ref_typespec* rt = ext->Class_typespec()) {
@@ -682,71 +708,82 @@ const UHDM::any* ObjectBinder::findInClass_defn(
     return nullptr;
   }
 
-  if (scope->VpiName() == name) return scope;
-  if (scope->VpiName() == shortName) return scope;
-
-  if (const UHDM::any* const actual1 =
-          findInVectorOfAny(name, object, scope->Variables(), scope)) {
-    return actual1;
-  } else if (const UHDM::any* const actual2 =
+  if (areSimilarNames(scope, name) || areSimilarNames(scope, shortName)) {
+    return scope;
+  } else if (const UHDM::any* const actual =
+                 findInVectorOfAny(name, object, scope->Variables(), scope)) {
+    return actual;
+  } else if (const UHDM::any* const actual =
                  findInVectorOfAny(name, object, scope->Task_funcs(), scope)) {
-    return actual2;
-  } else if (const UHDM::any* const actual3 =
-                 findInScope(object, static_cast<const UHDM::scope*>(scope))) {
-    return actual3;
-  } else if (const UHDM::any* const actual4 =
+    return actual;
+  } else if (const UHDM::any* const actual = findInScope(
+                 name, object, static_cast<const UHDM::scope*>(scope))) {
+    return actual;
+  } else if (const UHDM::any* const actual =
                  findInVectorOfAny(name, object, scope->Constraints(), scope)) {
-    return actual4;
+    return actual;
   } else if (const UHDM::extends* ext = scope->Extends()) {
     if (const UHDM::ref_typespec* rt = ext->Class_typespec()) {
       if (const UHDM::class_typespec* cts =
               rt->Actual_typespec<UHDM::class_typespec>()) {
-        return findInClass_defn(object, cts->Class_defn());
+        return findInClass_defn(name, object, cts->Class_defn());
       }
     }
   }
 
-  return findInScope(object, scope);
+  return findInScope(name, object, scope);
 }
 
 const UHDM::any* ObjectBinder::findInModule_inst(
-    const UHDM::any* const object, const UHDM::module_inst* const scope) {
+    std::string_view name, const UHDM::any* const object,
+    const UHDM::module_inst* const scope) {
   if (scope == nullptr) return nullptr;
   if (!m_searched.emplace(scope).second) return nullptr;
 
-  std::string_view name = suffixName(object->VpiName());
-  if (name == suffixName(scope->VpiName())) {
+  if (areSimilarNames(scope, name)) {
     return scope;
-  } else if (const UHDM::any* const actual1 =
+  } else if (const UHDM::any* const actual =
                  findInVectorOfAny(name, object, scope->Interfaces(), scope)) {
-    return actual1;
-  } else if (const UHDM::any* const actual2 = findInVectorOfAny(
+    return actual;
+  } else if (const UHDM::any* const actual = findInVectorOfAny(
                  name, object, scope->Interface_arrays(), scope)) {
-    return actual2;
+    return actual;
   }
 
-  return findInInstance(object, scope);
+  return findInInstance(name, object, scope);
 }
 
-const UHDM::any* ObjectBinder::findInDesign(const UHDM::any* const object,
+const UHDM::any* ObjectBinder::findInDesign(std::string_view name,
+                                            const UHDM::any* const object,
                                             const UHDM::design* const scope) {
   if (scope == nullptr) return nullptr;
   if (!m_searched.emplace(scope).second) return nullptr;
 
-  const std::string_view name = object->VpiName();
-
-  if (name == "$root") {
+  if (areSimilarNames(name, "$root") || areSimilarNames(scope, name)) {
     return scope;
-  } else if (scope->VpiName() == name) {
-    return scope;
-  } else if (const UHDM::any* const actual1 =
+  } else if (const UHDM::any* const actual =
                  findInVectorOfAny(name, object, scope->Parameters(), scope)) {
-    return actual1;
-  } else if (const UHDM::any* const actual2 = findInVectorOfAny(
+    return actual;
+  } else if (const UHDM::any* const actual = findInVectorOfAny(
                  name, object, scope->Param_assigns(), scope)) {
-    return actual2;
+    return actual;
   } else if (const UHDM::any* const actual =
                  findInVectorOfAny(name, object, scope->AllPackages(), scope)) {
+    return actual;
+  } else if (const UHDM::any* const actual =
+                 findInVectorOfAny(name, object, scope->AllModules(), scope)) {
+    return actual;
+  } else if (const UHDM::any* const actual =
+                 findInVectorOfAny(name, object, scope->AllClasses(), scope)) {
+    return actual;
+  } else if (const UHDM::any* const actual = findInVectorOfAny(
+                 name, object, scope->AllInterfaces(), scope)) {
+    return actual;
+  } else if (const UHDM::any* const actual =
+                 findInVectorOfAny(name, object, scope->AllPrograms(), scope)) {
+    return actual;
+  } else if (const UHDM::any* const actual =
+                 findInVectorOfAny(name, object, scope->AllUdps(), scope)) {
     return actual;
   }
 
@@ -768,7 +805,8 @@ const UHDM::any* ObjectBinder::getPrefix(const UHDM::any* const object) {
             const UHDM::any* const previous = hp->Path_elems()->at(i - 1);
             if (const UHDM::ref_obj* const ro1 =
                     any_cast<UHDM::ref_obj>(previous)) {
-              if ((ro1->VpiName() == "this") || (ro1->VpiName() == "super")) {
+              if (areSimilarNames(ro1, "this") ||
+                  areSimilarNames(ro1, "super")) {
                 const UHDM::any* prefix = ro1->VpiParent();
                 while (prefix != nullptr) {
                   if (prefix->UhdmType() == UHDM::uhdmclass_defn) return prefix;
@@ -798,6 +836,9 @@ const UHDM::any* ObjectBinder::getPrefix(const UHDM::any* const object) {
                 if (const UHDM::ref_typespec* const iod2 = p1->Typespec()) {
                   return iod2->Actual_typespec();
                 }
+              } else if (const UHDM::scope* const s =
+                             ro1->Actual_group<UHDM::scope>()) {
+                return s;
               } else if (const UHDM::logic_net* const ln =
                              ro1->Actual_group<UHDM::logic_net>()) {
                 // Ideally logic_net::Typespec should be valid but for
@@ -871,6 +912,8 @@ const UHDM::any* ObjectBinder::bindObject(const UHDM::any* const object) {
   } else if (!m_prefixStack.empty()) {
     if (const UHDM::any* const prefix = getPrefix(object)) {
       parent = prefix;
+      std::string_view::size_type npos = name.find('.');
+      if (npos != std::string_view::npos) name.remove_prefix(npos + 1);
     }
   }
 
@@ -878,91 +921,92 @@ const UHDM::any* ObjectBinder::bindObject(const UHDM::any* const object) {
     switch (parent->UhdmType()) {
       case UHDM::uhdmfunction: {
         if (const UHDM::any* const actual = findInFunction(
-                object, static_cast<const UHDM::function*>(parent))) {
+                name, object, static_cast<const UHDM::function*>(parent))) {
           return actual;
         }
       } break;
 
       case UHDM::uhdmtask: {
-        if (const UHDM::any* const actual =
-                findInTask(object, static_cast<const UHDM::task*>(parent))) {
+        if (const UHDM::any* const actual = findInTask(
+                name, object, static_cast<const UHDM::task*>(parent))) {
           return actual;
         }
       } break;
 
       case UHDM::uhdmfor_stmt: {
         if (const UHDM::any* const actual = findInFor_stmt(
-                object, static_cast<const UHDM::for_stmt*>(parent))) {
+                name, object, static_cast<const UHDM::for_stmt*>(parent))) {
           return actual;
         }
       } break;
 
       case UHDM::uhdmforeach_stmt: {
         if (const UHDM::any* const actual = findInForeach_stmt(
-                object, static_cast<const UHDM::foreach_stmt*>(parent))) {
+                name, object, static_cast<const UHDM::foreach_stmt*>(parent))) {
           return actual;
         }
       } break;
 
       case UHDM::uhdmbegin: {
         if (const UHDM::any* const actual = findInScope_sub(
-                object, static_cast<const UHDM::begin*>(parent))) {
+                name, object, static_cast<const UHDM::begin*>(parent))) {
           return actual;
         }
       } break;
 
       case UHDM::uhdmfork_stmt: {
         if (const UHDM::any* const actual = findInScope_sub(
-                object, static_cast<const UHDM::fork_stmt*>(parent))) {
+                name, object, static_cast<const UHDM::fork_stmt*>(parent))) {
           return actual;
         }
       } break;
 
       case UHDM::uhdmclass_defn: {
         if (const UHDM::any* const actual = findInClass_defn(
-                object, static_cast<const UHDM::class_defn*>(parent))) {
+                name, object, static_cast<const UHDM::class_defn*>(parent))) {
           return actual;
         }
       } break;
 
       case UHDM::uhdmmodule_inst: {
         if (const UHDM::any* const actual = findInModule_inst(
-                object, static_cast<const UHDM::module_inst*>(parent))) {
+                name, object, static_cast<const UHDM::module_inst*>(parent))) {
           return actual;
         }
       } break;
 
       case UHDM::uhdminterface_inst: {
         if (const UHDM::any* const actual = findInInterface_inst(
-                object, static_cast<const UHDM::interface_inst*>(parent))) {
+                name, object,
+                static_cast<const UHDM::interface_inst*>(parent))) {
           return actual;
         }
       } break;
 
       case UHDM::uhdmprogram: {
         if (const UHDM::any* const actual = findInProgram(
-                object, static_cast<const UHDM::program*>(parent))) {
+                name, object, static_cast<const UHDM::program*>(parent))) {
           return actual;
         }
       } break;
 
       case UHDM::uhdmpackage: {
         if (const UHDM::any* const actual = findInPackage(
-                object, static_cast<const UHDM::package*>(parent))) {
+                name, object, static_cast<const UHDM::package*>(parent))) {
           return actual;
         }
       } break;
 
       case UHDM::uhdmudp_defn: {
         if (const UHDM::any* const actual = findInUdp_defn(
-                object, static_cast<const UHDM::udp_defn*>(parent))) {
+                name, object, static_cast<const UHDM::udp_defn*>(parent))) {
           return actual;
         }
       } break;
 
       case UHDM::uhdmdesign: {
         if (const UHDM::any* const actual = findInDesign(
-                object, static_cast<const UHDM::design*>(parent))) {
+                name, object, static_cast<const UHDM::design*>(parent))) {
           return actual;
         }
       } break;
@@ -1056,6 +1100,10 @@ void ObjectBinder::enterRef_module(const UHDM::ref_module* const object) {
   if (const UHDM::any* const actual = getModuleInst(object->VpiDefName())) {
     const_cast<UHDM::ref_module*>(object)->Actual_group(
         const_cast<UHDM::any*>(actual));
+  } else if (const UHDM::any* const actual =
+                 getInterfaceInst(object->VpiDefName())) {
+    const_cast<UHDM::ref_module*>(object)->Actual_group(
+        const_cast<UHDM::any*>(actual));
   }
 }
 
@@ -1064,8 +1112,8 @@ void ObjectBinder::enterRef_obj(const UHDM::ref_obj* const object) {
 
   if (const UHDM::any* actual = bindObject(object)) {
     // Reporting error for $root.
-    if ((object->VpiName() == "$root") &&
-        (actual->UhdmType() == UHDM::uhdmdesign))
+    if ((actual->UhdmType() == UHDM::uhdmdesign) &&
+        areSimilarNames(object, "$root"))
       return;
 
     const_cast<UHDM::ref_obj*>(object)->Actual_group(
@@ -1074,15 +1122,24 @@ void ObjectBinder::enterRef_obj(const UHDM::ref_obj* const object) {
 }
 
 void ObjectBinder::enterRef_typespec(const UHDM::ref_typespec* const object) {
-  if (const UHDM::typespec* const t = object->Actual_typespec()) {
-    if (t->UhdmType() != UHDM::uhdmunsupported_typespec) {
-      return;
-    }
+  const UHDM::typespec* const object_Actual_typespec =
+      object->Actual_typespec();
+  if ((object_Actual_typespec != nullptr) &&
+      (object_Actual_typespec->UhdmType() == UHDM::uhdmunsupported_typespec)) {
+    const_cast<UHDM::ref_typespec*>(object)->Actual_typespec(nullptr);
   }
+
+  if (object->Actual_typespec() != nullptr) return;
 
   if (const UHDM::any* actual = bindObject(object)) {
     const_cast<UHDM::ref_typespec*>(object)->Actual_typespec(
         const_cast<UHDM::typespec*>(any_cast<UHDM::typespec>(actual)));
+  }
+
+  if ((object_Actual_typespec != nullptr) &&
+      (object->Actual_typespec() == nullptr)) {
+    const_cast<UHDM::ref_typespec*>(object)->Actual_typespec(
+        const_cast<UHDM::typespec*>(object_Actual_typespec));
   }
 }
 
@@ -1101,7 +1158,7 @@ void ObjectBinder::enterClass_defn(const UHDM::class_defn* const object) {
     const DesignComponent* dc =
         valuedcomponenti_cast<DesignComponent>(entry.first);
     if (dc == nullptr) continue;
-    if (rt->VpiName() != dc->getName()) continue;
+    if (!areSimilarNames(rt, dc->getName())) continue;
 
     const ClassDefinition* bdef =
         valuedcomponenti_cast<ClassDefinition>(entry.first);
@@ -1141,11 +1198,11 @@ void ObjectBinder::reportErrors() {
     if (const UHDM::ref_obj* const ro = any_cast<UHDM::ref_obj>(object)) {
       if (ro->Actual_group() == nullptr) {
         if (const UHDM::any* const parent = object->VpiParent()) {
-          if (!(((object->VpiName() == "size") ||
-                 (object->VpiName() == "delete")) &&
-                (parent->UhdmType() == UHDM::uhdmhier_path)))
+          if (!((parent->UhdmType() == UHDM::uhdmhier_path) &&
+                (areSimilarNames(object, "size") ||
+                 areSimilarNames(object, "delete"))))
             reportMissingActual = true;
-          if (object->VpiName() != "default") reportMissingActual = true;
+          if (!areSimilarNames(object, "default")) reportMissingActual = true;
         }
       }
     } else if (const UHDM::ref_typespec* const rt =
@@ -1207,7 +1264,7 @@ bool ObjectBinder::createDefaultNets() {
 
     const UHDM::any* const pro = ro->VpiParent();
     if ((pro != nullptr) && (pro->UhdmType() == UHDM::uhdmsys_func_call) &&
-        (pro->VpiName() == "$bits")) {
+        areSimilarNames(pro, "$bits")) {
       UHDM::ref_typespec* const rt = m_serializer.MakeRef_typespec();
       rt->VpiName(object->VpiName());
       rt->VpiParent(const_cast<UHDM::any*>(object->VpiParent()));
@@ -1221,11 +1278,11 @@ bool ObjectBinder::createDefaultNets() {
                                        }));
         m_serializer.Erase(rt);
       } else {
-        rt->VpiFile(pro->VpiFile());
-        rt->VpiLineNo(pro->VpiLineNo());
-        rt->VpiColumnNo(pro->VpiColumnNo());
-        rt->VpiEndLineNo(pro->VpiEndLineNo());
-        rt->VpiEndColumnNo(pro->VpiEndColumnNo());
+        rt->VpiFile(ro->VpiFile());
+        rt->VpiLineNo(ro->VpiLineNo());
+        rt->VpiColumnNo(ro->VpiColumnNo());
+        rt->VpiEndLineNo(ro->VpiEndLineNo());
+        rt->VpiEndColumnNo(ro->VpiEndColumnNo());
         UHDM::VectorOfany* const args =
             static_cast<const UHDM::sys_func_call*>(object->VpiParent())
                 ->Tf_call_args();
@@ -1239,16 +1296,20 @@ bool ObjectBinder::createDefaultNets() {
     }
 
     VObjectType defaultNetType = getDefaultNetType(component);
-    if ((defaultNetType != VObjectType::slNoType) && (scope != nullptr)) {
+    if (defaultNetType != VObjectType::slNoType) {
+      const UHDM::any* parent = object->VpiParent();
+      while ((parent != nullptr) && (parent->Cast<UHDM::scope>() == nullptr)) {
+        parent = parent->VpiParent();
+      }
       UHDM::logic_net* net = m_serializer.MakeLogic_net();
       net->VpiName(object->VpiName());
-      net->VpiParent(scope);
+      net->VpiParent(const_cast<UHDM::any*>(parent));
       net->VpiNetType(UhdmWriter::getVpiNetType(defaultNetType));
+      net->VpiFile(object->VpiFile());
       net->VpiLineNo(object->VpiLineNo());
       net->VpiColumnNo(object->VpiColumnNo());
       net->VpiEndLineNo(object->VpiEndLineNo());
       net->VpiEndColumnNo(object->VpiEndColumnNo());
-      net->VpiFile(object->VpiFile());
       const_cast<UHDM::ref_obj*>(ro)->Actual_group(net);
       result = true;
     }

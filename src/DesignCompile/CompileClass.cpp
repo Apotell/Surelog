@@ -39,6 +39,7 @@
 #include <Surelog/Utils/StringUtils.h>
 
 // UHDM
+#include <uhdm/attribute.h>
 #include <uhdm/class_defn.h>
 #include <uhdm/constraint.h>
 #include <uhdm/expr.h>
@@ -124,7 +125,7 @@ bool CompileClass::compile(Elaborate elaborate, Reduce reduce) {
     classId = current.m_child;
     if (fC->Type(classId) == VObjectType::paAttribute_instance) {
       if (UHDM::VectorOfattribute* attributes = m_helper.compileAttributes(
-              m_class, fC, classId, m_compileDesign, nullptr)) {
+              m_class, fC, classId, m_compileDesign, defn)) {
         m_class->Attributes(attributes);
       }
     }
@@ -133,7 +134,7 @@ bool CompileClass::compile(Elaborate elaborate, Reduce reduce) {
   // Package imports
   std::vector<FileCNodeId> pack_imports;
   // - Local file imports
-  for (auto import : fC->getObjects(VObjectType::paPackage_import_item)) {
+  for (auto& import : fC->getObjects(VObjectType::paPackage_import_item)) {
     pack_imports.push_back(import);
   }
   // - Parent container imports
@@ -141,7 +142,7 @@ bool CompileClass::compile(Elaborate elaborate, Reduce reduce) {
   if (container) {
     // FileCNodeId itself(container->getFileContents ()[0],
     // container->getNodeIds ()[0]); pack_imports.push_back(itself);
-    for (auto import :
+    for (auto& import :
          container->getObjects(VObjectType::paPackage_import_item)) {
       pack_imports.push_back(import);
     }
@@ -550,7 +551,7 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
      */
 
     NodeId task_decl =
-        m_helper.setFuncTaskQualifiers(fC, fC->Child(id), nullptr);
+        m_helper.setFuncTaskQualifiers<UHDM::task>(fC, fC->Child(id), nullptr);
     NodeId Task_body_declaration;
     if (fC->Type(task_decl) == VObjectType::paTask_body_declaration)
       Task_body_declaration = task_decl;
@@ -584,8 +585,8 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
     NodeId func_prototype = fC->Child(func_decl);
     UHDM::Serializer& s = m_compileDesign->getSerializer();
     if (fC->Type(func_prototype) == VObjectType::paTask_prototype) {
-      NodeId task_decl =
-          m_helper.setFuncTaskQualifiers(fC, fC->Child(id), nullptr);
+      NodeId task_decl = m_helper.setFuncTaskQualifiers<UHDM::function>(
+          fC, fC->Child(id), nullptr);
       NodeId Task_body_declaration;
       if (fC->Type(task_decl) == VObjectType::paTask_body_declaration)
         Task_body_declaration = task_decl;

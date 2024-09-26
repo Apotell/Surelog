@@ -2611,8 +2611,8 @@ void DesignElaboration::reduceUnnamedBlocks_() {
   }
 }
 
-void DesignElaboration::bind_ports_nets_(std::vector<Signal*>& ports,
-                                         std::vector<Signal*>& signals,
+void DesignElaboration::bind_ports_nets_(const std::vector<Signal*>& ports,
+                                         const std::vector<Signal*>& signals,
                                          const FileContent* fC,
                                          ModuleInstance* instance,
                                          DesignComponent* mod) {
@@ -2631,8 +2631,8 @@ bool DesignElaboration::bindDataTypes_(ModuleInstance* instance,
   if (component == nullptr) return true;
   if (component->getFileContents().empty()) return true;
   const FileContent* fC = component->getFileContents()[0];
-  std::vector<Signal*>& ports = component->getPorts();  // Always empty
-  std::vector<Signal*>& signals =
+  const std::vector<Signal*>& ports = component->getPorts();  // Always empty
+  const std::vector<Signal*>& signals =
       component->getSignals();  // Variables actually
   bind_ports_nets_(ports, signals, fC, instance, component);
   return true;
@@ -2640,12 +2640,12 @@ bool DesignElaboration::bindDataTypes_(ModuleInstance* instance,
 
 bool DesignElaboration::bindPackagesDataTypes_() {
   Design* design = m_compileDesign->getCompiler()->getDesign();
-  auto packages = design->getPackageDefinitions();
+  auto& packages = design->getPackageDefinitions();
   for (const auto& packNamePair : packages) {
     Package* package = packNamePair.second;
     const FileContent* fC = package->getFileContents()[0];
-    std::vector<Signal*>& ports = package->getPorts();  // Always empty
-    std::vector<Signal*>& signals =
+    const std::vector<Signal*>& ports = package->getPorts();  // Always empty
+    const std::vector<Signal*>& signals =
         package->getSignals();  // Variables actually
     bind_ports_nets_(ports, signals, fC, nullptr, package);
   }
@@ -2654,17 +2654,17 @@ bool DesignElaboration::bindPackagesDataTypes_() {
 
 bool DesignElaboration::bindDataTypes_() {
   Design* design = m_compileDesign->getCompiler()->getDesign();
-  auto packages = design->getPackageDefinitions();
+  auto& packages = design->getPackageDefinitions();
   for (const auto& packNamePair : packages) {
     Package* package = packNamePair.second;
     const FileContent* fC = package->getFileContents()[0];
-    std::vector<Signal*>& ports = package->getPorts();  // Always empty
-    std::vector<Signal*>& signals =
+    const std::vector<Signal*>& ports = package->getPorts();  // Always empty
+    const std::vector<Signal*>& signals =
         package->getSignals();  // Variables actually
     bind_ports_nets_(ports, signals, fC, nullptr, package);
   }
 
-  auto modules = design->getModuleDefinitions();
+  auto& modules = design->getModuleDefinitions();
   for (const auto& modNamePair : modules) {
     ModuleDefinition* mod = modNamePair.second;
     VObjectType compType = mod->getType();
@@ -2690,17 +2690,17 @@ bool DesignElaboration::bindDataTypes_() {
                compType == VObjectType::paGenerate_interface_item ||
                compType == VObjectType::paGenerate_begin_end_block) {
       const FileContent* fC = mod->getFileContents()[0];
-      std::vector<Signal*>& ports = mod->getPorts();
-      std::vector<Signal*>& signals = mod->getSignals();
+      const std::vector<Signal*>& ports = mod->getPorts();
+      const std::vector<Signal*>& signals = mod->getSignals();
       bind_ports_nets_(ports, signals, fC, nullptr, mod);
     }
   }
-  auto programs = design->getProgramDefinitions();
+  auto& programs = design->getProgramDefinitions();
   for (const auto& programPair : programs) {
     Program* prog = programPair.second;
     const FileContent* fC = prog->getFileContents()[0];
-    std::vector<Signal*>& ports = prog->getPorts();
-    std::vector<Signal*>& signals = prog->getSignals();
+    const std::vector<Signal*>& ports = prog->getPorts();
+    const std::vector<Signal*>& signals = prog->getSignals();
     bind_ports_nets_(ports, signals, fC, nullptr, prog);
   }
   return true;

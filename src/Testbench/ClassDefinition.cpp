@@ -50,8 +50,10 @@ ClassDefinition::ClassDefinition(std::string_view name, Library* library,
 
   UHDM::class_defn* const instance = serializer.MakeClass_defn();
   if (!name.empty()) instance->VpiName(name);
-  if (nodeId && (fC != nullptr))
-    fC->populateCoreMembers(nodeId, nodeId, instance);
+  if (nodeId && (fC != nullptr)) {
+    fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::paCLASS),
+                            nodeId, instance);
+  }
   if (container != nullptr) instance->VpiParent(container->getUhdmModel());
   setUhdmModel(instance);
 }

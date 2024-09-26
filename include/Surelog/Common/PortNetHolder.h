@@ -28,6 +28,7 @@
 // UHDM
 #include <uhdm/uhdm_forward_decl.h>
 
+#include <algorithm>
 #include <vector>
 
 namespace SURELOG {
@@ -38,8 +39,31 @@ class PortNetHolder {
  public:
   virtual ~PortNetHolder() {}  // virtual as used as interface
 
-  std::vector<Signal*>& getPorts() { return m_ports; }
-  std::vector<Signal*>& getSignals() { return m_signals; }
+  const std::vector<Signal*>& getPorts() const { return m_ports; }
+  const std::vector<Signal*>& getSignals() const { return m_signals; }
+
+  void addPort(Signal* signal) { m_ports.emplace_back(signal); }
+
+  void addSignal(Signal* signal) { m_signals.emplace_back(signal); }
+
+  bool removePort(Signal* signal) {
+    auto it = std::find(m_ports.begin(), m_ports.end(), signal);
+    if (it != m_ports.end()) {
+      m_ports.erase(it);
+      return true;
+    }
+    return false;
+  }
+
+  bool removeSignal(Signal* signal) {
+    auto it = std::find(m_signals.begin(), m_signals.end(), signal);
+    if (it != m_signals.end()) {
+      m_signals.erase(it);
+      return true;
+    }
+    return false;
+  }
+
   std::vector<UHDM::cont_assign*>* getContAssigns() const {
     return m_contAssigns;
   }

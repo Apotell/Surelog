@@ -27,14 +27,19 @@
 
 namespace SURELOG {
 
+int32_t Signal::s_instId = 0;
+
 Signal::Signal(DesignComponent* component, const FileContent* fileContent,
                NodeId nodeId, NodeId nameId, VObjectType type,
                VObjectType direction, NodeId packedDimension,
                NodeId unpackedDimension, bool is_signed)
-    : m_component(component),
+    : d_instId(++s_instId),
+      m_component(component),
       m_fileContent(fileContent),
       m_nodeId(nodeId),
       m_nameId(nameId),
+      m_netNodeId(nodeId),
+      m_netNameId(nameId),
       m_type(type),
       m_direction(direction),
       m_packedDimension(packedDimension),
@@ -44,10 +49,13 @@ Signal::Signal(DesignComponent* component, const FileContent* fileContent,
 Signal::Signal(DesignComponent* component, const FileContent* fileContent,
                NodeId nodeId, NodeId nameId, NodeId interfaceTypeNameId,
                VObjectType subnettype, NodeId unpackedDimension, bool is_signed)
-    : m_component(component),
+    : d_instId(++s_instId),
+      m_component(component),
       m_fileContent(fileContent),
       m_nodeId(nodeId),
       m_nameId(nameId),
+      m_netNodeId(nodeId),
+      m_netNameId(nameId),
       m_type(subnettype),
       m_direction(VObjectType::slNoType),
       m_interfaceTypeNameId(interfaceTypeNameId),

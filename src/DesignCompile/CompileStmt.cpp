@@ -510,6 +510,7 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
             ref_typespec* tpsRef = s.MakeRef_typespec();
             fC->populateCoreMembers(loopVarId, loopVarId, tpsRef);
             tpsRef->VpiParent(ref);
+            tpsRef->VpiName(fC->SymName(loopVarId));
             ref->Typespec(tpsRef);
           }
           ref->Typespec()->Actual_typespec(tps);
@@ -566,6 +567,7 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
     case VObjectType::paParameter_declaration:
     case VObjectType::paLocal_parameter_declaration: {
       NodeId Data_type_or_implicit = fC->Child(the_stmt);
+      NodeId Data_type = fC->Child(Data_type_or_implicit);
       UHDM::typespec* ts =
           compileTypespec(component, fC, fC->Child(Data_type_or_implicit),
                           compileDesign, Reduce::Yes, nullptr, nullptr, false);
@@ -576,7 +578,6 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
         NodeId name = fC->Child(Param_assignment);
         NodeId value = fC->Sibling(name);
         UHDM::parameter* param = s.MakeParameter();
-        fC->populateCoreMembers(Param_assignment, Param_assignment, param);
         // Unpacked dimensions
         if (fC->Type(value) == VObjectType::paUnpacked_dimension) {
           int32_t unpackedSize;
@@ -590,6 +591,8 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
           }
         }
         param->VpiLocalParam(true);
+        fC->populateCoreMembers(name, name, param);
+
         UHDM::param_assign* param_assign = s.MakeParam_assign();
         fC->populateCoreMembers(Param_assignment, Param_assignment,
                                 param_assign);
@@ -599,7 +602,9 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
         if (ts != nullptr) {
           if (param->Typespec() == nullptr) {
             ref_typespec* tsRef = s.MakeRef_typespec();
-            fC->populateCoreMembers(name, name, tsRef);
+            tsRef->VpiName(fC->SymName(Data_type));
+            fC->populateCoreMembers(Data_type_or_implicit,
+                                    Data_type_or_implicit, tsRef);
             tsRef->VpiParent(param);
             param->Typespec(tsRef);
           }
@@ -669,15 +674,14 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
           any* stmt = while_stmts->front();
           do_while->VpiStmt(stmt);
           stmt->VpiParent(do_while);
-          do_while->VpiEndLineNo(stmt->VpiEndLineNo());
-          do_while->VpiEndColumnNo(stmt->VpiEndColumnNo());
         }
       }
       if (UHDM::any* cond_exp = compileExpression(
               component, fC, Condition, compileDesign, Reduce::No, do_while)) {
         do_while->VpiCondition((UHDM::expr*)cond_exp);
       }
-      fC->populateCoreMembers(the_stmt, Condition, do_while);
+      fC->populateCoreMembers(fC->Parent(Condition), fC->Parent(Condition),
+                              do_while);
       stmt = do_while;
       break;
     }
@@ -966,7 +970,7 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
       // Non-elab model
       VectorOfany* stmts = s.MakeAnyVec();
       auto assigns = compileContinuousAssignment(
-          component, fC, fC->Child(the_stmt), compileDesign, nullptr, nullptr);
+          component, fC, fC->Child(the_stmt), compileDesign, pstmt, nullptr);
       for (auto assign : assigns) {
         assign->VpiParent(pstmt);
         stmts->push_back(assign);
@@ -1029,6 +1033,10 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
       stmt = final;
       break;
     }
+    case VObjectType::paNet_declaration: {
+      compileNetDeclaration(component, fC, the_stmt, false, compileDesign);
+      break;
+    }
     default:
       break;
   }
@@ -1036,16 +1044,14 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
     if (attributes) {
       // Only attach attributes to following stmt
       if (UHDM::atomic_stmt* stm = any_cast<atomic_stmt*>(stmt)) {
-        if (attributes) {
+        if (attributes != nullptr) {
           stm->Attributes(attributes);
-          for (auto a : *attributes) a->VpiParent(stm);
+          for (auto a : *attributes) a->VpiParent(stm, true);
         }
       }
     }
 
-    if (stmt->VpiLineNo() == 0) {
-      fC->populateCoreMembers(the_stmt, the_stmt, stmt);
-    }
+    fC->populateCoreMembers(the_stmt, the_stmt, stmt);
     stmt->VpiParent(pstmt);
     results = s.MakeAnyVec();
     results->push_back(stmt);
@@ -1053,9 +1059,9 @@ VectorOfany* CompileHelper::compileStmt(DesignComponent* component,
     for (any* st : *results) {
       st->VpiParent(pstmt);
       if (UHDM::atomic_stmt* stm = any_cast<atomic_stmt*>(st)) {
-        if (attributes) {
+        if (attributes != nullptr) {
           stm->Attributes(attributes);
-          for (auto a : *attributes) a->VpiParent(stm);
+          for (auto a : *attributes) a->VpiParent(stm, true);
         }
       }
     }
@@ -1130,22 +1136,25 @@ VectorOfany* CompileHelper::compileDataDeclaration(
       while (Variable_decl_assignment) {
         NodeId Var = Variable_decl_assignment;
         if (fC->Child(Var)) Var = fC->Child(Var);
-        NodeId UnpackedDimensionsId = fC->Sibling(Var);
+        NodeId UnpackedDimensionsStartId = fC->Sibling(Var);
         std::vector<UHDM::range*>* unpackedDimensions = nullptr;
-        if (fC->Type(UnpackedDimensionsId) != VObjectType::paExpression) {
+        if (fC->Type(UnpackedDimensionsStartId) != VObjectType::paExpression) {
           int32_t unpackedSize;
-          unpackedDimensions =
-              compileRanges(component, fC, UnpackedDimensionsId, compileDesign,
-                            reduce, nullptr, instance, unpackedSize, false);
+          unpackedDimensions = compileRanges(
+              component, fC, UnpackedDimensionsStartId, compileDesign, reduce,
+              nullptr, instance, unpackedSize, false);
         }
-        NodeId Expression = UnpackedDimensionsId;
+        NodeId UnpackedDimensionsEndId = UnpackedDimensionsStartId;
+        while (fC->Sibling(UnpackedDimensionsEndId))
+          UnpackedDimensionsEndId = fC->Sibling(UnpackedDimensionsEndId);
+        NodeId Expression = UnpackedDimensionsStartId;
         while (Expression &&
                (fC->Type(Expression) != VObjectType::paExpression)) {
           Expression = fC->Sibling(Expression);
         }
         variables* var = (variables*)compileVariable(
-            component, fC, Data_type, Data_type, compileDesign, Reduce::No,
-            pstmt, instance, false);
+            component, fC, Data_type, Var, compileDesign, Reduce::No, pstmt,
+            instance, false);
 
         if (var) {
           fC->populateCoreMembers(Var, Var, var);
@@ -1157,28 +1166,29 @@ VectorOfany* CompileHelper::compileDataDeclaration(
             array_var* arr = s.MakeArray_var();
             fC->populateCoreMembers(Var, Var, arr);
             array_typespec* tps = s.MakeArray_typespec();
+            tps->VpiParent(pstmt);
+            fC->populateCoreMembers(UnpackedDimensionsStartId,
+                                    UnpackedDimensionsEndId, tps);
+            tps->Ranges(unpackedDimensions);
+            for (auto r : *unpackedDimensions) r->VpiParent(tps, true);
+
             if (ref_typespec* var_ts = var->Typespec()) {
               if (typespec* ts = var_ts->Actual_typespec()) {
                 if (tps->Elem_typespec() == nullptr) {
                   ref_typespec* varRef = s.MakeRef_typespec();
                   varRef->VpiParent(tps);
-                  varRef->VpiName(fC->SymName(fC->Child(Data_type)));
+                  varRef->VpiName(fC->SymName(Data_type));
                   fC->populateCoreMembers(Data_type, Data_type, varRef);
                   tps->Elem_typespec(varRef);
                 }
                 tps->Elem_typespec()->Actual_typespec(ts);
               }
             }
-            tps->VpiParent(pstmt);
-            fC->populateCoreMembers(Var, fC->Sibling(Var), tps);
-            tps->VpiEndLineNo(unpackedDimensions->back()->VpiEndLineNo());
-            tps->VpiEndColumnNo(unpackedDimensions->back()->VpiEndColumnNo());
-            tps->Ranges(unpackedDimensions);
-            for (auto r : *unpackedDimensions) r->VpiParent(tps);
             if (arr->Typespec() == nullptr) {
               ref_typespec* tpsRef = s.MakeRef_typespec();
               tpsRef->VpiParent(arr);
-              fC->populateCoreMembers(Data_type, Data_type, tpsRef);
+              fC->populateCoreMembers(UnpackedDimensionsStartId,
+                                      UnpackedDimensionsEndId, tpsRef);
               arr->Typespec(tpsRef);
             }
             arr->Typespec()->Actual_typespec(tps);
@@ -1276,18 +1286,17 @@ UHDM::atomic_stmt* CompileHelper::compileConditionalStmt(
     }
     Cond_predicate = fC->Sibling(Cond_predicate);
   }
-  UHDM::any* cond_exp =
-      compileExpression(component, fC, Cond_predicate, compileDesign,
-                        Reduce::No, pstmt, instance);
   NodeId If_branch_stmt = fC->Sibling(Cond_predicate);
   NodeId Else_branch_stmt = fC->Sibling(If_branch_stmt);
   UHDM::atomic_stmt* result_stmt = nullptr;
   if (Else_branch_stmt) {
     UHDM::if_else* cond_stmt = s.MakeIf_else();
     cond_stmt->VpiQualifier(qualifier);
-    cond_stmt->VpiCondition((UHDM::expr*)cond_exp);
-    if (cond_exp && (cond_exp->VpiParent() == nullptr))
-      cond_exp->VpiParent(cond_stmt);
+    if (UHDM::any* cond_exp =
+            compileExpression(component, fC, Cond_predicate, compileDesign,
+                              Reduce::No, cond_stmt, instance)) {
+      cond_stmt->VpiCondition((UHDM::expr*)cond_exp);
+    }
     if (VectorOfany* if_stmts =
             compileStmt(component, fC, If_branch_stmt, compileDesign,
                         Reduce::No, cond_stmt, instance, muteErrors)) {
@@ -1302,9 +1311,11 @@ UHDM::atomic_stmt* CompileHelper::compileConditionalStmt(
   } else {
     UHDM::if_stmt* cond_stmt = s.MakeIf_stmt();
     cond_stmt->VpiQualifier(qualifier);
-    cond_stmt->VpiCondition((UHDM::expr*)cond_exp);
-    if (cond_exp && (cond_exp->VpiParent() == nullptr))
-      cond_exp->VpiParent(cond_stmt);
+    if (UHDM::any* cond_exp =
+            compileExpression(component, fC, Cond_predicate, compileDesign,
+                              Reduce::No, cond_stmt, instance)) {
+      cond_stmt->VpiCondition((UHDM::expr*)cond_exp);
+    }
     if (VectorOfany* if_stmts =
             compileStmt(component, fC, If_branch_stmt, compileDesign,
                         Reduce::No, cond_stmt, instance, muteErrors)) {
@@ -1342,10 +1353,7 @@ UHDM::atomic_stmt* CompileHelper::compileEventControlStmt(
   if (VectorOfany* stmts =
           compileStmt(component, fC, Statement_or_null, compileDesign,
                       Reduce::No, event, instance, muteErrors)) {
-    UHDM::any* const stmt = stmts->front();
-    event->Stmt(stmt);
-    event->VpiEndLineNo(stmt->VpiEndLineNo());
-    event->VpiEndColumnNo(stmt->VpiEndColumnNo());
+    if (!stmts->empty()) event->Stmt(stmts->front());
   }
   return event;
 }
@@ -1364,7 +1372,7 @@ UHDM::atomic_stmt* CompileHelper::compileRandcaseStmt(
   while (RandCase) {
     NodeId Expression = fC->Child(RandCase);
     UHDM::case_item* case_item = s.MakeCase_item();
-    fC->populateCoreMembers(Expression, Expression, case_item);
+    fC->populateCoreMembers(RandCase, RandCase, case_item);
     case_items->push_back(case_item);
     VectorOfany* exprs = case_item->VpiExprs(true);
     case_item->VpiParent(case_stmt);
@@ -1402,10 +1410,10 @@ UHDM::atomic_stmt* CompileHelper::compileCaseStmt(
   }
   NodeId Case_type = fC->Child(Case_keyword);
   NodeId Condition = fC->Sibling(Case_keyword);
-  UHDM::any* cond_exp = compileExpression(
-      component, fC, Condition, compileDesign, Reduce::No, pstmt, instance);
-  NodeId Case_item = fC->Sibling(Condition);
   UHDM::case_stmt* case_stmt = s.MakeCase_stmt();
+  UHDM::any* cond_exp = compileExpression(
+      component, fC, Condition, compileDesign, Reduce::No, case_stmt, instance);
+  NodeId Case_item = fC->Sibling(Condition);
   UHDM::VectorOfcase_item* case_items = case_stmt->Case_items(true);
   result = case_stmt;
   case_stmt->VpiCondition((UHDM::expr*)cond_exp);
@@ -1461,7 +1469,7 @@ UHDM::atomic_stmt* CompileHelper::compileCaseStmt(
             // Expr
             if (UHDM::any* item_exp =
                     compileExpression(component, fC, Expression, compileDesign,
-                                      Reduce::No, pstmt, instance)) {
+                                      Reduce::No, case_item, instance)) {
               item_exp->VpiParent(case_item);
               exprs->push_back(item_exp);
             }
@@ -1528,16 +1536,14 @@ UHDM::atomic_stmt* CompileHelper::compileCaseStmt(
   return result;
 }
 
+template <typename T>
 std::pair<std::vector<UHDM::io_decl*>*, std::vector<UHDM::variables*>*>
-CompileHelper::compileTfPortDecl(DesignComponent* component,
-                                 UHDM::task_func* parent, const FileContent* fC,
-                                 NodeId tf_item_decl,
+CompileHelper::compileTfPortDecl(DesignComponent* component, T* parent,
+                                 const FileContent* fC, NodeId tf_item_decl,
                                  CompileDesign* compileDesign) {
   UHDM::Serializer& s = compileDesign->getSerializer();
   std::vector<io_decl*>* ios = parent->Io_decls(true);
-  std::vector<variables*>* vars = parent->Variables(true);
-  std::pair<std::vector<UHDM::io_decl*>*, std::vector<UHDM::variables*>*>
-      results = std::make_pair(ios, vars);
+
   /*
 n<> u<137> t<TfPortDir_Inp> p<141> s<138> l<28>
 n<> u<138> t<Data_type_or_implicit> p<141> s<140> l<28>
@@ -1600,8 +1606,9 @@ n<> u<142> t<Tf_item_declaration> p<386> c<141> s<384> l<28>
             if (decl->Typespec() == nullptr) {
               ref_typespec* tsRef = s.MakeRef_typespec();
               tsRef->VpiParent(decl);
+              tsRef->VpiName(fC->SymName(Data_type));
               decl->Typespec(tsRef);
-              fC->populateCoreMembers(nameId, nameId, tsRef);
+              fC->populateCoreMembers(Data_type, Data_type, tsRef);
             }
             decl->Typespec()->Actual_typespec(ts);
           }
@@ -1669,11 +1676,13 @@ n<> u<142> t<Tf_item_declaration> p<386> c<141> s<384> l<28>
     }
     tf_item_decl = fC->Sibling(tf_item_decl);
   }
-  return results;
+  // std::vector<io_decl*>* ios = parent->Io_decls(true);
+  // std::vector<variables*>* vars = parent->Variables(true);
+  return std::make_pair(ios, nullptr);
 }
 
 std::vector<io_decl*>* CompileHelper::compileTfPortList(
-    DesignComponent* component, UHDM::task_func* parent, const FileContent* fC,
+    DesignComponent* component, UHDM::any* parent, const FileContent* fC,
     NodeId tf_port_list, CompileDesign* compileDesign) {
   if ((!tf_port_list) ||
       ((fC->Type(tf_port_list) != VObjectType::paTf_port_list) &&
@@ -1737,7 +1746,7 @@ std::vector<io_decl*>* CompileHelper::compileTfPortList(
       tf_data_type = fC->Sibling(tf_data_type_or_implicit);
       tf_param_name = fC->Sibling(tf_data_type);
     }
-    NodeId type = fC->Child(tf_data_type);
+    NodeId type = fC->sl_collect(tf_data_type, VObjectType::paData_type);
     if (fC->Type(type) == VObjectType::paVIRTUAL) type = fC->Sibling(type);
     if (prevType == InvalidNodeId) prevType = type;
 
@@ -1752,9 +1761,7 @@ std::vector<io_decl*>* CompileHelper::compileTfPortList(
                           Reduce::No, decl, nullptr, size, false)) {
       decl->Ranges(unpackedDimensions);
     }
-    fC->populateCoreMembers(
-        tf_port_item, unpackedDimension ? unpackedDimension : tf_param_name,
-        decl);
+    fC->populateCoreMembers(tf_param_name, tf_param_name, decl);
     if (UHDM::typespec* tempts =
             compileTypespec(component, fC, type, compileDesign, Reduce::No,
                             decl, nullptr, true)) {
@@ -1772,7 +1779,12 @@ std::vector<io_decl*>* CompileHelper::compileTfPortList(
           refName = fC->Child(refName);
         tsRef->VpiName(fC->SymName(refName));
         decl->Typespec(tsRef);
-        fC->populateCoreMembers(refName, refName, tsRef);
+        fC->populateCoreMembers(InvalidNodeId, InvalidNodeId, tsRef);
+        // Need to include the logic's packed dimensions!
+        tsRef->VpiLineNo(ts->VpiLineNo());
+        tsRef->VpiColumnNo(ts->VpiColumnNo());
+        tsRef->VpiEndLineNo(ts->VpiEndLineNo());
+        tsRef->VpiEndColumnNo(ts->VpiEndColumnNo());
       }
       decl->Typespec()->Actual_typespec(ts);
     }
@@ -1797,8 +1809,9 @@ std::vector<io_decl*>* CompileHelper::compileTfPortList(
   return ios;
 }
 
+template <typename T>
 NodeId CompileHelper::setFuncTaskQualifiers(const FileContent* fC,
-                                            NodeId nodeId, task_func* func) {
+                                            NodeId nodeId, T* func) {
   NodeId func_decl = nodeId;
   VObjectType func_type = fC->Type(nodeId);
 
@@ -1931,7 +1944,7 @@ bool CompileHelper::compileTask(DesignComponent* component,
   NodeId nodeId =
       (fC->Type(id) == VObjectType::paTask_declaration) ? id : fC->Child(id);
   std::string name;
-  NodeId task_decl = setFuncTaskQualifiers(fC, nodeId, nullptr);
+  NodeId task_decl = setFuncTaskQualifiers<task>(fC, nodeId, nullptr);
   NodeId Task_body_declaration;
   if (fC->Type(task_decl) == VObjectType::paTask_body_declaration)
     Task_body_declaration = task_decl;
@@ -2287,7 +2300,7 @@ bool CompileHelper::compileFunction(DesignComponent* component,
   if (pscope == nullptr)
     pscope = compileDesign->getCompiler()->getDesign()->getUhdmDesign();
   std::string name;
-  NodeId func_decl = setFuncTaskQualifiers(fC, nodeId, nullptr);
+  NodeId func_decl = setFuncTaskQualifiers<function>(fC, nodeId, nullptr);
   VObjectType func_decl_type = fC->Type(func_decl);
   bool constructor = false;
   if (func_decl_type == VObjectType::paClass_constructor_declaration ||
@@ -2384,12 +2397,19 @@ bool CompileHelper::compileFunction(DesignComponent* component,
                           compileDesign, Reduce::No, func, instance, false));
       if (var) {
         // Explicit return type
-        var->VpiName("");
+        // There's no variable as such and so clear out the location
+        // information. Only the associated ref_typespec should have a valid
+        // location.
+        var->VpiName(SymbolTable::getBadSymbol());
+        var->VpiLineNo(0);
+        var->VpiColumnNo(0);
+        var->VpiEndLineNo(0);
+        var->VpiEndColumnNo(0);
       }
     } else if (!Function_data_type) {
       // Implicit return type
       var = s.MakeLogic_var();
-      fC->populateCoreMembers(nameId, nameId, var);
+      fC->populateCoreMembers(InvalidNodeId, InvalidNodeId, var);
     }  // else void return type
     if (var != nullptr) {
       var->VpiParent(func);
@@ -2536,12 +2556,12 @@ Task* CompileHelper::compileTaskPrototype(DesignComponent* scope,
                                           const FileContent* fC, NodeId id,
                                           CompileDesign* compileDesign) {
   UHDM::Serializer& s = compileDesign->getSerializer();
-  std::vector<UHDM::task_func*>* task_funcs = scope->getTask_funcs();
+  std::vector<UHDM::task_func_decl*>* task_funcs = scope->getTask_func_decls();
   if (task_funcs == nullptr) {
-    scope->setTask_funcs(s.MakeTask_funcVec());
-    task_funcs = scope->getTask_funcs();
+    scope->setTask_func_decls(s.MakeTask_func_declVec());
+    task_funcs = scope->getTask_func_decls();
   }
-  UHDM::task* task = s.MakeTask();
+  UHDM::task_decl* task = s.MakeTask_decl();
   const UHDM::ScopedScope scopedScope(task);
   task_funcs->push_back(task);
   NodeId prop = setFuncTaskQualifiers(fC, id, task);
@@ -2585,12 +2605,12 @@ Function* CompileHelper::compileFunctionPrototype(
   std::string funcName;
   NodeId function_name;
   UHDM::Serializer& s = compileDesign->getSerializer();
-  std::vector<UHDM::task_func*>* task_funcs = scope->getTask_funcs();
+  std::vector<UHDM::task_func_decl*>* task_funcs = scope->getTask_func_decls();
   if (task_funcs == nullptr) {
-    scope->setTask_funcs(s.MakeTask_funcVec());
-    task_funcs = scope->getTask_funcs();
+    scope->setTask_func_decls(s.MakeTask_func_declVec());
+    task_funcs = scope->getTask_func_decls();
   }
-  UHDM::function* func = s.MakeFunction();
+  UHDM::function_decl* func = s.MakeFunction_decl();
   const UHDM::ScopedScope scopeScope(func);
   task_funcs->push_back(func);
   /*
@@ -2640,9 +2660,9 @@ Function* CompileHelper::compileFunctionPrototype(
   func->VpiName(funcName);
   func->VpiParent(scope->getUhdmModel());
   fC->populateCoreMembers(id, id, func);
-  if (auto v = any_cast<variables*>(compileVariable(scope, fC, type, type,
-                                                    compileDesign, Reduce::Yes,
-                                                    nullptr, nullptr, false))) {
+  if (auto v = any_cast<variables*>(
+          compileVariable(scope, fC, type, InvalidNodeId, compileDesign,
+                          Reduce::Yes, nullptr, nullptr, false))) {
     v->VpiParent(func);
     func->Return(v);
   }
@@ -2818,11 +2838,8 @@ UHDM::any* CompileHelper::compileForLoop(DesignComponent* component,
 
         if (variables* var = (variables*)compileVariable(
                 component, fC, Data_type, Var, compileDesign, Reduce::Yes,
-                assign_stmt, nullptr, false)) {
+                for_stmt, nullptr, false)) {
           assign_stmt->Lhs(var);
-          var->VpiParent(assign_stmt);
-          var->VpiName(fC->SymName(Var));
-          fC->populateCoreMembers(Var, Var, var);
         }
 
         if (expr* rhs =

@@ -3196,6 +3196,7 @@ CompileHelper::compileInstantiation(ModuleDefinition* mod,
   tps->VpiParent(mod->getUhdmModel());
 
   NodeId hierInstId = fC->sl_collect(id, VObjectType::paHierarchical_instance);
+  if (!hierInstId) hierInstId = fC->sl_collect(id, VObjectType::paUdp_instance);
   while (hierInstId) {
     NodeId instId = fC->sl_collect(hierInstId, VObjectType::paName_of_instance);
     NodeId identifierId = fC->Child(instId);
@@ -3219,7 +3220,7 @@ CompileHelper::compileInstantiation(ModuleDefinition* mod,
         mod_array->Elem_typespec(tpsRef);
         mod_array->Elem_typespec()->Actual_typespec(tps);
 
-        compileHighConn(mod, fC, compileDesign, instId, mod_array->Ports(true),
+        compileHighConn(mod, fC, compileDesign, /*instId*/id, mod_array->Ports(true),
                         mod_array);
         fC->populateCoreMembers(identifierId, identifierId, mod_array);
         results.first.push_back(mod_array);
@@ -3232,7 +3233,7 @@ CompileHelper::compileInstantiation(ModuleDefinition* mod,
       m->VpiParent(mod->getUhdmModel());
       fC->populateCoreMembers(moduleName, moduleName, m);
       results.second.push_back(m);
-      compileHighConn(mod, fC, compileDesign, instId, m->Ports(true), m);
+      compileHighConn(mod, fC, compileDesign, /*instId*/id, m->Ports(true), m);
     }
     hierInstId = fC->Sibling(hierInstId);
   }
@@ -3484,91 +3485,670 @@ void CompileHelper::compileGateInstantiation(ModuleDefinition* mod,
                  instance);
 }
 
+//void CompileHelper::compileHighConn(ModuleDefinition* component,
+//                                    const FileContent* fC,
+//                                    CompileDesign* compileDesign, NodeId instId,
+//                                    VectorOfport* ports, UHDM::any* pexpr) {
+//  NodeId list_of_ports = fC->Sibling(instId);
+//  UHDM::Serializer& s = compileDesign->getSerializer();
+//  NodeId Port_connection = fC->Child(list_of_ports);
+//
+//  while (Port_connection) {
+//    if (fC->Type(Port_connection) == VObjectType::paOrdered_port_connection) {
+//      if (NodeId child = fC->Child(Port_connection)) {
+//        port* p = s.MakePort();
+//        ports->push_back(p);
+//        p->VpiParent(pexpr);
+//
+//        if (fC->Type(child) == VObjectType::paAttribute_instance) {
+//          if (UHDM::VectorOfattribute* attributes =
+//                  compileAttributes(component, fC, child, compileDesign, p)) {
+//            p->Attributes(attributes);
+//          }
+//          child = fC->Sibling(child);
+//        }
+//
+//        fC->populateCoreMembers(child, child, p);
+//        checkForLoops(true);
+//        if (any* exp = compileExpression(component, fC, child, compileDesign,
+//                                         Reduce::No, p, nullptr)) {
+//          p->High_conn(exp);
+//        }
+//        checkForLoops(false);
+//      }  // else:  mod inst ();
+//    } else if (fC->Type(Port_connection) ==
+//               VObjectType::paNamed_port_connection) {
+//      NodeId formalName = fC->Child(Port_connection);
+//      NodeId attributeId;
+//      if (fC->Type(formalName) == VObjectType::paAttribute_instance) {
+//        attributeId = formalName;
+//        formalName = fC->Sibling(formalName);
+//      }
+//      port* result = nullptr;
+//      if (fC->Type(formalName) == VObjectType::paDOTSTAR) {
+//        constant* c = s.MakeConstant();
+//        c->VpiValue("STRING:.*");
+//        c->VpiDecompile(".*");
+//        fC->populateCoreMembers(Port_connection, Port_connection, c);
+//        port* p = s.MakePort();
+//        p->VpiParent(pexpr);
+//        fC->populateCoreMembers(Port_connection, Port_connection, p);
+//        p->High_conn(c);
+//        c->VpiParent(p);
+//        ports->push_back(p);
+//        result = p;
+//      } else {
+//        NodeId openParens = fC->Sibling(formalName);
+//        NodeId expId = fC->Sibling(openParens);
+//        port* p = s.MakePort();
+//        ports->push_back(p);
+//        p->VpiParent(pexpr);
+//        fC->populateCoreMembers(formalName, formalName, p);
+//        if (fC->Type(expId) == VObjectType::paCLOSE_PARENS) {
+//          // (.p())
+//        } else {
+//          p->VpiName(fC->SymName(formalName));
+//          if (expId) {  // (.p, ...)
+//            checkForLoops(true);
+//            if (any* exp =
+//                    compileExpression(component, fC, expId, compileDesign,
+//                                      Reduce::No, p, nullptr)) {
+//              p->High_conn(exp);
+//            }
+//            checkForLoops(false);
+//          }
+//        }
+//        result = p;
+//      }
+//
+//      if (attributeId) {
+//        if (UHDM::VectorOfattribute* attributes = compileAttributes(
+//                component, fC, attributeId, compileDesign, result)) {
+//          result->Attributes(attributes);
+//        }
+//      }
+//    }
+//    Port_connection = fC->Sibling(Port_connection);
+//  }
+//}
+
 void CompileHelper::compileHighConn(ModuleDefinition* component,
                                     const FileContent* fC,
                                     CompileDesign* compileDesign, NodeId instId,
-                                    VectorOfport* ports, UHDM::any* pexpr) {
-  NodeId list_of_ports = fC->Sibling(instId);
-  UHDM::Serializer& s = compileDesign->getSerializer();
-  NodeId Port_connection = fC->Child(list_of_ports);
+                                    VectorOfport* ports, any* pexpr) {
+  FileSystem* const fileSystem = FileSystem::getInstance();
+  NodeId Udp_instantiation = instId;
+  Serializer& s = compileDesign->getSerializer();
+  VObjectType inst_type = fC->Type(Udp_instantiation);
+  std::vector<Signal*> signals = component->getPorts();
 
-  while (Port_connection) {
-    if (fC->Type(Port_connection) == VObjectType::paOrdered_port_connection) {
-      if (NodeId child = fC->Child(Port_connection)) {
-        port* p = s.MakePort();
-        ports->push_back(p);
-        p->VpiParent(pexpr);
+  std::map<std::string_view, Signal*> allSignals;
+  std::map<std::string_view, Signal*> allSignalsConst;
 
-        if (fC->Type(child) == VObjectType::paAttribute_instance) {
-          if (UHDM::VectorOfattribute* attributes =
-                  compileAttributes(component, fC, child, compileDesign, p)) {
-            p->Attributes(attributes);
-          }
-          child = fC->Sibling(child);
-        }
+  for (Signal* s : signals) {
+    allSignals.emplace(s->getName(), s);
+    allSignalsConst.emplace(s->getName(), s);
+  }
 
-        fC->populateCoreMembers(child, child, p);
+  if ((inst_type == VObjectType::paUdp_instantiation) ||
+      (inst_type == VObjectType::paModule_instantiation) ||
+      (inst_type == VObjectType::paProgram_instantiation) ||
+      (inst_type == VObjectType::paInterface_instantiation) ||
+      (inst_type == VObjectType::paCmos_switch_instance) ||
+      (inst_type == VObjectType::paEnable_gate_instance) ||
+      (inst_type == VObjectType::paMos_switch_instance) ||
+      (inst_type == VObjectType::paN_input_gate_instance) ||
+      (inst_type == VObjectType::paN_output_gate_instance) ||
+      (inst_type == VObjectType::paPass_enable_switch_instance) ||
+      (inst_type == VObjectType::paPass_switch_instance) ||
+      (inst_type == VObjectType::paPull_gate_instance)) {
+    /*
+    n<DUT> u<178> t<StringConst> p<191> s<190> l<20>
+    n<dut> u<179> t<StringConst> p<180> l<20>
+    n<> u<180> t<Name_of_instance> p<190> c<179> s<185> l<20>
+    n<i> u<181> t<StringConst> p<182> l<20>
+    n<> u<182> t<Ps_or_hierarchical_identifier> p<185> c<181> s<184> l<20>
+    n<> u<183> t<Constant_bit_select> p<184> l<20>
+    n<> u<184> t<Constant_select> p<185> c<183> l<20>
+    n<> u<185> t<Net_lvalue> p<190> c<182> s<189> l<20>
+    n<o> u<186> t<StringConst> p<187> l<20>
+    n<> u<187> t<Primary_literal> p<188> c<186> l<20>
+    n<> u<188> t<Primary> p<189> c<187> l<20>
+    n<> u<189> t<Expression> p<190> c<188> l<20>
+    n<> u<190> t<Udp_instance> p<191> c<180> l<20>
+    n<> u<191> t<Udp_instantiation> p<192> c<178> l<20>
+    */
+    NodeId modId = fC->Child(Udp_instantiation);
+    NodeId Udp_instance = fC->Sibling(modId);
+    if ((inst_type == VObjectType::paCmos_switch_instance) ||
+        (inst_type == VObjectType::paEnable_gate_instance) ||
+        (inst_type == VObjectType::paMos_switch_instance) ||
+        (inst_type == VObjectType::paN_input_gate_instance) ||
+        (inst_type == VObjectType::paN_output_gate_instance) ||
+        (inst_type == VObjectType::paPass_enable_switch_instance) ||
+        (inst_type == VObjectType::paPass_switch_instance) ||
+        (inst_type == VObjectType::paPull_gate_instance)) {
+      modId = fC->Child(fC->Parent(Udp_instantiation));
+      Udp_instance = Udp_instantiation;
+      // In the case of single instance, point to the delay or parameter
+      NodeId tmp = fC->Sibling(modId);
+      if ((fC->Type(tmp) == VObjectType::paParameter_value_assignment) ||
+          (fC->Type(tmp) == VObjectType::paDelay2) ||
+          (fC->Type(tmp) == VObjectType::paDelay3)) {
+        Udp_instance = tmp;
+      }
+    }
+    if (fC->Type(Udp_instance) == VObjectType::paParameter_value_assignment) {
+      Udp_instance = fC->Sibling(Udp_instance);
+    } else if (fC->Type(Udp_instance) == VObjectType::paDelay2 ||
+               fC->Type(Udp_instance) == VObjectType::paDelay3) {
+      checkForLoops(true);
+      expr* delay_expr =
+          (expr*)compileExpression(component, fC, Udp_instance, compileDesign,
+                                   Reduce::Yes, nullptr, nullptr);
+      checkForLoops(false);
+      VectorOfexpr* delays = s.MakeExprVec();
+      // netlist->delays(delays);
+      delays->push_back(delay_expr);
+      Udp_instance = fC->Sibling(Udp_instance);
+    }
+    NodeId Net_lvalue;
+    if (const NodeId Name_of_instance = fC->Child(Udp_instance);
+        fC->Type(Name_of_instance) == VObjectType::paName_of_instance) {
+      Net_lvalue = fC->Sibling(Name_of_instance);
+      NodeId Name = fC->Child(Name_of_instance);
+      NodeId Unpacked_dimension = fC->Sibling(Name);
+      if (Unpacked_dimension) {
+        int32_t size;
         checkForLoops(true);
-        if (any* exp = compileExpression(component, fC, child, compileDesign,
-                                         Reduce::No, p, nullptr)) {
-          p->High_conn(exp);
-        }
+        VectorOfrange* ranges =
+            compileRanges(component, fC, Unpacked_dimension, compileDesign,
+                          Reduce::Yes, nullptr, nullptr, size, false);
         checkForLoops(false);
-      }  // else:  mod inst ();
-    } else if (fC->Type(Port_connection) ==
-               VObjectType::paNamed_port_connection) {
-      NodeId formalName = fC->Child(Port_connection);
-      NodeId attributeId;
-      if (fC->Type(formalName) == VObjectType::paAttribute_instance) {
-        attributeId = formalName;
-        formalName = fC->Sibling(formalName);
+        // netlist->ranges(ranges);
       }
-      port* result = nullptr;
-      if (fC->Type(formalName) == VObjectType::paDOTSTAR) {
-        constant* c = s.MakeConstant();
-        c->VpiValue("STRING:.*");
-        c->VpiDecompile(".*");
-        fC->populateCoreMembers(Port_connection, Port_connection, c);
-        port* p = s.MakePort();
-        p->VpiParent(pexpr);
-        fC->populateCoreMembers(Port_connection, Port_connection, p);
-        p->High_conn(c);
-        c->VpiParent(p);
-        ports->push_back(p);
-        result = p;
-      } else {
-        NodeId openParens = fC->Sibling(formalName);
-        NodeId expId = fC->Sibling(openParens);
-        port* p = s.MakePort();
-        ports->push_back(p);
-        p->VpiParent(pexpr);
-        fC->populateCoreMembers(formalName, formalName, p);
-        if (fC->Type(expId) == VObjectType::paCLOSE_PARENS) {
-          // (.p())
-        } else {
-          p->VpiName(fC->SymName(formalName));
-          if (expId) {  // (.p, ...)
-            checkForLoops(true);
-            if (any* exp =
-                    compileExpression(component, fC, expId, compileDesign,
-                                      Reduce::No, p, nullptr)) {
-              p->High_conn(exp);
+    } else {
+      Net_lvalue = Name_of_instance;
+    }
+    if (fC->Type(Net_lvalue) == VObjectType::paNet_lvalue) {
+      uint32_t index = 0;
+      while (Net_lvalue) {
+        std::string sigName;
+        NodeId sigId;
+        bool bit_or_part_select = false;
+        if (fC->Type(Net_lvalue) == VObjectType::paNet_lvalue) {
+          NodeId Hierarchical_identifier = fC->Child(Net_lvalue);
+          if (fC->Type(fC->Child(Hierarchical_identifier)) ==
+              VObjectType::paHierarchical_identifier) {
+            Hierarchical_identifier =
+                fC->Child(fC->Child(Hierarchical_identifier));
+          } else if (fC->Type(Hierarchical_identifier) !=
+                     VObjectType::paPs_or_hierarchical_identifier) {
+            Hierarchical_identifier = Net_lvalue;
+          }
+          if (isSelected(fC, Hierarchical_identifier))
+            bit_or_part_select = true;
+          sigId = Hierarchical_identifier;
+          if (fC->Type(fC->Child(sigId)) == VObjectType::slStringConst) {
+            sigId = fC->Child(sigId);
+          }
+          sigName = fC->SymName(sigId);
+        } else if (fC->Type(Net_lvalue) == VObjectType::paExpression) {
+          NodeId Primary = fC->Child(Net_lvalue);
+          NodeId Primary_literal = fC->Child(Primary);
+          if (fC->Type(Primary_literal) == VObjectType::paComplex_func_call)
+            bit_or_part_select = true;
+          sigId = fC->Child(Primary_literal);
+          sigName = fC->SymName(sigId);
+        }
+        if (ports) {
+          if (index < ports->size()) {
+            port* p = (*ports)[index];
+
+            if ((!bit_or_part_select) &&
+                (fC->Type(sigId) == VObjectType::slStringConst)) {
+              ref_obj* ref = s.MakeRef_obj();
+              fC->populateCoreMembers(sigId, sigId, ref);
+              p->High_conn(ref);
+              ref->VpiParent(p);
+              ref->VpiName(sigName);
+
+            } else {
+              any* exp = nullptr;
+              if (fC->Type(Net_lvalue) == VObjectType::paNet_lvalue) {
+                NodeId Hierarchical_identifier = fC->Child(Net_lvalue);
+                if (fC->Type(fC->Child(Hierarchical_identifier)) ==
+                    VObjectType::paHierarchical_identifier) {
+                  Hierarchical_identifier =
+                      fC->Child(fC->Child(Hierarchical_identifier));
+                } else if (fC->Type(Hierarchical_identifier) !=
+                           VObjectType::paPs_or_hierarchical_identifier) {
+                  Hierarchical_identifier = Net_lvalue;
+                }
+                checkForLoops(true);
+                exp = compileExpression(component, fC, Hierarchical_identifier,
+                                        compileDesign, Reduce::No, p, nullptr);
+                checkForLoops(false);
+              } else {
+                checkForLoops(true);
+                exp = compileExpression(component, fC, Net_lvalue,
+                                        compileDesign, Reduce::Yes, p, nullptr);
+                checkForLoops(false);
+              }
+              if (exp != nullptr) {
+                p->High_conn(exp);
+                exp->VpiParent(p);
+              }
             }
-            checkForLoops(false);
           }
         }
-        result = p;
+        if ((inst_type == VObjectType::paCmos_switch_instance) ||
+            (inst_type == VObjectType::paEnable_gate_instance) ||
+            (inst_type == VObjectType::paMos_switch_instance) ||
+            (inst_type == VObjectType::paN_input_gate_instance) ||
+            (inst_type == VObjectType::paN_output_gate_instance) ||
+            (inst_type == VObjectType::paPass_enable_switch_instance) ||
+            (inst_type == VObjectType::paPass_switch_instance) ||
+            (inst_type == VObjectType::paPull_gate_instance) ||
+            (inst_type == VObjectType::paUdp_instantiation) ||
+            (inst_type == VObjectType::paModule_instantiation)) {
+          port* p = s.MakePort();
+          p->VpiParent(pexpr);
+          fC->populateCoreMembers(Net_lvalue, Net_lvalue, p);
+          if ((fC->Type(sigId) == VObjectType::slStringConst) &&
+              (!bit_or_part_select)) {
+            ref_obj* ref = s.MakeRef_obj();
+            fC->populateCoreMembers(sigId, sigId, ref);
+            p->High_conn(ref);
+            ref->VpiName(sigName);
+            ref->VpiParent(p);
+          } else {
+            NodeId Hierarchical_identifier = fC->Child(Net_lvalue);
+            if (fC->Type(fC->Child(Hierarchical_identifier)) ==
+                VObjectType::paHierarchical_identifier) {
+              Hierarchical_identifier =
+                  fC->Child(fC->Child(Hierarchical_identifier));
+            } else if (fC->Type(Hierarchical_identifier) !=
+                       VObjectType::paPs_or_hierarchical_identifier) {
+              Hierarchical_identifier = Net_lvalue;
+            }
+            checkForLoops(true);
+            any* exp =
+                compileExpression(component, fC, Hierarchical_identifier,
+                                  compileDesign, Reduce::No, nullptr, nullptr);
+            checkForLoops(false);
+            p->High_conn(exp);
+            exp->VpiParent(p);
+            if (exp->UhdmType() == uhdmref_obj) {
+              ref_obj* ref = (ref_obj*)exp;
+              const std::string_view n = ref->VpiName();
+            }
+          }
+          ports->push_back(p);
+        }
+        Net_lvalue = fC->Sibling(Net_lvalue);
+        index++;
+      }
+    } else if (fC->Type(Net_lvalue) ==
+               VObjectType::paList_of_port_connections) {
+      /*
+      n<TESTBENCH> u<195> t<StringConst> p<212> s<211> l<21>
+      n<tb> u<196> t<StringConst> p<197> l<21>
+      n<> u<197> t<Name_of_instance> p<211> c<196> s<210> l<21>
+      n<observe> u<198> t<StringConst> p<203> s<202> l<21>
+      n<o> u<199> t<StringConst> p<200> l<21>
+      n<> u<200> t<Primary_literal> p<201> c<199> l<21>
+      n<> u<201> t<Primary> p<202> c<200> l<21>
+      n<> u<202> t<Expression> p<203> c<201> l<21>
+      n<> u<203> t<Named_port_connection> p<210> c<198> s<209> l<21>
+      n<drive> u<204> t<StringConst> p<209> s<208> l<21>
+      n<i> u<205> t<StringConst> p<206> l<21>
+      n<> u<206> t<Primary_literal> p<207> c<205> l<21>
+      n<> u<207> t<Primary> p<208> c<206> l<21>
+      n<> u<208> t<Expression> p<209> c<207> l<21>
+      n<> u<209> t<Named_port_connection> p<210> c<204> l<21>
+      n<> u<210> t<List_of_port_connections> p<211> c<203> l<21>
+      n<> u<211> t<Hierarchical_instance> p<212> c<197> l<21>
+      n<> u<212> t<Module_instantiation> p<213> c<195> l<21>
+      */
+      NodeId Named_port_connection = fC->Child(Net_lvalue);
+      uint32_t index = 0;
+      bool orderedConnection = false;
+      if (fC->Type(Named_port_connection) ==
+          VObjectType::paOrdered_port_connection) {
+        orderedConnection = true;
       }
 
-      if (attributeId) {
-        if (UHDM::VectorOfattribute* attributes = compileAttributes(
-                component, fC, attributeId, compileDesign, result)) {
-          result->Attributes(attributes);
+      bool wildcard = false;
+      NodeId MemNamed_port_connection = Named_port_connection;
+      uint32_t wildcardLineNumber = 0;
+      uint16_t wildcardColumnNumber = 0;
+      while (Named_port_connection) {
+        NodeId formalId = fC->Child(Named_port_connection);
+        if (fC->Type(formalId) == VObjectType::paDOTSTAR) {
+          // .* connection
+          wildcard = true;
+          wildcardLineNumber = fC->Line(formalId);
+          wildcardColumnNumber = fC->Column(formalId);
+          break;
+        }
+        Named_port_connection = fC->Sibling(Named_port_connection);
+      }
+
+      Named_port_connection = MemNamed_port_connection;
+      while (Named_port_connection) {
+        NodeId formalId = fC->Child(Named_port_connection);
+        if (!formalId) {
+          Named_port_connection = fC->Sibling(Named_port_connection);
+          index++;
+          continue;
+        }
+        UHDM::VectorOfattribute* attributes = nullptr;
+        if (fC->Type(formalId) == VObjectType::paAttribute_instance) {
+          attributes = compileAttributes(component, fC, formalId, compileDesign,
+                                         nullptr);
+          while (fC->Type(formalId) == VObjectType::paAttribute_instance) {
+            formalId = fC->Sibling(formalId);
+          }
+        }
+        if (fC->Type(formalId) == VObjectType::paDOTSTAR) {
+          // .* connection
+          Named_port_connection = fC->Sibling(Named_port_connection);
+          continue;
+        }
+
+        NodeId sigId = formalId;
+        std::string_view formalName = fC->SymName(formalId);
+        NodeId Expression = fC->Sibling(formalId);
+        if (orderedConnection) {
+          Expression = formalId;
+          NodeId Primary = fC->Child(Expression);
+          NodeId Primary_literal = fC->Child(Primary);
+          NodeId formalNameId = fC->Child(Primary_literal);
+          formalName = fC->SymName(formalNameId);
+        } else {
+          NodeId tmp = Expression;
+          if (fC->Type(tmp) == VObjectType::paOPEN_PARENS) {
+            tmp = fC->Sibling(tmp);
+            if (fC->Type(tmp) ==
+                VObjectType::paCLOSE_PARENS) {  // .p()  explicit disconnect
+              Named_port_connection = fC->Sibling(Named_port_connection);
+              port* p = nullptr;
+
+              if (index < ports->size()) {
+                if (orderedConnection) {
+                  formalName = ((signals)[index])->getName();
+                  p = (*ports)[index];
+                } else {
+                  for (port* pItr : *ports) {
+                    if (pItr->VpiName() == formalName) {
+                      p = pItr;
+                      break;
+                    }
+                  }
+                  if (p == nullptr) p = (*ports)[index];
+                }
+              } else {
+                p = s.MakePort();
+                p->VpiParent(pexpr);
+                ports->push_back(p);
+                p->VpiName(formalName);
+                fC->populateCoreMembers(formalId, formalId, p);
+                if (!allSignalsConst.empty()) {
+                  auto found = allSignalsConst.find(p->VpiName());
+                  if (found == allSignalsConst.end()) {
+                    SymbolTable* symbols =
+                        compileDesign->getCompiler()->getSymbolTable();
+                    ErrorContainer* errors =
+                        compileDesign->getCompiler()->getErrorContainer();
+                    Location loc(
+                        fileSystem->toPathId(
+                            p->VpiFile(),
+                            compileDesign->getCompiler()->getSymbolTable()),
+                        p->VpiLineNo(), p->VpiColumnNo(),
+                        symbols->registerSymbol(p->VpiName()));
+                    Error err(ErrorDefinition::ELAB_UNKNOWN_PORT, loc);
+                    errors->addError(err);
+                  }
+                }
+              }
+
+              operation* op = s.MakeOperation();
+              op->VpiOpType(vpiNullOp);
+              fC->populateCoreMembers(tmp, tmp, op);
+              op->VpiParent(p);
+              p->High_conn(op);
+              index++;
+              continue;
+            } else if (fC->Type(tmp) ==
+                       VObjectType::paExpression) {  // .p(s) connection by name
+              sigId = tmp;
+              Expression = tmp;
+              if (!allSignalsConst.empty()) {
+                auto found = allSignalsConst.find(formalName);
+                if (found == allSignalsConst.end()) {
+                  SymbolTable* symbols =
+                      compileDesign->getCompiler()->getSymbolTable();
+                  ErrorContainer* errors =
+                      compileDesign->getCompiler()->getErrorContainer();
+                  Location loc(fC->getFileId(formalId), fC->Line(formalId),
+                               fC->Column(formalId),
+                               symbols->registerSymbol(formalName));
+                  Error err(ErrorDefinition::ELAB_UNKNOWN_PORT, loc);
+                  errors->addError(err);
+                }
+              }
+            }
+          }  // else .p implicit connection
+        }
+        expr* hexpr = nullptr;
+        if (fC->Type(Expression) == VObjectType::paAttribute_instance) {
+          attributes = compileAttributes(component, fC, Expression,
+                                         compileDesign, nullptr);
+          while (fC->Type(Expression) == VObjectType::paAttribute_instance)
+            Expression = fC->Sibling(Expression);
+        }
+        if (Expression) {
+          checkForLoops(true);
+          hexpr =
+              (expr*)compileExpression(component, fC, Expression, compileDesign,
+                                       Reduce::Yes, nullptr, nullptr);
+          checkForLoops(false);
+          NodeId Primary = fC->Child(Expression);
+          NodeId Primary_literal = fC->Child(Primary);
+          sigId = fC->Child(Primary_literal);
+        }
+        std::string sigName;
+        bool modPort = true;
+        if (hexpr && hexpr->UhdmType() == uhdmhier_path) {
+          hier_path* hier = (hier_path*)hexpr;
+          for (auto p : *hier->Path_elems()) {
+            if (p->UhdmType() != uhdmref_obj) {
+              modPort = false;
+              break;
+            }
+          }
+        }
+        if (modPort) {
+          if (fC->Type(sigId) == VObjectType::slStringConst)
+            sigName = fC->SymName(sigId);
+        }
+        std::string baseName = sigName;
+        std::string selectName;
+        if (NodeId subId = fC->Sibling(sigId)) {
+          if (fC->Name(subId)) {
+            selectName = fC->SymName(subId);
+            sigName += std::string(".") + selectName;
+          }
+        }
+        port* p = nullptr;
+
+        if (index < ports->size()) {
+          if (orderedConnection) {
+            formalName = ((signals)[index])->getName();
+            p = (*ports)[index];
+          } else {
+            for (port* pItr : *ports) {
+              if (pItr->VpiName() == formalName) {
+                p = pItr;
+                break;
+              }
+            }
+            if (p == nullptr) p = (*ports)[index];
+          }
+        } else {
+          p = s.MakePort();
+          p->VpiParent(pexpr);
+          ports->push_back(p);
+        }
+
+        if ((!sigName.empty()) && (hexpr == nullptr)) {
+          ref_obj* ref = s.MakeRef_obj();
+          fC->populateCoreMembers(sigId, sigId, ref);
+          ref->VpiName(sigName);
+
+          ref->VpiParent(p);
+          p->High_conn(ref);
+
+        } else if (hexpr != nullptr) {
+          p->High_conn(hexpr);
+          hexpr->VpiParent(p);
+          if (hexpr->UhdmType() == uhdmref_obj) {
+            ((ref_obj*)hexpr)->VpiParent(p);
+          }
+        }
+        p->VpiName(formalName);
+        if (attributes) {
+          p->Attributes(attributes);
+          for (auto a : *attributes) a->VpiParent(p);
+        }
+        if (p->VpiLineNo() == 0) {
+          fC->populateCoreMembers(formalId, formalId, p);
+        }
+        bool lowconn_is_nettype = false;
+        if (const any* lc = p->Low_conn()) {
+          if (lc->UhdmType() == uhdmref_obj) {
+            ref_obj* rf = (ref_obj*)lc;
+            fC->populateCoreMembers(formalId, formalId, rf);
+            const any* act = rf->Actual_group();
+            if (act && (act->UhdmType() == uhdmlogic_net))
+              lowconn_is_nettype = true;
+          }
+        }
+        auto itr = allSignals.find(formalName);
+        if (itr != allSignals.end()) {
+          allSignals.erase(itr);
+        }
+        Named_port_connection = fC->Sibling(Named_port_connection);
+        index++;
+      }
+      {
+        uint32_t formalSize = 0;
+        if (ports) {
+          formalSize = ports->size();
+        }
+        if (wildcard) {
+          // Add missing ports
+          VectorOfport* newPorts = s.MakePortVec();
+          for (Signal* s1 : signals) {
+            const std::string_view sigName = s1->getName();
+            bool found = false;
+            port* pp = nullptr;
+            for (port* p : *ports) {
+              if (p->VpiName() == s1->getName()) {
+                newPorts->push_back(p);
+                found = true;
+                pp = p;
+                break;
+              }
+            }
+            if (!found) {
+              port* p = s.MakePort();
+              p->VpiParent(pexpr);
+              p->VpiName(sigName);
+              p->VpiFile(fileSystem->toPath(fC->getFileId()));
+              p->VpiLineNo(wildcardLineNumber);
+              p->VpiColumnNo(wildcardColumnNumber);
+              p->VpiEndLineNo(wildcardLineNumber);
+              p->VpiEndColumnNo(wildcardColumnNumber + 1);
+              newPorts->push_back(p);
+              pp = p;
+            }
+            if (pp->High_conn() == nullptr) {
+              ref_obj* ref = s.MakeRef_obj();
+              ref->VpiFile(fileSystem->toPath(fC->getFileId()));
+              ref->VpiLineNo(wildcardLineNumber);
+              ref->VpiColumnNo(wildcardColumnNumber);
+              ref->VpiEndLineNo(wildcardLineNumber);
+              ref->VpiEndColumnNo(wildcardColumnNumber + 1);
+              ref->VpiName(sigName);
+              ref->VpiParent(pp);
+
+              pp->High_conn(ref);
+            }
+          }
+          // netlist->ports(newPorts);
+        } else if (index < formalSize) {
+          // Add missing ports
+          VectorOfport* newPorts = s.MakePortVec();
+          for (Signal* s1 : signals) {
+            const std::string_view sigName = s1->getName();
+
+            auto itr = allSignals.find(sigName);
+            if (itr != allSignals.end()) {
+              auto pair = (*itr);
+              port* p = nullptr;
+              for (port* pt : *ports) {
+                if (pt->VpiName() == sigName) {
+                  p = pt;
+                  newPorts->push_back(p);
+                  break;
+                }
+              }
+
+              if (p) {
+                if (NodeId defaultId = pair.second->getDefaultValue()) {
+                  checkForLoops(true);
+                  if (expr* exp = (expr*)compileExpression(
+                          component, fC, defaultId, compileDesign, Reduce::No,
+                          p, nullptr)) {
+                    p->High_conn(exp);
+                  }
+                  checkForLoops(false);
+                }
+              }
+            } else {
+              for (port* pt : *ports) {
+                if (pt->VpiName() == sigName) {
+                  newPorts->push_back(pt);
+                  break;
+                }
+              }
+            }
+          }
+          // netlist->ports(newPorts);
         }
       }
     }
-    Port_connection = fC->Sibling(Port_connection);
   }
+  // Finally any unconnected ports with default value gets assigned the value
+  if (ports) {
+    for (auto p : *ports) {
+      if (p->High_conn() != nullptr) continue;
+      auto found = allSignals.find(p->VpiName());
+      if (found == allSignals.end()) continue;
+      if (NodeId defaultId = (*found).second->getDefaultValue()) {
+        checkForLoops(true);
+        if (expr* exp = (expr*)compileExpression(component, fC, defaultId,
+                                                 compileDesign, Reduce::No, p,
+                                                 nullptr)) {
+          p->High_conn(exp);
+        }
+        checkForLoops(false);
+      }
+    }
+  }
+  // return true;
 }
 
 initial* CompileHelper::compileInitialBlock(DesignComponent* component,

@@ -543,7 +543,7 @@ bool IntegrityChecker::areNamedSame(const UHDM::any* const object,
 }
 
 void IntegrityChecker::reportInvalidNames(const UHDM::any* const object) const {
-  // Function implicit return type are unnammed.
+  // Implicit function return type are unnammed.
   if (isImplicitFunctionReturnType(object)) return;
 
   bool shouldReport = false;
@@ -563,6 +563,8 @@ void IntegrityChecker::reportInvalidNames(const UHDM::any* const object) const {
   } else if (const UHDM::ref_typespec* const objectAsRef_typespec =
                  object->Cast<const UHDM::ref_typespec*>()) {
     shouldReport = (object->VpiName() == SymbolTable::getBadSymbol());
+    shouldReport = shouldReport || object->VpiName().empty();
+
     if (const UHDM::any* actual = objectAsRef_typespec->Actual_typespec()) {
       if ((actual->UhdmType() == UHDM::uhdmstruct_typespec) ||
           (actual->UhdmType() == UHDM::uhdmunion_typespec) ||
@@ -571,14 +573,10 @@ void IntegrityChecker::reportInvalidNames(const UHDM::any* const object) const {
         shouldReport = false;
       } else if ((actual->UhdmType() == UHDM::uhdmclass_typespec) ||
                  (actual->UhdmType() == UHDM::uhdmmodule_typespec) ||
-                 (actual->UhdmType() == UHDM::uhdmenum_typespec) ||
                  (actual->UhdmType() == UHDM::uhdminterface_typespec) ||
                  (actual->UhdmType() == UHDM::uhdmunsupported_typespec)) {
-        shouldReport = shouldReport || object->VpiName().empty();
         shouldReport = shouldReport || !areNamedSame(object, actual);
       }
-    } else {
-      shouldReport = shouldReport || object->VpiName().empty();
     }
   }
 
@@ -608,64 +606,32 @@ void IntegrityChecker::reportNullActual(const UHDM::any* const object) const {
   if (isBuiltPackageOnStack(object)) return;
 
   bool shouldReport = false;
-  switch (object->UhdmType()) {
-    case UHDM::uhdmref_obj: {
+
+  if (const UHDM::ref_obj* const objectAsRef_obj =
+          object->Cast<UHDM::ref_obj>()) {
+    shouldReport = objectAsRef_obj == nullptr;
+    // Special case for $root and few others
+    if (const UHDM::any* const parent = object->VpiParent()) {
       shouldReport =
-          static_cast<const UHDM::ref_obj*>(object)->Actual_group() == nullptr;
-      // Special case for $root and few others
-      if (const UHDM::any* const parent = object->VpiParent()) {
-        shouldReport =
-            shouldReport && !(((object->VpiName() == "$root") ||
-                               (object->VpiName() == "size") ||
-                               (object->VpiName() == "delete")) &&
-                              (parent->UhdmType() == UHDM::uhdmhier_path));
-        shouldReport =
-            shouldReport && !((parent->UhdmType() == UHDM::uhdmsys_func_call) &&
-                              (parent->VpiName() == "$bits"));
-        shouldReport = shouldReport && (object->VpiName() != "default");
-      }
-    } break;
-
-    case UHDM::uhdmref_typespec: {
+          shouldReport &&
+          !(((object->VpiName() == "$root") || (object->VpiName() == "size") ||
+             (object->VpiName() == "delete")) &&
+            (parent->UhdmType() == UHDM::uhdmhier_path));
       shouldReport =
-          static_cast<const UHDM::ref_typespec*>(object)->Actual_typespec() ==
-          nullptr;
-    } break;
-
-    case UHDM::uhdmbit_select: {
-      shouldReport =
-          static_cast<const UHDM::bit_select*>(object)->Actual_group() ==
-          nullptr;
-    } break;
-
-    case UHDM::uhdmpart_select: {
-      shouldReport =
-          static_cast<const UHDM::part_select*>(object)->Actual_group() ==
-          nullptr;
-    } break;
-
-    case UHDM::uhdmindexed_part_select: {
-      shouldReport = static_cast<const UHDM::indexed_part_select*>(object)
-                         ->Actual_group() == nullptr;
-    } break;
-
-    case UHDM::uhdmref_module: {
-      shouldReport =
-          static_cast<const UHDM::ref_module*>(object)->Actual_group() ==
-          nullptr;
-    } break;
-
-    case UHDM::uhdmchandle_var: {
-      shouldReport =
-          static_cast<const UHDM::chandle_var*>(object)->Actual_group() ==
-          nullptr;
-    } break;
-
-    default:
-      break;
-  }
-
-  if (const UHDM::task_func* const parentAsTask_func =
+          shouldReport && !((parent->UhdmType() == UHDM::uhdmsys_func_call) &&
+                            (parent->VpiName() == "$bits"));
+      shouldReport = shouldReport && (object->VpiName() != "default");
+    }
+  } else if (const UHDM::ref_typespec* const objectAsRef_typespec =
+                 object->Cast<const UHDM::ref_typespec*>()) {
+    shouldReport = objectAsRef_typespec->Actual_typespec() == nullptr;
+  } else if (const UHDM::ref_module* const objectAsRef_module =
+                 object->Cast<const UHDM::ref_module*>()) {
+    shouldReport = objectAsRef_module->Actual_group() == nullptr;
+  } else if (const UHDM::chandle_var* const objectAsChandle_var =
+                 object->Cast<const UHDM::chandle_var*>()) {
+    shouldReport = objectAsChandle_var->Actual_group() == nullptr;
+  } else if (const UHDM::task_func* const parentAsTask_func =
           object->VpiParent<UHDM::task_func>()) {
     if ((parentAsTask_func->Return() == object) &&
         (parentAsTask_func->VpiAccessType() == vpiDPIImportAcc)) {

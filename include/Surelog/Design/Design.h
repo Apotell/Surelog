@@ -78,7 +78,8 @@ class Design final {
   friend class SVLibShapeListener;
 
  public:
-  Design(Session* session, UHDM::Serializer& serializer, LibrarySet* librarySet, ConfigSet* configSet);
+  Design(Session* session, UHDM::Serializer& serializer, LibrarySet* librarySet,
+         ConfigSet* configSet);
   Design(const Design& orig) = delete;
   ~Design();
 
@@ -213,8 +214,8 @@ class Design final {
 
   Session* const m_session = nullptr;
   UHDM::design* const m_uhdmDesign = nullptr;
-  LibrarySet* m_librarySet;
-  ConfigSet* m_configSet;
+  LibrarySet* const m_librarySet = nullptr;
+  ConfigSet* const m_configSet = nullptr;
   FileIdDesignContentMap m_fileContents;
 
   FileIdDesignContentMap m_ppFileContents;

@@ -331,10 +331,6 @@ PreprocessFile::AntlrParserHandler* CompileSourceFile::getAntlrPpHandlerForId(
   return nullptr;
 }
 
-// void CompileSourceFile::setSymbolTable(SymbolTable* symbols) {
-//   m_symbolTable = symbols;
-// }
-
 #ifdef SURELOG_WITH_PYTHON
 void CompileSourceFile::setPythonInterp(PyThreadState* interpState) {
   m_interpState = interpState;

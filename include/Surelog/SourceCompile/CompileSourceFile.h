@@ -60,7 +60,7 @@ class CompileSourceFile final {
   CompileSourceFile(Session* session, CompileSourceFile* parent,
                     PathId ppResultFileId, uint32_t lineOffset);
   CompileSourceFile(const CompileSourceFile& orig);
-  virtual ~CompileSourceFile();
+  ~CompileSourceFile();
 
   bool compile(Action action);
 

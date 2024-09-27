@@ -34,7 +34,6 @@
 #include <unordered_map>
 
 // UHDM
-#include <uhdm/constant.h>
 #include <uhdm/containers.h>
 
 namespace UHDM {
@@ -43,12 +42,10 @@ class Serializer;
 }  // namespace UHDM
 
 namespace SURELOG {
-
 class CompileDesign;
 class DataType;
 class Design;
 class DesignComponent;
-class ErrorContainer;
 class FileContent;
 class Function;
 class NodeId;
@@ -58,7 +55,6 @@ class Scope;
 class Session;
 class Signal;
 class Statement;
-class SymbolTable;
 class Task;
 class TfPortItem;
 typedef std::vector<TfPortItem*> TfPortList;
@@ -80,12 +76,6 @@ enum class Reduce : bool { Yes = true, No = false };
 class CompileHelper final {
  public:
   explicit CompileHelper(Session* session);
-
-  void seterrorReporting(ErrorContainer* errors, SymbolTable* symbols) {
-    m_errors = errors;
-    m_symbols = symbols;
-    // m_exprBuilder.seterrorReporting(errors, symbols);
-  }
 
   void setDesign(Design* design) { m_exprBuilder.setDesign(design); }
 
@@ -660,11 +650,6 @@ class CompileHelper final {
  private:
   CompileHelper(const CompileHelper&) = delete;
 
-  Session* const m_session = nullptr;
-  ErrorContainer* m_errors = nullptr;
-  SymbolTable* m_symbols = nullptr;
-  ExprBuilder m_exprBuilder;
-  UHDM::module_inst* m_exprEvalPlaceHolder = nullptr;
   // Caches
   UHDM::int_typespec* buildIntTypespec(CompileDesign* compileDesign,
                                        PathId fileId, std::string_view name,
@@ -673,6 +658,11 @@ class CompileHelper final {
                                        uint16_t ecolumn);
   UHDM::typespec_member* buildTypespecMember(CompileDesign* compileDesign,
                                              const FileContent* fC, NodeId id);
+
+ private:
+  Session* const m_session = nullptr;
+  ExprBuilder m_exprBuilder;
+  UHDM::module_inst* m_exprEvalPlaceHolder = nullptr;
   bool m_checkForLoops = false;
   int32_t m_stackLevel = 0;
   bool m_unwind = false;

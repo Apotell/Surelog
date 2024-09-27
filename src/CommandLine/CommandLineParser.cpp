@@ -384,7 +384,7 @@ CommandLineParser::CommandLineParser(Session* session)
 #else
       m_pythonAllowed(false),
 #endif
-      m_nbLinesForFileSplitting(10000000),
+      m_linesForFileSplitting(10000000),
       m_pythonEvalScriptPerFile(false),
       m_pythonEvalScript(false),
       m_debugIncludeFileInfo(false),
@@ -1036,7 +1036,7 @@ bool CommandLineParser::parse(int32_t argc, const char** argv,
         break;
       }
       i++;
-      m_nbLinesForFileSplitting = std::stoi(all_arguments[i]);
+      m_linesForFileSplitting = std::stoi(all_arguments[i]);
     } else if (all_arguments[i] == "-builtin") {
       i++;
     } else if (all_arguments[i] == "-exe") {

@@ -134,12 +134,6 @@ struct PathIdHasher final {
   }
 };
 
-// struct PathIdEqualityComparer final {
-//   inline bool operator()(const PathId &lhs, const PathId &rhs) const {
-//     return (lhs == rhs);
-//   }
-// };
-
 struct PathIdLessThanComparer final {
   inline bool operator()(const PathId &lhs, const PathId &rhs) const {
     return ((RawPathId)lhs < (RawPathId)rhs);
@@ -147,8 +141,6 @@ struct PathIdLessThanComparer final {
 };
 
 typedef std::set<PathId, PathIdLessThanComparer> PathIdSet;
-// typedef std::unordered_set<PathId, PathIdHasher, PathIdEqualityComparer>
-//     PathIdUnorderedSet;
 typedef std::vector<PathId> PathIdVector;
 
 }  // namespace SURELOG

@@ -28,11 +28,10 @@
 #include <memory>
 
 namespace SURELOG {
-
 class CompileDesign;
 class Session;
 
-class CompilerHarness {
+class CompilerHarness final {
  public:
   explicit CompilerHarness(Session* session);
   std::unique_ptr<CompileDesign> createCompileDesign();

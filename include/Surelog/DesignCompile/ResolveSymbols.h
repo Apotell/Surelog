@@ -37,33 +37,34 @@ class Design;
 class FileContent;
 class Session;
 
-struct FunctorCreateLookup {
+struct FunctorCreateLookup final {
   FunctorCreateLookup(Session* session, CompileDesign* compileDesign,
                       FileContent* fileContent, Design* design)
       : m_session(session),
         m_compileDesign(compileDesign),
-        m_fileData(fileContent) {}
+        m_fileContent(fileContent) {}
 
   int32_t operator()() const;
 
  private:
   Session* const m_session = nullptr;
-  CompileDesign* const m_compileDesign;
-  FileContent* const m_fileData;
+  CompileDesign* const m_compileDesign = nullptr;
+  FileContent* const m_fileContent = nullptr;
 };
 
-struct FunctorResolve {
+struct FunctorResolve final {
   FunctorResolve(Session* session, CompileDesign* compileDesign,
                  FileContent* fileContent, Design* design)
       : m_session(session),
         m_compileDesign(compileDesign),
-        m_fileData(fileContent) {}
+        m_fileContent(fileContent) {}
+
   int32_t operator()() const;
 
  private:
   Session* const m_session = nullptr;
-  CompileDesign* const m_compileDesign;
-  FileContent* const m_fileData;
+  CompileDesign* const m_compileDesign = nullptr;
+  FileContent* const m_fileContent = nullptr;
 };
 
 class ResolveSymbols : public CompileStep {
@@ -72,7 +73,7 @@ class ResolveSymbols : public CompileStep {
                  FileContent* fileContent)
       : m_session(session),
         m_compileDesign(compileDesign),
-        m_fileData(fileContent) {}
+        m_fileContent(fileContent) {}
 
   void createFastLookup();
 
@@ -135,8 +136,8 @@ class ResolveSymbols : public CompileStep {
                        const VObjectTypeUnorderedSet& bindTypes);
 
   Session* const m_session = nullptr;
-  CompileDesign* const m_compileDesign;
-  FileContent* const m_fileData;
+  CompileDesign* const m_compileDesign = nullptr;
+  FileContent* const m_fileContent = nullptr;
 };
 
 };  // namespace SURELOG

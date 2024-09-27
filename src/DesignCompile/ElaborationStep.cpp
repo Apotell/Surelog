@@ -71,8 +71,6 @@ ElaborationStep::ElaborationStep(Session* session, CompileDesign* compileDesign)
   m_exprBuilder.setDesign(m_compileDesign->getCompiler()->getDesign());
 }
 
-ElaborationStep::~ElaborationStep() {}
-
 bool ElaborationStep::bindTypedefs_() {
   Compiler* const compiler = m_compileDesign->getCompiler();
   SymbolTable* const symbols = m_session->getSymbolTable();

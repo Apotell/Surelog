@@ -145,6 +145,7 @@ std::vector<std::string_view> computeVarChain(const FileContent* fC,
 TestbenchElaboration::TestbenchElaboration(Session* session,
                                            CompileDesign* compileDesign)
     : ElaborationStep(session, compileDesign) {}
+
 bool TestbenchElaboration::bindClasses_() {
   checkForMultipleDefinition_();
   bindBaseClasses_();

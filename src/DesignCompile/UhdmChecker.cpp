@@ -59,7 +59,6 @@ using UHDM::uhdmunsupported_typespec;
 
 bool UhdmChecker::registerFile(const FileContent* fC,
                                std::set<std::string_view>& moduleNames) {
-  // FileSystem* const fileSystem = m_session->getFileSystem();
   const VObject& current = fC->Object(NodeId(fC->getSize() - 2));
   NodeId id = current.m_child;
   PathId fileId = fC->getFileId();

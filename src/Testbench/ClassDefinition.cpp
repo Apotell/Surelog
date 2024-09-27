@@ -170,8 +170,8 @@ void ClassDefinition::insertClass(ClassDefinition* p) {
 }
 
 CoverGroupDefinition* ClassDefinition::getCoverGroup(std::string_view name) {
-  CoverGroupMap::iterator itr = m_covergroups.find(name);
-  if (itr == m_covergroups.end()) {
+  CoverGroupMap::iterator itr = m_coverGroups.find(name);
+  if (itr == m_coverGroups.end()) {
     return nullptr;
   } else {
     return (*itr).second;
@@ -179,12 +179,12 @@ CoverGroupDefinition* ClassDefinition::getCoverGroup(std::string_view name) {
 }
 
 void ClassDefinition::insertCoverGroup(CoverGroupDefinition* p) {
-  m_covergroups.emplace(p->getName(), p);
+  m_coverGroups.emplace(p->getName(), p);
 }
 
 const DataType* ClassDefinition::getBaseClass(std::string_view name) const {
-  BaseClassMap::const_iterator itr = m_baseclasses.find(name);
-  if (itr == m_baseclasses.end()) {
+  BaseClassMap::const_iterator itr = m_baseClasses.find(name);
+  if (itr == m_baseClasses.end()) {
     return nullptr;
   } else {
     return (*itr).second;
@@ -192,7 +192,7 @@ const DataType* ClassDefinition::getBaseClass(std::string_view name) const {
 }
 
 void ClassDefinition::insertBaseClass(DataType* p) {
-  m_baseclasses.emplace(p->getName(), p);
+  m_baseClasses.emplace(p->getName(), p);
 }
 
 const DataType* ClassDefinition::getBaseDataType(std::string_view name) const {

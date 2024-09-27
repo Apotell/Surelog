@@ -238,10 +238,9 @@ class FileContent : public DesignComponent {
 
   const PathId m_fileId;
   const PathId m_fileChunkId;
-  //ErrorContainer* const m_errors;
-
-  Library* m_library;          // TODO: should be set in constructor and *const
-  FileContent* m_parentFile;   // for file chunks
+  Library* m_library =
+      nullptr;  // TODO: should be set in constructor and *const
+  FileContent* m_parentFile = nullptr;  // for file chunks
   bool m_isLibraryCellFile = false;
 };
 

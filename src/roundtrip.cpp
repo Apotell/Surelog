@@ -3619,16 +3619,11 @@ int main(int argc, const char **argv) {
   }
 #endif
 
-  // SURELOG::FileSystem::setInstance(
-  //     new SURELOG::PlatformFileSystem(std::filesystem::current_path()));
-
   // Read command line, compile a design, use -parse argument
   int32_t code = 0;
 
   SURELOG::Session session;
   SURELOG::FileSystem *const fileSystem = session.getFileSystem();
-  // SURELOG::FileSystem *const fileSystem = SURELOG::FileSystem::getInstance();
-  // SURELOG::SymbolTable *const symbolTable = new SURELOG::SymbolTable();
   SURELOG::ErrorContainer *const errors = session.getErrorContainer();
   SURELOG::CommandLineParser *const clp = session.getCommandLineParser();
   bool success = session.parseCommandLine(argc, argv, false, false);
@@ -3665,9 +3660,6 @@ int main(int argc, const char **argv) {
 
   // Do not delete these objects until you are done with UHDM
   SURELOG::shutdown_compiler(compiler);
-  // delete clp;
-  // delete symbolTable;
-  // delete errors;
 
 #if defined(_MSC_VER) && defined(_DEBUG)
   // Redirect cout back to screen

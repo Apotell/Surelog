@@ -34,28 +34,28 @@ class Design;
 class Program;
 class Session;
 
-struct FunctorCompileProgram {
-  FunctorCompileProgram(Session* session, CompileDesign* compiler,
+struct FunctorCompileProgram final {
+  FunctorCompileProgram(Session* session, CompileDesign* compileDesign,
                         Program* program, Design* design)
       : m_session(session),
-        m_compileDesign(compiler),
+        m_compileDesign(compileDesign),
         m_program(program),
         m_design(design) {}
   int32_t operator()() const;
 
  private:
   Session* const m_session = nullptr;
-  CompileDesign* const m_compileDesign;
-  Program* const m_program;
-  Design* const m_design;
+  CompileDesign* const m_compileDesign = nullptr;
+  Program* const m_program = nullptr;
+  Design* const m_design = nullptr;
 };
 
-class CompileProgram : public CompileToolbox {
+class CompileProgram final : public CompileToolbox {
  public:
-  CompileProgram(Session* session, CompileDesign* compiler, Program* program,
-                 Design* design)
+  CompileProgram(Session* session, CompileDesign* compileDesign,
+                 Program* program, Design* design)
       : m_session(session),
-        m_compileDesign(compiler),
+        m_compileDesign(compileDesign),
         m_program(program),
         m_design(design),
         m_helper(session) {}
@@ -69,9 +69,9 @@ class CompileProgram : public CompileToolbox {
   bool collectObjects_(CollectType collectType);
 
   Session* const m_session = nullptr;
-  CompileDesign* const m_compileDesign;
-  Program* const m_program;
-  Design* const m_design;
+  CompileDesign* const m_compileDesign = nullptr;
+  Program* const m_program = nullptr;
+  Design* const m_design = nullptr;
   CompileHelper m_helper;
   uint32_t m_nbPorts = 0;
   bool m_hasNonNullPort = false;

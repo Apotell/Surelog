@@ -39,8 +39,8 @@ class Session;
 
 class UhdmChecker final {
  public:
-  UhdmChecker(Session* session, CompileDesign* compiler, Design* design)
-      : m_session(session), m_compileDesign(compiler), m_design(design) {}
+  UhdmChecker(Session* session, CompileDesign* compileDesign, Design* design)
+      : m_session(session), m_compileDesign(compileDesign), m_design(design) {}
 
   // Technically not a const method as it modifies some static values.
   bool check(PathId uhdmFileId);
@@ -54,8 +54,8 @@ class UhdmChecker final {
   void mergeColumnCoverage();
 
   Session* const m_session = nullptr;
-  CompileDesign* const m_compileDesign;
-  Design* const m_design;
+  CompileDesign* const m_compileDesign = nullptr;
+  Design* const m_design = nullptr;
   typedef uint32_t LineNb;
   enum Status { EXIST, COVERED, UNSUPPORTED };
   class ColRange {

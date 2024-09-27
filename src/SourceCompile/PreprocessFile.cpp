@@ -154,6 +154,7 @@ class PreprocessFile::DescriptiveErrorListener final
                                 size_t startIndex, size_t stopIndex,
                                 size_t prediction,
                                 antlr4::atn::ATNConfigSet* configs) final;
+
   Session* const m_session = nullptr;
   PreprocessFile* const m_pp;
   const PathId m_fileId;

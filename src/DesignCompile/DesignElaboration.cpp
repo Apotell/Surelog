@@ -57,11 +57,7 @@
 namespace SURELOG {
 DesignElaboration::DesignElaboration(Session* session,
                                      CompileDesign* compileDesign)
-    : TestbenchElaboration(session, compileDesign) {
-  m_moduleDefFactory = nullptr;
-  m_moduleInstFactory = nullptr;
-  m_exprBuilder.setDesign(m_compileDesign->getCompiler()->getDesign());
-}
+    : TestbenchElaboration(session, compileDesign) {}
 
 DesignElaboration::~DesignElaboration() {}
 

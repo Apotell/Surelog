@@ -1110,8 +1110,6 @@ UHDM::any *CompileHelper::compileSelectExpression(
   if (fC->Child(Bit_select) && fC->Sibling(Bit_select)) {
     // More than one
     UHDM::var_select *var_select = s.MakeVar_select();
-    VectorOfexpr *exprs = s.MakeExprVec();
-    var_select->Exprs(exprs);
     var_select->VpiName(name);
     if (name.find("::") != std::string::npos) {
       var_select->VpiFullName(name);
@@ -1269,8 +1267,7 @@ UHDM::any *CompileHelper::compileSelectExpression(
               if (sel->UhdmType() == uhdmhier_path) {
                 hier_path *p = (hier_path *)sel;
                 for (auto el : *p->Path_elems()) {
-                  el->VpiParent(path);
-                  // el->Swap(p, path);
+                  el->Swap(p, path);
                   elems->push_back(el);
                 }
                 break;

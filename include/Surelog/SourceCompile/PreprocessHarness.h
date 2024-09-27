@@ -25,11 +25,10 @@
 #define SURELOG_PREPROCESSHARNESS_H
 #pragma once
 
-#include <Surelog/Common/Session.h>
+#include <Surelog/Common/PathId.h>
 
 #include <string>
 #include <string_view>
-#include <Surelog/Common/PathId.h>
 
 namespace SURELOG {
 class CompilationUnit;

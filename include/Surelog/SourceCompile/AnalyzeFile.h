@@ -88,7 +88,7 @@ class AnalyzeFile final {
   std::vector<FileChunk> m_fileChunks;
   std::vector<PathId> m_splitFiles;
   std::vector<uint32_t> m_lineOffsets;
-  int32_t m_nbChunks;
+  int32_t m_nbChunks = 0;
   std::stack<IncludeFileInfo> m_includeFileInfo;
   std::string m_text;  // unit test
 };

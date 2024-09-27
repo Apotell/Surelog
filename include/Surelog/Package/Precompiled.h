@@ -33,7 +33,6 @@
 namespace SURELOG {
 class PathId;
 class Session;
-class SymbolTable;
 
 class Precompiled final {
  public:

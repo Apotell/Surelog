@@ -72,7 +72,6 @@ class ClassDefinition : public DesignComponent, public DataType {
   Library* getLibrary() { return m_library; }
   DesignComponent* getContainer() const { return m_container; }
   void setContainer(DesignComponent* container);
-  //UHDM::class_defn* getUhdmDefinition() const { return m_uhdm_definition; }
 
   // Parameter definitions are stored DesignComponent maps
   typedef std::map<std::string, Property*, StringViewCompare> PropertyMap;
@@ -104,12 +103,12 @@ class ClassDefinition : public DesignComponent, public DataType {
   ClassDefinition* getClass(std::string_view name);
   void insertClass(ClassDefinition* p);
 
-  const CoverGroupMap& getCoverGroupMap() const { return m_covergroups; }
+  const CoverGroupMap& getCoverGroupMap() const { return m_coverGroups; }
   CoverGroupDefinition* getCoverGroup(std::string_view name);
   void insertCoverGroup(CoverGroupDefinition* p);
 
-  const BaseClassMap& getBaseClassMap() const { return m_baseclasses; }
-  BaseClassMap& getMutableBaseClassMap() { return m_baseclasses; }
+  const BaseClassMap& getBaseClassMap() const { return m_baseClasses; }
+  BaseClassMap& getMutableBaseClassMap() { return m_baseClasses; }
   const DataType* getBaseClass(std::string_view name) const;
   void insertBaseClass(DataType* p);
 
@@ -137,10 +136,8 @@ class ClassDefinition : public DesignComponent, public DataType {
   TaskMap m_tasks;
   ConstraintMap m_constraints;
   ClassMap m_classes;
-  CoverGroupMap m_covergroups;
-  BaseClassMap m_baseclasses;
-  UHDM::class_defn* m_uhdm_definition = nullptr;
-
+  CoverGroupMap m_coverGroups;
+  BaseClassMap m_baseClasses;
   UHDM::VectorOfattribute* attributes_ = nullptr;
 };
 

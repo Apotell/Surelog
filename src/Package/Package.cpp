@@ -46,7 +46,8 @@ Package::Package(Session* session, std::string_view name, Library* library,
   UHDM::package* const instance = serializer.MakePackage();
   if (!name.empty()) instance->VpiName(name);
   if (nodeId && (fC != nullptr))
-    fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::paPACKAGE), nodeId, instance);
+    fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::paPACKAGE),
+                            nodeId, instance);
   setUhdmModel(instance);
 }
 

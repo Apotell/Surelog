@@ -70,10 +70,10 @@ class SV3_1aPpTreeListenerHelper : public CommonListenerHelper {
 
  protected:
   PreprocessFile* m_pp = nullptr;
-  bool m_inActiveBranch;
-  bool m_inMacroDefinitionParsing;
-  bool m_inProtectedRegion;
-  bool m_filterProtectedRegions;
+  bool m_inActiveBranch = false;
+  bool m_inMacroDefinitionParsing = false;
+  bool m_inProtectedRegion = false;
+  bool m_filterProtectedRegions = false;
   std::set<std::string_view> m_reservedMacroNamesSet;
   antlr4::ParserRuleContext* m_append_paused_context;
   PreprocessFile::SpecialInstructions m_instructions;

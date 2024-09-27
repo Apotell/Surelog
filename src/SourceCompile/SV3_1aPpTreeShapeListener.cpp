@@ -601,15 +601,10 @@ void SV3_1aPpTreeShapeListener::enterMacroInstanceNoArgs(
         ParseUtils::getEndLineColumn(m_pp->getTokenStream(), ctx);
     if (ctx->Macro_identifier()) {
       macroName = ctx->Macro_identifier()->getText();
-      startLineCol = ParseUtils::getLineColumn(ctx->Macro_identifier());
-      endLineCol = ParseUtils::getEndLineColumn(ctx->Macro_identifier());
     } else if (ctx->Macro_Escaped_identifier()) {
       macroName = ctx->Macro_Escaped_identifier()->getText();
       macroName.erase(0, 1);
       macroName = StringUtils::rtrim(macroName);
-      startLineCol = ParseUtils::getLineColumn(ctx->Macro_Escaped_identifier());
-      endLineCol =
-          ParseUtils::getEndLineColumn(ctx->Macro_Escaped_identifier());
     }
     macroName.erase(macroName.begin());
     std::vector<std::string> args;

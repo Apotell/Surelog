@@ -42,7 +42,6 @@ PreprocessHarness::~PreprocessHarness() {
 std::string PreprocessHarness::preprocess(std::string_view content,
                                           CompilationUnit* compUnit,
                                           PathId fileId) {
-  // std::string result;
   PreprocessFile::SpecialInstructions instructions(
       PreprocessFile::SpecialInstructions::DontMute,
       PreprocessFile::SpecialInstructions::DontMark,

@@ -33,50 +33,51 @@ class Design;
 class FileContent;
 class Session;
 
-struct FunctorCompileFileContentDecl {
-  FunctorCompileFileContentDecl(Session* session, CompileDesign* compiler,
-                                FileContent* file, Design* design)
+struct FunctorCompileFileContentDecl final {
+  FunctorCompileFileContentDecl(Session* session, CompileDesign* compileDesign,
+                                FileContent* fileContent, Design* design)
       : m_session(session),
-        m_compileDesign(compiler),
-        m_fileContent(file),
+        m_compileDesign(compileDesign),
+        m_fileContent(fileContent),
         m_design(design) {}
   int32_t operator()() const;
 
  private:
   Session* const m_session = nullptr;
-  CompileDesign* const m_compileDesign;
-  FileContent* const m_fileContent;
-  Design* const m_design;
+  CompileDesign* const m_compileDesign = nullptr;
+  FileContent* const m_fileContent = nullptr;
+  Design* const m_design = nullptr;
 };
 
-struct FunctorCompileFileContent {
-  FunctorCompileFileContent(Session* session, CompileDesign* compiler,
-                            FileContent* file, Design* design)
+struct FunctorCompileFileContent final {
+  FunctorCompileFileContent(Session* session, CompileDesign* compileDesign,
+                            FileContent* fileContent, Design* design)
       : m_session(session),
-        m_compileDesign(compiler),
-        m_fileContent(file),
+        m_compileDesign(compileDesign),
+        m_fileContent(fileContent),
         m_design(design) {}
   int32_t operator()() const;
 
  private:
   Session* const m_session = nullptr;
-  CompileDesign* const m_compileDesign;
-  FileContent* const m_fileContent;
-  Design* const m_design;
+  CompileDesign* const m_compileDesign = nullptr;
+  FileContent* const m_fileContent = nullptr;
+  Design* const m_design = nullptr;
 };
 
 class CompileFileContent final {
  public:
-  CompileFileContent(Session* session, CompileDesign* compiler,
-                     FileContent* file, Design* design, bool declOnly)
+  CompileFileContent(Session* session, CompileDesign* compileDesign,
+                     FileContent* fileContent, Design* design, bool declOnly)
       : m_session(session),
-        m_compileDesign(compiler),
-        m_fileContent(file),
+        m_compileDesign(compileDesign),
+        m_fileContent(fileContent),
         m_design(design),
         m_helper(session),
         m_declOnly(declOnly) {
-	//m_helper.seterrorReporting(m_session->getErrorContainer(), m_session->getSymbolTable());
-}
+    // m_helper.seterrorReporting(m_session->getErrorContainer(),
+    // m_session->getSymbolTable());
+  }
 
   bool compile(Elaborate elaborate, Reduce reduce);
 
@@ -85,8 +86,8 @@ class CompileFileContent final {
   bool collectObjects_();
 
   Session* const m_session = nullptr;
-  CompileDesign* const m_compileDesign;
-  FileContent* const m_fileContent;
+  CompileDesign* const m_compileDesign = nullptr;
+  FileContent* const m_fileContent = nullptr;
   Design* const m_design = nullptr;
   CompileHelper m_helper;
   bool m_declOnly = false;

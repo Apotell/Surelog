@@ -31,9 +31,6 @@
 #include <Surelog/ErrorReporting/ErrorContainer.h>
 #include <Surelog/SourceCompile/SymbolTable.h>
 
-#include <functional>
-#include <iostream>
-
 // UHDM
 #include <uhdm/ElaboratorListener.h>
 #include <uhdm/VpiListener.h>
@@ -98,7 +95,6 @@ int main(int argc, const char **argv) {
   clp->setCompile(true);
   clp->setElaborate(true);  // Request Surelog instance tree elaboration
   clp->setElabUhdm(true);   // Request UHDM Uniquification/Elaboration
-  // bool success = clp->parseCommandLine(argc, argv);
   bool success = session.parseCommandLine(argc, argv, false, false);
   errors->printMessages(clp->muteStdout());
 
@@ -120,8 +116,5 @@ int main(int argc, const char **argv) {
 
   // Do not delete these objects until you are done with UHDM
   SURELOG::shutdown_compiler(compiler);
-  // delete clp;
-  // delete symbolTable;
-  // delete errors;
   return 0;
 }

@@ -110,24 +110,25 @@ class ParseFile final {
   bool parseOneFile_(PathId fileId, uint32_t lineOffset);
   void buildLineInfoCache_();
 
+ private:
   Session* const m_session = nullptr;
   PathId m_fileId;
   PathId m_ppFileId;
-  CompileSourceFile* const m_compileSourceFile;
-  CompilationUnit* const m_compilationUnit;
+  CompileSourceFile* const m_compileSourceFile = nullptr;
+  CompilationUnit* const m_compilationUnit = nullptr;
   Library* m_library = nullptr;
   AntlrParserHandler* m_antlrParserHandler = nullptr;
   SV3_1aParserBaseListener* m_listener = nullptr;
   std::vector<LineTranslationInfo> m_lineTranslationVec;
-  bool m_usingCachedVersion;
-  bool m_keepParserHandler;
+  bool m_usingCachedVersion = false;
+  bool m_keepParserHandler = false;
   FileContent* m_fileContent = nullptr;
   bool debug_AstModel = false;
 
   // For file chunk:
   std::vector<ParseFile*> m_children;
-  ParseFile* const m_parent;
-  uint32_t m_offsetLine;
+  ParseFile* const m_parent = nullptr;
+  uint32_t m_offsetLine = 0;
   std::string m_profileInfo;
   std::string m_sourceText;  // For Unit tests
   std::vector<uint32_t> lineInfoCache;

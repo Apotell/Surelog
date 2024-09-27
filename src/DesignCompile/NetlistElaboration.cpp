@@ -47,8 +47,6 @@
 #include <Surelog/Testbench/TypeDef.h>
 #include <Surelog/Utils/StringUtils.h>
 
-#include <algorithm>
-
 // UHDM
 #include <uhdm/ElaboratorListener.h>
 #include <uhdm/ExprEval.h>
@@ -56,25 +54,14 @@
 #include <uhdm/uhdm.h>
 
 #include <algorithm>
+
 namespace SURELOG {
 
 using namespace UHDM;  // NOLINT (using a bunch of these)
 
 NetlistElaboration::NetlistElaboration(Session* session,
                                        CompileDesign* compileDesign)
-    : TestbenchElaboration(session, compileDesign) {
-  // m_exprBuilder.seterrorReporting(
-  //     m_compileDesign->getCompiler()->getErrorContainer(),
-  //     m_compileDesign->getCompiler()->getSymbolTable());
-  m_exprBuilder.setDesign(m_compileDesign->getCompiler()->getDesign());
-  // m_helper.seterrorReporting(
-  //     m_compileDesign->getCompiler()->getErrorContainer(),
-  //     m_compileDesign->getCompiler()->getSymbolTable());
-  // m_symbols = m_compileDesign->getCompiler()->getSymbolTable();
-  // m_errors = m_compileDesign->getCompiler()->getErrorContainer();
-}
-
-NetlistElaboration::~NetlistElaboration() {}
+    : TestbenchElaboration(session, compileDesign) {}
 
 bool NetlistElaboration::elaboratePackages() {
   Design* design = m_compileDesign->getCompiler()->getDesign();
@@ -85,7 +72,7 @@ bool NetlistElaboration::elaboratePackages() {
     Reduce reduce = Reduce::No;
     for (Package* pack : {p->getUnElabPackage(), p}) {
       if (pack->getNetlist() == nullptr) {
-        Netlist* netlist = new Netlist(m_session, nullptr);
+        Netlist* netlist = new Netlist(nullptr);
         pack->setNetlist(netlist);
       }
       Netlist* netlist = pack->getNetlist();
@@ -548,7 +535,7 @@ bool NetlistElaboration::elaborate_(ModuleInstance* instance, bool recurse) {
   }
 
   if (netlist == nullptr) {
-    netlist = new Netlist(m_session, instance);
+    netlist = new Netlist(instance);
     instance->setNetlist(netlist);
   }
 
@@ -1376,8 +1363,7 @@ bool NetlistElaboration::high_conn_(ModuleInstance* instance) {
               ModuleInstance* interfaceInstance =
                   new ModuleInstance(m_session, orig_interf, fC, sigId,
                                      instance, sigName, orig_interf->getName());
-              Netlist* netlistInterf =
-                  new Netlist(m_session, interfaceInstance);
+              Netlist* netlistInterf = new Netlist(interfaceInstance);
               interfaceInstance->setNetlist(netlistInterf);
 
               mp = elab_modport_(instance, interfaceInstance, formalName,
@@ -1560,7 +1546,7 @@ interface_inst* NetlistElaboration::elab_interface_(
   FileSystem* const fileSystem = m_session->getFileSystem();
   Netlist* netlist = instance->getNetlist();
   if (netlist == nullptr) {
-    netlist = new Netlist(m_session, instance);
+    netlist = new Netlist(instance);
     instance->setNetlist(netlist);
   }
   Serializer& s = m_compileDesign->getSerializer();
@@ -1742,7 +1728,7 @@ bool NetlistElaboration::elab_interfaces_(ModuleInstance* instance) {
     ModuleInstance* child = instance->getChildren(i);
     Netlist* netlist = child->getNetlist();
     if (netlist == nullptr) {
-      netlist = new Netlist(m_session, child);
+      netlist = new Netlist(child);
       child->setNetlist(netlist);
     }
     DesignComponent* childDef = child->getDefinition();
@@ -2568,8 +2554,7 @@ bool NetlistElaboration::elab_ports_nets_(
                     m_session, orig_interf, sig->getFileContent(),
                     sig->getNodeId(), instance, sigName,
                     orig_interf->getName());
-                Netlist* netlistInterf =
-                    new Netlist(m_session, interfaceInstance);
+                Netlist* netlistInterf = new Netlist(interfaceInstance);
                 interfaceInstance->setNetlist(netlistInterf);
                 if (interfaceRefInstance) {
                   for (auto& itr : interfaceRefInstance->getMappedValues()) {
@@ -2592,8 +2577,7 @@ bool NetlistElaboration::elab_ports_nets_(
               ModuleInstance* interfaceInstance = new ModuleInstance(
                   m_session, orig_interf, sig->getFileContent(),
                   sig->getNodeId(), instance, signame, orig_interf->getName());
-              Netlist* netlistInterf =
-                  new Netlist(m_session, interfaceInstance);
+              Netlist* netlistInterf = new Netlist(interfaceInstance);
               interfaceInstance->setNetlist(netlistInterf);
               if (interfaceRefInstance) {
                 for (auto& itr : interfaceRefInstance->getMappedValues()) {
@@ -2626,7 +2610,7 @@ bool NetlistElaboration::elab_ports_nets_(
             ModuleInstance* interfaceInstance = new ModuleInstance(
                 m_session, orig_interf, sig->getFileContent(), sig->getNodeId(),
                 instance, signame, orig_interf->getName());
-            Netlist* netlistInterf = new Netlist(m_session, interfaceInstance);
+            Netlist* netlistInterf = new Netlist(interfaceInstance);
             interfaceInstance->setNetlist(netlistInterf);
 
             interface_array* array_int = nullptr;

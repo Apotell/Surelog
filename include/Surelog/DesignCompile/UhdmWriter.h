@@ -125,8 +125,9 @@ class UhdmWriter final {
                                  const UHDM::any* parent);
   void bind(UHDM::Serializer& s, const std::vector<vpiHandle>& designs);
 
+ private:
   Session* const m_session = nullptr;
-  CompileDesign* const m_compileDesign;
+  CompileDesign* const m_compileDesign = nullptr;
   Design* const m_design = nullptr;
   ComponentMap m_componentMap;
   CompileHelper m_helper;

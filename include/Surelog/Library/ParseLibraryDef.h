@@ -54,9 +54,9 @@ class ParseLibraryDef final {
  private:
   Session* const m_session = nullptr;
   PathId m_fileId;
-  LibrarySet* const m_librarySet;
-  ConfigSet* const m_configSet;
-  FileContent* m_fileContent;
+  LibrarySet* const m_librarySet = nullptr;
+  ConfigSet* const m_configSet = nullptr;
+  FileContent* m_fileContent = nullptr;
 };
 
 }  // namespace SURELOG

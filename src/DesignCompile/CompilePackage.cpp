@@ -70,7 +70,6 @@ bool CompilePackage::compile(Elaborate elaborate, Reduce reduce) {
   m_helper.setReduce(reduce);
   fC->populateCoreMembers(packId, packId, pack);
 
-  // m_package->m_exprBuilder.seterrorReporting(m_errors, m_symbols);
   m_package->m_exprBuilder.setDesign(
       m_compileDesign->getCompiler()->getDesign());
   if (reduce == Reduce::Yes) {

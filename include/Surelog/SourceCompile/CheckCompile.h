@@ -44,8 +44,8 @@ class CheckCompile {
   bool checkSyntaxErrors_();
 
  private:
-  Session* const m_session;
-  Compiler* const m_compiler;
+  Session* const m_session = nullptr;
+  Compiler* const m_compiler = nullptr;
 };
 
 };  // namespace SURELOG

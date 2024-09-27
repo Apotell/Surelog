@@ -199,13 +199,11 @@ class CommandLineParser final {
   PathId pythonListenerId() const { return m_pythonListenerFileId; }
 
   /* Internal */
-  uint16_t getNbMaxTreads() const { return m_maxTreads; }
-  uint16_t getNbMaxProcesses() const { return m_maxProcesses; }
-  void setNbMaxTreads(uint16_t max) { m_maxTreads = max; }
-  void setNbMaxProcesses(uint16_t max) { m_maxProcesses = max; }
-  uint32_t getNbLinesForFileSpliting() const {
-    return m_nbLinesForFileSplitting;
-  }
+  uint16_t getMaxTreads() const { return m_maxTreads; }
+  uint16_t getMaxProcesses() const { return m_maxProcesses; }
+  void setMaxTreads(uint16_t max) { m_maxTreads = max; }
+  void setMaxProcesses(uint16_t max) { m_maxProcesses = max; }
+  uint32_t getLinesForFileSpliting() const { return m_linesForFileSplitting; }
   bool useTbb() const { return m_useTbb; }
   std::string getTimeScale() const { return m_timescale; }
   bool createCache() const { return m_createCache; }
@@ -325,7 +323,7 @@ class CommandLineParser final {
   bool m_debugLibraryDef;
   bool m_useTbb;
   bool m_pythonAllowed;
-  uint32_t m_nbLinesForFileSplitting;
+  uint32_t m_linesForFileSplitting;
   std::string m_timescale;
   bool m_pythonEvalScriptPerFile;
   bool m_pythonEvalScript;

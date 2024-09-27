@@ -38,7 +38,9 @@
 
 // UHDM
 #include <uhdm/uhdm.h>
+
 namespace fs = std::filesystem;
+
 int main(int argc, const char** argv) {
   // Read command line, compile a design, use -parse argument
   uint32_t code = 0;
@@ -48,7 +50,6 @@ int main(int argc, const char** argv) {
   SURELOG::CommandLineParser* const clp = session.getCommandLineParser();
   bool success = session.parseCommandLine(argc, argv, false, false);
   clp->noPython();
-  // bool success = clp->parseCommandLine(argc, argv);
   errors->printMessages(clp->muteStdout());
   SURELOG::Design* the_design = nullptr;
   SURELOG::scompiler* compiler = nullptr;
@@ -79,8 +80,5 @@ int main(int argc, const char** argv) {
   if (success && (!clp->help())) {
     SURELOG::shutdown_compiler(compiler);
   }
-  // delete clp;
-  // delete symbolTable;
-  // delete errors;
   return code;
 }

@@ -28,10 +28,11 @@
 #include <Surelog/Design/Design.h>
 
 // UHDM
-#include <uhdm/containers.h>
 #include <uhdm/Serializer.h>
+#include <uhdm/containers.h>
 #include <uhdm/sv_vpi_user.h>
 #include <uhdm/uhdm_forward_decl.h>
+
 #include <mutex>
 
 namespace UHDM {

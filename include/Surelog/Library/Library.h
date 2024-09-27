@@ -36,7 +36,6 @@
 namespace SURELOG {
 class ModuleDefinition;
 class Session;
-class SymbolTable;
 
 class Library final {
  public:

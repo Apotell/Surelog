@@ -121,15 +121,6 @@ ParseFile::~ParseFile() {
   delete m_listener;
 }
 
-// SymbolTable* ParseFile::getSymbolTable() {
-//   return m_symbolTable ? m_symbolTable :
-//   m_compileSourceFile->getSymbolTable();
-// }
-
-// ErrorContainer* ParseFile::getErrorContainer() {
-//   return m_errors ? m_errors : m_compileSourceFile->getErrorContainer();
-// }
-
 SymbolId ParseFile::registerSymbol(std::string_view symbol) {
   return m_session->getSymbolTable()->registerSymbol(symbol);
 }
@@ -541,9 +532,6 @@ bool ParseFile::parse() {
           // Only visit the chunks that got re-parsed
           // TODO: Incrementally regenerate the FileContent
           child->m_fileContent->setParent(m_fileContent);
-          // child->m_listener = new SV3_1aTreeShapeListener(
-          //     m_session, child, child->m_antlrParserHandler->m_tokens,
-          //     child->m_offsetLine);
 
           Timer tmr;
           antlr4::tree::ParseTreeWalker::DEFAULT.walk(

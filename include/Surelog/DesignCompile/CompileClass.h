@@ -31,7 +31,7 @@
 namespace SURELOG {
 class Session;
 
-struct FunctorCompileClass {
+struct FunctorCompileClass final {
   FunctorCompileClass(Session* session, CompileDesign* compiler,
                       ClassDefinition* classDef, Design* design)
       : m_session(session),
@@ -43,9 +43,9 @@ struct FunctorCompileClass {
 
  private:
   Session* const m_session = nullptr;
-  CompileDesign* const m_compileDesign;
-  ClassDefinition* const m_class;
-  Design* const m_design;
+  CompileDesign* const m_compileDesign = nullptr;
+  ClassDefinition* const m_class = nullptr;
+  Design* const m_design = nullptr;
 };
 
 class CompileClass final {
@@ -76,11 +76,10 @@ class CompileClass final {
   bool compile_class_type_(const FileContent* fC, NodeId id);
   bool compile_properties();
 
-
   Session* const m_session = nullptr;
-  CompileDesign* const m_compileDesign;
-  ClassDefinition* const m_class;
-  Design* const m_design;
+  CompileDesign* const m_compileDesign = nullptr;
+  ClassDefinition* const m_class = nullptr;
+  Design* const m_design = nullptr;
   CompileHelper m_helper;
   std::set<std::string> builtins_;
   UHDM::VectorOfattribute* m_attributes = nullptr;

@@ -123,7 +123,7 @@ void AnalyzeFile::analyze() {
   }
   if (allLines.empty()) return;
 
-  uint32_t minNbLineForPartitioning = clp->getNbLinesForFileSpliting();
+  uint32_t minNbLineForPartitioning = clp->getLinesForFileSpliting();
   std::vector<FileChunk> fileChunks;
   bool inPackage = false;
   int32_t inClass = 0;
@@ -384,7 +384,7 @@ void AnalyzeFile::analyze() {
 
   uint32_t lineSize = lineNb;
 
-  if (clp->getNbMaxProcesses() || (lineSize < minNbLineForPartitioning) ||
+  if (clp->getMaxProcesses() || (lineSize < minNbLineForPartitioning) ||
       (m_nbChunks < 2)) {
     m_splitFiles.emplace_back(m_ppFileId);
     m_lineOffsets.push_back(0);

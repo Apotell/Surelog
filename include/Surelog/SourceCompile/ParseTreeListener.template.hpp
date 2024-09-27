@@ -94,7 +94,7 @@ class ParseTreeListener {
   typedef std::vector<ParseTreeNode> parsetreenode_vector_t;
 
  public:
-  ParseTreeListener(Session* session) : m_session(session) {}
+  explicit ParseTreeListener(Session* session) : m_session(session) {}
   virtual ~ParseTreeListener() = default;
 
   virtual void enterSourceFile(PathId fileId) {}
@@ -102,17 +102,17 @@ class ParseTreeListener {
 
   virtual void enter(const ParseTreeNode& node) {}
   virtual void leave(const ParseTreeNode& node) {}
-  virtual void visit(const ParseTreeNode& node){}
+  virtual void visit(const ParseTreeNode& node) {}
 
   // clang-format off
 <PUBLIC_ENTER_LEAVE_DECLARATIONS>
-      // clang-format on
+  // clang-format on
 
-      // clang-format off
+  // clang-format off
 <PUBLIC_VISIT_DECLARATIONS>
-      // clang-format on
+  // clang-format on
 
-      void listen(const ParseTreeNode& node);
+  void listen(const ParseTreeNode& node);
   void listenChildren(const ParseTreeNode& node, bool ordered);
   void listenSiblings(const ParseTreeNode& node, bool ordered);
 
@@ -140,9 +140,10 @@ class ParseTreeListener {
  private:
   // clang-format off
 <PRIVATE_LISTEN_DECLARATIONS>
-      // clang-format on
+  // clang-format on
 
-      protected : Session* const m_session = nullptr;
+ protected:
+  Session* const m_session = nullptr;
   parsetreenode_set_t m_visited;
   parsetreenode_stack_t m_callstack;
 

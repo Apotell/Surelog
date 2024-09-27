@@ -40,12 +40,11 @@ class NetlistElaboration : public TestbenchElaboration {
  public:
   explicit NetlistElaboration(Session* session, CompileDesign* compileDesign);
   NetlistElaboration(const NetlistElaboration& orig) = delete;
+  ~NetlistElaboration() override = default;
 
   bool elaborate() override;
   bool elaboratePackages();
   bool elaborateInstance(ModuleInstance* instance);
-
-  ~NetlistElaboration() override;
 
   typedef std::map<NodeId, UHDM::typespec*> TypespecCache;
   bool elabSignal(Signal* sig, ModuleInstance* instance, ModuleInstance* child,

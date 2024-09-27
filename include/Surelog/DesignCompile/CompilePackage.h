@@ -33,33 +33,31 @@ class Design;
 class Package;
 class Session;
 
-struct FunctorCompilePackage {
-  FunctorCompilePackage(Session* session, CompileDesign* compiler,
+struct FunctorCompilePackage final {
+  FunctorCompilePackage(Session* session, CompileDesign* compileDesign,
                         Package* package, Design* design)
       : m_session(session),
-        m_compileDesign(compiler),
+        m_compileDesign(compileDesign),
         m_package(package),
         m_design(design) {}
   int32_t operator()() const;
 
  private:
   Session* const m_session = nullptr;
-  CompileDesign* const m_compileDesign;
-  Package* const m_package;
-  Design* const m_design;
+  CompileDesign* const m_compileDesign = nullptr;
+  Package* const m_package = nullptr;
+  Design* const m_design = nullptr;
 };
 
 class CompilePackage final {
  public:
-  CompilePackage(Session* session, CompileDesign* compiler, Package* package,
-                 Design* design)
+  CompilePackage(Session* session, CompileDesign* compileDesign,
+                 Package* package, Design* design)
       : m_session(session),
-        m_compileDesign(compiler),
+        m_compileDesign(compileDesign),
         m_package(package),
         m_design(design),
-        m_helper(session) {
-	//m_helper.seterrorReporting(errors, symbols);
-}
+        m_helper(session) {}
 
   bool compile(Elaborate elaborate, Reduce reduce);
 

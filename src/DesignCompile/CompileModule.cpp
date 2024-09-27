@@ -118,8 +118,6 @@ bool CompileModule::compile(Elaborate elaborate, Reduce reduce) {
   m_helper.setElaborate(elaborate);
   m_helper.setReduce(reduce);
 
-  // CommandLineParser* clp =
-  //     m_compileDesign->getCompiler()->getCommandLineParser();
   auto& blackboxModules = clp->getBlackBoxModules();
   bool skipModule = false;
   std::string libName;
@@ -1635,6 +1633,7 @@ void CompileModule::compileClockingBlock_(const FileContent* fC, NodeId id) {
     n<> u<20> t<Clocking_event> p<21> c<19> l<39>
     n<> u<21> t<Clocking_declaration> p<22> c<12> l<39>
    */
+
   SymbolTable* const symbols = m_session->getSymbolTable();
   NodeId clocking_block_type = fC->Child(id);
   NodeId clocking_block_name;

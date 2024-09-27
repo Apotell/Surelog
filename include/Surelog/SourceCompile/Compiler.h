@@ -30,7 +30,6 @@ limitations under the License.
 #include <Surelog/ErrorReporting/ErrorContainer.h>
 #include <Surelog/SourceCompile/CompileSourceFile.h>
 #include <Surelog/SourceCompile/PreprocessFile.h>
-//#include <uhdm/uhdm_forward_decl.h>
 #include <uhdm/Serializer.h>
 #include <uhdm/vpi_user.h>
 
@@ -93,7 +92,7 @@ class Compiler {
   // of the design.
   Design* getDesign() const { return m_design; }
 
-  UHDM::design* getUhdmDesign() const { return m_uhdmDesign; }
+  UHDM::design* getUhdmDesign() const;
   vpiHandle getVpiDesign() const;
   CompileDesign* getCompileDesign() const { return m_compileDesign; }
   ErrorContainer::Stats getErrorStats() const;
@@ -121,6 +120,7 @@ class Compiler {
                        CompileSourceFile::Action action);
   bool cleanup_();
 
+ private:
   UHDM::Serializer m_serializer;
   Session* const m_session = nullptr;
   CompilationUnit* m_commonCompilationUnit;
@@ -132,10 +132,9 @@ class Compiler {
   std::vector<CompileSourceFile*> m_compilersParentFiles;
   std::vector<CompilationUnit*> m_compilationUnits;
   std::vector<Session*> m_sessions;
-  LibrarySet* const m_librarySet;
-  ConfigSet* const m_configSet;
-  Design* const m_design;
-  UHDM::design* m_uhdmDesign;
+  LibrarySet* const m_librarySet = nullptr;
+  ConfigSet* const m_configSet = nullptr;
+  Design* const m_design = nullptr;
   PathIdSet m_libraryFiles;  // -v <file>
   std::string m_text;        // unit tests
   CompileDesign* m_compileDesign;

@@ -31,9 +31,6 @@
 #include <Surelog/ErrorReporting/ErrorContainer.h>
 #include <Surelog/SourceCompile/SymbolTable.h>
 
-#include <functional>
-#include <iostream>
-
 // UHDM
 #include <uhdm/ElaboratorListener.h>
 #include <uhdm/VpiListener.h>
@@ -43,11 +40,11 @@
 #include <iostream>
 
 namespace fs = std::filesystem;
+
 int main(int argc, const char** argv) {
   // Read command line, compile a design, use -parse argument
   uint32_t code = 0;
   SURELOG::Session session;
-  SURELOG::SymbolTable* const symbolTable = session.getSymbolTable();
   SURELOG::ErrorContainer* const errors = session.getErrorContainer();
   SURELOG::CommandLineParser* const clp = session.getCommandLineParser();
   bool success = session.parseCommandLine(argc, argv, false, false);
@@ -57,7 +54,6 @@ int main(int argc, const char** argv) {
   clp->setCompile(true);
   clp->setElaborate(true);  // Request Surelog instance tree Elaboration
   // clp->setElabUhdm(true);  // Request UHDM Uniquification/Elaboration
-  // bool success = clp->parseCommandLine(argc, argv);
   errors->printMessages(clp->muteStdout());
   vpiHandle the_design = 0;
   SURELOG::scompiler* compiler = nullptr;
@@ -227,8 +223,5 @@ int main(int argc, const char** argv) {
 
   // Do not delete these objects until you are done with UHDM
   SURELOG::shutdown_compiler(compiler);
-  delete clp;
-  delete symbolTable;
-  delete errors;
   return code;
 }

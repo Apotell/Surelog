@@ -46,8 +46,9 @@
 #include <Surelog/Utils/ContainerUtils.h>
 #include <Surelog/Utils/StringUtils.h>
 #include <Surelog/Utils/Timer.h>
-#include <uhdm/Serializer.h>
+
 // UHDM
+#include <uhdm/Serializer.h>
 #include <uhdm/design.h>
 #include <uhdm/preproc_macro_definition.h>
 #include <uhdm/preproc_macro_instance.h>
@@ -77,8 +78,8 @@ Compiler::Compiler(Session* session)
       m_design(new Design(m_session, m_serializer, m_librarySet, m_configSet)),
       m_compileDesign(nullptr) {
 #ifdef USETBB
-  if (m_session->useTbb() && (m_session->getNbMaxTreads() > 0))
-    tbb::task_scheduler_init init(m_session->getNbMaxTreads());
+  if (m_session->useTbb() && (m_session->getMaxTreads() > 0))
+    tbb::task_scheduler_init init(m_session->getMaxTreads());
 #endif
 }
 
@@ -88,7 +89,6 @@ Compiler::Compiler(Session* session, std::string_view text)
       m_librarySet(new LibrarySet()),
       m_configSet(new ConfigSet()),
       m_design(new Design(m_session, m_serializer, m_librarySet, m_configSet)),
-      m_uhdmDesign(0),
       m_text(text),
       m_compileDesign(nullptr) {}
 
@@ -249,29 +249,9 @@ bool Compiler::ppinit_() {
     }
   }
   for (const auto& libFileId : libFileIdSet) {
-    // SymbolTable* symbols = m_session->getSymbolTable();
-    // if (m_commandLineParser->fileunit()) {
-    //   comp_unit = new CompilationUnit(true);
-    //   m_compilationUnits.push_back(comp_unit);
-    //   symbols = m_commandLineParser->getSymbolTable()->CreateSnapshot();
-    //   m_symbolTables.push_back(symbols);
-    // }
-    // ErrorContainer* errors =
-    //     new ErrorContainer(symbols, m_errors->getLogListener());
-    // m_errorContainers.push_back(errors);
-    // errors->registerCmdLine(m_commandLineParser);
-
     // This line registers the file in the "work" library:
     /*Library* library  = */ m_librarySet->getLibrary(libFileId);
     m_libraryFiles.insert(libFileId);
-    // No need to register a compiler
-    // CompileSourceFile* compiler = new CompileSourceFile
-    // (m_commandLineParser->getLibraryFiles ()[i],
-    //                                                     m_commandLineParser,
-    //                                                     errors, this,
-    //                                                     symbols, comp_unit,
-    //                                                     library);
-    // m_compilers.push_back (compiler);
   }
 
   // Libraries (.map)
@@ -293,7 +273,6 @@ bool Compiler::ppinit_() {
         comp_unit = new CompilationUnit(true);
         m_compilationUnits.push_back(comp_unit);
         symbols = symbols->CreateSnapshot();
-        // m_symbolTables.push_back(symbols);
       }
       Session* const session = new Session(m_session->getFileSystem(), symbols,
                                            m_session->getLogListener(), nullptr,
@@ -413,7 +392,7 @@ bool Compiler::createFileList_() {
 
 bool Compiler::createMultiProcessParser_() {
   CommandLineParser* const clp = m_session->getCommandLineParser();
-  uint32_t nbProcesses = clp->getNbMaxProcesses();
+  uint32_t nbProcesses = clp->getMaxProcesses();
   if (nbProcesses == 0) return true;
 
   if (!(clp->writePpOutput() || clp->writePpOutputFileId())) {
@@ -450,7 +429,6 @@ bool Compiler::createMultiProcessParser_() {
 
   uint32_t bigJobThreashold = (largestJob / nbProcesses) * 3;
   std::vector<CompileSourceFile*> bigJobs;
-  // Precompiled* prec = Precompiled::getSingleton();
   Precompiled* const precompiled = m_session->getPrecompiled();
   const fs::path workingDir = fileSystem->getWorkingDir();
   for (const auto& compiler : m_compilers) {
@@ -609,7 +587,7 @@ bool Compiler::createMultiProcessParser_() {
 
 bool Compiler::createMultiProcessPreProcessor_() {
   CommandLineParser* const clp = m_session->getCommandLineParser();
-  uint32_t nbProcesses = clp->getNbMaxProcesses();
+  uint32_t nbProcesses = clp->getMaxProcesses();
   if (nbProcesses == 0) return true;
 
   if (!(clp->writePpOutput() || clp->writePpOutputFileId())) {
@@ -744,7 +722,7 @@ bool Compiler::parseinit_() {
     const uint32_t nbThreads =
         prec->isFilePrecompiled(compiler->getPpOutputFileId())
             ? 0
-            : clp->getNbMaxTreads();
+            : clp->getMaxTreads();
 
     const int32_t effectiveNbThreads = calculateEffectiveThreads(nbThreads);
 
@@ -775,7 +753,6 @@ bool Compiler::parseinit_() {
       int32_t j = 0;
       for (const auto& ppId : fileAnalyzer->getSplitFiles()) {
         SymbolTable* symbols = m_session->getSymbolTable()->CreateSnapshot();
-        // m_symbolTables.push_back(symbols);
         Session* const session = new Session(
             m_session->getFileSystem(), symbols, m_session->getLogListener(),
             nullptr, m_session->getCommandLineParser(),
@@ -785,14 +762,6 @@ bool Compiler::parseinit_() {
             session, compiler, ppId, fileAnalyzer->getLineOffsets()[j]);
         // Schedule chunk
         tmp_compilers.push_back(chunkCompiler);
-
-        // chunkCompiler->setSymbolTable(symbols);
-        // ErrorContainer* errors =
-        //     new ErrorContainer(symbols, m_errors->getLogListener());
-        // m_errorContainers.push_back(errors);
-        // errors->registerCmdLine(m_commandLineParser);
-        // chunkCompiler->setErrorContainer(errors);
-        //  chunkCompiler->getParser ()->setFileContent (fileContent);
 
         FileContent* const chunkFileContent =
             new FileContent(session, compiler->getParser()->getFileId(0),
@@ -850,7 +819,7 @@ bool Compiler::compileFileSet_(CompileSourceFile::Action action,
                                std::vector<CompileSourceFile*>& container) {
   ErrorContainer* const errors = m_session->getErrorContainer();
   CommandLineParser* const clp = m_session->getCommandLineParser();
-  const uint16_t maxThreadCount = allowMultithread ? clp->getNbMaxTreads() : 0;
+  const uint16_t maxThreadCount = allowMultithread ? clp->getMaxTreads() : 0;
 
   if (maxThreadCount < 1) {
     // Single thread
@@ -1274,10 +1243,14 @@ bool Compiler::parseLibrariesDef_() {
   return result;
 }
 
+UHDM::design* Compiler::getUhdmDesign() const {
+  return m_design->getUhdmDesign();
+}
+
 vpiHandle Compiler::getVpiDesign() const {
-  return (m_uhdmDesign != nullptr)
-             ? m_uhdmDesign->GetSerializer()->MakeUhdmHandle(
-                   m_uhdmDesign->UhdmType(), m_uhdmDesign)
-             : nullptr;
+  UHDM::design* const uhdmDesign = m_design->getUhdmDesign();
+  return (uhdmDesign != nullptr) ? uhdmDesign->GetSerializer()->MakeUhdmHandle(
+                                       uhdmDesign->UhdmType(), uhdmDesign)
+                                 : nullptr;
 }
 }  // namespace SURELOG

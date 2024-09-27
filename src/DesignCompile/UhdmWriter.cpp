@@ -2124,12 +2124,9 @@ UHDM::any* UhdmWriter::swapForSpecifiedVar(UHDM::Serializer& s,
 
 void UhdmWriter::bind(UHDM::Serializer& s,
                       const std::vector<vpiHandle>& designs) {
-  SymbolTable* const symbolTable = m_session->getSymbolTable();
-  ErrorContainer* const errorContainer = m_session->getErrorContainer();
   CommandLineParser* commandLineParser = m_session->getCommandLineParser();
-  if (ObjectBinder* const listener =
-          new ObjectBinder(m_session, m_componentMap, s, symbolTable,
-                           errorContainer, commandLineParser->muteStdout())) {
+  if (ObjectBinder* const listener = new ObjectBinder(
+          m_session, m_componentMap, s, commandLineParser->muteStdout())) {
     for (auto h : designs) {
       const design* const d =
           static_cast<const design*>(((const uhdm_handle*)h)->object);
@@ -2961,9 +2958,6 @@ bool UhdmWriter::write(PathId uhdmFileId) {
   ModuleMap moduleMap;
   Serializer& s = m_compileDesign->getSerializer();
   ExprBuilder exprBuilder(m_session);
-  // exprBuilder.seterrorReporting(
-  //    errors,
-  //    symbols);
 
   Location loc(uhdmFileId);
   Error err(ErrorDefinition::UHDM_CREATING_MODEL, loc);
@@ -3295,8 +3289,6 @@ bool UhdmWriter::write(PathId uhdmFileId) {
     bind(s, designs);
   }
 
-  // CommandLineParser* const clp =
-  //    clp;
   if (IntegrityChecker* const checker =
           new IntegrityChecker(fileSystem, symbols, errors)) {
     for (auto h : designs) {

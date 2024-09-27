@@ -155,51 +155,53 @@ bool ParseLibraryDef::parseLibraryDefinition(PathId fileId, Library* lib) {
 }
 
 bool ParseLibraryDef::parseConfigDefinition() {
-  FileContent* fC = m_fileContent;
-  if (!fC) return false;
+  if (!m_fileContent) return false;
 
   SymbolTable* const symbols = m_session->getSymbolTable();
 
   VObjectTypeUnorderedSet types = {VObjectType::paConfig_declaration};
-  std::vector<NodeId> configs = fC->sl_collect_all(fC->getRootNode(), types);
+  std::vector<NodeId> configs =
+      m_fileContent->sl_collect_all(m_fileContent->getRootNode(), types);
   for (auto& config : configs) {
-    NodeId ident = fC->Child(config);
-    std::string name =
-        StrCat(fC->getLibrary()->getName(), "@", fC->SymName(ident));
+    NodeId ident = m_fileContent->Child(config);
+    std::string name = StrCat(m_fileContent->getLibrary()->getName(), "@",
+                              m_fileContent->SymName(ident));
     symbols->registerSymbol(name);
-    Config conf(name, fC, config);
+    Config conf(name, m_fileContent, config);
 
     // Design clause
     VObjectTypeUnorderedSet designStmt = {VObjectType::paDesign_statement};
-    std::vector<NodeId> designs = fC->sl_collect_all(config, designStmt);
+    std::vector<NodeId> designs =
+        m_fileContent->sl_collect_all(config, designStmt);
     if (designs.empty()) {
       // TODO: Error
     } else if (designs.size() > 1) {
       // TODO: Error
     } else {
       NodeId design = designs[0];
-      NodeId libName = fC->Child(design);
-      NodeId topName = fC->Sibling(libName);
+      NodeId libName = m_fileContent->Child(design);
+      NodeId topName = m_fileContent->Sibling(libName);
       if (!topName) {
-        conf.setDesignLib(fC->getLibrary()->getName());
-        conf.setDesignTop(fC->SymName(libName));
+        conf.setDesignLib(m_fileContent->getLibrary()->getName());
+        conf.setDesignTop(m_fileContent->SymName(libName));
       } else {
-        conf.setDesignLib(fC->SymName(libName));
-        conf.setDesignTop(fC->SymName(topName));
+        conf.setDesignLib(m_fileContent->SymName(libName));
+        conf.setDesignTop(m_fileContent->SymName(topName));
       }
     }
 
     // Default clause
     VObjectTypeUnorderedSet defaultStmt = {VObjectType::paDefault_clause};
-    std::vector<NodeId> defaults = fC->sl_collect_all(config, defaultStmt);
+    std::vector<NodeId> defaults =
+        m_fileContent->sl_collect_all(config, defaultStmt);
     if (!defaults.empty()) {
       NodeId defaultClause = defaults[0];
-      NodeId libList = fC->Sibling(defaultClause);
-      if (fC->Type(libList) == VObjectType::paLiblist_clause) {
-        NodeId lib = fC->Child(libList);
+      NodeId libList = m_fileContent->Sibling(defaultClause);
+      if (m_fileContent->Type(libList) == VObjectType::paLiblist_clause) {
+        NodeId lib = m_fileContent->Child(libList);
         while (lib) {
-          conf.addDefaultLib(fC->SymName(lib));
-          lib = fC->Sibling(lib);
+          conf.addDefaultLib(m_fileContent->SymName(lib));
+          lib = m_fileContent->Sibling(lib);
         }
       }
     }
@@ -207,68 +209,71 @@ bool ParseLibraryDef::parseConfigDefinition() {
     // Instance and Cell clauses
     VObjectTypeUnorderedSet instanceStmt = {VObjectType::paInst_clause,
                                             VObjectType::paCell_clause};
-    std::vector<NodeId> instances = fC->sl_collect_all(config, instanceStmt);
+    std::vector<NodeId> instances =
+        m_fileContent->sl_collect_all(config, instanceStmt);
     for (auto& inst : instances) {
-      VObjectType type = fC->Type(inst);
-      NodeId instName = fC->Child(inst);
-      if (type == VObjectType::paInst_clause) instName = fC->Child(instName);
+      VObjectType type = m_fileContent->Type(inst);
+      NodeId instName = m_fileContent->Child(inst);
+      if (type == VObjectType::paInst_clause)
+        instName = m_fileContent->Child(instName);
       std::string instNameS;
       while (instName) {
         if (instNameS.empty())
-          instNameS = fC->SymName(instName);
+          instNameS = m_fileContent->SymName(instName);
         else
-          instNameS.append(".").append(fC->SymName(instName));
-        instName = fC->Sibling(instName);
+          instNameS.append(".").append(m_fileContent->SymName(instName));
+        instName = m_fileContent->Sibling(instName);
       }
-      NodeId instClause = fC->Sibling(inst);
-      if (fC->Type(instClause) == VObjectType::paLiblist_clause) {
-        NodeId libList = fC->Child(instClause);
+      NodeId instClause = m_fileContent->Sibling(inst);
+      if (m_fileContent->Type(instClause) == VObjectType::paLiblist_clause) {
+        NodeId libList = m_fileContent->Child(instClause);
         std::vector<std::string> libs;
         while (libList) {
-          libs.emplace_back(fC->SymName(libList));
-          libList = fC->Sibling(libList);
+          libs.emplace_back(m_fileContent->SymName(libList));
+          libList = m_fileContent->Sibling(libList);
         }
 
-        UseClause usec(UseClause::UseLib, libs, fC, instClause);
+        UseClause usec(UseClause::UseLib, libs, m_fileContent, instClause);
         if (type == VObjectType::paInst_clause)
           conf.addInstanceUseClause(instNameS, usec);
         else
           conf.addCellUseClause(instNameS, usec);
-      } else if (fC->Type(instClause) == VObjectType::paUse_clause) {
-        NodeId use = fC->Child(instClause);
+      } else if (m_fileContent->Type(instClause) == VObjectType::paUse_clause) {
+        NodeId use = m_fileContent->Child(instClause);
         std::string useName;
-        VObjectType useType = fC->Type(use);
+        VObjectType useType = m_fileContent->Type(use);
         if (useType == VObjectType::paParameter_value_assignment) {
-          UseClause usec(UseClause::UseParam, fC, use);
+          UseClause usec(UseClause::UseParam, m_fileContent, use);
           conf.addInstanceUseClause(instNameS, usec);
         } else {
           NodeId mem = use;
           while (use) {
             if (useName.empty())
-              useName = fC->SymName(use);
+              useName = m_fileContent->SymName(use);
             else
-              useName.append(".").append(fC->SymName(use));
-            use = fC->Sibling(use);
+              useName.append(".").append(m_fileContent->SymName(use));
+            use = m_fileContent->Sibling(use);
           }
           useName = StringUtils::replaceAll(useName, ".", "@");
-          UseClause usec(UseClause::UseModule, useName, fC, mem);
+          UseClause usec(UseClause::UseModule, useName, m_fileContent, mem);
           if (type == VObjectType::paInst_clause)
             conf.addInstanceUseClause(instNameS, usec);
           else
             conf.addCellUseClause(instNameS, usec);
         }
-      } else if (fC->Type(instClause) == VObjectType::paUse_clause_config) {
-        NodeId use = fC->Child(instClause);
+      } else if (m_fileContent->Type(instClause) ==
+                 VObjectType::paUse_clause_config) {
+        NodeId use = m_fileContent->Child(instClause);
         std::string useName;
         NodeId mem = use;
         while (use) {
           if (useName.empty())
-            useName = fC->SymName(use);
+            useName = m_fileContent->SymName(use);
           else
-            useName.append("@").append(fC->SymName(use));
-          use = fC->Sibling(use);
+            useName.append("@").append(m_fileContent->SymName(use));
+          use = m_fileContent->Sibling(use);
         }
-        UseClause usec(UseClause::UseConfig, useName, fC, mem);
+        UseClause usec(UseClause::UseConfig, useName, m_fileContent, mem);
         if (type == VObjectType::paInst_clause)
           conf.addInstanceUseClause(instNameS, usec);
         else

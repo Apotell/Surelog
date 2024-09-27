@@ -272,9 +272,9 @@ void ParseTreeListener::listenSiblings(const ParseTreeNode& node,
 
 // clang-format off
 <PRIVATE_LISTEN_IMPLEMENTATIONS>
-    // clang-format on
+// clang-format on
 
-    void ParseTreeListener::listen(const ParseTreeNode& node) {
+void ParseTreeListener::listen(const ParseTreeNode& node) {
   if (!m_visited.insert(node).second) {
     return;
   }

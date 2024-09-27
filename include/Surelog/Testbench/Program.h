@@ -76,9 +76,8 @@ class Program : public DesignComponent, public ClockingBlockHolder {
  private:
   std::string m_name;
   std::string m_endLabel;
-  Library* m_library;
+  Library* m_library = nullptr;
   ClassNameClassDefinitionMultiMap m_classDefinitions;
-
   UHDM::VectorOfattribute* attributes_ = nullptr;
 };
 

@@ -34,9 +34,7 @@
 #include <string>
 
 namespace SURELOG {
-
 class Session;
-//class SymbolTable;
 
 class VObject final {
  public:

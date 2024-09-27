@@ -43,15 +43,10 @@
 
 namespace SURELOG {
 ObjectBinder::ObjectBinder(Session* session, const ComponentMap& componentMap,
-                           UHDM::Serializer& serializer,
-                           SymbolTable* const symbolTable,
-                           ErrorContainer* const errorContainer,
-                           bool muteStdout)
+                           UHDM::Serializer& serializer, bool muteStdout)
     : m_session(session),
       m_componentMap(componentMap),
       m_serializer(serializer),
-      m_symbolTable(symbolTable),
-      m_errorContainer(errorContainer),
       m_muteStdout(muteStdout) {
   for (ComponentMap::const_reference entry : m_componentMap) {
     m_baseclassMap.emplace(entry.second, entry.first);
@@ -1194,7 +1189,10 @@ void ObjectBinder::enterClass_defn(const UHDM::class_defn* const object) {
 }
 
 void ObjectBinder::reportErrors() {
+  SymbolTable* const symbolTable = m_session->getSymbolTable();
   FileSystem* const fileSystem = m_session->getFileSystem();
+  ErrorContainer* const errorContainer = m_session->getErrorContainer();
+
   for (auto& [object, scope, component] : m_unbounded) {
     bool reportMissingActual = false;
     if (const UHDM::ref_obj* const ro = any_cast<UHDM::ref_obj>(object)) {
@@ -1224,23 +1222,23 @@ void ObjectBinder::reportErrors() {
     if (reportMissingActual) {
       const std::string text =
           StrCat("id: ", object->UhdmId(), ", name: ", object->VpiName());
-      Location loc(fileSystem->toPathId(object->VpiFile(), m_symbolTable),
+      Location loc(fileSystem->toPathId(object->VpiFile(), symbolTable),
                    object->VpiLineNo(), object->VpiColumnNo(),
-                   m_symbolTable->registerSymbol(text));
+                   symbolTable->registerSymbol(text));
       Error err(ErrorDefinition::UHDM_FAILED_TO_BIND, loc);
-      m_errorContainer->addError(err);
-      m_errorContainer->printMessages(m_muteStdout);
+      errorContainer->addError(err);
+      errorContainer->printMessages(m_muteStdout);
     }
 
     if (getDefaultNetType(component) == VObjectType::slNoType) {
       const std::string text =
           StrCat("id:", object->UhdmId(), ", name: ", object->VpiName());
-      Location loc(fileSystem->toPathId(object->VpiFile(), m_symbolTable),
+      Location loc(fileSystem->toPathId(object->VpiFile(), symbolTable),
                    object->VpiLineNo(), object->VpiColumnNo(),
-                   m_symbolTable->registerSymbol(text));
+                   symbolTable->registerSymbol(text));
       Error err(ErrorDefinition::ELAB_ILLEGAL_IMPLICIT_NET, loc);
-      m_errorContainer->addError(err);
-      m_errorContainer->printMessages(m_muteStdout);
+      errorContainer->addError(err);
+      errorContainer->printMessages(m_muteStdout);
     }
   }
 }
@@ -1251,8 +1249,6 @@ bool ObjectBinder::createDefaultNets() {
   m_unbounded.clear();
   for (Unbounded::const_reference entry : unbounded) {
     const UHDM::any* const object = std::get<0>(entry);
-    UHDM::instance* const scope =
-        const_cast<UHDM::instance*>(std::get<1>(entry));
     const ValuedComponentI* const component = std::get<2>(entry);
 
     const UHDM::ref_obj* ro = any_cast<UHDM::ref_obj>(object);

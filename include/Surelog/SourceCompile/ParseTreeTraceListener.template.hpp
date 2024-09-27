@@ -105,13 +105,14 @@ class ParseTreeTraceListener final : public ParseTreeListener {
 
   // clang-format off
 <PUBLIC_ENTER_LEAVE_DECLARATIONS>
-      // clang-format on
+  // clang-format on
 
-      // clang-format off
+  // clang-format off
 <PUBLIC_VISIT_DECLARATIONS>
-      // clang-format on
+  // clang-format on
 
-      private : std::ostream& m_strm;
+ private:
+  std::ostream& m_strm;
   size_t m_indent = 0;
 };
 }  // namespace SURELOG

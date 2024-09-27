@@ -99,17 +99,16 @@ bool CompileClass::compile(Elaborate elaborate, Reduce reduce) {
   const UHDM::ScopedScope scopedScope(defn);
 
   if (defn->VpiFullName().empty()) defn->VpiFullName(fullName);
-  // if (m_class->m_uhdm_definition->VpiFullName().empty())
-  //   m_class->m_uhdm_definition->VpiFullName(fullName);
   SymbolTable* const symbols = m_session->getSymbolTable();
   CommandLineParser* const clp = m_session->getCommandLineParser();
-  Location loc(fC->getFileId(nodeId), fC->Line(nodeId), fC->Column(nodeId),
-               symbols->registerSymbol(fullName));
 
-  Error err1(ErrorDefinition::COMP_COMPILE_CLASS, loc);
-  ErrorContainer* errors = new ErrorContainer(m_session);
-  errors->printMessage(err1, clp->muteStdout());
-  delete errors;
+  if (ErrorContainer* errors = new ErrorContainer(m_session)) {
+    Location loc(fC->getFileId(nodeId), fC->Line(nodeId), fC->Column(nodeId),
+                 symbols->registerSymbol(fullName));
+    Error err1(ErrorDefinition::COMP_COMPILE_CLASS, loc);
+    errors->printMessage(err1, clp->muteStdout());
+    delete errors;
+  }
   if (fC->getSize() == 0) return true;
 
   NodeId classId = m_class->m_nodeIds[0];

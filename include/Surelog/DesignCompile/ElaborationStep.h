@@ -52,7 +52,7 @@ class ElaborationStep {
 
   virtual bool elaborate() = 0;
 
-  virtual ~ElaborationStep();
+  virtual ~ElaborationStep() = default;
 
  protected:
   bool bindTypedefs_();

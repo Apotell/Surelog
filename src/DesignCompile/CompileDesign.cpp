@@ -52,7 +52,6 @@
 #include <Surelog/Utils/ContainerUtils.h>
 
 // UHDM
-// #include <uhdm/include_file_info.h>
 #include <uhdm/param_assign.h>
 #include <uhdm/vpi_visitor.h>
 
@@ -84,12 +83,12 @@ void CompileDesign::unlockSerializer() { m_compiler->unlockSerializer(); }
 
 bool CompileDesign::compile() {
   // Register UHDM Error callbacks
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  ErrorContainer* const errors = m_session->getErrorContainer();
+  SymbolTable* const symbols = m_session->getSymbolTable();
   UHDM::ErrorHandler errHandler =
       [=](UHDM::ErrorType errType, std::string_view msg,
           const UHDM::any* object1, const UHDM::any* object2) {
-        FileSystem* const fileSystem = m_session->getFileSystem();
-        ErrorContainer* const errors = m_session->getErrorContainer();
-        SymbolTable* const symbols = m_session->getSymbolTable();
         if (object1) {
           Location loc1(fileSystem->toPathId(object1->VpiFile(), symbols),
                         object1->VpiLineNo(), object1->VpiColumnNo(),
@@ -112,14 +111,15 @@ bool CompileDesign::compile() {
 
   UHDM::Serializer& serializer = m_compiler->getSerializer();
   serializer.SetErrorHandler(errHandler);
-  // m_serializer.SetErrorHandler(errHandler);
 
-  Location loc(BadSymbolId);
-  Error err1(ErrorDefinition::COMP_COMPILE, loc);
-  ErrorContainer* errors2 = new ErrorContainer(m_session);
-  errors2->addError(err1);
-  errors2->printMessage(err1, m_session->getCommandLineParser()->muteStdout());
-  delete errors2;
+  if (ErrorContainer* errors2 = new ErrorContainer(m_session)) {
+    Location loc(BadSymbolId);
+    Error err1(ErrorDefinition::COMP_COMPILE, loc);
+    errors2->addError(err1);
+    errors2->printMessage(err1,
+                          m_session->getCommandLineParser()->muteStdout());
+    delete errors2;
+  }
   return (compilation_());
 }
 
@@ -186,7 +186,6 @@ void CompileDesign::collectObjects_(Design::FileIdDesignContentMap& all_files,
                                     Design* design, bool finalCollection) {
   typedef std::map<std::string, std::vector<Package*>> FileNamePackageMap;
   FileNamePackageMap fileNamePackageMap;
-  // FileSystem* const fileSystem = m_session->getFileSystem();
   SymbolTable* const symbols = m_session->getSymbolTable();
   ErrorContainer* const errors = m_session->getErrorContainer();
   // Collect all packages and module definitions
@@ -272,12 +271,13 @@ void CompileDesign::collectObjects_(Design::FileIdDesignContentMap& all_files,
 }
 
 bool CompileDesign::elaborate() {
-  Location loc(BadSymbolId);
-  Error err2(ErrorDefinition::ELAB_ELABORATING_DESIGN, loc);
-  ErrorContainer* errors = new ErrorContainer(m_session);
-  errors->addError(err2);
-  errors->printMessage(err2, m_session->getCommandLineParser()->muteStdout());
-  delete errors;
+  if (ErrorContainer* errors = new ErrorContainer(m_session)) {
+    Location loc(BadSymbolId);
+    Error err(ErrorDefinition::ELAB_ELABORATING_DESIGN, loc);
+    errors->addError(err);
+    errors->printMessage(err, m_session->getCommandLineParser()->muteStdout());
+    delete errors;
+  }
   return (elaboration_());
 }
 
@@ -288,7 +288,7 @@ bool CompileDesign::compilation_() {
   auto& all_files = design->getAllFileContents();
 
 #if 0
-  int32_t maxThreadCount = m_session->getCommandLineParser()->getNbMaxTreads();
+  int32_t maxThreadCount = m_session->getCommandLineParser()->getMaxTreads();
 #else
   // The Actual Module... Compilation is not Multithread safe anymore due to
   // the UHDM model creation
@@ -365,19 +365,23 @@ bool CompileDesign::compilation_() {
 }
 
 bool CompileDesign::elaboration_() {
-  PackageAndRootElaboration* packEl =
-      new PackageAndRootElaboration(m_session, this);
-  packEl->elaborate();
-  delete packEl;
-  NetlistElaboration* netlistEl = new NetlistElaboration(m_session, this);
-  netlistEl->elaboratePackages();
-  delete netlistEl;
-  DesignElaboration* designEl = new DesignElaboration(m_session, this);
-  designEl->elaborate();
-  delete designEl;
-  UVMElaboration* uvmEl = new UVMElaboration(m_session, this);
-  uvmEl->elaborate();
-  delete uvmEl;
+  if (PackageAndRootElaboration* packEl =
+          new PackageAndRootElaboration(m_session, this)) {
+    packEl->elaborate();
+    delete packEl;
+  }
+  if (NetlistElaboration* netlistEl = new NetlistElaboration(m_session, this)) {
+    netlistEl->elaboratePackages();
+    delete netlistEl;
+  }
+  if (DesignElaboration* designEl = new DesignElaboration(m_session, this)) {
+    designEl->elaborate();
+    delete designEl;
+  }
+  if (UVMElaboration* uvmEl = new UVMElaboration(m_session, this)) {
+    uvmEl->elaborate();
+    delete uvmEl;
+  }
   return true;
 }
 

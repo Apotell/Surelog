@@ -877,8 +877,7 @@ std::pair<bool, std::string> PreprocessFile::evaluateMacro_(
       Location def(macroInfo->m_fileId, macroInfo->m_startLine,
                    macroInfo->m_startColumn,
                    registerSymbol(std::to_string(formal_args.size())));
-      std::vector<Location> locs = {arg, def};
-      Error err(ErrorDefinition::PP_TOO_MANY_ARGS_MACRO, loc, &locs);
+      Error err(ErrorDefinition::PP_TOO_MANY_ARGS_MACRO, {loc, arg, def});
       addError(err);
     }
   }
@@ -953,8 +952,8 @@ std::pair<bool, std::string> PreprocessFile::evaluateMacro_(
           Location arg(id);
           Location def(macroInfo->m_fileId, macroInfo->m_startLine,
                        macroInfo->m_startColumn, id);
-          std::vector<Location> locs = {arg, def};
-          Error err(ErrorDefinition::PP_MACRO_NO_DEFAULT_VALUE, loc, &locs);
+          Error err(ErrorDefinition::PP_MACRO_NO_DEFAULT_VALUE,
+                    {loc, arg, def});
           addError(err);
         }
         incorrectArgNb = true;

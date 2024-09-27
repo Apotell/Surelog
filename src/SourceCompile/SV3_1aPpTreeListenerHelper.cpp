@@ -157,10 +157,8 @@ void SV3_1aPpTreeListenerHelper::logError(ErrorDefinition::ErrorType error,
                                           Location& loc, Location& extraLoc,
                                           bool showDuplicates) {
   if (m_instructions.m_mute) return;
-  std::vector<Location> extras;
-  extras.push_back(extraLoc);
-  Error err(error, loc, &extras);
-  m_session->getErrorContainer()->addError(err, showDuplicates);
+  m_session->getErrorContainer()->addError(error, {loc, extraLoc},
+                                           showDuplicates);
 }
 
 void SV3_1aPpTreeListenerHelper::forwardToParser(

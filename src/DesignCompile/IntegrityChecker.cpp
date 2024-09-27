@@ -74,9 +74,8 @@ void IntegrityChecker::reportAmbigiousMembership(
         m_fileSystem->toPathId(object->VpiFile(), m_symbolTable),
         object->VpiLineNo(), object->VpiColumnNo(),
         m_symbolTable->registerSymbol(std::to_string(object->UhdmId())));
-    Error err(ErrorDefinition::INTEGRITY_CHECK_OBJECT_NOT_IN_PARENT_COLLECTION,
-              loc);
-    m_errorContainer->addError(err);
+    m_errorContainer->addError(
+        ErrorDefinition::INTEGRITY_CHECK_OBJECT_NOT_IN_PARENT_COLLECTION, loc);
   }
 }
 
@@ -94,8 +93,8 @@ void IntegrityChecker::reportDuplicates(const UHDM::any* const object,
     Location loc(m_fileSystem->toPathId(object->VpiFile(), m_symbolTable),
                  object->VpiLineNo(), object->VpiColumnNo(),
                  m_symbolTable->registerSymbol(text));
-    Error err(ErrorDefinition::INTEGRITY_CHECK_COLLECTION_HAS_DUPLICATES, loc);
-    m_errorContainer->addError(err);
+    m_errorContainer->addError(
+        ErrorDefinition::INTEGRITY_CHECK_COLLECTION_HAS_DUPLICATES, loc);
   }
 }
 
@@ -182,8 +181,8 @@ void IntegrityChecker::reportInvalidLocation(
         m_fileSystem->toPathId(object->VpiFile(), m_symbolTable),
         object->VpiLineNo(), object->VpiColumnNo(),
         m_symbolTable->registerSymbol(StrCat("Object: ", object->UhdmId())));
-    Error err(ErrorDefinition::INTEGRITY_CHECK_INVALID_LOCATION, loc);
-    m_errorContainer->addError(err);
+    m_errorContainer->addError(
+        ErrorDefinition::INTEGRITY_CHECK_INVALID_LOCATION, loc);
     return;
   }
 
@@ -421,8 +420,8 @@ void IntegrityChecker::reportInvalidLocation(
             "Child: ", object->UhdmId(), ", ",
             UHDM::UhdmName(object->UhdmType()), " Parent: ", parent->UhdmId(),
             ", ", UHDM::UhdmName(parent->UhdmType()))));
-    Error err(ErrorDefinition::INTEGRITY_CHECK_BAD_RELATIVE_LOCATION, loc);
-    m_errorContainer->addError(err);
+    m_errorContainer->addError(
+        ErrorDefinition::INTEGRITY_CHECK_BAD_RELATIVE_LOCATION, loc);
   }
 }
 
@@ -503,8 +502,8 @@ void IntegrityChecker::reportMissingLocation(
   Location loc(m_fileSystem->toPathId(object->VpiFile(), m_symbolTable),
                object->VpiLineNo(), object->VpiColumnNo(),
                m_symbolTable->registerSymbol(text));
-  Error err(ErrorDefinition::INTEGRITY_CHECK_MISSING_LOCATION, loc);
-  m_errorContainer->addError(err);
+  m_errorContainer->addError(ErrorDefinition::INTEGRITY_CHECK_MISSING_LOCATION,
+                             loc);
 }
 
 bool IntegrityChecker::isImplicitFunctionReturnType(const UHDM::any* object) {
@@ -566,16 +565,38 @@ void IntegrityChecker::reportInvalidNames(const UHDM::any* const object) const {
     shouldReport = shouldReport || object->VpiName().empty();
 
     if (const UHDM::any* actual = objectAsRef_typespec->Actual_typespec()) {
-      if ((actual->UhdmType() == UHDM::uhdmstruct_typespec) ||
-          (actual->UhdmType() == UHDM::uhdmunion_typespec) ||
-          (actual->UhdmType() == UHDM::uhdmenum_typespec)) {
+      if ((actual->UhdmType() == UHDM::uhdmarray_typespec) ||
+          (actual->UhdmType() == UHDM::uhdmbit_typespec) ||
+          (actual->UhdmType() == UHDM::uhdmbyte_typespec) ||
+          (actual->UhdmType() == UHDM::uhdmchandle_typespec) ||
+          (actual->UhdmType() == UHDM::uhdmint_typespec) ||
+          (actual->UhdmType() == UHDM::uhdminteger_typespec) ||
+          (actual->UhdmType() == UHDM::uhdmlogic_typespec) ||
+          (actual->UhdmType() == UHDM::uhdmlong_int_typespec) ||
+          (actual->UhdmType() == UHDM::uhdmpacked_array_typespec) ||
+          (actual->UhdmType() == UHDM::uhdmreal_typespec) ||
+          (actual->UhdmType() == UHDM::uhdmshort_int_typespec) ||
+          (actual->UhdmType() == UHDM::uhdmshort_real_typespec) ||
+          (actual->UhdmType() == UHDM::uhdmtime_typespec) ||
+          (actual->UhdmType() == UHDM::uhdmvoid_typespec)) {
+        shouldReport = false;
+      } else if ((actual->UhdmType() == UHDM::uhdmenum_typespec) ||
+                 (actual->UhdmType() == UHDM::uhdmstruct_typespec) ||
+                 (actual->UhdmType() == UHDM::uhdmunion_typespec)) {
         //@todo: Need to impliment typedefAlias "test/PreprocUhdmCov"
         shouldReport = false;
       } else if ((actual->UhdmType() == UHDM::uhdmclass_typespec) ||
-                 (actual->UhdmType() == UHDM::uhdmmodule_typespec) ||
                  (actual->UhdmType() == UHDM::uhdminterface_typespec) ||
+                 (actual->UhdmType() == UHDM::uhdmmodule_typespec) ||
                  (actual->UhdmType() == UHDM::uhdmunsupported_typespec)) {
         shouldReport = shouldReport || !areNamedSame(object, actual);
+      } else if ((actual->UhdmType() == UHDM::uhdmevent_typespec) ||
+                 (actual->UhdmType() == UHDM::uhdmimport_typespec) ||
+                 (actual->UhdmType() == UHDM::uhdmproperty_typespec) ||
+                 (actual->UhdmType() == UHDM::uhdmsequence_typespec) ||
+                 (actual->UhdmType() == UHDM::uhdmstring_typespec) ||
+                 (actual->UhdmType() == UHDM::uhdmtype_parameter)) {
+        // Do nothing! The name is expected to be valid for these types
       }
     }
   }
@@ -585,8 +606,8 @@ void IntegrityChecker::reportInvalidNames(const UHDM::any* const object) const {
         m_fileSystem->toPathId(object->VpiFile(), m_symbolTable),
         object->VpiLineNo(), object->VpiColumnNo(),
         m_symbolTable->registerSymbol(std::to_string(object->UhdmId())));
-    Error err(ErrorDefinition::INTEGRITY_CHECK_MISSING_NAME, loc);
-    m_errorContainer->addError(err);
+    m_errorContainer->addError(ErrorDefinition::INTEGRITY_CHECK_MISSING_NAME,
+                               loc);
   }
 }
 
@@ -597,8 +618,8 @@ void IntegrityChecker::reportInvalidFile(const UHDM::any* const object) const {
         m_fileSystem->toPathId(object->VpiFile(), m_symbolTable),
         object->VpiLineNo(), object->VpiColumnNo(),
         m_symbolTable->registerSymbol(std::to_string(object->UhdmId())));
-    Error err(ErrorDefinition::INTEGRITY_CHECK_MISSING_FILE, loc);
-    m_errorContainer->addError(err);
+    m_errorContainer->addError(ErrorDefinition::INTEGRITY_CHECK_MISSING_FILE,
+                               loc);
   }
 }
 
@@ -632,7 +653,7 @@ void IntegrityChecker::reportNullActual(const UHDM::any* const object) const {
                  object->Cast<const UHDM::chandle_var*>()) {
     shouldReport = objectAsChandle_var->Actual_group() == nullptr;
   } else if (const UHDM::task_func* const parentAsTask_func =
-          object->VpiParent<UHDM::task_func>()) {
+                 object->VpiParent<UHDM::task_func>()) {
     if ((parentAsTask_func->Return() == object) &&
         (parentAsTask_func->VpiAccessType() == vpiDPIImportAcc)) {
       // Imported functions cannot be bound!
@@ -645,8 +666,8 @@ void IntegrityChecker::reportNullActual(const UHDM::any* const object) const {
                  object->VpiLineNo(), object->VpiColumnNo(),
                  m_symbolTable->registerSymbol(
                      StrCat(object->UhdmId(), ", ", object->VpiName())));
-    Error err(ErrorDefinition::INTEGRITY_CHECK_NULL_ACTUAL, loc);
-    m_errorContainer->addError(err);
+    m_errorContainer->addError(ErrorDefinition::INTEGRITY_CHECK_NULL_ACTUAL,
+                               loc);
   }
 }
 
@@ -816,8 +837,8 @@ void IntegrityChecker::enterAny(const UHDM::any* const object) {
         m_fileSystem->toPathId(object->VpiFile(), m_symbolTable),
         object->VpiLineNo(), object->VpiColumnNo(),
         m_symbolTable->registerSymbol(std::to_string(object->UhdmId())));
-    Error err(ErrorDefinition::INTEGRITY_CHECK_MISSING_PARENT, loc);
-    m_errorContainer->addError(err);
+    m_errorContainer->addError(ErrorDefinition::INTEGRITY_CHECK_MISSING_PARENT,
+                               loc);
     return;
   }
 
@@ -924,10 +945,9 @@ void IntegrityChecker::enterAny(const UHDM::any* const object) {
         m_fileSystem->toPathId(object->VpiFile(), m_symbolTable),
         object->VpiLineNo(), object->VpiColumnNo(),
         m_symbolTable->registerSymbol(std::to_string(object->UhdmId())));
-    Error err(
+    m_errorContainer->addError(
         ErrorDefinition::INTEGRITY_CHECK_PARENT_IS_NEITHER_SCOPE_NOR_DESIGN,
         loc);
-    m_errorContainer->addError(err);
   }
 
   if (parentAsDesign != nullptr) {

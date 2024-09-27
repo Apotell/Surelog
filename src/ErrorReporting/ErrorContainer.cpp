@@ -57,13 +57,8 @@ void ErrorContainer::init() {
   }
 }
 
-Error& ErrorContainer::addError(Error& error, bool showDuplicates,
-                                bool reentrantPython) {
-  std::tuple<std::string, bool, bool> textStatus =
-      createErrorMessage(error, reentrantPython);
-  if (std::get<2>(textStatus))  // filter Message
-    return error;
-
+Error& ErrorContainer::addError(Error& error, const std::string& message,
+                                bool reportFatalError, bool showDuplicates) {
   FileSystem* const fileSystem = m_session->getFileSystem();
   SymbolTable* const symbolTable = m_session->getSymbolTable();
   std::multimap<ErrorDefinition::ErrorType, Waiver::WaiverData>& waivers =
@@ -96,14 +91,211 @@ Error& ErrorContainer::addError(Error& error, bool showDuplicates,
   }
 
   if (showDuplicates) {
-    m_errors.emplace_back(error);
-  } else {
-    if (m_errorSet.find(std::get<0>(textStatus)) == m_errorSet.end()) {
-      m_errors.emplace_back(error);
-      m_errorSet.insert(std::get<0>(textStatus));
+    return m_errors.emplace_back(error);
+  } else if (m_errorSet.find(message) == m_errorSet.end()) {
+    m_errorSet.emplace(message);
+    return m_errors.emplace_back(error);
+  }
+  return error;
+}
+
+std::tuple<std::string, bool, bool> ErrorContainer::createErrorMessage(
+    ErrorDefinition::ErrorType errorId, const std::vector<Location>& locations,
+    bool reentrantPython) const {
+  const std::map<ErrorDefinition::ErrorType, ErrorDefinition::ErrorInfo>&
+      infoMap = ErrorDefinition::getErrorInfoMap();
+
+  std::map<ErrorDefinition::ErrorType,
+           ErrorDefinition::ErrorInfo>::const_iterator itr =
+      infoMap.find(errorId);
+  if (itr == infoMap.end()) {
+    return std::make_tuple("", false, false);
+  }
+
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  SymbolTable* const symbolTable = m_session->getSymbolTable();
+  CommandLineParser* const clp = m_session->getCommandLineParser();
+
+  std::string tmp;
+  bool reportFatalError = false;
+  bool filterMessage = false;
+
+  ErrorDefinition::ErrorInfo info = itr->second;
+  std::string severity;
+  switch (info.m_severity) {
+    case ErrorDefinition::FATAL:
+      severity = "FTL";
+      reportFatalError = true;
+      break;
+    case ErrorDefinition::SYNTAX:
+      severity = "SNT";
+      break;
+    case ErrorDefinition::ERROR:
+      severity = "ERR";
+      break;
+    case ErrorDefinition::WARNING:
+      severity = "WRN";
+      if (clp->filterWarning()) filterMessage = true;
+      break;
+    case ErrorDefinition::INFO:
+      severity = "INF";
+      if (clp->filterInfo() &&
+          (errorId != ErrorDefinition::PP_PROCESSING_SOURCE_FILE))
+        filterMessage = true;
+      break;
+    case ErrorDefinition::NOTE:
+      severity = "NTE";
+      if (clp->filterNote()) filterMessage = true;
+      break;
+  }
+  std::string category = ErrorDefinition::getCategoryName(info.m_category);
+
+  const Location& loc = locations[0];
+  /* Object */
+  std::string text = info.m_errorText;
+  const std::string_view objectName = symbolTable->getSymbol(loc.m_object);
+  if (objectName != SymbolTable::getBadSymbol()) {
+    size_t objectOffset = text.find("%s");
+    if (objectOffset != std::string::npos) {
+      text = text.replace(objectOffset, 2, objectName);
     }
   }
-  return m_errors.back();
+
+  /* Location */
+  std::string location;
+  if (loc.m_fileId) {
+    location = fileSystem->toPath(loc.m_fileId);
+    if (loc.m_line > 0) {
+      location += ":" + std::to_string(loc.m_line) + ":";
+      if (loc.m_column > 0) location += std::to_string(loc.m_column) + ":";
+    }
+    location += " ";
+  }
+
+  /* Extra locations */
+  bool extraTextAppended = false;
+  uint32_t nbExtraLoc = locations.size();
+  for (uint32_t i = 1; i < nbExtraLoc; i++) {
+    const Location& extraLoc = locations[i];
+    if (extraLoc.m_fileId) {
+      std::string extraLocation(fileSystem->toPath(extraLoc.m_fileId));
+      if (extraLoc.m_line > 0) {
+        extraLocation += ":" + std::to_string(extraLoc.m_line) + ":";
+        if (extraLoc.m_column > 0)
+          extraLocation += std::to_string(extraLoc.m_column) + ":";
+      }
+      size_t objectOffset = text.find("%exloc");
+      if ((objectOffset == std::string::npos) && !info.m_extraText.empty()) {
+        if (!extraTextAppended) {
+          text += ",\n             " + info.m_extraText;
+          extraTextAppended = true;
+        }
+        objectOffset = text.find("%exloc");
+      }
+      if (objectOffset != std::string::npos) {
+        text = text.replace(objectOffset, 6, extraLocation);
+      }
+    } else {
+      if (!info.m_extraText.empty()) {
+        if ((i == 1) && !extraLoc.m_fileId) {
+          if (!extraTextAppended) {
+            text += ",\n" + info.m_extraText;
+            extraTextAppended = true;
+          }
+        } else {
+          if (!extraTextAppended) {
+            text += ",\n             " + info.m_extraText;
+            extraTextAppended = true;
+          }
+        }
+      }
+    }
+    if (extraLoc.m_object) {
+      const std::string_view objString =
+          symbolTable->getSymbol(extraLoc.m_object);
+      size_t objectOffset = text.find("%exobj");
+      if (objectOffset != std::string::npos) {
+        text = text.replace(objectOffset, 6, objString);
+      }
+    }
+  }
+  text += ".";
+  std::string padding;
+  if (errorId < 10)
+    padding = "000";
+  else if (errorId < 100)
+    padding = "00";
+  else if (errorId < 1000)
+    padding = "0";
+  if ((reentrantPython == false) || (!clp->pythonAllowed())) {
+    tmp = "[" + severity + ":" + category + padding + std::to_string(errorId) +
+          "] " + location + text + "\n";
+  } else {
+    std::vector<std::string> args;
+    args.push_back(severity);
+    args.push_back(category);
+    args.push_back(padding + std::to_string(errorId));
+    args.push_back(location);
+    args.push_back(text);
+    tmp = PythonAPI::evalScript("__main__", "SLformatMsg", args,
+                                (PyThreadState*)m_interpState);
+  }
+
+  return std::make_tuple(tmp, reportFatalError, filterMessage);
+}
+
+void ErrorContainer::addError(ErrorDefinition::ErrorType errorId,
+                              const Location& loc,
+                              bool showDuplicates /* = false */,
+                              bool reentrantPython /* = true */) {
+  auto [message, reportFatalError, filterMessage] =
+      createErrorMessage(errorId, {loc}, reentrantPython);
+
+  if (!filterMessage) {  // filter Message
+    Error error(errorId, loc);
+    addError(error, message, reportFatalError, showDuplicates);
+  }
+}
+
+void ErrorContainer::addError(ErrorDefinition::ErrorType errorId,
+                              const Location& loc, const Location& extra,
+                              bool showDuplicates /* = false */,
+                              bool reentrantPython /* = true */) {
+  auto [message, reportFatalError, filterMessage] =
+      createErrorMessage(errorId, {loc, extra}, reentrantPython);
+
+  if (!filterMessage) {  // filter Message
+    Error error(errorId, loc, extra);
+    addError(error, message, reportFatalError, showDuplicates);
+  }
+}
+
+void ErrorContainer::addError(ErrorDefinition::ErrorType errorId,
+                              const std::vector<Location>& locations,
+                              bool showDuplicates /* = false */,
+                              bool reentrantPython /* = true */) {
+  auto [message, reportFatalError, filterMessage] =
+      createErrorMessage(errorId, locations, reentrantPython);
+
+  if (!filterMessage) {  // filter Message
+    Error error(errorId, locations);
+    addError(error, message, reportFatalError, showDuplicates);
+  }
+}
+
+Error& ErrorContainer::addError(Error& error, bool showDuplicates,
+                                bool reentrantPython) {
+  if (error.m_reported || error.m_waived) {
+    return error;
+  }
+
+  auto [message, reportFatalError, filterMessage] =
+      createErrorMessage(error.m_errorId, error.m_locations, reentrantPython);
+
+  if (!filterMessage)  // filter Message
+    return addError(error, message, reportFatalError, showDuplicates);
+
+  return error;
 }
 
 void ErrorContainer::appendErrors(ErrorContainer& rhs) {
@@ -124,148 +316,6 @@ void ErrorContainer::appendErrors(ErrorContainer& rhs) {
       addError(err);
     }
   }
-}
-
-std::tuple<std::string, bool, bool> ErrorContainer::createErrorMessage(
-    const Error& msg, bool reentrantPython) const {
-  FileSystem* const fileSystem = m_session->getFileSystem();
-  SymbolTable* const symbolTable = m_session->getSymbolTable();
-  CommandLineParser* const clp = m_session->getCommandLineParser();
-  const std::map<ErrorDefinition::ErrorType, ErrorDefinition::ErrorInfo>&
-      infoMap = ErrorDefinition::getErrorInfoMap();
-  std::string tmp;
-  bool reportFatalError = false;
-  bool filterMessage = false;
-  if ((!msg.m_reported) && (!msg.m_waived)) {
-    ErrorDefinition::ErrorType type = msg.m_errorId;
-    std::map<ErrorDefinition::ErrorType,
-             ErrorDefinition::ErrorInfo>::const_iterator itr =
-        infoMap.find(type);
-    if (itr != infoMap.end()) {
-      ErrorDefinition::ErrorInfo info = (*itr).second;
-      std::string severity;
-      switch (info.m_severity) {
-        case ErrorDefinition::FATAL:
-          severity = "FTL";
-          reportFatalError = true;
-          break;
-        case ErrorDefinition::SYNTAX:
-          severity = "SNT";
-          break;
-        case ErrorDefinition::ERROR:
-          severity = "ERR";
-          break;
-        case ErrorDefinition::WARNING:
-          severity = "WRN";
-          if (clp->filterWarning()) filterMessage = true;
-          break;
-        case ErrorDefinition::INFO:
-          severity = "INF";
-          if (clp->filterInfo() &&
-              (type != ErrorDefinition::PP_PROCESSING_SOURCE_FILE))
-            filterMessage = true;
-          break;
-        case ErrorDefinition::NOTE:
-          severity = "NTE";
-          if (clp->filterNote()) filterMessage = true;
-          break;
-      }
-      std::string category = ErrorDefinition::getCategoryName(info.m_category);
-
-      const Location& loc = msg.m_locations[0];
-      /* Object */
-      std::string text = info.m_errorText;
-      const std::string_view objectName = symbolTable->getSymbol(loc.m_object);
-      if (objectName != SymbolTable::getBadSymbol()) {
-        size_t objectOffset = text.find("%s");
-        if (objectOffset != std::string::npos) {
-          text = text.replace(objectOffset, 2, objectName);
-        }
-      }
-
-      /* Location */
-      std::string location;
-      if (loc.m_fileId) {
-        location = fileSystem->toPath(loc.m_fileId);
-        if (loc.m_line > 0) {
-          location += ":" + std::to_string(loc.m_line) + ":";
-          if (loc.m_column > 0) location += std::to_string(loc.m_column) + ":";
-        }
-        location += " ";
-      }
-
-      /* Extra locations */
-      bool extraTextAppended = false;
-      uint32_t nbExtraLoc = msg.m_locations.size();
-      for (uint32_t i = 1; i < nbExtraLoc; i++) {
-        const Location& extraLoc = msg.m_locations[i];
-        if (extraLoc.m_fileId) {
-          std::string extraLocation(fileSystem->toPath(extraLoc.m_fileId));
-          if (extraLoc.m_line > 0) {
-            extraLocation += ":" + std::to_string(extraLoc.m_line) + ":";
-            if (extraLoc.m_column > 0)
-              extraLocation += std::to_string(extraLoc.m_column) + ":";
-          }
-          size_t objectOffset = text.find("%exloc");
-          if ((objectOffset == std::string::npos) &&
-              !info.m_extraText.empty()) {
-            if (!extraTextAppended) {
-              text += ",\n             " + info.m_extraText;
-              extraTextAppended = true;
-            }
-            objectOffset = text.find("%exloc");
-          }
-          if (objectOffset != std::string::npos) {
-            text = text.replace(objectOffset, 6, extraLocation);
-          }
-        } else {
-          if (!info.m_extraText.empty()) {
-            if ((i == 1) && !extraLoc.m_fileId) {
-              if (!extraTextAppended) {
-                text += ",\n" + info.m_extraText;
-                extraTextAppended = true;
-              }
-            } else {
-              if (!extraTextAppended) {
-                text += ",\n             " + info.m_extraText;
-                extraTextAppended = true;
-              }
-            }
-          }
-        }
-        if (extraLoc.m_object) {
-          const std::string_view objString =
-              symbolTable->getSymbol(extraLoc.m_object);
-          size_t objectOffset = text.find("%exobj");
-          if (objectOffset != std::string::npos) {
-            text = text.replace(objectOffset, 6, objString);
-          }
-        }
-      }
-      text += ".";
-      std::string padding;
-      if (msg.m_errorId < 10)
-        padding = "000";
-      else if (msg.m_errorId < 100)
-        padding = "00";
-      else if (msg.m_errorId < 1000)
-        padding = "0";
-      if ((reentrantPython == false) || (!clp->pythonAllowed())) {
-        tmp = "[" + severity + ":" + category + padding +
-              std::to_string(msg.m_errorId) + "] " + location + text + "\n";
-      } else {
-        std::vector<std::string> args;
-        args.push_back(severity);
-        args.push_back(category);
-        args.push_back(padding + std::to_string(msg.m_errorId));
-        args.push_back(location);
-        args.push_back(text);
-        tmp = PythonAPI::evalScript("__main__", "SLformatMsg", args,
-                                    (PyThreadState*)m_interpState);
-      }
-    }
-  }
-  return std::make_tuple(tmp, reportFatalError, filterMessage);
 }
 
 bool ErrorContainer::hasFatalErrors() const {
@@ -296,7 +346,8 @@ std::pair<std::string, bool> ErrorContainer::createReport_() const {
   std::string report;
   bool reportFatalError = false;
   for (const Error& msg : m_errors) {
-    std::tuple<std::string, bool, bool> textStatus = createErrorMessage(msg);
+    std::tuple<std::string, bool, bool> textStatus =
+        createErrorMessage(msg.m_errorId, msg.m_locations);
     if (std::get<1>(textStatus)) reportFatalError = true;
     if (std::get<2>(textStatus))  // Filtered
       continue;
@@ -310,7 +361,8 @@ std::pair<std::string, bool> ErrorContainer::createReport_(
   std::string report;
   bool reportFatalError = false;
   const Error& msg = error;
-  std::tuple<std::string, bool, bool> textStatus = createErrorMessage(msg);
+  std::tuple<std::string, bool, bool> textStatus =
+      createErrorMessage(msg.m_errorId, msg.m_locations);
   if (std::get<1>(textStatus)) reportFatalError = true;
   if (!std::get<2>(textStatus))  // Filtered
     report += std::get<0>(textStatus);

@@ -336,7 +336,7 @@ bool DesignElaboration::identifyTopModules_() {
       Location loc1(fileId1, line1, fC1->Column(nodeId1),
                     symbols->registerSymbol(moduleName));
 
-      std::vector<Location> locations;
+      std::vector<Location> locations{loc1};
 
       while (1) {
         const FileContent* fC2 = prevFileContent;
@@ -370,9 +370,8 @@ bool DesignElaboration::identifyTopModules_() {
         }
       }
 
-      if (!locations.empty()) {
-        Error err1(ErrorDefinition::ELAB_MULTIPLY_DEFINED_MODULE, loc1,
-                   &locations);
+      if (locations.size() > 1) {
+        Error err1(ErrorDefinition::ELAB_MULTIPLY_DEFINED_MODULE, locations);
         errors->addError(err1);
       }
     }

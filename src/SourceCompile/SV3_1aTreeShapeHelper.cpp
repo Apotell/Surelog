@@ -76,17 +76,14 @@ void SV3_1aTreeShapeHelper::logError(ErrorDefinition::ErrorType error,
 
 void SV3_1aTreeShapeHelper::logError(ErrorDefinition::ErrorType error,
                                      Location& loc, bool showDuplicates) {
-  Error err(error, loc);
-  m_session->getErrorContainer()->addError(err, showDuplicates);
+  m_session->getErrorContainer()->addError(error, loc, showDuplicates);
 }
 
 void SV3_1aTreeShapeHelper::logError(ErrorDefinition::ErrorType error,
                                      Location& loc, Location& extraLoc,
                                      bool showDuplicates) {
-  std::vector<Location> extras;
-  extras.push_back(extraLoc);
-  Error err(error, loc, &extras);
-  m_session->getErrorContainer()->addError(err, showDuplicates);
+  m_session->getErrorContainer()->addError(error, {loc, extraLoc},
+                                           showDuplicates);
 }
 
 NodeId SV3_1aTreeShapeHelper::generateDesignElemId() {

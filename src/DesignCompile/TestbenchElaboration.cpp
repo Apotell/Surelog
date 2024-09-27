@@ -180,7 +180,7 @@ bool TestbenchElaboration::checkForMultipleDefinition_() {
       Location loc1(fileId1, line1, fC1->Column(nodeId1),
                     symbols->registerSymbol(className));
 
-      std::vector<Location> locations;
+      std::vector<Location> locations{loc1};
 
       while (1) {
         const FileContent* fC2 = prevClassDefinition->getFileContents()[0];
@@ -214,9 +214,8 @@ bool TestbenchElaboration::checkForMultipleDefinition_() {
         }
       }
 
-      if (!locations.empty()) {
-        Error err1(ErrorDefinition::COMP_MULTIPLY_DEFINED_CLASS, loc1,
-                   &locations);
+      if (locations.size() > 1) {
+        Error err1(ErrorDefinition::COMP_MULTIPLY_DEFINED_CLASS, locations);
         errors->addError(err1);
       }
     }

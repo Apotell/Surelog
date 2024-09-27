@@ -63,6 +63,14 @@ class ErrorContainer final {
   void init();
   Error& addError(Error& error, bool showDuplicates = false,
                   bool reentrantPython = true);
+  void addError(ErrorDefinition::ErrorType errorId, const Location& loc,
+                bool showDuplicates = false, bool reentrantPython = true);
+  void addError(ErrorDefinition::ErrorType errorId, const Location& loc,
+                const Location& extra, bool showDuplicates = false,
+                bool reentrantPython = true);
+  void addError(ErrorDefinition::ErrorType errorId,
+                const std::vector<Location>& locations,
+                bool showDuplicates = false, bool reentrantPython = true);
 
   const std::vector<Error>& getErrors() const { return m_errors; }
   bool printMessages(bool muteStdout = false);
@@ -72,12 +80,17 @@ class ErrorContainer final {
   bool hasFatalErrors() const;
   Stats getErrorStats() const;
   void appendErrors(ErrorContainer&);
-  std::tuple<std::string, bool, bool> createErrorMessage(
-      const Error& error, bool reentrantPython = true) const;
   void setPythonInterp(void* interpState) { m_interpState = interpState; }
 
  private:
   ErrorContainer(const ErrorContainer& orig) = delete;
+
+  std::tuple<std::string, bool, bool> createErrorMessage(
+      ErrorDefinition::ErrorType errorId,
+      const std::vector<Location>& locations,
+      bool reentrantPython = true) const;
+  Error& addError(Error& error, const std::string& message,
+                  bool reportFatalError, bool showDuplicates);
 
   std::pair<std::string, bool> createReport_() const;
   std::pair<std::string, bool> createReport_(const Error& error) const;

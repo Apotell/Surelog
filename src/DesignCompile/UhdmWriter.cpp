@@ -3289,8 +3289,7 @@ bool UhdmWriter::write(PathId uhdmFileId) {
     bind(s, designs);
   }
 
-  if (IntegrityChecker* const checker =
-          new IntegrityChecker(fileSystem, symbols, errors)) {
+  if (IntegrityChecker* const checker = new IntegrityChecker(m_session)) {
     for (auto h : designs) {
       const design* const d =
           static_cast<const design*>(((const uhdm_handle*)h)->object);

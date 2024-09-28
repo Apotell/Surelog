@@ -3523,7 +3523,7 @@ UHDM::any *CompileHelper::compileAssignmentPattern(
             tps->VpiParent(pattern);
             if (pattern->Typespec() == nullptr) {
               ref_typespec *rt = s.MakeRef_typespec();
-              rt->VpiName(fC->SymName(Constant_expression));
+              rt->VpiName(tps->VpiName());
               rt->VpiParent(pattern);
               fC->populateCoreMembers(Constant_expression, Constant_expression,
                                       rt);

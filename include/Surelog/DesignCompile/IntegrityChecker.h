@@ -33,15 +33,11 @@
 #include <vector>
 
 namespace SURELOG {
-
-class ErrorContainer;
-class FileSystem;
-class SymbolTable;
+class Session;
 
 class IntegrityChecker final : protected UHDM::UhdmListener {
  public:
-  IntegrityChecker(FileSystem* fileSystem, SymbolTable* symbolTable,
-                   ErrorContainer* errorContainer);
+  explicit IntegrityChecker(Session* session);
 
   void check(const UHDM::design* const object);
   void check(const std::vector<const UHDM::design*>& objects);
@@ -357,9 +353,7 @@ class IntegrityChecker final : protected UHDM::UhdmListener {
                     const UHDM::VectorOfany& objects) final;
 
  private:
-  FileSystem* const m_fileSystem = nullptr;
-  SymbolTable* const m_symbolTable = nullptr;
-  ErrorContainer* const m_errorContainer = nullptr;
+  Session* const m_session = nullptr;
 
   typedef std::set<UHDM::UHDM_OBJECT_TYPE> object_type_set_t;
   const object_type_set_t m_acceptedObjectsWithInvalidLocations;

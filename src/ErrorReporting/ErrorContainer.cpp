@@ -344,29 +344,31 @@ bool ErrorContainer::hasFatalErrors() const {
 
 std::pair<std::string, bool> ErrorContainer::createReport_() const {
   std::string report;
-  bool reportFatalError = false;
-  for (const Error& msg : m_errors) {
-    std::tuple<std::string, bool, bool> textStatus =
-        createErrorMessage(msg.m_errorId, msg.m_locations);
-    if (std::get<1>(textStatus)) reportFatalError = true;
-    if (std::get<2>(textStatus))  // Filtered
-      continue;
-    report += std::get<0>(textStatus);
+  bool reportFatalErrors = false;
+  for (const Error& error : m_errors) {
+    if (!error.m_reported && !error.m_waived) {
+      auto [message, reportFatalError, filterMessage] =
+          createErrorMessage(error.m_errorId, error.m_locations);
+      if (reportFatalError) reportFatalErrors = true;
+      if (!filterMessage)  // Filtered
+        report += message;
+    }
   }
-  return std::make_pair(report, reportFatalError);
+  return std::make_pair(report, reportFatalErrors);
 }
 
 std::pair<std::string, bool> ErrorContainer::createReport_(
     const Error& error) const {
   std::string report;
-  bool reportFatalError = false;
-  const Error& msg = error;
-  std::tuple<std::string, bool, bool> textStatus =
-      createErrorMessage(msg.m_errorId, msg.m_locations);
-  if (std::get<1>(textStatus)) reportFatalError = true;
-  if (!std::get<2>(textStatus))  // Filtered
-    report += std::get<0>(textStatus);
-  return std::make_pair(report, reportFatalError);
+  bool reportFatalErrors = false;
+  if (!error.m_reported && !error.m_waived) {
+    auto [message, reportFatalError, filterMessage] =
+        createErrorMessage(error.m_errorId, error.m_locations);
+    if (reportFatalError) reportFatalErrors = true;
+    if (!filterMessage)  // Filtered
+      report += message;
+  }
+  return std::make_pair(report, reportFatalErrors);
 }
 
 bool ErrorContainer::printStats(ErrorContainer::Stats stats, bool muteStdout) {

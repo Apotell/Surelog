@@ -22,6 +22,7 @@
  */
 
 #include <Surelog/Common/FileSystem.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/DesignCompile/IntegrityChecker.h>
 #include <Surelog/ErrorReporting/ErrorContainer.h>
 #include <Surelog/SourceCompile/SymbolTable.h>
@@ -31,12 +32,8 @@
 #include <uhdm/uhdm.h>
 
 namespace SURELOG {
-IntegrityChecker::IntegrityChecker(FileSystem* fileSystem,
-                                   SymbolTable* symbolTable,
-                                   ErrorContainer* errorContainer)
-    : m_fileSystem(fileSystem),
-      m_symbolTable(symbolTable),
-      m_errorContainer(errorContainer),
+IntegrityChecker::IntegrityChecker(Session* session)
+    : m_session(session),
       m_acceptedObjectsWithInvalidLocations({
           UHDM::uhdmdesign,
           UHDM::uhdmsource_file,
@@ -70,11 +67,14 @@ void IntegrityChecker::reportAmbigiousMembership(
   if ((collection == nullptr) ||
       (std::find(collection->cbegin(), collection->cend(), object) ==
        collection->cend())) {
-    Location loc(
-        m_fileSystem->toPathId(object->VpiFile(), m_symbolTable),
-        object->VpiLineNo(), object->VpiColumnNo(),
-        m_symbolTable->registerSymbol(std::to_string(object->UhdmId())));
-    m_errorContainer->addError(
+    SymbolTable* const symbolTable = m_session->getSymbolTable();
+    FileSystem* const fileSystem = m_session->getFileSystem();
+    ErrorContainer* const errorContainer = m_session->getErrorContainer();
+
+    Location loc(fileSystem->toPathId(object->VpiFile(), symbolTable),
+                 object->VpiLineNo(), object->VpiColumnNo(),
+                 symbolTable->registerSymbol(std::to_string(object->UhdmId())));
+    errorContainer->addError(
         ErrorDefinition::INTEGRITY_CHECK_OBJECT_NOT_IN_PARENT_COLLECTION, loc);
   }
 }
@@ -88,12 +88,16 @@ void IntegrityChecker::reportDuplicates(const UHDM::any* const object,
 
   const std::set<T*> unique(collection->cbegin(), collection->cend());
   if (unique.size() != collection->size()) {
+    SymbolTable* const symbolTable = m_session->getSymbolTable();
+    FileSystem* const fileSystem = m_session->getFileSystem();
+    ErrorContainer* const errorContainer = m_session->getErrorContainer();
+
     std::string text = std::to_string(object->UhdmId());
     text.append("::").append(name);
-    Location loc(m_fileSystem->toPathId(object->VpiFile(), m_symbolTable),
+    Location loc(fileSystem->toPathId(object->VpiFile(), symbolTable),
                  object->VpiLineNo(), object->VpiColumnNo(),
-                 m_symbolTable->registerSymbol(text));
-    m_errorContainer->addError(
+                 symbolTable->registerSymbol(text));
+    errorContainer->addError(
         ErrorDefinition::INTEGRITY_CHECK_COLLECTION_HAS_DUPLICATES, loc);
   }
 }
@@ -174,15 +178,19 @@ void IntegrityChecker::reportInvalidLocation(
   const uint32_t cel = object->VpiEndLineNo();
   const uint32_t cec = object->VpiEndColumnNo();
 
+  SymbolTable* const symbolTable = m_session->getSymbolTable();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  ErrorContainer* const errorContainer = m_session->getErrorContainer();
+
   LineColumnRelation actualRelation = getLineColumnRelation(csl, csc, cel, cec);
   if ((actualRelation != LineColumnRelation::Before) &&
       (actualRelation != LineColumnRelation::Inside)) {
     Location loc(
-        m_fileSystem->toPathId(object->VpiFile(), m_symbolTable),
+        fileSystem->toPathId(object->VpiFile(), symbolTable),
         object->VpiLineNo(), object->VpiColumnNo(),
-        m_symbolTable->registerSymbol(StrCat("Object: ", object->UhdmId())));
-    m_errorContainer->addError(
-        ErrorDefinition::INTEGRITY_CHECK_INVALID_LOCATION, loc);
+        symbolTable->registerSymbol(StrCat("Object: ", object->UhdmId())));
+    errorContainer->addError(ErrorDefinition::INTEGRITY_CHECK_INVALID_LOCATION,
+                             loc);
     return;
   }
 
@@ -414,13 +422,13 @@ void IntegrityChecker::reportInvalidLocation(
 
   if (actualRelation != expectedRelation) {
     Location loc(
-        m_fileSystem->toPathId(object->VpiFile(), m_symbolTable),
+        fileSystem->toPathId(object->VpiFile(), symbolTable),
         object->VpiLineNo(), object->VpiColumnNo(),
-        m_symbolTable->registerSymbol(StrCat(
+        symbolTable->registerSymbol(StrCat(
             "Child: ", object->UhdmId(), ", ",
             UHDM::UhdmName(object->UhdmType()), " Parent: ", parent->UhdmId(),
             ", ", UHDM::UhdmName(parent->UhdmType()))));
-    m_errorContainer->addError(
+    errorContainer->addError(
         ErrorDefinition::INTEGRITY_CHECK_BAD_RELATIVE_LOCATION, loc);
   }
 }
@@ -497,13 +505,17 @@ void IntegrityChecker::reportMissingLocation(
     }
   }
 
+  SymbolTable* const symbolTable = m_session->getSymbolTable();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  ErrorContainer* const errorContainer = m_session->getErrorContainer();
+
   std::string text =
       StrCat(object->UhdmId(), ", ", UHDM::UhdmName(object->UhdmType()));
-  Location loc(m_fileSystem->toPathId(object->VpiFile(), m_symbolTable),
+  Location loc(fileSystem->toPathId(object->VpiFile(), symbolTable),
                object->VpiLineNo(), object->VpiColumnNo(),
-               m_symbolTable->registerSymbol(text));
-  m_errorContainer->addError(ErrorDefinition::INTEGRITY_CHECK_MISSING_LOCATION,
-                             loc);
+               symbolTable->registerSymbol(text));
+  errorContainer->addError(ErrorDefinition::INTEGRITY_CHECK_MISSING_LOCATION,
+                           loc);
 }
 
 bool IntegrityChecker::isImplicitFunctionReturnType(const UHDM::any* object) {
@@ -577,6 +589,7 @@ void IntegrityChecker::reportInvalidNames(const UHDM::any* const object) const {
           (actual->UhdmType() == UHDM::uhdmreal_typespec) ||
           (actual->UhdmType() == UHDM::uhdmshort_int_typespec) ||
           (actual->UhdmType() == UHDM::uhdmshort_real_typespec) ||
+          (actual->UhdmType() == UHDM::uhdmstring_typespec) ||
           (actual->UhdmType() == UHDM::uhdmtime_typespec) ||
           (actual->UhdmType() == UHDM::uhdmvoid_typespec)) {
         shouldReport = false;
@@ -594,7 +607,6 @@ void IntegrityChecker::reportInvalidNames(const UHDM::any* const object) const {
                  (actual->UhdmType() == UHDM::uhdmimport_typespec) ||
                  (actual->UhdmType() == UHDM::uhdmproperty_typespec) ||
                  (actual->UhdmType() == UHDM::uhdmsequence_typespec) ||
-                 (actual->UhdmType() == UHDM::uhdmstring_typespec) ||
                  (actual->UhdmType() == UHDM::uhdmtype_parameter)) {
         // Do nothing! The name is expected to be valid for these types
       }
@@ -602,24 +614,30 @@ void IntegrityChecker::reportInvalidNames(const UHDM::any* const object) const {
   }
 
   if (shouldReport) {
-    Location loc(
-        m_fileSystem->toPathId(object->VpiFile(), m_symbolTable),
-        object->VpiLineNo(), object->VpiColumnNo(),
-        m_symbolTable->registerSymbol(std::to_string(object->UhdmId())));
-    m_errorContainer->addError(ErrorDefinition::INTEGRITY_CHECK_MISSING_NAME,
-                               loc);
+    SymbolTable* const symbolTable = m_session->getSymbolTable();
+    FileSystem* const fileSystem = m_session->getFileSystem();
+    ErrorContainer* const errorContainer = m_session->getErrorContainer();
+
+    Location loc(fileSystem->toPathId(object->VpiFile(), symbolTable),
+                 object->VpiLineNo(), object->VpiColumnNo(),
+                 symbolTable->registerSymbol(std::to_string(object->UhdmId())));
+    errorContainer->addError(ErrorDefinition::INTEGRITY_CHECK_MISSING_NAME,
+                             loc);
   }
 }
 
 void IntegrityChecker::reportInvalidFile(const UHDM::any* const object) const {
   std::string_view filename = object->VpiFile();
   if (filename.empty() || (filename == SymbolTable::getBadSymbol())) {
-    Location loc(
-        m_fileSystem->toPathId(object->VpiFile(), m_symbolTable),
-        object->VpiLineNo(), object->VpiColumnNo(),
-        m_symbolTable->registerSymbol(std::to_string(object->UhdmId())));
-    m_errorContainer->addError(ErrorDefinition::INTEGRITY_CHECK_MISSING_FILE,
-                               loc);
+    SymbolTable* const symbolTable = m_session->getSymbolTable();
+    FileSystem* const fileSystem = m_session->getFileSystem();
+    ErrorContainer* const errorContainer = m_session->getErrorContainer();
+
+    Location loc(fileSystem->toPathId(object->VpiFile(), symbolTable),
+                 object->VpiLineNo(), object->VpiColumnNo(),
+                 symbolTable->registerSymbol(std::to_string(object->UhdmId())));
+    errorContainer->addError(ErrorDefinition::INTEGRITY_CHECK_MISSING_FILE,
+                             loc);
   }
 }
 
@@ -662,12 +680,15 @@ void IntegrityChecker::reportNullActual(const UHDM::any* const object) const {
   }
 
   if (shouldReport) {
-    Location loc(m_fileSystem->toPathId(object->VpiFile(), m_symbolTable),
+    SymbolTable* const symbolTable = m_session->getSymbolTable();
+    FileSystem* const fileSystem = m_session->getFileSystem();
+    ErrorContainer* const errorContainer = m_session->getErrorContainer();
+
+    Location loc(fileSystem->toPathId(object->VpiFile(), symbolTable),
                  object->VpiLineNo(), object->VpiColumnNo(),
-                 m_symbolTable->registerSymbol(
+                 symbolTable->registerSymbol(
                      StrCat(object->UhdmId(), ", ", object->VpiName())));
-    m_errorContainer->addError(ErrorDefinition::INTEGRITY_CHECK_NULL_ACTUAL,
-                               loc);
+    errorContainer->addError(ErrorDefinition::INTEGRITY_CHECK_NULL_ACTUAL, loc);
   }
 }
 
@@ -831,14 +852,17 @@ void IntegrityChecker::enterAny(const UHDM::any* const object) {
   reportInvalidNames(object);
   reportInvalidFile(object);
 
+  SymbolTable* const symbolTable = m_session->getSymbolTable();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  ErrorContainer* const errorContainer = m_session->getErrorContainer();
+
   const UHDM::any* const parent = object->VpiParent();
   if (parent == nullptr) {
-    Location loc(
-        m_fileSystem->toPathId(object->VpiFile(), m_symbolTable),
-        object->VpiLineNo(), object->VpiColumnNo(),
-        m_symbolTable->registerSymbol(std::to_string(object->UhdmId())));
-    m_errorContainer->addError(ErrorDefinition::INTEGRITY_CHECK_MISSING_PARENT,
-                               loc);
+    Location loc(fileSystem->toPathId(object->VpiFile(), symbolTable),
+                 object->VpiLineNo(), object->VpiColumnNo(),
+                 symbolTable->registerSymbol(std::to_string(object->UhdmId())));
+    errorContainer->addError(ErrorDefinition::INTEGRITY_CHECK_MISSING_PARENT,
+                             loc);
     return;
   }
 
@@ -941,11 +965,10 @@ void IntegrityChecker::enterAny(const UHDM::any* const object) {
   if ((parentAsScope == nullptr) && (parentAsDesign == nullptr) &&
       (parentAsUdpDefn == nullptr) &&
       (expectScope || expectDesign || expectUdpDefn)) {
-    Location loc(
-        m_fileSystem->toPathId(object->VpiFile(), m_symbolTable),
-        object->VpiLineNo(), object->VpiColumnNo(),
-        m_symbolTable->registerSymbol(std::to_string(object->UhdmId())));
-    m_errorContainer->addError(
+    Location loc(fileSystem->toPathId(object->VpiFile(), symbolTable),
+                 object->VpiLineNo(), object->VpiColumnNo(),
+                 symbolTable->registerSymbol(std::to_string(object->UhdmId())));
+    errorContainer->addError(
         ErrorDefinition::INTEGRITY_CHECK_PARENT_IS_NEITHER_SCOPE_NOR_DESIGN,
         loc);
   }

@@ -384,20 +384,26 @@ bool PreprocessFile::preprocess() {
       }
       // Remove ^M (DOS) from text file
       std::string text;
+      std::streamsize length = 0;
+      if (fileSystem->filesize(m_fileId, &length)) {
+        text.reserve(length);
+      }
       char nonAscii = '\0';
-      char c = stream.get();
       int32_t lineNb = 1;
       int32_t columnNb = 0;
       int32_t lineNonAscii = 0;
       int32_t columnNonAscii = 0;
+      int32_t c = stream.get();
       while (stream.good()) {
-        if (c != 0x0D) {
-          if (isascii(c))
+        if (c != '\r') {
+          if (std::isprint(c) || std::isspace(c)) {
             text += c;
-          else {
-            nonAscii = c;
-            lineNonAscii = lineNb;
-            columnNonAscii = columnNb;
+          } else {
+            if (nonAscii == '\0') {
+              nonAscii = c;
+              lineNonAscii = lineNb;
+              columnNonAscii = columnNb;
+            }
             text += " ";
           }
         }
@@ -574,7 +580,8 @@ bool PreprocessFile::preprocess() {
         /* symbolStartLine */ 0,
         /* symbolStartColumn */ 0,
         /* symbolEndLine */ 0,
-        /* symbolEndColumn */ 0);
+        /* symbolEndColumn */ 0,
+        /* indexOpposite */ 0);
   }
   if (m_debugAstModel && !precompiled)
     std::cout << m_fileContent->printObjects();
@@ -582,7 +589,7 @@ bool PreprocessFile::preprocess() {
   return true;
 }
 
-std::pair<uint32_t, uint16_t> PreprocessFile::getCurrentPosition() const {
+LineColumn PreprocessFile::getCurrentPosition() const {
   uint32_t lineCount = 0;
   const PreprocessFile* pf = this;
   while (pf != nullptr) {
@@ -591,8 +598,8 @@ std::pair<uint32_t, uint16_t> PreprocessFile::getCurrentPosition() const {
   }
 
   std::string::size_type p = m_result.rfind('\n');
-  return std::make_pair(lineCount + 1,
-                        (p == std::string::npos) ? 1 : (m_result.length() - p));
+  return LineColumn(lineCount + 1,
+                    (p == std::string::npos) ? 1 : (m_result.length() - p));
 }
 
 int32_t PreprocessFile::addIncludeFileInfo(
@@ -838,7 +845,7 @@ static std::string_view getFirstNonEmptyToken(
   return kEmpty;
 }
 
-std::pair<bool, std::string> PreprocessFile::evaluateMacro_(
+std::optional<std::string> PreprocessFile::evaluateMacro_(
     std::string_view name, std::vector<std::string>& actual_args,
     PreprocessFile* callingFile, uint32_t callingLine, LoopCheck& loopChecker,
     MacroInfo* macroInfo, SpecialInstructions& instructions,
@@ -849,6 +856,7 @@ std::pair<bool, std::string> PreprocessFile::evaluateMacro_(
   bool found = false;
   const std::vector<std::string>& formal_args = macroInfo->m_arguments;
   const std::vector<std::string>& orig_body_tokens = macroInfo->m_tokens;
+  const std::vector<LineColumn>& orig_token_positions = macroInfo->m_positions;
 
   if (instructions.m_check_macro_loop) {
     bool loop = loopChecker.addEdge(callingFile->m_macroId, getId(name));
@@ -863,21 +871,29 @@ std::pair<bool, std::string> PreprocessFile::evaluateMacro_(
                          macroInfo->m_startColumn, getId(name));
           Error err(ErrorDefinition::PP_RECURSIVE_MACRO_DEFINITION, loc, exloc);
           addError(err);
-          return std::make_pair(false,
-                                std::string(SymbolTable::getBadSymbol()));
+          return std::optional<std::string>();
         }
       }
     }
   }
   // Don't modify the actual tokens of the macro, make a copy...
   std::vector<std::string> body_tokens;
-  for (const std::string& tok : orig_body_tokens) {
+  body_tokens.reserve(orig_body_tokens.size());
+  std::vector<LineColumn> token_positions;
+  token_positions.reserve(orig_token_positions.size());
+  for (size_t i = 0, ni = orig_body_tokens.size(); i < ni; ++i) {
+    const std::string& tok = orig_body_tokens[i];
+    const LineColumn& lc = orig_token_positions[i];
     if (tok == "``_``") {
-      body_tokens.push_back("``");
-      body_tokens.push_back("_");
-      body_tokens.push_back("``");
+      body_tokens.emplace_back("``");
+      body_tokens.emplace_back("_");
+      body_tokens.emplace_back("``");
+      token_positions.emplace_back(lc.first, lc.second);
+      token_positions.emplace_back(lc.first, lc.second + 2);
+      token_positions.emplace_back(lc.first, lc.second + 3);
     } else {
-      body_tokens.push_back(tok);
+      body_tokens.emplace_back(tok);
+      token_positions.emplace_back(lc);
     }
   }
 
@@ -913,7 +929,7 @@ std::pair<bool, std::string> PreprocessFile::evaluateMacro_(
       addError(err);
     }
   }
-  bool incorrectArgNb = false;
+
   static const std::regex ws_re("[ \t]+");
   for (uint32_t i = 0; i < formal_args.size(); i++) {
     std::vector<std::string> formal_arg_default;
@@ -988,12 +1004,9 @@ std::pair<bool, std::string> PreprocessFile::evaluateMacro_(
           Error err(ErrorDefinition::PP_MACRO_NO_DEFAULT_VALUE, loc, &locs);
           addError(err);
         }
-        incorrectArgNb = true;
+        return std::optional<std::string>(StrCat("`", name));
       }
     }
-  }
-  if (incorrectArgNb) {
-    return std::make_pair(true, StrCat("`", name));
   }
   std::string body;
   for (const auto& token : body_tokens) {
@@ -1006,6 +1019,7 @@ std::pair<bool, std::string> PreprocessFile::evaluateMacro_(
   }
   // *** Body processing
   std::string body_short;
+  body_short.reserve(body.length());
   // Replace \\n by \n
   bool inString = false;
   char previous = '\0';
@@ -1014,11 +1028,9 @@ std::pair<bool, std::string> PreprocessFile::evaluateMacro_(
       inString = !inString;
     }
     if ((previous == '\\') && (c == '\n') && (!inString)) {
-      body_short.erase(body_short.end() - 1);
-      body_short.push_back(c);
-    } else {
-      body_short.push_back(c);
+      body_short.pop_back();
     }
+    body_short += c;
     previous = c;
   }
 
@@ -1066,7 +1078,7 @@ std::pair<bool, std::string> PreprocessFile::evaluateMacro_(
     result = body_short;
     found = true;
   }
-  return std::make_pair(found, result);
+  return found ? std::optional(result) : std::optional<std::string>();
 }
 
 MacroInfo* PreprocessFile::getMacro(std::string_view name) {
@@ -1181,19 +1193,17 @@ std::string PreprocessFile::getMacro(
     MacroInfo* info = m_compilationUnit->getMacroInfo(name);
     if (instructions.m_evaluate == SpecialInstructions::Evaluate) {
       if (info) {
-        std::pair<bool, std::string> evalResult = evaluateMacro_(
+        std::optional<std::string> evalResult = evaluateMacro_(
             name, arguments, callingFile, callingLine, loopChecker, info,
             instructions, embeddedMacroCallFile, embeddedMacroCallLine,
             embeddedMacroCallColumn);
-        found = evalResult.first;
-        result = evalResult.second;
-        result = std::regex_replace(result, std::regex("``"), "");
+        if ((found = evalResult.has_value())) {
+          result = std::regex_replace(evalResult.value(), std::regex("``"), "");
+        }
       }
-    } else {
-      if (info) {
-        found = true;
-        result.clear();
-      }
+    } else if (info) {
+      found = true;
+      result.clear();
     }
   }
   if (found == false) {

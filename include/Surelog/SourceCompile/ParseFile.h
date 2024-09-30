@@ -131,8 +131,11 @@ class ParseFile final {
 
   bool parseOneFile_(PathId fileId, uint32_t lineOffset);
   void buildLocationCache();
-  uint32_t buildLocationCache_recursive(uint32_t openIndex,
-                                        uint32_t closeIndex);
+  void buildLocationCache_recurse_for_includes(uint32_t openIndex,
+                                               uint32_t closeIndex);
+  uint32_t buildLocationCache_recurse_for_macros(uint32_t openIndex,
+                                                 uint32_t closeIndex);
+  void printLocationCache();
 
   // For file chunk:
   std::vector<ParseFile*> m_children;
@@ -144,6 +147,9 @@ class ParseFile final {
   std::string m_sourceText;  // For Unit tests
 
   enum class Delta { Absolute, Relative };
+  void addLocationCacheEntry(uint32_t sourceLine, Delta delta, PathId fileId,
+                             uint32_t line, uint32_t column, int32_t offset);
+
   typedef std::vector<std::tuple<Delta, PathId, uint32_t, uint32_t, int32_t>>
       location_cache_entry_t;
   typedef std::vector<location_cache_entry_t> location_cache_t;

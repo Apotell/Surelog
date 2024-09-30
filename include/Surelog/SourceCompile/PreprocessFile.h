@@ -31,6 +31,7 @@
 #include <Surelog/SourceCompile/IncludeFileInfo.h>
 #include <Surelog/SourceCompile/LoopCheck.h>
 
+#include <optional>
 #include <set>
 #include <vector>
 
@@ -141,7 +142,7 @@ class PreprocessFile final {
   uint32_t getIncluderLine() const { return m_includerLine; }
   size_t getLineCount() const { return m_lineCount; }
   void setLineCount(size_t count) { m_lineCount = count; }
-  std::pair<uint32_t, uint16_t> getCurrentPosition() const;
+  LineColumn getCurrentPosition() const;
   const std::vector<IncludeFileInfo>& getIncludeFileInfo() const {
     return m_includeFileInfo;
   }
@@ -333,7 +334,7 @@ class PreprocessFile final {
   }
 
  private:
-  std::pair<bool, std::string> evaluateMacro_(
+  std::optional<std::string> evaluateMacro_(
       std::string_view name, std::vector<std::string>& arguments,
       PreprocessFile* callingFile, uint32_t callingLine, LoopCheck& loopChecker,
       MacroInfo* macroInfo, SpecialInstructions& instructions,

@@ -43,7 +43,7 @@ FileContent::FileContent(PathId fileId, Library* library,
       m_library(library),
       m_symbolTable(symbolTable),
       m_parentFile(parent) {
-  addObject(BadSymbolId, BadPathId, VObjectType::sl_INVALID_, 0, 0, 0, 0,
+  addObject(BadSymbolId, m_fileId, VObjectType::sl_INVALID_, 0, 0, 0, 0,
             InvalidNodeId, InvalidNodeId, InvalidNodeId, InvalidNodeId);
 }
 

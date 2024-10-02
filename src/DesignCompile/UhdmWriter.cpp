@@ -1060,10 +1060,32 @@ void reInstanceTypespec(Serializer& serializer, any* root, package* p) {
   delete listener;
 }
 
+void UhdmWriter::writeTypedefTypespec(std::string_view typedefName,
+                                      UHDM::any* p, UHDM::Serializer& s,
+                                      NodeId id, const FileContent* fC) {
+  typedef_typespec* tdType = s.MakeTypedef_typespec();
+  tdType->VpiName(typedefName);
+  //fC->populateCoreMembers(id, id, tdType);
+  tdType->VpiParent(p);
+  ref_typespec* ref_type = s.MakeRef_typespec();
+  ref_type->VpiName(fC->SymName(id));
+  tdType->Typedef_alias(ref_type);
+  fC->populateCoreMembers(id, id, ref_type);
+}
+// typedef map => create correcponding typedef typespec  and parent to the package
 void UhdmWriter::writePackage(Package* pack, package* p, Serializer& s,
-                              bool elaborated) {
+                              bool elaborated, const FileContent* fC) {
   const ScopedScope scopedScope(p);
-
+  for (const auto& tp : pack->getTypeDefMap()) {
+    TypeDef* typd = tp.second;
+    const DataType* dt = typd;
+    
+    NodeId nId = typd->getDefinitionNode();
+    if (dt->getTypespec() == nullptr) {
+      writeTypedefTypespec(tp.first.c_str(), p, s, typd->getDefinitionNode(),
+                           fC);
+    }
+  }
   p->VpiEndLabel(pack->getEndLabel());
   p->VpiFullName(StrCat(pack->getName(), "::"));
 
@@ -1174,6 +1196,17 @@ void UhdmWriter::writeModule(ModuleDefinition* mod, module_inst* m,
 
   m->VpiEndLabel(mod->getEndLabel());
 
+  const FileContent* fC = mod->getFileContents()[0];
+  for (const auto& tp : mod->getTypeDefMap()) {
+    TypeDef* typd = tp.second;
+    const DataType* dt = typd;
+
+    NodeId nId = typd->getDefinitionNode();
+    if (dt->getTypespec() == nullptr) {
+      writeTypedefTypespec(tp.first.c_str(), m, s, typd->getDefinitionNode(),
+                           fC);
+    }
+  }
   // Let decls
   if (!mod->getLetStmts().empty()) {
     for (auto& stmt : mod->getLetStmts()) {
@@ -3056,7 +3089,7 @@ bool UhdmWriter::write(PathId uhdmFileId) {
               a->VpiParent(p);
             }
           }
-          writePackage(pack, p, s, true);
+          writePackage(pack, p, s, true, fC);
           if (fC) {
             // Builtin package has no file
             const NodeId modId = pack->getNodeIds()[0];
@@ -3088,7 +3121,7 @@ bool UhdmWriter::write(PathId uhdmFileId) {
             a->VpiParent(p);
           }
         }
-        writePackage(pack->getUnElabPackage(), p, s, false);
+        writePackage(pack->getUnElabPackage(), p, s, false, fC);
         if (fC) {
           // Builtin package has no file
           const NodeId modId = pack->getNodeIds()[0];

@@ -412,8 +412,17 @@ void IntegrityChecker::reportInvalidNames(const UHDM::any* const object) const {
     }
   } else if (object->UhdmType() == UHDM::uhdmref_typespec) {
     shouldReport = (object->VpiName() == SymbolTable::getBadSymbol());
-    if (const UHDM::any* actual =
-            static_cast<const UHDM::ref_typespec*>(object)->Actual_typespec()) {
+    const UHDM::any* const parent = object->VpiParent();
+    if (parent != nullptr && parent->UhdmType() == UHDM::uhdmtypedef_typespec) {
+      if (UHDM::ref_typespec* ref_tps =
+              ((UHDM::typespec*)parent)->Typedef_alias()) {
+        if (!shouldReport && !ref_tps->VpiName().empty() &&
+            ref_tps->Actual_typespec()!= nullptr)
+          shouldReport = ref_tps->VpiName() == ref_tps->Actual_typespec()->VpiName();
+      }
+    } else if (const UHDM::any* actual =
+                   static_cast<const UHDM::ref_typespec*>(object)
+                       ->Actual_typespec()) {
       if ((actual->UhdmType() == UHDM::uhdmstruct_typespec) ||
           (actual->UhdmType() == UHDM::uhdmunion_typespec) ||
           (actual->UhdmType() == UHDM::uhdmenum_typespec)) {
@@ -476,9 +485,21 @@ void IntegrityChecker::reportNullActual(const UHDM::any* const object) const {
     } break;
 
     case UHDM::uhdmref_typespec: {
-      shouldReport =
-          static_cast<const UHDM::ref_typespec*>(object)->Actual_typespec() ==
-          nullptr;
+      const UHDM::any* const parent = object->VpiParent();
+      if (parent != nullptr &&
+          parent->UhdmType() == UHDM::uhdmtypedef_typespec) {
+        if (UHDM::ref_typespec* ref_tps =
+                ((UHDM::typespec*)parent)->Typedef_alias()) {
+          if ((ref_tps->VpiName() == SymbolTable::getBadSymbol() ||
+               ref_tps->VpiName().empty()) &&
+              ref_tps->Actual_typespec() == nullptr)
+            shouldReport = true;
+        }        
+      } else {
+        shouldReport =
+            static_cast<const UHDM::ref_typespec*>(object)->Actual_typespec() ==
+            nullptr;
+      }
     } break;
 
     case UHDM::uhdmbit_select: {

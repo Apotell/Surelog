@@ -894,6 +894,14 @@ void UhdmWriter::writeClass(ClassDefinition* classDef, Serializer& s,
     c->VpiEndLabel(classDef->getEndLabel());
     c->Task_func_decls(classDef->getTask_func_decls());
 
+    // Test code
+    //for (const auto& tp : classDef->getTypeDefMap()) {
+    //  TypeDef* typd = tp.second;
+    //  const DataType* dt = typd;
+    //  if (dt->getTypespec()) {
+    //    dt->getTypespec()->VpiParent(c);
+    //  }
+    //}
     // Typepecs
     VectorOftypespec* typespecs = c->Typespecs(true);
     writeDataTypes(classDef->getDataTypeMap(), c, typespecs, s, true);
@@ -1063,6 +1071,7 @@ void reInstanceTypespec(Serializer& serializer, any* root, package* p) {
 void UhdmWriter::writeTypedefTypespec(std::string_view typedefName,
                                       UHDM::any* p, UHDM::Serializer& s,
                                       NodeId id, const FileContent* fC) {
+  return;
   typedef_typespec* tdType = s.MakeTypedef_typespec();
   tdType->VpiName(typedefName);
   //fC->populateCoreMembers(id, id, tdType);
@@ -1076,16 +1085,19 @@ void UhdmWriter::writeTypedefTypespec(std::string_view typedefName,
 void UhdmWriter::writePackage(Package* pack, package* p, Serializer& s,
                               bool elaborated, const FileContent* fC) {
   const ScopedScope scopedScope(p);
-  for (const auto& tp : pack->getTypeDefMap()) {
-    TypeDef* typd = tp.second;
-    const DataType* dt = typd;
-    
-    NodeId nId = typd->getDefinitionNode();
-    if (dt->getTypespec() == nullptr) {
-      writeTypedefTypespec(tp.first.c_str(), p, s, typd->getDefinitionNode(),
-                           fC);
-    }
-  }
+  //for (const auto& tp : pack->getTypeDefMap()) {
+  //  TypeDef* typd = tp.second;
+  //  const DataType* dt = typd;
+  //  
+  //  NodeId nId = typd->getDefinitionNode();
+  //  //if (dt->getTypespec() == nullptr) {
+  //  //  writeTypedefTypespec(tp.first.c_str(), p, s, typd->getDefinitionNode(),
+  //  //                       fC);
+  //  //}
+  //  if (dt->getTypespec()) {
+  //    dt->getTypespec()->VpiParent(p);
+  //  }
+  //}
   p->VpiEndLabel(pack->getEndLabel());
   p->VpiFullName(StrCat(pack->getName(), "::"));
 
@@ -1196,17 +1208,17 @@ void UhdmWriter::writeModule(ModuleDefinition* mod, module_inst* m,
 
   m->VpiEndLabel(mod->getEndLabel());
 
-  const FileContent* fC = mod->getFileContents()[0];
-  for (const auto& tp : mod->getTypeDefMap()) {
-    TypeDef* typd = tp.second;
-    const DataType* dt = typd;
+  //const FileContent* fC = mod->getFileContents()[0];
+  //for (const auto& tp : mod->getTypeDefMap()) {
+  //  TypeDef* typd = tp.second;
+  //  const DataType* dt = typd;
 
-    NodeId nId = typd->getDefinitionNode();
-    if (dt->getTypespec() == nullptr) {
-      writeTypedefTypespec(tp.first.c_str(), m, s, typd->getDefinitionNode(),
-                           fC);
-    }
-  }
+  //  NodeId nId = typd->getDefinitionNode();
+  //  if (dt->getTypespec() == nullptr) {
+  //    writeTypedefTypespec(tp.first.c_str(), m, s, typd->getDefinitionNode(),
+  //                         fC);
+  //  }
+  //}
   // Let decls
   if (!mod->getLetStmts().empty()) {
     for (auto& stmt : mod->getLetStmts()) {

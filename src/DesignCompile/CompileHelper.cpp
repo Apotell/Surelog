@@ -815,6 +815,20 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       enum_name_declaration = fC->Sibling(enum_name_declaration);
     }
 
+    // KS: Test code
+    typedef_typespec* tdTypespec = s.MakeTypedef_typespec();
+    tdTypespec->VpiName(name);
+    fC->populateCoreMembers(type_name, type_name, tdTypespec);
+    // tdTypespec->VpiParent(newTypeDef);
+    ref_typespec* ref_type = s.MakeRef_typespec();
+    // ref_type->VpiName(fC->SymName(stype));
+    tdTypespec->Typedef_alias(ref_type);
+    ref_type->Actual_typespec(enum_t);
+    fC->populateCoreMembers(data_type, type_declaration, ref_type);
+    ref_type->VpiParent(tdTypespec);
+    newTypeDef->setTypespec(tdTypespec);
+    //
+
     type->setDefinition(newTypeDef);
     if (scope) scope->insertTypeDef(newTypeDef);
     newType = newTypeDef;
@@ -834,12 +848,26 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
     if ((fC->Type(stype) == VObjectType::slStringConst) ||
         fC->Type(stype) == VObjectType::paClass_scope) {
       TypeDef* newTypeDef =
+
           new TypeDef(fC, type_declaration, stype, name, forwardDeclaration);
       type->setDefinition(newTypeDef);
       if (scope) scope->insertTypeDef(newTypeDef);
       DummyType* dummy = new DummyType(fC, type_name, stype);
       newTypeDef->setDataType(dummy);
       newTypeDef->setDefinition(dummy);
+      // KS: Test code
+      typedef_typespec* tdTypespec = s.MakeTypedef_typespec();
+      tdTypespec->VpiName(name);
+      fC->populateCoreMembers(type_name, type_name, tdTypespec);
+      //tdTypespec->VpiParent(newTypeDef);
+      ref_typespec* ref_type = s.MakeRef_typespec();
+      ref_type->VpiName(fC->SymName(stype));
+      tdTypespec->Typedef_alias(ref_type);
+      fC->populateCoreMembers(stype, stype, ref_type);
+      ref_type->VpiParent(tdTypespec);
+      newTypeDef->setTypespec(tdTypespec);
+      //
+      
       // Don't create the typespec here, as it is most likely going to be
       // incomplete at compilation time, except for packages and FileContent
       if ((m_reduce == Reduce::Yes) && (reduce == Reduce::Yes) &&
@@ -1906,14 +1934,22 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
                           compileDesign, reduce, uhdmScope, nullptr, true);
     checkForLoops(false);
   }
+  if (tps && tps->UhdmType() == uhdmpacked_array_typespec) {
+    if (ref_typespec* ert = ((packed_array_typespec*)tps)->Elem_typespec()) {
+      tps = ert->Actual_typespec();
+    }
+  }
+  typespec* org_tps = tps;
+
+  while (tps != nullptr && tps->UhdmType() == UHDM::uhdmtypedef_typespec) {
+    tps = static_cast<UHDM::typedef_typespec*>(tps)
+              ->Typedef_alias()
+              ->Actual_typespec();
+  }
   if (tps) {
     typespec* tmp = tps;
     UHDM_OBJECT_TYPE ttmp = tmp->UhdmType();
-    if (ttmp == uhdmpacked_array_typespec) {
-      if (ref_typespec* ert = ((packed_array_typespec*)tmp)->Elem_typespec()) {
-        tmp = ert->Actual_typespec();
-      }
-    } else if (ttmp == uhdmstruct_typespec) {
+     if (ttmp == uhdmstruct_typespec) {
       struct_typespec* the_tps = (struct_typespec*)tmp;
       if (the_tps->Members()) {
         isNet = true;
@@ -2402,6 +2438,10 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
   }
 
   if (obj) {
+    if (UHDM::variables* v = any_cast<UHDM::variables>(obj)) {
+      if (v->Typespec() != nullptr && org_tps && org_tps->UhdmType() == uhdmtypedef_typespec)
+        v->Typespec()->Actual_typespec(org_tps);
+    }
     fC->populateCoreMembers(sig->getNameId(), sig->getNameId(), obj);
   } else {
     // Unsupported type

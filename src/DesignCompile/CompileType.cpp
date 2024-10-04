@@ -735,6 +735,11 @@ any* CompileHelper::compileVariable(
     if (const TypeDef* tdef = datatype_cast<const TypeDef*>(dtype)) {
       if (tdef->getTypespec()) {
         tps = tdef->getTypespec();
+        while (tps != nullptr && tps->UhdmType() == UHDM::uhdmtypedef_typespec) {
+          tps = static_cast<UHDM::typedef_typespec*>(tps)
+                    ->Typedef_alias()
+                    ->Actual_typespec();
+        }
         found = false;
         break;
       }

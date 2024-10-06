@@ -659,13 +659,37 @@ MacroInfo* PreprocessFile::recordMacro(
               << std::endl;
   }
 
+  std::vector<std::string> body_tokens;
+  body_tokens.reserve(tokens.size());
+  std::vector<LineColumn> token_positions;
+  token_positions.reserve(positions.size());
+
+  for (size_t i = 0, ni = tokens.size(); i < ni; ++i) {
+    const std::string& tok = tokens[i];
+    const LineColumn& lc = positions[i];
+    if (tok == "``_``") {
+      body_tokens.emplace_back("``");
+      body_tokens.emplace_back("_");
+      body_tokens.emplace_back("``");
+      token_positions.emplace_back(lc.first, lc.second);
+      token_positions.emplace_back(lc.first, lc.second + 2);
+      token_positions.emplace_back(lc.first, lc.second + 3);
+    } else {
+      body_tokens.emplace_back(tok);
+      token_positions.emplace_back(lc);
+    }
+  }
+
+  StringUtils::replaceInTokenVector(body_tokens, "`\"", "\"");
+  StringUtils::replaceInTokenVector(body_tokens, "`\\`\"", "\\\"");
+
   // std::cout << "PP RECORDING MACRO: " << name  << ", FILE: " <<
   // getSymbol(getFileId(line)) << "" << std::endl;
 
   MacroInfo* macroInfo = new MacroInfo(
       name, arguments.empty() ? MacroInfo::NO_ARGS : MacroInfo::WITH_ARGS,
       getFileId(startLine), startLine, startColumn, endLine, endColumn,
-      bodyStartColumn, args, tokens, positions);
+      bodyStartColumn, args, body_tokens, token_positions);
   MacroStorageRef::iterator itr = m_macros.find(name);
   if (itr == m_macros.end()) {
     itr = m_macros.emplace(name, std::vector<MacroInfo*>()).first;
@@ -699,10 +723,34 @@ MacroInfo* PreprocessFile::recordMacro(
     uint16_t bodyStartColumn, const std::vector<std::string>& arguments,
     const std::vector<std::string>& tokens,
     const std::vector<LineColumn>& positions) {
+  std::vector<std::string> body_tokens;
+  body_tokens.reserve(tokens.size());
+  std::vector<LineColumn> token_positions;
+  token_positions.reserve(positions.size());
+
+  for (size_t i = 0, ni = tokens.size(); i < ni; ++i) {
+    const std::string& tok = tokens[i];
+    const LineColumn& lc = positions[i];
+    if (tok == "``_``") {
+      body_tokens.emplace_back("``");
+      body_tokens.emplace_back("_");
+      body_tokens.emplace_back("``");
+      token_positions.emplace_back(lc.first, lc.second);
+      token_positions.emplace_back(lc.first, lc.second + 2);
+      token_positions.emplace_back(lc.first, lc.second + 3);
+    } else {
+      body_tokens.emplace_back(tok);
+      token_positions.emplace_back(lc);
+    }
+  }
+
+  StringUtils::replaceInTokenVector(body_tokens, "`\"", "\"");
+  StringUtils::replaceInTokenVector(body_tokens, "`\\`\"", "\\\"");
+
   MacroInfo* macroInfo = new MacroInfo(
       name, arguments.empty() ? MacroInfo::NO_ARGS : MacroInfo::WITH_ARGS,
       fileId, startLine, startColumn, endLine, endColumn, bodyStartColumn,
-      arguments, tokens, positions);
+      arguments, body_tokens, token_positions);
   MacroStorageRef::iterator itr = m_macros.find(name);
   if (itr == m_macros.end()) {
     itr = m_macros.emplace(name, std::vector<MacroInfo*>()).first;
@@ -845,18 +893,14 @@ static std::string_view getFirstNonEmptyToken(
   return kEmpty;
 }
 
-std::optional<std::string> PreprocessFile::evaluateMacro_(
+std::tuple<bool, std::string, std::vector<LineColumn>>
+PreprocessFile::evaluateMacro_(
     std::string_view name, std::vector<std::string>& actual_args,
     PreprocessFile* callingFile, uint32_t callingLine, LoopCheck& loopChecker,
     MacroInfo* macroInfo, SpecialInstructions& instructions,
     PathId embeddedMacroCallFile, uint32_t embeddedMacroCallLine,
     uint16_t embeddedMacroCallColumn) {
   FileSystem* const fileSystem = FileSystem::getInstance();
-  std::string result;
-  bool found = false;
-  const std::vector<std::string>& formal_args = macroInfo->m_arguments;
-  const std::vector<std::string>& orig_body_tokens = macroInfo->m_tokens;
-  const std::vector<LineColumn>& orig_token_positions = macroInfo->m_positions;
 
   if (instructions.m_check_macro_loop) {
     bool loop = loopChecker.addEdge(callingFile->m_macroId, getId(name));
@@ -871,34 +915,16 @@ std::optional<std::string> PreprocessFile::evaluateMacro_(
                          macroInfo->m_startColumn, getId(name));
           Error err(ErrorDefinition::PP_RECURSIVE_MACRO_DEFINITION, loc, exloc);
           addError(err);
-          return std::optional<std::string>();
+          return {false, "", {}};
         }
       }
     }
   }
+  std::string result;
+  bool found = false;
+  const std::vector<std::string>& formal_args = macroInfo->m_arguments;
   // Don't modify the actual tokens of the macro, make a copy...
-  std::vector<std::string> body_tokens;
-  body_tokens.reserve(orig_body_tokens.size());
-  std::vector<LineColumn> token_positions;
-  token_positions.reserve(orig_token_positions.size());
-  for (size_t i = 0, ni = orig_body_tokens.size(); i < ni; ++i) {
-    const std::string& tok = orig_body_tokens[i];
-    const LineColumn& lc = orig_token_positions[i];
-    if (tok == "``_``") {
-      body_tokens.emplace_back("``");
-      body_tokens.emplace_back("_");
-      body_tokens.emplace_back("``");
-      token_positions.emplace_back(lc.first, lc.second);
-      token_positions.emplace_back(lc.first, lc.second + 2);
-      token_positions.emplace_back(lc.first, lc.second + 3);
-    } else {
-      body_tokens.emplace_back(tok);
-      token_positions.emplace_back(lc);
-    }
-  }
-
-  StringUtils::replaceInTokenVector(body_tokens, "`\"", "\"");
-  StringUtils::replaceInTokenVector(body_tokens, "`\\`\"", "\\\"");
+  std::vector<std::string> body_tokens(macroInfo->m_tokens);
 
   // argument substitution
   for (std::string& actual_arg : actual_args) {
@@ -1004,13 +1030,24 @@ std::optional<std::string> PreprocessFile::evaluateMacro_(
           Error err(ErrorDefinition::PP_MACRO_NO_DEFAULT_VALUE, loc, &locs);
           addError(err);
         }
-        return std::optional<std::string>(StrCat("`", name));
+        return {true, StrCat("`", name), {}};
       }
     }
   }
   std::string body;
-  for (const auto& token : body_tokens) {
+  std::vector<LineColumn> token_positions;
+  token_positions.reserve(macroInfo->m_positions.size());
+  uint32_t pos = 1;
+  uint32_t line = 0;
+  for (size_t i = 0, ni = body_tokens.size(); i < ni; ++i) {
+    const auto& token = body_tokens[i];
     body += token;
+    if ((line == 0) || (macroInfo->m_positions[i].first != line)) {
+      line = macroInfo->m_positions[i].first;
+      pos = 1;
+    }
+    token_positions.emplace_back(line, pos);
+    pos += token.length();
   }
   if (!actual_args.empty() && formal_args.empty()) {
     body += "(";
@@ -1078,7 +1115,7 @@ std::optional<std::string> PreprocessFile::evaluateMacro_(
     result = body_short;
     found = true;
   }
-  return found ? std::optional(result) : std::optional<std::string>();
+  return {found, result, token_positions};
 }
 
 MacroInfo* PreprocessFile::getMacro(std::string_view name) {
@@ -1164,7 +1201,7 @@ void PreprocessFile::undefineAllMacros(std::set<PreprocessFile*>& visited) {
   }
 }
 
-std::string PreprocessFile::getMacro(
+std::tuple<bool, std::string, std::vector<LineColumn>> PreprocessFile::getMacro(
     std::string_view name, std::vector<std::string>& arguments,
     PreprocessFile* callingFile, uint32_t callingLine, LoopCheck& loopChecker,
     SpecialInstructions& instructions, PathId embeddedMacroCallFile,
@@ -1193,28 +1230,29 @@ std::string PreprocessFile::getMacro(
     MacroInfo* info = m_compilationUnit->getMacroInfo(name);
     if (instructions.m_evaluate == SpecialInstructions::Evaluate) {
       if (info) {
-        std::optional<std::string> evalResult = evaluateMacro_(
+        auto [succeeded, result, positions] = evaluateMacro_(
             name, arguments, callingFile, callingLine, loopChecker, info,
             instructions, embeddedMacroCallFile, embeddedMacroCallLine,
             embeddedMacroCallColumn);
-        if ((found = evalResult.has_value())) {
-          result = std::regex_replace(evalResult.value(), std::regex("``"), "");
+        if (succeeded) {
+          found = true;
+          result = std::regex_replace(result, std::regex("``"), "");
+          return {true, result, positions};
         }
       }
     } else if (info) {
-      found = true;
-      result.clear();
+      return {true, "", {}};
     }
   }
   if (found == false) {
     if (instructions.m_as_is_undefined_macro ==
         SpecialInstructions::AsIsUndefinedMacro) {
-      return StrCat("`", name);
+      return {true, StrCat("`", name), {}};
     } else {
-      return MacroNotDefined;
+      return {false, MacroNotDefined, {}};
     }
   } else {
-    return result;
+    return {true, result, {}};
   }
 }
 

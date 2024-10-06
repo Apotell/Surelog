@@ -483,7 +483,7 @@ void SV3_1aPpTreeShapeListener::enterMacroInstanceWithArgs(
     std::vector<std::string> actualArgs;
     ParseUtils::tokenizeAtComma(actualArgs, tokens);
     macroName.erase(macroName.begin());
-    std::string macroBody;
+
     int32_t openingIndex = -1;
     if (!m_pp->isMacroBody()) {
       m_pp->getSourceFile()->m_loopChecker.clear();
@@ -494,6 +494,7 @@ void SV3_1aPpTreeShapeListener::enterMacroInstanceWithArgs(
     LineColumn endLineCol =
         ParseUtils::getEndLineColumn(m_pp->getTokenStream(), ctx);
 
+    std::tuple<bool, std::string, std::vector<LineColumn>> evalResult;
     MacroInfo *macroInf = m_pp->getMacro(macroName);
     if (macroInf) {
       PathId fileId = m_pp->getRawFileId();
@@ -519,15 +520,18 @@ void SV3_1aPpTreeShapeListener::enterMacroInstanceWithArgs(
           /* symbolStartColumn */ startLineCol.second,
           /* symbolEndLine */ endLineCol.first,
           /* symbolEndColumn */ endLineCol.second);
-      macroBody = m_pp->getMacro(
+      evalResult = m_pp->getMacro(
           macroName, actualArgs, m_pp, startLineCol.first,
           m_pp->getSourceFile()->m_loopChecker, m_pp->m_instructions,
           macroInf->m_fileId, macroInf->m_startLine, macroInf->m_startColumn);
+      m_pp->getSourceFile()->getIncludeFileInfo(openingIndex).m_tokenPositions =
+          std::get<2>(evalResult);
     } else {
-      macroBody = m_pp->getMacro(
+      evalResult = m_pp->getMacro(
           macroName, actualArgs, m_pp, startLineCol.first,
           m_pp->getSourceFile()->m_loopChecker, m_pp->m_instructions);
     }
+    std::string macroBody = std::get<1>(evalResult);
     if (m_pp->m_debugMacro)
       std::cout << "FIND MACRO: " << macroName << " ARGS: " << macroArgs
                 << " BODY: |" << macroBody << "|" << std::endl;
@@ -638,8 +642,8 @@ void SV3_1aPpTreeShapeListener::enterMacroInstanceNoArgs(
       m_pp->getSourceFile()->m_loopChecker.clear();
     }
 
-    std::string macroBody;
     int32_t openingIndex = -1;
+    std::tuple<bool, std::string, std::vector<LineColumn>> evalResult;
     MacroInfo *macroInf = m_pp->getMacro(macroName);
     if (macroInf) {
       if (macroInf->m_type == MacroInfo::WITH_ARGS) {
@@ -675,15 +679,18 @@ void SV3_1aPpTreeShapeListener::enterMacroInstanceNoArgs(
           /* symbolStartColumn */ startLineCol.second,
           /* symbolEndLine */ endLineCol.first,
           /* symbolEndColumn */ endLineCol.second);
-      macroBody = m_pp->getMacro(
+      evalResult = m_pp->getMacro(
           macroName, args, m_pp, startLineCol.first,
           m_pp->getSourceFile()->m_loopChecker, m_pp->m_instructions,
           macroInf->m_fileId, macroInf->m_startLine, macroInf->m_startColumn);
+      m_pp->getSourceFile()->getIncludeFileInfo(openingIndex).m_tokenPositions =
+          std::get<2>(evalResult);
     } else {
-      macroBody = m_pp->getMacro(macroName, args, m_pp, startLineCol.first,
+      evalResult = m_pp->getMacro(macroName, args, m_pp, startLineCol.first,
                                  m_pp->getSourceFile()->m_loopChecker,
                                  m_pp->m_instructions);
     }
+    std::string macroBody = std::get<1>(evalResult);
     if (m_pp->m_debugMacro)
       std::cout << "FIND MACRO: " << macroName << ", BODY: |" << macroBody
                 << "|" << std::endl;
@@ -1123,7 +1130,7 @@ void SV3_1aPpTreeShapeListener::enterIfdef_directive(
   }
   PreprocessFile::SpecialInstructions instr = m_pp->m_instructions;
   instr.m_evaluate = PreprocessFile::SpecialInstructions::DontEvaluate;
-  std::string macroBody =
+  auto [r, macroBody, p] =
       m_pp->getMacro(item.m_macroName, args, m_pp, 0,
                      m_pp->getSourceFile()->m_loopChecker, instr);
   item.m_defined = (macroBody != PreprocessFile::MacroNotDefined);
@@ -1161,7 +1168,7 @@ void SV3_1aPpTreeShapeListener::enterIfndef_directive(
   }
   PreprocessFile::SpecialInstructions instr = m_pp->m_instructions;
   instr.m_evaluate = PreprocessFile::SpecialInstructions::DontEvaluate;
-  std::string macroBody =
+  auto [r, macroBody, p] =
       m_pp->getMacro(item.m_macroName, args, m_pp, 0,
                      m_pp->getSourceFile()->m_loopChecker, instr);
   item.m_defined = (macroBody != PreprocessFile::MacroNotDefined);
@@ -1200,7 +1207,7 @@ void SV3_1aPpTreeShapeListener::enterElsif_directive(
   }
   PreprocessFile::SpecialInstructions instr = m_pp->m_instructions;
   instr.m_evaluate = PreprocessFile::SpecialInstructions::DontEvaluate;
-  std::string macroBody =
+  auto [r, macroBody, p] =
       m_pp->getMacro(item.m_macroName, args, m_pp, 0,
                      m_pp->getSourceFile()->m_loopChecker, instr);
   item.m_defined =
@@ -1584,7 +1591,8 @@ void SV3_1aPpTreeShapeListener::enterMultiline_args_macro_definition(
 
     const LineColumn startLineCol =
         ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
-    LineColumn endLineCol = ParseUtils::getEndLineColumn(tokens.back());
+    LineColumn endLineCol = ParseUtils::getEndLineColumn(
+        tokens.empty() ? ctx->getStop() : tokens.back());
     const LineColumn bodyStartLineCol =
         ParseUtils::getLineColumn(m_pp->getTokenStream(), cBody);
     const uint32_t nCRinArgs = std::count(text.begin(), text.end(), '\n');

@@ -31,7 +31,6 @@
 #include <Surelog/SourceCompile/IncludeFileInfo.h>
 #include <Surelog/SourceCompile/LoopCheck.h>
 
-#include <optional>
 #include <set>
 #include <vector>
 
@@ -106,14 +105,12 @@ class PreprocessFile final {
                          const std::vector<std::string>& formal_arguments,
                          const std::vector<std::string>& body,
                          const std::vector<LineColumn>& positions);
-  std::string getMacro(std::string_view name,
-                       std::vector<std::string>& actual_arguments,
-                       PreprocessFile* callingFile, uint32_t callingLine,
-                       LoopCheck& loopChecker,
-                       SpecialInstructions& instructions,
-                       PathId embeddedMacroCallFile = BadPathId,
-                       uint32_t embeddedMacroCallLine = 0,
-                       uint16_t embeddedMacroCallColumn = 0);
+  std::tuple<bool, std::string, std::vector<LineColumn>> getMacro(
+      std::string_view name, std::vector<std::string>& actual_arguments,
+      PreprocessFile* callingFile, uint32_t callingLine, LoopCheck& loopChecker,
+      SpecialInstructions& instructions,
+      PathId embeddedMacroCallFile = BadPathId,
+      uint32_t embeddedMacroCallLine = 0, uint16_t embeddedMacroCallColumn = 0);
   bool deleteMacro(std::string_view name, std::set<PreprocessFile*>& visited);
   void undefineAllMacros(std::set<PreprocessFile*>& visited);
   bool isMacroBody() const { return !m_macroBody.empty(); }
@@ -334,7 +331,7 @@ class PreprocessFile final {
   }
 
  private:
-  std::optional<std::string> evaluateMacro_(
+  std::tuple<bool, std::string, std::vector<LineColumn>> evaluateMacro_(
       std::string_view name, std::vector<std::string>& arguments,
       PreprocessFile* callingFile, uint32_t callingLine, LoopCheck& loopChecker,
       MacroInfo* macroInfo, SpecialInstructions& instructions,

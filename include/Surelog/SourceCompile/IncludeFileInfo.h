@@ -27,6 +27,7 @@
 
 #include <Surelog/Common/PathId.h>
 #include <Surelog/Common/SymbolId.h>
+#include <Surelog/Common/Containers.h>
 
 #include <vector>
 
@@ -90,6 +91,7 @@ class IncludeFileInfo final {
   int32_t m_indexOpposite = -1;
 
   std::vector<MacroInfo *> m_macroDefinitions;
+  std::vector<LineColumn> m_tokenPositions;
 };
 
 }  // namespace SURELOG

@@ -81,8 +81,10 @@ class ParseFile final {
   PathId getPpFileId() const { return m_ppFileId; }
   uint32_t getLineNb(uint32_t line);
 
-  std::tuple<PathId, uint32_t, uint16_t> mapLocation(uint32_t line,
-                                                     uint16_t column);
+  std::tuple<PathId, uint32_t, uint16_t> mapStartLocation(uint32_t line,
+                                                          uint16_t column);
+  std::tuple<PathId, uint32_t, uint16_t> mapEndLocation(uint32_t line,
+                                                        uint16_t column);
 
   class LineTranslationInfo {
    public:
@@ -131,10 +133,9 @@ class ParseFile final {
 
   bool parseOneFile_(PathId fileId, uint32_t lineOffset);
   void buildLocationCache();
-  void buildLocationCache_recurse_for_includes(uint32_t openIndex,
-                                               uint32_t closeIndex);
-  uint32_t buildLocationCache_recurse_for_macros(uint32_t openIndex,
-                                                 uint32_t closeIndex);
+  void buildLocationCache_recurse_for_includes(uint32_t index);
+  void buildLocationCache_recurse_for_macros(uint32_t index);
+  void buildLocationCache(uint32_t index, int32_t parentIndex, uint32_t parentTargetLine);
   void printLocationCache();
 
   // For file chunk:
@@ -146,11 +147,10 @@ class ParseFile final {
   std::string m_profileInfo;
   std::string m_sourceText;  // For Unit tests
 
-  enum class Delta { Absolute, Relative };
-  void addLocationCacheEntry(uint32_t sourceLine, Delta delta, PathId fileId,
-                             uint32_t line, uint32_t column, int32_t offset);
+  void addLocationCacheEntry(uint32_t sourceLine, PathId fileId, uint32_t line,
+                             uint32_t column, int32_t offset);
 
-  typedef std::vector<std::tuple<Delta, PathId, uint32_t, uint32_t, int32_t>>
+  typedef std::vector<std::tuple<PathId, uint32_t, uint32_t, int32_t>>
       location_cache_entry_t;
   typedef std::vector<location_cache_entry_t> location_cache_t;
   location_cache_t m_locationCache;

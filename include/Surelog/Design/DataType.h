@@ -112,7 +112,7 @@ class DataType : public RTTI {
   virtual bool isNet() const { return false; }
 
   UHDM::typespec* getTypespec() const { return m_typespec; }
-  void setTypespec(UHDM::typespec* typespec) { m_typespec = typespec; }
+  virtual void setTypespec(UHDM::typespec* typespec) { m_typespec = typespec; }
 
   UHDM::typespec* getUnpackedTypespec() const { return m_unpacked_typespec; }
   void setUnpackedTypespec(UHDM::typespec* typespec) {

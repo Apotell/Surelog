@@ -655,6 +655,21 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
         ts->VpiName(fullName);
         st->setTypespec(ts);
       }
+
+      // KS: Test code
+      typedef_typespec* tdTypespec = s.MakeTypedef_typespec();
+      tdTypespec->VpiName(name);
+      fC->populateCoreMembers(type_name, type_name, tdTypespec);
+      tdTypespec->VpiParent(pstmt);
+      ref_typespec* ref_type = s.MakeRef_typespec();
+      // ref_type->VpiName(fC->SymName(stype));
+      tdTypespec->Typedef_alias(ref_type);
+      ref_type->Actual_typespec(ts);
+      fC->populateCoreMembers(data_type, type_declaration, ref_type);
+      ref_type->VpiParent(tdTypespec);
+      newTypeDef->setTypespec(tdTypespec);
+      //
+
     } else if (struct_or_union_type == VObjectType::paUnion_keyword) {
       Union* st = new Union(fC, type_name, enum_base_type);
       newTypeDef->setDataType(st);
@@ -689,6 +704,19 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
         ts->VpiName(fullName);
         st->setTypespec(ts);
       }
+      // KS: Test code
+      typedef_typespec* tdTypespec = s.MakeTypedef_typespec();
+      tdTypespec->VpiName(name);
+      fC->populateCoreMembers(type_name, type_name, tdTypespec);
+      tdTypespec->VpiParent(pstmt);
+      ref_typespec* ref_type = s.MakeRef_typespec();
+      // ref_type->VpiName(fC->SymName(stype));
+      tdTypespec->Typedef_alias(ref_type);
+      ref_type->Actual_typespec(ts);
+      fC->populateCoreMembers(data_type, type_declaration, ref_type);
+      ref_type->VpiParent(tdTypespec);
+      newTypeDef->setTypespec(tdTypespec);
+      //
     }
 
     if (scope) {
@@ -819,7 +847,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
     typedef_typespec* tdTypespec = s.MakeTypedef_typespec();
     tdTypespec->VpiName(name);
     fC->populateCoreMembers(type_name, type_name, tdTypespec);
-    // tdTypespec->VpiParent(newTypeDef);
+    tdTypespec->VpiParent(pstmt);
     ref_typespec* ref_type = s.MakeRef_typespec();
     // ref_type->VpiName(fC->SymName(stype));
     tdTypespec->Typedef_alias(ref_type);
@@ -859,7 +887,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       typedef_typespec* tdTypespec = s.MakeTypedef_typespec();
       tdTypespec->VpiName(name);
       fC->populateCoreMembers(type_name, type_name, tdTypespec);
-      //tdTypespec->VpiParent(newTypeDef);
+      tdTypespec->VpiParent(pstmt);
       ref_typespec* ref_type = s.MakeRef_typespec();
       ref_type->VpiName(fC->SymName(stype));
       tdTypespec->Typedef_alias(ref_type);

@@ -514,6 +514,8 @@ bool ErrorDefinition::init() {
       "Object %s has duplicates");
   rec(INTEGRITY_CHECK_ACTUAL_CANNOT_BE_NULL, ERROR, INTG,
       "Object %s actual cannot be null");
+  rec(INTEGRITY_CHECK_TYPEDEF_TYPESPEC, ERROR, INTG,
+      "Missing typedef_typespec for Object %s");
   return true;
 }
 

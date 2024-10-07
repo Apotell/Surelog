@@ -106,7 +106,8 @@ class UhdmWriter final {
                          UHDM::gen_scope* m, ExprBuilder& exprBuilder);
   void writePackage(Package* pack, UHDM::package* p, UHDM::Serializer& s,
                     bool elaborated, const FileContent* fC);
-  void writeTypedefTypespec(std::string_view typedefName, UHDM::any* p, UHDM::Serializer& s, NodeId id,
+  void writeTypedefTypespec(TypeDef* tyDef, UHDM::any* p,
+                            UHDM::Serializer& s, NodeId id,
                             const FileContent* fC);
   void writeClasses(ClassNameClassDefinitionMultiMap& orig_classes,
                     UHDM::Serializer& s, UHDM::BaseClass* parent);

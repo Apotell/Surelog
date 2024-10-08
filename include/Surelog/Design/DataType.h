@@ -118,8 +118,9 @@ class DataType : public RTTI {
   void setUnpackedTypespec(UHDM::typespec* typespec) {
     m_unpacked_typespec = typespec;
   }
-
+  const int32_t d_id = ++s_id;
  protected:
+  static int32_t s_id;
   const FileContent* m_fileContent = nullptr;
   NodeId m_id;
   std::string m_name;

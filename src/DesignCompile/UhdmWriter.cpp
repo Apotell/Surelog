@@ -1078,7 +1078,7 @@ void UhdmWriter::writeTypedefTypespec(TypeDef* tyDef,
     
     Location loc(fileSystem->toPathId(fC->getName(), symbols), fC->Line(id),
                  fC->Column(id),
-                 symbols->registerSymbol(std::to_string((int)fC->getType())));
+                 symbols->registerSymbol(std::to_string(tyDef->d_id)));
     Error err(ErrorDefinition::INTEGRITY_CHECK_TYPEDEF_TYPESPEC, loc);
     errorContainer->addError(err);
   }

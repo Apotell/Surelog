@@ -555,6 +555,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       resolutionFunctionName = name;
     } else {
       array_tps = s.MakeArray_typespec();
+      array_tps->VpiParent(pstmt);
       fC->populateCoreMembers(
           data_type, Variable_dimension ? Variable_dimension : data_type,
           array_tps);
@@ -600,6 +601,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
   if (Packed_dimension &&
       (fC->Type(Packed_dimension) == VObjectType::paPacked_dimension)) {
     packed_array_tps = s.MakePacked_array_typespec();
+    packed_array_tps->VpiParent(pstmt);
     fC->populateCoreMembers(data_type, data_type, packed_array_tps);
     int32_t size;
     if (VectorOfrange* ranges =
@@ -634,7 +636,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
         ts->Instance(scope->getUhdmModel<UHDM::instance>());
       }
       if (array_tps) {
-        st->setTypespec(array_tps);
+        //st->setTypespec(array_tps);
         if (array_tps->Elem_typespec() == nullptr) {
           ref_typespec* rt = s.MakeRef_typespec();
           rt->VpiParent(array_tps);
@@ -643,7 +645,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
         array_tps->Elem_typespec()->Actual_typespec(ts);
         array_tps->VpiName(fullName);
       } else if (packed_array_tps) {
-        st->setTypespec(packed_array_tps);
+        //st->setTypespec(packed_array_tps);
         if (packed_array_tps->Elem_typespec() == nullptr) {
           ref_typespec* rt = s.MakeRef_typespec();
           rt->VpiParent(packed_array_tps);
@@ -653,7 +655,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
         packed_array_tps->VpiName(fullName);
       } else {
         ts->VpiName(fullName);
-        st->setTypespec(ts);
+        //st->setTypespec(ts);
       }
 
       // KS: Test code
@@ -683,7 +685,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
         ts->Instance(scope->getUhdmModel<UHDM::instance>());
       }
       if (array_tps) {
-        st->setTypespec(array_tps);
+        //st->setTypespec(array_tps);
         if (array_tps->Elem_typespec() == nullptr) {
           ref_typespec* rt = s.MakeRef_typespec();
           rt->VpiParent(array_tps);
@@ -692,7 +694,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
         array_tps->Elem_typespec()->Actual_typespec(ts);
         array_tps->VpiName(fullName);
       } else if (packed_array_tps) {
-        st->setTypespec(packed_array_tps);
+        //st->setTypespec(packed_array_tps);
         if (packed_array_tps->Elem_typespec() == nullptr) {
           ref_typespec* rt = s.MakeRef_typespec();
           rt->VpiParent(packed_array_tps);
@@ -702,7 +704,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
         packed_array_tps->VpiName(fullName);
       } else {
         ts->VpiName(fullName);
-        st->setTypespec(ts);
+        //st->setTypespec(ts);
       }
       // KS: Test code
       typedef_typespec* tdTypespec = s.MakeTypedef_typespec();
@@ -1073,7 +1075,20 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
           ts->Instance(scope->getUhdmModel<UHDM::instance>());
         }
         ts->VpiName(name);
-        simple->setTypespec(ts);
+        //simple->setTypespec(ts);
+        // KS: Test code
+        typedef_typespec* tdTypespec = s.MakeTypedef_typespec();
+        tdTypespec->VpiName(name);
+        fC->populateCoreMembers(type_name, type_name, tdTypespec);
+        tdTypespec->VpiParent(pstmt);
+        ref_typespec* ref_type = s.MakeRef_typespec();
+        ref_type->VpiName(fC->SymName(stype));
+        tdTypespec->Typedef_alias(ref_type);
+        fC->populateCoreMembers(stype, stype, ref_type);
+        ref_type->VpiParent(tdTypespec);
+        ref_type->Actual_typespec(ts);
+        newTypeDef->setTypespec(tdTypespec);
+        //
       }
       newType = newTypeDef;
     }

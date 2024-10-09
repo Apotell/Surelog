@@ -517,6 +517,19 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       TypeDef* newTypeDef = new TypeDef(fC, type_declaration, type_name, name);
       scope->insertTypeDef(newTypeDef);
       newType = newTypeDef;
+      // KS: Test code
+      typedef_typespec* tdTypespec = s.MakeTypedef_typespec();
+      tdTypespec->VpiName(name);
+      fC->populateCoreMembers(type_name, type_name, tdTypespec);
+      tdTypespec->VpiParent(pstmt);
+      ref_typespec* ref_type = s.MakeRef_typespec();
+      ref_type->VpiName(name);
+      tdTypespec->Typedef_alias(ref_type);
+      //ref_type->Actual_typespec(ts);
+      fC->populateCoreMembers(type_name, type_name, ref_type);
+      ref_type->VpiParent(tdTypespec);
+      newTypeDef->setTypespec(tdTypespec);
+      //
       return newType;
     }
   } else if (dtype == VObjectType::slStringConst) {

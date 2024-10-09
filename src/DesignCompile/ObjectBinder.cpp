@@ -337,6 +337,7 @@ const UHDM::any* ObjectBinder::findInVectorOfAny(
     if (c->UhdmType() == UHDM::uhdmref_module) continue;
     if (c->UhdmType() == UHDM::uhdmref_obj) continue;
     if (c->UhdmType() == UHDM::uhdmvar_select) continue;
+    if (object->VpiParent() == c) continue;
 
     if (any_cast<UHDM::typespec>(c) == nullptr) {
       if (any_cast<UHDM::ref_obj>(object) != nullptr) {
@@ -588,6 +589,7 @@ const UHDM::any* ObjectBinder::findInFor_stmt(
         if (lhs->UhdmType() == UHDM::uhdmref_module) continue;
         if (lhs->UhdmType() == UHDM::uhdmref_obj) continue;
         if (lhs->UhdmType() == UHDM::uhdmvar_select) continue;
+        if (object->VpiParent() == lhs) continue;
         if (lhs->VpiName() == name) return lhs;
         if (lhs->VpiName() == shortName) return lhs;
       }
@@ -648,6 +650,7 @@ const UHDM::any* ObjectBinder::findInScope_sub(
         if (lhs->UhdmType() == UHDM::uhdmref_module) continue;
         if (lhs->UhdmType() == UHDM::uhdmref_obj) continue;
         if (lhs->UhdmType() == UHDM::uhdmvar_select) continue;
+        if (object->VpiParent() == lhs) continue;
         if (lhs->VpiName() == name) return lhs;
         if (lhs->VpiName() == shortName) return lhs;
       }

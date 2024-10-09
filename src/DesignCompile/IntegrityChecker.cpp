@@ -418,7 +418,7 @@ void IntegrityChecker::reportInvalidNames(const UHDM::any* const object) const {
               ((UHDM::typespec*)parent)->Typedef_alias()) {
         if (!shouldReport && !ref_tps->VpiName().empty() &&
             ref_tps->Actual_typespec()!= nullptr)
-          shouldReport = ref_tps->VpiName() == ref_tps->Actual_typespec()->VpiName();
+          shouldReport = !areNamedSame(ref_tps, ref_tps->Actual_typespec());
       }
     } else if (const UHDM::any* actual =
                    static_cast<const UHDM::ref_typespec*>(object)

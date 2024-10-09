@@ -640,7 +640,7 @@ UHDM::any* CompileHelper::compileVariable(
             if (typespec* tps = dtype->getTypespec()) {
               var = getSimpleVarFromTypespec(fC, declarationId, nameId, tps,
                                              ranges, compileDesign);
-              if (ts) {
+              if (ts && var) {
                 if (var->Typespec() == nullptr) {
                   ref_typespec* tsRef = s.MakeRef_typespec();
                   tsRef->VpiParent(var);

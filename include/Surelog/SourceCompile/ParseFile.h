@@ -82,7 +82,7 @@ class ParseFile final {
   uint32_t getLineNb(uint32_t line);
 
   std::tuple<PathId, uint32_t, uint16_t> mapLocation(uint32_t line,
-                                                     uint16_t column);
+                                                     uint16_t column, bool isStart);
 
   class LineTranslationInfo {
    public:

@@ -687,8 +687,8 @@ void SV3_1aPpTreeShapeListener::enterMacroInstanceNoArgs(
           std::get<2>(evalResult);
     } else {
       evalResult = m_pp->getMacro(macroName, args, m_pp, startLineCol.first,
-                                 m_pp->getSourceFile()->m_loopChecker,
-                                 m_pp->m_instructions);
+                                  m_pp->getSourceFile()->m_loopChecker,
+                                  m_pp->m_instructions);
     }
     std::string macroBody = std::get<1>(evalResult);
     if (m_pp->m_debugMacro)

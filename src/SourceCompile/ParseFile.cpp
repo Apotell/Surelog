@@ -324,8 +324,8 @@ void ParseFile::buildLocationCache_recurse_for_includes(uint32_t index) {
       }
 
       while (sourceLine <= icifi.m_sourceLine) {
-        addLocationCacheEntry(sourceLine++, 1, oifi.m_sectionFileId,
-                              targetLine, 0);
+        addLocationCacheEntry(sourceLine++, 1, oifi.m_sectionFileId, targetLine,
+                              0);
       }
 
       sourceLine = icifi.m_sourceLine;
@@ -582,12 +582,11 @@ void ParseFile::buildLocationCache() {
   while (sourceLine < m_locationCache.size()) {
     m_locationCache[sourceLine++].emplace_back(1, m_fileId, targetLine++, 0);
   }
-
-  printLocationCache();
 }
 
 std::tuple<PathId, uint32_t, uint16_t> ParseFile::mapLocation(uint32_t line,
-                                                              uint16_t column) {
+                                                              uint16_t column,
+                                                              bool isStart) {
   if (!getCompileSourceFile()) return {m_fileId, line, column};
 
   PreprocessFile* pp = getCompileSourceFile()->getPreprocessor();
@@ -602,7 +601,7 @@ std::tuple<PathId, uint32_t, uint16_t> ParseFile::mapLocation(uint32_t line,
     const location_cache_entry_t& entry = m_locationCache[line];
     const uint16_t columnInSource = column;
 
-    PathId fileId;
+    PathId fileId = m_fileId;
     for (const location_cache_entry_t::value_type& item : entry) {
       if (columnInSource >= std::get<0>(item)) {
         fileId = std::get<1>(item);

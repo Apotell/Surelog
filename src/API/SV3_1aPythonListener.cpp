@@ -45,8 +45,7 @@ SV3_1aPythonListener::~SV3_1aPythonListener() {}
 void SV3_1aPythonListener::logError(ErrorDefinition::ErrorType error,
                                     antlr4::ParserRuleContext* ctx,
                                     std::string object, bool printColumn) {
-  LineColumn lineCol =
-      ParseUtils::getLineColumn(getTokenStream(), ctx);
+  LineColumn lineCol = ParseUtils::getLineColumn(getTokenStream(), ctx);
 
   Location loc(
       m_pl->getParseFile()->getFileId(lineCol.first + m_lineOffset),

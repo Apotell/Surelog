@@ -984,6 +984,7 @@ any* CompileHelper::compileVariable(
 
     if (obj != nullptr) {
       obj->VpiName(signame);
+      fC->populateCoreMembers(signalId, signalId, obj);
       obj->VpiParent(pscope);
       if (assignExp != nullptr) {
         assignExp->VpiParent(obj);
@@ -2812,10 +2813,17 @@ UHDM::typespec* CompileHelper::compileTypespec(
         result = compileDatastructureTypespec(
             component, fC, type, compileDesign, reduce, instance, "", typeName);
         if (ranges && result) {
+          UHDM::typespec* temp_result = result;
+          while (result != nullptr &&
+                 result->UhdmType() == UHDM::uhdmtypedef_typespec) {
+            result = static_cast<UHDM::typedef_typespec*>(result)
+                      ->Typedef_alias()
+                      ->Actual_typespec();
+          }
           UHDM_OBJECT_TYPE dstype = result->UhdmType();
           ref_typespec* resultRef = s.MakeRef_typespec();
           resultRef->VpiName(typeName);
-          resultRef->Actual_typespec(result);
+          resultRef->Actual_typespec(temp_result);
           if (dstype == uhdmstruct_typespec || dstype == uhdmenum_typespec ||
               dstype == uhdmunion_typespec) {
             packed_array_typespec* pats = s.MakePacked_array_typespec();

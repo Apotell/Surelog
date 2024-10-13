@@ -649,7 +649,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
         ts->Instance(scope->getUhdmModel<UHDM::instance>());
       }
       if (array_tps) {
-        //st->setTypespec(array_tps);
+        st->setTypespec(array_tps);
         if (array_tps->Elem_typespec() == nullptr) {
           ref_typespec* rt = s.MakeRef_typespec();
           rt->VpiParent(array_tps);
@@ -658,7 +658,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
         array_tps->Elem_typespec()->Actual_typespec(ts);
         array_tps->VpiName(fullName);
       } else if (packed_array_tps) {
-        //st->setTypespec(packed_array_tps);
+        st->setTypespec(packed_array_tps);
         if (packed_array_tps->Elem_typespec() == nullptr) {
           ref_typespec* rt = s.MakeRef_typespec();
           rt->VpiParent(packed_array_tps);
@@ -668,7 +668,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
         packed_array_tps->VpiName(fullName);
       } else {
         ts->VpiName(fullName);
-        //st->setTypespec(ts);
+        st->setTypespec(ts);
       }
 
       // KS: Test code
@@ -680,7 +680,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       // ref_type->VpiName(fC->SymName(stype));
       tdTypespec->Typedef_alias(ref_type);
       ref_type->Actual_typespec(ts);
-      fC->populateCoreMembers(data_type, type_declaration, ref_type);
+      fC->populateCoreMembers(data_type, data_type, ref_type);
       ref_type->VpiParent(tdTypespec);
       newTypeDef->setTypespec(tdTypespec);
       //
@@ -698,7 +698,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
         ts->Instance(scope->getUhdmModel<UHDM::instance>());
       }
       if (array_tps) {
-        //st->setTypespec(array_tps);
+        st->setTypespec(array_tps);
         if (array_tps->Elem_typespec() == nullptr) {
           ref_typespec* rt = s.MakeRef_typespec();
           rt->VpiParent(array_tps);
@@ -707,7 +707,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
         array_tps->Elem_typespec()->Actual_typespec(ts);
         array_tps->VpiName(fullName);
       } else if (packed_array_tps) {
-        //st->setTypespec(packed_array_tps);
+        st->setTypespec(packed_array_tps);
         if (packed_array_tps->Elem_typespec() == nullptr) {
           ref_typespec* rt = s.MakeRef_typespec();
           rt->VpiParent(packed_array_tps);
@@ -717,7 +717,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
         packed_array_tps->VpiName(fullName);
       } else {
         ts->VpiName(fullName);
-        //st->setTypespec(ts);
+        st->setTypespec(ts);
       }
       // KS: Test code
       typedef_typespec* tdTypespec = s.MakeTypedef_typespec();
@@ -728,7 +728,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       // ref_type->VpiName(fC->SymName(stype));
       tdTypespec->Typedef_alias(ref_type);
       ref_type->Actual_typespec(ts);
-      fC->populateCoreMembers(data_type, type_declaration, ref_type);
+      fC->populateCoreMembers(data_type, data_type, ref_type);
       ref_type->VpiParent(tdTypespec);
       newTypeDef->setTypespec(tdTypespec);
       //
@@ -867,7 +867,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
     // ref_type->VpiName(fC->SymName(stype));
     tdTypespec->Typedef_alias(ref_type);
     ref_type->Actual_typespec(enum_t);
-    fC->populateCoreMembers(data_type, type_declaration, ref_type);
+    fC->populateCoreMembers(data_type, data_type, ref_type);
     ref_type->VpiParent(tdTypespec);
     newTypeDef->setTypespec(tdTypespec);
     //
@@ -1990,11 +1990,7 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
                           compileDesign, reduce, uhdmScope, nullptr, true);
     checkForLoops(false);
   }
-  if (tps && tps->UhdmType() == uhdmpacked_array_typespec) {
-    if (ref_typespec* ert = ((packed_array_typespec*)tps)->Elem_typespec()) {
-      tps = ert->Actual_typespec();
-    }
-  }
+
   typespec* org_tps = tps;
 
   while (tps != nullptr && tps->UhdmType() == UHDM::uhdmtypedef_typespec) {
@@ -2005,7 +2001,11 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
   if (tps) {
     typespec* tmp = tps;
     UHDM_OBJECT_TYPE ttmp = tmp->UhdmType();
-     if (ttmp == uhdmstruct_typespec) {
+    if (tps && tps->UhdmType() == uhdmpacked_array_typespec) {
+      if (ref_typespec* ert = ((packed_array_typespec*)tps)->Elem_typespec()) {
+        tmp = ert->Actual_typespec();
+      }
+    } else if (ttmp == uhdmstruct_typespec) {
       struct_typespec* the_tps = (struct_typespec*)tmp;
       if (the_tps->Members()) {
         isNet = true;

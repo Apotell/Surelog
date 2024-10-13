@@ -167,13 +167,13 @@ SV3_1aTreeShapeHelper::getFileLine(antlr4::ParserRuleContext* ctx,
     endColumn = endLineCol.second;
   } else {
     auto [sf, sl, sc] =
-        m_pf->mapStartLocation(lineCol.first + m_lineOffset, lineCol.second);
+        m_pf->mapLocation(lineCol.first + m_lineOffset, lineCol.second);
     fileId = sf;
     line = sl;
     column = sc;
 
-    auto [ef, el, ec] = m_pf->mapStartLocation(endLineCol.first + m_lineOffset,
-                                             endLineCol.second);
+    auto [ef, el, ec] =
+        m_pf->mapLocation(endLineCol.first + m_lineOffset, endLineCol.second);
     endLine = el;
     endColumn = ec;
   }

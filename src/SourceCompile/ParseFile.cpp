@@ -204,10 +204,32 @@ void ParseFile::printLocationCache() {
       std::cout << index << ": " << std::get<0>(entry2) << ", "
                 << PathIdPP(std::get<1>(entry2)) << ", " << std::get<2>(entry2)
                 << ", " << std::get<3>(entry2) << std::endl;
+      // std::cout << index << ": " << PathIdPP(std::get<1>(entry2)) << ", "
+      //           << std::get<2>(entry2) << ", " << std::get<0>(entry2) << ", "
+      //           << std::get<3>(entry2) << std::endl;
     }
     std::cout << std::endl;
     ++index;
   }
+}
+
+inline bool ParseFile::isEmbeddedMacro(int32_t index) const {
+  auto const& infos =
+      getCompileSourceFile()->getPreprocessor()->getIncludeFileInfo();
+  if ((index < 0) || (index >= infos.size())) return false;
+
+  if (infos[index].m_context != IncludeFileInfo::Context::MACRO) {
+    return false;
+  }
+
+  while (--index >= 0) {
+    if ((infos[index].m_context == IncludeFileInfo::Context::MACRO) &&
+        (infos[index].m_action == IncludeFileInfo::Action::PUSH)) {
+      return true;
+    }
+  }
+
+  return false;
 }
 
 inline void ParseFile::addLocationCacheEntry(uint32_t sourceLine,
@@ -240,9 +262,17 @@ void ParseFile::buildLocationCache_recurse_for_includes(uint32_t index) {
   int32_t pic = -1;
   for (int32_t i = index + 1; i < oifi.m_indexOpposite; ++i) {
     const IncludeFileInfo& ioifi = infos[i];
-    if ((ioifi.m_action == IncludeFileInfo::Action::PUSH) &&
-        (ioifi.m_context == IncludeFileInfo::Context::INCLUDE)) {
-      const IncludeFileInfo& icifi = infos[ioifi.m_indexOpposite];
+    if (ioifi.m_action != IncludeFileInfo::Action::PUSH) {
+      continue;
+    }
+
+    const IncludeFileInfo& icifi = infos[ioifi.m_indexOpposite];
+
+    if (ioifi.m_context == IncludeFileInfo::Context::INCLUDE) {
+      if ((pic >= 0) &&
+          (infos[pic].m_context != IncludeFileInfo::Context::INCLUDE)) {
+        pic = -1;
+      }
 
       if (pic >= 0) {
         // Multiple includes on the same line
@@ -280,6 +310,27 @@ void ParseFile::buildLocationCache_recurse_for_includes(uint32_t index) {
       sourceLine = icifi.m_sourceLine;
       targetLine += (ioifi.m_symbolEndLine - ioifi.m_symbolStartLine);
       pic = ioifi.m_indexOpposite;
+    } else if (ioifi.m_context == IncludeFileInfo::Context::MACRO) {
+      if (pic >= 0) {
+        const IncludeFileInfo& picifi = infos[pic];
+        if (picifi.m_sourceLine != ioifi.m_sourceLine) {
+          ++sourceLine;
+        }
+      }
+
+      while (sourceLine < ioifi.m_sourceLine) {
+        addLocationCacheEntry(sourceLine++, 1, oifi.m_sectionFileId,
+                              targetLine++, 0);
+      }
+
+      while (sourceLine <= icifi.m_sourceLine) {
+        addLocationCacheEntry(sourceLine++, 1, oifi.m_sectionFileId,
+                              targetLine, 0);
+      }
+
+      sourceLine = icifi.m_sourceLine;
+      targetLine += (ioifi.m_symbolEndLine - ioifi.m_symbolStartLine) + 1;
+      pic = ioifi.m_indexOpposite;
     }
 
     i = ioifi.m_indexOpposite;
@@ -289,7 +340,8 @@ void ParseFile::buildLocationCache_recurse_for_includes(uint32_t index) {
     const IncludeFileInfo& picifi = infos[pic];
     const IncludeFileInfo& pioifi = infos[picifi.m_indexOpposite];
 
-    if (picifi.m_sourceColumn > 1) {
+    if ((picifi.m_context == IncludeFileInfo::Context::INCLUDE) &&
+        (picifi.m_sourceColumn > 1)) {
       addLocationCacheEntry(
           sourceLine, picifi.m_sourceColumn, oifi.m_sectionFileId,
           targetLine - 1,
@@ -305,25 +357,6 @@ void ParseFile::buildLocationCache_recurse_for_includes(uint32_t index) {
     addLocationCacheEntry(sourceLine++, 1, oifi.m_sectionFileId, targetLine++,
                           0);
   }
-}
-
-inline bool ParseFile::isEmbeddedMacro(int32_t index) const {
-  auto const& infos =
-      getCompileSourceFile()->getPreprocessor()->getIncludeFileInfo();
-  if ((index < 0) || (index >= infos.size())) return false;
-
-  if (infos[index].m_context != IncludeFileInfo::Context::MACRO) {
-    return false;
-  }
-
-  while (--index >= 0) {
-    if ((infos[index].m_context == IncludeFileInfo::Context::MACRO) &&
-        (infos[index].m_action == IncludeFileInfo::Action::PUSH)) {
-      return true;
-    }
-  }
-
-  return false;
 }
 
 void ParseFile::buildLocationCache_recurse_for_macros(

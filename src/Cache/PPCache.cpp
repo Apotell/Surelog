@@ -294,6 +294,14 @@ void PPCache::cacheMacros(::PPCache::Builder builder,
       targetTokens.set(i, sourceTokens[i].c_str());
     }
 
+    const std::vector<LineColumn>& sourcePositions = info->m_positions;
+    ::capnp::List<::LineColumn, ::capnp::Kind::STRUCT>::Builder
+        targetPositions = targetMacro.initPositions(sourcePositions.size());
+    for (size_t i = 0, ni = sourcePositions.size(); i < ni; ++i) {
+      targetPositions[i].setLine(sourcePositions[i].first);
+      targetPositions[i].setColumn(sourcePositions[i].second);
+    }
+
     ++index;
 
     /*

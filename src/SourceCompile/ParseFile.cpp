@@ -236,6 +236,7 @@ PathId ParseFile::getFileId(uint32_t line) {
 }
 
 uint32_t ParseFile::getLineNb(uint32_t line) {
+  if (line == 0) return line;
   if (!getCompileSourceFile()) return line;
   PreprocessFile* pp = getCompileSourceFile()->getPreprocessor();
   if (!pp) return 0;

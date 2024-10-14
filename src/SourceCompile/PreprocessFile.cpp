@@ -394,12 +394,14 @@ bool PreprocessFile::preprocess() {
       int32_t columnNonAscii = 0;
       while (stream.good()) {
         if (c != 0x0D) {
-          if (isascii(c))
+          if (isascii(c)) {
             text += c;
-          else {
-            nonAscii = c;
-            lineNonAscii = lineNb;
-            columnNonAscii = columnNb;
+          } else {
+            if (nonAscii == '\0') {
+              nonAscii = c;
+              lineNonAscii = lineNb;
+              columnNonAscii = columnNb;
+            }
             text += " ";
           }
         }

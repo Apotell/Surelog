@@ -50,10 +50,7 @@ std::string StrCat(Ts&&... args) {
 // string.
 template <typename... Ts>
 void StrAppend(std::string* dest, Ts&&... args) {
-  std::ostringstream out;
-  out << *dest;
-  (out << ... << std::forward<Ts>(args));
-  *dest = out.str();
+  dest->append(StrCat(std::forward<Ts>(args)...));
 }
 
 namespace StringUtils {

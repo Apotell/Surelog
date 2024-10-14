@@ -172,8 +172,8 @@ SV3_1aTreeShapeHelper::getFileLine(antlr4::ParserRuleContext* ctx,
     line = sl;
     column = sc;
 
-    auto [ef, el, ec] =
-        m_pf->mapLocation(endLineCol.first + m_lineOffset, endLineCol.second, false);
+    auto [ef, el, ec] = m_pf->mapLocation(endLineCol.first + m_lineOffset,
+                                          endLineCol.second, false);
     endLine = el;
     endColumn = ec;
   }

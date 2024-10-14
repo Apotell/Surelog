@@ -474,7 +474,8 @@ void PPCache::restoreMacros(SymbolTable& targetSymbols,
     std::vector<LineColumn> positions;
     positions.reserve(sourcePositions.size());
     for (const ::LineColumn::Reader& sourcePosition : sourcePositions) {
-      positions.emplace_back(sourcePosition.getLine(), sourcePosition.getColumn());
+      positions.emplace_back(sourcePosition.getLine(),
+                             sourcePosition.getColumn());
     }
 
     m_pp->recordMacro(

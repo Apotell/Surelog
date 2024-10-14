@@ -587,6 +587,7 @@ void ParseFile::buildLocationCache() {
 std::tuple<PathId, uint32_t, uint16_t> ParseFile::mapLocation(uint32_t line,
                                                               uint16_t column,
                                                               bool isStart) {
+  if ((line == 0) || (column == 0)) return {m_fileId, line, column};
   if (!getCompileSourceFile()) return {m_fileId, line, column};
 
   PreprocessFile* pp = getCompileSourceFile()->getPreprocessor();
@@ -597,7 +598,7 @@ std::tuple<PathId, uint32_t, uint16_t> ParseFile::mapLocation(uint32_t line,
 
   if (m_locationCache.empty()) buildLocationCache();
 
-  if ((line >= 0) && (line < m_locationCache.size())) {
+  if ((line >= 1) && (line < m_locationCache.size())) {
     const location_cache_entry_t& entry = m_locationCache[line];
     const uint16_t columnInSource = column;
 

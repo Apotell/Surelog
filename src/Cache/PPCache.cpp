@@ -254,61 +254,60 @@ void PPCache::cacheMacros(::PPCache::Builder builder,
                           const SymbolTable& sourceSymbols) {
   FileSystem* const fileSystem = FileSystem::getInstance();
 
-  const MacroStorage& sourceMacros = m_pp->getMacros();
-  size_t count = 0;
-  for (const auto& [macroName, infoVec] : sourceMacros) {
-    count += infoVec.size();
+  std::vector<MacroInfo*> sourceMacros;
+  for (const auto& [macroName, infoVec] : m_pp->getMacros()) {
+    for (const auto& info : infoVec) {
+      sourceMacros.emplace_back(info);
+    }
   }
 
   ::capnp::List<::Macro, ::capnp::Kind::STRUCT>::Builder targetMacros =
-      builder.initMacros(count);
+      builder.initMacros(sourceMacros.size());
 
   size_t index = 0;
-  for (const auto& [macroName, infoVec] : sourceMacros) {
-    for (const auto& info : infoVec) {
-      ::Macro::Builder targetMacro = targetMacros[index];
+  for (const auto& info : sourceMacros) {
+    ::Macro::Builder targetMacro = targetMacros[index];
 
-      targetMacro.setNameId(
-          (RawSymbolId)targetSymbols.registerSymbol(macroName));
-      targetMacro.setType((info->m_type == MacroInfo::WITH_ARGS)
-                              ? ::MacroType::WITH_ARGS
-                              : ::MacroType::NO_ARGS);
-      targetMacro.setFileId(
-          (RawPathId)fileSystem->copy(info->m_fileId, &targetSymbols));
-      targetMacro.setStartLine(info->m_startLine);
-      targetMacro.setStartColumn(info->m_startColumn);
-      targetMacro.setEndLine(info->m_endLine);
-      targetMacro.setEndColumn(info->m_endColumn);
+    targetMacro.setNameId(
+        (RawSymbolId)targetSymbols.registerSymbol(info->m_name));
+    targetMacro.setType((info->m_type == MacroInfo::WITH_ARGS)
+                            ? ::MacroType::WITH_ARGS
+                            : ::MacroType::NO_ARGS);
+    targetMacro.setFileId(
+        (RawPathId)fileSystem->copy(info->m_fileId, &targetSymbols));
+    targetMacro.setStartLine(info->m_startLine);
+    targetMacro.setStartColumn(info->m_startColumn);
+    targetMacro.setEndLine(info->m_endLine);
+    targetMacro.setEndColumn(info->m_endColumn);
 
-      const std::vector<std::string>& sourceArguments = info->m_arguments;
-      ::capnp::List<::capnp::Text, ::capnp::Kind::BLOB>::Builder
-          targetArguments = targetMacro.initArguments(sourceArguments.size());
-      for (size_t i = 0, ni = sourceArguments.size(); i < ni; ++i) {
-        targetArguments.set(i, sourceArguments[i].c_str());
-      }
-
-      const std::vector<std::string>& sourceTokens = info->m_tokens;
-      ::capnp::List<::capnp::Text, ::capnp::Kind::BLOB>::Builder targetTokens =
-          targetMacro.initTokens(sourceTokens.size());
-      for (size_t i = 0, ni = sourceTokens.size(); i < ni; ++i) {
-        targetTokens.set(i, sourceTokens[i].c_str());
-      }
-
-      ++index;
-
-      /*
-      std::cout << "SAVING MACRO: " << macroName << std::endl;
-      Debug code for a caching issue"
-      std::cout << "STRING VECTOR CONTENT:\n";
-      int32_t index = 0;
-      std::cout << "VECTOR SIZE: " << info->m_tokens.size() << std::endl;
-      for (auto st : info->m_tokens) {
-        std::cout << index << " ST:" << st.size() << " >>>" << st << "<<<"
-                  << std::endl;
-        index++;
-      }
-      */
+    const std::vector<std::string>& sourceArguments = info->m_arguments;
+    ::capnp::List<::capnp::Text, ::capnp::Kind::BLOB>::Builder targetArguments =
+        targetMacro.initArguments(sourceArguments.size());
+    for (size_t i = 0, ni = sourceArguments.size(); i < ni; ++i) {
+      targetArguments.set(i, sourceArguments[i].c_str());
     }
+
+    const std::vector<std::string>& sourceTokens = info->m_tokens;
+    ::capnp::List<::capnp::Text, ::capnp::Kind::BLOB>::Builder targetTokens =
+        targetMacro.initTokens(sourceTokens.size());
+    for (size_t i = 0, ni = sourceTokens.size(); i < ni; ++i) {
+      targetTokens.set(i, sourceTokens[i].c_str());
+    }
+
+    ++index;
+
+    /*
+    std::cout << "SAVING MACRO: " << macroName << std::endl;
+    Debug code for a caching issue"
+    std::cout << "STRING VECTOR CONTENT:\n";
+    int32_t index = 0;
+    std::cout << "VECTOR SIZE: " << info->m_tokens.size() << std::endl;
+    for (auto st : info->m_tokens) {
+      std::cout << index << " ST:" << st.size() << " >>>" << st << "<<<"
+                << std::endl;
+      index++;
+    }
+    */
   }
 }
 
@@ -401,6 +400,13 @@ void PPCache::cacheIncludeFileInfos(::PPCache::Builder builder,
                                     const SymbolTable& sourceSymbols) {
   FileSystem* const fileSystem = FileSystem::getInstance();
 
+  std::vector<MacroInfo*> sourceMacros;
+  for (const auto& [macroName, infoVec] : m_pp->getMacros()) {
+    for (const auto& info : infoVec) {
+      sourceMacros.emplace_back(info);
+    }
+  }
+
   const std::vector<IncludeFileInfo>& sourceIncludeFileInfos =
       m_pp->getIncludeFileInfo();
   ::capnp::List<::IncludeFileInfo, ::capnp::Kind::STRUCT>::Builder
@@ -422,6 +428,7 @@ void PPCache::cacheIncludeFileInfos(::PPCache::Builder builder,
     targetIncludeFileInfo.setAction(
         static_cast<uint16_t>(sourceIncludeFileInfo.m_action));
 
+    targetIncludeFileInfo.setDefinition(0);
     targetIncludeFileInfo.setSectionFileId((RawPathId)sectionFileId);
     targetIncludeFileInfo.setSectionLine(sourceIncludeFileInfo.m_sectionLine);
     targetIncludeFileInfo.setSectionColumn(
@@ -442,6 +449,28 @@ void PPCache::cacheIncludeFileInfos(::PPCache::Builder builder,
 
     targetIncludeFileInfo.setIndexOpposite(
         sourceIncludeFileInfo.m_indexOpposite);
+
+    const std::vector<MacroInfo*>& sourceDefinitions =
+        sourceIncludeFileInfo.m_macroDefinitions;
+    ::capnp::List<::uint16_t, ::capnp::Kind::PRIMITIVE>::Builder
+        targetDefinitions =
+            targetIncludeFileInfo.initDefinitions(sourceDefinitions.size());
+    for (size_t j = 0, nj = sourceDefinitions.size(); j < nj; ++j) {
+      targetDefinitions.set(
+          j, std::distance(sourceMacros.begin(),
+                           std::find(sourceMacros.begin(), sourceMacros.end(),
+                                     sourceDefinitions[j])));
+    }
+
+    const std::vector<LineColumn>& sourceTokenPositions =
+        sourceIncludeFileInfo.m_tokenPositions;
+    ::capnp::List<::LineColumn, ::capnp::Kind::STRUCT>::Builder
+        targetTokenPositions = targetIncludeFileInfo.initTokenPositions(
+            sourceTokenPositions.size());
+    for (size_t j = 0, nj = sourceTokenPositions.size(); j < nj; ++j) {
+      targetTokenPositions[j].setLine(sourceTokenPositions[j].first);
+      targetTokenPositions[j].setColumn(sourceTokenPositions[j].second);
+    }
   }
 }
 
@@ -542,6 +571,13 @@ void PPCache::restoreIncludeFileInfos(
     const SymbolTable& sourceSymbols) {
   FileSystem* const fileSystem = FileSystem::getInstance();
 
+  std::vector<MacroInfo*> sourceMacros;
+  for (const auto& [macroName, infoVec] : m_pp->getMacros()) {
+    for (const auto& info : infoVec) {
+      sourceMacros.emplace_back(info);
+    }
+  }
+
   for (const ::IncludeFileInfo::Reader& sourceIncludeFileInfo :
        sourceIncludeFileInfos) {
     SymbolId sectionSymbolId = targetSymbols.copyFrom(
@@ -554,11 +590,12 @@ void PPCache::restoreIncludeFileInfos(
     // std::cout << "read sectionFile: " << sectionFileName << " s:" <<
     // incinfo->m_sectionStartLine() << " o:" << incinfo->m_originalLine() <<
     // " t:" << incinfo->m_type() << "\n";
-    m_pp->addIncludeFileInfo(
+    int32_t index = m_pp->addIncludeFileInfo(
         static_cast<IncludeFileInfo::Context>(
             sourceIncludeFileInfo.getContext()),
         static_cast<IncludeFileInfo::Action>(sourceIncludeFileInfo.getAction()),
-        nullptr, sectionFileId, sourceIncludeFileInfo.getSectionLine(),
+        sourceMacros[sourceIncludeFileInfo.getDefinition()], sectionFileId,
+        sourceIncludeFileInfo.getSectionLine(),
         sourceIncludeFileInfo.getSectionColumn(),
         sourceIncludeFileInfo.getSourceLine(),
         sourceIncludeFileInfo.getSourceColumn(), sectionSymbolId,
@@ -567,6 +604,22 @@ void PPCache::restoreIncludeFileInfos(
         sourceIncludeFileInfo.getSymbolEndLine(),
         sourceIncludeFileInfo.getSymbolEndColumn(),
         sourceIncludeFileInfo.getIndexOpposite());
+
+    IncludeFileInfo& fi = m_pp->getIncludeFileInfo(index);
+
+    ::capnp::List<::uint16_t, ::capnp::Kind::PRIMITIVE>::Reader
+        sourceDefinitions = sourceIncludeFileInfo.getDefinitions();
+    std::vector<MacroInfo*>& targetDefinitions = fi.m_macroDefinitions;
+    for (uint16_t index : sourceDefinitions) {
+      targetDefinitions.emplace_back(sourceMacros[index]);
+    }
+
+    ::capnp::List<::LineColumn, ::capnp::Kind::STRUCT>::Reader
+        sourceTokenPositions = sourceIncludeFileInfo.getTokenPositions();
+    std::vector<LineColumn>& targetTokenPositions = fi.m_tokenPositions;
+    for (const ::LineColumn::Reader& lc : sourceTokenPositions) {
+      targetTokenPositions.emplace_back(lc.getLine(), lc.getColumn());
+    }
   }
 }
 

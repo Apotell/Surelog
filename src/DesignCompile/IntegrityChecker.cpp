@@ -176,9 +176,12 @@ void IntegrityChecker::reportInvalidLocation(
       (object->VpiColumnNo() == 0) && (object->VpiEndColumnNo() == 0))
     return;
 
+  if (object->UhdmType() == UHDM::uhdmtypedef_typespec) return;
+
   const UHDM::any* const parent = object->VpiParent();
   if (parent == nullptr) return;
   if (parent->UhdmType() == UHDM::uhdmdesign) return;
+  if (parent->UhdmType() == UHDM::uhdmtypedef_typespec) return;
 
   if ((parent->VpiLineNo() == 0) && (parent->VpiEndLineNo() == 0) &&
       (parent->VpiColumnNo() == 0) && (parent->VpiEndColumnNo() == 0))
@@ -416,9 +419,7 @@ void IntegrityChecker::reportInvalidNames(const UHDM::any* const object) const {
     if (parent != nullptr && parent->UhdmType() == UHDM::uhdmtypedef_typespec) {
       if (UHDM::ref_typespec* ref_tps =
               ((UHDM::typespec*)parent)->Typedef_alias()) {
-        if (!shouldReport && !ref_tps->VpiName().empty() &&
-            ref_tps->Actual_typespec()!= nullptr)
-          shouldReport = !areNamedSame(ref_tps, ref_tps->Actual_typespec());
+        shouldReport = false;
       }
     } else if (const UHDM::any* actual =
                    static_cast<const UHDM::ref_typespec*>(object)
@@ -490,10 +491,7 @@ void IntegrityChecker::reportNullActual(const UHDM::any* const object) const {
           parent->UhdmType() == UHDM::uhdmtypedef_typespec) {
         if (UHDM::ref_typespec* ref_tps =
                 ((UHDM::typespec*)parent)->Typedef_alias()) {
-          if ((ref_tps->VpiName() == SymbolTable::getBadSymbol() ||
-               ref_tps->VpiName().empty()) &&
-              ref_tps->Actual_typespec() == nullptr)
-            shouldReport = true;
+            shouldReport = false;
         }        
       } else {
         shouldReport =

@@ -2812,14 +2812,14 @@ UHDM::typespec* CompileHelper::compileTypespec(
       if (result == nullptr) {
         result = compileDatastructureTypespec(
             component, fC, type, compileDesign, reduce, instance, "", typeName);
-        if (ranges && result) {
-          UHDM::typespec* temp_result = result;
-          while (result != nullptr &&
-                 result->UhdmType() == UHDM::uhdmtypedef_typespec) {
-            result = static_cast<UHDM::typedef_typespec*>(result)
-                      ->Typedef_alias()
-                      ->Actual_typespec();
-          }
+        UHDM::typespec* temp_result = result;
+        while (result != nullptr &&
+               result->UhdmType() == UHDM::uhdmtypedef_typespec) {
+          result = static_cast<UHDM::typedef_typespec*>(result)
+                       ->Typedef_alias()
+                       ->Actual_typespec();
+        }
+        if (ranges && result) {          
           UHDM_OBJECT_TYPE dstype = result->UhdmType();
           ref_typespec* resultRef = s.MakeRef_typespec();
           resultRef->VpiName(typeName);

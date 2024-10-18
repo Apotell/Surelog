@@ -82,7 +82,11 @@ class ParseFile final {
   uint32_t getLineNb(uint32_t line);
 
   std::tuple<PathId, uint32_t, uint16_t> mapLocation(uint32_t line,
-                                                     uint16_t column, bool isStart);
+                                                     uint16_t column,
+                                                     bool isStart);
+
+  std::tuple<PathId, uint32_t, uint16_t, PathId, uint32_t, uint16_t>
+  mapLocations(uint32_t sl, uint16_t sc, uint32_t el, uint16_t ec);
 
   class LineTranslationInfo {
    public:
@@ -116,7 +120,7 @@ class ParseFile final {
   void profileParser();
 
  private:
-  typedef std::vector<std::tuple<uint32_t, PathId, uint32_t, int32_t>>
+  typedef std::vector<std::tuple<uint32_t, PathId, uint32_t, int32_t, int32_t>>
       location_cache_entry_t;
   typedef std::vector<location_cache_entry_t> location_cache_t;
   typedef std::vector<std::tuple<uint32_t, uint16_t, int32_t>>
@@ -125,13 +129,15 @@ class ParseFile final {
   bool parseOneFile_(PathId fileId, uint32_t lineOffset);
   void buildLocationCache();
   bool isEmbeddedMacro(int32_t index) const;
+  bool isEmbeddedMacro(int32_t inner, int32_t outer) const;
   void buildLocationCache_recurse_for_includes(uint32_t index);
   void buildLocationCache_recurse_for_macros(
-      uint32_t index, const macro_token_offsets_t& parentOffsets);
+      uint32_t index, int32_t parentIndex,
+      const macro_token_offsets_t& parentOffsets);
   void printLocationCache();
   void addLocationCacheEntry(uint32_t sourceLine, uint32_t sourceColumn,
-                             PathId fileId, uint32_t targetLine,
-                             int32_t offset);
+                             PathId fileId, uint32_t targetLine, int32_t offset,
+                             int32_t hint);
 
   PathId m_fileId;
   PathId m_ppFileId;

@@ -393,11 +393,11 @@ bool PreprocessFile::preprocess() {
       int32_t columnNb = 0;
       int32_t lineNonAscii = 0;
       int32_t columnNonAscii = 0;
-      char c = stream.get();
+      int32_t c = stream.get();
       while (stream.good()) {
         if (c != '\r') {
           if (std::isprint(c) || std::isspace(c)) {
-            text += c;
+            text += static_cast<char>(c);
           } else {
             if (nonAscii == '\0') {
               nonAscii = c;

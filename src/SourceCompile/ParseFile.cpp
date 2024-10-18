@@ -203,7 +203,8 @@ void ParseFile::printLocationCache() {
     for (const auto& entry2 : entry1) {
       std::cout << index << ": " << std::get<0>(entry2) << ", "
                 << PathIdPP(std::get<1>(entry2)) << ", " << std::get<2>(entry2)
-                << ", " << std::get<3>(entry2) << std::endl;
+                << ", " << std::get<3>(entry2) << ", " << std::get<4>(entry2)
+                << std::endl;
       // std::cout << index << ": " << PathIdPP(std::get<1>(entry2)) << ", "
       //           << std::get<2>(entry2) << ", " << std::get<0>(entry2) << ", "
       //           << std::get<3>(entry2) << std::endl;
@@ -222,10 +223,39 @@ inline bool ParseFile::isEmbeddedMacro(int32_t index) const {
     return false;
   }
 
+  int32_t pops = 0;
   while (--index >= 0) {
-    if ((infos[index].m_context == IncludeFileInfo::Context::MACRO) &&
-        (infos[index].m_action == IncludeFileInfo::Action::PUSH)) {
-      return true;
+    if (infos[index].m_context == IncludeFileInfo::Context::MACRO) {
+      if (infos[index].m_action == IncludeFileInfo::Action::PUSH) {
+        if (pops-- == 0) return true;
+      } else if (infos[index].m_action == IncludeFileInfo::Action::POP) {
+        ++pops;
+      }
+    }
+  }
+
+  return false;
+}
+
+inline bool ParseFile::isEmbeddedMacro(int32_t inner, int32_t outer) const {
+  auto const& infos =
+      getCompileSourceFile()->getPreprocessor()->getIncludeFileInfo();
+  if ((outer < 0) || (outer >= infos.size())) return false;
+  if ((inner < 0) || (inner >= infos.size())) return false;
+
+  if ((infos[outer].m_context != IncludeFileInfo::Context::MACRO) ||
+      (infos[inner].m_context != IncludeFileInfo::Context::MACRO)) {
+    return false;
+  }
+
+  int32_t pops = 0;
+  while (--inner >= outer) {
+    if (infos[inner].m_context == IncludeFileInfo::Context::MACRO) {
+      if (infos[inner].m_action == IncludeFileInfo::Action::PUSH) {
+        if (pops-- == 0) return (inner == outer);
+      } else if (infos[inner].m_action == IncludeFileInfo::Action::POP) {
+        ++pops;
+      }
     }
   }
 
@@ -235,9 +265,9 @@ inline bool ParseFile::isEmbeddedMacro(int32_t index) const {
 inline void ParseFile::addLocationCacheEntry(uint32_t sourceLine,
                                              uint32_t sourceColumn,
                                              PathId fileId, uint32_t targetLine,
-                                             int32_t offset) {
+                                             int32_t offset, int32_t hint) {
   m_locationCache[sourceLine].emplace_back(sourceColumn, fileId, targetLine,
-                                           offset);
+                                           offset, hint);
 }
 
 void ParseFile::buildLocationCache_recurse_for_includes(uint32_t index) {
@@ -256,7 +286,7 @@ void ParseFile::buildLocationCache_recurse_for_includes(uint32_t index) {
   // In case, the include tag doesn't start at column 1
   if (oifi.m_sourceColumn > 1) {
     addLocationCacheEntry(sourceLine++, oifi.m_sourceColumn,
-                          oifi.m_sectionFileId, targetLine++, 0);
+                          oifi.m_sectionFileId, targetLine++, 0, index);
   }
 
   int32_t pic = -1;
@@ -287,7 +317,8 @@ void ParseFile::buildLocationCache_recurse_for_includes(uint32_t index) {
           addLocationCacheEntry(sourceLine, picifi.m_sourceColumn,
                                 oifi.m_sectionFileId, targetLine - 1,
                                 int32_t(picifi.m_sourceColumn) -
-                                    int32_t(pioifi.m_symbolEndColumn));
+                                    int32_t(pioifi.m_symbolEndColumn),
+                                index);
         }
 
         if (picifi.m_sourceLine != ioifi.m_sourceLine) {
@@ -295,13 +326,13 @@ void ParseFile::buildLocationCache_recurse_for_includes(uint32_t index) {
 
           while (sourceLine <= ioifi.m_sourceLine) {
             addLocationCacheEntry(sourceLine++, 1, oifi.m_sectionFileId,
-                                  targetLine++, 0);
+                                  targetLine++, 0, index);
           }
         }
       } else {
         while (sourceLine <= ioifi.m_sourceLine) {
           addLocationCacheEntry(sourceLine++, 1, oifi.m_sectionFileId,
-                                targetLine++, 0);
+                                targetLine++, 0, index);
         }
       }
 
@@ -320,12 +351,12 @@ void ParseFile::buildLocationCache_recurse_for_includes(uint32_t index) {
 
       while (sourceLine < ioifi.m_sourceLine) {
         addLocationCacheEntry(sourceLine++, 1, oifi.m_sectionFileId,
-                              targetLine++, 0);
+                              targetLine++, 0, index);
       }
 
       while (sourceLine <= icifi.m_sourceLine) {
         addLocationCacheEntry(sourceLine++, 1, oifi.m_sectionFileId, targetLine,
-                              0);
+                              0, index);
       }
 
       sourceLine = icifi.m_sourceLine;
@@ -345,7 +376,8 @@ void ParseFile::buildLocationCache_recurse_for_includes(uint32_t index) {
       addLocationCacheEntry(
           sourceLine, picifi.m_sourceColumn, oifi.m_sectionFileId,
           targetLine - 1,
-          int32_t(picifi.m_sourceColumn) - int32_t(pioifi.m_symbolEndColumn));
+          int32_t(picifi.m_sourceColumn) - int32_t(pioifi.m_symbolEndColumn),
+          index);
     }
 
     if (picifi.m_sourceLine < cifi.m_sourceLine) {
@@ -355,12 +387,13 @@ void ParseFile::buildLocationCache_recurse_for_includes(uint32_t index) {
 
   while (sourceLine <= cifi.m_sourceLine) {
     addLocationCacheEntry(sourceLine++, 1, oifi.m_sectionFileId, targetLine++,
-                          0);
+                          0, index);
   }
 }
 
 void ParseFile::buildLocationCache_recurse_for_macros(
-    uint32_t index, const macro_token_offsets_t& parentOffsets) {
+    uint32_t index, int32_t parentIndex,
+    const macro_token_offsets_t& parentOffsets) {
   auto const& infos =
       getCompileSourceFile()->getPreprocessor()->getIncludeFileInfo();
   const IncludeFileInfo& oifi = infos[index];
@@ -428,7 +461,8 @@ void ParseFile::buildLocationCache_recurse_for_macros(
           addLocationCacheEntry(
               sourceLine, oifi.m_sourceColumn, macroFileId, targetLine,
               (cifi.m_sourceColumn - oifi.m_sourceColumn) -
-                  (oifi.m_symbolEndColumn - oifi.m_symbolStartColumn));
+                  (oifi.m_symbolEndColumn - oifi.m_symbolStartColumn),
+              index);
         }
       } else {
         // Scenario 3. Multi line instance expands to single line
@@ -442,19 +476,19 @@ void ParseFile::buildLocationCache_recurse_for_macros(
         // if (!isEmbeddedMacro(index)) {
         //   addLocationCacheEntry(
         //       sourceLine, macroFileId, targetLine, oifi.m_sourceColumn,
-        //       -(oifi.m_symbolEndColumn - oifi.m_symbolStartColumn));
+        //       -(oifi.m_symbolEndColumn - oifi.m_symbolStartColumn), index);
         // }
       } else {
         // Scenario 4. Multi line instance expands to multi line
         addLocationCacheEntry(sourceLine, oifi.m_sourceColumn, macroFileId,
-                              targetLine, -macroStartColumn);
+                              targetLine, -macroStartColumn, index);
       }
     }
 
     for (const auto& [line, column, offset] : offsets) {
       if (line == targetLine) {
         addLocationCacheEntry(sourceLine, column, macroFileId, targetLine,
-                              offset);
+                              offset, index);
       } else if (line > targetLine) {
         break;
       }
@@ -478,7 +512,8 @@ void ParseFile::buildLocationCache_recurse_for_macros(
 
       while (sourceLine <= ioifi.m_sourceLine) {
         if (prevEndSourceLine != ioifi.m_sourceLine) {
-          addLocationCacheEntry(sourceLine, 1, macroFileId, targetLine, 0);
+          addLocationCacheEntry(sourceLine, 1, macroFileId, targetLine, 0,
+                                index);
         }
 
         for (const auto& [line, column, offset] : offsets) {
@@ -486,7 +521,7 @@ void ParseFile::buildLocationCache_recurse_for_macros(
             if ((prevEndSourceColumn < column) &&
                 (column < ioifi.m_sourceColumn)) {
               addLocationCacheEntry(sourceLine, column, macroFileId, targetLine,
-                                    offset);
+                                    offset, index);
             } else {
               break;
             }
@@ -499,7 +534,7 @@ void ParseFile::buildLocationCache_recurse_for_macros(
         ++targetLine;
       }
 
-      buildLocationCache_recurse_for_macros(i, offsets);
+      buildLocationCache_recurse_for_macros(i, index, offsets);
       targetLine += (ioifi.m_symbolEndLine - ioifi.m_symbolStartLine);
       prevEndSourceLine = sourceLine = icifi.m_sourceLine;
       prevEndSourceColumn = icifi.m_sourceColumn;
@@ -511,12 +546,12 @@ void ParseFile::buildLocationCache_recurse_for_macros(
   if (oifi.m_context == IncludeFileInfo::Context::MACRO) {
     if (prevEndSourceLine > 0) ++sourceLine;
     while (sourceLine <= cifi.m_sourceLine) {
-      addLocationCacheEntry(sourceLine, 1, macroFileId, targetLine, 0);
+      addLocationCacheEntry(sourceLine, 1, macroFileId, targetLine, 0, index);
 
       for (const auto& [line, column, offset] : offsets) {
         if (line == targetLine) {
           addLocationCacheEntry(sourceLine, column, macroFileId, targetLine,
-                                offset);
+                                offset, index);
         } else if (line > targetLine) {
           break;
         }
@@ -541,24 +576,28 @@ void ParseFile::buildLocationCache_recurse_for_macros(
       if (oifi.m_symbolStartLine == oifi.m_symbolEndLine) {
         addLocationCacheEntry(oifi.m_sourceLine, cifi.m_sourceColumn,
                               oifi.m_sectionFileId, oifi.m_symbolEndLine,
-                              cifi.m_sourceColumn - symbolEndColumn);
+                              cifi.m_sourceColumn - symbolEndColumn,
+                              parentIndex);
       } else {
         // Scenario 3. Multi line instance expands to single line
         addLocationCacheEntry(oifi.m_sourceLine, cifi.m_sourceColumn,
                               oifi.m_sectionFileId, oifi.m_symbolEndLine,
-                              cifi.m_sourceColumn - symbolEndColumn);
+                              cifi.m_sourceColumn - symbolEndColumn,
+                              parentIndex);
       }
     } else {
       if (oifi.m_symbolStartLine == oifi.m_symbolEndLine) {
         // Scenario 2. Single line instance expands to multi line
         addLocationCacheEntry(cifi.m_sourceLine, cifi.m_sourceColumn,
                               oifi.m_sectionFileId, oifi.m_symbolEndLine,
-                              cifi.m_sourceColumn - symbolEndColumn);
+                              cifi.m_sourceColumn - symbolEndColumn,
+                              parentIndex);
       } else {
         // Scenario 4. Multi line instance expands to multi line
         addLocationCacheEntry(cifi.m_sourceLine, cifi.m_sourceColumn,
                               oifi.m_sectionFileId, oifi.m_symbolEndLine,
-                              cifi.m_sourceColumn - symbolEndColumn);
+                              cifi.m_sourceColumn - symbolEndColumn,
+                              parentIndex);
       }
     }
   }
@@ -573,15 +612,16 @@ void ParseFile::buildLocationCache() {
 
   m_locationCache.clear();
   m_locationCache.resize(pp->getLineCount() + 10);
-  m_locationCache[0].emplace_back(0, m_fileId, 0, 0);
+  m_locationCache[0].emplace_back(0, m_fileId, 0, 0, -1);
   buildLocationCache_recurse_for_includes(0);
-  buildLocationCache_recurse_for_macros(0, {});
+  buildLocationCache_recurse_for_macros(0, -1, {});
 
   uint32_t sourceLine = infos.back().m_sourceLine + 1;
   uint32_t targetLine = std::get<2>(m_locationCache[sourceLine - 1].back()) + 1;
   while (sourceLine < m_locationCache.size()) {
-    m_locationCache[sourceLine++].emplace_back(1, m_fileId, targetLine++, 0);
+    m_locationCache[sourceLine++].emplace_back(1, m_fileId, targetLine++, 0, 0);
   }
+  // printLocationCache();
 }
 
 std::tuple<PathId, uint32_t, uint16_t> ParseFile::mapLocation(uint32_t line,
@@ -603,12 +643,27 @@ std::tuple<PathId, uint32_t, uint16_t> ParseFile::mapLocation(uint32_t line,
     const uint16_t columnInSource = column;
 
     PathId fileId = m_fileId;
-    for (const location_cache_entry_t::value_type& item : entry) {
+    int32_t index = -1;
+    for (uint32_t i = 0, ni = entry.size(); i < ni; ++i) {
+      const location_cache_entry_t::value_type& item = entry[i];
+
       if (columnInSource >= std::get<0>(item)) {
-        fileId = std::get<1>(item);
-        line = std::get<2>(item);
-        column = columnInSource - std::get<3>(item);
+        index = i;
       }
+    }
+
+    if (!isStart && (index > 0)) {
+      // const location_cache_entry_t::value_type& item_p = entry[index - 1];
+      const location_cache_entry_t::value_type& item_i = entry[index];
+
+      if (columnInSource == std::get<0>(item_i)) --index;
+    }
+
+    if (index >= 0) {
+      const location_cache_entry_t::value_type& item = entry[index];
+      fileId = std::get<1>(item);
+      line = std::get<2>(item);
+      column = columnInSource - std::get<3>(item);
     }
 
     return {fileId, line, column};
@@ -620,6 +675,128 @@ std::tuple<PathId, uint32_t, uint16_t> ParseFile::mapLocation(uint32_t line,
   addError(err);
 
   return {m_fileId, line, column};
+}
+
+std::tuple<PathId, uint32_t, uint16_t, PathId, uint32_t, uint16_t>
+ParseFile::mapLocations(uint32_t sl, uint16_t sc, uint32_t el, uint16_t ec) {
+  if (!getCompileSourceFile()) return {m_fileId, sl, sc, m_fileId, el, ec};
+
+  PreprocessFile* pp = getCompileSourceFile()->getPreprocessor();
+  if (!pp) return {m_fileId, sl, sc, m_fileId, el, ec};
+
+  const auto& infos = pp->getIncludeFileInfo();
+  if (infos.empty()) return {m_fileId, sl, sc, m_fileId, el, ec};
+
+  if (m_locationCache.empty()) buildLocationCache();
+  if (m_locationCache.empty()) return {m_fileId, sl, sc, m_fileId, el, ec};
+
+  const location_cache_entry_t& entry_s = m_locationCache[sl];
+  const location_cache_entry_t& entry_e = m_locationCache[el];
+
+  int32_t si = -1;
+  if ((sl >= 1) && (sl < m_locationCache.size())) {
+    for (uint32_t i = 0, ni = entry_s.size(); i < ni; ++i) {
+      const location_cache_entry_t::value_type& item = entry_s[i];
+
+      if (sc >= std::get<0>(item)) {
+        si = i;
+      }
+    }
+  }
+
+  int32_t ei = -1;
+  if ((el >= 1) && (el < m_locationCache.size())) {
+    for (uint32_t i = 0, ni = entry_e.size(); i < ni; ++i) {
+      const location_cache_entry_t::value_type& item = entry_e[i];
+
+      if (ec >= std::get<0>(item)) {
+        ei = i;
+      }
+    }
+  }
+
+  if ((si > 0) && (ei >= 0)) {
+    const location_cache_entry_t::value_type& item_s = entry_s[si];
+    const location_cache_entry_t::value_type& item_s_p = entry_s[si - 1];
+
+    const location_cache_entry_t::value_type& item_e = entry_e[ei];
+
+    const int32_t hint_s = std::get<4>(item_s);
+    const int32_t hint_e = std::get<4>(item_e);
+    const int32_t hint_s_p = std::get<4>(item_s_p);
+
+    const IncludeFileInfo& info_s = infos[hint_s];
+
+    if ((hint_s >= 0) &&
+        (info_s.m_context == IncludeFileInfo::Context::MACRO) &&
+        ((hint_e < 0) || (hint_s != hint_e)) && (hint_s_p == hint_e) &&
+        (sc == std::get<0>(item_s))) {
+      --si;
+    }
+  }
+
+  if ((si >= 0) && (ei > 0)) {
+    const location_cache_entry_t::value_type& item_s = entry_s[si];
+
+    const location_cache_entry_t::value_type& item_e = entry_e[ei];
+    const location_cache_entry_t::value_type& item_e_p = entry_e[ei - 1];
+
+    const int32_t hint_s = std::get<4>(item_s);
+    const int32_t hint_e = std::get<4>(item_e);
+    const int32_t hint_e_p = std::get<4>(item_e_p);
+
+    const IncludeFileInfo& info_s = infos[hint_s];
+
+    if ((hint_s >= 0) &&
+        (info_s.m_context == IncludeFileInfo::Context::MACRO) &&
+        ((hint_e < 0) || (hint_s != hint_e)) && (hint_s == hint_e_p) &&
+        (ec == std::get<0>(item_e))) {
+      --ei;
+    }
+  }
+
+  PathId csf = m_fileId;
+  uint32_t csl = sl;
+  uint16_t csc = sc;
+  if (si >= 0) {
+    const location_cache_entry_t::value_type& item = entry_s[si];
+    csf = std::get<1>(item);
+    csl = std::get<2>(item);
+    csc = sc - std::get<3>(item);
+  }
+
+  PathId cef = m_fileId;
+  uint32_t cel = el;
+  uint16_t cec = ec;
+  if (ei >= 0) {
+    const location_cache_entry_t::value_type& item = entry_e[ei];
+    cef = std::get<1>(item);
+    cel = std::get<2>(item);
+    cec = ec - std::get<3>(item);
+  }
+
+  if ((si >= 0) && (ei >= 0)) {
+    const location_cache_entry_t::value_type& item_s = entry_s[si];
+    const location_cache_entry_t::value_type& item_e = entry_e[ei];
+
+    const int32_t hint_s = std::get<4>(item_s);
+    const int32_t hint_e = std::get<4>(item_e);
+
+    if (hint_s != hint_e) {
+      const IncludeFileInfo& info_s = infos[hint_s];
+      const IncludeFileInfo& info_e = infos[hint_e];
+
+      if (isEmbeddedMacro(hint_s, hint_e)) {
+        csl = cel;
+        csc = info_s.m_symbolStartColumn;
+      } else if (isEmbeddedMacro(hint_e, hint_s)) {
+        cel = csl;
+        cec = info_e.m_symbolEndColumn;
+      }
+    }
+  }
+
+  return {csf, csl, csc, cef, cel, cec};
 }
 
 bool ParseFile::parseOneFile_(PathId fileId, uint32_t lineOffset) {

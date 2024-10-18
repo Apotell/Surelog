@@ -1762,18 +1762,18 @@ std::vector<io_decl*>* CompileHelper::compileTfPortList(
     prevts = ts;
     decl->VpiParent(parent);
 
-    if (decl->Typespec() == nullptr) {
-      ref_typespec* tsRef = s.MakeRef_typespec();
-      tsRef->VpiParent(decl);
-      NodeId refName = (type == InvalidNodeId) ? prevType : type;
-      if ((fC->Type(refName) == VObjectType::paData_type) &&
-          (fC->SymName(refName) == SymbolTable::getBadSymbol()))
-        refName = fC->Child(refName);
-      tsRef->VpiName(fC->SymName(refName));
-      decl->Typespec(tsRef);
-      fC->populateCoreMembers(refName, refName, tsRef);
-    }
-    if (ts != nullptr) {      
+    if (ts != nullptr) {
+      if (decl->Typespec() == nullptr) {
+        ref_typespec* tsRef = s.MakeRef_typespec();
+        tsRef->VpiParent(decl);
+        NodeId refName = (type == InvalidNodeId) ? prevType : type;
+        if ((fC->Type(refName) == VObjectType::paData_type) &&
+            (fC->SymName(refName) == SymbolTable::getBadSymbol()))
+          refName = fC->Child(refName);
+        tsRef->VpiName(fC->SymName(refName));
+        decl->Typespec(tsRef);
+        fC->populateCoreMembers(refName, refName, tsRef);
+      }
       decl->Typespec()->Actual_typespec(ts);
     }
 

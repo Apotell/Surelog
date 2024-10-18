@@ -1712,7 +1712,7 @@ std::vector<io_decl*>* CompileHelper::compileTfPortList(
   NodeId tf_port_item = fC->Child(tf_port_list);
   int32_t previousDirection = vpiInput;
   NodeId prevType = InvalidNodeId;
-  UHDM::typespec* ts = nullptr;
+  typespec* prevts = nullptr;
   while (tf_port_item) {
     io_decl* decl = s.MakeIo_decl();
     ios->push_back(decl);
@@ -1749,25 +1749,31 @@ std::vector<io_decl*>* CompileHelper::compileTfPortList(
     fC->populateCoreMembers(
         tf_port_item, unpackedDimension ? unpackedDimension : tf_param_name,
         decl);
-    if (UHDM::typespec* tempts =
-            compileTypespec(component, fC, type, compileDesign, Reduce::No,
-                            decl, nullptr, true)) {
-      ts = tempts;
+    UHDM::typespec* ts = nullptr;
+    if (type) {
+      if (UHDM::typespec* tempts =
+              compileTypespec(component, fC, type, compileDesign, Reduce::No,
+                              decl, nullptr, true)) {
+        ts = tempts;
+      }
+    } else {
+      ts = prevts;
     }
+    prevts = ts;
     decl->VpiParent(parent);
 
-    if (ts != nullptr) {
-      if (decl->Typespec() == nullptr) {
-        ref_typespec* tsRef = s.MakeRef_typespec();
-        tsRef->VpiParent(decl);
-        NodeId refName = (type == InvalidNodeId) ? prevType : type;
-        if ((fC->Type(refName) == VObjectType::paData_type) &&
-            (fC->SymName(refName) == SymbolTable::getBadSymbol()))
-          refName = fC->Child(refName);
-        tsRef->VpiName(fC->SymName(refName));
-        decl->Typespec(tsRef);
-        fC->populateCoreMembers(refName, refName, tsRef);
-      }
+    if (decl->Typespec() == nullptr) {
+      ref_typespec* tsRef = s.MakeRef_typespec();
+      tsRef->VpiParent(decl);
+      NodeId refName = (type == InvalidNodeId) ? prevType : type;
+      if ((fC->Type(refName) == VObjectType::paData_type) &&
+          (fC->SymName(refName) == SymbolTable::getBadSymbol()))
+        refName = fC->Child(refName);
+      tsRef->VpiName(fC->SymName(refName));
+      decl->Typespec(tsRef);
+      fC->populateCoreMembers(refName, refName, tsRef);
+    }
+    if (ts != nullptr) {      
       decl->Typespec()->Actual_typespec(ts);
     }
 

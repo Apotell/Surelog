@@ -344,7 +344,9 @@ void ParseFile::buildLocationCache_recurse_for_includes(uint32_t index) {
     } else if (ioifi.m_context == IncludeFileInfo::Context::MACRO) {
       if (pic >= 0) {
         const IncludeFileInfo& picifi = infos[pic];
-        if (picifi.m_sourceLine != ioifi.m_sourceLine) {
+        if (picifi.m_sourceLine == ioifi.m_sourceLine) {
+          --targetLine;
+        } else {
           ++sourceLine;
         }
       }
@@ -510,28 +512,30 @@ void ParseFile::buildLocationCache_recurse_for_macros(
         if (prevEndSourceLine == ioifi.m_sourceLine) --targetLine;
       }
 
-      while (sourceLine <= ioifi.m_sourceLine) {
-        if (prevEndSourceLine != ioifi.m_sourceLine) {
-          addLocationCacheEntry(sourceLine, 1, macroFileId, targetLine, 0,
-                                index);
-        }
+      if (oifi.m_context == IncludeFileInfo::Context::MACRO) {
+        while (sourceLine <= ioifi.m_sourceLine) {
+          if (prevEndSourceLine != ioifi.m_sourceLine) {
+            addLocationCacheEntry(sourceLine, 1, macroFileId, targetLine, 0,
+                                  index);
+          }
 
-        for (const auto& [line, column, offset] : offsets) {
-          if (line == targetLine) {
-            if ((prevEndSourceColumn < column) &&
-                (column < ioifi.m_sourceColumn)) {
-              addLocationCacheEntry(sourceLine, column, macroFileId, targetLine,
-                                    offset, index);
-            } else {
+          for (const auto& [line, column, offset] : offsets) {
+            if (line == targetLine) {
+              if ((prevEndSourceColumn < column) &&
+                  (column < ioifi.m_sourceColumn)) {
+                addLocationCacheEntry(sourceLine, column, macroFileId,
+                                      targetLine, offset, index);
+              } else {
+                break;
+              }
+            } else if (line > targetLine) {
               break;
             }
-          } else if (line > targetLine) {
-            break;
           }
-        }
 
-        ++sourceLine;
-        ++targetLine;
+          ++sourceLine;
+          ++targetLine;
+        }
       }
 
       buildLocationCache_recurse_for_macros(i, index, offsets);
@@ -621,7 +625,7 @@ void ParseFile::buildLocationCache() {
   while (sourceLine < m_locationCache.size()) {
     m_locationCache[sourceLine++].emplace_back(1, m_fileId, targetLine++, 0, 0);
   }
-  // printLocationCache();
+  printLocationCache();
 }
 
 std::tuple<PathId, uint32_t, uint16_t> ParseFile::mapLocation(uint32_t line,

@@ -625,7 +625,7 @@ void ParseFile::buildLocationCache() {
   while (sourceLine < m_locationCache.size()) {
     m_locationCache[sourceLine++].emplace_back(1, m_fileId, targetLine++, 0, 0);
   }
-  printLocationCache();
+  // printLocationCache();
 }
 
 std::tuple<PathId, uint32_t, uint16_t> ParseFile::mapLocation(uint32_t line,

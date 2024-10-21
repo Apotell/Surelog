@@ -3307,17 +3307,6 @@ bool UhdmWriter::write(PathId uhdmFileId) {
 
   // CommandLineParser* const clp =
   //    clp;
-  if (IntegrityChecker* const checker =
-          new IntegrityChecker(fileSystem, symbols, errors)) {
-    for (auto h : designs) {
-      const design* const d =
-          static_cast<const design*>(((const uhdm_handle*)h)->object);
-      checker->check(d);
-    }
-
-    delete checker;
-    errors->printMessages(clp->muteStdout());
-  }
 
   // ----------------------------------
   // Lint only the elaborated model
@@ -3352,6 +3341,18 @@ bool UhdmWriter::write(PathId uhdmFileId) {
     errors->printMessages(clp->muteStdout());
     s.SetGCEnabled(clp->gc());
     s.Save(uhdmFile);
+  }
+
+  if (IntegrityChecker* const checker =
+          new IntegrityChecker(fileSystem, symbols, errors)) {
+    for (auto h : designs) {
+      const design* const d =
+          static_cast<const design*>(((const uhdm_handle*)h)->object);
+      checker->check(d);
+    }
+
+    delete checker;
+    errors->printMessages(clp->muteStdout());
   }
 
   if (clp->getDebugUhdm() || clp->getCoverUhdm()) {

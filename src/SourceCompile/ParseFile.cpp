@@ -715,45 +715,45 @@ ParseFile::mapLocations(uint32_t sl, uint16_t sc, uint32_t el, uint16_t ec) {
     }
   }
 
-  if ((si > 0) && (ei >= 0)) {
-    const location_cache_entry_t::value_type& item_s = entry_s[si];
-    const location_cache_entry_t::value_type& item_s_p = entry_s[si - 1];
-
-    const location_cache_entry_t::value_type& item_e = entry_e[ei];
-
-    const int32_t hint_s = std::get<4>(item_s);
-    const int32_t hint_e = std::get<4>(item_e);
-    const int32_t hint_s_p = std::get<4>(item_s_p);
-
-    const IncludeFileInfo& info_s = infos[hint_s];
-
-    if ((hint_s >= 0) &&
-        (info_s.m_context == IncludeFileInfo::Context::MACRO) &&
-        ((hint_e < 0) || (hint_s != hint_e)) && (hint_s_p == hint_e) &&
-        (sc == std::get<0>(item_s))) {
-      --si;
-    }
-  }
-
-  if ((si >= 0) && (ei > 0)) {
-    const location_cache_entry_t::value_type& item_s = entry_s[si];
-
-    const location_cache_entry_t::value_type& item_e = entry_e[ei];
-    const location_cache_entry_t::value_type& item_e_p = entry_e[ei - 1];
-
-    const int32_t hint_s = std::get<4>(item_s);
-    const int32_t hint_e = std::get<4>(item_e);
-    const int32_t hint_e_p = std::get<4>(item_e_p);
-
-    const IncludeFileInfo& info_s = infos[hint_s];
-
-    if ((hint_s >= 0) &&
-        (info_s.m_context == IncludeFileInfo::Context::MACRO) &&
-        ((hint_e < 0) || (hint_s != hint_e)) && (hint_s == hint_e_p) &&
-        (ec == std::get<0>(item_e))) {
-      --ei;
-    }
-  }
+  // if ((si > 0) && (ei >= 0)) {
+  //   const location_cache_entry_t::value_type& item_s = entry_s[si];
+  //   const location_cache_entry_t::value_type& item_s_p = entry_s[si - 1];
+  // 
+  //   const location_cache_entry_t::value_type& item_e = entry_e[ei];
+  // 
+  //   const int32_t hint_s = std::get<4>(item_s);
+  //   const int32_t hint_e = std::get<4>(item_e);
+  //   const int32_t hint_s_p = std::get<4>(item_s_p);
+  // 
+  //   const IncludeFileInfo& info_s = infos[hint_s];
+  // 
+  //   if ((hint_s >= 0) &&
+  //       (info_s.m_context == IncludeFileInfo::Context::MACRO) &&
+  //       ((hint_e < 0) || (hint_s != hint_e)) && (hint_s_p == hint_e) &&
+  //       (sc == std::get<0>(item_s))) {
+  //     --si;
+  //   }
+  // }
+  // 
+  // if ((si >= 0) && (ei > 0)) {
+  //   const location_cache_entry_t::value_type& item_s = entry_s[si];
+  // 
+  //   const location_cache_entry_t::value_type& item_e = entry_e[ei];
+  //   const location_cache_entry_t::value_type& item_e_p = entry_e[ei - 1];
+  // 
+  //   const int32_t hint_s = std::get<4>(item_s);
+  //   const int32_t hint_e = std::get<4>(item_e);
+  //   const int32_t hint_e_p = std::get<4>(item_e_p);
+  // 
+  //   const IncludeFileInfo& info_s = infos[hint_s];
+  // 
+  //   if ((hint_s >= 0) &&
+  //       (info_s.m_context == IncludeFileInfo::Context::MACRO) &&
+  //       ((hint_e < 0) || (hint_s != hint_e)) && (hint_s == hint_e_p) &&
+  //       (ec == std::get<0>(item_e))) {
+  //     --ei;
+  //   }
+  // }
 
   PathId csf = m_fileId;
   uint32_t csl = sl;
@@ -775,26 +775,26 @@ ParseFile::mapLocations(uint32_t sl, uint16_t sc, uint32_t el, uint16_t ec) {
     cec = ec - std::get<3>(item);
   }
 
-  if ((si >= 0) && (ei >= 0)) {
-    const location_cache_entry_t::value_type& item_s = entry_s[si];
-    const location_cache_entry_t::value_type& item_e = entry_e[ei];
-
-    const int32_t hint_s = std::get<4>(item_s);
-    const int32_t hint_e = std::get<4>(item_e);
-
-    if (hint_s != hint_e) {
-      const IncludeFileInfo& info_s = infos[hint_s];
-      const IncludeFileInfo& info_e = infos[hint_e];
-
-      if (isEmbeddedMacro(hint_s, hint_e)) {
-        csl = cel;
-        csc = info_s.m_symbolStartColumn;
-      } else if (isEmbeddedMacro(hint_e, hint_s)) {
-        cel = csl;
-        cec = info_e.m_symbolEndColumn;
-      }
-    }
-  }
+  // if ((si >= 0) && (ei >= 0)) {
+  //   const location_cache_entry_t::value_type& item_s = entry_s[si];
+  //   const location_cache_entry_t::value_type& item_e = entry_e[ei];
+  // 
+  //   const int32_t hint_s = std::get<4>(item_s);
+  //   const int32_t hint_e = std::get<4>(item_e);
+  // 
+  //   if (hint_s != hint_e) {
+  //     const IncludeFileInfo& info_s = infos[hint_s];
+  //     const IncludeFileInfo& info_e = infos[hint_e];
+  // 
+  //     if (isEmbeddedMacro(hint_s, hint_e)) {
+  //       csl = cel;
+  //       csc = info_s.m_symbolStartColumn;
+  //     } else if (isEmbeddedMacro(hint_e, hint_s)) {
+  //       cel = csl;
+  //       cec = info_e.m_symbolEndColumn;
+  //     }
+  //   }
+  // }
 
   return {csf, csl, csc, cef, cel, cec};
 }

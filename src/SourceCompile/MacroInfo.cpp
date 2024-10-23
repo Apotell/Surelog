@@ -27,9 +27,11 @@ namespace SURELOG {
 MacroInfo::MacroInfo(std::string_view name, int32_t type, PathId fileId,
                      uint32_t startLine, uint16_t startColumn, uint32_t endLine,
                      uint16_t endColumn, uint16_t bodyStartColumn,
+                     uint16_t nameStartColumn,
                      const std::vector<std::string>& arguments,
+                     const std::vector<LineColumn>& argumentPositions,
                      const std::vector<std::string>& tokens,
-                     const std::vector<LineColumn>& positions)
+                     const std::vector<LineColumn>& tokenPositions)
     : m_name(name),
       m_type(type),
       m_fileId(fileId),
@@ -38,7 +40,9 @@ MacroInfo::MacroInfo(std::string_view name, int32_t type, PathId fileId,
       m_endLine(endLine),
       m_endColumn(endColumn),
       m_bodyStartColumn(bodyStartColumn),
+      m_nameStartColumn(nameStartColumn),
       m_arguments(arguments),
+      m_argumentPositions(argumentPositions),
       m_tokens(tokens),
-      m_positions(positions) {}
+      m_tokenPositions(tokenPositions) {}
 }  // namespace SURELOG

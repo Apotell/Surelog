@@ -279,12 +279,24 @@ void PPCache::cacheMacros(::PPCache::Builder builder,
     targetMacro.setStartColumn(info->m_startColumn);
     targetMacro.setEndLine(info->m_endLine);
     targetMacro.setEndColumn(info->m_endColumn);
+    targetMacro.setNameColumn(info->m_nameStartColumn);
+    targetMacro.setBodyColumn(info->m_bodyStartColumn);
 
     const std::vector<std::string>& sourceArguments = info->m_arguments;
     ::capnp::List<::capnp::Text, ::capnp::Kind::BLOB>::Builder targetArguments =
         targetMacro.initArguments(sourceArguments.size());
     for (size_t i = 0, ni = sourceArguments.size(); i < ni; ++i) {
       targetArguments.set(i, sourceArguments[i].c_str());
+    }
+
+    const std::vector<LineColumn>& sourceArgumentPositions =
+        info->m_argumentPositions;
+    ::capnp::List<::LineColumn, ::capnp::Kind::STRUCT>::Builder
+        targetArgumentPositions =
+            targetMacro.initArgumentPositions(sourceArgumentPositions.size());
+    for (size_t i = 0, ni = sourceArgumentPositions.size(); i < ni; ++i) {
+      targetArgumentPositions[i].setLine(sourceArgumentPositions[i].first);
+      targetArgumentPositions[i].setColumn(sourceArgumentPositions[i].second);
     }
 
     const std::vector<std::string>& sourceTokens = info->m_tokens;
@@ -294,12 +306,14 @@ void PPCache::cacheMacros(::PPCache::Builder builder,
       targetTokens.set(i, sourceTokens[i].c_str());
     }
 
-    const std::vector<LineColumn>& sourcePositions = info->m_positions;
+    const std::vector<LineColumn>& sourceTokenPositions =
+        info->m_tokenPositions;
     ::capnp::List<::LineColumn, ::capnp::Kind::STRUCT>::Builder
-        targetPositions = targetMacro.initPositions(sourcePositions.size());
-    for (size_t i = 0, ni = sourcePositions.size(); i < ni; ++i) {
-      targetPositions[i].setLine(sourcePositions[i].first);
-      targetPositions[i].setColumn(sourcePositions[i].second);
+        targetTokenPositions =
+            targetMacro.initTokenPositions(sourceTokenPositions.size());
+    for (size_t i = 0, ni = sourceTokenPositions.size(); i < ni; ++i) {
+      targetTokenPositions[i].setLine(sourceTokenPositions[i].first);
+      targetTokenPositions[i].setColumn(sourceTokenPositions[i].second);
     }
 
     ++index;
@@ -436,7 +450,14 @@ void PPCache::cacheIncludeFileInfos(::PPCache::Builder builder,
     targetIncludeFileInfo.setAction(
         static_cast<uint16_t>(sourceIncludeFileInfo.m_action));
 
-    targetIncludeFileInfo.setDefinition(0);
+    if (sourceIncludeFileInfo.m_macroDefinition == nullptr) {
+      targetIncludeFileInfo.setDefinition(-1);
+    } else {
+      targetIncludeFileInfo.setDefinition(
+          std::distance(sourceMacros.begin(),
+                        std::find(sourceMacros.begin(), sourceMacros.end(),
+                                  sourceIncludeFileInfo.m_macroDefinition)));
+    }
     targetIncludeFileInfo.setSectionFileId((RawPathId)sectionFileId);
     targetIncludeFileInfo.setSectionLine(sourceIncludeFileInfo.m_sectionLine);
     targetIncludeFileInfo.setSectionColumn(
@@ -494,12 +515,21 @@ void PPCache::restoreMacros(SymbolTable& targetSymbols,
     const ::capnp::List<::capnp::Text, ::capnp::Kind::BLOB>::Reader&
         sourceTokens = sourceMacro.getTokens();
     const ::capnp::List<::LineColumn, ::capnp::Kind::STRUCT>::Reader&
-        sourcePositions = sourceMacro.getPositions();
+        sourceArgumentPositions = sourceMacro.getArgumentPositions();
+    const ::capnp::List<::LineColumn, ::capnp::Kind::STRUCT>::Reader&
+        sourceTokenPositions = sourceMacro.getTokenPositions();
 
     std::vector<std::string> args;
     args.reserve(sourceArguments.size());
     for (const ::capnp::Text::Reader& sourceArgument : sourceArguments) {
       args.emplace_back(sourceArgument.cStr());
+    }
+
+    std::vector<LineColumn> argumentPositions;
+    argumentPositions.reserve(sourceArgumentPositions.size());
+    for (const ::LineColumn::Reader& sourcePosition : sourceArgumentPositions) {
+      argumentPositions.emplace_back(sourcePosition.getLine(),
+                                     sourcePosition.getColumn());
     }
 
     std::vector<std::string> tokens;
@@ -508,11 +538,11 @@ void PPCache::restoreMacros(SymbolTable& targetSymbols,
       tokens.emplace_back(sourceToken.cStr());
     }
 
-    std::vector<LineColumn> positions;
-    positions.reserve(sourcePositions.size());
-    for (const ::LineColumn::Reader& sourcePosition : sourcePositions) {
-      positions.emplace_back(sourcePosition.getLine(),
-                             sourcePosition.getColumn());
+    std::vector<LineColumn> tokenPositions;
+    tokenPositions.reserve(sourceTokenPositions.size());
+    for (const ::LineColumn::Reader& sourcePosition : sourceTokenPositions) {
+      tokenPositions.emplace_back(sourcePosition.getLine(),
+                                  sourcePosition.getColumn());
     }
 
     m_pp->recordMacro(
@@ -522,8 +552,9 @@ void PPCache::restoreMacros(SymbolTable& targetSymbols,
                                  sourceMacro.getFileId(), UnknownRawPath))),
                              &targetSymbols),
         sourceMacro.getStartLine(), sourceMacro.getStartColumn(),
-        sourceMacro.getEndLine(), sourceMacro.getEndColumn(), 0, args, tokens,
-        positions);
+        sourceMacro.getEndLine(), sourceMacro.getEndColumn(),
+        sourceMacro.getNameColumn(), sourceMacro.getBodyColumn(), args,
+        argumentPositions, tokens, tokenPositions);
   }
 }
 
@@ -595,6 +626,9 @@ void PPCache::restoreIncludeFileInfos(
         fileSystem->remap(sourceSymbols.getSymbol(SymbolId(
             sourceIncludeFileInfo.getSectionFileId(), UnknownRawPath))),
         &targetSymbols);
+    int32_t macroIndex = sourceIncludeFileInfo.getDefinition();
+    MacroInfo* const macroDef =
+        (macroIndex != -1) ? sourceMacros[macroIndex] : nullptr;
     // std::cout << "read sectionFile: " << sectionFileName << " s:" <<
     // incinfo->m_sectionStartLine() << " o:" << incinfo->m_originalLine() <<
     // " t:" << incinfo->m_type() << "\n";
@@ -602,8 +636,7 @@ void PPCache::restoreIncludeFileInfos(
         static_cast<IncludeFileInfo::Context>(
             sourceIncludeFileInfo.getContext()),
         static_cast<IncludeFileInfo::Action>(sourceIncludeFileInfo.getAction()),
-        sourceMacros[sourceIncludeFileInfo.getDefinition()], sectionFileId,
-        sourceIncludeFileInfo.getSectionLine(),
+        macroDef, sectionFileId, sourceIncludeFileInfo.getSectionLine(),
         sourceIncludeFileInfo.getSectionColumn(),
         sourceIncludeFileInfo.getSourceLine(),
         sourceIncludeFileInfo.getSourceColumn(), sectionSymbolId,

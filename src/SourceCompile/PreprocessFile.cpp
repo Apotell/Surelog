@@ -631,20 +631,35 @@ void PreprocessFile::append(std::string_view s) {
 
 MacroInfo* PreprocessFile::recordMacro(
     std::string_view name, uint32_t startLine, uint16_t startColumn,
-    uint32_t endLine, uint16_t endColumn, uint16_t bodyStartColumn,
-    std::string_view arguments, const std::vector<std::string>& tokens,
-    const std::vector<LineColumn>& positions) {
+    uint32_t endLine, uint16_t endColumn, uint16_t nameStartColumn,
+    uint16_t bodyStartColumn, std::string_view arguments,
+    const std::vector<LineColumn>& argumentPositions,
+    const std::vector<std::string>& tokens,
+    const std::vector<LineColumn>& tokenPositions) {
+  if (m_includer != nullptr) {
+    MacroInfo* const macroInfo = m_includer->recordMacro(
+        name, startLine, startColumn, endLine, endColumn, nameStartColumn,
+        bodyStartColumn, arguments, argumentPositions, tokens, tokenPositions);
+    if (macroInfo != nullptr) {
+      MacroStorageRef::iterator itr = m_macros.find(name);
+      if (itr == m_macros.end()) {
+        itr = m_macros.emplace(name, std::vector<MacroInfo*>()).first;
+      }
+      itr->second.push_back(macroInfo);
+      m_compilationUnit->registerMacroInfo(name, macroInfo);
+    }
+    return macroInfo;
+  }
+
   // *** Argument processing
-  std::string arguments_short(arguments);
+  std::string_view arguments_short = StringUtils::trim(arguments);
   // Remove (
-  size_t p = arguments_short.find('(');
-  if (p != std::string::npos) {
-    arguments_short.erase(p, 1);
+  if (!arguments_short.empty() && (arguments_short.front() == '(')) {
+    arguments_short.remove_prefix(1);
   }
   // Remove )
-  p = arguments_short.find(')');
-  if (p != std::string::npos) {
-    arguments_short.erase(p, 1);
+  if (!arguments_short.empty() && (arguments_short.back() == ')')) {
+    arguments_short.remove_suffix(1);
   }
   // Tokenize args
   std::vector<std::string> args;
@@ -662,11 +677,11 @@ MacroInfo* PreprocessFile::recordMacro(
   std::vector<std::string> body_tokens;
   body_tokens.reserve(tokens.size());
   std::vector<LineColumn> token_positions;
-  token_positions.reserve(positions.size());
+  token_positions.reserve(tokenPositions.size());
 
   for (size_t i = 0, ni = tokens.size(); i < ni; ++i) {
     const std::string& tok = tokens[i];
-    const LineColumn& lc = positions[i];
+    const LineColumn& lc = tokenPositions[i];
     if (tok == "``_``") {
       body_tokens.emplace_back("``");
       body_tokens.emplace_back("_");
@@ -689,68 +704,31 @@ MacroInfo* PreprocessFile::recordMacro(
   MacroInfo* macroInfo = new MacroInfo(
       name, arguments.empty() ? MacroInfo::NO_ARGS : MacroInfo::WITH_ARGS,
       getFileId(startLine), startLine, startColumn, endLine, endColumn,
-      bodyStartColumn, args, body_tokens, token_positions);
+      nameStartColumn, bodyStartColumn, args, argumentPositions, body_tokens,
+      token_positions);
   MacroStorageRef::iterator itr = m_macros.find(name);
   if (itr == m_macros.end()) {
     itr = m_macros.emplace(name, std::vector<MacroInfo*>()).first;
   }
   itr->second.push_back(macroInfo);
   m_compilationUnit->registerMacroInfo(name, macroInfo);
-  checkMacroArguments_(name, startLine, startColumn, args, tokens);
+  checkMacroArguments_(name, startLine, nameStartColumn, args, tokens);
   return macroInfo;
-}
-
-std::string PreprocessFile::reportIncludeInfo() const {
-  FileSystem* const fileSystem = FileSystem::getInstance();
-  std::ostringstream strm;
-  for (auto const& info : m_includeFileInfo) {
-    const char* const context =
-        (info.m_context == IncludeFileInfo::Context::INCLUDE) ? "inc" : "mac";
-    const char* const action =
-        (info.m_action == IncludeFileInfo::Action::PUSH) ? "in" : "out";
-    strm << context << " " << info.m_sourceLine << ","
-         << info.m_symbolStartColumn << ":" << info.m_symbolEndLine << ","
-         << info.m_symbolEndColumn << " " << getSymbol(info.m_symbolId) << "^"
-         << fileSystem->toPath(info.m_sectionFileId) << " "
-         << info.m_sectionLine << " " << action << std::endl;
-  }
-  return strm.str();
 }
 
 MacroInfo* PreprocessFile::recordMacro(
     std::string_view name, PathId fileId, uint32_t startLine,
     uint16_t startColumn, uint32_t endLine, uint16_t endColumn,
-    uint16_t bodyStartColumn, const std::vector<std::string>& arguments,
+    uint16_t nameStartColumn, uint16_t bodyStartColumn,
+    const std::vector<std::string>& arguments,
+    const std::vector<LineColumn>& argumentPositions,
     const std::vector<std::string>& tokens,
-    const std::vector<LineColumn>& positions) {
-  std::vector<std::string> body_tokens;
-  body_tokens.reserve(tokens.size());
-  std::vector<LineColumn> token_positions;
-  token_positions.reserve(positions.size());
-
-  for (size_t i = 0, ni = tokens.size(); i < ni; ++i) {
-    const std::string& tok = tokens[i];
-    const LineColumn& lc = positions[i];
-    if (tok == "``_``") {
-      body_tokens.emplace_back("``");
-      body_tokens.emplace_back("_");
-      body_tokens.emplace_back("``");
-      token_positions.emplace_back(lc.first, lc.second);
-      token_positions.emplace_back(lc.first, lc.second + 2);
-      token_positions.emplace_back(lc.first, lc.second + 3);
-    } else {
-      body_tokens.emplace_back(tok);
-      token_positions.emplace_back(lc);
-    }
-  }
-
-  StringUtils::replaceInTokenVector(body_tokens, "`\"", "\"");
-  StringUtils::replaceInTokenVector(body_tokens, "`\\`\"", "\\\"");
-
+    const std::vector<LineColumn>& tokenPositions) {
+  // NOTE: This is called from PPCache so all the inputs are already processed.
   MacroInfo* macroInfo = new MacroInfo(
       name, arguments.empty() ? MacroInfo::NO_ARGS : MacroInfo::WITH_ARGS,
-      fileId, startLine, startColumn, endLine, endColumn, bodyStartColumn,
-      arguments, body_tokens, token_positions);
+      fileId, startLine, startColumn, endLine, endColumn, nameStartColumn,
+      bodyStartColumn, arguments, argumentPositions, tokens, tokenPositions);
   MacroStorageRef::iterator itr = m_macros.find(name);
   if (itr == m_macros.end()) {
     itr = m_macros.emplace(name, std::vector<MacroInfo*>()).first;
@@ -774,7 +752,7 @@ void PreprocessFile::checkMacroArguments_(
     std::string tok(StringUtils::trim(s));
     tok = StringUtils::replaceAll(tok, "``", "");
     tok = StringUtils::replaceAll(tok, "`", "");
-    tokenSet.insert(tok);
+    tokenSet.emplace(tok);
   }
   for (const auto& s : argSet) {
     if (tokenSet.find(s) == tokenSet.end()) {
@@ -815,6 +793,23 @@ void PreprocessFile::checkMacroArguments_(
       }
     }
   }
+}
+
+std::string PreprocessFile::reportIncludeInfo() const {
+  FileSystem* const fileSystem = FileSystem::getInstance();
+  std::ostringstream strm;
+  for (auto const& info : m_includeFileInfo) {
+    const char* const context =
+        (info.m_context == IncludeFileInfo::Context::INCLUDE) ? "inc" : "mac";
+    const char* const action =
+        (info.m_action == IncludeFileInfo::Action::PUSH) ? "in" : "out";
+    strm << context << " " << info.m_sourceLine << ","
+         << info.m_symbolStartColumn << ":" << info.m_symbolEndLine << ","
+         << info.m_symbolEndColumn << " " << getSymbol(info.m_symbolId) << "^"
+         << fileSystem->toPath(info.m_sectionFileId) << " "
+         << info.m_sectionLine << " " << action << std::endl;
+  }
+  return strm.str();
 }
 
 PathId PreprocessFile::getIncluderFileId(uint32_t line) const {
@@ -1036,14 +1031,14 @@ PreprocessFile::evaluateMacro_(
   }
   std::string body;
   std::vector<LineColumn> token_positions;
-  token_positions.reserve(macroInfo->m_positions.size());
+  token_positions.reserve(macroInfo->m_tokenPositions.size());
   uint32_t pos = 1;
   uint32_t line = 0;
   for (size_t i = 0, ni = body_tokens.size(); i < ni; ++i) {
     const auto& token = body_tokens[i];
     body += token;
-    if ((line == 0) || (macroInfo->m_positions[i].first != line)) {
-      line = macroInfo->m_positions[i].first;
+    if ((line == 0) || (macroInfo->m_tokenPositions[i].first != line)) {
+      line = macroInfo->m_tokenPositions[i].first;
       pos = 1;
     }
     token_positions.emplace_back(line, pos);

@@ -30,22 +30,25 @@ struct LineColumn {
 }
 
 struct Macro {
-  nameId      @0 :UInt64;
-  type        @1 :MacroType;
-  fileId      @2 :UInt32;
-  startLine   @3 :UInt32;
-  startColumn @4 :UInt16;
-  endLine     @5 :UInt32;
-  endColumn   @6 :UInt16;
-  arguments   @7 :List(Text);
-  tokens      @8 :List(Text);
-  positions   @9 :List(LineColumn);
+  nameId            @0  :UInt64;
+  type              @1  :MacroType;
+  fileId            @2  :UInt32;
+  startLine         @3  :UInt32;
+  startColumn       @4  :UInt16;
+  endLine           @5  :UInt32;
+  endColumn         @6  :UInt16;
+  nameColumn        @7  :UInt16;
+  bodyColumn        @8  :UInt16;
+  arguments         @9  :List(Text);
+  argumentPositions @10 :List(LineColumn);
+  tokens            @11 :List(Text);
+  tokenPositions    @12 :List(LineColumn);
 }
 
 struct IncludeFileInfo {
   action             @0  :UInt16;  # 1 or 2, push or pop
   context            @1  :UInt16;
-  definition         @2  :UInt32;
+  definition         @2  :Int32;
   sectionFileId      @3  :UInt64;
   sectionLine        @4  :UInt32;
   sourceLine         @5  :UInt32;

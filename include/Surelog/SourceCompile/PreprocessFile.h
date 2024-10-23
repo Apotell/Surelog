@@ -94,17 +94,20 @@ class PreprocessFile final {
   /* Macro manipulations */
   MacroInfo* recordMacro(std::string_view name, uint32_t startLine,
                          uint16_t startColumn, uint32_t endLine,
-                         uint16_t endColumn, uint16_t bodyStartColumn,
-                         std::string_view formal_arguments,
-                         const std::vector<std::string>& body,
-                         const std::vector<LineColumn>& positions);
+                         uint16_t endColumn, uint16_t nameStartColumn,
+                         uint16_t bodyStartColumn,
+                         std::string_view arguments,
+                         const std::vector<LineColumn>& argumentPositions,
+                         const std::vector<std::string>& tokens,
+                         const std::vector<LineColumn>& tokenPositions);
   MacroInfo* recordMacro(std::string_view name, PathId fileId,
                          uint32_t startLine, uint16_t startColumn,
                          uint32_t endLine, uint16_t endColumn,
-                         uint16_t bodyStartColumn,
-                         const std::vector<std::string>& formal_arguments,
-                         const std::vector<std::string>& body,
-                         const std::vector<LineColumn>& positions);
+                         uint16_t nameStartColumn, uint16_t bodyStartColumn,
+                         const std::vector<std::string>& arguments,
+                         const std::vector<LineColumn>& argumentPositions,
+                         const std::vector<std::string>& tokens,
+                         const std::vector<LineColumn>& tokenPositions);
   std::tuple<bool, std::string, std::vector<LineColumn>> getMacro(
       std::string_view name, std::vector<std::string>& actual_arguments,
       PreprocessFile* callingFile, uint32_t callingLine, LoopCheck& loopChecker,

@@ -496,11 +496,12 @@ operation                                              1
 package                                                2
 range                                                  1
 ref_obj                                                6
-ref_typespec                                          21
+ref_typespec                                          22
 ref_var                                                2
 source_file                                            1
 task                                                  11
 task_decl                                              1
+typedef_typespec                                       1
 unsupported_typespec                                   2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ForLoopBind/slpp_all/surelog.uhdm ...
@@ -900,8 +901,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/ForLoopBind/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1243,13 +1258,13 @@ design: (unnamed)
     |vpiName:uvm_vreg
     |vpiFullName:uvm::uvm_vreg
     |vpiVariables:
-    \_class_var: (uvm::uvm_vreg), line:21:10, endln:21:35
+    \_class_var: (uvm::uvm_vreg), line:21:25, endln:21:31
       |vpiParent:
       \_class_defn: (uvm::uvm_vreg), file:${SURELOG_DIR}/tests/ForLoopBind/dut.sv, line:20:1, endln:23:9
       |vpiTypespec:
       \_ref_typespec: (uvm::uvm_vreg::uvm_vreg_field), line:21:10, endln:21:24
         |vpiParent:
-        \_class_var: (uvm::uvm_vreg), line:21:10, endln:21:35
+        \_class_var: (uvm::uvm_vreg), line:21:25, endln:21:31
         |vpiName:uvm_vreg_field
         |vpiFullName:uvm::uvm_vreg::uvm_vreg_field
         |vpiActual:
@@ -1274,7 +1289,7 @@ design: (unnamed)
       |vpiVisibility:3
       |vpiArrayType:4
       |vpiReg:
-      \_class_var: (uvm::uvm_vreg), line:21:10, endln:21:35
+      \_class_var: (uvm::uvm_vreg), line:21:25, endln:21:31
     |vpiRegArray:
     \_array_var: (uvm::uvm_vreg::fields), line:21:25, endln:21:35
     |vpiInternalScope:
@@ -1549,7 +1564,7 @@ design: (unnamed)
     |vpiImportTypespec:
     \_class_typespec: (uvm_vreg_field), line:21:10, endln:21:24
     |vpiImportTypespec:
-    \_class_var: (uvm::uvm_vreg), line:21:10, endln:21:35
+    \_class_var: (uvm::uvm_vreg), line:21:25, endln:21:31
     |vpiImportTypespec:
     \_array_var: (uvm::uvm_vreg::fields), line:21:25, endln:21:35
     |vpiImportTypespec:
@@ -1612,7 +1627,3 @@ design: (unnamed)
 [LINT]: ${SURELOG_DIR}/tests/ForLoopBind/dut.sv:17:1: Non synthesizable construct, uvm_vreg_field
 [LINT]: ${SURELOG_DIR}/tests/ForLoopBind/dut.sv:20:1: Non synthesizable construct, uvm_vreg
 ============================== End Linting Results ==============================
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ForLoopBind/dut.sv | ${SURELOG_DIR}/build/regression/ForLoopBind/roundtrip/dut_000.sv | 11 | 36 |
-============================== End RoundTrip Results ==============================

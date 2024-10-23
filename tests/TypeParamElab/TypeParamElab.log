@@ -304,10 +304,11 @@ port                                                   1
 range                                                  2
 ref_module                                             2
 ref_obj                                                2
-ref_typespec                                          10
+ref_typespec                                          11
 source_file                                            1
 struct_typespec                                        1
 type_parameter                                         2
+typedef_typespec                                       1
 typespec_member                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypeParamElab/slpp_all/surelog.uhdm ...
@@ -525,6 +526,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (axi_meta_t), line:30:5, endln:30:15
+    |vpiParent:
+    \_module_inst: work@axi_node_arbiter (work@axi_node_arbiter), file:${SURELOG_DIR}/tests/TypeParamElab/dut.sv, line:22:1, endln:37:10
+    |vpiName:axi_meta_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@axi_node_arbiter.axi_meta_t), line:27:11, endln:30:4
+      |vpiParent:
+      \_typedef_typespec: (axi_meta_t), line:30:5, endln:30:15
+      |vpiFullName:work@axi_node_arbiter.axi_meta_t
+      |vpiActual:
+      \_struct_typespec: (axi_meta_t), line:27:11, endln:30:4
   |vpiImportTypespec:
   \_int_typespec: , line:23:13, endln:23:25
   |vpiImportTypespec:
@@ -537,6 +550,8 @@ design: (unnamed)
   \_logic_typespec: , line:28:5, endln:28:26
   |vpiImportTypespec:
   \_logic_typespec: , line:29:5, endln:29:25
+  |vpiImportTypespec:
+  \_typedef_typespec: (axi_meta_t), line:30:5, endln:30:15
   |vpiDefName:work@axi_node_arbiter
   |vpiRefModule:
   \_ref_module: work@stream_arbiter (i_arb_inp), line:32:2, endln:35:19
@@ -765,7 +780,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 3
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/TypeParamElab/dut.sv | ${SURELOG_DIR}/build/regression/TypeParamElab/roundtrip/dut_000.sv | 25 | 37 |
-============================== End RoundTrip Results ==============================

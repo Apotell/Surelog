@@ -159,24 +159,25 @@ io_decl                                                1
 operation                                              3
 package                                                1
 ref_obj                                                8
-ref_typespec                                           4
+ref_typespec                                           5
 ref_var                                                1
 return_stmt                                            1
 source_file                                            1
 struct_typespec                                        1
+typedef_typespec                                       1
 typespec_member                                        1
 unsupported_typespec                                   2
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:13:12: Failed to bind object: "id: 31, name: i".
-[ERR:EL0535] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:13:12: Illegal implicit net "id:31, name: i".
-[ERR:UH0734] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:12:21: Failed to bind object: "id: 24, name: nbytes".
-[ERR:EL0535] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:12:21: Illegal implicit net "id:24, name: nbytes".
-[ERR:UH0734] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:17:8: Failed to bind object: "id: 41, name: gp".
-[ERR:EL0535] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:17:8: Illegal implicit net "id:41, name: gp".
-[ERR:IG0809] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:13:12: Object 31 actual cannot be null.
-[ERR:IG0809] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:12:21: Object 24 actual cannot be null.
-[ERR:IG0809] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:17:8: Object 41 actual cannot be null.
+[ERR:UH0734] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:13:12: Failed to bind object: "id: 33, name: i".
+[ERR:EL0535] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:13:12: Illegal implicit net "id:33, name: i".
+[ERR:UH0734] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:12:21: Failed to bind object: "id: 26, name: nbytes".
+[ERR:EL0535] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:12:21: Illegal implicit net "id:26, name: nbytes".
+[ERR:UH0734] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:17:8: Failed to bind object: "id: 43, name: gp".
+[ERR:EL0535] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:17:8: Illegal implicit net "id:43, name: gp".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/IndexPartSelectBind/slpp_all/surelog.uhdm ...
+[ERR:IG0809] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:13:12: Object 33 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:12:21: Object 26 actual cannot be null.
+[ERR:IG0809] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:17:8: Object 43 actual cannot be null.
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/IndexPartSelectBind/slpp_all/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -455,12 +456,26 @@ design: (unnamed)
     |vpiParent:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:1:1, endln:23:11
     |vpiName:uvm_reg_data_t
+  |vpiTypedef:
+  \_typedef_typespec: (uvm_reg_bus_op), line:6:3, endln:6:17
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:1:1, endln:23:11
+    |vpiName:uvm_reg_bus_op
+    |vpiTypedefAlias:
+    \_ref_typespec: (pkg::uvm_reg_bus_op), line:4:9, endln:6:2
+      |vpiParent:
+      \_typedef_typespec: (uvm_reg_bus_op), line:6:3, endln:6:17
+      |vpiFullName:pkg::uvm_reg_bus_op
+      |vpiActual:
+      \_struct_typespec: (pkg::uvm_reg_bus_op), line:4:9, endln:6:2
   |vpiImportTypespec:
   \_class_defn: (pkg::tt), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:8:1, endln:21:9
   |vpiImportTypespec:
   \_struct_typespec: (pkg::uvm_reg_bus_op), line:4:9, endln:6:2
   |vpiImportTypespec:
   \_unsupported_typespec: (uvm_reg_data_t), line:5:3, endln:5:17
+  |vpiImportTypespec:
+  \_typedef_typespec: (uvm_reg_bus_op), line:6:3, endln:6:17
   |vpiDefName:pkg
   |vpiClassDefn:
   \_class_defn: (pkg::tt), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:8:1, endln:21:9
@@ -474,7 +489,3 @@ design: (unnamed)
 ============================== Begin Linting Results ==============================
 [LINT]: ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:8:1: Non synthesizable construct, tt
 ============================== End Linting Results ==============================
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv | ${SURELOG_DIR}/build/regression/IndexPartSelectBind/roundtrip/dut_000.sv | 4 | 23 |
-============================== End RoundTrip Results ==============================

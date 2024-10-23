@@ -94,9 +94,10 @@ module_inst                                            1
 package                                                2
 port                                                   2
 range                                                  1
-ref_typespec                                           3
+ref_typespec                                           4
 source_file                                            1
 struct_typespec                                        1
+typedef_typespec                                       1
 typespec_member                                        1
 unsupported_typespec                                   4
 === UHDM Object Stats End ===
@@ -158,10 +159,24 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (otp_ast_req_t), line:4:5, endln:4:18
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/PkgImportPkg/dut.sv, line:1:1, endln:5:26
+    |vpiName:otp_ast_req_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::otp_ast_req_t), line:2:11, endln:4:4
+      |vpiParent:
+      \_typedef_typespec: (otp_ast_req_t), line:4:5, endln:4:18
+      |vpiFullName:otp_ctrl_pkg::otp_ast_req_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_pkg::otp_ast_req_t), line:2:11, endln:4:4
   |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_pkg::otp_ast_req_t), line:2:11, endln:4:4
   |vpiImportTypespec:
   \_logic_typespec: , line:3:5, endln:3:16
+  |vpiImportTypespec:
+  \_typedef_typespec: (otp_ast_req_t), line:4:5, endln:4:18
   |vpiDefName:otp_ctrl_pkg
   |vpiEndLabel:otp_ctrl_pkg
 |uhdmallPackages:
@@ -249,7 +264,7 @@ design: (unnamed)
       |vpiName:otp_ast_req_t
       |vpiFullName:work@otp_ctrl.otp_ast_pwr_seq_o.otp_ast_req_t
       |vpiActual:
-      \_struct_typespec: (otp_ctrl_pkg::otp_ast_req_t), line:2:11, endln:4:4
+      \_typedef_typespec: (otp_ast_req_t), line:4:5, endln:4:18
   |vpiPort:
   \_port: (otp_ast_pwr_seq_h_i), line:15:3, endln:15:43
     |vpiParent:
@@ -271,7 +286,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 3
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PkgImportPkg/dut.sv | ${SURELOG_DIR}/build/regression/PkgImportPkg/roundtrip/dut_000.sv | 10 | 17 |
-============================== End RoundTrip Results ==============================

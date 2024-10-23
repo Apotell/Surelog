@@ -506,14 +506,15 @@ preproc_macro_instance                                 2
 range                                                  5
 ref_module                                             1
 ref_obj                                                9
-ref_typespec                                          20
+ref_typespec                                          22
 source_file                                            2
 struct_typespec                                        2
 task                                                   9
+typedef_typespec                                       2
 typespec_member                                        2
 === UHDM Object Stats End ===
-[ERR:IG0809] ${SURELOG_DIR}/tests/PreprocUhdmCov/dut.sv:30:2: Object 57 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PreprocUhdmCov/slpp_all/surelog.uhdm ...
+[ERR:IG0809] ${SURELOG_DIR}/tests/PreprocUhdmCov/dut.sv:30:2: Object 59 actual cannot be null.
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PreprocUhdmCov/slpp_all/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -952,8 +953,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/PreprocUhdmCov/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1363,6 +1378,18 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PreprocUhdmCov/dut.sv, line:4:1, endln:50:17
   |vpiTypedef:
+  \_typedef_typespec: (spi_device_reg2hw_intr_enable_reg_t), line:43:6, endln:43:41
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PreprocUhdmCov/dut.sv, line:4:1, endln:50:17
+    |vpiName:spi_device_reg2hw_intr_enable_reg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top.spi_device_reg2hw_intr_enable_reg_t), line:38:9, endln:43:5
+      |vpiParent:
+      \_typedef_typespec: (spi_device_reg2hw_intr_enable_reg_t), line:43:6, endln:43:41
+      |vpiFullName:work@top.spi_device_reg2hw_intr_enable_reg_t
+      |vpiActual:
+      \_struct_typespec: (spi_device_reg2hw_intr_enable_reg_t), line:38:9, endln:43:5
+  |vpiTypedef:
   \_logic_typespec: , line:4:19, endln:4:24
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PreprocUhdmCov/dut.sv, line:4:1, endln:50:17
@@ -1386,6 +1413,8 @@ design: (unnamed)
   \_struct_typespec: , line:40:2, endln:42:9
   |vpiImportTypespec:
   \_logic_typespec: , line:41:10, endln:41:15
+  |vpiImportTypespec:
+  \_typedef_typespec: (spi_device_reg2hw_intr_enable_reg_t), line:43:6, endln:43:41
   |vpiImportTypespec:
   \_logic_typespec: , line:4:19, endln:4:24
   |vpiImportTypespec:
@@ -1574,7 +1603,3 @@ design: (unnamed)
 [  ERROR] : 2
 [WARNING] : 5
 [   NOTE] : 1
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PreprocUhdmCov/dut.sv | ${SURELOG_DIR}/build/regression/PreprocUhdmCov/roundtrip/dut_000.sv | 16 | 50 |
-============================== End RoundTrip Results ==============================

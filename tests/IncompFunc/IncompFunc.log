@@ -174,9 +174,10 @@ packed_array_var                                       2
 port                                                   1
 range                                                  5
 ref_obj                                                3
-ref_typespec                                           7
+ref_typespec                                           8
 return_stmt                                            1
 source_file                                            1
+typedef_typespec                                       1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/IncompFunc/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/IncompFunc/slpp_all/checker/surelog.chk.html ...
@@ -331,7 +332,7 @@ design: (unnamed)
           |vpiName:sp2v_e
           |vpiFullName:work@top.get_BA.sp2v_e
           |vpiActual:
-          \_enum_typespec: (sp2v_e), line:2:12, endln:5:13
+          \_typedef_typespec: (sp2v_e), line:5:6, endln:5:12
       |vpiImportTypespec:
       \_packed_array_typespec: , line:8:7, endln:8:19
       |vpiImportTypespec:
@@ -411,7 +412,7 @@ design: (unnamed)
         |vpiName:sp2v_e
         |vpiFullName:work@top.get_BA.sp2v_e
         |vpiActual:
-        \_enum_typespec: (sp2v_e), line:2:12, endln:5:13
+        \_typedef_typespec: (sp2v_e), line:5:6, endln:5:12
     |vpiImportTypespec:
     \_packed_array_typespec: , line:7:23, endln:7:35
     |vpiImportTypespec:
@@ -477,6 +478,18 @@ design: (unnamed)
       |vpiDecompile:3'b111
       |vpiSize:3
   |vpiTypedef:
+  \_typedef_typespec: (sp2v_e), line:5:6, endln:5:12
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/IncompFunc/dut.sv, line:1:1, endln:14:10
+    |vpiName:sp2v_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top.sp2v_e), line:2:12, endln:5:5
+      |vpiParent:
+      \_typedef_typespec: (sp2v_e), line:5:6, endln:5:12
+      |vpiFullName:work@top.sp2v_e
+      |vpiActual:
+      \_enum_typespec: (sp2v_e), line:2:12, endln:5:13
+  |vpiTypedef:
   \_int_typespec: , line:1:19, endln:1:22
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/IncompFunc/dut.sv, line:1:1, endln:14:10
@@ -492,6 +505,8 @@ design: (unnamed)
   \_logic_typespec: , line:2:17, endln:2:28
   |vpiImportTypespec:
   \_enum_typespec: (sp2v_e), line:2:12, endln:5:13
+  |vpiImportTypespec:
+  \_typedef_typespec: (sp2v_e), line:5:6, endln:5:12
   |vpiImportTypespec:
   \_int_typespec: , line:1:19, endln:1:22
   |vpiImportTypespec:
@@ -546,7 +561,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/IncompFunc/dut.sv | ${SURELOG_DIR}/build/regression/IncompFunc/roundtrip/dut_000.sv | 7 | 14 |
-============================== End RoundTrip Results ==============================

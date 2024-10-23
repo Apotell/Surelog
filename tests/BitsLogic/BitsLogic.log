@@ -194,10 +194,11 @@ param_assign                                           1
 parameter                                              1
 range                                                  6
 ref_obj                                                3
-ref_typespec                                           7
+ref_typespec                                           9
 source_file                                            1
 struct_typespec                                        2
 sys_func_call                                          1
+typedef_typespec                                       2
 typespec_member                                        5
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
@@ -239,10 +240,24 @@ design: (unnamed)
   \_logic_typespec: , line:5:5, endln:5:10
     |vpiParent:
     \_package: SchedulerTypes (SchedulerTypes::), file:${SURELOG_DIR}/tests/BitsLogic/dut.sv, line:1:1, endln:8:11
+  |vpiTypedef:
+  \_typedef_typespec: (IntIssueQueueEntry), line:6:3, endln:6:21
+    |vpiParent:
+    \_package: SchedulerTypes (SchedulerTypes::), file:${SURELOG_DIR}/tests/BitsLogic/dut.sv, line:1:1, endln:8:11
+    |vpiName:IntIssueQueueEntry
+    |vpiTypedefAlias:
+    \_ref_typespec: (SchedulerTypes::IntIssueQueueEntry), line:3:9, endln:6:2
+      |vpiParent:
+      \_typedef_typespec: (IntIssueQueueEntry), line:6:3, endln:6:21
+      |vpiFullName:SchedulerTypes::IntIssueQueueEntry
+      |vpiActual:
+      \_struct_typespec: (SchedulerTypes::IntIssueQueueEntry), line:3:9, endln:6:2
   |vpiImportTypespec:
   \_struct_typespec: (SchedulerTypes::IntIssueQueueEntry), line:3:9, endln:6:2
   |vpiImportTypespec:
   \_logic_typespec: , line:5:5, endln:5:10
+  |vpiImportTypespec:
+  \_typedef_typespec: (IntIssueQueueEntry), line:6:3, endln:6:21
   |vpiDefName:SchedulerTypes
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitsLogic/dut.sv, line:12:1, endln:28:10
@@ -423,6 +438,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (ReplayQueueEntry), line:22:7, endln:22:23
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitsLogic/dut.sv, line:12:1, endln:28:10
+    |vpiName:ReplayQueueEntry
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top.ReplayQueueEntry), line:14:10, endln:22:6
+      |vpiParent:
+      \_typedef_typespec: (ReplayQueueEntry), line:22:7, endln:22:23
+      |vpiFullName:work@top.ReplayQueueEntry
+      |vpiActual:
+      \_struct_typespec: (ReplayQueueEntry), line:14:10, endln:22:6
+  |vpiTypedef:
   \_logic_typespec: , line:26:1, endln:26:14
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitsLogic/dut.sv, line:12:1, endln:28:10
@@ -470,6 +497,8 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:21:9, endln:21:21
   |vpiImportTypespec:
+  \_typedef_typespec: (ReplayQueueEntry), line:22:7, endln:22:23
+  |vpiImportTypespec:
   \_logic_typespec: , line:26:1, endln:26:14
   |vpiImportTypespec:
   \_logic_var: (work@top.b), line:26:15, endln:26:16
@@ -482,7 +511,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/BitsLogic/dut.sv | ${SURELOG_DIR}/build/regression/BitsLogic/roundtrip/dut_000.sv | 7 | 28 |
-============================== End RoundTrip Results ==============================

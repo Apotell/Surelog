@@ -433,10 +433,11 @@ param_assign                                           2
 parameter                                              2
 range                                                  2
 ref_obj                                                4
-ref_typespec                                          19
+ref_typespec                                          21
 source_file                                            1
 struct_typespec                                        1
 task                                                   9
+typedef_typespec                                       2
 typespec_member                                        4
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
@@ -837,8 +838,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/IfGenTypeBinding/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1122,6 +1137,18 @@ design: (unnamed)
   \_logic_typespec: , line:7:5, endln:7:10
     |vpiParent:
     \_package: ibex_pkg (ibex_pkg::), file:${SURELOG_DIR}/tests/IfGenTypeBinding/dut.sv, line:1:1, endln:11:11
+  |vpiTypedef:
+  \_typedef_typespec: (pmp_cfg_t), line:8:5, endln:8:14
+    |vpiParent:
+    \_package: ibex_pkg (ibex_pkg::), file:${SURELOG_DIR}/tests/IfGenTypeBinding/dut.sv, line:1:1, endln:11:11
+    |vpiName:pmp_cfg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (ibex_pkg::pmp_cfg_t), line:3:11, endln:8:4
+      |vpiParent:
+      \_typedef_typespec: (pmp_cfg_t), line:8:5, endln:8:14
+      |vpiFullName:ibex_pkg::pmp_cfg_t
+      |vpiActual:
+      \_struct_typespec: (ibex_pkg::pmp_cfg_t), line:3:11, endln:8:4
   |vpiImportTypespec:
   \_struct_typespec: (ibex_pkg::pmp_cfg_t), line:3:11, endln:8:4
   |vpiImportTypespec:
@@ -1132,6 +1159,8 @@ design: (unnamed)
   \_logic_typespec: , line:6:5, endln:6:10
   |vpiImportTypespec:
   \_logic_typespec: , line:7:5, endln:7:10
+  |vpiImportTypespec:
+  \_typedef_typespec: (pmp_cfg_t), line:8:5, endln:8:14
   |vpiDefName:ibex_pkg
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/IfGenTypeBinding/dut.sv, line:13:1, endln:24:10
@@ -1268,7 +1297,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/IfGenTypeBinding/dut.sv | ${SURELOG_DIR}/build/regression/IfGenTypeBinding/roundtrip/dut_000.sv | 8 | 24 |
-============================== End RoundTrip Results ==============================

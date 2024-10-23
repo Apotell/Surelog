@@ -317,11 +317,12 @@ parameter                                              5
 range                                                  5
 ref_module                                             2
 ref_obj                                                3
-ref_typespec                                          10
+ref_typespec                                          12
 source_file                                            1
 string_typespec                                        2
 struct_typespec                                        2
 tagged_pattern                                         2
+typedef_typespec                                       2
 typespec_member                                        4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamOverloading/slpp_all/surelog.uhdm ...
@@ -579,6 +580,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (struct_ab), line:11:6, endln:11:15
+    |vpiParent:
+    \_module_inst: work@prim_subreg_shadow (work@prim_subreg_shadow), file:${SURELOG_DIR}/tests/ParamOverloading/dut.sv, line:7:1, endln:22:10
+    |vpiName:struct_ab
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@prim_subreg_shadow.struct_ab), line:8:12, endln:11:5
+      |vpiParent:
+      \_typedef_typespec: (struct_ab), line:11:6, endln:11:15
+      |vpiFullName:work@prim_subreg_shadow.struct_ab
+      |vpiActual:
+      \_struct_typespec: (struct_ab), line:8:12, endln:11:5
+  |vpiTypedef:
   \_string_typespec: (a), line:14:7, endln:14:8
     |vpiParent:
     \_module_inst: work@prim_subreg_shadow (work@prim_subreg_shadow), file:${SURELOG_DIR}/tests/ParamOverloading/dut.sv, line:7:1, endln:22:10
@@ -594,6 +607,8 @@ design: (unnamed)
   \_logic_typespec: , line:9:7, endln:9:18
   |vpiImportTypespec:
   \_logic_typespec: , line:10:7, endln:10:18
+  |vpiImportTypespec:
+  \_typedef_typespec: (struct_ab), line:11:6, endln:11:15
   |vpiImportTypespec:
   \_string_typespec: (a), line:14:7, endln:14:8
   |vpiImportTypespec:
@@ -772,12 +787,26 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (struct_ab), line:28:6, endln:28:15
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamOverloading/dut.sv, line:24:1, endln:41:10
+    |vpiName:struct_ab
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top.struct_ab), line:25:12, endln:28:5
+      |vpiParent:
+      \_typedef_typespec: (struct_ab), line:28:6, endln:28:15
+      |vpiFullName:work@top.struct_ab
+      |vpiActual:
+      \_struct_typespec: (struct_ab), line:25:12, endln:28:5
   |vpiImportTypespec:
   \_struct_typespec: (struct_ab), line:25:12, endln:28:5
   |vpiImportTypespec:
   \_logic_typespec: , line:26:7, endln:26:18
   |vpiImportTypespec:
   \_logic_typespec: , line:27:7, endln:27:18
+  |vpiImportTypespec:
+  \_typedef_typespec: (struct_ab), line:28:6, endln:28:15
   |vpiDefName:work@top
   |vpiRefModule:
   \_ref_module: work@prim_subreg_shadow (u_ctrl_reg_shadowed), line:38:4, endln:40:28
@@ -793,7 +822,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 3
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ParamOverloading/dut.sv | ${SURELOG_DIR}/build/regression/ParamOverloading/roundtrip/dut_000.sv | 18 | 41 |
-============================== End RoundTrip Results ==============================

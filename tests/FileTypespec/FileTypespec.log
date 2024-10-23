@@ -158,9 +158,10 @@ package                                                2
 port                                                   2
 range                                                  1
 ref_obj                                                2
-ref_typespec                                           9
+ref_typespec                                          13
 source_file                                            1
 struct_typespec                                        2
+typedef_typespec                                       4
 typespec_member                                        4
 union_typespec                                         1
 union_var                                              2
@@ -204,10 +205,24 @@ design: (unnamed)
   \_logic_typespec: , line:3:5, endln:3:10
     |vpiParent:
     \_package: foo_flags (foo_flags::), file:${SURELOG_DIR}/tests/FileTypespec/dut.sv, line:1:1, endln:5:23
+  |vpiTypedef:
+  \_typedef_typespec: (common_flags_t), line:4:5, endln:4:19
+    |vpiParent:
+    \_package: foo_flags (foo_flags::), file:${SURELOG_DIR}/tests/FileTypespec/dut.sv, line:1:1, endln:5:23
+    |vpiName:common_flags_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (foo_flags::common_flags_t), line:2:11, endln:4:4
+      |vpiParent:
+      \_typedef_typespec: (common_flags_t), line:4:5, endln:4:19
+      |vpiFullName:foo_flags::common_flags_t
+      |vpiActual:
+      \_struct_typespec: (foo_flags::common_flags_t), line:2:11, endln:4:4
   |vpiImportTypespec:
   \_struct_typespec: (foo_flags::common_flags_t), line:2:11, endln:4:4
   |vpiImportTypespec:
   \_logic_typespec: , line:3:5, endln:3:10
+  |vpiImportTypespec:
+  \_typedef_typespec: (common_flags_t), line:4:5, endln:4:19
   |vpiDefName:foo_flags
   |vpiEndLabel:foo_flags
 |uhdmallPackages:
@@ -260,10 +275,24 @@ design: (unnamed)
       |INT:0
       |vpiDecompile:0
       |vpiSize:2
+  |vpiTypedef:
+  \_typedef_typespec: (classes), line:12:5, endln:12:12
+    |vpiParent:
+    \_package: fooes (fooes::), file:${SURELOG_DIR}/tests/FileTypespec/dut.sv, line:8:1, endln:14:19
+    |vpiName:classes
+    |vpiTypedefAlias:
+    \_ref_typespec: (fooes::classes), line:10:11, endln:12:4
+      |vpiParent:
+      \_typedef_typespec: (classes), line:12:5, endln:12:12
+      |vpiFullName:fooes::classes
+      |vpiActual:
+      \_enum_typespec: (fooes::classes), line:10:11, endln:12:13
   |vpiImportTypespec:
   \_logic_typespec: , line:10:16, endln:10:27
   |vpiImportTypespec:
   \_enum_typespec: (fooes::classes), line:10:11, endln:12:13
+  |vpiImportTypespec:
+  \_typedef_typespec: (classes), line:12:5, endln:12:12
   |vpiDefName:fooes
   |vpiEndLabel:fooes
 |uhdmallModules:
@@ -378,6 +407,18 @@ design: (unnamed)
   \_design: (unnamed)
   |vpiName:fooes::classes
 |vpiTypedef:
+\_typedef_typespec: (padded_fooes_t), line:18:3, endln:18:17
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:padded_fooes_t
+  |vpiTypedefAlias:
+  \_ref_typespec: (padded_fooes_t), line:16:9, endln:18:2
+    |vpiParent:
+    \_typedef_typespec: (padded_fooes_t), line:18:3, endln:18:17
+    |vpiFullName:padded_fooes_t
+    |vpiActual:
+    \_struct_typespec: (padded_fooes_t), line:16:9, endln:18:2
+|vpiTypedef:
 \_union_typespec: (top_flag_t), line:20:9, endln:23:13
   |vpiParent:
   \_design: (unnamed)
@@ -413,6 +454,18 @@ design: (unnamed)
   |vpiParent:
   \_design: (unnamed)
   |vpiName:foo_flags::common_flags_t
+|vpiTypedef:
+\_typedef_typespec: (top_flag_t), line:23:3, endln:23:13
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:top_flag_t
+  |vpiTypedefAlias:
+  \_ref_typespec: (top_flag_t), line:20:9, endln:23:2
+    |vpiParent:
+    \_typedef_typespec: (top_flag_t), line:23:3, endln:23:13
+    |vpiFullName:top_flag_t
+    |vpiActual:
+    \_union_typespec: (top_flag_t), line:20:9, endln:23:13
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -434,7 +487,3 @@ design: (unnamed)
 [LINT]: ${SURELOG_DIR}/tests/FileTypespec/dut.sv:21:3: Unsupported typespec, foo_flags::common_flags_t
 [LINT]:   \_ :0:0:
 ============================== End Linting Results ==============================
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/FileTypespec/dut.sv | ${SURELOG_DIR}/build/regression/FileTypespec/roundtrip/dut_000.sv | 8 | 27 |
-============================== End RoundTrip Results ==============================

@@ -110,10 +110,11 @@ modport                                                1
 module_inst                                            1
 port                                                   1
 ref_obj                                                4
-ref_typespec                                           3
+ref_typespec                                           5
 source_file                                            1
 struct_typespec                                        1
 struct_var                                             1
+typedef_typespec                                       2
 typespec_member                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/NameCollisionBind/slpp_all/surelog.uhdm ...
@@ -256,6 +257,18 @@ design: (unnamed)
   |vpiName:DataPath
   |vpiSigned:1
 |vpiTypedef:
+\_typedef_typespec: (DataPath), line:2:13, endln:2:21
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:DataPath
+  |vpiTypedefAlias:
+  \_ref_typespec: (DataPath), line:2:9, endln:2:12
+    |vpiParent:
+    \_typedef_typespec: (DataPath), line:2:13, endln:2:21
+    |vpiFullName:DataPath
+    |vpiActual:
+    \_int_typespec: (DataPath), line:2:9, endln:2:12
+|vpiTypedef:
 \_struct_typespec: (PerfCounterPath), line:4:9, endln:8:2
   |vpiParent:
   \_design: (unnamed)
@@ -274,13 +287,21 @@ design: (unnamed)
       |vpiFullName:PerfCounterPath.numLoadMiss.DataPath
       |vpiActual:
       \_int_typespec: (DataPath), line:2:9, endln:2:12
+|vpiTypedef:
+\_typedef_typespec: (PerfCounterPath), line:8:3, endln:8:18
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:PerfCounterPath
+  |vpiTypedefAlias:
+  \_ref_typespec: (PerfCounterPath), line:4:9, endln:8:2
+    |vpiParent:
+    \_typedef_typespec: (PerfCounterPath), line:8:3, endln:8:18
+    |vpiFullName:PerfCounterPath
+    |vpiActual:
+    \_struct_typespec: (PerfCounterPath), line:4:9, endln:8:2
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/NameCollisionBind/dut.sv | ${SURELOG_DIR}/build/regression/NameCollisionBind/roundtrip/dut_000.sv | 13 | 27 |
-============================== End RoundTrip Results ==============================

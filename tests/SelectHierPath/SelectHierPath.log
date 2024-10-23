@@ -102,10 +102,11 @@ module_inst                                            1
 operation                                              1
 range                                                  1
 ref_obj                                                3
-ref_typespec                                           3
+ref_typespec                                           5
 source_file                                            1
 struct_net                                             1
 struct_typespec                                        2
+typedef_typespec                                       2
 typespec_member                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SelectHierPath/slpp_all/surelog.uhdm ...
@@ -247,6 +248,18 @@ design: (unnamed)
   \_design: (unnamed)
   |vpiSigned:1
 |vpiTypedef:
+\_typedef_typespec: (BranchResult), line:3:3, endln:3:15
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:BranchResult
+  |vpiTypedefAlias:
+  \_ref_typespec: (BranchResult), line:1:9, endln:3:2
+    |vpiParent:
+    \_typedef_typespec: (BranchResult), line:3:3, endln:3:15
+    |vpiFullName:BranchResult
+    |vpiActual:
+    \_struct_typespec: (BranchResult), line:1:9, endln:3:2
+|vpiTypedef:
 \_struct_typespec: (IntegerRegisterWriteStageRegPath), line:5:9, endln:7:2
   |vpiParent:
   \_design: (unnamed)
@@ -265,13 +278,21 @@ design: (unnamed)
       |vpiFullName:IntegerRegisterWriteStageRegPath.brResult.BranchResult
       |vpiActual:
       \_struct_typespec: (BranchResult), line:1:9, endln:3:2
+|vpiTypedef:
+\_typedef_typespec: (IntegerRegisterWriteStageRegPath), line:7:3, endln:7:35
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:IntegerRegisterWriteStageRegPath
+  |vpiTypedefAlias:
+  \_ref_typespec: (IntegerRegisterWriteStageRegPath), line:5:9, endln:7:2
+    |vpiParent:
+    \_typedef_typespec: (IntegerRegisterWriteStageRegPath), line:7:3, endln:7:35
+    |vpiFullName:IntegerRegisterWriteStageRegPath
+    |vpiActual:
+    \_struct_typespec: (IntegerRegisterWriteStageRegPath), line:5:9, endln:7:2
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/SelectHierPath/dut.sv | ${SURELOG_DIR}/build/regression/SelectHierPath/roundtrip/dut_000.sv | 3 | 16 |
-============================== End RoundTrip Results ==============================

@@ -20,15 +20,15 @@
 [WARNING] : 1
 [   NOTE] : 0
 [INF:CM0023] Creating log file "${SURELOG_DIR}/tests/TestSepCompNoHash/slpp_all/surelog.log".
+PP CACHE USED FOR: ${SURELOG_DIR}/tests/TestSepCompNoHash/top.sv
 PP CACHE USED FOR: ${SURELOG_DIR}/tests/TestSepCompNoHash/pkg1.sv
 PP CACHE USED FOR: ${SURELOG_DIR}/tests/TestSepCompNoHash/pkg2.sv
-PP CACHE USED FOR: ${SURELOG_DIR}/tests/TestSepCompNoHash/top.sv
+PARSER CACHE USED FOR: ${SURELOG_DIR}/tests/TestSepCompNoHash/top.sv
 PARSER CACHE USED FOR: ${SURELOG_DIR}/tests/TestSepCompNoHash/pkg1.sv
 PARSER CACHE USED FOR: ${SURELOG_DIR}/tests/TestSepCompNoHash/pkg2.sv
-PARSER CACHE USED FOR: ${SURELOG_DIR}/tests/TestSepCompNoHash/top.sv
+[WRN:PA0205] ${SURELOG_DIR}/tests/TestSepCompNoHash/top.sv:1:1: No timescale set for "top".
 [WRN:PA0205] ${SURELOG_DIR}/tests/TestSepCompNoHash/pkg1.sv:1:1: No timescale set for "pkg1".
 [WRN:PA0205] ${SURELOG_DIR}/tests/TestSepCompNoHash/pkg2.sv:1:1: No timescale set for "pkg2".
-[WRN:PA0205] ${SURELOG_DIR}/tests/TestSepCompNoHash/top.sv:1:1: No timescale set for "top".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/TestSepCompNoHash/top.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
@@ -39,15 +39,15 @@ PARSER CACHE USED FOR: ${SURELOG_DIR}/tests/TestSepCompNoHash/top.sv
 design: (unnamed)
 |vpiName:unnamed
 |vpiSourceFiles:
+\_source_file: , file:${SURELOG_DIR}/tests/TestSepCompNoHash/top.sv
+  |vpiParent:
+  \_design: (unnamed)
+|vpiSourceFiles:
 \_source_file: , file:${SURELOG_DIR}/tests/TestSepCompNoHash/pkg1.sv
   |vpiParent:
   \_design: (unnamed)
 |vpiSourceFiles:
 \_source_file: , file:${SURELOG_DIR}/tests/TestSepCompNoHash/pkg2.sv
-  |vpiParent:
-  \_design: (unnamed)
-|vpiSourceFiles:
-\_source_file: , file:${SURELOG_DIR}/tests/TestSepCompNoHash/top.sv
   |vpiParent:
   \_design: (unnamed)
 |uhdmallPackages:
@@ -69,8 +69,22 @@ design: (unnamed)
       |INT:0
       |vpiDecompile:0
       |vpiSize:64
+  |vpiTypedef:
+  \_typedef_typespec: (enum1), line:5:5, endln:5:10
+    |vpiParent:
+    \_package: pkg1 (pkg1::), file:${SURELOG_DIR}/tests/TestSepCompNoHash/pkg1.sv, line:1:1, endln:7:11
+    |vpiName:enum1
+    |vpiTypedefAlias:
+    \_ref_typespec: (pkg1::enum1), line:3:11, endln:5:4
+      |vpiParent:
+      \_typedef_typespec: (enum1), line:5:5, endln:5:10
+      |vpiFullName:pkg1::enum1
+      |vpiActual:
+      \_enum_typespec: (pkg1::enum1), line:3:11, endln:5:11
   |vpiImportTypespec:
   \_enum_typespec: (pkg1::enum1), line:3:11, endln:5:11
+  |vpiImportTypespec:
+  \_typedef_typespec: (enum1), line:5:5, endln:5:10
   |vpiDefName:pkg1
 |uhdmallPackages:
 \_package: pkg2 (pkg2::), file:${SURELOG_DIR}/tests/TestSepCompNoHash/pkg2.sv, line:1:1, endln:16:11
@@ -82,13 +96,6 @@ design: (unnamed)
   \_parameter: (pkg2::P1), line:4:18, endln:4:33
     |vpiParent:
     \_package: pkg2 (pkg2::), file:${SURELOG_DIR}/tests/TestSepCompNoHash/pkg2.sv, line:1:1, endln:16:11
-    |vpiTypespec:
-    \_ref_typespec: (pkg2::P1), line:4:12, endln:4:17
-      |vpiParent:
-      \_parameter: (pkg2::P1), line:4:18, endln:4:33
-      |vpiFullName:pkg2::P1
-      |vpiActual:
-      \_unsupported_typespec: (enum2), line:4:12, endln:4:17
     |vpiName:P1
     |vpiFullName:pkg2::P1
   |vpiParamAssign:
@@ -106,12 +113,17 @@ design: (unnamed)
     |vpiLhs:
     \_parameter: (pkg2::P1), line:4:18, endln:4:33
   |vpiTypedef:
-  \_unsupported_typespec: (enum2), line:4:12, endln:4:17
+  \_typedef_typespec: (enum2), line:3:22, endln:3:27
     |vpiParent:
     \_package: pkg2 (pkg2::), file:${SURELOG_DIR}/tests/TestSepCompNoHash/pkg2.sv, line:1:1, endln:16:11
     |vpiName:enum2
+    |vpiTypedefAlias:
+    \_ref_typespec: (pkg2::enum2), line:3:10, endln:3:16
+      |vpiParent:
+      \_typedef_typespec: (enum2), line:3:22, endln:3:27
+      |vpiFullName:pkg2::enum2
   |vpiImportTypespec:
-  \_unsupported_typespec: (enum2), line:4:12, endln:4:17
+  \_typedef_typespec: (enum2), line:3:22, endln:3:27
   |vpiDefName:pkg2
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TestSepCompNoHash/top.sv, line:1:1, endln:4:10
@@ -129,9 +141,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 3
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/TestSepCompNoHash/pkg1.sv | ${SURELOG_DIR}/tests/TestSepCompNoHash/pkg1_000.sv | 1 | 7 |
-[roundtrip]: ${SURELOG_DIR}/tests/TestSepCompNoHash/pkg2.sv | ${SURELOG_DIR}/tests/TestSepCompNoHash/pkg2_000.sv | 10 | 16 |
-[roundtrip]: ${SURELOG_DIR}/tests/TestSepCompNoHash/top.sv  | ${SURELOG_DIR}/tests/TestSepCompNoHash/top_000.sv  | 3 | 4 |
-============================== End RoundTrip Results ==============================

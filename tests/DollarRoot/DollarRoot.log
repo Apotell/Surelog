@@ -6754,7 +6754,7 @@ int_var                                               30
 io_decl                                               43
 logic_net                                              2
 logic_typespec                                        18
-logic_var                                              9
+logic_var                                              7
 method_func_call                                      13
 module_inst                                            4
 named_event                                            1
@@ -6766,8 +6766,8 @@ parameter                                             10
 port                                                   2
 range                                                 39
 ref_obj                                              573
-ref_typespec                                         157
-ref_var                                                6
+ref_typespec                                         163
+ref_var                                                8
 return_stmt                                           11
 source_file                                            1
 string_typespec                                        2
@@ -6777,6 +6777,7 @@ struct_var                                            36
 sys_func_call                                         19
 task                                                  21
 task_call                                             22
+typedef_typespec                                       6
 typespec_member                                       10
 unsupported_typespec                                  11
 var_select                                             2
@@ -7179,8 +7180,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/DollarRoot/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -7394,13 +7409,13 @@ design: (unnamed)
   \_design: (unnamed)
   |vpiName:work@test_program
   |vpiVariables:
-  \_struct_var: (work@test_program.write_command_queue_master), line:67:36, endln:67:39
+  \_struct_var: (work@test_program.write_command_queue_master), line:67:10, endln:67:36
     |vpiParent:
     \_module_inst: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
     |vpiTypespec:
     \_ref_typespec: (work@test_program.write_command_queue_master.Command), line:67:1, endln:67:8
       |vpiParent:
-      \_struct_var: (work@test_program.write_command_queue_master), line:67:36, endln:67:39
+      \_struct_var: (work@test_program.write_command_queue_master), line:67:10, endln:67:36
       |vpiName:Command
       |vpiFullName:work@test_program.write_command_queue_master.Command
       |vpiActual:
@@ -7425,13 +7440,13 @@ design: (unnamed)
     |vpiVisibility:1
     |vpiArrayType:4
   |vpiVariables:
-  \_struct_var: (work@test_program.read_command_queue_master), line:68:35, endln:68:38
+  \_struct_var: (work@test_program.read_command_queue_master), line:68:10, endln:68:35
     |vpiParent:
     \_module_inst: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
     |vpiTypespec:
     \_ref_typespec: (work@test_program.read_command_queue_master.Command), line:68:1, endln:68:8
       |vpiParent:
-      \_struct_var: (work@test_program.read_command_queue_master), line:68:35, endln:68:38
+      \_struct_var: (work@test_program.read_command_queue_master), line:68:10, endln:68:35
       |vpiName:Command
       |vpiFullName:work@test_program.read_command_queue_master.Command
       |vpiActual:
@@ -7456,13 +7471,13 @@ design: (unnamed)
     |vpiVisibility:1
     |vpiArrayType:4
   |vpiVariables:
-  \_struct_var: (work@test_program.write_command_queue_slave), line:71:35, endln:71:38
+  \_struct_var: (work@test_program.write_command_queue_slave), line:71:10, endln:71:35
     |vpiParent:
     \_module_inst: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
     |vpiTypespec:
     \_ref_typespec: (work@test_program.write_command_queue_slave.Command), line:71:1, endln:71:8
       |vpiParent:
-      \_struct_var: (work@test_program.write_command_queue_slave), line:71:35, endln:71:38
+      \_struct_var: (work@test_program.write_command_queue_slave), line:71:10, endln:71:35
       |vpiName:Command
       |vpiFullName:work@test_program.write_command_queue_slave.Command
       |vpiActual:
@@ -7487,13 +7502,13 @@ design: (unnamed)
     |vpiVisibility:1
     |vpiArrayType:4
   |vpiVariables:
-  \_struct_var: (work@test_program.read_command_queue_slave), line:72:34, endln:72:37
+  \_struct_var: (work@test_program.read_command_queue_slave), line:72:10, endln:72:34
     |vpiParent:
     \_module_inst: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
     |vpiTypespec:
     \_ref_typespec: (work@test_program.read_command_queue_slave.Command), line:72:1, endln:72:8
       |vpiParent:
-      \_struct_var: (work@test_program.read_command_queue_slave), line:72:34, endln:72:37
+      \_struct_var: (work@test_program.read_command_queue_slave), line:72:10, endln:72:34
       |vpiName:Command
       |vpiFullName:work@test_program.read_command_queue_slave.Command
       |vpiActual:
@@ -7518,13 +7533,13 @@ design: (unnamed)
     |vpiVisibility:1
     |vpiArrayType:4
   |vpiVariables:
-  \_struct_var: (work@test_program.read_response_queue_slave), line:75:35, endln:75:38
+  \_struct_var: (work@test_program.read_response_queue_slave), line:75:10, endln:75:35
     |vpiParent:
     \_module_inst: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
     |vpiTypespec:
     \_ref_typespec: (work@test_program.read_response_queue_slave.Response), line:75:1, endln:75:9
       |vpiParent:
-      \_struct_var: (work@test_program.read_response_queue_slave), line:75:35, endln:75:38
+      \_struct_var: (work@test_program.read_response_queue_slave), line:75:10, endln:75:35
       |vpiName:Response
       |vpiFullName:work@test_program.read_response_queue_slave.Response
       |vpiActual:
@@ -12683,43 +12698,39 @@ design: (unnamed)
     |vpiName:randomize_burstcount
     |vpiFullName:work@test_program.randomize_burstcount
     |vpiVariables:
-    \_logic_var: (work@test_program.randomize_burstcount), line:601:23, endln:601:33
+    \_ref_var: (work@test_program.randomize_burstcount), line:601:23, endln:601:33
       |vpiParent:
       \_function: (work@test_program.randomize_burstcount), line:601:4, endln:607:15
       |vpiTypespec:
       \_ref_typespec: (work@test_program.randomize_burstcount.Burstcount), line:601:23, endln:601:33
         |vpiParent:
-        \_logic_var: (work@test_program.randomize_burstcount), line:601:23, endln:601:33
+        \_ref_var: (work@test_program.randomize_burstcount), line:601:23, endln:601:33
         |vpiName:Burstcount
         |vpiFullName:work@test_program.randomize_burstcount.Burstcount
         |vpiActual:
         \_logic_typespec: (Burstcount), line:31:12, endln:31:31
       |vpiFullName:work@test_program.randomize_burstcount
-    |vpiReg:
-    \_logic_var: (work@test_program.randomize_burstcount), line:601:23, endln:601:33
     |vpiInternalScope:
     \_begin: (work@test_program.randomize_burstcount)
       |vpiParent:
       \_function: (work@test_program.randomize_burstcount), line:601:4, endln:607:15
       |vpiFullName:work@test_program.randomize_burstcount
       |vpiVariables:
-      \_logic_var: (work@test_program.randomize_burstcount.burstcount), line:603:7, endln:603:17
+      \_ref_var: (work@test_program.randomize_burstcount.burstcount), line:603:7, endln:603:17
         |vpiParent:
         \_begin: (work@test_program.randomize_burstcount)
         |vpiTypespec:
         \_ref_typespec: (work@test_program.randomize_burstcount.burstcount.Burstcount), line:603:7, endln:603:17
           |vpiParent:
-          \_logic_var: (work@test_program.randomize_burstcount.burstcount), line:603:7, endln:603:17
+          \_ref_var: (work@test_program.randomize_burstcount.burstcount), line:603:7, endln:603:17
           |vpiName:Burstcount
           |vpiFullName:work@test_program.randomize_burstcount.burstcount.Burstcount
           |vpiActual:
           \_logic_typespec: (Burstcount), line:31:12, endln:31:31
         |vpiName:burstcount
         |vpiFullName:work@test_program.randomize_burstcount.burstcount
-      |vpiReg:
-      \_logic_var: (work@test_program.randomize_burstcount.burstcount), line:603:7, endln:603:17
       |vpiImportTypespec:
-      \_logic_var: (work@test_program.randomize_burstcount.burstcount), line:603:7, endln:603:17
+      \_ref_var: (work@test_program.randomize_burstcount.burstcount), line:603:7, endln:603:17
       |vpiStmt:
       \_assignment: , line:605:7, endln:605:48
         |vpiParent:
@@ -12754,7 +12765,7 @@ design: (unnamed)
           |vpiName:burstcount
           |vpiFullName:work@test_program.randomize_burstcount.burstcount
           |vpiActual:
-          \_logic_var: (work@test_program.randomize_burstcount.burstcount), line:603:7, endln:603:17
+          \_ref_var: (work@test_program.randomize_burstcount.burstcount), line:603:7, endln:603:17
       |vpiStmt:
       \_return_stmt: , line:606:7, endln:606:24
         |vpiParent:
@@ -12766,13 +12777,13 @@ design: (unnamed)
           |vpiName:burstcount
           |vpiFullName:work@test_program.randomize_burstcount.burstcount
           |vpiActual:
-          \_logic_var: (work@test_program.randomize_burstcount.burstcount), line:603:7, endln:603:17
+          \_ref_var: (work@test_program.randomize_burstcount.burstcount), line:603:7, endln:603:17
     |vpiImportTypespec:
-    \_logic_var: (work@test_program.randomize_burstcount), line:601:23, endln:601:33
+    \_ref_var: (work@test_program.randomize_burstcount), line:601:23, endln:601:33
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
-    \_logic_var: (work@test_program.randomize_burstcount), line:601:23, endln:601:33
+    \_ref_var: (work@test_program.randomize_burstcount), line:601:23, endln:601:33
     |vpiStmt:
     \_begin: (work@test_program.randomize_burstcount)
   |vpiInternalScope:
@@ -13339,7 +13350,7 @@ design: (unnamed)
             |vpiName:write_command_queue_master
             |vpiFullName:work@test_program.save_command_master.write_command_queue_master
             |vpiActual:
-            \_struct_var: (work@test_program.write_command_queue_master), line:67:36, endln:67:39
+            \_struct_var: (work@test_program.write_command_queue_master), line:67:10, endln:67:36
       |vpiElseStmt:
       \_begin: (work@test_program.save_command_master), line:638:19, endln:640:13
         |vpiParent:
@@ -13365,7 +13376,7 @@ design: (unnamed)
             |vpiName:read_command_queue_master
             |vpiFullName:work@test_program.save_command_master.read_command_queue_master
             |vpiActual:
-            \_struct_var: (work@test_program.read_command_queue_master), line:68:35, endln:68:38
+            \_struct_var: (work@test_program.read_command_queue_master), line:68:10, endln:68:35
   |vpiInternalScope:
   \_task: (work@test_program.save_command_slave), line:644:4, endln:656:11
     |vpiParent:
@@ -13491,7 +13502,7 @@ design: (unnamed)
               |vpiName:write_command_queue_slave
               |vpiFullName:work@test_program.save_command_slave.write_command_queue_slave
               |vpiActual:
-              \_struct_var: (work@test_program.write_command_queue_slave), line:71:35, endln:71:38
+              \_struct_var: (work@test_program.write_command_queue_slave), line:71:10, endln:71:35
         |vpiElseStmt:
         \_begin: (work@test_program.save_command_slave), line:652:16, endln:654:10
           |vpiParent:
@@ -13517,7 +13528,7 @@ design: (unnamed)
               |vpiName:read_command_queue_slave
               |vpiFullName:work@test_program.save_command_slave.read_command_queue_slave
               |vpiActual:
-              \_struct_var: (work@test_program.read_command_queue_slave), line:72:34, endln:72:37
+              \_struct_var: (work@test_program.read_command_queue_slave), line:72:10, endln:72:34
     |vpiTypedef:
     \_int_typespec: , line:646:7, endln:646:10
       |vpiParent:
@@ -14450,7 +14461,7 @@ design: (unnamed)
                     |vpiName:write_command_queue_slave
                     |vpiFullName:write_command_queue_slave[slave_id]
                     |vpiActual:
-                    \_struct_var: (work@test_program.write_command_queue_slave), line:71:35, endln:71:38
+                    \_struct_var: (work@test_program.write_command_queue_slave), line:71:10, endln:71:35
                     |vpiIndex:
                     \_ref_obj: (work@test_program.get_expected_command_for_slave.slave_id), line:700:49, endln:700:57
                       |vpiParent:
@@ -14736,7 +14747,7 @@ design: (unnamed)
                     |vpiName:read_command_queue_slave
                     |vpiFullName:read_command_queue_slave[slave_id]
                     |vpiActual:
-                    \_struct_var: (work@test_program.read_command_queue_slave), line:72:34, endln:72:37
+                    \_struct_var: (work@test_program.read_command_queue_slave), line:72:10, endln:72:34
                     |vpiIndex:
                     \_ref_obj: (work@test_program.get_expected_command_for_slave.slave_id), line:712:48, endln:712:56
                       |vpiParent:
@@ -15924,7 +15935,7 @@ design: (unnamed)
             |vpiName:read_response_queue_slave
             |vpiFullName:read_response_queue_slave[slave_id]
             |vpiActual:
-            \_struct_var: (work@test_program.read_response_queue_slave), line:75:35, endln:75:38
+            \_struct_var: (work@test_program.read_response_queue_slave), line:75:10, endln:75:35
             |vpiIndex:
             \_ref_obj: (work@test_program.get_expected_read_response.slave_id), line:781:39, endln:781:47
               |vpiParent:
@@ -16252,6 +16263,43 @@ design: (unnamed)
   |vpiTypedef:
   \_import_typespec: (avalon_mm_pkg), line:8:11, endln:8:27
   |vpiTypedef:
+  \_packed_array_typespec: , line:31:12, endln:31:31
+    |vpiParent:
+    \_module_inst: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
+    |vpiRange:
+    \_range: , line:31:18, endln:31:31
+      |vpiParent:
+      \_packed_array_typespec: , line:31:12, endln:31:31
+      |vpiLeftRange:
+      \_operation: , line:31:19, endln:31:28
+        |vpiParent:
+        \_range: , line:31:18, endln:31:31
+        |vpiOpType:11
+        |vpiOperand:
+        \_ref_obj: (work@test_program.BURST_W), line:31:19, endln:31:26
+          |vpiParent:
+          \_operation: , line:31:19, endln:31:28
+          |vpiName:BURST_W
+          |vpiFullName:work@test_program.BURST_W
+          |vpiActual:
+          \_parameter: (work@test_program.BURST_W), line:19:15, endln:19:43
+        |vpiOperand:
+        \_constant: , line:31:27, endln:31:28
+          |vpiParent:
+          \_operation: , line:31:19, endln:31:28
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:31:29, endln:31:30
+        |vpiParent:
+        \_range: , line:31:18, endln:31:31
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
   \_logic_typespec: (Burstcount), line:31:12, endln:31:31
     |vpiParent:
     \_module_inst: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
@@ -16290,6 +16338,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (Burstcount), line:31:37, endln:31:47
+    |vpiParent:
+    \_module_inst: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
+    |vpiName:Burstcount
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@test_program.Burstcount), line:31:12, endln:31:17
+      |vpiParent:
+      \_typedef_typespec: (Burstcount), line:31:37, endln:31:47
+      |vpiFullName:work@test_program.Burstcount
+      |vpiActual:
+      \_logic_typespec: (Burstcount), line:31:12, endln:31:31
+  |vpiTypedef:
   \_bit_typespec: , line:33:17, endln:33:20
     |vpiParent:
     \_module_inst: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
@@ -16322,6 +16382,18 @@ design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
   |vpiTypedef:
+  \_typedef_typespec: (Transaction), line:37:6, endln:37:17
+    |vpiParent:
+    \_module_inst: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
+    |vpiName:Transaction
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@test_program.Transaction), line:33:12, endln:37:5
+      |vpiParent:
+      \_typedef_typespec: (Transaction), line:37:6, endln:37:17
+      |vpiFullName:work@test_program.Transaction
+      |vpiActual:
+      \_enum_typespec: (Transaction), line:33:12, endln:37:18
+  |vpiTypedef:
   \_bit_typespec: , line:39:17, endln:39:20
     |vpiParent:
     \_module_inst: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
@@ -16353,6 +16425,18 @@ design: (unnamed)
       |UINT:1
       |vpiDecompile:1
       |vpiSize:64
+  |vpiTypedef:
+  \_typedef_typespec: (Burstmode), line:43:6, endln:43:15
+    |vpiParent:
+    \_module_inst: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
+    |vpiName:Burstmode
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@test_program.Burstmode), line:39:12, endln:43:5
+      |vpiParent:
+      \_typedef_typespec: (Burstmode), line:43:6, endln:43:15
+      |vpiFullName:work@test_program.Burstmode
+      |vpiActual:
+      \_enum_typespec: (Burstmode), line:39:12, endln:43:16
   |vpiTypedef:
   \_struct_typespec: (Command), line:45:12, endln:54:5
     |vpiParent:
@@ -16736,6 +16820,18 @@ design: (unnamed)
       |vpiActual:
       \_bit_typespec: , line:53:8, endln:53:18
   |vpiTypedef:
+  \_typedef_typespec: (Command), line:54:6, endln:54:13
+    |vpiParent:
+    \_module_inst: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
+    |vpiName:Command
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@test_program.Command), line:45:12, endln:54:5
+      |vpiParent:
+      \_typedef_typespec: (Command), line:54:6, endln:54:13
+      |vpiFullName:work@test_program.Command
+      |vpiActual:
+      \_struct_typespec: (Command), line:45:12, endln:54:5
+  |vpiTypedef:
   \_struct_typespec: (Response), line:56:12, endln:61:5
     |vpiParent:
     \_module_inst: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
@@ -16926,6 +17022,18 @@ design: (unnamed)
       |vpiFullName:work@test_program.Response.latency
       |vpiActual:
       \_bit_typespec: , line:60:7, endln:60:17
+  |vpiTypedef:
+  \_typedef_typespec: (Response), line:61:6, endln:61:14
+    |vpiParent:
+    \_module_inst: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
+    |vpiName:Response
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@test_program.Response), line:56:12, endln:61:5
+      |vpiParent:
+      \_typedef_typespec: (Response), line:61:6, endln:61:14
+      |vpiFullName:work@test_program.Response
+      |vpiActual:
+      \_struct_typespec: (Response), line:56:12, endln:61:5
   |vpiTypedef:
   \_unsupported_typespec: (write_command_queue_slave), line:691:19, endln:691:44
     |vpiParent:
@@ -17230,15 +17338,23 @@ design: (unnamed)
   |vpiImportTypespec:
   \_task: (work@test_program.verify_response), line:786:4, endln:795:11
   |vpiImportTypespec:
+  \_packed_array_typespec: , line:31:12, endln:31:31
+  |vpiImportTypespec:
   \_logic_typespec: (Burstcount), line:31:12, endln:31:31
+  |vpiImportTypespec:
+  \_typedef_typespec: (Burstcount), line:31:37, endln:31:47
   |vpiImportTypespec:
   \_bit_typespec: , line:33:17, endln:33:20
   |vpiImportTypespec:
   \_enum_typespec: (Transaction), line:33:12, endln:37:18
   |vpiImportTypespec:
+  \_typedef_typespec: (Transaction), line:37:6, endln:37:17
+  |vpiImportTypespec:
   \_bit_typespec: , line:39:17, endln:39:20
   |vpiImportTypespec:
   \_enum_typespec: (Burstmode), line:39:12, endln:43:16
+  |vpiImportTypespec:
+  \_typedef_typespec: (Burstmode), line:43:6, endln:43:15
   |vpiImportTypespec:
   \_struct_typespec: (Command), line:45:12, endln:54:5
   |vpiImportTypespec:
@@ -17258,6 +17374,8 @@ design: (unnamed)
   |vpiImportTypespec:
   \_array_typespec: , line:53:48, endln:53:63
   |vpiImportTypespec:
+  \_typedef_typespec: (Command), line:54:6, endln:54:13
+  |vpiImportTypespec:
   \_struct_typespec: (Response), line:56:12, endln:61:5
   |vpiImportTypespec:
   \_logic_typespec: , line:59:7, endln:59:25
@@ -17268,11 +17386,13 @@ design: (unnamed)
   |vpiImportTypespec:
   \_array_typespec: , line:60:46, endln:60:61
   |vpiImportTypespec:
+  \_typedef_typespec: (Response), line:61:6, endln:61:14
+  |vpiImportTypespec:
   \_unsupported_typespec: (write_command_queue_slave), line:691:19, endln:691:44
   |vpiImportTypespec:
   \_unsupported_typespec: (read_command_queue_slave), line:703:19, endln:703:43
   |vpiImportTypespec:
-  \_struct_var: (work@test_program.write_command_queue_master), line:67:36, endln:67:39
+  \_struct_var: (work@test_program.write_command_queue_master), line:67:10, endln:67:36
   |vpiImportTypespec:
   \_array_var: (work@test_program.write_command_queue_master), line:67:10, endln:67:39
   |vpiImportTypespec:
@@ -17282,7 +17402,7 @@ design: (unnamed)
   |vpiImportTypespec:
   \_unsupported_typespec: (Command), line:67:1, endln:67:8
   |vpiImportTypespec:
-  \_struct_var: (work@test_program.read_command_queue_master), line:68:35, endln:68:38
+  \_struct_var: (work@test_program.read_command_queue_master), line:68:10, endln:68:35
   |vpiImportTypespec:
   \_array_var: (work@test_program.read_command_queue_master), line:68:10, endln:68:38
   |vpiImportTypespec:
@@ -17292,7 +17412,7 @@ design: (unnamed)
   |vpiImportTypespec:
   \_unsupported_typespec: (Command), line:68:1, endln:68:8
   |vpiImportTypespec:
-  \_struct_var: (work@test_program.write_command_queue_slave), line:71:35, endln:71:38
+  \_struct_var: (work@test_program.write_command_queue_slave), line:71:10, endln:71:35
   |vpiImportTypespec:
   \_array_var: (work@test_program.write_command_queue_slave), line:71:10, endln:71:38
   |vpiImportTypespec:
@@ -17302,7 +17422,7 @@ design: (unnamed)
   |vpiImportTypespec:
   \_unsupported_typespec: (Command), line:71:1, endln:71:8
   |vpiImportTypespec:
-  \_struct_var: (work@test_program.read_command_queue_slave), line:72:34, endln:72:37
+  \_struct_var: (work@test_program.read_command_queue_slave), line:72:10, endln:72:34
   |vpiImportTypespec:
   \_array_var: (work@test_program.read_command_queue_slave), line:72:10, endln:72:37
   |vpiImportTypespec:
@@ -17312,7 +17432,7 @@ design: (unnamed)
   |vpiImportTypespec:
   \_unsupported_typespec: (Command), line:72:1, endln:72:8
   |vpiImportTypespec:
-  \_struct_var: (work@test_program.read_response_queue_slave), line:75:35, endln:75:38
+  \_struct_var: (work@test_program.read_response_queue_slave), line:75:10, endln:75:35
   |vpiImportTypespec:
   \_array_var: (work@test_program.read_response_queue_slave), line:75:10, endln:75:38
   |vpiImportTypespec:
@@ -17715,7 +17835,7 @@ design: (unnamed)
               |vpiName:read_command_queue_master
               |vpiFullName:read_command_queue_master[0]
               |vpiActual:
-              \_struct_var: (work@test_program.read_command_queue_master), line:68:35, endln:68:38
+              \_struct_var: (work@test_program.read_command_queue_master), line:68:10, endln:68:35
               |vpiIndex:
               \_constant: , line:254:39, endln:254:40
                 |vpiParent:
@@ -18334,7 +18454,7 @@ design: (unnamed)
                 |vpiName:read_response_queue_slave
                 |vpiFullName:work@test_program.read_response_queue_slave
                 |vpiActual:
-                \_struct_var: (work@test_program.read_response_queue_slave), line:75:35, endln:75:38
+                \_struct_var: (work@test_program.read_response_queue_slave), line:75:10, endln:75:35
     |vpiAlwaysType:1
   |vpiProcess:
   \_always: , line:333:4, endln:337:7
@@ -18547,7 +18667,7 @@ design: (unnamed)
               |vpiName:read_command_queue_master
               |vpiFullName:read_command_queue_master[1]
               |vpiActual:
-              \_struct_var: (work@test_program.read_command_queue_master), line:68:35, endln:68:38
+              \_struct_var: (work@test_program.read_command_queue_master), line:68:10, endln:68:35
               |vpiIndex:
               \_constant: , line:397:39, endln:397:40
                 |vpiParent:
@@ -19166,7 +19286,7 @@ design: (unnamed)
                 |vpiName:read_response_queue_slave
                 |vpiFullName:work@test_program.read_response_queue_slave
                 |vpiActual:
-                \_struct_var: (work@test_program.read_response_queue_slave), line:75:35, endln:75:38
+                \_struct_var: (work@test_program.read_response_queue_slave), line:75:10, endln:75:35
     |vpiAlwaysType:1
   |vpiProcess:
   \_always: , line:476:4, endln:480:7
@@ -19830,7 +19950,3 @@ design: (unnamed)
 [LINT]: ${SURELOG_DIR}/tests/DollarRoot/dut.sv:446:10: Non synthesizable construct, push_back
 [LINT]: ${SURELOG_DIR}/tests/DollarRoot/dut.sv:526:7: Non synthesizable construct,
 ============================== End Linting Results ==============================
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/DollarRoot/dut.sv | ${SURELOG_DIR}/build/regression/DollarRoot/roundtrip/dut_000.sv | 272 | 806 |
-============================== End RoundTrip Results ==============================

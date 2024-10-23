@@ -250,9 +250,10 @@ part_select                                            1
 port                                                   1
 range                                                  2
 ref_obj                                                7
-ref_typespec                                          11
+ref_typespec                                          12
 source_file                                            1
 struct_typespec                                        1
+typedef_typespec                                       1
 typespec_member                                        1
 unsupported_typespec                                   1
 var_select                                             1
@@ -463,6 +464,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (hw_key_req_t), line:8:6, endln:8:18
+    |vpiParent:
+    \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/PartSelectNoParent/dut.sv, line:1:1, endln:9:11
+    |vpiName:hw_key_req_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (my_pkg::hw_key_req_t), line:6:12, endln:8:5
+      |vpiParent:
+      \_typedef_typespec: (hw_key_req_t), line:8:6, endln:8:18
+      |vpiFullName:my_pkg::hw_key_req_t
+      |vpiActual:
+      \_struct_typespec: (my_pkg::hw_key_req_t), line:6:12, endln:8:5
   |vpiImportTypespec:
   \_int_typespec: , line:2:14, endln:2:17
   |vpiImportTypespec:
@@ -473,6 +486,8 @@ design: (unnamed)
   \_struct_typespec: (my_pkg::hw_key_req_t), line:6:12, endln:8:5
   |vpiImportTypespec:
   \_logic_typespec: , line:7:7, endln:7:39
+  |vpiImportTypespec:
+  \_typedef_typespec: (hw_key_req_t), line:8:6, endln:8:18
   |vpiDefName:my_pkg
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PartSelectNoParent/dut.sv, line:11:1, endln:19:10
@@ -719,7 +734,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PartSelectNoParent/dut.sv | ${SURELOG_DIR}/build/regression/PartSelectNoParent/roundtrip/dut_000.sv | 12 | 19 |
-============================== End RoundTrip Results ==============================

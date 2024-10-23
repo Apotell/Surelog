@@ -382,10 +382,11 @@ logic_typespec                                         1
 logic_var                                              1
 package                                                1
 ref_obj                                                4
-ref_typespec                                          16
+ref_typespec                                          18
 source_file                                            1
 task                                                   9
 type_parameter                                         8
+typedef_typespec                                       2
 unsupported_typespec                                   4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassTypeParamAlias/slpp_all/surelog.uhdm ...
@@ -785,8 +786,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/ClassTypeParamAlias/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1018,7 +1033,7 @@ design: (unnamed)
       |vpiName:BrickType
       |vpiFullName:work@param_types_as_class_item::BT::BrickType
       |vpiActual:
-      \_logic_typespec: (BrickType), line:5:11, endln:5:16
+      \_typedef_typespec: (BrickType), line:5:17, endln:5:26
   |vpiParameter:
   \_type_parameter: (work@param_types_as_class_item::CT1), line:7:13, endln:7:21
     |vpiParent:
@@ -1099,6 +1114,18 @@ design: (unnamed)
     \_class_defn: (work@param_types_as_class_item), file:${SURELOG_DIR}/tests/ClassTypeParamAlias/dut.sv, line:3:1, endln:10:9
     |vpiName:BrickType
   |vpiTypedef:
+  \_typedef_typespec: (BrickType), line:5:17, endln:5:26
+    |vpiParent:
+    \_class_defn: (work@param_types_as_class_item), file:${SURELOG_DIR}/tests/ClassTypeParamAlias/dut.sv, line:3:1, endln:10:9
+    |vpiName:BrickType
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@param_types_as_class_item::BrickType), line:5:11, endln:5:16
+      |vpiParent:
+      \_typedef_typespec: (BrickType), line:5:17, endln:5:26
+      |vpiFullName:work@param_types_as_class_item::BrickType
+      |vpiActual:
+      \_logic_typespec: (BrickType), line:5:11, endln:5:16
+  |vpiTypedef:
   \_type_parameter: (work@param_types_as_class_item::BT), line:6:13, endln:6:20
   |vpiTypedef:
   \_type_parameter: (work@param_types_as_class_item::CT1), line:7:13, endln:7:21
@@ -1137,6 +1164,8 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: (BrickType), line:5:11, endln:5:16
   |vpiImportTypespec:
+  \_typedef_typespec: (BrickType), line:5:17, endln:5:26
+  |vpiImportTypespec:
   \_type_parameter: (work@param_types_as_class_item::BT), line:6:13, endln:6:20
   |vpiImportTypespec:
   \_type_parameter: (work@param_types_as_class_item::CT1), line:7:13, endln:7:21
@@ -1168,7 +1197,3 @@ design: (unnamed)
 ============================== Begin Linting Results ==============================
 [LINT]: ${SURELOG_DIR}/tests/ClassTypeParamAlias/dut.sv:3:1: Non synthesizable construct, work@param_types_as_class_item
 ============================== End Linting Results ==============================
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ClassTypeParamAlias/dut.sv | ${SURELOG_DIR}/build/regression/ClassTypeParamAlias/roundtrip/dut_000.sv | 5 | 10 |
-============================== End RoundTrip Results ==============================

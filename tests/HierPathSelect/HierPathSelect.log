@@ -89,10 +89,11 @@ logic_typespec                                         1
 module_inst                                            1
 range                                                  1
 ref_obj                                                1
-ref_typespec                                           2
+ref_typespec                                           3
 source_file                                            1
 struct_net                                             1
 struct_typespec                                        1
+typedef_typespec                                       1
 typespec_member                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathSelect/slpp_all/surelog.uhdm ...
@@ -152,10 +153,24 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (struct_typedef), line:5:3, endln:5:17
+    |vpiParent:
+    \_module_inst: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/HierPathSelect/dut.sv, line:1:1, endln:10:10
+    |vpiName:struct_typedef
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@dut2.struct_typedef), line:3:9, endln:5:2
+      |vpiParent:
+      \_typedef_typespec: (struct_typedef), line:5:3, endln:5:17
+      |vpiFullName:work@dut2.struct_typedef
+      |vpiActual:
+      \_struct_typespec: (struct_typedef), line:3:9, endln:5:2
   |vpiImportTypespec:
   \_struct_typespec: (struct_typedef), line:3:9, endln:5:2
   |vpiImportTypespec:
   \_logic_typespec: , line:4:3, endln:4:14
+  |vpiImportTypespec:
+  \_typedef_typespec: (struct_typedef), line:5:3, endln:5:17
   |vpiImportTypespec:
   \_struct_net: (work@dut2.read_buf), line:6:16, endln:6:24
     |vpiParent:
@@ -219,7 +234,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/HierPathSelect/dut.sv | ${SURELOG_DIR}/build/regression/HierPathSelect/roundtrip/dut_000.sv | 3 | 10 |
-============================== End RoundTrip Results ==============================

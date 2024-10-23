@@ -260,9 +260,10 @@ parameter                                              5
 range                                                  4
 ref_module                                             3
 ref_obj                                                3
-ref_typespec                                           8
+ref_typespec                                          10
 source_file                                            1
 struct_typespec                                        1
+typedef_typespec                                       2
 typespec_member                                        1
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
@@ -346,6 +347,43 @@ design: (unnamed)
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv, line:1:1, endln:8:11
     |vpiSigned:1
   |vpiTypedef:
+  \_packed_array_typespec: , line:3:11, endln:3:28
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv, line:1:1, endln:8:11
+    |vpiRange:
+    \_range: , line:3:17, endln:3:28
+      |vpiParent:
+      \_packed_array_typespec: , line:3:11, endln:3:28
+      |vpiLeftRange:
+      \_operation: , line:3:18, endln:3:25
+        |vpiParent:
+        \_range: , line:3:17, endln:3:28
+        |vpiOpType:11
+        |vpiOperand:
+        \_ref_obj: (pkg::Width), line:3:18, endln:3:23
+          |vpiParent:
+          \_operation: , line:3:18, endln:3:25
+          |vpiName:Width
+          |vpiFullName:pkg::Width
+          |vpiActual:
+          \_parameter: (pkg::Width), line:2:17, endln:2:32
+        |vpiOperand:
+        \_constant: , line:3:24, endln:3:25
+          |vpiParent:
+          \_operation: , line:3:18, endln:3:25
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:3:26, endln:3:27
+        |vpiParent:
+        \_range: , line:3:17, endln:3:28
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
   \_logic_typespec: (key), line:3:11, endln:3:28
     |vpiParent:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv, line:1:1, endln:8:11
@@ -384,6 +422,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (key), line:3:31, endln:3:34
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv, line:1:1, endln:8:11
+    |vpiName:key
+    |vpiTypedefAlias:
+    \_ref_typespec: (pkg::key), line:3:11, endln:3:16
+      |vpiParent:
+      \_typedef_typespec: (key), line:3:31, endln:3:34
+      |vpiFullName:pkg::key
+      |vpiActual:
+      \_logic_typespec: (key), line:3:11, endln:3:28
+  |vpiTypedef:
   \_struct_typespec: (pkg::init_t), line:4:11, endln:6:4
     |vpiParent:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv, line:1:1, endln:8:11
@@ -402,12 +452,30 @@ design: (unnamed)
         |vpiFullName:pkg::init_t::key::key
         |vpiActual:
         \_logic_typespec: (key), line:3:11, endln:3:28
+  |vpiTypedef:
+  \_typedef_typespec: (init_t), line:6:5, endln:6:11
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv, line:1:1, endln:8:11
+    |vpiName:init_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (pkg::init_t), line:4:11, endln:6:4
+      |vpiParent:
+      \_typedef_typespec: (init_t), line:6:5, endln:6:11
+      |vpiFullName:pkg::init_t
+      |vpiActual:
+      \_struct_typespec: (pkg::init_t), line:4:11, endln:6:4
   |vpiImportTypespec:
   \_int_typespec: , line:2:13, endln:2:16
   |vpiImportTypespec:
+  \_packed_array_typespec: , line:3:11, endln:3:28
+  |vpiImportTypespec:
   \_logic_typespec: (key), line:3:11, endln:3:28
   |vpiImportTypespec:
+  \_typedef_typespec: (key), line:3:31, endln:3:34
+  |vpiImportTypespec:
   \_struct_typespec: (pkg::init_t), line:4:11, endln:6:4
+  |vpiImportTypespec:
+  \_typedef_typespec: (init_t), line:6:5, endln:6:11
   |vpiDefName:pkg
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv, line:17:1, endln:19:10
@@ -609,7 +677,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 5
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv | ${SURELOG_DIR}/build/regression/StructUnsizedVal/roundtrip/dut_000.sv | 14 | 23 |
-============================== End RoundTrip Results ==============================

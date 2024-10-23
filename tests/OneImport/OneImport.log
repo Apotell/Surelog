@@ -248,8 +248,9 @@ parameter                                              1
 port                                                   2
 range                                                  7
 ref_obj                                                3
-ref_typespec                                           5
+ref_typespec                                           6
 source_file                                            1
+typedef_typespec                                       1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/OneImport/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/OneImport/slpp_all/checker/surelog.chk.html ...
@@ -348,6 +349,18 @@ design: (unnamed)
       |vpiDecompile:6'h13
       |vpiSize:6
   |vpiTypedef:
+  \_typedef_typespec: (opcode_e), line:5:5, endln:5:13
+    |vpiParent:
+    \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/OneImport/dut.sv, line:1:1, endln:9:11
+    |vpiName:opcode_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (my_pkg::opcode_e), line:2:11, endln:5:4
+      |vpiParent:
+      \_typedef_typespec: (opcode_e), line:5:5, endln:5:13
+      |vpiFullName:my_pkg::opcode_e
+      |vpiActual:
+      \_enum_typespec: (my_pkg::opcode_e), line:2:11, endln:5:14
+  |vpiTypedef:
   \_int_typespec: , line:7:11, endln:7:23
     |vpiParent:
     \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/OneImport/dut.sv, line:1:1, endln:9:11
@@ -355,6 +368,8 @@ design: (unnamed)
   \_logic_typespec: , line:2:16, endln:2:27
   |vpiImportTypespec:
   \_enum_typespec: (my_pkg::opcode_e), line:2:11, endln:5:14
+  |vpiImportTypespec:
+  \_typedef_typespec: (opcode_e), line:5:5, endln:5:13
   |vpiImportTypespec:
   \_int_typespec: , line:7:11, endln:7:23
   |vpiDefName:my_pkg
@@ -540,7 +555,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/OneImport/dut.sv | ${SURELOG_DIR}/build/regression/OneImport/roundtrip/dut_000.sv | 12 | 20 |
-============================== End RoundTrip Results ==============================

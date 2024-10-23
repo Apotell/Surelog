@@ -105,9 +105,10 @@ packed_array_typespec                                  1
 port                                                   1
 range                                                  4
 ref_obj                                                2
-ref_typespec                                           5
+ref_typespec                                           6
 source_file                                            1
 struct_typespec                                        1
+typedef_typespec                                       1
 typespec_member                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedArrayStruct/slpp_all/surelog.uhdm ...
@@ -179,6 +180,18 @@ design: (unnamed)
       |vpiActual:
       \_struct_typespec: , line:2:12, endln:4:12
   |vpiTypedef:
+  \_typedef_typespec: (struct_array_t), line:4:13, endln:4:27
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayStruct/dut.sv, line:1:1, endln:7:10
+    |vpiName:struct_array_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top.struct_array_t), line:2:12, endln:4:12
+      |vpiParent:
+      \_typedef_typespec: (struct_array_t), line:4:13, endln:4:27
+      |vpiFullName:work@top.struct_array_t
+      |vpiActual:
+      \_packed_array_typespec: (struct_array_t), line:2:12, endln:4:12
+  |vpiTypedef:
   \_logic_typespec: , line:1:19, endln:1:31
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayStruct/dut.sv, line:1:1, endln:7:10
@@ -232,6 +245,8 @@ design: (unnamed)
   \_logic_typespec: , line:3:7, endln:3:12
   |vpiImportTypespec:
   \_packed_array_typespec: (struct_array_t), line:2:12, endln:4:12
+  |vpiImportTypespec:
+  \_typedef_typespec: (struct_array_t), line:4:13, endln:4:27
   |vpiImportTypespec:
   \_logic_typespec: , line:1:19, endln:1:31
   |vpiImportTypespec:
@@ -309,7 +324,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PackedArrayStruct/dut.sv | ${SURELOG_DIR}/build/regression/PackedArrayStruct/roundtrip/dut_000.sv | 5 | 7 |
-============================== End RoundTrip Results ==============================

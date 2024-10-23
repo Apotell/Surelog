@@ -1008,25 +1008,26 @@ parameter                                              1
 range                                                  2
 ref_module                                             1
 ref_obj                                               21
-ref_typespec                                          28
+ref_typespec                                          31
 source_file                                            3
 string_typespec                                        6
 struct_typespec                                        1
 sys_func_call                                         11
 task                                                  14
 task_call                                              6
+typedef_typespec                                       3
 typespec_member                                        3
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
-[ERR:IG0807] ${SURELOG_DIR}/tests/UnitPackage/simple_pkg.sv:20:22: Child 121 is not entirely in parent's scope.
-[ERR:IG0807] ${SURELOG_DIR}/tests/UnitPackage/simple_pkg.sv:20:33: Child 122 is not entirely in parent's scope.
-[ERR:IG0807] ${SURELOG_DIR}/tests/UnitPackage/simple_pkg.sv:21:20: Child 124 is not entirely in parent's scope.
-[ERR:IG0807] ${SURELOG_DIR}/tests/UnitPackage/simple_pkg.sv:22:24: Child 127 is not entirely in parent's scope.
-[ERR:IG0807] ${SURELOG_DIR}/tests/UnitPackage/simple_pkg.sv:23:25: Child 130 is not entirely in parent's scope.
-[ERR:IG0807] ${SURELOG_DIR}/tests/UnitPackage/simple_pkg.sv:24:20: Child 132 is not entirely in parent's scope.
-[ERR:IG0807] ${SURELOG_DIR}/tests/UnitPackage/simple_pkg.sv:27:27: Child 142 is not entirely in parent's scope.
-[ERR:IG0809] ${SURELOG_DIR}/tests/UnitPackage/simple_pkg.sv:16:4: Object 117 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnitPackage/slpp_unit/surelog.uhdm ...
+[ERR:IG0807] ${SURELOG_DIR}/tests/UnitPackage/simple_pkg.sv:20:22: Child 125 is not entirely in parent's scope.
+[ERR:IG0807] ${SURELOG_DIR}/tests/UnitPackage/simple_pkg.sv:20:33: Child 126 is not entirely in parent's scope.
+[ERR:IG0807] ${SURELOG_DIR}/tests/UnitPackage/simple_pkg.sv:21:20: Child 128 is not entirely in parent's scope.
+[ERR:IG0807] ${SURELOG_DIR}/tests/UnitPackage/simple_pkg.sv:22:24: Child 131 is not entirely in parent's scope.
+[ERR:IG0807] ${SURELOG_DIR}/tests/UnitPackage/simple_pkg.sv:23:25: Child 134 is not entirely in parent's scope.
+[ERR:IG0807] ${SURELOG_DIR}/tests/UnitPackage/simple_pkg.sv:24:20: Child 136 is not entirely in parent's scope.
+[ERR:IG0807] ${SURELOG_DIR}/tests/UnitPackage/simple_pkg.sv:27:27: Child 146 is not entirely in parent's scope.
+[ERR:IG0809] ${SURELOG_DIR}/tests/UnitPackage/simple_pkg.sv:16:4: Object 121 actual cannot be null.
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/UnitPackage/slpp_unit/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -1431,8 +1432,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/UnitPackage/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1689,6 +1704,18 @@ design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
   |vpiTypedef:
+  \_typedef_typespec: (bool), line:10:31, endln:10:35
+    |vpiParent:
+    \_package: definesPkg (definesPkg::), file:${SURELOG_DIR}/tests/UnitPackage/definesPkg.pkg, line:4:1, endln:17:11
+    |vpiName:bool
+    |vpiTypedefAlias:
+    \_ref_typespec: (definesPkg::bool), line:10:11, endln:10:30
+      |vpiParent:
+      \_typedef_typespec: (bool), line:10:31, endln:10:35
+      |vpiFullName:definesPkg::bool
+      |vpiActual:
+      \_enum_typespec: (definesPkg::bool), line:10:11, endln:10:36
+  |vpiTypedef:
   \_struct_typespec: (definesPkg::mem_s), line:11:11, endln:15:4
     |vpiParent:
     \_package: definesPkg (definesPkg::), file:${SURELOG_DIR}/tests/UnitPackage/definesPkg.pkg, line:4:1, endln:17:11
@@ -1784,8 +1811,22 @@ design: (unnamed)
   \_bit_typespec: , line:14:6, endln:14:9
     |vpiParent:
     \_package: definesPkg (definesPkg::), file:${SURELOG_DIR}/tests/UnitPackage/definesPkg.pkg, line:4:1, endln:17:11
+  |vpiTypedef:
+  \_typedef_typespec: (mem_s), line:15:5, endln:15:10
+    |vpiParent:
+    \_package: definesPkg (definesPkg::), file:${SURELOG_DIR}/tests/UnitPackage/definesPkg.pkg, line:4:1, endln:17:11
+    |vpiName:mem_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (definesPkg::mem_s), line:11:11, endln:15:4
+      |vpiParent:
+      \_typedef_typespec: (mem_s), line:15:5, endln:15:10
+      |vpiFullName:definesPkg::mem_s
+      |vpiActual:
+      \_struct_typespec: (definesPkg::mem_s), line:11:11, endln:15:4
   |vpiImportTypespec:
   \_enum_typespec: (definesPkg::bool), line:10:11, endln:10:36
+  |vpiImportTypespec:
+  \_typedef_typespec: (bool), line:10:31, endln:10:35
   |vpiImportTypespec:
   \_struct_typespec: (definesPkg::mem_s), line:11:11, endln:15:4
   |vpiImportTypespec:
@@ -1794,6 +1835,8 @@ design: (unnamed)
   \_bit_typespec: , line:13:6, endln:13:17
   |vpiImportTypespec:
   \_bit_typespec: , line:14:6, endln:14:9
+  |vpiImportTypespec:
+  \_typedef_typespec: (mem_s), line:15:5, endln:15:10
   |vpiDefName:definesPkg
 |uhdmallPackages:
 \_package: msgPkg (msgPkg::), file:${SURELOG_DIR}/tests/UnitPackage/msgPkg.pkg, line:4:1, endln:57:11
@@ -2706,9 +2749,3 @@ design: (unnamed)
 [LINT]: ${SURELOG_DIR}/tests/UnitPackage/simple_pkg.sv:23:3: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/UnitPackage/simple_pkg.sv:27:5: Non synthesizable construct,
 ============================== End Linting Results ==============================
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/UnitPackage/definesPkg.pkg | ${SURELOG_DIR}/build/regression/UnitPackage/roundtrip/definesPkg_000.pkg | 2 | 17 |
-[roundtrip]: ${SURELOG_DIR}/tests/UnitPackage/msgPkg.pkg     | ${SURELOG_DIR}/build/regression/UnitPackage/roundtrip/msgPkg_000.pkg     | 9 | 57 |
-[roundtrip]: ${SURELOG_DIR}/tests/UnitPackage/simple_pkg.sv  | ${SURELOG_DIR}/build/regression/UnitPackage/roundtrip/simple_pkg_000.sv  | 15 | 30 |
-============================== End RoundTrip Results ==============================

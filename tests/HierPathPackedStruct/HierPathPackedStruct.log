@@ -153,11 +153,12 @@ packed_array_typespec                                  1
 port                                                   1
 range                                                  3
 ref_obj                                                2
-ref_typespec                                           6
+ref_typespec                                           8
 source_file                                            1
 struct_typespec                                        2
 struct_var                                             1
 sys_func_call                                          1
+typedef_typespec                                       2
 typespec_member                                        3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathPackedStruct/slpp_all/surelog.uhdm ...
@@ -341,6 +342,18 @@ design: (unnamed)
       |UINT:0
       |vpiConstType:9
 |vpiTypedef:
+\_typedef_typespec: (fourty_two_t), line:4:3, endln:4:15
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:fourty_two_t
+  |vpiTypedefAlias:
+  \_ref_typespec: (fourty_two_t), line:1:9, endln:4:2
+    |vpiParent:
+    \_typedef_typespec: (fourty_two_t), line:4:3, endln:4:15
+    |vpiFullName:fourty_two_t
+    |vpiActual:
+    \_struct_typespec: (fourty_two_t), line:1:9, endln:4:2
+|vpiTypedef:
 \_struct_typespec: (foo_t), line:6:9, endln:8:2
   |vpiParent:
   \_design: (unnamed)
@@ -389,14 +402,22 @@ design: (unnamed)
     \_packed_array_typespec: , line:7:3, endln:7:21
     |vpiName:fourty_two_t
     |vpiActual:
-    \_struct_typespec: (fourty_two_t), line:1:9, endln:4:2
+    \_typedef_typespec: (fourty_two_t), line:4:3, endln:4:15
+|vpiTypedef:
+\_typedef_typespec: (foo_t), line:8:3, endln:8:8
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:foo_t
+  |vpiTypedefAlias:
+  \_ref_typespec: (foo_t), line:6:9, endln:8:2
+    |vpiParent:
+    \_typedef_typespec: (foo_t), line:8:3, endln:8:8
+    |vpiFullName:foo_t
+    |vpiActual:
+    \_struct_typespec: (foo_t), line:6:9, endln:8:2
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/HierPathPackedStruct/dut.sv | ${SURELOG_DIR}/build/regression/HierPathPackedStruct/roundtrip/dut_000.sv | 8 | 17 |
-============================== End RoundTrip Results ==============================

@@ -147,16 +147,17 @@ param_assign                                           2
 parameter                                              2
 ref_module                                             1
 ref_obj                                                1
-ref_typespec                                           6
+ref_typespec                                           7
 source_file                                            1
 string_typespec                                        2
 struct_typespec                                        1
 tagged_pattern                                         2
+typedef_typespec                                       1
 typespec_member                                        2
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/TaggedParam/dut.sv:12:62: Failed to bind object: "id: 16, name: fpnew_pkg::RV64D_Xsflt".
-[ERR:IG0809] ${SURELOG_DIR}/tests/TaggedParam/dut.sv:12:62: Object 16 actual cannot be null.
+[ERR:UH0734] ${SURELOG_DIR}/tests/TaggedParam/dut.sv:12:62: Failed to bind object: "id: 18, name: fpnew_pkg::RV64D_Xsflt".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TaggedParam/slpp_all/surelog.uhdm ...
+[ERR:IG0809] ${SURELOG_DIR}/tests/TaggedParam/dut.sv:12:62: Object 18 actual cannot be null.
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/TaggedParam/slpp_all/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -210,12 +211,26 @@ design: (unnamed)
   \_logic_typespec: , line:5:5, endln:5:10
     |vpiParent:
     \_package: fpnew_pkg (fpnew_pkg::), file:${SURELOG_DIR}/tests/TaggedParam/dut.sv, line:1:1, endln:8:11
+  |vpiTypedef:
+  \_typedef_typespec: (fpu_features_t), line:6:5, endln:6:19
+    |vpiParent:
+    \_package: fpnew_pkg (fpnew_pkg::), file:${SURELOG_DIR}/tests/TaggedParam/dut.sv, line:1:1, endln:8:11
+    |vpiName:fpu_features_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (fpnew_pkg::fpu_features_t), line:3:9, endln:6:4
+      |vpiParent:
+      \_typedef_typespec: (fpu_features_t), line:6:5, endln:6:19
+      |vpiFullName:fpnew_pkg::fpu_features_t
+      |vpiActual:
+      \_struct_typespec: (fpnew_pkg::fpu_features_t), line:3:9, endln:6:4
   |vpiImportTypespec:
   \_struct_typespec: (fpnew_pkg::fpu_features_t), line:3:9, endln:6:4
   |vpiImportTypespec:
   \_int_typespec: , line:4:5, endln:4:17
   |vpiImportTypespec:
   \_logic_typespec: , line:5:5, endln:5:10
+  |vpiImportTypespec:
+  \_typedef_typespec: (fpu_features_t), line:6:5, endln:6:19
   |vpiDefName:fpnew_pkg
 |uhdmallModules:
 \_module_inst: work@fpnew_top (work@fpnew_top), file:${SURELOG_DIR}/tests/TaggedParam/dut.sv, line:10:2, endln:14:11
@@ -347,7 +362,3 @@ design: (unnamed)
 [  ERROR] : 2
 [WARNING] : 3
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/TaggedParam/dut.sv | ${SURELOG_DIR}/build/regression/TaggedParam/roundtrip/dut_000.sv | 10 | 27 |
-============================== End RoundTrip Results ==============================

@@ -773,9 +773,10 @@ package                                                1
 port                                                  12
 prim_term                                             23
 ref_obj                                               23
-ref_typespec                                          11
+ref_typespec                                          12
 source_file                                            1
 task                                                   9
+typedef_typespec                                       1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/GateLevel/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/GateLevel/slpp_all/checker/surelog.chk.html ...
@@ -1174,8 +1175,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/GateLevel/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1957,7 +1972,3 @@ design: (unnamed)
 [  ERROR] : 1
 [WARNING] : 2
 [   NOTE] : 1
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/GateLevel/dut.sv | ${SURELOG_DIR}/build/regression/GateLevel/roundtrip/dut_000.sv | 18 | 20 |
-============================== End RoundTrip Results ==============================

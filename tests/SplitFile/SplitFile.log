@@ -52,7 +52,7 @@
 [INF:CP0302] ${SURELOG_DIR}/tests/SplitFile/top2.v:121:1: Compile class "toto4::blah31".
 [INF:CP0302] ${SURELOG_DIR}/tests/SplitFile/top2.v:167:1: Compile class "toto4::blah31_167".
 [INF:CP0302] ${SURELOG_DIR}/tests/SplitFile/top2.v:152:1: Compile class "toto4::blah32".
-[WRN:CP0334] ${SURELOG_DIR}/tests/SplitFile/top2.v:135:1: Colliding compilation unit name: "toto4::blah31",
+[WRN:CP0334] ${SURELOG_DIR}/tests/SplitFile/top2.v:135:1: Colliding compilation unit name: "%s",
              ${SURELOG_DIR}/tests/SplitFile/top2.v:121:1: previous usage.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
@@ -85,13 +85,14 @@ prim_term                                              1
 range                                                  3
 ref_module                                             3
 ref_obj                                               12
-ref_typespec                                          14
+ref_typespec                                          15
 source_file                                            3
 task                                                   9
+typedef_typespec                                       1
 === UHDM Object Stats End ===
+[INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SplitFile/slpp_unit/surelog.uhdm ...
 [ERR:IG0809] ${SURELOG_DIR}/tests/SplitFile/top.v:28:2: Object 43 actual cannot be null.
 [ERR:IG0809] ${SURELOG_DIR}/tests/SplitFile/top.v:91:2: Object 48 actual cannot be null.
-[INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SplitFile/slpp_unit/surelog.uhdm ...
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 2
@@ -112,9 +113,3 @@ task                                                   9
 [LINT]: ${SURELOG_DIR}/tests/SplitFile/top1.v:8:19: Non synthesizable construct, data
 [LINT]: ${SURELOG_DIR}/tests/SplitFile/top1.v:7:3: Non synthesizable construct, cb
 ============================== End Linting Results ==============================
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/SplitFile/top.v  | ${SURELOG_DIR}/build/regression/SplitFile/roundtrip/top_000.v  | 32 | 99 |
-[roundtrip]: ${SURELOG_DIR}/tests/SplitFile/top1.v | ${SURELOG_DIR}/build/regression/SplitFile/roundtrip/top1_000.v | 25 | 39 |
-[roundtrip]: ${SURELOG_DIR}/tests/SplitFile/top2.v | ${SURELOG_DIR}/build/regression/SplitFile/roundtrip/top2_000.v | 8 | 194 |
-============================== End RoundTrip Results ==============================

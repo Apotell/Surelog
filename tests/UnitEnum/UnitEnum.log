@@ -400,9 +400,10 @@ logic_net                                              3
 logic_var                                              1
 module_inst                                            1
 package                                                2
-ref_typespec                                          16
+ref_typespec                                          19
 source_file                                            1
 task                                                   9
+typedef_typespec                                       3
 unsupported_typespec                                   3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnitEnum/slpp_unit/surelog.uhdm ...
@@ -802,8 +803,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/UnitEnum/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1060,10 +1075,24 @@ design: (unnamed)
       |INT:3
       |vpiDecompile:3
       |vpiSize:64
+  |vpiTypedef:
+  \_typedef_typespec: (fsm_t_pkg), line:6:38, endln:6:47
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:2:1, endln:8:11
+    |vpiName:fsm_t_pkg
+    |vpiTypedefAlias:
+    \_ref_typespec: (pkg::fsm_t_pkg), line:6:10, endln:6:37
+      |vpiParent:
+      \_typedef_typespec: (fsm_t_pkg), line:6:38, endln:6:47
+      |vpiFullName:pkg::fsm_t_pkg
+      |vpiActual:
+      \_enum_typespec: (pkg::fsm_t_pkg), line:6:10, endln:6:48
   |vpiImportTypespec:
   \_class_defn: (pkg::Configuration1), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:3:1, endln:4:9
   |vpiImportTypespec:
   \_enum_typespec: (pkg::fsm_t_pkg), line:6:10, endln:6:48
+  |vpiImportTypespec:
+  \_typedef_typespec: (fsm_t_pkg), line:6:38, endln:6:47
   |vpiDefName:pkg
   |vpiClassDefn:
   \_class_defn: (pkg::Configuration1), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:3:1, endln:4:9
@@ -1147,6 +1176,18 @@ design: (unnamed)
       |vpiDecompile:3
       |vpiSize:64
   |vpiTypedef:
+  \_typedef_typespec: (fsm_t), line:16:38, endln:16:43
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:14:1, endln:24:10
+    |vpiName:fsm_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top.fsm_t), line:16:10, endln:16:37
+      |vpiParent:
+      \_typedef_typespec: (fsm_t), line:16:38, endln:16:43
+      |vpiFullName:work@top.fsm_t
+      |vpiActual:
+      \_enum_typespec: (fsm_t), line:16:10, endln:16:44
+  |vpiTypedef:
   \_unsupported_typespec: (fsm_t_pkg), line:19:1, endln:19:10
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:14:1, endln:24:10
@@ -1172,6 +1213,8 @@ design: (unnamed)
   \_import_typespec: (pkg), line:15:9, endln:15:15
   |vpiImportTypespec:
   \_enum_typespec: (fsm_t), line:16:10, endln:16:44
+  |vpiImportTypespec:
+  \_typedef_typespec: (fsm_t), line:16:38, endln:16:43
   |vpiImportTypespec:
   \_enum_var: (work@top.state), line:18:7, endln:18:12
   |vpiImportTypespec:
@@ -1244,7 +1287,3 @@ design: (unnamed)
 [LINT]: ${SURELOG_DIR}/tests/UnitEnum/top.v:3:1: Non synthesizable construct, Configuration1
 [LINT]: ${SURELOG_DIR}/tests/UnitEnum/top.v:10:1: Non synthesizable construct, work@Configuration2
 ============================== End Linting Results ==============================
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/UnitEnum/top.v | ${SURELOG_DIR}/build/regression/UnitEnum/roundtrip/top_000.v | 6 | 24 |
-============================== End RoundTrip Results ==============================

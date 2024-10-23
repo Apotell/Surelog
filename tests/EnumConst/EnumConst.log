@@ -77,8 +77,9 @@ logic_typespec                                         1
 module_inst                                            2
 operation                                              4
 range                                                  1
-ref_typespec                                           1
+ref_typespec                                           2
 source_file                                            1
+typedef_typespec                                       1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EnumConst/slpp_unit/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/EnumConst/slpp_unit/checker/surelog.chk.html ...
@@ -147,10 +148,24 @@ design: (unnamed)
       |BIN:100111
       |vpiDecompile:{1'b1,5'd07}
       |vpiSize:6
+  |vpiTypedef:
+  \_typedef_typespec: (exc_cause_e), line:5:3, endln:5:14
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/EnumConst/dut.sv, line:1:1, endln:7:10
+    |vpiName:exc_cause_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@dut.exc_cause_e), line:2:9, endln:5:2
+      |vpiParent:
+      \_typedef_typespec: (exc_cause_e), line:5:3, endln:5:14
+      |vpiFullName:work@dut.exc_cause_e
+      |vpiActual:
+      \_enum_typespec: (exc_cause_e), line:2:9, endln:5:15
   |vpiImportTypespec:
   \_logic_typespec: , line:2:14, endln:2:25
   |vpiImportTypespec:
   \_enum_typespec: (exc_cause_e), line:2:9, endln:5:15
+  |vpiImportTypespec:
+  \_typedef_typespec: (exc_cause_e), line:5:3, endln:5:14
   |vpiDefName:work@dut
 ===================
 [  FATAL] : 0
@@ -158,7 +173,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/EnumConst/dut.sv | ${SURELOG_DIR}/build/regression/EnumConst/roundtrip/dut_000.sv | 3 | 7 |
-============================== End RoundTrip Results ==============================

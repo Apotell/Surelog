@@ -385,11 +385,12 @@ logic_var                                              1
 module_inst                                            1
 package                                                1
 port                                                   2
-ref_typespec                                          18
+ref_typespec                                          21
 ref_var                                                2
 source_file                                            1
 string_typespec                                        4
 task                                                   9
+typedef_typespec                                       3
 unsupported_typespec                                   3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypeDefScope/slpp_all/surelog.uhdm ...
@@ -789,8 +790,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/TypeDefScope/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1043,12 +1058,39 @@ design: (unnamed)
         |vpiName:comp
         |vpiFullName:work@dut.UVMC_set_config_object.comp
       |vpiTypedef:
+      \_typedef_typespec: (converter1), line:8:46, endln:8:56
+        |vpiParent:
+        \_begin: (work@dut.UVMC_set_config_object)
+        |vpiName:converter1
+        |vpiTypedefAlias:
+        \_ref_typespec: (work@dut.UVMC_set_config_object.converter1.uvmc_default_converter), line:8:9, endln:8:31
+          |vpiParent:
+          \_typedef_typespec: (converter1), line:8:46, endln:8:56
+          |vpiName:uvmc_default_converter
+          |vpiFullName:work@dut.UVMC_set_config_object.converter1.uvmc_default_converter
+      |vpiTypedef:
       \_logic_typespec: (converter2), line:9:9, endln:9:14
         |vpiParent:
         \_begin: (work@dut.UVMC_set_config_object)
         |vpiName:converter2
+      |vpiTypedef:
+      \_typedef_typespec: (converter2), line:9:15, endln:9:25
+        |vpiParent:
+        \_begin: (work@dut.UVMC_set_config_object)
+        |vpiName:converter2
+        |vpiTypedefAlias:
+        \_ref_typespec: (work@dut.UVMC_set_config_object.converter2), line:9:9, endln:9:14
+          |vpiParent:
+          \_typedef_typespec: (converter2), line:9:15, endln:9:25
+          |vpiFullName:work@dut.UVMC_set_config_object.converter2
+          |vpiActual:
+          \_logic_typespec: (converter2), line:9:9, endln:9:14
+      |vpiImportTypespec:
+      \_typedef_typespec: (converter1), line:8:46, endln:8:56
       |vpiImportTypespec:
       \_logic_typespec: (converter2), line:9:9, endln:9:14
+      |vpiImportTypespec:
+      \_typedef_typespec: (converter2), line:9:15, endln:9:25
       |vpiImportTypespec:
       \_ref_var: (work@dut.UVMC_set_config_object.obj), line:11:1, endln:11:11
       |vpiImportTypespec:
@@ -1210,7 +1252,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/TypeDefScope/dut.sv | ${SURELOG_DIR}/build/regression/TypeDefScope/roundtrip/dut_000.sv | 11 | 18 |
-============================== End RoundTrip Results ==============================

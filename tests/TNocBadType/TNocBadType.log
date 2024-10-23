@@ -74,9 +74,9 @@ interface_inst                                         1
 interface_typespec                                     1
 logic_net                                              1
 module_inst                                            1
-ref_typespec                                           1
+ref_typespec                                           2
 source_file                                            1
-unsupported_typespec                                   1
+typedef_typespec                                       2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TNocBadType/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/TNocBadType/slpp_all/checker/surelog.chk.html ...
@@ -98,11 +98,25 @@ design: (unnamed)
     |vpiParent:
     \_interface_inst: work@tnoc_types (work@tnoc_types), file:${SURELOG_DIR}/tests/TNocBadType/dut.sv, line:1:1, endln:4:13
     |vpiName:tnoc_common_header
+    |vpiSigned:1
+  |vpiTypedef:
+  \_typedef_typespec: (tnoc_common_header), line:2:14, endln:2:32
+    |vpiParent:
+    \_interface_inst: work@tnoc_types (work@tnoc_types), file:${SURELOG_DIR}/tests/TNocBadType/dut.sv, line:1:1, endln:4:13
+    |vpiName:tnoc_common_header
     |vpiInstance:
     \_interface_inst: work@tnoc_types (work@tnoc_types), file:${SURELOG_DIR}/tests/TNocBadType/dut.sv, line:1:1, endln:4:13
-    |vpiSigned:1
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@tnoc_types.tnoc_common_header), line:2:10, endln:2:13
+      |vpiParent:
+      \_typedef_typespec: (tnoc_common_header), line:2:14, endln:2:32
+      |vpiFullName:work@tnoc_types.tnoc_common_header
+      |vpiActual:
+      \_int_typespec: (tnoc_common_header), line:2:10, endln:2:13
   |vpiImportTypespec:
   \_int_typespec: (tnoc_common_header), line:2:10, endln:2:13
+  |vpiImportTypespec:
+  \_typedef_typespec: (tnoc_common_header), line:2:14, endln:2:32
   |vpiDefName:work@tnoc_types
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TNocBadType/dut.sv, line:7:1, endln:13:10
@@ -110,33 +124,31 @@ design: (unnamed)
   \_design: (unnamed)
   |vpiName:work@top
   |vpiTypedef:
+  \_typedef_typespec: (tnoc_common_header), line:10:37, endln:10:55
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TNocBadType/dut.sv, line:7:1, endln:13:10
+    |vpiName:tnoc_common_header
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top.tnoc_common_header.types), line:10:11, endln:10:16
+      |vpiParent:
+      \_typedef_typespec: (tnoc_common_header), line:10:37, endln:10:55
+      |vpiName:types
+      |vpiFullName:work@top.tnoc_common_header.types
+  |vpiTypedef:
   \_interface_typespec: (tnoc_types), line:8:4, endln:8:14
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TNocBadType/dut.sv, line:7:1, endln:13:10
     |vpiName:tnoc_types
     |vpiInterface:
     \_interface_inst: work@tnoc_types (work@tnoc_types), file:${SURELOG_DIR}/tests/TNocBadType/dut.sv, line:1:1, endln:4:13
-  |vpiTypedef:
-  \_unsupported_typespec: (tnoc_common_header), line:12:3, endln:12:21
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TNocBadType/dut.sv, line:7:1, endln:13:10
-    |vpiName:tnoc_common_header
+  |vpiImportTypespec:
+  \_typedef_typespec: (tnoc_common_header), line:10:37, endln:10:55
   |vpiImportTypespec:
   \_interface_typespec: (tnoc_types), line:8:4, endln:8:14
-  |vpiImportTypespec:
-  \_unsupported_typespec: (tnoc_common_header), line:12:3, endln:12:21
   |vpiImportTypespec:
   \_logic_net: (work@top.common_header), line:12:23, endln:12:36
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TNocBadType/dut.sv, line:7:1, endln:13:10
-    |vpiTypespec:
-    \_ref_typespec: (work@top.common_header.common_header), line:12:3, endln:12:21
-      |vpiParent:
-      \_logic_net: (work@top.common_header), line:12:23, endln:12:36
-      |vpiName:common_header
-      |vpiFullName:work@top.common_header.common_header
-      |vpiActual:
-      \_unsupported_typespec: (tnoc_common_header), line:12:3, endln:12:21
     |vpiName:common_header
     |vpiFullName:work@top.common_header
   |vpiDefName:work@top
@@ -148,7 +160,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/TNocBadType/dut.sv | ${SURELOG_DIR}/build/regression/TNocBadType/roundtrip/dut_000.sv | 7 | 13 |
-============================== End RoundTrip Results ==============================

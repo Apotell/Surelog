@@ -460,11 +460,12 @@ property_decl                                          1
 property_spec                                          2
 range                                                  6
 ref_obj                                                7
-ref_typespec                                           6
+ref_typespec                                           7
 source_file                                            1
+typedef_typespec                                       1
 === UHDM Object Stats End ===
-[ERR:IG0809] ${SURELOG_DIR}/tests/Assertions/dut.sv:9:25: Object 25 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Assertions/slpp_all/surelog.uhdm ...
+[ERR:IG0809] ${SURELOG_DIR}/tests/Assertions/dut.sv:9:25: Object 27 actual cannot be null.
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/Assertions/slpp_all/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -673,6 +674,30 @@ design: (unnamed)
   |vpiReg:
   \_logic_var: (work@m.d), line:3:10, endln:3:11
   |vpiTypedef:
+  \_packed_array_typespec: , line:4:9, endln:4:19
+    |vpiParent:
+    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
+    |vpiRange:
+    \_range: , line:4:13, endln:4:19
+      |vpiParent:
+      \_packed_array_typespec: , line:4:9, endln:4:19
+      |vpiLeftRange:
+      \_constant: , line:4:14, endln:4:16
+        |vpiParent:
+        \_range: , line:4:13, endln:4:19
+        |vpiDecompile:15
+        |vpiSize:64
+        |UINT:15
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:4:17, endln:4:18
+        |vpiParent:
+        \_range: , line:4:13, endln:4:19
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
   \_bit_typespec: (bits), line:4:9, endln:4:19
     |vpiParent:
     \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
@@ -697,6 +722,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (bits), line:4:20, endln:4:24
+    |vpiParent:
+    \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
+    |vpiName:bits
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@m.bits), line:4:9, endln:4:12
+      |vpiParent:
+      \_typedef_typespec: (bits), line:4:20, endln:4:24
+      |vpiFullName:work@m.bits
+      |vpiActual:
+      \_bit_typespec: (bits), line:4:9, endln:4:19
   |vpiTypedef:
   \_bit_typespec: , line:9:18, endln:9:21
     |vpiParent:
@@ -758,7 +795,11 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
   |vpiImportTypespec:
+  \_packed_array_typespec: , line:4:9, endln:4:19
+  |vpiImportTypespec:
   \_bit_typespec: (bits), line:4:9, endln:4:19
+  |vpiImportTypespec:
+  \_typedef_typespec: (bits), line:4:20, endln:4:24
   |vpiImportTypespec:
   \_immediate_assert: (a1), line:8:4, endln:8:35
     |vpiParent:
@@ -870,7 +911,3 @@ design: (unnamed)
 [LINT]: ${SURELOG_DIR}/tests/Assertions/dut.sv:9:1: Non synthesizable construct, toggles
 [LINT]: ${SURELOG_DIR}/tests/Assertions/dut.sv:12:22: Non synthesizable construct,
 ============================== End Linting Results ==============================
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/Assertions/dut.sv | ${SURELOG_DIR}/build/regression/Assertions/roundtrip/dut_000.sv | 10 | 13 |
-============================== End RoundTrip Results ==============================

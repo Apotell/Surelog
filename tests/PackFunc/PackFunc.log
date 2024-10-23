@@ -138,6 +138,7 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 assignment                                             1
 begin                                                  1
+class_var                                              2
 constant                                               8
 design                                                 1
 function                                               1
@@ -148,11 +149,11 @@ operation                                              3
 package                                                2
 range                                                  4
 ref_obj                                                5
-ref_typespec                                           7
+ref_typespec                                           6
 source_file                                            1
 struct_typespec                                        1
-struct_var                                             2
 sys_func_call                                          3
+typedef_typespec                                       1
 typespec_member                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackFunc/slpp_all/surelog.uhdm ...
@@ -213,10 +214,24 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (foo_bar_t), line:4:5, endln:4:14
+    |vpiParent:
+    \_package: b (b::), file:${SURELOG_DIR}/tests/PackFunc/dut.sv, line:1:1, endln:6:11
+    |vpiName:foo_bar_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (b::foo_bar_t), line:2:11, endln:4:4
+      |vpiParent:
+      \_typedef_typespec: (foo_bar_t), line:4:5, endln:4:14
+      |vpiFullName:b::foo_bar_t
+      |vpiActual:
+      \_struct_typespec: (b::foo_bar_t), line:2:11, endln:4:4
   |vpiImportTypespec:
   \_struct_typespec: (b::foo_bar_t), line:2:11, endln:4:4
   |vpiImportTypespec:
   \_logic_typespec: , line:3:5, endln:3:17
+  |vpiImportTypespec:
+  \_typedef_typespec: (foo_bar_t), line:4:5, endln:4:14
   |vpiDefName:b
 |uhdmallPackages:
 \_package: aa (aa::), file:${SURELOG_DIR}/tests/PackFunc/dut.sv, line:8:1, endln:22:11
@@ -231,26 +246,26 @@ design: (unnamed)
     |vpiName:foo_bar
     |vpiFullName:aa::foo_bar
     |vpiVariables:
-    \_struct_var: (aa::foo_bar), line:10:22, endln:10:34
+    \_class_var: (aa::foo_bar), line:10:22, endln:10:34
       |vpiParent:
       \_function: (aa::foo_bar), line:10:3, endln:21:14
       |vpiTypespec:
       \_ref_typespec: (aa::foo_bar::b::foo_bar_t), line:10:22, endln:10:34
         |vpiParent:
-        \_struct_var: (aa::foo_bar), line:10:22, endln:10:34
+        \_class_var: (aa::foo_bar), line:10:22, endln:10:34
         |vpiName:b::foo_bar_t
         |vpiFullName:aa::foo_bar::b::foo_bar_t
         |vpiActual:
         \_struct_typespec: (b::foo_bar_t), line:2:11, endln:4:4
       |vpiFullName:aa::foo_bar
     |vpiVariables:
-    \_struct_var: (aa::foo_bar::y), line:14:5, endln:14:19
+    \_class_var: (aa::foo_bar::y), line:14:5, endln:14:17
       |vpiParent:
       \_function: (aa::foo_bar), line:10:3, endln:21:14
       |vpiTypespec:
       \_ref_typespec: (aa::foo_bar::y::b::foo_bar_t), line:14:5, endln:14:17
         |vpiParent:
-        \_struct_var: (aa::foo_bar::y), line:14:5, endln:14:19
+        \_class_var: (aa::foo_bar::y), line:14:5, endln:14:17
         |vpiName:b::foo_bar_t
         |vpiFullName:aa::foo_bar::y::b::foo_bar_t
         |vpiActual:
@@ -292,7 +307,7 @@ design: (unnamed)
           |vpiName:y
           |vpiFullName:aa::foo_bar::y
           |vpiActual:
-          \_struct_var: (aa::foo_bar::y), line:14:5, endln:14:19
+          \_class_var: (aa::foo_bar::y), line:14:5, endln:14:17
         |vpiLhs:
         \_ref_obj: (aa::foo_bar::foo_bar), line:18:7, endln:18:14
           |vpiParent:
@@ -300,7 +315,7 @@ design: (unnamed)
           |vpiName:foo_bar
           |vpiFullName:aa::foo_bar::foo_bar
           |vpiActual:
-          \_struct_var: (aa::foo_bar), line:10:22, endln:10:34
+          \_class_var: (aa::foo_bar), line:10:22, endln:10:34
     |vpiTypedef:
     \_logic_typespec: , line:15:5, endln:15:23
       |vpiParent:
@@ -386,9 +401,9 @@ design: (unnamed)
           |UINT:0
           |vpiConstType:9
     |vpiImportTypespec:
-    \_struct_var: (aa::foo_bar), line:10:22, endln:10:34
+    \_class_var: (aa::foo_bar), line:10:22, endln:10:34
     |vpiImportTypespec:
-    \_struct_var: (aa::foo_bar::y), line:14:5, endln:14:19
+    \_class_var: (aa::foo_bar::y), line:14:5, endln:14:17
     |vpiImportTypespec:
     \_logic_typespec: , line:15:5, endln:15:23
     |vpiImportTypespec:
@@ -398,7 +413,7 @@ design: (unnamed)
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
-    \_struct_var: (aa::foo_bar), line:10:22, endln:10:34
+    \_class_var: (aa::foo_bar), line:10:22, endln:10:34
     |vpiIODecl:
     \_io_decl: (a), line:12:24, endln:12:25
       |vpiParent:
@@ -428,6 +443,7 @@ design: (unnamed)
 [WARNING] : 2
 [   NOTE] : 0
 
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PackFunc/dut.sv | ${SURELOG_DIR}/build/regression/PackFunc/roundtrip/dut_000.sv | 7 | 22 |
-============================== End RoundTrip Results ==============================
+============================== Begin Linting Results ==============================
+[LINT]: ${SURELOG_DIR}/tests/PackFunc/dut.sv:10:22: Non synthesizable construct,
+[LINT]: ${SURELOG_DIR}/tests/PackFunc/dut.sv:14:5: Non synthesizable construct, y
+============================== End Linting Results ==============================

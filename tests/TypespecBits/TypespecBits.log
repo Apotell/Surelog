@@ -176,9 +176,10 @@ parameter                                              1
 port                                                   1
 range                                                  9
 ref_obj                                                7
-ref_typespec                                           2
+ref_typespec                                           3
 source_file                                            1
 sys_func_call                                          4
+typedef_typespec                                       1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypespecBits/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/TypespecBits/slpp_all/checker/surelog.chk.html ...
@@ -246,6 +247,50 @@ design: (unnamed)
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TypespecBits/dut.sv, line:2:1, endln:9:10
     |vpiSigned:1
   |vpiTypedef:
+  \_packed_array_typespec: , line:4:9, endln:4:30
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TypespecBits/dut.sv, line:2:1, endln:9:10
+    |vpiRange:
+    \_range: , line:4:20, endln:4:25
+      |vpiParent:
+      \_packed_array_typespec: , line:4:9, endln:4:30
+      |vpiLeftRange:
+      \_constant: , line:4:21, endln:4:22
+        |vpiParent:
+        \_range: , line:4:20, endln:4:25
+        |vpiDecompile:4
+        |vpiSize:64
+        |UINT:4
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:4:23, endln:4:24
+        |vpiParent:
+        \_range: , line:4:20, endln:4:25
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiRange:
+    \_range: , line:4:25, endln:4:30
+      |vpiParent:
+      \_packed_array_typespec: , line:4:9, endln:4:30
+      |vpiLeftRange:
+      \_ref_obj: (work@top.W), line:4:26, endln:4:27
+        |vpiParent:
+        \_range: , line:4:25, endln:4:30
+        |vpiName:W
+        |vpiFullName:work@top.W
+        |vpiActual:
+        \_parameter: (work@top.W), line:2:28, endln:2:33
+      |vpiRightRange:
+      \_constant: , line:4:28, endln:4:29
+        |vpiParent:
+        \_range: , line:4:25, endln:4:30
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
   \_logic_typespec: (sheet_t), line:4:9, endln:4:30
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TypespecBits/dut.sv, line:2:1, endln:9:10
@@ -291,6 +336,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (sheet_t), line:4:31, endln:4:38
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TypespecBits/dut.sv, line:2:1, endln:9:10
+    |vpiName:sheet_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top.sheet_t), line:4:9, endln:4:14
+      |vpiParent:
+      \_typedef_typespec: (sheet_t), line:4:31, endln:4:38
+      |vpiFullName:work@top.sheet_t
+      |vpiActual:
+      \_logic_typespec: (sheet_t), line:4:9, endln:4:30
+  |vpiTypedef:
   \_logic_typespec: , line:6:1, endln:6:27
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TypespecBits/dut.sv, line:2:1, endln:9:10
@@ -335,7 +392,11 @@ design: (unnamed)
   |vpiImportTypespec:
   \_int_typespec: , line:2:24, endln:2:27
   |vpiImportTypespec:
+  \_packed_array_typespec: , line:4:9, endln:4:30
+  |vpiImportTypespec:
   \_logic_typespec: (sheet_t), line:4:9, endln:4:30
+  |vpiImportTypespec:
+  \_typedef_typespec: (sheet_t), line:4:31, endln:4:38
   |vpiImportTypespec:
   \_logic_net: (work@top.rand_i), line:2:49, endln:2:55
     |vpiParent:
@@ -423,7 +484,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/TypespecBits/dut.sv | ${SURELOG_DIR}/build/regression/TypespecBits/roundtrip/dut_000.sv | 5 | 9 |
-============================== End RoundTrip Results ==============================

@@ -476,12 +476,13 @@ parameter                                              6
 range                                                  2
 ref_module                                             3
 ref_obj                                               16
-ref_typespec                                          16
+ref_typespec                                          18
 ref_var                                                1
 source_file                                            1
 string_typespec                                        4
 struct_typespec                                        1
 tagged_pattern                                         4
+typedef_typespec                                       2
 typespec_member                                        1
 unsupported_typespec                                   5
 === UHDM Object Stats End ===
@@ -553,10 +554,24 @@ design: (unnamed)
       |HEX:1
       |vpiDecompile:3'h1
       |vpiSize:3
+  |vpiTypedef:
+  \_typedef_typespec: (pad_type_e), line:5:6, endln:5:16
+    |vpiParent:
+    \_package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:1:1, endln:6:34
+    |vpiName:pad_type_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:12, endln:5:5
+      |vpiParent:
+      \_typedef_typespec: (pad_type_e), line:5:6, endln:5:16
+      |vpiFullName:prim_pad_wrapper_pkg::pad_type_e
+      |vpiActual:
+      \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:12, endln:5:17
   |vpiImportTypespec:
   \_logic_typespec: , line:2:18, endln:2:29
   |vpiImportTypespec:
   \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:12, endln:5:17
+  |vpiImportTypespec:
+  \_typedef_typespec: (pad_type_e), line:5:6, endln:5:16
   |vpiDefName:prim_pad_wrapper_pkg
   |vpiEndLabel:prim_pad_wrapper_pkg
 |uhdmallPackages:
@@ -681,12 +696,24 @@ design: (unnamed)
         |vpiName:pad_type_e
         |vpiFullName:pinmux_pkg::target_cfg_t::dio_pad_type::pad_type_e
         |vpiActual:
-        \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:12, endln:5:17
+        \_typedef_typespec: (pad_type_e), line:5:6, endln:5:16
   |vpiTypedef:
   \_unsupported_typespec: (pad_type_e), line:14:7, endln:14:32
     |vpiParent:
     \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
     |vpiName:pad_type_e
+  |vpiTypedef:
+  \_typedef_typespec: (target_cfg_t), line:15:6, endln:15:18
+    |vpiParent:
+    \_package: pinmux_pkg (pinmux_pkg::), file:${SURELOG_DIR}/tests/ParamElabMulti/dut.sv, line:8:1, endln:20:24
+    |vpiName:target_cfg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
+      |vpiParent:
+      \_typedef_typespec: (target_cfg_t), line:15:6, endln:15:18
+      |vpiFullName:pinmux_pkg::target_cfg_t
+      |vpiActual:
+      \_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
   |vpiTypedef:
   \_string_typespec: (dio_pad_type), line:18:7, endln:18:19
     |vpiParent:
@@ -710,6 +737,8 @@ design: (unnamed)
   \_struct_typespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
   |vpiImportTypespec:
   \_unsupported_typespec: (pad_type_e), line:14:7, endln:14:32
+  |vpiImportTypespec:
+  \_typedef_typespec: (target_cfg_t), line:15:6, endln:15:18
   |vpiImportTypespec:
   \_string_typespec: (dio_pad_type), line:18:7, endln:18:19
   |vpiImportTypespec:
@@ -1134,7 +1163,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 6
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ParamElabMulti/dut.sv | ${SURELOG_DIR}/build/regression/ParamElabMulti/roundtrip/dut_000.sv | 38 | 61 |
-============================== End RoundTrip Results ==============================

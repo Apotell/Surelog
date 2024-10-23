@@ -457,9 +457,10 @@ package                                                1
 port                                                   3
 range                                                  1
 ref_obj                                                6
-ref_typespec                                          21
+ref_typespec                                          23
 source_file                                            1
 task                                                   9
+typedef_typespec                                       2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BindVarsAndEnum/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/BindVarsAndEnum/slpp_all/checker/surelog.chk.html ...
@@ -858,8 +859,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/BindVarsAndEnum/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1220,6 +1235,18 @@ design: (unnamed)
       |vpiDecompile:2
       |vpiSize:2
   |vpiTypedef:
+  \_typedef_typespec: (state), line:7:59, endln:7:64
+    |vpiParent:
+    \_module_inst: work@conditional_Fsm (work@conditional_Fsm), file:${SURELOG_DIR}/tests/BindVarsAndEnum/dut.sv, line:1:1, endln:18:10
+    |vpiName:state
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@conditional_Fsm.state), line:7:11, endln:7:58
+      |vpiParent:
+      \_typedef_typespec: (state), line:7:59, endln:7:64
+      |vpiFullName:work@conditional_Fsm.state
+      |vpiActual:
+      \_enum_typespec: (state), line:7:11, endln:7:65
+  |vpiTypedef:
   \_bit_typespec: , line:1:32, endln:1:35
     |vpiParent:
     \_module_inst: work@conditional_Fsm (work@conditional_Fsm), file:${SURELOG_DIR}/tests/BindVarsAndEnum/dut.sv, line:1:1, endln:18:10
@@ -1253,6 +1280,8 @@ design: (unnamed)
   \_logic_typespec: , line:7:16, endln:7:27
   |vpiImportTypespec:
   \_enum_typespec: (state), line:7:11, endln:7:65
+  |vpiImportTypespec:
+  \_typedef_typespec: (state), line:7:59, endln:7:64
   |vpiImportTypespec:
   \_bit_typespec: , line:1:32, endln:1:35
   |vpiImportTypespec:
@@ -1431,7 +1460,3 @@ design: (unnamed)
 ============================== Begin Linting Results ==============================
 [LINT]: ${SURELOG_DIR}/tests/BindVarsAndEnum/dut.sv:11:10: Non synthesizable construct,
 ============================== End Linting Results ==============================
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/BindVarsAndEnum/dut.sv | ${SURELOG_DIR}/build/regression/BindVarsAndEnum/roundtrip/dut_000.sv | 11 | 18 |
-============================== End RoundTrip Results ==============================

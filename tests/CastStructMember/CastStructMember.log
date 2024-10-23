@@ -140,9 +140,10 @@ operation                                              2
 param_assign                                           1
 parameter                                              1
 range                                                  4
-ref_typespec                                           4
+ref_typespec                                           5
 source_file                                            1
 struct_typespec                                        1
+typedef_typespec                                       1
 typespec_member                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CastStructMember/slpp_all/surelog.uhdm ...
@@ -307,13 +308,21 @@ design: (unnamed)
   |vpiParent:
   \_design: (unnamed)
   |vpiSigned:1
+|vpiTypedef:
+\_typedef_typespec: (width_t), line:4:3, endln:4:10
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:width_t
+  |vpiTypedefAlias:
+  \_ref_typespec: (width_t), line:2:9, endln:4:2
+    |vpiParent:
+    \_typedef_typespec: (width_t), line:4:3, endln:4:10
+    |vpiFullName:width_t
+    |vpiActual:
+    \_struct_typespec: (width_t), line:2:9, endln:4:2
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/CastStructMember/dut.sv | ${SURELOG_DIR}/build/regression/CastStructMember/roundtrip/dut_000.sv | 5 | 10 |
-============================== End RoundTrip Results ==============================

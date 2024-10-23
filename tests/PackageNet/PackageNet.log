@@ -133,8 +133,9 @@ param_assign                                           2
 parameter                                              2
 range                                                  2
 ref_obj                                                3
-ref_typespec                                           3
+ref_typespec                                           4
 source_file                                            1
+typedef_typespec                                       1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageNet/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PackageNet/slpp_all/checker/surelog.chk.html ...
@@ -196,6 +197,30 @@ design: (unnamed)
     |vpiLhs:
     \_parameter: (my_package1::p2), line:4:12, endln:4:18
   |vpiTypedef:
+  \_packed_array_typespec: , line:6:9, endln:6:20
+    |vpiParent:
+    \_package: my_package1 (my_package1::), file:${SURELOG_DIR}/tests/PackageNet/dut.sv, line:1:1, endln:10:11
+    |vpiRange:
+    \_range: , line:6:15, endln:6:20
+      |vpiParent:
+      \_packed_array_typespec: , line:6:9, endln:6:20
+      |vpiLeftRange:
+      \_constant: , line:6:16, endln:6:17
+        |vpiParent:
+        \_range: , line:6:15, endln:6:20
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:6:18, endln:6:19
+        |vpiParent:
+        \_range: , line:6:15, endln:6:20
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
   \_logic_typespec: (word), line:6:9, endln:6:20
     |vpiParent:
     \_package: my_package1 (my_package1::), file:${SURELOG_DIR}/tests/PackageNet/dut.sv, line:1:1, endln:10:11
@@ -220,8 +245,24 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (word), line:6:21, endln:6:25
+    |vpiParent:
+    \_package: my_package1 (my_package1::), file:${SURELOG_DIR}/tests/PackageNet/dut.sv, line:1:1, endln:10:11
+    |vpiName:word
+    |vpiTypedefAlias:
+    \_ref_typespec: (my_package1::word), line:6:9, endln:6:14
+      |vpiParent:
+      \_typedef_typespec: (word), line:6:21, endln:6:25
+      |vpiFullName:my_package1::word
+      |vpiActual:
+      \_logic_typespec: (word), line:6:9, endln:6:20
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:6:9, endln:6:20
   |vpiImportTypespec:
   \_logic_typespec: (word), line:6:9, endln:6:20
+  |vpiImportTypespec:
+  \_typedef_typespec: (word), line:6:21, endln:6:25
   |vpiImportTypespec:
   \_logic_net: (my_package1::v), line:8:6, endln:8:7
     |vpiParent:
@@ -299,7 +340,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PackageNet/dut.sv | ${SURELOG_DIR}/build/regression/PackageNet/roundtrip/dut_000.sv | 9 | 21 |
-============================== End RoundTrip Results ==============================

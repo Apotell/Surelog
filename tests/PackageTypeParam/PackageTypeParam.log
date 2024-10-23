@@ -181,10 +181,11 @@ package                                                1
 port                                                   3
 range                                                  2
 ref_obj                                                4
-ref_typespec                                           8
+ref_typespec                                           9
 source_file                                            1
 struct_typespec                                        1
 type_parameter                                         1
+typedef_typespec                                       1
 typespec_member                                        5
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageTypeParam/slpp_all/surelog.uhdm ...
@@ -329,6 +330,18 @@ design: (unnamed)
   \_logic_typespec: , line:7:5, endln:7:10
     |vpiParent:
     \_package: new_package (new_package::), file:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv, line:1:1, endln:9:25
+  |vpiTypedef:
+  \_typedef_typespec: (zzz), line:8:3, endln:8:6
+    |vpiParent:
+    \_package: new_package (new_package::), file:${SURELOG_DIR}/tests/PackageTypeParam/dut.sv, line:1:1, endln:9:25
+    |vpiName:zzz
+    |vpiTypedefAlias:
+    \_ref_typespec: (new_package::zzz), line:2:9, endln:8:2
+      |vpiParent:
+      \_typedef_typespec: (zzz), line:8:3, endln:8:6
+      |vpiFullName:new_package::zzz
+      |vpiActual:
+      \_struct_typespec: (new_package::zzz), line:2:9, endln:8:2
   |vpiImportTypespec:
   \_struct_typespec: (new_package::zzz), line:2:9, endln:8:2
   |vpiImportTypespec:
@@ -341,6 +354,8 @@ design: (unnamed)
   \_logic_typespec: , line:6:5, endln:6:10
   |vpiImportTypespec:
   \_logic_typespec: , line:7:5, endln:7:10
+  |vpiImportTypespec:
+  \_typedef_typespec: (zzz), line:8:3, endln:8:6
   |vpiDefName:new_package
   |vpiEndLabel:new_package
 |uhdmallModules:
@@ -486,7 +501,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PackageTypeParam/dut.sv | ${SURELOG_DIR}/build/regression/PackageTypeParam/roundtrip/dut_000.sv | 13 | 28 |
-============================== End RoundTrip Results ==============================

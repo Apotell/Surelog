@@ -116,11 +116,12 @@ operation                                              2
 param_assign                                           1
 parameter                                              1
 range                                                  1
-ref_typespec                                           8
+ref_typespec                                           9
 source_file                                            1
 string_typespec                                        4
 struct_typespec                                        1
 tagged_pattern                                         4
+typedef_typespec                                       1
 typespec_member                                        3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TaggedPatternLogic/slpp_all/surelog.uhdm ...
@@ -313,6 +314,18 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TaggedPatternLogic/dut.sv, line:1:1, endln:15:10
   |vpiTypedef:
+  \_typedef_typespec: (complex_t), line:6:5, endln:6:14
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TaggedPatternLogic/dut.sv, line:1:1, endln:15:10
+    |vpiName:complex_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top.complex_t), line:2:11, endln:6:4
+      |vpiParent:
+      \_typedef_typespec: (complex_t), line:6:5, endln:6:14
+      |vpiFullName:work@top.complex_t
+      |vpiActual:
+      \_struct_typespec: (complex_t), line:2:11, endln:6:4
+  |vpiTypedef:
   \_string_typespec: (default), line:9:13, endln:9:20
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/TaggedPatternLogic/dut.sv, line:1:1, endln:15:10
@@ -341,6 +354,8 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:5:5, endln:5:10
   |vpiImportTypespec:
+  \_typedef_typespec: (complex_t), line:6:5, endln:6:14
+  |vpiImportTypespec:
   \_string_typespec: (default), line:9:13, endln:9:20
   |vpiImportTypespec:
   \_string_typespec: (addr), line:9:5, endln:9:9
@@ -355,7 +370,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/TaggedPatternLogic/dut.sv | ${SURELOG_DIR}/build/regression/TaggedPatternLogic/roundtrip/dut_000.sv | 4 | 15 |
-============================== End RoundTrip Results ==============================

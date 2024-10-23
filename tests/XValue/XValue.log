@@ -104,8 +104,9 @@ module_inst                                            2
 port                                                   2
 range                                                  4
 ref_obj                                                2
-ref_typespec                                           5
+ref_typespec                                           6
 source_file                                            1
+typedef_typespec                                       1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/XValue/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/XValue/slpp_all/checker/surelog.chk.html ...
@@ -175,6 +176,18 @@ design: (unnamed)
       |vpiDecompile:4'b1xxx
       |vpiSize:4
   |vpiTypedef:
+  \_typedef_typespec: (dfi_cmd_e), line:5:6, endln:5:15
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/XValue/dut.sv, line:1:1, endln:8:10
+    |vpiName:dfi_cmd_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top.dfi_cmd_e), line:2:12, endln:5:5
+      |vpiParent:
+      \_typedef_typespec: (dfi_cmd_e), line:5:6, endln:5:15
+      |vpiFullName:work@top.dfi_cmd_e
+      |vpiActual:
+      \_enum_typespec: (dfi_cmd_e), line:2:12, endln:5:16
+  |vpiTypedef:
   \_logic_typespec: , line:1:18, endln:1:23
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/XValue/dut.sv, line:1:1, endln:8:10
@@ -234,6 +247,8 @@ design: (unnamed)
   \_logic_typespec: , line:2:17, endln:2:28
   |vpiImportTypespec:
   \_enum_typespec: (dfi_cmd_e), line:2:12, endln:5:16
+  |vpiImportTypespec:
+  \_typedef_typespec: (dfi_cmd_e), line:5:6, endln:5:15
   |vpiImportTypespec:
   \_logic_typespec: , line:1:18, endln:1:23
   |vpiImportTypespec:
@@ -329,7 +344,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/XValue/dut.sv | ${SURELOG_DIR}/build/regression/XValue/roundtrip/dut_000.sv | 3 | 8 |
-============================== End RoundTrip Results ==============================

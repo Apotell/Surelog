@@ -317,12 +317,13 @@ port                                                   1
 range                                                  4
 ref_module                                             2
 ref_obj                                                8
-ref_typespec                                          11
+ref_typespec                                          13
 source_file                                            1
 struct_net                                             1
 struct_typespec                                        2
 struct_var                                             1
 sys_func_call                                          2
+typedef_typespec                                       2
 typespec_member                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathUnpackedInPacked/slpp_all/surelog.uhdm ...
@@ -498,6 +499,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (hw_key_req_t), line:7:6, endln:7:18
+    |vpiParent:
+    \_package: keymgr_pkg (keymgr_pkg::), file:${SURELOG_DIR}/tests/HierPathUnpackedInPacked/dut.sv, line:1:1, endln:14:11
+    |vpiName:hw_key_req_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (keymgr_pkg::hw_key_req_t), line:5:12, endln:7:5
+      |vpiParent:
+      \_typedef_typespec: (hw_key_req_t), line:7:6, endln:7:18
+      |vpiFullName:keymgr_pkg::hw_key_req_t
+      |vpiActual:
+      \_struct_typespec: (keymgr_pkg::hw_key_req_t), line:5:12, endln:7:5
+  |vpiTypedef:
   \_struct_typespec: (keymgr_pkg::foo_t), line:9:9, endln:11:2
     |vpiParent:
     \_package: keymgr_pkg (keymgr_pkg::), file:${SURELOG_DIR}/tests/HierPathUnpackedInPacked/dut.sv, line:1:1, endln:14:11
@@ -567,6 +580,18 @@ design: (unnamed)
       |vpiFullName:keymgr_pkg::foo_t::pair
       |vpiActual:
       \_logic_typespec: , line:10:4, endln:10:16
+  |vpiTypedef:
+  \_typedef_typespec: (foo_t), line:11:3, endln:11:8
+    |vpiParent:
+    \_package: keymgr_pkg (keymgr_pkg::), file:${SURELOG_DIR}/tests/HierPathUnpackedInPacked/dut.sv, line:1:1, endln:14:11
+    |vpiName:foo_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (keymgr_pkg::foo_t), line:9:9, endln:11:2
+      |vpiParent:
+      \_typedef_typespec: (foo_t), line:11:3, endln:11:8
+      |vpiFullName:keymgr_pkg::foo_t
+      |vpiActual:
+      \_struct_typespec: (keymgr_pkg::foo_t), line:9:9, endln:11:2
   |vpiImportTypespec:
   \_int_typespec: , line:2:14, endln:2:17
   |vpiImportTypespec:
@@ -576,11 +601,15 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:6:7, endln:6:39
   |vpiImportTypespec:
+  \_typedef_typespec: (hw_key_req_t), line:7:6, endln:7:18
+  |vpiImportTypespec:
   \_struct_typespec: (keymgr_pkg::foo_t), line:9:9, endln:11:2
   |vpiImportTypespec:
   \_logic_typespec: , line:10:4, endln:10:16
   |vpiImportTypespec:
   \_array_typespec: , line:10:21, endln:10:24
+  |vpiImportTypespec:
+  \_typedef_typespec: (foo_t), line:11:3, endln:11:8
   |vpiDefName:keymgr_pkg
 |uhdmallModules:
 \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/HierPathUnpackedInPacked/dut.sv, line:16:1, endln:17:10
@@ -856,7 +885,3 @@ design: (unnamed)
 [  ERROR] : 1
 [WARNING] : 3
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/HierPathUnpackedInPacked/dut.sv | ${SURELOG_DIR}/build/regression/HierPathUnpackedInPacked/roundtrip/dut_000.sv | 18 | 36 |
-============================== End RoundTrip Results ==============================

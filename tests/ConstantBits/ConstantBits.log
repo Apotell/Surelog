@@ -159,11 +159,12 @@ operation                                              2
 part_select                                            1
 range                                                  3
 ref_obj                                                2
-ref_typespec                                           6
+ref_typespec                                           7
 source_file                                            1
 struct_net                                             1
 struct_typespec                                        1
 sys_func_call                                          1
+typedef_typespec                                       1
 typespec_member                                        4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConstantBits/slpp_all/surelog.uhdm ...
@@ -288,6 +289,18 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstantBits/dut.sv, line:1:1, endln:12:10
   |vpiTypedef:
+  \_typedef_typespec: (cpu_ctrl_t), line:8:11, endln:8:21
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstantBits/dut.sv, line:1:1, endln:12:10
+    |vpiName:cpu_ctrl_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@dut.cpu_ctrl_t), line:3:17, endln:8:10
+      |vpiParent:
+      \_typedef_typespec: (cpu_ctrl_t), line:8:11, endln:8:21
+      |vpiFullName:work@dut.cpu_ctrl_t
+      |vpiActual:
+      \_struct_typespec: (cpu_ctrl_t), line:3:17, endln:8:10
+  |vpiTypedef:
   \_logic_typespec: , line:10:9, endln:10:21
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConstantBits/dut.sv, line:1:1, endln:12:10
@@ -321,6 +334,8 @@ design: (unnamed)
   \_logic_typespec: , line:6:11, endln:6:16
   |vpiImportTypespec:
   \_logic_typespec: , line:7:11, endln:7:16
+  |vpiImportTypespec:
+  \_typedef_typespec: (cpu_ctrl_t), line:8:11, endln:8:21
   |vpiImportTypespec:
   \_struct_net: (work@dut.cpuctrl_wdata), line:9:22, endln:9:35
     |vpiParent:
@@ -409,7 +424,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ConstantBits/dut.sv | ${SURELOG_DIR}/build/regression/ConstantBits/roundtrip/dut_000.sv | 3 | 12 |
-============================== End RoundTrip Results ==============================

@@ -174,8 +174,9 @@ parameter                                              2
 range                                                  2
 ref_module                                             1
 ref_obj                                                5
-ref_typespec                                           4
+ref_typespec                                           5
 source_file                                            1
+typedef_typespec                                       1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ImportPackage/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ImportPackage/slpp_all/checker/surelog.chk.html ...
@@ -228,6 +229,43 @@ design: (unnamed)
     \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:4:1, endln:7:25
     |vpiSigned:1
   |vpiTypedef:
+  \_packed_array_typespec: , line:6:12, endln:6:31
+    |vpiParent:
+    \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:4:1, endln:7:25
+    |vpiRange:
+    \_range: , line:6:18, endln:6:31
+      |vpiParent:
+      \_packed_array_typespec: , line:6:12, endln:6:31
+      |vpiLeftRange:
+      \_operation: , line:6:19, endln:6:28
+        |vpiParent:
+        \_range: , line:6:18, endln:6:31
+        |vpiOpType:11
+        |vpiOperand:
+        \_ref_obj: (lc_ctrl_pkg::TxWidth), line:6:19, endln:6:26
+          |vpiParent:
+          \_operation: , line:6:19, endln:6:28
+          |vpiName:TxWidth
+          |vpiFullName:lc_ctrl_pkg::TxWidth
+          |vpiActual:
+          \_parameter: (lc_ctrl_pkg::TxWidth), line:5:18, endln:5:29
+        |vpiOperand:
+        \_constant: , line:6:27, endln:6:28
+          |vpiParent:
+          \_operation: , line:6:19, endln:6:28
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:6:29, endln:6:30
+        |vpiParent:
+        \_range: , line:6:18, endln:6:31
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
   \_logic_typespec: (unused_type_t), line:6:12, endln:6:31
     |vpiParent:
     \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:4:1, endln:7:25
@@ -265,10 +303,26 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (unused_type_t), line:6:32, endln:6:45
+    |vpiParent:
+    \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:4:1, endln:7:25
+    |vpiName:unused_type_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (lc_ctrl_pkg::unused_type_t), line:6:12, endln:6:17
+      |vpiParent:
+      \_typedef_typespec: (unused_type_t), line:6:32, endln:6:45
+      |vpiFullName:lc_ctrl_pkg::unused_type_t
+      |vpiActual:
+      \_logic_typespec: (unused_type_t), line:6:12, endln:6:31
   |vpiImportTypespec:
   \_int_typespec: , line:5:14, endln:5:17
   |vpiImportTypespec:
+  \_packed_array_typespec: , line:6:12, endln:6:31
+  |vpiImportTypespec:
   \_logic_typespec: (unused_type_t), line:6:12, endln:6:31
+  |vpiImportTypespec:
+  \_typedef_typespec: (unused_type_t), line:6:32, endln:6:45
   |vpiDefName:lc_ctrl_pkg
   |vpiEndLabel:lc_ctrl_pkg
 |uhdmallModules:
@@ -413,7 +467,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 3
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ImportPackage/dut.sv | ${SURELOG_DIR}/build/regression/ImportPackage/roundtrip/dut_000.sv | 11 | 19 |
-============================== End RoundTrip Results ==============================

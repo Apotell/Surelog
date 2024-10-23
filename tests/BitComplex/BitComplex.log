@@ -199,11 +199,12 @@ parameter                                              3
 port                                                   1
 range                                                  2
 ref_obj                                                7
-ref_typespec                                           8
+ref_typespec                                           9
 source_file                                            1
 struct_net                                             1
 struct_typespec                                        1
 sys_func_call                                          2
+typedef_typespec                                       1
 typespec_member                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BitComplex/slpp_all/surelog.uhdm ...
@@ -378,6 +379,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (hw_key_req_t), line:7:6, endln:7:18
+    |vpiParent:
+    \_package: keymgr_pkg (keymgr_pkg::), file:${SURELOG_DIR}/tests/BitComplex/dut.sv, line:1:1, endln:8:11
+    |vpiName:hw_key_req_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (keymgr_pkg::hw_key_req_t), line:5:12, endln:7:5
+      |vpiParent:
+      \_typedef_typespec: (hw_key_req_t), line:7:6, endln:7:18
+      |vpiFullName:keymgr_pkg::hw_key_req_t
+      |vpiActual:
+      \_struct_typespec: (keymgr_pkg::hw_key_req_t), line:5:12, endln:7:5
   |vpiImportTypespec:
   \_int_typespec: , line:2:14, endln:2:17
   |vpiImportTypespec:
@@ -386,6 +399,8 @@ design: (unnamed)
   \_struct_typespec: (keymgr_pkg::hw_key_req_t), line:5:12, endln:7:5
   |vpiImportTypespec:
   \_logic_typespec: , line:6:7, endln:6:39
+  |vpiImportTypespec:
+  \_typedef_typespec: (hw_key_req_t), line:7:6, endln:7:18
   |vpiDefName:keymgr_pkg
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitComplex/dut.sv, line:10:1, endln:14:10
@@ -558,7 +573,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/BitComplex/dut.sv | ${SURELOG_DIR}/build/regression/BitComplex/roundtrip/dut_000.sv | 7 | 14 |
-============================== End RoundTrip Results ==============================

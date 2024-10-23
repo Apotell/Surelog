@@ -376,10 +376,11 @@ logic_typespec                                         2
 logic_var                                              1
 module_inst                                            1
 package                                                3
-ref_typespec                                          16
+ref_typespec                                          19
 source_file                                            1
 struct_typespec                                        3
 task                                                   9
+typedef_typespec                                       3
 typespec_member                                        4
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
@@ -780,8 +781,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/StructTypedef/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1067,6 +1082,18 @@ design: (unnamed)
   \_logic_typespec: , line:8:7, endln:8:12
     |vpiParent:
     \_package: flash_ctrl_reg_pkg (flash_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/StructTypedef/dut.sv, line:1:1, endln:12:11
+  |vpiTypedef:
+  \_typedef_typespec: (flash_ctrl_reg2hw_mp_region_cfg_mreg_t), line:10:5, endln:10:43
+    |vpiParent:
+    \_package: flash_ctrl_reg_pkg (flash_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/StructTypedef/dut.sv, line:1:1, endln:12:11
+    |vpiName:flash_ctrl_reg2hw_mp_region_cfg_mreg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t), line:3:9, endln:10:4
+      |vpiParent:
+      \_typedef_typespec: (flash_ctrl_reg2hw_mp_region_cfg_mreg_t), line:10:5, endln:10:43
+      |vpiFullName:flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t
+      |vpiActual:
+      \_struct_typespec: (flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t), line:3:9, endln:10:4
   |vpiImportTypespec:
   \_struct_typespec: (flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t), line:3:9, endln:10:4
   |vpiImportTypespec:
@@ -1077,6 +1104,8 @@ design: (unnamed)
   \_struct_typespec: , line:7:5, endln:9:6
   |vpiImportTypespec:
   \_logic_typespec: , line:8:7, endln:8:12
+  |vpiImportTypespec:
+  \_typedef_typespec: (flash_ctrl_reg2hw_mp_region_cfg_mreg_t), line:10:5, endln:10:43
   |vpiDefName:flash_ctrl_reg_pkg
 |uhdmallPackages:
 \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/StructTypedef/dut.sv, line:15:1, endln:19:11
@@ -1084,6 +1113,18 @@ design: (unnamed)
   \_design: (unnamed)
   |vpiName:flash_ctrl_pkg
   |vpiFullName:flash_ctrl_pkg::
+  |vpiTypedef:
+  \_typedef_typespec: (mp_region_cfg_t), line:17:69, endln:17:84
+    |vpiParent:
+    \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/StructTypedef/dut.sv, line:15:1, endln:19:11
+    |vpiName:mp_region_cfg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (flash_ctrl_pkg::mp_region_cfg_t), line:17:10, endln:17:30
+      |vpiParent:
+      \_typedef_typespec: (mp_region_cfg_t), line:17:69, endln:17:84
+      |vpiFullName:flash_ctrl_pkg::mp_region_cfg_t
+  |vpiImportTypespec:
+  \_typedef_typespec: (mp_region_cfg_t), line:17:69, endln:17:84
   |vpiDefName:flash_ctrl_pkg
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/StructTypedef/dut.sv, line:21:1, endln:27:10
@@ -1124,7 +1165,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 3
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/StructTypedef/dut.sv | ${SURELOG_DIR}/build/regression/StructTypedef/roundtrip/dut_000.sv | 4 | 27 |
-============================== End RoundTrip Results ==============================

@@ -161,8 +161,9 @@ parameter                                              2
 range                                                  2
 ref_module                                             2
 ref_obj                                                4
-ref_typespec                                           2
+ref_typespec                                           3
 source_file                                            1
+typedef_typespec                                       1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnsizedParam/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/UnsizedParam/slpp_all/checker/surelog.chk.html ...
@@ -242,6 +243,43 @@ design: (unnamed)
     \_module_inst: work@submodule (work@submodule), file:${SURELOG_DIR}/tests/UnsizedParam/dut.sv, line:1:1, endln:6:10
     |vpiSigned:1
   |vpiTypedef:
+  \_packed_array_typespec: , line:3:12, endln:3:25
+    |vpiParent:
+    \_module_inst: work@submodule (work@submodule), file:${SURELOG_DIR}/tests/UnsizedParam/dut.sv, line:1:1, endln:6:10
+    |vpiRange:
+    \_range: , line:3:18, endln:3:25
+      |vpiParent:
+      \_packed_array_typespec: , line:3:12, endln:3:25
+      |vpiLeftRange:
+      \_operation: , line:3:19, endln:3:22
+        |vpiParent:
+        \_range: , line:3:18, endln:3:25
+        |vpiOpType:11
+        |vpiOperand:
+        \_ref_obj: (work@submodule.X), line:3:19, endln:3:20
+          |vpiParent:
+          \_operation: , line:3:19, endln:3:22
+          |vpiName:X
+          |vpiFullName:work@submodule.X
+          |vpiActual:
+          \_parameter: (work@submodule.X), line:2:18, endln:2:24
+        |vpiOperand:
+        \_constant: , line:3:21, endln:3:22
+          |vpiParent:
+          \_operation: , line:3:19, endln:3:22
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:3:23, endln:3:24
+        |vpiParent:
+        \_range: , line:3:18, endln:3:25
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
   \_logic_typespec: (my_type_t), line:3:12, endln:3:25
     |vpiParent:
     \_module_inst: work@submodule (work@submodule), file:${SURELOG_DIR}/tests/UnsizedParam/dut.sv, line:1:1, endln:6:10
@@ -279,10 +317,26 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (my_type_t), line:3:26, endln:3:35
+    |vpiParent:
+    \_module_inst: work@submodule (work@submodule), file:${SURELOG_DIR}/tests/UnsizedParam/dut.sv, line:1:1, endln:6:10
+    |vpiName:my_type_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@submodule.my_type_t), line:3:12, endln:3:17
+      |vpiParent:
+      \_typedef_typespec: (my_type_t), line:3:26, endln:3:35
+      |vpiFullName:work@submodule.my_type_t
+      |vpiActual:
+      \_logic_typespec: (my_type_t), line:3:12, endln:3:25
   |vpiImportTypespec:
   \_int_typespec: , line:2:14, endln:2:17
   |vpiImportTypespec:
+  \_packed_array_typespec: , line:3:12, endln:3:25
+  |vpiImportTypespec:
   \_logic_typespec: (my_type_t), line:3:12, endln:3:25
+  |vpiImportTypespec:
+  \_typedef_typespec: (my_type_t), line:3:26, endln:3:35
   |vpiImportTypespec:
   \_logic_net: (work@submodule.a), line:5:11, endln:5:12
     |vpiParent:
@@ -346,7 +400,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/UnsizedParam/dut.sv | ${SURELOG_DIR}/build/regression/UnsizedParam/roundtrip/dut_000.sv | 10 | 11 |
-============================== End RoundTrip Results ==============================

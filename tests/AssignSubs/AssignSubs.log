@@ -193,9 +193,10 @@ package                                                1
 port                                                   1
 range                                                  4
 ref_obj                                                5
-ref_typespec                                           4
+ref_typespec                                           5
 ref_var                                                1
 source_file                                            1
+typedef_typespec                                       1
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/AssignSubs/slpp_all/surelog.uhdm ...
@@ -258,10 +259,24 @@ design: (unnamed)
       |BIN:11
       |vpiDecompile:4'b11
       |vpiSize:4
+  |vpiTypedef:
+  \_typedef_typespec: (priv_lvl_e), line:4:5, endln:4:15
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignSubs/dut.sv, line:1:1, endln:5:11
+    |vpiName:priv_lvl_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (pkg::priv_lvl_e), line:2:10, endln:4:4
+      |vpiParent:
+      \_typedef_typespec: (priv_lvl_e), line:4:5, endln:4:15
+      |vpiFullName:pkg::priv_lvl_e
+      |vpiActual:
+      \_enum_typespec: (pkg::priv_lvl_e), line:2:10, endln:4:16
   |vpiImportTypespec:
   \_logic_typespec: , line:2:15, endln:2:26
   |vpiImportTypespec:
   \_enum_typespec: (pkg::priv_lvl_e), line:2:10, endln:4:16
+  |vpiImportTypespec:
+  \_typedef_typespec: (priv_lvl_e), line:4:5, endln:4:15
   |vpiDefName:pkg
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/AssignSubs/dut.sv, line:7:1, endln:19:10
@@ -269,13 +284,13 @@ design: (unnamed)
   \_design: (unnamed)
   |vpiName:work@dut
   |vpiVariables:
-  \_logic_var: (work@dut), line:12:2, endln:12:20
+  \_logic_var: (work@dut), line:12:14, endln:12:15
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/AssignSubs/dut.sv, line:7:1, endln:19:10
     |vpiTypespec:
     \_ref_typespec: (work@dut), line:12:2, endln:12:13
       |vpiParent:
-      \_logic_var: (work@dut), line:12:2, endln:12:20
+      \_logic_var: (work@dut), line:12:14, endln:12:15
       |vpiFullName:work@dut
       |vpiActual:
       \_logic_typespec: , line:12:2, endln:12:13
@@ -315,9 +330,9 @@ design: (unnamed)
           |UINT:4
           |vpiConstType:9
     |vpiReg:
-    \_logic_var: (work@dut), line:12:2, endln:12:20
+    \_logic_var: (work@dut), line:12:14, endln:12:15
   |vpiReg:
-  \_logic_var: (work@dut), line:12:2, endln:12:20
+  \_logic_var: (work@dut), line:12:14, endln:12:15
   |vpiRegArray:
   \_array_var: (work@dut.c), line:12:14, endln:12:20
   |vpiInternalScope:
@@ -500,7 +515,7 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:12:2, endln:12:13
   |vpiImportTypespec:
-  \_logic_var: (work@dut), line:12:2, endln:12:20
+  \_logic_var: (work@dut), line:12:14, endln:12:15
   |vpiImportTypespec:
   \_array_var: (work@dut.c), line:12:14, endln:12:20
   |vpiImportTypespec:
@@ -537,7 +552,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/AssignSubs/dut.sv | ${SURELOG_DIR}/build/regression/AssignSubs/roundtrip/dut_000.sv | 11 | 19 |
-============================== End RoundTrip Results ==============================

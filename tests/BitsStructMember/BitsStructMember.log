@@ -28,11 +28,12 @@ parameter                                              1
 port                                                   2
 range                                                  5
 ref_obj                                               16
-ref_typespec                                          11
+ref_typespec                                          12
 source_file                                            1
 struct_net                                             1
 struct_typespec                                        1
 sys_func_call                                          1
+typedef_typespec                                       1
 typespec_member                                        4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BitsStructMember/slpp_all/surelog.uhdm ...
@@ -234,6 +235,18 @@ design: (unnamed)
   \_logic_typespec: , line:11:5, endln:11:10
     |vpiParent:
     \_package: keymgr_pkg (keymgr_pkg::), file:${SURELOG_DIR}/tests/BitsStructMember/dut.sv, line:1:1, endln:14:11
+  |vpiTypedef:
+  \_typedef_typespec: (kmac_data_req_t), line:12:5, endln:12:20
+    |vpiParent:
+    \_package: keymgr_pkg (keymgr_pkg::), file:${SURELOG_DIR}/tests/BitsStructMember/dut.sv, line:1:1, endln:14:11
+    |vpiName:kmac_data_req_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (keymgr_pkg::kmac_data_req_t), line:5:11, endln:12:4
+      |vpiParent:
+      \_typedef_typespec: (kmac_data_req_t), line:12:5, endln:12:20
+      |vpiFullName:keymgr_pkg::kmac_data_req_t
+      |vpiActual:
+      \_struct_typespec: (keymgr_pkg::kmac_data_req_t), line:5:11, endln:12:4
   |vpiImportTypespec:
   \_int_typespec: , line:3:13, endln:3:16
   |vpiImportTypespec:
@@ -246,6 +259,8 @@ design: (unnamed)
   \_logic_typespec: , line:8:5, endln:8:34
   |vpiImportTypespec:
   \_logic_typespec: , line:11:5, endln:11:10
+  |vpiImportTypespec:
+  \_typedef_typespec: (kmac_data_req_t), line:12:5, endln:12:20
   |vpiDefName:keymgr_pkg
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitsStructMember/dut.sv, line:16:1, endln:28:10
@@ -677,7 +692,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/BitsStructMember/dut.sv | ${SURELOG_DIR}/build/regression/BitsStructMember/roundtrip/dut_000.sv | 11 | 28 |
-============================== End RoundTrip Results ==============================

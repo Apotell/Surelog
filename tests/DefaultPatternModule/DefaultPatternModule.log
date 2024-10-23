@@ -370,7 +370,6 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 array_typespec                                         3
-array_var                                              1
 assignment                                             2
 begin                                                  4
 bit_select                                             5
@@ -389,10 +388,12 @@ parameter                                              3
 range                                                  6
 ref_module                                             1
 ref_obj                                               14
-ref_typespec                                          12
+ref_typespec                                          13
+ref_var                                                1
 source_file                                            1
 string_typespec                                        1
 tagged_pattern                                         1
+typedef_typespec                                       1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/DefaultPatternModule/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/DefaultPatternModule/slpp_all/checker/surelog.chk.html ...
@@ -584,13 +585,13 @@ design: (unnamed)
     |vpiName:ASSIGN_VADDR
     |vpiFullName:work@top.ASSIGN_VADDR
     |vpiVariables:
-    \_array_var: (work@top.ASSIGN_VADDR), line:8:17, endln:8:35
+    \_ref_var: (work@top.ASSIGN_VADDR), line:8:17, endln:8:35
       |vpiParent:
       \_function: (work@top.ASSIGN_VADDR), line:8:1, endln:12:12
       |vpiTypespec:
       \_ref_typespec: (work@top.ASSIGN_VADDR.ASSIGN_VADDR_RET_T), line:8:17, endln:8:35
         |vpiParent:
-        \_array_var: (work@top.ASSIGN_VADDR), line:8:17, endln:8:35
+        \_ref_var: (work@top.ASSIGN_VADDR), line:8:17, endln:8:35
         |vpiName:ASSIGN_VADDR_RET_T
         |vpiFullName:work@top.ASSIGN_VADDR.ASSIGN_VADDR_RET_T
         |vpiActual:
@@ -610,8 +611,6 @@ design: (unnamed)
       |vpiName:i
       |vpiFullName:work@top.ASSIGN_VADDR.i
       |vpiSigned:1
-    |vpiRegArray:
-    \_array_var: (work@top.ASSIGN_VADDR), line:8:17, endln:8:35
     |vpiInternalScope:
     \_for_stmt: (work@top.ASSIGN_VADDR), line:9:5, endln:11:8
       |vpiParent:
@@ -651,7 +650,7 @@ design: (unnamed)
             |vpiName:ASSIGN_VADDR
             |vpiFullName:work@top.ASSIGN_VADDR.ASSIGN_VADDR
             |vpiActual:
-            \_array_var: (work@top.ASSIGN_VADDR), line:8:17, endln:8:35
+            \_ref_var: (work@top.ASSIGN_VADDR), line:8:17, endln:8:35
             |vpiIndex:
             \_ref_obj: (work@top.i), line:10:23, endln:10:24
               |vpiParent:
@@ -716,14 +715,14 @@ design: (unnamed)
       \_function: (work@top.ASSIGN_VADDR), line:8:1, endln:12:12
       |vpiSigned:1
     |vpiImportTypespec:
-    \_array_var: (work@top.ASSIGN_VADDR), line:8:17, endln:8:35
+    \_ref_var: (work@top.ASSIGN_VADDR), line:8:17, endln:8:35
     |vpiImportTypespec:
     \_int_typespec: , line:9:10, endln:9:13
     |vpiImportTypespec:
     \_int_var: (work@top.ASSIGN_VADDR.i), line:9:14, endln:9:15
     |vpiVisibility:1
     |vpiReturn:
-    \_array_var: (work@top.ASSIGN_VADDR), line:8:17, endln:8:35
+    \_ref_var: (work@top.ASSIGN_VADDR), line:8:17, endln:8:35
     |vpiStmt:
     \_for_stmt: (work@top.ASSIGN_VADDR), line:9:5, endln:11:8
   |vpiTypedef:
@@ -760,10 +759,6 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternModule/dut.sv, line:1:1, endln:27:10
     |vpiName:default
-  |vpiTypedef:
-  \_int_typespec: , line:7:9, endln:7:21
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternModule/dut.sv, line:1:1, endln:27:10
   |vpiTypedef:
   \_array_typespec: (ASSIGN_VADDR_RET_T), line:7:9, endln:7:45
     |vpiParent:
@@ -803,6 +798,22 @@ design: (unnamed)
       |vpiActual:
       \_int_typespec: , line:7:9, endln:7:21
   |vpiTypedef:
+  \_int_typespec: , line:7:9, endln:7:21
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternModule/dut.sv, line:1:1, endln:27:10
+  |vpiTypedef:
+  \_typedef_typespec: (ASSIGN_VADDR_RET_T), line:7:22, endln:7:40
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternModule/dut.sv, line:1:1, endln:27:10
+    |vpiName:ASSIGN_VADDR_RET_T
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top.ASSIGN_VADDR_RET_T), line:7:9, endln:7:12
+      |vpiParent:
+      \_typedef_typespec: (ASSIGN_VADDR_RET_T), line:7:22, endln:7:40
+      |vpiFullName:work@top.ASSIGN_VADDR_RET_T
+      |vpiActual:
+      \_array_typespec: (ASSIGN_VADDR_RET_T), line:7:9, endln:7:45
+  |vpiTypedef:
   \_int_typespec: , line:14:12, endln:14:24
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultPatternModule/dut.sv, line:1:1, endln:27:10
@@ -830,9 +841,11 @@ design: (unnamed)
   |vpiImportTypespec:
   \_string_typespec: (default), line:5:36, endln:5:43
   |vpiImportTypespec:
+  \_array_typespec: (ASSIGN_VADDR_RET_T), line:7:9, endln:7:45
+  |vpiImportTypespec:
   \_int_typespec: , line:7:9, endln:7:21
   |vpiImportTypespec:
-  \_array_typespec: (ASSIGN_VADDR_RET_T), line:7:9, endln:7:45
+  \_typedef_typespec: (ASSIGN_VADDR_RET_T), line:7:22, endln:7:40
   |vpiImportTypespec:
   \_int_typespec: , line:14:12, endln:14:24
   |vpiImportTypespec:
@@ -969,7 +982,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/DefaultPatternModule/dut.sv | ${SURELOG_DIR}/build/regression/DefaultPatternModule/roundtrip/dut_000.sv | 24 | 31 |
-============================== End RoundTrip Results ==============================

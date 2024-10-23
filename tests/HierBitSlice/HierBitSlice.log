@@ -4577,16 +4577,20 @@ ref_typespec                                          77
 source_file                                            1
 struct_typespec                                        2
 struct_var                                             2
+typedef_typespec                                       4
 typespec_member                                       36
-unsupported_typespec                                  39
+unsupported_typespec                                  32
 === UHDM Object Stats End ===
 [ERR:UH0734] ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:4:9: Failed to bind object: "id: 9, name: FLOAT32_EXP_WIDTH".
 [ERR:EL0535] ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:4:9: Illegal implicit net "id:9, name: FLOAT32_EXP_WIDTH".
 [ERR:UH0734] ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:5:9: Failed to bind object: "id: 17, name: FLOAT32_SIG_WIDTH".
 [ERR:EL0535] ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:5:9: Illegal implicit net "id:17, name: FLOAT32_SIG_WIDTH".
+[ERR:UH0734] ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:51:18: Failed to bind object: "id: 140, name: NUM_VECTOR_LANES".
+[ERR:EL0535] ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:51:18: Illegal implicit net "id:140, name: NUM_VECTOR_LANES".
+[INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierBitSlice/slpp_all/surelog.uhdm ...
 [ERR:IG0809] ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:4:9: Object 9 actual cannot be null.
 [ERR:IG0809] ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:5:9: Object 17 actual cannot be null.
-[INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierBitSlice/slpp_all/surelog.uhdm ...
+[ERR:IG0809] ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:51:18: Object 140 actual cannot be null.
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/HierBitSlice/slpp_all/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -4717,13 +4721,13 @@ design: (unnamed)
     |vpiFullName:work@int_execute_stage.ix_subcycle
     |vpiVisibility:1
   |vpiVariables:
-  \_logic_var: (work@int_execute_stage), line:82:5, endln:82:57
+  \_logic_var: (work@int_execute_stage), line:82:39, endln:82:54
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiTypespec:
     \_ref_typespec: (work@int_execute_stage.scalar_t), line:82:11, endln:82:19
       |vpiParent:
-      \_logic_var: (work@int_execute_stage), line:82:5, endln:82:57
+      \_logic_var: (work@int_execute_stage), line:82:39, endln:82:54
       |vpiName:scalar_t
       |vpiFullName:work@int_execute_stage.scalar_t
       |vpiActual:
@@ -4764,7 +4768,7 @@ design: (unnamed)
           |UINT:8
           |vpiConstType:9
     |vpiReg:
-    \_logic_var: (work@int_execute_stage), line:82:5, endln:82:57
+    \_logic_var: (work@int_execute_stage), line:82:39, endln:82:54
   |vpiVariables:
   \_logic_var: (work@int_execute_stage.eret), line:91:11, endln:91:15
     |vpiParent:
@@ -4858,7 +4862,7 @@ design: (unnamed)
   |vpiReg:
   \_logic_var: (work@int_execute_stage.ix_subcycle), line:78:39, endln:78:50
   |vpiReg:
-  \_logic_var: (work@int_execute_stage), line:82:5, endln:82:57
+  \_logic_var: (work@int_execute_stage), line:82:39, endln:82:54
   |vpiReg:
   \_logic_var: (work@int_execute_stage.eret), line:91:11, endln:91:15
   |vpiReg:
@@ -4883,16 +4887,6 @@ design: (unnamed)
       |vpiFullName:work@int_execute_stage
     |vpiStmt:
     \_begin: (work@int_execute_stage), line:99:9, endln:274:12
-  |vpiTypedef:
-  \_unsupported_typespec: (vector_t), line:58:11, endln:58:19
-    |vpiParent:
-    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
-    |vpiName:vector_t
-  |vpiTypedef:
-  \_unsupported_typespec: (vector_t), line:59:11, endln:59:19
-    |vpiParent:
-    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
-    |vpiName:vector_t
   |vpiTypedef:
   \_unsupported_typespec: (vector_mask_t), line:60:11, endln:60:24
     |vpiParent:
@@ -4921,11 +4915,6 @@ design: (unnamed)
   \_logic_typespec: , line:71:12, endln:71:17
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
-  |vpiTypedef:
-  \_unsupported_typespec: (vector_t), line:73:12, endln:73:20
-    |vpiParent:
-    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
-    |vpiName:vector_t
   |vpiTypedef:
   \_unsupported_typespec: (vector_mask_t), line:74:12, endln:74:25
     |vpiParent:
@@ -4966,11 +4955,6 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
   |vpiTypedef:
-  \_unsupported_typespec: (vector_t), line:90:5, endln:90:13
-    |vpiParent:
-    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
-    |vpiName:vector_t
-  |vpiTypedef:
   \_logic_typespec: , line:91:5, endln:91:10
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
@@ -4990,16 +4974,6 @@ design: (unnamed)
   \_logic_typespec: , line:95:5, endln:95:10
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
-  |vpiTypedef:
-  \_unsupported_typespec: (vector_t), line:58:11, endln:58:19
-    |vpiParent:
-    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
-    |vpiName:vector_t
-  |vpiTypedef:
-  \_unsupported_typespec: (vector_t), line:59:11, endln:59:19
-    |vpiParent:
-    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
-    |vpiName:vector_t
   |vpiTypedef:
   \_unsupported_typespec: (vector_mask_t), line:60:11, endln:60:24
     |vpiParent:
@@ -5028,11 +5002,6 @@ design: (unnamed)
   \_logic_typespec: , line:71:12, endln:71:17
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
-  |vpiTypedef:
-  \_unsupported_typespec: (vector_t), line:73:12, endln:73:20
-    |vpiParent:
-    \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
-    |vpiName:vector_t
   |vpiTypedef:
   \_unsupported_typespec: (vector_mask_t), line:74:12, endln:74:25
     |vpiParent:
@@ -5133,11 +5102,7 @@ design: (unnamed)
     |vpiName:reset
     |vpiFullName:work@int_execute_stage.reset
   |vpiImportTypespec:
-  \_unsupported_typespec: (vector_t), line:58:11, endln:58:19
-  |vpiImportTypespec:
   \_logic_var: (work@int_execute_stage.of_operand1), line:58:39, endln:58:50
-  |vpiImportTypespec:
-  \_unsupported_typespec: (vector_t), line:59:11, endln:59:19
   |vpiImportTypespec:
   \_logic_var: (work@int_execute_stage.of_operand2), line:59:39, endln:59:50
   |vpiImportTypespec:
@@ -5201,8 +5166,6 @@ design: (unnamed)
   |vpiImportTypespec:
   \_struct_var: (work@int_execute_stage.ix_instruction), line:72:39, endln:72:53
   |vpiImportTypespec:
-  \_unsupported_typespec: (vector_t), line:73:12, endln:73:20
-  |vpiImportTypespec:
   \_logic_var: (work@int_execute_stage.ix_result), line:73:39, endln:73:48
   |vpiImportTypespec:
   \_unsupported_typespec: (vector_mask_t), line:74:12, endln:74:25
@@ -5253,7 +5216,7 @@ design: (unnamed)
     |vpiFullName:work@int_execute_stage.ix_privileged_op_fault
     |vpiNetType:36
   |vpiImportTypespec:
-  \_logic_var: (work@int_execute_stage), line:82:5, endln:82:57
+  \_logic_var: (work@int_execute_stage), line:82:39, endln:82:54
   |vpiImportTypespec:
   \_array_var: (work@int_execute_stage.cr_eret_address), line:82:39, endln:82:57
   |vpiImportTypespec:
@@ -5315,19 +5278,9 @@ design: (unnamed)
     |vpiFullName:work@int_execute_stage.ix_perf_cond_branch_not_taken
     |vpiNetType:36
   |vpiImportTypespec:
-  \_unsupported_typespec: (vector_t), line:90:5, endln:90:13
-  |vpiImportTypespec:
   \_logic_net: (work@int_execute_stage.vector_result), line:90:14, endln:90:27
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
-    |vpiTypespec:
-    \_ref_typespec: (work@int_execute_stage.vector_result.vector_result), line:90:5, endln:90:13
-      |vpiParent:
-      \_logic_net: (work@int_execute_stage.vector_result), line:90:14, endln:90:27
-      |vpiName:vector_result
-      |vpiFullName:work@int_execute_stage.vector_result.vector_result
-      |vpiActual:
-      \_unsupported_typespec: (vector_t), line:90:5, endln:90:13
     |vpiName:vector_result
     |vpiFullName:work@int_execute_stage.vector_result
   |vpiImportTypespec:
@@ -5351,10 +5304,6 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_var: (work@int_execute_stage.valid_instruction), line:95:11, endln:95:28
   |vpiImportTypespec:
-  \_unsupported_typespec: (vector_t), line:58:11, endln:58:19
-  |vpiImportTypespec:
-  \_unsupported_typespec: (vector_t), line:59:11, endln:59:19
-  |vpiImportTypespec:
   \_unsupported_typespec: (vector_mask_t), line:60:11, endln:60:24
   |vpiImportTypespec:
   \_unsupported_typespec: (local_thread_idx_t), line:63:11, endln:63:29
@@ -5366,8 +5315,6 @@ design: (unnamed)
   \_unsupported_typespec: (local_thread_idx_t), line:68:11, endln:68:29
   |vpiImportTypespec:
   \_logic_typespec: , line:71:12, endln:71:17
-  |vpiImportTypespec:
-  \_unsupported_typespec: (vector_t), line:73:12, endln:73:20
   |vpiImportTypespec:
   \_unsupported_typespec: (vector_mask_t), line:74:12, endln:74:25
   |vpiImportTypespec:
@@ -5512,28 +5459,12 @@ design: (unnamed)
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:of_operand1
     |vpiDirection:1
-    |vpiTypedef:
-    \_ref_typespec: (work@int_execute_stage.of_operand1.vector_t), line:58:11, endln:58:19
-      |vpiParent:
-      \_port: (of_operand1), line:58:5, endln:58:50
-      |vpiName:vector_t
-      |vpiFullName:work@int_execute_stage.of_operand1.vector_t
-      |vpiActual:
-      \_unsupported_typespec: (vector_t), line:58:11, endln:58:19
   |vpiPort:
   \_port: (of_operand2), line:59:5, endln:59:50
     |vpiParent:
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:of_operand2
     |vpiDirection:1
-    |vpiTypedef:
-    \_ref_typespec: (work@int_execute_stage.of_operand2.vector_t), line:59:11, endln:59:19
-      |vpiParent:
-      \_port: (of_operand2), line:59:5, endln:59:50
-      |vpiName:vector_t
-      |vpiFullName:work@int_execute_stage.of_operand2.vector_t
-      |vpiActual:
-      \_unsupported_typespec: (vector_t), line:59:11, endln:59:19
   |vpiPort:
   \_port: (of_mask_value), line:60:5, endln:60:52
     |vpiParent:
@@ -5656,14 +5587,6 @@ design: (unnamed)
     \_module_inst: work@int_execute_stage (work@int_execute_stage), file:${SURELOG_DIR}/tests/HierBitSlice/dut.sv, line:53:1, endln:374:10
     |vpiName:ix_result
     |vpiDirection:2
-    |vpiTypedef:
-    \_ref_typespec: (work@int_execute_stage.ix_result.vector_t), line:73:12, endln:73:20
-      |vpiParent:
-      \_port: (ix_result), line:73:5, endln:73:48
-      |vpiName:vector_t
-      |vpiFullName:work@int_execute_stage.ix_result.vector_t
-      |vpiActual:
-      \_unsupported_typespec: (vector_t), line:73:12, endln:73:20
   |vpiPort:
   \_port: (ix_mask_value), line:74:5, endln:74:52
     |vpiParent:
@@ -7280,6 +7203,18 @@ design: (unnamed)
       |UINT:0
       |vpiConstType:9
 |vpiTypedef:
+\_typedef_typespec: (float32_t), line:6:3, endln:6:12
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:float32_t
+  |vpiTypedefAlias:
+  \_ref_typespec: (float32_t), line:2:9, endln:6:2
+    |vpiParent:
+    \_typedef_typespec: (float32_t), line:6:3, endln:6:12
+    |vpiFullName:float32_t
+    |vpiActual:
+    \_struct_typespec: (float32_t), line:2:9, endln:6:2
+|vpiTypedef:
 \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
   |vpiParent:
   \_design: (unnamed)
@@ -7850,6 +7785,42 @@ design: (unnamed)
   \_design: (unnamed)
   |vpiName:cache_op_t
 |vpiTypedef:
+\_typedef_typespec: (decoded_instruction_t), line:48:3, endln:48:24
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:decoded_instruction_t
+  |vpiTypedefAlias:
+  \_ref_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+    |vpiParent:
+    \_typedef_typespec: (decoded_instruction_t), line:48:3, endln:48:24
+    |vpiFullName:decoded_instruction_t
+    |vpiActual:
+    \_struct_typespec: (decoded_instruction_t), line:8:9, endln:48:2
+|vpiTypedef:
+\_packed_array_typespec: , line:50:9, endln:50:20
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiRange:
+  \_range: , line:50:14, endln:50:20
+    |vpiParent:
+    \_packed_array_typespec: , line:50:9, endln:50:20
+    |vpiLeftRange:
+    \_constant: , line:50:15, endln:50:17
+      |vpiParent:
+      \_range: , line:50:14, endln:50:20
+      |vpiDecompile:31
+      |vpiSize:64
+      |UINT:31
+      |vpiConstType:9
+    |vpiRightRange:
+    \_constant: , line:50:18, endln:50:19
+      |vpiParent:
+      \_range: , line:50:14, endln:50:20
+      |vpiDecompile:0
+      |vpiSize:64
+      |UINT:0
+      |vpiConstType:9
+|vpiTypedef:
 \_logic_typespec: (scalar_t), line:50:9, endln:50:20
   |vpiParent:
   \_design: (unnamed)
@@ -7874,10 +7845,67 @@ design: (unnamed)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
+|vpiTypedef:
+\_typedef_typespec: (scalar_t), line:50:21, endln:50:29
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:scalar_t
+  |vpiTypedefAlias:
+  \_ref_typespec: (scalar_t), line:50:9, endln:50:14
+    |vpiParent:
+    \_typedef_typespec: (scalar_t), line:50:21, endln:50:29
+    |vpiFullName:scalar_t
+    |vpiActual:
+    \_logic_typespec: (scalar_t), line:50:9, endln:50:20
+|vpiTypedef:
+\_packed_array_typespec: , line:51:9, endln:51:41
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiRange:
+  \_range: , line:51:17, endln:51:41
+    |vpiParent:
+    \_packed_array_typespec: , line:51:9, endln:51:41
+    |vpiLeftRange:
+    \_operation: , line:51:18, endln:51:38
+      |vpiParent:
+      \_range: , line:51:17, endln:51:41
+      |vpiOpType:11
+      |vpiOperand:
+      \_ref_obj: (NUM_VECTOR_LANES), line:51:18, endln:51:34
+        |vpiParent:
+        \_operation: , line:51:18, endln:51:38
+        |vpiName:NUM_VECTOR_LANES
+      |vpiOperand:
+      \_constant: , line:51:37, endln:51:38
+        |vpiParent:
+        \_operation: , line:51:18, endln:51:38
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+    |vpiRightRange:
+    \_constant: , line:51:39, endln:51:40
+      |vpiParent:
+      \_range: , line:51:17, endln:51:41
+      |vpiDecompile:0
+      |vpiSize:64
+      |UINT:0
+      |vpiConstType:9
+|vpiTypedef:
+\_typedef_typespec: (vector_t), line:51:42, endln:51:50
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:vector_t
+  |vpiTypedefAlias:
+  \_ref_typespec: (vector_t.scalar_t), line:51:9, endln:51:17
+    |vpiParent:
+    \_typedef_typespec: (vector_t), line:51:42, endln:51:50
+    |vpiName:scalar_t
+    |vpiFullName:vector_t.scalar_t
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 6
+[  ERROR] : 9
 [WARNING] : 1
 [   NOTE] : 0
 
@@ -7991,7 +8019,3 @@ design: (unnamed)
 [LINT]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv:47:5: Unsupported typespec, cache_op_t
 [LINT]:   \_ :0:0:
 ============================== End Linting Results ==============================
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/HierBitSlice/dut.sv | ${SURELOG_DIR}/build/regression/HierBitSlice/roundtrip/dut_000.sv | 209 | 374 |
-============================== End RoundTrip Results ==============================

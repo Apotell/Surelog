@@ -66,8 +66,9 @@ package                                                2
 param_assign                                           1
 parameter                                              1
 ref_obj                                                2
-ref_typespec                                           3
+ref_typespec                                           4
 source_file                                            1
+typedef_typespec                                       1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageConst/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PackageConst/slpp_all/checker/surelog.chk.html ...
@@ -150,10 +151,24 @@ design: (unnamed)
       |UINT:24
       |vpiDecompile:spi_device_reg_pkg::NumCmdInfo
       |vpiSize:32
+  |vpiTypedef:
+  \_typedef_typespec: (cmd_info_index_e), line:8:6, endln:8:22
+    |vpiParent:
+    \_package: spi_device_pkg (spi_device_pkg::), file:${SURELOG_DIR}/tests/PackageConst/dut.sv, line:5:1, endln:9:11
+    |vpiName:cmd_info_index_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (spi_device_pkg::cmd_info_index_e), line:6:12, endln:8:5
+      |vpiParent:
+      \_typedef_typespec: (cmd_info_index_e), line:8:6, endln:8:22
+      |vpiFullName:spi_device_pkg::cmd_info_index_e
+      |vpiActual:
+      \_enum_typespec: (spi_device_pkg::cmd_info_index_e), line:6:12, endln:8:23
   |vpiImportTypespec:
   \_int_typespec: , line:6:17, endln:6:29
   |vpiImportTypespec:
   \_enum_typespec: (spi_device_pkg::cmd_info_index_e), line:6:12, endln:8:23
+  |vpiImportTypespec:
+  \_typedef_typespec: (cmd_info_index_e), line:8:6, endln:8:22
   |vpiDefName:spi_device_pkg
 ===================
 [  FATAL] : 0
@@ -161,7 +176,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PackageConst/dut.sv | ${SURELOG_DIR}/build/regression/PackageConst/roundtrip/dut_000.sv | 2 | 9 |
-============================== End RoundTrip Results ==============================

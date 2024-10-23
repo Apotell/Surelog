@@ -255,9 +255,10 @@ package                                                1
 port                                                   1
 range                                                  3
 ref_obj                                                7
-ref_typespec                                          11
+ref_typespec                                          13
 source_file                                            1
 struct_typespec                                        4
+typedef_typespec                                       2
 typespec_member                                        9
 unsupported_typespec                                   2
 === UHDM Object Stats End ===
@@ -513,6 +514,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (gpr_t), line:15:3, endln:15:8
+    |vpiParent:
+    \_package: riscv_isa_pkg (riscv_isa_pkg::), file:${SURELOG_DIR}/tests/StructStructHierPath/dut.sv, line:2:1, endln:26:26
+    |vpiName:gpr_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (riscv_isa_pkg::gpr_t), line:4:9, endln:15:2
+      |vpiParent:
+      \_typedef_typespec: (gpr_t), line:15:3, endln:15:8
+      |vpiFullName:riscv_isa_pkg::gpr_t
+      |vpiActual:
+      \_struct_typespec: (riscv_isa_pkg::gpr_t), line:4:9, endln:15:2
+  |vpiTypedef:
   \_struct_typespec: (riscv_isa_pkg::ctl_t), line:19:9, endln:23:2
     |vpiParent:
     \_package: riscv_isa_pkg (riscv_isa_pkg::), file:${SURELOG_DIR}/tests/StructStructHierPath/dut.sv, line:2:1, endln:26:26
@@ -531,6 +544,18 @@ design: (unnamed)
         |vpiFullName:riscv_isa_pkg::ctl_t::gpr::gpr_t
         |vpiActual:
         \_struct_typespec: (riscv_isa_pkg::gpr_t), line:4:9, endln:15:2
+  |vpiTypedef:
+  \_typedef_typespec: (ctl_t), line:23:3, endln:23:8
+    |vpiParent:
+    \_package: riscv_isa_pkg (riscv_isa_pkg::), file:${SURELOG_DIR}/tests/StructStructHierPath/dut.sv, line:2:1, endln:26:26
+    |vpiName:ctl_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (riscv_isa_pkg::ctl_t), line:19:9, endln:23:2
+      |vpiParent:
+      \_typedef_typespec: (ctl_t), line:23:3, endln:23:8
+      |vpiFullName:riscv_isa_pkg::ctl_t
+      |vpiActual:
+      \_struct_typespec: (riscv_isa_pkg::ctl_t), line:19:9, endln:23:2
   |vpiImportTypespec:
   \_struct_typespec: (riscv_isa_pkg::gpr_t), line:4:9, endln:15:2
   |vpiImportTypespec:
@@ -550,7 +575,11 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:13:5, endln:13:18
   |vpiImportTypespec:
+  \_typedef_typespec: (gpr_t), line:15:3, endln:15:8
+  |vpiImportTypespec:
   \_struct_typespec: (riscv_isa_pkg::ctl_t), line:19:9, endln:23:2
+  |vpiImportTypespec:
+  \_typedef_typespec: (ctl_t), line:23:3, endln:23:8
   |vpiDefName:riscv_isa_pkg
   |vpiEndLabel:riscv_isa_pkg
 |uhdmallModules:
@@ -642,7 +671,7 @@ design: (unnamed)
       |vpiName:ctl_t
       |vpiFullName:work@r5p_wbu.ctl.ctl_t
       |vpiActual:
-      \_struct_typespec: (riscv_isa_pkg::ctl_t), line:19:9, endln:23:2
+      \_typedef_typespec: (ctl_t), line:23:3, endln:23:8
   |vpiProcess:
   \_always: , line:31:3, endln:34:6
     |vpiParent:
@@ -735,7 +764,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/StructStructHierPath/dut.sv | ${SURELOG_DIR}/build/regression/StructStructHierPath/roundtrip/dut_000.sv | 8 | 37 |
-============================== End RoundTrip Results ==============================

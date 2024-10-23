@@ -724,13 +724,14 @@ operation                                              1
 package                                                2
 range                                                  5
 ref_obj                                               25
-ref_typespec                                          34
+ref_typespec                                          35
 ref_var                                               10
 source_file                                            2
 string_typespec                                        1
 string_var                                             1
 sys_func_call                                          2
 task                                                   9
+typedef_typespec                                       1
 unsupported_typespec                                  11
 === UHDM Object Stats End ===
 [ERR:UH0734] ${SURELOG_DIR}/tests/UnitForeach/top2.v:10:52: Failed to bind object: "id: 38, name: request".
@@ -739,10 +740,10 @@ unsupported_typespec                                  11
 [ERR:EL0535] ${SURELOG_DIR}/tests/UnitForeach/top2.v:10:85: Illegal implicit net "id:43, name: sequence_id".
 [ERR:UH0734] ${SURELOG_DIR}/tests/UnitForeach/top2.v:7:53: Failed to bind object: "id: 19, name: arb_sequence_q".
 [ERR:EL0535] ${SURELOG_DIR}/tests/UnitForeach/top2.v:7:53: Illegal implicit net "id:19, name: arb_sequence_q".
+[INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnitForeach/slpp_all/surelog.uhdm ...
 [ERR:IG0809] ${SURELOG_DIR}/tests/UnitForeach/top2.v:10:52: Object 38 actual cannot be null.
 [ERR:IG0809] ${SURELOG_DIR}/tests/UnitForeach/top2.v:10:85: Object 43 actual cannot be null.
 [ERR:IG0809] ${SURELOG_DIR}/tests/UnitForeach/top2.v:7:53: Object 19 actual cannot be null.
-[INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnitForeach/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/UnitForeach/slpp_all/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -1143,8 +1144,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/UnitForeach/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1656,13 +1671,13 @@ design: (unnamed)
   \_design: (unnamed)
   |vpiName:work@uvm_reg_map
   |vpiVariables:
-  \_class_var: (work@uvm_reg_map), line:46:9, endln:46:44
+  \_class_var: (work@uvm_reg_map), line:46:21, endln:46:30
     |vpiParent:
     \_class_defn: (work@uvm_reg_map), file:${SURELOG_DIR}/tests/UnitForeach/top.v, line:7:1, endln:83:9
     |vpiTypespec:
     \_ref_typespec: (work@uvm_reg_map::moreobj), line:46:9, endln:46:16
       |vpiParent:
-      \_class_var: (work@uvm_reg_map), line:46:9, endln:46:44
+      \_class_var: (work@uvm_reg_map), line:46:21, endln:46:30
       |vpiName:moreobj
       |vpiFullName:work@uvm_reg_map::moreobj
       |vpiActual:
@@ -1687,15 +1702,15 @@ design: (unnamed)
     |vpiVisibility:3
     |vpiArrayType:3
     |vpiReg:
-    \_class_var: (work@uvm_reg_map), line:46:9, endln:46:44
+    \_class_var: (work@uvm_reg_map), line:46:21, endln:46:30
   |vpiVariables:
-  \_class_var: (work@uvm_reg_map), line:47:9, endln:47:35
+  \_class_var: (work@uvm_reg_map), line:47:21, endln:47:31
     |vpiParent:
     \_class_defn: (work@uvm_reg_map), file:${SURELOG_DIR}/tests/UnitForeach/top.v, line:7:1, endln:83:9
     |vpiTypespec:
     \_ref_typespec: (work@uvm_reg_map::moreobj), line:47:9, endln:47:16
       |vpiParent:
-      \_class_var: (work@uvm_reg_map), line:47:9, endln:47:35
+      \_class_var: (work@uvm_reg_map), line:47:21, endln:47:31
       |vpiName:moreobj
       |vpiFullName:work@uvm_reg_map::moreobj
       |vpiActual:
@@ -1720,15 +1735,15 @@ design: (unnamed)
     |vpiVisibility:3
     |vpiArrayType:3
     |vpiReg:
-    \_class_var: (work@uvm_reg_map), line:47:9, endln:47:35
+    \_class_var: (work@uvm_reg_map), line:47:21, endln:47:31
   |vpiVariables:
-  \_class_var: (work@uvm_reg_map), line:48:9, endln:48:35
+  \_class_var: (work@uvm_reg_map), line:48:21, endln:48:31
     |vpiParent:
     \_class_defn: (work@uvm_reg_map), file:${SURELOG_DIR}/tests/UnitForeach/top.v, line:7:1, endln:83:9
     |vpiTypespec:
     \_ref_typespec: (work@uvm_reg_map::moreobj), line:48:9, endln:48:16
       |vpiParent:
-      \_class_var: (work@uvm_reg_map), line:48:9, endln:48:35
+      \_class_var: (work@uvm_reg_map), line:48:21, endln:48:31
       |vpiName:moreobj
       |vpiFullName:work@uvm_reg_map::moreobj
       |vpiActual:
@@ -1753,7 +1768,7 @@ design: (unnamed)
     |vpiVisibility:3
     |vpiArrayType:4
     |vpiReg:
-    \_class_var: (work@uvm_reg_map), line:48:9, endln:48:35
+    \_class_var: (work@uvm_reg_map), line:48:21, endln:48:31
   |vpiRegArray:
   \_array_var: (work@uvm_reg_map::m_submaps), line:46:21, endln:46:44
   |vpiRegArray:
@@ -2337,7 +2352,7 @@ design: (unnamed)
   |vpiImportTypespec:
   \_class_typespec: (moreobj), line:46:9, endln:46:16
   |vpiImportTypespec:
-  \_class_var: (work@uvm_reg_map), line:46:9, endln:46:44
+  \_class_var: (work@uvm_reg_map), line:46:21, endln:46:30
   |vpiImportTypespec:
   \_array_var: (work@uvm_reg_map::m_submaps), line:46:21, endln:46:44
   |vpiImportTypespec:
@@ -2345,7 +2360,7 @@ design: (unnamed)
   |vpiImportTypespec:
   \_class_typespec: (moreobj), line:47:9, endln:47:16
   |vpiImportTypespec:
-  \_class_var: (work@uvm_reg_map), line:47:9, endln:47:35
+  \_class_var: (work@uvm_reg_map), line:47:21, endln:47:31
   |vpiImportTypespec:
   \_array_var: (work@uvm_reg_map::m_submaps2), line:47:21, endln:47:35
   |vpiImportTypespec:
@@ -2353,7 +2368,7 @@ design: (unnamed)
   |vpiImportTypespec:
   \_class_typespec: (moreobj), line:48:9, endln:48:16
   |vpiImportTypespec:
-  \_class_var: (work@uvm_reg_map), line:48:9, endln:48:35
+  \_class_var: (work@uvm_reg_map), line:48:21, endln:48:31
   |vpiImportTypespec:
   \_array_var: (work@uvm_reg_map::m_submaps3), line:48:21, endln:48:35
   |vpiImportTypespec:
@@ -2386,8 +2401,3 @@ design: (unnamed)
 [LINT]: ${SURELOG_DIR}/tests/UnitForeach/top.v:1:1: Non synthesizable construct, work@moreobj
 [LINT]: ${SURELOG_DIR}/tests/UnitForeach/top.v:7:1: Non synthesizable construct, work@uvm_reg_map
 ============================== End Linting Results ==============================
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/UnitForeach/top.v  | ${SURELOG_DIR}/build/regression/UnitForeach/roundtrip/top_000.v  | 50 | 83 |
-[roundtrip]: ${SURELOG_DIR}/tests/UnitForeach/top2.v | ${SURELOG_DIR}/build/regression/UnitForeach/roundtrip/top2_000.v | 6 | 14 |
-============================== End RoundTrip Results ==============================

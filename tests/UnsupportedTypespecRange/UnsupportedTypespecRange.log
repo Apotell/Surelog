@@ -78,9 +78,10 @@ design                                                 1
 logic_typespec                                         1
 package                                                1
 range                                                  2
-ref_typespec                                           2
+ref_typespec                                           4
 source_file                                            1
 struct_typespec                                        1
+typedef_typespec                                       2
 typespec_member                                        2
 union_typespec                                         1
 unsupported_typespec                                   1
@@ -123,10 +124,24 @@ design: (unnamed)
   \_logic_typespec: , line:3:5, endln:3:10
     |vpiParent:
     \_package: foo_flags_pkg (foo_flags_pkg::), file:${SURELOG_DIR}/tests/UnsupportedTypespecRange/dut.sv, line:1:1, endln:6:27
+  |vpiTypedef:
+  \_typedef_typespec: (common_flags_t), line:4:5, endln:4:19
+    |vpiParent:
+    \_package: foo_flags_pkg (foo_flags_pkg::), file:${SURELOG_DIR}/tests/UnsupportedTypespecRange/dut.sv, line:1:1, endln:6:27
+    |vpiName:common_flags_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (foo_flags_pkg::common_flags_t), line:2:11, endln:4:4
+      |vpiParent:
+      \_typedef_typespec: (common_flags_t), line:4:5, endln:4:19
+      |vpiFullName:foo_flags_pkg::common_flags_t
+      |vpiActual:
+      \_struct_typespec: (foo_flags_pkg::common_flags_t), line:2:11, endln:4:4
   |vpiImportTypespec:
   \_struct_typespec: (foo_flags_pkg::common_flags_t), line:2:11, endln:4:4
   |vpiImportTypespec:
   \_logic_typespec: , line:3:5, endln:3:10
+  |vpiImportTypespec:
+  \_typedef_typespec: (common_flags_t), line:4:5, endln:4:19
   |vpiDefName:foo_flags_pkg
   |vpiEndLabel:foo_flags_pkg
 |vpiTypedef:
@@ -193,6 +208,18 @@ design: (unnamed)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
+|vpiTypedef:
+\_typedef_typespec: (top_flag_t), line:11:3, endln:11:13
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:top_flag_t
+  |vpiTypedefAlias:
+  \_ref_typespec: (top_flag_t), line:9:9, endln:11:2
+    |vpiParent:
+    \_typedef_typespec: (top_flag_t), line:11:3, endln:11:13
+    |vpiFullName:top_flag_t
+    |vpiActual:
+    \_union_typespec: (top_flag_t), line:9:9, endln:11:13
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -208,7 +235,3 @@ design: (unnamed)
 [LINT]: ${SURELOG_DIR}/tests/UnsupportedTypespecRange/dut.sv:10:5: Unsupported typespec, foo_flags_pkg::common_flags_t
 [LINT]:   \_ :0:0:
 ============================== End Linting Results ==============================
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/UnsupportedTypespecRange/dut.sv | ${SURELOG_DIR}/build/regression/UnsupportedTypespecRange/roundtrip/dut_000.sv | 2 | 11 |
-============================== End RoundTrip Results ==============================

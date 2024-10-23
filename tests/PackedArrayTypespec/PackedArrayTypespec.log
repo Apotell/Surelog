@@ -98,8 +98,9 @@ logic_typespec                                         1
 module_inst                                            2
 packed_array_typespec                                  2
 range                                                  3
-ref_typespec                                           1
+ref_typespec                                           4
 source_file                                            1
+typedef_typespec                                       3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedArrayTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PackedArrayTypespec/slpp_all/checker/surelog.chk.html ...
@@ -176,10 +177,106 @@ design: (unnamed)
       |INT:2
       |vpiDecompile:2
       |vpiSize:2
+  |vpiTypedef:
+  \_typedef_typespec: (unit_type_t), line:7:5, endln:7:16
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayTypespec/dut.sv, line:1:1, endln:13:10
+    |vpiName:unit_type_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top.unit_type_t), line:3:12, endln:7:4
+      |vpiParent:
+      \_typedef_typespec: (unit_type_t), line:7:5, endln:7:16
+      |vpiFullName:work@top.unit_type_t
+      |vpiActual:
+      \_enum_typespec: (unit_type_t), line:3:12, endln:7:17
+  |vpiTypedef:
+  \_packed_array_typespec: , line:9:11, endln:9:28
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayTypespec/dut.sv, line:1:1, endln:13:10
+    |vpiRange:
+    \_range: , line:9:23, endln:9:28
+      |vpiParent:
+      \_packed_array_typespec: , line:9:11, endln:9:28
+      |vpiLeftRange:
+      \_constant: , line:9:24, endln:9:25
+        |vpiParent:
+        \_range: , line:9:23, endln:9:28
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:9:26, endln:9:27
+        |vpiParent:
+        \_range: , line:9:23, endln:9:28
+        |vpiDecompile:4
+        |vpiSize:64
+        |UINT:4
+        |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (fmt_unit_types_t), line:9:29, endln:9:45
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayTypespec/dut.sv, line:1:1, endln:13:10
+    |vpiName:fmt_unit_types_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top.fmt_unit_types_t.unit_type_t), line:9:11, endln:9:22
+      |vpiParent:
+      \_typedef_typespec: (fmt_unit_types_t), line:9:29, endln:9:45
+      |vpiName:unit_type_t
+      |vpiFullName:work@top.fmt_unit_types_t.unit_type_t
+      |vpiActual:
+      \_enum_typespec: (unit_type_t), line:3:12, endln:7:17
+  |vpiTypedef:
+  \_packed_array_typespec: , line:11:11, endln:11:33
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayTypespec/dut.sv, line:1:1, endln:13:10
+    |vpiRange:
+    \_range: , line:11:28, endln:11:33
+      |vpiParent:
+      \_packed_array_typespec: , line:11:11, endln:11:33
+      |vpiLeftRange:
+      \_constant: , line:11:29, endln:11:30
+        |vpiParent:
+        \_range: , line:11:28, endln:11:33
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:11:31, endln:11:32
+        |vpiParent:
+        \_range: , line:11:28, endln:11:33
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (opgrp_fmt_unit_types_t), line:11:34, endln:11:56
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayTypespec/dut.sv, line:1:1, endln:13:10
+    |vpiName:opgrp_fmt_unit_types_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top.opgrp_fmt_unit_types_t.fmt_unit_types_t), line:11:11, endln:11:27
+      |vpiParent:
+      \_typedef_typespec: (opgrp_fmt_unit_types_t), line:11:34, endln:11:56
+      |vpiName:fmt_unit_types_t
+      |vpiFullName:work@top.opgrp_fmt_unit_types_t.fmt_unit_types_t
+      |vpiActual:
+      \_typedef_typespec: (fmt_unit_types_t), line:9:29, endln:9:45
   |vpiImportTypespec:
   \_logic_typespec: , line:3:17, endln:3:28
   |vpiImportTypespec:
   \_enum_typespec: (unit_type_t), line:3:12, endln:7:17
+  |vpiImportTypespec:
+  \_typedef_typespec: (unit_type_t), line:7:5, endln:7:16
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:9:11, endln:9:28
+  |vpiImportTypespec:
+  \_typedef_typespec: (fmt_unit_types_t), line:9:29, endln:9:45
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:11:11, endln:11:33
+  |vpiImportTypespec:
+  \_typedef_typespec: (opgrp_fmt_unit_types_t), line:11:34, endln:11:56
   |vpiDefName:work@top
 ===================
 [  FATAL] : 0
@@ -187,7 +284,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PackedArrayTypespec/dut.sv | ${SURELOG_DIR}/build/regression/PackedArrayTypespec/roundtrip/dut_000.sv | 5 | 13 |
-============================== End RoundTrip Results ==============================

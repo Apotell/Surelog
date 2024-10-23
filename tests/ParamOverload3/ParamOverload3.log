@@ -649,7 +649,7 @@ param_assign                                           8
 parameter                                              8
 range                                                  2
 ref_obj                                               22
-ref_typespec                                          33
+ref_typespec                                          35
 ref_var                                                1
 return_stmt                                            1
 source_file                                            1
@@ -657,6 +657,7 @@ string_typespec                                       15
 struct_typespec                                        1
 sys_func_call                                          3
 tagged_pattern                                        15
+typedef_typespec                                       2
 typespec_member                                        2
 unsupported_typespec                                   3
 === UHDM Object Stats End ===
@@ -1166,6 +1167,18 @@ design: (unnamed)
     |vpiParent:
     \_package: fpnew_pkg (fpnew_pkg::), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:1:1, endln:41:11
   |vpiTypedef:
+  \_typedef_typespec: (fp_encoding_t), line:9:5, endln:9:18
+    |vpiParent:
+    \_package: fpnew_pkg (fpnew_pkg::), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:1:1, endln:41:11
+    |vpiName:fp_encoding_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (fpnew_pkg::fp_encoding_t), line:6:10, endln:9:4
+      |vpiParent:
+      \_typedef_typespec: (fp_encoding_t), line:9:5, endln:9:18
+      |vpiFullName:fpnew_pkg::fp_encoding_t
+      |vpiActual:
+      \_struct_typespec: (fpnew_pkg::fp_encoding_t), line:6:10, endln:9:4
+  |vpiTypedef:
   \_logic_typespec: , line:11:16, endln:11:42
     |vpiParent:
     \_package: fpnew_pkg (fpnew_pkg::), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:1:1, endln:41:11
@@ -1255,6 +1268,18 @@ design: (unnamed)
       |vpiDecompile:'d4
       |vpiSize:-1
   |vpiTypedef:
+  \_typedef_typespec: (fp_format_e), line:18:5, endln:18:16
+    |vpiParent:
+    \_package: fpnew_pkg (fpnew_pkg::), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:1:1, endln:41:11
+    |vpiName:fp_format_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (fpnew_pkg::fp_format_e), line:11:11, endln:18:4
+      |vpiParent:
+      \_typedef_typespec: (fp_format_e), line:18:5, endln:18:16
+      |vpiFullName:fpnew_pkg::fp_format_e
+      |vpiActual:
+      \_enum_typespec: (fpnew_pkg::fp_format_e), line:11:11, endln:18:17
+  |vpiTypedef:
   \_packed_array_typespec: , line:20:14, endln:20:48
     |vpiParent:
     \_package: fpnew_pkg (fpnew_pkg::), file:${SURELOG_DIR}/tests/ParamOverload3/dut.sv, line:1:1, endln:41:11
@@ -1298,7 +1323,7 @@ design: (unnamed)
       |vpiName:fp_encoding_t
       |vpiFullName:fpnew_pkg::fp_encoding_t
       |vpiActual:
-      \_struct_typespec: (fpnew_pkg::fp_encoding_t), line:6:10, endln:9:4
+      \_typedef_typespec: (fp_encoding_t), line:9:5, endln:9:18
   |vpiTypedef:
   \_unsupported_typespec: (fpu_features_t), line:29:14, endln:29:28
     |vpiParent:
@@ -1392,9 +1417,13 @@ design: (unnamed)
   |vpiImportTypespec:
   \_int_typespec: , line:8:5, endln:8:17
   |vpiImportTypespec:
+  \_typedef_typespec: (fp_encoding_t), line:9:5, endln:9:18
+  |vpiImportTypespec:
   \_logic_typespec: , line:11:16, endln:11:42
   |vpiImportTypespec:
   \_enum_typespec: (fpnew_pkg::fp_format_e), line:11:11, endln:18:17
+  |vpiImportTypespec:
+  \_typedef_typespec: (fp_format_e), line:18:5, endln:18:16
   |vpiImportTypespec:
   \_packed_array_typespec: , line:20:14, endln:20:48
   |vpiImportTypespec:
@@ -1816,7 +1845,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ParamOverload3/dut.sv | ${SURELOG_DIR}/build/regression/ParamOverload3/roundtrip/dut_000.sv | 27 | 64 |
-============================== End RoundTrip Results ==============================

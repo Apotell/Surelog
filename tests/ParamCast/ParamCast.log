@@ -380,9 +380,10 @@ param_assign                                           1
 parameter                                              1
 range                                                  2
 ref_obj                                                5
-ref_typespec                                          14
+ref_typespec                                          16
 source_file                                            1
 task                                                   9
+typedef_typespec                                       2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamCast/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ParamCast/slpp_all/checker/surelog.chk.html ...
@@ -781,8 +782,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/ParamCast/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1067,12 +1082,26 @@ design: (unnamed)
       |vpiDecompile:3
       |vpiSize:64
   |vpiTypedef:
+  \_typedef_typespec: (part_idx_e), line:8:5, endln:8:15
+    |vpiParent:
+    \_package: otp_ctrl_part_pkg (otp_ctrl_part_pkg::), file:${SURELOG_DIR}/tests/ParamCast/dut.sv, line:1:1, endln:12:11
+    |vpiName:part_idx_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_part_pkg::part_idx_e), line:3:9, endln:8:4
+      |vpiParent:
+      \_typedef_typespec: (part_idx_e), line:8:5, endln:8:15
+      |vpiFullName:otp_ctrl_part_pkg::part_idx_e
+      |vpiActual:
+      \_enum_typespec: (otp_ctrl_part_pkg::part_idx_e), line:3:9, endln:8:16
+  |vpiTypedef:
   \_int_typespec: , line:10:12, endln:10:15
     |vpiParent:
     \_package: otp_ctrl_part_pkg (otp_ctrl_part_pkg::), file:${SURELOG_DIR}/tests/ParamCast/dut.sv, line:1:1, endln:12:11
     |vpiSigned:1
   |vpiImportTypespec:
   \_enum_typespec: (otp_ctrl_part_pkg::part_idx_e), line:3:9, endln:8:16
+  |vpiImportTypespec:
+  \_typedef_typespec: (part_idx_e), line:8:5, endln:8:15
   |vpiImportTypespec:
   \_int_typespec: , line:10:12, endln:10:15
   |vpiDefName:otp_ctrl_part_pkg
@@ -1149,7 +1178,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ParamCast/dut.sv | ${SURELOG_DIR}/build/regression/ParamCast/roundtrip/dut_000.sv | 5 | 18 |
-============================== End RoundTrip Results ==============================

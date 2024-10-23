@@ -98,8 +98,9 @@ logic_var                                              1
 module_inst                                            2
 package                                                1
 range                                                  1
-ref_typespec                                           2
+ref_typespec                                           4
 source_file                                            1
+typedef_typespec                                       2
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EnumVar/slpp_all/surelog.uhdm ...
@@ -178,10 +179,39 @@ design: (unnamed)
       |INT:2
       |vpiDecompile:2
       |vpiSize:8
+  |vpiTypedef:
+  \_typedef_typespec: (enum_t), line:6:5, endln:6:11
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/EnumVar/dut.sv, line:1:1, endln:9:11
+    |vpiName:enum_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (pkg::enum_t), line:2:11, endln:6:4
+      |vpiParent:
+      \_typedef_typespec: (enum_t), line:6:5, endln:6:11
+      |vpiFullName:pkg::enum_t
+      |vpiActual:
+      \_enum_typespec: (pkg::enum_t), line:2:11, endln:6:12
+  |vpiTypedef:
+  \_typedef_typespec: (alias_t), line:8:18, endln:8:25
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/EnumVar/dut.sv, line:1:1, endln:9:11
+    |vpiName:alias_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (pkg::alias_t::enum_t), line:8:11, endln:8:17
+      |vpiParent:
+      \_typedef_typespec: (alias_t), line:8:18, endln:8:25
+      |vpiName:enum_t
+      |vpiFullName:pkg::alias_t::enum_t
+      |vpiActual:
+      \_typedef_typespec: (enum_t), line:6:5, endln:6:11
   |vpiImportTypespec:
   \_logic_typespec: , line:2:16, endln:2:26
   |vpiImportTypespec:
   \_enum_typespec: (pkg::enum_t), line:2:11, endln:6:12
+  |vpiImportTypespec:
+  \_typedef_typespec: (enum_t), line:6:5, endln:6:11
+  |vpiImportTypespec:
+  \_typedef_typespec: (alias_t), line:8:18, endln:8:25
   |vpiDefName:pkg
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/EnumVar/dut.sv, line:11:1, endln:14:10
@@ -230,7 +260,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/EnumVar/dut.sv | ${SURELOG_DIR}/build/regression/EnumVar/roundtrip/dut_000.sv | 6 | 14 |
-============================== End RoundTrip Results ==============================

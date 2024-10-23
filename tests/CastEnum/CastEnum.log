@@ -384,9 +384,10 @@ operation                                              1
 package                                                2
 range                                                  1
 ref_obj                                                3
-ref_typespec                                          13
+ref_typespec                                          15
 source_file                                            1
 task                                                   9
+typedef_typespec                                       2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CastEnum/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/CastEnum/slpp_all/checker/surelog.chk.html ...
@@ -785,8 +786,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/CastEnum/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1060,10 +1075,24 @@ design: (unnamed)
       |HEX:2
       |vpiDecompile:2'h2
       |vpiSize:2
+  |vpiTypedef:
+  \_typedef_typespec: (dtm_op_e), line:7:3, endln:7:11
+    |vpiParent:
+    \_package: dm (dm::), file:${SURELOG_DIR}/tests/CastEnum/dut.sv, line:1:1, endln:9:11
+    |vpiName:dtm_op_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (dm::dtm_op_e), line:3:9, endln:7:2
+      |vpiParent:
+      \_typedef_typespec: (dtm_op_e), line:7:3, endln:7:11
+      |vpiFullName:dm::dtm_op_e
+      |vpiActual:
+      \_enum_typespec: (dm::dtm_op_e), line:3:9, endln:7:12
   |vpiImportTypespec:
   \_logic_typespec: , line:3:14, endln:3:25
   |vpiImportTypespec:
   \_enum_typespec: (dm::dtm_op_e), line:3:9, endln:7:12
+  |vpiImportTypespec:
+  \_typedef_typespec: (dtm_op_e), line:7:3, endln:7:11
   |vpiDefName:dm
 |uhdmallModules:
 \_module_inst: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/CastEnum/dut.sv, line:12:1, endln:17:10
@@ -1149,7 +1178,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/CastEnum/dut.sv | ${SURELOG_DIR}/build/regression/CastEnum/roundtrip/dut_000.sv | 5 | 17 |
-============================== End RoundTrip Results ==============================

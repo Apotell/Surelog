@@ -16,10 +16,11 @@ param_assign                                           3
 parameter                                              3
 range                                                  2
 ref_obj                                                4
-ref_typespec                                           8
+ref_typespec                                           9
 source_file                                            1
 struct_typespec                                        1
 sys_func_call                                          3
+typedef_typespec                                       1
 typespec_member                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageEval/slpp_unit/surelog.uhdm ...
@@ -163,7 +164,7 @@ design: (unnamed)
         |vpiName:t_test
         |vpiFullName:test_pkg::t_test
         |vpiActual:
-        \_struct_typespec: (test_pkg::t_test), line:7:9, endln:10:2
+        \_typedef_typespec: (t_test), line:10:3, endln:10:9
       |vpiName:$bits
     |vpiLhs:
     \_parameter: (test_pkg::TEST_SIZE), line:11:11, endln:11:36
@@ -248,6 +249,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (t_test), line:10:3, endln:10:9
+    |vpiParent:
+    \_package: test_pkg (test_pkg::), file:${SURELOG_DIR}/tests/PackageEval/dut.sv, line:1:1, endln:14:11
+    |vpiName:t_test
+    |vpiTypedefAlias:
+    \_ref_typespec: (test_pkg::t_test), line:7:9, endln:10:2
+      |vpiParent:
+      \_typedef_typespec: (t_test), line:10:3, endln:10:9
+      |vpiFullName:test_pkg::t_test
+      |vpiActual:
+      \_struct_typespec: (test_pkg::t_test), line:7:9, endln:10:2
   |vpiImportTypespec:
   \_int_typespec: , line:3:12, endln:3:15
   |vpiImportTypespec:
@@ -260,6 +273,8 @@ design: (unnamed)
   \_logic_typespec: , line:8:5, endln:8:10
   |vpiImportTypespec:
   \_logic_typespec: , line:9:5, endln:9:17
+  |vpiImportTypespec:
+  \_typedef_typespec: (t_test), line:10:3, endln:10:9
   |vpiDefName:test_pkg
 ===================
 [  FATAL] : 0
@@ -267,7 +282,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PackageEval/dut.sv | ${SURELOG_DIR}/build/regression/PackageEval/roundtrip/dut_000.sv | 3 | 14 |
-============================== End RoundTrip Results ==============================

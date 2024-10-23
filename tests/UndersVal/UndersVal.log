@@ -352,9 +352,10 @@ logic_var                                              1
 module_inst                                            2
 package                                                1
 range                                                  1
-ref_typespec                                          12
+ref_typespec                                          14
 source_file                                            1
 task                                                   9
+typedef_typespec                                       2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UndersVal/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/UndersVal/slpp_all/checker/surelog.chk.html ...
@@ -753,8 +754,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/UndersVal/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1051,10 +1066,24 @@ design: (unnamed)
       |HEX:00000005
       |vpiDecompile:32'h00000005
       |vpiSize:32
+  |vpiTypedef:
+  \_typedef_typespec: (err_code_e), line:10:5, endln:10:15
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/UndersVal/dut.sv, line:1:1, endln:12:10
+    |vpiName:err_code_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@dut.err_code_e), line:3:11, endln:10:4
+      |vpiParent:
+      \_typedef_typespec: (err_code_e), line:10:5, endln:10:15
+      |vpiFullName:work@dut.err_code_e
+      |vpiActual:
+      \_enum_typespec: (err_code_e), line:3:11, endln:10:16
   |vpiImportTypespec:
   \_logic_typespec: , line:3:16, endln:3:28
   |vpiImportTypespec:
   \_enum_typespec: (err_code_e), line:3:11, endln:10:16
+  |vpiImportTypespec:
+  \_typedef_typespec: (err_code_e), line:10:5, endln:10:15
   |vpiDefName:work@dut
 ===================
 [  FATAL] : 0
@@ -1062,7 +1091,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/UndersVal/dut.sv | ${SURELOG_DIR}/build/regression/UndersVal/roundtrip/dut_000.sv | 9 | 12 |
-============================== End RoundTrip Results ==============================

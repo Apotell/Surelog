@@ -132,11 +132,12 @@ param_assign                                           2
 parameter                                              2
 range                                                  1
 ref_module                                             1
-ref_typespec                                           6
+ref_typespec                                           7
 source_file                                            1
 string_typespec                                        3
 struct_typespec                                        1
 tagged_pattern                                         3
+typedef_typespec                                       1
 typespec_member                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamNoImport/slpp_all/surelog.uhdm ...
@@ -242,6 +243,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (pwr_ast_rsp_t), line:8:3, endln:8:16
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
+    |vpiName:pwr_ast_rsp_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (pkg::pwr_ast_rsp_t), line:6:9, endln:8:2
+      |vpiParent:
+      \_typedef_typespec: (pwr_ast_rsp_t), line:8:3, endln:8:16
+      |vpiFullName:pkg::pwr_ast_rsp_t
+      |vpiActual:
+      \_struct_typespec: (pkg::pwr_ast_rsp_t), line:6:9, endln:8:2
+  |vpiTypedef:
   \_string_typespec: (slow_clk_val), line:10:3, endln:10:15
     |vpiParent:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
@@ -260,6 +273,8 @@ design: (unnamed)
   \_struct_typespec: (pkg::pwr_ast_rsp_t), line:6:9, endln:8:2
   |vpiImportTypespec:
   \_logic_typespec: , line:7:3, endln:7:14
+  |vpiImportTypespec:
+  \_typedef_typespec: (pwr_ast_rsp_t), line:8:3, endln:8:16
   |vpiImportTypespec:
   \_string_typespec: (slow_clk_val), line:10:3, endln:10:15
   |vpiImportTypespec:
@@ -314,7 +329,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 3
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ParamNoImport/dut.sv | ${SURELOG_DIR}/build/regression/ParamNoImport/roundtrip/dut_000.sv | 6 | 18 |
-============================== End RoundTrip Results ==============================

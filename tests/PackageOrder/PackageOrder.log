@@ -13,7 +13,9 @@ design                                                 1
 import_typespec                                        2
 logic_typespec                                         1
 package                                                3
+ref_typespec                                           1
 source_file                                            1
+typedef_typespec                                       1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageOrder/slpp_unit/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PackageOrder/slpp_unit/checker/surelog.chk.html ...
@@ -36,8 +38,22 @@ design: (unnamed)
     |vpiParent:
     \_package: B (B::), file:${SURELOG_DIR}/tests/PackageOrder/dut.sv, line:1:1, endln:3:11
     |vpiName:C
+  |vpiTypedef:
+  \_typedef_typespec: (C), line:2:17, endln:2:18
+    |vpiParent:
+    \_package: B (B::), file:${SURELOG_DIR}/tests/PackageOrder/dut.sv, line:1:1, endln:3:11
+    |vpiName:C
+    |vpiTypedefAlias:
+    \_ref_typespec: (B::C), line:2:11, endln:2:16
+      |vpiParent:
+      \_typedef_typespec: (C), line:2:17, endln:2:18
+      |vpiFullName:B::C
+      |vpiActual:
+      \_logic_typespec: (C), line:2:11, endln:2:16
   |vpiImportTypespec:
   \_logic_typespec: (C), line:2:11, endln:2:16
+  |vpiImportTypespec:
+  \_typedef_typespec: (C), line:2:17, endln:2:18
   |vpiDefName:B
 |uhdmallPackages:
 \_package: D (D::), file:${SURELOG_DIR}/tests/PackageOrder/dut.sv, line:5:1, endln:7:11
@@ -67,7 +83,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 3
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PackageOrder/dut.sv | ${SURELOG_DIR}/build/regression/PackageOrder/roundtrip/dut_000.sv | 3 | 12 |
-============================== End RoundTrip Results ==============================

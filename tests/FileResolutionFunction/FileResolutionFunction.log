@@ -47,8 +47,9 @@ io_decl                                                1
 range                                                  1
 real_typespec                                          3
 real_var                                               1
-ref_typespec                                           2
+ref_typespec                                           3
 source_file                                            1
+typedef_typespec                                       1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FileResolutionFunction/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/FileResolutionFunction/slpp_all/checker/surelog.chk.html ...
@@ -65,6 +66,18 @@ design: (unnamed)
   |vpiParent:
   \_design: (unnamed)
   |vpiName:my_real
+|vpiTypedef:
+\_typedef_typespec: (my_real), line:2:14, endln:2:21
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:my_real
+  |vpiTypedefAlias:
+  \_ref_typespec: (my_real), line:2:9, endln:2:13
+    |vpiParent:
+    \_typedef_typespec: (my_real), line:2:14, endln:2:21
+    |vpiFullName:my_real
+    |vpiActual:
+    \_real_typespec: (my_real), line:2:9, endln:2:13
 |vpiTaskFunc:
 \_function: (my_function2), line:4:1, endln:5:12
   |vpiParent:
@@ -146,7 +159,3 @@ design: (unnamed)
 [LINT]: ${SURELOG_DIR}/tests/FileResolutionFunction/dut.sv:4:20: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/FileResolutionFunction/dut.sv:4:44: Non synthesizable construct,
 ============================== End Linting Results ==============================
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/FileResolutionFunction/dut.sv | ${SURELOG_DIR}/build/regression/FileResolutionFunction/roundtrip/dut_000.sv | 2 | 5 |
-============================== End RoundTrip Results ==============================

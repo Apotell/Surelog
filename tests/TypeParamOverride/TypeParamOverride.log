@@ -140,10 +140,11 @@ module_inst                                            2
 package                                                1
 ref_module                                             1
 ref_obj                                                2
-ref_typespec                                           4
+ref_typespec                                           5
 source_file                                            1
 struct_typespec                                        1
 type_parameter                                         1
+typedef_typespec                                       1
 typespec_member                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypeParamOverride/slpp_all/surelog.uhdm ...
@@ -200,12 +201,26 @@ design: (unnamed)
   \_logic_typespec: , line:5:5, endln:5:10
     |vpiParent:
     \_package: ariane_axi_soc (ariane_axi_soc::), file:${SURELOG_DIR}/tests/TypeParamOverride/dut.sv, line:1:1, endln:8:11
+  |vpiTypedef:
+  \_typedef_typespec: (resp_slv_t), line:6:3, endln:6:13
+    |vpiParent:
+    \_package: ariane_axi_soc (ariane_axi_soc::), file:${SURELOG_DIR}/tests/TypeParamOverride/dut.sv, line:1:1, endln:8:11
+    |vpiName:resp_slv_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (ariane_axi_soc::resp_slv_t), line:3:9, endln:6:2
+      |vpiParent:
+      \_typedef_typespec: (resp_slv_t), line:6:3, endln:6:13
+      |vpiFullName:ariane_axi_soc::resp_slv_t
+      |vpiActual:
+      \_struct_typespec: (ariane_axi_soc::resp_slv_t), line:3:9, endln:6:2
   |vpiImportTypespec:
   \_struct_typespec: (ariane_axi_soc::resp_slv_t), line:3:9, endln:6:2
   |vpiImportTypespec:
   \_logic_typespec: , line:4:5, endln:4:10
   |vpiImportTypespec:
   \_logic_typespec: , line:5:5, endln:5:10
+  |vpiImportTypespec:
+  \_typedef_typespec: (resp_slv_t), line:6:3, endln:6:13
   |vpiDefName:ariane_axi_soc
 |uhdmallModules:
 \_module_inst: work@ariane_testharness (work@ariane_testharness), file:${SURELOG_DIR}/tests/TypeParamOverride/dut.sv, line:23:1, endln:31:10
@@ -325,7 +340,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 3
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/TypeParamOverride/dut.sv | ${SURELOG_DIR}/build/regression/TypeParamOverride/roundtrip/dut_000.sv | 13 | 31 |
-============================== End RoundTrip Results ==============================

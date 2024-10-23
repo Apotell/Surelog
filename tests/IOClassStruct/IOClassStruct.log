@@ -123,9 +123,10 @@ io_decl                                                1
 operation                                              1
 package                                                1
 ref_obj                                                4
-ref_typespec                                           3
+ref_typespec                                           4
 source_file                                            1
 struct_typespec                                        1
+typedef_typespec                                       1
 typespec_member                                        1
 unsupported_typespec                                   2
 === UHDM Object Stats End ===
@@ -172,10 +173,24 @@ design: (unnamed)
     \_int_typespec: , line:7:5, endln:7:17
       |vpiParent:
       \_class_defn: (uvm_pkg::uvm_resource_types), file:${SURELOG_DIR}/tests/IOClassStruct/dut.sv, line:3:1, endln:10:9
+    |vpiTypedef:
+    \_typedef_typespec: (access_t), line:8:5, endln:8:13
+      |vpiParent:
+      \_class_defn: (uvm_pkg::uvm_resource_types), file:${SURELOG_DIR}/tests/IOClassStruct/dut.sv, line:3:1, endln:10:9
+      |vpiName:access_t
+      |vpiTypedefAlias:
+      \_ref_typespec: (uvm_pkg::uvm_resource_types::access_t), line:5:11, endln:8:4
+        |vpiParent:
+        \_typedef_typespec: (access_t), line:8:5, endln:8:13
+        |vpiFullName:uvm_pkg::uvm_resource_types::access_t
+        |vpiActual:
+        \_struct_typespec: (access_t), line:5:11, endln:8:4
     |vpiImportTypespec:
     \_struct_typespec: (access_t), line:5:11, endln:8:4
     |vpiImportTypespec:
     \_int_typespec: , line:7:5, endln:7:17
+    |vpiImportTypespec:
+    \_typedef_typespec: (access_t), line:8:5, endln:8:13
   |vpiInternalScope:
   \_class_defn: (uvm_pkg::uvm_resource_base), file:${SURELOG_DIR}/tests/IOClassStruct/dut.sv, line:12:1, endln:28:9
     |vpiParent:
@@ -335,7 +350,3 @@ design: (unnamed)
 [LINT]: ${SURELOG_DIR}/tests/IOClassStruct/dut.sv:16:6: Non synthesizable construct, access_record
 [LINT]: ${SURELOG_DIR}/tests/IOClassStruct/dut.sv:12:1: Non synthesizable construct, uvm_resource_base
 ============================== End Linting Results ==============================
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/IOClassStruct/dut.sv | ${SURELOG_DIR}/build/regression/IOClassStruct/roundtrip/dut_000.sv | 6 | 30 |
-============================== End RoundTrip Results ==============================

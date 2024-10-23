@@ -215,10 +215,11 @@ param_assign                                           2
 parameter                                              2
 range                                                  1
 ref_obj                                                5
-ref_typespec                                           8
+ref_typespec                                           9
 return_stmt                                            1
 source_file                                            1
 struct_typespec                                        1
+typedef_typespec                                       1
 typespec_member                                        2
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
@@ -554,6 +555,18 @@ design: (unnamed)
     |vpiParent:
     \_package: uvm (uvm::), file:${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv, line:1:1, endln:21:11
   |vpiTypedef:
+  \_typedef_typespec: (fp_encoding_t), line:5:3, endln:5:16
+    |vpiParent:
+    \_package: uvm (uvm::), file:${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv, line:1:1, endln:21:11
+    |vpiName:fp_encoding_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (uvm::fp_encoding_t), line:2:9, endln:5:2
+      |vpiParent:
+      \_typedef_typespec: (fp_encoding_t), line:5:3, endln:5:16
+      |vpiFullName:uvm::fp_encoding_t
+      |vpiActual:
+      \_struct_typespec: (uvm::fp_encoding_t), line:2:9, endln:5:2
+  |vpiTypedef:
   \_packed_array_typespec: , line:8:12, endln:8:46
     |vpiParent:
     \_package: uvm (uvm::), file:${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv, line:1:1, endln:21:11
@@ -597,7 +610,7 @@ design: (unnamed)
       |vpiName:fp_encoding_t
       |vpiFullName:uvm::fp_encoding_t
       |vpiActual:
-      \_struct_typespec: (uvm::fp_encoding_t), line:2:9, endln:5:2
+      \_typedef_typespec: (fp_encoding_t), line:5:3, endln:5:16
   |vpiTypedef:
   \_unsupported_typespec: (fp_format_e), line:17:42, endln:17:53
     |vpiParent:
@@ -612,6 +625,8 @@ design: (unnamed)
   |vpiImportTypespec:
   \_int_typespec: , line:4:3, endln:4:15
   |vpiImportTypespec:
+  \_typedef_typespec: (fp_encoding_t), line:5:3, endln:5:16
+  |vpiImportTypespec:
   \_packed_array_typespec: , line:8:12, endln:8:46
   |vpiImportTypespec:
   \_unsupported_typespec: (fp_format_e), line:17:42, endln:17:53
@@ -624,7 +639,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv | ${SURELOG_DIR}/build/regression/PackedArrayHierPath/roundtrip/dut_000.sv | 8 | 21 |
-============================== End RoundTrip Results ==============================

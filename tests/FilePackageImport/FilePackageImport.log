@@ -85,15 +85,16 @@ package                                                1
 packed_array_typespec                                  1
 range                                                  2
 ref_obj                                                1
-ref_typespec                                           3
+ref_typespec                                           4
 return_stmt                                            1
 source_file                                            1
+typedef_typespec                                       1
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/FilePackageImport/dut.sv:11:12: Failed to bind object: "id: 25, name: we".
-[ERR:EL0535] ${SURELOG_DIR}/tests/FilePackageImport/dut.sv:11:12: Illegal implicit net "id:25, name: we".
-[ERR:IG0809] ${SURELOG_DIR}/tests/FilePackageImport/dut.sv:11:12: Object 25 actual cannot be null.
+[ERR:UH0734] ${SURELOG_DIR}/tests/FilePackageImport/dut.sv:11:12: Failed to bind object: "id: 27, name: we".
+[ERR:EL0535] ${SURELOG_DIR}/tests/FilePackageImport/dut.sv:11:12: Illegal implicit net "id:27, name: we".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FilePackageImport/slpp_all/surelog.uhdm ...
+[ERR:IG0809] ${SURELOG_DIR}/tests/FilePackageImport/dut.sv:11:12: Object 27 actual cannot be null.
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/FilePackageImport/slpp_all/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -109,6 +110,30 @@ design: (unnamed)
   \_design: (unnamed)
   |vpiName:pkg_b
   |vpiFullName:pkg_b::
+  |vpiTypedef:
+  \_packed_array_typespec: , line:3:9, endln:3:20
+    |vpiParent:
+    \_package: pkg_b (pkg_b::), file:${SURELOG_DIR}/tests/FilePackageImport/dut.sv, line:2:1, endln:5:19
+    |vpiRange:
+    \_range: , line:3:15, endln:3:20
+      |vpiParent:
+      \_packed_array_typespec: , line:3:9, endln:3:20
+      |vpiLeftRange:
+      \_constant: , line:3:16, endln:3:17
+        |vpiParent:
+        \_range: , line:3:15, endln:3:20
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:3:18, endln:3:19
+        |vpiParent:
+        \_range: , line:3:15, endln:3:20
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
   |vpiTypedef:
   \_logic_typespec: (DCacheWayPath), line:3:9, endln:3:20
     |vpiParent:
@@ -134,8 +159,24 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (DCacheWayPath), line:3:21, endln:3:34
+    |vpiParent:
+    \_package: pkg_b (pkg_b::), file:${SURELOG_DIR}/tests/FilePackageImport/dut.sv, line:2:1, endln:5:19
+    |vpiName:DCacheWayPath
+    |vpiTypedefAlias:
+    \_ref_typespec: (pkg_b::DCacheWayPath), line:3:9, endln:3:14
+      |vpiParent:
+      \_typedef_typespec: (DCacheWayPath), line:3:21, endln:3:34
+      |vpiFullName:pkg_b::DCacheWayPath
+      |vpiActual:
+      \_logic_typespec: (DCacheWayPath), line:3:9, endln:3:20
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:3:9, endln:3:20
   |vpiImportTypespec:
   \_logic_typespec: (DCacheWayPath), line:3:9, endln:3:20
+  |vpiImportTypespec:
+  \_typedef_typespec: (DCacheWayPath), line:3:21, endln:3:34
   |vpiDefName:pkg_b
   |vpiEndLabel:pkg_b
 |vpiTypedef:
@@ -235,7 +276,3 @@ design: (unnamed)
 [LINT]: ${SURELOG_DIR}/tests/FilePackageImport/dut.sv:10:37: Unsupported typespec, DCacheWayPath
 [LINT]:   \_ :0:0:
 ============================== End Linting Results ==============================
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/FilePackageImport/dut.sv | ${SURELOG_DIR}/build/regression/FilePackageImport/roundtrip/dut_000.sv | 5 | 12 |
-============================== End RoundTrip Results ==============================

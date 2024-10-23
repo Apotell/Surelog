@@ -56,9 +56,10 @@ design                                                 1
 logic_typespec                                         1
 package                                                1
 range                                                  1
-ref_typespec                                           1
+ref_typespec                                           3
 source_file                                            1
 struct_typespec                                        1
+typedef_typespec                                       2
 typespec_member                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/VarRangeTypedef/slpp_all/surelog.uhdm ...
@@ -99,10 +100,65 @@ design: (unnamed)
   \_logic_typespec: , line:3:7, endln:3:12
     |vpiParent:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/VarRangeTypedef/dut.sv, line:1:1, endln:6:11
+  |vpiTypedef:
+  \_typedef_typespec: (a), line:4:6, endln:4:7
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/VarRangeTypedef/dut.sv, line:1:1, endln:6:11
+    |vpiName:a
+    |vpiTypedefAlias:
+    \_ref_typespec: (pkg::a), line:2:12, endln:4:5
+      |vpiParent:
+      \_typedef_typespec: (a), line:4:6, endln:4:7
+      |vpiFullName:pkg::a
+      |vpiActual:
+      \_struct_typespec: (pkg::a), line:2:12, endln:4:5
+  |vpiTypedef:
+  \_array_typespec: , line:5:12, endln:5:20
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/VarRangeTypedef/dut.sv, line:1:1, endln:6:11
+    |vpiRange:
+    \_range: , line:5:15, endln:5:20
+      |vpiParent:
+      \_array_typespec: , line:5:12, endln:5:20
+      |vpiLeftRange:
+      \_constant: , line:5:16, endln:5:17
+        |vpiParent:
+        \_range: , line:5:15, endln:5:20
+        |vpiDecompile:5
+        |vpiSize:64
+        |UINT:5
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:5:18, endln:5:19
+        |vpiParent:
+        \_range: , line:5:15, endln:5:20
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (b), line:5:14, endln:5:15
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/VarRangeTypedef/dut.sv, line:1:1, endln:6:11
+    |vpiName:b
+    |vpiTypedefAlias:
+    \_ref_typespec: (pkg::b::a), line:5:12, endln:5:13
+      |vpiParent:
+      \_typedef_typespec: (b), line:5:14, endln:5:15
+      |vpiName:a
+      |vpiFullName:pkg::b::a
+      |vpiActual:
+      \_typedef_typespec: (a), line:4:6, endln:4:7
   |vpiImportTypespec:
   \_struct_typespec: (pkg::a), line:2:12, endln:4:5
   |vpiImportTypespec:
   \_logic_typespec: , line:3:7, endln:3:12
+  |vpiImportTypespec:
+  \_typedef_typespec: (a), line:4:6, endln:4:7
+  |vpiImportTypespec:
+  \_array_typespec: , line:5:12, endln:5:20
+  |vpiImportTypespec:
+  \_typedef_typespec: (b), line:5:14, endln:5:15
   |vpiDefName:pkg
 ===================
 [  FATAL] : 0
@@ -110,7 +166,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/VarRangeTypedef/dut.sv | ${SURELOG_DIR}/build/regression/VarRangeTypedef/roundtrip/dut_000.sv | 1 | 6 |
-============================== End RoundTrip Results ==============================

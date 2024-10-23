@@ -31,11 +31,12 @@ param_assign                                           3
 parameter                                              3
 range                                                  4
 ref_obj                                                4
-ref_typespec                                          19
+ref_typespec                                          22
 source_file                                            1
 struct_typespec                                        1
 sys_func_call                                          1
 task                                                   9
+typedef_typespec                                       3
 typespec_member                                        4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterpElab1/slpp_unit/surelog.uhdm ...
@@ -435,8 +436,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/InterpElab1/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -817,6 +832,18 @@ design: (unnamed)
       |vpiDecompile:2'b11
       |vpiSize:2
   |vpiTypedef:
+  \_typedef_typespec: (dummy_instr_e), line:11:7, endln:11:20
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/InterpElab1/dut.sv, line:1:1, endln:21:10
+    |vpiName:dummy_instr_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@dut.dummy_instr_e), line:6:13, endln:11:6
+      |vpiParent:
+      \_typedef_typespec: (dummy_instr_e), line:11:7, endln:11:20
+      |vpiFullName:work@dut.dummy_instr_e
+      |vpiActual:
+      \_enum_typespec: (dummy_instr_e), line:6:13, endln:11:21
+  |vpiTypedef:
   \_struct_typespec: (lfsr_data_t), line:13:13, endln:18:6
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/InterpElab1/dut.sv, line:1:1, endln:21:10
@@ -983,6 +1010,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (lfsr_data_t), line:18:7, endln:18:18
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/InterpElab1/dut.sv, line:1:1, endln:21:10
+    |vpiName:lfsr_data_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@dut.lfsr_data_t), line:13:13, endln:18:6
+      |vpiParent:
+      \_typedef_typespec: (lfsr_data_t), line:18:7, endln:18:18
+      |vpiFullName:work@dut.lfsr_data_t
+      |vpiActual:
+      \_struct_typespec: (lfsr_data_t), line:13:13, endln:18:6
+  |vpiTypedef:
   \_int_typespec: , line:19:16, endln:19:28
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/InterpElab1/dut.sv, line:1:1, endln:21:10
@@ -995,6 +1034,8 @@ design: (unnamed)
   |vpiImportTypespec:
   \_enum_typespec: (dummy_instr_e), line:6:13, endln:11:21
   |vpiImportTypespec:
+  \_typedef_typespec: (dummy_instr_e), line:11:7, endln:11:20
+  |vpiImportTypespec:
   \_struct_typespec: (lfsr_data_t), line:13:13, endln:18:6
   |vpiImportTypespec:
   \_logic_typespec: , line:15:7, endln:15:23
@@ -1002,6 +1043,8 @@ design: (unnamed)
   \_logic_typespec: , line:16:7, endln:16:23
   |vpiImportTypespec:
   \_logic_typespec: , line:17:7, endln:17:32
+  |vpiImportTypespec:
+  \_typedef_typespec: (lfsr_data_t), line:18:7, endln:18:18
   |vpiImportTypespec:
   \_int_typespec: , line:19:16, endln:19:28
   |vpiDefName:work@dut
@@ -1011,7 +1054,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/InterpElab1/dut.sv | ${SURELOG_DIR}/build/regression/InterpElab1/roundtrip/dut_000.sv | 6 | 21 |
-============================== End RoundTrip Results ==============================

@@ -389,12 +389,13 @@ package                                                2
 param_assign                                           2
 parameter                                              2
 range                                                  1
-ref_typespec                                          22
+ref_typespec                                          24
 source_file                                            1
 string_typespec                                        6
 struct_typespec                                        1
 tagged_pattern                                         6
 task                                                   9
+typedef_typespec                                       2
 typespec_member                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LargeHexCast/slpp_all/surelog.uhdm ...
@@ -794,8 +795,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/LargeHexCast/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1145,6 +1160,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (app_config_t), line:4:6, endln:4:18
+    |vpiParent:
+    \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
+    |vpiName:app_config_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (kmac_pkg::app_config_t), line:2:12, endln:4:5
+      |vpiParent:
+      \_typedef_typespec: (app_config_t), line:4:6, endln:4:18
+      |vpiFullName:kmac_pkg::app_config_t
+      |vpiActual:
+      \_struct_typespec: (kmac_pkg::app_config_t), line:2:12, endln:4:5
+  |vpiTypedef:
   \_string_typespec: (Prefix), line:7:7, endln:7:13
     |vpiParent:
     \_package: kmac_pkg (kmac_pkg::), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
@@ -1179,6 +1206,8 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:3:7, endln:3:19
   |vpiImportTypespec:
+  \_typedef_typespec: (app_config_t), line:4:6, endln:4:18
+  |vpiImportTypespec:
   \_string_typespec: (Prefix), line:7:7, endln:7:13
   |vpiImportTypespec:
   \_string_typespec: (Prefix), line:7:7, endln:7:13
@@ -1209,7 +1238,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/LargeHexCast/dut.sv | ${SURELOG_DIR}/build/regression/LargeHexCast/roundtrip/dut_000.sv | 8 | 17 |
-============================== End RoundTrip Results ==============================

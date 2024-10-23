@@ -877,9 +877,10 @@ param_assign                                          14
 parameter                                             14
 range                                                 13
 ref_obj                                               43
-ref_typespec                                          39
+ref_typespec                                          41
 source_file                                            1
 task                                                   9
+typedef_typespec                                       2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageValue/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PackageValue/slpp_all/checker/surelog.chk.html ...
@@ -1278,8 +1279,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/PackageValue/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1526,10 +1541,24 @@ design: (unnamed)
       |UINT:0
       |vpiDecompile:0
       |vpiSize:64
+  |vpiTypedef:
+  \_typedef_typespec: (impl_e), line:7:5, endln:7:11
+    |vpiParent:
+    \_package: prim_pkg (prim_pkg::), file:${SURELOG_DIR}/tests/PackageValue/top.sv, line:1:1, endln:9:11
+    |vpiName:impl_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (prim_pkg::impl_e), line:4:11, endln:7:4
+      |vpiParent:
+      \_typedef_typespec: (impl_e), line:7:5, endln:7:11
+      |vpiFullName:prim_pkg::impl_e
+      |vpiActual:
+      \_enum_typespec: (prim_pkg::impl_e), line:4:11, endln:7:12
   |vpiImportTypespec:
   \_integer_typespec: , line:4:16, endln:4:23
   |vpiImportTypespec:
   \_enum_typespec: (prim_pkg::impl_e), line:4:11, endln:7:12
+  |vpiImportTypespec:
+  \_typedef_typespec: (impl_e), line:7:5, endln:7:11
   |vpiDefName:prim_pkg
 |uhdmallPackages:
 \_package: riscv (riscv::), file:${SURELOG_DIR}/tests/PackageValue/top.sv, line:37:1, endln:53:11
@@ -2582,7 +2611,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 4
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PackageValue/top.sv | ${SURELOG_DIR}/build/regression/PackageValue/roundtrip/top_000.sv | 35 | 72 |
-============================== End RoundTrip Results ==============================

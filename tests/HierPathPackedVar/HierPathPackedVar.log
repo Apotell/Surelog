@@ -288,15 +288,16 @@ parameter                                              1
 port                                                   1
 range                                                  8
 ref_obj                                                8
-ref_typespec                                          12
+ref_typespec                                          13
 source_file                                            1
 struct_typespec                                        1
 type_parameter                                         1
+typedef_typespec                                       1
 typespec_member                                        9
 unsupported_typespec                                   2
 === UHDM Object Stats End ===
-[ERR:IG0807] ${SURELOG_DIR}/tests/HierPathPackedVar/dut.sv:19:19: Child 72 is not entirely in parent's scope.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathPackedVar/slpp_all/surelog.uhdm ...
+[ERR:IG0807] ${SURELOG_DIR}/tests/HierPathPackedVar/dut.sv:19:19: Child 74 is not entirely in parent's scope.
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/HierPathPackedVar/slpp_all/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -564,6 +565,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (bypass_req_t), line:12:3, endln:12:15
+    |vpiParent:
+    \_package: std_cache_pkg (std_cache_pkg::), file:${SURELOG_DIR}/tests/HierPathPackedVar/dut.sv, line:1:1, endln:14:11
+    |vpiName:bypass_req_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (std_cache_pkg::bypass_req_t), line:2:12, endln:12:2
+      |vpiParent:
+      \_typedef_typespec: (bypass_req_t), line:12:3, endln:12:15
+      |vpiFullName:std_cache_pkg::bypass_req_t
+      |vpiActual:
+      \_struct_typespec: (std_cache_pkg::bypass_req_t), line:2:12, endln:12:2
   |vpiImportTypespec:
   \_struct_typespec: (std_cache_pkg::bypass_req_t), line:2:12, endln:12:2
   |vpiImportTypespec:
@@ -584,6 +597,8 @@ design: (unnamed)
   \_logic_typespec: , line:10:5, endln:10:16
   |vpiImportTypespec:
   \_logic_typespec: , line:11:5, endln:11:16
+  |vpiImportTypespec:
+  \_typedef_typespec: (bypass_req_t), line:12:3, endln:12:15
   |vpiDefName:std_cache_pkg
 |uhdmallModules:
 \_module_inst: work@axi_adapter_arbiter (work@axi_adapter_arbiter), file:${SURELOG_DIR}/tests/HierPathPackedVar/dut.sv, line:16:1, endln:26:10
@@ -827,7 +842,3 @@ design: (unnamed)
 [  ERROR] : 1
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/HierPathPackedVar/dut.sv | ${SURELOG_DIR}/build/regression/HierPathPackedVar/roundtrip/dut_000.sv | 12 | 26 |
-============================== End RoundTrip Results ==============================

@@ -91,8 +91,9 @@ logic_typespec                                         1
 module_inst                                            2
 port                                                   1
 range                                                  1
-ref_typespec                                           4
+ref_typespec                                           5
 source_file                                            2
+typedef_typespec                                       1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/AllBinding/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/AllBinding/slpp_all/checker/surelog.chk.html ...
@@ -222,14 +223,21 @@ design: (unnamed)
     |BIN:10
     |vpiDecompile:2'b10
     |vpiSize:2
+|vpiTypedef:
+\_typedef_typespec: (type_scr1_mem_resp_e), line:5:3, endln:5:23
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:type_scr1_mem_resp_e
+  |vpiTypedefAlias:
+  \_ref_typespec: (type_scr1_mem_resp_e), line:1:9, endln:5:2
+    |vpiParent:
+    \_typedef_typespec: (type_scr1_mem_resp_e), line:5:3, endln:5:23
+    |vpiFullName:type_scr1_mem_resp_e
+    |vpiActual:
+    \_enum_typespec: (type_scr1_mem_resp_e), line:1:9, endln:5:24
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/AllBinding/dut.sv  | ${SURELOG_DIR}/build/regression/AllBinding/roundtrip/dut_000.sv  | 4 | 5 |
-[roundtrip]: ${SURELOG_DIR}/tests/AllBinding/enum.sv | ${SURELOG_DIR}/build/regression/AllBinding/roundtrip/enum_000.sv | 3 | 4 |
-============================== End RoundTrip Results ==============================

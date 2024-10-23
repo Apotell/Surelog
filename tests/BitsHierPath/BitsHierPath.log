@@ -262,11 +262,12 @@ port                                                   1
 range                                                  1
 ref_module                                             4
 ref_obj                                                3
-ref_typespec                                           6
+ref_typespec                                           7
 source_file                                            1
 struct_net                                             1
 struct_typespec                                        1
 sys_func_call                                          1
+typedef_typespec                                       1
 typespec_member                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BitsHierPath/slpp_all/surelog.uhdm ...
@@ -343,12 +344,26 @@ design: (unnamed)
   \_logic_typespec: , line:4:5, endln:4:10
     |vpiParent:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:1:1, endln:6:17
+  |vpiTypedef:
+  \_typedef_typespec: (struct_t), line:5:5, endln:5:13
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:1:1, endln:6:17
+    |vpiName:struct_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (pkg::struct_t), line:2:11, endln:5:4
+      |vpiParent:
+      \_typedef_typespec: (struct_t), line:5:5, endln:5:13
+      |vpiFullName:pkg::struct_t
+      |vpiActual:
+      \_struct_typespec: (pkg::struct_t), line:2:11, endln:5:4
   |vpiImportTypespec:
   \_struct_typespec: (pkg::struct_t), line:2:11, endln:5:4
   |vpiImportTypespec:
   \_logic_typespec: , line:3:5, endln:3:15
   |vpiImportTypespec:
   \_logic_typespec: , line:4:5, endln:4:10
+  |vpiImportTypespec:
+  \_typedef_typespec: (struct_t), line:5:5, endln:5:13
   |vpiDefName:pkg
   |vpiEndLabel:pkg
 |uhdmallModules:
@@ -542,7 +557,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 3
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/BitsHierPath/dut.sv | ${SURELOG_DIR}/build/regression/BitsHierPath/roundtrip/dut_000.sv | 10 | 17 |
-============================== End RoundTrip Results ==============================

@@ -453,9 +453,10 @@ operation                                              5
 package                                                2
 range                                                  1
 ref_obj                                                5
-ref_typespec                                          12
+ref_typespec                                          14
 source_file                                            1
 task                                                   9
+typedef_typespec                                       2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CaseInside/slpp_unit/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/CaseInside/slpp_unit/checker/surelog.chk.html ...
@@ -854,8 +855,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/CaseInside/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1129,10 +1144,24 @@ design: (unnamed)
       |HEX:12
       |vpiDecompile:8'h12
       |vpiSize:8
+  |vpiTypedef:
+  \_typedef_typespec: (dm_csr_e), line:8:5, endln:8:13
+    |vpiParent:
+    \_package: dm (dm::), file:${SURELOG_DIR}/tests/CaseInside/top.sv, line:1:1, endln:10:16
+    |vpiName:dm_csr_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (dm::dm_csr_e), line:4:11, endln:8:4
+      |vpiParent:
+      \_typedef_typespec: (dm_csr_e), line:8:5, endln:8:13
+      |vpiFullName:dm::dm_csr_e
+      |vpiActual:
+      \_enum_typespec: (dm::dm_csr_e), line:4:11, endln:8:14
   |vpiImportTypespec:
   \_logic_typespec: , line:4:16, endln:4:27
   |vpiImportTypespec:
   \_enum_typespec: (dm::dm_csr_e), line:4:11, endln:8:14
+  |vpiImportTypespec:
+  \_typedef_typespec: (dm_csr_e), line:8:5, endln:8:13
   |vpiDefName:dm
   |vpiEndLabel:dm
 |uhdmallModules:
@@ -1339,7 +1368,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/CaseInside/top.sv | ${SURELOG_DIR}/build/regression/CaseInside/roundtrip/top_000.sv | 10 | 29 |
-============================== End RoundTrip Results ==============================

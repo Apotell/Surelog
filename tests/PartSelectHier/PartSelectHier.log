@@ -131,10 +131,11 @@ package                                                1
 part_select                                            1
 range                                                  3
 ref_obj                                                2
-ref_typespec                                           3
+ref_typespec                                           4
 source_file                                            1
 struct_net                                             1
 struct_typespec                                        1
+typedef_typespec                                       1
 typespec_member                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PartSelectHier/slpp_all/surelog.uhdm ...
@@ -195,10 +196,24 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (tl_d2h_t), line:4:5, endln:4:13
+    |vpiParent:
+    \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/PartSelectHier/dut.sv, line:1:1, endln:5:11
+    |vpiName:tl_d2h_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (tlul_pkg::tl_d2h_t), line:2:11, endln:4:4
+      |vpiParent:
+      \_typedef_typespec: (tl_d2h_t), line:4:5, endln:4:13
+      |vpiFullName:tlul_pkg::tl_d2h_t
+      |vpiActual:
+      \_struct_typespec: (tlul_pkg::tl_d2h_t), line:2:11, endln:4:4
   |vpiImportTypespec:
   \_struct_typespec: (tlul_pkg::tl_d2h_t), line:2:11, endln:4:4
   |vpiImportTypespec:
   \_logic_typespec: , line:3:5, endln:3:18
+  |vpiImportTypespec:
+  \_typedef_typespec: (tl_d2h_t), line:4:5, endln:4:13
   |vpiDefName:tlul_pkg
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/PartSelectHier/dut.sv, line:6:1, endln:10:10
@@ -330,7 +345,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PartSelectHier/dut.sv | ${SURELOG_DIR}/build/regression/PartSelectHier/roundtrip/dut_000.sv | 4 | 10 |
-============================== End RoundTrip Results ==============================

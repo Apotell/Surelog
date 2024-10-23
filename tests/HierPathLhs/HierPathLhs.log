@@ -170,16 +170,17 @@ packed_array_typespec                                  1
 packed_array_var                                       1
 range                                                  4
 ref_obj                                                6
-ref_typespec                                           4
+ref_typespec                                           5
 ref_var                                                1
 source_file                                            1
 struct_typespec                                        1
+typedef_typespec                                       1
 typespec_member                                        1
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
-[ERR:IG0809] ${SURELOG_DIR}/tests/HierPathLhs/dut.sv:15:12: Object 33 actual cannot be null.
-[ERR:IG0807] ${SURELOG_DIR}/tests/HierPathLhs/dut.sv:15:18: Child 36 is not entirely in parent's scope.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathLhs/slpp_all/surelog.uhdm ...
+[ERR:IG0809] ${SURELOG_DIR}/tests/HierPathLhs/dut.sv:15:12: Object 35 actual cannot be null.
+[ERR:IG0807] ${SURELOG_DIR}/tests/HierPathLhs/dut.sv:15:18: Child 38 is not entirely in parent's scope.
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/HierPathLhs/slpp_all/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -408,6 +409,18 @@ design: (unnamed)
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathLhs/dut.sv, line:8:1, endln:16:10
     |vpiSigned:1
   |vpiTypedef:
+  \_typedef_typespec: (struct_t), line:11:5, endln:11:13
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathLhs/dut.sv, line:8:1, endln:16:10
+    |vpiName:struct_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top.struct_t), line:9:11, endln:11:4
+      |vpiParent:
+      \_typedef_typespec: (struct_t), line:11:5, endln:11:13
+      |vpiFullName:work@top.struct_t
+      |vpiActual:
+      \_struct_typespec: (struct_t), line:9:11, endln:11:4
+  |vpiTypedef:
   \_packed_array_typespec: , line:13:3, endln:13:22
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathLhs/dut.sv, line:8:1, endln:16:10
@@ -458,11 +471,13 @@ design: (unnamed)
       |vpiName:struct_t
       |vpiFullName:work@top.struct_t
       |vpiActual:
-      \_struct_typespec: (struct_t), line:9:11, endln:11:4
+      \_typedef_typespec: (struct_t), line:11:5, endln:11:13
   |vpiImportTypespec:
   \_struct_typespec: (struct_t), line:9:11, endln:11:4
   |vpiImportTypespec:
   \_int_typespec: , line:10:5, endln:10:8
+  |vpiImportTypespec:
+  \_typedef_typespec: (struct_t), line:11:5, endln:11:13
   |vpiImportTypespec:
   \_packed_array_typespec: , line:13:3, endln:13:22
   |vpiImportTypespec:
@@ -545,7 +560,3 @@ design: (unnamed)
 [  ERROR] : 2
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/HierPathLhs/dut.sv | ${SURELOG_DIR}/build/regression/HierPathLhs/roundtrip/dut_000.sv | 10 | 16 |
-============================== End RoundTrip Results ==============================

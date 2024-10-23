@@ -329,11 +329,12 @@ port                                                   2
 range                                                  2
 ref_module                                             1
 ref_obj                                               14
-ref_typespec                                          27
+ref_typespec                                          31
 source_file                                            1
 string_typespec                                        9
 struct_typespec                                        2
 tagged_pattern                                         9
+typedef_typespec                                       4
 typespec_member                                        3
 unsupported_typespec                                   2
 === UHDM Object Stats End ===
@@ -709,6 +710,18 @@ design: (unnamed)
       |vpiDecompile:4'h9
       |vpiSize:4
   |vpiTypedef:
+  \_typedef_typespec: (mubi4_t), line:14:5, endln:14:12
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
+    |vpiName:mubi4_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (pkg::mubi4_t), line:11:11, endln:14:4
+      |vpiParent:
+      \_typedef_typespec: (mubi4_t), line:14:5, endln:14:12
+      |vpiFullName:pkg::mubi4_t
+      |vpiActual:
+      \_enum_typespec: (pkg::mubi4_t), line:11:11, endln:14:13
+  |vpiTypedef:
   \_logic_typespec: , line:15:16, endln:15:27
     |vpiParent:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
@@ -777,6 +790,18 @@ design: (unnamed)
       |vpiDecompile:3
       |vpiSize:2
   |vpiTypedef:
+  \_typedef_typespec: (flash_lcmgr_phase_e), line:20:5, endln:20:24
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
+    |vpiName:flash_lcmgr_phase_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (pkg::flash_lcmgr_phase_e), line:15:11, endln:20:4
+      |vpiParent:
+      \_typedef_typespec: (flash_lcmgr_phase_e), line:20:5, endln:20:24
+      |vpiFullName:pkg::flash_lcmgr_phase_e
+      |vpiActual:
+      \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:11, endln:20:25
+  |vpiTypedef:
   \_struct_typespec: (pkg::mp_region_cfg_t), line:21:11, endln:23:4
     |vpiParent:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
@@ -795,6 +820,18 @@ design: (unnamed)
         |vpiFullName:pkg::mp_region_cfg_t::en::mubi4_t
         |vpiActual:
         \_enum_typespec: (pkg::mubi4_t), line:11:11, endln:14:13
+  |vpiTypedef:
+  \_typedef_typespec: (mp_region_cfg_t), line:23:5, endln:23:20
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
+    |vpiName:mp_region_cfg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (pkg::mp_region_cfg_t), line:21:11, endln:23:4
+      |vpiParent:
+      \_typedef_typespec: (mp_region_cfg_t), line:23:5, endln:23:20
+      |vpiFullName:pkg::mp_region_cfg_t
+      |vpiActual:
+      \_struct_typespec: (pkg::mp_region_cfg_t), line:21:11, endln:23:4
   |vpiTypedef:
   \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
     |vpiParent:
@@ -827,6 +864,18 @@ design: (unnamed)
         |vpiFullName:pkg::data_region_attr_t::cfg::mp_region_cfg_t
         |vpiActual:
         \_struct_typespec: (pkg::mp_region_cfg_t), line:21:11, endln:23:4
+  |vpiTypedef:
+  \_typedef_typespec: (data_region_attr_t), line:27:5, endln:27:23
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:6:1, endln:33:11
+    |vpiName:data_region_attr_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
+      |vpiParent:
+      \_typedef_typespec: (data_region_attr_t), line:27:5, endln:27:23
+      |vpiFullName:pkg::data_region_attr_t
+      |vpiActual:
+      \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
   |vpiTypedef:
   \_string_typespec: (phase), line:29:8, endln:29:13
     |vpiParent:
@@ -885,13 +934,21 @@ design: (unnamed)
   |vpiImportTypespec:
   \_enum_typespec: (pkg::mubi4_t), line:11:11, endln:14:13
   |vpiImportTypespec:
+  \_typedef_typespec: (mubi4_t), line:14:5, endln:14:12
+  |vpiImportTypespec:
   \_logic_typespec: , line:15:16, endln:15:27
   |vpiImportTypespec:
   \_enum_typespec: (pkg::flash_lcmgr_phase_e), line:15:11, endln:20:25
   |vpiImportTypespec:
+  \_typedef_typespec: (flash_lcmgr_phase_e), line:20:5, endln:20:24
+  |vpiImportTypespec:
   \_struct_typespec: (pkg::mp_region_cfg_t), line:21:11, endln:23:4
   |vpiImportTypespec:
+  \_typedef_typespec: (mp_region_cfg_t), line:23:5, endln:23:20
+  |vpiImportTypespec:
   \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
+  |vpiImportTypespec:
+  \_typedef_typespec: (data_region_attr_t), line:27:5, endln:27:23
   |vpiImportTypespec:
   \_string_typespec: (phase), line:29:8, endln:29:13
   |vpiImportTypespec:
@@ -959,7 +1016,7 @@ design: (unnamed)
       |vpiName:data_region_attr_t
       |vpiFullName:work@foo.DATA_REG.data_region_attr_t
       |vpiActual:
-      \_struct_typespec: (pkg::data_region_attr_t), line:24:11, endln:27:4
+      \_typedef_typespec: (data_region_attr_t), line:27:5, endln:27:23
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv, line:40:1, endln:44:10
   |vpiParent:
@@ -999,7 +1056,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 4
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/AssignmentPatternInAssignmentPattern/dut.sv | ${SURELOG_DIR}/build/regression/AssignmentPatternInAssignmentPattern/roundtrip/dut_000.sv | 18 | 44 |
-============================== End RoundTrip Results ==============================

@@ -167,11 +167,12 @@ parameter                                              2
 range                                                  2
 ref_module                                             1
 ref_obj                                                1
-ref_typespec                                           7
+ref_typespec                                           8
 source_file                                            1
 string_typespec                                        2
 struct_typespec                                        1
 tagged_pattern                                         2
+typedef_typespec                                       1
 typespec_member                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/OpTypespec/slpp_all/surelog.uhdm ...
@@ -316,6 +317,18 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/OpTypespec/dut.sv, line:8:1, endln:21:10
   |vpiTypedef:
+  \_typedef_typespec: (pmp_cfg_t), line:12:3, endln:12:12
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/OpTypespec/dut.sv, line:8:1, endln:21:10
+    |vpiName:pmp_cfg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@dut.pmp_cfg_t), line:9:9, endln:12:2
+      |vpiParent:
+      \_typedef_typespec: (pmp_cfg_t), line:12:3, endln:12:12
+      |vpiFullName:work@dut.pmp_cfg_t
+      |vpiActual:
+      \_struct_typespec: (pmp_cfg_t), line:9:9, endln:12:2
+  |vpiTypedef:
   \_array_typespec: , line:14:12, endln:14:36
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/OpTypespec/dut.sv, line:8:1, endln:21:10
@@ -344,6 +357,8 @@ design: (unnamed)
   \_logic_typespec: , line:10:3, endln:10:8
   |vpiImportTypespec:
   \_logic_typespec: , line:11:3, endln:11:8
+  |vpiImportTypespec:
+  \_typedef_typespec: (pmp_cfg_t), line:12:3, endln:12:12
   |vpiImportTypespec:
   \_array_typespec: , line:14:12, endln:14:36
   |vpiImportTypespec:
@@ -447,7 +462,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/OpTypespec/dut.sv | ${SURELOG_DIR}/build/regression/OpTypespec/roundtrip/dut_000.sv | 12 | 21 |
-============================== End RoundTrip Results ==============================

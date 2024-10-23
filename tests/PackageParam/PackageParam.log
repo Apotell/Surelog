@@ -507,15 +507,16 @@ param_assign                                           7
 parameter                                              7
 range                                                  3
 ref_obj                                               11
-ref_typespec                                          26
+ref_typespec                                          28
 source_file                                            1
 sys_func_call                                          3
 task                                                   9
+typedef_typespec                                       2
 === UHDM Object Stats End ===
 [ERR:UH0734] ${SURELOG_DIR}/tests/PackageParam/dut.sv:10:23: Failed to bind object: "id: 30, name: LcStateWidth".
 [ERR:EL0535] ${SURELOG_DIR}/tests/PackageParam/dut.sv:10:23: Illegal implicit net "id:30, name: LcStateWidth".
-[ERR:IG0809] ${SURELOG_DIR}/tests/PackageParam/dut.sv:10:23: Object 30 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageParam/slpp_all/surelog.uhdm ...
+[ERR:IG0809] ${SURELOG_DIR}/tests/PackageParam/dut.sv:10:23: Object 30 actual cannot be null.
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PackageParam/slpp_all/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -912,8 +913,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/PackageParam/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1294,6 +1309,18 @@ design: (unnamed)
       |BIN:00000000000000000000000000000000
       |vpiDecompile:{A11,A10}
       |vpiSize:32
+  |vpiTypedef:
+  \_typedef_typespec: (lc_state_e), line:14:5, endln:14:15
+    |vpiParent:
+    \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/PackageParam/dut.sv, line:2:1, endln:15:11
+    |vpiName:lc_state_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (lc_ctrl_pkg::lc_state_e), line:10:11, endln:14:4
+      |vpiParent:
+      \_typedef_typespec: (lc_state_e), line:14:5, endln:14:15
+      |vpiFullName:lc_ctrl_pkg::lc_state_e
+      |vpiActual:
+      \_enum_typespec: (lc_ctrl_pkg::lc_state_e), line:10:11, endln:14:16
   |vpiImportTypespec:
   \_logic_typespec: , line:4:13, endln:4:25
   |vpiImportTypespec:
@@ -1302,6 +1329,8 @@ design: (unnamed)
   \_logic_typespec: , line:10:16, endln:10:40
   |vpiImportTypespec:
   \_enum_typespec: (lc_ctrl_pkg::lc_state_e), line:10:11, endln:14:16
+  |vpiImportTypespec:
+  \_typedef_typespec: (lc_state_e), line:14:5, endln:14:15
   |vpiDefName:lc_ctrl_pkg
 |uhdmallPackages:
 \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/PackageParam/dut.sv, line:19:1, endln:26:11
@@ -1541,7 +1570,3 @@ design: (unnamed)
 [  ERROR] : 4
 [WARNING] : 3
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PackageParam/dut.sv | ${SURELOG_DIR}/build/regression/PackageParam/roundtrip/dut_000.sv | 9 | 37 |
-============================== End RoundTrip Results ==============================

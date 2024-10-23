@@ -17,11 +17,12 @@ param_assign                                           2
 parameter                                              2
 range                                                  2
 ref_obj                                                3
-ref_typespec                                           8
+ref_typespec                                           9
 source_file                                            1
 string_typespec                                        3
 struct_typespec                                        1
 tagged_pattern                                         3
+typedef_typespec                                       1
 typespec_member                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ValueSize/slpp_unit/surelog.uhdm ...
@@ -168,6 +169,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (page_addr_t), line:5:5, endln:5:16
+    |vpiParent:
+    \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/ValueSize/dut.sv, line:1:1, endln:12:11
+    |vpiName:page_addr_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (flash_ctrl_pkg::page_addr_t), line:3:11, endln:5:4
+      |vpiParent:
+      \_typedef_typespec: (page_addr_t), line:5:5, endln:5:16
+      |vpiFullName:flash_ctrl_pkg::page_addr_t
+      |vpiActual:
+      \_struct_typespec: (flash_ctrl_pkg::page_addr_t), line:3:11, endln:5:4
+  |vpiTypedef:
   \_bit_typespec: , line:7:14, endln:7:23
     |vpiParent:
     \_package: flash_ctrl_pkg (flash_ctrl_pkg::), file:${SURELOG_DIR}/tests/ValueSize/dut.sv, line:1:1, endln:12:11
@@ -211,6 +224,8 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:4:6, endln:4:17
   |vpiImportTypespec:
+  \_typedef_typespec: (page_addr_t), line:5:5, endln:5:16
+  |vpiImportTypespec:
   \_bit_typespec: , line:7:14, endln:7:23
   |vpiImportTypespec:
   \_string_typespec: (addr), line:9:7, endln:9:11
@@ -225,7 +240,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ValueSize/dut.sv | ${SURELOG_DIR}/build/regression/ValueSize/roundtrip/dut_000.sv | 2 | 12 |
-============================== End RoundTrip Results ==============================

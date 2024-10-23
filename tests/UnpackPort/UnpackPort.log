@@ -410,17 +410,18 @@ package                                                1
 port                                                   1
 range                                                  3
 ref_obj                                                3
-ref_typespec                                          16
+ref_typespec                                          18
 ref_var                                                1
 source_file                                            1
 struct_net                                             1
 struct_typespec                                        1
 task                                                   9
+typedef_typespec                                       2
 typespec_member                                        1
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
-[ERR:IG0807] ${SURELOG_DIR}/tests/UnpackPort/dut.sv:6:24: Child 28 is not entirely in parent's scope.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnpackPort/slpp_all/surelog.uhdm ...
+[ERR:IG0807] ${SURELOG_DIR}/tests/UnpackPort/dut.sv:6:24: Child 30 is not entirely in parent's scope.
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/UnpackPort/slpp_all/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -817,8 +818,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/UnpackPort/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1184,6 +1199,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (struct2), line:4:5, endln:4:12
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/UnpackPort/dut.sv, line:1:1, endln:11:10
+    |vpiName:struct2
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@dut.struct2), line:2:11, endln:4:4
+      |vpiParent:
+      \_typedef_typespec: (struct2), line:4:5, endln:4:12
+      |vpiFullName:work@dut.struct2
+      |vpiActual:
+      \_struct_typespec: (struct2), line:2:11, endln:4:4
+  |vpiTypedef:
   \_unsupported_typespec: (i), line:8:15, endln:8:16
     |vpiParent:
     \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/UnpackPort/dut.sv, line:1:1, endln:11:10
@@ -1222,6 +1249,8 @@ design: (unnamed)
   \_struct_typespec: (struct2), line:2:11, endln:4:4
   |vpiImportTypespec:
   \_logic_typespec: , line:3:7, endln:3:18
+  |vpiImportTypespec:
+  \_typedef_typespec: (struct2), line:4:5, endln:4:12
   |vpiImportTypespec:
   \_unsupported_typespec: (i), line:8:15, endln:8:16
   |vpiImportTypespec:
@@ -1299,7 +1328,3 @@ design: (unnamed)
 [  ERROR] : 1
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/UnpackPort/dut.sv | ${SURELOG_DIR}/build/regression/UnpackPort/roundtrip/dut_000.sv | 7 | 11 |
-============================== End RoundTrip Results ==============================

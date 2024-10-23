@@ -146,10 +146,11 @@ packed_array_typespec                                  1
 port                                                   2
 range                                                  1
 ref_obj                                                4
-ref_typespec                                           8
+ref_typespec                                          10
 source_file                                            1
 struct_typespec                                        1
 struct_var                                             1
+typedef_typespec                                       2
 typespec_member                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LhsOp/slpp_all/surelog.uhdm ...
@@ -215,6 +216,18 @@ design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
   |vpiTypedef:
+  \_typedef_typespec: (cstate_e), line:3:37, endln:3:45
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LhsOp/dut.sv, line:2:1, endln:14:10
+    |vpiName:cstate_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top.cstate_e), line:3:11, endln:3:36
+      |vpiParent:
+      \_typedef_typespec: (cstate_e), line:3:37, endln:3:45
+      |vpiFullName:work@top.cstate_e
+      |vpiActual:
+      \_enum_typespec: (cstate_e), line:3:11, endln:3:46
+  |vpiTypedef:
   \_struct_typespec: (hw2reg_wrap_t), line:5:12, endln:7:5
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LhsOp/dut.sv, line:2:1, endln:14:10
@@ -264,7 +277,19 @@ design: (unnamed)
       |vpiName:cstate_e
       |vpiFullName:work@top.cstate_e
       |vpiActual:
-      \_enum_typespec: (cstate_e), line:3:11, endln:3:46
+      \_typedef_typespec: (cstate_e), line:3:37, endln:3:45
+  |vpiTypedef:
+  \_typedef_typespec: (hw2reg_wrap_t), line:7:6, endln:7:19
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LhsOp/dut.sv, line:2:1, endln:14:10
+    |vpiName:hw2reg_wrap_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top.hw2reg_wrap_t), line:5:12, endln:7:5
+      |vpiParent:
+      \_typedef_typespec: (hw2reg_wrap_t), line:7:6, endln:7:19
+      |vpiFullName:work@top.hw2reg_wrap_t
+      |vpiActual:
+      \_struct_typespec: (hw2reg_wrap_t), line:5:12, endln:7:5
   |vpiTypedef:
   \_logic_typespec: , line:2:19, endln:2:24
     |vpiParent:
@@ -286,9 +311,13 @@ design: (unnamed)
   |vpiImportTypespec:
   \_enum_typespec: (cstate_e), line:3:11, endln:3:46
   |vpiImportTypespec:
+  \_typedef_typespec: (cstate_e), line:3:37, endln:3:45
+  |vpiImportTypespec:
   \_struct_typespec: (hw2reg_wrap_t), line:5:12, endln:7:5
   |vpiImportTypespec:
   \_packed_array_typespec: , line:6:7, endln:6:21
+  |vpiImportTypespec:
+  \_typedef_typespec: (hw2reg_wrap_t), line:7:6, endln:7:19
   |vpiImportTypespec:
   \_logic_typespec: , line:2:19, endln:2:24
   |vpiImportTypespec:
@@ -411,7 +440,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/LhsOp/dut.sv | ${SURELOG_DIR}/build/regression/LhsOp/roundtrip/dut_000.sv | 8 | 14 |
-============================== End RoundTrip Results ==============================

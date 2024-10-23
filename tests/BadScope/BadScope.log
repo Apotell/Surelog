@@ -167,11 +167,12 @@ package                                                1
 param_assign                                           1
 parameter                                              1
 ref_obj                                                1
-ref_typespec                                          13
+ref_typespec                                          15
 source_file                                            1
 string_typespec                                        5
 struct_typespec                                        2
 tagged_pattern                                         5
+typedef_typespec                                       2
 typespec_member                                        7
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
@@ -229,12 +230,26 @@ design: (unnamed)
   \_logic_typespec: , line:6:5, endln:6:10
     |vpiParent:
     \_package: pack (pack::), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:2:1, endln:9:11
+  |vpiTypedef:
+  \_typedef_typespec: (status_t), line:7:5, endln:7:13
+    |vpiParent:
+    \_package: pack (pack::), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:2:1, endln:9:11
+    |vpiName:status_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (pack::status_t), line:4:10, endln:7:4
+      |vpiParent:
+      \_typedef_typespec: (status_t), line:7:5, endln:7:13
+      |vpiFullName:pack::status_t
+      |vpiActual:
+      \_struct_typespec: (pack::status_t), line:4:10, endln:7:4
   |vpiImportTypespec:
   \_struct_typespec: (pack::status_t), line:4:10, endln:7:4
   |vpiImportTypespec:
   \_logic_typespec: , line:5:5, endln:5:10
   |vpiImportTypespec:
   \_logic_typespec: , line:6:5, endln:6:10
+  |vpiImportTypespec:
+  \_typedef_typespec: (status_t), line:7:5, endln:7:13
   |vpiDefName:pack
 |uhdmallModules:
 \_module_inst: work@top3 (work@top3), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:12:1, endln:26:10
@@ -457,6 +472,18 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@top3 (work@top3), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:12:1, endln:26:10
   |vpiTypedef:
+  \_typedef_typespec: (status_t), line:20:5, endln:20:13
+    |vpiParent:
+    \_module_inst: work@top3 (work@top3), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:12:1, endln:26:10
+    |vpiName:status_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top3.status_t), line:14:10, endln:20:4
+      |vpiParent:
+      \_typedef_typespec: (status_t), line:20:5, endln:20:13
+      |vpiFullName:work@top3.status_t
+      |vpiActual:
+      \_struct_typespec: (status_t), line:14:10, endln:20:4
+  |vpiTypedef:
   \_string_typespec: (mie), line:21:42, endln:21:45
     |vpiParent:
     \_module_inst: work@top3 (work@top3), file:${SURELOG_DIR}/tests/BadScope/dut.sv, line:12:1, endln:26:10
@@ -496,6 +523,8 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:19:5, endln:19:10
   |vpiImportTypespec:
+  \_typedef_typespec: (status_t), line:20:5, endln:20:13
+  |vpiImportTypespec:
   \_string_typespec: (mie), line:21:42, endln:21:45
   |vpiImportTypespec:
   \_string_typespec: (mpie), line:22:43, endln:22:47
@@ -521,7 +550,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/BadScope/dut.sv | ${SURELOG_DIR}/build/regression/BadScope/roundtrip/dut_000.sv | 4 | 26 |
-============================== End RoundTrip Results ==============================

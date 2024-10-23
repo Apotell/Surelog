@@ -19,8 +19,9 @@ package                                                1
 port                                                   3
 ref_module                                             1
 ref_obj                                                1
-ref_typespec                                           5
+ref_typespec                                           6
 source_file                                            1
+typedef_typespec                                       1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConstPort/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ConstPort/slpp_all/checker/surelog.chk.html ...
@@ -70,10 +71,24 @@ design: (unnamed)
       |BIN:1
       |vpiDecompile:1'b1
       |vpiSize:1
+  |vpiTypedef:
+  \_typedef_typespec: (ciph_op_e), line:5:3, endln:5:12
+    |vpiParent:
+    \_package: aes_pkg (aes_pkg::), file:${SURELOG_DIR}/tests/ConstPort/dut.sv, line:1:1, endln:6:11
+    |vpiName:ciph_op_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (aes_pkg::ciph_op_e), line:2:9, endln:5:2
+      |vpiParent:
+      \_typedef_typespec: (ciph_op_e), line:5:3, endln:5:12
+      |vpiFullName:aes_pkg::ciph_op_e
+      |vpiActual:
+      \_enum_typespec: (aes_pkg::ciph_op_e), line:2:9, endln:5:13
   |vpiImportTypespec:
   \_logic_typespec: , line:2:14, endln:2:19
   |vpiImportTypespec:
   \_enum_typespec: (aes_pkg::ciph_op_e), line:2:9, endln:5:13
+  |vpiImportTypespec:
+  \_typedef_typespec: (ciph_op_e), line:5:3, endln:5:12
   |vpiDefName:aes_pkg
 |uhdmallModules:
 \_module_inst: work@cipher_core (work@cipher_core), file:${SURELOG_DIR}/tests/ConstPort/dut.sv, line:13:1, endln:20:10
@@ -182,7 +197,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 3
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ConstPort/dut.sv | ${SURELOG_DIR}/build/regression/ConstPort/roundtrip/dut_000.sv | 13 | 20 |
-============================== End RoundTrip Results ==============================

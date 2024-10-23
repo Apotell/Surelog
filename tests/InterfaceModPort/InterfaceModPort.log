@@ -1166,10 +1166,11 @@ program                                                1
 range                                                 24
 ref_module                                             4
 ref_obj                                               30
-ref_typespec                                          52
+ref_typespec                                          54
 source_file                                            1
 sys_func_call                                          1
 task                                                   9
+typedef_typespec                                       2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfaceModPort/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/InterfaceModPort/slpp_all/checker/surelog.chk.html ...
@@ -1568,8 +1569,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/InterfaceModPort/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -3286,6 +3301,18 @@ design: (unnamed)
       |vpiDecompile:3
       |vpiSize:64
   |vpiTypedef:
+  \_typedef_typespec: (fsm_t), line:89:38, endln:89:43
+    |vpiParent:
+    \_module_inst: work@memory_ctrl (work@memory_ctrl), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:87:1, endln:94:10
+    |vpiName:fsm_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@memory_ctrl.fsm_t), line:89:10, endln:89:37
+      |vpiParent:
+      \_typedef_typespec: (fsm_t), line:89:38, endln:89:43
+      |vpiFullName:work@memory_ctrl.fsm_t
+      |vpiActual:
+      \_enum_typespec: (fsm_t), line:89:10, endln:89:44
+  |vpiTypedef:
   \_interface_typespec: (system), line:87:28, endln:87:34
     |vpiParent:
     \_module_inst: work@memory_ctrl (work@memory_ctrl), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:87:1, endln:94:10
@@ -3303,6 +3330,8 @@ design: (unnamed)
     \_interface_inst: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:26:1, endln:57:13
   |vpiImportTypespec:
   \_enum_typespec: (fsm_t), line:89:10, endln:89:44
+  |vpiImportTypespec:
+  \_typedef_typespec: (fsm_t), line:89:38, endln:89:43
   |vpiImportTypespec:
   \_enum_var: (work@memory_ctrl.state), line:91:7, endln:91:12
   |vpiImportTypespec:
@@ -3330,13 +3359,13 @@ design: (unnamed)
   \_design: (unnamed)
   |vpiName:work@memory_model
   |vpiVariables:
-  \_logic_var: (work@memory_model), line:64:1, endln:64:25
+  \_logic_var: (work@memory_model), line:64:13, endln:64:16
     |vpiParent:
     \_module_inst: work@memory_model (work@memory_model), file:${SURELOG_DIR}/tests/InterfaceModPort/top.v, line:62:1, endln:82:10
     |vpiTypespec:
     \_ref_typespec: (work@memory_model), line:64:1, endln:64:12
       |vpiParent:
-      \_logic_var: (work@memory_model), line:64:1, endln:64:25
+      \_logic_var: (work@memory_model), line:64:13, endln:64:16
       |vpiFullName:work@memory_model
       |vpiActual:
       \_logic_typespec: , line:64:1, endln:64:12
@@ -3379,9 +3408,9 @@ design: (unnamed)
         |UINT:255
         |vpiConstType:9
     |vpiReg:
-    \_logic_var: (work@memory_model), line:64:1, endln:64:25
+    \_logic_var: (work@memory_model), line:64:13, endln:64:16
   |vpiReg:
-  \_logic_var: (work@memory_model), line:64:1, endln:64:25
+  \_logic_var: (work@memory_model), line:64:13, endln:64:16
   |vpiRegArray:
   \_array_var: (work@memory_model.mem), line:64:13, endln:64:25
   |vpiTypedef:
@@ -3431,7 +3460,7 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:64:1, endln:64:12
   |vpiImportTypespec:
-  \_logic_var: (work@memory_model), line:64:1, endln:64:25
+  \_logic_var: (work@memory_model), line:64:13, endln:64:16
   |vpiImportTypespec:
   \_array_var: (work@memory_model.mem), line:64:13, endln:64:25
   |vpiImportTypespec:
@@ -3769,7 +3798,3 @@ design: (unnamed)
 [LINT]: ${SURELOG_DIR}/tests/InterfaceModPort/top.v:99:1: Non synthesizable construct, work@test
 [LINT]: ${SURELOG_DIR}/tests/InterfaceModPort/top.v:115:8: Non synthesizable construct,
 ============================== End Linting Results ==============================
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/InterfaceModPort/top.v | ${SURELOG_DIR}/build/regression/InterfaceModPort/roundtrip/top_000.v | 45 | 124 |
-============================== End RoundTrip Results ==============================

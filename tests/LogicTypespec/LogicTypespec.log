@@ -91,9 +91,12 @@ packed_array_typespec                                  1
 range                                                  6
 ref_typespec                                           1
 source_file                                            1
+typedef_typespec                                       1
+unsupported_typespec                                   1
 === UHDM Object Stats End ===
-[ERR:IG0807] ${SURELOG_DIR}/tests/LogicTypespec/dut.sv:2:9: Child 12 is not entirely in parent's scope.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LogicTypespec/slpp_all/surelog.uhdm ...
+[ERR:IG0807] ${SURELOG_DIR}/tests/LogicTypespec/dut.sv:7:39: Child 22 is not entirely in parent's scope.
+[ERR:IG0807] ${SURELOG_DIR}/tests/LogicTypespec/dut.sv:7:44: Child 25 is not entirely in parent's scope.
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/LogicTypespec/slpp_all/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -110,7 +113,31 @@ design: (unnamed)
   |vpiName:my_package
   |vpiFullName:my_package::
   |vpiTypedef:
-  \_logic_typespec: (typedef_logic_typespec), line:2:9, endln:7:49
+  \_packed_array_typespec: , line:2:9, endln:2:20
+    |vpiParent:
+    \_package: my_package (my_package::), file:${SURELOG_DIR}/tests/LogicTypespec/dut.sv, line:1:1, endln:3:23
+    |vpiRange:
+    \_range: , line:2:15, endln:2:20
+      |vpiParent:
+      \_packed_array_typespec: , line:2:9, endln:2:20
+      |vpiLeftRange:
+      \_constant: , line:2:16, endln:2:17
+        |vpiParent:
+        \_range: , line:2:15, endln:2:20
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:2:18, endln:2:19
+        |vpiParent:
+        \_range: , line:2:15, endln:2:20
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_logic_typespec: (typedef_logic_typespec), line:2:9, endln:2:20
     |vpiParent:
     \_package: my_package (my_package::), file:${SURELOG_DIR}/tests/LogicTypespec/dut.sv, line:1:1, endln:3:23
     |vpiName:typedef_logic_typespec
@@ -134,8 +161,24 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (typedef_logic_typespec), line:2:21, endln:2:43
+    |vpiParent:
+    \_package: my_package (my_package::), file:${SURELOG_DIR}/tests/LogicTypespec/dut.sv, line:1:1, endln:3:23
+    |vpiName:typedef_logic_typespec
+    |vpiTypedefAlias:
+    \_ref_typespec: (my_package::typedef_logic_typespec), line:2:9, endln:2:14
+      |vpiParent:
+      \_typedef_typespec: (typedef_logic_typespec), line:2:21, endln:2:43
+      |vpiFullName:my_package::typedef_logic_typespec
+      |vpiActual:
+      \_logic_typespec: (typedef_logic_typespec), line:2:9, endln:2:20
   |vpiImportTypespec:
-  \_logic_typespec: (typedef_logic_typespec), line:2:9, endln:7:49
+  \_packed_array_typespec: , line:2:9, endln:2:20
+  |vpiImportTypespec:
+  \_logic_typespec: (typedef_logic_typespec), line:2:9, endln:2:20
+  |vpiImportTypespec:
+  \_typedef_typespec: (typedef_logic_typespec), line:2:21, endln:2:43
   |vpiDefName:my_package
   |vpiEndLabel:my_package
 |uhdmallModules:
@@ -147,19 +190,99 @@ design: (unnamed)
   \_logic_var: (work@logic_typespec.my_instance), line:7:50, endln:7:61
     |vpiParent:
     \_module_inst: work@logic_typespec (work@logic_typespec), file:${SURELOG_DIR}/tests/LogicTypespec/dut.sv, line:5:1, endln:9:27
-    |vpiTypespec:
-    \_ref_typespec: (work@logic_typespec.my_instance.my_package::typedef_logic_typespec[1:0][7:0]), line:7:1, endln:7:49
-      |vpiParent:
-      \_logic_var: (work@logic_typespec.my_instance), line:7:50, endln:7:61
-      |vpiName:my_package::typedef_logic_typespec[1:0][7:0]
-      |vpiFullName:work@logic_typespec.my_instance.my_package::typedef_logic_typespec[1:0][7:0]
-      |vpiActual:
-      \_logic_typespec: (typedef_logic_typespec), line:2:9, endln:7:49
     |vpiName:my_instance
     |vpiFullName:work@logic_typespec.my_instance
     |vpiVisibility:1
+    |vpiRange:
+    \_range: , line:7:39, endln:7:44
+      |vpiParent:
+      \_logic_var: (work@logic_typespec.my_instance), line:7:50, endln:7:61
+      |vpiLeftRange:
+      \_constant: , line:7:40, endln:7:41
+        |vpiParent:
+        \_range: , line:7:39, endln:7:44
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:7:42, endln:7:43
+        |vpiParent:
+        \_range: , line:7:39, endln:7:44
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiRange:
+    \_range: , line:7:44, endln:7:49
+      |vpiParent:
+      \_logic_var: (work@logic_typespec.my_instance), line:7:50, endln:7:61
+      |vpiLeftRange:
+      \_constant: , line:7:45, endln:7:46
+        |vpiParent:
+        \_range: , line:7:44, endln:7:49
+        |vpiDecompile:7
+        |vpiSize:64
+        |UINT:7
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:7:47, endln:7:48
+        |vpiParent:
+        \_range: , line:7:44, endln:7:49
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
   |vpiReg:
   \_logic_var: (work@logic_typespec.my_instance), line:7:50, endln:7:61
+  |vpiTypedef:
+  \_unsupported_typespec: (my_package::typedef_logic_typespec), line:7:1, endln:7:49
+    |vpiParent:
+    \_module_inst: work@logic_typespec (work@logic_typespec), file:${SURELOG_DIR}/tests/LogicTypespec/dut.sv, line:5:1, endln:9:27
+    |vpiName:my_package::typedef_logic_typespec
+    |vpiPacked:1
+    |vpiRange:
+    \_range: , line:7:39, endln:7:44
+      |vpiParent:
+      \_module_inst: work@logic_typespec (work@logic_typespec), file:${SURELOG_DIR}/tests/LogicTypespec/dut.sv, line:5:1, endln:9:27
+      |vpiLeftRange:
+      \_constant: , line:7:40, endln:7:41
+        |vpiParent:
+        \_range: , line:7:39, endln:7:44
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:7:42, endln:7:43
+        |vpiParent:
+        \_range: , line:7:39, endln:7:44
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiRange:
+    \_range: , line:7:44, endln:7:49
+      |vpiParent:
+      \_module_inst: work@logic_typespec (work@logic_typespec), file:${SURELOG_DIR}/tests/LogicTypespec/dut.sv, line:5:1, endln:9:27
+      |vpiLeftRange:
+      \_constant: , line:7:45, endln:7:46
+        |vpiParent:
+        \_range: , line:7:44, endln:7:49
+        |vpiDecompile:7
+        |vpiSize:64
+        |UINT:7
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:7:47, endln:7:48
+        |vpiParent:
+        \_range: , line:7:44, endln:7:49
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_unsupported_typespec: (my_package::typedef_logic_typespec), line:7:1, endln:7:49
   |vpiImportTypespec:
   \_logic_var: (work@logic_typespec.my_instance), line:7:50, endln:7:61
   |vpiDefName:work@logic_typespec
@@ -167,10 +290,6 @@ design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 1
+[  ERROR] : 2
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/LogicTypespec/dut.sv | ${SURELOG_DIR}/build/regression/LogicTypespec/roundtrip/dut_000.sv | 5 | 9 |
-============================== End RoundTrip Results ==============================

@@ -116,9 +116,10 @@ parameter                                              1
 port                                                   1
 range                                                  1
 ref_obj                                                2
-ref_typespec                                           4
+ref_typespec                                           5
 source_file                                            1
 sys_func_call                                          1
+typedef_typespec                                       1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ExprReductionBits/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ExprReductionBits/slpp_all/checker/surelog.chk.html ...
@@ -281,6 +282,18 @@ design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
   |vpiTypedef:
+  \_typedef_typespec: (logic90pb_0_e), line:6:7, endln:6:20
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ExprReductionBits/dut.sv, line:1:1, endln:8:10
+    |vpiName:logic90pb_0_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top.logic90pb_0_e), line:3:13, endln:6:6
+      |vpiParent:
+      \_typedef_typespec: (logic90pb_0_e), line:6:7, endln:6:20
+      |vpiFullName:work@top.logic90pb_0_e
+      |vpiActual:
+      \_enum_typespec: (logic90pb_0_e), line:3:13, endln:6:21
+  |vpiTypedef:
   \_int_typespec: , line:1:19, endln:1:22
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ExprReductionBits/dut.sv, line:1:1, endln:8:10
@@ -296,6 +309,8 @@ design: (unnamed)
   \_logic_typespec: , line:3:18, endln:3:57
   |vpiImportTypespec:
   \_enum_typespec: (logic90pb_0_e), line:3:13, endln:6:21
+  |vpiImportTypespec:
+  \_typedef_typespec: (logic90pb_0_e), line:6:7, endln:6:20
   |vpiImportTypespec:
   \_int_typespec: , line:1:19, endln:1:22
   |vpiImportTypespec:
@@ -322,7 +337,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ExprReductionBits/dut.sv | ${SURELOG_DIR}/build/regression/ExprReductionBits/roundtrip/dut_000.sv | 4 | 8 |
-============================== End RoundTrip Results ==============================

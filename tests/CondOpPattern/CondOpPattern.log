@@ -130,16 +130,17 @@ module_inst                                            1
 operation                                              3
 port                                                   2
 ref_obj                                                2
-ref_typespec                                          10
+ref_typespec                                          11
 source_file                                            1
 string_typespec                                        4
 struct_net                                             1
 struct_typespec                                        1
 tagged_pattern                                         4
+typedef_typespec                                       1
 typespec_member                                        2
 === UHDM Object Stats End ===
-[ERR:IG0807] ${SURELOG_DIR}/tests/CondOpPattern/dut.sv:6:7: Child 35 is not entirely in parent's scope.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CondOpPattern/slpp_all/surelog.uhdm ...
+[ERR:IG0807] ${SURELOG_DIR}/tests/CondOpPattern/dut.sv:6:7: Child 37 is not entirely in parent's scope.
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/CondOpPattern/slpp_all/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -193,6 +194,18 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@Example (work@Example), file:${SURELOG_DIR}/tests/CondOpPattern/dut.sv, line:1:1, endln:12:10
   |vpiTypedef:
+  \_typedef_typespec: (T), line:4:3, endln:4:4
+    |vpiParent:
+    \_module_inst: work@Example (work@Example), file:${SURELOG_DIR}/tests/CondOpPattern/dut.sv, line:1:1, endln:12:10
+    |vpiName:T
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@Example.T), line:2:9, endln:4:2
+      |vpiParent:
+      \_typedef_typespec: (T), line:4:3, endln:4:4
+      |vpiFullName:work@Example.T
+      |vpiActual:
+      \_struct_typespec: (T), line:2:9, endln:4:2
+  |vpiTypedef:
   \_string_typespec: (a), line:9:10, endln:9:11
     |vpiParent:
     \_module_inst: work@Example (work@Example), file:${SURELOG_DIR}/tests/CondOpPattern/dut.sv, line:1:1, endln:12:10
@@ -226,6 +239,8 @@ design: (unnamed)
   \_logic_typespec: , line:3:5, endln:3:10
   |vpiImportTypespec:
   \_logic_typespec: , line:3:5, endln:3:10
+  |vpiImportTypespec:
+  \_typedef_typespec: (T), line:4:3, endln:4:4
   |vpiImportTypespec:
   \_string_typespec: (a), line:9:10, endln:9:11
   |vpiImportTypespec:
@@ -420,7 +435,3 @@ design: (unnamed)
 [  ERROR] : 1
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/CondOpPattern/dut.sv | ${SURELOG_DIR}/build/regression/CondOpPattern/roundtrip/dut_000.sv | 8 | 12 |
-============================== End RoundTrip Results ==============================

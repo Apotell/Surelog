@@ -196,12 +196,13 @@ parameter                                              1
 port                                                   2
 range                                                  7
 ref_module                                             1
-ref_typespec                                           4
+ref_typespec                                           6
 source_file                                            1
+typedef_typespec                                       2
 unsupported_typespec                                   3
 === UHDM Object Stats End ===
-[ERR:IG0807] ${SURELOG_DIR}/tests/PackedArrayHighConn/dut.sv:14:13: Child 47 is not entirely in parent's scope.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedArrayHighConn/slpp_all/surelog.uhdm ...
+[ERR:IG0807] ${SURELOG_DIR}/tests/PackedArrayHighConn/dut.sv:14:13: Child 51 is not entirely in parent's scope.
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PackedArrayHighConn/slpp_all/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -262,6 +263,42 @@ design: (unnamed)
       |vpiDecompile:3'h0
       |vpiSize:3
   |vpiTypedef:
+  \_typedef_typespec: (pad_type_e), line:4:5, endln:4:15
+    |vpiParent:
+    \_package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg::), file:${SURELOG_DIR}/tests/PackedArrayHighConn/dut.sv, line:1:1, endln:6:34
+    |vpiName:pad_type_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:11, endln:4:4
+      |vpiParent:
+      \_typedef_typespec: (pad_type_e), line:4:5, endln:4:15
+      |vpiFullName:prim_pad_wrapper_pkg::pad_type_e
+      |vpiActual:
+      \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:11, endln:4:16
+  |vpiTypedef:
+  \_packed_array_typespec: , line:5:11, endln:5:22
+    |vpiParent:
+    \_package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg::), file:${SURELOG_DIR}/tests/PackedArrayHighConn/dut.sv, line:1:1, endln:6:34
+    |vpiRange:
+    \_range: , line:5:17, endln:5:22
+      |vpiParent:
+      \_packed_array_typespec: , line:5:11, endln:5:22
+      |vpiLeftRange:
+      \_constant: , line:5:18, endln:5:19
+        |vpiParent:
+        \_range: , line:5:17, endln:5:22
+        |vpiDecompile:7
+        |vpiSize:64
+        |UINT:7
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:5:20, endln:5:21
+        |vpiParent:
+        \_range: , line:5:17, endln:5:22
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
   \_logic_typespec: (pad_pok_t), line:5:11, endln:5:22
     |vpiParent:
     \_package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg::), file:${SURELOG_DIR}/tests/PackedArrayHighConn/dut.sv, line:1:1, endln:6:34
@@ -286,12 +323,30 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (pad_pok_t), line:5:23, endln:5:32
+    |vpiParent:
+    \_package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg::), file:${SURELOG_DIR}/tests/PackedArrayHighConn/dut.sv, line:1:1, endln:6:34
+    |vpiName:pad_pok_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (prim_pad_wrapper_pkg::pad_pok_t), line:5:11, endln:5:16
+      |vpiParent:
+      \_typedef_typespec: (pad_pok_t), line:5:23, endln:5:32
+      |vpiFullName:prim_pad_wrapper_pkg::pad_pok_t
+      |vpiActual:
+      \_logic_typespec: (pad_pok_t), line:5:11, endln:5:22
   |vpiImportTypespec:
   \_logic_typespec: , line:2:16, endln:2:27
   |vpiImportTypespec:
   \_enum_typespec: (prim_pad_wrapper_pkg::pad_type_e), line:2:11, endln:4:16
   |vpiImportTypespec:
+  \_typedef_typespec: (pad_type_e), line:4:5, endln:4:15
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:5:11, endln:5:22
+  |vpiImportTypespec:
   \_logic_typespec: (pad_pok_t), line:5:11, endln:5:22
+  |vpiImportTypespec:
+  \_typedef_typespec: (pad_pok_t), line:5:23, endln:5:32
   |vpiDefName:prim_pad_wrapper_pkg
   |vpiEndLabel:prim_pad_wrapper_pkg
 |uhdmallModules:
@@ -512,7 +567,3 @@ design: (unnamed)
 [  ERROR] : 1
 [WARNING] : 3
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PackedArrayHighConn/dut.sv | ${SURELOG_DIR}/build/regression/PackedArrayHighConn/roundtrip/dut_000.sv | 13 | 18 |
-============================== End RoundTrip Results ==============================

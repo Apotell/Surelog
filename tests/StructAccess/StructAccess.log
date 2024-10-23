@@ -528,11 +528,12 @@ operation                                              1
 package                                                1
 range                                                  2
 ref_obj                                                9
-ref_typespec                                          23
+ref_typespec                                          27
 source_file                                            1
 struct_typespec                                        2
 struct_var                                             2
 task                                                   9
+typedef_typespec                                       4
 typespec_member                                        3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/StructAccess/slpp_all/surelog.uhdm ...
@@ -932,8 +933,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/StructAccess/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1147,13 +1162,13 @@ design: (unnamed)
   \_design: (unnamed)
   |vpiName:work@top
   |vpiVariables:
-  \_struct_var: (work@top), line:16:32, endln:16:35
+  \_struct_var: (work@top), line:16:17, endln:16:30
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/StructAccess/dut.sv, line:1:1, endln:30:10
     |vpiTypespec:
     \_ref_typespec: (work@top.pmp_cfg_t), line:16:2, endln:16:11
       |vpiParent:
-      \_struct_var: (work@top), line:16:32, endln:16:35
+      \_struct_var: (work@top), line:16:17, endln:16:30
       |vpiName:pmp_cfg_t
       |vpiFullName:work@top.pmp_cfg_t
       |vpiActual:
@@ -1194,7 +1209,7 @@ design: (unnamed)
           |UINT:4
           |vpiConstType:9
     |vpiReg:
-    \_struct_var: (work@top), line:16:32, endln:16:35
+    \_struct_var: (work@top), line:16:17, endln:16:30
   |vpiVariables:
   \_struct_var: (work@top.csr_pmp_cfg_ie), line:17:17, endln:17:31
     |vpiParent:
@@ -1406,6 +1421,18 @@ design: (unnamed)
       |vpiDecompile:2'b00
       |vpiSize:2
   |vpiTypedef:
+  \_typedef_typespec: (pmp_cfg_enum), line:5:4, endln:5:16
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/StructAccess/dut.sv, line:1:1, endln:30:10
+    |vpiName:pmp_cfg_enum
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top.pmp_cfg_enum), line:3:10, endln:5:3
+      |vpiParent:
+      \_typedef_typespec: (pmp_cfg_enum), line:5:4, endln:5:16
+      |vpiFullName:work@top.pmp_cfg_enum
+      |vpiActual:
+      \_enum_typespec: (pmp_cfg_enum), line:3:10, endln:5:17
+  |vpiTypedef:
   \_struct_typespec: (pmp_cfg_struct), line:7:10, endln:9:3
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/StructAccess/dut.sv, line:1:1, endln:30:10
@@ -1427,6 +1454,18 @@ design: (unnamed)
   \_logic_typespec: , line:8:4, endln:8:9
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/StructAccess/dut.sv, line:1:1, endln:30:10
+  |vpiTypedef:
+  \_typedef_typespec: (pmp_cfg_struct), line:9:4, endln:9:18
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/StructAccess/dut.sv, line:1:1, endln:30:10
+    |vpiName:pmp_cfg_struct
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top.pmp_cfg_struct), line:7:10, endln:9:3
+      |vpiParent:
+      \_typedef_typespec: (pmp_cfg_struct), line:9:4, endln:9:18
+      |vpiFullName:work@top.pmp_cfg_struct
+      |vpiActual:
+      \_struct_typespec: (pmp_cfg_struct), line:7:10, endln:9:3
   |vpiTypedef:
   \_struct_typespec: (pmp_cfg_t), line:11:10, endln:14:3
     |vpiParent:
@@ -1460,6 +1499,18 @@ design: (unnamed)
         |vpiActual:
         \_struct_typespec: (pmp_cfg_struct), line:7:10, endln:9:3
   |vpiTypedef:
+  \_typedef_typespec: (pmp_cfg_t), line:14:4, endln:14:13
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/StructAccess/dut.sv, line:1:1, endln:30:10
+    |vpiName:pmp_cfg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top.pmp_cfg_t), line:11:10, endln:14:3
+      |vpiParent:
+      \_typedef_typespec: (pmp_cfg_t), line:14:4, endln:14:13
+      |vpiFullName:work@top.pmp_cfg_t
+      |vpiActual:
+      \_struct_typespec: (pmp_cfg_t), line:11:10, endln:14:3
+  |vpiTypedef:
   \_array_typespec: , line:16:17, endln:16:30
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/StructAccess/dut.sv, line:1:1, endln:30:10
@@ -1480,13 +1531,19 @@ design: (unnamed)
   |vpiImportTypespec:
   \_enum_typespec: (pmp_cfg_enum), line:3:10, endln:5:17
   |vpiImportTypespec:
+  \_typedef_typespec: (pmp_cfg_enum), line:5:4, endln:5:16
+  |vpiImportTypespec:
   \_struct_typespec: (pmp_cfg_struct), line:7:10, endln:9:3
   |vpiImportTypespec:
   \_logic_typespec: , line:8:4, endln:8:9
   |vpiImportTypespec:
+  \_typedef_typespec: (pmp_cfg_struct), line:9:4, endln:9:18
+  |vpiImportTypespec:
   \_struct_typespec: (pmp_cfg_t), line:11:10, endln:14:3
   |vpiImportTypespec:
-  \_struct_var: (work@top), line:16:32, endln:16:35
+  \_typedef_typespec: (pmp_cfg_t), line:14:4, endln:14:13
+  |vpiImportTypespec:
+  \_struct_var: (work@top), line:16:17, endln:16:30
   |vpiImportTypespec:
   \_array_var: (work@top.csr_pmp_cfg_i), line:16:17, endln:16:35
   |vpiImportTypespec:
@@ -1567,7 +1624,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/StructAccess/dut.sv | ${SURELOG_DIR}/build/regression/StructAccess/roundtrip/dut_000.sv | 11 | 30 |
-============================== End RoundTrip Results ==============================

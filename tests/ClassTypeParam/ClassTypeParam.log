@@ -20,14 +20,14 @@ io_decl                                                1
 logic_var                                              2
 method_func_call                                       2
 module_inst                                            1
-ref_typespec                                           7
+ref_typespec                                           9
 source_file                                            1
 string_typespec                                        1
 type_parameter                                         4
-unsupported_typespec                                   2
+typedef_typespec                                       2
 === UHDM Object Stats End ===
-[ERR:IG0809] ${SURELOG_DIR}/tests/ClassTypeParam/dut.sv:16:55: Object 22 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassTypeParam/slpp_unit/surelog.uhdm ...
+[ERR:IG0809] ${SURELOG_DIR}/tests/ClassTypeParam/dut.sv:16:55: Object 23 actual cannot be null.
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ClassTypeParam/slpp_unit/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -200,18 +200,24 @@ design: (unnamed)
   |vpiTypedef:
   \_type_parameter: (work@uvm_resource_db::T), line:7:30, endln:7:31
   |vpiTypedef:
-  \_unsupported_typespec: (rsrc_t), line:10:2, endln:10:8
+  \_typedef_typespec: (rsrc_t), line:9:28, endln:9:34
     |vpiParent:
     \_class_defn: (work@uvm_resource_db), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:7:1, endln:14:9
     |vpiName:rsrc_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@uvm_resource_db::rsrc_t::uvm_resource), line:9:10, endln:9:22
+      |vpiParent:
+      \_typedef_typespec: (rsrc_t), line:9:28, endln:9:34
+      |vpiName:uvm_resource
+      |vpiFullName:work@uvm_resource_db::rsrc_t::uvm_resource
   |vpiImportTypespec:
   \_int_typespec: , line:7:32, endln:7:35
   |vpiImportTypespec:
   \_type_parameter: (work@uvm_resource_db::T), line:7:30, endln:7:31
   |vpiImportTypespec:
-  \_function: (work@uvm_resource_db::check_all_sva_passed), line:11:2, endln:12:13
+  \_typedef_typespec: (rsrc_t), line:9:28, endln:9:34
   |vpiImportTypespec:
-  \_unsupported_typespec: (rsrc_t), line:10:2, endln:10:8
+  \_function: (work@uvm_resource_db::check_all_sva_passed), line:11:2, endln:12:13
   |vpiImportTypespec:
   \_logic_var: (work@uvm_resource_db::rsrc), line:10:9, endln:10:13
   |vpiMethod:
@@ -256,19 +262,12 @@ design: (unnamed)
   |vpiReg:
   \_logic_var: (work@top.misc1), line:24:25, endln:24:30
   |vpiTypedef:
-  \_unsupported_typespec: (m_uvm_config_obj_misc), line:24:3, endln:24:24
-    |vpiParent:
-    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:22:1, endln:27:10
-    |vpiName:m_uvm_config_obj_misc
-  |vpiTypedef:
   \_class_typespec: (uvm_config_db), line:26:3, endln:26:16
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:22:1, endln:27:10
     |vpiName:uvm_config_db
     |vpiClassDefn:
     \_class_defn: (work@uvm_config_db), file:${SURELOG_DIR}/tests/ClassTypeParam/dut.sv, line:16:1, endln:17:9
-  |vpiImportTypespec:
-  \_unsupported_typespec: (m_uvm_config_obj_misc), line:24:3, endln:24:24
   |vpiImportTypespec:
   \_logic_var: (work@top.misc1), line:24:25, endln:24:30
   |vpiImportTypespec:
@@ -280,6 +279,17 @@ design: (unnamed)
   \_method_func_call: (new), line:24:33, endln:24:36
   |vpiSysTaskCall:
   \_method_func_call: (new), line:26:46, endln:26:49
+|vpiTypedef:
+\_typedef_typespec: (m_uvm_config_obj_misc), line:20:44, endln:20:65
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:m_uvm_config_obj_misc
+  |vpiTypedefAlias:
+  \_ref_typespec: (m_uvm_config_obj_misc.uvm_config_db), line:20:9, endln:20:22
+    |vpiParent:
+    \_typedef_typespec: (m_uvm_config_obj_misc), line:20:44, endln:20:65
+    |vpiName:uvm_config_db
+    |vpiFullName:m_uvm_config_obj_misc.uvm_config_db
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
@@ -296,7 +306,3 @@ design: (unnamed)
 [LINT]: ${SURELOG_DIR}/tests/ClassTypeParam/dut.sv:26:46: Non synthesizable construct, new
 [LINT]: ${SURELOG_DIR}/tests/ClassTypeParam/dut.sv:24:33: Non synthesizable construct, new
 ============================== End Linting Results ==============================
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ClassTypeParam/dut.sv | ${SURELOG_DIR}/build/regression/ClassTypeParam/roundtrip/dut_000.sv | 12 | 27 |
-============================== End RoundTrip Results ==============================

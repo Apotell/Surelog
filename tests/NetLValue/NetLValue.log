@@ -136,9 +136,10 @@ packed_array_typespec                                  1
 packed_array_var                                       1
 range                                                  2
 ref_obj                                                3
-ref_typespec                                           4
+ref_typespec                                           5
 source_file                                            1
 struct_typespec                                        1
+typedef_typespec                                       1
 typespec_member                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/NetLValue/slpp_all/surelog.uhdm ...
@@ -208,6 +209,18 @@ design: (unnamed)
     \_module_inst: work@t (work@t), file:${SURELOG_DIR}/tests/NetLValue/dut.sv, line:1:1, endln:10:10
     |vpiSigned:1
   |vpiTypedef:
+  \_typedef_typespec: (S), line:2:30, endln:2:31
+    |vpiParent:
+    \_module_inst: work@t (work@t), file:${SURELOG_DIR}/tests/NetLValue/dut.sv, line:1:1, endln:10:10
+    |vpiName:S
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@t.S), line:2:12, endln:2:29
+      |vpiParent:
+      \_typedef_typespec: (S), line:2:30, endln:2:31
+      |vpiFullName:work@t.S
+      |vpiActual:
+      \_struct_typespec: (S), line:2:12, endln:2:29
+  |vpiTypedef:
   \_packed_array_typespec: , line:3:4, endln:3:10
     |vpiParent:
     \_module_inst: work@t (work@t), file:${SURELOG_DIR}/tests/NetLValue/dut.sv, line:1:1, endln:10:10
@@ -238,7 +251,7 @@ design: (unnamed)
       |vpiName:S
       |vpiFullName:work@t.S
       |vpiActual:
-      \_struct_typespec: (S), line:2:12, endln:2:29
+      \_typedef_typespec: (S), line:2:30, endln:2:31
   |vpiTypedef:
   \_int_typespec: , line:4:4, endln:4:7
     |vpiParent:
@@ -248,6 +261,8 @@ design: (unnamed)
   \_struct_typespec: (S), line:2:12, endln:2:29
   |vpiImportTypespec:
   \_int_typespec: , line:2:21, endln:2:24
+  |vpiImportTypespec:
+  \_typedef_typespec: (S), line:2:30, endln:2:31
   |vpiImportTypespec:
   \_packed_array_typespec: , line:3:4, endln:3:10
   |vpiImportTypespec:
@@ -359,7 +374,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/NetLValue/dut.sv | ${SURELOG_DIR}/build/regression/NetLValue/roundtrip/dut_000.sv | 4 | 10 |
-============================== End RoundTrip Results ==============================

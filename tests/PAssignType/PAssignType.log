@@ -212,11 +212,12 @@ param_assign                                           3
 parameter                                              3
 range                                                  3
 ref_module                                             2
-ref_typespec                                           9
+ref_typespec                                          10
 source_file                                            1
 string_typespec                                        3
 struct_typespec                                        1
 tagged_pattern                                         3
+typedef_typespec                                       1
 typespec_member                                        1
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
@@ -323,6 +324,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (ctrl_reg_t), line:4:3, endln:4:13
+    |vpiParent:
+    \_package: aes_pkg (aes_pkg::), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:1:1, endln:9:11
+    |vpiName:ctrl_reg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (aes_pkg::ctrl_reg_t), line:2:9, endln:4:2
+      |vpiParent:
+      \_typedef_typespec: (ctrl_reg_t), line:4:3, endln:4:13
+      |vpiFullName:aes_pkg::ctrl_reg_t
+      |vpiActual:
+      \_struct_typespec: (aes_pkg::ctrl_reg_t), line:2:9, endln:4:2
+  |vpiTypedef:
   \_string_typespec: (manual_operation), line:7:3, endln:7:19
     |vpiParent:
     \_package: aes_pkg (aes_pkg::), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:1:1, endln:9:11
@@ -341,6 +354,8 @@ design: (unnamed)
   \_struct_typespec: (aes_pkg::ctrl_reg_t), line:2:9, endln:4:2
   |vpiImportTypespec:
   \_logic_typespec: , line:3:3, endln:3:14
+  |vpiImportTypespec:
+  \_typedef_typespec: (ctrl_reg_t), line:4:3, endln:4:13
   |vpiImportTypespec:
   \_string_typespec: (manual_operation), line:7:3, endln:7:19
   |vpiImportTypespec:
@@ -523,7 +538,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 4
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PAssignType/dut.sv | ${SURELOG_DIR}/build/regression/PAssignType/roundtrip/dut_000.sv | 14 | 26 |
-============================== End RoundTrip Results ==============================

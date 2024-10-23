@@ -138,9 +138,10 @@ package                                                1
 port                                                   1
 range                                                  1
 ref_obj                                                3
-ref_typespec                                           1
+ref_typespec                                           3
 source_file                                            1
 struct_typespec                                        1
+typedef_typespec                                       2
 typespec_member                                        1
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
@@ -182,10 +183,65 @@ design: (unnamed)
   \_logic_typespec: , line:4:7, endln:4:12
     |vpiParent:
     \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/HierPathVarArray/dut.sv, line:2:1, endln:7:11
+  |vpiTypedef:
+  \_typedef_typespec: (a), line:5:6, endln:5:7
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/HierPathVarArray/dut.sv, line:2:1, endln:7:11
+    |vpiName:a
+    |vpiTypedefAlias:
+    \_ref_typespec: (pkg::a), line:3:12, endln:5:5
+      |vpiParent:
+      \_typedef_typespec: (a), line:5:6, endln:5:7
+      |vpiFullName:pkg::a
+      |vpiActual:
+      \_struct_typespec: (pkg::a), line:3:12, endln:5:5
+  |vpiTypedef:
+  \_array_typespec: , line:6:12, endln:6:20
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/HierPathVarArray/dut.sv, line:2:1, endln:7:11
+    |vpiRange:
+    \_range: , line:6:15, endln:6:20
+      |vpiParent:
+      \_array_typespec: , line:6:12, endln:6:20
+      |vpiLeftRange:
+      \_constant: , line:6:16, endln:6:17
+        |vpiParent:
+        \_range: , line:6:15, endln:6:20
+        |vpiDecompile:5
+        |vpiSize:64
+        |UINT:5
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:6:18, endln:6:19
+        |vpiParent:
+        \_range: , line:6:15, endln:6:20
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (b), line:6:14, endln:6:15
+    |vpiParent:
+    \_package: pkg (pkg::), file:${SURELOG_DIR}/tests/HierPathVarArray/dut.sv, line:2:1, endln:7:11
+    |vpiName:b
+    |vpiTypedefAlias:
+    \_ref_typespec: (pkg::b::a), line:6:12, endln:6:13
+      |vpiParent:
+      \_typedef_typespec: (b), line:6:14, endln:6:15
+      |vpiName:a
+      |vpiFullName:pkg::b::a
+      |vpiActual:
+      \_typedef_typespec: (a), line:5:6, endln:5:7
   |vpiImportTypespec:
   \_struct_typespec: (pkg::a), line:3:12, endln:5:5
   |vpiImportTypespec:
   \_logic_typespec: , line:4:7, endln:4:12
+  |vpiImportTypespec:
+  \_typedef_typespec: (a), line:5:6, endln:5:7
+  |vpiImportTypespec:
+  \_array_typespec: , line:6:12, endln:6:20
+  |vpiImportTypespec:
+  \_typedef_typespec: (b), line:6:14, endln:6:15
   |vpiDefName:pkg
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathVarArray/dut.sv, line:9:1, endln:13:10
@@ -322,7 +378,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 1
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/HierPathVarArray/dut.sv | ${SURELOG_DIR}/build/regression/HierPathVarArray/roundtrip/dut_000.sv | 4 | 13 |
-============================== End RoundTrip Results ==============================

@@ -221,11 +221,12 @@ range                                                  2
 real_typespec                                          5
 real_var                                               2
 ref_obj                                                6
-ref_typespec                                          10
+ref_typespec                                          17
 ref_var                                                2
 source_file                                            1
 struct_typespec                                        1
 struct_var                                             1
+typedef_typespec                                       7
 typespec_member                                        2
 unsupported_typespec                                   2
 === UHDM Object Stats End ===
@@ -268,10 +269,45 @@ design: (unnamed)
   \_design: (unnamed)
   |vpiName:net_bit
 |vpiTypedef:
+\_typedef_typespec: (net_bit), line:6:13, endln:6:20
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:net_bit
+  |vpiTypedefAlias:
+  \_ref_typespec: (net_bit), line:6:9, endln:6:12
+    |vpiParent:
+    \_typedef_typespec: (net_bit), line:6:13, endln:6:20
+    |vpiFullName:net_bit
+    |vpiActual:
+    \_bit_typespec: (net_bit), line:6:9, endln:6:12
+|vpiTypedef:
 \_real_typespec: (my_real), line:9:9, endln:9:13
   |vpiParent:
   \_design: (unnamed)
   |vpiName:my_real
+|vpiTypedef:
+\_typedef_typespec: (my_real), line:9:14, endln:9:21
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:my_real
+  |vpiTypedefAlias:
+  \_ref_typespec: (my_real), line:9:9, endln:9:13
+    |vpiParent:
+    \_typedef_typespec: (my_real), line:9:14, endln:9:21
+    |vpiFullName:my_real
+    |vpiActual:
+    \_real_typespec: (my_real), line:9:9, endln:9:13
+|vpiTypedef:
+\_typedef_typespec: (myalias), line:18:25, endln:18:32
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:myalias
+  |vpiTypedefAlias:
+  \_ref_typespec: (myalias.some_other_type), line:18:9, endln:18:24
+    |vpiParent:
+    \_typedef_typespec: (myalias), line:18:25, endln:18:32
+    |vpiName:some_other_type
+    |vpiFullName:myalias.some_other_type
 |vpiTypedef:
 \_struct_typespec: (T), line:22:9, endln:25:2
   |vpiParent:
@@ -310,10 +346,56 @@ design: (unnamed)
   |vpiParent:
   \_design: (unnamed)
 |vpiTypedef:
+\_typedef_typespec: (T), line:25:3, endln:25:4
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:T
+  |vpiTypedefAlias:
+  \_ref_typespec: (T), line:22:9, endln:25:2
+    |vpiParent:
+    \_typedef_typespec: (T), line:25:3, endln:25:4
+    |vpiFullName:T
+    |vpiActual:
+    \_struct_typespec: (T), line:22:9, endln:25:2
+|vpiTypedef:
+\_typedef_typespec: (wT), line:34:11, endln:34:13
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:wT
+  |vpiTypedefAlias:
+  \_ref_typespec: (wT.T), line:34:9, endln:34:10
+    |vpiParent:
+    \_typedef_typespec: (wT), line:34:11, endln:34:13
+    |vpiName:T
+    |vpiFullName:wT.T
+|vpiTypedef:
+\_typedef_typespec: (wTsum), line:36:11, endln:36:16
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:wTsum
+  |vpiTypedefAlias:
+  \_ref_typespec: (wTsum.T), line:36:9, endln:36:10
+    |vpiParent:
+    \_typedef_typespec: (wTsum), line:36:11, endln:36:16
+    |vpiName:T
+    |vpiFullName:wTsum.T
+|vpiTypedef:
 \_real_typespec: (my_real), line:39:9, endln:39:13
   |vpiParent:
   \_design: (unnamed)
   |vpiName:my_real
+|vpiTypedef:
+\_typedef_typespec: (my_real), line:39:14, endln:39:21
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:my_real
+  |vpiTypedefAlias:
+  \_ref_typespec: (my_real), line:39:9, endln:39:13
+    |vpiParent:
+    \_typedef_typespec: (my_real), line:39:14, endln:39:21
+    |vpiFullName:my_real
+    |vpiActual:
+    \_real_typespec: (my_real), line:39:9, endln:39:13
 |vpiTypedef:
 \_unsupported_typespec: (driver), line:30:12, endln:30:18
   |vpiParent:
@@ -644,7 +726,3 @@ design: (unnamed)
 [LINT]: ${SURELOG_DIR}/tests/NetType/dut.sv:30:19: Unsupported typespec, i
 [LINT]:   \_ ${SURELOG_DIR}/tests/NetType/dut.sv:0:0:
 ============================== End Linting Results ==============================
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/NetType/dut.sv | ${SURELOG_DIR}/build/regression/NetType/roundtrip/dut_000.sv | 15 | 42 |
-============================== End RoundTrip Results ==============================

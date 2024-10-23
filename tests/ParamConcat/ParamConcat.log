@@ -419,12 +419,13 @@ param_assign                                           2
 parameter                                              2
 range                                                  1
 ref_module                                             1
-ref_typespec                                          17
+ref_typespec                                          19
 source_file                                            1
 string_typespec                                        2
 struct_typespec                                        1
 tagged_pattern                                         2
 task                                                   9
+typedef_typespec                                       2
 typespec_member                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamConcat/slpp_all/surelog.uhdm ...
@@ -824,8 +825,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/ParamConcat/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1202,6 +1217,18 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamConcat/dut.sv, line:6:1, endln:19:10
   |vpiTypedef:
+  \_typedef_typespec: (status_t), line:12:5, endln:12:13
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamConcat/dut.sv, line:6:1, endln:19:10
+    |vpiName:status_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top.status_t), line:9:11, endln:12:4
+      |vpiParent:
+      \_typedef_typespec: (status_t), line:12:5, endln:12:13
+      |vpiFullName:work@top.status_t
+      |vpiActual:
+      \_struct_typespec: (status_t), line:9:11, endln:12:4
+  |vpiTypedef:
   \_string_typespec: (mpie), line:14:43, endln:14:47
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ParamConcat/dut.sv, line:6:1, endln:19:10
@@ -1217,6 +1244,8 @@ design: (unnamed)
   \_logic_typespec: , line:10:5, endln:10:10
   |vpiImportTypespec:
   \_logic_typespec: , line:11:5, endln:11:10
+  |vpiImportTypespec:
+  \_typedef_typespec: (status_t), line:12:5, endln:12:13
   |vpiImportTypespec:
   \_string_typespec: (mpie), line:14:43, endln:14:47
   |vpiImportTypespec:
@@ -1236,7 +1265,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ParamConcat/dut.sv | ${SURELOG_DIR}/build/regression/ParamConcat/roundtrip/dut_000.sv | 9 | 19 |
-============================== End RoundTrip Results ==============================

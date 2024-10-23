@@ -762,11 +762,12 @@ param_assign                                           4
 parameter                                              4
 range                                                  4
 ref_obj                                               29
-ref_typespec                                          30
+ref_typespec                                          31
 ref_var                                                1
 return_stmt                                            3
 source_file                                            1
 task                                                   9
+typedef_typespec                                       1
 === UHDM Object Stats End ===
 [ERR:UH0734] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:38:17: Failed to bind object: "id: 132, name: i".
 [ERR:EL0535] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:38:17: Illegal implicit net "id:132, name: i".
@@ -774,10 +775,10 @@ task                                                   9
 [ERR:EL0535] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:39:29: Illegal implicit net "id:140, name: i".
 [ERR:UH0734] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:54:38: Failed to bind object: "id: 156, name: InfosPerBank".
 [ERR:EL0535] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:54:38: Illegal implicit net "id:156, name: InfosPerBank".
+[INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EvalFuncPack/slpp_all/surelog.uhdm ...
 [ERR:IG0809] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:38:17: Object 132 actual cannot be null.
 [ERR:IG0809] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:39:29: Object 140 actual cannot be null.
 [ERR:IG0809] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:54:38: Object 156 actual cannot be null.
-[INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EvalFuncPack/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/EvalFuncPack/slpp_all/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -1174,8 +1175,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/EvalFuncPack/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -2334,7 +2349,3 @@ design: (unnamed)
 [  ERROR] : 9
 [WARNING] : 4
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv | ${SURELOG_DIR}/build/regression/EvalFuncPack/roundtrip/dut_000.sv | 20 | 63 |
-============================== End RoundTrip Results ==============================

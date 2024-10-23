@@ -92,8 +92,9 @@ operation                                              5
 param_assign                                           2
 parameter                                              2
 ref_obj                                                5
-ref_typespec                                           3
+ref_typespec                                           4
 source_file                                            1
+typedef_typespec                                       1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FileParam/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/FileParam/slpp_all/checker/surelog.chk.html ...
@@ -142,6 +143,18 @@ design: (unnamed)
     |vpiName:SCR1_SCU_DR_SYSCTRL_OP_BIT_L
     |UINT:0
     |vpiDecompile:P2 + 4
+|vpiTypedef:
+\_typedef_typespec: (type_scr1_scu_sysctrl_dr_bits_e), line:9:3, endln:9:34
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:type_scr1_scu_sysctrl_dr_bits_e
+  |vpiTypedefAlias:
+  \_ref_typespec: (type_scr1_scu_sysctrl_dr_bits_e), line:5:9, endln:9:2
+    |vpiParent:
+    \_typedef_typespec: (type_scr1_scu_sysctrl_dr_bits_e), line:9:3, endln:9:34
+    |vpiFullName:type_scr1_scu_sysctrl_dr_bits_e
+    |vpiActual:
+    \_enum_typespec: (type_scr1_scu_sysctrl_dr_bits_e), line:5:9, endln:9:35
 |vpiParameter:
 \_parameter: (P1), line:1:12, endln:1:18
   |vpiParent:
@@ -161,7 +174,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/FileParam/dut.sv | ${SURELOG_DIR}/build/regression/FileParam/roundtrip/dut_000.sv | 5 | 13 |
-============================== End RoundTrip Results ==============================

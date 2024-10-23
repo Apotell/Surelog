@@ -20,9 +20,10 @@ parameter                                              1
 port                                                   1
 range                                                  3
 ref_obj                                                2
-ref_typespec                                           7
+ref_typespec                                           8
 source_file                                            1
 struct_typespec                                        1
+typedef_typespec                                       1
 typespec_member                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PortPackage/slpp_unit/surelog.uhdm ...
@@ -99,12 +100,26 @@ design: (unnamed)
   \_logic_typespec: , line:5:9, endln:5:14
     |vpiParent:
     \_package: dm (dm::), file:${SURELOG_DIR}/tests/PortPackage/dut.sv, line:1:1, endln:8:11
+  |vpiTypedef:
+  \_typedef_typespec: (hartinfo_t), line:6:7, endln:6:17
+    |vpiParent:
+    \_package: dm (dm::), file:${SURELOG_DIR}/tests/PortPackage/dut.sv, line:1:1, endln:8:11
+    |vpiName:hartinfo_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (dm::hartinfo_t), line:3:10, endln:6:6
+      |vpiParent:
+      \_typedef_typespec: (hartinfo_t), line:6:7, endln:6:17
+      |vpiFullName:dm::hartinfo_t
+      |vpiActual:
+      \_struct_typespec: (dm::hartinfo_t), line:3:10, endln:6:6
   |vpiImportTypespec:
   \_struct_typespec: (dm::hartinfo_t), line:3:10, endln:6:6
   |vpiImportTypespec:
   \_logic_typespec: , line:4:9, endln:4:22
   |vpiImportTypespec:
   \_logic_typespec: , line:5:9, endln:5:14
+  |vpiImportTypespec:
+  \_typedef_typespec: (hartinfo_t), line:6:7, endln:6:17
   |vpiDefName:dm
 |uhdmallModules:
 \_module_inst: work@dm_top (work@dm_top), file:${SURELOG_DIR}/tests/PortPackage/dut.sv, line:10:1, endln:17:10
@@ -275,7 +290,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PortPackage/dut.sv | ${SURELOG_DIR}/build/regression/PortPackage/roundtrip/dut_000.sv | 7 | 17 |
-============================== End RoundTrip Results ==============================

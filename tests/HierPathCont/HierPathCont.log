@@ -172,10 +172,11 @@ operation                                              2
 port                                                   4
 range                                                  4
 ref_obj                                                7
-ref_typespec                                           9
+ref_typespec                                          10
 source_file                                            1
 struct_net                                             1
 struct_typespec                                        1
+typedef_typespec                                       1
 typespec_member                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathCont/slpp_all/surelog.uhdm ...
@@ -550,13 +551,21 @@ design: (unnamed)
       |vpiSize:64
       |UINT:0
       |vpiConstType:9
+|vpiTypedef:
+\_typedef_typespec: (my_struct_packed_t), line:1:40, endln:1:58
+  |vpiParent:
+  \_design: (unnamed)
+  |vpiName:my_struct_packed_t
+  |vpiTypedefAlias:
+  \_ref_typespec: (my_struct_packed_t), line:1:9, endln:1:39
+    |vpiParent:
+    \_typedef_typespec: (my_struct_packed_t), line:1:40, endln:1:58
+    |vpiFullName:my_struct_packed_t
+    |vpiActual:
+    \_struct_typespec: (my_struct_packed_t), line:1:9, endln:1:39
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/HierPathCont/dut.sv | ${SURELOG_DIR}/build/regression/HierPathCont/roundtrip/dut_000.sv | 11 | 22 |
-============================== End RoundTrip Results ==============================

@@ -345,11 +345,12 @@ parameter                                              3
 range                                                  7
 ref_module                                             2
 ref_obj                                                3
-ref_typespec                                          14
+ref_typespec                                          18
 source_file                                            1
 string_typespec                                        4
 struct_typespec                                        2
 tagged_pattern                                         4
+typedef_typespec                                       4
 typespec_member                                        4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EnumConstElab/slpp_all/surelog.uhdm ...
@@ -607,6 +608,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (struct_t), line:10:6, endln:10:14
+    |vpiParent:
+    \_module_inst: work@prim_subreg_shadow (work@prim_subreg_shadow), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:6:1, endln:24:10
+    |vpiName:struct_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@prim_subreg_shadow.struct_t), line:7:12, endln:10:5
+      |vpiParent:
+      \_typedef_typespec: (struct_t), line:10:6, endln:10:14
+      |vpiFullName:work@prim_subreg_shadow.struct_t
+      |vpiActual:
+      \_struct_typespec: (struct_t), line:7:12, endln:10:5
+  |vpiTypedef:
   \_logic_typespec: , line:12:17, endln:12:28
     |vpiParent:
     \_module_inst: work@prim_subreg_shadow (work@prim_subreg_shadow), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:6:1, endln:24:10
@@ -651,6 +664,18 @@ design: (unnamed)
       |vpiDecompile:3'b000
       |vpiSize:3
   |vpiTypedef:
+  \_typedef_typespec: (enum_t), line:14:6, endln:14:12
+    |vpiParent:
+    \_module_inst: work@prim_subreg_shadow (work@prim_subreg_shadow), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:6:1, endln:24:10
+    |vpiName:enum_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@prim_subreg_shadow.enum_t), line:12:12, endln:14:5
+      |vpiParent:
+      \_typedef_typespec: (enum_t), line:14:6, endln:14:12
+      |vpiFullName:work@prim_subreg_shadow.enum_t
+      |vpiActual:
+      \_enum_typespec: (enum_t), line:12:12, endln:14:13
+  |vpiTypedef:
   \_string_typespec: (a), line:17:7, endln:17:8
     |vpiParent:
     \_module_inst: work@prim_subreg_shadow (work@prim_subreg_shadow), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:6:1, endln:24:10
@@ -667,9 +692,13 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:9:7, endln:9:18
   |vpiImportTypespec:
+  \_typedef_typespec: (struct_t), line:10:6, endln:10:14
+  |vpiImportTypespec:
   \_logic_typespec: , line:12:17, endln:12:28
   |vpiImportTypespec:
   \_enum_typespec: (enum_t), line:12:12, endln:14:13
+  |vpiImportTypespec:
+  \_typedef_typespec: (enum_t), line:14:6, endln:14:12
   |vpiImportTypespec:
   \_string_typespec: (a), line:17:7, endln:17:8
   |vpiImportTypespec:
@@ -831,6 +860,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (struct_t), line:30:6, endln:30:14
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:26:1, endln:44:10
+    |vpiName:struct_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top.struct_t), line:27:12, endln:30:5
+      |vpiParent:
+      \_typedef_typespec: (struct_t), line:30:6, endln:30:14
+      |vpiFullName:work@top.struct_t
+      |vpiActual:
+      \_struct_typespec: (struct_t), line:27:12, endln:30:5
+  |vpiTypedef:
   \_logic_typespec: , line:32:17, endln:32:28
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:26:1, endln:44:10
@@ -875,6 +916,18 @@ design: (unnamed)
       |vpiDecompile:2'b11
       |vpiSize:2
   |vpiTypedef:
+  \_typedef_typespec: (enum_t), line:34:6, endln:34:12
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:26:1, endln:44:10
+    |vpiName:enum_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top.enum_t), line:32:12, endln:34:5
+      |vpiParent:
+      \_typedef_typespec: (enum_t), line:34:6, endln:34:12
+      |vpiFullName:work@top.enum_t
+      |vpiActual:
+      \_enum_typespec: (enum_t), line:32:12, endln:34:13
+  |vpiTypedef:
   \_string_typespec: (a), line:37:7, endln:37:8
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:26:1, endln:44:10
@@ -891,9 +944,13 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:29:7, endln:29:18
   |vpiImportTypespec:
+  \_typedef_typespec: (struct_t), line:30:6, endln:30:14
+  |vpiImportTypespec:
   \_logic_typespec: , line:32:17, endln:32:28
   |vpiImportTypespec:
   \_enum_typespec: (enum_t), line:32:12, endln:34:13
+  |vpiImportTypespec:
+  \_typedef_typespec: (enum_t), line:34:6, endln:34:12
   |vpiImportTypespec:
   \_string_typespec: (a), line:37:7, endln:37:8
   |vpiImportTypespec:
@@ -913,7 +970,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 3
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/EnumConstElab/dut.sv | ${SURELOG_DIR}/build/regression/EnumConstElab/roundtrip/dut_000.sv | 18 | 44 |
-============================== End RoundTrip Results ==============================

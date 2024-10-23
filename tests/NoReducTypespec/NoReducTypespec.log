@@ -232,11 +232,12 @@ parameter                                              4
 range                                                  2
 ref_module                                             1
 ref_obj                                                6
-ref_typespec                                          16
+ref_typespec                                          17
 source_file                                            1
 string_typespec                                        9
 struct_typespec                                        1
 tagged_pattern                                         9
+typedef_typespec                                       1
 typespec_member                                        3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/NoReducTypespec/slpp_all/surelog.uhdm ...
@@ -309,6 +310,18 @@ design: (unnamed)
   \_int_typespec: , line:5:5, endln:5:17
     |vpiParent:
     \_package: axi_pkg (axi_pkg::), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:1:1, endln:7:11
+  |vpiTypedef:
+  \_typedef_typespec: (xbar_cfg_t), line:6:5, endln:6:15
+    |vpiParent:
+    \_package: axi_pkg (axi_pkg::), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:1:1, endln:7:11
+    |vpiName:xbar_cfg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (axi_pkg::xbar_cfg_t), line:2:11, endln:6:4
+      |vpiParent:
+      \_typedef_typespec: (xbar_cfg_t), line:6:5, endln:6:15
+      |vpiFullName:axi_pkg::xbar_cfg_t
+      |vpiActual:
+      \_struct_typespec: (axi_pkg::xbar_cfg_t), line:2:11, endln:6:4
   |vpiImportTypespec:
   \_struct_typespec: (axi_pkg::xbar_cfg_t), line:2:11, endln:6:4
   |vpiImportTypespec:
@@ -317,6 +330,8 @@ design: (unnamed)
   \_int_typespec: , line:4:5, endln:4:17
   |vpiImportTypespec:
   \_int_typespec: , line:5:5, endln:5:17
+  |vpiImportTypespec:
+  \_typedef_typespec: (xbar_cfg_t), line:6:5, endln:6:15
   |vpiDefName:axi_pkg
 |uhdmallPackages:
 \_package: cheshire_pkg (cheshire_pkg::), file:${SURELOG_DIR}/tests/NoReducTypespec/dut.sv, line:18:1, endln:24:11
@@ -684,7 +699,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 4
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/NoReducTypespec/dut.sv | ${SURELOG_DIR}/build/regression/NoReducTypespec/roundtrip/dut_000.sv | 14 | 30 |
-============================== End RoundTrip Results ==============================

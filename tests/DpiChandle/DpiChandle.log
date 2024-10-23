@@ -325,12 +325,13 @@ io_decl                                               12
 logic_var                                              1
 module_inst                                            1
 package                                                1
-ref_typespec                                          13
+ref_typespec                                          14
 source_file                                            1
 task                                                   9
+typedef_typespec                                       1
 === UHDM Object Stats End ===
-[ERR:IG0809] ${SURELOG_DIR}/tests/DpiChandle/dut.sv:3:6: Object 6 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/DpiChandle/slpp_all/surelog.uhdm ...
+[ERR:IG0809] ${SURELOG_DIR}/tests/DpiChandle/dut.sv:3:6: Object 6 actual cannot be null.
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/DpiChandle/slpp_all/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -727,8 +728,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/DpiChandle/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1021,7 +1036,3 @@ design: (unnamed)
 [LINT]: ${SURELOG_DIR}/tests/DpiChandle/dut.sv:3:6: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/DpiChandle/dut.sv:6:28: Non synthesizable construct,
 ============================== End Linting Results ==============================
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/DpiChandle/dut.sv | ${SURELOG_DIR}/build/regression/DpiChandle/roundtrip/dut_000.sv | 6 | 7 |
-============================== End RoundTrip Results ==============================

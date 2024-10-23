@@ -360,9 +360,10 @@ method_func_call                                       2
 operation                                              1
 package                                                2
 ref_obj                                                6
-ref_typespec                                          11
+ref_typespec                                          12
 source_file                                            1
 task                                                   9
+typedef_typespec                                       1
 wait_stmt                                              1
 === UHDM Object Stats End ===
 [ERR:UH0734] ${SURELOG_DIR}/tests/DoWhile/dut.sv:10:14: Failed to bind object: "id: 18, name: m_type_names".
@@ -379,6 +380,7 @@ wait_stmt                                              1
 [ERR:EL0535] ${SURELOG_DIR}/tests/DoWhile/dut.sv:7:32: Illegal implicit net "id:13, name: UVM_PHASE_SYNCING".
 [ERR:UH0734] ${SURELOG_DIR}/tests/DoWhile/dut.sv:8:5: Failed to bind object: "id: 15, name: qs".
 [ERR:EL0535] ${SURELOG_DIR}/tests/DoWhile/dut.sv:8:5: Illegal implicit net "id:15, name: qs".
+[INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/DoWhile/slpp_all/surelog.uhdm ...
 [ERR:IG0807] ${SURELOG_DIR}/tests/DoWhile/dut.sv:10:14: Child 17 is not entirely in parent's scope.
 [ERR:IG0809] ${SURELOG_DIR}/tests/DoWhile/dut.sv:10:14: Object 18 actual cannot be null.
 [ERR:IG0809] ${SURELOG_DIR}/tests/DoWhile/dut.sv:10:32: Object 20 actual cannot be null.
@@ -387,7 +389,6 @@ wait_stmt                                              1
 [ERR:IG0809] ${SURELOG_DIR}/tests/DoWhile/dut.sv:7:21: Object 11 actual cannot be null.
 [ERR:IG0809] ${SURELOG_DIR}/tests/DoWhile/dut.sv:7:32: Object 13 actual cannot be null.
 [ERR:IG0809] ${SURELOG_DIR}/tests/DoWhile/dut.sv:8:5: Object 15 actual cannot be null.
-[INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/DoWhile/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/DoWhile/slpp_all/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -784,8 +785,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/DoWhile/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1112,7 +1127,3 @@ design: (unnamed)
 [LINT]: ${SURELOG_DIR}/tests/DoWhile/dut.sv:7:5: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/DoWhile/dut.sv:8:5: Non synthesizable construct, push_back
 ============================== End Linting Results ==============================
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/DoWhile/dut.sv | ${SURELOG_DIR}/build/regression/DoWhile/roundtrip/dut_000.sv | 3 | 14 |
-============================== End RoundTrip Results ==============================

@@ -147,11 +147,12 @@ operation                                              1
 param_assign                                           1
 parameter                                              1
 range                                                  4
-ref_typespec                                           8
+ref_typespec                                           9
 source_file                                            1
 string_typespec                                        3
 struct_typespec                                        1
 tagged_pattern                                         3
+typedef_typespec                                       1
 typespec_member                                        4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/DefaultTag/slpp_all/surelog.uhdm ...
@@ -403,6 +404,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (struct_1), line:7:6, endln:7:14
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultTag/dut.sv, line:1:1, endln:9:10
+    |vpiName:struct_1
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top.struct_1), line:2:12, endln:7:5
+      |vpiParent:
+      \_typedef_typespec: (struct_1), line:7:6, endln:7:14
+      |vpiFullName:work@top.struct_1
+      |vpiActual:
+      \_struct_typespec: (struct_1), line:2:12, endln:7:5
+  |vpiTypedef:
   \_string_typespec: (b), line:8:29, endln:8:30
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/DefaultTag/dut.sv, line:1:1, endln:9:10
@@ -428,6 +441,8 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:6:7, endln:6:18
   |vpiImportTypespec:
+  \_typedef_typespec: (struct_1), line:7:6, endln:7:14
+  |vpiImportTypespec:
   \_string_typespec: (b), line:8:29, endln:8:30
   |vpiImportTypespec:
   \_string_typespec: (d), line:8:36, endln:8:37
@@ -440,7 +455,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/DefaultTag/dut.sv | ${SURELOG_DIR}/build/regression/DefaultTag/roundtrip/dut_000.sv | 3 | 9 |
-============================== End RoundTrip Results ==============================

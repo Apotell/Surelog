@@ -138,9 +138,10 @@ package                                                1
 part_select                                            2
 range                                                  2
 ref_obj                                                1
-ref_typespec                                           3
+ref_typespec                                           4
 source_file                                            1
 struct_typespec                                        1
+typedef_typespec                                       1
 typespec_member                                        2
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
@@ -238,12 +239,26 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (trace_pkt_t), line:6:26, endln:6:37
+    |vpiParent:
+    \_package: swerv_types (swerv_types::), file:${SURELOG_DIR}/tests/PartSelectHierPath/dut.sv, line:1:1, endln:8:11
+    |vpiName:trace_pkt_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (swerv_types::trace_pkt_t), line:3:9, endln:6:25
+      |vpiParent:
+      \_typedef_typespec: (trace_pkt_t), line:6:26, endln:6:37
+      |vpiFullName:swerv_types::trace_pkt_t
+      |vpiActual:
+      \_struct_typespec: (swerv_types::trace_pkt_t), line:3:9, endln:6:25
   |vpiImportTypespec:
   \_struct_typespec: (swerv_types::trace_pkt_t), line:3:9, endln:6:25
   |vpiImportTypespec:
   \_logic_typespec: , line:4:24, endln:4:35
   |vpiImportTypespec:
   \_logic_typespec: , line:5:24, endln:5:36
+  |vpiImportTypespec:
+  \_typedef_typespec: (trace_pkt_t), line:6:26, endln:6:37
   |vpiDefName:swerv_types
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PartSelectHierPath/dut.sv, line:10:1, endln:14:10
@@ -351,7 +366,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PartSelectHierPath/dut.sv | ${SURELOG_DIR}/build/regression/PartSelectHierPath/roundtrip/dut_000.sv | 4 | 14 |
-============================== End RoundTrip Results ==============================

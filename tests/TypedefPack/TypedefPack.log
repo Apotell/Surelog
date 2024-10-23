@@ -129,8 +129,9 @@ package                                                1
 port                                                   2
 range                                                  4
 ref_obj                                                2
-ref_typespec                                           2
+ref_typespec                                           4
 source_file                                            1
+typedef_typespec                                       2
 unsupported_typespec                                   2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypedefPack/slpp_all/surelog.uhdm ...
@@ -201,10 +202,39 @@ design: (unnamed)
       |BIN:0101
       |vpiDecompile:4'b0101
       |vpiSize:4
+  |vpiTypedef:
+  \_typedef_typespec: (lc_tx_e), line:5:5, endln:5:12
+    |vpiParent:
+    \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/TypedefPack/dut.sv, line:1:1, endln:8:25
+    |vpiName:lc_tx_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (lc_ctrl_pkg::lc_tx_e), line:2:11, endln:5:4
+      |vpiParent:
+      \_typedef_typespec: (lc_tx_e), line:5:5, endln:5:12
+      |vpiFullName:lc_ctrl_pkg::lc_tx_e
+      |vpiActual:
+      \_enum_typespec: (lc_ctrl_pkg::lc_tx_e), line:2:11, endln:5:13
+  |vpiTypedef:
+  \_typedef_typespec: (lc_tx_t), line:7:19, endln:7:26
+    |vpiParent:
+    \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/TypedefPack/dut.sv, line:1:1, endln:8:25
+    |vpiName:lc_tx_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (lc_ctrl_pkg::lc_tx_t::lc_tx_e), line:7:11, endln:7:18
+      |vpiParent:
+      \_typedef_typespec: (lc_tx_t), line:7:19, endln:7:26
+      |vpiName:lc_tx_e
+      |vpiFullName:lc_ctrl_pkg::lc_tx_t::lc_tx_e
+      |vpiActual:
+      \_typedef_typespec: (lc_tx_e), line:5:5, endln:5:12
   |vpiImportTypespec:
   \_logic_typespec: , line:2:16, endln:2:27
   |vpiImportTypespec:
   \_enum_typespec: (lc_ctrl_pkg::lc_tx_e), line:2:11, endln:5:13
+  |vpiImportTypespec:
+  \_typedef_typespec: (lc_tx_e), line:5:5, endln:5:12
+  |vpiImportTypespec:
+  \_typedef_typespec: (lc_tx_t), line:7:19, endln:7:26
   |vpiDefName:lc_ctrl_pkg
   |vpiEndLabel:lc_ctrl_pkg
 |uhdmallModules:
@@ -265,7 +295,7 @@ design: (unnamed)
       |vpiName:lc_ctrl_pkg::lc_tx_t
       |vpiFullName:work@prim_lc_sender.lc_en_o.lc_ctrl_pkg::lc_tx_t
       |vpiActual:
-      \_unsupported_typespec: (lc_ctrl_pkg::lc_tx_t), line:12:10, endln:12:23
+      \_typedef_typespec: (lc_tx_t), line:7:19, endln:7:26
   |vpiContAssign:
   \_cont_assign: , line:14:10, endln:14:50
     |vpiParent:
@@ -298,7 +328,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/TypedefPack/dut.sv | ${SURELOG_DIR}/build/regression/TypedefPack/roundtrip/dut_000.sv | 9 | 15 |
-============================== End RoundTrip Results ==============================

@@ -1339,11 +1339,11 @@ port                                                   2
 range                                                 12
 ref_module                                             2
 ref_obj                                               47
-ref_typespec                                          26
+ref_typespec                                          29
 source_file                                            1
 sys_func_call                                          5
 task                                                   9
-unsupported_typespec                                   2
+typedef_typespec                                       5
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Bindings/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/Bindings/slpp_all/checker/surelog.chk.html ...
@@ -1742,8 +1742,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/Bindings/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1976,13 +1990,6 @@ design: (unnamed)
   \_parameter: (pack1::LC_TX_DEFAULT), line:15:22, endln:15:41
     |vpiParent:
     \_package: pack1 (pack1::), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:3:1, endln:17:11
-    |vpiTypespec:
-    \_ref_typespec: (pack1::LC_TX_DEFAULT), line:15:14, endln:15:21
-      |vpiParent:
-      \_parameter: (pack1::LC_TX_DEFAULT), line:15:22, endln:15:41
-      |vpiFullName:pack1::LC_TX_DEFAULT
-      |vpiActual:
-      \_unsupported_typespec: (lc_tx_t), line:15:14, endln:15:21
     |vpiName:LC_TX_DEFAULT
     |vpiFullName:pack1::LC_TX_DEFAULT
   |vpiParamAssign:
@@ -2084,10 +2091,30 @@ design: (unnamed)
       |vpiDecompile:4'b0101
       |vpiSize:4
   |vpiTypedef:
-  \_unsupported_typespec: (lc_tx_t), line:15:14, endln:15:21
+  \_typedef_typespec: (lc_tx_e), line:11:7, endln:11:14
+    |vpiParent:
+    \_package: pack1 (pack1::), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:3:1, endln:17:11
+    |vpiName:lc_tx_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (pack1::lc_tx_e), line:8:11, endln:11:6
+      |vpiParent:
+      \_typedef_typespec: (lc_tx_e), line:11:7, endln:11:14
+      |vpiFullName:pack1::lc_tx_e
+      |vpiActual:
+      \_enum_typespec: (pack1::lc_tx_e), line:8:11, endln:11:15
+  |vpiTypedef:
+  \_typedef_typespec: (lc_tx_t), line:13:21, endln:13:28
     |vpiParent:
     \_package: pack1 (pack1::), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:3:1, endln:17:11
     |vpiName:lc_tx_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (pack1::lc_tx_t::lc_tx_e), line:13:13, endln:13:20
+      |vpiParent:
+      \_typedef_typespec: (lc_tx_t), line:13:21, endln:13:28
+      |vpiName:lc_tx_e
+      |vpiFullName:pack1::lc_tx_t::lc_tx_e
+      |vpiActual:
+      \_typedef_typespec: (lc_tx_e), line:11:7, endln:11:14
   |vpiImportTypespec:
   \_int_typespec: , line:6:13, endln:6:16
   |vpiImportTypespec:
@@ -2095,7 +2122,9 @@ design: (unnamed)
   |vpiImportTypespec:
   \_enum_typespec: (pack1::lc_tx_e), line:8:11, endln:11:15
   |vpiImportTypespec:
-  \_unsupported_typespec: (lc_tx_t), line:15:14, endln:15:21
+  \_typedef_typespec: (lc_tx_e), line:11:7, endln:11:14
+  |vpiImportTypespec:
+  \_typedef_typespec: (lc_tx_t), line:13:21, endln:13:28
   |vpiDefName:pack1
 |uhdmallModules:
 \_module_inst: work@bsg_dff_reset (work@bsg_dff_reset), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:67:1, endln:80:10
@@ -3055,13 +3084,6 @@ design: (unnamed)
   \_parameter: (work@dut5.LC_TX_DEFAULT), line:94:22, endln:94:41
     |vpiParent:
     \_module_inst: work@dut5 (work@dut5), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:82:1, endln:108:10
-    |vpiTypespec:
-    \_ref_typespec: (work@dut5.LC_TX_DEFAULT), line:94:14, endln:94:21
-      |vpiParent:
-      \_parameter: (work@dut5.LC_TX_DEFAULT), line:94:22, endln:94:41
-      |vpiFullName:work@dut5.LC_TX_DEFAULT
-      |vpiActual:
-      \_unsupported_typespec: (lc_tx_t), line:94:14, endln:94:21
     |vpiName:LC_TX_DEFAULT
     |vpiFullName:work@dut5.LC_TX_DEFAULT
   |vpiParamAssign:
@@ -3220,10 +3242,30 @@ design: (unnamed)
       |vpiDecompile:4'b0101
       |vpiSize:4
   |vpiTypedef:
-  \_unsupported_typespec: (lc_tx_t), line:94:14, endln:94:21
+  \_typedef_typespec: (lc_tx_e), line:90:7, endln:90:14
+    |vpiParent:
+    \_module_inst: work@dut5 (work@dut5), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:82:1, endln:108:10
+    |vpiName:lc_tx_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@dut5.lc_tx_e), line:87:13, endln:90:6
+      |vpiParent:
+      \_typedef_typespec: (lc_tx_e), line:90:7, endln:90:14
+      |vpiFullName:work@dut5.lc_tx_e
+      |vpiActual:
+      \_enum_typespec: (lc_tx_e), line:87:13, endln:90:15
+  |vpiTypedef:
+  \_typedef_typespec: (lc_tx_t), line:92:21, endln:92:28
     |vpiParent:
     \_module_inst: work@dut5 (work@dut5), file:${SURELOG_DIR}/tests/Bindings/dut.sv, line:82:1, endln:108:10
     |vpiName:lc_tx_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@dut5.lc_tx_t.lc_tx_e), line:92:13, endln:92:20
+      |vpiParent:
+      \_typedef_typespec: (lc_tx_t), line:92:21, endln:92:28
+      |vpiName:lc_tx_e
+      |vpiFullName:work@dut5.lc_tx_t.lc_tx_e
+      |vpiActual:
+      \_enum_typespec: (lc_tx_e), line:87:13, endln:90:15
   |vpiTypedef:
   \_logic_typespec: , line:96:4, endln:96:22
     |vpiParent:
@@ -3268,7 +3310,9 @@ design: (unnamed)
   |vpiImportTypespec:
   \_enum_typespec: (lc_tx_e), line:87:13, endln:90:15
   |vpiImportTypespec:
-  \_unsupported_typespec: (lc_tx_t), line:94:14, endln:94:21
+  \_typedef_typespec: (lc_tx_e), line:90:7, endln:90:14
+  |vpiImportTypespec:
+  \_typedef_typespec: (lc_tx_t), line:92:21, endln:92:28
   |vpiImportTypespec:
   \_logic_typespec: , line:96:4, endln:96:22
   |vpiImportTypespec:
@@ -3604,7 +3648,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 6
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/Bindings/dut.sv | ${SURELOG_DIR}/build/regression/Bindings/roundtrip/dut_000.sv | 54 | 108 |
-============================== End RoundTrip Results ==============================

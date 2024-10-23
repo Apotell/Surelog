@@ -805,18 +805,19 @@ parameter                                              7
 range                                                 10
 ref_module                                             2
 ref_obj                                               21
-ref_typespec                                          39
+ref_typespec                                          42
 ref_var                                                1
 source_file                                            1
 string_typespec                                       12
 struct_typespec                                        1
 tagged_pattern                                        12
 task                                                   9
+typedef_typespec                                       3
 typespec_member                                        2
 unsupported_typespec                                   4
 === UHDM Object Stats End ===
-[ERR:IG0809] ${SURELOG_DIR}/tests/ParamArraySelect/dut.sv:45:6: Object 129 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamArraySelect/slpp_all/surelog.uhdm ...
+[ERR:IG0809] ${SURELOG_DIR}/tests/ParamArraySelect/dut.sv:45:6: Object 133 actual cannot be null.
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ParamArraySelect/slpp_all/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -1213,8 +1214,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/ParamArraySelect/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1536,6 +1551,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (part_info_t), line:5:5, endln:5:16
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:1:1, endln:7:11
+    |vpiName:part_info_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::part_info_t), line:2:11, endln:5:4
+      |vpiParent:
+      \_typedef_typespec: (part_info_t), line:5:5, endln:5:16
+      |vpiFullName:otp_ctrl_pkg::part_info_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_pkg::part_info_t), line:2:11, endln:5:4
+  |vpiTypedef:
   \_int_typespec: , line:6:13, endln:6:16
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:1:1, endln:7:11
@@ -1546,6 +1573,8 @@ design: (unnamed)
   \_logic_typespec: , line:3:5, endln:3:17
   |vpiImportTypespec:
   \_logic_typespec: , line:4:5, endln:4:17
+  |vpiImportTypespec:
+  \_typedef_typespec: (part_info_t), line:5:5, endln:5:16
   |vpiImportTypespec:
   \_int_typespec: , line:6:13, endln:6:16
   |vpiDefName:otp_ctrl_pkg
@@ -1804,6 +1833,18 @@ design: (unnamed)
       |INT:1
       |vpiDecompile:1
       |vpiSize:64
+  |vpiTypedef:
+  \_typedef_typespec: (part_idx_e), line:28:5, endln:28:15
+    |vpiParent:
+    \_package: otp_ctrl_part_pkg (otp_ctrl_part_pkg::), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:10:1, endln:30:11
+    |vpiName:part_idx_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_part_pkg::part_idx_e), line:25:11, endln:28:4
+      |vpiParent:
+      \_typedef_typespec: (part_idx_e), line:28:5, endln:28:15
+      |vpiFullName:otp_ctrl_part_pkg::part_idx_e
+      |vpiActual:
+      \_enum_typespec: (otp_ctrl_part_pkg::part_idx_e), line:25:11, endln:28:16
   |vpiImportTypespec:
   \_import_typespec: (otp_ctrl_pkg), line:11:10, endln:11:25
   |vpiImportTypespec:
@@ -1838,6 +1879,8 @@ design: (unnamed)
   \_string_typespec: (offset), line:21:7, endln:21:13
   |vpiImportTypespec:
   \_enum_typespec: (otp_ctrl_part_pkg::part_idx_e), line:25:11, endln:28:16
+  |vpiImportTypespec:
+  \_typedef_typespec: (part_idx_e), line:28:5, endln:28:15
   |vpiDefName:otp_ctrl_part_pkg
 |uhdmallModules:
 \_module_inst: work@otp_ctrl_lci (work@otp_ctrl_lci), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:33:1, endln:48:10
@@ -2478,7 +2521,3 @@ design: (unnamed)
 [  ERROR] : 1
 [WARNING] : 4
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ParamArraySelect/dut.sv | ${SURELOG_DIR}/build/regression/ParamArraySelect/roundtrip/dut_000.sv | 27 | 71 |
-============================== End RoundTrip Results ==============================

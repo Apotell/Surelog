@@ -8867,13 +8867,14 @@ param_assign                                         123
 parameter                                            123
 range                                                106
 ref_obj                                              228
-ref_typespec                                        1094
+ref_typespec                                        1192
 source_file                                            1
 string_typespec                                      723
 struct_typespec                                       43
 sys_func_call                                         17
 tagged_pattern                                       723
 task                                                   9
+typedef_typespec                                      98
 typespec_member                                      264
 union_typespec                                         2
 unsupported_typespec                                   2
@@ -9275,8 +9276,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/BlackParrotParam/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -10058,6 +10073,18 @@ design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
   |vpiTypedef:
+  \_typedef_typespec: (bp_fe_queue_type_e), line:328:3, endln:328:21
+    |vpiParent:
+    \_package: bp_common_pkg (bp_common_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2:1, endln:925:27
+    |vpiName:bp_fe_queue_type_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_pkg::bp_fe_queue_type_e), line:324:9, endln:328:2
+      |vpiParent:
+      \_typedef_typespec: (bp_fe_queue_type_e), line:328:3, endln:328:21
+      |vpiFullName:bp_common_pkg::bp_fe_queue_type_e
+      |vpiActual:
+      \_enum_typespec: (bp_common_pkg::bp_fe_queue_type_e), line:324:9, endln:328:22
+  |vpiTypedef:
   \_bit_typespec: , line:341:14, endln:341:23
     |vpiParent:
     \_package: bp_common_pkg (bp_common_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2:1, endln:925:27
@@ -10150,6 +10177,18 @@ design: (unnamed)
       |vpiDecompile:6
       |vpiSize:64
   |vpiTypedef:
+  \_typedef_typespec: (bp_fe_command_queue_opcodes_e), line:350:3, endln:350:32
+    |vpiParent:
+    \_package: bp_common_pkg (bp_common_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2:1, endln:925:27
+    |vpiName:bp_fe_command_queue_opcodes_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_pkg::bp_fe_command_queue_opcodes_e), line:341:9, endln:350:2
+      |vpiParent:
+      \_typedef_typespec: (bp_fe_command_queue_opcodes_e), line:350:3, endln:350:32
+      |vpiFullName:bp_common_pkg::bp_fe_command_queue_opcodes_e
+      |vpiActual:
+      \_enum_typespec: (bp_common_pkg::bp_fe_command_queue_opcodes_e), line:341:9, endln:350:33
+  |vpiTypedef:
   \_bit_typespec: , line:355:14, endln:355:17
     |vpiParent:
     \_package: bp_common_pkg (bp_common_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2:1, endln:925:27
@@ -10181,6 +10220,18 @@ design: (unnamed)
       |UINT:1
       |vpiDecompile:1
       |vpiSize:64
+  |vpiTypedef:
+  \_typedef_typespec: (bp_fe_misprediction_reason_e), line:359:3, endln:359:31
+    |vpiParent:
+    \_package: bp_common_pkg (bp_common_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2:1, endln:925:27
+    |vpiName:bp_fe_misprediction_reason_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_pkg::bp_fe_misprediction_reason_e), line:355:9, endln:359:2
+      |vpiParent:
+      \_typedef_typespec: (bp_fe_misprediction_reason_e), line:359:3, endln:359:31
+      |vpiFullName:bp_common_pkg::bp_fe_misprediction_reason_e
+      |vpiActual:
+      \_enum_typespec: (bp_common_pkg::bp_fe_misprediction_reason_e), line:355:9, endln:359:32
   |vpiTypedef:
   \_bit_typespec: , line:369:14, endln:369:23
     |vpiParent:
@@ -10249,6 +10300,18 @@ design: (unnamed)
       |UINT:3
       |vpiDecompile:3
       |vpiSize:64
+  |vpiTypedef:
+  \_typedef_typespec: (bp_fe_exception_code_e), line:375:3, endln:375:25
+    |vpiParent:
+    \_package: bp_common_pkg (bp_common_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2:1, endln:925:27
+    |vpiName:bp_fe_exception_code_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_pkg::bp_fe_exception_code_e), line:369:9, endln:375:2
+      |vpiParent:
+      \_typedef_typespec: (bp_fe_exception_code_e), line:375:3, endln:375:25
+      |vpiFullName:bp_common_pkg::bp_fe_exception_code_e
+      |vpiActual:
+      \_enum_typespec: (bp_common_pkg::bp_fe_exception_code_e), line:369:9, endln:375:26
   |vpiTypedef:
   \_bit_typespec: , line:386:14, endln:386:23
     |vpiParent:
@@ -10342,6 +10405,18 @@ design: (unnamed)
       |vpiDecompile:6
       |vpiSize:3
   |vpiTypedef:
+  \_typedef_typespec: (bp_fe_command_queue_subopcodes_e), line:395:3, endln:395:35
+    |vpiParent:
+    \_package: bp_common_pkg (bp_common_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2:1, endln:925:27
+    |vpiName:bp_fe_command_queue_subopcodes_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_pkg::bp_fe_command_queue_subopcodes_e), line:386:9, endln:395:2
+      |vpiParent:
+      \_typedef_typespec: (bp_fe_command_queue_subopcodes_e), line:395:3, endln:395:35
+      |vpiFullName:bp_common_pkg::bp_fe_command_queue_subopcodes_e
+      |vpiActual:
+      \_enum_typespec: (bp_common_pkg::bp_fe_command_queue_subopcodes_e), line:386:9, endln:395:36
+  |vpiTypedef:
   \_bit_typespec: , line:701:14, endln:701:23
     |vpiParent:
     \_package: bp_common_pkg (bp_common_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2:1, endln:925:27
@@ -10410,6 +10485,18 @@ design: (unnamed)
       |vpiDecompile:3'b011
       |vpiSize:3
   |vpiTypedef:
+  \_typedef_typespec: (bp_lce_cce_req_type_e), line:708:3, endln:708:24
+    |vpiParent:
+    \_package: bp_common_pkg (bp_common_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2:1, endln:925:27
+    |vpiName:bp_lce_cce_req_type_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_pkg::bp_lce_cce_req_type_e), line:701:9, endln:708:2
+      |vpiParent:
+      \_typedef_typespec: (bp_lce_cce_req_type_e), line:708:3, endln:708:24
+      |vpiFullName:bp_common_pkg::bp_lce_cce_req_type_e
+      |vpiActual:
+      \_enum_typespec: (bp_common_pkg::bp_lce_cce_req_type_e), line:701:9, endln:708:25
+  |vpiTypedef:
   \_bit_typespec: , line:718:14, endln:718:17
     |vpiParent:
     \_package: bp_common_pkg (bp_common_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2:1, endln:925:27
@@ -10442,6 +10529,18 @@ design: (unnamed)
       |vpiDecompile:1'b1
       |vpiSize:1
   |vpiTypedef:
+  \_typedef_typespec: (bp_lce_cce_req_non_excl_e), line:722:3, endln:722:28
+    |vpiParent:
+    \_package: bp_common_pkg (bp_common_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2:1, endln:925:27
+    |vpiName:bp_lce_cce_req_non_excl_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_pkg::bp_lce_cce_req_non_excl_e), line:718:9, endln:722:2
+      |vpiParent:
+      \_typedef_typespec: (bp_lce_cce_req_non_excl_e), line:722:3, endln:722:28
+      |vpiFullName:bp_common_pkg::bp_lce_cce_req_non_excl_e
+      |vpiActual:
+      \_enum_typespec: (bp_common_pkg::bp_lce_cce_req_non_excl_e), line:718:9, endln:722:29
+  |vpiTypedef:
   \_bit_typespec: , line:729:14, endln:729:17
     |vpiParent:
     \_package: bp_common_pkg (bp_common_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2:1, endln:925:27
@@ -10473,6 +10572,18 @@ design: (unnamed)
       |BIN:1
       |vpiDecompile:1'b1
       |vpiSize:1
+  |vpiTypedef:
+  \_typedef_typespec: (bp_lce_cce_lru_dirty_e), line:733:3, endln:733:25
+    |vpiParent:
+    \_package: bp_common_pkg (bp_common_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2:1, endln:925:27
+    |vpiName:bp_lce_cce_lru_dirty_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_pkg::bp_lce_cce_lru_dirty_e), line:729:9, endln:733:2
+      |vpiParent:
+      \_typedef_typespec: (bp_lce_cce_lru_dirty_e), line:733:3, endln:733:25
+      |vpiFullName:bp_common_pkg::bp_lce_cce_lru_dirty_e
+      |vpiActual:
+      \_enum_typespec: (bp_common_pkg::bp_lce_cce_lru_dirty_e), line:729:9, endln:733:26
   |vpiTypedef:
   \_bit_typespec: , line:739:14, endln:739:23
     |vpiParent:
@@ -10541,6 +10652,18 @@ design: (unnamed)
       |BIN:11
       |vpiDecompile:2'b11
       |vpiSize:2
+  |vpiTypedef:
+  \_typedef_typespec: (bp_lce_cce_uc_req_size_e), line:745:3, endln:745:27
+    |vpiParent:
+    \_package: bp_common_pkg (bp_common_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2:1, endln:925:27
+    |vpiName:bp_lce_cce_uc_req_size_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_pkg::bp_lce_cce_uc_req_size_e), line:739:9, endln:745:2
+      |vpiParent:
+      \_typedef_typespec: (bp_lce_cce_uc_req_size_e), line:745:3, endln:745:27
+      |vpiFullName:bp_common_pkg::bp_lce_cce_uc_req_size_e
+      |vpiActual:
+      \_enum_typespec: (bp_common_pkg::bp_lce_cce_uc_req_size_e), line:739:9, endln:745:28
   |vpiTypedef:
   \_bit_typespec: , line:757:14, endln:757:23
     |vpiParent:
@@ -10625,6 +10748,18 @@ design: (unnamed)
       |BIN:111
       |vpiDecompile:3'b111
       |vpiSize:3
+  |vpiTypedef:
+  \_typedef_typespec: (bp_coh_states_e), line:767:3, endln:767:18
+    |vpiParent:
+    \_package: bp_common_pkg (bp_common_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2:1, endln:925:27
+    |vpiName:bp_coh_states_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_pkg::bp_coh_states_e), line:757:9, endln:767:2
+      |vpiParent:
+      \_typedef_typespec: (bp_coh_states_e), line:767:3, endln:767:18
+      |vpiFullName:bp_common_pkg::bp_coh_states_e
+      |vpiActual:
+      \_enum_typespec: (bp_common_pkg::bp_coh_states_e), line:757:9, endln:767:19
   |vpiTypedef:
   \_bit_typespec: , line:788:14, endln:788:23
     |vpiParent:
@@ -10742,6 +10877,18 @@ design: (unnamed)
       |vpiDecompile:4'b1001
       |vpiSize:4
   |vpiTypedef:
+  \_typedef_typespec: (bp_lce_cmd_type_e), line:801:3, endln:801:20
+    |vpiParent:
+    \_package: bp_common_pkg (bp_common_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2:1, endln:925:27
+    |vpiName:bp_lce_cmd_type_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_pkg::bp_lce_cmd_type_e), line:788:9, endln:801:2
+      |vpiParent:
+      \_typedef_typespec: (bp_lce_cmd_type_e), line:801:3, endln:801:20
+      |vpiFullName:bp_common_pkg::bp_lce_cmd_type_e
+      |vpiActual:
+      \_enum_typespec: (bp_common_pkg::bp_lce_cmd_type_e), line:788:9, endln:801:21
+  |vpiTypedef:
   \_bit_typespec: , line:814:14, endln:814:23
     |vpiParent:
     \_package: bp_common_pkg (bp_common_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2:1, endln:925:27
@@ -10817,54 +10964,90 @@ design: (unnamed)
       |BIN:100
       |vpiDecompile:3'b100
       |vpiSize:3
+  |vpiTypedef:
+  \_typedef_typespec: (bp_lce_cce_resp_type_e), line:822:3, endln:822:25
+    |vpiParent:
+    \_package: bp_common_pkg (bp_common_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2:1, endln:925:27
+    |vpiName:bp_lce_cce_resp_type_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_pkg::bp_lce_cce_resp_type_e), line:814:9, endln:822:2
+      |vpiParent:
+      \_typedef_typespec: (bp_lce_cce_resp_type_e), line:822:3, endln:822:25
+      |vpiFullName:bp_common_pkg::bp_lce_cce_resp_type_e
+      |vpiActual:
+      \_enum_typespec: (bp_common_pkg::bp_lce_cce_resp_type_e), line:814:9, endln:822:26
   |vpiImportTypespec:
   \_bit_typespec: , line:324:14, endln:324:17
   |vpiImportTypespec:
   \_enum_typespec: (bp_common_pkg::bp_fe_queue_type_e), line:324:9, endln:328:22
   |vpiImportTypespec:
+  \_typedef_typespec: (bp_fe_queue_type_e), line:328:3, endln:328:21
+  |vpiImportTypespec:
   \_bit_typespec: , line:341:14, endln:341:23
   |vpiImportTypespec:
   \_enum_typespec: (bp_common_pkg::bp_fe_command_queue_opcodes_e), line:341:9, endln:350:33
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_fe_command_queue_opcodes_e), line:350:3, endln:350:32
   |vpiImportTypespec:
   \_bit_typespec: , line:355:14, endln:355:17
   |vpiImportTypespec:
   \_enum_typespec: (bp_common_pkg::bp_fe_misprediction_reason_e), line:355:9, endln:359:32
   |vpiImportTypespec:
+  \_typedef_typespec: (bp_fe_misprediction_reason_e), line:359:3, endln:359:31
+  |vpiImportTypespec:
   \_bit_typespec: , line:369:14, endln:369:23
   |vpiImportTypespec:
   \_enum_typespec: (bp_common_pkg::bp_fe_exception_code_e), line:369:9, endln:375:26
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_fe_exception_code_e), line:375:3, endln:375:25
   |vpiImportTypespec:
   \_bit_typespec: , line:386:14, endln:386:23
   |vpiImportTypespec:
   \_enum_typespec: (bp_common_pkg::bp_fe_command_queue_subopcodes_e), line:386:9, endln:395:36
   |vpiImportTypespec:
+  \_typedef_typespec: (bp_fe_command_queue_subopcodes_e), line:395:3, endln:395:35
+  |vpiImportTypespec:
   \_bit_typespec: , line:701:14, endln:701:23
   |vpiImportTypespec:
   \_enum_typespec: (bp_common_pkg::bp_lce_cce_req_type_e), line:701:9, endln:708:25
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_lce_cce_req_type_e), line:708:3, endln:708:24
   |vpiImportTypespec:
   \_bit_typespec: , line:718:14, endln:718:17
   |vpiImportTypespec:
   \_enum_typespec: (bp_common_pkg::bp_lce_cce_req_non_excl_e), line:718:9, endln:722:29
   |vpiImportTypespec:
+  \_typedef_typespec: (bp_lce_cce_req_non_excl_e), line:722:3, endln:722:28
+  |vpiImportTypespec:
   \_bit_typespec: , line:729:14, endln:729:17
   |vpiImportTypespec:
   \_enum_typespec: (bp_common_pkg::bp_lce_cce_lru_dirty_e), line:729:9, endln:733:26
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_lce_cce_lru_dirty_e), line:733:3, endln:733:25
   |vpiImportTypespec:
   \_bit_typespec: , line:739:14, endln:739:23
   |vpiImportTypespec:
   \_enum_typespec: (bp_common_pkg::bp_lce_cce_uc_req_size_e), line:739:9, endln:745:28
   |vpiImportTypespec:
+  \_typedef_typespec: (bp_lce_cce_uc_req_size_e), line:745:3, endln:745:27
+  |vpiImportTypespec:
   \_bit_typespec: , line:757:14, endln:757:23
   |vpiImportTypespec:
   \_enum_typespec: (bp_common_pkg::bp_coh_states_e), line:757:9, endln:767:19
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_coh_states_e), line:767:3, endln:767:18
   |vpiImportTypespec:
   \_bit_typespec: , line:788:14, endln:788:23
   |vpiImportTypespec:
   \_enum_typespec: (bp_common_pkg::bp_lce_cmd_type_e), line:788:9, endln:801:21
   |vpiImportTypespec:
+  \_typedef_typespec: (bp_lce_cmd_type_e), line:801:3, endln:801:20
+  |vpiImportTypespec:
   \_bit_typespec: , line:814:14, endln:814:23
   |vpiImportTypespec:
   \_enum_typespec: (bp_common_pkg::bp_lce_cce_resp_type_e), line:814:9, endln:822:26
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_lce_cce_resp_type_e), line:822:3, endln:822:25
   |vpiDefName:bp_common_pkg
   |vpiEndLabel:bp_common_pkg
 |uhdmallPackages:
@@ -11392,6 +11575,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (rv64_stvec_s), line:1223:4, endln:1223:16
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_stvec_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_stvec_s), line:1215:9, endln:1223:2
+      |vpiParent:
+      \_typedef_typespec: (rv64_stvec_s), line:1223:4, endln:1223:16
+      |vpiFullName:bp_common_rv64_pkg::rv64_stvec_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::rv64_stvec_s), line:1215:9, endln:1223:2
+  |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::bp_stvec_s), line:1225:9, endln:1228:2
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
@@ -11433,6 +11628,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (bp_stvec_s), line:1228:4, endln:1228:14
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:bp_stvec_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::bp_stvec_s), line:1225:9, endln:1228:2
+      |vpiParent:
+      \_typedef_typespec: (bp_stvec_s), line:1228:4, endln:1228:14
+      |vpiFullName:bp_common_rv64_pkg::bp_stvec_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::bp_stvec_s), line:1225:9, endln:1228:2
   |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_scounteren_s), line:1240:9, endln:1245:2
     |vpiParent:
@@ -11508,6 +11715,18 @@ design: (unnamed)
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
   |vpiTypedef:
+  \_typedef_typespec: (rv64_scounteren_s), line:1245:4, endln:1245:21
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_scounteren_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_scounteren_s), line:1240:9, endln:1245:2
+      |vpiParent:
+      \_typedef_typespec: (rv64_scounteren_s), line:1245:4, endln:1245:21
+      |vpiFullName:bp_common_rv64_pkg::rv64_scounteren_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::rv64_scounteren_s), line:1240:9, endln:1245:2
+  |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::bp_scounteren_s), line:1247:9, endln:1251:2
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
@@ -11546,6 +11765,42 @@ design: (unnamed)
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
   |vpiTypedef:
+  \_typedef_typespec: (bp_scounteren_s), line:1251:4, endln:1251:19
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:bp_scounteren_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::bp_scounteren_s), line:1247:9, endln:1251:2
+      |vpiParent:
+      \_typedef_typespec: (bp_scounteren_s), line:1251:4, endln:1251:19
+      |vpiFullName:bp_common_rv64_pkg::bp_scounteren_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::bp_scounteren_s), line:1247:9, endln:1251:2
+  |vpiTypedef:
+  \_packed_array_typespec: , line:1266:9, endln:1266:21
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiRange:
+    \_range: , line:1266:15, endln:1266:21
+      |vpiParent:
+      \_packed_array_typespec: , line:1266:9, endln:1266:21
+      |vpiLeftRange:
+      \_constant: , line:1266:16, endln:1266:18
+        |vpiParent:
+        \_range: , line:1266:15, endln:1266:21
+        |vpiDecompile:63
+        |vpiSize:64
+        |UINT:63
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:1266:19, endln:1266:20
+        |vpiParent:
+        \_range: , line:1266:15, endln:1266:21
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
   \_logic_typespec: (rv64_sscratch_s), line:1266:9, endln:1266:21
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
@@ -11566,6 +11821,42 @@ design: (unnamed)
       \_constant: , line:1266:19, endln:1266:20
         |vpiParent:
         \_range: , line:1266:15, endln:1266:21
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (rv64_sscratch_s), line:1266:22, endln:1266:37
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_sscratch_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_sscratch_s), line:1266:9, endln:1266:14
+      |vpiParent:
+      \_typedef_typespec: (rv64_sscratch_s), line:1266:22, endln:1266:37
+      |vpiFullName:bp_common_rv64_pkg::rv64_sscratch_s
+      |vpiActual:
+      \_logic_typespec: (rv64_sscratch_s), line:1266:9, endln:1266:21
+  |vpiTypedef:
+  \_packed_array_typespec: , line:1267:9, endln:1267:21
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiRange:
+    \_range: , line:1267:15, endln:1267:21
+      |vpiParent:
+      \_packed_array_typespec: , line:1267:9, endln:1267:21
+      |vpiLeftRange:
+      \_constant: , line:1267:16, endln:1267:18
+        |vpiParent:
+        \_range: , line:1267:15, endln:1267:21
+        |vpiDecompile:63
+        |vpiSize:64
+        |UINT:63
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:1267:19, endln:1267:20
+        |vpiParent:
+        \_range: , line:1267:15, endln:1267:21
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
@@ -11596,6 +11887,42 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (bp_sscratch_s), line:1267:22, endln:1267:35
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:bp_sscratch_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::bp_sscratch_s), line:1267:9, endln:1267:14
+      |vpiParent:
+      \_typedef_typespec: (bp_sscratch_s), line:1267:22, endln:1267:35
+      |vpiFullName:bp_common_rv64_pkg::bp_sscratch_s
+      |vpiActual:
+      \_logic_typespec: (bp_sscratch_s), line:1267:9, endln:1267:21
+  |vpiTypedef:
+  \_packed_array_typespec: , line:1275:9, endln:1275:21
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiRange:
+    \_range: , line:1275:15, endln:1275:21
+      |vpiParent:
+      \_packed_array_typespec: , line:1275:9, endln:1275:21
+      |vpiLeftRange:
+      \_constant: , line:1275:16, endln:1275:18
+        |vpiParent:
+        \_range: , line:1275:15, endln:1275:21
+        |vpiDecompile:63
+        |vpiSize:64
+        |UINT:63
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:1275:19, endln:1275:20
+        |vpiParent:
+        \_range: , line:1275:15, endln:1275:21
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
   \_logic_typespec: (rv64_sepc_s), line:1275:9, endln:1275:21
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
@@ -11616,6 +11943,42 @@ design: (unnamed)
       \_constant: , line:1275:19, endln:1275:20
         |vpiParent:
         \_range: , line:1275:15, endln:1275:21
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (rv64_sepc_s), line:1275:22, endln:1275:33
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_sepc_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_sepc_s), line:1275:9, endln:1275:14
+      |vpiParent:
+      \_typedef_typespec: (rv64_sepc_s), line:1275:22, endln:1275:33
+      |vpiFullName:bp_common_rv64_pkg::rv64_sepc_s
+      |vpiActual:
+      \_logic_typespec: (rv64_sepc_s), line:1275:9, endln:1275:21
+  |vpiTypedef:
+  \_packed_array_typespec: , line:1276:9, endln:1276:21
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiRange:
+    \_range: , line:1276:15, endln:1276:21
+      |vpiParent:
+      \_packed_array_typespec: , line:1276:9, endln:1276:21
+      |vpiLeftRange:
+      \_constant: , line:1276:16, endln:1276:18
+        |vpiParent:
+        \_range: , line:1276:15, endln:1276:21
+        |vpiDecompile:38
+        |vpiSize:64
+        |UINT:38
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:1276:19, endln:1276:20
+        |vpiParent:
+        \_range: , line:1276:15, endln:1276:21
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
@@ -11645,6 +12008,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (bp_sepc_s), line:1276:22, endln:1276:31
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:bp_sepc_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::bp_sepc_s), line:1276:9, endln:1276:14
+      |vpiParent:
+      \_typedef_typespec: (bp_sepc_s), line:1276:22, endln:1276:31
+      |vpiFullName:bp_common_rv64_pkg::bp_sepc_s
+      |vpiActual:
+      \_logic_typespec: (bp_sepc_s), line:1276:9, endln:1276:21
   |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_scause_s), line:1286:9, endln:1290:2
     |vpiParent:
@@ -11704,6 +12079,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (rv64_scause_s), line:1290:4, endln:1290:17
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_scause_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_scause_s), line:1286:9, endln:1290:2
+      |vpiParent:
+      \_typedef_typespec: (rv64_scause_s), line:1290:4, endln:1290:17
+      |vpiFullName:bp_common_rv64_pkg::rv64_scause_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::rv64_scause_s), line:1286:9, endln:1290:2
+  |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::bp_scause_s), line:1292:9, endln:1296:2
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
@@ -11762,6 +12149,42 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (bp_scause_s), line:1296:4, endln:1296:15
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:bp_scause_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::bp_scause_s), line:1292:9, endln:1296:2
+      |vpiParent:
+      \_typedef_typespec: (bp_scause_s), line:1296:4, endln:1296:15
+      |vpiFullName:bp_common_rv64_pkg::bp_scause_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::bp_scause_s), line:1292:9, endln:1296:2
+  |vpiTypedef:
+  \_packed_array_typespec: , line:1308:9, endln:1308:21
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiRange:
+    \_range: , line:1308:15, endln:1308:21
+      |vpiParent:
+      \_packed_array_typespec: , line:1308:9, endln:1308:21
+      |vpiLeftRange:
+      \_constant: , line:1308:16, endln:1308:18
+        |vpiParent:
+        \_range: , line:1308:15, endln:1308:21
+        |vpiDecompile:63
+        |vpiSize:64
+        |UINT:63
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:1308:19, endln:1308:20
+        |vpiParent:
+        \_range: , line:1308:15, endln:1308:21
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
   \_logic_typespec: (rv64_stval_s), line:1308:9, endln:1308:21
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
@@ -11782,6 +12205,42 @@ design: (unnamed)
       \_constant: , line:1308:19, endln:1308:20
         |vpiParent:
         \_range: , line:1308:15, endln:1308:21
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (rv64_stval_s), line:1308:22, endln:1308:34
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_stval_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_stval_s), line:1308:9, endln:1308:14
+      |vpiParent:
+      \_typedef_typespec: (rv64_stval_s), line:1308:22, endln:1308:34
+      |vpiFullName:bp_common_rv64_pkg::rv64_stval_s
+      |vpiActual:
+      \_logic_typespec: (rv64_stval_s), line:1308:9, endln:1308:21
+  |vpiTypedef:
+  \_packed_array_typespec: , line:1309:9, endln:1309:21
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiRange:
+    \_range: , line:1309:15, endln:1309:21
+      |vpiParent:
+      \_packed_array_typespec: , line:1309:9, endln:1309:21
+      |vpiLeftRange:
+      \_constant: , line:1309:16, endln:1309:18
+        |vpiParent:
+        \_range: , line:1309:15, endln:1309:21
+        |vpiDecompile:38
+        |vpiSize:64
+        |UINT:38
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:1309:19, endln:1309:20
+        |vpiParent:
+        \_range: , line:1309:15, endln:1309:21
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
@@ -11811,6 +12270,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (bp_stval_s), line:1309:22, endln:1309:32
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:bp_stval_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::bp_stval_s), line:1309:9, endln:1309:14
+      |vpiParent:
+      \_typedef_typespec: (bp_stval_s), line:1309:22, endln:1309:32
+      |vpiFullName:bp_common_rv64_pkg::bp_stval_s
+      |vpiActual:
+      \_logic_typespec: (bp_stval_s), line:1309:9, endln:1309:21
   |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_satp_s), line:1317:9, endln:1327:2
     |vpiParent:
@@ -11926,6 +12397,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (rv64_satp_s), line:1327:4, endln:1327:15
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_satp_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_satp_s), line:1317:9, endln:1327:2
+      |vpiParent:
+      \_typedef_typespec: (rv64_satp_s), line:1327:4, endln:1327:15
+      |vpiFullName:bp_common_rv64_pkg::rv64_satp_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::rv64_satp_s), line:1317:9, endln:1327:2
+  |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::bp_satp_s), line:1329:9, endln:1337:2
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
@@ -11983,6 +12466,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (bp_satp_s), line:1337:4, endln:1337:13
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:bp_satp_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::bp_satp_s), line:1329:9, endln:1337:2
+      |vpiParent:
+      \_typedef_typespec: (bp_satp_s), line:1337:4, endln:1337:13
+      |vpiFullName:bp_common_rv64_pkg::bp_satp_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::bp_satp_s), line:1329:9, endln:1337:2
   |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_mstatus_s), line:1352:9, endln:1428:2
     |vpiParent:
@@ -12534,6 +13029,18 @@ design: (unnamed)
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
   |vpiTypedef:
+  \_typedef_typespec: (rv64_mstatus_s), line:1428:4, endln:1428:18
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_mstatus_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_mstatus_s), line:1352:9, endln:1428:2
+      |vpiParent:
+      \_typedef_typespec: (rv64_mstatus_s), line:1428:4, endln:1428:18
+      |vpiFullName:bp_common_rv64_pkg::rv64_mstatus_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::rv64_mstatus_s), line:1352:9, endln:1428:2
+  |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::bp_mstatus_s), line:1430:9, endln:1442:2
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
@@ -12672,6 +13179,42 @@ design: (unnamed)
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
   |vpiTypedef:
+  \_typedef_typespec: (bp_mstatus_s), line:1442:4, endln:1442:16
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:bp_mstatus_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::bp_mstatus_s), line:1430:9, endln:1442:2
+      |vpiParent:
+      \_typedef_typespec: (bp_mstatus_s), line:1442:4, endln:1442:16
+      |vpiFullName:bp_common_rv64_pkg::bp_mstatus_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::bp_mstatus_s), line:1430:9, endln:1442:2
+  |vpiTypedef:
+  \_packed_array_typespec: , line:1467:9, endln:1467:21
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiRange:
+    \_range: , line:1467:15, endln:1467:21
+      |vpiParent:
+      \_packed_array_typespec: , line:1467:9, endln:1467:21
+      |vpiLeftRange:
+      \_constant: , line:1467:16, endln:1467:18
+        |vpiParent:
+        \_range: , line:1467:15, endln:1467:21
+        |vpiDecompile:63
+        |vpiSize:64
+        |UINT:63
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:1467:19, endln:1467:20
+        |vpiParent:
+        \_range: , line:1467:15, endln:1467:21
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
   \_logic_typespec: (rv64_medeleg_s), line:1467:9, endln:1467:21
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
@@ -12696,6 +13239,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (rv64_medeleg_s), line:1467:22, endln:1467:36
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_medeleg_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_medeleg_s), line:1467:9, endln:1467:14
+      |vpiParent:
+      \_typedef_typespec: (rv64_medeleg_s), line:1467:22, endln:1467:36
+      |vpiFullName:bp_common_rv64_pkg::rv64_medeleg_s
+      |vpiActual:
+      \_logic_typespec: (rv64_medeleg_s), line:1467:9, endln:1467:21
   |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::bp_medeleg_s), line:1469:9, endln:1474:2
     |vpiParent:
@@ -12810,6 +13365,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (bp_medeleg_s), line:1474:4, endln:1474:16
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:bp_medeleg_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::bp_medeleg_s), line:1469:9, endln:1474:2
+      |vpiParent:
+      \_typedef_typespec: (bp_medeleg_s), line:1474:4, endln:1474:16
+      |vpiFullName:bp_common_rv64_pkg::bp_medeleg_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::bp_medeleg_s), line:1469:9, endln:1474:2
   |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_mideleg_s), line:1490:9, endln:1514:2
     |vpiParent:
@@ -13045,6 +13612,18 @@ design: (unnamed)
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
   |vpiTypedef:
+  \_typedef_typespec: (rv64_mideleg_s), line:1514:4, endln:1514:18
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_mideleg_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_mideleg_s), line:1490:9, endln:1514:2
+      |vpiParent:
+      \_typedef_typespec: (rv64_mideleg_s), line:1514:4, endln:1514:18
+      |vpiFullName:bp_common_rv64_pkg::rv64_mideleg_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::rv64_mideleg_s), line:1490:9, endln:1514:2
+  |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::bp_mideleg_s), line:1516:9, endln:1526:2
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
@@ -13146,6 +13725,18 @@ design: (unnamed)
   \_logic_typespec: , line:1525:3, endln:1525:8
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+  |vpiTypedef:
+  \_typedef_typespec: (bp_mideleg_s), line:1526:4, endln:1526:16
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:bp_mideleg_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::bp_mideleg_s), line:1516:9, endln:1526:2
+      |vpiParent:
+      \_typedef_typespec: (bp_mideleg_s), line:1526:4, endln:1526:16
+      |vpiFullName:bp_common_rv64_pkg::bp_mideleg_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::bp_mideleg_s), line:1516:9, endln:1526:2
   |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_mie_s), line:1551:9, endln:1575:2
     |vpiParent:
@@ -13381,6 +13972,18 @@ design: (unnamed)
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
   |vpiTypedef:
+  \_typedef_typespec: (rv64_mie_s), line:1575:4, endln:1575:14
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_mie_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_mie_s), line:1551:9, endln:1575:2
+      |vpiParent:
+      \_typedef_typespec: (rv64_mie_s), line:1575:4, endln:1575:14
+      |vpiFullName:bp_common_rv64_pkg::rv64_mie_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::rv64_mie_s), line:1551:9, endln:1575:2
+  |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::bp_mie_s), line:1577:9, endln:1587:2
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
@@ -13483,6 +14086,18 @@ design: (unnamed)
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
   |vpiTypedef:
+  \_typedef_typespec: (bp_mie_s), line:1587:4, endln:1587:12
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:bp_mie_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::bp_mie_s), line:1577:9, endln:1587:2
+      |vpiParent:
+      \_typedef_typespec: (bp_mie_s), line:1587:4, endln:1587:12
+      |vpiFullName:bp_common_rv64_pkg::bp_mie_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::bp_mie_s), line:1577:9, endln:1587:2
+  |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_mtvec_s), line:1612:9, endln:1620:2
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
@@ -13561,6 +14176,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (rv64_mtvec_s), line:1620:4, endln:1620:16
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_mtvec_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_mtvec_s), line:1612:9, endln:1620:2
+      |vpiParent:
+      \_typedef_typespec: (rv64_mtvec_s), line:1620:4, endln:1620:16
+      |vpiFullName:bp_common_rv64_pkg::rv64_mtvec_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::rv64_mtvec_s), line:1612:9, endln:1620:2
+  |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::bp_mtvec_s), line:1622:9, endln:1625:2
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
@@ -13602,6 +14229,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (bp_mtvec_s), line:1625:4, endln:1625:14
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:bp_mtvec_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::bp_mtvec_s), line:1622:9, endln:1625:2
+      |vpiParent:
+      \_typedef_typespec: (bp_mtvec_s), line:1625:4, endln:1625:14
+      |vpiFullName:bp_common_rv64_pkg::bp_mtvec_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::bp_mtvec_s), line:1622:9, endln:1625:2
   |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_mcounteren_s), line:1637:9, endln:1643:2
     |vpiParent:
@@ -13693,6 +14332,18 @@ design: (unnamed)
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
   |vpiTypedef:
+  \_typedef_typespec: (rv64_mcounteren_s), line:1643:4, endln:1643:21
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_mcounteren_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_mcounteren_s), line:1637:9, endln:1643:2
+      |vpiParent:
+      \_typedef_typespec: (rv64_mcounteren_s), line:1643:4, endln:1643:21
+      |vpiFullName:bp_common_rv64_pkg::rv64_mcounteren_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::rv64_mcounteren_s), line:1637:9, endln:1643:2
+  |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::bp_mcounteren_s), line:1645:9, endln:1649:2
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
@@ -13731,6 +14382,42 @@ design: (unnamed)
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
   |vpiTypedef:
+  \_typedef_typespec: (bp_mcounteren_s), line:1649:4, endln:1649:19
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:bp_mcounteren_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::bp_mcounteren_s), line:1645:9, endln:1649:2
+      |vpiParent:
+      \_typedef_typespec: (bp_mcounteren_s), line:1649:4, endln:1649:19
+      |vpiFullName:bp_common_rv64_pkg::bp_mcounteren_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::bp_mcounteren_s), line:1645:9, endln:1649:2
+  |vpiTypedef:
+  \_packed_array_typespec: , line:1664:9, endln:1664:21
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiRange:
+    \_range: , line:1664:15, endln:1664:21
+      |vpiParent:
+      \_packed_array_typespec: , line:1664:9, endln:1664:21
+      |vpiLeftRange:
+      \_constant: , line:1664:16, endln:1664:18
+        |vpiParent:
+        \_range: , line:1664:15, endln:1664:21
+        |vpiDecompile:63
+        |vpiSize:64
+        |UINT:63
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:1664:19, endln:1664:20
+        |vpiParent:
+        \_range: , line:1664:15, endln:1664:21
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
   \_logic_typespec: (rv64_mscratch_s), line:1664:9, endln:1664:21
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
@@ -13751,6 +14438,42 @@ design: (unnamed)
       \_constant: , line:1664:19, endln:1664:20
         |vpiParent:
         \_range: , line:1664:15, endln:1664:21
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (rv64_mscratch_s), line:1664:22, endln:1664:37
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_mscratch_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_mscratch_s), line:1664:9, endln:1664:14
+      |vpiParent:
+      \_typedef_typespec: (rv64_mscratch_s), line:1664:22, endln:1664:37
+      |vpiFullName:bp_common_rv64_pkg::rv64_mscratch_s
+      |vpiActual:
+      \_logic_typespec: (rv64_mscratch_s), line:1664:9, endln:1664:21
+  |vpiTypedef:
+  \_packed_array_typespec: , line:1665:9, endln:1665:21
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiRange:
+    \_range: , line:1665:15, endln:1665:21
+      |vpiParent:
+      \_packed_array_typespec: , line:1665:9, endln:1665:21
+      |vpiLeftRange:
+      \_constant: , line:1665:16, endln:1665:18
+        |vpiParent:
+        \_range: , line:1665:15, endln:1665:21
+        |vpiDecompile:63
+        |vpiSize:64
+        |UINT:63
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:1665:19, endln:1665:20
+        |vpiParent:
+        \_range: , line:1665:15, endln:1665:21
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
@@ -13780,6 +14503,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (bp_mscratch_s), line:1665:22, endln:1665:35
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:bp_mscratch_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::bp_mscratch_s), line:1665:9, endln:1665:14
+      |vpiParent:
+      \_typedef_typespec: (bp_mscratch_s), line:1665:22, endln:1665:35
+      |vpiFullName:bp_common_rv64_pkg::bp_mscratch_s
+      |vpiActual:
+      \_logic_typespec: (bp_mscratch_s), line:1665:9, endln:1665:21
   |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_mip_s), line:1673:9, endln:1697:2
     |vpiParent:
@@ -14015,6 +14750,18 @@ design: (unnamed)
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
   |vpiTypedef:
+  \_typedef_typespec: (rv64_mip_s), line:1697:4, endln:1697:14
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_mip_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_mip_s), line:1673:9, endln:1697:2
+      |vpiParent:
+      \_typedef_typespec: (rv64_mip_s), line:1697:4, endln:1697:14
+      |vpiFullName:bp_common_rv64_pkg::rv64_mip_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::rv64_mip_s), line:1673:9, endln:1697:2
+  |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::bp_mip_s), line:1699:9, endln:1709:2
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
@@ -14117,6 +14864,42 @@ design: (unnamed)
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
   |vpiTypedef:
+  \_typedef_typespec: (bp_mip_s), line:1709:5, endln:1709:13
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:bp_mip_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::bp_mip_s), line:1699:9, endln:1709:2
+      |vpiParent:
+      \_typedef_typespec: (bp_mip_s), line:1709:5, endln:1709:13
+      |vpiFullName:bp_common_rv64_pkg::bp_mip_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::bp_mip_s), line:1699:9, endln:1709:2
+  |vpiTypedef:
+  \_packed_array_typespec: , line:1734:9, endln:1734:21
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiRange:
+    \_range: , line:1734:15, endln:1734:21
+      |vpiParent:
+      \_packed_array_typespec: , line:1734:9, endln:1734:21
+      |vpiLeftRange:
+      \_constant: , line:1734:16, endln:1734:18
+        |vpiParent:
+        \_range: , line:1734:15, endln:1734:21
+        |vpiDecompile:63
+        |vpiSize:64
+        |UINT:63
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:1734:19, endln:1734:20
+        |vpiParent:
+        \_range: , line:1734:15, endln:1734:21
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
   \_logic_typespec: (rv64_mtval_s), line:1734:9, endln:1734:21
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
@@ -14141,6 +14924,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (rv64_mtval_s), line:1734:22, endln:1734:34
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_mtval_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_mtval_s), line:1734:9, endln:1734:14
+      |vpiParent:
+      \_typedef_typespec: (rv64_mtval_s), line:1734:22, endln:1734:34
+      |vpiFullName:bp_common_rv64_pkg::rv64_mtval_s
+      |vpiActual:
+      \_logic_typespec: (rv64_mtval_s), line:1734:9, endln:1734:21
   |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::bp_mtval_s), line:1735:9, endln:1739:2
     |vpiParent:
@@ -14200,6 +14995,42 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (bp_mtval_s), line:1739:4, endln:1739:14
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:bp_mtval_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::bp_mtval_s), line:1735:9, endln:1739:2
+      |vpiParent:
+      \_typedef_typespec: (bp_mtval_s), line:1739:4, endln:1739:14
+      |vpiFullName:bp_common_rv64_pkg::bp_mtval_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::bp_mtval_s), line:1735:9, endln:1739:2
+  |vpiTypedef:
+  \_packed_array_typespec: , line:1747:9, endln:1747:21
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiRange:
+    \_range: , line:1747:15, endln:1747:21
+      |vpiParent:
+      \_packed_array_typespec: , line:1747:9, endln:1747:21
+      |vpiLeftRange:
+      \_constant: , line:1747:16, endln:1747:18
+        |vpiParent:
+        \_range: , line:1747:15, endln:1747:21
+        |vpiDecompile:63
+        |vpiSize:64
+        |UINT:63
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:1747:19, endln:1747:20
+        |vpiParent:
+        \_range: , line:1747:15, endln:1747:21
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
   \_logic_typespec: (rv64_mepc_s), line:1747:9, endln:1747:21
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
@@ -14224,6 +15055,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (rv64_mepc_s), line:1747:22, endln:1747:33
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_mepc_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_mepc_s), line:1747:9, endln:1747:14
+      |vpiParent:
+      \_typedef_typespec: (rv64_mepc_s), line:1747:22, endln:1747:33
+      |vpiFullName:bp_common_rv64_pkg::rv64_mepc_s
+      |vpiActual:
+      \_logic_typespec: (rv64_mepc_s), line:1747:9, endln:1747:21
   |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::bp_mepc_s), line:1748:9, endln:1752:2
     |vpiParent:
@@ -14282,6 +15125,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (bp_mepc_s), line:1752:4, endln:1752:13
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:bp_mepc_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::bp_mepc_s), line:1748:9, endln:1752:2
+      |vpiParent:
+      \_typedef_typespec: (bp_mepc_s), line:1752:4, endln:1752:13
+      |vpiFullName:bp_common_rv64_pkg::bp_mepc_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::bp_mepc_s), line:1748:9, endln:1752:2
   |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_pmpcfg_entry_s), line:1760:9, endln:1777:2
     |vpiParent:
@@ -14425,6 +15280,18 @@ design: (unnamed)
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
   |vpiTypedef:
+  \_typedef_typespec: (rv64_pmpcfg_entry_s), line:1777:4, endln:1777:23
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_pmpcfg_entry_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_pmpcfg_entry_s), line:1760:9, endln:1777:2
+      |vpiParent:
+      \_typedef_typespec: (rv64_pmpcfg_entry_s), line:1777:4, endln:1777:23
+      |vpiFullName:bp_common_rv64_pkg::rv64_pmpcfg_entry_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::rv64_pmpcfg_entry_s), line:1760:9, endln:1777:2
+  |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_pmpcfg_s), line:1779:9, endln:1782:2
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
@@ -14474,7 +15341,45 @@ design: (unnamed)
       |vpiName:rv64_pmpcfg_entry_s
       |vpiFullName:bp_common_rv64_pkg::rv64_pmpcfg_entry_s
       |vpiActual:
-      \_struct_typespec: (bp_common_rv64_pkg::rv64_pmpcfg_entry_s), line:1760:9, endln:1777:2
+      \_typedef_typespec: (rv64_pmpcfg_entry_s), line:1777:4, endln:1777:23
+  |vpiTypedef:
+  \_typedef_typespec: (rv64_pmpcfg_s), line:1782:4, endln:1782:17
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_pmpcfg_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_pmpcfg_s), line:1779:9, endln:1782:2
+      |vpiParent:
+      \_typedef_typespec: (rv64_pmpcfg_s), line:1782:4, endln:1782:17
+      |vpiFullName:bp_common_rv64_pkg::rv64_pmpcfg_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::rv64_pmpcfg_s), line:1779:9, endln:1782:2
+  |vpiTypedef:
+  \_typedef_typespec: (rv64_pmpcfg0_s), line:1783:23, endln:1783:37
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_pmpcfg0_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_pmpcfg0_s::rv64_pmpcfg_s), line:1783:9, endln:1783:22
+      |vpiParent:
+      \_typedef_typespec: (rv64_pmpcfg0_s), line:1783:23, endln:1783:37
+      |vpiName:rv64_pmpcfg_s
+      |vpiFullName:bp_common_rv64_pkg::rv64_pmpcfg0_s::rv64_pmpcfg_s
+      |vpiActual:
+      \_typedef_typespec: (rv64_pmpcfg_s), line:1782:4, endln:1782:17
+  |vpiTypedef:
+  \_typedef_typespec: (rv64_pmpcfg1_s), line:1784:23, endln:1784:37
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_pmpcfg1_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_pmpcfg1_s::rv64_pmpcfg_s), line:1784:9, endln:1784:22
+      |vpiParent:
+      \_typedef_typespec: (rv64_pmpcfg1_s), line:1784:23, endln:1784:37
+      |vpiName:rv64_pmpcfg_s
+      |vpiFullName:bp_common_rv64_pkg::rv64_pmpcfg1_s::rv64_pmpcfg_s
+      |vpiActual:
+      \_typedef_typespec: (rv64_pmpcfg_s), line:1782:4, endln:1782:17
   |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::bp_pmpcfg_s), line:1786:9, endln:1789:2
     |vpiParent:
@@ -14525,7 +15430,32 @@ design: (unnamed)
       |vpiName:rv64_pmpcfg_entry_s
       |vpiFullName:bp_common_rv64_pkg::rv64_pmpcfg_entry_s
       |vpiActual:
-      \_struct_typespec: (bp_common_rv64_pkg::rv64_pmpcfg_entry_s), line:1760:9, endln:1777:2
+      \_typedef_typespec: (rv64_pmpcfg_entry_s), line:1777:4, endln:1777:23
+  |vpiTypedef:
+  \_typedef_typespec: (bp_pmpcfg_s), line:1789:4, endln:1789:15
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:bp_pmpcfg_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::bp_pmpcfg_s), line:1786:9, endln:1789:2
+      |vpiParent:
+      \_typedef_typespec: (bp_pmpcfg_s), line:1789:4, endln:1789:15
+      |vpiFullName:bp_common_rv64_pkg::bp_pmpcfg_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::bp_pmpcfg_s), line:1786:9, endln:1789:2
+  |vpiTypedef:
+  \_typedef_typespec: (bp_pmpcfg0_s), line:1791:21, endln:1791:33
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:bp_pmpcfg0_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::bp_pmpcfg0_s::bp_pmpcfg_s), line:1791:9, endln:1791:20
+      |vpiParent:
+      \_typedef_typespec: (bp_pmpcfg0_s), line:1791:21, endln:1791:33
+      |vpiName:bp_pmpcfg_s
+      |vpiFullName:bp_common_rv64_pkg::bp_pmpcfg0_s::bp_pmpcfg_s
+      |vpiActual:
+      \_typedef_typespec: (bp_pmpcfg_s), line:1789:4, endln:1789:15
   |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_pmpaddr_s), line:1804:9, endln:1808:2
     |vpiParent:
@@ -14605,6 +15535,70 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (rv64_pmpaddr_s), line:1808:4, endln:1808:18
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_pmpaddr_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_pmpaddr_s), line:1804:9, endln:1808:2
+      |vpiParent:
+      \_typedef_typespec: (rv64_pmpaddr_s), line:1808:4, endln:1808:18
+      |vpiFullName:bp_common_rv64_pkg::rv64_pmpaddr_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::rv64_pmpaddr_s), line:1804:9, endln:1808:2
+  |vpiTypedef:
+  \_typedef_typespec: (rv64_pmpaddr0_s), line:1810:24, endln:1810:39
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_pmpaddr0_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_pmpaddr0_s::rv64_pmpaddr_s), line:1810:9, endln:1810:23
+      |vpiParent:
+      \_typedef_typespec: (rv64_pmpaddr0_s), line:1810:24, endln:1810:39
+      |vpiName:rv64_pmpaddr_s
+      |vpiFullName:bp_common_rv64_pkg::rv64_pmpaddr0_s::rv64_pmpaddr_s
+      |vpiActual:
+      \_typedef_typespec: (rv64_pmpaddr_s), line:1808:4, endln:1808:18
+  |vpiTypedef:
+  \_typedef_typespec: (rv64_pmpaddr1_s), line:1811:24, endln:1811:39
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_pmpaddr1_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_pmpaddr1_s::rv64_pmpaddr_s), line:1811:9, endln:1811:23
+      |vpiParent:
+      \_typedef_typespec: (rv64_pmpaddr1_s), line:1811:24, endln:1811:39
+      |vpiName:rv64_pmpaddr_s
+      |vpiFullName:bp_common_rv64_pkg::rv64_pmpaddr1_s::rv64_pmpaddr_s
+      |vpiActual:
+      \_typedef_typespec: (rv64_pmpaddr_s), line:1808:4, endln:1808:18
+  |vpiTypedef:
+  \_typedef_typespec: (rv64_pmpaddr2_s), line:1812:24, endln:1812:39
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_pmpaddr2_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_pmpaddr2_s::rv64_pmpaddr_s), line:1812:9, endln:1812:23
+      |vpiParent:
+      \_typedef_typespec: (rv64_pmpaddr2_s), line:1812:24, endln:1812:39
+      |vpiName:rv64_pmpaddr_s
+      |vpiFullName:bp_common_rv64_pkg::rv64_pmpaddr2_s::rv64_pmpaddr_s
+      |vpiActual:
+      \_typedef_typespec: (rv64_pmpaddr_s), line:1808:4, endln:1808:18
+  |vpiTypedef:
+  \_typedef_typespec: (rv64_pmpaddr3_s), line:1813:24, endln:1813:39
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_pmpaddr3_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_pmpaddr3_s::rv64_pmpaddr_s), line:1813:9, endln:1813:23
+      |vpiParent:
+      \_typedef_typespec: (rv64_pmpaddr3_s), line:1813:24, endln:1813:39
+      |vpiName:rv64_pmpaddr_s
+      |vpiFullName:bp_common_rv64_pkg::rv64_pmpaddr3_s::rv64_pmpaddr_s
+      |vpiActual:
+      \_typedef_typespec: (rv64_pmpaddr_s), line:1808:4, endln:1808:18
+  |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::bp_pmpaddr_s), line:1815:9, endln:1818:2
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
@@ -14646,6 +15640,70 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (bp_pmpaddr_s), line:1818:4, endln:1818:16
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:bp_pmpaddr_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::bp_pmpaddr_s), line:1815:9, endln:1818:2
+      |vpiParent:
+      \_typedef_typespec: (bp_pmpaddr_s), line:1818:4, endln:1818:16
+      |vpiFullName:bp_common_rv64_pkg::bp_pmpaddr_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::bp_pmpaddr_s), line:1815:9, endln:1818:2
+  |vpiTypedef:
+  \_typedef_typespec: (bp_pmpaddr0_s), line:1820:22, endln:1820:35
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:bp_pmpaddr0_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::bp_pmpaddr0_s::bp_pmpaddr_s), line:1820:9, endln:1820:21
+      |vpiParent:
+      \_typedef_typespec: (bp_pmpaddr0_s), line:1820:22, endln:1820:35
+      |vpiName:bp_pmpaddr_s
+      |vpiFullName:bp_common_rv64_pkg::bp_pmpaddr0_s::bp_pmpaddr_s
+      |vpiActual:
+      \_typedef_typespec: (bp_pmpaddr_s), line:1818:4, endln:1818:16
+  |vpiTypedef:
+  \_typedef_typespec: (bp_pmpaddr1_s), line:1821:22, endln:1821:35
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:bp_pmpaddr1_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::bp_pmpaddr1_s::bp_pmpaddr_s), line:1821:9, endln:1821:21
+      |vpiParent:
+      \_typedef_typespec: (bp_pmpaddr1_s), line:1821:22, endln:1821:35
+      |vpiName:bp_pmpaddr_s
+      |vpiFullName:bp_common_rv64_pkg::bp_pmpaddr1_s::bp_pmpaddr_s
+      |vpiActual:
+      \_typedef_typespec: (bp_pmpaddr_s), line:1818:4, endln:1818:16
+  |vpiTypedef:
+  \_typedef_typespec: (bp_pmpaddr2_s), line:1822:22, endln:1822:35
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:bp_pmpaddr2_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::bp_pmpaddr2_s::bp_pmpaddr_s), line:1822:9, endln:1822:21
+      |vpiParent:
+      \_typedef_typespec: (bp_pmpaddr2_s), line:1822:22, endln:1822:35
+      |vpiName:bp_pmpaddr_s
+      |vpiFullName:bp_common_rv64_pkg::bp_pmpaddr2_s::bp_pmpaddr_s
+      |vpiActual:
+      \_typedef_typespec: (bp_pmpaddr_s), line:1818:4, endln:1818:16
+  |vpiTypedef:
+  \_typedef_typespec: (bp_pmpaddr3_s), line:1823:22, endln:1823:35
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:bp_pmpaddr3_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::bp_pmpaddr3_s::bp_pmpaddr_s), line:1823:9, endln:1823:21
+      |vpiParent:
+      \_typedef_typespec: (bp_pmpaddr3_s), line:1823:22, endln:1823:35
+      |vpiName:bp_pmpaddr_s
+      |vpiFullName:bp_common_rv64_pkg::bp_pmpaddr3_s::bp_pmpaddr_s
+      |vpiActual:
+      \_typedef_typespec: (bp_pmpaddr_s), line:1818:4, endln:1818:16
   |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_mcause_s), line:1843:9, endln:1847:2
     |vpiParent:
@@ -14705,6 +15763,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (rv64_mcause_s), line:1847:4, endln:1847:17
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_mcause_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_mcause_s), line:1843:9, endln:1847:2
+      |vpiParent:
+      \_typedef_typespec: (rv64_mcause_s), line:1847:4, endln:1847:17
+      |vpiFullName:bp_common_rv64_pkg::rv64_mcause_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::rv64_mcause_s), line:1843:9, endln:1847:2
+  |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::bp_mcause_s), line:1849:9, endln:1853:2
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
@@ -14763,6 +15833,42 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (bp_mcause_s), line:1853:4, endln:1853:15
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:bp_mcause_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::bp_mcause_s), line:1849:9, endln:1853:2
+      |vpiParent:
+      \_typedef_typespec: (bp_mcause_s), line:1853:4, endln:1853:15
+      |vpiFullName:bp_common_rv64_pkg::bp_mcause_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::bp_mcause_s), line:1849:9, endln:1853:2
+  |vpiTypedef:
+  \_packed_array_typespec: , line:1865:9, endln:1865:21
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiRange:
+    \_range: , line:1865:15, endln:1865:21
+      |vpiParent:
+      \_packed_array_typespec: , line:1865:9, endln:1865:21
+      |vpiLeftRange:
+      \_constant: , line:1865:16, endln:1865:18
+        |vpiParent:
+        \_range: , line:1865:15, endln:1865:21
+        |vpiDecompile:63
+        |vpiSize:64
+        |UINT:63
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:1865:19, endln:1865:20
+        |vpiParent:
+        \_range: , line:1865:15, endln:1865:21
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
   \_logic_typespec: (rv64_mcounter_s), line:1865:9, endln:1865:21
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
@@ -14783,6 +15889,42 @@ design: (unnamed)
       \_constant: , line:1865:19, endln:1865:20
         |vpiParent:
         \_range: , line:1865:15, endln:1865:21
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (rv64_mcounter_s), line:1865:22, endln:1865:37
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_mcounter_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_mcounter_s), line:1865:9, endln:1865:14
+      |vpiParent:
+      \_typedef_typespec: (rv64_mcounter_s), line:1865:22, endln:1865:37
+      |vpiFullName:bp_common_rv64_pkg::rv64_mcounter_s
+      |vpiActual:
+      \_logic_typespec: (rv64_mcounter_s), line:1865:9, endln:1865:21
+  |vpiTypedef:
+  \_packed_array_typespec: , line:1866:9, endln:1866:21
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiRange:
+    \_range: , line:1866:15, endln:1866:21
+      |vpiParent:
+      \_packed_array_typespec: , line:1866:9, endln:1866:21
+      |vpiLeftRange:
+      \_constant: , line:1866:16, endln:1866:18
+        |vpiParent:
+        \_range: , line:1866:15, endln:1866:21
+        |vpiDecompile:47
+        |vpiSize:64
+        |UINT:47
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:1866:19, endln:1866:20
+        |vpiParent:
+        \_range: , line:1866:15, endln:1866:21
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
@@ -14812,6 +15954,70 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (bp_mcounter_s), line:1866:22, endln:1866:35
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:bp_mcounter_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::bp_mcounter_s), line:1866:9, endln:1866:14
+      |vpiParent:
+      \_typedef_typespec: (bp_mcounter_s), line:1866:22, endln:1866:35
+      |vpiFullName:bp_common_rv64_pkg::bp_mcounter_s
+      |vpiActual:
+      \_logic_typespec: (bp_mcounter_s), line:1866:9, endln:1866:21
+  |vpiTypedef:
+  \_typedef_typespec: (rv64_mcycle_s), line:1874:25, endln:1874:38
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_mcycle_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_mcycle_s::rv64_mcounter_s), line:1874:9, endln:1874:24
+      |vpiParent:
+      \_typedef_typespec: (rv64_mcycle_s), line:1874:25, endln:1874:38
+      |vpiName:rv64_mcounter_s
+      |vpiFullName:bp_common_rv64_pkg::rv64_mcycle_s::rv64_mcounter_s
+      |vpiActual:
+      \_logic_typespec: (rv64_mcounter_s), line:1865:9, endln:1865:21
+  |vpiTypedef:
+  \_typedef_typespec: (rv64_minstret_s), line:1875:25, endln:1875:40
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_minstret_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_minstret_s::rv64_mcounter_s), line:1875:9, endln:1875:24
+      |vpiParent:
+      \_typedef_typespec: (rv64_minstret_s), line:1875:25, endln:1875:40
+      |vpiName:rv64_mcounter_s
+      |vpiFullName:bp_common_rv64_pkg::rv64_minstret_s::rv64_mcounter_s
+      |vpiActual:
+      \_logic_typespec: (rv64_mcounter_s), line:1865:9, endln:1865:21
+  |vpiTypedef:
+  \_typedef_typespec: (bp_mcycle_s), line:1877:23, endln:1877:34
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:bp_mcycle_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::bp_mcycle_s::bp_mcounter_s), line:1877:9, endln:1877:22
+      |vpiParent:
+      \_typedef_typespec: (bp_mcycle_s), line:1877:23, endln:1877:34
+      |vpiName:bp_mcounter_s
+      |vpiFullName:bp_common_rv64_pkg::bp_mcycle_s::bp_mcounter_s
+      |vpiActual:
+      \_logic_typespec: (bp_mcounter_s), line:1866:9, endln:1866:21
+  |vpiTypedef:
+  \_typedef_typespec: (bp_minstret_s), line:1878:23, endln:1878:36
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:bp_minstret_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::bp_minstret_s::bp_mcounter_s), line:1878:9, endln:1878:22
+      |vpiParent:
+      \_typedef_typespec: (bp_minstret_s), line:1878:23, endln:1878:36
+      |vpiName:bp_mcounter_s
+      |vpiFullName:bp_common_rv64_pkg::bp_minstret_s::bp_mcounter_s
+      |vpiActual:
+      \_logic_typespec: (bp_mcounter_s), line:1866:9, endln:1866:21
   |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_mcountinhibit_s), line:1886:9, endln:1892:2
     |vpiParent:
@@ -14903,6 +16109,18 @@ design: (unnamed)
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
   |vpiTypedef:
+  \_typedef_typespec: (rv64_mcountinhibit_s), line:1892:4, endln:1892:24
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_mcountinhibit_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_mcountinhibit_s), line:1886:9, endln:1892:2
+      |vpiParent:
+      \_typedef_typespec: (rv64_mcountinhibit_s), line:1892:4, endln:1892:24
+      |vpiFullName:bp_common_rv64_pkg::rv64_mcountinhibit_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::rv64_mcountinhibit_s), line:1886:9, endln:1892:2
+  |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::bp_mcountinhibit_s), line:1894:9, endln:1898:2
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
@@ -14940,6 +16158,18 @@ design: (unnamed)
   \_logic_typespec: , line:1897:3, endln:1897:8
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+  |vpiTypedef:
+  \_typedef_typespec: (bp_mcountinhibit_s), line:1898:4, endln:1898:22
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:bp_mcountinhibit_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::bp_mcountinhibit_s), line:1894:9, endln:1898:2
+      |vpiParent:
+      \_typedef_typespec: (bp_mcountinhibit_s), line:1898:4, endln:1898:22
+      |vpiFullName:bp_common_rv64_pkg::bp_mcountinhibit_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::bp_mcountinhibit_s), line:1894:9, endln:1898:2
   |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_instr_rtype_s), line:1980:11, endln:1987:4
     |vpiParent:
@@ -15192,6 +16422,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (rv64_instr_rtype_s), line:1987:6, endln:1987:24
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_instr_rtype_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_instr_rtype_s), line:1980:11, endln:1987:4
+      |vpiParent:
+      \_typedef_typespec: (rv64_instr_rtype_s), line:1987:6, endln:1987:24
+      |vpiFullName:bp_common_rv64_pkg::rv64_instr_rtype_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::rv64_instr_rtype_s), line:1980:11, endln:1987:4
+  |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_instr_itype_s), line:1989:11, endln:1995:4
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
@@ -15393,6 +16635,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (rv64_instr_itype_s), line:1995:6, endln:1995:24
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_instr_itype_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_instr_itype_s), line:1989:11, endln:1995:4
+      |vpiParent:
+      \_typedef_typespec: (rv64_instr_itype_s), line:1995:6, endln:1995:24
+      |vpiFullName:bp_common_rv64_pkg::rv64_instr_itype_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::rv64_instr_itype_s), line:1989:11, endln:1995:4
   |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_instr_stype_s), line:1997:11, endln:2004:4
     |vpiParent:
@@ -15645,6 +16899,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (rv64_instr_stype_s), line:2004:6, endln:2004:24
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_instr_stype_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_instr_stype_s), line:1997:11, endln:2004:4
+      |vpiParent:
+      \_typedef_typespec: (rv64_instr_stype_s), line:2004:6, endln:2004:24
+      |vpiFullName:bp_common_rv64_pkg::rv64_instr_stype_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::rv64_instr_stype_s), line:1997:11, endln:2004:4
+  |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_instr_utype_s), line:2006:11, endln:2010:4
     |vpiParent:
     \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
@@ -15748,6 +17014,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (rv64_instr_utype_s), line:2010:6, endln:2010:24
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_instr_utype_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_instr_utype_s), line:2006:11, endln:2010:4
+      |vpiParent:
+      \_typedef_typespec: (rv64_instr_utype_s), line:2010:6, endln:2010:24
+      |vpiFullName:bp_common_rv64_pkg::rv64_instr_utype_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::rv64_instr_utype_s), line:2006:11, endln:2010:4
   |vpiTypedef:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_instr_s), line:2012:11, endln:2022:4
     |vpiParent:
@@ -15872,6 +17150,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (rv64_instr_s), line:2022:6, endln:2022:18
+    |vpiParent:
+    \_package: bp_common_rv64_pkg (bp_common_rv64_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:927:1, endln:2024:11
+    |vpiName:rv64_instr_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_rv64_pkg::rv64_instr_s), line:2012:11, endln:2022:4
+      |vpiParent:
+      \_typedef_typespec: (rv64_instr_s), line:2022:6, endln:2022:18
+      |vpiFullName:bp_common_rv64_pkg::rv64_instr_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_rv64_pkg::rv64_instr_s), line:2012:11, endln:2022:4
   |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_stvec_s), line:1215:9, endln:1223:2
   |vpiImportTypespec:
@@ -15879,9 +17169,13 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:1222:3, endln:1222:14
   |vpiImportTypespec:
+  \_typedef_typespec: (rv64_stvec_s), line:1223:4, endln:1223:16
+  |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::bp_stvec_s), line:1225:9, endln:1228:2
   |vpiImportTypespec:
   \_logic_typespec: , line:1227:3, endln:1227:15
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_stvec_s), line:1228:4, endln:1228:14
   |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_scounteren_s), line:1240:9, endln:1245:2
   |vpiImportTypespec:
@@ -15891,19 +17185,39 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:1244:3, endln:1244:8
   |vpiImportTypespec:
+  \_typedef_typespec: (rv64_scounteren_s), line:1245:4, endln:1245:21
+  |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::bp_scounteren_s), line:1247:9, endln:1251:2
   |vpiImportTypespec:
   \_logic_typespec: , line:1249:3, endln:1249:8
   |vpiImportTypespec:
   \_logic_typespec: , line:1250:3, endln:1250:8
   |vpiImportTypespec:
+  \_typedef_typespec: (bp_scounteren_s), line:1251:4, endln:1251:19
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:1266:9, endln:1266:21
+  |vpiImportTypespec:
   \_logic_typespec: (rv64_sscratch_s), line:1266:9, endln:1266:21
+  |vpiImportTypespec:
+  \_typedef_typespec: (rv64_sscratch_s), line:1266:22, endln:1266:37
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:1267:9, endln:1267:21
   |vpiImportTypespec:
   \_logic_typespec: (bp_sscratch_s), line:1267:9, endln:1267:21
   |vpiImportTypespec:
+  \_typedef_typespec: (bp_sscratch_s), line:1267:22, endln:1267:35
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:1275:9, endln:1275:21
+  |vpiImportTypespec:
   \_logic_typespec: (rv64_sepc_s), line:1275:9, endln:1275:21
   |vpiImportTypespec:
+  \_typedef_typespec: (rv64_sepc_s), line:1275:22, endln:1275:33
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:1276:9, endln:1276:21
+  |vpiImportTypespec:
   \_logic_typespec: (bp_sepc_s), line:1276:9, endln:1276:21
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_sepc_s), line:1276:22, endln:1276:31
   |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_scause_s), line:1286:9, endln:1290:2
   |vpiImportTypespec:
@@ -15911,15 +17225,27 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:1289:3, endln:1289:15
   |vpiImportTypespec:
+  \_typedef_typespec: (rv64_scause_s), line:1290:4, endln:1290:17
+  |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::bp_scause_s), line:1292:9, endln:1296:2
   |vpiImportTypespec:
   \_logic_typespec: , line:1294:3, endln:1294:8
   |vpiImportTypespec:
   \_logic_typespec: , line:1295:3, endln:1295:14
   |vpiImportTypespec:
+  \_typedef_typespec: (bp_scause_s), line:1296:4, endln:1296:15
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:1308:9, endln:1308:21
+  |vpiImportTypespec:
   \_logic_typespec: (rv64_stval_s), line:1308:9, endln:1308:21
   |vpiImportTypespec:
+  \_typedef_typespec: (rv64_stval_s), line:1308:22, endln:1308:34
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:1309:9, endln:1309:21
+  |vpiImportTypespec:
   \_logic_typespec: (bp_stval_s), line:1309:9, endln:1309:21
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_stval_s), line:1309:22, endln:1309:32
   |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_satp_s), line:1317:9, endln:1327:2
   |vpiImportTypespec:
@@ -15929,11 +17255,15 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:1326:3, endln:1326:15
   |vpiImportTypespec:
+  \_typedef_typespec: (rv64_satp_s), line:1327:4, endln:1327:15
+  |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::bp_satp_s), line:1329:9, endln:1337:2
   |vpiImportTypespec:
   \_logic_typespec: , line:1332:3, endln:1332:8
   |vpiImportTypespec:
   \_logic_typespec: , line:1336:3, endln:1336:15
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_satp_s), line:1337:4, endln:1337:13
   |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_mstatus_s), line:1352:9, endln:1428:2
   |vpiImportTypespec:
@@ -15985,6 +17315,8 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:1427:3, endln:1427:8
   |vpiImportTypespec:
+  \_typedef_typespec: (rv64_mstatus_s), line:1428:4, endln:1428:18
+  |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::bp_mstatus_s), line:1430:9, endln:1442:2
   |vpiImportTypespec:
   \_logic_typespec: , line:1432:3, endln:1432:8
@@ -16001,7 +17333,13 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:1441:3, endln:1441:8
   |vpiImportTypespec:
+  \_typedef_typespec: (bp_mstatus_s), line:1442:4, endln:1442:16
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:1467:9, endln:1467:21
+  |vpiImportTypespec:
   \_logic_typespec: (rv64_medeleg_s), line:1467:9, endln:1467:21
+  |vpiImportTypespec:
+  \_typedef_typespec: (rv64_medeleg_s), line:1467:22, endln:1467:36
   |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::bp_medeleg_s), line:1469:9, endln:1474:2
   |vpiImportTypespec:
@@ -16010,6 +17348,8 @@ design: (unnamed)
   \_logic_typespec: , line:1472:3, endln:1472:16
   |vpiImportTypespec:
   \_logic_typespec: , line:1473:3, endln:1473:16
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_medeleg_s), line:1474:4, endln:1474:16
   |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_mideleg_s), line:1490:9, endln:1514:2
   |vpiImportTypespec:
@@ -16039,6 +17379,8 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:1513:3, endln:1513:8
   |vpiImportTypespec:
+  \_typedef_typespec: (rv64_mideleg_s), line:1514:4, endln:1514:18
+  |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::bp_mideleg_s), line:1516:9, endln:1526:2
   |vpiImportTypespec:
   \_logic_typespec: , line:1518:3, endln:1518:8
@@ -16052,6 +17394,8 @@ design: (unnamed)
   \_logic_typespec: , line:1524:3, endln:1524:8
   |vpiImportTypespec:
   \_logic_typespec: , line:1525:3, endln:1525:8
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_mideleg_s), line:1526:4, endln:1526:16
   |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_mie_s), line:1551:9, endln:1575:2
   |vpiImportTypespec:
@@ -16081,6 +17425,8 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:1574:3, endln:1574:8
   |vpiImportTypespec:
+  \_typedef_typespec: (rv64_mie_s), line:1575:4, endln:1575:14
+  |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::bp_mie_s), line:1577:9, endln:1587:2
   |vpiImportTypespec:
   \_logic_typespec: , line:1579:3, endln:1579:8
@@ -16095,15 +17441,21 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:1586:3, endln:1586:8
   |vpiImportTypespec:
+  \_typedef_typespec: (bp_mie_s), line:1587:4, endln:1587:12
+  |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_mtvec_s), line:1612:9, endln:1620:2
   |vpiImportTypespec:
   \_logic_typespec: , line:1615:3, endln:1615:15
   |vpiImportTypespec:
   \_logic_typespec: , line:1619:3, endln:1619:14
   |vpiImportTypespec:
+  \_typedef_typespec: (rv64_mtvec_s), line:1620:4, endln:1620:16
+  |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::bp_mtvec_s), line:1622:9, endln:1625:2
   |vpiImportTypespec:
   \_logic_typespec: , line:1624:3, endln:1624:15
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_mtvec_s), line:1625:4, endln:1625:14
   |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_mcounteren_s), line:1637:9, endln:1643:2
   |vpiImportTypespec:
@@ -16115,15 +17467,27 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:1642:3, endln:1642:8
   |vpiImportTypespec:
+  \_typedef_typespec: (rv64_mcounteren_s), line:1643:4, endln:1643:21
+  |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::bp_mcounteren_s), line:1645:9, endln:1649:2
   |vpiImportTypespec:
   \_logic_typespec: , line:1647:3, endln:1647:8
   |vpiImportTypespec:
   \_logic_typespec: , line:1648:3, endln:1648:8
   |vpiImportTypespec:
+  \_typedef_typespec: (bp_mcounteren_s), line:1649:4, endln:1649:19
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:1664:9, endln:1664:21
+  |vpiImportTypespec:
   \_logic_typespec: (rv64_mscratch_s), line:1664:9, endln:1664:21
   |vpiImportTypespec:
+  \_typedef_typespec: (rv64_mscratch_s), line:1664:22, endln:1664:37
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:1665:9, endln:1665:21
+  |vpiImportTypespec:
   \_logic_typespec: (bp_mscratch_s), line:1665:9, endln:1665:21
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_mscratch_s), line:1665:22, endln:1665:35
   |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_mip_s), line:1673:9, endln:1697:2
   |vpiImportTypespec:
@@ -16153,6 +17517,8 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:1696:3, endln:1696:8
   |vpiImportTypespec:
+  \_typedef_typespec: (rv64_mip_s), line:1697:4, endln:1697:14
+  |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::bp_mip_s), line:1699:9, endln:1709:2
   |vpiImportTypespec:
   \_logic_typespec: , line:1701:3, endln:1701:8
@@ -16167,7 +17533,13 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:1708:3, endln:1708:8
   |vpiImportTypespec:
+  \_typedef_typespec: (bp_mip_s), line:1709:5, endln:1709:13
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:1734:9, endln:1734:21
+  |vpiImportTypespec:
   \_logic_typespec: (rv64_mtval_s), line:1734:9, endln:1734:21
+  |vpiImportTypespec:
+  \_typedef_typespec: (rv64_mtval_s), line:1734:22, endln:1734:34
   |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::bp_mtval_s), line:1735:9, endln:1739:2
   |vpiImportTypespec:
@@ -16175,13 +17547,21 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:1738:3, endln:1738:15
   |vpiImportTypespec:
+  \_typedef_typespec: (bp_mtval_s), line:1739:4, endln:1739:14
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:1747:9, endln:1747:21
+  |vpiImportTypespec:
   \_logic_typespec: (rv64_mepc_s), line:1747:9, endln:1747:21
+  |vpiImportTypespec:
+  \_typedef_typespec: (rv64_mepc_s), line:1747:22, endln:1747:33
   |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::bp_mepc_s), line:1748:9, endln:1752:2
   |vpiImportTypespec:
   \_logic_typespec: , line:1750:3, endln:1750:8
   |vpiImportTypespec:
   \_logic_typespec: , line:1751:3, endln:1751:15
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_mepc_s), line:1752:4, endln:1752:13
   |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_pmpcfg_entry_s), line:1760:9, endln:1777:2
   |vpiImportTypespec:
@@ -16197,13 +17577,25 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:1776:3, endln:1776:8
   |vpiImportTypespec:
+  \_typedef_typespec: (rv64_pmpcfg_entry_s), line:1777:4, endln:1777:23
+  |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_pmpcfg_s), line:1779:9, endln:1782:2
   |vpiImportTypespec:
   \_packed_array_typespec: , line:1781:3, endln:1781:28
   |vpiImportTypespec:
+  \_typedef_typespec: (rv64_pmpcfg_s), line:1782:4, endln:1782:17
+  |vpiImportTypespec:
+  \_typedef_typespec: (rv64_pmpcfg0_s), line:1783:23, endln:1783:37
+  |vpiImportTypespec:
+  \_typedef_typespec: (rv64_pmpcfg1_s), line:1784:23, endln:1784:37
+  |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::bp_pmpcfg_s), line:1786:9, endln:1789:2
   |vpiImportTypespec:
   \_packed_array_typespec: , line:1788:3, endln:1788:28
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_pmpcfg_s), line:1789:4, endln:1789:15
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_pmpcfg0_s), line:1791:21, endln:1791:33
   |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_pmpaddr_s), line:1804:9, endln:1808:2
   |vpiImportTypespec:
@@ -16211,9 +17603,29 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:1807:3, endln:1807:15
   |vpiImportTypespec:
+  \_typedef_typespec: (rv64_pmpaddr_s), line:1808:4, endln:1808:18
+  |vpiImportTypespec:
+  \_typedef_typespec: (rv64_pmpaddr0_s), line:1810:24, endln:1810:39
+  |vpiImportTypespec:
+  \_typedef_typespec: (rv64_pmpaddr1_s), line:1811:24, endln:1811:39
+  |vpiImportTypespec:
+  \_typedef_typespec: (rv64_pmpaddr2_s), line:1812:24, endln:1812:39
+  |vpiImportTypespec:
+  \_typedef_typespec: (rv64_pmpaddr3_s), line:1813:24, endln:1813:39
+  |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::bp_pmpaddr_s), line:1815:9, endln:1818:2
   |vpiImportTypespec:
   \_logic_typespec: , line:1817:3, endln:1817:15
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_pmpaddr_s), line:1818:4, endln:1818:16
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_pmpaddr0_s), line:1820:22, endln:1820:35
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_pmpaddr1_s), line:1821:22, endln:1821:35
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_pmpaddr2_s), line:1822:22, endln:1822:35
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_pmpaddr3_s), line:1823:22, endln:1823:35
   |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_mcause_s), line:1843:9, endln:1847:2
   |vpiImportTypespec:
@@ -16221,15 +17633,35 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:1846:3, endln:1846:15
   |vpiImportTypespec:
+  \_typedef_typespec: (rv64_mcause_s), line:1847:4, endln:1847:17
+  |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::bp_mcause_s), line:1849:9, endln:1853:2
   |vpiImportTypespec:
   \_logic_typespec: , line:1851:3, endln:1851:8
   |vpiImportTypespec:
   \_logic_typespec: , line:1852:3, endln:1852:14
   |vpiImportTypespec:
+  \_typedef_typespec: (bp_mcause_s), line:1853:4, endln:1853:15
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:1865:9, endln:1865:21
+  |vpiImportTypespec:
   \_logic_typespec: (rv64_mcounter_s), line:1865:9, endln:1865:21
   |vpiImportTypespec:
+  \_typedef_typespec: (rv64_mcounter_s), line:1865:22, endln:1865:37
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:1866:9, endln:1866:21
+  |vpiImportTypespec:
   \_logic_typespec: (bp_mcounter_s), line:1866:9, endln:1866:21
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_mcounter_s), line:1866:22, endln:1866:35
+  |vpiImportTypespec:
+  \_typedef_typespec: (rv64_mcycle_s), line:1874:25, endln:1874:38
+  |vpiImportTypespec:
+  \_typedef_typespec: (rv64_minstret_s), line:1875:25, endln:1875:40
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_mcycle_s), line:1877:23, endln:1877:34
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_minstret_s), line:1878:23, endln:1878:36
   |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_mcountinhibit_s), line:1886:9, endln:1892:2
   |vpiImportTypespec:
@@ -16241,11 +17673,15 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:1891:3, endln:1891:8
   |vpiImportTypespec:
+  \_typedef_typespec: (rv64_mcountinhibit_s), line:1892:4, endln:1892:24
+  |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::bp_mcountinhibit_s), line:1894:9, endln:1898:2
   |vpiImportTypespec:
   \_logic_typespec: , line:1896:3, endln:1896:8
   |vpiImportTypespec:
   \_logic_typespec: , line:1897:3, endln:1897:8
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_mcountinhibit_s), line:1898:4, endln:1898:22
   |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_instr_rtype_s), line:1980:11, endln:1987:4
   |vpiImportTypespec:
@@ -16259,6 +17695,8 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:1986:5, endln:1986:39
   |vpiImportTypespec:
+  \_typedef_typespec: (rv64_instr_rtype_s), line:1987:6, endln:1987:24
+  |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_instr_itype_s), line:1989:11, endln:1995:4
   |vpiImportTypespec:
   \_logic_typespec: , line:1991:5, endln:1991:36
@@ -16268,6 +17706,8 @@ design: (unnamed)
   \_logic_typespec: , line:1993:5, endln:1993:37
   |vpiImportTypespec:
   \_logic_typespec: , line:1994:5, endln:1994:39
+  |vpiImportTypespec:
+  \_typedef_typespec: (rv64_instr_itype_s), line:1995:6, endln:1995:24
   |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_instr_stype_s), line:1997:11, endln:2004:4
   |vpiImportTypespec:
@@ -16281,17 +17721,23 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:2003:5, endln:2003:38
   |vpiImportTypespec:
+  \_typedef_typespec: (rv64_instr_stype_s), line:2004:6, endln:2004:24
+  |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_instr_utype_s), line:2006:11, endln:2010:4
   |vpiImportTypespec:
   \_logic_typespec: , line:2008:5, endln:2008:36
   |vpiImportTypespec:
   \_logic_typespec: , line:2009:5, endln:2009:39
   |vpiImportTypespec:
+  \_typedef_typespec: (rv64_instr_utype_s), line:2010:6, endln:2010:24
+  |vpiImportTypespec:
   \_struct_typespec: (bp_common_rv64_pkg::rv64_instr_s), line:2012:11, endln:2022:4
   |vpiImportTypespec:
   \_union_typespec: , line:2014:5, endln:2020:6
   |vpiImportTypespec:
   \_logic_typespec: , line:2021:5, endln:2021:37
+  |vpiImportTypespec:
+  \_typedef_typespec: (rv64_instr_s), line:2022:6, endln:2022:18
   |vpiDefName:bp_common_rv64_pkg
 |uhdmallPackages:
 \_package: bp_common_aviary_pkg (bp_common_aviary_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2026:1, endln:2528:11
@@ -22142,6 +23588,18 @@ design: (unnamed)
     \_package: bp_common_aviary_pkg (bp_common_aviary_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2026:1, endln:2528:11
     |vpiSigned:1
   |vpiTypedef:
+  \_typedef_typespec: (bp_proc_param_s), line:2112:4, endln:2112:19
+    |vpiParent:
+    \_package: bp_common_aviary_pkg (bp_common_aviary_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2026:1, endln:2528:11
+    |vpiName:bp_proc_param_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:2062:9, endln:2112:2
+      |vpiParent:
+      \_typedef_typespec: (bp_proc_param_s), line:2112:4, endln:2112:19
+      |vpiFullName:bp_common_aviary_pkg::bp_proc_param_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:2062:9, endln:2112:2
+  |vpiTypedef:
   \_string_typespec: (default), line:2196:7, endln:2196:14
     |vpiParent:
     \_package: bp_common_aviary_pkg (bp_common_aviary_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2026:1, endln:2528:11
@@ -25862,6 +27320,18 @@ design: (unnamed)
       |vpiDecompile:0
       |vpiSize:64
   |vpiTypedef:
+  \_typedef_typespec: (bp_cfg_e), line:2513:5, endln:2513:13
+    |vpiParent:
+    \_package: bp_common_aviary_pkg (bp_common_aviary_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2026:1, endln:2528:11
+    |vpiName:bp_cfg_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_aviary_pkg::bp_cfg_e), line:2504:11, endln:2513:4
+      |vpiParent:
+      \_typedef_typespec: (bp_cfg_e), line:2513:5, endln:2513:13
+      |vpiFullName:bp_common_aviary_pkg::bp_cfg_e
+      |vpiActual:
+      \_enum_typespec: (bp_common_aviary_pkg::bp_cfg_e), line:2504:11, endln:2513:14
+  |vpiTypedef:
   \_packed_array_typespec: , line:2516:13, endln:2516:43
     |vpiParent:
     \_package: bp_common_aviary_pkg (bp_common_aviary_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2026:1, endln:2528:11
@@ -25905,7 +27375,7 @@ design: (unnamed)
       |vpiName:bp_proc_param_s
       |vpiFullName:bp_common_aviary_pkg::bp_proc_param_s
       |vpiActual:
-      \_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:2062:9, endln:2112:2
+      \_typedef_typespec: (bp_proc_param_s), line:2112:4, endln:2112:19
   |vpiImportTypespec:
   \_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:2062:9, endln:2112:2
   |vpiImportTypespec:
@@ -25988,6 +27458,8 @@ design: (unnamed)
   \_integer_typespec: , line:2110:3, endln:2110:10
   |vpiImportTypespec:
   \_integer_typespec: , line:2111:3, endln:2111:10
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_proc_param_s), line:2112:4, endln:2112:19
   |vpiImportTypespec:
   \_string_typespec: (default), line:2196:7, endln:2196:14
   |vpiImportTypespec:
@@ -27439,6 +28911,8 @@ design: (unnamed)
   |vpiImportTypespec:
   \_enum_typespec: (bp_common_aviary_pkg::bp_cfg_e), line:2504:11, endln:2513:14
   |vpiImportTypespec:
+  \_typedef_typespec: (bp_cfg_e), line:2513:5, endln:2513:13
+  |vpiImportTypespec:
   \_packed_array_typespec: , line:2516:13, endln:2516:43
   |vpiDefName:bp_common_aviary_pkg
 |uhdmallPackages:
@@ -27608,6 +29082,18 @@ design: (unnamed)
       |vpiDecompile:4'b1111
       |vpiSize:4
   |vpiTypedef:
+  \_typedef_typespec: (bp_be_int_fu_op_e), line:2968:3, endln:2968:20
+    |vpiParent:
+    \_package: bp_be_pkg (bp_be_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2530:1, endln:3363:23
+    |vpiName:bp_be_int_fu_op_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_be_pkg::bp_be_int_fu_op_e), line:2951:9, endln:2968:2
+      |vpiParent:
+      \_typedef_typespec: (bp_be_int_fu_op_e), line:2968:3, endln:2968:20
+      |vpiFullName:bp_be_pkg::bp_be_int_fu_op_e
+      |vpiActual:
+      \_enum_typespec: (bp_be_pkg::bp_be_int_fu_op_e), line:2951:9, endln:2968:21
+  |vpiTypedef:
   \_bit_typespec: , line:2970:14, endln:2970:23
     |vpiParent:
     \_package: bp_be_pkg (bp_be_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2530:1, endln:3363:23
@@ -27772,6 +29258,18 @@ design: (unnamed)
       |vpiDecompile:4'b1111
       |vpiSize:4
   |vpiTypedef:
+  \_typedef_typespec: (bp_be_mmu_fu_op_e), line:2992:3, endln:2992:20
+    |vpiParent:
+    \_package: bp_be_pkg (bp_be_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2530:1, endln:3363:23
+    |vpiName:bp_be_mmu_fu_op_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_be_pkg::bp_be_mmu_fu_op_e), line:2970:9, endln:2992:2
+      |vpiParent:
+      \_typedef_typespec: (bp_be_mmu_fu_op_e), line:2992:3, endln:2992:20
+      |vpiFullName:bp_be_pkg::bp_be_mmu_fu_op_e
+      |vpiActual:
+      \_enum_typespec: (bp_be_pkg::bp_be_mmu_fu_op_e), line:2970:9, endln:2992:21
+  |vpiTypedef:
   \_bit_typespec: , line:2994:14, endln:2994:23
     |vpiParent:
     \_package: bp_be_pkg (bp_be_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2530:1, endln:3363:23
@@ -27928,6 +29426,18 @@ design: (unnamed)
       |vpiDecompile:4'b1010
       |vpiSize:4
   |vpiTypedef:
+  \_typedef_typespec: (bp_be_csr_fu_op_e), line:3017:3, endln:3017:20
+    |vpiParent:
+    \_package: bp_be_pkg (bp_be_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2530:1, endln:3363:23
+    |vpiName:bp_be_csr_fu_op_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_be_pkg::bp_be_csr_fu_op_e), line:2994:9, endln:3017:2
+      |vpiParent:
+      \_typedef_typespec: (bp_be_csr_fu_op_e), line:3017:3, endln:3017:20
+      |vpiFullName:bp_be_pkg::bp_be_csr_fu_op_e
+      |vpiActual:
+      \_enum_typespec: (bp_be_pkg::bp_be_csr_fu_op_e), line:2994:9, endln:3017:21
+  |vpiTypedef:
   \_struct_typespec: (bp_be_pkg::bp_be_fu_op_s), line:3019:9, endln:3027:2
     |vpiParent:
     \_package: bp_be_pkg (bp_be_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2530:1, endln:3363:23
@@ -27990,6 +29500,18 @@ design: (unnamed)
         |vpiActual:
         \_enum_typespec: (bp_be_pkg::bp_be_csr_fu_op_e), line:2994:9, endln:3017:21
   |vpiTypedef:
+  \_typedef_typespec: (bp_be_fu_op_s), line:3027:4, endln:3027:17
+    |vpiParent:
+    \_package: bp_be_pkg (bp_be_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2530:1, endln:3363:23
+    |vpiName:bp_be_fu_op_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_be_pkg::bp_be_fu_op_s), line:3019:9, endln:3027:2
+      |vpiParent:
+      \_typedef_typespec: (bp_be_fu_op_s), line:3027:4, endln:3027:17
+      |vpiFullName:bp_be_pkg::bp_be_fu_op_s
+      |vpiActual:
+      \_struct_typespec: (bp_be_pkg::bp_be_fu_op_s), line:3019:9, endln:3027:2
+  |vpiTypedef:
   \_bit_typespec: , line:3029:14, endln:3029:17
     |vpiParent:
     \_package: bp_be_pkg (bp_be_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2530:1, endln:3363:23
@@ -28021,6 +29543,18 @@ design: (unnamed)
       |BIN:1
       |vpiDecompile:1'b1
       |vpiSize:1
+  |vpiTypedef:
+  \_typedef_typespec: (bp_be_src1_e), line:3033:3, endln:3033:15
+    |vpiParent:
+    \_package: bp_be_pkg (bp_be_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2530:1, endln:3363:23
+    |vpiName:bp_be_src1_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_be_pkg::bp_be_src1_e), line:3029:9, endln:3033:2
+      |vpiParent:
+      \_typedef_typespec: (bp_be_src1_e), line:3033:3, endln:3033:15
+      |vpiFullName:bp_be_pkg::bp_be_src1_e
+      |vpiActual:
+      \_enum_typespec: (bp_be_pkg::bp_be_src1_e), line:3029:9, endln:3033:16
   |vpiTypedef:
   \_bit_typespec: , line:3035:14, endln:3035:17
     |vpiParent:
@@ -28054,6 +29588,18 @@ design: (unnamed)
       |vpiDecompile:1'b1
       |vpiSize:1
   |vpiTypedef:
+  \_typedef_typespec: (bp_be_src2_e), line:3039:3, endln:3039:15
+    |vpiParent:
+    \_package: bp_be_pkg (bp_be_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2530:1, endln:3363:23
+    |vpiName:bp_be_src2_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_be_pkg::bp_be_src2_e), line:3035:9, endln:3039:2
+      |vpiParent:
+      \_typedef_typespec: (bp_be_src2_e), line:3039:3, endln:3039:15
+      |vpiFullName:bp_be_pkg::bp_be_src2_e
+      |vpiActual:
+      \_enum_typespec: (bp_be_pkg::bp_be_src2_e), line:3035:9, endln:3039:16
+  |vpiTypedef:
   \_bit_typespec: , line:3041:14, endln:3041:17
     |vpiParent:
     \_package: bp_be_pkg (bp_be_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2530:1, endln:3363:23
@@ -28085,6 +29631,18 @@ design: (unnamed)
       |BIN:1
       |vpiDecompile:1'b1
       |vpiSize:1
+  |vpiTypedef:
+  \_typedef_typespec: (bp_be_baddr_e), line:3045:3, endln:3045:16
+    |vpiParent:
+    \_package: bp_be_pkg (bp_be_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2530:1, endln:3363:23
+    |vpiName:bp_be_baddr_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_be_pkg::bp_be_baddr_e), line:3041:9, endln:3045:2
+      |vpiParent:
+      \_typedef_typespec: (bp_be_baddr_e), line:3045:3, endln:3045:16
+      |vpiFullName:bp_be_pkg::bp_be_baddr_e
+      |vpiActual:
+      \_enum_typespec: (bp_be_pkg::bp_be_baddr_e), line:3041:9, endln:3045:17
   |vpiTypedef:
   \_bit_typespec: , line:3047:14, endln:3047:17
     |vpiParent:
@@ -28118,6 +29676,18 @@ design: (unnamed)
       |vpiDecompile:1'b1
       |vpiSize:1
   |vpiTypedef:
+  \_typedef_typespec: (bp_be_offset_e), line:3051:3, endln:3051:17
+    |vpiParent:
+    \_package: bp_be_pkg (bp_be_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2530:1, endln:3363:23
+    |vpiName:bp_be_offset_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_be_pkg::bp_be_offset_e), line:3047:9, endln:3051:2
+      |vpiParent:
+      \_typedef_typespec: (bp_be_offset_e), line:3051:3, endln:3051:17
+      |vpiFullName:bp_be_pkg::bp_be_offset_e
+      |vpiActual:
+      \_enum_typespec: (bp_be_pkg::bp_be_offset_e), line:3047:9, endln:3051:18
+  |vpiTypedef:
   \_bit_typespec: , line:3053:14, endln:3053:17
     |vpiParent:
     \_package: bp_be_pkg (bp_be_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2530:1, endln:3363:23
@@ -28149,6 +29719,18 @@ design: (unnamed)
       |BIN:1
       |vpiDecompile:1'b1
       |vpiSize:1
+  |vpiTypedef:
+  \_typedef_typespec: (bp_be_result_e), line:3057:3, endln:3057:17
+    |vpiParent:
+    \_package: bp_be_pkg (bp_be_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2530:1, endln:3363:23
+    |vpiName:bp_be_result_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_be_pkg::bp_be_result_e), line:3053:9, endln:3057:2
+      |vpiParent:
+      \_typedef_typespec: (bp_be_result_e), line:3057:3, endln:3057:17
+      |vpiFullName:bp_be_pkg::bp_be_result_e
+      |vpiActual:
+      \_enum_typespec: (bp_be_pkg::bp_be_result_e), line:3053:9, endln:3057:18
   |vpiTypedef:
   \_struct_typespec: (bp_be_pkg::bp_be_decode_s), line:3059:9, endln:3089:2
     |vpiParent:
@@ -28522,6 +30104,18 @@ design: (unnamed)
     |vpiParent:
     \_package: bp_be_pkg (bp_be_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2530:1, endln:3363:23
   |vpiTypedef:
+  \_typedef_typespec: (bp_be_decode_s), line:3089:4, endln:3089:18
+    |vpiParent:
+    \_package: bp_be_pkg (bp_be_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2530:1, endln:3363:23
+    |vpiName:bp_be_decode_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_be_pkg::bp_be_decode_s), line:3059:9, endln:3089:2
+      |vpiParent:
+      \_typedef_typespec: (bp_be_decode_s), line:3089:4, endln:3089:18
+      |vpiFullName:bp_be_pkg::bp_be_decode_s
+      |vpiActual:
+      \_struct_typespec: (bp_be_pkg::bp_be_decode_s), line:3059:9, endln:3089:2
+  |vpiTypedef:
   \_struct_typespec: (bp_be_pkg::bp_be_ecode_dec_s), line:3091:9, endln:3110:2
     |vpiParent:
     \_package: bp_be_pkg (bp_be_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2530:1, endln:3363:23
@@ -28784,6 +30378,18 @@ design: (unnamed)
     |vpiParent:
     \_package: bp_be_pkg (bp_be_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2530:1, endln:3363:23
   |vpiTypedef:
+  \_typedef_typespec: (bp_be_ecode_dec_s), line:3110:4, endln:3110:21
+    |vpiParent:
+    \_package: bp_be_pkg (bp_be_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2530:1, endln:3363:23
+    |vpiName:bp_be_ecode_dec_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_be_pkg::bp_be_ecode_dec_s), line:3091:9, endln:3110:2
+      |vpiParent:
+      \_typedef_typespec: (bp_be_ecode_dec_s), line:3110:4, endln:3110:21
+      |vpiFullName:bp_be_pkg::bp_be_ecode_dec_s
+      |vpiActual:
+      \_struct_typespec: (bp_be_pkg::bp_be_ecode_dec_s), line:3091:9, endln:3110:2
+  |vpiTypedef:
   \_struct_typespec: (bp_be_pkg::bp_be_exception_s), line:3115:9, endln:3123:2
     |vpiParent:
     \_package: bp_be_pkg (bp_be_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2530:1, endln:3363:23
@@ -28869,6 +30475,18 @@ design: (unnamed)
   \_logic_typespec: , line:3122:3, endln:3122:8
     |vpiParent:
     \_package: bp_be_pkg (bp_be_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2530:1, endln:3363:23
+  |vpiTypedef:
+  \_typedef_typespec: (bp_be_exception_s), line:3123:4, endln:3123:21
+    |vpiParent:
+    \_package: bp_be_pkg (bp_be_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2530:1, endln:3363:23
+    |vpiName:bp_be_exception_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_be_pkg::bp_be_exception_s), line:3115:9, endln:3123:2
+      |vpiParent:
+      \_typedef_typespec: (bp_be_exception_s), line:3123:4, endln:3123:21
+      |vpiFullName:bp_be_pkg::bp_be_exception_s
+      |vpiActual:
+      \_struct_typespec: (bp_be_pkg::bp_be_exception_s), line:3115:9, endln:3123:2
   |vpiTypedef:
   \_struct_typespec: (bp_be_pkg::bp_sv39_pte_s), line:3169:11, endln:3182:4
     |vpiParent:
@@ -29163,6 +30781,18 @@ design: (unnamed)
   \_logic_typespec: , line:3181:5, endln:3181:10
     |vpiParent:
     \_package: bp_be_pkg (bp_be_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2530:1, endln:3363:23
+  |vpiTypedef:
+  \_typedef_typespec: (bp_sv39_pte_s), line:3182:6, endln:3182:19
+    |vpiParent:
+    \_package: bp_be_pkg (bp_be_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:2530:1, endln:3363:23
+    |vpiName:bp_sv39_pte_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_be_pkg::bp_sv39_pte_s), line:3169:11, endln:3182:4
+      |vpiParent:
+      \_typedef_typespec: (bp_sv39_pte_s), line:3182:6, endln:3182:19
+      |vpiFullName:bp_be_pkg::bp_sv39_pte_s
+      |vpiActual:
+      \_struct_typespec: (bp_be_pkg::bp_sv39_pte_s), line:3169:11, endln:3182:4
   |vpiImportTypespec:
   \_import_typespec: (bp_common_pkg), line:2531:10, endln:2531:26
   |vpiImportTypespec:
@@ -29172,37 +30802,55 @@ design: (unnamed)
   |vpiImportTypespec:
   \_enum_typespec: (bp_be_pkg::bp_be_int_fu_op_e), line:2951:9, endln:2968:21
   |vpiImportTypespec:
+  \_typedef_typespec: (bp_be_int_fu_op_e), line:2968:3, endln:2968:20
+  |vpiImportTypespec:
   \_bit_typespec: , line:2970:14, endln:2970:23
   |vpiImportTypespec:
   \_enum_typespec: (bp_be_pkg::bp_be_mmu_fu_op_e), line:2970:9, endln:2992:21
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_be_mmu_fu_op_e), line:2992:3, endln:2992:20
   |vpiImportTypespec:
   \_bit_typespec: , line:2994:14, endln:2994:23
   |vpiImportTypespec:
   \_enum_typespec: (bp_be_pkg::bp_be_csr_fu_op_e), line:2994:9, endln:3017:21
   |vpiImportTypespec:
+  \_typedef_typespec: (bp_be_csr_fu_op_e), line:3017:3, endln:3017:20
+  |vpiImportTypespec:
   \_struct_typespec: (bp_be_pkg::bp_be_fu_op_s), line:3019:9, endln:3027:2
   |vpiImportTypespec:
   \_union_typespec: , line:3021:3, endln:3026:4
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_be_fu_op_s), line:3027:4, endln:3027:17
   |vpiImportTypespec:
   \_bit_typespec: , line:3029:14, endln:3029:17
   |vpiImportTypespec:
   \_enum_typespec: (bp_be_pkg::bp_be_src1_e), line:3029:9, endln:3033:16
   |vpiImportTypespec:
+  \_typedef_typespec: (bp_be_src1_e), line:3033:3, endln:3033:15
+  |vpiImportTypespec:
   \_bit_typespec: , line:3035:14, endln:3035:17
   |vpiImportTypespec:
   \_enum_typespec: (bp_be_pkg::bp_be_src2_e), line:3035:9, endln:3039:16
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_be_src2_e), line:3039:3, endln:3039:15
   |vpiImportTypespec:
   \_bit_typespec: , line:3041:14, endln:3041:17
   |vpiImportTypespec:
   \_enum_typespec: (bp_be_pkg::bp_be_baddr_e), line:3041:9, endln:3045:17
   |vpiImportTypespec:
+  \_typedef_typespec: (bp_be_baddr_e), line:3045:3, endln:3045:16
+  |vpiImportTypespec:
   \_bit_typespec: , line:3047:14, endln:3047:17
   |vpiImportTypespec:
   \_enum_typespec: (bp_be_pkg::bp_be_offset_e), line:3047:9, endln:3051:18
   |vpiImportTypespec:
+  \_typedef_typespec: (bp_be_offset_e), line:3051:3, endln:3051:17
+  |vpiImportTypespec:
   \_bit_typespec: , line:3053:14, endln:3053:17
   |vpiImportTypespec:
   \_enum_typespec: (bp_be_pkg::bp_be_result_e), line:3053:9, endln:3057:18
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_be_result_e), line:3057:3, endln:3057:17
   |vpiImportTypespec:
   \_struct_typespec: (bp_be_pkg::bp_be_decode_s), line:3059:9, endln:3089:2
   |vpiImportTypespec:
@@ -29242,6 +30890,8 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:3080:3, endln:3080:8
   |vpiImportTypespec:
+  \_typedef_typespec: (bp_be_decode_s), line:3089:4, endln:3089:18
+  |vpiImportTypespec:
   \_struct_typespec: (bp_be_pkg::bp_be_ecode_dec_s), line:3091:9, endln:3110:2
   |vpiImportTypespec:
   \_logic_typespec: , line:3094:3, endln:3094:8
@@ -29276,6 +30926,8 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:3109:3, endln:3109:8
   |vpiImportTypespec:
+  \_typedef_typespec: (bp_be_ecode_dec_s), line:3110:4, endln:3110:21
+  |vpiImportTypespec:
   \_struct_typespec: (bp_be_pkg::bp_be_exception_s), line:3115:9, endln:3123:2
   |vpiImportTypespec:
   \_logic_typespec: , line:3118:3, endln:3118:8
@@ -29287,6 +30939,8 @@ design: (unnamed)
   \_logic_typespec: , line:3121:3, endln:3121:8
   |vpiImportTypespec:
   \_logic_typespec: , line:3122:3, endln:3122:8
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_be_exception_s), line:3123:4, endln:3123:21
   |vpiImportTypespec:
   \_struct_typespec: (bp_be_pkg::bp_sv39_pte_s), line:3169:11, endln:3182:4
   |vpiImportTypespec:
@@ -29311,6 +30965,8 @@ design: (unnamed)
   \_logic_typespec: , line:3180:5, endln:3180:10
   |vpiImportTypespec:
   \_logic_typespec: , line:3181:5, endln:3181:10
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_sv39_pte_s), line:3182:6, endln:3182:19
   |vpiDefName:bp_be_pkg
   |vpiEndLabel:bp_be_pkg
 |uhdmallPackages:
@@ -29476,6 +31132,18 @@ design: (unnamed)
       |vpiDecompile:4'b1110
       |vpiSize:4
   |vpiTypedef:
+  \_typedef_typespec: (bp_be_dcache_opcode_e), line:4311:5, endln:4311:26
+    |vpiParent:
+    \_package: bp_be_dcache_pkg (bp_be_dcache_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:3365:1, endln:4368:11
+    |vpiName:bp_be_dcache_opcode_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_be_dcache_pkg::bp_be_dcache_opcode_e), line:4290:11, endln:4311:4
+      |vpiParent:
+      \_typedef_typespec: (bp_be_dcache_opcode_e), line:4311:5, endln:4311:26
+      |vpiFullName:bp_be_dcache_pkg::bp_be_dcache_opcode_e
+      |vpiActual:
+      \_enum_typespec: (bp_be_dcache_pkg::bp_be_dcache_opcode_e), line:4290:11, endln:4311:27
+  |vpiTypedef:
   \_logic_typespec: , line:4316:16, endln:4316:27
     |vpiParent:
     \_package: bp_be_dcache_pkg (bp_be_dcache_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:3365:1, endln:4368:11
@@ -29535,6 +31203,18 @@ design: (unnamed)
       |INT:2
       |vpiDecompile:2
       |vpiSize:2
+  |vpiTypedef:
+  \_typedef_typespec: (bp_be_dcache_lce_data_mem_opcode_e), line:4327:5, endln:4327:39
+    |vpiParent:
+    \_package: bp_be_dcache_pkg (bp_be_dcache_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:3365:1, endln:4368:11
+    |vpiName:bp_be_dcache_lce_data_mem_opcode_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_be_dcache_pkg::bp_be_dcache_lce_data_mem_opcode_e), line:4316:11, endln:4327:4
+      |vpiParent:
+      \_typedef_typespec: (bp_be_dcache_lce_data_mem_opcode_e), line:4327:5, endln:4327:39
+      |vpiFullName:bp_be_dcache_pkg::bp_be_dcache_lce_data_mem_opcode_e
+      |vpiActual:
+      \_enum_typespec: (bp_be_dcache_pkg::bp_be_dcache_lce_data_mem_opcode_e), line:4316:11, endln:4327:40
   |vpiTypedef:
   \_logic_typespec: , line:4331:16, endln:4331:27
     |vpiParent:
@@ -29596,6 +31276,18 @@ design: (unnamed)
       |vpiDecompile:2
       |vpiSize:2
   |vpiTypedef:
+  \_typedef_typespec: (bp_be_dcache_lce_tag_mem_opcode_e), line:4342:5, endln:4342:38
+    |vpiParent:
+    \_package: bp_be_dcache_pkg (bp_be_dcache_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:3365:1, endln:4368:11
+    |vpiName:bp_be_dcache_lce_tag_mem_opcode_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_be_dcache_pkg::bp_be_dcache_lce_tag_mem_opcode_e), line:4331:11, endln:4342:4
+      |vpiParent:
+      \_typedef_typespec: (bp_be_dcache_lce_tag_mem_opcode_e), line:4342:5, endln:4342:38
+      |vpiFullName:bp_be_dcache_pkg::bp_be_dcache_lce_tag_mem_opcode_e
+      |vpiActual:
+      \_enum_typespec: (bp_be_dcache_pkg::bp_be_dcache_lce_tag_mem_opcode_e), line:4331:11, endln:4342:39
+  |vpiTypedef:
   \_logic_typespec: , line:4347:16, endln:4347:27
     |vpiParent:
     \_package: bp_be_dcache_pkg (bp_be_dcache_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:3365:1, endln:4368:11
@@ -29656,6 +31348,18 @@ design: (unnamed)
       |vpiDecompile:2
       |vpiSize:2
   |vpiTypedef:
+  \_typedef_typespec: (bp_be_dcache_lce_stat_mem_opcode_e), line:4358:5, endln:4358:39
+    |vpiParent:
+    \_package: bp_be_dcache_pkg (bp_be_dcache_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:3365:1, endln:4368:11
+    |vpiName:bp_be_dcache_lce_stat_mem_opcode_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_be_dcache_pkg::bp_be_dcache_lce_stat_mem_opcode_e), line:4347:11, endln:4358:4
+      |vpiParent:
+      \_typedef_typespec: (bp_be_dcache_lce_stat_mem_opcode_e), line:4358:5, endln:4358:39
+      |vpiFullName:bp_be_dcache_pkg::bp_be_dcache_lce_stat_mem_opcode_e
+      |vpiActual:
+      \_enum_typespec: (bp_be_dcache_pkg::bp_be_dcache_lce_stat_mem_opcode_e), line:4347:11, endln:4358:40
+  |vpiTypedef:
   \_logic_typespec: , line:4361:16, endln:4361:21
     |vpiParent:
     \_package: bp_be_dcache_pkg (bp_be_dcache_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:3365:1, endln:4368:11
@@ -29687,26 +31391,48 @@ design: (unnamed)
       |INT:1
       |vpiDecompile:1
       |vpiSize:1
+  |vpiTypedef:
+  \_typedef_typespec: (bp_be_dcache_lce_mode_e), line:4364:5, endln:4364:28
+    |vpiParent:
+    \_package: bp_be_dcache_pkg (bp_be_dcache_pkg::), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:3365:1, endln:4368:11
+    |vpiName:bp_be_dcache_lce_mode_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_be_dcache_pkg::bp_be_dcache_lce_mode_e), line:4361:11, endln:4364:4
+      |vpiParent:
+      \_typedef_typespec: (bp_be_dcache_lce_mode_e), line:4364:5, endln:4364:28
+      |vpiFullName:bp_be_dcache_pkg::bp_be_dcache_lce_mode_e
+      |vpiActual:
+      \_enum_typespec: (bp_be_dcache_pkg::bp_be_dcache_lce_mode_e), line:4361:11, endln:4364:29
   |vpiImportTypespec:
   \_logic_typespec: , line:4290:16, endln:4290:27
   |vpiImportTypespec:
   \_enum_typespec: (bp_be_dcache_pkg::bp_be_dcache_opcode_e), line:4290:11, endln:4311:27
   |vpiImportTypespec:
+  \_typedef_typespec: (bp_be_dcache_opcode_e), line:4311:5, endln:4311:26
+  |vpiImportTypespec:
   \_logic_typespec: , line:4316:16, endln:4316:27
   |vpiImportTypespec:
   \_enum_typespec: (bp_be_dcache_pkg::bp_be_dcache_lce_data_mem_opcode_e), line:4316:11, endln:4327:40
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_be_dcache_lce_data_mem_opcode_e), line:4327:5, endln:4327:39
   |vpiImportTypespec:
   \_logic_typespec: , line:4331:16, endln:4331:27
   |vpiImportTypespec:
   \_enum_typespec: (bp_be_dcache_pkg::bp_be_dcache_lce_tag_mem_opcode_e), line:4331:11, endln:4342:39
   |vpiImportTypespec:
+  \_typedef_typespec: (bp_be_dcache_lce_tag_mem_opcode_e), line:4342:5, endln:4342:38
+  |vpiImportTypespec:
   \_logic_typespec: , line:4347:16, endln:4347:27
   |vpiImportTypespec:
   \_enum_typespec: (bp_be_dcache_pkg::bp_be_dcache_lce_stat_mem_opcode_e), line:4347:11, endln:4358:40
   |vpiImportTypespec:
+  \_typedef_typespec: (bp_be_dcache_lce_stat_mem_opcode_e), line:4358:5, endln:4358:39
+  |vpiImportTypespec:
   \_logic_typespec: , line:4361:16, endln:4361:21
   |vpiImportTypespec:
   \_enum_typespec: (bp_be_dcache_pkg::bp_be_dcache_lce_mode_e), line:4361:11, endln:4364:29
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_be_dcache_lce_mode_e), line:4364:5, endln:4364:28
   |vpiDefName:bp_be_dcache_pkg
 |uhdmallModules:
 \_module_inst: work@bp_be_ptw (work@bp_be_ptw), file:${SURELOG_DIR}/tests/BlackParrotParam/dut.sv, line:4371:1, endln:4628:10
@@ -33186,7 +34912,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 6
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/BlackParrotParam/dut.sv | ${SURELOG_DIR}/build/regression/BlackParrotParam/roundtrip/dut_000.sv | 1120 | 4628 |
-============================== End RoundTrip Results ==============================

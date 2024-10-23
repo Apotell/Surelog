@@ -3652,7 +3652,7 @@ preproc_macro_definition                              10
 preproc_macro_instance                                 8
 range                                                  7
 ref_obj                                              226
-ref_typespec                                         149
+ref_typespec                                         155
 ref_var                                                1
 return_stmt                                           44
 short_int_typespec                                     8
@@ -3661,13 +3661,14 @@ string_typespec                                       24
 struct_typespec                                        2
 sys_func_call                                          5
 tagged_pattern                                        24
+typedef_typespec                                       6
 typespec_member                                       11
 unsupported_typespec                                   9
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/FuncDef2/dut.sv:71:13: Failed to bind object: "id: 214, name: i".
-[ERR:EL0535] ${SURELOG_DIR}/tests/FuncDef2/dut.sv:71:13: Illegal implicit net "id:214, name: i".
-[ERR:IG0809] ${SURELOG_DIR}/tests/FuncDef2/dut.sv:71:13: Object 214 actual cannot be null.
+[ERR:UH0734] ${SURELOG_DIR}/tests/FuncDef2/dut.sv:71:13: Failed to bind object: "id: 216, name: i".
+[ERR:EL0535] ${SURELOG_DIR}/tests/FuncDef2/dut.sv:71:13: Illegal implicit net "id:216, name: i".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FuncDef2/slpp_all/surelog.uhdm ...
+[ERR:IG0809] ${SURELOG_DIR}/tests/FuncDef2/dut.sv:71:13: Object 216 actual cannot be null.
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/FuncDef2/slpp_all/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -6626,7 +6627,7 @@ design: (unnamed)
             |vpiName:tnoc_packet_type
             |vpiFullName:tnoc_pkg::get_common_header_field_width::tnoc_packet_type
             |vpiActual:
-            \_enum_typespec: (tnoc_pkg::tnoc_packet_type), line:174:11, endln:181:22
+            \_typedef_typespec: (tnoc_packet_type), line:181:5, endln:181:21
           |vpiName:$bits
         |vpiLhs:
         \_ref_obj: (tnoc_pkg::get_common_header_field_width::width), line:230:5, endln:230:10
@@ -7024,7 +7025,7 @@ design: (unnamed)
             |vpiName:tnoc_burst_type
             |vpiFullName:tnoc_pkg::get_request_header_width::tnoc_burst_type
             |vpiActual:
-            \_enum_typespec: (tnoc_pkg::tnoc_burst_type), line:187:11, endln:191:21
+            \_typedef_typespec: (tnoc_burst_type), line:191:5, endln:191:20
           |vpiName:$bits
         |vpiLhs:
         \_ref_obj: (tnoc_pkg::get_request_header_width::width), line:246:5, endln:246:10
@@ -7250,7 +7251,7 @@ design: (unnamed)
             |vpiName:tnoc_response_status
             |vpiFullName:tnoc_pkg::get_response_header_width::tnoc_response_status
             |vpiActual:
-            \_struct_typespec: (tnoc_pkg::tnoc_response_status), line:193:11, endln:197:4
+            \_typedef_typespec: (tnoc_response_status), line:197:5, endln:197:25
           |vpiName:$bits
         |vpiLhs:
         \_ref_obj: (tnoc_pkg::get_response_header_width::width), line:256:5, endln:256:10
@@ -7860,7 +7861,7 @@ design: (unnamed)
             |vpiName:tnoc_response_status
             |vpiFullName:tnoc_pkg::get_response_payload_width::tnoc_response_status
             |vpiActual:
-            \_struct_typespec: (tnoc_pkg::tnoc_response_status), line:193:11, endln:197:4
+            \_typedef_typespec: (tnoc_response_status), line:197:5, endln:197:25
           |vpiName:$bits
         |vpiLhs:
         \_ref_obj: (tnoc_pkg::get_response_payload_width::width), line:286:5, endln:286:10
@@ -8538,7 +8539,7 @@ design: (unnamed)
             |vpiName:tnoc_flit_type
             |vpiFullName:tnoc_pkg::get_flit_width::tnoc_flit_type
             |vpiActual:
-            \_enum_typespec: (tnoc_pkg::tnoc_flit_type), line:309:11, endln:312:20
+            \_typedef_typespec: (tnoc_flit_type), line:312:5, endln:312:19
           |vpiName:$bits
         |vpiLhs:
         \_ref_obj: (tnoc_pkg::get_flit_width::width), line:332:5, endln:332:10
@@ -9820,6 +9821,18 @@ design: (unnamed)
     \_package: tnoc_pkg (tnoc_pkg::), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
     |vpiSigned:1
   |vpiTypedef:
+  \_typedef_typespec: (tnoc_packet_config), line:53:5, endln:53:23
+    |vpiParent:
+    \_package: tnoc_pkg (tnoc_pkg::), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
+    |vpiName:tnoc_packet_config
+    |vpiTypedefAlias:
+    \_ref_typespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+      |vpiParent:
+      \_typedef_typespec: (tnoc_packet_config), line:53:5, endln:53:23
+      |vpiFullName:tnoc_pkg::tnoc_packet_config
+      |vpiActual:
+      \_struct_typespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+  |vpiTypedef:
   \_string_typespec: (size_x), line:56:5, endln:56:11
     |vpiParent:
     \_package: tnoc_pkg (tnoc_pkg::), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
@@ -10024,6 +10037,18 @@ design: (unnamed)
       |vpiDecompile:'b11000000
       |vpiSize:-1
   |vpiTypedef:
+  \_typedef_typespec: (tnoc_packet_type), line:181:5, endln:181:21
+    |vpiParent:
+    \_package: tnoc_pkg (tnoc_pkg::), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
+    |vpiName:tnoc_packet_type
+    |vpiTypedefAlias:
+    \_ref_typespec: (tnoc_pkg::tnoc_packet_type), line:174:11, endln:181:4
+      |vpiParent:
+      \_typedef_typespec: (tnoc_packet_type), line:181:5, endln:181:21
+      |vpiFullName:tnoc_pkg::tnoc_packet_type
+      |vpiActual:
+      \_enum_typespec: (tnoc_pkg::tnoc_packet_type), line:174:11, endln:181:22
+  |vpiTypedef:
   \_int_typespec: , line:183:15, endln:183:18
     |vpiParent:
     \_package: tnoc_pkg (tnoc_pkg::), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
@@ -10099,6 +10124,18 @@ design: (unnamed)
       |vpiDecompile:2'b10
       |vpiSize:2
   |vpiTypedef:
+  \_typedef_typespec: (tnoc_burst_type), line:191:5, endln:191:20
+    |vpiParent:
+    \_package: tnoc_pkg (tnoc_pkg::), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
+    |vpiName:tnoc_burst_type
+    |vpiTypedefAlias:
+    \_ref_typespec: (tnoc_pkg::tnoc_burst_type), line:187:11, endln:191:4
+      |vpiParent:
+      \_typedef_typespec: (tnoc_burst_type), line:191:5, endln:191:20
+      |vpiFullName:tnoc_pkg::tnoc_burst_type
+      |vpiActual:
+      \_enum_typespec: (tnoc_pkg::tnoc_burst_type), line:187:11, endln:191:21
+  |vpiTypedef:
   \_struct_typespec: (tnoc_pkg::tnoc_response_status), line:193:11, endln:197:4
     |vpiParent:
     \_package: tnoc_pkg (tnoc_pkg::), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
@@ -10153,6 +10190,18 @@ design: (unnamed)
     |vpiParent:
     \_package: tnoc_pkg (tnoc_pkg::), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
   |vpiTypedef:
+  \_typedef_typespec: (tnoc_response_status), line:197:5, endln:197:25
+    |vpiParent:
+    \_package: tnoc_pkg (tnoc_pkg::), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
+    |vpiName:tnoc_response_status
+    |vpiTypedefAlias:
+    \_ref_typespec: (tnoc_pkg::tnoc_response_status), line:193:11, endln:197:4
+      |vpiParent:
+      \_typedef_typespec: (tnoc_response_status), line:197:5, endln:197:25
+      |vpiFullName:tnoc_pkg::tnoc_response_status
+      |vpiActual:
+      \_struct_typespec: (tnoc_pkg::tnoc_response_status), line:193:11, endln:197:4
+  |vpiTypedef:
   \_logic_typespec: , line:309:16, endln:309:21
     |vpiParent:
     \_package: tnoc_pkg (tnoc_pkg::), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
@@ -10185,6 +10234,18 @@ design: (unnamed)
       |vpiDecompile:1'b1
       |vpiSize:1
   |vpiTypedef:
+  \_typedef_typespec: (tnoc_flit_type), line:312:5, endln:312:19
+    |vpiParent:
+    \_package: tnoc_pkg (tnoc_pkg::), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
+    |vpiName:tnoc_flit_type
+    |vpiTypedefAlias:
+    \_ref_typespec: (tnoc_pkg::tnoc_flit_type), line:309:11, endln:312:4
+      |vpiParent:
+      \_typedef_typespec: (tnoc_flit_type), line:312:5, endln:312:19
+      |vpiFullName:tnoc_pkg::tnoc_flit_type
+      |vpiActual:
+      \_enum_typespec: (tnoc_pkg::tnoc_flit_type), line:309:11, endln:312:20
+  |vpiTypedef:
   \_bit_typespec: , line:373:16, endln:373:19
     |vpiParent:
     \_package: tnoc_pkg (tnoc_pkg::), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
@@ -10216,6 +10277,18 @@ design: (unnamed)
       |BIN:1
       |vpiDecompile:1'b1
       |vpiSize:1
+  |vpiTypedef:
+  \_typedef_typespec: (tnoc_port_type), line:376:5, endln:376:19
+    |vpiParent:
+    \_package: tnoc_pkg (tnoc_pkg::), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
+    |vpiName:tnoc_port_type
+    |vpiTypedefAlias:
+    \_ref_typespec: (tnoc_pkg::tnoc_port_type), line:373:11, endln:376:4
+      |vpiParent:
+      \_typedef_typespec: (tnoc_port_type), line:376:5, endln:376:19
+      |vpiFullName:tnoc_pkg::tnoc_port_type
+      |vpiActual:
+      \_enum_typespec: (tnoc_pkg::tnoc_port_type), line:373:11, endln:376:20
   |vpiImportTypespec:
   \_function: (tnoc_pkg::tnoc_clog2), line:66:3, endln:83:14
   |vpiImportTypespec:
@@ -10303,6 +10376,8 @@ design: (unnamed)
   |vpiImportTypespec:
   \_short_int_typespec: , line:52:5, endln:52:13
   |vpiImportTypespec:
+  \_typedef_typespec: (tnoc_packet_config), line:53:5, endln:53:23
+  |vpiImportTypespec:
   \_string_typespec: (size_x), line:56:5, endln:56:11
   |vpiImportTypespec:
   \_string_typespec: (size_y), line:57:5, endln:57:11
@@ -10355,6 +10430,8 @@ design: (unnamed)
   |vpiImportTypespec:
   \_enum_typespec: (tnoc_pkg::tnoc_packet_type), line:174:11, endln:181:22
   |vpiImportTypespec:
+  \_typedef_typespec: (tnoc_packet_type), line:181:5, endln:181:21
+  |vpiImportTypespec:
   \_int_typespec: , line:183:15, endln:183:18
   |vpiImportTypespec:
   \_int_typespec: , line:184:15, endln:184:18
@@ -10365,6 +10442,8 @@ design: (unnamed)
   |vpiImportTypespec:
   \_enum_typespec: (tnoc_pkg::tnoc_burst_type), line:187:11, endln:191:21
   |vpiImportTypespec:
+  \_typedef_typespec: (tnoc_burst_type), line:191:5, endln:191:20
+  |vpiImportTypespec:
   \_struct_typespec: (tnoc_pkg::tnoc_response_status), line:193:11, endln:197:4
   |vpiImportTypespec:
   \_logic_typespec: , line:194:5, endln:194:10
@@ -10373,13 +10452,19 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:196:5, endln:196:10
   |vpiImportTypespec:
+  \_typedef_typespec: (tnoc_response_status), line:197:5, endln:197:25
+  |vpiImportTypespec:
   \_logic_typespec: , line:309:16, endln:309:21
   |vpiImportTypespec:
   \_enum_typespec: (tnoc_pkg::tnoc_flit_type), line:309:11, endln:312:20
   |vpiImportTypespec:
+  \_typedef_typespec: (tnoc_flit_type), line:312:5, endln:312:19
+  |vpiImportTypespec:
   \_bit_typespec: , line:373:16, endln:373:19
   |vpiImportTypespec:
   \_enum_typespec: (tnoc_pkg::tnoc_port_type), line:373:11, endln:376:20
+  |vpiImportTypespec:
+  \_typedef_typespec: (tnoc_port_type), line:376:5, endln:376:19
   |vpiDefName:tnoc_pkg
   |vpiTaskFunc:
   \_function: (tnoc_pkg::tnoc_clog2), line:66:3, endln:83:14
@@ -11280,7 +11365,3 @@ design: (unnamed)
 [  ERROR] : 3
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/FuncDef2/dut.sv | ${SURELOG_DIR}/build/regression/FuncDef2/roundtrip/dut_000.sv | 207 | 433 |
-============================== End RoundTrip Results ==============================

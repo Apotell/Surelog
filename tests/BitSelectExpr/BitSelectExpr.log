@@ -109,9 +109,10 @@ packed_array_var                                       1
 port                                                   1
 range                                                  2
 ref_obj                                                1
-ref_typespec                                           5
+ref_typespec                                           6
 source_file                                            1
 struct_typespec                                        1
+typedef_typespec                                       1
 typespec_member                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BitSelectExpr/slpp_all/surelog.uhdm ...
@@ -182,6 +183,18 @@ design: (unnamed)
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectExpr/dut.sv, line:1:1, endln:12:10
     |vpiSigned:1
   |vpiTypedef:
+  \_typedef_typespec: (sram_otp_key_rsp_t), line:5:6, endln:5:24
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectExpr/dut.sv, line:1:1, endln:12:10
+    |vpiName:sram_otp_key_rsp_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top.sram_otp_key_rsp_t), line:3:12, endln:5:5
+      |vpiParent:
+      \_typedef_typespec: (sram_otp_key_rsp_t), line:5:6, endln:5:24
+      |vpiFullName:work@top.sram_otp_key_rsp_t
+      |vpiActual:
+      \_struct_typespec: (sram_otp_key_rsp_t), line:3:12, endln:5:5
+  |vpiTypedef:
   \_int_typespec: , line:1:19, endln:1:22
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectExpr/dut.sv, line:1:1, endln:12:10
@@ -217,7 +230,7 @@ design: (unnamed)
       |vpiName:sram_otp_key_rsp_t
       |vpiFullName:work@top.sram_otp_key_rsp_t
       |vpiActual:
-      \_struct_typespec: (sram_otp_key_rsp_t), line:3:12, endln:5:5
+      \_typedef_typespec: (sram_otp_key_rsp_t), line:5:6, endln:5:24
   |vpiTypedef:
   \_int_typespec: , line:1:19, endln:1:22
     |vpiParent:
@@ -227,6 +240,8 @@ design: (unnamed)
   \_struct_typespec: (sram_otp_key_rsp_t), line:3:12, endln:5:5
   |vpiImportTypespec:
   \_int_typespec: , line:4:7, endln:4:10
+  |vpiImportTypespec:
+  \_typedef_typespec: (sram_otp_key_rsp_t), line:5:6, endln:5:24
   |vpiImportTypespec:
   \_int_typespec: , line:1:19, endln:1:22
   |vpiImportTypespec:
@@ -311,7 +326,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/BitSelectExpr/dut.sv | ${SURELOG_DIR}/build/regression/BitSelectExpr/roundtrip/dut_000.sv | 4 | 12 |
-============================== End RoundTrip Results ==============================

@@ -247,8 +247,9 @@ parameter                                              4
 range                                                  5
 ref_module                                             2
 ref_obj                                                4
-ref_typespec                                           7
+ref_typespec                                           8
 source_file                                            1
+typedef_typespec                                       1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamByValue/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ParamByValue/slpp_all/checker/surelog.chk.html ...
@@ -414,6 +415,18 @@ design: (unnamed)
       |BIN:11011111011011101110011001111001
       |vpiDecompile:{B1,B0}
       |vpiSize:32
+  |vpiTypedef:
+  \_typedef_typespec: (lc_state_e), line:6:5, endln:6:15
+    |vpiParent:
+    \_package: lc_ctrl_state_pkg (lc_ctrl_state_pkg::), file:${SURELOG_DIR}/tests/ParamByValue/dut.sv, line:1:1, endln:7:11
+    |vpiName:lc_state_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (lc_ctrl_state_pkg::lc_state_e), line:4:11, endln:6:4
+      |vpiParent:
+      \_typedef_typespec: (lc_state_e), line:6:5, endln:6:15
+      |vpiFullName:lc_ctrl_state_pkg::lc_state_e
+      |vpiActual:
+      \_enum_typespec: (lc_ctrl_state_pkg::lc_state_e), line:4:11, endln:6:16
   |vpiImportTypespec:
   \_logic_typespec: , line:2:13, endln:2:25
   |vpiImportTypespec:
@@ -422,6 +435,8 @@ design: (unnamed)
   \_logic_typespec: , line:4:16, endln:4:28
   |vpiImportTypespec:
   \_enum_typespec: (lc_ctrl_state_pkg::lc_state_e), line:4:11, endln:6:16
+  |vpiImportTypespec:
+  \_typedef_typespec: (lc_state_e), line:6:5, endln:6:15
   |vpiDefName:lc_ctrl_state_pkg
 |uhdmallModules:
 \_module_inst: work@generic_flop (work@generic_flop), file:${SURELOG_DIR}/tests/ParamByValue/dut.sv, line:9:1, endln:10:10
@@ -575,7 +590,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 4
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ParamByValue/dut.sv | ${SURELOG_DIR}/build/regression/ParamByValue/roundtrip/dut_000.sv | 16 | 27 |
-============================== End RoundTrip Results ==============================

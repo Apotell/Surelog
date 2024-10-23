@@ -6621,7 +6621,7 @@ parameter                                            141
 range                                                104
 ref_module                                             1
 ref_obj                                              136
-ref_typespec                                         697
+ref_typespec                                         761
 ref_var                                                2
 return_stmt                                            2
 source_file                                            1
@@ -6630,6 +6630,7 @@ struct_typespec                                       75
 sys_func_call                                          5
 tagged_pattern                                       216
 task                                                   9
+typedef_typespec                                      64
 typespec_member                                      163
 unsupported_typespec                                  17
 === UHDM Object Stats End ===
@@ -7031,8 +7032,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -11183,6 +11198,18 @@ design: (unnamed)
     |vpiParent:
     \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
   |vpiTypedef:
+  \_typedef_typespec: (otp_ctrl_reg2hw_intr_state_reg_t), line:101:5, endln:101:37
+    |vpiParent:
+    \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+    |vpiName:otp_ctrl_reg2hw_intr_state_reg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_intr_state_reg_t), line:94:11, endln:101:4
+      |vpiParent:
+      \_typedef_typespec: (otp_ctrl_reg2hw_intr_state_reg_t), line:101:5, endln:101:37
+      |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_reg2hw_intr_state_reg_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_intr_state_reg_t), line:94:11, endln:101:4
+  |vpiTypedef:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_intr_enable_reg_t), line:103:11, endln:110:4
     |vpiParent:
     \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
@@ -11254,6 +11281,18 @@ design: (unnamed)
   \_logic_typespec: , line:108:7, endln:108:12
     |vpiParent:
     \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+  |vpiTypedef:
+  \_typedef_typespec: (otp_ctrl_reg2hw_intr_enable_reg_t), line:110:5, endln:110:38
+    |vpiParent:
+    \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+    |vpiName:otp_ctrl_reg2hw_intr_enable_reg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_intr_enable_reg_t), line:103:11, endln:110:4
+      |vpiParent:
+      \_typedef_typespec: (otp_ctrl_reg2hw_intr_enable_reg_t), line:110:5, endln:110:38
+      |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_reg2hw_intr_enable_reg_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_intr_enable_reg_t), line:103:11, endln:110:4
   |vpiTypedef:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_intr_test_reg_t), line:112:11, endln:121:4
     |vpiParent:
@@ -11359,6 +11398,18 @@ design: (unnamed)
     |vpiParent:
     \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
   |vpiTypedef:
+  \_typedef_typespec: (otp_ctrl_reg2hw_intr_test_reg_t), line:121:5, endln:121:36
+    |vpiParent:
+    \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+    |vpiName:otp_ctrl_reg2hw_intr_test_reg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_intr_test_reg_t), line:112:11, endln:121:4
+      |vpiParent:
+      \_typedef_typespec: (otp_ctrl_reg2hw_intr_test_reg_t), line:121:5, endln:121:36
+      |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_reg2hw_intr_test_reg_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_intr_test_reg_t), line:112:11, endln:121:4
+  |vpiTypedef:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_alert_test_reg_t), line:123:11, endln:132:4
     |vpiParent:
     \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
@@ -11462,6 +11513,18 @@ design: (unnamed)
   \_logic_typespec: , line:130:7, endln:130:12
     |vpiParent:
     \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+  |vpiTypedef:
+  \_typedef_typespec: (otp_ctrl_reg2hw_alert_test_reg_t), line:132:5, endln:132:37
+    |vpiParent:
+    \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+    |vpiName:otp_ctrl_reg2hw_alert_test_reg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_alert_test_reg_t), line:123:11, endln:132:4
+      |vpiParent:
+      \_typedef_typespec: (otp_ctrl_reg2hw_alert_test_reg_t), line:132:5, endln:132:37
+      |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_reg2hw_alert_test_reg_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_alert_test_reg_t), line:123:11, endln:132:4
   |vpiTypedef:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_direct_access_cmd_reg_t), line:134:11, endln:147:4
     |vpiParent:
@@ -11616,6 +11679,18 @@ design: (unnamed)
     |vpiParent:
     \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
   |vpiTypedef:
+  \_typedef_typespec: (otp_ctrl_reg2hw_direct_access_cmd_reg_t), line:147:5, endln:147:44
+    |vpiParent:
+    \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+    |vpiName:otp_ctrl_reg2hw_direct_access_cmd_reg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_direct_access_cmd_reg_t), line:134:11, endln:147:4
+      |vpiParent:
+      \_typedef_typespec: (otp_ctrl_reg2hw_direct_access_cmd_reg_t), line:147:5, endln:147:44
+      |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_reg2hw_direct_access_cmd_reg_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_direct_access_cmd_reg_t), line:134:11, endln:147:4
+  |vpiTypedef:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_direct_access_address_reg_t), line:149:11, endln:151:4
     |vpiParent:
     \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
@@ -11658,6 +11733,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (otp_ctrl_reg2hw_direct_access_address_reg_t), line:151:5, endln:151:48
+    |vpiParent:
+    \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+    |vpiName:otp_ctrl_reg2hw_direct_access_address_reg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_direct_access_address_reg_t), line:149:11, endln:151:4
+      |vpiParent:
+      \_typedef_typespec: (otp_ctrl_reg2hw_direct_access_address_reg_t), line:151:5, endln:151:48
+      |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_reg2hw_direct_access_address_reg_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_direct_access_address_reg_t), line:149:11, endln:151:4
+  |vpiTypedef:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_direct_access_wdata_mreg_t), line:153:11, endln:155:4
     |vpiParent:
     \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
@@ -11699,6 +11786,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (otp_ctrl_reg2hw_direct_access_wdata_mreg_t), line:155:5, endln:155:47
+    |vpiParent:
+    \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+    |vpiName:otp_ctrl_reg2hw_direct_access_wdata_mreg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_direct_access_wdata_mreg_t), line:153:11, endln:155:4
+      |vpiParent:
+      \_typedef_typespec: (otp_ctrl_reg2hw_direct_access_wdata_mreg_t), line:155:5, endln:155:47
+      |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_reg2hw_direct_access_wdata_mreg_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_direct_access_wdata_mreg_t), line:153:11, endln:155:4
   |vpiTypedef:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_check_trigger_reg_t), line:157:11, endln:166:4
     |vpiParent:
@@ -11804,6 +11903,18 @@ design: (unnamed)
     |vpiParent:
     \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
   |vpiTypedef:
+  \_typedef_typespec: (otp_ctrl_reg2hw_check_trigger_reg_t), line:166:5, endln:166:40
+    |vpiParent:
+    \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+    |vpiName:otp_ctrl_reg2hw_check_trigger_reg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_check_trigger_reg_t), line:157:11, endln:166:4
+      |vpiParent:
+      \_typedef_typespec: (otp_ctrl_reg2hw_check_trigger_reg_t), line:166:5, endln:166:40
+      |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_reg2hw_check_trigger_reg_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_check_trigger_reg_t), line:157:11, endln:166:4
+  |vpiTypedef:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_check_timeout_reg_t), line:168:11, endln:170:4
     |vpiParent:
     \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
@@ -11845,6 +11956,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (otp_ctrl_reg2hw_check_timeout_reg_t), line:170:5, endln:170:40
+    |vpiParent:
+    \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+    |vpiName:otp_ctrl_reg2hw_check_timeout_reg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_check_timeout_reg_t), line:168:11, endln:170:4
+      |vpiParent:
+      \_typedef_typespec: (otp_ctrl_reg2hw_check_timeout_reg_t), line:170:5, endln:170:40
+      |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_reg2hw_check_timeout_reg_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_check_timeout_reg_t), line:168:11, endln:170:4
   |vpiTypedef:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_integrity_check_period_reg_t), line:172:11, endln:174:4
     |vpiParent:
@@ -11888,6 +12011,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (otp_ctrl_reg2hw_integrity_check_period_reg_t), line:174:5, endln:174:49
+    |vpiParent:
+    \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+    |vpiName:otp_ctrl_reg2hw_integrity_check_period_reg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_integrity_check_period_reg_t), line:172:11, endln:174:4
+      |vpiParent:
+      \_typedef_typespec: (otp_ctrl_reg2hw_integrity_check_period_reg_t), line:174:5, endln:174:49
+      |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_reg2hw_integrity_check_period_reg_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_integrity_check_period_reg_t), line:172:11, endln:174:4
+  |vpiTypedef:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_consistency_check_period_reg_t), line:176:11, endln:178:4
     |vpiParent:
     \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
@@ -11930,6 +12065,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (otp_ctrl_reg2hw_consistency_check_period_reg_t), line:178:5, endln:178:51
+    |vpiParent:
+    \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+    |vpiName:otp_ctrl_reg2hw_consistency_check_period_reg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_consistency_check_period_reg_t), line:176:11, endln:178:4
+      |vpiParent:
+      \_typedef_typespec: (otp_ctrl_reg2hw_consistency_check_period_reg_t), line:178:5, endln:178:51
+      |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_reg2hw_consistency_check_period_reg_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_consistency_check_period_reg_t), line:176:11, endln:178:4
+  |vpiTypedef:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_creator_sw_cfg_read_lock_reg_t), line:180:11, endln:182:4
     |vpiParent:
     \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
@@ -11952,6 +12099,18 @@ design: (unnamed)
     |vpiParent:
     \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
   |vpiTypedef:
+  \_typedef_typespec: (otp_ctrl_reg2hw_creator_sw_cfg_read_lock_reg_t), line:182:5, endln:182:51
+    |vpiParent:
+    \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+    |vpiName:otp_ctrl_reg2hw_creator_sw_cfg_read_lock_reg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_creator_sw_cfg_read_lock_reg_t), line:180:11, endln:182:4
+      |vpiParent:
+      \_typedef_typespec: (otp_ctrl_reg2hw_creator_sw_cfg_read_lock_reg_t), line:182:5, endln:182:51
+      |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_reg2hw_creator_sw_cfg_read_lock_reg_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_creator_sw_cfg_read_lock_reg_t), line:180:11, endln:182:4
+  |vpiTypedef:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_owner_sw_cfg_read_lock_reg_t), line:184:11, endln:186:4
     |vpiParent:
     \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
@@ -11973,6 +12132,18 @@ design: (unnamed)
   \_logic_typespec: , line:185:5, endln:185:10
     |vpiParent:
     \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+  |vpiTypedef:
+  \_typedef_typespec: (otp_ctrl_reg2hw_owner_sw_cfg_read_lock_reg_t), line:186:5, endln:186:49
+    |vpiParent:
+    \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+    |vpiName:otp_ctrl_reg2hw_owner_sw_cfg_read_lock_reg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_owner_sw_cfg_read_lock_reg_t), line:184:11, endln:186:4
+      |vpiParent:
+      \_typedef_typespec: (otp_ctrl_reg2hw_owner_sw_cfg_read_lock_reg_t), line:186:5, endln:186:49
+      |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_reg2hw_owner_sw_cfg_read_lock_reg_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_owner_sw_cfg_read_lock_reg_t), line:184:11, endln:186:4
   |vpiTypedef:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_intr_state_reg_t), line:189:11, endln:198:4
     |vpiParent:
@@ -12077,6 +12248,18 @@ design: (unnamed)
   \_logic_typespec: , line:196:7, endln:196:12
     |vpiParent:
     \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+  |vpiTypedef:
+  \_typedef_typespec: (otp_ctrl_hw2reg_intr_state_reg_t), line:198:5, endln:198:37
+    |vpiParent:
+    \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+    |vpiName:otp_ctrl_hw2reg_intr_state_reg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_intr_state_reg_t), line:189:11, endln:198:4
+      |vpiParent:
+      \_typedef_typespec: (otp_ctrl_hw2reg_intr_state_reg_t), line:198:5, endln:198:37
+      |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_hw2reg_intr_state_reg_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_intr_state_reg_t), line:189:11, endln:198:4
   |vpiTypedef:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_status_reg_t), line:200:11, endln:246:4
     |vpiParent:
@@ -12579,6 +12762,18 @@ design: (unnamed)
     |vpiParent:
     \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
   |vpiTypedef:
+  \_typedef_typespec: (otp_ctrl_hw2reg_status_reg_t), line:246:5, endln:246:33
+    |vpiParent:
+    \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+    |vpiName:otp_ctrl_hw2reg_status_reg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_status_reg_t), line:200:11, endln:246:4
+      |vpiParent:
+      \_typedef_typespec: (otp_ctrl_hw2reg_status_reg_t), line:246:5, endln:246:33
+      |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_hw2reg_status_reg_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_status_reg_t), line:200:11, endln:246:4
+  |vpiTypedef:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_err_code_mreg_t), line:248:11, endln:250:4
     |vpiParent:
     \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
@@ -12621,6 +12816,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (otp_ctrl_hw2reg_err_code_mreg_t), line:250:5, endln:250:36
+    |vpiParent:
+    \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+    |vpiName:otp_ctrl_hw2reg_err_code_mreg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_err_code_mreg_t), line:248:11, endln:250:4
+      |vpiParent:
+      \_typedef_typespec: (otp_ctrl_hw2reg_err_code_mreg_t), line:250:5, endln:250:36
+      |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_hw2reg_err_code_mreg_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_err_code_mreg_t), line:248:11, endln:250:4
+  |vpiTypedef:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_direct_access_regwen_reg_t), line:252:11, endln:254:4
     |vpiParent:
     \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
@@ -12642,6 +12849,18 @@ design: (unnamed)
   \_logic_typespec: , line:253:5, endln:253:10
     |vpiParent:
     \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+  |vpiTypedef:
+  \_typedef_typespec: (otp_ctrl_hw2reg_direct_access_regwen_reg_t), line:254:5, endln:254:47
+    |vpiParent:
+    \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+    |vpiName:otp_ctrl_hw2reg_direct_access_regwen_reg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_direct_access_regwen_reg_t), line:252:11, endln:254:4
+      |vpiParent:
+      \_typedef_typespec: (otp_ctrl_hw2reg_direct_access_regwen_reg_t), line:254:5, endln:254:47
+      |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_hw2reg_direct_access_regwen_reg_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_direct_access_regwen_reg_t), line:252:11, endln:254:4
   |vpiTypedef:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_direct_access_rdata_mreg_t), line:256:11, endln:258:4
     |vpiParent:
@@ -12685,6 +12904,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (otp_ctrl_hw2reg_direct_access_rdata_mreg_t), line:258:5, endln:258:47
+    |vpiParent:
+    \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+    |vpiName:otp_ctrl_hw2reg_direct_access_rdata_mreg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_direct_access_rdata_mreg_t), line:256:11, endln:258:4
+      |vpiParent:
+      \_typedef_typespec: (otp_ctrl_hw2reg_direct_access_rdata_mreg_t), line:258:5, endln:258:47
+      |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_hw2reg_direct_access_rdata_mreg_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_direct_access_rdata_mreg_t), line:256:11, endln:258:4
+  |vpiTypedef:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_creator_sw_cfg_digest_mreg_t), line:260:11, endln:262:4
     |vpiParent:
     \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
@@ -12726,6 +12957,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (otp_ctrl_hw2reg_creator_sw_cfg_digest_mreg_t), line:262:5, endln:262:49
+    |vpiParent:
+    \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+    |vpiName:otp_ctrl_hw2reg_creator_sw_cfg_digest_mreg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_creator_sw_cfg_digest_mreg_t), line:260:11, endln:262:4
+      |vpiParent:
+      \_typedef_typespec: (otp_ctrl_hw2reg_creator_sw_cfg_digest_mreg_t), line:262:5, endln:262:49
+      |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_hw2reg_creator_sw_cfg_digest_mreg_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_creator_sw_cfg_digest_mreg_t), line:260:11, endln:262:4
   |vpiTypedef:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_owner_sw_cfg_digest_mreg_t), line:264:11, endln:266:4
     |vpiParent:
@@ -12769,6 +13012,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (otp_ctrl_hw2reg_owner_sw_cfg_digest_mreg_t), line:266:5, endln:266:47
+    |vpiParent:
+    \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+    |vpiName:otp_ctrl_hw2reg_owner_sw_cfg_digest_mreg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_owner_sw_cfg_digest_mreg_t), line:264:11, endln:266:4
+      |vpiParent:
+      \_typedef_typespec: (otp_ctrl_hw2reg_owner_sw_cfg_digest_mreg_t), line:266:5, endln:266:47
+      |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_hw2reg_owner_sw_cfg_digest_mreg_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_owner_sw_cfg_digest_mreg_t), line:264:11, endln:266:4
+  |vpiTypedef:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_hw_cfg_digest_mreg_t), line:268:11, endln:270:4
     |vpiParent:
     \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
@@ -12810,6 +13065,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (otp_ctrl_hw2reg_hw_cfg_digest_mreg_t), line:270:5, endln:270:41
+    |vpiParent:
+    \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+    |vpiName:otp_ctrl_hw2reg_hw_cfg_digest_mreg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_hw_cfg_digest_mreg_t), line:268:11, endln:270:4
+      |vpiParent:
+      \_typedef_typespec: (otp_ctrl_hw2reg_hw_cfg_digest_mreg_t), line:270:5, endln:270:41
+      |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_hw2reg_hw_cfg_digest_mreg_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_hw_cfg_digest_mreg_t), line:268:11, endln:270:4
   |vpiTypedef:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_secret0_digest_mreg_t), line:272:11, endln:274:4
     |vpiParent:
@@ -12853,6 +13120,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (otp_ctrl_hw2reg_secret0_digest_mreg_t), line:274:5, endln:274:42
+    |vpiParent:
+    \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+    |vpiName:otp_ctrl_hw2reg_secret0_digest_mreg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_secret0_digest_mreg_t), line:272:11, endln:274:4
+      |vpiParent:
+      \_typedef_typespec: (otp_ctrl_hw2reg_secret0_digest_mreg_t), line:274:5, endln:274:42
+      |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_hw2reg_secret0_digest_mreg_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_secret0_digest_mreg_t), line:272:11, endln:274:4
+  |vpiTypedef:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_secret1_digest_mreg_t), line:276:11, endln:278:4
     |vpiParent:
     \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
@@ -12895,6 +13174,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (otp_ctrl_hw2reg_secret1_digest_mreg_t), line:278:5, endln:278:42
+    |vpiParent:
+    \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+    |vpiName:otp_ctrl_hw2reg_secret1_digest_mreg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_secret1_digest_mreg_t), line:276:11, endln:278:4
+      |vpiParent:
+      \_typedef_typespec: (otp_ctrl_hw2reg_secret1_digest_mreg_t), line:278:5, endln:278:42
+      |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_hw2reg_secret1_digest_mreg_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_secret1_digest_mreg_t), line:276:11, endln:278:4
+  |vpiTypedef:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_secret2_digest_mreg_t), line:280:11, endln:282:4
     |vpiParent:
     \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
@@ -12936,6 +13227,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (otp_ctrl_hw2reg_secret2_digest_mreg_t), line:282:5, endln:282:42
+    |vpiParent:
+    \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+    |vpiName:otp_ctrl_hw2reg_secret2_digest_mreg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_secret2_digest_mreg_t), line:280:11, endln:282:4
+      |vpiParent:
+      \_typedef_typespec: (otp_ctrl_hw2reg_secret2_digest_mreg_t), line:282:5, endln:282:42
+      |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_hw2reg_secret2_digest_mreg_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_secret2_digest_mreg_t), line:280:11, endln:282:4
   |vpiTypedef:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_t), line:288:11, endln:302:4
     |vpiParent:
@@ -13142,7 +13445,19 @@ design: (unnamed)
       |vpiName:otp_ctrl_reg2hw_direct_access_wdata_mreg_t
       |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_reg2hw_direct_access_wdata_mreg_t
       |vpiActual:
-      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_direct_access_wdata_mreg_t), line:153:11, endln:155:4
+      \_typedef_typespec: (otp_ctrl_reg2hw_direct_access_wdata_mreg_t), line:155:5, endln:155:47
+  |vpiTypedef:
+  \_typedef_typespec: (otp_ctrl_reg2hw_t), line:302:5, endln:302:22
+    |vpiParent:
+    \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+    |vpiName:otp_ctrl_reg2hw_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_t), line:288:11, endln:302:4
+      |vpiParent:
+      \_typedef_typespec: (otp_ctrl_reg2hw_t), line:302:5, endln:302:22
+      |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_reg2hw_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_t), line:288:11, endln:302:4
   |vpiTypedef:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_t), line:307:11, endln:319:4
     |vpiParent:
@@ -13323,7 +13638,7 @@ design: (unnamed)
       |vpiName:otp_ctrl_hw2reg_err_code_mreg_t
       |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_hw2reg_err_code_mreg_t
       |vpiActual:
-      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_err_code_mreg_t), line:248:11, endln:250:4
+      \_typedef_typespec: (otp_ctrl_hw2reg_err_code_mreg_t), line:250:5, endln:250:36
   |vpiTypedef:
   \_packed_array_typespec: , line:312:5, endln:312:53
     |vpiParent:
@@ -13355,7 +13670,7 @@ design: (unnamed)
       |vpiName:otp_ctrl_hw2reg_direct_access_rdata_mreg_t
       |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_hw2reg_direct_access_rdata_mreg_t
       |vpiActual:
-      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_direct_access_rdata_mreg_t), line:256:11, endln:258:4
+      \_typedef_typespec: (otp_ctrl_hw2reg_direct_access_rdata_mreg_t), line:258:5, endln:258:47
   |vpiTypedef:
   \_packed_array_typespec: , line:313:5, endln:313:55
     |vpiParent:
@@ -13387,7 +13702,7 @@ design: (unnamed)
       |vpiName:otp_ctrl_hw2reg_creator_sw_cfg_digest_mreg_t
       |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_hw2reg_creator_sw_cfg_digest_mreg_t
       |vpiActual:
-      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_creator_sw_cfg_digest_mreg_t), line:260:11, endln:262:4
+      \_typedef_typespec: (otp_ctrl_hw2reg_creator_sw_cfg_digest_mreg_t), line:262:5, endln:262:49
   |vpiTypedef:
   \_packed_array_typespec: , line:314:5, endln:314:53
     |vpiParent:
@@ -13419,7 +13734,7 @@ design: (unnamed)
       |vpiName:otp_ctrl_hw2reg_owner_sw_cfg_digest_mreg_t
       |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_hw2reg_owner_sw_cfg_digest_mreg_t
       |vpiActual:
-      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_owner_sw_cfg_digest_mreg_t), line:264:11, endln:266:4
+      \_typedef_typespec: (otp_ctrl_hw2reg_owner_sw_cfg_digest_mreg_t), line:266:5, endln:266:47
   |vpiTypedef:
   \_packed_array_typespec: , line:315:5, endln:315:47
     |vpiParent:
@@ -13451,7 +13766,7 @@ design: (unnamed)
       |vpiName:otp_ctrl_hw2reg_hw_cfg_digest_mreg_t
       |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_hw2reg_hw_cfg_digest_mreg_t
       |vpiActual:
-      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_hw_cfg_digest_mreg_t), line:268:11, endln:270:4
+      \_typedef_typespec: (otp_ctrl_hw2reg_hw_cfg_digest_mreg_t), line:270:5, endln:270:41
   |vpiTypedef:
   \_packed_array_typespec: , line:316:5, endln:316:48
     |vpiParent:
@@ -13483,7 +13798,7 @@ design: (unnamed)
       |vpiName:otp_ctrl_hw2reg_secret0_digest_mreg_t
       |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_hw2reg_secret0_digest_mreg_t
       |vpiActual:
-      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_secret0_digest_mreg_t), line:272:11, endln:274:4
+      \_typedef_typespec: (otp_ctrl_hw2reg_secret0_digest_mreg_t), line:274:5, endln:274:42
   |vpiTypedef:
   \_packed_array_typespec: , line:317:5, endln:317:48
     |vpiParent:
@@ -13515,7 +13830,7 @@ design: (unnamed)
       |vpiName:otp_ctrl_hw2reg_secret1_digest_mreg_t
       |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_hw2reg_secret1_digest_mreg_t
       |vpiActual:
-      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_secret1_digest_mreg_t), line:276:11, endln:278:4
+      \_typedef_typespec: (otp_ctrl_hw2reg_secret1_digest_mreg_t), line:278:5, endln:278:42
   |vpiTypedef:
   \_packed_array_typespec: , line:318:5, endln:318:48
     |vpiParent:
@@ -13547,7 +13862,19 @@ design: (unnamed)
       |vpiName:otp_ctrl_hw2reg_secret2_digest_mreg_t
       |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_hw2reg_secret2_digest_mreg_t
       |vpiActual:
-      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_secret2_digest_mreg_t), line:280:11, endln:282:4
+      \_typedef_typespec: (otp_ctrl_hw2reg_secret2_digest_mreg_t), line:282:5, endln:282:42
+  |vpiTypedef:
+  \_typedef_typespec: (otp_ctrl_hw2reg_t), line:319:5, endln:319:22
+    |vpiParent:
+    \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+    |vpiName:otp_ctrl_hw2reg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_t), line:307:11, endln:319:4
+      |vpiParent:
+      \_typedef_typespec: (otp_ctrl_hw2reg_t), line:319:5, endln:319:22
+      |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_hw2reg_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_t), line:307:11, endln:319:4
   |vpiTypedef:
   \_logic_typespec: , line:322:13, endln:322:25
     |vpiParent:
@@ -14718,6 +15045,18 @@ design: (unnamed)
       |vpiDecompile:32
       |vpiSize:32
   |vpiTypedef:
+  \_typedef_typespec: (otp_ctrl_id_e), line:397:5, endln:397:18
+    |vpiParent:
+    \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
+    |vpiName:otp_ctrl_id_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_reg_pkg::otp_ctrl_id_e), line:363:11, endln:397:4
+      |vpiParent:
+      \_typedef_typespec: (otp_ctrl_id_e), line:397:5, endln:397:18
+      |vpiFullName:otp_ctrl_reg_pkg::otp_ctrl_id_e
+      |vpiActual:
+      \_enum_typespec: (otp_ctrl_reg_pkg::otp_ctrl_id_e), line:363:11, endln:397:19
+  |vpiTypedef:
   \_logic_typespec: , line:400:13, endln:400:24
     |vpiParent:
     \_package: otp_ctrl_reg_pkg (otp_ctrl_reg_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:24:1, endln:435:11
@@ -14891,6 +15230,8 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:99:7, endln:99:12
   |vpiImportTypespec:
+  \_typedef_typespec: (otp_ctrl_reg2hw_intr_state_reg_t), line:101:5, endln:101:37
+  |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_intr_enable_reg_t), line:103:11, endln:110:4
   |vpiImportTypespec:
   \_struct_typespec: , line:104:5, endln:106:6
@@ -14900,6 +15241,8 @@ design: (unnamed)
   \_struct_typespec: , line:107:5, endln:109:6
   |vpiImportTypespec:
   \_logic_typespec: , line:108:7, endln:108:12
+  |vpiImportTypespec:
+  \_typedef_typespec: (otp_ctrl_reg2hw_intr_enable_reg_t), line:110:5, endln:110:38
   |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_intr_test_reg_t), line:112:11, endln:121:4
   |vpiImportTypespec:
@@ -14915,6 +15258,8 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:119:7, endln:119:12
   |vpiImportTypespec:
+  \_typedef_typespec: (otp_ctrl_reg2hw_intr_test_reg_t), line:121:5, endln:121:36
+  |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_alert_test_reg_t), line:123:11, endln:132:4
   |vpiImportTypespec:
   \_struct_typespec: , line:124:5, endln:127:6
@@ -14928,6 +15273,8 @@ design: (unnamed)
   \_logic_typespec: , line:129:7, endln:129:12
   |vpiImportTypespec:
   \_logic_typespec: , line:130:7, endln:130:12
+  |vpiImportTypespec:
+  \_typedef_typespec: (otp_ctrl_reg2hw_alert_test_reg_t), line:132:5, endln:132:37
   |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_direct_access_cmd_reg_t), line:134:11, endln:147:4
   |vpiImportTypespec:
@@ -14949,13 +15296,19 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:145:7, endln:145:12
   |vpiImportTypespec:
+  \_typedef_typespec: (otp_ctrl_reg2hw_direct_access_cmd_reg_t), line:147:5, endln:147:44
+  |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_direct_access_address_reg_t), line:149:11, endln:151:4
   |vpiImportTypespec:
   \_logic_typespec: , line:150:5, endln:150:17
   |vpiImportTypespec:
+  \_typedef_typespec: (otp_ctrl_reg2hw_direct_access_address_reg_t), line:151:5, endln:151:48
+  |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_direct_access_wdata_mreg_t), line:153:11, endln:155:4
   |vpiImportTypespec:
   \_logic_typespec: , line:154:5, endln:154:17
+  |vpiImportTypespec:
+  \_typedef_typespec: (otp_ctrl_reg2hw_direct_access_wdata_mreg_t), line:155:5, endln:155:47
   |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_check_trigger_reg_t), line:157:11, endln:166:4
   |vpiImportTypespec:
@@ -14971,25 +15324,37 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:164:7, endln:164:12
   |vpiImportTypespec:
+  \_typedef_typespec: (otp_ctrl_reg2hw_check_trigger_reg_t), line:166:5, endln:166:40
+  |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_check_timeout_reg_t), line:168:11, endln:170:4
   |vpiImportTypespec:
   \_logic_typespec: , line:169:5, endln:169:17
+  |vpiImportTypespec:
+  \_typedef_typespec: (otp_ctrl_reg2hw_check_timeout_reg_t), line:170:5, endln:170:40
   |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_integrity_check_period_reg_t), line:172:11, endln:174:4
   |vpiImportTypespec:
   \_logic_typespec: , line:173:5, endln:173:17
   |vpiImportTypespec:
+  \_typedef_typespec: (otp_ctrl_reg2hw_integrity_check_period_reg_t), line:174:5, endln:174:49
+  |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_consistency_check_period_reg_t), line:176:11, endln:178:4
   |vpiImportTypespec:
   \_logic_typespec: , line:177:5, endln:177:17
+  |vpiImportTypespec:
+  \_typedef_typespec: (otp_ctrl_reg2hw_consistency_check_period_reg_t), line:178:5, endln:178:51
   |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_creator_sw_cfg_read_lock_reg_t), line:180:11, endln:182:4
   |vpiImportTypespec:
   \_logic_typespec: , line:181:5, endln:181:10
   |vpiImportTypespec:
+  \_typedef_typespec: (otp_ctrl_reg2hw_creator_sw_cfg_read_lock_reg_t), line:182:5, endln:182:51
+  |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_owner_sw_cfg_read_lock_reg_t), line:184:11, endln:186:4
   |vpiImportTypespec:
   \_logic_typespec: , line:185:5, endln:185:10
+  |vpiImportTypespec:
+  \_typedef_typespec: (otp_ctrl_reg2hw_owner_sw_cfg_read_lock_reg_t), line:186:5, endln:186:49
   |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_intr_state_reg_t), line:189:11, endln:198:4
   |vpiImportTypespec:
@@ -15004,6 +15369,8 @@ design: (unnamed)
   \_logic_typespec: , line:195:7, endln:195:12
   |vpiImportTypespec:
   \_logic_typespec: , line:196:7, endln:196:12
+  |vpiImportTypespec:
+  \_typedef_typespec: (otp_ctrl_hw2reg_intr_state_reg_t), line:198:5, endln:198:37
   |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_status_reg_t), line:200:11, endln:246:4
   |vpiImportTypespec:
@@ -15067,45 +15434,67 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:244:7, endln:244:12
   |vpiImportTypespec:
+  \_typedef_typespec: (otp_ctrl_hw2reg_status_reg_t), line:246:5, endln:246:33
+  |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_err_code_mreg_t), line:248:11, endln:250:4
   |vpiImportTypespec:
   \_logic_typespec: , line:249:5, endln:249:16
+  |vpiImportTypespec:
+  \_typedef_typespec: (otp_ctrl_hw2reg_err_code_mreg_t), line:250:5, endln:250:36
   |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_direct_access_regwen_reg_t), line:252:11, endln:254:4
   |vpiImportTypespec:
   \_logic_typespec: , line:253:5, endln:253:10
   |vpiImportTypespec:
+  \_typedef_typespec: (otp_ctrl_hw2reg_direct_access_regwen_reg_t), line:254:5, endln:254:47
+  |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_direct_access_rdata_mreg_t), line:256:11, endln:258:4
   |vpiImportTypespec:
   \_logic_typespec: , line:257:5, endln:257:17
+  |vpiImportTypespec:
+  \_typedef_typespec: (otp_ctrl_hw2reg_direct_access_rdata_mreg_t), line:258:5, endln:258:47
   |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_creator_sw_cfg_digest_mreg_t), line:260:11, endln:262:4
   |vpiImportTypespec:
   \_logic_typespec: , line:261:5, endln:261:17
   |vpiImportTypespec:
+  \_typedef_typespec: (otp_ctrl_hw2reg_creator_sw_cfg_digest_mreg_t), line:262:5, endln:262:49
+  |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_owner_sw_cfg_digest_mreg_t), line:264:11, endln:266:4
   |vpiImportTypespec:
   \_logic_typespec: , line:265:5, endln:265:17
+  |vpiImportTypespec:
+  \_typedef_typespec: (otp_ctrl_hw2reg_owner_sw_cfg_digest_mreg_t), line:266:5, endln:266:47
   |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_hw_cfg_digest_mreg_t), line:268:11, endln:270:4
   |vpiImportTypespec:
   \_logic_typespec: , line:269:5, endln:269:17
   |vpiImportTypespec:
+  \_typedef_typespec: (otp_ctrl_hw2reg_hw_cfg_digest_mreg_t), line:270:5, endln:270:41
+  |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_secret0_digest_mreg_t), line:272:11, endln:274:4
   |vpiImportTypespec:
   \_logic_typespec: , line:273:5, endln:273:17
+  |vpiImportTypespec:
+  \_typedef_typespec: (otp_ctrl_hw2reg_secret0_digest_mreg_t), line:274:5, endln:274:42
   |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_secret1_digest_mreg_t), line:276:11, endln:278:4
   |vpiImportTypespec:
   \_logic_typespec: , line:277:5, endln:277:17
   |vpiImportTypespec:
+  \_typedef_typespec: (otp_ctrl_hw2reg_secret1_digest_mreg_t), line:278:5, endln:278:42
+  |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_secret2_digest_mreg_t), line:280:11, endln:282:4
   |vpiImportTypespec:
   \_logic_typespec: , line:281:5, endln:281:17
   |vpiImportTypespec:
+  \_typedef_typespec: (otp_ctrl_hw2reg_secret2_digest_mreg_t), line:282:5, endln:282:42
+  |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_reg2hw_t), line:288:11, endln:302:4
   |vpiImportTypespec:
   \_packed_array_typespec: , line:295:5, endln:295:53
+  |vpiImportTypespec:
+  \_typedef_typespec: (otp_ctrl_reg2hw_t), line:302:5, endln:302:22
   |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_reg_pkg::otp_ctrl_hw2reg_t), line:307:11, endln:319:4
   |vpiImportTypespec:
@@ -15124,6 +15513,8 @@ design: (unnamed)
   \_packed_array_typespec: , line:317:5, endln:317:48
   |vpiImportTypespec:
   \_packed_array_typespec: , line:318:5, endln:318:48
+  |vpiImportTypespec:
+  \_typedef_typespec: (otp_ctrl_hw2reg_t), line:319:5, endln:319:22
   |vpiImportTypespec:
   \_logic_typespec: , line:322:13, endln:322:25
   |vpiImportTypespec:
@@ -15202,6 +15593,8 @@ design: (unnamed)
   \_int_typespec: , line:363:16, endln:363:19
   |vpiImportTypespec:
   \_enum_typespec: (otp_ctrl_reg_pkg::otp_ctrl_id_e), line:363:11, endln:397:19
+  |vpiImportTypespec:
+  \_typedef_typespec: (otp_ctrl_id_e), line:397:5, endln:397:18
   |vpiImportTypespec:
   \_logic_typespec: , line:400:13, endln:400:24
   |vpiImportTypespec:
@@ -16902,6 +17295,18 @@ design: (unnamed)
       |vpiDecompile:8'hA5
       |vpiSize:8
   |vpiTypedef:
+  \_typedef_typespec: (access_e), line:460:5, endln:460:13
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:access_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::access_e), line:457:11, endln:460:4
+      |vpiParent:
+      \_typedef_typespec: (access_e), line:460:5, endln:460:13
+      |vpiFullName:otp_ctrl_pkg::access_e
+      |vpiActual:
+      \_enum_typespec: (otp_ctrl_pkg::access_e), line:457:11, endln:460:14
+  |vpiTypedef:
   \_struct_typespec: (otp_ctrl_pkg::part_access_t), line:463:11, endln:466:4
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
@@ -16933,6 +17338,18 @@ design: (unnamed)
         |vpiFullName:otp_ctrl_pkg::part_access_t::write_lock::access_e
         |vpiActual:
         \_enum_typespec: (otp_ctrl_pkg::access_e), line:457:11, endln:460:14
+  |vpiTypedef:
+  \_typedef_typespec: (part_access_t), line:466:5, endln:466:18
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:part_access_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::part_access_t), line:463:11, endln:466:4
+      |vpiParent:
+      \_typedef_typespec: (part_access_t), line:466:5, endln:466:18
+      |vpiFullName:otp_ctrl_pkg::part_access_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_pkg::part_access_t), line:463:11, endln:466:4
   |vpiTypedef:
   \_int_typespec: , line:468:13, endln:468:16
     |vpiParent:
@@ -17011,6 +17428,18 @@ design: (unnamed)
       |BIN:100
       |vpiDecompile:3'b100
       |vpiSize:3
+  |vpiTypedef:
+  \_typedef_typespec: (dai_cmd_e), line:473:5, endln:473:14
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:dai_cmd_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::dai_cmd_e), line:469:11, endln:473:4
+      |vpiParent:
+      \_typedef_typespec: (dai_cmd_e), line:473:5, endln:473:14
+      |vpiFullName:otp_ctrl_pkg::dai_cmd_e
+      |vpiActual:
+      \_enum_typespec: (otp_ctrl_pkg::dai_cmd_e), line:469:11, endln:473:15
   |vpiTypedef:
   \_int_typespec: , line:480:13, endln:480:16
     |vpiParent:
@@ -17165,6 +17594,18 @@ design: (unnamed)
       |vpiDecompile:3'h7
       |vpiSize:3
   |vpiTypedef:
+  \_typedef_typespec: (otp_err_e), line:499:5, endln:499:14
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:otp_err_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::otp_err_e), line:490:11, endln:499:4
+      |vpiParent:
+      \_typedef_typespec: (otp_err_e), line:499:5, endln:499:14
+      |vpiFullName:otp_ctrl_pkg::otp_err_e
+      |vpiActual:
+      \_enum_typespec: (otp_ctrl_pkg::otp_err_e), line:490:11, endln:499:15
+  |vpiTypedef:
   \_int_typespec: , line:505:13, endln:505:16
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
@@ -17269,6 +17710,18 @@ design: (unnamed)
       |vpiDecompile:5
       |vpiSize:3
   |vpiTypedef:
+  \_typedef_typespec: (otp_scrmbl_cmd_e), line:518:5, endln:518:21
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:otp_scrmbl_cmd_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::otp_scrmbl_cmd_e), line:511:11, endln:518:4
+      |vpiParent:
+      \_typedef_typespec: (otp_scrmbl_cmd_e), line:518:5, endln:518:21
+      |vpiFullName:otp_ctrl_pkg::otp_scrmbl_cmd_e
+      |vpiActual:
+      \_enum_typespec: (otp_ctrl_pkg::otp_scrmbl_cmd_e), line:511:11, endln:518:22
+  |vpiTypedef:
   \_int_typespec: , line:520:13, endln:520:16
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
@@ -17356,6 +17809,18 @@ design: (unnamed)
       |INT:2
       |vpiDecompile:2
       |vpiSize:1
+  |vpiTypedef:
+  \_typedef_typespec: (key_sel_e), line:530:5, endln:530:14
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:key_sel_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::key_sel_e), line:526:11, endln:530:4
+      |vpiParent:
+      \_typedef_typespec: (key_sel_e), line:530:5, endln:530:14
+      |vpiFullName:otp_ctrl_pkg::key_sel_e
+      |vpiActual:
+      \_enum_typespec: (otp_ctrl_pkg::key_sel_e), line:526:11, endln:530:15
   |vpiTypedef:
   \_logic_typespec: , line:532:16, endln:532:41
     |vpiParent:
@@ -17446,6 +17911,18 @@ design: (unnamed)
       |vpiDecompile:4
       |vpiSize:1
   |vpiTypedef:
+  \_typedef_typespec: (digest_sel_e), line:538:5, endln:538:17
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:digest_sel_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::digest_sel_e), line:532:11, endln:538:4
+      |vpiParent:
+      \_typedef_typespec: (digest_sel_e), line:538:5, endln:538:17
+      |vpiFullName:otp_ctrl_pkg::digest_sel_e
+      |vpiActual:
+      \_enum_typespec: (otp_ctrl_pkg::digest_sel_e), line:532:11, endln:538:18
+  |vpiTypedef:
   \_logic_typespec: , line:540:16, endln:540:41
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
@@ -17511,6 +17988,18 @@ design: (unnamed)
       |vpiDecompile:1
       |vpiSize:1
   |vpiTypedef:
+  \_typedef_typespec: (digest_mode_e), line:543:5, endln:543:18
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:digest_mode_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::digest_mode_e), line:540:11, endln:543:4
+      |vpiParent:
+      \_typedef_typespec: (digest_mode_e), line:543:5, endln:543:18
+      |vpiFullName:otp_ctrl_pkg::digest_mode_e
+      |vpiActual:
+      \_enum_typespec: (otp_ctrl_pkg::digest_mode_e), line:540:11, endln:543:19
+  |vpiTypedef:
   \_logic_typespec: , line:549:16, endln:549:27
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
@@ -17570,6 +18059,18 @@ design: (unnamed)
       |INT:2
       |vpiDecompile:2
       |vpiSize:2
+  |vpiTypedef:
+  \_typedef_typespec: (part_variant_e), line:553:5, endln:553:19
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:part_variant_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::part_variant_e), line:549:11, endln:553:4
+      |vpiParent:
+      \_typedef_typespec: (part_variant_e), line:553:5, endln:553:19
+      |vpiFullName:otp_ctrl_pkg::part_variant_e
+      |vpiActual:
+      \_enum_typespec: (otp_ctrl_pkg::part_variant_e), line:549:11, endln:553:20
   |vpiTypedef:
   \_struct_typespec: (otp_ctrl_pkg::part_info_t), line:555:11, endln:567:4
     |vpiParent:
@@ -17765,6 +18266,18 @@ design: (unnamed)
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
   |vpiTypedef:
+  \_typedef_typespec: (part_info_t), line:567:5, endln:567:16
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:part_info_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::part_info_t), line:555:11, endln:567:4
+      |vpiParent:
+      \_typedef_typespec: (part_info_t), line:567:5, endln:567:16
+      |vpiFullName:otp_ctrl_pkg::part_info_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_pkg::part_info_t), line:555:11, endln:567:4
+  |vpiTypedef:
   \_struct_typespec: (otp_ctrl_pkg::otp_lc_data_t), line:573:11, endln:584:4
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
@@ -17922,6 +18435,18 @@ design: (unnamed)
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
     |vpiName:lc_ctrl_pkg::lc_id_state_e
+  |vpiTypedef:
+  \_typedef_typespec: (otp_lc_data_t), line:584:5, endln:584:18
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:otp_lc_data_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::otp_lc_data_t), line:573:11, endln:584:4
+      |vpiParent:
+      \_typedef_typespec: (otp_lc_data_t), line:584:5, endln:584:18
+      |vpiFullName:otp_ctrl_pkg::otp_lc_data_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_pkg::otp_lc_data_t), line:573:11, endln:584:4
   |vpiTypedef:
   \_string_typespec: (valid), line:588:5, endln:588:10
     |vpiParent:
@@ -18114,6 +18639,18 @@ design: (unnamed)
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
     |vpiName:lc_ctrl_pkg::lc_cnt_e
   |vpiTypedef:
+  \_typedef_typespec: (lc_otp_program_req_t), line:603:5, endln:603:25
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:lc_otp_program_req_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::lc_otp_program_req_t), line:599:11, endln:603:4
+      |vpiParent:
+      \_typedef_typespec: (lc_otp_program_req_t), line:603:5, endln:603:25
+      |vpiFullName:otp_ctrl_pkg::lc_otp_program_req_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_pkg::lc_otp_program_req_t), line:599:11, endln:603:4
+  |vpiTypedef:
   \_struct_typespec: (otp_ctrl_pkg::lc_otp_program_rsp_t), line:605:11, endln:608:4
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
@@ -18151,6 +18688,18 @@ design: (unnamed)
   \_logic_typespec: , line:607:5, endln:607:10
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+  |vpiTypedef:
+  \_typedef_typespec: (lc_otp_program_rsp_t), line:608:5, endln:608:25
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:lc_otp_program_rsp_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::lc_otp_program_rsp_t), line:605:11, endln:608:4
+      |vpiParent:
+      \_typedef_typespec: (lc_otp_program_rsp_t), line:608:5, endln:608:25
+      |vpiFullName:otp_ctrl_pkg::lc_otp_program_rsp_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_pkg::lc_otp_program_rsp_t), line:605:11, endln:608:4
   |vpiTypedef:
   \_struct_typespec: (otp_ctrl_pkg::lc_otp_token_req_t), line:611:11, endln:614:4
     |vpiParent:
@@ -18191,6 +18740,18 @@ design: (unnamed)
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
     |vpiName:lc_ctrl_pkg::lc_token_t
   |vpiTypedef:
+  \_typedef_typespec: (lc_otp_token_req_t), line:614:5, endln:614:23
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:lc_otp_token_req_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::lc_otp_token_req_t), line:611:11, endln:614:4
+      |vpiParent:
+      \_typedef_typespec: (lc_otp_token_req_t), line:614:5, endln:614:23
+      |vpiFullName:otp_ctrl_pkg::lc_otp_token_req_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_pkg::lc_otp_token_req_t), line:611:11, endln:614:4
+  |vpiTypedef:
   \_struct_typespec: (otp_ctrl_pkg::lc_otp_token_rsp_t), line:616:11, endln:619:4
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
@@ -18229,6 +18790,18 @@ design: (unnamed)
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
     |vpiName:lc_ctrl_pkg::lc_token_t
+  |vpiTypedef:
+  \_typedef_typespec: (lc_otp_token_rsp_t), line:619:5, endln:619:23
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:lc_otp_token_rsp_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::lc_otp_token_rsp_t), line:616:11, endln:619:4
+      |vpiParent:
+      \_typedef_typespec: (lc_otp_token_rsp_t), line:619:5, endln:619:23
+      |vpiFullName:otp_ctrl_pkg::lc_otp_token_rsp_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_pkg::lc_otp_token_rsp_t), line:616:11, endln:619:4
   |vpiTypedef:
   \_int_typespec: , line:625:13, endln:625:16
     |vpiParent:
@@ -18270,6 +18843,43 @@ design: (unnamed)
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
     |vpiSigned:1
   |vpiTypedef:
+  \_packed_array_typespec: , line:634:11, endln:634:35
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiRange:
+    \_range: , line:634:17, endln:634:35
+      |vpiParent:
+      \_packed_array_typespec: , line:634:11, endln:634:35
+      |vpiLeftRange:
+      \_operation: , line:634:18, endln:634:32
+        |vpiParent:
+        \_range: , line:634:17, endln:634:35
+        |vpiOpType:11
+        |vpiOperand:
+        \_ref_obj: (otp_ctrl_pkg::SramKeyWidth), line:634:18, endln:634:30
+          |vpiParent:
+          \_operation: , line:634:18, endln:634:32
+          |vpiName:SramKeyWidth
+          |vpiFullName:otp_ctrl_pkg::SramKeyWidth
+          |vpiActual:
+          \_parameter: (otp_ctrl_pkg::SramKeyWidth), line:629:17, endln:629:39
+        |vpiOperand:
+        \_constant: , line:634:31, endln:634:32
+          |vpiParent:
+          \_operation: , line:634:18, endln:634:32
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:634:33, endln:634:34
+        |vpiParent:
+        \_range: , line:634:17, endln:634:35
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
   \_logic_typespec: (sram_key_t), line:634:11, endln:634:35
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
@@ -18303,6 +18913,55 @@ design: (unnamed)
       \_constant: , line:634:33, endln:634:34
         |vpiParent:
         \_range: , line:634:17, endln:634:35
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (sram_key_t), line:634:38, endln:634:48
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:sram_key_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::sram_key_t), line:634:11, endln:634:16
+      |vpiParent:
+      \_typedef_typespec: (sram_key_t), line:634:38, endln:634:48
+      |vpiFullName:otp_ctrl_pkg::sram_key_t
+      |vpiActual:
+      \_logic_typespec: (sram_key_t), line:634:11, endln:634:35
+  |vpiTypedef:
+  \_packed_array_typespec: , line:635:11, endln:635:37
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiRange:
+    \_range: , line:635:17, endln:635:37
+      |vpiParent:
+      \_packed_array_typespec: , line:635:11, endln:635:37
+      |vpiLeftRange:
+      \_operation: , line:635:18, endln:635:34
+        |vpiParent:
+        \_range: , line:635:17, endln:635:37
+        |vpiOpType:11
+        |vpiOperand:
+        \_ref_obj: (otp_ctrl_pkg::SramNonceWidth), line:635:18, endln:635:32
+          |vpiParent:
+          \_operation: , line:635:18, endln:635:34
+          |vpiName:SramNonceWidth
+          |vpiFullName:otp_ctrl_pkg::SramNonceWidth
+          |vpiActual:
+          \_parameter: (otp_ctrl_pkg::SramNonceWidth), line:630:17, endln:630:38
+        |vpiOperand:
+        \_constant: , line:635:33, endln:635:34
+          |vpiParent:
+          \_operation: , line:635:18, endln:635:34
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:635:35, endln:635:36
+        |vpiParent:
+        \_range: , line:635:17, endln:635:37
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
@@ -18346,6 +19005,55 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (sram_nonce_t), line:635:38, endln:635:50
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:sram_nonce_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::sram_nonce_t), line:635:11, endln:635:16
+      |vpiParent:
+      \_typedef_typespec: (sram_nonce_t), line:635:38, endln:635:50
+      |vpiFullName:otp_ctrl_pkg::sram_nonce_t
+      |vpiActual:
+      \_logic_typespec: (sram_nonce_t), line:635:11, endln:635:37
+  |vpiTypedef:
+  \_packed_array_typespec: , line:636:11, endln:636:35
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiRange:
+    \_range: , line:636:17, endln:636:35
+      |vpiParent:
+      \_packed_array_typespec: , line:636:11, endln:636:35
+      |vpiLeftRange:
+      \_operation: , line:636:18, endln:636:32
+        |vpiParent:
+        \_range: , line:636:17, endln:636:35
+        |vpiOpType:11
+        |vpiOperand:
+        \_ref_obj: (otp_ctrl_pkg::OtbnKeyWidth), line:636:18, endln:636:30
+          |vpiParent:
+          \_operation: , line:636:18, endln:636:32
+          |vpiName:OtbnKeyWidth
+          |vpiFullName:otp_ctrl_pkg::OtbnKeyWidth
+          |vpiActual:
+          \_parameter: (otp_ctrl_pkg::OtbnKeyWidth), line:631:17, endln:631:39
+        |vpiOperand:
+        \_constant: , line:636:31, endln:636:32
+          |vpiParent:
+          \_operation: , line:636:18, endln:636:32
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:636:33, endln:636:34
+        |vpiParent:
+        \_range: , line:636:17, endln:636:35
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
   \_logic_typespec: (otbn_key_t), line:636:11, endln:636:35
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
@@ -18379,6 +19087,55 @@ design: (unnamed)
       \_constant: , line:636:33, endln:636:34
         |vpiParent:
         \_range: , line:636:17, endln:636:35
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (otbn_key_t), line:636:38, endln:636:48
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:otbn_key_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::otbn_key_t), line:636:11, endln:636:16
+      |vpiParent:
+      \_typedef_typespec: (otbn_key_t), line:636:38, endln:636:48
+      |vpiFullName:otp_ctrl_pkg::otbn_key_t
+      |vpiActual:
+      \_logic_typespec: (otbn_key_t), line:636:11, endln:636:35
+  |vpiTypedef:
+  \_packed_array_typespec: , line:637:11, endln:637:37
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiRange:
+    \_range: , line:637:17, endln:637:37
+      |vpiParent:
+      \_packed_array_typespec: , line:637:11, endln:637:37
+      |vpiLeftRange:
+      \_operation: , line:637:18, endln:637:34
+        |vpiParent:
+        \_range: , line:637:17, endln:637:37
+        |vpiOpType:11
+        |vpiOperand:
+        \_ref_obj: (otp_ctrl_pkg::OtbnNonceWidth), line:637:18, endln:637:32
+          |vpiParent:
+          \_operation: , line:637:18, endln:637:34
+          |vpiName:OtbnNonceWidth
+          |vpiFullName:otp_ctrl_pkg::OtbnNonceWidth
+          |vpiActual:
+          \_parameter: (otp_ctrl_pkg::OtbnNonceWidth), line:632:17, endln:632:39
+        |vpiOperand:
+        \_constant: , line:637:33, endln:637:34
+          |vpiParent:
+          \_operation: , line:637:18, endln:637:34
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:637:35, endln:637:36
+        |vpiParent:
+        \_range: , line:637:17, endln:637:37
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
@@ -18421,6 +19178,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (otbn_nonce_t), line:637:38, endln:637:50
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:otbn_nonce_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::otbn_nonce_t), line:637:11, endln:637:16
+      |vpiParent:
+      \_typedef_typespec: (otbn_nonce_t), line:637:38, endln:637:50
+      |vpiFullName:otp_ctrl_pkg::otbn_nonce_t
+      |vpiActual:
+      \_logic_typespec: (otbn_nonce_t), line:637:11, endln:637:37
   |vpiTypedef:
   \_struct_typespec: (otp_ctrl_pkg::otp_keymgr_key_t), line:639:11, endln:643:4
     |vpiParent:
@@ -18542,6 +19311,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (otp_keymgr_key_t), line:643:5, endln:643:21
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:otp_keymgr_key_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::otp_keymgr_key_t), line:639:11, endln:643:4
+      |vpiParent:
+      \_typedef_typespec: (otp_keymgr_key_t), line:643:5, endln:643:21
+      |vpiFullName:otp_ctrl_pkg::otp_keymgr_key_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_pkg::otp_keymgr_key_t), line:639:11, endln:643:4
+  |vpiTypedef:
   \_string_typespec: (valid), line:646:5, endln:646:10
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
@@ -18625,6 +19406,18 @@ design: (unnamed)
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
   |vpiTypedef:
+  \_typedef_typespec: (flash_otp_key_req_t), line:654:5, endln:654:24
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:flash_otp_key_req_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::flash_otp_key_req_t), line:651:11, endln:654:4
+      |vpiParent:
+      \_typedef_typespec: (flash_otp_key_req_t), line:654:5, endln:654:24
+      |vpiFullName:otp_ctrl_pkg::flash_otp_key_req_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_pkg::flash_otp_key_req_t), line:651:11, endln:654:4
+  |vpiTypedef:
   \_struct_typespec: (otp_ctrl_pkg::sram_otp_key_req_t), line:656:11, endln:658:4
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
@@ -18647,6 +19440,18 @@ design: (unnamed)
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
   |vpiTypedef:
+  \_typedef_typespec: (sram_otp_key_req_t), line:658:5, endln:658:23
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:sram_otp_key_req_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::sram_otp_key_req_t), line:656:11, endln:658:4
+      |vpiParent:
+      \_typedef_typespec: (sram_otp_key_req_t), line:658:5, endln:658:23
+      |vpiFullName:otp_ctrl_pkg::sram_otp_key_req_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_pkg::sram_otp_key_req_t), line:656:11, endln:658:4
+  |vpiTypedef:
   \_struct_typespec: (otp_ctrl_pkg::otbn_otp_key_req_t), line:660:11, endln:662:4
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
@@ -18668,6 +19473,18 @@ design: (unnamed)
   \_logic_typespec: , line:661:5, endln:661:10
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+  |vpiTypedef:
+  \_typedef_typespec: (otbn_otp_key_req_t), line:662:5, endln:662:23
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:otbn_otp_key_req_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::otbn_otp_key_req_t), line:660:11, endln:662:4
+      |vpiParent:
+      \_typedef_typespec: (otbn_otp_key_req_t), line:662:5, endln:662:23
+      |vpiFullName:otp_ctrl_pkg::otbn_otp_key_req_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_pkg::otbn_otp_key_req_t), line:660:11, endln:662:4
   |vpiTypedef:
   \_struct_typespec: (otp_ctrl_pkg::flash_otp_key_rsp_t), line:664:11, endln:669:4
     |vpiParent:
@@ -18771,6 +19588,18 @@ design: (unnamed)
   \_logic_typespec: , line:668:5, endln:668:10
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+  |vpiTypedef:
+  \_typedef_typespec: (flash_otp_key_rsp_t), line:669:5, endln:669:24
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:flash_otp_key_rsp_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::flash_otp_key_rsp_t), line:664:11, endln:669:4
+      |vpiParent:
+      \_typedef_typespec: (flash_otp_key_rsp_t), line:669:5, endln:669:24
+      |vpiFullName:otp_ctrl_pkg::flash_otp_key_rsp_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_pkg::flash_otp_key_rsp_t), line:664:11, endln:669:4
   |vpiTypedef:
   \_string_typespec: (data_ack), line:673:5, endln:673:13
     |vpiParent:
@@ -18896,6 +19725,18 @@ design: (unnamed)
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
   |vpiTypedef:
+  \_typedef_typespec: (sram_otp_key_rsp_t), line:684:5, endln:684:23
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:sram_otp_key_rsp_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::sram_otp_key_rsp_t), line:679:11, endln:684:4
+      |vpiParent:
+      \_typedef_typespec: (sram_otp_key_rsp_t), line:684:5, endln:684:23
+      |vpiFullName:otp_ctrl_pkg::sram_otp_key_rsp_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_pkg::sram_otp_key_rsp_t), line:679:11, endln:684:4
+  |vpiTypedef:
   \_struct_typespec: (otp_ctrl_pkg::otbn_otp_key_rsp_t), line:686:11, endln:691:4
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
@@ -18960,6 +19801,18 @@ design: (unnamed)
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
   |vpiTypedef:
+  \_typedef_typespec: (otbn_otp_key_rsp_t), line:691:5, endln:691:23
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:otbn_otp_key_rsp_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::otbn_otp_key_rsp_t), line:686:11, endln:691:4
+      |vpiParent:
+      \_typedef_typespec: (otbn_otp_key_rsp_t), line:691:5, endln:691:23
+      |vpiFullName:otp_ctrl_pkg::otbn_otp_key_rsp_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_pkg::otbn_otp_key_rsp_t), line:686:11, endln:691:4
+  |vpiTypedef:
   \_struct_typespec: (otp_ctrl_pkg::pwr_otp_init_req_t), line:697:11, endln:699:4
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
@@ -18981,6 +19834,18 @@ design: (unnamed)
   \_logic_typespec: , line:698:5, endln:698:10
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+  |vpiTypedef:
+  \_typedef_typespec: (pwr_otp_init_req_t), line:699:5, endln:699:23
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:pwr_otp_init_req_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::pwr_otp_init_req_t), line:697:11, endln:699:4
+      |vpiParent:
+      \_typedef_typespec: (pwr_otp_init_req_t), line:699:5, endln:699:23
+      |vpiFullName:otp_ctrl_pkg::pwr_otp_init_req_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_pkg::pwr_otp_init_req_t), line:697:11, endln:699:4
   |vpiTypedef:
   \_struct_typespec: (otp_ctrl_pkg::pwr_otp_init_rsp_t), line:701:11, endln:703:4
     |vpiParent:
@@ -19004,6 +19869,18 @@ design: (unnamed)
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
   |vpiTypedef:
+  \_typedef_typespec: (pwr_otp_init_rsp_t), line:703:5, endln:703:23
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:pwr_otp_init_rsp_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::pwr_otp_init_rsp_t), line:701:11, endln:703:4
+      |vpiParent:
+      \_typedef_typespec: (pwr_otp_init_rsp_t), line:703:5, endln:703:23
+      |vpiFullName:otp_ctrl_pkg::pwr_otp_init_rsp_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_pkg::pwr_otp_init_rsp_t), line:701:11, endln:703:4
+  |vpiTypedef:
   \_struct_typespec: (otp_ctrl_pkg::otp_pwr_state_t), line:705:11, endln:707:4
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
@@ -19025,6 +19902,18 @@ design: (unnamed)
   \_logic_typespec: , line:706:5, endln:706:10
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+  |vpiTypedef:
+  \_typedef_typespec: (otp_pwr_state_t), line:707:5, endln:707:20
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:otp_pwr_state_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::otp_pwr_state_t), line:705:11, endln:707:4
+      |vpiParent:
+      \_typedef_typespec: (otp_pwr_state_t), line:707:5, endln:707:20
+      |vpiFullName:otp_ctrl_pkg::otp_pwr_state_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_pkg::otp_pwr_state_t), line:705:11, endln:707:4
   |vpiTypedef:
   \_struct_typespec: (otp_ctrl_pkg::otp_ast_req_t), line:714:11, endln:716:4
     |vpiParent:
@@ -19081,6 +19970,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (otp_ast_req_t), line:716:5, endln:716:18
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:otp_ast_req_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::otp_ast_req_t), line:714:11, endln:716:4
+      |vpiParent:
+      \_typedef_typespec: (otp_ast_req_t), line:716:5, endln:716:18
+      |vpiFullName:otp_ctrl_pkg::otp_ast_req_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_pkg::otp_ast_req_t), line:714:11, endln:716:4
+  |vpiTypedef:
   \_struct_typespec: (otp_ctrl_pkg::otp_ast_rsp_t), line:718:11, endln:720:4
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
@@ -19136,10 +20037,59 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (otp_ast_rsp_t), line:720:5, endln:720:18
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:otp_ast_rsp_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::otp_ast_rsp_t), line:718:11, endln:720:4
+      |vpiParent:
+      \_typedef_typespec: (otp_ast_rsp_t), line:720:5, endln:720:18
+      |vpiFullName:otp_ctrl_pkg::otp_ast_rsp_t
+      |vpiActual:
+      \_struct_typespec: (otp_ctrl_pkg::otp_ast_rsp_t), line:718:11, endln:720:4
+  |vpiTypedef:
   \_int_typespec: , line:728:14, endln:728:17
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
     |vpiSigned:1
+  |vpiTypedef:
+  \_packed_array_typespec: , line:729:11, endln:729:32
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiRange:
+    \_range: , line:729:17, endln:729:32
+      |vpiParent:
+      \_packed_array_typespec: , line:729:11, endln:729:32
+      |vpiLeftRange:
+      \_operation: , line:729:18, endln:729:29
+        |vpiParent:
+        \_range: , line:729:17, endln:729:32
+        |vpiOpType:11
+        |vpiOperand:
+        \_ref_obj: (otp_ctrl_pkg::LfsrWidth), line:729:18, endln:729:27
+          |vpiParent:
+          \_operation: , line:729:18, endln:729:29
+          |vpiName:LfsrWidth
+          |vpiFullName:otp_ctrl_pkg::LfsrWidth
+          |vpiActual:
+          \_parameter: (otp_ctrl_pkg::LfsrWidth), line:728:18, endln:728:32
+        |vpiOperand:
+        \_constant: , line:729:28, endln:729:29
+          |vpiParent:
+          \_operation: , line:729:18, endln:729:29
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:729:30, endln:729:31
+        |vpiParent:
+        \_range: , line:729:17, endln:729:32
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
   |vpiTypedef:
   \_logic_typespec: (lfsr_seed_t), line:729:11, endln:729:32
     |vpiParent:
@@ -19174,6 +20124,93 @@ design: (unnamed)
       \_constant: , line:729:30, endln:729:31
         |vpiParent:
         \_range: , line:729:17, endln:729:32
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (lfsr_seed_t), line:729:56, endln:729:67
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:lfsr_seed_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::lfsr_seed_t), line:729:11, endln:729:16
+      |vpiParent:
+      \_typedef_typespec: (lfsr_seed_t), line:729:56, endln:729:67
+      |vpiFullName:otp_ctrl_pkg::lfsr_seed_t
+      |vpiActual:
+      \_logic_typespec: (lfsr_seed_t), line:729:11, endln:729:32
+  |vpiTypedef:
+  \_packed_array_typespec: , line:730:11, endln:730:55
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiRange:
+    \_range: , line:730:17, endln:730:32
+      |vpiParent:
+      \_packed_array_typespec: , line:730:11, endln:730:55
+      |vpiLeftRange:
+      \_operation: , line:730:18, endln:730:29
+        |vpiParent:
+        \_range: , line:730:17, endln:730:32
+        |vpiOpType:11
+        |vpiOperand:
+        \_ref_obj: (otp_ctrl_pkg::LfsrWidth), line:730:18, endln:730:27
+          |vpiParent:
+          \_operation: , line:730:18, endln:730:29
+          |vpiName:LfsrWidth
+          |vpiFullName:otp_ctrl_pkg::LfsrWidth
+          |vpiActual:
+          \_parameter: (otp_ctrl_pkg::LfsrWidth), line:728:18, endln:728:32
+        |vpiOperand:
+        \_constant: , line:730:28, endln:730:29
+          |vpiParent:
+          \_operation: , line:730:18, endln:730:29
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:730:30, endln:730:31
+        |vpiParent:
+        \_range: , line:730:17, endln:730:32
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiRange:
+    \_range: , line:730:32, endln:730:55
+      |vpiParent:
+      \_packed_array_typespec: , line:730:11, endln:730:55
+      |vpiLeftRange:
+      \_operation: , line:730:33, endln:730:52
+        |vpiParent:
+        \_range: , line:730:32, endln:730:55
+        |vpiOpType:11
+        |vpiOperand:
+        \_sys_func_call: ($clog2), line:730:33, endln:730:50
+          |vpiParent:
+          \_operation: , line:730:33, endln:730:52
+          |vpiArgument:
+          \_ref_obj: (otp_ctrl_pkg::LfsrWidth), line:730:40, endln:730:49
+            |vpiParent:
+            \_sys_func_call: ($clog2), line:730:33, endln:730:50
+            |vpiName:LfsrWidth
+            |vpiFullName:otp_ctrl_pkg::LfsrWidth
+            |vpiActual:
+            \_parameter: (otp_ctrl_pkg::LfsrWidth), line:728:18, endln:728:32
+          |vpiName:$clog2
+        |vpiOperand:
+        \_constant: , line:730:51, endln:730:52
+          |vpiParent:
+          \_operation: , line:730:33, endln:730:52
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:730:53, endln:730:54
+        |vpiParent:
+        \_range: , line:730:32, endln:730:55
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
@@ -19255,6 +20292,88 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (lfsr_perm_t), line:730:56, endln:730:67
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:lfsr_perm_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::lfsr_perm_t), line:730:11, endln:730:16
+      |vpiParent:
+      \_typedef_typespec: (lfsr_perm_t), line:730:56, endln:730:67
+      |vpiFullName:otp_ctrl_pkg::lfsr_perm_t
+      |vpiActual:
+      \_logic_typespec: (lfsr_perm_t), line:730:11, endln:730:55
+  |vpiTypedef:
+  \_packed_array_typespec: , line:736:11, endln:736:56
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiRange:
+    \_range: , line:736:17, endln:736:36
+      |vpiParent:
+      \_packed_array_typespec: , line:736:11, endln:736:56
+      |vpiLeftRange:
+      \_operation: , line:736:18, endln:736:33
+        |vpiParent:
+        \_range: , line:736:17, endln:736:36
+        |vpiOpType:11
+        |vpiOperand:
+        \_ref_obj: (otp_ctrl_pkg::NumScrmblKeys), line:736:18, endln:736:31
+          |vpiParent:
+          \_operation: , line:736:18, endln:736:33
+          |vpiName:NumScrmblKeys
+          |vpiFullName:otp_ctrl_pkg::NumScrmblKeys
+          |vpiActual:
+          \_parameter: (otp_ctrl_pkg::NumScrmblKeys), line:520:17, endln:520:34
+        |vpiOperand:
+        \_constant: , line:736:32, endln:736:33
+          |vpiParent:
+          \_operation: , line:736:18, endln:736:33
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:736:34, endln:736:35
+        |vpiParent:
+        \_range: , line:736:17, endln:736:36
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiRange:
+    \_range: , line:736:36, endln:736:56
+      |vpiParent:
+      \_packed_array_typespec: , line:736:11, endln:736:56
+      |vpiLeftRange:
+      \_operation: , line:736:37, endln:736:53
+        |vpiParent:
+        \_range: , line:736:36, endln:736:56
+        |vpiOpType:11
+        |vpiOperand:
+        \_ref_obj: (otp_ctrl_pkg::ScrmblKeyWidth), line:736:37, endln:736:51
+          |vpiParent:
+          \_operation: , line:736:37, endln:736:53
+          |vpiName:ScrmblKeyWidth
+          |vpiFullName:otp_ctrl_pkg::ScrmblKeyWidth
+          |vpiActual:
+          \_parameter: (otp_ctrl_pkg::ScrmblKeyWidth), line:505:17, endln:505:39
+        |vpiOperand:
+        \_constant: , line:736:52, endln:736:53
+          |vpiParent:
+          \_operation: , line:736:37, endln:736:53
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:736:54, endln:736:55
+        |vpiParent:
+        \_range: , line:736:36, endln:736:56
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
   \_logic_typespec: (key_array_t), line:736:11, endln:736:56
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
@@ -19321,6 +20440,88 @@ design: (unnamed)
       \_constant: , line:736:54, endln:736:55
         |vpiParent:
         \_range: , line:736:36, endln:736:56
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (key_array_t), line:736:57, endln:736:68
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:key_array_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::key_array_t), line:736:11, endln:736:16
+      |vpiParent:
+      \_typedef_typespec: (key_array_t), line:736:57, endln:736:68
+      |vpiFullName:otp_ctrl_pkg::key_array_t
+      |vpiActual:
+      \_logic_typespec: (key_array_t), line:736:11, endln:736:56
+  |vpiTypedef:
+  \_packed_array_typespec: , line:745:11, endln:745:56
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiRange:
+    \_range: , line:745:17, endln:745:36
+      |vpiParent:
+      \_packed_array_typespec: , line:745:11, endln:745:56
+      |vpiLeftRange:
+      \_operation: , line:745:18, endln:745:33
+        |vpiParent:
+        \_range: , line:745:17, endln:745:36
+        |vpiOpType:11
+        |vpiOperand:
+        \_ref_obj: (otp_ctrl_pkg::NumDigestSets), line:745:18, endln:745:31
+          |vpiParent:
+          \_operation: , line:745:18, endln:745:33
+          |vpiName:NumDigestSets
+          |vpiFullName:otp_ctrl_pkg::NumDigestSets
+          |vpiActual:
+          \_parameter: (otp_ctrl_pkg::NumDigestSets), line:521:17, endln:521:34
+        |vpiOperand:
+        \_constant: , line:745:32, endln:745:33
+          |vpiParent:
+          \_operation: , line:745:18, endln:745:33
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:745:34, endln:745:35
+        |vpiParent:
+        \_range: , line:745:17, endln:745:36
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiRange:
+    \_range: , line:745:36, endln:745:56
+      |vpiParent:
+      \_packed_array_typespec: , line:745:11, endln:745:56
+      |vpiLeftRange:
+      \_operation: , line:745:37, endln:745:53
+        |vpiParent:
+        \_range: , line:745:36, endln:745:56
+        |vpiOpType:11
+        |vpiOperand:
+        \_ref_obj: (otp_ctrl_pkg::ScrmblKeyWidth), line:745:37, endln:745:51
+          |vpiParent:
+          \_operation: , line:745:37, endln:745:53
+          |vpiName:ScrmblKeyWidth
+          |vpiFullName:otp_ctrl_pkg::ScrmblKeyWidth
+          |vpiActual:
+          \_parameter: (otp_ctrl_pkg::ScrmblKeyWidth), line:505:17, endln:505:39
+        |vpiOperand:
+        \_constant: , line:745:52, endln:745:53
+          |vpiParent:
+          \_operation: , line:745:37, endln:745:53
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:745:54, endln:745:55
+        |vpiParent:
+        \_range: , line:745:36, endln:745:56
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
@@ -19397,6 +20598,88 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (digest_const_array_t), line:745:57, endln:745:77
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:digest_const_array_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::digest_const_array_t), line:745:11, endln:745:16
+      |vpiParent:
+      \_typedef_typespec: (digest_const_array_t), line:745:57, endln:745:77
+      |vpiFullName:otp_ctrl_pkg::digest_const_array_t
+      |vpiActual:
+      \_logic_typespec: (digest_const_array_t), line:745:11, endln:745:56
+  |vpiTypedef:
+  \_packed_array_typespec: , line:754:11, endln:754:58
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiRange:
+    \_range: , line:754:17, endln:754:36
+      |vpiParent:
+      \_packed_array_typespec: , line:754:11, endln:754:58
+      |vpiLeftRange:
+      \_operation: , line:754:18, endln:754:33
+        |vpiParent:
+        \_range: , line:754:17, endln:754:36
+        |vpiOpType:11
+        |vpiOperand:
+        \_ref_obj: (otp_ctrl_pkg::NumDigestSets), line:754:18, endln:754:31
+          |vpiParent:
+          \_operation: , line:754:18, endln:754:33
+          |vpiName:NumDigestSets
+          |vpiFullName:otp_ctrl_pkg::NumDigestSets
+          |vpiActual:
+          \_parameter: (otp_ctrl_pkg::NumDigestSets), line:521:17, endln:521:34
+        |vpiOperand:
+        \_constant: , line:754:32, endln:754:33
+          |vpiParent:
+          \_operation: , line:754:18, endln:754:33
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:754:34, endln:754:35
+        |vpiParent:
+        \_range: , line:754:17, endln:754:36
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiRange:
+    \_range: , line:754:36, endln:754:58
+      |vpiParent:
+      \_packed_array_typespec: , line:754:11, endln:754:58
+      |vpiLeftRange:
+      \_operation: , line:754:37, endln:754:55
+        |vpiParent:
+        \_range: , line:754:36, endln:754:58
+        |vpiOpType:11
+        |vpiOperand:
+        \_ref_obj: (otp_ctrl_pkg::ScrmblBlockWidth), line:754:37, endln:754:53
+          |vpiParent:
+          \_operation: , line:754:37, endln:754:55
+          |vpiName:ScrmblBlockWidth
+          |vpiFullName:otp_ctrl_pkg::ScrmblBlockWidth
+          |vpiActual:
+          \_parameter: (otp_ctrl_pkg::ScrmblBlockWidth), line:506:17, endln:506:38
+        |vpiOperand:
+        \_constant: , line:754:54, endln:754:55
+          |vpiParent:
+          \_operation: , line:754:37, endln:754:55
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:754:56, endln:754:57
+        |vpiParent:
+        \_range: , line:754:36, endln:754:58
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
   \_logic_typespec: (digest_iv_array_t), line:754:11, endln:754:58
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
@@ -19468,6 +20751,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (digest_iv_array_t), line:754:59, endln:754:76
+    |vpiParent:
+    \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
+    |vpiName:digest_iv_array_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (otp_ctrl_pkg::digest_iv_array_t), line:754:11, endln:754:16
+      |vpiParent:
+      \_typedef_typespec: (digest_iv_array_t), line:754:59, endln:754:76
+      |vpiFullName:otp_ctrl_pkg::digest_iv_array_t
+      |vpiActual:
+      \_logic_typespec: (digest_iv_array_t), line:754:11, endln:754:58
+  |vpiTypedef:
   \_unsupported_typespec: (lc_ctrl_pkg::lc_token_t), line:763:13, endln:763:26
     |vpiParent:
     \_package: otp_ctrl_pkg (otp_ctrl_pkg::), file:${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv, line:438:1, endln:766:26
@@ -19487,13 +20782,19 @@ design: (unnamed)
   |vpiImportTypespec:
   \_enum_typespec: (otp_ctrl_pkg::access_e), line:457:11, endln:460:14
   |vpiImportTypespec:
+  \_typedef_typespec: (access_e), line:460:5, endln:460:13
+  |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_pkg::part_access_t), line:463:11, endln:466:4
+  |vpiImportTypespec:
+  \_typedef_typespec: (part_access_t), line:466:5, endln:466:18
   |vpiImportTypespec:
   \_int_typespec: , line:468:13, endln:468:16
   |vpiImportTypespec:
   \_logic_typespec: , line:469:16, endln:469:39
   |vpiImportTypespec:
   \_enum_typespec: (otp_ctrl_pkg::dai_cmd_e), line:469:11, endln:473:15
+  |vpiImportTypespec:
+  \_typedef_typespec: (dai_cmd_e), line:473:5, endln:473:14
   |vpiImportTypespec:
   \_int_typespec: , line:480:13, endln:480:16
   |vpiImportTypespec:
@@ -19515,6 +20816,8 @@ design: (unnamed)
   |vpiImportTypespec:
   \_enum_typespec: (otp_ctrl_pkg::otp_err_e), line:490:11, endln:499:15
   |vpiImportTypespec:
+  \_typedef_typespec: (otp_err_e), line:499:5, endln:499:14
+  |vpiImportTypespec:
   \_int_typespec: , line:505:13, endln:505:16
   |vpiImportTypespec:
   \_int_typespec: , line:506:13, endln:506:16
@@ -19527,6 +20830,8 @@ design: (unnamed)
   |vpiImportTypespec:
   \_enum_typespec: (otp_ctrl_pkg::otp_scrmbl_cmd_e), line:511:11, endln:518:22
   |vpiImportTypespec:
+  \_typedef_typespec: (otp_scrmbl_cmd_e), line:518:5, endln:518:21
+  |vpiImportTypespec:
   \_int_typespec: , line:520:13, endln:520:16
   |vpiImportTypespec:
   \_int_typespec: , line:521:13, endln:521:16
@@ -19537,17 +20842,25 @@ design: (unnamed)
   |vpiImportTypespec:
   \_enum_typespec: (otp_ctrl_pkg::key_sel_e), line:526:11, endln:530:15
   |vpiImportTypespec:
+  \_typedef_typespec: (key_sel_e), line:530:5, endln:530:14
+  |vpiImportTypespec:
   \_logic_typespec: , line:532:16, endln:532:41
   |vpiImportTypespec:
   \_enum_typespec: (otp_ctrl_pkg::digest_sel_e), line:532:11, endln:538:18
+  |vpiImportTypespec:
+  \_typedef_typespec: (digest_sel_e), line:538:5, endln:538:17
   |vpiImportTypespec:
   \_logic_typespec: , line:540:16, endln:540:41
   |vpiImportTypespec:
   \_enum_typespec: (otp_ctrl_pkg::digest_mode_e), line:540:11, endln:543:19
   |vpiImportTypespec:
+  \_typedef_typespec: (digest_mode_e), line:543:5, endln:543:18
+  |vpiImportTypespec:
   \_logic_typespec: , line:549:16, endln:549:27
   |vpiImportTypespec:
   \_enum_typespec: (otp_ctrl_pkg::part_variant_e), line:549:11, endln:553:20
+  |vpiImportTypespec:
+  \_typedef_typespec: (part_variant_e), line:553:5, endln:553:19
   |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_pkg::part_info_t), line:555:11, endln:567:4
   |vpiImportTypespec:
@@ -19562,6 +20875,8 @@ design: (unnamed)
   \_logic_typespec: , line:565:5, endln:565:10
   |vpiImportTypespec:
   \_logic_typespec: , line:566:5, endln:566:10
+  |vpiImportTypespec:
+  \_typedef_typespec: (part_info_t), line:567:5, endln:567:16
   |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_pkg::otp_lc_data_t), line:573:11, endln:584:4
   |vpiImportTypespec:
@@ -19582,6 +20897,8 @@ design: (unnamed)
   \_unsupported_typespec: (lc_ctrl_pkg::lc_token_t), line:582:5, endln:582:18
   |vpiImportTypespec:
   \_unsupported_typespec: (lc_ctrl_pkg::lc_id_state_e), line:583:5, endln:583:18
+  |vpiImportTypespec:
+  \_typedef_typespec: (otp_lc_data_t), line:584:5, endln:584:18
   |vpiImportTypespec:
   \_string_typespec: (valid), line:588:5, endln:588:10
   |vpiImportTypespec:
@@ -19645,11 +20962,15 @@ design: (unnamed)
   |vpiImportTypespec:
   \_unsupported_typespec: (lc_ctrl_pkg::lc_cnt_e), line:602:5, endln:602:18
   |vpiImportTypespec:
+  \_typedef_typespec: (lc_otp_program_req_t), line:603:5, endln:603:25
+  |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_pkg::lc_otp_program_rsp_t), line:605:11, endln:608:4
   |vpiImportTypespec:
   \_logic_typespec: , line:606:5, endln:606:10
   |vpiImportTypespec:
   \_logic_typespec: , line:607:5, endln:607:10
+  |vpiImportTypespec:
+  \_typedef_typespec: (lc_otp_program_rsp_t), line:608:5, endln:608:25
   |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_pkg::lc_otp_token_req_t), line:611:11, endln:614:4
   |vpiImportTypespec:
@@ -19657,11 +20978,15 @@ design: (unnamed)
   |vpiImportTypespec:
   \_unsupported_typespec: (lc_ctrl_pkg::lc_token_t), line:613:5, endln:613:18
   |vpiImportTypespec:
+  \_typedef_typespec: (lc_otp_token_req_t), line:614:5, endln:614:23
+  |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_pkg::lc_otp_token_rsp_t), line:616:11, endln:619:4
   |vpiImportTypespec:
   \_logic_typespec: , line:617:5, endln:617:10
   |vpiImportTypespec:
   \_unsupported_typespec: (lc_ctrl_pkg::lc_token_t), line:618:5, endln:618:18
+  |vpiImportTypespec:
+  \_typedef_typespec: (lc_otp_token_rsp_t), line:619:5, endln:619:23
   |vpiImportTypespec:
   \_int_typespec: , line:625:13, endln:625:16
   |vpiImportTypespec:
@@ -19679,13 +21004,29 @@ design: (unnamed)
   |vpiImportTypespec:
   \_int_typespec: , line:632:13, endln:632:16
   |vpiImportTypespec:
+  \_packed_array_typespec: , line:634:11, endln:634:35
+  |vpiImportTypespec:
   \_logic_typespec: (sram_key_t), line:634:11, endln:634:35
+  |vpiImportTypespec:
+  \_typedef_typespec: (sram_key_t), line:634:38, endln:634:48
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:635:11, endln:635:37
   |vpiImportTypespec:
   \_logic_typespec: (sram_nonce_t), line:635:11, endln:635:37
   |vpiImportTypespec:
+  \_typedef_typespec: (sram_nonce_t), line:635:38, endln:635:50
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:636:11, endln:636:35
+  |vpiImportTypespec:
   \_logic_typespec: (otbn_key_t), line:636:11, endln:636:35
   |vpiImportTypespec:
+  \_typedef_typespec: (otbn_key_t), line:636:38, endln:636:48
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:637:11, endln:637:37
+  |vpiImportTypespec:
   \_logic_typespec: (otbn_nonce_t), line:637:11, endln:637:37
+  |vpiImportTypespec:
+  \_typedef_typespec: (otbn_nonce_t), line:637:38, endln:637:50
   |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_pkg::otp_keymgr_key_t), line:639:11, endln:643:4
   |vpiImportTypespec:
@@ -19694,6 +21035,8 @@ design: (unnamed)
   \_logic_typespec: , line:641:5, endln:641:31
   |vpiImportTypespec:
   \_logic_typespec: , line:642:5, endln:642:31
+  |vpiImportTypespec:
+  \_typedef_typespec: (otp_keymgr_key_t), line:643:5, endln:643:21
   |vpiImportTypespec:
   \_string_typespec: (valid), line:646:5, endln:646:10
   |vpiImportTypespec:
@@ -19719,13 +21062,19 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:653:5, endln:653:10
   |vpiImportTypespec:
+  \_typedef_typespec: (flash_otp_key_req_t), line:654:5, endln:654:24
+  |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_pkg::sram_otp_key_req_t), line:656:11, endln:658:4
   |vpiImportTypespec:
   \_logic_typespec: , line:657:5, endln:657:10
   |vpiImportTypespec:
+  \_typedef_typespec: (sram_otp_key_req_t), line:658:5, endln:658:23
+  |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_pkg::otbn_otp_key_req_t), line:660:11, endln:662:4
   |vpiImportTypespec:
   \_logic_typespec: , line:661:5, endln:661:10
+  |vpiImportTypespec:
+  \_typedef_typespec: (otbn_otp_key_req_t), line:662:5, endln:662:23
   |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_pkg::flash_otp_key_rsp_t), line:664:11, endln:669:4
   |vpiImportTypespec:
@@ -19736,6 +21085,8 @@ design: (unnamed)
   \_logic_typespec: , line:667:5, endln:667:30
   |vpiImportTypespec:
   \_logic_typespec: , line:668:5, endln:668:10
+  |vpiImportTypespec:
+  \_typedef_typespec: (flash_otp_key_rsp_t), line:669:5, endln:669:24
   |vpiImportTypespec:
   \_string_typespec: (data_ack), line:673:5, endln:673:13
   |vpiImportTypespec:
@@ -19767,43 +21118,77 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:683:5, endln:683:10
   |vpiImportTypespec:
+  \_typedef_typespec: (sram_otp_key_rsp_t), line:684:5, endln:684:23
+  |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_pkg::otbn_otp_key_rsp_t), line:686:11, endln:691:4
   |vpiImportTypespec:
   \_logic_typespec: , line:687:5, endln:687:10
   |vpiImportTypespec:
   \_logic_typespec: , line:690:5, endln:690:10
   |vpiImportTypespec:
+  \_typedef_typespec: (otbn_otp_key_rsp_t), line:691:5, endln:691:23
+  |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_pkg::pwr_otp_init_req_t), line:697:11, endln:699:4
   |vpiImportTypespec:
   \_logic_typespec: , line:698:5, endln:698:10
+  |vpiImportTypespec:
+  \_typedef_typespec: (pwr_otp_init_req_t), line:699:5, endln:699:23
   |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_pkg::pwr_otp_init_rsp_t), line:701:11, endln:703:4
   |vpiImportTypespec:
   \_logic_typespec: , line:702:5, endln:702:10
   |vpiImportTypespec:
+  \_typedef_typespec: (pwr_otp_init_rsp_t), line:703:5, endln:703:23
+  |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_pkg::otp_pwr_state_t), line:705:11, endln:707:4
   |vpiImportTypespec:
   \_logic_typespec: , line:706:5, endln:706:10
+  |vpiImportTypespec:
+  \_typedef_typespec: (otp_pwr_state_t), line:707:5, endln:707:20
   |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_pkg::otp_ast_req_t), line:714:11, endln:716:4
   |vpiImportTypespec:
   \_logic_typespec: , line:715:5, endln:715:31
   |vpiImportTypespec:
+  \_typedef_typespec: (otp_ast_req_t), line:716:5, endln:716:18
+  |vpiImportTypespec:
   \_struct_typespec: (otp_ctrl_pkg::otp_ast_rsp_t), line:718:11, endln:720:4
   |vpiImportTypespec:
   \_logic_typespec: , line:719:5, endln:719:31
   |vpiImportTypespec:
+  \_typedef_typespec: (otp_ast_rsp_t), line:720:5, endln:720:18
+  |vpiImportTypespec:
   \_int_typespec: , line:728:14, endln:728:17
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:729:11, endln:729:32
   |vpiImportTypespec:
   \_logic_typespec: (lfsr_seed_t), line:729:11, endln:729:32
   |vpiImportTypespec:
+  \_typedef_typespec: (lfsr_seed_t), line:729:56, endln:729:67
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:730:11, endln:730:55
+  |vpiImportTypespec:
   \_logic_typespec: (lfsr_perm_t), line:730:11, endln:730:55
+  |vpiImportTypespec:
+  \_typedef_typespec: (lfsr_perm_t), line:730:56, endln:730:67
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:736:11, endln:736:56
   |vpiImportTypespec:
   \_logic_typespec: (key_array_t), line:736:11, endln:736:56
   |vpiImportTypespec:
+  \_typedef_typespec: (key_array_t), line:736:57, endln:736:68
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:745:11, endln:745:56
+  |vpiImportTypespec:
   \_logic_typespec: (digest_const_array_t), line:745:11, endln:745:56
   |vpiImportTypespec:
+  \_typedef_typespec: (digest_const_array_t), line:745:57, endln:745:77
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:754:11, endln:754:58
+  |vpiImportTypespec:
   \_logic_typespec: (digest_iv_array_t), line:754:11, endln:754:58
+  |vpiImportTypespec:
+  \_typedef_typespec: (digest_iv_array_t), line:754:59, endln:754:76
   |vpiImportTypespec:
   \_unsupported_typespec: (lc_ctrl_pkg::lc_token_t), line:763:13, endln:763:26
   |vpiDefName:otp_ctrl_pkg
@@ -22605,8 +23990,10 @@ design: (unnamed)
 [LINT]: ${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv:524:33: Undefined user function, vbits
 [LINT]: ${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv:524:33: Undefined user function, vbits
 [LINT]: ${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv:524:33: Undefined user function, vbits
+[LINT]: ${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv:524:33: Undefined user function, vbits
+[LINT]: ${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv:524:33: Undefined user function, vbits
+[LINT]: ${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv:524:33: Undefined user function, vbits
+[LINT]: ${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv:524:33: Undefined user function, vbits
+[LINT]: ${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv:524:33: Undefined user function, vbits
+[LINT]: ${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv:524:33: Undefined user function, vbits
 ============================== End Linting Results ==============================
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/BlackParrotMuteErrors/dut.sv | ${SURELOG_DIR}/build/regression/BlackParrotMuteErrors/roundtrip/dut_000.sv | 231 | 893 |
-============================== End RoundTrip Results ==============================

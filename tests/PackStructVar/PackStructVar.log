@@ -21,11 +21,12 @@ param_assign                                          11
 parameter                                             11
 range                                                  8
 ref_obj                                               11
-ref_typespec                                          35
+ref_typespec                                          37
 source_file                                            1
 struct_typespec                                        1
 struct_var                                             1
 sys_func_call                                          6
+typedef_typespec                                       2
 typespec_member                                       10
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackStructVar/slpp_all/surelog.uhdm ...
@@ -545,6 +546,18 @@ design: (unnamed)
       |vpiDecompile:3'h1
       |vpiSize:3
   |vpiTypedef:
+  \_typedef_typespec: (tl_d_op_e), line:21:4, endln:21:13
+    |vpiParent:
+    \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:16:1, endln:38:13
+    |vpiName:tl_d_op_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (tlul_pkg::tl_d_op_e), line:18:10, endln:21:3
+      |vpiParent:
+      \_typedef_typespec: (tl_d_op_e), line:21:4, endln:21:13
+      |vpiFullName:tlul_pkg::tl_d_op_e
+      |vpiActual:
+      \_enum_typespec: (tlul_pkg::tl_d_op_e), line:18:10, endln:21:14
+  |vpiTypedef:
   \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:36:3
     |vpiParent:
     \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:16:1, endln:38:13
@@ -892,10 +905,24 @@ design: (unnamed)
   \_logic_typespec: , line:35:4, endln:35:9
     |vpiParent:
     \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:16:1, endln:38:13
+  |vpiTypedef:
+  \_typedef_typespec: (tl_h2d_t), line:36:4, endln:36:12
+    |vpiParent:
+    \_package: tlul_pkg (tlul_pkg::), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:16:1, endln:38:13
+    |vpiName:tl_h2d_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:36:3
+      |vpiParent:
+      \_typedef_typespec: (tl_h2d_t), line:36:4, endln:36:12
+      |vpiFullName:tlul_pkg::tl_h2d_t
+      |vpiActual:
+      \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:36:3
   |vpiImportTypespec:
   \_logic_typespec: , line:18:15, endln:18:26
   |vpiImportTypespec:
   \_enum_typespec: (tlul_pkg::tl_d_op_e), line:18:10, endln:21:14
+  |vpiImportTypespec:
+  \_typedef_typespec: (tl_d_op_e), line:21:4, endln:21:13
   |vpiImportTypespec:
   \_struct_typespec: (tlul_pkg::tl_h2d_t), line:24:10, endln:36:3
   |vpiImportTypespec:
@@ -916,6 +943,8 @@ design: (unnamed)
   \_logic_typespec: , line:33:4, endln:33:9
   |vpiImportTypespec:
   \_logic_typespec: , line:35:4, endln:35:9
+  |vpiImportTypespec:
+  \_typedef_typespec: (tl_h2d_t), line:36:4, endln:36:12
   |vpiDefName:tlul_pkg
 |uhdmallModules:
 \_module_inst: work@flash_ctrl (work@flash_ctrl), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:41:1, endln:47:10
@@ -923,13 +952,13 @@ design: (unnamed)
   \_design: (unnamed)
   |vpiName:work@flash_ctrl
   |vpiVariables:
-  \_struct_var: (work@flash_ctrl), line:44:2, endln:44:37
+  \_struct_var: (work@flash_ctrl), line:44:21, endln:44:32
     |vpiParent:
     \_module_inst: work@flash_ctrl (work@flash_ctrl), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:41:1, endln:47:10
     |vpiTypespec:
     \_ref_typespec: (work@flash_ctrl.tlul_pkg::tl_h2d_t), line:44:2, endln:44:20
       |vpiParent:
-      \_struct_var: (work@flash_ctrl), line:44:2, endln:44:37
+      \_struct_var: (work@flash_ctrl), line:44:21, endln:44:32
       |vpiName:tlul_pkg::tl_h2d_t
       |vpiFullName:work@flash_ctrl.tlul_pkg::tl_h2d_t
       |vpiActual:
@@ -970,7 +999,7 @@ design: (unnamed)
           |UINT:2
           |vpiConstType:9
     |vpiReg:
-    \_struct_var: (work@flash_ctrl), line:44:2, endln:44:37
+    \_struct_var: (work@flash_ctrl), line:44:21, endln:44:32
   |vpiRegArray:
   \_array_var: (work@flash_ctrl.tl_fifo_h2d), line:44:21, endln:44:37
   |vpiTypedef:
@@ -978,7 +1007,7 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@flash_ctrl (work@flash_ctrl), file:${SURELOG_DIR}/tests/PackStructVar/dut.sv, line:41:1, endln:47:10
   |vpiImportTypespec:
-  \_struct_var: (work@flash_ctrl), line:44:2, endln:44:37
+  \_struct_var: (work@flash_ctrl), line:44:21, endln:44:32
   |vpiImportTypespec:
   \_array_var: (work@flash_ctrl.tl_fifo_h2d), line:44:21, endln:44:37
   |vpiImportTypespec:
@@ -990,7 +1019,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 3
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PackStructVar/dut.sv | ${SURELOG_DIR}/build/regression/PackStructVar/roundtrip/dut_000.sv | 21 | 47 |
-============================== End RoundTrip Results ==============================

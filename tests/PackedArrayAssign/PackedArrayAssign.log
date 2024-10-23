@@ -134,9 +134,10 @@ packed_array_var                                       1
 port                                                   1
 range                                                  6
 ref_obj                                                1
-ref_typespec                                           5
+ref_typespec                                           6
 source_file                                            1
 struct_typespec                                        1
+typedef_typespec                                       1
 typespec_member                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedArrayAssign/slpp_all/surelog.uhdm ...
@@ -232,6 +233,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (filter_ctl_t), line:4:6, endln:4:18
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayAssign/dut.sv, line:1:1, endln:8:10
+    |vpiName:filter_ctl_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top.filter_ctl_t), line:2:12, endln:4:5
+      |vpiParent:
+      \_typedef_typespec: (filter_ctl_t), line:4:6, endln:4:18
+      |vpiFullName:work@top.filter_ctl_t
+      |vpiActual:
+      \_struct_typespec: (filter_ctl_t), line:2:12, endln:4:5
+  |vpiTypedef:
   \_logic_typespec: , line:1:19, endln:1:30
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayAssign/dut.sv, line:1:1, endln:8:10
@@ -286,7 +299,7 @@ design: (unnamed)
       |vpiName:filter_ctl_t
       |vpiFullName:work@top.filter_ctl_t
       |vpiActual:
-      \_struct_typespec: (filter_ctl_t), line:2:12, endln:4:5
+      \_typedef_typespec: (filter_ctl_t), line:4:6, endln:4:18
   |vpiTypedef:
   \_logic_typespec: , line:1:19, endln:1:30
     |vpiParent:
@@ -315,6 +328,8 @@ design: (unnamed)
   \_struct_typespec: (filter_ctl_t), line:2:12, endln:4:5
   |vpiImportTypespec:
   \_logic_typespec: , line:3:7, endln:3:18
+  |vpiImportTypespec:
+  \_typedef_typespec: (filter_ctl_t), line:4:6, endln:4:18
   |vpiImportTypespec:
   \_logic_typespec: , line:1:19, endln:1:30
   |vpiImportTypespec:
@@ -388,7 +403,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PackedArrayAssign/dut.sv | ${SURELOG_DIR}/build/regression/PackedArrayAssign/roundtrip/dut_000.sv | 5 | 8 |
-============================== End RoundTrip Results ==============================

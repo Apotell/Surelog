@@ -584,13 +584,14 @@ operation                                              2
 package                                                2
 range                                                  1
 ref_obj                                               13
-ref_typespec                                          23
+ref_typespec                                          24
 ref_var                                                3
 return_stmt                                            2
 source_file                                            1
 string_typespec                                        2
 string_var                                             1
 task                                                   9
+typedef_typespec                                       1
 unsupported_typespec                                   6
 === UHDM Object Stats End ===
 [ERR:UH0734] ${SURELOG_DIR}/tests/UnitThisNew/dut.sv:9:7: Failed to bind object: "id: 34, name: tmp".
@@ -617,6 +618,7 @@ unsupported_typespec                                   6
 [ERR:EL0535] ${SURELOG_DIR}/tests/UnitThisNew/dut.sv:33:11: Illegal implicit net "id:75, name: this".
 [ERR:UH0734] ${SURELOG_DIR}/tests/UnitThisNew/dut.sv:33:16: Failed to bind object: "id: 76, name: stream_handle".
 [ERR:EL0535] ${SURELOG_DIR}/tests/UnitThisNew/dut.sv:33:16: Illegal implicit net "id:76, name: stream_handle".
+[INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnitThisNew/slpp_all/surelog.uhdm ...
 [ERR:IG0809] ${SURELOG_DIR}/tests/UnitThisNew/dut.sv:9:7: Object 34 actual cannot be null.
 [ERR:IG0809] ${SURELOG_DIR}/tests/UnitThisNew/dut.sv:11:16: Object 40 actual cannot be null.
 [ERR:IG0809] ${SURELOG_DIR}/tests/UnitThisNew/dut.sv:11:7: Object 39 actual cannot be null.
@@ -629,7 +631,6 @@ unsupported_typespec                                   6
 [ERR:IG0809] ${SURELOG_DIR}/tests/UnitThisNew/dut.sv:27:27: Object 67 actual cannot be null.
 [ERR:IG0809] ${SURELOG_DIR}/tests/UnitThisNew/dut.sv:33:11: Object 75 actual cannot be null.
 [ERR:IG0809] ${SURELOG_DIR}/tests/UnitThisNew/dut.sv:33:16: Object 76 actual cannot be null.
-[INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnitThisNew/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/UnitThisNew/slpp_all/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -1026,8 +1027,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/UnitThisNew/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1841,7 +1856,3 @@ design: (unnamed)
 [LINT]: ${SURELOG_DIR}/tests/UnitThisNew/dut.sv:19:15: Non synthesizable construct, new
 [LINT]: ${SURELOG_DIR}/tests/UnitThisNew/dut.sv:39:10: Non synthesizable construct, kill_update_thread
 ============================== End Linting Results ==============================
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/UnitThisNew/dut.sv | ${SURELOG_DIR}/build/regression/UnitThisNew/roundtrip/dut_000.sv | 18 | 44 |
-============================== End RoundTrip Results ==============================

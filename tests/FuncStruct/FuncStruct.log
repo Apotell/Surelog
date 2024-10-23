@@ -247,20 +247,21 @@ function                                               1
 import_typespec                                        1
 io_decl                                                2
 logic_typespec                                         3
-logic_var                                              4
+logic_var                                              2
 module_inst                                            1
 package                                                1
 packed_array_typespec                                  1
-packed_array_var                                       1
 range                                                  9
 ref_obj                                                4
-ref_typespec                                           8
+ref_typespec                                           9
+ref_var                                                2
 source_file                                            1
+typedef_typespec                                       1
 unsupported_typespec                                   2
 === UHDM Object Stats End ===
-[ERR:IG0807] ${SURELOG_DIR}/tests/FuncStruct/dut.sv:14:12: Child 63 is not entirely in parent's scope.
-[ERR:IG0807] ${SURELOG_DIR}/tests/FuncStruct/dut.sv:15:12: Child 72 is not entirely in parent's scope.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FuncStruct/slpp_all/surelog.uhdm ...
+[ERR:IG0807] ${SURELOG_DIR}/tests/FuncStruct/dut.sv:14:12: Child 64 is not entirely in parent's scope.
+[ERR:IG0807] ${SURELOG_DIR}/tests/FuncStruct/dut.sv:15:12: Child 73 is not entirely in parent's scope.
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/FuncStruct/slpp_all/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -283,60 +284,31 @@ design: (unnamed)
     |vpiName:compress
     |vpiFullName:hmac_pkg::compress
     |vpiVariables:
-    \_logic_var: (hmac_pkg::compress), line:3:20, endln:3:30
-      |vpiParent:
-      \_function: (hmac_pkg::compress), line:3:1, endln:8:12
-      |vpiFullName:hmac_pkg::compress
-    |vpiVariables:
-    \_packed_array_var: (hmac_pkg::compress), line:3:20, endln:3:36
+    \_ref_var: (hmac_pkg::compress), line:3:20, endln:3:36
       |vpiParent:
       \_function: (hmac_pkg::compress), line:3:1, endln:8:12
       |vpiTypespec:
       \_ref_typespec: (hmac_pkg::compress::sha_word_t), line:3:20, endln:3:36
         |vpiParent:
-        \_packed_array_var: (hmac_pkg::compress), line:3:20, endln:3:36
+        \_ref_var: (hmac_pkg::compress), line:3:20, endln:3:36
         |vpiName:sha_word_t
         |vpiFullName:hmac_pkg::compress::sha_word_t
         |vpiActual:
         \_logic_typespec: , line:3:20, endln:3:36
       |vpiFullName:hmac_pkg::compress
-      |vpiRange:
-      \_range: , line:3:31, endln:3:36
-        |vpiParent:
-        \_function: (hmac_pkg::compress), line:3:1, endln:8:12
-        |vpiLeftRange:
-        \_constant: , line:3:32, endln:3:33
-          |vpiParent:
-          \_range: , line:3:31, endln:3:36
-          |vpiDecompile:7
-          |vpiSize:64
-          |UINT:7
-          |vpiConstType:9
-        |vpiRightRange:
-        \_constant: , line:3:34, endln:3:35
-          |vpiParent:
-          \_range: , line:3:31, endln:3:36
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiConstType:9
-      |vpiElement:
-      \_logic_var: (hmac_pkg::compress), line:3:20, endln:3:30
-    |vpiReg:
-    \_logic_var: (hmac_pkg::compress), line:3:20, endln:3:30
     |vpiInternalScope:
     \_begin: (hmac_pkg::compress)
       |vpiParent:
       \_function: (hmac_pkg::compress), line:3:1, endln:8:12
       |vpiFullName:hmac_pkg::compress
       |vpiVariables:
-      \_logic_var: (hmac_pkg::compress::sigma_0), line:4:13, endln:4:23
+      \_ref_var: (hmac_pkg::compress::sigma_0), line:4:13, endln:4:23
         |vpiParent:
         \_begin: (hmac_pkg::compress)
         |vpiTypespec:
         \_ref_typespec: (hmac_pkg::compress::sigma_0::sha_word_t), line:4:13, endln:4:23
           |vpiParent:
-          \_logic_var: (hmac_pkg::compress::sigma_0), line:4:13, endln:4:23
+          \_ref_var: (hmac_pkg::compress::sigma_0), line:4:13, endln:4:23
           |vpiName:sha_word_t
           |vpiFullName:hmac_pkg::compress::sigma_0::sha_word_t
           |vpiActual:
@@ -344,10 +316,8 @@ design: (unnamed)
         |vpiName:sigma_0
         |vpiFullName:hmac_pkg::compress::sigma_0
         |vpiAutomatic:1
-      |vpiReg:
-      \_logic_var: (hmac_pkg::compress::sigma_0), line:4:13, endln:4:23
       |vpiImportTypespec:
-      \_logic_var: (hmac_pkg::compress::sigma_0), line:4:13, endln:4:23
+      \_ref_var: (hmac_pkg::compress::sigma_0), line:4:13, endln:4:23
       |vpiStmt:
       \_assignment: , line:6:3, endln:6:25
         |vpiParent:
@@ -369,7 +339,7 @@ design: (unnamed)
           |vpiName:sigma_0
           |vpiFullName:hmac_pkg::compress::sigma_0
           |vpiActual:
-          \_logic_var: (hmac_pkg::compress::sigma_0), line:4:13, endln:4:23
+          \_ref_var: (hmac_pkg::compress::sigma_0), line:4:13, endln:4:23
       |vpiStmt:
       \_assignment: , line:7:3, endln:7:26
         |vpiParent:
@@ -383,7 +353,7 @@ design: (unnamed)
           |vpiName:sigma_0
           |vpiFullName:hmac_pkg::compress::sigma_0
           |vpiActual:
-          \_logic_var: (hmac_pkg::compress::sigma_0), line:4:13, endln:4:23
+          \_ref_var: (hmac_pkg::compress::sigma_0), line:4:13, endln:4:23
         |vpiLhs:
         \_bit_select: (hmac_pkg::compress::compress), line:7:11, endln:7:14
           |vpiParent:
@@ -391,7 +361,7 @@ design: (unnamed)
           |vpiName:compress
           |vpiFullName:hmac_pkg::compress::compress
           |vpiActual:
-          \_packed_array_var: (hmac_pkg::compress), line:3:20, endln:3:36
+          \_ref_var: (hmac_pkg::compress), line:3:20, endln:3:36
           |vpiIndex:
           \_constant: , line:7:12, endln:7:13
             |vpiParent:
@@ -411,7 +381,7 @@ design: (unnamed)
         |vpiName:sha_word_t
         |vpiFullName:hmac_pkg::compress::sha_word_t
         |vpiActual:
-        \_logic_typespec: (sha_word_t), line:2:9, endln:2:21
+        \_typedef_typespec: (sha_word_t), line:2:22, endln:2:32
       |vpiRange:
       \_range: , line:3:31, endln:3:36
         |vpiParent:
@@ -443,7 +413,7 @@ design: (unnamed)
         |vpiName:sha_word_t
         |vpiFullName:hmac_pkg::compress::sha_word_t
         |vpiActual:
-        \_logic_typespec: (sha_word_t), line:2:9, endln:2:21
+        \_typedef_typespec: (sha_word_t), line:2:22, endln:2:32
       |vpiRange:
       \_range: , line:3:84, endln:3:89
         |vpiParent:
@@ -467,15 +437,13 @@ design: (unnamed)
     |vpiImportTypespec:
     \_logic_typespec: , line:3:20, endln:3:36
     |vpiImportTypespec:
-    \_logic_var: (hmac_pkg::compress), line:3:20, endln:3:30
-    |vpiImportTypespec:
-    \_packed_array_var: (hmac_pkg::compress), line:3:20, endln:3:36
+    \_ref_var: (hmac_pkg::compress), line:3:20, endln:3:36
     |vpiImportTypespec:
     \_logic_typespec: , line:3:73, endln:3:89
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
-    \_packed_array_var: (hmac_pkg::compress), line:3:20, endln:3:36
+    \_ref_var: (hmac_pkg::compress), line:3:20, endln:3:36
     |vpiIODecl:
     \_io_decl: (w), line:3:47, endln:3:65
       |vpiParent:
@@ -517,6 +485,30 @@ design: (unnamed)
     |vpiInstance:
     \_package: hmac_pkg (hmac_pkg::), file:${SURELOG_DIR}/tests/FuncStruct/dut.sv, line:1:1, endln:9:11
   |vpiTypedef:
+  \_packed_array_typespec: , line:2:9, endln:2:21
+    |vpiParent:
+    \_package: hmac_pkg (hmac_pkg::), file:${SURELOG_DIR}/tests/FuncStruct/dut.sv, line:1:1, endln:9:11
+    |vpiRange:
+    \_range: , line:2:15, endln:2:21
+      |vpiParent:
+      \_packed_array_typespec: , line:2:9, endln:2:21
+      |vpiLeftRange:
+      \_constant: , line:2:16, endln:2:18
+        |vpiParent:
+        \_range: , line:2:15, endln:2:21
+        |vpiDecompile:31
+        |vpiSize:64
+        |UINT:31
+        |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:2:19, endln:2:20
+        |vpiParent:
+        \_range: , line:2:15, endln:2:21
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
   \_logic_typespec: (sha_word_t), line:2:9, endln:2:21
     |vpiParent:
     \_package: hmac_pkg (hmac_pkg::), file:${SURELOG_DIR}/tests/FuncStruct/dut.sv, line:1:1, endln:9:11
@@ -541,10 +533,26 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (sha_word_t), line:2:22, endln:2:32
+    |vpiParent:
+    \_package: hmac_pkg (hmac_pkg::), file:${SURELOG_DIR}/tests/FuncStruct/dut.sv, line:1:1, endln:9:11
+    |vpiName:sha_word_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (hmac_pkg::sha_word_t), line:2:9, endln:2:14
+      |vpiParent:
+      \_typedef_typespec: (sha_word_t), line:2:22, endln:2:32
+      |vpiFullName:hmac_pkg::sha_word_t
+      |vpiActual:
+      \_logic_typespec: (sha_word_t), line:2:9, endln:2:21
   |vpiImportTypespec:
   \_function: (hmac_pkg::compress), line:3:1, endln:8:12
   |vpiImportTypespec:
+  \_packed_array_typespec: , line:2:9, endln:2:21
+  |vpiImportTypespec:
   \_logic_typespec: (sha_word_t), line:2:9, endln:2:21
+  |vpiImportTypespec:
+  \_typedef_typespec: (sha_word_t), line:2:22, endln:2:32
   |vpiDefName:hmac_pkg
   |vpiTaskFunc:
   \_function: (hmac_pkg::compress), line:3:1, endln:8:12
@@ -711,7 +719,3 @@ design: (unnamed)
 [  ERROR] : 2
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/FuncStruct/dut.sv | ${SURELOG_DIR}/build/regression/FuncStruct/roundtrip/dut_000.sv | 11 | 19 |
-============================== End RoundTrip Results ==============================

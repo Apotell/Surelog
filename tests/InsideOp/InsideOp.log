@@ -306,8 +306,9 @@ parameter                                              1
 port                                                   1
 ref_module                                             1
 ref_obj                                               16
-ref_typespec                                           4
+ref_typespec                                           5
 source_file                                            1
+typedef_typespec                                       1
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InsideOp/slpp_all/surelog.uhdm ...
@@ -391,10 +392,24 @@ design: (unnamed)
       |UINT:100
       |vpiDecompile:100
       |vpiSize:64
+  |vpiTypedef:
+  \_typedef_typespec: (get_e), line:10:5, endln:10:10
+    |vpiParent:
+    \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:1:1, endln:12:11
+    |vpiName:get_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (my_pkg::get_e), line:3:11, endln:10:4
+      |vpiParent:
+      \_typedef_typespec: (get_e), line:10:5, endln:10:10
+      |vpiFullName:my_pkg::get_e
+      |vpiActual:
+      \_enum_typespec: (my_pkg::get_e), line:3:11, endln:10:11
   |vpiImportTypespec:
   \_int_typespec: , line:3:16, endln:3:19
   |vpiImportTypespec:
   \_enum_typespec: (my_pkg::get_e), line:3:11, endln:10:11
+  |vpiImportTypespec:
+  \_typedef_typespec: (get_e), line:10:5, endln:10:10
   |vpiDefName:my_pkg
 |uhdmallModules:
 \_module_inst: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:14:1, endln:15:10
@@ -777,7 +792,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 0
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/InsideOp/dut.sv | ${SURELOG_DIR}/build/regression/InsideOp/roundtrip/dut_000.sv | 18 | 38 |
-============================== End RoundTrip Results ==============================

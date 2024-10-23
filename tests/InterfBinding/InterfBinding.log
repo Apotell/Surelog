@@ -139,9 +139,10 @@ module_inst                                            1
 package                                                1
 port                                                   3
 ref_obj                                                5
-ref_typespec                                           9
+ref_typespec                                          10
 source_file                                            1
 struct_typespec                                        1
+typedef_typespec                                       1
 typespec_member                                        2
 unsupported_typespec                                   2
 === UHDM Object Stats End ===
@@ -199,12 +200,26 @@ design: (unnamed)
   \_logic_typespec: , line:5:5, endln:5:10
     |vpiParent:
     \_package: pack (pack::), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:1:1, endln:8:11
+  |vpiTypedef:
+  \_typedef_typespec: (PipelineControll), line:6:3, endln:6:19
+    |vpiParent:
+    \_package: pack (pack::), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:1:1, endln:8:11
+    |vpiName:PipelineControll
+    |vpiTypedefAlias:
+    \_ref_typespec: (pack::PipelineControll), line:2:9, endln:6:2
+      |vpiParent:
+      \_typedef_typespec: (PipelineControll), line:6:3, endln:6:19
+      |vpiFullName:pack::PipelineControll
+      |vpiActual:
+      \_struct_typespec: (pack::PipelineControll), line:2:9, endln:6:2
   |vpiImportTypespec:
   \_struct_typespec: (pack::PipelineControll), line:2:9, endln:6:2
   |vpiImportTypespec:
   \_logic_typespec: , line:4:5, endln:4:10
   |vpiImportTypespec:
   \_logic_typespec: , line:5:5, endln:5:10
+  |vpiImportTypespec:
+  \_typedef_typespec: (PipelineControll), line:6:3, endln:6:19
   |vpiDefName:pack
 |uhdmallInterfaces:
 \_interface_inst: work@ControllerIF (work@ControllerIF), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:12:1, endln:25:13
@@ -479,7 +494,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 3
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/InterfBinding/dut.sv | ${SURELOG_DIR}/build/regression/InterfBinding/roundtrip/dut_000.sv | 17 | 36 |
-============================== End RoundTrip Results ==============================

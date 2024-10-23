@@ -127,13 +127,14 @@ packed_array_var                                       1
 port                                                   1
 range                                                  5
 ref_obj                                                1
-ref_typespec                                           5
+ref_typespec                                           6
 source_file                                            1
 struct_typespec                                        1
+typedef_typespec                                       1
 typespec_member                                        1
 === UHDM Object Stats End ===
-[ERR:IG0809] ${SURELOG_DIR}/tests/BitSelectSelect/dut.sv:8:13: Object 15 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BitSelectSelect/slpp_all/surelog.uhdm ...
+[ERR:IG0809] ${SURELOG_DIR}/tests/BitSelectSelect/dut.sv:8:13: Object 17 actual cannot be null.
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/BitSelectSelect/slpp_all/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -220,6 +221,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (filter_ctl_t), line:5:6, endln:5:18
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectSelect/dut.sv, line:2:1, endln:9:10
+    |vpiName:filter_ctl_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top.filter_ctl_t), line:3:12, endln:5:5
+      |vpiParent:
+      \_typedef_typespec: (filter_ctl_t), line:5:6, endln:5:18
+      |vpiFullName:work@top.filter_ctl_t
+      |vpiActual:
+      \_struct_typespec: (filter_ctl_t), line:3:12, endln:5:5
+  |vpiTypedef:
   \_int_typespec: , line:2:19, endln:2:22
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectSelect/dut.sv, line:2:1, endln:9:10
@@ -275,7 +288,7 @@ design: (unnamed)
       |vpiName:filter_ctl_t
       |vpiFullName:work@top.filter_ctl_t
       |vpiActual:
-      \_struct_typespec: (filter_ctl_t), line:3:12, endln:5:5
+      \_typedef_typespec: (filter_ctl_t), line:5:6, endln:5:18
   |vpiTypedef:
   \_int_typespec: , line:2:19, endln:2:22
     |vpiParent:
@@ -285,6 +298,8 @@ design: (unnamed)
   \_struct_typespec: (filter_ctl_t), line:3:12, endln:5:5
   |vpiImportTypespec:
   \_logic_typespec: , line:4:7, endln:4:18
+  |vpiImportTypespec:
+  \_typedef_typespec: (filter_ctl_t), line:5:6, endln:5:18
   |vpiImportTypespec:
   \_int_typespec: , line:2:19, endln:2:22
   |vpiImportTypespec:
@@ -369,7 +384,3 @@ design: (unnamed)
 [  ERROR] : 1
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/BitSelectSelect/dut.sv | ${SURELOG_DIR}/build/regression/BitSelectSelect/roundtrip/dut_000.sv | 5 | 9 |
-============================== End RoundTrip Results ==============================

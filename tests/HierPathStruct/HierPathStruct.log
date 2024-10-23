@@ -123,9 +123,10 @@ module_inst                                            1
 package                                                1
 range                                                  1
 ref_obj                                                3
-ref_typespec                                           4
+ref_typespec                                           6
 source_file                                            1
 struct_typespec                                        2
+typedef_typespec                                       2
 typespec_member                                        3
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
@@ -204,6 +205,18 @@ design: (unnamed)
     |vpiParent:
     \_package: gpio_reg_pkg (gpio_reg_pkg::), file:${SURELOG_DIR}/tests/HierPathStruct/dut.sv, line:1:1, endln:11:11
   |vpiTypedef:
+  \_typedef_typespec: (gpio_hw2reg_tt), line:5:5, endln:5:19
+    |vpiParent:
+    \_package: gpio_reg_pkg (gpio_reg_pkg::), file:${SURELOG_DIR}/tests/HierPathStruct/dut.sv, line:1:1, endln:11:11
+    |vpiName:gpio_hw2reg_tt
+    |vpiTypedefAlias:
+    \_ref_typespec: (gpio_reg_pkg::gpio_hw2reg_tt), line:2:11, endln:5:4
+      |vpiParent:
+      \_typedef_typespec: (gpio_hw2reg_tt), line:5:5, endln:5:19
+      |vpiFullName:gpio_reg_pkg::gpio_hw2reg_tt
+      |vpiActual:
+      \_struct_typespec: (gpio_reg_pkg::gpio_hw2reg_tt), line:2:11, endln:5:4
+  |vpiTypedef:
   \_struct_typespec: (gpio_reg_pkg::gpio_hw2reg_t), line:7:11, endln:9:4
     |vpiParent:
     \_package: gpio_reg_pkg (gpio_reg_pkg::), file:${SURELOG_DIR}/tests/HierPathStruct/dut.sv, line:1:1, endln:11:11
@@ -222,6 +235,18 @@ design: (unnamed)
         |vpiFullName:gpio_reg_pkg::gpio_hw2reg_t::data_in::gpio_hw2reg_tt
         |vpiActual:
         \_struct_typespec: (gpio_reg_pkg::gpio_hw2reg_tt), line:2:11, endln:5:4
+  |vpiTypedef:
+  \_typedef_typespec: (gpio_hw2reg_t), line:9:5, endln:9:18
+    |vpiParent:
+    \_package: gpio_reg_pkg (gpio_reg_pkg::), file:${SURELOG_DIR}/tests/HierPathStruct/dut.sv, line:1:1, endln:11:11
+    |vpiName:gpio_hw2reg_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (gpio_reg_pkg::gpio_hw2reg_t), line:7:11, endln:9:4
+      |vpiParent:
+      \_typedef_typespec: (gpio_hw2reg_t), line:9:5, endln:9:18
+      |vpiFullName:gpio_reg_pkg::gpio_hw2reg_t
+      |vpiActual:
+      \_struct_typespec: (gpio_reg_pkg::gpio_hw2reg_t), line:7:11, endln:9:4
   |vpiImportTypespec:
   \_struct_typespec: (gpio_reg_pkg::gpio_hw2reg_tt), line:2:11, endln:5:4
   |vpiImportTypespec:
@@ -229,7 +254,11 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:4:5, endln:4:10
   |vpiImportTypespec:
+  \_typedef_typespec: (gpio_hw2reg_tt), line:5:5, endln:5:19
+  |vpiImportTypespec:
   \_struct_typespec: (gpio_reg_pkg::gpio_hw2reg_t), line:7:11, endln:9:4
+  |vpiImportTypespec:
+  \_typedef_typespec: (gpio_hw2reg_t), line:9:5, endln:9:18
   |vpiDefName:gpio_reg_pkg
 |uhdmallModules:
 \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/HierPathStruct/dut.sv, line:13:1, endln:19:10
@@ -308,7 +337,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/HierPathStruct/dut.sv | ${SURELOG_DIR}/build/regression/HierPathStruct/roundtrip/dut_000.sv | 4 | 19 |
-============================== End RoundTrip Results ==============================

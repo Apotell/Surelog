@@ -106,8 +106,9 @@ operation                                              3
 range                                                  1
 ref_module                                             1
 ref_obj                                                1
-ref_typespec                                           1
+ref_typespec                                           2
 source_file                                            1
+typedef_typespec                                       1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EnumConcat/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/EnumConcat/slpp_all/checker/surelog.chk.html ...
@@ -174,10 +175,24 @@ design: (unnamed)
       |BIN:100011
       |vpiDecompile:{1'b1,5'd03}
       |vpiSize:6
+  |vpiTypedef:
+  \_typedef_typespec: (exc_cause_e), line:9:3, endln:9:14
+    |vpiParent:
+    \_module_inst: work@dut (work@dut), file:${SURELOG_DIR}/tests/EnumConcat/dut.sv, line:6:1, endln:15:10
+    |vpiName:exc_cause_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@dut.exc_cause_e), line:7:9, endln:9:2
+      |vpiParent:
+      \_typedef_typespec: (exc_cause_e), line:9:3, endln:9:14
+      |vpiFullName:work@dut.exc_cause_e
+      |vpiActual:
+      \_enum_typespec: (exc_cause_e), line:7:9, endln:9:15
   |vpiImportTypespec:
   \_logic_typespec: , line:7:14, endln:7:25
   |vpiImportTypespec:
   \_enum_typespec: (exc_cause_e), line:7:9, endln:9:15
+  |vpiImportTypespec:
+  \_typedef_typespec: (exc_cause_e), line:9:3, endln:9:14
   |vpiDefName:work@dut
   |vpiRefModule:
   \_ref_module: work@GOOD (good), line:12:5, endln:12:17
@@ -225,7 +240,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/EnumConcat/dut.sv | ${SURELOG_DIR}/build/regression/EnumConcat/roundtrip/dut_000.sv | 8 | 15 |
-============================== End RoundTrip Results ==============================

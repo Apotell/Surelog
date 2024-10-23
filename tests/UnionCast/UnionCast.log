@@ -1591,7 +1591,7 @@ AST_DEBUG_END
 assignment                                             2
 case_item                                              2
 case_stmt                                              1
-constant                                             258
+constant                                             246
 cont_assign                                            5
 design                                                 1
 enum_const                                            59
@@ -1611,10 +1611,11 @@ packed_array_typespec                                  1
 port                                                   5
 range                                                 53
 ref_obj                                               25
-ref_typespec                                          68
+ref_typespec                                          83
 source_file                                            1
 struct_typespec                                        8
 sys_func_call                                          4
+typedef_typespec                                      15
 typespec_member                                       50
 union_typespec                                         1
 unsupported_typespec                                   1
@@ -2086,6 +2087,55 @@ design: (unnamed)
       |vpiDecompile:5'b11111
       |vpiSize:5
   |vpiTypedef:
+  \_typedef_typespec: (op32_op62_et), line:46:3, endln:46:15
+    |vpiParent:
+    \_package: riscv_isa_pkg (riscv_isa_pkg::), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:19:1, endln:125:26
+    |vpiName:op32_op62_et
+    |vpiTypedefAlias:
+    \_ref_typespec: (riscv_isa_pkg::op32_op62_et), line:41:9, endln:46:2
+      |vpiParent:
+      \_typedef_typespec: (op32_op62_et), line:46:3, endln:46:15
+      |vpiFullName:riscv_isa_pkg::op32_op62_et
+      |vpiActual:
+      \_enum_typespec: (riscv_isa_pkg::op32_op62_et), line:41:9, endln:46:16
+  |vpiTypedef:
+  \_packed_array_typespec: , line:48:9, endln:48:22
+    |vpiParent:
+    \_package: riscv_isa_pkg (riscv_isa_pkg::), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:19:1, endln:125:26
+    |vpiRange:
+    \_range: , line:48:15, endln:48:22
+      |vpiParent:
+      \_packed_array_typespec: , line:48:9, endln:48:22
+      |vpiLeftRange:
+      \_operation: , line:48:16, endln:48:19
+        |vpiParent:
+        \_range: , line:48:15, endln:48:22
+        |vpiOpType:11
+        |vpiOperand:
+        \_constant: , line:48:16, endln:48:17
+          |vpiParent:
+          \_operation: , line:48:16, endln:48:19
+          |vpiDecompile:3
+          |vpiSize:64
+          |UINT:3
+          |vpiConstType:9
+        |vpiOperand:
+        \_constant: , line:48:18, endln:48:19
+          |vpiParent:
+          \_operation: , line:48:16, endln:48:19
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_constant: , line:48:20, endln:48:21
+        |vpiParent:
+        \_range: , line:48:15, endln:48:22
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
   \_logic_typespec: (fn3_t), line:48:9, endln:48:22
     |vpiParent:
     \_package: riscv_isa_pkg (riscv_isa_pkg::), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:19:1, endln:125:26
@@ -2123,6 +2173,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (fn3_t), line:48:23, endln:48:28
+    |vpiParent:
+    \_package: riscv_isa_pkg (riscv_isa_pkg::), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:19:1, endln:125:26
+    |vpiName:fn3_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (riscv_isa_pkg::fn3_t), line:48:9, endln:48:14
+      |vpiParent:
+      \_typedef_typespec: (fn3_t), line:48:23, endln:48:28
+      |vpiFullName:riscv_isa_pkg::fn3_t
+      |vpiActual:
+      \_logic_typespec: (fn3_t), line:48:9, endln:48:22
   |vpiTypedef:
   \_struct_typespec: (riscv_isa_pkg::op32_opcode_t), line:51:9, endln:54:2
     |vpiParent:
@@ -2178,6 +2240,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (op32_opcode_t), line:54:3, endln:54:16
+    |vpiParent:
+    \_package: riscv_isa_pkg (riscv_isa_pkg::), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:19:1, endln:125:26
+    |vpiName:op32_opcode_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (riscv_isa_pkg::op32_opcode_t), line:51:9, endln:54:2
+      |vpiParent:
+      \_typedef_typespec: (op32_opcode_t), line:54:3, endln:54:16
+      |vpiFullName:riscv_isa_pkg::op32_opcode_t
+      |vpiActual:
+      \_struct_typespec: (riscv_isa_pkg::op32_opcode_t), line:51:9, endln:54:2
   |vpiTypedef:
   \_logic_typespec: , line:57:14, endln:57:38
     |vpiParent:
@@ -2297,6 +2371,18 @@ design: (unnamed)
       |vpiDecompile:3'b111
       |vpiSize:3
   |vpiTypedef:
+  \_typedef_typespec: (fn3_alu_et), line:66:3, endln:66:13
+    |vpiParent:
+    \_package: riscv_isa_pkg (riscv_isa_pkg::), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:19:1, endln:125:26
+    |vpiName:fn3_alu_et
+    |vpiTypedefAlias:
+    \_ref_typespec: (riscv_isa_pkg::fn3_alu_et), line:57:9, endln:66:2
+      |vpiParent:
+      \_typedef_typespec: (fn3_alu_et), line:66:3, endln:66:13
+      |vpiFullName:riscv_isa_pkg::fn3_alu_et
+      |vpiActual:
+      \_enum_typespec: (riscv_isa_pkg::fn3_alu_et), line:57:9, endln:66:14
+  |vpiTypedef:
   \_logic_typespec: , line:69:14, endln:69:38
     |vpiParent:
     \_package: riscv_isa_pkg (riscv_isa_pkg::), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:19:1, endln:125:26
@@ -2415,6 +2501,18 @@ design: (unnamed)
       |vpiDecompile:3'b111
       |vpiSize:3
   |vpiTypedef:
+  \_typedef_typespec: (fn3_ldu_et), line:78:3, endln:78:13
+    |vpiParent:
+    \_package: riscv_isa_pkg (riscv_isa_pkg::), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:19:1, endln:125:26
+    |vpiName:fn3_ldu_et
+    |vpiTypedefAlias:
+    \_ref_typespec: (riscv_isa_pkg::fn3_ldu_et), line:69:9, endln:78:2
+      |vpiParent:
+      \_typedef_typespec: (fn3_ldu_et), line:78:3, endln:78:13
+      |vpiFullName:riscv_isa_pkg::fn3_ldu_et
+      |vpiActual:
+      \_enum_typespec: (riscv_isa_pkg::fn3_ldu_et), line:69:9, endln:78:14
+  |vpiTypedef:
   \_logic_typespec: , line:82:14, endln:82:38
     |vpiParent:
     \_package: riscv_isa_pkg (riscv_isa_pkg::), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:19:1, endln:125:26
@@ -2508,6 +2606,18 @@ design: (unnamed)
       |BIN:100
       |vpiDecompile:3'b100
       |vpiSize:3
+  |vpiTypedef:
+  \_typedef_typespec: (fn3_stu_et), line:91:3, endln:91:13
+    |vpiParent:
+    \_package: riscv_isa_pkg (riscv_isa_pkg::), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:19:1, endln:125:26
+    |vpiName:fn3_stu_et
+    |vpiTypedefAlias:
+    \_ref_typespec: (riscv_isa_pkg::fn3_stu_et), line:82:9, endln:91:2
+      |vpiParent:
+      \_typedef_typespec: (fn3_stu_et), line:91:3, endln:91:13
+      |vpiFullName:riscv_isa_pkg::fn3_stu_et
+      |vpiActual:
+      \_enum_typespec: (riscv_isa_pkg::fn3_stu_et), line:82:9, endln:91:14
   |vpiTypedef:
   \_logic_typespec: , line:94:14, endln:94:38
     |vpiParent:
@@ -2610,6 +2720,18 @@ design: (unnamed)
       |BIN:111
       |vpiDecompile:3'b111
       |vpiSize:3
+  |vpiTypedef:
+  \_typedef_typespec: (fn3_bru_et), line:103:3, endln:103:13
+    |vpiParent:
+    \_package: riscv_isa_pkg (riscv_isa_pkg::), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:19:1, endln:125:26
+    |vpiName:fn3_bru_et
+    |vpiTypedefAlias:
+    \_ref_typespec: (riscv_isa_pkg::fn3_bru_et), line:94:9, endln:103:2
+      |vpiParent:
+      \_typedef_typespec: (fn3_bru_et), line:103:3, endln:103:13
+      |vpiFullName:riscv_isa_pkg::fn3_bru_et
+      |vpiActual:
+      \_enum_typespec: (riscv_isa_pkg::fn3_bru_et), line:94:9, endln:103:14
   |vpiTypedef:
   \_struct_typespec: (riscv_isa_pkg::op32_r4_t), line:106:9, endln:106:181
     |vpiParent:
@@ -2823,6 +2945,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (op32_r4_t), line:106:182, endln:106:191
+    |vpiParent:
+    \_package: riscv_isa_pkg (riscv_isa_pkg::), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:19:1, endln:125:26
+    |vpiName:op32_r4_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (riscv_isa_pkg::op32_r4_t), line:106:9, endln:106:181
+      |vpiParent:
+      \_typedef_typespec: (op32_r4_t), line:106:182, endln:106:191
+      |vpiFullName:riscv_isa_pkg::op32_r4_t
+      |vpiActual:
+      \_struct_typespec: (riscv_isa_pkg::op32_r4_t), line:106:9, endln:106:181
+  |vpiTypedef:
   \_struct_typespec: (riscv_isa_pkg::op32_r_t), line:107:9, endln:107:181
     |vpiParent:
     \_package: riscv_isa_pkg (riscv_isa_pkg::), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:19:1, endln:125:26
@@ -2999,6 +3133,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (op32_r_t), line:107:182, endln:107:190
+    |vpiParent:
+    \_package: riscv_isa_pkg (riscv_isa_pkg::), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:19:1, endln:125:26
+    |vpiName:op32_r_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (riscv_isa_pkg::op32_r_t), line:107:9, endln:107:181
+      |vpiParent:
+      \_typedef_typespec: (op32_r_t), line:107:182, endln:107:190
+      |vpiFullName:riscv_isa_pkg::op32_r_t
+      |vpiActual:
+      \_struct_typespec: (riscv_isa_pkg::op32_r_t), line:107:9, endln:107:181
+  |vpiTypedef:
   \_struct_typespec: (riscv_isa_pkg::op32_i_t), line:108:9, endln:108:181
     |vpiParent:
     \_package: riscv_isa_pkg (riscv_isa_pkg::), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:19:1, endln:125:26
@@ -3138,6 +3284,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (op32_i_t), line:108:182, endln:108:190
+    |vpiParent:
+    \_package: riscv_isa_pkg (riscv_isa_pkg::), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:19:1, endln:125:26
+    |vpiName:op32_i_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (riscv_isa_pkg::op32_i_t), line:108:9, endln:108:181
+      |vpiParent:
+      \_typedef_typespec: (op32_i_t), line:108:182, endln:108:190
+      |vpiFullName:riscv_isa_pkg::op32_i_t
+      |vpiActual:
+      \_struct_typespec: (riscv_isa_pkg::op32_i_t), line:108:9, endln:108:181
   |vpiTypedef:
   \_struct_typespec: (riscv_isa_pkg::op32_s_t), line:109:9, endln:109:181
     |vpiParent:
@@ -3314,6 +3472,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (op32_s_t), line:109:182, endln:109:190
+    |vpiParent:
+    \_package: riscv_isa_pkg (riscv_isa_pkg::), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:19:1, endln:125:26
+    |vpiName:op32_s_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (riscv_isa_pkg::op32_s_t), line:109:9, endln:109:181
+      |vpiParent:
+      \_typedef_typespec: (op32_s_t), line:109:182, endln:109:190
+      |vpiFullName:riscv_isa_pkg::op32_s_t
+      |vpiActual:
+      \_struct_typespec: (riscv_isa_pkg::op32_s_t), line:109:9, endln:109:181
   |vpiTypedef:
   \_struct_typespec: (riscv_isa_pkg::op32_b_t), line:110:9, endln:110:181
     |vpiParent:
@@ -3563,6 +3733,18 @@ design: (unnamed)
         |UINT:11
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (op32_b_t), line:110:182, endln:110:190
+    |vpiParent:
+    \_package: riscv_isa_pkg (riscv_isa_pkg::), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:19:1, endln:125:26
+    |vpiName:op32_b_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (riscv_isa_pkg::op32_b_t), line:110:9, endln:110:181
+      |vpiParent:
+      \_typedef_typespec: (op32_b_t), line:110:182, endln:110:190
+      |vpiFullName:riscv_isa_pkg::op32_b_t
+      |vpiActual:
+      \_struct_typespec: (riscv_isa_pkg::op32_b_t), line:110:9, endln:110:181
+  |vpiTypedef:
   \_struct_typespec: (riscv_isa_pkg::op32_u_t), line:111:9, endln:111:181
     |vpiParent:
     \_package: riscv_isa_pkg (riscv_isa_pkg::), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:19:1, endln:125:26
@@ -3653,6 +3835,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (op32_u_t), line:111:182, endln:111:190
+    |vpiParent:
+    \_package: riscv_isa_pkg (riscv_isa_pkg::), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:19:1, endln:125:26
+    |vpiName:op32_u_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (riscv_isa_pkg::op32_u_t), line:111:9, endln:111:181
+      |vpiParent:
+      \_typedef_typespec: (op32_u_t), line:111:182, endln:111:190
+      |vpiFullName:riscv_isa_pkg::op32_u_t
+      |vpiActual:
+      \_struct_typespec: (riscv_isa_pkg::op32_u_t), line:111:9, endln:111:181
   |vpiTypedef:
   \_struct_typespec: (riscv_isa_pkg::op32_j_t), line:112:9, endln:112:181
     |vpiParent:
@@ -3853,6 +4047,18 @@ design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_typedef_typespec: (op32_j_t), line:112:182, endln:112:190
+    |vpiParent:
+    \_package: riscv_isa_pkg (riscv_isa_pkg::), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:19:1, endln:125:26
+    |vpiName:op32_j_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (riscv_isa_pkg::op32_j_t), line:112:9, endln:112:181
+      |vpiParent:
+      \_typedef_typespec: (op32_j_t), line:112:182, endln:112:190
+      |vpiFullName:riscv_isa_pkg::op32_j_t
+      |vpiActual:
+      \_struct_typespec: (riscv_isa_pkg::op32_j_t), line:112:9, endln:112:181
+  |vpiTypedef:
   \_union_typespec: (riscv_isa_pkg::op32_t), line:115:9, endln:123:9
     |vpiParent:
     \_package: riscv_isa_pkg (riscv_isa_pkg::), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:19:1, endln:125:26
@@ -3949,6 +4155,18 @@ design: (unnamed)
         |vpiFullName:riscv_isa_pkg::op32_t::j::op32_j_t
         |vpiActual:
         \_struct_typespec: (riscv_isa_pkg::op32_j_t), line:112:9, endln:112:181
+  |vpiTypedef:
+  \_typedef_typespec: (op32_t), line:123:3, endln:123:9
+    |vpiParent:
+    \_package: riscv_isa_pkg (riscv_isa_pkg::), file:${SURELOG_DIR}/tests/UnionCast/dut.sv, line:19:1, endln:125:26
+    |vpiName:op32_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (riscv_isa_pkg::op32_t), line:115:9, endln:123:2
+      |vpiParent:
+      \_typedef_typespec: (op32_t), line:123:3, endln:123:9
+      |vpiFullName:riscv_isa_pkg::op32_t
+      |vpiActual:
+      \_union_typespec: (riscv_isa_pkg::op32_t), line:115:9, endln:123:9
   |vpiImportTypespec:
   \_function: (riscv_isa_pkg::opsiz), line:25:1, endln:34:19
   |vpiImportTypespec:
@@ -3956,27 +4174,43 @@ design: (unnamed)
   |vpiImportTypespec:
   \_enum_typespec: (riscv_isa_pkg::op32_op62_et), line:41:9, endln:46:16
   |vpiImportTypespec:
+  \_typedef_typespec: (op32_op62_et), line:46:3, endln:46:15
+  |vpiImportTypespec:
+  \_packed_array_typespec: , line:48:9, endln:48:22
+  |vpiImportTypespec:
   \_logic_typespec: (fn3_t), line:48:9, endln:48:22
+  |vpiImportTypespec:
+  \_typedef_typespec: (fn3_t), line:48:23, endln:48:28
   |vpiImportTypespec:
   \_struct_typespec: (riscv_isa_pkg::op32_opcode_t), line:51:9, endln:54:2
   |vpiImportTypespec:
   \_logic_typespec: , line:53:3, endln:53:14
   |vpiImportTypespec:
+  \_typedef_typespec: (op32_opcode_t), line:54:3, endln:54:16
+  |vpiImportTypespec:
   \_logic_typespec: , line:57:14, endln:57:38
   |vpiImportTypespec:
   \_enum_typespec: (riscv_isa_pkg::fn3_alu_et), line:57:9, endln:66:14
+  |vpiImportTypespec:
+  \_typedef_typespec: (fn3_alu_et), line:66:3, endln:66:13
   |vpiImportTypespec:
   \_logic_typespec: , line:69:14, endln:69:38
   |vpiImportTypespec:
   \_enum_typespec: (riscv_isa_pkg::fn3_ldu_et), line:69:9, endln:78:14
   |vpiImportTypespec:
+  \_typedef_typespec: (fn3_ldu_et), line:78:3, endln:78:13
+  |vpiImportTypespec:
   \_logic_typespec: , line:82:14, endln:82:38
   |vpiImportTypespec:
   \_enum_typespec: (riscv_isa_pkg::fn3_stu_et), line:82:9, endln:91:14
   |vpiImportTypespec:
+  \_typedef_typespec: (fn3_stu_et), line:91:3, endln:91:13
+  |vpiImportTypespec:
   \_logic_typespec: , line:94:14, endln:94:38
   |vpiImportTypespec:
   \_enum_typespec: (riscv_isa_pkg::fn3_bru_et), line:94:9, endln:103:14
+  |vpiImportTypespec:
+  \_typedef_typespec: (fn3_bru_et), line:103:3, endln:103:13
   |vpiImportTypespec:
   \_struct_typespec: (riscv_isa_pkg::op32_r4_t), line:106:9, endln:106:181
   |vpiImportTypespec:
@@ -3990,6 +4224,8 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:106:116, endln:106:127
   |vpiImportTypespec:
+  \_typedef_typespec: (op32_r4_t), line:106:182, endln:106:191
+  |vpiImportTypespec:
   \_struct_typespec: (riscv_isa_pkg::op32_r_t), line:107:9, endln:107:181
   |vpiImportTypespec:
   \_logic_typespec: , line:107:41, endln:107:52
@@ -4000,6 +4236,8 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:107:116, endln:107:127
   |vpiImportTypespec:
+  \_typedef_typespec: (op32_r_t), line:107:182, endln:107:190
+  |vpiImportTypespec:
   \_struct_typespec: (riscv_isa_pkg::op32_i_t), line:108:9, endln:108:181
   |vpiImportTypespec:
   \_logic_typespec: , line:108:24, endln:108:37
@@ -4007,6 +4245,8 @@ design: (unnamed)
   \_logic_typespec: , line:108:86, endln:108:97
   |vpiImportTypespec:
   \_logic_typespec: , line:108:116, endln:108:127
+  |vpiImportTypespec:
+  \_typedef_typespec: (op32_i_t), line:108:182, endln:108:190
   |vpiImportTypespec:
   \_struct_typespec: (riscv_isa_pkg::op32_s_t), line:109:9, endln:109:181
   |vpiImportTypespec:
@@ -4017,6 +4257,8 @@ design: (unnamed)
   \_logic_typespec: , line:109:86, endln:109:97
   |vpiImportTypespec:
   \_logic_typespec: , line:109:116, endln:109:127
+  |vpiImportTypespec:
+  \_typedef_typespec: (op32_s_t), line:109:182, endln:109:190
   |vpiImportTypespec:
   \_struct_typespec: (riscv_isa_pkg::op32_b_t), line:110:9, endln:110:181
   |vpiImportTypespec:
@@ -4032,11 +4274,15 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:110:137, endln:110:150
   |vpiImportTypespec:
+  \_typedef_typespec: (op32_b_t), line:110:182, endln:110:190
+  |vpiImportTypespec:
   \_struct_typespec: (riscv_isa_pkg::op32_u_t), line:111:9, endln:111:181
   |vpiImportTypespec:
   \_logic_typespec: , line:111:24, endln:111:37
   |vpiImportTypespec:
   \_logic_typespec: , line:111:116, endln:111:127
+  |vpiImportTypespec:
+  \_typedef_typespec: (op32_u_t), line:111:182, endln:111:190
   |vpiImportTypespec:
   \_struct_typespec: (riscv_isa_pkg::op32_j_t), line:112:9, endln:112:181
   |vpiImportTypespec:
@@ -4050,7 +4296,11 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:112:116, endln:112:127
   |vpiImportTypespec:
+  \_typedef_typespec: (op32_j_t), line:112:182, endln:112:190
+  |vpiImportTypespec:
   \_union_typespec: (riscv_isa_pkg::op32_t), line:115:9, endln:123:9
+  |vpiImportTypespec:
+  \_typedef_typespec: (op32_t), line:123:3, endln:123:9
   |vpiDefName:riscv_isa_pkg
   |vpiTaskFunc:
   \_function: (riscv_isa_pkg::opsiz), line:25:1, endln:34:19
@@ -4816,7 +5066,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/UnionCast/dut.sv | ${SURELOG_DIR}/build/regression/UnionCast/roundtrip/dut_000.sv | 44 | 166 |
-============================== End RoundTrip Results ==============================

@@ -135,10 +135,11 @@ module_inst                                            2
 port                                                   3
 ref_module                                             1
 ref_obj                                                6
-ref_typespec                                           6
+ref_typespec                                           7
 source_file                                            1
 struct_net                                             1
 struct_typespec                                        1
+typedef_typespec                                       1
 typespec_member                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathBind/slpp_all/surelog.uhdm ...
@@ -247,6 +248,18 @@ design: (unnamed)
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathBind/dut.sv, line:5:1, endln:15:10
   |vpiTypedef:
+  \_typedef_typespec: (alert_rx_t), line:8:6, endln:8:16
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathBind/dut.sv, line:5:1, endln:15:10
+    |vpiName:alert_rx_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top.alert_rx_t), line:6:12, endln:8:5
+      |vpiParent:
+      \_typedef_typespec: (alert_rx_t), line:8:6, endln:8:16
+      |vpiFullName:work@top.alert_rx_t
+      |vpiActual:
+      \_struct_typespec: (alert_rx_t), line:6:12, endln:8:5
+  |vpiTypedef:
   \_logic_typespec: , line:5:20, endln:5:25
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathBind/dut.sv, line:5:1, endln:15:10
@@ -258,6 +271,8 @@ design: (unnamed)
   \_struct_typespec: (alert_rx_t), line:6:12, endln:8:5
   |vpiImportTypespec:
   \_logic_typespec: , line:7:7, endln:7:12
+  |vpiImportTypespec:
+  \_typedef_typespec: (alert_rx_t), line:8:6, endln:8:16
   |vpiImportTypespec:
   \_logic_typespec: , line:5:20, endln:5:25
   |vpiImportTypespec:
@@ -382,7 +397,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/HierPathBind/dut.sv | ${SURELOG_DIR}/build/regression/HierPathBind/roundtrip/dut_000.sv | 5 | 15 |
-============================== End RoundTrip Results ==============================

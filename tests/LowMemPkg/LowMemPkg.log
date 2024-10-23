@@ -83,8 +83,9 @@ logic_typespec                                         2
 logic_var                                              1
 module_inst                                            1
 package                                                1
-ref_typespec                                           2
+ref_typespec                                           3
 source_file                                            3
+typedef_typespec                                       1
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LowMemPkg/slpp_all/surelog.uhdm ...
@@ -117,8 +118,22 @@ design: (unnamed)
     |vpiParent:
     \_package: wddr_pkg (wddr_pkg::), file:${SURELOG_DIR}/tests/LowMemPkg/wddr_pkg.sv, line:19:1, endln:22:11
     |vpiName:my_logic
+  |vpiTypedef:
+  \_typedef_typespec: (my_logic), line:20:15, endln:20:23
+    |vpiParent:
+    \_package: wddr_pkg (wddr_pkg::), file:${SURELOG_DIR}/tests/LowMemPkg/wddr_pkg.sv, line:19:1, endln:22:11
+    |vpiName:my_logic
+    |vpiTypedefAlias:
+    \_ref_typespec: (wddr_pkg::my_logic), line:20:9, endln:20:14
+      |vpiParent:
+      \_typedef_typespec: (my_logic), line:20:15, endln:20:23
+      |vpiFullName:wddr_pkg::my_logic
+      |vpiActual:
+      \_logic_typespec: (my_logic), line:20:9, endln:20:14
   |vpiImportTypespec:
   \_logic_typespec: (my_logic), line:20:9, endln:20:14
+  |vpiImportTypespec:
+  \_typedef_typespec: (my_logic), line:20:15, endln:20:23
   |vpiDefName:wddr_pkg
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LowMemPkg/dut.sv, line:4:1, endln:8:10

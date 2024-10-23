@@ -53,16 +53,17 @@ port                                                 457
 range                                               1496
 ref_module                                             4
 ref_obj                                             2317
-ref_typespec                                        1389
+ref_typespec                                        1390
 ref_var                                                7
 source_file                                            4
 sys_func_call                                         15
 sys_task_call                                          1
 task                                                   9
+typedef_typespec                                       1
 unsupported_typespec                                   4
 === UHDM Object Stats End ===
-[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/AxiInterconnect/axi_interconnect_wrapper.v:1108:1: Object 6432 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/AxiInterconnect/slpp_all/surelog.uhdm ...
+[ERR:IG0809] ${SURELOG_DIR}/third_party/tests/AxiInterconnect/axi_interconnect_wrapper.v:1108:1: Object 6432 actual cannot be null.
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/AxiInterconnect/slpp_all/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -73,11 +74,11 @@ design: (unnamed)
   |vpiParent:
   \_design: (unnamed)
 |vpiSourceFiles:
-\_source_file: , file:${SURELOG_DIR}/third_party/tests/AxiInterconnect/priority_encoder.v
+\_source_file: , file:${SURELOG_DIR}/third_party/tests/AxiInterconnect/arbiter.v
   |vpiParent:
   \_design: (unnamed)
 |vpiSourceFiles:
-\_source_file: , file:${SURELOG_DIR}/third_party/tests/AxiInterconnect/arbiter.v
+\_source_file: , file:${SURELOG_DIR}/third_party/tests/AxiInterconnect/priority_encoder.v
   |vpiParent:
   \_design: (unnamed)
 |vpiSourceFiles:
@@ -471,8 +472,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/third_party/tests/AxiInterconnect/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -46602,7 +46617,3 @@ design: (unnamed)
 [  ERROR] : 1
 [WARNING] : 0
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/third_party/tests/AxiInterconnect/axi_interconnect_wrapper.v | ${SURELOG_DIR}/build/regression/AxiInterconnect/roundtrip/axi_interconnect_wrapper_000.v | 819 | 1215 |
-============================== End RoundTrip Results ==============================

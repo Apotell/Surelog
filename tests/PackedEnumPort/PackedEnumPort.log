@@ -154,12 +154,13 @@ package                                                1
 port                                                   4
 range                                                  3
 ref_module                                             1
-ref_typespec                                           7
+ref_typespec                                           9
 source_file                                            1
+typedef_typespec                                       2
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
-[ERR:IG0807] ${SURELOG_DIR}/tests/PackedEnumPort/dut.sv:25:24: Child 33 is not entirely in parent's scope.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedEnumPort/slpp_all/surelog.uhdm ...
+[ERR:IG0807] ${SURELOG_DIR}/tests/PackedEnumPort/dut.sv:25:24: Child 37 is not entirely in parent's scope.
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/PackedEnumPort/slpp_all/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -219,10 +220,39 @@ design: (unnamed)
       |BIN:1010
       |vpiDecompile:4'b1010
       |vpiSize:4
+  |vpiTypedef:
+  \_typedef_typespec: (lc_tx_e), line:5:6, endln:5:13
+    |vpiParent:
+    \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/PackedEnumPort/dut.sv, line:2:1, endln:8:25
+    |vpiName:lc_tx_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (lc_ctrl_pkg::lc_tx_e), line:3:12, endln:5:5
+      |vpiParent:
+      \_typedef_typespec: (lc_tx_e), line:5:6, endln:5:13
+      |vpiFullName:lc_ctrl_pkg::lc_tx_e
+      |vpiActual:
+      \_enum_typespec: (lc_ctrl_pkg::lc_tx_e), line:3:12, endln:5:14
+  |vpiTypedef:
+  \_typedef_typespec: (lc_tx_t), line:7:20, endln:7:27
+    |vpiParent:
+    \_package: lc_ctrl_pkg (lc_ctrl_pkg::), file:${SURELOG_DIR}/tests/PackedEnumPort/dut.sv, line:2:1, endln:8:25
+    |vpiName:lc_tx_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (lc_ctrl_pkg::lc_tx_t::lc_tx_e), line:7:12, endln:7:19
+      |vpiParent:
+      \_typedef_typespec: (lc_tx_t), line:7:20, endln:7:27
+      |vpiName:lc_tx_e
+      |vpiFullName:lc_ctrl_pkg::lc_tx_t::lc_tx_e
+      |vpiActual:
+      \_typedef_typespec: (lc_tx_e), line:5:6, endln:5:13
   |vpiImportTypespec:
   \_logic_typespec: , line:3:17, endln:3:28
   |vpiImportTypespec:
   \_enum_typespec: (lc_ctrl_pkg::lc_tx_e), line:3:12, endln:5:14
+  |vpiImportTypespec:
+  \_typedef_typespec: (lc_tx_e), line:5:6, endln:5:13
+  |vpiImportTypespec:
+  \_typedef_typespec: (lc_tx_t), line:7:20, endln:7:27
   |vpiDefName:lc_ctrl_pkg
   |vpiEndLabel:lc_ctrl_pkg
 |uhdmallModules:
@@ -465,7 +495,3 @@ design: (unnamed)
 [  ERROR] : 1
 [WARNING] : 3
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PackedEnumPort/dut.sv | ${SURELOG_DIR}/build/regression/PackedEnumPort/roundtrip/dut_000.sv | 20 | 37 |
-============================== End RoundTrip Results ==============================

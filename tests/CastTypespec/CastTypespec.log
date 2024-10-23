@@ -743,7 +743,7 @@ param_assign                                           8
 parameter                                              8
 range                                                  3
 ref_obj                                               17
-ref_typespec                                          40
+ref_typespec                                          42
 source_file                                            1
 string_typespec                                        2
 struct_typespec                                        2
@@ -751,10 +751,11 @@ struct_var                                             2
 sys_func_call                                          6
 tagged_pattern                                         2
 task                                                   9
+typedef_typespec                                       2
 typespec_member                                        5
 === UHDM Object Stats End ===
-[ERR:IG0807] ${SURELOG_DIR}/tests/CastTypespec/dut.sv:32:30: Child 137 is not entirely in parent's scope.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CastTypespec/slpp_all/surelog.uhdm ...
+[ERR:IG0807] ${SURELOG_DIR}/tests/CastTypespec/dut.sv:32:30: Child 139 is not entirely in parent's scope.
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/CastTypespec/slpp_all/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -1151,8 +1152,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1940,6 +1955,18 @@ design: (unnamed)
       |vpiActual:
       \_int_typespec: , line:27:21, endln:27:24
   |vpiTypedef:
+  \_typedef_typespec: (ab_t), line:27:34, endln:27:38
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
+    |vpiName:ab_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top.ab_t), line:27:13, endln:27:33
+      |vpiParent:
+      \_typedef_typespec: (ab_t), line:27:34, endln:27:38
+      |vpiFullName:work@top.ab_t
+      |vpiActual:
+      \_struct_typespec: (ab_t), line:27:13, endln:27:33
+  |vpiTypedef:
   \_struct_typespec: , line:26:5, endln:26:24
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
@@ -2017,6 +2044,8 @@ design: (unnamed)
   \_int_typespec: , line:27:21, endln:27:24
   |vpiImportTypespec:
   \_array_typespec: , line:27:28, endln:27:31
+  |vpiImportTypespec:
+  \_typedef_typespec: (ab_t), line:27:34, endln:27:38
   |vpiImportTypespec:
   \_struct_typespec: , line:26:5, endln:26:24
   |vpiImportTypespec:
@@ -2364,7 +2393,3 @@ design: (unnamed)
 [  ERROR] : 1
 [WARNING] : 3
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/CastTypespec/dut.sv | ${SURELOG_DIR}/build/regression/CastTypespec/roundtrip/dut_000.sv | 24 | 42 |
-============================== End RoundTrip Results ==============================

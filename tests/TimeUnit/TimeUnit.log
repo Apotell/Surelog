@@ -25,11 +25,11 @@
 [INF:CP0302] Compile class "builtin::mailbox".
 [INF:CP0302] Compile class "builtin::process".
 [INF:CP0302] Compile class "builtin::semaphore".
-[WRN:CP0334] ${SURELOG_DIR}/tests/TimeUnit/top1.v:122:1: Colliding compilation unit name: "splice1",
+[WRN:CP0334] ${SURELOG_DIR}/tests/TimeUnit/top1.v:122:1: Colliding compilation unit name: "%s",
              ${SURELOG_DIR}/tests/TimeUnit/top1.v:32:1: previous usage.
-[WRN:CP0334] ${SURELOG_DIR}/tests/TimeUnit/top1.v:194:1: Colliding compilation unit name: "splice1",
+[WRN:CP0334] ${SURELOG_DIR}/tests/TimeUnit/top1.v:194:1: Colliding compilation unit name: "%s",
              ${SURELOG_DIR}/tests/TimeUnit/top1.v:32:1: previous usage.
-[WRN:CP0334] ${SURELOG_DIR}/tests/TimeUnit/top1.v:253:1: Colliding compilation unit name: "splice1",
+[WRN:CP0334] ${SURELOG_DIR}/tests/TimeUnit/top1.v:253:1: Colliding compilation unit name: "%s",
              ${SURELOG_DIR}/tests/TimeUnit/top1.v:32:1: previous usage.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
@@ -62,13 +62,14 @@ prim_term                                              1
 range                                                  3
 ref_module                                             5
 ref_obj                                               12
-ref_typespec                                          14
+ref_typespec                                          15
 source_file                                            2
 task                                                   9
+typedef_typespec                                       1
 === UHDM Object Stats End ===
+[INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TimeUnit/slpp_unit/surelog.uhdm ...
 [ERR:IG0809] ${SURELOG_DIR}/tests/TimeUnit/top.v:24:2: Object 30 actual cannot be null.
 [ERR:IG0809] ${SURELOG_DIR}/tests/TimeUnit/top.v:87:2: Object 35 actual cannot be null.
-[INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TimeUnit/slpp_unit/surelog.uhdm ...
 [  FATAL] : 0
 [ SYNTAX] : 0
 [  ERROR] : 2
@@ -80,8 +81,3 @@ task                                                   9
 [LINT]: ${SURELOG_DIR}/tests/TimeUnit/top1.v:8:19: Non synthesizable construct, data
 [LINT]: ${SURELOG_DIR}/tests/TimeUnit/top1.v:7:3: Non synthesizable construct, cb
 ============================== End Linting Results ==============================
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/TimeUnit/top.v  | ${SURELOG_DIR}/build/regression/TimeUnit/roundtrip/top_000.v  | 27 | 95 |
-[roundtrip]: ${SURELOG_DIR}/tests/TimeUnit/top1.v | ${SURELOG_DIR}/build/regression/TimeUnit/roundtrip/top1_000.v | 34 | 290 |
-============================== End RoundTrip Results ==============================

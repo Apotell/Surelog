@@ -491,14 +491,15 @@ logic_var                                              1
 module_inst                                            2
 package                                                1
 range                                                  3
-ref_typespec                                          26
+ref_typespec                                          29
 ref_var                                                2
 source_file                                            1
 task                                                  10
+typedef_typespec                                       3
 unsupported_typespec                                   6
 === UHDM Object Stats End ===
-[ERR:IG0807] ${SURELOG_DIR}/tests/ClassFuncProto/top.v:44:51: Child 145 is not entirely in parent's scope.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassFuncProto/slpp_all/surelog.uhdm ...
+[ERR:IG0807] ${SURELOG_DIR}/tests/ClassFuncProto/top.v:44:51: Child 149 is not entirely in parent's scope.
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/ClassFuncProto/slpp_all/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -895,8 +896,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/ClassFuncProto/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1121,8 +1136,22 @@ design: (unnamed)
       \_class_defn: (work@toto::c2), file:${SURELOG_DIR}/tests/ClassFuncProto/top.v, line:8:1, endln:12:9
       |vpiName:this_type
       |vpiSigned:1
+    |vpiTypedef:
+    \_typedef_typespec: (this_type), line:10:13, endln:10:22
+      |vpiParent:
+      \_class_defn: (work@toto::c2), file:${SURELOG_DIR}/tests/ClassFuncProto/top.v, line:8:1, endln:12:9
+      |vpiName:this_type
+      |vpiTypedefAlias:
+      \_ref_typespec: (work@toto::c2::this_type), line:10:9, endln:10:12
+        |vpiParent:
+        \_typedef_typespec: (this_type), line:10:13, endln:10:22
+        |vpiFullName:work@toto::c2::this_type
+        |vpiActual:
+        \_int_typespec: (this_type), line:10:9, endln:10:12
     |vpiImportTypespec:
     \_int_typespec: (this_type), line:10:9, endln:10:12
+    |vpiImportTypespec:
+    \_typedef_typespec: (this_type), line:10:13, endln:10:22
     |vpiDerivedClasses:
     \_class_defn: (work@toto::c3), file:${SURELOG_DIR}/tests/ClassFuncProto/top.v, line:15:1, endln:16:9
       |vpiParent:
@@ -1505,6 +1534,18 @@ design: (unnamed)
             |vpiDecompile:3
             |vpiSize:2
         |vpiTypedef:
+        \_typedef_typespec: (uvm_severity), line:27:3, endln:27:15
+          |vpiParent:
+          \_class_defn: (work@toto::c1), file:${SURELOG_DIR}/tests/ClassFuncProto/top.v, line:18:1, endln:48:9
+          |vpiName:uvm_severity
+          |vpiTypedefAlias:
+          \_ref_typespec: (work@toto::c1::uvm_severity), line:21:9, endln:27:2
+            |vpiParent:
+            \_typedef_typespec: (uvm_severity), line:27:3, endln:27:15
+            |vpiFullName:work@toto::c1::uvm_severity
+            |vpiActual:
+            \_enum_typespec: (uvm_severity), line:21:9, endln:27:16
+        |vpiTypedef:
         \_unsupported_typespec: (REQ), line:30:10, endln:30:13
           |vpiParent:
           \_class_defn: (work@toto::c1), file:${SURELOG_DIR}/tests/ClassFuncProto/top.v, line:18:1, endln:48:9
@@ -1540,6 +1581,8 @@ design: (unnamed)
         \_bit_typespec: , line:21:14, endln:21:23
         |vpiImportTypespec:
         \_enum_typespec: (uvm_severity), line:21:9, endln:27:16
+        |vpiImportTypespec:
+        \_typedef_typespec: (uvm_severity), line:27:3, endln:27:15
         |vpiImportTypespec:
         \_function: (work@toto::c1::get_current_item), line:30:1, endln:33:14
         |vpiImportTypespec:
@@ -1642,7 +1685,3 @@ design: (unnamed)
 [LINT]: ${SURELOG_DIR}/tests/ClassFuncProto/top.v:18:18: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/ClassFuncProto/top.v:18:1: Non synthesizable construct, c1
 ============================== End Linting Results ==============================
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ClassFuncProto/top.v | ${SURELOG_DIR}/build/regression/ClassFuncProto/roundtrip/top_000.v | 12 | 52 |
-============================== End RoundTrip Results ==============================

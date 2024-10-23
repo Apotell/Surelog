@@ -478,12 +478,13 @@ port                                                   1
 range                                                  4
 ref_module                                             1
 ref_obj                                                8
-ref_typespec                                          21
+ref_typespec                                          23
 source_file                                            1
 struct_net                                             1
 struct_typespec                                        1
 sys_func_call                                          1
 task                                                   9
+typedef_typespec                                       2
 typespec_member                                        3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackDataType/slpp_all/surelog.uhdm ...
@@ -883,8 +884,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/PackDataType/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1219,6 +1234,18 @@ design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_typedef_typespec: (kmac_data_rsp_t), line:10:5, endln:10:20
+    |vpiParent:
+    \_package: keymgr_pkg (keymgr_pkg::), file:${SURELOG_DIR}/tests/PackDataType/dut.sv, line:1:1, endln:11:11
+    |vpiName:kmac_data_rsp_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (keymgr_pkg::kmac_data_rsp_t), line:5:10, endln:10:4
+      |vpiParent:
+      \_typedef_typespec: (kmac_data_rsp_t), line:10:5, endln:10:20
+      |vpiFullName:keymgr_pkg::kmac_data_rsp_t
+      |vpiActual:
+      \_struct_typespec: (keymgr_pkg::kmac_data_rsp_t), line:5:10, endln:10:4
   |vpiImportTypespec:
   \_int_typespec: , line:3:12, endln:3:15
   |vpiImportTypespec:
@@ -1229,6 +1256,8 @@ design: (unnamed)
   \_logic_typespec: , line:7:5, endln:7:10
   |vpiImportTypespec:
   \_logic_typespec: , line:8:5, endln:8:26
+  |vpiImportTypespec:
+  \_typedef_typespec: (kmac_data_rsp_t), line:10:5, endln:10:20
   |vpiDefName:keymgr_pkg
 |uhdmallModules:
 \_module_inst: work@OK (work@OK), file:${SURELOG_DIR}/tests/PackDataType/dut.sv, line:13:1, endln:14:10
@@ -1242,13 +1271,13 @@ design: (unnamed)
   \_design: (unnamed)
   |vpiName:work@kmac_keymgr
   |vpiVariables:
-  \_logic_var: (work@kmac_keymgr), line:22:2, endln:22:46
+  \_logic_var: (work@kmac_keymgr), line:22:28, endln:22:41
     |vpiParent:
     \_module_inst: work@kmac_keymgr (work@kmac_keymgr), file:${SURELOG_DIR}/tests/PackDataType/dut.sv, line:16:1, endln:24:10
     |vpiTypespec:
     \_ref_typespec: (work@kmac_keymgr), line:22:2, endln:22:27
       |vpiParent:
-      \_logic_var: (work@kmac_keymgr), line:22:2, endln:22:46
+      \_logic_var: (work@kmac_keymgr), line:22:28, endln:22:41
       |vpiFullName:work@kmac_keymgr
       |vpiActual:
       \_logic_typespec: , line:22:2, endln:22:27
@@ -1288,9 +1317,9 @@ design: (unnamed)
           |UINT:2
           |vpiConstType:9
     |vpiReg:
-    \_logic_var: (work@kmac_keymgr), line:22:2, endln:22:46
+    \_logic_var: (work@kmac_keymgr), line:22:28, endln:22:41
   |vpiReg:
-  \_logic_var: (work@kmac_keymgr), line:22:2, endln:22:46
+  \_logic_var: (work@kmac_keymgr), line:22:28, endln:22:41
   |vpiRegArray:
   \_array_var: (work@kmac_keymgr.keymgr_digest), line:22:28, endln:22:46
   |vpiParameter:
@@ -1404,7 +1433,7 @@ design: (unnamed)
   |vpiImportTypespec:
   \_logic_typespec: , line:22:2, endln:22:27
   |vpiImportTypespec:
-  \_logic_var: (work@kmac_keymgr), line:22:2, endln:22:46
+  \_logic_var: (work@kmac_keymgr), line:22:28, endln:22:41
   |vpiImportTypespec:
   \_array_var: (work@kmac_keymgr.keymgr_digest), line:22:28, endln:22:46
   |vpiImportTypespec:
@@ -1481,7 +1510,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 3
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PackDataType/dut.sv | ${SURELOG_DIR}/build/regression/PackDataType/roundtrip/dut_000.sv | 9 | 24 |
-============================== End RoundTrip Results ==============================

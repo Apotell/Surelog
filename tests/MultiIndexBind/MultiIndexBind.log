@@ -183,14 +183,15 @@ packed_array_typespec                                  1
 packed_array_var                                       1
 range                                                  5
 ref_obj                                                5
-ref_typespec                                           6
+ref_typespec                                          10
 source_file                                            1
 struct_typespec                                        2
+typedef_typespec                                       4
 typespec_member                                        3
 union_typespec                                         1
 === UHDM Object Stats End ===
-[ERR:IG0809] ${SURELOG_DIR}/tests/MultiIndexBind/dut.sv:28:21: Object 29 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/MultiIndexBind/slpp_all/surelog.uhdm ...
+[ERR:IG0809] ${SURELOG_DIR}/tests/MultiIndexBind/dut.sv:28:21: Object 37 actual cannot be null.
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/MultiIndexBind/slpp_all/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -264,6 +265,18 @@ design: (unnamed)
       |vpiDecompile:4'b0000
       |vpiSize:4
   |vpiTypedef:
+  \_typedef_typespec: (IntALU_Code), line:7:3, endln:7:14
+    |vpiParent:
+    \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
+    |vpiName:IntALU_Code
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@PreDecodeStage.IntALU_Code), line:4:9, endln:7:2
+      |vpiParent:
+      \_typedef_typespec: (IntALU_Code), line:7:3, endln:7:14
+      |vpiFullName:work@PreDecodeStage.IntALU_Code
+      |vpiActual:
+      \_enum_typespec: (IntALU_Code), line:4:9, endln:7:15
+  |vpiTypedef:
   \_struct_typespec: (IntMicroOpOperand), line:9:9, endln:12:2
     |vpiParent:
     \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
@@ -282,6 +295,18 @@ design: (unnamed)
         |vpiFullName:work@PreDecodeStage.IntMicroOpOperand.aluCode.IntALU_Code
         |vpiActual:
         \_enum_typespec: (IntALU_Code), line:4:9, endln:7:15
+  |vpiTypedef:
+  \_typedef_typespec: (IntMicroOpOperand), line:12:3, endln:12:20
+    |vpiParent:
+    \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
+    |vpiName:IntMicroOpOperand
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@PreDecodeStage.IntMicroOpOperand), line:9:9, endln:12:2
+      |vpiParent:
+      \_typedef_typespec: (IntMicroOpOperand), line:12:3, endln:12:20
+      |vpiFullName:work@PreDecodeStage.IntMicroOpOperand
+      |vpiActual:
+      \_struct_typespec: (IntMicroOpOperand), line:9:9, endln:12:2
   |vpiTypedef:
   \_union_typespec: (MicroOpOperand), line:14:9, endln:17:17
     |vpiParent:
@@ -302,6 +327,18 @@ design: (unnamed)
         |vpiActual:
         \_struct_typespec: (IntMicroOpOperand), line:9:9, endln:12:2
   |vpiTypedef:
+  \_typedef_typespec: (MicroOpOperand), line:17:3, endln:17:17
+    |vpiParent:
+    \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
+    |vpiName:MicroOpOperand
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@PreDecodeStage.MicroOpOperand), line:14:9, endln:17:2
+      |vpiParent:
+      \_typedef_typespec: (MicroOpOperand), line:17:3, endln:17:17
+      |vpiFullName:work@PreDecodeStage.MicroOpOperand
+      |vpiActual:
+      \_union_typespec: (MicroOpOperand), line:14:9, endln:17:17
+  |vpiTypedef:
   \_struct_typespec: (OpInfo), line:19:9, endln:22:2
     |vpiParent:
     \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
@@ -320,6 +357,18 @@ design: (unnamed)
         |vpiFullName:work@PreDecodeStage.OpInfo.operand.MicroOpOperand
         |vpiActual:
         \_union_typespec: (MicroOpOperand), line:14:9, endln:17:17
+  |vpiTypedef:
+  \_typedef_typespec: (OpInfo), line:22:3, endln:22:9
+    |vpiParent:
+    \_module_inst: work@PreDecodeStage (work@PreDecodeStage), file:${SURELOG_DIR}/tests/MultiIndexBind/dut.sv, line:1:1, endln:30:10
+    |vpiName:OpInfo
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@PreDecodeStage.OpInfo), line:19:9, endln:22:2
+      |vpiParent:
+      \_typedef_typespec: (OpInfo), line:22:3, endln:22:9
+      |vpiFullName:work@PreDecodeStage.OpInfo
+      |vpiActual:
+      \_struct_typespec: (OpInfo), line:19:9, endln:22:2
   |vpiTypedef:
   \_packed_array_typespec: , line:26:1, endln:26:18
     |vpiParent:
@@ -371,17 +420,25 @@ design: (unnamed)
       |vpiName:OpInfo
       |vpiFullName:work@PreDecodeStage.OpInfo
       |vpiActual:
-      \_struct_typespec: (OpInfo), line:19:9, endln:22:2
+      \_typedef_typespec: (OpInfo), line:22:3, endln:22:9
   |vpiImportTypespec:
   \_logic_typespec: , line:4:14, endln:4:25
   |vpiImportTypespec:
   \_enum_typespec: (IntALU_Code), line:4:9, endln:7:15
   |vpiImportTypespec:
+  \_typedef_typespec: (IntALU_Code), line:7:3, endln:7:14
+  |vpiImportTypespec:
   \_struct_typespec: (IntMicroOpOperand), line:9:9, endln:12:2
+  |vpiImportTypespec:
+  \_typedef_typespec: (IntMicroOpOperand), line:12:3, endln:12:20
   |vpiImportTypespec:
   \_union_typespec: (MicroOpOperand), line:14:9, endln:17:17
   |vpiImportTypespec:
+  \_typedef_typespec: (MicroOpOperand), line:17:3, endln:17:17
+  |vpiImportTypespec:
   \_struct_typespec: (OpInfo), line:19:9, endln:22:2
+  |vpiImportTypespec:
+  \_typedef_typespec: (OpInfo), line:22:3, endln:22:9
   |vpiImportTypespec:
   \_packed_array_typespec: , line:26:1, endln:26:18
   |vpiImportTypespec:
@@ -479,7 +536,3 @@ design: (unnamed)
 [  ERROR] : 1
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/MultiIndexBind/dut.sv | ${SURELOG_DIR}/build/regression/MultiIndexBind/roundtrip/dut_000.sv | 12 | 30 |
-============================== End RoundTrip Results ==============================

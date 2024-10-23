@@ -31,8 +31,9 @@ operation                                              7
 port                                                   6
 range                                                  3
 ref_obj                                               36
-ref_typespec                                          19
+ref_typespec                                          20
 source_file                                            1
+typedef_typespec                                       1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FuncBinding/slpp_unit/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/FuncBinding/slpp_unit/checker/surelog.chk.html ...
@@ -722,6 +723,18 @@ design: (unnamed)
       |vpiDecompile:3
       |vpiSize:64
   |vpiTypedef:
+  \_typedef_typespec: (state), line:11:55, endln:11:60
+    |vpiParent:
+    \_module_inst: work@fsm_using_function (work@fsm_using_function), file:${SURELOG_DIR}/tests/FuncBinding/dut.sv, line:1:1, endln:53:10
+    |vpiName:state
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@fsm_using_function.state), line:11:9, endln:11:54
+      |vpiParent:
+      \_typedef_typespec: (state), line:11:55, endln:11:60
+      |vpiFullName:work@fsm_using_function.state
+      |vpiActual:
+      \_enum_typespec: (state), line:11:9, endln:11:61
+  |vpiTypedef:
   \_bit_typespec: , line:2:7, endln:2:10
     |vpiParent:
     \_module_inst: work@fsm_using_function (work@fsm_using_function), file:${SURELOG_DIR}/tests/FuncBinding/dut.sv, line:1:1, endln:53:10
@@ -775,6 +788,8 @@ design: (unnamed)
   \_logic_typespec: , line:11:14, endln:11:25
   |vpiImportTypespec:
   \_enum_typespec: (state), line:11:9, endln:11:61
+  |vpiImportTypespec:
+  \_typedef_typespec: (state), line:11:55, endln:11:60
   |vpiImportTypespec:
   \_bit_typespec: , line:2:7, endln:2:10
   |vpiImportTypespec:
@@ -1103,7 +1118,3 @@ design: (unnamed)
 [LINT]: ${SURELOG_DIR}/tests/FuncBinding/dut.sv:48:19: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/FuncBinding/dut.sv:50:19: Non synthesizable construct,
 ============================== End Linting Results ==============================
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/FuncBinding/dut.sv | ${SURELOG_DIR}/build/regression/FuncBinding/roundtrip/dut_000.sv | 30 | 53 |
-============================== End RoundTrip Results ==============================

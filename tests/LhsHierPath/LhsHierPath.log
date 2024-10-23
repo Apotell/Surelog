@@ -159,10 +159,11 @@ packed_array_typespec                                  1
 port                                                   1
 range                                                  1
 ref_obj                                                5
-ref_typespec                                           4
+ref_typespec                                           6
 source_file                                            1
 struct_typespec                                        2
 struct_var                                             1
+typedef_typespec                                       2
 typespec_member                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LhsHierPath/slpp_all/surelog.uhdm ...
@@ -203,6 +204,18 @@ design: (unnamed)
   \_logic_typespec: , line:3:7, endln:3:12
     |vpiParent:
     \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/LhsHierPath/dut.sv, line:1:1, endln:9:11
+  |vpiTypedef:
+  \_typedef_typespec: (ast_dif_t), line:4:6, endln:4:15
+    |vpiParent:
+    \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/LhsHierPath/dut.sv, line:1:1, endln:9:11
+    |vpiName:ast_dif_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (my_pkg::ast_dif_t), line:2:12, endln:4:5
+      |vpiParent:
+      \_typedef_typespec: (ast_dif_t), line:4:6, endln:4:15
+      |vpiFullName:my_pkg::ast_dif_t
+      |vpiActual:
+      \_struct_typespec: (my_pkg::ast_dif_t), line:2:12, endln:4:5
   |vpiTypedef:
   \_struct_typespec: (my_pkg::ast_alert_rsp_t), line:6:12, endln:8:5
     |vpiParent:
@@ -253,15 +266,31 @@ design: (unnamed)
       |vpiName:ast_dif_t
       |vpiFullName:my_pkg::ast_dif_t
       |vpiActual:
-      \_struct_typespec: (my_pkg::ast_dif_t), line:2:12, endln:4:5
+      \_typedef_typespec: (ast_dif_t), line:4:6, endln:4:15
+  |vpiTypedef:
+  \_typedef_typespec: (ast_alert_rsp_t), line:8:6, endln:8:21
+    |vpiParent:
+    \_package: my_pkg (my_pkg::), file:${SURELOG_DIR}/tests/LhsHierPath/dut.sv, line:1:1, endln:9:11
+    |vpiName:ast_alert_rsp_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (my_pkg::ast_alert_rsp_t), line:6:12, endln:8:5
+      |vpiParent:
+      \_typedef_typespec: (ast_alert_rsp_t), line:8:6, endln:8:21
+      |vpiFullName:my_pkg::ast_alert_rsp_t
+      |vpiActual:
+      \_struct_typespec: (my_pkg::ast_alert_rsp_t), line:6:12, endln:8:5
   |vpiImportTypespec:
   \_struct_typespec: (my_pkg::ast_dif_t), line:2:12, endln:4:5
   |vpiImportTypespec:
   \_logic_typespec: , line:3:7, endln:3:12
   |vpiImportTypespec:
+  \_typedef_typespec: (ast_dif_t), line:4:6, endln:4:15
+  |vpiImportTypespec:
   \_struct_typespec: (my_pkg::ast_alert_rsp_t), line:6:12, endln:8:5
   |vpiImportTypespec:
   \_packed_array_typespec: , line:7:7, endln:7:22
+  |vpiImportTypespec:
+  \_typedef_typespec: (ast_alert_rsp_t), line:8:6, endln:8:21
   |vpiDefName:my_pkg
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/LhsHierPath/dut.sv, line:11:1, endln:17:10
@@ -441,7 +470,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 2
 [   NOTE] : 1
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/LhsHierPath/dut.sv | ${SURELOG_DIR}/build/regression/LhsHierPath/roundtrip/dut_000.sv | 9 | 17 |
-============================== End RoundTrip Results ==============================

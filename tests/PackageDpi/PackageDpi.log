@@ -17,9 +17,10 @@ io_decl                                                1
 logic_net                                              4
 module_inst                                            1
 package                                                1
-ref_typespec                                           7
+ref_typespec                                           8
 source_file                                            1
 string_typespec                                        2
+typedef_typespec                                       1
 unsupported_typespec                                   1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageDpi/slpp_unit/surelog.uhdm ...
@@ -153,6 +154,18 @@ design: (unnamed)
       |vpiDecompile:1
       |vpiSize:64
   |vpiTypedef:
+  \_typedef_typespec: (uvm_core_state), line:12:3, endln:12:17
+    |vpiParent:
+    \_package: pack (pack::), file:${SURELOG_DIR}/tests/PackageDpi/dut.sv, line:1:1, endln:27:11
+    |vpiName:uvm_core_state
+    |vpiTypedefAlias:
+    \_ref_typespec: (pack::uvm_core_state), line:7:9, endln:12:2
+      |vpiParent:
+      \_typedef_typespec: (uvm_core_state), line:12:3, endln:12:17
+      |vpiFullName:pack::uvm_core_state
+      |vpiActual:
+      \_enum_typespec: (pack::uvm_core_state), line:7:9, endln:12:18
+  |vpiTypedef:
   \_string_typespec: , line:5:1, endln:5:7
     |vpiParent:
     \_package: pack (pack::), file:${SURELOG_DIR}/tests/PackageDpi/dut.sv, line:1:1, endln:27:11
@@ -174,6 +187,8 @@ design: (unnamed)
   \_int_typespec: , line:3:33, endln:3:36
   |vpiImportTypespec:
   \_enum_typespec: (pack::uvm_core_state), line:7:9, endln:12:18
+  |vpiImportTypespec:
+  \_typedef_typespec: (uvm_core_state), line:12:3, endln:12:17
   |vpiImportTypespec:
   \_string_typespec: , line:5:1, endln:5:7
   |vpiImportTypespec:
@@ -257,7 +272,3 @@ design: (unnamed)
 ============================== Begin Linting Results ==============================
 [LINT]: ${SURELOG_DIR}/tests/PackageDpi/dut.sv:20:1: Non synthesizable construct, toto
 ============================== End Linting Results ==============================
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/PackageDpi/dut.sv | ${SURELOG_DIR}/build/regression/PackageDpi/roundtrip/dut_000.sv | 6 | 27 |
-============================== End RoundTrip Results ==============================

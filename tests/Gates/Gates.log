@@ -3125,14 +3125,15 @@ port                                                   4
 prim_term                                             91
 range                                                  7
 ref_obj                                              186
-ref_typespec                                          75
+ref_typespec                                          76
 source_file                                            1
 sys_func_call                                         16
 task                                                   9
+typedef_typespec                                       1
 === UHDM Object Stats End ===
+[INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Gates/slpp_all/surelog.uhdm ...
 [ERR:IG0807] ${SURELOG_DIR}/tests/Gates/dut.sv:224:9: Child 355 is not entirely in parent's scope.
 [ERR:IG0807] ${SURELOG_DIR}/tests/Gates/dut.sv:224:9: Child 358 is not entirely in parent's scope.
-[INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Gates/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/Gates/slpp_all/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -3529,8 +3530,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/Gates/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -8794,7 +8809,3 @@ design: (unnamed)
 [LINT]: ${SURELOG_DIR}/tests/Gates/dut.sv:44:3: Non synthesizable construct,
 [LINT]: ${SURELOG_DIR}/tests/Gates/dut.sv:45:3: Non synthesizable construct,
 ============================== End Linting Results ==============================
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/Gates/dut.sv | ${SURELOG_DIR}/build/regression/Gates/roundtrip/dut_000.sv | 73 | 235 |
-============================== End RoundTrip Results ==============================

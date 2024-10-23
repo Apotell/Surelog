@@ -165,10 +165,11 @@ int_var                                                1
 module_inst                                            1
 port                                                   1
 ref_obj                                                3
-ref_typespec                                           5
+ref_typespec                                           6
 source_file                                            1
 struct_typespec                                        1
 struct_var                                             1
+typedef_typespec                                       1
 typespec_member                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConstExpand/slpp_all/surelog.uhdm ...
@@ -257,6 +258,18 @@ design: (unnamed)
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstExpand/dut.sv, line:1:1, endln:15:10
     |vpiSigned:1
   |vpiTypedef:
+  \_typedef_typespec: (mac_bignum_operation_t), line:5:6, endln:5:28
+    |vpiParent:
+    \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstExpand/dut.sv, line:1:1, endln:15:10
+    |vpiName:mac_bignum_operation_t
+    |vpiTypedefAlias:
+    \_ref_typespec: (work@top.mac_bignum_operation_t), line:2:12, endln:5:5
+      |vpiParent:
+      \_typedef_typespec: (mac_bignum_operation_t), line:5:6, endln:5:28
+      |vpiFullName:work@top.mac_bignum_operation_t
+      |vpiActual:
+      \_struct_typespec: (mac_bignum_operation_t), line:2:12, endln:5:5
+  |vpiTypedef:
   \_int_typespec: , line:1:19, endln:1:22
     |vpiParent:
     \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/ConstExpand/dut.sv, line:1:1, endln:15:10
@@ -272,6 +285,8 @@ design: (unnamed)
   \_int_typespec: , line:3:7, endln:3:10
   |vpiImportTypespec:
   \_int_typespec: , line:4:7, endln:4:10
+  |vpiImportTypespec:
+  \_typedef_typespec: (mac_bignum_operation_t), line:5:6, endln:5:28
   |vpiImportTypespec:
   \_int_typespec: , line:1:19, endln:1:22
   |vpiImportTypespec:
@@ -414,7 +429,3 @@ design: (unnamed)
 [  ERROR] : 0
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/ConstExpand/dut.sv | ${SURELOG_DIR}/build/regression/ConstExpand/roundtrip/dut_000.sv | 7 | 15 |
-============================== End RoundTrip Results ==============================

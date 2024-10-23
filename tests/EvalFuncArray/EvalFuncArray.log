@@ -486,18 +486,19 @@ param_assign                                           2
 parameter                                              2
 range                                                  2
 ref_obj                                               11
-ref_typespec                                          20
+ref_typespec                                          21
 return_stmt                                            1
 source_file                                            1
 task                                                   9
+typedef_typespec                                       1
 === UHDM Object Stats End ===
 [ERR:UH0734] ${SURELOG_DIR}/tests/EvalFuncArray/dut.sv:16:17: Failed to bind object: "id: 72, name: i".
 [ERR:EL0535] ${SURELOG_DIR}/tests/EvalFuncArray/dut.sv:16:17: Illegal implicit net "id:72, name: i".
 [ERR:UH0734] ${SURELOG_DIR}/tests/EvalFuncArray/dut.sv:17:29: Failed to bind object: "id: 80, name: i".
 [ERR:EL0535] ${SURELOG_DIR}/tests/EvalFuncArray/dut.sv:17:29: Illegal implicit net "id:80, name: i".
+[INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EvalFuncArray/slpp_all/surelog.uhdm ...
 [ERR:IG0809] ${SURELOG_DIR}/tests/EvalFuncArray/dut.sv:16:17: Object 72 actual cannot be null.
 [ERR:IG0809] ${SURELOG_DIR}/tests/EvalFuncArray/dut.sv:17:29: Object 80 actual cannot be null.
-[INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EvalFuncArray/slpp_all/surelog.uhdm ...
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/EvalFuncArray/slpp_all/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -894,8 +895,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/EvalFuncArray/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1530,7 +1545,3 @@ design: (unnamed)
 [  ERROR] : 6
 [WARNING] : 1
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/EvalFuncArray/dut.sv | ${SURELOG_DIR}/build/regression/EvalFuncArray/roundtrip/dut_000.sv | 10 | 24 |
-============================== End RoundTrip Results ==============================

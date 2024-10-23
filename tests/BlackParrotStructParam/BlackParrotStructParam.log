@@ -658,17 +658,18 @@ parameter                                             10
 range                                                  4
 ref_module                                             1
 ref_obj                                               51
-ref_typespec                                          41
+ref_typespec                                          44
 source_file                                            1
 string_typespec                                       12
 struct_typespec                                        1
 tagged_pattern                                        12
 task                                                   9
+typedef_typespec                                       3
 typespec_member                                        1
 unsupported_typespec                                   2
 === UHDM Object Stats End ===
-[ERR:IG0809] ${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv:63:5: Object 212 actual cannot be null.
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BlackParrotStructParam/slpp_all/surelog.uhdm ...
+[ERR:IG0809] ${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv:63:5: Object 216 actual cannot be null.
 [INF:UH0709] Writing UHDM Html Coverage: ${SURELOG_DIR}/build/regression/BlackParrotStructParam/slpp_all/checker/surelog.chk.html ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -1065,8 +1066,22 @@ design: (unnamed)
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_class_defn: (builtin::process), file:${SURELOG_DIR}/tests/BlackParrotStructParam/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_ref_typespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_typedef_typespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_enum_typespec: (state), line:32:13, endln:32:74
     |vpiImportTypespec:
     \_enum_typespec: (state), line:32:13, endln:32:74
+    |vpiImportTypespec:
+    \_typedef_typespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1705,6 +1720,18 @@ design: (unnamed)
     \_package: bp_common_aviary_pkg (bp_common_aviary_pkg::), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
     |vpiSigned:1
   |vpiTypedef:
+  \_typedef_typespec: (bp_proc_param_s), line:8:6, endln:8:21
+    |vpiParent:
+    \_package: bp_common_aviary_pkg (bp_common_aviary_pkg::), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
+    |vpiName:bp_proc_param_s
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
+      |vpiParent:
+      \_typedef_typespec: (bp_proc_param_s), line:8:6, endln:8:21
+      |vpiFullName:bp_common_aviary_pkg::bp_proc_param_s
+      |vpiActual:
+      \_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
+  |vpiTypedef:
   \_string_typespec: (cc_x_dim), line:12:7, endln:12:15
     |vpiParent:
     \_package: bp_common_aviary_pkg (bp_common_aviary_pkg::), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
@@ -1795,7 +1822,7 @@ design: (unnamed)
       |vpiName:bp_proc_param_s
       |vpiFullName:bp_common_aviary_pkg::bp_proc_param_s
       |vpiActual:
-      \_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
+      \_typedef_typespec: (bp_proc_param_s), line:8:6, endln:8:21
   |vpiTypedef:
   \_bit_typespec: , line:48:15, endln:48:31
     |vpiParent:
@@ -1840,10 +1867,24 @@ design: (unnamed)
       |UINT:0
       |vpiDecompile:0
       |vpiSize:64
+  |vpiTypedef:
+  \_typedef_typespec: (bp_params_e), line:51:5, endln:51:16
+    |vpiParent:
+    \_package: bp_common_aviary_pkg (bp_common_aviary_pkg::), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
+    |vpiName:bp_params_e
+    |vpiTypedefAlias:
+    \_ref_typespec: (bp_common_aviary_pkg::bp_params_e), line:48:10, endln:51:4
+      |vpiParent:
+      \_typedef_typespec: (bp_params_e), line:51:5, endln:51:16
+      |vpiFullName:bp_common_aviary_pkg::bp_params_e
+      |vpiActual:
+      \_enum_typespec: (bp_common_aviary_pkg::bp_params_e), line:48:10, endln:51:17
   |vpiImportTypespec:
   \_struct_typespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
   |vpiImportTypespec:
   \_integer_typespec: , line:7:5, endln:7:12
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_proc_param_s), line:8:6, endln:8:21
   |vpiImportTypespec:
   \_string_typespec: (cc_x_dim), line:12:7, endln:12:15
   |vpiImportTypespec:
@@ -1874,6 +1915,8 @@ design: (unnamed)
   \_bit_typespec: , line:48:15, endln:48:31
   |vpiImportTypespec:
   \_enum_typespec: (bp_common_aviary_pkg::bp_params_e), line:48:10, endln:51:17
+  |vpiImportTypespec:
+  \_typedef_typespec: (bp_params_e), line:51:5, endln:51:16
   |vpiDefName:bp_common_aviary_pkg
 |uhdmallModules:
 \_module_inst: work@top (work@top), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:55:1, endln:66:10
@@ -2095,7 +2138,3 @@ design: (unnamed)
 [  ERROR] : 1
 [WARNING] : 2
 [   NOTE] : 0
-
-============================== Begin RoundTrip Results ==============================
-[roundtrip]: ${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv | ${SURELOG_DIR}/build/regression/BlackParrotStructParam/roundtrip/dut_000.sv | 34 | 66 |
-============================== End RoundTrip Results ==============================

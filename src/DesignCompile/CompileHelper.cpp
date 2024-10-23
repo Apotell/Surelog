@@ -525,7 +525,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       ref_typespec* ref_type = s.MakeRef_typespec();
       ref_type->VpiName(name);
       tdTypespec->Typedef_alias(ref_type);
-      //ref_type->Actual_typespec(ts);
+      // ref_type->Actual_typespec(ts);
       fC->populateCoreMembers(type_name, type_name, ref_type);
       ref_type->VpiParent(tdTypespec);
       newTypeDef->setTypespec(tdTypespec);
@@ -910,7 +910,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       ref_type->VpiParent(tdTypespec);
       newTypeDef->setTypespec(tdTypespec);
       //
-      
+
       // Don't create the typespec here, as it is most likely going to be
       // incomplete at compilation time, except for packages and FileContent
       if ((m_reduce == Reduce::Yes) && (reduce == Reduce::Yes) &&
@@ -1088,8 +1088,8 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
           ts->Instance(scope->getUhdmModel<UHDM::instance>());
         }
         ts->VpiName(name);
-        //simple->setTypespec(ts);
-        // KS: Test code
+        // simple->setTypespec(ts);
+        //  KS: Test code
         typedef_typespec* tdTypespec = s.MakeTypedef_typespec();
         tdTypespec->VpiName(name);
         fC->populateCoreMembers(type_name, type_name, tdTypespec);
@@ -2495,7 +2495,8 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
 
   if (obj) {
     if (UHDM::variables* v = any_cast<UHDM::variables>(obj)) {
-      if (v->Typespec() != nullptr && org_tps && org_tps->UhdmType() == uhdmtypedef_typespec)
+      if (v->Typespec() != nullptr && org_tps &&
+          org_tps->UhdmType() == uhdmtypedef_typespec)
         v->Typespec()->Actual_typespec(org_tps);
     }
     fC->populateCoreMembers(sig->getNameId(), sig->getNameId(), obj);

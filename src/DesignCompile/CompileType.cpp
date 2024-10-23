@@ -735,7 +735,8 @@ any* CompileHelper::compileVariable(
     if (const TypeDef* tdef = datatype_cast<const TypeDef*>(dtype)) {
       if (tdef->getTypespec()) {
         tps = tdef->getTypespec();
-        while (tps != nullptr && tps->UhdmType() == UHDM::uhdmtypedef_typespec) {
+        while (tps != nullptr &&
+               tps->UhdmType() == UHDM::uhdmtypedef_typespec) {
           tps = static_cast<UHDM::typedef_typespec*>(tps)
                     ->Typedef_alias()
                     ->Actual_typespec();
@@ -2819,7 +2820,7 @@ UHDM::typespec* CompileHelper::compileTypespec(
                        ->Typedef_alias()
                        ->Actual_typespec();
         }
-        if (ranges && result) {          
+        if (ranges && result) {
           UHDM_OBJECT_TYPE dstype = result->UhdmType();
           ref_typespec* resultRef = s.MakeRef_typespec();
           resultRef->VpiName(typeName);

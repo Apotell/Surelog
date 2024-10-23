@@ -895,7 +895,7 @@ void UhdmWriter::writeClass(ClassDefinition* classDef, Serializer& s,
     c->Task_func_decls(classDef->getTask_func_decls());
 
     // Test code
-    //for (const auto& tp : classDef->getTypeDefMap()) {
+    // for (const auto& tp : classDef->getTypeDefMap()) {
     //  TypeDef* typd = tp.second;
     //  const DataType* dt = typd;
     //  if (dt->getTypespec()) {
@@ -1068,43 +1068,42 @@ void reInstanceTypespec(Serializer& serializer, any* root, package* p) {
   delete listener;
 }
 
-void UhdmWriter::writeTypedefTypespec(TypeDef* tyDef, 
-                                      UHDM::any* p, UHDM::Serializer& s,
-                                      NodeId id, const FileContent* fC) {
+void UhdmWriter::writeTypedefTypespec(TypeDef* tyDef, UHDM::any* p,
+                                      UHDM::Serializer& s, NodeId id,
+                                      const FileContent* fC) {
   if (tyDef->getTypespec() == nullptr) {
     FileSystem* const fileSystem = m_session->getFileSystem();
     SymbolTable* const symbols = m_session->getSymbolTable();
     ErrorContainer* const errorContainer = m_session->getErrorContainer();
-    
+
     Location loc(fileSystem->toPathId(fC->getName(), symbols), fC->Line(id),
                  fC->Column(id),
                  symbols->registerSymbol(std::to_string(tyDef->d_id)));
     Error err(ErrorDefinition::INTEGRITY_CHECK_TYPEDEF_TYPESPEC, loc);
     errorContainer->addError(err);
   }
-  //typedef_typespec* tdType = s.MakeTypedef_typespec();
-  //tdType->VpiName(typedefName);
-  //fC->populateCoreMembers(id, id, tdType);
-  //tdType->VpiParent(p);
-  //ref_typespec* ref_type = s.MakeRef_typespec();
-  //ref_type->VpiName(fC->SymName(id));
-  //tdType->Typedef_alias(ref_type);
-  //fC->populateCoreMembers(id, id, ref_type);
+  // typedef_typespec* tdType = s.MakeTypedef_typespec();
+  // tdType->VpiName(typedefName);
+  // fC->populateCoreMembers(id, id, tdType);
+  // tdType->VpiParent(p);
+  // ref_typespec* ref_type = s.MakeRef_typespec();
+  // ref_type->VpiName(fC->SymName(id));
+  // tdType->Typedef_alias(ref_type);
+  // fC->populateCoreMembers(id, id, ref_type);
 }
-// typedef map => create correcponding typedef typespec  and parent to the package
+// typedef map => create correcponding typedef typespec  and parent to the
+// package
 void UhdmWriter::writePackage(Package* pack, package* p, Serializer& s,
                               bool elaborated, const FileContent* fC) {
   const ScopedScope scopedScope(p);
   for (const auto& tp : pack->getTypeDefMap()) {
     TypeDef* typd = tp.second;
-    //const DataType* dt = typd;
-    
-    //NodeId nId = typd->getDefinitionNode();
-    //if (dt->getTypespec() == nullptr) {
-    writeTypedefTypespec(typd, p, s, typd->getDefinitionNode(),
-                           fC);
-    //}
+    // const DataType* dt = typd;
 
+    // NodeId nId = typd->getDefinitionNode();
+    // if (dt->getTypespec() == nullptr) {
+    writeTypedefTypespec(typd, p, s, typd->getDefinitionNode(), fC);
+    //}
   }
   p->VpiEndLabel(pack->getEndLabel());
   p->VpiFullName(StrCat(pack->getName(), "::"));
@@ -1219,12 +1218,11 @@ void UhdmWriter::writeModule(ModuleDefinition* mod, module_inst* m,
   const FileContent* fC = mod->getFileContents()[0];
   for (const auto& tp : mod->getTypeDefMap()) {
     TypeDef* typd = tp.second;
-    //const DataType* dt = typd;
+    // const DataType* dt = typd;
 
     NodeId nId = typd->getDefinitionNode();
-    //if (dt->getTypespec() == nullptr) {
-      writeTypedefTypespec(typd, m, s, typd->getDefinitionNode(),
-                           fC);
+    // if (dt->getTypespec() == nullptr) {
+    writeTypedefTypespec(typd, m, s, typd->getDefinitionNode(), fC);
     //}
   }
   // Let decls

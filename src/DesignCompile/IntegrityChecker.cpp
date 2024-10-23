@@ -491,8 +491,8 @@ void IntegrityChecker::reportNullActual(const UHDM::any* const object) const {
           parent->UhdmType() == UHDM::uhdmtypedef_typespec) {
         if (UHDM::ref_typespec* ref_tps =
                 ((UHDM::typespec*)parent)->Typedef_alias()) {
-            shouldReport = false;
-        }        
+          shouldReport = false;
+        }
       } else {
         shouldReport =
             static_cast<const UHDM::ref_typespec*>(object)->Actual_typespec() ==

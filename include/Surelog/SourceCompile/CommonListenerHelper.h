@@ -37,14 +37,15 @@ namespace antlr4 {
 class CommonTokenStream;
 class ParserRuleContext;
 class Token;
+
 namespace tree {
 class ParseTree;
 }
 }  // namespace antlr4
 
 namespace SURELOG {
-
 class FileContent;
+class Session;
 class VObject;
 
 static constexpr char kEscapeSequence[] = "#~@";
@@ -101,13 +102,16 @@ class CommonListenerHelper {
   NodeId& MutableParent(NodeId index);
 
  protected:
-  CommonListenerHelper(FileContent* file_content,
+  CommonListenerHelper(Session* session, FileContent* file_content,
                        antlr4::CommonTokenStream* tokens);
+
+ protected:
+  Session* const m_session = nullptr;
 
   // These should be *const, but they are still set in some places.
   // TODO: fix these places.
-  FileContent* m_fileContent;
-  antlr4::CommonTokenStream* const m_tokens;
+  FileContent* m_fileContent = nullptr;
+  antlr4::CommonTokenStream* const m_tokens = nullptr;
 
   typedef std::map<const antlr4::tree::ParseTree*, NodeId> ContextToObjectMap;
   ContextToObjectMap m_contextToObjectMap;

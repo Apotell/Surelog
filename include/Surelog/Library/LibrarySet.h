@@ -25,24 +25,22 @@
 #define SURELOG_LIBRARYSET_H
 #pragma once
 
-#include <Surelog/Common/PathId.h>
-#include <Surelog/Common/SymbolId.h>
-
 #include <ostream>
 #include <string_view>
 #include <vector>
 
 namespace SURELOG {
-
 class ErrorContainer;
 class Library;
+class PathId;
+class Session;
 class SymbolTable;
 
 class LibrarySet final {
  public:
   LibrarySet() = default;
 
-  Library* addLibrary(std::string_view name, SymbolTable* symbolTable);
+  Library* addLibrary(Session* session, std::string_view name);
   std::vector<Library>& getLibraries() { return m_libraries; }
   Library* getLibrary(std::string_view libName);
   Library* getLibrary(PathId fileId);

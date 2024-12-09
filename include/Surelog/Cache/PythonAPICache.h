@@ -29,12 +29,12 @@
 #include <Surelog/Cache/PythonAPICache.capnp.h>
 
 namespace SURELOG {
-
 class PythonListen;
+class Session;
 
 class PythonAPICache final : Cache {
  public:
-  explicit PythonAPICache(PythonListen* listener);
+  PythonAPICache(Session* session, PythonListen* listener);
 
   bool restore();
   bool save();

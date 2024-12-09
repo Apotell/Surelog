@@ -23,6 +23,7 @@
 
 #include <Surelog/CommandLine/CommandLineParser.h>
 #include <Surelog/Common/FileSystem.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/DataType.h>
 #include <Surelog/Design/DummyType.h>
 #include <Surelog/Design/Enum.h>
@@ -62,26 +63,19 @@ namespace SURELOG {
 
 using namespace UHDM;  // NOLINT (using a bunch of these)
 
-ElaborationStep::ElaborationStep(CompileDesign* compileDesign)
-    : m_compileDesign(compileDesign) {
-  m_exprBuilder.seterrorReporting(
-      m_compileDesign->getCompiler()->getErrorContainer(),
-      m_compileDesign->getCompiler()->getSymbolTable());
+ElaborationStep::ElaborationStep(Session* session, CompileDesign* compileDesign)
+    : m_session(session),
+      m_compileDesign(compileDesign),
+      m_exprBuilder(session),
+      m_helper(session) {
   m_exprBuilder.setDesign(m_compileDesign->getCompiler()->getDesign());
-  m_helper.seterrorReporting(
-      m_compileDesign->getCompiler()->getErrorContainer(),
-      m_compileDesign->getCompiler()->getSymbolTable());
-  m_symbols = m_compileDesign->getCompiler()->getSymbolTable();
-  m_errors = m_compileDesign->getCompiler()->getErrorContainer();
 }
 
-ElaborationStep::~ElaborationStep() {}
-
 bool ElaborationStep::bindTypedefs_() {
-  FileSystem* const fileSystem = FileSystem::getInstance();
-  Compiler* compiler = m_compileDesign->getCompiler();
-  ErrorContainer* errors = compiler->getErrorContainer();
-  SymbolTable* symbols = compiler->getSymbolTable();
+  Compiler* const compiler = m_compileDesign->getCompiler();
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  ErrorContainer* const errors = m_session->getErrorContainer();
   Design* design = compiler->getDesign();
   Serializer& s = m_compileDesign->getSerializer();
   std::vector<std::pair<TypeDef*, DesignComponent*>> defs;
@@ -104,6 +98,11 @@ bool ElaborationStep::bindTypedefs_() {
 
   for (const auto& module : design->getModuleDefinitions()) {
     ModuleDefinition* mod = module.second;
+    for (const auto& typed : mod->getTypeDefMap()) {
+      TypeDef* typd = typed.second;
+      defs.emplace_back(typd, mod);
+    }
+    mod = mod->getUnelabMmodule();
     for (const auto& typed : mod->getTypeDefMap()) {
       TypeDef* typd = typed.second;
       defs.emplace_back(typd, mod);
@@ -173,10 +172,12 @@ bool ElaborationStep::bindTypedefs_() {
             ElaboratorContext elaboratorContext(&s, false, true);
             tpclone =
                 (typespec*)UHDM::clone_tree((any*)tps, &elaboratorContext);
-            ref_typespec* rt = s.MakeRef_typespec();
-            rt->VpiParent(tpclone);
-            rt->Actual_typespec(tps);
-            tpclone->Typedef_alias(rt);
+            if (typedef_typespec* tt = any_cast<typedef_typespec>(tpclone)) {
+              ref_typespec* rt = s.MakeRef_typespec();
+              rt->VpiParent(tpclone);
+              rt->Actual_typespec(tps);
+              tt->Typedef_alias(rt);
+            }
           }
           if (typespec* unpacked = prevDef->getUnpackedTypespec()) {
             ElaboratorContext elaboratorContext(&s, false, true);
@@ -274,117 +275,6 @@ bool ElaborationStep::bindTypedefs_() {
                         symbols->registerSymbol(definition_string));
           Error err1(ErrorDefinition::COMP_UNDEFINED_TYPE, loc1);
           errors->addError(err1);
-        }
-      }
-    }
-    if (typespec* tps = typd->getTypespec()) {
-      for (any* var : comp->getLateTypedefBinding()) {
-        const ref_typespec* orig_rt = nullptr;
-        if (expr* ex = any_cast<expr*>(var)) {
-          orig_rt = ex->Typespec();
-        } else if (typespec_member* ex = any_cast<typespec_member*>(var)) {
-          orig_rt = ex->Typespec();
-        } else if (parameter* ex = any_cast<parameter*>(var)) {
-          orig_rt = ex->Typespec();
-        } else if (type_parameter* ex = any_cast<type_parameter*>(var)) {
-          orig_rt = ex->Typespec();
-        } else if (io_decl* ex = any_cast<io_decl*>(var)) {
-          orig_rt = ex->Typespec();
-        }
-        if (orig_rt) {
-          if (const unsupported_typespec* orig_ut =
-                  orig_rt->Actual_typespec<unsupported_typespec>()) {
-            const std::string_view need = orig_ut->VpiName();
-            if (need == tps->VpiName()) {
-              m_compileDesign->getSwapedObjects().emplace(orig_ut, tps);
-            }
-          }
-        }
-      }
-    }
-  }
-  for (const auto& module : design->getPackageDefinitions()) {
-    Package* pack = module.second;
-    std::vector<Package*> packages;
-    packages.emplace_back(pack);
-    packages.emplace_back(pack->getUnElabPackage());
-    for (auto comp : packages) {
-      for (any* var : comp->getLateTypedefBinding()) {
-        const ref_typespec* orig_rt = nullptr;
-        if (expr* ex = any_cast<expr*>(var)) {
-          orig_rt = ex->Typespec();
-        } else if (typespec_member* ex = any_cast<typespec_member*>(var)) {
-          orig_rt = ex->Typespec();
-        } else if (parameter* ex = any_cast<parameter*>(var)) {
-          orig_rt = ex->Typespec();
-        } else if (type_parameter* ex = any_cast<type_parameter*>(var)) {
-          orig_rt = ex->Typespec();
-        } else if (io_decl* ex = any_cast<io_decl*>(var)) {
-          orig_rt = ex->Typespec();
-        }
-        if (orig_rt) {
-          if (const unsupported_typespec* orig_ut =
-                  orig_rt->Actual_typespec<unsupported_typespec>()) {
-            const std::string_view need = orig_ut->VpiName();
-            std::map<std::string, typespec*>::iterator itr = specs.find(need);
-            if (itr != specs.end()) {
-              m_compileDesign->getSwapedObjects().emplace(orig_ut, itr->second);
-            }
-          }
-        }
-      }
-    }
-  }
-  for (const auto& module : design->getModuleDefinitions()) {
-    DesignComponent* comp = module.second;
-    for (any* var : comp->getLateTypedefBinding()) {
-      const ref_typespec* orig_rt = nullptr;
-      if (expr* ex = any_cast<expr*>(var)) {
-        orig_rt = ex->Typespec();
-      } else if (typespec_member* ex = any_cast<typespec_member*>(var)) {
-        orig_rt = ex->Typespec();
-      } else if (parameter* ex = any_cast<parameter*>(var)) {
-        orig_rt = ex->Typespec();
-      } else if (type_parameter* ex = any_cast<type_parameter*>(var)) {
-        orig_rt = ex->Typespec();
-      } else if (io_decl* ex = any_cast<io_decl*>(var)) {
-        orig_rt = ex->Typespec();
-      }
-      if (orig_rt) {
-        if (const unsupported_typespec* orig_ut =
-                orig_rt->Actual_typespec<unsupported_typespec>()) {
-          const std::string_view need = orig_ut->VpiName();
-          std::map<std::string, typespec*>::iterator itr = specs.find(need);
-          if (itr != specs.end()) {
-            m_compileDesign->getSwapedObjects().emplace(orig_ut, itr->second);
-          }
-        }
-      }
-    }
-  }
-  for (const auto& module : design->getClassDefinitions()) {
-    DesignComponent* comp = module.second;
-    for (any* var : comp->getLateTypedefBinding()) {
-      const ref_typespec* orig_rt = nullptr;
-      if (expr* ex = any_cast<expr*>(var)) {
-        orig_rt = ex->Typespec();
-      } else if (typespec_member* ex = any_cast<typespec_member*>(var)) {
-        orig_rt = ex->Typespec();
-      } else if (parameter* ex = any_cast<parameter*>(var)) {
-        orig_rt = ex->Typespec();
-      } else if (type_parameter* ex = any_cast<type_parameter*>(var)) {
-        orig_rt = ex->Typespec();
-      } else if (io_decl* ex = any_cast<io_decl*>(var)) {
-        orig_rt = ex->Typespec();
-      }
-      if (orig_rt) {
-        if (const unsupported_typespec* orig_ut =
-                orig_rt->Actual_typespec<unsupported_typespec>()) {
-          const std::string_view need = orig_ut->VpiName();
-          std::map<std::string, typespec*>::iterator itr = specs.find(need);
-          if (itr != specs.end()) {
-            m_compileDesign->getSwapedObjects().emplace(orig_ut, itr->second);
-          }
         }
       }
     }
@@ -610,7 +500,7 @@ void ElaborationStep::swapTypespecPointersInUhdm(
     if (expr* ex = any_cast<expr*>(var)) {
       replace(ex->Typespec(), typespecSwapMap);
     }
-    if (typespec* ex = any_cast<typespec*>(var)) {
+    if (typedef_typespec* ex = any_cast<typedef_typespec*>(var)) {
       replace(ex->Typedef_alias(), typespecSwapMap);
     }
   }
@@ -633,95 +523,6 @@ bool ElaborationStep::bindTypedefsPostElab_() {
       queue.push(current->getChildren(i));
     }
     if (auto comp = current->getDefinition()) {
-      for (any* var : comp->getLateTypedefBinding()) {
-        const ref_typespec* orig_rt = nullptr;
-        if (expr* ex = any_cast<expr*>(var)) {
-          orig_rt = ex->Typespec();
-        } else if (typespec_member* ex = any_cast<typespec_member*>(var)) {
-          orig_rt = ex->Typespec();
-        } else if (parameter* ex = any_cast<parameter*>(var)) {
-          orig_rt = ex->Typespec();
-        } else if (type_parameter* ex = any_cast<type_parameter*>(var)) {
-          orig_rt = ex->Typespec();
-        } else if (io_decl* ex = any_cast<io_decl*>(var)) {
-          orig_rt = ex->Typespec();
-        }
-        const unsupported_typespec* orig_ut = nullptr;
-        if (orig_rt) {
-          orig_ut = orig_rt->Actual_typespec<unsupported_typespec>();
-        }
-        if (orig_ut) {
-          const std::string_view need = orig_ut->VpiName();
-          if (Netlist* netlist = current->getNetlist()) {
-            UHDM::typespec* tps = nullptr;
-            bool found = false;
-            if (netlist->nets()) {
-              for (auto net : *netlist->nets()) {
-                if (net->VpiName() == need) {
-                  if (UHDM::ref_typespec* rt = net->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                  found = true;
-                  break;
-                }
-              }
-            }
-            if (tps == nullptr) {
-              if (netlist->variables()) {
-                for (auto var : *netlist->variables()) {
-                  if (var->VpiName() == need) {
-                    if (UHDM::ref_typespec* rt = var->Typespec()) {
-                      tps = rt->Actual_typespec();
-                    }
-                    found = true;
-                    break;
-                  }
-                }
-              }
-            }
-            if (tps == nullptr) {
-              if (const DataType* dtype = comp->getDataType(need)) {
-                while (dtype) {
-                  if ((tps = dtype->getTypespec())) {
-                    found = true;
-                    break;
-                  }
-                  dtype = dtype->getDefinition();
-                }
-              }
-            }
-            if (tps == nullptr) {
-              if (const TypeDef* dtype = comp->getTypeDef(need)) {
-                if ((tps = dtype->getTypespec())) {
-                  found = true;
-                } else {
-                  std::string_view name = dtype->getFileContent()->SymName(
-                      dtype->getDefinitionNode());
-                  const DataType* def = bindDataType_(
-                      name, dtype->getFileContent(), dtype->getDefinitionNode(),
-                      comp, ErrorDefinition::NO_ERROR_MESSAGE);
-
-                  if (def && (dtype != def)) {
-                    dtype->setDefinition(def);
-                    ((TypeDef*)dtype)->setDataType((DataType*)def);
-                  }
-                  const DataType* dtype2 = dtype->getDataType();
-                  while (dtype2) {
-                    if ((tps = dtype2->getTypespec())) {
-                      found = true;
-                      break;
-                    }
-                    dtype2 = dtype2->getDefinition();
-                  }
-                }
-              }
-            }
-            if (found == true) {
-              m_compileDesign->getSwapedObjects().emplace(orig_ut, tps);
-            }
-          }
-        }
-      }
       for (const auto& typed : comp->getDataTypeMap()) {
         const DataType* dt = typed.second;
         while (dt) {
@@ -752,8 +553,7 @@ bool ElaborationStep::bindTypedefsPostElab_() {
 const DataType* ElaborationStep::bindTypeDef_(
     TypeDef* typd, const DesignComponent* parent,
     ErrorDefinition::ErrorType errtype) {
-  Compiler* compiler = m_compileDesign->getCompiler();
-  SymbolTable* symbols = compiler->getSymbolTable();
+  SymbolTable* symbols = m_session->getSymbolTable();
   NodeId defNode = typd->getDefinitionNode();
   const FileContent* fC = typd->getFileContent();
   VObjectType defType = fC->Type(defNode);
@@ -782,8 +582,8 @@ const DataType* ElaborationStep::bindDataType_(
     std::string_view type_name, const FileContent* fC, NodeId id,
     const DesignComponent* parent, ErrorDefinition::ErrorType errtype) {
   Compiler* compiler = m_compileDesign->getCompiler();
-  ErrorContainer* errors = compiler->getErrorContainer();
-  SymbolTable* symbols = compiler->getSymbolTable();
+  ErrorContainer* errors = m_session->getErrorContainer();
+  SymbolTable* symbols = m_session->getSymbolTable();
   Design* design = compiler->getDesign();
   std::string libName = "work";
   if (!parent->getFileContents().empty()) {
@@ -997,9 +797,8 @@ Variable* ElaborationStep::bindVariable_(std::string_view var_name,
                                          const DesignComponent* parent,
                                          ErrorDefinition::ErrorType errtype,
                                          bool returnClassParam) {
-  Compiler* compiler = m_compileDesign->getCompiler();
-  ErrorContainer* errors = compiler->getErrorContainer();
-  SymbolTable* symbols = compiler->getSymbolTable();
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  ErrorContainer* const errors = m_session->getErrorContainer();
   Variable* result = nullptr;
 
   const ClassDefinition* classDefinition =
@@ -1243,9 +1042,10 @@ bool ElaborationStep::bindPortType_(Signal* signal, const FileContent* fC,
   if (signal->getDataType() || signal->getInterfaceDef() ||
       signal->getModPort())
     return true;
-  Compiler* compiler = m_compileDesign->getCompiler();
-  ErrorContainer* errors = compiler->getErrorContainer();
-  SymbolTable* symbols = compiler->getSymbolTable();
+  Compiler* const compiler = m_compileDesign->getCompiler();
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  ErrorContainer* const errors = m_session->getErrorContainer();
+  CommandLineParser* const clp = m_session->getCommandLineParser();
   Design* design = compiler->getDesign();
   const std::string_view libName = fC->getLibrary()->getName();
   VObjectType type = fC->Type(id);
@@ -1352,7 +1152,7 @@ bool ElaborationStep::bindPortType_(Signal* signal, const FileContent* fC,
       if (signal->getInterfaceTypeNameId()) {
         interfName = signal->getInterfaceTypeName();
       } else {
-        if (NodeId typespecId = signal->getTypeSpecId()) {
+        if (NodeId typespecId = signal->getTypespecId()) {
           if (fC->Type(typespecId) == VObjectType::paClass_scope) {
             NodeId Class_type = fC->Child(typespecId);
             NodeId Class_type_name = fC->Child(Class_type);
@@ -1442,9 +1242,7 @@ bool ElaborationStep::bindPortType_(Signal* signal, const FileContent* fC,
       if (def == nullptr) {
         type = parentComponent->getDataType(interfName);
         if (type == nullptr) {
-          if (!m_compileDesign->getCompiler()
-                   ->getCommandLineParser()
-                   ->fileunit()) {
+          if (!clp->fileUnit()) {
             for (const auto& fC : m_compileDesign->getCompiler()
                                       ->getDesign()
                                       ->getAllFileContents()) {
@@ -1751,10 +1549,7 @@ any* ElaborationStep::makeVar_(DesignComponent* component, Signal* sig,
       } else if (ttps == uhdmunion_typespec) {
         var = s.MakeUnion_var();
       } else if (ttps == uhdmpacked_array_typespec) {
-        packed_array_var* avar = s.MakePacked_array_var();
-        auto elems = s.MakeAnyVec();
-        avar->Elements(elems);
-        var = avar;
+        var = s.MakePacked_array_var();
       } else if (ttps == uhdmarray_typespec) {
         UHDM::array_var* array_var = s.MakeArray_var();
         ref_typespec* tmpRef = s.MakeRef_typespec();
@@ -1805,8 +1600,9 @@ any* ElaborationStep::makeVar_(DesignComponent* component, Signal* sig,
       UHDM::typespec* spec = sit->getTypespec();
       spec = m_helper.elabTypespec(component, spec, m_compileDesign, nullptr,
                                    instance);
-      variables* var = m_helper.getSimpleVarFromTypespec(spec, packedDimensions,
-                                                         m_compileDesign);
+      variables* var = m_helper.getSimpleVarFromTypespec(
+          fC, sit->getNodeId(), sit->getNodeId(), spec, packedDimensions,
+          m_compileDesign);
       var->VpiConstantVariable(sig->isConst());
       var->VpiSigned(sig->isSigned());
       var->VpiName(signame);
@@ -1841,7 +1637,8 @@ any* ElaborationStep::makeVar_(DesignComponent* component, Signal* sig,
                    datatype_cast<const Parameter*>(dtype))) {
       if (UHDM::typespec* spec = elabTypeParameter_(component, sit, instance)) {
         if (variables* var = m_helper.getSimpleVarFromTypespec(
-                spec, packedDimensions, m_compileDesign)) {
+                fC, sit->getNodeId(), sit->getNodeId(), spec, packedDimensions,
+                m_compileDesign)) {
           var->VpiConstantVariable(sig->isConst());
           var->VpiSigned(sig->isSigned());
           var->VpiName(signame);
@@ -2057,9 +1854,7 @@ any* ElaborationStep::makeVar_(DesignComponent* component, Signal* sig,
     // packed struct array ...
     UHDM::packed_array_var* parray = s.MakePacked_array_var();
     parray->Ranges(packedDimensions);
-    VectorOfany* elements = s.MakeAnyVec();
-    elements->push_back(obj);
-    parray->Elements(elements);
+    parray->Elements(true)->push_back(obj);
     obj->VpiParent(parray);
     parray->VpiName(signame);
     obj = parray;
@@ -2067,7 +1862,6 @@ any* ElaborationStep::makeVar_(DesignComponent* component, Signal* sig,
 
   if (unpackedDimensions) {
     array_var* array_var = s.MakeArray_var();
-    array_var->Variables(s.MakeVariablesVec());
     bool dynamic = false;
     bool associative = false;
     bool queue = false;
@@ -2231,8 +2025,7 @@ any* ElaborationStep::makeVar_(DesignComponent* component, Signal* sig,
     vars->push_back(array_var);
     obj->VpiParent(array_var);
     if ((array_var->Typespec() == nullptr) || associative) {
-      VectorOfvariables* array_vars = array_var->Variables();
-      array_vars->push_back((variables*)obj);
+      array_var->Variables(true)->push_back((variables*)obj);
       ((variables*)obj)->VpiName("");
     }
     if (array_var->Typespec() == nullptr) {

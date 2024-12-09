@@ -34,23 +34,27 @@
 #include <unordered_map>
 
 // UHDM
-#include <uhdm/constant.h>
 #include <uhdm/containers.h>
 
-namespace SURELOG {
+namespace UHDM {
+class constant;
+class Serializer;
+}  // namespace UHDM
 
+namespace SURELOG {
 class CompileDesign;
 class DataType;
 class Design;
 class DesignComponent;
-class ErrorContainer;
 class FileContent;
 class Function;
 class NodeId;
+class Parameter;
 class Procedure;
 class Scope;
+class Session;
+class Signal;
 class Statement;
-class SymbolTable;
 class Task;
 class TfPortItem;
 typedef std::vector<TfPortItem*> TfPortList;
@@ -58,25 +62,20 @@ typedef std::vector<TfPortItem*> TfPortList;
 class FScope : public ValuedComponentI {
   SURELOG_IMPLEMENT_RTTI(FScope, ValuedComponentI)
  public:
-  FScope(const SURELOG::ValuedComponentI* parent,
+  FScope(Session* session, const SURELOG::ValuedComponentI* parent,
          SURELOG::ValuedComponentI* definition)
-      : ValuedComponentI(parent, definition) {}
+      : ValuedComponentI(session, parent, definition) {}
 
  private:
 };
 
 typedef std::vector<FScope*> Scopes;
+enum class Elaborate : bool { Yes = true, No = false };
 enum class Reduce : bool { Yes = true, No = false };
 
 class CompileHelper final {
  public:
-  CompileHelper() {}
-
-  void seterrorReporting(ErrorContainer* errors, SymbolTable* symbols) {
-    m_errors = errors;
-    m_symbols = symbols;
-    m_exprBuilder.seterrorReporting(errors, symbols);
-  }
+  explicit CompileHelper(Session* session);
 
   void setDesign(Design* design) { m_exprBuilder.setDesign(design); }
 
@@ -127,6 +126,7 @@ class CompileHelper final {
 
   bool compileAnsiPortDeclaration(DesignComponent* component,
                                   const FileContent* fC, NodeId id,
+                                  CompileDesign* compileDesign,
                                   VObjectType& port_direction);
 
   bool elaborationSystemTask(DesignComponent* component, const FileContent* fC,
@@ -141,12 +141,21 @@ class CompileHelper final {
                               CompileDesign* compileDesign, Reduce reduce,
                               UHDM::VectorOfattribute* attributes);
 
+  bool compileSignal(DesignComponent* comp, CompileDesign* compileDesign,
+                     Signal* sig, std::string_view prefix, bool signalIsPort,
+                     Reduce reduce);
+
+  UHDM::typespec* compileTypeParameter(DesignComponent* component,
+                                       CompileDesign* compileDesign,
+                                       Parameter* sit);
+
   // ------------------------------------------------------------------------------------------
   // UHDM modeling
 
   std::vector<UHDM::cont_assign*> compileContinuousAssignment(
       DesignComponent* component, const FileContent* fC, NodeId id,
-      CompileDesign* compileDesign, ValuedComponentI* instance);
+      CompileDesign* compileDesign, UHDM::any* pstmt,
+      ValuedComponentI* instance);
 
   UHDM::always* compileAlwaysBlock(DesignComponent* component,
                                    const FileContent* fC, NodeId id,
@@ -190,7 +199,9 @@ class CompileHelper final {
                                    bool port_param, bool muteErrors);
 
   NodeId setFuncTaskQualifiers(const FileContent* fC, NodeId nodeId,
-                               UHDM::task_func* func);
+                               UHDM::task_func* tf);
+  NodeId setFuncTaskDeclQualifiers(const FileContent* fC, NodeId nodeId,
+                                   UHDM::task_func_decl* tfd);
 
   bool compileTask(DesignComponent* component, const FileContent* fC,
                    NodeId nodeId, CompileDesign* compileDesign, Reduce reduce,
@@ -205,15 +216,15 @@ class CompileHelper final {
                             NodeId nodeId, CompileDesign* compileDesign);
 
   std::vector<UHDM::io_decl*>* compileTfPortList(DesignComponent* scope,
-                                                 UHDM::task_func* parent,
+                                                 UHDM::any* parent,
                                                  const FileContent* fC,
                                                  NodeId id,
                                                  CompileDesign* compileDesign);
 
+  template <typename T>
   std::pair<std::vector<UHDM::io_decl*>*, std::vector<UHDM::variables*>*>
-  compileTfPortDecl(DesignComponent* scope, UHDM::task_func* parent,
-                    const FileContent* fC, NodeId id,
-                    CompileDesign* compileDesign);
+  compileTfPortDecl(DesignComponent* scope, T* parent, const FileContent* fC,
+                    NodeId id, CompileDesign* compileDesign);
 
   UHDM::atomic_stmt* compileCaseStmt(DesignComponent* component,
                                      const FileContent* fC, NodeId nodeId,
@@ -236,9 +247,17 @@ class CompileHelper final {
                                  bool muteError = false);
 
   UHDM::any* compileVariable(DesignComponent* component, const FileContent* fC,
-                             NodeId nodeId, CompileDesign* compileDesign,
-                             Reduce reduce, UHDM::any* pstmt,
-                             ValuedComponentI* instance, bool muteErrors);
+                             NodeId declarationId, NodeId nameId,
+                             CompileDesign* compileDesign, Reduce reduce,
+                             UHDM::any* pstmt, ValuedComponentI* instance,
+                             bool muteErrors);
+  UHDM::any* compileVariable(DesignComponent* component,
+                             CompileDesign* compileDesign, Signal* sig,
+                             std::vector<UHDM::range*>* packedDimensions,
+                             int32_t packedSize,
+                             std::vector<UHDM::range*>* unpackedDimensions,
+                             int32_t unpackedSize, UHDM::expr* assignExp,
+                             UHDM::typespec* tps);
 
   UHDM::typespec* compileTypespec(DesignComponent* component,
                                   const FileContent* fC, NodeId nodeId,
@@ -250,7 +269,8 @@ class CompileHelper final {
                                          const FileContent* fC, NodeId type,
                                          VObjectType the_type,
                                          CompileDesign* compileDesign,
-                                         std::vector<UHDM::range*>* ranges);
+                                         std::vector<UHDM::range*>* ranges,
+                                         UHDM::any* pstmt);
 
   UHDM::typespec* compileDatastructureTypespec(
       DesignComponent* component, const FileContent* fC, NodeId type,
@@ -283,18 +303,20 @@ class CompileHelper final {
                                         CompileDesign* compileDesign,
                                         UHDM::any* pstmt,
                                         ValuedComponentI* instance);
-                                        
+
   UHDM::property_decl* compilePropertyDeclaration(DesignComponent* component,
-                                        const FileContent* fC, NodeId nodeId,
-                                        CompileDesign* compileDesign,
-                                        UHDM::any* pstmt,
-                                        ValuedComponentI* instance);
-                                        
+                                                  const FileContent* fC,
+                                                  NodeId nodeId,
+                                                  CompileDesign* compileDesign,
+                                                  UHDM::any* pstmt,
+                                                  ValuedComponentI* instance);
+
   UHDM::sequence_decl* compileSequenceDeclaration(DesignComponent* component,
-                                        const FileContent* fC, NodeId nodeId,
-                                        CompileDesign* compileDesign,
-                                        UHDM::any* pstmt,
-                                        ValuedComponentI* instance);
+                                                  const FileContent* fC,
+                                                  NodeId nodeId,
+                                                  CompileDesign* compileDesign,
+                                                  UHDM::any* pstmt,
+                                                  ValuedComponentI* instance);
 
   UHDM::initial* compileInitialBlock(DesignComponent* component,
                                      const FileContent* fC, NodeId id,
@@ -322,13 +344,13 @@ class CompileHelper final {
       std::string_view name, CompileDesign* compileDesign, Reduce reduce,
       UHDM::any* pexpr, ValuedComponentI* instance, bool muteErrors);
 
-  std::vector<UHDM::range*>* compileRanges(DesignComponent* component,
-                                           const FileContent* fC,
-                                           NodeId Packed_dimension,
-                                           CompileDesign* compileDesign,
-                                           Reduce reduce, UHDM::any* pexpr,
-                                           ValuedComponentI* instance,
-                                           int32_t& size, bool muteErrors);
+  UHDM::VectorOfrange* compileRanges(DesignComponent* component,
+                                     const FileContent* fC,
+                                     NodeId Packed_dimension,
+                                     CompileDesign* compileDesign,
+                                     Reduce reduce, UHDM::any* pexpr,
+                                     ValuedComponentI* instance, int32_t& size,
+                                     bool muteErrors);
 
   UHDM::any* compileAssignmentPattern(DesignComponent* component,
                                       const FileContent* fC,
@@ -396,11 +418,11 @@ class CompileHelper final {
                                     ValuedComponentI* instance,
                                     bool muteErrors);
 
-  std::vector<UHDM::attribute*>* compileAttributes(DesignComponent* component,
-                                                   const FileContent* fC,
-                                                   NodeId nodeId,
-                                                   CompileDesign* compileDesign,
-                                                   UHDM::any* pexpr);
+  UHDM::VectorOfattribute* compileAttributes(DesignComponent* component,
+                                             const FileContent* fC,
+                                             NodeId nodeId,
+                                             CompileDesign* compileDesign,
+                                             UHDM::any* pexpr);
 
   void compileImportDeclaration(DesignComponent* component,
                                 const FileContent* fC, NodeId id,
@@ -478,17 +500,17 @@ class CompileHelper final {
 
   void compileHighConn(ModuleDefinition* component, const FileContent* fC,
                        CompileDesign* compileDesign, NodeId id,
-                       UHDM::VectorOfport* ports);
+                       UHDM::VectorOfport* ports, UHDM::any* pexpr);
 
-  UHDM::VectorOfgen_stmt* compileGenStmt(ModuleDefinition* component,
-                                         const FileContent* fC,
-                                         CompileDesign* compileDesign,
-                                         NodeId id);
+  UHDM::VectorOfany* compileGenStmt(ModuleDefinition* component,
+                                    const FileContent* fC,
+                                    CompileDesign* compileDesign, NodeId id);
+
+  UHDM::constant* compileConst(const FileContent* fC, NodeId child,
+                               UHDM::Serializer& s);
 
   /** Variable is either a bit select or a range */
   bool isSelected(const FileContent* fC, NodeId id);
-
-  void setParentNoOverride(UHDM::any* obj, UHDM::any* parent);
 
   bool isMultidimensional(UHDM::typespec* ts, DesignComponent* component);
 
@@ -505,19 +527,18 @@ class CompileHelper final {
                        int32_t opIndex, UHDM::expr* rhs,
                        DesignComponent* component, CompileDesign* compileDesign,
                        ValuedComponentI* instance);
-  
+
   void adjustUnsized(UHDM::constant* c, int32_t size);
 
   UHDM::any* defaultPatternAssignment(const UHDM::typespec* tps, UHDM::any* exp,
                                       DesignComponent* component,
                                       CompileDesign* compileDesign,
+                                      Reduce reduce,
                                       ValuedComponentI* instance);
 
-  UHDM::expr* expandPatternAssignment(const UHDM::typespec* tps,
-                                      UHDM::expr* rhs,
-                                      DesignComponent* component,
-                                      CompileDesign* compileDesign,
-                                      ValuedComponentI* instance);
+  UHDM::expr* expandPatternAssignment(
+      const UHDM::typespec* tps, UHDM::expr* rhs, DesignComponent* component,
+      CompileDesign* compileDesign, Reduce reduce, ValuedComponentI* instance);
 
   uint64_t Bits(const UHDM::any* typespec, bool& invalidValue,
                 DesignComponent* component, CompileDesign* compileDesign,
@@ -525,6 +546,7 @@ class CompileHelper final {
                 uint32_t lineNumber, bool sizeMode);
 
   UHDM::variables* getSimpleVarFromTypespec(
+      const FileContent* fC, NodeId declarationId, NodeId nameId,
       UHDM::typespec* spec, std::vector<UHDM::range*>* packedDimensions,
       CompileDesign* compileDesign);
 
@@ -540,6 +562,11 @@ class CompileHelper final {
 
   void evalScheduledExprs(DesignComponent* component,
                           CompileDesign* compileDesign);
+
+  UHDM::expr* exprFromAssign(DesignComponent* component,
+                             CompileDesign* compileDesign,
+                             const FileContent* fC, NodeId id,
+                             NodeId unpackedDimension);
 
   void checkForLoops(bool on);
   bool loopDetected(PathId fileId, uint32_t lineNumber,
@@ -616,15 +643,15 @@ class CompileHelper final {
 
   std::string decompileHelper(const UHDM::any* sel);
 
-  void setElabMode(bool on) { m_elabMode = on; }
+  Elaborate getElaborate() const { return m_elaborate; }
+  void setElaborate(Elaborate elaborate) { m_elaborate = elaborate; }
+
+  Reduce getReduce() const { return m_reduce; }
+  void setReduce(Reduce reduce) { m_reduce = reduce; }
 
  private:
   CompileHelper(const CompileHelper&) = delete;
 
-  ErrorContainer* m_errors = nullptr;
-  SymbolTable* m_symbols = nullptr;
-  ExprBuilder m_exprBuilder;
-  UHDM::module_inst* m_exprEvalPlaceHolder = nullptr;
   // Caches
   UHDM::int_typespec* buildIntTypespec(CompileDesign* compileDesign,
                                        PathId fileId, std::string_view name,
@@ -632,18 +659,17 @@ class CompileHelper final {
                                        uint16_t column, uint32_t eline,
                                        uint16_t ecolumn);
   UHDM::typespec_member* buildTypespecMember(CompileDesign* compileDesign,
-                                             PathId fileId,
-                                             std::string_view name,
-                                             std::string_view value,
-                                             uint32_t line, uint16_t column,
-                                             uint32_t eline, uint16_t ecolumn);
-  std::unordered_map<std::string, UHDM::int_typespec*> m_cache_int_typespec;
-  std::unordered_map<std::string, UHDM::typespec_member*>
-      m_cache_typespec_member;
+                                             const FileContent* fC, NodeId id);
+
+ private:
+  Session* const m_session = nullptr;
+  ExprBuilder m_exprBuilder;
+  UHDM::module_inst* m_exprEvalPlaceHolder = nullptr;
   bool m_checkForLoops = false;
   int32_t m_stackLevel = 0;
   bool m_unwind = false;
-  bool m_elabMode = true;
+  Elaborate m_elaborate = Elaborate::Yes;
+  Reduce m_reduce = Reduce::Yes;
 };
 
 }  // namespace SURELOG

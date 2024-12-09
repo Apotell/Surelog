@@ -22,6 +22,7 @@
  */
 
 #include <Surelog/Common/FileSystem.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/Design.h>
 #include <Surelog/Design/FileContent.h>
 #include <Surelog/Design/Parameter.h>
@@ -141,6 +142,10 @@ std::vector<std::string_view> computeVarChain(const FileContent* fC,
   return var_chain;
 }
 
+TestbenchElaboration::TestbenchElaboration(Session* session,
+                                           CompileDesign* compileDesign)
+    : ElaborationStep(session, compileDesign) {}
+
 bool TestbenchElaboration::bindClasses_() {
   checkForMultipleDefinition_();
   bindBaseClasses_();
@@ -152,11 +157,11 @@ bool TestbenchElaboration::bindClasses_() {
 }
 
 bool TestbenchElaboration::checkForMultipleDefinition_() {
-  FileSystem* const fileSystem = FileSystem::getInstance();
-  Compiler* compiler = m_compileDesign->getCompiler();
-  ErrorContainer* errors = compiler->getErrorContainer();
-  SymbolTable* symbols = compiler->getSymbolTable();
-  Design* design = compiler->getDesign();
+  Compiler* const compiler = m_compileDesign->getCompiler();
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  ErrorContainer* const errors = m_session->getErrorContainer();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  Design* const design = compiler->getDesign();
   ClassNameClassDefinitionMultiMap classes = design->getClassDefinitions();
 
   // Check for multiple definition
@@ -175,7 +180,7 @@ bool TestbenchElaboration::checkForMultipleDefinition_() {
       Location loc1(fileId1, line1, fC1->Column(nodeId1),
                     symbols->registerSymbol(className));
 
-      std::vector<Location> locations;
+      std::vector<Location> locations{loc1};
 
       while (1) {
         const FileContent* fC2 = prevClassDefinition->getFileContents()[0];
@@ -209,9 +214,8 @@ bool TestbenchElaboration::checkForMultipleDefinition_() {
         }
       }
 
-      if (!locations.empty()) {
-        Error err1(ErrorDefinition::COMP_MULTIPLY_DEFINED_CLASS, loc1,
-                   &locations);
+      if (locations.size() > 1) {
+        Error err1(ErrorDefinition::COMP_MULTIPLY_DEFINED_CLASS, locations);
         errors->addError(err1);
       }
     }
@@ -251,8 +255,9 @@ bool TestbenchElaboration::bindBaseClasses_() {
             new Property(thisdt, classDefinition->getFileContent(),
                          classDefinition->getNodeId(), InvalidNodeId, "super",
                          false, false, false, false, false);
-        UHDM::class_defn* derived = classDefinition->getUhdmDefinition();
-        UHDM::class_defn* parent = bdef->getUhdmDefinition();
+        UHDM::class_defn* derived =
+            classDefinition->getUhdmModel<UHDM::class_defn>();
+        UHDM::class_defn* parent = bdef->getUhdmModel<UHDM::class_defn>();
         classDefinition->insertProperty(prop);
         UHDM::extends* extends = s.MakeExtends();
         extends->VpiParent(derived);
@@ -268,12 +273,7 @@ bool TestbenchElaboration::bindBaseClasses_() {
         tps->Class_defn(parent);
         tps->VpiName(placeHolder->getName());
         derived->Extends(extends);
-        UHDM::VectorOfclass_defn* all_derived = parent->Deriveds();
-        if (all_derived == nullptr) {
-          parent->Deriveds(s.MakeClass_defnVec());
-          all_derived = parent->Deriveds();
-        }
-        all_derived->push_back(derived);
+        parent->Deriveds(true)->push_back(derived);
       } else {
         class_def.second = datatype_cast<const Parameter*>(the_def);
         if (class_def.second) {
@@ -296,7 +296,8 @@ bool TestbenchElaboration::bindBaseClasses_() {
           extends_ts->VpiParent(extends);
           extends_ts->Actual_typespec(tps);
           extends->Class_typespec(extends_ts);
-          UHDM::class_defn* def = classDefinition->getUhdmDefinition();
+          UHDM::class_defn* def =
+              classDefinition->getUhdmModel<UHDM::class_defn>();
           def->Extends(extends);
         }
       }
@@ -354,8 +355,8 @@ bool TestbenchElaboration::bindFunctions_() {
 
 bool TestbenchElaboration::bindFunctionReturnTypesAndParamaters_() {
   Compiler* compiler = m_compileDesign->getCompiler();
-  ErrorContainer* errors = compiler->getErrorContainer();
-  SymbolTable* symbols = compiler->getSymbolTable();
+  ErrorContainer* errors = m_session->getErrorContainer();
+  SymbolTable* symbols = m_session->getSymbolTable();
   Design* design = compiler->getDesign();
   ClassNameClassDefinitionMultiMap classes = design->getClassDefinitions();
 
@@ -413,9 +414,10 @@ bool TestbenchElaboration::bindFunctionReturnTypesAndParamaters_() {
 }
 
 bool TestbenchElaboration::bindSubRoutineCall_(ClassDefinition* classDefinition,
-                                               Statement* stmt, Design* design,
-                                               SymbolTable* symbols,
-                                               ErrorContainer* errors) {
+                                               Statement* stmt,
+                                               Design* design) {
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  ErrorContainer* const errors = m_session->getErrorContainer();
   std::string datatypeName;
   SubRoutineCallStmt* st = statement_cast<SubRoutineCallStmt*>(stmt);
   std::vector<std::string_view> var_chain = st->getVarChainNames();
@@ -617,8 +619,6 @@ bool TestbenchElaboration::bindForeachLoop_(ClassDefinition* classDefinition,
 
 bool TestbenchElaboration::bindFunctionBodies_() {
   Compiler* compiler = m_compileDesign->getCompiler();
-  ErrorContainer* errors = compiler->getErrorContainer();
-  SymbolTable* symbols = compiler->getSymbolTable();
   Design* design = compiler->getDesign();
   ClassNameClassDefinitionMultiMap classes = design->getClassDefinitions();
 
@@ -654,7 +654,7 @@ bool TestbenchElaboration::bindFunctionBodies_() {
             break;
           }
           case VObjectType::paSubroutine_call_statement:
-            bindSubRoutineCall_(classDefinition, stmt, design, symbols, errors);
+            bindSubRoutineCall_(classDefinition, stmt, design);
             break;
           default:
             break;
@@ -696,24 +696,19 @@ bool TestbenchElaboration::bindTasks_() {
 bool TestbenchElaboration::bindProperties_() {
   Compiler* compiler = m_compileDesign->getCompiler();
   Design* design = compiler->getDesign();
-  UHDM::Serializer& s = m_compileDesign->getSerializer();
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  ErrorContainer* const errors = m_session->getErrorContainer();
   ClassNameClassDefinitionMultiMap classes = design->getClassDefinitions();
 
   // Bind properties
   for (const auto& [className, classDefinition] : classes) {
-    UHDM::class_defn* defn = classDefinition->getUhdmDefinition();
-    UHDM::VectorOfvariables* vars = defn->Variables();
-    UHDM::VectorOfnamed_event* events = defn->Named_events();
+    UHDM::class_defn* defn = classDefinition->getUhdmModel<UHDM::class_defn>();
+    UHDM::VectorOfvariables* vars = defn->Variables(true);
     for (Signal* sig : classDefinition->getSignals()) {
       const FileContent* fC = sig->getFileContent();
       NodeId id = sig->getNodeId();
       NodeId packedDimension = sig->getPackedDimension();
       NodeId unpackedDimension = sig->getUnpackedDimension();
-      if (vars == nullptr) {
-        vars = s.MakeVariablesVec();
-        defn->Variables(vars);
-      }
-
       const std::string_view signame = sig->getName();
 
       // Packed and unpacked ranges
@@ -730,7 +725,7 @@ bool TestbenchElaboration::bindProperties_() {
             Reduce::Yes, nullptr, nullptr, unpackedSize, false);
       }
       UHDM::typespec* tps = nullptr;
-      NodeId typeSpecId = sig->getTypeSpecId();
+      NodeId typeSpecId = sig->getTypespecId();
       if (typeSpecId) {
         tps = m_helper.compileTypespec(classDefinition, fC, typeSpecId,
                                        m_compileDesign, Reduce::Yes, nullptr,
@@ -749,26 +744,13 @@ bool TestbenchElaboration::bindProperties_() {
           exprFromAssign_(classDefinition, fC, id, unpackedDimension, nullptr);
       if (exp != nullptr) exp->VpiParent(defn);
 
-      UHDM::any* obj =
-          makeVar_(classDefinition, sig, packedDimensions, packedSize,
-                   unpackedDimensions, unpackedSize, nullptr, vars, exp, tps);
-
-      if (obj) {
-        if (obj->UhdmType() == UHDM::uhdmnamed_event) {
-          if (events == nullptr) {
-            defn->Named_events(s.MakeNamed_eventVec());
-            events = defn->Named_events();
-          }
-          events->push_back((UHDM::named_event*)obj);
-        }
-
+      if (UHDM::any* obj = makeVar_(classDefinition, sig, packedDimensions,
+                                    packedSize, unpackedDimensions,
+                                    unpackedSize, nullptr, vars, exp, tps)) {
         fC->populateCoreMembers(id, id, obj);
         obj->VpiParent(defn);
       } else {
         // Unsupported type
-        ErrorContainer* errors =
-            m_compileDesign->getCompiler()->getErrorContainer();
-        SymbolTable* symbols = m_compileDesign->getCompiler()->getSymbolTable();
         Location loc(fC->getFileId(), fC->Line(id), fC->Column(id),
                      symbols->registerSymbol(signame));
         Error err(ErrorDefinition::UHDM_UNSUPPORTED_SIGNAL, loc);

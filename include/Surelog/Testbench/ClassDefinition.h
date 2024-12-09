@@ -36,6 +36,10 @@
 #include <uhdm/containers.h>
 #include <uhdm/uhdm_forward_decl.h>
 
+namespace UHDM {
+class Serializer;
+}
+
 namespace SURELOG {
 
 class CompileClass;
@@ -45,16 +49,17 @@ class DataType;
 class FileContent;
 class Library;
 class Property;
+class Session;
 
 class ClassDefinition : public DesignComponent, public DataType {
   SURELOG_IMPLEMENT_RTTI_2_BASES(ClassDefinition, DesignComponent, DataType)
   friend class CompileClass;
 
  public:
-  ClassDefinition(std::string_view name, Library* library,
+  ClassDefinition(Session* session, std::string_view name, Library* library,
                   DesignComponent* container, const FileContent* fC,
                   NodeId nodeId, ClassDefinition* parent,
-                  UHDM::class_defn* uhdm_definition);
+                  UHDM::Serializer& serializer);
 
   ~ClassDefinition() override = default;
 
@@ -66,8 +71,7 @@ class ClassDefinition : public DesignComponent, public DataType {
   std::string_view getName() const override { return m_name; }
   Library* getLibrary() { return m_library; }
   DesignComponent* getContainer() const { return m_container; }
-  void setContainer(DesignComponent* container) { m_container = container; }
-  UHDM::class_defn* getUhdmDefinition() const { return m_uhdm_definition; }
+  void setContainer(DesignComponent* container);
 
   // Parameter definitions are stored DesignComponent maps
   typedef std::map<std::string, Property*, StringViewCompare> PropertyMap;
@@ -99,12 +103,12 @@ class ClassDefinition : public DesignComponent, public DataType {
   ClassDefinition* getClass(std::string_view name);
   void insertClass(ClassDefinition* p);
 
-  const CoverGroupMap& getCoverGroupMap() const { return m_covergroups; }
+  const CoverGroupMap& getCoverGroupMap() const { return m_coverGroups; }
   CoverGroupDefinition* getCoverGroup(std::string_view name);
   void insertCoverGroup(CoverGroupDefinition* p);
 
-  const BaseClassMap& getBaseClassMap() const { return m_baseclasses; }
-  BaseClassMap& getMutableBaseClassMap() { return m_baseclasses; }
+  const BaseClassMap& getBaseClassMap() const { return m_baseClasses; }
+  BaseClassMap& getMutableBaseClassMap() { return m_baseClasses; }
   const DataType* getBaseClass(std::string_view name) const;
   void insertBaseClass(DataType* p);
 
@@ -125,17 +129,15 @@ class ClassDefinition : public DesignComponent, public DataType {
  private:
   std::string m_name;
   std::string m_endLabel;
-  Library* m_library;
-  DesignComponent* m_container;
-  ClassDefinition* m_parent;
+  Library* const m_library = nullptr;
+  DesignComponent* m_container = nullptr;
+  ClassDefinition* const m_parent = nullptr;
   PropertyMap m_properties;
   TaskMap m_tasks;
   ConstraintMap m_constraints;
   ClassMap m_classes;
-  CoverGroupMap m_covergroups;
-  BaseClassMap m_baseclasses;
-  UHDM::class_defn* m_uhdm_definition;
-
+  CoverGroupMap m_coverGroups;
+  BaseClassMap m_baseClasses;
   UHDM::VectorOfattribute* attributes_ = nullptr;
 };
 

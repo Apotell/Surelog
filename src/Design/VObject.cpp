@@ -21,14 +21,17 @@
  * Created on June 14, 2017, 10:58 PM
  */
 
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/VObject.h>
 #include <Surelog/SourceCompile/SymbolTable.h>
 #include <Surelog/Utils/StringUtils.h>
 
 namespace SURELOG {
 
-std::string VObject::print(SymbolTable* symbols, NodeId uniqueId,
+std::string VObject::print(Session *session, NodeId uniqueId,
                            PathId definitionFile, PathId printedFile) const {
+  SymbolTable *const symbols = session->getSymbolTable();
+  FileSystem *const fileSystem = session->getFileSystem();
   std::string text;
   const std::string_view symbol = symbols->getSymbol(m_name);
   if (symbol == SymbolTable::getBadSymbol()) {
@@ -45,7 +48,8 @@ std::string VObject::print(SymbolTable* symbols, NodeId uniqueId,
   if (m_sibling) StrAppend(&text, " s<", m_sibling, ">");
 
   StrAppend(&text, " ");
-  if (printedFile != m_fileId) StrAppend(&text, "f<", m_fileId, "> ");
+  if (!printedFile.equals(m_fileId, fileSystem))
+    StrAppend(&text, "f<", m_fileId, "> ");
 
   StrAppend(&text, "l<", m_line, ":", m_column, ">");
   if (m_endLine) StrAppend(&text, " el<", m_endLine, ":", m_endColumn, ">");

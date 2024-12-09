@@ -39,15 +39,13 @@ static constexpr std::pair<uint16_t, uint16_t> kMinMaxRange(
     static_cast<uint16_t>(~0), 0);
 
 SV3_1aParseTreeListener::SV3_1aParseTreeListener(
-    ParseFile *pf, antlr4::CommonTokenStream *tokens, uint32_t lineOffset,
-    FileContent *ppFileContent)
-    : SV3_1aTreeShapeHelper(pf, tokens, lineOffset),
+    Session *session, ParseFile *pf, antlr4::CommonTokenStream *tokens,
+    uint32_t lineOffset, FileContent *ppFileContent)
+    : SV3_1aTreeShapeHelper(session, pf, tokens, lineOffset),
       m_ppFileContent(ppFileContent) {
   if (m_pf->getFileContent() == nullptr) {
-    m_fileContent = new FileContent(
-        m_pf->getFileId(0), m_pf->getLibrary(),
-        m_pf->getCompileSourceFile()->getSymbolTable(),
-        m_pf->getCompileSourceFile()->getErrorContainer(), nullptr, BadPathId);
+    m_fileContent = new FileContent(session, m_pf->getFileId(0),
+                                    m_pf->getLibrary(), nullptr, BadPathId);
     m_pf->setFileContent(m_fileContent);
     // m_pf->getCompileSourceFile()->getCompiler()->getDesign()->addFileContent(
     //     m_pf->getFileId(0), m_fileContent);
@@ -172,8 +170,10 @@ void SV3_1aParseTreeListener::applyLocationOffsets() {
   // std::cout << "ParseTreeListener::ColumnOffsets:" << std::endl;
   // for (const auto &entry : m_offsets) {
   //   std::cout << std::setfill(' ') << std::setw(4) << entry.first
-  //             << std::setfill(' ') << std::setw(4) << std::get<0>(entry.second)
-  //             << std::setfill(' ') << std::setw(4) << std::get<1>(entry.second)
+  //             << std::setfill(' ') << std::setw(4) <<
+  //             std::get<0>(entry.second)
+  //             << std::setfill(' ') << std::setw(4) <<
+  //             std::get<1>(entry.second)
   //             << std::endl;
   // }
   // std::cout << std::endl;
@@ -307,9 +307,8 @@ void SV3_1aParseTreeListener::visitPreprocEnd(antlr4::Token *token,
     } break;
 
     case VObjectType::ppMacro_instance: {
-      const ParseUtils::LineColumn slcBegin =
-          ParseUtils::getLineColumn(beginToken);
-      const ParseUtils::LineColumn slcEnd = ParseUtils::getLineColumn(endToken);
+      const LineColumn slcBegin = ParseUtils::getLineColumn(beginToken);
+      const LineColumn slcEnd = ParseUtils::getLineColumn(endToken);
 
       if (slcBegin.first == slcEnd.first) {
         auto [fileIdBegin, slBegin, scBegin, elBegin, ecBegin] =
@@ -345,10 +344,8 @@ void SV3_1aParseTreeListener::visitPreprocEnd(antlr4::Token *token,
                           std::forward_as_tuple(elEnd),
                           std::forward_as_tuple(scEnd, scEnd - ecEnd));
       } else {
-        const ParseUtils::LineColumn elcBegin =
-            ParseUtils::getEndLineColumn(beginToken);
-        const ParseUtils::LineColumn elcEnd =
-            ParseUtils::getEndLineColumn(endToken);
+        const LineColumn elcBegin = ParseUtils::getEndLineColumn(beginToken);
+        const LineColumn elcEnd = ParseUtils::getEndLineColumn(endToken);
         std::pair<line_ends_t::const_iterator, line_ends_t::const_iterator>
             ppMinMaxIt =
                 std::minmax_element(ppEnds.begin(), ppEnds.end(),

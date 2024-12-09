@@ -35,6 +35,8 @@
 #include <vector>
 
 namespace SURELOG {
+class Session;
+
 class SV3_1aParseTreeListener final : public SV3_1aParserBaseListener,
                                       public SV3_1aTreeShapeHelper {
   typedef std::vector<VObject> vobjects_t;
@@ -48,7 +50,8 @@ class SV3_1aParseTreeListener final : public SV3_1aParserBaseListener,
   typedef std::multimap<uint32_t, column_offset_t> offsets_t;
 
  public:
-  SV3_1aParseTreeListener(ParseFile* pf, antlr4::CommonTokenStream* tokens,
+  SV3_1aParseTreeListener(Session* session, ParseFile* pf,
+                          antlr4::CommonTokenStream* tokens,
                           uint32_t lineOffset, FileContent* ppFileContent);
   ~SV3_1aParseTreeListener() final = default;
 

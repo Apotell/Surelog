@@ -33,46 +33,44 @@ class CompileDesign;
 class Design;
 class ErrorContainer;
 class ModuleDefinition;
+class Session;
 class SymbolTable;
 class ValuedComponentI;
 
 struct FunctorCompileModule {
-  FunctorCompileModule(CompileDesign* compiler, ModuleDefinition* mdl,
-                       Design* design, SymbolTable* symbols,
-                       ErrorContainer* errors,
+  FunctorCompileModule(Session* session, CompileDesign* compiler,
+                       ModuleDefinition* mdl, Design* design,
                        ValuedComponentI* instance = nullptr)
-      : m_compileDesign(compiler),
+      : m_session(session),
+        m_compileDesign(compiler),
         m_module(mdl),
         m_design(design),
-        m_symbols(symbols),
-        m_errors(errors),
         m_instance(instance) {}
   int32_t operator()() const;
 
  private:
+  Session* const m_session = nullptr;
   CompileDesign* const m_compileDesign;
   ModuleDefinition* const m_module;
   Design* const m_design;
-  SymbolTable* const m_symbols;
-  ErrorContainer* const m_errors;
+  // SymbolTable* const m_symbols;
+  // ErrorContainer* const m_errors;
   ValuedComponentI* const m_instance;
 };
 
 class CompileModule final {
  public:
-  CompileModule(CompileDesign* compiler, ModuleDefinition* mdl,
-                Design* design, SymbolTable* symbols, ErrorContainer* errors,
+  CompileModule(Session* session, CompileDesign* compiler,
+                ModuleDefinition* mdl, Design* design,
                 ValuedComponentI* instance = nullptr)
-      : m_compileDesign(compiler),
+      : m_session(session),
+        m_compileDesign(compiler),
         m_module(mdl),
         m_design(design),
-        m_symbols(symbols),
-        m_errors(errors),
-        m_instance(instance) {
-    m_helper.seterrorReporting(errors, symbols);
-  }
+        m_helper(session),
+        m_instance(instance) {}
 
-  bool compile();
+  bool compile(Elaborate elaborate, Reduce reduce);
 
  private:
   CompileModule(const CompileModule&) = delete;
@@ -84,11 +82,10 @@ class CompileModule final {
   bool collectUdpObjects_();
   void compileClockingBlock_(const FileContent* fC, NodeId id);
 
+  Session* const m_session = nullptr;
   CompileDesign* const m_compileDesign;
   ModuleDefinition* const m_module;
   Design* const m_design;
-  SymbolTable* const m_symbols;
-  ErrorContainer* const m_errors;
   CompileHelper m_helper;
   ValuedComponentI* const m_instance;
   uint32_t m_nbPorts = 0;

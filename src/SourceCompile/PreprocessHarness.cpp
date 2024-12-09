@@ -21,7 +21,7 @@
  * Created on June 1, 2021, 8:37 PM
  */
 
-#include <Surelog/CommandLine/CommandLineParser.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/Library/Library.h>
 #include <Surelog/SourceCompile/CompilationUnit.h>
 #include <Surelog/SourceCompile/CompileSourceFile.h>
@@ -30,11 +30,18 @@
 
 namespace SURELOG {
 
-PreprocessHarness::PreprocessHarness() : m_errors(&m_symbols) {}
+PreprocessHarness::PreprocessHarness() : m_ownsSession(true) {}
+
+PreprocessHarness::PreprocessHarness(Session* session)
+    : m_session(session), m_ownsSession(false) {}
+
+PreprocessHarness::~PreprocessHarness() {
+  if (m_ownsSession) delete m_session;
+}
 
 std::string PreprocessHarness::preprocess(std::string_view content,
-                                          CompilationUnit* compUnit) {
-  std::string result;
+                                          CompilationUnit* compUnit,
+                                          PathId fileId) {
   PreprocessFile::SpecialInstructions instructions(
       PreprocessFile::SpecialInstructions::DontMute,
       PreprocessFile::SpecialInstructions::DontMark,
@@ -44,25 +51,31 @@ std::string PreprocessHarness::preprocess(std::string_view content,
       PreprocessFile::SpecialInstructions::Evaluate,
       compUnit ? PreprocessFile::SpecialInstructions::Persist
                : PreprocessFile::SpecialInstructions::DontPersist);
+  if (m_session == nullptr) m_session = new Session;
   CompilationUnit unit(false);
-  CommandLineParser clp(&m_errors, &m_symbols, false, false);
-  Library lib("work", &m_symbols);
-  Compiler compiler(&clp, &m_errors, &m_symbols);
-  CompileSourceFile csf(BadPathId, &clp, &m_errors, &compiler, &m_symbols,
+  Library lib(m_session, "work");
+  Compiler compiler(m_session);
+  CompileSourceFile csf(m_session, BadPathId, &compiler,
                         compUnit ? compUnit : &unit, &lib);
-  PreprocessFile pp(BadSymbolId, &csf, instructions,
+  PreprocessFile pp(m_session, BadSymbolId, &csf, instructions,
                     compUnit ? compUnit : &unit, &lib, nullptr, 0, content,
-                    nullptr, 0, BadPathId);
+                    nullptr, fileId, BadPathId, 0);
 
+  std::string result;
   if (!pp.preprocess()) {
     result = "ERROR_PP";
   }
-  if (m_errors.hasFatalErrors()) {
+
+  ErrorContainer* const errors = m_session->getErrorContainer();
+  if (errors->hasFatalErrors()) {
     result = "ERROR_PP";
   }
-  m_errors.printMessages();
+  errors->printMessages();
   if (result.empty()) result = pp.getPreProcessedFileContent();
   return result;
 }
 
+const ErrorContainer& PreprocessHarness::collectedErrors() const {
+  return *m_session->getErrorContainer();
+}
 }  // namespace SURELOG

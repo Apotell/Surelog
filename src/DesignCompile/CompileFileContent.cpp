@@ -22,7 +22,10 @@
  */
 
 #include <Surelog/Design/FileContent.h>
+#include <Surelog/DesignCompile/CompileDesign.h>
 #include <Surelog/DesignCompile/CompileFileContent.h>
+#include <Surelog/SourceCompile/Compiler.h>
+#include <uhdm/design.h>
 
 #include <stack>
 
@@ -30,21 +33,25 @@ namespace SURELOG {
 
 int32_t FunctorCompileFileContentDecl::operator()() const {
   CompileFileContent* instance = new CompileFileContent(
-      m_compileDesign, m_fileContent, m_design, true, m_symbols, m_errors);
-  instance->compile();
+      m_session, m_compileDesign, m_fileContent, m_design, true);
+  instance->compile(Elaborate::No, Reduce::No);
   delete instance;
   return 0;
 }
 
 int32_t FunctorCompileFileContent::operator()() const {
   CompileFileContent* instance = new CompileFileContent(
-      m_compileDesign, m_fileContent, m_design, false, m_symbols, m_errors);
-  instance->compile();
+      m_session, m_compileDesign, m_fileContent, m_design, false);
+  instance->compile(Elaborate::No, Reduce::No);
   delete instance;
   return 0;
 }
 
-bool CompileFileContent::compile() { return collectObjects_(); }
+bool CompileFileContent::compile(Elaborate elaborate, Reduce reduce) {
+  m_helper.setElaborate(elaborate);
+  m_helper.setReduce(reduce);
+  return collectObjects_();
+}
 
 bool CompileFileContent::collectObjects_() {
   std::vector<VObjectType> stopPoints = {
@@ -56,6 +63,10 @@ bool CompileFileContent::collectObjects_() {
       VObjectType::paPackage_declaration,
       VObjectType::paFunction_declaration,
       VObjectType::paInterface_class_declaration};
+
+  Design* const design = m_compileDesign->getCompiler()->getDesign();
+  UHDM::design* const udesign = design->getUhdmDesign();
+  const UHDM::ScopedScope scopedScope(udesign);
 
   FileContent* fC = m_fileContent;
   if (fC->getSize() == 0) return true;

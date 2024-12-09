@@ -44,13 +44,17 @@ class Library;
 class ModuleDefinition;
 class Package;
 class Program;
+class Session;
 
 class FileContent : public DesignComponent {
   SURELOG_IMPLEMENT_RTTI(FileContent, DesignComponent)
  public:
-  FileContent(PathId fileId, Library* library, SymbolTable* symbolTable,
-              ErrorContainer* errors, FileContent* parent, PathId fileChunkId);
+  FileContent(Session* session, PathId fileId, Library* library,
+              FileContent* parent, PathId fileChunkId);
   ~FileContent() override;
+
+  Session* getSession() { return m_session; }
+  const Session* getSession() const { return m_session; }
 
   void setLibrary(Library* lib) { m_library = lib; }
 
@@ -102,20 +106,19 @@ class FileContent : public DesignComponent {
   bool isInstance() const override { return false; }
   std::string_view getName() const override;
   NodeId getRootNode() const;
-  SymbolTable* getSymbolTable() const { return m_symbolTable; }
-  void setSymbolTable(SymbolTable* table) { m_symbolTable = table; }
   PathId getFileId(NodeId id) const;
   PathId* getMutableFileId(NodeId id);
   Library* getLibrary() const { return m_library; }
   std::vector<DesignElement*>& getDesignElements() { return m_elements; }
-  const std::vector<DesignElement*>& getDesignElements() const { return m_elements; }
+  const std::vector<DesignElement*>& getDesignElements() const {
+    return m_elements;
+  }
   void addDesignElement(std::string_view name, DesignElement* elem);
   const DesignElement* getDesignElement(std::string_view name) const;
   using DesignComponent::addObject;
   NodeId addObject(SymbolId name, PathId fileId, VObjectType type,
-                   uint32_t line, uint16_t column,
-                   uint32_t endLine, uint16_t endColumn,
-                   NodeId parent = InvalidNodeId,
+                   uint32_t line, uint16_t column, uint32_t endLine,
+                   uint16_t endColumn, NodeId parent = InvalidNodeId,
                    NodeId definition = InvalidNodeId,
                    NodeId child = InvalidNodeId,
                    NodeId sibling = InvalidNodeId);
@@ -193,7 +196,7 @@ class FileContent : public DesignComponent {
 
   const Program* getProgram(std::string_view name) const;
 
-  const ClassDefinition* getClassDefinition(std::string_view name) const;
+  ClassDefinition* getClassDefinition(std::string_view name) const;
 
   const FileContent* getParent() const { return m_parentFile; }
   void setParent(FileContent* parent) { m_parentFile = parent; }
@@ -208,7 +211,7 @@ class FileContent : public DesignComponent {
   void setLibraryCellFile() { m_isLibraryCellFile = true; }
 
   void populateCoreMembers(NodeId startIndex, NodeId endIndex,
-                           UHDM::any* instance) const;
+                           UHDM::any* instance, bool force = false) const;
 
   void sortTree();
   bool validate() const;
@@ -243,11 +246,9 @@ class FileContent : public DesignComponent {
 
   const PathId m_fileId;
   const PathId m_fileChunkId;
-  ErrorContainer* const m_errors;
-
-  Library* m_library;          // TODO: should be set in constructor and *const
-  SymbolTable* m_symbolTable;  // TODO: should be set in constructor *const
-  FileContent* m_parentFile;   // for file chunks
+  Library* m_library =
+      nullptr;  // TODO: should be set in constructor and *const
+  FileContent* m_parentFile = nullptr;  // for file chunks
   bool m_isLibraryCellFile = false;
 };
 

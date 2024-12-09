@@ -25,11 +25,13 @@
 #define SURELOG_SV3_1APPPARSETREELISTENER_H
 #pragma once
 
+#include <Surelog/SourceCompile/MacroInfo.h>
 #include <Surelog/SourceCompile/SV3_1aPpTreeListenerHelper.h>
 #include <parser/SV3_1aPpParserBaseListener.h>
 
 namespace SURELOG {
 class PreprocessFile;
+class Session;
 class SV3_1aPpParseTreeListener final : public SV3_1aPpParserBaseListener,
                                         public SV3_1aPpTreeListenerHelper {
  public:
@@ -37,7 +39,7 @@ class SV3_1aPpParseTreeListener final : public SV3_1aPpParserBaseListener,
   typedef std::set<const antlr4::ParserRuleContext*> visited_rules_t;
 
  public:
-  SV3_1aPpParseTreeListener(PreprocessFile* pp,
+  SV3_1aPpParseTreeListener(Session* session, PreprocessFile* pp,
                             antlr4::CommonTokenStream* tokens,
                             PreprocessFile::SpecialInstructions& instructions);
   ~SV3_1aPpParseTreeListener() final = default;
@@ -120,9 +122,11 @@ class SV3_1aPpParseTreeListener final : public SV3_1aPpParserBaseListener,
   bool isAnyOnCallStack(const std::unordered_set<size_t>& ruleIndicies) const;
 
   void appendPreprocBegin();
-  void appendPreprocEnd(antlr4::ParserRuleContext *ctx, VObjectType type);
+  void appendPreprocEnd(antlr4::ParserRuleContext* ctx, VObjectType type);
 
-  void recordMacro(std::string_view name, std::string_view arguments,
+  void recordMacro(std::string_view name, MacroInfo::DefType defType,
+                   std::string_view arguments,
+                   antlr4::ParserRuleContext* ctx,
                    antlr4::tree::TerminalNode* identifier,
                    antlr4::ParserRuleContext* body);
 

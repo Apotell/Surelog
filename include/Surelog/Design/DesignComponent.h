@@ -69,9 +69,10 @@ class ExprEval {
 class DesignComponent : public ValuedComponentI, public PortNetHolder {
   SURELOG_IMPLEMENT_RTTI(DesignComponent, ValuedComponentI)
  public:
-  DesignComponent(const DesignComponent* parent, DesignComponent* definition)
-      : ValuedComponentI(parent, definition), m_instance(nullptr) {}
-  ~DesignComponent() override {}
+  DesignComponent(Session* session, const DesignComponent* parent,
+                  DesignComponent* definition)
+      : ValuedComponentI(session, parent, definition) {}
+  ~DesignComponent() override = default;
 
   virtual uint32_t getSize() const = 0;
   virtual VObjectType getType() const = 0;
@@ -93,7 +94,8 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
   typedef std::map<std::string, std::pair<FileCNodeId, DesignComponent*>,
                    StringViewCompare>
       NamedObjectMap;
-  typedef std::vector<std::pair<std::string, UHDM::typespec*>> FuncNameTypespecVec;
+  typedef std::vector<std::pair<std::string, UHDM::typespec*>>
+      FuncNameTypespecVec;
 
   void addFileContent(const FileContent* fileContent, NodeId nodeId);
   const std::vector<const FileContent*>& getFileContents() const {
@@ -176,32 +178,13 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
     return m_sequence_decls;
   }
 
-  void needLateBinding(UHDM::ref_obj* obj) {
-    if (m_lateBinding) m_needLateBinding.push_back(obj);
-  }
-  const std::vector<UHDM::ref_obj*>& getLateBinding() const {
-    return m_needLateBinding;
-  }
-
-  void needLateTypedefBinding(UHDM::any* obj) {
-    if (m_lateBinding) m_needLateTypedefBinding.push_back(obj);
-  }
-  const std::vector<UHDM::any*>& getLateTypedefBinding() const {
-    return m_needLateTypedefBinding;
+  void setUhdmModel(UHDM::any* model) { m_model = model; }
+  UHDM::any* getUhdmModel() { return m_model; }
+  template <typename T>
+  T* getUhdmModel() const {
+    return (m_model == nullptr) ? nullptr : any_cast<T>(m_model);
   }
 
-  void needLateResolutionFunction(std::string_view funcName,
-                                  UHDM::typespec* tps) {
-    if (m_lateBinding) m_lateResolutionFunctions.emplace_back(funcName, tps);
-  }
-  FuncNameTypespecVec& getLateResolutionFunction() {
-    return m_lateResolutionFunctions;
-  }
-
-  void lateBinding(bool on) { m_lateBinding = on; }
-
-  void setUhdmInstance(UHDM::instance* instance) { m_instance = instance; }
-  UHDM::instance* getUhdmInstance() { return m_instance; }
   void scheduleParamExprEval(std::string_view name, ExprEval& expr_eval) {
     m_scheduledParamExprEval.emplace_back(name, expr_eval);
   }
@@ -238,18 +221,14 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
   std::vector<UHDM::import_typespec*> m_imported_symbols;
   std::vector<UHDM::tf_call*> m_elab_sys_calls;
   std::vector<UHDM::property_decl*> m_property_decls;
-  std::vector<UHDM::sequence_decl*> m_sequence_decls;  
-  std::vector<UHDM::ref_obj*> m_needLateBinding;
-  std::vector<UHDM::any*> m_needLateTypedefBinding;
-  FuncNameTypespecVec m_lateResolutionFunctions;
+  std::vector<UHDM::sequence_decl*> m_sequence_decls;
   ParameterMap m_parameterMap;
   ParameterVec m_orderedParameters;
   ParamAssignVec m_paramAssigns;
-  UHDM::instance* m_instance;
+  UHDM::any* m_model = nullptr;
   std::vector<std::pair<std::string, ExprEval>> m_scheduledParamExprEval;
   const DesignElement* m_designElement = nullptr;
   LetStmtMap m_letDecls;
-  bool m_lateBinding = true;
 };
 
 };  // namespace SURELOG

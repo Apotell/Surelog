@@ -29,9 +29,7 @@ namespace fs = std::filesystem;
 namespace {
 class TestFileSystem : public PlatformFileSystem {
  public:
-  explicit TestFileSystem(const fs::path &wd) : PlatformFileSystem(wd) {
-    FileSystem::setInstance(this);
-  }
+  explicit TestFileSystem(const fs::path &wd) : PlatformFileSystem(wd) {}
   TestFileSystem() : TestFileSystem(fs::current_path()) {}
 };
 

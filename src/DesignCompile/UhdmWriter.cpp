@@ -23,6 +23,7 @@
 
 #include <Surelog/CommandLine/CommandLineParser.h>
 #include <Surelog/Common/FileSystem.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/DesignElement.h>
 #include <Surelog/Design/FileContent.h>
 #include <Surelog/Design/ModPort.h>
@@ -32,6 +33,8 @@
 #include <Surelog/Design/Parameter.h>
 #include <Surelog/Design/Signal.h>
 #include <Surelog/DesignCompile/CompileDesign.h>
+#include <Surelog/DesignCompile/IntegrityChecker.h>
+#include <Surelog/DesignCompile/ObjectBinder.h>
 #include <Surelog/DesignCompile/UhdmChecker.h>
 #include <Surelog/DesignCompile/UhdmWriter.h>
 #include <Surelog/Package/Package.h>
@@ -43,9 +46,6 @@
 #include <Surelog/Testbench/Variable.h>
 #include <Surelog/Utils/StringUtils.h>
 
-#include <cstring>
-#include <queue>
-
 // UHDM
 #include <uhdm/ElaboratorListener.h>
 #include <uhdm/ExprEval.h>
@@ -53,10 +53,16 @@
 #include <uhdm/SynthSubset.h>
 #include <uhdm/UhdmAdjuster.h>
 #include <uhdm/UhdmLint.h>
+#include <uhdm/UhdmListener.h>
 #include <uhdm/VpiListener.h>
 #include <uhdm/clone_tree.h>
 #include <uhdm/uhdm.h>
 #include <uhdm/vpi_visitor.h>
+
+#include <algorithm>
+#include <cstring>
+#include <queue>
+#include <set>
 
 namespace SURELOG {
 namespace fs = std::filesystem;
@@ -164,12 +170,12 @@ std::string UhdmWriter::builtinGateName(VObjectType type) {
   return modName;
 }
 
-UhdmWriter::UhdmWriter(CompileDesign* compiler, Design* design)
-    : m_compileDesign(compiler), m_design(design), m_uhdmDesign(nullptr) {
-  m_helper.seterrorReporting(
-      m_compileDesign->getCompiler()->getErrorContainer(),
-      m_compileDesign->getCompiler()->getSymbolTable());
-}
+UhdmWriter::UhdmWriter(Session* session, CompileDesign* compiler,
+                       Design* design)
+    : m_session(session),
+      m_compileDesign(compiler),
+      m_design(design),
+      m_helper(session) {}
 
 uint32_t UhdmWriter::getStrengthType(VObjectType type) {
   switch (type) {
@@ -415,18 +421,12 @@ bool writeElabParameters(Serializer& s, ModuleInstance* instance,
 
   std::map<std::string_view, any*> paramSet;
   if (netlist->param_assigns()) {
-    VectorOfany* params = m->Parameters();
-    if (params == nullptr) params = s.MakeAnyVec();
-    m->Parameters(params);
     m->Param_assigns(netlist->param_assigns());
   }
 
   if (mod) {
-    VectorOfany* params = m->Parameters();
-    if (params == nullptr) params = s.MakeAnyVec();
-    m->Parameters(params);
-    VectorOfany* orig_params = mod->getParameters();
-    if (orig_params) {
+    if (VectorOfany* orig_params = mod->getParameters()) {
+      VectorOfany* params = m->Parameters(true);
       for (auto orig : *orig_params) {
         const std::string_view name = orig->VpiName();
         bool pushed = false;
@@ -493,9 +493,7 @@ bool writeElabParameters(Serializer& s, ModuleInstance* instance,
   }
 
   if (netlist->param_assigns()) {
-    VectorOfany* params = m->Parameters();
-    if (params == nullptr) params = s.MakeAnyVec();
-    m->Parameters(params);
+    VectorOfany* params = m->Parameters(true);
     for (auto p : *netlist->param_assigns()) {
       bool found = false;
       for (auto pt : *params) {
@@ -595,12 +593,12 @@ uint32_t UhdmWriter::getVpiNetType(VObjectType type) {
   return nettype;
 }
 
-void UhdmWriter::writePorts(std::vector<Signal*>& orig_ports, BaseClass* parent,
-                            VectorOfport* dest_ports, VectorOfnet* dest_nets,
-                            Serializer& s, ModPortMap& modPortMap,
+void UhdmWriter::writePorts(const std::vector<Signal*>& orig_ports,
+                            BaseClass* parent, Serializer& s,
+                            ModPortMap& modPortMap,
                             SignalBaseClassMap& signalBaseMap,
                             SignalMap& signalMap, ModuleInstance* instance,
-                            ModuleDefinition* mod) {
+                            DesignComponent* mod) {
   int32_t lastPortDirection = vpiInout;
   for (Signal* orig_port : orig_ports) {
     port* dest_port = s.MakePort();
@@ -615,14 +613,16 @@ void UhdmWriter::writePorts(std::vector<Signal*>& orig_ports, BaseClass* parent,
     }
 
     const FileContent* fC = orig_port->getFileContent();
-    if (fC->Type(orig_port->getNodeId()) == VObjectType::slStringConst)
+    if (fC->Type(orig_port->getNameId()) == VObjectType::slStringConst)
       dest_port->VpiName(orig_port->getName());
     if (orig_port->getDirection() != VObjectType::slNoType)
       lastPortDirection =
           UhdmWriter::getVpiDirection(orig_port->getDirection());
     dest_port->VpiDirection(lastPortDirection);
-    orig_port->getFileContent()->populateCoreMembers(
-        orig_port->getNodeId(), orig_port->getNodeId(), dest_port);
+    if (const FileContent* const fC = orig_port->getFileContent()) {
+      fC->populateCoreMembers(orig_port->getNameId(), orig_port->getNameId(),
+                              dest_port);
+    }
     dest_port->VpiParent(parent);
     if (ModPort* orig_modport = orig_port->getModPort()) {
       ref_obj* ref = s.MakeRef_obj();
@@ -645,13 +645,16 @@ void UhdmWriter::writePorts(std::vector<Signal*>& orig_ports, BaseClass* parent,
       }
     }
     if (NodeId defId = orig_port->getDefaultValue()) {
-      any* exp =
-          m_helper.compileExpression(mod, fC, defId, m_compileDesign,
-                                     Reduce::No, dest_port, instance, false);
-      dest_port->High_conn(exp);
+      if (any* exp = m_helper.compileExpression(mod, fC, defId, m_compileDesign,
+                                                Reduce::No, dest_port, instance,
+                                                false)) {
+        dest_port->High_conn(exp);
+      }
     }
-    if (orig_port->getTypeSpecId() && mod) {
+    if (orig_port->getTypespecId() && mod) {
       if (NodeId unpackedDimensions = orig_port->getUnpackedDimension()) {
+        NodeId nameId = orig_port->getNameId();
+        NodeId packedDimensions = orig_port->getPackedDimension();
         int32_t unpackedSize = 0;
         const FileContent* fC = orig_port->getFileContent();
         if (std::vector<UHDM::range*>* ranges = m_helper.compileRanges(
@@ -660,12 +663,8 @@ void UhdmWriter::writePorts(std::vector<Signal*>& orig_ports, BaseClass* parent,
           array_typespec* array_ts = s.MakeArray_typespec();
           array_ts->Ranges(ranges);
           array_ts->VpiParent(dest_port);
-          fC->populateCoreMembers(orig_port->getTypeSpecId(), InvalidNodeId,
+          fC->populateCoreMembers(unpackedDimensions, unpackedDimensions,
                                   array_ts);
-          if (!ranges->empty()) {
-            array_ts->VpiEndLineNo(ranges->back()->VpiEndLineNo());
-            array_ts->VpiEndColumnNo(ranges->back()->VpiEndColumnNo());
-          }
           for (range* r : *ranges) {
             r->VpiParent(array_ts);
             const expr* rrange = r->Right_expr();
@@ -674,7 +673,13 @@ void UhdmWriter::writePorts(std::vector<Signal*>& orig_ports, BaseClass* parent,
               if (const ref_typespec* rt = rrange->Typespec()) {
                 if (const typespec* ag = rt->Actual_typespec()) {
                   ref_typespec* cro = s.MakeRef_typespec();
+                  cro->VpiName(ag->VpiName());
                   cro->VpiParent(array_ts);
+                  cro->VpiFile(array_ts->VpiFile());
+                  cro->VpiLineNo(array_ts->VpiLineNo());
+                  cro->VpiColumnNo(array_ts->VpiColumnNo());
+                  cro->VpiEndLineNo(array_ts->VpiEndLineNo());
+                  cro->VpiEndColumnNo(array_ts->VpiEndColumnNo());
                   cro->Actual_typespec(const_cast<typespec*>(ag));
                   array_ts->Index_typespec(cro);
                 }
@@ -689,34 +694,43 @@ void UhdmWriter::writePorts(std::vector<Signal*>& orig_ports, BaseClass* parent,
           }
           if (dest_port->Typespec() == nullptr) {
             ref_typespec* dest_port_rt = s.MakeRef_typespec();
+            dest_port_rt->VpiName(fC->SymName(orig_port->getTypespecId()));
             dest_port_rt->VpiParent(dest_port);
+            fC->populateCoreMembers(orig_port->getTypespecId(),
+                                    orig_port->getTypespecId(), dest_port_rt);
             dest_port->Typespec(dest_port_rt);
           }
           dest_port->Typespec()->Actual_typespec(array_ts);
 
           if (typespec* ts = m_helper.compileTypespec(
-                  mod, fC, orig_port->getTypeSpecId(), m_compileDesign,
+                  mod, fC, orig_port->getTypespecId(), m_compileDesign,
                   Reduce::No, array_ts, nullptr, true)) {
             if (array_ts->Elem_typespec() == nullptr) {
               ref_typespec* array_ts_rt = s.MakeRef_typespec();
               array_ts_rt->VpiParent(array_ts);
+              fC->populateCoreMembers(
+                  orig_port->getTypespecId(),
+                  packedDimensions ? packedDimensions : nameId, array_ts_rt);
+              array_ts_rt->VpiName(ts->VpiName());
               array_ts->Elem_typespec(array_ts_rt);
             }
             array_ts->Elem_typespec()->Actual_typespec(ts);
           }
         }
       } else if (typespec* ts = m_helper.compileTypespec(
-                     mod, fC, orig_port->getTypeSpecId(), m_compileDesign,
+                     mod, fC, orig_port->getTypespecId(), m_compileDesign,
                      Reduce::No, dest_port, nullptr, true)) {
         if (dest_port->Typespec() == nullptr) {
           ref_typespec* dest_port_rt = s.MakeRef_typespec();
+          dest_port_rt->VpiName(ts->VpiName());
           dest_port_rt->VpiParent(dest_port);
           dest_port->Typespec(dest_port_rt);
+          fC->populateCoreMembers(orig_port->getTypespecId(),
+                                  orig_port->getTypespecId(), dest_port_rt);
         }
         dest_port->Typespec()->Actual_typespec(ts);
       }
     }
-    dest_ports->push_back(dest_port);
   }
 }
 
@@ -725,6 +739,7 @@ void UhdmWriter::writeDataTypes(const DesignComponent::DataTypeMap& datatypeMap,
                                 VectorOftypespec* dest_typespecs, Serializer& s,
                                 bool setParent) {
   std::set<uint64_t> ids;
+  for (const typespec* t : *dest_typespecs) ids.emplace(t->UhdmId());
   for (const auto& entry : datatypeMap) {
     const DataType* dtype = entry.second;
     if (dtype->getCategory() == DataType::Category::REF) {
@@ -748,18 +763,19 @@ void UhdmWriter::writeDataTypes(const DesignComponent::DataTypeMap& datatypeMap,
         if (parent->UhdmType() != uhdmclass_defn)
           tps->Instance((instance*)parent);
       }
-      if (setParent) tps->VpiParent(parent);
-      if (ids.find(tps->UhdmId()) == ids.end()) {
-        dest_typespecs->push_back(tps);
-        ids.insert(tps->UhdmId());
+      if (setParent && (tps->VpiParent() == nullptr)) {
+        tps->VpiParent(parent);
+        ids.emplace(tps->UhdmId());
+      } else if (ids.emplace(tps->UhdmId()).second) {
+        tps->VpiParent(parent);
       }
     }
   }
 }
 
 void UhdmWriter::writeNets(DesignComponent* mod,
-                           std::vector<Signal*>& orig_nets, BaseClass* parent,
-                           VectorOfnet* dest_nets, Serializer& s,
+                           const std::vector<Signal*>& orig_nets,
+                           BaseClass* parent, Serializer& s,
                            SignalBaseClassMap& signalBaseMap,
                            SignalMap& signalMap, SignalMap& portMap,
                            ModuleInstance* instance /* = nullptr */) {
@@ -780,7 +796,7 @@ void UhdmWriter::writeNets(DesignComponent* mod,
     }
     if (dest_net) {
       const FileContent* fC = orig_net->getFileContent();
-      if (fC->Type(orig_net->getNodeId()) == VObjectType::slStringConst) {
+      if (fC->Type(orig_net->getNameId()) == VObjectType::slStringConst) {
         auto portItr = portMap.find(orig_net->getName());
         if (portItr != portMap.end()) {
           Signal* sig = (*portItr).second;
@@ -789,19 +805,19 @@ void UhdmWriter::writeNets(DesignComponent* mod,
                 signalBaseMap.find(sig);
             if (itr != signalBaseMap.end()) {
               port* p = (port*)((*itr).second);
-              NodeId nodeId = orig_net->getNodeId();
+              NodeId nameId = orig_net->getNameId();
               if (p->Low_conn() == nullptr) {
                 ref_obj* ref = s.MakeRef_obj();
                 ref->VpiName(p->VpiName());
                 ref->Actual_group(dest_net);
                 ref->VpiParent(p);
                 p->Low_conn(ref);
-                fC->populateCoreMembers(nodeId, nodeId, ref);
+                fC->populateCoreMembers(nameId, nameId, ref);
               } else if (p->Low_conn()->UhdmType() == uhdmref_obj) {
                 ref_obj* ref = (ref_obj*)p->Low_conn();
                 ref->VpiName(p->VpiName());
                 if (ref->VpiLineNo() == 0) {
-                  fC->populateCoreMembers(nodeId, nodeId, ref);
+                  fC->populateCoreMembers(nameId, nameId, ref);
                 }
                 if (ref->Actual_group() == nullptr) {
                   ref->Actual_group(dest_net);
@@ -813,14 +829,17 @@ void UhdmWriter::writeNets(DesignComponent* mod,
         } else if (dest_net->Typespec() == nullptr) {
           // compileTypespec function need to account for range
           // location information if there is any in the typespec.
-          if (orig_net->getTypeSpecId()) {
+          if (orig_net->getTypespecId()) {
             if (typespec* ts = m_helper.compileTypespec(
-                    mod, fC, orig_net->getTypeSpecId(), m_compileDesign,
+                    mod, fC, orig_net->getTypespecId(), m_compileDesign,
                     Reduce::No, nullptr, nullptr, true)) {
               ref_typespec* rt = s.MakeRef_typespec();
+              rt->VpiName(ts->VpiName());
               rt->VpiParent(dest_net);
               rt->Actual_typespec(ts);
               dest_net->Typespec(rt);
+              fC->populateCoreMembers(orig_net->getTypespecId(),
+                                      orig_net->getTypespecId(), rt);
               NodeId dimensions = orig_net->getUnpackedDimension();
               if (!dimensions) dimensions = orig_net->getPackedDimension();
               if (dimensions) {
@@ -832,17 +851,18 @@ void UhdmWriter::writeNets(DesignComponent* mod,
         signalBaseMap.emplace(orig_net, dest_net);
         signalMap.emplace(orig_net->getName(), orig_net);
         dest_net->VpiName(orig_net->getName());
-        orig_net->getFileContent()->populateCoreMembers(
-            orig_net->getNodeId(), orig_net->getNodeId(), dest_net);
+        if (const FileContent* const fC = orig_net->getFileContent()) {
+          fC->populateCoreMembers(orig_net->getNameId(), orig_net->getNameId(),
+                                  dest_net);
+        }
         dest_net->VpiNetType(UhdmWriter::getVpiNetType(orig_net->getType()));
         dest_net->VpiParent(parent);
-        dest_nets->push_back(dest_net);
       }
     }
   }
 }
 
-void mapLowConns(std::vector<Signal*>& orig_ports, Serializer& s,
+void mapLowConns(const std::vector<Signal*>& orig_ports, Serializer& s,
                  UhdmWriter::SignalBaseClassMap& signalBaseMap) {
   for (Signal* orig_port : orig_ports) {
     if (Signal* lowconn = orig_port->getLowConn()) {
@@ -856,48 +876,33 @@ void mapLowConns(std::vector<Signal*>& orig_ports, Serializer& s,
           ((port*)itrport->second)->Low_conn(ref);
           ref->VpiParent(itrport->second);
           ref->Actual_group(itrlow->second);
-
-          const FileContent* fC = orig_port->getFileContent();
-          fC->populateCoreMembers(orig_port->getNodeId(),
-                                  orig_port->getNodeId(), ref);
+          ref->VpiName(orig_port->getName());
+          orig_port->getFileContent()->populateCoreMembers(
+              orig_port->getNodeId(), orig_port->getNodeId(), ref);
         }
       }
     }
   }
 }
 
-void UhdmWriter::writeClass(ClassDefinition* classDef,
-                            VectorOfclass_defn* dest_classes, Serializer& s,
+void UhdmWriter::writeClass(ClassDefinition* classDef, Serializer& s,
                             BaseClass* parent) {
   if (!classDef->getFileContents().empty() &&
       classDef->getType() == VObjectType::paClass_declaration) {
     const FileContent* fC = classDef->getFileContents()[0];
-    class_defn* c = classDef->getUhdmDefinition();
+    class_defn* c = classDef->getUhdmModel<class_defn>();
     m_componentMap.emplace(classDef, c);
     c->VpiParent(parent);
     c->VpiEndLabel(classDef->getEndLabel());
+    c->Task_func_decls(classDef->getTask_func_decls());
+
     // Typepecs
-    VectorOftypespec* typespecs = s.MakeTypespecVec();
-    c->Typespecs(typespecs);
+    VectorOftypespec* typespecs = c->Typespecs(true);
     writeDataTypes(classDef->getDataTypeMap(), c, typespecs, s, true);
 
     // Variables
     // Already bound in TestbenchElaboration
 
-    // Function and tasks
-    c->Task_funcs(classDef->getTask_funcs());
-    if (c->Task_funcs()) {
-      for (auto tf : *c->Task_funcs()) {
-        if (tf->VpiParent() == nullptr) tf->VpiParent(c);
-      }
-    }
-    // Parameters
-    if (classDef->getParameters()) {
-      c->Parameters(classDef->getParameters());
-      for (auto ps : *c->Parameters()) {
-        ps->VpiParent(c);
-      }
-    }
     // Extends, fix late binding
     if (const extends* ext = c->Extends()) {
       if (const ref_typespec* ext_rt = ext->Class_typespec()) {
@@ -934,7 +939,7 @@ void UhdmWriter::writeClass(ClassDefinition* classDef,
       }
     }
     c->VpiParent(parent);
-    dest_classes->push_back(c);
+
     const std::string_view name = classDef->getName();
     if (c->VpiName().empty()) c->VpiName(name);
     if (c->VpiFullName().empty()) c->VpiFullName(name);
@@ -955,30 +960,24 @@ void UhdmWriter::writeClass(ClassDefinition* classDef,
     // lateBinding(s, classDef, c);
 
     for (auto& nested : classDef->getClassMap()) {
-      ClassDefinition* c_nested = nested.second;
-      VectorOfclass_defn* dest_classes = s.MakeClass_defnVec();
-      writeClass(c_nested, dest_classes, s, c);
+      writeClass(nested.second, s, c);
     }
   }
 }
 
 void UhdmWriter::writeClasses(ClassNameClassDefinitionMultiMap& orig_classes,
-                              VectorOfclass_defn* dest_classes, Serializer& s,
-                              BaseClass* parent) {
+                              Serializer& s, BaseClass* parent) {
   for (auto& orig_class : orig_classes) {
-    ClassDefinition* classDef = orig_class.second;
-    writeClass(classDef, dest_classes, s, parent);
+    writeClass(orig_class.second, s, parent);
   }
 }
 
 void UhdmWriter::writeVariables(const DesignComponent::VariableMap& orig_vars,
-                                BaseClass* parent, VectorOfvariables* dest_vars,
-                                Serializer& s) {
+                                BaseClass* parent, Serializer& s) {
   for (auto& orig_var : orig_vars) {
     Variable* var = orig_var.second;
     const DataType* dtype = var->getDataType();
-    const ClassDefinition* classdef =
-        datatype_cast<const ClassDefinition*>(dtype);
+    const ClassDefinition* classdef = datatype_cast<ClassDefinition>(dtype);
     if (classdef) {
       class_var* cvar = s.MakeClass_var();
       cvar->VpiName(var->getName());
@@ -990,7 +989,6 @@ void UhdmWriter::writeVariables(const DesignComponent::VariableMap& orig_vars,
         // TODO: Bind Class type,
         // class_var -> class_typespec -> class_defn
       }
-      dest_vars->push_back(cvar);
     }
   }
 }
@@ -1001,7 +999,7 @@ class ReInstanceTypespec : public VpiListener {
   ~ReInstanceTypespec() override = default;
 
   void leaveAny(const any* object, vpiHandle handle) final {
-    if (any_cast<const typespec*>(object) != nullptr) {
+    if (any_cast<typespec>(object) != nullptr) {
       if ((object->UhdmType() != uhdmevent_typespec) &&
           (object->UhdmType() != uhdmimport_typespec) &&
           (object->UhdmType() != uhdmtype_parameter)) {
@@ -1020,11 +1018,11 @@ class ReInstanceTypespec : public VpiListener {
     if (cobject == nullptr) return;
     any* object = (any*)cobject;
     const instance* inst = nullptr;
-    if (typespec* tps = any_cast<typespec*>(object)) {
+    if (typespec* tps = any_cast<typespec>(object)) {
       inst = (instance*)tps->Instance();
-    } else if (function* tps = any_cast<function*>(object)) {
+    } else if (function* tps = any_cast<function>(object)) {
       inst = (instance*)tps->Instance();
-    } else if (task* tps = any_cast<task*>(object)) {
+    } else if (task* tps = any_cast<task>(object)) {
       inst = (instance*)tps->Instance();
     }
     if (inst) {
@@ -1033,15 +1031,14 @@ class ReInstanceTypespec : public VpiListener {
       if (d->AllPackages() != nullptr) {
         for (auto pack : *d->AllPackages()) {
           if (pack->VpiName() == name) {
-            if (typespec* tps = any_cast<typespec*>(object)) {
+            if (typespec* tps = any_cast<typespec>(object)) {
               tps->Instance(pack);
-              if (const enum_typespec* et =
-                      any_cast<const enum_typespec*>(cobject)) {
+              if (const enum_typespec* et = any_cast<enum_typespec>(cobject)) {
                 reInstance(et->Base_typespec());
               }
-            } else if (function* tps = any_cast<function*>(object)) {
+            } else if (function* tps = any_cast<function>(object)) {
               tps->Instance(pack);
-            } else if (task* tps = any_cast<task*>(object)) {
+            } else if (task* tps = any_cast<task>(object)) {
               tps->Instance(pack);
             }
             break;
@@ -1067,30 +1064,18 @@ void reInstanceTypespec(Serializer& serializer, any* root, package* p) {
 
 void UhdmWriter::writePackage(Package* pack, package* p, Serializer& s,
                               bool elaborated) {
+  const ScopedScope scopedScope(p);
+
   p->VpiEndLabel(pack->getEndLabel());
   p->VpiFullName(StrCat(pack->getName(), "::"));
-  VectorOfclass_defn* dest_classes = nullptr;
 
-  // Typepecs
-  VectorOftypespec* typespecs = s.MakeTypespecVec();
-  p->Typespecs(typespecs);
-  writeDataTypes(pack->getDataTypeMap(), p, typespecs, s, true);
-  for (auto tp : *typespecs) {
-    tp->Instance(p);
-  }
-  for (auto item : pack->getImportedSymbols()) {
-    typespecs->push_back(item);
-  }
   // Classes
   ClassNameClassDefinitionMultiMap& orig_classes = pack->getClassDefinitions();
-  dest_classes = s.MakeClass_defnVec();
-  writeClasses(orig_classes, dest_classes, s, p);
-  p->Class_defns(dest_classes);
+  writeClasses(orig_classes, s, p);
+
   // Parameters
-  if (pack->getParameters()) {
-    p->Parameters(pack->getParameters());
+  if (p->Parameters()) {
     for (auto ps : *p->Parameters()) {
-      ps->VpiParent(p);
       if (ps->UhdmType() == uhdmparameter) {
         ((parameter*)ps)
             ->VpiFullName(StrCat(pack->getName(), "::", ps->VpiName()));
@@ -1125,7 +1110,6 @@ void UhdmWriter::writePackage(Package* pack, package* p, Serializer& s,
 
   // Function and tasks
   if (pack->getTask_funcs()) {
-    p->Task_funcs(s.MakeTask_funcVec());
     for (auto tf : *pack->getTask_funcs()) {
       const std::string_view funcName = tf->VpiName();
       if (funcName.find("::") != std::string::npos) {
@@ -1134,16 +1118,14 @@ void UhdmWriter::writePackage(Package* pack, package* p, Serializer& s,
         const std::string_view className = res[0];
         const std::string_view funcName = res[1];
         bool foundParentClass = false;
-        for (auto cl : *dest_classes) {
-          if (cl->VpiName() == className) {
-            tf->VpiParent(cl);
-            tf->Instance(p);
-            if (cl->Task_funcs() == nullptr) {
-              cl->Task_funcs(s.MakeTask_funcVec());
+        if (p->Class_defns()) {
+          for (auto cl : *p->Class_defns()) {
+            if (cl->VpiName() == className) {
+              tf->VpiParent(cl, true);
+              tf->Instance(p);
+              foundParentClass = true;
+              break;
             }
-            cl->Task_funcs()->push_back(tf);
-            foundParentClass = true;
-            break;
           }
         }
         if (foundParentClass) {
@@ -1154,22 +1136,19 @@ void UhdmWriter::writePackage(Package* pack, package* p, Serializer& s,
         } else {
           tf->VpiParent(p);
           tf->Instance(p);
-          p->Task_funcs()->push_back(tf);
           ((task_func*)tf)
               ->VpiFullName(StrCat(pack->getName(), "::", tf->VpiName()));
         }
       } else {
         tf->VpiParent(p);
         tf->Instance(p);
-        p->Task_funcs()->push_back(tf);
         ((task_func*)tf)
             ->VpiFullName(StrCat(pack->getName(), "::", tf->VpiName()));
       }
     }
   }
   // Variables
-  Netlist* netlist = pack->getNetlist();
-  if (netlist) {
+  if (Netlist* netlist = pack->getNetlist()) {
     p->Variables(netlist->variables());
     if (netlist->variables()) {
       for (auto obj : *netlist->variables()) {
@@ -1183,20 +1162,14 @@ void UhdmWriter::writePackage(Package* pack, package* p, Serializer& s,
   SignalBaseClassMap signalBaseMap;
   SignalMap portMap;
   SignalMap netMap;
-  std::vector<Signal*> orig_nets = pack->getSignals();
-  VectorOfnet* dest_nets = s.MakeNetVec();
-  writeNets(pack, orig_nets, p, dest_nets, s, signalBaseMap, netMap, portMap,
-            nullptr);
-  p->Nets(dest_nets);
-  if (elaborated) {
-    lateTypedefBinding(s, pack, p);
-  }
-  lateBinding(s, pack, p);
+  const std::vector<Signal*>& orig_nets = pack->getSignals();
+  writeNets(pack, orig_nets, p, s, signalBaseMap, netMap, portMap, nullptr);
 }
 
 void UhdmWriter::writeModule(ModuleDefinition* mod, module_inst* m,
                              Serializer& s, ModuleMap& moduleMap,
                              ModPortMap& modPortMap, ModuleInstance* instance) {
+  const ScopedScope scopedScope(m);
   SignalBaseClassMap signalBaseMap;
   SignalMap portMap;
   SignalMap netMap;
@@ -1205,107 +1178,40 @@ void UhdmWriter::writeModule(ModuleDefinition* mod, module_inst* m,
 
   // Let decls
   if (!mod->getLetStmts().empty()) {
-    VectorOflet_decl* decls = s.MakeLet_declVec();
-    m->Let_decls(decls);
-    for (auto stmt : mod->getLetStmts()) {
+    for (auto& stmt : mod->getLetStmts()) {
       const_cast<let_decl*>(stmt.second->Decl())->VpiParent(m);
-      decls->push_back((let_decl*)stmt.second->Decl());
     }
   }
   // Gen stmts
   if (mod->getGenStmts()) {
-    m->Gen_stmts(mod->getGenStmts());
     for (auto stmt : *mod->getGenStmts()) {
       stmt->VpiParent(m);
     }
   }
   if (!mod->getPropertyDecls().empty()) {
-    VectorOfproperty_decl* decls = s.MakeProperty_declVec();
-    m->Property_decls(decls);
     for (auto decl : mod->getPropertyDecls()) {
       decl->VpiParent(m);
-      decls->push_back(decl);
     }
   }
   if (!mod->getSequenceDecls().empty()) {
-    VectorOfsequence_decl* decls = s.MakeSequence_declVec();
-    m->Sequence_decls(decls);
     for (auto decl : mod->getSequenceDecls()) {
       decl->VpiParent(m);
-      decls->push_back(decl);
     }
   }
 
-  // Typepecs
-  VectorOftypespec* typespecs = s.MakeTypespecVec();
-  m->Typespecs(typespecs);
-  writeDataTypes(mod->getDataTypeMap(), m, typespecs, s, true);
-  for (auto item : mod->getImportedSymbols()) {
-    typespecs->push_back(item);
-  }
   // Ports
-  std::vector<Signal*>& orig_ports = mod->getPorts();
-  VectorOfport* dest_ports = s.MakePortVec();
-  VectorOfnet* dest_nets = s.MakeNetVec();
-  writePorts(orig_ports, m, dest_ports, dest_nets, s, modPortMap, signalBaseMap,
-             portMap, instance, mod);
-  m->Ports(dest_ports);
+  const std::vector<Signal*>& orig_ports = mod->getPorts();
+  writePorts(orig_ports, m, s, modPortMap, signalBaseMap, portMap, instance,
+             mod);
   // Nets
-  std::vector<Signal*> orig_nets = mod->getSignals();
-  writeNets(mod, orig_nets, m, dest_nets, s, signalBaseMap, netMap, portMap,
-            instance);
-  m->Nets(dest_nets);
   mapLowConns(orig_ports, s, signalBaseMap);
   // Classes
   ClassNameClassDefinitionMultiMap& orig_classes = mod->getClassDefinitions();
-  VectorOfclass_defn* dest_classes = s.MakeClass_defnVec();
-  writeClasses(orig_classes, dest_classes, s, m);
-  m->Class_defns(dest_classes);
-  // Variables
-  // DesignComponent::VariableMap& orig_vars = mod->getVariables();
-  // VectorOfvariables* dest_vars = s.MakeVariablesVec();
-  // writeVariables(orig_vars, m, dest_vars, s);
-  // m->Variables(dest_vars);
+  writeClasses(orig_classes, s, m);
 
-  // Cont assigns
-  m->Cont_assigns(mod->getContAssigns());
-  if (m->Cont_assigns()) {
-    for (auto ps : *m->Cont_assigns()) {
-      ps->VpiParent(m);
-    }
-  }
-
-  // Processes
-  m->Process(mod->getProcesses());
-  if (m->Process()) {
-    for (auto ps : *m->Process()) {
-      ps->VpiParent(m);
-    }
-  }
-  // Parameters
-  if (mod->getParameters()) {
-    m->Parameters(mod->getParameters());
-    for (auto ps : *m->Parameters()) {
-      ps->VpiParent(m);
-    }
-  }
-  // Param_assigns
-  if (mod->getParam_assigns()) {
-    m->Param_assigns(mod->getParam_assigns());
-    for (auto ps : *m->Param_assigns()) {
-      ps->VpiParent(m);
-    }
-  }
   // Function and tasks
-  if (auto from = mod->getTask_funcs()) {
-    UHDM::VectorOftask_func* target = m->Task_funcs();
-    if (target == nullptr) {
-      m->Task_funcs(s.MakeTask_funcVec());
-      target = m->Task_funcs();
-    }
-    for (auto tf : *from) {
-      target->push_back(tf);
-      if (tf->VpiParent() == nullptr) tf->VpiParent(m);
+  if ((m_helper.getElaborate() == Elaborate::Yes) && m->Task_funcs()) {
+    for (auto tf : *m->Task_funcs()) {
       if (tf->Instance() == nullptr) tf->Instance(m);
     }
   }
@@ -1323,59 +1229,42 @@ void UhdmWriter::writeModule(ModuleDefinition* mod, module_inst* m,
         m->Global_clocking(cblock.getActual());
         break;
       }
-      case ClockingBlock::Type::Regular: {
-        VectorOfclocking_block* cblocks = m->Clocking_blocks();
-        if (cblocks == nullptr) {
-          m->Clocking_blocks(s.MakeClocking_blockVec());
-          cblocks = m->Clocking_blocks();
-        }
-        cblocks->push_back(cblock.getActual());
+      default:
         break;
-      }
     }
   }
 
   // Assertions
   if (mod->getAssertions()) {
-    m->Assertions(mod->getAssertions());
-    for (auto ps : *m->Assertions()) {
+    for (auto ps : *mod->getAssertions()) {
       ps->VpiParent(m);
     }
   }
   // Module Instantiation
   if (std::vector<UHDM::ref_module*>* subModules = mod->getRefModules()) {
-    m->Ref_modules(subModules);
     for (auto subModArr : *subModules) {
       subModArr->VpiParent(m);
     }
   }
   if (VectorOfmodule_array* subModuleArrays = mod->getModuleArrays()) {
-    m->Module_arrays(subModuleArrays);
     for (auto subModArr : *subModuleArrays) {
       subModArr->VpiParent(m);
     }
   }
   if (UHDM::VectorOfprimitive* subModules = mod->getPrimitives()) {
-    m->Primitives(subModules);
     for (auto subModArr : *subModules) {
       subModArr->VpiParent(m);
     }
   }
   if (UHDM::VectorOfprimitive_array* subModules = mod->getPrimitiveArrays()) {
-    m->Primitive_arrays(subModules);
     for (auto subModArr : *subModules) {
       subModArr->VpiParent(m);
     }
   }
-  // Late bind
-  if (mod) {
-    lateBinding(s, mod, m);
-  }
   // Interface instantiation
   const std::vector<Signal*>& signals = mod->getSignals();
   if (!signals.empty()) {
-    VectorOfinterface_array* subInterfaceArrays = s.MakeInterface_arrayVec();
-    m->Interface_arrays(subInterfaceArrays);
+    VectorOfinterface_array* subInterfaceArrays = m->Interface_arrays(true);
     for (Signal* sig : signals) {
       NodeId unpackedDimension = sig->getUnpackedDimension();
       if (unpackedDimension && sig->getInterfaceDef()) {
@@ -1390,7 +1279,7 @@ void UhdmWriter::writeModule(ModuleDefinition* mod, module_inst* m,
           interface_array* smarray = s.MakeInterface_array();
           smarray->Ranges(unpackedDimensions);
           for (auto d : *unpackedDimensions) d->VpiParent(smarray);
-          if (fC->Type(id) == VObjectType::slStringConst) {
+          if (fC->Type(sig->getNameId()) == VObjectType::slStringConst) {
             smarray->VpiName(sig->getName());
           }
           smarray->VpiFullName(typeName);
@@ -1417,12 +1306,13 @@ void UhdmWriter::writeModule(ModuleDefinition* mod, module_inst* m,
       }
     }
   }
-  lateBinding(s, mod, m);
 }
 
 void UhdmWriter::writeInterface(ModuleDefinition* mod, interface_inst* m,
                                 Serializer& s, ModPortMap& modPortMap,
                                 ModuleInstance* instance) {
+  const ScopedScope scopedScope(m);
+
   SignalBaseClassMap signalBaseMap;
   SignalMap portMap;
   SignalMap netMap;
@@ -1431,58 +1321,41 @@ void UhdmWriter::writeInterface(ModuleDefinition* mod, interface_inst* m,
 
   // Let decls
   if (!mod->getLetStmts().empty()) {
-    VectorOflet_decl* decls = s.MakeLet_declVec();
-    m->Let_decls(decls);
+    VectorOflet_decl* decls = m->Let_decls(true);
     for (auto stmt : mod->getLetStmts()) {
       decls->push_back((let_decl*)stmt.second->Decl());
     }
   }
   // Gen stmts
   if (mod->getGenStmts()) {
-    m->Gen_stmts(mod->getGenStmts());
     for (auto stmt : *mod->getGenStmts()) {
       stmt->VpiParent(m);
     }
   }
   if (!mod->getPropertyDecls().empty()) {
-    VectorOfproperty_decl* decls = s.MakeProperty_declVec();
-    m->Property_decls(decls);
     for (auto decl : mod->getPropertyDecls()) {
       decl->VpiParent(m);
-      decls->push_back(decl);
     }
   }
   if (!mod->getSequenceDecls().empty()) {
-    VectorOfsequence_decl* decls = s.MakeSequence_declVec();
-    m->Sequence_decls(decls);
     for (auto decl : mod->getSequenceDecls()) {
       decl->VpiParent(m);
-      decls->push_back(decl);
     }
   }
 
   // Typepecs
-  VectorOftypespec* typespecs = s.MakeTypespecVec();
-  m->Typespecs(typespecs);
+  VectorOftypespec* typespecs = m->Typespecs(true);
   writeDataTypes(mod->getDataTypeMap(), m, typespecs, s, true);
-  for (auto item : mod->getImportedSymbols()) {
-    typespecs->push_back(item);
-  }
   // Ports
-  std::vector<Signal*>& orig_ports = mod->getPorts();
-  VectorOfport* dest_ports = s.MakePortVec();
-  VectorOfnet* dest_nets = s.MakeNetVec();
-  writePorts(orig_ports, m, dest_ports, dest_nets, s, modPortMap, signalBaseMap,
-             portMap, instance);
-  m->Ports(dest_ports);
-  std::vector<Signal*> orig_nets = mod->getSignals();
-  writeNets(mod, orig_nets, m, dest_nets, s, signalBaseMap, netMap, portMap,
-            instance);
-  m->Nets(dest_nets);
+  const std::vector<Signal*>& orig_ports = mod->getPorts();
+  writePorts(orig_ports, m, s, modPortMap, signalBaseMap, portMap, instance,
+             mod);
+  const std::vector<Signal*>& orig_nets = mod->getSignals();
+  writeNets(mod, orig_nets, m, s, signalBaseMap, netMap, portMap, instance);
+
   // Modports
   ModuleDefinition::ModPortSignalMap& orig_modports =
       mod->getModPortSignalMap();
-  VectorOfmodport* dest_modports = s.MakeModportVec();
   for (auto& orig_modport : orig_modports) {
     modport* dest_modport = s.MakeModport();
     // dest_modport->Interface(m); // Loop in elaboration!
@@ -1492,75 +1365,50 @@ void UhdmWriter::writeInterface(ModuleDefinition* mod, interface_inst* m,
     orig_fC->populateCoreMembers(orig_nodeId, orig_nodeId, dest_modport);
     modPortMap.emplace(&orig_modport.second, dest_modport);
     dest_modport->VpiName(orig_modport.first);
-    VectorOfio_decl* ios = s.MakeIo_declVec();
     for (auto& sig : orig_modport.second.getPorts()) {
       const FileContent* fC = sig.getFileContent();
       io_decl* io = s.MakeIo_decl();
       io->VpiName(sig.getName());
-      NodeId id = sig.getNodeId();
-      fC->populateCoreMembers(id, id, io);
-      if (NodeId Expression = fC->Sibling(id)) {
+      fC->populateCoreMembers(sig.getNameId(), sig.getNameId(), io);
+      if (NodeId Expression = fC->Sibling(sig.getNodeId())) {
         m_helper.checkForLoops(true);
-        any* exp =
-            m_helper.compileExpression(mod, fC, Expression, m_compileDesign,
-                                       Reduce::Yes, io, instance, true);
+        if (any* exp =
+                m_helper.compileExpression(mod, fC, Expression, m_compileDesign,
+                                           Reduce::Yes, io, instance, true)) {
+          io->Expr(exp);
+        }
         m_helper.checkForLoops(false);
-        io->Expr(exp);
       }
       uint32_t direction = UhdmWriter::getVpiDirection(sig.getDirection());
       io->VpiDirection(direction);
       io->VpiParent(dest_modport);
-      ios->push_back(io);
     }
-    dest_modport->Io_decls(ios);
-    dest_modports->push_back(dest_modport);
   }
-  m->Modports(dest_modports);
 
   // Cont assigns
   if (mod->getContAssigns()) {
-    m->Cont_assigns(mod->getContAssigns());
-    for (auto ps : *m->Cont_assigns()) {
+    for (auto ps : *mod->getContAssigns()) {
       ps->VpiParent(m);
     }
   }
 
   // Assertions
   if (mod->getAssertions()) {
-    m->Assertions(mod->getAssertions());
-    for (auto ps : *m->Assertions()) {
+    for (auto ps : *mod->getAssertions()) {
       ps->VpiParent(m);
     }
   }
 
   // Processes
   if (mod->getProcesses()) {
-    m->Process(mod->getProcesses());
-    for (auto ps : *m->Process()) {
-      ps->VpiParent(m);
-    }
-  }
-
-  // Parameters
-  if (mod->getParameters()) {
-    m->Parameters(mod->getParameters());
-    for (auto ps : *m->Parameters()) {
-      ps->VpiParent(m);
-    }
-  }
-  // Param_assigns
-  if (mod->getParam_assigns()) {
-    m->Param_assigns(mod->getParam_assigns());
-    for (auto ps : *m->Param_assigns()) {
+    for (auto ps : *mod->getProcesses()) {
       ps->VpiParent(m);
     }
   }
 
   // Function and tasks
-  if (mod->getTask_funcs()) {
-    m->Task_funcs(mod->getTask_funcs());
+  if ((m_helper.getElaborate() == Elaborate::Yes) && m->Task_funcs()) {
     for (auto tf : *m->Task_funcs()) {
-      if (tf->VpiParent() == nullptr) tf->VpiParent(m);
       if (tf->Instance() == nullptr) tf->Instance(m);
     }
   }
@@ -1578,15 +1426,8 @@ void UhdmWriter::writeInterface(ModuleDefinition* mod, interface_inst* m,
         m->Global_clocking(cblock.getActual());
         break;
       }
-      case ClockingBlock::Type::Regular: {
-        VectorOfclocking_block* cblocks = m->Clocking_blocks();
-        if (cblocks == nullptr) {
-          m->Clocking_blocks(s.MakeClocking_blockVec());
-          cblocks = m->Clocking_blocks();
-        }
-        cblocks->push_back(cblock.getActual());
+      default:
         break;
-      }
     }
   }
 }
@@ -1594,6 +1435,8 @@ void UhdmWriter::writeInterface(ModuleDefinition* mod, interface_inst* m,
 void UhdmWriter::writeProgram(Program* mod, program* m, Serializer& s,
                               ModPortMap& modPortMap,
                               ModuleInstance* instance) {
+  const ScopedScope scopedScope(m);
+
   SignalBaseClassMap signalBaseMap;
   SignalMap portMap;
   SignalMap netMap;
@@ -1601,76 +1444,48 @@ void UhdmWriter::writeProgram(Program* mod, program* m, Serializer& s,
   m->VpiEndLabel(mod->getEndLabel());
 
   // Typepecs
-  VectorOftypespec* typespecs = s.MakeTypespecVec();
-  m->Typespecs(typespecs);
+  VectorOftypespec* typespecs = m->Typespecs(true);
   writeDataTypes(mod->getDataTypeMap(), m, typespecs, s, true);
-  for (auto item : mod->getImportedSymbols()) {
-    typespecs->push_back(item);
-  }
+
   // Ports
-  std::vector<Signal*>& orig_ports = mod->getPorts();
-  VectorOfport* dest_ports = s.MakePortVec();
-  VectorOfnet* dest_nets = s.MakeNetVec();
-  writePorts(orig_ports, m, dest_ports, dest_nets, s, modPortMap, signalBaseMap,
-             portMap, instance);
-  m->Ports(dest_ports);
+  const std::vector<Signal*>& orig_ports = mod->getPorts();
+  writePorts(orig_ports, m, s, modPortMap, signalBaseMap, portMap, instance,
+             mod);
+
   // Nets
-  std::vector<Signal*>& orig_nets = mod->getSignals();
-  writeNets(mod, orig_nets, m, dest_nets, s, signalBaseMap, netMap, portMap,
-            instance);
-  m->Nets(dest_nets);
+  const std::vector<Signal*>& orig_nets = mod->getSignals();
+  writeNets(mod, orig_nets, m, s, signalBaseMap, netMap, portMap, instance);
   mapLowConns(orig_ports, s, signalBaseMap);
-  // Parameters
-  if (mod->getParameters()) {
-    m->Parameters(mod->getParameters());
-    for (auto ps : *m->Parameters()) {
-      ps->VpiParent(m);
-    }
-  }
 
   // Assertions
   if (mod->getAssertions()) {
-    m->Assertions(mod->getAssertions());
-    for (auto ps : *m->Assertions()) {
+    for (auto ps : *mod->getAssertions()) {
       ps->VpiParent(m);
     }
   }
 
-  // Param_assigns
-  if (mod->getParam_assigns()) {
-    m->Param_assigns(mod->getParam_assigns());
-    for (auto ps : *m->Param_assigns()) {
-      ps->VpiParent(m);
-    }
-  }
   // Classes
   ClassNameClassDefinitionMultiMap& orig_classes = mod->getClassDefinitions();
-  VectorOfclass_defn* dest_classes = s.MakeClass_defnVec();
-  writeClasses(orig_classes, dest_classes, s, m);
-  m->Class_defns(dest_classes);
+  writeClasses(orig_classes, s, m);
+
   // Variables
   const DesignComponent::VariableMap& orig_vars = mod->getVariables();
-  VectorOfvariables* dest_vars = s.MakeVariablesVec();
-  writeVariables(orig_vars, m, dest_vars, s);
-  m->Variables(dest_vars);
+  writeVariables(orig_vars, m, s);
 
   // Cont assigns
-  m->Cont_assigns(mod->getContAssigns());
-  if (m->Cont_assigns()) {
-    for (auto ps : *m->Cont_assigns()) {
+  if (mod->getContAssigns()) {
+    for (auto ps : *mod->getContAssigns()) {
       ps->VpiParent(m);
     }
   }
   // Processes
-  m->Process(mod->getProcesses());
-  if (m->Process()) {
-    for (auto ps : *m->Process()) {
+  if (mod->getProcesses()) {
+    for (auto ps : *mod->getProcesses()) {
       ps->VpiParent(m);
     }
   }
-  m->Task_funcs(mod->getTask_funcs());
-  if (m->Task_funcs()) {
-    for (auto tf : *m->Task_funcs()) {
+  if (mod->getTask_funcs()) {
+    for (auto tf : *mod->getTask_funcs()) {
       tf->VpiParent(m);
     }
   }
@@ -1684,13 +1499,8 @@ void UhdmWriter::writeProgram(Program* mod, program* m, Serializer& s,
         m->Default_clocking(cblock.getActual());
         break;
       }
-      case ClockingBlock::Type::Regular: {
-        VectorOfclocking_block* cblocks = m->Clocking_blocks();
-        if (cblocks == nullptr) {
-          m->Clocking_blocks(s.MakeClocking_blockVec());
-          cblocks = m->Clocking_blocks();
-        }
-        cblocks->push_back(cblock.getActual());
+      case ClockingBlock::Type::Global: {
+        // m->Global_clocking(cblock.getActual());
         break;
       }
       default:
@@ -1706,39 +1516,26 @@ bool UhdmWriter::writeElabProgram(Serializer& s, ModuleInstance* instance,
   if (mod) {
     // Let decls
     if (!mod->getLetStmts().empty()) {
-      VectorOflet_decl* decls = s.MakeLet_declVec();
-      m->Let_decls(decls);
-      for (auto stmt : mod->getLetStmts()) {
-        decls->push_back((let_decl*)stmt.second->Decl());
+      for (auto& stmt : mod->getLetStmts()) {
+        const_cast<let_decl*>(stmt.second->Decl())->VpiParent(m);
       }
     }
     if (!mod->getPropertyDecls().empty()) {
-      VectorOfproperty_decl* decls = s.MakeProperty_declVec();
-      m->Property_decls(decls);
       for (auto decl : mod->getPropertyDecls()) {
         decl->VpiParent(m);
-        decls->push_back(decl);
       }
     }
     if (!mod->getSequenceDecls().empty()) {
-      VectorOfsequence_decl* decls = s.MakeSequence_declVec();
-      m->Sequence_decls(decls);
       for (auto decl : mod->getSequenceDecls()) {
         decl->VpiParent(m);
-        decls->push_back(decl);
       }
     }
     // Typepecs
-    VectorOftypespec* typespecs = s.MakeTypespecVec();
-    m->Typespecs(typespecs);
+    VectorOftypespec* typespecs = m->Typespecs(true);
     writeDataTypes(mod->getDataTypeMap(), m, typespecs, s, false);
-    for (auto item : mod->getImportedSymbols()) {
-      typespecs->push_back(item);
-    }
     // Assertions
     if (mod->getAssertions()) {
-      m->Assertions(mod->getAssertions());
-      for (auto ps : *m->Assertions()) {
+      for (auto ps : *mod->getAssertions()) {
         ps->VpiParent(m);
       }
     }
@@ -1756,7 +1553,7 @@ bool UhdmWriter::writeElabProgram(Serializer& s, ModuleInstance* instance,
         obj->VpiParent(m);
 
         if (auto lc = obj->Low_conn()) {
-          if (const ref_obj* ro = any_cast<const ref_obj*>(lc)) {
+          if (const ref_obj* ro = any_cast<ref_obj>(lc)) {
             if (const any* ag = ro->Actual_group()) {
               if (ag->UhdmType() == UHDM::uhdmmodport) {
                 PortModPortMap::const_iterator it1 =
@@ -1822,11 +1619,7 @@ bool UhdmWriter::writeElabProgram(Serializer& s, ModuleInstance* instance,
   }
   if (mod) {
     if (auto from = mod->getTask_funcs()) {
-      UHDM::VectorOftask_func* target = m->Task_funcs();
-      if (target == nullptr) {
-        m->Task_funcs(s.MakeTask_funcVec());
-        target = m->Task_funcs();
-      }
+      UHDM::VectorOftask_func* target = m->Task_funcs(true);
       for (auto tf : *from) {
         target->push_back(tf);
         if (tf->VpiParent() == nullptr) tf->VpiParent(m);
@@ -1858,21 +1651,10 @@ bool UhdmWriter::writeElabProgram(Serializer& s, ModuleInstance* instance,
           clocking_block* cb = (clocking_block*)UHDM::clone_tree(
               cblock.getActual(), &elaboratorContext);
           cb->VpiParent(m);
-          VectorOfclocking_block* cblocks = m->Clocking_blocks();
-          if (cblocks == nullptr) {
-            m->Clocking_blocks(s.MakeClocking_blockVec());
-            cblocks = m->Clocking_blocks();
-          }
-          cblocks->push_back(cb);
           break;
         }
       }
     }
-  }
-
-  if (mod) {
-    lateTypedefBinding(s, mod, m);
-    lateBinding(s, mod, m);
   }
 
   return true;
@@ -1893,7 +1675,8 @@ class DetectUnsizedConstant final : public VpiListener {
 void UhdmWriter::writeCont_assign(Netlist* netlist, Serializer& s,
                                   DesignComponent* mod, any* m,
                                   std::vector<cont_assign*>* assigns) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  SymbolTable* const symbols = m_session->getSymbolTable();
   if (netlist->cont_assigns()) {
     for (auto assign : *netlist->cont_assigns()) {
       const expr* lhs = assign->Lhs();
@@ -1939,22 +1722,20 @@ void UhdmWriter::writeCont_assign(Netlist* netlist, Serializer& s,
               any* rhstmp = m_helper.reduceExpr(
                   (expr*)rhs, invalidValue, mod, m_compileDesign,
                   netlist->getParent(),
-                  fileSystem->toPathId(
-                      rhs->VpiFile(),
-                      m_compileDesign->getCompiler()->getSymbolTable()),
+                  fileSystem->toPathId(rhs->VpiFile(), symbols),
                   rhs->VpiLineNo(), assign, true);
               m_helper.checkForLoops(false);
               if (const ref_typespec* rt = lhs->Typespec()) {
                 tps = rt->Actual_typespec();
               }
-              if (expr* exp = any_cast<expr*>(var)) {
+              if (expr* exp = any_cast<expr>(var)) {
                 if (const ref_typespec* rt = exp->Typespec()) {
                   if (const typespec* temp = rt->Actual_typespec()) {
                     tps = temp;
                   }
                 }
               }
-              if ((invalidValue == false) && rhstmp) {
+              if (!invalidValue && rhstmp) {
                 if (rhstmp->UhdmType() == uhdmconstant)
                   rhstmp = m_helper.adjustSize(tps, mod, m_compileDesign,
                                                netlist->getParent(),
@@ -1969,7 +1750,7 @@ void UhdmWriter::writeCont_assign(Netlist* netlist, Serializer& s,
             cloned = true;
           }
 
-          if (expr* exp = any_cast<expr*>(var)) {
+          if (expr* exp = any_cast<expr>(var)) {
             if (const ref_typespec* rt = exp->Typespec()) {
               if (const typespec* temp = rt->Actual_typespec()) {
                 tps = temp;
@@ -2004,13 +1785,13 @@ void UhdmWriter::writeCont_assign(Netlist* netlist, Serializer& s,
           int32_t opType = op->VpiOpType();
           if (opType == vpiAssignmentPatternOp || opType == vpiConditionOp) {
             if (m_helper.substituteAssignedValue(rhs, m_compileDesign)) {
-              rhs = m_helper.expandPatternAssignment(tps, (UHDM::expr*)rhs, mod,
-                                                     m_compileDesign,
-                                                     netlist->getParent());
+              rhs = m_helper.expandPatternAssignment(
+                  tps, (UHDM::expr*)rhs, mod, m_compileDesign,
+                  m_helper.getReduce(), netlist->getParent());
             }
           }
           rhs = (UHDM::expr*)m_helper.defaultPatternAssignment(
-              tps, (UHDM::expr*)rhs, mod, m_compileDesign,
+              tps, (UHDM::expr*)rhs, mod, m_compileDesign, m_helper.getReduce(),
               netlist->getParent());
 
           assign->Rhs((UHDM::expr*)rhs);
@@ -2059,28 +1840,22 @@ void UhdmWriter::writeCont_assign(Netlist* netlist, Serializer& s,
         m_helper.checkForLoops(true);
         any* res = m_helper.reduceExpr(
             (expr*)rhs, invalidValue, mod, m_compileDesign,
-            netlist->getParent(),
-            fileSystem->toPathId(
-                rhs->VpiFile(),
-                m_compileDesign->getCompiler()->getSymbolTable()),
+            netlist->getParent(), fileSystem->toPathId(rhs->VpiFile(), symbols),
             rhs->VpiLineNo(), assign, true);
         m_helper.checkForLoops(false);
-        if (invalidValue == false) {
-          if (res && (res->UhdmType() == uhdmconstant)) {
-            if (cloned == false) {
-              ElaboratorContext elaboratorContext(&s, false, true);
-              assign =
-                  (cont_assign*)UHDM::clone_tree(assign, &elaboratorContext);
-              assign->VpiParent(m);
-              lhs = assign->Lhs();
-              cloned = true;
-              res = m_helper.adjustSize(tps, mod, m_compileDesign,
-                                        netlist->getParent(), (constant*)res,
-                                        true);
-              res->VpiParent(assign);
-            }
-            assign->Rhs((constant*)res);
+        if (!invalidValue && res && (res->UhdmType() == uhdmconstant)) {
+          if (cloned == false) {
+            ElaboratorContext elaboratorContext(&s, false, true);
+            assign = (cont_assign*)UHDM::clone_tree(assign, &elaboratorContext);
+            assign->VpiParent(m);
+            lhs = assign->Lhs();
+            cloned = true;
+            res =
+                m_helper.adjustSize(tps, mod, m_compileDesign,
+                                    netlist->getParent(), (constant*)res, true);
+            res->VpiParent(assign);
           }
+          assign->Rhs((constant*)res);
         }
       }
       if (simplified == false && cloned == false) {
@@ -2104,42 +1879,35 @@ void UhdmWriter::writeCont_assign(Netlist* netlist, Serializer& s,
 
 bool UhdmWriter::writeElabGenScope(Serializer& s, ModuleInstance* instance,
                                    gen_scope* m, ExprBuilder& exprBuilder) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  FileSystem* const fileSystem = m_session->getFileSystem();
   Netlist* netlist = instance->getNetlist();
   ModuleDefinition* mod =
-      valuedcomponenti_cast<ModuleDefinition*>(instance->getDefinition());
+      valuedcomponenti_cast<ModuleDefinition>(instance->getDefinition());
   if (mod) {
     // Let decls
     if (!mod->getLetStmts().empty()) {
-      VectorOflet_decl* decls = s.MakeLet_declVec();
-      m->Let_decls(decls);
+      VectorOflet_decl* decls = m->Let_decls(true);
       for (auto stmt : mod->getLetStmts()) {
         decls->push_back((let_decl*)stmt.second->Decl());
       }
     }
     if (!mod->getPropertyDecls().empty()) {
-      VectorOfproperty_decl* decls = s.MakeProperty_declVec();
-      m->Property_decls(decls);
+      VectorOfproperty_decl* decls = m->Property_decls(true);
       for (auto decl : mod->getPropertyDecls()) {
         decl->VpiParent(m);
         decls->push_back(decl);
       }
     }
     if (!mod->getSequenceDecls().empty()) {
-      VectorOfsequence_decl* decls = s.MakeSequence_declVec();
-      m->Sequence_decls(decls);
+      VectorOfsequence_decl* decls = m->Sequence_decls(true);
       for (auto decl : mod->getSequenceDecls()) {
         decl->VpiParent(m);
         decls->push_back(decl);
       }
     }
     // Typepecs
-    VectorOftypespec* typespecs = s.MakeTypespecVec();
-    m->Typespecs(typespecs);
+    VectorOftypespec* typespecs = m->Typespecs(true);
     writeDataTypes(mod->getDataTypeMap(), m, typespecs, s, true);
-    for (auto item : mod->getImportedSymbols()) {
-      typespecs->push_back(item);
-    }
     // System elab tasks
     m->Elab_tasks((std::vector<UHDM::tf_call*>*)&mod->getElabSysCalls());
     if (m->Elab_tasks()) {
@@ -2164,11 +1932,7 @@ bool UhdmWriter::writeElabGenScope(Serializer& s, ModuleInstance* instance,
     }
 
     if (netlist->cont_assigns()) {
-      std::vector<cont_assign*>* assigns = m->Cont_assigns();
-      if (assigns == nullptr) {
-        m->Cont_assigns(s.MakeCont_assignVec());
-        assigns = m->Cont_assigns();
-      }
+      std::vector<cont_assign*>* assigns = m->Cont_assigns(true);
       writeCont_assign(netlist, s, mod, m, assigns);
       for (auto obj : *assigns) {
         obj->VpiParent(m);
@@ -2176,8 +1940,8 @@ bool UhdmWriter::writeElabGenScope(Serializer& s, ModuleInstance* instance,
     }
 
     // Processes
-    m->Process(netlist->process_stmts());
-    if (m->Process()) {
+    if (netlist->process_stmts()) {
+      m->Process(netlist->process_stmts());
       for (auto ps : *m->Process()) {
         ps->VpiParent(m);
       }
@@ -2191,12 +1955,7 @@ bool UhdmWriter::writeElabGenScope(Serializer& s, ModuleInstance* instance,
       for (auto& param : instance->getMappedValues()) {
         const std::string_view name = param.first;
         Value* val = param.second.first;
-        VectorOfany* params = nullptr;
-        params = m->Parameters();
-        if (params == nullptr) {
-          params = s.MakeAnyVec();
-        }
-        m->Parameters(params);
+        VectorOfany* params = m->Parameters(true);
         bool found = false;
         for (auto p : *params) {
           if (p->VpiName() == name) {
@@ -2251,11 +2010,7 @@ bool UhdmWriter::writeElabGenScope(Serializer& s, ModuleInstance* instance,
   DesignComponent* def = instance->getDefinition();
   if (def->getTask_funcs()) {
     // Function and tasks
-    UHDM::VectorOftask_func* target = m->Task_funcs();
-    if (target == nullptr) {
-      m->Task_funcs(s.MakeTask_funcVec());
-      target = m->Task_funcs();
-    }
+    UHDM::VectorOftask_func* target = m->Task_funcs(true);
     for (auto tf : *def->getTask_funcs()) {
       target->push_back(tf);
       if (tf->VpiParent() == nullptr) tf->VpiParent(m);
@@ -2276,12 +2031,6 @@ bool UhdmWriter::writeElabGenScope(Serializer& s, ModuleInstance* instance,
         clocking_block* cb = (clocking_block*)UHDM::clone_tree(
             cblock.getActual(), &elaboratorContext);
         cb->VpiParent(m);
-        VectorOfclocking_block* cblocks = m->Clocking_blocks();
-        if (cblocks == nullptr) {
-          m->Clocking_blocks(s.MakeClocking_blockVec());
-          cblocks = m->Clocking_blocks();
-        }
-        cblocks->push_back(cb);
         break;
       }
       default:
@@ -2298,7 +2047,8 @@ UHDM::any* UhdmWriter::swapForSpecifiedVar(UHDM::Serializer& s,
                                            variables* lvariable,
                                            std::string_view name,
                                            const any* var, const any* parent) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  SymbolTable* const symbols = m_session->getSymbolTable();
   if (tmp->VpiName() == name) {
     if (var->UhdmType() == uhdmref_var) {
       ref_var* ref = (ref_var*)var;
@@ -2309,9 +2059,8 @@ UHDM::any* UhdmWriter::swapForSpecifiedVar(UHDM::Serializer& s,
         if (lvariables) {
           for (auto var : *lvariables) {
             if (var->UhdmType() == uhdmhier_path) {
-              PathId parentFileId = fileSystem->toPathId(
-                  parent->VpiFile(),
-                  m_compileDesign->getCompiler()->getSymbolTable());
+              PathId parentFileId =
+                  fileSystem->toPathId(parent->VpiFile(), symbols);
               bool invalidValue = false;
               indexTypespec = (typespec*)m_helper.decodeHierPath(
                   (hier_path*)var, invalidValue, mod, m_compileDesign,
@@ -2321,9 +2070,8 @@ UHDM::any* UhdmWriter::swapForSpecifiedVar(UHDM::Serializer& s,
           }
         } else if (const variables* var = lvariable) {
           if (var->UhdmType() == uhdmhier_path) {
-            PathId parentFileId = fileSystem->toPathId(
-                parent->VpiFile(),
-                m_compileDesign->getCompiler()->getSymbolTable());
+            PathId parentFileId =
+                fileSystem->toPathId(parent->VpiFile(), symbols);
             bool invalidValue = false;
             indexTypespec = (typespec*)m_helper.decodeHierPath(
                 (hier_path*)var, invalidValue, mod, m_compileDesign,
@@ -2332,15 +2080,13 @@ UHDM::any* UhdmWriter::swapForSpecifiedVar(UHDM::Serializer& s,
           } else if (var->UhdmType() == uhdmref_var) {
             bool invalidValue = false;
             hier_path* path = s.MakeHier_path();
-            VectorOfany* elems = s.MakeAnyVec();
-            path->Path_elems(elems);
+            VectorOfany* elems = path->Path_elems(true);
             ref_obj* ref = s.MakeRef_obj();
             elems->push_back(ref);
             ref->VpiName(var->VpiName());
             path->VpiFullName(var->VpiName());
-            PathId parentFileId = fileSystem->toPathId(
-                parent->VpiFile(),
-                m_compileDesign->getCompiler()->getSymbolTable());
+            PathId parentFileId =
+                fileSystem->toPathId(parent->VpiFile(), symbols);
             indexTypespec = (typespec*)m_helper.decodeHierPath(
                 path, invalidValue, mod, m_compileDesign, Reduce::Yes, nullptr,
                 parentFileId, parent->VpiLineNo(), (any*)parent,
@@ -2349,8 +2095,9 @@ UHDM::any* UhdmWriter::swapForSpecifiedVar(UHDM::Serializer& s,
         }
         variables* swapVar = nullptr;
         if (indexTypespec) {
-          swapVar = m_helper.getSimpleVarFromTypespec((typespec*)indexTypespec,
-                                                      nullptr, m_compileDesign);
+          swapVar = m_helper.getSimpleVarFromTypespec(
+              nullptr, InvalidNodeId, InvalidNodeId, (typespec*)indexTypespec,
+              nullptr, m_compileDesign);
         } else {
           int_var* ivar = s.MakeInt_var();
           ref_typespec* rt = s.MakeRef_typespec();
@@ -2375,1414 +2122,17 @@ UHDM::any* UhdmWriter::swapForSpecifiedVar(UHDM::Serializer& s,
   return tmp;
 }
 
-void UhdmWriter::lateTypedefBinding(UHDM::Serializer& s, DesignComponent* mod,
-                                    scope* m) {
-  for (UHDM::any* var : mod->getLateTypedefBinding()) {
-    const typespec* orig = nullptr;
-    if (expr* ex = any_cast<expr*>(var)) {
-      if (ref_typespec* rt = ex->Typespec()) {
-        orig = rt->Actual_typespec();
-      }
-    } else if (typespec_member* ex = any_cast<typespec_member*>(var)) {
-      if (ref_typespec* rt = ex->Typespec()) {
-        orig = rt->Actual_typespec();
-      }
-    } else if (parameter* ex = any_cast<parameter*>(var)) {
-      if (ref_typespec* rt = ex->Typespec()) {
-        orig = rt->Actual_typespec();
-      }
-    } else if (type_parameter* ex = any_cast<type_parameter*>(var)) {
-      if (ref_typespec* rt = ex->Typespec()) {
-        orig = rt->Actual_typespec();
-      }
-    } else if (io_decl* ex = any_cast<io_decl*>(var)) {
-      if (ref_typespec* rt = ex->Typespec()) {
-        orig = rt->Actual_typespec();
-      }
+void UhdmWriter::bind(UHDM::Serializer& s,
+                      const std::vector<vpiHandle>& designs) {
+  CommandLineParser* commandLineParser = m_session->getCommandLineParser();
+  if (ObjectBinder* const listener = new ObjectBinder(
+          m_session, m_componentMap, s, commandLineParser->muteStdout())) {
+    for (auto h : designs) {
+      const design* const d =
+          static_cast<const design*>(((const uhdm_handle*)h)->object);
+      listener->bind(d, true);
     }
-    if (orig && (orig->UhdmType() == uhdmunsupported_typespec)) {
-      unsupported_typespec* unsup = (unsupported_typespec*)orig;
-      std::string_view name = StringUtils::trim(orig->VpiName());
-      const typespec* tps = nullptr;
-      bool found = false;
-
-      if (name.find("::") != std::string::npos) {
-        std::vector<std::string_view> res;
-        StringUtils::tokenizeMulti(name, "::", res);
-        if (res.size() > 1) {
-          const std::string_view packName = res[0];
-          const std::string_view typeName = res[1];
-          Package* pack =
-              m_compileDesign->getCompiler()->getDesign()->getPackage(packName);
-          if (pack) {
-            const auto& itr = m_componentMap.find(pack);
-            if (itr != m_componentMap.end()) {
-              package* p = (package*)itr->second;
-              if (p->Typespecs()) {
-                for (auto n : *p->Typespecs()) {
-                  if (n->VpiName() == typeName) {
-                    found = true;
-                    tps = n;
-                    break;
-                  }
-                  const std::string pname =
-                      StrCat(p->VpiName(), "::", typeName);
-                  if (n->VpiName() == pname) {
-                    found = true;
-                    tps = n;
-                    break;
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-
-      const any* parent = var->VpiParent();
-      while (parent) {
-        if (parent->UhdmType() == uhdmfunction) {
-          function* func = (function*)parent;
-          if (parent->VpiName() == name) {
-            if (const any* ret = func->Return()) {
-              variables* var = (variables*)ret;
-              found = true;
-              if (const ref_typespec* rt = var->Typespec()) {
-                tps = rt->Actual_typespec();
-              }
-            }
-            break;
-          }
-          if (auto decls = func->Io_decls()) {
-            for (auto decl : *decls) {
-              if (decl->VpiName() == name) {
-                if (decl->UhdmType() == uhdmref_var) continue;
-                if (decl->UhdmType() == uhdmref_obj) continue;
-                found = true;
-                if (const ref_typespec* rt = decl->Typespec()) {
-                  tps = rt->Actual_typespec();
-                }
-                break;
-              }
-            }
-          }
-          if (auto vars = func->Variables()) {
-            for (auto decl : *vars) {
-              if (decl->VpiName() == name) {
-                if (decl->UhdmType() == uhdmref_var) continue;
-                if (decl->UhdmType() == uhdmref_obj) continue;
-                found = true;
-                if (const ref_typespec* rt = decl->Typespec()) {
-                  tps = rt->Actual_typespec();
-                }
-                break;
-              }
-            }
-          }
-          if (auto params = func->Parameters()) {
-            for (auto decl : *params) {
-              if (decl->VpiName() == name) {
-                found = true;
-                if (decl->UhdmType() == uhdmparameter) {
-                  if (const ref_typespec* rt = ((parameter*)decl)->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                } else {
-                  if (const ref_typespec* rt =
-                          ((type_parameter*)decl)->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                }
-                break;
-              }
-            }
-          }
-          if (const UHDM::instance* inst = func->Instance()) {
-            if (inst->UhdmType() == uhdmpackage) {
-              package* pack = (package*)inst;
-              if (pack->Variables()) {
-                for (auto n : *pack->Variables()) {
-                  if (n->VpiName() == name) {
-                    if (n->UhdmType() == uhdmref_var) continue;
-                    if (n->UhdmType() == uhdmref_obj) continue;
-                    found = true;
-                    if (ref_typespec* rt = n->Typespec()) {
-                      tps = rt->Actual_typespec();
-                    }
-                    break;
-                  }
-                  if (m) {
-                    const std::string pname = StrCat(m->VpiName(), "::", name);
-                    if (n->VpiName() == pname) {
-                      if (n->UhdmType() == uhdmref_var) continue;
-                      if (n->UhdmType() == uhdmref_obj) continue;
-                      found = true;
-                      if (ref_typespec* rt = n->Typespec()) {
-                        tps = rt->Actual_typespec();
-                      }
-                      break;
-                    }
-                  }
-                }
-              }
-            }
-          }
-          if (found) break;
-        } else if (parent->UhdmType() == uhdmtask) {
-          task* ta = (task*)parent;
-          if (auto decls = ta->Io_decls()) {
-            for (auto decl : *decls) {
-              if (decl->VpiName() == name) {
-                if (decl->UhdmType() == uhdmref_var) continue;
-                if (decl->UhdmType() == uhdmref_obj) continue;
-                found = true;
-                if (ref_typespec* rt = decl->Typespec()) {
-                  tps = rt->Actual_typespec();
-                }
-                break;
-              }
-            }
-          }
-          if (auto vars = ta->Variables()) {
-            for (auto decl : *vars) {
-              if (decl->VpiName() == name) {
-                if (decl->UhdmType() == uhdmref_var) continue;
-                if (decl->UhdmType() == uhdmref_obj) continue;
-                found = true;
-                if (ref_typespec* rt = decl->Typespec()) {
-                  tps = rt->Actual_typespec();
-                }
-                break;
-              }
-            }
-          }
-          if (const UHDM::instance* inst = ta->Instance()) {
-            if (inst->UhdmType() == uhdmpackage) {
-              package* pack = (package*)inst;
-              if (pack->Variables()) {
-                for (auto n : *pack->Variables()) {
-                  if (n->VpiName() == name) {
-                    if (n->UhdmType() == uhdmref_var) continue;
-                    if (n->UhdmType() == uhdmref_obj) continue;
-                    found = true;
-                    if (ref_typespec* rt = n->Typespec()) {
-                      tps = rt->Actual_typespec();
-                    }
-                    break;
-                  }
-                  if (m) {
-                    const std::string pname = StrCat(m->VpiName(), "::", name);
-                    if (n->VpiName() == pname) {
-                      if (n->UhdmType() == uhdmref_var) continue;
-                      if (n->UhdmType() == uhdmref_obj) continue;
-                      found = true;
-                      if (ref_typespec* rt = n->Typespec()) {
-                        tps = rt->Actual_typespec();
-                      }
-                      break;
-                    }
-                  }
-                }
-              }
-            }
-          }
-          if (found) break;
-        } else if (parent->UhdmType() == uhdmfor_stmt) {
-          for_stmt* f = (for_stmt*)parent;
-          VectorOfany* inits = f->VpiForInitStmts();
-          if (inits) {
-            for (auto init : *inits) {
-              if (init->UhdmType() == uhdmassignment) {
-                assignment* as = (assignment*)init;
-                const expr* lhs = as->Lhs();
-                if (lhs && lhs->VpiName() == name) {
-                  if (lhs->UhdmType() == uhdmref_var) continue;
-                  if (lhs->UhdmType() == uhdmref_obj) continue;
-                  found = true;
-                  if (const ref_typespec* rt = lhs->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                  break;
-                }
-              }
-            }
-          }
-        } else if (parent->UhdmType() == uhdmforeach_stmt) {
-          foreach_stmt* f = (foreach_stmt*)parent;
-          VectorOfany* vars = f->VpiLoopVars();
-          if (vars) {
-            for (auto& vart : *vars) {
-              if (vart->VpiName() == name) {
-                if (vart->UhdmType() == uhdmref_var) continue;
-                if (vart->UhdmType() == uhdmref_obj) continue;
-                found = true;
-                if (ref_typespec* rt = ((variables*)vart)->Typespec()) {
-                  tps = rt->Actual_typespec();
-                }
-                if (any* p = var->VpiParent()) {
-                  if (p->UhdmType() == uhdmforeach_stmt) {
-                    foreach_stmt* fc = (foreach_stmt*)p;
-                    VectorOfany* varsc = fc->VpiLoopVars();
-                    for (auto& vartc : *varsc) {
-                      if (vartc->VpiName() == name) {
-                        vartc = vart;
-                        break;
-                      }
-                    }
-                  }
-                }
-                break;
-              }
-            }
-          }
-        } else if (parent->UhdmType() == uhdmmodule_inst) {
-          module_inst* m = (module_inst*)parent;
-          if (auto vars = m->Variables()) {
-            for (auto decl : *vars) {
-              if (decl->VpiName() == name) {
-                if (decl->UhdmType() == uhdmref_var) continue;
-                if (decl->UhdmType() == uhdmref_obj) continue;
-                found = true;
-                if (ref_typespec* rt = decl->Typespec()) {
-                  tps = rt->Actual_typespec();
-                }
-                break;
-              }
-            }
-          }
-          if (found) break;
-          if (auto params = m->Parameters()) {
-            for (auto decl : *params) {
-              if (decl->VpiName() == name) {
-                if (decl->UhdmType() == uhdmparameter) {
-                  if (ref_typespec* rt = ((parameter*)decl)->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                  found = true;
-                } else {
-                  if (ref_typespec* rt = ((type_parameter*)decl)->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                  found = true;
-                }
-                break;
-              }
-            }
-          }
-          if (found) break;
-          if (m) {
-            VectorOfport* ports = m->Ports();
-            if (ports) {
-              for (auto port : *ports) {
-                if (port->VpiName() == name) {
-                  if (ref_typespec* tmp = port->Typespec()) {
-                    found = true;
-                    tps = tmp->Actual_typespec();
-                    break;
-                  }
-                }
-              }
-            }
-            if (found) break;
-            VectorOfnet* nets = m->Nets();
-            if (nets) {
-              for (auto net : *nets) {
-                if (net->VpiName() == name) {
-                  if (ref_typespec* tmp = net->Typespec()) {
-                    found = true;
-                    tps = tmp->Actual_typespec();
-                    break;
-                  }
-                }
-              }
-            }
-            if (found) break;
-          }
-        } else if (parent->UhdmType() == uhdmbegin) {
-          begin* b = (begin*)parent;
-          if (auto vars = b->Variables()) {
-            for (auto decl : *vars) {
-              if (decl->VpiName() == name) {
-                if (decl->UhdmType() == uhdmref_var) continue;
-                if (decl->UhdmType() == uhdmref_obj) continue;
-                found = true;
-                if (ref_typespec* rt = decl->Typespec()) {
-                  tps = rt->Actual_typespec();
-                }
-                break;
-              }
-            }
-          }
-          if (found) break;
-          if (auto params = b->Parameters()) {
-            for (auto decl : *params) {
-              if (decl->VpiName() == name) {
-                if (decl->UhdmType() == uhdmparameter) {
-                  if (ref_typespec* rt = ((parameter*)decl)->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                } else {
-                  if (ref_typespec* rt = ((type_parameter*)decl)->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                }
-                break;
-              }
-            }
-          }
-          if (found) break;
-          VectorOfany* stmts = b->Stmts();
-          if (stmts) {
-            for (auto init : *stmts) {
-              if (init->UhdmType() == uhdmassignment) {
-                assignment* as = (assignment*)init;
-                const expr* lhs = as->Lhs();
-                if (lhs && lhs->VpiName() == name) {
-                  if (lhs->UhdmType() == uhdmref_var) continue;
-                  if (lhs->UhdmType() == uhdmref_obj) continue;
-                  found = true;
-                  if (const ref_typespec* rt = lhs->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                  break;
-                }
-              }
-            }
-          }
-        } else if (parent->UhdmType() == uhdmnamed_begin) {
-          named_begin* b = (named_begin*)parent;
-          if (auto vars = b->Variables()) {
-            for (auto decl : *vars) {
-              if (decl->VpiName() == name) {
-                if (decl->UhdmType() == uhdmref_var) continue;
-                if (decl->UhdmType() == uhdmref_obj) continue;
-                found = true;
-                if (const ref_typespec* rt = decl->Typespec()) {
-                  tps = rt->Actual_typespec();
-                }
-                break;
-              }
-            }
-          }
-          if (found) break;
-          if (auto params = b->Parameters()) {
-            for (auto decl : *params) {
-              if (decl->VpiName() == name) {
-                if (decl->UhdmType() == uhdmparameter) {
-                  if (const ref_typespec* rt = ((parameter*)decl)->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                } else {
-                  if (const ref_typespec* rt =
-                          ((type_parameter*)decl)->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                }
-                break;
-              }
-            }
-          }
-          if (found) break;
-          VectorOfany* stmts = b->Stmts();
-          if (stmts) {
-            for (auto init : *stmts) {
-              if (init->UhdmType() == uhdmassignment) {
-                assignment* as = (assignment*)init;
-                const expr* lhs = as->Lhs();
-                if (lhs && lhs->VpiName() == name) {
-                  if (lhs->UhdmType() == uhdmref_var) continue;
-                  if (lhs->UhdmType() == uhdmref_obj) continue;
-                  found = true;
-                  if (const ref_typespec* rt = lhs->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                  break;
-                }
-              }
-            }
-          }
-        } else if (parent->UhdmType() == uhdmfork_stmt) {
-          fork_stmt* b = (fork_stmt*)parent;
-          if (auto vars = b->Variables()) {
-            for (auto decl : *vars) {
-              if (decl->VpiName() == name) {
-                if (decl->UhdmType() == uhdmref_var) continue;
-                if (decl->UhdmType() == uhdmref_obj) continue;
-                found = true;
-                if (const ref_typespec* rt = decl->Typespec()) {
-                  tps = rt->Actual_typespec();
-                }
-                break;
-              }
-            }
-          }
-          if (found) break;
-          if (auto params = b->Parameters()) {
-            for (auto decl : *params) {
-              if (decl->VpiName() == name) {
-                found = true;
-                if (decl->UhdmType() == uhdmparameter) {
-                  if (const ref_typespec* rt = ((parameter*)decl)->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                } else {
-                  if (const ref_typespec* rt =
-                          ((type_parameter*)decl)->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                }
-                break;
-              }
-            }
-          }
-          if (found) break;
-          VectorOfany* stmts = b->Stmts();
-          if (stmts) {
-            for (auto init : *stmts) {
-              if (init->UhdmType() == uhdmassignment) {
-                assignment* as = (assignment*)init;
-                const expr* lhs = as->Lhs();
-                if (lhs && lhs->VpiName() == name) {
-                  if (lhs->UhdmType() == uhdmref_var) continue;
-                  if (lhs->UhdmType() == uhdmref_obj) continue;
-                  found = true;
-                  if (const ref_typespec* rt = lhs->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                  break;
-                }
-              }
-            }
-          }
-        } else if (parent->UhdmType() == uhdmnamed_fork) {
-          named_fork* b = (named_fork*)parent;
-          if (auto vars = b->Variables()) {
-            for (auto decl : *vars) {
-              if (decl->VpiName() == name) {
-                if (decl->UhdmType() == uhdmref_var) continue;
-                if (decl->UhdmType() == uhdmref_obj) continue;
-                found = true;
-                if (const ref_typespec* rt = decl->Typespec()) {
-                  tps = rt->Actual_typespec();
-                }
-                break;
-              }
-            }
-          }
-          if (found) break;
-          if (auto params = b->Parameters()) {
-            for (auto decl : *params) {
-              if (decl->VpiName() == name) {
-                found = true;
-                if (decl->UhdmType() == uhdmparameter) {
-                  if (const ref_typespec* rt = ((parameter*)decl)->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                } else {
-                  if (const ref_typespec* rt =
-                          ((type_parameter*)decl)->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                }
-                break;
-              }
-            }
-          }
-          if (found) break;
-          VectorOfany* stmts = b->Stmts();
-          if (stmts) {
-            for (auto init : *stmts) {
-              if (init->UhdmType() == uhdmassignment) {
-                assignment* as = (assignment*)init;
-                const expr* lhs = as->Lhs();
-                if (!lhs) continue;
-                if (lhs->UhdmType() == uhdmref_var) continue;
-                if (lhs->UhdmType() == uhdmref_obj) continue;
-                if (lhs->VpiName() == name) {
-                  found = true;
-                  if (const ref_typespec* rt = lhs->Typespec()) {
-                    tps = rt->Actual_typespec();
-                  }
-                  break;
-                }
-              }
-            }
-          }
-        }
-        if (found) {
-          if (tps) {
-            tps = replace(tps, m_compileDesign->getSwapedObjects());
-          }
-
-          if (unsup->Ranges()) {
-            ref_typespec* tpsRef = s.MakeRef_typespec();
-            tpsRef->Actual_typespec(const_cast<UHDM::typespec*>(tps));
-            if (unsup->VpiPacked()) {
-              packed_array_typespec* ptps = s.MakePacked_array_typespec();
-              tpsRef->VpiParent(ptps);
-              ptps->Elem_typespec(tpsRef);
-              ptps->Ranges(unsup->Ranges());
-              tps = ptps;
-            } else {
-              array_typespec* ptps = s.MakeArray_typespec();
-              tpsRef->VpiParent(ptps);
-              ptps->Elem_typespec(tpsRef);
-              ptps->Ranges(unsup->Ranges());
-              tps = ptps;
-            }
-            if (unsup->Ranges()) {
-              for (auto r : *unsup->Ranges()) {
-                r->VpiParent(const_cast<typespec*>(tps));
-              }
-            }
-          }
-          break;
-        }
-        parent = parent->VpiParent();
-      }
-
-      if (found == false) {
-        if (const any* parent = var->VpiParent()) {
-          // Foreach-loop, implicit loop var declaration fixup
-          if (parent->UhdmType() == uhdmforeach_stmt) {
-            foreach_stmt* for_stmt = (foreach_stmt*)parent;
-            if (VectorOfany* loopvars = for_stmt->VpiLoopVars()) {
-              for (any*& tmp : *loopvars) {
-                tmp = swapForSpecifiedVar(s, mod, tmp, for_stmt->Variables(),
-                                          for_stmt->Variable(), name, var,
-                                          parent);
-              }
-            }
-          } else if (parent->UhdmType() == uhdmassignment) {
-            parent = var->VpiParent()->VpiParent();
-            // gen_for loop, implicit loop var declaration fixup
-            if (parent->UhdmType() == uhdmgen_for) {
-              gen_for* for_stmt = (gen_for*)parent;
-              if (for_stmt->VpiForInitStmts()) {
-                any* stmt = for_stmt->VpiForInitStmts()->at(0);
-                if (stmt->UhdmType() == uhdmassignment) {
-                  assignment* st = (assignment*)stmt;
-                  st->Lhs((expr*)swapForSpecifiedVar(
-                      s, mod, st->Lhs(), nullptr, nullptr, name, var, parent));
-                }
-              }
-            }
-          }
-        }
-      }
-
-      if ((name.empty()) && (found == false)) {
-        // Port .op({\op[1] ,\op[0] })
-        if (operation* op = any_cast<operation*>(var)) {
-          const typespec* baseTypespec = nullptr;
-          uint64_t size = 0;
-          for (any* oper : *op->Operands()) {
-            if (oper->UhdmType() == uhdmref_obj) {
-              ref_obj* ref = (ref_obj*)oper;
-              if (const expr* ex = ref->Actual_group<expr>()) {
-                if (const UHDM::ref_typespec* rt = ex->Typespec()) {
-                  if (const typespec* tps = rt->Actual_typespec()) {
-                    baseTypespec = tps;
-                    break;
-                  }
-                }
-              }
-            }
-            size++;
-          }
-          if (baseTypespec) {
-            array_typespec* arr = s.MakeArray_typespec();
-            tps = arr;
-            found = true;
-            ref_typespec* baseRef = s.MakeRef_typespec();
-            baseRef->VpiParent(arr);
-            baseRef->Actual_typespec(const_cast<typespec*>(baseTypespec));
-            arr->Elem_typespec(baseRef);
-            VectorOfrange* ranges = s.MakeRangeVec();
-            range* ra = s.MakeRange();
-            ranges->push_back(ra);
-            constant* l = s.MakeConstant();
-            l->VpiValue("UINT:" + std::to_string(size - 1));
-            ra->Left_expr(l);
-            constant* r = s.MakeConstant();
-            r->VpiValue("UINT:0");
-            ra->Right_expr(r);
-            arr->Ranges(ranges);
-          }
-        }
-      }
-      if (found == true) {
-        if (tps == nullptr) {
-          if (expr* ex = any_cast<expr*>(var)) {
-            ex->Typespec(nullptr);
-          } else if (typespec_member* ex = any_cast<typespec_member*>(var)) {
-            ex->Typespec(nullptr);
-          } else if (parameter* ex = any_cast<parameter*>(var)) {
-            ex->Typespec(nullptr);
-          } else if (type_parameter* ex = any_cast<type_parameter*>(var)) {
-            ex->Typespec(nullptr);
-          } else if (io_decl* ex = any_cast<io_decl*>(var)) {
-            ex->Typespec(nullptr);
-          }
-        } else {
-          if (expr* ex = any_cast<expr*>(var)) {
-            if (ex->Typespec() == nullptr) {
-              ref_typespec* rt = s.MakeRef_typespec();
-              ex->Typespec(rt);
-              rt->VpiParent(ex);
-            }
-            ex->Typespec()->Actual_typespec(const_cast<UHDM::typespec*>(tps));
-          } else if (typespec_member* ex = any_cast<typespec_member*>(var)) {
-            if (ex->Typespec() == nullptr) {
-              ref_typespec* rt = s.MakeRef_typespec();
-              ex->Typespec(rt);
-              rt->VpiParent(ex);
-            }
-            ex->Typespec()->Actual_typespec(const_cast<UHDM::typespec*>(tps));
-          } else if (parameter* ex = any_cast<parameter*>(var)) {
-            if (ex->Typespec() == nullptr) {
-              ref_typespec* rt = s.MakeRef_typespec();
-              ex->Typespec(rt);
-              rt->VpiParent(ex);
-            }
-            ex->Typespec()->Actual_typespec(const_cast<UHDM::typespec*>(tps));
-          } else if (type_parameter* ex = any_cast<type_parameter*>(var)) {
-            if (ex->Typespec() == nullptr) {
-              ref_typespec* rt = s.MakeRef_typespec();
-              ex->Typespec(rt);
-              rt->VpiParent(ex);
-            }
-            ex->Typespec()->Actual_typespec(const_cast<UHDM::typespec*>(tps));
-          } else if (io_decl* ex = any_cast<io_decl*>(var)) {
-            if (ex->Typespec() == nullptr) {
-              ref_typespec* rt = s.MakeRef_typespec();
-              ex->Typespec(rt);
-              rt->VpiParent(ex);
-            }
-            ex->Typespec()->Actual_typespec(const_cast<UHDM::typespec*>(tps));
-          }
-        }
-      }
-    }
-  }
-  for (const auto& itr : mod->getLateResolutionFunction()) {
-    std::string_view funcName = itr.first;
-    std::pair<task_func*, DesignComponent*> ret =
-        m_helper.getTaskFunc(funcName, mod, m_compileDesign, nullptr, nullptr);
-    task_func* tf = ret.first;
-    function* resolution_func = any_cast<function*>(tf);
-    typespec* ts = itr.second;
-    if (resolution_func) {
-      if (ts->UhdmType() == uhdmbit_typespec) {
-        bit_typespec* btps = (bit_typespec*)ts;
-        btps->Resolution_func(resolution_func);
-      } else if (ts->UhdmType() == uhdmlogic_typespec) {
-        logic_typespec* btps = (logic_typespec*)ts;
-        btps->Resolution_func(resolution_func);
-      } else if (ts->UhdmType() == uhdmstruct_typespec) {
-        struct_typespec* btps = (struct_typespec*)ts;
-        btps->Resolution_func(resolution_func);
-      } else if (ts->UhdmType() == uhdmreal_typespec) {
-        real_typespec* btps = (real_typespec*)ts;
-        btps->Resolution_func(resolution_func);
-      } else if (ts->UhdmType() == uhdmarray_typespec) {
-        array_typespec* btps = (array_typespec*)ts;
-        btps->Resolution_func(resolution_func);
-      } else if (ts->UhdmType() == uhdmpacked_array_typespec) {
-        packed_array_typespec* btps = (packed_array_typespec*)ts;
-        btps->Resolution_func(resolution_func);
-      }
-    }
-  }
-}
-
-void UhdmWriter::lateBinding(Serializer& s, DesignComponent* mod, scope* m) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
-  for (UHDM::ref_obj* ref : mod->getLateBinding()) {
-    if (ref->Actual_group()) continue;
-    std::string_view name = ref->VpiName();
-    name = StringUtils::trim(name);
-    if (name.find("::") != std::string::npos) {
-      std::vector<std::string_view> res;
-      StringUtils::tokenizeMulti(name, "::", res);
-      if (res.size() > 1) {
-        const std::string_view packName = res[0];
-        const std::string_view typeName = res[1];
-        Package* pack =
-            m_compileDesign->getCompiler()->getDesign()->getPackage(packName);
-        if (pack) {
-          const auto& itr = m_componentMap.find(pack);
-          if (itr != m_componentMap.end()) {
-            package* p = (package*)itr->second;
-            if (p->Parameters()) {
-              for (auto n : *p->Parameters()) {
-                if (n->VpiName() == typeName) {
-                  if (n->UhdmType() == uhdmref_var) continue;
-                  if (n->UhdmType() == uhdmref_obj) continue;
-                  ref->Actual_group(n);
-                  break;
-                }
-                if (m) {
-                  const std::string pname =
-                      StrCat(m->VpiName(), "::", typeName);
-                  if (n->VpiName() == pname) {
-                    if (n->UhdmType() == uhdmref_var) continue;
-                    if (n->UhdmType() == uhdmref_obj) continue;
-                    ref->Actual_group(n);
-                    break;
-                  }
-                }
-              }
-            }
-            if (p->Variables()) {
-              for (auto n : *p->Variables()) {
-                if (n->VpiName() == typeName) {
-                  if (n->UhdmType() == uhdmref_var) continue;
-                  if (n->UhdmType() == uhdmref_obj) continue;
-                  ref->Actual_group(n);
-                  break;
-                }
-                if (m) {
-                  const std::string pname =
-                      StrCat(m->VpiName(), "::", typeName);
-                  if (n->VpiName() == pname) {
-                    if (n->UhdmType() == uhdmref_var) continue;
-                    if (n->UhdmType() == uhdmref_obj) continue;
-                    ref->Actual_group(n);
-                    break;
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-
-      continue;
-    }
-
-    const any* parent = ref->VpiParent();
-    while (parent) {
-      if (parent->UhdmType() == uhdmdesign) {
-        design* d = (design*)parent;
-        if (auto params = d->Parameters()) {
-          for (auto decl : *params) {
-            if (decl->VpiName() == name) {
-              ref->Actual_group(decl);
-              break;
-            }
-          }
-        }
-      } else if (parent->UhdmType() == uhdmfunction) {
-        function* func = (function*)parent;
-        if (parent->VpiName() == name) {
-          if (const any* ret = func->Return()) {
-            ElaboratorContext elaboratorContext(&s, false, true);
-            variables* var =
-                (variables*)UHDM::clone_tree(ret, &elaboratorContext);
-            var->VpiName(name);
-            var->VpiParent(ref);
-            ref->Actual_group(var);
-          }
-          break;
-        }
-        if (auto decls = func->Io_decls()) {
-          for (auto decl : *decls) {
-            if (decl->VpiName() == name) {
-              if (decl->UhdmType() == uhdmref_var) continue;
-              if (decl->UhdmType() == uhdmref_obj) continue;
-              ref->Actual_group(decl);
-              break;
-            }
-          }
-        }
-        if (auto vars = func->Variables()) {
-          for (auto decl : *vars) {
-            if (decl->VpiName() == name) {
-              if (decl->UhdmType() == uhdmref_var) continue;
-              if (decl->UhdmType() == uhdmref_obj) continue;
-              ref->Actual_group(decl);
-              break;
-            }
-          }
-        }
-        if (auto params = func->Parameters()) {
-          for (auto decl : *params) {
-            if (decl->VpiName() == name) {
-              ref->Actual_group(decl);
-              break;
-            }
-          }
-        }
-        if (const UHDM::instance* inst = func->Instance()) {
-          if (inst->UhdmType() == uhdmpackage) {
-            package* pack = (package*)inst;
-            if (pack->Variables()) {
-              for (auto n : *pack->Variables()) {
-                if (n->VpiName() == name) {
-                  if (n->UhdmType() == uhdmref_var) continue;
-                  if (n->UhdmType() == uhdmref_obj) continue;
-                  ref->Actual_group(n);
-                  break;
-                }
-                if (m) {
-                  const std::string pname = StrCat(m->VpiName(), "::", name);
-                  if (n->VpiName() == pname) {
-                    if (n->UhdmType() == uhdmref_var) continue;
-                    if (n->UhdmType() == uhdmref_obj) continue;
-                    ref->Actual_group(n);
-                    break;
-                  }
-                }
-              }
-            }
-          }
-        }
-        if (ref->Actual_group()) break;
-      } else if (parent->UhdmType() == uhdmtask) {
-        task* ta = (task*)parent;
-        if (auto decls = ta->Io_decls()) {
-          for (auto decl : *decls) {
-            if (decl->VpiName() == name) {
-              if (decl->UhdmType() == uhdmref_var) continue;
-              if (decl->UhdmType() == uhdmref_obj) continue;
-              ref->Actual_group(decl);
-              break;
-            }
-          }
-        }
-        if (auto vars = ta->Variables()) {
-          for (auto decl : *vars) {
-            if (decl->VpiName() == name) {
-              if (decl->UhdmType() == uhdmref_var) continue;
-              if (decl->UhdmType() == uhdmref_obj) continue;
-              ref->Actual_group(decl);
-              break;
-            }
-          }
-        }
-        if (const UHDM::instance* inst = ta->Instance()) {
-          if (inst->UhdmType() == uhdmpackage) {
-            package* pack = (package*)inst;
-            if (pack->Variables()) {
-              for (auto n : *pack->Variables()) {
-                if (n->VpiName() == name) {
-                  if (n->UhdmType() == uhdmref_var) continue;
-                  if (n->UhdmType() == uhdmref_obj) continue;
-                  ref->Actual_group(n);
-                  break;
-                }
-                if (m) {
-                  const std::string pname = StrCat(m->VpiName(), "::", name);
-                  if (n->VpiName() == pname) {
-                    if (n->UhdmType() == uhdmref_var) continue;
-                    if (n->UhdmType() == uhdmref_obj) continue;
-                    ref->Actual_group(n);
-                    break;
-                  }
-                }
-              }
-            }
-            if (m->Typespecs()) {
-              for (auto n : *m->Typespecs()) {
-                if (n->UhdmType() == uhdmenum_typespec) {
-                  enum_typespec* tps = any_cast<enum_typespec*>(n);
-                  if (tps && tps->Enum_consts()) {
-                    for (auto c : *tps->Enum_consts()) {
-                      if (c->VpiName() == name) {
-                        ref->Actual_group(c);
-                        break;
-                      }
-                      if (std::string(std::string(m->VpiName()) +
-                                      std::string("::") + std::string(name)) ==
-                          c->VpiName()) {
-                        ref->Actual_group(c);
-                        break;
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-        if (ref->Actual_group()) break;
-      } else if (parent->UhdmType() == uhdmfor_stmt) {
-        for_stmt* f = (for_stmt*)parent;
-        VectorOfany* inits = f->VpiForInitStmts();
-        if (inits) {
-          for (auto init : *inits) {
-            if (init->UhdmType() == uhdmassignment) {
-              assignment* as = (assignment*)init;
-              const expr* lhs = as->Lhs();
-              if (lhs && lhs->VpiName() == name) {
-                if (lhs->UhdmType() == uhdmref_var) continue;
-                if (lhs->UhdmType() == uhdmref_obj) continue;
-                ref->Actual_group((expr*)lhs);
-                break;
-              }
-            }
-          }
-        }
-      } else if (parent->UhdmType() == uhdmforeach_stmt) {
-        foreach_stmt* f = (foreach_stmt*)parent;
-        VectorOfany* vars = f->VpiLoopVars();
-        if (vars) {
-          for (auto var : *vars) {
-            if (var->VpiName() == name) {
-              if (var->UhdmType() == uhdmref_var) continue;
-              if (var->UhdmType() == uhdmref_obj) continue;
-              ref->Actual_group((expr*)var);
-              break;
-            }
-          }
-        }
-      } else if (parent->UhdmType() == uhdmbegin) {
-        begin* b = (begin*)parent;
-        if (auto vars = b->Variables()) {
-          for (auto decl : *vars) {
-            if (decl->VpiName() == name) {
-              if (decl->UhdmType() == uhdmref_var) continue;
-              if (decl->UhdmType() == uhdmref_obj) continue;
-              ref->Actual_group(decl);
-              break;
-            }
-          }
-        }
-        if (ref->Actual_group()) break;
-        if (auto params = b->Parameters()) {
-          for (auto decl : *params) {
-            if (decl->VpiName() == name) {
-              ref->Actual_group(decl);
-              break;
-            }
-          }
-        }
-        if (ref->Actual_group()) break;
-        VectorOfany* stmts = b->Stmts();
-        if (stmts) {
-          for (auto init : *stmts) {
-            if (init->UhdmType() == uhdmassignment) {
-              assignment* as = (assignment*)init;
-              const expr* lhs = as->Lhs();
-              if (lhs && lhs->VpiName() == name) {
-                if (lhs->UhdmType() == uhdmref_var) continue;
-                if (lhs->UhdmType() == uhdmref_obj) continue;
-                ref->Actual_group((expr*)lhs);
-                break;
-              }
-            } else if (init->UhdmType() == uhdmassign_stmt) {
-              assign_stmt* as = (assign_stmt*)init;
-              const expr* lhs = as->Lhs();
-              if (lhs->VpiName() == name) {
-                if (lhs->UhdmType() == uhdmref_var) continue;
-                if (lhs->UhdmType() == uhdmref_obj) continue;
-                ref->Actual_group((expr*)lhs);
-                break;
-              }
-            }
-          }
-        }
-      } else if (parent->UhdmType() == uhdmnamed_begin) {
-        named_begin* b = (named_begin*)parent;
-        if (auto vars = b->Variables()) {
-          for (auto decl : *vars) {
-            if (decl->VpiName() == name) {
-              if (decl->UhdmType() == uhdmref_var) continue;
-              if (decl->UhdmType() == uhdmref_obj) continue;
-              ref->Actual_group(decl);
-              break;
-            }
-          }
-        }
-        if (ref->Actual_group()) break;
-        if (auto params = b->Parameters()) {
-          for (auto decl : *params) {
-            if (decl->VpiName() == name) {
-              ref->Actual_group(decl);
-              break;
-            }
-          }
-        }
-        if (ref->Actual_group()) break;
-        VectorOfany* stmts = b->Stmts();
-        if (stmts) {
-          for (auto init : *stmts) {
-            if (init->UhdmType() == uhdmassign_stmt) {
-              assign_stmt* as = (assign_stmt*)init;
-              const expr* lhs = as->Lhs();
-              if (lhs->VpiName() == name) {
-                if (lhs->UhdmType() == uhdmref_var) continue;
-                if (lhs->UhdmType() == uhdmref_obj) continue;
-                ref->Actual_group((expr*)lhs);
-                break;
-              }
-            } else if (init->UhdmType() == uhdmassignment) {
-              assignment* as = (assignment*)init;
-              const expr* lhs = as->Lhs();
-              if (lhs->VpiName() == name) {
-                if (lhs->UhdmType() == uhdmref_var) continue;
-                if (lhs->UhdmType() == uhdmref_obj) continue;
-                ref->Actual_group((expr*)lhs);
-                break;
-              }
-            }
-          }
-        }
-      } else if (parent->UhdmType() == uhdmfork_stmt) {
-        fork_stmt* b = (fork_stmt*)parent;
-        if (auto vars = b->Variables()) {
-          for (auto decl : *vars) {
-            if (decl->VpiName() == name) {
-              if (decl->UhdmType() == uhdmref_var) continue;
-              if (decl->UhdmType() == uhdmref_obj) continue;
-              ref->Actual_group(decl);
-              break;
-            }
-          }
-        }
-        if (ref->Actual_group()) break;
-        if (auto params = b->Parameters()) {
-          for (auto decl : *params) {
-            if (decl->VpiName() == name) {
-              ref->Actual_group(decl);
-              break;
-            }
-          }
-        }
-        if (ref->Actual_group()) break;
-        VectorOfany* stmts = b->Stmts();
-        if (stmts) {
-          for (auto init : *stmts) {
-            if (init->UhdmType() == uhdmassign_stmt) {
-              assign_stmt* as = (assign_stmt*)init;
-              const expr* lhs = as->Lhs();
-              if (lhs->VpiName() == name) {
-                if (lhs->UhdmType() == uhdmref_var) continue;
-                if (lhs->UhdmType() == uhdmref_obj) continue;
-                ref->Actual_group((expr*)lhs);
-                break;
-              }
-            } else if (init->UhdmType() == uhdmassignment) {
-              assignment* as = (assignment*)init;
-              const expr* lhs = as->Lhs();
-              if (lhs->VpiName() == name) {
-                if (lhs->UhdmType() == uhdmref_var) continue;
-                if (lhs->UhdmType() == uhdmref_obj) continue;
-                ref->Actual_group((expr*)lhs);
-                break;
-              }
-            }
-          }
-        }
-      } else if (parent->UhdmType() == uhdmnamed_fork) {
-        named_fork* b = (named_fork*)parent;
-        if (auto vars = b->Variables()) {
-          for (auto decl : *vars) {
-            if (decl->VpiName() == name) {
-              if (decl->UhdmType() == uhdmref_var) continue;
-              if (decl->UhdmType() == uhdmref_obj) continue;
-              ref->Actual_group(decl);
-              break;
-            }
-          }
-        }
-        if (ref->Actual_group()) break;
-        if (auto params = b->Parameters()) {
-          for (auto decl : *params) {
-            if (decl->VpiName() == name) {
-              ref->Actual_group(decl);
-              break;
-            }
-          }
-        }
-        if (ref->Actual_group()) break;
-        VectorOfany* stmts = b->Stmts();
-        if (stmts) {
-          for (auto init : *stmts) {
-            if (init->UhdmType() == uhdmassign_stmt) {
-              assign_stmt* as = (assign_stmt*)init;
-              const expr* lhs = as->Lhs();
-              if (lhs->VpiName() == name) {
-                if (lhs->UhdmType() == uhdmref_var) continue;
-                if (lhs->UhdmType() == uhdmref_obj) continue;
-                ref->Actual_group((expr*)lhs);
-                break;
-              }
-            } else if (init->UhdmType() == uhdmassignment) {
-              assignment* as = (assignment*)init;
-              const expr* lhs = as->Lhs();
-              if (lhs->VpiName() == name) {
-                if (lhs->UhdmType() == uhdmref_var) continue;
-                if (lhs->UhdmType() == uhdmref_obj) continue;
-                ref->Actual_group((expr*)lhs);
-                break;
-              }
-            }
-          }
-        }
-      }
-      if (ref->Actual_group()) break;
-      parent = parent->VpiParent();
-    }
-    if (ref->Actual_group()) continue;
-    if (m && (m->UhdmType() == uhdmmodule_inst)) {
-      module_inst* minst = (module_inst*)m;
-      if (minst->Interfaces()) {
-        for (auto n : *minst->Interfaces()) {
-          if (n->VpiName() == name) {
-            ref->Actual_group(n);
-            break;
-          }
-        }
-        if (ref->Actual_group()) continue;
-      }
-      if (minst->Interface_arrays()) {
-        for (auto n : *minst->Interface_arrays()) {
-          if (n->VpiName() == name) {
-            ref->Actual_group(n);
-            break;
-          }
-        }
-        if (ref->Actual_group()) continue;
-      }
-    }
-    if (m &&
-        (m->UhdmType() == uhdmmodule_inst ||
-         m->UhdmType() == uhdminterface_inst || m->UhdmType() == uhdmprogram)) {
-      instance* inst = (instance*)m;
-      if (inst->Nets()) {
-        for (auto n : *inst->Nets()) {
-          if (n->VpiName() == name) {
-            ref->Actual_group(n);
-            break;
-          }
-          if (const ref_typespec* reftps = n->Typespec()) {
-            const typespec* tps = reftps->Actual_typespec();
-            if (tps->UhdmType() == uhdmenum_typespec) {
-              const enum_typespec* etps = any_cast<const enum_typespec*>(tps);
-              if (etps && etps->Enum_consts()) {
-                for (auto c : *etps->Enum_consts()) {
-                  if (c->VpiName() == name) {
-                    ref->Actual_group(c);
-                    break;
-                  }
-                }
-                if (ref->Actual_group()) break;
-              }
-            }
-          }
-        }
-        if (ref->Actual_group()) continue;
-      }
-      if (inst->Array_nets()) {
-        for (auto n : *inst->Array_nets()) {
-          if (n->VpiName() == name) {
-            ref->Actual_group(n);
-            break;
-          }
-        }
-        if (ref->Actual_group()) continue;
-      }
-    }
-    if (m && m->Variables()) {
-      for (auto n : *m->Variables()) {
-        if (n->VpiName() == name) {
-          ref->Actual_group(n);
-          break;
-        }
-        const std::string pname = StrCat(m->VpiName(), "::", name);
-        if (n->VpiName() == pname) {
-          ref->Actual_group(n);
-          break;
-        }
-      }
-      if (ref->Actual_group()) continue;
-    }
-
-    if (m && m->Param_assigns()) {
-      bool isParam = false;
-      for (auto p : *m->Param_assigns()) {
-        const any* lhs = p->Lhs();
-        if (lhs->VpiName() == name) {
-          // Do not bind blindly here, let the uhdmelab do this correctly
-          // ref->Actual_group((any*)p->Rhs());
-          isParam = true;
-          break;
-        }
-      }
-      if (isParam) continue;
-    }
-    if (m && m->Parameters()) {
-      bool isParam = false;
-      for (auto p : *m->Parameters()) {
-        if (p->VpiName() == name) {
-          isParam = true;
-          break;
-        }
-      }
-      if (isParam) continue;
-    }
-    if (m && m->Property_decls()) {
-      for (auto n : *m->Property_decls()) {
-        if (n->VpiName() == name) {
-          ref->Actual_group(n);
-          break;
-        }
-      }
-    }
-    if (m && m->Sequence_decls()) {
-      for (auto n : *m->Sequence_decls()) {
-        if (n->VpiName() == name) {
-          ref->Actual_group(n);
-          break;
-        }
-      }
-    }
-    if (m && m->Typespecs()) {
-      bool isTypespec = false;
-      std::vector<std::string> importedPackages;
-      for (auto n : *m->Typespecs()) {
-        if (n->UhdmType() == uhdmimport_typespec) {
-          importedPackages.emplace_back(n->VpiName());
-        }
-      }
-
-      for (auto n : *m->Typespecs()) {
-        if (n->UhdmType() == uhdmenum_typespec) {
-          enum_typespec* tps = any_cast<enum_typespec*>(n);
-          if (tps && tps->Enum_consts()) {
-            for (auto c : *tps->Enum_consts()) {
-              if (c->VpiName() == name) {
-                ref->Actual_group(c);
-                break;
-              }
-              if (std::string(std::string(m->VpiName()) + std::string("::") +
-                              std::string(name)) == c->VpiName()) {
-                ref->Actual_group(c);
-                break;
-              }
-            }
-          }
-        }
-        for (const auto& imp : importedPackages) {
-          if (n->VpiName() == StrCat(imp, "::", name)) {
-            isTypespec = true;
-            break;
-          }
-        }
-        if (n->VpiName() == name) {
-          isTypespec = true;
-          break;
-        }
-        if (ref->Actual_group()) break;
-      }
-      if (isTypespec) continue;
-      if (ref->Actual_group()) continue;
-    }
-    const FileContent* fC = mod->getFileContents()[0];
-    for (const auto& td : fC->getTypeDefMap()) {
-      const DataType* dt = td.second;
-      while (dt) {
-        typespec* n = dt->getTypespec();
-        n = replace(n, m_compileDesign->getSwapedObjects());
-        if (n && (n->UhdmType() == uhdmenum_typespec)) {
-          enum_typespec* tps = any_cast<enum_typespec*>(n);
-          if (tps && tps->Enum_consts()) {
-            for (auto c : *tps->Enum_consts()) {
-              if (c->VpiName() == name) {
-                ref->Actual_group(c);
-                break;
-              }
-            }
-          }
-        }
-        dt = dt->getDefinition();
-        if (ref->Actual_group()) break;
-      }
-      if (ref->Actual_group()) break;
-    }
-
-    if (m && m->Variables()) {
-      for (auto var : *m->Variables()) {
-        if (var->UhdmType() == uhdmenum_var) {
-          if (const ref_typespec* rt = var->Typespec()) {
-            if (const enum_typespec* tps =
-                    rt->Actual_typespec<enum_typespec>()) {
-              if (tps->Enum_consts()) {
-                for (auto c : *tps->Enum_consts()) {
-                  if (c->VpiName() == name) {
-                    ref->Actual_group(c);
-                    break;
-                  }
-                }
-              }
-            }
-          }
-        }
-        if (ref->Actual_group()) break;
-      }
-    }
-
-    if (!ref->Actual_group()) {
-      design* d = m_uhdmDesign;
-      if (auto params = d->Parameters()) {
-        for (auto decl : *params) {
-          if (decl->VpiName() == name) {
-            ref->Actual_group(decl);
-            break;
-          }
-        }
-      }
-    }
-
-    if (!ref->Actual_group()) {
-      if (mod) {
-        if (auto elem = mod->getDesignElement()) {
-          if (elem->m_defaultNetType == VObjectType::slNoType) {
-            Location loc(fileSystem->toPathId(
-                             ref->VpiFile(),
-                             m_compileDesign->getCompiler()->getSymbolTable()),
-                         ref->VpiLineNo(), ref->VpiColumnNo(),
-                         m_compileDesign->getCompiler()
-                             ->getSymbolTable()
-                             ->registerSymbol(name));
-            Error err(ErrorDefinition::ELAB_ILLEGAL_IMPLICIT_NET, loc);
-            m_compileDesign->getCompiler()->getErrorContainer()->addError(err);
-            m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
-                m_compileDesign->getCompiler()
-                    ->getCommandLineParser()
-                    ->muteStdout());
-          } else {
-            if (m && (m->UhdmType() == uhdmmodule_inst ||
-                      m->UhdmType() == uhdminterface_inst ||
-                      m->UhdmType() == uhdmprogram)) {
-              instance* inst = (instance*)m;
-              logic_net* net = s.MakeLogic_net();
-              net->VpiName(name);
-              net->VpiParent(m);
-              net->VpiLineNo(ref->VpiLineNo());
-              net->VpiColumnNo(ref->VpiColumnNo());
-              net->VpiEndLineNo(ref->VpiEndLineNo());
-              net->VpiEndColumnNo(ref->VpiEndColumnNo());
-              net->VpiNetType(
-                  UhdmWriter::getVpiNetType(elem->m_defaultNetType));
-              net->VpiLineNo(ref->VpiLineNo());
-              net->VpiEndLineNo(ref->VpiEndLineNo());
-              net->VpiColumnNo(ref->VpiColumnNo());
-              net->VpiEndColumnNo(ref->VpiEndColumnNo());
-              ref->Actual_group(net);
-              VectorOfnet* nets = inst->Nets();
-              if (nets == nullptr) {
-                inst->Nets(s.MakeNetVec());
-                nets = inst->Nets();
-              }
-              nets->push_back(net);
-            }
-          }
-        }
-      }
-    }
+    delete listener;
   }
 }
 
@@ -3795,27 +2145,21 @@ bool UhdmWriter::writeElabModule(Serializer& s, ModuleInstance* instance,
   if (mod) {
     // Let decls
     if (!mod->getLetStmts().empty()) {
-      VectorOflet_decl* decls = s.MakeLet_declVec();
-      m->Let_decls(decls);
+      VectorOflet_decl* decls = m->Let_decls(true);
       for (auto stmt : mod->getLetStmts()) {
         decls->push_back((let_decl*)stmt.second->Decl());
       }
     }
     if (!mod->getPropertyDecls().empty()) {
-      VectorOfproperty_decl* decls = s.MakeProperty_declVec();
-      m->Property_decls(decls);
+      VectorOfproperty_decl* decls = m->Property_decls(true);
       for (auto decl : mod->getPropertyDecls()) {
         decl->VpiParent(m);
         decls->push_back(decl);
       }
     }
     // Typepecs
-    VectorOftypespec* typespecs = s.MakeTypespecVec();
-    m->Typespecs(typespecs);
+    VectorOftypespec* typespecs = m->Typespecs(true);
     writeDataTypes(mod->getDataTypeMap(), m, typespecs, s, false);
-    for (auto item : mod->getImportedSymbols()) {
-      typespecs->push_back(item);
-    }
     // System elab tasks
     m->Elab_tasks((std::vector<UHDM::tf_call*>*)&mod->getElabSysCalls());
     if (m->Elab_tasks()) {
@@ -3877,11 +2221,7 @@ bool UhdmWriter::writeElabModule(Serializer& s, ModuleInstance* instance,
     }
 
     if (netlist->cont_assigns()) {
-      std::vector<cont_assign*>* assigns = m->Cont_assigns();
-      if (assigns == nullptr) {
-        m->Cont_assigns(s.MakeCont_assignVec());
-        assigns = m->Cont_assigns();
-      }
+      std::vector<cont_assign*>* assigns = m->Cont_assigns(true);
       writeCont_assign(netlist, s, mod, m, assigns);
     }
 
@@ -3907,26 +2247,15 @@ bool UhdmWriter::writeElabModule(Serializer& s, ModuleInstance* instance,
           m->Global_clocking(cb);
           break;
         }
-        case ClockingBlock::Type::Regular: {
-          VectorOfclocking_block* cblocks = m->Clocking_blocks();
-          if (cblocks == nullptr) {
-            m->Clocking_blocks(s.MakeClocking_blockVec());
-            cblocks = m->Clocking_blocks();
-          }
-          cblocks->push_back(cb);
+        default:
           break;
-        }
       }
     }
   }
 
   if (mod) {
     if (auto from = mod->getTask_funcs()) {
-      UHDM::VectorOftask_func* target = m->Task_funcs();
-      if (target == nullptr) {
-        m->Task_funcs(s.MakeTask_funcVec());
-        target = m->Task_funcs();
-      }
+      UHDM::VectorOftask_func* target = m->Task_funcs(true);
       for (auto tf : *from) {
         target->push_back(tf);
         if (tf->VpiParent() == nullptr) tf->VpiParent(m);
@@ -3945,27 +2274,21 @@ bool UhdmWriter::writeElabInterface(Serializer& s, ModuleInstance* instance,
   if (mod) {
     // Let decls
     if (!mod->getLetStmts().empty()) {
-      VectorOflet_decl* decls = s.MakeLet_declVec();
-      m->Let_decls(decls);
+      VectorOflet_decl* decls = m->Let_decls(true);
       for (auto stmt : mod->getLetStmts()) {
         decls->push_back((let_decl*)stmt.second->Decl());
       }
     }
     if (!mod->getPropertyDecls().empty()) {
-      VectorOfproperty_decl* decls = s.MakeProperty_declVec();
-      m->Property_decls(decls);
+      VectorOfproperty_decl* decls = m->Property_decls(true);
       for (auto decl : mod->getPropertyDecls()) {
         decl->VpiParent(m);
         decls->push_back(decl);
       }
     }
     // Typepecs
-    VectorOftypespec* typespecs = s.MakeTypespecVec();
-    m->Typespecs(typespecs);
+    VectorOftypespec* typespecs = m->Typespecs(true);
     writeDataTypes(mod->getDataTypeMap(), m, typespecs, s, false);
-    for (auto item : mod->getImportedSymbols()) {
-      typespecs->push_back(item);
-    }
     // System elab tasks
     m->Elab_tasks((std::vector<UHDM::tf_call*>*)&mod->getElabSysCalls());
     if (m->Elab_tasks()) {
@@ -4030,11 +2353,7 @@ bool UhdmWriter::writeElabInterface(Serializer& s, ModuleInstance* instance,
 
   if (netlist) {
     if (netlist->cont_assigns()) {
-      std::vector<cont_assign*>* assigns = m->Cont_assigns();
-      if (assigns == nullptr) {
-        m->Cont_assigns(s.MakeCont_assignVec());
-        assigns = m->Cont_assigns();
-      }
+      std::vector<cont_assign*>* assigns = m->Cont_assigns(true);
       writeCont_assign(netlist, s, mod, m, assigns);
     }
 
@@ -4046,7 +2365,6 @@ bool UhdmWriter::writeElabInterface(Serializer& s, ModuleInstance* instance,
   ModuleDefinition* module = (ModuleDefinition*)mod;
   ModuleDefinition::ModPortSignalMap& orig_modports =
       module->getModPortSignalMap();
-  VectorOfmodport* dest_modports = s.MakeModportVec();
   for (auto& orig_modport : orig_modports) {
     modport* dest_modport = s.MakeModport();
     dest_modport->Interface_inst(m);
@@ -4055,7 +2373,7 @@ bool UhdmWriter::writeElabInterface(Serializer& s, ModuleInstance* instance,
     const FileContent* orig_fC = orig_modport.second.getFileContent();
     const NodeId orig_nodeId = orig_modport.second.getNodeId();
     orig_fC->populateCoreMembers(orig_nodeId, orig_nodeId, dest_modport);
-    VectorOfio_decl* ios = s.MakeIo_declVec();
+    VectorOfio_decl* ios = dest_modport->Io_decls(true);
     for (auto& sig : orig_modport.second.getPorts()) {
       const FileContent* fC = sig.getFileContent();
       io_decl* io = s.MakeIo_decl();
@@ -4075,10 +2393,7 @@ bool UhdmWriter::writeElabInterface(Serializer& s, ModuleInstance* instance,
       io->VpiParent(dest_modport);
       ios->push_back(io);
     }
-    dest_modport->Io_decls(ios);
-    dest_modports->push_back(dest_modport);
   }
-  m->Modports(dest_modports);
 
   if (mod) {
     // ClockingBlocks
@@ -4098,26 +2413,15 @@ bool UhdmWriter::writeElabInterface(Serializer& s, ModuleInstance* instance,
           m->Global_clocking(cb);
           break;
         }
-        case ClockingBlock::Type::Regular: {
-          VectorOfclocking_block* cblocks = m->Clocking_blocks();
-          if (cblocks == nullptr) {
-            m->Clocking_blocks(s.MakeClocking_blockVec());
-            cblocks = m->Clocking_blocks();
-          }
-          cblocks->push_back(cb);
+        default:
           break;
-        }
       }
     }
   }
 
   if (mod) {
     if (auto from = mod->getTask_funcs()) {
-      UHDM::VectorOftask_func* target = m->Task_funcs();
-      if (target == nullptr) {
-        m->Task_funcs(s.MakeTask_funcVec());
-        target = m->Task_funcs();
-      }
+      UHDM::VectorOftask_func* target = m->Task_funcs(true);
       for (auto tf : *from) {
         target->push_back(tf);
         if (tf->VpiParent() == nullptr) tf->VpiParent(m);
@@ -4131,11 +2435,9 @@ bool UhdmWriter::writeElabInterface(Serializer& s, ModuleInstance* instance,
 void writePrimTerms(ModuleInstance* instance, primitive* prim,
                     int32_t vpiGateType, Serializer& s) {
   Netlist* netlist = instance->getNetlist();
-  VectorOfprim_term* terms = s.MakePrim_termVec();
-  prim->Prim_terms(terms);
-  if (netlist->ports()) {
+  if (VectorOfport* ports = netlist->ports()) {
+    VectorOfprim_term* terms = prim->Prim_terms(true);
     uint32_t index = 0;
-    VectorOfport* ports = netlist->ports();
     for (auto port : *ports) {
       prim_term* term = s.MakePrim_term();
       terms->push_back(term);
@@ -4182,7 +2484,8 @@ void UhdmWriter::writeInstance(ModuleDefinition* mod, ModuleInstance* instance,
                                any* m, CompileDesign* compileDesign,
                                ModPortMap& modPortMap, InstanceMap& instanceMap,
                                ExprBuilder& exprBuilder) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  Compiler* const compiler = m_compileDesign->getCompiler();
+  FileSystem* const fileSystem = m_session->getFileSystem();
   Serializer& s = compileDesign->getSerializer();
   VectorOfmodule_inst* subModules = nullptr;
   VectorOfprogram* subPrograms = nullptr;
@@ -4245,14 +2548,15 @@ void UhdmWriter::writeInstance(ModuleDefinition* mod, ModuleInstance* instance,
     ModuleInstance* child = instance->getChildren(i);
     DesignComponent* childDef = child->getDefinition();
     if (ModuleDefinition* mm =
-            valuedcomponenti_cast<ModuleDefinition*>(childDef)) {
+            valuedcomponenti_cast<ModuleDefinition>(childDef)) {
       VObjectType insttype = child->getType();
       if (insttype == VObjectType::paModule_instantiation) {
         if (subModules == nullptr) subModules = s.MakeModule_instVec();
         module_inst* sm = s.MakeModule_inst();
         tempInstanceMap.emplace(child, sm);
+        instanceMap.emplace(child, sm);
         if (childDef && !childDef->getFileContents().empty() &&
-            compileDesign->getCompiler()->isLibraryFile(
+            compiler->isLibraryFile(
                 childDef->getFileContents()[0]->getFileId())) {
           sm->VpiCellInstance(true);
         }
@@ -4306,8 +2610,7 @@ void UhdmWriter::writeInstance(ModuleDefinition* mod, ModuleInstance* instance,
                                                      child->getNodeId(), sm);
         subGenScopeArrays->push_back(sm);
         gen_scope* a_gen_scope = s.MakeGen_scope();
-        sm->Gen_scopes(s.MakeGen_scopeVec());
-        sm->Gen_scopes()->push_back(a_gen_scope);
+        sm->Gen_scopes(true)->push_back(a_gen_scope);
         child->getFileContent()->populateCoreMembers(
             child->getNodeId(), child->getNodeId(), a_gen_scope);
         a_gen_scope->VpiParent(sm);
@@ -4371,13 +2674,12 @@ void UhdmWriter::writeInstance(ModuleDefinition* mod, ModuleInstance* instance,
           UHDM::udp* udp = s.MakeUdp();
           gate = udp;
           if (ModuleDefinition* mm =
-                  valuedcomponenti_cast<ModuleDefinition*>(childDef)) {
-            udp->Udp_defn(mm->getUdpDefn());
+                  valuedcomponenti_cast<ModuleDefinition>(childDef)) {
+            udp->Udp_defn(mm->getUhdmModel<UHDM::udp_defn>());
           }
           if (UHDM::VectorOfrange* ranges = child->getNetlist()->ranges()) {
             gate_array = s.MakeUdp_array();
-            VectorOfprimitive* prims = s.MakePrimitiveVec();
-            gate_array->Primitives(prims);
+            VectorOfprimitive* prims = gate_array->Primitives(true);
             gate_array->Ranges(ranges);
             gate_array->VpiParent(m);
             prims->push_back(gate);
@@ -4401,8 +2703,7 @@ void UhdmWriter::writeInstance(ModuleDefinition* mod, ModuleInstance* instance,
           gate = s.MakeSwitch_tran();
           if (UHDM::VectorOfrange* ranges = child->getNetlist()->ranges()) {
             gate_array = s.MakeSwitch_array();
-            VectorOfprimitive* prims = s.MakePrimitiveVec();
-            gate_array->Primitives(prims);
+            VectorOfprimitive* prims = gate_array->Primitives(true);
             gate_array->Ranges(ranges);
             gate_array->VpiParent(m);
             prims->push_back(gate);
@@ -4424,8 +2725,7 @@ void UhdmWriter::writeInstance(ModuleDefinition* mod, ModuleInstance* instance,
             gate_array->VpiFullName(child->getFullPathName());
             child->getFileContent()->populateCoreMembers(
                 child->getNodeId(), child->getNodeId(), gate_array);
-            VectorOfprimitive* prims = s.MakePrimitiveVec();
-            gate_array->Primitives(prims);
+            VectorOfprimitive* prims = gate_array->Primitives(true);
             gate_array->Ranges(ranges);
             gate_array->VpiParent(m);
             prims->push_back(gate);
@@ -4455,19 +2755,19 @@ void UhdmWriter::writeInstance(ModuleDefinition* mod, ModuleInstance* instance,
         if (utype == uhdmmodule_inst) {
           ((module_inst*)m)->Primitives(subPrimitives);
           ((module_inst*)m)->Primitive_arrays(subPrimitiveArrays);
-          m_helper.setParentNoOverride(gate, m);
+          gate->VpiParent(m);
         } else if (utype == uhdmgen_scope) {
           ((gen_scope*)m)->Primitives(subPrimitives);
           ((gen_scope*)m)->Primitive_arrays(subPrimitiveArrays);
-          m_helper.setParentNoOverride(gate, m);
+          gate->VpiParent(m);
         }
         writePrimTerms(child, gate, vpiGateType, s);
       } else {
         // Unknown object type
       }
-    } else if (Program* prog = valuedcomponenti_cast<Program*>(childDef)) {
+    } else if (Program* prog = valuedcomponenti_cast<Program>(childDef)) {
       if (subPrograms == nullptr) subPrograms = s.MakeProgramVec();
-      program* sm = s.MakeProgram();
+      program* sm = prog->getUhdmModel<UHDM::program>();
       sm->VpiName(child->getInstanceName());
       sm->VpiDefName(child->getModuleName());
       sm->VpiFullName(child->getFullPathName());
@@ -4532,25 +2832,16 @@ void UhdmWriter::writeInstance(ModuleDefinition* mod, ModuleInstance* instance,
         const auto& modInstances =
             moduleArrayModuleInstancesMap.find(modArray)->second;
         if (!modInstances.empty()) {
-          modArray->Modules(s.MakeModule_instVec());
           modArray->VpiParent(m);
           ((module_inst*)m)->Module_arrays()->push_back(modArray);
           for (ModuleInstance* modInst : modInstances) {
             auto it = tempInstanceMap.find(modInst);
             if (it != tempInstanceMap.end()) {
-              modArray->Modules()->push_back(it->second);
+              modArray->Modules(true)->push_back(it->second);
             }
           }
         }
       }
-    }
-  }
-
-  if (mod && netlist) {
-    if (scope* sc = any_cast<scope*>(m)) {
-      lateTypedefBinding(s, mod, sc);
-      lateBinding(s, mod, sc);
-      lateTypedefBinding(s, mod, sc);
     }
   }
 }
@@ -4656,24 +2947,25 @@ void filterAlwaysBlocks(Serializer& s, design* d) {
   }
 }
 
-vpiHandle UhdmWriter::write(PathId uhdmFileId) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+bool UhdmWriter::write(PathId uhdmFileId) {
+  Compiler* const compiler = m_compileDesign->getCompiler();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  ErrorContainer* const errors = m_session->getErrorContainer();
+  CommandLineParser* const clp = m_session->getCommandLineParser();
   ModPortMap modPortMap;
   InstanceMap instanceMap;
   ModuleMap moduleMap;
   Serializer& s = m_compileDesign->getSerializer();
-  ExprBuilder exprBuilder;
-  exprBuilder.seterrorReporting(
-      m_compileDesign->getCompiler()->getErrorContainer(),
-      m_compileDesign->getCompiler()->getSymbolTable());
+  ExprBuilder exprBuilder(m_session);
 
   Location loc(uhdmFileId);
   Error err(ErrorDefinition::UHDM_CREATING_MODEL, loc);
-  m_compileDesign->getCompiler()->getErrorContainer()->addError(err);
-  m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
-      m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
+  errors->addError(err);
+  errors->printMessages(clp->muteStdout());
 
-  m_helper.setElabMode(false);
+  m_helper.setElaborate(Elaborate::No);
+  m_helper.setReduce(Reduce::No);
 
   // Compute list of design components that are part of the instance tree
   std::set<DesignComponent*> designComponents;
@@ -4704,135 +2996,77 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
     }
   }
 
-  vpiHandle designHandle = 0;
   std::vector<vpiHandle> designs;
   design* d = nullptr;
   if (m_design) {
-    d = s.MakeDesign();
-    m_uhdmDesign = d;
-    designHandle = reinterpret_cast<vpiHandle>(new uhdm_handle(uhdmdesign, d));
+    d = m_design->getUhdmDesign();
+    vpiHandle designHandle =
+        reinterpret_cast<vpiHandle>(new uhdm_handle(uhdmdesign, d));
     std::string designName = "unnamed";
-    auto topLevelModules = m_design->getTopLevelModuleInstances();
+    const auto& topLevelModules = m_design->getTopLevelModuleInstances();
     if (!topLevelModules.empty()) {
       designName = topLevelModules.front()->getModuleName();
     }
     d->VpiName(designName);
     designs.push_back(designHandle);
 
-    // ---------------------------
-    // Include File Info
-    if (m_compileDesign->getFileInfo()) {
-      d->Include_file_infos(m_compileDesign->getFileInfo());
-      for (auto ifi : *m_compileDesign->getFileInfo()) {
-        ifi->VpiParent(d);
-      }
-    }
-
     // -------------------------------
     // Non-Elaborated Model
-
-    // FileContent
-    VectorOftypespec* typespecs = s.MakeTypespecVec();
-    d->Typespecs(typespecs);
-    for (auto& fileIdContent : m_design->getAllFileContents()) {
-      // Typepecs
-      writeDataTypes(fileIdContent.second->getDataTypeMap(), d, typespecs, s,
-                     true);
-
-      // Function and tasks
-      if (auto from = fileIdContent.second->getTask_funcs()) {
-        UHDM::VectorOftask_func* target = d->Task_funcs();
-        if (target == nullptr) {
-          d->Task_funcs(s.MakeTask_funcVec());
-          target = d->Task_funcs();
-        }
-        for (auto tf : *from) {
-          target->push_back(tf);
-          if (tf->VpiParent() == nullptr) tf->VpiParent(d);
-        }
-      }
-
-      // Parameters
-      if (auto from = fileIdContent.second->getParameters()) {
-        UHDM::VectorOfany* target = d->Parameters();
-        if (target == nullptr) {
-          d->Parameters(s.MakeAnyVec());
-          target = d->Parameters();
-        }
-        for (auto tf : *from) {
-          tf->VpiParent(d);
-          target->push_back(tf);
-        }
-      }
-
-      // Param assigns
-      if (auto from = fileIdContent.second->getParam_assigns()) {
-        UHDM::VectorOfparam_assign* target = d->Param_assigns();
-        if (target == nullptr) {
-          d->Param_assigns(s.MakeParam_assignVec());
-          target = d->Param_assigns();
-        }
-        for (auto tf : *from) {
-          tf->VpiParent(d);
-          target->push_back(tf);
-        }
-      }
-      lateTypedefBinding(s, fileIdContent.second, nullptr);
-    }
 
     // Packages
     SURELOG::PackageDefinitionVec packages =
         m_design->getOrderedPackageDefinitions();
     for (auto& pack : m_design->getPackageDefinitions()) {
       if (pack.first == "builtin") {
+        pack.second->getUhdmModel()->VpiParent(d);
         if (pack.second) packages.insert(packages.begin(), pack.second);
         break;
       }
     }
 
-    m_helper.setElabMode(true);
+    if (clp->elaborate()) {
+      m_helper.setElaborate(Elaborate::Yes);
+      m_helper.setReduce(Reduce::Yes);
 
-    VectorOfpackage* v2 = s.MakePackageVec();
-    for (Package* pack : packages) {
-      if (!pack) continue;
-      if (!pack->getFileContents().empty() &&
-          pack->getType() == VObjectType::paPackage_declaration) {
-        const FileContent* fC = pack->getFileContents()[0];
-        package* p = (package*)pack->getUhdmInstance();
-        m_componentMap.emplace(pack, p);
-        p->VpiParent(d);
-        p->VpiTop(true);
-        p->VpiDefName(pack->getName());
-        if (pack->Attributes() != nullptr) {
-          p->Attributes(pack->Attributes());
-          for (auto a : *p->Attributes()) {
-            a->VpiParent(p);
+      VectorOfpackage* v2 = d->TopPackages(true);
+      for (Package* pack : packages) {
+        if (!pack) continue;
+        if (!pack->getFileContents().empty() &&
+            pack->getType() == VObjectType::paPackage_declaration) {
+          const FileContent* fC = pack->getFileContents()[0];
+          package* p = pack->getUhdmModel<package>();
+          m_componentMap.emplace(pack, p);
+          p->VpiParent(d);
+          p->VpiTop(true);
+          p->VpiDefName(pack->getName());
+          if (pack->Attributes() != nullptr) {
+            p->Attributes(pack->Attributes());
+            for (auto a : *p->Attributes()) {
+              a->VpiParent(p);
+            }
           }
+          writePackage(pack, p, s, true);
+          if (fC) {
+            // Builtin package has no file
+            const NodeId modId = pack->getNodeIds()[0];
+            const NodeId startId =
+                fC->sl_collect(modId, VObjectType::paPACKAGE);
+            fC->populateCoreMembers(startId, modId, p);
+          }
+          v2->push_back(p);
         }
-        writePackage(pack, p, s, true);
-        if (fC) {
-          // Builtin package has no file
-          const NodeId modId = pack->getNodeIds()[0];
-          const NodeId startId = fC->sl_collect(modId, VObjectType::paPACKAGE);
-          fC->populateCoreMembers(startId, modId, p);
-        }
-        v2->push_back(p);
       }
     }
-    d->TopPackages(v2);
 
-    m_helper.setElabMode(false);
+    m_helper.setElaborate(Elaborate::No);
+    m_helper.setReduce(Reduce::No);
 
-    VectorOfpackage* v3 = s.MakePackageVec();
-    d->AllPackages(v3);
     for (Package* pack : packages) {
       if (!pack) continue;
       if (!pack->getFileContents().empty() &&
           pack->getType() == VObjectType::paPackage_declaration) {
         const FileContent* fC = pack->getFileContents()[0];
-        package* p =
-            any_cast<package*>(pack->getUnElabPackage()->getUhdmInstance());
-        if (p == nullptr) p = s.MakePackage();
+        package* p = pack->getUnElabPackage()->getUhdmModel<package>();
         m_componentMap.emplace(pack->getUnElabPackage(), p);
         p->VpiName(pack->getName());
         p->VpiParent(d);
@@ -4843,7 +3077,6 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
             a->VpiParent(p);
           }
         }
-        v3->push_back(p);
         writePackage(pack->getUnElabPackage(), p, s, false);
         if (fC) {
           // Builtin package has no file
@@ -4854,20 +3087,14 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
       }
     }
 
-    // FileContent Late Binding after Packages
-    for (auto& fileIdContent : m_design->getAllFileContents()) {
-      lateTypedefBinding(s, fileIdContent.second, nullptr);
-    }
-
     // Programs
-    auto programs = m_design->getProgramDefinitions();
-    VectorOfprogram* uhdm_programs = s.MakeProgramVec();
+    const auto& programs = m_design->getProgramDefinitions();
     for (const auto& progNamePair : programs) {
       Program* prog = progNamePair.second;
       if (!prog->getFileContents().empty() &&
           prog->getType() == VObjectType::paProgram_declaration) {
         const FileContent* fC = prog->getFileContents()[0];
-        program* p = s.MakeProgram();
+        program* p = prog->getUhdmModel<UHDM::program>();
         m_componentMap.emplace(prog, p);
         moduleMap.emplace(prog->getName(), p);
         p->VpiParent(d);
@@ -4882,21 +3109,18 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
           }
         }
         writeProgram(prog, p, s, modPortMap);
-        uhdm_programs->push_back(p);
       }
     }
-    d->AllPrograms(uhdm_programs);
 
     // Interfaces
-    auto modules = m_design->getModuleDefinitions();
-    VectorOfinterface_inst* uhdm_interfaces = s.MakeInterface_instVec();
+    const auto& modules = m_design->getModuleDefinitions();
     for (const auto& modNamePair : modules) {
       ModuleDefinition* mod = modNamePair.second;
       if (mod->getFileContents().empty()) {
         // Built-in primitive
       } else if (mod->getType() == VObjectType::paInterface_declaration) {
         const FileContent* fC = mod->getFileContents()[0];
-        interface_inst* m = s.MakeInterface_inst();
+        interface_inst* m = mod->getUhdmModel<interface_inst>();
         m_componentMap.emplace(mod, m);
         moduleMap.emplace(mod->getName(), m);
         m->VpiParent(d);
@@ -4910,25 +3134,18 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
             a->VpiParent(m);
           }
         }
-        uhdm_interfaces->push_back(m);
         writeInterface(mod, m, s, modPortMap);
       }
     }
-    d->AllInterfaces(uhdm_interfaces);
 
-    // Modules
-    VectorOfmodule_inst* uhdm_modules = s.MakeModule_instVec();
-    // Udps
-    VectorOfudp_defn* uhdm_udps = s.MakeUdp_defnVec();
+    // Modules & Udps
     for (const auto& modNamePair : modules) {
       ModuleDefinition* mod = modNamePair.second;
       if (mod->getFileContents().empty()) {
         // Built-in primitive
       } else if (mod->getType() == VObjectType::paModule_declaration) {
-        const FileContent* fC = mod->getFileContents()[0];
-        module_inst* m = s.MakeModule_inst();
-        if (m_compileDesign->getCompiler()->isLibraryFile(
-                mod->getFileContents()[0]->getFileId())) {
+        module_inst* m = mod->getUhdmModel<module_inst>();
+        if (compiler->isLibraryFile(mod->getFileContents()[0]->getFileId())) {
           m->VpiCellInstance(true);
           // Don't list library cells unused in the design
           if (mod && (designComponents.find(mod) == designComponents.end()))
@@ -4956,16 +3173,10 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
             a->VpiParent(m);
           }
         }
-        const NodeId modId = mod->getNodeIds()[0];
-        const NodeId startId =
-            fC->sl_collect(modId, VObjectType::paModule_keyword);
-        fC->populateCoreMembers(startId, modId, m);
-        uhdm_modules->push_back(m);
-        writeModule(mod, m, s, moduleMap, modPortMap);
+        writeModule(mod->getUnelabMmodule(), m, s, moduleMap, modPortMap);
       } else if (mod->getType() == VObjectType::paUdp_declaration) {
         const FileContent* fC = mod->getFileContents()[0];
-        UHDM::udp_defn* defn = mod->getUdpDefn();
-        if (defn) {
+        if (UHDM::udp_defn* defn = mod->getUhdmModel<UHDM::udp_defn>()) {
           m_componentMap.emplace(mod, defn);
           defn->VpiParent(d);
           defn->VpiDefName(mod->getName());
@@ -4979,84 +3190,83 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
               a->VpiParent(defn);
             }
           }
-          uhdm_udps->push_back(defn);
         }
       }
     }
-    d->AllModules(uhdm_modules);
-    d->AllUdps(uhdm_udps);
-    for (module_inst* mod : *uhdm_modules) {
-      if (mod->Ref_modules()) {
-        for (auto subMod : *mod->Ref_modules()) {
-          ModuleMap::iterator itr =
-              moduleMap.find(std::string(subMod->VpiDefName()));
-          if (itr != moduleMap.end()) {
-            subMod->Actual_group((*itr).second);
+
+    if (VectorOfmodule_inst* uhdm_modules = d->AllModules()) {
+      for (module_inst* mod : *uhdm_modules) {
+        if (mod->Ref_modules()) {
+          for (auto subMod : *mod->Ref_modules()) {
+            ModuleMap::iterator itr =
+                moduleMap.find(std::string(subMod->VpiDefName()));
+            if (itr != moduleMap.end()) {
+              subMod->Actual_group((*itr).second);
+            }
           }
         }
       }
     }
 
     // Classes
-    auto classes = m_design->getClassDefinitions();
-    VectorOfclass_defn* v4 = s.MakeClass_defnVec();
+    const auto& classes = m_design->getClassDefinitions();
     for (const auto& classNamePair : classes) {
       ClassDefinition* classDef = classNamePair.second;
       if (!classDef->getFileContents().empty() &&
           classDef->getType() == VObjectType::paClass_declaration) {
-        class_defn* c = classDef->getUhdmDefinition();
+        class_defn* c = classDef->getUhdmModel<class_defn>();
         if (!c->VpiParent()) {
-          writeClass(classDef, v4, s, d);
+          writeClass(classDef, s, d);
         }
       }
     }
-    d->AllClasses(v4);
 
     // -------------------------------
     // Elaborated Model (Folded)
+    if (clp->elaborate()) {
+      m_helper.setElaborate(Elaborate::Yes);
+      m_helper.setReduce(Reduce::Yes);
 
-    m_helper.setElabMode(true);
-
-    // Top-level modules
-    VectorOfmodule_inst* uhdm_top_modules = s.MakeModule_instVec();
-    for (ModuleInstance* inst : topLevelModules) {
-      DesignComponent* component = inst->getDefinition();
-      ModuleDefinition* mod =
-          valuedcomponenti_cast<ModuleDefinition*>(component);
-      const auto& itr = m_componentMap.find(mod);
-      module_inst* m = s.MakeModule_inst();
-      m->VpiTopModule(true);
-      m->VpiTop(true);
-      module_inst* def = (module_inst*)itr->second;
-      m->VpiDefName(def->VpiDefName());
-      m->VpiName(def->VpiDefName());  // Top's instance name is module name
-      m->VpiFullName(
-          def->VpiDefName());  // Top's full instance name is module name
-      m->VpiFile(def->VpiFile());
-      m->VpiLineNo(def->VpiLineNo());
-      m->VpiColumnNo(def->VpiColumnNo());
-      m->VpiEndLineNo(def->VpiEndLineNo());
-      m->VpiEndColumnNo(def->VpiEndColumnNo());
-      writeInstance(mod, inst, m, m_compileDesign, modPortMap, instanceMap,
-                    exprBuilder);
-      uhdm_top_modules->push_back(m);
+      // Top-level modules
+      VectorOfmodule_inst* uhdm_top_modules = d->TopModules(true);
+      for (ModuleInstance* inst : topLevelModules) {
+        DesignComponent* component = inst->getDefinition();
+        ModuleDefinition* mod =
+            valuedcomponenti_cast<ModuleDefinition>(component);
+        const auto& itr = m_componentMap.find(mod);
+        module_inst* m = s.MakeModule_inst();
+        m->VpiTopModule(true);
+        m->VpiTop(true);
+        module_inst* def = (module_inst*)itr->second;
+        m->VpiDefName(def->VpiDefName());
+        m->VpiName(def->VpiDefName());  // Top's instance name is module name
+        m->VpiFullName(
+            def->VpiDefName());  // Top's full instance name is module name
+        m->VpiFile(def->VpiFile());
+        m->VpiLineNo(def->VpiLineNo());
+        m->VpiColumnNo(def->VpiColumnNo());
+        m->VpiEndLineNo(def->VpiEndLineNo());
+        m->VpiEndColumnNo(def->VpiEndColumnNo());
+        writeInstance(mod, inst, m, m_compileDesign, modPortMap, instanceMap,
+                      exprBuilder);
+        uhdm_top_modules->push_back(m);
+      }
     }
-    d->TopModules(uhdm_top_modules);
   }
 
-  if (m_compileDesign->getCompiler()->getCommandLineParser()->getUhdmStats()) {
+  if (clp->getUhdmStats()) {
     s.PrintStats(std::cerr, "Non-Elaborated Model");
   }
 
-  m_helper.setElabMode(true);
+  m_helper.setElaborate(Elaborate::Yes);
+  m_helper.setReduce(Reduce::Yes);
 
   // ----------------------------------
   // Fully elaborated model
-  if (m_compileDesign->getCompiler()->getCommandLineParser()->getElabUhdm()) {
+  if (clp->getElabUhdm()) {
     Error err(ErrorDefinition::UHDM_ELABORATION, loc);
-    m_compileDesign->getCompiler()->getErrorContainer()->addError(err);
-    m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
-        m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
+    errors->addError(err);
+    errors->printMessages(clp->muteStdout());
 
     if (ElaboratorContext* elaboratorContext =
             new ElaboratorContext(&s, false, false)) {
@@ -5065,9 +3275,9 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
       delete elaboratorContext;
     }
 
-    if (m_compileDesign->getCompiler()
-            ->getCommandLineParser()
-            ->getUhdmStats()) {
+    bind(s, designs);
+
+    if (clp->getUhdmStats()) {
       s.PrintStats(std::cerr, "Elaborated Model");
     }
 
@@ -5075,24 +3285,35 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
       adjuster->listenDesigns(designs);
       delete adjuster;
     }
+  } else {
+    bind(s, designs);
+  }
+
+  if (IntegrityChecker* const checker = new IntegrityChecker(m_session)) {
+    for (auto h : designs) {
+      const design* const d =
+          static_cast<const design*>(((const uhdm_handle*)h)->object);
+      checker->check(d);
+    }
+
+    delete checker;
+    errors->printMessages(clp->muteStdout());
   }
 
   // ----------------------------------
   // Lint only the elaborated model
-  if (UhdmLint* linter = new UhdmLint(&s, d)) {
-    linter->listenDesigns(designs);
-    delete linter;
+  if (m_session->getCommandLineParser()->getElabUhdm()) {
+    if (UhdmLint* linter = new UhdmLint(&s, d)) {
+      linter->listenDesigns(designs);
+      delete linter;
+    }
   }
 
-  if (m_compileDesign->getCompiler()
-          ->getCommandLineParser()
-          ->reportNonSynthesizable()) {
+  if (clp->getElabUhdm() && clp->reportNonSynthesizable()) {
     std::set<const any*> nonSynthesizableObjects;
     if (SynthSubset* annotate =
             new SynthSubset(&s, nonSynthesizableObjects, d, true,
-                            m_compileDesign->getCompiler()
-                                ->getCommandLineParser()
-                                ->reportNonSynthesizableWithFormal())) {
+                            clp->reportNonSynthesizableWithFormal())) {
       annotate->listenDesigns(designs);
       annotate->filterNonSynthesizable();
       delete annotate;
@@ -5108,72 +3329,39 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
   }
 
   const fs::path uhdmFile = fileSystem->toPlatformAbsPath(uhdmFileId);
-  if (m_compileDesign->getCompiler()->getCommandLineParser()->writeUhdm()) {
+  if (clp->writeUhdm()) {
     Error err(ErrorDefinition::UHDM_WRITE_DB, loc);
-    m_compileDesign->getCompiler()->getErrorContainer()->addError(err);
-    m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
-        m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
-    s.SetGCEnabled(
-        m_compileDesign->getCompiler()->getCommandLineParser()->gc());
+    errors->addError(err);
+    errors->printMessages(clp->muteStdout());
+    s.SetGCEnabled(clp->gc());
     s.Save(uhdmFile);
   }
 
-  if (m_compileDesign->getCompiler()->getCommandLineParser()->getDebugUhdm() ||
-      m_compileDesign->getCompiler()->getCommandLineParser()->getCoverUhdm()) {
+  if (clp->getDebugUhdm() || clp->getCoverUhdm()) {
     // Check before restore
-    Location loc(fileSystem->getCheckerHtmlFile(
-        uhdmFileId, m_compileDesign->getCompiler()->getSymbolTable()));
+    Location loc(fileSystem->getCheckerHtmlFile(uhdmFileId, symbols));
     Error err(ErrorDefinition::UHDM_WRITE_HTML_COVERAGE, loc);
-    m_compileDesign->getCompiler()->getErrorContainer()->addError(err);
-    m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
-        m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
+    errors->addError(err);
+    errors->printMessages(clp->muteStdout());
 
-    if (UhdmChecker* uhdmchecker = new UhdmChecker(m_compileDesign, m_design)) {
+    if (UhdmChecker* uhdmchecker =
+            new UhdmChecker(m_session, m_compileDesign, m_design)) {
       uhdmchecker->check(uhdmFileId);
       delete uhdmchecker;
     }
   }
 
-  if (m_compileDesign->getCompiler()->getCommandLineParser()->getDebugUhdm()) {
-    if (m_compileDesign->getCompiler()->getCommandLineParser()->writeUhdm()) {
-      Location loc((SymbolId)uhdmFileId);
-      Error err1(ErrorDefinition::UHDM_LOAD_DB, loc);
-      m_compileDesign->getCompiler()->getErrorContainer()->addError(err1);
-      m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
-          m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
-      const std::vector<vpiHandle>& restoredDesigns =
-          s.Restore(uhdmFile.string());
-
-      Error err2(ErrorDefinition::UHDM_VISITOR, loc);
-      m_compileDesign->getCompiler()->getErrorContainer()->addError(err2);
-      m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
-          m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
-
-      std::cout << "====== UHDM =======\n";
-      if (!restoredDesigns.empty()) {
-        designHandle = restoredDesigns[0];
-      }
-      vpi_show_ids(
-          m_compileDesign->getCompiler()->getCommandLineParser()->showVpiIds());
-      visit_designs(restoredDesigns, std::cout);
-      std::cout << "===================\n";
-    } else {
-      Location loc(
-          m_compileDesign->getCompiler()->getSymbolTable()->registerSymbol(
-              "in-memory uhdm"));
-      Error err2(ErrorDefinition::UHDM_VISITOR, loc);
-      m_compileDesign->getCompiler()->getErrorContainer()->addError(err2);
-      m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
-          m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
-      std::cout << "====== UHDM =======\n";
-      vpi_show_ids(
-          m_compileDesign->getCompiler()->getCommandLineParser()->showVpiIds());
-      visit_designs({designHandle}, std::cout);
-      std::cout << "===================\n";
-    }
+  if (clp->getDebugUhdm()) {
+    Location loc(symbols->registerSymbol("in-memory uhdm"));
+    Error err2(ErrorDefinition::UHDM_VISITOR, loc);
+    errors->addError(err2);
+    errors->printMessages(clp->muteStdout());
+    std::cout << "====== UHDM =======\n";
+    vpi_show_ids(clp->showVpiIds());
+    visit_designs(designs, std::cout);
+    std::cout << "===================\n";
   }
-  m_compileDesign->getCompiler()->getErrorContainer()->printMessages(
-      m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
-  return designHandle;
+  errors->printMessages(clp->muteStdout());
+  return true;
 }
 }  // namespace SURELOG

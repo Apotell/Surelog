@@ -21,6 +21,7 @@
  * Created on Feb 08, 2018, 9:54 PM
  */
 
+#include <Surelog/Common/Session.h>
 #include <Surelog/ErrorReporting/ErrorContainer.h>
 #include <Surelog/Library/AntlrLibParserErrorListener.h>
 #include <Surelog/Library/ParseLibraryDef.h>
@@ -31,10 +32,10 @@ namespace SURELOG {
 void AntlrLibParserErrorListener::syntaxError(
     antlr4::Recognizer *recognizer, antlr4::Token *offendingSymbol, size_t line,
     size_t charPositionInLine, const std::string &msg, std::exception_ptr e) {
-  SymbolId msgId = m_parser->getSymbolTable()->registerSymbol(msg);
+  SymbolId msgId = m_session->getSymbolTable()->registerSymbol(msg);
   Location loc(m_parser->getFileId(), line, charPositionInLine, msgId);
   Error err(ErrorDefinition::PA_SYNTAX_ERROR, loc);
-  m_parser->getErrorContainer()->addError(err);
+  m_session->getErrorContainer()->addError(err);
 }
 
 void AntlrLibParserErrorListener::reportAmbiguity(

@@ -32,25 +32,25 @@
 
 namespace SURELOG {
 class PathId;
-class SymbolTable;
+class Session;
 
 class Precompiled final {
  public:
-  static Precompiled* getSingleton();
+  explicit Precompiled(Session *session);
 
   void addPrecompiled(std::string_view package_name, std::string_view fileName);
 
   std::string getFileName(std::string_view packageName) const;
 
-  bool isFilePrecompiled(PathId fileId, SymbolTable* symbolTable) const;
+  bool isFilePrecompiled(PathId fileId) const;
   bool isFilePrecompiled(std::string_view fileName) const;
 
   bool isPackagePrecompiled(std::string_view packageName) const;
 
  private:
-  Precompiled();  // Only accessed via singleton.
-  Precompiled(const Precompiled&) = delete;
+  Precompiled(const Precompiled &) = delete;
 
+  Session *const m_session = nullptr;
   std::map<std::string, std::string, std::less<>> m_packageMap;
   std::set<std::string, std::less<>> m_packageFileSet;
 };

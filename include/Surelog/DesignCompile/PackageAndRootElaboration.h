@@ -28,11 +28,13 @@
 #include <Surelog/DesignCompile/ElaborationStep.h>
 
 namespace SURELOG {
+class Session;
 
 class PackageAndRootElaboration : public ElaborationStep {
  public:
-  explicit PackageAndRootElaboration(CompileDesign* compileDesign)
-      : ElaborationStep(compileDesign) {}
+  explicit PackageAndRootElaboration(Session* session,
+                                     CompileDesign* compileDesign)
+      : ElaborationStep(session, compileDesign) {}
 
   ~PackageAndRootElaboration() override = default;
 

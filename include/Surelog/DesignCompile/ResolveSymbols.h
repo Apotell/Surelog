@@ -31,56 +31,49 @@
 #include <unordered_set>
 
 namespace SURELOG {
-
-class Compiler;
 class CompileDesign;
+class Compiler;
 class Design;
-class ErrorContainer;
 class FileContent;
-class SymbolTable;
+class Session;
 
-struct FunctorCreateLookup {
-  FunctorCreateLookup(CompileDesign* compileDesign, FileContent* fileContent,
-                      Design* design, SymbolTable* symbolTable,
-                      ErrorContainer* errors)
-      : m_compileDesign(compileDesign),
-        m_fileData(fileContent),
-        m_symbolTable(symbolTable),
-        m_errorContainer(errors) {}
+struct FunctorCreateLookup final {
+  FunctorCreateLookup(Session* session, CompileDesign* compileDesign,
+                      FileContent* fileContent, Design* design)
+      : m_session(session),
+        m_compileDesign(compileDesign),
+        m_fileContent(fileContent) {}
+
   int32_t operator()() const;
 
  private:
-  CompileDesign* const m_compileDesign;
-  FileContent* const m_fileData;
-  SymbolTable* const m_symbolTable;
-  ErrorContainer* const m_errorContainer;
+  Session* const m_session = nullptr;
+  CompileDesign* const m_compileDesign = nullptr;
+  FileContent* const m_fileContent = nullptr;
 };
 
-struct FunctorResolve {
-  FunctorResolve(CompileDesign* compileDesign, FileContent* fileContent,
-                 Design* design, SymbolTable* symbolTable,
-                 ErrorContainer* errors)
-      : m_compileDesign(compileDesign),
-        m_fileData(fileContent),
-        m_symbolTable(symbolTable),
-        m_errorContainer(errors) {}
+struct FunctorResolve final {
+  FunctorResolve(Session* session, CompileDesign* compileDesign,
+                 FileContent* fileContent, Design* design)
+      : m_session(session),
+        m_compileDesign(compileDesign),
+        m_fileContent(fileContent) {}
+
   int32_t operator()() const;
 
  private:
-  CompileDesign* const m_compileDesign;
-  FileContent* const m_fileData;
-  SymbolTable* const m_symbolTable;
-  ErrorContainer* const m_errorContainer;
+  Session* const m_session = nullptr;
+  CompileDesign* const m_compileDesign = nullptr;
+  FileContent* const m_fileContent = nullptr;
 };
 
 class ResolveSymbols : public CompileStep {
  public:
-  ResolveSymbols(CompileDesign* compileDesign, FileContent* fileContent,
-                 SymbolTable* symbolTable, ErrorContainer* errors)
-      : m_compileDesign(compileDesign),
-        m_fileData(fileContent),
-        m_symbolTable(symbolTable),
-        m_errorContainer(errors) {}
+  ResolveSymbols(Session* session, CompileDesign* compileDesign,
+                 FileContent* fileContent)
+      : m_session(session),
+        m_compileDesign(compileDesign),
+        m_fileContent(fileContent) {}
 
   void createFastLookup();
 
@@ -142,10 +135,9 @@ class ResolveSymbols : public CompileStep {
   bool bindDefinition_(NodeId objIndex,
                        const VObjectTypeUnorderedSet& bindTypes);
 
-  CompileDesign* const m_compileDesign;
-  FileContent* const m_fileData;
-  SymbolTable* const m_symbolTable;
-  ErrorContainer* const m_errorContainer;
+  Session* const m_session = nullptr;
+  CompileDesign* const m_compileDesign = nullptr;
+  FileContent* const m_fileContent = nullptr;
 };
 
 };  // namespace SURELOG

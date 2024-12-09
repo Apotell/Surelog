@@ -27,6 +27,7 @@
 #define SURELOG_PARSETREETRACELISTENER_H
 #pragma once
 
+#include <Surelog/Common/Session.h>
 #include <Surelog/SourceCompile/ParseTreeListener.h>
 
 #include <filesystem>
@@ -63,10 +64,10 @@ class ParseTreeTraceListener final : public ParseTreeListener {
   ~ParseTreeTraceListener() final = default;
 
   void enterSourceFile(SURELOG::PathId fileId) final {
-    m_strm << std::string(m_indent++ * 2, ' ') << __func__ << ": "
-           << SURELOG::PathIdPP(fileId) << std::endl;
+    FileSystem* const fileSystem = m_session->getFileSystem();
 
-    FileSystem* const fileSystem = FileSystem::getInstance();
+    m_strm << std::string(m_indent++ * 2, ' ') << __func__ << ": "
+           << SURELOG::PathIdPP(fileId, fileSystem) << std::endl;
 
     const std::string srcFilepath =
         fileSystem->toPlatformAbsPath(fileId).string();
@@ -76,8 +77,9 @@ class ParseTreeTraceListener final : public ParseTreeListener {
     }
   }
   void leaveSourceFile(SURELOG::PathId fileId) final {
+    FileSystem* const fileSystem = m_session->getFileSystem();
     m_strm << std::string(2 * --m_indent, ' ') << __func__ << ": "
-           << SURELOG::PathIdPP(fileId) << std::endl;
+           << SURELOG::PathIdPP(fileId, fileSystem) << std::endl;
   }
 
   std::string escaped(std::string_view str) const {
@@ -111,8 +113,8 @@ class ParseTreeTraceListener final : public ParseTreeListener {
   // clang-format on
 
  private:
-   std::ostream& m_strm;
-   size_t m_indent = 0;
+  std::ostream& m_strm;
+  size_t m_indent = 0;
 };
 }  // namespace SURELOG
 

@@ -38,42 +38,39 @@ typedef struct _ts PyThreadState;
 #endif
 
 namespace SURELOG {
-
 class AnalyzeFile;
-class CommandLineParser;
 class CompilationUnit;
 class Compiler;
-class ErrorContainer;
 class Library;
 class ParseFile;
 class PreprocessFile;
 class PythonListen;
-class SymbolTable;
+class Session;
 
 class CompileSourceFile final {
  public:
   friend PreprocessFile;
   enum Action { Preprocess, PostPreprocess, Parse, PythonAPI };
 
-  CompileSourceFile(PathId fileId, CommandLineParser* clp,
-                    ErrorContainer* errors, Compiler* compiler,
-                    SymbolTable* symbols, CompilationUnit* comp_unit,
-                    Library* library, std::string_view = "");
+  CompileSourceFile(Session* session, PathId fileId, Compiler* compiler,
+                    CompilationUnit* comp_unit, Library* library,
+                    std::string_view = "");
 
   // Chunk File:
-  CompileSourceFile(CompileSourceFile* parent, PathId ppResultFileId,
-                    uint32_t lineOffset);
+  CompileSourceFile(Session* session, CompileSourceFile* parent,
+                    PathId ppResultFileId, uint32_t lineOffset);
+  CompileSourceFile(const CompileSourceFile& orig);
+  ~CompileSourceFile();
 
   bool compile(Action action);
-  CompileSourceFile(const CompileSourceFile& orig);
-  virtual ~CompileSourceFile();
+
   Compiler* getCompiler() const { return m_compiler; }
-  ErrorContainer* getErrorContainer() const { return m_errors; }
-  CommandLineParser* getCommandLineParser() const {
-    return m_commandLineParser;
-  }
-  SymbolTable* getSymbolTable() const { return m_symbolTable; }
   Library* getLibrary() const { return m_library; }
+
+  Session* getSession() { return m_session; }
+  const Session* getSession() const { return m_session; }
+  void setSession(Session* session) { m_session = session; }
+
   void registerPP(PreprocessFile* pp) { m_ppIncludeVec.push_back(pp); }
   bool initParser();
   void setParser(ParseFile* pf) { m_parser = pf; }
@@ -96,9 +93,6 @@ class CompileSourceFile final {
   PyThreadState* getPythonInterp() { return m_interpState; }
 #endif
 
-  void setSymbolTable(SymbolTable* symbols);
-  void setErrorContainer(ErrorContainer* errors) { m_errors = errors; }
-
   // Get size of job approximated by size of file to process.
   uint64_t getJobSize(Action action) const;
 
@@ -116,15 +110,12 @@ class CompileSourceFile final {
   bool postPreprocess_();
 
   bool parse_();
-
   bool pythonAPI_();
 
+  Session* m_session = nullptr;
   PathId m_fileId;
-  CommandLineParser* m_commandLineParser = nullptr;
-  ErrorContainer* m_errors = nullptr;
   Compiler* m_compiler = nullptr;
   PreprocessFile* m_pp = nullptr;
-  SymbolTable* m_symbolTable = nullptr;
   std::vector<PreprocessFile*> m_ppIncludeVec;
   ParseFile* m_parser = nullptr;
   CompilationUnit* m_compilationUnit = nullptr;

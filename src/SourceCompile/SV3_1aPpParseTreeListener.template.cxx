@@ -23,6 +23,7 @@
 
 #include <Surelog/CommandLine/CommandLineParser.h>
 #include <Surelog/Common/FileSystem.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/FileContent.h>
 #include <Surelog/SourceCompile/CompileSourceFile.h>
 #include <Surelog/SourceCompile/MacroInfo.h>
@@ -35,14 +36,12 @@
 
 namespace SURELOG {
 SV3_1aPpParseTreeListener::SV3_1aPpParseTreeListener(
-    PreprocessFile *pp, antlr4::CommonTokenStream *tokens,
+    Session *session, PreprocessFile *pp, antlr4::CommonTokenStream *tokens,
     PreprocessFile::SpecialInstructions &instructions)
-    : SV3_1aPpTreeListenerHelper(pp, instructions, tokens) {
+    : SV3_1aPpTreeListenerHelper(session, pp, instructions, tokens) {
   if (m_pp->getFileContent() == nullptr) {
-    m_fileContent = new FileContent(
-        m_pp->getFileId(0), m_pp->getLibrary(),
-        m_pp->getCompileSourceFile()->getSymbolTable(),
-        m_pp->getCompileSourceFile()->getErrorContainer(), nullptr, BadPathId);
+    m_fileContent = new FileContent(session, m_pp->getFileId(0),
+                                    m_pp->getLibrary(), nullptr, BadPathId);
     m_pp->setFileContent(m_fileContent);
   } else {
     m_fileContent = m_pp->getFileContent();
@@ -121,8 +120,7 @@ void SV3_1aPpParseTreeListener::enterIfdef_directive(
   if (m_paused == 0) appendPreprocBegin();
 
   std::string macroName;
-  ParseUtils::LineColumn lc =
-      ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
+  LineColumn lc = ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
   if (antlr4::tree::TerminalNode *const simpleIdentifierNode =
           ctx->Simple_identifier()) {
     lc = ParseUtils::getLineColumn(simpleIdentifierNode);
@@ -150,7 +148,7 @@ void SV3_1aPpParseTreeListener::enterIfdef_directive(
   std::vector<std::string> args;
   PreprocessFile::SpecialInstructions instr = m_pp->m_instructions;
   instr.m_evaluate = PreprocessFile::SpecialInstructions::DontEvaluate;
-  const std::string macroBody = m_pp->getMacro(
+  const auto [result, macroBody, tokenPositions] = m_pp->getMacro(
       macroName, args, m_pp, 0, m_pp->getSourceFile()->m_loopChecker, instr);
 
   PreprocessFile::IfElseItem &item = m_pp->getStack().emplace_back();
@@ -191,8 +189,7 @@ void SV3_1aPpParseTreeListener::enterElsif_directive(
   if (m_paused == 0) appendPreprocBegin();
 
   std::string macroName;
-  ParseUtils::LineColumn lc =
-      ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
+  LineColumn lc = ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
   if (antlr4::tree::TerminalNode *const simpleIdentifierNode =
           ctx->Simple_identifier()) {
     lc = ParseUtils::getLineColumn(simpleIdentifierNode);
@@ -220,7 +217,7 @@ void SV3_1aPpParseTreeListener::enterElsif_directive(
   std::vector<std::string> args;
   PreprocessFile::SpecialInstructions instr = m_pp->m_instructions;
   instr.m_evaluate = PreprocessFile::SpecialInstructions::DontEvaluate;
-  const std::string macroBody = m_pp->getMacro(
+  const auto [result, macroBody, tokenPositions] = m_pp->getMacro(
       macroName, args, m_pp, 0, m_pp->getSourceFile()->m_loopChecker, instr);
 
   const bool previousBranchActive = isPreviousBranchActive();
@@ -243,8 +240,7 @@ void SV3_1aPpParseTreeListener::enterElse_directive(
 
   const bool previousBranchActive = isPreviousBranchActive();
   PreprocessFile::IfElseItem &item = m_pp->getStack().emplace_back();
-  ParseUtils::LineColumn lc =
-      ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
+  LineColumn lc = ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
   item.m_defined = !previousBranchActive;
   item.m_type = PreprocessFile::IfElseItem::ELSE;
   setCurrentBranchActivity(lc.first);
@@ -270,8 +266,7 @@ void SV3_1aPpParseTreeListener::enterEndif_directive(
   if (m_paused == 0) appendPreprocBegin();
 
   PreprocessFile::IfElseStack &stack = m_pp->getStack();
-  ParseUtils::LineColumn lc =
-      ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
+  LineColumn lc = ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
   if (!stack.empty()) {
     bool unroll = true;
     // if (ctx->One_line_comment()) {
@@ -312,13 +307,11 @@ void SV3_1aPpParseTreeListener::enterInclude_directive(
     return;
   }
 
-  FileSystem *const fileSystem = FileSystem::getInstance();
+  FileSystem *const fileSystem = m_session->getFileSystem();
 
-  ParseUtils::LineColumn slc =
-      ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
-  ParseUtils::LineColumn elc =
-      ParseUtils::getEndLineColumn(m_pp->getTokenStream(), ctx);
-  int32_t openingIndex = -1;
+  LineColumn slc = ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
+  LineColumn elc = ParseUtils::getEndLineColumn(m_pp->getTokenStream(), ctx);
+
   std::string fileName;
   if (antlr4::tree::TerminalNode *const stringNode = ctx->STRING()) {
     fileName = stringNode->getText();
@@ -342,20 +335,18 @@ void SV3_1aPpParseTreeListener::enterInclude_directive(
 
   fileName = StringUtils::unquoted(StringUtils::trim(fileName));
 
+  SymbolTable *const symbols = m_session->getSymbolTable();
+
   PathId fileId = fileSystem->locate(
-      fileName,
-      m_pp->getCompileSourceFile()->getCommandLineParser()->getIncludePaths(),
-      getSymbolTable());
+      fileName, m_session->getCommandLineParser()->getIncludePaths(), symbols);
   if (!fileId) {
     // If failed to locate, then assume the same folder as the includer file
     // and let it fail down the stream.
     fileId = fileSystem->getSibling(m_pp->getCompileSourceFile()->getFileId(),
-                                    fileName, getSymbolTable());
+                                    fileName, symbols);
   }
 
-  const SymbolId symbolId = getSymbolTable()->registerSymbol(fileName);
-
-  if (m_pp->getCompileSourceFile()->getCommandLineParser()->verbose()) {
+  if (m_session->getCommandLineParser()->verbose()) {
     Location loc(fileId);
     logError(ErrorDefinition::PP_PROCESSING_INCLUDE_FILE, loc, true);
   }
@@ -372,21 +363,8 @@ void SV3_1aPpParseTreeListener::enterInclude_directive(
     tmp = tmp->getIncluder();
   }
 
-  uint32_t lineSum = m_pp->getSumLineCount() + 1;
-  openingIndex = m_pp->getSourceFile()->addIncludeFileInfo(
-      IncludeFileInfo::Context::INCLUDE,  // context
-      1,                                  // sectionStartLine
-      symbolId,                           // sectionSymbolId
-      fileId,                             // sectionFileId
-      lineSum,                            // originalStartLine
-      slc.second,                         // originalStartColumn
-      lineSum + (elc.first - slc.first),  // originalEndLine
-      elc.second,                         // originalEndColumn
-      IncludeFileInfo::Action::PUSH       // action
-  );
-
   PreprocessFile *pp = new PreprocessFile(
-      fileId, m_pp->getCompileSourceFile(), m_instructions,
+      m_session, fileId, m_pp->getCompileSourceFile(), m_instructions,
       m_pp->getCompilationUnit(), m_pp->getLibrary(), m_pp, slc.first);
   m_pp->getCompileSourceFile()->registerPP(pp);
   if (!pp->preprocess()) {
@@ -396,25 +374,6 @@ void SV3_1aPpParseTreeListener::enterInclude_directive(
   if (ctx->macro_instance()) {
     m_append_paused_context = ctx;
     m_pp->pauseAppend();
-  }
-
-  lineSum = m_pp->getSumLineCount() + 1;
-  int32_t closingIndex = m_pp->getSourceFile()->addIncludeFileInfo(
-      IncludeFileInfo::Context::INCLUDE,  // context
-      slc.first,                          // sectionStartLine
-      BadSymbolId,                        // sectionSymbolId
-      m_pp->getFileId(slc.first),         // sectionFileId
-      lineSum,                            // originalStartLine
-      slc.second,                         // originalStartColumn
-      lineSum + (elc.first - slc.first),  // originalEndLine
-      elc.second,                         // originalEndColumn
-      IncludeFileInfo::Action::POP,       // action
-      openingIndex,                       // indexOpening
-      0                                   // indexClosing
-  );
-  if (openingIndex >= 0) {
-    m_pp->getSourceFile()->getIncludeFileInfo(openingIndex).m_indexClosing =
-        closingIndex;
   }
 }
 
@@ -475,10 +434,8 @@ void SV3_1aPpParseTreeListener::enterMacroInstanceWithArgs(
   if (m_inMacroDefinitionParsing) return;
 
   if (m_inActiveBranch) {
-    ParseUtils::LineColumn slc =
-        ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
-    ParseUtils::LineColumn elc =
-        ParseUtils::getEndLineColumn(m_pp->getTokenStream(), ctx);
+    LineColumn slc = ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
+    LineColumn elc = ParseUtils::getEndLineColumn(m_pp->getTokenStream(), ctx);
 
     std::string macroName;
     if (antlr4::tree::TerminalNode *const identifier =
@@ -507,34 +464,45 @@ void SV3_1aPpParseTreeListener::enterMacroInstanceWithArgs(
       m_pp->getSourceFile()->m_loopChecker.clear();
     }
 
-    std::string macroBody;
+    std::tuple<bool, std::string, std::vector<LineColumn>> evalResult;
     MacroInfo *const macroInfo = m_pp->getMacro(macroName);
     if (macroInfo != nullptr) {
-      uint32_t lineSum = m_pp->getSumLineCount() + 1;
-      openingIndex = m_pp->getSourceFile()->addIncludeFileInfo(
-          IncludeFileInfo::Context::MACRO,    // context
-          macroInfo->m_startLine,             // sectionStartLine
-          BadSymbolId,                        // sectionSymbolId
-          macroInfo->m_fileId,                // sectionFileId
-          lineSum,                            // originalStartLine
-          slc.second,                         // originalStartColumn
-          lineSum + (elc.first - slc.first),  // originalEndLine
-          elc.second,                         // originalEndColumn
-          IncludeFileInfo::Action::PUSH       // action
-      );
-      macroBody = m_pp->getMacro(macroName, actualArgs, m_pp, slc.first,
-                                 m_pp->getSourceFile()->m_loopChecker,
-                                 m_pp->m_instructions, macroInfo->m_startLine,
-                                 macroInfo->m_fileId);
+      if (m_pp == m_pp->getSourceFile()) {
+        PathId fileId = m_pp->getRawFileId();
+        if (!fileId && m_pp->getEmbeddedMacroCallFile()) {
+          fileId = m_pp->getEmbeddedMacroCallFile();
+          slc.first += m_pp->getEmbeddedMacroCallLine() - 1;
+          elc.first += m_pp->getEmbeddedMacroCallLine() - 1;
+        }
+
+        const LineColumn sourceLineColumnStart = m_pp->getCurrentPosition();
+        openingIndex = m_pp->getSourceFile()->addIncludeFileInfo(
+            /* context */ IncludeFileInfo::Context::MACRO,
+            /* action */ IncludeFileInfo::Action::PUSH,
+            /* macroDefinition */ macroInfo,
+            /* sectionFileId */ fileId,
+            /* sectionLine */ macroInfo->m_startLine,
+            /* sectionColumn */ macroInfo->m_bodyStartColumn,
+            /* sourceLine */ sourceLineColumnStart.first,
+            /* sourceColumn */ sourceLineColumnStart.second,
+            /* sectionSymbolId */ BadSymbolId,
+            /* symbolLine */ slc.first,
+            /* symbolColumn */ slc.second);
+      }
+      evalResult = m_pp->getMacro(macroName, actualArgs, m_pp, slc.first,
+                                  m_pp->getSourceFile()->m_loopChecker,
+                                  m_pp->m_instructions, macroInfo->m_fileId,
+                                  macroInfo->m_startLine);
     } else {
-      macroBody = m_pp->getMacro(macroName, actualArgs, m_pp, slc.first,
-                                 m_pp->getSourceFile()->m_loopChecker,
-                                 m_pp->m_instructions);
+      evalResult = m_pp->getMacro(macroName, actualArgs, m_pp, slc.first,
+                                  m_pp->getSourceFile()->m_loopChecker,
+                                  m_pp->m_instructions);
     }
 
     const std::string macroArgs = ctx->macro_actual_args()->getText();
     int32_t nbCRinArgs = std::count(macroArgs.begin(), macroArgs.end(), '\n');
 
+    std::string &macroBody = std::get<1>(evalResult);
     bool emptyMacroBody = false;
     if (macroBody.empty()) {
       emptyMacroBody = true;
@@ -544,52 +512,21 @@ void SV3_1aPpParseTreeListener::enterMacroInstanceWithArgs(
     m_pp->append(macroBody);
 
     if (openingIndex >= 0) {
-      PathId fileId;
-      uint32_t line = 0;
-      if (m_pp->getEmbeddedMacroCallFile()) {
-        fileId = m_pp->getEmbeddedMacroCallFile();
-        line = m_pp->getEmbeddedMacroCallLine() + slc.first;
-      } else {
-        fileId = m_pp->getFileId(slc.first);
-        line = slc.first;
-      }
-      uint32_t lineSum = m_pp->getSumLineCount() + 1;
-      int32_t closingIndex = -1;
-      if (emptyMacroBody) {
-        if (nbCRinArgs) lineSum -= nbCRinArgs;
-
-        closingIndex = m_pp->getSourceFile()->addIncludeFileInfo(
-            IncludeFileInfo::Context::MACRO,    // context
-            line,                               // sectionStartLine
-            BadSymbolId,                        // sectionSymbolId
-            fileId,                             // sectionFileId
-            lineSum,                            // originalStartLine
-            slc.second,                         // originalStartColumn
-            lineSum + (elc.first - slc.first),  // originalEndLine
-            elc.second,                         // originalEndColumn
-            IncludeFileInfo::Action::POP,       // action
-            openingIndex,                       // indexOpening
-            0                                   // indexClosing
-        );
-      } else {
-        closingIndex = m_pp->getSourceFile()->addIncludeFileInfo(
-            IncludeFileInfo::Context::MACRO,    // context
-            line + nbCRinArgs,                  // sectionStartLine
-            BadSymbolId,                        // sectionSymbolId
-            fileId,                             // sectionFileId
-            lineSum,                            // originalStartLine
-            slc.second,                         // originalStartColumn
-            lineSum + (elc.first - slc.first),  // originalEndLine
-            elc.second,                         // originalEndColumn
-            IncludeFileInfo::Action::POP,       // action
-            openingIndex,                       // indexOpening
-            0                                   // indexClosing
-        );
-      }
-      if (openingIndex >= 0) {
-        m_pp->getSourceFile()->getIncludeFileInfo(openingIndex).m_indexClosing =
-            closingIndex;
-      }
+      LineColumn sourceLineColumnEnd = m_pp->getCurrentPosition();
+      if (emptyMacroBody && nbCRinArgs) sourceLineColumnEnd.first -= nbCRinArgs;
+      m_pp->getSourceFile()->addIncludeFileInfo(
+          /* context */ IncludeFileInfo::Context::MACRO,
+          /* action */ IncludeFileInfo::Action::POP,
+          /* macroDefinition */ nullptr,
+          /* sectionFileId */ BadPathId,
+          /* sectionLine */ 0,
+          /* sectionColumn */ 0,
+          /* sourceLine */ sourceLineColumnEnd.first,
+          /* sourceColumn */ sourceLineColumnEnd.second,
+          /* sectionSymbolId */ BadSymbolId,
+          /* symbolLine */ elc.first,
+          /* symbolColumn */ elc.second,
+          /* indexOpposite */ openingIndex);
     }
   } else {
     const std::string macroArgs = ctx->macro_actual_args()->getText();
@@ -608,10 +545,8 @@ void SV3_1aPpParseTreeListener::enterMacroInstanceNoArgs(
   if (m_paused++ == 0) appendPreprocBegin();
   if (!(m_inActiveBranch && !m_inMacroDefinitionParsing)) return;
 
-  ParseUtils::LineColumn slc =
-      ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
-  ParseUtils::LineColumn elc =
-      ParseUtils::getEndLineColumn(m_pp->getTokenStream(), ctx);
+  LineColumn slc = ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
+  LineColumn elc = ParseUtils::getEndLineColumn(m_pp->getTokenStream(), ctx);
 
   std::string macroName;
   if (antlr4::tree::TerminalNode *const macroIdentifierNode =
@@ -634,39 +569,52 @@ void SV3_1aPpParseTreeListener::enterMacroInstanceNoArgs(
     m_pp->getSourceFile()->m_loopChecker.clear();
   }
 
-  std::string macroBody;
+  SymbolTable *const symbols = m_session->getSymbolTable();
+
   int32_t openingIndex = -1;
   std::vector<std::string> args;
   MacroInfo *const macroInfo = m_pp->getMacro(macroName);
+  std::tuple<bool, std::string, std::vector<LineColumn>> evalResult;
   if (macroInfo != nullptr) {
-    if (macroInfo->m_type == MacroInfo::WITH_ARGS) {
+    if (!macroInfo->m_arguments.empty()) {
       Location loc(m_pp->getFileId(slc.first), m_pp->getLineNb(slc.first),
-                   slc.second, getSymbolTable()->getId(macroName));
+                   slc.second, symbols->getId(macroName));
       Location extraLoc(macroInfo->m_fileId, macroInfo->m_startLine,
                         macroInfo->m_startColumn);
       logError(ErrorDefinition::PP_MACRO_PARENTHESIS_NEEDED, loc, extraLoc);
     }
 
-    uint32_t lineSum = m_pp->getSumLineCount() + 1;
-    openingIndex = m_pp->getSourceFile()->addIncludeFileInfo(
-        IncludeFileInfo::Context::MACRO,    // context
-        macroInfo->m_startLine,             // sectionStartLine
-        BadSymbolId,                        // sectionSymbolId
-        macroInfo->m_fileId,                // sectionFileId
-        lineSum,                            // originalStartLine
-        slc.second,                         // originalStartColumn
-        lineSum + (elc.first - slc.first),  // originalEndLine
-        elc.second,                         // originalEndColumn
-        IncludeFileInfo::Action::PUSH       // action
-    );
-    macroBody = m_pp->getMacro(
+    if (m_pp == m_pp->getSourceFile()) {
+      PathId fileId = m_pp->getRawFileId();
+      if (!fileId && m_pp->getEmbeddedMacroCallFile()) {
+        fileId = m_pp->getEmbeddedMacroCallFile();
+        slc.first += m_pp->getEmbeddedMacroCallLine() - 1;
+        elc.first += m_pp->getEmbeddedMacroCallLine() - 1;
+      }
+
+      const LineColumn sourceLineColumnStart = m_pp->getCurrentPosition();
+      openingIndex = m_pp->getSourceFile()->addIncludeFileInfo(
+          /* context */ IncludeFileInfo::Context::MACRO,
+          /* action */ IncludeFileInfo::Action::PUSH,
+          /* macroDefinition */ macroInfo,
+          /* sectionFileId */ fileId,
+          /* sectionLine */ macroInfo->m_startLine,
+          /* sectionColumn */ macroInfo->m_bodyStartColumn,
+          /* sourceLine */ sourceLineColumnStart.first,
+          /* sourceColumn */ sourceLineColumnStart.second,
+          /* sectionSymbolId */ BadSymbolId,
+          /* symbolLine */ slc.first,
+          /* symbolColumn */ slc.second);
+    }
+    evalResult = m_pp->getMacro(
         macroName, args, m_pp, slc.first, m_pp->getSourceFile()->m_loopChecker,
-        m_pp->m_instructions, macroInfo->m_startLine, macroInfo->m_fileId);
+        m_pp->m_instructions, macroInfo->m_fileId, macroInfo->m_startLine);
   } else {
-    macroBody = m_pp->getMacro(macroName, args, m_pp, slc.first,
-                               m_pp->getSourceFile()->m_loopChecker,
-                               m_pp->m_instructions);
+    evalResult = m_pp->getMacro(macroName, args, m_pp, slc.first,
+                                m_pp->getSourceFile()->m_loopChecker,
+                                m_pp->m_instructions);
   }
+  std::string &macroBody = std::get<1>(evalResult);
   if (macroBody.empty() && m_instructions.m_mark_empty_macro) {
     macroBody = SymbolTable::getEmptyMacroMarker();
   }
@@ -674,35 +622,20 @@ void SV3_1aPpParseTreeListener::enterMacroInstanceNoArgs(
   m_pp->append(macroBody);
 
   if (openingIndex >= 0) {
-    PathId fileId;
-    uint32_t line = 0;
-    if (m_pp->getEmbeddedMacroCallFile()) {
-      fileId = m_pp->getEmbeddedMacroCallFile();
-      line = m_pp->getEmbeddedMacroCallLine() + slc.first;
-    } else {
-      fileId = m_pp->getFileId(slc.first);
-      line = slc.first;
-    }
-    if (macroBody.find('\n') != std::string::npos) {
-      uint32_t lineSum = m_pp->getSumLineCount() + 1;
-      int32_t closingIndex = m_pp->getSourceFile()->addIncludeFileInfo(
-          IncludeFileInfo::Context::MACRO,    // context
-          line,                               // sectionStartLine
-          BadSymbolId,                        // sectionSymbolId
-          fileId,                             // sectionFileId
-          lineSum,                            // originalStartLine
-          slc.second,                         // originalStartColumn
-          lineSum + (elc.first - slc.first),  // originalEndLine
-          elc.second,                         // originalEndColumn
-          IncludeFileInfo::Action::POP,       // action
-          openingIndex,                       // indexOpening
-          0                                   // indexClosing
-      );
-      if (openingIndex >= 0) {
-        m_pp->getSourceFile()->getIncludeFileInfo(openingIndex).m_indexClosing =
-            closingIndex;
-      }
-    }
+    LineColumn sourceLineColumnEnd = m_pp->getCurrentPosition();
+    m_pp->getSourceFile()->addIncludeFileInfo(
+        /* context */ IncludeFileInfo::Context::MACRO,
+        /* action */ IncludeFileInfo::Action::POP,
+        /* macroDefinition */ nullptr,
+        /* sectionFileId */ BadPathId,
+        /* sectionLine */ 0,
+        /* sectionColumn */ 0,
+        /* sourceLine */ sourceLineColumnEnd.first,
+        /* sourceColumn */ sourceLineColumnEnd.second,
+        /* sectionSymbolId */ BadSymbolId,
+        /* symbolLine */ elc.first,
+        /* symbolColumn */ elc.second,
+        /* indexOpposite */ openingIndex);
   }
 }
 
@@ -712,23 +645,32 @@ void SV3_1aPpParseTreeListener::exitMacroInstanceNoArgs(
 }
 
 void SV3_1aPpParseTreeListener::recordMacro(
-    std::string_view name, std::string_view arguments,
+    std::string_view name, MacroInfo::DefType defType,
+    std::string_view arguments, antlr4::ParserRuleContext *ctx,
     antlr4::tree::TerminalNode *identifier, antlr4::ParserRuleContext *body) {
-  ParseUtils::LineColumn slc = ParseUtils::getLineColumn(identifier);
-  ParseUtils::LineColumn elc = ParseUtils::getEndLineColumn(identifier);
+  const LineColumn slc = ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
+  const LineColumn elc =
+      ParseUtils::getEndLineColumn(m_pp->getTokenStream(), ctx);
+  const LineColumn nslc = ParseUtils::getLineColumn(identifier);
 
+  LineColumn bslc;
   std::vector<std::string> bodyTokens;
+  std::vector<LineColumn> bodyTokenPositions;
   if (body != nullptr) {
+    bslc = ParseUtils::getLineColumn(m_pp->getTokenStream(), body);
+
     std::vector<antlr4::Token *> tokens = ParseUtils::getFlatTokenList(body);
     bodyTokens.reserve(tokens.size());
+    bodyTokenPositions.reserve(tokens.size());
     for (antlr4::Token *token : tokens) {
       bodyTokens.emplace_back(token->getText());
+      bodyTokenPositions.emplace_back(ParseUtils::getLineColumn(token));
     }
   }
 
-  m_pp->recordMacro(name, m_pp->getLineNb(slc.first), slc.second,
-                    m_pp->getLineNb(slc.first) + (elc.first - slc.first),
-                    elc.second, arguments, bodyTokens);
+  m_pp->defineMacro(name, defType, m_pp->getLineNb(slc.first), slc.second,
+                    m_pp->getLineNb(elc.first), elc.second, nslc.second,
+                    bslc.second, arguments, {}, bodyTokens, bodyTokenPositions);
 }
 
 void SV3_1aPpParseTreeListener::enterMacro_definition(
@@ -808,7 +750,8 @@ void SV3_1aPpParseTreeListener::enterMacro_definition(
   if (macroName[0] == '\\') svname.remove_prefix(1);
   macroName = StringUtils::rtrim(svname);
 
-  recordMacro(macroName, arguments, identifier, body);
+  recordMacro(macroName, MacroInfo::DefType::DEFINE, arguments, ctx, identifier,
+              body);
   m_inMacroDefinitionParsing = true;
 }
 

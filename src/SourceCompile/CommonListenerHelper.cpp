@@ -31,9 +31,11 @@ namespace SURELOG {
 
 using antlr4::ParserRuleContext;
 
-CommonListenerHelper::CommonListenerHelper(FileContent* file_content,
+CommonListenerHelper::CommonListenerHelper(Session* session,
+                                           FileContent* file_content,
                                            antlr4::CommonTokenStream* tokens)
-    : m_fileContent(file_content),
+    : m_session(session),
+      m_fileContent(file_content),
       m_tokens(tokens),
       m_escSeqReplaceRegex(kEscapeSequence),
       m_escSeqSearchRegex(StrCat(kEscapeSequence, "(.*?)", kEscapeSequence)) {}
@@ -108,6 +110,7 @@ NodeId CommonListenerHelper::addVObject(ParserRuleContext* ctx, SymbolId sym,
       // true file/line when splitting
       inserted->m_fileId = (*it)->m_fileId;
       inserted->m_line = (*it)->m_line;
+      inserted->m_endLine = (*it)->m_endLine;
       (*it)->m_node = NodeId(objectIndex);
       break;
     }

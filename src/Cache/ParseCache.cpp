@@ -24,6 +24,7 @@
 #include <Surelog/Cache/ParseCache.h>
 #include <Surelog/CommandLine/CommandLineParser.h>
 #include <Surelog/Common/FileSystem.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/Design.h>
 #include <Surelog/Design/DesignElement.h>
 #include <Surelog/Design/FileContent.h>
@@ -34,12 +35,11 @@
 #include <Surelog/SourceCompile/ParseFile.h>
 #include <Surelog/SourceCompile/SymbolTable.h>
 #include <Surelog/Utils/StringUtils.h>
+#include <Surelog/config.h>
 #include <capnp/serialize-packed.h>
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-
-#include "Surelog/config.h"
 
 #if defined(_MSC_VER)
 #include <io.h>
@@ -55,17 +55,16 @@ namespace SURELOG {
 static constexpr char kSchemaVersion[] = "1.4";
 static constexpr std::string_view UnknownRawPath = "<unknown>";
 
-ParseCache::ParseCache(ParseFile* parser) : m_parse(parser) {}
+ParseCache::ParseCache(Session* session, ParseFile* parser)
+    : Cache(session), m_parse(parser) {}
 
 PathId ParseCache::getCacheFileId(PathId ppFileId) const {
   if (!ppFileId) ppFileId = m_parse->getPpFileId();
   if (!ppFileId) return BadPathId;
 
-  FileSystem* const fileSystem = FileSystem::getInstance();
-  CommandLineParser* clp =
-      m_parse->getCompileSourceFile()->getCommandLineParser();
-  SymbolTable* const symbolTable =
-      m_parse->getCompileSourceFile()->getSymbolTable();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  CommandLineParser* const clp = m_session->getCommandLineParser();
 
   const std::string_view libName = m_parse->getLibrary()->getName();
 
@@ -74,26 +73,23 @@ PathId ParseCache::getCacheFileId(PathId ppFileId) const {
     // an output file. Instead it uses the source itself i.e. from the original
     // source location. Compute the "potential" Preprocessor output file so the
     // cache file location would be correct.
-    ppFileId = fileSystem->getPpOutputFile(clp->fileunit(), ppFileId, libName,
-                                           symbolTable);
+    ppFileId = fileSystem->getPpOutputFile(clp->fileUnit(), ppFileId, libName,
+                                           symbols);
   }
 
-  Precompiled* const prec = Precompiled::getSingleton();
-  const bool isPrecompiled = prec->isFilePrecompiled(ppFileId, symbolTable);
+  Precompiled* const precompiled = m_session->getPrecompiled();
+  const bool isPrecompiled = precompiled->isFilePrecompiled(ppFileId);
 
-  return fileSystem->getParseCacheFile(clp->fileunit(), ppFileId, libName,
-                                       isPrecompiled, symbolTable);
+  return fileSystem->getParseCacheFile(clp->fileUnit(), ppFileId, libName,
+                                       isPrecompiled, symbols);
 }
 
 bool ParseCache::checkCacheIsValid(PathId cacheFileId,
                                    const ::ParseCache::Reader& root) const {
   const ::Header::Reader& sourceHeader = root.getHeader();
 
-  SymbolTable* const symbolTable =
-      m_parse->getCompileSourceFile()->getSymbolTable();
-  Precompiled* const prec = Precompiled::getSingleton();
-
-  if (prec->isFilePrecompiled(m_parse->getPpFileId(), symbolTable)) {
+  Precompiled* const precompiled = m_session->getPrecompiled();
+  if (precompiled->isFilePrecompiled(m_parse->getPpFileId())) {
     // For precompiled, check only the signature & version (so using
     // BadPathId instead of the actual arguments)
     return checkIfCacheIsValid(sourceHeader, kSchemaVersion, BadPathId,
@@ -107,7 +103,7 @@ bool ParseCache::checkCacheIsValid(PathId cacheFileId,
 bool ParseCache::checkCacheIsValid(PathId cacheFileId) const {
   if (!cacheFileId) return false;
 
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  FileSystem* const fileSystem = m_session->getFileSystem();
   const std::string filepath =
       fileSystem->toPlatformAbsPath(cacheFileId).string();
 
@@ -145,11 +141,12 @@ void ParseCache::cacheErrors(::ParseCache::Builder builder,
                              const ErrorContainer* errorContainer,
                              const SymbolTable& sourceSymbols,
                              PathId subjectId) {
+  FileSystem* const fileSystem = m_session->getFileSystem();
   std::vector<Error> sourceErrors;
   sourceErrors.reserve(errorContainer->getErrors().size());
   for (const Error& error : errorContainer->getErrors()) {
     for (const Location& loc : error.getLocations()) {
-      if (loc.m_fileId == subjectId) {
+      if (loc.m_fileId.equals(subjectId, fileSystem)) {
         sourceErrors.emplace_back(error);
         break;
       }
@@ -177,7 +174,7 @@ void ParseCache::cacheDesignElements(::ParseCache::Builder builder,
                                      const FileContent* fC,
                                      SymbolTable& targetSymbols,
                                      const SymbolTable& sourceSymbols) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  FileSystem* const fileSystem = m_session->getFileSystem();
   const std::vector<DesignElement*>& sourceDesignElements =
       fC->getDesignElements();
   ::capnp::List<::DesignElement, ::capnp::Kind::STRUCT>::Builder
@@ -223,7 +220,8 @@ void ParseCache::restoreDesignElements(
     const ::capnp::List<::DesignElement, ::capnp::Kind::STRUCT>::Reader&
         sourceDesignElements,
     const SymbolTable& sourceSymbols) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  SymbolTable* const symbols = m_session->getSymbolTable();
 
   for (const ::DesignElement::Reader& sourceElement : sourceDesignElements) {
     const std::string_view elemName = sourceSymbols.getSymbol(
@@ -232,7 +230,7 @@ void ParseCache::restoreDesignElements(
         targetSymbols.registerSymbol(elemName),
         fileSystem->toPathId(fileSystem->remap(sourceSymbols.getSymbol(SymbolId(
                                  sourceElement.getFileId(), UnknownRawPath))),
-                             m_parse->getCompileSourceFile()->getSymbolTable()),
+                             symbols),
         static_cast<DesignElement::ElemType>(sourceElement.getType()),
         NodeId(sourceElement.getUniqueId()), sourceElement.getLine(),
         sourceElement.getColumn(), sourceElement.getEndLine(),
@@ -267,7 +265,7 @@ void ParseCache::restoreDesignElements(
 bool ParseCache::restore(PathId cacheFileId) {
   if (!cacheFileId) return false;
 
-  FileSystem* const fileSystem = FileSystem::getInstance();
+  FileSystem* const fileSystem = m_session->getFileSystem();
   const std::string filepath =
       fileSystem->toPlatformAbsPath(cacheFileId).string();
 
@@ -288,21 +286,18 @@ bool ParseCache::restore(PathId cacheFileId) {
     }
 
     SymbolTable sourceSymbols;
-    SymbolTable& targetSymbols =
-        *m_parse->getCompileSourceFile()->getSymbolTable();
-    ErrorContainer* const targetErrorContainer =
-        m_parse->getCompileSourceFile()->getErrorContainer();
+    SymbolTable& targetSymbols = *m_session->getSymbolTable();
+    ErrorContainer* const targetErrorContainer = m_session->getErrorContainer();
 
     restoreSymbols(sourceSymbols, root.getSymbols());
-    restoreErrors(m_parse->getCompileSourceFile()->getErrorContainer(),
-                  targetSymbols, root.getErrors(), sourceSymbols);
+    restoreErrors(targetErrorContainer, targetSymbols, root.getErrors(),
+                  sourceSymbols);
 
     // Restore design content (Verilog Design Elements)
     FileContent* fC = m_parse->getFileContent();
     if (fC == nullptr) {
-      fC = new FileContent(m_parse->getFileId(0), m_parse->getLibrary(),
-                           &targetSymbols, targetErrorContainer, nullptr,
-                           BadPathId);
+      fC = new FileContent(m_session, m_parse->getFileId(0),
+                           m_parse->getLibrary(), nullptr, BadPathId);
       m_parse->setFileContent(fC);
       m_parse->getCompileSourceFile()
           ->getCompiler()
@@ -323,13 +318,10 @@ bool ParseCache::restore(PathId cacheFileId) {
 }
 
 bool ParseCache::restore() {
-  CommandLineParser* clp =
-      m_parse->getCompileSourceFile()->getCommandLineParser();
+  CommandLineParser* const clp = m_session->getCommandLineParser();
 
-  Precompiled* const prec = Precompiled::getSingleton();
-  if (prec->isFilePrecompiled(
-          m_parse->getPpFileId(),
-          m_parse->getCompileSourceFile()->getSymbolTable())) {
+  Precompiled* const precompiled = m_session->getPrecompiled();
+  if (precompiled->isFilePrecompiled(m_parse->getPpFileId())) {
     if (!clp->precompiledCacheAllowed()) return false;
   } else {
     if (!clp->cacheAllowed()) return false;
@@ -340,16 +332,17 @@ bool ParseCache::restore() {
 }
 
 bool ParseCache::save() {
-  CommandLineParser* clp =
-      m_parse->getCompileSourceFile()->getCommandLineParser();
+  CommandLineParser* const clp = m_session->getCommandLineParser();
   if (!clp->writeCache()) return true;
+
+  ErrorContainer* const errorContainer = m_session->getErrorContainer();
 
   FileContent* const fC = m_parse->getFileContent();
   if (fC && (fC->getVObjects().size() > Cache::Capacity)) {
     clp->setCacheAllowed(false);
     Location loc(BadSymbolId);
     Error err(ErrorDefinition::CMD_CACHE_CAPACITY_EXCEEDED, loc);
-    m_parse->getCompileSourceFile()->getErrorContainer()->addError(err);
+    errorContainer->addError(err);
     return false;
   }
 
@@ -359,11 +352,8 @@ bool ParseCache::save() {
     return true;
   }
 
-  FileSystem* const fileSystem = FileSystem::getInstance();
-  ErrorContainer* const errorContainer =
-      m_parse->getCompileSourceFile()->getErrorContainer();
-  SymbolTable* const sourceSymbols =
-      m_parse->getCompileSourceFile()->getSymbolTable();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  SymbolTable* const sourceSymbols = m_session->getSymbolTable();
   SymbolTable targetSymbols;
 
   ::capnp::MallocMessageBuilder message;

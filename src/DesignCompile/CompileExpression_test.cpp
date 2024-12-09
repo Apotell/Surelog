@@ -14,6 +14,7 @@
  limitations under the License.
 */
 
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/FileContent.h>
 #include <Surelog/DesignCompile/CompileDesign.h>
 #include <Surelog/DesignCompile/CompileHelper.h>
@@ -33,9 +34,10 @@ using ::testing::ElementsAre;
 
 namespace {
 TEST(CompileExpression, ExprFromParseTree1) {
-  CompileHelper helper;
-  ParserHarness pharness;
-  CompilerHarness charness;
+  Session session;
+  CompileHelper helper(&session);
+  ParserHarness pharness(&session);
+  CompilerHarness charness(&session);
   std::unique_ptr<CompileDesign> compileDesign = charness.createCompileDesign();
   // Cannot use parameters assignments in next expression, there is no
   // elaboration performed here!
@@ -66,9 +68,10 @@ TEST(CompileExpression, ExprFromParseTree1) {
   }
 }
 TEST(CompileExpression, ExprFromParseTree2) {
-  CompileHelper helper;
-  ParserHarness pharness;
-  CompilerHarness charness;
+  Session session;
+  CompileHelper helper(&session);
+  ParserHarness pharness(&session);
+  CompilerHarness charness(&session);
   std::unique_ptr<CompileDesign> compileDesign = charness.createCompileDesign();
   // Cannot use parameters assignments in next expression, there is no
   // elaboration performed here!
@@ -96,9 +99,10 @@ TEST(CompileExpression, ExprFromParseTree2) {
   }
 }
 TEST(CompileExpression, ExprFromParseTree3) {
-  CompileHelper helper;
-  ParserHarness pharness;
-  CompilerHarness charness;
+  Session session;
+  CompileHelper helper(&session);
+  ParserHarness pharness(&session);
+  CompilerHarness charness(&session);
   std::unique_ptr<CompileDesign> compileDesign = charness.createCompileDesign();
   // Cannot use parameters assignments in next expression, there is no
   // elaboration performed here!
@@ -131,10 +135,11 @@ TEST(CompileExpression, ExprFromParseTree3) {
   }
 }
 TEST(CompileExpression, ExprFromPpTree) {
-  CompileHelper helper;
-  PreprocessHarness ppharness;
-  ParserHarness pharness;
-  CompilerHarness charness;
+  Session session;
+  CompileHelper helper(&session);
+  PreprocessHarness ppharness(&session);
+  ParserHarness pharness(&session);
+  CompilerHarness charness(&session);
   std::unique_ptr<CompileDesign> compileDesign = charness.createCompileDesign();
   const std::string text = ppharness.preprocess(
       "`define A {1'b1, 2'b10}\n"

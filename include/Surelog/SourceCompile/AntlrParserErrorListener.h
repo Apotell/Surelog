@@ -25,28 +25,20 @@
 #define SURELOG_ANTLRPARSERERRORLISTENER_H
 #pragma once
 
-#include <Surelog/Common/PathId.h>
 #include <ANTLRErrorListener.h>
+#include <Surelog/Common/PathId.h>
 
 #include <vector>
 
-
 namespace SURELOG {
-
 class ParseFile;
+class Session;
 
 class AntlrParserErrorListener : public antlr4::ANTLRErrorListener {
  public:
-  AntlrParserErrorListener(ParseFile *parser, bool watchDogOn,
-                           uint32_t lineOffset, PathId fileId)
-      : m_parser(parser),
-        m_reportedSyntaxError(0),
-        m_watchDogOn(watchDogOn),
-        m_barked(false),
-        m_lineOffset(lineOffset),
-        m_fileId(fileId) {}
-
-  ~AntlrParserErrorListener() override{};
+  AntlrParserErrorListener(Session *session, ParseFile *parser, bool watchDogOn,
+                           uint32_t lineOffset, PathId fileId);
+  ~AntlrParserErrorListener() override = default;
 
   void syntaxError(antlr4::Recognizer *recognizer,
                    antlr4::Token *offendingSymbol, size_t line,
@@ -69,11 +61,12 @@ class AntlrParserErrorListener : public antlr4::ANTLRErrorListener {
                                 size_t stopIndex, size_t prediction,
                                 antlr4::atn::ATNConfigSet *configs) override;
 
-  ParseFile *m_parser;
-  int m_reportedSyntaxError;
-  bool m_watchDogOn;
-  bool m_barked;
-  uint32_t m_lineOffset;
+  Session *const m_session = nullptr;
+  ParseFile *m_parser = nullptr;
+  int32_t m_reportedSyntaxError = 0;
+  bool m_watchDogOn = false;
+  bool m_barked = false;
+  uint32_t m_lineOffset = 0;
   PathId m_fileId;
   std::vector<std::string> m_fileContent;
 };

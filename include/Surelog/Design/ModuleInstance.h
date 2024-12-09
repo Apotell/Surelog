@@ -30,9 +30,9 @@
 #include <Surelog/Common/SymbolId.h>
 #include <Surelog/Design/ValuedComponentI.h>
 #include <Surelog/SourceCompile/VObjectTypes.h>
+#include <uhdm/Serializer.h>
 
 #include <string_view>
-#include <uhdm/Serializer.h>
 
 namespace SURELOG {
 
@@ -47,9 +47,10 @@ class SymbolTable;
 class ModuleInstance : public ValuedComponentI {
   SURELOG_IMPLEMENT_RTTI(ModuleInstance, ValuedComponentI)
  public:
-  ModuleInstance(DesignComponent* definition, const FileContent* fileContent,
-                 NodeId nodeId, ModuleInstance* parent,
-                 std::string_view instName, std::string_view moduleName);
+  ModuleInstance(Session* session, DesignComponent* definition,
+                 const FileContent* fileContent, NodeId nodeId,
+                 ModuleInstance* parent, std::string_view instName,
+                 std::string_view moduleName);
   ~ModuleInstance() override;
 
   typedef std::map<UHDM::module_array*, std::vector<ModuleInstance*>>
@@ -66,6 +67,7 @@ class ModuleInstance : public ValuedComponentI {
     m_boundInstance = boundToInstance;
   }
   DesignComponent* getDefinition() { return m_definition; }
+  const DesignComponent* getDefinition() const { return m_definition; }
   uint32_t getNbChildren() const { return m_allSubInstances.size(); }
   ModuleInstance* getChildren(uint32_t i) {
     if (i < m_allSubInstances.size()) {
@@ -130,15 +132,6 @@ class ModuleInstance : public ValuedComponentI {
   bool m_elaborated = false;
   std::set<std::string, StringViewCompare> m_overridenParams;
   ModuleArrayModuleInstancesMap m_moduleArrayModuleInstancesMap;
-};
-
-class ModuleInstanceFactory {
- public:
-  ModuleInstance* newModuleInstance(DesignComponent* definition,
-                                    const FileContent* fileContent,
-                                    NodeId nodeId, ModuleInstance* parent,
-                                    std::string_view instName,
-                                    std::string_view moduleName);
 };
 
 }  // namespace SURELOG

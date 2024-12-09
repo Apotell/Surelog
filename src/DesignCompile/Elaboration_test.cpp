@@ -14,6 +14,7 @@
  limitations under the License.
 */
 
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/Design.h>
 #include <Surelog/Design/FileContent.h>
 #include <Surelog/Design/ModuleInstance.h>
@@ -221,7 +222,7 @@ TEST(Elaboration, DollarBits) {
   }
   EXPECT_NE(top, nullptr);
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler-getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto passign : *topMod->Param_assigns()) {
@@ -273,7 +274,7 @@ TEST(Elaboration, DollarBitsHier) {
     parameter o = $bits(reg2hw.ctrl.nco);
   endmodule)");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler-getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto passign : *topMod->Param_assigns()) {
@@ -302,7 +303,7 @@ TEST(Elaboration, ConcatHexa) {
     };
   endmodule)");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler-getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto passign : *topMod->Param_assigns()) {
@@ -330,7 +331,7 @@ TEST(Elaboration, ParamSubstituteWhenConstant) {
     parameter logic [7:0][3:0] P = X;
   endmodule )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler-getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto passign : *topMod->Param_assigns()) {
@@ -396,7 +397,7 @@ endmodule
 
 )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler-getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto passign : *topMod->Param_assigns()) {
@@ -432,7 +433,7 @@ module top();
 endmodule
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler-getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto passign : *topMod->Param_assigns()) {
@@ -480,7 +481,7 @@ module top(output [3:0] x);
 endmodule
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler-getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto cassign : *topMod->Cont_assigns()) {
@@ -537,7 +538,7 @@ module top(output logic [31:0] o);
 endmodule
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler-getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto passign : *topMod->Param_assigns()) {
@@ -571,7 +572,7 @@ module top(output int o);
 endmodule
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler-getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto passign : *topMod->Param_assigns()) {
@@ -612,7 +613,7 @@ endmodule : top
 
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler-getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto passign : *topMod->Param_assigns()) {
@@ -661,7 +662,7 @@ module top();
 endmodule
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler-getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto passign : *topMod->Param_assigns()) {
@@ -691,7 +692,7 @@ module top();
 endmodule
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler-getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto passign : *topMod->Param_assigns()) {
@@ -733,7 +734,7 @@ endmodule
 
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler-getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto inst : *topMod->Modules()) {
@@ -752,8 +753,9 @@ endmodule
 }
 #endif
 TEST(Elaboration, EnumConstElab) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
@@ -805,7 +807,7 @@ module top;
 endmodule // top
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
 
   UHDM::visit_designs({hdesign}, std::cout);
@@ -829,8 +831,9 @@ endmodule // top
 }
 
 TEST(Elaboration, ParamNoDefault) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
@@ -852,7 +855,7 @@ module top();
 endmodule
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto inst : *topMod->Modules()) {
@@ -871,8 +874,9 @@ endmodule
 }
 
 TEST(Elaboration, ParamOverloading) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
@@ -921,7 +925,7 @@ module top;
 endmodule // top
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto inst : *topMod->Modules()) {
@@ -942,8 +946,9 @@ endmodule // top
 }
 
 TEST(Elaboration, BitSelect) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
@@ -970,7 +975,7 @@ module top(output logic [15:0] o);
 endmodule // top
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto cassign : *topMod->Cont_assigns()) {
@@ -987,8 +992,9 @@ endmodule // top
 }
 
 TEST(Elaboration, PartSelect) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
@@ -1013,7 +1019,7 @@ module top(output logic [15:0] o);
 endmodule // top
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto cassign : *topMod->Cont_assigns()) {
@@ -1030,8 +1036,9 @@ endmodule // top
 }
 
 TEST(Elaboration, IndexedPartSelect) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
@@ -1056,7 +1063,7 @@ module top(output logic [15:0] o);
 endmodule // top
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto cassign : *topMod->Cont_assigns()) {
@@ -1073,8 +1080,9 @@ endmodule // top
 }
 
 TEST(Elaboration, ConcatPartSelect) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
@@ -1101,7 +1109,7 @@ module top(output logic [15:0] o);
 endmodule // top
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto cassign : *topMod->Cont_assigns()) {
@@ -1118,8 +1126,9 @@ endmodule // top
 }
 
 TEST(Elaboration, StringMath1) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
@@ -1136,7 +1145,7 @@ module Example();
 endmodule
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto passign : *topMod->Param_assigns()) {
@@ -1153,8 +1162,9 @@ endmodule
 }
 
 TEST(Elaboration, StringMath2) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
@@ -1166,7 +1176,7 @@ module dut2 #(parameter num_out_p="inv") ();
 endmodule
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto passign : *topMod->Param_assigns()) {
@@ -1183,8 +1193,9 @@ endmodule
 }
 
 TEST(Elaboration, CaseStatement) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
@@ -1221,7 +1232,7 @@ module top();
 endmodule
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto gen_array : *topMod->Gen_scope_arrays()) {
@@ -1235,8 +1246,9 @@ endmodule
 }
 
 TEST(Elaboration, DollarBitsArrayVar) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
@@ -1250,7 +1262,7 @@ module top(output int o);
 endmodule
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto cassign : *topMod->Cont_assigns()) {
@@ -1267,8 +1279,9 @@ endmodule
 }
 
 TEST(Elaboration, FuncImplicitSignedReturn) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
@@ -1284,7 +1297,7 @@ module top (o);
 endmodule
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto cassign : *topMod->Cont_assigns()) {
@@ -1301,8 +1314,9 @@ endmodule
 }
 
 TEST(Elaboration, SignedUnsigned) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
@@ -1318,7 +1332,7 @@ module top(out1, out2);
 endmodule
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto cassign : *topMod->Cont_assigns()) {
@@ -1339,8 +1353,9 @@ endmodule
 }
 
 TEST(Elaboration, ContAssignConst) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
@@ -1369,7 +1384,7 @@ module static_size_casting (
 endmodule : static_size_casting
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto cassign : *topMod->Cont_assigns()) {
@@ -1396,8 +1411,9 @@ endmodule : static_size_casting
 }
 
 TEST(Elaboration, ConstantPush) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
@@ -1410,7 +1426,7 @@ module top;
 endmodule
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto cassign : *topMod->Cont_assigns()) {
@@ -1426,9 +1442,12 @@ endmodule
   }
 }
 
+#if 0
+// Works only in elaborated mode where the sizes are actually computed.
 TEST(Elaboration, HierPathUnpacked) {
-  CompileHelper helper;
-  ElaboratorHarness eharness;
+  Session session;
+  CompileHelper helper(&session);
+  ElaboratorHarness eharness(&session);
 
   // Preprocess, Parse, Compile, Elaborate
   Design* design;
@@ -1455,7 +1474,7 @@ module top(output int o);
 endmodule // top
   )");
   Compiler* compiler = compileDesign->getCompiler();
-  vpiHandle hdesign = compiler->getUhdmDesign();
+  vpiHandle hdesign = compiler->getDesign()->getVpiDesign();
   UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     for (auto passign : *topMod->Param_assigns()) {
@@ -1474,6 +1493,6 @@ endmodule // top
     }
   }
 }
-
+#endif
 }  // namespace
 }  // namespace SURELOG

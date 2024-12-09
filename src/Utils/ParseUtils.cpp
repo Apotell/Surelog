@@ -26,14 +26,14 @@
 
 namespace SURELOG {
 
-ParseUtils::LineColumn ParseUtils::getLineColumn(antlr4::Token* token) {
+LineColumn ParseUtils::getLineColumn(antlr4::Token* token) {
   const uint32_t lineNb = static_cast<uint32_t>(token->getLine());
   const uint16_t columnNb =
       static_cast<uint16_t>(token->getCharPositionInLine() + 1);
-  return ParseUtils::LineColumn(lineNb, columnNb);
+  return {lineNb, columnNb};
 }
 
-ParseUtils::LineColumn ParseUtils::getEndLineColumn(antlr4::Token* token) {
+LineColumn ParseUtils::getEndLineColumn(antlr4::Token* token) {
   const std::string text = token->getText();
   const size_t pos = text.rfind('\n');
   if (pos == std::string::npos) {
@@ -41,37 +41,36 @@ ParseUtils::LineColumn ParseUtils::getEndLineColumn(antlr4::Token* token) {
     const uint16_t columnNb = static_cast<uint16_t>(
         token->getCharPositionInLine() + token->getStopIndex() -
         token->getStartIndex() + 1 + 1);
-    return ParseUtils::LineColumn(lineNb, columnNb);
+    return {lineNb, columnNb};
   } else {
     const uint32_t lineNb = static_cast<uint32_t>(token->getLine()) +
                             std::count(text.begin(), text.end(), '\n');
     const uint16_t columnNb = static_cast<uint16_t>(text.length() - pos);
-    return ParseUtils::LineColumn(lineNb, columnNb);
+    return {lineNb, columnNb};
   }
 }
 
-ParseUtils::LineColumn ParseUtils::getLineColumn(
-    antlr4::tree::TerminalNode* node) {
+LineColumn ParseUtils::getLineColumn(antlr4::tree::TerminalNode* node) {
   return getLineColumn(node->getSymbol());
 }
 
-ParseUtils::LineColumn ParseUtils::getEndLineColumn(
-    antlr4::tree::TerminalNode* node) {
+LineColumn ParseUtils::getEndLineColumn(antlr4::tree::TerminalNode* node) {
   return getEndLineColumn(node->getSymbol());
 }
 
-ParseUtils::LineColumn ParseUtils::getLineColumn(
-    antlr4::CommonTokenStream* stream, antlr4::ParserRuleContext* context) {
+LineColumn ParseUtils::getLineColumn(antlr4::CommonTokenStream* stream,
+                                     antlr4::ParserRuleContext* context) {
   const antlr4::misc::Interval sourceInterval = context->getSourceInterval();
-  return (sourceInterval.a < 0) ? ParseUtils::LineColumn(0, 0)
-                                : getLineColumn(stream->get(sourceInterval.a));
+  return (sourceInterval.a == -1)
+             ? LineColumn(0, 0)
+             : getLineColumn(stream->get(sourceInterval.a));
 }
 
-ParseUtils::LineColumn ParseUtils::getEndLineColumn(
-    antlr4::CommonTokenStream* stream, antlr4::ParserRuleContext* context) {
+LineColumn ParseUtils::getEndLineColumn(antlr4::CommonTokenStream* stream,
+                                        antlr4::ParserRuleContext* context) {
   const antlr4::misc::Interval sourceInterval = context->getSourceInterval();
-  return (sourceInterval.b < 0)
-             ? ParseUtils::LineColumn(0, 0)
+  return (sourceInterval.b == -1)
+             ? LineColumn(0, 0)
              : getEndLineColumn(stream->get(sourceInterval.b));
 }
 

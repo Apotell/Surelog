@@ -22,12 +22,26 @@
  */
 
 #include <Surelog/Common/FileSystem.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/SourceCompile/AntlrParserErrorListener.h>
 #include <Surelog/SourceCompile/CompileSourceFile.h>
 #include <Surelog/SourceCompile/ParseFile.h>
 #include <Surelog/Utils/StringUtils.h>
 
 namespace SURELOG {
+
+AntlrParserErrorListener::AntlrParserErrorListener(Session *session,
+                                                   ParseFile *parser,
+                                                   bool watchDogOn,
+                                                   uint32_t lineOffset,
+                                                   PathId fileId)
+    : m_session(session),
+      m_parser(parser),
+      m_reportedSyntaxError(0),
+      m_watchDogOn(watchDogOn),
+      m_barked(false),
+      m_lineOffset(lineOffset),
+      m_fileId(fileId) {}
 
 void AntlrParserErrorListener::syntaxError(
     antlr4::Recognizer *recognizer, antlr4::Token *offendingSymbol, size_t line,
@@ -36,7 +50,8 @@ void AntlrParserErrorListener::syntaxError(
     m_barked = true;
     return;
   }
-  FileSystem *const fileSystem = FileSystem::getInstance();
+
+  FileSystem *const fileSystem = m_session->getFileSystem();
   if (m_fileContent.empty()) {
     fileSystem->readLines(m_fileId, m_fileContent);
   }
@@ -47,7 +62,9 @@ void AntlrParserErrorListener::syntaxError(
     if (!lineText.empty()) {
       lineText.push_back('\n');
       lineText.append(charPositionInLine, ' ');
-      StrAppend(&lineText, "^-- ", fileSystem->toPath(m_fileId), ":", line, ":",
+      StrAppend(&lineText, "^-- ",
+                fileSystem->toPath(m_parser->getFileId(line + m_lineOffset)),
+                ":", m_parser->getLineNb(line + m_lineOffset), ":",
                 charPositionInLine, ":");
     }
   }

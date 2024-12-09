@@ -81,6 +81,7 @@ class DataType : public RTTI {
   const FileContent* getFileContent() const { return m_fileContent; }
 
   NodeId getNodeId() const { return m_id; }
+  void setNodeId(NodeId nodeId) { m_id = nodeId; }
 
   std::string_view getName() const { return m_name; }
 

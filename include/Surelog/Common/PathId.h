@@ -18,8 +18,7 @@
 #define SURELOG_PATHID_H
 #pragma once
 
-#include "Surelog/config.h"
-
+#include <Surelog/config.h>
 #include <Surelog/Common/SymbolId.h>
 
 #include <cstdint>
@@ -47,13 +46,13 @@ typedef uint32_t RawPathId;
 inline static constexpr RawPathId BadRawPathId = 0;
 inline static constexpr std::string_view BadRawPath = BadRawSymbol;
 
+class FileSystem;
 class SymbolTable;
 
 class PathId final {
  public:
 #if SURELOG_PATHID_DEBUG_ENABLED
-  PathId()
-      : m_symbolTable(nullptr), m_id(BadRawPathId), m_value(BadRawPath) {}
+  PathId() : m_symbolTable(nullptr), m_id(BadRawPathId), m_value(BadRawPath) {}
   PathId(const SymbolTable *const symbolTable, RawPathId id,
          std::string_view value)
       : m_symbolTable(symbolTable), m_id(id), m_value(value) {}
@@ -66,8 +65,7 @@ class PathId final {
   PathId(const SymbolTable *const symbolTable, RawPathId id,
          std::string_view value)
       : m_symbolTable(symbolTable), m_id(id) {}
-  PathId(const PathId &rhs)
-      : PathId(rhs.m_symbolTable, rhs.m_id, BadRawPath) {}
+  PathId(const PathId &rhs) : PathId(rhs.m_symbolTable, rhs.m_id, BadRawPath) {}
   PathId(const SymbolTable *const symbolTable, SymbolId id)
       : PathId(symbolTable, (RawSymbolId)id, BadRawPath) {}
 #endif
@@ -93,6 +91,8 @@ class PathId final {
   explicit operator SymbolId() const { return SymbolId(m_id, BadRawPath); }
 #endif
 
+  bool equals(const PathId &rhs, FileSystem *fileSystem) const;
+
   bool operator==(const PathId &rhs) const;
   bool operator!=(const PathId &rhs) const { return !operator==(rhs); }
 
@@ -117,10 +117,12 @@ inline std::ostream &operator<<(std::ostream &strm, const PathId &pathId) {
   return strm << pathId.m_id;
 }
 
-struct PathIdPP final { // Pretty Printer
+struct PathIdPP final {  // Pretty Printer
   const PathId &m_id;
+  FileSystem *const m_fileSystem = nullptr;
 
-  explicit PathIdPP(const PathId &id) : m_id(id) {}
+  explicit PathIdPP(const PathId &id, FileSystem *fileSystem)
+      : m_id(id), m_fileSystem(fileSystem) {}
 };
 
 std::ostream &operator<<(std::ostream &strm, const PathIdPP &id);
@@ -131,12 +133,6 @@ struct PathIdHasher final {
   }
 };
 
-struct PathIdEqualityComparer final {
-  inline bool operator()(const PathId &lhs, const PathId &rhs) const {
-    return (lhs == rhs);
-  }
-};
-
 struct PathIdLessThanComparer final {
   inline bool operator()(const PathId &lhs, const PathId &rhs) const {
     return ((RawPathId)lhs < (RawPathId)rhs);
@@ -144,8 +140,6 @@ struct PathIdLessThanComparer final {
 };
 
 typedef std::set<PathId, PathIdLessThanComparer> PathIdSet;
-typedef std::unordered_set<PathId, PathIdHasher, PathIdEqualityComparer>
-    PathIdUnorderedSet;
 typedef std::vector<PathId> PathIdVector;
 
 }  // namespace SURELOG

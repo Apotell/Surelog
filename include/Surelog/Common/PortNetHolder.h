@@ -28,6 +28,7 @@
 // UHDM
 #include <uhdm/uhdm_forward_decl.h>
 
+#include <algorithm>
 #include <vector>
 
 namespace SURELOG {
@@ -38,8 +39,31 @@ class PortNetHolder {
  public:
   virtual ~PortNetHolder() {}  // virtual as used as interface
 
-  std::vector<Signal*>& getPorts() { return m_ports; }
-  std::vector<Signal*>& getSignals() { return m_signals; }
+  const std::vector<Signal*>& getPorts() const { return m_ports; }
+  const std::vector<Signal*>& getSignals() const { return m_signals; }
+
+  void addPort(Signal* signal) { m_ports.emplace_back(signal); }
+
+  void addSignal(Signal* signal) { m_signals.emplace_back(signal); }
+
+  bool removePort(Signal* signal) {
+    auto it = std::find(m_ports.begin(), m_ports.end(), signal);
+    if (it != m_ports.end()) {
+      m_ports.erase(it);
+      return true;
+    }
+    return false;
+  }
+
+  bool removeSignal(Signal* signal) {
+    auto it = std::find(m_signals.begin(), m_signals.end(), signal);
+    if (it != m_signals.end()) {
+      m_signals.erase(it);
+      return true;
+    }
+    return false;
+  }
+
   std::vector<UHDM::cont_assign*>* getContAssigns() const {
     return m_contAssigns;
   }
@@ -83,6 +107,14 @@ class PortNetHolder {
     m_task_funcs = task_funcs;
   }
 
+  std::vector<UHDM::task_func_decl*>* getTask_func_decls() const {
+    return m_task_func_decls;
+  }
+
+  void setTask_func_decls(std::vector<UHDM::task_func_decl*>* task_func_decls) {
+    m_task_func_decls = task_func_decls;
+  }
+
  protected:
   std::vector<Signal*> m_ports;
   std::vector<Signal*> m_signals;
@@ -92,6 +124,7 @@ class PortNetHolder {
   std::vector<UHDM::param_assign*>* m_param_assigns = nullptr;
   std::vector<UHDM::param_assign*>* m_orig_param_assigns = nullptr;
   std::vector<UHDM::task_func*>* m_task_funcs = nullptr;
+  std::vector<UHDM::task_func_decl*>* m_task_func_decls = nullptr;
   std::vector<UHDM::any*>* m_assertions = nullptr;
 };
 

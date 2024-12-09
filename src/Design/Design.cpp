@@ -21,6 +21,7 @@
  * Created on July 1, 2017, 1:23 PM
  */
 
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/DefParam.h>
 #include <Surelog/Design/Design.h>
 #include <Surelog/Design/DesignComponent.h>
@@ -34,10 +35,19 @@
 #include <Surelog/Testbench/ClassDefinition.h>
 #include <Surelog/Testbench/Program.h>
 #include <Surelog/Utils/StringUtils.h>
+#include <uhdm/Serializer.h>
+#include <uhdm/design.h>
 
 #include <queue>
 
 namespace SURELOG {
+
+Design::Design(Session* session, UHDM::Serializer& serializer,
+               LibrarySet* librarySet, ConfigSet* configSet)
+    : m_session(session),
+      m_uhdmDesign(serializer.MakeDesign()),
+      m_librarySet(librarySet),
+      m_configSet(configSet) {}
 
 Design::~Design() {
   for (const auto& elem : m_ppFileContents) {
@@ -100,7 +110,8 @@ std::string Design::reportInstanceTree() const {
   std::string tree;
   ModuleInstance* tmp;
   std::queue<ModuleInstance*> queue;
-  SymbolTable* symbols = m_errors->getSymbolTable();
+  ErrorContainer* const errors = m_session->getErrorContainer();
+  SymbolTable* const symbols = m_session->getSymbolTable();
   for (auto instance : m_topLevelModuleInstances) {
     queue.push(instance);
   }
@@ -125,11 +136,11 @@ std::string Design::reportInstanceTree() const {
     if (type == VObjectType::paUdp_instantiation) {
       type_s = "[UDP]";
       Error err(ErrorDefinition::ELAB_INSTANCE_PATH, loc);
-      m_errors->addError(err);
+      errors->addError(err);
     } else if (type == VObjectType::paModule_instantiation) {
       type_s = "[MOD]";
       Error err(ErrorDefinition::ELAB_INSTANCE_PATH, loc);
-      m_errors->addError(err);
+      errors->addError(err);
     } else if ((type == VObjectType::paCmos_switch_instance) ||
                (type == VObjectType::paEnable_gate_instance) ||
                (type == VObjectType::paMos_switch_instance) ||
@@ -140,23 +151,23 @@ std::string Design::reportInstanceTree() const {
                (type == VObjectType::paPull_gate_instance)) {
       type_s = "[GAT]";
       Error err(ErrorDefinition::ELAB_INSTANCE_PATH, loc);
-      m_errors->addError(err);
+      errors->addError(err);
     } else if (type == VObjectType::paInterface_instantiation) {
       type_s = "[I/F]";
       Error err(ErrorDefinition::ELAB_INTERFACE_INSTANCE_PATH, loc);
-      m_errors->addError(err);
+      errors->addError(err);
     } else if (type == VObjectType::paProgram_instantiation) {
       type_s = "[PRG]";
       Error err(ErrorDefinition::ELAB_PROGRAM_INSTANCE_PATH, loc);
-      m_errors->addError(err);
+      errors->addError(err);
     } else if (type == VObjectType::paModule_declaration) {
       type_s = "[TOP]";
       Error err(ErrorDefinition::ELAB_INSTANCE_PATH, loc);
-      m_errors->addError(err);
+      errors->addError(err);
     } else {
       type_s = "[SCO]";
       Error err(ErrorDefinition::ELAB_SCOPE_PATH, loc);
-      m_errors->addError(err);
+      errors->addError(err);
     }
 
     StrAppend(&tree, type_s, " ", def, undef, " ", tmp->getFullPathName(),
@@ -354,25 +365,28 @@ void Design::addDefParam_(std::vector<std::string>& path, const FileContent* fC,
     parent->setLocation(fC, nodeId);
     return;
   }
+  ErrorContainer* const errors = m_session->getErrorContainer();
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  FileSystem* const fileSystem = m_session->getFileSystem();
   std::map<std::string, DefParam*>::iterator itr =
       parent->getChildren().find(path[0]);
   if (itr != parent->getChildren().end()) {
     path.erase(path.begin());
     if (path.empty()) {
       DefParam* previous = (*itr).second;
-      if ((fC->getFileId(nodeId) !=
-           previous->getLocation()->getFileId(previous->getNodeId())) ||
+      if (!fC->getFileId(nodeId).equals(
+              previous->getLocation()->getFileId(previous->getNodeId()),
+              fileSystem) ||
           (fC->Line(nodeId) !=
            previous->getLocation()->Line(previous->getNodeId()))) {
         Location loc1(fC->getFileId(nodeId), fC->Line(nodeId),
                       fC->Column(nodeId),
-                      m_errors->getSymbolTable()->registerSymbol(
-                          previous->getFullName()));
+                      symbols->registerSymbol(previous->getFullName()));
         Location loc2(previous->getLocation()->getFileId(previous->getNodeId()),
                       previous->getLocation()->Line(previous->getNodeId()),
                       previous->getLocation()->Column(previous->getNodeId()));
         Error err(ErrorDefinition::ELAB_MULTI_DEFPARAM_ON_OBJECT, loc1, loc2);
-        m_errors->addError(err);
+        errors->addError(err);
       }
     }
     addDefParam_(path, fC, nodeId, value, (*itr).second);
@@ -385,6 +399,8 @@ void Design::addDefParam_(std::vector<std::string>& path, const FileContent* fC,
 }
 
 void Design::checkDefParamUsage(DefParam* parent) {
+  ErrorContainer* const errors = m_session->getErrorContainer();
+  SymbolTable* const symbols = m_session->getSymbolTable();
   if (parent == nullptr) {
     // Start by all the top defs of the trie
     for (const auto& top : m_defParams) {
@@ -403,13 +419,12 @@ void Design::checkDefParamUsage(DefParam* parent) {
         return;
       }
 
-      Location loc(
-          parent->getLocation()->getFileId(parent->getNodeId()),
-          parent->getLocation()->Line(parent->getNodeId()),
-          parent->getLocation()->Column(parent->getNodeId()),
-          m_errors->getSymbolTable()->registerSymbol(parent->getFullName()));
+      Location loc(parent->getLocation()->getFileId(parent->getNodeId()),
+                   parent->getLocation()->Line(parent->getNodeId()),
+                   parent->getLocation()->Column(parent->getNodeId()),
+                   symbols->registerSymbol(parent->getFullName()));
       Error err(ErrorDefinition::ELAB_UNMATCHED_DEFPARAM, loc);
-      m_errors->addError(err);
+      errors->addError(err);
     }
     for (const auto& param : parent->getChildren()) {
       checkDefParamUsage(param.second);
@@ -458,21 +473,17 @@ void Design::orderPackages() {
       PackageNamePackageDefinitionMultiMap::iterator pos =
           m_packageDefinitions.begin();
       std::advance(pos, i);
-      std::pair<const std::string, Package*>* name_pack;
-      name_pack = &(*pos);
 
-      if (packageName == name_pack->first) {
+      if (packageName == pos->first) {
         MultiDefCount::iterator itr = multiDefCount.find(packageName);
         if (itr == multiDefCount.end()) {
           multiDefCount.emplace(packageName, 1);
         } else {
-          int32_t level = (*itr).second;
-          (*itr).second++;
+          int32_t level = itr->second++;
           pos = m_packageDefinitions.begin();
           std::advance(pos, i + level);
-          name_pack = &(*pos);
         }
-        m_orderedPackageDefinitions[index] = name_pack->second;
+        m_orderedPackageDefinitions[index] = pos->second;
         index++;
         break;
       }
@@ -503,8 +514,9 @@ Package* Design::addPackageDefinition(std::string_view packageName,
 
 void Design::addClassDefinition(std::string_view className,
                                 ClassDefinition* classDef) {
-  m_classDefinitions.emplace(className, classDef);
-  m_uniqueClassDefinitions.emplace(className, classDef);
+  if (m_uniqueClassDefinitions.emplace(className, classDef).second) {
+    m_classDefinitions.emplace(className, classDef);
+  }
 }
 
 void Design::clearContainers() {
@@ -543,5 +555,13 @@ std::vector<BindStmt*> Design::getBindStmts(std::string_view targetName) {
 
 void Design::addBindStmt(std::string_view targetName, BindStmt* stmt) {
   m_bindMap.emplace(targetName, stmt);
+}
+
+vpiHandle Design::getVpiDesign() const {
+  if (m_uhdmDesign != nullptr) {
+    return m_uhdmDesign->GetSerializer()->MakeUhdmHandle(UHDM::uhdmdesign,
+                                                         m_uhdmDesign);
+  }
+  return nullptr;
 }
 }  // namespace SURELOG

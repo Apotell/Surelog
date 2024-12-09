@@ -26,26 +26,44 @@
 #include <Surelog/Testbench/Constraint.h>
 #include <Surelog/Testbench/CoverGroupDefinition.h>
 #include <Surelog/Testbench/Property.h>
+#include <uhdm/Serializer.h>
+#include <uhdm/class_defn.h>
 
 #include <string_view>
 
 namespace SURELOG {
 
-ClassDefinition::ClassDefinition(std::string_view name, Library* library,
-                                 DesignComponent* container,
+ClassDefinition::ClassDefinition(Session* session, std::string_view name,
+                                 Library* library, DesignComponent* container,
                                  const FileContent* fC, NodeId nodeId,
                                  ClassDefinition* parent,
-                                 UHDM::class_defn* uhdm_definition)
-    : DesignComponent(container ? container : fC, nullptr),
+                                 UHDM::Serializer& serializer)
+    : DesignComponent(session, container ? container : fC, nullptr),
       DataType(fC, nodeId, name,
                fC ? fC->Type(nodeId) : VObjectType::paClass_declaration),
       m_name(name),
       m_library(library),
       m_container(container),
-      m_parent(parent),
-      m_uhdm_definition(uhdm_definition) {
+      m_parent(parent) {
   m_category = DataType::Category::CLASS;
   addFileContent(fC, nodeId);
+
+  UHDM::class_defn* const instance = serializer.MakeClass_defn();
+  if (!name.empty()) instance->VpiName(name);
+  if (nodeId && (fC != nullptr)) {
+    fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::paCLASS),
+                            nodeId, instance);
+  }
+  if (container != nullptr) instance->VpiParent(container->getUhdmModel());
+  setUhdmModel(instance);
+}
+
+void ClassDefinition::setContainer(DesignComponent* container) {
+  getUhdmModel()->VpiParent(nullptr, true);
+  m_container = container;
+
+  if (m_container != nullptr)
+    getUhdmModel()->VpiParent(m_container->getUhdmModel());
 }
 
 uint32_t ClassDefinition::getSize() const {
@@ -152,8 +170,8 @@ void ClassDefinition::insertClass(ClassDefinition* p) {
 }
 
 CoverGroupDefinition* ClassDefinition::getCoverGroup(std::string_view name) {
-  CoverGroupMap::iterator itr = m_covergroups.find(name);
-  if (itr == m_covergroups.end()) {
+  CoverGroupMap::iterator itr = m_coverGroups.find(name);
+  if (itr == m_coverGroups.end()) {
     return nullptr;
   } else {
     return (*itr).second;
@@ -161,12 +179,12 @@ CoverGroupDefinition* ClassDefinition::getCoverGroup(std::string_view name) {
 }
 
 void ClassDefinition::insertCoverGroup(CoverGroupDefinition* p) {
-  m_covergroups.emplace(p->getName(), p);
+  m_coverGroups.emplace(p->getName(), p);
 }
 
 const DataType* ClassDefinition::getBaseClass(std::string_view name) const {
-  BaseClassMap::const_iterator itr = m_baseclasses.find(name);
-  if (itr == m_baseclasses.end()) {
+  BaseClassMap::const_iterator itr = m_baseClasses.find(name);
+  if (itr == m_baseClasses.end()) {
     return nullptr;
   } else {
     return (*itr).second;
@@ -174,7 +192,7 @@ const DataType* ClassDefinition::getBaseClass(std::string_view name) const {
 }
 
 void ClassDefinition::insertBaseClass(DataType* p) {
-  m_baseclasses.emplace(p->getName(), p);
+  m_baseClasses.emplace(p->getName(), p);
 }
 
 const DataType* ClassDefinition::getBaseDataType(std::string_view name) const {

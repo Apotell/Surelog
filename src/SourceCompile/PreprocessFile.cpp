@@ -24,6 +24,7 @@
 #include <Surelog/Cache/PPCache.h>
 #include <Surelog/CommandLine/CommandLineParser.h>
 #include <Surelog/Common/FileSystem.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/FileContent.h>
 #include <Surelog/ErrorReporting/ErrorContainer.h>
 #include <Surelog/ErrorReporting/Waiver.h>
@@ -36,6 +37,7 @@
 #include <Surelog/SourceCompile/SV3_1aPpParseTreeListener.h>
 #include <Surelog/SourceCompile/SV3_1aPpTreeShapeListener.h>
 #include <Surelog/SourceCompile/SymbolTable.h>
+#include <Surelog/Utils/ContainerUtils.h>
 #include <Surelog/Utils/StringUtils.h>
 #include <Surelog/Utils/Timer.h>
 #include <antlr4-runtime.h>
@@ -58,8 +60,8 @@ const char* const PreprocessFile::MacroNotDefined = "SURELOG_MACRO_NOT_DEFINED";
 const char* const PreprocessFile::PP__Line__Marking = "SURELOG__LINE__MARKING";
 const char* const PreprocessFile::PP__File__Marking = "SURELOG__FILE__MARKING";
 IncludeFileInfo PreprocessFile::s_badIncludeFileInfo(
-    IncludeFileInfo::Context::NONE, 0, BadSymbolId, BadPathId, 0, 0, 0, 0,
-    IncludeFileInfo::Action::NONE);
+    IncludeFileInfo::Context::NONE, IncludeFileInfo::Action::NONE, BadPathId, 0,
+    0, 0, 0, BadSymbolId, 0, 0);
 
 void PreprocessFile::SpecialInstructions::print() {
   std::cout << "Trace:" << (m_mute ? "Mute" : "DontMute")
@@ -128,10 +130,12 @@ void PreprocessFile::setDebug(int32_t level) {
 class PreprocessFile::DescriptiveErrorListener final
     : public antlr4::ANTLRErrorListener {
  public:
-  DescriptiveErrorListener(PreprocessFile* pp, PathId fileId)
-      : m_pp(pp), m_fileId(fileId) {}
-  DescriptiveErrorListener(PreprocessFile* pp, std::string_view macroContext)
-      : m_pp(pp), m_macroContext(macroContext) {}
+  DescriptiveErrorListener(Session* session, PreprocessFile* pp, PathId fileId)
+      : m_session(session), m_pp(pp), m_fileId(fileId) {}
+
+  DescriptiveErrorListener(Session* session, PreprocessFile* pp,
+                           std::string_view macroContext)
+      : m_session(session), m_pp(pp), m_macroContext(macroContext) {}
 
   void syntaxError(Recognizer* recognizer, Token* offendingSymbol, size_t line,
                    size_t charPositionInLine, const std::string& msg,
@@ -153,6 +157,7 @@ class PreprocessFile::DescriptiveErrorListener final
                                 size_t prediction,
                                 antlr4::atn::ATNConfigSet* configs) final;
 
+  Session* const m_session = nullptr;
   PreprocessFile* const m_pp;
   const PathId m_fileId;
   const std::string m_macroContext;
@@ -162,6 +167,7 @@ class PreprocessFile::DescriptiveErrorListener final
 void PreprocessFile::DescriptiveErrorListener::syntaxError(
     Recognizer* recognizer, Token* offendingSymbol, size_t line,
     size_t charPositionInLine, const std::string& msg, std::exception_ptr e) {
+  FileSystem* const fileSystem = m_session->getFileSystem();
   SymbolId msgId = m_pp->registerSymbol(msg);
 
   if (m_pp->m_macroInfo) {
@@ -178,7 +184,6 @@ void PreprocessFile::DescriptiveErrorListener::syntaxError(
     Error err(ErrorDefinition::PP_MACRO_SYNTAX_ERROR, loc, extraLoc);
     m_pp->addError(err);
   } else {
-    FileSystem* fileSystem = FileSystem::getInstance();
     if (m_fileContent.empty()) {
       fileSystem->readLines(m_fileId, m_fileContent);
     }
@@ -218,20 +223,22 @@ void PreprocessFile::DescriptiveErrorListener::reportContextSensitivity(
     Parser* recognizer, const antlr4::dfa::DFA& dfa, size_t startIndex,
     size_t stopIndex, size_t prediction, antlr4::atn::ATNConfigSet* configs) {}
 
-PreprocessFile::PreprocessFile(PathId fileId, CompileSourceFile* csf,
+PreprocessFile::PreprocessFile(Session* session, PathId fileId,
+                               CompileSourceFile* csf,
                                SpecialInstructions& instructions,
                                CompilationUnit* comp_unit, Library* library,
                                PreprocessFile* includer /* = nullptr */,
                                uint32_t includerLine /* = 0 */)
-    : m_fileId(fileId),
+    : m_session(session),
+      m_fileId(fileId),
       m_library(library),
       m_includer(includer),
       m_includerLine(includerLine),
       m_compileSourceFile(csf),
       m_lineCount(0),
-      m_listener(nullptr),
-      m_instructions(instructions),
       m_antlrParserHandler(nullptr),
+      m_instructions(instructions),
+      m_listener(nullptr),
       m_macroInfo(nullptr),
       m_compilationUnit(comp_unit),
       m_pauseAppend(false),
@@ -239,60 +246,60 @@ PreprocessFile::PreprocessFile(PathId fileId, CompileSourceFile* csf,
       m_embeddedMacroCallLine(0),
       m_fileContent(nullptr),
       m_verilogVersion(VerilogVersion::NoVersion) {
-  setDebug(m_compileSourceFile->m_commandLineParser->getDebugLevel());
-  resetIncludeFileInfo();
+  setDebug(m_session->getCommandLineParser()->getDebugLevel());
   if (m_includer != nullptr) {
     m_includer->m_includes.push_back(this);
   }
 }
 
-PreprocessFile::PreprocessFile(SymbolId macroId, CompileSourceFile* csf,
+PreprocessFile::PreprocessFile(Session* session, SymbolId macroId,
+                               CompileSourceFile* csf,
                                SpecialInstructions& instructions,
                                CompilationUnit* comp_unit, Library* library,
                                PreprocessFile* includer, uint32_t includerLine,
                                std::string_view macroBody, MacroInfo* macroInfo,
-                               uint32_t embeddedMacroCallLine,
-                               PathId embeddedMacroCallFile)
-    : m_macroId(macroId),
+                               PathId fileId, PathId embeddedMacroCallFile,
+                               uint32_t embeddedMacroCallLine)
+    : m_session(session),
+      m_fileId(fileId),
+      m_macroId(macroId),
       m_library(library),
       m_macroBody(macroBody),
       m_includer(includer),
       m_includerLine(includerLine),
       m_compileSourceFile(csf),
       m_lineCount(0),
-      m_listener(nullptr),
-      m_instructions(instructions),
       m_antlrParserHandler(nullptr),
+      m_instructions(instructions),
+      m_listener(nullptr),
       m_macroInfo(macroInfo),
       m_compilationUnit(comp_unit),
       m_pauseAppend(false),
       m_usingCachedVersion(false),
-      m_embeddedMacroCallLine(embeddedMacroCallLine),
       m_embeddedMacroCallFile(embeddedMacroCallFile),
+      m_embeddedMacroCallLine(embeddedMacroCallLine),
       m_fileContent(nullptr),
       m_verilogVersion(VerilogVersion::NoVersion) {
-  setDebug(m_compileSourceFile->m_commandLineParser->getDebugLevel());
+  setDebug(m_session->getCommandLineParser()->getDebugLevel());
   if (m_includer != nullptr) {
     m_includer->m_includes.push_back(this);
   }
 }
 
 void PreprocessFile::addError(Error& error) {
-  if (!m_instructions.m_mute)
-    getCompileSourceFile()->getErrorContainer()->addError(error);
+  if (!m_instructions.m_mute) m_session->getErrorContainer()->addError(error);
 }
 
 std::string_view PreprocessFile::getSymbol(SymbolId id) const {
-  return getCompileSourceFile()->getSymbolTable()->getSymbol(id);
+  return m_session->getSymbolTable()->getSymbol(id);
 }
 
 SymbolId PreprocessFile::getMacroSignature() {
-  FileSystem* const fileSystem = FileSystem::getInstance();
   std::ostringstream strm;
   strm << getSymbol(m_macroId);
   if (m_macroInfo) {
-    strm << "|" << fileSystem->toPath(m_macroInfo->m_fileId) << "|"
-         << std::to_string(m_macroInfo->m_startLine);
+    strm << "|" << m_session->getFileSystem()->toPath(m_macroInfo->m_fileId)
+         << "|" << std::to_string(m_macroInfo->m_startLine);
   }
   strm << "|" << m_macroBody;
   SymbolId sigId = registerSymbol(strm.str());
@@ -302,11 +309,11 @@ SymbolId PreprocessFile::getMacroSignature() {
 PreprocessFile::~PreprocessFile() {
   delete m_listener;
   if (!m_instructions.m_persist) {
-    for (auto& [name, macros] : m_macros) {
-      for (auto& macro : macros) {
-        delete macro;
-      }
+    for (auto& info : m_includeFileInfo) {
+      DeleteSequenceContainerPointersAndClear(&info.m_macroDefinitions);
+      info.m_macroDefinition = nullptr;
     }
+    m_includeFileInfo.clear();
   }
 }
 
@@ -323,35 +330,32 @@ PreprocessFile::AntlrParserHandler::~AntlrParserHandler() {
   delete m_inputStream;
 }
 
-static size_t LinesCount(std::string_view s) {
-  return std::count(s.begin(), s.end(), '\n');
-}
-
 bool PreprocessFile::preprocess() {
   m_result.clear();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  Precompiled* const precompiled = m_session->getPrecompiled();
+  CommandLineParser* const clp = m_session->getCommandLineParser();
+  const bool isPrecompiled = precompiled->isFilePrecompiled(m_fileId);
+
   std::string macroName;
-  CommandLineParser* clp = getCompileSourceFile()->getCommandLineParser();
-  FileSystem* const fileSystem = FileSystem::getInstance();
   Timer tmr;
-  bool precompiled = false;
   SymbolId macroSignatureId;
   if (m_macroBody.empty()) {
-    precompiled = Precompiled::getSingleton()->isFilePrecompiled(
-        m_fileId, getCompileSourceFile()->getSymbolTable());
-    PPCache cache(this);
+    PPCache cache(m_session, this);
     if (cache.restore(clp->lowMem() || clp->noCacheHash())) {
       m_usingCachedVersion = true;
       getCompilationUnit()->setCurrentTimeInfo(getFileId(0));
-      if (m_debugAstModel && !precompiled && m_fileId)
+      if (m_debugAstModel && !isPrecompiled)
         m_fileContent->printTree(std::cout);
-      if (precompiled || clp->noCacheHash()) {
+      if (isPrecompiled || clp->noCacheHash()) {
         if (clp->debugCache()) {
-          std::cout << "PP CACHE USED FOR: " << PathIdPP(m_fileId) << std::endl;
+          std::cout << "PP CACHE USED FOR: " << PathIdPP(m_fileId, fileSystem)
+                    << std::endl;
         }
         return true;
       }
       if (!clp->parseOnly() && !clp->lowMem()) {
-        resetIncludeFileInfo();
+        clearIncludeFileInfo();
       }
     }
   } else {
@@ -370,9 +374,12 @@ bool PreprocessFile::preprocess() {
     m_antlrParserHandler->m_clearAntlrCache = clp->lowMem();
     if (m_macroBody.empty()) {
       if (m_debugPP)
-        std::cout << "PP PREPROCESS FILE: " << PathIdPP(m_fileId) << std::endl;
+        std::cout << "PP PREPROCESS FILE: " << PathIdPP(m_fileId, fileSystem)
+                  << std::endl;
       std::istream& stream = fileSystem->openForRead(m_fileId);
       if (!stream.good()) {
+        fileSystem->close(stream);
+
         if (m_includer == nullptr) {
           Location loc(m_fileId);
           Error err(ErrorDefinition::PP_CANNOT_OPEN_FILE, loc);
@@ -387,20 +394,26 @@ bool PreprocessFile::preprocess() {
       }
       // Remove ^M (DOS) from text file
       std::string text;
+      std::streamsize length = 0;
+      if (fileSystem->filesize(m_fileId, &length)) {
+        text.reserve(length);
+      }
       char nonAscii = '\0';
-      char c = stream.get();
       int32_t lineNb = 1;
       int32_t columnNb = 0;
       int32_t lineNonAscii = 0;
       int32_t columnNonAscii = 0;
+      int32_t c = stream.get();
       while (stream.good()) {
-        if (c != 0x0D) {
-          if (isascii(c))
-            text += c;
-          else {
-            nonAscii = c;
-            lineNonAscii = lineNb;
-            columnNonAscii = columnNb;
+        if (c != '\r') {
+          if (std::isprint(c) || std::isspace(c)) {
+            text += static_cast<char>(c);
+          } else {
+            if (nonAscii == '\0') {
+              nonAscii = c;
+              lineNonAscii = lineNb;
+              columnNonAscii = columnNb;
+            }
             text += " ";
           }
         }
@@ -453,10 +466,11 @@ bool PreprocessFile::preprocess() {
     }
     if (m_macroBody.empty()) {
       m_antlrParserHandler->m_errorListener =
-          new PreprocessFile::DescriptiveErrorListener(this, m_fileId);
+          new PreprocessFile::DescriptiveErrorListener(m_session, this,
+                                                       m_fileId);
     } else {
       m_antlrParserHandler->m_errorListener =
-          new PreprocessFile::DescriptiveErrorListener(this,
+          new PreprocessFile::DescriptiveErrorListener(m_session, this,
                                                        "in macro " + macroName);
     }
     m_antlrParserHandler->m_pplexer =
@@ -468,7 +482,7 @@ bool PreprocessFile::preprocess() {
         new CommonTokenStream(m_antlrParserHandler->m_pplexer);
     m_antlrParserHandler->m_pptokens->fill();
 
-    if (getCompileSourceFile()->getCommandLineParser()->profile()) {
+    if (clp->profile()) {
       // m_profileInfo += "Tokenizer: " + std::to_string (tmr.elapsed_rounded
       // ())
       // + " " + fileName + "\n";
@@ -494,8 +508,7 @@ bool PreprocessFile::preprocess() {
       m_antlrParserHandler->m_pptree =
           m_antlrParserHandler->m_ppparser->top_level_rule();
 
-      if (m_macroBody.empty() &&
-          getCompileSourceFile()->getCommandLineParser()->profile()) {
+      if (m_macroBody.empty() && clp->profile()) {
         StrAppend(&m_profileInfo, "PP SSL Parsing: ",
                   StringUtils::to_string(tmr.elapsed_rounded()), "s ",
                   fileSystem->toPath(m_fileId), "\n");
@@ -514,8 +527,7 @@ bool PreprocessFile::preprocess() {
       m_antlrParserHandler->m_pptree =
           m_antlrParserHandler->m_ppparser->top_level_rule();
 
-      if (m_macroBody.empty() &&
-          getCompileSourceFile()->getCommandLineParser()->profile()) {
+      if (m_macroBody.empty() && clp->profile()) {
         StrAppend(&m_profileInfo, "PP LL  Parsing: ",
                   StringUtils::to_string(tmr.elapsed_rounded()), "s ",
                   fileSystem->toPath(m_fileId), "\n");
@@ -544,74 +556,121 @@ bool PreprocessFile::preprocess() {
 
   if (clp->parseTree()) {
     m_listener = new SV3_1aPpParseTreeListener(
-        this, m_antlrParserHandler->m_pptokens, m_instructions);
+        m_session, this, m_antlrParserHandler->m_pptokens, m_instructions);
   } else {
     m_listener = new SV3_1aPpTreeShapeListener(
-        this, m_antlrParserHandler->m_pptokens, m_instructions);
+        m_session, this, m_antlrParserHandler->m_pptokens, m_instructions);
+  }
+
+  int32_t indexOpposite = -1;
+  if (m_macroBody.empty() && (m_includer == nullptr)) {
+    indexOpposite = getSourceFile()->addIncludeFileInfo(
+        /* context */ IncludeFileInfo::Context::INCLUDE,
+        /* action */ IncludeFileInfo::Action::PUSH,
+        /* macroDefinition */ nullptr,
+        /* sectionFileId */ m_fileId,
+        /* sectionLine */ 1,
+        /* sectionColumn */ 1,
+        /* sourceLine */ 1,
+        /* sourceColumn */ 1,
+        /* sectionSymbolId */ BadSymbolId,
+        /* symbolLine */ 0,
+        /* symbolColumn */ 0);
   }
 
   // TODO: this leaks
   antlr4::tree::ParseTreeWalker::DEFAULT.walk(m_listener,
                                               m_antlrParserHandler->m_pptree);
-  if (m_debugAstModel && !precompiled && m_fileId)
-    m_fileContent->printTree(std::cout);
-  m_lineCount = LinesCount(m_result);
+
+  const auto [lastLine, lastColumn] = getCurrentPosition();
+  if (m_macroBody.empty() && (m_includer == nullptr)) {
+    getSourceFile()->addIncludeFileInfo(
+        /* context */ IncludeFileInfo::Context::INCLUDE,
+        /* action */ IncludeFileInfo::Action::POP,
+        /* macroDefinition */ nullptr,
+        /* sectionFileId */ m_fileId,
+        /* sectionLine */ 0,
+        /* sectionColumn */ 0,
+        /* sourceLine */ lastLine,
+        /* sourceColumn */ lastColumn,
+        /* sectionSymbolId */ BadSymbolId,
+        /* symbolLine */ 0,
+        /* symbolColumn */ 0,
+        /* indexOpposite */ indexOpposite);
+  }
+
+  if (m_debugAstModel && !isPrecompiled) m_fileContent->printTree(std::cout);
+  m_lineCount = std::count(m_result.cbegin(), m_result.cend(), '\n');
   return true;
 }
 
-uint32_t PreprocessFile::getSumLineCount() {
-  uint32_t total = m_lineCount;
-  if (m_includer) total += m_includer->getSumLineCount();
-  return total;
+LineColumn PreprocessFile::getCurrentPosition() const {
+  uint32_t line = 0;
+  uint16_t column = 0;
+  bool columnReady = false;
+  const PreprocessFile* pf = this;
+
+  while (pf != nullptr) {
+    line += pf->m_lineCount;
+    if (!columnReady && !pf->m_result.empty()) {
+      if (std::string::size_type p = pf->m_result.rfind('\n');
+          p != std::string::npos) {
+        column += pf->m_result.length() - p;
+        columnReady = true;
+      } else {
+        column += pf->m_result.length();
+      }
+    }
+    pf = pf->m_includer;
+  }
+
+  if (column == 0) column = 1;
+  return LineColumn(line + 1, column);
 }
 
 int32_t PreprocessFile::addIncludeFileInfo(
-    IncludeFileInfo::Context context, uint32_t sectionStartLine,
-    SymbolId sectionSymbolId, PathId sectionFileId, uint32_t originalStartLine,
-    uint32_t originalStartColumn, uint32_t originalEndLine,
-    uint32_t originalEndColumn, IncludeFileInfo::Action action,
-    int32_t indexOpening /* = 0 */, int32_t indexClosing /* = 0 */) {
-  int32_t index = m_includeFileInfo.size();
-  m_includeFileInfo.emplace_back(
-      context, sectionStartLine, sectionSymbolId, sectionFileId,
-      originalStartLine, originalStartColumn, originalEndLine,
-      originalEndColumn, action, indexOpening, indexClosing);
-  return index;
-}
-
-void PreprocessFile::resetIncludeFileInfo() {
-  clearIncludeFileInfo();
-  if ((!m_compileSourceFile->m_commandLineParser->parseOnly()) &&
-      (!m_compileSourceFile->m_commandLineParser->lowMem())) {
-    addIncludeFileInfo(IncludeFileInfo::Context::NONE, 0, BadSymbolId, m_fileId,
-                       0, 0, 0, 0, IncludeFileInfo::Action::POP, 0, 0);
+    IncludeFileInfo::Context context, IncludeFileInfo::Action action,
+    const MacroInfo* macroDefinition, PathId sectionFileId,
+    uint32_t sectionLine, uint16_t sectionColumn, uint32_t sourceLine,
+    uint16_t sourceColumn, SymbolId symbolId, uint32_t symbolLine,
+    uint16_t symbolColumn, int32_t indexOpposite /* = -1 */) {
+  const int32_t index = m_includeFileInfo.size();
+  m_includeFileInfo.emplace_back(context, action, macroDefinition,
+                                 sectionFileId, sectionLine, sectionColumn,
+                                 sourceLine, sourceColumn, symbolId, symbolLine,
+                                 symbolColumn, indexOpposite);
+  if ((action == IncludeFileInfo::Action::POP) && (indexOpposite >= 0)) {
+    m_includeFileInfo[indexOpposite].m_indexOpposite = index;
   }
+  return index;
 }
 
 void PreprocessFile::clearIncludeFileInfo() { m_includeFileInfo.clear(); }
 
 void PreprocessFile::append(std::string_view s) {
   if (!m_pauseAppend) {
-    m_lineCount += LinesCount(s);
+    m_lineCount += std::count(s.cbegin(), s.cend(), '\n');
     m_result.append(s);
   }
 }
 
-void PreprocessFile::recordMacro(std::string_view name, uint32_t startLine,
-                                 uint16_t startColumn, uint32_t endLine,
-                                 uint16_t endColumn, std::string_view arguments,
-                                 const std::vector<std::string>& tokens) {
+MacroInfo* PreprocessFile::defineMacro(
+    std::string_view name, MacroInfo::DefType defType, uint32_t startLine,
+    uint16_t startColumn, uint32_t endLine, uint16_t endColumn,
+    uint16_t nameStartColumn, uint16_t bodyStartColumn,
+    std::string_view arguments,
+    const std::vector<LineColumn>& argumentPositions,
+    const std::vector<std::string>& tokens,
+    const std::vector<LineColumn>& tokenPositions) {
   // *** Argument processing
-  std::string arguments_short(arguments);
+  std::string_view arguments_short = StringUtils::trim(arguments);
   // Remove (
-  size_t p = arguments_short.find('(');
-  if (p != std::string::npos) {
-    arguments_short.erase(p, 1);
+  if (!arguments_short.empty() && (arguments_short.front() == '(')) {
+    arguments_short.remove_prefix(1);
   }
   // Remove )
-  p = arguments_short.find(')');
-  if (p != std::string::npos) {
-    arguments_short.erase(p, 1);
+  if (!arguments_short.empty() && (arguments_short.back() == ')')) {
+    arguments_short.remove_suffix(1);
   }
   // Tokenize args
   std::vector<std::string> args;
@@ -626,53 +685,75 @@ void PreprocessFile::recordMacro(std::string_view name, uint32_t startLine,
               << std::endl;
   }
 
+  std::vector<std::string> body_tokens;
+  body_tokens.reserve(tokens.size());
+  std::vector<LineColumn> token_positions;
+  token_positions.reserve(tokenPositions.size());
+
+  for (size_t i = 0, ni = tokens.size(); i < ni; ++i) {
+    const std::string& tok = tokens[i];
+    const LineColumn& lc = tokenPositions[i];
+    if (tok == "``_``") {
+      body_tokens.emplace_back("``");
+      body_tokens.emplace_back("_");
+      body_tokens.emplace_back("``");
+      token_positions.emplace_back(lc.first, lc.second);
+      token_positions.emplace_back(lc.first, lc.second + 2);
+      token_positions.emplace_back(lc.first, lc.second + 3);
+    } else {
+      body_tokens.emplace_back(tok);
+      token_positions.emplace_back(lc);
+    }
+  }
+
+  StringUtils::replaceInTokenVector(body_tokens, "`\"", "\"");
+  StringUtils::replaceInTokenVector(body_tokens, "`\\`\"", "\\\"");
+
   // std::cout << "PP RECORDING MACRO: " << name  << ", FILE: " <<
   // getSymbol(getFileId(line)) << "" << std::endl;
 
-  MacroInfo* macroInfo = new MacroInfo(
-      name, arguments.empty() ? MacroInfo::NO_ARGS : MacroInfo::WITH_ARGS,
-      getFileId(startLine), startLine, startColumn, endLine, endColumn, args,
-      tokens);
-  MacroStorageRef::iterator itr = m_macros.find(name);
-  if (itr == m_macros.end()) {
-    itr = m_macros.emplace(name, std::vector<MacroInfo*>()).first;
+  MacroInfo* macroInfo =
+      new MacroInfo(name, defType, getFileId(startLine), startLine, startColumn,
+                    endLine, endColumn, nameStartColumn, bodyStartColumn, args,
+                    argumentPositions, body_tokens, token_positions);
+  m_compilationUnit->registerMacroInfo(macroInfo);
+  checkMacroArguments_(name, startLine, nameStartColumn, args, tokens);
+
+  int32_t pops = 0;
+  std::vector<IncludeFileInfo>& includeFileInfo =
+      getSourceFile()->m_includeFileInfo;
+  for (int32_t i = includeFileInfo.size() - 1; i >= 0; --i) {
+    IncludeFileInfo& info = includeFileInfo[i];
+    if (info.m_context == IncludeFileInfo::Context::INCLUDE) {
+      if (info.m_action == IncludeFileInfo::Action::PUSH) {
+        if (pops-- == 0) {
+          info.m_macroDefinitions.emplace_back(macroInfo);
+          break;
+        }
+      } else if (info.m_action == IncludeFileInfo::Action::POP) {
+        ++pops;
+      }
+    }
   }
-  itr->second.push_back(macroInfo);
-  m_compilationUnit->registerMacroInfo(name, macroInfo);
-  checkMacroArguments_(name, startLine, startColumn, args, tokens);
+
+  return macroInfo;
 }
 
-std::string PreprocessFile::reportIncludeInfo() const {
-  FileSystem* const fileSystem = FileSystem::getInstance();
-  std::ostringstream strm;
-  for (auto const& info : m_includeFileInfo) {
-    const char* const context =
-        (info.m_context == IncludeFileInfo::Context::INCLUDE) ? "inc" : "mac";
-    const char* const action =
-        (info.m_action == IncludeFileInfo::Action::PUSH) ? "in" : "out";
-    strm << context << " " << info.m_originalStartLine << ","
-         << info.m_originalStartColumn << ":" << info.m_originalEndLine << ","
-         << info.m_originalEndColumn << " " << getSymbol(info.m_sectionSymbolId)
-         << "^" << fileSystem->toPath(info.m_sectionFileId) << " "
-         << info.m_sectionStartLine << " " << action << std::endl;
-  }
-  return strm.str();
-}
-
-void PreprocessFile::recordMacro(std::string_view name, PathId fileId,
-                                 uint32_t startLine, uint16_t startColumn,
-                                 uint32_t endLine, uint16_t endColumn,
-                                 const std::vector<std::string>& arguments,
-                                 const std::vector<std::string>& tokens) {
-  MacroInfo* macroInfo = new MacroInfo(
-      name, arguments.empty() ? MacroInfo::NO_ARGS : MacroInfo::WITH_ARGS,
-      fileId, startLine, startColumn, endLine, endColumn, arguments, tokens);
-  MacroStorageRef::iterator itr = m_macros.find(name);
-  if (itr == m_macros.end()) {
-    itr = m_macros.emplace(name, std::vector<MacroInfo*>()).first;
-  }
-  itr->second.push_back(macroInfo);
-  m_compilationUnit->registerMacroInfo(name, macroInfo);
+MacroInfo* PreprocessFile::defineMacro(
+    std::string_view name, MacroInfo::DefType defType, PathId fileId,
+    uint32_t startLine, uint16_t startColumn, uint32_t endLine,
+    uint16_t endColumn, uint16_t nameStartColumn, uint16_t bodyStartColumn,
+    const std::vector<std::string>& arguments,
+    const std::vector<LineColumn>& argumentPositions,
+    const std::vector<std::string>& tokens,
+    const std::vector<LineColumn>& tokenPositions) {
+  // NOTE: This is called from PPCache so all the inputs are already processed.
+  MacroInfo* macroInfo =
+      new MacroInfo(name, defType, fileId, startLine, startColumn, endLine,
+                    endColumn, nameStartColumn, bodyStartColumn, arguments,
+                    argumentPositions, tokens, tokenPositions);
+  m_compilationUnit->registerMacroInfo(macroInfo);
+  return macroInfo;
 }
 
 void PreprocessFile::checkMacroArguments_(
@@ -689,7 +770,7 @@ void PreprocessFile::checkMacroArguments_(
     std::string tok(StringUtils::trim(s));
     tok = StringUtils::replaceAll(tok, "``", "");
     tok = StringUtils::replaceAll(tok, "`", "");
-    tokenSet.insert(tok);
+    tokenSet.emplace(tok);
   }
   for (const auto& s : argSet) {
     if (tokenSet.find(s) == tokenSet.end()) {
@@ -732,6 +813,22 @@ void PreprocessFile::checkMacroArguments_(
   }
 }
 
+std::string PreprocessFile::reportIncludeInfo() const {
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  std::ostringstream strm;
+  for (auto const& info : m_includeFileInfo) {
+    const char* const context =
+        (info.m_context == IncludeFileInfo::Context::INCLUDE) ? "inc" : "mac";
+    const char* const action =
+        (info.m_action == IncludeFileInfo::Action::PUSH) ? "in" : "out";
+    strm << context << " " << info.m_sourceLine << "," << info.m_symbolLine
+         << ":" << info.m_symbolColumn << " " << getSymbol(info.m_symbolId)
+         << "^" << fileSystem->toPath(info.m_sectionFileId) << " "
+         << info.m_sectionLine << " " << action << std::endl;
+  }
+  return strm.str();
+}
+
 PathId PreprocessFile::getIncluderFileId(uint32_t line) const {
   const PreprocessFile* tmp = this;
   while (tmp->m_includer != nullptr) {
@@ -760,11 +857,11 @@ void PreprocessFile::forgetPreprocessor_(PreprocessFile* inc,
 }
 
 SymbolId PreprocessFile::registerSymbol(std::string_view symbol) const {
-  return getCompileSourceFile()->getSymbolTable()->registerSymbol(symbol);
+  return m_session->getSymbolTable()->registerSymbol(symbol);
 }
 
 SymbolId PreprocessFile::getId(std::string_view symbol) const {
-  return getCompileSourceFile()->getSymbolTable()->getId(symbol);
+  return m_session->getSymbolTable()->getId(symbol);
 }
 
 std::string PreprocessFile::evaluateMacroInstance(
@@ -776,12 +873,14 @@ std::string PreprocessFile::evaluateMacroInstance(
   SpecialInstructions instructions(
       SpecialInstructions::Mute, SpecialInstructions::Mark,
       SpecialInstructions::Filter, checkMacroLoop, asisUndefMacro);
-  PreprocessFile* pp =
-      new PreprocessFile(BadSymbolId, m_compileSourceFile, instructions,
-                         m_includer ? m_includer->m_compilationUnit
-                                    : callingFile->m_compilationUnit,
-                         callingFile->m_library, /* includer */ nullptr,
-                         /* includerLine */ 0, macro_instance);
+  const LineColumn lineColumn = getCurrentPosition();
+  PreprocessFile* pp = new PreprocessFile(
+      m_session, BadSymbolId, m_compileSourceFile, instructions,
+      callingFile ? callingFile->m_compilationUnit
+                  : m_includer->m_compilationUnit,
+      callingFile ? callingFile->m_library : m_includer->m_library,
+      callingFile ? callingFile : m_includer, callingLine, macro_instance,
+      nullptr, BadPathId, m_fileId, lineColumn.first);
   if (!pp->preprocess()) {
     result = MacroNotDefined;
   } else {
@@ -801,16 +900,13 @@ static std::string_view getFirstNonEmptyToken(
   return kEmpty;
 }
 
-std::pair<bool, std::string> PreprocessFile::evaluateMacro_(
+std::tuple<bool, std::string, std::vector<LineColumn>>
+PreprocessFile::evaluateMacro_(
     std::string_view name, std::vector<std::string>& actual_args,
     PreprocessFile* callingFile, uint32_t callingLine, LoopCheck& loopChecker,
     MacroInfo* macroInfo, SpecialInstructions& instructions,
-    uint32_t embeddedMacroCallLine, PathId embeddedMacroCallFile) {
-  FileSystem* const fileSystem = FileSystem::getInstance();
-  std::string result;
-  bool found = false;
-  const std::vector<std::string>& formal_args = macroInfo->m_arguments;
-  const std::vector<std::string>& orig_body_tokens = macroInfo->m_tokens;
+    PathId embeddedMacroCallFile, uint32_t embeddedMacroCallLine) {
+  FileSystem* const fileSystem = m_session->getFileSystem();
 
   if (instructions.m_check_macro_loop) {
     bool loop = loopChecker.addEdge(callingFile->m_macroId, getId(name));
@@ -820,31 +916,21 @@ std::pair<bool, std::string> PreprocessFile::evaluateMacro_(
         MacroInfo* macroInfo2 = m_compilationUnit->getMacroInfo(getSymbol(id));
         if (macroInfo2) {
           Location loc(macroInfo2->m_fileId, macroInfo2->m_startLine,
-                       macroInfo2->m_startColumn, id);
+                       macroInfo2->m_nameStartColumn, id);
           Location exloc(macroInfo->m_fileId, macroInfo->m_startLine,
-                         macroInfo->m_startColumn, getId(name));
+                         macroInfo->m_nameStartColumn, getId(name));
           Error err(ErrorDefinition::PP_RECURSIVE_MACRO_DEFINITION, loc, exloc);
           addError(err);
-          return std::make_pair(false,
-                                std::string(SymbolTable::getBadSymbol()));
+          return {false, "", {}};
         }
       }
     }
   }
+  std::string result;
+  bool found = false;
+  const std::vector<std::string>& formal_args = macroInfo->m_arguments;
   // Don't modify the actual tokens of the macro, make a copy...
-  std::vector<std::string> body_tokens;
-  for (const std::string& tok : orig_body_tokens) {
-    if (tok == "``_``") {
-      body_tokens.push_back("``");
-      body_tokens.push_back("_");
-      body_tokens.push_back("``");
-    } else {
-      body_tokens.push_back(tok);
-    }
-  }
-
-  StringUtils::replaceInTokenVector(body_tokens, "`\"", "\"");
-  StringUtils::replaceInTokenVector(body_tokens, "`\\`\"", "\\\"");
+  std::vector<std::string> body_tokens(macroInfo->m_tokens);
 
   // argument substitution
   for (std::string& actual_arg : actual_args) {
@@ -859,7 +945,7 @@ std::pair<bool, std::string> PreprocessFile::evaluateMacro_(
   if ((actual_args.size() > formal_args.size() && (!m_instructions.m_mute))) {
     if (formal_args.empty() && (getFirstNonEmptyToken(body_tokens) == "(")) {
       Location loc(macroInfo->m_fileId, macroInfo->m_startLine,
-                   macroInfo->m_startColumn + name.size() + 1, getId(name));
+                   macroInfo->m_nameStartColumn + name.size() + 1, getId(name));
       Error err(ErrorDefinition::PP_MACRO_HAS_SPACE_BEFORE_ARGS, loc);
       addError(err);
     } else if ((!Waiver::macroArgCheck(name)) && !formal_args.empty()) {
@@ -868,13 +954,13 @@ std::pair<bool, std::string> PreprocessFile::evaluateMacro_(
       Location arg(BadPathId, 0, 0,
                    registerSymbol(std::to_string(actual_args.size())));
       Location def(macroInfo->m_fileId, macroInfo->m_startLine,
-                   macroInfo->m_startColumn,
+                   macroInfo->m_nameStartColumn,
                    registerSymbol(std::to_string(formal_args.size())));
-      std::vector<Location> locs = {arg, def};
-      Error err(ErrorDefinition::PP_TOO_MANY_ARGS_MACRO, loc, &locs);
+      Error err(ErrorDefinition::PP_TOO_MANY_ARGS_MACRO, {loc, arg, def});
       addError(err);
     }
   }
+
   bool incorrectArgNb = false;
   static const std::regex ws_re("[ \t]+");
   for (uint32_t i = 0; i < formal_args.size(); i++) {
@@ -945,21 +1031,32 @@ std::pair<bool, std::string> PreprocessFile::evaluateMacro_(
               registerSymbol(std::to_string(i + 1) + " (" + formal + ")");
           Location arg(id);
           Location def(macroInfo->m_fileId, macroInfo->m_startLine,
-                       macroInfo->m_startColumn, id);
-          std::vector<Location> locs = {arg, def};
-          Error err(ErrorDefinition::PP_MACRO_NO_DEFAULT_VALUE, loc, &locs);
+                       macroInfo->m_nameStartColumn, id);
+          Error err(ErrorDefinition::PP_MACRO_NO_DEFAULT_VALUE,
+                    {loc, arg, def});
           addError(err);
         }
         incorrectArgNb = true;
       }
     }
   }
-  if (incorrectArgNb) {
-    return std::make_pair(true, StrCat("`", name));
-  }
+
+  if (incorrectArgNb) return {true, StrCat("`", name), {}};
+
   std::string body;
-  for (const auto& token : body_tokens) {
+  std::vector<LineColumn> token_positions;
+  token_positions.reserve(macroInfo->m_tokenPositions.size());
+  uint32_t pos = 1;
+  uint32_t line = 0;
+  for (size_t i = 0, ni = body_tokens.size(); i < ni; ++i) {
+    const auto& token = body_tokens[i];
     body += token;
+    if ((line == 0) || (macroInfo->m_tokenPositions[i].first != line)) {
+      line = macroInfo->m_tokenPositions[i].first;
+      pos = 1;
+    }
+    token_positions.emplace_back(line, pos);
+    pos += token.length();
   }
   if (!actual_args.empty() && formal_args.empty()) {
     body += "(";
@@ -968,6 +1065,7 @@ std::pair<bool, std::string> PreprocessFile::evaluateMacro_(
   }
   // *** Body processing
   std::string body_short;
+  body_short.reserve(body.length());
   // Replace \\n by \n
   bool inString = false;
   char previous = '\0';
@@ -976,29 +1074,10 @@ std::pair<bool, std::string> PreprocessFile::evaluateMacro_(
       inString = !inString;
     }
     if ((previous == '\\') && (c == '\n') && (!inString)) {
-      body_short.erase(body_short.end() - 1);
-      body_short.push_back(c);
-    } else {
-      body_short.push_back(c);
+      body_short.pop_back();
     }
+    body_short += c;
     previous = c;
-  }
-  // Truncate trailing carriage returns (up to 2)
-
-  for (int32_t i = 0; i < 2; i++) {
-    if (!body_short.empty()) {
-      if (body_short.at(body_short.size() - 1) == '\n') {
-        body_short.erase(body_short.size() - 1);
-      } else {
-        break;
-      }
-    }
-  }
-
-  // If it is a Multiline macro, insert a \n at the end
-
-  if (body_short.find('\n') != std::string::npos) {
-    body_short.push_back('\n');
   }
 
   if (body_short.find('`') != std::string::npos) {
@@ -1016,18 +1095,18 @@ std::pair<bool, std::string> PreprocessFile::evaluateMacro_(
         SpecialInstructions::Filter, m_instructions.m_check_macro_loop,
         m_instructions.m_as_is_undefined_macro);
     PreprocessFile* pp = new PreprocessFile(
-        macroId, m_compileSourceFile, instructions,
+        m_session, macroId, m_compileSourceFile, instructions,
         callingFile ? callingFile->m_compilationUnit
                     : m_includer->m_compilationUnit,
         callingFile ? callingFile->m_library : m_includer->m_library,
         callingFile ? callingFile : m_includer, callingLine, body_short,
-        macroInfo, embeddedMacroCallLine - 1, embeddedMacroCallFile);
+        macroInfo, macroInfo->m_fileId, embeddedMacroCallFile,
+        embeddedMacroCallLine);
     getCompileSourceFile()->registerPP(pp);
     if (!pp->preprocess()) {
       result = MacroNotDefined;
     } else {
       std::string pp_result = pp->getPreProcessedFileContent();
-
       if (callingLine && callingFile && !callingFile->isMacroBody()) {
         pp_result = std::regex_replace(
             pp_result, std::regex(PP__File__Marking),
@@ -1044,7 +1123,7 @@ std::pair<bool, std::string> PreprocessFile::evaluateMacro_(
     result = body_short;
     found = true;
   }
-  return std::make_pair(found, result);
+  return {found, result, token_positions};
 }
 
 MacroInfo* PreprocessFile::getMacro(std::string_view name) {
@@ -1052,89 +1131,39 @@ MacroInfo* PreprocessFile::getMacro(std::string_view name) {
   return m_compilationUnit->getMacroInfo(name);
 }
 
-bool PreprocessFile::deleteMacro(std::string_view name,
-                                 std::set<PreprocessFile*>& visited) {
+const MacroStorage& PreprocessFile::getMacros() const {
+  return m_compilationUnit->getMacros();
+}
+
+MacroInfo* PreprocessFile::undefineMacro(std::string_view name,
+                                         uint32_t startLine,
+                                         uint16_t startColumn, uint32_t endLine,
+                                         uint16_t endColumn,
+                                         uint16_t nameStartColumn) {
   /*SymbolId macroId = */ registerSymbol(name);
   if (m_debugMacro)
     std::cout << "PP CALL TO deleteMacro for " << name << std::endl;
-  bool found = false;
-  // Try CommandLine overrides
-  // const std::map<SymbolId,std::string>& defines =
-  // m_compileSourceFile->m_commandLineParser->getDefineList();
-  // std::map<SymbolId,std::string>::const_iterator itMap =
-  // defines.find(macroId);
-  // if (itMap != defines.end())
-  //  {
-  //    result = (*itMap).second;
-  //    found = true;
-  //  }
 
-  // Try local file scope
-  if (found == false) {
-    MacroStorage::iterator itr = m_macros.find(name);
-    if (itr != m_macros.end()) {
-      for (auto& macro : itr->second) {
-        delete macro;
-      }
-      m_macros.erase(itr);
-      m_compilationUnit->deleteMacro(name);
-      found = true;
-    }
-  }
-  // Try in included files
-  if (found == false) {
-    for (PreprocessFile* pFile : m_includes) {
-      if (visited.insert(pFile).second) {
-        bool tmp = pFile->deleteMacro(name, visited);
-        if (tmp == true) {
-          found = true;
-          break;
-        }
-      }
-    }
-  }
-  // Try in file that included this file
-  if ((found == false) && (m_includer != nullptr)) {
-    if (visited.insert(m_includer).second) {
-      bool tmp = m_includer->deleteMacro(name, visited);
-      if (tmp == true) {
-        found = true;
-      }
-    }
-  }
-  return found;
+  return defineMacro(name, MacroInfo::DefType::UNDEFINE_ONE, startLine,
+                     startColumn, endLine, endColumn, nameStartColumn, 0, "",
+                     {}, {}, {});
 }
 
-void PreprocessFile::undefineAllMacros(std::set<PreprocessFile*>& visited) {
+MacroInfo* PreprocessFile::undefineAllMacros(uint32_t startLine,
+                                             uint16_t startColumn,
+                                             uint32_t endLine,
+                                             uint16_t endColumn) {
   if (m_debugMacro) std::cout << "PP CALL TO undefineAllMacros" << std::endl;
-  for (auto& [name, macros] : m_macros) {
-    for (auto& macro : macros) {
-      delete macro;
-    }
-  }
-  m_macros.clear();
-  m_compilationUnit->deleteAllMacros();
-
-  for (PreprocessFile* pFile : m_includes) {
-    if (visited.find(pFile) == visited.end()) {
-      visited.insert(pFile);
-      pFile->undefineAllMacros(visited);
-    }
-  }
-
-  if (m_includer) {
-    if (visited.find(m_includer) == visited.end()) {
-      visited.insert(m_includer);
-      m_includer->undefineAllMacros(visited);
-    }
-  }
+  return defineMacro("", MacroInfo::DefType::UNDEFINE_ALL, startLine,
+                     startColumn, endLine, endColumn, 0, 0, "", {}, {}, {});
 }
 
-std::string PreprocessFile::getMacro(
+std::tuple<bool, std::string, std::vector<LineColumn>> PreprocessFile::getMacro(
     std::string_view name, std::vector<std::string>& arguments,
     PreprocessFile* callingFile, uint32_t callingLine, LoopCheck& loopChecker,
-    SpecialInstructions& instructions, uint32_t embeddedMacroCallLine,
-    PathId embeddedMacroCallFile) {
+    SpecialInstructions& instructions, PathId embeddedMacroCallFile,
+    uint32_t embeddedMacroCallLine) {
+  CommandLineParser* const clp = m_session->getCommandLineParser();
   SymbolId macroId = registerSymbol(name);
   if (m_debugMacro) {
     std::cout << "PP CALL TO getMacro for " << name << "\n";
@@ -1146,8 +1175,7 @@ std::string PreprocessFile::getMacro(
   std::string result;
   bool found = false;
   // Try CommandLine overrides
-  const auto& defines =
-      m_compileSourceFile->m_commandLineParser->getDefineList();
+  const auto& defines = clp->getDefineList();
   auto itMap = defines.find(macroId);
   if (itMap != defines.end()) {
     result = (*itMap).second;
@@ -1159,29 +1187,28 @@ std::string PreprocessFile::getMacro(
     MacroInfo* info = m_compilationUnit->getMacroInfo(name);
     if (instructions.m_evaluate == SpecialInstructions::Evaluate) {
       if (info) {
-        std::pair<bool, std::string> evalResult = evaluateMacro_(
+        auto [succeeded, result, positions] = evaluateMacro_(
             name, arguments, callingFile, callingLine, loopChecker, info,
-            instructions, embeddedMacroCallLine, embeddedMacroCallFile);
-        found = evalResult.first;
-        result = evalResult.second;
-        result = std::regex_replace(result, std::regex("``"), "");
+            instructions, embeddedMacroCallFile, embeddedMacroCallLine);
+        if (succeeded) {
+          found = true;
+          result = std::regex_replace(result, std::regex("``"), "");
+          return {true, result, positions};
+        }
       }
-    } else {
-      if (info) {
-        found = true;
-        result.clear();
-      }
+    } else if (info) {
+      return {true, "", {}};
     }
   }
   if (found == false) {
     if (instructions.m_as_is_undefined_macro ==
         SpecialInstructions::AsIsUndefinedMacro) {
-      return StrCat("`", name);
+      return {true, StrCat("`", name), {}};
     } else {
-      return MacroNotDefined;
+      return {false, MacroNotDefined, {}};
     }
   } else {
-    return result;
+    return {true, result, {}};
   }
 }
 
@@ -1229,19 +1256,9 @@ uint32_t PreprocessFile::getLineNb(uint32_t line) {
   return line;
 }
 
-std::string PreprocessFile::getPreProcessedFileContent() {
-  FileSystem* const fileSystem = FileSystem::getInstance();
-  // If File is empty (Only CR) return an empty string
-  bool nonEmpty = false;
-  uint32_t pp_result_size = m_result.size();
-  for (uint32_t i = 0; i < pp_result_size; i++) {
-    if ((m_result[i] != '\n') && (m_result[i] != ' ')) {
-      nonEmpty = true;
-      break;
-    }
-  }
-  if (!nonEmpty) m_result.clear();
+const std::string& PreprocessFile::getPreProcessedFileContent() const {
   if (m_debugPPResult) {
+    FileSystem* const fileSystem = m_session->getFileSystem();
     std::string objName =
         m_macroBody.empty()
             ? std::string("file ").append(fileSystem->toPath(m_fileId))
@@ -1273,11 +1290,11 @@ void PreprocessFile::collectIncludedFiles(std::set<PreprocessFile*>& included) {
 }
 
 void PreprocessFile::saveCache() {
-  CommandLineParser* clp = getCompileSourceFile()->getCommandLineParser();
+  CommandLineParser* clp = m_session->getCommandLineParser();
   if (clp->parseOnly() || clp->lowMem() || clp->link()) return;
   if (m_macroBody.empty()) {
     if (!m_usingCachedVersion) {
-      PPCache cache(this);
+      PPCache cache(m_session, this);
       cache.save();
     }
   }

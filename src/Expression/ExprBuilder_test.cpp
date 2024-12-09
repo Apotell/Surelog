@@ -14,6 +14,7 @@
  limitations under the License.
 */
 
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/FileContent.h>
 #include <Surelog/Expression/ExprBuilder.h>
 #include <Surelog/SourceCompile/ParserHarness.h>
@@ -71,7 +72,9 @@ TEST(ExprBuilderTest, BasicValueOp) {
 }
 TEST(ExprBuilderTest, BuildFrom) {
   {
-    ExprBuilder builder;
+    Session session;
+    ExprBuilder builder(&session);
+
     std::unique_ptr<Value> v1(builder.fromVpiValue("HEX:A", 4));
     std::unique_ptr<Value> v2(builder.fromVpiValue("INT:10", 0));
     std::unique_ptr<Value> v3(builder.fromString("2'b11"));
@@ -89,7 +92,8 @@ TEST(ExprBuilderTest, BuildFrom) {
   }
 }
 TEST(ExprBuilderTest, ExprFromParseTree1) {
-  ExprBuilder builder;
+  Session session;
+  ExprBuilder builder(&session);
   ParserHarness harness;
   // Cannot use parameters assignments in next expression, there is no
   // elaboration performed here!
@@ -111,7 +115,8 @@ TEST(ExprBuilderTest, ExprFromParseTree1) {
   }
 }
 TEST(ExprBuilderTest, ExprFromParseTree2) {
-  ExprBuilder builder;
+  Session session;
+  ExprBuilder builder(&session);
   ParserHarness harness;
   // Cannot use parameters assignments in next expression, there is no
   // elaboration performed here!

@@ -445,12 +445,14 @@ def _generate_XXXTreeShapeListener_h(listener: str, antlr_definition_filepath: s
       'namespace SURELOG {',
       '',
       '  class ParseFile;',
+      '  class Session;',
       '',
       '  class SV3_1aTreeShapeListener : public SV3_1aParserBaseListener, public SV3_1aTreeShapeHelper {',
       '  private:',
       '',
       '  public:',
-      '    SV3_1aTreeShapeListener(ParseFile* pf, antlr4::CommonTokenStream* tokens, uint32_t lineOffset);',
+      '    SV3_1aTreeShapeListener(',
+      '       Session *session, ParseFile* pf, antlr4::CommonTokenStream* tokens, uint32_t lineOffset);',
       '    ~SV3_1aTreeShapeListener() override;',
       ''
     ])
@@ -467,10 +469,14 @@ def _generate_XXXTreeShapeListener_h(listener: str, antlr_definition_filepath: s
       '',
       'namespace SURELOG {',
       '',
+      '  class Session;',
+      '',
       '  class SV3_1aPpTreeShapeListener : public SV3_1aPpParserBaseListener , public SV3_1aPpTreeListenerHelper {',
       '',
       '  public:',
-      '    SV3_1aPpTreeShapeListener(PreprocessFile* pp, antlr4::CommonTokenStream* tokens, PreprocessFile::SpecialInstructions& instructions);',
+      '    SV3_1aPpTreeShapeListener(',
+      '        Session *session, PreprocessFile* pp, antlr4::CommonTokenStream* tokens,'
+      '        PreprocessFile::SpecialInstructions& instructions);',
       ''
     ])
 

@@ -30,11 +30,12 @@
 
 namespace SURELOG {
 
+class MacroInfo;
 class PreprocessFile;
 
 class PPCache : Cache {
  public:
-  explicit PPCache(PreprocessFile* pp);
+  PPCache(Session* session, PreprocessFile* pp);
 
   bool restore(bool errorsOnly);
   bool save();
@@ -73,7 +74,7 @@ class PPCache : Cache {
                     const SymbolTable& sourceSymbols);
 
   void cacheTimeInfos(::PPCache::Builder builder, SymbolTable& targetSymbols,
-                    const SymbolTable& sourceSymbols);
+                      const SymbolTable& sourceSymbols);
 
   void cacheLineTranslationInfos(::PPCache::Builder builder,
                                  SymbolTable& targetSymbols,
@@ -87,7 +88,8 @@ class PPCache : Cache {
 
   void restoreMacros(SymbolTable& targetSymbols,
                      const ::capnp::List<::Macro>::Reader& sourceMacros,
-                     const SymbolTable& sourceSymbols);
+                     const SymbolTable& sourceSymbols,
+                     std::vector<MacroInfo*>& macros);
 
   void restoreTimeInfos(
       SymbolTable& targetSymbols,
@@ -103,7 +105,7 @@ class PPCache : Cache {
   void restoreIncludeFileInfos(
       SymbolTable& targetSymbols,
       const ::capnp::List<::IncludeFileInfo>::Reader& sourceIncludeFileInfos,
-      const SymbolTable& sourceSymbols);
+      const SymbolTable& sourceSymbols, const std::vector<MacroInfo*>& macros);
 
  private:
   PreprocessFile* const m_pp = nullptr;

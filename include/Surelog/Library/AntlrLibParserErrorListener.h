@@ -31,12 +31,14 @@
 #include <exception>
 
 namespace SURELOG {
-
 class ParseLibraryDef;
+class Session;
 
 class AntlrLibParserErrorListener : public antlr4::ANTLRErrorListener {
  public:
-  explicit AntlrLibParserErrorListener(ParseLibraryDef *parser) : m_parser(parser) {}
+  explicit AntlrLibParserErrorListener(Session *session,
+                                       ParseLibraryDef *parser)
+      : m_session(session), m_parser(parser) {}
 
   ~AntlrLibParserErrorListener() override{};
 
@@ -62,7 +64,8 @@ class AntlrLibParserErrorListener : public antlr4::ANTLRErrorListener {
                                 antlr4::atn::ATNConfigSet *configs) override;
 
  private:
-  ParseLibraryDef *const m_parser;
+  Session *const m_session = nullptr;
+  ParseLibraryDef *const m_parser = nullptr;
 };
 
 };  // namespace SURELOG

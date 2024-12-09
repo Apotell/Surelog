@@ -34,8 +34,7 @@
 #include <string>
 
 namespace SURELOG {
-
-class SymbolTable;
+class Session;
 
 class VObject final {
  public:
@@ -47,8 +46,8 @@ class VObject final {
                 InvalidNodeId /* sibling */) {}
 
   VObject(SymbolId name, PathId fileId, VObjectType type, uint32_t line,
-          uint16_t column, uint32_t endLine, uint16_t endColumn,
-          NodeId parent, NodeId definition, NodeId child, NodeId sibling)
+          uint16_t column, uint32_t endLine, uint16_t endColumn, NodeId parent,
+          NodeId definition, NodeId child, NodeId sibling)
       : m_name(name),
         m_fileId(fileId),
         m_type(type),
@@ -63,8 +62,8 @@ class VObject final {
 
   static std::string_view getTypeName(VObjectType type);
 
-  std::string print(SymbolTable* symbols, NodeId uniqueId,
-                    PathId definitionFile, PathId printedFile) const;
+  std::string print(Session* session, NodeId uniqueId, PathId definitionFile,
+                    PathId printedFile) const;
 
   SymbolId m_name;
   PathId m_fileId;

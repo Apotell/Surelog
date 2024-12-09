@@ -28,13 +28,18 @@
 #include <Surelog/Common/Containers.h>
 #include <Surelog/Common/NodeId.h>
 #include <Surelog/Common/PathId.h>
+#include <uhdm/vpi_user.h>
 
 #include <map>
 #include <mutex>
 #include <vector>
 
-namespace SURELOG {
+namespace UHDM {
+class design;
+class Serializer;
+}  // namespace UHDM
 
+namespace SURELOG {
 class AnalyzeFile;
 class BindStmt;
 class Builtin;
@@ -52,6 +57,7 @@ class ParseCache;
 class ParseFile;
 class PPCache;
 class PreprocessFile;
+class Session;
 class SV3_1aPpTreeShapeListener;
 class SV3_1aTreeShapeListener;
 class SVLibShapeListener;
@@ -72,11 +78,9 @@ class Design final {
   friend class SVLibShapeListener;
 
  public:
-  Design(ErrorContainer* errors, LibrarySet* librarySet, ConfigSet* configSet)
-      : m_errors(errors), m_librarySet(librarySet), m_configSet(configSet) {}
-
+  Design(Session* session, UHDM::Serializer& serializer, LibrarySet* librarySet,
+         ConfigSet* configSet);
   Design(const Design& orig) = delete;
-
   ~Design();
 
   typedef std::vector<std::pair<PathId, FileContent*>> FileIdDesignContentMap;
@@ -126,8 +130,7 @@ class Design final {
 
   std::string reportInstanceTree() const;
 
-  void reportInstanceTreeStats(uint32_t& nbTopLevelModules,
-                               uint32_t& maxDepth,
+  void reportInstanceTreeStats(uint32_t& nbTopLevelModules, uint32_t& maxDepth,
                                uint32_t& numberOfInstances,
                                uint32_t& numberOfLeafInstances,
                                uint32_t& nbUndefinedModules,
@@ -153,8 +156,6 @@ class Design final {
 
   ClassDefinition* getClassDefinition(std::string_view name) const;
 
-  ErrorContainer* getErrorContainer() { return m_errors; }
-
   typedef std::multimap<std::string, BindStmt*, std::less<>> BindMap;
 
   BindMap& getBindMap() { return m_bindMap; }
@@ -162,6 +163,11 @@ class Design final {
   std::vector<BindStmt*> getBindStmts(std::string_view targetName);
 
   void addBindStmt(std::string_view targetName, BindStmt* stmt);
+
+  UHDM::design* getUhdmDesign() { return m_uhdmDesign; }
+  const UHDM::design* getUhdmDesign() const { return m_uhdmDesign; }
+
+  vpiHandle getVpiDesign() const;
 
  protected:
   // Thread-safe
@@ -206,12 +212,10 @@ class Design final {
   DefParam* getDefParam_(std::vector<std::string>& path,
                          DefParam* parent) const;
 
-  ErrorContainer* m_errors;
-
-  LibrarySet* m_librarySet;
-
-  ConfigSet* m_configSet;
-
+  Session* const m_session = nullptr;
+  UHDM::design* const m_uhdmDesign = nullptr;
+  LibrarySet* const m_librarySet = nullptr;
+  ConfigSet* const m_configSet = nullptr;
   FileIdDesignContentMap m_fileContents;
 
   FileIdDesignContentMap m_ppFileContents;

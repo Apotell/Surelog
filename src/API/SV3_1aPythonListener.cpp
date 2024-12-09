@@ -22,6 +22,7 @@
  */
 
 #include <Surelog/API/SV3_1aPythonListener.h>
+#include <Surelog/Common/Containers.h>
 #include <Surelog/ErrorReporting/ErrorContainer.h>
 #include <Surelog/SourceCompile/PythonListen.h>
 #include <Surelog/SourceCompile/SymbolTable.h>
@@ -44,8 +45,7 @@ SV3_1aPythonListener::~SV3_1aPythonListener() {}
 void SV3_1aPythonListener::logError(ErrorDefinition::ErrorType error,
                                     antlr4::ParserRuleContext* ctx,
                                     std::string object, bool printColumn) {
-  ParseUtils::LineColumn lineCol =
-      ParseUtils::getLineColumn(getTokenStream(), ctx);
+  LineColumn lineCol = ParseUtils::getLineColumn(getTokenStream(), ctx);
 
   Location loc(
       m_pl->getParseFile()->getFileId(lineCol.first + m_lineOffset),

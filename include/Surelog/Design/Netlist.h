@@ -36,6 +36,7 @@ namespace SURELOG {
 
 class ModuleInstance;
 class ModPort;
+class Session;
 
 class Netlist {
  public:
@@ -111,7 +112,7 @@ class Netlist {
   ModuleInstance* getParent() { return m_parent; }
 
  private:
-  ModuleInstance* const m_parent;
+  ModuleInstance* const m_parent = nullptr;
 
   // members of the netlist
   std::vector<UHDM::interface_inst*>* m_interfaces = nullptr;

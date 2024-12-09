@@ -23,10 +23,13 @@
 
 #include <Surelog/CommandLine/CommandLineParser.h>
 #include <Surelog/Common/FileSystem.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/FileContent.h>
+#include <Surelog/Design/Signal.h>
 #include <Surelog/DesignCompile/CompileClass.h>
 #include <Surelog/DesignCompile/CompileDesign.h>
 #include <Surelog/ErrorReporting/ErrorContainer.h>
+#include <Surelog/Library/Library.h>
 #include <Surelog/SourceCompile/Compiler.h>
 #include <Surelog/SourceCompile/SymbolTable.h>
 #include <Surelog/Testbench/ClassDefinition.h>
@@ -37,21 +40,33 @@
 #include <Surelog/Utils/StringUtils.h>
 
 // UHDM
+#include <uhdm/attribute.h>
 #include <uhdm/class_defn.h>
+#include <uhdm/constraint.h>
+#include <uhdm/expr.h>
+#include <uhdm/extends.h>
+#include <uhdm/function.h>
+#include <uhdm/function_decl.h>
+#include <uhdm/ref_typespec.h>
+#include <uhdm/task.h>
+#include <uhdm/task_decl.h>
 
 #include <stack>
 
 namespace SURELOG {
 int32_t FunctorCompileClass::operator()() const {
   CompileClass* instance =
-      new CompileClass(m_compileDesign, m_class, m_design, m_symbols, m_errors);
-  instance->compile();
+      new CompileClass(m_session, m_compileDesign, m_class, m_design);
+  instance->compile(Elaborate::No, Reduce::No);
   delete instance;
   return true;
 }
 
-bool CompileClass::compile() {
+bool CompileClass::compile(Elaborate elaborate, Reduce reduce) {
   if (m_class->m_fileContents.empty()) return true;
+
+  m_helper.setElaborate(elaborate);
+  m_helper.setReduce(reduce);
 
   const FileContent* fC = m_class->m_fileContents[0];
   if (fC == nullptr) return true;
@@ -80,21 +95,20 @@ bool CompileClass::compile() {
     }
   }
 
-  if (m_class->m_uhdm_definition->VpiFullName().empty())
-    m_class->m_uhdm_definition->VpiFullName(fullName);
-  Location loc(fC->getFileId(nodeId), fC->Line(nodeId), fC->Column(nodeId),
-               m_symbols->registerSymbol(fullName));
+  UHDM::class_defn* const defn = m_class->getUhdmModel<UHDM::class_defn>();
+  const UHDM::ScopedScope scopedScope(defn);
 
-  Error err1(ErrorDefinition::COMP_COMPILE_CLASS, loc);
-  ErrorContainer* errors =
-      new ErrorContainer(m_symbols, m_errors->getLogListener());
-  errors->registerCmdLine(
-      m_compileDesign->getCompiler()->getCommandLineParser());
-  errors->addError(err1);
-  errors->printMessage(
-      err1,
-      m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
-  delete errors;
+  if (defn->VpiFullName().empty()) defn->VpiFullName(fullName);
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  CommandLineParser* const clp = m_session->getCommandLineParser();
+
+  if (ErrorContainer* errors = new ErrorContainer(m_session)) {
+    Location loc(fC->getFileId(nodeId), fC->Line(nodeId), fC->Column(nodeId),
+                 symbols->registerSymbol(fullName));
+    Error err1(ErrorDefinition::COMP_COMPILE_CLASS, loc);
+    errors->printMessage(err1, clp->muteStdout());
+    delete errors;
+  }
   if (fC->getSize() == 0) return true;
 
   NodeId classId = m_class->m_nodeIds[0];
@@ -109,7 +123,7 @@ bool CompileClass::compile() {
     classId = current.m_child;
     if (fC->Type(classId) == VObjectType::paAttribute_instance) {
       if (UHDM::VectorOfattribute* attributes = m_helper.compileAttributes(
-              m_class, fC, classId, m_compileDesign, nullptr)) {
+              m_class, fC, classId, m_compileDesign, defn)) {
         m_class->Attributes(attributes);
       }
     }
@@ -118,7 +132,7 @@ bool CompileClass::compile() {
   // Package imports
   std::vector<FileCNodeId> pack_imports;
   // - Local file imports
-  for (auto import : fC->getObjects(VObjectType::paPackage_import_item)) {
+  for (auto& import : fC->getObjects(VObjectType::paPackage_import_item)) {
     pack_imports.push_back(import);
   }
   // - Parent container imports
@@ -126,7 +140,7 @@ bool CompileClass::compile() {
   if (container) {
     // FileCNodeId itself(container->getFileContents ()[0],
     // container->getNodeIds ()[0]); pack_imports.push_back(itself);
-    for (auto import :
+    for (auto& import :
          container->getObjects(VObjectType::paPackage_import_item)) {
       pack_imports.push_back(import);
     }
@@ -234,15 +248,11 @@ bool CompileClass::compile() {
             Location loc(fC->getFileId(m_class->getNodeIds()[0]),
                          fC->Line(m_class->getNodeIds()[0]),
                          fC->Column(m_class->getNodeIds()[0]),
-                         m_compileDesign->getCompiler()
-                             ->getSymbolTable()
-                             ->registerSymbol(moduleName));
+                         symbols->registerSymbol(moduleName));
             Location loc2(fC->getFileId(id), fC->Line(id), fC->Column(id),
-                          m_compileDesign->getCompiler()
-                              ->getSymbolTable()
-                              ->registerSymbol(endLabel));
+                          symbols->registerSymbol(endLabel));
             Error err(ErrorDefinition::COMP_UNMATCHED_LABEL, loc, loc2);
-            m_compileDesign->getCompiler()->getErrorContainer()->addError(err);
+            m_session->getErrorContainer()->addError(err);
           }
         }
         break;
@@ -267,10 +277,64 @@ bool CompileClass::compile() {
     m_class->insertFunction(method);
   }
 
+  compile_properties();
+  return true;
+}
+
+bool CompileClass::compile_properties() {
+  UHDM::class_defn* defn = m_class->getUhdmModel<UHDM::class_defn>();
+  for (Signal* sig : m_class->getSignals()) {
+    const FileContent* fC = sig->getFileContent();
+    NodeId id = sig->getNodeId();
+    NodeId packedDimension = sig->getPackedDimension();
+    NodeId unpackedDimension = sig->getUnpackedDimension();
+
+    // Packed and unpacked ranges
+    int32_t packedSize = 0;
+    int32_t unpackedSize = 0;
+    std::vector<UHDM::range*>* packedDimensions = m_helper.compileRanges(
+        m_class, fC, packedDimension, m_compileDesign, Reduce::Yes, nullptr,
+        nullptr, packedSize, false);
+    std::vector<UHDM::range*>* unpackedDimensions = nullptr;
+    if (fC->Type(unpackedDimension) == VObjectType::paClass_new) {
+    } else {
+      unpackedDimensions = m_helper.compileRanges(
+          m_class, fC, unpackedDimension, m_compileDesign, Reduce::Yes, nullptr,
+          nullptr, unpackedSize, false);
+    }
+    UHDM::typespec* tps = nullptr;
+    NodeId typeSpecId = sig->getTypespecId();
+    if (typeSpecId) {
+      tps = m_helper.compileTypespec(m_class, fC, typeSpecId, m_compileDesign,
+                                     Reduce::Yes, nullptr, nullptr, false);
+    }
+    if (tps == nullptr) {
+      if (sig->getInterfaceTypeNameId()) {
+        tps = m_helper.compileTypespec(
+            m_class, fC, sig->getInterfaceTypeNameId(), m_compileDesign,
+            Reduce::Yes, nullptr, nullptr, false);
+      }
+    }
+
+    // Assignment to a default value
+    UHDM::expr* exp = m_helper.exprFromAssign(m_class, m_compileDesign, fC, id,
+                                              unpackedDimension);
+    if (exp != nullptr) exp->VpiParent(defn);
+
+    if (UHDM::any* obj = m_helper.compileVariable(
+            m_class, m_compileDesign, sig, packedDimensions, packedSize,
+            unpackedDimensions, unpackedSize, exp, tps)) {
+      fC->populateCoreMembers(sig->getNameId(), sig->getNameId(), obj);
+      obj->VpiParent(defn);
+    }
+  }
   return true;
 }
 
 bool CompileClass::compile_class_property_(const FileContent* fC, NodeId id) {
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  ErrorContainer* const errors = m_session->getErrorContainer();
+
   NodeId data_declaration = fC->Child(id);
   m_helper.compileDataDeclaration(m_class, fC, data_declaration, false,
                                   m_compileDesign, Reduce::No, m_attributes);
@@ -349,15 +413,15 @@ bool CompileClass::compile_class_property_(const FileContent* fC, NodeId id) {
         Property* previous = m_class->getProperty(varName);
         if (previous) {
           Location loc1(fC->getFileId(var), fC->Line(var), fC->Column(var),
-                        m_symbols->registerSymbol(varName));
+                        symbols->registerSymbol(varName));
           const FileContent* prevFile = previous->getFileContent();
           NodeId prevNode = previous->getNodeId();
           Location loc2(prevFile->getFileId(prevNode), prevFile->Line(prevNode),
                         prevFile->Column(prevNode),
-                        m_symbols->registerSymbol(varName));
+                        symbols->registerSymbol(varName));
           Error err(ErrorDefinition::COMP_MULTIPLY_DEFINED_PROPERTY, loc1,
                     loc2);
-          m_errors->addError(err);
+          errors->addError(err);
         }
 
         Property* prop =
@@ -390,6 +454,9 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
     n<> u<20> t<Function_declaration> p<21> c<19> l<12>
     n<> u<21> t<Class_method> p<22> c<8> l<12>
    */
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  ErrorContainer* const errors = m_session->getErrorContainer();
+
   NodeId func_decl = fC->Child(id);
   VObjectType func_type = fC->Type(func_decl);
   std::string funcName;
@@ -462,15 +529,15 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
       if (builtins_.find(funcName) != builtins_.end()) {
         Location loc(fC->getFileId(), fC->Line(function_name),
                      fC->Column(function_name),
-                     m_symbols->registerSymbol(funcName));
+                     symbols->registerSymbol(funcName));
         Error err(ErrorDefinition::COMP_CANNOT_REDEFINE_BUILTIN_METHOD, loc);
-        m_errors->addError(err);
+        errors->addError(err);
       }
     }
-    m_helper.compileFunction(m_class, fC, fC->Child(id), m_compileDesign,
-                             Reduce::No, nullptr, true);
-    m_helper.compileFunction(m_class, fC, fC->Child(id), m_compileDesign,
-                             Reduce::No, nullptr, true);
+    m_helper.compileFunction(m_class, fC, id, m_compileDesign, Reduce::No,
+                             nullptr, true);
+    m_helper.compileFunction(m_class, fC, id, m_compileDesign, Reduce::No,
+                             nullptr, true);
 
   } else if (func_type == VObjectType::paTask_declaration) {
     /*
@@ -499,10 +566,10 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
           .append(fC->SymName(fC->Sibling(task_name)));
     }
 
-    m_helper.compileTask(m_class, fC, fC->Child(id), m_compileDesign,
-                         Reduce::No, nullptr, true);
-    m_helper.compileTask(m_class, fC, fC->Child(id), m_compileDesign,
-                         Reduce::No, nullptr, true);
+    m_helper.compileTask(m_class, fC, id, m_compileDesign, Reduce::No, nullptr,
+                         true);
+    m_helper.compileTask(m_class, fC, id, m_compileDesign, Reduce::No, nullptr,
+                         true);
 
   } else if (func_type == VObjectType::paMethod_prototype) {
     /*
@@ -515,6 +582,7 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
      n<> u<71> t<Class_method> p<72> c<70> l<37>
      */
     NodeId func_prototype = fC->Child(func_decl);
+    UHDM::Serializer& s = m_compileDesign->getSerializer();
     if (fC->Type(func_prototype) == VObjectType::paTask_prototype) {
       NodeId task_decl =
           m_helper.setFuncTaskQualifiers(fC, fC->Child(id), nullptr);
@@ -533,11 +601,40 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
             .append(fC->SymName(fC->Sibling(task_name)));
       }
 
-      m_helper.compileTask(m_class, fC, fC->Child(id), m_compileDesign,
-                           Reduce::No, nullptr, true);
-      m_helper.compileTask(m_class, fC, fC->Child(id), m_compileDesign,
-                           Reduce::No, nullptr, true);
+      m_helper.compileTask(m_class, fC, id, m_compileDesign, Reduce::No,
+                           nullptr, true);
+      m_helper.compileTask(m_class, fC, id, m_compileDesign, Reduce::No,
+                           nullptr, true);
 
+      std::vector<UHDM::task_func_decl*>* task_func_decls =
+          m_class->getTask_func_decls();
+      if (task_func_decls == nullptr) {
+        m_class->setTask_func_decls(s.MakeTask_func_declVec());
+        task_func_decls = m_class->getTask_func_decls();
+      }
+
+      UHDM::task_decl* td = nullptr;
+      for (UHDM::task_func_decl* tfd : *m_class->getTask_func_decls()) {
+        if (tfd->VpiName() == taskName) {
+          td = any_cast<UHDM::task_decl>(tfd);
+          break;
+        }
+      }
+
+      if (td == nullptr) {
+        td = s.MakeTask_decl();
+        td->VpiName(taskName);
+        td->VpiParent(m_class->getUhdmModel());
+        fC->populateCoreMembers(id, id, td);
+        task_func_decls->push_back(td);
+      }
+
+      for (UHDM::task_func* tf : *m_class->getTask_funcs()) {
+        if (tf->VpiName() == taskName) {
+          td->Task_func(tf);
+          break;
+        }
+      }
     } else {
       NodeId function_data_type = fC->Child(func_prototype);
       NodeId data_type = fC->Child(function_data_type);
@@ -553,10 +650,40 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
       NodeId function_name = fC->Sibling(function_data_type);
       funcName = fC->SymName(function_name);
 
-      m_helper.compileFunction(m_class, fC, fC->Child(id), m_compileDesign,
-                               Reduce::No, nullptr, true);
-      m_helper.compileFunction(m_class, fC, fC->Child(id), m_compileDesign,
-                               Reduce::No, nullptr, true);
+      m_helper.compileFunction(m_class, fC, id, m_compileDesign, Reduce::No,
+                               nullptr, true);
+      m_helper.compileFunction(m_class, fC, id, m_compileDesign, Reduce::No,
+                               nullptr, true);
+
+      std::vector<UHDM::task_func_decl*>* task_func_decls =
+          m_class->getTask_func_decls();
+      if (task_func_decls == nullptr) {
+        m_class->setTask_func_decls(s.MakeTask_func_declVec());
+        task_func_decls = m_class->getTask_func_decls();
+      }
+
+      UHDM::function_decl* fd = nullptr;
+      for (UHDM::task_func_decl* tfd : *m_class->getTask_func_decls()) {
+        if (tfd->VpiName() == funcName) {
+          fd = any_cast<UHDM::function_decl>(tfd);
+          break;
+        }
+      }
+
+      if (fd == nullptr) {
+        fd = s.MakeFunction_decl();
+        fd->VpiName(funcName);
+        fd->VpiParent(m_class->getUhdmModel());
+        fC->populateCoreMembers(id, id, fd);
+        task_func_decls->push_back(fd);
+      }
+
+      for (UHDM::task_func* tf : *m_class->getTask_funcs()) {
+        if (tf->VpiName() == funcName) {
+          fd->Task_func(tf);
+          break;
+        }
+      }
     }
     is_extern = true;
   } else if (func_type == VObjectType::paClass_constructor_declaration) {
@@ -569,11 +696,10 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
   } else if (func_type == VObjectType::paClass_constructor_prototype) {
     funcName = "new";
 
-    m_helper.compileFunction(m_class, fC, fC->Child(id), m_compileDesign,
-                             Reduce::No, nullptr, true);
-    m_helper.compileFunction(m_class, fC, fC->Child(id), m_compileDesign,
-                             Reduce::No, nullptr, true);
-
+    m_helper.compileFunction(m_class, fC, id, m_compileDesign, Reduce::No,
+                             nullptr, true);
+    m_helper.compileFunction(m_class, fC, id, m_compileDesign, Reduce::No,
+                             nullptr, true);
   } else {
     funcName = "UNRECOGNIZED_METHOD_TYPE";
   }
@@ -583,14 +709,14 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
     TaskMethod* prevDef = m_class->getTask(taskName);
     if (prevDef) {
       Location loc1(fC->getFileId(id), fC->Line(id), fC->Column(id),
-                    m_symbols->registerSymbol(taskName));
+                    symbols->registerSymbol(taskName));
       const FileContent* prevFile = prevDef->getFileContent();
       NodeId prevNode = prevDef->getNodeId();
       Location loc2(prevFile->getFileId(prevNode), prevFile->Line(prevNode),
                     prevFile->Column(prevNode),
-                    m_symbols->registerSymbol(taskName));
+                    symbols->registerSymbol(taskName));
       Error err(ErrorDefinition::COMP_MULTIPLY_DEFINED_TASK, loc1, loc2);
-      m_errors->addError(err);
+      errors->addError(err);
     }
     m_class->insertTask(method);
   } else {
@@ -603,7 +729,7 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
     method->compile(m_helper);
     Function* prevDef = m_class->getFunction(funcName);
     if (prevDef) {
-      SymbolId funcSymbol = m_symbols->registerSymbol(funcName);
+      SymbolId funcSymbol = symbols->registerSymbol(funcName);
       Location loc1(fC->getFileId(id), fC->Line(id), fC->Column(id),
                     funcSymbol);
       const FileContent* prevFile = prevDef->getFileContent();
@@ -612,7 +738,7 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
                     prevFile->Column(prevNode), funcSymbol);
       if (funcSymbol) {
         Error err(ErrorDefinition::COMP_MULTIPLY_DEFINED_FUNCTION, loc1, loc2);
-        m_errors->addError(err);
+        errors->addError(err);
       }
     }
     m_class->insertFunction(method);
@@ -622,6 +748,9 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
 
 bool CompileClass::compile_class_constraint_(const FileContent* fC,
                                              NodeId class_constraint) {
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  ErrorContainer* const errors = m_session->getErrorContainer();
+
   NodeId constraint_prototype = fC->Child(class_constraint);
   NodeId constraint_name = fC->Child(constraint_prototype);
   const std::string_view constName = fC->SymName(constraint_name);
@@ -629,84 +758,83 @@ bool CompileClass::compile_class_constraint_(const FileContent* fC,
   if (prevDef) {
     Location loc1(fC->getFileId(class_constraint), fC->Line(class_constraint),
                   fC->Column(class_constraint),
-                  m_symbols->registerSymbol(constName));
+                  symbols->registerSymbol(constName));
     const FileContent* prevFile = prevDef->getFileContent();
     NodeId prevNode = prevDef->getNodeId();
     Location loc2(prevFile->getFileId(prevNode), prevFile->Line(prevNode),
                   prevFile->Column(prevNode),
-                  m_symbols->registerSymbol(constName));
+                  symbols->registerSymbol(constName));
     Error err(ErrorDefinition::COMP_MULTIPLY_DEFINED_CONSTRAINT, loc1, loc2);
-    m_errors->addError(err);
+    errors->addError(err);
   }
   Constraint* constraint = new Constraint(fC, class_constraint, constName);
   m_class->insertConstraint(constraint);
 
+  UHDM::class_defn* const pscope = m_class->getUhdmModel<UHDM::class_defn>();
+  m_helper.compileConstraintBlock(m_class, fC, class_constraint,
+                                  m_compileDesign, pscope);
   return true;
 }
 
 bool CompileClass::compile_class_declaration_(const FileContent* fC,
                                               NodeId id) {
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  ErrorContainer* const errors = m_session->getErrorContainer();
+
   UHDM::Serializer& s = m_compileDesign->getSerializer();
   const bool virtualClass = fC->sl_collect(id, VObjectType::paVIRTUAL);
   const NodeId class_name_id = fC->sl_collect(id, VObjectType::slStringConst);
   const std::string_view class_name = fC->SymName(class_name_id);
   std::string full_class_name =
-      StrCat(m_class->m_uhdm_definition->VpiFullName(), "::", class_name);
+      StrCat(m_class->getUhdmModel<UHDM::class_defn>()->VpiFullName(),
+             "::", class_name);
   ClassDefinition* prevDef = m_class->getClass(class_name);
   if (prevDef) {
     Location loc1(fC->getFileId(class_name_id), fC->Line(class_name_id),
                   fC->Column(class_name_id),
-                  m_symbols->registerSymbol(class_name));
+                  symbols->registerSymbol(class_name));
     const FileContent* prevFile = prevDef->getFileContent();
     NodeId prevNode =
         prevFile->sl_collect(prevDef->getNodeId(), VObjectType::slStringConst);
     Location loc2(prevFile->getFileId(prevNode), prevFile->Line(prevNode),
                   prevFile->Column(prevNode),
-                  m_symbols->registerSymbol(class_name));
+                  symbols->registerSymbol(class_name));
     Error err(ErrorDefinition::COMP_MULTIPLY_DEFINED_INNER_CLASS, loc1, loc2);
-    m_errors->addError(err);
+    errors->addError(err);
   }
-  UHDM::class_defn* defn = s.MakeClass_defn();
-  defn->VpiVirtual(virtualClass);
-  defn->VpiName(class_name);
-  defn->VpiFullName(full_class_name);
   ClassDefinition* the_class =
-      new ClassDefinition(class_name, m_class->getLibrary(),
-                          m_class->getContainer(), fC, id, m_class, defn);
+      new ClassDefinition(m_session, class_name, m_class->getLibrary(),
+                          m_class->getContainer(), fC, id, m_class, s);
+  UHDM::class_defn* defn = the_class->getUhdmModel<UHDM::class_defn>();
+  defn->VpiVirtual(virtualClass);
+  defn->VpiFullName(full_class_name);
   m_class->insertClass(the_class);
-  UHDM::class_defn* parent = m_class->getUhdmDefinition();
+  UHDM::class_defn* parent = m_class->getUhdmModel<UHDM::class_defn>();
   defn->VpiParent(parent);
-  UHDM::VectorOfscope* scopes = parent->Scopes();
-  if (scopes == nullptr) {
-    parent->Scopes(s.MakeScopeVec());
-    scopes = parent->Scopes();
-  }
-  scopes->push_back(defn);
 
-  CompileClass* instance = new CompileClass(m_compileDesign, the_class,
-                                            m_design, m_symbols, m_errors);
-  instance->compile();
-  delete instance;
-
+  FunctorCompileClass(m_session, m_compileDesign, the_class, m_design)();
   return true;
 }
 
 bool CompileClass::compile_covergroup_declaration_(const FileContent* fC,
                                                    NodeId id) {
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  ErrorContainer* const errors = m_session->getErrorContainer();
+
   NodeId covergroup_name = fC->Child(id);
   const std::string_view covergroupName = fC->SymName(covergroup_name);
   CoverGroupDefinition* prevDef = m_class->getCoverGroup(covergroupName);
   if (prevDef) {
     Location loc1(fC->getFileId(covergroup_name), fC->Line(covergroup_name),
                   fC->Column(covergroup_name),
-                  m_symbols->registerSymbol(covergroupName));
+                  symbols->registerSymbol(covergroupName));
     const FileContent* prevFile = prevDef->getFileContent();
     NodeId prevNode = prevDef->getNodeId();
     Location loc2(prevFile->getFileId(prevNode), prevFile->Line(prevNode),
                   prevFile->Column(prevNode),
-                  m_symbols->registerSymbol(covergroupName));
+                  symbols->registerSymbol(covergroupName));
     Error err(ErrorDefinition::COMP_MULTIPLY_DEFINED_COVERGROUP, loc1, loc2);
-    m_errors->addError(err);
+    errors->addError(err);
   }
   CoverGroupDefinition* covergroup =
       new CoverGroupDefinition(fC, id, covergroupName);
@@ -732,6 +860,9 @@ bool CompileClass::compile_local_parameter_declaration_(const FileContent* fC,
    n<> u<19> t<List_of_param_assignments> p<20> c<18> l<3>
    n<> u<20> t<Local_parameter_declaration> p<21> c<10> l<3>
   */
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  ErrorContainer* const errors = m_session->getErrorContainer();
+
   NodeId list_of_type_assignments = fC->Child(id);
   if (fC->Type(list_of_type_assignments) ==
           VObjectType::paList_of_type_assignments ||
@@ -756,14 +887,13 @@ bool CompileClass::compile_local_parameter_declaration_(const FileContent* fC,
         m_class->getNamedObject(name);
     if (prevDef) {
       Location loc1(fC->getFileId(var), fC->Line(var), fC->Column(var),
-                    m_symbols->registerSymbol(name));
+                    symbols->registerSymbol(name));
       const FileContent* prevFile = prevDef->first.fC;
       NodeId prevNode = prevDef->first.nodeId;
       Location loc2(prevFile->getFileId(prevNode), prevFile->Line(prevNode),
-                    prevFile->Column(prevNode),
-                    m_symbols->registerSymbol(name));
+                    prevFile->Column(prevNode), symbols->registerSymbol(name));
       Error err(ErrorDefinition::COMP_MULTIPLY_DEFINED_PARAMETER, loc1, loc2);
-      m_errors->addError(err);
+      errors->addError(err);
     }
 
     FileCNodeId fnid(fC, id);
@@ -777,6 +907,9 @@ bool CompileClass::compile_local_parameter_declaration_(const FileContent* fC,
 
 bool CompileClass::compile_parameter_declaration_(const FileContent* fC,
                                                   NodeId id) {
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  ErrorContainer* const errors = m_session->getErrorContainer();
+
   NodeId list_of_type_assignments = fC->Child(id);
   if (fC->Type(list_of_type_assignments) ==
           VObjectType::paList_of_type_assignments ||
@@ -802,14 +935,13 @@ bool CompileClass::compile_parameter_declaration_(const FileContent* fC,
         m_class->getNamedObject(name);
     if (prevDef) {
       Location loc1(fC->getFileId(var), fC->Line(var), fC->Column(var),
-                    m_symbols->registerSymbol(name));
+                    symbols->registerSymbol(name));
       const FileContent* prevFile = prevDef->first.fC;
       NodeId prevNode = prevDef->first.nodeId;
       Location loc2(prevFile->getFileId(prevNode), prevFile->Line(prevNode),
-                    prevFile->Column(prevNode),
-                    m_symbols->registerSymbol(name));
+                    prevFile->Column(prevNode), symbols->registerSymbol(name));
       Error err(ErrorDefinition::COMP_MULTIPLY_DEFINED_PARAMETER, loc1, loc2);
-      m_errors->addError(err);
+      errors->addError(err);
     }
 
     FileCNodeId fnid(fC, id);
@@ -833,12 +965,16 @@ bool CompileClass::compile_class_type_(const FileContent* fC, NodeId id) {
     base_class_id = fC->Sibling(base_class_id);
     base_class_name.append("::").append(fC->SymName(base_class_id));
   }
-  // Insert base class placeholder
-  // Will be bound in UVMElaboration step
-  ClassDefinition* base_class = new ClassDefinition(
-      base_class_name, m_class->getLibrary(), m_class->getContainer(), fC,
-      base_class_id, nullptr, s.MakeClass_defn());
-  m_class->insertBaseClass(base_class);
+  UHDM::extends* extends = s.MakeExtends();
+  extends->VpiParent(m_class->getUhdmModel());
+  fC->populateCoreMembers(base_class_id, base_class_id, extends);
+  m_class->getUhdmModel<UHDM::class_defn>()->Extends(extends);
+
+  UHDM::ref_typespec* extends_ts = s.MakeRef_typespec();
+  extends_ts->VpiParent(extends);
+  extends_ts->VpiName(base_class_name);
+  fC->populateCoreMembers(base_class_id, base_class_id, extends_ts);
+  extends->Class_typespec(extends_ts);
 
   return true;
 }
@@ -871,7 +1007,7 @@ bool CompileClass::compile_class_parameters_(const FileContent* fC, NodeId id) {
   n<> u<11> t<Parameter_port_list> p<31> c<10> s<20> l<18>
 
   */
-  UHDM::class_defn* defn = m_class->getUhdmDefinition();
+  UHDM::class_defn* defn = m_class->getUhdmModel<UHDM::class_defn>();
 
   if (fC->sl_collect(id, VObjectType::paVIRTUAL)) {
     defn->VpiVirtual(true);

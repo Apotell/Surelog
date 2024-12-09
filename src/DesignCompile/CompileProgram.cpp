@@ -22,6 +22,7 @@
  */
 
 #include <Surelog/CommandLine/CommandLineParser.h>
+#include <Surelog/Common/Session.h>
 #include <Surelog/Design/FileContent.h>
 #include <Surelog/DesignCompile/CompileDesign.h>
 #include <Surelog/DesignCompile/CompileProgram.h>
@@ -35,39 +36,44 @@
 #include <Surelog/Utils/StringUtils.h>
 #include <uhdm/final_stmt.h>
 #include <uhdm/initial.h>
+#include <uhdm/program.h>
 
 #include <stack>
 
 namespace SURELOG {
 
 int32_t FunctorCompileProgram::operator()() const {
-  CompileProgram* instance = new CompileProgram(m_compileDesign, m_program,
-                                                m_design, m_symbols, m_errors);
-  instance->compile();
+  CompileProgram* instance =
+      new CompileProgram(m_session, m_compileDesign, m_program, m_design);
+  instance->compile(Elaborate::No, Reduce::No);
   delete instance;
   return 0;
 }
 
-bool CompileProgram::compile() {
+bool CompileProgram::compile(Elaborate elaborate, Reduce reduce) {
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  ErrorContainer* const errors = m_session->getErrorContainer();
+
+  m_helper.setElaborate(elaborate);
+  m_helper.setReduce(reduce);
+
   const FileContent* fC = m_program->m_fileContents[0];
   NodeId nodeId = m_program->m_nodeIds[0];
 
   Location loc(fC->getFileId(nodeId), fC->Line(nodeId), fC->Column(nodeId),
-               m_symbols->registerSymbol(m_program->getName()));
+               symbols->registerSymbol(m_program->getName()));
 
   Error err1(ErrorDefinition::COMP_COMPILE_PROGRAM, loc);
-  ErrorContainer* errors =
-      new ErrorContainer(m_symbols, m_errors->getLogListener());
-  errors->registerCmdLine(
-      m_compileDesign->getCompiler()->getCommandLineParser());
-  errors->addError(err1);
-  errors->printMessage(
-      err1,
-      m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
-  delete errors;
+  ErrorContainer* errors2 = new ErrorContainer(m_session);
+  errors2->addError(err1);
+  errors2->printMessage(err1, m_session->getCommandLineParser()->muteStdout());
+  delete errors2;
 
   Error err2(ErrorDefinition::COMP_PROGRAM_OBSOLETE_USAGE, loc);
-  m_errors->addError(err2);
+  errors->addError(err2);
+
+  UHDM::program* const prgm = m_program->getUhdmModel<UHDM::program>();
+  const UHDM::ScopedScope scopedScope(prgm);
 
   if (!collectObjects_(CollectType::FUNCTION)) return false;
   if (!collectObjects_(CollectType::DEFINITION)) return false;
@@ -78,6 +84,9 @@ bool CompileProgram::compile() {
 
 bool CompileProgram::collectObjects_(CollectType collectType) {
   const FileContent* fC = m_program->m_fileContents[0];
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  ErrorContainer* const errors = m_session->getErrorContainer();
+
   NodeId nodeId = m_program->m_nodeIds[0];
   std::vector<VObjectType> stopPoints = {
       VObjectType::paClass_declaration,
@@ -149,20 +158,21 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
       }
       case VObjectType::paAnsi_port_declaration: {
         if (collectType != CollectType::DEFINITION) break;
-        m_helper.compileAnsiPortDeclaration(m_program, fC, id, port_direction);
+        m_helper.compileAnsiPortDeclaration(m_program, fC, id, m_compileDesign,
+                                            port_direction);
         break;
       }
       case VObjectType::paProperty_declaration: {
         if (collectType != CollectType::OTHER) break;
         UHDM::property_decl* decl = m_helper.compilePropertyDeclaration(
-            m_program, fC, fC->Child(id), m_compileDesign, nullptr, nullptr);
+            m_program, fC, id, m_compileDesign, nullptr, nullptr);
         m_program->addPropertyDecl(decl);
         break;
       }
       case VObjectType::paSequence_declaration: {
         if (collectType != CollectType::OTHER) break;
         UHDM::sequence_decl* decl = m_helper.compileSequenceDeclaration(
-            m_program, fC, fC->Child(id), m_compileDesign, nullptr, nullptr);
+            m_program, fC, id, m_compileDesign, nullptr, nullptr);
         m_program->addSequenceDecl(decl);
         break;
       }
@@ -218,7 +228,7 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
       case VObjectType::paContinuous_assign: {
         if (collectType != CollectType::OTHER) break;
         m_helper.compileContinuousAssignment(m_program, fC, fC->Child(id),
-                                             m_compileDesign, nullptr);
+                                             m_compileDesign, nullptr, nullptr);
         break;
       }
       case VObjectType::paParameter_declaration: {
@@ -363,15 +373,11 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
             Location loc(fC->getFileId(m_program->getNodeIds()[0]),
                          fC->Line(m_program->getNodeIds()[0]),
                          fC->Column(m_program->getNodeIds()[0]),
-                         m_compileDesign->getCompiler()
-                             ->getSymbolTable()
-                             ->registerSymbol(moduleName));
+                         symbols->registerSymbol(moduleName));
             Location loc2(fC->getFileId(id), fC->Line(id), fC->Column(id),
-                          m_compileDesign->getCompiler()
-                              ->getSymbolTable()
-                              ->registerSymbol(endLabel));
+                          symbols->registerSymbol(endLabel));
             Error err(ErrorDefinition::COMP_UNMATCHED_LABEL, loc, loc2);
-            m_compileDesign->getCompiler()->getErrorContainer()->addError(err);
+            errors->addError(err);
           }
         }
         break;

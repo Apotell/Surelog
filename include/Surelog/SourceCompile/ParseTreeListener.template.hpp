@@ -39,9 +39,8 @@
 #include <vector>
 
 namespace SURELOG {
-
 class ParseTreeListener;
-class SymbolTable;
+class Session;
 class VObject;
 struct ParseTreeNodeEqualityComparer;
 struct ParseTreeNodeHash;
@@ -100,7 +99,9 @@ class ParseTreeListener {
   ParseTreeListener() = default;
   virtual ~ParseTreeListener() = default;
 
-  virtual bool shouldWalkSourceFile(PathId fileId) { return true; }
+  virtual bool shouldWalkSourceFile(Session* session, PathId fileId) {
+    return true;
+  }
   virtual void enterSourceFile(PathId fileId) {}
   virtual void leaveSourceFile(PathId fileId) {}
 
@@ -120,8 +121,8 @@ class ParseTreeListener {
   void listenChildren(const ParseTreeNode& node);
   void listenSiblings(const ParseTreeNode& node);
 
-  void listen(PathId fileId, const VObject* objects, size_t count,
-              const SymbolTable* symbolTable);
+  void listen(Session* session, PathId fileId, const VObject* objects,
+              size_t count);
 
   VObjectType getNodeType(const ParseTreeNode& node) const;
   ParseTreeNode getRootNode() const;
@@ -149,13 +150,13 @@ class ParseTreeListener {
   // clang-format on
 
  protected:
+  Session* m_session = nullptr;
   parsetreenode_set_t m_visited;
   parsetreenode_stack_t m_callstack;
 
  private:
   const VObject* m_objects = nullptr;
   size_t m_count = 0;
-  const SymbolTable* m_symbolTable = nullptr;
 };
 }  // namespace SURELOG
 

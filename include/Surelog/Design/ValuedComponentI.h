@@ -38,6 +38,7 @@
 namespace SURELOG {
 
 class ExprBuilder;
+class Session;
 class Value;
 
 class ValuedComponentI : public RTTI {
@@ -47,11 +48,16 @@ class ValuedComponentI : public RTTI {
       std::map<std::string, std::pair<Value*, int32_t>, StringViewCompare>;
   using ComplexValueMap = std::map<std::string, UHDM::expr*, StringViewCompare>;
 
-  ValuedComponentI(const ValuedComponentI* parentScope,
+  ValuedComponentI(Session* session, const ValuedComponentI* parentScope,
                    ValuedComponentI* definition)
-      : m_parentScope(parentScope), m_definition(definition){};
+      : m_session(session),
+        m_parentScope(parentScope),
+        m_definition(definition) {}
 
   ~ValuedComponentI() override = default;
+
+  Session* getSession() { return m_session; }
+  const Session* getSession() const { return m_session; }
 
   virtual Value* getValue(std::string_view name) const;
   virtual Value* getValue(std::string_view name,
@@ -70,6 +76,9 @@ class ValuedComponentI : public RTTI {
   const ComplexValueMap& getComplexValues() const { return m_complexValues; }
   // Do not change the signature of this method, it's use in gdb for debug.
   virtual std::string decompile(char* valueName) { return "Undefined"; }
+
+ protected:
+  Session* const m_session = nullptr;
 
  private:
   const ValuedComponentI* m_parentScope;

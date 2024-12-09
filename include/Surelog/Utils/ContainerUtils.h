@@ -22,8 +22,14 @@ namespace SURELOG {
 
 // Delete all pointers in a sequence container and clear()'s it.
 template <typename Container>
-void DeleteContainerPointersAndClear(Container *c) {
+void DeleteSequenceContainerPointersAndClear(Container *c) {
   for (auto &item : *c) delete item;
+  c->clear();
+}
+
+template <typename Container>
+void DeleteAssociateContainerValuePointersAndClear(Container *c) {
+  for (auto &[key, value] : *c) delete value;
   c->clear();
 }
 

@@ -59,6 +59,7 @@ using antlr4::Token;
 const char* const PreprocessFile::MacroNotDefined = "SURELOG_MACRO_NOT_DEFINED";
 const char* const PreprocessFile::PP__Line__Marking = "SURELOG__LINE__MARKING";
 const char* const PreprocessFile::PP__File__Marking = "SURELOG__FILE__MARKING";
+
 IncludeFileInfo PreprocessFile::s_badIncludeFileInfo(
     IncludeFileInfo::Context::NONE, IncludeFileInfo::Action::NONE, BadPathId, 0,
     0, 0, 0, BadSymbolId, 0, 0);

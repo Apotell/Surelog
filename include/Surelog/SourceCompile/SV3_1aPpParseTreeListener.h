@@ -36,15 +36,13 @@ class SV3_1aPpParseTreeListener final : public SV3_1aPpParserBaseListener,
                                         public SV3_1aPpTreeListenerHelper {
  public:
   typedef std::vector<size_t> callstack_t;
-  typedef std::set<const antlr4::ParserRuleContext*> visited_rules_t;
+  typedef std::set<const antlr4::tree::ParseTree*> visited_nodes_t;
 
  public:
   SV3_1aPpParseTreeListener(Session* session, PreprocessFile* pp,
                             antlr4::CommonTokenStream* tokens,
                             PreprocessFile::SpecialInstructions& instructions);
   ~SV3_1aPpParseTreeListener() final = default;
-
-  void enterText_blob(SV3_1aPpParser::Text_blobContext* ctx) final;
 
   void enterEscaped_identifier(
       SV3_1aPpParser::Escaped_identifierContext* ctx) final;
@@ -64,10 +62,6 @@ class SV3_1aPpParseTreeListener final : public SV3_1aPpParserBaseListener,
 
   void enterElse_directive(SV3_1aPpParser::Else_directiveContext* ctx) final;
   void exitElse_directive(SV3_1aPpParser::Else_directiveContext* ctx) final;
-
-  void enterElseif_directive(
-      SV3_1aPpParser::Elseif_directiveContext* ctx) final;
-  void exitElseif_directive(SV3_1aPpParser::Elseif_directiveContext* ctx) final;
 
   void enterEndif_directive(SV3_1aPpParser::Endif_directiveContext* ctx) final;
   void exitEndif_directive(SV3_1aPpParser::Endif_directiveContext* ctx) final;
@@ -121,20 +115,17 @@ class SV3_1aPpParseTreeListener final : public SV3_1aPpParserBaseListener,
   bool isOnCallStack(size_t ruleIndex) const;
   bool isAnyOnCallStack(const std::unordered_set<size_t>& ruleIndicies) const;
 
+  void collectAsVisited(antlr4::ParserRuleContext* ctx);
+  bool isInActiveBranch() const;
+
   void appendPreprocBegin();
   void appendPreprocEnd(antlr4::ParserRuleContext* ctx, VObjectType type);
 
-  void recordMacro(std::string_view name, MacroInfo::DefType defType,
-                   std::string_view arguments,
-                   antlr4::ParserRuleContext* ctx,
-                   antlr4::tree::TerminalNode* identifier,
-                   antlr4::ParserRuleContext* body);
-
  private:
-  visited_rules_t m_visitedRules;
   callstack_t m_callstack;
-  size_t m_pendingCRs = 0;
-  int32_t m_paused = 0;
+  visited_nodes_t m_visitedNodes;
+  int32_t m_processingDirective = 0;
+  int32_t m_processingMacroInstance = 0;
 };
 }  // namespace SURELOG
 

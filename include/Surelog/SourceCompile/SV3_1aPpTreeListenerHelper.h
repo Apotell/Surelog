@@ -43,7 +43,7 @@ class SV3_1aPpTreeListenerHelper : public CommonListenerHelper {
   // Helper function if-else
   void setCurrentBranchActivity(uint32_t currentLine);
   // Helper function if-else
-  bool isPreviousBranchActive();
+  bool isPreviousBranchActive() const;
   // Helper function to log errors
   void logError(ErrorDefinition::ErrorType error,
                 antlr4::ParserRuleContext* ctx, std::string_view object,

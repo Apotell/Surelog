@@ -1052,7 +1052,7 @@ void Compiler::writeUhdmSourceFiles() {
     }
   }
 
-  for (auto [pmi, mi] : instanceMap) {
+  for (const auto &[pmi, mi] : instanceMap) {
     if (auto it = defMap.find(mi); it != defMap.cend()) {
       pmi->Preproc_macro_definition(it->second);
     }

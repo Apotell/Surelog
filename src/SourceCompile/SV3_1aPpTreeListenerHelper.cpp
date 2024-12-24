@@ -242,49 +242,25 @@ void SV3_1aPpTreeListenerHelper::setCurrentBranchActivity(
   }
 }
 
-bool SV3_1aPpTreeListenerHelper::isPreviousBranchActive() {
-  PreprocessFile::IfElseStack& stack = m_pp->getStack();
-  bool previousBranchActive = false;
-  bool checkPrev = true;
-  if (stack.empty()) {
-    return false;
-  }
-  int32_t index = stack.size() - 1;
-  while (checkPrev) {
-    checkPrev = false;
-    PreprocessFile::IfElseItem& tmpitem = stack.at(index);
+bool SV3_1aPpTreeListenerHelper::isPreviousBranchActive() const {
+  const PreprocessFile::IfElseStack& stack = m_pp->getStack();
+  if (stack.empty()) return true;
+
+  for (int32_t i = stack.size() - 1; i >= 0; --i) {
+    const PreprocessFile::IfElseItem& tmpitem = stack[i];
     switch (tmpitem.m_type) {
       case PreprocessFile::IfElseItem::IFDEF:
-        if (tmpitem.m_defined) {
-          previousBranchActive = true;
-        }
-        checkPrev = false;
-        break;
+        return tmpitem.m_defined;
       case PreprocessFile::IfElseItem::ELSIF:
-        if (tmpitem.m_defined) {
-          previousBranchActive = true;
-          checkPrev = false;
-        } else {
-          checkPrev = true;
-        }
+        if (tmpitem.m_defined) return true;
         break;
       case PreprocessFile::IfElseItem::IFNDEF:
-        if (!tmpitem.m_defined) {
-          previousBranchActive = true;
-        }
-        checkPrev = false;
-        break;
+        return !tmpitem.m_defined;
       default:
         break;
     }
-    if (index > 0) {
-      index--;
-    } else {
-      if (checkPrev) previousBranchActive = false;
-      checkPrev = false;
-    }
   }
-  return previousBranchActive;
+  return false;
 }
 
 }  // namespace SURELOG

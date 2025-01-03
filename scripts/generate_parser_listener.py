@@ -388,7 +388,7 @@ def _collect_typenames(filepath: str):
 
 
 def _get_implemented_methods(filepath: str):
-  parse_method_name_regex = re.compile('.+::(?P<method_name>(enter|exit|visit)\w+)\s*\(.*')
+  parse_method_name_regex = re.compile('.+::(?P<method_name>(enter|exit|visit)\\w+)\\s*\\(.*')
 
   methods = set()
   with open(filepath, 'rt') as strm:
@@ -480,9 +480,9 @@ def _generate_XXXTreeShapeListener_h(listener: str, antlr_definition_filepath: s
       ''
     ])
 
-  parse_method_name_regex = re.compile('\s*virtual\s+void\s+(?P<method_name>(enter|exit|visit)\w+)\s*\(.*')
-  sub_regex1 = re.compile('\s*virtual\s+(?P<declaration>void\s+(?P<method>(enter|exit|visit)\w+).+)\s+override\s+\{\s+\}')
-  sub_regex2 = re.compile('(.+)(/\*ctx\*/)(.+)')
+  parse_method_name_regex = re.compile('\\s*virtual\\s+void\\s+(?P<method_name>(enter|exit|visit)\\w+)\\s*\\(.*')
+  sub_regex1 = re.compile('\\s*virtual\\s+(?P<declaration>void\\s+(?P<method>(enter|exit|visit)\\w+).+)\\s+override\\s+\\{\\s+\\}')
+  sub_regex2 = re.compile('(.+)(/\\*ctx\\*/)(.+)')
 
   implemented_methods = _get_implemented_methods(cpp_input_filepath)
   with open(antlr_definition_filepath, 'rt') as strm:
@@ -495,13 +495,13 @@ def _generate_XXXTreeShapeListener_h(listener: str, antlr_definition_filepath: s
           method_name = m.group('method_name')
 
           if method_name in implemented_methods:
-            line = sub_regex1.sub('    \g<declaration> final;', line)
+            line = sub_regex1.sub('    \\g<declaration> final;', line)
           elif method_name.startswith('exit'):
             method_name = method_name.replace('exit', '')
-            line = sub_regex1.sub(f'\g<declaration> final {{ addVObject(ctx, VObjectType::{vot_prefix}{method_name}); }}', line)
-            line = sub_regex2.sub('    \g<1>ctx\g<3>', line)
+            line = sub_regex1.sub(f'\\g<declaration> final {{ addVObject(ctx, VObjectType::{vot_prefix}{method_name}); }}', line)
+            line = sub_regex2.sub('    \\g<1>ctx\\g<3>', line)
           else:
-            line = sub_regex1.sub('    \g<declaration> final {}', line)
+            line = sub_regex1.sub('    \\g<declaration> final {}', line)
 
           content.append(line)
 
@@ -625,67 +625,93 @@ def _generate_VObjectTypes_cpp(pp_typenames: list, pa_typenames: list, filepath:
     '#include <string_view>',
     '#include <Surelog/Design/VObject.h>',
     '',
+    '#include <algorithm>',
+    '#include <map>',
+    '#include <string>',
+    '#include <string_view>',
+    '',
     'using namespace SURELOG;',
     '',
-    'std::string_view VObject::getTypeName(VObjectType type) {',
-    '  switch (type) {',
+    'static const std::map<VObjectType, std::string_view> kTypeToName{',
+    '  // Global typenames (shared acroos preprocessor & parser)'
   ]
-
-  content.append('    // Global typenames (shared acroos preprocessor & parser)')
-  content.append('')
-
-  index = _sl_typename_start
-  index += 1
-  for typename in _sl_typenames:
-    content.append(f'    case VObjectType::sl{typename} /* = {index} */: return "sl{typename}";')
-    index += 1
-
-  content.append('')
-  content.append('    // Preprocessor typenames')
-  content.append('')
-
-  index = _pp_typename_start
-  index += 1
-  for typename in pp_typenames:
-    content.append(f'    case VObjectType::pp{typename} /* = {index} */: return "pp{typename}";')
-    index += 1
-
-  content.append('')
-  content.append('    // Forced Preprocessor typenames')
-  content.append('')
-
-  index = _forced_pp_typename_start
-  index += 1
-  for typename in sorted(_forced_pp_typenames):
-    content.append(f'    case VObjectType::pp{typename} /* = {index} */: return "pp{typename}";')
-    index += 1
-
-  content.append('')
-  content.append('    // Parser typenames')
-  content.append('')
-
-  index = _pa_typename_start
-  index += 1
-  for typename in pa_typenames:
-    content.append(f'    case VObjectType::pa{typename} /* = {index} */: return "pa{typename}";')
-    index += 1
-
-  content.append('')
-  content.append('    // Forced Parser typenames')
-  content.append('')
-
-  index = _forced_pa_typename_start
-  index += 1
-  for typename in sorted(_forced_pa_typenames):
-    content.append(f'    case VObjectType::pa{typename} /* = {index} */: return "pa{typename}";')
-    index += 1
-
   content.extend([
+    f'  {{ VObjectType::sl{typename} /* = {_sl_typename_start + 1 + index} */, "sl{typename}" }},'
+    for index, typename in enumerate(_sl_typenames)
+  ])
+  content.append('')
+  content.append('  // Preprocessor typenames')
+  content.extend([
+    f'  {{ VObjectType::pp{typename} /* = {_pp_typename_start + 1 + index} */, "pp{typename}" }},'
+    for index, typename in enumerate(pp_typenames)
+  ])
+  content.append('')
+  content.append('  // Forced Preprocessor typenames')
+  content.extend([
+    f'  {{ VObjectType::pp{typename} /* = {_forced_pp_typename_start + 1 + index} */, "pp{typename}" }},'
+    for index, typename in enumerate(sorted(_forced_pp_typenames))
+  ])
+  content.append('')
+  content.append('  // Parser typenames')
+  content.extend([
+    f'  {{ VObjectType::pa{typename} /* = {_forced_pp_typename_start + 1 + index} */, "pa{typename}" }},'
+    for index, typename in enumerate(pa_typenames)
+  ])
+  content.append('')
+  content.append('  // Forced Parser typenames')
+  content.extend([
+    f'  {{ VObjectType::pa{typename} /* = {_forced_pa_typename_start + 1 + index} */, "pa{typename}" }},'
+    for index, typename in enumerate(sorted(_forced_pa_typenames))
+  ])
+  content.extend([
+    '};',
     '',
-    '  default: return "((VObjectType out of range))";',
-    '  }',
+    'static const std::map<std::string_view, VObjectType, std::less<>> kNameToType{',
+    '  // Global typenames (shared acroos preprocessor & parser)'
+  ])
+  content.extend([
+    f'  {{ "sl{typename.lower()}", VObjectType::sl{typename} /* = {_sl_typename_start + 1 + index} */ }},'
+    for index, typename in enumerate(_sl_typenames)
+  ])
+  content.append('')
+  content.append('  // Preprocessor typenames')
+  content.extend([
+    f'  {{ "pp{typename.lower()}", VObjectType::pp{typename} /* = {_pp_typename_start + 1 + index} */ }},'
+    for index, typename in enumerate(pp_typenames)
+  ])
+  content.append('')
+  content.append('  // Forced Preprocessor typenames')
+  content.extend([
+    f'  {{ "pp{typename.lower()}", VObjectType::pp{typename} /* = {_forced_pp_typename_start + 1 + index} */ }},'
+    for index, typename in enumerate(sorted(_forced_pp_typenames))
+  ])
+  content.append('')
+  content.append('  // Parser typenames')
+  content.extend([
+    f'  {{ "pa{typename.lower()}", VObjectType::pa{typename} /* = {_forced_pp_typename_start + 1 + index} */ }},'
+    for index, typename in enumerate(pa_typenames)
+  ])
+  content.append('')
+  content.append('  // Forced Parser typenames')
+  content.extend([
+    f'  {{ "pa{typename.lower()}", VObjectType::pa{typename} /* = {_forced_pa_typename_start + 1 + index} */ }},'
+    for index, typename in enumerate(sorted(_forced_pa_typenames))
+  ])
+  content.extend([
+    '};',
+    '',
+    'std::string_view VObject::getTypeName(VObjectType type) {',
+    '  auto it = kTypeToName.find(type);',
+    '  return (it == kTypeToName.cend()) ? "((Unknown VObjectType))" : it->second;',
     '}',
-    ''
+    '',
+    'VObjectType VObject::getType(std::string_view name) {',
+    '  std::string n(name);',
+    '  std::transform(n.begin(), n.end(), n.begin(), [](std::string::value_type c) { return std::tolower((int32_t)c); });',
+    '  auto it = kNameToType.find(n);',
+    '  return (it == kNameToType.cend()) ? VObjectType::sl_INVALID_ : it->second;',
+    '}',
+    '',
   ])
 
   _write_output(filepath, '\n'.join(content))

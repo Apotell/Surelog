@@ -61,6 +61,7 @@ class VObject final {
         m_sibling(sibling) {}
 
   static std::string_view getTypeName(VObjectType type);
+  static VObjectType getType(std::string_view name);
 
   std::string print(Session* session, NodeId uniqueId, PathId definitionFile,
                     PathId printedFile) const;

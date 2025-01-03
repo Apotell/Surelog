@@ -98,34 +98,17 @@ void SV3_1aPpParseTreeListener::collectAsVisited(
   }
 }
 
-bool SV3_1aPpParseTreeListener::isInActiveBranch() const {
-  const PreprocessFile::IfElseStack &ifElseStack = m_pp->getStack();
-  if (!ifElseStack.empty()) {
-    const PreprocessFile::IfElseItem &last = ifElseStack.back();
-    switch (last.m_type) {
-      case PreprocessFile::IfElseItem::IFDEF:
-      case PreprocessFile::IfElseItem::ELSIF:
-        return last.m_defined && last.m_previousActiveState;
-      case PreprocessFile::IfElseItem::IFNDEF:
-        return !last.m_defined && last.m_previousActiveState;
-      default:
-        break;
-    }
-  }
-
-  return true;
-}
-
 void SV3_1aPpParseTreeListener::appendPreprocBegin() {
-  if (m_processingDirective++ != 0) return;
+  if (m_pp != m_pp->getSourceFile()) return;
 
   const size_t index = m_fileContent->getVObjects().size();
   m_pp->append(StrCat(kPreprocBeginPrefix, index, kPreprocBeginSuffix));
+  ++m_processingDirective;
 }
 
 void SV3_1aPpParseTreeListener::appendPreprocEnd(antlr4::ParserRuleContext *ctx,
                                                  VObjectType type) {
-  if (--m_processingDirective != 0) return;
+  if (m_pp != m_pp->getSourceFile()) return;
 
   std::string text = ctx->getText();
   std::vector<antlr4::Token *> tokens = ParseUtils::getFlatTokenList(ctx);
@@ -145,6 +128,7 @@ void SV3_1aPpParseTreeListener::appendPreprocEnd(antlr4::ParserRuleContext *ctx,
   const size_t index = (RawNodeId)addVObject(ctx, type);
   m_pp->append(StrCat(std::string(nCRs, '\n'), kPreprocEndPrefix, index,
                       kPreprocEndSuffix, suffix));
+  --m_processingDirective;
 }
 
 void SV3_1aPpParseTreeListener::enterEscaped_identifier(
@@ -194,7 +178,7 @@ void SV3_1aPpParseTreeListener::enterIfdef_directive(
   const auto [result, macroBody, tokenPositions] = m_pp->getMacro(
       macroName, args, m_pp, 0, m_pp->getSourceFile()->m_loopChecker, instr);
 
-  const bool prevInActiveBranch = isInActiveBranch();
+  const bool prevInActiveBranch = m_inActiveBranch;
   PreprocessFile::IfElseItem &item = m_pp->getStack().emplace_back();
   item.m_macroName = macroName;
   item.m_defined = (macroBody != PreprocessFile::MacroNotDefined);
@@ -249,7 +233,7 @@ void SV3_1aPpParseTreeListener::enterIfndef_directive(
   const auto [result, macroBody, tokenPositions] = m_pp->getMacro(
       macroName, args, m_pp, 0, m_pp->getSourceFile()->m_loopChecker, instr);
 
-  const bool prevInActiveBranch = isInActiveBranch();
+  const bool prevInActiveBranch = m_inActiveBranch;
   PreprocessFile::IfElseItem &item = m_pp->getStack().emplace_back();
   item.m_macroName = macroName;
   item.m_defined = (macroBody != PreprocessFile::MacroNotDefined);
@@ -315,7 +299,7 @@ void SV3_1aPpParseTreeListener::enterElsif_directive(
   const auto [result, macroBody, tokenPositions] = m_pp->getMacro(
       macroName, args, m_pp, 0, m_pp->getSourceFile()->m_loopChecker, instr);
 
-  const bool prevInActiveBranch = isInActiveBranch();
+  const bool prevInActiveBranch = m_inActiveBranch;
   const bool previousBranchActive = isPreviousBranchActive();
   PreprocessFile::IfElseItem &item = m_pp->getStack().emplace_back();
   item.m_macroName = macroName;
@@ -340,7 +324,7 @@ void SV3_1aPpParseTreeListener::exitElsif_directive(
 
 void SV3_1aPpParseTreeListener::enterElse_directive(
     SV3_1aPpParser::Else_directiveContext *ctx) {
-  const bool prevInActiveBranch = isInActiveBranch();
+  const bool prevInActiveBranch = m_inActiveBranch;
   const bool previousBranchActive = isPreviousBranchActive();
   const LineColumn lc = ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
   PreprocessFile::IfElseItem &item = m_pp->getStack().emplace_back();
@@ -364,7 +348,7 @@ void SV3_1aPpParseTreeListener::exitElse_directive(
 
 void SV3_1aPpParseTreeListener::enterEndif_directive(
     SV3_1aPpParser::Endif_directiveContext *ctx) {
-  const bool prevInActiveBranch = isInActiveBranch();
+  const bool prevInActiveBranch = m_inActiveBranch;
   PreprocessFile::IfElseStack &stack = m_pp->getStack();
   bool unroll = true;
   while (unroll && (!stack.empty())) {
@@ -930,7 +914,7 @@ void SV3_1aPpParseTreeListener::exitEveryRule(antlr4::ParserRuleContext *ctx) {
     m_callstack.pop_back();
   }
 
-  if (m_processingDirective < 1) return;
+  if ((m_processingDirective < 1) || (m_pp != m_pp->getSourceFile())) return;
   if ((ctx->getRuleIndex() ==
        SV3_1aPpParser::RuleEscaped_macro_definition_body) ||
       (ctx->getRuleIndex() ==
@@ -939,14 +923,12 @@ void SV3_1aPpParseTreeListener::exitEveryRule(antlr4::ParserRuleContext *ctx) {
     return;
   }
 
-  if ((m_processingDirective > 0) && (m_pp == m_pp->getSourceFile())) {
   // clang-format off
   switch (ctx->getRuleIndex()) {
 <RULE_CASE_STATEMENTS>
     default: break;
    }
   // clang-format on
-  }
 }
 
 void SV3_1aPpParseTreeListener::visitTerminal(

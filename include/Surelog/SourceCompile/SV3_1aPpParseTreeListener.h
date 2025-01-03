@@ -116,7 +116,6 @@ class SV3_1aPpParseTreeListener final : public SV3_1aPpParserBaseListener,
   bool isAnyOnCallStack(const std::unordered_set<size_t>& ruleIndicies) const;
 
   void collectAsVisited(antlr4::ParserRuleContext* ctx);
-  bool isInActiveBranch() const;
 
   void appendPreprocBegin();
   void appendPreprocEnd(antlr4::ParserRuleContext* ctx, VObjectType type);

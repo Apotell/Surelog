@@ -62,6 +62,14 @@ class ParseTreeNode final {
     return *this;
   }
 
+  bool operator == (const ParseTreeNode& rhs) const {
+    return (m_index == rhs.m_index) && (m_object == rhs.m_object);
+  }
+
+  bool operator != (const ParseTreeNode& rhs) const {
+    return (m_index != rhs.m_index) || (m_object != rhs.m_object);
+  }
+
  public:
   operator bool() const { return m_index && (m_object != nullptr); }
 

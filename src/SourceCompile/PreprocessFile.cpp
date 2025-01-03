@@ -1109,13 +1109,20 @@ PreprocessFile::evaluateMacro_(
     } else {
       std::string pp_result = pp->getPreProcessedFileContent();
       if (callingLine && callingFile && !callingFile->isMacroBody()) {
+        CommandLineParser* const clp = m_session->getCommandLineParser();
         pp_result = std::regex_replace(
             pp_result, std::regex(PP__File__Marking),
             StrCat("\"",
                    fileSystem->toPath(callingFile->getFileId(callingLine)),
                    "\""));
-        pp_result = std::regex_replace(pp_result, std::regex(PP__Line__Marking),
-                                       std::to_string(callingLine));
+        if (clp->parseTree()) {
+          pp_result =
+              std::regex_replace(pp_result, std::regex(PP__Line__Marking), "0");
+        } else {
+          pp_result =
+              std::regex_replace(pp_result, std::regex(PP__Line__Marking),
+                                 std::to_string(callingLine));
+        }
       }
       result = pp_result;
       found = true;

@@ -26,16 +26,23 @@
 #pragma once
 
 #include <Surelog/Common/Containers.h>
-#include <ParserRuleContext.h>
+
+namespace antlr4 {
+class CommonTokenStream;
+class Token;
+class ParserRuleContext;
+namespace tree {
+class ParseTree;
+class TerminalNode;
+}  // namespace tree
+}  // namespace antlr4
 
 namespace SURELOG {
 namespace ParseUtils {
-using ParseTree = antlr4::tree::ParseTree;
-
-LineColumn getLineColumn(antlr4::CommonTokenStream* stream,
-                         antlr4::ParserRuleContext* context);
-LineColumn getEndLineColumn(antlr4::CommonTokenStream* stream,
-                            antlr4::ParserRuleContext* context);
+LineColumn getLineColumn(const antlr4::CommonTokenStream* stream,
+                         antlr4::tree::ParseTree* context);
+LineColumn getEndLineColumn(const antlr4::CommonTokenStream* stream,
+                            antlr4::tree::ParseTree* context);
 
 LineColumn getLineColumn(antlr4::Token* token);
 LineColumn getEndLineColumn(antlr4::Token* token);
@@ -43,13 +50,15 @@ LineColumn getEndLineColumn(antlr4::Token* token);
 LineColumn getLineColumn(antlr4::tree::TerminalNode* node);
 LineColumn getEndLineColumn(antlr4::tree::TerminalNode* node);
 
-const std::vector<ParseTree*>& getTopTokenList(ParseTree* tree);
+const std::vector<antlr4::tree::ParseTree*>& getTopTokenList(
+    const antlr4::tree::ParseTree* tree);
 void tokenizeAtComma(std::vector<std::string>& actualArgs,
-                     const std::vector<ParseTree*>& tokens);
+                     const std::vector<antlr4::tree::ParseTree*>& tokens);
 
-std::vector<antlr4::Token*> getFlatTokenList(ParseTree* tree);
+std::vector<antlr4::Token*> getFlatTokenList(antlr4::tree::ParseTree* tree);
 
-void inOrderTraversal(std::vector<antlr4::Token*>& tokens, ParseTree* parent);
+void inOrderTraversal(std::vector<antlr4::Token*>& tokens,
+                      const antlr4::tree::ParseTree* parent);
 }  // namespace ParseUtils
 
 }  // namespace SURELOG

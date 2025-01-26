@@ -81,7 +81,7 @@ class SV3_1aTreeShapeHelper : public CommonListenerHelper {
       SV3_1aParser::Time_literalContext* ctx);
 
   std::tuple<PathId, uint32_t, uint16_t, uint32_t, uint16_t> getFileLine(
-      antlr4::ParserRuleContext* ctx, antlr4::Token* token) const override;
+      antlr4::tree::ParseTree* ctx, antlr4::Token* token) const override;
 
  protected:
   SV3_1aTreeShapeHelper(Session* session, ParseFile* pf,

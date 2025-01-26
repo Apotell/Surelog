@@ -104,6 +104,16 @@ class SV3_1aPpParseTreeListener final : public SV3_1aPpParserBaseListener,
       SV3_1aPpParser::Escaped_macro_definition_bodyContext* ctx) final;
   void exitMacro_arg(SV3_1aPpParser::Macro_argContext* ctx) final;
 
+  void enterPragma_directive(
+      SV3_1aPpParser::Pragma_directiveContext* ctx) final;
+  void exitPragma_directive(SV3_1aPpParser::Pragma_directiveContext* ctx) final;
+
+  void enterComment(SV3_1aPpParser::CommentContext* ctx) final;
+  void exitComment(SV3_1aPpParser::CommentContext* ctx) final;
+
+  void enterDescription(SV3_1aPpParser::DescriptionContext* ctx) final;
+  void exitDescription(SV3_1aPpParser::DescriptionContext* ctx) final;
+
   void enterEveryRule(antlr4::ParserRuleContext* ctx) final;
   void exitEveryRule(antlr4::ParserRuleContext* ctx) final;
   void visitTerminal(antlr4::tree::TerminalNode* node) final;
@@ -125,6 +135,10 @@ class SV3_1aPpParseTreeListener final : public SV3_1aPpParserBaseListener,
   visited_nodes_t m_visitedNodes;
   int32_t m_processingDirective = 0;
   int32_t m_processingMacroInstance = 0;
+  int32_t m_processingPragmaDirective = 0;
+
+  const std::regex m_regexTranslateOn;
+  const std::regex m_regexTranslateOff;
 };
 }  // namespace SURELOG
 

@@ -61,7 +61,7 @@ class SV3_1aPpTreeListenerHelper : public CommonListenerHelper {
   SymbolId registerSymbol(std::string_view symbol) final;
 
   std::tuple<PathId, uint32_t, uint16_t, uint32_t, uint16_t> getFileLine(
-      antlr4::ParserRuleContext* ctx, antlr4::Token* token) const override;
+      antlr4::tree::ParseTree* ctx, antlr4::Token* token) const override;
 
  protected:
   SV3_1aPpTreeListenerHelper(Session* session, PreprocessFile* pp,

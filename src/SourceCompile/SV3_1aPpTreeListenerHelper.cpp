@@ -30,6 +30,8 @@
 #include <Surelog/SourceCompile/SymbolTable.h>
 #include <Surelog/Utils/ParseUtils.h>
 
+#include <antlr4-runtime.h>
+
 namespace SURELOG {
 
 SV3_1aPpTreeListenerHelper::SV3_1aPpTreeListenerHelper(
@@ -52,7 +54,7 @@ SymbolId SV3_1aPpTreeListenerHelper::registerSymbol(std::string_view symbol) {
 }
 
 std::tuple<PathId, uint32_t, uint16_t, uint32_t, uint16_t>
-SV3_1aPpTreeListenerHelper::getFileLine(antlr4::ParserRuleContext* ctx,
+SV3_1aPpTreeListenerHelper::getFileLine(antlr4::tree::ParseTree* ctx,
                                         antlr4::Token* token) const {
   LineColumn lineCol = ParseUtils::getLineColumn(m_tokens, ctx);
   LineColumn endLineCol = ParseUtils::getEndLineColumn(m_tokens, ctx);

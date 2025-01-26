@@ -148,6 +148,7 @@ class CommandLineParser final {
   bool sepComp() const { return m_sepComp; }
   bool link() const { return m_link; }
   bool gc() const { return m_gc; }
+  bool disableLineMarkings() const { return m_disableLineMarkings; }
   bool parseTree() const { return m_parseTree; }
   void setParse(bool val) { m_parse = val; }
   void setParseTree(bool val) { m_parseTree = val; }
@@ -155,6 +156,7 @@ class CommandLineParser final {
   void setLowMem(bool val) { m_lowMem = val; }
   void setCompile(bool val) { m_compile = val; }
   void setElaborate(bool val) { m_elaborate = val; }
+  void setDisableLineMarkings(bool val) { m_disableLineMarkings = val; }
   void setSepComp(bool val) {
     m_sepComp = val;
     m_writePpOutput = val;
@@ -358,6 +360,7 @@ class CommandLineParser final {
   bool m_sepComp;
   bool m_link;
   bool m_gc;
+  bool m_disableLineMarkings;
 };
 
 }  // namespace SURELOG

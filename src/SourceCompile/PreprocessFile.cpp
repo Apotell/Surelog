@@ -346,8 +346,13 @@ bool PreprocessFile::preprocess() {
     if (cache.restore(clp->lowMem() || clp->noCacheHash())) {
       m_usingCachedVersion = true;
       getCompilationUnit()->setCurrentTimeInfo(getFileId(0));
-      if (m_debugAstModel && !isPrecompiled)
-        m_fileContent->printTree(std::cout);
+      if (m_debugAstModel && !isPrecompiled) {
+        if (clp->parseTree()) {
+          std::cout << m_fileContent->printObjects() << std::endl;
+        } else {
+          m_fileContent->printTree(std::cout);
+        }
+      }
       if (isPrecompiled || clp->noCacheHash()) {
         if (clp->debugCache()) {
           std::cout << "PP CACHE USED FOR: " << PathIdPP(m_fileId, fileSystem)
@@ -600,7 +605,13 @@ bool PreprocessFile::preprocess() {
         /* indexOpposite */ indexOpposite);
   }
 
-  if (m_debugAstModel && !isPrecompiled) m_fileContent->printTree(std::cout);
+  if (m_debugAstModel && !isPrecompiled) {
+    if (clp->parseTree()) {
+      std::cout << m_fileContent->printObjects() << std::endl;
+    } else {
+      m_fileContent->printTree(std::cout);
+    }
+  }
   m_lineCount = std::count(m_result.cbegin(), m_result.cend(), '\n');
   return true;
 }
@@ -1115,7 +1126,7 @@ PreprocessFile::evaluateMacro_(
             StrCat("\"",
                    fileSystem->toPath(callingFile->getFileId(callingLine)),
                    "\""));
-        if (clp->parseTree()) {
+        if (clp->disableLineMarkings()) {
           pp_result =
               std::regex_replace(pp_result, std::regex(PP__Line__Marking), "0");
         } else {

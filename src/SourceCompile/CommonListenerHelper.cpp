@@ -29,7 +29,7 @@
 
 namespace SURELOG {
 
-using antlr4::ParserRuleContext;
+using antlr4::tree::ParseTree;
 
 CommonListenerHelper::CommonListenerHelper(Session* session,
                                            FileContent* file_content,
@@ -93,7 +93,7 @@ uint32_t CommonListenerHelper::Line(NodeId index) const {
   return m_fileContent->Line(index);
 }
 
-NodeId CommonListenerHelper::addVObject(ParserRuleContext* ctx, SymbolId sym,
+NodeId CommonListenerHelper::addVObject(ParseTree* ctx, SymbolId sym,
                                         VObjectType objtype) {
   auto [fileId, line, column, endLine, endColumn] = getFileLine(ctx, nullptr);
 
@@ -118,19 +118,17 @@ NodeId CommonListenerHelper::addVObject(ParserRuleContext* ctx, SymbolId sym,
   return objectIndex;
 }
 
-NodeId CommonListenerHelper::addVObject(ParserRuleContext* ctx,
-                                        std::string_view name,
+NodeId CommonListenerHelper::addVObject(ParseTree* ctx, std::string_view name,
                                         VObjectType objtype) {
   return addVObject(ctx, registerSymbol(name), objtype);
 }
 
-NodeId CommonListenerHelper::addVObject(ParserRuleContext* ctx,
-                                        VObjectType objtype) {
+NodeId CommonListenerHelper::addVObject(ParseTree* ctx, VObjectType objtype) {
   return addVObject(ctx, BadSymbolId, objtype);
 }
 
 void CommonListenerHelper::addParentChildRelations(NodeId indexParent,
-                                                   ParserRuleContext* ctx) {
+                                                   const ParseTree* ctx) {
   NodeId currentIndex = indexParent;
   for (antlr4::tree::ParseTree* child : ctx->children) {
     NodeId childIndex = NodeIdFromContext(child);
@@ -146,7 +144,7 @@ void CommonListenerHelper::addParentChildRelations(NodeId indexParent,
   }
 }
 
-NodeId CommonListenerHelper::getObjectId(ParserRuleContext* ctx) const {
+NodeId CommonListenerHelper::getObjectId(const ParseTree* ctx) const {
   auto itr = m_contextToObjectMap.find(ctx);
   return (itr == m_contextToObjectMap.end()) ? InvalidNodeId : itr->second;
 }

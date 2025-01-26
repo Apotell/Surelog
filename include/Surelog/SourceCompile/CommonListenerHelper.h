@@ -82,20 +82,20 @@ class CommonListenerHelper {
   uint16_t Column(NodeId index) const;
   uint32_t Line(NodeId index) const;
 
-  NodeId addVObject(antlr4::ParserRuleContext* ctx, std::string_view name,
+  NodeId addVObject(antlr4::tree::ParseTree* ctx, std::string_view name,
                     VObjectType objtype);
 
-  NodeId addVObject(antlr4::ParserRuleContext* ctx, VObjectType objtype);
-  NodeId addVObject(antlr4::ParserRuleContext* ctx, SymbolId sym,
+  NodeId addVObject(antlr4::tree::ParseTree* ctx, VObjectType objtype);
+  NodeId addVObject(antlr4::tree::ParseTree* ctx, SymbolId sym,
                     VObjectType objtype);
 
   void addParentChildRelations(NodeId indexParent,
-                               antlr4::ParserRuleContext* ctx);
+                               const antlr4::tree::ParseTree* ctx);
 
-  NodeId getObjectId(antlr4::ParserRuleContext* ctx) const;
+  NodeId getObjectId(const antlr4::tree::ParseTree* ctx) const;
 
   virtual std::tuple<PathId, uint32_t, uint16_t, uint32_t, uint16_t>
-  getFileLine(antlr4::ParserRuleContext* ctx, antlr4::Token* token) const = 0;
+  getFileLine(antlr4::tree::ParseTree* ctx, antlr4::Token* token) const = 0;
 
   NodeId& MutableChild(NodeId index);
   NodeId& MutableSibling(NodeId index);

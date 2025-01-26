@@ -29,6 +29,7 @@
 #include <Surelog/SourceCompile/SV3_1aParseTreeListener.h>
 #include <Surelog/Utils/NumUtils.h>
 #include <Surelog/Utils/ParseUtils.h>
+#include <Surelog/Utils/StringUtils.h>
 #include <parser/SV3_1aLexer.h>
 
 #include <algorithm>
@@ -54,35 +55,44 @@ SV3_1aParseTreeListener::SV3_1aParseTreeListener(
   }
 }
 
-NodeId SV3_1aParseTreeListener::addVObject(antlr4::ParserRuleContext *ctx,
-                                           antlr4::Token *token,
-                                           VObjectType objectType) {
-  if (m_paused != 0) return InvalidNodeId;
-  if (!m_visitedTokens.emplace(token).second) return InvalidNodeId;
-
-  auto [fileId, line, column, endLine, endColumn] = getFileLine(nullptr, token);
-  const std::string text = token->getText();
-
-  NodeId childIndex =
-      m_fileContent->addObject(registerSymbol(text), fileId, objectType, line,
-                               column, endLine, endColumn);
-
-  NodeId parentIndex = NodeIdFromContext(ctx);
-
-  VObject *const childObject = m_fileContent->MutableObject(childIndex);
-  VObject *const parentObject = m_fileContent->MutableObject(parentIndex);
-
-  childObject->m_parent = parentIndex;
-  childObject->m_sibling = parentObject->m_child;
-  parentObject->m_child = childIndex;
-
-  return childIndex;
-}
-
 NodeId SV3_1aParseTreeListener::addVObject(antlr4::tree::TerminalNode *node,
                                            VObjectType objectType) {
-  return (m_paused == 0) ? addVObject((antlr4::ParserRuleContext *)node,
-                                      node->getText(), objectType)
+  // This call connect the node to the tree i.e. parenting and shouldn't
+  // be replaced with node->getSymbol() as second argument. Also, the
+  // returned id doesn't get collected in orphans and so parenting gets
+  // entirely ignored if called with getSymbol() as argument.
+  return (m_paused == 0) ? addVObject(node, node->getText(), objectType)
+                         : InvalidNodeId;
+}
+
+NodeId SV3_1aParseTreeListener::addOrphan(antlr4::tree::ParseTree *tree,
+                                          NodeId nodeId) {
+  orphan_objects_t::const_iterator it = m_orphanObjects.find(tree);
+  if (it != m_orphanObjects.cend()) {
+    VObject *const object = m_fileContent->MutableObject(nodeId);
+    object->m_sibling = it->second;
+  }
+  m_orphanObjects.insert_or_assign(tree, nodeId);
+  return nodeId;
+}
+
+NodeId SV3_1aParseTreeListener::addOrphan(antlr4::tree::ParseTree *tree,
+                                          antlr4::Token *token,
+                                          std::string_view text,
+                                          VObjectType objectType) {
+  if (m_paused != 0) return InvalidNodeId;
+
+  auto [fileId, line, column, endLine, endColumn] = getFileLine(nullptr, token);
+  const NodeId nodeId =
+      m_fileContent->addObject(registerSymbol(text), fileId, objectType, line,
+                               column, endLine, endColumn);
+  return addOrphan(tree, nodeId);
+}
+
+NodeId SV3_1aParseTreeListener::addOrphan(antlr4::tree::ParseTree *tree,
+                                          antlr4::Token *token,
+                                          VObjectType objectType) {
+  return (m_paused == 0) ? addOrphan(tree, token, token->getText(), objectType)
                          : InvalidNodeId;
 }
 
@@ -178,7 +188,7 @@ void SV3_1aParseTreeListener::applyLocationOffsets() {
   // }
   // std::cout << std::endl;
 
-  m_fileContent->sortTree();
+  // m_fileContent->sortTree();
   // m_fileContent->printTree(std::cout);
 
   vobjects_t &vobjects = *m_fileContent->mutableVObjects();
@@ -412,90 +422,139 @@ void SV3_1aParseTreeListener::visitPreprocEnd(antlr4::Token *token,
 }
 
 void SV3_1aParseTreeListener::processPendingTokens(
-    antlr4::ParserRuleContext *ctx, size_t endTokenIndex) {
+    antlr4::tree::ParseTree *tree, size_t endTokenIndex) {
   while (m_lastVisitedTokenIndex < endTokenIndex) {
     antlr4::Token *const lastToken = m_tokens->get(m_lastVisitedTokenIndex);
+    ++m_lastVisitedTokenIndex;
 
-    NodeId nodeId;
     switch (lastToken->getType()) {
       case SV3_1aParser::PREPROC_BEGIN: {
         visitPreprocBegin(lastToken);
+        m_ruleCallstack.emplace_back(tree);
       } break;
 
       case SV3_1aParser::PREPROC_END: {
-        antlr4::Token *const endToken = lastToken;
-        const std::string endText = endToken->getText();
-        std::string_view svtext = endText;
+        const std::string text = lastToken->getText();
+        std::string_view svtext = text;
         svtext.remove_prefix(kPreprocEndPrefix.length());
 
         uint32_t index = 0;
         if (NumUtils::parseUint32(svtext, &index)) {
           const NodeId ppNodeId(index);
-          nodeId = mergeObjectTree(ppNodeId);
+          const NodeId nodeId = mergeObjectTree(ppNodeId);
+          addOrphan(m_ruleCallstack.back(), nodeId);
+          if (NodeId parentId = NodeIdFromContext(m_ruleCallstack.back())) {
+            processOrphanObjects(m_ruleCallstack.back(), parentId);
+          }
           visitPreprocEnd(lastToken, ppNodeId);
+          m_ruleCallstack.pop_back();
         }
       } break;
 
       case SV3_1aParser::One_line_comment: {
-        nodeId = addVObject(ctx, lastToken, VObjectType::paOne_line_comment);
+        std::string text = lastToken->getText();
+
+        uint32_t count = 0;
+        std::string_view trimmed = text;
+        while (!trimmed.empty() && (trimmed.back() == '\n')) {
+          trimmed.remove_suffix(1);
+          ++count;
+        }
+
+        if (!trimmed.empty()) {
+          NodeId nodeId = addOrphan(tree, lastToken, trimmed,
+                                    VObjectType::paOne_line_comment);
+          // Adjust the end location of the object
+          VObject *const object = m_fileContent->MutableObject(nodeId);
+          --object->m_endLine;
+          object->m_endColumn = object->m_column + trimmed.length();
+        }
+
+        for (uint32_t i = 0; i < count; ++i) {
+          addOrphan(tree, lastToken, "\n", VObjectType::ppCR);
+        }
+
+        m_visitedTokens.emplace(lastToken);
       } break;
 
       case SV3_1aParser::Block_comment: {
-        nodeId = addVObject(ctx, lastToken, VObjectType::paBlock_comment);
+        addOrphan(tree, lastToken, VObjectType::paBlock_comment);
       } break;
 
       case SV3_1aParser::White_space: {
-        nodeId = addVObject(ctx, lastToken, VObjectType::paWhite_space);
+        std::string text = lastToken->getText();
+        const std::vector<std::string_view> parts =
+            StringUtils::splitLines(text);
+        for (std::string_view part : parts) {
+          bool hasCR = false;
+          if (!part.empty() && (part.back() == '\n')) {
+            part.remove_suffix(1);
+            hasCR = true;
+          }
+          if (!part.empty()) {
+            addOrphan(tree, lastToken, part, VObjectType::paWhite_space);
+          }
+          if (hasCR) {
+            addOrphan(tree, lastToken, "\n", VObjectType::ppCR);
+          }
+        }
+        m_visitedTokens.emplace(lastToken);
       } break;
 
-      default: {
-        nodeId = InvalidNodeId;
-      } break;
+      default:
+        break;
     }
-
-    if (nodeId) m_orphanObjects.emplace(ctx, nodeId);
-    ++m_lastVisitedTokenIndex;
   }
 }
 
 void SV3_1aParseTreeListener::processOrphanObjects(
-    antlr4::ParserRuleContext *ctx, NodeId parentId) {
-  std::pair<orphan_objects_t::const_iterator, orphan_objects_t::const_iterator>
-      bounds = m_orphanObjects.equal_range(ctx);
-  if (bounds.first == bounds.second) return;
+    antlr4::tree::ParseTree *tree, NodeId parentId) {
+  orphan_objects_t::const_iterator it = m_orphanObjects.find(tree);
+  if (it == m_orphanObjects.cend()) return;
 
-  VObject *const parent = m_fileContent->MutableObject(parentId);
-  for (orphan_objects_t::const_iterator it = bounds.first; it != bounds.second;
-       ++it) {
-    const NodeId &orphanId = it->second;
-    VObject *const orphan = m_fileContent->MutableObject(orphanId);
+  std::vector<VObject> &objects = *m_fileContent->mutableVObjects();
+  VObject &parent = objects[parentId];
 
-    orphan->m_parent = parentId;
-    orphan->m_sibling = parent->m_child;
-    parent->m_child = orphanId;
+  std::vector<NodeId> indicies;
+  for (NodeId childId = parent.m_child; childId;
+       childId = objects[childId].m_sibling) {
+    indicies.emplace_back(childId);
   }
 
-  m_orphanObjects.erase(bounds.first, bounds.second);
+  NodeId orphanId = it->second;
+  while (orphanId) {
+    VObject &orphan = objects[orphanId];
+    orphan.m_parent = parentId;
+    indicies.emplace_back(orphanId);
+
+    orphanId = orphan.m_sibling;
+
+    if (!orphanId) {
+      orphan.m_sibling = parent.m_child;
+      parent.m_child = it->second;
+    }
+  }
+
+  m_orphanObjects.erase(it);
+
+  std::sort(indicies.begin(), indicies.end());
+
+  for (size_t i = 1, ni = indicies.size(); i < ni; ++i) {
+    objects[indicies[i - 1]].m_sibling = indicies[i];
+  }
+  objects[indicies.back()].m_sibling = InvalidNodeId;
+  parent.m_child = indicies[0];
 }
 
 void SV3_1aParseTreeListener::enterEveryRule(antlr4::ParserRuleContext *ctx) {
   if (const antlr4::Token *const startToken = ctx->getStart()) {
-    if (!m_ruleCallstack.empty()) {
-      processPendingTokens(m_ruleCallstack.back(), startToken->getTokenIndex());
+    if (ctx->parent != nullptr) {
+      processPendingTokens(ctx->parent, startToken->getTokenIndex());
     }
   }
-  m_ruleCallstack.emplace_back(ctx);
 }
 
 void SV3_1aParseTreeListener::exitEveryRule(antlr4::ParserRuleContext *ctx) {
-  if (!m_ruleCallstack.empty() && (m_ruleCallstack.back() == ctx)) {
-    m_ruleCallstack.pop_back();
-  }
-
-  if (const antlr4::Token *const stopToken = ctx->getStop()) {
-    processPendingTokens(ctx, stopToken->getTokenIndex());
-  }
-
   NodeId nodeId;
 
   // clang-format off
@@ -504,6 +563,10 @@ void SV3_1aParseTreeListener::exitEveryRule(antlr4::ParserRuleContext *ctx) {
     default: break;
   }
   // clang-format on
+
+  if (const antlr4::Token *const stopToken = ctx->getStop()) {
+    processPendingTokens(ctx, stopToken->getTokenIndex());
+  }
 
   processOrphanObjects(ctx, nodeId);
 
@@ -518,13 +581,14 @@ void SV3_1aParseTreeListener::visitTerminal(antlr4::tree::TerminalNode *node) {
   if (token->getType() == antlr4::Token::EOF) return;
   if (!m_visitedTokens.emplace(token).second) return;
 
-  if (!m_ruleCallstack.empty()) {
-    processPendingTokens(m_ruleCallstack.back(), token->getTokenIndex());
+  if (node->parent != nullptr) {
+    processPendingTokens(node->parent, token->getTokenIndex());
   }
 
   NodeId nodeId;
 
-  // clang-format off
+  if (m_paused == 0) {
+    // clang-format off
   switch (token->getType()) {
     case SV3_1aParser::Escaped_identifier: {
       std::string text = node->getText();
@@ -533,20 +597,20 @@ void SV3_1aParseTreeListener::visitTerminal(antlr4::tree::TerminalNode *node) {
         std::string var = "\\" + match[1].str();
         text = text.replace(match.position(0), match.length(0), var);
       }
-      nodeId = addVObject((antlr4::ParserRuleContext *)node, text, VObjectType::paEscaped_identifier);
+      nodeId = addVObject(node, text, VObjectType::paEscaped_identifier);
     } break;
 
 <VISIT_CASE_STATEMENTS>
     default: break;
   }
-  // clang-format on
+    // clang-format on
 
-  if (nodeId) {
-    VObject *const object = m_fileContent->MutableObject(nodeId);
+    if (nodeId) {
+      VObject *const object = m_fileContent->MutableObject(nodeId);
 
-    const std::optional<bool> isUnary = isUnaryOperator(node);
-    if (isUnary) {
-      // clang-format off
+      const std::optional<bool> isUnary = isUnaryOperator(node);
+      if (isUnary) {
+        // clang-format off
       switch (token->getType()) {
         case SV3_1aParser::BITW_AND: object->m_type = isUnary.value() ? VObjectType::paUnary_BitwAnd : VObjectType::paBinOp_BitwAnd; break;
         case SV3_1aParser::BITW_OR: object->m_type = isUnary.value() ? VObjectType::paUnary_BitwOr : VObjectType::paBinOp_BitwOr; break;
@@ -559,7 +623,8 @@ void SV3_1aParseTreeListener::visitTerminal(antlr4::tree::TerminalNode *node) {
         case SV3_1aParser::STAR: object->m_type = VObjectType::paBinOp_Mult; break;
         default: break;
       }
-      // clang-format on
+        // clang-format on
+      }
     }
   }
 }

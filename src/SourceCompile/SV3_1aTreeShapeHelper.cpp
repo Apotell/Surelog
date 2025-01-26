@@ -140,7 +140,7 @@ void SV3_1aTreeShapeHelper::addDesignElement(antlr4::ParserRuleContext* ctx,
 }
 
 std::tuple<PathId, uint32_t, uint16_t, uint32_t, uint16_t>
-SV3_1aTreeShapeHelper::getFileLine(antlr4::ParserRuleContext* ctx,
+SV3_1aTreeShapeHelper::getFileLine(antlr4::tree::ParseTree* ctx,
                                    antlr4::Token* token) const {
   LineColumn lineCol = (token == nullptr)
                            ? ParseUtils::getLineColumn(m_tokens, ctx)

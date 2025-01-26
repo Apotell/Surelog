@@ -43,6 +43,8 @@
 namespace SURELOG {
 namespace fs = std::filesystem;
 
+constexpr uint32_t kLinesForFileSplitting = 10000000;
+
 static std::unordered_map<std::string, int32_t>
     cmd_ignore;  // commands with an arg to be dropped, and the number of args
                  // to drop
@@ -385,7 +387,7 @@ CommandLineParser::CommandLineParser(Session* session)
 #else
       m_pythonAllowed(false),
 #endif
-      m_linesForFileSplitting(10000000),
+      m_linesForFileSplitting(kLinesForFileSplitting),
       m_pythonEvalScriptPerFile(false),
       m_pythonEvalScript(false),
       m_debugIncludeFileInfo(false),
@@ -407,7 +409,8 @@ CommandLineParser::CommandLineParser(Session* session)
       m_noCacheHash(false),
       m_sepComp(false),
       m_link(false),
-      m_gc(true) {
+      m_gc(true),
+      m_disableLineMarkings(false) {
   m_libraryExtensions.emplace_back(
       m_session->getSymbolTable()->registerSymbol(".v"));  // default
 }
@@ -562,6 +565,25 @@ void CommandLineParser::processArgs_(const std::vector<std::string>& args,
   SymbolTable* const symbols = m_session->getSymbolTable();
   FileSystem* const fileSystem = m_session->getFileSystem();
   ErrorContainer* const errors = m_session->getErrorContainer();
+
+  for (const std::string& arg : args) {
+    if (arg.find("-D") == 0) {
+      std::string def;
+      std::string value;
+      const size_t loc = arg.find('=');
+      if (loc == std::string::npos) {
+        def = arg.substr(2);
+      } else {
+        def = arg.substr(2, loc - 2);
+        value = arg.substr(loc + 1);
+      }
+      if (!def.empty()) {
+        StringUtils::registerEnvVar(def, value);
+        SymbolId id = symbols->registerSymbol(def);
+        m_defineList.emplace(id, value);
+      }
+    }
+  }
 
   for (uint32_t i = 0; i < args.size(); i++) {
     std::string arg(undecorateArg(args[i]));
@@ -1036,6 +1058,8 @@ bool CommandLineParser::parse(int32_t argc, const char** argv,
       m_gc = false;
     } else if (all_arguments[i] == "-gc") {
       m_gc = true;
+    } else if (all_arguments[i] == "-disable-line-markings") {
+      m_disableLineMarkings = true;
     }
 // No multiprocess on Windows platform, only multithreads
 #if defined(_MSC_VER) || defined(__MINGW32__) || defined(__CYGWIN__)
@@ -1269,6 +1293,7 @@ bool CommandLineParser::parse(int32_t argc, const char** argv,
       m_parseOnly = false;
       m_compile = false;
       m_elaborate = false;
+      m_linesForFileSplitting = kLinesForFileSplitting;
     } else if (all_arguments[i] == "-parseonly") {
       m_writePpOutput = true;
       m_parse = true;

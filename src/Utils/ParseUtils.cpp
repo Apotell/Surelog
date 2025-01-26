@@ -58,16 +58,16 @@ LineColumn ParseUtils::getEndLineColumn(antlr4::tree::TerminalNode* node) {
   return getEndLineColumn(node->getSymbol());
 }
 
-LineColumn ParseUtils::getLineColumn(antlr4::CommonTokenStream* stream,
-                                     antlr4::ParserRuleContext* context) {
+LineColumn ParseUtils::getLineColumn(const antlr4::CommonTokenStream* stream,
+                                     antlr4::tree::ParseTree* context) {
   const antlr4::misc::Interval sourceInterval = context->getSourceInterval();
   return (sourceInterval.a == -1)
              ? LineColumn(0, 0)
              : getLineColumn(stream->get(sourceInterval.a));
 }
 
-LineColumn ParseUtils::getEndLineColumn(antlr4::CommonTokenStream* stream,
-                                        antlr4::ParserRuleContext* context) {
+LineColumn ParseUtils::getEndLineColumn(const antlr4::CommonTokenStream* stream,
+                                        antlr4::tree::ParseTree* context) {
   const antlr4::misc::Interval sourceInterval = context->getSourceInterval();
   return (sourceInterval.b == -1)
              ? LineColumn(0, 0)
@@ -75,7 +75,7 @@ LineColumn ParseUtils::getEndLineColumn(antlr4::CommonTokenStream* stream,
 }
 
 const std::vector<antlr4::tree::ParseTree*>& ParseUtils::getTopTokenList(
-    antlr4::tree::ParseTree* tree) {
+    const antlr4::tree::ParseTree* tree) {
   return tree->children;
 }
 
@@ -155,7 +155,7 @@ std::vector<antlr4::Token*> ParseUtils::getFlatTokenList(
  */
 
 void ParseUtils::inOrderTraversal(std::vector<antlr4::Token*>& tokens,
-                                  antlr4::tree::ParseTree* parent) {
+                                  const antlr4::tree::ParseTree* parent) {
   if (!parent) return;
   // Iterate over all child nodes of `parent`.
   for (auto child : parent->children) {

@@ -41,9 +41,9 @@ class SV3_1aParseTreeListener final : public SV3_1aParserBaseListener,
                                       public SV3_1aTreeShapeHelper {
   typedef std::vector<VObject> vobjects_t;
 
-  typedef std::vector<antlr4::ParserRuleContext*> rule_callstack_t;
+  typedef std::vector<antlr4::tree::ParseTree*> rule_callstack_t;
   typedef std::set<const antlr4::Token*> visited_tokens_t;
-  typedef std::multimap<antlr4::ParserRuleContext*, NodeId> orphan_objects_t;
+  typedef std::map<const antlr4::tree::ParseTree*, NodeId> orphan_objects_t;
   typedef std::vector<antlr4::Token*> preproc_begin_statck_t;
 
   typedef std::tuple<uint16_t, int32_t> column_offset_t;
@@ -64,9 +64,13 @@ class SV3_1aParseTreeListener final : public SV3_1aParserBaseListener,
 
  private:
   using SV3_1aTreeShapeHelper::addVObject;
-  NodeId addVObject(antlr4::ParserRuleContext* ctx, antlr4::Token* token,
-                    VObjectType objectType);
   NodeId addVObject(antlr4::tree::TerminalNode* node, VObjectType objectType);
+
+  NodeId addOrphan(antlr4::tree::ParseTree* tree, NodeId nodeId);
+  NodeId addOrphan(antlr4::tree::ParseTree* tree, antlr4::Token* token,
+                   VObjectType objectType);
+  NodeId addOrphan(antlr4::tree::ParseTree* tree, antlr4::Token* token,
+                   std::string_view text, VObjectType objectType);
 
   NodeId mergeObjectTree(NodeId ppNodeId);
   std::optional<bool> isUnaryOperator(
@@ -76,12 +80,12 @@ class SV3_1aParseTreeListener final : public SV3_1aParserBaseListener,
   void applyLocationOffsets();
   void visitPreprocBegin(antlr4::Token* token);
   void visitPreprocEnd(antlr4::Token* token, NodeId ppNodeId);
-  void processPendingTokens(antlr4::ParserRuleContext* ctx,
+  void processPendingTokens(antlr4::tree::ParseTree* tree,
                             size_t endTokenIndex);
-  void processOrphanObjects(antlr4::ParserRuleContext* ctx, NodeId parentId);
+  void processOrphanObjects(antlr4::tree::ParseTree* tree, NodeId parentId);
 
   typedef std::map<uint32_t, std::pair<uint16_t, uint16_t>> line_ends_t;
-  void collectLineRanges(NodeId ppParentId, line_ends_t &ends) const;
+  void collectLineRanges(NodeId ppParentId, line_ends_t& ends) const;
   void collectLineRanges(const antlr4::Token* begin, const antlr4::Token* end,
                          line_ends_t& ends) const;
 

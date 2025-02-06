@@ -661,7 +661,7 @@ void IntegrityChecker::reportNullActual(const UHDM::any* const object) const {
     }
   } else if (const UHDM::ref_module* const objectAsRef_module =
                  object->Cast<const UHDM::ref_module*>()) {
-    shouldReport = objectAsRef_module->Actual_group() == nullptr;
+    shouldReport = objectAsRef_module->Actual_instance() == nullptr;
   } else if (const UHDM::chandle_var* const objectAsChandle_var =
                  object->Cast<const UHDM::chandle_var*>()) {
     shouldReport = objectAsChandle_var->Actual_group() == nullptr;

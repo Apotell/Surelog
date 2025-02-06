@@ -1100,15 +1100,15 @@ void ObjectBinder::enterVar_select(const UHDM::var_select* const object) {
 }
 
 void ObjectBinder::enterRef_module(const UHDM::ref_module* const object) {
-  if (object->Actual_group() != nullptr) return;
+  if (object->Actual_instance() != nullptr) return;
 
   if (const UHDM::any* const actual = getModuleInst(object->VpiDefName())) {
-    const_cast<UHDM::ref_module*>(object)->Actual_group(
-        const_cast<UHDM::any*>(actual));
+    const_cast<UHDM::ref_module*>(object)->Actual_instance(
+        const_cast<UHDM::instance*>(any_cast<UHDM::instance>(actual)));
   } else if (const UHDM::any* const actual =
                  getInterfaceInst(object->VpiDefName())) {
-    const_cast<UHDM::ref_module*>(object)->Actual_group(
-        const_cast<UHDM::any*>(actual));
+    const_cast<UHDM::ref_module*>(object)->Actual_instance(
+        const_cast<UHDM::instance*>(any_cast<UHDM::instance>(actual)));
   }
 }
 
@@ -1222,7 +1222,7 @@ void ObjectBinder::reportErrors() {
       }
     } else if (const UHDM::ref_module* const rm =
                    any_cast<UHDM::ref_module>(object)) {
-      if (rm->Actual_group() == nullptr) {
+      if (rm->Actual_instance() == nullptr) {
         reportMissingActual = true;
       }
     }

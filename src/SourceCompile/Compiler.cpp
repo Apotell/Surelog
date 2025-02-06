@@ -170,10 +170,9 @@ bool Compiler::ppinit_() {
     Library* library = m_librarySet->getLibrary(sourceFileId);
     sourceFiles.insert(sourceFileId);
 
-    Session* const session = new Session(m_session->getFileSystem(), symbols,
-                                         m_session->getLogListener(), nullptr,
-                                         m_session->getCommandLineParser(),
-                                         m_session->getPrecompiled());
+    Session* const session = new Session(
+        m_session->getFileSystem(), symbols, m_session->getLogListener(),
+        nullptr, m_session->getCommandLineParser(), nullptr);
     m_sessions.emplace_back(session);
 
     if (clp->fileUnit() && clp->parseBuiltIn()) {
@@ -272,10 +271,9 @@ bool Compiler::ppinit_() {
         m_compilationUnits.emplace_back(comp_unit);
         symbols = symbols->CreateSnapshot();
       }
-      Session* const session = new Session(m_session->getFileSystem(), symbols,
-                                           m_session->getLogListener(), nullptr,
-                                           m_session->getCommandLineParser(),
-                                           m_session->getPrecompiled());
+      Session* const session = new Session(
+          m_session->getFileSystem(), symbols, m_session->getLogListener(),
+          nullptr, m_session->getCommandLineParser(), nullptr);
       m_sessions.emplace_back(session);
 
       CompileSourceFile* compiler =
@@ -739,10 +737,9 @@ bool Compiler::parseinit_() {
         symbols = symbols->CreateSnapshot();
       }
 
-      Session* const session = new Session(m_session->getFileSystem(), symbols,
-                                           m_session->getLogListener(), nullptr,
-                                           m_session->getCommandLineParser(),
-                                           m_session->getPrecompiled());
+      Session* const session = new Session(
+          m_session->getFileSystem(), symbols, m_session->getLogListener(),
+          nullptr, m_session->getCommandLineParser(), nullptr);
       m_sessions.emplace_back(session);
       compiler->getParser()->setFileContent(new FileContent(
           session, compiler->getParser()->getFileId(0),
@@ -753,8 +750,7 @@ bool Compiler::parseinit_() {
         SymbolTable* symbols = m_session->getSymbolTable()->CreateSnapshot();
         Session* const session = new Session(
             m_session->getFileSystem(), symbols, m_session->getLogListener(),
-            nullptr, m_session->getCommandLineParser(),
-            m_session->getPrecompiled());
+            nullptr, m_session->getCommandLineParser(), nullptr);
         m_sessions.emplace_back(session);
         CompileSourceFile* chunkCompiler = new CompileSourceFile(
             session, compiler, ppId, fileAnalyzer->getLineOffsets()[j]);
@@ -776,8 +772,7 @@ bool Compiler::parseinit_() {
 
         Session* const session = new Session(
             m_session->getFileSystem(), symbols, m_session->getLogListener(),
-            nullptr, m_session->getCommandLineParser(),
-            m_session->getPrecompiled());
+            nullptr, m_session->getCommandLineParser(), nullptr);
         m_sessions.emplace_back(session);
 
         compiler->setSession(session);
@@ -1052,7 +1047,7 @@ void Compiler::writeUhdmSourceFiles() {
     }
   }
 
-  for (const auto &[pmi, mi] : instanceMap) {
+  for (const auto& [pmi, mi] : instanceMap) {
     if (auto it = defMap.find(mi); it != defMap.cend()) {
       pmi->Preproc_macro_definition(it->second);
     }

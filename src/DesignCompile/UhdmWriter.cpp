@@ -3201,7 +3201,7 @@ bool UhdmWriter::write(PathId uhdmFileId) {
             ModuleMap::iterator itr =
                 moduleMap.find(std::string(subMod->VpiDefName()));
             if (itr != moduleMap.end()) {
-              subMod->Actual_group((*itr).second);
+              subMod->Actual_instance(itr->second);
             }
           }
         }

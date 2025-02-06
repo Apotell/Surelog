@@ -98,12 +98,6 @@ class SV3_1aPpParseTreeListener final : public SV3_1aPpParserBaseListener,
       SV3_1aPpParser::Macro_definitionContext* ctx) final;
   void exitMacro_definition(SV3_1aPpParser::Macro_definitionContext* ctx) final;
 
-  void exitSimple_macro_definition_body(
-      SV3_1aPpParser::Simple_macro_definition_bodyContext* ctx) final;
-  void exitEscaped_macro_definition_body(
-      SV3_1aPpParser::Escaped_macro_definition_bodyContext* ctx) final;
-  void exitMacro_arg(SV3_1aPpParser::Macro_argContext* ctx) final;
-
   void enterPragma_directive(
       SV3_1aPpParser::Pragma_directiveContext* ctx) final;
   void exitPragma_directive(SV3_1aPpParser::Pragma_directiveContext* ctx) final;

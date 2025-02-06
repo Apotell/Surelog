@@ -80,10 +80,15 @@ NodeId SV3_1aPpParseTreeListener::addVObject(antlr4::tree::TerminalNode *node,
       --object->m_endLine;
       object->m_endColumn = object->m_column + trimmed.length();
     }
-
+    NodeId pNodeId = nodeId;
     for (uint32_t i = 0; i < count; ++i) {
       nodeId = addVObject((antlr4::ParserRuleContext *)node, "\n",
                           VObjectType::ppCR);
+      if (pNodeId) {
+        VObject *const object = m_fileContent->MutableObject(pNodeId);
+        object->m_sibling = nodeId;
+      }
+      pNodeId = nodeId;
     }
   } else {
     nodeId = addVObject((antlr4::ParserRuleContext *)node, node->getText(),
@@ -174,7 +179,7 @@ void SV3_1aPpParseTreeListener::appendPreprocEnd(antlr4::ParserRuleContext *ctx,
 
 void SV3_1aPpParseTreeListener::enterEscaped_identifier(
     SV3_1aPpParser::Escaped_identifierContext *ctx) {
-  if (m_inActiveBranch && !m_inProtectedRegion) {
+  if (m_inActiveBranch && !m_inProtectedRegion && !m_inMacroDefinitionParsing) {
     const std::string text = ctx->getText();
 
     std::string sequence = kEscapeSequence;
@@ -187,7 +192,7 @@ void SV3_1aPpParseTreeListener::enterEscaped_identifier(
 
 void SV3_1aPpParseTreeListener::enterIfdef_directive(
     SV3_1aPpParser::Ifdef_directiveContext *ctx) {
-  if (m_inProtectedRegion) return;
+  if (m_inProtectedRegion || m_inMacroDefinitionParsing) return;
 
   std::string macroName;
   LineColumn lc = ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
@@ -235,7 +240,7 @@ void SV3_1aPpParseTreeListener::enterIfdef_directive(
 
 void SV3_1aPpParseTreeListener::exitIfdef_directive(
     SV3_1aPpParser::Ifdef_directiveContext *ctx) {
-  if (m_inProtectedRegion) return;
+  if (m_inProtectedRegion || m_inMacroDefinitionParsing) return;
 
   const PreprocessFile::IfElseStack &ifElseStack = m_pp->getStack();
   if (m_inActiveBranch ||
@@ -246,7 +251,7 @@ void SV3_1aPpParseTreeListener::exitIfdef_directive(
 
 void SV3_1aPpParseTreeListener::enterIfndef_directive(
     SV3_1aPpParser::Ifndef_directiveContext *ctx) {
-  if (m_inProtectedRegion) return;
+  if (m_inProtectedRegion || m_inMacroDefinitionParsing) return;
 
   std::string macroName;
   LineColumn lc = ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
@@ -294,7 +299,7 @@ void SV3_1aPpParseTreeListener::enterIfndef_directive(
 
 void SV3_1aPpParseTreeListener::exitIfndef_directive(
     SV3_1aPpParser::Ifndef_directiveContext *ctx) {
-  if (m_inProtectedRegion) return;
+  if (m_inProtectedRegion || m_inMacroDefinitionParsing) return;
 
   const PreprocessFile::IfElseStack &ifElseStack = m_pp->getStack();
   if (m_inActiveBranch ||
@@ -305,7 +310,9 @@ void SV3_1aPpParseTreeListener::exitIfndef_directive(
 
 void SV3_1aPpParseTreeListener::enterUndef_directive(
     SV3_1aPpParser::Undef_directiveContext *ctx) {
-  if (!m_inActiveBranch || m_inProtectedRegion) return;
+  if (!m_inActiveBranch || m_inProtectedRegion || m_inMacroDefinitionParsing) {
+    return;
+  }
 
   appendPreprocBegin();
   collectAsVisited(ctx);
@@ -313,14 +320,16 @@ void SV3_1aPpParseTreeListener::enterUndef_directive(
 
 void SV3_1aPpParseTreeListener::exitUndef_directive(
     SV3_1aPpParser::Undef_directiveContext *ctx) {
-  if (!m_inActiveBranch || m_inProtectedRegion) return;
+  if (!m_inActiveBranch || m_inProtectedRegion || m_inMacroDefinitionParsing) {
+    return;
+  }
 
   appendPreprocEnd(ctx, VObjectType::ppUndef_directive);
 }
 
 void SV3_1aPpParseTreeListener::enterElsif_directive(
     SV3_1aPpParser::Elsif_directiveContext *ctx) {
-  if (m_inProtectedRegion) return;
+  if (m_inProtectedRegion || m_inMacroDefinitionParsing) return;
 
   std::string macroName;
   LineColumn lc = ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
@@ -370,7 +379,7 @@ void SV3_1aPpParseTreeListener::enterElsif_directive(
 
 void SV3_1aPpParseTreeListener::exitElsif_directive(
     SV3_1aPpParser::Elsif_directiveContext *ctx) {
-  if (m_inProtectedRegion) return;
+  if (m_inProtectedRegion || m_inMacroDefinitionParsing) return;
 
   const PreprocessFile::IfElseStack &ifElseStack = m_pp->getStack();
   if (m_inActiveBranch ||
@@ -381,7 +390,7 @@ void SV3_1aPpParseTreeListener::exitElsif_directive(
 
 void SV3_1aPpParseTreeListener::enterElse_directive(
     SV3_1aPpParser::Else_directiveContext *ctx) {
-  if (m_inProtectedRegion) return;
+  if (m_inProtectedRegion || m_inMacroDefinitionParsing) return;
 
   const bool prevInActiveBranch = m_inActiveBranch;
   const bool previousBranchActive = isPreviousBranchActive();
@@ -398,7 +407,7 @@ void SV3_1aPpParseTreeListener::enterElse_directive(
 
 void SV3_1aPpParseTreeListener::exitElse_directive(
     SV3_1aPpParser::Else_directiveContext *ctx) {
-  if (m_inProtectedRegion) return;
+  if (m_inProtectedRegion || m_inMacroDefinitionParsing) return;
 
   const PreprocessFile::IfElseStack &ifElseStack = m_pp->getStack();
   if (m_inActiveBranch ||
@@ -409,7 +418,7 @@ void SV3_1aPpParseTreeListener::exitElse_directive(
 
 void SV3_1aPpParseTreeListener::enterEndif_directive(
     SV3_1aPpParser::Endif_directiveContext *ctx) {
-  if (m_inProtectedRegion) return;
+  if (m_inProtectedRegion || m_inMacroDefinitionParsing) return;
 
   const bool prevInActiveBranch = m_inActiveBranch;
   PreprocessFile::IfElseStack &stack = m_pp->getStack();
@@ -441,7 +450,7 @@ void SV3_1aPpParseTreeListener::enterEndif_directive(
 
 void SV3_1aPpParseTreeListener::exitEndif_directive(
     SV3_1aPpParser::Endif_directiveContext *ctx) {
-  if (m_inActiveBranch && !m_inProtectedRegion) {
+  if (m_inActiveBranch && !m_inProtectedRegion && !m_inMacroDefinitionParsing) {
     appendPreprocEnd(ctx, VObjectType::ppEndif_directive);
   }
 }
@@ -524,26 +533,28 @@ void SV3_1aPpParseTreeListener::exitInclude_directive(
 
 void SV3_1aPpParseTreeListener::enterLine_directive(
     SV3_1aPpParser::Line_directiveContext *ctx) {
-  if (m_inActiveBranch && !m_inProtectedRegion) {
+  if (m_inActiveBranch && !m_inProtectedRegion && !m_inMacroDefinitionParsing) {
     appendPreprocBegin();
   }
 }
 
 void SV3_1aPpParseTreeListener::exitLine_directive(
     SV3_1aPpParser::Line_directiveContext *ctx) {
-  if (m_inActiveBranch && !m_inProtectedRegion) {
+  if (m_inActiveBranch && !m_inProtectedRegion && !m_inMacroDefinitionParsing) {
     appendPreprocEnd(ctx, VObjectType::ppLine_directive);
   }
 }
 
 void SV3_1aPpParseTreeListener::enterSv_file_directive(
     SV3_1aPpParser::Sv_file_directiveContext *ctx) {
-  if (!m_inActiveBranch || m_inProtectedRegion) return;
+  if (!m_inActiveBranch || m_inProtectedRegion || m_inMacroDefinitionParsing) {
+    return;
+  }
 
   appendPreprocBegin();
   if (m_pp->getMacroInfo()) {
     m_pp->append(PreprocessFile::PP__File__Marking);
-  } else {
+  } else if (!m_inMacroDefinitionParsing) {
     FileSystem *const fileSystem = m_session->getFileSystem();
     const LineColumn lc =
         ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
@@ -554,14 +565,16 @@ void SV3_1aPpParseTreeListener::enterSv_file_directive(
 
 void SV3_1aPpParseTreeListener::exitSv_file_directive(
     SV3_1aPpParser::Sv_file_directiveContext *ctx) {
-  if (m_inActiveBranch && !m_inProtectedRegion) {
+  if (m_inActiveBranch && !m_inProtectedRegion && !m_inMacroDefinitionParsing) {
     appendPreprocEnd(ctx, VObjectType::ppSv_file_directive);
   }
 }
 
 void SV3_1aPpParseTreeListener::enterSv_line_directive(
     SV3_1aPpParser::Sv_line_directiveContext *ctx) {
-  if (!m_inActiveBranch || m_inProtectedRegion) return;
+  if (!m_inActiveBranch || m_inProtectedRegion || m_inMacroDefinitionParsing) {
+    return;
+  }
 
   appendPreprocBegin();
   if (m_pp->getMacroInfo()) {
@@ -575,7 +588,7 @@ void SV3_1aPpParseTreeListener::enterSv_line_directive(
 
 void SV3_1aPpParseTreeListener::exitSv_line_directive(
     SV3_1aPpParser::Sv_line_directiveContext *ctx) {
-  if (m_inActiveBranch && !m_inProtectedRegion) {
+  if (m_inActiveBranch && !m_inProtectedRegion && !m_inMacroDefinitionParsing) {
     appendPreprocEnd(ctx, VObjectType::ppSv_line_directive);
   }
 }
@@ -963,32 +976,6 @@ void SV3_1aPpParseTreeListener::exitMacro_definition(
   }
 }
 
-void SV3_1aPpParseTreeListener::exitSimple_macro_definition_body(
-    SV3_1aPpParser::Simple_macro_definition_bodyContext *ctx) {
-  if ((m_processingDirective > 0) && (m_pp == m_pp->getSourceFile())) {
-    addVObject(ctx, ctx->getText(),
-               VObjectType::ppSimple_macro_definition_body);
-    collectAsVisited(ctx);
-  }
-}
-
-void SV3_1aPpParseTreeListener::exitEscaped_macro_definition_body(
-    SV3_1aPpParser::Escaped_macro_definition_bodyContext *ctx) {
-  if ((m_processingDirective > 0) && (m_pp == m_pp->getSourceFile())) {
-    addVObject(ctx, ctx->getText(),
-               VObjectType::ppEscaped_macro_definition_body);
-    collectAsVisited(ctx);
-  }
-}
-
-void SV3_1aPpParseTreeListener::exitMacro_arg(
-    SV3_1aPpParser::Macro_argContext *ctx) {
-  if ((m_processingDirective > 0) && (m_pp == m_pp->getSourceFile())) {
-    addVObject(ctx, ctx->getText(), VObjectType::ppMacro_arg);
-    collectAsVisited(ctx);
-  }
-}
-
 void SV3_1aPpParseTreeListener::enterPragma_directive(
     SV3_1aPpParser::Pragma_directiveContext *ctx) {
   if (!m_inActiveBranch || m_inProtectedRegion) return;
@@ -1083,7 +1070,7 @@ void SV3_1aPpParseTreeListener::exitComment(
                                   ? object->m_column + text.length()
                                   : text.length() - p;
       }
-    } else if (m_inProtectedRegion) {
+    } else if (m_inProtectedRegion || m_inMacroDefinitionParsing) {
       addVObject(ctx, VObjectType::ppComment);
     }
   }
@@ -1150,15 +1137,12 @@ void SV3_1aPpParseTreeListener::exitEveryRule(antlr4::ParserRuleContext *ctx) {
   if (ignore) return;
 
   const size_t ruleIndex = ctx->getRuleIndex();
-  if (m_inProtectedRegion && (m_processingPragmaDirective == 0) &&
-      (ruleIndex == SV3_1aPpParser::RuleDescription)) {
+  if ((ruleIndex == SV3_1aPpParser::RuleDescription) && m_inProtectedRegion &&
+      (m_processingPragmaDirective == 0)) {
     return;
   }
 
-  if ((ruleIndex == SV3_1aPpParser::RuleEscaped_macro_definition_body) ||
-      (ruleIndex == SV3_1aPpParser::RuleSimple_macro_definition_body) ||
-      (ruleIndex == SV3_1aPpParser::RuleMacro_arg) ||
-      (ruleIndex == SV3_1aPpParser::RulePragma_directive)) {
+  if (ruleIndex == SV3_1aPpParser::RulePragma_directive) {
     return;
   }
 
@@ -1183,14 +1167,6 @@ void SV3_1aPpParseTreeListener::visitTerminal(
   if (token->getType() == antlr4::Token::EOF) return;
 
   const size_t tokenType = token->getType();
-
-  // Special handling for macro arg since we don't want
-  // the terminal simple identifier in the tree.
-  if (isAnyOnCallStack({SV3_1aPpParser::RuleEscaped_macro_definition_body,
-                        SV3_1aPpParser::RuleSimple_macro_definition_body,
-                        SV3_1aPpParser::RuleMacro_arg})) {
-    return;
-  }
 
   bool shouldAddVObject = false;
   shouldAddVObject = shouldAddVObject || (m_processingDirective > 0);

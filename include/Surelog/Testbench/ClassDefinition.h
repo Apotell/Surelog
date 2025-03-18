@@ -36,7 +36,7 @@
 #include <uhdm/containers.h>
 #include <uhdm/uhdm_forward_decl.h>
 
-namespace UHDM {
+namespace uhdm {
 class Serializer;
 }
 
@@ -59,7 +59,7 @@ class ClassDefinition : public DesignComponent, public DataType {
   ClassDefinition(Session* session, std::string_view name, Library* library,
                   DesignComponent* container, const FileContent* fC,
                   NodeId nodeId, ClassDefinition* parent,
-                  UHDM::Serializer& serializer);
+                  uhdm::Serializer& serializer);
 
   ~ClassDefinition() override = default;
 
@@ -116,9 +116,9 @@ class ClassDefinition : public DesignComponent, public DataType {
 
   bool hasCompleteBaseSpecification() const;
 
-  UHDM::VectorOfattribute* Attributes() const { return attributes_; }
+  uhdm::AttributeCollection* getAttributes() const { return attributes_; }
 
-  bool Attributes(UHDM::VectorOfattribute* data) {
+  bool setAttributes(uhdm::AttributeCollection* data) {
     attributes_ = data;
     return true;
   }
@@ -138,7 +138,7 @@ class ClassDefinition : public DesignComponent, public DataType {
   ClassMap m_classes;
   CoverGroupMap m_coverGroups;
   BaseClassMap m_baseClasses;
-  UHDM::VectorOfattribute* attributes_ = nullptr;
+  uhdm::AttributeCollection* attributes_ = nullptr;
 };
 
 }  // namespace SURELOG

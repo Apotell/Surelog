@@ -434,7 +434,7 @@ set(surelog_SRC
   ${PROJECT_SOURCE_DIR}/src/Design/Enum.cpp
   ${PROJECT_SOURCE_DIR}/src/Design/FileContent.cpp
   ${PROJECT_SOURCE_DIR}/src/Design/Function.cpp
-  ${PROJECT_SOURCE_DIR}/src/Design/ModPort.cpp
+  ${PROJECT_SOURCE_DIR}/src/Design/Modport.cpp
   ${PROJECT_SOURCE_DIR}/src/Design/ModuleDefinition.cpp
   ${PROJECT_SOURCE_DIR}/src/Design/ModuleInstance.cpp
   ${PROJECT_SOURCE_DIR}/src/Design/Netlist.cpp
@@ -941,7 +941,7 @@ install(
         ${PROJECT_SOURCE_DIR}/include/Surelog/Design/Function.h
         ${PROJECT_SOURCE_DIR}/include/Surelog/Design/Scope.h
         ${PROJECT_SOURCE_DIR}/include/Surelog/Design/TimeInfo.h
-        ${PROJECT_SOURCE_DIR}/include/Surelog/Design/ModPort.h
+        ${PROJECT_SOURCE_DIR}/include/Surelog/Design/Modport.h
         ${PROJECT_SOURCE_DIR}/include/Surelog/Design/Union.h
         ${PROJECT_SOURCE_DIR}/include/Surelog/Design/SimpleType.h
         ${PROJECT_SOURCE_DIR}/include/Surelog/Design/DummyType.h

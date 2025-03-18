@@ -41,31 +41,29 @@
 
 namespace fs = std::filesystem;
 
-class DesignListener final : public UHDM::VpiListener {
-  void enterModule_inst(const UHDM::module_inst *object,
-                        vpiHandle handle) final {
-    std::string_view instName = object->VpiName();
-    m_flatTraversal =
-        (instName.empty()) && ((object->VpiParent() == 0) ||
-                               ((object->VpiParent() != 0) &&
-                                (object->VpiParent()->VpiType() != vpiModule)));
+class DesignListener final : public uhdm::VpiListener {
+  void enterModule(const uhdm::Module *object, vpiHandle handle) final {
+    std::string_view instName = object->getName();
+    m_flatTraversal = (instName.empty()) &&
+                      ((object->getParent() == 0) ||
+                       ((object->getParent() != 0) &&
+                        (object->getParent()->getVpiType() != vpiModule)));
     if (m_flatTraversal)
-      std::cout << "Entering Module Definition: " << object->VpiDefName() << " "
-                << intptr_t(object) << " " << object->UhdmId() << std::endl;
+      std::cout << "Entering Module Definition: " << object->getDefName() << " "
+                << intptr_t(object) << " " << object->getUhdmId() << std::endl;
     else
-      std::cout << "Entering Module Instance: " << object->VpiFullName() << " "
-                << intptr_t(object) << " " << object->UhdmId() << std::endl;
+      std::cout << "Entering Module Instance: " << object->getFullName() << " "
+                << intptr_t(object) << " " << object->getUhdmId() << std::endl;
   }
 
-  void enterCont_assign(const UHDM::cont_assign *object,
-                        vpiHandle handle) final {
+  void enterContAssign(const uhdm::ContAssign *object, vpiHandle handle) final {
     if (m_flatTraversal) {
       std::cout << "  Let's skip the cont assigns in the flat traversal and "
                    "only navigate the ones in the hierarchical tree!"
                 << std::endl;
     } else {
       std::cout << "  enterCont_assign " << intptr_t(object) << " "
-                << object->UhdmId() << std::endl;
+                << object->getUhdmId() << std::endl;
     }
   }
 

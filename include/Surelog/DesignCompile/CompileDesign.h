@@ -35,7 +35,7 @@
 
 #include <mutex>
 
-namespace UHDM {
+namespace uhdm {
 class Serializer;
 }
 
@@ -62,11 +62,11 @@ class CompileDesign {
   const Session* getSession() const { return m_session; }
 
   Compiler* getCompiler() const { return m_compiler; }
-  UHDM::Serializer& getSerializer();
+  uhdm::Serializer& getSerializer();
   void lockSerializer();
   void unlockSerializer();
-  UHDM::VectorOfsource_file* getUhdmSourceFiles() { return m_uhdmSourcefiles; }
-  std::map<const UHDM::typespec*, const UHDM::typespec*>& getSwapedObjects() {
+  uhdm::SourceFileCollection* getUhdmSourceFiles() { return m_uhdmSourcefiles; }
+  std::map<const uhdm::Typespec*, const uhdm::Typespec*>& getSwapedObjects() {
     return m_typespecSwapMap;
   }
 
@@ -84,8 +84,8 @@ class CompileDesign {
   Session* const m_session = nullptr;
   Compiler* const m_compiler;
   std::vector<Session*> m_sessions;
-  UHDM::VectorOfsource_file* m_uhdmSourcefiles = nullptr;
-  std::map<const UHDM::typespec*, const UHDM::typespec*> m_typespecSwapMap;
+  uhdm::SourceFileCollection* m_uhdmSourcefiles = nullptr;
+  std::map<const uhdm::Typespec*, const uhdm::Typespec*> m_typespecSwapMap;
 };
 
 }  // namespace SURELOG

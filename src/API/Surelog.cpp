@@ -43,12 +43,12 @@ void shutdown_compiler(scompiler* the_compiler) {
   if (the_compiler == nullptr) return;
   Compiler* compiler = (Compiler*)the_compiler;
   if (CompileDesign* comp = compiler->getCompileDesign()) {
-    comp->getSerializer().Purge();
+    comp->getSerializer().purge();
   }
   delete (Compiler*)the_compiler;
 }
 
-UHDM::design* get_uhdm_design(scompiler* compiler) {
+uhdm::Design* get_uhdm_design(scompiler* compiler) {
   if (Design* design = get_design(compiler)) {
     return design->getUhdmDesign();
   }

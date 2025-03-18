@@ -7,12 +7,15 @@ concurrency:
 on:
   workflow_dispatch:
 
+env:
+  SURELOG_WITH_TCMALLOC: 'Off'
+
 jobs:
 
 # Linux build, test, and publish
   linux-install:
     name: "Linux | Install | ${{ matrix.compiler }} | ${{ matrix.config }}"
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
@@ -88,7 +91,7 @@ jobs:
 # Linux regression
   linux-regression:
     name: "Linux | Regression | ${{ matrix.compiler }} | ${{ matrix.config }} [${{ matrix.shard }}]"
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs: linux-install
     strategy:
       fail-fast: false
@@ -104,11 +107,6 @@ jobs:
       regression-artifact-name: sl-${{ github.run_number }}-linux-${{ matrix.compiler }}-${{ matrix.config }}-regression-${{ matrix.shard }}
 
     steps:
-    - name: Install dependencies
-      run: |
-        sudo apt-get update -qq &&
-        sudo apt install -y google-perftools libgoogle-perftools-dev
-
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
@@ -116,9 +114,7 @@ jobs:
         architecture: x64
 
     - name: Setup Python Packages
-      run: |
-        pip3 install orderedmultidict
-        pip3 install psutil
+      run: pip3 install orderedmultidict psutil
 
     - name: Checkout code
       uses: actions/checkout@v4
@@ -164,7 +160,7 @@ jobs:
 # Collect statistics
   collect-statistics:
     name: "Linux | Statistics | ${{ matrix.compiler }} | ${{ matrix.config }}"
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs: linux-regression
     if: "!cancelled()"
     strategy:
@@ -182,8 +178,8 @@ jobs:
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
-        python-version: 3.8
-        architecture: x64
+        python-version: '3.10'
+        architecture: 'x64'
 
     - name: Checkout code
       uses: actions/checkout@v4
@@ -217,7 +213,7 @@ jobs:
 
 # Code formatting
   CodeFormatting:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
     - name: Checkout code
@@ -236,14 +232,14 @@ jobs:
 
 # Code Tideness
   ClangTidy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
     - name: Install Dependencies
       run: |
         sudo apt-get update -qq
         sudo apt -qq -y install clang-tidy-12 \
-                                g++-9 default-jre cmake \
+                                g++-11 default-jre cmake \
                                 uuid-dev build-essential
 
     - name: Setup Python

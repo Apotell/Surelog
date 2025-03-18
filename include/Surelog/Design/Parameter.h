@@ -48,8 +48,8 @@ class Parameter : public DataType {
   VObjectType getType() const override;
   NodeId getNodeType() const { return m_ntype; }
 
-  void setUhdmParam(UHDM::any* param) { m_param = param; }
-  UHDM::any* getUhdmParam() const { return m_param; }
+  void setUhdmParam(uhdm::Any* param) { m_param = param; }
+  uhdm::Any* getUhdmParam() const { return m_param; }
   bool isPortParam() const { return m_port_param; }
   void setImportedPackage(std::string_view package) {
     m_importedPackage = package;
@@ -62,7 +62,7 @@ class Parameter : public DataType {
 
  private:
   NodeId m_ntype;
-  UHDM::any* m_param;
+  uhdm::Any* m_param;
   std::string m_importedPackage;
   bool m_port_param;
   bool type_param = false;

@@ -29,7 +29,6 @@
 #include <Surelog/SourceCompile/SV3_1aPpTreeListenerHelper.h>
 #include <Surelog/SourceCompile/SymbolTable.h>
 #include <Surelog/Utils/ParseUtils.h>
-
 #include <antlr4-runtime.h>
 
 namespace SURELOG {

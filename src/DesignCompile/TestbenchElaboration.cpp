@@ -229,7 +229,7 @@ bool TestbenchElaboration::checkForMultipleDefinition_() {
 bool TestbenchElaboration::bindBaseClasses_() {
   Compiler* compiler = m_compileDesign->getCompiler();
   Design* design = compiler->getDesign();
-  UHDM::Serializer& s = m_compileDesign->getSerializer();
+  uhdm::Serializer& s = m_compileDesign->getSerializer();
 
   ClassNameClassDefinitionMultiMap classes = design->getClassDefinitions();
 
@@ -255,27 +255,27 @@ bool TestbenchElaboration::bindBaseClasses_() {
             new Property(thisdt, classDefinition->getFileContent(),
                          classDefinition->getNodeId(), InvalidNodeId, "super",
                          false, false, false, false, false);
-        UHDM::class_defn* derived =
-            classDefinition->getUhdmModel<UHDM::class_defn>();
-        UHDM::class_defn* parent = bdef->getUhdmModel<UHDM::class_defn>();
+        uhdm::ClassDefn* derived =
+            classDefinition->getUhdmModel<uhdm::ClassDefn>();
+        uhdm::ClassDefn* parent = bdef->getUhdmModel<uhdm::ClassDefn>();
         classDefinition->insertProperty(prop);
-        UHDM::extends* extends = s.MakeExtends();
-        extends->VpiParent(derived);
+        uhdm::Extends* extends = s.make<uhdm::Extends>();
+        extends->setParent(derived);
         fCDef->populateCoreMembers(placeHolder->getNodeId(),
                                    placeHolder->getNodeId(), extends);
-        UHDM::class_typespec* tps = s.MakeClass_typespec();
+        uhdm::ClassTypespec* tps = s.make<uhdm::ClassTypespec>();
         fCDef->populateCoreMembers(placeHolder->getNodeId(),
                                    placeHolder->getNodeId(), tps);
-        UHDM::ref_typespec* extends_ts = s.MakeRef_typespec();
-        extends_ts->VpiParent(extends);
-        extends_ts->Actual_typespec(tps);
-        extends->Class_typespec(extends_ts);
-        tps->Class_defn(parent);
-        tps->VpiName(placeHolder->getName());
-        derived->Extends(extends);
-        parent->Deriveds(true)->push_back(derived);
+        uhdm::RefTypespec* extends_ts = s.make<uhdm::RefTypespec>();
+        extends_ts->setParent(extends);
+        extends_ts->setActualTypespec(tps);
+        extends->setClassTypespec(extends_ts);
+        tps->setClassDefn(parent);
+        tps->setName(placeHolder->getName());
+        derived->setExtends(extends);
+        parent->getDerivedClasses(true)->push_back(derived);
       } else {
-        class_def.second = datatype_cast<const Parameter*>(the_def);
+        class_def.second = datatype_cast<Parameter>(the_def);
         if (class_def.second) {
           // Super
           DataType* thisdt = new DataType(
@@ -287,18 +287,18 @@ bool TestbenchElaboration::bindBaseClasses_() {
                            classDefinition->getNodeId(), InvalidNodeId, "super",
                            false, false, false, false, false);
           classDefinition->insertProperty(prop);
-          UHDM::extends* extends = s.MakeExtends();
+          uhdm::Extends* extends = s.make<uhdm::Extends>();
           fCDef->populateCoreMembers(placeHolder->getNodeId(),
                                      placeHolder->getNodeId(), extends);
-          UHDM::class_typespec* tps = s.MakeClass_typespec();
-          tps->VpiName(class_def.second->getName());
-          UHDM::ref_typespec* extends_ts = s.MakeRef_typespec();
-          extends_ts->VpiParent(extends);
-          extends_ts->Actual_typespec(tps);
-          extends->Class_typespec(extends_ts);
-          UHDM::class_defn* def =
-              classDefinition->getUhdmModel<UHDM::class_defn>();
-          def->Extends(extends);
+          uhdm::ClassTypespec* tps = s.make<uhdm::ClassTypespec>();
+          tps->setName(class_def.second->getName());
+          uhdm::RefTypespec* extends_ts = s.make<uhdm::RefTypespec>();
+          extends_ts->setParent(extends);
+          extends_ts->setActualTypespec(tps);
+          extends->setClassTypespec(extends_ts);
+          uhdm::ClassDefn* def =
+              classDefinition->getUhdmModel<uhdm::ClassDefn>();
+          def->setExtends(extends);
         }
       }
     }
@@ -702,8 +702,8 @@ bool TestbenchElaboration::bindProperties_() {
 
   // Bind properties
   for (const auto& [className, classDefinition] : classes) {
-    UHDM::class_defn* defn = classDefinition->getUhdmModel<UHDM::class_defn>();
-    UHDM::VectorOfvariables* vars = defn->Variables(true);
+    uhdm::ClassDefn* defn = classDefinition->getUhdmModel<uhdm::ClassDefn>();
+    uhdm::VariablesCollection* vars = defn->getVariables(true);
     for (Signal* sig : classDefinition->getSignals()) {
       const FileContent* fC = sig->getFileContent();
       NodeId id = sig->getNodeId();
@@ -714,17 +714,17 @@ bool TestbenchElaboration::bindProperties_() {
       // Packed and unpacked ranges
       int32_t packedSize = 0;
       int32_t unpackedSize = 0;
-      std::vector<UHDM::range*>* packedDimensions = m_helper.compileRanges(
+      std::vector<uhdm::Range*>* packedDimensions = m_helper.compileRanges(
           classDefinition, fC, packedDimension, m_compileDesign, Reduce::Yes,
           nullptr, nullptr, packedSize, false);
-      std::vector<UHDM::range*>* unpackedDimensions = nullptr;
+      std::vector<uhdm::Range*>* unpackedDimensions = nullptr;
       if (fC->Type(unpackedDimension) == VObjectType::paClass_new) {
       } else {
         unpackedDimensions = m_helper.compileRanges(
             classDefinition, fC, unpackedDimension, m_compileDesign,
             Reduce::Yes, nullptr, nullptr, unpackedSize, false);
       }
-      UHDM::typespec* tps = nullptr;
+      uhdm::Typespec* tps = nullptr;
       NodeId typeSpecId = sig->getTypespecId();
       if (typeSpecId) {
         tps = m_helper.compileTypespec(classDefinition, fC, typeSpecId,
@@ -740,15 +740,15 @@ bool TestbenchElaboration::bindProperties_() {
       }
 
       // Assignment to a default value
-      UHDM::expr* exp =
+      uhdm::Expr* exp =
           exprFromAssign_(classDefinition, fC, id, unpackedDimension, nullptr);
-      if (exp != nullptr) exp->VpiParent(defn);
+      if (exp != nullptr) exp->setParent(defn);
 
-      if (UHDM::any* obj = makeVar_(classDefinition, sig, packedDimensions,
+      if (uhdm::Any* obj = makeVar_(classDefinition, sig, packedDimensions,
                                     packedSize, unpackedDimensions,
                                     unpackedSize, nullptr, vars, exp, tps)) {
         fC->populateCoreMembers(id, id, obj);
-        obj->VpiParent(defn);
+        obj->setParent(defn);
       } else {
         // Unsupported type
         Location loc(fC->getFileId(), fC->Line(id), fC->Column(id),

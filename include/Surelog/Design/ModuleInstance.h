@@ -53,7 +53,7 @@ class ModuleInstance : public ValuedComponentI {
                  std::string_view moduleName);
   ~ModuleInstance() override;
 
-  typedef std::map<UHDM::module_array*, std::vector<ModuleInstance*>>
+  typedef std::map<uhdm::ModuleArray*, std::vector<ModuleInstance*>>
       ModuleArrayModuleInstancesMap;
 
   void addSubInstance(ModuleInstance* subInstance);
@@ -96,7 +96,7 @@ class ModuleInstance : public ValuedComponentI {
 
   void setNodeId(NodeId id) { m_nodeId = id; }  // Used for generate stmt
   void overrideParentChild(ModuleInstance* parent, ModuleInstance* interm,
-                           ModuleInstance* child, UHDM::Serializer& s);
+                           ModuleInstance* child, uhdm::Serializer& s);
   Netlist* getNetlist() { return m_netlist; }
   void setNetlist(Netlist* netlist) { m_netlist = netlist; }
 
@@ -104,7 +104,7 @@ class ModuleInstance : public ValuedComponentI {
 
   Value* getValue(std::string_view name,
                   ExprBuilder& exprBuilder) const override;
-  UHDM::expr* getComplexValue(std::string_view name) const override;
+  uhdm::Expr* getComplexValue(std::string_view name) const override;
 
   ModuleInstance* getInstanceBinding() { return m_boundInstance; }
   bool isElaborated() const { return m_elaborated; }

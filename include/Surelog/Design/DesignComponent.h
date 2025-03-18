@@ -35,6 +35,7 @@
 #include <Surelog/SourceCompile/VObjectTypes.h>
 
 // UHDM
+#include <uhdm/BaseClass.h>
 #include <uhdm/uhdm_forward_decl.h>
 
 namespace SURELOG {
@@ -52,18 +53,18 @@ class Variable;
 
 class ExprEval {
  public:
-  ExprEval(UHDM::expr* expr, ValuedComponentI* instance, PathId fileId,
-           uint32_t lineNumber, UHDM::any* pexpr)
+  ExprEval(uhdm::Expr* expr, ValuedComponentI* instance, PathId fileId,
+           uint32_t lineNumber, uhdm::Any* pexpr)
       : m_expr(expr),
         m_instance(instance),
         m_fileId(fileId),
         m_lineNumber(lineNumber),
         m_pexpr(pexpr) {}
-  UHDM::expr* m_expr;
+  uhdm::Expr* m_expr;
   ValuedComponentI* m_instance;
   PathId m_fileId;
   uint32_t m_lineNumber;
-  UHDM::any* m_pexpr;
+  uhdm::Any* m_pexpr;
 };
 
 class DesignComponent : public ValuedComponentI, public PortNetHolder {
@@ -94,7 +95,7 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
   typedef std::map<std::string, std::pair<FileCNodeId, DesignComponent*>,
                    StringViewCompare>
       NamedObjectMap;
-  typedef std::vector<std::pair<std::string, UHDM::typespec*>>
+  typedef std::vector<std::pair<std::string, uhdm::Typespec*>>
       FuncNameTypespecVec;
 
   void addFileContent(const FileContent* fileContent, NodeId nodeId);
@@ -150,36 +151,36 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
   void addParamAssign(ParamAssign* assign) { m_paramAssigns.push_back(assign); }
   const ParamAssignVec& getParamAssignVec() const { return m_paramAssigns; }
 
-  void addImportedSymbol(UHDM::import_typespec* i) {
+  void addImportedSymbol(uhdm::ImportTypespec* i) {
     m_imported_symbols.push_back(i);
   }
-  const std::vector<UHDM::import_typespec*>& getImportedSymbols() const {
+  const std::vector<uhdm::ImportTypespec*>& getImportedSymbols() const {
     return m_imported_symbols;
   }
 
-  void addElabSysCall(UHDM::tf_call* elab_sys_call) {
+  void addElabSysCall(uhdm::TFCall* elab_sys_call) {
     m_elab_sys_calls.push_back(elab_sys_call);
   }
-  const std::vector<UHDM::tf_call*>& getElabSysCalls() const {
+  const std::vector<uhdm::TFCall*>& getElabSysCalls() const {
     return m_elab_sys_calls;
   }
 
-  void addPropertyDecl(UHDM::property_decl* prop_decl) {
+  void addPropertyDecl(uhdm::PropertyDecl* prop_decl) {
     m_property_decls.push_back(prop_decl);
   }
-  const std::vector<UHDM::property_decl*>& getPropertyDecls() const {
+  const std::vector<uhdm::PropertyDecl*>& getPropertyDecls() const {
     return m_property_decls;
   }
 
-  void addSequenceDecl(UHDM::sequence_decl* seq_decl) {
+  void addSequenceDecl(uhdm::SequenceDecl* seq_decl) {
     m_sequence_decls.push_back(seq_decl);
   }
-  const std::vector<UHDM::sequence_decl*>& getSequenceDecls() const {
+  const std::vector<uhdm::SequenceDecl*>& getSequenceDecls() const {
     return m_sequence_decls;
   }
 
-  void setUhdmModel(UHDM::any* model) { m_model = model; }
-  UHDM::any* getUhdmModel() { return m_model; }
+  void setUhdmModel(uhdm::Any* model) { m_model = model; }
+  uhdm::Any* getUhdmModel() { return m_model; }
   template <typename T>
   T* getUhdmModel() const {
     return (m_model == nullptr) ? nullptr : any_cast<T>(m_model);
@@ -218,14 +219,14 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
   TypeDefMap m_typedefs;
   std::vector<Package*> m_packages;
   VariableMap m_variables;
-  std::vector<UHDM::import_typespec*> m_imported_symbols;
-  std::vector<UHDM::tf_call*> m_elab_sys_calls;
-  std::vector<UHDM::property_decl*> m_property_decls;
-  std::vector<UHDM::sequence_decl*> m_sequence_decls;
+  std::vector<uhdm::ImportTypespec*> m_imported_symbols;
+  std::vector<uhdm::TFCall*> m_elab_sys_calls;
+  std::vector<uhdm::PropertyDecl*> m_property_decls;
+  std::vector<uhdm::SequenceDecl*> m_sequence_decls;
   ParameterMap m_parameterMap;
   ParameterVec m_orderedParameters;
   ParamAssignVec m_paramAssigns;
-  UHDM::any* m_model = nullptr;
+  uhdm::Any* m_model = nullptr;
   std::vector<std::pair<std::string, ExprEval>> m_scheduledParamExprEval;
   const DesignElement* m_designElement = nullptr;
   LetStmtMap m_letDecls;

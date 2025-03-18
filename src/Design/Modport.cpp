@@ -15,16 +15,16 @@
  */
 
 /*
- * File:   ModPort.cpp
+ * File:   Modport.cpp
  * Author: alain
  *
  * Created on January 31, 2020, 9:46 PM
  */
-#include <Surelog/Design/ModPort.h>
+#include <Surelog/Design/Modport.h>
 
 namespace SURELOG {
 
-const Signal* ModPort::getPort(std::string_view name) const {
+const Signal* Modport::getPort(std::string_view name) const {
   for (const Signal& sig : m_ports) {
     if (sig.getName() == name) {
       return &sig;

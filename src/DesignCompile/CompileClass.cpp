@@ -95,10 +95,10 @@ bool CompileClass::compile(Elaborate elaborate, Reduce reduce) {
     }
   }
 
-  UHDM::class_defn* const defn = m_class->getUhdmModel<UHDM::class_defn>();
-  const UHDM::ScopedScope scopedScope(defn);
+  uhdm::ClassDefn* const defn = m_class->getUhdmModel<uhdm::ClassDefn>();
+  const uhdm::ScopedScope scopedScope(defn);
 
-  if (defn->VpiFullName().empty()) defn->VpiFullName(fullName);
+  if (defn->getFullName().empty()) defn->setFullName(fullName);
   SymbolTable* const symbols = m_session->getSymbolTable();
   CommandLineParser* const clp = m_session->getCommandLineParser();
 
@@ -122,9 +122,9 @@ bool CompileClass::compile(Elaborate elaborate, Reduce reduce) {
     VObject current = fC->Object(classId);
     classId = current.m_child;
     if (fC->Type(classId) == VObjectType::paAttribute_instance) {
-      if (UHDM::VectorOfattribute* attributes = m_helper.compileAttributes(
+      if (uhdm::AttributeCollection* attributes = m_helper.compileAttributes(
               m_class, fC, classId, m_compileDesign, defn)) {
-        m_class->Attributes(attributes);
+        m_class->setAttributes(attributes);
       }
     }
   }
@@ -282,7 +282,7 @@ bool CompileClass::compile(Elaborate elaborate, Reduce reduce) {
 }
 
 bool CompileClass::compile_properties() {
-  UHDM::class_defn* defn = m_class->getUhdmModel<UHDM::class_defn>();
+  uhdm::ClassDefn* defn = m_class->getUhdmModel<uhdm::ClassDefn>();
   for (Signal* sig : m_class->getSignals()) {
     const FileContent* fC = sig->getFileContent();
     NodeId id = sig->getNodeId();
@@ -292,17 +292,17 @@ bool CompileClass::compile_properties() {
     // Packed and unpacked ranges
     int32_t packedSize = 0;
     int32_t unpackedSize = 0;
-    std::vector<UHDM::range*>* packedDimensions = m_helper.compileRanges(
+    std::vector<uhdm::Range*>* packedDimensions = m_helper.compileRanges(
         m_class, fC, packedDimension, m_compileDesign, Reduce::Yes, nullptr,
         nullptr, packedSize, false);
-    std::vector<UHDM::range*>* unpackedDimensions = nullptr;
+    std::vector<uhdm::Range*>* unpackedDimensions = nullptr;
     if (fC->Type(unpackedDimension) == VObjectType::paClass_new) {
     } else {
       unpackedDimensions = m_helper.compileRanges(
           m_class, fC, unpackedDimension, m_compileDesign, Reduce::Yes, nullptr,
           nullptr, unpackedSize, false);
     }
-    UHDM::typespec* tps = nullptr;
+    uhdm::Typespec* tps = nullptr;
     NodeId typeSpecId = sig->getTypespecId();
     if (typeSpecId) {
       tps = m_helper.compileTypespec(m_class, fC, typeSpecId, m_compileDesign,
@@ -317,15 +317,15 @@ bool CompileClass::compile_properties() {
     }
 
     // Assignment to a default value
-    UHDM::expr* exp = m_helper.exprFromAssign(m_class, m_compileDesign, fC, id,
+    uhdm::Expr* exp = m_helper.exprFromAssign(m_class, m_compileDesign, fC, id,
                                               unpackedDimension);
-    if (exp != nullptr) exp->VpiParent(defn);
+    if (exp != nullptr) exp->setParent(defn);
 
-    if (UHDM::any* obj = m_helper.compileVariable(
+    if (uhdm::Any* obj = m_helper.compileVariable(
             m_class, m_compileDesign, sig, packedDimensions, packedSize,
             unpackedDimensions, unpackedSize, exp, tps)) {
       fC->populateCoreMembers(sig->getNameId(), sig->getNameId(), obj);
-      obj->VpiParent(defn);
+      obj->setParent(defn);
     }
   }
   return true;
@@ -582,7 +582,7 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
      n<> u<71> t<Class_method> p<72> c<70> l<37>
      */
     NodeId func_prototype = fC->Child(func_decl);
-    UHDM::Serializer& s = m_compileDesign->getSerializer();
+    uhdm::Serializer& s = m_compileDesign->getSerializer();
     if (fC->Type(func_prototype) == VObjectType::paTask_prototype) {
       NodeId task_decl =
           m_helper.setFuncTaskQualifiers(fC, fC->Child(id), nullptr);
@@ -606,32 +606,32 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
       m_helper.compileTask(m_class, fC, id, m_compileDesign, Reduce::No,
                            nullptr, true);
 
-      std::vector<UHDM::task_func_decl*>* task_func_decls =
-          m_class->getTask_func_decls();
+      std::vector<uhdm::TaskFuncDecl*>* task_func_decls =
+          m_class->getTaskFuncDecls();
       if (task_func_decls == nullptr) {
-        m_class->setTask_func_decls(s.MakeTask_func_declVec());
-        task_func_decls = m_class->getTask_func_decls();
+        m_class->setTaskFuncDecls(s.makeCollection<uhdm::TaskFuncDecl>());
+        task_func_decls = m_class->getTaskFuncDecls();
       }
 
-      UHDM::task_decl* td = nullptr;
-      for (UHDM::task_func_decl* tfd : *m_class->getTask_func_decls()) {
-        if (tfd->VpiName() == taskName) {
-          td = any_cast<UHDM::task_decl>(tfd);
+      uhdm::TaskDecl* td = nullptr;
+      for (uhdm::TaskFuncDecl* tfd : *m_class->getTaskFuncDecls()) {
+        if (tfd->getName() == taskName) {
+          td = any_cast<uhdm::TaskDecl>(tfd);
           break;
         }
       }
 
       if (td == nullptr) {
-        td = s.MakeTask_decl();
-        td->VpiName(taskName);
-        td->VpiParent(m_class->getUhdmModel());
+        td = s.make<uhdm::TaskDecl>();
+        td->setName(taskName);
+        td->setParent(m_class->getUhdmModel());
         fC->populateCoreMembers(id, id, td);
         task_func_decls->push_back(td);
       }
 
-      for (UHDM::task_func* tf : *m_class->getTask_funcs()) {
-        if (tf->VpiName() == taskName) {
-          td->Task_func(tf);
+      for (uhdm::TaskFunc* tf : *m_class->getTaskFuncs()) {
+        if (tf->getName() == taskName) {
+          td->setTaskFunc(tf);
           break;
         }
       }
@@ -655,32 +655,32 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
       m_helper.compileFunction(m_class, fC, id, m_compileDesign, Reduce::No,
                                nullptr, true);
 
-      std::vector<UHDM::task_func_decl*>* task_func_decls =
-          m_class->getTask_func_decls();
+      std::vector<uhdm::TaskFuncDecl*>* task_func_decls =
+          m_class->getTaskFuncDecls();
       if (task_func_decls == nullptr) {
-        m_class->setTask_func_decls(s.MakeTask_func_declVec());
-        task_func_decls = m_class->getTask_func_decls();
+        m_class->setTaskFuncDecls(s.makeCollection<uhdm::TaskFuncDecl>());
+        task_func_decls = m_class->getTaskFuncDecls();
       }
 
-      UHDM::function_decl* fd = nullptr;
-      for (UHDM::task_func_decl* tfd : *m_class->getTask_func_decls()) {
-        if (tfd->VpiName() == funcName) {
-          fd = any_cast<UHDM::function_decl>(tfd);
+      uhdm::FunctionDecl* fd = nullptr;
+      for (uhdm::TaskFuncDecl* tfd : *m_class->getTaskFuncDecls()) {
+        if (tfd->getName() == funcName) {
+          fd = any_cast<uhdm::FunctionDecl>(tfd);
           break;
         }
       }
 
       if (fd == nullptr) {
-        fd = s.MakeFunction_decl();
-        fd->VpiName(funcName);
-        fd->VpiParent(m_class->getUhdmModel());
+        fd = s.make<uhdm::FunctionDecl>();
+        fd->setName(funcName);
+        fd->setParent(m_class->getUhdmModel());
         fC->populateCoreMembers(id, id, fd);
         task_func_decls->push_back(fd);
       }
 
-      for (UHDM::task_func* tf : *m_class->getTask_funcs()) {
-        if (tf->VpiName() == funcName) {
-          fd->Task_func(tf);
+      for (uhdm::TaskFunc* tf : *m_class->getTaskFuncs()) {
+        if (tf->getName() == funcName) {
+          fd->setTaskFunc(tf);
           break;
         }
       }
@@ -770,7 +770,7 @@ bool CompileClass::compile_class_constraint_(const FileContent* fC,
   Constraint* constraint = new Constraint(fC, class_constraint, constName);
   m_class->insertConstraint(constraint);
 
-  UHDM::class_defn* const pscope = m_class->getUhdmModel<UHDM::class_defn>();
+  uhdm::ClassDefn* const pscope = m_class->getUhdmModel<uhdm::ClassDefn>();
   m_helper.compileConstraintBlock(m_class, fC, class_constraint,
                                   m_compileDesign, pscope);
   return true;
@@ -781,12 +781,12 @@ bool CompileClass::compile_class_declaration_(const FileContent* fC,
   SymbolTable* const symbols = m_session->getSymbolTable();
   ErrorContainer* const errors = m_session->getErrorContainer();
 
-  UHDM::Serializer& s = m_compileDesign->getSerializer();
+  uhdm::Serializer& s = m_compileDesign->getSerializer();
   const bool virtualClass = fC->sl_collect(id, VObjectType::paVIRTUAL);
   const NodeId class_name_id = fC->sl_collect(id, VObjectType::slStringConst);
   const std::string_view class_name = fC->SymName(class_name_id);
   std::string full_class_name =
-      StrCat(m_class->getUhdmModel<UHDM::class_defn>()->VpiFullName(),
+      StrCat(m_class->getUhdmModel<uhdm::ClassDefn>()->getFullName(),
              "::", class_name);
   ClassDefinition* prevDef = m_class->getClass(class_name);
   if (prevDef) {
@@ -805,12 +805,12 @@ bool CompileClass::compile_class_declaration_(const FileContent* fC,
   ClassDefinition* the_class =
       new ClassDefinition(m_session, class_name, m_class->getLibrary(),
                           m_class->getContainer(), fC, id, m_class, s);
-  UHDM::class_defn* defn = the_class->getUhdmModel<UHDM::class_defn>();
-  defn->VpiVirtual(virtualClass);
-  defn->VpiFullName(full_class_name);
+  uhdm::ClassDefn* defn = the_class->getUhdmModel<uhdm::ClassDefn>();
+  defn->setVirtual(virtualClass);
+  defn->setFullName(full_class_name);
   m_class->insertClass(the_class);
-  UHDM::class_defn* parent = m_class->getUhdmModel<UHDM::class_defn>();
-  defn->VpiParent(parent);
+  uhdm::ClassDefn* parent = m_class->getUhdmModel<uhdm::ClassDefn>();
+  defn->setParent(parent);
 
   FunctorCompileClass(m_session, m_compileDesign, the_class, m_design)();
   return true;
@@ -954,7 +954,7 @@ bool CompileClass::compile_parameter_declaration_(const FileContent* fC,
 }
 
 bool CompileClass::compile_class_type_(const FileContent* fC, NodeId id) {
-  UHDM::Serializer& s = m_compileDesign->getSerializer();
+  uhdm::Serializer& s = m_compileDesign->getSerializer();
   NodeId parent = fC->Parent(id);
   VObjectType ptype = fC->Type(parent);
   if (ptype != VObjectType::paClass_declaration) return true;
@@ -965,16 +965,16 @@ bool CompileClass::compile_class_type_(const FileContent* fC, NodeId id) {
     base_class_id = fC->Sibling(base_class_id);
     base_class_name.append("::").append(fC->SymName(base_class_id));
   }
-  UHDM::extends* extends = s.MakeExtends();
-  extends->VpiParent(m_class->getUhdmModel());
+  uhdm::Extends* extends = s.make<uhdm::Extends>();
+  extends->setParent(m_class->getUhdmModel());
   fC->populateCoreMembers(base_class_id, base_class_id, extends);
-  m_class->getUhdmModel<UHDM::class_defn>()->Extends(extends);
+  m_class->getUhdmModel<uhdm::ClassDefn>()->setExtends(extends);
 
-  UHDM::ref_typespec* extends_ts = s.MakeRef_typespec();
-  extends_ts->VpiParent(extends);
-  extends_ts->VpiName(base_class_name);
+  uhdm::RefTypespec* extends_ts = s.make<uhdm::RefTypespec>();
+  extends_ts->setParent(extends);
+  extends_ts->setName(base_class_name);
   fC->populateCoreMembers(base_class_id, base_class_id, extends_ts);
-  extends->Class_typespec(extends_ts);
+  extends->setClassTypespec(extends_ts);
 
   return true;
 }
@@ -1007,10 +1007,10 @@ bool CompileClass::compile_class_parameters_(const FileContent* fC, NodeId id) {
   n<> u<11> t<Parameter_port_list> p<31> c<10> s<20> l<18>
 
   */
-  UHDM::class_defn* defn = m_class->getUhdmModel<UHDM::class_defn>();
+  uhdm::ClassDefn* defn = m_class->getUhdmModel<uhdm::ClassDefn>();
 
   if (fC->sl_collect(id, VObjectType::paVIRTUAL)) {
-    defn->VpiVirtual(true);
+    defn->setVirtual(true);
   }
 
   NodeId paramList = fC->sl_collect(id, VObjectType::paParameter_port_list);

@@ -87,28 +87,28 @@ class ElaborationStep {
                      DesignComponent* parentComponent,
                      ErrorDefinition::ErrorType errtype);
 
-  UHDM::expr* exprFromAssign_(DesignComponent* component, const FileContent* fC,
+  uhdm::Expr* exprFromAssign_(DesignComponent* component, const FileContent* fC,
                               NodeId id, NodeId unpackedDimension,
                               ModuleInstance* instance);
 
-  UHDM::typespec* elabTypeParameter_(DesignComponent* component,
+  uhdm::Typespec* elabTypeParameter_(DesignComponent* component,
                                      Parameter* typeParam,
                                      ModuleInstance* instance);
 
-  UHDM::any* makeVar_(DesignComponent* component, Signal* sig,
-                      std::vector<UHDM::range*>* packedDimensions,
+  uhdm::Any* makeVar_(DesignComponent* component, Signal* sig,
+                      std::vector<uhdm::Range*>* packedDimensions,
                       int32_t packedSize,
-                      std::vector<UHDM::range*>* unpackedDimensions,
+                      std::vector<uhdm::Range*>* unpackedDimensions,
                       int32_t unpackedSize, ModuleInstance* instance,
-                      UHDM::VectorOfvariables* vars, UHDM::expr* assignExp,
-                      UHDM::typespec* tps);
+                      uhdm::VariablesCollection* vars, uhdm::Expr* assignExp,
+                      uhdm::Typespec* tps);
 
   void swapTypespecPointersInUhdm(
-      UHDM::Serializer& s,
-      std::map<const UHDM::typespec*, const UHDM::typespec*>& typespecSwapMap);
+      uhdm::Serializer& s,
+      std::map<const uhdm::Typespec*, const uhdm::Typespec*>& typespecSwapMap);
   void swapTypespecPointersInTypedef(
       Design* design,
-      std::map<const UHDM::typespec*, const UHDM::typespec*>& typespecSwapMap);
+      std::map<const uhdm::Typespec*, const uhdm::Typespec*>& typespecSwapMap);
 
  protected:
   Session* const m_session = nullptr;

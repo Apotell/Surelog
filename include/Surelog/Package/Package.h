@@ -47,7 +47,7 @@ class Package : public DesignComponent {
 
  public:
   Package(Session* session, std::string_view name, Library* library,
-          const FileContent* fC, NodeId nodeId, UHDM::Serializer& serializer);
+          const FileContent* fC, NodeId nodeId, uhdm::Serializer& serializer);
   void append(Package* package);
 
   ~Package() override = default;
@@ -71,9 +71,9 @@ class Package : public DesignComponent {
   ClassDefinition* getClassDefinition(std::string_view name);
   ExprBuilder* getExprBuilder() { return &m_exprBuilder; }
 
-  UHDM::VectorOfattribute* Attributes() const { return attributes_; }
+  uhdm::AttributeCollection* getAttributes() const { return attributes_; }
 
-  bool Attributes(UHDM::VectorOfattribute* data) {
+  bool setAttributes(uhdm::AttributeCollection* data) {
     attributes_ = data;
     return true;
   }
@@ -94,7 +94,7 @@ class Package : public DesignComponent {
   ExprBuilder m_exprBuilder;
   ClassNameClassDefinitionMultiMap m_classDefinitions;
 
-  UHDM::VectorOfattribute* attributes_ = nullptr;
+  uhdm::AttributeCollection* attributes_ = nullptr;
   Netlist* m_netlist = nullptr;
   Package* m_unElabPackage = nullptr;
 };

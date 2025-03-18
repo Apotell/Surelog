@@ -45,7 +45,7 @@ Design* get_design(scompiler* compiler);
 // navigate) see: third_party/Verilog_Object_Model.pdf
 //      third_party/UHDM/include/
 //      third_party/UHDM/headers/
-UHDM::design* get_uhdm_design(scompiler* compiler);
+uhdm::Design* get_uhdm_design(scompiler* compiler);
 vpiHandle get_vpi_design(scompiler* compiler);
 
 // Terminate the compiler session, cleanup internal datastructures,

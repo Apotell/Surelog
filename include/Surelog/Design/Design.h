@@ -34,10 +34,10 @@
 #include <mutex>
 #include <vector>
 
-namespace UHDM {
-class design;
+namespace uhdm {
+class Design;
 class Serializer;
-}  // namespace UHDM
+}  // namespace uhdm
 
 namespace SURELOG {
 class AnalyzeFile;
@@ -78,7 +78,7 @@ class Design final {
   friend class SVLibShapeListener;
 
  public:
-  Design(Session* session, UHDM::Serializer& serializer, LibrarySet* librarySet,
+  Design(Session* session, uhdm::Serializer& serializer, LibrarySet* librarySet,
          ConfigSet* configSet);
   Design(const Design& orig) = delete;
   ~Design();
@@ -164,8 +164,8 @@ class Design final {
 
   void addBindStmt(std::string_view targetName, BindStmt* stmt);
 
-  UHDM::design* getUhdmDesign() { return m_uhdmDesign; }
-  const UHDM::design* getUhdmDesign() const { return m_uhdmDesign; }
+  uhdm::Design* getUhdmDesign() { return m_uhdmDesign; }
+  const uhdm::Design* getUhdmDesign() const { return m_uhdmDesign; }
 
   vpiHandle getVpiDesign() const;
 
@@ -213,7 +213,7 @@ class Design final {
                          DefParam* parent) const;
 
   Session* const m_session = nullptr;
-  UHDM::design* const m_uhdmDesign = nullptr;
+  uhdm::Design* const m_uhdmDesign = nullptr;
   LibrarySet* const m_librarySet = nullptr;
   ConfigSet* const m_configSet = nullptr;
   FileIdDesignContentMap m_fileContents;

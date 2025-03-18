@@ -32,12 +32,12 @@
 namespace SURELOG {
 
 Program::Program(Session* session, std::string_view name, Library* library,
-                 FileContent* fC, NodeId nodeId, UHDM::Serializer& serializer)
+                 FileContent* fC, NodeId nodeId, uhdm::Serializer& serializer)
     : DesignComponent(session, fC, nullptr), m_name(name), m_library(library) {
   addFileContent(fC, nodeId);
 
-  UHDM::program* const instance = serializer.MakeProgram();
-  if (!name.empty()) instance->VpiName(name);
+  uhdm::Program* const instance = serializer.make<uhdm::Program>();
+  if (!name.empty()) instance->setName(name);
   if (nodeId && (fC != nullptr))
     fC->populateCoreMembers(nodeId, nodeId, instance);
   setUhdmModel(instance);

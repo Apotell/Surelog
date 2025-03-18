@@ -42,10 +42,10 @@
 
 namespace SURELOG {
 
-Design::Design(Session* session, UHDM::Serializer& serializer,
+Design::Design(Session* session, uhdm::Serializer& serializer,
                LibrarySet* librarySet, ConfigSet* configSet)
     : m_session(session),
-      m_uhdmDesign(serializer.MakeDesign()),
+      m_uhdmDesign(serializer.make<uhdm::Design>()),
       m_librarySet(librarySet),
       m_configSet(configSet) {}
 
@@ -559,7 +559,7 @@ void Design::addBindStmt(std::string_view targetName, BindStmt* stmt) {
 
 vpiHandle Design::getVpiDesign() const {
   if (m_uhdmDesign != nullptr) {
-    return m_uhdmDesign->GetSerializer()->MakeUhdmHandle(UHDM::uhdmdesign,
+    return m_uhdmDesign->getSerializer()->makeUhdmHandle(uhdm::UhdmType::Design,
                                                          m_uhdmDesign);
   }
   return nullptr;

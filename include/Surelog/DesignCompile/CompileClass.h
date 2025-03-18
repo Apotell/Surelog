@@ -82,7 +82,7 @@ class CompileClass final {
   Design* const m_design = nullptr;
   CompileHelper m_helper;
   std::set<std::string> builtins_;
-  UHDM::VectorOfattribute* m_attributes = nullptr;
+  uhdm::AttributeCollection* m_attributes = nullptr;
 };
 
 }  // namespace SURELOG

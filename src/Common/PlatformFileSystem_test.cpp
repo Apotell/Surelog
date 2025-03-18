@@ -38,7 +38,7 @@
 // UHDM
 #include <uhdm/ExprEval.h>
 #include <uhdm/design.h>
-#include <uhdm/module_inst.h>
+#include <uhdm/module.h>
 #include <uhdm/param_assign.h>
 #include <uhdm/vpi_uhdm.h>
 #include <uhdm/vpi_user.h>
@@ -1047,20 +1047,20 @@ TEST(PlatformFileSystemTest, InMemoryTest) {
   }
   EXPECT_NE(top, nullptr);
 
-  UHDM::design *const udesign = compiler->getUhdmDesign();
-  for (auto topMod : *udesign->TopModules()) {
-    for (auto passign : *topMod->Param_assigns()) {
-      UHDM::expr *rhs = (UHDM::expr *)passign->Rhs();
+  uhdm::Design *const udesign = compiler->getUhdmDesign();
+  for (auto topMod : *udesign->getTopModules()) {
+    for (auto passign : *topMod->getParamAssigns()) {
+      uhdm::Expr *rhs = (uhdm::Expr *)passign->getRhs();
       bool invalidValue = false;
-      UHDM::ExprEval eval;
+      uhdm::ExprEval eval;
       EXPECT_EQ(eval.get_value(invalidValue, rhs), 17);
     }
-    for (auto sub : *topMod->Modules()) {
-      const std::string_view instName = sub->VpiName();
-      for (auto passign : *sub->Param_assigns()) {
-        UHDM::expr *rhs = (UHDM::expr *)passign->Rhs();
+    for (auto sub : *topMod->getModules()) {
+      const std::string_view instName = sub->getName();
+      for (auto passign : *sub->getParamAssigns()) {
+        uhdm::Expr *rhs = (uhdm::Expr *)passign->getRhs();
         bool invalidValue = false;
-        UHDM::ExprEval eval;
+        uhdm::ExprEval eval;
         uint64_t val = eval.get_value(invalidValue, rhs);
         if (instName == "dut1") {
           EXPECT_EQ(val, 8);

@@ -638,42 +638,42 @@ ModuleInstance* DesignElaboration::createBindInstance_(BindStmt* bind,
   return instance;
 }
 
-const UHDM::any* resize(UHDM::Serializer& serializer, const UHDM::any* object,
+const uhdm::Any* resize(uhdm::Serializer& serializer, const uhdm::Any* object,
                         int32_t maxsize, bool is_overall_unsigned) {
   if (object == nullptr) {
     return nullptr;
   }
-  UHDM::any* result = (UHDM::any*)object;
-  UHDM::UHDM_OBJECT_TYPE type = result->UhdmType();
-  if (type == UHDM::uhdmconstant) {
-    UHDM::constant* c = (UHDM::constant*)result;
-    if (c->VpiSize() < maxsize) {
-      UHDM::ElaboratorContext elaboratorContext(&serializer);
-      c = (UHDM::constant*)UHDM::clone_tree(c, &elaboratorContext);
-      int32_t constType = c->VpiConstType();
-      const UHDM::typespec* tps = nullptr;
-      if (const UHDM::ref_typespec* rt = c->Typespec()) {
-        tps = rt->Actual_typespec();
+  uhdm::Any* result = (uhdm::Any*)object;
+  uhdm::UhdmType type = result->getUhdmType();
+  if (type == uhdm::UhdmType::Constant) {
+    uhdm::Constant* c = (uhdm::Constant*)result;
+    if (c->getSize() < maxsize) {
+      uhdm::ElaboratorContext elaboratorContext(&serializer);
+      c = (uhdm::Constant*)uhdm::clone_tree(c, &elaboratorContext);
+      int32_t constType = c->getConstType();
+      const uhdm::Typespec* tps = nullptr;
+      if (const uhdm::RefTypespec* rt = c->getTypespec()) {
+        tps = rt->getActualTypespec();
       }
       bool is_signed = false;
       if (tps) {
-        if (tps->UhdmType() == UHDM::uhdmint_typespec) {
-          UHDM::int_typespec* itps = (UHDM::int_typespec*)tps;
-          if (itps->VpiSigned()) {
+        if (tps->getUhdmType() == uhdm::UhdmType::IntTypespec) {
+          uhdm::IntTypespec* itps = (uhdm::IntTypespec*)tps;
+          if (itps->getSigned()) {
             is_signed = true;
           }
         }
       }
       if (constType == vpiBinaryConst) {
-        std::string value(c->VpiValue());
+        std::string value(c->getValue());
         if (is_signed && (!is_overall_unsigned)) {
-          value.insert(4, (maxsize - c->VpiSize()), '1');
+          value.insert(4, (maxsize - c->getSize()), '1');
         } else {
-          value.insert(4, (maxsize - c->VpiSize()), '0');
+          value.insert(4, (maxsize - c->getSize()), '0');
         }
-        c->VpiValue(value);
+        c->setValue(value);
       }
-      c->VpiSize(maxsize);
+      c->setSize(maxsize);
       result = c;
     }
   }
@@ -690,7 +690,7 @@ void DesignElaboration::elaborateInstance_(
   ErrorContainer* const errors = m_session->getErrorContainer();
   CommandLineParser* const clp = m_session->getCommandLineParser();
 
-  UHDM::Serializer& s = m_compileDesign->getSerializer();
+  uhdm::Serializer& s = m_compileDesign->getSerializer();
   auto& blackboxModules = clp->getBlackBoxModules();
   std::string modName;
   if (DesignComponent* def = parent->getDefinition()) {
@@ -756,8 +756,8 @@ void DesignElaboration::elaborateInstance_(
       }
       for (const auto& cvalues : parent->getComplexValues()) {
         const std::string& name = cvalues.first;
-        UHDM::expr* pval = cvalues.second;
-        UHDM::expr* val = tmp->getComplexValue(name);
+        uhdm::Expr* pval = cvalues.second;
+        uhdm::Expr* val = tmp->getComplexValue(name);
         if (val) {
           if (pval != val) {
             loopDetected = false;
@@ -1152,22 +1152,23 @@ void DesignElaboration::elaborateInstance_(
 
               for (NodeId id : checkIds) {
                 m_helper.checkForLoops(true);
-                UHDM::any* tmpExp = m_helper.compileExpression(
+                uhdm::Any* tmpExp = m_helper.compileExpression(
                     parentDef, fC, id, m_compileDesign, Reduce::Yes, nullptr,
                     parent, false);
                 m_helper.checkForLoops(false);
-                if (tmpExp && (tmpExp->UhdmType() == UHDM::uhdmconstant)) {
-                  UHDM::constant* c = (UHDM::constant*)tmpExp;
-                  maxsize = std::max(maxsize, c->VpiSize());
-                  const UHDM::typespec* tps = nullptr;
-                  if (const UHDM::ref_typespec* rt = c->Typespec()) {
-                    tps = rt->Actual_typespec();
+                if (tmpExp &&
+                    (tmpExp->getUhdmType() == uhdm::UhdmType::Constant)) {
+                  uhdm::Constant* c = (uhdm::Constant*)tmpExp;
+                  maxsize = std::max(maxsize, c->getSize());
+                  const uhdm::Typespec* tps = nullptr;
+                  if (const uhdm::RefTypespec* rt = c->getTypespec()) {
+                    tps = rt->getActualTypespec();
                   }
                   bool is_signed = false;
                   if (tps) {
-                    if (tps->UhdmType() == UHDM::uhdmint_typespec) {
-                      UHDM::int_typespec* itps = (UHDM::int_typespec*)tps;
-                      if (itps->VpiSigned()) {
+                    if (tps->getUhdmType() == uhdm::UhdmType::IntTypespec) {
+                      uhdm::IntTypespec* itps = (uhdm::IntTypespec*)tps;
+                      if (itps->getSigned()) {
                         is_signed = true;
                       }
                     }
@@ -1179,16 +1180,16 @@ void DesignElaboration::elaborateInstance_(
               }
             }
             m_helper.checkForLoops(true);
-            const UHDM::any* condExpr = m_helper.compileExpression(
+            const uhdm::Any* condExpr = m_helper.compileExpression(
                 parentDef, fC, conditionId, m_compileDesign, Reduce::Yes,
                 nullptr, parent, false);
             m_helper.checkForLoops(false);
             condExpr = resize(m_compileDesign->getSerializer(), condExpr,
                               maxsize, is_overall_unsigned);
-            UHDM::ExprEval eval;
+            uhdm::ExprEval eval;
             bool invalidValue = false;
             condVal = eval.get_value(
-                invalidValue, any_cast<const UHDM::expr*>(condExpr), true);
+                invalidValue, any_cast<const uhdm::Expr*>(condExpr), true);
             if (invalidValue) {
               Location loc(fC->getFileId(conditionId), fC->Line(conditionId),
                            fC->Column(conditionId));
@@ -1206,16 +1207,16 @@ void DesignElaboration::elaborateInstance_(
                 // Find if one of the case expr matches the case expr
                 if (fC->Type(exprItem) == VObjectType::paConstant_expression) {
                   m_helper.checkForLoops(true);
-                  const UHDM::any* caseExpr = m_helper.compileExpression(
+                  const uhdm::Any* caseExpr = m_helper.compileExpression(
                       parentDef, fC, exprItem, m_compileDesign, Reduce::Yes,
                       nullptr, parent, false);
                   m_helper.checkForLoops(false);
                   caseExpr = resize(m_compileDesign->getSerializer(), caseExpr,
                                     maxsize, is_overall_unsigned);
-                  UHDM::ExprEval eval;
+                  uhdm::ExprEval eval;
                   bool invalidValue = false;
                   int64_t caseVal = eval.get_value(
-                      invalidValue, any_cast<const UHDM::expr*>(caseExpr),
+                      invalidValue, any_cast<const uhdm::Expr*>(caseExpr),
                       true);
                   if (invalidValue) {
                     Location loc(fC->getFileId(exprItem), fC->Line(exprItem),
@@ -1758,25 +1759,25 @@ void DesignElaboration::elaborateInstance_(
             if (type == VObjectType::paModule_instantiation) {
               int32_t unpackedSize = 0;
               unpackedDimId = fC->Sibling(identifierId);
-              if (std::vector<UHDM::range*>* unpackedDimensions =
+              if (std::vector<uhdm::Range*>* unpackedDimensions =
                       m_helper.compileRanges(
                           def, fC, unpackedDimId, m_compileDesign, Reduce::No,
                           nullptr, parent, unpackedSize, false)) {
-                UHDM::Serializer& s = m_compileDesign->getSerializer();
-                UHDM::module_array* mod_array = s.MakeModule_array();
-                mod_array->Ranges(unpackedDimensions);
-                mod_array->VpiName(instName);
-                mod_array->VpiFullName(modName);
+                uhdm::Serializer& s = m_compileDesign->getSerializer();
+                uhdm::ModuleArray* mod_array = s.make<uhdm::ModuleArray>();
+                mod_array->setRanges(unpackedDimensions);
+                mod_array->setName(instName);
+                mod_array->setFullName(modName);
                 fC->populateCoreMembers(identifierId, identifierId, mod_array);
 
-                UHDM::module_typespec* tps = s.MakeModule_typespec();
+                uhdm::ModuleTypespec* tps = s.make<uhdm::ModuleTypespec>();
                 NodeId typespecId = fC->Child(subInstanceId);
-                tps->VpiName(fC->SymName(typespecId));
+                tps->setName(fC->SymName(typespecId));
                 fC->populateCoreMembers(typespecId, typespecId, tps);
-                UHDM::ref_typespec* tpsRef = s.MakeRef_typespec();
-                tpsRef->VpiParent(mod_array);
-                tpsRef->Actual_typespec(tps);
-                mod_array->Elem_typespec(tpsRef);
+                uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
+                tpsRef->setParent(mod_array);
+                tpsRef->setActualTypespec(tps);
+                mod_array->setElemTypespec(tpsRef);
                 parent->getModuleArrayModuleInstancesMap().emplace(
                     mod_array, localSubInstances);
               }
@@ -1903,11 +1904,11 @@ std::vector<std::string_view> DesignElaboration::collectParams_(
 
         NodeId ident = packageFile->Child(param);
         const std::string_view name = packageFile->SymName(ident);
-        if (UHDM::expr* exp = def->getComplexValue(name)) {
-          UHDM::Serializer& s = m_compileDesign->getSerializer();
-          UHDM::ElaboratorContext elaboratorContext(&s, false, true);
-          UHDM::any* pclone = UHDM::clone_tree(exp, &elaboratorContext);
-          instance->setComplexValue(name, (UHDM::expr*)pclone);
+        if (uhdm::Expr* exp = def->getComplexValue(name)) {
+          uhdm::Serializer& s = m_compileDesign->getSerializer();
+          uhdm::ElaboratorContext elaboratorContext(&s, false, true);
+          uhdm::Any* pclone = uhdm::clone_tree(exp, &elaboratorContext);
+          instance->setComplexValue(name, (uhdm::Expr*)pclone);
         } else {
           Value* value = m_exprBuilder.clone(def->getValue(name));
           if (value)
@@ -1989,16 +1990,16 @@ std::vector<std::string_view> DesignElaboration::collectParams_(
           continue;
         }
         m_helper.checkForLoops(true);
-        UHDM::expr* complexV = (UHDM::expr*)m_helper.compileExpression(
+        uhdm::Expr* complexV = (uhdm::Expr*)m_helper.compileExpression(
             parentDefinition, parentFile, expr, m_compileDesign, Reduce::Yes,
             nullptr, parentInstance, false);
         m_helper.checkForLoops(false);
         Value* value = nullptr;
         bool complex = false;
         if (complexV) {
-          UHDM::UHDM_OBJECT_TYPE exprtype = complexV->UhdmType();
-          if (exprtype == UHDM::uhdmconstant) {
-            UHDM::constant* c = (UHDM::constant*)complexV;
+          uhdm::UhdmType exprtype = complexV->getUhdmType();
+          if (exprtype == uhdm::UhdmType::Constant) {
+            uhdm::Constant* c = (uhdm::Constant*)complexV;
             if (en_replay && m_helper.errorOnNegativeConstant(
                                  parentDefinition, complexV, m_compileDesign,
                                  parentInstance)) {
@@ -2012,13 +2013,13 @@ std::vector<std::string_view> DesignElaboration::collectParams_(
                 m_exprBuilder.evalExpr(parentFile, expr, parentInstance, true);
               }
             }
-            const std::string_view v = c->VpiValue();
-            value = m_exprBuilder.fromVpiValue(v, c->VpiSize());
-          } else if ((exprtype == UHDM::uhdmoperation) ||
-                     (exprtype == UHDM::uhdmfunc_call) ||
-                     (exprtype == UHDM::uhdmsys_func_call) ||
-                     (exprtype == UHDM::uhdmindexed_part_select) ||
-                     (exprtype == UHDM::uhdmhier_path)) {
+            const std::string_view v = c->getValue();
+            value = m_exprBuilder.fromVpiValue(v, c->getSize());
+          } else if ((exprtype == uhdm::UhdmType::Operation) ||
+                     (exprtype == uhdm::UhdmType::FuncCall) ||
+                     (exprtype == uhdm::UhdmType::SysFuncCall) ||
+                     (exprtype == uhdm::UhdmType::IndexedPartSelect) ||
+                     (exprtype == uhdm::UhdmType::HierPath)) {
             if (instance) {
               complex = true;
               if (m_helper.substituteAssignedValue(complexV, m_compileDesign)) {
@@ -2026,15 +2027,15 @@ std::vector<std::string_view> DesignElaboration::collectParams_(
                 instance->setOverridenParam(name);
               } else {
                 m_helper.checkForLoops(true);
-                complexV = (UHDM::expr*)m_helper.compileExpression(
+                complexV = (uhdm::Expr*)m_helper.compileExpression(
                     parentDefinition, parentFile, expr, m_compileDesign,
                     Reduce::No, nullptr, parentInstance, false);
                 m_helper.checkForLoops(false);
-                if (complexV->UhdmType() == UHDM::uhdmref_obj) {
-                  UHDM::ref_obj* ref = (UHDM::ref_obj*)complexV;
-                  if (ref->Actual_group() == nullptr) {
-                    ref->Actual_group(m_helper.bindParameter(
-                        parentDefinition, parentInstance, ref->VpiName(),
+                if (complexV->getUhdmType() == uhdm::UhdmType::RefObj) {
+                  uhdm::RefObj* ref = (uhdm::RefObj*)complexV;
+                  if (ref->getActual() == nullptr) {
+                    ref->setActual(m_helper.bindParameter(
+                        parentDefinition, parentInstance, ref->getName(),
                         m_compileDesign, true));
                   }
                 }
@@ -2042,7 +2043,7 @@ std::vector<std::string_view> DesignElaboration::collectParams_(
                 instance->setOverridenParam(name);
               }
             }
-          } else if (exprtype == UHDM::uhdmref_obj) {
+          } else if (exprtype == uhdm::UhdmType::RefObj) {
             bool isTypeParam = false;
             if (module) {
               Parameter* p = module->getParameter(name);
@@ -2050,26 +2051,26 @@ std::vector<std::string_view> DesignElaboration::collectParams_(
             }
             if (!isTypeParam) {
               complex = true;
-              UHDM::ref_obj* ref = (UHDM::ref_obj*)complexV;
-              if (ref->Actual_group() == nullptr) {
-                ref->Actual_group(m_helper.bindParameter(
-                    parentDefinition, parentInstance, ref->VpiName(),
+              uhdm::RefObj* ref = (uhdm::RefObj*)complexV;
+              if (ref->getActual() == nullptr) {
+                ref->setActual(m_helper.bindParameter(
+                    parentDefinition, parentInstance, ref->getName(),
                     m_compileDesign, true));
               }
               instance->setComplexValue(name, complexV);
               instance->setOverridenParam(name);
             }
-          } else if (exprtype == UHDM::uhdmparameter) {
-            UHDM::parameter* param = (UHDM::parameter*)complexV;
-            const std::string_view pname = param->VpiName();
-            const UHDM::typespec* tps = nullptr;
-            if (const UHDM::ref_typespec* rt = param->Typespec()) {
-              tps = rt->Actual_typespec();
+          } else if (exprtype == uhdm::UhdmType::Parameter) {
+            uhdm::Parameter* param = (uhdm::Parameter*)complexV;
+            const std::string_view pname = param->getName();
+            const uhdm::Typespec* tps = nullptr;
+            if (const uhdm::RefTypespec* rt = param->getTypespec()) {
+              tps = rt->getActualTypespec();
             }
-            const UHDM::instance* pinst = tps->Instance();
-            if (pinst->UhdmType() == UHDM::uhdmpackage) {
+            const uhdm::Instance* pinst = tps->getInstance();
+            if (pinst->getUhdmType() == uhdm::UhdmType::Package) {
               Design* design = m_compileDesign->getCompiler()->getDesign();
-              if (Package* pack = design->getPackage(pinst->VpiName())) {
+              if (Package* pack = design->getPackage(pinst->getName())) {
                 if ((complexV = pack->getComplexValue(pname))) {
                   complex = true;
                   instance->setComplexValue(name, complexV);
@@ -2155,7 +2156,7 @@ std::vector<std::string_view> DesignElaboration::collectParams_(
           isTypeParam = p->isTypeParam();
         }
         m_helper.checkForLoops(true);
-        UHDM::expr* complexV = (UHDM::expr*)m_helper.compileExpression(
+        uhdm::Expr* complexV = (uhdm::Expr*)m_helper.compileExpression(
             parentDefinition, parentFile, expr, m_compileDesign, Reduce::Yes,
             nullptr, parentInstance, false);
         m_helper.checkForLoops(false);
@@ -2180,11 +2181,11 @@ std::vector<std::string_view> DesignElaboration::collectParams_(
         }
 
         if (complexV) {
-          if (complexV->UhdmType() == UHDM::uhdmconstant) {
-            UHDM::constant* c = (UHDM::constant*)complexV;
-            const std::string_view v = c->VpiValue();
-            value = m_exprBuilder.fromVpiValue(v, c->VpiSize());
-          } else if (complexV->UhdmType() == UHDM::uhdmoperation) {
+          if (complexV->getUhdmType() == uhdm::UhdmType::Constant) {
+            uhdm::Constant* c = (uhdm::Constant*)complexV;
+            const std::string_view v = c->getValue();
+            value = m_exprBuilder.fromVpiValue(v, c->getSize());
+          } else if (complexV->getUhdmType() == uhdm::UhdmType::Operation) {
             if (instance) {
               complex = true;
               instance->setComplexValue(name, complexV);
@@ -2225,9 +2226,9 @@ std::vector<std::string_view> DesignElaboration::collectParams_(
       Parameter* p = module->getParameter(name);
       if (p) {
         p->setTypespec(nullptr);
-        if (UHDM::parameter* param =
-                any_cast<UHDM::parameter*>(p->getUhdmParam())) {
-          param->Typespec(nullptr);
+        if (uhdm::Parameter* param =
+                any_cast<uhdm::Parameter*>(p->getUhdmParam())) {
+          param->setTypespec(nullptr);
         }
       }
     }
@@ -2331,67 +2332,68 @@ std::vector<std::string_view> DesignElaboration::collectParams_(
           }
           if (exprId) {
             m_helper.checkForLoops(true);
-            UHDM::expr* expr = (UHDM::expr*)m_helper.compileExpression(
+            uhdm::Expr* expr = (uhdm::Expr*)m_helper.compileExpression(
                 instance->getDefinition(), param.fC, exprId, m_compileDesign,
                 isMultidimension ? Reduce::No : Reduce::Yes, nullptr, instance,
                 false);
             m_helper.checkForLoops(false);
             Value* value = nullptr;
             bool complex = false;
-            UHDM::typespec* ts = nullptr;
+            uhdm::Typespec* ts = nullptr;
             if (p) {
               ts = p->getTypespec();
-              if (UHDM::any* param = p->getUhdmParam()) {
-                if (param->UhdmType() == UHDM::uhdmparameter) {
-                  if (UHDM::ref_typespec* rt =
-                          ((UHDM::parameter*)param)->Typespec()) {
-                    ts = rt->Actual_typespec();
+              if (uhdm::Any* param = p->getUhdmParam()) {
+                if (param->getUhdmType() == uhdm::UhdmType::Parameter) {
+                  if (uhdm::RefTypespec* rt =
+                          ((uhdm::Parameter*)param)->getTypespec()) {
+                    ts = rt->getActualTypespec();
                   }
                 } else {
-                  if (UHDM::ref_typespec* rt =
-                          ((UHDM::type_parameter*)param)->Typespec()) {
-                    ts = rt->Actual_typespec();
+                  if (uhdm::RefTypespec* rt =
+                          ((uhdm::TypeParameter*)param)->getTypespec()) {
+                    ts = rt->getActualTypespec();
                   }
                 }
               }
             }
             if (expr) {
-              if (expr->UhdmType() == UHDM::uhdmconstant) {
-                UHDM::constant* c = (UHDM::constant*)expr;
+              if (expr->getUhdmType() == uhdm::UhdmType::Constant) {
+                uhdm::Constant* c = (uhdm::Constant*)expr;
                 if (ts) {
-                  if (ts->UhdmType() != UHDM::uhdmunsupported_typespec) {
+                  if (ts->getUhdmType() !=
+                      uhdm::UhdmType::UnsupportedTypespec) {
                     m_helper.adjustSize(ts, instance->getDefinition(),
                                         m_compileDesign, instance, c);
-                    if (c->Typespec() == nullptr) {
-                      UHDM::Serializer& s = m_compileDesign->getSerializer();
-                      UHDM::ref_typespec* tsRef = s.MakeRef_typespec();
-                      tsRef->VpiParent(c);
-                      tsRef->Actual_typespec(ts);
-                      c->Typespec(tsRef);
+                    if (c->getTypespec() == nullptr) {
+                      uhdm::Serializer& s = m_compileDesign->getSerializer();
+                      uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
+                      tsRef->setParent(c);
+                      tsRef->setActualTypespec(ts);
+                      c->setTypespec(tsRef);
                     }
                   }
                 }
 
-                const std::string_view v = c->VpiValue();
-                value = m_exprBuilder.fromVpiValue(v, c->VpiSize());
-                const UHDM::typespec* cts = nullptr;
-                if (const UHDM::ref_typespec* rt = c->Typespec()) {
-                  cts = rt->Actual_typespec();
+                const std::string_view v = c->getValue();
+                value = m_exprBuilder.fromVpiValue(v, c->getSize());
+                const uhdm::Typespec* cts = nullptr;
+                if (const uhdm::RefTypespec* rt = c->getTypespec()) {
+                  cts = rt->getActualTypespec();
                 }
                 value->setTypespec(cts ? cts : ts);
                 if (ts)
                   m_helper.valueRange(value, ts, cts ? cts : ts,
                                       instance->getDefinition(),
                                       m_compileDesign, instance);
-              } else if (expr->UhdmType() == UHDM::uhdmoperation) {
+              } else if (expr->getUhdmType() == uhdm::UhdmType::Operation) {
                 if (instance) {
                   complex = true;
-                  expr = (UHDM::expr*)m_helper.defaultPatternAssignment(
+                  expr = (uhdm::Expr*)m_helper.defaultPatternAssignment(
                       ts, expr, instance->getDefinition(), m_compileDesign,
                       m_helper.getReduce(), instance);
                   instance->setComplexValue(name, expr);
-                  UHDM::operation* op = (UHDM::operation*)expr;
-                  int32_t opType = op->VpiOpType();
+                  uhdm::Operation* op = (uhdm::Operation*)expr;
+                  int32_t opType = op->getOpType();
                   if (opType == vpiAssignmentPatternOp) {
                     if (ts) {
                       if (m_helper.substituteAssignedValue(expr,
@@ -2404,29 +2406,32 @@ std::vector<std::string_view> DesignElaboration::collectParams_(
                     }
                   }
                   if (p) {
-                    if (UHDM::typespec* ts = p->getTypespec()) {
-                      if (UHDM::any* param = p->getUhdmParam()) {
-                        if (param->UhdmType() == UHDM::uhdmparameter) {
-                          if (UHDM::ref_typespec* rt =
-                                  ((UHDM::parameter*)param)->Typespec()) {
-                            ts = rt->Actual_typespec();
+                    if (uhdm::Typespec* ts = p->getTypespec()) {
+                      if (uhdm::Any* param = p->getUhdmParam()) {
+                        if (param->getUhdmType() == uhdm::UhdmType::Parameter) {
+                          if (uhdm::RefTypespec* rt =
+                                  ((uhdm::Parameter*)param)->getTypespec()) {
+                            ts = rt->getActualTypespec();
                           }
                         } else {
-                          if (UHDM::ref_typespec* rt =
-                                  ((UHDM::type_parameter*)param)->Typespec()) {
-                            ts = rt->Actual_typespec();
+                          if (uhdm::RefTypespec* rt =
+                                  ((uhdm::TypeParameter*)param)
+                                      ->getTypespec()) {
+                            ts = rt->getActualTypespec();
                           }
                         }
                       }
-                      if (ts->UhdmType() != UHDM::uhdmunsupported_typespec) {
-                        if (op->Typespec() == nullptr) {
-                          UHDM::Serializer& s =
+                      if (ts->getUhdmType() !=
+                          uhdm::UhdmType::UnsupportedTypespec) {
+                        if (op->getTypespec() == nullptr) {
+                          uhdm::Serializer& s =
                               m_compileDesign->getSerializer();
-                          UHDM::ref_typespec* tsRef = s.MakeRef_typespec();
-                          tsRef->VpiParent(op);
-                          op->Typespec(tsRef);
+                          uhdm::RefTypespec* tsRef =
+                              s.make<uhdm::RefTypespec>();
+                          tsRef->setParent(op);
+                          op->setTypespec(tsRef);
                         }
-                        op->Typespec()->Actual_typespec(ts);
+                        op->getTypespec()->setActualTypespec(ts);
                       }
                     }
                     m_helper.reorderAssignmentPattern(module, p->getUhdmParam(),
@@ -2510,7 +2515,7 @@ void DesignElaboration::checkConfigurations_() {
 
 void DesignElaboration::reduceUnnamedBlocks_() {
   Design* design = m_compileDesign->getCompiler()->getDesign();
-  UHDM::Serializer& s = m_compileDesign->getSerializer();
+  uhdm::Serializer& s = m_compileDesign->getSerializer();
   std::queue<ModuleInstance*> queue;
   for (auto instance : design->getTopLevelModuleInstances()) {
     queue.push(instance);

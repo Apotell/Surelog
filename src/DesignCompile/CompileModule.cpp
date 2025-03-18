@@ -41,11 +41,14 @@
 #include <uhdm/assignment.h>
 #include <uhdm/attribute.h>
 #include <uhdm/constant.h>
+#include <uhdm/cont_assign.h>
 #include <uhdm/final_stmt.h>
 #include <uhdm/initial.h>
 #include <uhdm/io_decl.h>
 #include <uhdm/logic_net.h>
-#include <uhdm/module_inst.h>
+#include <uhdm/module.h>
+#include <uhdm/module_array.h>
+#include <uhdm/ref_module.h>
 #include <uhdm/ref_obj.h>
 #include <uhdm/table_entry.h>
 #include <uhdm/udp_defn.h>
@@ -214,9 +217,9 @@ bool CompileModule::compile(Elaborate elaborate, Reduce reduce) {
       } while (nodeId &&
                (fC->Type(nodeId) != VObjectType::paAttribute_instance));
       if (nodeId) {
-        if (UHDM::VectorOfattribute* attributes = m_helper.compileAttributes(
+        if (uhdm::AttributeCollection* attributes = m_helper.compileAttributes(
                 m_module, fC, nodeId, m_compileDesign, nullptr)) {
-          m_module->Attributes(attributes);
+          m_module->setAttributes(attributes);
         }
       }
 
@@ -234,15 +237,15 @@ bool CompileModule::compile(Elaborate elaborate, Reduce reduce) {
 }
 
 bool CompileModule::collectUdpObjects_() {
-  UHDM::Serializer& s = m_compileDesign->getSerializer();
+  uhdm::Serializer& s = m_compileDesign->getSerializer();
   const FileContent* const fC = m_module->m_fileContents[0];
   NodeId id = m_module->m_nodeIds[0];
   VObject current = fC->Object(id);
   std::stack<NodeId> stack;
   stack.push(id);
 
-  const UHDM::ScopedScope scopedScope(m_module->getUhdmModel());
-  UHDM::udp_defn* defn = m_module->getUhdmModel<UHDM::udp_defn>();
+  const uhdm::ScopedScope scopedScope(m_module->getUhdmModel());
+  uhdm::UdpDefn* defn = m_module->getUhdmModel<uhdm::UdpDefn>();
   while (!stack.empty()) {
     id = stack.top();
     stack.pop();
@@ -254,9 +257,10 @@ bool CompileModule::collectUdpObjects_() {
       case VObjectType::paUdp_ansi_declaration: {
         NodeId Attributes = fC->Child(id);
         if (fC->Type(Attributes) == VObjectType::paAttribute_instance) {
-          if (UHDM::VectorOfattribute* attributes = m_helper.compileAttributes(
-                  m_module, fC, Attributes, m_compileDesign, defn)) {
-            defn->Attributes(attributes);
+          if (uhdm::AttributeCollection* attributes =
+                  m_helper.compileAttributes(m_module, fC, Attributes,
+                                             m_compileDesign, defn)) {
+            defn->setAttributes(attributes);
           }
         }
         break;
@@ -264,11 +268,11 @@ bool CompileModule::collectUdpObjects_() {
       case VObjectType::paUdp_port_list: {
         NodeId port = fC->Child(id);
         while (port) {
-          UHDM::io_decl* io = s.MakeIo_decl();
+          uhdm::IODecl* io = s.make<uhdm::IODecl>();
           const std::string_view name = fC->SymName(port);
           fC->populateCoreMembers(port, port, io);
-          io->VpiName(name);
-          io->VpiParent(defn);
+          io->setName(name);
+          io->setParent(defn);
           port = fC->Sibling(port);
         }
         break;
@@ -276,11 +280,12 @@ bool CompileModule::collectUdpObjects_() {
       case VObjectType::paUdp_output_declaration:
       case VObjectType::paUdp_reg_declaration: {
         NodeId Output = fC->Child(id);
-        UHDM::logic_net* net = s.MakeLogic_net();
+        uhdm::LogicNet* net = s.make<uhdm::LogicNet>();
         if (fC->Type(Output) == VObjectType::paAttribute_instance) {
-          if (UHDM::VectorOfattribute* attributes = m_helper.compileAttributes(
-                  m_module, fC, Output, m_compileDesign, net)) {
-            net->Attributes(attributes);
+          if (uhdm::AttributeCollection* attributes =
+                  m_helper.compileAttributes(m_module, fC, Output,
+                                             m_compileDesign, net)) {
+            net->setAttributes(attributes);
           }
           while (fC->Type(Output) == VObjectType::paAttribute_instance)
             Output = fC->Sibling(Output);
@@ -288,14 +293,14 @@ bool CompileModule::collectUdpObjects_() {
 
         const std::string_view outputname = fC->SymName(Output);
         fC->populateCoreMembers(id, id, net);
-        net->VpiParent(defn);
-        if (std::vector<UHDM::io_decl*>* ios = defn->Io_decls()) {
+        net->setParent(defn);
+        if (std::vector<uhdm::IODecl*>* ios = defn->getIODecls()) {
           for (auto io : *ios) {
-            if (io->VpiName() == outputname) {
-              if (io->Expr() == nullptr)
-                io->Expr(net);  // reg def do not override output def
-              net->VpiName(io->VpiName());
-              io->VpiDirection(vpiOutput);
+            if (io->getName() == outputname) {
+              if (io->getExpr() == nullptr)
+                io->setExpr(net);  // reg def do not override output def
+              net->setName(io->getName());
+              io->setDirection(vpiOutput);
               break;
             }
           }
@@ -304,7 +309,7 @@ bool CompileModule::collectUdpObjects_() {
       }
       case VObjectType::paUdp_input_declaration: {
         NodeId Indentifier_list = fC->Child(id);
-        UHDM::VectorOfattribute* attributes = nullptr;
+        uhdm::AttributeCollection* attributes = nullptr;
         if (fC->Type(Indentifier_list) == VObjectType::paAttribute_instance) {
           attributes = m_helper.compileAttributes(
               m_module, fC, Indentifier_list, m_compileDesign, nullptr);
@@ -315,19 +320,19 @@ bool CompileModule::collectUdpObjects_() {
         NodeId Identifier = fC->Child(Indentifier_list);
         while (Identifier) {
           const std::string_view inputname = fC->SymName(Identifier);
-          if (std::vector<UHDM::io_decl*>* ios = defn->Io_decls()) {
-            UHDM::logic_net* net = s.MakeLogic_net();
+          if (std::vector<uhdm::IODecl*>* ios = defn->getIODecls()) {
+            uhdm::LogicNet* net = s.make<uhdm::LogicNet>();
             fC->populateCoreMembers(id, id, net);
             if (attributes != nullptr) {
-              net->Attributes(attributes);
-              for (auto a : *attributes) a->VpiParent(net);
+              net->setAttributes(attributes);
+              for (auto a : *attributes) a->setParent(net);
             }
-            net->VpiParent(defn);
+            net->setParent(defn);
             for (auto io : *ios) {
-              if (io->VpiName() == inputname) {
-                io->Expr(net);
-                net->VpiName(io->VpiName());
-                io->VpiDirection(vpiInput);
+              if (io->getName() == inputname) {
+                io->setExpr(net);
+                net->setName(io->getName());
+                io->setDirection(vpiInput);
                 break;
               }
             }
@@ -367,10 +372,10 @@ bool CompileModule::collectUdpObjects_() {
         ventry += ": ";
         NodeId Symbol = fC->Child(Output_symbol);
         ventry += fC->SymName(Symbol);
-        UHDM::table_entry* entry = s.MakeTable_entry();
-        entry->VpiParent(defn);
-        entry->VpiValue(ventry);
-        entry->VpiSize(nb);
+        uhdm::TableEntry* entry = s.make<uhdm::TableEntry>();
+        entry->setParent(defn);
+        entry->setValue(ventry);
+        entry->setSize(nb);
         fC->populateCoreMembers(Level_input_list, Level_input_list, entry);
         break;
       }
@@ -458,37 +463,37 @@ bool CompileModule::collectUdpObjects_() {
           ventry += "-";
         }
 
-        UHDM::table_entry* entry = s.MakeTable_entry();
-        entry->VpiParent(defn);
-        entry->VpiValue(ventry);
-        entry->VpiSize(nb);
+        uhdm::TableEntry* entry = s.make<uhdm::TableEntry>();
+        entry->setParent(defn);
+        entry->setValue(ventry);
+        entry->setSize(nb);
         fC->populateCoreMembers(Level_input_list, Level_input_list, entry);
         break;
       }
       case VObjectType::paUdp_initial_statement: {
         NodeId Identifier = fC->Child(id);
         NodeId Value = fC->Sibling(Identifier);
-        UHDM::initial* init = s.MakeInitial();
+        uhdm::Initial* init = s.make<uhdm::Initial>();
         fC->populateCoreMembers(id, id, init);
-        init->VpiParent(defn);
-        defn->Initial(init);
-        UHDM::assignment* assign_stmt = s.MakeAssignment();
-        init->Stmt(assign_stmt);
-        UHDM::ref_obj* ref = s.MakeRef_obj();
-        ref->VpiName(fC->SymName(Identifier));
-        ref->VpiParent(assign_stmt);
+        init->setParent(defn);
+        defn->setInitial(init);
+        uhdm::Assignment* assign_stmt = s.make<uhdm::Assignment>();
+        init->setStmt(assign_stmt);
+        uhdm::RefObj* ref = s.make<uhdm::RefObj>();
+        ref->setName(fC->SymName(Identifier));
+        ref->setParent(assign_stmt);
         fC->populateCoreMembers(Identifier, Identifier, ref);
-        assign_stmt->Lhs(ref);
+        assign_stmt->setLhs(ref);
         fC->populateCoreMembers(id, id, assign_stmt);
-        assign_stmt->VpiParent(init);
-        UHDM::constant* c = s.MakeConstant();
-        assign_stmt->Rhs(c);
+        assign_stmt->setParent(init);
+        uhdm::Constant* c = s.make<uhdm::Constant>();
+        assign_stmt->setRhs(c);
         std::string val = StrCat("UINT:", fC->SymName(Value));
-        c->VpiValue(val);
-        c->VpiDecompile(fC->SymName(Value));
-        c->VpiSize(64);
-        c->VpiConstType(vpiUIntConst);
-        c->VpiParent(assign_stmt);
+        c->setValue(val);
+        c->setDecompile(fC->SymName(Value));
+        c->setSize(64);
+        c->setConstType(vpiUIntConst);
+        c->setParent(assign_stmt);
         fC->populateCoreMembers(Value, Value, c);
         break;
       }
@@ -524,7 +529,7 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
     stopPoints.push_back(VObjectType::paGenerate_region);
   }
 
-  const UHDM::ScopedScope scopedScope(m_module->getUhdmModel());
+  const uhdm::ScopedScope scopedScope(m_module->getUhdmModel());
   for (uint32_t i = 0; i < m_module->m_fileContents.size(); i++) {
     const FileContent* fC = m_module->m_fileContents[i];
     VObject current = fC->Object(m_module->m_nodeIds[i]);
@@ -656,13 +661,13 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
         }
         case VObjectType::paContinuous_assign: {
           if (collectType != CollectType::OTHER) break;
-          std::vector<UHDM::cont_assign*> assigns =
+          std::vector<uhdm::ContAssign*> assigns =
               m_helper.compileContinuousAssignment(
                   m_module, fC, fC->Child(id), m_compileDesign,
                   m_module->getUhdmModel(), m_instance);
           if (m_module->getContAssigns() == nullptr) {
-            m_module->setContAssigns(
-                m_compileDesign->getSerializer().MakeCont_assignVec());
+            m_module->setContAssigns(m_compileDesign->getSerializer()
+                                         .makeCollection<uhdm::ContAssign>());
           }
           for (auto assign : assigns) {
             m_module->getContAssigns()->push_back(assign);
@@ -671,7 +676,7 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
         }
         case VObjectType::paProperty_declaration: {
           if (collectType != CollectType::OTHER) break;
-          if (UHDM::property_decl* decl = m_helper.compilePropertyDeclaration(
+          if (uhdm::PropertyDecl* decl = m_helper.compilePropertyDeclaration(
                   m_module, fC, id, m_compileDesign, m_module->getUhdmModel(),
                   m_instance)) {
             m_module->addPropertyDecl(decl);
@@ -680,7 +685,7 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
         }
         case VObjectType::paSequence_declaration: {
           if (collectType != CollectType::OTHER) break;
-          if (UHDM::sequence_decl* decl = m_helper.compileSequenceDeclaration(
+          if (uhdm::SequenceDecl* decl = m_helper.compileSequenceDeclaration(
                   m_module, fC, id, m_compileDesign, m_module->getUhdmModel(),
                   m_instance)) {
             m_module->addSequenceDecl(decl);
@@ -689,12 +694,12 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
         }
         case VObjectType::paAlways_construct: {
           if (collectType != CollectType::OTHER) break;
-          UHDM::always* always = m_helper.compileAlwaysBlock(
+          uhdm::Always* always = m_helper.compileAlwaysBlock(
               m_module, fC, id, m_compileDesign, m_instance);
-          UHDM::VectorOfprocess_stmt* processes = m_module->getProcesses();
+          uhdm::ProcessCollection* processes = m_module->getProcesses();
           if (processes == nullptr) {
-            m_module->setProcesses(
-                m_compileDesign->getSerializer().MakeProcess_stmtVec());
+            m_module->setProcesses(m_compileDesign->getSerializer()
+                                       .makeCollection<uhdm::Process>());
             processes = m_module->getProcesses();
           }
           processes->push_back(always);
@@ -862,15 +867,15 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
         case VObjectType::paModule_instantiation:
         case VObjectType::paProgram_instantiation: {
           if (collectType != CollectType::OTHER) break;
-          std::pair<std::vector<UHDM::module_array*>,
-                    std::vector<UHDM::ref_module*>>
+          std::pair<std::vector<uhdm::ModuleArray*>,
+                    std::vector<uhdm::RefModule*>>
               result = m_helper.compileInstantiation(
                   m_module, fC, m_compileDesign, id, m_instance);
           if (!result.first.empty()) {
             auto subModuleArrays = m_module->getModuleArrays();
             if (subModuleArrays == nullptr) {
-              subModuleArrays =
-                  m_compileDesign->getSerializer().MakeModule_arrayVec();
+              subModuleArrays = m_compileDesign->getSerializer()
+                                    .makeCollection<uhdm::ModuleArray>();
               m_module->setModuleArrays(subModuleArrays);
             }
             for (auto mod : result.first) {
@@ -880,7 +885,8 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
           if (!result.second.empty()) {
             auto subModules = m_module->getRefModules();
             if (subModules == nullptr) {
-              subModules = m_compileDesign->getSerializer().MakeRef_moduleVec();
+              subModules = m_compileDesign->getSerializer()
+                               .makeCollection<uhdm::RefModule>();
               m_module->setRefModules(subModules);
             }
             for (auto mod : result.second) {
@@ -893,12 +899,12 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
         }
         case VObjectType::paInitial_construct: {
           if (collectType != CollectType::OTHER) break;
-          UHDM::initial* init =
+          uhdm::Initial* init =
               m_helper.compileInitialBlock(m_module, fC, id, m_compileDesign);
-          UHDM::VectorOfprocess_stmt* processes = m_module->getProcesses();
+          uhdm::ProcessCollection* processes = m_module->getProcesses();
           if (processes == nullptr) {
-            m_module->setProcesses(
-                m_compileDesign->getSerializer().MakeProcess_stmtVec());
+            m_module->setProcesses(m_compileDesign->getSerializer()
+                                       .makeCollection<uhdm::Process>());
             processes = m_module->getProcesses();
           }
           processes->push_back(init);
@@ -906,12 +912,12 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
         }
         case VObjectType::paFinal_construct: {
           if (collectType != CollectType::OTHER) break;
-          UHDM::final_stmt* final =
+          uhdm::FinalStmt* final =
               m_helper.compileFinalBlock(m_module, fC, id, m_compileDesign);
-          UHDM::VectorOfprocess_stmt* processes = m_module->getProcesses();
+          uhdm::ProcessCollection* processes = m_module->getProcesses();
           if (processes == nullptr) {
-            m_module->setProcesses(
-                m_compileDesign->getSerializer().MakeProcess_stmtVec());
+            m_module->setProcesses(m_compileDesign->getSerializer()
+                                       .makeCollection<uhdm::Process>());
             processes = m_module->getProcesses();
           }
           processes->push_back(final);
@@ -951,11 +957,11 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
           FileCNodeId fnid(fC, id);
           m_module->addObject(type, fnid);
           if (m_instance) break;
-          UHDM::VectorOfany* stmts =
+          uhdm::AnyCollection* stmts =
               m_helper.compileGenStmt(m_module, fC, m_compileDesign, id);
           if (m_module->getGenStmts() == nullptr) {
             m_module->setGenStmts(
-                m_compileDesign->getSerializer().MakeAnyVec());
+                m_compileDesign->getSerializer().makeCollection<uhdm::Any>());
           }
           for (auto st : *stmts) {
             m_module->getGenStmts()->push_back(st);
@@ -1025,7 +1031,7 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
     stopPoints.push_back(VObjectType::paGenerate_region);
   }
 
-  const UHDM::ScopedScope scopedScope(m_module->getUhdmModel());
+  const uhdm::ScopedScope scopedScope(m_module->getUhdmModel());
   for (uint32_t i = 0; i < m_module->m_fileContents.size(); i++) {
     const FileContent* fC = m_module->m_fileContents[i];
     VObject current = fC->Object(m_module->m_nodeIds[i]);
@@ -1127,13 +1133,13 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
         }
         case VObjectType::paContinuous_assign: {
           if (collectType != CollectType::OTHER) break;
-          std::vector<UHDM::cont_assign*> assigns =
+          std::vector<uhdm::ContAssign*> assigns =
               m_helper.compileContinuousAssignment(m_module, fC, fC->Child(id),
                                                    m_compileDesign, nullptr,
                                                    m_instance);
           if (m_module->getContAssigns() == nullptr) {
-            m_module->setContAssigns(
-                m_compileDesign->getSerializer().MakeCont_assignVec());
+            m_module->setContAssigns(m_compileDesign->getSerializer()
+                                         .makeCollection<uhdm::ContAssign>());
           }
           for (auto assign : assigns) {
             m_module->getContAssigns()->push_back(assign);
@@ -1142,12 +1148,12 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
         }
         case VObjectType::paAlways_construct: {
           if (collectType != CollectType::OTHER) break;
-          UHDM::always* always = m_helper.compileAlwaysBlock(
+          uhdm::Always* always = m_helper.compileAlwaysBlock(
               m_module, fC, id, m_compileDesign, m_instance);
-          UHDM::VectorOfprocess_stmt* processes = m_module->getProcesses();
+          uhdm::ProcessCollection* processes = m_module->getProcesses();
           if (processes == nullptr) {
-            m_module->setProcesses(
-                m_compileDesign->getSerializer().MakeProcess_stmtVec());
+            m_module->setProcesses(m_compileDesign->getSerializer()
+                                       .makeCollection<uhdm::Process>());
             processes = m_module->getProcesses();
           }
           processes->push_back(always);
@@ -1186,15 +1192,15 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
         case VObjectType::paModule_instantiation:
         case VObjectType::paProgram_instantiation: {
           if (collectType != CollectType::OTHER) break;
-          std::pair<std::vector<UHDM::module_array*>,
-                    std::vector<UHDM::ref_module*>>
+          std::pair<std::vector<uhdm::ModuleArray*>,
+                    std::vector<uhdm::RefModule*>>
               result = m_helper.compileInstantiation(
                   m_module, fC, m_compileDesign, id, m_instance);
           if (!result.first.empty()) {
             auto subModuleArrays = m_module->getModuleArrays();
             if (subModuleArrays == nullptr) {
-              subModuleArrays =
-                  m_compileDesign->getSerializer().MakeModule_arrayVec();
+              subModuleArrays = m_compileDesign->getSerializer()
+                                    .makeCollection<uhdm::ModuleArray>();
               m_module->setModuleArrays(subModuleArrays);
             }
             for (auto mod : result.first) {
@@ -1204,7 +1210,8 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
           if (!result.second.empty()) {
             auto subModules = m_module->getRefModules();
             if (subModules == nullptr) {
-              subModules = m_compileDesign->getSerializer().MakeRef_moduleVec();
+              subModules = m_compileDesign->getSerializer()
+                               .makeCollection<uhdm::RefModule>();
               m_module->setRefModules(subModules);
             }
             for (auto mod : result.second) {
@@ -1233,14 +1240,14 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
         }
         case VObjectType::paProperty_declaration: {
           if (collectType != CollectType::OTHER) break;
-          UHDM::property_decl* decl = m_helper.compilePropertyDeclaration(
+          uhdm::PropertyDecl* decl = m_helper.compilePropertyDeclaration(
               m_module, fC, id, m_compileDesign, nullptr, m_instance);
           m_module->addPropertyDecl(decl);
           break;
         }
         case VObjectType::paSequence_declaration: {
           if (collectType != CollectType::OTHER) break;
-          UHDM::sequence_decl* decl = m_helper.compileSequenceDeclaration(
+          uhdm::SequenceDecl* decl = m_helper.compileSequenceDeclaration(
               m_module, fC, id, m_compileDesign, nullptr, m_instance);
           m_module->addSequenceDecl(decl);
           break;
@@ -1302,7 +1309,7 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
                       m_module, fC, port_declaration, simple_port_name,
                       VObjectType::paData_type_or_implicit, port_direction_type,
                       InvalidNodeId, InvalidNodeId, false);
-                  m_module->insertModPort(modportsymb, signal, modportname);
+                  m_module->insertModport(modportsymb, signal, modportname);
                   modport_simple_port = fC->Sibling(modport_simple_port);
                 }
               } else if (port_declaration_type ==
@@ -1326,7 +1333,7 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
                       ErrorDefinition::COMP_MODPORT_UNDEFINED_CLOCKING_BLOCK,
                       loc);
                 } else {
-                  m_module->insertModPort(modportsymb, *cb);
+                  m_module->insertModport(modportsymb, *cb);
                 }
               }
               modport_ports_declaration =
@@ -1336,12 +1343,12 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
           break;
         case VObjectType::paInitial_construct: {
           if (collectType != CollectType::OTHER) break;
-          UHDM::initial* init =
+          uhdm::Initial* init =
               m_helper.compileInitialBlock(m_module, fC, id, m_compileDesign);
-          UHDM::VectorOfprocess_stmt* processes = m_module->getProcesses();
+          uhdm::ProcessCollection* processes = m_module->getProcesses();
           if (processes == nullptr) {
-            m_module->setProcesses(
-                m_compileDesign->getSerializer().MakeProcess_stmtVec());
+            m_module->setProcesses(m_compileDesign->getSerializer()
+                                       .makeCollection<uhdm::Process>());
             processes = m_module->getProcesses();
           }
           processes->push_back(init);
@@ -1349,12 +1356,12 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
         }
         case VObjectType::paFinal_construct: {
           if (collectType != CollectType::OTHER) break;
-          UHDM::final_stmt* final =
+          uhdm::FinalStmt* final =
               m_helper.compileFinalBlock(m_module, fC, id, m_compileDesign);
-          UHDM::VectorOfprocess_stmt* processes = m_module->getProcesses();
+          uhdm::ProcessCollection* processes = m_module->getProcesses();
           if (processes == nullptr) {
-            m_module->setProcesses(
-                m_compileDesign->getSerializer().MakeProcess_stmtVec());
+            m_module->setProcesses(m_compileDesign->getSerializer()
+                                       .makeCollection<uhdm::Process>());
             processes = m_module->getProcesses();
           }
           processes->push_back(final);
@@ -1452,11 +1459,11 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
           FileCNodeId fnid(fC, id);
           m_module->addObject(type, fnid);
           if (m_instance) break;
-          UHDM::VectorOfany* stmts =
+          uhdm::AnyCollection* stmts =
               m_helper.compileGenStmt(m_module, fC, m_compileDesign, id);
           if (m_module->getGenStmts() == nullptr) {
             m_module->setGenStmts(
-                m_compileDesign->getSerializer().MakeAnyVec());
+                m_compileDesign->getSerializer().makeCollection<uhdm::Any>());
           }
           for (auto st : *stmts) {
             m_module->getGenStmts()->push_back(st);
@@ -1650,7 +1657,7 @@ void CompileModule::compileClockingBlock_(const FileContent* fC, NodeId id) {
         symbols->registerSymbol(fC->SymName(clocking_block_name));
   else
     clocking_block_symbol = symbols->registerSymbol("unnamed_clocking_block");
-  UHDM::clocking_block* cblock = m_helper.compileClockingBlock(
+  uhdm::ClockingBlock* cblock = m_helper.compileClockingBlock(
       m_module, fC, id, m_compileDesign, nullptr, m_instance);
   ClockingBlock cb(fC, clocking_block_type, clocking_event, type, cblock);
   m_module->addClockingBlock(clocking_block_symbol, cb);

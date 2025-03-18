@@ -65,7 +65,9 @@ class Statement : public RTTI {
   virtual Function* getFunction() { return nullptr; }
   virtual void setFunction(Function* function) {}
 
-  void addStatement(Statement* statement) { m_statements.emplace_back(statement); }
+  void addStatement(Statement* statement) {
+    m_statements.emplace_back(statement);
+  }
   const StatementVector& getStatements() const { return m_statements; }
 
  private:

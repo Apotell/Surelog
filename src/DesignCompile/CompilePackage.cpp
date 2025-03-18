@@ -62,7 +62,7 @@ int32_t FunctorCompilePackage::operator()() const {
 
 bool CompilePackage::compile(Elaborate elaborate, Reduce reduce) {
   if (!m_package) return false;
-  UHDM::package* pack = m_package->getUhdmModel<UHDM::package>();
+  uhdm::Package* pack = m_package->getUhdmModel<uhdm::Package>();
   const FileContent* fC = m_package->m_fileContents[0];
   SymbolTable* const symbols = m_session->getSymbolTable();
   NodeId packId = m_package->m_nodeIds[0];
@@ -82,7 +82,7 @@ bool CompilePackage::compile(Elaborate elaborate, Reduce reduce) {
     errors2->printMessage(err, m_session->getCommandLineParser()->muteStdout());
     delete errors2;
   }
-  const UHDM::ScopedScope scopedScope(pack);
+  const uhdm::ScopedScope scopedScope(pack);
   collectObjects_(CollectType::FUNCTION, reduce);
   collectObjects_(CollectType::DEFINITION, reduce);
   m_helper.evalScheduledExprs(m_package, m_compileDesign);
@@ -93,9 +93,9 @@ bool CompilePackage::compile(Elaborate elaborate, Reduce reduce) {
     packId = current.m_child;
   } while (packId && (fC->Type(packId) != VObjectType::paAttribute_instance));
   if (packId) {
-    if (UHDM::VectorOfattribute* attributes = m_helper.compileAttributes(
+    if (uhdm::AttributeCollection* attributes = m_helper.compileAttributes(
             m_package, fC, packId, m_compileDesign, nullptr)) {
-      m_package->Attributes(attributes);
+      m_package->setAttributes(attributes);
     }
   }
 
@@ -256,14 +256,14 @@ bool CompilePackage::collectObjects_(CollectType collectType, Reduce reduce) {
         }
         case VObjectType::paProperty_declaration: {
           if (collectType != CollectType::OTHER) break;
-          UHDM::property_decl* decl = m_helper.compilePropertyDeclaration(
+          uhdm::PropertyDecl* decl = m_helper.compilePropertyDeclaration(
               m_package, fC, id, m_compileDesign, nullptr, nullptr);
           m_package->addPropertyDecl(decl);
           break;
         }
         case VObjectType::paSequence_declaration: {
           if (collectType != CollectType::OTHER) break;
-          UHDM::sequence_decl* decl = m_helper.compileSequenceDeclaration(
+          uhdm::SequenceDecl* decl = m_helper.compileSequenceDeclaration(
               m_package, fC, id, m_compileDesign, nullptr, nullptr);
           m_package->addSequenceDecl(decl);
           break;

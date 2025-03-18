@@ -27,8 +27,8 @@
 
 #include <Surelog/Common/RTTI.h>
 
-#include <string>
 #include <map>
+#include <string>
 #include <vector>
 
 namespace SURELOG {

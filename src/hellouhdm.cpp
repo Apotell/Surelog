@@ -70,9 +70,9 @@ int main(int argc, const char** argv) {
   // different process pre-elaboration), then optionally elaborate it:
   if (the_design && (!vpi_get(vpiElaborated, the_design))) {
     std::cout << "UHDM Elaboration...\n";
-    UHDM::Serializer serializer;
-    UHDM::ElaboratorContext* elaboratorContext =
-        new UHDM::ElaboratorContext(&serializer, true);
+    uhdm::Serializer serializer;
+    uhdm::ElaboratorContext* elaboratorContext =
+        new uhdm::ElaboratorContext(&serializer, true);
     elaboratorContext->m_elaborator.listenDesigns({the_design});
     delete elaboratorContext;
   }
@@ -87,13 +87,13 @@ int main(int argc, const char** argv) {
   // - Walker design pattern (See third_party/UHDM/src/vpi_visitor.cpp)
 
   if (the_design) {
-    UHDM::design* udesign = nullptr;
+    uhdm::Design* udesign = nullptr;
     if (vpi_get(vpiType, the_design) == vpiDesign) {
       // C++ top handle from which the entire design can be traversed using the
       // C++ API
       udesign = UhdmDesignFromVpiHandle(the_design);
       result.append("Design name (C++): ")
-          .append(udesign->VpiName())
+          .append(udesign->getName())
           .append("\n");
     }
     // Example demonstrating the classic VPI API traversal of the folded model
@@ -105,7 +105,7 @@ int main(int argc, const char** argv) {
         "\n";
     // Flat Module list:
     result += "Module List:\n";
-    vpiHandle modItr = vpi_iterate(UHDM::uhdmallModules, the_design);
+    vpiHandle modItr = vpi_iterate(vpiAllModules, the_design);
     while (vpiHandle obj_h = vpi_scan(modItr)) {
       if (vpi_get(vpiType, obj_h) != vpiModule) {
         result += "ERROR: this is not a module\n";
@@ -156,7 +156,7 @@ int main(int argc, const char** argv) {
     // Instance tree:
     // Elaborated Instance tree
     result += "Instance Tree:\n";
-    vpiHandle instItr = vpi_iterate(UHDM::uhdmtopModules, the_design);
+    vpiHandle instItr = vpi_iterate(vpiTopModules, the_design);
     while (vpiHandle obj_h = vpi_scan(instItr)) {
       std::function<std::string(vpiHandle, std::string)> inst_visit =
           [&inst_visit](vpiHandle obj_h, std::string margin) {

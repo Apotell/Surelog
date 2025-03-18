@@ -55,13 +55,13 @@ class Enum : public DataType {
   NodeId getDefinitionId() const { return m_nameId; }
   NameValueMap& getValues() { return m_values; }
 
-  UHDM::typespec* getBaseTypespec() const { return m_baseTypespec; }
-  void setBaseTypespec(UHDM::typespec* typespec) { m_baseTypespec = typespec; }
+  uhdm::Typespec* getBaseTypespec() const { return m_baseTypespec; }
+  void setBaseTypespec(uhdm::Typespec* typespec) { m_baseTypespec = typespec; }
 
  private:
   const NodeId m_nameId;
   NameValueMap m_values;
-  UHDM::typespec* m_baseTypespec;
+  uhdm::Typespec* m_baseTypespec;
 };
 
 }  // namespace SURELOG

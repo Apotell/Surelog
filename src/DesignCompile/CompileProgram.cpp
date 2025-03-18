@@ -72,8 +72,8 @@ bool CompileProgram::compile(Elaborate elaborate, Reduce reduce) {
   Error err2(ErrorDefinition::COMP_PROGRAM_OBSOLETE_USAGE, loc);
   errors->addError(err2);
 
-  UHDM::program* const prgm = m_program->getUhdmModel<UHDM::program>();
-  const UHDM::ScopedScope scopedScope(prgm);
+  uhdm::Program* const prgm = m_program->getUhdmModel<uhdm::Program>();
+  const uhdm::ScopedScope scopedScope(prgm);
 
   if (!collectObjects_(CollectType::FUNCTION)) return false;
   if (!collectObjects_(CollectType::DEFINITION)) return false;
@@ -99,9 +99,9 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
   } while (programId &&
            (fC->Type(programId) != VObjectType::paAttribute_instance));
   if (programId) {
-    if (UHDM::VectorOfattribute* attributes = m_helper.compileAttributes(
+    if (uhdm::AttributeCollection* attributes = m_helper.compileAttributes(
             m_program, fC, programId, m_compileDesign, nullptr)) {
-      m_program->Attributes(attributes);
+      m_program->setAttributes(attributes);
     }
   }
 
@@ -164,14 +164,14 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
       }
       case VObjectType::paProperty_declaration: {
         if (collectType != CollectType::OTHER) break;
-        UHDM::property_decl* decl = m_helper.compilePropertyDeclaration(
+        uhdm::PropertyDecl* decl = m_helper.compilePropertyDeclaration(
             m_program, fC, id, m_compileDesign, nullptr, nullptr);
         m_program->addPropertyDecl(decl);
         break;
       }
       case VObjectType::paSequence_declaration: {
         if (collectType != CollectType::OTHER) break;
-        UHDM::sequence_decl* decl = m_helper.compileSequenceDeclaration(
+        uhdm::SequenceDecl* decl = m_helper.compileSequenceDeclaration(
             m_program, fC, id, m_compileDesign, nullptr, nullptr);
         m_program->addSequenceDecl(decl);
         break;
@@ -307,12 +307,12 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
       }
       case VObjectType::paInitial_construct: {
         if (collectType != CollectType::OTHER) break;
-        UHDM::initial* init =
+        uhdm::Initial* init =
             m_helper.compileInitialBlock(m_program, fC, id, m_compileDesign);
-        UHDM::VectorOfprocess_stmt* processes = m_program->getProcesses();
+        uhdm::ProcessCollection* processes = m_program->getProcesses();
         if (processes == nullptr) {
           m_program->setProcesses(
-              m_compileDesign->getSerializer().MakeProcess_stmtVec());
+              m_compileDesign->getSerializer().makeCollection<uhdm::Process>());
           processes = m_program->getProcesses();
         }
         processes->push_back(init);
@@ -320,12 +320,12 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
       }
       case VObjectType::paFinal_construct: {
         if (collectType != CollectType::OTHER) break;
-        UHDM::final_stmt* final =
+        uhdm::FinalStmt* final =
             m_helper.compileFinalBlock(m_program, fC, id, m_compileDesign);
-        UHDM::VectorOfprocess_stmt* processes = m_program->getProcesses();
+        uhdm::ProcessCollection* processes = m_program->getProcesses();
         if (processes == nullptr) {
           m_program->setProcesses(
-              m_compileDesign->getSerializer().MakeProcess_stmtVec());
+              m_compileDesign->getSerializer().makeCollection<uhdm::Process>());
           processes = m_program->getProcesses();
         }
         processes->push_back(final);

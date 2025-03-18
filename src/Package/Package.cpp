@@ -31,7 +31,7 @@ namespace SURELOG {
 
 Package::Package(Session* session, std::string_view name, Library* library,
                  const FileContent* fC, NodeId nodeId,
-                 UHDM::Serializer& serializer)
+                 uhdm::Serializer& serializer)
     : DesignComponent(session, fC, nullptr),
       m_name(name),
       m_library(library),
@@ -43,8 +43,8 @@ Package::Package(Session* session, std::string_view name, Library* library,
   //   m_unElabPackage->m_name = name;
   // }
 
-  UHDM::package* const instance = serializer.MakePackage();
-  if (!name.empty()) instance->VpiName(name);
+  uhdm::Package* const instance = serializer.make<uhdm::Package>();
+  if (!name.empty()) instance->setName(name);
   if (nodeId && (fC != nullptr))
     fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::paPACKAGE),
                             nodeId, instance);

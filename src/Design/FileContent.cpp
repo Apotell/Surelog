@@ -30,6 +30,7 @@
 #include <Surelog/SourceCompile/SymbolTable.h>
 #include <Surelog/SourceCompile/VObjectTypes.h>
 #include <Surelog/Utils/StringUtils.h>
+#include <uhdm/BaseClass.h>
 
 #include <iostream>
 #include <stack>
@@ -651,13 +652,13 @@ const DesignElement* FileContent::getDesignElement(
 }
 
 void FileContent::populateCoreMembers(NodeId startIndex, NodeId endIndex,
-                                      UHDM::any* instance,
+                                      uhdm::Any* instance,
                                       bool force /* = false */) const {
-  if (startIndex && ((instance->VpiLineNo() == 0) || force)) {
+  if (startIndex && ((instance->getStartLine() == 0) || force)) {
     if (startIndex < m_objects.size()) {
       const VObject& object = m_objects[startIndex];
-      instance->VpiLineNo(object.m_line);
-      instance->VpiColumnNo(object.m_column);
+      instance->setStartLine(object.m_line);
+      instance->setStartColumn(object.m_column);
     } else {
       m_session->getErrorContainer()->addError(
           ErrorDefinition::COMP_INTERNAL_ERROR_OUT_OF_BOUND,
@@ -666,10 +667,10 @@ void FileContent::populateCoreMembers(NodeId startIndex, NodeId endIndex,
     }
   }
 
-  if (endIndex && ((instance->VpiEndLineNo() == 0) || force)) {
+  if (endIndex && ((instance->getEndLine() == 0) || force)) {
     if (endIndex < m_objects.size()) {
       // For packed/unpacked dimenion, include all ranges!
-      if (instance->UhdmType() != UHDM::uhdmrange) {
+      if (instance->getUhdmType() != uhdm::UhdmType::Range) {
         NodeId siblingId = endIndex;
         while (siblingId && ((m_objects[siblingId].m_type ==
                               VObjectType::paPacked_dimension) ||
@@ -681,8 +682,8 @@ void FileContent::populateCoreMembers(NodeId startIndex, NodeId endIndex,
       }
 
       const VObject& object = m_objects[endIndex];
-      instance->VpiEndLineNo(object.m_endLine);
-      instance->VpiEndColumnNo(object.m_endColumn);
+      instance->setEndLine(object.m_endLine);
+      instance->setEndColumn(object.m_endColumn);
     } else {
       m_session->getErrorContainer()->addError(
           ErrorDefinition::COMP_INTERNAL_ERROR_OUT_OF_BOUND,
@@ -691,8 +692,8 @@ void FileContent::populateCoreMembers(NodeId startIndex, NodeId endIndex,
     }
   }
 
-  if (instance->VpiFile().empty() ||
-      (instance->VpiFile() == SymbolTable::getBadSymbol()) || force) {
+  if (instance->getFile().empty() ||
+      (instance->getFile() == SymbolTable::getBadSymbol()) || force) {
     PathId fileId;
     // Issue #3239: Apparently, it's possible that startIndex.m_fileId
     // & endIndex.m_fileId are differently (for example, including a file
@@ -723,7 +724,7 @@ void FileContent::populateCoreMembers(NodeId startIndex, NodeId endIndex,
     }
 
     if (fileId) {
-      instance->VpiFile(m_session->getFileSystem()->toPath(fileId));
+      instance->setFile(m_session->getFileSystem()->toPath(fileId));
     }
   }
 }

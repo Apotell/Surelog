@@ -59,7 +59,8 @@ void SV3_1aPpTreeShapeListener::enterComment(
   CommandLineParser *const clp = m_session->getCommandLineParser();
   if (clp->reportNonSynthesizable()) {
     if (ctx->One_line_comment()) {
-      static const std::regex reg(R"(\/\/\s*(pragma|synopsys)\s+translate_off\s*)");
+      static const std::regex reg(
+          R"(\/\/\s*(pragma|synopsys)\s+translate_off\s*)");
       const std::string &text = ctx->One_line_comment()->getText();
       if (std::regex_match(text, reg)) {
         m_filterProtectedRegions = true;
@@ -80,7 +81,8 @@ void SV3_1aPpTreeShapeListener::enterComment(
   }
   if (clp->reportNonSynthesizable()) {
     if (ctx->One_line_comment()) {
-      static const std::regex reg(R"(\/\/\s*(pragma|synopsys)\s+translate_on\s*)");
+      static const std::regex reg(
+          R"(\/\/\s*(pragma|synopsys)\s+translate_on\s*)");
       const std::string &text = ctx->One_line_comment()->getText();
       if (std::regex_match(text, reg)) {
         if (!clp->filterProtectedRegions()) {

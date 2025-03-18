@@ -68,7 +68,7 @@ class Compiler {
   Session* getSession() { return m_session; }
   const Session* getSession() const { return m_session; }
 
-  UHDM::Serializer& getSerializer() { return m_serializer; }
+  uhdm::Serializer& getSerializer() { return m_serializer; }
   void lockSerializer() { m_serializerMutex.lock(); }
   void unlockSerializer() { m_serializerMutex.unlock(); }
 
@@ -92,7 +92,7 @@ class Compiler {
   // of the design.
   Design* getDesign() const { return m_design; }
 
-  UHDM::design* getUhdmDesign() const;
+  uhdm::Design* getUhdmDesign() const;
   vpiHandle getVpiDesign() const;
   CompileDesign* getCompileDesign() const { return m_compileDesign; }
   ErrorContainer::Stats getErrorStats() const;
@@ -121,7 +121,7 @@ class Compiler {
   bool cleanup_();
 
  private:
-  UHDM::Serializer m_serializer;
+  uhdm::Serializer m_serializer;
   Session* const m_session = nullptr;
   CompilationUnit* m_commonCompilationUnit;
   std::map<SymbolId, PreprocessFile::AntlrParserHandler*,

@@ -73,7 +73,7 @@ CompileDesign::~CompileDesign() {
   // delete m_compiler;
 }
 
-UHDM::Serializer& CompileDesign::getSerializer() {
+uhdm::Serializer& CompileDesign::getSerializer() {
   return m_compiler->getSerializer();
 }
 
@@ -86,16 +86,16 @@ bool CompileDesign::compile() {
   FileSystem* const fileSystem = m_session->getFileSystem();
   ErrorContainer* const errors = m_session->getErrorContainer();
   SymbolTable* const symbols = m_session->getSymbolTable();
-  UHDM::ErrorHandler errHandler =
-      [=](UHDM::ErrorType errType, std::string_view msg,
-          const UHDM::any* object1, const UHDM::any* object2) {
+  uhdm::ErrorHandler errHandler =
+      [=](uhdm::ErrorType errType, std::string_view msg,
+          const uhdm::Any* object1, const uhdm::Any* object2) {
         if (object1) {
-          Location loc1(fileSystem->toPathId(object1->VpiFile(), symbols),
-                        object1->VpiLineNo(), object1->VpiColumnNo(),
+          Location loc1(fileSystem->toPathId(object1->getFile(), symbols),
+                        object1->getStartLine(), object1->getStartColumn(),
                         symbols->registerSymbol(msg));
           if (object2) {
-            Location loc2(fileSystem->toPathId(object2->VpiFile(), symbols),
-                          object2->VpiLineNo(), object2->VpiColumnNo());
+            Location loc2(fileSystem->toPathId(object2->getFile(), symbols),
+                          object2->getStartLine(), object2->getStartColumn());
             Error err((ErrorDefinition::ErrorType)errType, loc1, loc2);
             errors->addError(err);
           } else {
@@ -109,8 +109,8 @@ bool CompileDesign::compile() {
         }
       };
 
-  UHDM::Serializer& serializer = m_compiler->getSerializer();
-  serializer.SetErrorHandler(errHandler);
+  uhdm::Serializer& serializer = m_compiler->getSerializer();
+  serializer.setErrorHandler(errHandler);
 
   if (ErrorContainer* errors2 = new ErrorContainer(m_session)) {
     Location loc(BadSymbolId);
@@ -422,8 +422,8 @@ void decompile(Session* session, ValuedComponentI* instance) {
         }
         if (inst->getNetlist() && inst->getNetlist()->param_assigns()) {
           for (auto ps : *inst->getNetlist()->param_assigns()) {
-            std::cout << ps->Lhs()->VpiName() << " = \n";
-            decompile((UHDM::any*)ps->Rhs());
+            std::cout << ps->getLhs()->getName() << " = \n";
+            decompile((uhdm::Any*)ps->getRhs());
           }
         }
         inst = inst->getParent();

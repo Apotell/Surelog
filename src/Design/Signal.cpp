@@ -91,7 +91,7 @@ std::string_view Signal::getName() const {
   return m_fileContent->SymName(m_nameId);
 }
 
-NodeId Signal::getModPortId() const {
+NodeId Signal::getModportId() const {
   return m_fileContent->Sibling(m_interfaceTypeNameId);
 }
 

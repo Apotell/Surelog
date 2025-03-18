@@ -237,7 +237,7 @@ void Builtin::addBuiltinTypes() const {
       {"builtin", "any_sverilog_class", "void", "constraint_mode"},
       {"builtin", "any_sverilog_class", "void", "rand_mode"}};
 
-  UHDM::Serializer& s = m_compileDesign->getSerializer();
+  uhdm::Serializer& s = m_compileDesign->getSerializer();
   for (const auto& f : functionDef) {
     Package* package = m_design->getPackage(f.packageName);
     if (package == nullptr) {
@@ -292,7 +292,7 @@ void Builtin::addBuiltinMacros(CompilationUnit* compUnit) const {
 void Builtin::addBuiltinClasses() const {
   // builtin.sv compilation
   FileSystem* const fileSystem = m_session->getFileSystem();
-  UHDM::Serializer& s = m_compileDesign->getSerializer();
+  uhdm::Serializer& s = m_compileDesign->getSerializer();
   // A fake path to keep the API simple!
   SymbolTable* const symbolTable = m_session->getSymbolTable();
   PathId fileId = fileSystem->getChild(fileSystem->getWorkingDir(symbolTable),

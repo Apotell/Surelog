@@ -211,7 +211,7 @@ class FileContent : public DesignComponent {
   void setLibraryCellFile() { m_isLibraryCellFile = true; }
 
   void populateCoreMembers(NodeId startIndex, NodeId endIndex,
-                           UHDM::any* instance, bool force = false) const;
+                           uhdm::Any* instance, bool force = false) const;
 
   void sortTree();
   bool validate() const;

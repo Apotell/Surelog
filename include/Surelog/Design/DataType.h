@@ -32,8 +32,8 @@
 #include <string>
 #include <string_view>
 
-namespace UHDM {
-class typespec;
+namespace uhdm {
+class Typespec;
 };
 
 namespace SURELOG {
@@ -111,11 +111,11 @@ class DataType : public RTTI {
 
   virtual bool isNet() const { return false; }
 
-  UHDM::typespec* getTypespec() const { return m_typespec; }
-  void setTypespec(UHDM::typespec* typespec) { m_typespec = typespec; }
+  uhdm::Typespec* getTypespec() const { return m_typespec; }
+  void setTypespec(uhdm::Typespec* typespec) { m_typespec = typespec; }
 
-  UHDM::typespec* getUnpackedTypespec() const { return m_unpacked_typespec; }
-  void setUnpackedTypespec(UHDM::typespec* typespec) {
+  uhdm::Typespec* getUnpackedTypespec() const { return m_unpacked_typespec; }
+  void setUnpackedTypespec(uhdm::Typespec* typespec) {
     m_unpacked_typespec = typespec;
   }
 
@@ -126,8 +126,8 @@ class DataType : public RTTI {
   mutable const DataType* m_definition = nullptr;
   VObjectType m_type = VObjectType::sl_INVALID_;
   bool m_is_parameter = false;
-  UHDM::typespec* m_typespec = nullptr;
-  UHDM::typespec* m_unpacked_typespec = nullptr;
+  uhdm::Typespec* m_typespec = nullptr;
+  uhdm::Typespec* m_unpacked_typespec = nullptr;
   Category m_category = Category::REF;
 };
 

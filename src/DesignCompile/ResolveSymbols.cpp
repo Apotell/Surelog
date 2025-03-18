@@ -60,7 +60,7 @@ std::string_view ResolveSymbols::SymName(NodeId index) const {
 }
 
 void ResolveSymbols::createFastLookup() {
-  UHDM::Serializer& s = m_compileDesign->getSerializer();
+  uhdm::Serializer& s = m_compileDesign->getSerializer();
   ErrorContainer* const errors = m_session->getErrorContainer();
   Library* lib = m_fileContent->getLibrary();
   const std::string_view libName = lib->getName();
@@ -96,7 +96,7 @@ void ResolveSymbols::createFastLookup() {
           const std::string_view pkgname = name;
           Package* pdef =
               new Package(m_session, pkgname, lib, m_fileContent, object, s);
-          UHDM::package* pack = pdef->getUhdmModel<UHDM::package>();
+          uhdm::Package* pack = pdef->getUhdmModel<uhdm::Package>();
           m_fileContent->populateCoreMembers(object, object, pack);
           m_fileContent->addPackageDefinition(pkgname, pdef);
 

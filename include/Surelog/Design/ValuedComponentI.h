@@ -46,7 +46,7 @@ class ValuedComponentI : public RTTI {
  public:
   using ParamMap =
       std::map<std::string, std::pair<Value*, int32_t>, StringViewCompare>;
-  using ComplexValueMap = std::map<std::string, UHDM::expr*, StringViewCompare>;
+  using ComplexValueMap = std::map<std::string, uhdm::Expr*, StringViewCompare>;
 
   ValuedComponentI(Session* session, const ValuedComponentI* parentScope,
                    ValuedComponentI* definition)
@@ -70,8 +70,8 @@ class ValuedComponentI : public RTTI {
   const ValuedComponentI* getParentScope() const { return m_parentScope; }
   void setParentScope(ValuedComponentI* parent) { m_parentScope = parent; }
 
-  virtual void setComplexValue(std::string_view name, UHDM::expr* val);
-  virtual UHDM::expr* getComplexValue(std::string_view name) const;
+  virtual void setComplexValue(std::string_view name, uhdm::Expr* val);
+  virtual uhdm::Expr* getComplexValue(std::string_view name) const;
   virtual void forgetComplexValue(std::string_view name);
   const ComplexValueMap& getComplexValues() const { return m_complexValues; }
   // Do not change the signature of this method, it's use in gdb for debug.

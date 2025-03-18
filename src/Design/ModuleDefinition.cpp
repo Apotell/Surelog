@@ -22,11 +22,11 @@
  */
 
 #include <Surelog/Design/FileContent.h>
-#include <Surelog/Design/ModPort.h>
+#include <Surelog/Design/Modport.h>
 #include <Surelog/Design/ModuleDefinition.h>
 #include <uhdm/Serializer.h>
-#include <uhdm/interface_inst.h>
-#include <uhdm/module_inst.h>
+#include <uhdm/interface.h>
+#include <uhdm/module.h>
 #include <uhdm/udp_defn.h>
 
 namespace SURELOG {
@@ -38,31 +38,31 @@ VObjectType ModuleDefinition::getType() const {
 
 ModuleDefinition::ModuleDefinition(Session* session, std::string_view name,
                                    const FileContent* fC, NodeId nodeId,
-                                   UHDM::Serializer& serializer)
+                                   uhdm::Serializer& serializer)
     : DesignComponent(session, fC, nullptr), m_name(name), m_udpDefn(nullptr) {
   addFileContent(fC, nodeId);
   m_unelabModule = this;
   switch (fC->Type(nodeId)) {
     // case VObjectType::paConfig_declaration:
     case VObjectType::paUdp_declaration: {
-      UHDM::udp_defn* const instance = serializer.MakeUdp_defn();
-      if (!name.empty()) instance->VpiDefName(name);
+      uhdm::UdpDefn* const instance = serializer.make<uhdm::UdpDefn>();
+      if (!name.empty()) instance->setDefName(name);
       fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::paPRIMITIVE),
                               nodeId, instance);
       setUhdmModel(instance);
     } break;
 
     case VObjectType::paInterface_declaration: {
-      UHDM::interface_inst* const instance = serializer.MakeInterface_inst();
-      if (!name.empty()) instance->VpiName(name);
+      uhdm::Interface* const instance = serializer.make<uhdm::Interface>();
+      if (!name.empty()) instance->setName(name);
       fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::paINTERFACE),
                               nodeId, instance);
       setUhdmModel(instance);
     } break;
 
     default: {
-      UHDM::module_inst* const instance = serializer.MakeModule_inst();
-      if (!name.empty()) instance->VpiName(name);
+      uhdm::Module* const instance = serializer.make<uhdm::Module>();
+      if (!name.empty()) instance->setName(name);
       fC->populateCoreMembers(
           fC->sl_collect(nodeId, VObjectType::paModule_keyword), nodeId,
           instance);
@@ -88,11 +88,11 @@ uint32_t ModuleDefinition::getSize() const {
   return size;
 }
 
-void ModuleDefinition::insertModPort(std::string_view modport,
+void ModuleDefinition::insertModport(std::string_view modport,
                                      const Signal& signal, NodeId nodeId) {
-  ModPortSignalMap::iterator itr = m_modportSignalMap.find(modport);
+  ModportSignalMap::iterator itr = m_modportSignalMap.find(modport);
   if (itr == m_modportSignalMap.end()) {
-    ModPort modp(this, modport, m_fileContents[0], nodeId);
+    Modport modp(this, modport, m_fileContents[0], nodeId);
     modp.addSignal(signal);
     m_modportSignalMap.emplace(modport, modp);
   } else {
@@ -100,9 +100,9 @@ void ModuleDefinition::insertModPort(std::string_view modport,
   }
 }
 
-const Signal* ModuleDefinition::getModPortSignal(std::string_view modport,
+const Signal* ModuleDefinition::getModportSignal(std::string_view modport,
                                                  NodeId port) const {
-  ModPortSignalMap::const_iterator itr = m_modportSignalMap.find(modport);
+  ModportSignalMap::const_iterator itr = m_modportSignalMap.find(modport);
   if (itr == m_modportSignalMap.end()) {
     return nullptr;
   } else {
@@ -115,8 +115,8 @@ const Signal* ModuleDefinition::getModPortSignal(std::string_view modport,
   return nullptr;
 }
 
-ModPort* ModuleDefinition::getModPort(std::string_view modport) {
-  ModPortSignalMap::iterator itr = m_modportSignalMap.find(modport);
+Modport* ModuleDefinition::getModport(std::string_view modport) {
+  ModportSignalMap::iterator itr = m_modportSignalMap.find(modport);
   if (itr == m_modportSignalMap.end()) {
     return nullptr;
   } else {
@@ -124,9 +124,9 @@ ModPort* ModuleDefinition::getModPort(std::string_view modport) {
   }
 }
 
-void ModuleDefinition::insertModPort(std::string_view modport,
+void ModuleDefinition::insertModport(std::string_view modport,
                                      ClockingBlock& cb) {
-  ModPortClockingBlockMap::iterator itr =
+  ModportClockingBlockMap::iterator itr =
       m_modportClockingBlockMap.find(modport);
   if (itr == m_modportClockingBlockMap.end()) {
     std::vector<ClockingBlock> cbs;
@@ -137,7 +137,7 @@ void ModuleDefinition::insertModPort(std::string_view modport,
   }
 }
 
-const ClockingBlock* ModuleDefinition::getModPortClockingBlock(
+const ClockingBlock* ModuleDefinition::getModportClockingBlock(
     std::string_view modport, NodeId port) const {
   auto itr = m_modportClockingBlockMap.find(modport);
   if (itr == m_modportClockingBlockMap.end()) {

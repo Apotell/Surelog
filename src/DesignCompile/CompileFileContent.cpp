@@ -65,8 +65,8 @@ bool CompileFileContent::collectObjects_() {
       VObjectType::paInterface_class_declaration};
 
   Design* const design = m_compileDesign->getCompiler()->getDesign();
-  UHDM::design* const udesign = design->getUhdmDesign();
-  const UHDM::ScopedScope scopedScope(udesign);
+  uhdm::Design* const udesign = design->getUhdmDesign();
+  const uhdm::ScopedScope scopedScope(udesign);
 
   FileContent* fC = m_fileContent;
   if (fC->getSize() == 0) return true;

@@ -45,14 +45,6 @@
 #include <stack>
 
 namespace SURELOG {
-using UHDM::BaseClass;
-using UHDM::begin;
-using UHDM::Serializer;
-using UHDM::UHDM_OBJECT_TYPE;
-using UHDM::uhdmunsupported_expr;
-using UHDM::uhdmunsupported_stmt;
-using UHDM::uhdmunsupported_typespec;
-
 // TODO: In the code below, some of the column-range based coverage is
 // implemented, the data collection part is. The actual coverage is not and is
 // commented out as it is a work in progress
@@ -537,26 +529,27 @@ float UhdmChecker::reportCoverage(PathId uhdmFileId) {
 void UhdmChecker::annotate() {
   SymbolTable* const symbols = m_session->getSymbolTable();
   FileSystem* const fileSystem = m_session->getFileSystem();
-  Serializer& s = m_compileDesign->getSerializer();
-  const auto& objects = s.AllObjects();
+  uhdm::Serializer& s = m_compileDesign->getSerializer();
+  const auto& objects = s.getAllObjects();
   for (const auto& obj : objects) {
-    const BaseClass* bc = obj.first;
+    const uhdm::BaseClass* bc = obj.first;
     if (!bc) continue;
     bool unsupported = false;
-    UHDM_OBJECT_TYPE ot = bc->UhdmType();
-    if ((ot == uhdmunsupported_expr) || (ot == uhdmunsupported_stmt) ||
-        (ot == uhdmunsupported_typespec))
+    uhdm::UhdmType ot = bc->getUhdmType();
+    if ((ot == uhdm::UhdmType::UnsupportedExpr) ||
+        (ot == uhdm::UhdmType::UnsupportedStmt) ||
+        (ot == uhdm::UhdmType::UnsupportedTypespec))
       unsupported = true;
-    PathId fnId = fileSystem->toPathId(bc->VpiFile(), symbols);
+    PathId fnId = fileSystem->toPathId(bc->getFile(), symbols);
     const auto& fItr = m_fileMap.find(fnId);
     if (fItr != m_fileMap.end()) {
       const FileContent* fC = (*fItr).second;
       FileNodeCoverMap::iterator fileItr = m_fileNodeCoverMap.find(fC);
       if (fileItr != m_fileNodeCoverMap.end()) {
         RangesMap& uhdmCover = (*fileItr).second;
-        RangesMap::iterator cItr = uhdmCover.find(bc->VpiLineNo());
-        // uint16_t from = bc->VpiColumnNo();
-        // uint16_t to = bc->VpiEndColumnNo();
+        RangesMap::iterator cItr = uhdmCover.find(bc->getStartLine());
+        // uint16_t from = bc->getStartColumn();
+        // uint16_t to = bc->getEndColumn();
 
         if (cItr != uhdmCover.end()) {
           // bool found = false;

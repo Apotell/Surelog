@@ -38,7 +38,7 @@ TEST(Uhdm, PortType) {
   CompileHelper helper(&session);
   ElaboratorHarness eharness(&session);
 
-  Design* design;
+  uhdm::Design* design;
   FileContent* fC;
   CompileDesign* compileDesign;
   // Preprocess, Parse, Compile, Elaborate, Create UHDM model
@@ -54,17 +54,17 @@ TEST(Uhdm, PortType) {
   EXPECT_EQ(insts.size(), 3);
   Compiler* compiler = compileDesign->getCompiler();
   vpiHandle hdesign = compiler->getUhdmDesign();
-  UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
+  uhdm::Design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
-    std::string_view instName = topMod->VpiName();
-    EXPECT_EQ(topMod->Ports()->size(), 2);
-    for (auto port : *topMod->Ports()) {
+    std::string_view instName = topMod->getName();
+    EXPECT_EQ(topMod->getPorts()->size(), 2);
+    for (auto port : *topMod->getPorts()) {
       if (instName == "UnitTest@dut1") {
-        EXPECT_EQ(port->VpiDirection(), vpiInout);
+        EXPECT_EQ(port->getDirection(), vpiInout);
       } else if (instName == "UnitTest@dut2") {
-        EXPECT_EQ(port->VpiDirection(), vpiInput);
+        EXPECT_EQ(port->getDirection(), vpiInput);
       } else if (instName == "UnitTest@dut3") {
-        EXPECT_EQ(port->VpiDirection(), vpiOutput);
+        EXPECT_EQ(port->getDirection(), vpiOutput);
       } else {
         FAIL();
       }
@@ -76,7 +76,7 @@ TEST(Uhdm, Unsigned) {
   CompileHelper helper(&session);
   ElaboratorHarness eharness(&session);
 
-  Design* design;
+  uhdm::Design* design;
   FileContent* fC;
   CompileDesign* compileDesign;
   // Preprocess, Parse, Compile, Elaborate, Create UHDM model
@@ -94,25 +94,25 @@ TEST(Uhdm, Unsigned) {
   EXPECT_EQ(insts.size(), 1);
   Compiler* compiler = compileDesign->getCompiler();
   vpiHandle hdesign = compiler->getUhdmDesign();
-  UHDM::design* udesign = UhdmDesignFromVpiHandle(hdesign);
+  uhdm::Design* udesign = UhdmDesignFromVpiHandle(hdesign);
   for (auto topMod : *udesign->TopModules()) {
     EXPECT_EQ(topMod->Param_assigns()->size(), 6);
     for (auto passign : *topMod->Param_assigns()) {
-      UHDM::parameter* p = (UHDM::parameter*)passign->Lhs();
-      const std::string_view pname = p->VpiName();
-      UHDM::constant* value = (UHDM::constant*)passign->Rhs();
+      uhdm::Parameter* p = (uhdm::Parameter*)passign->getLhs();
+      const std::string_view pname = p->getName();
+      uhdm::Constant* value = (uhdm::Constant*)passign->getRhs();
       if (pname == "A") {
-        EXPECT_EQ(value->VpiValue(), "UINT:4");
+        EXPECT_EQ(value->getValue(), "UINT:4");
       } else if (pname == "B") {
-        EXPECT_EQ(value->VpiValue(), "UINT:252");
+        EXPECT_EQ(value->getValue(), "UINT:252");
       } else if (pname == "C") {
-        EXPECT_EQ(value->VpiValue(), "UINT:12");
+        EXPECT_EQ(value->getValue(), "UINT:12");
       } else if (pname == "D") {
-        EXPECT_EQ(value->VpiValue(), "INT:-4");
+        EXPECT_EQ(value->getValue(), "INT:-4");
       } else if (pname == "E") {
-        EXPECT_EQ(value->VpiValue(), "INT:-4");
+        EXPECT_EQ(value->getValue(), "INT:-4");
       } else if (pname == "F") {
-        EXPECT_EQ(value->VpiValue(), "INT:-4");
+        EXPECT_EQ(value->getValue(), "INT:-4");
       } else {
         FAIL();
       }

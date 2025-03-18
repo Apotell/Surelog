@@ -39,7 +39,7 @@ namespace SURELOG {
 class DataType;
 class DesignComponent;
 class FileContent;
-class ModPort;
+class Modport;
 class ModuleDefinition;
 
 class Signal final {
@@ -70,8 +70,8 @@ class Signal final {
   void setInterfaceDef(ModuleDefinition* interfaceDef) {
     m_interfaceDef = interfaceDef;
   }
-  ModPort* getModPort() { return m_modPort; }
-  void setModPort(ModPort* modport) { m_modPort = modport; }
+  Modport* getModport() { return m_modPort; }
+  void setModport(Modport* modport) { m_modPort = modport; }
   void setDirection(VObjectType direction) { m_direction = direction; }
   void setType(VObjectType type) { m_type = type; }
   void setDataType(const DataType* dtype) { m_dataType = dtype; }
@@ -103,7 +103,7 @@ class Signal final {
   Signal* getLowConn() const { return m_lowConn; }
   NodeId getPackedDimension() const { return m_packedDimension; }
   NodeId getUnpackedDimension() const { return m_unpackedDimension; }
-  NodeId getModPortId() const;
+  NodeId getModportId() const;
   NodeId getInterfaceTypeNameId() const { return m_interfaceTypeNameId; }
   NodeId getTypespecId() const { return m_typespecId; }
   NodeId getDelay() const { return m_delay; }
@@ -113,11 +113,11 @@ class Signal final {
 
   DesignComponent* getComponent() { return m_component; }
 
-  std::vector<UHDM::attribute*>* attributes() { return m_attributes; }
-  void attributes(std::vector<UHDM::attribute*>* attr) { m_attributes = attr; }
+  std::vector<uhdm::Attribute*>* attributes() { return m_attributes; }
+  void attributes(std::vector<uhdm::Attribute*>* attr) { m_attributes = attr; }
 
-  UHDM::any* uhdmScopeModel() { return m_uhdmScopeModel; }
-  void uhdmScopeModel(UHDM::any* scopeModel) { m_uhdmScopeModel = scopeModel; }
+  uhdm::Any* uhdmScopeModel() { return m_uhdmScopeModel; }
+  void uhdmScopeModel(uhdm::Any* scopeModel) { m_uhdmScopeModel = scopeModel; }
 
  private:
   static int32_t s_instId;
@@ -138,11 +138,11 @@ class Signal final {
   VObjectType m_type = VObjectType::slNoType;
   VObjectType m_direction = VObjectType::slNoType;
   ModuleDefinition* m_interfaceDef = nullptr;
-  ModPort* m_modPort = nullptr;
+  Modport* m_modPort = nullptr;
   const DataType* m_dataType = nullptr;
   Signal* m_lowConn = nullptr;  // for ports
-  std::vector<UHDM::attribute*>* m_attributes = nullptr;
-  UHDM::any* m_uhdmScopeModel = nullptr;
+  std::vector<uhdm::Attribute*>* m_attributes = nullptr;
+  uhdm::Any* m_uhdmScopeModel = nullptr;
   bool m_const = false;
   bool m_var = false;
   bool m_signed = false;

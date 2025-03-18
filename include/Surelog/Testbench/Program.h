@@ -33,6 +33,10 @@
 // UHDM
 #include <uhdm/containers.h>
 
+namespace uhdm {
+class Serializer;
+}
+
 namespace SURELOG {
 
 class CompileProgram;
@@ -46,7 +50,7 @@ class Program : public DesignComponent, public ClockingBlockHolder {
 
  public:
   Program(Session* session, std::string_view name, Library* library,
-          FileContent* fC, NodeId nodeId, UHDM::Serializer& serializer);
+          FileContent* fC, NodeId nodeId, uhdm::Serializer& serializer);
   ~Program() override = default;
 
   uint32_t getSize() const override;
@@ -63,9 +67,9 @@ class Program : public DesignComponent, public ClockingBlockHolder {
   }
   ClassDefinition* getClassDefinition(std::string_view name);
 
-  UHDM::VectorOfattribute* Attributes() { return attributes_; }
+  uhdm::AttributeCollection* getAttributes() { return attributes_; }
 
-  bool Attributes(UHDM::VectorOfattribute* data) {
+  bool setAttributes(uhdm::AttributeCollection* data) {
     attributes_ = data;
     return true;
   }
@@ -78,7 +82,7 @@ class Program : public DesignComponent, public ClockingBlockHolder {
   std::string m_endLabel;
   Library* m_library = nullptr;
   ClassNameClassDefinitionMultiMap m_classDefinitions;
-  UHDM::VectorOfattribute* attributes_ = nullptr;
+  uhdm::AttributeCollection* attributes_ = nullptr;
 };
 
 };  // namespace SURELOG

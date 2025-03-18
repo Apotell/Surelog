@@ -37,7 +37,7 @@ ClassDefinition::ClassDefinition(Session* session, std::string_view name,
                                  Library* library, DesignComponent* container,
                                  const FileContent* fC, NodeId nodeId,
                                  ClassDefinition* parent,
-                                 UHDM::Serializer& serializer)
+                                 uhdm::Serializer& serializer)
     : DesignComponent(session, container ? container : fC, nullptr),
       DataType(fC, nodeId, name,
                fC ? fC->Type(nodeId) : VObjectType::paClass_declaration),
@@ -48,22 +48,22 @@ ClassDefinition::ClassDefinition(Session* session, std::string_view name,
   m_category = DataType::Category::CLASS;
   addFileContent(fC, nodeId);
 
-  UHDM::class_defn* const instance = serializer.MakeClass_defn();
-  if (!name.empty()) instance->VpiName(name);
+  uhdm::ClassDefn* const instance = serializer.make<uhdm::ClassDefn>();
+  if (!name.empty()) instance->setName(name);
   if (nodeId && (fC != nullptr)) {
     fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::paCLASS),
                             nodeId, instance);
   }
-  if (container != nullptr) instance->VpiParent(container->getUhdmModel());
+  if (container != nullptr) instance->setParent(container->getUhdmModel());
   setUhdmModel(instance);
 }
 
 void ClassDefinition::setContainer(DesignComponent* container) {
-  getUhdmModel()->VpiParent(nullptr, true);
+  getUhdmModel()->setParent(nullptr, true);
   m_container = container;
 
   if (m_container != nullptr)
-    getUhdmModel()->VpiParent(m_container->getUhdmModel());
+    getUhdmModel()->setParent(m_container->getUhdmModel());
 }
 
 uint32_t ClassDefinition::getSize() const {
@@ -223,7 +223,7 @@ bool ClassDefinition::hasCompleteBaseSpecification() const {
       if (cparent) {
         return cparent->hasCompleteBaseSpecification();
       }
-      const Parameter* param = datatype_cast<const Parameter*>(parent.second);
+      const Parameter* param = datatype_cast<Parameter>(parent.second);
       if (param) return false;
     }
   }

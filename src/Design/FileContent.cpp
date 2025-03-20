@@ -29,6 +29,7 @@
 #include <Surelog/Library/Library.h>
 #include <Surelog/SourceCompile/SymbolTable.h>
 #include <Surelog/SourceCompile/VObjectTypes.h>
+#include <Surelog/Testbench/ClassDefinition.h>
 #include <Surelog/Utils/StringUtils.h>
 #include <uhdm/BaseClass.h>
 
@@ -200,7 +201,18 @@ const Program* FileContent::getProgram(std::string_view name) const {
   }
 }
 
-ClassDefinition* FileContent::getClassDefinition(std::string_view name) const {
+ClassDefinition* FileContent::getClassDefinition(std::string_view name) {
+  ClassNameClassDefinitionMultiMap::iterator itr =
+      m_classDefinitions.find(name);
+  if (itr == m_classDefinitions.end()) {
+    return nullptr;
+  } else {
+    return itr->second;
+  }
+}
+
+const ClassDefinition* FileContent::getClassDefinition(
+    std::string_view name) const {
   ClassNameClassDefinitionMultiMap::const_iterator itr =
       m_classDefinitions.find(name);
   if (itr == m_classDefinitions.end()) {
@@ -208,6 +220,16 @@ ClassDefinition* FileContent::getClassDefinition(std::string_view name) const {
   } else {
     return itr->second;
   }
+}
+
+const DataType* FileContent::getDataType(Design* design,
+                                         std::string_view name) const {
+  if (const DataType* const dt = DesignComponent::getDataType(design, name)) {
+    return dt;
+  } else if (const DataType* const dt = getClassDefinition(name)) {
+    return dt;
+  }
+  return nullptr;
 }
 
 void FileContent::SetDefinitionFile(NodeId index, PathId def) {

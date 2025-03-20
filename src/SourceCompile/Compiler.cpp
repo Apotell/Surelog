@@ -1012,6 +1012,8 @@ void Compiler::writeUhdmSourceFiles() {
             pmd->setStartColumn(mi->m_startColumn);
             pmd->setEndLine(mi->m_endLine);
             pmd->setEndColumn(mi->m_endColumn);
+            pmd->setNameStartColumn(mi->m_nameStartColumn);
+            pmd->setBodyStartColumn(mi->m_bodyStartColumn);
             incl->getPreprocMacroDefinitions(true)->emplace_back(pmd);
             defMap.emplace(mi, pmd);
           }

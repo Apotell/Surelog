@@ -101,7 +101,11 @@ class ClassDefinition : public DesignComponent, public DataType {
   // Nested classes
   const ClassMap& getClassMap() const { return m_classes; }
   ClassDefinition* getClass(std::string_view name);
+  const ClassDefinition* getClass(std::string_view name) const;
   void insertClass(ClassDefinition* p);
+
+  const DataType* getDataType(Design* design,
+                              std::string_view name) const override;
 
   const CoverGroupMap& getCoverGroupMap() const { return m_coverGroups; }
   CoverGroupDefinition* getCoverGroup(std::string_view name);

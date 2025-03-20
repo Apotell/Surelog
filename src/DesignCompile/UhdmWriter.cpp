@@ -448,7 +448,7 @@ bool writeElabParameters(Serializer& s, ModuleInstance* instance,
                     break;
                   }
                 }
-                params->push_back(uparam);
+                params->emplace_back(uparam);
                 pushed = true;
               }
               break;
@@ -463,7 +463,7 @@ bool writeElabParameters(Serializer& s, ModuleInstance* instance,
                 break;
               }
             }
-            params->push_back(orig);
+            params->emplace_back(orig);
           }
         } else {
           // Regular param
@@ -490,7 +490,7 @@ bool writeElabParameters(Serializer& s, ModuleInstance* instance,
             }
           }
           */
-          params->push_back(pclone);
+          params->emplace_back(pclone);
         }
       }
     }
@@ -506,7 +506,7 @@ bool writeElabParameters(Serializer& s, ModuleInstance* instance,
           break;
         }
       }
-      if (!found) params->push_back(p->getLhs());
+      if (!found) params->emplace_back(p->getLhs());
     }
   }
 
@@ -657,7 +657,6 @@ void UhdmWriter::writePorts(const std::vector<Signal*>& orig_ports,
     }
     if (orig_port->getTypespecId() && mod) {
       if (NodeId unpackedDimensions = orig_port->getUnpackedDimension()) {
-        NodeId nameId = orig_port->getNameId();
         NodeId packedDimensions = orig_port->getPackedDimension();
         int32_t unpackedSize = 0;
         const FileContent* fC = orig_port->getFileContent();
@@ -712,9 +711,11 @@ void UhdmWriter::writePorts(const std::vector<Signal*>& orig_ports,
             if (array_ts->getElemTypespec() == nullptr) {
               uhdm::RefTypespec* array_ts_rt = s.make<uhdm::RefTypespec>();
               array_ts_rt->setParent(array_ts);
-              fC->populateCoreMembers(
-                  orig_port->getTypespecId(),
-                  packedDimensions ? packedDimensions : nameId, array_ts_rt);
+              fC->populateCoreMembers(orig_port->getTypespecId(),
+                                      packedDimensions
+                                          ? packedDimensions
+                                          : orig_port->getTypespecId(),
+                                      array_ts_rt);
               array_ts_rt->setName(ts->getName());
               array_ts->setElemTypespec(array_ts_rt);
             }
@@ -1175,7 +1176,8 @@ void UhdmWriter::writePackage(Package* pack, uhdm::Package* p,
 }
 
 void UhdmWriter::writeModule(ModuleDefinition* mod, uhdm::Module* m,
-                             uhdm::Serializer& s, ModuleMap& moduleMap,
+                             uhdm::Serializer& s,
+                             InstanceDefinitionMap& instanceDefinitionMap,
                              ModportMap& modPortMap, ModuleInstance* instance) {
   const uhdm::ScopedScope scopedScope(m);
   SignalBaseClassMap signalBaseMap;
@@ -1188,6 +1190,12 @@ void UhdmWriter::writeModule(ModuleDefinition* mod, uhdm::Module* m,
   if (!mod->getLetStmts().empty()) {
     for (auto& stmt : mod->getLetStmts()) {
       const_cast<uhdm::LetDecl*>(stmt.second->getDecl())->setParent(m);
+    }
+  }
+  // Gen vars
+  if (mod->getGenVars()) {
+    for (auto var : *mod->getGenVars()) {
+      var->setParent(m);
     }
   }
   // Gen stmts
@@ -1310,7 +1318,7 @@ void UhdmWriter::writeModule(ModuleDefinition* mod, uhdm::Module* m,
           tps->setName(typeName);
           fC->populateCoreMembers(typespecStart, typespecEnd, tps);
 
-          subInterfaceArrays->push_back(smarray);
+          subInterfaceArrays->emplace_back(smarray);
         }
       }
     }
@@ -1332,7 +1340,7 @@ void UhdmWriter::writeInterface(ModuleDefinition* mod, uhdm::Interface* m,
   if (!mod->getLetStmts().empty()) {
     uhdm::LetDeclCollection* decls = m->getLetDecls(true);
     for (auto stmt : mod->getLetStmts()) {
-      decls->push_back((uhdm::LetDecl*)stmt.second->getDecl());
+      decls->emplace_back((uhdm::LetDecl*)stmt.second->getDecl());
     }
   }
   // Gen stmts
@@ -1630,7 +1638,7 @@ bool UhdmWriter::writeElabProgram(Serializer& s, ModuleInstance* instance,
     if (auto from = mod->getTaskFuncs()) {
       uhdm::TaskFuncCollection* target = m->getTaskFuncs(true);
       for (auto tf : *from) {
-        target->push_back(tf);
+        target->emplace_back(tf);
         if (tf->getParent() == nullptr) tf->setParent(m);
         if (tf->getInstance() == nullptr) tf->setInstance(m);
       }
@@ -1892,7 +1900,7 @@ void UhdmWriter::writeContAssign(Netlist* netlist, uhdm::Serializer& s,
       }
       if (tps != nullptr) const_cast<uhdm::Typespec*>(tps)->setParent(nullptr);
       if (cloned || (assign->getParent() == nullptr)) assign->setParent(m);
-      assigns->push_back(assign);
+      assigns->emplace_back(assign);
     }
   }
 }
@@ -1909,21 +1917,21 @@ bool UhdmWriter::writeElabGenScope(Serializer& s, ModuleInstance* instance,
     if (!mod->getLetStmts().empty()) {
       uhdm::LetDeclCollection* decls = m->getLetDecls(true);
       for (auto stmt : mod->getLetStmts()) {
-        decls->push_back((uhdm::LetDecl*)stmt.second->getDecl());
+        decls->emplace_back((uhdm::LetDecl*)stmt.second->getDecl());
       }
     }
     if (!mod->getPropertyDecls().empty()) {
       uhdm::PropertyDeclCollection* decls = m->getPropertyDecls(true);
       for (auto decl : mod->getPropertyDecls()) {
         decl->setParent(m);
-        decls->push_back(decl);
+        decls->emplace_back(decl);
       }
     }
     if (!mod->getSequenceDecls().empty()) {
       uhdm::SequenceDeclCollection* decls = m->getSequenceDecls(true);
       for (auto decl : mod->getSequenceDecls()) {
         decl->setParent(m);
-        decls->push_back(decl);
+        decls->emplace_back(decl);
       }
     }
     // Typepecs
@@ -1997,7 +2005,7 @@ bool UhdmWriter::writeElabGenScope(Serializer& s, ModuleInstance* instance,
           rt->setParent(p);
           p->setTypespec(rt);
           rt->setActualTypespec(ts);
-          params->push_back(p);
+          params->emplace_back(p);
         }
       }
     }
@@ -2033,7 +2041,7 @@ bool UhdmWriter::writeElabGenScope(Serializer& s, ModuleInstance* instance,
     // Function and tasks
     uhdm::TaskFuncCollection* target = m->getTaskFuncs(true);
     for (auto tf : *def->getTaskFuncs()) {
-      target->push_back(tf);
+      target->emplace_back(tf);
       if (tf->getParent() == nullptr) tf->setParent(m);
     }
   }
@@ -2102,7 +2110,7 @@ uhdm::Any* UhdmWriter::swapForSpecifiedVar(
             uhdm::HierPath* path = s.make<uhdm::HierPath>();
             uhdm::AnyCollection* elems = path->getPathElems(true);
             uhdm::RefObj* ref = s.make<uhdm::RefObj>();
-            elems->push_back(ref);
+            elems->emplace_back(ref);
             ref->setName(var->getName());
             path->setFullName(var->getName());
             PathId parentFileId =
@@ -2167,14 +2175,14 @@ bool UhdmWriter::writeElabModule(Serializer& s, ModuleInstance* instance,
     if (!mod->getLetStmts().empty()) {
       uhdm::LetDeclCollection* decls = m->getLetDecls(true);
       for (auto stmt : mod->getLetStmts()) {
-        decls->push_back((uhdm::LetDecl*)stmt.second->getDecl());
+        decls->emplace_back((uhdm::LetDecl*)stmt.second->getDecl());
       }
     }
     if (!mod->getPropertyDecls().empty()) {
       uhdm::PropertyDeclCollection* decls = m->getPropertyDecls(true);
       for (auto decl : mod->getPropertyDecls()) {
         decl->setParent(m);
-        decls->push_back(decl);
+        decls->emplace_back(decl);
       }
     }
     // Typepecs
@@ -2277,7 +2285,7 @@ bool UhdmWriter::writeElabModule(Serializer& s, ModuleInstance* instance,
     if (auto from = mod->getTaskFuncs()) {
       uhdm::TaskFuncCollection* target = m->getTaskFuncs(true);
       for (auto tf : *from) {
-        target->push_back(tf);
+        target->emplace_back(tf);
         if (tf->getParent() == nullptr) tf->setParent(m);
         if (tf->getInstance() == nullptr) tf->setInstance(m);
       }
@@ -2296,14 +2304,14 @@ bool UhdmWriter::writeElabInterface(Serializer& s, ModuleInstance* instance,
     if (!mod->getLetStmts().empty()) {
       uhdm::LetDeclCollection* decls = m->getLetDecls(true);
       for (auto stmt : mod->getLetStmts()) {
-        decls->push_back((uhdm::LetDecl*)stmt.second->getDecl());
+        decls->emplace_back((uhdm::LetDecl*)stmt.second->getDecl());
       }
     }
     if (!mod->getPropertyDecls().empty()) {
       uhdm::PropertyDeclCollection* decls = m->getPropertyDecls(true);
       for (auto decl : mod->getPropertyDecls()) {
         decl->setParent(m);
-        decls->push_back(decl);
+        decls->emplace_back(decl);
       }
     }
     // Typepecs
@@ -2411,7 +2419,7 @@ bool UhdmWriter::writeElabInterface(Serializer& s, ModuleInstance* instance,
       uint32_t direction = UhdmWriter::getVpiDirection(sig.getDirection());
       io->setDirection(direction);
       io->setParent(dest_modport);
-      ios->push_back(io);
+      ios->emplace_back(io);
     }
   }
 
@@ -2443,7 +2451,7 @@ bool UhdmWriter::writeElabInterface(Serializer& s, ModuleInstance* instance,
     if (auto from = mod->getTaskFuncs()) {
       uhdm::TaskFuncCollection* target = m->getTaskFuncs(true);
       for (auto tf : *from) {
-        target->push_back(tf);
+        target->emplace_back(tf);
         if (tf->getParent() == nullptr) tf->setParent(m);
         if (tf->getInstance() == nullptr) tf->setInstance(m);
       }
@@ -2460,7 +2468,7 @@ void writePrimTerms(ModuleInstance* instance, uhdm::Primitive* prim,
     uint32_t index = 0;
     for (auto port : *ports) {
       uhdm::PrimTerm* term = s.make<uhdm::PrimTerm>();
-      terms->push_back(term);
+      terms->emplace_back(term);
       uhdm::Expr* hconn = (uhdm::Expr*)port->getHighConn();
       hconn->setParent(prim);
       term->setExpr(hconn);
@@ -2502,7 +2510,8 @@ void writePrimTerms(ModuleInstance* instance, uhdm::Primitive* prim,
 
 void UhdmWriter::writeInstance(ModuleDefinition* mod, ModuleInstance* instance,
                                uhdm::Any* m, CompileDesign* compileDesign,
-                               ModportMap& modPortMap, InstanceMap& instanceMap,
+                               ModportMap& modPortMap,
+                               ModuleInstanceMap& moduleInstanceMap,
                                ExprBuilder& exprBuilder) {
   Compiler* const compiler = m_compileDesign->getCompiler();
   FileSystem* const fileSystem = m_session->getFileSystem();
@@ -2575,7 +2584,7 @@ void UhdmWriter::writeInstance(ModuleDefinition* mod, ModuleInstance* instance,
           subModules = s.makeCollection<uhdm::Module>();
         uhdm::Module* sm = s.make<uhdm::Module>();
         tempInstanceMap.emplace(child, sm);
-        instanceMap.emplace(child, sm);
+        moduleInstanceMap.emplace(child, sm);
         if (childDef && !childDef->getFileContents().empty() &&
             compiler->isLibraryFile(
                 childDef->getFileContents()[0]->getFileId())) {
@@ -2589,7 +2598,7 @@ void UhdmWriter::writeInstance(ModuleDefinition* mod, ModuleInstance* instance,
         sm->setDefLineNo(defFile->Line(mm->getNodeIds()[0]));
         child->getFileContent()->populateCoreMembers(child->getNodeId(),
                                                      child->getNodeId(), sm);
-        subModules->push_back(sm);
+        subModules->emplace_back(sm);
         if (m->getUhdmType() == uhdm::UhdmType::Module) {
           ((uhdm::Module*)m)->setModules(subModules);
           sm->setInstance((uhdm::Module*)m);
@@ -2599,8 +2608,8 @@ void UhdmWriter::writeInstance(ModuleDefinition* mod, ModuleInstance* instance,
           ((uhdm::GenScope*)m)->setModules(subModules);
           sm->setParent(m);
         }
-        writeInstance(mm, child, sm, compileDesign, modPortMap, instanceMap,
-                      exprBuilder);
+        writeInstance(mm, child, sm, compileDesign, modPortMap,
+                      moduleInstanceMap, exprBuilder);
       } else if (insttype == VObjectType::paConditional_generate_construct ||
                  insttype == VObjectType::paLoop_generate_construct ||
                  insttype == VObjectType::paGenerate_begin_end_block ||
@@ -2629,9 +2638,9 @@ void UhdmWriter::writeInstance(ModuleDefinition* mod, ModuleInstance* instance,
         sm->setFullName(child->getFullPathName());
         child->getFileContent()->populateCoreMembers(child->getNodeId(),
                                                      child->getNodeId(), sm);
-        subGenScopeArrays->push_back(sm);
+        subGenScopeArrays->emplace_back(sm);
         uhdm::GenScope* a_gen_scope = s.make<uhdm::GenScope>();
-        sm->getGenScopes(true)->push_back(a_gen_scope);
+        sm->getGenScopes(true)->emplace_back(a_gen_scope);
         child->getFileContent()->populateCoreMembers(
             child->getNodeId(), child->getNodeId(), a_gen_scope);
         a_gen_scope->setParent(sm);
@@ -2647,7 +2656,7 @@ void UhdmWriter::writeInstance(ModuleDefinition* mod, ModuleInstance* instance,
           sm->setParent(m);
         }
         writeInstance(mm, child, a_gen_scope, compileDesign, modPortMap,
-                      instanceMap, exprBuilder);
+                      moduleInstanceMap, exprBuilder);
 
       } else if (insttype == VObjectType::paInterface_instantiation) {
         if (subInterfaces == nullptr)
@@ -2661,7 +2670,7 @@ void UhdmWriter::writeInstance(ModuleDefinition* mod, ModuleInstance* instance,
         const FileContent* defFile = mm->getFileContents()[0];
         sm->setDefFile(fileSystem->toPath(defFile->getFileId()));
         sm->setDefLineNo(defFile->Line(mm->getNodeIds()[0]));
-        subInterfaces->push_back(sm);
+        subInterfaces->emplace_back(sm);
         uhdm::UhdmType utype = m->getUhdmType();
         if (utype == uhdm::UhdmType::Module) {
           ((uhdm::Module*)m)->setInterfaces(subInterfaces);
@@ -2674,8 +2683,8 @@ void UhdmWriter::writeInstance(ModuleDefinition* mod, ModuleInstance* instance,
           ((uhdm::Interface*)m)->setInterfaces(subInterfaces);
           sm->setParent(m);
         }
-        writeInstance(mm, child, sm, compileDesign, modPortMap, instanceMap,
-                      exprBuilder);
+        writeInstance(mm, child, sm, compileDesign, modPortMap,
+                      moduleInstanceMap, exprBuilder);
 
       } else if ((insttype == VObjectType::paUdp_instantiation) ||
                  (insttype == VObjectType::paCmos_switch_instance) ||
@@ -2704,16 +2713,16 @@ void UhdmWriter::writeInstance(ModuleDefinition* mod, ModuleInstance* instance,
             uhdm::PrimitiveCollection* prims = gate_array->getPrimitives(true);
             gate_array->setRanges(ranges);
             gate_array->setParent(m);
-            prims->push_back(gate);
+            prims->emplace_back(gate);
             gate->setParent(gate_array);
             for (auto r : *ranges) r->setParent(gate_array);
             if (subPrimitiveArrays == nullptr)
               subPrimitiveArrays = s.makeCollection<uhdm::PrimitiveArray>();
-            subPrimitiveArrays->push_back(gate_array);
+            subPrimitiveArrays->emplace_back(gate_array);
           } else {
             if (subPrimitives == nullptr)
               subPrimitives = s.makeCollection<uhdm::Primitive>();
-            subPrimitives->push_back(gate);
+            subPrimitives->emplace_back(gate);
           }
         } else if (vpiGateType == vpiPmosPrim || vpiGateType == vpiRpmosPrim ||
                    vpiGateType == vpiNmosPrim || vpiGateType == vpiRnmosPrim ||
@@ -2729,16 +2738,16 @@ void UhdmWriter::writeInstance(ModuleDefinition* mod, ModuleInstance* instance,
             uhdm::PrimitiveCollection* prims = gate_array->getPrimitives(true);
             gate_array->setRanges(ranges);
             gate_array->setParent(m);
-            prims->push_back(gate);
+            prims->emplace_back(gate);
             gate->setParent(gate_array);
             for (auto r : *ranges) r->setParent(gate_array);
             if (subPrimitiveArrays == nullptr)
               subPrimitiveArrays = s.makeCollection<uhdm::PrimitiveArray>();
-            subPrimitiveArrays->push_back(gate_array);
+            subPrimitiveArrays->emplace_back(gate_array);
           } else {
             if (subPrimitives == nullptr)
               subPrimitives = s.makeCollection<uhdm::Primitive>();
-            subPrimitives->push_back(gate);
+            subPrimitives->emplace_back(gate);
           }
           gate->setPrimType(vpiGateType);
         } else {
@@ -2752,16 +2761,16 @@ void UhdmWriter::writeInstance(ModuleDefinition* mod, ModuleInstance* instance,
             uhdm::PrimitiveCollection* prims = gate_array->getPrimitives(true);
             gate_array->setRanges(ranges);
             gate_array->setParent(m);
-            prims->push_back(gate);
+            prims->emplace_back(gate);
             gate->setParent(gate_array);
             for (auto r : *ranges) r->setParent(gate_array);
             if (subPrimitiveArrays == nullptr)
               subPrimitiveArrays = s.makeCollection<uhdm::PrimitiveArray>();
-            subPrimitiveArrays->push_back(gate_array);
+            subPrimitiveArrays->emplace_back(gate_array);
           } else {
             if (subPrimitives == nullptr)
               subPrimitives = s.makeCollection<uhdm::Primitive>();
-            subPrimitives->push_back(gate);
+            subPrimitives->emplace_back(gate);
           }
           gate->setPrimType(vpiGateType);
         }
@@ -2802,7 +2811,7 @@ void UhdmWriter::writeInstance(ModuleDefinition* mod, ModuleInstance* instance,
       const FileContent* defFile = prog->getFileContents()[0];
       sm->setDefFile(fileSystem->toPath(defFile->getFileId()));
       sm->setDefLineNo(defFile->Line(prog->getNodeIds()[0]));
-      subPrograms->push_back(sm);
+      subPrograms->emplace_back(sm);
       uhdm::UhdmType utype = m->getUhdmType();
       if (utype == uhdm::UhdmType::Module) {
         ((uhdm::Module*)m)->setPrograms(subPrograms);
@@ -2822,7 +2831,7 @@ void UhdmWriter::writeInstance(ModuleDefinition* mod, ModuleInstance* instance,
       sm->setFullName(child->getFullPathName());
       child->getFileContent()->populateCoreMembers(child->getNodeId(),
                                                    child->getNodeId(), sm);
-      subModules->push_back(sm);
+      subModules->emplace_back(sm);
       uhdm::UhdmType utype = m->getUhdmType();
       if (utype == uhdm::UhdmType::Module) {
         ((uhdm::Module*)m)->setModules(subModules);
@@ -2833,7 +2842,7 @@ void UhdmWriter::writeInstance(ModuleDefinition* mod, ModuleInstance* instance,
         ((uhdm::GenScope*)m)->setModules(subModules);
         sm->setParent(m);
       }
-      writeInstance(mm, child, sm, compileDesign, modPortMap, instanceMap,
+      writeInstance(mm, child, sm, compileDesign, modPortMap, moduleInstanceMap,
                     exprBuilder);
     }
   }
@@ -2859,11 +2868,11 @@ void UhdmWriter::writeInstance(ModuleDefinition* mod, ModuleInstance* instance,
             moduleArrayModuleInstancesMap.find(modArray)->second;
         if (!modInstances.empty()) {
           modArray->setParent(m);
-          ((uhdm::Module*)m)->getModuleArrays()->push_back(modArray);
+          ((uhdm::Module*)m)->getModuleArrays()->emplace_back(modArray);
           for (ModuleInstance* modInst : modInstances) {
             auto it = tempInstanceMap.find(modInst);
             if (it != tempInstanceMap.end()) {
-              modArray->getModules(true)->push_back(it->second);
+              modArray->getModules(true)->emplace_back(it->second);
             }
           }
         }
@@ -2980,8 +2989,8 @@ bool UhdmWriter::write(PathId uhdmFileId) {
   ErrorContainer* const errors = m_session->getErrorContainer();
   CommandLineParser* const clp = m_session->getCommandLineParser();
   ModportMap modPortMap;
-  InstanceMap instanceMap;
-  ModuleMap moduleMap;
+  InstanceDefinitionMap instanceDefinitionMap;
+  ModuleInstanceMap moduleInstanceMap;
   uhdm::Serializer& s = m_compileDesign->getSerializer();
   ExprBuilder exprBuilder(m_session);
 
@@ -3034,7 +3043,7 @@ bool UhdmWriter::write(PathId uhdmFileId) {
       designName = topLevelModules.front()->getModuleName();
     }
     d->setName(designName);
-    designs.push_back(designHandle);
+    designs.emplace_back(designHandle);
 
     // -------------------------------
     // Non-Elaborated Model
@@ -3079,7 +3088,7 @@ bool UhdmWriter::write(PathId uhdmFileId) {
                 fC->sl_collect(modId, VObjectType::paPACKAGE);
             fC->populateCoreMembers(startId, modId, p);
           }
-          v2->push_back(p);
+          v2->emplace_back(p);
         }
       }
     }
@@ -3123,7 +3132,7 @@ bool UhdmWriter::write(PathId uhdmFileId) {
         const FileContent* fC = prog->getFileContents()[0];
         uhdm::Program* p = prog->getUhdmModel<uhdm::Program>();
         m_componentMap.emplace(prog, p);
-        moduleMap.emplace(prog->getName(), p);
+        instanceDefinitionMap.emplace(prog->getName(), p);
         p->setParent(d);
         p->setDefName(prog->getName());
         const NodeId modId = prog->getNodeIds()[0];
@@ -3149,7 +3158,7 @@ bool UhdmWriter::write(PathId uhdmFileId) {
         const FileContent* fC = mod->getFileContents()[0];
         uhdm::Interface* m = mod->getUhdmModel<uhdm::Interface>();
         m_componentMap.emplace(mod, m);
-        moduleMap.emplace(mod->getName(), m);
+        instanceDefinitionMap.emplace(mod->getName(), m);
         m->setParent(d);
         m->setDefName(mod->getName());
         const NodeId modId = mod->getNodeIds()[0];
@@ -3172,7 +3181,8 @@ bool UhdmWriter::write(PathId uhdmFileId) {
         // Built-in primitive
       } else if (mod->getType() == VObjectType::paModule_declaration) {
         uhdm::Module* m = mod->getUhdmModel<uhdm::Module>();
-        if (compiler->isLibraryFile(mod->getFileContents()[0]->getFileId())) {
+        if (clp->getElabUhdm() &&
+            compiler->isLibraryFile(mod->getFileContents()[0]->getFileId())) {
           m->setCellInstance(true);
           // Don't list library cells unused in the design
           if (mod && (designComponents.find(mod) == designComponents.end()))
@@ -3180,15 +3190,16 @@ bool UhdmWriter::write(PathId uhdmFileId) {
         }
         m_componentMap.emplace(mod, m);
         std::string_view modName = mod->getName();
-        moduleMap.emplace(modName, m);
+        instanceDefinitionMap.emplace(modName, m);
         m->setDefName(modName);
         if (modName.find("::") == std::string_view::npos) {
           m->setParent(d);
         } else {
           modName = StringUtils::rtrim_until(modName, ':');
           modName.remove_suffix(1);
-          ModuleMap::const_iterator pmodIt = moduleMap.find(modName);
-          if (pmodIt == moduleMap.end()) {
+          InstanceDefinitionMap::const_iterator pmodIt =
+              instanceDefinitionMap.find(modName);
+          if (pmodIt == instanceDefinitionMap.end()) {
             m->setParent(d);
           } else {
             m->setParent(pmodIt->second);
@@ -3200,7 +3211,8 @@ bool UhdmWriter::write(PathId uhdmFileId) {
             a->setParent(m);
           }
         }
-        writeModule(mod->getUnelabMmodule(), m, s, moduleMap, modPortMap);
+        writeModule(mod->getUnelabMmodule(), m, s, instanceDefinitionMap,
+                    modPortMap);
       } else if (mod->getType() == VObjectType::paUdp_declaration) {
         const FileContent* fC = mod->getFileContents()[0];
         if (uhdm::UdpDefn* defn = mod->getUhdmModel<uhdm::UdpDefn>()) {
@@ -3225,9 +3237,9 @@ bool UhdmWriter::write(PathId uhdmFileId) {
       for (uhdm::Module* mod : *uhdm_modules) {
         if (mod->getRefModules()) {
           for (auto subMod : *mod->getRefModules()) {
-            ModuleMap::iterator itr =
-                moduleMap.find(std::string(subMod->getDefName()));
-            if (itr != moduleMap.end()) {
+            InstanceDefinitionMap::iterator itr =
+                instanceDefinitionMap.find(std::string(subMod->getDefName()));
+            if (itr != instanceDefinitionMap.end()) {
               subMod->setActual(itr->second);
             }
           }
@@ -3274,9 +3286,9 @@ bool UhdmWriter::write(PathId uhdmFileId) {
         m->setStartColumn(def->getStartColumn());
         m->setEndLine(def->getEndLine());
         m->setEndColumn(def->getEndColumn());
-        writeInstance(mod, inst, m, m_compileDesign, modPortMap, instanceMap,
-                      exprBuilder);
-        uhdm_top_modules->push_back(m);
+        writeInstance(mod, inst, m, m_compileDesign, modPortMap,
+                      moduleInstanceMap, exprBuilder);
+        uhdm_top_modules->emplace_back(m);
       }
     }
   }

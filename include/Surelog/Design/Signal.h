@@ -78,6 +78,7 @@ class Signal final {
   void setPackedDimension(NodeId id) { m_packedDimension = id; }
   void setUnpackedDimension(NodeId id) { m_unpackedDimension = id; }
   void setTypespecId(NodeId id) { m_typespecId = id; }
+  void setInterfaceTypespecId(NodeId id) { m_interfaceTypeNameId = id; }
   bool isInterface() const { return (bool)m_interfaceTypeNameId; }
   void setLowConn(Signal* sig) { m_lowConn = sig; }
   void setConst() { m_const = true; }

@@ -348,9 +348,9 @@ bool PreprocessFile::preprocess() {
       getCompilationUnit()->setCurrentTimeInfo(getFileId(0));
       if (m_debugAstModel && !isPrecompiled) {
         if (clp->parseTree()) {
-          std::cout << m_fileContent->printObjects() << std::endl;
-        } else {
           m_fileContent->printTree(std::cout);
+        } else {
+          std::cout << m_fileContent->printObjects() << std::endl;
         }
       }
       if (isPrecompiled || clp->noCacheHash()) {
@@ -607,9 +607,9 @@ bool PreprocessFile::preprocess() {
 
   if (m_debugAstModel && !isPrecompiled) {
     if (clp->parseTree()) {
-      std::cout << m_fileContent->printObjects() << std::endl;
-    } else {
       m_fileContent->printTree(std::cout);
+    } else {
+      std::cout << m_fileContent->printObjects() << std::endl;
     }
   }
   m_lineCount = std::count(m_result.cbegin(), m_result.cend(), '\n');

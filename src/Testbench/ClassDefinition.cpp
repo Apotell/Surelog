@@ -88,8 +88,18 @@ Property* ClassDefinition::getProperty(std::string_view name) const {
     }
     return nullptr;
   } else {
-    return (*itr).second;
+    return itr->second;
   }
+}
+
+const DataType* ClassDefinition::getDataType(Design* design,
+                                             std::string_view name) const {
+  if (const DataType* const dt = DesignComponent::getDataType(design, name)) {
+    return dt;
+  } else if (const DataType* const dt = getClass(name)) {
+    return dt;
+  }
+  return nullptr;
 }
 
 void ClassDefinition::insertProperty(Property* p) {
@@ -99,7 +109,7 @@ void ClassDefinition::insertProperty(Property* p) {
 Function* ClassDefinition::getFunction(std::string_view name) const {
   FunctionMap::const_iterator itr = m_functions.find(name);
   if (itr != m_functions.end()) {
-    return (*itr).second;
+    return itr->second;
   }
 
   for (const auto& parent : getBaseClassMap()) {
@@ -135,7 +145,7 @@ TaskMethod* ClassDefinition::getTask(std::string_view name) const {
     }
     return nullptr;
   } else {
-    return (*itr).second;
+    return itr->second;
   }
 }
 
@@ -148,7 +158,7 @@ Constraint* ClassDefinition::getConstraint(std::string_view name) {
   if (itr == m_constraints.end()) {
     return nullptr;
   } else {
-    return (*itr).second;
+    return itr->second;
   }
 }
 
@@ -161,7 +171,16 @@ ClassDefinition* ClassDefinition::getClass(std::string_view name) {
   if (itr == m_classes.end()) {
     return nullptr;
   } else {
-    return (*itr).second;
+    return itr->second;
+  }
+}
+
+const ClassDefinition* ClassDefinition::getClass(std::string_view name) const {
+  ClassMap::const_iterator itr = m_classes.find(name);
+  if (itr == m_classes.end()) {
+    return nullptr;
+  } else {
+    return itr->second;
   }
 }
 
@@ -174,7 +193,7 @@ CoverGroupDefinition* ClassDefinition::getCoverGroup(std::string_view name) {
   if (itr == m_coverGroups.end()) {
     return nullptr;
   } else {
-    return (*itr).second;
+    return itr->second;
   }
 }
 
@@ -187,7 +206,7 @@ const DataType* ClassDefinition::getBaseClass(std::string_view name) const {
   if (itr == m_baseClasses.end()) {
     return nullptr;
   } else {
-    return (*itr).second;
+    return itr->second;
   }
 }
 
@@ -211,7 +230,7 @@ const DataType* ClassDefinition::getBaseDataType(std::string_view name) const {
     }
     return nullptr;
   } else {
-    return (*itr).second;
+    return itr->second;
   }
 }
 

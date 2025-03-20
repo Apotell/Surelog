@@ -50,10 +50,10 @@ class UhdmWriter final {
  public:
   typedef std::map<Modport*, uhdm::Modport*> ModportMap;
   typedef std::map<const ValuedComponentI*, uhdm::BaseClass*> ComponentMap;
-  typedef std::map<std::string_view, uhdm::BaseClass*> ModuleMap;
+  typedef std::map<std::string_view, uhdm::Instance*> InstanceDefinitionMap;
   typedef std::map<Signal*, uhdm::BaseClass*> SignalBaseClassMap;
   typedef std::map<std::string, Signal*, std::less<>> SignalMap;
-  typedef std::map<ModuleInstance*, uhdm::BaseClass*> InstanceMap;
+  typedef std::map<ModuleInstance*, uhdm::Module*> ModuleInstanceMap;
   typedef std::map<std::string, uhdm::BaseClass*> VpiSignalMap;
 
   UhdmWriter(Session* session, CompileDesign* compiler, Design* design);
@@ -87,8 +87,8 @@ class UhdmWriter final {
   void writeVariables(const DesignComponent::VariableMap& orig_vars,
                       uhdm::BaseClass* parent, uhdm::Serializer& s);
   void writeModule(ModuleDefinition* mod, uhdm::Module* m, uhdm::Serializer& s,
-                   ModuleMap& moduleMap, ModportMap& modPortMap,
-                   ModuleInstance* instance = nullptr);
+                   InstanceDefinitionMap& instanceDefinitionMap,
+                   ModportMap& modPortMap, ModuleInstance* instance = nullptr);
   void writeInterface(ModuleDefinition* mod, uhdm::Interface* m,
                       uhdm::Serializer& s, ModportMap& modPortMap,
                       ModuleInstance* instance = nullptr);
@@ -96,7 +96,8 @@ class UhdmWriter final {
                           uhdm::Interface* m, ExprBuilder& exprBuilder);
   void writeInstance(ModuleDefinition* mod, ModuleInstance* instance,
                      uhdm::Any* m, CompileDesign* compileDesign,
-                     ModportMap& modPortMap, InstanceMap& instanceMap,
+                     ModportMap& modPortMap,
+                     ModuleInstanceMap& moduleInstanceMap,
                      ExprBuilder& exprBuilder);
   bool writeElabModule(uhdm::Serializer& s, ModuleInstance* instance,
                        uhdm::Module* m, ExprBuilder& exprBuilder);

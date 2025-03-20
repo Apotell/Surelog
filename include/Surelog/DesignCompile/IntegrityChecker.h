@@ -43,8 +43,13 @@ class IntegrityChecker final : protected uhdm::UhdmListener {
   void check(const std::vector<const uhdm::Design*>& objects);
 
  private:
-  bool isBuiltPackageOnStack(const uhdm::Any* const object) const;
+  bool isBuiltInPackageOnStack(const uhdm::Any* const object) const;
   bool isUVMMember(const uhdm::Any* const object) const;
+
+  const uhdm::PreprocMacroDefinition* getMacroDefinition(
+      std::string_view filepath, uint32_t line, uint16_t column) const;
+  const uhdm::PreprocMacroDefinition* getMacroDefinition(
+      const uhdm::Any* const object) const;
 
   enum class LineColumnRelation {
     Before,
@@ -53,8 +58,12 @@ class IntegrityChecker final : protected uhdm::UhdmListener {
     Inconclusive,
   };
 
-  LineColumnRelation getLineColumnRelation(uint32_t csl, uint16_t csc,
-                                           uint32_t cel, uint16_t cec) const;
+  LineColumnRelation getLineColumnRelation(uint32_t sl, uint16_t sc,
+                                           uint32_t el, uint16_t ec) const;
+
+  LineColumnRelation getLineColumnRelation(uint32_t l, uint16_t c, uint32_t sl,
+                                           uint16_t sc, uint32_t el,
+                                           uint16_t ec) const;
 
   LineColumnRelation getLineColumnRelation(uint32_t csl, uint16_t csc,
                                            uint32_t cel, uint16_t cec,
@@ -842,6 +851,7 @@ class IntegrityChecker final : protected uhdm::UhdmListener {
 
  private:
   Session* const m_session = nullptr;
+  const uhdm::Design* m_design = nullptr;
 
   typedef std::set<uhdm::UhdmType> object_type_set_t;
   const object_type_set_t m_acceptedObjectsWithInvalidLocations;

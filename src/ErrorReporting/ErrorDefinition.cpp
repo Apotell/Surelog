@@ -497,24 +497,20 @@ bool ErrorDefinition::init() {
   rec(UHDM_FAILED_TO_BIND, ERROR, UHDM, "Failed to bind object: \"%s\"");
 
   rec(INTEGRITY_CHECK_MISSING_LOCATION, ERROR, INTG,
-      "Object %s is missing location information");
-  rec(INTEGRITY_CHECK_MISSING_PARENT, ERROR, INTG,
-      "Object %s parent cannot be null");
-  rec(INTEGRITY_CHECK_MISSING_NAME, ERROR, INTG,
-      "Object %s has missing/invalid name");
-  rec(INTEGRITY_CHECK_MISSING_FILE, ERROR, INTG,
-      "Object %s has missing/invalid file");
+      "Missing location information: %s");
+  rec(INTEGRITY_CHECK_MISSING_PARENT, ERROR, INTG, "Parent is null: %s");
+  rec(INTEGRITY_CHECK_MISSING_NAME, ERROR, INTG, "Missing/invalid name: %s");
+  rec(INTEGRITY_CHECK_MISSING_FILE, ERROR, INTG, "Missing/invalid file: %s");
   rec(INTEGRITY_CHECK_PARENT_IS_NEITHER_SCOPE_NOR_DESIGN, ERROR, INTG,
-      "Object %s should be parented to either a scope or design");
+      "Parented to neither scope nor design: %s");
   rec(INTEGRITY_CHECK_OBJECT_NOT_IN_PARENT_COLLECTION, ERROR, INTG,
-      "Object %s not found in parent (scope|design)'s collection");
+      "Object not found in parent (scope|design)'s collection: %s");
   rec(INTEGRITY_CHECK_BAD_RELATIVE_LOCATION, ERROR, INTG,
-      "Bad relative location, %s");
+      "Bad relative location: %s");
   rec(INTEGRITY_CHECK_COLLECTION_HAS_DUPLICATES, ERROR, INTG,
-      "Object %s has duplicates");
-  rec(INTEGRITY_CHECK_NULL_ACTUAL, ERROR, INTG,
-      "Object %s actual cannot be null");
-  rec(INTEGRITY_CHECK_INVALID_LOCATION, ERROR, INTG, "Invalid location %s");
+      "Object has duplicates: %s");
+  rec(INTEGRITY_CHECK_BINDING, ERROR, INTG, "Unbound: %s");
+  rec(INTEGRITY_CHECK_INVALID_LOCATION, ERROR, INTG, "Invalid location: %s");
   return true;
 }
 

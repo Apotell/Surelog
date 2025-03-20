@@ -50,7 +50,7 @@ bool CompileHelper::compileAssertionItem(DesignComponent* component,
         assertions = component->getAssertions();
       }
       for (auto stmt : *stmts) {
-        assertions->push_back(stmt);
+        assertions->emplace_back(stmt);
       }
     }
   } /*else if (fC->Type(item) == slDeferred_immediate_assertion_item) {
@@ -262,7 +262,43 @@ uhdm::Any* CompileHelper::compileSimpleImmediateAssertion(
     DesignComponent* component, const FileContent* fC, NodeId the_stmt,
     CompileDesign* compileDesign, uhdm::Any* pstmt,
     SURELOG::ValuedComponentI* instance) {
+  /*
+  n<o> u<277> t<StringConst> p<278> l<25>
+  n<> u<278> t<Primary_literal> p<279> c<277> l<25>
+  n<> u<279> t<Primary> p<280> c<278> l<25>
+  n<> u<280> t<Expression> p<286> c<279> s<281> l<25>
+  n<> u<281> t<BinOp_Equiv> p<286> s<285> l<25>
+  n<0> u<282> t<IntConst> p<283> l<25>
+  n<> u<283> t<Primary_literal> p<284> c<282> l<25>
+  n<> u<284> t<Primary> p<285> c<283> l<25>
+  n<> u<285> t<Expression> p<286> c<284> l<25>
+  n<> u<286> t<Expression> p<289> c<280> s<288> l<25>
+  n<> u<287> t<Statement_or_null> p<288> l<25>
+  n<> u<288> t<Action_block> p<289> c<287> l<25>
+  n<> u<289> t<Simple_immediate_assert_statement> p<290> c<286> l<25>
+  */
   uhdm::Serializer& s = compileDesign->getSerializer();
+
+  uhdm::Any* stmt = nullptr;
+  switch (fC->Type(the_stmt)) {
+    case VObjectType::paSimple_immediate_assert_statement: {
+      stmt = s.make<uhdm::ImmediateAssert>();
+      break;
+    }
+    case VObjectType::paSimple_immediate_assume_statement: {
+      stmt = s.make<uhdm::ImmediateAssume>();
+      break;
+    }
+    case VObjectType::paSimple_immediate_cover_statement: {
+      stmt = s.make<uhdm::ImmediateCover>();
+      break;
+    }
+    default:
+      return nullptr;
+  }
+  fC->populateCoreMembers(the_stmt, the_stmt, stmt);
+  stmt->setParent(pstmt);
+
   NodeId Expression = fC->Child(the_stmt);
   NodeId Action_block = fC->Sibling(Expression);
   NodeId if_stmt_id = fC->Child(Action_block);
@@ -275,77 +311,47 @@ uhdm::Any* CompileHelper::compileSimpleImmediateAssertion(
     if (else_keyword) else_stmt_id = fC->Sibling(else_keyword);
   }
   uhdm::Any* expr = compileExpression(component, fC, Expression, compileDesign,
-                                      Reduce::No, pstmt, instance);
+                                      Reduce::No, stmt, instance);
   uhdm::AnyCollection* if_stmts = nullptr;
-  if (if_stmt_id)
-    if_stmts = compileStmt(component, fC, if_stmt_id, compileDesign, Reduce::No,
-                           pstmt);
+  if (if_stmt_id) {
+    if_stmts =
+        compileStmt(component, fC, if_stmt_id, compileDesign, Reduce::No, stmt);
+  }
   uhdm::Any* if_stmt = nullptr;
   if (if_stmts) if_stmt = (*if_stmts)[0];
   uhdm::AnyCollection* else_stmts = nullptr;
-  if (else_stmt_id)
+  if (else_stmt_id) {
     else_stmts = compileStmt(component, fC, else_stmt_id, compileDesign,
-                             Reduce::No, pstmt);
+                             Reduce::No, stmt);
+  }
   uhdm::Any* else_stmt = nullptr;
   if (else_stmts) else_stmt = (*else_stmts)[0];
-  uhdm::Any* stmt = nullptr;
+
   switch (fC->Type(the_stmt)) {
     case VObjectType::paSimple_immediate_assert_statement: {
-      uhdm::ImmediateAssert* astmt = s.make<uhdm::ImmediateAssert>();
-      fC->populateCoreMembers(the_stmt, the_stmt, astmt);
-      astmt->setParent(pstmt);
+      uhdm::ImmediateAssert* astmt = any_cast<uhdm::ImmediateAssert>(stmt);
       astmt->setExpr((uhdm::Expr*)expr);
-      if (expr) expr->setParent(astmt);
       astmt->setStmt(if_stmt);
-      if (if_stmt) if_stmt->setParent(astmt);
       astmt->setElseStmt(else_stmt);
-      if (else_stmt) else_stmt->setParent(astmt);
-      stmt = astmt;
       break;
     }
     case VObjectType::paSimple_immediate_assume_statement: {
-      uhdm::ImmediateAssume* astmt = s.make<uhdm::ImmediateAssume>();
-      fC->populateCoreMembers(the_stmt, the_stmt, astmt);
-      astmt->setParent(pstmt);
+      uhdm::ImmediateAssume* astmt = any_cast<uhdm::ImmediateAssume>(stmt);
       astmt->setExpr((uhdm::Expr*)expr);
-      if (expr) expr->setParent(astmt);
       astmt->setStmt(if_stmt);
-      if (if_stmt) if_stmt->setParent(astmt);
       astmt->setElseStmt(else_stmt);
-      if (else_stmt) else_stmt->setParent(astmt);
-      stmt = astmt;
       break;
     }
     case VObjectType::paSimple_immediate_cover_statement: {
-      uhdm::ImmediateCover* astmt = s.make<uhdm::ImmediateCover>();
-      fC->populateCoreMembers(the_stmt, the_stmt, astmt);
-      astmt->setParent(pstmt);
+      uhdm::ImmediateCover* astmt = any_cast<uhdm::ImmediateCover>(stmt);
       astmt->setExpr((uhdm::Expr*)expr);
-      if (expr) expr->setParent(astmt);
       astmt->setStmt(if_stmt);
-      if (if_stmt) if_stmt->setParent(astmt);
-      stmt = astmt;
       break;
     }
     default:
       break;
   }
 
-  /*
-n<o> u<277> t<StringConst> p<278> l<25>
-n<> u<278> t<Primary_literal> p<279> c<277> l<25>
-n<> u<279> t<Primary> p<280> c<278> l<25>
-n<> u<280> t<Expression> p<286> c<279> s<281> l<25>
-n<> u<281> t<BinOp_Equiv> p<286> s<285> l<25>
-n<0> u<282> t<IntConst> p<283> l<25>
-n<> u<283> t<Primary_literal> p<284> c<282> l<25>
-n<> u<284> t<Primary> p<285> c<283> l<25>
-n<> u<285> t<Expression> p<286> c<284> l<25>
-n<> u<286> t<Expression> p<289> c<280> s<288> l<25>
-n<> u<287> t<Statement_or_null> p<288> l<25>
-n<> u<288> t<Action_block> p<289> c<287> l<25>
-n<> u<289> t<Simple_immediate_assert_statement> p<290> c<286> l<25>
-*/
   return stmt;
 }
 
@@ -466,7 +472,7 @@ uhdm::PropertyDecl* CompileHelper::compilePropertyDeclaration(
       uhdm::PropFormalDecl* prop_port_decl = s.make<uhdm::PropFormalDecl>();
       prop_port_decl->setParent(result);
       fC->populateCoreMembers(Port_name, Port_name, prop_port_decl);
-      ports->push_back(prop_port_decl);
+      ports->emplace_back(prop_port_decl);
       prop_port_decl->setName(fC->SymName(Port_name));
       if (tps != nullptr) {
         uhdm::RefTypespec* rtps = s.make<uhdm::RefTypespec>();
@@ -495,7 +501,7 @@ uhdm::PropertyDecl* CompileHelper::compilePropertyDeclaration(
           if (uhdm::Assignment* vast = any_cast<uhdm::Assignment*>(v)) {
             if (uhdm::Variables* va =
                     any_cast<uhdm::Variables*>(vast->getLhs())) {
-              vars->push_back(va);
+              vars->emplace_back(va);
             }
           }
         }
@@ -557,7 +563,7 @@ uhdm::SequenceDecl* CompileHelper::compileSequenceDeclaration(
       NodeId Port_name = fC->Sibling(Sequence_formal_type);
       uhdm::SeqFormalDecl* prop_port_decl = s.make<uhdm::SeqFormalDecl>();
       fC->populateCoreMembers(Sequence_expr, Sequence_expr, prop_port_decl);
-      ports->push_back(prop_port_decl);
+      ports->emplace_back(prop_port_decl);
       prop_port_decl->setName(fC->SymName(Port_name));
       uhdm::RefTypespec* rtps = s.make<uhdm::RefTypespec>();
       rtps->setActualTypespec(tps);

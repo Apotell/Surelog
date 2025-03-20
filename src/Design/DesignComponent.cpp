@@ -21,6 +21,7 @@
  * Created on March 25, 2018, 10:27 PM
  */
 
+#include <Surelog/Design/Design.h>
 #include <Surelog/Design/DesignComponent.h>
 #include <Surelog/Design/FileContent.h>
 #include <Surelog/Design/Parameter.h>
@@ -28,16 +29,16 @@
 #include <Surelog/Testbench/TaskMethod.h>
 #include <Surelog/Testbench/TypeDef.h>
 #include <Surelog/Testbench/Variable.h>
+#include <uhdm/import_typespec.h>
 
 namespace SURELOG {
 void DesignComponent::addFileContent(const FileContent* fileContent,
                                      NodeId nodeId) {
-  bool add = true;
-  for (auto f : m_fileContents)
-    if (fileContent == f) add = false;
-  if (add) {
-    m_fileContents.push_back(fileContent);
-    m_nodeIds.push_back(nodeId);
+  if ((fileContent != nullptr) &&
+      (std::find(m_fileContents.cbegin(), m_fileContents.cend(), fileContent) ==
+       m_fileContents.cend())) {
+    m_fileContents.emplace_back(fileContent);
+    m_nodeIds.emplace_back(nodeId);
   }
 }
 
@@ -47,7 +48,7 @@ const std::vector<FileCNodeId>& DesignComponent::getObjects(
   if (itr == m_objects.end()) {
     return m_empty;
   } else {
-    return (*itr).second;
+    return itr->second;
   }
 }
 
@@ -55,10 +56,10 @@ void DesignComponent::addObject(VObjectType type, FileCNodeId object) {
   auto itr = m_objects.find(type);
   if (itr == m_objects.end()) {
     std::vector<FileCNodeId> tmp;
-    tmp.push_back(object);
+    tmp.emplace_back(object);
     m_objects.emplace(type, tmp);
   } else {
-    (*itr).second.push_back(object);
+    itr->second.emplace_back(object);
   }
 }
 
@@ -73,13 +74,13 @@ const std::pair<FileCNodeId, DesignComponent*>* DesignComponent::getNamedObject(
   if (itr == m_namedObjects.end()) {
     return nullptr;
   } else {
-    return &(*itr).second;
+    return &itr->second;
   }
 }
 
 void DesignComponent::append(DesignComponent* comp) {
-  for (auto file : comp->m_fileContents) m_fileContents.push_back(file);
-  for (auto nodeId : comp->m_nodeIds) m_nodeIds.push_back(nodeId);
+  for (auto file : comp->m_fileContents) m_fileContents.emplace_back(file);
+  for (auto& nodeId : comp->m_nodeIds) m_nodeIds.emplace_back(nodeId);
   for (auto& obj : comp->m_objects) {
     for (auto& elem : obj.second) addObject(obj.first, elem);
   }
@@ -95,17 +96,41 @@ void DesignComponent::insertDataType(std::string_view dataTypeName,
   m_dataTypes.emplace(dataTypeName, dataType);
 }
 
-const DataType* DesignComponent::getDataType(std::string_view name) const {
+const DataType* DesignComponent::getDataTypeRecursive(
+    Design* design, std::string_view name,
+    std::set<const DesignComponent*>& visited) const {
+  if (!visited.insert(this).second) return nullptr;
   DataTypeMap::const_iterator itr = m_dataTypes.find(name);
-  if (itr == m_dataTypes.end()) {
-    const DesignComponent* parent = (const DesignComponent*)getParentScope();
-    if (parent) {
-      return parent->getDataType(name);
-    } else
-      return nullptr;
-  } else {
-    return (*itr).second;
+  if (itr != m_dataTypes.end()) return itr->second;
+  if (const DesignComponent* const parent =
+          valuedcomponenti_cast<DesignComponent>(getParentScope())) {
+    if (const DataType* const dt =
+            parent->getDataTypeRecursive(design, name, visited)) {
+      return dt;
+    }
   }
+  return getImportedDataType(design, name, visited);
+}
+
+const DataType* DesignComponent::getImportedDataType(
+    Design* design, std::string_view name,
+    std::set<const DesignComponent*>& visited) const {
+  for (uhdm::ImportTypespec* it : m_importTypespecs) {
+    if (DesignComponent* const dc =
+            design->getComponentDefinition(it->getName())) {
+      if (const DataType* const dt =
+              dc->getDataTypeRecursive(design, name, visited)) {
+        return dt;
+      }
+    }
+  }
+  return nullptr;
+}
+
+const DataType* DesignComponent::getDataType(Design* design,
+                                             std::string_view name) const {
+  std::set<const DesignComponent*> visited;
+  return getDataTypeRecursive(design, name, visited);
 }
 
 void DesignComponent::insertUsedDataType(std::string_view dataTypeName,
@@ -118,22 +143,21 @@ DataType* DesignComponent::getUsedDataType(std::string_view name) {
   if (itr == m_usedDataTypes.end()) {
     return nullptr;
   } else {
-    return (*itr).second;
+    return itr->second;
   }
 }
 
 const TypeDef* DesignComponent::getTypeDef(std::string_view name) const {
   TypeDefMap::const_iterator itr = m_typedefs.find(name);
   if (itr == m_typedefs.end()) {
-    const DesignComponent* parent =
-        valuedcomponenti_cast<const DesignComponent*>(getParentScope());
-    if (parent) {
+    if (const DesignComponent* const parent =
+            valuedcomponenti_cast<const DesignComponent*>(getParentScope())) {
       return parent->getTypeDef(name);
-    } else
-      return nullptr;
+    }
   } else {
-    return (*itr).second;
+    return itr->second;
   }
+  return nullptr;
 }
 
 void DesignComponent::insertTypeDef(TypeDef* p) {
@@ -143,15 +167,14 @@ void DesignComponent::insertTypeDef(TypeDef* p) {
 Function* DesignComponent::getFunction(std::string_view name) const {
   FunctionMap::const_iterator itr = m_functions.find(name);
   if (itr == m_functions.end()) {
-    const DesignComponent* parent =
-        valuedcomponenti_cast<const DesignComponent*>(getParentScope());
-    if (parent) {
+    if (const DesignComponent* const parent =
+            valuedcomponenti_cast<const DesignComponent*>(getParentScope())) {
       return parent->getFunction(name);
-    } else
-      return nullptr;
+    }
   } else {
-    return (*itr).second;
+    return itr->second;
   }
+  return nullptr;
 }
 
 void DesignComponent::insertFunction(Function* p) {
@@ -161,15 +184,14 @@ void DesignComponent::insertFunction(Function* p) {
 Task* DesignComponent::getTask(std::string_view name) const {
   TaskMap::const_iterator itr = m_tasks.find(name);
   if (itr == m_tasks.end()) {
-    const DesignComponent* parent =
-        valuedcomponenti_cast<const DesignComponent*>(getParentScope());
-    if (parent) {
+    if (const DesignComponent* const parent =
+            valuedcomponenti_cast<const DesignComponent*>(getParentScope())) {
       return parent->getTask(name);
-    } else
-      return nullptr;
+    }
   } else {
-    return (*itr).second;
+    return itr->second;
   }
+  return nullptr;
 }
 
 void DesignComponent::insertTask(Task* p) { m_tasks.emplace(p->getName(), p); }
@@ -183,7 +205,7 @@ Variable* DesignComponent::getVariable(std::string_view name) {
   if (itr == m_variables.end()) {
     return nullptr;
   } else {
-    return (*itr).second;
+    return itr->second;
   }
 }
 
@@ -192,24 +214,24 @@ Parameter* DesignComponent::getParameter(std::string_view name) const {
   if (itr == m_parameterMap.end()) {
     return nullptr;
   } else {
-    return (*itr).second;
+    return itr->second;
   }
 }
 
 void DesignComponent::insertParameter(Parameter* p) {
   m_parameterMap.emplace(p->getName(), p);
-  m_orderedParameters.push_back(p);
+  m_orderedParameters.emplace_back(p);
 }
 
 void DesignComponent::insertLetStmt(std::string_view name, LetStmt* decl) {
-  m_letDecls.insert(std::pair(name, decl));
+  m_letDecls.emplace(name, decl);
 }
 LetStmt* DesignComponent::getLetStmt(std::string_view name) {
   auto itr = m_letDecls.find(name);
   if (itr == m_letDecls.end()) {
     return nullptr;
   } else {
-    return (*itr).second;
+    return itr->second;
   }
 }
 

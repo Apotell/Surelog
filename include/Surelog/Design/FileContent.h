@@ -196,7 +196,11 @@ class FileContent : public DesignComponent {
 
   const Program* getProgram(std::string_view name) const;
 
-  ClassDefinition* getClassDefinition(std::string_view name) const;
+  ClassDefinition* getClassDefinition(std::string_view name);
+  const ClassDefinition* getClassDefinition(std::string_view name) const;
+
+  const DataType* getDataType(Design* design,
+                              std::string_view name) const override;
 
   const FileContent* getParent() const { return m_parentFile; }
   void setParent(FileContent* parent) { m_parentFile = parent; }

@@ -116,10 +116,10 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
     std::vector<FileCNodeId> pack_imports;
     // - Local file imports
     for (auto import : fC->getObjects(VObjectType::paPackage_import_item)) {
-      pack_imports.push_back(import);
+      pack_imports.emplace_back(import);
     }
 
-    for (auto pack_import : pack_imports) {
+    for (auto& pack_import : pack_imports) {
       const FileContent* pack_fC = pack_import.fC;
       NodeId pack_id = pack_import.nodeId;
       m_helper.importPackage(m_program, m_design, pack_fC, pack_id,
@@ -307,28 +307,28 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
       }
       case VObjectType::paInitial_construct: {
         if (collectType != CollectType::OTHER) break;
-        uhdm::Initial* init =
-            m_helper.compileInitialBlock(m_program, fC, id, m_compileDesign);
+        uhdm::Initial* init = m_helper.compileInitialBlock(
+            m_program, fC, id, m_compileDesign, m_program->getUhdmModel());
         uhdm::ProcessCollection* processes = m_program->getProcesses();
         if (processes == nullptr) {
           m_program->setProcesses(
               m_compileDesign->getSerializer().makeCollection<uhdm::Process>());
           processes = m_program->getProcesses();
         }
-        processes->push_back(init);
+        processes->emplace_back(init);
         break;
       }
       case VObjectType::paFinal_construct: {
         if (collectType != CollectType::OTHER) break;
-        uhdm::FinalStmt* final =
-            m_helper.compileFinalBlock(m_program, fC, id, m_compileDesign);
+        uhdm::FinalStmt* final = m_helper.compileFinalBlock(
+            m_program, fC, id, m_compileDesign, m_program->getUhdmModel());
         uhdm::ProcessCollection* processes = m_program->getProcesses();
         if (processes == nullptr) {
           m_program->setProcesses(
               m_compileDesign->getSerializer().makeCollection<uhdm::Process>());
           processes = m_program->getProcesses();
         }
-        processes->push_back(final);
+        processes->emplace_back(final);
         break;
       }
       case VObjectType::paParam_assignment:

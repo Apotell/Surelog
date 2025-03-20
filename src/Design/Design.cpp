@@ -87,12 +87,15 @@ void Design::addPPFileContent(PathId fileId, FileContent* content) {
 
 DesignComponent* Design::getComponentDefinition(
     std::string_view componentName) const {
-  DesignComponent* comp = (DesignComponent*)getModuleDefinition(componentName);
-  if (comp) return comp;
-  comp = (DesignComponent*)getProgram(componentName);
-  if (comp) return comp;
-  comp = (DesignComponent*)getClassDefinition(componentName);
-  if (comp) return comp;
+  if (DesignComponent* const dc = getPackage(componentName)) {
+    return dc;
+  } else if (DesignComponent* const dc = getModuleDefinition(componentName)) {
+    return dc;
+  } else if (DesignComponent* const dc = getProgram(componentName)) {
+    return dc;
+  } else if (DesignComponent* const dc = getClassDefinition(componentName)) {
+    return dc;
+  }
   return nullptr;
 }
 
@@ -101,7 +104,7 @@ ModuleDefinition* Design::getModuleDefinition(
   ModuleNameModuleDefinitionMap::const_iterator itr =
       m_moduleDefinitions.find(moduleName);
   if (itr != m_moduleDefinitions.end()) {
-    return (*itr).second;
+    return itr->second;
   }
   return nullptr;
 }
@@ -317,7 +320,7 @@ DefParam* Design::getDefParam(std::string_view name) const {
       m_defParams.find(vpath[0]);
   if (itr != m_defParams.end()) {
     vpath.erase(vpath.begin());
-    return getDefParam_(vpath, (*itr).second);
+    return getDefParam_(vpath, itr->second);
   }
   return nullptr;
 }
@@ -337,7 +340,7 @@ DefParam* Design::getDefParam_(std::vector<std::string>& path,
       parent->getChildren().find(path[0]);
   if (itr != parent->getChildren().end()) {
     path.erase(path.begin());
-    return getDefParam_(path, (*itr).second);
+    return getDefParam_(path, itr->second);
   }
   return nullptr;
 }
@@ -349,7 +352,7 @@ void Design::addDefParam(std::string_view name, const FileContent* fC,
   std::map<std::string, DefParam*>::iterator itr = m_defParams.find(vpath[0]);
   if (itr != m_defParams.end()) {
     vpath.erase(vpath.begin());
-    addDefParam_(vpath, fC, nodeId, value, (*itr).second);
+    addDefParam_(vpath, fC, nodeId, value, itr->second);
   } else {
     DefParam* def = new DefParam(vpath[0]);
     m_defParams.emplace(vpath[0], def);
@@ -373,7 +376,7 @@ void Design::addDefParam_(std::vector<std::string>& path, const FileContent* fC,
   if (itr != parent->getChildren().end()) {
     path.erase(path.begin());
     if (path.empty()) {
-      DefParam* previous = (*itr).second;
+      DefParam* previous = itr->second;
       if (!fC->getFileId(nodeId).equals(
               previous->getLocation()->getFileId(previous->getNodeId()),
               fileSystem) ||
@@ -389,7 +392,7 @@ void Design::addDefParam_(std::vector<std::string>& path, const FileContent* fC,
         errors->addError(err);
       }
     }
-    addDefParam_(path, fC, nodeId, value, (*itr).second);
+    addDefParam_(path, fC, nodeId, value, itr->second);
   } else {
     DefParam* def = new DefParam(path[0], parent);
     parent->setChild(path[0], def);
@@ -438,7 +441,7 @@ Package* Design::getPackage(std::string_view name) const {
   if (itr == m_packageDefinitions.end()) {
     return nullptr;
   } else {
-    return (*itr).second;
+    return itr->second;
   }
 }
 
@@ -448,7 +451,7 @@ Program* Design::getProgram(std::string_view name) const {
   if (itr == m_programDefinitions.end()) {
     return nullptr;
   } else {
-    return (*itr).second;
+    return itr->second;
   }
 }
 
@@ -458,7 +461,7 @@ ClassDefinition* Design::getClassDefinition(std::string_view name) const {
   if (itr == m_uniqueClassDefinitions.end()) {
     return nullptr;
   } else {
-    return (*itr).second;
+    return itr->second;
   }
 }
 
@@ -499,7 +502,7 @@ Package* Design::addPackageDefinition(std::string_view packageName,
     m_packageDefinitions.emplace(packageName, package);
     return package;
   } else {
-    Package* old = (*itr).second;
+    Package* old = itr->second;
     if (old->getFileContents()[0]->getParent() &&
         (old->getFileContents()[0]->getParent() ==
          package->getFileContents()[0]->getParent())) {
@@ -544,10 +547,10 @@ std::vector<BindStmt*> Design::getBindStmts(std::string_view targetName) {
   std::vector<BindStmt*> results;
   BindMap::iterator itr = m_bindMap.find(targetName);
   while (itr != m_bindMap.end()) {
-    if ((*itr).first != targetName) {
+    if (itr->first != targetName) {
       break;
     }
-    results.push_back((*itr).second);
+    results.emplace_back(itr->second);
     itr++;
   }
   return results;

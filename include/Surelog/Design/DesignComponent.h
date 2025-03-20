@@ -41,6 +41,7 @@
 namespace SURELOG {
 
 class DataType;
+class Design;
 class DesignElement;
 class FileContent;
 class Function;
@@ -119,7 +120,8 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
   void insertUsedDataType(std::string_view dataTypeName, DataType* dataType);
 
   const DataTypeMap& getDataTypeMap() const { return m_dataTypes; }
-  const DataType* getDataType(std::string_view name) const;
+  virtual const DataType* getDataType(Design* design,
+                                      std::string_view name) const;
   void insertDataType(std::string_view dataTypeName, DataType* dataType);
 
   const TypeDefMap& getTypeDefMap() const { return m_typedefs; }
@@ -134,7 +136,7 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
   virtual Task* getTask(std::string_view name) const;
   void insertTask(Task* p);
 
-  void addAccessPackage(Package* p) { m_packages.push_back(p); }
+  void addAccessPackage(Package* p) { m_packages.emplace_back(p); }
   const std::vector<Package*>& getAccessPackages() const { return m_packages; }
 
   void addVariable(Variable* var);
@@ -148,35 +150,40 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
     return m_orderedParameters;
   }
 
-  void addParamAssign(ParamAssign* assign) { m_paramAssigns.push_back(assign); }
+  void addParamAssign(ParamAssign* assign) {
+    m_paramAssigns.emplace_back(assign);
+  }
   const ParamAssignVec& getParamAssignVec() const { return m_paramAssigns; }
 
-  void addImportedSymbol(uhdm::ImportTypespec* i) {
-    m_imported_symbols.push_back(i);
+  void addImportTypespec(uhdm::ImportTypespec* i) {
+    m_importTypespecs.emplace_back(i);
   }
+  const DataType* getImportedDataType(
+      Design* design, std::string_view name,
+      std::set<const DesignComponent*>& visited) const;
   const std::vector<uhdm::ImportTypespec*>& getImportedSymbols() const {
-    return m_imported_symbols;
+    return m_importTypespecs;
   }
 
   void addElabSysCall(uhdm::TFCall* elab_sys_call) {
-    m_elab_sys_calls.push_back(elab_sys_call);
+    m_elabSysCalls.emplace_back(elab_sys_call);
   }
   const std::vector<uhdm::TFCall*>& getElabSysCalls() const {
-    return m_elab_sys_calls;
+    return m_elabSysCalls;
   }
 
   void addPropertyDecl(uhdm::PropertyDecl* prop_decl) {
-    m_property_decls.push_back(prop_decl);
+    m_propertyDecls.emplace_back(prop_decl);
   }
   const std::vector<uhdm::PropertyDecl*>& getPropertyDecls() const {
-    return m_property_decls;
+    return m_propertyDecls;
   }
 
   void addSequenceDecl(uhdm::SequenceDecl* seq_decl) {
-    m_sequence_decls.push_back(seq_decl);
+    m_sequenceDecls.emplace_back(seq_decl);
   }
   const std::vector<uhdm::SequenceDecl*>& getSequenceDecls() const {
-    return m_sequence_decls;
+    return m_sequenceDecls;
   }
 
   void setUhdmModel(uhdm::Any* model) { m_model = model; }
@@ -200,6 +207,11 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
 
   const LetStmtMap& getLetStmts() const { return m_letDecls; }
 
+ private:
+  const DataType* getDataTypeRecursive(
+      Design* design, std::string_view name,
+      std::set<const DesignComponent*>& visited) const;
+
  protected:
   std::vector<const FileContent*> m_fileContents;
   std::vector<NodeId> m_nodeIds;
@@ -219,10 +231,10 @@ class DesignComponent : public ValuedComponentI, public PortNetHolder {
   TypeDefMap m_typedefs;
   std::vector<Package*> m_packages;
   VariableMap m_variables;
-  std::vector<uhdm::ImportTypespec*> m_imported_symbols;
-  std::vector<uhdm::TFCall*> m_elab_sys_calls;
-  std::vector<uhdm::PropertyDecl*> m_property_decls;
-  std::vector<uhdm::SequenceDecl*> m_sequence_decls;
+  std::vector<uhdm::ImportTypespec*> m_importTypespecs;
+  std::vector<uhdm::TFCall*> m_elabSysCalls;
+  std::vector<uhdm::PropertyDecl*> m_propertyDecls;
+  std::vector<uhdm::SequenceDecl*> m_sequenceDecls;
   ParameterMap m_parameterMap;
   ParameterVec m_orderedParameters;
   ParamAssignVec m_paramAssigns;

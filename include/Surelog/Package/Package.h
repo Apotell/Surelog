@@ -61,6 +61,9 @@ class Package : public DesignComponent {
   bool isInstance() const override { return false; }
   std::string_view getName() const override { return m_name; }
 
+  const DataType* getDataType(Design* design,
+                              std::string_view name) const override;
+
   ClassNameClassDefinitionMultiMap& getClassDefinitions() {
     return m_classDefinitions;
   }
@@ -69,6 +72,7 @@ class Package : public DesignComponent {
     m_classDefinitions.emplace(className, classDef);
   }
   ClassDefinition* getClassDefinition(std::string_view name);
+  const ClassDefinition* getClassDefinition(std::string_view name) const;
   ExprBuilder* getExprBuilder() { return &m_exprBuilder; }
 
   uhdm::AttributeCollection* getAttributes() const { return attributes_; }

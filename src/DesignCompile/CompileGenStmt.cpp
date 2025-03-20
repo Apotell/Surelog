@@ -71,11 +71,31 @@ namespace SURELOG {
 
 using namespace uhdm;  // NOLINT (we use a good chunk of these here)
 
-uhdm::AnyCollection* CompileHelper::compileGenStmt(ModuleDefinition* component,
-                                                   const FileContent* fC,
-                                                   CompileDesign* compileDesign,
-                                                   NodeId id) {
-  uhdm::Serializer& s = compileDesign->getSerializer();
+uhdm::AnyCollection* CompileHelper::compileGenVars(
+    DesignComponent* component, const FileContent* fC, NodeId id,
+    CompileDesign* compileDesign) {
+  Serializer& s = compileDesign->getSerializer();
+  AnyCollection* vars = nullptr;
+  NodeId identifierListId = fC->Child(id);
+  while (identifierListId) {
+    NodeId nameId = fC->Child(identifierListId);
+
+    uhdm::GenVar* var = s.make<uhdm::GenVar>();
+    var->setName(fC->SymName(nameId));
+    fC->populateCoreMembers(nameId, nameId, var);
+
+    if (vars == nullptr) vars = s.makeCollection<Any>();
+    vars->emplace_back(var);
+
+    identifierListId = fC->Sibling(identifierListId);
+  }
+  return vars;
+}
+
+uhdm::AnyCollection* CompileHelper::compileGenStmt(
+    DesignComponent* component, const FileContent* fC, NodeId id,
+    CompileDesign* compileDesign) {
+  Serializer& s = compileDesign->getSerializer();
   NodeId stmtId = fC->Child(id);
   uhdm::Any* genstmt = nullptr;
   if (fC->Type(id) == VObjectType::paGenerate_region) {
@@ -235,10 +255,10 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(ModuleDefinition* component,
         uhdm::CaseItem* citem = s.make<uhdm::CaseItem>();
         citem->setParent(gencase);
         fC->populateCoreMembers(tmp, tmp, citem);
-        items->push_back(citem);
+        items->emplace_back(citem);
         if (ex) {
           ex->setParent(citem);
-          citem->getExprs(true)->push_back(ex);
+          citem->getExprs(true)->emplace_back(ex);
         }
 
         uhdm::Begin* stmt = s.make<uhdm::Begin>();
@@ -293,7 +313,7 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(ModuleDefinition* component,
       assign_stmt->setRhs(rhs);
     }
     checkForLoops(false);
-    genfor->getForInitStmts(true)->push_back(assign_stmt);
+    genfor->getForInitStmts(true)->emplace_back(assign_stmt);
 
     // Condition
     checkForLoops(true);
@@ -357,7 +377,7 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(ModuleDefinition* component,
     }
   }
   uhdm::AnyCollection* stmts = s.makeCollection<Any>();
-  if (genstmt) stmts->push_back(genstmt);
+  if (genstmt) stmts->emplace_back(genstmt);
   return stmts;
 }
 

@@ -340,9 +340,9 @@ def _get_run_args(name, filepath, dirpath, binary_filepath, uvm_reldirpath, mp, 
   cmdline = cmdline.replace('"', '\\"')
   cmdline = cmdline.replace("'", "\\'")
   if 'MSYSTEM' in os.environ:
-    cmdline = re.sub('[.\\\/]+[\\\/]UVM', uvm_reldirpath.replace('\\', '/'), cmdline)
+    cmdline = re.sub(r'[.\\\/]+[\\/]UVM', uvm_reldirpath.replace('\\', '/'), cmdline)
   else:
-    cmdline = re.sub('[.\\\/]+[\\\/]UVM', uvm_reldirpath.replace('\\', '\\\\'), cmdline)
+    cmdline = re.sub(r'[.\\\/]+[\\/]UVM', uvm_reldirpath.replace('\\', '\\\\'), cmdline)
   cmdline = cmdline.strip()
 
   if '.sh' in cmdline or '.bat' in cmdline:
@@ -353,14 +353,14 @@ def _get_run_args(name, filepath, dirpath, binary_filepath, uvm_reldirpath, mp, 
     if '*/*.sv' in cmdline:
       cmdline = cmdline.replace('*/*.sv', ' '.join(_find_files(dirpath, '*.sv')))
     if '-mt' in cmdline:
-      cmdline = re.sub('-mt\s+(max|\d+)', '', cmdline)
+      cmdline = re.sub(r'-mt\s+(max|\d+)', '', cmdline)
 
     if mp and ((mp == 'max') or (mp.isnumeric() and int(mp) > 0)):
-      cmdline = re.sub('-mp\s+(max|\d+)', '', cmdline)  # Option overridden from command prompt
+      cmdline = re.sub(r'-mp\s+(max|\d+)', '', cmdline)  # Option overridden from command prompt
     if mp or ('-mp' in cmdline):
       cmdline = cmdline.replace('-nocache', '')
     if '-lowmem' in cmdline:
-      cmdline = re.sub('-mp\s+(max|\d+)', '', cmdline)
+      cmdline = re.sub(r'-mp\s+(max|\d+)', '', cmdline)
       mp = '1'
 
     parts = cmdline.split(' ')

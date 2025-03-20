@@ -160,6 +160,7 @@ class CompileHelper final {
   uhdm::Always* compileAlwaysBlock(DesignComponent* component,
                                    const FileContent* fC, NodeId id,
                                    CompileDesign* compileDesign,
+                                   uhdm::Any* pstmt,
                                    ValuedComponentI* instance);
 
   uhdm::Any* compileTfCall(DesignComponent* component, const FileContent* fC,
@@ -322,11 +323,13 @@ class CompileHelper final {
 
   uhdm::Initial* compileInitialBlock(DesignComponent* component,
                                      const FileContent* fC, NodeId id,
-                                     CompileDesign* compileDesign);
+                                     CompileDesign* compileDesign,
+                                     uhdm::Any* pstmt);
 
   uhdm::FinalStmt* compileFinalBlock(DesignComponent* component,
                                      const FileContent* fC, NodeId id,
-                                     CompileDesign* compileDesign);
+                                     CompileDesign* compileDesign,
+                                     uhdm::Any* pstmt);
 
   void compileBindStmt(DesignComponent* component, const FileContent* fC,
                        NodeId nodeId, CompileDesign* compileDesign,
@@ -483,8 +486,8 @@ class CompileHelper final {
 
   std::pair<std::vector<uhdm::ModuleArray*>, std::vector<uhdm::RefModule*>>
   compileInstantiation(ModuleDefinition* mod, const FileContent* fC,
-                       CompileDesign* compileDesign, NodeId id,
-                       ValuedComponentI* instance);
+                       CompileDesign* compileDesign, uhdm::Any* pexpr,
+                       NodeId id, ValuedComponentI* instance);
 
   void writePrimTerms(ModuleDefinition* mod, const FileContent* fC,
                       CompileDesign* compileDesign, NodeId id,
@@ -503,9 +506,13 @@ class CompileHelper final {
                        CompileDesign* compileDesign, NodeId id,
                        uhdm::PortCollection* ports, uhdm::Any* pexpr);
 
-  uhdm::AnyCollection* compileGenStmt(ModuleDefinition* component,
-                                      const FileContent* fC,
-                                      CompileDesign* compileDesign, NodeId id);
+  uhdm::AnyCollection* compileGenStmt(DesignComponent* component,
+                                      const FileContent* fC, NodeId id,
+                                      CompileDesign* compileDesign);
+
+  uhdm::AnyCollection* compileGenVars(DesignComponent* component,
+                                      const FileContent* fC, NodeId id,
+                                      CompileDesign* compileDesign);
 
   uhdm::Constant* compileConst(const FileContent* fC, NodeId child,
                                uhdm::Serializer& s);

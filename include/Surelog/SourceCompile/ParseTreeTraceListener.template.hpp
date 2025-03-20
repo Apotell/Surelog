@@ -36,7 +36,7 @@
 // clang-format off
 #define TRACE_INIT_CONTEXT                \
   int32_t sl = 0, sc = 0, el = 0, ec = 0; \
-  std::string text;                       \
+  std::string_view text;                  \
   getNodeLocation(node, sl, sc, el, ec);  \
   getNodeText(node, text)
 

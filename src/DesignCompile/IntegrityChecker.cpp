@@ -41,7 +41,12 @@ IntegrityChecker::IntegrityChecker(Session* session)
           uhdm::UhdmType::PreprocMacroInstance,
       }) {}
 
-bool IntegrityChecker::isBuiltPackageOnStack(
+static std::string asSymbol(const uhdm::Any* const object) {
+  return StrCat(object->getUhdmId(), ", ",
+                uhdm::UhdmName(object->getUhdmType()), ", ", object->getName());
+}
+
+bool IntegrityChecker::isBuiltInPackageOnStack(
     const uhdm::Any* const object) const {
   return ((object->getUhdmType() == uhdm::UhdmType::Package) &&
           (object->getName() == "builtin")) ||
@@ -72,10 +77,9 @@ void IntegrityChecker::reportAmbigiousMembership(
     FileSystem* const fileSystem = m_session->getFileSystem();
     ErrorContainer* const errorContainer = m_session->getErrorContainer();
 
-    Location loc(
-        fileSystem->toPathId(object->getFile(), symbolTable),
-        object->getStartLine(), object->getStartColumn(),
-        symbolTable->registerSymbol(std::to_string(object->getUhdmId())));
+    Location loc(fileSystem->toPathId(object->getFile(), symbolTable),
+                 object->getStartLine(), object->getStartColumn(),
+                 symbolTable->registerSymbol(asSymbol(object)));
     errorContainer->addError(
         ErrorDefinition::INTEGRITY_CHECK_OBJECT_NOT_IN_PARENT_COLLECTION, loc);
   }
@@ -93,26 +97,37 @@ void IntegrityChecker::reportDuplicates(const uhdm::Any* const object,
     FileSystem* const fileSystem = m_session->getFileSystem();
     ErrorContainer* const errorContainer = m_session->getErrorContainer();
 
-    std::string text = std::to_string(object->getUhdmId());
-    text.append("::").append(std::to_string(vpiRelation));
     Location loc(fileSystem->toPathId(object->getFile(), symbolTable),
                  object->getStartLine(), object->getStartColumn(),
-                 symbolTable->registerSymbol(text));
+                 symbolTable->registerSymbol(asSymbol(object)));
     errorContainer->addError(
         ErrorDefinition::INTEGRITY_CHECK_COLLECTION_HAS_DUPLICATES, loc);
   }
 }
 
 inline IntegrityChecker::LineColumnRelation
-IntegrityChecker::getLineColumnRelation(uint32_t csl, uint16_t csc,
-                                        uint32_t cel, uint16_t cec) const {
-  if (csl == cel) {
-    if (csc < cec) return LineColumnRelation::Before;
-    if (csc == cec) return LineColumnRelation::Inside;
-    if (csc > cec) return LineColumnRelation::After;
+IntegrityChecker::getLineColumnRelation(uint32_t sl, uint16_t sc, uint32_t el,
+                                        uint16_t ec) const {
+  if (sl == el) {
+    if (sc < ec) return LineColumnRelation::Before;
+    if (sc == ec) return LineColumnRelation::Inside;
+    if (sc > ec) return LineColumnRelation::After;
   }
 
-  return (csl < cel) ? LineColumnRelation::Before : LineColumnRelation::After;
+  return (sl < el) ? LineColumnRelation::Before : LineColumnRelation::After;
+}
+
+inline IntegrityChecker::LineColumnRelation
+IntegrityChecker::getLineColumnRelation(uint32_t l, uint16_t c, uint32_t sl,
+                                        uint16_t sc, uint32_t el,
+                                        uint16_t ec) const {
+  if (l < sl) return LineColumnRelation::Before;
+  if (l > el) return LineColumnRelation::After;
+
+  if ((l == sl) && (c < sc)) return LineColumnRelation::Before;
+  if ((l == el) && (c > ec)) return LineColumnRelation::After;
+
+  return LineColumnRelation::Inside;
 }
 
 inline IntegrityChecker::LineColumnRelation
@@ -131,6 +146,89 @@ IntegrityChecker::getLineColumnRelation(uint32_t csl, uint16_t csc,
   if (startIsInside && endIsInside) return LineColumnRelation::Inside;
 
   return LineColumnRelation::Inconclusive;
+}
+
+const uhdm::PreprocMacroDefinition* IntegrityChecker::getMacroDefinition(
+    std::string_view filepath, uint32_t line, uint16_t column) const {
+  const uhdm::SourceFile* sourceFile = nullptr;
+  if (const uhdm::SourceFileCollection* const sourceFiles =
+          m_design->getSourceFiles()) {
+    uhdm::SourceFileCollection::const_iterator it =
+        std::find_if(sourceFiles->cbegin(), sourceFiles->cend(),
+                     [&filepath](const uhdm::SourceFile* const object) {
+                       return object->getFile() == filepath;
+                     });
+    if (it != sourceFiles->cend()) sourceFile = *it;
+  }
+
+  if (sourceFile == nullptr) return nullptr;
+
+  if (const uhdm::PreprocMacroDefinitionCollection* const definitions =
+          sourceFile->getPreprocMacroDefinitions()) {
+    for (uhdm::PreprocMacroDefinition* const def : *definitions) {
+      bool inside =
+          (line >= def->getStartLine()) && (line <= def->getEndLine());
+      if (line == def->getStartLine()) {
+        inside = inside && (column >= def->getStartColumn());
+      }
+      if (line == def->getEndLine()) {
+        inside = inside && (column <= def->getEndColumn());
+      }
+      if (inside) return def;
+    }
+  }
+  return nullptr;
+}
+
+const uhdm::PreprocMacroDefinition* IntegrityChecker::getMacroDefinition(
+    const uhdm::Any* const object) const {
+  const std::string_view filepath = object->getFile();
+  if (filepath.empty() || (filepath == SymbolTable::getBadSymbol())) {
+    return nullptr;
+  }
+
+  const uhdm::SourceFile* sourceFile = nullptr;
+  if (const uhdm::SourceFileCollection* const sourceFiles =
+          m_design->getSourceFiles()) {
+    uhdm::SourceFileCollection::const_iterator it =
+        std::find_if(sourceFiles->cbegin(), sourceFiles->cend(),
+                     [&filepath](const uhdm::SourceFile* const object) {
+                       return object->getFile() == filepath;
+                     });
+    if (it != sourceFiles->cend()) sourceFile = *it;
+  }
+
+  if (sourceFile == nullptr) return nullptr;
+
+  const uint32_t csl = object->getStartLine();
+  const uint16_t csc = object->getStartColumn();
+  const uint32_t cel = object->getEndLine();
+  const uint16_t cec = object->getEndColumn();
+
+  if (const uhdm::PreprocMacroDefinitionCollection* const definitions =
+          sourceFile->getPreprocMacroDefinitions()) {
+    for (uhdm::PreprocMacroDefinition* const def : *definitions) {
+      const uint32_t psl = def->getStartLine();
+      const uint16_t psc = def->getStartColumn();
+      const uint32_t pel = def->getEndLine();
+      const uint16_t pec = def->getEndColumn();
+
+      const LineColumnRelation startRelation =
+          getLineColumnRelation(csl, csc, psl, psc, pel, pec);
+      const LineColumnRelation endRelation =
+          getLineColumnRelation(cel, cec, psl, psc, pel, pec);
+
+      const bool startInside = (startRelation == LineColumnRelation::Inside) ||
+                               (startRelation == LineColumnRelation::After);
+      const bool endInside = (endRelation == LineColumnRelation::Inside) ||
+                             (endRelation == LineColumnRelation::Before);
+
+      if (startInside && endInside) {
+        return def;
+      }
+    }
+  }
+  return nullptr;
 }
 
 void IntegrityChecker::reportInvalidLocation(
@@ -174,25 +272,28 @@ void IntegrityChecker::reportInvalidLocation(
       (parent->getUhdmType() == uhdm::UhdmType::HierPath))
     return;
 
+  SymbolTable* const symbolTable = m_session->getSymbolTable();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  ErrorContainer* const errorContainer = m_session->getErrorContainer();
+
   const uint32_t csl = object->getStartLine();
   const uint32_t csc = object->getStartColumn();
   const uint32_t cel = object->getEndLine();
   const uint32_t cec = object->getEndColumn();
 
-  SymbolTable* const symbolTable = m_session->getSymbolTable();
-  FileSystem* const fileSystem = m_session->getFileSystem();
-  ErrorContainer* const errorContainer = m_session->getErrorContainer();
-
   LineColumnRelation actualRelation = getLineColumnRelation(csl, csc, cel, cec);
   if ((actualRelation != LineColumnRelation::Before) &&
       (actualRelation != LineColumnRelation::Inside)) {
-    Location loc(
-        fileSystem->toPathId(object->getFile(), symbolTable),
-        object->getStartLine(), object->getStartColumn(),
-        symbolTable->registerSymbol(StrCat("Object: ", object->getUhdmId())));
-    errorContainer->addError(ErrorDefinition::INTEGRITY_CHECK_INVALID_LOCATION,
-                             loc);
-    return;
+    // if (getMacroDefinition(object->getFile(), csl, csc) ==
+    //     getMacroDefinition(object->getFile(), cel, cec))
+    {
+      Location loc(fileSystem->toPathId(object->getFile(), symbolTable),
+                   object->getStartLine(), object->getStartColumn(),
+                   symbolTable->registerSymbol(asSymbol(object)));
+      errorContainer->addError(
+          ErrorDefinition::INTEGRITY_CHECK_INVALID_LOCATION, loc);
+      return;
+    }
   }
 
   const uint32_t psl = parent->getStartLine();
@@ -272,6 +373,18 @@ void IntegrityChecker::reportInvalidLocation(
         // Since array_typspec refers to the range, index is basically the
         // range in case of associative arrays, queues, and dynamic arrays.
         expectedRelation = LineColumnRelation::Inside;
+      }
+    } else if (const uhdm::IODecl* const parentAsIo_decl =
+                   parent->Cast<uhdm::IODecl>()) {
+      if (parentAsIo_decl->getTypespec() == object) {
+        // In old verilog style, the parameter declaration is different!
+        // task MYHDL3_adv;
+        //   input width;
+        //   integer width;
+        // begin: MYHDL82_RETURN
+        // end
+        if (actualRelation == LineColumnRelation::After)
+          expectedRelation = LineColumnRelation::After;
       }
     }
   } else if (object->getUhdmType() == uhdm::UhdmType::Attribute) {
@@ -358,8 +471,11 @@ void IntegrityChecker::reportInvalidLocation(
   } else if (const uhdm::Port* const parentAsPort =
                  parent->Cast<uhdm::Port>()) {
     if (parentAsPort->getHighConn() == object) {
-      // module modname(..., input type name = object, ... )
-      expectedRelation = LineColumnRelation::After;
+      // module modname(..., .port(high_conn), ... )  <= After
+      // module modname(..., port, ... )  <= Inside
+      if (actualRelation == LineColumnRelation::After) {
+        expectedRelation = LineColumnRelation::After;
+      }
     }
   } else if (const uhdm::LetDecl* const parentAsLet_decl =
                  parent->Cast<uhdm::LetDecl>()) {
@@ -411,15 +527,20 @@ void IntegrityChecker::reportInvalidLocation(
   }
 
   if (actualRelation != expectedRelation) {
-    Location loc(fileSystem->toPathId(object->getFile(), symbolTable),
-                 object->getStartLine(), object->getStartColumn(),
-                 symbolTable->registerSymbol(
-                     StrCat("Child: ", object->getUhdmId(), ", ",
-                            uhdm::UhdmName(object->getUhdmType()),
-                            " Parent: ", parent->getUhdmId(), ", ",
-                            uhdm::UhdmName(parent->getUhdmType()))));
-    errorContainer->addError(
-        ErrorDefinition::INTEGRITY_CHECK_BAD_RELATIVE_LOCATION, loc);
+    // const uhdm::PreprocMacroDefinition* const objectPPMD =
+    //     getMacroDefinition(object);
+    // const uhdm::PreprocMacroDefinition* const parentPPMD =
+    //     getMacroDefinition(parent);
+    // if (objectPPMD == parentPPMD)
+    {
+      Location loc(
+          fileSystem->toPathId(object->getFile(), symbolTable),
+          object->getStartLine(), object->getStartColumn(),
+          symbolTable->registerSymbol(StrCat("Child: ", asSymbol(object),
+                                             " Parent: ", asSymbol(parent))));
+      errorContainer->addError(
+          ErrorDefinition::INTEGRITY_CHECK_BAD_RELATIVE_LOCATION, loc);
+    }
   }
 }
 
@@ -499,11 +620,9 @@ void IntegrityChecker::reportMissingLocation(
   FileSystem* const fileSystem = m_session->getFileSystem();
   ErrorContainer* const errorContainer = m_session->getErrorContainer();
 
-  std::string text =
-      StrCat(object->getUhdmId(), ", ", uhdm::UhdmName(object->getUhdmType()));
   Location loc(fileSystem->toPathId(object->getFile(), symbolTable),
                object->getStartLine(), object->getStartColumn(),
-               symbolTable->registerSymbol(text));
+               symbolTable->registerSymbol(asSymbol(object)));
   errorContainer->addError(ErrorDefinition::INTEGRITY_CHECK_MISSING_LOCATION,
                            loc);
 }
@@ -550,8 +669,10 @@ void IntegrityChecker::reportInvalidNames(const uhdm::Any* const object) const {
 
   if (const uhdm::RefObj* const objectAsRef_obj =
           object->Cast<uhdm::RefObj>()) {
-    shouldReport = (object->getName() == SymbolTable::getBadSymbol());
-    shouldReport = shouldReport || object->getName().empty();
+    shouldReport = object->getName().empty();
+    shouldReport =
+        shouldReport || (object->getName().find(SymbolTable::getBadSymbol()) !=
+                         std::string_view::npos);
 
     if (const uhdm::Any* const actual = objectAsRef_obj->getActual()) {
       shouldReport = shouldReport || !areNamedSame(object, actual);
@@ -562,7 +683,8 @@ void IntegrityChecker::reportInvalidNames(const uhdm::Any* const object) const {
     shouldReport = shouldReport && (object->getName() != "this");
   } else if (const uhdm::RefTypespec* const objectAsRef_typespec =
                  object->Cast<const uhdm::RefTypespec*>()) {
-    shouldReport = (object->getName() == SymbolTable::getBadSymbol());
+    shouldReport = (object->getName().find(SymbolTable::getBadSymbol()) !=
+                    std::string_view::npos);
     if (const uhdm::TypedefTypespec* const parent =
             object->getParent<uhdm::TypedefTypespec>()) {
       if (parent->getTypedefAlias() != nullptr) {
@@ -596,7 +718,9 @@ void IntegrityChecker::reportInvalidNames(const uhdm::Any* const object) const {
                  (actual->getUhdmType() ==
                   uhdm::UhdmType::UnsupportedTypespec)) {
         shouldReport = shouldReport || object->getName().empty();
-        shouldReport = shouldReport || !areNamedSame(object, actual);
+        if (object->getName() != "item") {
+          shouldReport = shouldReport || !areNamedSame(object, actual);
+        }
       }
     } else {
       shouldReport = shouldReport || object->getName().empty();
@@ -608,10 +732,9 @@ void IntegrityChecker::reportInvalidNames(const uhdm::Any* const object) const {
     FileSystem* const fileSystem = m_session->getFileSystem();
     ErrorContainer* const errorContainer = m_session->getErrorContainer();
 
-    Location loc(
-        fileSystem->toPathId(object->getFile(), symbolTable),
-        object->getStartLine(), object->getStartColumn(),
-        symbolTable->registerSymbol(std::to_string(object->getUhdmId())));
+    Location loc(fileSystem->toPathId(object->getFile(), symbolTable),
+                 object->getStartLine(), object->getStartColumn(),
+                 symbolTable->registerSymbol(asSymbol(object)));
     errorContainer->addError(ErrorDefinition::INTEGRITY_CHECK_MISSING_NAME,
                              loc);
   }
@@ -626,17 +749,16 @@ void IntegrityChecker::reportInvalidFile(const uhdm::Any* const object) const {
     FileSystem* const fileSystem = m_session->getFileSystem();
     ErrorContainer* const errorContainer = m_session->getErrorContainer();
 
-    Location loc(
-        fileSystem->toPathId(object->getFile(), symbolTable),
-        object->getStartLine(), object->getStartColumn(),
-        symbolTable->registerSymbol(std::to_string(object->getUhdmId())));
+    Location loc(fileSystem->toPathId(object->getFile(), symbolTable),
+                 object->getStartLine(), object->getStartColumn(),
+                 symbolTable->registerSymbol(asSymbol(object)));
     errorContainer->addError(ErrorDefinition::INTEGRITY_CHECK_MISSING_FILE,
                              loc);
   }
 }
 
 void IntegrityChecker::reportNullActual(const uhdm::Any* const object) const {
-  if (isBuiltPackageOnStack(object)) return;
+  if (isBuiltInPackageOnStack(object)) return;
 
   bool shouldReport = false;
 
@@ -687,15 +809,14 @@ void IntegrityChecker::reportNullActual(const uhdm::Any* const object) const {
 
     Location loc(fileSystem->toPathId(object->getFile(), symbolTable),
                  object->getStartLine(), object->getStartColumn(),
-                 symbolTable->registerSymbol(
-                     StrCat(object->getUhdmId(), ", ", object->getName())));
-    errorContainer->addError(ErrorDefinition::INTEGRITY_CHECK_NULL_ACTUAL, loc);
+                 symbolTable->registerSymbol(asSymbol(object)));
+    errorContainer->addError(ErrorDefinition::INTEGRITY_CHECK_BINDING, loc);
   }
 }
 
 void IntegrityChecker::enterAny(const uhdm::Any* const object,
                                 uint32_t vpiRelation) {
-  if (isBuiltPackageOnStack(object)) return;
+  if (isBuiltInPackageOnStack(object)) return;
   if (isUVMMember(object)) return;
 
   reportNullActual(object);
@@ -730,10 +851,9 @@ void IntegrityChecker::enterAny(const uhdm::Any* const object,
   const uhdm::Any* const parent = object->getParent();
   if ((object->getUhdmType() != uhdm::UhdmType::Design) &&
       (parent == nullptr)) {
-    Location loc(
-        fileSystem->toPathId(object->getFile(), symbolTable),
-        object->getStartLine(), object->getStartColumn(),
-        symbolTable->registerSymbol(std::to_string(object->getUhdmId())));
+    Location loc(fileSystem->toPathId(object->getFile(), symbolTable),
+                 object->getStartLine(), object->getStartColumn(),
+                 symbolTable->registerSymbol(asSymbol(object)));
     errorContainer->addError(ErrorDefinition::INTEGRITY_CHECK_MISSING_PARENT,
                              loc);
     return;
@@ -840,10 +960,9 @@ void IntegrityChecker::enterAny(const uhdm::Any* const object,
   if ((parentAsScope == nullptr) && (parentAsDesign == nullptr) &&
       (parentAsUdpDefn == nullptr) &&
       (expectScope || expectDesign || expectUdpDefn)) {
-    Location loc(
-        fileSystem->toPathId(object->getFile(), symbolTable),
-        object->getStartLine(), object->getStartColumn(),
-        symbolTable->registerSymbol(std::to_string(object->getUhdmId())));
+    Location loc(fileSystem->toPathId(object->getFile(), symbolTable),
+                 object->getStartLine(), object->getStartColumn(),
+                 symbolTable->registerSymbol(asSymbol(object)));
     errorContainer->addError(
         ErrorDefinition::INTEGRITY_CHECK_PARENT_IS_NEITHER_SCOPE_NOR_DESIGN,
         loc);
@@ -2078,7 +2197,9 @@ void IntegrityChecker::enterWhileStmtCollection(
 }
 
 void IntegrityChecker::check(const uhdm::Design* const object) {
+  m_design = object;
   listenAny(object);
+  m_design = nullptr;
 }
 
 void IntegrityChecker::check(const std::vector<const uhdm::Design*>& objects) {

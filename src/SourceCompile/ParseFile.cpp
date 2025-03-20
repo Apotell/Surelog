@@ -96,7 +96,7 @@ ParseFile::ParseFile(Session* session, CompileSourceFile* compileSourceFile,
       debug_AstModel(false),
       m_parent(parent),
       m_offsetLine(offsetLine) {
-  parent->m_children.push_back(this);
+  parent->m_children.emplace_back(this);
 }
 
 ParseFile::ParseFile(Session* session, std::string_view text,
@@ -677,8 +677,13 @@ bool ParseFile::parse() {
 
     if (cache.restore()) {
       m_usingCachedVersion = true;
-      if (debug_AstModel && !isPrecompiled && m_fileId)
-        m_fileContent->printTree(std::cout);
+      if (debug_AstModel && !isPrecompiled && m_fileId) {
+        if (clp->parseTree()) {
+          m_fileContent->printTree(std::cout);
+        } else {
+          std::cout << m_fileContent->printObjects() << std::endl;
+        }
+      }
       if (clp->debugCache()) {
         std::cout << "PARSER CACHE USED FOR: "
                   << fileSystem->toPath(getFileId(0)) << std::endl;
@@ -693,8 +698,13 @@ bool ParseFile::parse() {
       if (cache.restore()) {
         child->m_fileContent->setParent(m_fileContent);
         m_usingCachedVersion = true;
-        if (debug_AstModel && !isPrecompiled && m_fileId)
-          child->m_fileContent->printTree(std::cout);
+        if (debug_AstModel && !isPrecompiled && m_fileId) {
+          if (clp->parseTree()) {
+            child->m_fileContent->printTree(std::cout);
+          } else {
+            std::cout << child->m_fileContent->printObjects() << std::endl;
+          }
+        }
       } else {
         ok = false;
       }
@@ -742,8 +752,13 @@ bool ParseFile::parse() {
       antlr4::tree::ParseTreeWalker::DEFAULT.walk(m_listener,
                                                   m_antlrParserHandler->m_tree);
 
-      if (debug_AstModel && !isPrecompiled && m_fileId)
-        m_fileContent->printTree(std::cout);
+      if (debug_AstModel && !isPrecompiled && m_fileId) {
+        if (clp->parseTree()) {
+          m_fileContent->printTree(std::cout);
+        } else {
+          std::cout << m_fileContent->printObjects() << std::endl;
+        }
+      }
 
       if (clp->profile()) {
         // m_profileInfo += "AST Walking: " + std::to_string
@@ -797,8 +812,13 @@ bool ParseFile::parse() {
             tmr.reset();
           }
 
-          if (debug_AstModel && !isPrecompiled && m_fileId)
-            child->m_fileContent->printTree(std::cout);
+          if (debug_AstModel && !isPrecompiled && m_fileId) {
+            if (clp->parseTree()) {
+              child->m_fileContent->printTree(std::cout);
+            } else {
+              std::cout << child->m_fileContent->printObjects() << std::endl;
+            }
+          }
 
           ParseCache cache(m_session, child);
           if (clp->link()) return true;

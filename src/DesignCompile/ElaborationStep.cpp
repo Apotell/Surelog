@@ -608,7 +608,7 @@ const DataType* ElaborationStep::bindDataType_(
   }
 
   const DataType* result = nullptr;
-  if ((result = parent->getDataType(type_name))) {
+  if ((result = parent->getDataType(design, type_name))) {
     found = true;
   }
   if (found == false) {
@@ -658,7 +658,7 @@ const DataType* ElaborationStep::bindDataType_(
         classFound = true;
         break;
       }
-      const DataType* dtype = package->getDataType(type_name);
+      const DataType* dtype = package->getDataType(design, type_name);
       if (dtype) {
         found = true;
         result = dtype;
@@ -689,7 +689,7 @@ const DataType* ElaborationStep::bindDataType_(
       if (found == false) {
         if (classDefinition->getContainer()) {
           const DataType* dtype =
-              classDefinition->getContainer()->getDataType(type_name);
+              classDefinition->getContainer()->getDataType(design, type_name);
           if (dtype) {
             found = true;
             result = dtype;
@@ -738,7 +738,8 @@ const DataType* ElaborationStep::bindDataType_(
         }
       }
       if (itr1 != classes.end()) {
-        const DataType* dtype = (*itr1).second->getDataType(the_type_name);
+        const DataType* dtype =
+            itr1->second->getDataType(design, the_type_name);
         if (dtype) {
           result = dtype;
           found = true;
@@ -747,13 +748,13 @@ const DataType* ElaborationStep::bindDataType_(
       if (found == false) {
         Package* pack = design->getPackage(classOrPackageName);
         if (pack) {
-          const DataType* dtype = pack->getDataType(the_type_name);
+          const DataType* dtype = pack->getDataType(design, the_type_name);
           if (dtype) {
             result = dtype;
             found = true;
           }
           if (found == false) {
-            dtype = pack->getDataType(type_name);
+            dtype = pack->getDataType(design, type_name);
             if (dtype) {
               result = dtype;
               found = true;
@@ -780,7 +781,7 @@ const DataType* ElaborationStep::bindDataType_(
   } else {
     if (classFound == true) {
       // Binding
-      ClassDefinition* def = (*itr1).second;
+      ClassDefinition* def = itr1->second;
       result = def;
     }
   }
@@ -912,7 +913,7 @@ Variable* ElaborationStep::locateStaticVariable_(
     if (i < var_chain.size() - 1) name += "::";
   }
   std::map<std::string, Variable*>::iterator itr = m_staticVariables.find(name);
-  if (itr != m_staticVariables.end()) return (*itr).second;
+  if (itr != m_staticVariables.end()) return itr->second;
   Variable* result = nullptr;
   Design* design = m_compileDesign->getCompiler()->getDesign();
   if (!var_chain.empty()) {
@@ -1012,7 +1013,7 @@ bool bindStructInPackage(Design* design, Signal* signal,
                          std::string_view structName) {
   Package* p = design->getPackage(packageName);
   if (p) {
-    const DataType* dtype = p->getDataType(structName);
+    const DataType* dtype = p->getDataType(design, structName);
     if (dtype) {
       signal->setDataType(dtype);
       const DataType* actual = dtype->getActual();
@@ -1131,7 +1132,7 @@ bool ElaborationStep::bindPortType_(Signal* signal, const FileContent* fC,
                 StrCat(libName, "@", interfName));
           }
           if (def == nullptr) {
-            type = parentComponent->getDataType(interfName);
+            type = parentComponent->getDataType(design, interfName);
           }
           checkIfBuiltInTypeOrErrorOut(def, fC, id, type, interfName, errors,
                                        symbols);
@@ -1240,13 +1241,14 @@ bool ElaborationStep::bindPortType_(Signal* signal, const FileContent* fC,
         }
       }
       if (def == nullptr) {
-        type = parentComponent->getDataType(interfName);
+        type = parentComponent->getDataType(design, interfName);
         if (type == nullptr) {
           if (!clp->fileUnit()) {
             for (const auto& fC : m_compileDesign->getCompiler()
                                       ->getDesign()
                                       ->getAllFileContents()) {
-              if (const DataType* dt1 = fC.second->getDataType(interfName)) {
+              if (const DataType* dt1 =
+                      fC.second->getDataType(design, interfName)) {
                 type = dt1;
                 break;
               }
@@ -1834,7 +1836,7 @@ uhdm::Any* ElaborationStep::makeVar_(
           netlist->named_events(s.makeCollection<uhdm::NamedEvent>());
           events = netlist->named_events();
         }
-        events->push_back(event);
+        events->emplace_back(event);
       }
       return event;
     } else {
@@ -1855,7 +1857,7 @@ uhdm::Any* ElaborationStep::makeVar_(
     // packed struct array ...
     uhdm::PackedArrayVar* parray = s.make<uhdm::PackedArrayVar>();
     parray->setRanges(packedDimensions);
-    parray->getElements(true)->push_back(obj);
+    parray->getElements(true)->emplace_back(obj);
     obj->setParent(parray);
     parray->setName(signame);
     obj = parray;
@@ -2024,10 +2026,10 @@ uhdm::Any* ElaborationStep::makeVar_(
     array_var->setRandType(vpiNotRand);
     array_var->setVisibility(vpiPublicVis);
     fC->populateCoreMembers(sig->getNodeId(), sig->getNodeId(), array_var);
-    vars->push_back(array_var);
+    vars->emplace_back(array_var);
     obj->setParent(array_var);
     if ((array_var->getTypespec() == nullptr) || associative) {
-      array_var->getVariables(true)->push_back((uhdm::Variables*)obj);
+      array_var->getVariables(true)->emplace_back((uhdm::Variables*)obj);
       ((uhdm::Variables*)obj)->setName("");
     }
     if (array_var->getTypespec() == nullptr) {
@@ -2051,7 +2053,7 @@ uhdm::Any* ElaborationStep::makeVar_(
     } else if (obj->getUhdmType() == uhdm::UhdmType::LogicVar) {
       ((uhdm::LogicVar*)obj)->setName(signame);
     }
-    vars->push_back((uhdm::Variables*)obj);
+    vars->emplace_back((uhdm::Variables*)obj);
   }
 
   if (assignExp) {

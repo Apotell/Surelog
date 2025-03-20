@@ -15,7 +15,7 @@ jobs:
 # Linux build, test, and publish
   linux-install:
     name: "Linux | Install | ${{ matrix.compiler }} | ${{ matrix.config }}"
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
@@ -25,19 +25,15 @@ jobs:
         - release
 
     env:
-      artifact-name: sl-${{ github.run_number }}-linux-${{ matrix.compiler }}-${{ matrix.config }}
+      artifact-name: sl-linux-${{ matrix.compiler }}-${{ matrix.config }}
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
       with:
         submodules: recursive
-        fetch-depth: 0
-
-    # Fetch tags for CMakeLists version check
-    # https://github.com/actions/checkout/issues/701
-    - name: Git fetch tags
-      run: git fetch --tags origin
+        fetch-depth: 1
+        fetch-tags: true
 
     - uses: ./.github/linux-setup
       with:
@@ -91,26 +87,31 @@ jobs:
 # Linux regression
   linux-regression:
     name: "Linux | Regression | ${{ matrix.compiler }} | ${{ matrix.config }} [${{ matrix.shard }}]"
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: linux-install
     strategy:
       fail-fast: false
       matrix:
-        num_shards: [8]
-        shard: [0, 1, 2, 3, 4, 5, 6, 7]
+        num_shards: [4]
+        shard: [0, 1, 2, 3]
         compiler:
         - gcc
         config:
         - release
     env:
-      build-artifact-name: sl-${{ github.run_number }}-linux-${{ matrix.compiler }}-${{ matrix.config }}
-      regression-artifact-name: sl-${{ github.run_number }}-linux-${{ matrix.compiler }}-${{ matrix.config }}-regression-${{ matrix.shard }}
+      build-artifact-name: sl-linux-${{ matrix.compiler }}-${{ matrix.config }}
+      regression-artifact-name: sl-linux-${{ matrix.compiler }}-${{ matrix.config }}-regression-${{ matrix.shard }}
 
     steps:
+    - name: Install dependencies
+      run: |
+        sudo apt-get update -qq &&
+        sudo apt install -y libunwind-dev google-perftools libgoogle-perftools-dev
+
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
-        python-version: 3.8
+        python-version: '3.x'
         architecture: x64
 
     - name: Setup Python Packages
@@ -119,8 +120,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       with:
-        submodules: recursive
-        fetch-depth: 0
+        fetch-depth: 1
 
     - name: Download artifact
       uses: actions/download-artifact@v4
@@ -137,7 +137,6 @@ jobs:
         python3 scripts/regression.py run       \
           --uhdm-lint-filepath bin/uhdm-lint    \
           --jobs $(nproc)                       \
-          --show-diffs                          \
           --num_shards=${{ matrix.num_shards }} \
           --shard=${{ matrix.shard }}
         git status
@@ -160,7 +159,7 @@ jobs:
 # Collect statistics
   collect-statistics:
     name: "Linux | Statistics | ${{ matrix.compiler }} | ${{ matrix.config }}"
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: linux-regression
     if: "!cancelled()"
     strategy:
@@ -171,20 +170,20 @@ jobs:
         config:
         - release
     env:
-      regression-artifact-pattern: "sl-${{ github.run_number }}-linux-${{ matrix.compiler }}-${{ matrix.config }}-regression-*"
-      statistics-artifact-name: sl-${{ github.run_number }}-linux-${{ matrix.compiler }}-${{ matrix.config }}-statistics
+      regression-artifact-pattern: "sl-linux-${{ matrix.compiler }}-${{ matrix.config }}-regression-*"
+      statistics-artifact-name: sl-linux-${{ matrix.compiler }}-${{ matrix.config }}-statistics
 
     steps:
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.10'
-        architecture: 'x64'
+        python-version: '3.x'
+        architecture: x64
 
     - name: Checkout code
       uses: actions/checkout@v4
       with:
-        fetch-depth: 0
+        fetch-depth: 1
         submodules: false
         sparse-checkout: scripts/scan_errors.py
         sparse-checkout-cone-mode: false
@@ -200,8 +199,8 @@ jobs:
       timeout-minutes: 30
       run: |
         ls -lR
-        python3 scripts/scan_errors.py artifacts ${{ github.run_number }}
-        mv artifacts/sl-${{ github.run_number }}.txt ${{ env.statistics-artifact-name }}.log
+        python3 scripts/scan_errors.py artifacts
+        mv artifacts/sl-ic-errors.txt ${{ env.statistics-artifact-name }}.log
 
     - name: Upload regression artifacts
       if: always()
@@ -213,13 +212,13 @@ jobs:
 
 # Code formatting
   CodeFormatting:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
       with:
-        fetch-depth: 0
+        fetch-depth: 1
 
     - name: Install Dependencies
       run: |
@@ -232,7 +231,7 @@ jobs:
 
 # Code Tideness
   ClangTidy:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
     - name: Install Dependencies
@@ -245,19 +244,17 @@ jobs:
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
-        python-version: 3.8
+        python-version: '3.x'
         architecture: x64
 
     - name: Setup Python Packages
-      run: |
-        pip3 install orderedmultidict
-        pip3 install psutil
+      run: pip3 install orderedmultidict psutil
 
     - name: Checkout code
       uses: actions/checkout@v4
       with:
         submodules: recursive
-        fetch-depth: 0
+        fetch-depth: 1
 
     - name: Use ccache
       uses: hendrikmuhs/ccache-action@v1.2

@@ -64,9 +64,31 @@ ClassDefinition* Package::getClassDefinition(std::string_view name) {
   if (itr == m_classDefinitions.end()) {
     return nullptr;
   } else {
-    return (*itr).second;
+    return itr->second;
   }
 }
+
+const ClassDefinition* Package::getClassDefinition(
+    std::string_view name) const {
+  ClassNameClassDefinitionMultiMap::const_iterator itr =
+      m_classDefinitions.find(name);
+  if (itr == m_classDefinitions.end()) {
+    return nullptr;
+  } else {
+    return itr->second;
+  }
+}
+
+const DataType* Package::getDataType(Design* design,
+                                     std::string_view name) const {
+  if (const DataType* const dt = DesignComponent::getDataType(design, name)) {
+    return dt;
+  } else if (const DataType* const dt = getClassDefinition(name)) {
+    return dt;
+  }
+  return nullptr;
+}
+
 void Package::append(Package* package) {
   DesignComponent::append(package);
   for (auto& type : package->m_dataTypes)

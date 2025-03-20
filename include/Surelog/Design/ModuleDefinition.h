@@ -119,6 +119,7 @@ class ModuleDefinition : public DesignComponent, public ClockingBlockHolder {
     return m_subGenScopeArrays;
   }
   std::vector<uhdm::Any*>* getGenStmts() { return m_genStmts; }
+  std::vector<uhdm::Any*>* getGenVars() { return m_genVars; }
   void setPrimitives(uhdm::PrimitiveCollection* primitives) {
     m_subPrimitives = primitives;
   }
@@ -131,6 +132,7 @@ class ModuleDefinition : public DesignComponent, public ClockingBlockHolder {
   void setGenStmts(std::vector<uhdm::Any*>* gen_stmts) {
     m_genStmts = gen_stmts;
   }
+  void setGenVars(std::vector<uhdm::Any*>* gen_vars) { m_genVars = gen_vars; }
   std::string_view getEndLabel() const { return m_endLabel; }
   void setEndLabel(std::string_view endLabel) { m_endLabel = endLabel; }
 
@@ -153,6 +155,7 @@ class ModuleDefinition : public DesignComponent, public ClockingBlockHolder {
   uhdm::PrimitiveArrayCollection* m_subPrimitiveArrays = nullptr;
   uhdm::GenScopeArrayCollection* m_subGenScopeArrays = nullptr;
   std::vector<uhdm::Any*>* m_genStmts = nullptr;
+  std::vector<uhdm::Any*>* m_genVars = nullptr;
 };
 
 };  // namespace SURELOG

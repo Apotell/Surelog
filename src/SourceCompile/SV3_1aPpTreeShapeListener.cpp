@@ -1121,7 +1121,7 @@ void SV3_1aPpTreeShapeListener::enterIfdef_directive(
   item.m_defined = (macroBody != PreprocessFile::MacroNotDefined);
   item.m_type = PreprocessFile::IfElseItem::IFDEF;
   item.m_previousActiveState = m_inActiveBranch;
-  m_pp->getStack().push_back(item);
+  m_pp->getStack().emplace_back(item);
   setCurrentBranchActivity(lineCol.first);
 }
 
@@ -1159,7 +1159,7 @@ void SV3_1aPpTreeShapeListener::enterIfndef_directive(
   item.m_defined = (macroBody != PreprocessFile::MacroNotDefined);
   item.m_type = PreprocessFile::IfElseItem::IFNDEF;
   item.m_previousActiveState = m_inActiveBranch;
-  m_pp->getStack().push_back(item);
+  m_pp->getStack().emplace_back(item);
   setCurrentBranchActivity(lineCol.first);
 }
 
@@ -1198,7 +1198,7 @@ void SV3_1aPpTreeShapeListener::enterElsif_directive(
   item.m_defined =
       (macroBody != PreprocessFile::MacroNotDefined) && (!previousBranchActive);
   item.m_type = PreprocessFile::IfElseItem::ELSIF;
-  m_pp->getStack().push_back(item);
+  m_pp->getStack().emplace_back(item);
   setCurrentBranchActivity(lineCol.first);
 }
 
@@ -1209,7 +1209,7 @@ void SV3_1aPpTreeShapeListener::enterElse_directive(
   bool previousBranchActive = isPreviousBranchActive();
   item.m_defined = !previousBranchActive;
   item.m_type = PreprocessFile::IfElseItem::ELSE;
-  m_pp->getStack().push_back(item);
+  m_pp->getStack().emplace_back(item);
   setCurrentBranchActivity(lineCol.first);
 }
 

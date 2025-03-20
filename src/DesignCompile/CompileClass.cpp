@@ -77,7 +77,7 @@ bool CompileClass::compile(Elaborate elaborate, Reduce reduce) {
   DesignComponent* tmp_container = nullptr;
   while (parent) {
     tmp_container = parent->getContainer();
-    names.push_back(parent->getName());
+    names.emplace_back(parent->getName());
     parent = parent->m_parent;
   }
 
@@ -133,16 +133,16 @@ bool CompileClass::compile(Elaborate elaborate, Reduce reduce) {
   std::vector<FileCNodeId> pack_imports;
   // - Local file imports
   for (auto& import : fC->getObjects(VObjectType::paPackage_import_item)) {
-    pack_imports.push_back(import);
+    pack_imports.emplace_back(import);
   }
   // - Parent container imports
   DesignComponent* container = m_class->getContainer();
   if (container) {
     // FileCNodeId itself(container->getFileContents ()[0],
-    // container->getNodeIds ()[0]); pack_imports.push_back(itself);
+    // container->getNodeIds ()[0]); pack_imports.emplace_back(itself);
     for (auto& import :
          container->getObjects(VObjectType::paPackage_import_item)) {
-      pack_imports.push_back(import);
+      pack_imports.emplace_back(import);
     }
   }
 
@@ -306,13 +306,13 @@ bool CompileClass::compile_properties() {
     NodeId typeSpecId = sig->getTypespecId();
     if (typeSpecId) {
       tps = m_helper.compileTypespec(m_class, fC, typeSpecId, m_compileDesign,
-                                     Reduce::Yes, nullptr, nullptr, false);
+                                     Reduce::Yes, defn, nullptr, false);
     }
     if (tps == nullptr) {
       if (sig->getInterfaceTypeNameId()) {
         tps = m_helper.compileTypespec(
             m_class, fC, sig->getInterfaceTypeNameId(), m_compileDesign,
-            Reduce::Yes, nullptr, nullptr, false);
+            Reduce::Yes, defn, nullptr, false);
       }
     }
 
@@ -626,7 +626,7 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
         td->setName(taskName);
         td->setParent(m_class->getUhdmModel());
         fC->populateCoreMembers(id, id, td);
-        task_func_decls->push_back(td);
+        task_func_decls->emplace_back(td);
       }
 
       for (uhdm::TaskFunc* tf : *m_class->getTaskFuncs()) {
@@ -675,7 +675,7 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
         fd->setName(funcName);
         fd->setParent(m_class->getUhdmModel());
         fC->populateCoreMembers(id, id, fd);
-        task_func_decls->push_back(fd);
+        task_func_decls->emplace_back(fd);
       }
 
       for (uhdm::TaskFunc* tf : *m_class->getTaskFuncs()) {

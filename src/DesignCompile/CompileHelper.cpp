@@ -205,7 +205,7 @@ bool CompileHelper::importPackage(DesignComponent* scope, Design* design,
         uhdm::Parameter* the_p = (uhdm::Parameter*)pclone;
         the_p->setImported(pack_name);
       }
-      parameters->push_back(pclone);
+      parameters->emplace_back(pclone);
       clone->setUhdmParam(pclone);
     }
   }
@@ -236,7 +236,7 @@ bool CompileHelper::importPackage(DesignComponent* scope, Design* design,
     uhdm::ParamAssign* cpass =
         (uhdm::ParamAssign*)uhdm::clone_tree(pass, &elaboratorContext);
     clone->setUhdmParamAssign(cpass);
-    param_assigns->push_back(cpass);
+    param_assigns->emplace_back(cpass);
     uhdm::Any* orig_p = (uhdm::Any*)cpass->getLhs();
     uhdm::Any* pclone =
         orig_p;  // The param_assign clone already cloned the param
@@ -289,9 +289,9 @@ bool CompileHelper::importPackage(DesignComponent* scope, Design* design,
                                                     /*mute errors */ true);
           uhdm::TaskFunc* clone = (uhdm::TaskFunc*)uhdm::clone_tree(
               (uhdm::Any*)func, &elaboratorContext);
-          sfuncs->push_back(clone);
+          sfuncs->emplace_back(clone);
         } else {
-          sfuncs->push_back(func);
+          sfuncs->emplace_back(func);
         }
       }
     }
@@ -452,7 +452,7 @@ bool CompileHelper::compileTfPortList(Procedure* parent, const FileContent* fC,
       NodeId range;
       TfPortItem* param = new TfPortItem(parent, fC, tf_port_item, range, name,
                                          dtype, value, tf_port_direction_type);
-      targetList.push_back(param);
+      targetList.emplace_back(param);
       tf_port_item = fC->Sibling(tf_port_item);
     }
   }
@@ -807,7 +807,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
         econst->setDecompile(value->decompiledValue());
       }
       econst->setSize(value->getSize());
-      econsts->push_back(econst);
+      econsts->emplace_back(econst);
       enum_name_declaration = fC->Sibling(enum_name_declaration);
     }
 
@@ -1080,11 +1080,11 @@ bool CompileHelper::compileScopeBody(Scope* parent, Statement* parentStmt,
         std::vector<SubRoutineArg*> args;
         while (expression) {
           SubRoutineArg* arg = new SubRoutineArg(expression, nullptr);
-          args.push_back(arg);
+          args.emplace_back(arg);
           expression = fC->Sibling(expression);
         }
         std::vector<NodeId> var_chain;
-        var_chain.push_back(function_statement_or_null);
+        var_chain.emplace_back(function_statement_or_null);
         SubRoutineCallStmt* stmt = new SubRoutineCallStmt(
             parent, parentStmt, fC, function_statement_or_null,
             VObjectType::paSubroutine_call_statement, var_chain, "new", args,
@@ -1137,7 +1137,7 @@ bool CompileHelper::compileSubroutine_call(Scope* parent, Statement* parentStmt,
   } else if (fC->Type(base_name) == VObjectType::paImplicit_class_handle) {
     next_name = fC->Sibling(base_name);
     base_name = fC->Child(base_name);
-    var_chain.push_back(base_name);
+    var_chain.emplace_back(base_name);
   } else if (fC->Type(base_name) == VObjectType::paClass_scope) {
     next_name = fC->Sibling(base_name);
     base_name = fC->Child(base_name);
@@ -1148,7 +1148,7 @@ bool CompileHelper::compileSubroutine_call(Scope* parent, Statement* parentStmt,
         base_name = fC->Sibling(base_name);
       }
       if (!base_name) break;
-      var_chain.push_back(base_name);
+      var_chain.emplace_back(base_name);
       base_name = fC->Sibling(base_name);
     }
     static_call = true;
@@ -1165,7 +1165,7 @@ bool CompileHelper::compileSubroutine_call(Scope* parent, Statement* parentStmt,
     if (ntype == VObjectType::paList_of_arguments) {
       break;
     }
-    var_chain.push_back(next_name);
+    var_chain.emplace_back(next_name);
 
     next_name = fC->Sibling(next_name);
   }
@@ -1178,7 +1178,7 @@ bool CompileHelper::compileSubroutine_call(Scope* parent, Statement* parentStmt,
   std::vector<SubRoutineArg*> args;
   while (expression) {
     SubRoutineArg* arg = new SubRoutineArg(expression, nullptr);
-    args.push_back(arg);
+    args.emplace_back(arg);
     expression = fC->Sibling(expression);
   }
 
@@ -2028,7 +2028,7 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
           if (packedDimensions) {
             uhdm::PackedArrayNet* pnets = s.make<uhdm::PackedArrayNet>();
             pnets->setRanges(packedDimensions);
-            pnets->getElements(true)->push_back(stv);
+            pnets->getElements(true)->emplace_back(stv);
             stv->setParent(pnets);
             for (auto r : *packedDimensions) r->setParent(pnets);
             obj = pnets;
@@ -2051,7 +2051,7 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
           if (packedDimensions) {
             uhdm::PackedArrayNet* pnets = s.make<uhdm::PackedArrayNet>();
             pnets->setRanges(packedDimensions);
-            pnets->getElements(true)->push_back(stv);
+            pnets->getElements(true)->emplace_back(stv);
             stv->setParent(pnets);
             for (auto r : *packedDimensions) r->setParent(pnets);
             obj = pnets;
@@ -2125,7 +2125,7 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
         if (packedDimensions) {
           uhdm::PackedArrayNet* pnets = s.make<uhdm::PackedArrayNet>();
           pnets->setRanges(packedDimensions);
-          pnets->getElements(true)->push_back(stv);
+          pnets->getElements(true)->emplace_back(stv);
           stv->setParent(pnets);
           for (auto r : *packedDimensions) r->setParent(pnets);
           obj = pnets;
@@ -2150,7 +2150,7 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
         if (packedDimensions) {
           uhdm::PackedArrayNet* pnets = s.make<uhdm::PackedArrayNet>();
           pnets->setRanges(packedDimensions);
-          pnets->getElements(true)->push_back(stv);
+          pnets->getElements(true)->emplace_back(stv);
           stv->setParent(pnets);
           for (auto r : *packedDimensions) r->setParent(pnets);
           obj = pnets;
@@ -2210,7 +2210,7 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
           if (packedDimensions) {
             uhdm::PackedArrayNet* pnets = s.make<uhdm::PackedArrayNet>();
             pnets->setRanges(packedDimensions);
-            pnets->getElements(true)->push_back(stv);
+            pnets->getElements(true)->emplace_back(stv);
             stv->setParent(pnets);
             for (auto r : *packedDimensions) r->setParent(pnets);
             obj = pnets;
@@ -2237,7 +2237,7 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
           if (packedDimensions) {
             uhdm::PackedArrayNet* pnets = s.make<uhdm::PackedArrayNet>();
             pnets->setRanges(packedDimensions);
-            pnets->getElements(true)->push_back(stv);
+            pnets->getElements(true)->emplace_back(stv);
             stv->setParent(pnets);
             fC->populateCoreMembers(sig->getNetNameId(), sig->getNetNameId(),
                                     pnets);
@@ -2394,6 +2394,7 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
       uhdm::LogicNet* logicn = s.make<uhdm::LogicNet>();
       logicn->setSigned(sig->isSigned());
       logicn->setNetType(UhdmWriter::getVpiNetType(sig->getType()));
+      logicn->setName(fC->SymName(sig->getNetNameId()));
       fC->populateCoreMembers(sig->getNetNameId(), sig->getNetNameId(), logicn);
       if (sig->attributes()) {
         logicn->setAttributes(sig->attributes());
@@ -2617,7 +2618,7 @@ bool CompileHelper::compileAnsiPortDeclaration(DesignComponent* component,
         s->setTypespecId(if_type_name_s);
         component->addPort(s);
         // DO NOT create signals for interfaces:
-        // component->getSignals().push_back(s);
+        // component->getSignals().emplace_back(s);
       } else {
         Signal* s = new Signal(component, fC, id, identifier, if_type_name_s,
                                VObjectType::slNoType, unpackedDimension, false);
@@ -2626,7 +2627,7 @@ bool CompileHelper::compileAnsiPortDeclaration(DesignComponent* component,
         s->setTypespecId(if_type_name_s);
         component->addPort(s);
         // DO NOT create signals for interfaces:
-        // component->getSignals().push_back(s);
+        // component->getSignals().emplace_back(s);
       }
     } else {
       VObjectType dataType = VObjectType::paData_type_or_implicit;
@@ -2841,7 +2842,7 @@ void CompileHelper::compileImportDeclaration(DesignComponent* component,
     import_stmt->setName(package_name);
 
     package_import_item_id = fC->Sibling(package_import_item_id);
-    component->addImportedSymbol(import_stmt);
+    component->addImportTypespec(import_stmt);
   }
 }
 
@@ -2982,8 +2983,12 @@ bool CompileHelper::compileDataDeclaration(
         Signal* sig = new Signal(component, fC, var_decl, signal, sigType,
                                  VObjectType::slNoType, packedDimension,
                                  unpackedDimension, false);
+        if (sigType == VObjectType::paInterface_identifier) {
+          sig->setInterfaceTypespecId(data_type);
+        } else {
+          sig->setTypespecId(data_type);
+        }
         sig->uhdmScopeModel(compileDesign->getSerializer().topScope());
-        sig->setTypespecId(data_type);
         if (is_const) sig->setConst();
         if (var_type) sig->setVar();
         if (portRef) portRef->setLowConn(sig);
@@ -3062,9 +3067,16 @@ n<> u<17> t<Continuous_assign> p<18> c<16> l<4>
       if ((fC->Type(Constant_select) == VObjectType::paConstant_select) &&
           (Ps_or_hierarchical_identifier != Hierarchical_identifier) &&
           (lhs_exp->getUhdmType() == uhdm::UhdmType::HierPath)) {
+        NodeId identifierId = fC->Sibling(Hierarchical_identifier);
+        while (identifierId &&
+               (fC->Type(identifierId) != VObjectType::slStringConst))
+          identifierId = fC->Sibling(identifierId);
+        std::string_view identifierName;
+        if (fC->Type(identifierId) == VObjectType::slStringConst)
+          identifierName = fC->SymName(identifierId);
         if (uhdm::Any* sel = compileSelectExpression(
-                component, fC, fC->Child(Constant_select), "", compileDesign,
-                Reduce::No, lhs_exp, instance, false)) {
+                component, fC, fC->Child(Constant_select), identifierName,
+                compileDesign, Reduce::No, lhs_exp, instance, false)) {
           uhdm::HierPath* path = (uhdm::HierPath*)lhs_exp;
           uhdm::Any* last = path->getPathElems()->back();
           if (last->getUhdmType() == uhdm::UhdmType::RefObj &&
@@ -3078,7 +3090,7 @@ n<> u<17> t<Continuous_assign> p<18> c<16> l<4>
             sel_bs->setFullName(
                 StrCat(last_ro->getFullName(), decompileHelper(sel)));
           }
-          path->getPathElems()->push_back(sel);
+          path->getPathElems()->emplace_back(sel);
           std::string path_name(path->getName());
           path_name += decompileHelper(sel);
           path->setName(path_name);
@@ -3125,7 +3137,7 @@ n<> u<17> t<Continuous_assign> p<18> c<16> l<4>
       lhs_exp->setParent(cassign);
       rhs_exp->setParent(cassign);
       fC->populateCoreMembers(id, List_of_net_assignments, cassign);
-      assigns.push_back(cassign);
+      assigns.emplace_back(cassign);
     }
     Net_assignment = fC->Sibling(Net_assignment);
   }
@@ -3189,21 +3201,44 @@ std::string CompileHelper::decompileHelper(const uhdm::Any* sel) {
 std::pair<std::vector<uhdm::ModuleArray*>, std::vector<uhdm::RefModule*>>
 CompileHelper::compileInstantiation(ModuleDefinition* mod,
                                     const FileContent* fC,
-                                    CompileDesign* compileDesign, NodeId id,
+                                    CompileDesign* compileDesign,
+                                    uhdm::Any* pexpr, NodeId id,
                                     ValuedComponentI* instance) {
   std::pair<std::vector<uhdm::ModuleArray*>, std::vector<uhdm::RefModule*>>
       results;
   uhdm::Serializer& s = compileDesign->getSerializer();
+  Design* const design = compileDesign->getCompiler()->getDesign();
   NodeId moduleName = fC->sl_collect(id, VObjectType::slStringConst);
   const std::string_view libName = fC->getLibrary()->getName();
   const std::string_view mname = fC->SymName(moduleName);
   std::string modName = StrCat(libName, "@", mname);
+  ModuleDefinition* parentModuleDefinition =
+      design->getModuleDefinition(modName);
+  if (parentModuleDefinition == nullptr) parentModuleDefinition = mod;
 
+  uhdm::Scope* parentScope = any_cast<uhdm::Scope>(pexpr);
+  if (parentScope == nullptr) parentScope = mod->getUhdmModel<uhdm::Module>();
+
+  uhdm::ModuleTypespec* tps = nullptr;
   NodeId typespecId = fC->Child(id);
-  uhdm::ModuleTypespec* tps = s.make<uhdm::ModuleTypespec>();
-  tps->setName(fC->SymName(typespecId));
-  fC->populateCoreMembers(typespecId, typespecId, tps);
-  tps->setParent(mod->getUhdmModel());
+  const std::string_view typespecName = fC->SymName(typespecId);
+  if (uhdm::TypespecCollection* const typespecs = parentScope->getTypespecs()) {
+    for (uhdm::Typespec* t : *typespecs) {
+      if (uhdm::ModuleTypespec* const mt = any_cast<uhdm::ModuleTypespec>(t)) {
+        if (mt->getName() == typespecName) {
+          tps = mt;
+          break;
+        }
+      }
+    }
+  }
+
+  if (tps == nullptr) {
+    tps = s.make<uhdm::ModuleTypespec>();
+    tps->setName(typespecName);
+    tps->setParent(parentScope);
+    fC->populateCoreMembers(typespecId, typespecId, tps);
+  }
 
   NodeId hierInstId = fC->sl_collect(id, VObjectType::paHierarchical_instance);
   if (!hierInstId) hierInstId = fC->sl_collect(id, VObjectType::paUdp_instance);
@@ -3230,20 +3265,21 @@ CompileHelper::compileInstantiation(ModuleDefinition* mod,
         mod_array->setElemTypespec(tpsRef);
         mod_array->getElemTypespec()->setActualTypespec(tps);
 
-        compileHighConn(mod, fC, compileDesign, id, mod_array->getPorts(true),
-                        mod_array);
+        compileHighConn(parentModuleDefinition, fC, compileDesign, id,
+                        mod_array->getPorts(true), mod_array);
         fC->populateCoreMembers(identifierId, identifierId, mod_array);
-        results.first.push_back(mod_array);
+        results.first.emplace_back(mod_array);
       }
     } else {
       // Simple instance
       uhdm::RefModule* m = s.make<uhdm::RefModule>();
       m->setName(instName);
       m->setDefName(modName);
-      m->setParent(mod->getUhdmModel());
+      m->setParent(parentScope);
       fC->populateCoreMembers(moduleName, moduleName, m);
-      results.second.push_back(m);
-      compileHighConn(mod, fC, compileDesign, id, m->getPorts(true), m);
+      results.second.emplace_back(m);
+      compileHighConn(parentModuleDefinition, fC, compileDesign, id,
+                      m->getPorts(true), m);
     }
     hierInstId = fC->Sibling(hierInstId);
   }
@@ -3348,13 +3384,13 @@ void CompileHelper::compileUdpInstantiation(ModuleDefinition* mod,
       }
       uhdm::PrimitiveArray* gate_array = s.make<uhdm::UdpArray>();
       gate_array->setRanges(ranges);
-      gate_array->getPrimitives(true)->push_back(gate);
-      mod->getPrimitiveArrays()->push_back(gate_array);
+      gate_array->getPrimitives(true)->emplace_back(gate);
+      mod->getPrimitiveArrays()->emplace_back(gate_array);
     } else {
       if (mod->getPrimitives() == nullptr) {
         mod->setPrimitives(s.makeCollection<uhdm::Primitive>());
       }
-      mod->getPrimitives()->push_back(gate);
+      mod->getPrimitives()->emplace_back(gate);
     }
 
     gate->setName(instName);
@@ -3374,7 +3410,7 @@ void CompileHelper::writePrimTerms(ModuleDefinition* mod, const FileContent* fC,
   uint32_t index = 0;
   while (id) {
     uhdm::PrimTerm* term = s.make<uhdm::PrimTerm>();
-    terms->push_back(term);
+    terms->emplace_back(term);
     NodeId expId = fC->Child(id);
     uhdm::Expr* hconn = (uhdm::Expr*)compileExpression(
         mod, fC, expId, compileDesign, Reduce::No, nullptr);
@@ -3439,16 +3475,16 @@ void CompileHelper::compileGateInstantiation(ModuleDefinition* mod,
           compileRanges(mod, fC, Unpacked_dimension, compileDesign, Reduce::No,
                         nullptr, instance, size, false);
       gate_array->setRanges(ranges);
-      gate_array->getPrimitives(true)->push_back(gate);
+      gate_array->getPrimitives(true)->emplace_back(gate);
       if (mod->getPrimitiveArrays() == nullptr) {
         mod->setPrimitiveArrays(s.makeCollection<uhdm::PrimitiveArray>());
       }
-      mod->getPrimitiveArrays()->push_back(gate_array);
+      mod->getPrimitiveArrays()->emplace_back(gate_array);
     } else {
       if (mod->getPrimitives() == nullptr) {
         mod->setPrimitives(s.makeCollection<uhdm::Primitive>());
       }
-      mod->getPrimitives()->push_back(gate);
+      mod->getPrimitives()->emplace_back(gate);
     }
     gate->setPrimType(vpiGateType);
   } else {
@@ -3464,16 +3500,16 @@ void CompileHelper::compileGateInstantiation(ModuleDefinition* mod,
         gate_array->setRanges(ranges);
       }
       gate->setParent(gate_array);
-      gate_array->getPrimitives(true)->push_back(gate);
+      gate_array->getPrimitives(true)->emplace_back(gate);
       if (mod->getPrimitiveArrays() == nullptr) {
         mod->setPrimitiveArrays(s.makeCollection<uhdm::PrimitiveArray>());
       }
-      mod->getPrimitiveArrays()->push_back(gate_array);
+      mod->getPrimitiveArrays()->emplace_back(gate_array);
     } else {
       if (mod->getPrimitives() == nullptr) {
         mod->setPrimitives(s.makeCollection<uhdm::Primitive>());
       }
-      mod->getPrimitives()->push_back(gate);
+      mod->getPrimitives()->emplace_back(gate);
     }
 
     gate->setPrimType(vpiGateType);
@@ -3567,7 +3603,7 @@ void CompileHelper::compileHighConn(ModuleDefinition* component,
         // UhdmWriter sets the value on the gate if the array has only one
         // element.
         uhdm::ExprCollection* delays = s.makeCollection<uhdm::Expr>();
-        delays->push_back(delay_expr);
+        delays->emplace_back(delay_expr);
       }
       checkForLoops(false);
       Udp_instance = fC->Sibling(Udp_instance);
@@ -3634,7 +3670,7 @@ void CompileHelper::compileHighConn(ModuleDefinition* component,
               uhdm::RefObj* ref = s.make<uhdm::RefObj>();
               fC->populateCoreMembers(sigId, sigId, ref);
               p->setHighConn(ref);
-              ref->setParent(p);
+              ref->setParent(p, true);
               ref->setName(sigName);
 
             } else {
@@ -3661,7 +3697,7 @@ void CompileHelper::compileHighConn(ModuleDefinition* component,
               }
               if (exp != nullptr) {
                 p->setHighConn(exp);
-                exp->setParent(p);
+                exp->setParent(p, true);
               }
             }
           }
@@ -3685,7 +3721,7 @@ void CompileHelper::compileHighConn(ModuleDefinition* component,
             fC->populateCoreMembers(sigId, sigId, ref);
             p->setHighConn(ref);
             ref->setName(sigName);
-            ref->setParent(p);
+            ref->setParent(p, true);
           } else {
             NodeId Hierarchical_identifier = fC->Child(Net_lvalue);
             if (fC->Type(fC->Child(Hierarchical_identifier)) ==
@@ -3701,11 +3737,11 @@ void CompileHelper::compileHighConn(ModuleDefinition* component,
                     component, fC, Hierarchical_identifier, compileDesign,
                     Reduce::No, nullptr, nullptr)) {
               p->setHighConn(exp);
-              exp->setParent(p);
+              exp->setParent(p, true);
             }
             checkForLoops(false);
           }
-          ports->push_back(p);
+          ports->emplace_back(p);
         }
         Net_lvalue = fC->Sibling(Net_lvalue);
         index++;
@@ -3809,29 +3845,32 @@ void CompileHelper::compileHighConn(ModuleDefinition* component,
                   }
                   if (p == nullptr) p = (*ports)[index];
                 }
-              } else {
+              }
+
+              if (p == nullptr) {
                 p = s.make<uhdm::Port>();
                 p->setParent(pexpr);
-                ports->push_back(p);
+                ports->emplace_back(p);
                 p->setName(formalName);
                 fC->populateCoreMembers(formalId, formalId, p);
-                if (!allSignalsConst.empty()) {
-                  auto found = allSignalsConst.find(p->getName());
-                  if (found == allSignalsConst.end()) {
-                    SymbolTable* symbols = m_session->getSymbolTable();
-                    ErrorContainer* errors = m_session->getErrorContainer();
-                    Location loc(fileSystem->toPathId(p->getFile(), symbols),
-                                 p->getStartLine(), p->getStartColumn(),
-                                 symbols->registerSymbol(p->getName()));
-                    errors->addError(ErrorDefinition::ELAB_UNKNOWN_PORT, loc);
-                  }
+              }
+
+              if (!allSignalsConst.empty()) {
+                auto found = allSignalsConst.find(p->getName());
+                if (found == allSignalsConst.end()) {
+                  SymbolTable* symbols = m_session->getSymbolTable();
+                  ErrorContainer* errors = m_session->getErrorContainer();
+                  Location loc(fileSystem->toPathId(p->getFile(), symbols),
+                               p->getStartLine(), p->getStartColumn(),
+                               symbols->registerSymbol(p->getName()));
+                  errors->addError(ErrorDefinition::ELAB_UNKNOWN_PORT, loc);
                 }
               }
 
               uhdm::Operation* op = s.make<uhdm::Operation>();
               op->setOpType(vpiNullOp);
               fC->populateCoreMembers(tmp, tmp, op);
-              op->setParent(p);
+              op->setParent(p, true);
               p->setHighConn(op);
               index++;
               continue;
@@ -3860,11 +3899,34 @@ void CompileHelper::compileHighConn(ModuleDefinition* component,
           while (fC->Type(Expression) == VObjectType::paAttribute_instance)
             Expression = fC->Sibling(Expression);
         }
+
+        uhdm::Port* p = nullptr;
+        if (index < ports->size()) {
+          if (orderedConnection) {
+            formalName = signals[index]->getName();
+            p = (*ports)[index];
+          } else {
+            for (uhdm::Port* pItr : *ports) {
+              if (pItr->getName() == formalName) {
+                p = pItr;
+                break;
+              }
+            }
+            if (p == nullptr) p = (*ports)[index];
+          }
+        }
+
+        if (p == nullptr) {
+          p = s.make<uhdm::Port>();
+          p->setParent(pexpr);
+          ports->emplace_back(p);
+        }
+
         if (Expression) {
           checkForLoops(true);
           hexpr = (uhdm::Expr*)compileExpression(component, fC, Expression,
-                                                 compileDesign, Reduce::Yes,
-                                                 nullptr, nullptr);
+                                                 compileDesign, Reduce::Yes, p,
+                                                 nullptr);
           checkForLoops(false);
           NodeId Primary = fC->Child(Expression);
           NodeId Primary_literal = fC->Child(Primary);
@@ -3881,9 +3943,8 @@ void CompileHelper::compileHighConn(ModuleDefinition* component,
             }
           }
         }
-        if (modPort) {
-          if (fC->Type(sigId) == VObjectType::slStringConst)
-            sigName = fC->SymName(sigId);
+        if (modPort && (fC->Type(sigId) == VObjectType::slStringConst)) {
+          sigName = fC->SymName(sigId);
         }
         std::string baseName = sigName;
         std::string selectName;
@@ -3894,39 +3955,18 @@ void CompileHelper::compileHighConn(ModuleDefinition* component,
           }
         }
 
-        uhdm::Port* p = nullptr;
-        if (index < ports->size()) {
-          if (orderedConnection) {
-            formalName = signals[index]->getName();
-            p = (*ports)[index];
-          } else {
-            for (uhdm::Port* pItr : *ports) {
-              if (pItr->getName() == formalName) {
-                p = pItr;
-                break;
-              }
-            }
-            if (p == nullptr) p = (*ports)[index];
-          }
-        } else {
-          p = s.make<uhdm::Port>();
-          p->setParent(pexpr);
-          ports->push_back(p);
-        }
-
         if ((!sigName.empty()) && (hexpr == nullptr)) {
           uhdm::RefObj* ref = s.make<uhdm::RefObj>();
           fC->populateCoreMembers(sigId, sigId, ref);
           ref->setName(sigName);
-
-          ref->setParent(p);
+          ref->setParent(p, true);
           p->setHighConn(ref);
 
         } else if (hexpr != nullptr) {
           p->setHighConn(hexpr);
           hexpr->setParent(p);
           if (hexpr->getUhdmType() == uhdm::UhdmType::RefObj) {
-            ((uhdm::RefObj*)hexpr)->setParent(p);
+            ((uhdm::RefObj*)hexpr)->setParent(p, true);
           }
         }
         p->setName(formalName);
@@ -3968,7 +4008,7 @@ void CompileHelper::compileHighConn(ModuleDefinition* component,
             uhdm::Port* pp = nullptr;
             for (uhdm::Port* p : *ports) {
               if (p->getName() == s1->getName()) {
-                newPorts->push_back(p);
+                newPorts->emplace_back(p);
                 found = true;
                 pp = p;
                 break;
@@ -3983,7 +4023,7 @@ void CompileHelper::compileHighConn(ModuleDefinition* component,
               p->setStartColumn(wildcardColumnNumber);
               p->setEndLine(wildcardLineNumber);
               p->setEndColumn(wildcardColumnNumber + 1);
-              newPorts->push_back(p);
+              newPorts->emplace_back(p);
               pp = p;
             }
             if (pp->getHighConn() == nullptr) {
@@ -4012,7 +4052,7 @@ void CompileHelper::compileHighConn(ModuleDefinition* component,
               for (uhdm::Port* pt : *ports) {
                 if (pt->getName() == sigName) {
                   p = pt;
-                  newPorts->push_back(p);
+                  newPorts->emplace_back(p);
                   break;
                 }
               }
@@ -4031,7 +4071,7 @@ void CompileHelper::compileHighConn(ModuleDefinition* component,
             } else {
               for (uhdm::Port* pt : *ports) {
                 if (pt->getName() == sigName) {
-                  newPorts->push_back(pt);
+                  newPorts->emplace_back(pt);
                   break;
                 }
               }
@@ -4060,13 +4100,15 @@ void CompileHelper::compileHighConn(ModuleDefinition* component,
   }
 }
 
-uhdm::Initial* CompileHelper::compileInitialBlock(
-    DesignComponent* component, const FileContent* fC, NodeId initial_construct,
-    CompileDesign* compileDesign) {
+uhdm::Initial* CompileHelper::compileInitialBlock(DesignComponent* component,
+                                                  const FileContent* fC,
+                                                  NodeId initial_construct,
+                                                  CompileDesign* compileDesign,
+                                                  uhdm::Any* pstmt) {
   uhdm::Serializer& s = compileDesign->getSerializer();
   compileDesign->lockSerializer();
   uhdm::Initial* init = s.make<uhdm::Initial>();
-  init->setParent(component->getUhdmModel());
+  init->setParent(pstmt);
   fC->populateCoreMembers(initial_construct, initial_construct, init);
   NodeId Statement_or_null = fC->Child(initial_construct);
   if (uhdm::AnyCollection* stmts = compileStmt(
@@ -4077,12 +4119,15 @@ uhdm::Initial* CompileHelper::compileInitialBlock(
   return init;
 }
 
-uhdm::FinalStmt* CompileHelper::compileFinalBlock(
-    DesignComponent* component, const FileContent* fC, NodeId final_construct,
-    CompileDesign* compileDesign) {
+uhdm::FinalStmt* CompileHelper::compileFinalBlock(DesignComponent* component,
+                                                  const FileContent* fC,
+                                                  NodeId final_construct,
+                                                  CompileDesign* compileDesign,
+                                                  uhdm::Any* pstmt) {
   uhdm::Serializer& s = compileDesign->getSerializer();
   compileDesign->lockSerializer();
   uhdm::FinalStmt* final = s.make<uhdm::FinalStmt>();
+  final->setParent(pstmt);
   fC->populateCoreMembers(final_construct, final_construct, final);
   NodeId Statement_or_null = fC->Child(final_construct);
   if (uhdm::AnyCollection* stmts = compileStmt(
@@ -4216,11 +4261,12 @@ uhdm::Always* CompileHelper::compileAlwaysBlock(DesignComponent* component,
                                                 const FileContent* fC,
                                                 NodeId id,
                                                 CompileDesign* compileDesign,
+                                                uhdm::Any* pstmt,
                                                 ValuedComponentI* instance) {
   uhdm::Serializer& s = compileDesign->getSerializer();
   compileDesign->lockSerializer();
   uhdm::Always* always = s.make<uhdm::Always>();
-  always->setParent(component->getUhdmModel());
+  always->setParent(pstmt);
   NodeId always_keyword = fC->Child(id);
   switch (fC->Type(always_keyword)) {
     case VObjectType::paALWAYS:
@@ -4514,7 +4560,7 @@ uhdm::Any* CompileHelper::defaultPatternAssignment(
                   uhdm::ArrayExpr* array = s.make<uhdm::ArrayExpr>();
                   uhdm::ExprCollection* exprs = array->getExprs(true);
                   for (uint32_t i = 0; i < size; i++) {
-                    exprs->push_back(c);
+                    exprs->emplace_back(c);
                   }
                   result = array;
                 }
@@ -4600,7 +4646,7 @@ bool CompileHelper::compileParameterDeclaration(
       if (localParam) {
         p->setLocalParam(true);
       }
-      parameters->push_back(p);
+      parameters->emplace_back(p);
       Parameter* param = new Parameter(fC, typeNameId, fC->SymName(typeNameId),
                                        ntype, port_param);
       param->setTypeParam();
@@ -4639,7 +4685,7 @@ bool CompileHelper::compileParameterDeclaration(
       if (localParam) {
         p->setLocalParam(true);
       }
-      parameters->push_back(p);
+      parameters->emplace_back(p);
       Parameter* param = new Parameter(fC, Identifier, fC->SymName(Identifier),
                                        Constant_param_expression, port_param);
       param->setTypeParam();
@@ -4842,7 +4888,7 @@ bool CompileHelper::compileParameterDeclaration(
       if (localParam) {
         param->setLocalParam(true);
       }
-      parameters->push_back(param);
+      parameters->emplace_back(param);
 
       ParamAssign* assign =
           new ParamAssign(fC, name, value, isMultiDimension, port_param);
@@ -4851,7 +4897,7 @@ bool CompileHelper::compileParameterDeclaration(
       component->addParamAssign(assign);
       param_assign->setParent(pany);
       fC->populateCoreMembers(Param_assignment, Param_assignment, param_assign);
-      param_assigns->push_back(param_assign);
+      param_assigns->emplace_back(param_assign);
       if (param) {
         param_assign->setLhs(param);
         param->setParent(param_assign);
@@ -4879,7 +4925,7 @@ bool CompileHelper::compileParameterDeclaration(
                 s.makeCollection<uhdm::ParamAssign>());
             orig_param_assigns = component->getOrigParam_assigns();
           }
-          orig_param_assigns->push_back(param_assign);
+          orig_param_assigns->emplace_back(param_assign);
         }
 
         uhdm::Expr* rhs = (uhdm::Expr*)compileExpression(
@@ -4967,7 +5013,7 @@ bool CompileHelper::compileParameterDeclaration(
                   r->setParent(its);
                   fC->populateCoreMembers(Param_assignment, Param_assignment,
                                           r);
-                  its->getRanges(true)->push_back(r);
+                  its->getRanges(true)->emplace_back(r);
 
                   ts = its;
                   p->setTypespec(ts);
@@ -5399,13 +5445,13 @@ uhdm::Any* CompileHelper::compileTfCall(DesignComponent* component,
             uhdm::ParamAssign* pass = s.make<uhdm::ParamAssign>();
             pass->setLhs(p);
             if (actual) pass->setRhs(actual);
-            passigns->push_back(pass);
+            passigns->emplace_back(pass);
           }
           uhdm::ContAssign* cts = s.make<uhdm::ContAssign>();
           uhdm::ContAssignCollection* assigns = modTmp->getContAssigns(true);
           const uhdm::Expr* exp = stmt->getExpr();
           cts->setRhs((uhdm::Expr*)exp);
-          assigns->push_back(cts);
+          assigns->emplace_back(cts);
 
           if (uhdm::ElaboratorContext* elaboratorContext =
                   new uhdm::ElaboratorContext(&s, false)) {
@@ -5424,7 +5470,7 @@ uhdm::Any* CompileHelper::compileTfCall(DesignComponent* component,
                   nullptr, false)) {
             uhdm::ExprCollection* exprs = let->getArguments(true);
             for (auto ex : *arguments) {
-              exprs->push_back((uhdm::Expr*)ex);
+              exprs->emplace_back((uhdm::Expr*)ex);
             }
           }
           return let;
@@ -5494,7 +5540,7 @@ uhdm::AnyCollection* CompileHelper::compileTfCallArguments(
       if (exp) {
         if (exp->getParent() == nullptr) exp->setParent(call);
         args.emplace(fC->SymName(argument), exp);
-        argOrder.push_back(exp);
+        argOrder.emplace_back(exp);
       }
       argumentNode = fC->Sibling(argumentNode);
     } else if (((fC->Type(argument) == VObjectType::paUnary_Tilda) ||
@@ -5507,7 +5553,7 @@ uhdm::AnyCollection* CompileHelper::compileTfCallArguments(
                             call, instance, muteErrors);
       if (exp) {
         if (exp->getParent() == nullptr) exp->setParent(call);
-        arguments->push_back(exp);
+        arguments->emplace_back(exp);
       }
       argumentNode = fC->Sibling(argumentNode);
     } else {
@@ -5517,7 +5563,7 @@ uhdm::AnyCollection* CompileHelper::compileTfCallArguments(
         if (uhdm::Any* exp =
                 compileExpression(component, fC, Expression, compileDesign,
                                   reduce, call, instance, muteErrors)) {
-          arguments->push_back(exp);
+          arguments->emplace_back(exp);
           exp->setParent(call);
         }
       } else {
@@ -5528,7 +5574,7 @@ uhdm::AnyCollection* CompileHelper::compileTfCallArguments(
         c->setConstType(vpiIntConst);
         c->setParent(call);
         fC->populateCoreMembers(argumentNode, argumentNode, c);
-        arguments->push_back(c);
+        arguments->emplace_back(c);
       }
     }
     argumentNode = fC->Sibling(argumentNode);
@@ -5538,7 +5584,7 @@ uhdm::AnyCollection* CompileHelper::compileTfCallArguments(
       if (uhdm::Any* exp =
               compileExpression(component, fC, clocking, compileDesign, reduce,
                                 call, instance, muteErrors)) {
-        arguments->push_back(exp);
+        arguments->emplace_back(exp);
         exp->setParent(call);
       }
     }
@@ -5549,7 +5595,7 @@ uhdm::AnyCollection* CompileHelper::compileTfCallArguments(
         const std::string_view name = decl->getName();
         std::map<std::string, uhdm::Any*>::iterator itr = args.find(name);
         if (itr != args.end()) {
-          arguments->push_back((*itr).second);
+          arguments->emplace_back((*itr).second);
         } else if (m_elaborate == Elaborate::Yes) {
           if (const uhdm::Constant* const def =
                   decl->getExpr<uhdm::Constant>()) {
@@ -5560,13 +5606,13 @@ uhdm::AnyCollection* CompileHelper::compileTfCallArguments(
             c->setConstType(def->getConstType());
             c->setParent(call);
             fC->populateCoreMembers(InvalidNodeId, InvalidNodeId, c);
-            arguments->push_back(c);
+            arguments->emplace_back(c);
           }
         }
       }
     } else {
       for (uhdm::Any* exp : argOrder) {
-        arguments->push_back(exp);
+        arguments->emplace_back(exp);
       }
     }
   }
@@ -5727,7 +5773,7 @@ uhdm::AttributeCollection* CompileHelper::compileAttributes(
       attribute->setName(name);
       attribute->setParent(pexpr);
       fC->populateCoreMembers(Attr_spec, Attr_spec, attribute);
-      results->push_back(attribute);
+      results->emplace_back(attribute);
       if (NodeId Constant_expression = fC->Sibling(Attr_name)) {
         if (uhdm::Expr* expr = (uhdm::Expr*)compileExpression(
                 component, fC, Constant_expression, compileDesign, Reduce::No,
@@ -5969,7 +6015,7 @@ uhdm::ClockingBlock* CompileHelper::compileClockingBlock(
               io->setExpr(exp);
             }
           }
-          ios->push_back(io);
+          ios->emplace_back(io);
           const std::string_view sigName = fC->SymName(Identifier);
           io->setName(sigName);
           if (direction == VObjectType::paClockingDir_Input) {
@@ -6382,7 +6428,7 @@ uhdm::Expr* CompileHelper::expandPatternAssignment(
           array->setRanges(atps->getRanges());
           array->setElements(vars);
           for (uint32_t i = 0; i < size; i++) {
-            vars->push_back(s.make<uhdm::EnumVar>());
+            vars->emplace_back(s.make<uhdm::EnumVar>());
           }
           result = array;
         }
@@ -6511,7 +6557,7 @@ void CompileHelper::setRange(uhdm::Constant* c, Value* val,
     c->setTypespec(tpsRef);
     uhdm::Range* r = s.make<uhdm::Range>();
     r->setParent(tps);
-    tps->getRanges(true)->push_back(r);
+    tps->getRanges(true)->emplace_back(r);
     uhdm::Constant* lc = s.make<uhdm::Constant>();
     lc->setValue("UINT:" + std::to_string(lr));
     r->setLeftExpr(lc);
@@ -6551,7 +6597,7 @@ void CompileHelper::compileLetDeclaration(DesignComponent* component,
       formal->setStartColumn(io->getStartColumn());
       formal->setEndLine(io->getEndLine());
       formal->setEndColumn(io->getEndColumn());
-      args->push_back(formal);
+      args->emplace_back(formal);
     }
   }
 
@@ -6559,7 +6605,7 @@ void CompileHelper::compileLetDeclaration(DesignComponent* component,
   if (uhdm::Expr* exp = (uhdm::Expr*)compileExpression(
           component, fC, Expression, compileDesign, Reduce::No, decl, nullptr,
           false)) {
-    decl->getExprs(true)->push_back(exp);
+    decl->getExprs(true)->emplace_back(exp);
 
     stmt = new LetStmt(decl, decl->getSeqFormalDecls(), exp);
   } else {
@@ -6591,7 +6637,7 @@ bool CompileHelper::elaborationSystemTask(DesignComponent* component,
   scall->setName(name);
   uhdm::AnyCollection* args = scall->getArguments(true);
   uhdm::Constant* c = s.make<uhdm::Constant>();
-  args->push_back(c);
+  args->emplace_back(c);
   c->setValue(std::string("STRING:") + std::string(text));
   c->setDecompile(text);
   c->setConstType(vpiStringConst);

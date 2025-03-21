@@ -336,7 +336,7 @@ void ModuleInstance::overrideParentChild(ModuleInstance* parent,
       uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
       rt->setParent(p);
       p->setTypespec(rt);
-      rt->setActualTypespec(ts);
+      rt->setActual(ts);
       uhdm::ParamAssign* pass = s.make<uhdm::ParamAssign>();
       pass->setLhs(p);
       uhdm::Constant* c = s.make<uhdm::Constant>();

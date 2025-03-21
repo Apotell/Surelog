@@ -174,7 +174,7 @@ bool ElaborationStep::bindTypedefs_() {
                     any_cast<uhdm::TypedefTypespec>(tpclone)) {
               uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
               rt->setParent(tpclone);
-              rt->setActualTypespec(tps);
+              rt->setActual(tps);
               tt->setTypedefAlias(rt);
             }
           }
@@ -186,7 +186,7 @@ bool ElaborationStep::bindTypedefs_() {
             if (tpclone != nullptr) {
               uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
               rt->setParent(unpacked_clone);
-              rt->setActualTypespec(tpclone);
+              rt->setActual(tpclone);
               unpacked_clone->setElemTypespec(rt);
             }
             tpclone = unpacked_clone;
@@ -303,10 +303,10 @@ static void replace(
     std::map<const uhdm::Typespec*, const uhdm::Typespec*>& typespecSwapMap) {
   if (orig_rt) {
     if (const uhdm::UnsupportedTypespec* orig_ut =
-            orig_rt->getActualTypespec<uhdm::UnsupportedTypespec>()) {
+            orig_rt->getActual<uhdm::UnsupportedTypespec>()) {
       auto itr = typespecSwapMap.find(orig_ut);
       if (itr != typespecSwapMap.end()) {
-        const_cast<uhdm::RefTypespec*>(orig_rt)->setActualTypespec(
+        const_cast<uhdm::RefTypespec*>(orig_rt)->setActual(
             const_cast<uhdm::Typespec*>(itr->second));
       }
     }
@@ -1389,11 +1389,11 @@ uhdm::Typespec* ElaborationStep::elabTypeParameter_(DesignComponent* component,
   bool type_param = false;
   if (uparam->getUhdmType() == uhdm::UhdmType::TypeParameter) {
     if (uhdm::RefTypespec* rt = ((uhdm::TypeParameter*)uparam)->getTypespec())
-      spec = rt->getActualTypespec();
+      spec = rt->getActual();
     type_param = true;
   } else {
     if (uhdm::RefTypespec* rt = ((uhdm::Parameter*)uparam)->getTypespec())
-      spec = rt->getActualTypespec();
+      spec = rt->getActual();
   }
 
   const std::string_view pname = sit->getName();
@@ -1418,11 +1418,11 @@ uhdm::Typespec* ElaborationStep::elabTypeParameter_(DesignComponent* component,
       if (type_param) {
         if (uhdm::RefTypespec* rt =
                 ((uhdm::TypeParameter*)uparam)->getTypespec()) {
-          override_spec = rt->getActualTypespec();
+          override_spec = rt->getActual();
         }
       } else {
         if (uhdm::RefTypespec* rt = ((uhdm::Parameter*)uparam)->getTypespec()) {
-          override_spec = rt->getActualTypespec();
+          override_spec = rt->getActual();
         }
       }
 
@@ -1442,7 +1442,7 @@ uhdm::Typespec* ElaborationStep::elabTypeParameter_(DesignComponent* component,
             override_specRef->setParent(tparam);
             tparam->setTypespec(override_specRef);
           }
-          tparam->getTypespec()->setActualTypespec(override_spec);
+          tparam->getTypespec()->setActual(override_spec);
         } else {
           uhdm::Parameter* tparam = (uhdm::Parameter*)uparam;
           if (tparam->getTypespec() == nullptr) {
@@ -1450,7 +1450,7 @@ uhdm::Typespec* ElaborationStep::elabTypeParameter_(DesignComponent* component,
             override_specRef->setParent(tparam);
             tparam->setTypespec(override_specRef);
           }
-          tparam->getTypespec()->setActualTypespec(override_spec);
+          tparam->getTypespec()->setActual(override_spec);
         }
         spec = override_spec;
         spec->setParent(uparam);
@@ -1489,7 +1489,7 @@ uhdm::Any* ElaborationStep::makeVar_(
         if (uhdm::Typespec* ts = en->getTypespec()) {
           uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
           tsRef->setParent(stv);
-          tsRef->setActualTypespec(ts);
+          tsRef->setActual(ts);
           stv->setTypespec(tsRef);
         }
         if (assignExp != nullptr) {
@@ -1506,7 +1506,7 @@ uhdm::Any* ElaborationStep::makeVar_(
         if (uhdm::Typespec* ts = st->getTypespec()) {
           uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
           tsRef->setParent(stv);
-          tsRef->setActualTypespec(ts);
+          tsRef->setActual(ts);
           stv->setTypespec(tsRef);
         }
         if (assignExp != nullptr) {
@@ -1523,7 +1523,7 @@ uhdm::Any* ElaborationStep::makeVar_(
         if (uhdm::Typespec* ts = un->getTypespec()) {
           uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
           tsRef->setParent(stv);
-          tsRef->setActualTypespec(ts);
+          tsRef->setActual(ts);
           stv->setTypespec(tsRef);
         }
         if (assignExp != nullptr) {
@@ -1556,7 +1556,7 @@ uhdm::Any* ElaborationStep::makeVar_(
         uhdm::ArrayVar* array_var = s.make<uhdm::ArrayVar>();
         uhdm::RefTypespec* tmpRef = s.make<uhdm::RefTypespec>();
         tmpRef->setParent(array_var);
-        tmpRef->setActualTypespec(s.make<uhdm::ArrayTypespec>());
+        tmpRef->setActual(s.make<uhdm::ArrayTypespec>());
         array_var->setTypespec(tmpRef);
         array_var->setArrayType(vpiStaticArray);
         array_var->setRandType(vpiNotRand);
@@ -1589,7 +1589,7 @@ uhdm::Any* ElaborationStep::makeVar_(
         tpsRef->setParent(var);
         var->setTypespec(tpsRef);
       }
-      var->getTypespec()->setActualTypespec(tps);
+      var->getTypespec()->setActual(tps);
       if (assignExp != nullptr) {
         var->setExpr(assignExp);
         assignExp->setParent(var);
@@ -1613,7 +1613,7 @@ uhdm::Any* ElaborationStep::makeVar_(
         specRef->setParent(var);
         var->setTypespec(specRef);
       }
-      var->getTypespec()->setActualTypespec(spec);
+      var->getTypespec()->setActual(spec);
       if (assignExp != nullptr) {
         var->setExpr(assignExp);
         assignExp->setParent(var);
@@ -1626,7 +1626,7 @@ uhdm::Any* ElaborationStep::makeVar_(
       uhdm::ClassVar* stv = s.make<uhdm::ClassVar>();
       uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
       tpsRef->setParent(stv);
-      tpsRef->setActualTypespec(tps);
+      tpsRef->setActual(tps);
       stv->setTypespec(tpsRef);
       if (assignExp != nullptr) {
         stv->setExpr(assignExp);
@@ -1730,7 +1730,7 @@ uhdm::Any* ElaborationStep::makeVar_(
           rt->setParent(obj);
           obj->setTypespec(rt);
         }
-        obj->getTypespec()->setActualTypespec(tps);
+        obj->getTypespec()->setActual(tps);
         tps->setParent(obj);
       }
       obj->setName(signame);
@@ -1745,7 +1745,7 @@ uhdm::Any* ElaborationStep::makeVar_(
       tps = s.make<uhdm::ShortIntTypespec>();
       uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
       tpsRef->setParent(int_var);
-      tpsRef->setActualTypespec(tps);
+      tpsRef->setActual(tps);
       int_var->setTypespec(tpsRef);
     } else if (subnettype == VObjectType::paIntegerAtomType_Int) {
       uhdm::IntVar* int_var = s.make<uhdm::IntVar>();
@@ -1753,7 +1753,7 @@ uhdm::Any* ElaborationStep::makeVar_(
       tps = s.make<uhdm::IntTypespec>();
       uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
       tpsRef->setParent(int_var);
-      tpsRef->setActualTypespec(tps);
+      tpsRef->setActual(tps);
       int_var->setTypespec(tpsRef);
     } else if (subnettype == VObjectType::paIntegerAtomType_Integer) {
       uhdm::IntegerVar* int_var = s.make<uhdm::IntegerVar>();
@@ -1761,7 +1761,7 @@ uhdm::Any* ElaborationStep::makeVar_(
       tps = s.make<uhdm::IntegerTypespec>();
       uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
       tpsRef->setParent(int_var);
-      tpsRef->setActualTypespec(tps);
+      tpsRef->setActual(tps);
       int_var->setTypespec(tpsRef);
     } else if (subnettype == VObjectType::paIntegerAtomType_LongInt) {
       uhdm::LongIntVar* int_var = s.make<uhdm::LongIntVar>();
@@ -1769,7 +1769,7 @@ uhdm::Any* ElaborationStep::makeVar_(
       tps = s.make<uhdm::LongIntTypespec>();
       uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
       tpsRef->setParent(int_var);
-      tpsRef->setActualTypespec(tps);
+      tpsRef->setActual(tps);
       int_var->setTypespec(tpsRef);
     } else if (subnettype == VObjectType::paIntegerAtomType_Time) {
       uhdm::TimeVar* int_var = s.make<uhdm::TimeVar>();
@@ -1781,7 +1781,7 @@ uhdm::Any* ElaborationStep::makeVar_(
       tps = btps;
       uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
       tpsRef->setParent(int_var);
-      tpsRef->setActualTypespec(tps);
+      tpsRef->setActual(tps);
       int_var->setTypespec(tpsRef);
       int_var->setRanges(packedDimensions);
       var = int_var;
@@ -1791,7 +1791,7 @@ uhdm::Any* ElaborationStep::makeVar_(
       tps = btps;
       uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
       tpsRef->setParent(int_var);
-      tpsRef->setActualTypespec(tps);
+      tpsRef->setActual(tps);
       int_var->setTypespec(tpsRef);
       var = int_var;
     } else if (subnettype == VObjectType::paNonIntType_ShortReal) {
@@ -1823,7 +1823,7 @@ uhdm::Any* ElaborationStep::makeVar_(
       tps = ltps;
       uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
       tpsRef->setParent(logicv);
-      tpsRef->setActualTypespec(tps);
+      tpsRef->setActual(tps);
       logicv->setTypespec(tpsRef);
       var = logicv;
     } else if (subnettype == VObjectType::paEvent_type) {
@@ -1883,17 +1883,17 @@ uhdm::Any* ElaborationStep::makeVar_(
           associative = true;
           const uhdm::Typespec* tp = nullptr;
           if (const uhdm::RefTypespec* rt = rhs->getTypespec()) {
-            tp = rt->getActualTypespec();
+            tp = rt->getActual();
           }
           uhdm::ArrayTypespec* taps = s.make<uhdm::ArrayTypespec>();
           uhdm::RefTypespec* tpRef = s.make<uhdm::RefTypespec>();
           tpRef->setParent(taps);
-          tpRef->setActualTypespec(const_cast<uhdm::Typespec*>(tp));
+          tpRef->setActual(const_cast<uhdm::Typespec*>(tp));
           taps->setIndexTypespec(tpRef);
 
           uhdm::RefTypespec* taps_ref = s.make<uhdm::RefTypespec>();
           taps_ref->setParent(array_var);
-          taps_ref->setActualTypespec(taps);
+          taps_ref->setActual(taps);
           array_var->setTypespec(taps_ref);
           unpackedDimensions->erase(itr);
           break;
@@ -1914,7 +1914,7 @@ uhdm::Any* ElaborationStep::makeVar_(
           uhdm::ArrayTypespec* tps = s.make<uhdm::ArrayTypespec>();
           uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
           tpsRef->setParent(array_var);
-          tpsRef->setActualTypespec(tps);
+          tpsRef->setActual(tps);
           array_var->setTypespec(tpsRef);
 
           if (associative)
@@ -1928,7 +1928,7 @@ uhdm::Any* ElaborationStep::makeVar_(
           uhdm::ArrayTypespec* subtps = s.make<uhdm::ArrayTypespec>();
           tpsRef = s.make<uhdm::RefTypespec>();
           tpsRef->setParent(tps);
-          tpsRef->setActualTypespec(subtps);
+          tpsRef->setActual(subtps);
           tps->setElemTypespec(tpsRef);
 
           subtps->setRanges(unpackedDimensions);
@@ -1937,7 +1937,7 @@ uhdm::Any* ElaborationStep::makeVar_(
               uhdm::IntTypespec* ts = s.make<uhdm::IntTypespec>();
               tpsRef = s.make<uhdm::RefTypespec>();
               tpsRef->setParent(subtps);
-              tpsRef->setActualTypespec(ts);
+              tpsRef->setActual(ts);
               subtps->setElemTypespec(tpsRef);
               break;
             }
@@ -1945,7 +1945,7 @@ uhdm::Any* ElaborationStep::makeVar_(
               uhdm::IntegerTypespec* ts = s.make<uhdm::IntegerTypespec>();
               tpsRef = s.make<uhdm::RefTypespec>();
               tpsRef->setParent(subtps);
-              tpsRef->setActualTypespec(ts);
+              tpsRef->setActual(ts);
               subtps->setElemTypespec(tpsRef);
               break;
             }
@@ -1953,7 +1953,7 @@ uhdm::Any* ElaborationStep::makeVar_(
               uhdm::LogicTypespec* ts = s.make<uhdm::LogicTypespec>();
               tpsRef = s.make<uhdm::RefTypespec>();
               tpsRef->setParent(subtps);
-              tpsRef->setActualTypespec(ts);
+              tpsRef->setActual(ts);
               subtps->setElemTypespec(tpsRef);
               break;
             }
@@ -1961,7 +1961,7 @@ uhdm::Any* ElaborationStep::makeVar_(
               uhdm::LongIntTypespec* ts = s.make<uhdm::LongIntTypespec>();
               tpsRef = s.make<uhdm::RefTypespec>();
               tpsRef->setParent(subtps);
-              tpsRef->setActualTypespec(ts);
+              tpsRef->setActual(ts);
               subtps->setElemTypespec(tpsRef);
               break;
             }
@@ -1969,7 +1969,7 @@ uhdm::Any* ElaborationStep::makeVar_(
               uhdm::ShortIntTypespec* ts = s.make<uhdm::ShortIntTypespec>();
               tpsRef = s.make<uhdm::RefTypespec>();
               tpsRef->setParent(subtps);
-              tpsRef->setActualTypespec(ts);
+              tpsRef->setActual(ts);
               subtps->setElemTypespec(tpsRef);
               break;
             }
@@ -1977,7 +1977,7 @@ uhdm::Any* ElaborationStep::makeVar_(
               uhdm::ByteTypespec* ts = s.make<uhdm::ByteTypespec>();
               tpsRef = s.make<uhdm::RefTypespec>();
               tpsRef->setParent(subtps);
-              tpsRef->setActualTypespec(ts);
+              tpsRef->setActual(ts);
               subtps->setElemTypespec(tpsRef);
               break;
             }
@@ -1985,7 +1985,7 @@ uhdm::Any* ElaborationStep::makeVar_(
               uhdm::BitTypespec* ts = s.make<uhdm::BitTypespec>();
               tpsRef = s.make<uhdm::RefTypespec>();
               tpsRef->setParent(subtps);
-              tpsRef->setActualTypespec(ts);
+              tpsRef->setActual(ts);
               subtps->setElemTypespec(tpsRef);
               break;
             }
@@ -1993,7 +1993,7 @@ uhdm::Any* ElaborationStep::makeVar_(
               uhdm::StringTypespec* ts = s.make<uhdm::StringTypespec>();
               tpsRef = s.make<uhdm::RefTypespec>();
               tpsRef->setParent(subtps);
-              tpsRef->setActualTypespec(ts);
+              tpsRef->setActual(ts);
               subtps->setElemTypespec(tpsRef);
               break;
             }
@@ -2002,7 +2002,7 @@ uhdm::Any* ElaborationStep::makeVar_(
                   s.make<uhdm::UnsupportedTypespec>();
               tpsRef = s.make<uhdm::RefTypespec>();
               tpsRef->setParent(subtps);
-              tpsRef->setActualTypespec(ts);
+              tpsRef->setActual(ts);
               subtps->setElemTypespec(tpsRef);
               break;
             }
@@ -2035,7 +2035,7 @@ uhdm::Any* ElaborationStep::makeVar_(
     if (array_var->getTypespec() == nullptr) {
       uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
       tsRef->setParent(array_var);
-      tsRef->setActualTypespec(s.make<uhdm::ArrayTypespec>());
+      tsRef->setActual(s.make<uhdm::ArrayTypespec>());
       array_var->setTypespec(tsRef);
     }
     array_var->setExpr(assignExp);
@@ -2068,7 +2068,7 @@ uhdm::Any* ElaborationStep::makeVar_(
         if (tp->getUhdmType() == uhdm::UhdmType::PackedArrayTypespec) {
           uhdm::PackedArrayTypespec* ptp = (uhdm::PackedArrayTypespec*)tp;
           if (const uhdm::RefTypespec* ert = ptp->getElemTypespec()) {
-            tp = ert->getActualTypespec();
+            tp = ert->getActual();
           }
           if (tp == nullptr) tp = tps;
         }

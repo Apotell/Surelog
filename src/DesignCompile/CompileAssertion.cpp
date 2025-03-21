@@ -476,7 +476,7 @@ uhdm::PropertyDecl* CompileHelper::compilePropertyDeclaration(
       prop_port_decl->setName(fC->SymName(Port_name));
       if (tps != nullptr) {
         uhdm::RefTypespec* rtps = s.make<uhdm::RefTypespec>();
-        rtps->setActualTypespec(tps);
+        rtps->setActual(tps);
         rtps->setName(fC->SymName(Port_name));
         prop_port_decl->setTypespec(rtps);
         rtps->setParent(prop_port_decl);
@@ -566,7 +566,7 @@ uhdm::SequenceDecl* CompileHelper::compileSequenceDeclaration(
       ports->emplace_back(prop_port_decl);
       prop_port_decl->setName(fC->SymName(Port_name));
       uhdm::RefTypespec* rtps = s.make<uhdm::RefTypespec>();
-      rtps->setActualTypespec(tps);
+      rtps->setActual(tps);
       prop_port_decl->setTypespec(rtps);
       Sequence_port_item = fC->Sibling(Sequence_port_item);
     }

@@ -131,7 +131,7 @@ Variables* CompileHelper::getSimpleVarFromTypespec(
       if (m_elaborate == Elaborate::Yes) {
         uhdm::RefTypespec* specRef = s.make<uhdm::RefTypespec>();
         specRef->setParent(enumv);
-        specRef->setActualTypespec(spec);
+        specRef->setActual(spec);
         enumv->setTypespec(specRef);
       }
       if (packedDimensions != nullptr) {
@@ -173,7 +173,7 @@ Variables* CompileHelper::getSimpleVarFromTypespec(
       if (m_elaborate == Elaborate::Yes) {
         uhdm::RefTypespec* specRef = s.make<uhdm::RefTypespec>();
         specRef->setParent(var);
-        specRef->setActualTypespec(spec);
+        specRef->setActual(spec);
         var->setTypespec(specRef);
       }
       if (packedDimensions != nullptr) {
@@ -194,7 +194,7 @@ Variables* CompileHelper::getSimpleVarFromTypespec(
       if (m_elaborate == Elaborate::Yes) {
         uhdm::RefTypespec* specRef = s.make<uhdm::RefTypespec>();
         specRef->setParent(var);
-        specRef->setActualTypespec(spec);
+        specRef->setActual(spec);
         var->setTypespec(specRef);
       }
       if (packedDimensions != nullptr) {
@@ -210,7 +210,7 @@ Variables* CompileHelper::getSimpleVarFromTypespec(
     case uhdm::UhdmType::ArrayTypespec: {
       uhdm::ArrayTypespec* atps = (uhdm::ArrayTypespec*)spec;
       if (uhdm::RefTypespec* atps_rt = atps->getIndexTypespec()) {
-        if (uhdm::Typespec* indextps = atps_rt->getActualTypespec()) {
+        if (uhdm::Typespec* indextps = atps_rt->getActual()) {
           return getSimpleVarFromTypespec(fC, declarationId, nameId, indextps,
                                           packedDimensions, compileDesign);
         }
@@ -219,7 +219,7 @@ Variables* CompileHelper::getSimpleVarFromTypespec(
         if (m_elaborate == Elaborate::Yes) {
           uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
           tpsRef->setParent(array);
-          tpsRef->setActualTypespec(s.make<uhdm::ArrayTypespec>());
+          tpsRef->setActual(s.make<uhdm::ArrayTypespec>());
           array->setTypespec(tpsRef);
         }
         var = array;
@@ -235,7 +235,7 @@ Variables* CompileHelper::getSimpleVarFromTypespec(
       specRef->setParent(var);
       var->setTypespec(specRef);
     }
-    var->getTypespec()->setActualTypespec(spec);
+    var->getTypespec()->setActual(spec);
   }
   return var;
 }
@@ -348,7 +348,7 @@ uhdm::Any* CompileHelper::compileVariable(
                 var->setTypespec(tsRef);
                 fC->populateCoreMembers(declarationId, declarationId, tsRef);
               }
-              var->getTypespec()->setActualTypespec(ts);
+              var->getTypespec()->setActual(ts);
             }
             result = var;
           }
@@ -386,7 +386,7 @@ uhdm::Any* CompileHelper::compileVariable(
           uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
           tpsRef->setName(typespecName);
           tpsRef->setParent(var);
-          tpsRef->setActualTypespec(ts);
+          tpsRef->setActual(ts);
           var->setTypespec(tpsRef);
           var->setName(fC->SymName(nameId));
           fC->populateCoreMembers(variable, variable, tpsRef);
@@ -400,7 +400,7 @@ uhdm::Any* CompileHelper::compileVariable(
         uhdm::ClassVar* var = s.make<uhdm::ClassVar>();
         uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
         tsRef->setParent(var);
-        tsRef->setActualTypespec(ts);
+        tsRef->setActual(ts);
         tsRef->setName(ts->getName());
         var->setTypespec(tsRef);
         var->setName(fC->SymName(nameId));
@@ -416,7 +416,7 @@ uhdm::Any* CompileHelper::compileVariable(
           if (ts) {
             uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
             tsRef->setParent(var);
-            tsRef->setActualTypespec(ts);
+            tsRef->setActual(ts);
             tsRef->setName(ts->getName());
             fC->populateCoreMembers(declarationId, declarationId, tsRef);
             var->setTypespec(tsRef);
@@ -430,7 +430,7 @@ uhdm::Any* CompileHelper::compileVariable(
             uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
             fC->populateCoreMembers(declarationId, declarationId, tsRef);
             tsRef->setParent(ref);
-            tsRef->setActualTypespec(ts);
+            tsRef->setActual(ts);
             tsRef->setName(typeName);
             fC->populateCoreMembers(declarationId, declarationId, tsRef);
             ref->setTypespec(tsRef);
@@ -445,7 +445,7 @@ uhdm::Any* CompileHelper::compileVariable(
       uhdm::LogicVar* var = s.make<uhdm::LogicVar>();
       uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
       tsRef->setParent(var);
-      tsRef->setActualTypespec(ts);
+      tsRef->setActual(ts);
       var->setTypespec(tsRef);
       var->setName(fC->SymName(nameId));
       fC->populateCoreMembers(nameId, nameId, var);
@@ -457,7 +457,7 @@ uhdm::Any* CompileHelper::compileVariable(
       uhdm::IntVar* var = s.make<uhdm::IntVar>();
       uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
       tsRef->setParent(var);
-      tsRef->setActualTypespec(ts);
+      tsRef->setActual(ts);
       var->setTypespec(tsRef);
       var->setSigned(isSigned);
       var->setName(fC->SymName(nameId));
@@ -470,7 +470,7 @@ uhdm::Any* CompileHelper::compileVariable(
       uhdm::IntegerVar* var = s.make<uhdm::IntegerVar>();
       uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
       tsRef->setParent(var);
-      tsRef->setActualTypespec(ts);
+      tsRef->setActual(ts);
       var->setTypespec(tsRef);
       var->setSigned(isSigned);
       var->setName(fC->SymName(nameId));
@@ -483,7 +483,7 @@ uhdm::Any* CompileHelper::compileVariable(
       uhdm::IntVar* var = s.make<uhdm::IntVar>();
       uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
       tsRef->setParent(var);
-      tsRef->setActualTypespec(ts);
+      tsRef->setActual(ts);
       var->setTypespec(tsRef);
       var->setSigned(isSigned);
       var->setName(fC->SymName(nameId));
@@ -497,7 +497,7 @@ uhdm::Any* CompileHelper::compileVariable(
       if (ts != nullptr) {
         uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
         tsRef->setParent(var);
-        tsRef->setActualTypespec(ts);
+        tsRef->setActual(ts);
         var->setTypespec(tsRef);
         fC->populateCoreMembers(declarationId, declarationId, tsRef);
       }
@@ -511,7 +511,7 @@ uhdm::Any* CompileHelper::compileVariable(
       uhdm::ByteVar* var = s.make<uhdm::ByteVar>();
       uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
       tsRef->setParent(var);
-      tsRef->setActualTypespec(ts);
+      tsRef->setActual(ts);
       var->setTypespec(tsRef);
       var->setSigned(isSigned);
       var->setName(fC->SymName(nameId));
@@ -524,7 +524,7 @@ uhdm::Any* CompileHelper::compileVariable(
       uhdm::LongIntVar* var = s.make<uhdm::LongIntVar>();
       uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
       tsRef->setParent(var);
-      tsRef->setActualTypespec(ts);
+      tsRef->setActual(ts);
       var->setTypespec(tsRef);
       var->setSigned(isSigned);
       var->setName(fC->SymName(nameId));
@@ -537,7 +537,7 @@ uhdm::Any* CompileHelper::compileVariable(
       uhdm::ShortIntVar* var = s.make<uhdm::ShortIntVar>();
       uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
       tsRef->setParent(var);
-      tsRef->setActualTypespec(ts);
+      tsRef->setActual(ts);
       var->setTypespec(tsRef);
       var->setSigned(isSigned);
       var->setName(fC->SymName(nameId));
@@ -550,7 +550,7 @@ uhdm::Any* CompileHelper::compileVariable(
       uhdm::TimeVar* var = s.make<uhdm::TimeVar>();
       uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
       tsRef->setParent(var);
-      tsRef->setActualTypespec(ts);
+      tsRef->setActual(ts);
       var->setTypespec(tsRef);
       var->setName(fC->SymName(nameId));
       fC->populateCoreMembers(nameId, nameId, var);
@@ -562,7 +562,7 @@ uhdm::Any* CompileHelper::compileVariable(
       uhdm::BitVar* var = s.make<uhdm::BitVar>();
       uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
       tsRef->setParent(var);
-      tsRef->setActualTypespec(ts);
+      tsRef->setActual(ts);
       var->setTypespec(tsRef);
       var->setName(fC->SymName(nameId));
       fC->populateCoreMembers(nameId, nameId, var);
@@ -574,7 +574,7 @@ uhdm::Any* CompileHelper::compileVariable(
       uhdm::ShortRealVar* var = s.make<uhdm::ShortRealVar>();
       uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
       tsRef->setParent(var);
-      tsRef->setActualTypespec(ts);
+      tsRef->setActual(ts);
       var->setTypespec(tsRef);
       var->setName(fC->SymName(nameId));
       fC->populateCoreMembers(nameId, nameId, var);
@@ -586,7 +586,7 @@ uhdm::Any* CompileHelper::compileVariable(
       uhdm::RealVar* var = s.make<uhdm::RealVar>();
       uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
       tsRef->setParent(var);
-      tsRef->setActualTypespec(ts);
+      tsRef->setActual(ts);
       var->setTypespec(tsRef);
       var->setName(fC->SymName(nameId));
       fC->populateCoreMembers(nameId, nameId, var);
@@ -616,7 +616,7 @@ uhdm::Any* CompileHelper::compileVariable(
                 var->setTypespec(tsRef);
                 fC->populateCoreMembers(declarationId, declarationId, tsRef);
               }
-              var->getTypespec()->setActualTypespec(ts);
+              var->getTypespec()->setActual(ts);
             }
             break;
           }
@@ -650,7 +650,7 @@ uhdm::Any* CompileHelper::compileVariable(
                   var->setTypespec(tsRef);
                   fC->populateCoreMembers(declarationId, declarationId, tsRef);
                 }
-                var->getTypespec()->setActualTypespec(ts);
+                var->getTypespec()->setActual(ts);
               }
               break;
             }
@@ -665,7 +665,7 @@ uhdm::Any* CompileHelper::compileVariable(
       uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
       tsRef->setName(completeName);
       tsRef->setParent(var);
-      tsRef->setActualTypespec(ts);
+      tsRef->setActual(ts);
       fC->populateCoreMembers(declarationId, declarationId, tsRef);
       var->setTypespec(tsRef);
       result = var;
@@ -675,7 +675,7 @@ uhdm::Any* CompileHelper::compileVariable(
       uhdm::StringVar* var = s.make<uhdm::StringVar>();
       uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
       tsRef->setParent(var);
-      tsRef->setActualTypespec(ts);
+      tsRef->setActual(ts);
       var->setTypespec(tsRef);
       var->setName(fC->SymName(nameId));
       fC->populateCoreMembers(nameId, nameId, var);
@@ -690,7 +690,7 @@ uhdm::Any* CompileHelper::compileVariable(
       var->setName(fC->SymName(nameid));
       uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
       tsRef->setParent(var);
-      tsRef->setActualTypespec(ts);
+      tsRef->setActual(ts);
       var->setTypespec(tsRef);
       fC->populateCoreMembers(declarationId, declarationId, tsRef);
       result = var;
@@ -718,7 +718,7 @@ uhdm::Any* CompileHelper::compileVariable(
 
         uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
         tsRef->setParent(var);
-        tsRef->setActualTypespec(ts);
+        tsRef->setActual(ts);
         fC->populateCoreMembers(declarationId, declarationId, tsRef);
         var->setTypespec(tsRef);
 
@@ -773,7 +773,7 @@ uhdm::Any* CompileHelper::compileVariable(
         if (uhdm::Typespec* ts = en->getTypespec()) {
           uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
           tsRef->setParent(stv);
-          tsRef->setActualTypespec(ts);
+          tsRef->setActual(ts);
           fC->populateCoreMembers(rtBeginId, rtEndId, tsRef);
           stv->setTypespec(tsRef);
         }
@@ -791,7 +791,7 @@ uhdm::Any* CompileHelper::compileVariable(
         if (uhdm::Typespec* ts = st->getTypespec()) {
           uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
           tsRef->setParent(stv);
-          tsRef->setActualTypespec(ts);
+          tsRef->setActual(ts);
           fC->populateCoreMembers(rtBeginId, rtEndId, tsRef);
           stv->setTypespec(tsRef);
         }
@@ -809,7 +809,7 @@ uhdm::Any* CompileHelper::compileVariable(
         if (uhdm::Typespec* ts = un->getTypespec()) {
           uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
           tsRef->setParent(stv);
-          tsRef->setActualTypespec(ts);
+          tsRef->setActual(ts);
           fC->populateCoreMembers(rtBeginId, rtEndId, tsRef);
           stv->setTypespec(tsRef);
         }
@@ -843,7 +843,7 @@ uhdm::Any* CompileHelper::compileVariable(
         uhdm::ArrayVar* array_var = s.make<uhdm::ArrayVar>();
         uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
         tsRef->setParent(array_var);
-        tsRef->setActualTypespec(s.make<uhdm::ArrayTypespec>());
+        tsRef->setActual(s.make<uhdm::ArrayTypespec>());
         fC->populateCoreMembers(rtBeginId, rtEndId, tsRef);
         array_var->setTypespec(tsRef);
         array_var->setArrayType(vpiStaticArray);
@@ -881,7 +881,7 @@ uhdm::Any* CompileHelper::compileVariable(
         fC->populateCoreMembers(rtBeginId, rtEndId, tpsRef);
         var->setTypespec(tpsRef);
       }
-      var->getTypespec()->setActualTypespec(tps);
+      var->getTypespec()->setActual(tps);
       if (assignExp != nullptr) {
         var->setExpr(assignExp);
         assignExp->setParent(var);
@@ -905,7 +905,7 @@ uhdm::Any* CompileHelper::compileVariable(
         fC->populateCoreMembers(rtBeginId, rtEndId, tsRef);
         var->setTypespec(tsRef);
       }
-      var->getTypespec()->setActualTypespec(spec);
+      var->getTypespec()->setActual(spec);
       if (assignExp != nullptr) {
         var->setExpr(assignExp);
         assignExp->setParent(var);
@@ -918,7 +918,7 @@ uhdm::Any* CompileHelper::compileVariable(
       uhdm::ClassVar* stv = s.make<uhdm::ClassVar>();
       uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
       tpsRef->setParent(stv);
-      tpsRef->setActualTypespec(tps);
+      tpsRef->setActual(tps);
       fC->populateCoreMembers(rtBeginId, rtEndId, tpsRef);
       stv->setTypespec(tpsRef);
       if (assignExp != nullptr) {
@@ -1034,7 +1034,7 @@ uhdm::Any* CompileHelper::compileVariable(
                (rt->getName() == SymbolTable::getBadSymbol())))
             rt->setName(tps->getName());
         }
-        obj->getTypespec()->setActualTypespec(tps);
+        obj->getTypespec()->setActual(tps);
         tps->setParent(obj);
       }
     }
@@ -1050,7 +1050,7 @@ uhdm::Any* CompileHelper::compileVariable(
       tps->setParent(pscope);
       uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
       tpsRef->setParent(int_var);
-      tpsRef->setActualTypespec(tps);
+      tpsRef->setActual(tps);
       int_var->setTypespec(tpsRef);
       fC->populateCoreMembers(rtBeginId, rtEndId, tpsRef);
       fC->populateCoreMembers(rtBeginId, rtEndId, tps);
@@ -1062,7 +1062,7 @@ uhdm::Any* CompileHelper::compileVariable(
       tps->setParent(pscope);
       uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
       tpsRef->setParent(int_var);
-      tpsRef->setActualTypespec(tps);
+      tpsRef->setActual(tps);
       int_var->setTypespec(tpsRef);
       fC->populateCoreMembers(rtBeginId, rtEndId, tpsRef);
       fC->populateCoreMembers(rtBeginId, rtEndId, tps);
@@ -1074,7 +1074,7 @@ uhdm::Any* CompileHelper::compileVariable(
       tps->setParent(pscope);
       uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
       tpsRef->setParent(int_var);
-      tpsRef->setActualTypespec(tps);
+      tpsRef->setActual(tps);
       int_var->setTypespec(tpsRef);
       fC->populateCoreMembers(rtBeginId, rtEndId, tpsRef);
       fC->populateCoreMembers(rtBeginId, rtEndId, tps);
@@ -1086,7 +1086,7 @@ uhdm::Any* CompileHelper::compileVariable(
       tps->setParent(pscope);
       uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
       tpsRef->setParent(int_var);
-      tpsRef->setActualTypespec(tps);
+      tpsRef->setActual(tps);
       int_var->setTypespec(tpsRef);
       fC->populateCoreMembers(rtBeginId, rtEndId, tpsRef);
       fC->populateCoreMembers(rtBeginId, rtEndId, tps);
@@ -1106,7 +1106,7 @@ uhdm::Any* CompileHelper::compileVariable(
       tps = btps;
       uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
       tpsRef->setParent(int_var);
-      tpsRef->setActualTypespec(tps);
+      tpsRef->setActual(tps);
       int_var->setTypespec(tpsRef);
       fC->populateCoreMembers(rtBeginId, rtEndId, tpsRef);
       fC->populateCoreMembers(rtBeginId, rtEndId, tps);
@@ -1119,7 +1119,7 @@ uhdm::Any* CompileHelper::compileVariable(
       tps = btps;
       uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
       tpsRef->setParent(int_var);
-      tpsRef->setActualTypespec(tps);
+      tpsRef->setActual(tps);
       int_var->setTypespec(tpsRef);
       fC->populateCoreMembers(rtBeginId, rtEndId, tpsRef);
       fC->populateCoreMembers(rtBeginId, rtEndId, tps);
@@ -1161,7 +1161,7 @@ uhdm::Any* CompileHelper::compileVariable(
       tps = ltps;
       uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
       tpsRef->setParent(logicv);
-      tpsRef->setActualTypespec(tps);
+      tpsRef->setActual(tps);
       fC->populateCoreMembers(rtBeginId, rtEndId, tpsRef);
       logicv->setTypespec(tpsRef);
       var = logicv;
@@ -1223,7 +1223,7 @@ uhdm::Any* CompileHelper::compileVariable(
           associative = true;
           const uhdm::Typespec* tp = nullptr;
           if (const uhdm::RefTypespec* rt = rhs->getTypespec()) {
-            tp = rt->getActualTypespec();
+            tp = rt->getActual();
           }
 
           uhdm::ArrayTypespec* taps = s.make<uhdm::ArrayTypespec>();
@@ -1234,7 +1234,7 @@ uhdm::Any* CompileHelper::compileVariable(
           if (tps != nullptr) {
             uhdm::RefTypespec* ert = s.make<uhdm::RefTypespec>();
             ert->setParent(taps);
-            ert->setActualTypespec(tps);
+            ert->setActual(tps);
             ert->setName(tps->getName());
             taps->setElemTypespec(ert);
             fC->populateCoreMembers(sig->getTypespecId(), sig->getTypespecId(),
@@ -1245,7 +1245,7 @@ uhdm::Any* CompileHelper::compileVariable(
             uhdm::RefTypespec* tpRef = s.make<uhdm::RefTypespec>();
             tpRef->setParent(taps);
             tpRef->setName(tp->getName());
-            tpRef->setActualTypespec(const_cast<uhdm::Typespec*>(tp));
+            tpRef->setActual(const_cast<uhdm::Typespec*>(tp));
             taps->setIndexTypespec(tpRef);
             fC->populateCoreMembers(sig->getUnpackedDimension(),
                                     sig->getUnpackedDimension(), tpRef);
@@ -1253,7 +1253,7 @@ uhdm::Any* CompileHelper::compileVariable(
 
           uhdm::RefTypespec* taps_ref = s.make<uhdm::RefTypespec>();
           taps_ref->setParent(array_var);
-          taps_ref->setActualTypespec(taps);
+          taps_ref->setActual(taps);
           taps_ref->setName(array_var->getName());
           fC->populateCoreMembers(sig->getUnpackedDimension(),
                                   sig->getUnpackedDimension(), taps_ref);
@@ -1280,7 +1280,7 @@ uhdm::Any* CompileHelper::compileVariable(
           uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
           tpsRef->setParent(array_var);
           tps->setParent(pscope);
-          tpsRef->setActualTypespec(tps);
+          tpsRef->setActual(tps);
           NodeId unpackDimensionId = sig->getUnpackedDimension();
           while (fC->Sibling(unpackDimensionId))
             unpackDimensionId = fC->Sibling(unpackDimensionId);
@@ -1305,7 +1305,7 @@ uhdm::Any* CompileHelper::compileVariable(
           tpsRef = s.make<uhdm::RefTypespec>();
           fC->populateCoreMembers(signalId, signalId, tpsRef);
           tpsRef->setParent(tps);
-          tpsRef->setActualTypespec(subtps);
+          tpsRef->setActual(subtps);
           tps->setElemTypespec(tpsRef);
 
           subtps->setRanges(unpackedDimensions);
@@ -1320,7 +1320,7 @@ uhdm::Any* CompileHelper::compileVariable(
               ts->setParent(pscope);
               tpsRef = s.make<uhdm::RefTypespec>();
               tpsRef->setParent(subtps);
-              tpsRef->setActualTypespec(ts);
+              tpsRef->setActual(ts);
               subtps->setElemTypespec(tpsRef);
               break;
             }
@@ -1330,7 +1330,7 @@ uhdm::Any* CompileHelper::compileVariable(
               ts->setParent(pscope);
               tpsRef = s.make<uhdm::RefTypespec>();
               tpsRef->setParent(subtps);
-              tpsRef->setActualTypespec(ts);
+              tpsRef->setActual(ts);
               subtps->setElemTypespec(tpsRef);
               break;
             }
@@ -1340,7 +1340,7 @@ uhdm::Any* CompileHelper::compileVariable(
               ts->setParent(pscope);
               tpsRef = s.make<uhdm::RefTypespec>();
               tpsRef->setParent(subtps);
-              tpsRef->setActualTypespec(ts);
+              tpsRef->setActual(ts);
               subtps->setElemTypespec(tpsRef);
               break;
             }
@@ -1350,7 +1350,7 @@ uhdm::Any* CompileHelper::compileVariable(
               ts->setParent(pscope);
               tpsRef = s.make<uhdm::RefTypespec>();
               tpsRef->setParent(subtps);
-              tpsRef->setActualTypespec(ts);
+              tpsRef->setActual(ts);
               subtps->setElemTypespec(tpsRef);
               break;
             }
@@ -1360,7 +1360,7 @@ uhdm::Any* CompileHelper::compileVariable(
               ts->setParent(pscope);
               tpsRef = s.make<uhdm::RefTypespec>();
               tpsRef->setParent(subtps);
-              tpsRef->setActualTypespec(ts);
+              tpsRef->setActual(ts);
               subtps->setElemTypespec(tpsRef);
               break;
             }
@@ -1370,7 +1370,7 @@ uhdm::Any* CompileHelper::compileVariable(
               ts->setParent(pscope);
               tpsRef = s.make<uhdm::RefTypespec>();
               tpsRef->setParent(subtps);
-              tpsRef->setActualTypespec(ts);
+              tpsRef->setActual(ts);
               subtps->setElemTypespec(tpsRef);
               break;
             }
@@ -1380,7 +1380,7 @@ uhdm::Any* CompileHelper::compileVariable(
               ts->setParent(pscope);
               tpsRef = s.make<uhdm::RefTypespec>();
               tpsRef->setParent(subtps);
-              tpsRef->setActualTypespec(ts);
+              tpsRef->setActual(ts);
               subtps->setElemTypespec(tpsRef);
               break;
             }
@@ -1390,7 +1390,7 @@ uhdm::Any* CompileHelper::compileVariable(
               ts->setParent(pscope);
               tpsRef = s.make<uhdm::RefTypespec>();
               tpsRef->setParent(subtps);
-              tpsRef->setActualTypespec(ts);
+              tpsRef->setActual(ts);
               subtps->setElemTypespec(tpsRef);
               break;
             }
@@ -1403,7 +1403,7 @@ uhdm::Any* CompileHelper::compileVariable(
               fC->populateCoreMembers(rtBeginId, rtEndId, ts);
               tpsRef->setName(fC->SymName(rtBeginId));
               tpsRef->setParent(subtps);
-              tpsRef->setActualTypespec(ts);
+              tpsRef->setActual(ts);
               subtps->setElemTypespec(tpsRef);
               break;
             }
@@ -1447,7 +1447,7 @@ uhdm::Any* CompileHelper::compileVariable(
       if (tps != nullptr) {
         uhdm::RefTypespec* ert = s.make<uhdm::RefTypespec>();
         ert->setParent(attps);
-        ert->setActualTypespec(tps);
+        ert->setActual(tps);
         ert->setName(tps->getName());
         attps->setElemTypespec(ert);
         if (sig->getInterfaceTypeNameId()) {
@@ -1461,7 +1461,7 @@ uhdm::Any* CompileHelper::compileVariable(
 
       uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
       tsRef->setParent(array_var);
-      tsRef->setActualTypespec(attps);
+      tsRef->setActual(attps);
       array_var->setTypespec(tsRef);
       fC->populateCoreMembers(sig->getUnpackedDimension(),
                               sig->getUnpackedDimension(), tsRef);
@@ -1498,7 +1498,7 @@ uhdm::Any* CompileHelper::compileVariable(
         if (tp->getUhdmType() == uhdm::UhdmType::PackedArrayTypespec) {
           uhdm::PackedArrayTypespec* ptp = (uhdm::PackedArrayTypespec*)tp;
           if (const uhdm::RefTypespec* ert = ptp->getElemTypespec()) {
-            tp = ert->getActualTypespec();
+            tp = ert->getActual();
           }
           if (tp == nullptr) tp = tps;
         }
@@ -1555,11 +1555,11 @@ uhdm::Typespec* CompileHelper::compileTypeParameter(
   if (uhdm::Any* uparam = sit->getUhdmParam()) {
     if (uparam->getUhdmType() == uhdm::UhdmType::TypeParameter) {
       if (uhdm::RefTypespec* rt = ((uhdm::TypeParameter*)uparam)->getTypespec())
-        spec = rt->getActualTypespec();
+        spec = rt->getActual();
       type_param = true;
     } else {
       if (uhdm::RefTypespec* rt = ((uhdm::Parameter*)uparam)->getTypespec())
-        spec = rt->getActualTypespec();
+        spec = rt->getActual();
     }
   }
 
@@ -1583,11 +1583,11 @@ uhdm::Typespec* CompileHelper::compileTypeParameter(
 
   if (type_param) {
     if (uhdm::RefTypespec* rt = ((uhdm::TypeParameter*)uparam)->getTypespec()) {
-      override_spec = rt->getActualTypespec();
+      override_spec = rt->getActual();
     }
   } else {
     if (uhdm::RefTypespec* rt = ((uhdm::Parameter*)uparam)->getTypespec()) {
-      override_spec = rt->getActualTypespec();
+      override_spec = rt->getActual();
     }
   }
 
@@ -1605,7 +1605,7 @@ uhdm::Typespec* CompileHelper::compileTypeParameter(
         override_specRef->setParent(tparam);
         tparam->setTypespec(override_specRef);
       }
-      tparam->getTypespec()->setActualTypespec(override_spec);
+      tparam->getTypespec()->setActual(override_spec);
     } else {
       uhdm::Parameter* tparam = (uhdm::Parameter*)uparam;
       if (tparam->getTypespec() == nullptr) {
@@ -1613,7 +1613,7 @@ uhdm::Typespec* CompileHelper::compileTypeParameter(
         override_specRef->setParent(tparam);
         tparam->setTypespec(override_specRef);
       }
-      tparam->getTypespec()->setActualTypespec(override_spec);
+      tparam->getTypespec()->setActual(override_spec);
     }
     spec = override_spec;
     spec->setParent(uparam);
@@ -1634,7 +1634,7 @@ const uhdm::Typespec* bindTypespec(Design* design, std::string_view name,
           if (uhdm::TypeParameter* tparam =
                   any_cast<uhdm::TypeParameter>(uparam)) {
             if (const uhdm::RefTypespec* rt = tparam->getTypespec()) {
-              result = rt->getActualTypespec();
+              result = rt->getActual();
             }
             uhdm::ElaboratorContext elaboratorContext(&s, false, true);
             result = any_cast<uhdm::Typespec>(
@@ -1651,7 +1651,7 @@ const uhdm::Typespec* bindTypespec(Design* design, std::string_view name,
             if (uhdm::TypeParameter* tparam =
                     any_cast<uhdm::TypeParameter>(uparam)) {
               if (const uhdm::RefTypespec* rt = tparam->getTypespec()) {
-                result = rt->getActualTypespec();
+                result = rt->getActual();
               }
               uhdm::ElaboratorContext elaboratorContext(&s, false, true);
               result = any_cast<uhdm::Typespec>(
@@ -1717,7 +1717,7 @@ Typespec* CompileHelper::compileDatastructureTypespec(
             uhdm::ParamAssign* param_assign = passign->getUhdmParamAssign();
             uhdm::Parameter* lhs = (uhdm::Parameter*)param_assign->getLhs();
             if (uhdm::RefTypespec* rt = lhs->getTypespec()) {
-              result = rt->getActualTypespec();
+              result = rt->getActual();
             }
             if (result == nullptr) {
               if (uhdm::IntTypespec* tps = buildIntTypespec(
@@ -1816,7 +1816,7 @@ Typespec* CompileHelper::compileDatastructureTypespec(
           for (uhdm::TypespecMember* memb : *tpss->getMembers()) {
             if (memb->getName() == suffixname) {
               if (uhdm::RefTypespec* rt = memb->getTypespec()) {
-                result = rt->getActualTypespec();
+                result = rt->getActual();
               }
               break;
             }
@@ -1845,7 +1845,7 @@ Typespec* CompileHelper::compileDatastructureTypespec(
                 tsRef->setParent(new_result);
                 tt->setTypedefAlias(tsRef);
               }
-              tt->getTypedefAlias()->setActualTypespec(result);
+              tt->getTypedefAlias()->setActual(result);
             }
             result = new_result;
           }
@@ -1909,7 +1909,7 @@ Typespec* CompileHelper::compileDatastructureTypespec(
                   uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
                   tpsRef->setParent(tp);
                   tpsRef->setName(fName);
-                  tpsRef->setActualTypespec(tps);
+                  tpsRef->setActual(tps);
                   tp->setTypespec(tpsRef);
                   p->getFileContent()->populateCoreMembers(p->getNodeId(),
                                                            p->getNodeId(), tp);
@@ -1940,7 +1940,7 @@ Typespec* CompileHelper::compileDatastructureTypespec(
                       uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
                       tpsRef->setParent(tp);
                       tpsRef->setName(name);
-                      tpsRef->setActualTypespec(tps);
+                      tpsRef->setActual(tps);
                       p->getFileContent()->populateCoreMembers(
                           p->getNodeId(), p->getNodeId(), tp);
                       p->getFileContent()->populateCoreMembers(
@@ -2342,7 +2342,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(
         uhdm::RefTypespec* baseTypeRef = s.make<uhdm::RefTypespec>();
         baseTypeRef->setParent(en);
         baseTypeRef->setName(fC->SymName(nodeId));
-        baseTypeRef->setActualTypespec(baseType);
+        baseTypeRef->setActual(baseType);
         fC->populateCoreMembers(nodeId, nodeId, baseTypeRef);
         en->setBaseTypespec(baseTypeRef);
       }
@@ -2626,7 +2626,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(
               (result->getUhdmType() != uhdm::UhdmType::IntTypespec)) {
             uhdm::RefTypespec* resultRef = s.make<uhdm::RefTypespec>();
             fC->populateCoreMembers(type, type, resultRef);
-            resultRef->setActualTypespec(result);
+            resultRef->setActual(result);
             if (isPacked) {
               uhdm::PackedArrayTypespec* pats =
                   s.make<uhdm::PackedArrayTypespec>();
@@ -2700,7 +2700,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(
             fC->Column(Packed_dimensionStartId) - 1);
 
         uhdm::RefTypespec* resultRef = s.make<uhdm::RefTypespec>();
-        resultRef->setActualTypespec(result);
+        resultRef->setActual(result);
         fC->populateCoreMembers(id, InvalidNodeId, resultRef);
         resultRef->setEndLine(fC->Line(Packed_dimensionStartId));
         resultRef->setEndColumn(fC->Column(Packed_dimensionStartId) - 1);
@@ -2759,7 +2759,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(
                                       tsRef);
               m->setTypespec(tsRef);
             }
-            m->getTypespec()->setActualTypespec(member_ts);
+            m->getTypespec()->setActual(member_ts);
           }
           if (Expression &&
               (fC->Type(Expression) != VObjectType::paVariable_dimension)) {
@@ -2794,8 +2794,8 @@ uhdm::Typespec* CompileHelper::compileTypespec(
                                       pats);
               ref->setParent(m);
               fC->populateCoreMembers(Data_type, Data_type, ref);
-              ref->setActualTypespec(m->getTypespec()->getActualTypespec());
-              m->getTypespec()->setActualTypespec(pats);
+              ref->setActual(m->getTypespec()->getActual());
+              m->getTypespec()->setActual(pats);
               if (ranges != nullptr) {
                 pats->setRanges(ranges);
                 for (auto r : *ranges) r->setParent(pats, true);
@@ -2935,7 +2935,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(
               } else if (const uhdm::Operation* exp =
                              any_cast<const uhdm::Operation*>(rhs)) {
                 if (const uhdm::RefTypespec* rt = exp->getTypespec())
-                  result = const_cast<uhdm::Typespec*>(rt->getActualTypespec());
+                  result = const_cast<uhdm::Typespec*>(rt->getActual());
               }
               break;
             }
@@ -2974,7 +2974,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(
           uhdm::UhdmType dstype = result->getUhdmType();
           uhdm::RefTypespec* resultRef = s.make<uhdm::RefTypespec>();
           resultRef->setName(typeName);
-          resultRef->setActualTypespec(result);
+          resultRef->setActual(result);
           if (dstype == uhdm::UhdmType::StructTypespec ||
               dstype == uhdm::UhdmType::EnumTypespec ||
               dstype == uhdm::UhdmType::UnionTypespec) {
@@ -3301,7 +3301,7 @@ bool CompileHelper::isOverloaded(const uhdm::Any* expr,
       case uhdm::UhdmType::Constant: {
         if (const uhdm::RefTypespec* rt =
                 ((uhdm::Constant*)tmp)->getTypespec()) {
-          if (const uhdm::Any* tp = rt->getActualTypespec()) {
+          if (const uhdm::Any* tp = rt->getActual()) {
             stack.push(tp);
           }
         }
@@ -3337,7 +3337,7 @@ bool CompileHelper::isOverloaded(const uhdm::Any* expr,
           }
         }
         if (const uhdm::RefTypespec* rt = tps->getElemTypespec()) {
-          if (const uhdm::Any* etps = rt->getActualTypespec()) {
+          if (const uhdm::Any* etps = rt->getActual()) {
             stack.push(etps);
           }
         }
@@ -3351,7 +3351,7 @@ bool CompileHelper::isOverloaded(const uhdm::Any* expr,
           }
         }
         if (const uhdm::RefTypespec* rt = tps->getElemTypespec()) {
-          if (const uhdm::Any* etps = rt->getActualTypespec()) {
+          if (const uhdm::Any* etps = rt->getActual()) {
             stack.push(etps);
           }
         }

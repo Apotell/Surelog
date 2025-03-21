@@ -315,7 +315,7 @@ void IntegrityChecker::reportInvalidLocation(
   LineColumnRelation expectedRelation = LineColumnRelation::Inside;
   if (const uhdm::RefTypespec* const objectAsRef_typespec =
           object->Cast<uhdm::RefTypespec>()) {
-    if (objectAsRef_typespec->getActualTypespec<uhdm::UnsupportedTypespec>() !=
+    if (objectAsRef_typespec->getActual<uhdm::UnsupportedTypespec>() !=
         nullptr) {
       // Ignore issues with unsupported_typespec.
       // There are known issues with genvar not followed with a type.
@@ -590,7 +590,7 @@ void IntegrityChecker::reportMissingLocation(
         parent->Cast<uhdm::Function>();
     if (const uhdm::Variables* const var = parentAsFunction->getReturn()) {
       if (const uhdm::RefTypespec* const rt = var->getTypespec()) {
-        if ((rt == object) || (rt->getActualTypespec() == object)) {
+        if ((rt == object) || (rt->getActual() == object)) {
           return;
         }
       }
@@ -690,8 +690,7 @@ void IntegrityChecker::reportInvalidNames(const uhdm::Any* const object) const {
       if (parent->getTypedefAlias() != nullptr) {
         shouldReport = false;
       }
-    } else if (const uhdm::Any* actual =
-                   objectAsRef_typespec->getActualTypespec()) {
+    } else if (const uhdm::Any* actual = objectAsRef_typespec->getActual()) {
       if ((actual->getUhdmType() == uhdm::UhdmType::ArrayTypespec) ||
           (actual->getUhdmType() == uhdm::UhdmType::BitTypespec) ||
           (actual->getUhdmType() == uhdm::UhdmType::ByteTypespec) ||
@@ -785,7 +784,7 @@ void IntegrityChecker::reportNullActual(const uhdm::Any* const object) const {
         shouldReport = false;
       }
     } else {
-      shouldReport = objectAsRef_typespec->getActualTypespec() == nullptr;
+      shouldReport = objectAsRef_typespec->getActual() == nullptr;
     }
   } else if (const uhdm::RefModule* const objectAsRef_module =
                  object->Cast<const uhdm::RefModule*>()) {
@@ -831,7 +830,7 @@ void IntegrityChecker::enterAny(const uhdm::Any* const object,
     if (op->getOpType() == vpiCastOp) {
       if (const uhdm::RefTypespec* const rt = op->getTypespec()) {
         if (const uhdm::IntTypespec* const t =
-                rt->getActualTypespec<uhdm::IntTypespec>()) {
+                rt->getActual<uhdm::IntTypespec>()) {
           if (const uhdm::Expr* const e = t->getExpr()) {
             m_visited.emplace(e);
           }

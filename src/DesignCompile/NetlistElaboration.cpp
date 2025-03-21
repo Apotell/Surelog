@@ -209,7 +209,7 @@ bool NetlistElaboration::elab_parameters_(ModuleInstance* instance,
             if (lhs->getUhdmType() == uhdm::UhdmType::Parameter) {
               if (const uhdm::RefTypespec* rt =
                       ((uhdm::Parameter*)lhs)->getTypespec()) {
-                ts = rt->getActualTypespec();
+                ts = rt->getActual();
               }
             }
             if (m_helper.substituteAssignedValue(rhs, m_compileDesign)) {
@@ -227,7 +227,7 @@ bool NetlistElaboration::elab_parameters_(ModuleInstance* instance,
               uhdm::Parameter* p = (uhdm::Parameter*)lhs;
               const uhdm::Typespec* tps = nullptr;
               if (const uhdm::RefTypespec* rt = p->getTypespec()) {
-                tps = rt->getActualTypespec();
+                tps = rt->getActual();
               }
               if (tps) {
                 uhdm::ExprEval eval;
@@ -241,7 +241,7 @@ bool NetlistElaboration::elab_parameters_(ModuleInstance* instance,
               } else if (rhs->getUhdmType() == uhdm::UhdmType::Operation) {
                 uhdm::Operation* op = (uhdm::Operation*)rhs;
                 if (const uhdm::RefTypespec* rt = op->getTypespec()) {
-                  if (const uhdm::Typespec* tps = rt->getActualTypespec()) {
+                  if (const uhdm::Typespec* tps = rt->getActual()) {
                     uhdm::ExprEval eval;
                     if (uhdm::Expr* tmp = eval.flattenPatternAssignments(
                             s, tps, (uhdm::Expr*)rhs)) {
@@ -342,20 +342,20 @@ bool NetlistElaboration::elab_parameters_(ModuleInstance* instance,
         if (orig_p->getUhdmType() == uhdm::UhdmType::Parameter) {
           if (uhdm::RefTypespec* rt =
                   ((uhdm::Parameter*)orig_p)->getTypespec()) {
-            if (uhdm::Typespec* ag = rt->getActualTypespec()) {
+            if (uhdm::Typespec* ag = rt->getActual()) {
               uhdm::RefTypespec* crt = s.make<uhdm::RefTypespec>();
               crt->setParent(c);
-              crt->setActualTypespec(ag);
+              crt->setActual(ag);
               c->setTypespec(crt);
             }
           }
         } else {
           if (uhdm::RefTypespec* rt =
                   ((uhdm::TypeParameter*)orig_p)->getTypespec()) {
-            if (uhdm::Typespec* ag = rt->getActualTypespec()) {
+            if (uhdm::Typespec* ag = rt->getActual()) {
               uhdm::RefTypespec* crt = s.make<uhdm::RefTypespec>();
               crt->setParent(c);
-              crt->setActualTypespec(ag);
+              crt->setActual(ag);
               c->setTypespec(crt);
             }
           }
@@ -371,14 +371,14 @@ bool NetlistElaboration::elab_parameters_(ModuleInstance* instance,
             tsRef->setParent(c);
             c->setTypespec(tsRef);
           }
-          c->getTypespec()->setActualTypespec((uhdm::Typespec*)ts);
+          c->getTypespec()->setActual((uhdm::Typespec*)ts);
         }
         assign->getFileContent()->populateCoreMembers(assign->getAssignId(),
                                                       assign->getAssignId(), c);
         inst_assign->setRhs(c);
         const uhdm::Typespec* tps = nullptr;
         if (const uhdm::RefTypespec* rt = c->getTypespec()) {
-          tps = rt->getActualTypespec();
+          tps = rt->getActual();
         }
         m_helper.adjustSize(tps, instance->getDefinition(), m_compileDesign,
                             instance, c);
@@ -442,20 +442,20 @@ bool NetlistElaboration::elab_parameters_(ModuleInstance* instance,
           if (orig_p->getUhdmType() == uhdm::UhdmType::Parameter) {
             if (uhdm::RefTypespec* rt =
                     ((uhdm::Parameter*)orig_p)->getTypespec()) {
-              if (uhdm::Typespec* ag = rt->getActualTypespec()) {
+              if (uhdm::Typespec* ag = rt->getActual()) {
                 uhdm::RefTypespec* crt = s.make<uhdm::RefTypespec>();
                 crt->setParent(c);
-                crt->setActualTypespec(ag);
+                crt->setActual(ag);
                 c->setTypespec(crt);
               }
             }
           } else {
             if (uhdm::RefTypespec* rt =
                     ((uhdm::TypeParameter*)orig_p)->getTypespec()) {
-              if (uhdm::Typespec* ag = rt->getActualTypespec()) {
+              if (uhdm::Typespec* ag = rt->getActual()) {
                 uhdm::RefTypespec* crt = s.make<uhdm::RefTypespec>();
                 crt->setParent(c);
-                crt->setActualTypespec(ag);
+                crt->setActual(ag);
                 c->setTypespec(crt);
               }
             }
@@ -493,12 +493,12 @@ bool NetlistElaboration::elab_parameters_(ModuleInstance* instance,
       if (lhs->getUhdmType() == uhdm::UhdmType::Parameter) {
         if (const uhdm::RefTypespec* rt =
                 ((uhdm::Parameter*)lhs)->getTypespec()) {
-          tps = rt->getActualTypespec();
+          tps = rt->getActual();
         }
       } else {
         if (const uhdm::RefTypespec* rt =
                 ((uhdm::TypeParameter*)lhs)->getTypespec()) {
-          tps = rt->getActualTypespec();
+          tps = rt->getActual();
         }
       }
       if (tps) {
@@ -933,7 +933,7 @@ bool NetlistElaboration::high_conn_(ModuleInstance* instance) {
                       uhdm::LogicNet* lnet = (uhdm::LogicNet*)net;
                       if (const uhdm::RefTypespec* rt = lnet->getTypespec()) {
                         if (const uhdm::LogicTypespec* tps =
-                                rt->getActualTypespec<uhdm::LogicTypespec>()) {
+                                rt->getActual<uhdm::LogicTypespec>()) {
                           if (tps->getRanges()) bitBlast = true;
                         }
                       }
@@ -941,7 +941,7 @@ bool NetlistElaboration::high_conn_(ModuleInstance* instance) {
                       uhdm::ArrayNet* lnet = (uhdm::ArrayNet*)net;
                       if (const uhdm::RefTypespec* rt = lnet->getTypespec()) {
                         if (const uhdm::ArrayTypespec* tps =
-                                rt->getActualTypespec<uhdm::ArrayTypespec>()) {
+                                rt->getActual<uhdm::ArrayTypespec>()) {
                           if (tps->getRanges()) bitBlast = true;
                         }
                       }
@@ -1300,7 +1300,7 @@ bool NetlistElaboration::high_conn_(ModuleInstance* instance) {
             int32_t opType = op->getOpType();
             const uhdm::Typespec* tps = nullptr;
             if (p && p->getTypespec()) {
-              tps = p->getTypespec()->getActualTypespec();
+              tps = p->getTypespec()->getActual();
             }
             if (opType == vpiAssignmentPatternOp) {
               if (m_helper.substituteAssignedValue(hexpr, m_compileDesign)) {
@@ -1850,15 +1850,14 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
     if (ttmp == uhdm::UhdmType::PackedArrayTypespec) {
       if (uhdm::RefTypespec* ert =
               ((uhdm::PackedArrayTypespec*)tmp)->getElemTypespec()) {
-        tmp = ert->getActualTypespec();
+        tmp = ert->getActual();
       }
     } else if (ttmp == uhdm::UhdmType::StructTypespec) {
       uhdm::StructTypespec* the_tps = (uhdm::StructTypespec*)tmp;
       if (the_tps->getMembers()) {
         isNet = true;
         for (uhdm::TypespecMember* member : *the_tps->getMembers()) {
-          if (const uhdm::Typespec* mtps =
-                  member->getTypespec()->getActualTypespec()) {
+          if (const uhdm::Typespec* mtps = member->getTypespec()->getActual()) {
             uhdm::UhdmType mtype = mtps->getUhdmType();
             if (mtype != uhdm::UhdmType::LogicTypespec &&
                 mtype != uhdm::UhdmType::StructTypespec) {
@@ -1942,7 +1941,7 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
           // logicn->setRanges(packedDimensions);
           uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
           rt->setParent(logicn);
-          rt->setActualTypespec(spec);
+          rt->setActual(spec);
           logicn->setTypespec(rt);
           logicn->setName(signame);
           spec->setParent(logicn);
@@ -1955,7 +1954,7 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
           }
           uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
           rt->setParent(stv);
-          rt->setActualTypespec(spec);
+          rt->setActual(spec);
           stv->setTypespec(rt);
           spec->setParent(stv);
           obj = stv;
@@ -1976,7 +1975,7 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
           }
           uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
           rt->setParent(stv);
-          rt->setActualTypespec(spec);
+          rt->setActual(spec);
           stv->setTypespec(rt);
           spec->setParent(stv);
           obj = stv;
@@ -2000,7 +1999,7 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
           // logicn->setRanges(packedDimensions);
           uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
           rt->setParent(logicn);
-          rt->setActualTypespec(spec);
+          rt->setActual(spec);
           logicn->setTypespec(rt);
           logicn->setName(signame);
           spec->setParent(logicn);
@@ -2015,7 +2014,7 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
           logicn->setName(signame);
           uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
           rt->setParent(logicn);
-          rt->setActualTypespec(spec);
+          rt->setActual(spec);
           logicn->setTypespec(rt);
           spec->setParent(logicn);
           obj = logicn;
@@ -2038,7 +2037,7 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
         stv->setName(signame);
         uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
         rt->setParent(stv);
-        rt->setActualTypespec(en->getTypespec());
+        rt->setActual(en->getTypespec());
         stv->setTypespec(rt);
         if (sig->attributes()) {
           stv->setAttributes(sig->attributes());
@@ -2066,7 +2065,7 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
         }
         uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
         rt->setParent(stv);
-        rt->setActualTypespec(st->getTypespec());
+        rt->setActual(st->getTypespec());
         stv->setTypespec(rt);
         obj = stv;
         if (packedDimensions) {
@@ -2106,7 +2105,7 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
           // logicn->setRanges(packedDimensions);
           uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
           rt->setParent(logicn);
-          rt->setActualTypespec(spec);
+          rt->setActual(spec);
           logicn->setTypespec(rt);
           spec->setParent(logicn);
           logicn->setName(signame);
@@ -2120,7 +2119,7 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
           }
           uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
           rt->setParent(stv);
-          rt->setActualTypespec(spec);
+          rt->setActual(spec);
           stv->setTypespec(rt);
           spec->setParent(stv);
           obj = stv;
@@ -2145,7 +2144,7 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
           }
           uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
           rt->setParent(stv);
-          rt->setActualTypespec(spec);
+          rt->setActual(spec);
           stv->setTypespec(rt);
           spec->setParent(stv);
           obj = stv;
@@ -2170,7 +2169,7 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
           logicn->setSigned(sig->isSigned());
           uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
           rt->setParent(logicn);
-          rt->setActualTypespec(spec);
+          rt->setActual(spec);
           logicn->setTypespec(rt);
           spec->setParent(logicn);
           // Move range to typespec for simple types
@@ -2187,7 +2186,7 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
           logicn->setName(signame);
           uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
           rt->setParent(logicn);
-          rt->setActualTypespec(spec);
+          rt->setActual(spec);
           logicn->setTypespec(rt);
           spec->setParent(logicn);
           obj = logicn;
@@ -2215,7 +2214,7 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
         logicn->setNetType(UhdmWriter::getVpiNetType(sig->getType()));
         uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
         rt->setParent(logicn);
-        rt->setActualTypespec(tps);
+        rt->setActual(tps);
         logicn->setTypespec(rt);
         tps->setParent(logicn);
         // Move range to typespec for simple types
@@ -2266,7 +2265,7 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
       }
       uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
       rt->setParent(stv);
-      rt->setActualTypespec(tps);
+      rt->setActual(tps);
       stv->setTypespec(rt);
       tps->setParent(stv);
       obj = stv;
@@ -2281,7 +2280,7 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
       stv->setName(signame);
       uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
       rt->setParent(stv);
-      rt->setActualTypespec(tps);
+      rt->setActual(tps);
       stv->setTypespec(rt);
       tps->setParent(stv);
       obj = stv;
@@ -2327,7 +2326,7 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
         // logicn->setRanges(packedDimensions);
         uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
         rt->setParent(logicn);
-        rt->setActualTypespec(tps);
+        rt->setActual(tps);
         logicn->setTypespec(rt);
         tps->setParent(logicn);
       }
@@ -2518,7 +2517,7 @@ bool NetlistElaboration::elab_ports_nets_(
               rt->setParent(dest_port);
               dest_port->setTypespec(rt);
             }
-            dest_port->getTypespec()->setActualTypespec(tps);
+            dest_port->getTypespec()->setActual(tps);
           }
         }
 

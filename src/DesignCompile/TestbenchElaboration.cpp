@@ -268,7 +268,7 @@ bool TestbenchElaboration::bindBaseClasses_() {
                                    placeHolder->getNodeId(), tps);
         uhdm::RefTypespec* extends_ts = s.make<uhdm::RefTypespec>();
         extends_ts->setParent(extends);
-        extends_ts->setActualTypespec(tps);
+        extends_ts->setActual(tps);
         extends->setClassTypespec(extends_ts);
         tps->setClassDefn(parent);
         tps->setName(placeHolder->getName());
@@ -294,7 +294,7 @@ bool TestbenchElaboration::bindBaseClasses_() {
           tps->setName(class_def.second->getName());
           uhdm::RefTypespec* extends_ts = s.make<uhdm::RefTypespec>();
           extends_ts->setParent(extends);
-          extends_ts->setActualTypespec(tps);
+          extends_ts->setActual(tps);
           extends->setClassTypespec(extends_ts);
           uhdm::ClassDefn* def =
               classDefinition->getUhdmModel<uhdm::ClassDefn>();

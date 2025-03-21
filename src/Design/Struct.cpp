@@ -46,7 +46,7 @@ bool Struct::isNet() const {
   if (tps->getMembers()) {
     for (uhdm::TypespecMember* member : *tps->getMembers()) {
       if (const uhdm::RefTypespec* rt = member->getTypespec()) {
-        if (const uhdm::Typespec* ag = rt->getActualTypespec()) {
+        if (const uhdm::Typespec* ag = rt->getActual()) {
           if (ag->getUhdmType() != uhdm::UhdmType::LogicTypespec) {
             return false;
           }

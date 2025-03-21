@@ -412,7 +412,7 @@ class RoundTripTracer final : public uhdm::UhdmListener {
 
     if (const uhdm::RefTypespec *const rt =
             ((uhdm::TypedefTypespec *)object)->getTypedefAlias()) {
-      if (const uhdm::Typespec *const alias = rt->getActualTypespec()) {
+      if (const uhdm::Typespec *const alias = rt->getActual()) {
         return getTypespecName(alias);
       }
     }
@@ -490,7 +490,7 @@ class RoundTripTracer final : public uhdm::UhdmListener {
 
     const uhdm::Typespec *ts = nullptr;
     if (const uhdm::RefTypespec *const rt = object->getTypespec()) {
-      ts = rt->getActualTypespec();
+      ts = rt->getActual();
     }
 
     if (ts != nullptr) {
@@ -507,7 +507,7 @@ class RoundTripTracer final : public uhdm::UhdmListener {
       if ((variables != nullptr) && !variables->empty()) {
         const uhdm::Variables *const variable = variables->at(0);
         if (const uhdm::RefTypespec *const rt = variable->getTypespec()) {
-          ts = rt->getActualTypespec();
+          ts = rt->getActual();
         }
         if (ts != nullptr) {
           prefix.append(getTypespecName(ts));
@@ -582,13 +582,13 @@ class RoundTripTracer final : public uhdm::UhdmListener {
       if (const uhdm::RefTypespec *const element_typespec =
               static_cast<const uhdm::ArrayTypespec *>(object)
                   ->getElemTypespec()) {
-        typespec = element_typespec->getActualTypespec();
+        typespec = element_typespec->getActual();
       }
     } else if (object->getUhdmType() == uhdm::UhdmType::PackedArrayTypespec) {
       if (const uhdm::RefTypespec *const element_typespec =
               static_cast<const uhdm::PackedArrayTypespec *>(object)
                   ->getElemTypespec()) {
-        typespec = element_typespec->getActualTypespec();
+        typespec = element_typespec->getActual();
       }
     }
 
@@ -611,7 +611,7 @@ class RoundTripTracer final : public uhdm::UhdmListener {
             static_cast<const uhdm::TypedefTypespec *>(typespec);
         if (const uhdm::RefTypespec *const rt =
                 struct_typespec->getTypedefAlias()) {
-          if (const uhdm::Typespec *const alias = rt->getActualTypespec()) {
+          if (const uhdm::Typespec *const alias = rt->getActual()) {
             text = formatName(alias->getName());
           }
         }
@@ -1406,7 +1406,7 @@ class RoundTripTracer final : public uhdm::UhdmListener {
 
     const uhdm::Typespec *typespec = nullptr;
     if (const uhdm::RefTypespec *const rt = object->getTypespec()) {
-      typespec = rt->getActualTypespec();
+      typespec = rt->getActual();
     }
 
     const uhdm::Any *const pattern = object->getPattern();
@@ -1583,7 +1583,7 @@ class RoundTripTracer final : public uhdm::UhdmListener {
     insert(filepath, object->getStartLine(), object->getStartColumn(), text);
 
     if (const uhdm::RefTypespec *const rt = object->getTypespec()) {
-      if (const uhdm::Typespec *const typespec = rt->getActualTypespec()) {
+      if (const uhdm::Typespec *const typespec = rt->getActual()) {
         m_visited.insert(typespec);
       }
     }
@@ -1883,7 +1883,7 @@ class RoundTripTracer final : public uhdm::UhdmListener {
     const std::filesystem::path &filepath = object->getFile();
 
     if (const uhdm::RefTypespec *const rt = object->getTypespec()) {
-      if (const uhdm::Typespec *const typespec = rt->getActualTypespec()) {
+      if (const uhdm::Typespec *const typespec = rt->getActual()) {
         insert(filepath, typespec->getStartLine(),
                typespec->getStartColumn() - 1, "[");
         insert(filepath, typespec->getEndLine(), typespec->getEndColumn(), "]");
@@ -2381,7 +2381,7 @@ class RoundTripTracer final : public uhdm::UhdmListener {
     const std::filesystem::path &filepath = object->getFile();
 
     if (const uhdm::RefTypespec *const rt = object->getTypespec()) {
-      if (const uhdm::Typespec *const typespec = rt->getActualTypespec()) {
+      if (const uhdm::Typespec *const typespec = rt->getActual()) {
         const std::string name = getTypespecName(typespec);
         switch (typespec->getUhdmType()) {
           case uhdm::UhdmType::ClassTypespec:
@@ -2625,7 +2625,7 @@ class RoundTripTracer final : public uhdm::UhdmListener {
     }
 
     if (const uhdm::RefTypespec *const rt = object->getTypespec()) {
-      if (const uhdm::Typespec *const typespec = rt->getActualTypespec()) {
+      if (const uhdm::Typespec *const typespec = rt->getActual()) {
         prefix.append(getTypespecName(typespec)).append(1, kOverwriteMarker);
       }
     }
@@ -2651,7 +2651,7 @@ class RoundTripTracer final : public uhdm::UhdmListener {
     }
 
     if (const uhdm::RefTypespec *const rt = object->getTypespec()) {
-      if (const uhdm::Typespec *const typespec = rt->getActualTypespec()) {
+      if (const uhdm::Typespec *const typespec = rt->getActual()) {
         prefix.append(getTypespecName(typespec)).append(1, kOverwriteMarker);
       }
     }
@@ -2677,7 +2677,7 @@ class RoundTripTracer final : public uhdm::UhdmListener {
     }
 
     if (const uhdm::RefTypespec *const rt = object->getTypespec()) {
-      if (const uhdm::Typespec *const typespec = rt->getActualTypespec()) {
+      if (const uhdm::Typespec *const typespec = rt->getActual()) {
         prefix.append(getTypespecName(typespec)).append(1, kOverwriteMarker);
       }
     }
@@ -2766,7 +2766,7 @@ class RoundTripTracer final : public uhdm::UhdmListener {
     int32_t line = object->getStartLine();
     int32_t column = object->getStartColumn();
     if (const uhdm::RefTypespec *const rt = object->getTypespec()) {
-      if (const uhdm::Typespec *const typespec = rt->getActualTypespec()) {
+      if (const uhdm::Typespec *const typespec = rt->getActual()) {
         if ((typespec->getUhdmType() == uhdm::UhdmType::EnumTypespec) ||
             (typespec->getUhdmType() == uhdm::UhdmType::StructTypespec)) {
           const std::string name = getTypespecName(typespec);
@@ -2951,8 +2951,7 @@ class RoundTripTracer final : public uhdm::UhdmListener {
 
           const uhdm::RangeCollection *ranges = nullptr;
           if (const uhdm::RefTypespec *const rt = port->getTypespec()) {
-            if (const uhdm::Typespec *const typespec =
-                    rt->getActualTypespec()) {
+            if (const uhdm::Typespec *const typespec = rt->getActual()) {
               if (typespec->getUhdmType() == uhdm::UhdmType::ArrayTypespec) {
                 ranges = static_cast<const uhdm::ArrayTypespec *>(typespec)
                              ->getRanges();
@@ -3038,13 +3037,13 @@ class RoundTripTracer final : public uhdm::UhdmListener {
           const uhdm::Typespec *itypespec = nullptr;
           if (const uhdm::RefTypespec *const rt =
                   static_cast<const uhdm::Parameter *>(ilhs)->getTypespec()) {
-            itypespec = rt->getActualTypespec();
+            itypespec = rt->getActual();
           }
 
           const uhdm::Typespec *jtypespec = nullptr;
           if (const uhdm::RefTypespec *const rt =
                   static_cast<const uhdm::Parameter *>(jlhs)->getTypespec()) {
-            jtypespec = rt->getActualTypespec();
+            jtypespec = rt->getActual();
           }
 
           if ((itypespec != nullptr) && (jtypespec != nullptr) &&
@@ -3203,7 +3202,7 @@ class RoundTripTracer final : public uhdm::UhdmListener {
     std::string text("enum ");
 
     if (const uhdm::RefTypespec *const rt = object->getBaseTypespec()) {
-      if (const uhdm::Typespec *const base_typespec = rt->getActualTypespec()) {
+      if (const uhdm::Typespec *const base_typespec = rt->getActual()) {
         text.append(getTypespecName(base_typespec)).append(1, kOverwriteMarker);
       }
     }
@@ -3298,7 +3297,7 @@ class RoundTripTracer final : public uhdm::UhdmListener {
 
     const std::filesystem::path &filepath = object->getFile();
     if (const uhdm::RefTypespec *const rt = object->getTypespec()) {
-      if (const uhdm::Typespec *const typespec = rt->getActualTypespec()) {
+      if (const uhdm::Typespec *const typespec = rt->getActual()) {
         switch (typespec->getUhdmType()) {
           case uhdm::UhdmType::LogicTypespec: {
             insert(filepath, typespec->getStartLine(),
@@ -3326,7 +3325,7 @@ class RoundTripTracer final : public uhdm::UhdmListener {
     const std::filesystem::path &filepath = object->getFile();
 
     if (const uhdm::RefTypespec *const rt = object->getTypespec()) {
-      if (const uhdm::Typespec *typespec = rt->getActualTypespec()) {
+      if (const uhdm::Typespec *typespec = rt->getActual()) {
         insert(filepath, rt->getStartLine(), rt->getStartColumn(),
                getTypespecName(typespec));
       }

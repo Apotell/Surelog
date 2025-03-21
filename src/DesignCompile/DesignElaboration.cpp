@@ -653,7 +653,7 @@ const uhdm::Any* resize(uhdm::Serializer& serializer, const uhdm::Any* object,
       int32_t constType = c->getConstType();
       const uhdm::Typespec* tps = nullptr;
       if (const uhdm::RefTypespec* rt = c->getTypespec()) {
-        tps = rt->getActualTypespec();
+        tps = rt->getActual();
       }
       bool is_signed = false;
       if (tps) {
@@ -1162,7 +1162,7 @@ void DesignElaboration::elaborateInstance_(
                   maxsize = std::max(maxsize, c->getSize());
                   const uhdm::Typespec* tps = nullptr;
                   if (const uhdm::RefTypespec* rt = c->getTypespec()) {
-                    tps = rt->getActualTypespec();
+                    tps = rt->getActual();
                   }
                   bool is_signed = false;
                   if (tps) {
@@ -1776,7 +1776,7 @@ void DesignElaboration::elaborateInstance_(
                 fC->populateCoreMembers(typespecId, typespecId, tps);
                 uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
                 tpsRef->setParent(mod_array);
-                tpsRef->setActualTypespec(tps);
+                tpsRef->setActual(tps);
                 mod_array->setElemTypespec(tpsRef);
                 parent->getModuleArrayModuleInstancesMap().emplace(
                     mod_array, localSubInstances);
@@ -2065,7 +2065,7 @@ std::vector<std::string_view> DesignElaboration::collectParams_(
             const std::string_view pname = param->getName();
             const uhdm::Typespec* tps = nullptr;
             if (const uhdm::RefTypespec* rt = param->getTypespec()) {
-              tps = rt->getActualTypespec();
+              tps = rt->getActual();
             }
             const uhdm::Instance* pinst = tps->getInstance();
             if (pinst->getUhdmType() == uhdm::UhdmType::Package) {
@@ -2346,12 +2346,12 @@ std::vector<std::string_view> DesignElaboration::collectParams_(
                 if (param->getUhdmType() == uhdm::UhdmType::Parameter) {
                   if (uhdm::RefTypespec* rt =
                           ((uhdm::Parameter*)param)->getTypespec()) {
-                    ts = rt->getActualTypespec();
+                    ts = rt->getActual();
                   }
                 } else {
                   if (uhdm::RefTypespec* rt =
                           ((uhdm::TypeParameter*)param)->getTypespec()) {
-                    ts = rt->getActualTypespec();
+                    ts = rt->getActual();
                   }
                 }
               }
@@ -2368,7 +2368,7 @@ std::vector<std::string_view> DesignElaboration::collectParams_(
                       uhdm::Serializer& s = m_compileDesign->getSerializer();
                       uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
                       tsRef->setParent(c);
-                      tsRef->setActualTypespec(ts);
+                      tsRef->setActual(ts);
                       c->setTypespec(tsRef);
                     }
                   }
@@ -2378,7 +2378,7 @@ std::vector<std::string_view> DesignElaboration::collectParams_(
                 value = m_exprBuilder.fromVpiValue(v, c->getSize());
                 const uhdm::Typespec* cts = nullptr;
                 if (const uhdm::RefTypespec* rt = c->getTypespec()) {
-                  cts = rt->getActualTypespec();
+                  cts = rt->getActual();
                 }
                 value->setTypespec(cts ? cts : ts);
                 if (ts)
@@ -2411,13 +2411,13 @@ std::vector<std::string_view> DesignElaboration::collectParams_(
                         if (param->getUhdmType() == uhdm::UhdmType::Parameter) {
                           if (uhdm::RefTypespec* rt =
                                   ((uhdm::Parameter*)param)->getTypespec()) {
-                            ts = rt->getActualTypespec();
+                            ts = rt->getActual();
                           }
                         } else {
                           if (uhdm::RefTypespec* rt =
                                   ((uhdm::TypeParameter*)param)
                                       ->getTypespec()) {
-                            ts = rt->getActualTypespec();
+                            ts = rt->getActual();
                           }
                         }
                       }
@@ -2431,7 +2431,7 @@ std::vector<std::string_view> DesignElaboration::collectParams_(
                           tsRef->setParent(op);
                           op->setTypespec(tsRef);
                         }
-                        op->getTypespec()->setActualTypespec(ts);
+                        op->getTypespec()->setActual(ts);
                       }
                     }
                     m_helper.reorderAssignmentPattern(module, p->getUhdmParam(),

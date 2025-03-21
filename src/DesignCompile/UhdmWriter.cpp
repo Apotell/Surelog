@@ -674,7 +674,7 @@ void UhdmWriter::writePorts(const std::vector<Signal*>& orig_ports,
             if (rrange->getValue() == "STRING:associative") {
               array_ts->setArrayType(vpiAssocArray);
               if (const uhdm::RefTypespec* rt = rrange->getTypespec()) {
-                if (const uhdm::Typespec* ag = rt->getActualTypespec()) {
+                if (const uhdm::Typespec* ag = rt->getActual()) {
                   uhdm::RefTypespec* cro = s.make<uhdm::RefTypespec>();
                   cro->setName(ag->getName());
                   cro->setParent(array_ts);
@@ -683,7 +683,7 @@ void UhdmWriter::writePorts(const std::vector<Signal*>& orig_ports,
                   cro->setStartColumn(array_ts->getStartColumn());
                   cro->setEndLine(array_ts->getEndLine());
                   cro->setEndColumn(array_ts->getEndColumn());
-                  cro->setActualTypespec(const_cast<uhdm::Typespec*>(ag));
+                  cro->setActual(const_cast<uhdm::Typespec*>(ag));
                   array_ts->setIndexTypespec(cro);
                 }
               }
@@ -703,7 +703,7 @@ void UhdmWriter::writePorts(const std::vector<Signal*>& orig_ports,
                                     orig_port->getTypespecId(), dest_port_rt);
             dest_port->setTypespec(dest_port_rt);
           }
-          dest_port->getTypespec()->setActualTypespec(array_ts);
+          dest_port->getTypespec()->setActual(array_ts);
 
           if (uhdm::Typespec* ts = m_helper.compileTypespec(
                   mod, fC, orig_port->getTypespecId(), m_compileDesign,
@@ -719,7 +719,7 @@ void UhdmWriter::writePorts(const std::vector<Signal*>& orig_ports,
               array_ts_rt->setName(ts->getName());
               array_ts->setElemTypespec(array_ts_rt);
             }
-            array_ts->getElemTypespec()->setActualTypespec(ts);
+            array_ts->getElemTypespec()->setActual(ts);
           }
         }
       } else if (uhdm::Typespec* ts = m_helper.compileTypespec(
@@ -733,7 +733,7 @@ void UhdmWriter::writePorts(const std::vector<Signal*>& orig_ports,
           fC->populateCoreMembers(orig_port->getTypespecId(),
                                   orig_port->getTypespecId(), dest_port_rt);
         }
-        dest_port->getTypespec()->setActualTypespec(ts);
+        dest_port->getTypespec()->setActual(ts);
       }
     }
   }
@@ -842,7 +842,7 @@ void UhdmWriter::writeNets(DesignComponent* mod,
               uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
               rt->setName(ts->getName());
               rt->setParent(dest_net);
-              rt->setActualTypespec(ts);
+              rt->setActual(ts);
               dest_net->setTypespec(rt);
               fC->populateCoreMembers(orig_net->getTypespecId(),
                                       orig_net->getTypespecId(), rt);
@@ -913,7 +913,7 @@ void UhdmWriter::writeClass(ClassDefinition* classDef, uhdm::Serializer& s,
     if (const uhdm::Extends* ext = c->getExtends()) {
       if (const uhdm::RefTypespec* ext_rt = ext->getClassTypespec()) {
         if (const uhdm::ClassTypespec* tps =
-                ext_rt->getActualTypespec<uhdm::ClassTypespec>()) {
+                ext_rt->getActual<uhdm::ClassTypespec>()) {
           if (tps->getClassDefn() == nullptr) {
             const std::string_view tpsName = tps->getName();
             if (c->getParameters()) {
@@ -923,7 +923,7 @@ void UhdmWriter::writeClass(ClassDefinition* classDef, uhdm::Serializer& s,
                     uhdm::TypeParameter* tp = (uhdm::TypeParameter*)ps;
                     if (const uhdm::RefTypespec* tp_rt = tp->getTypespec()) {
                       if (const uhdm::ClassTypespec* cptp =
-                              tp_rt->getActualTypespec<uhdm::ClassTypespec>()) {
+                              tp_rt->getActual<uhdm::ClassTypespec>()) {
                         ((uhdm::ClassTypespec*)tps)
                             ->setClassDefn(
                                 (uhdm::ClassDefn*)cptp->getClassDefn());
@@ -1314,7 +1314,7 @@ void UhdmWriter::writeModule(ModuleDefinition* mod, uhdm::Module* m,
             tps_rt->setParent(smarray);
             smarray->setElemTypespec(tps_rt);
           }
-          smarray->getElemTypespec()->setActualTypespec(tps);
+          smarray->getElemTypespec()->setActual(tps);
           tps->setName(typeName);
           fC->populateCoreMembers(typespecStart, typespecEnd, tps);
 
@@ -1701,7 +1701,7 @@ void UhdmWriter::writeContAssign(Netlist* netlist, uhdm::Serializer& s,
       const uhdm::Expr* delay = assign->getDelay();
       const uhdm::Typespec* tps = nullptr;
       if (const uhdm::RefTypespec* rt = lhs->getTypespec()) {
-        tps = rt->getActualTypespec();
+        tps = rt->getActual();
       }
       bool simplified = false;
       bool cloned = false;
@@ -1714,7 +1714,7 @@ void UhdmWriter::writeContAssign(Netlist* netlist, uhdm::Serializer& s,
         lhs = assign->getLhs();
         rhs = assign->getRhs();
         if (const uhdm::RefTypespec* rt = lhs->getTypespec()) {
-          tps = rt->getActualTypespec();
+          tps = rt->getActual();
         }
         delay = assign->getDelay();
         uhdm::RefObj* ref = (uhdm::RefObj*)delay;
@@ -1744,11 +1744,11 @@ void UhdmWriter::writeContAssign(Netlist* netlist, uhdm::Serializer& s,
                   rhs->getStartLine(), assign, true);
               m_helper.checkForLoops(false);
               if (const uhdm::RefTypespec* rt = lhs->getTypespec()) {
-                tps = rt->getActualTypespec();
+                tps = rt->getActual();
               }
               if (uhdm::Expr* exp = any_cast<uhdm::Expr>(var)) {
                 if (const uhdm::RefTypespec* rt = exp->getTypespec()) {
-                  if (const uhdm::Typespec* temp = rt->getActualTypespec()) {
+                  if (const uhdm::Typespec* temp = rt->getActual()) {
                     tps = temp;
                   }
                 }
@@ -1770,7 +1770,7 @@ void UhdmWriter::writeContAssign(Netlist* netlist, uhdm::Serializer& s,
 
           if (uhdm::Expr* exp = any_cast<uhdm::Expr>(var)) {
             if (const uhdm::RefTypespec* rt = exp->getTypespec()) {
-              if (const uhdm::Typespec* temp = rt->getActualTypespec()) {
+              if (const uhdm::Typespec* temp = rt->getActual()) {
                 tps = temp;
               }
             }
@@ -1793,7 +1793,7 @@ void UhdmWriter::writeContAssign(Netlist* netlist, uhdm::Serializer& s,
             rhs = assign->getRhs();
             delay = assign->getDelay();
             if (const uhdm::RefTypespec* rt = lhs->getTypespec()) {
-              tps = rt->getActualTypespec();
+              tps = rt->getActual();
             }
             cloned = true;
           }
@@ -1824,7 +1824,7 @@ void UhdmWriter::writeContAssign(Netlist* netlist, uhdm::Serializer& s,
       } else if (rhs->getUhdmType() == uhdm::UhdmType::Operation) {
         uhdm::Operation* op = (uhdm::Operation*)rhs;
         if (const uhdm::RefTypespec* ro1 = op->getTypespec()) {
-          if (const uhdm::Typespec* tps = ro1->getActualTypespec()) {
+          if (const uhdm::Typespec* tps = ro1->getActual()) {
             uhdm::ExprEval eval(true);
             uhdm::Expr* tmp =
                 eval.flattenPatternAssignments(s, tps, (uhdm::Expr*)rhs);
@@ -1838,7 +1838,7 @@ void UhdmWriter::writeContAssign(Netlist* netlist, uhdm::Serializer& s,
                 rhs = assign->getRhs();
                 delay = assign->getDelay();
                 if (const uhdm::RefTypespec* ro2 = lhs->getTypespec()) {
-                  tps = ro2->getActualTypespec();
+                  tps = ro2->getActual();
                 }
                 cloned = true;
               }
@@ -1860,7 +1860,7 @@ void UhdmWriter::writeContAssign(Netlist* netlist, uhdm::Serializer& s,
           }
           ((uhdm::Expr*)rhs)
               ->getTypespec()
-              ->setActualTypespec(const_cast<uhdm::Typespec*>(tps));
+              ->setActual(const_cast<uhdm::Typespec*>(tps));
         }
         m_helper.checkForLoops(true);
         uhdm::Any* res = m_helper.reduceExpr(
@@ -2004,7 +2004,7 @@ bool UhdmWriter::writeElabGenScope(Serializer& s, ModuleInstance* instance,
           uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
           rt->setParent(p);
           p->setTypespec(rt);
-          rt->setActualTypespec(ts);
+          rt->setActual(ts);
           params->emplace_back(p);
         }
       }
@@ -2080,8 +2080,7 @@ uhdm::Any* UhdmWriter::swapForSpecifiedVar(
     if (var->getUhdmType() == uhdm::UhdmType::RefVar) {
       uhdm::RefVar* ref = (uhdm::RefVar*)var;
       const uhdm::Typespec* tp = nullptr;
-      if (uhdm::RefTypespec* rt = ref->getTypespec())
-        tp = rt->getActualTypespec();
+      if (uhdm::RefTypespec* rt = ref->getTypespec()) tp = rt->getActual();
       if (tp && tp->getUhdmType() == uhdm::UhdmType::UnsupportedTypespec) {
         const uhdm::Typespec* indexTypespec = nullptr;
         if (lvariables) {
@@ -2129,7 +2128,7 @@ uhdm::Any* UhdmWriter::swapForSpecifiedVar(
         } else {
           uhdm::IntVar* ivar = s.make<uhdm::IntVar>();
           uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
-          rt->setActualTypespec(s.make<uhdm::IntTypespec>());
+          rt->setActual(s.make<uhdm::IntTypespec>());
           rt->setParent(ivar);
           ivar->setTypespec(rt);
           swapVar = ivar;

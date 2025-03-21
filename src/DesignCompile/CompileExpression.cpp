@@ -482,7 +482,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
           uhdm::RefTypespec *const rt = s.make<uhdm::RefTypespec>();
           rt->setParent(c);
           c->setTypespec(rt);
-          rt->setActualTypespec(tps);
+          rt->setActual(tps);
         }
         switch (base) {
           case 'h':
@@ -844,7 +844,7 @@ uhdm::Any *CompileHelper::getValue(std::string_view name,
             uhdm::Operation *op = (uhdm::Operation *)result;
             const uhdm::Typespec *opts = nullptr;
             if (uhdm::RefTypespec *rt = op->getTypespec()) {
-              opts = rt->getActualTypespec();
+              opts = rt->getActual();
             }
             uhdm::ExprEval eval;
             if (uhdm::Expr *res = eval.flattenPatternAssignments(
@@ -918,7 +918,7 @@ uhdm::Any *CompileHelper::getValue(std::string_view name,
                       if (lhs->getUhdmType() == uhdm::UhdmType::Parameter) {
                         if (const uhdm::RefTypespec *rt =
                                 ((uhdm::Parameter *)lhs)->getTypespec()) {
-                          ts = rt->getActualTypespec();
+                          ts = rt->getActual();
                         }
                       }
                       rhs = expandPatternAssignment(ts, (uhdm::Expr *)rhs,
@@ -1024,7 +1024,7 @@ uhdm::Any *CompileHelper::getValue(std::string_view name,
                   if (lhs->getUhdmType() == uhdm::UhdmType::Parameter) {
                     if (const uhdm::RefTypespec *rt =
                             ((uhdm::Parameter *)lhs)->getTypespec()) {
-                      ts = rt->getActualTypespec();
+                      ts = rt->getActual();
                     }
                   }
                   rhs =
@@ -1581,7 +1581,7 @@ uhdm::Any *CompileHelper::compileExpression(
           rttps->setParent(op);
           op->setTypespec(rttps);
         }
-        op->getTypespec()->setActualTypespec(tps);
+        op->getTypespec()->setActual(tps);
         Port_reference = fC->Sibling(Port_reference);
       }
       break;
@@ -2411,7 +2411,7 @@ uhdm::Any *CompileHelper::compileExpression(
                   rttps->setParent(operation);
                   operation->setTypespec(rttps);
                 }
-                operation->getTypespec()->setActualTypespec(tps);
+                operation->getTypespec()->setActual(tps);
               }
             }
             result = operation;
@@ -2609,14 +2609,14 @@ uhdm::Any *CompileHelper::compileExpression(
                                 if (uhdm::RefTypespec *lhs_rt =
                                         ((uhdm::TypeParameter *)lhs)
                                             ->getTypespec()) {
-                                  tps = lhs_rt->getActualTypespec();
+                                  tps = lhs_rt->getActual();
                                 }
                               } else if (lhs->getUhdmType() ==
                                          uhdm::UhdmType::Parameter) {
                                 if (uhdm::RefTypespec *lhs_rt =
                                         ((uhdm::Parameter *)lhs)
                                             ->getTypespec()) {
-                                  tps = lhs_rt->getActualTypespec();
+                                  tps = lhs_rt->getActual();
                                 }
                               }
                               uhdm::Expr *res = (uhdm::Expr *)result;
@@ -2624,7 +2624,7 @@ uhdm::Any *CompileHelper::compileExpression(
                                 uhdm::RefTypespec *tps_rt =
                                     s.make<uhdm::RefTypespec>();
                                 tps_rt->setParent(res);
-                                tps_rt->setActualTypespec(tps);
+                                tps_rt->setActual(tps);
                                 res->setTypespec(tps_rt);
                               }
                               break;
@@ -2686,13 +2686,13 @@ uhdm::Any *CompileHelper::compileExpression(
                             if (uhdm::RefTypespec *lhs_rt =
                                     ((uhdm::TypeParameter *)lhs)
                                         ->getTypespec()) {
-                              tps = lhs_rt->getActualTypespec();
+                              tps = lhs_rt->getActual();
                             }
                           } else if (lhs->getUhdmType() ==
                                      uhdm::UhdmType::Parameter) {
                             if (uhdm::RefTypespec *lhs_rt =
                                     ((uhdm::Parameter *)lhs)->getTypespec()) {
-                              tps = lhs_rt->getActualTypespec();
+                              tps = lhs_rt->getActual();
                             }
                           }
 
@@ -2701,7 +2701,7 @@ uhdm::Any *CompileHelper::compileExpression(
                             uhdm::RefTypespec *tps_rt =
                                 s.make<uhdm::RefTypespec>();
                             tps_rt->setParent(res);
-                            tps_rt->setActualTypespec(tps);
+                            tps_rt->setActual(tps);
                             res->setTypespec(tps_rt);
                           }
                           break;
@@ -2739,7 +2739,7 @@ uhdm::Any *CompileHelper::compileExpression(
               ts->setSigned(true);
               uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
               rt->setParent(c);
-              rt->setActualTypespec(ts);
+              rt->setActual(ts);
               c->setTypespec(rt);
             }
             result = c;
@@ -2857,7 +2857,7 @@ uhdm::Any *CompileHelper::compileExpression(
           uhdm::ArrayTypespec *at = s.make<uhdm::ArrayTypespec>();
           at->setParent(var);
           fC->populateCoreMembers(parent, parent, at);
-          rt->setActualTypespec(at);
+          rt->setActual(at);
           fC->populateCoreMembers(parent, parent, rt);
           var->setTypespec(rt);
           var->setArrayType(vpiQueueArray);
@@ -3551,7 +3551,7 @@ uhdm::Any *CompileHelper::compileAssignmentPattern(
                                       rt);
               pattern->setTypespec(rt);
             }
-            pattern->getTypespec()->setActualTypespec(tps);
+            pattern->getTypespec()->setActual(tps);
             fC->populateCoreMembers(Constant_expression, Expression, pattern);
           } else {
             NodeId Primary_literal = Constant_primary;
@@ -3566,7 +3566,7 @@ uhdm::Any *CompileHelper::compileAssignmentPattern(
                 fC->populateCoreMembers(Primary_literal, Primary_literal, rt);
                 pattern->setTypespec(rt);
               }
-              pattern->getTypespec()->setActualTypespec(tps);
+              pattern->getTypespec()->setActual(tps);
             }
           }
           pattern->setParent(operation);
@@ -3861,7 +3861,7 @@ uhdm::RangeCollection *CompileHelper::compileRanges(
             uhdm::RefTypespec *assoc_tps_rt = s.make<uhdm::RefTypespec>();
             assoc_tps_rt->setName(assoc_tps->getName());
             assoc_tps_rt->setParent(rexpc);
-            assoc_tps_rt->setActualTypespec(assoc_tps);
+            assoc_tps_rt->setActual(assoc_tps);
             fC->populateCoreMembers(rexpr, rexpr, assoc_tps_rt);
             rexpc->setTypespec(assoc_tps_rt);
 
@@ -3955,7 +3955,7 @@ uhdm::RangeCollection *CompileHelper::compileRanges(
                                 nullptr, instance, true)) {
           uhdm::RefTypespec *assoc_tps_rt = s.make<uhdm::RefTypespec>();
           assoc_tps_rt->setParent(rexpc);
-          assoc_tps_rt->setActualTypespec(assoc_tps);
+          assoc_tps_rt->setActual(assoc_tps);
           fC->populateCoreMembers(DataType, DataType, assoc_tps_rt);
           rexpc->setTypespec(assoc_tps_rt);
         }
@@ -4119,7 +4119,7 @@ const uhdm::Typespec *getMemberTypespec(
     for (uhdm::TypespecMember *memb : *ts->getMembers()) {
       if (memb->getName() == suffixes[index]) {
         if (const uhdm::RefTypespec *rt = memb->getTypespec()) {
-          result = rt->getActualTypespec();
+          result = rt->getActual();
         }
         if (result && (index < (suffixes.size() - 1))) {
           if (result->getUhdmType() == uhdm::UhdmType::StructTypespec) {
@@ -4284,7 +4284,7 @@ const uhdm::Typespec *CompileHelper::getTypespec(
           }
           uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
           rt->setParent(array);
-          rt->setActualTypespec(const_cast<uhdm::Typespec *>(result));
+          rt->setActual(const_cast<uhdm::Typespec *>(result));
           array->setElemTypespec(rt);
           fC->populateCoreMembers(
               sigTypeId, Unpacked_dimension ? Unpacked_dimension : sigTypeId,
@@ -4315,7 +4315,7 @@ const uhdm::Typespec *CompileHelper::getTypespec(
           }
           uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
           rt->setParent(array);
-          rt->setActualTypespec(const_cast<uhdm::Typespec *>(result));
+          rt->setActual(const_cast<uhdm::Typespec *>(result));
           array->setElemTypespec(rt);
           result = array;
         }
@@ -4357,7 +4357,7 @@ const uhdm::Typespec *CompileHelper::getTypespec(
             if (p->getName() == basename) {
               const uhdm::Typespec *tps = nullptr;
               if (const uhdm::RefTypespec *rt = p->getTypespec()) {
-                tps = rt->getActualTypespec();
+                tps = rt->getActual();
               }
               if (!suffixnames.empty()) {
                 result = getMemberTypespec(tps, suffixnames, 0);
@@ -4373,12 +4373,12 @@ const uhdm::Typespec *CompileHelper::getTypespec(
               if (param->getUhdmType() == uhdm::UhdmType::Parameter) {
                 uhdm::Parameter *p = (uhdm::Parameter *)param;
                 if (const uhdm::RefTypespec *rt = p->getTypespec()) {
-                  result = rt->getActualTypespec();
+                  result = rt->getActual();
                 }
               } else {
                 uhdm::TypeParameter *p = (uhdm::TypeParameter *)param;
                 if (const uhdm::RefTypespec *rt = p->getTypespec()) {
-                  result = rt->getActualTypespec();
+                  result = rt->getActual();
                 }
               }
               break;
@@ -4653,7 +4653,7 @@ uhdm::Any *CompileHelper::compileBound(
           muteErrors)) {
     const uhdm::Typespec *ts = nullptr;
     if (const uhdm::RefTypespec *rt = operand->getTypespec()) {
-      ts = rt->getActualTypespec();
+      ts = rt->getActual();
     }
     uhdm::RangeCollection *ranges = nullptr;
     if (ts) {
@@ -5224,8 +5224,7 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
                 path_rt->setParent(path);
                 path->setTypespec(path_rt);
               }
-              path->getTypespec()->setActualTypespec(
-                  expval_rt->getActualTypespec());
+              path->getTypespec()->setActual(expval_rt->getActual());
             }
           } else if (uhdm::Port *expval = any_cast<uhdm::Port>(rootValue)) {
             path->setExpr(expval->getLowConn());
@@ -5237,12 +5236,12 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
             if (param->getUhdmType() == uhdm::UhdmType::Parameter) {
               uhdm::Parameter *p = (uhdm::Parameter *)param;
               if (uhdm::RefTypespec *rt = p->getTypespec()) {
-                tps = rt->getActualTypespec();
+                tps = rt->getActual();
               }
             } else {
               uhdm::TypeParameter *p = (uhdm::TypeParameter *)param;
               if (uhdm::RefTypespec *rt = p->getTypespec()) {
-                tps = rt->getActualTypespec();
+                tps = rt->getActual();
               }
             }
             if (path->getTypespec() == nullptr) {
@@ -5250,7 +5249,7 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
               rt->setParent(path);
               path->setTypespec(rt);
             }
-            path->getTypespec()->setActualTypespec(tps);
+            path->getTypespec()->setActual(tps);
           }
         }
       }
@@ -5673,7 +5672,7 @@ void CompileHelper::reorderAssignmentPattern(
       if (p->getRanges()) {
         ranges = p->getRanges();
       } else if (const uhdm::RefTypespec *rt = p->getTypespec()) {
-        if (const uhdm::Typespec *tps = rt->getActualTypespec()) {
+        if (const uhdm::Typespec *tps = rt->getActual()) {
           uhdm::UhdmType ttype = tps->getUhdmType();
           if (ttype == uhdm::UhdmType::BitTypespec) {
             ranges = ((uhdm::BitTypespec *)tps)->getRanges();

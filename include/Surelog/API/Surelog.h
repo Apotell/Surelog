@@ -36,6 +36,8 @@ namespace SURELOG {
 class Design;
 class AstListener;
 class Session;
+class VObject;
+class NodeId;
 struct scompiler;
 
 // Create a compiler session based on the command line options
@@ -58,6 +60,13 @@ vpiHandle get_vpi_design(scompiler* compiler);
 void shutdown_compiler(scompiler* compiler);
 
 void walk(scompiler* compiler, AstListener* listener);
+
+bool CompareTrees(scompiler* LHScompiler, scompiler* RHScompiler);
+
+bool areIdentical(NodeId nodeIdA, const std::vector<VObject>& objectsA,
+                  NodeId nodeIdB, const std::vector<VObject>& objectsB);
+NodeId getNext(NodeId nodeId, const std::vector<VObject>& objects);
+bool isSkippableType(uint16_t type);
 
 }  // namespace SURELOG
 

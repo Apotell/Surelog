@@ -48,7 +48,8 @@ SV3_1aPythonListener::~SV3_1aPythonListener() = default;
 
 void SV3_1aPythonListener::logError(ErrorDefinition::ErrorType error,
                                     antlr4::ParserRuleContext* ctx,
-                                    const std::string& object, bool printColumn) {
+                                    const std::string& object,
+                                    bool printColumn) {
   LineColumn lineCol = ParseUtils::getLineColumn(getTokenStream(), ctx);
 
   Location loc(

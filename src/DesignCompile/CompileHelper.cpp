@@ -2694,11 +2694,10 @@ bool CompileHelper::compileAnsiPortDeclaration(DesignComponent* component,
   return true;
 }
 
-bool CompileHelper::compileNetDeclaration(DesignComponent* component,
-                                          const FileContent* fC, NodeId id,
-                                          bool interface,
-                                          CompileDesign* compileDesign,
-                                          uhdm::AttributeCollection* attributes) {
+bool CompileHelper::compileNetDeclaration(
+    DesignComponent* component, const FileContent* fC, NodeId id,
+    bool interface, CompileDesign* compileDesign,
+    uhdm::AttributeCollection* attributes) {
   /*
  n<> u<17> t<NetType_Wire> p<18> l<27>
  n<> u<18> t<NetTypeOrTrireg_Net> p<22> c<17> s<21> l<27>

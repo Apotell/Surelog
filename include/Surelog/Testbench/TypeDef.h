@@ -57,5 +57,5 @@ class TypeDef final : public DataType {
   bool m_forwardDeclaration;
 };
 
-};     // namespace SURELOG
+};  // namespace SURELOG
 #endif /* SURELOG_TYPEDEF_H */

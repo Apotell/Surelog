@@ -26,10 +26,10 @@
 #include "Surelog/Design/Design.h"
 #include "Surelog/Design/FileContent.h"
 #include "Surelog/DesignCompile/CompileDesign.h"
+#include "Surelog/SourceCompile/AstListener.h"
 #include "Surelog/SourceCompile/CompileSourceFile.h"
 #include "Surelog/SourceCompile/Compiler.h"
 #include "Surelog/SourceCompile/ParseFile.h"
-#include "Surelog/SourceCompile/AstListener.h"
 
 namespace SURELOG {
 

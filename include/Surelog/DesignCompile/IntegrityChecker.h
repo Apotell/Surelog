@@ -49,7 +49,8 @@ class IntegrityChecker final : protected uhdm::UhdmListener {
   std::set<const uhdm::PreprocMacroInstance*> getMacroInstances(
       const uhdm::Any* const object) const;
 
-  void populateAnyMacroInstanceCache(const uhdm::PreprocMacroInstance *const pmi);
+  void populateAnyMacroInstanceCache(
+      const uhdm::PreprocMacroInstance* const pmi);
   void populateAnyMacroInstanceCache();
 
   enum class LineColumnRelation {

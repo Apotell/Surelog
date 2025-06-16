@@ -16,6 +16,8 @@
 
 #include "Surelog/API/Surelog.h"
 
+#include <map>
+#include <string_view>
 #include <vector>
 
 #include "Surelog/CommandLine/CommandLineParser.h"
@@ -82,118 +84,86 @@ void walk(scompiler* compiler, AstListener* listener) {
   }
 }
 
-bool CompareTrees(scompiler* LHScompiler, scompiler* RHScompiler) {
-  Compiler* formattingCompiler = (Compiler*)LHScompiler;
-  Compiler* verificationComplier = (Compiler*)RHScompiler;
-
-  const std::vector<CompileSourceFile*>& formattedFiles =
-      formattingCompiler->getCompileSourceFiles();
-  const std::vector<CompileSourceFile*>& verificationFiles =
-      verificationComplier->getCompileSourceFiles();
-
-  FileSystem* formattingFileSystem =
-      formattingCompiler->getSession()->getFileSystem();
-  FileSystem* verificationFileSystem =
-      verificationComplier->getSession()->getFileSystem();
-  // Iterate over all formatted files
-  for (const auto* formattedFile : formattedFiles) {
-    ParseFile* formatParser = formattedFile->getParser();
-    FileContent* formatFC = formatParser->getFileContent();
-    NodeId formatTree = formatFC->getRootNode();
-    const std::vector<VObject>& formatTreeObjects = formatFC->getVObjects();
-
-    const std::string targetFileName =
-        ((std::filesystem::path)formattingFileSystem->toPath(
-             formattedFile->getFileId()))
-            .filename()
-            .string();
-
-    // Find matching file in verification set
-    const CompileSourceFile* matchedVerificationFile = nullptr;
-    for (const auto* verificationFile : verificationFiles) {
-      std::string verificationFileName =
-          ((std::filesystem::path)verificationFileSystem->toPath(
-               verificationFile->getFileId()))
-              .filename()
-              .string();
-
-      if (verificationFileName == targetFileName) {
-        matchedVerificationFile = verificationFile;
-        break;
-      }
-    }
-
-    if (matchedVerificationFile) {
-      ParseFile* verificationParser = matchedVerificationFile->getParser();
-      FileContent* verificationFC = verificationParser->getFileContent();
-      NodeId verificationTree = verificationFC->getRootNode();
-      const std::vector<VObject>& verificationTreeObjects =
-          verificationFC->getVObjects();
-
-      if (!areIdentical(formatTree, formatTreeObjects, verificationTree,
-                        verificationTreeObjects)) {
-        return false;  // Trees don't match
-      }
-    } else {
-      std::cout << "No matching file found for " << targetFileName
-                << " in verification set.\n";
-      return false;  // No match found
-    }
-  }
-
-  return true;  // All matched trees are identical
+static bool isSpace(VObjectType type) {
+  return (type == VObjectType::paWhite_space) || (type == VObjectType::ppCR);
 }
 
-bool isSkippableType(VObjectType type) {
-  return type == VObjectType::paWhite_space || type == VObjectType::ppCR;
-}
-
-NodeId getNext(NodeId nodeId, const std::vector<VObject>& objects) {
-  while (nodeId && isSkippableType(objects[nodeId].m_type)) {
-    nodeId = (objects[nodeId].m_child) ? objects[nodeId].m_child
-                                       : objects[nodeId].m_sibling;
+static NodeId skipSpace(NodeId nodeId, const std::vector<VObject>& objects) {
+  while (nodeId && isSpace(objects[nodeId].m_type)) {
+    nodeId = objects[nodeId].m_sibling;
   }
   return nodeId;
 }
 
-bool areIdentical(NodeId nodeIdA, const std::vector<VObject>& objectsA,
-                  NodeId nodeIdB, const std::vector<VObject>& objectsB) {
-  nodeIdA = getNext(nodeIdA, objectsA);
-  nodeIdB = getNext(nodeIdB, objectsB);
+static bool compareTrees(NodeId nodeIdA, const std::vector<VObject>& objectsA,
+                         NodeId nodeIdB, const std::vector<VObject>& objectsB) {
+  if (!nodeIdA && !nodeIdB) {
+    // Both nodes are null
+    return true;
+  }
 
-  // Both nodes are null
-  if (!nodeIdA && !nodeIdB) return true;
+  if (!nodeIdA || !nodeIdB) {
+    // One null but the other isn't
+    return false;
+  }
 
-  // One null but the other isn't
-  if (!nodeIdA || !nodeIdB) return false;
+  if (objectsA[nodeIdA].m_type != objectsB[nodeIdB].m_type) {
+    // Type mismatch
+    return false;
+  }
 
-  // Type mismatch
-  if (objectsA[nodeIdA].m_type != objectsB[nodeIdB].m_type) return false;
+  nodeIdA = skipSpace(objectsA[nodeIdA].m_child, objectsA);
+  nodeIdB = skipSpace(objectsB[nodeIdB].m_child, objectsB);
 
-  // Compare children
-  NodeId childA = getNext(objectsA[nodeIdA].m_child, objectsA);
-  NodeId childB = getNext(objectsB[nodeIdB].m_child, objectsB);
-
-  while (childA || childB) {
-    // Recursively compare corresponding children
-    if (!areIdentical(childA, objectsA, childB, objectsB)) return false;
-
-    // Advance to next sibling (skipping whitespace/CR)
-    NodeId sibA(0);
-    if (childA) {
-      sibA = objectsA[childA].m_sibling;
-    }
-    NodeId sibB(0);
-    if (childB) {
-      sibB = objectsB[childB].m_sibling;
+  while (nodeIdA || nodeIdB) {
+    if (!compareTrees(nodeIdA, objectsA, nodeIdB, objectsB)) {
+      return false;
     }
 
-    childA = getNext(sibA, objectsA);
-    childB = getNext(sibB, objectsB);
-    ;
+    nodeIdA = skipSpace(objectsA[nodeIdA].m_sibling, objectsA);
+    nodeIdB = skipSpace(objectsB[nodeIdB].m_sibling, objectsB);
   }
 
   return true;
 }
 
+bool compareParserOutputs(scompiler* lhs, scompiler* rhs) {
+  std::map<std::string_view, const FileContent*> lookup;
+
+  Compiler* const lhsCompiler = (Compiler*)lhs;
+  if (FileSystem* const lhsFS = lhsCompiler->getSession()->getFileSystem()) {
+    for (const CompileSourceFile* csf : lhsCompiler->getCompileSourceFiles()) {
+      const ParseFile* const pf = csf->getParser();
+      const FileContent* const fc = pf->getFileContent();
+      lookup.emplace(lhsFS->toPath(fc->getFileId()), fc);
+    }
+  }
+
+  Compiler* const rhsCompiler = (Compiler*)rhs;
+  FileSystem* const rhsFS = rhsCompiler->getSession()->getFileSystem();
+  for (const CompileSourceFile* csf : rhsCompiler->getCompileSourceFiles()) {
+    const ParseFile* const pf = csf->getParser();
+    const FileContent* const fc = pf->getFileContent();
+
+    auto it = lookup.find(rhsFS->toPath(fc->getFileId()));
+    if (it == lookup.cend()) {
+      return false;
+    }
+
+    const FileContent* const lhsFC = it->second;
+    const FileContent* const rhsFC = fc;
+
+    NodeId lhsRootNode = lhsFC->getRootNode();
+    const std::vector<VObject>& lhsObjects = lhsFC->getVObjects();
+
+    NodeId rhsRootNode = rhsFC->getRootNode();
+    const std::vector<VObject>& rhsObjects = rhsFC->getVObjects();
+
+    if (!compareTrees(lhsRootNode, lhsObjects, rhsRootNode, rhsObjects)) {
+      return false;
+    }
+  }
+
+  return true;
+}
 }  // namespace SURELOG

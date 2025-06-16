@@ -1158,5 +1158,4 @@ void PlatformFileSystem::printConfiguration(std::ostream &out) {
   }
   out << "=== === ===" << std::endl;
 }
-
 }  // namespace SURELOG

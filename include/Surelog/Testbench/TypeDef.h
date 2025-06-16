@@ -58,4 +58,5 @@ class TypeDef final : public DataType {
 };
 
 };  // namespace SURELOG
+
 #endif /* SURELOG_TYPEDEF_H */

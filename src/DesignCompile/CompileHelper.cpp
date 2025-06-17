@@ -6225,7 +6225,7 @@ uhdm::Expr* CompileHelper::expandPatternAssignment(
   uint64_t patternSize = 0;
 
   uhdm::ExprEval eval(true);
-  rhs = eval.flattenPatternAssignments(s, tps, (uhdm::Expr*)rhs);
+  rhs = eval.flattenPatternAssignments(s, tps, rhs);
 
   std::vector<int32_t> values(size, 0);
   if (rhs->getUhdmType() == uhdm::UhdmType::Operation) {

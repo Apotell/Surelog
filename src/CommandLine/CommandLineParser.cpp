@@ -1631,7 +1631,7 @@ void CommandLineParser::findAllIncludeFiles() {
 
   SymbolTable* const symbols = m_session->getSymbolTable();
   FileSystem* const fileSystem = m_session->getFileSystem();
-  const std::regex includeRegex(R"("^\\s*`include\\s+\"([^\"]+)\"")");
+  const std::regex includeRegex("^\\s*`include\\s+\"([^\"]+)\"");
 
   while (!queue.empty()) {
     PathId pathId = queue.front();

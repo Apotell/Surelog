@@ -1625,43 +1625,38 @@ bool CommandLineParser::cleanCache() {
   return noError;
 }
 
-void CommandLineParser::findAllIncludeFiles() {
-  std::set<std::string> visited;
+void CommandLineParser::addIncludesAsSourceFiles() {
   std::deque<PathId> queue(m_sourceFiles.cbegin(), m_sourceFiles.cend());
 
   SymbolTable* const symbols = m_session->getSymbolTable();
   FileSystem* const fileSystem = m_session->getFileSystem();
-  const std::regex includeRegex("^\\s*`include\\s+\"([^\"]+)\"");
+  const std::regex includeRegex(R"("^\\s*`include\\s+\"([^\"]+)\"")");
 
+  std::string line;
+  line.reserve(2048);
+  PathIdSet visited;
   while (!queue.empty()) {
-    PathId pathId = queue.front();
+    PathId fileId = queue.front();
     queue.pop_front();
 
-    std::string filePath = fileSystem->toPlatformAbsPath(pathId).string();
+    if (!visited.emplace(fileId).second) continue;  // Prevent cycles
+    if (!fileSystem->exists(fileId)) continue;
 
-    if (!visited.emplace(filePath).second) continue;  // Prevent cycles
-
-    if (!std::filesystem::exists(filePath)) continue;
-
-    std::ifstream file(filePath);
-    if (!file.is_open()) continue;
-
-    std::string line;
-    while (std::getline(file, line)) {
+    std::istream& strm = fileSystem->openForRead(fileId);
+    while (strm.good() && std::getline(strm, line)) {
       std::smatch match;
       if (std::regex_search(line, match, includeRegex)) {
-        std::string includeFile = match[1].str();
+        std::string includedFile = match[1].str();
 
-        PathId fileId = fileSystem->locate(
-            includeFile, m_session->getCommandLineParser()->getIncludePaths(),
-            symbols);
-        if (fileId && m_sourceFileSet.find(fileId) == m_sourceFileSet.end()) {
-          m_sourceFiles.emplace_back(fileId);
-          m_sourceFileSet.emplace(fileId);
+        if (PathId includedId =
+                fileSystem->locate(includedFile, m_includePaths, symbols)) {
+          if (m_sourceFileSet.emplace(includedId).second) {
+            m_sourceFiles.emplace_back(includedId);
+            queue.emplace_back(includedId);
+          }
         }
-
-        queue.emplace_back(fileId);
       }
+      fileSystem->close(strm);
     }
   }
 }

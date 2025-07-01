@@ -246,8 +246,9 @@ class CommandLineParser final {
   void fullSVMode(bool sverilog) { m_sverilog = sverilog; }
   bool isSVFile(PathId fileId) const;
   bool cleanCache();
-  // update the list of source files with all its include files
-  void findAllIncludeFiles();
+
+  // update the list of source files with all its included files
+  void addIncludesAsSourceFiles();
 
  private:
   std::pair<PathId, std::filesystem::path> addWorkingDirectory_(

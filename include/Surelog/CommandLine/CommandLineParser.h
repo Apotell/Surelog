@@ -247,6 +247,9 @@ class CommandLineParser final {
   bool isSVFile(PathId fileId) const;
   bool cleanCache();
 
+  // update the list of source files with all its included files
+  void addIncludesAsSourceFiles();
+
  private:
   std::pair<PathId, std::filesystem::path> addWorkingDirectory_(
       const std::filesystem::path& wd, const std::filesystem::path& rwd);

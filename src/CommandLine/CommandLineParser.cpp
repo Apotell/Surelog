@@ -25,6 +25,7 @@
 
 #include <cstdint>
 #include <filesystem>
+#include <fstream>
 #include <map>
 #include <nlohmann/json.hpp>
 #include <string>
@@ -1622,5 +1623,41 @@ bool CommandLineParser::cleanCache() {
   }
 
   return noError;
+}
+
+void CommandLineParser::addIncludesAsSourceFiles() {
+  std::deque<PathId> queue(m_sourceFiles.cbegin(), m_sourceFiles.cend());
+
+  SymbolTable* const symbols = m_session->getSymbolTable();
+  FileSystem* const fileSystem = m_session->getFileSystem();
+  const std::regex includeRegex(R"("^\\s*`include\\s+\"([^\"]+)\"")");
+
+  std::string line;
+  line.reserve(2048);
+  PathIdSet visited;
+  while (!queue.empty()) {
+    PathId fileId = queue.front();
+    queue.pop_front();
+
+    if (!visited.emplace(fileId).second) continue;  // Prevent cycles
+    if (!fileSystem->exists(fileId)) continue;
+
+    std::istream& strm = fileSystem->openForRead(fileId);
+    while (strm.good() && std::getline(strm, line)) {
+      std::smatch match;
+      if (std::regex_search(line, match, includeRegex)) {
+        std::string includedFile = match[1].str();
+
+        if (PathId includedId =
+                fileSystem->locate(includedFile, m_includePaths, symbols)) {
+          if (m_sourceFileSet.emplace(includedId).second) {
+            m_sourceFiles.emplace_back(includedId);
+            queue.emplace_back(includedId);
+          }
+        }
+      }
+      fileSystem->close(strm);
+    }
+  }
 }
 }  // namespace SURELOG

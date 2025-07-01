@@ -1656,8 +1656,8 @@ void CommandLineParser::addIncludesAsSourceFiles() {
           }
         }
       }
-      fileSystem->close(strm);
     }
+    fileSystem->close(strm);
   }
 }
 }  // namespace SURELOG

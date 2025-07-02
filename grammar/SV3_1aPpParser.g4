@@ -113,7 +113,12 @@ unterminated_string: DOUBLE_QUOTE string_blob* CR;
 
 macro_actual_args: macro_arg* (COMMA macro_arg*)*;
 
-comment: LINE_COMMENT | BLOCK_COMMENT | SYNOPSIS_BLOCK_COMMENT;
+comment
+  : LINE_COMMENT
+  | ESCAPED_LINE_COMMENT
+  | BLOCK_COMMENT
+  | SYNOPSIS_BLOCK_COMMENT
+  ;
 
 integral_number: INTEGRAL_NUMBER;
 
@@ -470,11 +475,19 @@ macro_arguments
   ;
 
 escaped_macro_definition_body
-  : escaped_macro_definition_body_alt1
-  | escaped_macro_definition_body_alt2
+  : escaped_macro_definition_body_inner ESCAPED_CR SPACES* (
+    LINE_COMMENT
+    | CR
+    | EOF
+  )
+  | escaped_macro_definition_body_inner (
+    LINE_COMMENT
+    | CR SPACES*
+    | EOF
+  )
   ;
 
-escaped_macro_definition_body_alt1
+escaped_macro_definition_body_inner
   : (
     unterminated_string
     | MACRO_IDENTIFIER
@@ -496,7 +509,9 @@ escaped_macro_definition_body_alt1
     | SPACES
     | FIXED_POINT_NUMBER
     | QUOTED_STRING
-    | comment
+    | ESCAPED_LINE_COMMENT
+    | BLOCK_COMMENT
+    | SYNOPSIS_BLOCK_COMMENT
     | TICK_QUOTE
     | TICK_BACKSLASH_TICK_QUOTE
     | TICK_TICK
@@ -505,41 +520,7 @@ escaped_macro_definition_body_alt1
     | CLOSE_CURLY
     | OPEN_BRACKET
     | CLOSE_BRACKET
-  )*? ESCAPED_CR SPACES* (CR | EOF)
-  ;
-
-escaped_macro_definition_body_alt2
-  : (
-    unterminated_string
-    | MACRO_IDENTIFIER
-    | MACRO_ESCAPED_IDENTIFIER
-    | escaped_identifier
-    | SIMPLE_IDENTIFIER
-    | integral_number
-    | TEXT_CR
-    | pound_delay
-    | pound_pound_delay
-    | ESCAPED_CR
-    | OPEN_PARENS
-    | CLOSE_PARENS
-    | COMMA
-    | ASSIGN_OP
-    | DOUBLE_QUOTE
-    | TICK_VARIABLE
-    | directive_in_macro
-    | SPACES
-    | FIXED_POINT_NUMBER
-    | QUOTED_STRING
-    | comment
-    | TICK_QUOTE
-    | TICK_BACKSLASH_TICK_QUOTE
-    | TICK_TICK
-    | SPECIAL
-    | OPEN_CURLY
-    | CLOSE_CURLY
-    | OPEN_BRACKET
-    | CLOSE_BRACKET
-  )*? (CR SPACES* | EOF)
+  )*?
   ;
 
 simple_macro_definition_body

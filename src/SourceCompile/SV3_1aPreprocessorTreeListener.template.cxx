@@ -384,7 +384,8 @@ SV3_1aPreprocessorTreeListener::SV3_1aPreprocessorTreeListener(
 NodeId SV3_1aPreprocessorTreeListener::addVObject(
     antlr4::tree::TerminalNode *node, VObjectType objectType) {
   NodeId nodeId;
-  if (objectType == VObjectType::LINE_COMMENT) {
+  if ((objectType == VObjectType::LINE_COMMENT) ||
+      (objectType == VObjectType::ESCAPED_LINE_COMMENT)) {
     const std::string text = node->getText();
     const LineColumn lc = ParseUtils::getLineColumn(node->getSymbol());
 
@@ -396,7 +397,7 @@ NodeId SV3_1aPreprocessorTreeListener::addVObject(
     }
 
     if (!trimmed.empty()) {
-      nodeId = addVObject(node, trimmed, VObjectType::LINE_COMMENT);
+      nodeId = addVObject(node, trimmed, objectType);
       // Adjust the end location of the object
       VObject *const object = m_fileContent->MutableObject(nodeId);
       --object->m_endLine;

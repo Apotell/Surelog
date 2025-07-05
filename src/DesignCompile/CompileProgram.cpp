@@ -252,7 +252,7 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
         if (collectType != CollectType::DEFINITION) break;
         NodeId list_of_type_assignments = fC->Child(id);
         if (fC->Type(list_of_type_assignments) ==
-                VObjectType::paList_of_type_assignments ||
+                VObjectType::paType_assignment_list ||
             fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
           // Type param
           m_helper.compileParameterDeclaration(
@@ -270,7 +270,7 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
         if (collectType != CollectType::DEFINITION) break;
         NodeId list_of_type_assignments = fC->Child(id);
         if (fC->Type(list_of_type_assignments) ==
-                VObjectType::paList_of_type_assignments ||
+                VObjectType::paType_assignment_list ||
             fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
           // Type param
           m_helper.compileParameterDeclaration(

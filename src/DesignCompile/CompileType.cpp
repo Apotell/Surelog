@@ -999,7 +999,7 @@ Typespec* CompileHelper::compileDatastructureTypespec(
           param = actualFC->Sibling(n);
         }
         if (param && (actualFC->Type(param) !=
-                      VObjectType::paList_of_net_decl_assignments)) {
+                      VObjectType::paNet_decl_assignment_list)) {
           uhdm::AnyCollection* params = ref->getParameters(true);
           uhdm::ParamAssignCollection* assigns = ref->getParamAssigns(true);
           uint32_t index = 0;

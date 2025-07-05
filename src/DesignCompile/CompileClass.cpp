@@ -855,7 +855,7 @@ bool CompileClass::compile_local_parameter_declaration_(const FileContent* fC,
 
   NodeId list_of_type_assignments = fC->Child(id);
   if (fC->Type(list_of_type_assignments) ==
-          VObjectType::paList_of_type_assignments ||
+          VObjectType::paType_assignment_list ||
       fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
     // Type param
     m_helper.compileParameterDeclaration(m_class, fC, list_of_type_assignments,
@@ -902,7 +902,7 @@ bool CompileClass::compile_parameter_declaration_(const FileContent* fC,
 
   NodeId list_of_type_assignments = fC->Child(id);
   if (fC->Type(list_of_type_assignments) ==
-          VObjectType::paList_of_type_assignments ||
+          VObjectType::paType_assignment_list ||
       fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
     // Type param
     m_helper.compileParameterDeclaration(m_class, fC, list_of_type_assignments,
@@ -1010,7 +1010,7 @@ bool CompileClass::compile_class_parameters_(const FileContent* fC, NodeId id) {
       NodeId list_of_type_assignments = fC->Child(parameter_port_declaration);
       NodeId type = fC->Child(list_of_type_assignments);
       if (fC->Type(list_of_type_assignments) ==
-              VObjectType::paList_of_type_assignments ||
+              VObjectType::paType_assignment_list ||
           fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
         // Type param
         m_helper.compileParameterDeclaration(

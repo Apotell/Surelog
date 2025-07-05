@@ -2145,7 +2145,7 @@ bool CompileHelper::compileClassConstructorDeclaration(
     } else if (fC->Type(StmtTmp) == VObjectType::paSuper_dot_new) {
       nbStmts++;
       NodeId lookAhead = fC->Sibling(StmtTmp);
-      if (fC->Type(lookAhead) == VObjectType::paList_of_arguments) {
+      if (fC->Type(lookAhead) == VObjectType::paArgument_list) {
         StmtTmp = fC->Sibling(StmtTmp);
       }
     } else if (fC->Type(StmtTmp) == VObjectType::paFunction_statement_or_null) {
@@ -2160,7 +2160,7 @@ bool CompileHelper::compileClassConstructorDeclaration(
       mcall->setParent(func);
       mcall->setName("super.new");
       NodeId Args = fC->Sibling(Stmt);
-      if (fC->Type(Args) == VObjectType::paList_of_arguments) {
+      if (fC->Type(Args) == VObjectType::paArgument_list) {
         if (uhdm::AnyCollection* arguments =
                 compileTfCallArguments(component, fC, Args, compileDesign,
                                        Reduce::No, mcall, nullptr, false)) {
@@ -2197,7 +2197,7 @@ bool CompileHelper::compileClassConstructorDeclaration(
         mcall->setParent(func);
         mcall->setName("super.new");
         NodeId Args = fC->Sibling(Stmt);
-        if (fC->Type(Args) == VObjectType::paList_of_arguments) {
+        if (fC->Type(Args) == VObjectType::paArgument_list) {
           if (uhdm::AnyCollection* arguments =
                   compileTfCallArguments(component, fC, Args, compileDesign,
                                          Reduce::No, mcall, nullptr, false)) {
@@ -3011,7 +3011,7 @@ uhdm::Any* CompileHelper::compileForLoop(DesignComponent* component,
         For_variable_declaration = fC->Sibling(For_variable_declaration);
       }
     } else if (fC->Type(For_variable_declaration) ==
-               VObjectType::paList_of_variable_assignments) {
+               VObjectType::paVariable_assignment_list) {
       NodeId List_of_variable_assignments = For_variable_declaration;
       NodeId Variable_assignment = fC->Child(List_of_variable_assignments);
       while (Variable_assignment) {

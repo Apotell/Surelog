@@ -1180,7 +1180,7 @@ bool CompileHelper::compileSubroutine_call(Scope* parent, Statement* parentStmt,
       next_name = fC->Sibling(next_name);
     }
     if (!next_name) break;
-    if (ntype == VObjectType::paList_of_arguments) {
+    if (ntype == VObjectType::paArgument_list) {
       break;
     }
     var_chain.emplace_back(next_name);
@@ -1402,7 +1402,7 @@ bool CompileHelper::compileScopeVariable(Scope* parent, const FileContent* fC,
         NodeId var = fC->Child(variable_decl_assignment);
         VObjectType varType = fC->Type(var);
         NodeId range = fC->Sibling(var);
-        if (varType == VObjectType::paList_of_arguments) {
+        if (varType == VObjectType::paArgument_list) {
           // new ()
         } else {
           const std::string_view varName = fC->SymName(var);
@@ -3336,8 +3336,7 @@ void CompileHelper::compileHighConn(ModuleDefinition* component,
         Net_lvalue = fC->Sibling(Net_lvalue);
         index++;
       }
-    } else if (fC->Type(Net_lvalue) ==
-               VObjectType::paList_of_port_connections) {
+    } else if (fC->Type(Net_lvalue) == VObjectType::paPort_connection_list) {
       /*
       n<TESTBENCH> u<195> t<StringConst> p<212> s<211> l<21>
       n<tb> u<196> t<StringConst> p<197> l<21>
@@ -4198,9 +4197,9 @@ bool CompileHelper::compileParameterDeclaration(
     param_assigns = component->getParamAssigns();
   }
   uhdm::Any* const pany = component->getUhdmModel();
-  if (fC->Type(nodeId) == VObjectType::paList_of_type_assignments) {
+  if (fC->Type(nodeId) == VObjectType::paType_assignment_list) {
     // Type param
-    NodeId typeNameId = fC->Child(nodeId);
+    NodeId typeNameId = fC->Child(fC->Child(nodeId));
     while (typeNameId) {
       NodeId ntype = fC->Sibling(typeNameId);
       bool skip = false;
@@ -4240,7 +4239,6 @@ bool CompileHelper::compileParameterDeclaration(
       typeNameId = fC->Sibling(typeNameId);
       if (skip) typeNameId = fC->Sibling(typeNameId);
     }
-
   } else if (fC->Type(nodeId) == VObjectType::TYPE) {
     // Type param
     NodeId list_of_param_assignments = fC->Sibling(nodeId);
@@ -4281,7 +4279,7 @@ bool CompileHelper::compileParameterDeclaration(
     // Regular param
     NodeId Data_type_or_implicit;
     NodeId List_of_param_assignments;
-    if (fC->Type(nodeId) == VObjectType::paList_of_param_assignments) {
+    if (fC->Type(nodeId) == VObjectType::paParam_assignment_list) {
       List_of_param_assignments = nodeId;
     } else {
       Data_type_or_implicit = fC->Child(nodeId);
@@ -6169,7 +6167,7 @@ bool CompileHelper::elaborationSystemTask(DesignComponent* component,
   NodeId taskNameId = fC->Child(id);
   NodeId NumberOrArgList = fC->Sibling(taskNameId);
   NodeId ArgList = NumberOrArgList;
-  if (fC->Type(ArgList) != VObjectType::paList_of_arguments) {
+  if (fC->Type(ArgList) != VObjectType::paArgument_list) {
     ArgList = fC->Sibling(ArgList);
   }
   NodeId Expression = fC->Child(ArgList);

@@ -4389,7 +4389,7 @@ uhdm::Any *CompileHelper::compileBits(
     callId = id;
   }
   NodeId Expression = List_of_arguments;
-  if (fC->Type(Expression) == VObjectType::paList_of_arguments) {
+  if (fC->Type(Expression) == VObjectType::paArgument_list) {
     Expression = fC->Child(Expression);
   } else if (fC->Type(Expression) == VObjectType::paData_type) {
     Expression = fC->Child(Expression);
@@ -4627,7 +4627,7 @@ uhdm::Any *CompileHelper::compileBound(
   uhdm::Serializer &s = compileDesign->getSerializer();
   uhdm::Any *result = nullptr;
   NodeId Expression = List_of_arguments;
-  if (fC->Type(Expression) == VObjectType::paList_of_arguments) {
+  if (fC->Type(Expression) == VObjectType::paArgument_list) {
     Expression = fC->Child(Expression);
   }
   if (uhdm::Expr *operand = (uhdm::Expr *)compileExpression(
@@ -4719,7 +4719,7 @@ uhdm::Any *CompileHelper::compileClog2(
   uhdm::Serializer &s = compileDesign->getSerializer();
   uhdm::Any *result = nullptr;
   NodeId Expression = List_of_arguments;
-  if (fC->Type(Expression) == VObjectType::paList_of_arguments) {
+  if (fC->Type(Expression) == VObjectType::paArgument_list) {
     Expression = fC->Child(Expression);
   }
 
@@ -4791,7 +4791,7 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
         fC->Type(tmp) == VObjectType::paMethod_call_body ||
         fC->Type(tmp) == VObjectType::paSubroutine_call) {
       hierPath = true;
-    } else if (fC->Type(tmp) == VObjectType::paList_of_arguments) {
+    } else if (fC->Type(tmp) == VObjectType::paArgument_list) {
       List_of_arguments = tmp;
     }
     tmp = fC->Sibling(tmp);
@@ -4898,7 +4898,7 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
       rootName = "super";
     }
     NodeId List_of_arguments = fC->Sibling(Method);
-    if (fC->Type(List_of_arguments) == VObjectType::paList_of_arguments) {
+    if (fC->Type(List_of_arguments) == VObjectType::paArgument_list) {
       uhdm::MethodFuncCall *fcall = s.make<uhdm::MethodFuncCall>();
       if (uhdm::Expr *object = (uhdm::Expr *)compileExpression(
               component, fC, Handle, compileDesign, reduce, fcall, instance,
@@ -5362,7 +5362,7 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
         NodeId lookAhead = fC->Sibling(dotedName);
 
         if ((fC->Type(dotedName) == VObjectType::paMethod_call_body) ||
-            (fC->Type(lookAhead) == VObjectType::paList_of_arguments)) {
+            (fC->Type(lookAhead) == VObjectType::paArgument_list)) {
           NodeId method_child = fC->Child(dotedName);
           uhdm::MethodFuncCall *fcall = nullptr;
           if (fC->Type(method_child) == VObjectType::paBuilt_in_method_call) {
@@ -5400,8 +5400,7 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
               NodeId list_of_arguments =
                   fC->Sibling(fC->Child(fC->Child(method_child)));
               NodeId with_conditions_node;
-              if (fC->Type(list_of_arguments) ==
-                  VObjectType::paList_of_arguments) {
+              if (fC->Type(list_of_arguments) == VObjectType::paArgument_list) {
                 if (uhdm::AnyCollection *arguments = compileTfCallArguments(
                         component, fC, list_of_arguments, compileDesign, reduce,
                         fcall, instance, muteErrors)) {
@@ -5541,7 +5540,7 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
       }
       result = ref;
     }
-  } else if (fC->Type(dotedName) == VObjectType::paList_of_arguments) {
+  } else if (fC->Type(dotedName) == VObjectType::paArgument_list) {
     result =
         compileTfCall(component, fC, fC->Parent(name), compileDesign, pexpr);
   } else if (fC->Type(name) == VObjectType::STRING_CONST) {

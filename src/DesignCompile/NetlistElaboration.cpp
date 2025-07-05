@@ -687,8 +687,7 @@ ModuleInstance* NetlistElaboration::getInterfaceInstance_(
         }
         Net_lvalue = fC->Sibling(Net_lvalue);
       }
-    } else if (fC->Type(Net_lvalue) ==
-               VObjectType::paList_of_port_connections) {
+    } else if (fC->Type(Net_lvalue) == VObjectType::paPort_connection_list) {
       NodeId Named_port_connection = fC->Child(Net_lvalue);
       bool orderedConnection = false;
       if (fC->Type(Named_port_connection) ==
@@ -1089,8 +1088,7 @@ bool NetlistElaboration::high_conn_(ModuleInstance* instance) {
         Net_lvalue = fC->Sibling(Net_lvalue);
         index++;
       }
-    } else if (fC->Type(Net_lvalue) ==
-               VObjectType::paList_of_port_connections) {
+    } else if (fC->Type(Net_lvalue) == VObjectType::paPort_connection_list) {
       /*
       n<TESTBENCH> u<195> t<StringConst> p<212> s<211> l<21>
       n<tb> u<196> t<StringConst> p<197> l<21>

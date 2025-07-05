@@ -121,7 +121,7 @@ bool UhdmChecker::registerFile(const FileContent* fC,
         type == VObjectType::ENDCHECKER || type == VObjectType::ENDPROPERTY ||
         type == VObjectType::ENDSPECIFY || type == VObjectType::ENDSEQUENCE ||
         type == VObjectType::paPort_declaration ||
-        type == VObjectType::paList_of_ports || type == VObjectType::paPort ||
+        type == VObjectType::paPort_list || type == VObjectType::paPort ||
         type == VObjectType::paConditional_generate_construct ||
         type == VObjectType::paGenerate_module_conditional_statement ||
         type == VObjectType::paGenerate_interface_conditional_statement ||
@@ -138,7 +138,7 @@ bool UhdmChecker::registerFile(const FileContent* fC,
       }
       skip = true;  // Only skip the item itself
     }
-    if (type == VObjectType::paList_of_port_declarations ||
+    if (type == VObjectType::paPort_declaration_list ||
         type == VObjectType::paBit_select || type == VObjectType::paSelect ||
         type == VObjectType::IF || type == VObjectType::ELSE ||
         type == VObjectType::OPEN_PARENS || type == VObjectType::CLOSE_PARENS) {

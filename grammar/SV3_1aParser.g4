@@ -162,13 +162,13 @@ description
   ;
 
 module_nonansi_header
-  : attribute_instance* module_keyword lifetime? identifier package_import_declaration*
-      parameter_port_list? list_of_ports SEMICOLON
+  : attribute_instance* module_keyword lifetime? identifier package_import_declaration_list
+      parameter_port_list? port_list SEMICOLON
   ;
 
 module_ansi_header
-  : attribute_instance* module_keyword lifetime? identifier package_import_declaration*
-      parameter_port_list? list_of_port_declarations? SEMICOLON
+  : attribute_instance* module_keyword lifetime? identifier package_import_declaration_list
+      parameter_port_list? port_declaration_list? SEMICOLON
   ;
 
 module_declaration
@@ -189,13 +189,13 @@ module_declaration
 module_keyword: MODULE | MACROMODULE;
 
 interface_nonansi_header
-  : attribute_instance* INTERFACE lifetime? interface_identifier package_import_declaration*
-      parameter_port_list? list_of_ports SEMICOLON
+  : attribute_instance* INTERFACE lifetime? interface_identifier package_import_declaration_list
+      parameter_port_list? port_list SEMICOLON
   ;
 
 interface_ansi_header
-  : attribute_instance* INTERFACE lifetime? interface_identifier package_import_declaration*
-      parameter_port_list? list_of_port_declarations? SEMICOLON
+  : attribute_instance* INTERFACE lifetime? interface_identifier package_import_declaration_list
+      parameter_port_list? port_declaration_list? SEMICOLON
   ;
 
 interface_declaration
@@ -214,13 +214,13 @@ interface_declaration
   ;
 
 program_nonansi_header
-  : (attribute_instance) PROGRAM lifetime? identifier package_import_declaration*
-      parameter_port_list? list_of_ports SEMICOLON
+  : (attribute_instance) PROGRAM lifetime? identifier package_import_declaration_list
+      parameter_port_list? port_list SEMICOLON
   ;
 
 program_ansi_header
-  : attribute_instance* PROGRAM lifetime? identifier package_import_declaration* parameter_port_list
-      ? list_of_port_declarations? SEMICOLON
+  : attribute_instance* PROGRAM lifetime? identifier package_import_declaration_list
+      parameter_port_list? port_declaration_list? SEMICOLON
   ;
 
 checker_declaration
@@ -248,9 +248,7 @@ program_declaration
 
 class_declaration
   : VIRTUAL? CLASS lifetime? identifier parameter_port_list? (
-    EXTENDS class_type (
-      OPEN_PARENS list_of_arguments CLOSE_PARENS
-    )?
+    EXTENDS class_type (OPEN_PARENS argument_list CLOSE_PARENS)?
   )? (
     IMPLEMENTS interface_class_type (COMMA interface_class_type)*
   )? SEMICOLON class_item* ENDCLASS (COLON identifier)?
@@ -291,7 +289,7 @@ timeunits_declaration
   ;
 
 parameter_port_list
-  : POUND OPEN_PARENS list_of_param_assignments (
+  : POUND OPEN_PARENS param_assignment_list (
     COMMA parameter_port_declaration
   )* CLOSE_PARENS
   | POUND OPEN_PARENS parameter_port_declaration (
@@ -303,16 +301,16 @@ parameter_port_list
 parameter_port_declaration
   : parameter_declaration
   | local_parameter_declaration
-  | data_type list_of_param_assignments
-  | TYPE list_of_type_assignments
+  | data_type param_assignment_list
+  | TYPE type_assignment_list
   ;
 
-list_of_ports
+port_list
   : OPEN_PARENS CLOSE_PARENS
   | OPEN_PARENS port (COMMA port)* CLOSE_PARENS
   ;
 
-list_of_port_declarations
+port_declaration_list
   : OPEN_PARENS (
     attribute_instance* ansi_port_declaration (
       COMMA attribute_instance* ansi_port_declaration
@@ -365,8 +363,8 @@ ansi_port_declaration
 
 elaboration_system_task
   : DOLLAR SIMPLE_IDENTIFIER (
-    (OPEN_PARENS number (COMMA list_of_arguments)? CLOSE_PARENS)? SEMICOLON
-    | (OPEN_PARENS list_of_arguments CLOSE_PARENS)? SEMICOLON
+    (OPEN_PARENS number (COMMA argument_list)? CLOSE_PARENS)? SEMICOLON
+    | (OPEN_PARENS argument_list CLOSE_PARENS)? SEMICOLON
   )
   ;
 
@@ -386,10 +384,7 @@ module_common_item
   | system_task
   ;
 
-module_item
-  : port_declaration SEMICOLON
-  | non_port_module_item
-  ;
+module_item: port_declaration SEMICOLON | non_port_module_item;
 
 module_or_generate_item
   : attribute_instance* (
@@ -422,9 +417,7 @@ non_port_module_item
   | pragma_directive
   ;
 
-parameter_override
-  : DEFPARAM list_of_defparam_assignments SEMICOLON
-  ;
+parameter_override: DEFPARAM defparam_assignment_list SEMICOLON;
 
 bind_directive
   : BIND identifier (
@@ -603,7 +596,7 @@ class_constructor_declaration
   : FUNCTION class_scope? NEW (
     OPEN_PARENS tf_port_list? CLOSE_PARENS
   )? SEMICOLON block_item_declaration* (
-    super_dot_new (OPEN_PARENS list_of_arguments CLOSE_PARENS)? SEMICOLON
+    super_dot_new (OPEN_PARENS argument_list CLOSE_PARENS)? SEMICOLON
   )? function_statement_or_null* ENDFUNCTION (COLON NEW)?
   ;
 
@@ -711,40 +704,40 @@ anonymous_program_item
   ;
 
 local_parameter_declaration
-  : LOCALPARAM (data_type_or_implicit | TYPE) list_of_param_assignments
+  : LOCALPARAM (data_type_or_implicit | TYPE) param_assignment_list
   ;
 
 parameter_declaration
-  : PARAMETER (data_type_or_implicit | TYPE) list_of_param_assignments
+  : PARAMETER (data_type_or_implicit | TYPE) param_assignment_list
   ;
 
 specparam_declaration
-  : SPECPARAM packed_dimension? list_of_specparam_assignments SEMICOLON
+  : SPECPARAM packed_dimension? specparam_assignment_list SEMICOLON
   ;
 
-inout_declaration: INOUT net_port_type list_of_port_identifiers;
+inout_declaration: INOUT net_port_type port_identifier_list;
 
 input_declaration
   : INPUT (
-    net_port_type list_of_port_identifiers
-    | variable_port_type? list_of_variable_identifiers
+    net_port_type port_identifier_list
+    | variable_port_type? variable_identifier_list
   )
   ;
 
 output_declaration
   : OUTPUT (
-    net_port_type list_of_port_identifiers
-    | variable_port_type? list_of_variable_port_identifiers
+    net_port_type port_identifier_list
+    | variable_port_type? variable_port_identifier_list
   )
   ;
 
 interface_port_declaration
-  : interface_identifier list_of_interface_identifiers
-  | interface_identifier DOT identifier list_of_interface_identifiers
+  : interface_identifier interface_identifier_list
+  | interface_identifier DOT identifier interface_identifier_list
   ;
 
 ref_declaration
-  : REF variable_port_type list_of_variable_identifiers
+  : REF variable_port_type variable_identifier_list
   ;
 
 data_declaration
@@ -762,13 +755,15 @@ variable_impl_declaration
     data_type_or_implicit
     | signing packed_dimension*
     | packed_dimension+
-  ) list_of_variable_decl_assignments SEMICOLON
+  ) variable_decl_assignment_list SEMICOLON
   ;
 
 variable_declaration
-  : (data_type | signing packed_dimension* | packed_dimension+) list_of_variable_decl_assignments
+  : (data_type | signing packed_dimension* | packed_dimension+) variable_decl_assignment_list
       SEMICOLON
   ;
+
+package_import_declaration_list: package_import_declaration*?;
 
 package_import_declaration
   : IMPORT package_import_item (COMMA package_import_item)* SEMICOLON
@@ -787,8 +782,8 @@ net_declaration
   : net_type (drive_strength | charge_strength)? (
     VECTORED
     | SCALARED
-  )? data_type_or_implicit delay3? list_of_net_decl_assignments SEMICOLON
-  | identifier delay_control? list_of_net_decl_assignments SEMICOLON
+  )? data_type_or_implicit delay3? net_decl_assignment_list SEMICOLON
+  | identifier delay_control? net_decl_assignment_list SEMICOLON
   | INTERCONNECT implicit_data_type pound_delay_value? identifier unpacked_dimension* (
     COMMA identifier unpacked_dimension*
   )? SEMICOLON
@@ -983,8 +978,7 @@ random_qualifier
   ;
 
 struct_union_member
-  : attribute_instance* random_qualifier? data_type_or_void list_of_variable_decl_assignments
-      SEMICOLON
+  : attribute_instance* random_qualifier? data_type_or_void variable_decl_assignment_list SEMICOLON
   ;
 
 data_type_or_void: data_type | VOID;
@@ -1051,57 +1045,53 @@ delay_value
   | ps_or_hierarchical_identifier
   ; //REMOVED  | Decimal_number
 
-list_of_defparam_assignments
+defparam_assignment_list
   : defparam_assignment (COMMA defparam_assignment)*
   ;
 
-list_of_interface_identifiers
+interface_identifier_list
   : interface_identifier unpacked_dimension* (
     COMMA interface_identifier unpacked_dimension*
   )*
   ;
 
-list_of_net_decl_assignments
+net_decl_assignment_list
   : net_decl_assignment (COMMA net_decl_assignment)*
   ;
 
-list_of_param_assignments
+param_assignment_list
   : param_assignment (COMMA param_assignment)*
   ;
 
-list_of_port_identifiers
+port_identifier_list
   : identifier unpacked_dimension* (
     COMMA identifier unpacked_dimension*
   )*
   ;
 
-list_of_specparam_assignments
+specparam_assignment_list
   : specparam_assignment (COMMA specparam_assignment)*
   ;
 
-list_of_tf_variable_identifiers
+tf_variable_identifier_list
   : identifier variable_dimension* (ASSIGN_OP expression)? (
     COMMA identifier variable_dimension* (ASSIGN_OP expression)?
   )*
   ;
 
-list_of_type_assignments
-  : (identifier (ASSIGN_OP data_type)?) (
-    COMMA (identifier (ASSIGN_OP data_type)?)
-  )*
-  ;
+type_assignment_list: type_assignment (COMMA type_assignment)*;
 
-list_of_variable_decl_assignments
+variable_decl_assignment_list
   : variable_decl_assignment (COMMA variable_decl_assignment)*
   ;
 
-list_of_variable_identifiers
+variable_identifier_list
   : identifier variable_dimension* (
     COMMA identifier variable_dimension*
   )*
   ;
 
-list_of_variable_port_identifiers
+variable_port_identifier_list
   : identifier variable_dimension* (
     ASSIGN_OP constant_expression
   )? (
@@ -1111,7 +1101,7 @@ list_of_variable_port_identifiers
   )*
   ;
 
-list_of_virtual_interface_decl
+virtual_interface_decl_list
   : identifier (ASSIGN_OP identifier)? (
     COMMA identifier (ASSIGN_OP identifier)?
   )*
@@ -1130,6 +1120,8 @@ param_assignment
     ASSIGN_OP constant_param_expression
   )?
   ;
+
+type_assignment: identifier (ASSIGN_OP data_type)?;
 
 specparam_assignment
   : identifier ASSIGN_OP constant_mintypmax_expression
@@ -1154,16 +1146,14 @@ variable_decl_assignment
         ASSIGN_OP dynamic_array_new
       )?
     )
-    | (
-      ASSIGN_OP NEW (OPEN_PARENS list_of_arguments CLOSE_PARENS)?
-    )
+    | (ASSIGN_OP NEW (OPEN_PARENS argument_list CLOSE_PARENS)?)
     | (variable_dimension* (ASSIGN_OP expression)?)
   )
-  ; //        | ASSIGN_OP NEW (OPEN_PARENS list_of_arguments CLOSE_PARENS)?
+  ; //        | ASSIGN_OP NEW (OPEN_PARENS argument_list CLOSE_PARENS)?
 
 class_new
   : class_scope? NEW (
-    OPEN_PARENS list_of_arguments CLOSE_PARENS
+    OPEN_PARENS argument_list CLOSE_PARENS
     | expression
   )?
   ;
@@ -1282,7 +1272,7 @@ tf_port_direction: INPUT | OUTPUT | INOUT | REF | CONST REF;
 
 tf_port_declaration
   : attribute_instance* tf_port_direction var_type? data_type_or_implicit
-      list_of_tf_variable_identifiers SEMICOLON
+      tf_variable_identifier_list SEMICOLON
   ;
 
 task_prototype
@@ -1325,7 +1315,7 @@ overload_operator
 overload_proto_formals: data_type (COMMA data_type)*;
 
 virtual_interface_declaration
-  : VIRTUAL INTERFACE? interface_identifier list_of_virtual_interface_decl SEMICOLON
+  : VIRTUAL INTERFACE? interface_identifier virtual_interface_decl_list SEMICOLON
   ;
 
 modport_item
@@ -1563,13 +1553,13 @@ sequence_formal_type
 
 sequence_instance
   : ps_or_hierarchical_sequence_identifier (
-    OPEN_PARENS sequence_list_of_arguments CLOSE_PARENS
+    OPEN_PARENS sequence_argument_list CLOSE_PARENS
   )?
   ;
 
 sequence_arg: sequence_actual_arg?;
 
-sequence_list_of_arguments
+sequence_argument_list
   : sequence_actual_arg? (COMMA sequence_arg)* (
     COMMA DOT identifier OPEN_PARENS sequence_actual_arg? CLOSE_PARENS
   )*
@@ -1624,7 +1614,7 @@ expression_or_dist
   ;
 
 assertion_variable_declaration
-  : data_type list_of_variable_identifiers SEMICOLON
+  : data_type variable_identifier_list SEMICOLON
   ;
 
 let_declaration
@@ -1643,7 +1633,7 @@ let_formal_type: data_type_or_implicit | UNTYPED;
 
 /*
  let_expression :
- package_scope? identifier (OPEN_PARENS list_of_arguments CLOSE_PARENS)? ;
+ package_scope? identifier (OPEN_PARENS argument_list CLOSE_PARENS)? ;
  */
 
 covergroup_declaration
@@ -1752,12 +1742,12 @@ trans_range_list
 repeat_range: expression | expression COLON expression;
 
 cover_cross
-  : (identifier COLON)? CROSS list_of_cross_items (
+  : (identifier COLON)? CROSS cross_item_list (
     IFF OPEN_PARENS expression CLOSE_PARENS
   )? cross_body
   ;
 
-list_of_cross_items
+cross_item_list
   : cross_item COMMA cross_item (COMMA cross_item)*
   ;
 
@@ -1928,14 +1918,12 @@ module_instantiation
   ;
 
 parameter_value_assignment
-  : POUND (
-    OPEN_PARENS list_of_parameter_assignments? CLOSE_PARENS
-  )
+  : POUND (OPEN_PARENS parameter_assignment_list? CLOSE_PARENS)
   | POUND_DELAY
   | POUND SIMPLE_IDENTIFIER
   ;
 
-list_of_parameter_assignments
+parameter_assignment_list
   : ordered_parameter_assignment (
     COMMA ordered_parameter_assignment
   )*
@@ -1949,12 +1937,12 @@ named_parameter_assignment
   ;
 
 hierarchical_instance
-  : name_of_instance OPEN_PARENS list_of_port_connections CLOSE_PARENS
+  : name_of_instance OPEN_PARENS port_connection_list CLOSE_PARENS
   ;
 
 name_of_instance: identifier unpacked_dimension*;
 
-list_of_port_connections
+port_connection_list
   : ordered_port_connection (COMMA ordered_port_connection)*
   | named_port_connection (COMMA named_port_connection)*
   ;
@@ -1969,10 +1957,10 @@ named_port_connection
   ;
 
 checker_instantiation
-  : ps_identifier name_of_instance OPEN_PARENS list_of_checker_port_connections CLOSE_PARENS SEMICOLON
+  : ps_identifier name_of_instance OPEN_PARENS checker_port_connection_list CLOSE_PARENS SEMICOLON
   ;
 
-list_of_checker_port_connections
+checker_port_connection_list
   : ordered_checker_port_connection (
     COMMA ordered_checker_port_connection
   )?
@@ -2119,11 +2107,16 @@ conditional_generate_construct
   ;
 
 if_generate_construct
-  : IF OPEN_PARENS constant_expression CLOSE_PARENS generate_item 
-    ( ELSE generate_item  | {_input->LA(1) != ELSE}? );
+  : IF OPEN_PARENS constant_expression CLOSE_PARENS generate_item (
+    ELSE generate_item
+    | {_input->LA(1) != ELSE}?
+  )
+  ;
 
 case_generate_construct
-  : CASE OPEN_PARENS constant_expression CLOSE_PARENS (case_generate_item)+ ENDCASE
+  : CASE OPEN_PARENS constant_expression CLOSE_PARENS (
+    case_generate_item
+  )+ ENDCASE
   ;
 
 case_generate_item
@@ -2131,10 +2124,14 @@ case_generate_item
   | DEFAULT COLON? generate_item
   ;
 
-generate_begin_end_block:
- ( identifier COLON )? BEGIN ( COLON identifier | {_input->LA(1) != COLON}? )
-        ( generate_item )*
-    END ( COLON identifier | {_input->LA(1) != COLON}? )
+generate_begin_end_block
+  : (identifier COLON)? BEGIN (
+    COLON identifier
+    | {_input->LA(1) != COLON}?
+  ) (generate_item)* END (
+    COLON identifier
+    | {_input->LA(1) != COLON}?
+  )
   ;
 
 //generate_item
@@ -2269,13 +2266,13 @@ udp_instance
   ;
 
 continuous_assign
-  : ASSIGN drive_strength? delay3? list_of_net_assignments SEMICOLON
-  | ASSIGN_OP delay_control? list_of_variable_assignments SEMICOLON
+  : ASSIGN drive_strength? delay3? net_assignment_list SEMICOLON
+  | ASSIGN_OP delay_control? variable_assignment_list SEMICOLON
   ;
 
-list_of_net_assignments: net_assignment (COMMA net_assignment)*;
+net_assignment_list: net_assignment (COMMA net_assignment)*;
 
-list_of_variable_assignments
+variable_assignment_list
   : variable_assignment (COMMA variable_assignment)*
   ;
 
@@ -2583,7 +2580,7 @@ loop_statement
   ;
 
 for_initialization
-  : list_of_variable_assignments
+  : variable_assignment_list
   | for_variable_declaration (COMMA for_variable_declaration)*
   ;
 
@@ -2685,7 +2682,7 @@ clocking_event
 
 clocking_item
   : DEFAULT default_skew SEMICOLON
-  | clocking_direction list_of_clocking_decl_assign SEMICOLON
+  | clocking_direction clocking_decl_assign_list SEMICOLON
   | attribute_instance* concurrent_assertion_item_declaration
   ;
 
@@ -2702,7 +2699,7 @@ clocking_direction
   | INOUT                                      # ClockingDir_Inout
   ;
 
-list_of_clocking_decl_assign
+clocking_decl_assign_list
   : clocking_decl_assign (COMMA clocking_decl_assign)*
   ;
 
@@ -2765,7 +2762,7 @@ rs_prod
   ;
 
 production_item
-  : identifier (OPEN_PARENS list_of_arguments CLOSE_PARENS)?
+  : identifier (OPEN_PARENS argument_list CLOSE_PARENS)?
   ;
 
 rs_if_else
@@ -2798,13 +2795,13 @@ specify_item
   ;
 
 pulsestyle_declaration
-  : PULSESTYLE_ONEVENT list_of_path_outputs SEMICOLON
-  | PULSESTYLE_ONDETECT list_of_path_outputs SEMICOLON
+  : PULSESTYLE_ONEVENT path_output_list SEMICOLON
+  | PULSESTYLE_ONDETECT path_output_list SEMICOLON
   ;
 
 showcancelled_declaration
-  : SHOWCANCELLED list_of_path_outputs SEMICOLON
-  | NOSHOWCANCELLED list_of_path_outputs SEMICOLON
+  : SHOWCANCELLED path_output_list SEMICOLON
+  | NOSHOWCANCELLED path_output_list SEMICOLON
   ;
 
 path_declaration
@@ -2824,16 +2821,16 @@ parallel_path_description
   ;
 
 full_path_description
-  : OPEN_PARENS list_of_path_inputs (PLUS | MINUS)? FULL_CONN_OP list_of_path_outputs CLOSE_PARENS
+  : OPEN_PARENS path_input_list (PLUS | MINUS)? FULL_CONN_OP path_output_list CLOSE_PARENS
   ;
 
-list_of_path_inputs
+path_input_list
   : specify_input_terminal_descriptor (
     COMMA specify_input_terminal_descriptor
   )*
   ;
 
-list_of_path_outputs
+path_output_list
   : specify_output_terminal_descriptor (
     COMMA specify_output_terminal_descriptor
   )*
@@ -2852,11 +2849,11 @@ specify_output_terminal_descriptor
   ;
 
 path_delay_value
-  : list_of_path_delay_expressions
-  | OPEN_PARENS list_of_path_delay_expressions CLOSE_PARENS
+  : path_delay_expression_list
+  | OPEN_PARENS path_delay_expression_list CLOSE_PARENS
   ;
 
-list_of_path_delay_expressions
+path_delay_expression_list
   : t_path_delay_expression
   | trise_path_delay_expression COMMA tfall_path_delay_expression
   | trise_path_delay_expression COMMA tfall_path_delay_expression COMMA tz_path_delay_expression
@@ -2898,7 +2895,7 @@ parallel_edge_sensitive_path_description
   ;
 
 full_edge_sensitive_path_description
-  : OPEN_PARENS edge_identifier? list_of_path_inputs FULL_CONN_OP OPEN_PARENS list_of_path_outputs
+  : OPEN_PARENS edge_identifier? path_input_list FULL_CONN_OP OPEN_PARENS path_output_list
       part_select_op_colon expression CLOSE_PARENS CLOSE_PARENS
   ;
 
@@ -3174,7 +3171,7 @@ subroutine_call
   )? dollar_root_keyword? identifier (
     constant_bit_select DOT identifier
   )* attribute_instance* (
-    (OPEN_PARENS list_of_arguments CLOSE_PARENS)
+    (OPEN_PARENS argument_list CLOSE_PARENS)
     | select
   ) (DOT method_call_body)?
   | randomize_call
@@ -3182,7 +3179,7 @@ subroutine_call
 
 argument: expression?;
 
-list_of_arguments
+argument_list
   : expression? (COMMA argument)* (
     COMMA DOT identifier OPEN_PARENS expression? CLOSE_PARENS
   )*
@@ -3198,7 +3195,7 @@ method_call
 
 method_call_body
   : identifier attribute_instance* (
-    OPEN_PARENS list_of_arguments CLOSE_PARENS
+    OPEN_PARENS argument_list CLOSE_PARENS
   )?
   | built_in_method_call
   ;
@@ -3207,7 +3204,7 @@ built_in_method_call: array_manipulation_call | randomize_call;
 
 array_manipulation_call
   : array_method_name attribute_instance* (
-    OPEN_PARENS list_of_arguments CLOSE_PARENS
+    OPEN_PARENS argument_list CLOSE_PARENS
   )? (WITH OPEN_PARENS expression CLOSE_PARENS)?
   ;
 
@@ -3376,7 +3373,8 @@ constant_indexed_range
  | ARITH_SHIFT_LEFT)
  attribute_instance* expression expression_prime
  | (
- LESS | LESS_EQUAL |
+ LESS
+ | LESS_EQUAL |
  GREATER | GREATER_EQUAL
  | INSIDE) attribute_instance* expression
  expression_prime
@@ -3405,7 +3403,8 @@ constant_indexed_range
  attribute_instance)* expression
  expression_prime
  | (LOGICAL_AND expression)*
- QMARK (
+ QMARK
+ (
  attribute_instance)* expression COLON
  expression expression_prime
  | (IMPLY |
@@ -3587,7 +3586,7 @@ complex_func_call
   )? dollar_root_keyword? identifier (
     (OPEN_BRACKET constant_expression CLOSE_BRACKET)* DOT identifier
   )* attribute_instance* (
-    (OPEN_PARENS (list_of_arguments) CLOSE_PARENS)
+    (OPEN_PARENS (argument_list) CLOSE_PARENS)
     | select
   ) (DOT method_call_body)?
   ;
@@ -3829,7 +3828,7 @@ ps_type_identifier
 system_task
   : system_task_names (
     OPEN_PARENS (
-      list_of_arguments (COMMA clocking_event)?
+      argument_list (COMMA clocking_event)?
       | data_type
     ) CLOSE_PARENS
   )?

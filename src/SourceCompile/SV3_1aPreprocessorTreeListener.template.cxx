@@ -609,9 +609,9 @@ void SV3_1aPreprocessorTreeListener::exitIfdef_directive(
     SV3_1aPpParser::Ifdef_directiveContext *ctx) {
   if (m_inProtectedRegion || m_inMacroDefinitionParsing) return;
 
-  if (!m_passThrough) {
-    addVObject(ctx, VObjectType::ppIfdef_directive);
+  addVObject(ctx, VObjectType::ppIfdef_directive);
 
+  if (!m_passThrough) {
     std::string text = ctx->getText();
     std::replace_if(
         text.begin(), text.end(), [](char ch) { return ch != '\n'; }, ' ');
@@ -678,9 +678,9 @@ void SV3_1aPreprocessorTreeListener::exitIfndef_directive(
     SV3_1aPpParser::Ifndef_directiveContext *ctx) {
   if (m_inProtectedRegion || m_inMacroDefinitionParsing) return;
 
-  if (!m_passThrough) {
-    addVObject(ctx, VObjectType::ppIfndef_directive);
+  addVObject(ctx, VObjectType::ppIfndef_directive);
 
+  if (!m_passThrough) {
     std::string text = ctx->getText();
     std::replace_if(
         text.begin(), text.end(), [](char ch) { return ch != '\n'; }, ' ');
@@ -707,9 +707,9 @@ void SV3_1aPreprocessorTreeListener::exitUndef_directive(
     SV3_1aPpParser::Undef_directiveContext *ctx) {
   if (m_inProtectedRegion || m_inMacroDefinitionParsing) return;
 
-  if (!m_passThrough) {
-    addVObject(ctx, VObjectType::ppUndef_directive);
+  addVObject(ctx, VObjectType::ppUndef_directive);
 
+  if (!m_passThrough) {
     std::string text = ctx->getText();
     std::replace_if(
         text.begin(), text.end(), [](char ch) { return ch != '\n'; }, ' ');
@@ -778,9 +778,9 @@ void SV3_1aPreprocessorTreeListener::exitElsif_directive(
     SV3_1aPpParser::Elsif_directiveContext *ctx) {
   if (m_inProtectedRegion || m_inMacroDefinitionParsing) return;
 
-  if (!m_passThrough) {
-    addVObject(ctx, VObjectType::ppElsif_directive);
+  addVObject(ctx, VObjectType::ppElsif_directive);
 
+  if (!m_passThrough) {
     std::string text = ctx->getText();
     std::replace_if(
         text.begin(), text.end(), [](char ch) { return ch != '\n'; }, ' ');
@@ -816,9 +816,9 @@ void SV3_1aPreprocessorTreeListener::exitElse_directive(
   item.m_previousActiveState = m_inActiveBranch;
   setCurrentBranchActivity(lc.first);
 
-  if (!m_passThrough) {
-    addVObject(ctx, VObjectType::ppElse_directive);
+  addVObject(ctx, VObjectType::ppElse_directive);
 
+  if (!m_passThrough) {
     std::string text = ctx->getText();
     std::replace_if(
         text.begin(), text.end(), [](char ch) { return ch != '\n'; }, ' ');
@@ -876,8 +876,9 @@ void SV3_1aPreprocessorTreeListener::exitEndif_directive(
 
   if (m_inActiveBranch) m_passThrough = false;
 
+  addVObject(ctx, VObjectType::ppEndif_directive);
+
   if (!m_passThrough) {
-    addVObject(ctx, VObjectType::ppEndif_directive);
     appendPreprocEnd();
   }
 }

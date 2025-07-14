@@ -374,7 +374,7 @@ bool CompileModule::collectUdpObjects_() {
         while (Level_symbol) {
           NodeId Symbol = fC->Child(Level_symbol);
           uint32_t nbSymb = 0;
-          if (fC->Type(Symbol) == VObjectType::paQMARK) {
+          if (fC->Type(Symbol) == VObjectType::QMARK) {
             ventry += "? ";
             nbSymb = 1;
           } else if (fC->Type(Symbol) == VObjectType::paBinOp_Mult) {
@@ -416,7 +416,7 @@ bool CompileModule::collectUdpObjects_() {
             NodeId Level_Symbol = fC->Child(Level_symbol);
             while (Level_Symbol) {
               NodeId Symbol = fC->Child(Level_Symbol);
-              if (fC->Type(Symbol) == VObjectType::paQMARK) {
+              if (fC->Type(Symbol) == VObjectType::QMARK) {
                 ventry += "?";
               } else if (fC->Type(Symbol) == VObjectType::paBinOp_Mult) {
                 ventry += "* ";
@@ -432,7 +432,7 @@ bool CompileModule::collectUdpObjects_() {
             NodeId Symbol = fC->Child(Level_symbol);
 
             uint32_t nbSymb = 0;
-            if (fC->Type(Symbol) == VObjectType::paQMARK) {
+            if (fC->Type(Symbol) == VObjectType::QMARK) {
               ventry += "? ";
               nbSymb = 1;
             } else if (fC->Type(Symbol) == VObjectType::paBinOp_Mult) {
@@ -455,7 +455,7 @@ bool CompileModule::collectUdpObjects_() {
         ventry += ": ";
         NodeId Symbol = fC->Child(Current_state);
 
-        if (fC->Type(Symbol) == VObjectType::paQMARK) {
+        if (fC->Type(Symbol) == VObjectType::QMARK) {
           ventry += "? ";
         } else if (fC->Type(Symbol) == VObjectType::paBinOp_Mult) {
           ventry += "* ";
@@ -565,8 +565,8 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
       endOfBlockId = id;
       while (endOfBlockId) {
         VObjectType type = fC->Type(endOfBlockId);
-        if (type == VObjectType::paEND) break;
-        if (type == VObjectType::paELSE) break;
+        if (type == VObjectType::END) break;
+        if (type == VObjectType::ELSE) break;
         endOfBlockId = fC->Sibling(endOfBlockId);
       }
       if (!endOfBlockId) endOfBlockId = fC->Sibling(m_module->getGenBlockId());
@@ -592,7 +592,7 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
     NodeId ParameterPortListId;
     std::stack<NodeId> stack;
     stack.push(id);
-    VObjectType port_direction = VObjectType::slNoType;
+    VObjectType port_direction = VObjectType::NO_TYPE;
     NodeId startId = id;
     while (!stack.empty()) {
       id = stack.top();
@@ -749,7 +749,7 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
           NodeId list_of_type_assignments = fC->Child(id);
           if (fC->Type(list_of_type_assignments) ==
                   VObjectType::paList_of_type_assignments ||
-              fC->Type(list_of_type_assignments) == VObjectType::paTYPE) {
+              fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
             // Type param
             m_helper.compileParameterDeclaration(
                 m_module, fC, list_of_type_assignments, m_compileDesign,
@@ -769,7 +769,7 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
           NodeId list_of_type_assignments = fC->Child(id);
           if (fC->Type(list_of_type_assignments) ==
                   VObjectType::paList_of_type_assignments ||
-              fC->Type(list_of_type_assignments) == VObjectType::paTYPE) {
+              fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
             // Type param
             m_helper.compileParameterDeclaration(
                 m_module, fC, list_of_type_assignments, m_compileDesign,
@@ -827,7 +827,7 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
         case VObjectType::paClass_declaration: {
           if (collectType != CollectType::OTHER) break;
           NodeId nameId = fC->Child(id);
-          if (fC->Type(nameId) == VObjectType::paVIRTUAL) {
+          if (fC->Type(nameId) == VObjectType::VIRTUAL) {
             nameId = fC->Sibling(nameId);
           }
           const std::string_view name = fC->SymName(nameId);
@@ -949,7 +949,7 @@ bool CompileModule::collectModuleObjects_(CollectType collectType) {
           processes->emplace_back(final);
           break;
         }
-        case VObjectType::slStringConst: {
+        case VObjectType::STRING_CONST: {
           if (collectType != CollectType::DEFINITION) break;
           NodeId sibling = fC->Sibling(id);
           if (!sibling) {
@@ -1105,7 +1105,7 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
     NodeId ParameterPortListId;
     std::stack<NodeId> stack;
     stack.push(id);
-    VObjectType port_direction = VObjectType::slNoType;
+    VObjectType port_direction = VObjectType::NO_TYPE;
     NodeId startId = id;
     while (!stack.empty()) {
       id = stack.top();
@@ -1318,7 +1318,7 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
             NodeId modportname = fC->Child(id);
             const std::string_view modportsymb = fC->SymName(modportname);
             NodeId modport_ports_declaration = fC->Sibling(modportname);
-            VObjectType port_direction_type = VObjectType::slNoType;
+            VObjectType port_direction_type = VObjectType::NO_TYPE;
             while (modport_ports_declaration) {
               NodeId port_declaration = fC->Child(modport_ports_declaration);
               VObjectType port_declaration_type = fC->Type(port_declaration);
@@ -1419,7 +1419,7 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
           NodeId list_of_type_assignments = fC->Child(id);
           if (fC->Type(list_of_type_assignments) ==
                   VObjectType::paList_of_type_assignments ||
-              fC->Type(list_of_type_assignments) == VObjectType::paTYPE) {
+              fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
             // Type param
             m_helper.compileParameterDeclaration(
                 m_module, fC, list_of_type_assignments, m_compileDesign,
@@ -1439,7 +1439,7 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
           NodeId list_of_type_assignments = fC->Child(id);
           if (fC->Type(list_of_type_assignments) ==
                   VObjectType::paList_of_type_assignments ||
-              fC->Type(list_of_type_assignments) == VObjectType::paTYPE) {
+              fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
             // Type param
             m_helper.compileParameterDeclaration(
                 m_module, fC, list_of_type_assignments, m_compileDesign,
@@ -1472,7 +1472,7 @@ bool CompileModule::collectInterfaceObjects_(CollectType collectType) {
           m_helper.compileLetDeclaration(m_module, fC, id, m_compileDesign);
           break;
         }
-        case VObjectType::paENDINTERFACE: {
+        case VObjectType::ENDINTERFACE: {
           if (collectType != CollectType::DEFINITION) break;
           NodeId InterfaceIdentifier = fC->Sibling(id);
           if (InterfaceIdentifier) {
@@ -1588,7 +1588,7 @@ bool CompileModule::checkModule_() {
     NodeId portId = port->getNodeId();
     if (fC->Type(portId) == VObjectType::paPort) {
       NodeId expName = fC->Child(portId);
-      if (fC->Type(expName) == VObjectType::slStringConst) {
+      if (fC->Type(expName) == VObjectType::STRING_CONST) {
         // Port expression
         continue;
       }
@@ -1607,7 +1607,7 @@ bool CompileModule::checkModule_() {
         countMissingType++;
       }
     }
-    if (port->getDirection() == VObjectType::slNoType) {
+    if (port->getDirection() == VObjectType::NO_TYPE) {
       if (countMissingDirection == 0)
         missingDirectionLoc = new Location(
             fileSystem->copy(
@@ -1705,14 +1705,14 @@ void CompileModule::compileClockingBlock_(const FileContent* fC, NodeId id) {
   NodeId clocking_block_name;
   SymbolId clocking_block_symbol;
   ClockingBlock::Type type = ClockingBlock::Regular;
-  if (fC->Type(clocking_block_type) == VObjectType::paDEFAULT)
+  if (fC->Type(clocking_block_type) == VObjectType::DEFAULT)
     type = ClockingBlock::Default;
-  else if (fC->Type(clocking_block_type) == VObjectType::paGLOBAL)
+  else if (fC->Type(clocking_block_type) == VObjectType::GLOBAL)
     type = ClockingBlock::Global;
-  else if (fC->Type(clocking_block_type) == VObjectType::slStringConst)
+  else if (fC->Type(clocking_block_type) == VObjectType::STRING_CONST)
     clocking_block_name = clocking_block_type;
   NodeId clocking_event = fC->Sibling(clocking_block_type);
-  if (fC->Type(clocking_event) == VObjectType::slStringConst) {
+  if (fC->Type(clocking_event) == VObjectType::STRING_CONST) {
     clocking_block_name = clocking_event;
     clocking_event = fC->Sibling(clocking_block_name);
   }

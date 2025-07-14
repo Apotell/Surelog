@@ -41,7 +41,7 @@ AstListener::AstListener(const AstListener& rhs)
       m_count(rhs.m_count) {}
 
 VObjectType AstListener::getNodeType(const AstNode& node) const {
-  return node ? node.m_object->m_type : VObjectType::sl_INVALID_;
+  return node ? node.m_object->m_type : VObjectType::_INVALID_;
 }
 
 AstNode AstListener::getRootNode() const {

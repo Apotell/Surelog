@@ -121,18 +121,18 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(
     checkForLoops(false);
 
     NodeId blockNameId = fC->Child(fC->Child(stmtId));
-    if (fC->Type(blockNameId) == VObjectType::slStringConst) {
+    if (fC->Type(blockNameId) == VObjectType::STRING_CONST) {
       stmt->setName(fC->SymName(blockNameId));
     }
   } else if (fC->Type(stmtId) ==
              VObjectType::paIf_generate_construct) {  // If, If-Else stmt
     NodeId ifElseId = fC->Child(stmtId);
-    if (fC->Type(ifElseId) == VObjectType::paIF) {
+    if (fC->Type(ifElseId) == VObjectType::IF) {
       // lookahead
       NodeId tmp = ifElseId;
       bool ifelse = false;
       while (tmp) {
-        if (fC->Type(tmp) == VObjectType::paELSE) {
+        if (fC->Type(tmp) == VObjectType::ELSE) {
           ifelse = true;
           break;
         }
@@ -171,7 +171,7 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(
         checkForLoops(false);
 
         NodeId blockNameId = fC->Child(fC->Child(stmtId));
-        if (fC->Type(blockNameId) == VObjectType::slStringConst) {
+        if (fC->Type(blockNameId) == VObjectType::STRING_CONST) {
           stmt1->setName(fC->SymName(blockNameId));
         }
 
@@ -195,7 +195,7 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(
         checkForLoops(false);
 
         blockNameId = fC->Child(fC->Child(elseStmtId));
-        if (fC->Type(blockNameId) == VObjectType::slStringConst) {
+        if (fC->Type(blockNameId) == VObjectType::STRING_CONST) {
           stmt2->setName(fC->SymName(blockNameId));
         }
         fC->populateCoreMembers(ifElseId, elseStmtId, genif);
@@ -223,7 +223,7 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(
         checkForLoops(false);
 
         NodeId blockNameId = fC->Child(fC->Child(stmtId));
-        if (fC->Type(blockNameId) == VObjectType::slStringConst) {
+        if (fC->Type(blockNameId) == VObjectType::STRING_CONST) {
           stmt->setName(fC->SymName(blockNameId));
         }
       }
@@ -276,7 +276,7 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(
         checkForLoops(false);
 
         NodeId blockNameId = fC->Child(fC->Child(stmtId));
-        if (fC->Type(blockNameId) == VObjectType::slStringConst) {
+        if (fC->Type(blockNameId) == VObjectType::STRING_CONST) {
           stmt->setName(fC->SymName(blockNameId));
         }
       }
@@ -372,7 +372,7 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(
     checkForLoops(false);
 
     NodeId blockNameId = fC->Child(fC->Child(genBlock));
-    if (fC->Type(blockNameId) == VObjectType::slStringConst) {
+    if (fC->Type(blockNameId) == VObjectType::STRING_CONST) {
       stmt->setName(fC->SymName(blockNameId));
     }
   }

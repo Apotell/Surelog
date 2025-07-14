@@ -95,7 +95,7 @@ void ResolveSymbols::createFastLookup() {
 
   for (auto& object : objects) {
     VObjectType type = m_fileContent->Type(object);
-    NodeId stId = m_fileContent->sl_collect(object, VObjectType::slStringConst,
+    NodeId stId = m_fileContent->sl_collect(object, VObjectType::STRING_CONST,
                                             VObjectType::paAttr_spec);
     if (stId) {
       const std::string_view name = SymName(stId);
@@ -116,9 +116,8 @@ void ResolveSymbols::createFastLookup() {
           std::vector<NodeId> subobjects =
               m_fileContent->sl_collect_all(object, subtypes, subtypes);
           for (auto& subobject : subobjects) {
-            NodeId stId =
-                m_fileContent->sl_collect(subobject, VObjectType::slStringConst,
-                                          VObjectType::paAttr_spec);
+            NodeId stId = m_fileContent->sl_collect(
+                subobject, VObjectType::STRING_CONST, VObjectType::paAttr_spec);
             if (stId) {
               const std::string_view name = SymName(stId);
               const std::string fullSubName = StrCat(pkgname, "::", name);
@@ -142,9 +141,8 @@ void ResolveSymbols::createFastLookup() {
           std::vector<NodeId> subobjects =
               m_fileContent->sl_collect_all(object, subtypes, subtypes);
           for (auto& subobject : subobjects) {
-            NodeId stId =
-                m_fileContent->sl_collect(subobject, VObjectType::slStringConst,
-                                          VObjectType::paAttr_spec);
+            NodeId stId = m_fileContent->sl_collect(
+                subobject, VObjectType::STRING_CONST, VObjectType::paAttr_spec);
             if (stId) {
               const std::string_view name = SymName(stId);
               const std::string fullSubName = StrCat(fullName, "::", name);
@@ -176,9 +174,8 @@ void ResolveSymbols::createFastLookup() {
           std::vector<NodeId> subobjects =
               m_fileContent->sl_collect_all(object, subtypes, subtypes);
           for (auto& subobject : subobjects) {
-            NodeId stId =
-                m_fileContent->sl_collect(subobject, VObjectType::slStringConst,
-                                          VObjectType::paAttr_spec);
+            NodeId stId = m_fileContent->sl_collect(
+                subobject, VObjectType::STRING_CONST, VObjectType::paAttr_spec);
             if (stId) {
               const std::string_view name = SymName(stId);
               const std::string fullSubName = StrCat(fullName, "::", name);
@@ -309,7 +306,7 @@ std::vector<NodeId> ResolveSymbols::sl_collect_all(NodeId parent,
 bool ResolveSymbols::bindDefinition_(NodeId objIndex,
                                      const VObjectTypeUnorderedSet& bindTypes) {
   const std::string_view modName =
-      SymName(sl_collect(objIndex, VObjectType::slStringConst));
+      SymName(sl_collect(objIndex, VObjectType::STRING_CONST));
   Design::FileIdDesignContentMap& all_files =
       this->m_compileDesign->getCompiler()->getDesign()->getAllFileContents();
 
@@ -383,7 +380,7 @@ bool ResolveSymbols::resolve() {
        * This warning is now treated in the elaboration to give the library
       information if (!found)
         {
-          std::string modName = SymName (sl_collect (objIndex, slStringConst));
+          std::string modName = SymName (sl_collect (objIndex, STRING_CONST));
           Location loc (m_fileContent->getFileId (), Line (objIndex), 0,
       m_symbolTable->registerSymbol (modName)); Error err (errorType, loc);
           m_errorContainer->addError (err, false, false);

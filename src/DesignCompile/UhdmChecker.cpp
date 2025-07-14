@@ -87,7 +87,7 @@ bool UhdmChecker::registerFile(const FileContent* fC,
     const VObject& current = fC->Object(id);
     bool skip = false;
     VObjectType type = current.m_type;
-    if (type == VObjectType::paEND) skip = true;
+    if (type == VObjectType::END) skip = true;
 
     // Skip macro expansion which resides in another file (header)
     PathId fid = fC->getFileId(id);
@@ -97,7 +97,7 @@ bool UhdmChecker::registerFile(const FileContent* fC,
     }
 
     if (type == VObjectType::paModule_declaration) {
-      NodeId stId = fC->sl_collect(id, VObjectType::slStringConst,
+      NodeId stId = fC->sl_collect(id, VObjectType::STRING_CONST,
                                    VObjectType::paAttr_spec);
       if (stId) {
         std::string name =
@@ -109,22 +109,17 @@ bool UhdmChecker::registerFile(const FileContent* fC,
       endModuleNode = fC->Parent(id);
       endModuleNode = fC->Sibling(endModuleNode);
     }
-    if (type == VObjectType::paDescription || type == VObjectType::paENDCASE ||
-        type == VObjectType::paENDTASK || type == VObjectType::paENDFUNCTION ||
-        type == VObjectType::paENDMODULE ||
-        type == VObjectType::paENDINTERFACE ||
-        type == VObjectType::paENDPACKAGE ||
-        type == VObjectType::paENDCLOCKING || type == VObjectType::paENDCLASS ||
-        type == VObjectType::paENDGENERATE ||
-        type == VObjectType::paENDCONFIG ||
+    if (type == VObjectType::paDescription || type == VObjectType::ENDCASE ||
+        type == VObjectType::ENDTASK || type == VObjectType::ENDFUNCTION ||
+        type == VObjectType::ENDMODULE || type == VObjectType::ENDINTERFACE ||
+        type == VObjectType::ENDPACKAGE || type == VObjectType::ENDCLOCKING ||
+        type == VObjectType::ENDCLASS || type == VObjectType::ENDGENERATE ||
+        type == VObjectType::ENDCONFIG ||
         type == VObjectType::paEndcelldefine_directive ||
-        type == VObjectType::paENDGROUP ||
-        type == VObjectType::paENDPRIMITIVE ||
-        type == VObjectType::paENDTABLE || type == VObjectType::paENDPROGRAM ||
-        type == VObjectType::paENDCHECKER ||
-        type == VObjectType::paENDPROPERTY ||
-        type == VObjectType::paENDSPECIFY ||
-        type == VObjectType::paENDSEQUENCE ||
+        type == VObjectType::ENDGROUP || type == VObjectType::ENDPRIMITIVE ||
+        type == VObjectType::ENDTABLE || type == VObjectType::ENDPROGRAM ||
+        type == VObjectType::ENDCHECKER || type == VObjectType::ENDPROPERTY ||
+        type == VObjectType::ENDSPECIFY || type == VObjectType::ENDSEQUENCE ||
         type == VObjectType::paPort_declaration ||
         type == VObjectType::paList_of_ports || type == VObjectType::paPort ||
         type == VObjectType::paConditional_generate_construct ||
@@ -145,9 +140,8 @@ bool UhdmChecker::registerFile(const FileContent* fC,
     }
     if (type == VObjectType::paList_of_port_declarations ||
         type == VObjectType::paBit_select || type == VObjectType::paSelect ||
-        type == VObjectType::paIF || type == VObjectType::paELSE ||
-        type == VObjectType::paOPEN_PARENS ||
-        type == VObjectType::paCLOSE_PARENS) {
+        type == VObjectType::IF || type == VObjectType::ELSE ||
+        type == VObjectType::OPEN_PARENS || type == VObjectType::CLOSE_PARENS) {
       skip = true;  // Only skip the item itself
     }
     if (type == VObjectType::paGenvar_declaration) {
@@ -159,7 +153,7 @@ bool UhdmChecker::registerFile(const FileContent* fC,
       continue;
     }
     SURELOG::VObjectType parentType = fC->Type(current.m_parent);
-    if ((type == VObjectType::slStringConst) &&
+    if ((type == VObjectType::STRING_CONST) &&
         ((parentType ==
           VObjectType::paModule_declaration) ||  // endmodule : name
          (parentType ==

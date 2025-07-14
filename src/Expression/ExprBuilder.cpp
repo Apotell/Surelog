@@ -269,7 +269,7 @@ Value* ExprBuilder::evalExpr(const FileContent* fC, NodeId parent,
             m_valueFactory.deleteValue(valueR);
             break;
           }
-          case VObjectType::paQMARK:
+          case VObjectType::QMARK:
           case VObjectType::paConditional_operator: {
             int64_t v = valueL->getValueL();
             m_valueFactory.deleteValue(valueL);
@@ -418,7 +418,7 @@ Value* ExprBuilder::evalExpr(const FileContent* fC, NodeId parent,
             break;
         }
       } break;
-      case VObjectType::slIntConst: {
+      case VObjectType::INT_CONST: {
         const std::string_view val = fC->SymName(child);
         const std::string_view size = StringUtils::rtrim_until(val, '\'');
         int64_t intsize = 0;
@@ -504,7 +504,7 @@ Value* ExprBuilder::evalExpr(const FileContent* fC, NodeId parent,
         }
         break;
       }
-      case VObjectType::slRealConst: {
+      case VObjectType::REAL_CONST: {
         double d;
         value->set(NumUtils::parseDouble(fC->SymName(child), &d) ? d : 0);
         break;
@@ -514,7 +514,7 @@ Value* ExprBuilder::evalExpr(const FileContent* fC, NodeId parent,
         break;
       }
       case VObjectType::paPackage_scope:
-      case VObjectType::slStringConst: {
+      case VObjectType::STRING_CONST: {
         Value* sval = nullptr;
         std::string fullName;
         if (childType == VObjectType::paPackage_scope) {
@@ -566,7 +566,7 @@ Value* ExprBuilder::evalExpr(const FileContent* fC, NodeId parent,
         }
         break;
       }
-      case VObjectType::slStringLiteral: {
+      case VObjectType::STRING_LITERAL: {
         m_valueFactory.deleteValue(value);
         value = m_valueFactory.newStValue();
         const std::string_view name = StringUtils::unquoted(fC->SymName(child));
@@ -675,7 +675,7 @@ Value* ExprBuilder::evalExpr(const FileContent* fC, NodeId parent,
           NodeId Primary_literal = fC->Child(Constant_primary);
           NodeId ConstVal = fC->Child(Primary_literal);
           std::string token;
-          if (fC->Type(ConstVal) == VObjectType::slIntConst) {
+          if (fC->Type(ConstVal) == VObjectType::INT_CONST) {
             token = fC->SymName(ConstVal);
           } else {
             Value* constVal =
@@ -752,7 +752,7 @@ Value* ExprBuilder::evalExpr(const FileContent* fC, NodeId parent,
   } else {
     VObjectType type = fC->Type(parent);
     switch (type) {
-      case VObjectType::slStringConst: {
+      case VObjectType::STRING_CONST: {
         Value* sval = nullptr;
         std::string fullName;
         const std::string_view name = fC->SymName(parent);

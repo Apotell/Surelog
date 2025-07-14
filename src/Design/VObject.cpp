@@ -45,7 +45,12 @@ std::string VObject::print(Session *session, NodeId uniqueId,
     StrAppend(&text, "n<", StringUtils::replaceAll(symbol, "\n", "\\n"), ">");
   }
   StrAppend(&text, " u<", uniqueId, "> ");
-  StrAppend(&text, "t<", getTypeName(m_type).substr(2), ">");
+  std::string_view typeName = getTypeName(m_type);
+  if (StringUtils::startsWith(typeName, "pp") ||
+      StringUtils::startsWith(typeName, "pa")) {
+    typeName.remove_prefix(2);
+  }
+  StrAppend(&text, "t<", typeName, ">");
   if (m_parent) StrAppend(&text, " p<", m_parent, ">");
   if (m_definition) StrAppend(&text, " d<", m_definition, ">");
   if (definitionFile) StrAppend(&text, " df<", definitionFile, ">");

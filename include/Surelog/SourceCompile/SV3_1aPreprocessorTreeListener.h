@@ -29,6 +29,9 @@
 #include <Surelog/SourceCompile/SV3_1aPpTreeListenerHelper.h>
 #include <parser/SV3_1aPpParserBaseListener.h>
 
+// System includes
+#include <array>
+
 namespace SURELOG {
 class PreprocessFile;
 class Session;
@@ -121,7 +124,11 @@ class SV3_1aPreprocessorTreeListener final : public SV3_1aPpParserBaseListener,
   void appendPreprocEnd();
 
  private:
+  using token_set_t = std::set<antlr4::Token*>;
+
   bool m_passThrough = false;
+  token_set_t m_tokensToIgnore;
+  std::array<bool, 256> m_charsInOperator;
 };
 }  // namespace SURELOG
 

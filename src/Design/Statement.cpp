@@ -40,7 +40,7 @@ std::string_view SubRoutineCallStmt::getVarName(NodeId base_name) const {
       return "super";
     case VObjectType::paThis_keyword:
       return "this";
-    case VObjectType::slStringConst:
+    case VObjectType::STRING_CONST:
       return fC->SymName(base_name);
     default:
       return "UNKNOWN_VAR_NAME";

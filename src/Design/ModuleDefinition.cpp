@@ -58,7 +58,7 @@ ModuleDefinition::ModuleDefinition(Session* session, std::string_view name,
     case VObjectType::paUdp_declaration: {
       uhdm::UdpDefn* const instance = serializer.make<uhdm::UdpDefn>();
       if (!name.empty()) instance->setDefName(name);
-      fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::paPRIMITIVE),
+      fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::PRIMITIVE),
                               nodeId, instance);
       setUhdmModel(instance);
     } break;
@@ -66,7 +66,7 @@ ModuleDefinition::ModuleDefinition(Session* session, std::string_view name,
     case VObjectType::paInterface_declaration: {
       uhdm::Interface* const instance = serializer.make<uhdm::Interface>();
       if (!name.empty()) instance->setName(name);
-      fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::paINTERFACE),
+      fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::INTERFACE),
                               nodeId, instance);
       setUhdmModel(instance);
     } break;

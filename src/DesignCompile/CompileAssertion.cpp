@@ -121,7 +121,7 @@ uhdm::Any* CompileHelper::compileConcurrentAssertion(
   if (fC->Type(Action_block) == VObjectType::paAction_block) {
     NodeId if_stmt_id = fC->Child(Action_block);
     NodeId else_stmt_id;
-    if (fC->Type(if_stmt_id) == VObjectType::paELSE) {
+    if (fC->Type(if_stmt_id) == VObjectType::ELSE) {
       else_stmt_id = fC->Sibling(if_stmt_id);
       if_stmt_id = InvalidNodeId;
     } else if (NodeId else_keyword = fC->Sibling(if_stmt_id)) {
@@ -307,7 +307,7 @@ uhdm::Any* CompileHelper::compileSimpleImmediateAssertion(
   NodeId Action_block = fC->Sibling(Expression);
   NodeId if_stmt_id = fC->Child(Action_block);
   NodeId else_stmt_id;
-  if (fC->Type(if_stmt_id) == VObjectType::paELSE) {
+  if (fC->Type(if_stmt_id) == VObjectType::ELSE) {
     else_stmt_id = fC->Sibling(if_stmt_id);
     if_stmt_id = InvalidNodeId;
   } else {
@@ -369,12 +369,12 @@ uhdm::Any* CompileHelper::compileDeferredImmediateAssertion(
   uhdm::Serializer& s = compileDesign->getSerializer();
   NodeId the_stmt_child = fC->Child(the_stmt);
   int32_t isFinal =
-      fC->Type(the_stmt_child) == VObjectType::paPound_delay ? 0 : 1;
+      fC->Type(the_stmt_child) == VObjectType::POUND_DELAY ? 0 : 1;
   NodeId Expression = isFinal ? the_stmt_child : fC->Sibling(the_stmt_child);
   NodeId Action_block = fC->Sibling(Expression);
   NodeId if_stmt_id = fC->Child(Action_block);
   NodeId else_stmt_id;
-  if (fC->Type(if_stmt_id) == VObjectType::paELSE) {
+  if (fC->Type(if_stmt_id) == VObjectType::ELSE) {
     else_stmt_id = fC->Sibling(if_stmt_id);
     if_stmt_id = InvalidNodeId;
   } else {

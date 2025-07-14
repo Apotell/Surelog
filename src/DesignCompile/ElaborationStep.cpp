@@ -234,7 +234,7 @@ bool ElaborationStep::bindTypedefs_() {
         if (ts) {
           ts->setName(typd->getName());
           std::string name;
-          if (typeF->Type(typeId) == VObjectType::slStringConst) {
+          if (typeF->Type(typeId) == VObjectType::STRING_CONST) {
             name = typeF->SymName(typeId);
           } else {
             name = typd->getName();
@@ -290,7 +290,7 @@ bool ElaborationStep::bindTypedefs_() {
           std::string definition_string;
           NodeId defNode = typd->getDefinitionNode();
           VObjectType defType = fC->Type(defNode);
-          if (defType == VObjectType::slStringConst) {
+          if (defType == VObjectType::STRING_CONST) {
             definition_string = fC->SymName(defNode);
           }
           Location loc1(fC->getFileId(id), fC->Line(id), fC->Column(id),
@@ -580,7 +580,7 @@ const DataType* ElaborationStep::bindTypeDef_(
   const FileContent* fC = typd->getFileContent();
   VObjectType defType = fC->Type(defNode);
   std::string objName;
-  if (defType == VObjectType::slStringConst) {
+  if (defType == VObjectType::STRING_CONST) {
     objName = fC->SymName(defNode);
   } else if (defType == VObjectType::paClass_scope) {
     NodeId class_type = fC->Child(defNode);
@@ -872,7 +872,7 @@ Variable* ElaborationStep::bindVariable_(std::string_view var_name,
     if (result) {
       const DataType* dtype = result->getDataType();
       if (dtype && !dtype->getDefinition()) {
-        if (dtype->getType() == VObjectType::slStringConst) {
+        if (dtype->getType() == VObjectType::STRING_CONST) {
           result = nullptr;
         }
       }
@@ -1170,7 +1170,7 @@ bool ElaborationStep::bindPortType_(Signal* signal, const FileContent* fC,
       }
       break;
     }
-    case VObjectType::slStringConst: {
+    case VObjectType::STRING_CONST: {
       std::string interfName;
       if (signal->getInterfaceTypeNameId()) {
         interfName = signal->getInterfaceTypeName();
@@ -1184,7 +1184,7 @@ bool ElaborationStep::bindPortType_(Signal* signal, const FileContent* fC,
                                     fC->SymName(Class_type_name),
                                     fC->SymName(Class_scope_name)))
               return true;
-          } else if (fC->Type(typespecId) == VObjectType::slStringConst) {
+          } else if (fC->Type(typespecId) == VObjectType::STRING_CONST) {
             interfName = fC->SymName(typespecId);
           }
         }
@@ -1312,7 +1312,7 @@ bool ElaborationStep::bindPortType_(Signal* signal, const FileContent* fC,
           }
         }
       }
-      if (signal->getType() != VObjectType::slNoType) {
+      if (signal->getType() != VObjectType::NO_TYPE) {
         return true;
       }
       if (def == nullptr) {

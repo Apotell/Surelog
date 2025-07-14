@@ -139,7 +139,7 @@ library_declaration
   ;
 
 file_path_spec
-  : (Simple_identifier | DIV | DOT | STAR | DOTSTAR | QMARK)+
+  : (SIMPLE_IDENTIFIER | DIV | DOT | STAR | DOTSTAR | QMARK)+
   ;
 
 include_statement: INCLUDE file_path_spec SEMICOLON;
@@ -364,7 +364,7 @@ ansi_port_declaration
   ;
 
 elaboration_system_task
-  : DOLLAR Simple_identifier (
+  : DOLLAR SIMPLE_IDENTIFIER (
     (OPEN_PARENS number (COMMA list_of_arguments)? CLOSE_PARENS)? SEMICOLON
     | (OPEN_PARENS list_of_arguments CLOSE_PARENS)? SEMICOLON
   )
@@ -884,7 +884,7 @@ packed_keyword: PACKED;
 
 string_type: STRING;
 
-string_value: String;
+string_value: QUOTED_STRING;
 
 chandle_type: CHANDLE;
 
@@ -906,7 +906,7 @@ enum_base_type
 
 enum_name_declaration
   : identifier (
-    OPEN_BRACKET Integral_number (COLON Integral_number)? CLOSE_BRACKET
+    OPEN_BRACKET INTEGRAL_NUMBER (COLON INTEGRAL_NUMBER)? CLOSE_BRACKET
   )? (ASSIGN_OP constant_expression)?
   ;
 
@@ -915,8 +915,8 @@ class_scope: class_type COLONCOLON;
 // identifier was inlined to lexer tokens for parsing speed
 class_type
   : (
-    Simple_identifier
-    | Escaped_identifier
+    SIMPLE_IDENTIFIER
+    | ESCAPED_IDENTIFIER
     | THIS
     | RANDOMIZE
     | SAMPLE
@@ -1037,14 +1037,14 @@ delay2
   ;
 
 pound_delay_value
-  : Pound_Pound_delay time_unit?
-  | Pound_delay time_unit?
+  : POUND_POUND_DELAY time_unit?
+  | POUND_DELAY time_unit?
   | POUND delay_value
   ;
 
 delay_value
-  : Integral_number
-  | Real_number
+  : INTEGRAL_NUMBER
+  | REAL_NUMBER
   | ps_identifier
   | time_literal
   | ONESTEP
@@ -1236,12 +1236,12 @@ function_prototype
 
 dpi_import_export
   : IMPORT string_value (context_keyword | pure_keyword)? (
-    Simple_identifier ASSIGN_OP
+    SIMPLE_IDENTIFIER ASSIGN_OP
   )? function_prototype SEMICOLON
   | IMPORT string_value context_keyword? (
-    Simple_identifier ASSIGN_OP
+    SIMPLE_IDENTIFIER ASSIGN_OP
   )? task_prototype SEMICOLON
-  | EXPORT string_value (Simple_identifier ASSIGN_OP)? (
+  | EXPORT string_value (SIMPLE_IDENTIFIER ASSIGN_OP)? (
     function_name_decl
     | task_name_decl
   ) SEMICOLON
@@ -1526,7 +1526,7 @@ sequence_expr
 
 cycle_delay_range
   : POUNDPOUND constant_primary
-  | Pound_Pound_delay
+  | POUND_POUND_DELAY
   | POUNDPOUND OPEN_BRACKET cycle_delay_const_range_expression CLOSE_BRACKET
   | POUNDPOUND ASSOCIATIVE_UNSPECIFIED
   | POUNDPOUND OPEN_BRACKET PLUS CLOSE_BRACKET
@@ -1931,8 +1931,8 @@ parameter_value_assignment
   : POUND (
     OPEN_PARENS list_of_parameter_assignments? CLOSE_PARENS
   )
-  | Pound_delay
-  | POUND Simple_identifier
+  | POUND_DELAY
+  | POUND SIMPLE_IDENTIFIER
   ;
 
 list_of_parameter_assignments
@@ -2229,7 +2229,7 @@ init_val
   | ONE_TICK_bX     # InitVal_1TickbX
   | ONE_TICK_Bx     # InitVal_1TickBx
   | ONE_TICK_BX     # InitVal_1TickBX
-  | Integral_number # InitVal_Integral
+  | INTEGRAL_NUMBER # InitVal_Integral
   ;
 
 sequential_entry
@@ -2250,11 +2250,11 @@ edge_indicator
 
 next_state: output_symbol | MINUS;
 
-output_symbol: Integral_number | Simple_identifier;
+output_symbol: INTEGRAL_NUMBER | SIMPLE_IDENTIFIER;
 
-level_symbol: Integral_number | Simple_identifier | QMARK;
+level_symbol: INTEGRAL_NUMBER | SIMPLE_IDENTIFIER | QMARK;
 
-edge_symbol: Simple_identifier | STAR;
+edge_symbol: SIMPLE_IDENTIFIER | STAR;
 
 udp_instantiation
   : identifier drive_strength? delay2? udp_instance (
@@ -2655,17 +2655,17 @@ deferred_immediate_assertion_statement
   ;
 
 deferred_immediate_assert_statement
-  : ASSERT (Pound_Pound_delay | Pound_delay) OPEN_PARENS expression CLOSE_PARENS action_block
+  : ASSERT (POUND_POUND_DELAY | POUND_DELAY) OPEN_PARENS expression CLOSE_PARENS action_block
   | ASSERT FINAL (expression) action_block
   ;
 
 deferred_immediate_assume_statement
-  : ASSUME (Pound_Pound_delay | Pound_delay) OPEN_PARENS expression CLOSE_PARENS action_block
+  : ASSUME (POUND_POUND_DELAY | POUND_DELAY) OPEN_PARENS expression CLOSE_PARENS action_block
   | ASSUME FINAL OPEN_PARENS expression CLOSE_PARENS action_block
   ;
 
 deferred_immediate_cover_statement
-  : COVER (Pound_Pound_delay | Pound_delay) OPEN_PARENS expression CLOSE_PARENS statement_or_null
+  : COVER (POUND_POUND_DELAY | POUND_DELAY) OPEN_PARENS expression CLOSE_PARENS statement_or_null
   | COVER FINAL OPEN_PARENS expression CLOSE_PARENS statement_or_null
   ;
 
@@ -2718,8 +2718,8 @@ clocking_drive
   ;
 
 cycle_delay
-  : POUNDPOUND Integral_number
-  | Pound_Pound_delay
+  : POUNDPOUND INTEGRAL_NUMBER
+  | POUND_POUND_DELAY
   | POUNDPOUND identifier
   | POUNDPOUND OPEN_PARENS expression CLOSE_PARENS
   ;
@@ -2924,17 +2924,17 @@ system_timing_check
   ;
 
 dollar_setup_timing_check
-  : DOLLAR Simple_identifier OPEN_PARENS timing_check_event COMMA reference_event COMMA
+  : DOLLAR SIMPLE_IDENTIFIER OPEN_PARENS timing_check_event COMMA reference_event COMMA
       timing_check_limit (COMMA notifier?)? CLOSE_PARENS SEMICOLON
   ;
 
 dollar_hold_timing_check
-  : DOLLAR Simple_identifier OPEN_PARENS reference_event COMMA timing_check_event COMMA
+  : DOLLAR SIMPLE_IDENTIFIER OPEN_PARENS reference_event COMMA timing_check_event COMMA
       timing_check_limit (COMMA notifier?)? CLOSE_PARENS SEMICOLON
   ;
 
 dollar_setuphold_timing_check
-  : DOLLAR Simple_identifier OPEN_PARENS reference_event COMMA timing_check_event COMMA
+  : DOLLAR SIMPLE_IDENTIFIER OPEN_PARENS reference_event COMMA timing_check_event COMMA
       timing_check_limit COMMA timing_check_limit (
     COMMA notifier? (
       COMMA stamptime_condition? (
@@ -2947,17 +2947,17 @@ dollar_setuphold_timing_check
   ;
 
 dollar_recovery_timing_check
-  : DOLLAR Simple_identifier OPEN_PARENS reference_event COMMA timing_check_event COMMA
+  : DOLLAR SIMPLE_IDENTIFIER OPEN_PARENS reference_event COMMA timing_check_event COMMA
       timing_check_limit (COMMA notifier?)? CLOSE_PARENS SEMICOLON
   ;
 
 dollar_removal_timing_check
-  : DOLLAR Simple_identifier OPEN_PARENS reference_event COMMA timing_check_event COMMA
+  : DOLLAR SIMPLE_IDENTIFIER OPEN_PARENS reference_event COMMA timing_check_event COMMA
       timing_check_limit (COMMA notifier?)? CLOSE_PARENS SEMICOLON
   ;
 
 dollar_recrem_timing_check
-  : DOLLAR Simple_identifier OPEN_PARENS reference_event COMMA timing_check_event COMMA
+  : DOLLAR SIMPLE_IDENTIFIER OPEN_PARENS reference_event COMMA timing_check_event COMMA
       timing_check_limit COMMA timing_check_limit (
     COMMA notifier? (
       COMMA stamptime_condition? (
@@ -2970,12 +2970,12 @@ dollar_recrem_timing_check
   ;
 
 dollar_skew_timing_check
-  : DOLLAR Simple_identifier OPEN_PARENS reference_event COMMA timing_check_event COMMA
+  : DOLLAR SIMPLE_IDENTIFIER OPEN_PARENS reference_event COMMA timing_check_event COMMA
       timing_check_limit (COMMA notifier?)? CLOSE_PARENS SEMICOLON
   ;
 
 dollar_timeskew_timing_check
-  : DOLLAR Simple_identifier OPEN_PARENS reference_event COMMA timing_check_event COMMA
+  : DOLLAR SIMPLE_IDENTIFIER OPEN_PARENS reference_event COMMA timing_check_event COMMA
       timing_check_limit (
     COMMA notifier? (
       COMMA event_based_flag? (COMMA remain_active_flag?)?
@@ -2984,7 +2984,7 @@ dollar_timeskew_timing_check
   ;
 
 dollar_fullskew_timing_check
-  : DOLLAR Simple_identifier OPEN_PARENS reference_event COMMA timing_check_event COMMA
+  : DOLLAR SIMPLE_IDENTIFIER OPEN_PARENS reference_event COMMA timing_check_event COMMA
       timing_check_limit COMMA timing_check_limit (
     COMMA notifier? (
       COMMA event_based_flag? (COMMA remain_active_flag?)?
@@ -2993,18 +2993,18 @@ dollar_fullskew_timing_check
   ;
 
 dollar_period_timing_check
-  : DOLLAR Simple_identifier OPEN_PARENS controlled_timing_check_event COMMA timing_check_limit (
+  : DOLLAR SIMPLE_IDENTIFIER OPEN_PARENS controlled_timing_check_event COMMA timing_check_limit (
     COMMA notifier?
   )? CLOSE_PARENS SEMICOLON
   ;
 
 dollar_width_timing_check
-  : DOLLAR Simple_identifier OPEN_PARENS controlled_timing_check_event COMMA timing_check_limit
+  : DOLLAR SIMPLE_IDENTIFIER OPEN_PARENS controlled_timing_check_event COMMA timing_check_limit
       COMMA threshold (COMMA notifier?)? CLOSE_PARENS SEMICOLON
   ;
 
 dollar_nochange_timing_check
-  : DOLLAR Simple_identifier OPEN_PARENS reference_event COMMA timing_check_event COMMA
+  : DOLLAR SIMPLE_IDENTIFIER OPEN_PARENS reference_event COMMA timing_check_event COMMA
       start_edge_offset COMMA end_edge_offset (COMMA notifier?)? CLOSE_PARENS SEMICOLON
   ;
 
@@ -3066,11 +3066,11 @@ edge_control_specifier
   ;
 
 edge_descriptor
-  : Integral_number
-  | Simple_identifier Integral_number
-  | Integral_number Simple_identifier
+  : INTEGRAL_NUMBER
+  | SIMPLE_IDENTIFIER INTEGRAL_NUMBER
+  | INTEGRAL_NUMBER SIMPLE_IDENTIFIER
   ;
-// | Rising | Falling | Simple_identifier Zero_or_one | Zero_or_one Simple_identifier;
+// | Rising | Falling | SIMPLE_IDENTIFIER Zero_or_one | Zero_or_one SIMPLE_IDENTIFIER;
 
 timing_check_condition
   : scalar_timing_check_condition
@@ -3095,7 +3095,7 @@ scalar_constant
   | TICK_b1         # Scalar_Tickb1
   | TICK_B0         # Scalar_TickB0
   | TICK_B1         # Scalar_TickB1
-  | Integral_number # Scalar_Integral
+  | INTEGRAL_NUMBER # Scalar_Integral
   ;
 
 concatenation
@@ -3625,10 +3625,10 @@ this_dot_super: THIS DOT SUPER;
 
 null_keyword: NULL_KEYWORD;
 
-time_literal: Integral_number time_unit | Real_number time_unit;
+time_literal: INTEGRAL_NUMBER time_unit | REAL_NUMBER time_unit;
 //REMOVED | Unsigned_number time_unit | Fixed_point_number time_unit;
 
-time_unit: Simple_identifier;
+time_unit: SIMPLE_IDENTIFIER;
 
 implicit_class_handle
   : this_keyword
@@ -3729,8 +3729,8 @@ binary_module_path_operator
   ;
 
 number
-  : Integral_number
-  | Real_number
+  : INTEGRAL_NUMBER
+  | REAL_NUMBER
   | ONE_TICK_b0
   | ONE_TICK_b1
   | ONE_TICK_B0
@@ -3747,7 +3747,7 @@ number
   | ONE_TICK_BX
   ;
 
-unbased_unsized_literal: TICK Simple_identifier;
+unbased_unsized_literal: TICK SIMPLE_IDENTIFIER;
 
 attribute_instance
   : OPEN_PARENS_STAR attr_spec (COMMA attr_spec)* STAR_CLOSE_PARENS
@@ -3764,8 +3764,8 @@ hierarchical_identifier
   ;
 
 identifier
-  : Simple_identifier
-  | Escaped_identifier
+  : SIMPLE_IDENTIFIER
+  | ESCAPED_IDENTIFIER
   | THIS // System Verilog keyword
   | RANDOMIZE // System Verilog keyword
   | SAMPLE
@@ -3779,8 +3779,8 @@ interface_identifier
 
 package_scope
   : (
-    Simple_identifier
-    | Escaped_identifier
+    SIMPLE_IDENTIFIER
+    | ESCAPED_IDENTIFIER
     | THIS
     | RANDOMIZE
     | SAMPLE
@@ -3790,16 +3790,16 @@ package_scope
 
 ps_identifier
   : (
-    Simple_identifier
-    | Escaped_identifier
+    SIMPLE_IDENTIFIER
+    | ESCAPED_IDENTIFIER
     | THIS
     | RANDOMIZE
     | SAMPLE
     | DOLLAR_UNIT
   ) (
     COLONCOLON (
-      Simple_identifier
-      | Escaped_identifier
+      SIMPLE_IDENTIFIER
+      | ESCAPED_IDENTIFIER
       | THIS
       | RANDOMIZE
       | SAMPLE
@@ -3836,7 +3836,7 @@ system_task
   ;
 
 system_task_names
-  : DOLLAR Simple_identifier (DOLLAR Simple_identifier)*
+  : DOLLAR SIMPLE_IDENTIFIER (DOLLAR SIMPLE_IDENTIFIER)*
   | DOLLAR TIME
   | DOLLAR REALTIME
   | DOLLAR SIGNED
@@ -3847,10 +3847,10 @@ system_task_names
 top_directives
   : timescale_directive
   | uselib_directive
-  | BACK_TICK Simple_identifier (
+  | BACK_TICK SIMPLE_IDENTIFIER (
     number
-    | Simple_identifier
-    | Real_number
+    | SIMPLE_IDENTIFIER
+    | REAL_NUMBER
   )?
   | begin_keywords_directive
   | end_keywords_directive
@@ -3888,14 +3888,14 @@ top_directives
   ;
 
 pragma_directive
-  : TICK_PRAGMA Simple_identifier (
+  : TICK_PRAGMA SIMPLE_IDENTIFIER (
     pragma_expression (COMMA pragma_expression)*
   )?
   ;
 
 pragma_expression
-  : Simple_identifier
-  | Simple_identifier ASSIGN_OP pragma_value
+  : SIMPLE_IDENTIFIER
+  | SIMPLE_IDENTIFIER ASSIGN_OP pragma_value
   | pragma_value
   | BEGIN
   | END
@@ -3905,25 +3905,25 @@ pragma_value
   : OPEN_PARENS pragma_expression (COMMA pragma_expression)* CLOSE_PARENS
   | number
   | string_value
-  | Simple_identifier
+  | SIMPLE_IDENTIFIER
   ;
 
 timescale_directive
-  : TICK_TIMESCALE Integral_number Simple_identifier DIV Integral_number Simple_identifier
+  : TICK_TIMESCALE INTEGRAL_NUMBER SIMPLE_IDENTIFIER DIV INTEGRAL_NUMBER SIMPLE_IDENTIFIER
   ;
 
-begin_keywords_directive: TICK_BEGIN_KEYWORDS String;
+begin_keywords_directive: TICK_BEGIN_KEYWORDS QUOTED_STRING;
 
 end_keywords_directive: TICK_END_KEYWORDS;
 
 unconnected_drive_directive
-  : TICK_UNCONNECTED_DRIVE (Simple_identifier | PULL0 | PULL1)
+  : TICK_UNCONNECTED_DRIVE (SIMPLE_IDENTIFIER | PULL0 | PULL1)
   ;
 
 nounconnected_drive_directive: TICK_NOUNCONNECTED_DRIVE;
 
 default_nettype_directive
-  : TICK_DEFAULT_NETTYPE (Simple_identifier | net_type)
+  : TICK_DEFAULT_NETTYPE (SIMPLE_IDENTIFIER | net_type)
   ;
 
 uselib_directive: TICK_USELIB;
@@ -3953,7 +3953,7 @@ default_trireg_strenght_directive
   : TICK_DEFAULT_TRIREG_STRENGTH number
   ;
 default_decay_time_directive
-  : TICK_DEFAULT_DECAY_TIME (number | Simple_identifier)
+  : TICK_DEFAULT_DECAY_TIME (number | SIMPLE_IDENTIFIER)
   ;
 delay_mode_distributed_directive: TICK_DELAY_MODE_DISTRIBUTED;
 delay_mode_path_directive: TICK_DELAY_MODE_PATH;
@@ -3962,7 +3962,7 @@ delay_mode_zero_directive: TICK_DELAY_MODE_ZERO;
 
 surelog_macro_not_defined: SURELOG_MACRO_NOT_DEFINED;
 
-slline: TICK_LINE Integral_number String Integral_number;
+slline: TICK_LINE INTEGRAL_NUMBER QUOTED_STRING INTEGRAL_NUMBER;
 
 config_declaration
   : CONFIG identifier SEMICOLON (

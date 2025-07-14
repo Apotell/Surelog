@@ -151,7 +151,7 @@ bool CompileHelper::importPackage(DesignComponent* scope, Design* design,
 
   std::string object_name;
   if (NodeId objId = fC->Sibling(nameId)) {
-    if (fC->Type(objId) == VObjectType::slStringConst) {
+    if (fC->Type(objId) == VObjectType::STRING_CONST) {
       object_name = fC->SymName(objId);
     }
   }
@@ -442,12 +442,12 @@ bool CompileHelper::compileTfPortList(Procedure* parent, const FileContent* fC,
         tf_data_type = fC->Sibling(tf_data_type_or_implicit);
         tf_param_name = fC->Sibling(tf_data_type);
       } else {
-        tf_port_direction_type = VObjectType::sl_INVALID_;
+        tf_port_direction_type = VObjectType::_INVALID_;
       }
       NodeId type = fC->Child(tf_data_type);
       VObjectType the_type = fC->Type(type);
       std::string typeName;
-      if (the_type == VObjectType::slStringConst) {
+      if (the_type == VObjectType::STRING_CONST) {
         typeName = fC->SymName(type);
       } else if (the_type == VObjectType::paClass_scope) {
         NodeId class_type = fC->Child(type);
@@ -465,7 +465,7 @@ bool CompileHelper::compileTfPortList(Procedure* parent, const FileContent* fC,
 
       if (expression &&
           (fC->Type(expression) != VObjectType::paVariable_dimension) &&
-          (dtype->getType() != VObjectType::slStringConst)) {
+          (dtype->getType() != VObjectType::STRING_CONST)) {
         value = m_exprBuilder.evalExpr(fC, expression, parent->getParent());
       }
       NodeId range;
@@ -530,13 +530,13 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
     const std::string_view name = fC->SymName(type_name);
     const TypeDef* prevDef = scope->getTypeDef(name);
     if (prevDef) return prevDef;
-    if (fC->Type(type_name) == VObjectType::slStringConst) {
+    if (fC->Type(type_name) == VObjectType::STRING_CONST) {
       TypeDef* newTypeDef = new TypeDef(fC, type_declaration, type_name, name);
       scope->insertTypeDef(newTypeDef);
       newType = newTypeDef;
       return newType;
     }
-  } else if (dtype == VObjectType::slStringConst) {
+  } else if (dtype == VObjectType::STRING_CONST) {
     NodeId btype = data_type;
     NodeId Select = fC->Sibling(btype);
     if (fC->Type(Select) == VObjectType::paConstant_bit_select) {
@@ -563,7 +563,7 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
   uhdm::Function* resolution_func = nullptr;
   std::string resolutionFunctionName;
   if (Variable_dimension) {
-    if (fC->Type(Variable_dimension) == VObjectType::slStringConst) {
+    if (fC->Type(Variable_dimension) == VObjectType::STRING_CONST) {
       std::string_view name = fC->SymName(Variable_dimension);
       std::pair<uhdm::TaskFunc*, DesignComponent*> ret =
           getTaskFunc(name, scope, compileDesign, nullptr, nullptr);
@@ -840,15 +840,15 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
   } else {
     bool forwardDeclaration = false;
     NodeId stype = fC->Child(data_type);
-    if (fC->Type(stype) == VObjectType::paVIRTUAL) stype = fC->Sibling(stype);
-    if (!stype && (fC->Type(data_type) == VObjectType::slStringConst)) {
+    if (fC->Type(stype) == VObjectType::VIRTUAL) stype = fC->Sibling(stype);
+    if (!stype && (fC->Type(data_type) == VObjectType::STRING_CONST)) {
       stype = data_type;
       if (!fC->Sibling(stype)) {
         name = fC->SymName(stype);
         forwardDeclaration = true;
       }
     }
-    if ((fC->Type(stype) == VObjectType::slStringConst) ||
+    if ((fC->Type(stype) == VObjectType::STRING_CONST) ||
         fC->Type(stype) == VObjectType::paClass_scope) {
       TypeDef* newTypeDef =
           new TypeDef(fC, type_declaration, stype, name, forwardDeclaration);
@@ -1230,10 +1230,10 @@ bool CompileHelper::compileLoop_stmt(Scope* parent, Statement* parentStmt,
                                      NodeId loop_statement) {
   NodeId loop = fC->Child(loop_statement);
   switch (fC->Type(loop)) {
-    case VObjectType::paFOR:
+    case VObjectType::FOR:
       compileForLoop_stmt(parent, parentStmt, fC, fC->Sibling(loop));
       break;
-    case VObjectType::paFOREACH:
+    case VObjectType::FOREACH:
       compileForeachLoop_stmt(parent, parentStmt, fC, fC->Sibling(loop));
       break;
     default:
@@ -1378,7 +1378,7 @@ bool CompileHelper::compileScopeVariable(Scope* parent, const FileContent* fC,
       NodeId node_type = fC->Child(data_type);
       VObjectType the_type = fC->Type(node_type);
       std::string typeName;
-      if (the_type == VObjectType::slStringConst) {
+      if (the_type == VObjectType::STRING_CONST) {
         typeName = fC->SymName(node_type);
       } else if (the_type == VObjectType::paClass_scope) {
         NodeId class_type = fC->Child(node_type);
@@ -1494,7 +1494,7 @@ VObjectType getSignalType(const FileContent* fC, NodeId net_port_type,
         if (the_type == VObjectType::paIntVec_TypeBit ||
             the_type == VObjectType::paIntVec_TypeLogic ||
             the_type == VObjectType::paIntVec_TypeReg ||
-            the_type == VObjectType::slStringConst ||
+            the_type == VObjectType::STRING_CONST ||
             the_type == VObjectType::paClass_scope ||
             the_type == VObjectType::paIntegerAtomType_Int ||
             the_type == VObjectType::paIntegerAtomType_Integer ||
@@ -1510,7 +1510,7 @@ VObjectType getSignalType(const FileContent* fC, NodeId net_port_type,
             is_signed = true;
           }
 
-          if (the_type == VObjectType::slStringConst) {
+          if (the_type == VObjectType::STRING_CONST) {
             const std::string_view tname = fC->SymName(integer_vector_type);
             if (tname == "logic") {
               the_type = VObjectType::paIntVec_TypeLogic;
@@ -1559,7 +1559,7 @@ void setDirectionAndType(DesignComponent* component, const FileContent* fC,
                          uhdm::Serializer& s) {
   ModuleDefinition* module =
       valuedcomponenti_cast<ModuleDefinition*>(component);
-  VObjectType dir_type = VObjectType::slNoType;
+  VObjectType dir_type = VObjectType::NO_TYPE;
   if (type == VObjectType::paInput_declaration)
     dir_type = VObjectType::paPortDir_Inp;
   else if (type == VObjectType::paOutput_declaration)
@@ -1677,7 +1677,7 @@ bool CompileHelper::compilePortDeclaration(DesignComponent* component,
             NodeId if_name_s = fC->Child(if_name);
             Signal* signal = new Signal(
                 component, fC, Port_expression, if_name_s, if_type_name_s,
-                VObjectType::slNoType, InvalidNodeId, false);
+                VObjectType::NO_TYPE, InvalidNodeId, false);
             signal->uhdmScopeModel(compileDesign->getSerializer().topScope());
             signal->setStatic();
             component->addPort(signal);
@@ -1695,8 +1695,8 @@ bool CompileHelper::compilePortDeclaration(DesignComponent* component,
         if (hasNonNullPort) {
           // Null port
           Signal* signal = new Signal(
-              component, fC, id, id, VObjectType::slNoType,
-              VObjectType::slNoType, InvalidNodeId, InvalidNodeId, false);
+              component, fC, id, id, VObjectType::NO_TYPE, VObjectType::NO_TYPE,
+              InvalidNodeId, InvalidNodeId, false);
           signal->uhdmScopeModel(compileDesign->getSerializer().topScope());
           signal->setStatic();
           component->addPort(signal);
@@ -1753,7 +1753,7 @@ bool CompileHelper::compilePortDeclaration(DesignComponent* component,
             }
             Signal* signal = new Signal(
                 component, fC, interface_identifier, identifier, interfIdName,
-                VObjectType::slNoType, unpackedDimension, false);
+                VObjectType::NO_TYPE, unpackedDimension, false);
             signal->uhdmScopeModel(compileDesign->getSerializer().topScope());
             signal->setStatic();
             component->addSignal(signal);
@@ -1884,10 +1884,10 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
   uhdm::Typespec* tps = nullptr;
   // Determine if the "signal" is a net or a var
   bool isNet = true;
-  if ((dtype && (subnettype == VObjectType::slNoType)) || sig->isConst() ||
+  if ((dtype && (subnettype == VObjectType::NO_TYPE)) || sig->isConst() ||
       sig->isVar() || (!sig->isStatic()) ||
       (subnettype == VObjectType::paClass_scope) ||
-      (subnettype == VObjectType::slStringConst) ||
+      (subnettype == VObjectType::STRING_CONST) ||
       (subnettype == VObjectType::paIntegerAtomType_Int) ||
       (subnettype == VObjectType::paIntegerAtomType_Integer) ||
       (subnettype == VObjectType::paIntegerAtomType_Byte) ||
@@ -2530,7 +2530,7 @@ bool CompileHelper::compileAnsiPortDeclaration(DesignComponent* component,
 
     NodeId packedDimension = fC->Sibling(NetType);
     if (fC->Type(packedDimension) ==
-        VObjectType::slStringConst) {  // net type is class_scope
+        VObjectType::STRING_CONST) {  // net type is class_scope
       packedDimension = fC->Sibling(packedDimension);
     }
     if (fC->Type(NetType) == VObjectType::paImplicit_data_type) {
@@ -2553,7 +2553,7 @@ bool CompileHelper::compileAnsiPortDeclaration(DesignComponent* component,
     }
     if (fC->Type(NetType) == VObjectType::paClass_scope) {
       specParamId = fC->Parent(NetType);
-    } else if (fC->Type(NetType) == VObjectType::slStringConst) {
+    } else if (fC->Type(NetType) == VObjectType::STRING_CONST) {
       specParamId = NetType;
     }
     if (fC->Type(packedDimension) != VObjectType::paPacked_dimension) {
@@ -2617,7 +2617,7 @@ bool CompileHelper::compileAnsiPortDeclaration(DesignComponent* component,
     */
     Signal* s =
         new Signal(component, fC, net_port_header, port_name, interface_name,
-                   VObjectType::slNoType, unpacked_dimension, false);
+                   VObjectType::NO_TYPE, unpacked_dimension, false);
     s->uhdmScopeModel(compileDesign->getSerializer().topScope());
     s->setStatic();
     s->setTypespecId(interface_name);
@@ -2633,7 +2633,7 @@ bool CompileHelper::compileAnsiPortDeclaration(DesignComponent* component,
       if (fC->Type(if_type_name_s) == VObjectType::paIntVec_TypeReg ||
           fC->Type(if_type_name_s) == VObjectType::paIntVec_TypeLogic) {
         Signal* s = new Signal(component, fC, id, identifier,
-                               fC->Type(if_type_name_s), VObjectType::slNoType,
+                               fC->Type(if_type_name_s), VObjectType::NO_TYPE,
                                InvalidNodeId, unpackedDimension, false);
         s->uhdmScopeModel(compileDesign->getSerializer().topScope());
         s->setStatic();
@@ -2643,7 +2643,7 @@ bool CompileHelper::compileAnsiPortDeclaration(DesignComponent* component,
         // component->getSignals().emplace_back(s);
       } else {
         Signal* s = new Signal(component, fC, id, identifier, if_type_name_s,
-                               VObjectType::slNoType, unpackedDimension, false);
+                               VObjectType::NO_TYPE, unpackedDimension, false);
         s->uhdmScopeModel(compileDesign->getSerializer().topScope());
         s->setStatic();
         s->setTypespecId(if_type_name_s);
@@ -2709,8 +2709,8 @@ bool CompileHelper::compileNetDeclaration(
   NodeId List_of_net_decl_assignments;
   NodeId Packed_dimension;
   bool isSigned = false;
-  VObjectType nettype = VObjectType::slNoType;
-  VObjectType subnettype = VObjectType::slNoType;
+  VObjectType nettype = VObjectType::NO_TYPE;
+  VObjectType subnettype = VObjectType::NO_TYPE;
   NodeId NetTypeOrTrireg_Net = fC->Child(id);
   NodeId NetType = fC->Child(NetTypeOrTrireg_Net);
   if (!NetType) {
@@ -2782,7 +2782,7 @@ bool CompileHelper::compileNetDeclaration(
       }
     }
 
-    if (nettype == VObjectType::slStringConst) {
+    if (nettype == VObjectType::STRING_CONST) {
       Signal* sig =
           new Signal(component, fC, net_decl_assignment, signal, InvalidNodeId,
                      subnettype, Unpacked_dimension, false);
@@ -2795,7 +2795,7 @@ bool CompileHelper::compileNetDeclaration(
       component->addSignal(sig);
     } else {
       Signal* sig = new Signal(component, fC, net_decl_assignment, signal,
-                               nettype, VObjectType::slNoType, Packed_dimension,
+                               nettype, VObjectType::NO_TYPE, Packed_dimension,
                                Unpacked_dimension, false);
       sig->uhdmScopeModel(compileDesign->getSerializer().topScope());
       sig->setTypespecId(NetType);
@@ -2955,18 +2955,18 @@ bool CompileHelper::compileDataDeclaration(
       }
       NodeId data_type = fC->Child(variable_declaration);
       NodeId intVec_TypeReg = fC->Child(data_type);
-      if (fC->Type(intVec_TypeReg) == VObjectType::paVIRTUAL)
+      if (fC->Type(intVec_TypeReg) == VObjectType::VIRTUAL)
         intVec_TypeReg = fC->Sibling(intVec_TypeReg);
       if (fC->Type(intVec_TypeReg) == VObjectType::paIntegerAtomType_Byte ||
           fC->Type(intVec_TypeReg) == VObjectType::paIntegerAtomType_Int ||
           fC->Type(intVec_TypeReg) == VObjectType::paIntegerAtomType_Integer ||
           fC->Type(intVec_TypeReg) == VObjectType::paIntegerAtomType_LongInt ||
           fC->Type(intVec_TypeReg) == VObjectType::paIntegerAtomType_Shortint ||
-          fC->Type(intVec_TypeReg) == VObjectType::paReal_number) {
+          fC->Type(intVec_TypeReg) == VObjectType::REAL_NUMBER) {
         is_signed = true;
       }
       NodeId packedDimension = fC->Sibling(intVec_TypeReg);
-      if (fC->Type(packedDimension) == VObjectType::slStringConst) {
+      if (fC->Type(packedDimension) == VObjectType::STRING_CONST) {
         // class or package name;
         if (fC->Type(fC->Sibling(packedDimension)) ==
             VObjectType::paPacked_dimension) {
@@ -3004,7 +3004,7 @@ bool CompileHelper::compileDataDeclaration(
 
         VObjectType sigType = fC->Type(intVec_TypeReg);
         Signal* sig = new Signal(component, fC, var_decl, signal, sigType,
-                                 VObjectType::slNoType, packedDimension,
+                                 VObjectType::NO_TYPE, packedDimension,
                                  unpackedDimension, false);
         if (sigType == VObjectType::paInterface_identifier) {
           sig->setInterfaceTypespecId(data_type);
@@ -3100,10 +3100,10 @@ uhdm::ContAssignCollection CompileHelper::compileContinuousAssignment(
             (lhs_exp->getUhdmType() == uhdm::UhdmType::HierPath)) {
           NodeId identifierId = fC->Sibling(Hierarchical_identifier);
           while (identifierId &&
-                 (fC->Type(identifierId) != VObjectType::slStringConst))
+                 (fC->Type(identifierId) != VObjectType::STRING_CONST))
             identifierId = fC->Sibling(identifierId);
           std::string_view identifierName;
-          if (fC->Type(identifierId) == VObjectType::slStringConst)
+          if (fC->Type(identifierId) == VObjectType::STRING_CONST)
             identifierName = fC->SymName(identifierId);
           if (uhdm::Any* sel = compileSelectExpression(
                   component, fC, fC->Child(Constant_select), identifierName,
@@ -3142,9 +3142,9 @@ uhdm::ContAssignCollection CompileHelper::compileContinuousAssignment(
 
       if (Strength0) {
         VObjectType st0 = fC->Type(Strength0);
-        if (st0 == VObjectType::paSUPPLY0 || st0 == VObjectType::paSTRONG0 ||
-            st0 == VObjectType::paPULL0 || st0 == VObjectType::paWEAK0 ||
-            st0 == VObjectType::paHIGHZ0) {
+        if (st0 == VObjectType::SUPPLY0 || st0 == VObjectType::STRONG0 ||
+            st0 == VObjectType::PULL0 || st0 == VObjectType::WEAK0 ||
+            st0 == VObjectType::HIGHZ0) {
           cassign->setStrength0(
               UhdmWriter::getStrengthType(fC->Type(Strength0)));
         } else {
@@ -3155,9 +3155,9 @@ uhdm::ContAssignCollection CompileHelper::compileContinuousAssignment(
 
       if (Strength1) {
         VObjectType st1 = fC->Type(Strength1);
-        if (st1 == VObjectType::paSUPPLY0 || st1 == VObjectType::paSTRONG0 ||
-            st1 == VObjectType::paPULL0 || st1 == VObjectType::paWEAK0 ||
-            st1 == VObjectType::paHIGHZ0) {
+        if (st1 == VObjectType::SUPPLY0 || st1 == VObjectType::STRONG0 ||
+            st1 == VObjectType::PULL0 || st1 == VObjectType::WEAK0 ||
+            st1 == VObjectType::HIGHZ0) {
           cassign->setStrength0(
               UhdmWriter::getStrengthType(fC->Type(Strength1)));
         } else {
@@ -3238,7 +3238,7 @@ CompileHelper::compileInstantiation(ModuleDefinition* mod,
       results;
   uhdm::Serializer& s = compileDesign->getSerializer();
   Design* const design = compileDesign->getCompiler()->getDesign();
-  NodeId moduleName = fC->sl_collect(id, VObjectType::slStringConst);
+  NodeId moduleName = fC->sl_collect(id, VObjectType::STRING_CONST);
   const std::string_view libName = fC->getLibrary()->getName();
   const std::string_view mname = fC->SymName(moduleName);
   std::string modName = StrCat(libName, "@", mname);
@@ -3366,9 +3366,9 @@ uint32_t CompileHelper::getBuiltinType(VObjectType type) {
       return vpiRnmosPrim;
     case VObjectType::paMosSwitchType_RPMos:
       return vpiRpmosPrim;
-    case VObjectType::paPULLUP:
+    case VObjectType::PULLUP:
       return vpiPullupPrim;
-    case VObjectType::paPULLDOWN:
+    case VObjectType::PULLDOWN:
       return vpiPulldownPrim;
     default:
       return 0;
@@ -3680,7 +3680,7 @@ void CompileHelper::compileHighConn(ModuleDefinition* component,
           if (isSelected(fC, Hierarchical_identifier))
             bit_or_part_select = true;
           sigId = Hierarchical_identifier;
-          if (fC->Type(fC->Child(sigId)) == VObjectType::slStringConst) {
+          if (fC->Type(fC->Child(sigId)) == VObjectType::STRING_CONST) {
             sigId = fC->Child(sigId);
           }
           sigName = fC->SymName(sigId);
@@ -3697,7 +3697,7 @@ void CompileHelper::compileHighConn(ModuleDefinition* component,
             uhdm::Port* p = (*ports)[index];
 
             if ((!bit_or_part_select) &&
-                (fC->Type(sigId) == VObjectType::slStringConst)) {
+                (fC->Type(sigId) == VObjectType::STRING_CONST)) {
               uhdm::RefObj* ref = s.make<uhdm::RefObj>();
               fC->populateCoreMembers(sigId, sigId, ref);
               p->setHighConn(ref);
@@ -3746,7 +3746,7 @@ void CompileHelper::compileHighConn(ModuleDefinition* component,
           uhdm::Port* p = s.make<uhdm::Port>();
           p->setParent(pexpr);
           fC->populateCoreMembers(Net_lvalue, Net_lvalue, p);
-          if ((fC->Type(sigId) == VObjectType::slStringConst) &&
+          if ((fC->Type(sigId) == VObjectType::STRING_CONST) &&
               (!bit_or_part_select)) {
             uhdm::RefObj* ref = s.make<uhdm::RefObj>();
             fC->populateCoreMembers(sigId, sigId, ref);
@@ -3813,7 +3813,7 @@ void CompileHelper::compileHighConn(ModuleDefinition* component,
       uint16_t wildcardColumnNumber = 0;
       while (Named_port_connection) {
         NodeId formalId = fC->Child(Named_port_connection);
-        if (fC->Type(formalId) == VObjectType::paDOTSTAR) {
+        if (fC->Type(formalId) == VObjectType::DOTSTAR) {
           // .* connection
           wildcard = true;
           wildcardLineNumber = fC->Line(formalId);
@@ -3839,7 +3839,7 @@ void CompileHelper::compileHighConn(ModuleDefinition* component,
             formalId = fC->Sibling(formalId);
           }
         }
-        if (fC->Type(formalId) == VObjectType::paDOTSTAR) {
+        if (fC->Type(formalId) == VObjectType::DOTSTAR) {
           // .* connection
           Named_port_connection = fC->Sibling(Named_port_connection);
           continue;
@@ -3856,10 +3856,10 @@ void CompileHelper::compileHighConn(ModuleDefinition* component,
           formalName = fC->SymName(formalNameId);
         } else {
           NodeId tmp = Expression;
-          if (fC->Type(tmp) == VObjectType::paOPEN_PARENS) {
+          if (fC->Type(tmp) == VObjectType::OPEN_PARENS) {
             tmp = fC->Sibling(tmp);
             if (fC->Type(tmp) ==
-                VObjectType::paCLOSE_PARENS) {  // .p()  explicit disconnect
+                VObjectType::CLOSE_PARENS) {  // .p()  explicit disconnect
               Named_port_connection = fC->Sibling(Named_port_connection);
               uhdm::Port* p = nullptr;
 
@@ -3975,7 +3975,7 @@ void CompileHelper::compileHighConn(ModuleDefinition* component,
         }
 
         std::string sigName;
-        if (modPort && (fC->Type(sigId) == VObjectType::slStringConst)) {
+        if (modPort && (fC->Type(sigId) == VObjectType::STRING_CONST)) {
           sigName = fC->SymName(sigId);
         }
         if (NodeId subId = fC->Sibling(sigId)) {
@@ -4189,26 +4189,26 @@ uhdm::AtomicStmt* CompileHelper::compileProceduralTimingControlStmt(
   } else {
     auto childIds =
         fC->sl_collect_all(IntConst,
-                           {VObjectType::slStringConst, VObjectType::slIntConst,
-                            VObjectType::slRealConst},
+                           {VObjectType::STRING_CONST, VObjectType::INT_CONST,
+                            VObjectType::REAL_CONST},
                            true);
     NodeId valueNodeId = childIds.empty() ? IntConst : childIds.front();
-    if (fC->Type(valueNodeId) == VObjectType::slStringConst) {
+    if (fC->Type(valueNodeId) == VObjectType::STRING_CONST) {
       uhdm::RefObj* ref = s.make<uhdm::RefObj>();
       ref->setName(fC->SymName(valueNodeId));
       ref->setParent(dc);
       fC->populateCoreMembers(valueNodeId, valueNodeId, ref);
       dc->setDelay(ref);
-    } else if ((fC->Type(valueNodeId) == VObjectType::slIntConst) ||
-               (fC->Type(valueNodeId) == VObjectType::slRealConst)) {
+    } else if ((fC->Type(valueNodeId) == VObjectType::INT_CONST) ||
+               (fC->Type(valueNodeId) == VObjectType::REAL_CONST)) {
       uhdm::Constant* c = s.make<uhdm::Constant>();
       std::string value =
-          (fC->Type(valueNodeId) == VObjectType::slIntConst) ? "INT:" : "REAL:";
+          (fC->Type(valueNodeId) == VObjectType::INT_CONST) ? "INT:" : "REAL:";
       value.append(fC->SymName(valueNodeId));
       c->setValue(value);
       c->setDecompile(fC->SymName(valueNodeId));
       c->setSize(64);
-      c->setConstType(fC->Type(valueNodeId) == VObjectType::slIntConst
+      c->setConstType(fC->Type(valueNodeId) == VObjectType::INT_CONST
                           ? vpiIntConst
                           : vpiRealConst);
       c->setParent(dc);
@@ -4296,16 +4296,16 @@ uhdm::Always* CompileHelper::compileAlwaysBlock(DesignComponent* component,
   always->setParent(pstmt);
   NodeId always_keyword = fC->Child(id);
   switch (fC->Type(always_keyword)) {
-    case VObjectType::paALWAYS:
+    case VObjectType::ALWAYS:
       always->setAlwaysType(vpiAlways);
       break;
-    case VObjectType::paALWAYS_COMB:
+    case VObjectType::ALWAYS_COMB:
       always->setAlwaysType(vpiAlwaysComb);
       break;
-    case VObjectType::paALWAYS_FF:
+    case VObjectType::ALWAYS_FF:
       always->setAlwaysType(vpiAlwaysFF);
       break;
-    case VObjectType::paALWAYS_LATCH:
+    case VObjectType::ALWAYS_LATCH:
       always->setAlwaysType(vpiAlwaysLatch);
       break;
     default:
@@ -4314,7 +4314,7 @@ uhdm::Always* CompileHelper::compileAlwaysBlock(DesignComponent* component,
   NodeId Statement = fC->Sibling(always_keyword);
   NodeId Statement_item = fC->Child(Statement);
   uhdm::AnyCollection* stmts = nullptr;
-  if (fC->Type(Statement_item) == VObjectType::slStringConst) {
+  if (fC->Type(Statement_item) == VObjectType::STRING_CONST) {
     stmts = compileStmt(component, fC, Statement_item, compileDesign,
                         Reduce::No, always, instance);
   } else {
@@ -4647,8 +4647,7 @@ bool CompileHelper::compileParameterDeclaration(
       bool skip = false;
       if (ntype && fC->Type(ntype) == VObjectType::paData_type) {
         ntype = fC->Child(ntype);
-        if (fC->Type(ntype) == VObjectType::paVIRTUAL)
-          ntype = fC->Sibling(ntype);
+        if (fC->Type(ntype) == VObjectType::VIRTUAL) ntype = fC->Sibling(ntype);
         skip = true;
       } else {
         ntype = InvalidNodeId;
@@ -4683,7 +4682,7 @@ bool CompileHelper::compileParameterDeclaration(
       if (skip) typeNameId = fC->Sibling(typeNameId);
     }
 
-  } else if (fC->Type(nodeId) == VObjectType::paTYPE) {
+  } else if (fC->Type(nodeId) == VObjectType::TYPE) {
     // Type param
     NodeId list_of_param_assignments = fC->Sibling(nodeId);
     NodeId Param_assignment = fC->Child(list_of_param_assignments);
@@ -4750,7 +4749,7 @@ bool CompileHelper::compileParameterDeclaration(
             type == VObjectType::paIntegerAtomType_Integer ||
             type == VObjectType::paIntegerAtomType_LongInt ||
             type == VObjectType::paIntegerAtomType_Shortint ||
-            type == VObjectType::paReal_number) {
+            type == VObjectType::REAL_NUMBER) {
           isSigned = true;
         }
         if (fC->Type(Signage) == VObjectType::paSigning_Signed) isSigned = true;
@@ -5364,7 +5363,7 @@ uhdm::Any* CompileHelper::compileTfCall(DesignComponent* component,
     tfNameNode = nameId;
     uhdm::FuncCall* fcall = s.make<uhdm::FuncCall>();
     while (nameId) {
-      if (fC->Type(nameId) == VObjectType::slStringConst) {
+      if (fC->Type(nameId) == VObjectType::STRING_CONST) {
         name.append(".").append(fC->SymName(nameId));
         tfNameNode = nameId;
       } else if (fC->Type(nameId) == VObjectType::paConstant_bit_select) {
@@ -5557,7 +5556,7 @@ uhdm::AnyCollection* CompileHelper::compileTfCallArguments(
     }
     NodeId sibling = fC->Sibling(argument);
     NodeId Expression;
-    if ((fC->Type(argument) == VObjectType::slStringConst) &&
+    if ((fC->Type(argument) == VObjectType::STRING_CONST) &&
         (fC->Type(sibling) == VObjectType::paExpression)) {
       // arg by name
       Expression = sibling;
@@ -5655,7 +5654,7 @@ uhdm::Assignment* CompileHelper::compileBlockingAssignment(
   NodeId Variable_lvalue;
   if (fC->Type(Operator_assignment) == VObjectType::paVariable_lvalue) {
     Variable_lvalue = Operator_assignment;
-  } else if (fC->Type(Operator_assignment) == VObjectType::slStringConst) {
+  } else if (fC->Type(Operator_assignment) == VObjectType::STRING_CONST) {
     Variable_lvalue = Operator_assignment;
   } else {
     Variable_lvalue = fC->Child(Operator_assignment);
@@ -5666,7 +5665,7 @@ uhdm::Assignment* CompileHelper::compileBlockingAssignment(
   NodeId Delay_or_event_control;
   NodeId AssignOp_Assign;
   if (fC->Type(Variable_lvalue) == VObjectType::paHierarchical_identifier ||
-      fC->Type(Variable_lvalue) == VObjectType::slStringConst) {
+      fC->Type(Variable_lvalue) == VObjectType::STRING_CONST) {
     NodeId Variable_lvalue = Operator_assignment;
     Delay_or_event_control = fC->Sibling(Variable_lvalue);
     NodeId Expression = fC->Sibling(Delay_or_event_control);
@@ -5824,13 +5823,13 @@ uhdm::ClockingBlock* CompileHelper::compileClockingBlock(
   NodeId clocking_block_type = fC->Child(nodeId);
   NodeId clocking_block_name;
   std::string name;
-  if (fC->Type(clocking_block_type) == VObjectType::paDEFAULT) {
-  } else if (fC->Type(clocking_block_type) == VObjectType::paGLOBAL) {
-  } else if (fC->Type(clocking_block_type) == VObjectType::slStringConst) {
+  if (fC->Type(clocking_block_type) == VObjectType::DEFAULT) {
+  } else if (fC->Type(clocking_block_type) == VObjectType::GLOBAL) {
+  } else if (fC->Type(clocking_block_type) == VObjectType::STRING_CONST) {
     clocking_block_name = clocking_block_type;
   }
   NodeId clocking_event = fC->Sibling(clocking_block_type);
-  if (fC->Type(clocking_event) == VObjectType::slStringConst) {
+  if (fC->Type(clocking_event) == VObjectType::STRING_CONST) {
     clocking_block_name = clocking_event;
     clocking_event = fC->Sibling(clocking_block_name);
   }

@@ -58,7 +58,7 @@ FileContent::FileContent(Session* session, PathId fileId, Library* library,
       m_fileChunkId(fileChunkId),
       m_library(library),
       m_parentFile(parent) {
-  addObject(BadSymbolId, m_fileId, VObjectType::sl_INVALID_, 0, 0, 0, 0,
+  addObject(BadSymbolId, m_fileId, VObjectType::_INVALID_, 0, 0, 0, 0,
             InvalidNodeId, InvalidNodeId, InvalidNodeId, InvalidNodeId);
 }
 
@@ -162,7 +162,7 @@ std::string FileContent::printObjects() const {
     printTree(strm, id, 0);
   } else {
     for (size_t i = 0, ni = m_objects.size(); i < ni; ++i) {
-      if (m_objects[i].m_type == VObjectType::paPREPROC_END) {
+      if (m_objects[i].m_type == VObjectType::PREPROC_END) {
         printTree(strm, NodeId(i), 0);
       }
     }
@@ -373,12 +373,12 @@ NodeId FileContent::Parent(NodeId index) const {
 }
 
 VObjectType FileContent::Type(NodeId index) const {
-  if (!index) return VObjectType::sl_INVALID_;
+  if (!index) return VObjectType::_INVALID_;
   if (index >= m_objects.size()) {
     m_session->getErrorContainer()->addError(
         ErrorDefinition::COMP_INTERNAL_ERROR_OUT_OF_BOUND, Location(m_fileId));
     std::cerr << "\nINTERNAL OUT OF BOUND ERROR\n\n";
-    return VObjectType::sl_INVALID_;
+    return VObjectType::_INVALID_;
   }
   return (VObjectType)m_objects[index].m_type;
 }
@@ -835,7 +835,7 @@ bool FileContent::validate() const {
   } else {
     bool result = true;
     for (size_t i = 0, ni = m_objects.size(); i < ni && result; ++i) {
-      if (m_objects[i].m_type == VObjectType::paPREPROC_END) {
+      if (m_objects[i].m_type == VObjectType::PREPROC_END) {
         result = result && validate(NodeId(i));
       }
     }

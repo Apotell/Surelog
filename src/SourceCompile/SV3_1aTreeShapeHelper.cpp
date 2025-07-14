@@ -205,10 +205,10 @@ std::pair<double, TimeInfo::Unit> SV3_1aTreeShapeHelper::getTimeValue(
     SV3_1aParser::Time_literalContext* ctx) {
   double actual_value = 0;
   TimeInfo::Unit unit = TimeInfo::Unit::Second;
-  if (ctx->Integral_number())
-    actual_value = atoi(ctx->Integral_number()->getText().c_str());
-  if (ctx->Real_number())
-    actual_value = atoi(ctx->Real_number()->getText().c_str());
+  if (ctx->INTEGRAL_NUMBER())
+    actual_value = atoi(ctx->INTEGRAL_NUMBER()->getText().c_str());
+  if (ctx->REAL_NUMBER())
+    actual_value = atoi(ctx->REAL_NUMBER()->getText().c_str());
   unit = TimeInfo::unitFromString(ctx->time_unit()->getText());
 
   return std::make_pair(actual_value, unit);

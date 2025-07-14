@@ -58,8 +58,8 @@ ClassDefinition::ClassDefinition(Session* session, std::string_view name,
   uhdm::ClassDefn* const instance = serializer.make<uhdm::ClassDefn>();
   if (!name.empty()) instance->setName(name);
   if (nodeId && (fC != nullptr)) {
-    fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::paCLASS),
-                            nodeId, instance);
+    fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::CLASS), nodeId,
+                            instance);
   }
   if (container != nullptr) instance->setParent(container->getUhdmModel());
   setUhdmModel(instance);

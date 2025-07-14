@@ -187,7 +187,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
         results = s.makeCollection<Any>();
         NodeId tmp = child;
         while (tmp) {
-          if (fC->Type(tmp) != VObjectType::slStringConst) {
+          if (fC->Type(tmp) != VObjectType::STRING_CONST) {
             if (uhdm::AnyCollection* stmts =
                     compileStmt(component, fC, tmp, compileDesign, reduce,
                                 pstmt, instance, muteErrors)) {
@@ -300,7 +300,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       uhdm::Scope* scope = nullptr;
       std::string label, endLabel;
       NodeId labelId, endLabelId;
-      if (fC->Type(item) == VObjectType::slStringConst) {
+      if (fC->Type(item) == VObjectType::STRING_CONST) {
         labelId = item;
         item = fC->Sibling(item);
       } else {
@@ -308,12 +308,12 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
         NodeId Statement = fC->Parent(Statement_item);
         NodeId Label = fC->Child(Statement);
         if (fC->Sibling(Label) == Statement_item) {
-          if (fC->Type(Label) == VObjectType::slStringConst) labelId = Label;
+          if (fC->Type(Label) == VObjectType::STRING_CONST) labelId = Label;
         }
       }
       NodeId tempItem = item;
       while (tempItem) {
-        if (fC->Type(tempItem) == VObjectType::paEND) {
+        if (fC->Type(tempItem) == VObjectType::END) {
           if ((endLabelId = fC->Sibling(tempItem))) {
             break;
           }
@@ -344,7 +344,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
         Error err(ErrorDefinition::COMP_UNMATCHED_LABEL, loc, loc2);
         errors->addError(err);
       }
-      while (item && (fC->Type(item) != VObjectType::paEND)) {
+      while (item && (fC->Type(item) != VObjectType::END)) {
         if (uhdm::AnyCollection* cstmts =
                 compileStmt(component, fC, item, compileDesign, Reduce::No,
                             stmt, instance, muteErrors)) {
@@ -377,7 +377,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       uhdm::Scope* scope = nullptr;
       std::string label, endLabel;
       NodeId labelId, endLabelId;
-      if (fC->Type(item) == VObjectType::slStringConst) {
+      if (fC->Type(item) == VObjectType::STRING_CONST) {
         labelId = item;
         item = fC->Sibling(item);
       } else {
@@ -385,7 +385,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
         NodeId Statement = fC->Parent(Statement_item);
         NodeId Label = fC->Child(Statement);
         if (fC->Sibling(Label) == Statement_item) {
-          if (fC->Type(Label) == VObjectType::slStringConst) labelId = Label;
+          if (fC->Type(Label) == VObjectType::STRING_CONST) labelId = Label;
         }
       }
       // Get join label if any
@@ -477,7 +477,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       }
       break;
     }
-    case VObjectType::paFOREVER: {
+    case VObjectType::FOREVER: {
       uhdm::ForeverStmt* forever = s.make<uhdm::ForeverStmt>();
       NodeId item = fC->Sibling(the_stmt);
       if (uhdm::AnyCollection* forev =
@@ -492,7 +492,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       stmt = forever;
       break;
     }
-    case VObjectType::paFOREACH: {
+    case VObjectType::FOREACH: {
       uhdm::ForeachStmt* for_each = s.make<uhdm::ForeachStmt>();
       NodeId Ps_or_hierarchical_array_identifier = fC->Sibling(the_stmt);
       uhdm::Any* var = compileVariable(
@@ -503,10 +503,10 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       NodeId loopVarId = fC->Child(Loop_variables);
       NodeId Statement = Loop_variables;
       uhdm::AnyCollection* loop_vars = for_each->getLoopVars(true);
-      while (fC->Type(Statement) == VObjectType::slStringConst ||
+      while (fC->Type(Statement) == VObjectType::STRING_CONST ||
              fC->Type(Statement) == VObjectType::paLoop_variables ||
              fC->Type(Statement) == VObjectType::paComma) {
-        if (fC->Type(Statement) == VObjectType::slStringConst) {
+        if (fC->Type(Statement) == VObjectType::STRING_CONST) {
           loopVarId = Statement;
         } else if (fC->Type(Statement) == VObjectType::paComma) {
           uhdm::Operation* op = s.make<uhdm::Operation>();
@@ -549,7 +549,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
               break;
             }
           }
-          if ((fC->Type(loopVarId) != VObjectType::slStringConst) &&
+          if ((fC->Type(loopVarId) != VObjectType::STRING_CONST) &&
               ((fC->Type(loopVarId) != VObjectType::paComma))) {
             break;
           }
@@ -640,7 +640,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       results = param_assigns;
       break;
     }
-    case VObjectType::paREPEAT: {
+    case VObjectType::REPEAT: {
       NodeId cond = fC->Sibling(the_stmt);
       NodeId rstmt = fC->Sibling(cond);
       uhdm::Repeat* repeat = s.make<uhdm::Repeat>();
@@ -660,7 +660,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       stmt = repeat;
       break;
     }
-    case VObjectType::paWHILE: {
+    case VObjectType::WHILE: {
       NodeId cond = fC->Sibling(the_stmt);
       NodeId rstmt = fC->Sibling(cond);
       uhdm::WhileStmt* while_st = s.make<uhdm::WhileStmt>();
@@ -680,7 +680,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       stmt = while_st;
       break;
     }
-    case VObjectType::paDO: {
+    case VObjectType::DO: {
       NodeId Statement_or_null = fC->Sibling(the_stmt);
       NodeId Condition = fC->Sibling(Statement_or_null);
       uhdm::DoWhile* do_while = s.make<uhdm::DoWhile>();
@@ -761,7 +761,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
               waitst->setEndColumn(stmt->getEndColumn());
             }
           }
-        } else if (fC->Type(Stmt) == VObjectType::paELSE) {
+        } else if (fC->Type(Stmt) == VObjectType::ELSE) {
           // Else Only
           Stmt = fC->Sibling(Stmt);
           if (uhdm::AnyCollection* if_stmts =
@@ -820,11 +820,11 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       }
       break;
     }
-    case VObjectType::paFOR: {
+    case VObjectType::FOR: {
       stmt = compileForLoop(component, fC, the_stmt, compileDesign, true);
       break;
     }
-    case VObjectType::paRETURN: {
+    case VObjectType::RETURN: {
       uhdm::ReturnStmt* return_stmt = s.make<uhdm::ReturnStmt>();
       fC->populateCoreMembers(the_stmt, the_stmt, return_stmt);
       if (NodeId cond = fC->Sibling(the_stmt)) {
@@ -840,7 +840,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       stmt = return_stmt;
       break;
     }
-    case VObjectType::paBREAK: {
+    case VObjectType::BREAK: {
       uhdm::BreakStmt* bstmt = s.make<uhdm::BreakStmt>();
       stmt = bstmt;
       break;
@@ -866,7 +866,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       }
       break;
     }
-    case VObjectType::paCONTINUE: {
+    case VObjectType::CONTINUE: {
       uhdm::ContinueStmt* cstmt = s.make<uhdm::ContinueStmt>();
       stmt = cstmt;
       break;
@@ -910,7 +910,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
                                        compileDesign, reduce, pstmt, instance);
       break;
     }
-    case VObjectType::slStringConst: {
+    case VObjectType::STRING_CONST: {
       if (uhdm::AnyCollection* stmts =
               compileStmt(component, fC, fC->Sibling(the_stmt), compileDesign,
                           Reduce::No, pstmt, instance, muteErrors)) {
@@ -938,7 +938,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       if (fC->Type(If_block) == VObjectType::paAction_block) {
         NodeId if_stmt_id = fC->Child(If_block);
         NodeId else_stmt_id;
-        if (fC->Type(if_stmt_id) == VObjectType::paELSE) {
+        if (fC->Type(if_stmt_id) == VObjectType::ELSE) {
           else_stmt_id = fC->Sibling(if_stmt_id);
           if_stmt_id = InvalidNodeId;
         } else {
@@ -1085,7 +1085,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
     }
   } else {
     VObjectType stmttype = fC->Type(the_stmt);
-    if ((muteErrors == false) && (stmttype != VObjectType::paEND) &&
+    if ((muteErrors == false) && (stmttype != VObjectType::END) &&
         (stmttype != VObjectType::paJoin_keyword) &&
         (stmttype != VObjectType::paJoin_any_keyword) &&
         (stmttype != VObjectType::paJoin_none_keyword)) {
@@ -1296,11 +1296,11 @@ uhdm::AtomicStmt* CompileHelper::compileConditionalStmt(
   int32_t qualifier = 0;
   if (fC->Type(Cond_predicate) == VObjectType::paUnique_priority) {
     NodeId Qualifier = fC->Child(Cond_predicate);
-    if (fC->Type(Qualifier) == VObjectType::paUNIQUE) {
+    if (fC->Type(Qualifier) == VObjectType::UNIQUE) {
       qualifier = vpiUniqueQualifier;
-    } else if (fC->Type(Qualifier) == VObjectType::paPRIORITY) {
+    } else if (fC->Type(Qualifier) == VObjectType::PRIORITY) {
       qualifier = vpiPriorityQualifier;
-    } else if (fC->Type(Qualifier) == VObjectType::paUNIQUE0) {
+    } else if (fC->Type(Qualifier) == VObjectType::UNIQUE0) {
       qualifier = vpiUniqueQualifier;
     }
     Cond_predicate = fC->Sibling(Cond_predicate);
@@ -1408,7 +1408,7 @@ uhdm::AtomicStmt* CompileHelper::compileRandcaseStmt(
       case_item->setStmt(stmts->front());
     }
     RandCase = fC->Sibling(RandCase);
-    if (fC->Type(RandCase) == VObjectType::paENDCASE) {
+    if (fC->Type(RandCase) == VObjectType::ENDCASE) {
       break;
     }
   }
@@ -1440,13 +1440,13 @@ uhdm::AtomicStmt* CompileHelper::compileCaseStmt(
   VObjectType CaseType = fC->Type(Case_type);
   switch (CaseType) {
     case VObjectType::paCase_inside_item:
-    case VObjectType::paCASE:
+    case VObjectType::CASE:
       case_stmt->setCaseType(vpiCaseExact);
       break;
-    case VObjectType::paCASEX:
+    case VObjectType::CASEX:
       case_stmt->setCaseType(vpiCaseX);
       break;
-    case VObjectType::paCASEZ:
+    case VObjectType::CASEZ:
       case_stmt->setCaseType(vpiCaseZ);
       break;
     default:
@@ -1455,13 +1455,13 @@ uhdm::AtomicStmt* CompileHelper::compileCaseStmt(
   if (Unique) {
     VObjectType UniqueType = fC->Type(Unique);
     switch (UniqueType) {
-      case VObjectType::paUNIQUE:
+      case VObjectType::UNIQUE:
         case_stmt->setQualifier(vpiUniqueQualifier);
         break;
-      case VObjectType::paUNIQUE0:
+      case VObjectType::UNIQUE0:
         case_stmt->setQualifier(vpiNoQualifier);
         break;
-      case VObjectType::paPRIORITY:
+      case VObjectType::PRIORITY:
         case_stmt->setQualifier(vpiPriorityQualifier);
         break;
       default:
@@ -1767,7 +1767,7 @@ std::vector<uhdm::IODecl*>* CompileHelper::compileTfPortList(
       tf_param_name = fC->Sibling(tf_data_type);
     }
     NodeId type = fC->sl_collect(tf_data_type, VObjectType::paData_type);
-    if (fC->Type(type) == VObjectType::paVIRTUAL) type = fC->Sibling(type);
+    if (fC->Type(type) == VObjectType::VIRTUAL) type = fC->Sibling(type);
     if (prevType == InvalidNodeId) prevType = type;
 
     NodeId unpackedDimension =
@@ -1815,7 +1815,7 @@ std::vector<uhdm::IODecl*>* CompileHelper::compileTfPortList(
     NodeId expression = fC->Sibling(tf_param_name);
     if (expression &&
         (fC->Type(expression) != VObjectType::paVariable_dimension) &&
-        (fC->Type(type) != VObjectType::slStringConst)) {
+        (fC->Type(type) != VObjectType::STRING_CONST)) {
       if (uhdm::Any* defvalue =
               compileExpression(component, fC, expression, compileDesign,
                                 Reduce::No, decl, nullptr)) {
@@ -1854,10 +1854,10 @@ NodeId CompileHelper::setFuncTaskQualifiers(const FileContent* fC,
          (func_type == VObjectType::paLifetime_Static) ||
          (func_type == VObjectType::paDpi_import_export) ||
          (func_type == VObjectType::paPure_keyword) ||
-         (func_type == VObjectType::paIMPORT) ||
-         (func_type == VObjectType::paEXPORT) ||
+         (func_type == VObjectType::IMPORT) ||
+         (func_type == VObjectType::EXPORT) ||
          (func_type == VObjectType::paContext_keyword) ||
-         (func_type == VObjectType::slStringConst)) {
+         (func_type == VObjectType::STRING_CONST)) {
     if (func_type == VObjectType::paDpi_import_export) {
       func_decl = fC->Child(func_decl);
       func_type = fC->Type(func_decl);
@@ -1867,17 +1867,17 @@ NodeId CompileHelper::setFuncTaskQualifiers(const FileContent* fC,
       func_type = fC->Type(func_decl);
       if (tf) tf->setDPIPure(true);
     }
-    if (func_type == VObjectType::paEXPORT) {
+    if (func_type == VObjectType::EXPORT) {
       func_decl = fC->Sibling(func_decl);
       func_type = fC->Type(func_decl);
       if (tf) tf->setAccessType(vpiDPIExportAcc);
     }
-    if (func_type == VObjectType::paIMPORT) {
+    if (func_type == VObjectType::IMPORT) {
       func_decl = fC->Sibling(func_decl);
       func_type = fC->Type(func_decl);
       if (tf) tf->setAccessType(vpiDPIImportAcc);
     }
-    if (func_type == VObjectType::slStringLiteral) {
+    if (func_type == VObjectType::STRING_LITERAL) {
       std::string_view ctype = StringUtils::unquoted(fC->SymName(func_decl));
       if (ctype == "DPI-C") {
         if (tf) tf->setDPICStr(vpiDPIC);
@@ -1970,7 +1970,7 @@ bool CompileHelper::compileTask(DesignComponent* component,
   else
     Task_body_declaration = fC->Child(task_decl);
   NodeId task_name = fC->Child(Task_body_declaration);
-  if (fC->Type(task_name) == VObjectType::slStringConst)
+  if (fC->Type(task_name) == VObjectType::STRING_CONST)
     name = fC->SymName(task_name);
   else if (fC->Type(task_name) == VObjectType::paClass_scope) {
     NodeId Class_type = fC->Child(task_name);
@@ -2037,7 +2037,7 @@ bool CompileHelper::compileTask(DesignComponent* component,
 
   NodeId MoreStatement_or_null = fC->Sibling(Statement_or_null);
   if (MoreStatement_or_null &&
-      (fC->Type(MoreStatement_or_null) == VObjectType::paENDTASK)) {
+      (fC->Type(MoreStatement_or_null) == VObjectType::ENDTASK)) {
     MoreStatement_or_null = InvalidNodeId;
   }
   if (MoreStatement_or_null) {
@@ -2051,7 +2051,7 @@ bool CompileHelper::compileTask(DesignComponent* component,
     NodeId lastStatementId = Statement_or_null;
     while (Statement_or_null) {
       if (Statement_or_null &&
-          (fC->Type(Statement_or_null) == VObjectType::paENDTASK))
+          (fC->Type(Statement_or_null) == VObjectType::ENDTASK))
         break;
       if (fC->Type(fC->Child(Statement_or_null)) ==
           VObjectType::paTf_port_declaration) {
@@ -2111,7 +2111,7 @@ bool CompileHelper::compileTask(DesignComponent* component,
   } else {
     // Page 983, 2017 Standard: 0 or 1 Stmt
     if (Statement_or_null &&
-        (fC->Type(Statement_or_null) != VObjectType::paENDTASK)) {
+        (fC->Type(Statement_or_null) != VObjectType::ENDTASK)) {
       uhdm::AnyCollection* stmts =
           compileStmt(component, fC, Statement_or_null, compileDesign, reduce,
                       task, instance);
@@ -2345,7 +2345,7 @@ bool CompileHelper::compileFunction(DesignComponent* component,
     NodeId Function_data_type_or_implicit =
         fC->Child(Function_body_declaration);
     nameId = fC->Sibling(Function_data_type_or_implicit);
-    if (fC->Type(nameId) == VObjectType::slStringConst) {
+    if (fC->Type(nameId) == VObjectType::STRING_CONST) {
       name = fC->SymName(nameId);
       Tf_port_list = fC->Sibling(nameId);
     } else if (fC->Type(nameId) == VObjectType::paClass_scope) {
@@ -2496,8 +2496,7 @@ bool CompileHelper::compileFunction(DesignComponent* component,
   NodeId MoreFunction_statement_or_null =
       fC->Sibling(Function_statement_or_null);
   if (MoreFunction_statement_or_null &&
-      (fC->Type(MoreFunction_statement_or_null) ==
-       VObjectType::paENDFUNCTION)) {
+      (fC->Type(MoreFunction_statement_or_null) == VObjectType::ENDFUNCTION)) {
     MoreFunction_statement_or_null = InvalidNodeId;
   }
   if (MoreFunction_statement_or_null) {
@@ -2614,10 +2613,10 @@ NodeId CompileHelper::setFuncTaskDeclQualifiers(const FileContent* fC,
          (func_type == VObjectType::paLifetime_Static) ||
          (func_type == VObjectType::paDpi_import_export) ||
          (func_type == VObjectType::paPure_keyword) ||
-         (func_type == VObjectType::paIMPORT) ||
-         (func_type == VObjectType::paEXPORT) ||
+         (func_type == VObjectType::IMPORT) ||
+         (func_type == VObjectType::EXPORT) ||
          (func_type == VObjectType::paContext_keyword) ||
-         (func_type == VObjectType::slStringConst)) {
+         (func_type == VObjectType::STRING_CONST)) {
     if (func_type == VObjectType::paDpi_import_export) {
       func_decl = fC->Child(func_decl);
       func_type = fC->Type(func_decl);
@@ -2627,17 +2626,17 @@ NodeId CompileHelper::setFuncTaskDeclQualifiers(const FileContent* fC,
       func_type = fC->Type(func_decl);
       if (tfd) tfd->setDPIPure(true);
     }
-    if (func_type == VObjectType::paEXPORT) {
+    if (func_type == VObjectType::EXPORT) {
       func_decl = fC->Sibling(func_decl);
       func_type = fC->Type(func_decl);
       if (tfd) tfd->setAccessType(vpiDPIExportAcc);
     }
-    if (func_type == VObjectType::paIMPORT) {
+    if (func_type == VObjectType::IMPORT) {
       func_decl = fC->Sibling(func_decl);
       func_type = fC->Type(func_decl);
       if (tfd) tfd->setAccessType(vpiDPIImportAcc);
     }
-    if (func_type == VObjectType::slStringLiteral) {
+    if (func_type == VObjectType::STRING_LITERAL) {
       std::string_view ctype = StringUtils::unquoted(fC->SymName(func_decl));
       if (ctype == "DPI-C") {
         if (tfd) tfd->setDPICStr(vpiDPIC);
@@ -2726,7 +2725,7 @@ Task* CompileHelper::compileTaskPrototype(DesignComponent* scope,
   fC->populateCoreMembers(id, id, task);
 
   NodeId Tf_port_list;
-  if (fC->Type(task_name) == VObjectType::slStringConst) {
+  if (fC->Type(task_name) == VObjectType::STRING_CONST) {
     Tf_port_list = fC->Sibling(task_name);
   } else if (fC->Type(task_name) == VObjectType::paClass_scope) {
     NodeId Class_type = fC->Child(task_name);
@@ -2791,7 +2790,7 @@ Function* CompileHelper::compileFunctionPrototype(
   NodeId type = fC->Child(data_type);
   VObjectType the_type = fC->Type(type);
   std::string typeName;
-  if (the_type == VObjectType::slStringConst) {
+  if (the_type == VObjectType::STRING_CONST) {
     typeName = fC->SymName(type);
   } else if (the_type == VObjectType::paClass_scope) {
     NodeId class_type = fC->Child(type);
@@ -2804,10 +2803,10 @@ Function* CompileHelper::compileFunctionPrototype(
     typeName = VObject::getTypeName(the_type);
   }
 
-  if (fC->Type(fC->Child(id)) == VObjectType::paEXPORT) {
+  if (fC->Type(fC->Child(id)) == VObjectType::EXPORT) {
     function_name = fC->Child(func_prototype);
     funcName = fC->SymName(function_name);
-  } else if (fC->Type(fC->Child(id)) == VObjectType::paIMPORT) {
+  } else if (fC->Type(fC->Child(id)) == VObjectType::IMPORT) {
     function_name = fC->Sibling(function_data_type);
     funcName = fC->SymName(function_name);
   }
@@ -2822,7 +2821,7 @@ Function* CompileHelper::compileFunctionPrototype(
     func->setReturn(v);
   }
   NodeId Tf_port_list;
-  if (fC->Type(function_name) == VObjectType::slStringConst) {
+  if (fC->Type(function_name) == VObjectType::STRING_CONST) {
     Tf_port_list = fC->Sibling(function_name);
   } else if (fC->Type(function_name) == VObjectType::paClass_scope) {
     NodeId Class_type = fC->Child(function_name);
@@ -2860,7 +2859,7 @@ uhdm::Any* CompileHelper::compileProceduralContinuousAssign(
   VObjectType assigntype = fC->Type(assigntypeid);
   uhdm::AtomicStmt* the_stmt = nullptr;
   switch (assigntype) {
-    case VObjectType::paASSIGN: {
+    case VObjectType::ASSIGN: {
       uhdm::AssignStmt* assign = s.make<uhdm::AssignStmt>();
       NodeId Variable_assignment = fC->Sibling(assigntypeid);
       NodeId Variable_lvalue = fC->Child(Variable_assignment);
@@ -2885,7 +2884,7 @@ uhdm::Any* CompileHelper::compileProceduralContinuousAssign(
       the_stmt = assign;
       break;
     }
-    case VObjectType::paFORCE: {
+    case VObjectType::FORCE: {
       uhdm::Force* assign = s.make<uhdm::Force>();
       NodeId Variable_assignment = fC->Sibling(assigntypeid);
       NodeId Variable_lvalue = fC->Child(Variable_assignment);
@@ -2910,7 +2909,7 @@ uhdm::Any* CompileHelper::compileProceduralContinuousAssign(
       the_stmt = assign;
       break;
     }
-    case VObjectType::paDEASSIGN: {
+    case VObjectType::DEASSIGN: {
       uhdm::Deassign* assign = s.make<uhdm::Deassign>();
       NodeId Variable_assignment = fC->Sibling(assigntypeid);
       NodeId Variable_lvalue = fC->Child(Variable_assignment);
@@ -2930,7 +2929,7 @@ uhdm::Any* CompileHelper::compileProceduralContinuousAssign(
       the_stmt = assign;
       break;
     }
-    case VObjectType::paRELEASE: {
+    case VObjectType::RELEASE: {
       uhdm::Release* assign = s.make<uhdm::Release>();
       NodeId Variable_assignment = fC->Sibling(assigntypeid);
       NodeId Variable_lvalue = fC->Child(Variable_assignment);
@@ -3280,7 +3279,7 @@ uhdm::MethodFuncCall* CompileHelper::compileRandomizeCall(
   NodeId With;
   if (fC->Type(Identifier_list) == VObjectType::paIdentifier_list) {
     With = fC->Sibling(Identifier_list);
-  } else if (fC->Type(Identifier_list) == VObjectType::paWITH) {
+  } else if (fC->Type(Identifier_list) == VObjectType::WITH) {
     With = Identifier_list;
   }
   NodeId Constraint_block = fC->Sibling(With);
@@ -3353,7 +3352,7 @@ void CompileHelper::compileBindStmt(DesignComponent* component,
   const std::string_view targetName = fC->SymName(Target_scope);
   NodeId Bind_instantiation = fC->Sibling(Target_scope);
   NodeId Instance_target;
-  if (fC->Type(Bind_instantiation) == VObjectType::slStringConst) {
+  if (fC->Type(Bind_instantiation) == VObjectType::STRING_CONST) {
     Instance_target = Bind_instantiation;
     NodeId Constant_bit_select = fC->Sibling(Bind_instantiation);
     Bind_instantiation = fC->Sibling(Constant_bit_select);

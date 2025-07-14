@@ -54,7 +54,7 @@ Package::Package(Session* session, std::string_view name, Library* library,
   uhdm::Package* const instance = serializer.make<uhdm::Package>();
   if (!name.empty()) instance->setName(name);
   if (nodeId && (fC != nullptr))
-    fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::paPACKAGE),
+    fC->populateCoreMembers(fC->sl_collect(nodeId, VObjectType::PACKAGE),
                             nodeId, instance);
   setUhdmModel(instance);
 }

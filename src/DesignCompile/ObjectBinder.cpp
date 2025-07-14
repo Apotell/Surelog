@@ -102,7 +102,7 @@ bool ObjectBinder::isInElaboratedTree(const uhdm::Any* object) {
 
 VObjectType ObjectBinder::getDefaultNetType(
     const ValuedComponentI* component) const {
-  if (component == nullptr) return VObjectType::slNoType;
+  if (component == nullptr) return VObjectType::NO_TYPE;
 
   if (const DesignComponent* dc1 =
           valuedcomponenti_cast<DesignComponent>(component)) {
@@ -121,7 +121,7 @@ VObjectType ObjectBinder::getDefaultNetType(
     }
   }
 
-  return VObjectType::slNoType;
+  return VObjectType::NO_TYPE;
 }
 
 template <typename T>
@@ -1404,7 +1404,7 @@ void ObjectBinder::reportErrors() {
       errorContainer->printMessages(m_muteStdout);
     }
 
-    if (getDefaultNetType(component) == VObjectType::slNoType) {
+    if (getDefaultNetType(component) == VObjectType::NO_TYPE) {
       const std::string text =
           StrCat("id:", object->getUhdmId(), ", name: ", object->getName());
       Location loc(fileSystem->toPathId(object->getFile(), symbolTable),
@@ -1470,7 +1470,7 @@ bool ObjectBinder::createDefaultNets() {
 
     const ValuedComponentI* const component = std::get<1>(entry);
     VObjectType defaultNetType = getDefaultNetType(component);
-    if (defaultNetType != VObjectType::slNoType) {
+    if (defaultNetType != VObjectType::NO_TYPE) {
       const uhdm::Any* parent = object->getParent();
       while ((parent != nullptr) && (parent->Cast<uhdm::Scope>() == nullptr)) {
         parent = parent->getParent();

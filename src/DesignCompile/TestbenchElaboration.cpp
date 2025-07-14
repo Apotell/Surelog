@@ -138,7 +138,7 @@ std::vector<std::string_view> computeVarChain(const FileContent* fC,
   while (nodeId) {
     VObjectType type = fC->Type(nodeId);
     switch (type) {
-      case VObjectType::slStringConst: {
+      case VObjectType::STRING_CONST: {
         var_chain.emplace_back(fC->SymName(nodeId));
         break;
       }
@@ -338,7 +338,7 @@ bool TestbenchElaboration::bindDataTypes_() {
       DataType* dtype = datatype.second;
       if (dtype->getDefinition()) continue;
       VObjectType type = dtype->getType();
-      if (type == VObjectType::slStringConst ||
+      if (type == VObjectType::STRING_CONST ||
           type == VObjectType::paNull_rule ||
           type == VObjectType::paClass_scope) {
         const DataType* the_def = bindDataType_(
@@ -353,7 +353,7 @@ bool TestbenchElaboration::bindDataTypes_() {
         DataType* dtype = datatype.second;
         if (dtype->getDefinition()) continue;
         VObjectType type = dtype->getType();
-        if (type == VObjectType::slStringConst ||
+        if (type == VObjectType::STRING_CONST ||
             type == VObjectType::paNull_rule ||
             type == VObjectType::paClass_scope) {
           const DataType* the_def = bindDataType_(
@@ -387,7 +387,7 @@ bool TestbenchElaboration::bindFunctionReturnTypesAndParamaters_() {
       const std::string_view dataTypeName = dtype->getName();
       if (dtype->getDefinition()) continue;
       if (dtype->getFileContent() == nullptr) continue;
-      if (dtype->getType() == VObjectType::slStringConst) {
+      if (dtype->getType() == VObjectType::STRING_CONST) {
         const DataType* the_def = bindDataType_(
             dataTypeName, dtype->getFileContent(), func.second->getNodeId(),
             classDefinition, ErrorDefinition::COMP_UNDEFINED_TYPE);
@@ -398,7 +398,7 @@ bool TestbenchElaboration::bindFunctionReturnTypesAndParamaters_() {
         const std::string_view dataTypeName = dtype->getName();
         if (dtype->getDefinition()) continue;
         if (dtype->getFileContent() == nullptr) continue;
-        if (dtype->getType() == VObjectType::slStringConst) {
+        if (dtype->getType() == VObjectType::STRING_CONST) {
           const DataType* the_def = bindDataType_(
               dataTypeName, dtype->getFileContent(), param->getNodeId(),
               classDefinition, ErrorDefinition::COMP_UNDEFINED_TYPE);
@@ -616,7 +616,7 @@ bool TestbenchElaboration::bindForeachLoop_(ClassDefinition* classDefinition,
       range = sfC->Child(rangeTypeId);
     }
     VObjectType rangeType = sfC->Type(rangeTypeId);
-    if (rangeType == VObjectType::slStringConst) {
+    if (rangeType == VObjectType::STRING_CONST) {
       const std::string_view dataTypeName = sfC->SymName(rangeTypeId);
       itrDataType =
           bindDataType_(dataTypeName, sfC, rangeTypeId, classDefinition,
@@ -701,7 +701,7 @@ bool TestbenchElaboration::bindTasks_() {
         const std::string_view dataTypeName = dtype->getName();
         if (dtype->getDefinition()) continue;
         if (dtype->getFileContent() == nullptr) continue;
-        if (dtype->getType() == VObjectType::slStringConst) {
+        if (dtype->getType() == VObjectType::STRING_CONST) {
           const DataType* the_def = bindDataType_(
               dataTypeName, dtype->getFileContent(), param->getNodeId(),
               classDefinition, ErrorDefinition::COMP_UNDEFINED_TYPE);

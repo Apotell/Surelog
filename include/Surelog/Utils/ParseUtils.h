@@ -54,15 +54,9 @@ LineColumn getEndLineColumn(antlr4::Token* token);
 LineColumn getLineColumn(antlr4::tree::TerminalNode* node);
 LineColumn getEndLineColumn(antlr4::tree::TerminalNode* node);
 
-const std::vector<antlr4::tree::ParseTree*>& getTopTokenList(
-    const antlr4::tree::ParseTree* tree);
 void tokenizeAtComma(std::vector<std::string>& actualArgs,
                      const std::vector<antlr4::tree::ParseTree*>& tokens);
-
 std::vector<antlr4::Token*> getFlatTokenList(antlr4::tree::ParseTree* tree);
-
-void inOrderTraversal(std::vector<antlr4::Token*>& tokens,
-                      const antlr4::tree::ParseTree* parent);
 }  // namespace SURELOG::ParseUtils
 
 #endif /* SURELOG_PARSEUTILS_H */

@@ -887,7 +887,7 @@ void DesignElaboration::elaborateInstance_(
           }
           Generate_item = fC->Sibling(Generate_item);
           if (Generate_item &&
-              (fC->Type(Generate_item) == VObjectType::paENDGENERATE)) {
+              (fC->Type(Generate_item) == VObjectType::ENDGENERATE)) {
             break;
           }
         }
@@ -927,7 +927,7 @@ void DesignElaboration::elaborateInstance_(
           }
           Generate_item = fC->Sibling(Generate_item);
           if (Generate_item &&
-              (fC->Type(Generate_item) == VObjectType::paENDGENERATE)) {
+              (fC->Type(Generate_item) == VObjectType::ENDGENERATE)) {
             break;
           }
         }
@@ -969,7 +969,7 @@ void DesignElaboration::elaborateInstance_(
             fC->sl_collect(subInstanceId, VObjectType::paName_of_instance);
         if (instId == InvalidNodeId) {
           NodeId nameId = fC->Child(subInstanceId);
-          if (fC->Type(nameId) == VObjectType::slStringConst) {
+          if (fC->Type(nameId) == VObjectType::STRING_CONST) {
             instId = subInstanceId;
           }
         }
@@ -1091,7 +1091,7 @@ void DesignElaboration::elaborateInstance_(
           bool cont = (validValue && (condVal > 0));
 
           NodeId blockNameId = fC->Child(genBlock);
-          if (fC->Type(blockNameId) == VObjectType::slStringConst) {
+          if (fC->Type(blockNameId) == VObjectType::STRING_CONST) {
             modName = fC->SymName(blockNameId);
           }
           while (cont) {
@@ -1299,7 +1299,7 @@ void DesignElaboration::elaborateInstance_(
                         fC->Child(Generate_begin_end_block);
                   }
                   if (fC->Type(Module_or_generate_item) ==
-                      VObjectType::slStringConst) {
+                      VObjectType::STRING_CONST) {
                     Generate_item = fC->Sibling(Module_or_generate_item);
                     Module_or_generate_item = fC->Child(Generate_item);
                   }
@@ -1313,7 +1313,7 @@ void DesignElaboration::elaborateInstance_(
                     NodeId If_generate_construct =
                         fC->Child(Conditional_generate_construct);
                     Cond = fC->Child(If_generate_construct);
-                    if (fC->Type(Cond) == VObjectType::paIF) {
+                    if (fC->Type(Cond) == VObjectType::IF) {
                       Cond = fC->Sibling(Cond);
                     }
                     if (fC->Type(Cond) == VObjectType::paConstant_expression) {
@@ -1331,7 +1331,7 @@ void DesignElaboration::elaborateInstance_(
                              VObjectType::
                                  paGenerate_module_conditional_statement) {
                     Cond = fC->Child(Generate_item);
-                    if (fC->Type(Cond) == VObjectType::paIF) {
+                    if (fC->Type(Cond) == VObjectType::IF) {
                       Cond = fC->Sibling(Cond);
                     }
                     if (fC->Type(Cond) == VObjectType::paConstant_expression) {
@@ -1369,14 +1369,14 @@ void DesignElaboration::elaborateInstance_(
 
               // refresh instName
               NodeId blockNameId = fC->Child(tmp);
-              if (fC->Type(blockNameId) == VObjectType::slStringConst ||
+              if (fC->Type(blockNameId) == VObjectType::STRING_CONST ||
                   fC->Type(blockNameId) ==
                       VObjectType::paGenerate_begin_end_block) {  // if-else
                 if (fC->Type(blockNameId) ==
                     VObjectType::paGenerate_begin_end_block) {
                   NodeId Identifier = fC->Child(blockNameId);
                   NodeId Generate_item = Identifier;
-                  if (fC->Type(Identifier) == VObjectType::slStringConst) {
+                  if (fC->Type(Identifier) == VObjectType::STRING_CONST) {
                     Generate_item = fC->Sibling(Identifier);
                     modName = fC->SymName(Identifier);
                   }
@@ -1395,7 +1395,7 @@ void DesignElaboration::elaborateInstance_(
                     if (!blockIds.empty()) {
                       NodeId blockId = blockIds[0];
                       NodeId blockNameId = fC->Child(blockId);
-                      if (fC->Type(blockNameId) == VObjectType::slStringConst) {
+                      if (fC->Type(blockNameId) == VObjectType::STRING_CONST) {
                         modName = fC->SymName(blockNameId);
                         subInstanceId = fC->Sibling(blockNameId);
                         childId = subInstanceId;
@@ -1418,7 +1418,7 @@ void DesignElaboration::elaborateInstance_(
                 if (!blockIds.empty()) {
                   NodeId blockId = blockIds[0];
                   NodeId blockNameId = fC->Child(blockId);
-                  if (fC->Type(blockNameId) == VObjectType::slStringConst) {
+                  if (fC->Type(blockNameId) == VObjectType::STRING_CONST) {
                     modName = fC->SymName(blockNameId);
                     subInstanceId = fC->Sibling(blockNameId);
                     childId = subInstanceId;
@@ -1441,10 +1441,10 @@ void DesignElaboration::elaborateInstance_(
           blockId = fC->Child(blockId);
         }
         if (fC->Type(blockId) == VObjectType::paGenerate_begin_end_block &&
-            (fC->Type(fC->Child(blockId)) != VObjectType::slStringConst))
+            (fC->Type(fC->Child(blockId)) != VObjectType::STRING_CONST))
           blockId = fC->Child(blockId);
         NodeId blockNameId = fC->Child(blockId);
-        if (fC->Type(blockNameId) == VObjectType::slStringConst) {
+        if (fC->Type(blockNameId) == VObjectType::STRING_CONST) {
           modName = fC->SymName(blockNameId);
           instName = modName;
         }
@@ -1491,8 +1491,8 @@ void DesignElaboration::elaborateInstance_(
               break;
             }
           }
-          if (fC->Type(blockId) == VObjectType::paELSE) break;
-          if (fC->Type(blockId) == VObjectType::paEND) break;
+          if (fC->Type(blockId) == VObjectType::ELSE) break;
+          if (fC->Type(blockId) == VObjectType::END) break;
         }
         parent->addSubInstance(child);
       }
@@ -1591,7 +1591,7 @@ void DesignElaboration::elaborateInstance_(
       } else {
         // Regular module binding
         NodeId moduleName =
-            fC->sl_collect(subInstanceId, VObjectType::slStringConst);
+            fC->sl_collect(subInstanceId, VObjectType::STRING_CONST);
         const std::string_view libName = fC->getLibrary()->getName();
         mname = fC->SymName(moduleName);
 
@@ -1650,7 +1650,7 @@ void DesignElaboration::elaborateInstance_(
         VObjectType tmpType = fC->Type(tmpId);
         if (tmpType == VObjectType::paParameter_value_assignment ||
             tmpType == VObjectType::paDelay2 ||
-            tmpType == VObjectType::slIntConst) {
+            tmpType == VObjectType::INT_CONST) {
           paramOverride = tmpId;
         }
 
@@ -1990,7 +1990,7 @@ std::vector<std::string_view> DesignElaboration::collectParams_(
         overrideParams.push_back(parentParamOverride);
       }
     } else if (parentFile->Type(parentParamOverride) ==
-               VObjectType::slIntConst) {
+               VObjectType::INT_CONST) {
       // dffr #4 u1 ( )
       overrideParams.push_back(parentParamOverride);
     }
@@ -1998,10 +1998,10 @@ std::vector<std::string_view> DesignElaboration::collectParams_(
     for (auto paramAssign : overrideParams) {
       NodeId child = parentFile->Child(paramAssign);
       if (parentFile->Type(paramAssign) == VObjectType::paDelay2 ||
-          parentFile->Type(paramAssign) == VObjectType::slIntConst) {
+          parentFile->Type(paramAssign) == VObjectType::INT_CONST) {
         child = paramAssign;
       }
-      if (parentFile->Type(child) == VObjectType::slStringConst) {
+      if (parentFile->Type(child) == VObjectType::STRING_CONST) {
         // Named param
         const std::string_view name = parentFile->SymName(child);
         overridenParams.insert(name);
@@ -2297,7 +2297,7 @@ std::vector<std::string_view> DesignElaboration::collectParams_(
     std::string fullPath;
     std::string path;
     while (var) {
-      if (fC->Type(var) == VObjectType::slStringConst) {
+      if (fC->Type(var) == VObjectType::STRING_CONST) {
         fullPath += fC->SymName(var);
       } else if (fC->Type(var) == VObjectType::paConstant_expression) {
         NodeId Constant_primary = fC->Child(var);
@@ -2308,7 +2308,7 @@ std::vector<std::string_view> DesignElaboration::collectParams_(
       }
       var = fC->Sibling(var);
       bool isString = false;
-      if (fC->Type(var) == VObjectType::slStringConst) {
+      if (fC->Type(var) == VObjectType::STRING_CONST) {
         isString = true;
       }
       if (var && isString) {

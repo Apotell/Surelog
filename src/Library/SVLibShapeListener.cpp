@@ -154,9 +154,9 @@ void SVLibShapeListener::exitString_value(
     SV3_1aParser::String_valueContext *ctx) {
   std::string ident;
 
-  ident = ctx->String()->getText();
+  ident = ctx->QUOTED_STRING()->getText();
 
-  addVObject(ctx, ident, VObjectType::slStringLiteral);
+  addVObject(ctx, ident, VObjectType::STRING_LITERAL);
 
   if (ident.size() > SV_MAX_STRING_SIZE) {
     logError(ErrorDefinition::PA_MAX_LENGTH_IDENTIFIER, ctx, ident);
@@ -165,10 +165,10 @@ void SVLibShapeListener::exitString_value(
 
 void SVLibShapeListener::exitIdentifier(SV3_1aParser::IdentifierContext *ctx) {
   std::string ident;
-  if (ctx->Simple_identifier())
-    ident = ctx->Simple_identifier()->getText();
-  else if (ctx->Escaped_identifier()) {
-    ident = ctx->Escaped_identifier()->getText();
+  if (ctx->SIMPLE_IDENTIFIER())
+    ident = ctx->SIMPLE_IDENTIFIER()->getText();
+  else if (ctx->ESCAPED_IDENTIFIER()) {
+    ident = ctx->ESCAPED_IDENTIFIER()->getText();
     ident.erase(0, 3);
     ident.erase(ident.size() - 3, 3);
   } else if (ctx->THIS())
@@ -179,7 +179,7 @@ void SVLibShapeListener::exitIdentifier(SV3_1aParser::IdentifierContext *ctx) {
     ident = ctx->SAMPLE()->getText();
 
   // !!! Don't forget to change CompileModule.cpp type checker !!!
-  addVObject(ctx, ident, VObjectType::slStringConst);
+  addVObject(ctx, ident, VObjectType::STRING_CONST);
 
   if (ident.size() > SV_MAX_IDENTIFIER_SIZE) {
     logError(ErrorDefinition::PA_MAX_LENGTH_IDENTIFIER, ctx, ident);
@@ -194,7 +194,7 @@ void SVLibShapeListener::exitHierarchical_identifier(
   childCtx = (antlr4::ParserRuleContext *)ctx->children[0];
   ident = ctx->getText();
   ident = std::regex_replace(ident, m_regexEscSeqReplace, "");
-  addVObject(childCtx, ident, VObjectType::slStringConst);
+  addVObject(childCtx, ident, VObjectType::STRING_CONST);
   addVObject(ctx, VObjectType::paHierarchical_identifier);
 
   if (ident.size() > SV_MAX_IDENTIFIER_SIZE) {

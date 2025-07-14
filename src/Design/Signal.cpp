@@ -64,7 +64,7 @@ Signal::Signal(DesignComponent* component, const FileContent* fileContent,
       m_interfaceTypeNameId(interfaceTypeNameId),
       m_unpackedDimension(unpackedDimension),
       m_type(subnettype),
-      m_direction(VObjectType::slNoType),
+      m_direction(VObjectType::NO_TYPE),
       m_signed(is_signed) {}
 
 std::string Signal::getInterfaceTypeName() const {
@@ -80,11 +80,11 @@ std::string Signal::getInterfaceTypeName() const {
     type_name = m_fileContent->SymName(m_interfaceTypeNameId);
     NodeId constant_select = m_fileContent->Sibling(m_interfaceTypeNameId);
     if (constant_select) {
-      if (m_fileContent->Type(constant_select) == VObjectType::slStringConst) {
+      if (m_fileContent->Type(constant_select) == VObjectType::STRING_CONST) {
         type_name.append(".").append(m_fileContent->SymName(constant_select));
       } else {
         NodeId selector = m_fileContent->Child(constant_select);
-        if (m_fileContent->Type(selector) == VObjectType::slStringConst)
+        if (m_fileContent->Type(selector) == VObjectType::STRING_CONST)
           type_name.append(".").append(m_fileContent->SymName(selector));
       }
     }

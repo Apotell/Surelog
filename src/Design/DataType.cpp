@@ -90,12 +90,12 @@ bool DataType::isData_type(VObjectType type) {
 
 bool DataType::isString_type(VObjectType type) {
   return (type == VObjectType::paString_type ||
-          type == VObjectType::slStringConst ||
-          type == VObjectType::slStringLiteral);
+          type == VObjectType::STRING_CONST ||
+          type == VObjectType::STRING_LITERAL);
 }
 
 bool DataType::isNumber(VObjectType type) {
-  return (type == VObjectType::slRealConst ||
+  return (type == VObjectType::REAL_CONST ||
           type == VObjectType::paInteger_type ||
           type == VObjectType::paNumber_1Tickb0 ||
           type == VObjectType::paNumber_1Tickb1 ||

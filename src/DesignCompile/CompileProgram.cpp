@@ -147,7 +147,7 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
   NodeId ParameterPortListId;
   std::stack<NodeId> stack;
   stack.push(id);
-  VObjectType port_direction = VObjectType::slNoType;
+  VObjectType port_direction = VObjectType::NO_TYPE;
   while (!stack.empty()) {
     id = stack.top();
     if (ParameterPortListId && (id == ParameterPortListId)) {
@@ -253,7 +253,7 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
         NodeId list_of_type_assignments = fC->Child(id);
         if (fC->Type(list_of_type_assignments) ==
                 VObjectType::paList_of_type_assignments ||
-            fC->Type(list_of_type_assignments) == VObjectType::paTYPE) {
+            fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
           // Type param
           m_helper.compileParameterDeclaration(
               m_program, fC, list_of_type_assignments, m_compileDesign,
@@ -271,7 +271,7 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
         NodeId list_of_type_assignments = fC->Child(id);
         if (fC->Type(list_of_type_assignments) ==
                 VObjectType::paList_of_type_assignments ||
-            fC->Type(list_of_type_assignments) == VObjectType::paTYPE) {
+            fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
           // Type param
           m_helper.compileParameterDeclaration(
               m_program, fC, list_of_type_assignments, m_compileDesign,
@@ -287,7 +287,7 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
       case VObjectType::paClass_declaration: {
         if (collectType != CollectType::OTHER) break;
         NodeId nameId = fC->Child(id);
-        if (fC->Type(nameId) == VObjectType::paVIRTUAL) {
+        if (fC->Type(nameId) == VObjectType::VIRTUAL) {
           nameId = fC->Sibling(nameId);
         }
         const std::string_view name = fC->SymName(nameId);
@@ -376,7 +376,7 @@ bool CompileProgram::collectObjects_(CollectType collectType) {
         }
         break;
       }
-      case VObjectType::slStringConst: {
+      case VObjectType::STRING_CONST: {
         if (collectType != CollectType::DEFINITION) break;
         NodeId sibling = fC->Sibling(id);
         if (!sibling) {

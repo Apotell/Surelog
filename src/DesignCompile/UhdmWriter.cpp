@@ -192,10 +192,10 @@ std::string UhdmWriter::builtinGateName(VObjectType type) {
     case VObjectType::paMosSwitchType_RPMos:
       modName = "work@rpmos";
       break;
-    case VObjectType::paPULLUP:
+    case VObjectType::PULLUP:
       modName = "work@pullup";
       break;
-    case VObjectType::paPULLDOWN:
+    case VObjectType::PULLDOWN:
       modName = "work@pulldown";
       break;
     default:
@@ -214,25 +214,25 @@ UhdmWriter::UhdmWriter(Session* session, CompileDesign* compiler,
 
 uint32_t UhdmWriter::getStrengthType(VObjectType type) {
   switch (type) {
-    case VObjectType::paSUPPLY0:
+    case VObjectType::SUPPLY0:
       return vpiSupply0;
-    case VObjectType::paSUPPLY1:
+    case VObjectType::SUPPLY1:
       return vpiSupply1;
-    case VObjectType::paSTRONG0:
+    case VObjectType::STRONG0:
       return vpiStrongDrive;
-    case VObjectType::paSTRONG1:
+    case VObjectType::STRONG1:
       return vpiStrongDrive;
-    case VObjectType::paPULL0:
+    case VObjectType::PULL0:
       return vpiPullDrive;
-    case VObjectType::paPULL1:
+    case VObjectType::PULL1:
       return vpiPullDrive;
-    case VObjectType::paWEAK0:
+    case VObjectType::WEAK0:
       return vpiWeakDrive;
-    case VObjectType::paWEAK1:
+    case VObjectType::WEAK1:
       return vpiWeakDrive;
-    case VObjectType::paHIGHZ0:
+    case VObjectType::HIGHZ0:
       return vpiHighZ;
-    case VObjectType::paHIGHZ1:
+    case VObjectType::HIGHZ1:
       return vpiHighZ;
     default:
       return 0;
@@ -266,7 +266,7 @@ uint32_t UhdmWriter::getVpiOpType(VObjectType type) {
     case VObjectType::paBinOp_Equiv:
       return vpiEqOp;
     case VObjectType::paBinOp_Not:
-    case VObjectType::paNOT:
+    case VObjectType::NOT:
       return vpiNeqOp;
     case VObjectType::paBinOp_Percent:
       return vpiModOp;
@@ -323,9 +323,9 @@ uint32_t UhdmWriter::getVpiOpType(VObjectType type) {
     case VObjectType::paIncDec_MinusMinus:
       return vpiPostDecOp;
     case VObjectType::paConditional_operator:
-    case VObjectType::paQMARK:
+    case VObjectType::QMARK:
       return vpiConditionOp;
-    case VObjectType::paINSIDE:
+    case VObjectType::INSIDE:
     case VObjectType::paOpen_range_list:
       return vpiInsideOp;
     case VObjectType::paBinOp_FourStateLogicEqual:
@@ -366,29 +366,29 @@ uint32_t UhdmWriter::getVpiOpType(VObjectType type) {
     case VObjectType::paBinOp_WildcardNotEqual:
     case VObjectType::paBinOp_WildNotEqual:
       return vpiWildNeqOp;
-    case VObjectType::paIFF:
+    case VObjectType::IFF:
       return vpiIffOp;
-    case VObjectType::paOR:
+    case VObjectType::OR:
       return vpiLogOrOp;
-    case VObjectType::paAND:
+    case VObjectType::AND:
       return vpiLogAndOp;
-    case VObjectType::paNON_OVERLAP_IMPLY:
+    case VObjectType::NON_OVERLAP_IMPLY:
       return vpiNonOverlapImplyOp;
-    case VObjectType::paOVERLAP_IMPLY:
+    case VObjectType::OVERLAP_IMPLY:
       return vpiOverlapImplyOp;
-    case VObjectType::paOVERLAPPED:
+    case VObjectType::OVERLAPPED:
       return vpiOverlapFollowedByOp;
-    case VObjectType::paNONOVERLAPPED:
+    case VObjectType::NONOVERLAPPED:
       return vpiNonOverlapFollowedByOp;
-    case VObjectType::paUNTIL:
+    case VObjectType::UNTIL:
       return vpiUntilOp;
-    case VObjectType::paS_UNTIL:
+    case VObjectType::S_UNTIL:
       return vpiUntilOp;
-    case VObjectType::paUNTIL_WITH:
+    case VObjectType::UNTIL_WITH:
       return vpiUntilWithOp;
-    case VObjectType::paS_UNTIL_WITH:
+    case VObjectType::S_UNTIL_WITH:
       return vpiUntilWithOp;
-    case VObjectType::paIMPLIES:
+    case VObjectType::IMPLIES:
       return vpiImpliesOp;
     case VObjectType::paCycle_delay_range:
       return vpiCycleDelayOp;
@@ -398,31 +398,31 @@ uint32_t UhdmWriter::getVpiOpType(VObjectType type) {
       return vpiRepeatOp;
     case VObjectType::paGoto_repetition:
       return vpiGotoRepeatOp;
-    case VObjectType::paTHROUGHOUT:
+    case VObjectType::THROUGHOUT:
       return vpiThroughoutOp;
-    case VObjectType::paWITHIN:
+    case VObjectType::WITHIN:
       return vpiWithinOp;
-    case VObjectType::paINTERSECT:
+    case VObjectType::INTERSECT:
       return vpiIntersectOp;
-    case VObjectType::paFIRST_MATCH:
+    case VObjectType::FIRST_MATCH:
       return vpiFirstMatchOp;
-    case VObjectType::paSTRONG:
+    case VObjectType::STRONG:
       return vpiOpStrong;
-    case VObjectType::paACCEPT_ON:
+    case VObjectType::ACCEPT_ON:
       return vpiAcceptOnOp;
-    case VObjectType::paSYNC_ACCEPT_ON:
+    case VObjectType::SYNC_ACCEPT_ON:
       return vpiSyncAcceptOnOp;
-    case VObjectType::paREJECT_ON:
+    case VObjectType::REJECT_ON:
       return vpiRejectOnOp;
-    case VObjectType::paSYNC_REJECT_ON:
+    case VObjectType::SYNC_REJECT_ON:
       return vpiSyncRejectOnOp;
-    case VObjectType::paNEXTTIME:
+    case VObjectType::NEXTTIME:
       return vpiNexttimeOp;
-    case VObjectType::paS_NEXTTIME:
+    case VObjectType::S_NEXTTIME:
       return vpiNexttimeOp;
-    case VObjectType::paALWAYS:
+    case VObjectType::ALWAYS:
       return vpiAlwaysOp;
-    case VObjectType::paEVENTUALLY:
+    case VObjectType::EVENTUALLY:
       return vpiEventuallyOp;
     default:
       return 0;
@@ -652,9 +652,9 @@ void UhdmWriter::writePorts(const std::vector<Signal*>& orig_ports,
     }
 
     const FileContent* fC = orig_port->getFileContent();
-    if (fC->Type(orig_port->getNameId()) == VObjectType::slStringConst)
+    if (fC->Type(orig_port->getNameId()) == VObjectType::STRING_CONST)
       dest_port->setName(orig_port->getName());
-    if (orig_port->getDirection() != VObjectType::slNoType)
+    if (orig_port->getDirection() != VObjectType::NO_TYPE)
       lastPortDirection =
           UhdmWriter::getVpiDirection(orig_port->getDirection());
     dest_port->setDirection(lastPortDirection);
@@ -836,7 +836,7 @@ void UhdmWriter::writeNets(DesignComponent* mod,
     }
     if (dest_net) {
       const FileContent* fC = orig_net->getFileContent();
-      if (fC->Type(orig_net->getNameId()) == VObjectType::slStringConst) {
+      if (fC->Type(orig_net->getNameId()) == VObjectType::STRING_CONST) {
         auto portItr = portMap.find(orig_net->getName());
         if (portItr != portMap.end()) {
           Signal* sig = (*portItr).second;
@@ -994,7 +994,7 @@ void UhdmWriter::writeClass(ClassDefinition* classDef, uhdm::Serializer& s,
     if (fC) {
       // Builtin classes have no file
       const NodeId modId = classDef->getNodeIds()[0];
-      const NodeId startId = fC->sl_collect(modId, VObjectType::paCLASS);
+      const NodeId startId = fC->sl_collect(modId, VObjectType::CLASS);
       fC->populateCoreMembers(startId, modId, c);
     }
     // Activate when hier_path is better supported
@@ -1430,7 +1430,7 @@ void UhdmWriter::writeModule(ModuleDefinition* mod, uhdm::Module* m,
           uhdm::InterfaceArray* smarray = s.make<uhdm::InterfaceArray>();
           smarray->setRanges(unpackedDimensions);
           for (auto d : *unpackedDimensions) d->setParent(smarray);
-          if (fC->Type(sig->getNameId()) == VObjectType::slStringConst) {
+          if (fC->Type(sig->getNameId()) == VObjectType::STRING_CONST) {
             smarray->setName(sig->getName());
           }
           smarray->setFullName(typeName);
@@ -3222,8 +3222,7 @@ bool UhdmWriter::write(PathId uhdmFileId) {
           if (fC) {
             // Builtin package has no file
             const NodeId modId = pack->getNodeIds()[0];
-            const NodeId startId =
-                fC->sl_collect(modId, VObjectType::paPACKAGE);
+            const NodeId startId = fC->sl_collect(modId, VObjectType::PACKAGE);
             fC->populateCoreMembers(startId, modId, p);
           }
           v2->emplace_back(p);
@@ -3255,7 +3254,7 @@ bool UhdmWriter::write(PathId uhdmFileId) {
         if (fC) {
           // Builtin package has no file
           const NodeId modId = pack->getNodeIds()[0];
-          const NodeId startId = fC->sl_collect(modId, VObjectType::paPACKAGE);
+          const NodeId startId = fC->sl_collect(modId, VObjectType::PACKAGE);
           fC->populateCoreMembers(startId, modId, p);
         }
       }
@@ -3274,7 +3273,7 @@ bool UhdmWriter::write(PathId uhdmFileId) {
         p->setParent(d);
         p->setDefName(prog->getName());
         const NodeId modId = prog->getNodeIds()[0];
-        const NodeId startId = fC->sl_collect(modId, VObjectType::paPROGRAM);
+        const NodeId startId = fC->sl_collect(modId, VObjectType::PROGRAM);
         fC->populateCoreMembers(startId, modId, p);
         if (prog->getAttributes() != nullptr) {
           p->setAttributes(prog->getAttributes());
@@ -3300,7 +3299,7 @@ bool UhdmWriter::write(PathId uhdmFileId) {
         m->setParent(d);
         m->setDefName(mod->getName());
         const NodeId modId = mod->getNodeIds()[0];
-        const NodeId startId = fC->sl_collect(modId, VObjectType::paINTERFACE);
+        const NodeId startId = fC->sl_collect(modId, VObjectType::INTERFACE);
         fC->populateCoreMembers(startId, modId, m);
         if (mod->getAttributes() != nullptr) {
           m->setAttributes(mod->getAttributes());
@@ -3358,8 +3357,7 @@ bool UhdmWriter::write(PathId uhdmFileId) {
           defn->setParent(d);
           defn->setDefName(mod->getName());
           const NodeId modId = mod->getNodeIds()[0];
-          const NodeId startId =
-              fC->sl_collect(modId, VObjectType::paPRIMITIVE);
+          const NodeId startId = fC->sl_collect(modId, VObjectType::PRIMITIVE);
           fC->populateCoreMembers(startId, modId, defn);
           if (mod->getAttributes() != nullptr) {
             defn->setAttributes(mod->getAttributes());

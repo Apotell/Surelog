@@ -118,7 +118,7 @@ class FileContent final : public DesignComponent {
   uint32_t getSize() const final {
     return static_cast<uint32_t>(m_objects.size());
   }
-  VObjectType getType() const final { return VObjectType::slNoType; }
+  VObjectType getType() const final { return VObjectType::NO_TYPE; }
   bool isInstance() const final { return false; }
   std::string_view getName() const final;
   NodeId getRootNode() const;

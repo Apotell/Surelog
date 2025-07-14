@@ -205,7 +205,7 @@ bool CompileClass::compile(Elaborate elaborate, Reduce reduce) {
         inFunction_body_declaration = true;
         break;
       }
-      case VObjectType::paENDFUNCTION: {
+      case VObjectType::ENDFUNCTION: {
         inFunction_body_declaration = false;
         break;
       }
@@ -213,7 +213,7 @@ bool CompileClass::compile(Elaborate elaborate, Reduce reduce) {
         inTask_body_declaration = true;
         break;
       }
-      case VObjectType::paENDTASK: {
+      case VObjectType::ENDTASK: {
         inTask_body_declaration = false;
         break;
       }
@@ -251,7 +251,7 @@ bool CompileClass::compile(Elaborate elaborate, Reduce reduce) {
         m_helper.compileLetDeclaration(m_class, fC, id, m_compileDesign);
         break;
       }
-      case VObjectType::slStringConst: {
+      case VObjectType::STRING_CONST: {
         NodeId sibling = fC->Sibling(id);
         if (!sibling) {
           if (fC->Type(fC->Parent(id)) != VObjectType::paClass_declaration)
@@ -398,7 +398,7 @@ bool CompileClass::compile_class_property_(const FileContent* fC, NodeId id) {
 
       VObjectType the_type = fC->Type(node_type);
       std::string typeName;
-      if (the_type == VObjectType::slStringConst) {
+      if (the_type == VObjectType::STRING_CONST) {
         typeName = fC->SymName(node_type);
       } else if (the_type == VObjectType::paClass_scope) {
         NodeId class_type = fC->Child(node_type);
@@ -528,12 +528,12 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
     NodeId data_type = fC->Child(function_data_type);
     NodeId type = fC->Child(data_type);
     VObjectType the_type = fC->Type(type);
-    if (the_type == VObjectType::paVIRTUAL) {
+    if (the_type == VObjectType::VIRTUAL) {
       type = fC->Sibling(type);
       the_type = fC->Type(type);
     }
     std::string typeName;
-    if (the_type == VObjectType::slStringConst) {
+    if (the_type == VObjectType::STRING_CONST) {
       typeName = fC->SymName(type);
     } else {
       typeName = VObject::getTypeName(the_type);
@@ -573,7 +573,7 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
     else
       Task_body_declaration = fC->Child(task_decl);
     NodeId task_name = fC->Child(Task_body_declaration);
-    if (fC->Type(task_name) == VObjectType::slStringConst)
+    if (fC->Type(task_name) == VObjectType::STRING_CONST)
       taskName = fC->SymName(task_name);
     else if (fC->Type(task_name) == VObjectType::paClass_scope) {
       NodeId Class_type = fC->Child(task_name);
@@ -608,7 +608,7 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
       else
         Task_body_declaration = fC->Child(task_decl);
       NodeId task_name = fC->Child(Task_body_declaration);
-      if (fC->Type(task_name) == VObjectType::slStringConst)
+      if (fC->Type(task_name) == VObjectType::STRING_CONST)
         taskName = fC->SymName(task_name);
       else if (fC->Type(task_name) == VObjectType::paClass_scope) {
         NodeId Class_type = fC->Child(task_name);
@@ -657,7 +657,7 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
       NodeId type = fC->Child(data_type);
       VObjectType the_type = fC->Type(type);
       std::string typeName;
-      if (the_type == VObjectType::slStringConst) {
+      if (the_type == VObjectType::STRING_CONST) {
         typeName = fC->SymName(type);
       } else {
         typeName = VObject::getTypeName(the_type);
@@ -704,7 +704,7 @@ bool CompileClass::compile_class_method_(const FileContent* fC, NodeId id) {
     is_extern = true;
   } else if (func_type == VObjectType::paClass_constructor_declaration) {
     funcName = "new";
-    returnType->init(fC, InvalidNodeId, "void", VObjectType::slNoType);
+    returnType->init(fC, InvalidNodeId, "void", VObjectType::NO_TYPE);
 
     m_helper.compileClassConstructorDeclaration(m_class, fC, fC->Child(id),
                                                 m_compileDesign);
@@ -798,8 +798,8 @@ bool CompileClass::compile_class_declaration_(const FileContent* fC,
   ErrorContainer* const errors = m_session->getErrorContainer();
 
   uhdm::Serializer& s = m_compileDesign->getSerializer();
-  const bool virtualClass = fC->sl_collect(id, VObjectType::paVIRTUAL);
-  const NodeId class_name_id = fC->sl_collect(id, VObjectType::slStringConst);
+  const bool virtualClass = fC->sl_collect(id, VObjectType::VIRTUAL);
+  const NodeId class_name_id = fC->sl_collect(id, VObjectType::STRING_CONST);
   const std::string_view class_name = fC->SymName(class_name_id);
   std::string full_class_name =
       StrCat(m_class->getUhdmModel<uhdm::ClassDefn>()->getFullName(),
@@ -811,7 +811,7 @@ bool CompileClass::compile_class_declaration_(const FileContent* fC,
                   symbols->registerSymbol(class_name));
     const FileContent* prevFile = prevDef->getFileContent();
     NodeId prevNode =
-        prevFile->sl_collect(prevDef->getNodeId(), VObjectType::slStringConst);
+        prevFile->sl_collect(prevDef->getNodeId(), VObjectType::STRING_CONST);
     Location loc2(prevFile->getFileId(prevNode), prevFile->Line(prevNode),
                   prevFile->Column(prevNode),
                   symbols->registerSymbol(class_name));
@@ -882,7 +882,7 @@ bool CompileClass::compile_local_parameter_declaration_(const FileContent* fC,
   NodeId list_of_type_assignments = fC->Child(id);
   if (fC->Type(list_of_type_assignments) ==
           VObjectType::paList_of_type_assignments ||
-      fC->Type(list_of_type_assignments) == VObjectType::paTYPE) {
+      fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
     // Type param
     m_helper.compileParameterDeclaration(m_class, fC, list_of_type_assignments,
                                          m_compileDesign, Reduce::No, true,
@@ -929,7 +929,7 @@ bool CompileClass::compile_parameter_declaration_(const FileContent* fC,
   NodeId list_of_type_assignments = fC->Child(id);
   if (fC->Type(list_of_type_assignments) ==
           VObjectType::paList_of_type_assignments ||
-      fC->Type(list_of_type_assignments) == VObjectType::paTYPE) {
+      fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
     // Type param
     m_helper.compileParameterDeclaration(m_class, fC, list_of_type_assignments,
                                          m_compileDesign, Reduce::No, false,
@@ -977,7 +977,7 @@ bool CompileClass::compile_class_type_(const FileContent* fC, NodeId id) {
   NodeId base_class_id = fC->Child(id);
   std::string base_class_name(fC->SymName(base_class_id));
   while (fC->Sibling(base_class_id) &&
-         (fC->Type(fC->Sibling(base_class_id)) == VObjectType::slStringConst)) {
+         (fC->Type(fC->Sibling(base_class_id)) == VObjectType::STRING_CONST)) {
     base_class_id = fC->Sibling(base_class_id);
     base_class_name.append("::").append(fC->SymName(base_class_id));
   }
@@ -1025,7 +1025,7 @@ bool CompileClass::compile_class_parameters_(const FileContent* fC, NodeId id) {
   */
   uhdm::ClassDefn* defn = m_class->getUhdmModel<uhdm::ClassDefn>();
 
-  if (fC->sl_collect(id, VObjectType::paVIRTUAL)) {
+  if (fC->sl_collect(id, VObjectType::VIRTUAL)) {
     defn->setVirtual(true);
   }
 
@@ -1037,12 +1037,12 @@ bool CompileClass::compile_class_parameters_(const FileContent* fC, NodeId id) {
       NodeId type = fC->Child(list_of_type_assignments);
       if (fC->Type(list_of_type_assignments) ==
               VObjectType::paList_of_type_assignments ||
-          fC->Type(list_of_type_assignments) == VObjectType::paTYPE) {
+          fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
         // Type param
         m_helper.compileParameterDeclaration(
             m_class, fC, list_of_type_assignments, m_compileDesign, Reduce::No,
             false, nullptr, false, false);
-      } else if (fC->Type(type) == VObjectType::paTYPE) {
+      } else if (fC->Type(type) == VObjectType::TYPE) {
         // Handled in compile_parameter_declaration_
       } else {
         // Regular param

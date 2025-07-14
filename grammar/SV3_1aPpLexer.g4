@@ -23,9 +23,11 @@ ESCAPED_IDENTIFIER: '\\' ~[WS\r\t\n]*? WS |
 
 // A.9.2 Comments
 
-One_line_comment: '//' Comment_text '\r'? '\n';
+LINE_COMMENT: '//' Comment_text '\r'? '\n';
 
-Block_comment: '/*' Comment_text '*/';
+BLOCK_COMMENT: '/*' Comment_text '*/';
+
+SYNOPSIS_BLOCK_COMMENT: '/``*' Comment_text '*``/';
 
 fragment Comment_text: .*?;
 
@@ -157,11 +159,11 @@ CONFIG: 'config';
 
 ENDCONFIG: 'endconfig';
 
-Macro_identifier: '`' [a-zA-Z_] [a-zA-Z0-9_$]*;
+MACRO_IDENTIFIER: '`' [a-zA-Z_] [a-zA-Z0-9_$]*;
 
-Macro_Escaped_identifier: '`\\' ~[WS\r\t\n]*? WS;
+MACRO_ESCAPED_IDENTIFIER: '`\\' ~[WS\r\t\n]*? WS;
 
-STRING
+QUOTED_STRING
   : '"' // a opening quote
   (
     // start group
@@ -177,11 +179,11 @@ STRING
   '"'
   ; // the closing quote
 
-Simple_identifier: [a-zA-Z_] [a-zA-Z0-9_$]*;
+SIMPLE_IDENTIFIER: [a-zA-Z_] [a-zA-Z0-9_$]*;
 
-Spaces: (WS | TAB)+;
+SPACES: (WS | TAB)+;
 
-Pound_Pound_delay: '##' WS* [0-9] [0-9_.]*;
+POUND_POUND_DELAY: '##' WS* [0-9] [0-9_.]*;
 
 POUND_DELAY: '#' WS* [0-9] [0-9_.]*;
 
@@ -327,7 +329,7 @@ fragment Z_digit: ('z' | 'Z' | '?');
 
 fragment Z_digit_no_qm: ('z' | 'Z');
 
-Fixed_point_number: [0-9]+ '.' [0-9]+;
+FIXED_POINT_NUMBER: [0-9]+ '.' [0-9]+;
 
 fragment WS: [ ]+;
 
@@ -358,6 +360,6 @@ CLOSE_CURLY: '}';
 OPEN_BRACKET: '[';
 CLOSE_BRACKET: ']';
 
-Special: [~!@#$%^&*+|:;'<>.?/-]+?;
+SPECIAL: [~!@#$%^&*+|:;'<>.?/-]+?;
 
 ANY: .;

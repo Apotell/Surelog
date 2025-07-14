@@ -55,7 +55,7 @@
 namespace SURELOG {
 
 static VObjectType convert(std::string_view type) {
-  VObjectType result = VObjectType::slNoType;
+  VObjectType result = VObjectType::NO_TYPE;
   if (type == "int")
     result = VObjectType::paIntegerAtomType_Int;
   else if (type == "generic")
@@ -387,7 +387,7 @@ void Builtin::addBuiltinClasses() const {
                                                               fC1);
 
   for (const auto& classId : classes) {
-    if (NodeId stId = fC1->sl_collect(classId, VObjectType::slStringConst,
+    if (NodeId stId = fC1->sl_collect(classId, VObjectType::STRING_CONST,
                                       VObjectType::paAttr_spec)) {
       const std::string_view name = fC1->SymName(stId);
       const std::string fullClassName = StrCat("builtin::", name);

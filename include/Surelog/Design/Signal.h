@@ -140,8 +140,8 @@ class Signal final {
   NodeId m_delay;
   NodeId m_drive_strength;
   NodeId m_default_value;
-  VObjectType m_type = VObjectType::slNoType;
-  VObjectType m_direction = VObjectType::slNoType;
+  VObjectType m_type = VObjectType::NO_TYPE;
+  VObjectType m_direction = VObjectType::NO_TYPE;
   ModuleDefinition* m_interfaceDef = nullptr;
   Modport* m_modPort = nullptr;
   const DataType* m_dataType = nullptr;

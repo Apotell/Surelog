@@ -104,22 +104,22 @@ description
 escaped_identifier: ESCAPED_IDENTIFIER;
 
 macro_instance
-  : (Macro_identifier | Macro_Escaped_identifier) Spaces* OPEN_PARENS macro_actual_args CLOSE_PARENS
+  : (MACRO_IDENTIFIER | MACRO_ESCAPED_IDENTIFIER) SPACES* OPEN_PARENS macro_actual_args CLOSE_PARENS
       # MacroInstanceWithArgs
-  | (Macro_identifier | Macro_Escaped_identifier) # MacroInstanceNoArgs
+  | (MACRO_IDENTIFIER | MACRO_ESCAPED_IDENTIFIER) # MacroInstanceNoArgs
   ;
 
 unterminated_string: DOUBLE_QUOTE string_blob* CR;
 
 macro_actual_args: macro_arg* (COMMA macro_arg*)*;
 
-comment: One_line_comment | Block_comment;
+comment: LINE_COMMENT | BLOCK_COMMENT | SYNOPSIS_BLOCK_COMMENT;
 
 integral_number: INTEGRAL_NUMBER;
 
 pound_delay: POUND_DELAY;
 
-pound_pound_delay: Pound_Pound_delay;
+pound_pound_delay: POUND_POUND_DELAY;
 
 macro_definition
   : define_directive
@@ -130,18 +130,18 @@ macro_definition
   ;
 
 include_directive
-  : TICK_INCLUDE Spaces (
-    STRING
-    | Simple_identifier
+  : TICK_INCLUDE SPACES (
+    QUOTED_STRING
+    | SIMPLE_IDENTIFIER
     | ESCAPED_IDENTIFIER
     | macro_instance
   )
   ;
 
-line_directive: TICK_LINE Spaces integral_number STRING Spaces integral_number;
+line_directive: TICK_LINE SPACES integral_number QUOTED_STRING SPACES integral_number;
 
 default_nettype_directive
-  : TICK_DEFAULT_NETTYPE Spaces Simple_identifier
+  : TICK_DEFAULT_NETTYPE SPACES SIMPLE_IDENTIFIER
   ;
 
 sv_file_directive: TICK_FILE__;
@@ -151,23 +151,23 @@ sv_line_directive: TICK_LINE__;
 timescale_directive: TICK_TIMESCALE TIMESCALE;
 
 undef_directive
-  : TICK_UNDEF Spaces (
-    Simple_identifier
+  : TICK_UNDEF SPACES (
+    SIMPLE_IDENTIFIER
     | ESCAPED_IDENTIFIER
     | macro_instance
   )
   ;
 
 ifdef_directive
-  : TICK_IFDEF Spaces (
-    Simple_identifier
+  : TICK_IFDEF SPACES (
+    SIMPLE_IDENTIFIER
     | ESCAPED_IDENTIFIER
     | macro_instance
   )
   ;
 
 ifdef_directive_in_macro_body
-  : TICK_IFDEF Spaces (
+  : TICK_IFDEF SPACES (
     identifier_in_macro_body
     | ESCAPED_IDENTIFIER
     | macro_instance
@@ -175,15 +175,15 @@ ifdef_directive_in_macro_body
   ;
 
 ifndef_directive
-  : TICK_IFNDEF Spaces (
-    Simple_identifier
+  : TICK_IFNDEF SPACES (
+    SIMPLE_IDENTIFIER
     | ESCAPED_IDENTIFIER
     | macro_instance
   )
   ;
 
 ifndef_directive_in_macro_body
-  : TICK_IFNDEF Spaces (
+  : TICK_IFNDEF SPACES (
     identifier_in_macro_body
     | ESCAPED_IDENTIFIER
     | macro_instance
@@ -191,15 +191,15 @@ ifndef_directive_in_macro_body
   ;
 
 elsif_directive
-  : TICK_ELSIF Spaces (
-    Simple_identifier
+  : TICK_ELSIF SPACES (
+    SIMPLE_IDENTIFIER
     | ESCAPED_IDENTIFIER
     | macro_instance
   )
   ;
 
 elsif_directive_in_macro_body
-  : TICK_ELSIF Spaces (
+  : TICK_ELSIF SPACES (
     identifier_in_macro_body
     | ESCAPED_IDENTIFIER
     | macro_instance
@@ -207,15 +207,15 @@ elsif_directive_in_macro_body
   ;
 
 elseif_directive
-  : TICK_ELSEIF Spaces (
-    Simple_identifier
+  : TICK_ELSEIF SPACES (
+    SIMPLE_IDENTIFIER
     | ESCAPED_IDENTIFIER
     | macro_instance
   )
   ;
 
 elseif_directive_in_macro_body
-  : TICK_ELSEIF Spaces (
+  : TICK_ELSEIF SPACES (
     identifier_in_macro_body
     | ESCAPED_IDENTIFIER
     | macro_instance
@@ -225,29 +225,29 @@ elseif_directive_in_macro_body
 else_directive: TICK_ELSE;
 
 endif_directive
-  : TICK_ENDIF Spaces* One_line_comment
+  : TICK_ENDIF SPACES* LINE_COMMENT
   | TICK_ENDIF
   ;
 
 resetall_directive: TICK_RESETALL;
 
-begin_keywords_directive: TICK_BEGIN_KEYWORDS Spaces STRING;
+begin_keywords_directive: TICK_BEGIN_KEYWORDS SPACES QUOTED_STRING;
 
 end_keywords_directive: TICK_END_KEYWORDS;
 
 pragma_directive
-  : TICK_PRAGMA Spaces Simple_identifier (
-    pragma_expression (Special pragma_expression)*
+  : TICK_PRAGMA SPACES SIMPLE_IDENTIFIER (
+    pragma_expression (SPECIAL pragma_expression)*
   )*
   ;
 
-celldefine_directive: TICK_CELLDEFINE Spaces* CR;
+celldefine_directive: TICK_CELLDEFINE SPACES* CR;
 
-endcelldefine_directive: TICK_ENDCELLDEFINE Spaces* CR;
+endcelldefine_directive: TICK_ENDCELLDEFINE SPACES* CR;
 
-protect_directive: TICK_PROTECT Spaces* CR;
+protect_directive: TICK_PROTECT SPACES* CR;
 
-endprotect_directive: TICK_ENDPROTECT Spaces* CR;
+endprotect_directive: TICK_ENDPROTECT SPACES* CR;
 
 protected_directive: TICK_PROTECTED;
 
@@ -286,23 +286,23 @@ accelerate_directive: TICK_ACCELERATE;
 noaccelerate_directive: TICK_NOACCELERATE;
 
 default_trireg_strength_directive
-  : TICK_DEFAULT_TRIREG_STRENGTH Spaces integral_number
+  : TICK_DEFAULT_TRIREG_STRENGTH SPACES integral_number
   ;
 
 default_decay_time_directive
-  : TICK_DEFAULT_DECAY_TIME Spaces (
+  : TICK_DEFAULT_DECAY_TIME SPACES (
     integral_number
-    | Simple_identifier
-    | Fixed_point_number
+    | SIMPLE_IDENTIFIER
+    | FIXED_POINT_NUMBER
   )
   ;
 
 unconnected_drive_directive
-  : TICK_UNCONNECTED_DRIVE Spaces Simple_identifier
+  : TICK_UNCONNECTED_DRIVE SPACES SIMPLE_IDENTIFIER
   ;
 
 nounconnected_drive_directive
-  : TICK_NOUNCONNECTED_DRIVE Spaces* CR
+  : TICK_NOUNCONNECTED_DRIVE SPACES* CR
   ;
 
 delay_mode_distributed_directive: TICK_DELAY_MODE_DISTRIBUTED;
@@ -337,54 +337,54 @@ config: CONFIG;
 endconfig: ENDCONFIG;
 
 define_directive
-  : TICK_DEFINE Spaces (Simple_identifier | ESCAPED_IDENTIFIER) Spaces* CR
+  : TICK_DEFINE SPACES (SIMPLE_IDENTIFIER | ESCAPED_IDENTIFIER) SPACES* CR
   ;
 
 multiline_no_args_macro_definition
-  : TICK_DEFINE Spaces (Simple_identifier | ESCAPED_IDENTIFIER) Spaces*
+  : TICK_DEFINE SPACES (SIMPLE_IDENTIFIER | ESCAPED_IDENTIFIER) SPACES*
       escaped_macro_definition_body
   ;
 
 multiline_args_macro_definition
-  : TICK_DEFINE Spaces (Simple_identifier | ESCAPED_IDENTIFIER) macro_arguments Spaces*
+  : TICK_DEFINE SPACES (SIMPLE_IDENTIFIER | ESCAPED_IDENTIFIER) macro_arguments SPACES*
       escaped_macro_definition_body
   ;
 
 simple_no_args_macro_definition
-  : TICK_DEFINE Spaces (Simple_identifier | ESCAPED_IDENTIFIER) Spaces simple_macro_definition_body
-      (CR | One_line_comment)
-  | TICK_DEFINE Spaces (Simple_identifier | ESCAPED_IDENTIFIER) Spaces* CR
+  : TICK_DEFINE SPACES (SIMPLE_IDENTIFIER | ESCAPED_IDENTIFIER) SPACES simple_macro_definition_body
+      (CR | LINE_COMMENT)
+  | TICK_DEFINE SPACES (SIMPLE_IDENTIFIER | ESCAPED_IDENTIFIER) SPACES* CR
   ;
 
 simple_args_macro_definition
-  : TICK_DEFINE Spaces (Simple_identifier | ESCAPED_IDENTIFIER) macro_arguments Spaces
-      simple_macro_definition_body (CR | One_line_comment)
-  | TICK_DEFINE Spaces (Simple_identifier | ESCAPED_IDENTIFIER) macro_arguments Spaces* CR
+  : TICK_DEFINE SPACES (SIMPLE_IDENTIFIER | ESCAPED_IDENTIFIER) macro_arguments SPACES
+      simple_macro_definition_body (CR | LINE_COMMENT)
+  | TICK_DEFINE SPACES (SIMPLE_IDENTIFIER | ESCAPED_IDENTIFIER) macro_arguments SPACES* CR
   ;
 
-identifier_in_macro_body: (Simple_identifier TICK_TICK?)*;
+identifier_in_macro_body: (SIMPLE_IDENTIFIER TICK_TICK?)*;
 
 simple_no_args_macro_definition_in_macro_body
-  : TICK_DEFINE Spaces (
+  : TICK_DEFINE SPACES (
     identifier_in_macro_body
     | ESCAPED_IDENTIFIER
-  ) Spaces simple_macro_definition_body_in_macro_body
-  | TICK_DEFINE Spaces (
+  ) SPACES simple_macro_definition_body_in_macro_body
+  | TICK_DEFINE SPACES (
     identifier_in_macro_body
     | ESCAPED_IDENTIFIER
-  ) Spaces*
-  | TICK_DEFINE Spaces (
+  ) SPACES*
+  | TICK_DEFINE SPACES (
     identifier_in_macro_body
     | ESCAPED_IDENTIFIER
   ) TICK_VARIABLE simple_macro_definition_body_in_macro_body
   ;
 
 simple_args_macro_definition_in_macro_body
-  : TICK_DEFINE Spaces (
+  : TICK_DEFINE SPACES (
     identifier_in_macro_body
     | ESCAPED_IDENTIFIER
-  ) macro_arguments Spaces simple_macro_definition_body_in_macro_body
-  | TICK_DEFINE Spaces (
+  ) macro_arguments SPACES simple_macro_definition_body_in_macro_body
+  | TICK_DEFINE SPACES (
     identifier_in_macro_body
     | ESCAPED_IDENTIFIER
   ) macro_arguments
@@ -460,10 +460,10 @@ directive_in_macro
 macro_arguments
   : OPEN_PARENS (
     (
-      Spaces* Simple_identifier Spaces* (ASSIGN_OP default_value*)*
+      SPACES* SIMPLE_IDENTIFIER SPACES* (ASSIGN_OP default_value*)*
     ) (
-      COMMA Spaces* (
-        Simple_identifier Spaces* (ASSIGN_OP default_value*)*
+      COMMA SPACES* (
+        SIMPLE_IDENTIFIER SPACES* (ASSIGN_OP default_value*)*
       )
     )*
   )* CLOSE_PARENS
@@ -477,10 +477,10 @@ escaped_macro_definition_body
 escaped_macro_definition_body_alt1
   : (
     unterminated_string
-    | Macro_identifier
-    | Macro_Escaped_identifier
+    | MACRO_IDENTIFIER
+    | MACRO_ESCAPED_IDENTIFIER
     | escaped_identifier
-    | Simple_identifier
+    | SIMPLE_IDENTIFIER
     | integral_number
     | TEXT_CR
     | pound_delay
@@ -493,28 +493,28 @@ escaped_macro_definition_body_alt1
     | DOUBLE_QUOTE
     | TICK_VARIABLE
     | directive_in_macro
-    | Spaces
-    | Fixed_point_number
-    | STRING
+    | SPACES
+    | FIXED_POINT_NUMBER
+    | QUOTED_STRING
     | comment
     | TICK_QUOTE
     | TICK_BACKSLASH_TICK_QUOTE
     | TICK_TICK
-    | Special
+    | SPECIAL
     | OPEN_CURLY
     | CLOSE_CURLY
     | OPEN_BRACKET
     | CLOSE_BRACKET
-  )*? ESCAPED_CR Spaces* (CR | EOF)
+  )*? ESCAPED_CR SPACES* (CR | EOF)
   ;
 
 escaped_macro_definition_body_alt2
   : (
     unterminated_string
-    | Macro_identifier
-    | Macro_Escaped_identifier
+    | MACRO_IDENTIFIER
+    | MACRO_ESCAPED_IDENTIFIER
     | escaped_identifier
-    | Simple_identifier
+    | SIMPLE_IDENTIFIER
     | integral_number
     | TEXT_CR
     | pound_delay
@@ -527,28 +527,28 @@ escaped_macro_definition_body_alt2
     | DOUBLE_QUOTE
     | TICK_VARIABLE
     | directive_in_macro
-    | Spaces
-    | Fixed_point_number
-    | STRING
+    | SPACES
+    | FIXED_POINT_NUMBER
+    | QUOTED_STRING
     | comment
     | TICK_QUOTE
     | TICK_BACKSLASH_TICK_QUOTE
     | TICK_TICK
-    | Special
+    | SPECIAL
     | OPEN_CURLY
     | CLOSE_CURLY
     | OPEN_BRACKET
     | CLOSE_BRACKET
-  )*? (CR Spaces* | EOF)
+  )*? (CR SPACES* | EOF)
   ;
 
 simple_macro_definition_body
   : (
     unterminated_string
-    | Macro_identifier
-    | Macro_Escaped_identifier
+    | MACRO_IDENTIFIER
+    | MACRO_ESCAPED_IDENTIFIER
     | escaped_identifier
-    | Simple_identifier
+    | SIMPLE_IDENTIFIER
     | integral_number
     | pound_delay
     | pound_pound_delay
@@ -559,14 +559,14 @@ simple_macro_definition_body
     | ASSIGN_OP
     | DOUBLE_QUOTE
     | TICK_VARIABLE
-    | Spaces
-    | Fixed_point_number
-    | STRING
+    | SPACES
+    | FIXED_POINT_NUMBER
+    | QUOTED_STRING
     | comment
     | TICK_QUOTE
     | TICK_BACKSLASH_TICK_QUOTE
     | TICK_TICK
-    | Special
+    | SPECIAL
     | OPEN_CURLY
     | CLOSE_CURLY
     | OPEN_BRACKET
@@ -579,10 +579,10 @@ simple_macro_definition_body
 simple_macro_definition_body_in_macro_body
   : (
     unterminated_string
-    | Macro_identifier
-    | Macro_Escaped_identifier
+    | MACRO_IDENTIFIER
+    | MACRO_ESCAPED_IDENTIFIER
     | escaped_identifier
-    | Simple_identifier
+    | SIMPLE_IDENTIFIER
     | integral_number
     | pound_delay
     | pound_pound_delay
@@ -593,14 +593,14 @@ simple_macro_definition_body_in_macro_body
     | ASSIGN_OP
     | DOUBLE_QUOTE
     | TICK_VARIABLE
-    | Spaces
-    | Fixed_point_number
-    | STRING
+    | SPACES
+    | FIXED_POINT_NUMBER
+    | QUOTED_STRING
     | comment
     | TICK_QUOTE
     | TICK_BACKSLASH_TICK_QUOTE
     | TICK_TICK
-    | Special
+    | SPECIAL
     | OPEN_CURLY
     | CLOSE_CURLY
     | OPEN_BRACKET
@@ -609,11 +609,11 @@ simple_macro_definition_body_in_macro_body
   ;
 
 pragma_expression
-  : Simple_identifier
+  : SIMPLE_IDENTIFIER
   | integral_number
-  | Spaces
-  | Fixed_point_number
-  | STRING
+  | SPACES
+  | FIXED_POINT_NUMBER
+  | QUOTED_STRING
   | OPEN_CURLY
   | CLOSE_CURLY
   | OPEN_BRACKET
@@ -626,16 +626,16 @@ pragma_expression
   | escaped_identifier
   | pound_delay
   | pound_pound_delay
-  | Special
+  | SPECIAL
   | ANY
   ;
 
 macro_arg
-  : Simple_identifier
+  : SIMPLE_IDENTIFIER
   | integral_number
-  | Spaces
-  | Fixed_point_number
-  | STRING
+  | SPACES
+  | FIXED_POINT_NUMBER
+  | QUOTED_STRING
   | paired_parens
   | ASSIGN_OP
   | DOUBLE_QUOTE
@@ -648,18 +648,18 @@ macro_arg
   | comment
   | pound_delay
   | pound_pound_delay
-  | Special
+  | SPECIAL
   | ANY
   ;
 
 paired_parens
   : (
     OPEN_PARENS (
-      Simple_identifier
+      SIMPLE_IDENTIFIER
       | integral_number
-      | Spaces
-      | Fixed_point_number
-      | STRING
+      | SPACES
+      | FIXED_POINT_NUMBER
+      | QUOTED_STRING
       | COMMA
       | ASSIGN_OP
       | DOUBLE_QUOTE
@@ -669,17 +669,17 @@ paired_parens
       | paired_parens
       | escaped_identifier
       | comment
-      | Special
+      | SPECIAL
       | ANY
     )* CLOSE_PARENS
   )
   | (
     OPEN_CURLY (
-      Simple_identifier
+      SIMPLE_IDENTIFIER
       | integral_number
-      | Spaces
-      | Fixed_point_number
-      | STRING
+      | SPACES
+      | FIXED_POINT_NUMBER
+      | QUOTED_STRING
       | COMMA
       | ASSIGN_OP
       | DOUBLE_QUOTE
@@ -688,17 +688,17 @@ paired_parens
       | paired_parens
       | escaped_identifier
       | comment
-      | Special
+      | SPECIAL
       | ANY
     )* CLOSE_CURLY
   )
   | (
     OPEN_BRACKET (
-      Simple_identifier
+      SIMPLE_IDENTIFIER
       | integral_number
-      | Spaces
-      | Fixed_point_number
-      | STRING
+      | SPACES
+      | FIXED_POINT_NUMBER
+      | QUOTED_STRING
       | COMMA
       | ASSIGN_OP
       | DOUBLE_QUOTE
@@ -707,19 +707,19 @@ paired_parens
       | paired_parens
       | escaped_identifier
       | comment
-      | Special
+      | SPECIAL
       | ANY
     )* CLOSE_BRACKET
   )
   ;
 
 text_blob
-  : Simple_identifier
+  : SIMPLE_IDENTIFIER
   | CR
-  | Spaces
-  | Fixed_point_number
+  | SPACES
+  | FIXED_POINT_NUMBER
   | ESCAPED_CR
-  | STRING
+  | QUOTED_STRING
   | OPEN_PARENS
   | CLOSE_PARENS
   | COMMA
@@ -737,18 +737,18 @@ text_blob
   | TICK_QUOTE
   | TICK_BACKSLASH_TICK_QUOTE
   | TEXT_CR
-  | Special
+  | SPECIAL
   | ANY
   ;
 
-string: STRING;
+string: QUOTED_STRING;
 
 default_value
-  : Simple_identifier
+  : SIMPLE_IDENTIFIER
   | integral_number
-  | Spaces
-  | Fixed_point_number
-  | STRING
+  | SPACES
+  | FIXED_POINT_NUMBER
+  | QUOTED_STRING
   | OPEN_CURLY
   | CLOSE_CURLY
   | OPEN_BRACKET
@@ -756,15 +756,15 @@ default_value
   | paired_parens
   | escaped_identifier
   | macro_instance
-  | Special
+  | SPECIAL
   | ANY
   ;
 
 string_blob
-  : Simple_identifier
+  : SIMPLE_IDENTIFIER
   | integral_number
-  | Spaces
-  | Fixed_point_number
+  | SPACES
+  | FIXED_POINT_NUMBER
   | ESCAPED_CR
   | OPEN_PARENS
   | CLOSE_PARENS
@@ -780,6 +780,6 @@ string_blob
   | pound_delay
   | pound_pound_delay
   | TEXT_CR
-  | Special
+  | SPECIAL
   | ANY
   ;

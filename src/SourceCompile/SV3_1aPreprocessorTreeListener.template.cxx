@@ -34,7 +34,333 @@
 #include <Surelog/Utils/StringUtils.h>
 #include <parser/SV3_1aPpParser.h>
 
+#include <map>
+
 namespace SURELOG {
+using operators_t = std::map<std::string_view, VObjectType>;
+using reserved_words_t = std::map<std::string_view, VObjectType>;
+
+static const operators_t kOperators = {
+    {"=", VObjectType::ASSIGN_OP},
+    {"+=", VObjectType::ADD_ASSIGN},
+    {"-=", VObjectType::SUB_ASSIGN},
+    {"*=", VObjectType::MULT_ASSIGN},
+    {"/=", VObjectType::DIV_ASSIGN},
+    {"%=", VObjectType::MODULO_ASSIGN},
+    {"&=", VObjectType::BITW_AND_ASSIGN},
+    {"|=", VObjectType::BITW_OR_ASSIGN},
+    {"^=", VObjectType::BITW_XOR_ASSIGN},
+    {"<<=", VObjectType::BITW_LEFT_SHIFT_ASSIGN},
+    {">>=", VObjectType::BITW_RIGHT_SHIFT_ASSIGN},
+    {"<<<=", VObjectType::ARITH_SHIFT_LEFT_ASSIGN},
+    {">>>=", VObjectType::ARITH_SHIFT_RIGHT_ASSIGN},
+    {"+", VObjectType::PLUS},
+    {"-", VObjectType::MINUS},
+    {"!", VObjectType::BANG},
+    {"~", VObjectType::TILDA},
+    {"&", VObjectType::BITW_AND},
+    {"~&", VObjectType::REDUCTION_NAND},
+    {"|", VObjectType::BITW_OR},
+    {"~|", VObjectType::REDUCTION_NOR},
+    {"^", VObjectType::BITW_XOR},
+    {"~^", VObjectType::REDUCTION_XNOR2},
+    {"^~", VObjectType::REDUCTION_XNOR1},
+    {"*", VObjectType::STAR},
+    {"/", VObjectType::DIV},
+    {"%", VObjectType::PERCENT},
+    {"==", VObjectType::EQUIV},
+    {"!=", VObjectType::NOTEQUAL},
+    {"===", VObjectType::FOUR_STATE_LOGIC_EQUAL},
+    {"!==", VObjectType::FOUR_STATE_LOGIC_NOTEQUAL},
+    {"==?", VObjectType::BINARY_WILDCARD_EQUAL},
+    {"!=?", VObjectType::BINARY_WILDCARD_NOTEQUAL},
+    {"&&", VObjectType::LOGICAL_AND},
+    {"||", VObjectType::LOGICAL_OR},
+    {"**", VObjectType::STARSTAR},
+    {"<", VObjectType::LESS},
+    {"<=", VObjectType::LESS_EQUAL},
+    {">", VObjectType::GREATER},
+    {">=", VObjectType::GREATER_EQUAL},
+    {">>", VObjectType::SHIFT_RIGHT},
+    {"<<", VObjectType::SHIFT_LEFT},
+    {">>>", VObjectType::ARITH_SHIFT_RIGHT},
+    {"<<<", VObjectType::ARITH_SHIFT_LEFT},
+    {"->", VObjectType::IMPLY},
+    {"<->", VObjectType::EQUIVALENCE},
+    {"++", VObjectType::PLUSPLUS},
+    {"--", VObjectType::MINUSMINUS},
+    {"*>", VObjectType::FULL_CONN_OP},
+    {"&&&", VObjectType::COND_PRED_OP},
+    {"->>", VObjectType::NON_BLOCKING_TRIGGER_EVENT_OP},
+    {"+:", VObjectType::INC_PART_SELECT_OP},
+    {"-:", VObjectType::DEC_PART_SELECT_OP},
+    {":=", VObjectType::ASSIGN_VALUE},
+    {"*::*", VObjectType::STARCOLONCOLONSTAR},
+    {"=>", VObjectType::TRANSITION_OP},
+    {"@", VObjectType::AT},
+    {"|->", VObjectType::OVERLAP_IMPLY},
+    {"|=>", VObjectType::NON_OVERLAP_IMPLY},
+    {"#-#", VObjectType::OVERLAPPED},
+    {"[*", VObjectType::CONSECUTIVE_REP},
+    {"[=", VObjectType::NON_CONSECUTIVE_REP},
+    {"[->", VObjectType::GOTO_REP},
+    {":", VObjectType::COLON},
+    {"::", VObjectType::COLONCOLON},
+    {"?", VObjectType::QMARK},
+    {"#=#", VObjectType::NONOVERLAPPED},
+    {"#", VObjectType::POUND_DELAY},
+    {"##", VObjectType::POUND_POUND_DELAY}};
+
+static const reserved_words_t kReservedWords = {
+    {"accept_on", VObjectType::ACCEPT_ON},
+    {"alias", VObjectType::ALIAS},
+    {"always", VObjectType::ALWAYS},
+    {"always_comb", VObjectType::ALWAYS_COMB},
+    {"always_ff", VObjectType::ALWAYS_FF},
+    {"always_latch", VObjectType::ALWAYS_LATCH},
+    {"and", VObjectType::AND},
+    {"assert", VObjectType::ASSERT},
+    {"assign", VObjectType::ASSIGN},
+    {"assume", VObjectType::ASSUME},
+    {"automatic", VObjectType::AUTOMATIC},
+    {"before", VObjectType::BEFORE},
+    {"begin", VObjectType::BEGIN},
+    {"bind", VObjectType::BIND},
+    {"bins", VObjectType::BINS},
+    {"binsof", VObjectType::BINSOF},
+    {"bit", VObjectType::BIT},
+    {"break", VObjectType::BREAK},
+    {"buf", VObjectType::BUF},
+    {"bufif0", VObjectType::BUFIF0},
+    {"bufif1", VObjectType::BUFIF1},
+    {"byte", VObjectType::BYTE},
+    {"case", VObjectType::CASE},
+    {"casex", VObjectType::CASEX},
+    {"casez", VObjectType::CASEZ},
+    {"cell", VObjectType::CELL},
+    {"chandle", VObjectType::CHANDLE},
+    {"checker", VObjectType::CHECKER},
+    {"class", VObjectType::CLASS},
+    {"clocking", VObjectType::CLOCKING},
+    {"cmos", VObjectType::CMOS},
+    {"config", VObjectType::CONFIG},
+    {"const", VObjectType::CONST},
+    {"constraint", VObjectType::CONSTRAINT},
+    {"context", VObjectType::CONTEXT},
+    {"continue", VObjectType::CONTINUE},
+    {"cover", VObjectType::COVER},
+    {"covergroup", VObjectType::COVERGROUP},
+    {"coverpoint", VObjectType::COVERPOINT},
+    {"cross", VObjectType::CROSS},
+    {"deassign", VObjectType::DEASSIGN},
+    {"default", VObjectType::DEFAULT},
+    {"defparam", VObjectType::DEFPARAM},
+    {"design", VObjectType::DESIGN},
+    {"disable", VObjectType::DISABLE},
+    {"dist", VObjectType::DIST},
+    {"do", VObjectType::DO},
+    {"edge", VObjectType::EDGE},
+    {"else", VObjectType::ELSE},
+    {"end", VObjectType::END},
+    {"endcase", VObjectType::ENDCASE},
+    {"endchecker", VObjectType::ENDCHECKER},
+    {"endclass", VObjectType::ENDCLASS},
+    {"endclocking", VObjectType::ENDCLOCKING},
+    {"endconfig", VObjectType::ENDCONFIG},
+    {"endfunction", VObjectType::ENDFUNCTION},
+    {"endgenerate", VObjectType::ENDGENERATE},
+    {"endgroup", VObjectType::ENDGROUP},
+    {"endinterface", VObjectType::ENDINTERFACE},
+    {"endmodule", VObjectType::ENDMODULE},
+    {"endpackage", VObjectType::ENDPACKAGE},
+    {"endprimitive", VObjectType::ENDPRIMITIVE},
+    {"endprogram", VObjectType::ENDPROGRAM},
+    {"endproperty", VObjectType::ENDPROPERTY},
+    {"endspecify", VObjectType::ENDSPECIFY},
+    {"endsequence", VObjectType::ENDSEQUENCE},
+    {"endtable", VObjectType::ENDTABLE},
+    {"endtask", VObjectType::ENDTASK},
+    {"enum", VObjectType::ENUM},
+    {"event", VObjectType::EVENT},
+    {"eventually", VObjectType::EVENTUALLY},
+    {"expect", VObjectType::EXPECT},
+    {"export", VObjectType::EXPORT},
+    {"extends", VObjectType::EXTENDS},
+    {"extern", VObjectType::EXTERN},
+    {"final", VObjectType::FINAL},
+    {"first_match", VObjectType::FIRST_MATCH},
+    {"for", VObjectType::FOR},
+    {"force", VObjectType::FORCE},
+    {"foreach", VObjectType::FOREACH},
+    {"forever", VObjectType::FOREVER},
+    {"fork", VObjectType::FORK},
+    {"forkjoin", VObjectType::FORKJOIN},
+    {"function", VObjectType::FUNCTION},
+    {"generate", VObjectType::GENERATE},
+    {"genvar", VObjectType::GENVAR},
+    {"global", VObjectType::GLOBAL},
+    {"highz0", VObjectType::HIGHZ0},
+    {"highz1", VObjectType::HIGHZ1},
+    {"if", VObjectType::IF},
+    {"iff", VObjectType::IFF},
+    {"ifnone", VObjectType::IFNONE},
+    {"ignore_bins", VObjectType::IGNORE_BINS},
+    {"illegal_bins", VObjectType::ILLEGAL_BINS},
+    {"implements", VObjectType::IMPLEMENTS},
+    {"implies", VObjectType::IMPLIES},
+    {"import", VObjectType::IMPORT},
+    {"incdir", VObjectType::INCDIR},
+    {"include", VObjectType::INCLUDE},
+    {"initial", VObjectType::INITIAL},
+    {"inout", VObjectType::INOUT},
+    {"input", VObjectType::INPUT},
+    {"inside", VObjectType::INSIDE},
+    {"instance", VObjectType::INSTANCE},
+    {"int", VObjectType::INT},
+    {"integer", VObjectType::INTEGER},
+    {"interconnect", VObjectType::INTERCONNECT},
+    {"interface", VObjectType::INTERFACE},
+    {"intersect", VObjectType::INTERSECT},
+    {"join", VObjectType::JOIN},
+    {"join_any", VObjectType::JOIN_ANY},
+    {"join_none", VObjectType::JOIN_NONE},
+    {"large", VObjectType::LARGE},
+    {"let", VObjectType::LET},
+    {"liblist", VObjectType::LIBLIST},
+    {"library", VObjectType::LIBRARY},
+    {"local", VObjectType::LOCAL},
+    {"localparam", VObjectType::LOCALPARAM},
+    {"logic", VObjectType::LOGIC},
+    {"longint", VObjectType::LONGINT},
+    {"macromodule", VObjectType::MACROMODULE},
+    {"matches", VObjectType::MATCHES},
+    {"medium", VObjectType::MEDIUM},
+    {"modport", VObjectType::MODPORT},
+    {"module", VObjectType::MODULE},
+    {"nand", VObjectType::NAND},
+    {"negedge", VObjectType::NEGEDGE},
+    {"nettype", VObjectType::NETTYPE},
+    {"new", VObjectType::NEW},
+    {"nexttime", VObjectType::NEXTTIME},
+    {"nmos", VObjectType::NMOS},
+    {"nor", VObjectType::NOR},
+    {"noshowcancelled", VObjectType::NOSHOWCANCELLED},
+    {"not", VObjectType::NOT},
+    {"notif0", VObjectType::NOTIF0},
+    {"notif1", VObjectType::NOTIF1},
+    {"null", VObjectType::NULL_KEYWORD},
+    {"or", VObjectType::OR},
+    {"output", VObjectType::OUTPUT},
+    {"package", VObjectType::PACKAGE},
+    {"packed", VObjectType::PACKED},
+    {"parameter", VObjectType::PARAMETER},
+    {"pmos", VObjectType::PMOS},
+    {"posedge", VObjectType::POSEDGE},
+    {"primitive", VObjectType::PRIMITIVE},
+    {"priority", VObjectType::PRIORITY},
+    {"program", VObjectType::PROGRAM},
+    {"property", VObjectType::PROPERTY},
+    {"protected", VObjectType::PROTECTED},
+    {"pull0", VObjectType::PULL0},
+    {"pull1", VObjectType::PULL1},
+    {"pulldown", VObjectType::PULLDOWN},
+    {"pullup", VObjectType::PULLUP},
+    {"pulsestyle_ondetect", VObjectType::PULSESTYLE_ONDETECT},
+    {"pulsestyle_onevent", VObjectType::PULSESTYLE_ONEVENT},
+    {"pure", VObjectType::PURE},
+    {"rand", VObjectType::RAND},
+    {"randc", VObjectType::RANDC},
+    {"randcase", VObjectType::RANDCASE},
+    {"randsequence", VObjectType::RANDSEQUENCE},
+    {"rcmos", VObjectType::RCMOS},
+    {"real", VObjectType::REAL},
+    {"realtime", VObjectType::REALTIME},
+    {"ref", VObjectType::REF},
+    {"reg", VObjectType::REG},
+    {"reject_on", VObjectType::REJECT_ON},
+    {"release", VObjectType::RELEASE},
+    {"repeat", VObjectType::REPEAT},
+    {"restrict", VObjectType::RESTRICT},
+    {"return", VObjectType::RETURN},
+    {"rnmos", VObjectType::RNMOS},
+    {"rpmos", VObjectType::RPMOS},
+    {"rtran", VObjectType::RTRAN},
+    {"rtranif0", VObjectType::RTRANIF0},
+    {"rtranif1", VObjectType::RTRANIF1},
+    {"s_always", VObjectType::S_ALWAYS},
+    {"s_eventually", VObjectType::S_EVENTUALLY},
+    {"s_nexttime", VObjectType::S_NEXTTIME},
+    {"s_until", VObjectType::S_UNTIL},
+    {"s_until_with", VObjectType::S_UNTIL_WITH},
+    {"scalared", VObjectType::SCALARED},
+    {"sequence", VObjectType::SEQUENCE},
+    {"shortint", VObjectType::SHORTINT},
+    {"shortreal", VObjectType::SHORTREAL},
+    {"showcancelled", VObjectType::SHOWCANCELLED},
+    {"signed", VObjectType::SIGNED},
+    {"small", VObjectType::SMALL},
+    {"soft", VObjectType::SOFT},
+    {"solve", VObjectType::SOLVE},
+    {"specify", VObjectType::SPECIFY},
+    {"specparam", VObjectType::SPECPARAM},
+    {"static", VObjectType::STATIC},
+    {"string", VObjectType::STRING},
+    {"strong", VObjectType::STRONG},
+    {"strong0", VObjectType::STRONG0},
+    {"strong1", VObjectType::STRONG1},
+    {"struct", VObjectType::STRUCT},
+    {"super", VObjectType::SUPER},
+    {"supply0", VObjectType::SUPPLY0},
+    {"supply1", VObjectType::SUPPLY1},
+    {"sync_accept_on", VObjectType::SYNC_ACCEPT_ON},
+    {"sync_reject_on", VObjectType::SYNC_REJECT_ON},
+    {"table", VObjectType::TABLE},
+    {"tagged", VObjectType::TAGGED},
+    {"task", VObjectType::TASK},
+    {"this", VObjectType::THIS},
+    {"throughout", VObjectType::THROUGHOUT},
+    {"time", VObjectType::TIME},
+    {"timeprecision", VObjectType::TIMEPRECISION},
+    {"timeunit", VObjectType::TIMEUNIT},
+    {"tran", VObjectType::TRAN},
+    {"tranif0", VObjectType::TRANIF0},
+    {"tranif1", VObjectType::TRANIF1},
+    {"tri", VObjectType::TRI},
+    {"tri0", VObjectType::TRI0},
+    {"tri1", VObjectType::TRI1},
+    {"triand", VObjectType::TRIAND},
+    {"trior", VObjectType::TRIOR},
+    {"trireg", VObjectType::TRIREG},
+    {"type", VObjectType::TYPE},
+    {"typedef", VObjectType::TYPEDEF},
+    {"union", VObjectType::UNION},
+    {"unique", VObjectType::UNIQUE},
+    {"unique0", VObjectType::UNIQUE0},
+    {"unsigned", VObjectType::UNSIGNED},
+    {"until", VObjectType::UNTIL},
+    {"until_with", VObjectType::UNTIL_WITH},
+    {"untyped", VObjectType::UNTYPED},
+    {"use", VObjectType::USE},
+    {"uwire", VObjectType::UWIRE},
+    {"var", VObjectType::VAR},
+    {"vectored", VObjectType::VECTORED},
+    {"virtual", VObjectType::VIRTUAL},
+    {"void", VObjectType::VOID},
+    {"wait", VObjectType::WAIT},
+    {"wait_order", VObjectType::WAIT_ORDER},
+    {"wand", VObjectType::WAND},
+    {"weak", VObjectType::WEAK},
+    {"weak0", VObjectType::WEAK0},
+    {"weak1", VObjectType::WEAK1},
+    {"while", VObjectType::WHILE},
+    {"wildcard", VObjectType::WILDCARD},
+    {"wire", VObjectType::WIRE},
+    {"with", VObjectType::WITH},
+    {"within", VObjectType::WITHIN},
+    {"wor", VObjectType::WOR},
+    {"xnor", VObjectType::XNOR},
+    {"xor", VObjectType::XOR}};
+
 SV3_1aPreprocessorTreeListener::SV3_1aPreprocessorTreeListener(
     Session *session, PreprocessFile *pp, antlr4::CommonTokenStream *tokens,
     PreprocessFile::SpecialInstructions &instructions)
@@ -46,12 +372,19 @@ SV3_1aPreprocessorTreeListener::SV3_1aPreprocessorTreeListener(
   } else {
     m_fileContent = m_pp->getFileContent();
   }
+
+  std::fill(m_charsInOperator.begin(), m_charsInOperator.end(), false);
+  for (const auto &[text, _] : kOperators) {
+    for (char c : text) {
+      m_charsInOperator[c] = true;
+    }
+  }
 }
 
-NodeId SV3_1aPreprocessorTreeListener::addVObject(antlr4::tree::TerminalNode *node,
-                                             VObjectType objectType) {
+NodeId SV3_1aPreprocessorTreeListener::addVObject(
+    antlr4::tree::TerminalNode *node, VObjectType objectType) {
   NodeId nodeId;
-  if (objectType == VObjectType::ppOne_line_comment) {
+  if (objectType == VObjectType::LINE_COMMENT) {
     const std::string text = node->getText();
     const LineColumn lc = ParseUtils::getLineColumn(node->getSymbol());
 
@@ -63,7 +396,7 @@ NodeId SV3_1aPreprocessorTreeListener::addVObject(antlr4::tree::TerminalNode *no
     }
 
     if (!trimmed.empty()) {
-      nodeId = addVObject(node, trimmed, VObjectType::paOne_line_comment);
+      nodeId = addVObject(node, trimmed, VObjectType::LINE_COMMENT);
       // Adjust the end location of the object
       VObject *const object = m_fileContent->MutableObject(nodeId);
       --object->m_endLine;
@@ -71,7 +404,7 @@ NodeId SV3_1aPreprocessorTreeListener::addVObject(antlr4::tree::TerminalNode *no
           lc.second + trimmed.length();
     }
     if (hasCR) {
-      nodeId = addVObject(node, "\n", VObjectType::ppCR);
+      nodeId = addVObject(node, "\n", VObjectType::CR);
       VObject *const object = m_fileContent->MutableObject(nodeId);
       object->m_startColumn = object->m_ppStartColumn =
           lc.second + trimmed.length();
@@ -111,7 +444,7 @@ void SV3_1aPreprocessorTreeListener::appendPreprocEnd() {
   if (m_pp != m_pp->getSourceFile()) return;
 
   const NodeId parentId = m_fileContent->addObject(
-      BadSymbolId, BadPathId, VObjectType::paPREPROC_END, 0, 0, 0, 0);
+      BadSymbolId, BadPathId, VObjectType::PREPROC_END, 0, 0, 0, 0);
   m_pp->append(StrCat(kPreprocEndPrefix, parentId, kPreprocEndSuffix));
 
   std::vector<VObject> &objects = *m_fileContent->mutableVObjects();
@@ -228,7 +561,7 @@ void SV3_1aPreprocessorTreeListener::enterIfdef_directive(
   std::string macroName;
   LineColumn lc = ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
   if (antlr4::tree::TerminalNode *const simpleIdentifierNode =
-          ctx->Simple_identifier()) {
+          ctx->SIMPLE_IDENTIFIER()) {
     lc = ParseUtils::getLineColumn(simpleIdentifierNode);
     macroName = simpleIdentifierNode->getText();
   } else if (antlr4::tree::TerminalNode *const escapedIdentifierNode =
@@ -297,7 +630,7 @@ void SV3_1aPreprocessorTreeListener::enterIfndef_directive(
   std::string macroName;
   LineColumn lc = ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
   if (antlr4::tree::TerminalNode *const simpleIdentifierNode =
-          ctx->Simple_identifier()) {
+          ctx->SIMPLE_IDENTIFIER()) {
     lc = ParseUtils::getLineColumn(simpleIdentifierNode);
     macroName = simpleIdentifierNode->getText();
   } else if (antlr4::tree::TerminalNode *const escapedIdentifierNode =
@@ -395,7 +728,7 @@ void SV3_1aPreprocessorTreeListener::enterElsif_directive(
   std::string macroName;
   LineColumn lc = ParseUtils::getLineColumn(m_pp->getTokenStream(), ctx);
   if (antlr4::tree::TerminalNode *const simpleIdentifierNode =
-          ctx->Simple_identifier()) {
+          ctx->SIMPLE_IDENTIFIER()) {
     lc = ParseUtils::getLineColumn(simpleIdentifierNode);
     macroName = simpleIdentifierNode->getText();
   } else if (antlr4::tree::TerminalNode *const escapedIdentifierNode =
@@ -563,7 +896,7 @@ void SV3_1aPreprocessorTreeListener::enterInclude_directive(
   LineColumn elc = ParseUtils::getEndLineColumn(m_pp->getTokenStream(), ctx);
 
   std::string fileName;
-  if (antlr4::tree::TerminalNode *const stringNode = ctx->STRING()) {
+  if (antlr4::tree::TerminalNode *const stringNode = ctx->QUOTED_STRING()) {
     fileName = stringNode->getText();
     slc = ParseUtils::getLineColumn(stringNode);
     elc = ParseUtils::getEndLineColumn(stringNode);
@@ -720,10 +1053,10 @@ void SV3_1aPreprocessorTreeListener::enterMacroInstanceWithArgs(
   }
 
   std::string macroName;
-  if (antlr4::tree::TerminalNode *const identifier = ctx->Macro_identifier()) {
+  if (antlr4::tree::TerminalNode *const identifier = ctx->MACRO_IDENTIFIER()) {
     macroName = identifier->getText();
   } else if (antlr4::tree::TerminalNode *escapedIdentifier =
-                 ctx->Macro_Escaped_identifier()) {
+                 ctx->MACRO_ESCAPED_IDENTIFIER()) {
     macroName = escapedIdentifier->getText();
     std::string_view svname = macroName;
     svname.remove_prefix(1);
@@ -731,8 +1064,15 @@ void SV3_1aPreprocessorTreeListener::enterMacroInstanceWithArgs(
   }
   macroName.erase(macroName.begin());
 
-  std::vector<antlr4::tree::ParseTree *> tokens =
-      ParseUtils::getTopTokenList(ctx->macro_actual_args());
+  std::vector<antlr4::tree::ParseTree *> tokens;
+  for (antlr4::tree::ParseTree *child : ctx->macro_actual_args()->children) {
+    if (child->getTreeType() == antlr4::tree::ParseTreeType::TERMINAL) {
+      tokens.emplace_back(child);
+    } else {
+      tokens.insert(tokens.end(), child->children.cbegin(),
+                    child->children.cend());
+    }
+  }
   std::vector<std::string> actualArgs;
   ParseUtils::tokenizeAtComma(actualArgs, tokens);
 
@@ -853,10 +1193,10 @@ void SV3_1aPreprocessorTreeListener::enterMacroInstanceNoArgs(
 
   std::string macroName;
   if (antlr4::tree::TerminalNode *const macroIdentifierNode =
-          ctx->Macro_identifier()) {
+          ctx->MACRO_IDENTIFIER()) {
     macroName = macroIdentifierNode->getText();
   } else if (antlr4::tree::TerminalNode *const macroEscapedIdentifierNode =
-                 ctx->Macro_Escaped_identifier()) {
+                 ctx->MACRO_ESCAPED_IDENTIFIER()) {
     macroName = macroEscapedIdentifierNode->getText();
     std::string_view svname = macroName;
     svname.remove_prefix(1);
@@ -980,7 +1320,7 @@ void SV3_1aPreprocessorTreeListener::enterMacro_definition(
 
   if (SV3_1aPpParser::Simple_no_args_macro_definitionContext *const
           simpleNoArgsDefinition = ctx->simple_no_args_macro_definition()) {
-    if ((identifier = simpleNoArgsDefinition->Simple_identifier()))
+    if ((identifier = simpleNoArgsDefinition->SIMPLE_IDENTIFIER()))
       macroName = identifier->getText();
     else if ((identifier = simpleNoArgsDefinition->ESCAPED_IDENTIFIER())) {
       macroName = identifier->getText();
@@ -992,7 +1332,7 @@ void SV3_1aPreprocessorTreeListener::enterMacro_definition(
     body = simpleNoArgsDefinition->simple_macro_definition_body();
   } else if (SV3_1aPpParser::Simple_args_macro_definitionContext *const
                  simpleArgsDefinition = ctx->simple_args_macro_definition()) {
-    if ((identifier = simpleArgsDefinition->Simple_identifier()))
+    if ((identifier = simpleArgsDefinition->SIMPLE_IDENTIFIER()))
       macroName = identifier->getText();
     else if ((identifier = simpleArgsDefinition->ESCAPED_IDENTIFIER())) {
       macroName = identifier->getText();
@@ -1006,7 +1346,7 @@ void SV3_1aPreprocessorTreeListener::enterMacro_definition(
   } else if (SV3_1aPpParser::Multiline_no_args_macro_definitionContext
                  *const multiNoArgsDefinition =
                      ctx->multiline_no_args_macro_definition()) {
-    if ((identifier = multiNoArgsDefinition->Simple_identifier()))
+    if ((identifier = multiNoArgsDefinition->SIMPLE_IDENTIFIER()))
       macroName = identifier->getText();
     else if ((identifier = multiNoArgsDefinition->ESCAPED_IDENTIFIER())) {
       macroName = identifier->getText();
@@ -1018,7 +1358,7 @@ void SV3_1aPreprocessorTreeListener::enterMacro_definition(
     body = multiNoArgsDefinition->escaped_macro_definition_body();
   } else if (SV3_1aPpParser::Multiline_args_macro_definitionContext *const
                  multiArgsDefinition = ctx->multiline_args_macro_definition()) {
-    if ((identifier = multiArgsDefinition->Simple_identifier()))
+    if ((identifier = multiArgsDefinition->SIMPLE_IDENTIFIER()))
       macroName = identifier->getText();
     else if ((identifier = multiArgsDefinition->ESCAPED_IDENTIFIER())) {
       macroName = identifier->getText();
@@ -1031,7 +1371,7 @@ void SV3_1aPreprocessorTreeListener::enterMacro_definition(
     body = multiArgsDefinition->escaped_macro_definition_body();
   } else if (SV3_1aPpParser::Define_directiveContext *const defineDirective =
                  ctx->define_directive()) {
-    if ((identifier = defineDirective->Simple_identifier()))
+    if ((identifier = defineDirective->SIMPLE_IDENTIFIER()))
       macroName = identifier->getText();
     else if ((identifier = defineDirective->ESCAPED_IDENTIFIER())) {
       macroName = identifier->getText();
@@ -1053,7 +1393,8 @@ void SV3_1aPreprocessorTreeListener::enterMacro_definition(
   std::vector<std::string> bodyTokens;
   std::vector<LineColumn> bodyTokenPositions;
   if (body != nullptr) {
-    std::vector<antlr4::Token *> tokens = ParseUtils::getFlatTokenList(body);
+    std::vector<antlr4::Token *> tokens = m_tokens->getTokens(
+        body->getStart()->getTokenIndex(), body->getStop()->getTokenIndex());
 
     std::string suffix;
     while (!tokens.empty()) {
@@ -1157,13 +1498,13 @@ void SV3_1aPreprocessorTreeListener::enterPragma_directive(
     SV3_1aPpParser::Pragma_directiveContext *ctx) {
   if (!m_inActiveBranch || m_inProtectedRegion) return;
 
-  if (antlr4::tree::TerminalNode *const identifier = ctx->Simple_identifier()) {
+  if (antlr4::tree::TerminalNode *const identifier = ctx->SIMPLE_IDENTIFIER()) {
     if (identifier->getText() == "protect") {
       const std::vector<SV3_1aPpParser::Pragma_expressionContext *> &exprs =
           ctx->pragma_expression();
       for (SV3_1aPpParser::Pragma_expressionContext *expr : exprs) {
         if (antlr4::tree::TerminalNode *const exprIdentifier =
-                expr->Simple_identifier()) {
+                expr->SIMPLE_IDENTIFIER()) {
           if (exprIdentifier->getText() == "begin_protected") {
             m_inProtectedRegion = true;
             if (!m_passThrough) {
@@ -1182,13 +1523,13 @@ void SV3_1aPreprocessorTreeListener::exitPragma_directive(
     SV3_1aPpParser::Pragma_directiveContext *ctx) {
   if (!m_inActiveBranch || !m_inProtectedRegion) return;
 
-  if (antlr4::tree::TerminalNode *const identifier = ctx->Simple_identifier()) {
+  if (antlr4::tree::TerminalNode *const identifier = ctx->SIMPLE_IDENTIFIER()) {
     if (identifier->getText() == "protect") {
       const std::vector<SV3_1aPpParser::Pragma_expressionContext *> &exprs =
           ctx->pragma_expression();
       for (SV3_1aPpParser::Pragma_expressionContext *expr : exprs) {
         if (antlr4::tree::TerminalNode *const exprIdentifier =
-                expr->Simple_identifier()) {
+                expr->SIMPLE_IDENTIFIER()) {
           if (exprIdentifier->getText() == "end_protected") {
             addVObject(ctx, VObjectType::ppPragma_directive);
 
@@ -1207,7 +1548,7 @@ void SV3_1aPreprocessorTreeListener::enterComment(
     SV3_1aPpParser::CommentContext *ctx) {
   if (!m_inActiveBranch || m_inMacroDefinitionParsing) return;
 
-  if (antlr4::tree::TerminalNode *const commentNode = ctx->One_line_comment()) {
+  if (antlr4::tree::TerminalNode *const commentNode = ctx->LINE_COMMENT()) {
     const std::string text = commentNode->getText();
     if (std::regex_match(text, m_regexTranslateOff)) {
       m_inProtectedRegion = true;
@@ -1230,7 +1571,7 @@ void SV3_1aPreprocessorTreeListener::exitComment(
   // translate_on is possible without having a translate_off.
   // if (!m_inProtectedRegion) return;
 
-  if (antlr4::tree::TerminalNode *const commentNode = ctx->One_line_comment()) {
+  if (antlr4::tree::TerminalNode *const commentNode = ctx->LINE_COMMENT()) {
     const std::string text = commentNode->getText();
     if (std::regex_match(text, m_regexTranslateOn)) {
       addVObject(ctx, VObjectType::ppComment);
@@ -1263,11 +1604,12 @@ void SV3_1aPreprocessorTreeListener::exitComment(
   }
 }
 
-void SV3_1aPreprocessorTreeListener::enterEveryRule(antlr4::ParserRuleContext *ctx) {
-}
+void SV3_1aPreprocessorTreeListener::enterEveryRule(
+    antlr4::ParserRuleContext *ctx) {}
 
-void SV3_1aPreprocessorTreeListener::exitEveryRule(antlr4::ParserRuleContext *ctx) {
-  bool ignore = !m_passThrough && !m_inMacroDefinitionParsing;
+void SV3_1aPreprocessorTreeListener::exitEveryRule(
+    antlr4::ParserRuleContext *ctx) {
+  bool ignore = true;
   for (const antlr4::tree::ParseTree *child : ctx->children) {
     if (NodeIdFromContext(child)) {
       ignore = false;
@@ -1295,7 +1637,7 @@ void SV3_1aPreprocessorTreeListener::exitEveryRule(antlr4::ParserRuleContext *ct
   switch (ruleIndex) {
 <RULE_CASE_STATEMENTS>
     default: break;
-   }
+  }
   // clang-format on
 
   if (nodeId && m_inMacroDefinitionParsing) {
@@ -1307,35 +1649,91 @@ void SV3_1aPreprocessorTreeListener::exitEveryRule(antlr4::ParserRuleContext *ct
 
 void SV3_1aPreprocessorTreeListener::visitTerminal(
     antlr4::tree::TerminalNode *node) {
-  const antlr4::Token *const token = node->getSymbol();
-  if (token->getType() == antlr4::Token::EOF) return;
-
+  antlr4::Token *const token = node->getSymbol();
   const size_t tokenType = token->getType();
+
+  if (tokenType == antlr4::Token::EOF) return;
+  if (m_tokensToIgnore.find(token) != m_tokensToIgnore.cend()) return;
+
   bool shouldAddVObject = (m_pp == m_pp->getSourceFile()) &&
                           (m_passThrough || m_inMacroDefinitionParsing);
 
   if (shouldAddVObject && m_inMacroDefinitionParsing &&
-      (token->getType() == SV3_1aPpParser::CR) && (node->parent != nullptr) &&
+      (tokenType == SV3_1aPpParser::CR) && (node->parent != nullptr) &&
       !node->parent->children.empty() &&
       (node->parent->children.back() == node)) {
-    // When parsing a macro definition, avoid include he terminal newline.
+    // When parsing a macro definition, avoid include the terminal newline.
     shouldAddVObject = false;
+  }
+
+  const std::string tokenText = token->getText();
+  if (shouldAddVObject && !m_inProtectedRegion &&
+      std::all_of(tokenText.cbegin(), tokenText.cend(),
+                  [this](char c) { return m_charsInOperator[c]; })) {
+    std::string text;
+    std::string best;
+    size_t bestI = token->getTokenIndex();
+    for (size_t i = bestI, ni = bestI + 4; i < ni; ++i) {
+      antlr4::Token *const next = m_tokens->get(i);
+      const std::string nextText = next->getText();
+      if (std::all_of(nextText.cbegin(), nextText.cend(),
+                      [this](char c) { return m_charsInOperator[c]; })) {
+        text.append(nextText);
+        operators_t::const_iterator it = kOperators.find(text);
+        if (it != kOperators.cend()) {
+          bestI = i;
+          best = text;
+        }
+      } else {
+        break;
+      }
+    }
+
+    if (!best.empty()) {
+      for (size_t i = token->getTokenIndex() + 1; i <= bestI; ++i) {
+        m_tokensToIgnore.emplace(m_tokens->get(i));
+      }
+
+      operators_t::const_iterator it = kOperators.find(best);
+      NodeId nodeId = addVObject(node, best, it->second);
+      VObject *const object = m_fileContent->MutableObject(nodeId);
+      std::tie(object->m_endLine, object->m_endColumn) =
+          ParseUtils::getEndLineColumn(m_tokens->get(bestI));
+      object->m_ppEndLine = object->m_endLine;
+      object->m_ppEndColumn = object->m_endColumn;
+      shouldAddVObject = false;
+    }
   }
 
   if (shouldAddVObject) {
     // clang-format off
-  switch (tokenType) {
+    switch (tokenType) {
 <VISIT_CASE_STATEMENTS>
-    default: break;
-  }
+      default: break;
+    }
     // clang-format on
+
+    if (m_inMacroDefinitionParsing) {
+      if (NodeId nodeId = NodeIdFromContext(node)) {
+        if (VObject *const object = m_fileContent->MutableObject(nodeId)) {
+          SymbolTable *const symbols = m_session->getSymbolTable();
+          std::string_view text = symbols->getSymbol(object->m_name);
+
+          operators_t::const_iterator it1 = kOperators.find(text);
+          if (it1 != kOperators.cend()) object->m_type = it1->second;
+
+          reserved_words_t::const_iterator it2 = kReservedWords.find(text);
+          if (it2 != kReservedWords.cend()) object->m_type = it2->second;
+        }
+      }
+    }
   }
 
   if (m_inMacroDefinitionParsing) {
     // Definition needs special handling to avoid adding the
     // terminal newline. Do nothing here!
   } else if (m_passThrough || m_inProtectedRegion) {
-    std::string text = token->getText();
+    std::string text = tokenText;
     std::replace_if(
         text.begin(), text.end(), [](char ch) { return ch != '\n'; }, ' ');
     m_pp->append(text);
@@ -1346,17 +1744,17 @@ void SV3_1aPreprocessorTreeListener::visitTerminal(
     // "string as a rule" but we need to handle "string as a token"
     // as well and the only way distinguish is by checking the parent type.
     bool skipString = true;
-    skipString = skipString && (tokenType == SV3_1aPpParser::STRING);
+    skipString = skipString && (tokenType == SV3_1aPpParser::QUOTED_STRING);
     skipString = skipString && (node->parent->getTreeType() ==
                                 antlr4::tree::ParseTreeType::RULE);
     skipString = skipString &&
                  (((antlr4::ParserRuleContext *)node->parent)->getRuleIndex() ==
                   SV3_1aPpParser::RuleString);
-    if (((tokenType != SV3_1aPpParser::STRING) || !skipString) &&
+    if (((tokenType != SV3_1aPpParser::QUOTED_STRING) || !skipString) &&
         (tokenType != SV3_1aPpParser::TICK_LINE__) &&
         (tokenType != SV3_1aPpParser::TICK_FILE__) &&
         (tokenType != SV3_1aPpParser::ESCAPED_IDENTIFIER)) {
-      m_pp->append(token->getText());
+      m_pp->append(tokenText);
     }
   }
 }

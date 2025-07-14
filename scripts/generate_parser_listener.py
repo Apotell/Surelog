@@ -6,21 +6,39 @@ import sys
 
 # Important Note: Cache allows only 24 bits for the type. So, the ID's have to be in the range [0, 4095]
 
-_sl_typename_start = 1
-_pp_typename_start = 51
-_forced_pp_typename_start = 501
-_pa_typename_start = 1001
-_forced_pa_typename_start = 3501
+_tokens_start = 1
+_pp_typename_start = 1001
+_forced_pp_typename_start = 1801
+_pa_typename_start = 2001
+_forced_pa_typename_start = 2801
 
-_sl_typenames = [
+_tokens = [
   '_INVALID_',
-  'NoType',
-  'Null',
-  'IntConst',
-  'RealConst',
-  'StringConst',
-  'StringLiteral',
-  'Unparsable_Text',
+  'NO_TYPE',
+  'INT_CONST',
+  'REAL_CONST',
+  'STRING_CONST',
+  'STRING_LITERAL',
+  'UNPARSABLE_TEXT',
+
+  'BinaryOp_BitwAnd',
+  'BinaryOp_BitwOr',
+  'BinaryOp_BitwXor',
+  'BinaryOp_Minus',
+  'BinaryOp_Mult',
+  'BinaryOp_Plus',
+  'BinaryOp_ReductNand',
+  'BinaryOp_ReductXnor1',
+  'BinaryOp_ReductXnor2',
+
+  'UnaryOp_BitwAnd',
+  'UnaryOp_BitwOr',
+  'UnaryOp_BitwXor',
+  'UnaryOp_Minus',
+  'UnaryOp_Plus',
+  'UnaryOp_ReductNand',
+  'UnaryOp_ReductXnor1',
+  'UnaryOp_ReductXnor2',
 ]
 
 _forced_pp_typenames = set([
@@ -520,7 +538,7 @@ def _generate_XXXTreeShapeListener_h(listener: str, antlr_definition_filepath: s
 
 
 def _generate_VObjectTypes_h(pp_typenames: list, pa_typenames: list, filepath: str):
-  global _sl_typename_start
+  global _tokens_start
   global _pa_typename_start
   global _pp_typename_start
 
@@ -540,16 +558,16 @@ def _generate_VObjectTypes_h(pp_typenames: list, pa_typenames: list, filepath: s
     'enum class VObjectType : uint16_t {',
   ]
 
-  content.append('  // Global typenames (shared acroos preprocessor & parser)')
+  content.append('  // Global tokens (shared acroos preprocessor & parser)')
   content.append('')
 
-  index = _sl_typename_start
-  content.append(f'  slIndexBegin = {index},')
+  index = _tokens_start
+  content.append(f'  TokensBegin = {index},')
   index += 1
-  for typename in _sl_typenames:
-    content.append(f'  sl{typename} = {index},')
+  for token in _tokens:
+    content.append(f'  {token} = {index},')
     index += 1
-  content.append(f'  slIndexEnd = {index},')
+  content.append(f'  TokensEnd = {index},')
 
   content.append('')
   content.append('  // Preprocessor typenames')
@@ -614,7 +632,7 @@ def _generate_VObjectTypes_h(pp_typenames: list, pa_typenames: list, filepath: s
 
 
 def _generate_VObjectTypes_cpp(pp_typenames: list, pa_typenames: list, filepath: str):
-  global _sl_typename_start
+  global _tokens_start
   global _pa_typename_start
   global _pp_typename_start
 
@@ -633,11 +651,11 @@ def _generate_VObjectTypes_cpp(pp_typenames: list, pa_typenames: list, filepath:
     'using namespace SURELOG;',
     '',
     'static const std::map<VObjectType, std::string_view> kTypeToName{',
-    '  // Global typenames (shared acroos preprocessor & parser)'
+    '  // Global tokens (shared acroos preprocessor & parser)'
   ]
   content.extend([
-    f'  {{ VObjectType::sl{typename} /* = {_sl_typename_start + 1 + index} */, "sl{typename}" }},'
-    for index, typename in enumerate(_sl_typenames)
+    f'  {{ VObjectType::{token} /* = {_tokens_start + 1 + index} */, "{token}" }},'
+    for index, token in enumerate(_tokens)
   ])
   content.append('')
   content.append('  // Preprocessor typenames')
@@ -667,11 +685,11 @@ def _generate_VObjectTypes_cpp(pp_typenames: list, pa_typenames: list, filepath:
     '};',
     '',
     'static const std::map<std::string_view, VObjectType, std::less<>> kNameToType{',
-    '  // Global typenames (shared acroos preprocessor & parser)'
+    '  // Global tokens (shared acroos preprocessor & parser)'
   ])
   content.extend([
-    f'  {{ "sl{typename.lower()}", VObjectType::sl{typename} /* = {_sl_typename_start + 1 + index} */ }},'
-    for index, typename in enumerate(_sl_typenames)
+    f'  {{ "{token.lower()}", VObjectType::{token} /* = {_tokens_start + 1 + index} */ }},'
+    for index, token in enumerate(_tokens)
   ])
   content.append('')
   content.append('  // Preprocessor typenames')
@@ -709,7 +727,7 @@ def _generate_VObjectTypes_cpp(pp_typenames: list, pa_typenames: list, filepath:
     '  std::string n(name);',
     '  std::transform(n.begin(), n.end(), n.begin(), [](std::string::value_type c) { return std::tolower((int32_t)c); });',
     '  auto it = kNameToType.find(n);',
-    '  return (it == kNameToType.cend()) ? VObjectType::sl_INVALID_ : it->second;',
+    '  return (it == kNameToType.cend()) ? VObjectType::_INVALID_ : it->second;',
     '}',
     '',
   ])
@@ -718,7 +736,7 @@ def _generate_VObjectTypes_cpp(pp_typenames: list, pa_typenames: list, filepath:
 
 
 def _generate_VObjectTypes_py_h(pp_typenames: list, pa_typenames: list, filepath: str):
-  global _sl_typename_start
+  global _tokens_start
   global _pa_typename_start
   global _pp_typename_start
 
@@ -739,12 +757,12 @@ def _generate_VObjectTypes_py_h(pp_typenames: list, pa_typenames: list, filepath
   ]
 
   content.append('')
-  content.append('  "# Global typenames (shared acroos preprocessor & parser)\\n",')
+  content.append('  "# Global tokens (shared acroos preprocessor & parser)\\n",')
 
-  index = _sl_typename_start
+  index = _tokens_start
   index += 1
-  for typename in _sl_typenames:
-    content.append(f'  "sl{typename} = {index};\\n",')
+  for token in _tokens:
+    content.append(f'  "{token} = {index};\\n",')
     index += 1
 
   content.append('')
@@ -796,7 +814,7 @@ def _generate_VObjectTypes_py_h(pp_typenames: list, pa_typenames: list, filepath
 def _generate_SV3_1aPreprocessorTreeListener_cpp(tokens: list, rules: list, template_filepath: str, output_filepath: str):
   rule_case_statements = [f'    case SV3_1aPpParser::Rule{rule}: nodeId = addVObject(ctx, VObjectType::pp{rule}); break;' for rule in rules]
   visit_case_statements = [
-    f'    case SV3_1aPpParser::{token}: addVObject(node, VObjectType::pp{token}); break;'
+    f'      case SV3_1aPpParser::{token}: addVObject(node, VObjectType::{token}); break;'
     for token in tokens
   ]
 
@@ -809,8 +827,8 @@ def _generate_SV3_1aPreprocessorTreeListener_cpp(tokens: list, rules: list, temp
 def _generate_SV3_1aParserTreeListener_cpp(tokens: list, rules: list, template_filepath: str, output_filepath: str):
   rule_case_statements = [f'      case SV3_1aParser::Rule{rule}: addVObject(ctx, VObjectType::pa{rule}); break;' for rule in rules]
   visit_case_statements = [
-    f'    case SV3_1aParser::{token}: nodeId = addVObject(node, VObjectType::pa{token}); break;'
-    for token in tokens if token not in ['Escaped_identifier', 'PREPROC_BEGIN', 'PREPROC_END']
+    f'    case SV3_1aParser::{token}: nodeId = addVObject(node, VObjectType::{token}); break;'
+    for token in tokens if token not in ['ESCAPED_IDENTIFIER', 'PREPROC_BEGIN', 'PREPROC_END']
   ]
 
   content = open(template_filepath, 'rt').read()
@@ -819,7 +837,9 @@ def _generate_SV3_1aParserTreeListener_cpp(tokens: list, rules: list, template_f
   _write_output(output_filepath, content)
 
 
-def _generate_AstListener_h(pp_tokens: list, pp_rules: list, pa_tokens: list, pa_rules: list, template_filepath: str, output_filepath: str):
+def _generate_AstListener_h(pp_rules: list, pa_rules: list, template_filepath: str, output_filepath: str):
+  global _tokens
+
   public_enter_leave_declarations = []
   private_listen_declarations = []
   for prefix, rules in [('PP', pp_rules), ('PA', pa_rules)]:
@@ -833,12 +853,7 @@ def _generate_AstListener_h(pp_tokens: list, pp_rules: list, pa_tokens: list, pa
       private_listen_declarations.append(f'  void listen{prefix}_{rule}(const AstNode& node);')
     private_listen_declarations.append('')
 
-  public_visit_declarations = []
-  public_visit_declarations.extend([f'  virtual void visitSL_{typename}(const AstNode& node) {{}}' for typename in _sl_typenames])
-  public_visit_declarations.append(  '')
-  public_visit_declarations.extend([f'  virtual void visitPP_{token}(const AstNode& node) {{}}' for token in pp_tokens])
-  public_visit_declarations.append(  '')
-  public_visit_declarations.extend([f'  virtual void visitPA_{token}(const AstNode& node) {{}}' for token in pa_tokens])
+  public_visit_declarations = [f'  virtual void visit_{token}(const AstNode& node) {{}}' for token in _tokens]
 
   content = open(template_filepath, 'rt').read()
   content = content.replace('<PUBLIC_ENTER_LEAVE_DECLARATIONS>', '\n'.join(public_enter_leave_declarations).rstrip())
@@ -847,7 +862,9 @@ def _generate_AstListener_h(pp_tokens: list, pp_rules: list, pa_tokens: list, pa
   _write_output(output_filepath, content)
 
 
-def _generate_AstListener_cpp(pp_tokens: list, pp_rules: list, pa_tokens: list, pa_rules: list, template_filepath: str, output_filepath: str):
+def _generate_AstListener_cpp(pp_rules: list, pa_rules: list, template_filepath: str, output_filepath: str):
+  global _tokens
+
   private_listen_implementations = []
   for prefix, rules in [('PP', pp_rules), ('PA', pa_rules)]:
     for rule in rules:
@@ -865,11 +882,7 @@ def _generate_AstListener_cpp(pp_tokens: list, pp_rules: list, pa_tokens: list, 
   listen_case_statements.append(  '')
   listen_case_statements.extend([f'    case VObjectType::pa{rule}: enter(node); listenPA_{rule}(node); leave(node); break;' for rule in pa_rules])
   listen_case_statements.append(  '')
-  listen_case_statements.extend([f'    case VObjectType::sl{typename}: visit(node); visitSL_{typename}(node); break;' for typename in _sl_typenames])
-  listen_case_statements.append(  '')
-  listen_case_statements.extend([f'    case VObjectType::pp{token}: visit(node); visitPP_{token}(node); break;' for token in pp_tokens])
-  listen_case_statements.append(  '')
-  listen_case_statements.extend([f'    case VObjectType::pa{token}: visit(node); visitPA_{token}(node); break;' for token in pa_tokens])
+  listen_case_statements.extend([f'    case VObjectType::{token}: visit(node); visit_{token}(node); break;' for token in _tokens])
 
   content = open(template_filepath, 'rt').read()
   content = content.replace('<PRIVATE_LISTEN_IMPLEMENTATIONS>', '\n'.join(private_listen_implementations).rstrip())
@@ -877,7 +890,9 @@ def _generate_AstListener_cpp(pp_tokens: list, pp_rules: list, pa_tokens: list, 
   _write_output(output_filepath, content)
 
 
-def _generate_AstTraceListener_h(pp_tokens: list, pp_rules: list, pa_tokens: list, pa_rules: list, template_filepath: str, output_filepath: str):
+def _generate_AstTraceListener_h(pp_rules: list, pa_rules: list, template_filepath: str, output_filepath: str):
+  global _tokens
+
   public_enter_leave_declarations = []
   for prefix, rules in [('PP', pp_rules), ('PA', pa_rules)]:
     for rule in rules:
@@ -887,12 +902,7 @@ def _generate_AstTraceListener_h(pp_tokens: list, pp_rules: list, pa_tokens: lis
         ''
       ])
 
-  public_visit_declarations = []
-  for prefix, tokens in [('SL', _sl_typenames), ('PP', pp_tokens), ('PA', pa_tokens)]:
-    public_visit_declarations.extend([
-      f'  void visit{prefix}_{token}(const AstNode& node) final {{ TRACE_VISIT; }}' for token in tokens
-    ])
-    public_visit_declarations.append(  '')
+  public_visit_declarations = [f'  void visit_{token}(const AstNode& node) final {{ TRACE_VISIT; }}' for token in _tokens]
 
   content = open(template_filepath, 'rt').read()
   content = content.replace('<PUBLIC_ENTER_LEAVE_DECLARATIONS>', '\n'.join(public_enter_leave_declarations).rstrip())
@@ -901,6 +911,8 @@ def _generate_AstTraceListener_h(pp_tokens: list, pp_rules: list, pa_tokens: lis
 
 
 def _main():
+  global _tokens
+
   parser = argparse.ArgumentParser()
 
   parser.add_argument(
@@ -943,10 +955,12 @@ def _main():
     pprint.pprint(pa_errors)
     return -1
 
-  pp_typenames = set.union(pp_tokens, pp_rules)
+  _tokens = sorted(set(_tokens).union(pa_tokens).union(pp_tokens))
+
+  pp_typenames = set(pp_rules)
   pp_typenames.difference_update(_blacklisted_pp_typenames)
 
-  pa_typenames = set.union(pa_tokens, pa_rules)
+  pa_typenames = set.union(pa_rules)
   pa_typenames.difference_update(_blacklisted_pa_typenames)
 
   pp_tokens = sorted(pp_tokens)
@@ -979,24 +993,24 @@ def _main():
     os.path.join(args.input_dirpath, 'src', 'SourceCompile', 'SV3_1aParserTreeListener.template.cxx'),
     os.path.join(args.output_dirpath, 'src', 'SourceCompile', 'SV3_1aParserTreeListener.cpp'))
 
-  pa_rules = set.union(set(pa_rules), _forced_pa_rules)
+  pa_rules = set(pa_rules).union(_forced_pa_rules)
   pa_rules = sorted(pa_rules)
 
-  pa_tokens = set.union(set(pa_tokens), _forced_pa_tokens)
+  pa_tokens = set(pa_tokens).union(_forced_pa_tokens)
   pa_tokens = sorted(pa_tokens)
 
   _generate_AstListener_h(
-    pp_tokens, pp_rules, pa_tokens, pa_rules,
+    pp_rules, pa_rules,
     os.path.join(args.input_dirpath, 'include', 'Surelog', 'SourceCompile', 'AstListener.template.hpp'),
     os.path.join(args.output_dirpath, 'include', 'Surelog', 'SourceCompile', 'AstListener.h'))
 
   _generate_AstTraceListener_h(
-    pp_tokens, pp_rules, pa_tokens, pa_rules,
+    pp_rules, pa_rules,
     os.path.join(args.input_dirpath, 'include', 'Surelog', 'SourceCompile', 'AstTraceListener.template.hpp'),
     os.path.join(args.output_dirpath, 'include', 'Surelog', 'SourceCompile', 'AstTraceListener.h'))
 
   _generate_AstListener_cpp(
-    pp_tokens, pp_rules, pa_tokens, pa_rules,
+    pp_rules, pa_rules,
     os.path.join(args.input_dirpath, 'src', 'SourceCompile', 'AstListener.template.cxx'),
     os.path.join(args.output_dirpath, 'src', 'SourceCompile', 'AstListener.cpp'))
 

@@ -80,11 +80,6 @@ LineColumn ParseUtils::getEndLineColumn(const antlr4::CommonTokenStream* stream,
              : getEndLineColumn(stream->get(sourceInterval.b));
 }
 
-const std::vector<antlr4::tree::ParseTree*>& ParseUtils::getTopTokenList(
-    const antlr4::tree::ParseTree* tree) {
-  return tree->children;
-}
-
 void ParseUtils::tokenizeAtComma(
     std::vector<std::string>& actualArgs,
     const std::vector<antlr4::tree::ParseTree*>& tokens) {
@@ -135,22 +130,6 @@ void ParseUtils::tokenizeAtComma(
 }
 
 /**
- * Retrieves all Tokens from the {@code tree} in an in-order sequence.
- *
- * @param tree
- *         the parse tee to get all tokens from.
- *
- * @return all Tokens from the {@code tree} in an in-order sequence.
- */
-
-std::vector<antlr4::Token*> ParseUtils::getFlatTokenList(
-    antlr4::tree::ParseTree* tree) {
-  std::vector<antlr4::Token*> tokens;
-  inOrderTraversal(tokens, tree);
-  return tokens;
-}
-
-/**
  * Makes an in-order traversal over {@code parent} (recursively) collecting
  * all Tokens of the terminal nodes it encounters.
  *
@@ -160,8 +139,8 @@ std::vector<antlr4::Token*> ParseUtils::getFlatTokenList(
  *         the current parent node to inspect for terminal nodes.
  */
 
-void ParseUtils::inOrderTraversal(std::vector<antlr4::Token*>& tokens,
-                                  const antlr4::tree::ParseTree* parent) {
+static void inOrderTraversal(std::vector<antlr4::Token*>& tokens,
+                             const antlr4::tree::ParseTree* parent) {
   if (!parent) return;
   // Iterate over all child nodes of `parent`.
   for (auto child : parent->children) {
@@ -178,4 +157,19 @@ void ParseUtils::inOrderTraversal(std::vector<antlr4::Token*>& tokens,
   }
 }
 
+/**
+ * Retrieves all Tokens from the {@code tree} in an in-order sequence.
+ *
+ * @param tree
+ *         the parse tee to get all tokens from.
+ *
+ * @return all Tokens from the {@code tree} in an in-order sequence.
+ */
+
+std::vector<antlr4::Token*> ParseUtils::getFlatTokenList(
+    antlr4::tree::ParseTree* tree) {
+  std::vector<antlr4::Token*> tokens;
+  inOrderTraversal(tokens, tree);
+  return tokens;
+}
 }  // namespace SURELOG

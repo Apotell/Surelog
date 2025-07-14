@@ -499,7 +499,7 @@ uint32_t SLgetModuleLine(ModuleDefinition* module) {
 }
 
 VObjectType SLgetModuleType(ModuleDefinition* module) {
-  if (!module) return VObjectType::slNoType;
+  if (!module) return VObjectType::NO_TYPE;
   return module->getType();
 }
 
@@ -533,7 +533,7 @@ uint32_t SLgetClassLine(ClassDefinition* module) {
 }
 
 VObjectType SLgetClassType(ClassDefinition* module) {
-  if (!module) return VObjectType::slNoType;
+  if (!module) return VObjectType::NO_TYPE;
   return module->getType();
 }
 
@@ -567,7 +567,7 @@ uint32_t SLgetPackageLine(Package* module) {
 }
 
 VObjectType SLgetPackageType(Package* module) {
-  if (!module) return VObjectType::slNoType;
+  if (!module) return VObjectType::NO_TYPE;
   return module->getType();
 }
 
@@ -600,7 +600,7 @@ uint32_t SLgetProgramLine(Program* module) {
 }
 
 VObjectType SLgetProgramType(Program* module) {
-  if (!module) return VObjectType::slNoType;
+  if (!module) return VObjectType::NO_TYPE;
   return module->getType();
 }
 
@@ -615,12 +615,12 @@ RawNodeId SLgetProgramRootNode(Program* module) {
 }
 
 VObjectType SLgetInstanceType(ModuleInstance* instance) {
-  if (!instance) return VObjectType::slNoType;
+  if (!instance) return VObjectType::NO_TYPE;
   return instance->getType();
 }
 
 VObjectType SLgetInstanceModuleType(ModuleInstance* instance) {
-  if (!instance) return VObjectType::slNoType;
+  if (!instance) return VObjectType::NO_TYPE;
   return instance->getModuleType();
 }
 

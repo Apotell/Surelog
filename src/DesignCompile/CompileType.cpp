@@ -268,7 +268,7 @@ uhdm::Any* CompileHelper::compileVariable(
       the_type == VObjectType::paPs_or_hierarchical_identifier) {
     variable = fC->Child(variable);
     the_type = fC->Type(variable);
-    if (the_type == VObjectType::paVIRTUAL) {
+    if (the_type == VObjectType::VIRTUAL) {
       variable = fC->Sibling(variable);
       the_type = fC->Type(variable);
     }
@@ -278,7 +278,7 @@ uhdm::Any* CompileHelper::compileVariable(
       variable = fC->Sibling(variable);
       the_type = fC->Type(variable);
     }
-  } else if (the_type == VObjectType::sl_INVALID_) {
+  } else if (the_type == VObjectType::_INVALID_) {
     return nullptr;
   }
   if (the_type == VObjectType::paComplex_func_call) {
@@ -296,8 +296,8 @@ uhdm::Any* CompileHelper::compileVariable(
     }
   }
 
-  if (fC->Type(variable) == VObjectType::slStringConst &&
-      fC->Type(Packed_dimension) == VObjectType::slStringConst) {
+  if (fC->Type(variable) == VObjectType::STRING_CONST &&
+      fC->Type(Packed_dimension) == VObjectType::STRING_CONST) {
     uhdm::HierPath* path = s.make<uhdm::HierPath>();
     uhdm::AnyCollection* elems = path->getPathElems(true);
     std::string fullName(fC->SymName(variable));
@@ -307,7 +307,7 @@ uhdm::Any* CompileHelper::compileVariable(
     elems->emplace_back(obj);
     fC->populateCoreMembers(variable, variable, obj);
     path->setFile(obj->getFile());
-    while (fC->Type(Packed_dimension) == VObjectType::slStringConst) {
+    while (fC->Type(Packed_dimension) == VObjectType::STRING_CONST) {
       uhdm::RefObj* obj = s.make<uhdm::RefObj>();
       const std::string_view name = fC->SymName(Packed_dimension);
       fullName.append(".").append(name);
@@ -335,7 +335,7 @@ uhdm::Any* CompileHelper::compileVariable(
   VObjectType decl_type = fC->Type(declarationId);
   if ((decl_type != VObjectType::paPs_or_hierarchical_identifier) &&
       (decl_type != VObjectType::paImplicit_class_handle) &&
-      (decl_type != VObjectType::slStringConst)) {
+      (decl_type != VObjectType::STRING_CONST)) {
     ts = compileTypespec(component, fC, declarationId, compileDesign, reduce,
                          pstmt, instance, true);
   }
@@ -345,7 +345,7 @@ uhdm::Any* CompileHelper::compileVariable(
     isSigned = false;
   }
   switch (the_type) {
-    case VObjectType::slStringConst:
+    case VObjectType::STRING_CONST:
     case VObjectType::paChandle_type: {
       const std::string_view typeName = fC->SymName(variable);
 
@@ -410,7 +410,7 @@ uhdm::Any* CompileHelper::compileVariable(
           result = var;
         }
       }
-      if ((result == nullptr) && (the_type == VObjectType::slStringConst) &&
+      if ((result == nullptr) && (the_type == VObjectType::STRING_CONST) &&
           (ts != nullptr) &&
           (ts->getUhdmType() == uhdm::UhdmType::ClassTypespec)) {
         uhdm::ClassVar* var = s.make<uhdm::ClassVar>();
@@ -1763,17 +1763,17 @@ Typespec* CompileHelper::compileDatastructureTypespec(
             std::string suffixname;
             std::string_view typeName2 = typeName;
             if (fC->Type(sig->getInterfaceTypeNameId()) ==
-                VObjectType::slStringConst) {
+                VObjectType::STRING_CONST) {
               typeName2 = fC->SymName(sig->getInterfaceTypeNameId());
             }
             NodeId suffixNode;
             if ((suffixNode = fC->Sibling(type))) {
-              if (fC->Type(suffixNode) == VObjectType::slStringConst) {
+              if (fC->Type(suffixNode) == VObjectType::STRING_CONST) {
                 suffixname = fC->SymName(suffixNode);
               } else if (fC->Type(suffixNode) ==
                          VObjectType::paConstant_bit_select) {
                 suffixNode = fC->Sibling(suffixNode);
-                if (fC->Type(suffixNode) == VObjectType::slStringConst) {
+                if (fC->Type(suffixNode) == VObjectType::STRING_CONST) {
                   suffixname = fC->SymName(suffixNode);
                 }
               }
@@ -2261,7 +2261,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(
       // Implicit type
     }
   }
-  if (fC->Type(type) == VObjectType::paVIRTUAL) type = fC->Sibling(type);
+  if (fC->Type(type) == VObjectType::VIRTUAL) type = fC->Sibling(type);
   VObjectType the_type = fC->Type(type);
   if (the_type == VObjectType::paData_type_or_implicit) {
     type = fC->Child(type);
@@ -2270,7 +2270,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(
   if (the_type == VObjectType::paData_type) {
     if (fC->Child(type)) {
       type = fC->Child(type);
-      if (fC->Type(type) == VObjectType::paVIRTUAL) type = fC->Sibling(type);
+      if (fC->Type(type) == VObjectType::VIRTUAL) type = fC->Sibling(type);
     } else {
       // Implicit type
     }
@@ -2279,7 +2279,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(
   NodeId Packed_dimension;
   if (the_type == VObjectType::paPacked_dimension) {
     Packed_dimension = type;
-  } else if (the_type == VObjectType::slStringConst) {
+  } else if (the_type == VObjectType::STRING_CONST) {
     // Class parameter or struct reference
     Packed_dimension = fC->Sibling(type);
     if (fC->Type(Packed_dimension) != VObjectType::paPacked_dimension)
@@ -2296,7 +2296,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(
     isPacked = true;
   }
   if (fC->Type(Packed_dimension) == VObjectType::paStruct_union_member ||
-      fC->Type(Packed_dimension) == VObjectType::slStringConst) {
+      fC->Type(Packed_dimension) == VObjectType::STRING_CONST) {
     Packed_dimension = fC->Sibling(Packed_dimension);
   }
 
@@ -2522,7 +2522,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(
     }
     case VObjectType::paPrimary_literal: {
       NodeId literal = fC->Child(type);
-      if (fC->Type(literal) == VObjectType::slStringConst) {
+      if (fC->Type(literal) == VObjectType::STRING_CONST) {
         const std::string_view typeName = fC->SymName(literal);
         result = compileDatastructureTypespec(
             component, fC, type, compileDesign, reduce, instance, "", typeName);
@@ -2827,7 +2827,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(
       return compileTypespec(component, fC, fC->Child(type), compileDesign,
                              reduce, pstmt, instance, false);
     }
-    case VObjectType::slStringConst: {
+    case VObjectType::STRING_CONST: {
       const std::string_view typeName = fC->SymName(type);
       if (typeName == "logic") {
         uhdm::LogicTypespec* var = s.make<uhdm::LogicTypespec>();

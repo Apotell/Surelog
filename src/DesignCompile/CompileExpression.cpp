@@ -453,7 +453,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
   VObjectType objtype = fC->Type(child);
   uhdm::Constant *result = nullptr;
   switch (objtype) {
-    case VObjectType::slIntConst: {
+    case VObjectType::INT_CONST: {
       // Do not evaluate the constant, keep it as in the source text:
       uhdm::Constant *c = s.make<uhdm::Constant>();
       fC->populateCoreMembers(child, child, c);
@@ -552,7 +552,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       result = c;
       break;
     }
-    case VObjectType::slRealConst: {
+    case VObjectType::REAL_CONST: {
       uhdm::Constant *c = s.make<uhdm::Constant>();
       const std::string_view value = fC->SymName(child);
       c->setDecompile(value);
@@ -725,7 +725,7 @@ uhdm::Constant *CompileHelper::compileConst(const FileContent *fC, NodeId child,
       result = c;
       break;
     }
-    case VObjectType::slStringLiteral: {
+    case VObjectType::STRING_LITERAL: {
       uhdm::Constant *c = s.make<uhdm::Constant>();
       std::string_view value = StringUtils::unquoted(fC->SymName(child));
       c->setDecompile(fC->SymName(child));
@@ -1243,7 +1243,7 @@ uhdm::Any *CompileHelper::compileSelectExpression(
       } else {
         result = sel;
       }
-    } else if ((fC->Type(Bit_select) == VObjectType::slStringConst) ||
+    } else if ((fC->Type(Bit_select) == VObjectType::STRING_CONST) ||
                (fC->Type(Bit_select) ==
                 VObjectType::paPs_or_hierarchical_identifier)) {
       std::string hname(name);
@@ -1261,7 +1261,7 @@ uhdm::Any *CompileHelper::compileSelectExpression(
              VObjectType::paPs_or_hierarchical_identifier)) {
           uhdm::RefObj *r = s.make<uhdm::RefObj>();
           NodeId nameId = fC->Child(Bit_select);
-          while (fC->Type(nameId) != VObjectType::slStringConst)
+          while (fC->Type(nameId) != VObjectType::STRING_CONST)
             nameId = fC->Child(nameId);
           r->setName(fC->SymName(nameId));
           r->setParent(path);
@@ -1270,7 +1270,7 @@ uhdm::Any *CompileHelper::compileSelectExpression(
           hname.append(".").append(fC->SymName(nameId));
         } else if ((fC->Type(Bit_select) == VObjectType::paSelect)) {
           NodeId nameId = fC->Child(Bit_select);
-          if (nameId && (fC->Type(nameId) == VObjectType::slStringConst)) {
+          if (nameId && (fC->Type(nameId) == VObjectType::STRING_CONST)) {
             uhdm::RefObj *r = s.make<uhdm::RefObj>();
             r->setName(fC->SymName(nameId));
             r->setParent(path);
@@ -1278,7 +1278,7 @@ uhdm::Any *CompileHelper::compileSelectExpression(
             elems->emplace_back(r);
             hname.append(".").append(fC->SymName(nameId));
           }
-        } else if (fC->Type(Bit_select) == VObjectType::slStringConst) {
+        } else if (fC->Type(Bit_select) == VObjectType::STRING_CONST) {
           NodeId tmp = fC->Sibling(Bit_select);
           if (((fC->Type(tmp) == VObjectType::paConstant_bit_select) ||
                (fC->Type(tmp) == VObjectType::paBit_select)) &&
@@ -1361,7 +1361,7 @@ uhdm::Any *CompileHelper::compileExpression(
   }
   parentType = fC->Type(parent);
   NodeId child = fC->Child(parent);
-  VObjectType childType = VObjectType::sl_INVALID_;
+  VObjectType childType = VObjectType::_INVALID_;
   if (child) {
     childType = fC->Type(child);
   }
@@ -1519,7 +1519,7 @@ uhdm::Any *CompileHelper::compileExpression(
     }
     case VObjectType::paExpression: {
       NodeId Iff = fC->Sibling(parent);
-      if (fC->Type(Iff) == VObjectType::paIFF) {
+      if (fC->Type(Iff) == VObjectType::IFF) {
         uhdm::Operation *op = s.make<uhdm::Operation>();
         op->setOpType(vpiIffOp);
         op->setParent(pexpr);
@@ -1717,7 +1717,7 @@ uhdm::Any *CompileHelper::compileExpression(
         case VObjectType::paUnary_Plus:
         case VObjectType::paUnary_Tilda:
         case VObjectType::paUnary_Not:
-        case VObjectType::paNOT:
+        case VObjectType::NOT:
         case VObjectType::paUnary_BitwOr:
         case VObjectType::paUnary_BitwAnd:
         case VObjectType::paUnary_BitwXor:
@@ -1843,9 +1843,9 @@ uhdm::Any *CompileHelper::compileExpression(
                 op->getOperands()->emplace_back(rep);
               }
               result = op;
-            } else if ((distType == VObjectType::paTHROUGHOUT) ||
-                       (distType == VObjectType::paWITHIN) ||
-                       (distType == VObjectType::paINTERSECT)) {
+            } else if ((distType == VObjectType::THROUGHOUT) ||
+                       (distType == VObjectType::WITHIN) ||
+                       (distType == VObjectType::INTERSECT)) {
               NodeId repetition = fC->Sibling(dist);
               op->setOpType(UhdmWriter::getVpiOpType(distType));
               if (uhdm::Any *rep = compileExpression(component, fC, repetition,
@@ -1863,7 +1863,7 @@ uhdm::Any *CompileHelper::compileExpression(
                                           reduce, pexpr, instance, muteErrors);
           break;
         }
-        case VObjectType::paDOT: {
+        case VObjectType::DOT: {
           NodeId Identifier = fC->Sibling(child);
           uhdm::RefObj *ref = s.make<uhdm::RefObj>();
           ref->setName(fC->SymName(Identifier));
@@ -1947,7 +1947,7 @@ uhdm::Any *CompileHelper::compileExpression(
           }
           break;
         }
-        case VObjectType::paTAGGED: {
+        case VObjectType::TAGGED: {
           NodeId Identifier = fC->Sibling(child);
           NodeId Expression = fC->Sibling(Identifier);
           uhdm::TaggedPattern *pattern = s.make<uhdm::TaggedPattern>();
@@ -2028,7 +2028,7 @@ uhdm::Any *CompileHelper::compileExpression(
           }
           VObjectType opType = fC->Type(op);
           uint32_t vopType = UhdmWriter::getVpiOpType(opType);
-          if (opType == VObjectType::paQMARK ||
+          if (opType == VObjectType::QMARK ||
               opType == VObjectType::paConditional_operator) {  // Ternary op
             if ((m_reduce == Reduce::Yes) && (reduce == Reduce::Yes) &&
                 (opL->getUhdmType() == uhdm::UhdmType::Constant)) {
@@ -2075,7 +2075,7 @@ uhdm::Any *CompileHelper::compileExpression(
             while (fC->Type(rval) == VObjectType::paAttribute_instance)
               rval = fC->Sibling(rval);
           }
-          if (opType == VObjectType::paINSIDE) {
+          if (opType == VObjectType::INSIDE) {
             // Because open_range_list is stored in { }, it is being interpreted
             // as a concatenation operation. Code below constructs it manually.
             // Example tree:
@@ -2146,7 +2146,7 @@ uhdm::Any *CompileHelper::compileExpression(
               }
             }
           }
-          if (opType == VObjectType::paQMARK ||
+          if (opType == VObjectType::QMARK ||
               opType == VObjectType::paConditional_operator) {  // Ternary op
             rval = fC->Sibling(rval);
             if (uhdm::Any *opR = compileExpression(
@@ -2338,7 +2338,7 @@ uhdm::Any *CompileHelper::compileExpression(
             int32_t operationType = UhdmWriter::getVpiOpType(type);
             if (NodeId subOp1 = fC->Child(oper)) {
               VObjectType subOp1type = fC->Type(subOp1);
-              if (subOp1type == VObjectType::paPound_Pound_delay) {
+              if (subOp1type == VObjectType::POUND_POUND_DELAY) {
                 if (NodeId subOp2 = fC->Sibling(subOp1)) {
                   VObjectType subOp2type = fC->Type(subOp2);
                   if (subOp2type == VObjectType::paAssociative_dimension) {
@@ -2446,13 +2446,13 @@ uhdm::Any *CompileHelper::compileExpression(
         case VObjectType::paPackage_scope:
         case VObjectType::paClass_type:
         case VObjectType::paHierarchical_identifier:
-        case VObjectType::slStringConst: {
+        case VObjectType::STRING_CONST: {
           std::string name;
           Value *sval = nullptr;
           if (childType == VObjectType::paPackage_scope) {
             const std::string_view packageName = fC->SymName(fC->Child(child));
             NodeId paramId = fC->Sibling(child);
-            if (fC->Type(paramId) != VObjectType::slStringConst)
+            if (fC->Type(paramId) != VObjectType::STRING_CONST)
               paramId = fC->Child(paramId);
             NodeId selectId = fC->Sibling(paramId);
             const std::string_view n = fC->SymName(paramId);
@@ -2550,7 +2550,7 @@ uhdm::Any *CompileHelper::compileExpression(
             NodeId rhsbackup = rhs;
             while ((rhs = fC->Sibling(rhs))) {
               VObjectType type = fC->Type(rhs);
-              if (type == VObjectType::slStringConst) {
+              if (type == VObjectType::STRING_CONST) {
                 if (fC->Type(rhsbackup) == VObjectType::paPackage_scope) {
                   name.append("::").append(fC->SymName(rhs));
                 } else {
@@ -2769,8 +2769,8 @@ uhdm::Any *CompileHelper::compileExpression(
           }
           break;
         }
-        case VObjectType::slIntConst:
-        case VObjectType::slRealConst:
+        case VObjectType::INT_CONST:
+        case VObjectType::REAL_CONST:
         case VObjectType::paNumber_1Tickb1:
         case VObjectType::paNumber_1TickB1:
         case VObjectType::paInitVal_1Tickb1:
@@ -2806,7 +2806,7 @@ uhdm::Any *CompileHelper::compileExpression(
         case VObjectType::paX:
         case VObjectType::paZ:
         case VObjectType::paTime_literal:
-        case VObjectType::slStringLiteral: {
+        case VObjectType::STRING_LITERAL: {
           if ((result = compileConst(fC, child, s))) {
             result->setParent(pexpr);
           }
@@ -2942,7 +2942,7 @@ uhdm::Any *CompileHelper::compileExpression(
         case VObjectType::paSubroutine_call: {
           NodeId Dollar_keyword = fC->Child(child);
           NodeId nameId;
-          if (fC->Type(Dollar_keyword) == VObjectType::slStringConst) {
+          if (fC->Type(Dollar_keyword) == VObjectType::STRING_CONST) {
             nameId = Dollar_keyword;
           } else {
             nameId = fC->Sibling(Dollar_keyword);
@@ -2969,7 +2969,7 @@ uhdm::Any *CompileHelper::compileExpression(
           } else if (name == "typename") {
             result = compileTypename(component, fC, List_of_arguments,
                                      compileDesign, reduce, pexpr, instance);
-          } else if (fC->Type(Dollar_keyword) == VObjectType::slStringConst ||
+          } else if (fC->Type(Dollar_keyword) == VObjectType::STRING_CONST ||
                      fC->Type(Dollar_keyword) == VObjectType::paClass_scope) {
             if (fC->Type(Dollar_keyword) == VObjectType::paClass_scope) {
               NodeId Class_type = fC->Child(Dollar_keyword);
@@ -3064,7 +3064,7 @@ uhdm::Any *CompileHelper::compileExpression(
           int32_t operationType = UhdmWriter::getVpiOpType(type);
           if (NodeId subOp1 = fC->Child(child)) {
             VObjectType subOp1type = fC->Type(subOp1);
-            if (subOp1type == VObjectType::paPound_Pound_delay) {
+            if (subOp1type == VObjectType::POUND_POUND_DELAY) {
               operationType = vpiUnaryCycleDelayOp;
               if (NodeId subOp2 = fC->Sibling(subOp1)) {
                 VObjectType subOp2type = fC->Type(subOp2);
@@ -3114,12 +3114,12 @@ uhdm::Any *CompileHelper::compileExpression(
           if (NodeId sib = fC->Sibling(child)) {
             VObjectType type = fC->Type(sib);
             switch (type) {
-              case VObjectType::paOR:
-              case VObjectType::paAND:
-              case VObjectType::paUNTIL:
-              case VObjectType::paS_UNTIL:
-              case VObjectType::paUNTIL_WITH:
-              case VObjectType::paS_UNTIL_WITH: {
+              case VObjectType::OR:
+              case VObjectType::AND:
+              case VObjectType::UNTIL:
+              case VObjectType::S_UNTIL:
+              case VObjectType::UNTIL_WITH:
+              case VObjectType::S_UNTIL_WITH: {
                 int32_t optype = UhdmWriter::getVpiOpType(type);
                 uhdm::Operation *oper = s.make<uhdm::Operation>();
                 oper->setParent(pexpr);
@@ -3158,16 +3158,16 @@ uhdm::Any *CompileHelper::compileExpression(
           result = ref;
           break;
         }
-        case VObjectType::paACCEPT_ON:
-        case VObjectType::paREJECT_ON:
-        case VObjectType::paSYNC_ACCEPT_ON:
-        case VObjectType::paSYNC_REJECT_ON:
-        case VObjectType::paALWAYS:
-        case VObjectType::paS_ALWAYS:
-        case VObjectType::paEVENTUALLY:
-        case VObjectType::paS_EVENTUALLY:
-        case VObjectType::paNEXTTIME:
-        case VObjectType::paS_NEXTTIME: {
+        case VObjectType::ACCEPT_ON:
+        case VObjectType::REJECT_ON:
+        case VObjectType::SYNC_ACCEPT_ON:
+        case VObjectType::SYNC_REJECT_ON:
+        case VObjectType::ALWAYS:
+        case VObjectType::S_ALWAYS:
+        case VObjectType::EVENTUALLY:
+        case VObjectType::S_EVENTUALLY:
+        case VObjectType::NEXTTIME:
+        case VObjectType::S_NEXTTIME: {
           VObjectType type = childType;
           uhdm::Operation *operation = s.make<uhdm::Operation>();
           operation->setParent(pexpr);
@@ -3318,8 +3318,8 @@ uhdm::Any *CompileHelper::compileExpression(
           result = cons;
           break;
         }
-        case VObjectType::slIntConst:
-        case VObjectType::slRealConst:
+        case VObjectType::INT_CONST:
+        case VObjectType::REAL_CONST:
         case VObjectType::paNumber_1Tickb1:
         case VObjectType::paNumber_1TickB1:
         case VObjectType::paInitVal_1Tickb1:
@@ -3355,13 +3355,13 @@ uhdm::Any *CompileHelper::compileExpression(
         case VObjectType::paX:
         case VObjectType::paZ:
         case VObjectType::paTime_literal:
-        case VObjectType::slStringLiteral: {
+        case VObjectType::STRING_LITERAL: {
           if ((result = compileConst(fC, parent, s))) {
             result->setParent(pexpr);
           }
           break;
         }
-        case VObjectType::slStringConst:
+        case VObjectType::STRING_CONST:
         case VObjectType::paDollar_root_keyword: {
           result = compileComplexFuncCall(component, fC, parent, compileDesign,
                                           reduce, pexpr, instance, muteErrors);
@@ -3389,7 +3389,7 @@ uhdm::Any *CompileHelper::compileExpression(
   }
   if ((result == nullptr) && (muteErrors == false)) {
     VObjectType exprtype = fC->Type(the_node);
-    if (exprtype != VObjectType::paEND) {
+    if (exprtype != VObjectType::END) {
       ErrorContainer *const errors = m_session->getErrorContainer();
       SymbolTable *const symbols = m_session->getSymbolTable();
       uhdm::UnsupportedExpr *exp = s.make<uhdm::UnsupportedExpr>();
@@ -3554,7 +3554,7 @@ uhdm::Any *CompileHelper::compileAssignmentPattern(
           NodeId Constant_primary = fC->Child(Constant_expression);
           if (!Constant_primary) {
             uhdm::StringTypespec *tps = s.make<uhdm::StringTypespec>();
-            if (fC->Type(Constant_expression) == VObjectType::slStringConst) {
+            if (fC->Type(Constant_expression) == VObjectType::STRING_CONST) {
               tps->setName(fC->SymName(Constant_expression));
             } else {
               tps->setName("default");
@@ -3564,7 +3564,7 @@ uhdm::Any *CompileHelper::compileAssignmentPattern(
             tps->setParent(pattern);
             if (pattern->getTypespec() == nullptr) {
               uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
-              if (fC->Type(Constant_expression) == VObjectType::slStringConst) {
+              if (fC->Type(Constant_expression) == VObjectType::STRING_CONST) {
                 rt->setName(fC->SymName(Constant_expression));
               }
               rt->setParent(pattern);
@@ -4188,10 +4188,10 @@ const uhdm::Typespec *CompileHelper::getTypespec(
       result = s.make<uhdm::TimeTypespec>();
       break;
     }
-    case VObjectType::slStringConst: {
+    case VObjectType::STRING_CONST: {
       basename = fC->SymName(id);
       NodeId suffix = fC->Sibling(id);
-      while (suffix && (fC->Type(suffix) == VObjectType::slStringConst)) {
+      while (suffix && (fC->Type(suffix) == VObjectType::STRING_CONST)) {
         suffixnames.emplace_back(fC->SymName(suffix));
         suffix = fC->Sibling(suffix);
       }
@@ -4292,7 +4292,7 @@ const uhdm::Typespec *CompileHelper::getTypespec(
             sig->getComponent(), fC, sigTypeId, compileDesign, reduce,
             sig->getComponent()->getUhdmModel(), instance, true);
         NodeId Unpacked_dimension = sig->getUnpackedDimension();
-        if (fC->Type(Unpacked_dimension) != VObjectType::sl_INVALID_) {
+        if (fC->Type(Unpacked_dimension) != VObjectType::_INVALID_) {
           uhdm::ArrayTypespec *array = s.make<uhdm::ArrayTypespec>();
           int32_t size;
           if (uhdm::RangeCollection *ranges = compileRanges(
@@ -4311,14 +4311,14 @@ const uhdm::Typespec *CompileHelper::getTypespec(
         }
       } else {
         NodeId Packed_dimension = sig->getPackedDimension();
-        if (fC->Type(Packed_dimension) != VObjectType::sl_INVALID_) {
+        if (fC->Type(Packed_dimension) != VObjectType::_INVALID_) {
           NodeId DataType = fC->Parent(Packed_dimension);
           result = compileTypespec(
               sig->getComponent(), fC, DataType, compileDesign, reduce,
               sig->getComponent()->getUhdmModel(), instance, false);
         }
         NodeId Unpacked_dimension = sig->getUnpackedDimension();
-        if (fC->Type(Unpacked_dimension) != VObjectType::sl_INVALID_) {
+        if (fC->Type(Unpacked_dimension) != VObjectType::_INVALID_) {
           uhdm::ArrayTypespec *array = s.make<uhdm::ArrayTypespec>();
           int32_t size;
           if (uhdm::RangeCollection *ranges = compileRanges(
@@ -4564,7 +4564,7 @@ uhdm::Any *CompileHelper::compileTypename(DesignComponent *component,
   uhdm::Constant *c = s.make<uhdm::Constant>();
   if (fC->Type(Expression) == VObjectType::paData_type) {
     Expression = fC->Child(Expression);
-    if (fC->Type(Expression) == VObjectType::paVIRTUAL)
+    if (fC->Type(Expression) == VObjectType::VIRTUAL)
       Expression = fC->Sibling(Expression);
   }
   VObjectType type = fC->Type(Expression);
@@ -4823,7 +4823,7 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
   }
   NodeId List_of_arguments;
   while (tmp) {
-    if (fC->Type(tmp) == VObjectType::slStringConst ||
+    if (fC->Type(tmp) == VObjectType::STRING_CONST ||
         fC->Type(tmp) == VObjectType::paMethod_call_body ||
         fC->Type(tmp) == VObjectType::paSubroutine_call) {
       hierPath = true;
@@ -4848,7 +4848,7 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
     std::string name = "$root";
     NodeId nameId = fC->Sibling(Dollar_root_keyword);
     while (nameId) {
-      if (fC->Type(nameId) == VObjectType::slStringConst) {
+      if (fC->Type(nameId) == VObjectType::STRING_CONST) {
         name.append(".").append(fC->SymName(nameId));
         ref = s.make<uhdm::RefObj>();
         ref->setName(fC->SymName(nameId));
@@ -4990,7 +4990,7 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
           fC->populateCoreMembers(nameId, nameId, r);
           fC->populateCoreMembers(InvalidNodeId, Method, path);
           Method = fC->Sibling(Method);
-          if (fC->Type(Method) != VObjectType::slStringConst) {
+          if (fC->Type(Method) != VObjectType::STRING_CONST) {
             break;
           }
         }
@@ -5021,7 +5021,7 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
       fcall->setName(rootName);
       fC->populateCoreMembers(fC->Parent(Method), fC->Parent(Method), fcall);
       result = fcall;
-    } else if (fC->Type(List_of_arguments) == VObjectType::slStringConst) {
+    } else if (fC->Type(List_of_arguments) == VObjectType::STRING_CONST) {
       // TODO: this is a mockup
       uhdm::Constant *cvar = s.make<uhdm::Constant>();
       cvar->setDecompile("this");
@@ -5110,7 +5110,7 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
               else
                 result = param;
             } else if ((fC->Type(List_of_arguments) ==
-                        VObjectType::slStringConst)) {
+                        VObjectType::STRING_CONST)) {
               uhdm::HierPath *path = s.make<uhdm::HierPath>();
               uhdm::AnyCollection *elems = path->getPathElems(true);
               uhdm::RefObj *ref = s.make<uhdm::RefObj>();
@@ -5122,7 +5122,7 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
               elems->emplace_back(ref);
               while (List_of_arguments) {
                 if ((fC->Type(List_of_arguments) ==
-                     VObjectType::slStringConst)) {
+                     VObjectType::STRING_CONST)) {
                   uhdm::RefObj *ref = s.make<uhdm::RefObj>();
                   ref->setName(fC->SymName(List_of_arguments));
                   ref->setParent(path);
@@ -5169,7 +5169,7 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
   } else if (fC->Type(dotedName) == VObjectType::paSelect ||
              fC->Type(dotedName) == VObjectType::paConstant_select ||
              fC->Type(dotedName) == VObjectType::paConstant_expression ||
-             fC->Type(dotedName) == VObjectType::slStringConst ||
+             fC->Type(dotedName) == VObjectType::STRING_CONST ||
              fC->Type(dotedName) == VObjectType::paConstant_bit_select ||
              fC->Type(dotedName) == VObjectType::paBit_select) {
     NodeId Bit_select = fC->Child(dotedName);
@@ -5288,7 +5288,7 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
       while (dotedName) {
         VObjectType dtype = fC->Type(dotedName);
         NodeId BitSelect = fC->Child(dotedName);
-        if (dtype == VObjectType::slStringConst) {
+        if (dtype == VObjectType::STRING_CONST) {
           the_name.append(".").append(fC->SymName(dotedName));
           if (!tmpName.empty()) {
             uhdm::RefObj *ref = s.make<uhdm::RefObj>();
@@ -5580,7 +5580,7 @@ uhdm::Any *CompileHelper::compileComplexFuncCall(
   } else if (fC->Type(dotedName) == VObjectType::paList_of_arguments) {
     result =
         compileTfCall(component, fC, fC->Parent(name), compileDesign, pexpr);
-  } else if (fC->Type(name) == VObjectType::slStringConst) {
+  } else if (fC->Type(name) == VObjectType::STRING_CONST) {
     const std::string_view n = fC->SymName(name);
     uhdm::RefObj *ref = s.make<uhdm::RefObj>();
     ref->setName(n);

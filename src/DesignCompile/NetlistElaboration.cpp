@@ -675,7 +675,7 @@ ModuleInstance* NetlistElaboration::getInterfaceInstance_(
             Hierarchical_identifier = Net_lvalue;
           }
           sigId = Hierarchical_identifier;
-          if (fC->Type(fC->Child(sigId)) == VObjectType::slStringConst) {
+          if (fC->Type(fC->Child(sigId)) == VObjectType::STRING_CONST) {
             sigId = fC->Child(sigId);
           }
           sigName = fC->SymName(sigId);
@@ -699,7 +699,7 @@ ModuleInstance* NetlistElaboration::getInterfaceInstance_(
       NodeId MemNamed_port_connection = Named_port_connection;
       while (Named_port_connection) {
         NodeId formalId = fC->Child(Named_port_connection);
-        if (fC->Type(formalId) == VObjectType::paDOTSTAR) {
+        if (fC->Type(formalId) == VObjectType::DOTSTAR) {
           // .* connection
           break;
         }
@@ -710,7 +710,7 @@ ModuleInstance* NetlistElaboration::getInterfaceInstance_(
       while (Named_port_connection) {
         NodeId formalId = fC->Child(Named_port_connection);
         if (!formalId) break;
-        if (fC->Type(formalId) == VObjectType::paDOTSTAR) {
+        if (fC->Type(formalId) == VObjectType::DOTSTAR) {
           // .* connection
           Named_port_connection = fC->Sibling(Named_port_connection);
           continue;
@@ -726,10 +726,10 @@ ModuleInstance* NetlistElaboration::getInterfaceInstance_(
           formalName = fC->SymName(formalNameId);
         } else {
           NodeId tmp = Expression;
-          if (fC->Type(tmp) == VObjectType::paOPEN_PARENS) {
+          if (fC->Type(tmp) == VObjectType::OPEN_PARENS) {
             tmp = fC->Sibling(tmp);
             if (fC->Type(tmp) ==
-                VObjectType::paCLOSE_PARENS) {  // .p()  explicit disconnect
+                VObjectType::CLOSE_PARENS) {  // .p()  explicit disconnect
               Named_port_connection = fC->Sibling(Named_port_connection);
               continue;
             } else if (fC->Type(tmp) ==
@@ -924,7 +924,7 @@ bool NetlistElaboration::high_conn_(ModuleInstance* instance) {
           if (m_helper.isSelected(fC, Hierarchical_identifier))
             bit_or_part_select = true;
           sigId = Hierarchical_identifier;
-          if (fC->Type(fC->Child(sigId)) == VObjectType::slStringConst) {
+          if (fC->Type(fC->Child(sigId)) == VObjectType::STRING_CONST) {
             sigId = fC->Child(sigId);
           }
           sigName = fC->SymName(sigId);
@@ -941,7 +941,7 @@ bool NetlistElaboration::high_conn_(ModuleInstance* instance) {
             uhdm::Port* p = (*ports)[index];
 
             if ((!bit_or_part_select) &&
-                (fC->Type(sigId) == VObjectType::slStringConst)) {
+                (fC->Type(sigId) == VObjectType::STRING_CONST)) {
               bool bitBlast = false;
               uhdm::Any* net = nullptr;
               if (parent) {
@@ -1042,7 +1042,7 @@ bool NetlistElaboration::high_conn_(ModuleInstance* instance) {
             netlist->ports(ports);
           }
           fC->populateCoreMembers(Net_lvalue, Net_lvalue, p);
-          if ((fC->Type(sigId) == VObjectType::slStringConst) &&
+          if ((fC->Type(sigId) == VObjectType::STRING_CONST) &&
               (!bit_or_part_select)) {
             uhdm::RefObj* ref = s.make<uhdm::RefObj>();
             fC->populateCoreMembers(sigId, sigId, ref);
@@ -1125,7 +1125,7 @@ bool NetlistElaboration::high_conn_(ModuleInstance* instance) {
       uint16_t wildcardColumnNumber = 0;
       while (Named_port_connection) {
         NodeId formalId = fC->Child(Named_port_connection);
-        if (fC->Type(formalId) == VObjectType::paDOTSTAR) {
+        if (fC->Type(formalId) == VObjectType::DOTSTAR) {
           // .* connection
           wildcard = true;
           wildcardLineNumber = fC->Line(formalId);
@@ -1151,7 +1151,7 @@ bool NetlistElaboration::high_conn_(ModuleInstance* instance) {
             formalId = fC->Sibling(formalId);
           }
         }
-        if (fC->Type(formalId) == VObjectType::paDOTSTAR) {
+        if (fC->Type(formalId) == VObjectType::DOTSTAR) {
           // .* connection
           Named_port_connection = fC->Sibling(Named_port_connection);
           continue;
@@ -1168,10 +1168,10 @@ bool NetlistElaboration::high_conn_(ModuleInstance* instance) {
           formalName = fC->SymName(formalNameId);
         } else {
           NodeId tmp = Expression;
-          if (fC->Type(tmp) == VObjectType::paOPEN_PARENS) {
+          if (fC->Type(tmp) == VObjectType::OPEN_PARENS) {
             tmp = fC->Sibling(tmp);
             if (fC->Type(tmp) ==
-                VObjectType::paCLOSE_PARENS) {  // .p()  explicit disconnect
+                VObjectType::CLOSE_PARENS) {  // .p()  explicit disconnect
               Named_port_connection = fC->Sibling(Named_port_connection);
               uhdm::Port* p = nullptr;
               if (ports) {
@@ -1265,7 +1265,7 @@ bool NetlistElaboration::high_conn_(ModuleInstance* instance) {
           }
         }
         if (modPort) {
-          if (fC->Type(sigId) == VObjectType::slStringConst)
+          if (fC->Type(sigId) == VObjectType::STRING_CONST)
             sigName = fC->SymName(sigId);
         }
         std::string baseName = sigName;
@@ -1811,10 +1811,10 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
   uhdm::Typespec* tps = nullptr;
   // Determine if the "signal" is a net or a var
   bool isNet = true;
-  if ((dtype && (subnettype == VObjectType::slNoType)) || sig->isConst() ||
+  if ((dtype && (subnettype == VObjectType::NO_TYPE)) || sig->isConst() ||
       sig->isVar() || (!sig->isStatic()) ||
       (subnettype == VObjectType::paClass_scope) ||
-      (subnettype == VObjectType::slStringConst) ||
+      (subnettype == VObjectType::STRING_CONST) ||
       (subnettype == VObjectType::paIntegerAtomType_Int) ||
       (subnettype == VObjectType::paIntegerAtomType_Integer) ||
       (subnettype == VObjectType::paIntegerAtomType_Byte) ||
@@ -2468,13 +2468,13 @@ bool NetlistElaboration::elab_ports_nets_(
         if (!do_ports) continue;
         // Ports pass
         uhdm::Port* dest_port = s.make<uhdm::Port>();
-        if (sig->getDirection() != VObjectType::slNoType) {
+        if (sig->getDirection() != VObjectType::NO_TYPE) {
           lastPortDirection = UhdmWriter::getVpiDirection(sig->getDirection());
         }
         dest_port->setDirection(lastPortDirection);
         std::string signame;
         VObjectType nodeIdType = fC->Type(sig->getNodeId());
-        if (nodeIdType == VObjectType::slStringConst) {
+        if (nodeIdType == VObjectType::STRING_CONST) {
           signame = sig->getName();
           dest_port->setName(signame);
         } else if (nodeIdType == VObjectType::paPort) {
@@ -2674,7 +2674,7 @@ bool NetlistElaboration::elab_ports_nets_(
       } else if (pass == 1) {
         // Nets pass
         if (do_ports) continue;
-        if (fC->Type(sig->getNodeId()) == VObjectType::slStringConst) {
+        if (fC->Type(sig->getNodeId()) == VObjectType::STRING_CONST) {
           const std::string_view signame = sig->getName();
           if (portInterf.find(signame) == portInterf.end()) {
             bool sigIsPort = false;
@@ -2694,7 +2694,7 @@ bool NetlistElaboration::elab_ports_nets_(
         // Port low conn pass
         if (do_ports) continue;
         std::string signame;
-        if (fC->Type(sig->getNodeId()) == VObjectType::slStringConst) {
+        if (fC->Type(sig->getNodeId()) == VObjectType::STRING_CONST) {
           signame = sig->getName();
         } else {
           portIndex++;
@@ -2814,7 +2814,7 @@ uhdm::Any* NetlistElaboration::bind_net_(const FileContent* origfC, NodeId id,
             component->getDesignElement()
                 ? component->getDesignElement()->m_defaultNetType
                 : VObjectType::paNetType_Wire;
-        if (implicitNetType == VObjectType::slNoType) {
+        if (implicitNetType == VObjectType::NO_TYPE) {
           Location loc(origfC->getFileId(),
                        id ? origfC->Line(id) : instance->getLineNb(),
                        id ? origfC->Column(id) : instance->getColumnNb(),

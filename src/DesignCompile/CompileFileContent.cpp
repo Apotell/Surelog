@@ -68,7 +68,7 @@ bool CompileFileContent::collectObjects_() {
       VObjectType::paInterface_declaration,
       VObjectType::paProgram_declaration,
       VObjectType::paClass_declaration,
-      VObjectType::paPRIMITIVE,
+      VObjectType::PRIMITIVE,
       VObjectType::paPackage_declaration,
       VObjectType::paFunction_declaration,
       VObjectType::paInterface_class_declaration};
@@ -131,7 +131,7 @@ bool CompileFileContent::collectObjects_() {
           NodeId list_of_type_assignments = fC->Child(id);
           if (fC->Type(list_of_type_assignments) ==
                   VObjectType::paList_of_type_assignments ||
-              fC->Type(list_of_type_assignments) == VObjectType::paTYPE) {
+              fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
             // Type param
             m_helper.compileParameterDeclaration(
                 m_fileContent, fC, list_of_type_assignments, m_compileDesign,
@@ -157,7 +157,7 @@ bool CompileFileContent::collectObjects_() {
           NodeId list_of_type_assignments = fC->Child(id);
           if (fC->Type(list_of_type_assignments) ==
                   VObjectType::paList_of_type_assignments ||
-              fC->Type(list_of_type_assignments) == VObjectType::paTYPE) {
+              fC->Type(list_of_type_assignments) == VObjectType::TYPE) {
             // Type param
             m_helper.compileParameterDeclaration(
                 m_fileContent, fC, list_of_type_assignments, m_compileDesign,

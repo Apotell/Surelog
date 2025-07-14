@@ -64,9 +64,9 @@ ONE_TICK_Bx: '1\'Bx';
 
 ONE_TICK_BX: '1\'BX';
 
-Pound_Pound_delay: '##' ' '* [0-9] [0-9_.]*;
+POUND_POUND_DELAY: '##' ' '* [0-9] [0-9_.]*;
 
-Pound_delay: '#' ' '* [0-9] [0-9_.]*;
+POUND_DELAY: '#' ' '* [0-9] [0-9_.]*;
 
 fragment Non_zero_unsigned_number
   : '1' ..'9' ('_' | Decimal_digit)*
@@ -97,7 +97,7 @@ fragment Hex_number
   : (Non_zero_unsigned_number ' '*)? Hex_base ' '* Hex_value
   ;
 
-Integral_number
+INTEGRAL_NUMBER
   : Decimal_number
   | Octal_number
   | Binary_number
@@ -110,7 +110,7 @@ Integral_number
  unsigned_number
  */
 
-Real_number
+REAL_NUMBER
   : Fixed_point_number
   | Unsigned_number ('.' Unsigned_number)? ('e' | 'E') (
     PLUS
@@ -192,7 +192,7 @@ fragment Z_digit: ('z' | 'Z' | QMARK);
 
 // A.8.8 Strings
 
-String
+QUOTED_STRING
   : '"' // a opening quote
   (
     // start group
@@ -212,13 +212,13 @@ String
 
 /* one_line_comment ::= // comment_text \n */
 
-One_line_comment
+LINE_COMMENT
   : '//' Comment_text '\r'? ('\n' | EOF) -> channel(COMMENTS)
   ;
 
 // block_comment ::= /* comment_text */
 
-Block_comment: '/*' Comment_text '*/' -> channel(COMMENTS);
+BLOCK_COMMENT: '/*' Comment_text '*/' -> channel(COMMENTS);
 
 /* comment_text ::= { Any_ASCII_character } */
 
@@ -232,7 +232,7 @@ AT_PARENS_STAR: '@' ' '? '(' ' '? '*' ' '? ')';
 
 // 9.4 White space
 
-White_space: [ \t\n\r]+ -> channel(WHITESPACES);
+WHITE_SPACE: [ \t\n\r]+ -> channel(WHITESPACES);
 
 // ######################### LEXER RULES ################################
 
@@ -919,8 +919,8 @@ NETTYPE: 'nettype';
 
 //Escaped_identifier : '^^^' [\\|+a-zA-Z0-9_$:,-/*{}()`~!=;'"<>?.]* '^^^' ;
 
-Escaped_identifier: '#~@' .*? '#~@';
-Preproc_identifier: '@~#' Decimal_digit+;
+ESCAPED_IDENTIFIER: '#~@' .*? '#~@';
+PREPROC_IDENTIFIER: '@~#' Decimal_digit+;
 
 TILDA: '~';
 
@@ -930,7 +930,7 @@ REDUCTION_XNOR2: '~^';
 
 /* simple_identifier <<2>> ::= [ a-zA-Z_ ] { [ a-zA-Z0-9_$ ] } */
 
-Simple_identifier: [a-zA-Z_] [a-zA-Z0-9_$]*;
+SIMPLE_IDENTIFIER: [a-zA-Z_] [a-zA-Z0-9_$]*;
 
 TICK_LINE: '`line';
 
@@ -1009,7 +1009,7 @@ TICK_PRAGMA: '`pragma';
 BACK_TICK: '`';
 
 SURELOG_MACRO_NOT_DEFINED
-  : 'SURELOG_MACRO_NOT_DEFINED:' Simple_identifier '!!!'
+  : 'SURELOG_MACRO_NOT_DEFINED:' SIMPLE_IDENTIFIER '!!!'
   ;
 
 ANY: .;

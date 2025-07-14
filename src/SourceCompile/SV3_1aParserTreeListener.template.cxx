@@ -138,7 +138,7 @@ void SV3_1aParserTreeListener::enterString_value(
     SV3_1aParser::String_valueContext *ctx) {
   if (m_paused != 0) return;
 
-  std::string text = ctx->String()->getText();
+  std::string text = ctx->QUOTED_STRING()->getText();
 
   std::smatch match;
   while (std::regex_search(text, match, m_regexEscSeqSearch)) {
@@ -147,7 +147,7 @@ void SV3_1aParserTreeListener::enterString_value(
   }
 
   addVObject(ctx, text, VObjectType::paString_value);
-  m_visitedTokens.emplace(ctx->String()->getSymbol());
+  m_visitedTokens.emplace(ctx->QUOTED_STRING()->getSymbol());
 
   if (text.size() > SV_MAX_STRING_SIZE) {
     logError(ErrorDefinition::PA_MAX_LENGTH_IDENTIFIER, ctx, text);
@@ -294,7 +294,7 @@ void SV3_1aParserTreeListener::processPendingTokens(
         }
       } break;
 
-      case SV3_1aParser::One_line_comment: {
+      case SV3_1aParser::LINE_COMMENT: {
         if (m_paused != 0) break;
 
         std::string text = lastToken->getText();
@@ -308,7 +308,7 @@ void SV3_1aParserTreeListener::processPendingTokens(
 
         if (!trimmed.empty()) {
           const NodeId nodeId =
-              addVObject(tree, trimmed, VObjectType::paOne_line_comment, true);
+              addVObject(tree, trimmed, VObjectType::LINE_COMMENT, true);
           overrideLocation(nodeId, lastToken);
 
           VObject *const object = m_fileContent->MutableObject(nodeId);
@@ -322,7 +322,7 @@ void SV3_1aParserTreeListener::processPendingTokens(
         }
 
         if (hasCR) {
-          const NodeId nodeId = addVObject(tree, "\n", VObjectType::ppCR, true);
+          const NodeId nodeId = addVObject(tree, "\n", VObjectType::CR, true);
           overrideLocation(nodeId, lastToken);
 
           VObject *const object = m_fileContent->MutableObject(nodeId);
@@ -334,15 +334,15 @@ void SV3_1aParserTreeListener::processPendingTokens(
         m_visitedTokens.emplace(lastToken);
       } break;
 
-      case SV3_1aParser::Block_comment: {
+      case SV3_1aParser::BLOCK_COMMENT: {
         if (m_paused != 0) break;
 
         const NodeId nodeId = addVObject(tree, lastToken->getText(),
-                                         VObjectType::paBlock_comment, true);
+                                         VObjectType::BLOCK_COMMENT, true);
         overrideLocation(nodeId, lastToken);
       } break;
 
-      case SV3_1aParser::White_space: {
+      case SV3_1aParser::WHITE_SPACE: {
         if (m_paused != 0) break;
 
         std::string text = lastToken->getText();
@@ -356,7 +356,7 @@ void SV3_1aParserTreeListener::processPendingTokens(
           }
           if (!part.empty()) {
             const NodeId nodeId =
-                addVObject(tree, part, VObjectType::paWhite_space, true);
+                addVObject(tree, part, VObjectType::WHITE_SPACE, true);
             VObject *const object = m_fileContent->MutableObject(nodeId);
 
             object->m_ppStartLine = object->m_ppEndLine = lc.first;
@@ -370,7 +370,7 @@ void SV3_1aParserTreeListener::processPendingTokens(
           }
           if (hasCR) {
             const NodeId nodeId =
-                addVObject(tree, "\n", VObjectType::ppCR, true);
+                addVObject(tree, "\n", VObjectType::CR, true);
             VObject *const object = m_fileContent->MutableObject(nodeId);
 
             object->m_ppStartLine = lc.first;
@@ -451,14 +451,14 @@ void SV3_1aParserTreeListener::visitTerminal(antlr4::tree::TerminalNode *node) {
   // clang-format off
   NodeId nodeId;
   switch (token->getType()) {
-    case SV3_1aParser::Escaped_identifier: {
+    case SV3_1aParser::ESCAPED_IDENTIFIER: {
       std::string text = node->getText();
       std::smatch match;
       while (std::regex_search(text, match, m_regexEscSeqSearch)) {
         std::string var = "\\" + match[1].str();
         text = text.replace(match.position(0), match.length(0), var);
       }
-      nodeId = addVObject(node, text, VObjectType::paEscaped_identifier);
+      nodeId = addVObject(node, text, VObjectType::ESCAPED_IDENTIFIER);
     } break;
 
 <VISIT_CASE_STATEMENTS>
@@ -473,15 +473,15 @@ void SV3_1aParserTreeListener::visitTerminal(antlr4::tree::TerminalNode *node) {
     if (isUnary) {
       // clang-format off
       switch (token->getType()) {
-        case SV3_1aParser::BITW_AND: object->m_type = isUnary.value() ? VObjectType::paUnary_BitwAnd : VObjectType::paBinOp_BitwAnd; break;
-        case SV3_1aParser::BITW_OR: object->m_type = isUnary.value() ? VObjectType::paUnary_BitwOr : VObjectType::paBinOp_BitwOr; break;
-        case SV3_1aParser::BITW_XOR: object->m_type = isUnary.value() ? VObjectType::paUnary_BitwXor : VObjectType::paBinOp_BitwXor; break;
-        case SV3_1aParser::MINUS: object->m_type = isUnary.value() ? VObjectType::paUnary_Minus : VObjectType::paBinOp_Minus; break;
-        case SV3_1aParser::PLUS: object->m_type = isUnary.value() ? VObjectType::paUnary_Plus : VObjectType::paBinOp_Plus; break;
-        case SV3_1aParser::REDUCTION_NAND: object->m_type = isUnary.value() ? VObjectType::paUnary_ReductNand : VObjectType::paBinOp_ReductNand; break;
-        case SV3_1aParser::REDUCTION_XNOR1: object->m_type = isUnary.value() ? VObjectType::paUnary_ReductXnor1 : VObjectType::paBinOp_ReductXnor1; break;
-        case SV3_1aParser::REDUCTION_XNOR2: object->m_type = isUnary.value() ? VObjectType::paUnary_ReductXnor2 : VObjectType::paBinOp_ReductXnor2; break;
-        case SV3_1aParser::STAR: object->m_type = VObjectType::paBinOp_Mult; break;
+        case SV3_1aParser::BITW_AND: object->m_type = isUnary.value() ? VObjectType::UnaryOp_BitwAnd : VObjectType::BinaryOp_BitwAnd; break;
+        case SV3_1aParser::BITW_OR: object->m_type = isUnary.value() ? VObjectType::UnaryOp_BitwOr : VObjectType::BinaryOp_BitwOr; break;
+        case SV3_1aParser::BITW_XOR: object->m_type = isUnary.value() ? VObjectType::UnaryOp_BitwXor : VObjectType::BinaryOp_BitwXor; break;
+        case SV3_1aParser::MINUS: object->m_type = isUnary.value() ? VObjectType::UnaryOp_Minus : VObjectType::BinaryOp_Minus; break;
+        case SV3_1aParser::PLUS: object->m_type = isUnary.value() ? VObjectType::UnaryOp_Plus : VObjectType::BinaryOp_Plus; break;
+        case SV3_1aParser::REDUCTION_NAND: object->m_type = isUnary.value() ? VObjectType::UnaryOp_ReductNand : VObjectType::BinaryOp_ReductNand; break;
+        case SV3_1aParser::REDUCTION_XNOR1: object->m_type = isUnary.value() ? VObjectType::UnaryOp_ReductXnor1 : VObjectType::BinaryOp_ReductXnor1; break;
+        case SV3_1aParser::REDUCTION_XNOR2: object->m_type = isUnary.value() ? VObjectType::UnaryOp_ReductXnor2 : VObjectType::BinaryOp_ReductXnor2; break;
+        case SV3_1aParser::STAR: object->m_type = VObjectType::BinaryOp_Mult; break;
         default: break;
       }
       // clang-format on
@@ -495,7 +495,7 @@ void SV3_1aParserTreeListener::visitErrorNode(antlr4::tree::ErrorNode *node) {
       (text != PreprocessFile::MacroNotDefined) &&
       (text != PreprocessFile::PP__Line__Marking) &&
       (text != PreprocessFile::PP__File__Marking)) {
-    addVObject(node, VObjectType::slUnparsable_Text);
+    addVObject(node, VObjectType::UNPARSABLE_TEXT);
   }
 }
 }  // namespace SURELOG

@@ -85,7 +85,7 @@ void walk(scompiler* compiler, AstListener* listener) {
 }
 
 static bool isSpace(VObjectType type) {
-  return (type == VObjectType::paWhite_space) || (type == VObjectType::ppCR);
+  return (type == VObjectType::WHITE_SPACE) || (type == VObjectType::CR);
 }
 
 static NodeId skipSpace(NodeId nodeId, const std::vector<VObject>& objects) {

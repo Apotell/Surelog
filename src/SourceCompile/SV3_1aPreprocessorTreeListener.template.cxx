@@ -790,6 +790,8 @@ void SV3_1aPreprocessorTreeListener::enterMacroInstanceWithArgs(
   if (macroBody.empty()) {
     emptyMacroBody = true;
     macroBody.append(nCRinArgs, '\n');
+  } else if (macroBody == "SURELOG_MACRO_NOT_DEFINED") {
+    macroBody.append(nCRinArgs, '\n');
   }
 
   m_pp->append(macroBody);

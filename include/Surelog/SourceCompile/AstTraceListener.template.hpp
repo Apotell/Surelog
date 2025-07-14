@@ -79,7 +79,7 @@ class AstTraceListener final : public AstListener {
         fileSystem->toPlatformAbsPath(fileId).string();
     if ((srcFilepath.find("/third_party/UVM/") != std::string::npos) ||
         (srcFilepath.find("\\third_party\\UVM\\") != std::string::npos)) {
-      m_visited.insert(getRootNode());
+      markVisited(getRootNode(), false);
     }
   }
   void leaveSourceFile(SURELOG::PathId fileId,

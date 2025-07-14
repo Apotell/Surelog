@@ -155,6 +155,7 @@ class AstListener {
 
  public:
   AstListener() = default;
+  AstListener(const AstListener &rhs);
   virtual ~AstListener() = default;
 
   virtual bool shouldWalkSourceFile(Session* session, PathId fileId) const {
@@ -229,11 +230,11 @@ class AstListener {
   bool getNodeChildren(const AstNode& node, astnode_vector_t& children) const;
   bool getNodeSiblings(const AstNode& node, astnode_vector_t& siblings) const;
 
-  AstNode getNodeOfTypeInHierarchy(const AstNode& node, VObjectType type,
-                                   size_t depth = 4) const;
-  AstNode getNodeOfTypeInHierarchy(const AstNode& node,
-                                   const std::set<VObjectType>& types,
-                                   size_t depth = 4) const;
+  AstNode getNodeOfTypeInTree(const AstNode& node, VObjectType type,
+                              size_t depth = 4) const;
+  AstNode getNodeOfTypeInTree(const AstNode& node,
+                              const std::set<VObjectType>& types,
+                              size_t depth = 4) const;
 
   size_t getNodeChildCount(const AstNode& node) const;
   size_t getNodeChildCount(const AstNode& node, VObjectType type) const;
@@ -245,6 +246,27 @@ class AstListener {
   size_t getNodeSiblingCount(const AstNode& node,
                              const std::set<VObjectType>& types) const;
 
+  size_t getNodeCountInTree(const AstNode& node) const;
+  size_t getNodeCountInTree(const AstNode& node, VObjectType type) const;
+  size_t getNodeCountInTree(const AstNode& node,
+                            const std::set<VObjectType>& types) const;
+
+  const NodeIdSet& getVisited() const { return m_visited; }
+  size_t markVisited(const AstNode& node, bool includeSubTree);
+  size_t clearVisited(const AstNode& node, bool includeSubTree);
+
+  size_t markChildrenVisited(const AstNode& node, bool includeSubTree);
+  size_t clearVisitedChildren(const AstNode& node, bool includeSubTree);
+
+ private:
+  size_t getNodeCountInTree(const NodeId& id) const;
+  size_t getNodeCountInTree(const NodeId& id, VObjectType type) const;
+  size_t getNodeCountInTree(const NodeId& id,
+                            const std::set<VObjectType>& types) const;
+
+  size_t markVisited(const NodeId& id);
+  size_t clearVisited(const NodeId& id);
+
  private:
   // clang-format off
 <PRIVATE_LISTEN_DECLARATIONS>
@@ -252,9 +274,10 @@ class AstListener {
 
  protected:
   Session* m_session = nullptr;
-  astnode_set_t m_visited;
 
  private:
+  NodeIdSet m_visited;
+
   const VObject* m_objects = nullptr;
   size_t m_count = 0;
 };

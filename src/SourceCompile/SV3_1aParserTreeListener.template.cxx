@@ -432,7 +432,8 @@ void SV3_1aParserTreeListener::exitEveryRule(antlr4::ParserRuleContext *ctx) {
 
   if (const antlr4::Token *const stopToken = ctx->getStop()) {
     if (!ctx->children.empty()) {
-      processPendingTokens(ctx->children.back(), stopToken->getTokenIndex());
+      processPendingTokens(ctx->children.empty() ? ctx : ctx->children.back(),
+                           m_tokens->size());
     }
   }
 

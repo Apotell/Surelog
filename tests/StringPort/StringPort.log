@@ -10,7 +10,7 @@ n<> u<42> t<Top_level_rule> c<1> l<1:1> el<7:1>
       n<> u<39> t<Module_declaration> p<40> c<13> l<1:1> el<6:10>
         n<> u<13> t<Module_ansi_header> p<39> c<2> s<37> l<1:1> el<1:29>
           n<module> u<2> t<Module_keyword> p<13> s<3> l<1:1> el<1:7>
-          n<top> u<3> t<StringConst> p<13> s<12> l<1:8> el<1:11>
+          n<top> u<3> t<STRING_CONST> p<13> s<12> l<1:8> el<1:11>
           n<> u<12> t<List_of_port_declarations> p<13> c<11> l<1:11> el<1:28>
             n<> u<11> t<Ansi_port_declaration> p<12> c<9> l<1:12> el<1:27>
               n<> u<9> t<Net_port_header> p<11> c<4> s<10> l<1:12> el<1:25>
@@ -19,7 +19,7 @@ n<> u<42> t<Top_level_rule> c<1> l<1:1> el<7:1>
                   n<> u<7> t<Data_type_or_implicit> p<8> c<6> l<1:19> el<1:25>
                     n<string> u<6> t<Data_type> p<7> c<5> l<1:19> el<1:25>
                       n<string> u<5> t<String_type> p<6> l<1:19> el<1:25>
-              n<o> u<10> t<StringConst> p<11> l<1:26> el<1:27>
+              n<o> u<10> t<STRING_CONST> p<11> l<1:26> el<1:27>
         n<> u<37> t<Non_port_module_item> p<39> c<36> s<38> l<3:4> el<5:7>
           n<> u<36> t<Module_or_generate_item> p<37> c<35> l<3:4> el<5:7>
             n<> u<35> t<Module_common_item> p<36> c<34> l<3:4> el<5:7>
@@ -35,14 +35,14 @@ n<> u<42> t<Top_level_rule> c<1> l<1:1> el<7:1>
                                 n<> u<24> t<Operator_assignment> p<25> c<18> l<4:7> el<4:17>
                                   n<> u<18> t<Variable_lvalue> p<24> c<15> s<19> l<4:7> el<4:8>
                                     n<> u<15> t<Ps_or_hierarchical_identifier> p<18> c<14> s<17> l<4:7> el<4:8>
-                                      n<o> u<14> t<StringConst> p<15> l<4:7> el<4:8>
+                                      n<o> u<14> t<STRING_CONST> p<15> l<4:7> el<4:8>
                                     n<> u<17> t<Select> p<18> c<16> l<4:9> el<4:9>
                                       n<> u<16> t<Bit_select> p<17> l<4:9> el<4:9>
                                   n<> u<19> t<AssignOp_Assign> p<24> s<23> l<4:9> el<4:10>
                                   n<> u<23> t<Expression> p<24> c<22> l<4:11> el<4:17>
                                     n<> u<22> t<Primary> p<23> c<21> l<4:11> el<4:17>
                                       n<> u<21> t<Primary_literal> p<22> c<20> l<4:11> el<4:17>
-                                        n<"abcd"> u<20> t<StringLiteral> p<21> l<4:11> el<4:17>
+                                        n<"abcd"> u<20> t<STRING_LITERAL> p<21> l<4:11> el<4:17>
                         n<> u<29> t<END> p<30> l<5:4> el<5:7>
         n<> u<38> t<ENDMODULE> p<39> l<6:1> el<6:10>
 AST_DEBUG_END
@@ -58,23 +58,20 @@ Assignment                                             1
 Begin                                                  1
 ClassDefn                                              8
 ClassTypespec                                          1
-ClassVar                                               1
 Constant                                               6
 Design                                                 1
 EnumConst                                              5
 EnumTypespec                                           1
-EnumVar                                                1
 Function                                               9
 IODecl                                                11
 Initial                                                1
 IntTypespec                                            9
-IntVar                                                 4
-LogicVar                                               1
+LogicTypespec                                          1
 Module                                                 1
 Package                                                1
 Port                                                   1
 RefObj                                                 1
-RefTypespec                                           13
+RefTypespec                                           14
 StringTypespec                                         2
 StringVar                                              1
 Task                                                   9
@@ -131,19 +128,6 @@ Design: (unnamed)
       \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/StringPort/builtin.sv, line:1:3, endln:27:11
       |vpiName:num
       |vpiFullName:builtin::mailbox::num
-      |vpiVariables:
-      \_IntVar: (builtin::mailbox::num)
-        |vpiParent:
-        \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
-        |vpiTypespec:
-        \_RefTypespec: (builtin::mailbox::num), line:6:14, endln:6:17
-          |vpiParent:
-          \_IntVar: (builtin::mailbox::num)
-          |vpiFullName:builtin::mailbox::num
-          |vpiActual:
-          \_IntTypespec: , line:6:14, endln:6:17
-        |vpiFullName:builtin::mailbox::num
-        |vpiSigned:1
       |vpiTypedef:
       \_IntTypespec: , line:6:14, endln:6:17
         |vpiParent:
@@ -151,12 +135,15 @@ Design: (unnamed)
         |vpiSigned:1
       |vpiImportTypespec:
       \_IntTypespec: , line:6:14, endln:6:17
-      |vpiImportTypespec:
-      \_IntVar: (builtin::mailbox::num)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_IntVar: (builtin::mailbox::num)
+      \_RefTypespec: (builtin::mailbox::num), line:6:14, endln:6:17
+        |vpiParent:
+        \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
+        |vpiFullName:builtin::mailbox::num
+        |vpiActual:
+        \_IntTypespec: , line:6:14, endln:6:17
     |vpiInternalScope:
     \_Task: (builtin::mailbox::put), line:9:5, endln:10:12
       |vpiParent:
@@ -177,19 +164,21 @@ Design: (unnamed)
       \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/StringPort/builtin.sv, line:1:3, endln:27:11
       |vpiName:try_put
       |vpiFullName:builtin::mailbox::try_put
-      |vpiVariables:
-      \_LogicVar: (builtin::mailbox::try_put)
+      |vpiTypedef:
+      \_LogicTypespec: 
         |vpiParent:
         \_Function: (builtin::mailbox::try_put), line:12:5, endln:13:16
-        |vpiFullName:builtin::mailbox::try_put
-      |vpiReg:
-      \_LogicVar: (builtin::mailbox::try_put)
       |vpiImportTypespec:
-      \_LogicVar: (builtin::mailbox::try_put)
+      \_LogicTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_LogicVar: (builtin::mailbox::try_put)
+      \_RefTypespec: (builtin::mailbox::try_put)
+        |vpiParent:
+        \_Function: (builtin::mailbox::try_put), line:12:5, endln:13:16
+        |vpiFullName:builtin::mailbox::try_put
+        |vpiActual:
+        \_LogicTypespec: 
       |vpiIODecl:
       \_IODecl: (message), line:12:23, endln:12:30
         |vpiParent:
@@ -216,19 +205,6 @@ Design: (unnamed)
       \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/StringPort/builtin.sv, line:1:3, endln:27:11
       |vpiName:try_get
       |vpiFullName:builtin::mailbox::try_get
-      |vpiVariables:
-      \_IntVar: (builtin::mailbox::try_get)
-        |vpiParent:
-        \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
-        |vpiTypespec:
-        \_RefTypespec: (builtin::mailbox::try_get), line:18:14, endln:18:17
-          |vpiParent:
-          \_IntVar: (builtin::mailbox::try_get)
-          |vpiFullName:builtin::mailbox::try_get
-          |vpiActual:
-          \_IntTypespec: , line:18:14, endln:18:17
-        |vpiFullName:builtin::mailbox::try_get
-        |vpiSigned:1
       |vpiTypedef:
       \_IntTypespec: , line:18:14, endln:18:17
         |vpiParent:
@@ -236,12 +212,15 @@ Design: (unnamed)
         |vpiSigned:1
       |vpiImportTypespec:
       \_IntTypespec: , line:18:14, endln:18:17
-      |vpiImportTypespec:
-      \_IntVar: (builtin::mailbox::try_get)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_IntVar: (builtin::mailbox::try_get)
+      \_RefTypespec: (builtin::mailbox::try_get), line:18:14, endln:18:17
+        |vpiParent:
+        \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
+        |vpiFullName:builtin::mailbox::try_get
+        |vpiActual:
+        \_IntTypespec: , line:18:14, endln:18:17
       |vpiIODecl:
       \_IODecl: (message), line:18:31, endln:18:38
         |vpiParent:
@@ -268,19 +247,6 @@ Design: (unnamed)
       \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/StringPort/builtin.sv, line:1:3, endln:27:11
       |vpiName:try_peek
       |vpiFullName:builtin::mailbox::try_peek
-      |vpiVariables:
-      \_IntVar: (builtin::mailbox::try_peek)
-        |vpiParent:
-        \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
-        |vpiTypespec:
-        \_RefTypespec: (builtin::mailbox::try_peek), line:24:14, endln:24:17
-          |vpiParent:
-          \_IntVar: (builtin::mailbox::try_peek)
-          |vpiFullName:builtin::mailbox::try_peek
-          |vpiActual:
-          \_IntTypespec: , line:24:14, endln:24:17
-        |vpiFullName:builtin::mailbox::try_peek
-        |vpiSigned:1
       |vpiTypedef:
       \_IntTypespec: , line:24:14, endln:24:17
         |vpiParent:
@@ -288,12 +254,15 @@ Design: (unnamed)
         |vpiSigned:1
       |vpiImportTypespec:
       \_IntTypespec: , line:24:14, endln:24:17
-      |vpiImportTypespec:
-      \_IntVar: (builtin::mailbox::try_peek)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_IntVar: (builtin::mailbox::try_peek)
+      \_RefTypespec: (builtin::mailbox::try_peek), line:24:14, endln:24:17
+        |vpiParent:
+        \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
+        |vpiFullName:builtin::mailbox::try_peek
+        |vpiActual:
+        \_IntTypespec: , line:24:14, endln:24:17
       |vpiIODecl:
       \_IODecl: (message), line:24:31, endln:24:38
         |vpiParent:
@@ -340,19 +309,6 @@ Design: (unnamed)
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/StringPort/builtin.sv, line:30:3, endln:52:11
       |vpiName:self
       |vpiFullName:builtin::process::self
-      |vpiVariables:
-      \_ClassVar: (builtin::process::self)
-        |vpiParent:
-        \_Function: (builtin::process::self), line:34:5, endln:35:16
-        |vpiTypespec:
-        \_RefTypespec: (builtin::process::self::builtin::process), line:34:21, endln:34:28
-          |vpiParent:
-          \_ClassVar: (builtin::process::self)
-          |vpiName:builtin::process
-          |vpiFullName:builtin::process::self::builtin::process
-          |vpiActual:
-          \_ClassTypespec: (process), line:34:21, endln:34:28
-        |vpiFullName:builtin::process::self
       |vpiTypedef:
       \_ClassTypespec: (process), line:34:21, endln:34:28
         |vpiParent:
@@ -362,37 +318,32 @@ Design: (unnamed)
         \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/StringPort/builtin.sv, line:30:3, endln:52:11
       |vpiImportTypespec:
       \_ClassTypespec: (process), line:34:21, endln:34:28
-      |vpiImportTypespec:
-      \_ClassVar: (builtin::process::self)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_ClassVar: (builtin::process::self)
+      \_RefTypespec: (builtin::process::self::process), line:34:21, endln:34:28
+        |vpiParent:
+        \_Function: (builtin::process::self), line:34:5, endln:35:16
+        |vpiName:process
+        |vpiFullName:builtin::process::self::process
+        |vpiActual:
+        \_ClassTypespec: (process), line:34:21, endln:34:28
     |vpiInternalScope:
     \_Function: (builtin::process::status), line:37:5, endln:38:16
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/StringPort/builtin.sv, line:30:3, endln:52:11
       |vpiName:status
       |vpiFullName:builtin::process::status
-      |vpiVariables:
-      \_EnumVar: (builtin::process::status)
-        |vpiParent:
-        \_Function: (builtin::process::status), line:37:5, endln:38:16
-        |vpiTypespec:
-        \_RefTypespec: (builtin::process::status::state), line:37:14, endln:37:19
-          |vpiParent:
-          \_EnumVar: (builtin::process::status)
-          |vpiName:state
-          |vpiFullName:builtin::process::status::state
-          |vpiActual:
-          \_EnumTypespec: (state), line:32:13, endln:32:73
-        |vpiFullName:builtin::process::status
-      |vpiImportTypespec:
-      \_EnumVar: (builtin::process::status)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_EnumVar: (builtin::process::status)
+      \_RefTypespec: (builtin::process::status::state), line:37:14, endln:37:19
+        |vpiParent:
+        \_Function: (builtin::process::status), line:37:5, endln:38:16
+        |vpiName:state
+        |vpiFullName:builtin::process::status::state
+        |vpiActual:
+        \_EnumTypespec: (state), line:32:13, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -580,19 +531,6 @@ Design: (unnamed)
       \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/StringPort/builtin.sv, line:55:3, endln:69:11
       |vpiName:try_get
       |vpiFullName:builtin::semaphore::try_get
-      |vpiVariables:
-      \_IntVar: (builtin::semaphore::try_get)
-        |vpiParent:
-        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiTypespec:
-        \_RefTypespec: (builtin::semaphore::try_get), line:66:14, endln:66:17
-          |vpiParent:
-          \_IntVar: (builtin::semaphore::try_get)
-          |vpiFullName:builtin::semaphore::try_get
-          |vpiActual:
-          \_IntTypespec: , line:66:14, endln:66:17
-        |vpiFullName:builtin::semaphore::try_get
-        |vpiSigned:1
       |vpiTypedef:
       \_IntTypespec: , line:66:14, endln:66:17
         |vpiParent:
@@ -605,14 +543,17 @@ Design: (unnamed)
         |vpiSigned:1
       |vpiImportTypespec:
       \_IntTypespec: , line:66:14, endln:66:17
-      |vpiImportTypespec:
-      \_IntVar: (builtin::semaphore::try_get)
       |vpiImportTypespec:
       \_IntTypespec: , line:66:26, endln:66:29
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_IntVar: (builtin::semaphore::try_get)
+      \_RefTypespec: (builtin::semaphore::try_get), line:66:14, endln:66:17
+        |vpiParent:
+        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+        |vpiFullName:builtin::semaphore::try_get
+        |vpiActual:
+        \_IntTypespec: , line:66:14, endln:66:17
       |vpiIODecl:
       \_IODecl: (keyCount), line:66:30, endln:66:38
         |vpiParent:

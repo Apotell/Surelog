@@ -148,9 +148,9 @@ Operation                                              3
 Package                                                2
 Range                                                  4
 RefObj                                                 5
-RefTypespec                                            7
+RefTypespec                                            6
 StructTypespec                                         1
-StructVar                                              2
+StructVar                                              1
 SysFuncCall                                            3
 TypespecMember                                         1
 === UHDM Object Stats End ===
@@ -262,7 +262,7 @@ Design: (unnamed)
           |vpiName:foo_bar
           |vpiFullName:aa::foo_bar::foo_bar
           |vpiActual:
-          \_StructVar: (aa::foo_bar)
+          \_Function: (aa::foo_bar), line:10:3, endln:21:14
     |vpiTypedef:
     \_LogicTypespec: , line:15:5, endln:15:23
       |vpiParent:
@@ -347,19 +347,6 @@ Design: (unnamed)
           |vpiSize:64
           |UINT:0
           |vpiConstType:9
-    |vpiImportTypespec:
-    \_StructVar: (aa::foo_bar)
-      |vpiParent:
-      \_Function: (aa::foo_bar), line:10:3, endln:21:14
-      |vpiTypespec:
-      \_RefTypespec: (aa::foo_bar::b::foo_bar_t), line:10:22, endln:10:34
-        |vpiParent:
-        \_StructVar: (aa::foo_bar)
-        |vpiName:b::foo_bar_t
-        |vpiFullName:aa::foo_bar::b::foo_bar_t
-        |vpiActual:
-        \_StructTypespec: (b::foo_bar_t), line:2:11, endln:4:4
-      |vpiFullName:aa::foo_bar
     |vpiImportTypespec:
     \_StructVar: (aa::foo_bar::y), line:14:18, endln:14:19
       |vpiParent:
@@ -384,7 +371,13 @@ Design: (unnamed)
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
-    \_StructVar: (aa::foo_bar)
+    \_RefTypespec: (aa::foo_bar::b::foo_bar_t), line:10:22, endln:10:34
+      |vpiParent:
+      \_Function: (aa::foo_bar), line:10:3, endln:21:14
+      |vpiName:b::foo_bar_t
+      |vpiFullName:aa::foo_bar::b::foo_bar_t
+      |vpiActual:
+      \_StructTypespec: (b::foo_bar_t), line:2:11, endln:4:4
     |vpiIODecl:
     \_IODecl: (a), line:12:24, endln:12:25
       |vpiParent:

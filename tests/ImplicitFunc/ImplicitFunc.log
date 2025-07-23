@@ -48,14 +48,13 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/ImplicitFunc/dut.sv:1:1: Compile module "work@dut".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                               4
+Constant                                               8
 Design                                                 1
 Function                                               2
-LogicTypespec                                          1
-LogicVar                                               2
+LogicTypespec                                          4
 Module                                                 1
-Range                                                  2
-RefTypespec                                            1
+Range                                                  4
+RefTypespec                                            4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ImplicitFunc/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -73,20 +72,6 @@ Design: (unnamed)
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ImplicitFunc/dut.sv, line:1:1, endln:11:10
     |vpiName:foo
     |vpiFullName:work@dut.foo
-    |vpiVariables:
-    \_LogicVar: (work@dut.foo)
-      |vpiParent:
-      \_Function: (work@dut.foo), line:3:4, endln:5:15
-      |vpiTypespec:
-      \_RefTypespec: (work@dut.foo), line:3:13, endln:3:18
-        |vpiParent:
-        \_LogicVar: (work@dut.foo)
-        |vpiFullName:work@dut.foo
-        |vpiActual:
-        \_LogicTypespec: , line:3:13, endln:3:18
-      |vpiFullName:work@dut.foo
-    |vpiReg:
-    \_LogicVar: (work@dut.foo)
     |vpiTypedef:
     \_LogicTypespec: , line:3:13, endln:3:18
       |vpiParent:
@@ -111,32 +96,68 @@ Design: (unnamed)
           |vpiSize:64
           |UINT:0
           |vpiConstType:9
-      |vpiSigned:1
+    |vpiTypedef:
+    \_LogicTypespec: , line:3:13, endln:3:18
+      |vpiParent:
+      \_Function: (work@dut.foo), line:3:4, endln:5:15
+      |vpiRange:
+      \_Range: , line:3:13, endln:3:18
+        |vpiParent:
+        \_LogicTypespec: , line:3:13, endln:3:18
+        |vpiLeftRange:
+        \_Constant: , line:3:14, endln:3:15
+          |vpiParent:
+          \_Range: , line:3:13, endln:3:18
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+        |vpiRightRange:
+        \_Constant: , line:3:16, endln:3:17
+          |vpiParent:
+          \_Range: , line:3:13, endln:3:18
+          |vpiDecompile:0
+          |vpiSize:64
+          |UINT:0
+          |vpiConstType:9
     |vpiImportTypespec:
-    \_LogicVar: (work@dut.foo)
+    \_LogicTypespec: , line:3:13, endln:3:18
     |vpiImportTypespec:
     \_LogicTypespec: , line:3:13, endln:3:18
     |vpiVisibility:1
     |vpiReturn:
-    \_LogicVar: (work@dut.foo)
+    \_RefTypespec: (work@dut.foo), line:3:13, endln:3:18
+      |vpiParent:
+      \_Function: (work@dut.foo), line:3:4, endln:5:15
+      |vpiFullName:work@dut.foo
+      |vpiActual:
+      \_LogicTypespec: , line:3:13, endln:3:18
   |vpiInternalScope:
   \_Function: (work@dut.bar), line:7:4, endln:9:15
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ImplicitFunc/dut.sv, line:1:1, endln:11:10
     |vpiName:bar
     |vpiFullName:work@dut.bar
-    |vpiVariables:
-    \_LogicVar: (work@dut.bar)
+    |vpiTypedef:
+    \_LogicTypespec: 
+      |vpiParent:
+      \_Function: (work@dut.bar), line:7:4, endln:9:15
+    |vpiTypedef:
+    \_LogicTypespec: 
+      |vpiParent:
+      \_Function: (work@dut.bar), line:7:4, endln:9:15
+    |vpiImportTypespec:
+    \_LogicTypespec: 
+    |vpiImportTypespec:
+    \_LogicTypespec: 
+    |vpiVisibility:1
+    |vpiReturn:
+    \_RefTypespec: (work@dut.bar)
       |vpiParent:
       \_Function: (work@dut.bar), line:7:4, endln:9:15
       |vpiFullName:work@dut.bar
-    |vpiReg:
-    \_LogicVar: (work@dut.bar)
-    |vpiImportTypespec:
-    \_LogicVar: (work@dut.bar)
-    |vpiVisibility:1
-    |vpiReturn:
-    \_LogicVar: (work@dut.bar)
+      |vpiActual:
+      \_LogicTypespec: 
   |vpiImportTypespec:
   \_Function: (work@dut.foo), line:3:4, endln:5:15
   |vpiImportTypespec:

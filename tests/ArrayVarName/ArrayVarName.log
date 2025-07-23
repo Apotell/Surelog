@@ -109,7 +109,7 @@ Design                                                 1
 FuncCall                                               1
 Function                                               1
 IntTypespec                                            4
-IntVar                                                 3
+IntVar                                                 2
 Module                                                 1
 Operation                                              2
 Port                                                   1
@@ -149,19 +149,6 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayVarName/dut.sv, line:1:1, endln:8:10
     |vpiName:get_a1
     |vpiFullName:work@top.get_a1
-    |vpiVariables:
-    \_IntVar: (work@top.get_a1)
-      |vpiParent:
-      \_Function: (work@top.get_a1), line:4:4, endln:7:15
-      |vpiTypespec:
-      \_RefTypespec: (work@top.get_a1), line:4:23, endln:4:26
-        |vpiParent:
-        \_IntVar: (work@top.get_a1)
-        |vpiFullName:work@top.get_a1
-        |vpiActual:
-        \_IntTypespec: , line:4:23, endln:4:26
-      |vpiFullName:work@top.get_a1
-      |vpiSigned:1
     |vpiInternalScope:
     \_Begin: (work@top.get_a1)
       |vpiParent:
@@ -293,12 +280,15 @@ Design: (unnamed)
       |vpiSigned:1
     |vpiImportTypespec:
     \_IntTypespec: , line:4:23, endln:4:26
-    |vpiImportTypespec:
-    \_IntVar: (work@top.get_a1)
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
-    \_IntVar: (work@top.get_a1)
+    \_RefTypespec: (work@top.get_a1), line:4:23, endln:4:26
+      |vpiParent:
+      \_Function: (work@top.get_a1), line:4:4, endln:7:15
+      |vpiFullName:work@top.get_a1
+      |vpiActual:
+      \_IntTypespec: , line:4:23, endln:4:26
     |vpiStmt:
     \_Begin: (work@top.get_a1)
   |vpiTypedef:

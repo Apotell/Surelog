@@ -197,7 +197,7 @@ Design                                                 1
 Function                                               2
 IODecl                                                 2
 IntTypespec                                            6
-IntVar                                                 2
+IntVar                                                 1
 MethodFuncCall                                         1
 Operation                                              2
 Package                                                1
@@ -449,19 +449,6 @@ Design: (unnamed)
       \_ClassDefn: (pack::C), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:12:1, endln:25:9
       |vpiName:get
       |vpiFullName:pack::C::get
-      |vpiVariables:
-      \_IntVar: (pack::C::get)
-        |vpiParent:
-        \_Function: (pack::C::get), line:22:3, endln:24:14
-        |vpiTypespec:
-        \_RefTypespec: (pack::C::get), line:22:12, endln:22:15
-          |vpiParent:
-          \_IntVar: (pack::C::get)
-          |vpiFullName:pack::C::get
-          |vpiActual:
-          \_IntTypespec: , line:22:12, endln:22:15
-        |vpiFullName:pack::C::get
-        |vpiSigned:1
       |vpiTypedef:
       \_IntTypespec: , line:22:12, endln:22:15
         |vpiParent:
@@ -469,12 +456,15 @@ Design: (unnamed)
         |vpiSigned:1
       |vpiImportTypespec:
       \_IntTypespec: , line:22:12, endln:22:15
-      |vpiImportTypespec:
-      \_IntVar: (pack::C::get)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_IntVar: (pack::C::get)
+      \_RefTypespec: (pack::C::get), line:22:12, endln:22:15
+        |vpiParent:
+        \_Function: (pack::C::get), line:22:3, endln:24:14
+        |vpiFullName:pack::C::get
+        |vpiActual:
+        \_IntTypespec: , line:22:12, endln:22:15
       |vpiStmt:
       \_ReturnStmt: , line:23:5, endln:23:13
         |vpiParent:

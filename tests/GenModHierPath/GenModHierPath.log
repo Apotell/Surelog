@@ -120,8 +120,9 @@ Operation                                              1
 Range                                                  1
 RefModule                                              1
 RefObj                                                 3
-RefTypespec                                            3
+RefTypespec                                            4
 SysFuncCall                                            1
+VoidTypespec                                           1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/GenModHierPath/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -220,6 +221,12 @@ Design: (unnamed)
     \_Module: work@InitializedBlockRAM (work@InitializedBlockRAM), file:${SURELOG_DIR}/tests/GenModHierPath/dut.sv, line:8:1, endln:20:10
     |vpiName:InitializeMemory
     |vpiFullName:work@InitializedBlockRAM.InitializeMemory
+    |vpiTypedef:
+    \_VoidTypespec: , line:16:22, endln:16:26
+      |vpiParent:
+      \_Function: (work@InitializedBlockRAM.InitializeMemory), line:16:3, endln:18:14
+    |vpiImportTypespec:
+    \_VoidTypespec: , line:16:22, endln:16:26
     |vpiImportTypespec:
     \_LogicNet: (work@InitializedBlockRAM.InitializeMemory.body), line:17:15, endln:17:19
       |vpiParent:
@@ -243,6 +250,13 @@ Design: (unnamed)
       |vpiNetType:1
     |vpiVisibility:1
     |vpiAutomatic:1
+    |vpiReturn:
+    \_RefTypespec: (work@InitializedBlockRAM.InitializeMemory)
+      |vpiParent:
+      \_Function: (work@InitializedBlockRAM.InitializeMemory), line:16:3, endln:18:14
+      |vpiFullName:work@InitializedBlockRAM.InitializeMemory
+      |vpiActual:
+      \_VoidTypespec: , line:16:22, endln:16:26
     |vpiStmt:
     \_SysFuncCall: ($readmemh), line:17:5, endln:17:30
       |vpiParent:

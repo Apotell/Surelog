@@ -129,14 +129,14 @@ Design                                                 1
 Function                                               1
 IODecl                                                 1
 IntTypespec                                            1
-LogicVar                                               1
+LogicTypespec                                          1
 Module                                                 2
 ModuleTypespec                                         1
 ParamAssign                                            2
 Parameter                                              2
 RefModule                                              1
 RefObj                                                 2
-RefTypespec                                            1
+RefTypespec                                            2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ImplicitFuncArgAndReturn/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -175,18 +175,20 @@ Design: (unnamed)
     \_Module: work@ScratchPad (work@ScratchPad), file:${SURELOG_DIR}/tests/ImplicitFuncArgAndReturn/dut.sv, line:9:1, endln:24:10
     |vpiName:w_1
     |vpiFullName:work@ScratchPad.w_1
-    |vpiVariables:
-    \_LogicVar: (work@ScratchPad.w_1)
+    |vpiTypedef:
+    \_LogicTypespec: 
+      |vpiParent:
+      \_Function: (work@ScratchPad.w_1), line:15:1, endln:17:12
+    |vpiImportTypespec:
+    \_LogicTypespec: 
+    |vpiVisibility:1
+    |vpiReturn:
+    \_RefTypespec: (work@ScratchPad.w_1)
       |vpiParent:
       \_Function: (work@ScratchPad.w_1), line:15:1, endln:17:12
       |vpiFullName:work@ScratchPad.w_1
-    |vpiReg:
-    \_LogicVar: (work@ScratchPad.w_1)
-    |vpiImportTypespec:
-    \_LogicVar: (work@ScratchPad.w_1)
-    |vpiVisibility:1
-    |vpiReturn:
-    \_LogicVar: (work@ScratchPad.w_1)
+      |vpiActual:
+      \_LogicTypespec: 
     |vpiIODecl:
     \_IODecl: (val), line:15:20, endln:15:23
       |vpiParent:
@@ -214,7 +216,7 @@ Design: (unnamed)
         |vpiName:w_1
         |vpiFullName:work@ScratchPad.w_1.w_1
         |vpiActual:
-        \_LogicVar: (work@ScratchPad.w_1)
+        \_Function: (work@ScratchPad.w_1), line:15:1, endln:17:12
   |vpiTypedef:
   \_ModuleTypespec: (sub), line:21:4, endln:21:7
     |vpiParent:

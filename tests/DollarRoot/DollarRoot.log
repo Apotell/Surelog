@@ -6474,13 +6474,11 @@ BitVar                                                 1
 BreakStmt                                              2
 ClassDefn                                              8
 ClassTypespec                                          1
-ClassVar                                               1
 Constant                                             169
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              9
 EnumTypespec                                           3
-EnumVar                                                1
 EventControl                                           9
 EventStmt                                              1
 EventTypespec                                          1
@@ -6495,28 +6493,28 @@ IfStmt                                                10
 ImportTypespec                                         2
 Initial                                                1
 IntTypespec                                           44
-IntVar                                                30
+IntVar                                                26
 LogicNet                                               2
-LogicTypespec                                         18
-LogicVar                                               9
+LogicTypespec                                         19
+LogicVar                                               5
 MethodFuncCall                                        13
 Module                                                 4
 NamedEvent                                             1
 Operation                                            112
 Package                                                1
-PackedArrayTypespec                                    1
+PackedArrayTypespec                                    3
 ParamAssign                                           10
 Parameter                                             10
 Port                                                   2
 Range                                                 39
 RefObj                                               573
-RefTypespec                                          155
+RefTypespec                                          160
 RefVar                                                 6
 ReturnStmt                                            11
 StringTypespec                                         2
 StringVar                                              1
 StructTypespec                                         2
-StructVar                                             36
+StructVar                                             28
 SysFuncCall                                           19
 Task                                                  21
 TaskCall                                              22
@@ -6577,19 +6575,6 @@ Design: (unnamed)
       \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/DollarRoot/builtin.sv, line:1:3, endln:27:11
       |vpiName:num
       |vpiFullName:builtin::mailbox::num
-      |vpiVariables:
-      \_IntVar: (builtin::mailbox::num)
-        |vpiParent:
-        \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
-        |vpiTypespec:
-        \_RefTypespec: (builtin::mailbox::num), line:6:14, endln:6:17
-          |vpiParent:
-          \_IntVar: (builtin::mailbox::num)
-          |vpiFullName:builtin::mailbox::num
-          |vpiActual:
-          \_IntTypespec: , line:6:14, endln:6:17
-        |vpiFullName:builtin::mailbox::num
-        |vpiSigned:1
       |vpiTypedef:
       \_IntTypespec: , line:6:14, endln:6:17
         |vpiParent:
@@ -6597,12 +6582,15 @@ Design: (unnamed)
         |vpiSigned:1
       |vpiImportTypespec:
       \_IntTypespec: , line:6:14, endln:6:17
-      |vpiImportTypespec:
-      \_IntVar: (builtin::mailbox::num)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_IntVar: (builtin::mailbox::num)
+      \_RefTypespec: (builtin::mailbox::num), line:6:14, endln:6:17
+        |vpiParent:
+        \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
+        |vpiFullName:builtin::mailbox::num
+        |vpiActual:
+        \_IntTypespec: , line:6:14, endln:6:17
     |vpiInternalScope:
     \_Task: (builtin::mailbox::put), line:9:5, endln:10:12
       |vpiParent:
@@ -6623,19 +6611,21 @@ Design: (unnamed)
       \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/DollarRoot/builtin.sv, line:1:3, endln:27:11
       |vpiName:try_put
       |vpiFullName:builtin::mailbox::try_put
-      |vpiVariables:
-      \_LogicVar: (builtin::mailbox::try_put)
+      |vpiTypedef:
+      \_LogicTypespec: 
         |vpiParent:
         \_Function: (builtin::mailbox::try_put), line:12:5, endln:13:16
-        |vpiFullName:builtin::mailbox::try_put
-      |vpiReg:
-      \_LogicVar: (builtin::mailbox::try_put)
       |vpiImportTypespec:
-      \_LogicVar: (builtin::mailbox::try_put)
+      \_LogicTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_LogicVar: (builtin::mailbox::try_put)
+      \_RefTypespec: (builtin::mailbox::try_put)
+        |vpiParent:
+        \_Function: (builtin::mailbox::try_put), line:12:5, endln:13:16
+        |vpiFullName:builtin::mailbox::try_put
+        |vpiActual:
+        \_LogicTypespec: 
       |vpiIODecl:
       \_IODecl: (message), line:12:23, endln:12:30
         |vpiParent:
@@ -6662,19 +6652,6 @@ Design: (unnamed)
       \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/DollarRoot/builtin.sv, line:1:3, endln:27:11
       |vpiName:try_get
       |vpiFullName:builtin::mailbox::try_get
-      |vpiVariables:
-      \_IntVar: (builtin::mailbox::try_get)
-        |vpiParent:
-        \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
-        |vpiTypespec:
-        \_RefTypespec: (builtin::mailbox::try_get), line:18:14, endln:18:17
-          |vpiParent:
-          \_IntVar: (builtin::mailbox::try_get)
-          |vpiFullName:builtin::mailbox::try_get
-          |vpiActual:
-          \_IntTypespec: , line:18:14, endln:18:17
-        |vpiFullName:builtin::mailbox::try_get
-        |vpiSigned:1
       |vpiTypedef:
       \_IntTypespec: , line:18:14, endln:18:17
         |vpiParent:
@@ -6682,12 +6659,15 @@ Design: (unnamed)
         |vpiSigned:1
       |vpiImportTypespec:
       \_IntTypespec: , line:18:14, endln:18:17
-      |vpiImportTypespec:
-      \_IntVar: (builtin::mailbox::try_get)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_IntVar: (builtin::mailbox::try_get)
+      \_RefTypespec: (builtin::mailbox::try_get), line:18:14, endln:18:17
+        |vpiParent:
+        \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
+        |vpiFullName:builtin::mailbox::try_get
+        |vpiActual:
+        \_IntTypespec: , line:18:14, endln:18:17
       |vpiIODecl:
       \_IODecl: (message), line:18:31, endln:18:38
         |vpiParent:
@@ -6714,19 +6694,6 @@ Design: (unnamed)
       \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/DollarRoot/builtin.sv, line:1:3, endln:27:11
       |vpiName:try_peek
       |vpiFullName:builtin::mailbox::try_peek
-      |vpiVariables:
-      \_IntVar: (builtin::mailbox::try_peek)
-        |vpiParent:
-        \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
-        |vpiTypespec:
-        \_RefTypespec: (builtin::mailbox::try_peek), line:24:14, endln:24:17
-          |vpiParent:
-          \_IntVar: (builtin::mailbox::try_peek)
-          |vpiFullName:builtin::mailbox::try_peek
-          |vpiActual:
-          \_IntTypespec: , line:24:14, endln:24:17
-        |vpiFullName:builtin::mailbox::try_peek
-        |vpiSigned:1
       |vpiTypedef:
       \_IntTypespec: , line:24:14, endln:24:17
         |vpiParent:
@@ -6734,12 +6701,15 @@ Design: (unnamed)
         |vpiSigned:1
       |vpiImportTypespec:
       \_IntTypespec: , line:24:14, endln:24:17
-      |vpiImportTypespec:
-      \_IntVar: (builtin::mailbox::try_peek)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_IntVar: (builtin::mailbox::try_peek)
+      \_RefTypespec: (builtin::mailbox::try_peek), line:24:14, endln:24:17
+        |vpiParent:
+        \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
+        |vpiFullName:builtin::mailbox::try_peek
+        |vpiActual:
+        \_IntTypespec: , line:24:14, endln:24:17
       |vpiIODecl:
       \_IODecl: (message), line:24:31, endln:24:38
         |vpiParent:
@@ -6786,19 +6756,6 @@ Design: (unnamed)
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/DollarRoot/builtin.sv, line:30:3, endln:52:11
       |vpiName:self
       |vpiFullName:builtin::process::self
-      |vpiVariables:
-      \_ClassVar: (builtin::process::self)
-        |vpiParent:
-        \_Function: (builtin::process::self), line:34:5, endln:35:16
-        |vpiTypespec:
-        \_RefTypespec: (builtin::process::self::builtin::process), line:34:21, endln:34:28
-          |vpiParent:
-          \_ClassVar: (builtin::process::self)
-          |vpiName:builtin::process
-          |vpiFullName:builtin::process::self::builtin::process
-          |vpiActual:
-          \_ClassTypespec: (process), line:34:21, endln:34:28
-        |vpiFullName:builtin::process::self
       |vpiTypedef:
       \_ClassTypespec: (process), line:34:21, endln:34:28
         |vpiParent:
@@ -6808,37 +6765,32 @@ Design: (unnamed)
         \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/DollarRoot/builtin.sv, line:30:3, endln:52:11
       |vpiImportTypespec:
       \_ClassTypespec: (process), line:34:21, endln:34:28
-      |vpiImportTypespec:
-      \_ClassVar: (builtin::process::self)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_ClassVar: (builtin::process::self)
+      \_RefTypespec: (builtin::process::self::process), line:34:21, endln:34:28
+        |vpiParent:
+        \_Function: (builtin::process::self), line:34:5, endln:35:16
+        |vpiName:process
+        |vpiFullName:builtin::process::self::process
+        |vpiActual:
+        \_ClassTypespec: (process), line:34:21, endln:34:28
     |vpiInternalScope:
     \_Function: (builtin::process::status), line:37:5, endln:38:16
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/DollarRoot/builtin.sv, line:30:3, endln:52:11
       |vpiName:status
       |vpiFullName:builtin::process::status
-      |vpiVariables:
-      \_EnumVar: (builtin::process::status)
-        |vpiParent:
-        \_Function: (builtin::process::status), line:37:5, endln:38:16
-        |vpiTypespec:
-        \_RefTypespec: (builtin::process::status::state), line:37:14, endln:37:19
-          |vpiParent:
-          \_EnumVar: (builtin::process::status)
-          |vpiName:state
-          |vpiFullName:builtin::process::status::state
-          |vpiActual:
-          \_EnumTypespec: (state), line:32:13, endln:32:73
-        |vpiFullName:builtin::process::status
-      |vpiImportTypespec:
-      \_EnumVar: (builtin::process::status)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_EnumVar: (builtin::process::status)
+      \_RefTypespec: (builtin::process::status::state), line:37:14, endln:37:19
+        |vpiParent:
+        \_Function: (builtin::process::status), line:37:5, endln:38:16
+        |vpiName:state
+        |vpiFullName:builtin::process::status::state
+        |vpiActual:
+        \_EnumTypespec: (state), line:32:13, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -7026,19 +6978,6 @@ Design: (unnamed)
       \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/DollarRoot/builtin.sv, line:55:3, endln:69:11
       |vpiName:try_get
       |vpiFullName:builtin::semaphore::try_get
-      |vpiVariables:
-      \_IntVar: (builtin::semaphore::try_get)
-        |vpiParent:
-        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiTypespec:
-        \_RefTypespec: (builtin::semaphore::try_get), line:66:14, endln:66:17
-          |vpiParent:
-          \_IntVar: (builtin::semaphore::try_get)
-          |vpiFullName:builtin::semaphore::try_get
-          |vpiActual:
-          \_IntTypespec: , line:66:14, endln:66:17
-        |vpiFullName:builtin::semaphore::try_get
-        |vpiSigned:1
       |vpiTypedef:
       \_IntTypespec: , line:66:14, endln:66:17
         |vpiParent:
@@ -7051,14 +6990,17 @@ Design: (unnamed)
         |vpiSigned:1
       |vpiImportTypespec:
       \_IntTypespec: , line:66:14, endln:66:17
-      |vpiImportTypespec:
-      \_IntVar: (builtin::semaphore::try_get)
       |vpiImportTypespec:
       \_IntTypespec: , line:66:26, endln:66:29
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_IntVar: (builtin::semaphore::try_get)
+      \_RefTypespec: (builtin::semaphore::try_get), line:66:14, endln:66:17
+        |vpiParent:
+        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+        |vpiFullName:builtin::semaphore::try_get
+        |vpiActual:
+        \_IntTypespec: , line:66:14, endln:66:17
       |vpiIODecl:
       \_IODecl: (keyCount), line:66:30, endln:66:38
         |vpiParent:
@@ -8082,19 +8024,6 @@ Design: (unnamed)
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
     |vpiName:get_read_response_from_master_0
     |vpiFullName:work@test_program.get_read_response_from_master_0
-    |vpiVariables:
-    \_StructVar: (work@test_program.get_read_response_from_master_0)
-      |vpiParent:
-      \_Function: (work@test_program.get_read_response_from_master_0), line:266:4, endln:277:15
-      |vpiTypespec:
-      \_RefTypespec: (work@test_program.get_read_response_from_master_0.Response), line:266:23, endln:266:31
-        |vpiParent:
-        \_StructVar: (work@test_program.get_read_response_from_master_0)
-        |vpiName:Response
-        |vpiFullName:work@test_program.get_read_response_from_master_0.Response
-        |vpiActual:
-        \_StructTypespec: (Response), line:56:12, endln:61:5
-      |vpiFullName:work@test_program.get_read_response_from_master_0
     |vpiInternalScope:
     \_Begin: (work@test_program.get_read_response_from_master_0)
       |vpiParent:
@@ -8423,12 +8352,16 @@ Design: (unnamed)
           |vpiFullName:work@test_program.get_read_response_from_master_0.rsp
           |vpiActual:
           \_StructVar: (work@test_program.get_read_response_from_master_0.rsp), line:268:16, endln:268:19
-    |vpiImportTypespec:
-    \_StructVar: (work@test_program.get_read_response_from_master_0)
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
-    \_StructVar: (work@test_program.get_read_response_from_master_0)
+    \_RefTypespec: (work@test_program.get_read_response_from_master_0.Response), line:266:23, endln:266:31
+      |vpiParent:
+      \_Function: (work@test_program.get_read_response_from_master_0), line:266:4, endln:277:15
+      |vpiName:Response
+      |vpiFullName:work@test_program.get_read_response_from_master_0.Response
+      |vpiActual:
+      \_StructTypespec: (Response), line:56:12, endln:61:5
     |vpiStmt:
     \_Begin: (work@test_program.get_read_response_from_master_0)
   |vpiInternalScope:
@@ -8437,19 +8370,6 @@ Design: (unnamed)
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
     |vpiName:get_command_from_slave_0
     |vpiFullName:work@test_program.get_command_from_slave_0
-    |vpiVariables:
-    \_StructVar: (work@test_program.get_command_from_slave_0)
-      |vpiParent:
-      \_Function: (work@test_program.get_command_from_slave_0), line:309:4, endln:328:15
-      |vpiTypespec:
-      \_RefTypespec: (work@test_program.get_command_from_slave_0.Command), line:309:23, endln:309:30
-        |vpiParent:
-        \_StructVar: (work@test_program.get_command_from_slave_0)
-        |vpiName:Command
-        |vpiFullName:work@test_program.get_command_from_slave_0.Command
-        |vpiActual:
-        \_StructTypespec: (Command), line:45:12, endln:54:5
-      |vpiFullName:work@test_program.get_command_from_slave_0
     |vpiInternalScope:
     \_Begin: (work@test_program.get_command_from_slave_0)
       |vpiParent:
@@ -9054,12 +8974,16 @@ Design: (unnamed)
           |vpiFullName:work@test_program.get_command_from_slave_0.cmd
           |vpiActual:
           \_StructVar: (work@test_program.get_command_from_slave_0.cmd), line:311:15, endln:311:18
-    |vpiImportTypespec:
-    \_StructVar: (work@test_program.get_command_from_slave_0)
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
-    \_StructVar: (work@test_program.get_command_from_slave_0)
+    \_RefTypespec: (work@test_program.get_command_from_slave_0.Command), line:309:23, endln:309:30
+      |vpiParent:
+      \_Function: (work@test_program.get_command_from_slave_0), line:309:4, endln:328:15
+      |vpiName:Command
+      |vpiFullName:work@test_program.get_command_from_slave_0.Command
+      |vpiActual:
+      \_StructTypespec: (Command), line:45:12, endln:54:5
     |vpiStmt:
     \_Begin: (work@test_program.get_command_from_slave_0)
   |vpiInternalScope:
@@ -10090,19 +10014,6 @@ Design: (unnamed)
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
     |vpiName:get_read_response_from_master_1
     |vpiFullName:work@test_program.get_read_response_from_master_1
-    |vpiVariables:
-    \_StructVar: (work@test_program.get_read_response_from_master_1)
-      |vpiParent:
-      \_Function: (work@test_program.get_read_response_from_master_1), line:409:4, endln:420:15
-      |vpiTypespec:
-      \_RefTypespec: (work@test_program.get_read_response_from_master_1.Response), line:409:23, endln:409:31
-        |vpiParent:
-        \_StructVar: (work@test_program.get_read_response_from_master_1)
-        |vpiName:Response
-        |vpiFullName:work@test_program.get_read_response_from_master_1.Response
-        |vpiActual:
-        \_StructTypespec: (Response), line:56:12, endln:61:5
-      |vpiFullName:work@test_program.get_read_response_from_master_1
     |vpiInternalScope:
     \_Begin: (work@test_program.get_read_response_from_master_1)
       |vpiParent:
@@ -10431,12 +10342,16 @@ Design: (unnamed)
           |vpiFullName:work@test_program.get_read_response_from_master_1.rsp
           |vpiActual:
           \_StructVar: (work@test_program.get_read_response_from_master_1.rsp), line:411:16, endln:411:19
-    |vpiImportTypespec:
-    \_StructVar: (work@test_program.get_read_response_from_master_1)
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
-    \_StructVar: (work@test_program.get_read_response_from_master_1)
+    \_RefTypespec: (work@test_program.get_read_response_from_master_1.Response), line:409:23, endln:409:31
+      |vpiParent:
+      \_Function: (work@test_program.get_read_response_from_master_1), line:409:4, endln:420:15
+      |vpiName:Response
+      |vpiFullName:work@test_program.get_read_response_from_master_1.Response
+      |vpiActual:
+      \_StructTypespec: (Response), line:56:12, endln:61:5
     |vpiStmt:
     \_Begin: (work@test_program.get_read_response_from_master_1)
   |vpiInternalScope:
@@ -10445,19 +10360,6 @@ Design: (unnamed)
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
     |vpiName:get_command_from_slave_1
     |vpiFullName:work@test_program.get_command_from_slave_1
-    |vpiVariables:
-    \_StructVar: (work@test_program.get_command_from_slave_1)
-      |vpiParent:
-      \_Function: (work@test_program.get_command_from_slave_1), line:452:4, endln:471:15
-      |vpiTypespec:
-      \_RefTypespec: (work@test_program.get_command_from_slave_1.Command), line:452:23, endln:452:30
-        |vpiParent:
-        \_StructVar: (work@test_program.get_command_from_slave_1)
-        |vpiName:Command
-        |vpiFullName:work@test_program.get_command_from_slave_1.Command
-        |vpiActual:
-        \_StructTypespec: (Command), line:45:12, endln:54:5
-      |vpiFullName:work@test_program.get_command_from_slave_1
     |vpiInternalScope:
     \_Begin: (work@test_program.get_command_from_slave_1)
       |vpiParent:
@@ -11062,12 +10964,16 @@ Design: (unnamed)
           |vpiFullName:work@test_program.get_command_from_slave_1.cmd
           |vpiActual:
           \_StructVar: (work@test_program.get_command_from_slave_1.cmd), line:454:15, endln:454:18
-    |vpiImportTypespec:
-    \_StructVar: (work@test_program.get_command_from_slave_1)
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
-    \_StructVar: (work@test_program.get_command_from_slave_1)
+    \_RefTypespec: (work@test_program.get_command_from_slave_1.Command), line:452:23, endln:452:30
+      |vpiParent:
+      \_Function: (work@test_program.get_command_from_slave_1), line:452:4, endln:471:15
+      |vpiName:Command
+      |vpiFullName:work@test_program.get_command_from_slave_1.Command
+      |vpiActual:
+      \_StructTypespec: (Command), line:45:12, endln:54:5
     |vpiStmt:
     \_Begin: (work@test_program.get_command_from_slave_1)
   |vpiInternalScope:
@@ -12030,19 +11936,6 @@ Design: (unnamed)
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
     |vpiName:create_command
     |vpiFullName:work@test_program.create_command
-    |vpiVariables:
-    \_StructVar: (work@test_program.create_command)
-      |vpiParent:
-      \_Function: (work@test_program.create_command), line:570:4, endln:599:15
-      |vpiTypespec:
-      \_RefTypespec: (work@test_program.create_command.Command), line:570:23, endln:570:30
-        |vpiParent:
-        \_StructVar: (work@test_program.create_command)
-        |vpiName:Command
-        |vpiFullName:work@test_program.create_command.Command
-        |vpiActual:
-        \_StructTypespec: (Command), line:45:12, endln:54:5
-      |vpiFullName:work@test_program.create_command
     |vpiInternalScope:
     \_Begin: (work@test_program.create_command)
       |vpiParent:
@@ -12642,13 +12535,17 @@ Design: (unnamed)
       \_Function: (work@test_program.create_command), line:570:4, endln:599:15
       |vpiSigned:1
     |vpiImportTypespec:
-    \_StructVar: (work@test_program.create_command)
-    |vpiImportTypespec:
     \_IntTypespec: , line:573:7, endln:573:10
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
-    \_StructVar: (work@test_program.create_command)
+    \_RefTypespec: (work@test_program.create_command.Command), line:570:23, endln:570:30
+      |vpiParent:
+      \_Function: (work@test_program.create_command), line:570:4, endln:599:15
+      |vpiName:Command
+      |vpiFullName:work@test_program.create_command.Command
+      |vpiActual:
+      \_StructTypespec: (Command), line:45:12, endln:54:5
     |vpiIODecl:
     \_IODecl: (trans), line:571:22, endln:571:27
       |vpiParent:
@@ -12698,21 +12595,6 @@ Design: (unnamed)
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
     |vpiName:randomize_burstcount
     |vpiFullName:work@test_program.randomize_burstcount
-    |vpiVariables:
-    \_LogicVar: (work@test_program.randomize_burstcount)
-      |vpiParent:
-      \_Function: (work@test_program.randomize_burstcount), line:601:4, endln:607:15
-      |vpiTypespec:
-      \_RefTypespec: (work@test_program.randomize_burstcount.Burstcount), line:601:23, endln:601:33
-        |vpiParent:
-        \_LogicVar: (work@test_program.randomize_burstcount)
-        |vpiName:Burstcount
-        |vpiFullName:work@test_program.randomize_burstcount.Burstcount
-        |vpiActual:
-        \_LogicTypespec: (Burstcount), line:31:12, endln:31:31
-      |vpiFullName:work@test_program.randomize_burstcount
-    |vpiReg:
-    \_LogicVar: (work@test_program.randomize_burstcount)
     |vpiInternalScope:
     \_Begin: (work@test_program.randomize_burstcount)
       |vpiParent:
@@ -12783,12 +12665,16 @@ Design: (unnamed)
           |vpiFullName:work@test_program.randomize_burstcount.burstcount
           |vpiActual:
           \_LogicVar: (work@test_program.randomize_burstcount.burstcount), line:603:18, endln:603:28
-    |vpiImportTypespec:
-    \_LogicVar: (work@test_program.randomize_burstcount)
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
-    \_LogicVar: (work@test_program.randomize_burstcount)
+    \_RefTypespec: (work@test_program.randomize_burstcount.Burstcount), line:601:23, endln:601:33
+      |vpiParent:
+      \_Function: (work@test_program.randomize_burstcount), line:601:4, endln:607:15
+      |vpiName:Burstcount
+      |vpiFullName:work@test_program.randomize_burstcount.Burstcount
+      |vpiActual:
+      \_LogicTypespec: (Burstcount), line:31:12, endln:31:31
     |vpiStmt:
     \_Begin: (work@test_program.randomize_burstcount)
   |vpiInternalScope:
@@ -12797,20 +12683,6 @@ Design: (unnamed)
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
     |vpiName:generate_random_aligned_address
     |vpiFullName:work@test_program.generate_random_aligned_address
-    |vpiVariables:
-    \_LogicVar: (work@test_program.generate_random_aligned_address)
-      |vpiParent:
-      \_Function: (work@test_program.generate_random_aligned_address), line:609:4, endln:618:15
-      |vpiTypespec:
-      \_RefTypespec: (work@test_program.generate_random_aligned_address), line:609:23, endln:609:42
-        |vpiParent:
-        \_LogicVar: (work@test_program.generate_random_aligned_address)
-        |vpiFullName:work@test_program.generate_random_aligned_address
-        |vpiActual:
-        \_LogicTypespec: , line:609:23, endln:609:42
-      |vpiFullName:work@test_program.generate_random_aligned_address
-    |vpiReg:
-    \_LogicVar: (work@test_program.generate_random_aligned_address)
     |vpiInternalScope:
     \_Begin: (work@test_program.generate_random_aligned_address)
       |vpiParent:
@@ -13091,13 +12963,16 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_LogicTypespec: , line:609:23, endln:609:42
     |vpiImportTypespec:
-    \_LogicVar: (work@test_program.generate_random_aligned_address)
-    |vpiImportTypespec:
     \_IntTypespec: , line:610:7, endln:610:10
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
-    \_LogicVar: (work@test_program.generate_random_aligned_address)
+    \_RefTypespec: (work@test_program.generate_random_aligned_address), line:609:23, endln:609:42
+      |vpiParent:
+      \_Function: (work@test_program.generate_random_aligned_address), line:609:4, endln:618:15
+      |vpiFullName:work@test_program.generate_random_aligned_address
+      |vpiActual:
+      \_PackedArrayTypespec: , line:609:29, endln:609:42
     |vpiIODecl:
     \_IODecl: (slave_id), line:610:11, endln:610:19
       |vpiParent:
@@ -13578,20 +13453,6 @@ Design: (unnamed)
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
     |vpiName:translate_master_to_slave_address
     |vpiFullName:work@test_program.translate_master_to_slave_address
-    |vpiVariables:
-    \_LogicVar: (work@test_program.translate_master_to_slave_address)
-      |vpiParent:
-      \_Function: (work@test_program.translate_master_to_slave_address), line:658:4, endln:668:15
-      |vpiTypespec:
-      \_RefTypespec: (work@test_program.translate_master_to_slave_address), line:658:23, endln:658:42
-        |vpiParent:
-        \_LogicVar: (work@test_program.translate_master_to_slave_address)
-        |vpiFullName:work@test_program.translate_master_to_slave_address
-        |vpiActual:
-        \_LogicTypespec: , line:658:23, endln:658:42
-      |vpiFullName:work@test_program.translate_master_to_slave_address
-    |vpiReg:
-    \_LogicVar: (work@test_program.translate_master_to_slave_address)
     |vpiInternalScope:
     \_Begin: (work@test_program.translate_master_to_slave_address)
       |vpiParent:
@@ -13933,13 +13794,16 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_LogicTypespec: , line:658:23, endln:658:42
     |vpiImportTypespec:
-    \_LogicVar: (work@test_program.translate_master_to_slave_address)
-    |vpiImportTypespec:
     \_LogicTypespec: , line:659:7, endln:659:26
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
-    \_LogicVar: (work@test_program.translate_master_to_slave_address)
+    \_RefTypespec: (work@test_program.translate_master_to_slave_address), line:658:23, endln:658:42
+      |vpiParent:
+      \_Function: (work@test_program.translate_master_to_slave_address), line:658:4, endln:668:15
+      |vpiFullName:work@test_program.translate_master_to_slave_address
+      |vpiActual:
+      \_PackedArrayTypespec: , line:658:29, endln:658:42
     |vpiIODecl:
     \_IODecl: (addr), line:659:28, endln:659:32
       |vpiParent:
@@ -14093,19 +13957,6 @@ Design: (unnamed)
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
     |vpiName:get_expected_command_for_slave
     |vpiFullName:work@test_program.get_expected_command_for_slave
-    |vpiVariables:
-    \_StructVar: (work@test_program.get_expected_command_for_slave)
-      |vpiParent:
-      \_Function: (work@test_program.get_expected_command_for_slave), line:682:4, endln:717:15
-      |vpiTypespec:
-      \_RefTypespec: (work@test_program.get_expected_command_for_slave.Command), line:682:23, endln:682:30
-        |vpiParent:
-        \_StructVar: (work@test_program.get_expected_command_for_slave)
-        |vpiName:Command
-        |vpiFullName:work@test_program.get_expected_command_for_slave.Command
-        |vpiActual:
-        \_StructTypespec: (Command), line:45:12, endln:54:5
-      |vpiFullName:work@test_program.get_expected_command_for_slave
     |vpiInternalScope:
     \_Begin: (work@test_program.get_expected_command_for_slave)
       |vpiParent:
@@ -14785,13 +14636,17 @@ Design: (unnamed)
       \_Function: (work@test_program.get_expected_command_for_slave), line:682:4, endln:717:15
       |vpiSigned:1
     |vpiImportTypespec:
-    \_StructVar: (work@test_program.get_expected_command_for_slave)
-    |vpiImportTypespec:
     \_IntTypespec: , line:684:7, endln:684:10
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
-    \_StructVar: (work@test_program.get_expected_command_for_slave)
+    \_RefTypespec: (work@test_program.get_expected_command_for_slave.Command), line:682:23, endln:682:30
+      |vpiParent:
+      \_Function: (work@test_program.get_expected_command_for_slave), line:682:4, endln:717:15
+      |vpiName:Command
+      |vpiFullName:work@test_program.get_expected_command_for_slave.Command
+      |vpiActual:
+      \_StructTypespec: (Command), line:45:12, endln:54:5
     |vpiIODecl:
     \_IODecl: (cmd), line:683:15, endln:683:18
       |vpiParent:
@@ -15538,19 +15393,6 @@ Design: (unnamed)
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
     |vpiName:create_response
     |vpiFullName:work@test_program.create_response
-    |vpiVariables:
-    \_StructVar: (work@test_program.create_response)
-      |vpiParent:
-      \_Function: (work@test_program.create_response), line:759:4, endln:772:15
-      |vpiTypespec:
-      \_RefTypespec: (work@test_program.create_response.Response), line:759:23, endln:759:31
-        |vpiParent:
-        \_StructVar: (work@test_program.create_response)
-        |vpiName:Response
-        |vpiFullName:work@test_program.create_response.Response
-        |vpiActual:
-        \_StructTypespec: (Response), line:56:12, endln:61:5
-      |vpiFullName:work@test_program.create_response
     |vpiInternalScope:
     \_Begin: (work@test_program.create_response)
       |vpiParent:
@@ -15796,12 +15638,16 @@ Design: (unnamed)
           |vpiFullName:work@test_program.create_response.rsp
           |vpiActual:
           \_StructVar: (work@test_program.create_response.rsp), line:763:16, endln:763:19
-    |vpiImportTypespec:
-    \_StructVar: (work@test_program.create_response)
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
-    \_StructVar: (work@test_program.create_response)
+    \_RefTypespec: (work@test_program.create_response.Response), line:759:23, endln:759:31
+      |vpiParent:
+      \_Function: (work@test_program.create_response), line:759:4, endln:772:15
+      |vpiName:Response
+      |vpiFullName:work@test_program.create_response.Response
+      |vpiActual:
+      \_StructTypespec: (Response), line:56:12, endln:61:5
     |vpiIODecl:
     \_IODecl: (burstcount), line:760:18, endln:760:28
       |vpiParent:
@@ -15824,19 +15670,6 @@ Design: (unnamed)
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
     |vpiName:get_expected_read_response
     |vpiFullName:work@test_program.get_expected_read_response
-    |vpiVariables:
-    \_StructVar: (work@test_program.get_expected_read_response)
-      |vpiParent:
-      \_Function: (work@test_program.get_expected_read_response), line:774:4, endln:784:15
-      |vpiTypespec:
-      \_RefTypespec: (work@test_program.get_expected_read_response.Response), line:774:23, endln:774:31
-        |vpiParent:
-        \_StructVar: (work@test_program.get_expected_read_response)
-        |vpiName:Response
-        |vpiFullName:work@test_program.get_expected_read_response.Response
-        |vpiActual:
-        \_StructTypespec: (Response), line:56:12, endln:61:5
-      |vpiFullName:work@test_program.get_expected_read_response
     |vpiInternalScope:
     \_Begin: (work@test_program.get_expected_read_response)
       |vpiParent:
@@ -15974,12 +15807,16 @@ Design: (unnamed)
           |vpiFullName:work@test_program.get_expected_read_response.rsp
           |vpiActual:
           \_StructVar: (work@test_program.get_expected_read_response.rsp), line:778:16, endln:778:19
-    |vpiImportTypespec:
-    \_StructVar: (work@test_program.get_expected_read_response)
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
-    \_StructVar: (work@test_program.get_expected_read_response)
+    \_RefTypespec: (work@test_program.get_expected_read_response.Response), line:774:23, endln:774:31
+      |vpiParent:
+      \_Function: (work@test_program.get_expected_read_response), line:774:4, endln:784:15
+      |vpiName:Response
+      |vpiFullName:work@test_program.get_expected_read_response.Response
+      |vpiActual:
+      \_StructTypespec: (Response), line:56:12, endln:61:5
     |vpiIODecl:
     \_IODecl: (cmd), line:775:15, endln:775:18
       |vpiParent:
@@ -17001,6 +16838,94 @@ Design: (unnamed)
       |vpiActual:
       \_BitTypespec: , line:60:7, endln:60:17
   |vpiTypedef:
+  \_PackedArrayTypespec: , line:609:29, endln:609:42
+    |vpiParent:
+    \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
+    |vpiRange:
+    \_Range: , line:609:29, endln:609:42
+      |vpiParent:
+      \_PackedArrayTypespec: , line:609:29, endln:609:42
+      |vpiLeftRange:
+      \_Operation: , line:609:30, endln:609:38
+        |vpiParent:
+        \_Range: , line:609:29, endln:609:42
+        |vpiOpType:11
+        |vpiOperand:
+        \_RefObj: (work@test_program.ADDR_W), line:609:30, endln:609:36
+          |vpiParent:
+          \_Operation: , line:609:30, endln:609:38
+          |vpiName:ADDR_W
+          |vpiFullName:work@test_program.ADDR_W
+          |vpiActual:
+          \_Parameter: (work@test_program.ADDR_W), line:13:15, endln:13:44
+        |vpiOperand:
+        \_Constant: , line:609:37, endln:609:38
+          |vpiParent:
+          \_Operation: , line:609:30, endln:609:38
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:609:40, endln:609:41
+        |vpiParent:
+        \_Range: , line:609:29, endln:609:42
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@test_program.generate_random_aligned_address), line:609:23, endln:609:42
+      |vpiParent:
+      \_LogicTypespec: , line:609:23, endln:609:42
+      |vpiFullName:work@test_program.generate_random_aligned_address
+      |vpiActual:
+      \_LogicTypespec: , line:609:23, endln:609:42
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:658:29, endln:658:42
+    |vpiParent:
+    \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
+    |vpiRange:
+    \_Range: , line:658:29, endln:658:42
+      |vpiParent:
+      \_PackedArrayTypespec: , line:658:29, endln:658:42
+      |vpiLeftRange:
+      \_Operation: , line:658:30, endln:658:38
+        |vpiParent:
+        \_Range: , line:658:29, endln:658:42
+        |vpiOpType:11
+        |vpiOperand:
+        \_RefObj: (work@test_program.ADDR_W), line:658:30, endln:658:36
+          |vpiParent:
+          \_Operation: , line:658:30, endln:658:38
+          |vpiName:ADDR_W
+          |vpiFullName:work@test_program.ADDR_W
+          |vpiActual:
+          \_Parameter: (work@test_program.ADDR_W), line:13:15, endln:13:44
+        |vpiOperand:
+        \_Constant: , line:658:37, endln:658:38
+          |vpiParent:
+          \_Operation: , line:658:30, endln:658:38
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:658:40, endln:658:41
+        |vpiParent:
+        \_Range: , line:658:29, endln:658:42
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@test_program.translate_master_to_slave_address), line:658:23, endln:658:42
+      |vpiParent:
+      \_LogicTypespec: , line:658:23, endln:658:42
+      |vpiFullName:work@test_program.translate_master_to_slave_address
+      |vpiActual:
+      \_LogicTypespec: , line:658:23, endln:658:42
+  |vpiTypedef:
   \_ArrayTypespec: , line:67:39, endln:67:42
     |vpiParent:
     \_Module: work@test_program (work@test_program), file:${SURELOG_DIR}/tests/DollarRoot/dut.sv, line:5:1, endln:797:10
@@ -17338,6 +17263,10 @@ Design: (unnamed)
   \_BitTypespec: , line:60:7, endln:60:17
   |vpiImportTypespec:
   \_ArrayTypespec: , line:60:46, endln:60:61
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:609:29, endln:609:42
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:658:29, endln:658:42
   |vpiImportTypespec:
   \_StructVar: (work@test_program.write_command_queue_master), line:67:10, endln:67:36
   |vpiImportTypespec:

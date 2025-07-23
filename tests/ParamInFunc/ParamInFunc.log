@@ -163,7 +163,6 @@ Function                                               1
 IODecl                                                 1
 LogicNet                                               4
 LogicTypespec                                          2
-LogicVar                                               1
 Module                                                 3
 Operation                                              1
 ParamAssign                                            2
@@ -190,18 +189,6 @@ Design: (unnamed)
     \_Module: work@func_block_top (work@func_block_top), file:${SURELOG_DIR}/tests/ParamInFunc/dut.sv, line:3:1, endln:10:10
     |vpiName:func3
     |vpiFullName:work@func_block_top.func3
-    |vpiReg:
-    \_LogicVar: (work@func_block_top.func3)
-      |vpiParent:
-      \_Function: (work@func_block_top.func3), line:4:9, endln:9:20
-      |vpiTypespec:
-      \_RefTypespec: (work@func_block_top.func3), line:4:28, endln:4:34
-        |vpiParent:
-        \_LogicVar: (work@func_block_top.func3)
-        |vpiFullName:work@func_block_top.func3
-        |vpiActual:
-        \_LogicTypespec: , line:4:28, endln:4:34
-      |vpiFullName:work@func_block_top.func3
     |vpiParameter:
     \_Parameter: (work@func_block_top.func3.A), line:5:28, endln:5:34
       |vpiParent:
@@ -281,7 +268,6 @@ Design: (unnamed)
           |vpiSize:64
           |UINT:0
           |vpiConstType:9
-      |vpiSigned:1
     |vpiTypedef:
     \_LogicTypespec: , line:7:23, endln:7:29
       |vpiParent:
@@ -307,15 +293,18 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
     |vpiImportTypespec:
-    \_LogicVar: (work@func_block_top.func3)
-    |vpiImportTypespec:
     \_LogicTypespec: , line:4:28, endln:4:34
     |vpiImportTypespec:
     \_LogicTypespec: , line:7:23, endln:7:29
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
-    \_LogicVar: (work@func_block_top.func3)
+    \_RefTypespec: (work@func_block_top.func3), line:4:28, endln:4:34
+      |vpiParent:
+      \_Function: (work@func_block_top.func3), line:4:9, endln:9:20
+      |vpiFullName:work@func_block_top.func3
+      |vpiActual:
+      \_LogicTypespec: , line:4:28, endln:4:34
     |vpiIODecl:
     \_IODecl: (inp), line:7:30, endln:7:33
       |vpiParent:
@@ -369,7 +358,7 @@ Design: (unnamed)
         |vpiFullName:work@func_block_top.func3.func3
         |vpiDefName:func3
         |vpiActual:
-        \_LogicVar: (work@func_block_top.func3)
+        \_Function: (work@func_block_top.func3), line:4:9, endln:9:20
         |vpiConstantSelect:1
         |vpiLeftRange:
         \_RefObj: (work@func_block_top.func3.func3.A), line:8:23, endln:8:24

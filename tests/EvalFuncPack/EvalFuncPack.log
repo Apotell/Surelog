@@ -482,12 +482,10 @@ Begin                                                  5
 BitSelect                                              2
 ClassDefn                                              8
 ClassTypespec                                          1
-ClassVar                                               1
 Constant                                              32
 Design                                                 1
 EnumConst                                              5
 EnumTypespec                                           1
-EnumVar                                                1
 ForStmt                                                2
 FuncCall                                              10
 Function                                              12
@@ -495,11 +493,11 @@ IODecl                                                14
 IfStmt                                                 1
 ImportTypespec                                         2
 IntTypespec                                           16
-IntVar                                                 6
+IntVar                                                 2
 IntegerTypespec                                        6
-IntegerVar                                             4
-LogicTypespec                                          1
-LogicVar                                               2
+IntegerVar                                             1
+LogicTypespec                                          2
+LogicVar                                               1
 Module                                                 2
 Operation                                             15
 Package                                                4
@@ -507,13 +505,13 @@ ParamAssign                                            4
 Parameter                                              4
 Range                                                  3
 RefObj                                                27
-RefTypespec                                           29
+RefTypespec                                           30
 RefVar                                                 1
 ReturnStmt                                             3
 Task                                                   9
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:54:38: Failed to bind object: "id: 150, name: InfosPerBank".
-[ERR:EL0535] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:54:38: Illegal implicit net "id:150, name: InfosPerBank".
+[ERR:UH0734] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:54:38: Failed to bind object: "id: 147, name: InfosPerBank".
+[ERR:EL0535] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:54:38: Illegal implicit net "id:147, name: InfosPerBank".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EvalFuncPack/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -566,19 +564,6 @@ Design: (unnamed)
       \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/EvalFuncPack/builtin.sv, line:1:3, endln:27:11
       |vpiName:num
       |vpiFullName:builtin::mailbox::num
-      |vpiVariables:
-      \_IntVar: (builtin::mailbox::num)
-        |vpiParent:
-        \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
-        |vpiTypespec:
-        \_RefTypespec: (builtin::mailbox::num), line:6:14, endln:6:17
-          |vpiParent:
-          \_IntVar: (builtin::mailbox::num)
-          |vpiFullName:builtin::mailbox::num
-          |vpiActual:
-          \_IntTypespec: , line:6:14, endln:6:17
-        |vpiFullName:builtin::mailbox::num
-        |vpiSigned:1
       |vpiTypedef:
       \_IntTypespec: , line:6:14, endln:6:17
         |vpiParent:
@@ -586,12 +571,15 @@ Design: (unnamed)
         |vpiSigned:1
       |vpiImportTypespec:
       \_IntTypespec: , line:6:14, endln:6:17
-      |vpiImportTypespec:
-      \_IntVar: (builtin::mailbox::num)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_IntVar: (builtin::mailbox::num)
+      \_RefTypespec: (builtin::mailbox::num), line:6:14, endln:6:17
+        |vpiParent:
+        \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
+        |vpiFullName:builtin::mailbox::num
+        |vpiActual:
+        \_IntTypespec: , line:6:14, endln:6:17
     |vpiInternalScope:
     \_Task: (builtin::mailbox::put), line:9:5, endln:10:12
       |vpiParent:
@@ -612,19 +600,21 @@ Design: (unnamed)
       \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/EvalFuncPack/builtin.sv, line:1:3, endln:27:11
       |vpiName:try_put
       |vpiFullName:builtin::mailbox::try_put
-      |vpiVariables:
-      \_LogicVar: (builtin::mailbox::try_put)
+      |vpiTypedef:
+      \_LogicTypespec: 
         |vpiParent:
         \_Function: (builtin::mailbox::try_put), line:12:5, endln:13:16
-        |vpiFullName:builtin::mailbox::try_put
-      |vpiReg:
-      \_LogicVar: (builtin::mailbox::try_put)
       |vpiImportTypespec:
-      \_LogicVar: (builtin::mailbox::try_put)
+      \_LogicTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_LogicVar: (builtin::mailbox::try_put)
+      \_RefTypespec: (builtin::mailbox::try_put)
+        |vpiParent:
+        \_Function: (builtin::mailbox::try_put), line:12:5, endln:13:16
+        |vpiFullName:builtin::mailbox::try_put
+        |vpiActual:
+        \_LogicTypespec: 
       |vpiIODecl:
       \_IODecl: (message), line:12:23, endln:12:30
         |vpiParent:
@@ -651,19 +641,6 @@ Design: (unnamed)
       \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/EvalFuncPack/builtin.sv, line:1:3, endln:27:11
       |vpiName:try_get
       |vpiFullName:builtin::mailbox::try_get
-      |vpiVariables:
-      \_IntVar: (builtin::mailbox::try_get)
-        |vpiParent:
-        \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
-        |vpiTypespec:
-        \_RefTypespec: (builtin::mailbox::try_get), line:18:14, endln:18:17
-          |vpiParent:
-          \_IntVar: (builtin::mailbox::try_get)
-          |vpiFullName:builtin::mailbox::try_get
-          |vpiActual:
-          \_IntTypespec: , line:18:14, endln:18:17
-        |vpiFullName:builtin::mailbox::try_get
-        |vpiSigned:1
       |vpiTypedef:
       \_IntTypespec: , line:18:14, endln:18:17
         |vpiParent:
@@ -671,12 +648,15 @@ Design: (unnamed)
         |vpiSigned:1
       |vpiImportTypespec:
       \_IntTypespec: , line:18:14, endln:18:17
-      |vpiImportTypespec:
-      \_IntVar: (builtin::mailbox::try_get)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_IntVar: (builtin::mailbox::try_get)
+      \_RefTypespec: (builtin::mailbox::try_get), line:18:14, endln:18:17
+        |vpiParent:
+        \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
+        |vpiFullName:builtin::mailbox::try_get
+        |vpiActual:
+        \_IntTypespec: , line:18:14, endln:18:17
       |vpiIODecl:
       \_IODecl: (message), line:18:31, endln:18:38
         |vpiParent:
@@ -703,19 +683,6 @@ Design: (unnamed)
       \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/EvalFuncPack/builtin.sv, line:1:3, endln:27:11
       |vpiName:try_peek
       |vpiFullName:builtin::mailbox::try_peek
-      |vpiVariables:
-      \_IntVar: (builtin::mailbox::try_peek)
-        |vpiParent:
-        \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
-        |vpiTypespec:
-        \_RefTypespec: (builtin::mailbox::try_peek), line:24:14, endln:24:17
-          |vpiParent:
-          \_IntVar: (builtin::mailbox::try_peek)
-          |vpiFullName:builtin::mailbox::try_peek
-          |vpiActual:
-          \_IntTypespec: , line:24:14, endln:24:17
-        |vpiFullName:builtin::mailbox::try_peek
-        |vpiSigned:1
       |vpiTypedef:
       \_IntTypespec: , line:24:14, endln:24:17
         |vpiParent:
@@ -723,12 +690,15 @@ Design: (unnamed)
         |vpiSigned:1
       |vpiImportTypespec:
       \_IntTypespec: , line:24:14, endln:24:17
-      |vpiImportTypespec:
-      \_IntVar: (builtin::mailbox::try_peek)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_IntVar: (builtin::mailbox::try_peek)
+      \_RefTypespec: (builtin::mailbox::try_peek), line:24:14, endln:24:17
+        |vpiParent:
+        \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
+        |vpiFullName:builtin::mailbox::try_peek
+        |vpiActual:
+        \_IntTypespec: , line:24:14, endln:24:17
       |vpiIODecl:
       \_IODecl: (message), line:24:31, endln:24:38
         |vpiParent:
@@ -775,19 +745,6 @@ Design: (unnamed)
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/EvalFuncPack/builtin.sv, line:30:3, endln:52:11
       |vpiName:self
       |vpiFullName:builtin::process::self
-      |vpiVariables:
-      \_ClassVar: (builtin::process::self)
-        |vpiParent:
-        \_Function: (builtin::process::self), line:34:5, endln:35:16
-        |vpiTypespec:
-        \_RefTypespec: (builtin::process::self::builtin::process), line:34:21, endln:34:28
-          |vpiParent:
-          \_ClassVar: (builtin::process::self)
-          |vpiName:builtin::process
-          |vpiFullName:builtin::process::self::builtin::process
-          |vpiActual:
-          \_ClassTypespec: (process), line:34:21, endln:34:28
-        |vpiFullName:builtin::process::self
       |vpiTypedef:
       \_ClassTypespec: (process), line:34:21, endln:34:28
         |vpiParent:
@@ -797,37 +754,32 @@ Design: (unnamed)
         \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/EvalFuncPack/builtin.sv, line:30:3, endln:52:11
       |vpiImportTypespec:
       \_ClassTypespec: (process), line:34:21, endln:34:28
-      |vpiImportTypespec:
-      \_ClassVar: (builtin::process::self)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_ClassVar: (builtin::process::self)
+      \_RefTypespec: (builtin::process::self::process), line:34:21, endln:34:28
+        |vpiParent:
+        \_Function: (builtin::process::self), line:34:5, endln:35:16
+        |vpiName:process
+        |vpiFullName:builtin::process::self::process
+        |vpiActual:
+        \_ClassTypespec: (process), line:34:21, endln:34:28
     |vpiInternalScope:
     \_Function: (builtin::process::status), line:37:5, endln:38:16
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/EvalFuncPack/builtin.sv, line:30:3, endln:52:11
       |vpiName:status
       |vpiFullName:builtin::process::status
-      |vpiVariables:
-      \_EnumVar: (builtin::process::status)
-        |vpiParent:
-        \_Function: (builtin::process::status), line:37:5, endln:38:16
-        |vpiTypespec:
-        \_RefTypespec: (builtin::process::status::state), line:37:14, endln:37:19
-          |vpiParent:
-          \_EnumVar: (builtin::process::status)
-          |vpiName:state
-          |vpiFullName:builtin::process::status::state
-          |vpiActual:
-          \_EnumTypespec: (state), line:32:13, endln:32:73
-        |vpiFullName:builtin::process::status
-      |vpiImportTypespec:
-      \_EnumVar: (builtin::process::status)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_EnumVar: (builtin::process::status)
+      \_RefTypespec: (builtin::process::status::state), line:37:14, endln:37:19
+        |vpiParent:
+        \_Function: (builtin::process::status), line:37:5, endln:38:16
+        |vpiName:state
+        |vpiFullName:builtin::process::status::state
+        |vpiActual:
+        \_EnumTypespec: (state), line:32:13, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -1015,19 +967,6 @@ Design: (unnamed)
       \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/EvalFuncPack/builtin.sv, line:55:3, endln:69:11
       |vpiName:try_get
       |vpiFullName:builtin::semaphore::try_get
-      |vpiVariables:
-      \_IntVar: (builtin::semaphore::try_get)
-        |vpiParent:
-        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiTypespec:
-        \_RefTypespec: (builtin::semaphore::try_get), line:66:14, endln:66:17
-          |vpiParent:
-          \_IntVar: (builtin::semaphore::try_get)
-          |vpiFullName:builtin::semaphore::try_get
-          |vpiActual:
-          \_IntTypespec: , line:66:14, endln:66:17
-        |vpiFullName:builtin::semaphore::try_get
-        |vpiSigned:1
       |vpiTypedef:
       \_IntTypespec: , line:66:14, endln:66:17
         |vpiParent:
@@ -1040,14 +979,17 @@ Design: (unnamed)
         |vpiSigned:1
       |vpiImportTypespec:
       \_IntTypespec: , line:66:14, endln:66:17
-      |vpiImportTypespec:
-      \_IntVar: (builtin::semaphore::try_get)
       |vpiImportTypespec:
       \_IntTypespec: , line:66:26, endln:66:29
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_IntVar: (builtin::semaphore::try_get)
+      \_RefTypespec: (builtin::semaphore::try_get), line:66:14, endln:66:17
+        |vpiParent:
+        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+        |vpiFullName:builtin::semaphore::try_get
+        |vpiActual:
+        \_IntTypespec: , line:66:14, endln:66:17
       |vpiIODecl:
       \_IODecl: (keyCount), line:66:30, endln:66:38
         |vpiParent:
@@ -1124,19 +1066,6 @@ Design: (unnamed)
     \_Package: prim_util_pkg (prim_util_pkg), file:${SURELOG_DIR}/tests/EvalFuncPack/dut.sv, line:2:1, endln:22:11
     |vpiName:_clog2
     |vpiFullName:prim_util_pkg::_clog2
-    |vpiVariables:
-    \_IntegerVar: (prim_util_pkg::_clog2)
-      |vpiParent:
-      \_Function: (prim_util_pkg::_clog2), line:6:3, endln:13:14
-      |vpiTypespec:
-      \_RefTypespec: (prim_util_pkg::_clog2), line:6:22, endln:6:29
-        |vpiParent:
-        \_IntegerVar: (prim_util_pkg::_clog2)
-        |vpiFullName:prim_util_pkg::_clog2
-        |vpiActual:
-        \_IntegerTypespec: , line:6:22, endln:6:29
-      |vpiFullName:prim_util_pkg::_clog2
-      |vpiSigned:1
     |vpiInternalScope:
     \_Begin: (prim_util_pkg::_clog2)
       |vpiParent:
@@ -1351,13 +1280,16 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_IntegerTypespec: , line:6:22, endln:6:29
     |vpiImportTypespec:
-    \_IntegerVar: (prim_util_pkg::_clog2)
-    |vpiImportTypespec:
     \_IntegerTypespec: , line:6:37, endln:6:44
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
-    \_IntegerVar: (prim_util_pkg::_clog2)
+    \_RefTypespec: (prim_util_pkg::_clog2), line:6:22, endln:6:29
+      |vpiParent:
+      \_Function: (prim_util_pkg::_clog2), line:6:3, endln:13:14
+      |vpiFullName:prim_util_pkg::_clog2
+      |vpiActual:
+      \_IntegerTypespec: , line:6:22, endln:6:29
     |vpiIODecl:
     \_IODecl: (value), line:6:45, endln:6:50
       |vpiParent:
@@ -1381,19 +1313,6 @@ Design: (unnamed)
     \_Package: prim_util_pkg (prim_util_pkg), file:${SURELOG_DIR}/tests/EvalFuncPack/dut.sv, line:2:1, endln:22:11
     |vpiName:vbits
     |vpiFullName:prim_util_pkg::vbits
-    |vpiVariables:
-    \_IntegerVar: (prim_util_pkg::vbits)
-      |vpiParent:
-      \_Function: (prim_util_pkg::vbits), line:15:1, endln:19:14
-      |vpiTypespec:
-      \_RefTypespec: (prim_util_pkg::vbits), line:15:20, endln:15:27
-        |vpiParent:
-        \_IntegerVar: (prim_util_pkg::vbits)
-        |vpiFullName:prim_util_pkg::vbits
-        |vpiActual:
-        \_IntegerTypespec: , line:15:20, endln:15:27
-      |vpiFullName:prim_util_pkg::vbits
-      |vpiSigned:1
     |vpiTypedef:
     \_IntegerTypespec: , line:15:20, endln:15:27
       |vpiParent:
@@ -1406,14 +1325,17 @@ Design: (unnamed)
       |vpiSigned:1
     |vpiImportTypespec:
     \_IntegerTypespec: , line:15:20, endln:15:27
-    |vpiImportTypespec:
-    \_IntegerVar: (prim_util_pkg::vbits)
     |vpiImportTypespec:
     \_IntegerTypespec: , line:15:34, endln:15:41
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
-    \_IntegerVar: (prim_util_pkg::vbits)
+    \_RefTypespec: (prim_util_pkg::vbits), line:15:20, endln:15:27
+      |vpiParent:
+      \_Function: (prim_util_pkg::vbits), line:15:1, endln:19:14
+      |vpiFullName:prim_util_pkg::vbits
+      |vpiActual:
+      \_IntegerTypespec: , line:15:20, endln:15:27
     |vpiIODecl:
     \_IODecl: (value), line:15:42, endln:15:47
       |vpiParent:
@@ -1622,19 +1544,6 @@ Design: (unnamed)
     \_Package: flash_ctrl_pkg (flash_ctrl_pkg), file:${SURELOG_DIR}/tests/EvalFuncPack/dut.sv, line:24:1, endln:45:11
     |vpiName:max_info_pages
     |vpiFullName:flash_ctrl_pkg::max_info_pages
-    |vpiVariables:
-    \_IntegerVar: (flash_ctrl_pkg::max_info_pages)
-      |vpiParent:
-      \_Function: (flash_ctrl_pkg::max_info_pages), line:35:1, endln:43:14
-      |vpiTypespec:
-      \_RefTypespec: (flash_ctrl_pkg::max_info_pages), line:35:20, endln:35:27
-        |vpiParent:
-        \_IntegerVar: (flash_ctrl_pkg::max_info_pages)
-        |vpiFullName:flash_ctrl_pkg::max_info_pages
-        |vpiActual:
-        \_IntegerTypespec: , line:35:20, endln:35:27
-      |vpiFullName:flash_ctrl_pkg::max_info_pages
-      |vpiSigned:1
     |vpiInternalScope:
     \_Begin: (flash_ctrl_pkg::max_info_pages)
       |vpiParent:
@@ -1857,13 +1766,16 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_IntegerTypespec: , line:35:20, endln:35:27
     |vpiImportTypespec:
-    \_IntegerVar: (flash_ctrl_pkg::max_info_pages)
-    |vpiImportTypespec:
     \_IntTypespec: , line:35:43, endln:35:46
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
-    \_IntegerVar: (flash_ctrl_pkg::max_info_pages)
+    \_RefTypespec: (flash_ctrl_pkg::max_info_pages), line:35:20, endln:35:27
+      |vpiParent:
+      \_Function: (flash_ctrl_pkg::max_info_pages), line:35:1, endln:43:14
+      |vpiFullName:flash_ctrl_pkg::max_info_pages
+      |vpiActual:
+      \_IntegerTypespec: , line:35:20, endln:35:27
     |vpiIODecl:
     \_IODecl: (infos), line:35:47, endln:35:52
       |vpiParent:

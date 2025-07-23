@@ -160,16 +160,15 @@ Operation                                              3
 Package                                                1
 RefObj                                                 8
 RefTypespec                                            4
-RefVar                                                 1
 ReturnStmt                                             1
 StructTypespec                                         1
 TypespecMember                                         1
 UnsupportedTypespec                                    2
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:12:21: Failed to bind object: "id: 23, name: nbytes".
-[ERR:EL0535] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:12:21: Illegal implicit net "id:23, name: nbytes".
-[ERR:UH0734] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:17:8: Failed to bind object: "id: 40, name: gp".
-[ERR:EL0535] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:17:8: Illegal implicit net "id:40, name: gp".
+[ERR:UH0734] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:12:21: Failed to bind object: "id: 22, name: nbytes".
+[ERR:EL0535] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:12:21: Illegal implicit net "id:22, name: nbytes".
+[ERR:UH0734] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:17:8: Failed to bind object: "id: 39, name: gp".
+[ERR:EL0535] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:17:8: Illegal implicit net "id:39, name: gp".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/IndexPartSelectBind/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -192,19 +191,6 @@ Design: (unnamed)
       \_ClassDefn: (pkg::tt), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:8:1, endln:21:9
       |vpiName:reg2bus
       |vpiFullName:pkg::tt::reg2bus
-      |vpiVariables:
-      \_RefVar: (pkg::tt::reg2bus)
-        |vpiParent:
-        \_Function: (pkg::tt::reg2bus), line:10:1, endln:19:12
-        |vpiTypespec:
-        \_RefTypespec: (pkg::tt::reg2bus::uvm_sequence_item), line:10:18, endln:10:35
-          |vpiParent:
-          \_RefVar: (pkg::tt::reg2bus)
-          |vpiName:uvm_sequence_item
-          |vpiFullName:pkg::tt::reg2bus::uvm_sequence_item
-          |vpiActual:
-          \_UnsupportedTypespec: (uvm_sequence_item), line:10:18, endln:10:35
-        |vpiFullName:pkg::tt::reg2bus
       |vpiInternalScope:
       \_Begin: (pkg::tt::reg2bus)
         |vpiParent:
@@ -388,13 +374,17 @@ Design: (unnamed)
             \_ReturnStmt: , line:17:1, endln:17:10
             |vpiName:gp
             |vpiFullName:pkg::tt::reg2bus::gp
-      |vpiImportTypespec:
-      \_RefVar: (pkg::tt::reg2bus)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiVirtual:1
       |vpiReturn:
-      \_RefVar: (pkg::tt::reg2bus)
+      \_RefTypespec: (pkg::tt::reg2bus::uvm_sequence_item), line:10:18, endln:10:35
+        |vpiParent:
+        \_Function: (pkg::tt::reg2bus), line:10:1, endln:19:12
+        |vpiName:uvm_sequence_item
+        |vpiFullName:pkg::tt::reg2bus::uvm_sequence_item
+        |vpiActual:
+        \_UnsupportedTypespec: (uvm_sequence_item), line:10:18, endln:10:35
       |vpiIODecl:
       \_IODecl: (rw), line:10:69, endln:10:71
         |vpiParent:

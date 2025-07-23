@@ -376,7 +376,6 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayTypespec                                          3
-ArrayVar                                               1
 Assignment                                             2
 Begin                                                  4
 BitSelect                                              5
@@ -630,19 +629,6 @@ Design: (unnamed)
     |vpiName:ASSIGN_VADDR
     |vpiFullName:work@top.ASSIGN_VADDR
     |vpiVariables:
-    \_ArrayVar: (work@top.ASSIGN_VADDR)
-      |vpiParent:
-      \_Function: (work@top.ASSIGN_VADDR), line:11:1, endln:15:12
-      |vpiTypespec:
-      \_RefTypespec: (work@top.ASSIGN_VADDR.ASSIGN_VADDR_RET_T), line:11:17, endln:11:35
-        |vpiParent:
-        \_ArrayVar: (work@top.ASSIGN_VADDR)
-        |vpiName:ASSIGN_VADDR_RET_T
-        |vpiFullName:work@top.ASSIGN_VADDR.ASSIGN_VADDR_RET_T
-        |vpiActual:
-        \_ArrayTypespec: (ASSIGN_VADDR_RET_T), line:10:22, endln:10:45
-      |vpiFullName:work@top.ASSIGN_VADDR
-    |vpiVariables:
     \_IntVar: (work@top.ASSIGN_VADDR.i), line:12:14, endln:12:15
       |vpiParent:
       \_Function: (work@top.ASSIGN_VADDR), line:11:1, endln:15:12
@@ -656,8 +642,6 @@ Design: (unnamed)
       |vpiName:i
       |vpiFullName:work@top.ASSIGN_VADDR.i
       |vpiSigned:1
-    |vpiRegArray:
-    \_ArrayVar: (work@top.ASSIGN_VADDR)
     |vpiInternalScope:
     \_ForStmt: (work@top.ASSIGN_VADDR), line:12:5, endln:14:8
       |vpiParent:
@@ -704,7 +688,7 @@ Design: (unnamed)
             |vpiName:ASSIGN_VADDR
             |vpiFullName:work@top.ASSIGN_VADDR.ASSIGN_VADDR
             |vpiActual:
-            \_ArrayVar: (work@top.ASSIGN_VADDR)
+            \_Function: (work@top.ASSIGN_VADDR), line:11:1, endln:15:12
             |vpiIndex:
             \_RefObj: (work@top.ASSIGN_VADDR.i), line:13:23, endln:13:24
               |vpiParent:
@@ -769,14 +753,18 @@ Design: (unnamed)
       \_Function: (work@top.ASSIGN_VADDR), line:11:1, endln:15:12
       |vpiSigned:1
     |vpiImportTypespec:
-    \_ArrayVar: (work@top.ASSIGN_VADDR)
-    |vpiImportTypespec:
     \_IntTypespec: , line:12:10, endln:12:13
     |vpiImportTypespec:
     \_IntVar: (work@top.ASSIGN_VADDR.i), line:12:14, endln:12:15
     |vpiVisibility:1
     |vpiReturn:
-    \_ArrayVar: (work@top.ASSIGN_VADDR)
+    \_RefTypespec: (work@top.ASSIGN_VADDR.ASSIGN_VADDR_RET_T), line:11:17, endln:11:35
+      |vpiParent:
+      \_Function: (work@top.ASSIGN_VADDR), line:11:1, endln:15:12
+      |vpiName:ASSIGN_VADDR_RET_T
+      |vpiFullName:work@top.ASSIGN_VADDR.ASSIGN_VADDR_RET_T
+      |vpiActual:
+      \_ArrayTypespec: (ASSIGN_VADDR_RET_T), line:10:22, endln:10:45
     |vpiStmt:
     \_ForStmt: (work@top.ASSIGN_VADDR), line:12:5, endln:14:8
   |vpiInternalScope:

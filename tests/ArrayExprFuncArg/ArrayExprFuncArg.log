@@ -545,7 +545,6 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayTypespec                                          3
-ArrayVar                                               1
 Assignment                                             5
 Begin                                                  9
 BitSelect                                              6
@@ -558,7 +557,7 @@ GenIf                                                  5
 IODecl                                                 2
 IfStmt                                                 1
 IntTypespec                                           10
-IntVar                                                 3
+IntVar                                                 2
 Module                                                 2
 ModuleTypespec                                         1
 Operation                                             15
@@ -791,19 +790,6 @@ Design: (unnamed)
     |vpiName:ASSIGN_VADDR
     |vpiFullName:work@top.ASSIGN_VADDR
     |vpiVariables:
-    \_ArrayVar: (work@top.ASSIGN_VADDR)
-      |vpiParent:
-      \_Function: (work@top.ASSIGN_VADDR), line:10:1, endln:14:12
-      |vpiTypespec:
-      \_RefTypespec: (work@top.ASSIGN_VADDR.ASSIGN_VADDR_RET_T), line:10:17, endln:10:35
-        |vpiParent:
-        \_ArrayVar: (work@top.ASSIGN_VADDR)
-        |vpiName:ASSIGN_VADDR_RET_T
-        |vpiFullName:work@top.ASSIGN_VADDR.ASSIGN_VADDR_RET_T
-        |vpiActual:
-        \_ArrayTypespec: (ASSIGN_VADDR_RET_T), line:9:22, endln:9:45
-      |vpiFullName:work@top.ASSIGN_VADDR
-    |vpiVariables:
     \_IntVar: (work@top.ASSIGN_VADDR.i), line:11:13, endln:11:14
       |vpiParent:
       \_Function: (work@top.ASSIGN_VADDR), line:10:1, endln:14:12
@@ -817,8 +803,6 @@ Design: (unnamed)
       |vpiName:i
       |vpiFullName:work@top.ASSIGN_VADDR.i
       |vpiSigned:1
-    |vpiRegArray:
-    \_ArrayVar: (work@top.ASSIGN_VADDR)
     |vpiInternalScope:
     \_ForStmt: (work@top.ASSIGN_VADDR), line:11:4, endln:13:11
       |vpiParent:
@@ -858,7 +842,7 @@ Design: (unnamed)
             |vpiName:ASSIGN_VADDR
             |vpiFullName:work@top.ASSIGN_VADDR.ASSIGN_VADDR
             |vpiActual:
-            \_ArrayVar: (work@top.ASSIGN_VADDR)
+            \_Function: (work@top.ASSIGN_VADDR), line:10:1, endln:14:12
             |vpiIndex:
             \_RefObj: (work@top.ASSIGN_VADDR.i), line:12:15, endln:12:16
               |vpiParent:
@@ -923,14 +907,18 @@ Design: (unnamed)
       \_Function: (work@top.ASSIGN_VADDR), line:10:1, endln:14:12
       |vpiSigned:1
     |vpiImportTypespec:
-    \_ArrayVar: (work@top.ASSIGN_VADDR)
-    |vpiImportTypespec:
     \_IntTypespec: , line:11:9, endln:11:12
     |vpiImportTypespec:
     \_IntVar: (work@top.ASSIGN_VADDR.i), line:11:13, endln:11:14
     |vpiVisibility:1
     |vpiReturn:
-    \_ArrayVar: (work@top.ASSIGN_VADDR)
+    \_RefTypespec: (work@top.ASSIGN_VADDR.ASSIGN_VADDR_RET_T), line:10:17, endln:10:35
+      |vpiParent:
+      \_Function: (work@top.ASSIGN_VADDR), line:10:1, endln:14:12
+      |vpiName:ASSIGN_VADDR_RET_T
+      |vpiFullName:work@top.ASSIGN_VADDR.ASSIGN_VADDR_RET_T
+      |vpiActual:
+      \_ArrayTypespec: (ASSIGN_VADDR_RET_T), line:9:22, endln:9:45
     |vpiStmt:
     \_ForStmt: (work@top.ASSIGN_VADDR), line:11:4, endln:13:11
   |vpiInternalScope:
@@ -939,18 +927,6 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayExprFuncArg/dut.sv, line:1:1, endln:44:10
     |vpiName:MAX_VADDR_CNT
     |vpiFullName:work@top.MAX_VADDR_CNT
-    |vpiVariables:
-    \_IntVar: (work@top.MAX_VADDR_CNT)
-      |vpiParent:
-      \_Function: (work@top.MAX_VADDR_CNT), line:25:1, endln:32:12
-      |vpiTypespec:
-      \_RefTypespec: (work@top.MAX_VADDR_CNT), line:25:17, endln:25:29
-        |vpiParent:
-        \_IntVar: (work@top.MAX_VADDR_CNT)
-        |vpiFullName:work@top.MAX_VADDR_CNT
-        |vpiActual:
-        \_IntTypespec: , line:25:17, endln:25:29
-      |vpiFullName:work@top.MAX_VADDR_CNT
     |vpiInternalScope:
     \_Begin: (work@top.MAX_VADDR_CNT)
       |vpiParent:
@@ -1012,7 +988,7 @@ Design: (unnamed)
                 |vpiName:MAX_VADDR_CNT
                 |vpiFullName:work@top.MAX_VADDR_CNT.MAX_VADDR_CNT
                 |vpiActual:
-                \_IntVar: (work@top.MAX_VADDR_CNT)
+                \_Function: (work@top.MAX_VADDR_CNT), line:25:1, endln:32:12
             |vpiStmt:
             \_Begin: (work@top.MAX_VADDR_CNT), line:28:37, endln:30:12
               |vpiParent:
@@ -1047,7 +1023,7 @@ Design: (unnamed)
                   |vpiName:MAX_VADDR_CNT
                   |vpiFullName:work@top.MAX_VADDR_CNT.MAX_VADDR_CNT
                   |vpiActual:
-                  \_IntVar: (work@top.MAX_VADDR_CNT)
+                  \_Function: (work@top.MAX_VADDR_CNT), line:25:1, endln:32:12
         |vpiForInitStmt:
         \_Assignment: , line:27:10, endln:27:19
           |vpiParent:
@@ -1128,7 +1104,7 @@ Design: (unnamed)
           |vpiName:MAX_VADDR_CNT
           |vpiFullName:work@top.MAX_VADDR_CNT.MAX_VADDR_CNT
           |vpiActual:
-          \_IntVar: (work@top.MAX_VADDR_CNT)
+          \_Function: (work@top.MAX_VADDR_CNT), line:25:1, endln:32:12
       |vpiStmt:
       \_ForStmt: (work@top.MAX_VADDR_CNT), line:27:5, endln:31:8
     |vpiTypedef:
@@ -1146,14 +1122,17 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_IntTypespec: , line:25:17, endln:25:29
     |vpiImportTypespec:
-    \_IntVar: (work@top.MAX_VADDR_CNT)
-    |vpiImportTypespec:
     \_IntTypespec: , line:25:44, endln:25:56
     |vpiImportTypespec:
     \_IntTypespec: , line:25:67, endln:25:79
     |vpiVisibility:1
     |vpiReturn:
-    \_IntVar: (work@top.MAX_VADDR_CNT)
+    \_RefTypespec: (work@top.MAX_VADDR_CNT), line:25:17, endln:25:29
+      |vpiParent:
+      \_Function: (work@top.MAX_VADDR_CNT), line:25:1, endln:32:12
+      |vpiFullName:work@top.MAX_VADDR_CNT
+      |vpiActual:
+      \_IntTypespec: , line:25:17, endln:25:29
     |vpiIODecl:
     \_IODecl: (SRC), line:25:57, endln:25:60
       |vpiParent:

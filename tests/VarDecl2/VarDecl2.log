@@ -116,7 +116,7 @@ Design                                                 1
 ForStmt                                                1
 Function                                               1
 IntTypespec                                            6
-IntVar                                                 5
+IntVar                                                 4
 Module                                                 1
 Operation                                              2
 Port                                                   1
@@ -155,19 +155,6 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/VarDecl2/dut.sv, line:1:1, endln:11:16
     |vpiName:theta
     |vpiFullName:work@top.theta
-    |vpiVariables:
-    \_IntVar: (work@top.theta)
-      |vpiParent:
-      \_Function: (work@top.theta), line:2:4, endln:9:23
-      |vpiTypespec:
-      \_RefTypespec: (work@top.theta), line:2:23, endln:2:26
-        |vpiParent:
-        \_IntVar: (work@top.theta)
-        |vpiFullName:work@top.theta
-        |vpiActual:
-        \_IntTypespec: , line:2:23, endln:2:26
-      |vpiFullName:work@top.theta
-      |vpiSigned:1
     |vpiInternalScope:
     \_Begin: (work@top.theta)
       |vpiParent:
@@ -335,12 +322,15 @@ Design: (unnamed)
       |vpiSigned:1
     |vpiImportTypespec:
     \_IntTypespec: , line:2:23, endln:2:26
-    |vpiImportTypespec:
-    \_IntVar: (work@top.theta)
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
-    \_IntVar: (work@top.theta)
+    \_RefTypespec: (work@top.theta), line:2:23, endln:2:26
+      |vpiParent:
+      \_Function: (work@top.theta), line:2:4, endln:9:23
+      |vpiFullName:work@top.theta
+      |vpiActual:
+      \_IntTypespec: , line:2:23, endln:2:26
     |vpiStmt:
     \_Begin: (work@top.theta)
   |vpiTypedef:

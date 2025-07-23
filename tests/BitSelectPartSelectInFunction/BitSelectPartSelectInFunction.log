@@ -195,15 +195,15 @@ IODecl                                                 1
 IntTypespec                                            2
 IntVar                                                 1
 LogicTypespec                                          2
-LogicVar                                               2
+LogicVar                                               1
 Module                                                 1
 Operation                                              1
-PackedArrayTypespec                                    1
+PackedArrayTypespec                                    2
 PartSelect                                             2
 Port                                                   1
 Range                                                  6
 RefObj                                                 1
-RefTypespec                                            5
+RefTypespec                                            7
 ReturnStmt                                             1
 VarSelect                                              2
 === UHDM Object Stats End ===
@@ -238,20 +238,6 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectPartSelectInFunction/dut.sv, line:1:1, endln:12:10
     |vpiName:iota
     |vpiFullName:work@top.iota
-    |vpiVariables:
-    \_LogicVar: (work@top.iota)
-      |vpiParent:
-      \_Function: (work@top.iota), line:6:4, endln:10:22
-      |vpiTypespec:
-      \_RefTypespec: (work@top.iota), line:6:23, endln:6:34
-        |vpiParent:
-        \_LogicVar: (work@top.iota)
-        |vpiFullName:work@top.iota
-        |vpiActual:
-        \_LogicTypespec: , line:6:23, endln:6:34
-      |vpiFullName:work@top.iota
-    |vpiReg:
-    \_LogicVar: (work@top.iota)
     |vpiInternalScope:
     \_Begin: (work@top.iota)
       |vpiParent:
@@ -411,12 +397,15 @@ Design: (unnamed)
           |vpiConstType:9
     |vpiImportTypespec:
     \_LogicTypespec: , line:6:23, endln:6:34
-    |vpiImportTypespec:
-    \_LogicVar: (work@top.iota)
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
-    \_LogicVar: (work@top.iota)
+    \_RefTypespec: (work@top.iota), line:6:23, endln:6:34
+      |vpiParent:
+      \_Function: (work@top.iota), line:6:4, endln:10:22
+      |vpiFullName:work@top.iota
+      |vpiActual:
+      \_PackedArrayTypespec: , line:6:29, endln:6:34
     |vpiIODecl:
     \_IODecl: (state), line:6:46, endln:6:51
       |vpiParent:
@@ -523,6 +512,37 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_PackedArrayTypespec: , line:6:29, endln:6:34
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectPartSelectInFunction/dut.sv, line:1:1, endln:12:10
+    |vpiRange:
+    \_Range: , line:6:29, endln:6:34
+      |vpiParent:
+      \_PackedArrayTypespec: , line:6:29, endln:6:34
+      |vpiLeftRange:
+      \_Constant: , line:6:30, endln:6:31
+        |vpiParent:
+        \_Range: , line:6:29, endln:6:34
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:6:32, endln:6:33
+        |vpiParent:
+        \_Range: , line:6:29, endln:6:34
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@top.iota), line:6:23, endln:6:34
+      |vpiParent:
+      \_LogicTypespec: , line:6:23, endln:6:34
+      |vpiFullName:work@top.iota
+      |vpiActual:
+      \_LogicTypespec: , line:6:23, endln:6:34
+  |vpiTypedef:
   \_IntTypespec: , line:1:19, endln:1:22
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectPartSelectInFunction/dut.sv, line:1:1, endln:12:10
@@ -538,6 +558,8 @@ Design: (unnamed)
   \_PackedArrayTypespec: , line:2:12, endln:2:28
   |vpiImportTypespec:
   \_LogicTypespec: (box_t), line:2:12, endln:2:28
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:6:29, endln:6:34
   |vpiImportTypespec:
   \_IntTypespec: , line:1:19, endln:1:22
   |vpiImportTypespec:

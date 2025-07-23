@@ -231,28 +231,25 @@ AST_DEBUG_END
 Begin                                                  1
 ClassDefn                                              8
 ClassTypespec                                          1
-ClassVar                                               1
 Constant                                              15
 ContAssign                                             4
 Design                                                 1
 EnumConst                                              5
 EnumTypespec                                           1
-EnumVar                                                1
 Function                                              10
 IODecl                                                13
 IntTypespec                                            9
-IntVar                                                 4
 LogicNet                                               2
-LogicTypespec                                          8
-LogicVar                                               2
+LogicTypespec                                          9
 Module                                                 1
 ModuleTypespec                                         1
 Package                                                1
+PackedArrayTypespec                                    1
 Port                                                   3
 Range                                                  5
 RefModule                                              1
 RefObj                                                 9
-RefTypespec                                           20
+RefTypespec                                           23
 StructTypespec                                         2
 Task                                                   9
 TypespecMember                                         2
@@ -309,19 +306,6 @@ Design: (unnamed)
       \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/PreprocUhdmCov/builtin.sv, line:1:3, endln:27:11
       |vpiName:num
       |vpiFullName:builtin::mailbox::num
-      |vpiVariables:
-      \_IntVar: (builtin::mailbox::num)
-        |vpiParent:
-        \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
-        |vpiTypespec:
-        \_RefTypespec: (builtin::mailbox::num), line:6:14, endln:6:17
-          |vpiParent:
-          \_IntVar: (builtin::mailbox::num)
-          |vpiFullName:builtin::mailbox::num
-          |vpiActual:
-          \_IntTypespec: , line:6:14, endln:6:17
-        |vpiFullName:builtin::mailbox::num
-        |vpiSigned:1
       |vpiTypedef:
       \_IntTypespec: , line:6:14, endln:6:17
         |vpiParent:
@@ -329,12 +313,15 @@ Design: (unnamed)
         |vpiSigned:1
       |vpiImportTypespec:
       \_IntTypespec: , line:6:14, endln:6:17
-      |vpiImportTypespec:
-      \_IntVar: (builtin::mailbox::num)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_IntVar: (builtin::mailbox::num)
+      \_RefTypespec: (builtin::mailbox::num), line:6:14, endln:6:17
+        |vpiParent:
+        \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
+        |vpiFullName:builtin::mailbox::num
+        |vpiActual:
+        \_IntTypespec: , line:6:14, endln:6:17
     |vpiInternalScope:
     \_Task: (builtin::mailbox::put), line:9:5, endln:10:12
       |vpiParent:
@@ -355,19 +342,21 @@ Design: (unnamed)
       \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/PreprocUhdmCov/builtin.sv, line:1:3, endln:27:11
       |vpiName:try_put
       |vpiFullName:builtin::mailbox::try_put
-      |vpiVariables:
-      \_LogicVar: (builtin::mailbox::try_put)
+      |vpiTypedef:
+      \_LogicTypespec: 
         |vpiParent:
         \_Function: (builtin::mailbox::try_put), line:12:5, endln:13:16
-        |vpiFullName:builtin::mailbox::try_put
-      |vpiReg:
-      \_LogicVar: (builtin::mailbox::try_put)
       |vpiImportTypespec:
-      \_LogicVar: (builtin::mailbox::try_put)
+      \_LogicTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_LogicVar: (builtin::mailbox::try_put)
+      \_RefTypespec: (builtin::mailbox::try_put)
+        |vpiParent:
+        \_Function: (builtin::mailbox::try_put), line:12:5, endln:13:16
+        |vpiFullName:builtin::mailbox::try_put
+        |vpiActual:
+        \_LogicTypespec: 
       |vpiIODecl:
       \_IODecl: (message), line:12:23, endln:12:30
         |vpiParent:
@@ -394,19 +383,6 @@ Design: (unnamed)
       \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/PreprocUhdmCov/builtin.sv, line:1:3, endln:27:11
       |vpiName:try_get
       |vpiFullName:builtin::mailbox::try_get
-      |vpiVariables:
-      \_IntVar: (builtin::mailbox::try_get)
-        |vpiParent:
-        \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
-        |vpiTypespec:
-        \_RefTypespec: (builtin::mailbox::try_get), line:18:14, endln:18:17
-          |vpiParent:
-          \_IntVar: (builtin::mailbox::try_get)
-          |vpiFullName:builtin::mailbox::try_get
-          |vpiActual:
-          \_IntTypespec: , line:18:14, endln:18:17
-        |vpiFullName:builtin::mailbox::try_get
-        |vpiSigned:1
       |vpiTypedef:
       \_IntTypespec: , line:18:14, endln:18:17
         |vpiParent:
@@ -414,12 +390,15 @@ Design: (unnamed)
         |vpiSigned:1
       |vpiImportTypespec:
       \_IntTypespec: , line:18:14, endln:18:17
-      |vpiImportTypespec:
-      \_IntVar: (builtin::mailbox::try_get)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_IntVar: (builtin::mailbox::try_get)
+      \_RefTypespec: (builtin::mailbox::try_get), line:18:14, endln:18:17
+        |vpiParent:
+        \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
+        |vpiFullName:builtin::mailbox::try_get
+        |vpiActual:
+        \_IntTypespec: , line:18:14, endln:18:17
       |vpiIODecl:
       \_IODecl: (message), line:18:31, endln:18:38
         |vpiParent:
@@ -446,19 +425,6 @@ Design: (unnamed)
       \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/PreprocUhdmCov/builtin.sv, line:1:3, endln:27:11
       |vpiName:try_peek
       |vpiFullName:builtin::mailbox::try_peek
-      |vpiVariables:
-      \_IntVar: (builtin::mailbox::try_peek)
-        |vpiParent:
-        \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
-        |vpiTypespec:
-        \_RefTypespec: (builtin::mailbox::try_peek), line:24:14, endln:24:17
-          |vpiParent:
-          \_IntVar: (builtin::mailbox::try_peek)
-          |vpiFullName:builtin::mailbox::try_peek
-          |vpiActual:
-          \_IntTypespec: , line:24:14, endln:24:17
-        |vpiFullName:builtin::mailbox::try_peek
-        |vpiSigned:1
       |vpiTypedef:
       \_IntTypespec: , line:24:14, endln:24:17
         |vpiParent:
@@ -466,12 +432,15 @@ Design: (unnamed)
         |vpiSigned:1
       |vpiImportTypespec:
       \_IntTypespec: , line:24:14, endln:24:17
-      |vpiImportTypespec:
-      \_IntVar: (builtin::mailbox::try_peek)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_IntVar: (builtin::mailbox::try_peek)
+      \_RefTypespec: (builtin::mailbox::try_peek), line:24:14, endln:24:17
+        |vpiParent:
+        \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
+        |vpiFullName:builtin::mailbox::try_peek
+        |vpiActual:
+        \_IntTypespec: , line:24:14, endln:24:17
       |vpiIODecl:
       \_IODecl: (message), line:24:31, endln:24:38
         |vpiParent:
@@ -518,19 +487,6 @@ Design: (unnamed)
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/PreprocUhdmCov/builtin.sv, line:30:3, endln:52:11
       |vpiName:self
       |vpiFullName:builtin::process::self
-      |vpiVariables:
-      \_ClassVar: (builtin::process::self)
-        |vpiParent:
-        \_Function: (builtin::process::self), line:34:5, endln:35:16
-        |vpiTypespec:
-        \_RefTypespec: (builtin::process::self::builtin::process), line:34:21, endln:34:28
-          |vpiParent:
-          \_ClassVar: (builtin::process::self)
-          |vpiName:builtin::process
-          |vpiFullName:builtin::process::self::builtin::process
-          |vpiActual:
-          \_ClassTypespec: (process), line:34:21, endln:34:28
-        |vpiFullName:builtin::process::self
       |vpiTypedef:
       \_ClassTypespec: (process), line:34:21, endln:34:28
         |vpiParent:
@@ -540,37 +496,32 @@ Design: (unnamed)
         \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/PreprocUhdmCov/builtin.sv, line:30:3, endln:52:11
       |vpiImportTypespec:
       \_ClassTypespec: (process), line:34:21, endln:34:28
-      |vpiImportTypespec:
-      \_ClassVar: (builtin::process::self)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_ClassVar: (builtin::process::self)
+      \_RefTypespec: (builtin::process::self::process), line:34:21, endln:34:28
+        |vpiParent:
+        \_Function: (builtin::process::self), line:34:5, endln:35:16
+        |vpiName:process
+        |vpiFullName:builtin::process::self::process
+        |vpiActual:
+        \_ClassTypespec: (process), line:34:21, endln:34:28
     |vpiInternalScope:
     \_Function: (builtin::process::status), line:37:5, endln:38:16
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/PreprocUhdmCov/builtin.sv, line:30:3, endln:52:11
       |vpiName:status
       |vpiFullName:builtin::process::status
-      |vpiVariables:
-      \_EnumVar: (builtin::process::status)
-        |vpiParent:
-        \_Function: (builtin::process::status), line:37:5, endln:38:16
-        |vpiTypespec:
-        \_RefTypespec: (builtin::process::status::state), line:37:14, endln:37:19
-          |vpiParent:
-          \_EnumVar: (builtin::process::status)
-          |vpiName:state
-          |vpiFullName:builtin::process::status::state
-          |vpiActual:
-          \_EnumTypespec: (state), line:32:13, endln:32:73
-        |vpiFullName:builtin::process::status
-      |vpiImportTypespec:
-      \_EnumVar: (builtin::process::status)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_EnumVar: (builtin::process::status)
+      \_RefTypespec: (builtin::process::status::state), line:37:14, endln:37:19
+        |vpiParent:
+        \_Function: (builtin::process::status), line:37:5, endln:38:16
+        |vpiName:state
+        |vpiFullName:builtin::process::status::state
+        |vpiActual:
+        \_EnumTypespec: (state), line:32:13, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -758,19 +709,6 @@ Design: (unnamed)
       \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/PreprocUhdmCov/builtin.sv, line:55:3, endln:69:11
       |vpiName:try_get
       |vpiFullName:builtin::semaphore::try_get
-      |vpiVariables:
-      \_IntVar: (builtin::semaphore::try_get)
-        |vpiParent:
-        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiTypespec:
-        \_RefTypespec: (builtin::semaphore::try_get), line:66:14, endln:66:17
-          |vpiParent:
-          \_IntVar: (builtin::semaphore::try_get)
-          |vpiFullName:builtin::semaphore::try_get
-          |vpiActual:
-          \_IntTypespec: , line:66:14, endln:66:17
-        |vpiFullName:builtin::semaphore::try_get
-        |vpiSigned:1
       |vpiTypedef:
       \_IntTypespec: , line:66:14, endln:66:17
         |vpiParent:
@@ -783,14 +721,17 @@ Design: (unnamed)
         |vpiSigned:1
       |vpiImportTypespec:
       \_IntTypespec: , line:66:14, endln:66:17
-      |vpiImportTypespec:
-      \_IntVar: (builtin::semaphore::try_get)
       |vpiImportTypespec:
       \_IntTypespec: , line:66:26, endln:66:29
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_IntVar: (builtin::semaphore::try_get)
+      \_RefTypespec: (builtin::semaphore::try_get), line:66:14, endln:66:17
+        |vpiParent:
+        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+        |vpiFullName:builtin::semaphore::try_get
+        |vpiActual:
+        \_IntTypespec: , line:66:14, endln:66:17
       |vpiIODecl:
       \_IODecl: (keyCount), line:66:30, endln:66:38
         |vpiParent:
@@ -867,20 +808,6 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PreprocUhdmCov/dut.sv, line:4:1, endln:50:17
     |vpiName:prince_shiftrows_32bit
     |vpiFullName:work@top.prince_shiftrows_32bit
-    |vpiVariables:
-    \_LogicVar: (work@top.prince_shiftrows_32bit)
-      |vpiParent:
-      \_Function: (work@top.prince_shiftrows_32bit), line:45:4, endln:48:40
-      |vpiTypespec:
-      \_RefTypespec: (work@top.prince_shiftrows_32bit), line:45:23, endln:45:35
-        |vpiParent:
-        \_LogicVar: (work@top.prince_shiftrows_32bit)
-        |vpiFullName:work@top.prince_shiftrows_32bit
-        |vpiActual:
-        \_LogicTypespec: , line:45:23, endln:45:35
-      |vpiFullName:work@top.prince_shiftrows_32bit
-    |vpiReg:
-    \_LogicVar: (work@top.prince_shiftrows_32bit)
     |vpiInternalScope:
     \_Begin: (work@top.prince_shiftrows_32bit)
       |vpiParent:
@@ -981,15 +908,18 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_LogicTypespec: , line:45:23, endln:45:35
     |vpiImportTypespec:
-    \_LogicVar: (work@top.prince_shiftrows_32bit)
-    |vpiImportTypespec:
     \_LogicTypespec: , line:45:59, endln:45:71
     |vpiImportTypespec:
     \_LogicTypespec: , line:46:64, endln:46:81
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
-    \_LogicVar: (work@top.prince_shiftrows_32bit)
+    \_RefTypespec: (work@top.prince_shiftrows_32bit), line:45:23, endln:45:35
+      |vpiParent:
+      \_Function: (work@top.prince_shiftrows_32bit), line:45:4, endln:48:40
+      |vpiFullName:work@top.prince_shiftrows_32bit
+      |vpiActual:
+      \_PackedArrayTypespec: , line:45:29, endln:45:35
     |vpiIODecl:
     \_IODecl: (state_in), line:45:77, endln:45:85
       |vpiParent:
@@ -1058,6 +988,37 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PreprocUhdmCov/dut.sv, line:4:1, endln:50:17
   |vpiTypedef:
+  \_PackedArrayTypespec: , line:45:29, endln:45:35
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PreprocUhdmCov/dut.sv, line:4:1, endln:50:17
+    |vpiRange:
+    \_Range: , line:45:29, endln:45:35
+      |vpiParent:
+      \_PackedArrayTypespec: , line:45:29, endln:45:35
+      |vpiLeftRange:
+      \_Constant: , line:45:30, endln:45:32
+        |vpiParent:
+        \_Range: , line:45:29, endln:45:35
+        |vpiDecompile:31
+        |vpiSize:64
+        |UINT:31
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:45:33, endln:45:34
+        |vpiParent:
+        \_Range: , line:45:29, endln:45:35
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@top.prince_shiftrows_32bit), line:45:23, endln:45:35
+      |vpiParent:
+      \_LogicTypespec: , line:45:23, endln:45:35
+      |vpiFullName:work@top.prince_shiftrows_32bit
+      |vpiActual:
+      \_LogicTypespec: , line:45:23, endln:45:35
+  |vpiTypedef:
   \_ModuleTypespec: (prim_subreg), line:30:2, endln:30:13
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PreprocUhdmCov/dut.sv, line:4:1, endln:50:17
@@ -1086,6 +1047,8 @@ Design: (unnamed)
   \_StructTypespec: , line:40:2, endln:42:9
   |vpiImportTypespec:
   \_LogicTypespec: , line:41:10, endln:41:15
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:45:29, endln:45:35
   |vpiImportTypespec:
   \_ModuleTypespec: (prim_subreg), line:30:2, endln:30:13
   |vpiImportTypespec:

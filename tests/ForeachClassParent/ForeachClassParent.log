@@ -86,9 +86,10 @@ ForeachStmt                                            1
 Function                                               1
 Package                                                1
 Range                                                  1
-RefTypespec                                            5
+RefTypespec                                            6
 RefVar                                                 2
 UnsupportedTypespec                                    1
+VoidTypespec                                           1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ForeachClassParent/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -217,13 +218,26 @@ Design: (unnamed)
           |vpiStmt:
           \_Begin: (uvm::uvm_phase::get_adjacent_predecessor_nodes), line:12:40, endln:13:9
         |vpiTypedef:
+        \_VoidTypespec: , line:10:12, endln:10:16
+          |vpiParent:
+          \_Function: (uvm::uvm_phase::get_adjacent_predecessor_nodes), line:10:3, endln:15:14
+        |vpiTypedef:
         \_UnsupportedTypespec: (index), line:12:32, endln:12:37
           |vpiParent:
           \_Function: (uvm::uvm_phase::get_adjacent_predecessor_nodes), line:10:3, endln:15:14
           |vpiName:index
         |vpiImportTypespec:
+        \_VoidTypespec: , line:10:12, endln:10:16
+        |vpiImportTypespec:
         \_UnsupportedTypespec: (index), line:12:32, endln:12:37
         |vpiVisibility:1
+        |vpiReturn:
+        \_RefTypespec: (uvm::uvm_phase::get_adjacent_predecessor_nodes)
+          |vpiParent:
+          \_Function: (uvm::uvm_phase::get_adjacent_predecessor_nodes), line:10:3, endln:15:14
+          |vpiFullName:uvm::uvm_phase::get_adjacent_predecessor_nodes
+          |vpiActual:
+          \_VoidTypespec: , line:10:12, endln:10:16
         |vpiStmt:
         \_ForeachStmt: (uvm::uvm_phase::get_adjacent_predecessor_nodes), line:12:6, endln:13:9
         |vpiInstance:

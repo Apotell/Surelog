@@ -1452,12 +1452,10 @@ IODecl                                                 2
 IfStmt                                                 1
 ImmediateAssert                                       18
 Initial                                                1
-IntVar                                                 1
 IntegerTypespec                                        2
 IntegerVar                                             1
 LogicNet                                              21
-LogicTypespec                                         28
-LogicVar                                               1
+LogicTypespec                                         29
 Module                                                 2
 ModuleTypespec                                         1
 Operation                                             38
@@ -1468,7 +1466,7 @@ Port                                                  21
 Range                                                 30
 RefModule                                              4
 RefObj                                                69
-RefTypespec                                           30
+RefTypespec                                           31
 RefVar                                                 1
 SysFuncCall                                            2
 === UHDM Object Stats End ===
@@ -1524,18 +1522,6 @@ Design: (unnamed)
     \_Module: work@Example (work@Example), file:${SURELOG_DIR}/tests/StringRange/dut.sv, line:1:1, endln:37:10
     |vpiName:flip
     |vpiFullName:work@Example.flip
-    |vpiReg:
-    \_LogicVar: (work@Example.flip)
-      |vpiParent:
-      \_Function: (work@Example.flip), line:6:5, endln:9:16
-      |vpiTypespec:
-      \_RefTypespec: (work@Example.flip), line:6:24, endln:6:30
-        |vpiParent:
-        \_LogicVar: (work@Example.flip)
-        |vpiFullName:work@Example.flip
-        |vpiActual:
-        \_LogicTypespec: , line:6:24, endln:6:30
-      |vpiFullName:work@Example.flip
     |vpiTypedef:
     \_LogicTypespec: , line:6:24, endln:6:30
       |vpiParent:
@@ -1560,7 +1546,6 @@ Design: (unnamed)
           |vpiSize:64
           |UINT:0
           |vpiConstType:9
-      |vpiSigned:1
     |vpiTypedef:
     \_LogicTypespec: , line:7:15, endln:7:21
       |vpiParent:
@@ -1586,15 +1571,18 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
     |vpiImportTypespec:
-    \_LogicVar: (work@Example.flip)
-    |vpiImportTypespec:
     \_LogicTypespec: , line:6:24, endln:6:30
     |vpiImportTypespec:
     \_LogicTypespec: , line:7:15, endln:7:21
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
-    \_LogicVar: (work@Example.flip)
+    \_RefTypespec: (work@Example.flip), line:6:24, endln:6:30
+      |vpiParent:
+      \_Function: (work@Example.flip), line:6:5, endln:9:16
+      |vpiFullName:work@Example.flip
+      |vpiActual:
+      \_LogicTypespec: , line:6:24, endln:6:30
     |vpiIODecl:
     \_IODecl: (inp), line:7:22, endln:7:25
       |vpiParent:
@@ -1634,7 +1622,7 @@ Design: (unnamed)
         |vpiName:flip
         |vpiFullName:work@Example.flip.flip
         |vpiActual:
-        \_LogicVar: (work@Example.flip)
+        \_Function: (work@Example.flip), line:6:5, endln:9:16
   |vpiInternalScope:
   \_GenRegion: (work@Example), line:11:5, endln:28:16
     |vpiParent:
@@ -2358,21 +2346,46 @@ Design: (unnamed)
     |vpiName:negate
     |vpiFullName:work@top.negate
     |vpiTypedef:
+    \_LogicTypespec: , line:56:14, endln:56:27
+      |vpiParent:
+      \_Function: (work@top.negate), line:56:5, endln:59:16
+      |vpiRange:
+      \_Range: , line:56:21, endln:56:27
+        |vpiParent:
+        \_LogicTypespec: , line:56:14, endln:56:27
+        |vpiLeftRange:
+        \_Constant: , line:56:22, endln:56:24
+          |vpiParent:
+          \_Range: , line:56:21, endln:56:27
+          |vpiDecompile:31
+          |vpiSize:64
+          |UINT:31
+          |vpiConstType:9
+        |vpiRightRange:
+        \_Constant: , line:56:25, endln:56:26
+          |vpiParent:
+          \_Range: , line:56:21, endln:56:27
+          |vpiDecompile:0
+          |vpiSize:64
+          |UINT:0
+          |vpiConstType:9
+    |vpiTypedef:
     \_IntegerTypespec: , line:57:15, endln:57:22
       |vpiParent:
       \_Function: (work@top.negate), line:56:5, endln:59:16
       |vpiSigned:1
     |vpiImportTypespec:
-    \_IntVar: (work@top.negate)
-      |vpiParent:
-      \_Function: (work@top.negate), line:56:5, endln:59:16
-      |vpiFullName:work@top.negate
-      |vpiSigned:1
+    \_LogicTypespec: , line:56:14, endln:56:27
     |vpiImportTypespec:
     \_IntegerTypespec: , line:57:15, endln:57:22
     |vpiVisibility:1
     |vpiReturn:
-    \_IntVar: (work@top.negate)
+    \_RefTypespec: (work@top.negate), line:56:14, endln:56:20
+      |vpiParent:
+      \_Function: (work@top.negate), line:56:5, endln:59:16
+      |vpiFullName:work@top.negate
+      |vpiActual:
+      \_LogicTypespec: , line:56:14, endln:56:27
     |vpiIODecl:
     \_IODecl: (inp), line:57:23, endln:57:26
       |vpiParent:
@@ -2412,7 +2425,7 @@ Design: (unnamed)
         |vpiName:negate
         |vpiFullName:work@top.negate.negate
         |vpiActual:
-        \_IntVar: (work@top.negate)
+        \_Function: (work@top.negate), line:56:5, endln:59:16
   |vpiTypedef:
   \_ModuleTypespec: (Example), line:44:5, endln:44:12
     |vpiParent:

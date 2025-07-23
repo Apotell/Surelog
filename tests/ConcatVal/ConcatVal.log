@@ -225,28 +225,25 @@ AST_DEBUG_END
 Begin                                                  1
 ClassDefn                                              8
 ClassTypespec                                          1
-ClassVar                                               1
 Constant                                              35
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              8
 EnumTypespec                                           2
-EnumVar                                                1
 FuncCall                                               1
 Function                                              10
 IODecl                                                13
 IntTypespec                                            9
-IntVar                                                 4
-LogicTypespec                                          5
-LogicVar                                               2
+LogicTypespec                                          6
 Module                                                 2
 Operation                                              7
 Package                                                1
+PackedArrayTypespec                                    1
 ParamAssign                                            1
 Parameter                                              1
 Range                                                  8
 RefObj                                                 3
-RefTypespec                                           16
+RefTypespec                                           19
 Task                                                   9
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConcatVal/slpp_all/surelog.uhdm ...
@@ -301,19 +298,6 @@ Design: (unnamed)
       \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/ConcatVal/builtin.sv, line:1:3, endln:27:11
       |vpiName:num
       |vpiFullName:builtin::mailbox::num
-      |vpiVariables:
-      \_IntVar: (builtin::mailbox::num)
-        |vpiParent:
-        \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
-        |vpiTypespec:
-        \_RefTypespec: (builtin::mailbox::num), line:6:14, endln:6:17
-          |vpiParent:
-          \_IntVar: (builtin::mailbox::num)
-          |vpiFullName:builtin::mailbox::num
-          |vpiActual:
-          \_IntTypespec: , line:6:14, endln:6:17
-        |vpiFullName:builtin::mailbox::num
-        |vpiSigned:1
       |vpiTypedef:
       \_IntTypespec: , line:6:14, endln:6:17
         |vpiParent:
@@ -321,12 +305,15 @@ Design: (unnamed)
         |vpiSigned:1
       |vpiImportTypespec:
       \_IntTypespec: , line:6:14, endln:6:17
-      |vpiImportTypespec:
-      \_IntVar: (builtin::mailbox::num)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_IntVar: (builtin::mailbox::num)
+      \_RefTypespec: (builtin::mailbox::num), line:6:14, endln:6:17
+        |vpiParent:
+        \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
+        |vpiFullName:builtin::mailbox::num
+        |vpiActual:
+        \_IntTypespec: , line:6:14, endln:6:17
     |vpiInternalScope:
     \_Task: (builtin::mailbox::put), line:9:5, endln:10:12
       |vpiParent:
@@ -347,19 +334,21 @@ Design: (unnamed)
       \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/ConcatVal/builtin.sv, line:1:3, endln:27:11
       |vpiName:try_put
       |vpiFullName:builtin::mailbox::try_put
-      |vpiVariables:
-      \_LogicVar: (builtin::mailbox::try_put)
+      |vpiTypedef:
+      \_LogicTypespec: 
         |vpiParent:
         \_Function: (builtin::mailbox::try_put), line:12:5, endln:13:16
-        |vpiFullName:builtin::mailbox::try_put
-      |vpiReg:
-      \_LogicVar: (builtin::mailbox::try_put)
       |vpiImportTypespec:
-      \_LogicVar: (builtin::mailbox::try_put)
+      \_LogicTypespec: 
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_LogicVar: (builtin::mailbox::try_put)
+      \_RefTypespec: (builtin::mailbox::try_put)
+        |vpiParent:
+        \_Function: (builtin::mailbox::try_put), line:12:5, endln:13:16
+        |vpiFullName:builtin::mailbox::try_put
+        |vpiActual:
+        \_LogicTypespec: 
       |vpiIODecl:
       \_IODecl: (message), line:12:23, endln:12:30
         |vpiParent:
@@ -386,19 +375,6 @@ Design: (unnamed)
       \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/ConcatVal/builtin.sv, line:1:3, endln:27:11
       |vpiName:try_get
       |vpiFullName:builtin::mailbox::try_get
-      |vpiVariables:
-      \_IntVar: (builtin::mailbox::try_get)
-        |vpiParent:
-        \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
-        |vpiTypespec:
-        \_RefTypespec: (builtin::mailbox::try_get), line:18:14, endln:18:17
-          |vpiParent:
-          \_IntVar: (builtin::mailbox::try_get)
-          |vpiFullName:builtin::mailbox::try_get
-          |vpiActual:
-          \_IntTypespec: , line:18:14, endln:18:17
-        |vpiFullName:builtin::mailbox::try_get
-        |vpiSigned:1
       |vpiTypedef:
       \_IntTypespec: , line:18:14, endln:18:17
         |vpiParent:
@@ -406,12 +382,15 @@ Design: (unnamed)
         |vpiSigned:1
       |vpiImportTypespec:
       \_IntTypespec: , line:18:14, endln:18:17
-      |vpiImportTypespec:
-      \_IntVar: (builtin::mailbox::try_get)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_IntVar: (builtin::mailbox::try_get)
+      \_RefTypespec: (builtin::mailbox::try_get), line:18:14, endln:18:17
+        |vpiParent:
+        \_Function: (builtin::mailbox::try_get), line:18:5, endln:19:16
+        |vpiFullName:builtin::mailbox::try_get
+        |vpiActual:
+        \_IntTypespec: , line:18:14, endln:18:17
       |vpiIODecl:
       \_IODecl: (message), line:18:31, endln:18:38
         |vpiParent:
@@ -438,19 +417,6 @@ Design: (unnamed)
       \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/ConcatVal/builtin.sv, line:1:3, endln:27:11
       |vpiName:try_peek
       |vpiFullName:builtin::mailbox::try_peek
-      |vpiVariables:
-      \_IntVar: (builtin::mailbox::try_peek)
-        |vpiParent:
-        \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
-        |vpiTypespec:
-        \_RefTypespec: (builtin::mailbox::try_peek), line:24:14, endln:24:17
-          |vpiParent:
-          \_IntVar: (builtin::mailbox::try_peek)
-          |vpiFullName:builtin::mailbox::try_peek
-          |vpiActual:
-          \_IntTypespec: , line:24:14, endln:24:17
-        |vpiFullName:builtin::mailbox::try_peek
-        |vpiSigned:1
       |vpiTypedef:
       \_IntTypespec: , line:24:14, endln:24:17
         |vpiParent:
@@ -458,12 +424,15 @@ Design: (unnamed)
         |vpiSigned:1
       |vpiImportTypespec:
       \_IntTypespec: , line:24:14, endln:24:17
-      |vpiImportTypespec:
-      \_IntVar: (builtin::mailbox::try_peek)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_IntVar: (builtin::mailbox::try_peek)
+      \_RefTypespec: (builtin::mailbox::try_peek), line:24:14, endln:24:17
+        |vpiParent:
+        \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
+        |vpiFullName:builtin::mailbox::try_peek
+        |vpiActual:
+        \_IntTypespec: , line:24:14, endln:24:17
       |vpiIODecl:
       \_IODecl: (message), line:24:31, endln:24:38
         |vpiParent:
@@ -510,19 +479,6 @@ Design: (unnamed)
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ConcatVal/builtin.sv, line:30:3, endln:52:11
       |vpiName:self
       |vpiFullName:builtin::process::self
-      |vpiVariables:
-      \_ClassVar: (builtin::process::self)
-        |vpiParent:
-        \_Function: (builtin::process::self), line:34:5, endln:35:16
-        |vpiTypespec:
-        \_RefTypespec: (builtin::process::self::builtin::process), line:34:21, endln:34:28
-          |vpiParent:
-          \_ClassVar: (builtin::process::self)
-          |vpiName:builtin::process
-          |vpiFullName:builtin::process::self::builtin::process
-          |vpiActual:
-          \_ClassTypespec: (process), line:34:21, endln:34:28
-        |vpiFullName:builtin::process::self
       |vpiTypedef:
       \_ClassTypespec: (process), line:34:21, endln:34:28
         |vpiParent:
@@ -532,37 +488,32 @@ Design: (unnamed)
         \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ConcatVal/builtin.sv, line:30:3, endln:52:11
       |vpiImportTypespec:
       \_ClassTypespec: (process), line:34:21, endln:34:28
-      |vpiImportTypespec:
-      \_ClassVar: (builtin::process::self)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_ClassVar: (builtin::process::self)
+      \_RefTypespec: (builtin::process::self::process), line:34:21, endln:34:28
+        |vpiParent:
+        \_Function: (builtin::process::self), line:34:5, endln:35:16
+        |vpiName:process
+        |vpiFullName:builtin::process::self::process
+        |vpiActual:
+        \_ClassTypespec: (process), line:34:21, endln:34:28
     |vpiInternalScope:
     \_Function: (builtin::process::status), line:37:5, endln:38:16
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ConcatVal/builtin.sv, line:30:3, endln:52:11
       |vpiName:status
       |vpiFullName:builtin::process::status
-      |vpiVariables:
-      \_EnumVar: (builtin::process::status)
-        |vpiParent:
-        \_Function: (builtin::process::status), line:37:5, endln:38:16
-        |vpiTypespec:
-        \_RefTypespec: (builtin::process::status::state), line:37:14, endln:37:19
-          |vpiParent:
-          \_EnumVar: (builtin::process::status)
-          |vpiName:state
-          |vpiFullName:builtin::process::status::state
-          |vpiActual:
-          \_EnumTypespec: (state), line:32:13, endln:32:73
-        |vpiFullName:builtin::process::status
-      |vpiImportTypespec:
-      \_EnumVar: (builtin::process::status)
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_EnumVar: (builtin::process::status)
+      \_RefTypespec: (builtin::process::status::state), line:37:14, endln:37:19
+        |vpiParent:
+        \_Function: (builtin::process::status), line:37:5, endln:38:16
+        |vpiName:state
+        |vpiFullName:builtin::process::status::state
+        |vpiActual:
+        \_EnumTypespec: (state), line:32:13, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -750,19 +701,6 @@ Design: (unnamed)
       \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/ConcatVal/builtin.sv, line:55:3, endln:69:11
       |vpiName:try_get
       |vpiFullName:builtin::semaphore::try_get
-      |vpiVariables:
-      \_IntVar: (builtin::semaphore::try_get)
-        |vpiParent:
-        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
-        |vpiTypespec:
-        \_RefTypespec: (builtin::semaphore::try_get), line:66:14, endln:66:17
-          |vpiParent:
-          \_IntVar: (builtin::semaphore::try_get)
-          |vpiFullName:builtin::semaphore::try_get
-          |vpiActual:
-          \_IntTypespec: , line:66:14, endln:66:17
-        |vpiFullName:builtin::semaphore::try_get
-        |vpiSigned:1
       |vpiTypedef:
       \_IntTypespec: , line:66:14, endln:66:17
         |vpiParent:
@@ -775,14 +713,17 @@ Design: (unnamed)
         |vpiSigned:1
       |vpiImportTypespec:
       \_IntTypespec: , line:66:14, endln:66:17
-      |vpiImportTypespec:
-      \_IntVar: (builtin::semaphore::try_get)
       |vpiImportTypespec:
       \_IntTypespec: , line:66:26, endln:66:29
       |vpiMethod:1
       |vpiVisibility:1
       |vpiReturn:
-      \_IntVar: (builtin::semaphore::try_get)
+      \_RefTypespec: (builtin::semaphore::try_get), line:66:14, endln:66:17
+        |vpiParent:
+        \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+        |vpiFullName:builtin::semaphore::try_get
+        |vpiActual:
+        \_IntTypespec: , line:66:14, endln:66:17
       |vpiIODecl:
       \_IODecl: (keyCount), line:66:30, endln:66:38
         |vpiParent:
@@ -899,20 +840,6 @@ Design: (unnamed)
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConcatVal/dut.sv, line:1:1, endln:15:10
     |vpiName:sbox4_64bit
     |vpiFullName:work@dut.sbox4_64bit
-    |vpiVariables:
-    \_LogicVar: (work@dut.sbox4_64bit)
-      |vpiParent:
-      \_Function: (work@dut.sbox4_64bit), line:4:2, endln:5:28
-      |vpiTypespec:
-      \_RefTypespec: (work@dut.sbox4_64bit), line:4:21, endln:4:33
-        |vpiParent:
-        \_LogicVar: (work@dut.sbox4_64bit)
-        |vpiFullName:work@dut.sbox4_64bit
-        |vpiActual:
-        \_LogicTypespec: , line:4:21, endln:4:33
-      |vpiFullName:work@dut.sbox4_64bit
-    |vpiReg:
-    \_LogicVar: (work@dut.sbox4_64bit)
     |vpiInternalScope:
     \_Begin: (work@dut.sbox4_64bit)
       |vpiParent:
@@ -1013,15 +940,18 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_LogicTypespec: , line:4:21, endln:4:33
     |vpiImportTypespec:
-    \_LogicVar: (work@dut.sbox4_64bit)
-    |vpiImportTypespec:
     \_LogicTypespec: , line:4:46, endln:4:58
     |vpiImportTypespec:
     \_LogicTypespec: , line:4:69, endln:4:86
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
-    \_LogicVar: (work@dut.sbox4_64bit)
+    \_RefTypespec: (work@dut.sbox4_64bit), line:4:21, endln:4:33
+      |vpiParent:
+      \_Function: (work@dut.sbox4_64bit), line:4:2, endln:5:28
+      |vpiFullName:work@dut.sbox4_64bit
+      |vpiActual:
+      \_PackedArrayTypespec: , line:4:27, endln:4:33
     |vpiIODecl:
     \_IODecl: (state_in), line:4:59, endln:4:67
       |vpiParent:
@@ -1095,6 +1025,37 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_PackedArrayTypespec: , line:4:27, endln:4:33
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConcatVal/dut.sv, line:1:1, endln:15:10
+    |vpiRange:
+    \_Range: , line:4:27, endln:4:33
+      |vpiParent:
+      \_PackedArrayTypespec: , line:4:27, endln:4:33
+      |vpiLeftRange:
+      \_Constant: , line:4:28, endln:4:30
+        |vpiParent:
+        \_Range: , line:4:27, endln:4:33
+        |vpiDecompile:63
+        |vpiSize:64
+        |UINT:63
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:4:31, endln:4:32
+        |vpiParent:
+        \_Range: , line:4:27, endln:4:33
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@dut.sbox4_64bit), line:4:21, endln:4:33
+      |vpiParent:
+      \_LogicTypespec: , line:4:21, endln:4:33
+      |vpiFullName:work@dut.sbox4_64bit
+      |vpiActual:
+      \_LogicTypespec: , line:4:21, endln:4:33
+  |vpiTypedef:
   \_LogicTypespec: , line:7:16, endln:7:27
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ConcatVal/dut.sv, line:1:1, endln:15:10
@@ -1158,6 +1119,8 @@ Design: (unnamed)
   \_Function: (work@dut.sbox4_64bit), line:4:2, endln:5:28
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:13, endln:2:30
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:4:27, endln:4:33
   |vpiImportTypespec:
   \_LogicTypespec: , line:7:16, endln:7:27
   |vpiImportTypespec:

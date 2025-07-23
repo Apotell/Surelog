@@ -134,28 +134,28 @@ ForeachStmt                                            1
 Function                                               1
 HierPath                                               3
 IfStmt                                                 1
-LogicTypespec                                          1
-LogicVar                                               2
+LogicTypespec                                          2
+LogicVar                                               1
 Operation                                              4
 Package                                                1
 Range                                                  1
 RefObj                                                 8
-RefTypespec                                            5
+RefTypespec                                            6
 RefVar                                                 1
 UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:16: Failed to bind object: "id: 20, name: addrs".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:16: Illegal implicit net "id:20, name: addrs".
-[ERR:UH0734] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:17: Failed to bind object: "id: 21, name: i".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:17: Illegal implicit net "id:21, name: i".
-[ERR:UH0734] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:29: Failed to bind object: "id: 25, name: min".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:29: Illegal implicit net "id:25, name: min".
-[ERR:UH0734] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:41: Failed to bind object: "id: 27, name: addrs".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:41: Illegal implicit net "id:27, name: addrs".
-[ERR:UH0734] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:42: Failed to bind object: "id: 28, name: i".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:42: Illegal implicit net "id:28, name: i".
-[ERR:UH0734] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:54: Failed to bind object: "id: 32, name: max".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:54: Illegal implicit net "id:32, name: max".
+[ERR:UH0734] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:16: Failed to bind object: "id: 21, name: addrs".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:16: Illegal implicit net "id:21, name: addrs".
+[ERR:UH0734] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:17: Failed to bind object: "id: 22, name: i".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:17: Illegal implicit net "id:22, name: i".
+[ERR:UH0734] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:29: Failed to bind object: "id: 26, name: min".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:29: Illegal implicit net "id:26, name: min".
+[ERR:UH0734] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:41: Failed to bind object: "id: 28, name: addrs".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:41: Illegal implicit net "id:28, name: addrs".
+[ERR:UH0734] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:42: Failed to bind object: "id: 29, name: i".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:42: Illegal implicit net "id:29, name: i".
+[ERR:UH0734] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:54: Failed to bind object: "id: 33, name: max".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ForeachClass/dut.sv:12:54: Illegal implicit net "id:33, name: max".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ForeachClass/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -254,13 +254,6 @@ Design: (unnamed)
     \_Package: uvm (uvm), file:${SURELOG_DIR}/tests/ForeachClass/dut.sv, line:1:1, endln:17:11
     |vpiName:f1
     |vpiFullName:uvm::f1
-    |vpiVariables:
-    \_LogicVar: (uvm::f1)
-      |vpiParent:
-      \_Function: (uvm::f1), line:8:3, endln:15:14
-      |vpiFullName:uvm::f1
-    |vpiReg:
-    \_LogicVar: (uvm::f1)
     |vpiInternalScope:
     \_Begin: (uvm::f1)
       |vpiParent:
@@ -433,11 +426,20 @@ Design: (unnamed)
       \_UnsupportedTypespec: (range), line:11:39, endln:11:44
       |vpiStmt:
       \_ForeachStmt: (uvm::f1), line:11:5, endln:14:8
+    |vpiTypedef:
+    \_LogicTypespec: 
+      |vpiParent:
+      \_Function: (uvm::f1), line:8:3, endln:15:14
     |vpiImportTypespec:
-    \_LogicVar: (uvm::f1)
+    \_LogicTypespec: 
     |vpiVisibility:1
     |vpiReturn:
-    \_LogicVar: (uvm::f1)
+    \_RefTypespec: (uvm::f1)
+      |vpiParent:
+      \_Function: (uvm::f1), line:8:3, endln:15:14
+      |vpiFullName:uvm::f1
+      |vpiActual:
+      \_LogicTypespec: 
     |vpiStmt:
     \_Begin: (uvm::f1)
     |vpiInstance:

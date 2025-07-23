@@ -1055,7 +1055,7 @@ GenIf                                                 14
 IntegerTypespec                                        2
 IntegerVar                                             1
 LogicNet                                               4
-LogicVar                                               1
+LogicTypespec                                          1
 Module                                                 2
 ModuleTypespec                                        15
 Operation                                             45
@@ -1065,7 +1065,7 @@ Port                                                   6
 RealTypespec                                           1
 RefModule                                             15
 RefObj                                                30
-RefTypespec                                            2
+RefTypespec                                            3
 ReturnStmt                                             1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/DoublePres/slpp_all/surelog.uhdm ...
@@ -1714,11 +1714,6 @@ Design: (unnamed)
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/DoublePres/dut.sv, line:8:1, endln:111:10
     |vpiName:incr_d
     |vpiFullName:work@dut.incr_d
-    |vpiReg:
-    \_LogicVar: (work@dut.incr_d)
-      |vpiParent:
-      \_Function: (work@dut.incr_d), line:46:1, endln:51:12
-      |vpiFullName:work@dut.incr_d
     |vpiInternalScope:
     \_Begin: (work@dut.incr_d)
       |vpiParent:
@@ -1745,7 +1740,7 @@ Design: (unnamed)
           |vpiName:incr_d
           |vpiFullName:work@dut.incr_d.incr_d
           |vpiActual:
-          \_LogicVar: (work@dut.incr_d)
+          \_Function: (work@dut.incr_d), line:46:1, endln:51:12
       |vpiStmt:
       \_Operation: , line:49:4, endln:49:12
         |vpiParent:
@@ -1758,7 +1753,7 @@ Design: (unnamed)
           |vpiName:incr_d
           |vpiFullName:work@dut.incr_d.incr_d
           |vpiActual:
-          \_LogicVar: (work@dut.incr_d)
+          \_Function: (work@dut.incr_d), line:46:1, endln:51:12
       |vpiStmt:
       \_ReturnStmt: , line:50:4, endln:50:17
         |vpiParent:
@@ -1770,7 +1765,11 @@ Design: (unnamed)
           |vpiName:incr_d
           |vpiFullName:work@dut.incr_d.incr_d
           |vpiActual:
-          \_LogicVar: (work@dut.incr_d)
+          \_Function: (work@dut.incr_d), line:46:1, endln:51:12
+    |vpiTypedef:
+    \_LogicTypespec: 
+      |vpiParent:
+      \_Function: (work@dut.incr_d), line:46:1, endln:51:12
     |vpiTypedef:
     \_IntegerTypespec: , line:47:4, endln:47:11
       |vpiParent:
@@ -1782,7 +1781,7 @@ Design: (unnamed)
       \_Function: (work@dut.incr_d), line:46:1, endln:51:12
       |vpiSigned:1
     |vpiImportTypespec:
-    \_LogicVar: (work@dut.incr_d)
+    \_LogicTypespec: 
     |vpiImportTypespec:
     \_IntegerTypespec: , line:47:4, endln:47:11
     |vpiImportTypespec:
@@ -1804,7 +1803,12 @@ Design: (unnamed)
       |vpiAutomatic:1
     |vpiVisibility:1
     |vpiReturn:
-    \_LogicVar: (work@dut.incr_d)
+    \_RefTypespec: (work@dut.incr_d)
+      |vpiParent:
+      \_Function: (work@dut.incr_d), line:46:1, endln:51:12
+      |vpiFullName:work@dut.incr_d
+      |vpiActual:
+      \_LogicTypespec: 
     |vpiStmt:
     \_Begin: (work@dut.incr_d)
   |vpiInternalScope:

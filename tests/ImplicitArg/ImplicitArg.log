@@ -10,7 +10,7 @@ n<> u<48> t<Top_level_rule> c<1> l<1:1> el<10:1>
       n<> u<45> t<Module_declaration> p<46> c<5> l<1:1> el<9:10>
         n<> u<5> t<Module_nonansi_header> p<45> c<2> s<43> l<1:1> el<1:14>
           n<module> u<2> t<Module_keyword> p<5> s<3> l<1:1> el<1:7>
-          n<top> u<3> t<StringConst> p<5> s<4> l<1:8> el<1:11>
+          n<top> u<3> t<STRING_CONST> p<5> s<4> l<1:8> el<1:11>
           n<> u<4> t<List_of_ports> p<5> l<1:11> el<1:13>
         n<> u<43> t<Module_item> p<45> c<42> s<44> l<3:1> el<7:12>
           n<> u<42> t<Non_port_module_item> p<43> c<41> l<3:1> el<7:12>
@@ -25,7 +25,7 @@ n<> u<48> t<Top_level_rule> c<1> l<1:1> el<10:1>
                           n<> u<9> t<Function_data_type> p<10> c<8> l<3:20> el<3:25>
                             n<> u<8> t<Data_type> p<9> c<7> l<3:20> el<3:25>
                               n<> u<7> t<IntVec_TypeLogic> p<8> l<3:20> el<3:25>
-                        n<bsg_mul_booth> u<11> t<StringConst> p<36> s<25> l<4:1> el<4:14>
+                        n<bsg_mul_booth> u<11> t<STRING_CONST> p<36> s<25> l<4:1> el<4:14>
                         n<> u<25> t<Tf_port_list> p<36> c<24> s<34> l<5:3> el<5:12>
                           n<> u<24> t<Tf_port_item> p<25> c<22> l<5:3> el<5:12>
                             n<> u<22> t<Data_type_or_implicit> p<24> c<21> s<23> l<5:3> el<5:8>
@@ -34,12 +34,12 @@ n<> u<48> t<Top_level_rule> c<1> l<1:1> el<10:1>
                                   n<> u<15> t<Constant_expression> p<20> c<14> s<19> l<5:4> el<5:5>
                                     n<> u<14> t<Constant_primary> p<15> c<13> l<5:4> el<5:5>
                                       n<> u<13> t<Primary_literal> p<14> c<12> l<5:4> el<5:5>
-                                        n<2> u<12> t<IntConst> p<13> l<5:4> el<5:5>
+                                        n<2> u<12> t<INT_CONST> p<13> l<5:4> el<5:5>
                                   n<> u<19> t<Constant_expression> p<20> c<18> l<5:6> el<5:7>
                                     n<> u<18> t<Constant_primary> p<19> c<17> l<5:6> el<5:7>
                                       n<> u<17> t<Primary_literal> p<18> c<16> l<5:6> el<5:7>
-                                        n<0> u<16> t<IntConst> p<17> l<5:6> el<5:7>
-                            n<sdn> u<23> t<StringConst> p<24> l<5:9> el<5:12>
+                                        n<0> u<16> t<INT_CONST> p<17> l<5:6> el<5:7>
+                            n<sdn> u<23> t<STRING_CONST> p<24> l<5:9> el<5:12>
                         n<> u<34> t<Function_statement_or_null> p<36> c<33> s<35> l<6:3> el<6:12>
                           n<> u<33> t<Statement> p<34> c<32> l<6:3> el<6:12>
                             n<> u<32> t<Statement_item> p<33> c<31> l<6:3> el<6:12>
@@ -48,7 +48,7 @@ n<> u<48> t<Top_level_rule> c<1> l<1:1> el<10:1>
                                 n<> u<29> t<Expression> p<31> c<28> l<6:10> el<6:11>
                                   n<> u<28> t<Primary> p<29> c<27> l<6:10> el<6:11>
                                     n<> u<27> t<Primary_literal> p<28> c<26> l<6:10> el<6:11>
-                                      n<1> u<26> t<IntConst> p<27> l<6:10> el<6:11>
+                                      n<1> u<26> t<INT_CONST> p<27> l<6:10> el<6:11>
                         n<> u<35> t<ENDFUNCTION> p<36> l<7:1> el<7:12>
         n<> u<44> t<ENDMODULE> p<45> l<9:1> el<9:10>
 AST_DEBUG_END
@@ -62,7 +62,6 @@ Design                                                 1
 Function                                               1
 IODecl                                                 1
 LogicTypespec                                          1
-LogicVar                                               1
 Module                                                 1
 RefTypespec                                            1
 ReturnStmt                                             1
@@ -83,32 +82,21 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ImplicitArg/dut.sv, line:1:1, endln:9:10
     |vpiName:bsg_mul_booth
     |vpiFullName:work@top.bsg_mul_booth
-    |vpiVariables:
-    \_LogicVar: (work@top.bsg_mul_booth)
-      |vpiParent:
-      \_Function: (work@top.bsg_mul_booth), line:3:1, endln:7:12
-      |vpiTypespec:
-      \_RefTypespec: (work@top.bsg_mul_booth), line:3:20, endln:3:25
-        |vpiParent:
-        \_LogicVar: (work@top.bsg_mul_booth)
-        |vpiFullName:work@top.bsg_mul_booth
-        |vpiActual:
-        \_LogicTypespec: , line:3:20, endln:3:25
-      |vpiFullName:work@top.bsg_mul_booth
-    |vpiReg:
-    \_LogicVar: (work@top.bsg_mul_booth)
     |vpiTypedef:
     \_LogicTypespec: , line:3:20, endln:3:25
       |vpiParent:
       \_Function: (work@top.bsg_mul_booth), line:3:1, endln:7:12
     |vpiImportTypespec:
     \_LogicTypespec: , line:3:20, endln:3:25
-    |vpiImportTypespec:
-    \_LogicVar: (work@top.bsg_mul_booth)
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
-    \_LogicVar: (work@top.bsg_mul_booth)
+    \_RefTypespec: (work@top.bsg_mul_booth), line:3:20, endln:3:25
+      |vpiParent:
+      \_Function: (work@top.bsg_mul_booth), line:3:1, endln:7:12
+      |vpiFullName:work@top.bsg_mul_booth
+      |vpiActual:
+      \_LogicTypespec: , line:3:20, endln:3:25
     |vpiIODecl:
     \_IODecl: (sdn), line:5:9, endln:5:12
       |vpiParent:

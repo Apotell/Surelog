@@ -122,9 +122,10 @@ IntTypespec                                            2
 Module                                                 1
 Operation                                              1
 RefObj                                                 4
-RefTypespec                                            2
+RefTypespec                                            3
 ReturnStmt                                             1
 SysFuncCall                                            2
+VoidTypespec                                           1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/VoidFuncReturn/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -202,6 +203,10 @@ Design: (unnamed)
             |vpiActual:
             \_IODecl: (b), line:3:30, endln:3:31
     |vpiTypedef:
+    \_VoidTypespec: , line:3:10, endln:3:14
+      |vpiParent:
+      \_Function: (work@top.add), line:3:1, endln:6:12
+    |vpiTypedef:
     \_IntTypespec: , line:3:19, endln:3:22
       |vpiParent:
       \_Function: (work@top.add), line:3:1, endln:6:12
@@ -212,10 +217,19 @@ Design: (unnamed)
       \_Function: (work@top.add), line:3:1, endln:6:12
       |vpiSigned:1
     |vpiImportTypespec:
+    \_VoidTypespec: , line:3:10, endln:3:14
+    |vpiImportTypespec:
     \_IntTypespec: , line:3:19, endln:3:22
     |vpiImportTypespec:
     \_IntTypespec: , line:3:26, endln:3:29
     |vpiVisibility:1
+    |vpiReturn:
+    \_RefTypespec: (work@top.add)
+      |vpiParent:
+      \_Function: (work@top.add), line:3:1, endln:6:12
+      |vpiFullName:work@top.add
+      |vpiActual:
+      \_VoidTypespec: , line:3:10, endln:3:14
     |vpiIODecl:
     \_IODecl: (a), line:3:23, endln:3:24
       |vpiParent:

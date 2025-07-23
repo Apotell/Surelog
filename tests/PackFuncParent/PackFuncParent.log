@@ -233,13 +233,14 @@ IODecl                                                 2
 IndexedPartSelect                                      2
 LogicNet                                               1
 LogicTypespec                                          7
-LogicVar                                               3
+LogicVar                                               1
 Module                                                 1
 Package                                                1
+PackedArrayTypespec                                    2
 Port                                                   1
 Range                                                 11
 RefObj                                                 3
-RefTypespec                                            7
+RefTypespec                                           11
 ReturnStmt                                             2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackFuncParent/slpp_all/surelog.uhdm ...
@@ -258,20 +259,6 @@ Design: (unnamed)
     \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/PackFuncParent/dut.sv, line:1:1, endln:11:11
     |vpiName:sbox4_8bit
     |vpiFullName:my_pkg::sbox4_8bit
-    |vpiVariables:
-    \_LogicVar: (my_pkg::sbox4_8bit)
-      |vpiParent:
-      \_Function: (my_pkg::sbox4_8bit), line:2:4, endln:4:28
-      |vpiTypespec:
-      \_RefTypespec: (my_pkg::sbox4_8bit), line:2:23, endln:2:34
-        |vpiParent:
-        \_LogicVar: (my_pkg::sbox4_8bit)
-        |vpiFullName:my_pkg::sbox4_8bit
-        |vpiActual:
-        \_LogicTypespec: , line:2:23, endln:2:34
-      |vpiFullName:my_pkg::sbox4_8bit
-    |vpiReg:
-    \_LogicVar: (my_pkg::sbox4_8bit)
     |vpiTypedef:
     \_LogicTypespec: , line:2:23, endln:2:34
       |vpiParent:
@@ -323,13 +310,16 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_LogicTypespec: , line:2:23, endln:2:34
     |vpiImportTypespec:
-    \_LogicVar: (my_pkg::sbox4_8bit)
-    |vpiImportTypespec:
     \_LogicTypespec: , line:2:46, endln:2:57
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
-    \_LogicVar: (my_pkg::sbox4_8bit)
+    \_RefTypespec: (my_pkg::sbox4_8bit), line:2:23, endln:2:34
+      |vpiParent:
+      \_Function: (my_pkg::sbox4_8bit), line:2:4, endln:4:28
+      |vpiFullName:my_pkg::sbox4_8bit
+      |vpiActual:
+      \_PackedArrayTypespec: , line:2:29, endln:2:34
     |vpiIODecl:
     \_IODecl: (state_in), line:2:58, endln:2:66
       |vpiParent:
@@ -363,20 +353,6 @@ Design: (unnamed)
     \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/PackFuncParent/dut.sv, line:1:1, endln:11:11
     |vpiName:sbox4_16bit
     |vpiFullName:my_pkg::sbox4_16bit
-    |vpiVariables:
-    \_LogicVar: (my_pkg::sbox4_16bit)
-      |vpiParent:
-      \_Function: (my_pkg::sbox4_16bit), line:6:4, endln:10:29
-      |vpiTypespec:
-      \_RefTypespec: (my_pkg::sbox4_16bit), line:6:23, endln:6:35
-        |vpiParent:
-        \_LogicVar: (my_pkg::sbox4_16bit)
-        |vpiFullName:my_pkg::sbox4_16bit
-        |vpiActual:
-        \_LogicTypespec: , line:6:23, endln:6:35
-      |vpiFullName:my_pkg::sbox4_16bit
-    |vpiReg:
-    \_LogicVar: (my_pkg::sbox4_16bit)
     |vpiInternalScope:
     \_Begin: (my_pkg::sbox4_16bit)
       |vpiParent:
@@ -555,13 +531,16 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_LogicTypespec: , line:6:23, endln:6:35
     |vpiImportTypespec:
-    \_LogicVar: (my_pkg::sbox4_16bit)
-    |vpiImportTypespec:
     \_LogicTypespec: , line:6:48, endln:6:60
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
-    \_LogicVar: (my_pkg::sbox4_16bit)
+    \_RefTypespec: (my_pkg::sbox4_16bit), line:6:23, endln:6:35
+      |vpiParent:
+      \_Function: (my_pkg::sbox4_16bit), line:6:4, endln:10:29
+      |vpiFullName:my_pkg::sbox4_16bit
+      |vpiActual:
+      \_PackedArrayTypespec: , line:6:29, endln:6:35
     |vpiIODecl:
     \_IODecl: (state_in), line:6:61, endln:6:69
       |vpiParent:
@@ -579,10 +558,76 @@ Design: (unnamed)
     \_Begin: (my_pkg::sbox4_16bit)
     |vpiInstance:
     \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/PackFuncParent/dut.sv, line:1:1, endln:11:11
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:2:29, endln:2:34
+    |vpiParent:
+    \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/PackFuncParent/dut.sv, line:1:1, endln:11:11
+    |vpiRange:
+    \_Range: , line:2:29, endln:2:34
+      |vpiParent:
+      \_PackedArrayTypespec: , line:2:29, endln:2:34
+      |vpiLeftRange:
+      \_Constant: , line:2:30, endln:2:31
+        |vpiParent:
+        \_Range: , line:2:29, endln:2:34
+        |vpiDecompile:7
+        |vpiSize:64
+        |UINT:7
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:2:32, endln:2:33
+        |vpiParent:
+        \_Range: , line:2:29, endln:2:34
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (my_pkg::sbox4_8bit), line:2:23, endln:2:34
+      |vpiParent:
+      \_LogicTypespec: , line:2:23, endln:2:34
+      |vpiFullName:my_pkg::sbox4_8bit
+      |vpiActual:
+      \_LogicTypespec: , line:2:23, endln:2:34
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:6:29, endln:6:35
+    |vpiParent:
+    \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/PackFuncParent/dut.sv, line:1:1, endln:11:11
+    |vpiRange:
+    \_Range: , line:6:29, endln:6:35
+      |vpiParent:
+      \_PackedArrayTypespec: , line:6:29, endln:6:35
+      |vpiLeftRange:
+      \_Constant: , line:6:30, endln:6:32
+        |vpiParent:
+        \_Range: , line:6:29, endln:6:35
+        |vpiDecompile:15
+        |vpiSize:64
+        |UINT:15
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:6:33, endln:6:34
+        |vpiParent:
+        \_Range: , line:6:29, endln:6:35
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (my_pkg::sbox4_16bit), line:6:23, endln:6:35
+      |vpiParent:
+      \_LogicTypespec: , line:6:23, endln:6:35
+      |vpiFullName:my_pkg::sbox4_16bit
+      |vpiActual:
+      \_LogicTypespec: , line:6:23, endln:6:35
   |vpiImportTypespec:
   \_Function: (my_pkg::sbox4_8bit), line:2:4, endln:4:28
   |vpiImportTypespec:
   \_Function: (my_pkg::sbox4_16bit), line:6:4, endln:10:29
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:2:29, endln:2:34
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:6:29, endln:6:35
   |vpiDefName:my_pkg
   |vpiTaskFunc:
   \_Function: (my_pkg::sbox4_8bit), line:2:4, endln:4:28

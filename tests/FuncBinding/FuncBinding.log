@@ -576,14 +576,13 @@ FuncCall                                               1
 Function                                               1
 IODecl                                                 4
 IfElse                                                 5
-LogicTypespec                                          3
-LogicVar                                               1
+LogicTypespec                                          4
 Module                                                 2
 Operation                                              7
 Port                                                   6
 Range                                                  3
 RefObj                                                36
-RefTypespec                                           19
+RefTypespec                                           20
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FuncBinding/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -715,13 +714,10 @@ Design: (unnamed)
     \_Module: work@fsm_using_function (work@fsm_using_function), file:${SURELOG_DIR}/tests/FuncBinding/dut.sv, line:1:1, endln:53:10
     |vpiName:fsm_function
     |vpiFullName:work@fsm_using_function.fsm_function
-    |vpiVariables:
-    \_LogicVar: (work@fsm_using_function.fsm_function)
+    |vpiTypedef:
+    \_LogicTypespec: 
       |vpiParent:
       \_Function: (work@fsm_using_function.fsm_function), line:21:1, endln:42:12
-      |vpiFullName:work@fsm_using_function.fsm_function
-    |vpiReg:
-    \_LogicVar: (work@fsm_using_function.fsm_function)
     |vpiTypedef:
     \_LogicTypespec: , line:21:29, endln:21:40
       |vpiParent:
@@ -779,7 +775,7 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
     |vpiImportTypespec:
-    \_LogicVar: (work@fsm_using_function.fsm_function)
+    \_LogicTypespec: 
     |vpiImportTypespec:
     \_LogicTypespec: , line:21:29, endln:21:40
     |vpiImportTypespec:
@@ -790,7 +786,12 @@ Design: (unnamed)
     \_LogicTypespec: , line:21:88, endln:21:99
     |vpiVisibility:1
     |vpiReturn:
-    \_LogicVar: (work@fsm_using_function.fsm_function)
+    \_RefTypespec: (work@fsm_using_function.fsm_function)
+      |vpiParent:
+      \_Function: (work@fsm_using_function.fsm_function), line:21:1, endln:42:12
+      |vpiFullName:work@fsm_using_function.fsm_function
+      |vpiActual:
+      \_LogicTypespec: 
     |vpiIODecl:
     \_IODecl: (state), line:21:41, endln:21:46
       |vpiParent:

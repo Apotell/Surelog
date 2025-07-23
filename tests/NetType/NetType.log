@@ -208,7 +208,6 @@ Assignment                                             2
 Begin                                                  1
 BitSelect                                              1
 BitTypespec                                            3
-BitVar                                                 1
 Constant                                               5
 Design                                                 1
 ForeachStmt                                            1
@@ -218,12 +217,11 @@ IODecl                                                 2
 Module                                                 1
 Range                                                  2
 RealTypespec                                           5
-RealVar                                                2
+RealVar                                                1
 RefObj                                                 6
 RefTypespec                                            9
 RefVar                                                 2
 StructTypespec                                         1
-StructVar                                              1
 TypespecMember                                         2
 UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
@@ -312,49 +310,27 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:my_function
-  |vpiVariables:
-  \_BitVar: (my_function)
-    |vpiParent:
-    \_Function: (my_function), line:3:1, endln:4:12
-    |vpiTypespec:
-    \_RefTypespec: (my_function), line:3:20, endln:3:23
-      |vpiParent:
-      \_BitVar: (my_function)
-      |vpiFullName:my_function
-      |vpiActual:
-      \_BitTypespec: , line:3:20, endln:3:23
-    |vpiFullName:my_function
   |vpiTypedef:
   \_BitTypespec: , line:3:20, endln:3:23
     |vpiParent:
     \_Function: (my_function), line:3:1, endln:4:12
   |vpiImportTypespec:
   \_BitTypespec: , line:3:20, endln:3:23
-  |vpiImportTypespec:
-  \_BitVar: (my_function)
   |vpiMethod:1
   |vpiVisibility:1
   |vpiAutomatic:1
   |vpiReturn:
-  \_BitVar: (my_function)
+  \_RefTypespec: (my_function), line:3:20, endln:3:23
+    |vpiParent:
+    \_Function: (my_function), line:3:1, endln:4:12
+    |vpiFullName:my_function
+    |vpiActual:
+    \_BitTypespec: , line:3:20, endln:3:23
 |vpiTaskFunc:
 \_Function: (Tsum), line:28:1, endln:32:12
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:Tsum
-  |vpiVariables:
-  \_StructVar: (Tsum)
-    |vpiParent:
-    \_Function: (Tsum), line:28:1, endln:32:12
-    |vpiTypespec:
-    \_RefTypespec: (Tsum.T), line:28:20, endln:28:21
-      |vpiParent:
-      \_StructVar: (Tsum)
-      |vpiName:T
-      |vpiFullName:Tsum.T
-      |vpiActual:
-      \_StructTypespec: (T), line:22:9, endln:25:2
-    |vpiFullName:Tsum
   |vpiInternalScope:
   \_Begin: (Tsum)
     |vpiParent:
@@ -434,7 +410,7 @@ Design: (unnamed)
             \_HierPath: (Tsum.field1), line:31:9, endln:31:16
             |vpiName:Tsum
             |vpiActual:
-            \_StructVar: (Tsum)
+            \_Function: (Tsum), line:28:1, endln:32:12
           |vpiActual:
           \_RefObj: (field1), line:31:10, endln:31:16
             |vpiParent:
@@ -474,7 +450,7 @@ Design: (unnamed)
           \_HierPath: (Tsum.field1), line:29:7, endln:29:14
           |vpiName:Tsum
           |vpiActual:
-          \_StructVar: (Tsum)
+          \_Function: (Tsum), line:28:1, endln:32:12
         |vpiActual:
         \_RefObj: (field1), line:29:8, endln:29:14
           |vpiParent:
@@ -485,13 +461,17 @@ Design: (unnamed)
         |vpiName:Tsum.field1
     |vpiStmt:
     \_ForeachStmt: (Tsum), line:30:3, endln:31:36
-  |vpiImportTypespec:
-  \_StructVar: (Tsum)
   |vpiMethod:1
   |vpiVisibility:1
   |vpiAutomatic:1
   |vpiReturn:
-  \_StructVar: (Tsum)
+  \_RefTypespec: (Tsum.T), line:28:20, endln:28:21
+    |vpiParent:
+    \_Function: (Tsum), line:28:1, endln:32:12
+    |vpiName:T
+    |vpiFullName:Tsum.T
+    |vpiActual:
+    \_StructTypespec: (T), line:22:9, endln:25:2
   |vpiIODecl:
   \_IODecl: (driver), line:28:36, endln:28:42
     |vpiParent:
@@ -532,18 +512,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:my_function2
-  |vpiVariables:
-  \_RealVar: (my_function2)
-    |vpiParent:
-    \_Function: (my_function2), line:41:1, endln:42:12
-    |vpiTypespec:
-    \_RefTypespec: (my_function2), line:41:20, endln:41:24
-      |vpiParent:
-      \_RealVar: (my_function2)
-      |vpiFullName:my_function2
-      |vpiActual:
-      \_RealTypespec: , line:41:20, endln:41:24
-    |vpiFullName:my_function2
   |vpiTypedef:
   \_RealTypespec: , line:41:20, endln:41:24
     |vpiParent:
@@ -554,15 +522,18 @@ Design: (unnamed)
     \_Function: (my_function2), line:41:1, endln:42:12
   |vpiImportTypespec:
   \_RealTypespec: , line:41:20, endln:41:24
-  |vpiImportTypespec:
-  \_RealVar: (my_function2)
   |vpiImportTypespec:
   \_RealTypespec: , line:41:44, endln:41:48
   |vpiMethod:1
   |vpiVisibility:1
   |vpiAutomatic:1
   |vpiReturn:
-  \_RealVar: (my_function2)
+  \_RefTypespec: (my_function2), line:41:20, endln:41:24
+    |vpiParent:
+    \_Function: (my_function2), line:41:1, endln:42:12
+    |vpiFullName:my_function2
+    |vpiActual:
+    \_RealTypespec: , line:41:20, endln:41:24
   |vpiIODecl:
   \_IODecl: (driver), line:41:49, endln:41:55
     |vpiParent:

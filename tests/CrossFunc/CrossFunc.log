@@ -358,7 +358,6 @@ Operation                                              8
 Range                                                  7
 RefObj                                                12
 RefTypespec                                            8
-RefVar                                                 2
 UnsupportedTypespec                                    3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CrossFunc/slpp_all/surelog.uhdm ...
@@ -431,19 +430,6 @@ Design: (unnamed)
     \_Module: work@mod_m (work@mod_m), file:${SURELOG_DIR}/tests/CrossFunc/dut.sv, line:1:1, endln:32:10
     |vpiName:myFunc1
     |vpiFullName:work@mod_m.myFunc1
-    |vpiVariables:
-    \_RefVar: (work@mod_m.myFunc1)
-      |vpiParent:
-      \_Function: (work@mod_m.myFunc1), line:9:3, endln:12:14
-      |vpiTypespec:
-      \_RefTypespec: (work@mod_m.myFunc1.CrossQueueType), line:9:12, endln:9:26
-        |vpiParent:
-        \_RefVar: (work@mod_m.myFunc1)
-        |vpiName:CrossQueueType
-        |vpiFullName:work@mod_m.myFunc1.CrossQueueType
-        |vpiActual:
-        \_UnsupportedTypespec: (CrossQueueType), line:9:12, endln:9:26
-      |vpiFullName:work@mod_m.myFunc1
     |vpiVariables:
     \_IntVar: (work@mod_m.myFunc1.i), line:10:13, endln:10:14
       |vpiParent:
@@ -550,8 +536,6 @@ Design: (unnamed)
       \_Function: (work@mod_m.myFunc1), line:9:3, endln:12:14
       |vpiSigned:1
     |vpiImportTypespec:
-    \_RefVar: (work@mod_m.myFunc1)
-    |vpiImportTypespec:
     \_IntTypespec: , line:9:35, endln:9:38
     |vpiImportTypespec:
     \_IntTypespec: , line:10:9, endln:10:12
@@ -559,7 +543,13 @@ Design: (unnamed)
     \_IntVar: (work@mod_m.myFunc1.i), line:10:13, endln:10:14
     |vpiVisibility:1
     |vpiReturn:
-    \_RefVar: (work@mod_m.myFunc1)
+    \_RefTypespec: (work@mod_m.myFunc1.CrossQueueType), line:9:12, endln:9:26
+      |vpiParent:
+      \_Function: (work@mod_m.myFunc1), line:9:3, endln:12:14
+      |vpiName:CrossQueueType
+      |vpiFullName:work@mod_m.myFunc1.CrossQueueType
+      |vpiActual:
+      \_UnsupportedTypespec: (CrossQueueType), line:9:12, endln:9:26
     |vpiIODecl:
     \_IODecl: (f_lim), line:9:39, endln:9:44
       |vpiParent:
@@ -581,19 +571,6 @@ Design: (unnamed)
     \_Module: work@mod_m (work@mod_m), file:${SURELOG_DIR}/tests/CrossFunc/dut.sv, line:1:1, endln:32:10
     |vpiName:myFunc2
     |vpiFullName:work@mod_m.myFunc2
-    |vpiVariables:
-    \_RefVar: (work@mod_m.myFunc2)
-      |vpiParent:
-      \_Function: (work@mod_m.myFunc2), line:17:3, endln:20:14
-      |vpiTypespec:
-      \_RefTypespec: (work@mod_m.myFunc2.CrossQueueType), line:17:12, endln:17:26
-        |vpiParent:
-        \_RefVar: (work@mod_m.myFunc2)
-        |vpiName:CrossQueueType
-        |vpiFullName:work@mod_m.myFunc2.CrossQueueType
-        |vpiActual:
-        \_UnsupportedTypespec: (CrossQueueType), line:17:12, endln:17:26
-      |vpiFullName:work@mod_m.myFunc2
     |vpiVariables:
     \_LogicVar: (work@mod_m.myFunc2.i), line:18:22, endln:18:23
       |vpiParent:
@@ -765,8 +742,6 @@ Design: (unnamed)
           |UINT:0
           |vpiConstType:9
     |vpiImportTypespec:
-    \_RefVar: (work@mod_m.myFunc2)
-    |vpiImportTypespec:
     \_LogicTypespec: , line:17:35, endln:17:47
     |vpiImportTypespec:
     \_LogicTypespec: , line:18:9, endln:18:21
@@ -774,7 +749,13 @@ Design: (unnamed)
     \_LogicVar: (work@mod_m.myFunc2.i), line:18:22, endln:18:23
     |vpiVisibility:1
     |vpiReturn:
-    \_RefVar: (work@mod_m.myFunc2)
+    \_RefTypespec: (work@mod_m.myFunc2.CrossQueueType), line:17:12, endln:17:26
+      |vpiParent:
+      \_Function: (work@mod_m.myFunc2), line:17:3, endln:20:14
+      |vpiName:CrossQueueType
+      |vpiFullName:work@mod_m.myFunc2.CrossQueueType
+      |vpiActual:
+      \_UnsupportedTypespec: (CrossQueueType), line:17:12, endln:17:26
     |vpiIODecl:
     \_IODecl: (f_lim), line:17:48, endln:17:53
       |vpiParent:

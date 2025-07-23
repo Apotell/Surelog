@@ -207,7 +207,6 @@ Range                                                  5
 RefObj                                                11
 RefTypespec                                            4
 StringTypespec                                         1
-StringVar                                              1
 VarSelect                                              1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FuncDefaultVal/slpp_all/surelog.uhdm ...
@@ -276,18 +275,6 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FuncDefaultVal/dut.sv, line:1:1, endln:10:10
     |vpiName:dasm
     |vpiFullName:work@top.dasm
-    |vpiVariables:
-    \_StringVar: (work@top.dasm)
-      |vpiParent:
-      \_Function: (work@top.dasm), line:5:1, endln:8:12
-      |vpiTypespec:
-      \_RefTypespec: (work@top.dasm), line:5:10, endln:5:16
-        |vpiParent:
-        \_StringVar: (work@top.dasm)
-        |vpiFullName:work@top.dasm
-        |vpiActual:
-        \_StringTypespec: , line:5:10, endln:5:16
-      |vpiFullName:work@top.dasm
     |vpiInternalScope:
     \_Begin: (work@top.dasm)
       |vpiParent:
@@ -436,7 +423,7 @@ Design: (unnamed)
           |vpiName:dasm
           |vpiFullName:work@top.dasm.dasm
           |vpiActual:
-          \_StringVar: (work@top.dasm)
+          \_Function: (work@top.dasm), line:5:1, endln:8:12
       |vpiStmt:
       \_IfStmt: , line:7:5, endln:7:36
         |vpiParent:
@@ -493,11 +480,14 @@ Design: (unnamed)
       \_Function: (work@top.dasm), line:5:1, endln:8:12
     |vpiImportTypespec:
     \_StringTypespec: , line:5:10, endln:5:16
-    |vpiImportTypespec:
-    \_StringVar: (work@top.dasm)
     |vpiVisibility:1
     |vpiReturn:
-    \_StringVar: (work@top.dasm)
+    \_RefTypespec: (work@top.dasm), line:5:10, endln:5:16
+      |vpiParent:
+      \_Function: (work@top.dasm), line:5:1, endln:8:12
+      |vpiFullName:work@top.dasm
+      |vpiActual:
+      \_StringTypespec: , line:5:10, endln:5:16
     |vpiIODecl:
     \_IODecl: (tid), line:5:29, endln:5:32
       |vpiParent:

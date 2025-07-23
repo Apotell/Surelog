@@ -2181,15 +2181,12 @@ bool CompileHelper::compileClassConstructorDeclaration(
   NodeId varId = fC->Sibling(data_type_or_implicitId);
 
   if (m_elaborate == Elaborate::Yes) {
-    uhdm::ClassVar* var = s.make<uhdm::ClassVar>();
-    var->setParent(func);
-    func->setReturn(var);
     uhdm::ClassTypespec* tps = s.make<uhdm::ClassTypespec>();
     uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
-    tpsRef->setParent(var);
+    tpsRef->setParent(func);
     tpsRef->setActual(tps);
-    var->setTypespec(tpsRef);
-    fC->populateCoreMembers(varId, varId, var);
+    fC->populateCoreMembers(varId, varId, tpsRef);
+    func->setReturn(tpsRef);
 
     if (ClassDefinition* cdef =
             valuedcomponenti_cast<ClassDefinition*>(component)) {
@@ -2390,18 +2387,16 @@ bool CompileHelper::compileFunction(DesignComponent* component,
   setFuncTaskQualifiers(fC, nodeId, func);
   func->setMethod(isMethod);
   if (constructor) {
-    uhdm::ClassVar* var = s.make<uhdm::ClassVar>();
-    var->setParent(func);
-    fC->populateCoreMembers(InvalidNodeId, InvalidNodeId, var);
-    func->setReturn(var);
     uhdm::ClassTypespec* tps = s.make<uhdm::ClassTypespec>();
     tps->setParent(func);
     fC->populateCoreMembers(InvalidNodeId, InvalidNodeId, tps);
+
     uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
-    tpsRef->setParent(var);
+    tpsRef->setParent(func);
     tpsRef->setActual(tps);
     fC->populateCoreMembers(InvalidNodeId, InvalidNodeId, tpsRef);
-    var->setTypespec(tpsRef);
+    func->setReturn(tpsRef);
+
     ClassDefinition* cdef = valuedcomponenti_cast<ClassDefinition*>(component);
     tps->setClassDefn(cdef->getUhdmModel<uhdm::ClassDefn>());
     tps->setName(cdef->getUhdmModel<uhdm::ClassDefn>()->getFullName());
@@ -2424,30 +2419,95 @@ bool CompileHelper::compileFunction(DesignComponent* component,
          (fC->Type(Function_data_type) == VObjectType::paSigning_Signed))) {
       Return_data_type = Function_data_type;
     }
-    uhdm::Variables* var = nullptr;
+
+    uhdm::Typespec* ts = nullptr;
     if (Return_data_type) {
-      var = any_cast<uhdm::Variables>(
-          compileVariable(component, fC, Return_data_type, Return_data_type,
-                          compileDesign, Reduce::No, func, instance, false));
-      if (var) {
-        // Explicit return type
-        // There's no variable as such and so clear out the location
-        // information. Only the associated ref_typespec should have a valid
-        // location.
-        var->setName(SymbolTable::getBadSymbol());
-        var->setStartLine(0);
-        var->setStartColumn(0);
-        var->setEndLine(0);
-        var->setEndColumn(0);
-      }
+      ts = compileTypespec(component, fC, Return_data_type, compileDesign,
+                           reduce, func, instance, true);
     } else if (!Function_data_type) {
       // Implicit return type
-      var = s.make<uhdm::LogicVar>();
-      fC->populateCoreMembers(InvalidNodeId, InvalidNodeId, var);
-    }  // else void return type
-    if (var != nullptr) {
-      var->setParent(func);
-      func->setReturn(var);
+      ts = s.make<uhdm::LogicTypespec>();
+      ts->setParent(func);
+      fC->populateCoreMembers(InvalidNodeId, InvalidNodeId, ts);
+    } else {  // else void return type
+      ts = s.make<uhdm::VoidTypespec>();
+      ts->setParent(func);
+      fC->populateCoreMembers(Function_data_type, Function_data_type, ts);
+    }
+
+    NodeId Packed_dimension = Return_data_type;
+    if (fC->Type(Packed_dimension) == VObjectType::paData_type) {
+      if (fC->Type(fC->Child(Packed_dimension)) ==
+          VObjectType::paPacked_dimension) {
+        Packed_dimension = fC->Child(Packed_dimension);
+      } else {
+        Packed_dimension = fC->Sibling(fC->Child(Packed_dimension));
+      }
+    }
+    if (fC->Type(Packed_dimension) != VObjectType::paPacked_dimension) {
+      Packed_dimension = fC->Sibling(Return_data_type);
+    }
+    if (!Packed_dimension) {
+      // Implicit return value:
+      // function [1:0] fct();
+      if (fC->Type(Return_data_type) == VObjectType::paConstant_range) {
+        Packed_dimension = Return_data_type;
+      }
+    }
+    if (ts && Packed_dimension) {
+      int32_t size = 0;
+      uhdm::RangeCollection* ranges =
+          compileRanges(component, fC, Packed_dimension, compileDesign, reduce,
+                        func, instance, size, false);
+
+      uhdm::PackedArrayTypespec* tpaps = s.make<uhdm::PackedArrayTypespec>();
+      tpaps->setParent(pscope);
+      fC->populateCoreMembers(Packed_dimension, Packed_dimension, tpaps);
+
+      uhdm::RefTypespec* pret = s.make<uhdm::RefTypespec>();
+      pret->setParent(tpaps);
+      pret->setActual(tpaps);
+
+      uhdm::RefTypespec* ert = s.make<uhdm::RefTypespec>();
+      ert->setParent(ts);
+      ert->setActual(ts);
+      ert->setName(ts->getName());
+      tpaps->setElemTypespec(ert);
+      fC->populateCoreMembers(Return_data_type, Return_data_type, ert);
+
+      if ((ranges != nullptr) && !ranges->empty()) {
+        tpaps->setRanges(ranges);
+        for (uhdm::Range* r : *ranges) r->setParent(tpaps, true);
+        ts->setEndLine(ranges->back()->getEndLine());
+        ts->setEndColumn(ranges->back()->getEndColumn());
+      }
+      ts = tpaps;
+    }
+    if ((ts == nullptr) && Packed_dimension) {
+      uhdm::LogicTypespec* lts = s.make<uhdm::LogicTypespec>();
+      lts->setParent(func);
+      fC->populateCoreMembers(Return_data_type, Return_data_type, lts);
+
+      int32_t size;
+      uhdm::RangeCollection* ranges =
+          compileRanges(component, fC, Packed_dimension, compileDesign, reduce,
+                        func, instance, size, false);
+      if ((ranges != nullptr) && !ranges->empty()) {
+        lts->setRanges(ranges);
+        for (uhdm::Range* r : *ranges) r->setParent(lts, true);
+        lts->setEndLine(ranges->back()->getEndLine());
+        lts->setEndColumn(ranges->back()->getEndColumn());
+      }
+      ts = lts;
+    }
+
+    if (ts != nullptr) {
+      uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
+      fC->populateCoreMembers(Return_data_type, Return_data_type, tsRef);
+      tsRef->setName(ts->getName());
+      tsRef->setParent(func);
+      tsRef->setActual(ts);
+      func->setReturn(tsRef);
     }
   }
 
@@ -2814,11 +2874,40 @@ Function* CompileHelper::compileFunctionPrototype(
   func->setName(funcName);
   func->setParent(scope->getUhdmModel());
   fC->populateCoreMembers(id, id, func);
-  if (auto v = any_cast<uhdm::Variables>(
-          compileVariable(scope, fC, type, InvalidNodeId, compileDesign,
-                          Reduce::Yes, nullptr, nullptr, false))) {
-    v->setParent(func);
-    func->setReturn(v);
+  uhdm::Typespec* ts = compileTypespec(scope, fC, type, compileDesign,
+                                       Reduce::Yes, func, nullptr, true);
+  NodeId Packed_dimension = type;
+  if (fC->Type(Packed_dimension) != VObjectType::paPacked_dimension)
+    Packed_dimension = fC->Sibling(type);
+  if (!Packed_dimension && (fC->Type(type) == VObjectType::paConstant_range)) {
+    Packed_dimension = type;
+  }
+
+  if ((ts == nullptr) && Packed_dimension) {
+    uhdm::LogicTypespec* lts = s.make<uhdm::LogicTypespec>();
+    lts->setParent(func);  // Need input
+    fC->populateCoreMembers(type, type, lts);
+
+    int32_t size;
+    uhdm::RangeCollection* ranges =
+        compileRanges(scope, fC, Packed_dimension, compileDesign, Reduce::Yes,
+                      func, nullptr, size, false);
+    if ((ranges != nullptr) && !ranges->empty()) {
+      lts->setRanges(ranges);
+      for (uhdm::Range* r : *ranges) r->setParent(lts, true);
+      lts->setEndLine(ranges->back()->getEndLine());
+      lts->setEndColumn(ranges->back()->getEndColumn());
+    }
+    ts = lts;
+  }
+
+  if (ts != nullptr) {
+    uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
+    fC->populateCoreMembers(type, type, tsRef);
+    tsRef->setName(ts->getName());
+    tsRef->setParent(func);
+    tsRef->setActual(ts);
+    func->setReturn(tsRef);
   }
   NodeId Tf_port_list;
   if (fC->Type(function_name) == VObjectType::STRING_CONST) {

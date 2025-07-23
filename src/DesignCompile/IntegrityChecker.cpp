@@ -533,11 +533,9 @@ void IntegrityChecker::reportMissingLocation(const uhdm::Any* object) const {
     // is implicit.
     const uhdm::Function* const parentAsFunction =
         parent->Cast<uhdm::Function>();
-    if (const uhdm::Variables* const var = parentAsFunction->getReturn()) {
-      if (const uhdm::RefTypespec* const rt = var->getTypespec()) {
-        if ((rt == object) || (rt->getActual() == object)) {
-          return;
-        }
+    if (const uhdm::RefTypespec* const rt = parentAsFunction->getReturn()) {
+      if ((rt == object) || (rt->getActual() == object)) {
+        return;
       }
     }
   } else if (object->Cast<uhdm::Variables>() != nullptr) {
@@ -576,7 +574,7 @@ bool IntegrityChecker::isImplicitFunctionReturnType(const uhdm::Any* object) {
   if (any_cast<uhdm::RefTypespec>(object) != nullptr) {
     object = object->getParent();
   }
-  if (const uhdm::Variables* v = any_cast<uhdm::Variables>(object)) {
+  if (const uhdm::RefTypespec* v = any_cast<uhdm::RefTypespec>(object)) {
     if (const uhdm::Function* f = object->getParent<uhdm::Function>()) {
       if ((f->getReturn() == v) && v->getName().empty()) return true;
     }

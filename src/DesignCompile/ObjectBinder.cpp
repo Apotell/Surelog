@@ -597,7 +597,7 @@ const uhdm::Any* ObjectBinder::findInFunction(std::string_view name,
   if (!m_searched.emplace(scope).second) return nullptr;
 
   if (areSimilarNames(scope, name)) {
-    return scope->getReturn();
+    return scope;
   } else if (const uhdm::Any* const actual =
                  findInCollection(name, refType, scope->getIODecls(), scope)) {
     return actual;

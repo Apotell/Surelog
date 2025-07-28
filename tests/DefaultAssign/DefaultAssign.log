@@ -150,19 +150,18 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/DefaultAssign/dut.sv:1:1: Compile module "work@foo".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                              15
+Constant                                               7
 ContAssign                                             1
 Design                                                 1
-LogicNet                                               1
+LogicNet                                               2
 LogicTypespec                                          4
-LogicVar                                               1
 Module                                                 2
 ModuleTypespec                                         1
 Operation                                              3
 ParamAssign                                            1
 Parameter                                              1
 Port                                                   2
-Range                                                  6
+Range                                                  2
 RefModule                                              1
 RefObj                                                 1
 RefTypespec                                            7
@@ -179,22 +178,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@dut
-  |vpiVariables:
-  \_LogicVar: (work@dut.data), line:6:14, endln:6:18
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:4:1, endln:14:10
-    |vpiTypespec:
-    \_RefTypespec: (work@dut.data), line:6:1, endln:6:13
-      |vpiParent:
-      \_LogicVar: (work@dut.data), line:6:14, endln:6:18
-      |vpiFullName:work@dut.data
-      |vpiActual:
-      \_LogicTypespec: , line:6:1, endln:6:13
-    |vpiName:data
-    |vpiFullName:work@dut.data
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@dut.data), line:6:14, endln:6:18
   |vpiParameter:
   \_Parameter: (work@dut.data), line:8:24, endln:8:46
     |vpiParent:
@@ -235,7 +218,7 @@ Design: (unnamed)
           \_TaggedPattern: , line:8:34, endln:8:44
           |vpiFullName:work@dut
           |vpiActual:
-          \_StringTypespec: (default), line:8:34, endln:8:41
+          \_StringTypespec: , line:8:34, endln:8:41
     |vpiLhs:
     \_Parameter: (work@dut.data), line:8:24, endln:8:46
   |vpiTypedef:
@@ -263,25 +246,22 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_StringTypespec: (default), line:8:34, endln:8:41
+  \_StringTypespec: , line:8:34, endln:8:41
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:4:1, endln:14:10
-    |vpiName:default
   |vpiTypedef:
-  \_StringTypespec: (default), line:10:18, endln:10:25
+  \_StringTypespec: , line:10:18, endln:10:25
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:4:1, endln:14:10
-    |vpiName:default
   |vpiTypedef:
   \_ModuleTypespec: (foo), line:12:1, endln:12:4
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:4:1, endln:14:10
     |vpiName:foo
   |vpiTypedef:
-  \_StringTypespec: (default), line:12:16, endln:12:23
+  \_StringTypespec: , line:12:16, endln:12:23
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:4:1, endln:14:10
-    |vpiName:default
   |vpiTypedef:
   \_LogicTypespec: , line:6:1, endln:6:13
     |vpiParent:
@@ -309,18 +289,32 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:8:11, endln:8:23
   |vpiImportTypespec:
-  \_StringTypespec: (default), line:8:34, endln:8:41
+  \_StringTypespec: , line:8:34, endln:8:41
   |vpiImportTypespec:
-  \_StringTypespec: (default), line:10:18, endln:10:25
+  \_StringTypespec: , line:10:18, endln:10:25
   |vpiImportTypespec:
   \_ModuleTypespec: (foo), line:12:1, endln:12:4
   |vpiImportTypespec:
-  \_StringTypespec: (default), line:12:16, endln:12:23
+  \_StringTypespec: , line:12:16, endln:12:23
   |vpiImportTypespec:
   \_LogicTypespec: , line:6:1, endln:6:13
   |vpiImportTypespec:
-  \_LogicVar: (work@dut.data), line:6:14, endln:6:18
+  \_LogicNet: (work@dut.data), line:6:14, endln:6:18
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:4:1, endln:14:10
+    |vpiTypespec:
+    \_RefTypespec: (work@dut.data), line:6:1, endln:6:13
+      |vpiParent:
+      \_LogicNet: (work@dut.data), line:6:14, endln:6:18
+      |vpiFullName:work@dut.data
+      |vpiActual:
+      \_LogicTypespec: , line:6:1, endln:6:13
+    |vpiName:data
+    |vpiFullName:work@dut.data
+    |vpiNetType:36
   |vpiDefName:work@dut
+  |vpiNet:
+  \_LogicNet: (work@dut.data), line:6:14, endln:6:18
   |vpiContAssign:
   \_ContAssign: , line:10:8, endln:10:30
     |vpiParent:
@@ -348,7 +342,7 @@ Design: (unnamed)
           \_TaggedPattern: , line:10:18, endln:10:28
           |vpiFullName:work@dut
           |vpiActual:
-          \_StringTypespec: (default), line:10:18, endln:10:25
+          \_StringTypespec: , line:10:18, endln:10:25
     |vpiLhs:
     \_RefObj: (work@dut.data), line:10:8, endln:10:12
       |vpiParent:
@@ -356,7 +350,7 @@ Design: (unnamed)
       |vpiName:data
       |vpiFullName:work@dut.data
       |vpiActual:
-      \_LogicVar: (work@dut.data), line:6:14, endln:6:18
+      \_LogicNet: (work@dut.data), line:6:14, endln:6:18
   |vpiRefModule:
   \_RefModule: work@foo (f), line:12:1, endln:12:4
     |vpiParent:
@@ -393,78 +387,38 @@ Design: (unnamed)
             \_TaggedPattern: , line:12:16, endln:12:26
             |vpiFullName:work@dut.f.data
             |vpiActual:
-            \_StringTypespec: (default), line:12:16, endln:12:23
+            \_StringTypespec: , line:12:16, endln:12:23
 |vpiAllModules:
 \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:1:1, endln:2:10
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@foo
   |vpiTypedef:
-  \_LogicTypespec: , line:1:18, endln:1:30
+  \_LogicTypespec: , line:1:18, endln:1:23
     |vpiParent:
     \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:1:1, endln:2:10
-    |vpiRange:
-    \_Range: , line:1:24, endln:1:30
-      |vpiParent:
-      \_LogicTypespec: , line:1:18, endln:1:30
-      |vpiLeftRange:
-      \_Constant: , line:1:25, endln:1:27
-        |vpiParent:
-        \_Range: , line:1:24, endln:1:30
-        |vpiDecompile:31
-        |vpiSize:64
-        |UINT:31
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:1:28, endln:1:29
-        |vpiParent:
-        \_Range: , line:1:24, endln:1:30
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiTypedef:
-  \_LogicTypespec: , line:1:18, endln:1:30
+  \_LogicTypespec: , line:1:18, endln:1:23
     |vpiParent:
     \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:1:1, endln:2:10
-    |vpiRange:
-    \_Range: , line:1:24, endln:1:30
-      |vpiParent:
-      \_LogicTypespec: , line:1:18, endln:1:30
-      |vpiLeftRange:
-      \_Constant: , line:1:25, endln:1:27
-        |vpiParent:
-        \_Range: , line:1:24, endln:1:30
-        |vpiDecompile:31
-        |vpiSize:64
-        |UINT:31
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:1:28, endln:1:29
-        |vpiParent:
-        \_Range: , line:1:24, endln:1:30
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiImportTypespec:
-  \_LogicTypespec: , line:1:18, endln:1:30
+  \_LogicTypespec: , line:1:18, endln:1:23
   |vpiImportTypespec:
   \_LogicNet: (work@foo.data), line:1:31, endln:1:35
     |vpiParent:
     \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/DefaultAssign/dut.sv, line:1:1, endln:2:10
     |vpiTypespec:
-    \_RefTypespec: (work@foo.data), line:1:18, endln:1:30
+    \_RefTypespec: (work@foo.data), line:1:18, endln:1:23
       |vpiParent:
       \_LogicNet: (work@foo.data), line:1:31, endln:1:35
       |vpiFullName:work@foo.data
       |vpiActual:
-      \_LogicTypespec: , line:1:18, endln:1:30
+      \_LogicTypespec: , line:1:18, endln:1:23
     |vpiName:data
     |vpiFullName:work@foo.data
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicTypespec: , line:1:18, endln:1:30
+  \_LogicTypespec: , line:1:18, endln:1:23
   |vpiDefName:work@foo
   |vpiNet:
   \_LogicNet: (work@foo.data), line:1:31, endln:1:35
@@ -480,7 +434,7 @@ Design: (unnamed)
       \_Port: (data), line:1:31, endln:1:35
       |vpiFullName:work@foo.data
       |vpiActual:
-      \_LogicTypespec: , line:1:18, endln:1:30
+      \_LogicTypespec: , line:1:18, endln:1:23
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

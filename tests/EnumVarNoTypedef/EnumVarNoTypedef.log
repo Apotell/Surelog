@@ -49,15 +49,11 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/EnumVarNoTypedef/dut.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                               3
 Design                                                 1
-EnumConst                                              1
-EnumTypespec                                           1
-EnumVar                                                1
+LogicNet                                               1
 LogicTypespec                                          1
-Module                                                 2
-Range                                                  1
-RefTypespec                                            2
+Module                                                 1
+RefTypespec                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EnumVarNoTypedef/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -69,70 +65,28 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@top
-  |vpiVariables:
-  \_EnumVar: (work@top.myenum), line:5:4, endln:5:10
+  |vpiTypedef:
+  \_LogicTypespec: , line:3:7, endln:3:12
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/EnumVarNoTypedef/dut.sv, line:1:1, endln:7:10
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:3:7, endln:3:12
+  |vpiImportTypespec:
+  \_LogicNet: (work@top.myenum), line:5:4, endln:5:10
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/EnumVarNoTypedef/dut.sv, line:1:1, endln:7:10
     |vpiTypespec:
-    \_RefTypespec: (work@top.myenum), line:3:2, endln:4:17
+    \_RefTypespec: (work@top.myenum), line:3:2, endln:5:3
       |vpiParent:
-      \_EnumVar: (work@top.myenum), line:5:4, endln:5:10
+      \_LogicNet: (work@top.myenum), line:5:4, endln:5:10
       |vpiFullName:work@top.myenum
       |vpiActual:
-      \_EnumTypespec: , line:3:2, endln:5:3
+      \_LogicTypespec: , line:3:7, endln:3:12
     |vpiName:myenum
     |vpiFullName:work@top.myenum
-    |vpiVisibility:1
-  |vpiTypedef:
-  \_LogicTypespec: , line:3:7, endln:3:18
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/EnumVarNoTypedef/dut.sv, line:1:1, endln:7:10
-    |vpiRange:
-    \_Range: , line:3:13, endln:3:18
-      |vpiParent:
-      \_LogicTypespec: , line:3:7, endln:3:18
-      |vpiLeftRange:
-      \_Constant: , line:3:14, endln:3:15
-        |vpiParent:
-        \_Range: , line:3:13, endln:3:18
-        |vpiDecompile:2
-        |vpiSize:64
-        |UINT:2
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:3:16, endln:3:17
-        |vpiParent:
-        \_Range: , line:3:13, endln:3:18
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_EnumTypespec: , line:3:2, endln:5:3
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/EnumVarNoTypedef/dut.sv, line:1:1, endln:7:10
-    |vpiBaseTypespec:
-    \_RefTypespec: (work@top), line:3:7, endln:3:18
-      |vpiParent:
-      \_EnumTypespec: , line:3:2, endln:5:3
-      |vpiFullName:work@top
-      |vpiActual:
-      \_LogicTypespec: , line:3:7, endln:3:18
-    |vpiEnumConst:
-    \_EnumConst: (Global), line:4:4, endln:4:17
-      |vpiParent:
-      \_EnumTypespec: , line:3:2, endln:5:3
-      |vpiName:Global
-      |UINT:2
-      |vpiDecompile:4'h2
-      |vpiSize:4
-  |vpiImportTypespec:
-  \_LogicTypespec: , line:3:7, endln:3:18
-  |vpiImportTypespec:
-  \_EnumTypespec: , line:3:2, endln:5:3
-  |vpiImportTypespec:
-  \_EnumVar: (work@top.myenum), line:5:4, endln:5:10
   |vpiDefName:work@top
+  |vpiNet:
+  \_LogicNet: (work@top.myenum), line:5:4, endln:5:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

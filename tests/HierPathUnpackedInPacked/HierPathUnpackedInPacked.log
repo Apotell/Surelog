@@ -306,7 +306,7 @@ GenIf                                                  2
 HierPath                                               4
 IntTypespec                                            4
 IntVar                                                 1
-LogicTypespec                                          3
+LogicTypespec                                          2
 Module                                                 4
 ModuleTypespec                                         2
 Operation                                              5
@@ -317,11 +317,11 @@ Port                                                   1
 Range                                                  4
 RefModule                                              2
 RefObj                                                 8
-RefTypespec                                           11
-StructNet                                              1
+RefTypespec                                           13
+StructNet                                              2
 StructTypespec                                         2
-StructVar                                              1
 SysFuncCall                                            2
+TypedefTypespec                                        2
 TypespecMember                                         2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathUnpackedInPacked/slpp_all/surelog.uhdm ...
@@ -403,21 +403,32 @@ Design: (unnamed)
     \_Package: keymgr_pkg (keymgr_pkg), file:${SURELOG_DIR}/tests/HierPathUnpackedInPacked/dut.sv, line:1:1, endln:14:11
     |vpiSigned:1
   |vpiTypedef:
-  \_StructTypespec: (keymgr_pkg::hw_key_req_t), line:5:12, endln:7:5
+  \_TypedefTypespec: (keymgr_pkg::hw_key_req_t), line:7:6, endln:7:18
     |vpiParent:
     \_Package: keymgr_pkg (keymgr_pkg), file:${SURELOG_DIR}/tests/HierPathUnpackedInPacked/dut.sv, line:1:1, endln:14:11
     |vpiName:keymgr_pkg::hw_key_req_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (keymgr_pkg::hw_key_req_t), line:5:12, endln:7:5
+      |vpiParent:
+      \_TypedefTypespec: (keymgr_pkg::hw_key_req_t), line:7:6, endln:7:18
+      |vpiFullName:keymgr_pkg::hw_key_req_t
+      |vpiActual:
+      \_StructTypespec: , line:5:12, endln:7:5
+  |vpiTypedef:
+  \_StructTypespec: , line:5:12, endln:7:5
+    |vpiParent:
+    \_Package: keymgr_pkg (keymgr_pkg), file:${SURELOG_DIR}/tests/HierPathUnpackedInPacked/dut.sv, line:1:1, endln:14:11
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (key), line:6:40, endln:6:43
       |vpiParent:
-      \_StructTypespec: (keymgr_pkg::hw_key_req_t), line:5:12, endln:7:5
+      \_StructTypespec: , line:5:12, endln:7:5
       |vpiName:key
       |vpiTypespec:
-      \_RefTypespec: (keymgr_pkg::hw_key_req_t::key), line:6:7, endln:6:39
+      \_RefTypespec: (keymgr_pkg::key), line:6:7, endln:6:39
         |vpiParent:
         \_TypespecMember: (key), line:6:40, endln:6:43
-        |vpiFullName:keymgr_pkg::hw_key_req_t::key
+        |vpiFullName:keymgr_pkg::key
         |vpiActual:
         \_LogicTypespec: , line:6:7, endln:6:39
   |vpiTypedef:
@@ -491,23 +502,34 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_StructTypespec: (keymgr_pkg::foo_t), line:9:9, endln:11:2
+  \_TypedefTypespec: (keymgr_pkg::foo_t), line:11:3, endln:11:8
     |vpiParent:
     \_Package: keymgr_pkg (keymgr_pkg), file:${SURELOG_DIR}/tests/HierPathUnpackedInPacked/dut.sv, line:1:1, endln:14:11
     |vpiName:keymgr_pkg::foo_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (keymgr_pkg::foo_t), line:9:9, endln:11:2
+      |vpiParent:
+      \_TypedefTypespec: (keymgr_pkg::foo_t), line:11:3, endln:11:8
+      |vpiFullName:keymgr_pkg::foo_t
+      |vpiActual:
+      \_StructTypespec: , line:9:9, endln:11:2
+  |vpiTypedef:
+  \_StructTypespec: , line:9:9, endln:11:2
+    |vpiParent:
+    \_Package: keymgr_pkg (keymgr_pkg), file:${SURELOG_DIR}/tests/HierPathUnpackedInPacked/dut.sv, line:1:1, endln:14:11
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (pair), line:10:17, endln:10:24
       |vpiParent:
-      \_StructTypespec: (keymgr_pkg::foo_t), line:9:9, endln:11:2
+      \_StructTypespec: , line:9:9, endln:11:2
       |vpiName:pair
       |vpiTypespec:
-      \_RefTypespec: (keymgr_pkg::foo_t::pair), line:10:4, endln:10:16
+      \_RefTypespec: (keymgr_pkg::pair), line:10:4, endln:10:16
         |vpiParent:
         \_TypespecMember: (pair), line:10:17, endln:10:24
-        |vpiFullName:keymgr_pkg::foo_t::pair
+        |vpiFullName:keymgr_pkg::pair
         |vpiActual:
-        \_ArrayTypespec: , line:10:21, endln:10:24
+        \_ArrayTypespec: , line:10:4, endln:10:24
   |vpiTypedef:
   \_LogicTypespec: , line:10:4, endln:10:16
     |vpiParent:
@@ -533,13 +555,14 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_ArrayTypespec: , line:10:21, endln:10:24
+  \_ArrayTypespec: , line:10:4, endln:10:24
     |vpiParent:
     \_Package: keymgr_pkg (keymgr_pkg), file:${SURELOG_DIR}/tests/HierPathUnpackedInPacked/dut.sv, line:1:1, endln:14:11
+    |vpiArrayType:1
     |vpiRange:
     \_Range: , line:10:21, endln:10:24
       |vpiParent:
-      \_ArrayTypespec: , line:10:21, endln:10:24
+      \_ArrayTypespec: , line:10:4, endln:10:24
       |vpiRightRange:
       \_Operation: , line:10:22, endln:10:23
         |vpiParent:
@@ -556,7 +579,7 @@ Design: (unnamed)
     |vpiElemTypespec:
     \_RefTypespec: (keymgr_pkg), line:10:4, endln:10:16
       |vpiParent:
-      \_ArrayTypespec: , line:10:21, endln:10:24
+      \_ArrayTypespec: , line:10:4, endln:10:24
       |vpiFullName:keymgr_pkg
       |vpiActual:
       \_LogicTypespec: , line:10:4, endln:10:16
@@ -565,15 +588,19 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:3:14, endln:3:17
   |vpiImportTypespec:
-  \_StructTypespec: (keymgr_pkg::hw_key_req_t), line:5:12, endln:7:5
+  \_TypedefTypespec: (keymgr_pkg::hw_key_req_t), line:7:6, endln:7:18
+  |vpiImportTypespec:
+  \_StructTypespec: , line:5:12, endln:7:5
   |vpiImportTypespec:
   \_LogicTypespec: , line:6:7, endln:6:39
   |vpiImportTypespec:
-  \_StructTypespec: (keymgr_pkg::foo_t), line:9:9, endln:11:2
+  \_TypedefTypespec: (keymgr_pkg::foo_t), line:11:3, endln:11:8
+  |vpiImportTypespec:
+  \_StructTypespec: , line:9:9, endln:11:2
   |vpiImportTypespec:
   \_LogicTypespec: , line:10:4, endln:10:16
   |vpiImportTypespec:
-  \_ArrayTypespec: , line:10:21, endln:10:24
+  \_ArrayTypespec: , line:10:4, endln:10:24
   |vpiDefName:keymgr_pkg
 |vpiAllModules:
 \_Module: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/HierPathUnpackedInPacked/dut.sv, line:16:1, endln:17:10
@@ -600,21 +627,7 @@ Design: (unnamed)
     |vpiName:o
     |vpiFullName:work@top.o
     |vpiSigned:1
-    |vpiVisibility:1
-  |vpiVariables:
-  \_StructVar: (work@top.a), line:21:23, endln:21:24
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathUnpackedInPacked/dut.sv, line:19:1, endln:36:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.a.keymgr_pkg::foo_t), line:21:5, endln:21:22
-      |vpiParent:
-      \_StructVar: (work@top.a), line:21:23, endln:21:24
-      |vpiName:keymgr_pkg::foo_t
-      |vpiFullName:work@top.a.keymgr_pkg::foo_t
-      |vpiActual:
-      \_StructTypespec: (keymgr_pkg::foo_t), line:9:9, endln:11:2
-    |vpiName:a
-    |vpiFullName:work@top.a
+    |vpiRandType:1
     |vpiVisibility:1
   |vpiParameter:
   \_Parameter: (work@top.p1), line:23:13, endln:23:44
@@ -685,7 +698,7 @@ Design: (unnamed)
           \_HierPath: (a.pair[0]), line:24:24, endln:24:33
           |vpiName:a
           |vpiActual:
-          \_StructVar: (work@top.a), line:21:23, endln:21:24
+          \_StructNet: (work@top.a), line:21:23, endln:21:24
         |vpiActual:
         \_BitSelect: (work@top.a.pair[0].pair), line:24:30, endln:24:33
           |vpiParent:
@@ -693,7 +706,7 @@ Design: (unnamed)
           |vpiName:pair
           |vpiFullName:work@top.a.pair[0].pair
           |vpiActual:
-          \_TypespecMember: (pair), line:10:17, endln:10:24
+          \_LogicNet: (work@top.pair), line:24:30, endln:24:33
           |vpiIndex:
           \_Constant: , line:24:31, endln:24:32
             |vpiParent:
@@ -765,17 +778,29 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathUnpackedInPacked/dut.sv, line:19:1, endln:36:10
     |vpiTypespec:
-    \_RefTypespec: (work@top.keymgr_key_i.keymgr_key_i), line:20:4, endln:20:28
+    \_RefTypespec: (work@top.keymgr_key_i.keymgr_pkg::hw_key_req_t), line:20:4, endln:20:28
       |vpiParent:
       \_StructNet: (work@top.keymgr_key_i), line:20:29, endln:20:41
-      |vpiName:keymgr_key_i
-      |vpiFullName:work@top.keymgr_key_i.keymgr_key_i
+      |vpiName:keymgr_pkg::hw_key_req_t
+      |vpiFullName:work@top.keymgr_key_i.keymgr_pkg::hw_key_req_t
       |vpiActual:
-      \_StructTypespec: (keymgr_pkg::hw_key_req_t), line:5:12, endln:7:5
+      \_TypedefTypespec: (keymgr_pkg::hw_key_req_t), line:7:6, endln:7:18
     |vpiName:keymgr_key_i
     |vpiFullName:work@top.keymgr_key_i
   |vpiImportTypespec:
-  \_StructVar: (work@top.a), line:21:23, endln:21:24
+  \_StructNet: (work@top.a), line:21:23, endln:21:24
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathUnpackedInPacked/dut.sv, line:19:1, endln:36:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.a.keymgr_pkg::foo_t), line:21:5, endln:21:22
+      |vpiParent:
+      \_StructNet: (work@top.a), line:21:23, endln:21:24
+      |vpiName:keymgr_pkg::foo_t
+      |vpiFullName:work@top.a.keymgr_pkg::foo_t
+      |vpiActual:
+      \_TypedefTypespec: (keymgr_pkg::foo_t), line:11:3, endln:11:8
+    |vpiName:a
+    |vpiFullName:work@top.a
   |vpiImportTypespec:
   \_IntTypespec: , line:19:19, endln:19:22
   |vpiImportTypespec:
@@ -785,11 +810,22 @@ Design: (unnamed)
     |vpiName:key
     |vpiFullName:work@top.key
     |vpiNetType:1
+  |vpiImportTypespec:
+  \_LogicNet: (work@top.pair), line:24:30, endln:24:33
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathUnpackedInPacked/dut.sv, line:19:1, endln:36:10
+    |vpiName:pair
+    |vpiFullName:work@top.pair
+    |vpiNetType:1
   |vpiDefName:work@top
   |vpiNet:
   \_StructNet: (work@top.keymgr_key_i), line:20:29, endln:20:41
   |vpiNet:
+  \_StructNet: (work@top.a), line:21:23, endln:21:24
+  |vpiNet:
   \_LogicNet: (work@top.key), line:23:40, endln:23:43
+  |vpiNet:
+  \_LogicNet: (work@top.pair), line:24:30, endln:24:33
   |vpiPort:
   \_Port: (o), line:19:23, endln:19:24
     |vpiParent:

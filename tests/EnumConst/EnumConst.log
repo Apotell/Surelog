@@ -76,7 +76,8 @@ LogicTypespec                                          1
 Module                                                 2
 Operation                                              4
 Range                                                  1
-RefTypespec                                            1
+RefTypespec                                            2
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EnumConst/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -88,6 +89,33 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@dut
+  |vpiTypedef:
+  \_EnumTypespec: , line:2:9, endln:5:14
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/EnumConst/dut.sv, line:1:1, endln:7:10
+    |vpiBaseTypespec:
+    \_RefTypespec: (work@dut), line:2:14, endln:2:25
+      |vpiParent:
+      \_EnumTypespec: , line:2:9, endln:5:14
+      |vpiFullName:work@dut
+      |vpiActual:
+      \_LogicTypespec: , line:2:14, endln:2:25
+    |vpiEnumConst:
+    \_EnumConst: (EXC_CAUSE_IRQ_SOFTWARE_M), line:3:3, endln:3:47
+      |vpiParent:
+      \_EnumTypespec: , line:2:9, endln:5:14
+      |vpiName:EXC_CAUSE_IRQ_SOFTWARE_M
+      |BIN:100011
+      |vpiDecompile:{1'b1,5'd03}
+      |vpiSize:6
+    |vpiEnumConst:
+    \_EnumConst: (EXC_CAUSE_IRQ_TIMER_M), line:4:3, endln:4:47
+      |vpiParent:
+      \_EnumTypespec: , line:2:9, endln:5:14
+      |vpiName:EXC_CAUSE_IRQ_TIMER_M
+      |BIN:100111
+      |vpiDecompile:{1'b1,5'd07}
+      |vpiSize:6
   |vpiTypedef:
   \_LogicTypespec: , line:2:14, endln:2:25
     |vpiParent:
@@ -113,37 +141,23 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_EnumTypespec: (exc_cause_e), line:2:9, endln:5:14
+  \_TypedefTypespec: (exc_cause_e), line:5:3, endln:5:14
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/EnumConst/dut.sv, line:1:1, endln:7:10
     |vpiName:exc_cause_e
-    |vpiBaseTypespec:
-    \_RefTypespec: (work@dut.exc_cause_e), line:2:14, endln:2:25
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@dut.exc_cause_e), line:2:9, endln:5:2
       |vpiParent:
-      \_EnumTypespec: (exc_cause_e), line:2:9, endln:5:14
+      \_TypedefTypespec: (exc_cause_e), line:5:3, endln:5:14
       |vpiFullName:work@dut.exc_cause_e
       |vpiActual:
-      \_LogicTypespec: , line:2:14, endln:2:25
-    |vpiEnumConst:
-    \_EnumConst: (EXC_CAUSE_IRQ_SOFTWARE_M), line:3:3, endln:3:47
-      |vpiParent:
-      \_EnumTypespec: (exc_cause_e), line:2:9, endln:5:14
-      |vpiName:EXC_CAUSE_IRQ_SOFTWARE_M
-      |BIN:100011
-      |vpiDecompile:{1'b1,5'd03}
-      |vpiSize:6
-    |vpiEnumConst:
-    \_EnumConst: (EXC_CAUSE_IRQ_TIMER_M), line:4:3, endln:4:47
-      |vpiParent:
-      \_EnumTypespec: (exc_cause_e), line:2:9, endln:5:14
-      |vpiName:EXC_CAUSE_IRQ_TIMER_M
-      |BIN:100111
-      |vpiDecompile:{1'b1,5'd07}
-      |vpiSize:6
+      \_EnumTypespec: , line:2:9, endln:5:14
+  |vpiImportTypespec:
+  \_EnumTypespec: , line:2:9, endln:5:14
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:14, endln:2:25
   |vpiImportTypespec:
-  \_EnumTypespec: (exc_cause_e), line:2:9, endln:5:14
+  \_TypedefTypespec: (exc_cause_e), line:5:3, endln:5:14
   |vpiDefName:work@dut
 ===================
 [  FATAL] : 0

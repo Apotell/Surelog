@@ -239,7 +239,7 @@ Assignment                                             2
 Begin                                                  1
 ClassDefn                                              8
 ClassTypespec                                          1
-Constant                                              26
+Constant                                              16
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              5
@@ -249,20 +249,20 @@ Function                                               9
 IODecl                                                11
 Initial                                                1
 IntTypespec                                           10
-LogicNet                                               2
+LogicNet                                               4
 LogicTypespec                                          7
-LogicVar                                               2
 Module                                                 1
-Operation                                             12
+Operation                                              8
 Package                                                1
 ParamAssign                                            1
 Parameter                                              1
 PartSelect                                             1
 Port                                                   2
-Range                                                  7
-RefObj                                                12
-RefTypespec                                           19
+Range                                                  2
+RefObj                                                 8
+RefTypespec                                           20
 Task                                                   9
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConcatWidth/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -531,7 +531,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -565,14 +565,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ConcatWidth/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -580,7 +579,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -588,7 +587,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -596,7 +595,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -604,13 +603,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ConcatWidth/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -812,38 +825,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@top
-  |vpiVariables:
-  \_LogicVar: (work@top.counter), line:8:18, endln:8:25
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConcatWidth/dut.sv, line:1:1, endln:18:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.counter), line:8:5, endln:8:17
-      |vpiParent:
-      \_LogicVar: (work@top.counter), line:8:18, endln:8:25
-      |vpiFullName:work@top.counter
-      |vpiActual:
-      \_LogicTypespec: , line:8:5, endln:8:17
-    |vpiName:counter
-    |vpiFullName:work@top.counter
-    |vpiVisibility:1
-  |vpiVariables:
-  \_LogicVar: (work@top.counter_upd), line:9:30, endln:9:41
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConcatWidth/dut.sv, line:1:1, endln:18:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.counter_upd), line:9:5, endln:9:29
-      |vpiParent:
-      \_LogicVar: (work@top.counter_upd), line:9:30, endln:9:41
-      |vpiFullName:work@top.counter_upd
-      |vpiActual:
-      \_LogicTypespec: , line:9:5, endln:9:29
-    |vpiName:counter_upd
-    |vpiFullName:work@top.counter_upd
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@top.counter), line:8:18, endln:8:25
-  |vpiReg:
-  \_LogicVar: (work@top.counter_upd), line:9:30, endln:9:41
   |vpiParameter:
   \_Parameter: (work@top.CounterWidth), line:2:19, endln:2:36
     |vpiParent:
@@ -883,42 +864,9 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConcatWidth/dut.sv, line:1:1, endln:18:10
   |vpiTypedef:
-  \_LogicTypespec: , line:5:12, endln:5:36
+  \_LogicTypespec: , line:5:12, endln:5:17
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConcatWidth/dut.sv, line:1:1, endln:18:10
-    |vpiRange:
-    \_Range: , line:5:18, endln:5:36
-      |vpiParent:
-      \_LogicTypespec: , line:5:12, endln:5:36
-      |vpiLeftRange:
-      \_Operation: , line:5:19, endln:5:33
-        |vpiParent:
-        \_Range: , line:5:18, endln:5:36
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (work@top.CounterWidth), line:5:19, endln:5:31
-          |vpiParent:
-          \_Operation: , line:5:19, endln:5:33
-          |vpiName:CounterWidth
-          |vpiFullName:work@top.CounterWidth
-          |vpiActual:
-          \_Parameter: (work@top.CounterWidth), line:2:19, endln:2:36
-        |vpiOperand:
-        \_Constant: , line:5:32, endln:5:33
-          |vpiParent:
-          \_Operation: , line:5:19, endln:5:33
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:5:34, endln:5:35
-        |vpiParent:
-        \_Range: , line:5:18, endln:5:36
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiTypedef:
   \_LogicTypespec: , line:8:5, endln:8:17
     |vpiParent:
@@ -985,42 +933,9 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConcatWidth/dut.sv, line:1:1, endln:18:10
   |vpiTypedef:
-  \_LogicTypespec: , line:5:12, endln:5:36
+  \_LogicTypespec: , line:5:12, endln:5:17
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConcatWidth/dut.sv, line:1:1, endln:18:10
-    |vpiRange:
-    \_Range: , line:5:18, endln:5:36
-      |vpiParent:
-      \_LogicTypespec: , line:5:12, endln:5:36
-      |vpiLeftRange:
-      \_Operation: , line:5:19, endln:5:33
-        |vpiParent:
-        \_Range: , line:5:18, endln:5:36
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (work@top.CounterWidth), line:5:19, endln:5:31
-          |vpiParent:
-          \_Operation: , line:5:19, endln:5:33
-          |vpiName:CounterWidth
-          |vpiFullName:work@top.CounterWidth
-          |vpiActual:
-          \_Parameter: (work@top.CounterWidth), line:2:19, endln:2:36
-        |vpiOperand:
-        \_Constant: , line:5:32, endln:5:33
-          |vpiParent:
-          \_Operation: , line:5:19, endln:5:33
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:5:34, endln:5:35
-        |vpiParent:
-        \_Range: , line:5:18, endln:5:36
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiImportTypespec:
   \_IntTypespec: , line:2:15, endln:2:18
   |vpiImportTypespec:
@@ -1040,38 +955,66 @@ Design: (unnamed)
     |vpiFullName:work@top.clk
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicTypespec: , line:5:12, endln:5:36
+  \_LogicTypespec: , line:5:12, endln:5:17
   |vpiImportTypespec:
   \_LogicNet: (work@top.out), line:5:37, endln:5:40
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConcatWidth/dut.sv, line:1:1, endln:18:10
     |vpiTypespec:
-    \_RefTypespec: (work@top.out), line:5:12, endln:5:36
+    \_RefTypespec: (work@top.out), line:5:12, endln:5:17
       |vpiParent:
       \_LogicNet: (work@top.out), line:5:37, endln:5:40
       |vpiFullName:work@top.out
       |vpiActual:
-      \_LogicTypespec: , line:5:12, endln:5:36
+      \_LogicTypespec: , line:5:12, endln:5:17
     |vpiName:out
     |vpiFullName:work@top.out
     |vpiNetType:36
   |vpiImportTypespec:
   \_LogicTypespec: , line:8:5, endln:8:17
   |vpiImportTypespec:
-  \_LogicVar: (work@top.counter), line:8:18, endln:8:25
+  \_LogicNet: (work@top.counter), line:8:18, endln:8:25
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConcatWidth/dut.sv, line:1:1, endln:18:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.counter), line:8:5, endln:8:17
+      |vpiParent:
+      \_LogicNet: (work@top.counter), line:8:18, endln:8:25
+      |vpiFullName:work@top.counter
+      |vpiActual:
+      \_LogicTypespec: , line:8:5, endln:8:17
+    |vpiName:counter
+    |vpiFullName:work@top.counter
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicTypespec: , line:9:5, endln:9:29
   |vpiImportTypespec:
-  \_LogicVar: (work@top.counter_upd), line:9:30, endln:9:41
+  \_LogicNet: (work@top.counter_upd), line:9:30, endln:9:41
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConcatWidth/dut.sv, line:1:1, endln:18:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.counter_upd), line:9:5, endln:9:29
+      |vpiParent:
+      \_LogicNet: (work@top.counter_upd), line:9:30, endln:9:41
+      |vpiFullName:work@top.counter_upd
+      |vpiActual:
+      \_LogicTypespec: , line:9:5, endln:9:29
+    |vpiName:counter_upd
+    |vpiFullName:work@top.counter_upd
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicTypespec: , line:4:11, endln:4:16
   |vpiImportTypespec:
-  \_LogicTypespec: , line:5:12, endln:5:36
+  \_LogicTypespec: , line:5:12, endln:5:17
   |vpiDefName:work@top
   |vpiNet:
   \_LogicNet: (work@top.clk), line:4:17, endln:4:20
   |vpiNet:
   \_LogicNet: (work@top.out), line:5:37, endln:5:40
+  |vpiNet:
+  \_LogicNet: (work@top.counter), line:8:18, endln:8:25
+  |vpiNet:
+  \_LogicNet: (work@top.counter_upd), line:9:30, endln:9:41
   |vpiPort:
   \_Port: (clk), line:4:17, endln:4:20
     |vpiParent:
@@ -1097,7 +1040,7 @@ Design: (unnamed)
       \_Port: (out), line:5:37, endln:5:40
       |vpiFullName:work@top.out
       |vpiActual:
-      \_LogicTypespec: , line:5:12, endln:5:36
+      \_LogicTypespec: , line:5:12, endln:5:17
   |vpiProcess:
   \_Initial: , line:11:5, endln:12:21
     |vpiParent:
@@ -1123,7 +1066,7 @@ Design: (unnamed)
         |vpiName:counter
         |vpiFullName:work@top.counter
         |vpiActual:
-        \_LogicVar: (work@top.counter), line:8:18, endln:8:25
+        \_LogicNet: (work@top.counter), line:8:18, endln:8:25
   |vpiProcess:
   \_Always: , line:13:5, endln:15:8
     |vpiParent:
@@ -1169,7 +1112,7 @@ Design: (unnamed)
               |vpiFullName:work@top.counter
               |vpiDefName:counter
               |vpiActual:
-              \_LogicVar: (work@top.counter), line:8:18, endln:8:25
+              \_LogicNet: (work@top.counter), line:8:18, endln:8:25
               |vpiConstantSelect:1
               |vpiLeftRange:
               \_Operation: , line:14:31, endln:14:45
@@ -1259,7 +1202,7 @@ Design: (unnamed)
             |vpiName:counter_upd
             |vpiFullName:work@top.counter_upd
             |vpiActual:
-            \_LogicVar: (work@top.counter_upd), line:9:30, endln:9:41
+            \_LogicNet: (work@top.counter_upd), line:9:30, endln:9:41
     |vpiAlwaysType:1
   |vpiContAssign:
   \_ContAssign: , line:16:12, endln:16:29
@@ -1272,7 +1215,7 @@ Design: (unnamed)
       |vpiName:counter_upd
       |vpiFullName:work@top.counter_upd
       |vpiActual:
-      \_LogicVar: (work@top.counter_upd), line:9:30, endln:9:41
+      \_LogicNet: (work@top.counter_upd), line:9:30, endln:9:41
     |vpiLhs:
     \_RefObj: (work@top.out), line:16:12, endln:16:15
       |vpiParent:

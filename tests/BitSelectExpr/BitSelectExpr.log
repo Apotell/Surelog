@@ -96,7 +96,7 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 BitSelect                                              1
-Constant                                               7
+Constant                                               5
 ContAssign                                             1
 Design                                                 1
 HierPath                                               1
@@ -104,13 +104,14 @@ IntTypespec                                            3
 IntVar                                                 1
 Module                                                 1
 Operation                                              1
+PackedArrayNet                                         1
 PackedArrayTypespec                                    1
-PackedArrayVar                                         1
 Port                                                   1
-Range                                                  2
+Range                                                  1
 RefObj                                                 1
-RefTypespec                                            5
+RefTypespec                                            6
 StructTypespec                                         1
+TypedefTypespec                                        1
 TypespecMember                                         1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BitSelectExpr/slpp_all/surelog.uhdm ...
@@ -137,38 +138,35 @@ Design: (unnamed)
     |vpiName:o
     |vpiFullName:work@top.o
     |vpiSigned:1
-    |vpiVisibility:1
-  |vpiVariables:
-  \_PackedArrayVar: (work@top.sram_otp_key_o), line:7:29, endln:7:43
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectExpr/dut.sv, line:1:1, endln:12:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.sram_otp_key_o.sram_otp_key_rsp_t), line:7:4, endln:7:28
-      |vpiParent:
-      \_PackedArrayVar: (work@top.sram_otp_key_o), line:7:29, endln:7:43
-      |vpiName:sram_otp_key_rsp_t
-      |vpiFullName:work@top.sram_otp_key_o.sram_otp_key_rsp_t
-      |vpiActual:
-      \_PackedArrayTypespec: , line:7:23, endln:7:28
-    |vpiName:sram_otp_key_o
-    |vpiFullName:work@top.sram_otp_key_o
+    |vpiRandType:1
     |vpiVisibility:1
   |vpiTypedef:
-  \_StructTypespec: (sram_otp_key_rsp_t), line:3:12, endln:5:5
+  \_TypedefTypespec: (sram_otp_key_rsp_t), line:5:6, endln:5:24
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectExpr/dut.sv, line:1:1, endln:12:10
     |vpiName:sram_otp_key_rsp_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@top.sram_otp_key_rsp_t), line:3:12, endln:5:5
+      |vpiParent:
+      \_TypedefTypespec: (sram_otp_key_rsp_t), line:5:6, endln:5:24
+      |vpiFullName:work@top.sram_otp_key_rsp_t
+      |vpiActual:
+      \_StructTypespec: , line:3:12, endln:5:5
+  |vpiTypedef:
+  \_StructTypespec: , line:3:12, endln:5:5
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectExpr/dut.sv, line:1:1, endln:12:10
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (nonce), line:4:14, endln:4:19
       |vpiParent:
-      \_StructTypespec: (sram_otp_key_rsp_t), line:3:12, endln:5:5
+      \_StructTypespec: , line:3:12, endln:5:5
       |vpiName:nonce
       |vpiTypespec:
-      \_RefTypespec: (work@top.sram_otp_key_rsp_t.nonce), line:4:7, endln:4:10
+      \_RefTypespec: (work@top.nonce), line:4:7, endln:4:10
         |vpiParent:
         \_TypespecMember: (nonce), line:4:14, endln:4:19
-        |vpiFullName:work@top.sram_otp_key_rsp_t.nonce
+        |vpiFullName:work@top.nonce
         |vpiActual:
         \_IntTypespec: , line:4:7, endln:4:10
   |vpiTypedef:
@@ -182,13 +180,13 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectExpr/dut.sv, line:1:1, endln:12:10
     |vpiSigned:1
   |vpiTypedef:
-  \_PackedArrayTypespec: , line:7:23, endln:7:28
+  \_PackedArrayTypespec: , line:7:4, endln:7:28
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectExpr/dut.sv, line:1:1, endln:12:10
     |vpiRange:
     \_Range: , line:7:23, endln:7:28
       |vpiParent:
-      \_PackedArrayTypespec: , line:7:23, endln:7:28
+      \_PackedArrayTypespec: , line:7:4, endln:7:28
       |vpiLeftRange:
       \_Constant: , line:7:24, endln:7:25
         |vpiParent:
@@ -206,20 +204,22 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (work@top.sram_otp_key_rsp_t), line:7:4, endln:7:22
+    \_RefTypespec: (work@top.sram_otp_key_rsp_t), line:5:6, endln:5:24
       |vpiParent:
-      \_PackedArrayTypespec: , line:7:23, endln:7:28
+      \_PackedArrayTypespec: , line:7:4, endln:7:28
       |vpiName:sram_otp_key_rsp_t
       |vpiFullName:work@top.sram_otp_key_rsp_t
       |vpiActual:
-      \_StructTypespec: (sram_otp_key_rsp_t), line:3:12, endln:5:5
+      \_TypedefTypespec: (sram_otp_key_rsp_t), line:5:6, endln:5:24
   |vpiTypedef:
   \_IntTypespec: , line:1:19, endln:1:22
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectExpr/dut.sv, line:1:1, endln:12:10
     |vpiSigned:1
   |vpiImportTypespec:
-  \_StructTypespec: (sram_otp_key_rsp_t), line:3:12, endln:5:5
+  \_TypedefTypespec: (sram_otp_key_rsp_t), line:5:6, endln:5:24
+  |vpiImportTypespec:
+  \_StructTypespec: , line:3:12, endln:5:5
   |vpiImportTypespec:
   \_IntTypespec: , line:4:7, endln:4:10
   |vpiImportTypespec:
@@ -227,9 +227,21 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntVar: (work@top.o), line:1:23, endln:1:24
   |vpiImportTypespec:
-  \_PackedArrayTypespec: , line:7:23, endln:7:28
+  \_PackedArrayTypespec: , line:7:4, endln:7:28
   |vpiImportTypespec:
-  \_PackedArrayVar: (work@top.sram_otp_key_o), line:7:29, endln:7:43
+  \_PackedArrayNet: (work@top.sram_otp_key_o), line:7:29, endln:7:43
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectExpr/dut.sv, line:1:1, endln:12:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.sram_otp_key_o.sram_otp_key_rsp_t), line:7:4, endln:7:28
+      |vpiParent:
+      \_PackedArrayNet: (work@top.sram_otp_key_o), line:7:29, endln:7:43
+      |vpiName:sram_otp_key_rsp_t
+      |vpiFullName:work@top.sram_otp_key_o.sram_otp_key_rsp_t
+      |vpiActual:
+      \_PackedArrayTypespec: , line:7:4, endln:7:28
+    |vpiName:sram_otp_key_o
+    |vpiFullName:work@top.sram_otp_key_o
   |vpiImportTypespec:
   \_IntTypespec: , line:1:19, endln:1:22
   |vpiImportTypespec:
@@ -240,6 +252,8 @@ Design: (unnamed)
     |vpiFullName:work@top.nonce
     |vpiNetType:1
   |vpiDefName:work@top
+  |vpiNet:
+  \_PackedArrayNet: (work@top.sram_otp_key_o), line:7:29, endln:7:43
   |vpiNet:
   \_LogicNet: (work@top.nonce), line:9:31, endln:9:36
   |vpiPort:
@@ -278,7 +292,7 @@ Design: (unnamed)
         |vpiName:sram_otp_key_o
         |vpiFullName:sram_otp_key_o[2 - 2]
         |vpiActual:
-        \_PackedArrayVar: (work@top.sram_otp_key_o), line:7:29, endln:7:43
+        \_PackedArrayNet: (work@top.sram_otp_key_o), line:7:29, endln:7:43
         |vpiIndex:
         \_Operation: , line:9:26, endln:9:29
           |vpiParent:

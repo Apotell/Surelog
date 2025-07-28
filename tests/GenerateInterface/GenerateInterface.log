@@ -451,7 +451,7 @@ Begin                                                  4
 BitSelect                                              3
 ClassDefn                                              8
 ClassTypespec                                          1
-Constant                                              42
+Constant                                              24
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              5
@@ -462,22 +462,23 @@ GenRegion                                              1
 IODecl                                                11
 IntTypespec                                           12
 Interface                                              2
-LogicNet                                               6
+LogicNet                                               5
 LogicTypespec                                          7
-LogicVar                                               3
+LogicVar                                               4
 Module                                                 2
 ModuleTypespec                                         2
-Operation                                             22
+Operation                                             13
 Package                                                1
 ParamAssign                                            3
 Parameter                                              3
 Port                                                   3
-Range                                                 15
+Range                                                  6
 RefModule                                              2
-RefObj                                                29
-RefTypespec                                           21
+RefObj                                                20
+RefTypespec                                           22
 RefVar                                                 3
 Task                                                   9
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/GenerateInterface/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -746,7 +747,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -780,14 +781,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/GenerateInterface/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -795,7 +795,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -803,7 +803,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -811,7 +811,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -819,13 +819,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/GenerateInterface/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1040,6 +1054,7 @@ Design: (unnamed)
       \_LogicTypespec: , line:3:3, endln:3:25
     |vpiName:xyz_o
     |vpiFullName:work@abc_if.xyz_o
+    |vpiRandType:1
     |vpiVisibility:1
   |vpiVariables:
   \_LogicVar: (work@abc_if.clk_i), line:4:26, endln:4:31
@@ -1054,6 +1069,7 @@ Design: (unnamed)
       \_LogicTypespec: , line:4:3, endln:4:25
     |vpiName:clk_i
     |vpiFullName:work@abc_if.clk_i
+    |vpiRandType:1
     |vpiVisibility:1
   |vpiReg:
   \_LogicVar: (work@abc_if.xyz_o), line:3:26, endln:3:31
@@ -1376,6 +1392,14 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:work@pins_if
   |vpiVariables:
+  \_LogicVar: (work@pins_if.pins), line:23:21, endln:23:25
+    |vpiParent:
+    \_Interface: work@pins_if (work@pins_if), file:${SURELOG_DIR}/tests/GenerateInterface/top.sv, line:22:1, endln:32:13
+    |vpiName:pins
+    |vpiFullName:work@pins_if.pins
+    |vpiRandType:1
+    |vpiVisibility:1
+  |vpiVariables:
   \_LogicVar: (work@pins_if.pins_o), line:25:21, endln:25:27
     |vpiParent:
     \_Interface: work@pins_if (work@pins_if), file:${SURELOG_DIR}/tests/GenerateInterface/top.sv, line:22:1, endln:32:13
@@ -1388,7 +1412,10 @@ Design: (unnamed)
       \_LogicTypespec: , line:25:3, endln:25:20
     |vpiName:pins_o
     |vpiFullName:work@pins_if.pins_o
+    |vpiRandType:1
     |vpiVisibility:1
+  |vpiReg:
+  \_LogicVar: (work@pins_if.pins), line:23:21, endln:23:25
   |vpiReg:
   \_LogicVar: (work@pins_if.pins_o), line:25:21, endln:25:27
   |vpiParameter:
@@ -1584,11 +1611,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:22:32, endln:22:35
   |vpiImportTypespec:
-  \_LogicNet: (work@pins_if.pins), line:23:21, endln:23:25
-    |vpiParent:
-    \_Interface: work@pins_if (work@pins_if), file:${SURELOG_DIR}/tests/GenerateInterface/top.sv, line:22:1, endln:32:13
-    |vpiName:pins
-    |vpiFullName:work@pins_if.pins
+  \_LogicVar: (work@pins_if.pins), line:23:21, endln:23:25
   |vpiImportTypespec:
   \_LogicTypespec: , line:25:3, endln:25:20
   |vpiImportTypespec:
@@ -1616,8 +1639,6 @@ Design: (unnamed)
     |vpiFullName:work@pins_if.pins_o
     |vpiNetType:36
   |vpiDefName:work@pins_if
-  |vpiNet:
-  \_LogicNet: (work@pins_if.pins), line:23:21, endln:23:25
   |vpiNet:
   \_LogicNet: (work@pins_if.pins), line:23:21, endln:23:25
   |vpiNet:

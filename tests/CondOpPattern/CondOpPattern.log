@@ -130,11 +130,12 @@ Module                                                 1
 Operation                                              3
 Port                                                   2
 RefObj                                                 2
-RefTypespec                                           10
+RefTypespec                                           11
 StringTypespec                                         4
 StructNet                                              1
 StructTypespec                                         1
 TaggedPattern                                          4
+TypedefTypespec                                        1
 TypespecMember                                         2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CondOpPattern/slpp_all/surelog.uhdm ...
@@ -148,33 +149,44 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:work@Example
   |vpiTypedef:
-  \_StructTypespec: (T), line:2:9, endln:4:2
+  \_TypedefTypespec: (T), line:4:3, endln:4:4
     |vpiParent:
     \_Module: work@Example (work@Example), file:${SURELOG_DIR}/tests/CondOpPattern/dut.sv, line:1:1, endln:12:10
     |vpiName:T
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@Example.T), line:2:9, endln:4:2
+      |vpiParent:
+      \_TypedefTypespec: (T), line:4:3, endln:4:4
+      |vpiFullName:work@Example.T
+      |vpiActual:
+      \_StructTypespec: , line:2:9, endln:4:2
+  |vpiTypedef:
+  \_StructTypespec: , line:2:9, endln:4:2
+    |vpiParent:
+    \_Module: work@Example (work@Example), file:${SURELOG_DIR}/tests/CondOpPattern/dut.sv, line:1:1, endln:12:10
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (a), line:3:11, endln:3:12
       |vpiParent:
-      \_StructTypespec: (T), line:2:9, endln:4:2
+      \_StructTypespec: , line:2:9, endln:4:2
       |vpiName:a
       |vpiTypespec:
-      \_RefTypespec: (work@Example.T.a), line:3:5, endln:3:10
+      \_RefTypespec: (work@Example.a), line:3:5, endln:3:10
         |vpiParent:
         \_TypespecMember: (a), line:3:11, endln:3:12
-        |vpiFullName:work@Example.T.a
+        |vpiFullName:work@Example.a
         |vpiActual:
         \_LogicTypespec: , line:3:5, endln:3:10
     |vpiTypespecMember:
     \_TypespecMember: (b), line:3:14, endln:3:15
       |vpiParent:
-      \_StructTypespec: (T), line:2:9, endln:4:2
+      \_StructTypespec: , line:2:9, endln:4:2
       |vpiName:b
       |vpiTypespec:
-      \_RefTypespec: (work@Example.T.b), line:3:5, endln:3:10
+      \_RefTypespec: (work@Example.b), line:3:5, endln:3:10
         |vpiParent:
         \_TypespecMember: (b), line:3:14, endln:3:15
-        |vpiFullName:work@Example.T.b
+        |vpiFullName:work@Example.b
         |vpiActual:
         \_LogicTypespec: , line:3:5, endln:3:10
   |vpiTypedef:
@@ -186,25 +198,21 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@Example (work@Example), file:${SURELOG_DIR}/tests/CondOpPattern/dut.sv, line:1:1, endln:12:10
   |vpiTypedef:
-  \_StringTypespec: (a), line:9:10, endln:9:11
+  \_StringTypespec: , line:9:10, endln:9:11
     |vpiParent:
     \_Module: work@Example (work@Example), file:${SURELOG_DIR}/tests/CondOpPattern/dut.sv, line:1:1, endln:12:10
-    |vpiName:a
   |vpiTypedef:
-  \_StringTypespec: (b), line:9:19, endln:9:20
+  \_StringTypespec: , line:9:19, endln:9:20
     |vpiParent:
     \_Module: work@Example (work@Example), file:${SURELOG_DIR}/tests/CondOpPattern/dut.sv, line:1:1, endln:12:10
-    |vpiName:b
   |vpiTypedef:
-  \_StringTypespec: (a), line:10:10, endln:10:11
+  \_StringTypespec: , line:10:10, endln:10:11
     |vpiParent:
     \_Module: work@Example (work@Example), file:${SURELOG_DIR}/tests/CondOpPattern/dut.sv, line:1:1, endln:12:10
-    |vpiName:a
   |vpiTypedef:
-  \_StringTypespec: (b), line:10:19, endln:10:20
+  \_StringTypespec: , line:10:19, endln:10:20
     |vpiParent:
     \_Module: work@Example (work@Example), file:${SURELOG_DIR}/tests/CondOpPattern/dut.sv, line:1:1, endln:12:10
-    |vpiName:b
   |vpiTypedef:
   \_LogicTypespec: , line:6:7, endln:6:12
     |vpiParent:
@@ -214,43 +222,45 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@Example (work@Example), file:${SURELOG_DIR}/tests/CondOpPattern/dut.sv, line:1:1, endln:12:10
   |vpiImportTypespec:
-  \_StructTypespec: (T), line:2:9, endln:4:2
+  \_TypedefTypespec: (T), line:4:3, endln:4:4
+  |vpiImportTypespec:
+  \_StructTypespec: , line:2:9, endln:4:2
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:5, endln:3:10
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:5, endln:3:10
   |vpiImportTypespec:
-  \_StringTypespec: (a), line:9:10, endln:9:11
+  \_StringTypespec: , line:9:10, endln:9:11
   |vpiImportTypespec:
-  \_StringTypespec: (b), line:9:19, endln:9:20
+  \_StringTypespec: , line:9:19, endln:9:20
   |vpiImportTypespec:
-  \_StringTypespec: (a), line:10:10, endln:10:11
+  \_StringTypespec: , line:10:10, endln:10:11
   |vpiImportTypespec:
-  \_StringTypespec: (b), line:10:19, endln:10:20
+  \_StringTypespec: , line:10:19, endln:10:20
   |vpiImportTypespec:
-  \_StructNet: (work@Example.out), line:5:10, endln:5:13
+  \_StructNet: (work@Example.out), line:1:22, endln:1:25
     |vpiParent:
     \_Module: work@Example (work@Example), file:${SURELOG_DIR}/tests/CondOpPattern/dut.sv, line:1:1, endln:12:10
     |vpiTypespec:
-    \_RefTypespec: (work@Example.out.out), line:5:8, endln:5:9
+    \_RefTypespec: (work@Example.out.T), line:5:8, endln:5:9
       |vpiParent:
-      \_StructNet: (work@Example.out), line:5:10, endln:5:13
-      |vpiName:out
-      |vpiFullName:work@Example.out.out
+      \_StructNet: (work@Example.out), line:1:22, endln:1:25
+      |vpiName:T
+      |vpiFullName:work@Example.out.T
       |vpiActual:
-      \_StructTypespec: (T), line:2:9, endln:4:2
+      \_TypedefTypespec: (T), line:4:3, endln:4:4
     |vpiName:out
     |vpiFullName:work@Example.out
   |vpiImportTypespec:
   \_LogicTypespec: , line:6:7, endln:6:12
   |vpiImportTypespec:
-  \_LogicNet: (work@Example.flag), line:6:13, endln:6:17
+  \_LogicNet: (work@Example.flag), line:1:16, endln:1:20
     |vpiParent:
     \_Module: work@Example (work@Example), file:${SURELOG_DIR}/tests/CondOpPattern/dut.sv, line:1:1, endln:12:10
     |vpiTypespec:
     \_RefTypespec: (work@Example.flag), line:6:7, endln:6:12
       |vpiParent:
-      \_LogicNet: (work@Example.flag), line:6:13, endln:6:17
+      \_LogicNet: (work@Example.flag), line:1:16, endln:1:20
       |vpiFullName:work@Example.flag
       |vpiActual:
       \_LogicTypespec: , line:6:7, endln:6:12
@@ -261,9 +271,9 @@ Design: (unnamed)
   \_LogicTypespec: , line:6:7, endln:6:12
   |vpiDefName:work@Example
   |vpiNet:
-  \_StructNet: (work@Example.out), line:5:10, endln:5:13
+  \_StructNet: (work@Example.out), line:1:22, endln:1:25
   |vpiNet:
-  \_LogicNet: (work@Example.flag), line:6:13, endln:6:17
+  \_LogicNet: (work@Example.flag), line:1:16, endln:1:20
   |vpiPort:
   \_Port: (flag), line:1:16, endln:1:20
     |vpiParent:
@@ -290,7 +300,7 @@ Design: (unnamed)
       |vpiName:T
       |vpiFullName:work@Example.out.T
       |vpiActual:
-      \_StructTypespec: (T), line:2:9, endln:4:2
+      \_TypedefTypespec: (T), line:4:3, endln:4:4
   |vpiContAssign:
   \_ContAssign: , line:7:8, endln:10:28
     |vpiParent:
@@ -307,7 +317,7 @@ Design: (unnamed)
         |vpiName:flag
         |vpiFullName:work@Example.flag
         |vpiActual:
-        \_LogicNet: (work@Example.flag), line:6:13, endln:6:17
+        \_LogicNet: (work@Example.flag), line:1:16, endln:1:20
       |vpiOperand:
       \_Operation: , line:9:7, endln:9:28
         |vpiParent:
@@ -332,7 +342,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@Example.a
             |vpiActual:
-            \_StringTypespec: (a), line:9:10, endln:9:11
+            \_StringTypespec: , line:9:10, endln:9:11
         |vpiOperand:
         \_TaggedPattern: , line:9:19, endln:9:26
           |vpiParent:
@@ -352,7 +362,7 @@ Design: (unnamed)
             |vpiName:b
             |vpiFullName:work@Example.b
             |vpiActual:
-            \_StringTypespec: (b), line:9:19, endln:9:20
+            \_StringTypespec: , line:9:19, endln:9:20
       |vpiOperand:
       \_Operation: , line:10:7, endln:10:28
         |vpiParent:
@@ -377,7 +387,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@Example.a
             |vpiActual:
-            \_StringTypespec: (a), line:10:10, endln:10:11
+            \_StringTypespec: , line:10:10, endln:10:11
         |vpiOperand:
         \_TaggedPattern: , line:10:19, endln:10:26
           |vpiParent:
@@ -397,7 +407,7 @@ Design: (unnamed)
             |vpiName:b
             |vpiFullName:work@Example.b
             |vpiActual:
-            \_StringTypespec: (b), line:10:19, endln:10:20
+            \_StringTypespec: , line:10:19, endln:10:20
     |vpiLhs:
     \_RefObj: (work@Example.out), line:7:8, endln:7:11
       |vpiParent:
@@ -405,7 +415,7 @@ Design: (unnamed)
       |vpiName:out
       |vpiFullName:work@Example.out
       |vpiActual:
-      \_StructNet: (work@Example.out), line:5:10, endln:5:13
+      \_StructNet: (work@Example.out), line:1:22, endln:1:25
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

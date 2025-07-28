@@ -140,9 +140,10 @@ ModuleTypespec                                         1
 Package                                                1
 RefModule                                              1
 RefObj                                                 2
-RefTypespec                                            4
+RefTypespec                                            5
 StructTypespec                                         1
 TypeParameter                                          1
+TypedefTypespec                                        1
 TypespecMember                                         2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypeParamOverride/slpp_all/surelog.uhdm ...
@@ -156,33 +157,44 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:ariane_axi_soc
   |vpiTypedef:
-  \_StructTypespec: (ariane_axi_soc::resp_slv_t), line:3:9, endln:6:2
+  \_TypedefTypespec: (ariane_axi_soc::resp_slv_t), line:6:3, endln:6:13
     |vpiParent:
     \_Package: ariane_axi_soc (ariane_axi_soc), file:${SURELOG_DIR}/tests/TypeParamOverride/dut.sv, line:1:1, endln:8:11
     |vpiName:ariane_axi_soc::resp_slv_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (ariane_axi_soc::resp_slv_t), line:3:9, endln:6:2
+      |vpiParent:
+      \_TypedefTypespec: (ariane_axi_soc::resp_slv_t), line:6:3, endln:6:13
+      |vpiFullName:ariane_axi_soc::resp_slv_t
+      |vpiActual:
+      \_StructTypespec: , line:3:9, endln:6:2
+  |vpiTypedef:
+  \_StructTypespec: , line:3:9, endln:6:2
+    |vpiParent:
+    \_Package: ariane_axi_soc (ariane_axi_soc), file:${SURELOG_DIR}/tests/TypeParamOverride/dut.sv, line:1:1, endln:8:11
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (w_ready), line:4:19, endln:4:26
       |vpiParent:
-      \_StructTypespec: (ariane_axi_soc::resp_slv_t), line:3:9, endln:6:2
+      \_StructTypespec: , line:3:9, endln:6:2
       |vpiName:w_ready
       |vpiTypespec:
-      \_RefTypespec: (ariane_axi_soc::resp_slv_t::w_ready), line:4:5, endln:4:10
+      \_RefTypespec: (ariane_axi_soc::w_ready), line:4:5, endln:4:10
         |vpiParent:
         \_TypespecMember: (w_ready), line:4:19, endln:4:26
-        |vpiFullName:ariane_axi_soc::resp_slv_t::w_ready
+        |vpiFullName:ariane_axi_soc::w_ready
         |vpiActual:
         \_LogicTypespec: , line:4:5, endln:4:10
     |vpiTypespecMember:
     \_TypespecMember: (b_valid), line:5:19, endln:5:26
       |vpiParent:
-      \_StructTypespec: (ariane_axi_soc::resp_slv_t), line:3:9, endln:6:2
+      \_StructTypespec: , line:3:9, endln:6:2
       |vpiName:b_valid
       |vpiTypespec:
-      \_RefTypespec: (ariane_axi_soc::resp_slv_t::b_valid), line:5:5, endln:5:10
+      \_RefTypespec: (ariane_axi_soc::b_valid), line:5:5, endln:5:10
         |vpiParent:
         \_TypespecMember: (b_valid), line:5:19, endln:5:26
-        |vpiFullName:ariane_axi_soc::resp_slv_t::b_valid
+        |vpiFullName:ariane_axi_soc::b_valid
         |vpiActual:
         \_LogicTypespec: , line:5:5, endln:5:10
   |vpiTypedef:
@@ -194,7 +206,9 @@ Design: (unnamed)
     |vpiParent:
     \_Package: ariane_axi_soc (ariane_axi_soc), file:${SURELOG_DIR}/tests/TypeParamOverride/dut.sv, line:1:1, endln:8:11
   |vpiImportTypespec:
-  \_StructTypespec: (ariane_axi_soc::resp_slv_t), line:3:9, endln:6:2
+  \_TypedefTypespec: (ariane_axi_soc::resp_slv_t), line:6:3, endln:6:13
+  |vpiImportTypespec:
+  \_StructTypespec: , line:3:9, endln:6:2
   |vpiImportTypespec:
   \_LogicTypespec: , line:4:5, endln:4:10
   |vpiImportTypespec:

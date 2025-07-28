@@ -127,16 +127,17 @@ AST_DEBUG_END
 Constant                                               7
 ContAssign                                             1
 Design                                                 1
+LogicNet                                               1
 LogicTypespec                                          3
-LogicVar                                               1
 Module                                                 2
 Operation                                              4
 RefObj                                                 2
-RefTypespec                                            6
+RefTypespec                                            7
 StringTypespec                                         2
 StructNet                                              1
 StructTypespec                                         1
 TaggedPattern                                          2
+TypedefTypespec                                        1
 TypespecMember                                         2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PatternAssignment/slpp_all/surelog.uhdm ...
@@ -149,58 +150,45 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@dut
-  |vpiVariables:
-  \_LogicVar: (work@dut.test), line:9:7, endln:9:11
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PatternAssignment/dut.sv, line:1:1, endln:15:10
-    |vpiTypespec:
-    \_RefTypespec: (work@dut.test), line:9:1, endln:9:6
-      |vpiParent:
-      \_LogicVar: (work@dut.test), line:9:7, endln:9:11
-      |vpiFullName:work@dut.test
-      |vpiActual:
-      \_LogicTypespec: , line:9:1, endln:9:6
-    |vpiName:test
-    |vpiFullName:work@dut.test
-    |vpiVisibility:1
-    |vpiExpr:
-    \_Constant: , line:9:14, endln:9:18
-      |vpiParent:
-      \_LogicVar: (work@dut.test), line:9:7, endln:9:11
-      |vpiDecompile:1'b1
-      |vpiSize:1
-      |BIN:1
-      |vpiConstType:3
-  |vpiReg:
-  \_LogicVar: (work@dut.test), line:9:7, endln:9:11
   |vpiTypedef:
-  \_StructTypespec: (typedef_struct), line:3:9, endln:6:2
+  \_TypedefTypespec: (typedef_struct), line:6:3, endln:6:17
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PatternAssignment/dut.sv, line:1:1, endln:15:10
     |vpiName:typedef_struct
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@dut.typedef_struct), line:3:9, endln:6:2
+      |vpiParent:
+      \_TypedefTypespec: (typedef_struct), line:6:3, endln:6:17
+      |vpiFullName:work@dut.typedef_struct
+      |vpiActual:
+      \_StructTypespec: , line:3:9, endln:6:2
+  |vpiTypedef:
+  \_StructTypespec: , line:3:9, endln:6:2
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PatternAssignment/dut.sv, line:1:1, endln:15:10
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (a), line:4:9, endln:4:10
       |vpiParent:
-      \_StructTypespec: (typedef_struct), line:3:9, endln:6:2
+      \_StructTypespec: , line:3:9, endln:6:2
       |vpiName:a
       |vpiTypespec:
-      \_RefTypespec: (work@dut.typedef_struct.a), line:4:3, endln:4:8
+      \_RefTypespec: (work@dut.a), line:4:3, endln:4:8
         |vpiParent:
         \_TypespecMember: (a), line:4:9, endln:4:10
-        |vpiFullName:work@dut.typedef_struct.a
+        |vpiFullName:work@dut.a
         |vpiActual:
         \_LogicTypespec: , line:4:3, endln:4:8
     |vpiTypespecMember:
     \_TypespecMember: (b), line:5:9, endln:5:10
       |vpiParent:
-      \_StructTypespec: (typedef_struct), line:3:9, endln:6:2
+      \_StructTypespec: , line:3:9, endln:6:2
       |vpiName:b
       |vpiTypespec:
-      \_RefTypespec: (work@dut.typedef_struct.b), line:5:3, endln:5:8
+      \_RefTypespec: (work@dut.b), line:5:3, endln:5:8
         |vpiParent:
         \_TypespecMember: (b), line:5:9, endln:5:10
-        |vpiFullName:work@dut.typedef_struct.b
+        |vpiFullName:work@dut.b
         |vpiActual:
         \_LogicTypespec: , line:5:3, endln:5:8
   |vpiTypedef:
@@ -212,50 +200,64 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PatternAssignment/dut.sv, line:1:1, endln:15:10
   |vpiTypedef:
-  \_StringTypespec: (a), line:11:3, endln:11:4
+  \_StringTypespec: , line:11:3, endln:11:4
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PatternAssignment/dut.sv, line:1:1, endln:15:10
-    |vpiName:a
   |vpiTypedef:
-  \_StringTypespec: (b), line:12:3, endln:12:4
+  \_StringTypespec: , line:12:3, endln:12:4
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PatternAssignment/dut.sv, line:1:1, endln:15:10
-    |vpiName:b
   |vpiTypedef:
   \_LogicTypespec: , line:9:1, endln:9:6
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PatternAssignment/dut.sv, line:1:1, endln:15:10
   |vpiImportTypespec:
-  \_StructTypespec: (typedef_struct), line:3:9, endln:6:2
+  \_TypedefTypespec: (typedef_struct), line:6:3, endln:6:17
+  |vpiImportTypespec:
+  \_StructTypespec: , line:3:9, endln:6:2
   |vpiImportTypespec:
   \_LogicTypespec: , line:4:3, endln:4:8
   |vpiImportTypespec:
   \_LogicTypespec: , line:5:3, endln:5:8
   |vpiImportTypespec:
-  \_StringTypespec: (a), line:11:3, endln:11:4
+  \_StringTypespec: , line:11:3, endln:11:4
   |vpiImportTypespec:
-  \_StringTypespec: (b), line:12:3, endln:12:4
+  \_StringTypespec: , line:12:3, endln:12:4
   |vpiImportTypespec:
   \_StructNet: (work@dut.c), line:8:16, endln:8:17
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PatternAssignment/dut.sv, line:1:1, endln:15:10
     |vpiTypespec:
-    \_RefTypespec: (work@dut.c.c), line:8:1, endln:8:15
+    \_RefTypespec: (work@dut.c.typedef_struct), line:8:1, endln:8:15
       |vpiParent:
       \_StructNet: (work@dut.c), line:8:16, endln:8:17
-      |vpiName:c
-      |vpiFullName:work@dut.c.c
+      |vpiName:typedef_struct
+      |vpiFullName:work@dut.c.typedef_struct
       |vpiActual:
-      \_StructTypespec: (typedef_struct), line:3:9, endln:6:2
+      \_TypedefTypespec: (typedef_struct), line:6:3, endln:6:17
     |vpiName:c
     |vpiFullName:work@dut.c
   |vpiImportTypespec:
   \_LogicTypespec: , line:9:1, endln:9:6
   |vpiImportTypespec:
-  \_LogicVar: (work@dut.test), line:9:7, endln:9:11
+  \_LogicNet: (work@dut.test), line:9:7, endln:9:11
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PatternAssignment/dut.sv, line:1:1, endln:15:10
+    |vpiTypespec:
+    \_RefTypespec: (work@dut.test), line:9:1, endln:9:6
+      |vpiParent:
+      \_LogicNet: (work@dut.test), line:9:7, endln:9:11
+      |vpiFullName:work@dut.test
+      |vpiActual:
+      \_LogicTypespec: , line:9:1, endln:9:6
+    |vpiName:test
+    |vpiFullName:work@dut.test
+    |vpiNetType:36
   |vpiDefName:work@dut
   |vpiNet:
   \_StructNet: (work@dut.c), line:8:16, endln:8:17
+  |vpiNet:
+  \_LogicNet: (work@dut.test), line:9:7, endln:9:11
   |vpiContAssign:
   \_ContAssign: , line:10:8, endln:13:2
     |vpiParent:
@@ -286,7 +288,7 @@ Design: (unnamed)
               |vpiName:test
               |vpiFullName:work@dut.test
               |vpiActual:
-              \_LogicVar: (work@dut.test), line:9:7, endln:9:11
+              \_LogicNet: (work@dut.test), line:9:7, endln:9:11
             |vpiOperand:
             \_Constant: , line:11:15, endln:11:19
               |vpiParent:
@@ -318,7 +320,7 @@ Design: (unnamed)
           |vpiName:a
           |vpiFullName:work@dut.a
           |vpiActual:
-          \_StringTypespec: (a), line:11:3, endln:11:4
+          \_StringTypespec: , line:11:3, endln:11:4
       |vpiOperand:
       \_TaggedPattern: , line:12:3, endln:12:25
         |vpiParent:
@@ -359,7 +361,7 @@ Design: (unnamed)
           |vpiName:b
           |vpiFullName:work@dut.b
           |vpiActual:
-          \_StringTypespec: (b), line:12:3, endln:12:4
+          \_StringTypespec: , line:12:3, endln:12:4
     |vpiLhs:
     \_RefObj: (work@dut.c), line:10:8, endln:10:9
       |vpiParent:

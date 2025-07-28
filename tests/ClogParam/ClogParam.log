@@ -207,9 +207,10 @@ Parameter                                              4
 Port                                                   3
 RefModule                                              1
 RefObj                                                 6
-RefTypespec                                            9
+RefTypespec                                           10
 StructTypespec                                         1
 SysFuncCall                                            1
+TypedefTypespec                                        1
 TypespecMember                                         1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClogParam/slpp_all/surelog.uhdm ...
@@ -236,6 +237,7 @@ Design: (unnamed)
     |vpiName:a
     |vpiFullName:work@otp_ctrl_ecc_reg.a
     |vpiSigned:1
+    |vpiRandType:1
     |vpiVisibility:1
   |vpiParameter:
   \_Parameter: (work@otp_ctrl_ecc_reg.Depth), line:2:19, endln:2:30
@@ -384,6 +386,7 @@ Design: (unnamed)
     |vpiName:o
     |vpiFullName:work@top.o
     |vpiSigned:1
+    |vpiRandType:1
     |vpiVisibility:1
   |vpiParameter:
   \_Parameter: (work@top.Info), line:12:26, endln:12:49
@@ -396,7 +399,7 @@ Design: (unnamed)
       |vpiName:part_info_t
       |vpiFullName:work@top.Info.part_info_t
       |vpiActual:
-      \_StructTypespec: (part_info_t), line:8:12, endln:10:5
+      \_TypedefTypespec: (part_info_t), line:10:6, endln:10:17
     |vpiName:Info
     |vpiFullName:work@top.Info
   |vpiParameter:
@@ -459,21 +462,32 @@ Design: (unnamed)
     |vpiLhs:
     \_Parameter: (work@top.NumScrmblBlocks), line:13:19, endln:13:43
   |vpiTypedef:
-  \_StructTypespec: (part_info_t), line:8:12, endln:10:5
+  \_TypedefTypespec: (part_info_t), line:10:6, endln:10:17
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClogParam/dut.sv, line:7:1, endln:19:16
     |vpiName:part_info_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@top.part_info_t), line:8:12, endln:10:5
+      |vpiParent:
+      \_TypedefTypespec: (part_info_t), line:10:6, endln:10:17
+      |vpiFullName:work@top.part_info_t
+      |vpiActual:
+      \_StructTypespec: , line:8:12, endln:10:5
+  |vpiTypedef:
+  \_StructTypespec: , line:8:12, endln:10:5
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClogParam/dut.sv, line:7:1, endln:19:16
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (x), line:9:11, endln:9:12
       |vpiParent:
-      \_StructTypespec: (part_info_t), line:8:12, endln:10:5
+      \_StructTypespec: , line:8:12, endln:10:5
       |vpiName:x
       |vpiTypespec:
-      \_RefTypespec: (work@top.part_info_t.x), line:9:7, endln:9:10
+      \_RefTypespec: (work@top.x), line:9:7, endln:9:10
         |vpiParent:
         \_TypespecMember: (x), line:9:11, endln:9:12
-        |vpiFullName:work@top.part_info_t.x
+        |vpiFullName:work@top.x
         |vpiActual:
         \_IntTypespec: , line:9:7, endln:9:10
   |vpiTypedef:
@@ -502,7 +516,9 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClogParam/dut.sv, line:7:1, endln:19:16
     |vpiSigned:1
   |vpiImportTypespec:
-  \_StructTypespec: (part_info_t), line:8:12, endln:10:5
+  \_TypedefTypespec: (part_info_t), line:10:6, endln:10:17
+  |vpiImportTypespec:
+  \_StructTypespec: , line:8:12, endln:10:5
   |vpiImportTypespec:
   \_IntTypespec: , line:9:7, endln:9:10
   |vpiImportTypespec:

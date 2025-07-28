@@ -122,7 +122,7 @@ AST_DEBUG_END
 BitSelect                                              2
 ClassDefn                                              8
 ClassTypespec                                          1
-Constant                                              21
+Constant                                              15
 Design                                                 1
 EnumConst                                              5
 EnumTypespec                                           1
@@ -130,17 +130,18 @@ Function                                               9
 HierPath                                               1
 IODecl                                                11
 IntTypespec                                            9
+LogicNet                                               1
 LogicTypespec                                          3
-LogicVar                                               1
 Module                                                 1
 Package                                                1
+PackedArrayNet                                         1
 PackedArrayTypespec                                    1
-PackedArrayVar                                         1
-Range                                                  7
+Range                                                  4
 RefObj                                                 1
-RefTypespec                                           16
+RefTypespec                                           18
 StructTypespec                                         1
 Task                                                   9
+TypedefTypespec                                        2
 TypespecMember                                         1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SelectSelect/slpp_all/surelog.uhdm ...
@@ -410,7 +411,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -444,14 +445,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/SelectSelect/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -459,7 +459,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -467,7 +467,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -475,7 +475,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -483,13 +483,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/SelectSelect/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -691,98 +705,33 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@adc_ctrl_core
-  |vpiVariables:
-  \_PackedArrayVar: (work@adc_ctrl_core.a), line:6:28, endln:6:29
-    |vpiParent:
-    \_Module: work@adc_ctrl_core (work@adc_ctrl_core), file:${SURELOG_DIR}/tests/SelectSelect/dut.sv, line:1:1, endln:8:10
-    |vpiTypespec:
-    \_RefTypespec: (work@adc_ctrl_core.a.filter_ctl_t), line:6:4, endln:6:27
-      |vpiParent:
-      \_PackedArrayVar: (work@adc_ctrl_core.a), line:6:28, endln:6:29
-      |vpiName:filter_ctl_t
-      |vpiFullName:work@adc_ctrl_core.a.filter_ctl_t
-      |vpiActual:
-      \_PackedArrayTypespec: , line:6:17, endln:6:27
-    |vpiName:a
-    |vpiFullName:work@adc_ctrl_core.a
-    |vpiVisibility:1
-  |vpiVariables:
-  \_LogicVar: (work@adc_ctrl_core.x), line:7:16, endln:7:17
-    |vpiParent:
-    \_Module: work@adc_ctrl_core (work@adc_ctrl_core), file:${SURELOG_DIR}/tests/SelectSelect/dut.sv, line:1:1, endln:8:10
-    |vpiTypespec:
-    \_RefTypespec: (work@adc_ctrl_core.x), line:7:4, endln:7:15
-      |vpiParent:
-      \_LogicVar: (work@adc_ctrl_core.x), line:7:16, endln:7:17
-      |vpiFullName:work@adc_ctrl_core.x
-      |vpiActual:
-      \_LogicTypespec: , line:7:4, endln:7:15
-    |vpiName:x
-    |vpiFullName:work@adc_ctrl_core.x
-    |vpiVisibility:1
-    |vpiExpr:
-    \_HierPath: (a[0][0].min_v), line:7:20, endln:7:33
-      |vpiParent:
-      \_LogicVar: (work@adc_ctrl_core.x), line:7:16, endln:7:17
-      |vpiActual:
-      \_BitSelect: (a[0]), line:7:20, endln:7:21
-        |vpiParent:
-        \_HierPath: (a[0][0].min_v), line:7:20, endln:7:33
-        |vpiName:a
-        |vpiFullName:a[0]
-        |vpiActual:
-        \_PackedArrayVar: (work@adc_ctrl_core.a), line:6:28, endln:6:29
-        |vpiIndex:
-        \_Constant: , line:7:22, endln:7:23
-          |vpiParent:
-          \_BitSelect: (a[0]), line:7:20, endln:7:21
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiConstType:9
-      |vpiActual:
-      \_BitSelect: (a[0][0]), line:7:22, endln:7:23
-        |vpiParent:
-        \_HierPath: (a[0][0].min_v), line:7:20, endln:7:33
-        |vpiName:a[0]
-        |vpiFullName:a[0][0]
-        |vpiActual:
-        \_LogicNet: (work@adc_ctrl_core.a[0]), line:7:22, endln:7:23
-        |vpiIndex:
-        \_Constant: , line:7:25, endln:7:26
-          |vpiParent:
-          \_BitSelect: (a[0][0]), line:7:22, endln:7:23
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiConstType:9
-      |vpiActual:
-      \_RefObj: (work@adc_ctrl_core.x.min_v), line:7:28, endln:7:33
-        |vpiParent:
-        \_HierPath: (a[0][0].min_v), line:7:20, endln:7:33
-        |vpiName:min_v
-        |vpiFullName:work@adc_ctrl_core.x.min_v
-        |vpiActual:
-        \_LogicNet: (work@adc_ctrl_core.min_v), line:7:28, endln:7:33
-      |vpiName:a[0][0].min_v
-  |vpiReg:
-  \_LogicVar: (work@adc_ctrl_core.x), line:7:16, endln:7:17
   |vpiTypedef:
-  \_StructTypespec: (filter_ctl_t), line:2:12, endln:4:5
+  \_TypedefTypespec: (filter_ctl_t), line:4:6, endln:4:18
     |vpiParent:
     \_Module: work@adc_ctrl_core (work@adc_ctrl_core), file:${SURELOG_DIR}/tests/SelectSelect/dut.sv, line:1:1, endln:8:10
     |vpiName:filter_ctl_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@adc_ctrl_core.filter_ctl_t), line:2:12, endln:4:5
+      |vpiParent:
+      \_TypedefTypespec: (filter_ctl_t), line:4:6, endln:4:18
+      |vpiFullName:work@adc_ctrl_core.filter_ctl_t
+      |vpiActual:
+      \_StructTypespec: , line:2:12, endln:4:5
+  |vpiTypedef:
+  \_StructTypespec: , line:2:12, endln:4:5
+    |vpiParent:
+    \_Module: work@adc_ctrl_core (work@adc_ctrl_core), file:${SURELOG_DIR}/tests/SelectSelect/dut.sv, line:1:1, endln:8:10
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (min_v), line:3:19, endln:3:24
       |vpiParent:
-      \_StructTypespec: (filter_ctl_t), line:2:12, endln:4:5
+      \_StructTypespec: , line:2:12, endln:4:5
       |vpiName:min_v
       |vpiTypespec:
-      \_RefTypespec: (work@adc_ctrl_core.filter_ctl_t.min_v), line:3:7, endln:3:18
+      \_RefTypespec: (work@adc_ctrl_core.min_v), line:3:7, endln:3:18
         |vpiParent:
         \_TypespecMember: (min_v), line:3:19, endln:3:24
-        |vpiFullName:work@adc_ctrl_core.filter_ctl_t.min_v
+        |vpiFullName:work@adc_ctrl_core.min_v
         |vpiActual:
         \_LogicTypespec: , line:3:7, endln:3:18
   |vpiTypedef:
@@ -810,13 +759,13 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_PackedArrayTypespec: , line:6:17, endln:6:27
+  \_PackedArrayTypespec: , line:6:4, endln:6:27
     |vpiParent:
     \_Module: work@adc_ctrl_core (work@adc_ctrl_core), file:${SURELOG_DIR}/tests/SelectSelect/dut.sv, line:1:1, endln:8:10
     |vpiRange:
     \_Range: , line:6:17, endln:6:22
       |vpiParent:
-      \_PackedArrayTypespec: , line:6:17, endln:6:27
+      \_PackedArrayTypespec: , line:6:4, endln:6:27
       |vpiLeftRange:
       \_Constant: , line:6:18, endln:6:19
         |vpiParent:
@@ -836,7 +785,7 @@ Design: (unnamed)
     |vpiRange:
     \_Range: , line:6:22, endln:6:27
       |vpiParent:
-      \_PackedArrayTypespec: , line:6:17, endln:6:27
+      \_PackedArrayTypespec: , line:6:4, endln:6:27
       |vpiLeftRange:
       \_Constant: , line:6:23, endln:6:24
         |vpiParent:
@@ -854,13 +803,13 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (work@adc_ctrl_core.filter_ctl_t), line:6:4, endln:6:16
+    \_RefTypespec: (work@adc_ctrl_core.filter_ctl_t), line:4:6, endln:4:18
       |vpiParent:
-      \_PackedArrayTypespec: , line:6:17, endln:6:27
+      \_PackedArrayTypespec: , line:6:4, endln:6:27
       |vpiName:filter_ctl_t
       |vpiFullName:work@adc_ctrl_core.filter_ctl_t
       |vpiActual:
-      \_StructTypespec: (filter_ctl_t), line:2:12, endln:4:5
+      \_TypedefTypespec: (filter_ctl_t), line:4:6, endln:4:18
   |vpiTypedef:
   \_LogicTypespec: , line:7:4, endln:7:15
     |vpiParent:
@@ -886,36 +835,48 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiImportTypespec:
-  \_StructTypespec: (filter_ctl_t), line:2:12, endln:4:5
+  \_TypedefTypespec: (filter_ctl_t), line:4:6, endln:4:18
+  |vpiImportTypespec:
+  \_StructTypespec: , line:2:12, endln:4:5
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:7, endln:3:18
   |vpiImportTypespec:
-  \_PackedArrayTypespec: , line:6:17, endln:6:27
+  \_PackedArrayTypespec: , line:6:4, endln:6:27
   |vpiImportTypespec:
-  \_PackedArrayVar: (work@adc_ctrl_core.a), line:6:28, endln:6:29
+  \_PackedArrayNet: (work@adc_ctrl_core.a), line:6:28, endln:6:29
+    |vpiParent:
+    \_Module: work@adc_ctrl_core (work@adc_ctrl_core), file:${SURELOG_DIR}/tests/SelectSelect/dut.sv, line:1:1, endln:8:10
+    |vpiTypespec:
+    \_RefTypespec: (work@adc_ctrl_core.a.filter_ctl_t), line:6:4, endln:6:27
+      |vpiParent:
+      \_PackedArrayNet: (work@adc_ctrl_core.a), line:6:28, endln:6:29
+      |vpiName:filter_ctl_t
+      |vpiFullName:work@adc_ctrl_core.a.filter_ctl_t
+      |vpiActual:
+      \_PackedArrayTypespec: , line:6:4, endln:6:27
+    |vpiName:a
+    |vpiFullName:work@adc_ctrl_core.a
   |vpiImportTypespec:
   \_LogicTypespec: , line:7:4, endln:7:15
   |vpiImportTypespec:
-  \_LogicVar: (work@adc_ctrl_core.x), line:7:16, endln:7:17
-  |vpiImportTypespec:
-  \_LogicNet: (work@adc_ctrl_core.a[0]), line:7:22, endln:7:23
+  \_LogicNet: (work@adc_ctrl_core.x), line:7:16, endln:7:17
     |vpiParent:
     \_Module: work@adc_ctrl_core (work@adc_ctrl_core), file:${SURELOG_DIR}/tests/SelectSelect/dut.sv, line:1:1, endln:8:10
-    |vpiName:a[0]
-    |vpiFullName:work@adc_ctrl_core.a[0]
-    |vpiNetType:1
-  |vpiImportTypespec:
-  \_LogicNet: (work@adc_ctrl_core.min_v), line:7:28, endln:7:33
-    |vpiParent:
-    \_Module: work@adc_ctrl_core (work@adc_ctrl_core), file:${SURELOG_DIR}/tests/SelectSelect/dut.sv, line:1:1, endln:8:10
-    |vpiName:min_v
-    |vpiFullName:work@adc_ctrl_core.min_v
-    |vpiNetType:1
+    |vpiTypespec:
+    \_RefTypespec: (work@adc_ctrl_core.x), line:7:4, endln:7:15
+      |vpiParent:
+      \_LogicNet: (work@adc_ctrl_core.x), line:7:16, endln:7:17
+      |vpiFullName:work@adc_ctrl_core.x
+      |vpiActual:
+      \_LogicTypespec: , line:7:4, endln:7:15
+    |vpiName:x
+    |vpiFullName:work@adc_ctrl_core.x
+    |vpiNetType:36
   |vpiDefName:work@adc_ctrl_core
   |vpiNet:
-  \_LogicNet: (work@adc_ctrl_core.a[0]), line:7:22, endln:7:23
+  \_PackedArrayNet: (work@adc_ctrl_core.a), line:6:28, endln:6:29
   |vpiNet:
-  \_LogicNet: (work@adc_ctrl_core.min_v), line:7:28, endln:7:33
+  \_LogicNet: (work@adc_ctrl_core.x), line:7:16, endln:7:17
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

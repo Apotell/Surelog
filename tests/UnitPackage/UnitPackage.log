@@ -729,8 +729,8 @@ Constant                                              27
 DelayControl                                           3
 Design                                                 1
 EnumConst                                              7
+EnumNet                                                1
 EnumTypespec                                           2
-EnumVar                                                1
 FuncCall                                               2
 Function                                              11
 GenIf                                                  1
@@ -746,17 +746,19 @@ Module                                                 1
 ModuleTypespec                                         1
 Operation                                              4
 Package                                                3
+PackedArrayTypespec                                    2
 ParamAssign                                            1
 Parameter                                              1
 Range                                                  2
 RefModule                                              1
 RefObj                                                21
-RefTypespec                                           29
+RefTypespec                                           34
 StringTypespec                                         6
 StructTypespec                                         1
 SysFuncCall                                           11
 Task                                                  14
 TaskCall                                               6
+TypedefTypespec                                        3
 TypespecMember                                         3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnitPackage/slpp_unit/surelog.uhdm ...
@@ -1026,7 +1028,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -1060,14 +1062,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/UnitPackage/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -1075,7 +1076,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -1083,7 +1084,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -1091,7 +1092,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -1099,13 +1100,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/UnitPackage/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1329,14 +1344,13 @@ Design: (unnamed)
     |vpiLhs:
     \_Parameter: (definesPkg::SIZE), line:8:13, endln:8:21
   |vpiTypedef:
-  \_EnumTypespec: (definesPkg::bool), line:10:11, endln:10:35
+  \_EnumTypespec: , line:10:11, endln:10:35
     |vpiParent:
     \_Package: definesPkg (definesPkg), file:${SURELOG_DIR}/tests/UnitPackage/definesPkg.pkg, line:4:1, endln:17:11
-    |vpiName:definesPkg::bool
     |vpiEnumConst:
     \_EnumConst: (FALSE), line:10:18, endln:10:23
       |vpiParent:
-      \_EnumTypespec: (definesPkg::bool), line:10:11, endln:10:35
+      \_EnumTypespec: , line:10:11, endln:10:35
       |vpiName:FALSE
       |INT:0
       |vpiDecompile:0
@@ -1344,63 +1358,86 @@ Design: (unnamed)
     |vpiEnumConst:
     \_EnumConst: (TRUE), line:10:25, endln:10:29
       |vpiParent:
-      \_EnumTypespec: (definesPkg::bool), line:10:11, endln:10:35
+      \_EnumTypespec: , line:10:11, endln:10:35
       |vpiName:TRUE
       |INT:1
       |vpiDecompile:1
       |vpiSize:64
   |vpiTypedef:
-  \_StructTypespec: (definesPkg::mem_s), line:11:11, endln:15:4
+  \_TypedefTypespec: (definesPkg::bool), line:10:31, endln:10:35
+    |vpiParent:
+    \_Package: definesPkg (definesPkg), file:${SURELOG_DIR}/tests/UnitPackage/definesPkg.pkg, line:4:1, endln:17:11
+    |vpiName:definesPkg::bool
+    |vpiTypedefAlias:
+    \_RefTypespec: (definesPkg::bool), line:10:11, endln:10:30
+      |vpiParent:
+      \_TypedefTypespec: (definesPkg::bool), line:10:31, endln:10:35
+      |vpiFullName:definesPkg::bool
+      |vpiActual:
+      \_EnumTypespec: , line:10:11, endln:10:35
+  |vpiTypedef:
+  \_TypedefTypespec: (definesPkg::mem_s), line:15:5, endln:15:10
     |vpiParent:
     \_Package: definesPkg (definesPkg), file:${SURELOG_DIR}/tests/UnitPackage/definesPkg.pkg, line:4:1, endln:17:11
     |vpiName:definesPkg::mem_s
+    |vpiTypedefAlias:
+    \_RefTypespec: (definesPkg::mem_s), line:11:11, endln:15:4
+      |vpiParent:
+      \_TypedefTypespec: (definesPkg::mem_s), line:15:5, endln:15:10
+      |vpiFullName:definesPkg::mem_s
+      |vpiActual:
+      \_StructTypespec: , line:11:11, endln:15:4
+  |vpiTypedef:
+  \_StructTypespec: , line:11:11, endln:15:4
+    |vpiParent:
+    \_Package: definesPkg (definesPkg), file:${SURELOG_DIR}/tests/UnitPackage/definesPkg.pkg, line:4:1, endln:17:11
     |vpiTypespecMember:
     \_TypespecMember: (addr), line:12:20, endln:12:24
       |vpiParent:
-      \_StructTypespec: (definesPkg::mem_s), line:11:11, endln:15:4
+      \_StructTypespec: , line:11:11, endln:15:4
       |vpiName:addr
       |vpiTypespec:
-      \_RefTypespec: (definesPkg::mem_s::addr::bit), line:12:6, endln:12:17
+      \_RefTypespec: (definesPkg::addr::bit), line:12:6, endln:12:17
         |vpiParent:
         \_TypespecMember: (addr), line:12:20, endln:12:24
         |vpiName:bit
-        |vpiFullName:definesPkg::mem_s::addr::bit
+        |vpiFullName:definesPkg::addr::bit
         |vpiActual:
-        \_BitTypespec: , line:12:6, endln:12:17
+        \_PackedArrayTypespec: , line:12:6, endln:12:17
     |vpiTypespecMember:
     \_TypespecMember: (data), line:13:20, endln:13:24
       |vpiParent:
-      \_StructTypespec: (definesPkg::mem_s), line:11:11, endln:15:4
+      \_StructTypespec: , line:11:11, endln:15:4
       |vpiName:data
       |vpiTypespec:
-      \_RefTypespec: (definesPkg::mem_s::data::bit), line:13:6, endln:13:17
+      \_RefTypespec: (definesPkg::data::bit), line:13:6, endln:13:17
         |vpiParent:
         \_TypespecMember: (data), line:13:20, endln:13:24
         |vpiName:bit
-        |vpiFullName:definesPkg::mem_s::data::bit
+        |vpiFullName:definesPkg::data::bit
         |vpiActual:
-        \_BitTypespec: , line:13:6, endln:13:17
+        \_PackedArrayTypespec: , line:13:6, endln:13:17
     |vpiTypespecMember:
     \_TypespecMember: (wr), line:14:20, endln:14:22
       |vpiParent:
-      \_StructTypespec: (definesPkg::mem_s), line:11:11, endln:15:4
+      \_StructTypespec: , line:11:11, endln:15:4
       |vpiName:wr
       |vpiTypespec:
-      \_RefTypespec: (definesPkg::mem_s::wr::bit), line:14:6, endln:14:9
+      \_RefTypespec: (definesPkg::wr::bit), line:14:6, endln:14:9
         |vpiParent:
         \_TypespecMember: (wr), line:14:20, endln:14:22
         |vpiName:bit
-        |vpiFullName:definesPkg::mem_s::wr::bit
+        |vpiFullName:definesPkg::wr::bit
         |vpiActual:
         \_BitTypespec: , line:14:6, endln:14:9
   |vpiTypedef:
-  \_BitTypespec: , line:12:6, endln:12:17
+  \_PackedArrayTypespec: , line:12:6, endln:12:17
     |vpiParent:
     \_Package: definesPkg (definesPkg), file:${SURELOG_DIR}/tests/UnitPackage/definesPkg.pkg, line:4:1, endln:17:11
     |vpiRange:
     \_Range: , line:12:12, endln:12:17
       |vpiParent:
-      \_BitTypespec: , line:12:6, endln:12:17
+      \_PackedArrayTypespec: , line:12:6, endln:12:17
       |vpiLeftRange:
       \_Constant: , line:12:13, endln:12:14
         |vpiParent:
@@ -1417,14 +1454,21 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (definesPkg), line:12:6, endln:12:9
+      |vpiParent:
+      \_PackedArrayTypespec: , line:12:6, endln:12:17
+      |vpiFullName:definesPkg
+      |vpiActual:
+      \_BitTypespec: , line:12:6, endln:12:9
   |vpiTypedef:
-  \_BitTypespec: , line:13:6, endln:13:17
+  \_PackedArrayTypespec: , line:13:6, endln:13:17
     |vpiParent:
     \_Package: definesPkg (definesPkg), file:${SURELOG_DIR}/tests/UnitPackage/definesPkg.pkg, line:4:1, endln:17:11
     |vpiRange:
     \_Range: , line:13:12, endln:13:17
       |vpiParent:
-      \_BitTypespec: , line:13:6, endln:13:17
+      \_PackedArrayTypespec: , line:13:6, endln:13:17
       |vpiLeftRange:
       \_Constant: , line:13:13, endln:13:14
         |vpiParent:
@@ -1441,18 +1485,29 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (definesPkg), line:13:6, endln:13:9
+      |vpiParent:
+      \_PackedArrayTypespec: , line:13:6, endln:13:17
+      |vpiFullName:definesPkg
+      |vpiActual:
+      \_BitTypespec: , line:13:6, endln:13:9
   |vpiTypedef:
   \_BitTypespec: , line:14:6, endln:14:9
     |vpiParent:
     \_Package: definesPkg (definesPkg), file:${SURELOG_DIR}/tests/UnitPackage/definesPkg.pkg, line:4:1, endln:17:11
   |vpiImportTypespec:
-  \_EnumTypespec: (definesPkg::bool), line:10:11, endln:10:35
+  \_EnumTypespec: , line:10:11, endln:10:35
   |vpiImportTypespec:
-  \_StructTypespec: (definesPkg::mem_s), line:11:11, endln:15:4
+  \_TypedefTypespec: (definesPkg::bool), line:10:31, endln:10:35
   |vpiImportTypespec:
-  \_BitTypespec: , line:12:6, endln:12:17
+  \_TypedefTypespec: (definesPkg::mem_s), line:15:5, endln:15:10
   |vpiImportTypespec:
-  \_BitTypespec: , line:13:6, endln:13:17
+  \_StructTypespec: , line:11:11, endln:15:4
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:12:6, endln:12:17
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:13:6, endln:13:17
   |vpiImportTypespec:
   \_BitTypespec: , line:14:6, endln:14:9
   |vpiDefName:definesPkg
@@ -2092,21 +2147,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@simple_package
-  |vpiVariables:
-  \_EnumVar: (work@simple_package.value), line:13:8, endln:13:13
-    |vpiParent:
-    \_Module: work@simple_package (work@simple_package), file:${SURELOG_DIR}/tests/UnitPackage/simple_pkg.sv, line:11:1, endln:30:10
-    |vpiTypespec:
-    \_RefTypespec: (work@simple_package.value.bool), line:13:1, endln:13:5
-      |vpiParent:
-      \_EnumVar: (work@simple_package.value), line:13:8, endln:13:13
-      |vpiName:bool
-      |vpiFullName:work@simple_package.value.bool
-      |vpiActual:
-      \_EnumTypespec: (definesPkg::bool), line:10:11, endln:10:35
-    |vpiName:value
-    |vpiFullName:work@simple_package.value
-    |vpiVisibility:1
   |vpiInternalScope:
   \_Begin: (work@simple_package.inst), line:15:15, endln:17:6
     |vpiParent:
@@ -2127,7 +2167,19 @@ Design: (unnamed)
       |vpiName:u1
       |vpiDefName:work@M1
   |vpiImportTypespec:
-  \_EnumVar: (work@simple_package.value), line:13:8, endln:13:13
+  \_EnumNet: (work@simple_package.value), line:13:8, endln:13:13
+    |vpiParent:
+    \_Module: work@simple_package (work@simple_package), file:${SURELOG_DIR}/tests/UnitPackage/simple_pkg.sv, line:11:1, endln:30:10
+    |vpiTypespec:
+    \_RefTypespec: (work@simple_package.value.bool), line:13:1, endln:13:5
+      |vpiParent:
+      \_EnumNet: (work@simple_package.value), line:13:8, endln:13:13
+      |vpiName:bool
+      |vpiFullName:work@simple_package.value.bool
+      |vpiActual:
+      \_TypedefTypespec: (definesPkg::bool), line:10:31, endln:10:35
+    |vpiName:value
+    |vpiFullName:work@simple_package.value
   |vpiImportTypespec:
   \_LogicNet: (work@simple_package.SIZE), line:15:5, endln:15:9
     |vpiParent:
@@ -2136,6 +2188,8 @@ Design: (unnamed)
     |vpiFullName:work@simple_package.SIZE
     |vpiNetType:1
   |vpiDefName:work@simple_package
+  |vpiNet:
+  \_EnumNet: (work@simple_package.value), line:13:8, endln:13:13
   |vpiNet:
   \_LogicNet: (work@simple_package.SIZE), line:15:5, endln:15:9
   |vpiProcess:
@@ -2275,7 +2329,7 @@ Design: (unnamed)
             |vpiName:value
             |vpiFullName:work@simple_package.value
             |vpiActual:
-            \_EnumVar: (work@simple_package.value), line:13:8, endln:13:13
+            \_EnumNet: (work@simple_package.value), line:13:8, endln:13:13
           |vpiOperand:
           \_Constant: , line:26:28, endln:26:32
             |vpiParent:
@@ -2357,6 +2411,9 @@ Design: (unnamed)
     |vpiSize:32
     |STRING:bool
     |vpiConstType:8
+\_weaklyReferenced:
+\_BitTypespec: , line:12:6, endln:12:9
+\_BitTypespec: , line:13:6, endln:13:9
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

@@ -110,15 +110,16 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 BitTypespec                                            1
-BitVar                                                 1
-Constant                                              12
+Constant                                               6
 Design                                                 1
 LogicNet                                               2
 LogicTypespec                                          2
 Module                                                 1
-PackedArrayTypespec                                    3
-Range                                                  6
-RefTypespec                                            3
+PackedArrayNet                                         1
+PackedArrayTypespec                                    1
+Range                                                  3
+RefTypespec                                            7
+TypedefTypespec                                        3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LogicTypedef/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -130,29 +131,14 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@test
-  |vpiVariables:
-  \_BitVar: (work@test.bitn), line:9:18, endln:9:22
-    |vpiParent:
-    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/LogicTypedef/dut.sv, line:1:1, endln:11:10
-    |vpiTypespec:
-    \_RefTypespec: (work@test.bitn.bit_two_bits), line:9:5, endln:9:17
-      |vpiParent:
-      \_BitVar: (work@test.bitn), line:9:18, endln:9:22
-      |vpiName:bit_two_bits
-      |vpiFullName:work@test.bitn.bit_two_bits
-      |vpiActual:
-      \_BitTypespec: (bit_two_bits), line:8:13, endln:8:22
-    |vpiName:bitn
-    |vpiFullName:work@test.bitn
-    |vpiVisibility:1
   |vpiTypedef:
-  \_PackedArrayTypespec: , line:2:13, endln:2:24
+  \_LogicTypespec: , line:2:13, endln:2:24
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/LogicTypedef/dut.sv, line:1:1, endln:11:10
     |vpiRange:
     \_Range: , line:2:19, endln:2:24
       |vpiParent:
-      \_PackedArrayTypespec: , line:2:13, endln:2:24
+      \_LogicTypespec: , line:2:13, endln:2:24
       |vpiLeftRange:
       \_Constant: , line:2:20, endln:2:21
         |vpiParent:
@@ -170,38 +156,25 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_LogicTypespec: (log_two_bits), line:2:13, endln:2:24
+  \_TypedefTypespec: (log_two_bits), line:2:25, endln:2:37
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/LogicTypedef/dut.sv, line:1:1, endln:11:10
     |vpiName:log_two_bits
-    |vpiRange:
-    \_Range: , line:2:19, endln:2:24
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@test.log_two_bits), line:2:13, endln:2:18
       |vpiParent:
-      \_LogicTypespec: (log_two_bits), line:2:13, endln:2:24
-      |vpiLeftRange:
-      \_Constant: , line:2:20, endln:2:21
-        |vpiParent:
-        \_Range: , line:2:19, endln:2:24
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:2:22, endln:2:23
-        |vpiParent:
-        \_Range: , line:2:19, endln:2:24
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
+      \_TypedefTypespec: (log_two_bits), line:2:25, endln:2:37
+      |vpiFullName:work@test.log_two_bits
+      |vpiActual:
+      \_LogicTypespec: , line:2:13, endln:2:24
   |vpiTypedef:
-  \_PackedArrayTypespec: , line:5:13, endln:5:22
+  \_LogicTypespec: , line:5:13, endln:5:22
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/LogicTypedef/dut.sv, line:1:1, endln:11:10
     |vpiRange:
     \_Range: , line:5:17, endln:5:22
       |vpiParent:
-      \_PackedArrayTypespec: , line:5:13, endln:5:22
+      \_LogicTypespec: , line:5:13, endln:5:22
       |vpiLeftRange:
       \_Constant: , line:5:18, endln:5:19
         |vpiParent:
@@ -219,30 +192,21 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_LogicTypespec: (reg_two_bits), line:5:13, endln:5:22
+  \_TypedefTypespec: (reg_two_bits), line:5:23, endln:5:35
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/LogicTypedef/dut.sv, line:1:1, endln:11:10
     |vpiName:reg_two_bits
-    |vpiRange:
-    \_Range: , line:5:17, endln:5:22
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@test.reg_two_bits), line:5:13, endln:5:16
       |vpiParent:
-      \_LogicTypespec: (reg_two_bits), line:5:13, endln:5:22
-      |vpiLeftRange:
-      \_Constant: , line:5:18, endln:5:19
-        |vpiParent:
-        \_Range: , line:5:17, endln:5:22
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:5:20, endln:5:21
-        |vpiParent:
-        \_Range: , line:5:17, endln:5:22
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
+      \_TypedefTypespec: (reg_two_bits), line:5:23, endln:5:35
+      |vpiFullName:work@test.reg_two_bits
+      |vpiActual:
+      \_LogicTypespec: , line:5:13, endln:5:22
+  |vpiTypedef:
+  \_BitTypespec: , line:8:13, endln:8:16
+    |vpiParent:
+    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/LogicTypedef/dut.sv, line:1:1, endln:11:10
   |vpiTypedef:
   \_PackedArrayTypespec: , line:8:13, endln:8:22
     |vpiParent:
@@ -267,43 +231,39 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@test), line:8:13, endln:8:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:8:13, endln:8:22
+      |vpiFullName:work@test
+      |vpiActual:
+      \_BitTypespec: , line:8:13, endln:8:16
   |vpiTypedef:
-  \_BitTypespec: (bit_two_bits), line:8:13, endln:8:22
+  \_TypedefTypespec: (bit_two_bits), line:8:23, endln:8:35
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/LogicTypedef/dut.sv, line:1:1, endln:11:10
     |vpiName:bit_two_bits
-    |vpiRange:
-    \_Range: , line:8:17, endln:8:22
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@test.bit_two_bits), line:8:13, endln:8:16
       |vpiParent:
-      \_BitTypespec: (bit_two_bits), line:8:13, endln:8:22
-      |vpiLeftRange:
-      \_Constant: , line:8:18, endln:8:19
-        |vpiParent:
-        \_Range: , line:8:17, endln:8:22
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:8:20, endln:8:21
-        |vpiParent:
-        \_Range: , line:8:17, endln:8:22
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
+      \_TypedefTypespec: (bit_two_bits), line:8:23, endln:8:35
+      |vpiFullName:work@test.bit_two_bits
+      |vpiActual:
+      \_PackedArrayTypespec: , line:8:13, endln:8:22
   |vpiImportTypespec:
-  \_PackedArrayTypespec: , line:2:13, endln:2:24
+  \_LogicTypespec: , line:2:13, endln:2:24
   |vpiImportTypespec:
-  \_LogicTypespec: (log_two_bits), line:2:13, endln:2:24
+  \_TypedefTypespec: (log_two_bits), line:2:25, endln:2:37
   |vpiImportTypespec:
-  \_PackedArrayTypespec: , line:5:13, endln:5:22
+  \_LogicTypespec: , line:5:13, endln:5:22
   |vpiImportTypespec:
-  \_LogicTypespec: (reg_two_bits), line:5:13, endln:5:22
+  \_TypedefTypespec: (reg_two_bits), line:5:23, endln:5:35
+  |vpiImportTypespec:
+  \_BitTypespec: , line:8:13, endln:8:16
   |vpiImportTypespec:
   \_PackedArrayTypespec: , line:8:13, endln:8:22
   |vpiImportTypespec:
-  \_BitTypespec: (bit_two_bits), line:8:13, endln:8:22
+  \_TypedefTypespec: (bit_two_bits), line:8:23, endln:8:35
   |vpiImportTypespec:
   \_LogicNet: (work@test.logn), line:3:18, endln:3:22
     |vpiParent:
@@ -315,7 +275,7 @@ Design: (unnamed)
       |vpiName:log_two_bits
       |vpiFullName:work@test.logn.log_two_bits
       |vpiActual:
-      \_LogicTypespec: (log_two_bits), line:2:13, endln:2:24
+      \_TypedefTypespec: (log_two_bits), line:2:25, endln:2:37
     |vpiName:logn
     |vpiFullName:work@test.logn
   |vpiImportTypespec:
@@ -329,16 +289,30 @@ Design: (unnamed)
       |vpiName:reg_two_bits
       |vpiFullName:work@test.regn.reg_two_bits
       |vpiActual:
-      \_LogicTypespec: (reg_two_bits), line:5:13, endln:5:22
+      \_TypedefTypespec: (reg_two_bits), line:5:23, endln:5:35
     |vpiName:regn
     |vpiFullName:work@test.regn
   |vpiImportTypespec:
-  \_BitVar: (work@test.bitn), line:9:18, endln:9:22
+  \_PackedArrayNet: (work@test.bitn), line:9:18, endln:9:22
+    |vpiParent:
+    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/LogicTypedef/dut.sv, line:1:1, endln:11:10
+    |vpiTypespec:
+    \_RefTypespec: (work@test.bitn.bit_two_bits), line:9:5, endln:9:17
+      |vpiParent:
+      \_PackedArrayNet: (work@test.bitn), line:9:18, endln:9:22
+      |vpiName:bit_two_bits
+      |vpiFullName:work@test.bitn.bit_two_bits
+      |vpiActual:
+      \_TypedefTypespec: (bit_two_bits), line:8:23, endln:8:35
+    |vpiName:bitn
+    |vpiFullName:work@test.bitn
   |vpiDefName:work@test
   |vpiNet:
   \_LogicNet: (work@test.logn), line:3:18, endln:3:22
   |vpiNet:
   \_LogicNet: (work@test.regn), line:6:18, endln:6:22
+  |vpiNet:
+  \_PackedArrayNet: (work@test.bitn), line:9:18, endln:9:22
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

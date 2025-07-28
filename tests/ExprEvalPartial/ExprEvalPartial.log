@@ -87,14 +87,14 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/ExprEvalPartial/dut.sv:2:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                               9
+Constant                                               7
 ContAssign                                             1
 Design                                                 1
+LogicNet                                               1
 LogicTypespec                                          1
-LogicVar                                               1
 Module                                                 1
 Operation                                              5
-Range                                                  2
+Range                                                  1
 RefObj                                                 2
 RefTypespec                                            1
 === UHDM Object Stats End ===
@@ -108,22 +108,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@top
-  |vpiVariables:
-  \_LogicVar: (work@top.s1c), line:3:18, endln:3:21
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ExprEvalPartial/dut.sv, line:2:1, endln:5:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.s1c), line:3:5, endln:3:17
-      |vpiParent:
-      \_LogicVar: (work@top.s1c), line:3:18, endln:3:21
-      |vpiFullName:work@top.s1c
-      |vpiActual:
-      \_LogicTypespec: , line:3:5, endln:3:17
-    |vpiName:s1c
-    |vpiFullName:work@top.s1c
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@top.s1c), line:3:18, endln:3:21
   |vpiTypedef:
   \_LogicTypespec: , line:3:5, endln:3:17
     |vpiParent:
@@ -151,7 +135,19 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:5, endln:3:17
   |vpiImportTypespec:
-  \_LogicVar: (work@top.s1c), line:3:18, endln:3:21
+  \_LogicNet: (work@top.s1c), line:3:18, endln:3:21
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ExprEvalPartial/dut.sv, line:2:1, endln:5:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.s1c), line:3:5, endln:3:17
+      |vpiParent:
+      \_LogicNet: (work@top.s1c), line:3:18, endln:3:21
+      |vpiFullName:work@top.s1c
+      |vpiActual:
+      \_LogicTypespec: , line:3:5, endln:3:17
+    |vpiName:s1c
+    |vpiFullName:work@top.s1c
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicNet: (work@top.A), line:4:34, endln:4:35
     |vpiParent:
@@ -160,6 +156,8 @@ Design: (unnamed)
     |vpiFullName:work@top.A
     |vpiNetType:1
   |vpiDefName:work@top
+  |vpiNet:
+  \_LogicNet: (work@top.s1c), line:3:18, endln:3:21
   |vpiNet:
   \_LogicNet: (work@top.A), line:4:34, endln:4:35
   |vpiContAssign:
@@ -246,7 +244,7 @@ Design: (unnamed)
       |vpiName:s1c
       |vpiFullName:work@top.s1c
       |vpiActual:
-      \_LogicVar: (work@top.s1c), line:3:18, endln:3:21
+      \_LogicNet: (work@top.s1c), line:3:18, endln:3:21
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

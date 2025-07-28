@@ -47,16 +47,15 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/UnsizedArray/dut.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+ArrayNet                                               1
 ArrayTypespec                                          1
-ArrayVar                                               1
 ByteTypespec                                           1
-ByteVar                                                1
 Constant                                               5
 Design                                                 1
 Module                                                 2
 Operation                                              1
 Range                                                  1
-RefTypespec                                            3
+RefTypespec                                            2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnsizedArray/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -68,96 +67,44 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@top
-  |vpiVariables:
-  \_ByteVar: (work@top), line:2:9, endln:2:10
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedArray/dut.sv, line:1:1, endln:4:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top), line:2:4, endln:2:8
-      |vpiParent:
-      \_ByteVar: (work@top), line:2:9, endln:2:10
-      |vpiFullName:work@top
-      |vpiActual:
-      \_ByteTypespec: , line:2:4, endln:2:8
-    |vpiFullName:work@top
-    |vpiExpr:
-    \_Operation: , line:2:15, endln:2:24
-      |vpiParent:
-      \_ArrayVar: (work@top.b), line:2:9, endln:2:10
-      |vpiOpType:33
-      |vpiOperand:
-      \_Constant: , line:2:16, endln:2:17
-        |vpiParent:
-        \_Operation: , line:2:15, endln:2:24
-        |vpiDecompile:1
-        |vpiSize:8
-        |UINT:1
-        |vpiConstType:9
-      |vpiOperand:
-      \_Constant: , line:2:19, endln:2:20
-        |vpiParent:
-        \_Operation: , line:2:15, endln:2:24
-        |vpiDecompile:1
-        |vpiSize:8
-        |UINT:1
-        |vpiConstType:9
-      |vpiOperand:
-      \_Constant: , line:2:22, endln:2:23
-        |vpiParent:
-        \_Operation: , line:2:15, endln:2:24
-        |vpiDecompile:1
-        |vpiSize:8
-        |UINT:1
-        |vpiConstType:9
-  |vpiVariables:
-  \_ArrayVar: (work@top.b), line:2:9, endln:2:10
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedArray/dut.sv, line:1:1, endln:4:10
-    |vpiSize:1
-    |vpiTypespec:
-    \_RefTypespec: (work@top.b), line:2:10, endln:2:12
-      |vpiParent:
-      \_ArrayVar: (work@top.b), line:2:9, endln:2:10
-      |vpiFullName:work@top.b
-      |vpiActual:
-      \_ArrayTypespec: , line:2:10, endln:2:12
-    |vpiName:b
-    |vpiFullName:work@top.b
-    |vpiSigned:1
-    |vpiRandType:1
-    |vpiVisibility:1
-    |vpiExpr:
-    \_Operation: , line:2:15, endln:2:24
-    |vpiArrayType:2
-    |vpiReg:
-    \_ByteVar: (work@top), line:2:9, endln:2:10
-  |vpiRegArray:
-  \_ArrayVar: (work@top.b), line:2:9, endln:2:10
   |vpiTypedef:
   \_ByteTypespec: , line:2:4, endln:2:8
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedArray/dut.sv, line:1:1, endln:4:10
     |vpiSigned:1
   |vpiTypedef:
-  \_ArrayTypespec: , line:2:10, endln:2:12
+  \_ArrayTypespec: , line:2:4, endln:2:24
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedArray/dut.sv, line:1:1, endln:4:10
+    |vpiArrayType:2
     |vpiElemTypespec:
     \_RefTypespec: (work@top), line:2:4, endln:2:8
       |vpiParent:
-      \_ArrayTypespec: , line:2:10, endln:2:12
+      \_ArrayTypespec: , line:2:4, endln:2:24
       |vpiFullName:work@top
       |vpiActual:
       \_ByteTypespec: , line:2:4, endln:2:8
   |vpiImportTypespec:
   \_ByteTypespec: , line:2:4, endln:2:8
   |vpiImportTypespec:
-  \_ByteVar: (work@top), line:2:9, endln:2:10
+  \_ArrayTypespec: , line:2:4, endln:2:24
   |vpiImportTypespec:
-  \_ArrayVar: (work@top.b), line:2:9, endln:2:10
-  |vpiImportTypespec:
-  \_ArrayTypespec: , line:2:10, endln:2:12
+  \_ArrayNet: (work@top.b), line:2:9, endln:2:10
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnsizedArray/dut.sv, line:1:1, endln:4:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.b), line:2:4, endln:2:8
+      |vpiParent:
+      \_ArrayNet: (work@top.b), line:2:9, endln:2:10
+      |vpiFullName:work@top.b
+      |vpiActual:
+      \_ArrayTypespec: , line:2:4, endln:2:24
+    |vpiName:b
+    |vpiFullName:work@top.b
+    |vpiSigned:1
   |vpiDefName:work@top
+  |vpiArrayNet:
+  \_ArrayNet: (work@top.b), line:2:9, endln:2:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

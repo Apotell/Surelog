@@ -106,14 +106,16 @@ LogicTypespec                                          1
 Module                                                 1
 Operation                                              6
 Package                                                1
+PackedArrayTypespec                                    1
 ParamAssign                                            2
 Parameter                                              2
 Range                                                  2
 RefObj                                                 3
-RefTypespec                                            8
+RefTypespec                                           10
 StringTypespec                                         3
 StructTypespec                                         1
 TaggedPattern                                          3
+TypedefTypespec                                        1
 TypespecMember                                         1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ValueSize/slpp_unit/surelog.uhdm ...
@@ -137,7 +139,7 @@ Design: (unnamed)
       \_Parameter: (flash_ctrl_pkg::SeedBank), line:7:24, endln:7:36
       |vpiFullName:flash_ctrl_pkg::SeedBank
       |vpiActual:
-      \_BitTypespec: , line:7:14, endln:7:23
+      \_PackedArrayTypespec: , line:7:14, endln:7:23
     |vpiName:SeedBank
     |vpiFullName:flash_ctrl_pkg::SeedBank
   |vpiParameter:
@@ -151,7 +153,7 @@ Design: (unnamed)
       |vpiName:page_addr_t
       |vpiFullName:flash_ctrl_pkg::SeedInfoPageSel::page_addr_t
       |vpiActual:
-      \_StructTypespec: (flash_ctrl_pkg::page_addr_t), line:3:11, endln:5:4
+      \_TypedefTypespec: (flash_ctrl_pkg::page_addr_t), line:5:5, endln:5:16
     |vpiName:SeedInfoPageSel
     |vpiFullName:flash_ctrl_pkg::SeedInfoPageSel
   |vpiParamAssign:
@@ -209,25 +211,36 @@ Design: (unnamed)
           |vpiName:addr
           |vpiFullName:flash_ctrl_pkg::addr
           |vpiActual:
-          \_StringTypespec: (addr), line:9:7, endln:9:11
+          \_StringTypespec: , line:9:7, endln:9:11
     |vpiLhs:
     \_Parameter: (flash_ctrl_pkg::SeedInfoPageSel), line:8:26, endln:10:5
   |vpiTypedef:
-  \_StructTypespec: (flash_ctrl_pkg::page_addr_t), line:3:11, endln:5:4
+  \_TypedefTypespec: (flash_ctrl_pkg::page_addr_t), line:5:5, endln:5:16
     |vpiParent:
     \_Package: flash_ctrl_pkg (flash_ctrl_pkg), file:${SURELOG_DIR}/tests/ValueSize/dut.sv, line:1:1, endln:12:11
     |vpiName:flash_ctrl_pkg::page_addr_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (flash_ctrl_pkg::page_addr_t), line:3:11, endln:5:4
+      |vpiParent:
+      \_TypedefTypespec: (flash_ctrl_pkg::page_addr_t), line:5:5, endln:5:16
+      |vpiFullName:flash_ctrl_pkg::page_addr_t
+      |vpiActual:
+      \_StructTypespec: , line:3:11, endln:5:4
+  |vpiTypedef:
+  \_StructTypespec: , line:3:11, endln:5:4
+    |vpiParent:
+    \_Package: flash_ctrl_pkg (flash_ctrl_pkg), file:${SURELOG_DIR}/tests/ValueSize/dut.sv, line:1:1, endln:12:11
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (addr), line:4:18, endln:4:22
       |vpiParent:
-      \_StructTypespec: (flash_ctrl_pkg::page_addr_t), line:3:11, endln:5:4
+      \_StructTypespec: , line:3:11, endln:5:4
       |vpiName:addr
       |vpiTypespec:
-      \_RefTypespec: (flash_ctrl_pkg::page_addr_t::addr), line:4:6, endln:4:17
+      \_RefTypespec: (flash_ctrl_pkg::addr), line:4:6, endln:4:17
         |vpiParent:
         \_TypespecMember: (addr), line:4:18, endln:4:22
-        |vpiFullName:flash_ctrl_pkg::page_addr_t::addr
+        |vpiFullName:flash_ctrl_pkg::addr
         |vpiActual:
         \_LogicTypespec: , line:4:6, endln:4:17
   |vpiTypedef:
@@ -255,13 +268,17 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_BitTypespec: , line:7:14, endln:7:23
+  \_BitTypespec: , line:7:14, endln:7:17
+    |vpiParent:
+    \_Package: flash_ctrl_pkg (flash_ctrl_pkg), file:${SURELOG_DIR}/tests/ValueSize/dut.sv, line:1:1, endln:12:11
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:7:14, endln:7:23
     |vpiParent:
     \_Package: flash_ctrl_pkg (flash_ctrl_pkg), file:${SURELOG_DIR}/tests/ValueSize/dut.sv, line:1:1, endln:12:11
     |vpiRange:
     \_Range: , line:7:18, endln:7:23
       |vpiParent:
-      \_BitTypespec: , line:7:14, endln:7:23
+      \_PackedArrayTypespec: , line:7:14, endln:7:23
       |vpiLeftRange:
       \_Constant: , line:7:19, endln:7:20
         |vpiParent:
@@ -278,33 +295,41 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (flash_ctrl_pkg), line:7:14, endln:7:17
+      |vpiParent:
+      \_PackedArrayTypespec: , line:7:14, endln:7:23
+      |vpiFullName:flash_ctrl_pkg
+      |vpiActual:
+      \_BitTypespec: , line:7:14, endln:7:17
   |vpiTypedef:
-  \_StringTypespec: (addr), line:9:7, endln:9:11
+  \_StringTypespec: , line:9:7, endln:9:11
     |vpiParent:
     \_Package: flash_ctrl_pkg (flash_ctrl_pkg), file:${SURELOG_DIR}/tests/ValueSize/dut.sv, line:1:1, endln:12:11
-    |vpiName:addr
   |vpiTypedef:
-  \_StringTypespec: (addr), line:9:7, endln:9:11
+  \_StringTypespec: , line:9:7, endln:9:11
     |vpiParent:
     \_Package: flash_ctrl_pkg (flash_ctrl_pkg), file:${SURELOG_DIR}/tests/ValueSize/dut.sv, line:1:1, endln:12:11
-    |vpiName:addr
   |vpiTypedef:
-  \_StringTypespec: (addr), line:9:7, endln:9:11
+  \_StringTypespec: , line:9:7, endln:9:11
     |vpiParent:
     \_Package: flash_ctrl_pkg (flash_ctrl_pkg), file:${SURELOG_DIR}/tests/ValueSize/dut.sv, line:1:1, endln:12:11
-    |vpiName:addr
   |vpiImportTypespec:
-  \_StructTypespec: (flash_ctrl_pkg::page_addr_t), line:3:11, endln:5:4
+  \_TypedefTypespec: (flash_ctrl_pkg::page_addr_t), line:5:5, endln:5:16
+  |vpiImportTypespec:
+  \_StructTypespec: , line:3:11, endln:5:4
   |vpiImportTypespec:
   \_LogicTypespec: , line:4:6, endln:4:17
   |vpiImportTypespec:
-  \_BitTypespec: , line:7:14, endln:7:23
+  \_BitTypespec: , line:7:14, endln:7:17
   |vpiImportTypespec:
-  \_StringTypespec: (addr), line:9:7, endln:9:11
+  \_PackedArrayTypespec: , line:7:14, endln:7:23
   |vpiImportTypespec:
-  \_StringTypespec: (addr), line:9:7, endln:9:11
+  \_StringTypespec: , line:9:7, endln:9:11
   |vpiImportTypespec:
-  \_StringTypespec: (addr), line:9:7, endln:9:11
+  \_StringTypespec: , line:9:7, endln:9:11
+  |vpiImportTypespec:
+  \_StringTypespec: , line:9:7, endln:9:11
   |vpiDefName:flash_ctrl_pkg
 ===================
 [  FATAL] : 0

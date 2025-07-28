@@ -225,16 +225,17 @@ GenIf                                                  1
 ImportTypespec                                         1
 IntTypespec                                            2
 LogicTypespec                                          1
-Module                                                 3
+Module                                                 4
 ModuleTypespec                                         1
 Operation                                              4
 Package                                                2
+PackedArrayTypespec                                    1
 ParamAssign                                            5
 Parameter                                              5
 Range                                                  2
 RefModule                                              1
 RefObj                                                13
-RefTypespec                                            6
+RefTypespec                                            7
 RefVar                                                 1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LogicArrayParam/slpp_all/surelog.uhdm ...
@@ -380,7 +381,7 @@ Design: (unnamed)
       \_Parameter: (alert_pkg::AsyncOn), line:13:32, endln:13:74
       |vpiFullName:alert_pkg::AsyncOn
       |vpiActual:
-      \_BitTypespec: , line:13:14, endln:13:31
+      \_PackedArrayTypespec: , line:13:14, endln:13:31
     |vpiLocalParam:1
     |vpiName:AsyncOn
     |vpiFullName:alert_pkg::AsyncOn
@@ -417,13 +418,17 @@ Design: (unnamed)
     |vpiParent:
     \_Package: alert_pkg (alert_pkg), file:${SURELOG_DIR}/tests/LogicArrayParam/dut.sv, line:9:1, endln:15:11
   |vpiTypedef:
-  \_BitTypespec: , line:13:14, endln:13:31
+  \_BitTypespec: , line:13:14, endln:13:17
+    |vpiParent:
+    \_Package: alert_pkg (alert_pkg), file:${SURELOG_DIR}/tests/LogicArrayParam/dut.sv, line:9:1, endln:15:11
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:13:14, endln:13:31
     |vpiParent:
     \_Package: alert_pkg (alert_pkg), file:${SURELOG_DIR}/tests/LogicArrayParam/dut.sv, line:9:1, endln:15:11
     |vpiRange:
     \_Range: , line:13:18, endln:13:31
       |vpiParent:
-      \_BitTypespec: , line:13:14, endln:13:31
+      \_PackedArrayTypespec: , line:13:14, endln:13:31
       |vpiLeftRange:
       \_Operation: , line:13:19, endln:13:28
         |vpiParent:
@@ -453,10 +458,19 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (alert_pkg), line:13:14, endln:13:17
+      |vpiParent:
+      \_PackedArrayTypespec: , line:13:14, endln:13:31
+      |vpiFullName:alert_pkg
+      |vpiActual:
+      \_BitTypespec: , line:13:14, endln:13:17
   |vpiImportTypespec:
   \_IntTypespec: , line:12:14, endln:12:26
   |vpiImportTypespec:
-  \_BitTypespec: , line:13:14, endln:13:31
+  \_BitTypespec: , line:13:14, endln:13:17
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:13:14, endln:13:31
   |vpiDefName:alert_pkg
 |vpiAllModules:
 \_Module: work@M (work@M), file:${SURELOG_DIR}/tests/LogicArrayParam/dut.sv, line:17:1, endln:18:10

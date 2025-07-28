@@ -205,18 +205,19 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+ArrayNet                                               1
 ArrayTypespec                                          3
-Constant                                              18
+Constant                                              16
 Design                                                 1
 EnumConst                                              3
 EnumTypespec                                           1
 IntTypespec                                            1
-LogicNet                                               1
 LogicTypespec                                          2
 Module                                                 2
-PackedArrayTypespec                                    4
-Range                                                  9
-RefTypespec                                            4
+PackedArrayTypespec                                    3
+Range                                                  8
+RefTypespec                                           14
+TypedefTypespec                                        6
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnpackedTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -229,14 +230,19 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:work@top
   |vpiTypedef:
-  \_ArrayTypespec: (triple), line:4:15, endln:4:27
+  \_IntTypespec: , line:4:11, endln:4:14
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv, line:1:1, endln:23:10
-    |vpiName:triple
+    |vpiSigned:1
+  |vpiTypedef:
+  \_ArrayTypespec: , line:4:11, endln:4:27
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv, line:1:1, endln:23:10
+    |vpiArrayType:1
     |vpiRange:
     \_Range: , line:4:22, endln:4:27
       |vpiParent:
-      \_ArrayTypespec: (triple), line:4:15, endln:4:27
+      \_ArrayTypespec: , line:4:11, endln:4:27
       |vpiLeftRange:
       \_Constant: , line:4:23, endln:4:24
         |vpiParent:
@@ -254,73 +260,24 @@ Design: (unnamed)
         |UINT:3
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (work@top.triple), line:4:11, endln:4:14
+    \_RefTypespec: (work@top), line:4:11, endln:4:14
       |vpiParent:
-      \_ArrayTypespec: (triple), line:4:15, endln:4:27
-      |vpiFullName:work@top.triple
+      \_ArrayTypespec: , line:4:11, endln:4:27
+      |vpiFullName:work@top
       |vpiActual:
       \_IntTypespec: , line:4:11, endln:4:14
   |vpiTypedef:
-  \_IntTypespec: , line:4:11, endln:4:14
+  \_TypedefTypespec: (triple), line:4:15, endln:4:21
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv, line:1:1, endln:23:10
-    |vpiSigned:1
-  |vpiTypedef:
-  \_ArrayTypespec: (logic_7_0_t), line:7:23, endln:7:40
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv, line:1:1, endln:23:10
-    |vpiName:logic_7_0_t
-    |vpiRange:
-    \_Range: , line:7:35, endln:7:40
+    |vpiName:triple
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@top.triple), line:4:11, endln:4:14
       |vpiParent:
-      \_ArrayTypespec: (logic_7_0_t), line:7:23, endln:7:40
-      |vpiLeftRange:
-      \_Constant: , line:7:36, endln:7:37
-        |vpiParent:
-        \_Range: , line:7:35, endln:7:40
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:7:38, endln:7:39
-        |vpiParent:
-        \_Range: , line:7:35, endln:7:40
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-    |vpiElemTypespec:
-    \_RefTypespec: (work@top.logic_7_0_t), line:7:11, endln:7:22
-      |vpiParent:
-      \_ArrayTypespec: (logic_7_0_t), line:7:23, endln:7:40
-      |vpiFullName:work@top.logic_7_0_t
+      \_TypedefTypespec: (triple), line:4:15, endln:4:21
+      |vpiFullName:work@top.triple
       |vpiActual:
-      \_LogicTypespec: , line:7:11, endln:7:22
-  |vpiTypedef:
-  \_PackedArrayTypespec: , line:7:11, endln:7:22
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv, line:1:1, endln:23:10
-    |vpiRange:
-    \_Range: , line:7:17, endln:7:22
-      |vpiParent:
-      \_PackedArrayTypespec: , line:7:11, endln:7:22
-      |vpiLeftRange:
-      \_Constant: , line:7:18, endln:7:19
-        |vpiParent:
-        \_Range: , line:7:17, endln:7:22
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:7:20, endln:7:21
-        |vpiParent:
-        \_Range: , line:7:17, endln:7:22
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
+      \_ArrayTypespec: , line:4:11, endln:4:27
   |vpiTypedef:
   \_LogicTypespec: , line:7:11, endln:7:22
     |vpiParent:
@@ -345,6 +302,85 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_ArrayTypespec: , line:7:11, endln:7:40
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv, line:1:1, endln:23:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:7:35, endln:7:40
+      |vpiParent:
+      \_ArrayTypespec: , line:7:11, endln:7:40
+      |vpiLeftRange:
+      \_Constant: , line:7:36, endln:7:37
+        |vpiParent:
+        \_Range: , line:7:35, endln:7:40
+        |vpiDecompile:7
+        |vpiSize:64
+        |UINT:7
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:7:38, endln:7:39
+        |vpiParent:
+        \_Range: , line:7:35, endln:7:40
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@top), line:7:11, endln:7:22
+      |vpiParent:
+      \_ArrayTypespec: , line:7:11, endln:7:40
+      |vpiFullName:work@top
+      |vpiActual:
+      \_LogicTypespec: , line:7:11, endln:7:22
+  |vpiTypedef:
+  \_TypedefTypespec: (logic_7_0_t), line:7:23, endln:7:34
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv, line:1:1, endln:23:10
+    |vpiName:logic_7_0_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@top.logic_7_0_t), line:7:11, endln:7:16
+      |vpiParent:
+      \_TypedefTypespec: (logic_7_0_t), line:7:23, endln:7:34
+      |vpiFullName:work@top.logic_7_0_t
+      |vpiActual:
+      \_ArrayTypespec: , line:7:11, endln:7:40
+  |vpiTypedef:
+  \_EnumTypespec: , line:10:12, endln:14:16
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv, line:1:1, endln:23:10
+    |vpiBaseTypespec:
+    \_RefTypespec: (work@top), line:10:17, endln:10:28
+      |vpiParent:
+      \_EnumTypespec: , line:10:12, endln:14:16
+      |vpiFullName:work@top
+      |vpiActual:
+      \_LogicTypespec: , line:10:17, endln:10:28
+    |vpiEnumConst:
+    \_EnumConst: (DISABLED), line:11:5, endln:11:13
+      |vpiParent:
+      \_EnumTypespec: , line:10:12, endln:14:16
+      |vpiName:DISABLED
+      |INT:0
+      |vpiDecompile:0
+      |vpiSize:2
+    |vpiEnumConst:
+    \_EnumConst: (PARALLEL), line:12:5, endln:12:13
+      |vpiParent:
+      \_EnumTypespec: , line:10:12, endln:14:16
+      |vpiName:PARALLEL
+      |INT:1
+      |vpiDecompile:1
+      |vpiSize:2
+    |vpiEnumConst:
+    \_EnumConst: (MERGED), line:13:5, endln:13:11
+      |vpiParent:
+      \_EnumTypespec: , line:10:12, endln:14:16
+      |vpiName:MERGED
+      |INT:2
+      |vpiDecompile:2
+      |vpiSize:2
   |vpiTypedef:
   \_LogicTypespec: , line:10:17, endln:10:28
     |vpiParent:
@@ -370,41 +406,29 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_EnumTypespec: (unit_type_t), line:10:12, endln:14:16
+  \_TypedefTypespec: (unit_type_t), line:14:5, endln:14:16
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv, line:1:1, endln:23:10
     |vpiName:unit_type_t
-    |vpiBaseTypespec:
-    \_RefTypespec: (work@top.unit_type_t), line:10:17, endln:10:28
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@top.unit_type_t), line:10:12, endln:14:4
       |vpiParent:
-      \_EnumTypespec: (unit_type_t), line:10:12, endln:14:16
+      \_TypedefTypespec: (unit_type_t), line:14:5, endln:14:16
       |vpiFullName:work@top.unit_type_t
       |vpiActual:
-      \_LogicTypespec: , line:10:17, endln:10:28
-    |vpiEnumConst:
-    \_EnumConst: (DISABLED), line:11:5, endln:11:13
+      \_EnumTypespec: , line:10:12, endln:14:16
+  |vpiTypedef:
+  \_TypedefTypespec: (fmt_unit_types_t), line:16:29, endln:16:45
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv, line:1:1, endln:23:10
+    |vpiName:fmt_unit_types_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@top.fmt_unit_types_t), line:16:11, endln:16:22
       |vpiParent:
-      \_EnumTypespec: (unit_type_t), line:10:12, endln:14:16
-      |vpiName:DISABLED
-      |INT:0
-      |vpiDecompile:0
-      |vpiSize:2
-    |vpiEnumConst:
-    \_EnumConst: (PARALLEL), line:12:5, endln:12:13
-      |vpiParent:
-      \_EnumTypespec: (unit_type_t), line:10:12, endln:14:16
-      |vpiName:PARALLEL
-      |INT:1
-      |vpiDecompile:1
-      |vpiSize:2
-    |vpiEnumConst:
-    \_EnumConst: (MERGED), line:13:5, endln:13:11
-      |vpiParent:
-      \_EnumTypespec: (unit_type_t), line:10:12, endln:14:16
-      |vpiName:MERGED
-      |INT:2
-      |vpiDecompile:2
-      |vpiSize:2
+      \_TypedefTypespec: (fmt_unit_types_t), line:16:29, endln:16:45
+      |vpiFullName:work@top.fmt_unit_types_t
+      |vpiActual:
+      \_PackedArrayTypespec: , line:16:11, endln:16:28
   |vpiTypedef:
   \_PackedArrayTypespec: , line:16:11, endln:16:28
     |vpiParent:
@@ -429,30 +453,26 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:4
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@top.unit_type_t), line:14:5, endln:14:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:16:11, endln:16:28
+      |vpiName:unit_type_t
+      |vpiFullName:work@top.unit_type_t
+      |vpiActual:
+      \_TypedefTypespec: (unit_type_t), line:14:5, endln:14:16
   |vpiTypedef:
-  \_ArrayTypespec: , line:18:29, endln:18:54
+  \_TypedefTypespec: (fmt_unit_types_t_u), line:18:29, endln:18:47
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv, line:1:1, endln:23:10
-    |vpiRange:
-    \_Range: , line:18:49, endln:18:54
+    |vpiName:fmt_unit_types_t_u
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@top.fmt_unit_types_t_u), line:18:11, endln:18:22
       |vpiParent:
-      \_ArrayTypespec: , line:18:29, endln:18:54
-      |vpiLeftRange:
-      \_Constant: , line:18:50, endln:18:51
-        |vpiParent:
-        \_Range: , line:18:49, endln:18:54
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:18:52, endln:18:53
-        |vpiParent:
-        \_Range: , line:18:49, endln:18:54
-        |vpiDecompile:8
-        |vpiSize:64
-        |UINT:8
-        |vpiConstType:9
+      \_TypedefTypespec: (fmt_unit_types_t_u), line:18:29, endln:18:47
+      |vpiFullName:work@top.fmt_unit_types_t_u
+      |vpiActual:
+      \_ArrayTypespec: , line:18:11, endln:18:54
   |vpiTypedef:
   \_PackedArrayTypespec: , line:18:11, endln:18:28
     |vpiParent:
@@ -477,6 +497,58 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:4
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@top.unit_type_t), line:18:23, endln:18:28
+      |vpiParent:
+      \_PackedArrayTypespec: , line:18:11, endln:18:28
+      |vpiName:unit_type_t
+      |vpiFullName:work@top.unit_type_t
+      |vpiActual:
+      \_TypedefTypespec: (unit_type_t), line:14:5, endln:14:16
+  |vpiTypedef:
+  \_ArrayTypespec: , line:18:11, endln:18:54
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv, line:1:1, endln:23:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:18:49, endln:18:54
+      |vpiParent:
+      \_ArrayTypespec: , line:18:11, endln:18:54
+      |vpiLeftRange:
+      \_Constant: , line:18:50, endln:18:51
+        |vpiParent:
+        \_Range: , line:18:49, endln:18:54
+        |vpiDecompile:7
+        |vpiSize:64
+        |UINT:7
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:18:52, endln:18:53
+        |vpiParent:
+        \_Range: , line:18:49, endln:18:54
+        |vpiDecompile:8
+        |vpiSize:64
+        |UINT:8
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@top), line:18:11, endln:18:28
+      |vpiParent:
+      \_ArrayTypespec: , line:18:11, endln:18:54
+      |vpiFullName:work@top
+      |vpiActual:
+      \_PackedArrayTypespec: , line:18:11, endln:18:28
+  |vpiTypedef:
+  \_TypedefTypespec: (opgrp_fmt_unit_types_t), line:21:34, endln:21:56
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv, line:1:1, endln:23:10
+    |vpiName:opgrp_fmt_unit_types_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@top.opgrp_fmt_unit_types_t), line:21:11, endln:21:27
+      |vpiParent:
+      \_TypedefTypespec: (opgrp_fmt_unit_types_t), line:21:34, endln:21:56
+      |vpiFullName:work@top.opgrp_fmt_unit_types_t
+      |vpiActual:
+      \_PackedArrayTypespec: , line:21:11, endln:21:33
   |vpiTypedef:
   \_PackedArrayTypespec: , line:21:11, endln:21:33
     |vpiParent:
@@ -501,45 +573,63 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:1
         |vpiConstType:9
-  |vpiImportTypespec:
-  \_ArrayTypespec: (triple), line:4:15, endln:4:27
+    |vpiElemTypespec:
+    \_RefTypespec: (work@top.fmt_unit_types_t), line:16:29, endln:16:45
+      |vpiParent:
+      \_PackedArrayTypespec: , line:21:11, endln:21:33
+      |vpiName:fmt_unit_types_t
+      |vpiFullName:work@top.fmt_unit_types_t
+      |vpiActual:
+      \_TypedefTypespec: (fmt_unit_types_t), line:16:29, endln:16:45
   |vpiImportTypespec:
   \_IntTypespec: , line:4:11, endln:4:14
   |vpiImportTypespec:
-  \_ArrayTypespec: (logic_7_0_t), line:7:23, endln:7:40
+  \_ArrayTypespec: , line:4:11, endln:4:27
   |vpiImportTypespec:
-  \_PackedArrayTypespec: , line:7:11, endln:7:22
+  \_TypedefTypespec: (triple), line:4:15, endln:4:21
   |vpiImportTypespec:
   \_LogicTypespec: , line:7:11, endln:7:22
   |vpiImportTypespec:
+  \_ArrayTypespec: , line:7:11, endln:7:40
+  |vpiImportTypespec:
+  \_TypedefTypespec: (logic_7_0_t), line:7:23, endln:7:34
+  |vpiImportTypespec:
+  \_EnumTypespec: , line:10:12, endln:14:16
+  |vpiImportTypespec:
   \_LogicTypespec: , line:10:17, endln:10:28
   |vpiImportTypespec:
-  \_EnumTypespec: (unit_type_t), line:10:12, endln:14:16
+  \_TypedefTypespec: (unit_type_t), line:14:5, endln:14:16
+  |vpiImportTypespec:
+  \_TypedefTypespec: (fmt_unit_types_t), line:16:29, endln:16:45
   |vpiImportTypespec:
   \_PackedArrayTypespec: , line:16:11, endln:16:28
   |vpiImportTypespec:
-  \_ArrayTypespec: , line:18:29, endln:18:54
+  \_TypedefTypespec: (fmt_unit_types_t_u), line:18:29, endln:18:47
   |vpiImportTypespec:
   \_PackedArrayTypespec: , line:18:11, endln:18:28
   |vpiImportTypespec:
+  \_ArrayTypespec: , line:18:11, endln:18:54
+  |vpiImportTypespec:
+  \_TypedefTypespec: (opgrp_fmt_unit_types_t), line:21:34, endln:21:56
+  |vpiImportTypespec:
   \_PackedArrayTypespec: , line:21:11, endln:21:33
   |vpiImportTypespec:
-  \_LogicNet: (work@top.b), line:5:10, endln:5:11
+  \_ArrayNet: (work@top.b), line:5:10, endln:5:11
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnpackedTypespec/dut.sv, line:1:1, endln:23:10
     |vpiTypespec:
     \_RefTypespec: (work@top.b.triple), line:5:3, endln:5:9
       |vpiParent:
-      \_LogicNet: (work@top.b), line:5:10, endln:5:11
+      \_ArrayNet: (work@top.b), line:5:10, endln:5:11
       |vpiName:triple
       |vpiFullName:work@top.b.triple
       |vpiActual:
-      \_ArrayTypespec: (triple), line:4:15, endln:4:27
+      \_TypedefTypespec: (triple), line:4:15, endln:4:21
     |vpiName:b
     |vpiFullName:work@top.b
   |vpiDefName:work@top
-  |vpiNet:
-  \_LogicNet: (work@top.b), line:5:10, endln:5:11
+  |vpiArrayNet:
+  \_ArrayNet: (work@top.b), line:5:10, endln:5:11
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

@@ -249,9 +249,10 @@ Port                                                   3
 Range                                                  5
 RefModule                                              1
 RefObj                                                 9
-RefTypespec                                           23
+RefTypespec                                           25
 StructTypespec                                         2
 Task                                                   9
+TypedefTypespec                                        2
 TypespecMember                                         2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PreprocUhdmCov/slpp_all/surelog.uhdm ...
@@ -521,7 +522,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -555,14 +556,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/PreprocUhdmCov/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -570,7 +570,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -578,7 +578,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -586,7 +586,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -594,13 +594,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/PreprocUhdmCov/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -949,21 +963,32 @@ Design: (unnamed)
     |vpiStmt:
     \_Begin: (work@top.prince_shiftrows_32bit)
   |vpiTypedef:
-  \_StructTypespec: (spi_device_reg2hw_intr_enable_reg_t), line:38:9, endln:43:5
+  \_TypedefTypespec: (spi_device_reg2hw_intr_enable_reg_t), line:43:6, endln:43:41
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PreprocUhdmCov/dut.sv, line:4:1, endln:50:17
     |vpiName:spi_device_reg2hw_intr_enable_reg_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@top.spi_device_reg2hw_intr_enable_reg_t), line:38:9, endln:43:5
+      |vpiParent:
+      \_TypedefTypespec: (spi_device_reg2hw_intr_enable_reg_t), line:43:6, endln:43:41
+      |vpiFullName:work@top.spi_device_reg2hw_intr_enable_reg_t
+      |vpiActual:
+      \_StructTypespec: , line:38:9, endln:43:5
+  |vpiTypedef:
+  \_StructTypespec: , line:38:9, endln:43:5
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PreprocUhdmCov/dut.sv, line:4:1, endln:50:17
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (txunderflow), line:42:10, endln:42:21
       |vpiParent:
-      \_StructTypespec: (spi_device_reg2hw_intr_enable_reg_t), line:38:9, endln:43:5
+      \_StructTypespec: , line:38:9, endln:43:5
       |vpiName:txunderflow
       |vpiTypespec:
-      \_RefTypespec: (work@top.spi_device_reg2hw_intr_enable_reg_t.txunderflow), line:40:2, endln:42:9
+      \_RefTypespec: (work@top.txunderflow), line:40:2, endln:42:9
         |vpiParent:
         \_TypespecMember: (txunderflow), line:42:10, endln:42:21
-        |vpiFullName:work@top.spi_device_reg2hw_intr_enable_reg_t.txunderflow
+        |vpiFullName:work@top.txunderflow
         |vpiActual:
         \_StructTypespec: , line:40:2, endln:42:9
   |vpiTypedef:
@@ -1042,7 +1067,9 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_Function: (work@top.prince_shiftrows_32bit), line:45:4, endln:48:40
   |vpiImportTypespec:
-  \_StructTypespec: (spi_device_reg2hw_intr_enable_reg_t), line:38:9, endln:43:5
+  \_TypedefTypespec: (spi_device_reg2hw_intr_enable_reg_t), line:43:6, endln:43:41
+  |vpiImportTypespec:
+  \_StructTypespec: , line:38:9, endln:43:5
   |vpiImportTypespec:
   \_StructTypespec: , line:40:2, endln:42:9
   |vpiImportTypespec:

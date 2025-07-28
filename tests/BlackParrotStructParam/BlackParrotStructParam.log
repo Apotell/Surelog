@@ -378,7 +378,7 @@ BitSelect                                              1
 BitTypespec                                            1
 ClassDefn                                              8
 ClassTypespec                                          1
-Constant                                              31
+Constant                                              29
 Design                                                 1
 EnumConst                                              6
 EnumTypespec                                           2
@@ -389,23 +389,24 @@ IODecl                                                11
 ImportTypespec                                         1
 IntTypespec                                            9
 IntegerTypespec                                        1
+LogicNet                                               1
 LogicTypespec                                          2
-LogicVar                                               1
 Module                                                 2
 ModuleTypespec                                         1
-Operation                                             30
+Operation                                             29
 Package                                                2
-PackedArrayTypespec                                    1
+PackedArrayTypespec                                    2
 ParamAssign                                           10
 Parameter                                             10
-Range                                                  4
+Range                                                  3
 RefModule                                              1
-RefObj                                                51
-RefTypespec                                           42
+RefObj                                                50
+RefTypespec                                           46
 StringTypespec                                        12
 StructTypespec                                         1
 TaggedPattern                                         12
 Task                                                   9
+TypedefTypespec                                        3
 TypespecMember                                         1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BlackParrotStructParam/slpp_all/surelog.uhdm ...
@@ -675,7 +676,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -709,14 +710,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/BlackParrotStructParam/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -724,7 +724,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -732,7 +732,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -740,7 +740,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -748,13 +748,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/BlackParrotStructParam/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -975,7 +989,7 @@ Design: (unnamed)
       |vpiName:bp_proc_param_s
       |vpiFullName:bp_common_aviary_pkg::bp_default_cfg_p::bp_proc_param_s
       |vpiActual:
-      \_StructTypespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
+      \_TypedefTypespec: (bp_common_aviary_pkg::bp_proc_param_s), line:8:6, endln:8:21
     |vpiLocalParam:1
     |vpiName:bp_default_cfg_p
     |vpiFullName:bp_common_aviary_pkg::bp_default_cfg_p
@@ -990,7 +1004,7 @@ Design: (unnamed)
       |vpiName:bp_proc_param_s
       |vpiFullName:bp_common_aviary_pkg::bp_unicore_cfg_p::bp_proc_param_s
       |vpiActual:
-      \_StructTypespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
+      \_TypedefTypespec: (bp_common_aviary_pkg::bp_proc_param_s), line:8:6, endln:8:21
     |vpiLocalParam:1
     |vpiName:bp_unicore_cfg_p
     |vpiFullName:bp_common_aviary_pkg::bp_unicore_cfg_p
@@ -1005,7 +1019,7 @@ Design: (unnamed)
       |vpiName:bp_proc_param_s
       |vpiFullName:bp_common_aviary_pkg::bp_multicore_cce_ucode_half_override_p::bp_proc_param_s
       |vpiActual:
-      \_StructTypespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
+      \_TypedefTypespec: (bp_common_aviary_pkg::bp_proc_param_s), line:8:6, endln:8:21
     |vpiLocalParam:1
     |vpiName:bp_multicore_cce_ucode_half_override_p
     |vpiFullName:bp_common_aviary_pkg::bp_multicore_cce_ucode_half_override_p
@@ -1020,7 +1034,7 @@ Design: (unnamed)
       |vpiName:bp_proc_param_s
       |vpiFullName:bp_common_aviary_pkg::bp_multicore_1_cce_ucode_cfg_p::bp_proc_param_s
       |vpiActual:
-      \_StructTypespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
+      \_TypedefTypespec: (bp_common_aviary_pkg::bp_proc_param_s), line:8:6, endln:8:21
     |vpiLocalParam:1
     |vpiName:bp_multicore_1_cce_ucode_cfg_p
     |vpiFullName:bp_common_aviary_pkg::bp_multicore_1_cce_ucode_cfg_p
@@ -1035,7 +1049,7 @@ Design: (unnamed)
       |vpiName:bp_proc_param_s
       |vpiFullName:bp_common_aviary_pkg::bp_multicore_cce_ucode_half_cfg_p::bp_proc_param_s
       |vpiActual:
-      \_StructTypespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
+      \_TypedefTypespec: (bp_common_aviary_pkg::bp_proc_param_s), line:8:6, endln:8:21
     |vpiLocalParam:1
     |vpiName:bp_multicore_cce_ucode_half_cfg_p
     |vpiFullName:bp_common_aviary_pkg::bp_multicore_cce_ucode_half_cfg_p
@@ -1050,7 +1064,7 @@ Design: (unnamed)
       |vpiName:bp_proc_param_s
       |vpiFullName:bp_common_aviary_pkg::all_cfgs_gp::bp_proc_param_s
       |vpiActual:
-      \_PackedArrayTypespec: , line:42:28, endln:42:40
+      \_PackedArrayTypespec: , line:42:12, endln:42:40
     |vpiName:all_cfgs_gp
     |vpiFullName:bp_common_aviary_pkg::all_cfgs_gp
   |vpiParamAssign:
@@ -1095,7 +1109,7 @@ Design: (unnamed)
           |vpiName:cc_x_dim
           |vpiFullName:bp_common_aviary_pkg::cc_x_dim
           |vpiActual:
-          \_StringTypespec: (cc_x_dim), line:12:7, endln:12:15
+          \_StringTypespec: , line:12:7, endln:12:15
     |vpiLhs:
     \_Parameter: (bp_common_aviary_pkg::bp_default_cfg_p), line:10:30, endln:13:8
   |vpiParamAssign:
@@ -1139,7 +1153,7 @@ Design: (unnamed)
           \_TaggedPattern: , line:19:7, endln:19:22
           |vpiFullName:bp_common_aviary_pkg
           |vpiActual:
-          \_StringTypespec: (default), line:19:7, endln:19:14
+          \_StringTypespec: , line:19:7, endln:19:14
     |vpiLhs:
     \_Parameter: (bp_common_aviary_pkg::bp_multicore_cce_ucode_half_override_p), line:17:30, endln:20:8
   |vpiParamAssign:
@@ -1240,7 +1254,7 @@ Design: (unnamed)
           |vpiName:cc_x_dim
           |vpiFullName:bp_common_aviary_pkg::cc_x_dim
           |vpiActual:
-          \_StringTypespec: (cc_x_dim), line:24:5, endln:24:13
+          \_StringTypespec: , line:24:5, endln:24:13
     |vpiLhs:
     \_Parameter: (bp_common_aviary_pkg::bp_multicore_1_cce_ucode_cfg_p), line:22:29, endln:30:8
   |vpiParamAssign:
@@ -1341,7 +1355,7 @@ Design: (unnamed)
           |vpiName:cc_x_dim
           |vpiFullName:bp_common_aviary_pkg::cc_x_dim
           |vpiActual:
-          \_StringTypespec: (cc_x_dim), line:34:5, endln:34:13
+          \_StringTypespec: , line:34:5, endln:34:13
     |vpiLhs:
     \_Parameter: (bp_common_aviary_pkg::bp_multicore_cce_ucode_half_cfg_p), line:32:28, endln:40:10
   |vpiParamAssign:
@@ -1364,21 +1378,32 @@ Design: (unnamed)
     |vpiLhs:
     \_Parameter: (bp_common_aviary_pkg::all_cfgs_gp), line:42:41, endln:46:4
   |vpiTypedef:
-  \_StructTypespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
+  \_TypedefTypespec: (bp_common_aviary_pkg::bp_proc_param_s), line:8:6, endln:8:21
     |vpiParent:
     \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
     |vpiName:bp_common_aviary_pkg::bp_proc_param_s
+    |vpiTypedefAlias:
+    \_RefTypespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
+      |vpiParent:
+      \_TypedefTypespec: (bp_common_aviary_pkg::bp_proc_param_s), line:8:6, endln:8:21
+      |vpiFullName:bp_common_aviary_pkg::bp_proc_param_s
+      |vpiActual:
+      \_StructTypespec: , line:5:9, endln:8:4
+  |vpiTypedef:
+  \_StructTypespec: , line:5:9, endln:8:4
+    |vpiParent:
+    \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (cc_x_dim), line:7:13, endln:7:21
       |vpiParent:
-      \_StructTypespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
+      \_StructTypespec: , line:5:9, endln:8:4
       |vpiName:cc_x_dim
       |vpiTypespec:
-      \_RefTypespec: (bp_common_aviary_pkg::bp_proc_param_s::cc_x_dim), line:7:5, endln:7:12
+      \_RefTypespec: (bp_common_aviary_pkg::cc_x_dim), line:7:5, endln:7:12
         |vpiParent:
         \_TypespecMember: (cc_x_dim), line:7:13, endln:7:21
-        |vpiFullName:bp_common_aviary_pkg::bp_proc_param_s::cc_x_dim
+        |vpiFullName:bp_common_aviary_pkg::cc_x_dim
         |vpiActual:
         \_IntegerTypespec: , line:7:5, endln:7:12
   |vpiTypedef:
@@ -1387,73 +1412,61 @@ Design: (unnamed)
     \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
     |vpiSigned:1
   |vpiTypedef:
-  \_StringTypespec: (cc_x_dim), line:12:7, endln:12:15
+  \_StringTypespec: , line:12:7, endln:12:15
     |vpiParent:
     \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
-    |vpiName:cc_x_dim
   |vpiTypedef:
-  \_StringTypespec: (cc_x_dim), line:12:7, endln:12:15
+  \_StringTypespec: , line:12:7, endln:12:15
     |vpiParent:
     \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
-    |vpiName:cc_x_dim
   |vpiTypedef:
-  \_StringTypespec: (cc_x_dim), line:12:7, endln:12:15
+  \_StringTypespec: , line:12:7, endln:12:15
     |vpiParent:
     \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
-    |vpiName:cc_x_dim
   |vpiTypedef:
-  \_StringTypespec: (default), line:19:7, endln:19:14
+  \_StringTypespec: , line:19:7, endln:19:14
     |vpiParent:
     \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
-    |vpiName:default
   |vpiTypedef:
-  \_StringTypespec: (default), line:19:7, endln:19:14
+  \_StringTypespec: , line:19:7, endln:19:14
     |vpiParent:
     \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
-    |vpiName:default
   |vpiTypedef:
-  \_StringTypespec: (default), line:19:7, endln:19:14
+  \_StringTypespec: , line:19:7, endln:19:14
     |vpiParent:
     \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
-    |vpiName:default
   |vpiTypedef:
-  \_StringTypespec: (cc_x_dim), line:24:5, endln:24:13
+  \_StringTypespec: , line:24:5, endln:24:13
     |vpiParent:
     \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
-    |vpiName:cc_x_dim
   |vpiTypedef:
-  \_StringTypespec: (cc_x_dim), line:24:5, endln:24:13
+  \_StringTypespec: , line:24:5, endln:24:13
     |vpiParent:
     \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
-    |vpiName:cc_x_dim
   |vpiTypedef:
-  \_StringTypespec: (cc_x_dim), line:24:5, endln:24:13
+  \_StringTypespec: , line:24:5, endln:24:13
     |vpiParent:
     \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
-    |vpiName:cc_x_dim
   |vpiTypedef:
-  \_StringTypespec: (cc_x_dim), line:34:5, endln:34:13
+  \_StringTypespec: , line:34:5, endln:34:13
     |vpiParent:
     \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
-    |vpiName:cc_x_dim
   |vpiTypedef:
-  \_StringTypespec: (cc_x_dim), line:34:5, endln:34:13
+  \_StringTypespec: , line:34:5, endln:34:13
     |vpiParent:
     \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
-    |vpiName:cc_x_dim
   |vpiTypedef:
-  \_StringTypespec: (cc_x_dim), line:34:5, endln:34:13
+  \_StringTypespec: , line:34:5, endln:34:13
     |vpiParent:
     \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
-    |vpiName:cc_x_dim
   |vpiTypedef:
-  \_PackedArrayTypespec: , line:42:28, endln:42:40
+  \_PackedArrayTypespec: , line:42:12, endln:42:40
     |vpiParent:
     \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
     |vpiRange:
     \_Range: , line:42:28, endln:42:40
       |vpiParent:
-      \_PackedArrayTypespec: , line:42:28, endln:42:40
+      \_PackedArrayTypespec: , line:42:12, endln:42:40
       |vpiLeftRange:
       \_RefObj: (bp_common_aviary_pkg::max_cfgs), line:42:29, endln:42:37
         |vpiParent:
@@ -1471,21 +1484,43 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (bp_common_aviary_pkg::bp_proc_param_s), line:42:12, endln:42:27
+    \_RefTypespec: (bp_common_aviary_pkg::bp_proc_param_s), line:8:6, endln:8:21
       |vpiParent:
-      \_PackedArrayTypespec: , line:42:28, endln:42:40
-      |vpiName:bp_proc_param_s
-      |vpiFullName:bp_common_aviary_pkg::bp_proc_param_s
+      \_PackedArrayTypespec: , line:42:12, endln:42:40
+      |vpiName:bp_common_aviary_pkg::bp_proc_param_s
       |vpiActual:
-      \_StructTypespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
+      \_TypedefTypespec: (bp_common_aviary_pkg::bp_proc_param_s), line:8:6, endln:8:21
   |vpiTypedef:
-  \_BitTypespec: , line:48:15, endln:48:31
+  \_EnumTypespec: , line:48:10, endln:51:16
+    |vpiParent:
+    \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
+    |vpiBaseTypespec:
+    \_RefTypespec: (bp_common_aviary_pkg), line:48:15, endln:48:31
+      |vpiParent:
+      \_EnumTypespec: , line:48:10, endln:51:16
+      |vpiFullName:bp_common_aviary_pkg
+      |vpiActual:
+      \_PackedArrayTypespec: , line:48:15, endln:48:31
+    |vpiEnumConst:
+    \_EnumConst: (e_bp_default_cfg), line:50:5, endln:50:47
+      |vpiParent:
+      \_EnumTypespec: , line:48:10, endln:51:16
+      |vpiName:e_bp_default_cfg
+      |UINT:0
+      |vpiDecompile:0
+      |vpiSize:64
+  |vpiTypedef:
+  \_BitTypespec: , line:48:15, endln:48:18
+    |vpiParent:
+    \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:48:15, endln:48:31
     |vpiParent:
     \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
     |vpiRange:
     \_Range: , line:48:19, endln:48:31
       |vpiParent:
-      \_BitTypespec: , line:48:15, endln:48:31
+      \_PackedArrayTypespec: , line:48:15, endln:48:31
       |vpiLeftRange:
       \_RefObj: (bp_common_aviary_pkg::max_cfgs), line:48:20, endln:48:28
         |vpiParent:
@@ -1502,82 +1537,71 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (bp_common_aviary_pkg), line:48:15, endln:48:18
+      |vpiParent:
+      \_PackedArrayTypespec: , line:48:15, endln:48:31
+      |vpiFullName:bp_common_aviary_pkg
+      |vpiActual:
+      \_BitTypespec: , line:48:15, endln:48:18
   |vpiTypedef:
-  \_EnumTypespec: (bp_common_aviary_pkg::bp_params_e), line:48:10, endln:51:16
+  \_TypedefTypespec: (bp_common_aviary_pkg::bp_params_e), line:51:5, endln:51:16
     |vpiParent:
     \_Package: bp_common_aviary_pkg (bp_common_aviary_pkg), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:1:1, endln:53:11
     |vpiName:bp_common_aviary_pkg::bp_params_e
-    |vpiBaseTypespec:
-    \_RefTypespec: (bp_common_aviary_pkg::bp_params_e), line:48:15, endln:48:31
+    |vpiTypedefAlias:
+    \_RefTypespec: (bp_common_aviary_pkg::bp_params_e), line:48:10, endln:51:4
       |vpiParent:
-      \_EnumTypespec: (bp_common_aviary_pkg::bp_params_e), line:48:10, endln:51:16
+      \_TypedefTypespec: (bp_common_aviary_pkg::bp_params_e), line:51:5, endln:51:16
       |vpiFullName:bp_common_aviary_pkg::bp_params_e
       |vpiActual:
-      \_BitTypespec: , line:48:15, endln:48:31
-    |vpiEnumConst:
-    \_EnumConst: (e_bp_default_cfg), line:50:5, endln:50:47
-      |vpiParent:
-      \_EnumTypespec: (bp_common_aviary_pkg::bp_params_e), line:48:10, endln:51:16
-      |vpiName:e_bp_default_cfg
-      |UINT:0
-      |vpiDecompile:0
-      |vpiSize:64
+      \_EnumTypespec: , line:48:10, endln:51:16
   |vpiImportTypespec:
-  \_StructTypespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
+  \_TypedefTypespec: (bp_common_aviary_pkg::bp_proc_param_s), line:8:6, endln:8:21
+  |vpiImportTypespec:
+  \_StructTypespec: , line:5:9, endln:8:4
   |vpiImportTypespec:
   \_IntegerTypespec: , line:7:5, endln:7:12
   |vpiImportTypespec:
-  \_StringTypespec: (cc_x_dim), line:12:7, endln:12:15
+  \_StringTypespec: , line:12:7, endln:12:15
   |vpiImportTypespec:
-  \_StringTypespec: (cc_x_dim), line:12:7, endln:12:15
+  \_StringTypespec: , line:12:7, endln:12:15
   |vpiImportTypespec:
-  \_StringTypespec: (cc_x_dim), line:12:7, endln:12:15
+  \_StringTypespec: , line:12:7, endln:12:15
   |vpiImportTypespec:
-  \_StringTypespec: (default), line:19:7, endln:19:14
+  \_StringTypespec: , line:19:7, endln:19:14
   |vpiImportTypespec:
-  \_StringTypespec: (default), line:19:7, endln:19:14
+  \_StringTypespec: , line:19:7, endln:19:14
   |vpiImportTypespec:
-  \_StringTypespec: (default), line:19:7, endln:19:14
+  \_StringTypespec: , line:19:7, endln:19:14
   |vpiImportTypespec:
-  \_StringTypespec: (cc_x_dim), line:24:5, endln:24:13
+  \_StringTypespec: , line:24:5, endln:24:13
   |vpiImportTypespec:
-  \_StringTypespec: (cc_x_dim), line:24:5, endln:24:13
+  \_StringTypespec: , line:24:5, endln:24:13
   |vpiImportTypespec:
-  \_StringTypespec: (cc_x_dim), line:24:5, endln:24:13
+  \_StringTypespec: , line:24:5, endln:24:13
   |vpiImportTypespec:
-  \_StringTypespec: (cc_x_dim), line:34:5, endln:34:13
+  \_StringTypespec: , line:34:5, endln:34:13
   |vpiImportTypespec:
-  \_StringTypespec: (cc_x_dim), line:34:5, endln:34:13
+  \_StringTypespec: , line:34:5, endln:34:13
   |vpiImportTypespec:
-  \_StringTypespec: (cc_x_dim), line:34:5, endln:34:13
+  \_StringTypespec: , line:34:5, endln:34:13
   |vpiImportTypespec:
-  \_PackedArrayTypespec: , line:42:28, endln:42:40
+  \_PackedArrayTypespec: , line:42:12, endln:42:40
   |vpiImportTypespec:
-  \_BitTypespec: , line:48:15, endln:48:31
+  \_EnumTypespec: , line:48:10, endln:51:16
   |vpiImportTypespec:
-  \_EnumTypespec: (bp_common_aviary_pkg::bp_params_e), line:48:10, endln:51:16
+  \_BitTypespec: , line:48:15, endln:48:18
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:48:15, endln:48:31
+  |vpiImportTypespec:
+  \_TypedefTypespec: (bp_common_aviary_pkg::bp_params_e), line:51:5, endln:51:16
   |vpiDefName:bp_common_aviary_pkg
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:55:1, endln:66:10
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@top
-  |vpiVariables:
-  \_LogicVar: (work@top.aa), line:60:25, endln:60:27
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:55:1, endln:66:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.aa), line:60:2, endln:60:24
-      |vpiParent:
-      \_LogicVar: (work@top.aa), line:60:25, endln:60:27
-      |vpiFullName:work@top.aa
-      |vpiActual:
-      \_LogicTypespec: , line:60:2, endln:60:24
-    |vpiName:aa
-    |vpiFullName:work@top.aa
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@top.aa), line:60:25, endln:60:27
   |vpiParameter:
   \_Parameter: (work@top.bp_params_p), line:56:25, endln:56:55
     |vpiParent:
@@ -1589,7 +1613,7 @@ Design: (unnamed)
       |vpiName:bp_params_e
       |vpiFullName:work@top.bp_params_p.bp_params_e
       |vpiActual:
-      \_EnumTypespec: (bp_common_aviary_pkg::bp_params_e), line:48:10, endln:51:16
+      \_TypedefTypespec: (bp_common_aviary_pkg::bp_params_e), line:51:5, endln:51:16
     |vpiName:bp_params_p
     |vpiFullName:work@top.bp_params_p
   |vpiParameter:
@@ -1603,7 +1627,7 @@ Design: (unnamed)
       |vpiName:bp_proc_param_s
       |vpiFullName:work@top.proc_param_lp.bp_proc_param_s
       |vpiActual:
-      \_StructTypespec: (bp_common_aviary_pkg::bp_proc_param_s), line:5:9, endln:8:4
+      \_TypedefTypespec: (bp_common_aviary_pkg::bp_proc_param_s), line:8:6, endln:8:21
     |vpiLocalParam:1
     |vpiName:proc_param_lp
     |vpiFullName:work@top.proc_param_lp
@@ -1748,7 +1772,19 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:60:2, endln:60:24
   |vpiImportTypespec:
-  \_LogicVar: (work@top.aa), line:60:25, endln:60:27
+  \_LogicNet: (work@top.aa), line:60:25, endln:60:27
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackParrotStructParam/dut.sv, line:55:1, endln:66:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.aa), line:60:2, endln:60:24
+      |vpiParent:
+      \_LogicNet: (work@top.aa), line:60:25, endln:60:27
+      |vpiFullName:work@top.aa
+      |vpiActual:
+      \_LogicTypespec: , line:60:2, endln:60:24
+    |vpiName:aa
+    |vpiFullName:work@top.aa
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicNet: (work@top.e_bp_default_cfg), line:56:39, endln:56:55
     |vpiParent:
@@ -1764,6 +1800,8 @@ Design: (unnamed)
     |vpiFullName:work@top.all_cfgs_gp
     |vpiNetType:1
   |vpiDefName:work@top
+  |vpiNet:
+  \_LogicNet: (work@top.aa), line:60:25, endln:60:27
   |vpiNet:
   \_LogicNet: (work@top.e_bp_default_cfg), line:56:39, endln:56:55
   |vpiNet:

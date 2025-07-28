@@ -658,9 +658,10 @@ Package                                                2
 Port                                                  12
 RefModule                                              1
 RefObj                                                18
-RefTypespec                                           28
+RefTypespec                                           29
 TableEntry                                            14
 Task                                                   9
+TypedefTypespec                                        1
 UdpDefn                                                1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Attributes/slpp_all/surelog.uhdm ...
@@ -930,7 +931,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -964,14 +965,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/Attributes/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -979,7 +979,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -987,7 +987,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -995,7 +995,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -1003,13 +1003,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/Attributes/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1446,13 +1460,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:10, endln:2:14
   |vpiImportTypespec:
-  \_LogicNet: (work@bar.clk), line:2:15, endln:2:18
+  \_LogicNet: (work@bar.clk), line:1:12, endln:1:15
     |vpiParent:
     \_Module: work@bar (work@bar), file:${SURELOG_DIR}/tests/Attributes/dut.sv, line:1:1, endln:11:10
     |vpiTypespec:
     \_RefTypespec: (work@bar.clk), line:2:10, endln:2:14
       |vpiParent:
-      \_LogicNet: (work@bar.clk), line:2:15, endln:2:18
+      \_LogicNet: (work@bar.clk), line:1:12, endln:1:15
       |vpiFullName:work@bar.clk
       |vpiActual:
       \_LogicTypespec: , line:2:10, endln:2:14
@@ -1462,13 +1476,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:10, endln:3:14
   |vpiImportTypespec:
-  \_LogicNet: (work@bar.rst), line:3:15, endln:3:18
+  \_LogicNet: (work@bar.rst), line:1:17, endln:1:20
     |vpiParent:
     \_Module: work@bar (work@bar), file:${SURELOG_DIR}/tests/Attributes/dut.sv, line:1:1, endln:11:10
     |vpiTypespec:
     \_RefTypespec: (work@bar.rst), line:3:10, endln:3:14
       |vpiParent:
-      \_LogicNet: (work@bar.rst), line:3:15, endln:3:18
+      \_LogicNet: (work@bar.rst), line:1:17, endln:1:20
       |vpiFullName:work@bar.rst
       |vpiActual:
       \_LogicTypespec: , line:3:10, endln:3:14
@@ -1478,13 +1492,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:4:10, endln:4:14
   |vpiImportTypespec:
-  \_LogicNet: (work@bar.inp), line:4:15, endln:4:18
+  \_LogicNet: (work@bar.inp), line:1:22, endln:1:25
     |vpiParent:
     \_Module: work@bar (work@bar), file:${SURELOG_DIR}/tests/Attributes/dut.sv, line:1:1, endln:11:10
     |vpiTypespec:
     \_RefTypespec: (work@bar.inp), line:4:10, endln:4:14
       |vpiParent:
-      \_LogicNet: (work@bar.inp), line:4:15, endln:4:18
+      \_LogicNet: (work@bar.inp), line:1:22, endln:1:25
       |vpiFullName:work@bar.inp
       |vpiActual:
       \_LogicTypespec: , line:4:10, endln:4:14
@@ -1494,13 +1508,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:5:10, endln:5:13
   |vpiImportTypespec:
-  \_LogicNet: (work@bar.out), line:5:15, endln:5:18
+  \_LogicNet: (work@bar.out), line:1:27, endln:1:30
     |vpiParent:
     \_Module: work@bar (work@bar), file:${SURELOG_DIR}/tests/Attributes/dut.sv, line:1:1, endln:11:10
     |vpiTypespec:
     \_RefTypespec: (work@bar.out), line:5:10, endln:5:13
       |vpiParent:
-      \_LogicNet: (work@bar.out), line:5:15, endln:5:18
+      \_LogicNet: (work@bar.out), line:1:27, endln:1:30
       |vpiFullName:work@bar.out
       |vpiActual:
       \_LogicTypespec: , line:5:10, endln:5:13
@@ -1517,13 +1531,13 @@ Design: (unnamed)
   \_LogicTypespec: , line:5:10, endln:5:13
   |vpiDefName:work@bar
   |vpiNet:
-  \_LogicNet: (work@bar.clk), line:2:15, endln:2:18
+  \_LogicNet: (work@bar.clk), line:1:12, endln:1:15
   |vpiNet:
-  \_LogicNet: (work@bar.rst), line:3:15, endln:3:18
+  \_LogicNet: (work@bar.rst), line:1:17, endln:1:20
   |vpiNet:
-  \_LogicNet: (work@bar.inp), line:4:15, endln:4:18
+  \_LogicNet: (work@bar.inp), line:1:22, endln:1:25
   |vpiNet:
-  \_LogicNet: (work@bar.out), line:5:15, endln:5:18
+  \_LogicNet: (work@bar.out), line:1:27, endln:1:30
   |vpiPort:
   \_Port: (clk), line:1:12, endln:1:15
     |vpiParent:
@@ -1596,7 +1610,7 @@ Design: (unnamed)
           |vpiName:clk
           |vpiFullName:work@bar.clk
           |vpiActual:
-          \_LogicNet: (work@bar.clk), line:2:15, endln:2:18
+          \_LogicNet: (work@bar.clk), line:1:12, endln:1:15
       |vpiStmt:
       \_IfElse: , line:8:5, endln:9:26
         |vpiParent:
@@ -1608,7 +1622,7 @@ Design: (unnamed)
           |vpiName:rst
           |vpiFullName:work@bar.rst
           |vpiActual:
-          \_LogicNet: (work@bar.rst), line:3:15, endln:3:18
+          \_LogicNet: (work@bar.rst), line:1:17, endln:1:20
         |vpiStmt:
         \_Assignment: , line:8:14, endln:8:25
           |vpiParent:
@@ -1629,7 +1643,7 @@ Design: (unnamed)
             |vpiName:out
             |vpiFullName:work@bar.out
             |vpiActual:
-            \_LogicNet: (work@bar.out), line:5:15, endln:5:18
+            \_LogicNet: (work@bar.out), line:1:27, endln:1:30
         |vpiElseStmt:
         \_Assignment: , line:9:14, endln:9:25
           |vpiParent:
@@ -1647,7 +1661,7 @@ Design: (unnamed)
               |vpiName:inp
               |vpiFullName:work@bar.inp
               |vpiActual:
-              \_LogicNet: (work@bar.inp), line:4:15, endln:4:18
+              \_LogicNet: (work@bar.inp), line:1:22, endln:1:25
           |vpiLhs:
           \_RefObj: (work@bar.out), line:9:14, endln:9:17
             |vpiParent:
@@ -1655,7 +1669,7 @@ Design: (unnamed)
             |vpiName:out
             |vpiFullName:work@bar.out
             |vpiActual:
-            \_LogicNet: (work@bar.out), line:5:15, endln:5:18
+            \_LogicNet: (work@bar.out), line:1:27, endln:1:30
     |vpiAlwaysType:1
 |vpiAllModules:
 \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/Attributes/dut.sv, line:13:1, endln:41:10
@@ -1704,13 +1718,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:14:10, endln:14:14
   |vpiImportTypespec:
-  \_LogicNet: (work@foo.clk), line:14:15, endln:14:18
+  \_LogicNet: (work@foo.clk), line:13:12, endln:13:15
     |vpiParent:
     \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/Attributes/dut.sv, line:13:1, endln:41:10
     |vpiTypespec:
     \_RefTypespec: (work@foo.clk), line:14:10, endln:14:14
       |vpiParent:
-      \_LogicNet: (work@foo.clk), line:14:15, endln:14:18
+      \_LogicNet: (work@foo.clk), line:13:12, endln:13:15
       |vpiFullName:work@foo.clk
       |vpiActual:
       \_LogicTypespec: , line:14:10, endln:14:14
@@ -1720,13 +1734,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:15:10, endln:15:14
   |vpiImportTypespec:
-  \_LogicNet: (work@foo.rst), line:15:15, endln:15:18
+  \_LogicNet: (work@foo.rst), line:13:17, endln:13:20
     |vpiParent:
     \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/Attributes/dut.sv, line:13:1, endln:41:10
     |vpiTypespec:
     \_RefTypespec: (work@foo.rst), line:15:10, endln:15:14
       |vpiParent:
-      \_LogicNet: (work@foo.rst), line:15:15, endln:15:18
+      \_LogicNet: (work@foo.rst), line:13:17, endln:13:20
       |vpiFullName:work@foo.rst
       |vpiActual:
       \_LogicTypespec: , line:15:10, endln:15:14
@@ -1736,13 +1750,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:16:10, endln:16:14
   |vpiImportTypespec:
-  \_LogicNet: (work@foo.inp), line:16:15, endln:16:18
+  \_LogicNet: (work@foo.inp), line:13:22, endln:13:25
     |vpiParent:
     \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/Attributes/dut.sv, line:13:1, endln:41:10
     |vpiTypespec:
     \_RefTypespec: (work@foo.inp), line:16:10, endln:16:14
       |vpiParent:
-      \_LogicNet: (work@foo.inp), line:16:15, endln:16:18
+      \_LogicNet: (work@foo.inp), line:13:22, endln:13:25
       |vpiFullName:work@foo.inp
       |vpiActual:
       \_LogicTypespec: , line:16:10, endln:16:14
@@ -1752,13 +1766,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:17:10, endln:17:14
   |vpiImportTypespec:
-  \_LogicNet: (work@foo.out), line:17:15, endln:17:18
+  \_LogicNet: (work@foo.out), line:13:27, endln:13:30
     |vpiParent:
     \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/Attributes/dut.sv, line:13:1, endln:41:10
     |vpiTypespec:
     \_RefTypespec: (work@foo.out), line:17:10, endln:17:14
       |vpiParent:
-      \_LogicNet: (work@foo.out), line:17:15, endln:17:18
+      \_LogicNet: (work@foo.out), line:13:27, endln:13:30
       |vpiFullName:work@foo.out
       |vpiActual:
       \_LogicTypespec: , line:17:10, endln:17:14
@@ -1810,13 +1824,13 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@foo
   |vpiNet:
-  \_LogicNet: (work@foo.clk), line:14:15, endln:14:18
+  \_LogicNet: (work@foo.clk), line:13:12, endln:13:15
   |vpiNet:
-  \_LogicNet: (work@foo.rst), line:15:15, endln:15:18
+  \_LogicNet: (work@foo.rst), line:13:17, endln:13:20
   |vpiNet:
-  \_LogicNet: (work@foo.inp), line:16:15, endln:16:18
+  \_LogicNet: (work@foo.inp), line:13:22, endln:13:25
   |vpiNet:
-  \_LogicNet: (work@foo.out), line:17:15, endln:17:18
+  \_LogicNet: (work@foo.out), line:13:27, endln:13:30
   |vpiNet:
   \_LogicNet: (work@foo.pieces0), line:22:18, endln:22:25
   |vpiNet:
@@ -2127,7 +2141,7 @@ Design: (unnamed)
         |vpiName:clk
         |vpiFullName:work@foo.bar_instance.clk.clk
         |vpiActual:
-        \_LogicNet: (work@foo.clk), line:14:15, endln:14:18
+        \_LogicNet: (work@foo.clk), line:13:12, endln:13:15
       |vpiAttribute:
       \_Attribute: (clock_connected), line:19:25, endln:19:48
         |vpiParent:
@@ -2146,7 +2160,7 @@ Design: (unnamed)
         |vpiName:rst
         |vpiFullName:work@foo.bar_instance.rst.rst
         |vpiActual:
-        \_LogicNet: (work@foo.rst), line:15:15, endln:15:18
+        \_LogicNet: (work@foo.rst), line:13:17, endln:13:20
     |vpiPort:
     \_Port: (inp), line:19:95, endln:19:98
       |vpiParent:
@@ -2159,7 +2173,7 @@ Design: (unnamed)
         |vpiName:inp
         |vpiFullName:work@foo.bar_instance.inp.inp
         |vpiActual:
-        \_LogicNet: (work@foo.inp), line:16:15, endln:16:18
+        \_LogicNet: (work@foo.inp), line:13:22, endln:13:25
       |vpiAttribute:
       \_Attribute: (this_is_the_input), line:19:65, endln:19:91
         |vpiParent:
@@ -2178,7 +2192,7 @@ Design: (unnamed)
         |vpiName:out
         |vpiFullName:work@foo.bar_instance.out.out
         |vpiActual:
-        \_LogicNet: (work@foo.out), line:17:15, endln:17:18
+        \_LogicNet: (work@foo.out), line:13:27, endln:13:30
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/Attributes/test_attributes.sv, line:32:1, endln:39:10
   |vpiParent:

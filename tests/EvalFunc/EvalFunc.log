@@ -729,7 +729,7 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Assignment                                            15
 Begin                                                  6
-Constant                                              27
+Constant                                              25
 Design                                                 1
 ForStmt                                                3
 FuncCall                                               6
@@ -737,16 +737,17 @@ Function                                               6
 IODecl                                                 6
 IfElse                                                 1
 IfStmt                                                 1
+IntegerNet                                             1
 IntegerTypespec                                       15
-IntegerVar                                             2
+IntegerVar                                             1
+LogicNet                                               1
 LogicTypespec                                          2
-LogicVar                                               1
 Module                                                 1
 Operation                                             17
 Package                                                1
 ParamAssign                                            5
 Parameter                                              5
-Range                                                  3
+Range                                                  2
 RefObj                                                38
 RefTypespec                                           15
 RefVar                                                 2
@@ -1407,20 +1408,6 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/EvalFunc/dut.sv, line:22:1, endln:68:10
     |vpiName:log2
     |vpiFullName:work@top.log2
-    |vpiReg:
-    \_LogicVar: (work@top.log2.shifted), line:35:12, endln:35:19
-      |vpiParent:
-      \_Function: (work@top.log2), line:33:1, endln:48:12
-      |vpiTypespec:
-      \_RefTypespec: (work@top.log2.shifted), line:35:1, endln:35:11
-        |vpiParent:
-        \_LogicVar: (work@top.log2.shifted), line:35:12, endln:35:19
-        |vpiFullName:work@top.log2.shifted
-        |vpiActual:
-        \_LogicTypespec: , line:35:1, endln:35:11
-      |vpiName:shifted
-      |vpiFullName:work@top.log2.shifted
-      |vpiAutomatic:1
     |vpiInternalScope:
     \_Begin: (work@top.log2), line:37:1, endln:47:4
       |vpiParent:
@@ -1520,7 +1507,7 @@ Design: (unnamed)
                   |vpiName:res
                   |vpiFullName:work@top.log2.res
                   |vpiActual:
-                  \_IntegerVar: (work@top.log2.res), line:36:9, endln:36:12
+                  \_IntegerNet: (work@top.log2.res), line:36:9, endln:36:12
                 |vpiOperand:
                 \_Constant: , line:43:34, endln:43:35
                   |vpiParent:
@@ -1536,7 +1523,7 @@ Design: (unnamed)
                 |vpiName:res
                 |vpiFullName:work@top.log2.res
                 |vpiActual:
-                \_IntegerVar: (work@top.log2.res), line:36:9, endln:36:12
+                \_IntegerNet: (work@top.log2.res), line:36:9, endln:36:12
             |vpiCondition:
             \_Operation: , line:43:15, endln:43:24
               |vpiParent:
@@ -1549,7 +1536,7 @@ Design: (unnamed)
                 |vpiName:shifted
                 |vpiFullName:work@top.log2.shifted
                 |vpiActual:
-                \_LogicVar: (work@top.log2.shifted), line:35:12, endln:35:19
+                \_LogicNet: (work@top.log2.shifted), line:35:12, endln:35:19
               |vpiOperand:
               \_Constant: , line:43:23, endln:43:24
                 |vpiParent:
@@ -1576,7 +1563,7 @@ Design: (unnamed)
                   |vpiName:shifted
                   |vpiFullName:work@top.log2.shifted
                   |vpiActual:
-                  \_LogicVar: (work@top.log2.shifted), line:35:12, endln:35:19
+                  \_LogicNet: (work@top.log2.shifted), line:35:12, endln:35:19
                 |vpiOperand:
                 \_Constant: , line:44:23, endln:44:24
                   |vpiParent:
@@ -1592,7 +1579,7 @@ Design: (unnamed)
                 |vpiName:shifted
                 |vpiFullName:work@top.log2.shifted
                 |vpiActual:
-                \_LogicVar: (work@top.log2.shifted), line:35:12, endln:35:19
+                \_LogicNet: (work@top.log2.shifted), line:35:12, endln:35:19
           |vpiImportTypespec:
           \_RefVar: (work@top.log2), line:43:8, endln:43:11
           |vpiStmt:
@@ -1629,7 +1616,7 @@ Design: (unnamed)
               |vpiName:shifted
               |vpiFullName:work@top.log2.shifted
               |vpiActual:
-              \_LogicVar: (work@top.log2.shifted), line:35:12, endln:35:19
+              \_LogicNet: (work@top.log2.shifted), line:35:12, endln:35:19
           |vpiStmt:
           \_ForStmt: (work@top.log2), line:43:3, endln:44:25
           |vpiStmt:
@@ -1645,7 +1632,7 @@ Design: (unnamed)
               |vpiName:res
               |vpiFullName:work@top.log2.res
               |vpiActual:
-              \_IntegerVar: (work@top.log2.res), line:36:9, endln:36:12
+              \_IntegerNet: (work@top.log2.res), line:36:9, endln:36:12
             |vpiLhs:
             \_RefObj: (work@top.log2.log2), line:45:3, endln:45:7
               |vpiParent:
@@ -1731,26 +1718,37 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_LogicTypespec: , line:35:1, endln:35:11
     |vpiImportTypespec:
-    \_LogicVar: (work@top.log2.shifted), line:35:12, endln:35:19
+    \_LogicNet: (work@top.log2.shifted), line:35:12, endln:35:19
+      |vpiParent:
+      \_Function: (work@top.log2), line:33:1, endln:48:12
+      |vpiTypespec:
+      \_RefTypespec: (work@top.log2.shifted), line:35:1, endln:35:11
+        |vpiParent:
+        \_LogicNet: (work@top.log2.shifted), line:35:12, endln:35:19
+        |vpiFullName:work@top.log2.shifted
+        |vpiActual:
+        \_LogicTypespec: , line:35:1, endln:35:11
+      |vpiName:shifted
+      |vpiFullName:work@top.log2.shifted
+      |vpiSigned:1
     |vpiImportTypespec:
     \_IntegerTypespec: , line:36:1, endln:36:8
     |vpiImportTypespec:
     \_IntegerTypespec: , line:36:1, endln:36:8
     |vpiImportTypespec:
-    \_IntegerVar: (work@top.log2.res), line:36:9, endln:36:12
+    \_IntegerNet: (work@top.log2.res), line:36:9, endln:36:12
       |vpiParent:
       \_Function: (work@top.log2), line:33:1, endln:48:12
       |vpiTypespec:
       \_RefTypespec: (work@top.log2.res), line:36:1, endln:36:8
         |vpiParent:
-        \_IntegerVar: (work@top.log2.res), line:36:9, endln:36:12
+        \_IntegerNet: (work@top.log2.res), line:36:9, endln:36:12
         |vpiFullName:work@top.log2.res
         |vpiActual:
         \_IntegerTypespec: , line:36:1, endln:36:8
       |vpiName:res
       |vpiFullName:work@top.log2.res
       |vpiSigned:1
-      |vpiAutomatic:1
     |vpiVisibility:1
     |vpiReturn:
     \_RefTypespec: (work@top.log2), line:33:10, endln:33:17

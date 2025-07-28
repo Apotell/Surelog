@@ -157,11 +157,12 @@ ParamAssign                                            1
 Parameter                                              1
 Port                                                   2
 RefObj                                                 6
-RefTypespec                                           14
+RefTypespec                                           15
 StringTypespec                                         6
 StructNet                                              2
 StructTypespec                                         1
 TaggedPattern                                          6
+TypedefTypespec                                        1
 TypespecMember                                         2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackStructField/slpp_all/surelog.uhdm ...
@@ -185,7 +186,7 @@ Design: (unnamed)
       |vpiName:my_package::my_struct
       |vpiFullName:my_package::my_parameter::my_package::my_struct
       |vpiActual:
-      \_StructTypespec: (my_package::my_struct), line:4:11, endln:7:4
+      \_TypedefTypespec: (my_package::my_struct), line:7:5, endln:7:14
     |vpiName:my_parameter
     |vpiFullName:my_package::my_parameter
   |vpiParamAssign:
@@ -216,7 +217,7 @@ Design: (unnamed)
           |vpiName:a
           |vpiFullName:my_package::a
           |vpiActual:
-          \_StringTypespec: (a), line:10:5, endln:10:6
+          \_StringTypespec: , line:10:5, endln:10:6
       |vpiOperand:
       \_TaggedPattern: , line:11:5, endln:11:12
         |vpiParent:
@@ -236,37 +237,48 @@ Design: (unnamed)
           |vpiName:b
           |vpiFullName:my_package::b
           |vpiActual:
-          \_StringTypespec: (b), line:11:5, endln:11:6
+          \_StringTypespec: , line:11:5, endln:11:6
     |vpiLhs:
     \_Parameter: (my_package::my_parameter), line:9:35, endln:12:4
   |vpiTypedef:
-  \_StructTypespec: (my_package::my_struct), line:4:11, endln:7:4
+  \_TypedefTypespec: (my_package::my_struct), line:7:5, endln:7:14
     |vpiParent:
     \_Package: my_package (my_package), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:2:1, endln:14:24
     |vpiName:my_package::my_struct
+    |vpiTypedefAlias:
+    \_RefTypespec: (my_package::my_struct), line:4:11, endln:7:4
+      |vpiParent:
+      \_TypedefTypespec: (my_package::my_struct), line:7:5, endln:7:14
+      |vpiFullName:my_package::my_struct
+      |vpiActual:
+      \_StructTypespec: , line:4:11, endln:7:4
+  |vpiTypedef:
+  \_StructTypespec: , line:4:11, endln:7:4
+    |vpiParent:
+    \_Package: my_package (my_package), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:2:1, endln:14:24
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (a), line:5:11, endln:5:12
       |vpiParent:
-      \_StructTypespec: (my_package::my_struct), line:4:11, endln:7:4
+      \_StructTypespec: , line:4:11, endln:7:4
       |vpiName:a
       |vpiTypespec:
-      \_RefTypespec: (my_package::my_struct::a), line:5:5, endln:5:10
+      \_RefTypespec: (my_package::a), line:5:5, endln:5:10
         |vpiParent:
         \_TypespecMember: (a), line:5:11, endln:5:12
-        |vpiFullName:my_package::my_struct::a
+        |vpiFullName:my_package::a
         |vpiActual:
         \_LogicTypespec: , line:5:5, endln:5:10
     |vpiTypespecMember:
     \_TypespecMember: (b), line:6:11, endln:6:12
       |vpiParent:
-      \_StructTypespec: (my_package::my_struct), line:4:11, endln:7:4
+      \_StructTypespec: , line:4:11, endln:7:4
       |vpiName:b
       |vpiTypespec:
-      \_RefTypespec: (my_package::my_struct::b), line:6:5, endln:6:10
+      \_RefTypespec: (my_package::b), line:6:5, endln:6:10
         |vpiParent:
         \_TypespecMember: (b), line:6:11, endln:6:12
-        |vpiFullName:my_package::my_struct::b
+        |vpiFullName:my_package::b
         |vpiActual:
         \_LogicTypespec: , line:6:5, endln:6:10
   |vpiTypedef:
@@ -278,53 +290,49 @@ Design: (unnamed)
     |vpiParent:
     \_Package: my_package (my_package), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:2:1, endln:14:24
   |vpiTypedef:
-  \_StringTypespec: (a), line:10:5, endln:10:6
+  \_StringTypespec: , line:10:5, endln:10:6
     |vpiParent:
     \_Package: my_package (my_package), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:2:1, endln:14:24
-    |vpiName:a
   |vpiTypedef:
-  \_StringTypespec: (b), line:11:5, endln:11:6
+  \_StringTypespec: , line:11:5, endln:11:6
     |vpiParent:
     \_Package: my_package (my_package), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:2:1, endln:14:24
-    |vpiName:b
   |vpiTypedef:
-  \_StringTypespec: (a), line:10:5, endln:10:6
+  \_StringTypespec: , line:10:5, endln:10:6
     |vpiParent:
     \_Package: my_package (my_package), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:2:1, endln:14:24
-    |vpiName:a
   |vpiTypedef:
-  \_StringTypespec: (b), line:11:5, endln:11:6
+  \_StringTypespec: , line:11:5, endln:11:6
     |vpiParent:
     \_Package: my_package (my_package), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:2:1, endln:14:24
-    |vpiName:b
   |vpiTypedef:
-  \_StringTypespec: (a), line:10:5, endln:10:6
+  \_StringTypespec: , line:10:5, endln:10:6
     |vpiParent:
     \_Package: my_package (my_package), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:2:1, endln:14:24
-    |vpiName:a
   |vpiTypedef:
-  \_StringTypespec: (b), line:11:5, endln:11:6
+  \_StringTypespec: , line:11:5, endln:11:6
     |vpiParent:
     \_Package: my_package (my_package), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:2:1, endln:14:24
-    |vpiName:b
   |vpiImportTypespec:
-  \_StructTypespec: (my_package::my_struct), line:4:11, endln:7:4
+  \_TypedefTypespec: (my_package::my_struct), line:7:5, endln:7:14
+  |vpiImportTypespec:
+  \_StructTypespec: , line:4:11, endln:7:4
   |vpiImportTypespec:
   \_LogicTypespec: , line:5:5, endln:5:10
   |vpiImportTypespec:
   \_LogicTypespec: , line:6:5, endln:6:10
   |vpiImportTypespec:
-  \_StringTypespec: (a), line:10:5, endln:10:6
+  \_StringTypespec: , line:10:5, endln:10:6
   |vpiImportTypespec:
-  \_StringTypespec: (b), line:11:5, endln:11:6
+  \_StringTypespec: , line:11:5, endln:11:6
   |vpiImportTypespec:
-  \_StringTypespec: (a), line:10:5, endln:10:6
+  \_StringTypespec: , line:10:5, endln:10:6
   |vpiImportTypespec:
-  \_StringTypespec: (b), line:11:5, endln:11:6
+  \_StringTypespec: , line:11:5, endln:11:6
   |vpiImportTypespec:
-  \_StringTypespec: (a), line:10:5, endln:10:6
+  \_StringTypespec: , line:10:5, endln:10:6
   |vpiImportTypespec:
-  \_StringTypespec: (b), line:11:5, endln:11:6
+  \_StringTypespec: , line:11:5, endln:11:6
   |vpiDefName:my_package
   |vpiEndLabel:my_package
 |vpiAllModules:
@@ -337,13 +345,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@my_module (work@my_module), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:16:1, endln:24:22
     |vpiTypespec:
-    \_RefTypespec: (work@my_module.x.x), line:17:12, endln:17:33
+    \_RefTypespec: (work@my_module.x.my_package::my_struct), line:17:12, endln:17:33
       |vpiParent:
       \_StructNet: (work@my_module.x), line:17:34, endln:17:35
-      |vpiName:x
-      |vpiFullName:work@my_module.x.x
+      |vpiName:my_package::my_struct
+      |vpiFullName:work@my_module.x.my_package::my_struct
       |vpiActual:
-      \_StructTypespec: (my_package::my_struct), line:4:11, endln:7:4
+      \_TypedefTypespec: (my_package::my_struct), line:7:5, endln:7:14
     |vpiName:x
     |vpiFullName:work@my_module.x
   |vpiImportTypespec:
@@ -351,13 +359,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@my_module (work@my_module), file:${SURELOG_DIR}/tests/PackStructField/dut.sv, line:16:1, endln:24:22
     |vpiTypespec:
-    \_RefTypespec: (work@my_module.y.y), line:18:12, endln:18:33
+    \_RefTypespec: (work@my_module.y.my_package::my_struct), line:18:12, endln:18:33
       |vpiParent:
       \_StructNet: (work@my_module.y), line:18:34, endln:18:35
-      |vpiName:y
-      |vpiFullName:work@my_module.y.y
+      |vpiName:my_package::my_struct
+      |vpiFullName:work@my_module.y.my_package::my_struct
       |vpiActual:
-      \_StructTypespec: (my_package::my_struct), line:4:11, endln:7:4
+      \_TypedefTypespec: (my_package::my_struct), line:7:5, endln:7:14
     |vpiName:y
     |vpiFullName:work@my_module.y
   |vpiDefName:work@my_module
@@ -378,7 +386,7 @@ Design: (unnamed)
       |vpiName:my_package::my_struct
       |vpiFullName:work@my_module.x.my_package::my_struct
       |vpiActual:
-      \_StructTypespec: (my_package::my_struct), line:4:11, endln:7:4
+      \_TypedefTypespec: (my_package::my_struct), line:7:5, endln:7:14
   |vpiPort:
   \_Port: (y), line:18:34, endln:18:35
     |vpiParent:
@@ -392,7 +400,7 @@ Design: (unnamed)
       |vpiName:my_package::my_struct
       |vpiFullName:work@my_module.y.my_package::my_struct
       |vpiActual:
-      \_StructTypespec: (my_package::my_struct), line:4:11, endln:7:4
+      \_TypedefTypespec: (my_package::my_struct), line:7:5, endln:7:14
   |vpiContAssign:
   \_ContAssign: , line:21:8, endln:21:38
     |vpiParent:

@@ -852,7 +852,7 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Assignment                                             2
 Begin                                                  1
-Constant                                              64
+Constant                                              34
 ContAssign                                             1
 DelayControl                                           4
 Design                                                 1
@@ -861,18 +861,19 @@ ImmediateAssert                                        2
 Initial                                                1
 Interface                                              1
 InterfaceTypespec                                      2
-LogicNet                                              12
+LogicNet                                              10
 LogicTypespec                                         16
+LogicVar                                               2
 Module                                                 4
 ModuleTypespec                                         6
-Operation                                             26
+Operation                                             11
 ParamAssign                                            6
 Parameter                                              6
 Port                                                  20
 Program                                                1
-Range                                                 24
+Range                                                  9
 RefModule                                              6
-RefObj                                                55
+RefObj                                                40
 RefTypespec                                           17
 SysFuncCall                                            9
 === UHDM Object Stats End ===
@@ -887,6 +888,40 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@ConnectTB
+  |vpiVariables:
+  \_LogicVar: (work@ConnectTB.con_i), line:8:68, endln:8:73
+    |vpiParent:
+    \_Interface: work@ConnectTB (work@ConnectTB), file:${SURELOG_DIR}/tests/OneNetRange/dut.v, line:8:1, endln:9:13
+    |vpiTypespec:
+    \_RefTypespec: (work@ConnectTB.con_i), line:8:51, endln:8:55
+      |vpiParent:
+      \_LogicVar: (work@ConnectTB.con_i), line:8:68, endln:8:73
+      |vpiFullName:work@ConnectTB.con_i
+      |vpiActual:
+      \_LogicTypespec: , line:8:51, endln:8:67
+    |vpiName:con_i
+    |vpiFullName:work@ConnectTB.con_i
+    |vpiRandType:1
+    |vpiVisibility:1
+  |vpiVariables:
+  \_LogicVar: (work@ConnectTB.con_o), line:8:98, endln:8:103
+    |vpiParent:
+    \_Interface: work@ConnectTB (work@ConnectTB), file:${SURELOG_DIR}/tests/OneNetRange/dut.v, line:8:1, endln:9:13
+    |vpiTypespec:
+    \_RefTypespec: (work@ConnectTB.con_o), line:8:82, endln:8:85
+      |vpiParent:
+      \_LogicVar: (work@ConnectTB.con_o), line:8:98, endln:8:103
+      |vpiFullName:work@ConnectTB.con_o
+      |vpiActual:
+      \_LogicTypespec: , line:8:82, endln:8:85
+    |vpiName:con_o
+    |vpiFullName:work@ConnectTB.con_o
+    |vpiRandType:1
+    |vpiVisibility:1
+  |vpiReg:
+  \_LogicVar: (work@ConnectTB.con_i), line:8:68, endln:8:73
+  |vpiReg:
+  \_LogicVar: (work@ConnectTB.con_o), line:8:98, endln:8:103
   |vpiParameter:
   \_Parameter: (work@ConnectTB.width), line:8:33, endln:8:42
     |vpiParent:
@@ -946,42 +981,9 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_LogicTypespec: , line:8:82, endln:8:97
+  \_LogicTypespec: , line:8:82, endln:8:85
     |vpiParent:
     \_Interface: work@ConnectTB (work@ConnectTB), file:${SURELOG_DIR}/tests/OneNetRange/dut.v, line:8:1, endln:9:13
-    |vpiRange:
-    \_Range: , line:8:86, endln:8:97
-      |vpiParent:
-      \_LogicTypespec: , line:8:82, endln:8:97
-      |vpiLeftRange:
-      \_Operation: , line:8:87, endln:8:94
-        |vpiParent:
-        \_Range: , line:8:86, endln:8:97
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (work@ConnectTB.width), line:8:87, endln:8:92
-          |vpiParent:
-          \_Operation: , line:8:87, endln:8:94
-          |vpiName:width
-          |vpiFullName:work@ConnectTB.width
-          |vpiActual:
-          \_Parameter: (work@ConnectTB.width), line:8:33, endln:8:42
-        |vpiOperand:
-        \_Constant: , line:8:93, endln:8:94
-          |vpiParent:
-          \_Operation: , line:8:87, endln:8:94
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:8:95, endln:8:96
-        |vpiParent:
-        \_Range: , line:8:86, endln:8:97
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiTypedef:
   \_LogicTypespec: , line:8:51, endln:8:67
     |vpiParent:
@@ -1020,78 +1022,21 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_LogicTypespec: , line:8:82, endln:8:97
+  \_LogicTypespec: , line:8:82, endln:8:85
     |vpiParent:
     \_Interface: work@ConnectTB (work@ConnectTB), file:${SURELOG_DIR}/tests/OneNetRange/dut.v, line:8:1, endln:9:13
-    |vpiRange:
-    \_Range: , line:8:86, endln:8:97
-      |vpiParent:
-      \_LogicTypespec: , line:8:82, endln:8:97
-      |vpiLeftRange:
-      \_Operation: , line:8:87, endln:8:94
-        |vpiParent:
-        \_Range: , line:8:86, endln:8:97
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (work@ConnectTB.width), line:8:87, endln:8:92
-          |vpiParent:
-          \_Operation: , line:8:87, endln:8:94
-          |vpiName:width
-          |vpiFullName:work@ConnectTB.width
-          |vpiActual:
-          \_Parameter: (work@ConnectTB.width), line:8:33, endln:8:42
-        |vpiOperand:
-        \_Constant: , line:8:93, endln:8:94
-          |vpiParent:
-          \_Operation: , line:8:87, endln:8:94
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:8:95, endln:8:96
-        |vpiParent:
-        \_Range: , line:8:86, endln:8:97
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiImportTypespec:
   \_LogicTypespec: , line:8:51, endln:8:67
   |vpiImportTypespec:
-  \_LogicNet: (work@ConnectTB.con_i), line:8:68, endln:8:73
-    |vpiParent:
-    \_Interface: work@ConnectTB (work@ConnectTB), file:${SURELOG_DIR}/tests/OneNetRange/dut.v, line:8:1, endln:9:13
-    |vpiTypespec:
-    \_RefTypespec: (work@ConnectTB.con_i), line:8:51, endln:8:67
-      |vpiParent:
-      \_LogicNet: (work@ConnectTB.con_i), line:8:68, endln:8:73
-      |vpiFullName:work@ConnectTB.con_i
-      |vpiActual:
-      \_LogicTypespec: , line:8:51, endln:8:67
-    |vpiName:con_i
-    |vpiFullName:work@ConnectTB.con_i
-    |vpiNetType:1
+  \_LogicVar: (work@ConnectTB.con_i), line:8:68, endln:8:73
   |vpiImportTypespec:
-  \_LogicTypespec: , line:8:82, endln:8:97
+  \_LogicTypespec: , line:8:82, endln:8:85
   |vpiImportTypespec:
-  \_LogicNet: (work@ConnectTB.con_o), line:8:98, endln:8:103
-    |vpiParent:
-    \_Interface: work@ConnectTB (work@ConnectTB), file:${SURELOG_DIR}/tests/OneNetRange/dut.v, line:8:1, endln:9:13
-    |vpiTypespec:
-    \_RefTypespec: (work@ConnectTB.con_o), line:8:82, endln:8:97
-      |vpiParent:
-      \_LogicNet: (work@ConnectTB.con_o), line:8:98, endln:8:103
-      |vpiFullName:work@ConnectTB.con_o
-      |vpiActual:
-      \_LogicTypespec: , line:8:82, endln:8:97
-    |vpiName:con_o
-    |vpiFullName:work@ConnectTB.con_o
-    |vpiNetType:48
+  \_LogicVar: (work@ConnectTB.con_o), line:8:98, endln:8:103
   |vpiImportTypespec:
   \_LogicTypespec: , line:8:51, endln:8:67
   |vpiImportTypespec:
-  \_LogicTypespec: , line:8:82, endln:8:97
+  \_LogicTypespec: , line:8:82, endln:8:85
   |vpiImportTypespec:
   \_LogicNet: (work@ConnectTB.con_i), line:8:68, endln:8:73
     |vpiParent:
@@ -1107,10 +1052,6 @@ Design: (unnamed)
     |vpiFullName:work@ConnectTB.con_o
     |vpiNetType:48
   |vpiDefName:work@ConnectTB
-  |vpiNet:
-  \_LogicNet: (work@ConnectTB.con_i), line:8:68, endln:8:73
-  |vpiNet:
-  \_LogicNet: (work@ConnectTB.con_o), line:8:98, endln:8:103
   |vpiNet:
   \_LogicNet: (work@ConnectTB.con_i), line:8:68, endln:8:73
   |vpiNet:
@@ -1156,7 +1097,7 @@ Design: (unnamed)
       \_Port: (con_o), line:8:98, endln:8:103
       |vpiFullName:work@ConnectTB.con_o
       |vpiActual:
-      \_LogicTypespec: , line:8:82, endln:8:97
+      \_LogicTypespec: , line:8:82, endln:8:85
 |vpiAllPrograms:
 \_Program: work@TESTBENCH (work@TESTBENCH), file:${SURELOG_DIR}/tests/OneNetRange/tb.v, line:1:1, endln:13:11
   |vpiParent:
@@ -1221,46 +1162,13 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_LogicTypespec: , line:1:82, endln:1:97
+  \_LogicTypespec: , line:1:82, endln:1:85
     |vpiParent:
     \_Program: work@TESTBENCH (work@TESTBENCH), file:${SURELOG_DIR}/tests/OneNetRange/tb.v, line:1:1, endln:13:11
-    |vpiRange:
-    \_Range: , line:1:86, endln:1:97
-      |vpiParent:
-      \_LogicTypespec: , line:1:82, endln:1:97
-      |vpiLeftRange:
-      \_Operation: , line:1:87, endln:1:94
-        |vpiParent:
-        \_Range: , line:1:86, endln:1:97
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (work@TESTBENCH.width), line:1:87, endln:1:92
-          |vpiParent:
-          \_Operation: , line:1:87, endln:1:94
-          |vpiName:width
-          |vpiFullName:work@TESTBENCH.width
-          |vpiActual:
-          \_Parameter: (work@TESTBENCH.width), line:1:31, endln:1:40
-        |vpiOperand:
-        \_Constant: , line:1:93, endln:1:94
-          |vpiParent:
-          \_Operation: , line:1:87, endln:1:94
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:1:95, endln:1:96
-        |vpiParent:
-        \_Range: , line:1:86, endln:1:97
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiImportTypespec:
   \_LogicTypespec: , line:1:49, endln:1:65
   |vpiImportTypespec:
-  \_LogicTypespec: , line:1:82, endln:1:97
+  \_LogicTypespec: , line:1:82, endln:1:85
   |vpiImportTypespec:
   \_LogicNet: (work@TESTBENCH.observe), line:1:66, endln:1:73
     |vpiParent:
@@ -1573,7 +1481,7 @@ Design: (unnamed)
       \_Port: (drive), line:1:98, endln:1:103
       |vpiFullName:work@TESTBENCH.drive
       |vpiActual:
-      \_LogicTypespec: , line:1:82, endln:1:97
+      \_LogicTypespec: , line:1:82, endln:1:85
 |vpiAllModules:
 \_Module: work@SUB (work@SUB), file:${SURELOG_DIR}/tests/OneNetRange/dut.v, line:15:1, endln:17:10
   |vpiParent:
@@ -1638,42 +1546,9 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_LogicTypespec: , line:15:71, endln:15:86
+  \_LogicTypespec: , line:15:71, endln:15:74
     |vpiParent:
     \_Module: work@SUB (work@SUB), file:${SURELOG_DIR}/tests/OneNetRange/dut.v, line:15:1, endln:17:10
-    |vpiRange:
-    \_Range: , line:15:75, endln:15:86
-      |vpiParent:
-      \_LogicTypespec: , line:15:71, endln:15:86
-      |vpiLeftRange:
-      \_Operation: , line:15:76, endln:15:83
-        |vpiParent:
-        \_Range: , line:15:75, endln:15:86
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (work@SUB.width), line:15:76, endln:15:81
-          |vpiParent:
-          \_Operation: , line:15:76, endln:15:83
-          |vpiName:width
-          |vpiFullName:work@SUB.width
-          |vpiActual:
-          \_Parameter: (work@SUB.width), line:15:24, endln:15:33
-        |vpiOperand:
-        \_Constant: , line:15:82, endln:15:83
-          |vpiParent:
-          \_Operation: , line:15:76, endln:15:83
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:15:84, endln:15:85
-        |vpiParent:
-        \_Range: , line:15:75, endln:15:86
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiTypedef:
   \_LogicTypespec: , line:15:42, endln:15:58
     |vpiParent:
@@ -1712,42 +1587,9 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_LogicTypespec: , line:15:71, endln:15:86
+  \_LogicTypespec: , line:15:71, endln:15:74
     |vpiParent:
     \_Module: work@SUB (work@SUB), file:${SURELOG_DIR}/tests/OneNetRange/dut.v, line:15:1, endln:17:10
-    |vpiRange:
-    \_Range: , line:15:75, endln:15:86
-      |vpiParent:
-      \_LogicTypespec: , line:15:71, endln:15:86
-      |vpiLeftRange:
-      \_Operation: , line:15:76, endln:15:83
-        |vpiParent:
-        \_Range: , line:15:75, endln:15:86
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (work@SUB.width), line:15:76, endln:15:81
-          |vpiParent:
-          \_Operation: , line:15:76, endln:15:83
-          |vpiName:width
-          |vpiFullName:work@SUB.width
-          |vpiActual:
-          \_Parameter: (work@SUB.width), line:15:24, endln:15:33
-        |vpiOperand:
-        \_Constant: , line:15:82, endln:15:83
-          |vpiParent:
-          \_Operation: , line:15:76, endln:15:83
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:15:84, endln:15:85
-        |vpiParent:
-        \_Range: , line:15:75, endln:15:86
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiImportTypespec:
   \_LogicTypespec: , line:15:42, endln:15:58
   |vpiImportTypespec:
@@ -1755,7 +1597,7 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@SUB (work@SUB), file:${SURELOG_DIR}/tests/OneNetRange/dut.v, line:15:1, endln:17:10
     |vpiTypespec:
-    \_RefTypespec: (work@SUB.inp), line:15:42, endln:15:58
+    \_RefTypespec: (work@SUB.inp), line:15:42, endln:15:46
       |vpiParent:
       \_LogicNet: (work@SUB.inp), line:15:59, endln:15:62
       |vpiFullName:work@SUB.inp
@@ -1765,25 +1607,25 @@ Design: (unnamed)
     |vpiFullName:work@SUB.inp
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicTypespec: , line:15:71, endln:15:86
+  \_LogicTypespec: , line:15:71, endln:15:74
   |vpiImportTypespec:
   \_LogicNet: (work@SUB.out), line:15:87, endln:15:90
     |vpiParent:
     \_Module: work@SUB (work@SUB), file:${SURELOG_DIR}/tests/OneNetRange/dut.v, line:15:1, endln:17:10
     |vpiTypespec:
-    \_RefTypespec: (work@SUB.out), line:15:71, endln:15:86
+    \_RefTypespec: (work@SUB.out), line:15:71, endln:15:74
       |vpiParent:
       \_LogicNet: (work@SUB.out), line:15:87, endln:15:90
       |vpiFullName:work@SUB.out
       |vpiActual:
-      \_LogicTypespec: , line:15:71, endln:15:86
+      \_LogicTypespec: , line:15:71, endln:15:74
     |vpiName:out
     |vpiFullName:work@SUB.out
     |vpiNetType:48
   |vpiImportTypespec:
   \_LogicTypespec: , line:15:42, endln:15:58
   |vpiImportTypespec:
-  \_LogicTypespec: , line:15:71, endln:15:86
+  \_LogicTypespec: , line:15:71, endln:15:74
   |vpiDefName:work@SUB
   |vpiNet:
   \_LogicNet: (work@SUB.inp), line:15:59, endln:15:62
@@ -1814,7 +1656,7 @@ Design: (unnamed)
       \_Port: (out), line:15:87, endln:15:90
       |vpiFullName:work@SUB.out
       |vpiActual:
-      \_LogicTypespec: , line:15:71, endln:15:86
+      \_LogicTypespec: , line:15:71, endln:15:74
   |vpiContAssign:
   \_ContAssign: , line:16:10, endln:16:19
     |vpiParent:
@@ -1963,7 +1805,7 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@TOP (work@TOP), file:${SURELOG_DIR}/tests/OneNetRange/tb.v, line:16:1, endln:23:10
     |vpiTypespec:
-    \_RefTypespec: (work@TOP.i), line:18:3, endln:18:19
+    \_RefTypespec: (work@TOP.i), line:18:3, endln:18:7
       |vpiParent:
       \_LogicNet: (work@TOP.i), line:18:20, endln:18:21
       |vpiFullName:work@TOP.i
@@ -1979,7 +1821,7 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@TOP (work@TOP), file:${SURELOG_DIR}/tests/OneNetRange/tb.v, line:16:1, endln:23:10
     |vpiTypespec:
-    \_RefTypespec: (work@TOP.o), line:19:3, endln:19:19
+    \_RefTypespec: (work@TOP.o), line:19:3, endln:19:7
       |vpiParent:
       \_LogicNet: (work@TOP.o), line:19:20, endln:19:21
       |vpiFullName:work@TOP.o
@@ -2233,42 +2075,9 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_LogicTypespec: , line:2:69, endln:2:84
+  \_LogicTypespec: , line:2:69, endln:2:72
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNetRange/dut.v, line:2:1, endln:5:10
-    |vpiRange:
-    \_Range: , line:2:73, endln:2:84
-      |vpiParent:
-      \_LogicTypespec: , line:2:69, endln:2:84
-      |vpiLeftRange:
-      \_Operation: , line:2:74, endln:2:81
-        |vpiParent:
-        \_Range: , line:2:73, endln:2:84
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (work@dut.width), line:2:74, endln:2:79
-          |vpiParent:
-          \_Operation: , line:2:74, endln:2:81
-          |vpiName:width
-          |vpiFullName:work@dut.width
-          |vpiActual:
-          \_Parameter: (work@dut.width), line:2:24, endln:2:33
-        |vpiOperand:
-        \_Constant: , line:2:80, endln:2:81
-          |vpiParent:
-          \_Operation: , line:2:74, endln:2:81
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:2:82, endln:2:83
-        |vpiParent:
-        \_Range: , line:2:73, endln:2:84
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiTypedef:
   \_LogicTypespec: , line:2:42, endln:2:58
     |vpiParent:
@@ -2307,42 +2116,9 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_LogicTypespec: , line:2:69, endln:2:84
+  \_LogicTypespec: , line:2:69, endln:2:72
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNetRange/dut.v, line:2:1, endln:5:10
-    |vpiRange:
-    \_Range: , line:2:73, endln:2:84
-      |vpiParent:
-      \_LogicTypespec: , line:2:69, endln:2:84
-      |vpiLeftRange:
-      \_Operation: , line:2:74, endln:2:81
-        |vpiParent:
-        \_Range: , line:2:73, endln:2:84
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (work@dut.width), line:2:74, endln:2:79
-          |vpiParent:
-          \_Operation: , line:2:74, endln:2:81
-          |vpiName:width
-          |vpiFullName:work@dut.width
-          |vpiActual:
-          \_Parameter: (work@dut.width), line:2:24, endln:2:33
-        |vpiOperand:
-        \_Constant: , line:2:80, endln:2:81
-          |vpiParent:
-          \_Operation: , line:2:74, endln:2:81
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:2:82, endln:2:83
-        |vpiParent:
-        \_Range: , line:2:73, endln:2:84
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiImportTypespec:
   \_ModuleTypespec: (ConnectTB), line:3:3, endln:3:12
   |vpiImportTypespec:
@@ -2354,7 +2130,7 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNetRange/dut.v, line:2:1, endln:5:10
     |vpiTypespec:
-    \_RefTypespec: (work@dut.i), line:2:42, endln:2:58
+    \_RefTypespec: (work@dut.i), line:2:42, endln:2:46
       |vpiParent:
       \_LogicNet: (work@dut.i), line:2:59, endln:2:60
       |vpiFullName:work@dut.i
@@ -2364,25 +2140,25 @@ Design: (unnamed)
     |vpiFullName:work@dut.i
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicTypespec: , line:2:69, endln:2:84
+  \_LogicTypespec: , line:2:69, endln:2:72
   |vpiImportTypespec:
   \_LogicNet: (work@dut.o), line:2:85, endln:2:86
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneNetRange/dut.v, line:2:1, endln:5:10
     |vpiTypespec:
-    \_RefTypespec: (work@dut.o), line:2:69, endln:2:84
+    \_RefTypespec: (work@dut.o), line:2:69, endln:2:72
       |vpiParent:
       \_LogicNet: (work@dut.o), line:2:85, endln:2:86
       |vpiFullName:work@dut.o
       |vpiActual:
-      \_LogicTypespec: , line:2:69, endln:2:84
+      \_LogicTypespec: , line:2:69, endln:2:72
     |vpiName:o
     |vpiFullName:work@dut.o
     |vpiNetType:48
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:42, endln:2:58
   |vpiImportTypespec:
-  \_LogicTypespec: , line:2:69, endln:2:84
+  \_LogicTypespec: , line:2:69, endln:2:72
   |vpiDefName:work@dut
   |vpiNet:
   \_LogicNet: (work@dut.i), line:2:59, endln:2:60
@@ -2413,7 +2189,7 @@ Design: (unnamed)
       \_Port: (o), line:2:85, endln:2:86
       |vpiFullName:work@dut.o
       |vpiActual:
-      \_LogicTypespec: , line:2:69, endln:2:84
+      \_LogicTypespec: , line:2:69, endln:2:72
   |vpiRefModule:
   \_RefModule: work@ConnectTB (conntb), line:3:3, endln:3:12
     |vpiParent:

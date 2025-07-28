@@ -210,11 +210,12 @@ ParamAssign                                            3
 Parameter                                              3
 Range                                                  3
 RefModule                                              2
-RefTypespec                                            9
+RefTypespec                                           10
 StringTypespec                                         3
 StructNet                                              1
 StructTypespec                                         1
 TaggedPattern                                          3
+TypedefTypespec                                        1
 TypespecMember                                         1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamNoSubst/slpp_all/surelog.uhdm ...
@@ -228,117 +229,127 @@ Design: (unnamed), id:1
   \_Design: (unnamed), id:1
   |vpiName:aes_pkg
   |vpiParameter:
-  \_Parameter: (aes_pkg::CTRL_RESET), id:13, line:6:22, endln:8:2
+  \_Parameter: (aes_pkg::CTRL_RESET), id:15, line:6:22, endln:8:2
     |vpiParent:
     \_Package: aes_pkg (aes_pkg), id:2, file:${SURELOG_DIR}/tests/ParamNoSubst/dut.sv, line:1:1, endln:9:11
     |vpiTypespec:
-    \_RefTypespec: (aes_pkg::CTRL_RESET::ctrl_reg_t), id:20, line:6:11, endln:6:21
+    \_RefTypespec: (aes_pkg::CTRL_RESET::ctrl_reg_t), id:22, line:6:11, endln:6:21
       |vpiParent:
-      \_Parameter: (aes_pkg::CTRL_RESET), id:13, line:6:22, endln:8:2
+      \_Parameter: (aes_pkg::CTRL_RESET), id:15, line:6:22, endln:8:2
       |vpiName:ctrl_reg_t
       |vpiFullName:aes_pkg::CTRL_RESET::ctrl_reg_t
       |vpiActual:
-      \_StructTypespec: (aes_pkg::ctrl_reg_t), id:6, line:2:9, endln:4:2
+      \_TypedefTypespec: (aes_pkg::ctrl_reg_t), id:6, line:4:3, endln:4:13
     |vpiName:CTRL_RESET
     |vpiFullName:aes_pkg::CTRL_RESET
   |vpiParamAssign:
-  \_ParamAssign: , id:21, line:6:22, endln:8:2
+  \_ParamAssign: , id:23, line:6:22, endln:8:2
     |vpiParent:
     \_Package: aes_pkg (aes_pkg), id:2, file:${SURELOG_DIR}/tests/ParamNoSubst/dut.sv, line:1:1, endln:9:11
     |vpiRhs:
-    \_Operation: , id:27, line:6:35, endln:8:2
+    \_Operation: , id:29, line:6:35, endln:8:2
       |vpiParent:
-      \_ParamAssign: , id:21, line:6:22, endln:8:2
+      \_ParamAssign: , id:23, line:6:22, endln:8:2
       |vpiOpType:75
       |vpiOperand:
-      \_TaggedPattern: , id:28, line:7:3, endln:7:23
+      \_TaggedPattern: , id:30, line:7:3, endln:7:23
         |vpiParent:
-        \_Operation: , id:27, line:6:35, endln:8:2
+        \_Operation: , id:29, line:6:35, endln:8:2
         |vpiPattern:
-        \_Constant: , id:29, line:7:21, endln:7:23
+        \_Constant: , id:31, line:7:21, endln:7:23
           |vpiParent:
-          \_TaggedPattern: , id:28, line:7:3, endln:7:23
+          \_TaggedPattern: , id:30, line:7:3, endln:7:23
           |vpiDecompile:'0
           |vpiSize:-1
           |BIN:0
           |vpiConstType:3
         |vpiTypespec:
-        \_RefTypespec: (aes_pkg::manual_operation), id:31, line:7:3, endln:7:19
+        \_RefTypespec: (aes_pkg::manual_operation), id:33, line:7:3, endln:7:19
           |vpiParent:
-          \_TaggedPattern: , id:28, line:7:3, endln:7:23
+          \_TaggedPattern: , id:30, line:7:3, endln:7:23
           |vpiName:manual_operation
           |vpiFullName:aes_pkg::manual_operation
           |vpiActual:
-          \_StringTypespec: (manual_operation), id:30, line:7:3, endln:7:19
+          \_StringTypespec: , id:32, line:7:3, endln:7:19
     |vpiLhs:
-    \_Parameter: (aes_pkg::CTRL_RESET), id:13, line:6:22, endln:8:2
+    \_Parameter: (aes_pkg::CTRL_RESET), id:15, line:6:22, endln:8:2
   |vpiTypedef:
-  \_StructTypespec: (aes_pkg::ctrl_reg_t), id:6, line:2:9, endln:4:2
+  \_TypedefTypespec: (aes_pkg::ctrl_reg_t), id:6, line:4:3, endln:4:13
     |vpiParent:
     \_Package: aes_pkg (aes_pkg), id:2, file:${SURELOG_DIR}/tests/ParamNoSubst/dut.sv, line:1:1, endln:9:11
     |vpiName:aes_pkg::ctrl_reg_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (aes_pkg::ctrl_reg_t), id:14, line:2:9, endln:4:2
+      |vpiParent:
+      \_TypedefTypespec: (aes_pkg::ctrl_reg_t), id:6, line:4:3, endln:4:13
+      |vpiFullName:aes_pkg::ctrl_reg_t
+      |vpiActual:
+      \_StructTypespec: , id:7, line:2:9, endln:4:2
+  |vpiTypedef:
+  \_StructTypespec: , id:7, line:2:9, endln:4:2
+    |vpiParent:
+    \_Package: aes_pkg (aes_pkg), id:2, file:${SURELOG_DIR}/tests/ParamNoSubst/dut.sv, line:1:1, endln:9:11
     |vpiPacked:1
     |vpiTypespecMember:
-    \_TypespecMember: (manual_operation), id:11, line:3:15, endln:3:31
+    \_TypespecMember: (manual_operation), id:12, line:3:15, endln:3:31
       |vpiParent:
-      \_StructTypespec: (aes_pkg::ctrl_reg_t), id:6, line:2:9, endln:4:2
+      \_StructTypespec: , id:7, line:2:9, endln:4:2
       |vpiName:manual_operation
       |vpiTypespec:
-      \_RefTypespec: (aes_pkg::ctrl_reg_t::manual_operation), id:12, line:3:3, endln:3:14
+      \_RefTypespec: (aes_pkg::manual_operation), id:13, line:3:3, endln:3:14
         |vpiParent:
-        \_TypespecMember: (manual_operation), id:11, line:3:15, endln:3:31
-        |vpiFullName:aes_pkg::ctrl_reg_t::manual_operation
+        \_TypespecMember: (manual_operation), id:12, line:3:15, endln:3:31
+        |vpiFullName:aes_pkg::manual_operation
         |vpiActual:
-        \_LogicTypespec: , id:10, line:3:3, endln:3:14
+        \_LogicTypespec: , id:8, line:3:3, endln:3:14
   |vpiTypedef:
-  \_LogicTypespec: , id:10, line:3:3, endln:3:14
+  \_LogicTypespec: , id:8, line:3:3, endln:3:14
     |vpiParent:
     \_Package: aes_pkg (aes_pkg), id:2, file:${SURELOG_DIR}/tests/ParamNoSubst/dut.sv, line:1:1, endln:9:11
     |vpiRange:
-    \_Range: , id:7, line:3:8, endln:3:14
+    \_Range: , id:9, line:3:8, endln:3:14
       |vpiParent:
-      \_LogicTypespec: , id:10, line:3:3, endln:3:14
+      \_LogicTypespec: , id:8, line:3:3, endln:3:14
       |vpiLeftRange:
-      \_Constant: , id:8, line:3:9, endln:3:11
+      \_Constant: , id:10, line:3:9, endln:3:11
         |vpiParent:
-        \_Range: , id:7, line:3:8, endln:3:14
+        \_Range: , id:9, line:3:8, endln:3:14
         |vpiDecompile:31
         |vpiSize:64
         |UINT:31
         |vpiConstType:9
       |vpiRightRange:
-      \_Constant: , id:9, line:3:12, endln:3:13
+      \_Constant: , id:11, line:3:12, endln:3:13
         |vpiParent:
-        \_Range: , id:7, line:3:8, endln:3:14
+        \_Range: , id:9, line:3:8, endln:3:14
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_StringTypespec: (manual_operation), id:17, line:7:3, endln:7:19
+  \_StringTypespec: , id:19, line:7:3, endln:7:19
     |vpiParent:
     \_Package: aes_pkg (aes_pkg), id:2, file:${SURELOG_DIR}/tests/ParamNoSubst/dut.sv, line:1:1, endln:9:11
-    |vpiName:manual_operation
   |vpiTypedef:
-  \_StringTypespec: (manual_operation), id:25, line:7:3, endln:7:19
+  \_StringTypespec: , id:27, line:7:3, endln:7:19
     |vpiParent:
     \_Package: aes_pkg (aes_pkg), id:2, file:${SURELOG_DIR}/tests/ParamNoSubst/dut.sv, line:1:1, endln:9:11
-    |vpiName:manual_operation
   |vpiTypedef:
-  \_StringTypespec: (manual_operation), id:30, line:7:3, endln:7:19
+  \_StringTypespec: , id:32, line:7:3, endln:7:19
     |vpiParent:
     \_Package: aes_pkg (aes_pkg), id:2, file:${SURELOG_DIR}/tests/ParamNoSubst/dut.sv, line:1:1, endln:9:11
-    |vpiName:manual_operation
   |vpiImportTypespec:
-  \_StructTypespec: (aes_pkg::ctrl_reg_t), id:6, line:2:9, endln:4:2
+  \_TypedefTypespec: (aes_pkg::ctrl_reg_t), id:6, line:4:3, endln:4:13
   |vpiImportTypespec:
-  \_LogicTypespec: , id:10, line:3:3, endln:3:14
+  \_StructTypespec: , id:7, line:2:9, endln:4:2
   |vpiImportTypespec:
-  \_StringTypespec: (manual_operation), id:17, line:7:3, endln:7:19
+  \_LogicTypespec: , id:8, line:3:3, endln:3:14
   |vpiImportTypespec:
-  \_StringTypespec: (manual_operation), id:25, line:7:3, endln:7:19
+  \_StringTypespec: , id:19, line:7:3, endln:7:19
   |vpiImportTypespec:
-  \_StringTypespec: (manual_operation), id:30, line:7:3, endln:7:19
+  \_StringTypespec: , id:27, line:7:3, endln:7:19
+  |vpiImportTypespec:
+  \_StringTypespec: , id:32, line:7:3, endln:7:19
   |vpiDefName:aes_pkg
 |vpiAllModules:
 \_Module: work@aes_core (work@aes_core), id:5, file:${SURELOG_DIR}/tests/ParamNoSubst/dut.sv, line:22:1, endln:26:10
@@ -346,46 +357,46 @@ Design: (unnamed), id:1
   \_Design: (unnamed), id:1
   |vpiName:work@aes_core
   |vpiTypedef:
-  \_ImportTypespec: (aes_pkg), id:32, line:23:10, endln:23:20
+  \_ImportTypespec: (aes_pkg), id:34, line:23:10, endln:23:20
     |vpiParent:
     \_Module: work@aes_core (work@aes_core), id:5, file:${SURELOG_DIR}/tests/ParamNoSubst/dut.sv, line:22:1, endln:26:10
     |vpiName:aes_pkg
     |vpiImportTypespecItem:
-    \_Constant: , id:33, line:23:10, endln:23:20
+    \_Constant: , id:35, line:23:10, endln:23:20
       |vpiParent:
-      \_ImportTypespec: (aes_pkg), id:32, line:23:10, endln:23:20
+      \_ImportTypespec: (aes_pkg), id:34, line:23:10, endln:23:20
       |vpiDecompile:*
       |vpiSize:8
       |STRING:*
       |vpiConstType:8
   |vpiTypedef:
-  \_ModuleTypespec: (prim_subreg_shadow), id:34, line:25:3, endln:25:21
+  \_ModuleTypespec: (prim_subreg_shadow), id:36, line:25:3, endln:25:21
     |vpiParent:
     \_Module: work@aes_core (work@aes_core), id:5, file:${SURELOG_DIR}/tests/ParamNoSubst/dut.sv, line:22:1, endln:26:10
     |vpiName:prim_subreg_shadow
   |vpiImportTypespec:
-  \_ImportTypespec: (aes_pkg), id:32, line:23:10, endln:23:20
+  \_ImportTypespec: (aes_pkg), id:34, line:23:10, endln:23:20
   |vpiImportTypespec:
-  \_ModuleTypespec: (prim_subreg_shadow), id:34, line:25:3, endln:25:21
+  \_ModuleTypespec: (prim_subreg_shadow), id:36, line:25:3, endln:25:21
   |vpiImportTypespec:
-  \_StructNet: (work@aes_core.ctrl_q), id:36, line:24:14, endln:24:20
+  \_StructNet: (work@aes_core.ctrl_q), id:38, line:24:14, endln:24:20
     |vpiParent:
     \_Module: work@aes_core (work@aes_core), id:5, file:${SURELOG_DIR}/tests/ParamNoSubst/dut.sv, line:22:1, endln:26:10
     |vpiTypespec:
-    \_RefTypespec: (work@aes_core.ctrl_q.ctrl_q), id:37, line:24:3, endln:24:13
+    \_RefTypespec: (work@aes_core.ctrl_q.ctrl_reg_t), id:39, line:24:3, endln:24:13
       |vpiParent:
-      \_StructNet: (work@aes_core.ctrl_q), id:36, line:24:14, endln:24:20
-      |vpiName:ctrl_q
-      |vpiFullName:work@aes_core.ctrl_q.ctrl_q
+      \_StructNet: (work@aes_core.ctrl_q), id:38, line:24:14, endln:24:20
+      |vpiName:ctrl_reg_t
+      |vpiFullName:work@aes_core.ctrl_q.ctrl_reg_t
       |vpiActual:
-      \_StructTypespec: (aes_pkg::ctrl_reg_t), id:6, line:2:9, endln:4:2
+      \_TypedefTypespec: (aes_pkg::ctrl_reg_t), id:6, line:4:3, endln:4:13
     |vpiName:ctrl_q
     |vpiFullName:work@aes_core.ctrl_q
   |vpiDefName:work@aes_core
   |vpiNet:
-  \_StructNet: (work@aes_core.ctrl_q), id:36, line:24:14, endln:24:20
+  \_StructNet: (work@aes_core.ctrl_q), id:38, line:24:14, endln:24:20
   |vpiRefModule:
-  \_RefModule: work@prim_subreg_shadow (ctrl_shadowed_reg), id:35, line:25:3, endln:25:21
+  \_RefModule: work@prim_subreg_shadow (ctrl_shadowed_reg), id:37, line:25:3, endln:25:21
     |vpiParent:
     \_Module: work@aes_core (work@aes_core), id:5, file:${SURELOG_DIR}/tests/ParamNoSubst/dut.sv, line:22:1, endln:26:10
     |vpiName:ctrl_shadowed_reg
@@ -398,59 +409,59 @@ Design: (unnamed), id:1
   \_Design: (unnamed), id:1
   |vpiName:work@prim_subreg
   |vpiParameter:
-  \_Parameter: (work@prim_subreg.RESVAL), id:42, line:12:26, endln:12:37
+  \_Parameter: (work@prim_subreg.RESVAL), id:44, line:12:26, endln:12:37
     |vpiParent:
     \_Module: work@prim_subreg (work@prim_subreg), id:3, file:${SURELOG_DIR}/tests/ParamNoSubst/dut.sv, line:11:1, endln:14:10
     |BIN:0
     |vpiTypespec:
-    \_RefTypespec: (work@prim_subreg.RESVAL), id:43, line:12:13, endln:12:25
+    \_RefTypespec: (work@prim_subreg.RESVAL), id:45, line:12:13, endln:12:25
       |vpiParent:
-      \_Parameter: (work@prim_subreg.RESVAL), id:42, line:12:26, endln:12:37
+      \_Parameter: (work@prim_subreg.RESVAL), id:44, line:12:26, endln:12:37
       |vpiFullName:work@prim_subreg.RESVAL
       |vpiActual:
-      \_LogicTypespec: , id:41, line:12:13, endln:12:25
+      \_LogicTypespec: , id:40, line:12:13, endln:12:25
     |vpiName:RESVAL
     |vpiFullName:work@prim_subreg.RESVAL
   |vpiParamAssign:
-  \_ParamAssign: , id:44, line:12:26, endln:12:37
+  \_ParamAssign: , id:46, line:12:26, endln:12:37
     |vpiParent:
     \_Module: work@prim_subreg (work@prim_subreg), id:3, file:${SURELOG_DIR}/tests/ParamNoSubst/dut.sv, line:11:1, endln:14:10
     |vpiRhs:
-    \_Constant: , id:45, line:12:35, endln:12:37
+    \_Constant: , id:47, line:12:35, endln:12:37
       |vpiParent:
-      \_ParamAssign: , id:44, line:12:26, endln:12:37
+      \_ParamAssign: , id:46, line:12:26, endln:12:37
       |vpiDecompile:'0
       |vpiSize:-1
       |BIN:0
       |vpiConstType:3
     |vpiLhs:
-    \_Parameter: (work@prim_subreg.RESVAL), id:42, line:12:26, endln:12:37
+    \_Parameter: (work@prim_subreg.RESVAL), id:44, line:12:26, endln:12:37
   |vpiTypedef:
-  \_LogicTypespec: , id:41, line:12:13, endln:12:25
+  \_LogicTypespec: , id:40, line:12:13, endln:12:25
     |vpiParent:
     \_Module: work@prim_subreg (work@prim_subreg), id:3, file:${SURELOG_DIR}/tests/ParamNoSubst/dut.sv, line:11:1, endln:14:10
     |vpiRange:
-    \_Range: , id:38, line:12:19, endln:12:25
+    \_Range: , id:41, line:12:19, endln:12:25
       |vpiParent:
-      \_LogicTypespec: , id:41, line:12:13, endln:12:25
+      \_LogicTypespec: , id:40, line:12:13, endln:12:25
       |vpiLeftRange:
-      \_Constant: , id:39, line:12:20, endln:12:22
+      \_Constant: , id:42, line:12:20, endln:12:22
         |vpiParent:
-        \_Range: , id:38, line:12:19, endln:12:25
+        \_Range: , id:41, line:12:19, endln:12:25
         |vpiDecompile:31
         |vpiSize:64
         |UINT:31
         |vpiConstType:9
       |vpiRightRange:
-      \_Constant: , id:40, line:12:23, endln:12:24
+      \_Constant: , id:43, line:12:23, endln:12:24
         |vpiParent:
-        \_Range: , id:38, line:12:19, endln:12:25
+        \_Range: , id:41, line:12:19, endln:12:25
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
   |vpiImportTypespec:
-  \_LogicTypespec: , id:41, line:12:13, endln:12:25
+  \_LogicTypespec: , id:40, line:12:13, endln:12:25
   |vpiDefName:work@prim_subreg
 |vpiAllModules:
 \_Module: work@prim_subreg_shadow (work@prim_subreg_shadow), id:4, file:${SURELOG_DIR}/tests/ParamNoSubst/dut.sv, line:16:1, endln:20:10
@@ -458,69 +469,69 @@ Design: (unnamed), id:1
   \_Design: (unnamed), id:1
   |vpiName:work@prim_subreg_shadow
   |vpiParameter:
-  \_Parameter: (work@prim_subreg_shadow.RESVAL), id:50, line:17:26, endln:17:37
+  \_Parameter: (work@prim_subreg_shadow.RESVAL), id:52, line:17:26, endln:17:37
     |vpiParent:
     \_Module: work@prim_subreg_shadow (work@prim_subreg_shadow), id:4, file:${SURELOG_DIR}/tests/ParamNoSubst/dut.sv, line:16:1, endln:20:10
     |BIN:0
     |vpiTypespec:
-    \_RefTypespec: (work@prim_subreg_shadow.RESVAL), id:51, line:17:13, endln:17:25
+    \_RefTypespec: (work@prim_subreg_shadow.RESVAL), id:53, line:17:13, endln:17:25
       |vpiParent:
-      \_Parameter: (work@prim_subreg_shadow.RESVAL), id:50, line:17:26, endln:17:37
+      \_Parameter: (work@prim_subreg_shadow.RESVAL), id:52, line:17:26, endln:17:37
       |vpiFullName:work@prim_subreg_shadow.RESVAL
       |vpiActual:
-      \_LogicTypespec: , id:49, line:17:13, endln:17:25
+      \_LogicTypespec: , id:48, line:17:13, endln:17:25
     |vpiName:RESVAL
     |vpiFullName:work@prim_subreg_shadow.RESVAL
   |vpiParamAssign:
-  \_ParamAssign: , id:52, line:17:26, endln:17:37
+  \_ParamAssign: , id:54, line:17:26, endln:17:37
     |vpiParent:
     \_Module: work@prim_subreg_shadow (work@prim_subreg_shadow), id:4, file:${SURELOG_DIR}/tests/ParamNoSubst/dut.sv, line:16:1, endln:20:10
     |vpiRhs:
-    \_Constant: , id:53, line:17:35, endln:17:37
+    \_Constant: , id:55, line:17:35, endln:17:37
       |vpiParent:
-      \_ParamAssign: , id:52, line:17:26, endln:17:37
+      \_ParamAssign: , id:54, line:17:26, endln:17:37
       |vpiDecompile:'0
       |vpiSize:-1
       |BIN:0
       |vpiConstType:3
     |vpiLhs:
-    \_Parameter: (work@prim_subreg_shadow.RESVAL), id:50, line:17:26, endln:17:37
+    \_Parameter: (work@prim_subreg_shadow.RESVAL), id:52, line:17:26, endln:17:37
   |vpiTypedef:
-  \_LogicTypespec: , id:49, line:17:13, endln:17:25
+  \_LogicTypespec: , id:48, line:17:13, endln:17:25
     |vpiParent:
     \_Module: work@prim_subreg_shadow (work@prim_subreg_shadow), id:4, file:${SURELOG_DIR}/tests/ParamNoSubst/dut.sv, line:16:1, endln:20:10
     |vpiRange:
-    \_Range: , id:46, line:17:19, endln:17:25
+    \_Range: , id:49, line:17:19, endln:17:25
       |vpiParent:
-      \_LogicTypespec: , id:49, line:17:13, endln:17:25
+      \_LogicTypespec: , id:48, line:17:13, endln:17:25
       |vpiLeftRange:
-      \_Constant: , id:47, line:17:20, endln:17:22
+      \_Constant: , id:50, line:17:20, endln:17:22
         |vpiParent:
-        \_Range: , id:46, line:17:19, endln:17:25
+        \_Range: , id:49, line:17:19, endln:17:25
         |vpiDecompile:31
         |vpiSize:64
         |UINT:31
         |vpiConstType:9
       |vpiRightRange:
-      \_Constant: , id:48, line:17:23, endln:17:24
+      \_Constant: , id:51, line:17:23, endln:17:24
         |vpiParent:
-        \_Range: , id:46, line:17:19, endln:17:25
+        \_Range: , id:49, line:17:19, endln:17:25
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_ModuleTypespec: (prim_subreg), id:54, line:19:3, endln:19:14
+  \_ModuleTypespec: (prim_subreg), id:56, line:19:3, endln:19:14
     |vpiParent:
     \_Module: work@prim_subreg_shadow (work@prim_subreg_shadow), id:4, file:${SURELOG_DIR}/tests/ParamNoSubst/dut.sv, line:16:1, endln:20:10
     |vpiName:prim_subreg
   |vpiImportTypespec:
-  \_LogicTypespec: , id:49, line:17:13, endln:17:25
+  \_LogicTypespec: , id:48, line:17:13, endln:17:25
   |vpiImportTypespec:
-  \_ModuleTypespec: (prim_subreg), id:54, line:19:3, endln:19:14
+  \_ModuleTypespec: (prim_subreg), id:56, line:19:3, endln:19:14
   |vpiDefName:work@prim_subreg_shadow
   |vpiRefModule:
-  \_RefModule: work@prim_subreg (committed_reg), id:55, line:19:3, endln:19:14
+  \_RefModule: work@prim_subreg (committed_reg), id:57, line:19:3, endln:19:14
     |vpiParent:
     \_Module: work@prim_subreg_shadow (work@prim_subreg_shadow), id:4, file:${SURELOG_DIR}/tests/ParamNoSubst/dut.sv, line:16:1, endln:20:10
     |vpiName:committed_reg

@@ -106,7 +106,7 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ClassDefn                                              8
 ClassTypespec                                          1
-Constant                                              21
+Constant                                               7
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              5
@@ -114,17 +114,17 @@ EnumTypespec                                           1
 Function                                               9
 IODecl                                                11
 IntTypespec                                            9
-LogicNet                                               2
+LogicNet                                               3
 LogicTypespec                                          6
-LogicVar                                               1
 Module                                                 1
 Package                                                1
 Port                                                   2
-Range                                                  8
+Range                                                  1
 RefObj                                                 2
-RefTypespec                                           17
+RefTypespec                                           18
 SysFuncCall                                            1
 Task                                                   9
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SignedPort/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -393,7 +393,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -427,14 +427,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/SignedPort/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -442,7 +441,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -450,7 +449,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -458,7 +457,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -466,13 +465,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/SignedPort/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -674,72 +687,15 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@dut
-  |vpiVariables:
-  \_LogicVar: (work@dut.c), line:3:22, endln:3:23
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/SignedPort/dut.sv, line:2:1, endln:5:10
-    |vpiTypespec:
-    \_RefTypespec: (work@dut.c), line:3:3, endln:3:21
-      |vpiParent:
-      \_LogicVar: (work@dut.c), line:3:22, endln:3:23
-      |vpiFullName:work@dut.c
-      |vpiActual:
-      \_LogicTypespec: , line:3:3, endln:3:21
-    |vpiName:c
-    |vpiFullName:work@dut.c
-    |vpiSigned:1
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@dut.c), line:3:22, endln:3:23
   |vpiTypedef:
-  \_LogicTypespec: , line:2:19, endln:2:37
+  \_LogicTypespec: , line:2:19, endln:2:31
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/SignedPort/dut.sv, line:2:1, endln:5:10
-    |vpiRange:
-    \_Range: , line:2:32, endln:2:37
-      |vpiParent:
-      \_LogicTypespec: , line:2:19, endln:2:37
-      |vpiLeftRange:
-      \_Constant: , line:2:33, endln:2:34
-        |vpiParent:
-        \_Range: , line:2:32, endln:2:37
-        |vpiDecompile:2
-        |vpiSize:64
-        |UINT:2
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:2:35, endln:2:36
-        |vpiParent:
-        \_Range: , line:2:32, endln:2:37
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
     |vpiSigned:1
   |vpiTypedef:
-  \_LogicTypespec: , line:2:48, endln:2:68
+  \_LogicTypespec: , line:2:48, endln:2:53
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/SignedPort/dut.sv, line:2:1, endln:5:10
-    |vpiRange:
-    \_Range: , line:2:63, endln:2:68
-      |vpiParent:
-      \_LogicTypespec: , line:2:48, endln:2:68
-      |vpiLeftRange:
-      \_Constant: , line:2:64, endln:2:65
-        |vpiParent:
-        \_Range: , line:2:63, endln:2:68
-        |vpiDecompile:2
-        |vpiSize:64
-        |UINT:2
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:2:66, endln:2:67
-        |vpiParent:
-        \_Range: , line:2:63, endln:2:68
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiTypedef:
   \_LogicTypespec: , line:3:3, endln:3:21
     |vpiParent:
@@ -766,100 +722,75 @@ Design: (unnamed)
         |vpiConstType:9
     |vpiSigned:1
   |vpiTypedef:
-  \_LogicTypespec: , line:2:19, endln:2:37
+  \_LogicTypespec: , line:2:19, endln:2:31
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/SignedPort/dut.sv, line:2:1, endln:5:10
-    |vpiRange:
-    \_Range: , line:2:32, endln:2:37
-      |vpiParent:
-      \_LogicTypespec: , line:2:19, endln:2:37
-      |vpiLeftRange:
-      \_Constant: , line:2:33, endln:2:34
-        |vpiParent:
-        \_Range: , line:2:32, endln:2:37
-        |vpiDecompile:2
-        |vpiSize:64
-        |UINT:2
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:2:35, endln:2:36
-        |vpiParent:
-        \_Range: , line:2:32, endln:2:37
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
     |vpiSigned:1
   |vpiTypedef:
-  \_LogicTypespec: , line:2:48, endln:2:68
+  \_LogicTypespec: , line:2:48, endln:2:53
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/SignedPort/dut.sv, line:2:1, endln:5:10
-    |vpiRange:
-    \_Range: , line:2:63, endln:2:68
-      |vpiParent:
-      \_LogicTypespec: , line:2:48, endln:2:68
-      |vpiLeftRange:
-      \_Constant: , line:2:64, endln:2:65
-        |vpiParent:
-        \_Range: , line:2:63, endln:2:68
-        |vpiDecompile:2
-        |vpiSize:64
-        |UINT:2
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:2:66, endln:2:67
-        |vpiParent:
-        \_Range: , line:2:63, endln:2:68
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiImportTypespec:
-  \_LogicTypespec: , line:2:19, endln:2:37
+  \_LogicTypespec: , line:2:19, endln:2:31
   |vpiImportTypespec:
   \_LogicNet: (work@dut.a), line:2:38, endln:2:39
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/SignedPort/dut.sv, line:2:1, endln:5:10
     |vpiTypespec:
-    \_RefTypespec: (work@dut.a), line:2:19, endln:2:37
+    \_RefTypespec: (work@dut.a), line:2:19, endln:2:24
       |vpiParent:
       \_LogicNet: (work@dut.a), line:2:38, endln:2:39
       |vpiFullName:work@dut.a
       |vpiActual:
-      \_LogicTypespec: , line:2:19, endln:2:37
+      \_LogicTypespec: , line:2:19, endln:2:31
     |vpiName:a
     |vpiFullName:work@dut.a
     |vpiNetType:36
     |vpiSigned:1
   |vpiImportTypespec:
-  \_LogicTypespec: , line:2:48, endln:2:68
+  \_LogicTypespec: , line:2:48, endln:2:53
   |vpiImportTypespec:
   \_LogicNet: (work@dut.b), line:2:69, endln:2:70
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/SignedPort/dut.sv, line:2:1, endln:5:10
     |vpiTypespec:
-    \_RefTypespec: (work@dut.b), line:2:48, endln:2:68
+    \_RefTypespec: (work@dut.b), line:2:48, endln:2:53
       |vpiParent:
       \_LogicNet: (work@dut.b), line:2:69, endln:2:70
       |vpiFullName:work@dut.b
       |vpiActual:
-      \_LogicTypespec: , line:2:48, endln:2:68
+      \_LogicTypespec: , line:2:48, endln:2:53
     |vpiName:b
     |vpiFullName:work@dut.b
     |vpiNetType:36
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:3, endln:3:21
   |vpiImportTypespec:
-  \_LogicVar: (work@dut.c), line:3:22, endln:3:23
+  \_LogicNet: (work@dut.c), line:3:22, endln:3:23
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/SignedPort/dut.sv, line:2:1, endln:5:10
+    |vpiTypespec:
+    \_RefTypespec: (work@dut.c), line:3:3, endln:3:21
+      |vpiParent:
+      \_LogicNet: (work@dut.c), line:3:22, endln:3:23
+      |vpiFullName:work@dut.c
+      |vpiActual:
+      \_LogicTypespec: , line:3:3, endln:3:21
+    |vpiName:c
+    |vpiFullName:work@dut.c
+    |vpiNetType:36
+    |vpiSigned:1
   |vpiImportTypespec:
-  \_LogicTypespec: , line:2:19, endln:2:37
+  \_LogicTypespec: , line:2:19, endln:2:31
   |vpiImportTypespec:
-  \_LogicTypespec: , line:2:48, endln:2:68
+  \_LogicTypespec: , line:2:48, endln:2:53
   |vpiDefName:work@dut
   |vpiNet:
   \_LogicNet: (work@dut.a), line:2:38, endln:2:39
   |vpiNet:
   \_LogicNet: (work@dut.b), line:2:69, endln:2:70
+  |vpiNet:
+  \_LogicNet: (work@dut.c), line:3:22, endln:3:23
   |vpiPort:
   \_Port: (a), line:2:38, endln:2:39
     |vpiParent:
@@ -872,7 +803,7 @@ Design: (unnamed)
       \_Port: (a), line:2:38, endln:2:39
       |vpiFullName:work@dut.a
       |vpiActual:
-      \_LogicTypespec: , line:2:19, endln:2:37
+      \_LogicTypespec: , line:2:19, endln:2:31
   |vpiPort:
   \_Port: (b), line:2:69, endln:2:70
     |vpiParent:
@@ -885,7 +816,7 @@ Design: (unnamed)
       \_Port: (b), line:2:69, endln:2:70
       |vpiFullName:work@dut.b
       |vpiActual:
-      \_LogicTypespec: , line:2:48, endln:2:68
+      \_LogicTypespec: , line:2:48, endln:2:53
   |vpiContAssign:
   \_ContAssign: , line:4:11, endln:4:27
     |vpiParent:

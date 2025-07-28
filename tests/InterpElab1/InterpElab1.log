@@ -243,10 +243,11 @@ ParamAssign                                            3
 Parameter                                              3
 Range                                                  4
 RefObj                                                 4
-RefTypespec                                           20
+RefTypespec                                           23
 StructTypespec                                         1
 SysFuncCall                                            1
 Task                                                   9
+TypedefTypespec                                        3
 TypespecMember                                         4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterpElab1/slpp_unit/surelog.uhdm ...
@@ -516,7 +517,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -550,14 +551,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/InterpElab1/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -565,7 +565,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -573,7 +573,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -581,7 +581,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -589,13 +589,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/InterpElab1/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -884,7 +898,7 @@ Design: (unnamed)
         |vpiName:lfsr_data_t
         |vpiFullName:work@dut.lfsr_data_t
         |vpiActual:
-        \_StructTypespec: (lfsr_data_t), line:13:13, endln:18:6
+        \_TypedefTypespec: (lfsr_data_t), line:18:7, endln:18:18
       |vpiName:$bits
     |vpiLhs:
     \_Parameter: (work@dut.LFSR_OUT_W), line:19:29, endln:19:60
@@ -896,6 +910,49 @@ Design: (unnamed)
   \_IntTypespec: , line:4:15, endln:4:27
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/InterpElab1/dut.sv, line:1:1, endln:21:10
+  |vpiTypedef:
+  \_EnumTypespec: , line:6:13, endln:11:20
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/InterpElab1/dut.sv, line:1:1, endln:21:10
+    |vpiBaseTypespec:
+    \_RefTypespec: (work@dut), line:6:18, endln:6:29
+      |vpiParent:
+      \_EnumTypespec: , line:6:13, endln:11:20
+      |vpiFullName:work@dut
+      |vpiActual:
+      \_LogicTypespec: , line:6:18, endln:6:29
+    |vpiEnumConst:
+    \_EnumConst: (DUMMY_ADD), line:7:7, endln:7:24
+      |vpiParent:
+      \_EnumTypespec: , line:6:13, endln:11:20
+      |vpiName:DUMMY_ADD
+      |BIN:00
+      |vpiDecompile:2'b00
+      |vpiSize:2
+    |vpiEnumConst:
+    \_EnumConst: (DUMMY_MUL), line:8:7, endln:8:24
+      |vpiParent:
+      \_EnumTypespec: , line:6:13, endln:11:20
+      |vpiName:DUMMY_MUL
+      |BIN:01
+      |vpiDecompile:2'b01
+      |vpiSize:2
+    |vpiEnumConst:
+    \_EnumConst: (DUMMY_DIV), line:9:7, endln:9:24
+      |vpiParent:
+      \_EnumTypespec: , line:6:13, endln:11:20
+      |vpiName:DUMMY_DIV
+      |BIN:10
+      |vpiDecompile:2'b10
+      |vpiSize:2
+    |vpiEnumConst:
+    \_EnumConst: (DUMMY_AND), line:10:7, endln:10:24
+      |vpiParent:
+      \_EnumTypespec: , line:6:13, endln:11:20
+      |vpiName:DUMMY_AND
+      |BIN:11
+      |vpiDecompile:2'b11
+      |vpiSize:2
   |vpiTypedef:
   \_LogicTypespec: , line:6:18, endln:6:29
     |vpiParent:
@@ -921,102 +978,81 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_EnumTypespec: (dummy_instr_e), line:6:13, endln:11:20
+  \_TypedefTypespec: (dummy_instr_e), line:11:7, endln:11:20
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/InterpElab1/dut.sv, line:1:1, endln:21:10
     |vpiName:dummy_instr_e
-    |vpiBaseTypespec:
-    \_RefTypespec: (work@dut.dummy_instr_e), line:6:18, endln:6:29
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@dut.dummy_instr_e), line:6:13, endln:11:6
       |vpiParent:
-      \_EnumTypespec: (dummy_instr_e), line:6:13, endln:11:20
+      \_TypedefTypespec: (dummy_instr_e), line:11:7, endln:11:20
       |vpiFullName:work@dut.dummy_instr_e
       |vpiActual:
-      \_LogicTypespec: , line:6:18, endln:6:29
-    |vpiEnumConst:
-    \_EnumConst: (DUMMY_ADD), line:7:7, endln:7:24
-      |vpiParent:
-      \_EnumTypespec: (dummy_instr_e), line:6:13, endln:11:20
-      |vpiName:DUMMY_ADD
-      |BIN:00
-      |vpiDecompile:2'b00
-      |vpiSize:2
-    |vpiEnumConst:
-    \_EnumConst: (DUMMY_MUL), line:8:7, endln:8:24
-      |vpiParent:
-      \_EnumTypespec: (dummy_instr_e), line:6:13, endln:11:20
-      |vpiName:DUMMY_MUL
-      |BIN:01
-      |vpiDecompile:2'b01
-      |vpiSize:2
-    |vpiEnumConst:
-    \_EnumConst: (DUMMY_DIV), line:9:7, endln:9:24
-      |vpiParent:
-      \_EnumTypespec: (dummy_instr_e), line:6:13, endln:11:20
-      |vpiName:DUMMY_DIV
-      |BIN:10
-      |vpiDecompile:2'b10
-      |vpiSize:2
-    |vpiEnumConst:
-    \_EnumConst: (DUMMY_AND), line:10:7, endln:10:24
-      |vpiParent:
-      \_EnumTypespec: (dummy_instr_e), line:6:13, endln:11:20
-      |vpiName:DUMMY_AND
-      |BIN:11
-      |vpiDecompile:2'b11
-      |vpiSize:2
+      \_EnumTypespec: , line:6:13, endln:11:20
   |vpiTypedef:
-  \_StructTypespec: (lfsr_data_t), line:13:13, endln:18:6
+  \_TypedefTypespec: (lfsr_data_t), line:18:7, endln:18:18
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/InterpElab1/dut.sv, line:1:1, endln:21:10
     |vpiName:lfsr_data_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@dut.lfsr_data_t), line:13:13, endln:18:6
+      |vpiParent:
+      \_TypedefTypespec: (lfsr_data_t), line:18:7, endln:18:18
+      |vpiFullName:work@dut.lfsr_data_t
+      |vpiActual:
+      \_StructTypespec: , line:13:13, endln:18:6
+  |vpiTypedef:
+  \_StructTypespec: , line:13:13, endln:18:6
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/InterpElab1/dut.sv, line:1:1, endln:21:10
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (instr_type), line:14:33, endln:14:43
       |vpiParent:
-      \_StructTypespec: (lfsr_data_t), line:13:13, endln:18:6
+      \_StructTypespec: , line:13:13, endln:18:6
       |vpiName:instr_type
       |vpiTypespec:
-      \_RefTypespec: (work@dut.lfsr_data_t.instr_type.dummy_instr_e), line:14:7, endln:14:20
+      \_RefTypespec: (work@dut.instr_type.dummy_instr_e), line:14:7, endln:14:20
         |vpiParent:
         \_TypespecMember: (instr_type), line:14:33, endln:14:43
         |vpiName:dummy_instr_e
-        |vpiFullName:work@dut.lfsr_data_t.instr_type.dummy_instr_e
+        |vpiFullName:work@dut.instr_type.dummy_instr_e
         |vpiActual:
-        \_EnumTypespec: (dummy_instr_e), line:6:13, endln:11:20
+        \_TypedefTypespec: (dummy_instr_e), line:11:7, endln:11:20
     |vpiTypespecMember:
     \_TypespecMember: (op_b), line:15:33, endln:15:37
       |vpiParent:
-      \_StructTypespec: (lfsr_data_t), line:13:13, endln:18:6
+      \_StructTypespec: , line:13:13, endln:18:6
       |vpiName:op_b
       |vpiTypespec:
-      \_RefTypespec: (work@dut.lfsr_data_t.op_b), line:15:7, endln:15:23
+      \_RefTypespec: (work@dut.op_b), line:15:7, endln:15:23
         |vpiParent:
         \_TypespecMember: (op_b), line:15:33, endln:15:37
-        |vpiFullName:work@dut.lfsr_data_t.op_b
+        |vpiFullName:work@dut.op_b
         |vpiActual:
         \_LogicTypespec: , line:15:7, endln:15:23
     |vpiTypespecMember:
     \_TypespecMember: (op_a), line:16:33, endln:16:37
       |vpiParent:
-      \_StructTypespec: (lfsr_data_t), line:13:13, endln:18:6
+      \_StructTypespec: , line:13:13, endln:18:6
       |vpiName:op_a
       |vpiTypespec:
-      \_RefTypespec: (work@dut.lfsr_data_t.op_a), line:16:7, endln:16:23
+      \_RefTypespec: (work@dut.op_a), line:16:7, endln:16:23
         |vpiParent:
         \_TypespecMember: (op_a), line:16:33, endln:16:37
-        |vpiFullName:work@dut.lfsr_data_t.op_a
+        |vpiFullName:work@dut.op_a
         |vpiActual:
         \_LogicTypespec: , line:16:7, endln:16:23
     |vpiTypespecMember:
     \_TypespecMember: (cnt), line:17:33, endln:17:36
       |vpiParent:
-      \_StructTypespec: (lfsr_data_t), line:13:13, endln:18:6
+      \_StructTypespec: , line:13:13, endln:18:6
       |vpiName:cnt
       |vpiTypespec:
-      \_RefTypespec: (work@dut.lfsr_data_t.cnt), line:17:7, endln:17:32
+      \_RefTypespec: (work@dut.cnt), line:17:7, endln:17:32
         |vpiParent:
         \_TypespecMember: (cnt), line:17:33, endln:17:36
-        |vpiFullName:work@dut.lfsr_data_t.cnt
+        |vpiFullName:work@dut.cnt
         |vpiActual:
         \_LogicTypespec: , line:17:7, endln:17:32
   |vpiTypedef:
@@ -1139,11 +1175,15 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:4:15, endln:4:27
   |vpiImportTypespec:
+  \_EnumTypespec: , line:6:13, endln:11:20
+  |vpiImportTypespec:
   \_LogicTypespec: , line:6:18, endln:6:29
   |vpiImportTypespec:
-  \_EnumTypespec: (dummy_instr_e), line:6:13, endln:11:20
+  \_TypedefTypespec: (dummy_instr_e), line:11:7, endln:11:20
   |vpiImportTypespec:
-  \_StructTypespec: (lfsr_data_t), line:13:13, endln:18:6
+  \_TypedefTypespec: (lfsr_data_t), line:18:7, endln:18:18
+  |vpiImportTypespec:
+  \_StructTypespec: , line:13:13, endln:18:6
   |vpiImportTypespec:
   \_LogicTypespec: , line:15:7, endln:15:23
   |vpiImportTypespec:

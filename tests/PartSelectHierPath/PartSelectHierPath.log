@@ -136,9 +136,10 @@ Package                                                1
 PartSelect                                             2
 Range                                                  2
 RefObj                                                 1
-RefTypespec                                            3
+RefTypespec                                            4
 StructNet                                              1
 StructTypespec                                         1
+TypedefTypespec                                        1
 TypespecMember                                         2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PartSelectHierPath/slpp_all/surelog.uhdm ...
@@ -152,33 +153,44 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:swerv_types
   |vpiTypedef:
-  \_StructTypespec: (swerv_types::trace_pkt_t), line:3:9, endln:6:25
+  \_TypedefTypespec: (swerv_types::trace_pkt_t), line:6:26, endln:6:37
     |vpiParent:
     \_Package: swerv_types (swerv_types), file:${SURELOG_DIR}/tests/PartSelectHierPath/dut.sv, line:1:1, endln:8:11
     |vpiName:swerv_types::trace_pkt_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (swerv_types::trace_pkt_t), line:3:9, endln:6:25
+      |vpiParent:
+      \_TypedefTypespec: (swerv_types::trace_pkt_t), line:6:26, endln:6:37
+      |vpiFullName:swerv_types::trace_pkt_t
+      |vpiActual:
+      \_StructTypespec: , line:3:9, endln:6:25
+  |vpiTypedef:
+  \_StructTypespec: , line:3:9, endln:6:25
+    |vpiParent:
+    \_Package: swerv_types (swerv_types), file:${SURELOG_DIR}/tests/PartSelectHierPath/dut.sv, line:1:1, endln:8:11
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (trace_rv_i_valid_ip), line:4:36, endln:4:55
       |vpiParent:
-      \_StructTypespec: (swerv_types::trace_pkt_t), line:3:9, endln:6:25
+      \_StructTypespec: , line:3:9, endln:6:25
       |vpiName:trace_rv_i_valid_ip
       |vpiTypespec:
-      \_RefTypespec: (swerv_types::trace_pkt_t::trace_rv_i_valid_ip), line:4:24, endln:4:35
+      \_RefTypespec: (swerv_types::trace_rv_i_valid_ip), line:4:24, endln:4:35
         |vpiParent:
         \_TypespecMember: (trace_rv_i_valid_ip), line:4:36, endln:4:55
-        |vpiFullName:swerv_types::trace_pkt_t::trace_rv_i_valid_ip
+        |vpiFullName:swerv_types::trace_rv_i_valid_ip
         |vpiActual:
         \_LogicTypespec: , line:4:24, endln:4:35
     |vpiTypespecMember:
     \_TypespecMember: (trace_rv_i_insn_ip), line:5:37, endln:5:55
       |vpiParent:
-      \_StructTypespec: (swerv_types::trace_pkt_t), line:3:9, endln:6:25
+      \_StructTypespec: , line:3:9, endln:6:25
       |vpiName:trace_rv_i_insn_ip
       |vpiTypespec:
-      \_RefTypespec: (swerv_types::trace_pkt_t::trace_rv_i_insn_ip), line:5:24, endln:5:36
+      \_RefTypespec: (swerv_types::trace_rv_i_insn_ip), line:5:24, endln:5:36
         |vpiParent:
         \_TypespecMember: (trace_rv_i_insn_ip), line:5:37, endln:5:55
-        |vpiFullName:swerv_types::trace_pkt_t::trace_rv_i_insn_ip
+        |vpiFullName:swerv_types::trace_rv_i_insn_ip
         |vpiActual:
         \_LogicTypespec: , line:5:24, endln:5:36
   |vpiTypedef:
@@ -230,7 +242,9 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiImportTypespec:
-  \_StructTypespec: (swerv_types::trace_pkt_t), line:3:9, endln:6:25
+  \_TypedefTypespec: (swerv_types::trace_pkt_t), line:6:26, endln:6:37
+  |vpiImportTypespec:
+  \_StructTypespec: , line:3:9, endln:6:25
   |vpiImportTypespec:
   \_LogicTypespec: , line:4:24, endln:4:35
   |vpiImportTypespec:
@@ -261,13 +275,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PartSelectHierPath/dut.sv, line:10:1, endln:14:10
     |vpiTypespec:
-    \_RefTypespec: (work@top.trace_rv_trace_pkt.trace_rv_trace_pkt), line:12:3, endln:12:14
+    \_RefTypespec: (work@top.trace_rv_trace_pkt.trace_pkt_t), line:12:3, endln:12:14
       |vpiParent:
       \_StructNet: (work@top.trace_rv_trace_pkt), line:12:16, endln:12:34
-      |vpiName:trace_rv_trace_pkt
-      |vpiFullName:work@top.trace_rv_trace_pkt.trace_rv_trace_pkt
+      |vpiName:trace_pkt_t
+      |vpiFullName:work@top.trace_rv_trace_pkt.trace_pkt_t
       |vpiActual:
-      \_StructTypespec: (swerv_types::trace_pkt_t), line:3:9, endln:6:25
+      \_TypedefTypespec: (swerv_types::trace_pkt_t), line:6:26, endln:6:37
     |vpiName:trace_rv_trace_pkt
     |vpiFullName:work@top.trace_rv_trace_pkt
   |vpiImportTypespec:

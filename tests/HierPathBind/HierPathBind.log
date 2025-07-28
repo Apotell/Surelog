@@ -136,9 +136,10 @@ ModuleTypespec                                         1
 Port                                                   3
 RefModule                                              1
 RefObj                                                 6
-RefTypespec                                            6
+RefTypespec                                            7
 StructNet                                              1
 StructTypespec                                         1
+TypedefTypespec                                        1
 TypespecMember                                         1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathBind/slpp_all/surelog.uhdm ...
@@ -219,21 +220,32 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:work@top
   |vpiTypedef:
-  \_StructTypespec: (alert_rx_t), line:6:12, endln:8:5
+  \_TypedefTypespec: (alert_rx_t), line:8:6, endln:8:16
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathBind/dut.sv, line:5:1, endln:15:10
     |vpiName:alert_rx_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@top.alert_rx_t), line:6:12, endln:8:5
+      |vpiParent:
+      \_TypedefTypespec: (alert_rx_t), line:8:6, endln:8:16
+      |vpiFullName:work@top.alert_rx_t
+      |vpiActual:
+      \_StructTypespec: , line:6:12, endln:8:5
+  |vpiTypedef:
+  \_StructTypespec: , line:6:12, endln:8:5
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathBind/dut.sv, line:5:1, endln:15:10
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (ping_p), line:7:16, endln:7:22
       |vpiParent:
-      \_StructTypespec: (alert_rx_t), line:6:12, endln:8:5
+      \_StructTypespec: , line:6:12, endln:8:5
       |vpiName:ping_p
       |vpiTypespec:
-      \_RefTypespec: (work@top.alert_rx_t.ping_p), line:7:7, endln:7:12
+      \_RefTypespec: (work@top.ping_p), line:7:7, endln:7:12
         |vpiParent:
         \_TypespecMember: (ping_p), line:7:16, endln:7:22
-        |vpiFullName:work@top.alert_rx_t.ping_p
+        |vpiFullName:work@top.ping_p
         |vpiActual:
         \_LogicTypespec: , line:7:7, endln:7:12
   |vpiTypedef:
@@ -254,7 +266,9 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathBind/dut.sv, line:5:1, endln:15:10
   |vpiImportTypespec:
-  \_StructTypespec: (alert_rx_t), line:6:12, endln:8:5
+  \_TypedefTypespec: (alert_rx_t), line:8:6, endln:8:16
+  |vpiImportTypespec:
+  \_StructTypespec: , line:6:12, endln:8:5
   |vpiImportTypespec:
   \_LogicTypespec: , line:7:7, endln:7:12
   |vpiImportTypespec:
@@ -280,13 +294,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathBind/dut.sv, line:5:1, endln:15:10
     |vpiTypespec:
-    \_RefTypespec: (work@top.alert_rx_i.alert_rx_i), line:10:4, endln:10:14
+    \_RefTypespec: (work@top.alert_rx_i.alert_rx_t), line:10:4, endln:10:14
       |vpiParent:
       \_StructNet: (work@top.alert_rx_i), line:10:16, endln:10:26
-      |vpiName:alert_rx_i
-      |vpiFullName:work@top.alert_rx_i.alert_rx_i
+      |vpiName:alert_rx_t
+      |vpiFullName:work@top.alert_rx_i.alert_rx_t
       |vpiActual:
-      \_StructTypespec: (alert_rx_t), line:6:12, endln:8:5
+      \_TypedefTypespec: (alert_rx_t), line:8:6, endln:8:16
     |vpiName:alert_rx_i
     |vpiFullName:work@top.alert_rx_i
   |vpiImportTypespec:

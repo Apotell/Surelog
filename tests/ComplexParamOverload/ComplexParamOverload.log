@@ -408,8 +408,9 @@ ParamAssign                                            6
 Parameter                                              6
 RefModule                                              4
 RefObj                                                 2
-RefTypespec                                           12
+RefTypespec                                           18
 StructTypespec                                         3
+TypedefTypespec                                        6
 TypespecMember                                         3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ComplexParamOverload/slpp_all/surelog.uhdm ...
@@ -423,155 +424,233 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:pinmux_pkg
   |vpiTypedef:
-  \_IntTypespec: , line:2:17, endln:2:20
+  \_EnumTypespec: , line:2:12, endln:4:13
     |vpiParent:
     \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:1:1, endln:25:11
-    |vpiSigned:1
-  |vpiTypedef:
-  \_EnumTypespec: (pinmux_pkg::enum1_e), line:2:12, endln:4:13
-    |vpiParent:
-    \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:1:1, endln:25:11
-    |vpiName:pinmux_pkg::enum1_e
     |vpiBaseTypespec:
-    \_RefTypespec: (pinmux_pkg::enum1_e), line:2:17, endln:2:20
+    \_RefTypespec: (pinmux_pkg), line:2:17, endln:2:20
       |vpiParent:
-      \_EnumTypespec: (pinmux_pkg::enum1_e), line:2:12, endln:4:13
-      |vpiFullName:pinmux_pkg::enum1_e
+      \_EnumTypespec: , line:2:12, endln:4:13
+      |vpiFullName:pinmux_pkg
       |vpiActual:
       \_IntTypespec: , line:2:17, endln:2:20
     |vpiEnumConst:
     \_EnumConst: (A), line:3:7, endln:3:12
       |vpiParent:
-      \_EnumTypespec: (pinmux_pkg::enum1_e), line:2:12, endln:4:13
+      \_EnumTypespec: , line:2:12, endln:4:13
       |vpiName:A
       |UINT:1
       |vpiDecompile:1
       |vpiSize:64
   |vpiTypedef:
-  \_StructTypespec: (pinmux_pkg::struct1_t), line:6:12, endln:8:5
-    |vpiParent:
-    \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:1:1, endln:25:11
-    |vpiName:pinmux_pkg::struct1_t
-    |vpiPacked:1
-    |vpiTypespecMember:
-    \_TypespecMember: (dio_pad_type), line:7:15, endln:7:27
-      |vpiParent:
-      \_StructTypespec: (pinmux_pkg::struct1_t), line:6:12, endln:8:5
-      |vpiName:dio_pad_type
-      |vpiTypespec:
-      \_RefTypespec: (pinmux_pkg::struct1_t::dio_pad_type::enum1_e), line:7:7, endln:7:14
-        |vpiParent:
-        \_TypespecMember: (dio_pad_type), line:7:15, endln:7:27
-        |vpiName:enum1_e
-        |vpiFullName:pinmux_pkg::struct1_t::dio_pad_type::enum1_e
-        |vpiActual:
-        \_EnumTypespec: (pinmux_pkg::enum1_e), line:2:12, endln:4:13
-  |vpiTypedef:
-  \_IntTypespec: , line:10:17, endln:10:20
+  \_IntTypespec: , line:2:17, endln:2:20
     |vpiParent:
     \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:1:1, endln:25:11
     |vpiSigned:1
   |vpiTypedef:
-  \_EnumTypespec: (pinmux_pkg::enum2_e), line:10:12, endln:12:13
+  \_TypedefTypespec: (pinmux_pkg::enum1_e), line:4:6, endln:4:13
     |vpiParent:
     \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:1:1, endln:25:11
-    |vpiName:pinmux_pkg::enum2_e
-    |vpiBaseTypespec:
-    \_RefTypespec: (pinmux_pkg::enum2_e), line:10:17, endln:10:20
+    |vpiName:pinmux_pkg::enum1_e
+    |vpiTypedefAlias:
+    \_RefTypespec: (pinmux_pkg::enum1_e), line:2:12, endln:4:5
       |vpiParent:
-      \_EnumTypespec: (pinmux_pkg::enum2_e), line:10:12, endln:12:13
-      |vpiFullName:pinmux_pkg::enum2_e
+      \_TypedefTypespec: (pinmux_pkg::enum1_e), line:4:6, endln:4:13
+      |vpiFullName:pinmux_pkg::enum1_e
+      |vpiActual:
+      \_EnumTypespec: , line:2:12, endln:4:13
+  |vpiTypedef:
+  \_TypedefTypespec: (pinmux_pkg::struct1_t), line:8:6, endln:8:15
+    |vpiParent:
+    \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:1:1, endln:25:11
+    |vpiName:pinmux_pkg::struct1_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (pinmux_pkg::struct1_t), line:6:12, endln:8:5
+      |vpiParent:
+      \_TypedefTypespec: (pinmux_pkg::struct1_t), line:8:6, endln:8:15
+      |vpiFullName:pinmux_pkg::struct1_t
+      |vpiActual:
+      \_StructTypespec: , line:6:12, endln:8:5
+  |vpiTypedef:
+  \_StructTypespec: , line:6:12, endln:8:5
+    |vpiParent:
+    \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:1:1, endln:25:11
+    |vpiPacked:1
+    |vpiTypespecMember:
+    \_TypespecMember: (dio_pad_type), line:7:15, endln:7:27
+      |vpiParent:
+      \_StructTypespec: , line:6:12, endln:8:5
+      |vpiName:dio_pad_type
+      |vpiTypespec:
+      \_RefTypespec: (pinmux_pkg::dio_pad_type::enum1_e), line:7:7, endln:7:14
+        |vpiParent:
+        \_TypespecMember: (dio_pad_type), line:7:15, endln:7:27
+        |vpiName:enum1_e
+        |vpiFullName:pinmux_pkg::dio_pad_type::enum1_e
+        |vpiActual:
+        \_TypedefTypespec: (pinmux_pkg::enum1_e), line:4:6, endln:4:13
+  |vpiTypedef:
+  \_EnumTypespec: , line:10:12, endln:12:13
+    |vpiParent:
+    \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:1:1, endln:25:11
+    |vpiBaseTypespec:
+    \_RefTypespec: (pinmux_pkg), line:10:17, endln:10:20
+      |vpiParent:
+      \_EnumTypespec: , line:10:12, endln:12:13
+      |vpiFullName:pinmux_pkg
       |vpiActual:
       \_IntTypespec: , line:10:17, endln:10:20
     |vpiEnumConst:
     \_EnumConst: (B), line:11:7, endln:11:12
       |vpiParent:
-      \_EnumTypespec: (pinmux_pkg::enum2_e), line:10:12, endln:12:13
+      \_EnumTypespec: , line:10:12, endln:12:13
       |vpiName:B
       |UINT:2
       |vpiDecompile:2
       |vpiSize:64
   |vpiTypedef:
-  \_StructTypespec: (pinmux_pkg::struct2_t), line:14:12, endln:16:5
+  \_IntTypespec: , line:10:17, endln:10:20
+    |vpiParent:
+    \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:1:1, endln:25:11
+    |vpiSigned:1
+  |vpiTypedef:
+  \_TypedefTypespec: (pinmux_pkg::enum2_e), line:12:6, endln:12:13
+    |vpiParent:
+    \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:1:1, endln:25:11
+    |vpiName:pinmux_pkg::enum2_e
+    |vpiTypedefAlias:
+    \_RefTypespec: (pinmux_pkg::enum2_e), line:10:12, endln:12:5
+      |vpiParent:
+      \_TypedefTypespec: (pinmux_pkg::enum2_e), line:12:6, endln:12:13
+      |vpiFullName:pinmux_pkg::enum2_e
+      |vpiActual:
+      \_EnumTypespec: , line:10:12, endln:12:13
+  |vpiTypedef:
+  \_TypedefTypespec: (pinmux_pkg::struct2_t), line:16:6, endln:16:15
     |vpiParent:
     \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:1:1, endln:25:11
     |vpiName:pinmux_pkg::struct2_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (pinmux_pkg::struct2_t), line:14:12, endln:16:5
+      |vpiParent:
+      \_TypedefTypespec: (pinmux_pkg::struct2_t), line:16:6, endln:16:15
+      |vpiFullName:pinmux_pkg::struct2_t
+      |vpiActual:
+      \_StructTypespec: , line:14:12, endln:16:5
+  |vpiTypedef:
+  \_StructTypespec: , line:14:12, endln:16:5
+    |vpiParent:
+    \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:1:1, endln:25:11
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (dio_pad_type), line:15:15, endln:15:27
       |vpiParent:
-      \_StructTypespec: (pinmux_pkg::struct2_t), line:14:12, endln:16:5
+      \_StructTypespec: , line:14:12, endln:16:5
       |vpiName:dio_pad_type
       |vpiTypespec:
-      \_RefTypespec: (pinmux_pkg::struct2_t::dio_pad_type::enum2_e), line:15:7, endln:15:14
+      \_RefTypespec: (pinmux_pkg::dio_pad_type::enum2_e), line:15:7, endln:15:14
         |vpiParent:
         \_TypespecMember: (dio_pad_type), line:15:15, endln:15:27
         |vpiName:enum2_e
-        |vpiFullName:pinmux_pkg::struct2_t::dio_pad_type::enum2_e
+        |vpiFullName:pinmux_pkg::dio_pad_type::enum2_e
         |vpiActual:
-        \_EnumTypespec: (pinmux_pkg::enum2_e), line:10:12, endln:12:13
+        \_TypedefTypespec: (pinmux_pkg::enum2_e), line:12:6, endln:12:13
+  |vpiTypedef:
+  \_EnumTypespec: , line:18:12, endln:20:13
+    |vpiParent:
+    \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:1:1, endln:25:11
+    |vpiBaseTypespec:
+    \_RefTypespec: (pinmux_pkg), line:18:17, endln:18:20
+      |vpiParent:
+      \_EnumTypespec: , line:18:12, endln:20:13
+      |vpiFullName:pinmux_pkg
+      |vpiActual:
+      \_IntTypespec: , line:18:17, endln:18:20
+    |vpiEnumConst:
+    \_EnumConst: (C), line:19:7, endln:19:12
+      |vpiParent:
+      \_EnumTypespec: , line:18:12, endln:20:13
+      |vpiName:C
+      |UINT:3
+      |vpiDecompile:3
+      |vpiSize:64
   |vpiTypedef:
   \_IntTypespec: , line:18:17, endln:18:20
     |vpiParent:
     \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:1:1, endln:25:11
     |vpiSigned:1
   |vpiTypedef:
-  \_EnumTypespec: (pinmux_pkg::enum3_e), line:18:12, endln:20:13
+  \_TypedefTypespec: (pinmux_pkg::enum3_e), line:20:6, endln:20:13
     |vpiParent:
     \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:1:1, endln:25:11
     |vpiName:pinmux_pkg::enum3_e
-    |vpiBaseTypespec:
-    \_RefTypespec: (pinmux_pkg::enum3_e), line:18:17, endln:18:20
+    |vpiTypedefAlias:
+    \_RefTypespec: (pinmux_pkg::enum3_e), line:18:12, endln:20:5
       |vpiParent:
-      \_EnumTypespec: (pinmux_pkg::enum3_e), line:18:12, endln:20:13
+      \_TypedefTypespec: (pinmux_pkg::enum3_e), line:20:6, endln:20:13
       |vpiFullName:pinmux_pkg::enum3_e
       |vpiActual:
-      \_IntTypespec: , line:18:17, endln:18:20
-    |vpiEnumConst:
-    \_EnumConst: (C), line:19:7, endln:19:12
-      |vpiParent:
-      \_EnumTypespec: (pinmux_pkg::enum3_e), line:18:12, endln:20:13
-      |vpiName:C
-      |UINT:3
-      |vpiDecompile:3
-      |vpiSize:64
+      \_EnumTypespec: , line:18:12, endln:20:13
   |vpiTypedef:
-  \_StructTypespec: (pinmux_pkg::struct3_t), line:22:12, endln:24:5
+  \_TypedefTypespec: (pinmux_pkg::struct3_t), line:24:6, endln:24:15
     |vpiParent:
     \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:1:1, endln:25:11
     |vpiName:pinmux_pkg::struct3_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (pinmux_pkg::struct3_t), line:22:12, endln:24:5
+      |vpiParent:
+      \_TypedefTypespec: (pinmux_pkg::struct3_t), line:24:6, endln:24:15
+      |vpiFullName:pinmux_pkg::struct3_t
+      |vpiActual:
+      \_StructTypespec: , line:22:12, endln:24:5
+  |vpiTypedef:
+  \_StructTypespec: , line:22:12, endln:24:5
+    |vpiParent:
+    \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:1:1, endln:25:11
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (dio_pad_type), line:23:15, endln:23:27
       |vpiParent:
-      \_StructTypespec: (pinmux_pkg::struct3_t), line:22:12, endln:24:5
+      \_StructTypespec: , line:22:12, endln:24:5
       |vpiName:dio_pad_type
       |vpiTypespec:
-      \_RefTypespec: (pinmux_pkg::struct3_t::dio_pad_type::enum3_e), line:23:7, endln:23:14
+      \_RefTypespec: (pinmux_pkg::dio_pad_type::enum3_e), line:23:7, endln:23:14
         |vpiParent:
         \_TypespecMember: (dio_pad_type), line:23:15, endln:23:27
         |vpiName:enum3_e
-        |vpiFullName:pinmux_pkg::struct3_t::dio_pad_type::enum3_e
+        |vpiFullName:pinmux_pkg::dio_pad_type::enum3_e
         |vpiActual:
-        \_EnumTypespec: (pinmux_pkg::enum3_e), line:18:12, endln:20:13
+        \_TypedefTypespec: (pinmux_pkg::enum3_e), line:20:6, endln:20:13
+  |vpiImportTypespec:
+  \_EnumTypespec: , line:2:12, endln:4:13
   |vpiImportTypespec:
   \_IntTypespec: , line:2:17, endln:2:20
   |vpiImportTypespec:
-  \_EnumTypespec: (pinmux_pkg::enum1_e), line:2:12, endln:4:13
+  \_TypedefTypespec: (pinmux_pkg::enum1_e), line:4:6, endln:4:13
   |vpiImportTypespec:
-  \_StructTypespec: (pinmux_pkg::struct1_t), line:6:12, endln:8:5
+  \_TypedefTypespec: (pinmux_pkg::struct1_t), line:8:6, endln:8:15
+  |vpiImportTypespec:
+  \_StructTypespec: , line:6:12, endln:8:5
+  |vpiImportTypespec:
+  \_EnumTypespec: , line:10:12, endln:12:13
   |vpiImportTypespec:
   \_IntTypespec: , line:10:17, endln:10:20
   |vpiImportTypespec:
-  \_EnumTypespec: (pinmux_pkg::enum2_e), line:10:12, endln:12:13
+  \_TypedefTypespec: (pinmux_pkg::enum2_e), line:12:6, endln:12:13
   |vpiImportTypespec:
-  \_StructTypespec: (pinmux_pkg::struct2_t), line:14:12, endln:16:5
+  \_TypedefTypespec: (pinmux_pkg::struct2_t), line:16:6, endln:16:15
+  |vpiImportTypespec:
+  \_StructTypespec: , line:14:12, endln:16:5
+  |vpiImportTypespec:
+  \_EnumTypespec: , line:18:12, endln:20:13
   |vpiImportTypespec:
   \_IntTypespec: , line:18:17, endln:18:20
   |vpiImportTypespec:
-  \_EnumTypespec: (pinmux_pkg::enum3_e), line:18:12, endln:20:13
+  \_TypedefTypespec: (pinmux_pkg::enum3_e), line:20:6, endln:20:13
   |vpiImportTypespec:
-  \_StructTypespec: (pinmux_pkg::struct3_t), line:22:12, endln:24:5
+  \_TypedefTypespec: (pinmux_pkg::struct3_t), line:24:6, endln:24:15
+  |vpiImportTypespec:
+  \_StructTypespec: , line:22:12, endln:24:5
   |vpiDefName:pinmux_pkg
 |vpiAllModules:
 \_Module: work@almost_top (work@almost_top), file:${SURELOG_DIR}/tests/ComplexParamOverload/dut.sv, line:54:1, endln:63:10
@@ -590,7 +669,7 @@ Design: (unnamed)
       |vpiName:struct1_t
       |vpiFullName:work@almost_top.TargetCfg.struct1_t
       |vpiActual:
-      \_StructTypespec: (pinmux_pkg::struct1_t), line:6:12, endln:8:5
+      \_TypedefTypespec: (pinmux_pkg::struct1_t), line:8:6, endln:8:15
     |vpiName:TargetCfg
     |vpiFullName:work@almost_top.TargetCfg
   |vpiParamAssign:
@@ -726,7 +805,7 @@ Design: (unnamed)
       |vpiName:struct3_t
       |vpiFullName:work@prim_pad_attr.TargetCfg.struct3_t
       |vpiActual:
-      \_StructTypespec: (pinmux_pkg::struct3_t), line:22:12, endln:24:5
+      \_TypedefTypespec: (pinmux_pkg::struct3_t), line:24:6, endln:24:15
     |vpiName:TargetCfg
     |vpiFullName:work@prim_pad_attr.TargetCfg
   |vpiParameter:
@@ -884,7 +963,7 @@ Design: (unnamed)
       |vpiName:struct2_t
       |vpiFullName:work@top.TargetCfg.struct2_t
       |vpiActual:
-      \_StructTypespec: (pinmux_pkg::struct2_t), line:14:12, endln:16:5
+      \_TypedefTypespec: (pinmux_pkg::struct2_t), line:16:6, endln:16:15
     |vpiName:TargetCfg
     |vpiFullName:work@top.TargetCfg
   |vpiParamAssign:

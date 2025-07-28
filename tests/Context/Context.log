@@ -78,6 +78,7 @@ Design: (unnamed)
     |vpiName:a
     |vpiFullName:work@top.a
     |vpiSigned:1
+    |vpiRandType:1
     |vpiVisibility:1
   |vpiTypedef:
   \_IntTypespec: , line:1:19, endln:1:22
@@ -96,6 +97,29 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:1:19, endln:1:22
   |vpiDefName:work@top
+  |vpiTaskFuncDecl:
+  \_TaskDecl: (work@top.get_2), line:2:4, endln:2:52
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/Context/dut.sv, line:1:1, endln:3:10
+    |vpiName:get_2
+    |vpiFullName:work@top.get_2
+    |vpiAccessType:4
+    |vpiVisibility:1
+    |vpiDPIContext:1
+    |vpiDPICStr:2
+    |vpiIODecl:
+    \_IODecl: (x), line:2:49, endln:2:50
+      |vpiParent:
+      \_TaskDecl: (work@top.get_2), line:2:4, endln:2:52
+      |vpiDirection:2
+      |vpiName:x
+      |vpiTypedef:
+      \_RefTypespec: (work@top.get_2.x), line:2:45, endln:2:48
+        |vpiParent:
+        \_IODecl: (x), line:2:49, endln:2:50
+        |vpiFullName:work@top.get_2.x
+        |vpiActual:
+        \_IntTypespec: , line:2:45, endln:2:48
   |vpiPort:
   \_Port: (a), line:1:23, endln:1:24
     |vpiParent:
@@ -109,6 +133,11 @@ Design: (unnamed)
       |vpiFullName:work@top.a
       |vpiActual:
       \_IntTypespec: , line:1:19, endln:1:22
+\_weaklyReferenced:
+\_IntTypespec: , line:2:45, endln:2:48
+  |vpiParent:
+  \_TaskDecl: (work@top.get_2), line:2:4, endln:2:52
+  |vpiSigned:1
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

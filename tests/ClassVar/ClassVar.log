@@ -151,7 +151,7 @@ RefVar                                                 2
 StringTypespec                                         2
 StringVar                                              1
 StructTypespec                                         1
-StructVar                                              1
+TypedefTypespec                                        1
 TypespecMember                                         1
 UnsupportedTypespec                                    1
 VoidTypespec                                           1
@@ -173,58 +173,41 @@ Design: (unnamed)
     |vpiName:uvm_hdl_path_concat
     |vpiFullName:pack::uvm_hdl_path_concat
     |vpiVariables:
-    \_StructVar: (pack::uvm_hdl_path_concat), line:8:23, endln:8:29
-      |vpiParent:
-      \_ClassDefn: (pack::uvm_hdl_path_concat), file:${SURELOG_DIR}/tests/ClassVar/dut.sv, line:7:1, endln:9:9
-      |vpiTypespec:
-      \_RefTypespec: (pack::uvm_hdl_path_concat::uvm_hdl_path_slice), line:8:4, endln:8:22
-        |vpiParent:
-        \_StructVar: (pack::uvm_hdl_path_concat), line:8:23, endln:8:29
-        |vpiName:uvm_hdl_path_slice
-        |vpiFullName:pack::uvm_hdl_path_concat::uvm_hdl_path_slice
-        |vpiActual:
-        \_StructTypespec: (pack::uvm_hdl_path_slice), line:3:9, endln:5:2
-      |vpiFullName:pack::uvm_hdl_path_concat
-    |vpiVariables:
     \_ArrayVar: (pack::uvm_hdl_path_concat::slices), line:8:23, endln:8:29
       |vpiParent:
       \_ClassDefn: (pack::uvm_hdl_path_concat), file:${SURELOG_DIR}/tests/ClassVar/dut.sv, line:7:1, endln:9:9
-      |vpiSize:1
       |vpiTypespec:
-      \_RefTypespec: (pack::uvm_hdl_path_concat::slices), line:8:29, endln:8:31
+      \_RefTypespec: (pack::uvm_hdl_path_concat::slices::uvm_hdl_path_slice), line:8:4, endln:8:22
         |vpiParent:
         \_ArrayVar: (pack::uvm_hdl_path_concat::slices), line:8:23, endln:8:29
-        |vpiFullName:pack::uvm_hdl_path_concat::slices
+        |vpiName:uvm_hdl_path_slice
+        |vpiFullName:pack::uvm_hdl_path_concat::slices::uvm_hdl_path_slice
         |vpiActual:
-        \_ArrayTypespec: , line:8:29, endln:8:31
+        \_ArrayTypespec: , line:8:4, endln:8:31
       |vpiName:slices
       |vpiFullName:pack::uvm_hdl_path_concat::slices
       |vpiAutomatic:1
       |vpiRandType:1
       |vpiVisibility:1
-      |vpiArrayType:2
-      |vpiReg:
-      \_StructVar: (pack::uvm_hdl_path_concat), line:8:23, endln:8:29
     |vpiRegArray:
     \_ArrayVar: (pack::uvm_hdl_path_concat::slices), line:8:23, endln:8:29
     |vpiTypedef:
-    \_ArrayTypespec: , line:8:29, endln:8:31
+    \_ArrayTypespec: , line:8:4, endln:8:31
       |vpiParent:
       \_ClassDefn: (pack::uvm_hdl_path_concat), file:${SURELOG_DIR}/tests/ClassVar/dut.sv, line:7:1, endln:9:9
+      |vpiArrayType:2
       |vpiElemTypespec:
       \_RefTypespec: (pack::uvm_hdl_path_concat::pack::uvm_hdl_path_slice), line:8:4, endln:8:22
         |vpiParent:
-        \_ArrayTypespec: , line:8:29, endln:8:31
+        \_ArrayTypespec: , line:8:4, endln:8:31
         |vpiName:pack::uvm_hdl_path_slice
         |vpiFullName:pack::uvm_hdl_path_concat::pack::uvm_hdl_path_slice
         |vpiActual:
-        \_StructTypespec: (pack::uvm_hdl_path_slice), line:3:9, endln:5:2
+        \_TypedefTypespec: (pack::uvm_hdl_path_slice), line:5:3, endln:5:21
     |vpiImportTypespec:
-    \_StructVar: (pack::uvm_hdl_path_concat), line:8:23, endln:8:29
+    \_ArrayTypespec: , line:8:4, endln:8:31
     |vpiImportTypespec:
     \_ArrayVar: (pack::uvm_hdl_path_concat::slices), line:8:23, endln:8:29
-    |vpiImportTypespec:
-    \_ArrayTypespec: , line:8:29, endln:8:31
   |vpiInternalScope:
   \_ClassDefn: (pack::uvm_mem_mam), file:${SURELOG_DIR}/tests/ClassVar/dut.sv, line:11:1, endln:26:9
     |vpiParent:
@@ -300,14 +283,16 @@ Design: (unnamed)
               |vpiParent:
               \_Begin: (pack::uvm_mem_mam::check_reg), line:16:21, endln:22:6
               |vpiTypespec:
-              \_RefTypespec: (pack::uvm_mem_mam::check_reg::p_), line:18:5, endln:18:11
+              \_RefTypespec: (pack::uvm_mem_mam::check_reg::p_::string), line:18:5, endln:18:11
                 |vpiParent:
                 \_StringVar: (pack::uvm_mem_mam::check_reg::p_), line:18:12, endln:18:14
-                |vpiFullName:pack::uvm_mem_mam::check_reg::p_
+                |vpiName:string
+                |vpiFullName:pack::uvm_mem_mam::check_reg::p_::string
                 |vpiActual:
                 \_StringTypespec: , line:18:5, endln:18:11
               |vpiName:p_
               |vpiFullName:pack::uvm_mem_mam::check_reg::p_
+              |vpiSigned:1
             |vpiTypedef:
             \_ClassTypespec: (uvm_hdl_path_concat), line:17:5, endln:17:24
               |vpiParent:
@@ -492,21 +477,32 @@ Design: (unnamed)
     |vpiMethod:
     \_Function: (pack::uvm_mem_mam::check_reg), line:13:1, endln:24:12
   |vpiTypedef:
-  \_StructTypespec: (pack::uvm_hdl_path_slice), line:3:9, endln:5:2
+  \_TypedefTypespec: (pack::uvm_hdl_path_slice), line:5:3, endln:5:21
     |vpiParent:
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/ClassVar/dut.sv, line:1:1, endln:28:11
     |vpiName:pack::uvm_hdl_path_slice
+    |vpiTypedefAlias:
+    \_RefTypespec: (pack::uvm_hdl_path_slice), line:3:9, endln:5:2
+      |vpiParent:
+      \_TypedefTypespec: (pack::uvm_hdl_path_slice), line:5:3, endln:5:21
+      |vpiFullName:pack::uvm_hdl_path_slice
+      |vpiActual:
+      \_StructTypespec: , line:3:9, endln:5:2
+  |vpiTypedef:
+  \_StructTypespec: , line:3:9, endln:5:2
+    |vpiParent:
+    \_Package: pack (pack), file:${SURELOG_DIR}/tests/ClassVar/dut.sv, line:1:1, endln:28:11
     |vpiTypespecMember:
     \_TypespecMember: (spath), line:4:11, endln:4:16
       |vpiParent:
-      \_StructTypespec: (pack::uvm_hdl_path_slice), line:3:9, endln:5:2
+      \_StructTypespec: , line:3:9, endln:5:2
       |vpiName:spath
       |vpiTypespec:
-      \_RefTypespec: (pack::uvm_hdl_path_slice::spath::string), line:4:4, endln:4:10
+      \_RefTypespec: (pack::spath::string), line:4:4, endln:4:10
         |vpiParent:
         \_TypespecMember: (spath), line:4:11, endln:4:16
         |vpiName:string
-        |vpiFullName:pack::uvm_hdl_path_slice::spath::string
+        |vpiFullName:pack::spath::string
         |vpiActual:
         \_StringTypespec: , line:4:4, endln:4:10
   |vpiTypedef:
@@ -518,7 +514,9 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ClassDefn: (pack::uvm_mem_mam), file:${SURELOG_DIR}/tests/ClassVar/dut.sv, line:11:1, endln:26:9
   |vpiImportTypespec:
-  \_StructTypespec: (pack::uvm_hdl_path_slice), line:3:9, endln:5:2
+  \_TypedefTypespec: (pack::uvm_hdl_path_slice), line:5:3, endln:5:21
+  |vpiImportTypespec:
+  \_StructTypespec: , line:3:9, endln:5:2
   |vpiImportTypespec:
   \_StringTypespec: , line:4:4, endln:4:10
   |vpiDefName:pack

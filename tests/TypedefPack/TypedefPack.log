@@ -115,22 +115,22 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/TypedefPack/dut.sv:10:1: Compile module "work@prim_lc_sender".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                              12
+Constant                                               6
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              2
+EnumNet                                                1
 EnumTypespec                                           1
 LogicNet                                               1
 LogicTypespec                                          1
-LogicVar                                               1
 Module                                                 2
 Operation                                              1
 Package                                                1
 Port                                                   2
-Range                                                  4
+Range                                                  1
 RefObj                                                 2
-RefTypespec                                            2
-UnsupportedTypespec                                    2
+RefTypespec                                            5
+TypedefTypespec                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypedefPack/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -142,6 +142,33 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:lc_ctrl_pkg
+  |vpiTypedef:
+  \_EnumTypespec: , line:2:11, endln:5:12
+    |vpiParent:
+    \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/TypedefPack/dut.sv, line:1:1, endln:8:25
+    |vpiBaseTypespec:
+    \_RefTypespec: (lc_ctrl_pkg), line:2:16, endln:2:27
+      |vpiParent:
+      \_EnumTypespec: , line:2:11, endln:5:12
+      |vpiFullName:lc_ctrl_pkg
+      |vpiActual:
+      \_LogicTypespec: , line:2:16, endln:2:27
+    |vpiEnumConst:
+    \_EnumConst: (On), line:3:5, endln:3:18
+      |vpiParent:
+      \_EnumTypespec: , line:2:11, endln:5:12
+      |vpiName:On
+      |BIN:1010
+      |vpiDecompile:4'b1010
+      |vpiSize:4
+    |vpiEnumConst:
+    \_EnumConst: (Off), line:4:5, endln:4:18
+      |vpiParent:
+      \_EnumTypespec: , line:2:11, endln:5:12
+      |vpiName:Off
+      |BIN:0101
+      |vpiDecompile:4'b0101
+      |vpiSize:4
   |vpiTypedef:
   \_LogicTypespec: , line:2:16, endln:2:27
     |vpiParent:
@@ -167,37 +194,37 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_EnumTypespec: (lc_ctrl_pkg::lc_tx_e), line:2:11, endln:5:12
+  \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_e), line:5:5, endln:5:12
     |vpiParent:
     \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/TypedefPack/dut.sv, line:1:1, endln:8:25
     |vpiName:lc_ctrl_pkg::lc_tx_e
-    |vpiBaseTypespec:
-    \_RefTypespec: (lc_ctrl_pkg::lc_tx_e), line:2:16, endln:2:27
+    |vpiTypedefAlias:
+    \_RefTypespec: (lc_ctrl_pkg::lc_tx_e), line:2:11, endln:5:4
       |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::lc_tx_e), line:2:11, endln:5:12
+      \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_e), line:5:5, endln:5:12
       |vpiFullName:lc_ctrl_pkg::lc_tx_e
       |vpiActual:
-      \_LogicTypespec: , line:2:16, endln:2:27
-    |vpiEnumConst:
-    \_EnumConst: (On), line:3:5, endln:3:18
+      \_EnumTypespec: , line:2:11, endln:5:12
+  |vpiTypedef:
+  \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_t), line:7:19, endln:7:26
+    |vpiParent:
+    \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/TypedefPack/dut.sv, line:1:1, endln:8:25
+    |vpiName:lc_ctrl_pkg::lc_tx_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (lc_ctrl_pkg::lc_tx_t), line:7:11, endln:7:18
       |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::lc_tx_e), line:2:11, endln:5:12
-      |vpiName:On
-      |BIN:1010
-      |vpiDecompile:4'b1010
-      |vpiSize:4
-    |vpiEnumConst:
-    \_EnumConst: (Off), line:4:5, endln:4:18
-      |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::lc_tx_e), line:2:11, endln:5:12
-      |vpiName:Off
-      |BIN:0101
-      |vpiDecompile:4'b0101
-      |vpiSize:4
+      \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_t), line:7:19, endln:7:26
+      |vpiFullName:lc_ctrl_pkg::lc_tx_t
+      |vpiActual:
+      \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_e), line:5:5, endln:5:12
+  |vpiImportTypespec:
+  \_EnumTypespec: , line:2:11, endln:5:12
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:16, endln:2:27
   |vpiImportTypespec:
-  \_EnumTypespec: (lc_ctrl_pkg::lc_tx_e), line:2:11, endln:5:12
+  \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_e), line:5:5, endln:5:12
+  |vpiImportTypespec:
+  \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_t), line:7:19, endln:7:26
   |vpiDefName:lc_ctrl_pkg
   |vpiEndLabel:lc_ctrl_pkg
 |vpiAllModules:
@@ -205,25 +232,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@prim_lc_sender
-  |vpiVariables:
-  \_LogicVar: (work@prim_lc_sender.lc_en_o), line:12:31, endln:12:38
-    |vpiParent:
-    \_Module: work@prim_lc_sender (work@prim_lc_sender), file:${SURELOG_DIR}/tests/TypedefPack/dut.sv, line:10:1, endln:15:27
-    |vpiName:lc_en_o
-    |vpiFullName:work@prim_lc_sender.lc_en_o
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@prim_lc_sender.lc_en_o), line:12:31, endln:12:38
-  |vpiTypedef:
-  \_UnsupportedTypespec: (lc_ctrl_pkg::lc_tx_t), line:12:10, endln:12:30
-    |vpiParent:
-    \_Module: work@prim_lc_sender (work@prim_lc_sender), file:${SURELOG_DIR}/tests/TypedefPack/dut.sv, line:10:1, endln:15:27
-    |vpiName:lc_ctrl_pkg::lc_tx_t
-  |vpiTypedef:
-  \_UnsupportedTypespec: (lc_ctrl_pkg::lc_tx_t), line:12:10, endln:12:30
-    |vpiParent:
-    \_Module: work@prim_lc_sender (work@prim_lc_sender), file:${SURELOG_DIR}/tests/TypedefPack/dut.sv, line:10:1, endln:15:27
-    |vpiName:lc_ctrl_pkg::lc_tx_t
   |vpiImportTypespec:
   \_LogicNet: (work@prim_lc_sender.lc_en_i), line:11:16, endln:11:23
     |vpiParent:
@@ -231,14 +239,24 @@ Design: (unnamed)
     |vpiName:lc_en_i
     |vpiFullName:work@prim_lc_sender.lc_en_i
   |vpiImportTypespec:
-  \_UnsupportedTypespec: (lc_ctrl_pkg::lc_tx_t), line:12:10, endln:12:30
-  |vpiImportTypespec:
-  \_LogicVar: (work@prim_lc_sender.lc_en_o), line:12:31, endln:12:38
-  |vpiImportTypespec:
-  \_UnsupportedTypespec: (lc_ctrl_pkg::lc_tx_t), line:12:10, endln:12:30
+  \_EnumNet: (work@prim_lc_sender.lc_en_o), line:12:31, endln:12:38
+    |vpiParent:
+    \_Module: work@prim_lc_sender (work@prim_lc_sender), file:${SURELOG_DIR}/tests/TypedefPack/dut.sv, line:10:1, endln:15:27
+    |vpiTypespec:
+    \_RefTypespec: (work@prim_lc_sender.lc_en_o.lc_ctrl_pkg::lc_tx_t), line:12:10, endln:12:30
+      |vpiParent:
+      \_EnumNet: (work@prim_lc_sender.lc_en_o), line:12:31, endln:12:38
+      |vpiName:lc_ctrl_pkg::lc_tx_t
+      |vpiFullName:work@prim_lc_sender.lc_en_o.lc_ctrl_pkg::lc_tx_t
+      |vpiActual:
+      \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_t), line:7:19, endln:7:26
+    |vpiName:lc_en_o
+    |vpiFullName:work@prim_lc_sender.lc_en_o
   |vpiDefName:work@prim_lc_sender
   |vpiNet:
   \_LogicNet: (work@prim_lc_sender.lc_en_i), line:11:16, endln:11:23
+  |vpiNet:
+  \_EnumNet: (work@prim_lc_sender.lc_en_o), line:12:31, endln:12:38
   |vpiPort:
   \_Port: (lc_en_i), line:11:16, endln:11:23
     |vpiParent:
@@ -258,7 +276,7 @@ Design: (unnamed)
       |vpiName:lc_ctrl_pkg::lc_tx_t
       |vpiFullName:work@prim_lc_sender.lc_en_o.lc_ctrl_pkg::lc_tx_t
       |vpiActual:
-      \_UnsupportedTypespec: (lc_ctrl_pkg::lc_tx_t), line:12:10, endln:12:30
+      \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_t), line:7:19, endln:7:26
   |vpiContAssign:
   \_ContAssign: , line:14:10, endln:14:50
     |vpiParent:
@@ -283,7 +301,7 @@ Design: (unnamed)
       |vpiName:lc_en_o
       |vpiFullName:work@prim_lc_sender.lc_en_o
       |vpiActual:
-      \_LogicVar: (work@prim_lc_sender.lc_en_o), line:12:31, endln:12:38
+      \_EnumNet: (work@prim_lc_sender.lc_en_o), line:12:31, endln:12:38
   |vpiEndLabel:prim_lc_sender
 ===================
 [  FATAL] : 0

@@ -6124,7 +6124,7 @@ CaseItem                                              42
 CaseStmt                                               5
 ClassDefn                                              8
 ClassTypespec                                          1
-Constant                                             208
+Constant                                             136
 DelayControl                                          30
 Design                                                 1
 EnumConst                                              5
@@ -6147,13 +6147,14 @@ Package                                                1
 ParamAssign                                           29
 Parameter                                             29
 Port                                                  28
-Range                                                 44
+Range                                                  8
 RefModule                                              3
 RefObj                                               507
-RefTypespec                                           59
+RefTypespec                                           60
 SysFuncCall                                            2
 Task                                                  10
 TaskCall                                              10
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FSMBsp13/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -6422,7 +6423,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -6456,14 +6457,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/FSMBsp13/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -6471,7 +6471,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -6479,7 +6479,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -6487,7 +6487,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -6495,13 +6495,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/FSMBsp13/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -6999,32 +7013,32 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiImportTypespec:
-  \_LogicNet: (work@FSM1.Clk), line:2:7, endln:2:10
+  \_LogicNet: (work@FSM1.Clk), line:1:14, endln:1:17
     |vpiParent:
     \_Module: work@FSM1 (work@FSM1), file:${SURELOG_DIR}/tests/FSMBsp13/fsm1.v, line:1:1, endln:158:10
     |vpiName:Clk
     |vpiFullName:work@FSM1.Clk
   |vpiImportTypespec:
-  \_LogicNet: (work@FSM1.Reset), line:2:12, endln:2:17
+  \_LogicNet: (work@FSM1.Reset), line:1:19, endln:1:24
     |vpiParent:
     \_Module: work@FSM1 (work@FSM1), file:${SURELOG_DIR}/tests/FSMBsp13/fsm1.v, line:1:1, endln:158:10
     |vpiName:Reset
     |vpiFullName:work@FSM1.Reset
   |vpiImportTypespec:
-  \_LogicNet: (work@FSM1.SlowRam), line:2:19, endln:2:26
+  \_LogicNet: (work@FSM1.SlowRam), line:1:26, endln:1:33
     |vpiParent:
     \_Module: work@FSM1 (work@FSM1), file:${SURELOG_DIR}/tests/FSMBsp13/fsm1.v, line:1:1, endln:158:10
     |vpiName:SlowRam
     |vpiFullName:work@FSM1.SlowRam
   |vpiImportTypespec:
-  \_LogicNet: (work@FSM1.Read), line:3:8, endln:3:12
+  \_LogicNet: (work@FSM1.Read), line:1:35, endln:1:39
     |vpiParent:
     \_Module: work@FSM1 (work@FSM1), file:${SURELOG_DIR}/tests/FSMBsp13/fsm1.v, line:1:1, endln:158:10
     |vpiName:Read
     |vpiFullName:work@FSM1.Read
     |vpiNetType:48
   |vpiImportTypespec:
-  \_LogicNet: (work@FSM1.Write), line:3:14, endln:3:19
+  \_LogicNet: (work@FSM1.Write), line:1:41, endln:1:46
     |vpiParent:
     \_Module: work@FSM1 (work@FSM1), file:${SURELOG_DIR}/tests/FSMBsp13/fsm1.v, line:1:1, endln:158:10
     |vpiName:Write
@@ -7128,15 +7142,15 @@ Design: (unnamed)
     |vpiNetType:48
   |vpiDefName:work@FSM1
   |vpiNet:
-  \_LogicNet: (work@FSM1.Clk), line:2:7, endln:2:10
+  \_LogicNet: (work@FSM1.Clk), line:1:14, endln:1:17
   |vpiNet:
-  \_LogicNet: (work@FSM1.Reset), line:2:12, endln:2:17
+  \_LogicNet: (work@FSM1.Reset), line:1:19, endln:1:24
   |vpiNet:
-  \_LogicNet: (work@FSM1.SlowRam), line:2:19, endln:2:26
+  \_LogicNet: (work@FSM1.SlowRam), line:1:26, endln:1:33
   |vpiNet:
-  \_LogicNet: (work@FSM1.Read), line:3:8, endln:3:12
+  \_LogicNet: (work@FSM1.Read), line:1:35, endln:1:39
   |vpiNet:
-  \_LogicNet: (work@FSM1.Write), line:3:14, endln:3:19
+  \_LogicNet: (work@FSM1.Write), line:1:41, endln:1:46
   |vpiNet:
   \_LogicNet: (work@FSM1.Read), line:5:5, endln:5:9
   |vpiNet:
@@ -7199,7 +7213,7 @@ Design: (unnamed)
           |vpiName:Clk
           |vpiFullName:work@FSM1.Clk
           |vpiActual:
-          \_LogicNet: (work@FSM1.Clk), line:2:7, endln:2:10
+          \_LogicNet: (work@FSM1.Clk), line:1:14, endln:1:17
       |vpiStmt:
       \_Begin: (work@FSM1.SEQ), line:14:23, endln:19:4
         |vpiParent:
@@ -7217,7 +7231,7 @@ Design: (unnamed)
             |vpiName:Reset
             |vpiFullName:work@FSM1.SEQ.Reset
             |vpiActual:
-            \_LogicNet: (work@FSM1.Reset), line:2:12, endln:2:17
+            \_LogicNet: (work@FSM1.Reset), line:1:19, endln:1:24
           |vpiStmt:
           \_Assignment: , line:16:5, endln:16:23
             |vpiParent:
@@ -7293,7 +7307,7 @@ Design: (unnamed)
           |vpiName:Read
           |vpiFullName:work@FSM1.Read
           |vpiActual:
-          \_LogicNet: (work@FSM1.Read), line:3:8, endln:3:12
+          \_LogicNet: (work@FSM1.Read), line:1:35, endln:1:39
       |vpiStmt:
       \_Assignment: , line:23:3, endln:23:12
         |vpiParent:
@@ -7315,7 +7329,7 @@ Design: (unnamed)
           |vpiName:Write
           |vpiFullName:work@FSM1.Write
           |vpiActual:
-          \_LogicNet: (work@FSM1.Write), line:3:14, endln:3:19
+          \_LogicNet: (work@FSM1.Write), line:1:41, endln:1:46
       |vpiStmt:
       \_Assignment: , line:24:3, endln:24:11
         |vpiParent:
@@ -7484,7 +7498,7 @@ Design: (unnamed)
                     |vpiName:Write
                     |vpiFullName:work@FSM1.COMB.Write
                     |vpiActual:
-                    \_LogicNet: (work@FSM1.Write), line:3:14, endln:3:19
+                    \_LogicNet: (work@FSM1.Write), line:1:41, endln:1:46
                 |vpiLhs:
                 \_RefObj: (work@FSM1.COMB.Read), line:34:7, endln:34:11
                   |vpiParent:
@@ -7492,7 +7506,7 @@ Design: (unnamed)
                   |vpiName:Read
                   |vpiFullName:work@FSM1.COMB.Read
                   |vpiActual:
-                  \_LogicNet: (work@FSM1.Read), line:3:8, endln:3:12
+                  \_LogicNet: (work@FSM1.Read), line:1:35, endln:1:39
               |vpiStmt:
               \_Assignment: , line:35:7, endln:35:20
                 |vpiParent:
@@ -7511,7 +7525,7 @@ Design: (unnamed)
                     |vpiName:Read
                     |vpiFullName:work@FSM1.COMB.Read
                     |vpiActual:
-                    \_LogicNet: (work@FSM1.Read), line:3:8, endln:3:12
+                    \_LogicNet: (work@FSM1.Read), line:1:35, endln:1:39
                 |vpiLhs:
                 \_RefObj: (work@FSM1.COMB.Write), line:35:7, endln:35:12
                   |vpiParent:
@@ -7519,7 +7533,7 @@ Design: (unnamed)
                   |vpiName:Write
                   |vpiFullName:work@FSM1.COMB.Write
                   |vpiActual:
-                  \_LogicNet: (work@FSM1.Write), line:3:14, endln:3:19
+                  \_LogicNet: (work@FSM1.Write), line:1:41, endln:1:46
               |vpiStmt:
               \_IfElse: , line:36:7, endln:41:33
                 |vpiParent:
@@ -7536,7 +7550,7 @@ Design: (unnamed)
                     |vpiName:Read
                     |vpiFullName:work@FSM1.COMB.Read
                     |vpiActual:
-                    \_LogicNet: (work@FSM1.Read), line:3:8, endln:3:12
+                    \_LogicNet: (work@FSM1.Read), line:1:35, endln:1:39
                   |vpiOperand:
                   \_Constant: , line:36:19, endln:36:20
                     |vpiParent:
@@ -7583,7 +7597,7 @@ Design: (unnamed)
                       |vpiName:Write
                       |vpiFullName:work@FSM1.COMB.Write
                       |vpiActual:
-                      \_LogicNet: (work@FSM1.Write), line:3:14, endln:3:19
+                      \_LogicNet: (work@FSM1.Write), line:1:41, endln:1:46
                     |vpiOperand:
                     \_Constant: , line:37:25, endln:37:26
                       |vpiParent:
@@ -7630,7 +7644,7 @@ Design: (unnamed)
                         |vpiName:SlowRam
                         |vpiFullName:work@FSM1.COMB.SlowRam
                         |vpiActual:
-                        \_LogicNet: (work@FSM1.SlowRam), line:2:19, endln:2:26
+                        \_LogicNet: (work@FSM1.SlowRam), line:1:26, endln:1:33
                       |vpiOperand:
                       \_Constant: , line:38:27, endln:38:28
                         |vpiParent:
@@ -7866,7 +7880,7 @@ Design: (unnamed)
                     |vpiName:Write
                     |vpiFullName:work@FSM1.COMB.Write
                     |vpiActual:
-                    \_LogicNet: (work@FSM1.Write), line:3:14, endln:3:19
+                    \_LogicNet: (work@FSM1.Write), line:1:41, endln:1:46
                 |vpiLhs:
                 \_RefObj: (work@FSM1.COMB.Read), line:47:7, endln:47:11
                   |vpiParent:
@@ -7874,7 +7888,7 @@ Design: (unnamed)
                   |vpiName:Read
                   |vpiFullName:work@FSM1.COMB.Read
                   |vpiActual:
-                  \_LogicNet: (work@FSM1.Read), line:3:8, endln:3:12
+                  \_LogicNet: (work@FSM1.Read), line:1:35, endln:1:39
               |vpiStmt:
               \_Assignment: , line:48:7, endln:48:20
                 |vpiParent:
@@ -7893,7 +7907,7 @@ Design: (unnamed)
                     |vpiName:Read
                     |vpiFullName:work@FSM1.COMB.Read
                     |vpiActual:
-                    \_LogicNet: (work@FSM1.Read), line:3:8, endln:3:12
+                    \_LogicNet: (work@FSM1.Read), line:1:35, endln:1:39
                 |vpiLhs:
                 \_RefObj: (work@FSM1.COMB.Write), line:48:7, endln:48:12
                   |vpiParent:
@@ -7901,7 +7915,7 @@ Design: (unnamed)
                   |vpiName:Write
                   |vpiFullName:work@FSM1.COMB.Write
                   |vpiActual:
-                  \_LogicNet: (work@FSM1.Write), line:3:14, endln:3:19
+                  \_LogicNet: (work@FSM1.Write), line:1:41, endln:1:46
               |vpiStmt:
               \_IfElse: , line:49:7, endln:54:33
                 |vpiParent:
@@ -7918,7 +7932,7 @@ Design: (unnamed)
                     |vpiName:Read
                     |vpiFullName:work@FSM1.COMB.Read
                     |vpiActual:
-                    \_LogicNet: (work@FSM1.Read), line:3:8, endln:3:12
+                    \_LogicNet: (work@FSM1.Read), line:1:35, endln:1:39
                   |vpiOperand:
                   \_Constant: , line:49:19, endln:49:20
                     |vpiParent:
@@ -7965,7 +7979,7 @@ Design: (unnamed)
                       |vpiName:Write
                       |vpiFullName:work@FSM1.COMB.Write
                       |vpiActual:
-                      \_LogicNet: (work@FSM1.Write), line:3:14, endln:3:19
+                      \_LogicNet: (work@FSM1.Write), line:1:41, endln:1:46
                     |vpiOperand:
                     \_Constant: , line:50:25, endln:50:26
                       |vpiParent:
@@ -8012,7 +8026,7 @@ Design: (unnamed)
                         |vpiName:SlowRam
                         |vpiFullName:work@FSM1.COMB.SlowRam
                         |vpiActual:
-                        \_LogicNet: (work@FSM1.SlowRam), line:2:19, endln:2:26
+                        \_LogicNet: (work@FSM1.SlowRam), line:1:26, endln:1:33
                       |vpiOperand:
                       \_Constant: , line:51:27, endln:51:28
                         |vpiParent:
@@ -8248,7 +8262,7 @@ Design: (unnamed)
                     |vpiName:Write
                     |vpiFullName:work@FSM1.COMB.Write
                     |vpiActual:
-                    \_LogicNet: (work@FSM1.Write), line:3:14, endln:3:19
+                    \_LogicNet: (work@FSM1.Write), line:1:41, endln:1:46
                 |vpiLhs:
                 \_RefObj: (work@FSM1.COMB.Read), line:60:7, endln:60:11
                   |vpiParent:
@@ -8256,7 +8270,7 @@ Design: (unnamed)
                   |vpiName:Read
                   |vpiFullName:work@FSM1.COMB.Read
                   |vpiActual:
-                  \_LogicNet: (work@FSM1.Read), line:3:8, endln:3:12
+                  \_LogicNet: (work@FSM1.Read), line:1:35, endln:1:39
               |vpiStmt:
               \_Assignment: , line:61:7, endln:61:20
                 |vpiParent:
@@ -8275,7 +8289,7 @@ Design: (unnamed)
                     |vpiName:Read
                     |vpiFullName:work@FSM1.COMB.Read
                     |vpiActual:
-                    \_LogicNet: (work@FSM1.Read), line:3:8, endln:3:12
+                    \_LogicNet: (work@FSM1.Read), line:1:35, endln:1:39
                 |vpiLhs:
                 \_RefObj: (work@FSM1.COMB.Write), line:61:7, endln:61:12
                   |vpiParent:
@@ -8283,7 +8297,7 @@ Design: (unnamed)
                   |vpiName:Write
                   |vpiFullName:work@FSM1.COMB.Write
                   |vpiActual:
-                  \_LogicNet: (work@FSM1.Write), line:3:14, endln:3:19
+                  \_LogicNet: (work@FSM1.Write), line:1:41, endln:1:46
               |vpiStmt:
               \_IfElse: , line:62:7, endln:67:33
                 |vpiParent:
@@ -8300,7 +8314,7 @@ Design: (unnamed)
                     |vpiName:Read
                     |vpiFullName:work@FSM1.COMB.Read
                     |vpiActual:
-                    \_LogicNet: (work@FSM1.Read), line:3:8, endln:3:12
+                    \_LogicNet: (work@FSM1.Read), line:1:35, endln:1:39
                   |vpiOperand:
                   \_Constant: , line:62:19, endln:62:20
                     |vpiParent:
@@ -8347,7 +8361,7 @@ Design: (unnamed)
                       |vpiName:Write
                       |vpiFullName:work@FSM1.COMB.Write
                       |vpiActual:
-                      \_LogicNet: (work@FSM1.Write), line:3:14, endln:3:19
+                      \_LogicNet: (work@FSM1.Write), line:1:41, endln:1:46
                     |vpiOperand:
                     \_Constant: , line:63:25, endln:63:26
                       |vpiParent:
@@ -8394,7 +8408,7 @@ Design: (unnamed)
                         |vpiName:SlowRam
                         |vpiFullName:work@FSM1.COMB.SlowRam
                         |vpiActual:
-                        \_LogicNet: (work@FSM1.SlowRam), line:2:19, endln:2:26
+                        \_LogicNet: (work@FSM1.SlowRam), line:1:26, endln:1:33
                       |vpiOperand:
                       \_Constant: , line:64:27, endln:64:28
                         |vpiParent:
@@ -8630,7 +8644,7 @@ Design: (unnamed)
                     |vpiName:Write
                     |vpiFullName:work@FSM1.COMB.Write
                     |vpiActual:
-                    \_LogicNet: (work@FSM1.Write), line:3:14, endln:3:19
+                    \_LogicNet: (work@FSM1.Write), line:1:41, endln:1:46
                 |vpiLhs:
                 \_RefObj: (work@FSM1.COMB.Read), line:73:7, endln:73:11
                   |vpiParent:
@@ -8638,7 +8652,7 @@ Design: (unnamed)
                   |vpiName:Read
                   |vpiFullName:work@FSM1.COMB.Read
                   |vpiActual:
-                  \_LogicNet: (work@FSM1.Read), line:3:8, endln:3:12
+                  \_LogicNet: (work@FSM1.Read), line:1:35, endln:1:39
               |vpiStmt:
               \_Assignment: , line:74:7, endln:74:20
                 |vpiParent:
@@ -8657,7 +8671,7 @@ Design: (unnamed)
                     |vpiName:Read
                     |vpiFullName:work@FSM1.COMB.Read
                     |vpiActual:
-                    \_LogicNet: (work@FSM1.Read), line:3:8, endln:3:12
+                    \_LogicNet: (work@FSM1.Read), line:1:35, endln:1:39
                 |vpiLhs:
                 \_RefObj: (work@FSM1.COMB.Write), line:74:7, endln:74:12
                   |vpiParent:
@@ -8665,7 +8679,7 @@ Design: (unnamed)
                   |vpiName:Write
                   |vpiFullName:work@FSM1.COMB.Write
                   |vpiActual:
-                  \_LogicNet: (work@FSM1.Write), line:3:14, endln:3:19
+                  \_LogicNet: (work@FSM1.Write), line:1:41, endln:1:46
               |vpiStmt:
               \_IfElse: , line:75:7, endln:77:32
                 |vpiParent:
@@ -8871,7 +8885,7 @@ Design: (unnamed)
                     |vpiName:Write
                     |vpiFullName:work@FSM1.COMB.Write
                     |vpiActual:
-                    \_LogicNet: (work@FSM1.Write), line:3:14, endln:3:19
+                    \_LogicNet: (work@FSM1.Write), line:1:41, endln:1:46
                 |vpiLhs:
                 \_RefObj: (work@FSM1.COMB.Read), line:83:7, endln:83:11
                   |vpiParent:
@@ -8879,7 +8893,7 @@ Design: (unnamed)
                   |vpiName:Read
                   |vpiFullName:work@FSM1.COMB.Read
                   |vpiActual:
-                  \_LogicNet: (work@FSM1.Read), line:3:8, endln:3:12
+                  \_LogicNet: (work@FSM1.Read), line:1:35, endln:1:39
               |vpiStmt:
               \_Assignment: , line:84:7, endln:84:20
                 |vpiParent:
@@ -8898,7 +8912,7 @@ Design: (unnamed)
                     |vpiName:Read
                     |vpiFullName:work@FSM1.COMB.Read
                     |vpiActual:
-                    \_LogicNet: (work@FSM1.Read), line:3:8, endln:3:12
+                    \_LogicNet: (work@FSM1.Read), line:1:35, endln:1:39
                 |vpiLhs:
                 \_RefObj: (work@FSM1.COMB.Write), line:84:7, endln:84:12
                   |vpiParent:
@@ -8906,7 +8920,7 @@ Design: (unnamed)
                   |vpiName:Write
                   |vpiFullName:work@FSM1.COMB.Write
                   |vpiActual:
-                  \_LogicNet: (work@FSM1.Write), line:3:14, endln:3:19
+                  \_LogicNet: (work@FSM1.Write), line:1:41, endln:1:46
               |vpiStmt:
               \_IfElse: , line:85:7, endln:87:32
                 |vpiParent:
@@ -9112,7 +9126,7 @@ Design: (unnamed)
                     |vpiName:Write
                     |vpiFullName:work@FSM1.COMB.Write
                     |vpiActual:
-                    \_LogicNet: (work@FSM1.Write), line:3:14, endln:3:19
+                    \_LogicNet: (work@FSM1.Write), line:1:41, endln:1:46
                 |vpiLhs:
                 \_RefObj: (work@FSM1.COMB.Read), line:93:7, endln:93:11
                   |vpiParent:
@@ -9120,7 +9134,7 @@ Design: (unnamed)
                   |vpiName:Read
                   |vpiFullName:work@FSM1.COMB.Read
                   |vpiActual:
-                  \_LogicNet: (work@FSM1.Read), line:3:8, endln:3:12
+                  \_LogicNet: (work@FSM1.Read), line:1:35, endln:1:39
               |vpiStmt:
               \_Assignment: , line:94:7, endln:94:20
                 |vpiParent:
@@ -9139,7 +9153,7 @@ Design: (unnamed)
                     |vpiName:Read
                     |vpiFullName:work@FSM1.COMB.Read
                     |vpiActual:
-                    \_LogicNet: (work@FSM1.Read), line:3:8, endln:3:12
+                    \_LogicNet: (work@FSM1.Read), line:1:35, endln:1:39
                 |vpiLhs:
                 \_RefObj: (work@FSM1.COMB.Write), line:94:7, endln:94:12
                   |vpiParent:
@@ -9147,7 +9161,7 @@ Design: (unnamed)
                   |vpiName:Write
                   |vpiFullName:work@FSM1.COMB.Write
                   |vpiActual:
-                  \_LogicNet: (work@FSM1.Write), line:3:14, endln:3:19
+                  \_LogicNet: (work@FSM1.Write), line:1:41, endln:1:46
               |vpiStmt:
               \_IfElse: , line:95:7, endln:97:32
                 |vpiParent:
@@ -9211,7 +9225,7 @@ Design: (unnamed)
                       |vpiName:Write
                       |vpiFullName:work@FSM1.COMB.Write
                       |vpiActual:
-                      \_LogicNet: (work@FSM1.Write), line:3:14, endln:3:19
+                      \_LogicNet: (work@FSM1.Write), line:1:41, endln:1:46
                     |vpiOperand:
                     \_Constant: , line:96:25, endln:96:26
                       |vpiParent:
@@ -9353,7 +9367,7 @@ Design: (unnamed)
                     |vpiName:Write
                     |vpiFullName:work@FSM1.COMB.Write
                     |vpiActual:
-                    \_LogicNet: (work@FSM1.Write), line:3:14, endln:3:19
+                    \_LogicNet: (work@FSM1.Write), line:1:41, endln:1:46
                 |vpiLhs:
                 \_RefObj: (work@FSM1.COMB.Read), line:103:7, endln:103:11
                   |vpiParent:
@@ -9361,7 +9375,7 @@ Design: (unnamed)
                   |vpiName:Read
                   |vpiFullName:work@FSM1.COMB.Read
                   |vpiActual:
-                  \_LogicNet: (work@FSM1.Read), line:3:8, endln:3:12
+                  \_LogicNet: (work@FSM1.Read), line:1:35, endln:1:39
               |vpiStmt:
               \_Assignment: , line:104:7, endln:104:20
                 |vpiParent:
@@ -9380,7 +9394,7 @@ Design: (unnamed)
                     |vpiName:Read
                     |vpiFullName:work@FSM1.COMB.Read
                     |vpiActual:
-                    \_LogicNet: (work@FSM1.Read), line:3:8, endln:3:12
+                    \_LogicNet: (work@FSM1.Read), line:1:35, endln:1:39
                 |vpiLhs:
                 \_RefObj: (work@FSM1.COMB.Write), line:104:7, endln:104:12
                   |vpiParent:
@@ -9388,7 +9402,7 @@ Design: (unnamed)
                   |vpiName:Write
                   |vpiFullName:work@FSM1.COMB.Write
                   |vpiActual:
-                  \_LogicNet: (work@FSM1.Write), line:3:14, endln:3:19
+                  \_LogicNet: (work@FSM1.Write), line:1:41, endln:1:46
               |vpiStmt:
               \_IfElse: , line:105:7, endln:107:33
                 |vpiParent:
@@ -9594,7 +9608,7 @@ Design: (unnamed)
                     |vpiName:Write
                     |vpiFullName:work@FSM1.COMB.Write
                     |vpiActual:
-                    \_LogicNet: (work@FSM1.Write), line:3:14, endln:3:19
+                    \_LogicNet: (work@FSM1.Write), line:1:41, endln:1:46
                 |vpiLhs:
                 \_RefObj: (work@FSM1.COMB.Read), line:113:7, endln:113:11
                   |vpiParent:
@@ -9602,7 +9616,7 @@ Design: (unnamed)
                   |vpiName:Read
                   |vpiFullName:work@FSM1.COMB.Read
                   |vpiActual:
-                  \_LogicNet: (work@FSM1.Read), line:3:8, endln:3:12
+                  \_LogicNet: (work@FSM1.Read), line:1:35, endln:1:39
               |vpiStmt:
               \_Assignment: , line:114:7, endln:114:20
                 |vpiParent:
@@ -9621,7 +9635,7 @@ Design: (unnamed)
                     |vpiName:Read
                     |vpiFullName:work@FSM1.COMB.Read
                     |vpiActual:
-                    \_LogicNet: (work@FSM1.Read), line:3:8, endln:3:12
+                    \_LogicNet: (work@FSM1.Read), line:1:35, endln:1:39
                 |vpiLhs:
                 \_RefObj: (work@FSM1.COMB.Write), line:114:7, endln:114:12
                   |vpiParent:
@@ -9629,7 +9643,7 @@ Design: (unnamed)
                   |vpiName:Write
                   |vpiFullName:work@FSM1.COMB.Write
                   |vpiActual:
-                  \_LogicNet: (work@FSM1.Write), line:3:14, endln:3:19
+                  \_LogicNet: (work@FSM1.Write), line:1:41, endln:1:46
               |vpiStmt:
               \_IfElse: , line:115:7, endln:117:32
                 |vpiParent:
@@ -9784,7 +9798,7 @@ Design: (unnamed)
                   |vpiName:Read
                   |vpiFullName:work@FSM1.COMB.Read
                   |vpiActual:
-                  \_LogicNet: (work@FSM1.Read), line:3:8, endln:3:12
+                  \_LogicNet: (work@FSM1.Read), line:1:35, endln:1:39
               |vpiStmt:
               \_Assignment: , line:122:7, endln:122:16
                 |vpiParent:
@@ -9806,7 +9820,7 @@ Design: (unnamed)
                   |vpiName:Write
                   |vpiFullName:work@FSM1.COMB.Write
                   |vpiActual:
-                  \_LogicNet: (work@FSM1.Write), line:3:14, endln:3:19
+                  \_LogicNet: (work@FSM1.Write), line:1:41, endln:1:46
               |vpiStmt:
               \_Assignment: , line:123:7, endln:123:19
                 |vpiParent:
@@ -9975,7 +9989,7 @@ Design: (unnamed)
                   |vpiName:Read
                   |vpiFullName:work@FSM1.COMB.Read
                   |vpiActual:
-                  \_LogicNet: (work@FSM1.Read), line:3:8, endln:3:12
+                  \_LogicNet: (work@FSM1.Read), line:1:35, endln:1:39
               |vpiStmt:
               \_Assignment: , line:132:7, endln:132:16
                 |vpiParent:
@@ -9997,7 +10011,7 @@ Design: (unnamed)
                   |vpiName:Write
                   |vpiFullName:work@FSM1.COMB.Write
                   |vpiActual:
-                  \_LogicNet: (work@FSM1.Write), line:3:14, endln:3:19
+                  \_LogicNet: (work@FSM1.Write), line:1:41, endln:1:46
               |vpiStmt:
               \_IfElse: , line:133:7, endln:136:29
                 |vpiParent:
@@ -10009,7 +10023,7 @@ Design: (unnamed)
                   |vpiName:SlowRam
                   |vpiFullName:work@FSM1.COMB.SlowRam
                   |vpiActual:
-                  \_LogicNet: (work@FSM1.SlowRam), line:2:19, endln:2:26
+                  \_LogicNet: (work@FSM1.SlowRam), line:1:26, endln:1:33
                 |vpiStmt:
                 \_Assignment: , line:134:9, endln:134:29
                   |vpiParent:
@@ -10146,7 +10160,7 @@ Design: (unnamed)
                   |vpiName:Read
                   |vpiFullName:work@FSM1.COMB.Read
                   |vpiActual:
-                  \_LogicNet: (work@FSM1.Read), line:3:8, endln:3:12
+                  \_LogicNet: (work@FSM1.Read), line:1:35, endln:1:39
               |vpiStmt:
               \_Assignment: , line:143:7, endln:143:16
                 |vpiParent:
@@ -10168,7 +10182,7 @@ Design: (unnamed)
                   |vpiName:Write
                   |vpiFullName:work@FSM1.COMB.Write
                   |vpiActual:
-                  \_LogicNet: (work@FSM1.Write), line:3:14, endln:3:19
+                  \_LogicNet: (work@FSM1.Write), line:1:41, endln:1:46
               |vpiStmt:
               \_Assignment: , line:144:7, endln:144:26
                 |vpiParent:
@@ -10275,7 +10289,7 @@ Design: (unnamed)
                   |vpiName:Read
                   |vpiFullName:work@FSM1.COMB.Read
                   |vpiActual:
-                  \_LogicNet: (work@FSM1.Read), line:3:8, endln:3:12
+                  \_LogicNet: (work@FSM1.Read), line:1:35, endln:1:39
               |vpiStmt:
               \_Assignment: , line:151:7, endln:151:16
                 |vpiParent:
@@ -10297,7 +10311,7 @@ Design: (unnamed)
                   |vpiName:Write
                   |vpiFullName:work@FSM1.COMB.Write
                   |vpiActual:
-                  \_LogicNet: (work@FSM1.Write), line:3:14, endln:3:19
+                  \_LogicNet: (work@FSM1.Write), line:1:41, endln:1:46
               |vpiStmt:
               \_Assignment: , line:152:7, endln:152:26
                 |vpiParent:
@@ -10863,25 +10877,25 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_Task: (work@FSM2.SwitchCtrl), line:23:1, endln:33:8
   |vpiImportTypespec:
-  \_LogicNet: (work@FSM2.clock), line:2:7, endln:2:12
+  \_LogicNet: (work@FSM2.clock), line:1:13, endln:1:18
     |vpiParent:
     \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
     |vpiName:clock
     |vpiFullName:work@FSM2.clock
   |vpiImportTypespec:
-  \_LogicNet: (work@FSM2.reset), line:2:14, endln:2:19
+  \_LogicNet: (work@FSM2.reset), line:1:20, endln:1:25
     |vpiParent:
     \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
     |vpiName:reset
     |vpiFullName:work@FSM2.reset
   |vpiImportTypespec:
-  \_LogicNet: (work@FSM2.control), line:2:21, endln:2:28
+  \_LogicNet: (work@FSM2.control), line:1:27, endln:1:34
     |vpiParent:
     \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
     |vpiName:control
     |vpiFullName:work@FSM2.control
   |vpiImportTypespec:
-  \_LogicNet: (work@FSM2.y), line:3:14, endln:3:15
+  \_LogicNet: (work@FSM2.y), line:1:36, endln:1:37
     |vpiParent:
     \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
     |vpiName:y
@@ -11051,13 +11065,13 @@ Design: (unnamed)
   |vpiTaskFunc:
   \_Task: (work@FSM2.SwitchCtrl), line:23:1, endln:33:8
   |vpiNet:
-  \_LogicNet: (work@FSM2.clock), line:2:7, endln:2:12
+  \_LogicNet: (work@FSM2.clock), line:1:13, endln:1:18
   |vpiNet:
-  \_LogicNet: (work@FSM2.reset), line:2:14, endln:2:19
+  \_LogicNet: (work@FSM2.reset), line:1:20, endln:1:25
   |vpiNet:
-  \_LogicNet: (work@FSM2.control), line:2:21, endln:2:28
+  \_LogicNet: (work@FSM2.control), line:1:27, endln:1:34
   |vpiNet:
-  \_LogicNet: (work@FSM2.y), line:3:14, endln:3:15
+  \_LogicNet: (work@FSM2.y), line:1:36, endln:1:37
   |vpiNet:
   \_LogicNet: (work@FSM2.y), line:4:11, endln:4:12
   |vpiNet:
@@ -11285,7 +11299,7 @@ Design: (unnamed)
           |vpiName:control
           |vpiFullName:work@FSM2.control
           |vpiActual:
-          \_LogicNet: (work@FSM2.control), line:2:21, endln:2:28
+          \_LogicNet: (work@FSM2.control), line:1:27, endln:1:34
         |vpiOperand:
         \_RefObj: (work@FSM2.CurrentState), line:36:21, endln:36:33
           |vpiParent:
@@ -11409,7 +11423,7 @@ Design: (unnamed)
                   |vpiName:control
                   |vpiFullName:work@FSM2.COMB.control
                   |vpiActual:
-                  \_LogicNet: (work@FSM2.control), line:2:21, endln:2:28
+                  \_LogicNet: (work@FSM2.control), line:1:27, endln:1:34
                 |vpiStmt:
                 \_Assignment: , line:46:9, endln:46:24
                   |vpiParent:
@@ -12453,7 +12467,7 @@ Design: (unnamed)
             |vpiName:clock
             |vpiFullName:work@FSM2.clock
             |vpiActual:
-            \_LogicNet: (work@FSM2.clock), line:2:7, endln:2:12
+            \_LogicNet: (work@FSM2.clock), line:1:13, endln:1:18
         |vpiOperand:
         \_Operation: , line:116:27, endln:116:40
           |vpiParent:
@@ -12466,7 +12480,7 @@ Design: (unnamed)
             |vpiName:reset
             |vpiFullName:work@FSM2.reset
             |vpiActual:
-            \_LogicNet: (work@FSM2.reset), line:2:14, endln:2:19
+            \_LogicNet: (work@FSM2.reset), line:1:20, endln:1:25
       |vpiStmt:
       \_Begin: (work@FSM2.SEQ), line:116:42, endln:121:4
         |vpiParent:
@@ -12484,7 +12498,7 @@ Design: (unnamed)
             |vpiName:reset
             |vpiFullName:work@FSM2.SEQ.reset
             |vpiActual:
-            \_LogicNet: (work@FSM2.reset), line:2:14, endln:2:19
+            \_LogicNet: (work@FSM2.reset), line:1:20, endln:1:25
           |vpiStmt:
           \_Assignment: , line:118:5, endln:118:23
             |vpiParent:
@@ -12598,7 +12612,7 @@ Design: (unnamed)
                 |vpiName:y
                 |vpiFullName:work@FSM2.OUT_LOGIC.y
                 |vpiActual:
-                \_LogicNet: (work@FSM2.y), line:3:14, endln:3:15
+                \_LogicNet: (work@FSM2.y), line:1:36, endln:1:37
           |vpiCaseItem:
           \_CaseItem: , line:127:5, endln:127:14
             |vpiParent:
@@ -12632,7 +12646,7 @@ Design: (unnamed)
                 |vpiName:y
                 |vpiFullName:work@FSM2.OUT_LOGIC.y
                 |vpiActual:
-                \_LogicNet: (work@FSM2.y), line:3:14, endln:3:15
+                \_LogicNet: (work@FSM2.y), line:1:36, endln:1:37
           |vpiCaseItem:
           \_CaseItem: , line:128:5, endln:128:14
             |vpiParent:
@@ -12666,7 +12680,7 @@ Design: (unnamed)
                 |vpiName:y
                 |vpiFullName:work@FSM2.OUT_LOGIC.y
                 |vpiActual:
-                \_LogicNet: (work@FSM2.y), line:3:14, endln:3:15
+                \_LogicNet: (work@FSM2.y), line:1:36, endln:1:37
           |vpiCaseItem:
           \_CaseItem: , line:129:5, endln:129:14
             |vpiParent:
@@ -12700,7 +12714,7 @@ Design: (unnamed)
                 |vpiName:y
                 |vpiFullName:work@FSM2.OUT_LOGIC.y
                 |vpiActual:
-                \_LogicNet: (work@FSM2.y), line:3:14, endln:3:15
+                \_LogicNet: (work@FSM2.y), line:1:36, endln:1:37
           |vpiCaseItem:
           \_CaseItem: , line:130:5, endln:130:18
             |vpiParent:
@@ -12726,7 +12740,7 @@ Design: (unnamed)
                 |vpiName:y
                 |vpiFullName:work@FSM2.OUT_LOGIC.y
                 |vpiActual:
-                \_LogicNet: (work@FSM2.y), line:3:14, endln:3:15
+                \_LogicNet: (work@FSM2.y), line:1:36, endln:1:37
     |vpiAlwaysType:1
 |vpiAllModules:
 \_Module: work@FSM3 (work@FSM3), file:${SURELOG_DIR}/tests/FSMBsp13/fsm3.v, line:1:1, endln:64:10
@@ -12917,31 +12931,31 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@FSM3 (work@FSM3), file:${SURELOG_DIR}/tests/FSMBsp13/fsm3.v, line:1:1, endln:64:10
   |vpiImportTypespec:
-  \_LogicNet: (work@FSM3.clock), line:2:7, endln:2:12
+  \_LogicNet: (work@FSM3.clock), line:1:13, endln:1:18
     |vpiParent:
     \_Module: work@FSM3 (work@FSM3), file:${SURELOG_DIR}/tests/FSMBsp13/fsm3.v, line:1:1, endln:64:10
     |vpiName:clock
     |vpiFullName:work@FSM3.clock
   |vpiImportTypespec:
-  \_LogicNet: (work@FSM3.keys), line:2:14, endln:2:18
+  \_LogicNet: (work@FSM3.keys), line:1:20, endln:1:24
     |vpiParent:
     \_Module: work@FSM3 (work@FSM3), file:${SURELOG_DIR}/tests/FSMBsp13/fsm3.v, line:1:1, endln:64:10
     |vpiName:keys
     |vpiFullName:work@FSM3.keys
   |vpiImportTypespec:
-  \_LogicNet: (work@FSM3.brake), line:2:20, endln:2:25
+  \_LogicNet: (work@FSM3.brake), line:1:26, endln:1:31
     |vpiParent:
     \_Module: work@FSM3 (work@FSM3), file:${SURELOG_DIR}/tests/FSMBsp13/fsm3.v, line:1:1, endln:64:10
     |vpiName:brake
     |vpiFullName:work@FSM3.brake
   |vpiImportTypespec:
-  \_LogicNet: (work@FSM3.accelerate), line:2:27, endln:2:37
+  \_LogicNet: (work@FSM3.accelerate), line:1:33, endln:1:43
     |vpiParent:
     \_Module: work@FSM3 (work@FSM3), file:${SURELOG_DIR}/tests/FSMBsp13/fsm3.v, line:1:1, endln:64:10
     |vpiName:accelerate
     |vpiFullName:work@FSM3.accelerate
   |vpiImportTypespec:
-  \_LogicNet: (work@FSM3.Speed), line:3:14, endln:3:19
+  \_LogicNet: (work@FSM3.Speed), line:1:45, endln:1:50
     |vpiParent:
     \_Module: work@FSM3 (work@FSM3), file:${SURELOG_DIR}/tests/FSMBsp13/fsm3.v, line:1:1, endln:64:10
     |vpiName:Speed
@@ -13013,15 +13027,15 @@ Design: (unnamed)
     |vpiNetType:48
   |vpiDefName:work@FSM3
   |vpiNet:
-  \_LogicNet: (work@FSM3.clock), line:2:7, endln:2:12
+  \_LogicNet: (work@FSM3.clock), line:1:13, endln:1:18
   |vpiNet:
-  \_LogicNet: (work@FSM3.keys), line:2:14, endln:2:18
+  \_LogicNet: (work@FSM3.keys), line:1:20, endln:1:24
   |vpiNet:
-  \_LogicNet: (work@FSM3.brake), line:2:20, endln:2:25
+  \_LogicNet: (work@FSM3.brake), line:1:26, endln:1:31
   |vpiNet:
-  \_LogicNet: (work@FSM3.accelerate), line:2:27, endln:2:37
+  \_LogicNet: (work@FSM3.accelerate), line:1:33, endln:1:43
   |vpiNet:
-  \_LogicNet: (work@FSM3.Speed), line:3:14, endln:3:19
+  \_LogicNet: (work@FSM3.Speed), line:1:45, endln:1:50
   |vpiNet:
   \_LogicNet: (work@FSM3.Speed), line:4:11, endln:4:16
   |vpiNet:
@@ -13160,7 +13174,7 @@ Design: (unnamed)
             |vpiName:clock
             |vpiFullName:work@FSM3.clock
             |vpiActual:
-            \_LogicNet: (work@FSM3.clock), line:2:7, endln:2:12
+            \_LogicNet: (work@FSM3.clock), line:1:13, endln:1:18
         |vpiOperand:
         \_Operation: , line:22:27, endln:22:39
           |vpiParent:
@@ -13173,7 +13187,7 @@ Design: (unnamed)
             |vpiName:keys
             |vpiFullName:work@FSM3.keys
             |vpiActual:
-            \_LogicNet: (work@FSM3.keys), line:2:14, endln:2:18
+            \_LogicNet: (work@FSM3.keys), line:1:20, endln:1:24
       |vpiStmt:
       \_Begin: (work@FSM3.FSM3), line:22:41, endln:62:5
         |vpiParent:
@@ -13196,7 +13210,7 @@ Design: (unnamed)
               |vpiName:keys
               |vpiFullName:work@FSM3.FSM3.keys
               |vpiActual:
-              \_LogicNet: (work@FSM3.keys), line:2:14, endln:2:18
+              \_LogicNet: (work@FSM3.keys), line:1:20, endln:1:24
           |vpiStmt:
           \_Assignment: , line:24:4, endln:24:16
             |vpiParent:
@@ -13218,7 +13232,7 @@ Design: (unnamed)
               |vpiName:Speed
               |vpiFullName:work@FSM3.FSM3.Speed
               |vpiActual:
-              \_LogicNet: (work@FSM3.Speed), line:3:14, endln:3:19
+              \_LogicNet: (work@FSM3.Speed), line:1:45, endln:1:50
           |vpiElseStmt:
           \_IfElse: , line:25:8, endln:46:19
             |vpiParent:
@@ -13230,7 +13244,7 @@ Design: (unnamed)
               |vpiName:accelerate
               |vpiFullName:work@FSM3.FSM3.accelerate
               |vpiActual:
-              \_LogicNet: (work@FSM3.accelerate), line:2:27, endln:2:37
+              \_LogicNet: (work@FSM3.accelerate), line:1:33, endln:1:43
             |vpiStmt:
             \_CaseStmt: , line:26:5, endln:34:12
               |vpiParent:
@@ -13243,7 +13257,7 @@ Design: (unnamed)
                 |vpiName:Speed
                 |vpiFullName:work@FSM3.FSM3.Speed
                 |vpiActual:
-                \_LogicNet: (work@FSM3.Speed), line:3:14, endln:3:19
+                \_LogicNet: (work@FSM3.Speed), line:1:45, endln:1:50
               |vpiCaseItem:
               \_CaseItem: , line:27:7, endln:27:28
                 |vpiParent:
@@ -13277,7 +13291,7 @@ Design: (unnamed)
                     |vpiName:Speed
                     |vpiFullName:work@FSM3.FSM3.Speed
                     |vpiActual:
-                    \_LogicNet: (work@FSM3.Speed), line:3:14, endln:3:19
+                    \_LogicNet: (work@FSM3.Speed), line:1:45, endln:1:50
               |vpiCaseItem:
               \_CaseItem: , line:28:7, endln:28:30
                 |vpiParent:
@@ -13311,7 +13325,7 @@ Design: (unnamed)
                     |vpiName:Speed
                     |vpiFullName:work@FSM3.FSM3.Speed
                     |vpiActual:
-                    \_LogicNet: (work@FSM3.Speed), line:3:14, endln:3:19
+                    \_LogicNet: (work@FSM3.Speed), line:1:45, endln:1:50
               |vpiCaseItem:
               \_CaseItem: , line:29:7, endln:29:28
                 |vpiParent:
@@ -13345,7 +13359,7 @@ Design: (unnamed)
                     |vpiName:Speed
                     |vpiFullName:work@FSM3.FSM3.Speed
                     |vpiActual:
-                    \_LogicNet: (work@FSM3.Speed), line:3:14, endln:3:19
+                    \_LogicNet: (work@FSM3.Speed), line:1:45, endln:1:50
               |vpiCaseItem:
               \_CaseItem: , line:30:7, endln:30:30
                 |vpiParent:
@@ -13379,7 +13393,7 @@ Design: (unnamed)
                     |vpiName:Speed
                     |vpiFullName:work@FSM3.FSM3.Speed
                     |vpiActual:
-                    \_LogicNet: (work@FSM3.Speed), line:3:14, endln:3:19
+                    \_LogicNet: (work@FSM3.Speed), line:1:45, endln:1:50
               |vpiCaseItem:
               \_CaseItem: , line:31:7, endln:31:28
                 |vpiParent:
@@ -13413,7 +13427,7 @@ Design: (unnamed)
                     |vpiName:Speed
                     |vpiFullName:work@FSM3.FSM3.Speed
                     |vpiActual:
-                    \_LogicNet: (work@FSM3.Speed), line:3:14, endln:3:19
+                    \_LogicNet: (work@FSM3.Speed), line:1:45, endln:1:50
               |vpiCaseItem:
               \_CaseItem: , line:32:7, endln:32:28
                 |vpiParent:
@@ -13447,7 +13461,7 @@ Design: (unnamed)
                     |vpiName:Speed
                     |vpiFullName:work@FSM3.FSM3.Speed
                     |vpiActual:
-                    \_LogicNet: (work@FSM3.Speed), line:3:14, endln:3:19
+                    \_LogicNet: (work@FSM3.Speed), line:1:45, endln:1:50
               |vpiCaseItem:
               \_CaseItem: , line:33:7, endln:33:28
                 |vpiParent:
@@ -13481,7 +13495,7 @@ Design: (unnamed)
                     |vpiName:Speed
                     |vpiFullName:work@FSM3.FSM3.Speed
                     |vpiActual:
-                    \_LogicNet: (work@FSM3.Speed), line:3:14, endln:3:19
+                    \_LogicNet: (work@FSM3.Speed), line:1:45, endln:1:50
             |vpiElseStmt:
             \_IfElse: , line:35:8, endln:46:19
               |vpiParent:
@@ -13493,7 +13507,7 @@ Design: (unnamed)
                 |vpiName:brake
                 |vpiFullName:work@FSM3.FSM3.brake
                 |vpiActual:
-                \_LogicNet: (work@FSM3.brake), line:2:20, endln:2:25
+                \_LogicNet: (work@FSM3.brake), line:1:26, endln:1:31
               |vpiStmt:
               \_CaseStmt: , line:36:5, endln:44:12
                 |vpiParent:
@@ -13506,7 +13520,7 @@ Design: (unnamed)
                   |vpiName:Speed
                   |vpiFullName:work@FSM3.FSM3.Speed
                   |vpiActual:
-                  \_LogicNet: (work@FSM3.Speed), line:3:14, endln:3:19
+                  \_LogicNet: (work@FSM3.Speed), line:1:45, endln:1:50
                 |vpiCaseItem:
                 \_CaseItem: , line:37:7, endln:37:30
                   |vpiParent:
@@ -13540,7 +13554,7 @@ Design: (unnamed)
                       |vpiName:Speed
                       |vpiFullName:work@FSM3.FSM3.Speed
                       |vpiActual:
-                      \_LogicNet: (work@FSM3.Speed), line:3:14, endln:3:19
+                      \_LogicNet: (work@FSM3.Speed), line:1:45, endln:1:50
                 |vpiCaseItem:
                 \_CaseItem: , line:38:7, endln:38:30
                   |vpiParent:
@@ -13574,7 +13588,7 @@ Design: (unnamed)
                       |vpiName:Speed
                       |vpiFullName:work@FSM3.FSM3.Speed
                       |vpiActual:
-                      \_LogicNet: (work@FSM3.Speed), line:3:14, endln:3:19
+                      \_LogicNet: (work@FSM3.Speed), line:1:45, endln:1:50
                 |vpiCaseItem:
                 \_CaseItem: , line:39:7, endln:39:28
                   |vpiParent:
@@ -13608,7 +13622,7 @@ Design: (unnamed)
                       |vpiName:Speed
                       |vpiFullName:work@FSM3.FSM3.Speed
                       |vpiActual:
-                      \_LogicNet: (work@FSM3.Speed), line:3:14, endln:3:19
+                      \_LogicNet: (work@FSM3.Speed), line:1:45, endln:1:50
                 |vpiCaseItem:
                 \_CaseItem: , line:40:7, endln:40:28
                   |vpiParent:
@@ -13642,7 +13656,7 @@ Design: (unnamed)
                       |vpiName:Speed
                       |vpiFullName:work@FSM3.FSM3.Speed
                       |vpiActual:
-                      \_LogicNet: (work@FSM3.Speed), line:3:14, endln:3:19
+                      \_LogicNet: (work@FSM3.Speed), line:1:45, endln:1:50
                 |vpiCaseItem:
                 \_CaseItem: , line:41:7, endln:41:28
                   |vpiParent:
@@ -13676,7 +13690,7 @@ Design: (unnamed)
                       |vpiName:Speed
                       |vpiFullName:work@FSM3.FSM3.Speed
                       |vpiActual:
-                      \_LogicNet: (work@FSM3.Speed), line:3:14, endln:3:19
+                      \_LogicNet: (work@FSM3.Speed), line:1:45, endln:1:50
                 |vpiCaseItem:
                 \_CaseItem: , line:42:7, endln:42:30
                   |vpiParent:
@@ -13710,7 +13724,7 @@ Design: (unnamed)
                       |vpiName:Speed
                       |vpiFullName:work@FSM3.FSM3.Speed
                       |vpiActual:
-                      \_LogicNet: (work@FSM3.Speed), line:3:14, endln:3:19
+                      \_LogicNet: (work@FSM3.Speed), line:1:45, endln:1:50
                 |vpiCaseItem:
                 \_CaseItem: , line:43:7, endln:43:28
                   |vpiParent:
@@ -13744,7 +13758,7 @@ Design: (unnamed)
                       |vpiName:Speed
                       |vpiFullName:work@FSM3.FSM3.Speed
                       |vpiActual:
-                      \_LogicNet: (work@FSM3.Speed), line:3:14, endln:3:19
+                      \_LogicNet: (work@FSM3.Speed), line:1:45, endln:1:50
               |vpiElseStmt:
               \_Assignment: , line:46:5, endln:46:18
                 |vpiParent:
@@ -13758,7 +13772,7 @@ Design: (unnamed)
                   |vpiName:Speed
                   |vpiFullName:work@FSM3.FSM3.Speed
                   |vpiActual:
-                  \_LogicNet: (work@FSM3.Speed), line:3:14, endln:3:19
+                  \_LogicNet: (work@FSM3.Speed), line:1:45, endln:1:50
                 |vpiLhs:
                 \_RefObj: (work@FSM3.FSM3.Speed), line:46:5, endln:46:10
                   |vpiParent:
@@ -13766,7 +13780,7 @@ Design: (unnamed)
                   |vpiName:Speed
                   |vpiFullName:work@FSM3.FSM3.Speed
                   |vpiActual:
-                  \_LogicNet: (work@FSM3.Speed), line:3:14, endln:3:19
+                  \_LogicNet: (work@FSM3.Speed), line:1:45, endln:1:50
         |vpiStmt:
         \_IfElse: , line:48:2, endln:51:19
           |vpiParent:
@@ -13783,7 +13797,7 @@ Design: (unnamed)
               |vpiName:keys
               |vpiFullName:work@FSM3.FSM3.keys
               |vpiActual:
-              \_LogicNet: (work@FSM3.keys), line:2:14, endln:2:18
+              \_LogicNet: (work@FSM3.keys), line:1:20, endln:1:24
           |vpiStmt:
           \_Assignment: , line:49:4, endln:49:13
             |vpiParent:
@@ -13849,7 +13863,7 @@ Design: (unnamed)
               |vpiName:keys
               |vpiFullName:work@FSM3.FSM3.keys
               |vpiActual:
-              \_LogicNet: (work@FSM3.keys), line:2:14, endln:2:18
+              \_LogicNet: (work@FSM3.keys), line:1:20, endln:1:24
           |vpiStmt:
           \_Assignment: , line:54:4, endln:54:13
             |vpiParent:
@@ -13915,7 +13929,7 @@ Design: (unnamed)
               |vpiName:keys
               |vpiFullName:work@FSM3.FSM3.keys
               |vpiActual:
-              \_LogicNet: (work@FSM3.keys), line:2:14, endln:2:18
+              \_LogicNet: (work@FSM3.keys), line:1:20, endln:1:24
           |vpiStmt:
           \_Assignment: , line:59:4, endln:59:13
             |vpiParent:
@@ -14547,7 +14561,7 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FSMBsp13/top.v, line:1:1, endln:146:10
     |vpiTypespec:
-    \_RefTypespec: (work@top.Fsm2Out), line:8:1, endln:8:11
+    \_RefTypespec: (work@top.Fsm2Out), line:8:1, endln:8:5
       |vpiParent:
       \_LogicNet: (work@top.Fsm2Out), line:8:12, endln:8:19
       |vpiFullName:work@top.Fsm2Out
@@ -14563,7 +14577,7 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FSMBsp13/top.v, line:1:1, endln:146:10
     |vpiTypespec:
-    \_RefTypespec: (work@top.speed), line:9:1, endln:9:11
+    \_RefTypespec: (work@top.speed), line:9:1, endln:9:5
       |vpiParent:
       \_LogicNet: (work@top.speed), line:9:12, endln:9:17
       |vpiFullName:work@top.speed

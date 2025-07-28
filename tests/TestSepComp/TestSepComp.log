@@ -40,20 +40,33 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:pkg1
   |vpiTypedef:
-  \_EnumTypespec: (pkg1::enum1), line:3:11, endln:5:10
+  \_EnumTypespec: , line:3:11, endln:5:10
     |vpiParent:
     \_Package: pkg1 (pkg1), file:${SURELOG_DIR}/tests/TestSepComp/pkg1.sv, line:1:1, endln:7:11
-    |vpiName:pkg1::enum1
     |vpiEnumConst:
     \_EnumConst: (HERE), line:4:5, endln:4:9
       |vpiParent:
-      \_EnumTypespec: (pkg1::enum1), line:3:11, endln:5:10
+      \_EnumTypespec: , line:3:11, endln:5:10
       |vpiName:HERE
       |INT:0
       |vpiDecompile:0
       |vpiSize:64
+  |vpiTypedef:
+  \_TypedefTypespec: (pkg1::enum1), line:5:5, endln:5:10
+    |vpiParent:
+    \_Package: pkg1 (pkg1), file:${SURELOG_DIR}/tests/TestSepComp/pkg1.sv, line:1:1, endln:7:11
+    |vpiName:pkg1::enum1
+    |vpiTypedefAlias:
+    \_RefTypespec: (pkg1::enum1), line:3:11, endln:5:4
+      |vpiParent:
+      \_TypedefTypespec: (pkg1::enum1), line:5:5, endln:5:10
+      |vpiFullName:pkg1::enum1
+      |vpiActual:
+      \_EnumTypespec: , line:3:11, endln:5:10
   |vpiImportTypespec:
-  \_EnumTypespec: (pkg1::enum1), line:3:11, endln:5:10
+  \_EnumTypespec: , line:3:11, endln:5:10
+  |vpiImportTypespec:
+  \_TypedefTypespec: (pkg1::enum1), line:5:5, endln:5:10
   |vpiDefName:pkg1
 |vpiAllPackages:
 \_Package: pkg2 (pkg2), file:${SURELOG_DIR}/tests/TestSepComp/pkg2.sv, line:1:1, endln:16:11
@@ -71,7 +84,7 @@ Design: (unnamed)
       |vpiName:enum2
       |vpiFullName:pkg2::P1::enum2
       |vpiActual:
-      \_UnsupportedTypespec: (enum2), line:4:12, endln:4:17
+      \_TypedefTypespec: (pkg2::enum2), line:3:22, endln:3:27
     |vpiName:P1
     |vpiFullName:pkg2::P1
   |vpiParamAssign:
@@ -89,12 +102,19 @@ Design: (unnamed)
     |vpiLhs:
     \_Parameter: (pkg2::P1), line:4:18, endln:4:33
   |vpiTypedef:
-  \_UnsupportedTypespec: (enum2), line:4:12, endln:4:17
+  \_TypedefTypespec: (pkg2::enum2), line:3:22, endln:3:27
     |vpiParent:
     \_Package: pkg2 (pkg2), file:${SURELOG_DIR}/tests/TestSepComp/pkg2.sv, line:1:1, endln:16:11
-    |vpiName:enum2
+    |vpiName:pkg2::enum2
+    |vpiTypedefAlias:
+    \_RefTypespec: (pkg2::enum2), line:3:10, endln:3:16
+      |vpiParent:
+      \_TypedefTypespec: (pkg2::enum2), line:3:22, endln:3:27
+      |vpiFullName:pkg2::enum2
+      |vpiActual:
+      \_TypedefTypespec: (pkg1::enum1), line:5:5, endln:5:10
   |vpiImportTypespec:
-  \_UnsupportedTypespec: (enum2), line:4:12, endln:4:17
+  \_TypedefTypespec: (pkg2::enum2), line:3:22, endln:3:27
   |vpiDefName:pkg2
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TestSepComp/top.sv, line:1:1, endln:4:10

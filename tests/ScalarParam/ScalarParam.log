@@ -122,12 +122,13 @@ GenIf                                                  1
 Module                                                 3
 ModuleTypespec                                         2
 Operation                                              1
+PackedArrayTypespec                                    1
 ParamAssign                                            1
 Parameter                                              1
 Range                                                  1
 RefModule                                              2
 RefObj                                                 1
-RefTypespec                                            1
+RefTypespec                                            2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ScalarParam/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -177,7 +178,7 @@ Design: (unnamed)
       \_Parameter: (work@param_test.DRspDepth), line:5:25, endln:5:41
       |vpiFullName:work@param_test.DRspDepth
       |vpiActual:
-      \_BitTypespec: , line:5:11, endln:5:20
+      \_PackedArrayTypespec: , line:5:11, endln:5:20
     |vpiName:DRspDepth
     |vpiFullName:work@param_test.DRspDepth
   |vpiParamAssign:
@@ -215,13 +216,17 @@ Design: (unnamed)
       |vpiActual:
       \_Module: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/ScalarParam/dut.sv, line:1:1, endln:2:10
   |vpiTypedef:
-  \_BitTypespec: , line:5:11, endln:5:20
+  \_BitTypespec: , line:5:11, endln:5:14
+    |vpiParent:
+    \_Module: work@param_test (work@param_test), file:${SURELOG_DIR}/tests/ScalarParam/dut.sv, line:4:1, endln:10:10
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:5:11, endln:5:20
     |vpiParent:
     \_Module: work@param_test (work@param_test), file:${SURELOG_DIR}/tests/ScalarParam/dut.sv, line:4:1, endln:10:10
     |vpiRange:
     \_Range: , line:5:15, endln:5:20
       |vpiParent:
-      \_BitTypespec: , line:5:11, endln:5:20
+      \_PackedArrayTypespec: , line:5:11, endln:5:20
       |vpiLeftRange:
       \_Constant: , line:5:16, endln:5:17
         |vpiParent:
@@ -238,8 +243,17 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@param_test), line:5:11, endln:5:14
+      |vpiParent:
+      \_PackedArrayTypespec: , line:5:11, endln:5:20
+      |vpiFullName:work@param_test
+      |vpiActual:
+      \_BitTypespec: , line:5:11, endln:5:14
   |vpiImportTypespec:
-  \_BitTypespec: , line:5:11, endln:5:20
+  \_BitTypespec: , line:5:11, endln:5:14
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:5:11, endln:5:20
   |vpiDefName:work@param_test
   |vpiGenStmt:
   \_GenIf: , line:7:4, endln:9:7

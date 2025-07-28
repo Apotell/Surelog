@@ -122,8 +122,8 @@ ParamAssign                                            2
 Parameter                                              2
 Range                                                  1
 RefObj                                                 4
-RefTypespec                                            4
-UnsupportedTypespec                                    1
+RefTypespec                                            6
+TypedefTypespec                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ImportBinding/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -161,7 +161,7 @@ Design: (unnamed)
       |vpiName:lc_tx_t
       |vpiFullName:lc_ctrl_pkg::LC_TX_DEFAULT::lc_tx_t
       |vpiActual:
-      \_UnsupportedTypespec: (lc_tx_t), line:11:15, endln:11:22
+      \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_t), line:9:21, endln:9:28
     |vpiName:LC_TX_DEFAULT
     |vpiFullName:lc_ctrl_pkg::LC_TX_DEFAULT
   |vpiParamAssign:
@@ -197,6 +197,33 @@ Design: (unnamed)
     |vpiParent:
     \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/ImportBinding/dut.sv, line:1:1, endln:13:11
     |vpiSigned:1
+  |vpiTypedef:
+  \_EnumTypespec: , line:4:12, endln:7:14
+    |vpiParent:
+    \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/ImportBinding/dut.sv, line:1:1, endln:13:11
+    |vpiBaseTypespec:
+    \_RefTypespec: (lc_ctrl_pkg), line:4:17, endln:4:36
+      |vpiParent:
+      \_EnumTypespec: , line:4:12, endln:7:14
+      |vpiFullName:lc_ctrl_pkg
+      |vpiActual:
+      \_LogicTypespec: , line:4:17, endln:4:36
+    |vpiEnumConst:
+    \_EnumConst: (On), line:5:7, endln:5:20
+      |vpiParent:
+      \_EnumTypespec: , line:4:12, endln:7:14
+      |vpiName:On
+      |BIN:1010
+      |vpiDecompile:4'b1010
+      |vpiSize:4
+    |vpiEnumConst:
+    \_EnumConst: (Off), line:6:6, endln:6:19
+      |vpiParent:
+      \_EnumTypespec: , line:4:12, endln:7:14
+      |vpiName:Off
+      |BIN:0101
+      |vpiDecompile:4'b0101
+      |vpiSize:4
   |vpiTypedef:
   \_LogicTypespec: , line:4:17, endln:4:36
     |vpiParent:
@@ -235,46 +262,39 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_EnumTypespec: (lc_ctrl_pkg::lc_tx_e), line:4:12, endln:7:14
+  \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_e), line:7:7, endln:7:14
     |vpiParent:
     \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/ImportBinding/dut.sv, line:1:1, endln:13:11
     |vpiName:lc_ctrl_pkg::lc_tx_e
-    |vpiBaseTypespec:
-    \_RefTypespec: (lc_ctrl_pkg::lc_tx_e), line:4:17, endln:4:36
+    |vpiTypedefAlias:
+    \_RefTypespec: (lc_ctrl_pkg::lc_tx_e), line:4:12, endln:7:6
       |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::lc_tx_e), line:4:12, endln:7:14
+      \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_e), line:7:7, endln:7:14
       |vpiFullName:lc_ctrl_pkg::lc_tx_e
       |vpiActual:
-      \_LogicTypespec: , line:4:17, endln:4:36
-    |vpiEnumConst:
-    \_EnumConst: (On), line:5:7, endln:5:20
-      |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::lc_tx_e), line:4:12, endln:7:14
-      |vpiName:On
-      |BIN:1010
-      |vpiDecompile:4'b1010
-      |vpiSize:4
-    |vpiEnumConst:
-    \_EnumConst: (Off), line:6:6, endln:6:19
-      |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::lc_tx_e), line:4:12, endln:7:14
-      |vpiName:Off
-      |BIN:0101
-      |vpiDecompile:4'b0101
-      |vpiSize:4
+      \_EnumTypespec: , line:4:12, endln:7:14
   |vpiTypedef:
-  \_UnsupportedTypespec: (lc_tx_t), line:11:15, endln:11:22
+  \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_t), line:9:21, endln:9:28
     |vpiParent:
     \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/ImportBinding/dut.sv, line:1:1, endln:13:11
-    |vpiName:lc_tx_t
+    |vpiName:lc_ctrl_pkg::lc_tx_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (lc_ctrl_pkg::lc_tx_t), line:9:13, endln:9:20
+      |vpiParent:
+      \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_t), line:9:21, endln:9:28
+      |vpiFullName:lc_ctrl_pkg::lc_tx_t
+      |vpiActual:
+      \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_e), line:7:7, endln:7:14
   |vpiImportTypespec:
   \_IntTypespec: , line:3:14, endln:3:17
   |vpiImportTypespec:
+  \_EnumTypespec: , line:4:12, endln:7:14
+  |vpiImportTypespec:
   \_LogicTypespec: , line:4:17, endln:4:36
   |vpiImportTypespec:
-  \_EnumTypespec: (lc_ctrl_pkg::lc_tx_e), line:4:12, endln:7:14
+  \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_e), line:7:7, endln:7:14
   |vpiImportTypespec:
-  \_UnsupportedTypespec: (lc_tx_t), line:11:15, endln:11:22
+  \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_t), line:9:21, endln:9:28
   |vpiDefName:lc_ctrl_pkg
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ImportBinding/dut.sv, line:15:1, endln:19:10

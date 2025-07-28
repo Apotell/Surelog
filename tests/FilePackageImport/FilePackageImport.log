@@ -73,7 +73,7 @@ AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                               5
+Constant                                               3
 Design                                                 1
 Function                                               1
 IODecl                                                 2
@@ -81,14 +81,14 @@ ImportTypespec                                         1
 IntTypespec                                            1
 LogicTypespec                                          2
 Package                                                1
-PackedArrayTypespec                                    1
-Range                                                  2
+Range                                                  1
 RefObj                                                 1
-RefTypespec                                            3
+RefTypespec                                            4
 ReturnStmt                                             1
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/FilePackageImport/dut.sv:11:12: Failed to bind object: "id: 22, name: we".
-[ERR:EL0535] ${SURELOG_DIR}/tests/FilePackageImport/dut.sv:11:12: Illegal implicit net "id:22, name: we".
+[ERR:UH0734] ${SURELOG_DIR}/tests/FilePackageImport/dut.sv:11:12: Failed to bind object: "id: 20, name: we".
+[ERR:EL0535] ${SURELOG_DIR}/tests/FilePackageImport/dut.sv:11:12: Illegal implicit net "id:20, name: we".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FilePackageImport/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -100,13 +100,13 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:pkg_b
   |vpiTypedef:
-  \_PackedArrayTypespec: , line:3:9, endln:3:20
+  \_LogicTypespec: , line:3:9, endln:3:20
     |vpiParent:
     \_Package: pkg_b (pkg_b), file:${SURELOG_DIR}/tests/FilePackageImport/dut.sv, line:2:1, endln:5:19
     |vpiRange:
     \_Range: , line:3:15, endln:3:20
       |vpiParent:
-      \_PackedArrayTypespec: , line:3:9, endln:3:20
+      \_LogicTypespec: , line:3:9, endln:3:20
       |vpiLeftRange:
       \_Constant: , line:3:16, endln:3:17
         |vpiParent:
@@ -124,34 +124,21 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_LogicTypespec: (DCacheWayPath), line:3:9, endln:3:20
+  \_TypedefTypespec: (pkg_b::DCacheWayPath), line:3:21, endln:3:34
     |vpiParent:
     \_Package: pkg_b (pkg_b), file:${SURELOG_DIR}/tests/FilePackageImport/dut.sv, line:2:1, endln:5:19
-    |vpiName:DCacheWayPath
-    |vpiRange:
-    \_Range: , line:3:15, endln:3:20
+    |vpiName:pkg_b::DCacheWayPath
+    |vpiTypedefAlias:
+    \_RefTypespec: (pkg_b::DCacheWayPath), line:3:9, endln:3:14
       |vpiParent:
-      \_LogicTypespec: (DCacheWayPath), line:3:9, endln:3:20
-      |vpiLeftRange:
-      \_Constant: , line:3:16, endln:3:17
-        |vpiParent:
-        \_Range: , line:3:15, endln:3:20
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:3:18, endln:3:19
-        |vpiParent:
-        \_Range: , line:3:15, endln:3:20
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
+      \_TypedefTypespec: (pkg_b::DCacheWayPath), line:3:21, endln:3:34
+      |vpiFullName:pkg_b::DCacheWayPath
+      |vpiActual:
+      \_LogicTypespec: , line:3:9, endln:3:20
   |vpiImportTypespec:
-  \_PackedArrayTypespec: , line:3:9, endln:3:20
+  \_LogicTypespec: , line:3:9, endln:3:20
   |vpiImportTypespec:
-  \_LogicTypespec: (DCacheWayPath), line:3:9, endln:3:20
+  \_TypedefTypespec: (pkg_b::DCacheWayPath), line:3:21, endln:3:34
   |vpiDefName:pkg_b
   |vpiEndLabel:pkg_b
 |vpiTypedef:
@@ -215,13 +202,13 @@ Design: (unnamed)
     |vpiDirection:1
     |vpiName:way
     |vpiTypedef:
-    \_RefTypespec: (TreeLRU_CalcWriteEnable.way.DCacheWayPath), line:3:9, endln:3:20
+    \_RefTypespec: (TreeLRU_CalcWriteEnable.way.DCacheWayPath), line:3:21, endln:3:34
       |vpiParent:
       \_IODecl: (way), line:10:51, endln:10:54
       |vpiName:DCacheWayPath
       |vpiFullName:TreeLRU_CalcWriteEnable.way.DCacheWayPath
       |vpiActual:
-      \_LogicTypespec: (DCacheWayPath), line:3:9, endln:3:20
+      \_TypedefTypespec: (pkg_b::DCacheWayPath), line:3:21, endln:3:34
   |vpiStmt:
   \_ReturnStmt: , line:11:5, endln:11:14
     |vpiParent:

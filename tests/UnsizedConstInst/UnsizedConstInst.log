@@ -143,13 +143,12 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/UnsizedConstInst/dut.sv:9:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+ArrayNet                                               1
 ArrayTypespec                                          1
-ArrayVar                                               1
 Constant                                               5
 ContAssign                                             1
 Design                                                 1
 LogicTypespec                                          1
-LogicVar                                               1
 Module                                                 2
 ModuleTypespec                                         1
 Operation                                              1
@@ -159,7 +158,7 @@ PartSelect                                             1
 Range                                                  1
 RefModule                                              2
 RefObj                                                 2
-RefTypespec                                            3
+RefTypespec                                            2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnsizedConstInst/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -171,61 +170,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@bottom
-  |vpiVariables:
-  \_LogicVar: (work@bottom), line:3:9, endln:3:25
-    |vpiParent:
-    \_Module: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/UnsizedConstInst/dut.sv, line:1:1, endln:7:10
-    |vpiTypespec:
-    \_RefTypespec: (work@bottom), line:3:3, endln:3:8
-      |vpiParent:
-      \_LogicVar: (work@bottom), line:3:9, endln:3:25
-      |vpiFullName:work@bottom
-      |vpiActual:
-      \_LogicTypespec: , line:3:3, endln:3:8
-    |vpiFullName:work@bottom
-  |vpiVariables:
-  \_ArrayVar: (work@bottom.product_exponent), line:3:9, endln:3:25
-    |vpiParent:
-    \_Module: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/UnsizedConstInst/dut.sv, line:1:1, endln:7:10
-    |vpiSize:1
-    |vpiTypespec:
-    \_RefTypespec: (work@bottom.product_exponent), line:3:25, endln:3:31
-      |vpiParent:
-      \_ArrayVar: (work@bottom.product_exponent), line:3:9, endln:3:25
-      |vpiFullName:work@bottom.product_exponent
-      |vpiActual:
-      \_ArrayTypespec: , line:3:25, endln:3:31
-    |vpiName:product_exponent
-    |vpiFullName:work@bottom.product_exponent
-    |vpiRandType:1
-    |vpiVisibility:1
-    |vpiArrayType:1
-    |vpiRange:
-    \_Range: , line:3:25, endln:3:31
-      |vpiParent:
-      \_ArrayVar: (work@bottom.product_exponent), line:3:9, endln:3:25
-      |vpiLeftRange:
-      \_Constant: , line:3:26, endln:3:28
-        |vpiParent:
-        \_Range: , line:3:25, endln:3:31
-        |vpiDecompile:10
-        |vpiSize:64
-        |UINT:10
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:3:29, endln:3:30
-        |vpiParent:
-        \_Range: , line:3:25, endln:3:31
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-    |vpiReg:
-    \_LogicVar: (work@bottom), line:3:9, endln:3:25
-  |vpiReg:
-  \_LogicVar: (work@bottom), line:3:9, endln:3:25
-  |vpiRegArray:
-  \_ArrayVar: (work@bottom.product_exponent), line:3:9, endln:3:25
   |vpiParameter:
   \_Parameter: (work@bottom.P), line:2:13, endln:2:18
     |vpiParent:
@@ -252,24 +196,55 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/UnsizedConstInst/dut.sv, line:1:1, endln:7:10
   |vpiTypedef:
-  \_ArrayTypespec: , line:3:25, endln:3:31
+  \_ArrayTypespec: , line:3:3, endln:3:31
     |vpiParent:
     \_Module: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/UnsizedConstInst/dut.sv, line:1:1, endln:7:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:3:25, endln:3:31
+      |vpiParent:
+      \_ArrayTypespec: , line:3:3, endln:3:31
+      |vpiLeftRange:
+      \_Constant: , line:3:26, endln:3:28
+        |vpiParent:
+        \_Range: , line:3:25, endln:3:31
+        |vpiDecompile:10
+        |vpiSize:64
+        |UINT:10
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:3:29, endln:3:30
+        |vpiParent:
+        \_Range: , line:3:25, endln:3:31
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@bottom), line:3:3, endln:3:8
       |vpiParent:
-      \_ArrayTypespec: , line:3:25, endln:3:31
+      \_ArrayTypespec: , line:3:3, endln:3:31
       |vpiFullName:work@bottom
       |vpiActual:
       \_LogicTypespec: , line:3:3, endln:3:8
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:3, endln:3:8
   |vpiImportTypespec:
-  \_LogicVar: (work@bottom), line:3:9, endln:3:25
+  \_ArrayTypespec: , line:3:3, endln:3:31
   |vpiImportTypespec:
-  \_ArrayVar: (work@bottom.product_exponent), line:3:9, endln:3:25
-  |vpiImportTypespec:
-  \_ArrayTypespec: , line:3:25, endln:3:31
+  \_ArrayNet: (work@bottom.product_exponent), line:3:9, endln:3:25
+    |vpiParent:
+    \_Module: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/UnsizedConstInst/dut.sv, line:1:1, endln:7:10
+    |vpiTypespec:
+    \_RefTypespec: (work@bottom.product_exponent), line:3:3, endln:3:8
+      |vpiParent:
+      \_ArrayNet: (work@bottom.product_exponent), line:3:9, endln:3:25
+      |vpiFullName:work@bottom.product_exponent
+      |vpiActual:
+      \_ArrayTypespec: , line:3:3, endln:3:31
+    |vpiName:product_exponent
+    |vpiFullName:work@bottom.product_exponent
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicNet: (work@bottom.p), line:5:10, endln:5:11
     |vpiParent:
@@ -280,6 +255,8 @@ Design: (unnamed)
   |vpiDefName:work@bottom
   |vpiNet:
   \_LogicNet: (work@bottom.p), line:5:10, endln:5:11
+  |vpiArrayNet:
+  \_ArrayNet: (work@bottom.product_exponent), line:3:9, endln:3:25
   |vpiContAssign:
   \_ContAssign: , line:5:10, endln:5:41
     |vpiParent:
@@ -297,7 +274,7 @@ Design: (unnamed)
         |vpiFullName:work@bottom.product_exponent
         |vpiDefName:product_exponent
         |vpiActual:
-        \_ArrayVar: (work@bottom.product_exponent), line:3:9, endln:3:25
+        \_ArrayNet: (work@bottom.product_exponent), line:3:9, endln:3:25
         |vpiConstantSelect:1
         |vpiLeftRange:
         \_RefObj: (work@bottom.product_exponent.P), line:5:31, endln:5:32

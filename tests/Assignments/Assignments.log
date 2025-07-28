@@ -328,13 +328,14 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Always                                                 1
+ArrayTypespec                                          1
 Assignment                                            11
 Begin                                                  2
 BitSelect                                              2
 BitTypespec                                            1
 ClassDefn                                              8
 ClassTypespec                                          1
-Constant                                              16
+Constant                                              18
 DelayControl                                           2
 Design                                                 1
 EnumConst                                              5
@@ -354,10 +355,11 @@ Operation                                              4
 Package                                                1
 PartSelect                                             3
 Port                                                   2
-Range                                                  1
+Range                                                  2
 RefObj                                                21
-RefTypespec                                           15
+RefTypespec                                           17
 Task                                                   9
+TypedefTypespec                                        1
 VoidTypespec                                           1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Assignments/slpp_all/surelog.uhdm ...
@@ -627,7 +629,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -661,14 +663,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/Assignments/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -676,7 +677,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -684,7 +685,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -692,7 +693,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -700,13 +701,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/Assignments/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1287,24 +1302,38 @@ Design: (unnamed)
           |STRING:unsized
           |vpiConstType:6
       |vpiTypedef:
-      \_RefTypespec: (work@dut.uvm_packer::get_packed_bits.stream), line:5:49, endln:5:52
+      \_RefTypespec: (work@dut.uvm_packer::get_packed_bits.stream), line:5:49, endln:5:70
         |vpiParent:
         \_IODecl: (stream), line:5:62, endln:5:68
         |vpiFullName:work@dut.uvm_packer::get_packed_bits.stream
         |vpiActual:
-        \_BitTypespec: , line:5:49, endln:5:52
+        \_ArrayTypespec: , line:5:49, endln:5:70
     |vpiStmt:
     \_Begin: (work@dut.uvm_packer::get_packed_bits)
+  |vpiTypedef:
+  \_ArrayTypespec: , line:5:49, endln:5:70
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/Assignments/dut.sv, line:1:1, endln:22:10
+    |vpiArrayType:2
+    |vpiElemTypespec:
+    \_RefTypespec: (work@dut), line:5:49, endln:5:61
+      |vpiParent:
+      \_ArrayTypespec: , line:5:49, endln:5:70
+      |vpiFullName:work@dut
+      |vpiActual:
+      \_BitTypespec: , line:5:49, endln:5:52
   |vpiImportTypespec:
   \_Function: (work@dut.uvm_packer::get_packed_bits), line:5:3, endln:12:14
   |vpiImportTypespec:
-  \_LogicNet: (work@dut.clk), line:2:9, endln:2:12
+  \_ArrayTypespec: , line:5:49, endln:5:70
+  |vpiImportTypespec:
+  \_LogicNet: (work@dut.clk), line:1:12, endln:1:15
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/Assignments/dut.sv, line:1:1, endln:22:10
     |vpiName:clk
     |vpiFullName:work@dut.clk
   |vpiImportTypespec:
-  \_LogicNet: (work@dut.o), line:3:10, endln:3:11
+  \_LogicNet: (work@dut.o), line:1:17, endln:1:18
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/Assignments/dut.sv, line:1:1, endln:22:10
     |vpiName:o
@@ -1313,9 +1342,9 @@ Design: (unnamed)
   |vpiTaskFunc:
   \_Function: (work@dut.uvm_packer::get_packed_bits), line:5:3, endln:12:14
   |vpiNet:
-  \_LogicNet: (work@dut.clk), line:2:9, endln:2:12
+  \_LogicNet: (work@dut.clk), line:1:12, endln:1:15
   |vpiNet:
-  \_LogicNet: (work@dut.o), line:3:10, endln:3:11
+  \_LogicNet: (work@dut.o), line:1:17, endln:1:18
   |vpiPort:
   \_Port: (clk), line:1:12, endln:1:15
     |vpiParent:
@@ -1348,7 +1377,7 @@ Design: (unnamed)
           |vpiName:clk
           |vpiFullName:work@dut.clk
           |vpiActual:
-          \_LogicNet: (work@dut.clk), line:2:9, endln:2:12
+          \_LogicNet: (work@dut.clk), line:1:12, endln:1:15
       |vpiStmt:
       \_Begin: (work@dut), line:14:25, endln:20:6
         |vpiParent:
@@ -1471,7 +1500,7 @@ Design: (unnamed)
             |vpiName:o
             |vpiFullName:work@dut.o
             |vpiActual:
-            \_LogicNet: (work@dut.o), line:3:10, endln:3:11
+            \_LogicNet: (work@dut.o), line:1:17, endln:1:18
         |vpiStmt:
         \_Assignment: , line:17:5, endln:17:17
           |vpiParent:

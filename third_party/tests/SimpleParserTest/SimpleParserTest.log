@@ -10920,6 +10920,7 @@ there are 1 more instances of this message.
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Always                                                25
 ArrayNet                                               3
+ArrayTypespec                                          3
 Assignment                                           157
 Begin                                                 59
 BitSelect                                             97
@@ -10927,7 +10928,7 @@ CaseItem                                              35
 CaseStmt                                               4
 ClassDefn                                              8
 ClassTypespec                                          1
-Constant                                             538
+Constant                                             359
 ContAssign                                            11
 DelayControl                                           3
 Design                                                 1
@@ -10943,29 +10944,29 @@ IfElse                                                16
 IfStmt                                                21
 Initial                                                1
 IntTypespec                                            9
+IntegerNet                                            11
 IntegerTypespec                                       12
-IntegerVar                                            11
-LogicNet                                             124
+LogicNet                                             122
 LogicTypespec                                         62
-LogicVar                                               1
 Module                                                14
 ModuleTypespec                                         2
-Operation                                            259
+Operation                                            224
 Package                                                1
 ParamAssign                                            7
 Parameter                                              7
 PartSelect                                             9
 Port                                                  81
 PrimTerm                                              17
-Range                                                125
+Range                                                 35
 RefModule                                              2
-RefObj                                               448
-RefTypespec                                           82
+RefObj                                               412
+RefTypespec                                           86
 RefVar                                                11
 Repeat                                                 8
 SysFuncCall                                            3
 TableEntry                                            17
 Task                                                  10
+TypedefTypespec                                        1
 UdpDefn                                                2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SimpleParserTest/slpp_unit/surelog.uhdm ...
@@ -11235,7 +11236,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -11269,14 +11270,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -11284,7 +11284,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -11292,7 +11292,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -11300,7 +11300,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -11308,13 +11308,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -11760,37 +11774,6 @@ Design: (unnamed)
     \_Module: work@LFSR_TASK (work@LFSR_TASK), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/lfsr_task.v, line:2:1, endln:37:10
     |vpiName:LFSR_TAPS8_TASK
     |vpiFullName:work@LFSR_TASK.LFSR_TAPS8_TASK
-    |vpiVariables:
-    \_IntegerVar: (work@LFSR_TASK.LFSR_TAPS8_TASK.i), line:13:10, endln:13:11
-      |vpiParent:
-      \_Task: (work@LFSR_TASK.LFSR_TAPS8_TASK), line:9:2, endln:25:9
-      |vpiTypespec:
-      \_RefTypespec: (work@LFSR_TASK.LFSR_TAPS8_TASK.i), line:13:2, endln:13:9
-        |vpiParent:
-        \_IntegerVar: (work@LFSR_TASK.LFSR_TAPS8_TASK.i), line:13:10, endln:13:11
-        |vpiFullName:work@LFSR_TASK.LFSR_TAPS8_TASK.i
-        |vpiActual:
-        \_IntegerTypespec: , line:13:2, endln:13:9
-      |vpiName:i
-      |vpiFullName:work@LFSR_TASK.LFSR_TAPS8_TASK.i
-      |vpiSigned:1
-      |vpiAutomatic:1
-    |vpiVariables:
-    \_LogicVar: (work@LFSR_TASK.LFSR_TAPS8_TASK.XorNor), line:14:6, endln:14:12
-      |vpiParent:
-      \_Task: (work@LFSR_TASK.LFSR_TAPS8_TASK), line:9:2, endln:25:9
-      |vpiTypespec:
-      \_RefTypespec: (work@LFSR_TASK.LFSR_TAPS8_TASK.XorNor), line:14:2, endln:14:5
-        |vpiParent:
-        \_LogicVar: (work@LFSR_TASK.LFSR_TAPS8_TASK.XorNor), line:14:6, endln:14:12
-        |vpiFullName:work@LFSR_TASK.LFSR_TAPS8_TASK.XorNor
-        |vpiActual:
-        \_LogicTypespec: , line:14:2, endln:14:5
-      |vpiName:XorNor
-      |vpiFullName:work@LFSR_TASK.LFSR_TAPS8_TASK.XorNor
-      |vpiAutomatic:1
-    |vpiReg:
-    \_LogicVar: (work@LFSR_TASK.LFSR_TAPS8_TASK.XorNor), line:14:6, endln:14:12
     |vpiInternalScope:
     \_Begin: (work@LFSR_TASK.LFSR_TAPS8_TASK), line:16:2, endln:24:5
       |vpiParent:
@@ -11861,7 +11844,7 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:work@LFSR_TASK.LFSR_TAPS8_TASK.i
             |vpiActual:
-            \_IntegerVar: (work@LFSR_TASK.LFSR_TAPS8_TASK.i), line:13:10, endln:13:11
+            \_IntegerNet: (work@LFSR_TASK.LFSR_TAPS8_TASK.i), line:13:10, endln:13:11
         |vpiCondition:
         \_Operation: , line:18:12, endln:18:16
           |vpiParent:
@@ -11912,7 +11895,7 @@ Design: (unnamed)
                   |vpiName:i
                   |vpiFullName:work@LFSR_TASK.LFSR_TAPS8_TASK.Chain.i
                   |vpiActual:
-                  \_IntegerVar: (work@LFSR_TASK.LFSR_TAPS8_TASK.i), line:13:10, endln:13:11
+                  \_IntegerNet: (work@LFSR_TASK.LFSR_TAPS8_TASK.i), line:13:10, endln:13:11
                 |vpiOperand:
                 \_Constant: , line:19:14, endln:19:15
                   |vpiParent:
@@ -11960,7 +11943,7 @@ Design: (unnamed)
                     |vpiName:i
                     |vpiFullName:work@LFSR_TASK.LFSR_TAPS8_TASK.A.i
                     |vpiActual:
-                    \_IntegerVar: (work@LFSR_TASK.LFSR_TAPS8_TASK.i), line:13:10, endln:13:11
+                    \_IntegerNet: (work@LFSR_TASK.LFSR_TAPS8_TASK.i), line:13:10, endln:13:11
                   |vpiOperand:
                   \_Constant: , line:20:25, endln:20:26
                     |vpiParent:
@@ -11976,7 +11959,7 @@ Design: (unnamed)
                 |vpiName:XorNor
                 |vpiFullName:work@LFSR_TASK.LFSR_TAPS8_TASK.XorNor
                 |vpiActual:
-                \_LogicVar: (work@LFSR_TASK.LFSR_TAPS8_TASK.XorNor), line:14:6, endln:14:12
+                \_LogicNet: (work@LFSR_TASK.LFSR_TAPS8_TASK.XorNor), line:14:6, endln:14:12
             |vpiLhs:
             \_BitSelect: (work@LFSR_TASK.LFSR_TAPS8_TASK.Next_LFSR_Reg), line:20:15, endln:20:18
               |vpiParent:
@@ -11992,7 +11975,7 @@ Design: (unnamed)
                 |vpiName:i
                 |vpiFullName:work@LFSR_TASK.LFSR_TAPS8_TASK.i
                 |vpiActual:
-                \_IntegerVar: (work@LFSR_TASK.LFSR_TAPS8_TASK.i), line:13:10, endln:13:11
+                \_IntegerNet: (work@LFSR_TASK.LFSR_TAPS8_TASK.i), line:13:10, endln:13:11
           |vpiElseStmt:
           \_Assignment: , line:22:2, endln:22:27
             |vpiParent:
@@ -12019,7 +12002,7 @@ Design: (unnamed)
                   |vpiName:i
                   |vpiFullName:work@LFSR_TASK.LFSR_TAPS8_TASK.A.i
                   |vpiActual:
-                  \_IntegerVar: (work@LFSR_TASK.LFSR_TAPS8_TASK.i), line:13:10, endln:13:11
+                  \_IntegerNet: (work@LFSR_TASK.LFSR_TAPS8_TASK.i), line:13:10, endln:13:11
                 |vpiOperand:
                 \_Constant: , line:22:25, endln:22:26
                   |vpiParent:
@@ -12043,7 +12026,7 @@ Design: (unnamed)
                 |vpiName:i
                 |vpiFullName:work@LFSR_TASK.LFSR_TAPS8_TASK.i
                 |vpiActual:
-                \_IntegerVar: (work@LFSR_TASK.LFSR_TAPS8_TASK.i), line:13:10, endln:13:11
+                \_IntegerNet: (work@LFSR_TASK.LFSR_TAPS8_TASK.i), line:13:10, endln:13:11
       |vpiImportTypespec:
       \_RefVar: (work@LFSR_TASK.LFSR_TAPS8_TASK), line:18:7, endln:18:8
       |vpiStmt:
@@ -12111,7 +12094,7 @@ Design: (unnamed)
           |vpiName:XorNor
           |vpiFullName:work@LFSR_TASK.LFSR_TAPS8_TASK.XorNor
           |vpiActual:
-          \_LogicVar: (work@LFSR_TASK.LFSR_TAPS8_TASK.XorNor), line:14:6, endln:14:12
+          \_LogicNet: (work@LFSR_TASK.LFSR_TAPS8_TASK.XorNor), line:14:6, endln:14:12
       |vpiStmt:
       \_ForStmt: (work@LFSR_TASK.LFSR_TAPS8_TASK), line:18:2, endln:22:28
       |vpiStmt:
@@ -12127,7 +12110,7 @@ Design: (unnamed)
           |vpiName:XorNor
           |vpiFullName:work@LFSR_TASK.LFSR_TAPS8_TASK.XorNor
           |vpiActual:
-          \_LogicVar: (work@LFSR_TASK.LFSR_TAPS8_TASK.XorNor), line:14:6, endln:14:12
+          \_LogicNet: (work@LFSR_TASK.LFSR_TAPS8_TASK.XorNor), line:14:6, endln:14:12
         |vpiLhs:
         \_BitSelect: (work@LFSR_TASK.LFSR_TAPS8_TASK.Next_LFSR_Reg), line:23:15, endln:23:18
           |vpiParent:
@@ -12269,13 +12252,37 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_IntegerTypespec: , line:13:2, endln:13:9
     |vpiImportTypespec:
-    \_IntegerVar: (work@LFSR_TASK.LFSR_TAPS8_TASK.i), line:13:10, endln:13:11
+    \_IntegerNet: (work@LFSR_TASK.LFSR_TAPS8_TASK.i), line:13:10, endln:13:11
+      |vpiParent:
+      \_Task: (work@LFSR_TASK.LFSR_TAPS8_TASK), line:9:2, endln:25:9
+      |vpiTypespec:
+      \_RefTypespec: (work@LFSR_TASK.LFSR_TAPS8_TASK.i), line:13:2, endln:13:9
+        |vpiParent:
+        \_IntegerNet: (work@LFSR_TASK.LFSR_TAPS8_TASK.i), line:13:10, endln:13:11
+        |vpiFullName:work@LFSR_TASK.LFSR_TAPS8_TASK.i
+        |vpiActual:
+        \_IntegerTypespec: , line:13:2, endln:13:9
+      |vpiName:i
+      |vpiFullName:work@LFSR_TASK.LFSR_TAPS8_TASK.i
+      |vpiSigned:1
     |vpiImportTypespec:
     \_LogicTypespec: , line:14:2, endln:14:5
     |vpiImportTypespec:
     \_LogicTypespec: , line:14:2, endln:14:5
     |vpiImportTypespec:
-    \_LogicVar: (work@LFSR_TASK.LFSR_TAPS8_TASK.XorNor), line:14:6, endln:14:12
+    \_LogicNet: (work@LFSR_TASK.LFSR_TAPS8_TASK.XorNor), line:14:6, endln:14:12
+      |vpiParent:
+      \_Task: (work@LFSR_TASK.LFSR_TAPS8_TASK), line:9:2, endln:25:9
+      |vpiTypespec:
+      \_RefTypespec: (work@LFSR_TASK.LFSR_TAPS8_TASK.XorNor), line:14:2, endln:14:5
+        |vpiParent:
+        \_LogicNet: (work@LFSR_TASK.LFSR_TAPS8_TASK.XorNor), line:14:6, endln:14:12
+        |vpiFullName:work@LFSR_TASK.LFSR_TAPS8_TASK.XorNor
+        |vpiActual:
+        \_LogicTypespec: , line:14:2, endln:14:5
+      |vpiName:XorNor
+      |vpiFullName:work@LFSR_TASK.LFSR_TAPS8_TASK.XorNor
+      |vpiSigned:1
     |vpiImportTypespec:
     \_LogicTypespec: , line:15:2, endln:15:11
     |vpiVisibility:1
@@ -12371,26 +12378,26 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_Task: (work@LFSR_TASK.LFSR_TAPS8_TASK), line:9:2, endln:25:9
   |vpiImportTypespec:
-  \_LogicNet: (work@LFSR_TASK.clock), line:3:7, endln:3:12
+  \_LogicNet: (work@LFSR_TASK.clock), line:2:19, endln:2:24
     |vpiParent:
     \_Module: work@LFSR_TASK (work@LFSR_TASK), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/lfsr_task.v, line:2:1, endln:37:10
     |vpiName:clock
     |vpiFullName:work@LFSR_TASK.clock
   |vpiImportTypespec:
-  \_LogicNet: (work@LFSR_TASK.seed1), line:4:13, endln:4:18
+  \_LogicNet: (work@LFSR_TASK.seed1), line:2:33, endln:2:38
     |vpiParent:
     \_Module: work@LFSR_TASK (work@LFSR_TASK), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/lfsr_task.v, line:2:1, endln:37:10
     |vpiName:seed1
     |vpiFullName:work@LFSR_TASK.seed1
   |vpiImportTypespec:
-  \_LogicNet: (work@LFSR_TASK.random1), line:5:14, endln:5:21
+  \_LogicNet: (work@LFSR_TASK.random1), line:2:47, endln:2:54
     |vpiParent:
     \_Module: work@LFSR_TASK (work@LFSR_TASK), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/lfsr_task.v, line:2:1, endln:37:10
     |vpiName:random1
     |vpiFullName:work@LFSR_TASK.random1
     |vpiNetType:48
   |vpiImportTypespec:
-  \_LogicNet: (work@LFSR_TASK.random2), line:5:23, endln:5:30
+  \_LogicNet: (work@LFSR_TASK.random2), line:2:56, endln:2:63
     |vpiParent:
     \_Module: work@LFSR_TASK (work@LFSR_TASK), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/lfsr_task.v, line:2:1, endln:37:10
     |vpiName:random2
@@ -12444,13 +12451,13 @@ Design: (unnamed)
   |vpiTaskFunc:
   \_Task: (work@LFSR_TASK.LFSR_TAPS8_TASK), line:9:2, endln:25:9
   |vpiNet:
-  \_LogicNet: (work@LFSR_TASK.clock), line:3:7, endln:3:12
+  \_LogicNet: (work@LFSR_TASK.clock), line:2:19, endln:2:24
   |vpiNet:
-  \_LogicNet: (work@LFSR_TASK.seed1), line:4:13, endln:4:18
+  \_LogicNet: (work@LFSR_TASK.seed1), line:2:33, endln:2:38
   |vpiNet:
-  \_LogicNet: (work@LFSR_TASK.random1), line:5:14, endln:5:21
+  \_LogicNet: (work@LFSR_TASK.random1), line:2:47, endln:2:54
   |vpiNet:
-  \_LogicNet: (work@LFSR_TASK.random2), line:5:23, endln:5:30
+  \_LogicNet: (work@LFSR_TASK.random2), line:2:56, endln:2:63
   |vpiNet:
   \_LogicNet: (work@LFSR_TASK.random1), line:6:11, endln:6:18
   |vpiNet:
@@ -12520,7 +12527,7 @@ Design: (unnamed)
             |vpiName:clock
             |vpiFullName:work@LFSR_TASK.clock
             |vpiActual:
-            \_LogicNet: (work@LFSR_TASK.clock), line:3:7, endln:3:12
+            \_LogicNet: (work@LFSR_TASK.clock), line:2:19, endln:2:24
         |vpiOperand:
         \_Operation: , line:27:26, endln:27:39
           |vpiParent:
@@ -12564,7 +12571,7 @@ Design: (unnamed)
             |vpiName:seed1
             |vpiFullName:work@LFSR_TASK.seed1
             |vpiActual:
-            \_LogicNet: (work@LFSR_TASK.seed1), line:4:13, endln:4:18
+            \_LogicNet: (work@LFSR_TASK.seed1), line:2:33, endln:2:38
           |vpiLhs:
           \_RefObj: (work@LFSR_TASK.random1), line:29:2, endln:29:9
             |vpiParent:
@@ -12572,7 +12579,7 @@ Design: (unnamed)
             |vpiName:random1
             |vpiFullName:work@LFSR_TASK.random1
             |vpiActual:
-            \_LogicNet: (work@LFSR_TASK.random1), line:5:14, endln:5:21
+            \_LogicNet: (work@LFSR_TASK.random1), line:2:47, endln:2:54
         |vpiElseStmt:
         \_FuncCall: (LFSR_TASK), line:31:2, endln:31:38
           |vpiParent:
@@ -12584,7 +12591,7 @@ Design: (unnamed)
             |vpiName:random1
             |vpiFullName:work@LFSR_TASK.random1
             |vpiActual:
-            \_LogicNet: (work@LFSR_TASK.random1), line:5:14, endln:5:21
+            \_LogicNet: (work@LFSR_TASK.random1), line:2:47, endln:2:54
           |vpiArgument:
           \_RefObj: (work@LFSR_TASK.Chain1), line:31:22, endln:31:28
             |vpiParent:
@@ -12600,7 +12607,7 @@ Design: (unnamed)
             |vpiName:random1
             |vpiFullName:work@LFSR_TASK.random1
             |vpiActual:
-            \_LogicNet: (work@LFSR_TASK.random1), line:5:14, endln:5:21
+            \_LogicNet: (work@LFSR_TASK.random1), line:2:47, endln:2:54
           |vpiName:LFSR_TASK
     |vpiAlwaysType:1
   |vpiProcess:
@@ -12628,7 +12635,7 @@ Design: (unnamed)
             |vpiName:clock
             |vpiFullName:work@LFSR_TASK.clock
             |vpiActual:
-            \_LogicNet: (work@LFSR_TASK.clock), line:3:7, endln:3:12
+            \_LogicNet: (work@LFSR_TASK.clock), line:2:19, endln:2:24
         |vpiOperand:
         \_Operation: , line:32:26, endln:32:39
           |vpiParent:
@@ -12680,7 +12687,7 @@ Design: (unnamed)
             |vpiName:random2
             |vpiFullName:work@LFSR_TASK.random2
             |vpiActual:
-            \_LogicNet: (work@LFSR_TASK.random2), line:5:23, endln:5:30
+            \_LogicNet: (work@LFSR_TASK.random2), line:2:56, endln:2:63
         |vpiElseStmt:
         \_FuncCall: (LFSR_TASK), line:36:2, endln:36:38
           |vpiParent:
@@ -12692,7 +12699,7 @@ Design: (unnamed)
             |vpiName:random2
             |vpiFullName:work@LFSR_TASK.random2
             |vpiActual:
-            \_LogicNet: (work@LFSR_TASK.random2), line:5:23, endln:5:30
+            \_LogicNet: (work@LFSR_TASK.random2), line:2:56, endln:2:63
           |vpiArgument:
           \_RefObj: (work@LFSR_TASK.Chain2), line:36:22, endln:36:28
             |vpiParent:
@@ -12708,7 +12715,7 @@ Design: (unnamed)
             |vpiName:random2
             |vpiFullName:work@LFSR_TASK.random2
             |vpiActual:
-            \_LogicNet: (work@LFSR_TASK.random2), line:5:23, endln:5:30
+            \_LogicNet: (work@LFSR_TASK.random2), line:2:56, endln:2:63
           |vpiName:LFSR_TASK
     |vpiAlwaysType:1
 |vpiAllModules:
@@ -12716,156 +12723,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@arbiter
-  |vpiVariables:
-  \_IntegerVar: (work@arbiter.i), line:3:10, endln:3:11
-    |vpiParent:
-    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
-    |vpiTypespec:
-    \_RefTypespec: (work@arbiter.i), line:3:2, endln:3:9
-      |vpiParent:
-      \_IntegerVar: (work@arbiter.i), line:3:10, endln:3:11
-      |vpiFullName:work@arbiter.i
-      |vpiActual:
-      \_IntegerTypespec: , line:3:2, endln:3:9
-    |vpiName:i
-    |vpiFullName:work@arbiter.i
-    |vpiSigned:1
-    |vpiVisibility:1
-  |vpiVariables:
-  \_IntegerVar: (work@arbiter.j), line:3:12, endln:3:13
-    |vpiParent:
-    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
-    |vpiTypespec:
-    \_RefTypespec: (work@arbiter.j), line:3:2, endln:3:9
-      |vpiParent:
-      \_IntegerVar: (work@arbiter.j), line:3:12, endln:3:13
-      |vpiFullName:work@arbiter.j
-      |vpiActual:
-      \_IntegerTypespec: , line:3:2, endln:3:9
-    |vpiName:j
-    |vpiFullName:work@arbiter.j
-    |vpiSigned:1
-    |vpiVisibility:1
-  |vpiVariables:
-  \_IntegerVar: (work@arbiter.k), line:3:14, endln:3:15
-    |vpiParent:
-    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
-    |vpiTypespec:
-    \_RefTypespec: (work@arbiter.k), line:3:2, endln:3:9
-      |vpiParent:
-      \_IntegerVar: (work@arbiter.k), line:3:14, endln:3:15
-      |vpiFullName:work@arbiter.k
-      |vpiActual:
-      \_IntegerTypespec: , line:3:2, endln:3:9
-    |vpiName:k
-    |vpiFullName:work@arbiter.k
-    |vpiSigned:1
-    |vpiVisibility:1
-  |vpiVariables:
-  \_IntegerVar: (work@arbiter.p), line:3:16, endln:3:17
-    |vpiParent:
-    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
-    |vpiTypespec:
-    \_RefTypespec: (work@arbiter.p), line:3:2, endln:3:9
-      |vpiParent:
-      \_IntegerVar: (work@arbiter.p), line:3:16, endln:3:17
-      |vpiFullName:work@arbiter.p
-      |vpiActual:
-      \_IntegerTypespec: , line:3:2, endln:3:9
-    |vpiName:p
-    |vpiFullName:work@arbiter.p
-    |vpiSigned:1
-    |vpiVisibility:1
-  |vpiVariables:
-  \_IntegerVar: (work@arbiter.q), line:3:18, endln:3:19
-    |vpiParent:
-    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
-    |vpiTypespec:
-    \_RefTypespec: (work@arbiter.q), line:3:2, endln:3:9
-      |vpiParent:
-      \_IntegerVar: (work@arbiter.q), line:3:18, endln:3:19
-      |vpiFullName:work@arbiter.q
-      |vpiActual:
-      \_IntegerTypespec: , line:3:2, endln:3:9
-    |vpiName:q
-    |vpiFullName:work@arbiter.q
-    |vpiSigned:1
-    |vpiVisibility:1
-  |vpiVariables:
-  \_IntegerVar: (work@arbiter.r), line:3:20, endln:3:21
-    |vpiParent:
-    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
-    |vpiTypespec:
-    \_RefTypespec: (work@arbiter.r), line:3:2, endln:3:9
-      |vpiParent:
-      \_IntegerVar: (work@arbiter.r), line:3:20, endln:3:21
-      |vpiFullName:work@arbiter.r
-      |vpiActual:
-      \_IntegerTypespec: , line:3:2, endln:3:9
-    |vpiName:r
-    |vpiFullName:work@arbiter.r
-    |vpiSigned:1
-    |vpiVisibility:1
-  |vpiVariables:
-  \_IntegerVar: (work@arbiter.s), line:3:22, endln:3:23
-    |vpiParent:
-    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
-    |vpiTypespec:
-    \_RefTypespec: (work@arbiter.s), line:3:2, endln:3:9
-      |vpiParent:
-      \_IntegerVar: (work@arbiter.s), line:3:22, endln:3:23
-      |vpiFullName:work@arbiter.s
-      |vpiActual:
-      \_IntegerTypespec: , line:3:2, endln:3:9
-    |vpiName:s
-    |vpiFullName:work@arbiter.s
-    |vpiSigned:1
-    |vpiVisibility:1
-  |vpiVariables:
-  \_IntegerVar: (work@arbiter.t), line:3:24, endln:3:25
-    |vpiParent:
-    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
-    |vpiTypespec:
-    \_RefTypespec: (work@arbiter.t), line:3:2, endln:3:9
-      |vpiParent:
-      \_IntegerVar: (work@arbiter.t), line:3:24, endln:3:25
-      |vpiFullName:work@arbiter.t
-      |vpiActual:
-      \_IntegerTypespec: , line:3:2, endln:3:9
-    |vpiName:t
-    |vpiFullName:work@arbiter.t
-    |vpiSigned:1
-    |vpiVisibility:1
-  |vpiVariables:
-  \_IntegerVar: (work@arbiter.u), line:3:26, endln:3:27
-    |vpiParent:
-    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
-    |vpiTypespec:
-    \_RefTypespec: (work@arbiter.u), line:3:2, endln:3:9
-      |vpiParent:
-      \_IntegerVar: (work@arbiter.u), line:3:26, endln:3:27
-      |vpiFullName:work@arbiter.u
-      |vpiActual:
-      \_IntegerTypespec: , line:3:2, endln:3:9
-    |vpiName:u
-    |vpiFullName:work@arbiter.u
-    |vpiSigned:1
-    |vpiVisibility:1
-  |vpiVariables:
-  \_IntegerVar: (work@arbiter.v), line:3:28, endln:3:29
-    |vpiParent:
-    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
-    |vpiTypespec:
-    \_RefTypespec: (work@arbiter.v), line:3:2, endln:3:9
-      |vpiParent:
-      \_IntegerVar: (work@arbiter.v), line:3:28, endln:3:29
-      |vpiFullName:work@arbiter.v
-      |vpiActual:
-      \_IntegerTypespec: , line:3:2, endln:3:9
-    |vpiName:v
-    |vpiFullName:work@arbiter.v
-    |vpiSigned:1
-    |vpiVisibility:1
   |vpiParameter:
   \_Parameter: (work@arbiter.NUMUNITS), line:7:12, endln:7:24
     |vpiParent:
@@ -12995,6 +12852,51 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_ArrayTypespec: , line:19:2, endln:19:48
+    |vpiParent:
+    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:19:32, endln:19:48
+      |vpiParent:
+      \_ArrayTypespec: , line:19:2, endln:19:48
+      |vpiLeftRange:
+      \_Operation: , line:19:33, endln:19:43
+        |vpiParent:
+        \_Range: , line:19:32, endln:19:48
+        |vpiOpType:11
+        |vpiOperand:
+        \_RefObj: (work@arbiter.NUMUNITS), line:19:33, endln:19:41
+          |vpiParent:
+          \_Operation: , line:19:33, endln:19:43
+          |vpiName:NUMUNITS
+          |vpiFullName:work@arbiter.NUMUNITS
+          |vpiActual:
+          \_Parameter: (work@arbiter.NUMUNITS), line:7:12, endln:7:24
+        |vpiOperand:
+        \_Constant: , line:19:42, endln:19:43
+          |vpiParent:
+          \_Operation: , line:19:33, endln:19:43
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:19:46, endln:19:47
+        |vpiParent:
+        \_Range: , line:19:32, endln:19:48
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@arbiter), line:19:2, endln:19:26
+      |vpiParent:
+      \_ArrayTypespec: , line:19:2, endln:19:48
+      |vpiFullName:work@arbiter
+      |vpiActual:
+      \_LogicTypespec: , line:19:2, endln:19:26
   |vpiTypedef:
   \_LogicTypespec: , line:20:2, endln:20:26
     |vpiParent:
@@ -13218,6 +13120,51 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_ArrayTypespec: , line:34:2, endln:34:48
+    |vpiParent:
+    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:34:32, endln:34:48
+      |vpiParent:
+      \_ArrayTypespec: , line:34:2, endln:34:48
+      |vpiLeftRange:
+      \_Operation: , line:34:33, endln:34:43
+        |vpiParent:
+        \_Range: , line:34:32, endln:34:48
+        |vpiOpType:11
+        |vpiOperand:
+        \_RefObj: (work@arbiter.NUMUNITS), line:34:33, endln:34:41
+          |vpiParent:
+          \_Operation: , line:34:33, endln:34:43
+          |vpiName:NUMUNITS
+          |vpiFullName:work@arbiter.NUMUNITS
+          |vpiActual:
+          \_Parameter: (work@arbiter.NUMUNITS), line:7:12, endln:7:24
+        |vpiOperand:
+        \_Constant: , line:34:42, endln:34:43
+          |vpiParent:
+          \_Operation: , line:34:33, endln:34:43
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:34:46, endln:34:47
+        |vpiParent:
+        \_Range: , line:34:32, endln:34:48
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@arbiter), line:34:2, endln:34:26
+      |vpiParent:
+      \_ArrayTypespec: , line:34:2, endln:34:48
+      |vpiFullName:work@arbiter
+      |vpiActual:
+      \_LogicTypespec: , line:34:2, endln:34:26
+  |vpiTypedef:
   \_LogicTypespec: , line:36:2, endln:36:22
     |vpiParent:
     \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
@@ -13291,6 +13238,51 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_ArrayTypespec: , line:38:2, endln:38:53
+    |vpiParent:
+    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:38:37, endln:38:53
+      |vpiParent:
+      \_ArrayTypespec: , line:38:2, endln:38:53
+      |vpiLeftRange:
+      \_Operation: , line:38:38, endln:38:48
+        |vpiParent:
+        \_Range: , line:38:37, endln:38:53
+        |vpiOpType:11
+        |vpiOperand:
+        \_RefObj: (work@arbiter.NUMUNITS), line:38:38, endln:38:46
+          |vpiParent:
+          \_Operation: , line:38:38, endln:38:48
+          |vpiName:NUMUNITS
+          |vpiFullName:work@arbiter.NUMUNITS
+          |vpiActual:
+          \_Parameter: (work@arbiter.NUMUNITS), line:7:12, endln:7:24
+        |vpiOperand:
+        \_Constant: , line:38:47, endln:38:48
+          |vpiParent:
+          \_Operation: , line:38:38, endln:38:48
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:38:51, endln:38:52
+        |vpiParent:
+        \_Range: , line:38:37, endln:38:53
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@arbiter), line:38:2, endln:38:26
+      |vpiParent:
+      \_ArrayTypespec: , line:38:2, endln:38:53
+      |vpiFullName:work@arbiter
+      |vpiActual:
+      \_LogicTypespec: , line:38:2, endln:38:26
   |vpiTypedef:
   \_LogicTypespec: , line:40:2, endln:40:26
     |vpiParent:
@@ -13442,75 +13434,195 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntegerTypespec: , line:3:2, endln:3:9
   |vpiImportTypespec:
-  \_IntegerVar: (work@arbiter.i), line:3:10, endln:3:11
+  \_IntegerNet: (work@arbiter.i), line:3:10, endln:3:11
+    |vpiParent:
+    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
+    |vpiTypespec:
+    \_RefTypespec: (work@arbiter.i), line:3:2, endln:3:9
+      |vpiParent:
+      \_IntegerNet: (work@arbiter.i), line:3:10, endln:3:11
+      |vpiFullName:work@arbiter.i
+      |vpiActual:
+      \_IntegerTypespec: , line:3:2, endln:3:9
+    |vpiName:i
+    |vpiFullName:work@arbiter.i
+    |vpiSigned:1
   |vpiImportTypespec:
   \_IntegerTypespec: , line:3:2, endln:3:9
   |vpiImportTypespec:
-  \_IntegerVar: (work@arbiter.j), line:3:12, endln:3:13
+  \_IntegerNet: (work@arbiter.j), line:3:12, endln:3:13
+    |vpiParent:
+    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
+    |vpiTypespec:
+    \_RefTypespec: (work@arbiter.j), line:3:2, endln:3:9
+      |vpiParent:
+      \_IntegerNet: (work@arbiter.j), line:3:12, endln:3:13
+      |vpiFullName:work@arbiter.j
+      |vpiActual:
+      \_IntegerTypespec: , line:3:2, endln:3:9
+    |vpiName:j
+    |vpiFullName:work@arbiter.j
+    |vpiSigned:1
   |vpiImportTypespec:
   \_IntegerTypespec: , line:3:2, endln:3:9
   |vpiImportTypespec:
-  \_IntegerVar: (work@arbiter.k), line:3:14, endln:3:15
+  \_IntegerNet: (work@arbiter.k), line:3:14, endln:3:15
+    |vpiParent:
+    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
+    |vpiTypespec:
+    \_RefTypespec: (work@arbiter.k), line:3:2, endln:3:9
+      |vpiParent:
+      \_IntegerNet: (work@arbiter.k), line:3:14, endln:3:15
+      |vpiFullName:work@arbiter.k
+      |vpiActual:
+      \_IntegerTypespec: , line:3:2, endln:3:9
+    |vpiName:k
+    |vpiFullName:work@arbiter.k
+    |vpiSigned:1
   |vpiImportTypespec:
   \_IntegerTypespec: , line:3:2, endln:3:9
   |vpiImportTypespec:
-  \_IntegerVar: (work@arbiter.p), line:3:16, endln:3:17
+  \_IntegerNet: (work@arbiter.p), line:3:16, endln:3:17
+    |vpiParent:
+    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
+    |vpiTypespec:
+    \_RefTypespec: (work@arbiter.p), line:3:2, endln:3:9
+      |vpiParent:
+      \_IntegerNet: (work@arbiter.p), line:3:16, endln:3:17
+      |vpiFullName:work@arbiter.p
+      |vpiActual:
+      \_IntegerTypespec: , line:3:2, endln:3:9
+    |vpiName:p
+    |vpiFullName:work@arbiter.p
+    |vpiSigned:1
   |vpiImportTypespec:
   \_IntegerTypespec: , line:3:2, endln:3:9
   |vpiImportTypespec:
-  \_IntegerVar: (work@arbiter.q), line:3:18, endln:3:19
+  \_IntegerNet: (work@arbiter.q), line:3:18, endln:3:19
+    |vpiParent:
+    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
+    |vpiTypespec:
+    \_RefTypespec: (work@arbiter.q), line:3:2, endln:3:9
+      |vpiParent:
+      \_IntegerNet: (work@arbiter.q), line:3:18, endln:3:19
+      |vpiFullName:work@arbiter.q
+      |vpiActual:
+      \_IntegerTypespec: , line:3:2, endln:3:9
+    |vpiName:q
+    |vpiFullName:work@arbiter.q
+    |vpiSigned:1
   |vpiImportTypespec:
   \_IntegerTypespec: , line:3:2, endln:3:9
   |vpiImportTypespec:
-  \_IntegerVar: (work@arbiter.r), line:3:20, endln:3:21
+  \_IntegerNet: (work@arbiter.r), line:3:20, endln:3:21
+    |vpiParent:
+    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
+    |vpiTypespec:
+    \_RefTypespec: (work@arbiter.r), line:3:2, endln:3:9
+      |vpiParent:
+      \_IntegerNet: (work@arbiter.r), line:3:20, endln:3:21
+      |vpiFullName:work@arbiter.r
+      |vpiActual:
+      \_IntegerTypespec: , line:3:2, endln:3:9
+    |vpiName:r
+    |vpiFullName:work@arbiter.r
+    |vpiSigned:1
   |vpiImportTypespec:
   \_IntegerTypespec: , line:3:2, endln:3:9
   |vpiImportTypespec:
-  \_IntegerVar: (work@arbiter.s), line:3:22, endln:3:23
+  \_IntegerNet: (work@arbiter.s), line:3:22, endln:3:23
+    |vpiParent:
+    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
+    |vpiTypespec:
+    \_RefTypespec: (work@arbiter.s), line:3:2, endln:3:9
+      |vpiParent:
+      \_IntegerNet: (work@arbiter.s), line:3:22, endln:3:23
+      |vpiFullName:work@arbiter.s
+      |vpiActual:
+      \_IntegerTypespec: , line:3:2, endln:3:9
+    |vpiName:s
+    |vpiFullName:work@arbiter.s
+    |vpiSigned:1
   |vpiImportTypespec:
   \_IntegerTypespec: , line:3:2, endln:3:9
   |vpiImportTypespec:
-  \_IntegerVar: (work@arbiter.t), line:3:24, endln:3:25
+  \_IntegerNet: (work@arbiter.t), line:3:24, endln:3:25
+    |vpiParent:
+    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
+    |vpiTypespec:
+    \_RefTypespec: (work@arbiter.t), line:3:2, endln:3:9
+      |vpiParent:
+      \_IntegerNet: (work@arbiter.t), line:3:24, endln:3:25
+      |vpiFullName:work@arbiter.t
+      |vpiActual:
+      \_IntegerTypespec: , line:3:2, endln:3:9
+    |vpiName:t
+    |vpiFullName:work@arbiter.t
+    |vpiSigned:1
   |vpiImportTypespec:
   \_IntegerTypespec: , line:3:2, endln:3:9
   |vpiImportTypespec:
-  \_IntegerVar: (work@arbiter.u), line:3:26, endln:3:27
+  \_IntegerNet: (work@arbiter.u), line:3:26, endln:3:27
+    |vpiParent:
+    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
+    |vpiTypespec:
+    \_RefTypespec: (work@arbiter.u), line:3:2, endln:3:9
+      |vpiParent:
+      \_IntegerNet: (work@arbiter.u), line:3:26, endln:3:27
+      |vpiFullName:work@arbiter.u
+      |vpiActual:
+      \_IntegerTypespec: , line:3:2, endln:3:9
+    |vpiName:u
+    |vpiFullName:work@arbiter.u
+    |vpiSigned:1
   |vpiImportTypespec:
   \_IntegerTypespec: , line:3:2, endln:3:9
   |vpiImportTypespec:
-  \_IntegerVar: (work@arbiter.v), line:3:28, endln:3:29
+  \_IntegerNet: (work@arbiter.v), line:3:28, endln:3:29
+    |vpiParent:
+    \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
+    |vpiTypespec:
+    \_RefTypespec: (work@arbiter.v), line:3:2, endln:3:9
+      |vpiParent:
+      \_IntegerNet: (work@arbiter.v), line:3:28, endln:3:29
+      |vpiFullName:work@arbiter.v
+      |vpiActual:
+      \_IntegerTypespec: , line:3:2, endln:3:9
+    |vpiName:v
+    |vpiFullName:work@arbiter.v
+    |vpiSigned:1
   |vpiImportTypespec:
-  \_LogicNet: (work@arbiter.clock), line:12:8, endln:12:13
+  \_LogicNet: (work@arbiter.clock), line:2:16, endln:2:21
     |vpiParent:
     \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
     |vpiName:clock
     |vpiFullName:work@arbiter.clock
   |vpiImportTypespec:
-  \_LogicNet: (work@arbiter.reset), line:13:8, endln:13:13
+  \_LogicNet: (work@arbiter.reset), line:2:23, endln:2:28
     |vpiParent:
     \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
     |vpiName:reset
     |vpiFullName:work@arbiter.reset
   |vpiImportTypespec:
-  \_LogicNet: (work@arbiter.roundORpriority), line:14:8, endln:14:23
+  \_LogicNet: (work@arbiter.roundORpriority), line:2:30, endln:2:45
     |vpiParent:
     \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
     |vpiName:roundORpriority
     |vpiFullName:work@arbiter.roundORpriority
   |vpiImportTypespec:
-  \_LogicNet: (work@arbiter.request), line:15:25, endln:15:32
+  \_LogicNet: (work@arbiter.request), line:2:47, endln:2:54
     |vpiParent:
     \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
     |vpiName:request
     |vpiFullName:work@arbiter.request
   |vpiImportTypespec:
-  \_LogicNet: (work@arbiter.tpriority), line:16:38, endln:16:47
+  \_LogicNet: (work@arbiter.tpriority), line:2:56, endln:2:65
     |vpiParent:
     \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
     |vpiName:tpriority
     |vpiFullName:work@arbiter.tpriority
   |vpiImportTypespec:
-  \_LogicNet: (work@arbiter.grant), line:17:26, endln:17:31
+  \_LogicNet: (work@arbiter.grant), line:2:67, endln:2:72
     |vpiParent:
     \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
     |vpiName:grant
@@ -13519,16 +13631,18 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:19:2, endln:19:26
   |vpiImportTypespec:
-  \_LogicNet: (work@arbiter.prio), line:19:27, endln:19:31
+  \_ArrayTypespec: , line:19:2, endln:19:48
+  |vpiImportTypespec:
+  \_ArrayNet: (work@arbiter.prio), line:19:27, endln:19:31
     |vpiParent:
     \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
     |vpiTypespec:
     \_RefTypespec: (work@arbiter.prio), line:19:2, endln:19:26
       |vpiParent:
-      \_LogicNet: (work@arbiter.prio), line:19:27, endln:19:31
+      \_ArrayNet: (work@arbiter.prio), line:19:27, endln:19:31
       |vpiFullName:work@arbiter.prio
       |vpiActual:
-      \_LogicTypespec: , line:19:2, endln:19:26
+      \_ArrayTypespec: , line:19:2, endln:19:48
     |vpiName:prio
     |vpiFullName:work@arbiter.prio
     |vpiNetType:48
@@ -13615,16 +13729,18 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:34:2, endln:34:26
   |vpiImportTypespec:
-  \_LogicNet: (work@arbiter.scan), line:34:27, endln:34:31
+  \_ArrayTypespec: , line:34:2, endln:34:48
+  |vpiImportTypespec:
+  \_ArrayNet: (work@arbiter.scan), line:34:27, endln:34:31
     |vpiParent:
     \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
     |vpiTypespec:
     \_RefTypespec: (work@arbiter.scan), line:34:2, endln:34:26
       |vpiParent:
-      \_LogicNet: (work@arbiter.scan), line:34:27, endln:34:31
+      \_ArrayNet: (work@arbiter.scan), line:34:27, endln:34:31
       |vpiFullName:work@arbiter.scan
       |vpiActual:
-      \_LogicTypespec: , line:34:2, endln:34:26
+      \_ArrayTypespec: , line:34:2, endln:34:48
     |vpiName:scan
     |vpiFullName:work@arbiter.scan
     |vpiNetType:48
@@ -13647,16 +13763,18 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:38:2, endln:38:26
   |vpiImportTypespec:
-  \_LogicNet: (work@arbiter.selectPrio), line:38:27, endln:38:37
+  \_ArrayTypespec: , line:38:2, endln:38:53
+  |vpiImportTypespec:
+  \_ArrayNet: (work@arbiter.selectPrio), line:38:27, endln:38:37
     |vpiParent:
     \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
     |vpiTypespec:
     \_RefTypespec: (work@arbiter.selectPrio), line:38:2, endln:38:26
       |vpiParent:
-      \_LogicNet: (work@arbiter.selectPrio), line:38:27, endln:38:37
+      \_ArrayNet: (work@arbiter.selectPrio), line:38:27, endln:38:37
       |vpiFullName:work@arbiter.selectPrio
       |vpiActual:
-      \_LogicTypespec: , line:38:2, endln:38:26
+      \_ArrayTypespec: , line:38:2, endln:38:53
     |vpiName:selectPrio
     |vpiFullName:work@arbiter.selectPrio
     |vpiNetType:48
@@ -13699,7 +13817,7 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@arbiter (work@arbiter), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/another_arbiter.v, line:2:1, endln:121:10
     |vpiTypespec:
-    \_RefTypespec: (work@arbiter.prioRequest), line:44:2, endln:44:23
+    \_RefTypespec: (work@arbiter.prioRequest), line:44:2, endln:44:6
       |vpiParent:
       \_LogicNet: (work@arbiter.prioRequest), line:44:24, endln:44:35
       |vpiFullName:work@arbiter.prioRequest
@@ -13726,19 +13844,37 @@ Design: (unnamed)
     |vpiNetType:48
   |vpiDefName:work@arbiter
   |vpiNet:
-  \_LogicNet: (work@arbiter.clock), line:12:8, endln:12:13
+  \_IntegerNet: (work@arbiter.i), line:3:10, endln:3:11
   |vpiNet:
-  \_LogicNet: (work@arbiter.reset), line:13:8, endln:13:13
+  \_IntegerNet: (work@arbiter.j), line:3:12, endln:3:13
   |vpiNet:
-  \_LogicNet: (work@arbiter.roundORpriority), line:14:8, endln:14:23
+  \_IntegerNet: (work@arbiter.k), line:3:14, endln:3:15
   |vpiNet:
-  \_LogicNet: (work@arbiter.request), line:15:25, endln:15:32
+  \_IntegerNet: (work@arbiter.p), line:3:16, endln:3:17
   |vpiNet:
-  \_LogicNet: (work@arbiter.tpriority), line:16:38, endln:16:47
+  \_IntegerNet: (work@arbiter.q), line:3:18, endln:3:19
   |vpiNet:
-  \_LogicNet: (work@arbiter.grant), line:17:26, endln:17:31
+  \_IntegerNet: (work@arbiter.r), line:3:20, endln:3:21
   |vpiNet:
-  \_LogicNet: (work@arbiter.prio), line:19:27, endln:19:31
+  \_IntegerNet: (work@arbiter.s), line:3:22, endln:3:23
+  |vpiNet:
+  \_IntegerNet: (work@arbiter.t), line:3:24, endln:3:25
+  |vpiNet:
+  \_IntegerNet: (work@arbiter.u), line:3:26, endln:3:27
+  |vpiNet:
+  \_IntegerNet: (work@arbiter.v), line:3:28, endln:3:29
+  |vpiNet:
+  \_LogicNet: (work@arbiter.clock), line:2:16, endln:2:21
+  |vpiNet:
+  \_LogicNet: (work@arbiter.reset), line:2:23, endln:2:28
+  |vpiNet:
+  \_LogicNet: (work@arbiter.roundORpriority), line:2:30, endln:2:45
+  |vpiNet:
+  \_LogicNet: (work@arbiter.request), line:2:47, endln:2:54
+  |vpiNet:
+  \_LogicNet: (work@arbiter.tpriority), line:2:56, endln:2:65
+  |vpiNet:
+  \_LogicNet: (work@arbiter.grant), line:2:67, endln:2:72
   |vpiNet:
   \_LogicNet: (work@arbiter.tmp_prio), line:20:27, endln:20:35
   |vpiNet:
@@ -13750,11 +13886,7 @@ Design: (unnamed)
   |vpiNet:
   \_LogicNet: (work@arbiter.nextNext), line:33:27, endln:33:35
   |vpiNet:
-  \_LogicNet: (work@arbiter.scan), line:34:27, endln:34:31
-  |vpiNet:
   \_LogicNet: (work@arbiter.found), line:36:23, endln:36:28
-  |vpiNet:
-  \_LogicNet: (work@arbiter.selectPrio), line:38:27, endln:38:37
   |vpiNet:
   \_LogicNet: (work@arbiter.min), line:40:27, endln:40:30
   |vpiNet:
@@ -13763,6 +13895,12 @@ Design: (unnamed)
   \_LogicNet: (work@arbiter.prioRequest), line:44:24, endln:44:35
   |vpiNet:
   \_LogicNet: (work@arbiter.finalRequest), line:46:23, endln:46:35
+  |vpiArrayNet:
+  \_ArrayNet: (work@arbiter.prio), line:19:27, endln:19:31
+  |vpiArrayNet:
+  \_ArrayNet: (work@arbiter.scan), line:34:27, endln:34:31
+  |vpiArrayNet:
+  \_ArrayNet: (work@arbiter.selectPrio), line:38:27, endln:38:37
   |vpiPort:
   \_Port: (clock), line:2:16, endln:2:21
     |vpiParent:
@@ -13814,7 +13952,7 @@ Design: (unnamed)
         |vpiName:tpriority
         |vpiFullName:work@arbiter.tpriority
         |vpiActual:
-        \_LogicNet: (work@arbiter.tpriority), line:16:38, endln:16:47
+        \_LogicNet: (work@arbiter.tpriority), line:2:56, endln:2:65
       |vpiStmt:
       \_Begin: (work@arbiter), line:22:2, endln:29:5
         |vpiParent:
@@ -13877,7 +14015,7 @@ Design: (unnamed)
                     |vpiName:j
                     |vpiFullName:work@arbiter.j
                     |vpiActual:
-                    \_IntegerVar: (work@arbiter.j), line:3:12, endln:3:13
+                    \_IntegerNet: (work@arbiter.j), line:3:12, endln:3:13
                   |vpiOperand:
                   \_Constant: , line:25:32, endln:25:33
                     |vpiParent:
@@ -13893,7 +14031,7 @@ Design: (unnamed)
                   |vpiName:j
                   |vpiFullName:work@arbiter.j
                   |vpiActual:
-                  \_IntegerVar: (work@arbiter.j), line:3:12, endln:3:13
+                  \_IntegerNet: (work@arbiter.j), line:3:12, endln:3:13
               |vpiCondition:
               \_Operation: , line:25:12, endln:25:26
                 |vpiParent:
@@ -13906,7 +14044,7 @@ Design: (unnamed)
                   |vpiName:j
                   |vpiFullName:work@arbiter.j
                   |vpiActual:
-                  \_IntegerVar: (work@arbiter.j), line:3:12, endln:3:13
+                  \_IntegerNet: (work@arbiter.j), line:3:12, endln:3:13
                 |vpiOperand:
                 \_RefObj: (work@arbiter.ADDRESSWIDTH), line:25:14, endln:25:26
                   |vpiParent:
@@ -13928,7 +14066,7 @@ Design: (unnamed)
                   |vpiName:tpriority
                   |vpiFullName:work@arbiter.tpriority
                   |vpiActual:
-                  \_LogicNet: (work@arbiter.tpriority), line:16:38, endln:16:47
+                  \_LogicNet: (work@arbiter.tpriority), line:2:56, endln:2:65
                   |vpiIndex:
                   \_Operation: , line:26:26, endln:26:44
                     |vpiParent:
@@ -13946,7 +14084,7 @@ Design: (unnamed)
                         |vpiName:i
                         |vpiFullName:work@arbiter.tpriority.i
                         |vpiActual:
-                        \_IntegerVar: (work@arbiter.i), line:3:10, endln:3:11
+                        \_IntegerNet: (work@arbiter.i), line:3:10, endln:3:11
                       |vpiOperand:
                       \_RefObj: (work@arbiter.tpriority.ADDRESSWIDTH), line:26:28, endln:26:40
                         |vpiParent:
@@ -13962,7 +14100,7 @@ Design: (unnamed)
                       |vpiName:j
                       |vpiFullName:work@arbiter.tpriority.j
                       |vpiActual:
-                      \_IntegerVar: (work@arbiter.j), line:3:12, endln:3:13
+                      \_IntegerNet: (work@arbiter.j), line:3:12, endln:3:13
                 |vpiLhs:
                 \_BitSelect: (work@arbiter.tmp_prio), line:26:10, endln:26:13
                   |vpiParent:
@@ -13978,7 +14116,7 @@ Design: (unnamed)
                     |vpiName:j
                     |vpiFullName:work@arbiter.j
                     |vpiActual:
-                    \_IntegerVar: (work@arbiter.j), line:3:12, endln:3:13
+                    \_IntegerNet: (work@arbiter.j), line:3:12, endln:3:13
             |vpiImportTypespec:
             \_RefVar: (work@arbiter), line:25:7, endln:25:8
             |vpiStmt:
@@ -14004,7 +14142,7 @@ Design: (unnamed)
                 |vpiName:prio
                 |vpiFullName:work@arbiter.prio
                 |vpiActual:
-                \_LogicNet: (work@arbiter.prio), line:19:27, endln:19:31
+                \_ArrayNet: (work@arbiter.prio), line:19:27, endln:19:31
                 |vpiIndex:
                 \_RefObj: (work@arbiter.i), line:27:7, endln:27:8
                   |vpiParent:
@@ -14012,7 +14150,7 @@ Design: (unnamed)
                   |vpiName:i
                   |vpiFullName:work@arbiter.i
                   |vpiActual:
-                  \_IntegerVar: (work@arbiter.i), line:3:10, endln:3:11
+                  \_IntegerNet: (work@arbiter.i), line:3:10, endln:3:11
           |vpiForInitStmt:
           \_Assignment: , line:23:7, endln:23:10
             |vpiParent:
@@ -14045,7 +14183,7 @@ Design: (unnamed)
                 |vpiName:i
                 |vpiFullName:work@arbiter.i
                 |vpiActual:
-                \_IntegerVar: (work@arbiter.i), line:3:10, endln:3:11
+                \_IntegerNet: (work@arbiter.i), line:3:10, endln:3:11
               |vpiOperand:
               \_Constant: , line:23:28, endln:23:29
                 |vpiParent:
@@ -14061,7 +14199,7 @@ Design: (unnamed)
               |vpiName:i
               |vpiFullName:work@arbiter.i
               |vpiActual:
-              \_IntegerVar: (work@arbiter.i), line:3:10, endln:3:11
+              \_IntegerNet: (work@arbiter.i), line:3:10, endln:3:11
           |vpiCondition:
           \_Operation: , line:23:12, endln:23:22
             |vpiParent:
@@ -14074,7 +14212,7 @@ Design: (unnamed)
               |vpiName:i
               |vpiFullName:work@arbiter.i
               |vpiActual:
-              \_IntegerVar: (work@arbiter.i), line:3:10, endln:3:11
+              \_IntegerNet: (work@arbiter.i), line:3:10, endln:3:11
             |vpiOperand:
             \_RefObj: (work@arbiter.NUMUNITS), line:23:14, endln:23:22
               |vpiParent:
@@ -14110,7 +14248,7 @@ Design: (unnamed)
           |vpiName:clock
           |vpiFullName:work@arbiter.clock
           |vpiActual:
-          \_LogicNet: (work@arbiter.clock), line:12:8, endln:12:13
+          \_LogicNet: (work@arbiter.clock), line:2:16, endln:2:21
       |vpiStmt:
       \_Begin: (work@arbiter), line:50:2, endln:53:5
         |vpiParent:
@@ -14132,7 +14270,7 @@ Design: (unnamed)
               |vpiName:reset
               |vpiFullName:work@arbiter.reset
               |vpiActual:
-              \_LogicNet: (work@arbiter.reset), line:13:8, endln:13:13
+              \_LogicNet: (work@arbiter.reset), line:2:23, endln:2:28
           |vpiStmt:
           \_Assignment: , line:51:13, endln:51:23
             |vpiParent:
@@ -14153,7 +14291,7 @@ Design: (unnamed)
               |vpiName:grant
               |vpiFullName:work@arbiter.grant
               |vpiActual:
-              \_LogicNet: (work@arbiter.grant), line:17:26, endln:17:31
+              \_LogicNet: (work@arbiter.grant), line:2:67, endln:2:72
           |vpiElseStmt:
           \_Assignment: , line:52:7, endln:52:22
             |vpiParent:
@@ -14174,7 +14312,7 @@ Design: (unnamed)
               |vpiName:grant
               |vpiFullName:work@arbiter.grant
               |vpiActual:
-              \_LogicNet: (work@arbiter.grant), line:17:26, endln:17:31
+              \_LogicNet: (work@arbiter.grant), line:2:67, endln:2:72
     |vpiAlwaysType:1
   |vpiProcess:
   \_Always: , line:55:2, endln:59:5
@@ -14196,7 +14334,7 @@ Design: (unnamed)
           |vpiName:clock
           |vpiFullName:work@arbiter.clock
           |vpiActual:
-          \_LogicNet: (work@arbiter.clock), line:12:8, endln:12:13
+          \_LogicNet: (work@arbiter.clock), line:2:16, endln:2:21
       |vpiStmt:
       \_Begin: (work@arbiter), line:56:2, endln:59:5
         |vpiParent:
@@ -14218,7 +14356,7 @@ Design: (unnamed)
               |vpiName:reset
               |vpiFullName:work@arbiter.reset
               |vpiActual:
-              \_LogicNet: (work@arbiter.reset), line:13:8, endln:13:13
+              \_LogicNet: (work@arbiter.reset), line:2:23, endln:2:28
           |vpiStmt:
           \_Assignment: , line:57:13, endln:57:22
             |vpiParent:
@@ -14317,7 +14455,7 @@ Design: (unnamed)
                         |vpiName:request
                         |vpiFullName:work@arbiter.request
                         |vpiActual:
-                        \_LogicNet: (work@arbiter.request), line:15:25, endln:15:32
+                        \_LogicNet: (work@arbiter.request), line:2:47, endln:2:54
                       |vpiOperand:
                       \_BitSelect: (work@arbiter.prio), line:61:25, endln:61:28
                         |vpiParent:
@@ -14325,7 +14463,7 @@ Design: (unnamed)
                         |vpiName:prio
                         |vpiFullName:work@arbiter.prio
                         |vpiActual:
-                        \_LogicNet: (work@arbiter.prio), line:19:27, endln:19:31
+                        \_ArrayNet: (work@arbiter.prio), line:19:27, endln:19:31
                         |vpiIndex:
                         \_Constant: , line:61:26, endln:61:27
                           |vpiParent:
@@ -14341,7 +14479,7 @@ Design: (unnamed)
                       |vpiName:prio
                       |vpiFullName:work@arbiter.prio
                       |vpiActual:
-                      \_LogicNet: (work@arbiter.prio), line:19:27, endln:19:31
+                      \_ArrayNet: (work@arbiter.prio), line:19:27, endln:19:31
                       |vpiIndex:
                       \_Constant: , line:61:37, endln:61:38
                         |vpiParent:
@@ -14357,7 +14495,7 @@ Design: (unnamed)
                     |vpiName:prio
                     |vpiFullName:work@arbiter.prio
                     |vpiActual:
-                    \_LogicNet: (work@arbiter.prio), line:19:27, endln:19:31
+                    \_ArrayNet: (work@arbiter.prio), line:19:27, endln:19:31
                     |vpiIndex:
                     \_Constant: , line:61:48, endln:61:49
                       |vpiParent:
@@ -14373,7 +14511,7 @@ Design: (unnamed)
                   |vpiName:prio
                   |vpiFullName:work@arbiter.prio
                   |vpiActual:
-                  \_LogicNet: (work@arbiter.prio), line:19:27, endln:19:31
+                  \_ArrayNet: (work@arbiter.prio), line:19:27, endln:19:31
                   |vpiIndex:
                   \_Constant: , line:61:59, endln:61:60
                     |vpiParent:
@@ -14389,7 +14527,7 @@ Design: (unnamed)
                 |vpiName:prio
                 |vpiFullName:work@arbiter.prio
                 |vpiActual:
-                \_LogicNet: (work@arbiter.prio), line:19:27, endln:19:31
+                \_ArrayNet: (work@arbiter.prio), line:19:27, endln:19:31
                 |vpiIndex:
                 \_Constant: , line:62:7, endln:62:8
                   |vpiParent:
@@ -14405,7 +14543,7 @@ Design: (unnamed)
               |vpiName:prio
               |vpiFullName:work@arbiter.prio
               |vpiActual:
-              \_LogicNet: (work@arbiter.prio), line:19:27, endln:19:31
+              \_ArrayNet: (work@arbiter.prio), line:19:27, endln:19:31
               |vpiIndex:
               \_Constant: , line:62:18, endln:62:19
                 |vpiParent:
@@ -14421,7 +14559,7 @@ Design: (unnamed)
             |vpiName:prio
             |vpiFullName:work@arbiter.prio
             |vpiActual:
-            \_LogicNet: (work@arbiter.prio), line:19:27, endln:19:31
+            \_ArrayNet: (work@arbiter.prio), line:19:27, endln:19:31
             |vpiIndex:
             \_Constant: , line:62:29, endln:62:30
               |vpiParent:
@@ -14437,7 +14575,7 @@ Design: (unnamed)
           |vpiName:prio
           |vpiFullName:work@arbiter.prio
           |vpiActual:
-          \_LogicNet: (work@arbiter.prio), line:19:27, endln:19:31
+          \_ArrayNet: (work@arbiter.prio), line:19:27, endln:19:31
           |vpiIndex:
           \_Constant: , line:62:40, endln:62:41
             |vpiParent:
@@ -14493,7 +14631,7 @@ Design: (unnamed)
                 |vpiName:k
                 |vpiFullName:work@arbiter.k
                 |vpiActual:
-                \_IntegerVar: (work@arbiter.k), line:3:14, endln:3:15
+                \_IntegerNet: (work@arbiter.k), line:3:14, endln:3:15
               |vpiOperand:
               \_Constant: , line:64:27, endln:64:28
                 |vpiParent:
@@ -14509,7 +14647,7 @@ Design: (unnamed)
               |vpiName:k
               |vpiFullName:work@arbiter.k
               |vpiActual:
-              \_IntegerVar: (work@arbiter.k), line:3:14, endln:3:15
+              \_IntegerNet: (work@arbiter.k), line:3:14, endln:3:15
           |vpiCondition:
           \_Operation: , line:64:11, endln:64:21
             |vpiParent:
@@ -14522,7 +14660,7 @@ Design: (unnamed)
               |vpiName:k
               |vpiFullName:work@arbiter.k
               |vpiActual:
-              \_IntegerVar: (work@arbiter.k), line:3:14, endln:3:15
+              \_IntegerNet: (work@arbiter.k), line:3:14, endln:3:15
             |vpiOperand:
             \_RefObj: (work@arbiter.NUMUNITS), line:64:13, endln:64:21
               |vpiParent:
@@ -14549,7 +14687,7 @@ Design: (unnamed)
                 |vpiName:request
                 |vpiFullName:work@arbiter.request
                 |vpiActual:
-                \_LogicNet: (work@arbiter.request), line:15:25, endln:15:32
+                \_LogicNet: (work@arbiter.request), line:2:47, endln:2:54
                 |vpiIndex:
                 \_RefObj: (work@arbiter.k), line:65:26, endln:65:27
                   |vpiParent:
@@ -14557,7 +14695,7 @@ Design: (unnamed)
                   |vpiName:k
                   |vpiFullName:work@arbiter.k
                   |vpiActual:
-                  \_IntegerVar: (work@arbiter.k), line:3:14, endln:3:15
+                  \_IntegerNet: (work@arbiter.k), line:3:14, endln:3:15
               |vpiOperand:
               \_BitSelect: (work@arbiter.prio), line:65:35, endln:65:38
                 |vpiParent:
@@ -14565,7 +14703,7 @@ Design: (unnamed)
                 |vpiName:prio
                 |vpiFullName:work@arbiter.prio
                 |vpiActual:
-                \_LogicNet: (work@arbiter.prio), line:19:27, endln:19:31
+                \_ArrayNet: (work@arbiter.prio), line:19:27, endln:19:31
                 |vpiIndex:
                 \_RefObj: (work@arbiter.k), line:65:36, endln:65:37
                   |vpiParent:
@@ -14573,7 +14711,7 @@ Design: (unnamed)
                   |vpiName:k
                   |vpiFullName:work@arbiter.k
                   |vpiActual:
-                  \_IntegerVar: (work@arbiter.k), line:3:14, endln:3:15
+                  \_IntegerNet: (work@arbiter.k), line:3:14, endln:3:15
               |vpiOperand:
               \_Operation: , line:65:41, endln:65:51
                 |vpiParent:
@@ -14602,7 +14740,7 @@ Design: (unnamed)
               |vpiName:selectPrio
               |vpiFullName:work@arbiter.selectPrio
               |vpiActual:
-              \_LogicNet: (work@arbiter.selectPrio), line:38:27, endln:38:37
+              \_ArrayNet: (work@arbiter.selectPrio), line:38:27, endln:38:37
               |vpiIndex:
               \_RefObj: (work@arbiter.k), line:65:13, endln:65:14
                 |vpiParent:
@@ -14610,7 +14748,7 @@ Design: (unnamed)
                 |vpiName:k
                 |vpiFullName:work@arbiter.k
                 |vpiActual:
-                \_IntegerVar: (work@arbiter.k), line:3:14, endln:3:15
+                \_IntegerNet: (work@arbiter.k), line:3:14, endln:3:15
         |vpiImportTypespec:
         \_RefVar: (work@arbiter), line:64:6, endln:64:7
         |vpiStmt:
@@ -14649,7 +14787,7 @@ Design: (unnamed)
             |vpiName:request
             |vpiFullName:work@arbiter.request
             |vpiActual:
-            \_LogicNet: (work@arbiter.request), line:15:25, endln:15:32
+            \_LogicNet: (work@arbiter.request), line:2:47, endln:2:54
         |vpiOperand:
         \_RefObj: (work@arbiter.roundORpriority), line:68:36, endln:68:51
           |vpiParent:
@@ -14657,7 +14795,7 @@ Design: (unnamed)
           |vpiName:roundORpriority
           |vpiFullName:work@arbiter.roundORpriority
           |vpiActual:
-          \_LogicNet: (work@arbiter.roundORpriority), line:14:8, endln:14:23
+          \_LogicNet: (work@arbiter.roundORpriority), line:2:30, endln:2:45
       |vpiStmt:
       \_Begin: (work@arbiter), line:69:2, endln:73:5
         |vpiParent:
@@ -14705,7 +14843,7 @@ Design: (unnamed)
                 |vpiName:r
                 |vpiFullName:work@arbiter.r
                 |vpiActual:
-                \_IntegerVar: (work@arbiter.r), line:3:20, endln:3:21
+                \_IntegerNet: (work@arbiter.r), line:3:20, endln:3:21
               |vpiOperand:
               \_Constant: , line:70:27, endln:70:28
                 |vpiParent:
@@ -14721,7 +14859,7 @@ Design: (unnamed)
               |vpiName:r
               |vpiFullName:work@arbiter.r
               |vpiActual:
-              \_IntegerVar: (work@arbiter.r), line:3:20, endln:3:21
+              \_IntegerNet: (work@arbiter.r), line:3:20, endln:3:21
           |vpiCondition:
           \_Operation: , line:70:11, endln:70:21
             |vpiParent:
@@ -14734,7 +14872,7 @@ Design: (unnamed)
               |vpiName:r
               |vpiFullName:work@arbiter.r
               |vpiActual:
-              \_IntegerVar: (work@arbiter.r), line:3:20, endln:3:21
+              \_IntegerNet: (work@arbiter.r), line:3:20, endln:3:21
             |vpiOperand:
             \_RefObj: (work@arbiter.NUMUNITS), line:70:13, endln:70:21
               |vpiParent:
@@ -14761,7 +14899,7 @@ Design: (unnamed)
                 |vpiName:roundORpriority
                 |vpiFullName:work@arbiter.roundORpriority
                 |vpiActual:
-                \_LogicNet: (work@arbiter.roundORpriority), line:14:8, endln:14:23
+                \_LogicNet: (work@arbiter.roundORpriority), line:2:30, endln:2:45
               |vpiOperand:
               \_BitSelect: (work@arbiter.prioRequest), line:71:49, endln:71:52
                 |vpiParent:
@@ -14777,7 +14915,7 @@ Design: (unnamed)
                   |vpiName:r
                   |vpiFullName:work@arbiter.r
                   |vpiActual:
-                  \_IntegerVar: (work@arbiter.r), line:3:20, endln:3:21
+                  \_IntegerNet: (work@arbiter.r), line:3:20, endln:3:21
               |vpiOperand:
               \_BitSelect: (work@arbiter.request), line:72:9, endln:72:12
                 |vpiParent:
@@ -14785,7 +14923,7 @@ Design: (unnamed)
                 |vpiName:request
                 |vpiFullName:work@arbiter.request
                 |vpiActual:
-                \_LogicNet: (work@arbiter.request), line:15:25, endln:15:32
+                \_LogicNet: (work@arbiter.request), line:2:47, endln:2:54
                 |vpiIndex:
                 \_RefObj: (work@arbiter.r), line:72:10, endln:72:11
                   |vpiParent:
@@ -14793,7 +14931,7 @@ Design: (unnamed)
                   |vpiName:r
                   |vpiFullName:work@arbiter.r
                   |vpiActual:
-                  \_IntegerVar: (work@arbiter.r), line:3:20, endln:3:21
+                  \_IntegerNet: (work@arbiter.r), line:3:20, endln:3:21
             |vpiLhs:
             \_BitSelect: (work@arbiter.finalRequest), line:71:14, endln:71:17
               |vpiParent:
@@ -14809,7 +14947,7 @@ Design: (unnamed)
                 |vpiName:r
                 |vpiFullName:work@arbiter.r
                 |vpiActual:
-                \_IntegerVar: (work@arbiter.r), line:3:20, endln:3:21
+                \_IntegerNet: (work@arbiter.r), line:3:20, endln:3:21
         |vpiImportTypespec:
         \_RefVar: (work@arbiter), line:70:6, endln:70:7
         |vpiStmt:
@@ -14865,7 +15003,7 @@ Design: (unnamed)
                       |vpiName:selectPrio
                       |vpiFullName:work@arbiter.selectPrio
                       |vpiActual:
-                      \_LogicNet: (work@arbiter.selectPrio), line:38:27, endln:38:37
+                      \_ArrayNet: (work@arbiter.selectPrio), line:38:27, endln:38:37
                       |vpiIndex:
                       \_Constant: , line:76:21, endln:76:22
                         |vpiParent:
@@ -14881,7 +15019,7 @@ Design: (unnamed)
                       |vpiName:selectPrio
                       |vpiFullName:work@arbiter.selectPrio
                       |vpiActual:
-                      \_LogicNet: (work@arbiter.selectPrio), line:38:27, endln:38:37
+                      \_ArrayNet: (work@arbiter.selectPrio), line:38:27, endln:38:37
                       |vpiIndex:
                       \_Constant: , line:76:38, endln:76:39
                         |vpiParent:
@@ -14897,7 +15035,7 @@ Design: (unnamed)
                     |vpiName:selectPrio
                     |vpiFullName:work@arbiter.selectPrio
                     |vpiActual:
-                    \_LogicNet: (work@arbiter.selectPrio), line:38:27, endln:38:37
+                    \_ArrayNet: (work@arbiter.selectPrio), line:38:27, endln:38:37
                     |vpiIndex:
                     \_Constant: , line:76:55, endln:76:56
                       |vpiParent:
@@ -14913,7 +15051,7 @@ Design: (unnamed)
                   |vpiName:selectPrio
                   |vpiFullName:work@arbiter.selectPrio
                   |vpiActual:
-                  \_LogicNet: (work@arbiter.selectPrio), line:38:27, endln:38:37
+                  \_ArrayNet: (work@arbiter.selectPrio), line:38:27, endln:38:37
                   |vpiIndex:
                   \_Constant: , line:77:13, endln:77:14
                     |vpiParent:
@@ -14929,7 +15067,7 @@ Design: (unnamed)
                 |vpiName:selectPrio
                 |vpiFullName:work@arbiter.selectPrio
                 |vpiActual:
-                \_LogicNet: (work@arbiter.selectPrio), line:38:27, endln:38:37
+                \_ArrayNet: (work@arbiter.selectPrio), line:38:27, endln:38:37
                 |vpiIndex:
                 \_Constant: , line:77:30, endln:77:31
                   |vpiParent:
@@ -14945,7 +15083,7 @@ Design: (unnamed)
               |vpiName:selectPrio
               |vpiFullName:work@arbiter.selectPrio
               |vpiActual:
-              \_LogicNet: (work@arbiter.selectPrio), line:38:27, endln:38:37
+              \_ArrayNet: (work@arbiter.selectPrio), line:38:27, endln:38:37
               |vpiIndex:
               \_Constant: , line:77:47, endln:77:48
                 |vpiParent:
@@ -14961,7 +15099,7 @@ Design: (unnamed)
             |vpiName:selectPrio
             |vpiFullName:work@arbiter.selectPrio
             |vpiActual:
-            \_LogicNet: (work@arbiter.selectPrio), line:38:27, endln:38:37
+            \_ArrayNet: (work@arbiter.selectPrio), line:38:27, endln:38:37
             |vpiIndex:
             \_Constant: , line:78:13, endln:78:14
               |vpiParent:
@@ -14977,7 +15115,7 @@ Design: (unnamed)
           |vpiName:selectPrio
           |vpiFullName:work@arbiter.selectPrio
           |vpiActual:
-          \_LogicNet: (work@arbiter.selectPrio), line:38:27, endln:38:37
+          \_ArrayNet: (work@arbiter.selectPrio), line:38:27, endln:38:37
           |vpiIndex:
           \_Constant: , line:78:30, endln:78:31
             |vpiParent:
@@ -15033,7 +15171,7 @@ Design: (unnamed)
                 |vpiName:p
                 |vpiFullName:work@arbiter.p
                 |vpiActual:
-                \_IntegerVar: (work@arbiter.p), line:3:16, endln:3:17
+                \_IntegerNet: (work@arbiter.p), line:3:16, endln:3:17
               |vpiOperand:
               \_Constant: , line:81:28, endln:81:29
                 |vpiParent:
@@ -15049,7 +15187,7 @@ Design: (unnamed)
               |vpiName:p
               |vpiFullName:work@arbiter.p
               |vpiActual:
-              \_IntegerVar: (work@arbiter.p), line:3:16, endln:3:17
+              \_IntegerNet: (work@arbiter.p), line:3:16, endln:3:17
           |vpiCondition:
           \_Operation: , line:81:12, endln:81:22
             |vpiParent:
@@ -15062,7 +15200,7 @@ Design: (unnamed)
               |vpiName:p
               |vpiFullName:work@arbiter.p
               |vpiActual:
-              \_IntegerVar: (work@arbiter.p), line:3:16, endln:3:17
+              \_IntegerNet: (work@arbiter.p), line:3:16, endln:3:17
             |vpiOperand:
             \_RefObj: (work@arbiter.NUMUNITS), line:81:14, endln:81:22
               |vpiParent:
@@ -15087,7 +15225,7 @@ Design: (unnamed)
                 |vpiName:selectPrio
                 |vpiFullName:work@arbiter.selectPrio
                 |vpiActual:
-                \_LogicNet: (work@arbiter.selectPrio), line:38:27, endln:38:37
+                \_ArrayNet: (work@arbiter.selectPrio), line:38:27, endln:38:37
                 |vpiIndex:
                 \_RefObj: (work@arbiter.p), line:82:17, endln:82:18
                   |vpiParent:
@@ -15095,7 +15233,7 @@ Design: (unnamed)
                   |vpiName:p
                   |vpiFullName:work@arbiter.p
                   |vpiActual:
-                  \_IntegerVar: (work@arbiter.p), line:3:16, endln:3:17
+                  \_IntegerNet: (work@arbiter.p), line:3:16, endln:3:17
               |vpiOperand:
               \_RefObj: (work@arbiter.min), line:82:22, endln:82:25
                 |vpiParent:
@@ -15117,7 +15255,7 @@ Design: (unnamed)
                 |vpiName:selectPrio
                 |vpiFullName:work@arbiter.selectPrio
                 |vpiActual:
-                \_LogicNet: (work@arbiter.selectPrio), line:38:27, endln:38:37
+                \_ArrayNet: (work@arbiter.selectPrio), line:38:27, endln:38:37
                 |vpiIndex:
                 \_RefObj: (work@arbiter.p), line:82:44, endln:82:45
                   |vpiParent:
@@ -15125,7 +15263,7 @@ Design: (unnamed)
                   |vpiName:p
                   |vpiFullName:work@arbiter.p
                   |vpiActual:
-                  \_IntegerVar: (work@arbiter.p), line:3:16, endln:3:17
+                  \_IntegerNet: (work@arbiter.p), line:3:16, endln:3:17
               |vpiLhs:
               \_RefObj: (work@arbiter.min), line:82:27, endln:82:30
                 |vpiParent:
@@ -15149,7 +15287,7 @@ Design: (unnamed)
             |vpiName:selectPrio
             |vpiFullName:work@arbiter.selectPrio
             |vpiActual:
-            \_LogicNet: (work@arbiter.selectPrio), line:38:27, endln:38:37
+            \_ArrayNet: (work@arbiter.selectPrio), line:38:27, endln:38:37
             |vpiIndex:
             \_Constant: , line:80:19, endln:80:20
               |vpiParent:
@@ -15245,7 +15383,7 @@ Design: (unnamed)
                         |vpiName:prio
                         |vpiFullName:work@arbiter.prio
                         |vpiActual:
-                        \_LogicNet: (work@arbiter.prio), line:19:27, endln:19:31
+                        \_ArrayNet: (work@arbiter.prio), line:19:27, endln:19:31
                         |vpiIndex:
                         \_Constant: , line:85:33, endln:85:34
                           |vpiParent:
@@ -15261,7 +15399,7 @@ Design: (unnamed)
                       |vpiName:prio
                       |vpiFullName:work@arbiter.prio
                       |vpiActual:
-                      \_LogicNet: (work@arbiter.prio), line:19:27, endln:19:31
+                      \_ArrayNet: (work@arbiter.prio), line:19:27, endln:19:31
                       |vpiIndex:
                       \_Constant: , line:85:44, endln:85:45
                         |vpiParent:
@@ -15277,7 +15415,7 @@ Design: (unnamed)
                     |vpiName:prio
                     |vpiFullName:work@arbiter.prio
                     |vpiActual:
-                    \_LogicNet: (work@arbiter.prio), line:19:27, endln:19:31
+                    \_ArrayNet: (work@arbiter.prio), line:19:27, endln:19:31
                     |vpiIndex:
                     \_Constant: , line:85:55, endln:85:56
                       |vpiParent:
@@ -15293,7 +15431,7 @@ Design: (unnamed)
                   |vpiName:prio
                   |vpiFullName:work@arbiter.prio
                   |vpiActual:
-                  \_LogicNet: (work@arbiter.prio), line:19:27, endln:19:31
+                  \_ArrayNet: (work@arbiter.prio), line:19:27, endln:19:31
                   |vpiIndex:
                   \_Constant: , line:85:66, endln:85:67
                     |vpiParent:
@@ -15309,7 +15447,7 @@ Design: (unnamed)
                 |vpiName:prio
                 |vpiFullName:work@arbiter.prio
                 |vpiActual:
-                \_LogicNet: (work@arbiter.prio), line:19:27, endln:19:31
+                \_ArrayNet: (work@arbiter.prio), line:19:27, endln:19:31
                 |vpiIndex:
                 \_Constant: , line:86:10, endln:86:11
                   |vpiParent:
@@ -15325,7 +15463,7 @@ Design: (unnamed)
               |vpiName:prio
               |vpiFullName:work@arbiter.prio
               |vpiActual:
-              \_LogicNet: (work@arbiter.prio), line:19:27, endln:19:31
+              \_ArrayNet: (work@arbiter.prio), line:19:27, endln:19:31
               |vpiIndex:
               \_Constant: , line:86:21, endln:86:22
                 |vpiParent:
@@ -15341,7 +15479,7 @@ Design: (unnamed)
             |vpiName:prio
             |vpiFullName:work@arbiter.prio
             |vpiActual:
-            \_LogicNet: (work@arbiter.prio), line:19:27, endln:19:31
+            \_ArrayNet: (work@arbiter.prio), line:19:27, endln:19:31
             |vpiIndex:
             \_Constant: , line:86:32, endln:86:33
               |vpiParent:
@@ -15357,7 +15495,7 @@ Design: (unnamed)
           |vpiName:prio
           |vpiFullName:work@arbiter.prio
           |vpiActual:
-          \_LogicNet: (work@arbiter.prio), line:19:27, endln:19:31
+          \_ArrayNet: (work@arbiter.prio), line:19:27, endln:19:31
           |vpiIndex:
           \_Constant: , line:86:43, endln:86:44
             |vpiParent:
@@ -15413,7 +15551,7 @@ Design: (unnamed)
                 |vpiName:q
                 |vpiFullName:work@arbiter.q
                 |vpiActual:
-                \_IntegerVar: (work@arbiter.q), line:3:18, endln:3:19
+                \_IntegerNet: (work@arbiter.q), line:3:18, endln:3:19
               |vpiOperand:
               \_Constant: , line:88:27, endln:88:28
                 |vpiParent:
@@ -15429,7 +15567,7 @@ Design: (unnamed)
               |vpiName:q
               |vpiFullName:work@arbiter.q
               |vpiActual:
-              \_IntegerVar: (work@arbiter.q), line:3:18, endln:3:19
+              \_IntegerNet: (work@arbiter.q), line:3:18, endln:3:19
           |vpiCondition:
           \_Operation: , line:88:11, endln:88:21
             |vpiParent:
@@ -15442,7 +15580,7 @@ Design: (unnamed)
               |vpiName:q
               |vpiFullName:work@arbiter.q
               |vpiActual:
-              \_IntegerVar: (work@arbiter.q), line:3:18, endln:3:19
+              \_IntegerNet: (work@arbiter.q), line:3:18, endln:3:19
             |vpiOperand:
             \_RefObj: (work@arbiter.NUMUNITS), line:88:13, endln:88:21
               |vpiParent:
@@ -15474,7 +15612,7 @@ Design: (unnamed)
                   |vpiName:prio
                   |vpiFullName:work@arbiter.prio
                   |vpiActual:
-                  \_LogicNet: (work@arbiter.prio), line:19:27, endln:19:31
+                  \_ArrayNet: (work@arbiter.prio), line:19:27, endln:19:31
                   |vpiIndex:
                   \_RefObj: (work@arbiter.q), line:89:21, endln:89:22
                     |vpiParent:
@@ -15482,7 +15620,7 @@ Design: (unnamed)
                     |vpiName:q
                     |vpiFullName:work@arbiter.q
                     |vpiActual:
-                    \_IntegerVar: (work@arbiter.q), line:3:18, endln:3:19
+                    \_IntegerNet: (work@arbiter.q), line:3:18, endln:3:19
                 |vpiOperand:
                 \_RefObj: (work@arbiter.min), line:89:25, endln:89:28
                   |vpiParent:
@@ -15522,7 +15660,7 @@ Design: (unnamed)
                 |vpiName:q
                 |vpiFullName:work@arbiter.q
                 |vpiActual:
-                \_IntegerVar: (work@arbiter.q), line:3:18, endln:3:19
+                \_IntegerNet: (work@arbiter.q), line:3:18, endln:3:19
         |vpiImportTypespec:
         \_RefVar: (work@arbiter), line:88:6, endln:88:7
         |vpiStmt:
@@ -15591,7 +15729,7 @@ Design: (unnamed)
                 |vpiName:s
                 |vpiFullName:work@arbiter.s
                 |vpiActual:
-                \_IntegerVar: (work@arbiter.s), line:3:22, endln:3:23
+                \_IntegerNet: (work@arbiter.s), line:3:22, endln:3:23
               |vpiOperand:
               \_Constant: , line:96:27, endln:96:28
                 |vpiParent:
@@ -15607,7 +15745,7 @@ Design: (unnamed)
               |vpiName:s
               |vpiFullName:work@arbiter.s
               |vpiActual:
-              \_IntegerVar: (work@arbiter.s), line:3:22, endln:3:23
+              \_IntegerNet: (work@arbiter.s), line:3:22, endln:3:23
           |vpiCondition:
           \_Operation: , line:96:11, endln:96:21
             |vpiParent:
@@ -15620,7 +15758,7 @@ Design: (unnamed)
               |vpiName:s
               |vpiFullName:work@arbiter.s
               |vpiActual:
-              \_IntegerVar: (work@arbiter.s), line:3:22, endln:3:23
+              \_IntegerNet: (work@arbiter.s), line:3:22, endln:3:23
             |vpiOperand:
             \_RefObj: (work@arbiter.NUMUNITS), line:96:13, endln:96:21
               |vpiParent:
@@ -15665,7 +15803,7 @@ Design: (unnamed)
                     |vpiName:s
                     |vpiFullName:work@arbiter.s
                     |vpiActual:
-                    \_IntegerVar: (work@arbiter.s), line:3:22, endln:3:23
+                    \_IntegerNet: (work@arbiter.s), line:3:22, endln:3:23
                 |vpiOperand:
                 \_RefObj: (work@arbiter.NUMUNITS), line:97:22, endln:97:30
                   |vpiParent:
@@ -15694,7 +15832,7 @@ Design: (unnamed)
                   |vpiName:s
                   |vpiFullName:work@arbiter.s
                   |vpiActual:
-                  \_IntegerVar: (work@arbiter.s), line:3:22, endln:3:23
+                  \_IntegerNet: (work@arbiter.s), line:3:22, endln:3:23
               |vpiOperand:
               \_Operation: , line:97:43, endln:97:58
                 |vpiParent:
@@ -15720,7 +15858,7 @@ Design: (unnamed)
                     |vpiName:s
                     |vpiFullName:work@arbiter.s
                     |vpiActual:
-                    \_IntegerVar: (work@arbiter.s), line:3:22, endln:3:23
+                    \_IntegerNet: (work@arbiter.s), line:3:22, endln:3:23
                 |vpiOperand:
                 \_RefObj: (work@arbiter.NUMUNITS), line:97:50, endln:97:58
                   |vpiParent:
@@ -15736,7 +15874,7 @@ Design: (unnamed)
               |vpiName:scan
               |vpiFullName:work@arbiter.scan
               |vpiActual:
-              \_LogicNet: (work@arbiter.scan), line:34:27, endln:34:31
+              \_ArrayNet: (work@arbiter.scan), line:34:27, endln:34:31
               |vpiIndex:
               \_RefObj: (work@arbiter.s), line:97:7, endln:97:8
                 |vpiParent:
@@ -15744,7 +15882,7 @@ Design: (unnamed)
                 |vpiName:s
                 |vpiFullName:work@arbiter.s
                 |vpiActual:
-                \_IntegerVar: (work@arbiter.s), line:3:22, endln:3:23
+                \_IntegerNet: (work@arbiter.s), line:3:22, endln:3:23
         |vpiImportTypespec:
         \_RefVar: (work@arbiter), line:96:6, endln:96:7
         |vpiStmt:
@@ -15813,7 +15951,7 @@ Design: (unnamed)
                         |vpiName:scan
                         |vpiFullName:work@arbiter.scan
                         |vpiActual:
-                        \_LogicNet: (work@arbiter.scan), line:34:27, endln:34:31
+                        \_ArrayNet: (work@arbiter.scan), line:34:27, endln:34:31
                         |vpiIndex:
                         \_Constant: , line:100:31, endln:100:32
                           |vpiParent:
@@ -15829,7 +15967,7 @@ Design: (unnamed)
                       |vpiName:scan
                       |vpiFullName:work@arbiter.scan
                       |vpiActual:
-                      \_LogicNet: (work@arbiter.scan), line:34:27, endln:34:31
+                      \_ArrayNet: (work@arbiter.scan), line:34:27, endln:34:31
                       |vpiIndex:
                       \_Constant: , line:100:42, endln:100:43
                         |vpiParent:
@@ -15845,7 +15983,7 @@ Design: (unnamed)
                     |vpiName:scan
                     |vpiFullName:work@arbiter.scan
                     |vpiActual:
-                    \_LogicNet: (work@arbiter.scan), line:34:27, endln:34:31
+                    \_ArrayNet: (work@arbiter.scan), line:34:27, endln:34:31
                     |vpiIndex:
                     \_Constant: , line:100:53, endln:100:54
                       |vpiParent:
@@ -15861,7 +15999,7 @@ Design: (unnamed)
                   |vpiName:scan
                   |vpiFullName:work@arbiter.scan
                   |vpiActual:
-                  \_LogicNet: (work@arbiter.scan), line:34:27, endln:34:31
+                  \_ArrayNet: (work@arbiter.scan), line:34:27, endln:34:31
                   |vpiIndex:
                   \_Constant: , line:100:64, endln:100:65
                     |vpiParent:
@@ -15877,7 +16015,7 @@ Design: (unnamed)
                 |vpiName:scan
                 |vpiFullName:work@arbiter.scan
                 |vpiActual:
-                \_LogicNet: (work@arbiter.scan), line:34:27, endln:34:31
+                \_ArrayNet: (work@arbiter.scan), line:34:27, endln:34:31
                 |vpiIndex:
                 \_Constant: , line:101:7, endln:101:8
                   |vpiParent:
@@ -15893,7 +16031,7 @@ Design: (unnamed)
               |vpiName:scan
               |vpiFullName:work@arbiter.scan
               |vpiActual:
-              \_LogicNet: (work@arbiter.scan), line:34:27, endln:34:31
+              \_ArrayNet: (work@arbiter.scan), line:34:27, endln:34:31
               |vpiIndex:
               \_Constant: , line:101:18, endln:101:19
                 |vpiParent:
@@ -15909,7 +16047,7 @@ Design: (unnamed)
             |vpiName:scan
             |vpiFullName:work@arbiter.scan
             |vpiActual:
-            \_LogicNet: (work@arbiter.scan), line:34:27, endln:34:31
+            \_ArrayNet: (work@arbiter.scan), line:34:27, endln:34:31
             |vpiIndex:
             \_Constant: , line:101:29, endln:101:30
               |vpiParent:
@@ -15925,7 +16063,7 @@ Design: (unnamed)
           |vpiName:scan
           |vpiFullName:work@arbiter.scan
           |vpiActual:
-          \_LogicNet: (work@arbiter.scan), line:34:27, endln:34:31
+          \_ArrayNet: (work@arbiter.scan), line:34:27, endln:34:31
           |vpiIndex:
           \_Constant: , line:101:40, endln:101:41
             |vpiParent:
@@ -15981,7 +16119,7 @@ Design: (unnamed)
                 |vpiName:t
                 |vpiFullName:work@arbiter.t
                 |vpiActual:
-                \_IntegerVar: (work@arbiter.t), line:3:24, endln:3:25
+                \_IntegerNet: (work@arbiter.t), line:3:24, endln:3:25
               |vpiOperand:
               \_Constant: , line:104:29, endln:104:30
                 |vpiParent:
@@ -15997,7 +16135,7 @@ Design: (unnamed)
               |vpiName:t
               |vpiFullName:work@arbiter.t
               |vpiActual:
-              \_IntegerVar: (work@arbiter.t), line:3:24, endln:3:25
+              \_IntegerNet: (work@arbiter.t), line:3:24, endln:3:25
           |vpiCondition:
           \_Operation: , line:104:11, endln:104:23
             |vpiParent:
@@ -16010,7 +16148,7 @@ Design: (unnamed)
               |vpiName:t
               |vpiFullName:work@arbiter.t
               |vpiActual:
-              \_IntegerVar: (work@arbiter.t), line:3:24, endln:3:25
+              \_IntegerNet: (work@arbiter.t), line:3:24, endln:3:25
             |vpiOperand:
             \_Operation: , line:104:13, endln:104:23
               |vpiParent:
@@ -16063,7 +16201,7 @@ Design: (unnamed)
                     |vpiName:t
                     |vpiFullName:work@arbiter.found.t
                     |vpiActual:
-                    \_IntegerVar: (work@arbiter.t), line:3:24, endln:3:25
+                    \_IntegerNet: (work@arbiter.t), line:3:24, endln:3:25
                   |vpiOperand:
                   \_Constant: , line:105:21, endln:105:22
                     |vpiParent:
@@ -16087,7 +16225,7 @@ Design: (unnamed)
                   |vpiName:scan
                   |vpiFullName:work@arbiter.finalRequest.scan
                   |vpiActual:
-                  \_LogicNet: (work@arbiter.scan), line:34:27, endln:34:31
+                  \_ArrayNet: (work@arbiter.scan), line:34:27, endln:34:31
                   |vpiIndex:
                   \_RefObj: (work@arbiter.finalRequest.t), line:105:45, endln:105:46
                     |vpiParent:
@@ -16095,7 +16233,7 @@ Design: (unnamed)
                     |vpiName:t
                     |vpiFullName:work@arbiter.finalRequest.t
                     |vpiActual:
-                    \_IntegerVar: (work@arbiter.t), line:3:24, endln:3:25
+                    \_IntegerNet: (work@arbiter.t), line:3:24, endln:3:25
             |vpiLhs:
             \_BitSelect: (work@arbiter.found), line:105:7, endln:105:10
               |vpiParent:
@@ -16111,7 +16249,7 @@ Design: (unnamed)
                 |vpiName:t
                 |vpiFullName:work@arbiter.t
                 |vpiActual:
-                \_IntegerVar: (work@arbiter.t), line:3:24, endln:3:25
+                \_IntegerNet: (work@arbiter.t), line:3:24, endln:3:25
         |vpiImportTypespec:
         \_RefVar: (work@arbiter), line:104:6, endln:104:7
         |vpiStmt:
@@ -16135,7 +16273,7 @@ Design: (unnamed)
               |vpiName:scan
               |vpiFullName:work@arbiter.finalRequest.scan
               |vpiActual:
-              \_LogicNet: (work@arbiter.scan), line:34:27, endln:34:31
+              \_ArrayNet: (work@arbiter.scan), line:34:27, endln:34:31
               |vpiIndex:
               \_Constant: , line:103:31, endln:103:32
                 |vpiParent:
@@ -16239,7 +16377,7 @@ Design: (unnamed)
                         |vpiName:scan
                         |vpiFullName:work@arbiter.scan
                         |vpiActual:
-                        \_LogicNet: (work@arbiter.scan), line:34:27, endln:34:31
+                        \_ArrayNet: (work@arbiter.scan), line:34:27, endln:34:31
                         |vpiIndex:
                         \_Constant: , line:108:40, endln:108:41
                           |vpiParent:
@@ -16255,7 +16393,7 @@ Design: (unnamed)
                       |vpiName:scan
                       |vpiFullName:work@arbiter.scan
                       |vpiActual:
-                      \_LogicNet: (work@arbiter.scan), line:34:27, endln:34:31
+                      \_ArrayNet: (work@arbiter.scan), line:34:27, endln:34:31
                       |vpiIndex:
                       \_Constant: , line:108:51, endln:108:52
                         |vpiParent:
@@ -16271,7 +16409,7 @@ Design: (unnamed)
                     |vpiName:scan
                     |vpiFullName:work@arbiter.scan
                     |vpiActual:
-                    \_LogicNet: (work@arbiter.scan), line:34:27, endln:34:31
+                    \_ArrayNet: (work@arbiter.scan), line:34:27, endln:34:31
                     |vpiIndex:
                     \_Constant: , line:108:62, endln:108:63
                       |vpiParent:
@@ -16287,7 +16425,7 @@ Design: (unnamed)
                   |vpiName:scan
                   |vpiFullName:work@arbiter.scan
                   |vpiActual:
-                  \_LogicNet: (work@arbiter.scan), line:34:27, endln:34:31
+                  \_ArrayNet: (work@arbiter.scan), line:34:27, endln:34:31
                   |vpiIndex:
                   \_Constant: , line:109:7, endln:109:8
                     |vpiParent:
@@ -16303,7 +16441,7 @@ Design: (unnamed)
                 |vpiName:scan
                 |vpiFullName:work@arbiter.scan
                 |vpiActual:
-                \_LogicNet: (work@arbiter.scan), line:34:27, endln:34:31
+                \_ArrayNet: (work@arbiter.scan), line:34:27, endln:34:31
                 |vpiIndex:
                 \_Constant: , line:109:18, endln:109:19
                   |vpiParent:
@@ -16319,7 +16457,7 @@ Design: (unnamed)
               |vpiName:scan
               |vpiFullName:work@arbiter.scan
               |vpiActual:
-              \_LogicNet: (work@arbiter.scan), line:34:27, endln:34:31
+              \_ArrayNet: (work@arbiter.scan), line:34:27, endln:34:31
               |vpiIndex:
               \_Constant: , line:109:29, endln:109:30
                 |vpiParent:
@@ -16335,7 +16473,7 @@ Design: (unnamed)
             |vpiName:scan
             |vpiFullName:work@arbiter.scan
             |vpiActual:
-            \_LogicNet: (work@arbiter.scan), line:34:27, endln:34:31
+            \_ArrayNet: (work@arbiter.scan), line:34:27, endln:34:31
             |vpiIndex:
             \_Constant: , line:109:40, endln:109:41
               |vpiParent:
@@ -16351,7 +16489,7 @@ Design: (unnamed)
           |vpiName:scan
           |vpiFullName:work@arbiter.scan
           |vpiActual:
-          \_LogicNet: (work@arbiter.scan), line:34:27, endln:34:31
+          \_ArrayNet: (work@arbiter.scan), line:34:27, endln:34:31
           |vpiIndex:
           \_Constant: , line:109:51, endln:109:52
             |vpiParent:
@@ -16407,7 +16545,7 @@ Design: (unnamed)
                 |vpiName:u
                 |vpiFullName:work@arbiter.u
                 |vpiActual:
-                \_IntegerVar: (work@arbiter.u), line:3:26, endln:3:27
+                \_IntegerNet: (work@arbiter.u), line:3:26, endln:3:27
               |vpiOperand:
               \_Constant: , line:112:27, endln:112:28
                 |vpiParent:
@@ -16423,7 +16561,7 @@ Design: (unnamed)
               |vpiName:u
               |vpiFullName:work@arbiter.u
               |vpiActual:
-              \_IntegerVar: (work@arbiter.u), line:3:26, endln:3:27
+              \_IntegerNet: (work@arbiter.u), line:3:26, endln:3:27
           |vpiCondition:
           \_Operation: , line:112:11, endln:112:21
             |vpiParent:
@@ -16436,7 +16574,7 @@ Design: (unnamed)
               |vpiName:u
               |vpiFullName:work@arbiter.u
               |vpiActual:
-              \_IntegerVar: (work@arbiter.u), line:3:26, endln:3:27
+              \_IntegerNet: (work@arbiter.u), line:3:26, endln:3:27
             |vpiOperand:
             \_RefObj: (work@arbiter.NUMUNITS), line:112:13, endln:112:21
               |vpiParent:
@@ -16471,7 +16609,7 @@ Design: (unnamed)
                   |vpiName:scan
                   |vpiFullName:work@arbiter.finalRequest.scan
                   |vpiActual:
-                  \_LogicNet: (work@arbiter.scan), line:34:27, endln:34:31
+                  \_ArrayNet: (work@arbiter.scan), line:34:27, endln:34:31
                   |vpiIndex:
                   \_RefObj: (work@arbiter.finalRequest.u), line:113:38, endln:113:39
                     |vpiParent:
@@ -16479,7 +16617,7 @@ Design: (unnamed)
                     |vpiName:u
                     |vpiFullName:work@arbiter.finalRequest.u
                     |vpiActual:
-                    \_IntegerVar: (work@arbiter.u), line:3:26, endln:3:27
+                    \_IntegerNet: (work@arbiter.u), line:3:26, endln:3:27
               |vpiOperand:
               \_Operation: , line:113:45, endln:113:56
                 |vpiParent:
@@ -16505,7 +16643,7 @@ Design: (unnamed)
                       |vpiName:u
                       |vpiFullName:work@arbiter.found.u
                       |vpiActual:
-                      \_IntegerVar: (work@arbiter.u), line:3:26, endln:3:27
+                      \_IntegerNet: (work@arbiter.u), line:3:26, endln:3:27
                     |vpiOperand:
                     \_Constant: , line:113:54, endln:113:55
                       |vpiParent:
@@ -16529,7 +16667,7 @@ Design: (unnamed)
                 |vpiName:scan
                 |vpiFullName:work@arbiter.grantD.scan
                 |vpiActual:
-                \_LogicNet: (work@arbiter.scan), line:34:27, endln:34:31
+                \_ArrayNet: (work@arbiter.scan), line:34:27, endln:34:31
                 |vpiIndex:
                 \_RefObj: (work@arbiter.grantD.u), line:113:14, endln:113:15
                   |vpiParent:
@@ -16537,7 +16675,7 @@ Design: (unnamed)
                   |vpiName:u
                   |vpiFullName:work@arbiter.grantD.u
                   |vpiActual:
-                  \_IntegerVar: (work@arbiter.u), line:3:26, endln:3:27
+                  \_IntegerNet: (work@arbiter.u), line:3:26, endln:3:27
         |vpiImportTypespec:
         \_RefVar: (work@arbiter), line:112:6, endln:112:7
         |vpiStmt:
@@ -16561,7 +16699,7 @@ Design: (unnamed)
               |vpiName:scan
               |vpiFullName:work@arbiter.finalRequest.scan
               |vpiActual:
-              \_LogicNet: (work@arbiter.scan), line:34:27, endln:34:31
+              \_ArrayNet: (work@arbiter.scan), line:34:27, endln:34:31
               |vpiIndex:
               \_Constant: , line:111:38, endln:111:39
                 |vpiParent:
@@ -16585,7 +16723,7 @@ Design: (unnamed)
               |vpiName:scan
               |vpiFullName:work@arbiter.grantD.scan
               |vpiActual:
-              \_LogicNet: (work@arbiter.scan), line:34:27, endln:34:31
+              \_ArrayNet: (work@arbiter.scan), line:34:27, endln:34:31
               |vpiIndex:
               \_Constant: , line:111:14, endln:111:15
                 |vpiParent:
@@ -16660,7 +16798,7 @@ Design: (unnamed)
                 |vpiName:v
                 |vpiFullName:work@arbiter.v
                 |vpiActual:
-                \_IntegerVar: (work@arbiter.v), line:3:28, endln:3:29
+                \_IntegerNet: (work@arbiter.v), line:3:28, endln:3:29
               |vpiOperand:
               \_Constant: , line:118:29, endln:118:30
                 |vpiParent:
@@ -16676,7 +16814,7 @@ Design: (unnamed)
               |vpiName:v
               |vpiFullName:work@arbiter.v
               |vpiActual:
-              \_IntegerVar: (work@arbiter.v), line:3:28, endln:3:29
+              \_IntegerNet: (work@arbiter.v), line:3:28, endln:3:29
           |vpiCondition:
           \_Operation: , line:118:11, endln:118:23
             |vpiParent:
@@ -16689,7 +16827,7 @@ Design: (unnamed)
               |vpiName:v
               |vpiFullName:work@arbiter.v
               |vpiActual:
-              \_IntegerVar: (work@arbiter.v), line:3:28, endln:3:29
+              \_IntegerNet: (work@arbiter.v), line:3:28, endln:3:29
             |vpiOperand:
             \_Operation: , line:118:13, endln:118:23
               |vpiParent:
@@ -16730,7 +16868,7 @@ Design: (unnamed)
                 |vpiName:v
                 |vpiFullName:work@arbiter.v
                 |vpiActual:
-                \_IntegerVar: (work@arbiter.v), line:3:28, endln:3:29
+                \_IntegerNet: (work@arbiter.v), line:3:28, endln:3:29
             |vpiStmt:
             \_Assignment: , line:119:16, endln:119:30
               |vpiParent:
@@ -16749,7 +16887,7 @@ Design: (unnamed)
                   |vpiName:v
                   |vpiFullName:work@arbiter.v
                   |vpiActual:
-                  \_IntegerVar: (work@arbiter.v), line:3:28, endln:3:29
+                  \_IntegerNet: (work@arbiter.v), line:3:28, endln:3:29
                 |vpiOperand:
                 \_Constant: , line:119:29, endln:119:30
                   |vpiParent:
@@ -16817,7 +16955,7 @@ Design: (unnamed)
         |vpiName:request
         |vpiFullName:work@arbiter.request
         |vpiActual:
-        \_LogicNet: (work@arbiter.request), line:15:25, endln:15:32
+        \_LogicNet: (work@arbiter.request), line:2:47, endln:2:54
     |vpiLhs:
     \_RefObj: (work@arbiter.prioRequest), line:92:9, endln:92:20
       |vpiParent:
@@ -16832,30 +16970,30 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:work@case1
   |vpiImportTypespec:
-  \_LogicNet: (work@case1.in1), line:3:13, endln:3:16
+  \_LogicNet: (work@case1.in1), line:2:15, endln:2:18
     |vpiParent:
     \_Module: work@case1 (work@case1), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/m_input_mult.v, line:2:1, endln:18:10
     |vpiName:in1
     |vpiFullName:work@case1.in1
   |vpiImportTypespec:
-  \_LogicNet: (work@case1.in2), line:4:13, endln:4:16
+  \_LogicNet: (work@case1.in2), line:2:20, endln:2:23
     |vpiParent:
     \_Module: work@case1 (work@case1), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/m_input_mult.v, line:2:1, endln:18:10
     |vpiName:in2
     |vpiFullName:work@case1.in2
   |vpiImportTypespec:
-  \_LogicNet: (work@case1.out2), line:5:8, endln:5:12
+  \_LogicNet: (work@case1.out2), line:2:25, endln:2:29
     |vpiParent:
     \_Module: work@case1 (work@case1), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/m_input_mult.v, line:2:1, endln:18:10
     |vpiName:out2
     |vpiFullName:work@case1.out2
   |vpiDefName:work@case1
   |vpiNet:
-  \_LogicNet: (work@case1.in1), line:3:13, endln:3:16
+  \_LogicNet: (work@case1.in1), line:2:15, endln:2:18
   |vpiNet:
-  \_LogicNet: (work@case1.in2), line:4:13, endln:4:16
+  \_LogicNet: (work@case1.in2), line:2:20, endln:2:23
   |vpiNet:
-  \_LogicNet: (work@case1.out2), line:5:8, endln:5:12
+  \_LogicNet: (work@case1.out2), line:2:25, endln:2:29
   |vpiPort:
   \_Port: (in1), line:2:15, endln:2:18
     |vpiParent:
@@ -16894,7 +17032,7 @@ Design: (unnamed)
           |vpiName:in1
           |vpiFullName:work@case1.in1
           |vpiActual:
-          \_LogicNet: (work@case1.in1), line:3:13, endln:3:16
+          \_LogicNet: (work@case1.in1), line:2:15, endln:2:18
         |vpiOperand:
         \_RefObj: (work@case1.in2), line:6:16, endln:6:19
           |vpiParent:
@@ -16902,7 +17040,7 @@ Design: (unnamed)
           |vpiName:in2
           |vpiFullName:work@case1.in2
           |vpiActual:
-          \_LogicNet: (work@case1.in2), line:4:13, endln:4:16
+          \_LogicNet: (work@case1.in2), line:2:20, endln:2:23
       |vpiStmt:
       \_CaseStmt: , line:7:2, endln:16:9
         |vpiParent:
@@ -16915,7 +17053,7 @@ Design: (unnamed)
           |vpiName:in2
           |vpiFullName:work@case1.in2
           |vpiActual:
-          \_LogicNet: (work@case1.in2), line:4:13, endln:4:16
+          \_LogicNet: (work@case1.in2), line:2:20, endln:2:23
         |vpiCaseItem:
         \_CaseItem: , line:8:2, endln:8:25
           |vpiParent:
@@ -16941,7 +17079,7 @@ Design: (unnamed)
               |vpiName:in1
               |vpiFullName:work@case1.in1
               |vpiActual:
-              \_LogicNet: (work@case1.in1), line:3:13, endln:3:16
+              \_LogicNet: (work@case1.in1), line:2:15, endln:2:18
               |vpiIndex:
               \_Constant: , line:8:22, endln:8:23
                 |vpiParent:
@@ -16957,7 +17095,7 @@ Design: (unnamed)
               |vpiName:out2
               |vpiFullName:work@case1.out2
               |vpiActual:
-              \_LogicNet: (work@case1.out2), line:5:8, endln:5:12
+              \_LogicNet: (work@case1.out2), line:2:25, endln:2:29
         |vpiCaseItem:
         \_CaseItem: , line:9:2, endln:9:25
           |vpiParent:
@@ -16983,7 +17121,7 @@ Design: (unnamed)
               |vpiName:in1
               |vpiFullName:work@case1.in1
               |vpiActual:
-              \_LogicNet: (work@case1.in1), line:3:13, endln:3:16
+              \_LogicNet: (work@case1.in1), line:2:15, endln:2:18
               |vpiIndex:
               \_Constant: , line:9:22, endln:9:23
                 |vpiParent:
@@ -16999,7 +17137,7 @@ Design: (unnamed)
               |vpiName:out2
               |vpiFullName:work@case1.out2
               |vpiActual:
-              \_LogicNet: (work@case1.out2), line:5:8, endln:5:12
+              \_LogicNet: (work@case1.out2), line:2:25, endln:2:29
         |vpiCaseItem:
         \_CaseItem: , line:10:2, endln:10:25
           |vpiParent:
@@ -17025,7 +17163,7 @@ Design: (unnamed)
               |vpiName:in1
               |vpiFullName:work@case1.in1
               |vpiActual:
-              \_LogicNet: (work@case1.in1), line:3:13, endln:3:16
+              \_LogicNet: (work@case1.in1), line:2:15, endln:2:18
               |vpiIndex:
               \_Constant: , line:10:22, endln:10:23
                 |vpiParent:
@@ -17041,7 +17179,7 @@ Design: (unnamed)
               |vpiName:out2
               |vpiFullName:work@case1.out2
               |vpiActual:
-              \_LogicNet: (work@case1.out2), line:5:8, endln:5:12
+              \_LogicNet: (work@case1.out2), line:2:25, endln:2:29
         |vpiCaseItem:
         \_CaseItem: , line:11:2, endln:11:25
           |vpiParent:
@@ -17067,7 +17205,7 @@ Design: (unnamed)
               |vpiName:in1
               |vpiFullName:work@case1.in1
               |vpiActual:
-              \_LogicNet: (work@case1.in1), line:3:13, endln:3:16
+              \_LogicNet: (work@case1.in1), line:2:15, endln:2:18
               |vpiIndex:
               \_Constant: , line:11:22, endln:11:23
                 |vpiParent:
@@ -17083,7 +17221,7 @@ Design: (unnamed)
               |vpiName:out2
               |vpiFullName:work@case1.out2
               |vpiActual:
-              \_LogicNet: (work@case1.out2), line:5:8, endln:5:12
+              \_LogicNet: (work@case1.out2), line:2:25, endln:2:29
         |vpiCaseItem:
         \_CaseItem: , line:12:2, endln:12:25
           |vpiParent:
@@ -17109,7 +17247,7 @@ Design: (unnamed)
               |vpiName:in1
               |vpiFullName:work@case1.in1
               |vpiActual:
-              \_LogicNet: (work@case1.in1), line:3:13, endln:3:16
+              \_LogicNet: (work@case1.in1), line:2:15, endln:2:18
               |vpiIndex:
               \_Constant: , line:12:22, endln:12:23
                 |vpiParent:
@@ -17125,7 +17263,7 @@ Design: (unnamed)
               |vpiName:out2
               |vpiFullName:work@case1.out2
               |vpiActual:
-              \_LogicNet: (work@case1.out2), line:5:8, endln:5:12
+              \_LogicNet: (work@case1.out2), line:2:25, endln:2:29
         |vpiCaseItem:
         \_CaseItem: , line:13:2, endln:13:25
           |vpiParent:
@@ -17151,7 +17289,7 @@ Design: (unnamed)
               |vpiName:in1
               |vpiFullName:work@case1.in1
               |vpiActual:
-              \_LogicNet: (work@case1.in1), line:3:13, endln:3:16
+              \_LogicNet: (work@case1.in1), line:2:15, endln:2:18
               |vpiIndex:
               \_Constant: , line:13:22, endln:13:23
                 |vpiParent:
@@ -17167,7 +17305,7 @@ Design: (unnamed)
               |vpiName:out2
               |vpiFullName:work@case1.out2
               |vpiActual:
-              \_LogicNet: (work@case1.out2), line:5:8, endln:5:12
+              \_LogicNet: (work@case1.out2), line:2:25, endln:2:29
         |vpiCaseItem:
         \_CaseItem: , line:14:2, endln:14:25
           |vpiParent:
@@ -17193,7 +17331,7 @@ Design: (unnamed)
               |vpiName:in1
               |vpiFullName:work@case1.in1
               |vpiActual:
-              \_LogicNet: (work@case1.in1), line:3:13, endln:3:16
+              \_LogicNet: (work@case1.in1), line:2:15, endln:2:18
               |vpiIndex:
               \_Constant: , line:14:22, endln:14:23
                 |vpiParent:
@@ -17209,7 +17347,7 @@ Design: (unnamed)
               |vpiName:out2
               |vpiFullName:work@case1.out2
               |vpiActual:
-              \_LogicNet: (work@case1.out2), line:5:8, endln:5:12
+              \_LogicNet: (work@case1.out2), line:2:25, endln:2:29
         |vpiCaseItem:
         \_CaseItem: , line:15:2, endln:15:25
           |vpiParent:
@@ -17235,7 +17373,7 @@ Design: (unnamed)
               |vpiName:in1
               |vpiFullName:work@case1.in1
               |vpiActual:
-              \_LogicNet: (work@case1.in1), line:3:13, endln:3:16
+              \_LogicNet: (work@case1.in1), line:2:15, endln:2:18
               |vpiIndex:
               \_Constant: , line:15:22, endln:15:23
                 |vpiParent:
@@ -17251,7 +17389,7 @@ Design: (unnamed)
               |vpiName:out2
               |vpiFullName:work@case1.out2
               |vpiActual:
-              \_LogicNet: (work@case1.out2), line:5:8, endln:5:12
+              \_LogicNet: (work@case1.out2), line:2:25, endln:2:29
     |vpiAlwaysType:1
 |vpiAllModules:
 \_Module: work@case2 (work@case2), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/m_input_mult.v, line:21:1, endln:46:10
@@ -17283,19 +17421,19 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiImportTypespec:
-  \_LogicNet: (work@case2.in1), line:22:13, endln:22:16
+  \_LogicNet: (work@case2.in1), line:21:15, endln:21:18
     |vpiParent:
     \_Module: work@case2 (work@case2), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/m_input_mult.v, line:21:1, endln:46:10
     |vpiName:in1
     |vpiFullName:work@case2.in1
   |vpiImportTypespec:
-  \_LogicNet: (work@case2.sel), line:23:13, endln:23:16
+  \_LogicNet: (work@case2.sel), line:21:20, endln:21:23
     |vpiParent:
     \_Module: work@case2 (work@case2), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/m_input_mult.v, line:21:1, endln:46:10
     |vpiName:sel
     |vpiFullName:work@case2.sel
   |vpiImportTypespec:
-  \_LogicNet: (work@case2.out2), line:24:15, endln:24:19
+  \_LogicNet: (work@case2.out2), line:21:25, endln:21:29
     |vpiParent:
     \_Module: work@case2 (work@case2), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/m_input_mult.v, line:21:1, endln:46:10
     |vpiName:out2
@@ -17318,11 +17456,11 @@ Design: (unnamed)
     |vpiNetType:48
   |vpiDefName:work@case2
   |vpiNet:
-  \_LogicNet: (work@case2.in1), line:22:13, endln:22:16
+  \_LogicNet: (work@case2.in1), line:21:15, endln:21:18
   |vpiNet:
-  \_LogicNet: (work@case2.sel), line:23:13, endln:23:16
+  \_LogicNet: (work@case2.sel), line:21:20, endln:21:23
   |vpiNet:
-  \_LogicNet: (work@case2.out2), line:24:15, endln:24:19
+  \_LogicNet: (work@case2.out2), line:21:25, endln:21:29
   |vpiNet:
   \_LogicNet: (work@case2.select), line:25:11, endln:25:17
   |vpiPort:
@@ -17358,7 +17496,7 @@ Design: (unnamed)
         |vpiName:sel
         |vpiFullName:work@case2.sel
         |vpiActual:
-        \_LogicNet: (work@case2.sel), line:23:13, endln:23:16
+        \_LogicNet: (work@case2.sel), line:21:20, endln:21:23
       |vpiStmt:
       \_CaseStmt: , line:28:2, endln:37:9
         |vpiParent:
@@ -17371,7 +17509,7 @@ Design: (unnamed)
           |vpiName:sel
           |vpiFullName:work@case2.sel
           |vpiActual:
-          \_LogicNet: (work@case2.sel), line:23:13, endln:23:16
+          \_LogicNet: (work@case2.sel), line:21:20, endln:21:23
         |vpiCaseItem:
         \_CaseItem: , line:29:2, endln:29:32
           |vpiParent:
@@ -17661,7 +17799,7 @@ Design: (unnamed)
         |vpiName:in1
         |vpiFullName:work@case2.in1
         |vpiActual:
-        \_LogicNet: (work@case2.in1), line:22:13, endln:22:16
+        \_LogicNet: (work@case2.in1), line:21:15, endln:21:18
       |vpiOperand:
       \_BitSelect: (work@case2.select), line:38:33, endln:38:36
         |vpiParent:
@@ -17686,7 +17824,7 @@ Design: (unnamed)
       |vpiFullName:work@case2.out2
       |vpiDefName:out2
       |vpiActual:
-      \_LogicNet: (work@case2.out2), line:24:15, endln:24:19
+      \_LogicNet: (work@case2.out2), line:21:25, endln:21:29
       |vpiConstantSelect:1
       |vpiLeftRange:
       \_Constant: , line:38:14, endln:38:15
@@ -17720,7 +17858,7 @@ Design: (unnamed)
         |vpiName:in1
         |vpiFullName:work@case2.in1
         |vpiActual:
-        \_LogicNet: (work@case2.in1), line:22:13, endln:22:16
+        \_LogicNet: (work@case2.in1), line:21:15, endln:21:18
       |vpiOperand:
       \_BitSelect: (work@case2.select), line:39:33, endln:39:36
         |vpiParent:
@@ -17745,7 +17883,7 @@ Design: (unnamed)
       |vpiFullName:work@case2.out2
       |vpiDefName:out2
       |vpiActual:
-      \_LogicNet: (work@case2.out2), line:24:15, endln:24:19
+      \_LogicNet: (work@case2.out2), line:21:25, endln:21:29
       |vpiConstantSelect:1
       |vpiLeftRange:
       \_Constant: , line:39:14, endln:39:15
@@ -17779,7 +17917,7 @@ Design: (unnamed)
         |vpiName:in1
         |vpiFullName:work@case2.in1
         |vpiActual:
-        \_LogicNet: (work@case2.in1), line:22:13, endln:22:16
+        \_LogicNet: (work@case2.in1), line:21:15, endln:21:18
       |vpiOperand:
       \_BitSelect: (work@case2.select), line:40:33, endln:40:36
         |vpiParent:
@@ -17804,7 +17942,7 @@ Design: (unnamed)
       |vpiFullName:work@case2.out2
       |vpiDefName:out2
       |vpiActual:
-      \_LogicNet: (work@case2.out2), line:24:15, endln:24:19
+      \_LogicNet: (work@case2.out2), line:21:25, endln:21:29
       |vpiConstantSelect:1
       |vpiLeftRange:
       \_Constant: , line:40:14, endln:40:15
@@ -17838,7 +17976,7 @@ Design: (unnamed)
         |vpiName:in1
         |vpiFullName:work@case2.in1
         |vpiActual:
-        \_LogicNet: (work@case2.in1), line:22:13, endln:22:16
+        \_LogicNet: (work@case2.in1), line:21:15, endln:21:18
       |vpiOperand:
       \_BitSelect: (work@case2.select), line:41:33, endln:41:36
         |vpiParent:
@@ -17863,7 +18001,7 @@ Design: (unnamed)
       |vpiFullName:work@case2.out2
       |vpiDefName:out2
       |vpiActual:
-      \_LogicNet: (work@case2.out2), line:24:15, endln:24:19
+      \_LogicNet: (work@case2.out2), line:21:25, endln:21:29
       |vpiConstantSelect:1
       |vpiLeftRange:
       \_Constant: , line:41:14, endln:41:15
@@ -17897,7 +18035,7 @@ Design: (unnamed)
         |vpiName:in1
         |vpiFullName:work@case2.in1
         |vpiActual:
-        \_LogicNet: (work@case2.in1), line:22:13, endln:22:16
+        \_LogicNet: (work@case2.in1), line:21:15, endln:21:18
       |vpiOperand:
       \_BitSelect: (work@case2.select), line:42:33, endln:42:36
         |vpiParent:
@@ -17922,7 +18060,7 @@ Design: (unnamed)
       |vpiFullName:work@case2.out2
       |vpiDefName:out2
       |vpiActual:
-      \_LogicNet: (work@case2.out2), line:24:15, endln:24:19
+      \_LogicNet: (work@case2.out2), line:21:25, endln:21:29
       |vpiConstantSelect:1
       |vpiLeftRange:
       \_Constant: , line:42:14, endln:42:15
@@ -17956,7 +18094,7 @@ Design: (unnamed)
         |vpiName:in1
         |vpiFullName:work@case2.in1
         |vpiActual:
-        \_LogicNet: (work@case2.in1), line:22:13, endln:22:16
+        \_LogicNet: (work@case2.in1), line:21:15, endln:21:18
       |vpiOperand:
       \_BitSelect: (work@case2.select), line:43:35, endln:43:38
         |vpiParent:
@@ -17981,7 +18119,7 @@ Design: (unnamed)
       |vpiFullName:work@case2.out2
       |vpiDefName:out2
       |vpiActual:
-      \_LogicNet: (work@case2.out2), line:24:15, endln:24:19
+      \_LogicNet: (work@case2.out2), line:21:25, endln:21:29
       |vpiConstantSelect:1
       |vpiLeftRange:
       \_Constant: , line:43:14, endln:43:16
@@ -18015,7 +18153,7 @@ Design: (unnamed)
         |vpiName:in1
         |vpiFullName:work@case2.in1
         |vpiActual:
-        \_LogicNet: (work@case2.in1), line:22:13, endln:22:16
+        \_LogicNet: (work@case2.in1), line:21:15, endln:21:18
       |vpiOperand:
       \_BitSelect: (work@case2.select), line:44:35, endln:44:38
         |vpiParent:
@@ -18040,7 +18178,7 @@ Design: (unnamed)
       |vpiFullName:work@case2.out2
       |vpiDefName:out2
       |vpiActual:
-      \_LogicNet: (work@case2.out2), line:24:15, endln:24:19
+      \_LogicNet: (work@case2.out2), line:21:25, endln:21:29
       |vpiConstantSelect:1
       |vpiLeftRange:
       \_Constant: , line:44:14, endln:44:16
@@ -18074,7 +18212,7 @@ Design: (unnamed)
         |vpiName:in1
         |vpiFullName:work@case2.in1
         |vpiActual:
-        \_LogicNet: (work@case2.in1), line:22:13, endln:22:16
+        \_LogicNet: (work@case2.in1), line:21:15, endln:21:18
       |vpiOperand:
       \_BitSelect: (work@case2.select), line:45:35, endln:45:38
         |vpiParent:
@@ -18099,7 +18237,7 @@ Design: (unnamed)
       |vpiFullName:work@case2.out2
       |vpiDefName:out2
       |vpiActual:
-      \_LogicNet: (work@case2.out2), line:24:15, endln:24:19
+      \_LogicNet: (work@case2.out2), line:21:25, endln:21:29
       |vpiConstantSelect:1
       |vpiLeftRange:
       \_Constant: , line:45:14, endln:45:16
@@ -18127,25 +18265,25 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dff_async_reset (work@dff_async_reset), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/dff.v, line:8:1, endln:31:10
   |vpiImportTypespec:
-  \_LogicNet: (work@dff_async_reset.data), line:15:7, endln:15:11
+  \_LogicNet: (work@dff_async_reset.data), line:9:1, endln:9:5
     |vpiParent:
     \_Module: work@dff_async_reset (work@dff_async_reset), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/dff.v, line:8:1, endln:31:10
     |vpiName:data
     |vpiFullName:work@dff_async_reset.data
   |vpiImportTypespec:
-  \_LogicNet: (work@dff_async_reset.clk), line:15:13, endln:15:16
+  \_LogicNet: (work@dff_async_reset.clk), line:10:1, endln:10:4
     |vpiParent:
     \_Module: work@dff_async_reset (work@dff_async_reset), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/dff.v, line:8:1, endln:31:10
     |vpiName:clk
     |vpiFullName:work@dff_async_reset.clk
   |vpiImportTypespec:
-  \_LogicNet: (work@dff_async_reset.reset), line:15:18, endln:15:23
+  \_LogicNet: (work@dff_async_reset.reset), line:11:1, endln:11:6
     |vpiParent:
     \_Module: work@dff_async_reset (work@dff_async_reset), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/dff.v, line:8:1, endln:31:10
     |vpiName:reset
     |vpiFullName:work@dff_async_reset.reset
   |vpiImportTypespec:
-  \_LogicNet: (work@dff_async_reset.q), line:18:8, endln:18:9
+  \_LogicNet: (work@dff_async_reset.q), line:12:1, endln:12:2
     |vpiParent:
     \_Module: work@dff_async_reset (work@dff_async_reset), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/dff.v, line:8:1, endln:31:10
     |vpiName:q
@@ -18169,13 +18307,13 @@ Design: (unnamed)
     |vpiNetType:48
   |vpiDefName:work@dff_async_reset
   |vpiNet:
-  \_LogicNet: (work@dff_async_reset.data), line:15:7, endln:15:11
+  \_LogicNet: (work@dff_async_reset.data), line:9:1, endln:9:5
   |vpiNet:
-  \_LogicNet: (work@dff_async_reset.clk), line:15:13, endln:15:16
+  \_LogicNet: (work@dff_async_reset.clk), line:10:1, endln:10:4
   |vpiNet:
-  \_LogicNet: (work@dff_async_reset.reset), line:15:18, endln:15:23
+  \_LogicNet: (work@dff_async_reset.reset), line:11:1, endln:11:6
   |vpiNet:
-  \_LogicNet: (work@dff_async_reset.q), line:18:8, endln:18:9
+  \_LogicNet: (work@dff_async_reset.q), line:12:1, endln:12:2
   |vpiNet:
   \_LogicNet: (work@dff_async_reset.q), line:21:5, endln:21:6
   |vpiPort:
@@ -18227,7 +18365,7 @@ Design: (unnamed)
             |vpiName:clk
             |vpiFullName:work@dff_async_reset.clk
             |vpiActual:
-            \_LogicNet: (work@dff_async_reset.clk), line:15:13, endln:15:16
+            \_LogicNet: (work@dff_async_reset.clk), line:10:1, endln:10:4
         |vpiOperand:
         \_Operation: , line:24:27, endln:24:40
           |vpiParent:
@@ -18240,7 +18378,7 @@ Design: (unnamed)
             |vpiName:reset
             |vpiFullName:work@dff_async_reset.reset
             |vpiActual:
-            \_LogicNet: (work@dff_async_reset.reset), line:15:18, endln:15:23
+            \_LogicNet: (work@dff_async_reset.reset), line:11:1, endln:11:6
       |vpiStmt:
       \_IfElse: , line:25:1, endln:29:4
         |vpiParent:
@@ -18257,7 +18395,7 @@ Design: (unnamed)
             |vpiName:reset
             |vpiFullName:work@dff_async_reset.reset
             |vpiActual:
-            \_LogicNet: (work@dff_async_reset.reset), line:15:18, endln:15:23
+            \_LogicNet: (work@dff_async_reset.reset), line:11:1, endln:11:6
         |vpiStmt:
         \_Begin: (work@dff_async_reset), line:25:13, endln:27:4
           |vpiParent:
@@ -18283,7 +18421,7 @@ Design: (unnamed)
               |vpiName:q
               |vpiFullName:work@dff_async_reset.q
               |vpiActual:
-              \_LogicNet: (work@dff_async_reset.q), line:18:8, endln:18:9
+              \_LogicNet: (work@dff_async_reset.q), line:12:1, endln:12:2
         |vpiElseStmt:
         \_Begin: (work@dff_async_reset), line:27:11, endln:29:4
           |vpiParent:
@@ -18301,7 +18439,7 @@ Design: (unnamed)
               |vpiName:data
               |vpiFullName:work@dff_async_reset.data
               |vpiActual:
-              \_LogicNet: (work@dff_async_reset.data), line:15:7, endln:15:11
+              \_LogicNet: (work@dff_async_reset.data), line:9:1, endln:9:5
             |vpiLhs:
             \_RefObj: (work@dff_async_reset.q), line:28:3, endln:28:4
               |vpiParent:
@@ -18309,7 +18447,7 @@ Design: (unnamed)
               |vpiName:q
               |vpiFullName:work@dff_async_reset.q
               |vpiActual:
-              \_LogicNet: (work@dff_async_reset.q), line:18:8, endln:18:9
+              \_LogicNet: (work@dff_async_reset.q), line:12:1, endln:12:2
     |vpiAlwaysType:1
 |vpiAllModules:
 \_Module: work@encoder_using_case (work@encoder_using_case), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/encoder.v, line:7:1, endln:43:10
@@ -18341,20 +18479,20 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiImportTypespec:
-  \_LogicNet: (work@encoder_using_case.binary_out), line:12:14, endln:12:24
+  \_LogicNet: (work@encoder_using_case.binary_out), line:8:1, endln:8:11
     |vpiParent:
     \_Module: work@encoder_using_case (work@encoder_using_case), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/encoder.v, line:7:1, endln:43:10
     |vpiName:binary_out
     |vpiFullName:work@encoder_using_case.binary_out
     |vpiNetType:48
   |vpiImportTypespec:
-  \_LogicNet: (work@encoder_using_case.enable), line:13:8, endln:13:14
+  \_LogicNet: (work@encoder_using_case.enable), line:10:1, endln:10:7
     |vpiParent:
     \_Module: work@encoder_using_case (work@encoder_using_case), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/encoder.v, line:7:1, endln:43:10
     |vpiName:enable
     |vpiFullName:work@encoder_using_case.enable
   |vpiImportTypespec:
-  \_LogicNet: (work@encoder_using_case.encoder_in), line:14:14, endln:14:24
+  \_LogicNet: (work@encoder_using_case.encoder_in), line:9:1, endln:9:11
     |vpiParent:
     \_Module: work@encoder_using_case (work@encoder_using_case), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/encoder.v, line:7:1, endln:43:10
     |vpiName:encoder_in
@@ -18377,11 +18515,11 @@ Design: (unnamed)
     |vpiNetType:48
   |vpiDefName:work@encoder_using_case
   |vpiNet:
-  \_LogicNet: (work@encoder_using_case.binary_out), line:12:14, endln:12:24
+  \_LogicNet: (work@encoder_using_case.binary_out), line:8:1, endln:8:11
   |vpiNet:
-  \_LogicNet: (work@encoder_using_case.enable), line:13:8, endln:13:14
+  \_LogicNet: (work@encoder_using_case.enable), line:10:1, endln:10:7
   |vpiNet:
-  \_LogicNet: (work@encoder_using_case.encoder_in), line:14:14, endln:14:24
+  \_LogicNet: (work@encoder_using_case.encoder_in), line:9:1, endln:9:11
   |vpiNet:
   \_LogicNet: (work@encoder_using_case.binary_out), line:17:11, endln:17:21
   |vpiPort:
@@ -18422,7 +18560,7 @@ Design: (unnamed)
           |vpiName:enable
           |vpiFullName:work@encoder_using_case.enable
           |vpiActual:
-          \_LogicNet: (work@encoder_using_case.enable), line:13:8, endln:13:14
+          \_LogicNet: (work@encoder_using_case.enable), line:10:1, endln:10:7
         |vpiOperand:
         \_RefObj: (work@encoder_using_case.encoder_in), line:19:21, endln:19:31
           |vpiParent:
@@ -18430,7 +18568,7 @@ Design: (unnamed)
           |vpiName:encoder_in
           |vpiFullName:work@encoder_using_case.encoder_in
           |vpiActual:
-          \_LogicNet: (work@encoder_using_case.encoder_in), line:14:14, endln:14:24
+          \_LogicNet: (work@encoder_using_case.encoder_in), line:9:1, endln:9:11
       |vpiStmt:
       \_Begin: (work@encoder_using_case), line:20:1, endln:41:4
         |vpiParent:
@@ -18457,7 +18595,7 @@ Design: (unnamed)
             |vpiName:binary_out
             |vpiFullName:work@encoder_using_case.binary_out
             |vpiActual:
-            \_LogicNet: (work@encoder_using_case.binary_out), line:12:14, endln:12:24
+            \_LogicNet: (work@encoder_using_case.binary_out), line:8:1, endln:8:11
         |vpiStmt:
         \_IfStmt: , line:22:3, endln:40:6
           |vpiParent:
@@ -18469,7 +18607,7 @@ Design: (unnamed)
             |vpiName:enable
             |vpiFullName:work@encoder_using_case.enable
             |vpiActual:
-            \_LogicNet: (work@encoder_using_case.enable), line:13:8, endln:13:14
+            \_LogicNet: (work@encoder_using_case.enable), line:10:1, endln:10:7
           |vpiStmt:
           \_Begin: (work@encoder_using_case), line:22:15, endln:40:6
             |vpiParent:
@@ -18487,7 +18625,7 @@ Design: (unnamed)
                 |vpiName:encoder_in
                 |vpiFullName:work@encoder_using_case.encoder_in
                 |vpiActual:
-                \_LogicNet: (work@encoder_using_case.encoder_in), line:14:14, endln:14:24
+                \_LogicNet: (work@encoder_using_case.encoder_in), line:9:1, endln:9:11
               |vpiCaseItem:
               \_CaseItem: , line:24:7, endln:24:33
                 |vpiParent:
@@ -18521,7 +18659,7 @@ Design: (unnamed)
                     |vpiName:binary_out
                     |vpiFullName:work@encoder_using_case.binary_out
                     |vpiActual:
-                    \_LogicNet: (work@encoder_using_case.binary_out), line:12:14, endln:12:24
+                    \_LogicNet: (work@encoder_using_case.binary_out), line:8:1, endln:8:11
               |vpiCaseItem:
               \_CaseItem: , line:25:7, endln:25:33
                 |vpiParent:
@@ -18555,7 +18693,7 @@ Design: (unnamed)
                     |vpiName:binary_out
                     |vpiFullName:work@encoder_using_case.binary_out
                     |vpiActual:
-                    \_LogicNet: (work@encoder_using_case.binary_out), line:12:14, endln:12:24
+                    \_LogicNet: (work@encoder_using_case.binary_out), line:8:1, endln:8:11
               |vpiCaseItem:
               \_CaseItem: , line:26:7, endln:26:33
                 |vpiParent:
@@ -18589,7 +18727,7 @@ Design: (unnamed)
                     |vpiName:binary_out
                     |vpiFullName:work@encoder_using_case.binary_out
                     |vpiActual:
-                    \_LogicNet: (work@encoder_using_case.binary_out), line:12:14, endln:12:24
+                    \_LogicNet: (work@encoder_using_case.binary_out), line:8:1, endln:8:11
               |vpiCaseItem:
               \_CaseItem: , line:27:7, endln:27:33
                 |vpiParent:
@@ -18623,7 +18761,7 @@ Design: (unnamed)
                     |vpiName:binary_out
                     |vpiFullName:work@encoder_using_case.binary_out
                     |vpiActual:
-                    \_LogicNet: (work@encoder_using_case.binary_out), line:12:14, endln:12:24
+                    \_LogicNet: (work@encoder_using_case.binary_out), line:8:1, endln:8:11
               |vpiCaseItem:
               \_CaseItem: , line:28:7, endln:28:33
                 |vpiParent:
@@ -18657,7 +18795,7 @@ Design: (unnamed)
                     |vpiName:binary_out
                     |vpiFullName:work@encoder_using_case.binary_out
                     |vpiActual:
-                    \_LogicNet: (work@encoder_using_case.binary_out), line:12:14, endln:12:24
+                    \_LogicNet: (work@encoder_using_case.binary_out), line:8:1, endln:8:11
               |vpiCaseItem:
               \_CaseItem: , line:29:7, endln:29:33
                 |vpiParent:
@@ -18691,7 +18829,7 @@ Design: (unnamed)
                     |vpiName:binary_out
                     |vpiFullName:work@encoder_using_case.binary_out
                     |vpiActual:
-                    \_LogicNet: (work@encoder_using_case.binary_out), line:12:14, endln:12:24
+                    \_LogicNet: (work@encoder_using_case.binary_out), line:8:1, endln:8:11
               |vpiCaseItem:
               \_CaseItem: , line:30:7, endln:30:33
                 |vpiParent:
@@ -18725,7 +18863,7 @@ Design: (unnamed)
                     |vpiName:binary_out
                     |vpiFullName:work@encoder_using_case.binary_out
                     |vpiActual:
-                    \_LogicNet: (work@encoder_using_case.binary_out), line:12:14, endln:12:24
+                    \_LogicNet: (work@encoder_using_case.binary_out), line:8:1, endln:8:11
               |vpiCaseItem:
               \_CaseItem: , line:31:7, endln:31:33
                 |vpiParent:
@@ -18759,7 +18897,7 @@ Design: (unnamed)
                     |vpiName:binary_out
                     |vpiFullName:work@encoder_using_case.binary_out
                     |vpiActual:
-                    \_LogicNet: (work@encoder_using_case.binary_out), line:12:14, endln:12:24
+                    \_LogicNet: (work@encoder_using_case.binary_out), line:8:1, endln:8:11
               |vpiCaseItem:
               \_CaseItem: , line:32:7, endln:32:33
                 |vpiParent:
@@ -18793,7 +18931,7 @@ Design: (unnamed)
                     |vpiName:binary_out
                     |vpiFullName:work@encoder_using_case.binary_out
                     |vpiActual:
-                    \_LogicNet: (work@encoder_using_case.binary_out), line:12:14, endln:12:24
+                    \_LogicNet: (work@encoder_using_case.binary_out), line:8:1, endln:8:11
               |vpiCaseItem:
               \_CaseItem: , line:33:7, endln:33:34
                 |vpiParent:
@@ -18827,7 +18965,7 @@ Design: (unnamed)
                     |vpiName:binary_out
                     |vpiFullName:work@encoder_using_case.binary_out
                     |vpiActual:
-                    \_LogicNet: (work@encoder_using_case.binary_out), line:12:14, endln:12:24
+                    \_LogicNet: (work@encoder_using_case.binary_out), line:8:1, endln:8:11
               |vpiCaseItem:
               \_CaseItem: , line:34:7, endln:34:34
                 |vpiParent:
@@ -18861,7 +18999,7 @@ Design: (unnamed)
                     |vpiName:binary_out
                     |vpiFullName:work@encoder_using_case.binary_out
                     |vpiActual:
-                    \_LogicNet: (work@encoder_using_case.binary_out), line:12:14, endln:12:24
+                    \_LogicNet: (work@encoder_using_case.binary_out), line:8:1, endln:8:11
               |vpiCaseItem:
               \_CaseItem: , line:35:7, endln:35:34
                 |vpiParent:
@@ -18895,7 +19033,7 @@ Design: (unnamed)
                     |vpiName:binary_out
                     |vpiFullName:work@encoder_using_case.binary_out
                     |vpiActual:
-                    \_LogicNet: (work@encoder_using_case.binary_out), line:12:14, endln:12:24
+                    \_LogicNet: (work@encoder_using_case.binary_out), line:8:1, endln:8:11
               |vpiCaseItem:
               \_CaseItem: , line:36:7, endln:36:34
                 |vpiParent:
@@ -18929,7 +19067,7 @@ Design: (unnamed)
                     |vpiName:binary_out
                     |vpiFullName:work@encoder_using_case.binary_out
                     |vpiActual:
-                    \_LogicNet: (work@encoder_using_case.binary_out), line:12:14, endln:12:24
+                    \_LogicNet: (work@encoder_using_case.binary_out), line:8:1, endln:8:11
               |vpiCaseItem:
               \_CaseItem: , line:37:7, endln:37:34
                 |vpiParent:
@@ -18963,7 +19101,7 @@ Design: (unnamed)
                     |vpiName:binary_out
                     |vpiFullName:work@encoder_using_case.binary_out
                     |vpiActual:
-                    \_LogicNet: (work@encoder_using_case.binary_out), line:12:14, endln:12:24
+                    \_LogicNet: (work@encoder_using_case.binary_out), line:8:1, endln:8:11
               |vpiCaseItem:
               \_CaseItem: , line:38:7, endln:38:34
                 |vpiParent:
@@ -18997,7 +19135,7 @@ Design: (unnamed)
                     |vpiName:binary_out
                     |vpiFullName:work@encoder_using_case.binary_out
                     |vpiActual:
-                    \_LogicNet: (work@encoder_using_case.binary_out), line:12:14, endln:12:24
+                    \_LogicNet: (work@encoder_using_case.binary_out), line:8:1, endln:8:11
     |vpiAlwaysType:1
 |vpiAllModules:
 \_Module: work@full_adder_gates (work@full_adder_gates), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/full_adder.v, line:7:1, endln:18:10
@@ -19021,31 +19159,31 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@full_adder_gates (work@full_adder_gates), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/full_adder.v, line:7:1, endln:18:10
   |vpiImportTypespec:
-  \_LogicNet: (work@full_adder_gates.x), line:8:7, endln:8:8
+  \_LogicNet: (work@full_adder_gates.x), line:7:25, endln:7:26
     |vpiParent:
     \_Module: work@full_adder_gates (work@full_adder_gates), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/full_adder.v, line:7:1, endln:18:10
     |vpiName:x
     |vpiFullName:work@full_adder_gates.x
   |vpiImportTypespec:
-  \_LogicNet: (work@full_adder_gates.y), line:8:9, endln:8:10
+  \_LogicNet: (work@full_adder_gates.y), line:7:27, endln:7:28
     |vpiParent:
     \_Module: work@full_adder_gates (work@full_adder_gates), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/full_adder.v, line:7:1, endln:18:10
     |vpiName:y
     |vpiFullName:work@full_adder_gates.y
   |vpiImportTypespec:
-  \_LogicNet: (work@full_adder_gates.z), line:8:11, endln:8:12
+  \_LogicNet: (work@full_adder_gates.z), line:7:29, endln:7:30
     |vpiParent:
     \_Module: work@full_adder_gates (work@full_adder_gates), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/full_adder.v, line:7:1, endln:18:10
     |vpiName:z
     |vpiFullName:work@full_adder_gates.z
   |vpiImportTypespec:
-  \_LogicNet: (work@full_adder_gates.sum), line:9:8, endln:9:11
+  \_LogicNet: (work@full_adder_gates.sum), line:7:31, endln:7:34
     |vpiParent:
     \_Module: work@full_adder_gates (work@full_adder_gates), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/full_adder.v, line:7:1, endln:18:10
     |vpiName:sum
     |vpiFullName:work@full_adder_gates.sum
   |vpiImportTypespec:
-  \_LogicNet: (work@full_adder_gates.carry), line:9:12, endln:9:17
+  \_LogicNet: (work@full_adder_gates.carry), line:7:35, endln:7:40
     |vpiParent:
     \_Module: work@full_adder_gates (work@full_adder_gates), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/full_adder.v, line:7:1, endln:18:10
     |vpiName:carry
@@ -19116,15 +19254,15 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@full_adder_gates
   |vpiNet:
-  \_LogicNet: (work@full_adder_gates.x), line:8:7, endln:8:8
+  \_LogicNet: (work@full_adder_gates.x), line:7:25, endln:7:26
   |vpiNet:
-  \_LogicNet: (work@full_adder_gates.y), line:8:9, endln:8:10
+  \_LogicNet: (work@full_adder_gates.y), line:7:27, endln:7:28
   |vpiNet:
-  \_LogicNet: (work@full_adder_gates.z), line:8:11, endln:8:12
+  \_LogicNet: (work@full_adder_gates.z), line:7:29, endln:7:30
   |vpiNet:
-  \_LogicNet: (work@full_adder_gates.sum), line:9:8, endln:9:11
+  \_LogicNet: (work@full_adder_gates.sum), line:7:31, endln:7:34
   |vpiNet:
-  \_LogicNet: (work@full_adder_gates.carry), line:9:12, endln:9:17
+  \_LogicNet: (work@full_adder_gates.carry), line:7:35, endln:7:40
   |vpiNet:
   \_LogicNet: (work@full_adder_gates.and1), line:10:6, endln:10:10
   |vpiNet:
@@ -19197,7 +19335,7 @@ Design: (unnamed)
         |vpiName:x
         |vpiFullName:work@full_adder_gates.U_and1.x
         |vpiActual:
-        \_LogicNet: (work@full_adder_gates.x), line:8:7, endln:8:8
+        \_LogicNet: (work@full_adder_gates.x), line:7:25, endln:7:26
     |vpiPrimTerm:
     \_PrimTerm: , line:12:20, endln:12:21
       |vpiParent:
@@ -19211,7 +19349,7 @@ Design: (unnamed)
         |vpiName:y
         |vpiFullName:work@full_adder_gates.U_and1.y
         |vpiActual:
-        \_LogicNet: (work@full_adder_gates.y), line:8:9, endln:8:10
+        \_LogicNet: (work@full_adder_gates.y), line:7:27, endln:7:28
   |vpiPrimitive:
   \_Gate: work@and (work@full_adder_gates.U_and2), line:13:5, endln:13:22
     |vpiParent:
@@ -19246,7 +19384,7 @@ Design: (unnamed)
         |vpiName:x
         |vpiFullName:work@full_adder_gates.U_and2.x
         |vpiActual:
-        \_LogicNet: (work@full_adder_gates.x), line:8:7, endln:8:8
+        \_LogicNet: (work@full_adder_gates.x), line:7:25, endln:7:26
     |vpiPrimTerm:
     \_PrimTerm: , line:13:20, endln:13:21
       |vpiParent:
@@ -19260,7 +19398,7 @@ Design: (unnamed)
         |vpiName:z
         |vpiFullName:work@full_adder_gates.U_and2.z
         |vpiActual:
-        \_LogicNet: (work@full_adder_gates.z), line:8:11, endln:8:12
+        \_LogicNet: (work@full_adder_gates.z), line:7:29, endln:7:30
   |vpiPrimitive:
   \_Gate: work@and (work@full_adder_gates.U_and3), line:14:5, endln:14:22
     |vpiParent:
@@ -19295,7 +19433,7 @@ Design: (unnamed)
         |vpiName:y
         |vpiFullName:work@full_adder_gates.U_and3.y
         |vpiActual:
-        \_LogicNet: (work@full_adder_gates.y), line:8:9, endln:8:10
+        \_LogicNet: (work@full_adder_gates.y), line:7:27, endln:7:28
     |vpiPrimTerm:
     \_PrimTerm: , line:14:20, endln:14:21
       |vpiParent:
@@ -19309,7 +19447,7 @@ Design: (unnamed)
         |vpiName:z
         |vpiFullName:work@full_adder_gates.U_and3.z
         |vpiActual:
-        \_LogicNet: (work@full_adder_gates.z), line:8:11, endln:8:12
+        \_LogicNet: (work@full_adder_gates.z), line:7:29, endln:7:30
   |vpiPrimitive:
   \_Gate: work@or (work@full_adder_gates.U_or), line:15:5, endln:15:34
     |vpiParent:
@@ -19330,7 +19468,7 @@ Design: (unnamed)
         |vpiName:carry
         |vpiFullName:work@full_adder_gates.U_or.carry
         |vpiActual:
-        \_LogicNet: (work@full_adder_gates.carry), line:9:12, endln:9:17
+        \_LogicNet: (work@full_adder_gates.carry), line:7:35, endln:7:40
     |vpiPrimTerm:
     \_PrimTerm: , line:15:19, endln:15:23
       |vpiParent:
@@ -19393,7 +19531,7 @@ Design: (unnamed)
         |vpiName:sum
         |vpiFullName:work@full_adder_gates.U_sum.sum
         |vpiActual:
-        \_LogicNet: (work@full_adder_gates.sum), line:9:8, endln:9:11
+        \_LogicNet: (work@full_adder_gates.sum), line:7:31, endln:7:34
     |vpiPrimTerm:
     \_PrimTerm: , line:16:16, endln:16:17
       |vpiParent:
@@ -19407,7 +19545,7 @@ Design: (unnamed)
         |vpiName:x
         |vpiFullName:work@full_adder_gates.U_sum.x
         |vpiActual:
-        \_LogicNet: (work@full_adder_gates.x), line:8:7, endln:8:8
+        \_LogicNet: (work@full_adder_gates.x), line:7:25, endln:7:26
     |vpiPrimTerm:
     \_PrimTerm: , line:16:18, endln:16:19
       |vpiParent:
@@ -19421,7 +19559,7 @@ Design: (unnamed)
         |vpiName:y
         |vpiFullName:work@full_adder_gates.U_sum.y
         |vpiActual:
-        \_LogicNet: (work@full_adder_gates.y), line:8:9, endln:8:10
+        \_LogicNet: (work@full_adder_gates.y), line:7:27, endln:7:28
     |vpiPrimTerm:
     \_PrimTerm: , line:16:20, endln:16:21
       |vpiParent:
@@ -19435,7 +19573,7 @@ Design: (unnamed)
         |vpiName:z
         |vpiFullName:work@full_adder_gates.U_sum.z
         |vpiActual:
-        \_LogicNet: (work@full_adder_gates.z), line:8:11, endln:8:12
+        \_LogicNet: (work@full_adder_gates.z), line:7:29, endln:7:30
 |vpiAllModules:
 \_Module: work@mux21_switch (work@mux21_switch), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/mux21.v, line:7:1, endln:22:10
   |vpiParent:
@@ -19454,25 +19592,25 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@mux21_switch (work@mux21_switch), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/mux21.v, line:7:1, endln:22:10
   |vpiImportTypespec:
-  \_LogicNet: (work@mux21_switch.out), line:9:11, endln:9:14
+  \_LogicNet: (work@mux21_switch.out), line:7:22, endln:7:25
     |vpiParent:
     \_Module: work@mux21_switch (work@mux21_switch), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/mux21.v, line:7:1, endln:22:10
     |vpiName:out
     |vpiFullName:work@mux21_switch.out
   |vpiImportTypespec:
-  \_LogicNet: (work@mux21_switch.ctrl), line:10:11, endln:10:15
+  \_LogicNet: (work@mux21_switch.ctrl), line:7:27, endln:7:31
     |vpiParent:
     \_Module: work@mux21_switch (work@mux21_switch), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/mux21.v, line:7:1, endln:22:10
     |vpiName:ctrl
     |vpiFullName:work@mux21_switch.ctrl
   |vpiImportTypespec:
-  \_LogicNet: (work@mux21_switch.in1), line:10:17, endln:10:20
+  \_LogicNet: (work@mux21_switch.in1), line:7:33, endln:7:36
     |vpiParent:
     \_Module: work@mux21_switch (work@mux21_switch), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/mux21.v, line:7:1, endln:22:10
     |vpiName:in1
     |vpiFullName:work@mux21_switch.in1
   |vpiImportTypespec:
-  \_LogicNet: (work@mux21_switch.in2), line:10:22, endln:10:25
+  \_LogicNet: (work@mux21_switch.in2), line:7:38, endln:7:41
     |vpiParent:
     \_Module: work@mux21_switch (work@mux21_switch), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/mux21.v, line:7:1, endln:22:10
     |vpiName:in2
@@ -19527,13 +19665,13 @@ Design: (unnamed)
     |vpiNetType:11
   |vpiDefName:work@mux21_switch
   |vpiNet:
-  \_LogicNet: (work@mux21_switch.out), line:9:11, endln:9:14
+  \_LogicNet: (work@mux21_switch.out), line:7:22, endln:7:25
   |vpiNet:
-  \_LogicNet: (work@mux21_switch.ctrl), line:10:11, endln:10:15
+  \_LogicNet: (work@mux21_switch.ctrl), line:7:27, endln:7:31
   |vpiNet:
-  \_LogicNet: (work@mux21_switch.in1), line:10:17, endln:10:20
+  \_LogicNet: (work@mux21_switch.in1), line:7:33, endln:7:36
   |vpiNet:
-  \_LogicNet: (work@mux21_switch.in2), line:10:22, endln:10:25
+  \_LogicNet: (work@mux21_switch.in2), line:7:38, endln:7:41
   |vpiNet:
   \_LogicNet: (work@mux21_switch.e), line:11:18, endln:11:19
   |vpiNet:
@@ -19570,38 +19708,38 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:work@pri_encooder
   |vpiImportTypespec:
-  \_LogicNet: (work@pri_encooder.Op), line:50:13, endln:50:15
+  \_LogicNet: (work@pri_encooder.Op), line:49:22, endln:49:24
     |vpiParent:
     \_Module: work@pri_encooder (work@pri_encooder), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/m_input_mult.v, line:49:1, endln:73:10
     |vpiName:Op
     |vpiFullName:work@pri_encooder.Op
   |vpiImportTypespec:
-  \_LogicNet: (work@pri_encooder.Funct), line:51:13, endln:51:18
+  \_LogicNet: (work@pri_encooder.Funct), line:49:26, endln:49:31
     |vpiParent:
     \_Module: work@pri_encooder (work@pri_encooder), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/m_input_mult.v, line:49:1, endln:73:10
     |vpiName:Funct
     |vpiFullName:work@pri_encooder.Funct
   |vpiImportTypespec:
-  \_LogicNet: (work@pri_encooder.Sel), line:52:14, endln:52:17
+  \_LogicNet: (work@pri_encooder.Sel), line:49:33, endln:49:36
     |vpiParent:
     \_Module: work@pri_encooder (work@pri_encooder), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/m_input_mult.v, line:49:1, endln:73:10
     |vpiName:Sel
     |vpiFullName:work@pri_encooder.Sel
   |vpiImportTypespec:
-  \_LogicNet: (work@pri_encooder.B), line:53:8, endln:53:9
+  \_LogicNet: (work@pri_encooder.B), line:49:38, endln:49:39
     |vpiParent:
     \_Module: work@pri_encooder (work@pri_encooder), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/m_input_mult.v, line:49:1, endln:73:10
     |vpiName:B
     |vpiFullName:work@pri_encooder.B
   |vpiDefName:work@pri_encooder
   |vpiNet:
-  \_LogicNet: (work@pri_encooder.Op), line:50:13, endln:50:15
+  \_LogicNet: (work@pri_encooder.Op), line:49:22, endln:49:24
   |vpiNet:
-  \_LogicNet: (work@pri_encooder.Funct), line:51:13, endln:51:18
+  \_LogicNet: (work@pri_encooder.Funct), line:49:26, endln:49:31
   |vpiNet:
-  \_LogicNet: (work@pri_encooder.Sel), line:52:14, endln:52:17
+  \_LogicNet: (work@pri_encooder.Sel), line:49:33, endln:49:36
   |vpiNet:
-  \_LogicNet: (work@pri_encooder.B), line:53:8, endln:53:9
+  \_LogicNet: (work@pri_encooder.B), line:49:38, endln:49:39
   |vpiPort:
   \_Port: (Op), line:49:22, endln:49:24
     |vpiParent:
@@ -19646,7 +19784,7 @@ Design: (unnamed)
           |vpiName:Op
           |vpiFullName:work@pri_encooder.Op
           |vpiActual:
-          \_LogicNet: (work@pri_encooder.Op), line:50:13, endln:50:15
+          \_LogicNet: (work@pri_encooder.Op), line:49:22, endln:49:24
         |vpiOperand:
         \_RefObj: (work@pri_encooder.Funct), line:54:15, endln:54:20
           |vpiParent:
@@ -19654,7 +19792,7 @@ Design: (unnamed)
           |vpiName:Funct
           |vpiFullName:work@pri_encooder.Funct
           |vpiActual:
-          \_LogicNet: (work@pri_encooder.Funct), line:51:13, endln:51:18
+          \_LogicNet: (work@pri_encooder.Funct), line:49:26, endln:49:31
       |vpiStmt:
       \_CaseStmt: , line:55:2, endln:72:9
         |vpiParent:
@@ -19672,7 +19810,7 @@ Design: (unnamed)
             |vpiName:Op
             |vpiFullName:work@pri_encooder.Op
             |vpiActual:
-            \_LogicNet: (work@pri_encooder.Op), line:50:13, endln:50:15
+            \_LogicNet: (work@pri_encooder.Op), line:49:22, endln:49:24
           |vpiOperand:
           \_RefObj: (work@pri_encooder.Funct), line:55:14, endln:55:19
             |vpiParent:
@@ -19680,7 +19818,7 @@ Design: (unnamed)
             |vpiName:Funct
             |vpiFullName:work@pri_encooder.Funct
             |vpiActual:
-            \_LogicNet: (work@pri_encooder.Funct), line:51:13, endln:51:18
+            \_LogicNet: (work@pri_encooder.Funct), line:49:26, endln:49:31
         |vpiCaseItem:
         \_CaseItem: , line:56:2, endln:59:5
           |vpiParent:
@@ -19732,7 +19870,7 @@ Design: (unnamed)
                 |vpiName:Sel
                 |vpiFullName:work@pri_encooder.Sel
                 |vpiActual:
-                \_LogicNet: (work@pri_encooder.Sel), line:52:14, endln:52:17
+                \_LogicNet: (work@pri_encooder.Sel), line:49:33, endln:49:36
             |vpiStmt:
             \_Assignment: , line:58:2, endln:58:10
               |vpiParent:
@@ -19754,7 +19892,7 @@ Design: (unnamed)
                 |vpiName:B
                 |vpiFullName:work@pri_encooder.B
                 |vpiActual:
-                \_LogicNet: (work@pri_encooder.B), line:53:8, endln:53:9
+                \_LogicNet: (work@pri_encooder.B), line:49:38, endln:49:39
         |vpiCaseItem:
         \_CaseItem: , line:60:2, endln:63:5
           |vpiParent:
@@ -19806,7 +19944,7 @@ Design: (unnamed)
                 |vpiName:Sel
                 |vpiFullName:work@pri_encooder.Sel
                 |vpiActual:
-                \_LogicNet: (work@pri_encooder.Sel), line:52:14, endln:52:17
+                \_LogicNet: (work@pri_encooder.Sel), line:49:33, endln:49:36
             |vpiStmt:
             \_Assignment: , line:62:2, endln:62:10
               |vpiParent:
@@ -19828,7 +19966,7 @@ Design: (unnamed)
                 |vpiName:B
                 |vpiFullName:work@pri_encooder.B
                 |vpiActual:
-                \_LogicNet: (work@pri_encooder.B), line:53:8, endln:53:9
+                \_LogicNet: (work@pri_encooder.B), line:49:38, endln:49:39
         |vpiCaseItem:
         \_CaseItem: , line:64:2, endln:67:5
           |vpiParent:
@@ -19880,7 +20018,7 @@ Design: (unnamed)
                 |vpiName:Sel
                 |vpiFullName:work@pri_encooder.Sel
                 |vpiActual:
-                \_LogicNet: (work@pri_encooder.Sel), line:52:14, endln:52:17
+                \_LogicNet: (work@pri_encooder.Sel), line:49:33, endln:49:36
             |vpiStmt:
             \_Assignment: , line:66:2, endln:66:10
               |vpiParent:
@@ -19902,7 +20040,7 @@ Design: (unnamed)
                 |vpiName:B
                 |vpiFullName:work@pri_encooder.B
                 |vpiActual:
-                \_LogicNet: (work@pri_encooder.B), line:53:8, endln:53:9
+                \_LogicNet: (work@pri_encooder.B), line:49:38, endln:49:39
         |vpiCaseItem:
         \_CaseItem: , line:68:2, endln:71:5
           |vpiParent:
@@ -19933,7 +20071,7 @@ Design: (unnamed)
                 |vpiName:Sel
                 |vpiFullName:work@pri_encooder.Sel
                 |vpiActual:
-                \_LogicNet: (work@pri_encooder.Sel), line:52:14, endln:52:17
+                \_LogicNet: (work@pri_encooder.Sel), line:49:33, endln:49:36
             |vpiStmt:
             \_Assignment: , line:70:2, endln:70:10
               |vpiParent:
@@ -19955,7 +20093,7 @@ Design: (unnamed)
                 |vpiName:B
                 |vpiFullName:work@pri_encooder.B
                 |vpiActual:
-                \_LogicNet: (work@pri_encooder.B), line:53:8, endln:53:9
+                \_LogicNet: (work@pri_encooder.B), line:49:38, endln:49:39
     |vpiAlwaysType:1
 |vpiAllModules:
 \_Module: work@syn_fifo (work@syn_fifo), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/synfifo.v, line:8:1, endln:104:10
@@ -20217,61 +20355,61 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ModuleTypespec: (ram_dp_ar_aw), line:91:1, endln:91:13
   |vpiImportTypespec:
-  \_LogicNet: (work@syn_fifo.clk), line:26:7, endln:26:10
+  \_LogicNet: (work@syn_fifo.clk), line:9:1, endln:9:4
     |vpiParent:
     \_Module: work@syn_fifo (work@syn_fifo), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/synfifo.v, line:8:1, endln:104:10
     |vpiName:clk
     |vpiFullName:work@syn_fifo.clk
   |vpiImportTypespec:
-  \_LogicNet: (work@syn_fifo.rst), line:27:7, endln:27:10
+  \_LogicNet: (work@syn_fifo.rst), line:10:1, endln:10:4
     |vpiParent:
     \_Module: work@syn_fifo (work@syn_fifo), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/synfifo.v, line:8:1, endln:104:10
     |vpiName:rst
     |vpiFullName:work@syn_fifo.rst
   |vpiImportTypespec:
-  \_LogicNet: (work@syn_fifo.wr_cs), line:28:7, endln:28:12
+  \_LogicNet: (work@syn_fifo.wr_cs), line:11:1, endln:11:6
     |vpiParent:
     \_Module: work@syn_fifo (work@syn_fifo), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/synfifo.v, line:8:1, endln:104:10
     |vpiName:wr_cs
     |vpiFullName:work@syn_fifo.wr_cs
   |vpiImportTypespec:
-  \_LogicNet: (work@syn_fifo.rd_cs), line:29:7, endln:29:12
+  \_LogicNet: (work@syn_fifo.rd_cs), line:12:1, endln:12:6
     |vpiParent:
     \_Module: work@syn_fifo (work@syn_fifo), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/synfifo.v, line:8:1, endln:104:10
     |vpiName:rd_cs
     |vpiFullName:work@syn_fifo.rd_cs
   |vpiImportTypespec:
-  \_LogicNet: (work@syn_fifo.rd_en), line:30:7, endln:30:12
+  \_LogicNet: (work@syn_fifo.rd_en), line:14:1, endln:14:6
     |vpiParent:
     \_Module: work@syn_fifo (work@syn_fifo), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/synfifo.v, line:8:1, endln:104:10
     |vpiName:rd_en
     |vpiFullName:work@syn_fifo.rd_en
   |vpiImportTypespec:
-  \_LogicNet: (work@syn_fifo.wr_en), line:31:7, endln:31:12
+  \_LogicNet: (work@syn_fifo.wr_en), line:15:1, endln:15:6
     |vpiParent:
     \_Module: work@syn_fifo (work@syn_fifo), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/synfifo.v, line:8:1, endln:104:10
     |vpiName:wr_en
     |vpiFullName:work@syn_fifo.wr_en
   |vpiImportTypespec:
-  \_LogicNet: (work@syn_fifo.data_in), line:32:24, endln:32:31
+  \_LogicNet: (work@syn_fifo.data_in), line:13:1, endln:13:8
     |vpiParent:
     \_Module: work@syn_fifo (work@syn_fifo), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/synfifo.v, line:8:1, endln:104:10
     |vpiName:data_in
     |vpiFullName:work@syn_fifo.data_in
   |vpiImportTypespec:
-  \_LogicNet: (work@syn_fifo.full), line:33:8, endln:33:12
+  \_LogicNet: (work@syn_fifo.full), line:18:1, endln:18:5
     |vpiParent:
     \_Module: work@syn_fifo (work@syn_fifo), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/synfifo.v, line:8:1, endln:104:10
     |vpiName:full
     |vpiFullName:work@syn_fifo.full
   |vpiImportTypespec:
-  \_LogicNet: (work@syn_fifo.empty), line:34:8, endln:34:13
+  \_LogicNet: (work@syn_fifo.empty), line:17:1, endln:17:6
     |vpiParent:
     \_Module: work@syn_fifo (work@syn_fifo), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/synfifo.v, line:8:1, endln:104:10
     |vpiName:empty
     |vpiFullName:work@syn_fifo.empty
   |vpiImportTypespec:
-  \_LogicNet: (work@syn_fifo.data_out), line:35:25, endln:35:33
+  \_LogicNet: (work@syn_fifo.data_out), line:16:1, endln:16:9
     |vpiParent:
     \_Module: work@syn_fifo (work@syn_fifo), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/synfifo.v, line:8:1, endln:104:10
     |vpiName:data_out
@@ -20348,7 +20486,7 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@syn_fifo (work@syn_fifo), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/synfifo.v, line:8:1, endln:104:10
     |vpiTypespec:
-    \_RefTypespec: (work@syn_fifo.data_ram), line:42:1, endln:42:22
+    \_RefTypespec: (work@syn_fifo.data_ram), line:42:1, endln:42:5
       |vpiParent:
       \_LogicNet: (work@syn_fifo.data_ram), line:42:23, endln:42:31
       |vpiFullName:work@syn_fifo.data_ram
@@ -20359,25 +20497,25 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@syn_fifo
   |vpiNet:
-  \_LogicNet: (work@syn_fifo.clk), line:26:7, endln:26:10
+  \_LogicNet: (work@syn_fifo.clk), line:9:1, endln:9:4
   |vpiNet:
-  \_LogicNet: (work@syn_fifo.rst), line:27:7, endln:27:10
+  \_LogicNet: (work@syn_fifo.rst), line:10:1, endln:10:4
   |vpiNet:
-  \_LogicNet: (work@syn_fifo.wr_cs), line:28:7, endln:28:12
+  \_LogicNet: (work@syn_fifo.wr_cs), line:11:1, endln:11:6
   |vpiNet:
-  \_LogicNet: (work@syn_fifo.rd_cs), line:29:7, endln:29:12
+  \_LogicNet: (work@syn_fifo.rd_cs), line:12:1, endln:12:6
   |vpiNet:
-  \_LogicNet: (work@syn_fifo.rd_en), line:30:7, endln:30:12
+  \_LogicNet: (work@syn_fifo.rd_en), line:14:1, endln:14:6
   |vpiNet:
-  \_LogicNet: (work@syn_fifo.wr_en), line:31:7, endln:31:12
+  \_LogicNet: (work@syn_fifo.wr_en), line:15:1, endln:15:6
   |vpiNet:
-  \_LogicNet: (work@syn_fifo.data_in), line:32:24, endln:32:31
+  \_LogicNet: (work@syn_fifo.data_in), line:13:1, endln:13:8
   |vpiNet:
-  \_LogicNet: (work@syn_fifo.full), line:33:8, endln:33:12
+  \_LogicNet: (work@syn_fifo.full), line:18:1, endln:18:5
   |vpiNet:
-  \_LogicNet: (work@syn_fifo.empty), line:34:8, endln:34:13
+  \_LogicNet: (work@syn_fifo.empty), line:17:1, endln:17:6
   |vpiNet:
-  \_LogicNet: (work@syn_fifo.data_out), line:35:25, endln:35:33
+  \_LogicNet: (work@syn_fifo.data_out), line:16:1, endln:16:9
   |vpiNet:
   \_LogicNet: (work@syn_fifo.wr_pointer), line:38:22, endln:38:32
   |vpiNet:
@@ -20473,7 +20611,7 @@ Design: (unnamed)
             |vpiName:clk
             |vpiFullName:work@syn_fifo.clk
             |vpiActual:
-            \_LogicNet: (work@syn_fifo.clk), line:26:7, endln:26:10
+            \_LogicNet: (work@syn_fifo.clk), line:9:1, endln:9:4
         |vpiOperand:
         \_Operation: , line:49:26, endln:49:37
           |vpiParent:
@@ -20486,7 +20624,7 @@ Design: (unnamed)
             |vpiName:rst
             |vpiFullName:work@syn_fifo.rst
             |vpiActual:
-            \_LogicNet: (work@syn_fifo.rst), line:27:7, endln:27:10
+            \_LogicNet: (work@syn_fifo.rst), line:10:1, endln:10:4
       |vpiStmt:
       \_Begin: (work@syn_fifo.WRITE_POINTER), line:50:1, endln:56:4
         |vpiParent:
@@ -20504,7 +20642,7 @@ Design: (unnamed)
             |vpiName:rst
             |vpiFullName:work@syn_fifo.WRITE_POINTER.rst
             |vpiActual:
-            \_LogicNet: (work@syn_fifo.rst), line:27:7, endln:27:10
+            \_LogicNet: (work@syn_fifo.rst), line:10:1, endln:10:4
           |vpiStmt:
           \_Begin: (work@syn_fifo.WRITE_POINTER), line:51:12, endln:53:6
             |vpiParent:
@@ -20547,7 +20685,7 @@ Design: (unnamed)
                 |vpiName:wr_cs
                 |vpiFullName:work@syn_fifo.WRITE_POINTER.wr_cs
                 |vpiActual:
-                \_LogicNet: (work@syn_fifo.wr_cs), line:28:7, endln:28:12
+                \_LogicNet: (work@syn_fifo.wr_cs), line:11:1, endln:11:6
               |vpiOperand:
               \_RefObj: (work@syn_fifo.WRITE_POINTER.wr_en), line:53:25, endln:53:30
                 |vpiParent:
@@ -20555,7 +20693,7 @@ Design: (unnamed)
                 |vpiName:wr_en
                 |vpiFullName:work@syn_fifo.WRITE_POINTER.wr_en
                 |vpiActual:
-                \_LogicNet: (work@syn_fifo.wr_en), line:31:7, endln:31:12
+                \_LogicNet: (work@syn_fifo.wr_en), line:15:1, endln:15:6
             |vpiStmt:
             \_Begin: (work@syn_fifo.WRITE_POINTER), line:53:33, endln:55:6
               |vpiParent:
@@ -20621,7 +20759,7 @@ Design: (unnamed)
             |vpiName:clk
             |vpiFullName:work@syn_fifo.clk
             |vpiActual:
-            \_LogicNet: (work@syn_fifo.clk), line:26:7, endln:26:10
+            \_LogicNet: (work@syn_fifo.clk), line:9:1, endln:9:4
         |vpiOperand:
         \_Operation: , line:58:26, endln:58:37
           |vpiParent:
@@ -20634,7 +20772,7 @@ Design: (unnamed)
             |vpiName:rst
             |vpiFullName:work@syn_fifo.rst
             |vpiActual:
-            \_LogicNet: (work@syn_fifo.rst), line:27:7, endln:27:10
+            \_LogicNet: (work@syn_fifo.rst), line:10:1, endln:10:4
       |vpiStmt:
       \_Begin: (work@syn_fifo.READ_POINTER), line:59:1, endln:65:4
         |vpiParent:
@@ -20652,7 +20790,7 @@ Design: (unnamed)
             |vpiName:rst
             |vpiFullName:work@syn_fifo.READ_POINTER.rst
             |vpiActual:
-            \_LogicNet: (work@syn_fifo.rst), line:27:7, endln:27:10
+            \_LogicNet: (work@syn_fifo.rst), line:10:1, endln:10:4
           |vpiStmt:
           \_Begin: (work@syn_fifo.READ_POINTER), line:60:12, endln:62:6
             |vpiParent:
@@ -20695,7 +20833,7 @@ Design: (unnamed)
                 |vpiName:rd_cs
                 |vpiFullName:work@syn_fifo.READ_POINTER.rd_cs
                 |vpiActual:
-                \_LogicNet: (work@syn_fifo.rd_cs), line:29:7, endln:29:12
+                \_LogicNet: (work@syn_fifo.rd_cs), line:12:1, endln:12:6
               |vpiOperand:
               \_RefObj: (work@syn_fifo.READ_POINTER.rd_en), line:62:25, endln:62:30
                 |vpiParent:
@@ -20703,7 +20841,7 @@ Design: (unnamed)
                 |vpiName:rd_en
                 |vpiFullName:work@syn_fifo.READ_POINTER.rd_en
                 |vpiActual:
-                \_LogicNet: (work@syn_fifo.rd_en), line:30:7, endln:30:12
+                \_LogicNet: (work@syn_fifo.rd_en), line:14:1, endln:14:6
             |vpiStmt:
             \_Begin: (work@syn_fifo.READ_POINTER), line:62:33, endln:64:6
               |vpiParent:
@@ -20769,7 +20907,7 @@ Design: (unnamed)
             |vpiName:clk
             |vpiFullName:work@syn_fifo.clk
             |vpiActual:
-            \_LogicNet: (work@syn_fifo.clk), line:26:7, endln:26:10
+            \_LogicNet: (work@syn_fifo.clk), line:9:1, endln:9:4
         |vpiOperand:
         \_Operation: , line:67:27, endln:67:38
           |vpiParent:
@@ -20782,7 +20920,7 @@ Design: (unnamed)
             |vpiName:rst
             |vpiFullName:work@syn_fifo.rst
             |vpiActual:
-            \_LogicNet: (work@syn_fifo.rst), line:27:7, endln:27:10
+            \_LogicNet: (work@syn_fifo.rst), line:10:1, endln:10:4
       |vpiStmt:
       \_Begin: (work@syn_fifo.READ_DATA), line:68:1, endln:74:4
         |vpiParent:
@@ -20800,7 +20938,7 @@ Design: (unnamed)
             |vpiName:rst
             |vpiFullName:work@syn_fifo.READ_DATA.rst
             |vpiActual:
-            \_LogicNet: (work@syn_fifo.rst), line:27:7, endln:27:10
+            \_LogicNet: (work@syn_fifo.rst), line:10:1, endln:10:4
           |vpiStmt:
           \_Begin: (work@syn_fifo.READ_DATA), line:69:12, endln:71:6
             |vpiParent:
@@ -20826,7 +20964,7 @@ Design: (unnamed)
                 |vpiName:data_out
                 |vpiFullName:work@syn_fifo.READ_DATA.data_out
                 |vpiActual:
-                \_LogicNet: (work@syn_fifo.data_out), line:35:25, endln:35:33
+                \_LogicNet: (work@syn_fifo.data_out), line:16:1, endln:16:9
           |vpiElseStmt:
           \_IfStmt: , line:71:12, endln:73:6
             |vpiParent:
@@ -20843,7 +20981,7 @@ Design: (unnamed)
                 |vpiName:rd_cs
                 |vpiFullName:work@syn_fifo.READ_DATA.rd_cs
                 |vpiActual:
-                \_LogicNet: (work@syn_fifo.rd_cs), line:29:7, endln:29:12
+                \_LogicNet: (work@syn_fifo.rd_cs), line:12:1, endln:12:6
               |vpiOperand:
               \_RefObj: (work@syn_fifo.READ_DATA.rd_en), line:71:25, endln:71:30
                 |vpiParent:
@@ -20851,7 +20989,7 @@ Design: (unnamed)
                 |vpiName:rd_en
                 |vpiFullName:work@syn_fifo.READ_DATA.rd_en
                 |vpiActual:
-                \_LogicNet: (work@syn_fifo.rd_en), line:30:7, endln:30:12
+                \_LogicNet: (work@syn_fifo.rd_en), line:14:1, endln:14:6
             |vpiStmt:
             \_Begin: (work@syn_fifo.READ_DATA), line:71:33, endln:73:6
               |vpiParent:
@@ -20877,7 +21015,7 @@ Design: (unnamed)
                   |vpiName:data_out
                   |vpiFullName:work@syn_fifo.READ_DATA.data_out
                   |vpiActual:
-                  \_LogicNet: (work@syn_fifo.data_out), line:35:25, endln:35:33
+                  \_LogicNet: (work@syn_fifo.data_out), line:16:1, endln:16:9
     |vpiAlwaysType:1
   |vpiProcess:
   \_Always: , line:76:1, endln:89:4
@@ -20904,7 +21042,7 @@ Design: (unnamed)
             |vpiName:clk
             |vpiFullName:work@syn_fifo.clk
             |vpiActual:
-            \_LogicNet: (work@syn_fifo.clk), line:26:7, endln:26:10
+            \_LogicNet: (work@syn_fifo.clk), line:9:1, endln:9:4
         |vpiOperand:
         \_Operation: , line:76:26, endln:76:37
           |vpiParent:
@@ -20917,7 +21055,7 @@ Design: (unnamed)
             |vpiName:rst
             |vpiFullName:work@syn_fifo.rst
             |vpiActual:
-            \_LogicNet: (work@syn_fifo.rst), line:27:7, endln:27:10
+            \_LogicNet: (work@syn_fifo.rst), line:10:1, endln:10:4
       |vpiStmt:
       \_Begin: (work@syn_fifo.STATUS_COUNTER), line:77:1, endln:89:4
         |vpiParent:
@@ -20935,7 +21073,7 @@ Design: (unnamed)
             |vpiName:rst
             |vpiFullName:work@syn_fifo.STATUS_COUNTER.rst
             |vpiActual:
-            \_LogicNet: (work@syn_fifo.rst), line:27:7, endln:27:10
+            \_LogicNet: (work@syn_fifo.rst), line:10:1, endln:10:4
           |vpiStmt:
           \_Begin: (work@syn_fifo.STATUS_COUNTER), line:78:12, endln:81:6
             |vpiParent:
@@ -20988,7 +21126,7 @@ Design: (unnamed)
                     |vpiName:rd_cs
                     |vpiFullName:work@syn_fifo.STATUS_COUNTER.rd_cs
                     |vpiActual:
-                    \_LogicNet: (work@syn_fifo.rd_cs), line:29:7, endln:29:12
+                    \_LogicNet: (work@syn_fifo.rd_cs), line:12:1, endln:12:6
                   |vpiOperand:
                   \_RefObj: (work@syn_fifo.STATUS_COUNTER.rd_en), line:81:26, endln:81:31
                     |vpiParent:
@@ -20996,7 +21134,7 @@ Design: (unnamed)
                     |vpiName:rd_en
                     |vpiFullName:work@syn_fifo.STATUS_COUNTER.rd_en
                     |vpiActual:
-                    \_LogicNet: (work@syn_fifo.rd_en), line:30:7, endln:30:12
+                    \_LogicNet: (work@syn_fifo.rd_en), line:14:1, endln:14:6
                 |vpiOperand:
                 \_Operation: , line:81:36, endln:81:53
                   |vpiParent:
@@ -21014,7 +21152,7 @@ Design: (unnamed)
                       |vpiName:wr_cs
                       |vpiFullName:work@syn_fifo.STATUS_COUNTER.wr_cs
                       |vpiActual:
-                      \_LogicNet: (work@syn_fifo.wr_cs), line:28:7, endln:28:12
+                      \_LogicNet: (work@syn_fifo.wr_cs), line:11:1, endln:11:6
                     |vpiOperand:
                     \_RefObj: (work@syn_fifo.STATUS_COUNTER.wr_en), line:81:47, endln:81:52
                       |vpiParent:
@@ -21022,7 +21160,7 @@ Design: (unnamed)
                       |vpiName:wr_en
                       |vpiFullName:work@syn_fifo.STATUS_COUNTER.wr_en
                       |vpiActual:
-                      \_LogicNet: (work@syn_fifo.wr_en), line:31:7, endln:31:12
+                      \_LogicNet: (work@syn_fifo.wr_en), line:15:1, endln:15:6
               |vpiOperand:
               \_Operation: , line:82:21, endln:82:36
                 |vpiParent:
@@ -21109,7 +21247,7 @@ Design: (unnamed)
                       |vpiName:wr_cs
                       |vpiFullName:work@syn_fifo.STATUS_COUNTER.wr_cs
                       |vpiActual:
-                      \_LogicNet: (work@syn_fifo.wr_cs), line:28:7, endln:28:12
+                      \_LogicNet: (work@syn_fifo.wr_cs), line:11:1, endln:11:6
                     |vpiOperand:
                     \_RefObj: (work@syn_fifo.STATUS_COUNTER.wr_en), line:85:26, endln:85:31
                       |vpiParent:
@@ -21117,7 +21255,7 @@ Design: (unnamed)
                       |vpiName:wr_en
                       |vpiFullName:work@syn_fifo.STATUS_COUNTER.wr_en
                       |vpiActual:
-                      \_LogicNet: (work@syn_fifo.wr_en), line:31:7, endln:31:12
+                      \_LogicNet: (work@syn_fifo.wr_en), line:15:1, endln:15:6
                   |vpiOperand:
                   \_Operation: , line:85:36, endln:85:53
                     |vpiParent:
@@ -21135,7 +21273,7 @@ Design: (unnamed)
                         |vpiName:rd_cs
                         |vpiFullName:work@syn_fifo.STATUS_COUNTER.rd_cs
                         |vpiActual:
-                        \_LogicNet: (work@syn_fifo.rd_cs), line:29:7, endln:29:12
+                        \_LogicNet: (work@syn_fifo.rd_cs), line:12:1, endln:12:6
                       |vpiOperand:
                       \_RefObj: (work@syn_fifo.STATUS_COUNTER.rd_en), line:85:47, endln:85:52
                         |vpiParent:
@@ -21143,7 +21281,7 @@ Design: (unnamed)
                         |vpiName:rd_en
                         |vpiFullName:work@syn_fifo.STATUS_COUNTER.rd_en
                         |vpiActual:
-                        \_LogicNet: (work@syn_fifo.rd_en), line:30:7, endln:30:12
+                        \_LogicNet: (work@syn_fifo.rd_en), line:14:1, endln:14:6
                 |vpiOperand:
                 \_Operation: , line:86:20, endln:86:43
                   |vpiParent:
@@ -21250,7 +21388,7 @@ Design: (unnamed)
       |vpiName:full
       |vpiFullName:work@syn_fifo.full
       |vpiActual:
-      \_LogicNet: (work@syn_fifo.full), line:33:8, endln:33:12
+      \_LogicNet: (work@syn_fifo.full), line:18:1, endln:18:5
   |vpiContAssign:
   \_ContAssign: , line:46:8, endln:46:33
     |vpiParent:
@@ -21283,7 +21421,7 @@ Design: (unnamed)
       |vpiName:empty
       |vpiFullName:work@syn_fifo.empty
       |vpiActual:
-      \_LogicNet: (work@syn_fifo.empty), line:34:8, endln:34:13
+      \_LogicNet: (work@syn_fifo.empty), line:17:1, endln:17:6
   |vpiRefModule:
   \_RefModule: work@ram_dp_ar_aw (DP_RAM), line:91:1, endln:91:13
     |vpiParent:
@@ -21315,7 +21453,7 @@ Design: (unnamed)
         |vpiName:data_in
         |vpiFullName:work@syn_fifo.DP_RAM.data_0.data_in
         |vpiActual:
-        \_LogicNet: (work@syn_fifo.data_in), line:32:24, endln:32:31
+        \_LogicNet: (work@syn_fifo.data_in), line:13:1, endln:13:8
     |vpiPort:
     \_Port: (cs_0), line:94:2, endln:94:6
       |vpiParent:
@@ -21328,7 +21466,7 @@ Design: (unnamed)
         |vpiName:wr_cs
         |vpiFullName:work@syn_fifo.DP_RAM.cs_0.wr_cs
         |vpiActual:
-        \_LogicNet: (work@syn_fifo.wr_cs), line:28:7, endln:28:12
+        \_LogicNet: (work@syn_fifo.wr_cs), line:11:1, endln:11:6
     |vpiPort:
     \_Port: (we_0), line:95:2, endln:95:6
       |vpiParent:
@@ -21341,7 +21479,7 @@ Design: (unnamed)
         |vpiName:wr_en
         |vpiFullName:work@syn_fifo.DP_RAM.we_0.wr_en
         |vpiActual:
-        \_LogicNet: (work@syn_fifo.wr_en), line:31:7, endln:31:12
+        \_LogicNet: (work@syn_fifo.wr_en), line:15:1, endln:15:6
     |vpiPort:
     \_Port: (oe_0), line:96:2, endln:96:6
       |vpiParent:
@@ -21393,7 +21531,7 @@ Design: (unnamed)
         |vpiName:rd_cs
         |vpiFullName:work@syn_fifo.DP_RAM.cs_1.rd_cs
         |vpiActual:
-        \_LogicNet: (work@syn_fifo.rd_cs), line:29:7, endln:29:12
+        \_LogicNet: (work@syn_fifo.rd_cs), line:12:1, endln:12:6
     |vpiPort:
     \_Port: (we_1), line:100:2, endln:100:6
       |vpiParent:
@@ -21419,7 +21557,7 @@ Design: (unnamed)
         |vpiName:rd_en
         |vpiFullName:work@syn_fifo.DP_RAM.oe_1.rd_en
         |vpiActual:
-        \_LogicNet: (work@syn_fifo.rd_en), line:30:7, endln:30:12
+        \_LogicNet: (work@syn_fifo.rd_en), line:14:1, endln:14:6
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/arbiter_tb.v, line:3:1, endln:64:10
   |vpiParent:
@@ -22642,82 +22780,82 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@uart (work@uart), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/uart.v, line:8:1, endln:155:10
   |vpiImportTypespec:
-  \_LogicNet: (work@uart.reset), line:24:14, endln:24:19
+  \_LogicNet: (work@uart.reset), line:9:1, endln:9:6
     |vpiParent:
     \_Module: work@uart (work@uart), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/uart.v, line:8:1, endln:155:10
     |vpiName:reset
     |vpiFullName:work@uart.reset
   |vpiImportTypespec:
-  \_LogicNet: (work@uart.txclk), line:25:14, endln:25:19
+  \_LogicNet: (work@uart.txclk), line:10:1, endln:10:6
     |vpiParent:
     \_Module: work@uart (work@uart), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/uart.v, line:8:1, endln:155:10
     |vpiName:txclk
     |vpiFullName:work@uart.txclk
   |vpiImportTypespec:
-  \_LogicNet: (work@uart.ld_tx_data), line:26:14, endln:26:24
+  \_LogicNet: (work@uart.ld_tx_data), line:11:1, endln:11:11
     |vpiParent:
     \_Module: work@uart (work@uart), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/uart.v, line:8:1, endln:155:10
     |vpiName:ld_tx_data
     |vpiFullName:work@uart.ld_tx_data
   |vpiImportTypespec:
-  \_LogicNet: (work@uart.tx_data), line:27:14, endln:27:21
+  \_LogicNet: (work@uart.tx_data), line:12:1, endln:12:8
     |vpiParent:
     \_Module: work@uart (work@uart), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/uart.v, line:8:1, endln:155:10
     |vpiName:tx_data
     |vpiFullName:work@uart.tx_data
   |vpiImportTypespec:
-  \_LogicNet: (work@uart.tx_enable), line:28:14, endln:28:23
+  \_LogicNet: (work@uart.tx_enable), line:13:1, endln:13:10
     |vpiParent:
     \_Module: work@uart (work@uart), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/uart.v, line:8:1, endln:155:10
     |vpiName:tx_enable
     |vpiFullName:work@uart.tx_enable
   |vpiImportTypespec:
-  \_LogicNet: (work@uart.tx_out), line:29:14, endln:29:20
+  \_LogicNet: (work@uart.tx_out), line:14:1, endln:14:7
     |vpiParent:
     \_Module: work@uart (work@uart), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/uart.v, line:8:1, endln:155:10
     |vpiName:tx_out
     |vpiFullName:work@uart.tx_out
     |vpiNetType:48
   |vpiImportTypespec:
-  \_LogicNet: (work@uart.tx_empty), line:30:14, endln:30:22
+  \_LogicNet: (work@uart.tx_empty), line:15:1, endln:15:9
     |vpiParent:
     \_Module: work@uart (work@uart), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/uart.v, line:8:1, endln:155:10
     |vpiName:tx_empty
     |vpiFullName:work@uart.tx_empty
     |vpiNetType:48
   |vpiImportTypespec:
-  \_LogicNet: (work@uart.rxclk), line:31:14, endln:31:19
+  \_LogicNet: (work@uart.rxclk), line:16:1, endln:16:6
     |vpiParent:
     \_Module: work@uart (work@uart), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/uart.v, line:8:1, endln:155:10
     |vpiName:rxclk
     |vpiFullName:work@uart.rxclk
   |vpiImportTypespec:
-  \_LogicNet: (work@uart.uld_rx_data), line:32:14, endln:32:25
+  \_LogicNet: (work@uart.uld_rx_data), line:17:1, endln:17:12
     |vpiParent:
     \_Module: work@uart (work@uart), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/uart.v, line:8:1, endln:155:10
     |vpiName:uld_rx_data
     |vpiFullName:work@uart.uld_rx_data
   |vpiImportTypespec:
-  \_LogicNet: (work@uart.rx_data), line:33:14, endln:33:21
+  \_LogicNet: (work@uart.rx_data), line:18:1, endln:18:8
     |vpiParent:
     \_Module: work@uart (work@uart), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/uart.v, line:8:1, endln:155:10
     |vpiName:rx_data
     |vpiFullName:work@uart.rx_data
     |vpiNetType:48
   |vpiImportTypespec:
-  \_LogicNet: (work@uart.rx_enable), line:34:14, endln:34:23
+  \_LogicNet: (work@uart.rx_enable), line:19:1, endln:19:10
     |vpiParent:
     \_Module: work@uart (work@uart), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/uart.v, line:8:1, endln:155:10
     |vpiName:rx_enable
     |vpiFullName:work@uart.rx_enable
   |vpiImportTypespec:
-  \_LogicNet: (work@uart.rx_in), line:35:14, endln:35:19
+  \_LogicNet: (work@uart.rx_in), line:20:1, endln:20:6
     |vpiParent:
     \_Module: work@uart (work@uart), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/uart.v, line:8:1, endln:155:10
     |vpiName:rx_in
     |vpiFullName:work@uart.rx_in
   |vpiImportTypespec:
-  \_LogicNet: (work@uart.rx_empty), line:36:14, endln:36:22
+  \_LogicNet: (work@uart.rx_empty), line:21:1, endln:21:9
     |vpiParent:
     \_Module: work@uart (work@uart), file:${SURELOG_DIR}/third_party/tests/SimpleParserTest/uart.v, line:8:1, endln:155:10
     |vpiName:rx_empty
@@ -22965,31 +23103,31 @@ Design: (unnamed)
     |vpiNetType:48
   |vpiDefName:work@uart
   |vpiNet:
-  \_LogicNet: (work@uart.reset), line:24:14, endln:24:19
+  \_LogicNet: (work@uart.reset), line:9:1, endln:9:6
   |vpiNet:
-  \_LogicNet: (work@uart.txclk), line:25:14, endln:25:19
+  \_LogicNet: (work@uart.txclk), line:10:1, endln:10:6
   |vpiNet:
-  \_LogicNet: (work@uart.ld_tx_data), line:26:14, endln:26:24
+  \_LogicNet: (work@uart.ld_tx_data), line:11:1, endln:11:11
   |vpiNet:
-  \_LogicNet: (work@uart.tx_data), line:27:14, endln:27:21
+  \_LogicNet: (work@uart.tx_data), line:12:1, endln:12:8
   |vpiNet:
-  \_LogicNet: (work@uart.tx_enable), line:28:14, endln:28:23
+  \_LogicNet: (work@uart.tx_enable), line:13:1, endln:13:10
   |vpiNet:
-  \_LogicNet: (work@uart.tx_out), line:29:14, endln:29:20
+  \_LogicNet: (work@uart.tx_out), line:14:1, endln:14:7
   |vpiNet:
-  \_LogicNet: (work@uart.tx_empty), line:30:14, endln:30:22
+  \_LogicNet: (work@uart.tx_empty), line:15:1, endln:15:9
   |vpiNet:
-  \_LogicNet: (work@uart.rxclk), line:31:14, endln:31:19
+  \_LogicNet: (work@uart.rxclk), line:16:1, endln:16:6
   |vpiNet:
-  \_LogicNet: (work@uart.uld_rx_data), line:32:14, endln:32:25
+  \_LogicNet: (work@uart.uld_rx_data), line:17:1, endln:17:12
   |vpiNet:
-  \_LogicNet: (work@uart.rx_data), line:33:14, endln:33:21
+  \_LogicNet: (work@uart.rx_data), line:18:1, endln:18:8
   |vpiNet:
-  \_LogicNet: (work@uart.rx_enable), line:34:14, endln:34:23
+  \_LogicNet: (work@uart.rx_enable), line:19:1, endln:19:10
   |vpiNet:
-  \_LogicNet: (work@uart.rx_in), line:35:14, endln:35:19
+  \_LogicNet: (work@uart.rx_in), line:20:1, endln:20:6
   |vpiNet:
-  \_LogicNet: (work@uart.rx_empty), line:36:14, endln:36:22
+  \_LogicNet: (work@uart.rx_empty), line:21:1, endln:21:9
   |vpiNet:
   \_LogicNet: (work@uart.tx_reg), line:39:14, endln:39:20
   |vpiNet:
@@ -23123,7 +23261,7 @@ Design: (unnamed)
             |vpiName:rxclk
             |vpiFullName:work@uart.rxclk
             |vpiActual:
-            \_LogicNet: (work@uart.rxclk), line:31:14, endln:31:19
+            \_LogicNet: (work@uart.rxclk), line:16:1, endln:16:6
         |vpiOperand:
         \_Operation: , line:56:28, endln:56:41
           |vpiParent:
@@ -23136,7 +23274,7 @@ Design: (unnamed)
             |vpiName:reset
             |vpiFullName:work@uart.reset
             |vpiActual:
-            \_LogicNet: (work@uart.reset), line:24:14, endln:24:19
+            \_LogicNet: (work@uart.reset), line:9:1, endln:9:6
       |vpiStmt:
       \_IfElse: , line:57:1, endln:117:4
         |vpiParent:
@@ -23148,7 +23286,7 @@ Design: (unnamed)
           |vpiName:reset
           |vpiFullName:work@uart.reset
           |vpiActual:
-          \_LogicNet: (work@uart.reset), line:24:14, endln:24:19
+          \_LogicNet: (work@uart.reset), line:9:1, endln:9:6
         |vpiStmt:
         \_Begin: (work@uart), line:57:12, endln:68:4
           |vpiParent:
@@ -23195,7 +23333,7 @@ Design: (unnamed)
               |vpiName:rx_data
               |vpiFullName:work@uart.rx_data
               |vpiActual:
-              \_LogicNet: (work@uart.rx_data), line:33:14, endln:33:21
+              \_LogicNet: (work@uart.rx_data), line:18:1, endln:18:8
           |vpiStmt:
           \_Assignment: , line:60:3, endln:60:21
             |vpiParent:
@@ -23300,7 +23438,7 @@ Design: (unnamed)
               |vpiName:rx_empty
               |vpiFullName:work@uart.rx_empty
               |vpiActual:
-              \_LogicNet: (work@uart.rx_empty), line:36:14, endln:36:22
+              \_LogicNet: (work@uart.rx_empty), line:21:1, endln:21:9
           |vpiStmt:
           \_Assignment: , line:65:3, endln:65:21
             |vpiParent:
@@ -23381,7 +23519,7 @@ Design: (unnamed)
               |vpiName:rx_in
               |vpiFullName:work@uart.rx_in
               |vpiActual:
-              \_LogicNet: (work@uart.rx_in), line:35:14, endln:35:19
+              \_LogicNet: (work@uart.rx_in), line:20:1, endln:20:6
             |vpiLhs:
             \_RefObj: (work@uart.rx_d1), line:70:3, endln:70:8
               |vpiParent:
@@ -23422,7 +23560,7 @@ Design: (unnamed)
               |vpiName:uld_rx_data
               |vpiFullName:work@uart.uld_rx_data
               |vpiActual:
-              \_LogicNet: (work@uart.uld_rx_data), line:32:14, endln:32:25
+              \_LogicNet: (work@uart.uld_rx_data), line:17:1, endln:17:12
             |vpiStmt:
             \_Begin: (work@uart), line:73:20, endln:76:6
               |vpiParent:
@@ -23448,7 +23586,7 @@ Design: (unnamed)
                   |vpiName:rx_data
                   |vpiFullName:work@uart.rx_data
                   |vpiActual:
-                  \_LogicNet: (work@uart.rx_data), line:33:14, endln:33:21
+                  \_LogicNet: (work@uart.rx_data), line:18:1, endln:18:8
               |vpiStmt:
               \_Assignment: , line:75:5, endln:75:18
                 |vpiParent:
@@ -23469,7 +23607,7 @@ Design: (unnamed)
                   |vpiName:rx_empty
                   |vpiFullName:work@uart.rx_empty
                   |vpiActual:
-                  \_LogicNet: (work@uart.rx_empty), line:36:14, endln:36:22
+                  \_LogicNet: (work@uart.rx_empty), line:21:1, endln:21:9
           |vpiStmt:
           \_IfStmt: , line:78:3, endln:113:6
             |vpiParent:
@@ -23481,7 +23619,7 @@ Design: (unnamed)
               |vpiName:rx_enable
               |vpiFullName:work@uart.rx_enable
               |vpiActual:
-              \_LogicNet: (work@uart.rx_enable), line:34:14, endln:34:23
+              \_LogicNet: (work@uart.rx_enable), line:19:1, endln:19:10
             |vpiStmt:
             \_Begin: (work@uart), line:78:18, endln:113:6
               |vpiParent:
@@ -24012,7 +24150,7 @@ Design: (unnamed)
                                       |vpiName:rx_empty
                                       |vpiFullName:work@uart.rx_empty
                                       |vpiActual:
-                                      \_LogicNet: (work@uart.rx_empty), line:36:14, endln:36:22
+                                      \_LogicNet: (work@uart.rx_empty), line:21:1, endln:21:9
                                   |vpiStmt:
                                   \_Assignment: , line:105:18, endln:105:35
                                     |vpiParent:
@@ -24051,7 +24189,7 @@ Design: (unnamed)
                                         |vpiName:rx_empty
                                         |vpiFullName:work@uart.rx_empty
                                         |vpiActual:
-                                        \_LogicNet: (work@uart.rx_empty), line:36:14, endln:36:22
+                                        \_LogicNet: (work@uart.rx_empty), line:21:1, endln:21:9
                                       |vpiOperand:
                                       \_Constant: , line:107:47, endln:107:48
                                         |vpiParent:
@@ -24092,7 +24230,7 @@ Design: (unnamed)
                 |vpiName:rx_enable
                 |vpiFullName:work@uart.rx_enable
                 |vpiActual:
-                \_LogicNet: (work@uart.rx_enable), line:34:14, endln:34:23
+                \_LogicNet: (work@uart.rx_enable), line:19:1, endln:19:10
             |vpiStmt:
             \_Begin: (work@uart), line:114:19, endln:116:6
               |vpiParent:
@@ -24145,7 +24283,7 @@ Design: (unnamed)
             |vpiName:txclk
             |vpiFullName:work@uart.txclk
             |vpiActual:
-            \_LogicNet: (work@uart.txclk), line:25:14, endln:25:19
+            \_LogicNet: (work@uart.txclk), line:10:1, endln:10:6
         |vpiOperand:
         \_Operation: , line:120:28, endln:120:41
           |vpiParent:
@@ -24158,7 +24296,7 @@ Design: (unnamed)
             |vpiName:reset
             |vpiFullName:work@uart.reset
             |vpiActual:
-            \_LogicNet: (work@uart.reset), line:24:14, endln:24:19
+            \_LogicNet: (work@uart.reset), line:9:1, endln:9:6
       |vpiStmt:
       \_IfElse: , line:121:1, endln:153:4
         |vpiParent:
@@ -24170,7 +24308,7 @@ Design: (unnamed)
           |vpiName:reset
           |vpiFullName:work@uart.reset
           |vpiActual:
-          \_LogicNet: (work@uart.reset), line:24:14, endln:24:19
+          \_LogicNet: (work@uart.reset), line:9:1, endln:9:6
         |vpiStmt:
         \_Begin: (work@uart), line:121:12, endln:127:4
           |vpiParent:
@@ -24217,7 +24355,7 @@ Design: (unnamed)
               |vpiName:tx_empty
               |vpiFullName:work@uart.tx_empty
               |vpiActual:
-              \_LogicNet: (work@uart.tx_empty), line:30:14, endln:30:22
+              \_LogicNet: (work@uart.tx_empty), line:15:1, endln:15:9
           |vpiStmt:
           \_Assignment: , line:124:3, endln:124:21
             |vpiParent:
@@ -24259,7 +24397,7 @@ Design: (unnamed)
               |vpiName:tx_out
               |vpiFullName:work@uart.tx_out
               |vpiActual:
-              \_LogicNet: (work@uart.tx_out), line:29:14, endln:29:20
+              \_LogicNet: (work@uart.tx_out), line:14:1, endln:14:7
           |vpiStmt:
           \_Assignment: , line:126:3, endln:126:21
             |vpiParent:
@@ -24297,7 +24435,7 @@ Design: (unnamed)
               |vpiName:ld_tx_data
               |vpiFullName:work@uart.ld_tx_data
               |vpiActual:
-              \_LogicNet: (work@uart.ld_tx_data), line:26:14, endln:26:24
+              \_LogicNet: (work@uart.ld_tx_data), line:11:1, endln:11:11
             |vpiStmt:
             \_Begin: (work@uart), line:128:20, endln:135:7
               |vpiParent:
@@ -24319,7 +24457,7 @@ Design: (unnamed)
                     |vpiName:tx_empty
                     |vpiFullName:work@uart.tx_empty
                     |vpiActual:
-                    \_LogicNet: (work@uart.tx_empty), line:30:14, endln:30:22
+                    \_LogicNet: (work@uart.tx_empty), line:15:1, endln:15:9
                 |vpiStmt:
                 \_Begin: (work@uart), line:129:22, endln:131:10
                   |vpiParent:
@@ -24363,7 +24501,7 @@ Design: (unnamed)
                       |vpiName:tx_data
                       |vpiFullName:work@uart.tx_data
                       |vpiActual:
-                      \_LogicNet: (work@uart.tx_data), line:27:14, endln:27:21
+                      \_LogicNet: (work@uart.tx_data), line:12:1, endln:12:8
                     |vpiLhs:
                     \_RefObj: (work@uart.tx_reg), line:132:9, endln:132:15
                       |vpiParent:
@@ -24392,7 +24530,7 @@ Design: (unnamed)
                       |vpiName:tx_empty
                       |vpiFullName:work@uart.tx_empty
                       |vpiActual:
-                      \_LogicNet: (work@uart.tx_empty), line:30:14, endln:30:22
+                      \_LogicNet: (work@uart.tx_empty), line:15:1, endln:15:9
           |vpiStmt:
           \_IfStmt: , line:136:4, endln:149:7
             |vpiParent:
@@ -24409,7 +24547,7 @@ Design: (unnamed)
                 |vpiName:tx_enable
                 |vpiFullName:work@uart.tx_enable
                 |vpiActual:
-                \_LogicNet: (work@uart.tx_enable), line:28:14, endln:28:23
+                \_LogicNet: (work@uart.tx_enable), line:13:1, endln:13:10
               |vpiOperand:
               \_Operation: , line:136:21, endln:136:30
                 |vpiParent:
@@ -24422,7 +24560,7 @@ Design: (unnamed)
                   |vpiName:tx_empty
                   |vpiFullName:work@uart.tx_empty
                   |vpiActual:
-                  \_LogicNet: (work@uart.tx_empty), line:30:14, endln:30:22
+                  \_LogicNet: (work@uart.tx_empty), line:15:1, endln:15:9
             |vpiStmt:
             \_Begin: (work@uart), line:136:32, endln:149:7
               |vpiParent:
@@ -24512,7 +24650,7 @@ Design: (unnamed)
                       |vpiName:tx_out
                       |vpiFullName:work@uart.tx_out
                       |vpiActual:
-                      \_LogicNet: (work@uart.tx_out), line:29:14, endln:29:20
+                      \_LogicNet: (work@uart.tx_out), line:14:1, endln:14:7
               |vpiStmt:
               \_IfStmt: , line:141:6, endln:143:9
                 |vpiParent:
@@ -24610,7 +24748,7 @@ Design: (unnamed)
                       |vpiName:tx_out
                       |vpiFullName:work@uart.tx_out
                       |vpiActual:
-                      \_LogicNet: (work@uart.tx_out), line:29:14, endln:29:20
+                      \_LogicNet: (work@uart.tx_out), line:14:1, endln:14:7
               |vpiStmt:
               \_IfStmt: , line:144:6, endln:148:9
                 |vpiParent:
@@ -24661,7 +24799,7 @@ Design: (unnamed)
                       |vpiName:tx_out
                       |vpiFullName:work@uart.tx_out
                       |vpiActual:
-                      \_LogicNet: (work@uart.tx_out), line:29:14, endln:29:20
+                      \_LogicNet: (work@uart.tx_out), line:14:1, endln:14:7
                   |vpiStmt:
                   \_Assignment: , line:146:8, endln:146:19
                     |vpiParent:
@@ -24703,7 +24841,7 @@ Design: (unnamed)
                       |vpiName:tx_empty
                       |vpiFullName:work@uart.tx_empty
                       |vpiActual:
-                      \_LogicNet: (work@uart.tx_empty), line:30:14, endln:30:22
+                      \_LogicNet: (work@uart.tx_empty), line:15:1, endln:15:9
           |vpiStmt:
           \_IfStmt: , line:150:4, endln:152:7
             |vpiParent:
@@ -24720,7 +24858,7 @@ Design: (unnamed)
                 |vpiName:tx_enable
                 |vpiFullName:work@uart.tx_enable
                 |vpiActual:
-                \_LogicNet: (work@uart.tx_enable), line:28:14, endln:28:23
+                \_LogicNet: (work@uart.tx_enable), line:13:1, endln:13:10
             |vpiStmt:
             \_Begin: (work@uart), line:150:20, endln:152:7
               |vpiParent:

@@ -408,10 +408,11 @@ ParamAssign                                            9
 Parameter                                              9
 Range                                                  1
 RefObj                                                39
-RefTypespec                                           24
+RefTypespec                                           26
 StructNet                                              1
 StructTypespec                                         4
 SysFuncCall                                            4
+TypedefTypespec                                        2
 TypespecMember                                         6
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathStructTypespec/slpp_all/surelog.uhdm ...
@@ -880,33 +881,44 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:kmac_reg_pkg
   |vpiTypedef:
-  \_StructTypespec: (kmac_reg_pkg::kmac_hw2reg_status_reg_t), line:18:11, endln:25:4
+  \_TypedefTypespec: (kmac_reg_pkg::kmac_hw2reg_status_reg_t), line:25:5, endln:25:29
     |vpiParent:
     \_Package: kmac_reg_pkg (kmac_reg_pkg), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:17:1, endln:31:11
     |vpiName:kmac_reg_pkg::kmac_hw2reg_status_reg_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (kmac_reg_pkg::kmac_hw2reg_status_reg_t), line:18:11, endln:25:4
+      |vpiParent:
+      \_TypedefTypespec: (kmac_reg_pkg::kmac_hw2reg_status_reg_t), line:25:5, endln:25:29
+      |vpiFullName:kmac_reg_pkg::kmac_hw2reg_status_reg_t
+      |vpiActual:
+      \_StructTypespec: , line:18:11, endln:25:4
+  |vpiTypedef:
+  \_StructTypespec: , line:18:11, endln:25:4
+    |vpiParent:
+    \_Package: kmac_reg_pkg (kmac_reg_pkg), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:17:1, endln:31:11
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (sha3_idle), line:21:7, endln:21:16
       |vpiParent:
-      \_StructTypespec: (kmac_reg_pkg::kmac_hw2reg_status_reg_t), line:18:11, endln:25:4
+      \_StructTypespec: , line:18:11, endln:25:4
       |vpiName:sha3_idle
       |vpiTypespec:
-      \_RefTypespec: (kmac_reg_pkg::kmac_hw2reg_status_reg_t::sha3_idle), line:19:5, endln:21:6
+      \_RefTypespec: (kmac_reg_pkg::sha3_idle), line:19:5, endln:21:6
         |vpiParent:
         \_TypespecMember: (sha3_idle), line:21:7, endln:21:16
-        |vpiFullName:kmac_reg_pkg::kmac_hw2reg_status_reg_t::sha3_idle
+        |vpiFullName:kmac_reg_pkg::sha3_idle
         |vpiActual:
         \_StructTypespec: , line:19:5, endln:21:6
     |vpiTypespecMember:
     \_TypespecMember: (fifo_depth), line:24:7, endln:24:17
       |vpiParent:
-      \_StructTypespec: (kmac_reg_pkg::kmac_hw2reg_status_reg_t), line:18:11, endln:25:4
+      \_StructTypespec: , line:18:11, endln:25:4
       |vpiName:fifo_depth
       |vpiTypespec:
-      \_RefTypespec: (kmac_reg_pkg::kmac_hw2reg_status_reg_t::fifo_depth), line:22:5, endln:24:6
+      \_RefTypespec: (kmac_reg_pkg::fifo_depth), line:22:5, endln:24:6
         |vpiParent:
         \_TypespecMember: (fifo_depth), line:24:7, endln:24:17
-        |vpiFullName:kmac_reg_pkg::kmac_hw2reg_status_reg_t::fifo_depth
+        |vpiFullName:kmac_reg_pkg::fifo_depth
         |vpiActual:
         \_StructTypespec: , line:22:5, endln:24:6
   |vpiTypedef:
@@ -972,39 +984,52 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_StructTypespec: (kmac_reg_pkg::kmac_hw2reg_t), line:27:11, endln:30:4
+  \_TypedefTypespec: (kmac_reg_pkg::kmac_hw2reg_t), line:30:5, endln:30:18
     |vpiParent:
     \_Package: kmac_reg_pkg (kmac_reg_pkg), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:17:1, endln:31:11
     |vpiName:kmac_reg_pkg::kmac_hw2reg_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (kmac_reg_pkg::kmac_hw2reg_t), line:27:11, endln:30:4
+      |vpiParent:
+      \_TypedefTypespec: (kmac_reg_pkg::kmac_hw2reg_t), line:30:5, endln:30:18
+      |vpiFullName:kmac_reg_pkg::kmac_hw2reg_t
+      |vpiActual:
+      \_StructTypespec: , line:27:11, endln:30:4
+  |vpiTypedef:
+  \_StructTypespec: , line:27:11, endln:30:4
+    |vpiParent:
+    \_Package: kmac_reg_pkg (kmac_reg_pkg), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:17:1, endln:31:11
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (intr_state), line:28:30, endln:28:40
       |vpiParent:
-      \_StructTypespec: (kmac_reg_pkg::kmac_hw2reg_t), line:27:11, endln:30:4
+      \_StructTypespec: , line:27:11, endln:30:4
       |vpiName:intr_state
       |vpiTypespec:
-      \_RefTypespec: (kmac_reg_pkg::kmac_hw2reg_t::intr_state::kmac_hw2reg_status_reg_t), line:28:5, endln:28:29
+      \_RefTypespec: (kmac_reg_pkg::intr_state::kmac_hw2reg_status_reg_t), line:28:5, endln:28:29
         |vpiParent:
         \_TypespecMember: (intr_state), line:28:30, endln:28:40
         |vpiName:kmac_hw2reg_status_reg_t
-        |vpiFullName:kmac_reg_pkg::kmac_hw2reg_t::intr_state::kmac_hw2reg_status_reg_t
+        |vpiFullName:kmac_reg_pkg::intr_state::kmac_hw2reg_status_reg_t
         |vpiActual:
-        \_StructTypespec: (kmac_reg_pkg::kmac_hw2reg_status_reg_t), line:18:11, endln:25:4
+        \_TypedefTypespec: (kmac_reg_pkg::kmac_hw2reg_status_reg_t), line:25:5, endln:25:29
     |vpiTypespecMember:
     \_TypespecMember: (status), line:29:30, endln:29:36
       |vpiParent:
-      \_StructTypespec: (kmac_reg_pkg::kmac_hw2reg_t), line:27:11, endln:30:4
+      \_StructTypespec: , line:27:11, endln:30:4
       |vpiName:status
       |vpiTypespec:
-      \_RefTypespec: (kmac_reg_pkg::kmac_hw2reg_t::status::kmac_hw2reg_status_reg_t), line:29:5, endln:29:29
+      \_RefTypespec: (kmac_reg_pkg::status::kmac_hw2reg_status_reg_t), line:29:5, endln:29:29
         |vpiParent:
         \_TypespecMember: (status), line:29:30, endln:29:36
         |vpiName:kmac_hw2reg_status_reg_t
-        |vpiFullName:kmac_reg_pkg::kmac_hw2reg_t::status::kmac_hw2reg_status_reg_t
+        |vpiFullName:kmac_reg_pkg::status::kmac_hw2reg_status_reg_t
         |vpiActual:
-        \_StructTypespec: (kmac_reg_pkg::kmac_hw2reg_status_reg_t), line:18:11, endln:25:4
+        \_TypedefTypespec: (kmac_reg_pkg::kmac_hw2reg_status_reg_t), line:25:5, endln:25:29
   |vpiImportTypespec:
-  \_StructTypespec: (kmac_reg_pkg::kmac_hw2reg_status_reg_t), line:18:11, endln:25:4
+  \_TypedefTypespec: (kmac_reg_pkg::kmac_hw2reg_status_reg_t), line:25:5, endln:25:29
+  |vpiImportTypespec:
+  \_StructTypespec: , line:18:11, endln:25:4
   |vpiImportTypespec:
   \_StructTypespec: , line:19:5, endln:21:6
   |vpiImportTypespec:
@@ -1014,7 +1039,9 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:23:7, endln:23:18
   |vpiImportTypespec:
-  \_StructTypespec: (kmac_reg_pkg::kmac_hw2reg_t), line:27:11, endln:30:4
+  \_TypedefTypespec: (kmac_reg_pkg::kmac_hw2reg_t), line:30:5, endln:30:18
+  |vpiImportTypespec:
+  \_StructTypespec: , line:27:11, endln:30:4
   |vpiDefName:kmac_reg_pkg
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:33:1, endln:40:10
@@ -1062,13 +1089,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathStructTypespec/dut.sv, line:33:1, endln:40:10
     |vpiTypespec:
-    \_RefTypespec: (work@top.hw2reg.hw2reg), line:36:1, endln:36:14
+    \_RefTypespec: (work@top.hw2reg.kmac_hw2reg_t), line:36:1, endln:36:14
       |vpiParent:
       \_StructNet: (work@top.hw2reg), line:36:15, endln:36:21
-      |vpiName:hw2reg
-      |vpiFullName:work@top.hw2reg.hw2reg
+      |vpiName:kmac_hw2reg_t
+      |vpiFullName:work@top.hw2reg.kmac_hw2reg_t
       |vpiActual:
-      \_StructTypespec: (kmac_reg_pkg::kmac_hw2reg_t), line:27:11, endln:30:4
+      \_TypedefTypespec: (kmac_reg_pkg::kmac_hw2reg_t), line:30:5, endln:30:18
     |vpiName:hw2reg
     |vpiFullName:work@top.hw2reg
   |vpiImportTypespec:

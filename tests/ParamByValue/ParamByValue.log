@@ -245,7 +245,8 @@ Parameter                                              4
 Range                                                  5
 RefModule                                              2
 RefObj                                                 4
-RefTypespec                                            7
+RefTypespec                                            8
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamByValue/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -362,6 +363,25 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_EnumTypespec: , line:4:11, endln:6:15
+    |vpiParent:
+    \_Package: lc_ctrl_state_pkg (lc_ctrl_state_pkg), file:${SURELOG_DIR}/tests/ParamByValue/dut.sv, line:1:1, endln:7:11
+    |vpiBaseTypespec:
+    \_RefTypespec: (lc_ctrl_state_pkg), line:4:16, endln:4:28
+      |vpiParent:
+      \_EnumTypespec: , line:4:11, endln:6:15
+      |vpiFullName:lc_ctrl_state_pkg
+      |vpiActual:
+      \_LogicTypespec: , line:4:16, endln:4:28
+    |vpiEnumConst:
+    \_EnumConst: (LcStScrap), line:5:5, endln:5:34
+      |vpiParent:
+      \_EnumTypespec: , line:4:11, endln:6:15
+      |vpiName:LcStScrap
+      |BIN:11011111011011101110011001111001
+      |vpiDecompile:{B1,B0}
+      |vpiSize:32
+  |vpiTypedef:
   \_LogicTypespec: , line:4:16, endln:4:28
     |vpiParent:
     \_Package: lc_ctrl_state_pkg (lc_ctrl_state_pkg), file:${SURELOG_DIR}/tests/ParamByValue/dut.sv, line:1:1, endln:7:11
@@ -386,33 +406,27 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_EnumTypespec: (lc_ctrl_state_pkg::lc_state_e), line:4:11, endln:6:15
+  \_TypedefTypespec: (lc_ctrl_state_pkg::lc_state_e), line:6:5, endln:6:15
     |vpiParent:
     \_Package: lc_ctrl_state_pkg (lc_ctrl_state_pkg), file:${SURELOG_DIR}/tests/ParamByValue/dut.sv, line:1:1, endln:7:11
     |vpiName:lc_ctrl_state_pkg::lc_state_e
-    |vpiBaseTypespec:
-    \_RefTypespec: (lc_ctrl_state_pkg::lc_state_e), line:4:16, endln:4:28
+    |vpiTypedefAlias:
+    \_RefTypespec: (lc_ctrl_state_pkg::lc_state_e), line:4:11, endln:6:4
       |vpiParent:
-      \_EnumTypespec: (lc_ctrl_state_pkg::lc_state_e), line:4:11, endln:6:15
+      \_TypedefTypespec: (lc_ctrl_state_pkg::lc_state_e), line:6:5, endln:6:15
       |vpiFullName:lc_ctrl_state_pkg::lc_state_e
       |vpiActual:
-      \_LogicTypespec: , line:4:16, endln:4:28
-    |vpiEnumConst:
-    \_EnumConst: (LcStScrap), line:5:5, endln:5:34
-      |vpiParent:
-      \_EnumTypespec: (lc_ctrl_state_pkg::lc_state_e), line:4:11, endln:6:15
-      |vpiName:LcStScrap
-      |BIN:11011111011011101110011001111001
-      |vpiDecompile:{B1,B0}
-      |vpiSize:32
+      \_EnumTypespec: , line:4:11, endln:6:15
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:13, endln:2:25
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:13, endln:3:25
   |vpiImportTypespec:
+  \_EnumTypespec: , line:4:11, endln:6:15
+  |vpiImportTypespec:
   \_LogicTypespec: , line:4:16, endln:4:28
   |vpiImportTypespec:
-  \_EnumTypespec: (lc_ctrl_state_pkg::lc_state_e), line:4:11, endln:6:15
+  \_TypedefTypespec: (lc_ctrl_state_pkg::lc_state_e), line:6:5, endln:6:15
   |vpiDefName:lc_ctrl_state_pkg
 |vpiAllModules:
 \_Module: work@generic_flop (work@generic_flop), file:${SURELOG_DIR}/tests/ParamByValue/dut.sv, line:9:1, endln:10:10

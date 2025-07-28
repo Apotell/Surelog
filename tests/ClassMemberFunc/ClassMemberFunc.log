@@ -89,6 +89,7 @@ AST_DEBUG_END
 Assignment                                             2
 Begin                                                  1
 ClassDefn                                              2
+ClassTypespec                                          1
 ClassVar                                               1
 Design                                                 1
 Function                                               1
@@ -96,8 +97,9 @@ HierPath                                               1
 MethodFuncCall                                         1
 Package                                                1
 RefObj                                                 2
-RefTypespec                                            3
+RefTypespec                                            4
 RefVar                                                 1
+TypedefTypespec                                        1
 UnsupportedTypespec                                    2
 VoidTypespec                                           1
 === UHDM Object Stats End ===
@@ -125,6 +127,31 @@ Design: (unnamed)
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv, line:1:1, endln:20:11
     |vpiName:uvm_resource_types
     |vpiFullName:pkg::uvm_resource_types
+    |vpiTypedef:
+    \_TypedefTypespec: (rsrc_q_t), line:8:41, endln:8:49
+      |vpiParent:
+      \_ClassDefn: (pkg::uvm_resource_types), file:${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv, line:6:1, endln:10:9
+      |vpiName:rsrc_q_t
+      |vpiTypedefAlias:
+      \_RefTypespec: (pkg::uvm_resource_types::rsrc_q_t), line:8:11, endln:8:20
+        |vpiParent:
+        \_TypedefTypespec: (rsrc_q_t), line:8:41, endln:8:49
+        |vpiFullName:pkg::uvm_resource_types::rsrc_q_t
+        |vpiActual:
+        \_ClassTypespec: (uvm_queue), line:8:11, endln:8:20
+    |vpiTypedef:
+    \_ClassTypespec: (uvm_queue), line:8:11, endln:8:20
+      |vpiParent:
+      \_ClassDefn: (pkg::uvm_resource_types), file:${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv, line:6:1, endln:10:9
+      |vpiName:uvm_queue
+      |vpiClassDefn:
+      \_ClassDefn: (pkg::uvm_queue), file:${SURELOG_DIR}/tests/ClassMemberFunc/dut.sv, line:3:1, endln:4:9
+    |vpiImportTypespec:
+    \_TypedefTypespec: (rsrc_q_t), line:8:41, endln:8:49
+    |vpiImportTypespec:
+    \_ClassTypespec: (uvm_queue), line:8:11, endln:8:20
+    |vpiClassTypespec:
+    \_ClassTypespec: (uvm_queue), line:8:11, endln:8:20
   |vpiInternalScope:
   \_Function: (pkg::uvm_sequencer_base::start_phase_sequence), line:12:1, endln:18:12
     |vpiParent:
@@ -147,7 +174,7 @@ Design: (unnamed)
           |vpiName:uvm_resource_types::rsrc_q_t
           |vpiFullName:pkg::uvm_sequencer_base::start_phase_sequence::rq::uvm_resource_types::rsrc_q_t
           |vpiActual:
-          \_UnsupportedTypespec: (uvm_resource_types::rsrc_q_t), line:13:1, endln:13:29
+          \_TypedefTypespec: (rsrc_q_t), line:8:41, endln:8:49
         |vpiName:rq
         |vpiFullName:pkg::uvm_sequencer_base::start_phase_sequence::rq
       |vpiVariables:

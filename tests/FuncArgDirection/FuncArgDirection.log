@@ -226,7 +226,7 @@ Begin                                                  2
 BitSelect                                              2
 ClassDefn                                              8
 ClassTypespec                                          1
-Constant                                              27
+Constant                                              21
 ContAssign                                             2
 Design                                                 1
 EnumConst                                              5
@@ -237,17 +237,18 @@ Function                                              10
 IODecl                                                12
 IntTypespec                                           10
 IntVar                                                 1
+LogicNet                                               3
 LogicTypespec                                          6
-LogicVar                                               3
 Module                                                 1
 Operation                                              3
 Package                                                1
 PackedArrayTypespec                                    1
-Range                                                  9
+Range                                                  6
 RefObj                                                 8
-RefTypespec                                           20
+RefTypespec                                           21
 ReturnStmt                                             1
 Task                                                   9
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FuncArgDirection/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -516,7 +517,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -550,14 +551,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/FuncArgDirection/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -565,7 +565,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -573,7 +573,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -581,7 +581,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -589,13 +589,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/FuncArgDirection/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -797,38 +811,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@dut
-  |vpiVariables:
-  \_LogicVar: (work@dut.ctr_we_o_rev), line:10:19, endln:10:31
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/FuncArgDirection/dut.sv, line:1:1, endln:15:10
-    |vpiTypespec:
-    \_RefTypespec: (work@dut.ctr_we_o_rev), line:10:1, endln:10:12
-      |vpiParent:
-      \_LogicVar: (work@dut.ctr_we_o_rev), line:10:19, endln:10:31
-      |vpiFullName:work@dut.ctr_we_o_rev
-      |vpiActual:
-      \_LogicTypespec: , line:10:1, endln:10:12
-    |vpiName:ctr_we_o_rev
-    |vpiFullName:work@dut.ctr_we_o_rev
-    |vpiVisibility:1
-  |vpiVariables:
-  \_LogicVar: (work@dut.ctr_we_o), line:10:33, endln:10:41
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/FuncArgDirection/dut.sv, line:1:1, endln:15:10
-    |vpiTypespec:
-    \_RefTypespec: (work@dut.ctr_we_o), line:10:1, endln:10:12
-      |vpiParent:
-      \_LogicVar: (work@dut.ctr_we_o), line:10:33, endln:10:41
-      |vpiFullName:work@dut.ctr_we_o
-      |vpiActual:
-      \_LogicTypespec: , line:10:1, endln:10:12
-    |vpiName:ctr_we_o
-    |vpiFullName:work@dut.ctr_we_o
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@dut.ctr_we_o_rev), line:10:19, endln:10:31
-  |vpiReg:
-  \_LogicVar: (work@dut.ctr_we_o), line:10:33, endln:10:41
   |vpiInternalScope:
   \_Function: (work@dut.aes_rev_order_bit), line:2:1, endln:8:12
     |vpiParent:
@@ -840,19 +822,6 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (work@dut.aes_rev_order_bit), line:2:1, endln:8:12
       |vpiFullName:work@dut.aes_rev_order_bit
-      |vpiVariables:
-      \_LogicVar: (work@dut.aes_rev_order_bit.out), line:3:15, endln:3:18
-        |vpiParent:
-        \_Begin: (work@dut.aes_rev_order_bit)
-        |vpiTypespec:
-        \_RefTypespec: (work@dut.aes_rev_order_bit.out), line:3:3, endln:3:14
-          |vpiParent:
-          \_LogicVar: (work@dut.aes_rev_order_bit.out), line:3:15, endln:3:18
-          |vpiFullName:work@dut.aes_rev_order_bit.out
-          |vpiActual:
-          \_LogicTypespec: , line:3:3, endln:3:14
-        |vpiName:out
-        |vpiFullName:work@dut.aes_rev_order_bit.out
       |vpiVariables:
       \_IntVar: (work@dut.aes_rev_order_bit.i), line:4:12, endln:4:13
         |vpiParent:
@@ -867,8 +836,6 @@ Design: (unnamed)
         |vpiName:i
         |vpiFullName:work@dut.aes_rev_order_bit.i
         |vpiSigned:1
-      |vpiReg:
-      \_LogicVar: (work@dut.aes_rev_order_bit.out), line:3:15, endln:3:18
       |vpiInternalScope:
       \_ForStmt: (work@dut.aes_rev_order_bit), line:4:3, endln:6:6
         |vpiParent:
@@ -921,7 +888,7 @@ Design: (unnamed)
               |vpiName:out
               |vpiFullName:work@dut.aes_rev_order_bit.out
               |vpiActual:
-              \_LogicVar: (work@dut.aes_rev_order_bit.out), line:3:15, endln:3:18
+              \_LogicNet: (work@dut.aes_rev_order_bit.out), line:3:15, endln:3:18
               |vpiIndex:
               \_RefObj: (work@dut.aes_rev_order_bit.i), line:5:9, endln:5:10
                 |vpiParent:
@@ -1012,7 +979,19 @@ Design: (unnamed)
       |vpiImportTypespec:
       \_LogicTypespec: , line:3:3, endln:3:14
       |vpiImportTypespec:
-      \_LogicVar: (work@dut.aes_rev_order_bit.out), line:3:15, endln:3:18
+      \_LogicNet: (work@dut.aes_rev_order_bit.out), line:3:15, endln:3:18
+        |vpiParent:
+        \_Begin: (work@dut.aes_rev_order_bit)
+        |vpiTypespec:
+        \_RefTypespec: (work@dut.aes_rev_order_bit.out), line:3:3, endln:3:14
+          |vpiParent:
+          \_LogicNet: (work@dut.aes_rev_order_bit.out), line:3:15, endln:3:18
+          |vpiFullName:work@dut.aes_rev_order_bit.out
+          |vpiActual:
+          \_LogicTypespec: , line:3:3, endln:3:14
+        |vpiName:out
+        |vpiFullName:work@dut.aes_rev_order_bit.out
+        |vpiSigned:1
       |vpiImportTypespec:
       \_IntTypespec: , line:4:8, endln:4:11
       |vpiImportTypespec:
@@ -1030,7 +1009,7 @@ Design: (unnamed)
           |vpiName:out
           |vpiFullName:work@dut.aes_rev_order_bit.out
           |vpiActual:
-          \_LogicVar: (work@dut.aes_rev_order_bit.out), line:3:15, endln:3:18
+          \_LogicNet: (work@dut.aes_rev_order_bit.out), line:3:15, endln:3:18
     |vpiTypedef:
     \_LogicTypespec: , line:2:20, endln:2:31
       |vpiParent:
@@ -1193,14 +1172,42 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:10:1, endln:10:12
   |vpiImportTypespec:
-  \_LogicVar: (work@dut.ctr_we_o_rev), line:10:19, endln:10:31
+  \_LogicNet: (work@dut.ctr_we_o_rev), line:10:19, endln:10:31
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/FuncArgDirection/dut.sv, line:1:1, endln:15:10
+    |vpiTypespec:
+    \_RefTypespec: (work@dut.ctr_we_o_rev), line:10:1, endln:10:12
+      |vpiParent:
+      \_LogicNet: (work@dut.ctr_we_o_rev), line:10:19, endln:10:31
+      |vpiFullName:work@dut.ctr_we_o_rev
+      |vpiActual:
+      \_LogicTypespec: , line:10:1, endln:10:12
+    |vpiName:ctr_we_o_rev
+    |vpiFullName:work@dut.ctr_we_o_rev
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicTypespec: , line:10:1, endln:10:12
   |vpiImportTypespec:
-  \_LogicVar: (work@dut.ctr_we_o), line:10:33, endln:10:41
+  \_LogicNet: (work@dut.ctr_we_o), line:10:33, endln:10:41
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/FuncArgDirection/dut.sv, line:1:1, endln:15:10
+    |vpiTypespec:
+    \_RefTypespec: (work@dut.ctr_we_o), line:10:1, endln:10:12
+      |vpiParent:
+      \_LogicNet: (work@dut.ctr_we_o), line:10:33, endln:10:41
+      |vpiFullName:work@dut.ctr_we_o
+      |vpiActual:
+      \_LogicTypespec: , line:10:1, endln:10:12
+    |vpiName:ctr_we_o
+    |vpiFullName:work@dut.ctr_we_o
+    |vpiNetType:36
   |vpiDefName:work@dut
   |vpiTaskFunc:
   \_Function: (work@dut.aes_rev_order_bit), line:2:1, endln:8:12
+  |vpiNet:
+  \_LogicNet: (work@dut.ctr_we_o_rev), line:10:19, endln:10:31
+  |vpiNet:
+  \_LogicNet: (work@dut.ctr_we_o), line:10:33, endln:10:41
   |vpiContAssign:
   \_ContAssign: , line:12:8, endln:12:34
     |vpiParent:
@@ -1220,7 +1227,7 @@ Design: (unnamed)
       |vpiName:ctr_we_o_rev
       |vpiFullName:work@dut.ctr_we_o_rev
       |vpiActual:
-      \_LogicVar: (work@dut.ctr_we_o_rev), line:10:19, endln:10:31
+      \_LogicNet: (work@dut.ctr_we_o_rev), line:10:19, endln:10:31
   |vpiContAssign:
   \_ContAssign: , line:14:8, endln:14:50
     |vpiParent:
@@ -1236,7 +1243,7 @@ Design: (unnamed)
         |vpiName:ctr_we_o_rev
         |vpiFullName:work@dut.ctr_we_o_rev
         |vpiActual:
-        \_LogicVar: (work@dut.ctr_we_o_rev), line:10:19, endln:10:31
+        \_LogicNet: (work@dut.ctr_we_o_rev), line:10:19, endln:10:31
       |vpiName:aes_rev_order_bit
       |vpiFunction:
       \_Function: (work@dut.aes_rev_order_bit), line:2:1, endln:8:12
@@ -1247,7 +1254,7 @@ Design: (unnamed)
       |vpiName:ctr_we_o
       |vpiFullName:work@dut.ctr_we_o
       |vpiActual:
-      \_LogicVar: (work@dut.ctr_we_o), line:10:33, endln:10:41
+      \_LogicNet: (work@dut.ctr_we_o), line:10:33, endln:10:41
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

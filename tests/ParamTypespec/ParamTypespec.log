@@ -168,24 +168,24 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamTypespec/dut.sv:9:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                              13
+Constant                                              10
 ContAssign                                             1
 Design                                                 1
 ImportTypespec                                         1
 IntTypespec                                            2
 IntVar                                                 1
+LogicNet                                               1
 LogicTypespec                                          2
-LogicVar                                               1
 Module                                                 2
-Operation                                             17
+Operation                                             15
 Package                                                1
 ParamAssign                                            2
 Parameter                                              2
 Port                                                   1
-Range                                                  3
-RefObj                                                 5
+Range                                                  2
+RefObj                                                 4
 RefTypespec                                            5
-SysFuncCall                                            2
+SysFuncCall                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -291,31 +291,8 @@ Design: (unnamed)
     |vpiName:o
     |vpiFullName:work@top.o
     |vpiSigned:1
+    |vpiRandType:1
     |vpiVisibility:1
-  |vpiVariables:
-  \_LogicVar: (work@top.part_buf_data), line:14:40, endln:14:53
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamTypespec/dut.sv, line:9:1, endln:16:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.part_buf_data), line:14:4, endln:14:39
-      |vpiParent:
-      \_LogicVar: (work@top.part_buf_data), line:14:40, endln:14:53
-      |vpiFullName:work@top.part_buf_data
-      |vpiActual:
-      \_LogicTypespec: , line:14:4, endln:14:39
-    |vpiName:part_buf_data
-    |vpiFullName:work@top.part_buf_data
-    |vpiVisibility:1
-    |vpiExpr:
-    \_Constant: , line:14:56, endln:14:58
-      |vpiParent:
-      \_LogicVar: (work@top.part_buf_data), line:14:40, endln:14:53
-      |vpiDecompile:'1
-      |vpiSize:-1
-      |BIN:1
-      |vpiConstType:3
-  |vpiReg:
-  \_LogicVar: (work@top.part_buf_data), line:14:40, endln:14:53
   |vpiParameter:
   \_Parameter: (work@top.P), line:12:14, endln:12:32
     |vpiParent:
@@ -333,7 +310,7 @@ Design: (unnamed)
       |vpiName:PartInvDefault
       |vpiFullName:work@top.PartInvDefault
       |vpiActual:
-      \_LogicNet: (work@top.PartInvDefault), line:14:17, endln:14:31
+      \_LogicNet: (work@top.PartInvDefault), line:12:18, endln:12:32
     |vpiLhs:
     \_Parameter: (work@top.P), line:12:14, endln:12:32
   |vpiTypedef:
@@ -383,7 +360,7 @@ Design: (unnamed)
               |vpiName:PartInvDefault
               |vpiFullName:work@top.PartInvDefault
               |vpiActual:
-              \_LogicNet: (work@top.PartInvDefault), line:14:17, endln:14:31
+              \_LogicNet: (work@top.PartInvDefault), line:12:18, endln:12:32
             |vpiName:$bits
           |vpiOperand:
           \_Constant: , line:14:33, endln:14:34
@@ -423,11 +400,23 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:14:4, endln:14:39
   |vpiImportTypespec:
-  \_LogicVar: (work@top.part_buf_data), line:14:40, endln:14:53
+  \_LogicNet: (work@top.part_buf_data), line:14:40, endln:14:53
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamTypespec/dut.sv, line:9:1, endln:16:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.part_buf_data), line:14:4, endln:14:39
+      |vpiParent:
+      \_LogicNet: (work@top.part_buf_data), line:14:40, endln:14:53
+      |vpiFullName:work@top.part_buf_data
+      |vpiActual:
+      \_LogicTypespec: , line:14:4, endln:14:39
+    |vpiName:part_buf_data
+    |vpiFullName:work@top.part_buf_data
+    |vpiNetType:36
   |vpiImportTypespec:
   \_IntTypespec: , line:9:19, endln:9:22
   |vpiImportTypespec:
-  \_LogicNet: (work@top.PartInvDefault), line:14:17, endln:14:31
+  \_LogicNet: (work@top.PartInvDefault), line:12:18, endln:12:32
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamTypespec/dut.sv, line:9:1, endln:16:10
     |vpiName:PartInvDefault
@@ -435,7 +424,9 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@top
   |vpiNet:
-  \_LogicNet: (work@top.PartInvDefault), line:14:17, endln:14:31
+  \_LogicNet: (work@top.part_buf_data), line:14:40, endln:14:53
+  |vpiNet:
+  \_LogicNet: (work@top.PartInvDefault), line:12:18, endln:12:32
   |vpiPort:
   \_Port: (o), line:9:23, endln:9:24
     |vpiParent:
@@ -465,7 +456,7 @@ Design: (unnamed)
         |vpiName:part_buf_data
         |vpiFullName:work@top.part_buf_data
         |vpiActual:
-        \_LogicVar: (work@top.part_buf_data), line:14:40, endln:14:53
+        \_LogicNet: (work@top.part_buf_data), line:14:40, endln:14:53
     |vpiLhs:
     \_RefObj: (work@top.o), line:15:11, endln:15:12
       |vpiParent:

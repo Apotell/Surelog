@@ -96,14 +96,14 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/PartSelect3/dut.sv:1:1: Compile module "work@t".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                              17
+Constant                                              11
 ContAssign                                             1
 Design                                                 1
+LogicNet                                               1
 LogicTypespec                                          1
-LogicVar                                               1
 Module                                                 1
 PartSelect                                             1
-Range                                                  6
+Range                                                  3
 RefTypespec                                            1
 VarSelect                                              1
 === UHDM Object Stats End ===
@@ -117,22 +117,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@t
-  |vpiVariables:
-  \_LogicVar: (work@t.state_d), line:2:23, endln:2:30
-    |vpiParent:
-    \_Module: work@t (work@t), file:${SURELOG_DIR}/tests/PartSelect3/dut.sv, line:1:1, endln:4:10
-    |vpiTypespec:
-    \_RefTypespec: (work@t.state_d), line:2:1, endln:2:22
-      |vpiParent:
-      \_LogicVar: (work@t.state_d), line:2:23, endln:2:30
-      |vpiFullName:work@t.state_d
-      |vpiActual:
-      \_LogicTypespec: , line:2:1, endln:2:22
-    |vpiName:state_d
-    |vpiFullName:work@t.state_d
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@t.state_d), line:2:23, endln:2:30
   |vpiTypedef:
   \_LogicTypespec: , line:2:1, endln:2:22
     |vpiParent:
@@ -200,8 +184,22 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:1, endln:2:22
   |vpiImportTypespec:
-  \_LogicVar: (work@t.state_d), line:2:23, endln:2:30
+  \_LogicNet: (work@t.state_d), line:2:23, endln:2:30
+    |vpiParent:
+    \_Module: work@t (work@t), file:${SURELOG_DIR}/tests/PartSelect3/dut.sv, line:1:1, endln:4:10
+    |vpiTypespec:
+    \_RefTypespec: (work@t.state_d), line:2:1, endln:2:22
+      |vpiParent:
+      \_LogicNet: (work@t.state_d), line:2:23, endln:2:30
+      |vpiFullName:work@t.state_d
+      |vpiActual:
+      \_LogicTypespec: , line:2:1, endln:2:22
+    |vpiName:state_d
+    |vpiFullName:work@t.state_d
+    |vpiNetType:36
   |vpiDefName:work@t
+  |vpiNet:
+  \_LogicNet: (work@t.state_d), line:2:23, endln:2:30
   |vpiContAssign:
   \_ContAssign: , line:3:8, endln:3:40
     |vpiParent:
@@ -221,7 +219,7 @@ Design: (unnamed)
       |vpiName:state_d
       |vpiFullName:work@t.state_d
       |vpiActual:
-      \_LogicVar: (work@t.state_d), line:2:23, endln:2:30
+      \_LogicNet: (work@t.state_d), line:2:23, endln:2:30
       |vpiIndex:
       \_Constant: , line:3:16, endln:3:17
         |vpiParent:
@@ -246,7 +244,7 @@ Design: (unnamed)
         |vpiFullName:work@t.state_d
         |vpiDefName:state_d
         |vpiActual:
-        \_LogicVar: (work@t.state_d), line:2:23, endln:2:30
+        \_LogicNet: (work@t.state_d), line:2:23, endln:2:30
         |vpiConstantSelect:1
         |vpiLeftRange:
         \_Constant: , line:3:22, endln:3:23

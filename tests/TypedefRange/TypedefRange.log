@@ -58,8 +58,9 @@ LogicTypespec                                          1
 Package                                                1
 PackedArrayTypespec                                    1
 Range                                                  1
-RefTypespec                                            1
+RefTypespec                                            4
 StructTypespec                                         1
+TypedefTypespec                                        2
 TypespecMember                                         1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypedefRange/slpp_unit/surelog.uhdm ...
@@ -73,27 +74,50 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:pkg
   |vpiTypedef:
-  \_StructTypespec: (pkg::a), line:2:12, endln:4:5
+  \_TypedefTypespec: (pkg::a), line:4:6, endln:4:7
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/TypedefRange/dut.sv, line:1:1, endln:6:11
     |vpiName:pkg::a
+    |vpiTypedefAlias:
+    \_RefTypespec: (pkg::a), line:2:12, endln:4:5
+      |vpiParent:
+      \_TypedefTypespec: (pkg::a), line:4:6, endln:4:7
+      |vpiFullName:pkg::a
+      |vpiActual:
+      \_StructTypespec: , line:2:12, endln:4:5
+  |vpiTypedef:
+  \_StructTypespec: , line:2:12, endln:4:5
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/TypedefRange/dut.sv, line:1:1, endln:6:11
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (x), line:3:16, endln:3:17
       |vpiParent:
-      \_StructTypespec: (pkg::a), line:2:12, endln:4:5
+      \_StructTypespec: , line:2:12, endln:4:5
       |vpiName:x
       |vpiTypespec:
-      \_RefTypespec: (pkg::a::x), line:3:7, endln:3:12
+      \_RefTypespec: (pkg::x), line:3:7, endln:3:12
         |vpiParent:
         \_TypespecMember: (x), line:3:16, endln:3:17
-        |vpiFullName:pkg::a::x
+        |vpiFullName:pkg::x
         |vpiActual:
         \_LogicTypespec: , line:3:7, endln:3:12
   |vpiTypedef:
   \_LogicTypespec: , line:3:7, endln:3:12
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/TypedefRange/dut.sv, line:1:1, endln:6:11
+  |vpiTypedef:
+  \_TypedefTypespec: (pkg::b), line:5:19, endln:5:20
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/TypedefRange/dut.sv, line:1:1, endln:6:11
+    |vpiName:pkg::b
+    |vpiTypedefAlias:
+    \_RefTypespec: (pkg::b), line:5:12, endln:5:13
+      |vpiParent:
+      \_TypedefTypespec: (pkg::b), line:5:19, endln:5:20
+      |vpiFullName:pkg::b
+      |vpiActual:
+      \_PackedArrayTypespec: , line:5:12, endln:5:18
   |vpiTypedef:
   \_PackedArrayTypespec: , line:5:12, endln:5:18
     |vpiParent:
@@ -118,10 +142,21 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (pkg::a), line:4:6, endln:4:7
+      |vpiParent:
+      \_PackedArrayTypespec: , line:5:12, endln:5:18
+      |vpiName:pkg::a
+      |vpiActual:
+      \_TypedefTypespec: (pkg::a), line:4:6, endln:4:7
   |vpiImportTypespec:
-  \_StructTypespec: (pkg::a), line:2:12, endln:4:5
+  \_TypedefTypespec: (pkg::a), line:4:6, endln:4:7
+  |vpiImportTypespec:
+  \_StructTypespec: , line:2:12, endln:4:5
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:7, endln:3:12
+  |vpiImportTypespec:
+  \_TypedefTypespec: (pkg::b), line:5:19, endln:5:20
   |vpiImportTypespec:
   \_PackedArrayTypespec: , line:5:12, endln:5:18
   |vpiDefName:pkg

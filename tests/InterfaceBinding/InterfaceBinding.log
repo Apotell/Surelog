@@ -316,17 +316,16 @@ BitTypespec                                            2
 BitVar                                                 1
 ClockingBlock                                          1
 ClockingIODecl                                         4
-Constant                                              36
 Design                                                 1
 EventControl                                           2
 IfElse                                                 1
 Interface                                              1
-LogicNet                                              14
+LogicNet                                              10
 LogicTypespec                                          2
+LogicVar                                               4
 Module                                                 1
 Operation                                              4
 Port                                                  10
-Range                                                 18
 RefObj                                                14
 RefTypespec                                            4
 === UHDM Object Stats End ===
@@ -353,7 +352,48 @@ Design: (unnamed)
       \_BitTypespec: , line:20:9, endln:20:12
     |vpiName:clk
     |vpiFullName:work@add_sub_if.clk
+    |vpiRandType:1
     |vpiVisibility:1
+  |vpiVariables:
+  \_LogicVar: (work@add_sub_if.a), line:21:15, endln:21:16
+    |vpiParent:
+    \_Interface: work@add_sub_if (work@add_sub_if), file:${SURELOG_DIR}/tests/InterfaceBinding/dut.sv, line:19:1, endln:34:25
+    |vpiName:a
+    |vpiFullName:work@add_sub_if.a
+    |vpiRandType:1
+    |vpiVisibility:1
+  |vpiVariables:
+  \_LogicVar: (work@add_sub_if.b), line:22:15, endln:22:16
+    |vpiParent:
+    \_Interface: work@add_sub_if (work@add_sub_if), file:${SURELOG_DIR}/tests/InterfaceBinding/dut.sv, line:19:1, endln:34:25
+    |vpiName:b
+    |vpiFullName:work@add_sub_if.b
+    |vpiRandType:1
+    |vpiVisibility:1
+  |vpiVariables:
+  \_LogicVar: (work@add_sub_if.doAdd), line:23:15, endln:23:20
+    |vpiParent:
+    \_Interface: work@add_sub_if (work@add_sub_if), file:${SURELOG_DIR}/tests/InterfaceBinding/dut.sv, line:19:1, endln:34:25
+    |vpiName:doAdd
+    |vpiFullName:work@add_sub_if.doAdd
+    |vpiRandType:1
+    |vpiVisibility:1
+  |vpiVariables:
+  \_LogicVar: (work@add_sub_if.result), line:24:15, endln:24:21
+    |vpiParent:
+    \_Interface: work@add_sub_if (work@add_sub_if), file:${SURELOG_DIR}/tests/InterfaceBinding/dut.sv, line:19:1, endln:34:25
+    |vpiName:result
+    |vpiFullName:work@add_sub_if.result
+    |vpiRandType:1
+    |vpiVisibility:1
+  |vpiReg:
+  \_LogicVar: (work@add_sub_if.a), line:21:15, endln:21:16
+  |vpiReg:
+  \_LogicVar: (work@add_sub_if.b), line:22:15, endln:22:16
+  |vpiReg:
+  \_LogicVar: (work@add_sub_if.doAdd), line:23:15, endln:23:20
+  |vpiReg:
+  \_LogicVar: (work@add_sub_if.result), line:24:15, endln:24:21
   |vpiInternalScope:
   \_ClockingBlock: (work@add_sub_if.cb), line:27:3, endln:32:14
     |vpiParent:
@@ -414,29 +454,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_BitVar: (work@add_sub_if.clk), line:20:13, endln:20:16
   |vpiImportTypespec:
-  \_LogicNet: (work@add_sub_if.a), line:21:15, endln:21:16
-    |vpiParent:
-    \_Interface: work@add_sub_if (work@add_sub_if), file:${SURELOG_DIR}/tests/InterfaceBinding/dut.sv, line:19:1, endln:34:25
-    |vpiName:a
-    |vpiFullName:work@add_sub_if.a
+  \_LogicVar: (work@add_sub_if.a), line:21:15, endln:21:16
   |vpiImportTypespec:
-  \_LogicNet: (work@add_sub_if.b), line:22:15, endln:22:16
-    |vpiParent:
-    \_Interface: work@add_sub_if (work@add_sub_if), file:${SURELOG_DIR}/tests/InterfaceBinding/dut.sv, line:19:1, endln:34:25
-    |vpiName:b
-    |vpiFullName:work@add_sub_if.b
+  \_LogicVar: (work@add_sub_if.b), line:22:15, endln:22:16
   |vpiImportTypespec:
-  \_LogicNet: (work@add_sub_if.doAdd), line:23:15, endln:23:20
-    |vpiParent:
-    \_Interface: work@add_sub_if (work@add_sub_if), file:${SURELOG_DIR}/tests/InterfaceBinding/dut.sv, line:19:1, endln:34:25
-    |vpiName:doAdd
-    |vpiFullName:work@add_sub_if.doAdd
+  \_LogicVar: (work@add_sub_if.doAdd), line:23:15, endln:23:20
   |vpiImportTypespec:
-  \_LogicNet: (work@add_sub_if.result), line:24:15, endln:24:21
-    |vpiParent:
-    \_Interface: work@add_sub_if (work@add_sub_if), file:${SURELOG_DIR}/tests/InterfaceBinding/dut.sv, line:19:1, endln:34:25
-    |vpiName:result
-    |vpiFullName:work@add_sub_if.result
+  \_LogicVar: (work@add_sub_if.result), line:24:15, endln:24:21
   |vpiImportTypespec:
   \_BitTypespec: , line:20:9, endln:20:12
   |vpiImportTypespec:
@@ -470,14 +494,6 @@ Design: (unnamed)
     |vpiName:result
     |vpiFullName:work@add_sub_if.result
   |vpiDefName:work@add_sub_if
-  |vpiNet:
-  \_LogicNet: (work@add_sub_if.a), line:21:15, endln:21:16
-  |vpiNet:
-  \_LogicNet: (work@add_sub_if.b), line:22:15, endln:22:16
-  |vpiNet:
-  \_LogicNet: (work@add_sub_if.doAdd), line:23:15, endln:23:20
-  |vpiNet:
-  \_LogicNet: (work@add_sub_if.result), line:24:15, endln:24:21
   |vpiNet:
   \_LogicNet: (work@add_sub_if.clk), line:20:13, endln:20:16
   |vpiNet:
@@ -574,53 +590,13 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:work@ADD_SUB
   |vpiTypedef:
-  \_LogicTypespec: , line:6:10, endln:6:19
+  \_LogicTypespec: , line:6:10, endln:6:13
     |vpiParent:
     \_Module: work@ADD_SUB (work@ADD_SUB), file:${SURELOG_DIR}/tests/InterfaceBinding/dut.sv, line:1:1, endln:17:19
-    |vpiRange:
-    \_Range: , line:6:14, endln:6:19
-      |vpiParent:
-      \_LogicTypespec: , line:6:10, endln:6:19
-      |vpiLeftRange:
-      \_Constant: , line:6:15, endln:6:16
-        |vpiParent:
-        \_Range: , line:6:14, endln:6:19
-        |vpiDecompile:8
-        |vpiSize:64
-        |UINT:8
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:6:17, endln:6:18
-        |vpiParent:
-        \_Range: , line:6:14, endln:6:19
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiTypedef:
-  \_LogicTypespec: , line:6:10, endln:6:19
+  \_LogicTypespec: , line:6:10, endln:6:13
     |vpiParent:
     \_Module: work@ADD_SUB (work@ADD_SUB), file:${SURELOG_DIR}/tests/InterfaceBinding/dut.sv, line:1:1, endln:17:19
-    |vpiRange:
-    \_Range: , line:6:14, endln:6:19
-      |vpiParent:
-      \_LogicTypespec: , line:6:10, endln:6:19
-      |vpiLeftRange:
-      \_Constant: , line:6:15, endln:6:16
-        |vpiParent:
-        \_Range: , line:6:14, endln:6:19
-        |vpiDecompile:8
-        |vpiSize:64
-        |UINT:8
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:6:17, endln:6:18
-        |vpiParent:
-        \_Range: , line:6:14, endln:6:19
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiImportTypespec:
   \_LogicNet: (work@ADD_SUB.clk), line:2:20, endln:2:23
     |vpiParent:
@@ -646,23 +622,23 @@ Design: (unnamed)
     |vpiName:doAdd0
     |vpiFullName:work@ADD_SUB.doAdd0
   |vpiImportTypespec:
-  \_LogicTypespec: , line:6:10, endln:6:19
+  \_LogicTypespec: , line:6:10, endln:6:13
   |vpiImportTypespec:
   \_LogicNet: (work@ADD_SUB.result0), line:6:20, endln:6:27
     |vpiParent:
     \_Module: work@ADD_SUB (work@ADD_SUB), file:${SURELOG_DIR}/tests/InterfaceBinding/dut.sv, line:1:1, endln:17:19
     |vpiTypespec:
-    \_RefTypespec: (work@ADD_SUB.result0), line:6:10, endln:6:19
+    \_RefTypespec: (work@ADD_SUB.result0), line:6:10, endln:6:13
       |vpiParent:
       \_LogicNet: (work@ADD_SUB.result0), line:6:20, endln:6:27
       |vpiFullName:work@ADD_SUB.result0
       |vpiActual:
-      \_LogicTypespec: , line:6:10, endln:6:19
+      \_LogicTypespec: , line:6:10, endln:6:13
     |vpiName:result0
     |vpiFullName:work@ADD_SUB.result0
     |vpiNetType:48
   |vpiImportTypespec:
-  \_LogicTypespec: , line:6:10, endln:6:19
+  \_LogicTypespec: , line:6:10, endln:6:13
   |vpiDefName:work@ADD_SUB
   |vpiNet:
   \_LogicNet: (work@ADD_SUB.clk), line:2:20, endln:2:23
@@ -710,7 +686,7 @@ Design: (unnamed)
       \_Port: (result0), line:6:20, endln:6:27
       |vpiFullName:work@ADD_SUB.result0
       |vpiActual:
-      \_LogicTypespec: , line:6:10, endln:6:19
+      \_LogicTypespec: , line:6:10, endln:6:13
   |vpiProcess:
   \_Always: , line:9:3, endln:15:8
     |vpiParent:

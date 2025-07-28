@@ -97,16 +97,15 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/SignedVsUnsignedPort/dut.sv:2:1: Compile module "work@rvdffe".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                              12
+Constant                                               4
 Design                                                 1
-LogicNet                                               1
+LogicNet                                               2
 LogicTypespec                                          3
-LogicVar                                               1
 Module                                                 2
 ModuleTypespec                                         1
 PartSelect                                             1
 Port                                                   2
-Range                                                  5
+Range                                                  1
 RefModule                                              1
 RefTypespec                                            3
 === UHDM Object Stats End ===
@@ -120,23 +119,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@dut
-  |vpiVariables:
-  \_LogicVar: (work@dut.rs2_ext_in), line:8:25, endln:8:35
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/SignedVsUnsignedPort/dut.sv, line:6:1, endln:12:10
-    |vpiTypespec:
-    \_RefTypespec: (work@dut.rs2_ext_in), line:8:4, endln:8:23
-      |vpiParent:
-      \_LogicVar: (work@dut.rs2_ext_in), line:8:25, endln:8:35
-      |vpiFullName:work@dut.rs2_ext_in
-      |vpiActual:
-      \_LogicTypespec: , line:8:4, endln:8:23
-    |vpiName:rs2_ext_in
-    |vpiFullName:work@dut.rs2_ext_in
-    |vpiSigned:1
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@dut.rs2_ext_in), line:8:25, endln:8:35
   |vpiTypedef:
   \_ModuleTypespec: (rvdffe), line:10:4, endln:10:10
     |vpiParent:
@@ -172,8 +154,23 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:8:4, endln:8:23
   |vpiImportTypespec:
-  \_LogicVar: (work@dut.rs2_ext_in), line:8:25, endln:8:35
+  \_LogicNet: (work@dut.rs2_ext_in), line:8:25, endln:8:35
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/SignedVsUnsignedPort/dut.sv, line:6:1, endln:12:10
+    |vpiTypespec:
+    \_RefTypespec: (work@dut.rs2_ext_in), line:8:4, endln:8:23
+      |vpiParent:
+      \_LogicNet: (work@dut.rs2_ext_in), line:8:25, endln:8:35
+      |vpiFullName:work@dut.rs2_ext_in
+      |vpiActual:
+      \_LogicTypespec: , line:8:4, endln:8:23
+    |vpiName:rs2_ext_in
+    |vpiFullName:work@dut.rs2_ext_in
+    |vpiNetType:36
+    |vpiSigned:1
   |vpiDefName:work@dut
+  |vpiNet:
+  \_LogicNet: (work@dut.rs2_ext_in), line:8:25, endln:8:35
   |vpiRefModule:
   \_RefModule: work@rvdffe (i_b_x_ff), line:10:4, endln:10:10
     |vpiParent:
@@ -195,7 +192,7 @@ Design: (unnamed)
         |vpiFullName:work@dut.i_b_x_ff.din.rs2_ext_in
         |vpiDefName:rs2_ext_in
         |vpiActual:
-        \_LogicVar: (work@dut.rs2_ext_in), line:8:25, endln:8:35
+        \_LogicNet: (work@dut.rs2_ext_in), line:8:25, endln:8:35
         |vpiConstantSelect:1
         |vpiLeftRange:
         \_Constant: , line:10:46, endln:10:48
@@ -219,71 +216,31 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:work@rvdffe
   |vpiTypedef:
-  \_LogicTypespec: , line:3:12, endln:3:24
+  \_LogicTypespec: , line:3:12, endln:3:17
     |vpiParent:
     \_Module: work@rvdffe (work@rvdffe), file:${SURELOG_DIR}/tests/SignedVsUnsignedPort/dut.sv, line:2:1, endln:4:10
-    |vpiRange:
-    \_Range: , line:3:18, endln:3:24
-      |vpiParent:
-      \_LogicTypespec: , line:3:12, endln:3:24
-      |vpiLeftRange:
-      \_Constant: , line:3:19, endln:3:21
-        |vpiParent:
-        \_Range: , line:3:18, endln:3:24
-        |vpiDecompile:32
-        |vpiSize:64
-        |UINT:32
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:3:22, endln:3:23
-        |vpiParent:
-        \_Range: , line:3:18, endln:3:24
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiTypedef:
-  \_LogicTypespec: , line:3:12, endln:3:24
+  \_LogicTypespec: , line:3:12, endln:3:17
     |vpiParent:
     \_Module: work@rvdffe (work@rvdffe), file:${SURELOG_DIR}/tests/SignedVsUnsignedPort/dut.sv, line:2:1, endln:4:10
-    |vpiRange:
-    \_Range: , line:3:18, endln:3:24
-      |vpiParent:
-      \_LogicTypespec: , line:3:12, endln:3:24
-      |vpiLeftRange:
-      \_Constant: , line:3:19, endln:3:21
-        |vpiParent:
-        \_Range: , line:3:18, endln:3:24
-        |vpiDecompile:32
-        |vpiSize:64
-        |UINT:32
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:3:22, endln:3:23
-        |vpiParent:
-        \_Range: , line:3:18, endln:3:24
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiImportTypespec:
-  \_LogicTypespec: , line:3:12, endln:3:24
+  \_LogicTypespec: , line:3:12, endln:3:17
   |vpiImportTypespec:
   \_LogicNet: (work@rvdffe.din), line:3:25, endln:3:28
     |vpiParent:
     \_Module: work@rvdffe (work@rvdffe), file:${SURELOG_DIR}/tests/SignedVsUnsignedPort/dut.sv, line:2:1, endln:4:10
     |vpiTypespec:
-    \_RefTypespec: (work@rvdffe.din), line:3:12, endln:3:24
+    \_RefTypespec: (work@rvdffe.din), line:3:12, endln:3:17
       |vpiParent:
       \_LogicNet: (work@rvdffe.din), line:3:25, endln:3:28
       |vpiFullName:work@rvdffe.din
       |vpiActual:
-      \_LogicTypespec: , line:3:12, endln:3:24
+      \_LogicTypespec: , line:3:12, endln:3:17
     |vpiName:din
     |vpiFullName:work@rvdffe.din
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicTypespec: , line:3:12, endln:3:24
+  \_LogicTypespec: , line:3:12, endln:3:17
   |vpiDefName:work@rvdffe
   |vpiNet:
   \_LogicNet: (work@rvdffe.din), line:3:25, endln:3:28
@@ -299,7 +256,7 @@ Design: (unnamed)
       \_Port: (din), line:3:25, endln:3:28
       |vpiFullName:work@rvdffe.din
       |vpiActual:
-      \_LogicTypespec: , line:3:12, endln:3:24
+      \_LogicTypespec: , line:3:12, endln:3:17
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

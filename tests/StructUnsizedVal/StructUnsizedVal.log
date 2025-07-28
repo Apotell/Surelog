@@ -242,23 +242,23 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv:21:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                              23
+Constant                                              15
 Design                                                 1
 ImportTypespec                                         1
 IntTypespec                                            1
 LogicTypespec                                          3
 Module                                                 5
 ModuleTypespec                                         3
-Operation                                              2
+Operation                                              1
 Package                                                1
-PackedArrayTypespec                                    1
 ParamAssign                                            5
 Parameter                                              5
-Range                                                  4
+Range                                                  3
 RefModule                                              3
-RefObj                                                 3
-RefTypespec                                            8
+RefObj                                                 2
+RefTypespec                                           10
 StructTypespec                                         1
+TypedefTypespec                                        2
 TypespecMember                                         1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/StructUnsizedVal/slpp_all/surelog.uhdm ...
@@ -298,7 +298,7 @@ Design: (unnamed)
       |vpiName:init_t
       |vpiFullName:pkg::InitDefault::init_t
       |vpiActual:
-      \_StructTypespec: (pkg::init_t), line:4:11, endln:6:4
+      \_TypedefTypespec: (pkg::init_t), line:6:5, endln:6:11
     |vpiLocalParam:1
     |vpiName:InitDefault
     |vpiFullName:pkg::InitDefault
@@ -336,13 +336,13 @@ Design: (unnamed)
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv, line:1:1, endln:8:11
     |vpiSigned:1
   |vpiTypedef:
-  \_PackedArrayTypespec: , line:3:11, endln:3:28
+  \_LogicTypespec: , line:3:11, endln:3:28
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv, line:1:1, endln:8:11
     |vpiRange:
     \_Range: , line:3:17, endln:3:28
       |vpiParent:
-      \_PackedArrayTypespec: , line:3:11, endln:3:28
+      \_LogicTypespec: , line:3:11, endln:3:28
       |vpiLeftRange:
       \_Operation: , line:3:18, endln:3:25
         |vpiParent:
@@ -373,70 +373,57 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_LogicTypespec: (key), line:3:11, endln:3:28
+  \_TypedefTypespec: (pkg::key), line:3:31, endln:3:34
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv, line:1:1, endln:8:11
-    |vpiName:key
-    |vpiRange:
-    \_Range: , line:3:17, endln:3:28
+    |vpiName:pkg::key
+    |vpiTypedefAlias:
+    \_RefTypespec: (pkg::key), line:3:11, endln:3:16
       |vpiParent:
-      \_LogicTypespec: (key), line:3:11, endln:3:28
-      |vpiLeftRange:
-      \_Operation: , line:3:18, endln:3:25
-        |vpiParent:
-        \_Range: , line:3:17, endln:3:28
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (pkg::key::Width), line:3:18, endln:3:23
-          |vpiParent:
-          \_Operation: , line:3:18, endln:3:25
-          |vpiName:Width
-          |vpiFullName:pkg::key::Width
-          |vpiActual:
-          \_Parameter: (pkg::Width), line:2:17, endln:2:32
-        |vpiOperand:
-        \_Constant: , line:3:24, endln:3:25
-          |vpiParent:
-          \_Operation: , line:3:18, endln:3:25
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:3:26, endln:3:27
-        |vpiParent:
-        \_Range: , line:3:17, endln:3:28
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
+      \_TypedefTypespec: (pkg::key), line:3:31, endln:3:34
+      |vpiFullName:pkg::key
+      |vpiActual:
+      \_LogicTypespec: , line:3:11, endln:3:28
   |vpiTypedef:
-  \_StructTypespec: (pkg::init_t), line:4:11, endln:6:4
+  \_TypedefTypespec: (pkg::init_t), line:6:5, endln:6:11
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv, line:1:1, endln:8:11
     |vpiName:pkg::init_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (pkg::init_t), line:4:11, endln:6:4
+      |vpiParent:
+      \_TypedefTypespec: (pkg::init_t), line:6:5, endln:6:11
+      |vpiFullName:pkg::init_t
+      |vpiActual:
+      \_StructTypespec: , line:4:11, endln:6:4
+  |vpiTypedef:
+  \_StructTypespec: , line:4:11, endln:6:4
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv, line:1:1, endln:8:11
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (key), line:5:11, endln:5:14
       |vpiParent:
-      \_StructTypespec: (pkg::init_t), line:4:11, endln:6:4
+      \_StructTypespec: , line:4:11, endln:6:4
       |vpiName:key
       |vpiTypespec:
-      \_RefTypespec: (pkg::init_t::key::key), line:5:5, endln:5:8
+      \_RefTypespec: (pkg::key::key), line:5:5, endln:5:8
         |vpiParent:
         \_TypespecMember: (key), line:5:11, endln:5:14
         |vpiName:key
-        |vpiFullName:pkg::init_t::key::key
+        |vpiFullName:pkg::key::key
         |vpiActual:
-        \_LogicTypespec: (key), line:3:11, endln:3:28
+        \_TypedefTypespec: (pkg::key), line:3:31, endln:3:34
   |vpiImportTypespec:
   \_IntTypespec: , line:2:13, endln:2:16
   |vpiImportTypespec:
-  \_PackedArrayTypespec: , line:3:11, endln:3:28
+  \_LogicTypespec: , line:3:11, endln:3:28
   |vpiImportTypespec:
-  \_LogicTypespec: (key), line:3:11, endln:3:28
+  \_TypedefTypespec: (pkg::key), line:3:31, endln:3:34
   |vpiImportTypespec:
-  \_StructTypespec: (pkg::init_t), line:4:11, endln:6:4
+  \_TypedefTypespec: (pkg::init_t), line:6:5, endln:6:11
+  |vpiImportTypespec:
+  \_StructTypespec: , line:4:11, endln:6:4
   |vpiDefName:pkg
 |vpiAllModules:
 \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/StructUnsizedVal/dut.sv, line:17:1, endln:19:10
@@ -454,7 +441,7 @@ Design: (unnamed)
       |vpiName:init_t
       |vpiFullName:work@dut.Init.init_t
       |vpiActual:
-      \_StructTypespec: (pkg::init_t), line:4:11, endln:6:4
+      \_TypedefTypespec: (pkg::init_t), line:6:5, endln:6:11
     |vpiName:Init
     |vpiFullName:work@dut.Init
   |vpiParamAssign:

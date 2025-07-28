@@ -132,8 +132,9 @@ Operation                                              1
 Package                                                1
 Port                                                   2
 RefObj                                                 4
-RefTypespec                                            7
+RefTypespec                                            8
 ReturnStmt                                             1
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackEnumVal/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -173,13 +174,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:val
       |vpiTypedef:
-      \_RefTypespec: (test_package::test_true::val::lc_tx_t), line:4:11, endln:7:12
+      \_RefTypespec: (test_package::test_true::val::lc_tx_t), line:7:5, endln:7:12
         |vpiParent:
         \_IODecl: (val), line:9:46, endln:9:49
         |vpiName:lc_tx_t
         |vpiFullName:test_package::test_true::val::lc_tx_t
         |vpiActual:
-        \_EnumTypespec: (test_package::lc_tx_t), line:4:11, endln:7:12
+        \_TypedefTypespec: (test_package::lc_tx_t), line:7:5, endln:7:12
     |vpiStmt:
     \_ReturnStmt: , line:10:5, endln:10:21
       |vpiParent:
@@ -208,25 +209,20 @@ Design: (unnamed)
     |vpiInstance:
     \_Package: test_package (test_package), file:${SURELOG_DIR}/tests/PackEnumVal/dut.sv, line:2:1, endln:13:11
   |vpiTypedef:
-  \_LogicTypespec: , line:4:16, endln:4:21
+  \_EnumTypespec: , line:4:11, endln:7:12
     |vpiParent:
     \_Package: test_package (test_package), file:${SURELOG_DIR}/tests/PackEnumVal/dut.sv, line:2:1, endln:13:11
-  |vpiTypedef:
-  \_EnumTypespec: (test_package::lc_tx_t), line:4:11, endln:7:12
-    |vpiParent:
-    \_Package: test_package (test_package), file:${SURELOG_DIR}/tests/PackEnumVal/dut.sv, line:2:1, endln:13:11
-    |vpiName:test_package::lc_tx_t
     |vpiBaseTypespec:
-    \_RefTypespec: (test_package::lc_tx_t), line:4:16, endln:4:21
+    \_RefTypespec: (test_package), line:4:16, endln:4:21
       |vpiParent:
-      \_EnumTypespec: (test_package::lc_tx_t), line:4:11, endln:7:12
-      |vpiFullName:test_package::lc_tx_t
+      \_EnumTypespec: , line:4:11, endln:7:12
+      |vpiFullName:test_package
       |vpiActual:
       \_LogicTypespec: , line:4:16, endln:4:21
     |vpiEnumConst:
     \_EnumConst: (On), line:5:5, endln:5:12
       |vpiParent:
-      \_EnumTypespec: (test_package::lc_tx_t), line:4:11, endln:7:12
+      \_EnumTypespec: , line:4:11, endln:7:12
       |vpiName:On
       |UINT:1
       |vpiDecompile:1
@@ -234,17 +230,35 @@ Design: (unnamed)
     |vpiEnumConst:
     \_EnumConst: (Off), line:6:5, endln:6:12
       |vpiParent:
-      \_EnumTypespec: (test_package::lc_tx_t), line:4:11, endln:7:12
+      \_EnumTypespec: , line:4:11, endln:7:12
       |vpiName:Off
       |UINT:0
       |vpiDecompile:0
       |vpiSize:64
+  |vpiTypedef:
+  \_LogicTypespec: , line:4:16, endln:4:21
+    |vpiParent:
+    \_Package: test_package (test_package), file:${SURELOG_DIR}/tests/PackEnumVal/dut.sv, line:2:1, endln:13:11
+  |vpiTypedef:
+  \_TypedefTypespec: (test_package::lc_tx_t), line:7:5, endln:7:12
+    |vpiParent:
+    \_Package: test_package (test_package), file:${SURELOG_DIR}/tests/PackEnumVal/dut.sv, line:2:1, endln:13:11
+    |vpiName:test_package::lc_tx_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (test_package::lc_tx_t), line:4:11, endln:7:4
+      |vpiParent:
+      \_TypedefTypespec: (test_package::lc_tx_t), line:7:5, endln:7:12
+      |vpiFullName:test_package::lc_tx_t
+      |vpiActual:
+      \_EnumTypespec: , line:4:11, endln:7:12
   |vpiImportTypespec:
   \_Function: (test_package::test_true), line:9:3, endln:11:26
   |vpiImportTypespec:
+  \_EnumTypespec: , line:4:11, endln:7:12
+  |vpiImportTypespec:
   \_LogicTypespec: , line:4:16, endln:4:21
   |vpiImportTypespec:
-  \_EnumTypespec: (test_package::lc_tx_t), line:4:11, endln:7:12
+  \_TypedefTypespec: (test_package::lc_tx_t), line:7:5, endln:7:12
   |vpiDefName:test_package
   |vpiTaskFunc:
   \_Function: (test_package::test_true), line:9:3, endln:11:26

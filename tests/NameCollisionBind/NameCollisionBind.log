@@ -109,9 +109,10 @@ Modport                                                1
 Module                                                 1
 Port                                                   1
 RefObj                                                 4
-RefTypespec                                            3
+RefTypespec                                            5
 StructTypespec                                         1
 StructVar                                              1
+TypedefTypespec                                        2
 TypespecMember                                         1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/NameCollisionBind/slpp_all/surelog.uhdm ...
@@ -135,9 +136,10 @@ Design: (unnamed)
       |vpiName:PerfCounterPath
       |vpiFullName:work@PerformanceCounterIF.perfCounter.PerfCounterPath
       |vpiActual:
-      \_StructTypespec: (PerfCounterPath), line:4:9, endln:8:2
+      \_TypedefTypespec: (PerfCounterPath), line:8:3, endln:8:18
     |vpiName:perfCounter
     |vpiFullName:work@PerformanceCounterIF.perfCounter
+    |vpiRandType:1
     |vpiVisibility:1
   |vpiImportTypespec:
   \_StructVar: (work@PerformanceCounterIF.perfCounter), line:13:21, endln:13:32
@@ -243,30 +245,52 @@ Design: (unnamed)
       |vpiActual:
       \_LogicNet: (work@CSR_Unit.mshrID), line:25:9, endln:25:15
 |vpiTypedef:
-\_IntTypespec: (DataPath), line:2:9, endln:2:12
+\_IntTypespec: , line:2:9, endln:2:12
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiSigned:1
+|vpiTypedef:
+\_TypedefTypespec: (DataPath), line:2:13, endln:2:21
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:DataPath
-  |vpiSigned:1
+  |vpiTypedefAlias:
+  \_RefTypespec: (DataPath), line:2:9, endln:2:12
+    |vpiParent:
+    \_TypedefTypespec: (DataPath), line:2:13, endln:2:21
+    |vpiFullName:DataPath
+    |vpiActual:
+    \_IntTypespec: , line:2:9, endln:2:12
 |vpiTypedef:
-\_StructTypespec: (PerfCounterPath), line:4:9, endln:8:2
+\_TypedefTypespec: (PerfCounterPath), line:8:3, endln:8:18
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:PerfCounterPath
+  |vpiTypedefAlias:
+  \_RefTypespec: (PerfCounterPath), line:4:9, endln:8:2
+    |vpiParent:
+    \_TypedefTypespec: (PerfCounterPath), line:8:3, endln:8:18
+    |vpiFullName:PerfCounterPath
+    |vpiActual:
+    \_StructTypespec: , line:4:9, endln:8:2
+|vpiTypedef:
+\_StructTypespec: , line:4:9, endln:8:2
+  |vpiParent:
+  \_Design: (unnamed)
   |vpiPacked:1
   |vpiTypespecMember:
   \_TypespecMember: (numLoadMiss), line:6:10, endln:6:21
     |vpiParent:
-    \_StructTypespec: (PerfCounterPath), line:4:9, endln:8:2
+    \_StructTypespec: , line:4:9, endln:8:2
     |vpiName:numLoadMiss
     |vpiTypespec:
-    \_RefTypespec: (PerfCounterPath.numLoadMiss.DataPath), line:6:1, endln:6:9
+    \_RefTypespec: (numLoadMiss.DataPath), line:6:1, endln:6:9
       |vpiParent:
       \_TypespecMember: (numLoadMiss), line:6:10, endln:6:21
       |vpiName:DataPath
-      |vpiFullName:PerfCounterPath.numLoadMiss.DataPath
+      |vpiFullName:numLoadMiss.DataPath
       |vpiActual:
-      \_IntTypespec: (DataPath), line:2:9, endln:2:12
+      \_TypedefTypespec: (DataPath), line:2:13, endln:2:21
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

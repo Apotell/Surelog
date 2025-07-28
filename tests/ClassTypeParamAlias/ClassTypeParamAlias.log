@@ -124,9 +124,10 @@ IntTypespec                                            9
 LogicTypespec                                          2
 Package                                                1
 RefObj                                                 4
-RefTypespec                                           17
+RefTypespec                                           19
 Task                                                   9
 TypeParameter                                          8
+TypedefTypespec                                        2
 UnsupportedTypespec                                    4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassTypeParamAlias/slpp_all/surelog.uhdm ...
@@ -396,7 +397,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -430,14 +431,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ClassTypeParamAlias/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -445,7 +445,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -453,7 +453,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -461,7 +461,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -469,13 +469,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ClassTypeParamAlias/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -696,7 +710,7 @@ Design: (unnamed)
       |vpiName:BrickType
       |vpiFullName:work@param_types_as_class_item::BT::BrickType
       |vpiActual:
-      \_LogicTypespec: (BrickType), line:5:11, endln:5:16
+      \_TypedefTypespec: (BrickType), line:5:17, endln:5:26
   |vpiParameter:
   \_TypeParameter: (work@param_types_as_class_item::CT1), line:7:18, endln:7:21
     |vpiParent:
@@ -730,8 +744,8 @@ Design: (unnamed)
     |vpiParent:
     \_ClassDefn: (work@param_types_as_class_item), file:${SURELOG_DIR}/tests/ClassTypeParamAlias/dut.sv, line:3:1, endln:10:9
     |vpiName:GT
-    |vpiLocalParam:1
     |vpiFullName:work@param_types_as_class_item::GT
+    |vpiLocalParam:1
     |vpiTypespec:
     \_RefTypespec: (work@param_types_as_class_item::GT::mypkg::GlueType), line:8:24, endln:8:39
       |vpiParent:
@@ -745,22 +759,22 @@ Design: (unnamed)
     |vpiParent:
     \_ClassDefn: (work@param_types_as_class_item), file:${SURELOG_DIR}/tests/ClassTypeParamAlias/dut.sv, line:3:1, endln:10:9
     |vpiName:GT2
-    |vpiLocalParam:1
     |vpiFullName:work@param_types_as_class_item::GT2
+    |vpiLocalParam:1
   |vpiParameter:
   \_TypeParameter: (work@param_types_as_class_item::HT1), line:9:19, endln:9:22
     |vpiParent:
     \_ClassDefn: (work@param_types_as_class_item), file:${SURELOG_DIR}/tests/ClassTypeParamAlias/dut.sv, line:3:1, endln:10:9
     |vpiName:HT1
-    |vpiLocalParam:1
     |vpiFullName:work@param_types_as_class_item::HT1
+    |vpiLocalParam:1
   |vpiParameter:
   \_TypeParameter: (work@param_types_as_class_item::HT2), line:9:24, endln:9:27
     |vpiParent:
     \_ClassDefn: (work@param_types_as_class_item), file:${SURELOG_DIR}/tests/ClassTypeParamAlias/dut.sv, line:3:1, endln:10:9
     |vpiName:HT2
-    |vpiLocalParam:1
     |vpiFullName:work@param_types_as_class_item::HT2
+    |vpiLocalParam:1
     |vpiTypespec:
     \_RefTypespec: (work@param_types_as_class_item::HT2::mypkg::ModuleType), line:9:30, endln:9:53
       |vpiParent:
@@ -772,10 +786,21 @@ Design: (unnamed)
   |vpiTypedef:
   \_TypeParameter: (work@param_types_as_class_item::AT), line:4:18, endln:4:20
   |vpiTypedef:
-  \_LogicTypespec: (BrickType), line:5:11, endln:5:16
+  \_LogicTypespec: , line:5:11, endln:5:16
+    |vpiParent:
+    \_ClassDefn: (work@param_types_as_class_item), file:${SURELOG_DIR}/tests/ClassTypeParamAlias/dut.sv, line:3:1, endln:10:9
+  |vpiTypedef:
+  \_TypedefTypespec: (BrickType), line:5:17, endln:5:26
     |vpiParent:
     \_ClassDefn: (work@param_types_as_class_item), file:${SURELOG_DIR}/tests/ClassTypeParamAlias/dut.sv, line:3:1, endln:10:9
     |vpiName:BrickType
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@param_types_as_class_item::BrickType), line:5:11, endln:5:16
+      |vpiParent:
+      \_TypedefTypespec: (BrickType), line:5:17, endln:5:26
+      |vpiFullName:work@param_types_as_class_item::BrickType
+      |vpiActual:
+      \_LogicTypespec: , line:5:11, endln:5:16
   |vpiTypedef:
   \_TypeParameter: (work@param_types_as_class_item::BT), line:6:18, endln:6:20
   |vpiTypedef:
@@ -813,7 +838,9 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_TypeParameter: (work@param_types_as_class_item::AT), line:4:18, endln:4:20
   |vpiImportTypespec:
-  \_LogicTypespec: (BrickType), line:5:11, endln:5:16
+  \_LogicTypespec: , line:5:11, endln:5:16
+  |vpiImportTypespec:
+  \_TypedefTypespec: (BrickType), line:5:17, endln:5:26
   |vpiImportTypespec:
   \_TypeParameter: (work@param_types_as_class_item::BT), line:6:18, endln:6:20
   |vpiImportTypespec:

@@ -292,8 +292,8 @@ Constant                                              11
 Design                                                 1
 IntTypespec                                            3
 IntegerTypespec                                        2
+LogicNet                                               1
 LogicTypespec                                          4
-LogicVar                                               1
 Module                                                 3
 ModuleTypespec                                         2
 Operation                                              4
@@ -303,9 +303,10 @@ Port                                                   1
 Range                                                  2
 RefModule                                              2
 RefObj                                                 2
-RefTypespec                                           10
+RefTypespec                                           12
 StructTypespec                                         1
 TypeParameter                                          2
+TypedefTypespec                                        1
 TypespecMember                                         2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypeParamElab/slpp_all/surelog.uhdm ...
@@ -415,33 +416,44 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@axi_node_arbiter (work@axi_node_arbiter), file:${SURELOG_DIR}/tests/TypeParamElab/dut.sv, line:22:1, endln:37:10
   |vpiTypedef:
-  \_StructTypespec: (axi_meta_t), line:27:11, endln:30:4
+  \_TypedefTypespec: (axi_meta_t), line:30:5, endln:30:15
     |vpiParent:
     \_Module: work@axi_node_arbiter (work@axi_node_arbiter), file:${SURELOG_DIR}/tests/TypeParamElab/dut.sv, line:22:1, endln:37:10
     |vpiName:axi_meta_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@axi_node_arbiter.axi_meta_t), line:27:11, endln:30:4
+      |vpiParent:
+      \_TypedefTypespec: (axi_meta_t), line:30:5, endln:30:15
+      |vpiFullName:work@axi_node_arbiter.axi_meta_t
+      |vpiActual:
+      \_StructTypespec: , line:27:11, endln:30:4
+  |vpiTypedef:
+  \_StructTypespec: , line:27:11, endln:30:4
+    |vpiParent:
+    \_Module: work@axi_node_arbiter (work@axi_node_arbiter), file:${SURELOG_DIR}/tests/TypeParamElab/dut.sv, line:22:1, endln:37:10
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (aux), line:28:27, endln:28:30
       |vpiParent:
-      \_StructTypespec: (axi_meta_t), line:27:11, endln:30:4
+      \_StructTypespec: , line:27:11, endln:30:4
       |vpiName:aux
       |vpiTypespec:
-      \_RefTypespec: (work@axi_node_arbiter.axi_meta_t.aux), line:28:5, endln:28:26
+      \_RefTypespec: (work@axi_node_arbiter.aux), line:28:5, endln:28:26
         |vpiParent:
         \_TypespecMember: (aux), line:28:27, endln:28:30
-        |vpiFullName:work@axi_node_arbiter.axi_meta_t.aux
+        |vpiFullName:work@axi_node_arbiter.aux
         |vpiActual:
         \_LogicTypespec: , line:28:5, endln:28:26
     |vpiTypespecMember:
     \_TypespecMember: (id), line:29:27, endln:29:29
       |vpiParent:
-      \_StructTypespec: (axi_meta_t), line:27:11, endln:30:4
+      \_StructTypespec: , line:27:11, endln:30:4
       |vpiName:id
       |vpiTypespec:
-      \_RefTypespec: (work@axi_node_arbiter.axi_meta_t.id), line:29:5, endln:29:25
+      \_RefTypespec: (work@axi_node_arbiter.id), line:29:5, endln:29:25
         |vpiParent:
         \_TypespecMember: (id), line:29:27, endln:29:29
-        |vpiFullName:work@axi_node_arbiter.axi_meta_t.id
+        |vpiFullName:work@axi_node_arbiter.id
         |vpiActual:
         \_LogicTypespec: , line:29:5, endln:29:25
   |vpiTypedef:
@@ -530,7 +542,9 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:25:13, endln:25:25
   |vpiImportTypespec:
-  \_StructTypespec: (axi_meta_t), line:27:11, endln:30:4
+  \_TypedefTypespec: (axi_meta_t), line:30:5, endln:30:15
+  |vpiImportTypespec:
+  \_StructTypespec: , line:27:11, endln:30:4
   |vpiImportTypespec:
   \_LogicTypespec: , line:28:5, endln:28:26
   |vpiImportTypespec:
@@ -656,15 +670,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@stream_arbiter_flushable
-  |vpiVariables:
-  \_LogicVar: (work@stream_arbiter_flushable.oup_data_o), line:5:30, endln:5:40
-    |vpiParent:
-    \_Module: work@stream_arbiter_flushable (work@stream_arbiter_flushable), file:${SURELOG_DIR}/tests/TypeParamElab/dut.sv, line:1:1, endln:7:10
-    |vpiName:oup_data_o
-    |vpiFullName:work@stream_arbiter_flushable.oup_data_o
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@stream_arbiter_flushable.oup_data_o), line:5:30, endln:5:40
   |vpiParameter:
   \_TypeParameter: (work@stream_arbiter_flushable.DATA_T), line:2:25, endln:2:31
     |vpiParent:
@@ -750,8 +755,22 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntegerTypespec: , line:3:15, endln:3:22
   |vpiImportTypespec:
-  \_LogicVar: (work@stream_arbiter_flushable.oup_data_o), line:5:30, endln:5:40
+  \_LogicNet: (work@stream_arbiter_flushable.oup_data_o), line:5:30, endln:5:40
+    |vpiParent:
+    \_Module: work@stream_arbiter_flushable (work@stream_arbiter_flushable), file:${SURELOG_DIR}/tests/TypeParamElab/dut.sv, line:1:1, endln:7:10
+    |vpiTypespec:
+    \_RefTypespec: (work@stream_arbiter_flushable.oup_data_o.DATA_T), line:5:11, endln:5:17
+      |vpiParent:
+      \_LogicNet: (work@stream_arbiter_flushable.oup_data_o), line:5:30, endln:5:40
+      |vpiName:DATA_T
+      |vpiFullName:work@stream_arbiter_flushable.oup_data_o.DATA_T
+      |vpiActual:
+      \_TypeParameter: (work@stream_arbiter_flushable.DATA_T), line:2:25, endln:2:31
+    |vpiName:oup_data_o
+    |vpiFullName:work@stream_arbiter_flushable.oup_data_o
   |vpiDefName:work@stream_arbiter_flushable
+  |vpiNet:
+  \_LogicNet: (work@stream_arbiter_flushable.oup_data_o), line:5:30, endln:5:40
   |vpiPort:
   \_Port: (oup_data_o), line:5:30, endln:5:40
     |vpiParent:

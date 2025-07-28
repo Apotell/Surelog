@@ -347,17 +347,18 @@ Module                                                 3
 ModuleTypespec                                         2
 Operation                                             18
 Package                                                1
-PackedArrayTypespec                                    1
+PackedArrayTypespec                                    2
 ParamAssign                                            9
 Parameter                                              9
 Range                                                  2
 RefModule                                              2
 RefObj                                                22
-RefTypespec                                           20
+RefTypespec                                           23
 StringTypespec                                         6
 StructTypespec                                         1
 SysFuncCall                                            3
 TaggedPattern                                          6
+TypedefTypespec                                        2
 TypespecMember                                         1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConcatOrder/slpp_all/surelog.uhdm ...
@@ -396,7 +397,7 @@ Design: (unnamed)
       |vpiName:bp_proc_param_s
       |vpiFullName:bp_common_pkg::bp_multicore_1_cce_ucode_cfg_p::bp_proc_param_s
       |vpiActual:
-      \_StructTypespec: (bp_common_pkg::bp_proc_param_s), line:5:10, endln:8:4
+      \_TypedefTypespec: (bp_common_pkg::bp_proc_param_s), line:8:6, endln:8:21
     |vpiLocalParam:1
     |vpiName:bp_multicore_1_cce_ucode_cfg_p
     |vpiFullName:bp_common_pkg::bp_multicore_1_cce_ucode_cfg_p
@@ -411,7 +412,7 @@ Design: (unnamed)
       |vpiName:bp_proc_param_s
       |vpiFullName:bp_common_pkg::all_cfgs_gp::bp_proc_param_s
       |vpiActual:
-      \_PackedArrayTypespec: , line:13:27, endln:13:41
+      \_PackedArrayTypespec: , line:13:11, endln:13:41
     |vpiName:all_cfgs_gp
     |vpiFullName:bp_common_pkg::all_cfgs_gp
   |vpiParameter:
@@ -425,7 +426,7 @@ Design: (unnamed)
       |vpiName:bp_proc_param_s
       |vpiFullName:bp_common_pkg::bp_default_cfg_p::bp_proc_param_s
       |vpiActual:
-      \_StructTypespec: (bp_common_pkg::bp_proc_param_s), line:5:10, endln:8:4
+      \_TypedefTypespec: (bp_common_pkg::bp_proc_param_s), line:8:6, endln:8:21
     |vpiLocalParam:1
     |vpiName:bp_default_cfg_p
     |vpiFullName:bp_common_pkg::bp_default_cfg_p
@@ -440,7 +441,7 @@ Design: (unnamed)
       |vpiName:bp_proc_param_s
       |vpiFullName:bp_common_pkg::bp_unicore_cfg_p::bp_proc_param_s
       |vpiActual:
-      \_StructTypespec: (bp_common_pkg::bp_proc_param_s), line:5:10, endln:8:4
+      \_TypedefTypespec: (bp_common_pkg::bp_proc_param_s), line:8:6, endln:8:21
     |vpiLocalParam:1
     |vpiName:bp_unicore_cfg_p
     |vpiFullName:bp_common_pkg::bp_unicore_cfg_p
@@ -539,7 +540,7 @@ Design: (unnamed)
           |vpiName:cce_ucode
           |vpiFullName:bp_common_pkg::cce_ucode
           |vpiActual:
-          \_StringTypespec: (cce_ucode), line:11:13, endln:11:22
+          \_StringTypespec: , line:11:13, endln:11:22
     |vpiLhs:
     \_Parameter: (bp_common_pkg::bp_multicore_1_cce_ucode_cfg_p), line:10:31, endln:11:27
   |vpiParamAssign:
@@ -597,7 +598,7 @@ Design: (unnamed)
           |vpiName:cce_ucode
           |vpiFullName:bp_common_pkg::cce_ucode
           |vpiActual:
-          \_StringTypespec: (cce_ucode), line:27:8, endln:27:17
+          \_StringTypespec: , line:27:8, endln:27:17
     |vpiLhs:
     \_Parameter: (bp_common_pkg::bp_default_cfg_p), line:25:28, endln:28:8
   |vpiParamAssign:
@@ -615,21 +616,32 @@ Design: (unnamed)
     |vpiLhs:
     \_Parameter: (bp_common_pkg::bp_unicore_cfg_p), line:30:28, endln:30:63
   |vpiTypedef:
-  \_StructTypespec: (bp_common_pkg::bp_proc_param_s), line:5:10, endln:8:4
+  \_TypedefTypespec: (bp_common_pkg::bp_proc_param_s), line:8:6, endln:8:21
     |vpiParent:
     \_Package: bp_common_pkg (bp_common_pkg), file:${SURELOG_DIR}/tests/ConcatOrder/dut.sv, line:1:1, endln:32:11
     |vpiName:bp_common_pkg::bp_proc_param_s
+    |vpiTypedefAlias:
+    \_RefTypespec: (bp_common_pkg::bp_proc_param_s), line:5:10, endln:8:4
+      |vpiParent:
+      \_TypedefTypespec: (bp_common_pkg::bp_proc_param_s), line:8:6, endln:8:21
+      |vpiFullName:bp_common_pkg::bp_proc_param_s
+      |vpiActual:
+      \_StructTypespec: , line:5:10, endln:8:4
+  |vpiTypedef:
+  \_StructTypespec: , line:5:10, endln:8:4
+    |vpiParent:
+    \_Package: bp_common_pkg (bp_common_pkg), file:${SURELOG_DIR}/tests/ConcatOrder/dut.sv, line:1:1, endln:32:11
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (cce_ucode), line:7:22, endln:7:31
       |vpiParent:
-      \_StructTypespec: (bp_common_pkg::bp_proc_param_s), line:5:10, endln:8:4
+      \_StructTypespec: , line:5:10, endln:8:4
       |vpiName:cce_ucode
       |vpiTypespec:
-      \_RefTypespec: (bp_common_pkg::bp_proc_param_s::cce_ucode), line:7:5, endln:7:21
+      \_RefTypespec: (bp_common_pkg::cce_ucode), line:7:5, endln:7:21
         |vpiParent:
         \_TypespecMember: (cce_ucode), line:7:22, endln:7:31
-        |vpiFullName:bp_common_pkg::bp_proc_param_s::cce_ucode
+        |vpiFullName:bp_common_pkg::cce_ucode
         |vpiActual:
         \_IntegerTypespec: , line:7:5, endln:7:21
   |vpiTypedef:
@@ -637,28 +649,25 @@ Design: (unnamed)
     |vpiParent:
     \_Package: bp_common_pkg (bp_common_pkg), file:${SURELOG_DIR}/tests/ConcatOrder/dut.sv, line:1:1, endln:32:11
   |vpiTypedef:
-  \_StringTypespec: (cce_ucode), line:11:13, endln:11:22
+  \_StringTypespec: , line:11:13, endln:11:22
     |vpiParent:
     \_Package: bp_common_pkg (bp_common_pkg), file:${SURELOG_DIR}/tests/ConcatOrder/dut.sv, line:1:1, endln:32:11
-    |vpiName:cce_ucode
   |vpiTypedef:
-  \_StringTypespec: (cce_ucode), line:11:13, endln:11:22
+  \_StringTypespec: , line:11:13, endln:11:22
     |vpiParent:
     \_Package: bp_common_pkg (bp_common_pkg), file:${SURELOG_DIR}/tests/ConcatOrder/dut.sv, line:1:1, endln:32:11
-    |vpiName:cce_ucode
   |vpiTypedef:
-  \_StringTypespec: (cce_ucode), line:11:13, endln:11:22
+  \_StringTypespec: , line:11:13, endln:11:22
     |vpiParent:
     \_Package: bp_common_pkg (bp_common_pkg), file:${SURELOG_DIR}/tests/ConcatOrder/dut.sv, line:1:1, endln:32:11
-    |vpiName:cce_ucode
   |vpiTypedef:
-  \_PackedArrayTypespec: , line:13:27, endln:13:41
+  \_PackedArrayTypespec: , line:13:11, endln:13:41
     |vpiParent:
     \_Package: bp_common_pkg (bp_common_pkg), file:${SURELOG_DIR}/tests/ConcatOrder/dut.sv, line:1:1, endln:32:11
     |vpiRange:
     \_Range: , line:13:27, endln:13:41
       |vpiParent:
-      \_PackedArrayTypespec: , line:13:27, endln:13:41
+      \_PackedArrayTypespec: , line:13:11, endln:13:41
       |vpiLeftRange:
       \_Operation: , line:13:28, endln:13:38
         |vpiParent:
@@ -689,21 +698,51 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (bp_common_pkg::bp_proc_param_s), line:13:11, endln:13:26
+    \_RefTypespec: (bp_common_pkg::bp_proc_param_s), line:8:6, endln:8:21
       |vpiParent:
-      \_PackedArrayTypespec: , line:13:27, endln:13:41
-      |vpiName:bp_proc_param_s
-      |vpiFullName:bp_common_pkg::bp_proc_param_s
+      \_PackedArrayTypespec: , line:13:11, endln:13:41
+      |vpiName:bp_common_pkg::bp_proc_param_s
       |vpiActual:
-      \_StructTypespec: (bp_common_pkg::bp_proc_param_s), line:5:10, endln:8:4
+      \_TypedefTypespec: (bp_common_pkg::bp_proc_param_s), line:8:6, endln:8:21
   |vpiTypedef:
-  \_BitTypespec: , line:19:16, endln:19:37
+  \_EnumTypespec: , line:19:11, endln:23:16
+    |vpiParent:
+    \_Package: bp_common_pkg (bp_common_pkg), file:${SURELOG_DIR}/tests/ConcatOrder/dut.sv, line:1:1, endln:32:11
+    |vpiBaseTypespec:
+    \_RefTypespec: (bp_common_pkg), line:19:16, endln:19:37
+      |vpiParent:
+      \_EnumTypespec: , line:19:11, endln:23:16
+      |vpiFullName:bp_common_pkg
+      |vpiActual:
+      \_PackedArrayTypespec: , line:19:16, endln:19:37
+    |vpiEnumConst:
+    \_EnumConst: (e_bp_multicore_1_cce_ucode_cfg), line:21:5, endln:21:55
+      |vpiParent:
+      \_EnumTypespec: , line:19:11, endln:23:16
+      |vpiName:e_bp_multicore_1_cce_ucode_cfg
+      |UINT:1
+      |vpiDecompile:1
+      |vpiSize:64
+    |vpiEnumConst:
+    \_EnumConst: (e_bp_default_cfg), line:22:6, endln:22:56
+      |vpiParent:
+      \_EnumTypespec: , line:19:11, endln:23:16
+      |vpiName:e_bp_default_cfg
+      |UINT:0
+      |vpiDecompile:0
+      |vpiSize:64
+  |vpiTypedef:
+  \_BitTypespec: , line:19:16, endln:19:19
+    |vpiParent:
+    \_Package: bp_common_pkg (bp_common_pkg), file:${SURELOG_DIR}/tests/ConcatOrder/dut.sv, line:1:1, endln:32:11
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:19:16, endln:19:37
     |vpiParent:
     \_Package: bp_common_pkg (bp_common_pkg), file:${SURELOG_DIR}/tests/ConcatOrder/dut.sv, line:1:1, endln:32:11
     |vpiRange:
     \_Range: , line:19:20, endln:19:37
       |vpiParent:
-      \_BitTypespec: , line:19:16, endln:19:37
+      \_PackedArrayTypespec: , line:19:16, endln:19:37
       |vpiLeftRange:
       \_Operation: , line:19:21, endln:19:34
         |vpiParent:
@@ -733,71 +772,65 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (bp_common_pkg), line:19:16, endln:19:19
+      |vpiParent:
+      \_PackedArrayTypespec: , line:19:16, endln:19:37
+      |vpiFullName:bp_common_pkg
+      |vpiActual:
+      \_BitTypespec: , line:19:16, endln:19:19
   |vpiTypedef:
-  \_EnumTypespec: (bp_common_pkg::bp_params_e), line:19:11, endln:23:16
+  \_TypedefTypespec: (bp_common_pkg::bp_params_e), line:23:5, endln:23:16
     |vpiParent:
     \_Package: bp_common_pkg (bp_common_pkg), file:${SURELOG_DIR}/tests/ConcatOrder/dut.sv, line:1:1, endln:32:11
     |vpiName:bp_common_pkg::bp_params_e
-    |vpiBaseTypespec:
-    \_RefTypespec: (bp_common_pkg::bp_params_e), line:19:16, endln:19:37
+    |vpiTypedefAlias:
+    \_RefTypespec: (bp_common_pkg::bp_params_e), line:19:11, endln:23:4
       |vpiParent:
-      \_EnumTypespec: (bp_common_pkg::bp_params_e), line:19:11, endln:23:16
+      \_TypedefTypespec: (bp_common_pkg::bp_params_e), line:23:5, endln:23:16
       |vpiFullName:bp_common_pkg::bp_params_e
       |vpiActual:
-      \_BitTypespec: , line:19:16, endln:19:37
-    |vpiEnumConst:
-    \_EnumConst: (e_bp_multicore_1_cce_ucode_cfg), line:21:5, endln:21:55
-      |vpiParent:
-      \_EnumTypespec: (bp_common_pkg::bp_params_e), line:19:11, endln:23:16
-      |vpiName:e_bp_multicore_1_cce_ucode_cfg
-      |UINT:1
-      |vpiDecompile:1
-      |vpiSize:64
-    |vpiEnumConst:
-    \_EnumConst: (e_bp_default_cfg), line:22:6, endln:22:56
-      |vpiParent:
-      \_EnumTypespec: (bp_common_pkg::bp_params_e), line:19:11, endln:23:16
-      |vpiName:e_bp_default_cfg
-      |UINT:0
-      |vpiDecompile:0
-      |vpiSize:64
+      \_EnumTypespec: , line:19:11, endln:23:16
   |vpiTypedef:
-  \_StringTypespec: (cce_ucode), line:27:8, endln:27:17
+  \_StringTypespec: , line:27:8, endln:27:17
     |vpiParent:
     \_Package: bp_common_pkg (bp_common_pkg), file:${SURELOG_DIR}/tests/ConcatOrder/dut.sv, line:1:1, endln:32:11
-    |vpiName:cce_ucode
   |vpiTypedef:
-  \_StringTypespec: (cce_ucode), line:27:8, endln:27:17
+  \_StringTypespec: , line:27:8, endln:27:17
     |vpiParent:
     \_Package: bp_common_pkg (bp_common_pkg), file:${SURELOG_DIR}/tests/ConcatOrder/dut.sv, line:1:1, endln:32:11
-    |vpiName:cce_ucode
   |vpiTypedef:
-  \_StringTypespec: (cce_ucode), line:27:8, endln:27:17
+  \_StringTypespec: , line:27:8, endln:27:17
     |vpiParent:
     \_Package: bp_common_pkg (bp_common_pkg), file:${SURELOG_DIR}/tests/ConcatOrder/dut.sv, line:1:1, endln:32:11
-    |vpiName:cce_ucode
   |vpiImportTypespec:
-  \_StructTypespec: (bp_common_pkg::bp_proc_param_s), line:5:10, endln:8:4
+  \_TypedefTypespec: (bp_common_pkg::bp_proc_param_s), line:8:6, endln:8:21
+  |vpiImportTypespec:
+  \_StructTypespec: , line:5:10, endln:8:4
   |vpiImportTypespec:
   \_IntegerTypespec: , line:7:5, endln:7:21
   |vpiImportTypespec:
-  \_StringTypespec: (cce_ucode), line:11:13, endln:11:22
+  \_StringTypespec: , line:11:13, endln:11:22
   |vpiImportTypespec:
-  \_StringTypespec: (cce_ucode), line:11:13, endln:11:22
+  \_StringTypespec: , line:11:13, endln:11:22
   |vpiImportTypespec:
-  \_StringTypespec: (cce_ucode), line:11:13, endln:11:22
+  \_StringTypespec: , line:11:13, endln:11:22
   |vpiImportTypespec:
-  \_PackedArrayTypespec: , line:13:27, endln:13:41
+  \_PackedArrayTypespec: , line:13:11, endln:13:41
   |vpiImportTypespec:
-  \_BitTypespec: , line:19:16, endln:19:37
+  \_EnumTypespec: , line:19:11, endln:23:16
   |vpiImportTypespec:
-  \_EnumTypespec: (bp_common_pkg::bp_params_e), line:19:11, endln:23:16
+  \_BitTypespec: , line:19:16, endln:19:19
   |vpiImportTypespec:
-  \_StringTypespec: (cce_ucode), line:27:8, endln:27:17
+  \_PackedArrayTypespec: , line:19:16, endln:19:37
   |vpiImportTypespec:
-  \_StringTypespec: (cce_ucode), line:27:8, endln:27:17
+  \_TypedefTypespec: (bp_common_pkg::bp_params_e), line:23:5, endln:23:16
   |vpiImportTypespec:
-  \_StringTypespec: (cce_ucode), line:27:8, endln:27:17
+  \_StringTypespec: , line:27:8, endln:27:17
+  |vpiImportTypespec:
+  \_StringTypespec: , line:27:8, endln:27:17
+  |vpiImportTypespec:
+  \_StringTypespec: , line:27:8, endln:27:17
   |vpiDefName:bp_common_pkg
 |vpiAllModules:
 \_Module: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/ConcatOrder/dut.sv, line:35:1, endln:37:10
@@ -821,7 +854,7 @@ Design: (unnamed)
       |vpiName:bp_params_e
       |vpiFullName:work@testbench.bp_params_p.bp_params_e
       |vpiActual:
-      \_EnumTypespec: (bp_common_pkg::bp_params_e), line:19:11, endln:23:16
+      \_TypedefTypespec: (bp_common_pkg::bp_params_e), line:23:5, endln:23:16
     |vpiName:bp_params_p
     |vpiFullName:work@testbench.bp_params_p
   |vpiParameter:
@@ -835,7 +868,7 @@ Design: (unnamed)
       |vpiName:bp_proc_param_s
       |vpiFullName:work@testbench.proc_param_lp.bp_proc_param_s
       |vpiActual:
-      \_StructTypespec: (bp_common_pkg::bp_proc_param_s), line:5:10, endln:8:4
+      \_TypedefTypespec: (bp_common_pkg::bp_proc_param_s), line:8:6, endln:8:21
     |vpiLocalParam:1
     |vpiName:proc_param_lp
     |vpiFullName:work@testbench.proc_param_lp

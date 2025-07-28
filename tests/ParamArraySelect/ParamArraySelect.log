@@ -522,38 +522,40 @@ AST_DEBUG_END
 ArrayTypespec                                          1
 Assignment                                             1
 Begin                                                  2
-BitSelect                                              4
+BitSelect                                              3
 ClassDefn                                              8
 ClassTypespec                                          1
-Constant                                              42
+Constant                                              41
 Design                                                 1
 EnumConst                                              7
 EnumTypespec                                           2
 Function                                               9
 GenFor                                                 1
 GenIf                                                  1
-HierPath                                               5
+HierPath                                               4
 IODecl                                                11
 ImportTypespec                                         3
 IntTypespec                                           12
+LogicNet                                               2
 LogicTypespec                                          7
-LogicVar                                               2
 Module                                                 4
 ModuleTypespec                                         2
-Operation                                             23
+Operation                                             21
 Package                                                3
 ParamAssign                                            7
 Parameter                                              7
-Range                                                  9
+Range                                                  8
 RefModule                                              2
-RefObj                                                20
-RefTypespec                                           38
+RefObj                                                18
+RefTypespec                                           43
 RefVar                                                 1
 StringTypespec                                        12
 StructTypespec                                         1
 TaggedPattern                                         12
 Task                                                   9
+TypedefTypespec                                        3
 TypespecMember                                         2
+UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamArraySelect/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -822,7 +824,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -856,14 +858,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ParamArraySelect/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -871,7 +872,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -879,7 +880,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -887,7 +888,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -895,13 +896,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ParamArraySelect/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1133,33 +1148,44 @@ Design: (unnamed)
     |vpiLhs:
     \_Parameter: (otp_ctrl_pkg::NumPart), line:6:17, endln:6:28
   |vpiTypedef:
-  \_StructTypespec: (otp_ctrl_pkg::part_info_t), line:2:11, endln:5:4
+  \_TypedefTypespec: (otp_ctrl_pkg::part_info_t), line:5:5, endln:5:16
     |vpiParent:
     \_Package: otp_ctrl_pkg (otp_ctrl_pkg), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:1:1, endln:7:11
     |vpiName:otp_ctrl_pkg::part_info_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (otp_ctrl_pkg::part_info_t), line:2:11, endln:5:4
+      |vpiParent:
+      \_TypedefTypespec: (otp_ctrl_pkg::part_info_t), line:5:5, endln:5:16
+      |vpiFullName:otp_ctrl_pkg::part_info_t
+      |vpiActual:
+      \_StructTypespec: , line:2:11, endln:5:4
+  |vpiTypedef:
+  \_StructTypespec: , line:2:11, endln:5:4
+    |vpiParent:
+    \_Package: otp_ctrl_pkg (otp_ctrl_pkg), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:1:1, endln:7:11
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (size), line:3:18, endln:3:22
       |vpiParent:
-      \_StructTypespec: (otp_ctrl_pkg::part_info_t), line:2:11, endln:5:4
+      \_StructTypespec: , line:2:11, endln:5:4
       |vpiName:size
       |vpiTypespec:
-      \_RefTypespec: (otp_ctrl_pkg::part_info_t::size), line:3:5, endln:3:17
+      \_RefTypespec: (otp_ctrl_pkg::size), line:3:5, endln:3:17
         |vpiParent:
         \_TypespecMember: (size), line:3:18, endln:3:22
-        |vpiFullName:otp_ctrl_pkg::part_info_t::size
+        |vpiFullName:otp_ctrl_pkg::size
         |vpiActual:
         \_LogicTypespec: , line:3:5, endln:3:17
     |vpiTypespecMember:
     \_TypespecMember: (offset), line:4:18, endln:4:24
       |vpiParent:
-      \_StructTypespec: (otp_ctrl_pkg::part_info_t), line:2:11, endln:5:4
+      \_StructTypespec: , line:2:11, endln:5:4
       |vpiName:offset
       |vpiTypespec:
-      \_RefTypespec: (otp_ctrl_pkg::part_info_t::offset), line:4:5, endln:4:17
+      \_RefTypespec: (otp_ctrl_pkg::offset), line:4:5, endln:4:17
         |vpiParent:
         \_TypespecMember: (offset), line:4:18, endln:4:24
-        |vpiFullName:otp_ctrl_pkg::part_info_t::offset
+        |vpiFullName:otp_ctrl_pkg::offset
         |vpiActual:
         \_LogicTypespec: , line:4:5, endln:4:17
   |vpiTypedef:
@@ -1216,7 +1242,9 @@ Design: (unnamed)
     \_Package: otp_ctrl_pkg (otp_ctrl_pkg), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:1:1, endln:7:11
     |vpiSigned:1
   |vpiImportTypespec:
-  \_StructTypespec: (otp_ctrl_pkg::part_info_t), line:2:11, endln:5:4
+  \_TypedefTypespec: (otp_ctrl_pkg::part_info_t), line:5:5, endln:5:16
+  |vpiImportTypespec:
+  \_StructTypespec: , line:2:11, endln:5:4
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:5, endln:3:17
   |vpiImportTypespec:
@@ -1233,31 +1261,14 @@ Design: (unnamed)
   \_Parameter: (otp_ctrl_part_pkg::PartInfo), line:12:26, endln:23:4
     |vpiParent:
     \_Package: otp_ctrl_part_pkg (otp_ctrl_part_pkg), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:10:1, endln:30:11
-    |vpiSize:1
     |vpiTypespec:
-    \_RefTypespec: (otp_ctrl_part_pkg::PartInfo), line:12:14, endln:12:25
+    \_RefTypespec: (otp_ctrl_part_pkg::PartInfo::part_info_t), line:12:14, endln:12:25
       |vpiParent:
       \_Parameter: (otp_ctrl_part_pkg::PartInfo), line:12:26, endln:23:4
-      |vpiFullName:otp_ctrl_part_pkg::PartInfo
+      |vpiName:part_info_t
+      |vpiFullName:otp_ctrl_part_pkg::PartInfo::part_info_t
       |vpiActual:
-      \_ArrayTypespec: , line:12:35, endln:12:44
-    |vpiRange:
-    \_Range: , line:12:35, endln:12:44
-      |vpiParent:
-      \_Parameter: (otp_ctrl_part_pkg::PartInfo), line:12:26, endln:23:4
-      |vpiRightRange:
-      \_Operation: , line:12:36, endln:12:43
-        |vpiParent:
-        \_Range: , line:12:35, endln:12:44
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (otp_ctrl_part_pkg::PartInfo::NumPart), line:12:36, endln:12:43
-          |vpiParent:
-          \_Operation: , line:12:36, endln:12:43
-          |vpiName:NumPart
-          |vpiFullName:otp_ctrl_part_pkg::PartInfo::NumPart
-          |vpiActual:
-          \_Parameter: (otp_ctrl_pkg::NumPart), line:6:17, endln:6:28
+      \_ArrayTypespec: , line:12:14, endln:23:4
     |vpiLocalParam:1
     |vpiName:PartInfo
     |vpiFullName:otp_ctrl_part_pkg::PartInfo
@@ -1294,7 +1305,7 @@ Design: (unnamed)
             |vpiName:size
             |vpiFullName:otp_ctrl_part_pkg::size
             |vpiActual:
-            \_StringTypespec: (size), line:15:7, endln:15:11
+            \_StringTypespec: , line:15:7, endln:15:11
         |vpiOperand:
         \_TaggedPattern: , line:16:7, endln:16:22
           |vpiParent:
@@ -1314,7 +1325,7 @@ Design: (unnamed)
             |vpiName:offset
             |vpiFullName:otp_ctrl_part_pkg::offset
             |vpiActual:
-            \_StringTypespec: (offset), line:16:7, endln:16:13
+            \_StringTypespec: , line:16:7, endln:16:13
       |vpiOperand:
       \_Operation: , line:19:5, endln:22:6
         |vpiParent:
@@ -1339,7 +1350,7 @@ Design: (unnamed)
             |vpiName:size
             |vpiFullName:otp_ctrl_part_pkg::size
             |vpiActual:
-            \_StringTypespec: (size), line:20:7, endln:20:11
+            \_StringTypespec: , line:20:7, endln:20:11
         |vpiOperand:
         \_TaggedPattern: , line:21:7, endln:21:22
           |vpiParent:
@@ -1359,7 +1370,7 @@ Design: (unnamed)
             |vpiName:offset
             |vpiFullName:otp_ctrl_part_pkg::offset
             |vpiActual:
-            \_StringTypespec: (offset), line:21:7, endln:21:13
+            \_StringTypespec: , line:21:7, endln:21:13
     |vpiLhs:
     \_Parameter: (otp_ctrl_part_pkg::PartInfo), line:12:26, endln:23:4
   |vpiTypedef:
@@ -1376,88 +1387,87 @@ Design: (unnamed)
       |STRING:*
       |vpiConstType:8
   |vpiTypedef:
-  \_StringTypespec: (size), line:15:7, endln:15:11
+  \_UnsupportedTypespec: (NumPart), line:12:36, endln:12:43
     |vpiParent:
     \_Package: otp_ctrl_part_pkg (otp_ctrl_part_pkg), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:10:1, endln:30:11
-    |vpiName:size
+    |vpiName:NumPart
   |vpiTypedef:
-  \_StringTypespec: (offset), line:16:7, endln:16:13
+  \_ArrayTypespec: , line:12:14, endln:23:4
     |vpiParent:
     \_Package: otp_ctrl_part_pkg (otp_ctrl_part_pkg), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:10:1, endln:30:11
-    |vpiName:offset
-  |vpiTypedef:
-  \_StringTypespec: (size), line:20:7, endln:20:11
-    |vpiParent:
-    \_Package: otp_ctrl_part_pkg (otp_ctrl_part_pkg), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:10:1, endln:30:11
-    |vpiName:size
-  |vpiTypedef:
-  \_StringTypespec: (offset), line:21:7, endln:21:13
-    |vpiParent:
-    \_Package: otp_ctrl_part_pkg (otp_ctrl_part_pkg), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:10:1, endln:30:11
-    |vpiName:offset
-  |vpiTypedef:
-  \_ArrayTypespec: , line:12:35, endln:12:44
-    |vpiParent:
-    \_Package: otp_ctrl_part_pkg (otp_ctrl_part_pkg), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:10:1, endln:30:11
-    |vpiRange:
-    \_Range: , line:12:35, endln:12:44
-    |vpiElemTypespec:
-    \_RefTypespec: (otp_ctrl_part_pkg::part_info_t), line:12:14, endln:12:25
+    |vpiArrayType:3
+    |vpiIndexTypespec:
+    \_RefTypespec: (otp_ctrl_part_pkg::NumPart), line:12:35, endln:12:44
       |vpiParent:
-      \_ArrayTypespec: , line:12:35, endln:12:44
-      |vpiName:part_info_t
-      |vpiFullName:otp_ctrl_part_pkg::part_info_t
+      \_ArrayTypespec: , line:12:14, endln:23:4
+      |vpiName:NumPart
+      |vpiFullName:otp_ctrl_part_pkg::NumPart
       |vpiActual:
-      \_StructTypespec: (otp_ctrl_pkg::part_info_t), line:2:11, endln:5:4
+      \_UnsupportedTypespec: (NumPart), line:12:36, endln:12:43
+    |vpiElemTypespec:
+    \_RefTypespec: (otp_ctrl_part_pkg::otp_ctrl_pkg::part_info_t), line:12:14, endln:12:25
+      |vpiParent:
+      \_ArrayTypespec: , line:12:14, endln:23:4
+      |vpiName:otp_ctrl_pkg::part_info_t
+      |vpiFullName:otp_ctrl_part_pkg::otp_ctrl_pkg::part_info_t
+      |vpiActual:
+      \_TypedefTypespec: (otp_ctrl_pkg::part_info_t), line:5:5, endln:5:16
   |vpiTypedef:
-  \_StringTypespec: (size), line:15:7, endln:15:11
+  \_StringTypespec: , line:15:7, endln:15:11
     |vpiParent:
     \_Package: otp_ctrl_part_pkg (otp_ctrl_part_pkg), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:10:1, endln:30:11
-    |vpiName:size
   |vpiTypedef:
-  \_StringTypespec: (offset), line:16:7, endln:16:13
+  \_StringTypespec: , line:16:7, endln:16:13
     |vpiParent:
     \_Package: otp_ctrl_part_pkg (otp_ctrl_part_pkg), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:10:1, endln:30:11
-    |vpiName:offset
   |vpiTypedef:
-  \_StringTypespec: (size), line:20:7, endln:20:11
+  \_StringTypespec: , line:20:7, endln:20:11
     |vpiParent:
     \_Package: otp_ctrl_part_pkg (otp_ctrl_part_pkg), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:10:1, endln:30:11
-    |vpiName:size
   |vpiTypedef:
-  \_StringTypespec: (offset), line:21:7, endln:21:13
+  \_StringTypespec: , line:21:7, endln:21:13
     |vpiParent:
     \_Package: otp_ctrl_part_pkg (otp_ctrl_part_pkg), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:10:1, endln:30:11
-    |vpiName:offset
   |vpiTypedef:
-  \_StringTypespec: (size), line:15:7, endln:15:11
+  \_StringTypespec: , line:15:7, endln:15:11
     |vpiParent:
     \_Package: otp_ctrl_part_pkg (otp_ctrl_part_pkg), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:10:1, endln:30:11
-    |vpiName:size
   |vpiTypedef:
-  \_StringTypespec: (offset), line:16:7, endln:16:13
+  \_StringTypespec: , line:16:7, endln:16:13
     |vpiParent:
     \_Package: otp_ctrl_part_pkg (otp_ctrl_part_pkg), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:10:1, endln:30:11
-    |vpiName:offset
   |vpiTypedef:
-  \_StringTypespec: (size), line:20:7, endln:20:11
+  \_StringTypespec: , line:20:7, endln:20:11
     |vpiParent:
     \_Package: otp_ctrl_part_pkg (otp_ctrl_part_pkg), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:10:1, endln:30:11
-    |vpiName:size
   |vpiTypedef:
-  \_StringTypespec: (offset), line:21:7, endln:21:13
+  \_StringTypespec: , line:21:7, endln:21:13
     |vpiParent:
     \_Package: otp_ctrl_part_pkg (otp_ctrl_part_pkg), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:10:1, endln:30:11
-    |vpiName:offset
   |vpiTypedef:
-  \_EnumTypespec: (otp_ctrl_part_pkg::part_idx_e), line:25:11, endln:28:15
+  \_StringTypespec: , line:15:7, endln:15:11
     |vpiParent:
     \_Package: otp_ctrl_part_pkg (otp_ctrl_part_pkg), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:10:1, endln:30:11
-    |vpiName:otp_ctrl_part_pkg::part_idx_e
+  |vpiTypedef:
+  \_StringTypespec: , line:16:7, endln:16:13
+    |vpiParent:
+    \_Package: otp_ctrl_part_pkg (otp_ctrl_part_pkg), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:10:1, endln:30:11
+  |vpiTypedef:
+  \_StringTypespec: , line:20:7, endln:20:11
+    |vpiParent:
+    \_Package: otp_ctrl_part_pkg (otp_ctrl_part_pkg), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:10:1, endln:30:11
+  |vpiTypedef:
+  \_StringTypespec: , line:21:7, endln:21:13
+    |vpiParent:
+    \_Package: otp_ctrl_part_pkg (otp_ctrl_part_pkg), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:10:1, endln:30:11
+  |vpiTypedef:
+  \_EnumTypespec: , line:25:11, endln:28:15
+    |vpiParent:
+    \_Package: otp_ctrl_part_pkg (otp_ctrl_part_pkg), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:10:1, endln:30:11
     |vpiEnumConst:
     \_EnumConst: (CreatorSwCfgIdx), line:26:5, endln:26:20
       |vpiParent:
-      \_EnumTypespec: (otp_ctrl_part_pkg::part_idx_e), line:25:11, endln:28:15
+      \_EnumTypespec: , line:25:11, endln:28:15
       |vpiName:CreatorSwCfgIdx
       |INT:0
       |vpiDecompile:0
@@ -1465,63 +1475,63 @@ Design: (unnamed)
     |vpiEnumConst:
     \_EnumConst: (LifeCycleIdx), line:27:5, endln:27:17
       |vpiParent:
-      \_EnumTypespec: (otp_ctrl_part_pkg::part_idx_e), line:25:11, endln:28:15
+      \_EnumTypespec: , line:25:11, endln:28:15
       |vpiName:LifeCycleIdx
       |INT:1
       |vpiDecompile:1
       |vpiSize:64
+  |vpiTypedef:
+  \_TypedefTypespec: (otp_ctrl_part_pkg::part_idx_e), line:28:5, endln:28:15
+    |vpiParent:
+    \_Package: otp_ctrl_part_pkg (otp_ctrl_part_pkg), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:10:1, endln:30:11
+    |vpiName:otp_ctrl_part_pkg::part_idx_e
+    |vpiTypedefAlias:
+    \_RefTypespec: (otp_ctrl_part_pkg::part_idx_e), line:25:11, endln:28:4
+      |vpiParent:
+      \_TypedefTypespec: (otp_ctrl_part_pkg::part_idx_e), line:28:5, endln:28:15
+      |vpiFullName:otp_ctrl_part_pkg::part_idx_e
+      |vpiActual:
+      \_EnumTypespec: , line:25:11, endln:28:15
   |vpiImportTypespec:
   \_ImportTypespec: (otp_ctrl_pkg), line:11:10, endln:11:25
   |vpiImportTypespec:
-  \_StringTypespec: (size), line:15:7, endln:15:11
+  \_UnsupportedTypespec: (NumPart), line:12:36, endln:12:43
   |vpiImportTypespec:
-  \_StringTypespec: (offset), line:16:7, endln:16:13
+  \_ArrayTypespec: , line:12:14, endln:23:4
   |vpiImportTypespec:
-  \_StringTypespec: (size), line:20:7, endln:20:11
+  \_StringTypespec: , line:15:7, endln:15:11
   |vpiImportTypespec:
-  \_StringTypespec: (offset), line:21:7, endln:21:13
+  \_StringTypespec: , line:16:7, endln:16:13
   |vpiImportTypespec:
-  \_ArrayTypespec: , line:12:35, endln:12:44
+  \_StringTypespec: , line:20:7, endln:20:11
   |vpiImportTypespec:
-  \_StringTypespec: (size), line:15:7, endln:15:11
+  \_StringTypespec: , line:21:7, endln:21:13
   |vpiImportTypespec:
-  \_StringTypespec: (offset), line:16:7, endln:16:13
+  \_StringTypespec: , line:15:7, endln:15:11
   |vpiImportTypespec:
-  \_StringTypespec: (size), line:20:7, endln:20:11
+  \_StringTypespec: , line:16:7, endln:16:13
   |vpiImportTypespec:
-  \_StringTypespec: (offset), line:21:7, endln:21:13
+  \_StringTypespec: , line:20:7, endln:20:11
   |vpiImportTypespec:
-  \_StringTypespec: (size), line:15:7, endln:15:11
+  \_StringTypespec: , line:21:7, endln:21:13
   |vpiImportTypespec:
-  \_StringTypespec: (offset), line:16:7, endln:16:13
+  \_StringTypespec: , line:15:7, endln:15:11
   |vpiImportTypespec:
-  \_StringTypespec: (size), line:20:7, endln:20:11
+  \_StringTypespec: , line:16:7, endln:16:13
   |vpiImportTypespec:
-  \_StringTypespec: (offset), line:21:7, endln:21:13
+  \_StringTypespec: , line:20:7, endln:20:11
   |vpiImportTypespec:
-  \_EnumTypespec: (otp_ctrl_part_pkg::part_idx_e), line:25:11, endln:28:15
+  \_StringTypespec: , line:21:7, endln:21:13
+  |vpiImportTypespec:
+  \_EnumTypespec: , line:25:11, endln:28:15
+  |vpiImportTypespec:
+  \_TypedefTypespec: (otp_ctrl_part_pkg::part_idx_e), line:28:5, endln:28:15
   |vpiDefName:otp_ctrl_part_pkg
 |vpiAllModules:
 \_Module: work@otp_ctrl_lci (work@otp_ctrl_lci), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:33:1, endln:48:10
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@otp_ctrl_lci
-  |vpiVariables:
-  \_LogicVar: (work@otp_ctrl_lci.cnt_d), line:42:28, endln:42:33
-    |vpiParent:
-    \_Module: work@otp_ctrl_lci (work@otp_ctrl_lci), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:33:1, endln:48:10
-    |vpiTypespec:
-    \_RefTypespec: (work@otp_ctrl_lci.cnt_d), line:42:2, endln:42:27
-      |vpiParent:
-      \_LogicVar: (work@otp_ctrl_lci.cnt_d), line:42:28, endln:42:33
-      |vpiFullName:work@otp_ctrl_lci.cnt_d
-      |vpiActual:
-      \_LogicTypespec: , line:42:2, endln:42:27
-    |vpiName:cnt_d
-    |vpiFullName:work@otp_ctrl_lci.cnt_d
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@otp_ctrl_lci.cnt_d), line:42:28, endln:42:33
   |vpiParameter:
   \_Parameter: (work@otp_ctrl_lci.Info), line:37:25, endln:37:47
     |vpiParent:
@@ -1533,7 +1543,7 @@ Design: (unnamed)
       |vpiName:part_info_t
       |vpiFullName:work@otp_ctrl_lci.Info.part_info_t
       |vpiActual:
-      \_StructTypespec: (otp_ctrl_pkg::part_info_t), line:2:11, endln:5:4
+      \_TypedefTypespec: (otp_ctrl_pkg::part_info_t), line:5:5, endln:5:16
     |vpiName:Info
     |vpiFullName:work@otp_ctrl_lci.Info
   |vpiParameter:
@@ -1688,8 +1698,22 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:42:2, endln:42:27
   |vpiImportTypespec:
-  \_LogicVar: (work@otp_ctrl_lci.cnt_d), line:42:28, endln:42:33
+  \_LogicNet: (work@otp_ctrl_lci.cnt_d), line:42:28, endln:42:33
+    |vpiParent:
+    \_Module: work@otp_ctrl_lci (work@otp_ctrl_lci), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:33:1, endln:48:10
+    |vpiTypespec:
+    \_RefTypespec: (work@otp_ctrl_lci.cnt_d), line:42:2, endln:42:27
+      |vpiParent:
+      \_LogicNet: (work@otp_ctrl_lci.cnt_d), line:42:28, endln:42:33
+      |vpiFullName:work@otp_ctrl_lci.cnt_d
+      |vpiActual:
+      \_LogicTypespec: , line:42:2, endln:42:27
+    |vpiName:cnt_d
+    |vpiFullName:work@otp_ctrl_lci.cnt_d
+    |vpiNetType:36
   |vpiDefName:work@otp_ctrl_lci
+  |vpiNet:
+  \_LogicNet: (work@otp_ctrl_lci.cnt_d), line:42:28, endln:42:33
   |vpiGenStmt:
   \_GenIf: , line:44:3, endln:46:6
     |vpiParent:
@@ -1722,22 +1746,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@top
-  |vpiVariables:
-  \_LogicVar: (work@top.aaa), line:59:41, endln:59:44
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:51:1, endln:71:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.aaa), line:59:3, endln:59:40
-      |vpiParent:
-      \_LogicVar: (work@top.aaa), line:59:41, endln:59:44
-      |vpiFullName:work@top.aaa
-      |vpiActual:
-      \_LogicTypespec: , line:59:3, endln:59:40
-    |vpiName:aaa
-    |vpiFullName:work@top.aaa
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@top.aaa), line:59:41, endln:59:44
   |vpiParameter:
   \_Parameter: (work@top.OtpByteAddrWidth), line:58:17, endln:58:37
     |vpiParent:
@@ -1837,7 +1845,7 @@ Design: (unnamed)
                 |vpiName:PartInfo
                 |vpiFullName:PartInfo[k]
                 |vpiActual:
-                \_LogicNet: (work@top.PartInfo), line:59:10, endln:59:18
+                \_LogicNet: (work@top.gen_part_sel.PartInfo), line:62:75, endln:62:83
                 |vpiIndex:
                 \_RefObj: (work@top.gen_part_sel.PartInfo[k].offset.k), line:62:84, endln:62:85
                   |vpiParent:
@@ -1871,7 +1879,7 @@ Design: (unnamed)
                 |vpiName:PartInfo
                 |vpiFullName:PartInfo[k]
                 |vpiActual:
-                \_LogicNet: (work@top.PartInfo), line:59:10, endln:59:18
+                \_LogicNet: (work@top.gen_part_sel.PartInfo), line:62:75, endln:62:83
                 |vpiIndex:
                 \_RefObj: (work@top.gen_part_sel.PartInfo[k].size.k), line:63:84, endln:63:85
                   |vpiParent:
@@ -1887,7 +1895,7 @@ Design: (unnamed)
                 |vpiName:size
                 |vpiFullName:work@top.gen_part_sel.size
                 |vpiActual:
-                \_LogicNet: (work@top.size), line:59:33, endln:59:37
+                \_LogicNet: (work@top.gen_part_sel.size), line:63:87, endln:63:91
               |vpiName:PartInfo[k].size
         |vpiLhs:
         \_Parameter: (work@top.gen_part_sel.PartEnd), line:62:43, endln:62:50
@@ -1924,6 +1932,13 @@ Design: (unnamed)
         |vpiLhs:
         \_Parameter: (work@top.gen_part_sel.DigestOffset), line:65:45, endln:65:57
       |vpiImportTypespec:
+      \_LogicNet: (work@top.gen_part_sel.PartInfo), line:62:75, endln:62:83
+        |vpiParent:
+        \_Begin: (work@top.gen_part_sel), line:61:39, endln:68:6
+        |vpiName:PartInfo
+        |vpiFullName:work@top.gen_part_sel.PartInfo
+        |vpiNetType:1
+      |vpiImportTypespec:
       \_LogicNet: (work@top.gen_part_sel.k), line:62:84, endln:62:85
         |vpiParent:
         \_Begin: (work@top.gen_part_sel), line:61:39, endln:68:6
@@ -1936,6 +1951,13 @@ Design: (unnamed)
         \_Begin: (work@top.gen_part_sel), line:61:39, endln:68:6
         |vpiName:offset
         |vpiFullName:work@top.gen_part_sel.offset
+        |vpiNetType:1
+      |vpiImportTypespec:
+      \_LogicNet: (work@top.gen_part_sel.size), line:63:87, endln:63:91
+        |vpiParent:
+        \_Begin: (work@top.gen_part_sel), line:61:39, endln:68:6
+        |vpiName:size
+        |vpiFullName:work@top.gen_part_sel.size
         |vpiNetType:1
       |vpiStmt:
       \_ParamAssign: , line:62:43, endln:63:92
@@ -2156,7 +2178,19 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:59:3, endln:59:40
   |vpiImportTypespec:
-  \_LogicVar: (work@top.aaa), line:59:41, endln:59:44
+  \_LogicNet: (work@top.aaa), line:59:41, endln:59:44
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamArraySelect/dut.sv, line:51:1, endln:71:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.aaa), line:59:3, endln:59:40
+      |vpiParent:
+      \_LogicNet: (work@top.aaa), line:59:41, endln:59:44
+      |vpiFullName:work@top.aaa
+      |vpiActual:
+      \_LogicTypespec: , line:59:3, endln:59:40
+    |vpiName:aaa
+    |vpiFullName:work@top.aaa
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicNet: (work@top.PartInfo), line:59:10, endln:59:18
     |vpiParent:
@@ -2179,6 +2213,8 @@ Design: (unnamed)
     |vpiFullName:work@top.size
     |vpiNetType:1
   |vpiDefName:work@top
+  |vpiNet:
+  \_LogicNet: (work@top.aaa), line:59:41, endln:59:44
   |vpiNet:
   \_LogicNet: (work@top.PartInfo), line:59:10, endln:59:18
   |vpiNet:

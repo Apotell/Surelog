@@ -40,13 +40,15 @@ AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                               2
+ArrayTypespec                                          1
+Constant                                               4
 Design                                                 1
 Function                                               1
 IODecl                                                 1
-Range                                                  1
+Range                                                  2
 RealTypespec                                           3
-RefTypespec                                            2
+RefTypespec                                            4
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FileResolutionFunction/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -54,10 +56,32 @@ RefTypespec                                            2
 Design: (unnamed)
 |vpiName:unnamed
 |vpiTypedef:
-\_RealTypespec: (my_real), line:2:9, endln:2:13
+\_RealTypespec: , line:2:9, endln:2:13
+  |vpiParent:
+  \_Design: (unnamed)
+|vpiTypedef:
+\_TypedefTypespec: (my_real), line:2:14, endln:2:21
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:my_real
+  |vpiTypedefAlias:
+  \_RefTypespec: (my_real), line:2:9, endln:2:13
+    |vpiParent:
+    \_TypedefTypespec: (my_real), line:2:14, endln:2:21
+    |vpiFullName:my_real
+    |vpiActual:
+    \_RealTypespec: , line:2:9, endln:2:13
+|vpiTypedef:
+\_ArrayTypespec: , line:4:44, endln:4:58
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiArrayType:2
+  |vpiElemTypespec:
+  \_RefTypespec: , line:4:44, endln:4:48
+    |vpiParent:
+    \_ArrayTypespec: , line:4:44, endln:4:58
+    |vpiActual:
+    \_RealTypespec: , line:4:44, endln:4:48
 |vpiTaskFunc:
 \_Function: (my_function2), line:4:1, endln:5:12
   |vpiParent:
@@ -111,12 +135,12 @@ Design: (unnamed)
         |STRING:unsized
         |vpiConstType:6
     |vpiTypedef:
-    \_RefTypespec: (my_function2.driver), line:4:44, endln:4:48
+    \_RefTypespec: (my_function2.driver), line:4:44, endln:4:58
       |vpiParent:
       \_IODecl: (driver), line:4:49, endln:4:55
       |vpiFullName:my_function2.driver
       |vpiActual:
-      \_RealTypespec: , line:4:44, endln:4:48
+      \_ArrayTypespec: , line:4:44, endln:4:58
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

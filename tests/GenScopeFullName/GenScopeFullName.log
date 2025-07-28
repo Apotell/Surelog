@@ -112,17 +112,16 @@ AST_DEBUG_END
 Assignment                                             1
 Begin                                                  1
 BitSelect                                              1
-Constant                                               6
+Constant                                               4
 Design                                                 1
 GenFor                                                 1
-LogicNet                                               1
+LogicNet                                               2
 LogicTypespec                                          3
-LogicVar                                               1
 Module                                                 2
 ModuleTypespec                                         1
 Operation                                              2
 Port                                                   2
-Range                                                  2
+Range                                                  1
 RefModule                                              1
 RefObj                                                 3
 RefTypespec                                            3
@@ -138,22 +137,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@dut
-  |vpiVariables:
-  \_LogicVar: (work@dut.a), line:2:16, endln:2:17
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/GenScopeFullName/dut.sv, line:1:1, endln:10:10
-    |vpiTypespec:
-    \_RefTypespec: (work@dut.a), line:2:4, endln:2:15
-      |vpiParent:
-      \_LogicVar: (work@dut.a), line:2:16, endln:2:17
-      |vpiFullName:work@dut.a
-      |vpiActual:
-      \_LogicTypespec: , line:2:4, endln:2:15
-    |vpiName:a
-    |vpiFullName:work@dut.a
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@dut.a), line:2:16, endln:2:17
   |vpiInternalScope:
   \_GenFor: (work@dut), line:4:4, endln:8:7
     |vpiParent:
@@ -205,7 +188,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@dut.gen_modules.module_in_genscope.a
             |vpiActual:
-            \_LogicVar: (work@dut.a), line:2:16, endln:2:17
+            \_LogicNet: (work@dut.a), line:2:16, endln:2:17
             |vpiIndex:
             \_RefObj: (work@dut.gen_modules.module_in_genscope.i), line:5:44, endln:5:45
               |vpiParent:
@@ -307,8 +290,22 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:4, endln:2:15
   |vpiImportTypespec:
-  \_LogicVar: (work@dut.a), line:2:16, endln:2:17
+  \_LogicNet: (work@dut.a), line:2:16, endln:2:17
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/GenScopeFullName/dut.sv, line:1:1, endln:10:10
+    |vpiTypespec:
+    \_RefTypespec: (work@dut.a), line:2:4, endln:2:15
+      |vpiParent:
+      \_LogicNet: (work@dut.a), line:2:16, endln:2:17
+      |vpiFullName:work@dut.a
+      |vpiActual:
+      \_LogicTypespec: , line:2:4, endln:2:15
+    |vpiName:a
+    |vpiFullName:work@dut.a
+    |vpiNetType:36
   |vpiDefName:work@dut
+  |vpiNet:
+  \_LogicNet: (work@dut.a), line:2:16, endln:2:17
 |vpiAllModules:
 \_Module: work@ibex_counter (work@ibex_counter), file:${SURELOG_DIR}/tests/GenScopeFullName/dut.sv, line:12:1, endln:14:10
   |vpiParent:

@@ -92,18 +92,18 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 BitSelect                                              1
-Constant                                               7
+Constant                                               5
 ContAssign                                             1
 Design                                                 1
 IntTypespec                                            1
+LogicNet                                               1
 LogicTypespec                                          1
-LogicVar                                               1
 Module                                                 1
-Operation                                              3
+Operation                                              2
 ParamAssign                                            1
 Parameter                                              1
-Range                                                  2
-RefObj                                                 3
+Range                                                  1
+RefObj                                                 2
 RefTypespec                                            2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/IndexAssign/slpp_unit/surelog.uhdm ...
@@ -116,22 +116,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@t
-  |vpiVariables:
-  \_LogicVar: (work@t.sig), line:3:17, endln:3:20
-    |vpiParent:
-    \_Module: work@t (work@t), file:${SURELOG_DIR}/tests/IndexAssign/dut.sv, line:1:1, endln:5:10
-    |vpiTypespec:
-    \_RefTypespec: (work@t.sig), line:3:3, endln:3:16
-      |vpiParent:
-      \_LogicVar: (work@t.sig), line:3:17, endln:3:20
-      |vpiFullName:work@t.sig
-      |vpiActual:
-      \_LogicTypespec: , line:3:3, endln:3:16
-    |vpiName:sig
-    |vpiFullName:work@t.sig
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@t.sig), line:3:17, endln:3:20
   |vpiParameter:
   \_Parameter: (work@t.I), line:2:27, endln:2:32
     |vpiParent:
@@ -207,8 +191,22 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:3, endln:3:16
   |vpiImportTypespec:
-  \_LogicVar: (work@t.sig), line:3:17, endln:3:20
+  \_LogicNet: (work@t.sig), line:3:17, endln:3:20
+    |vpiParent:
+    \_Module: work@t (work@t), file:${SURELOG_DIR}/tests/IndexAssign/dut.sv, line:1:1, endln:5:10
+    |vpiTypespec:
+    \_RefTypespec: (work@t.sig), line:3:3, endln:3:16
+      |vpiParent:
+      \_LogicNet: (work@t.sig), line:3:17, endln:3:20
+      |vpiFullName:work@t.sig
+      |vpiActual:
+      \_LogicTypespec: , line:3:3, endln:3:16
+    |vpiName:sig
+    |vpiFullName:work@t.sig
+    |vpiNetType:36
   |vpiDefName:work@t
+  |vpiNet:
+  \_LogicNet: (work@t.sig), line:3:17, endln:3:20
   |vpiContAssign:
   \_ContAssign: , line:4:10, endln:4:22
     |vpiParent:
@@ -228,7 +226,7 @@ Design: (unnamed)
       |vpiName:sig
       |vpiFullName:work@t.sig
       |vpiActual:
-      \_LogicVar: (work@t.sig), line:3:17, endln:3:20
+      \_LogicNet: (work@t.sig), line:3:17, endln:3:20
       |vpiIndex:
       \_Operation: , line:4:14, endln:4:17
         |vpiParent:

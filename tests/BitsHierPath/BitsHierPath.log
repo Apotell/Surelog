@@ -262,10 +262,11 @@ Port                                                   1
 Range                                                  1
 RefModule                                              4
 RefObj                                                 3
-RefTypespec                                            6
+RefTypespec                                            7
 StructNet                                              1
 StructTypespec                                         1
 SysFuncCall                                            1
+TypedefTypespec                                        1
 TypespecMember                                         2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BitsHierPath/slpp_all/surelog.uhdm ...
@@ -279,33 +280,44 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:pkg
   |vpiTypedef:
-  \_StructTypespec: (pkg::struct_t), line:2:11, endln:5:4
+  \_TypedefTypespec: (pkg::struct_t), line:5:5, endln:5:13
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:1:1, endln:6:17
     |vpiName:pkg::struct_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (pkg::struct_t), line:2:11, endln:5:4
+      |vpiParent:
+      \_TypedefTypespec: (pkg::struct_t), line:5:5, endln:5:13
+      |vpiFullName:pkg::struct_t
+      |vpiActual:
+      \_StructTypespec: , line:2:11, endln:5:4
+  |vpiTypedef:
+  \_StructTypespec: , line:2:11, endln:5:4
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:1:1, endln:6:17
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (x), line:3:16, endln:3:17
       |vpiParent:
-      \_StructTypespec: (pkg::struct_t), line:2:11, endln:5:4
+      \_StructTypespec: , line:2:11, endln:5:4
       |vpiName:x
       |vpiTypespec:
-      \_RefTypespec: (pkg::struct_t::x), line:3:5, endln:3:15
+      \_RefTypespec: (pkg::x), line:3:5, endln:3:15
         |vpiParent:
         \_TypespecMember: (x), line:3:16, endln:3:17
-        |vpiFullName:pkg::struct_t::x
+        |vpiFullName:pkg::x
         |vpiActual:
         \_LogicTypespec: , line:3:5, endln:3:15
     |vpiTypespecMember:
     \_TypespecMember: (z), line:4:16, endln:4:17
       |vpiParent:
-      \_StructTypespec: (pkg::struct_t), line:2:11, endln:5:4
+      \_StructTypespec: , line:2:11, endln:5:4
       |vpiName:z
       |vpiTypespec:
-      \_RefTypespec: (pkg::struct_t::z), line:4:5, endln:4:10
+      \_RefTypespec: (pkg::z), line:4:5, endln:4:10
         |vpiParent:
         \_TypespecMember: (z), line:4:16, endln:4:17
-        |vpiFullName:pkg::struct_t::z
+        |vpiFullName:pkg::z
         |vpiActual:
         \_LogicTypespec: , line:4:5, endln:4:10
   |vpiTypedef:
@@ -337,7 +349,9 @@ Design: (unnamed)
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:1:1, endln:6:17
   |vpiImportTypespec:
-  \_StructTypespec: (pkg::struct_t), line:2:11, endln:5:4
+  \_TypedefTypespec: (pkg::struct_t), line:5:5, endln:5:13
+  |vpiImportTypespec:
+  \_StructTypespec: , line:2:11, endln:5:4
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:5, endln:3:15
   |vpiImportTypespec:
@@ -469,13 +483,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitsHierPath/dut.sv, line:11:1, endln:17:10
     |vpiTypespec:
-    \_RefTypespec: (work@top.in.in), line:11:19, endln:11:32
+    \_RefTypespec: (work@top.in.pkg::struct_t), line:11:19, endln:11:32
       |vpiParent:
       \_StructNet: (work@top.in), line:11:33, endln:11:35
-      |vpiName:in
-      |vpiFullName:work@top.in.in
+      |vpiName:pkg::struct_t
+      |vpiFullName:work@top.in.pkg::struct_t
       |vpiActual:
-      \_StructTypespec: (pkg::struct_t), line:2:11, endln:5:4
+      \_TypedefTypespec: (pkg::struct_t), line:5:5, endln:5:13
     |vpiName:in
     |vpiFullName:work@top.in
   |vpiImportTypespec:
@@ -503,7 +517,7 @@ Design: (unnamed)
       |vpiName:pkg::struct_t
       |vpiFullName:work@top.in.pkg::struct_t
       |vpiActual:
-      \_StructTypespec: (pkg::struct_t), line:2:11, endln:5:4
+      \_TypedefTypespec: (pkg::struct_t), line:5:5, endln:5:13
   |vpiRefModule:
   \_RefModule: work@dut (dut1), line:13:4, endln:13:7
     |vpiParent:

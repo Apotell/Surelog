@@ -165,25 +165,25 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/InterfaceElab/dut.sv:32:1: Compile module "work@testharness".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                               7
+Constant                                               5
 Design                                                 1
 IODecl                                                 1
 IntTypespec                                            1
 Interface                                              1
 InterfaceTypespec                                      4
-LogicNet                                               3
+LogicNet                                               2
 LogicTypespec                                          4
-LogicVar                                               1
+LogicVar                                               2
 Modport                                                1
 Module                                                 3
 ModuleTypespec                                         3
-Operation                                              4
+Operation                                              3
 ParamAssign                                            1
 Parameter                                              1
 Port                                                   4
-Range                                                  3
+Range                                                  2
 RefModule                                              3
-RefObj                                                 6
+RefObj                                                 5
 RefTypespec                                            6
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfaceElab/slpp_all/surelog.uhdm ...
@@ -197,6 +197,21 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:work@REG_BUS
   |vpiVariables:
+  \_LogicVar: (work@REG_BUS.clk_i), line:6:15, endln:6:20
+    |vpiParent:
+    \_Interface: work@REG_BUS (work@REG_BUS), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:2:1, endln:13:13
+    |vpiTypespec:
+    \_RefTypespec: (work@REG_BUS.clk_i), line:6:9, endln:6:14
+      |vpiParent:
+      \_LogicVar: (work@REG_BUS.clk_i), line:6:15, endln:6:20
+      |vpiFullName:work@REG_BUS.clk_i
+      |vpiActual:
+      \_LogicTypespec: , line:6:9, endln:6:14
+    |vpiName:clk_i
+    |vpiFullName:work@REG_BUS.clk_i
+    |vpiRandType:1
+    |vpiVisibility:1
+  |vpiVariables:
   \_LogicVar: (work@REG_BUS.addr), line:9:28, endln:9:32
     |vpiParent:
     \_Interface: work@REG_BUS (work@REG_BUS), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:2:1, endln:13:13
@@ -209,7 +224,10 @@ Design: (unnamed)
       \_LogicTypespec: , line:9:3, endln:9:25
     |vpiName:addr
     |vpiFullName:work@REG_BUS.addr
+    |vpiRandType:1
     |vpiVisibility:1
+  |vpiReg:
+  \_LogicVar: (work@REG_BUS.clk_i), line:6:15, endln:6:20
   |vpiReg:
   \_LogicVar: (work@REG_BUS.addr), line:9:28, endln:9:32
   |vpiParameter:
@@ -337,19 +355,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:6:9, endln:6:14
   |vpiImportTypespec:
-  \_LogicNet: (work@REG_BUS.clk_i), line:6:15, endln:6:20
-    |vpiParent:
-    \_Interface: work@REG_BUS (work@REG_BUS), file:${SURELOG_DIR}/tests/InterfaceElab/dut.sv, line:2:1, endln:13:13
-    |vpiTypespec:
-    \_RefTypespec: (work@REG_BUS.clk_i), line:6:9, endln:6:14
-      |vpiParent:
-      \_LogicNet: (work@REG_BUS.clk_i), line:6:15, endln:6:20
-      |vpiFullName:work@REG_BUS.clk_i
-      |vpiActual:
-      \_LogicTypespec: , line:6:9, endln:6:14
-    |vpiName:clk_i
-    |vpiFullName:work@REG_BUS.clk_i
-    |vpiNetType:36
+  \_LogicVar: (work@REG_BUS.clk_i), line:6:15, endln:6:20
   |vpiImportTypespec:
   \_LogicTypespec: , line:9:3, endln:9:25
   |vpiImportTypespec:
@@ -380,8 +386,6 @@ Design: (unnamed)
     |vpiFullName:work@REG_BUS.addr
     |vpiNetType:36
   |vpiDefName:work@REG_BUS
-  |vpiNet:
-  \_LogicNet: (work@REG_BUS.clk_i), line:6:15, endln:6:20
   |vpiNet:
   \_LogicNet: (work@REG_BUS.clk_i), line:6:15, endln:6:20
   |vpiNet:

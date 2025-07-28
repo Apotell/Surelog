@@ -630,7 +630,7 @@ Begin                                                  5
 ClassDefn                                              1
 ClassTypespec                                          1
 ClassVar                                               1
-Constant                                              24
+Constant                                              20
 ContAssign                                             1
 Design                                                 1
 IODecl                                                 2
@@ -639,13 +639,14 @@ IfStmt                                                 1
 Initial                                                1
 Interface                                              1
 InterfaceTypespec                                      6
-LogicNet                                              11
+LogicNet                                              10
 LogicTypespec                                          8
+LogicVar                                               1
 Modport                                                2
 Module                                                 3
 Operation                                             16
 Port                                                   5
-Range                                                  4
+Range                                                  2
 RefObj                                                35
 RefTypespec                                           12
 SysFuncCall                                            5
@@ -666,30 +667,35 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@mem_if
-  |vpiTypedef:
-  \_LogicTypespec: , line:47:25, endln:47:29
-    |vpiParent:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:47:1, endln:52:13
-  |vpiTypedef:
-  \_LogicTypespec: , line:47:25, endln:47:29
-    |vpiParent:
-    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:47:1, endln:52:13
-  |vpiImportTypespec:
-  \_LogicTypespec: , line:47:25, endln:47:29
-  |vpiImportTypespec:
-  \_LogicNet: (work@mem_if.clk), line:47:30, endln:47:33
+  |vpiVariables:
+  \_LogicVar: (work@mem_if.clk), line:47:30, endln:47:33
     |vpiParent:
     \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:47:1, endln:52:13
     |vpiTypespec:
     \_RefTypespec: (work@mem_if.clk), line:47:25, endln:47:29
       |vpiParent:
-      \_LogicNet: (work@mem_if.clk), line:47:30, endln:47:33
+      \_LogicVar: (work@mem_if.clk), line:47:30, endln:47:33
       |vpiFullName:work@mem_if.clk
       |vpiActual:
       \_LogicTypespec: , line:47:25, endln:47:29
     |vpiName:clk
     |vpiFullName:work@mem_if.clk
-    |vpiNetType:1
+    |vpiRandType:1
+    |vpiVisibility:1
+  |vpiReg:
+  \_LogicVar: (work@mem_if.clk), line:47:30, endln:47:33
+  |vpiTypedef:
+  \_LogicTypespec: , line:47:25, endln:47:29
+    |vpiParent:
+    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:47:1, endln:52:13
+  |vpiTypedef:
+  \_LogicTypespec: , line:47:25, endln:47:29
+    |vpiParent:
+    \_Interface: work@mem_if (work@mem_if), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:47:1, endln:52:13
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:47:25, endln:47:29
+  |vpiImportTypespec:
+  \_LogicVar: (work@mem_if.clk), line:47:30, endln:47:33
   |vpiImportTypespec:
   \_LogicTypespec: , line:47:25, endln:47:29
   |vpiImportTypespec:
@@ -700,8 +706,6 @@ Design: (unnamed)
     |vpiFullName:work@mem_if.clk
     |vpiNetType:1
   |vpiDefName:work@mem_if
-  |vpiNet:
-  \_LogicNet: (work@mem_if.clk), line:47:30, endln:47:33
   |vpiNet:
   \_LogicNet: (work@mem_if.clk), line:47:30, endln:47:33
   |vpiModport:
@@ -754,6 +758,7 @@ Design: (unnamed)
       \_ClassTypespec: (DD2), line:61:1, endln:61:4
     |vpiName:toto2
     |vpiFullName:work@memory_ctrl1.toto2
+    |vpiRandType:1
     |vpiVisibility:1
   |vpiTypedef:
   \_UnsupportedTypespec: (DD1), line:59:1, endln:59:4
@@ -960,7 +965,7 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@tb_operators (work@tb_operators), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:3:1, endln:38:10
     |vpiTypespec:
-    \_RefTypespec: (work@tb_operators.shifter), line:5:1, endln:5:12
+    \_RefTypespec: (work@tb_operators.shifter), line:5:1, endln:5:5
       |vpiParent:
       \_LogicNet: (work@tb_operators.shifter), line:5:13, endln:5:20
       |vpiFullName:work@tb_operators.shifter
@@ -976,7 +981,7 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@tb_operators (work@tb_operators), file:${SURELOG_DIR}/tests/UnitTest/top.v, line:3:1, endln:38:10
     |vpiTypespec:
-    \_RefTypespec: (work@tb_operators.result), line:6:1, endln:6:12
+    \_RefTypespec: (work@tb_operators.result), line:6:1, endln:6:5
       |vpiParent:
       \_LogicNet: (work@tb_operators.result), line:6:13, endln:6:19
       |vpiFullName:work@tb_operators.result

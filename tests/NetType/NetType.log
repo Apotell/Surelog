@@ -204,26 +204,28 @@ AST_DEBUG_END
              ${SURELOG_DIR}/tests/NetType/dut.sv:9:1: previous definition.
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+ArrayTypespec                                          2
 Assignment                                             2
 Begin                                                  1
 BitSelect                                              1
 BitTypespec                                            3
-Constant                                               5
+Constant                                               9
 Design                                                 1
 ForeachStmt                                            1
 Function                                               3
 HierPath                                               3
 IODecl                                                 2
 Module                                                 1
-Range                                                  2
+Range                                                  4
 RealTypespec                                           5
 RealVar                                                1
 RefObj                                                 6
-RefTypespec                                            9
+RefTypespec                                           18
 RefVar                                                 2
 StructTypespec                                         1
+TypedefTypespec                                        7
 TypespecMember                                         2
-UnsupportedTypespec                                    1
+UnsupportedTypespec                                    2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/NetType/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -246,50 +248,101 @@ Design: (unnamed)
       |vpiName:my_real
       |vpiFullName:work@dut.my_real_net.my_real
       |vpiActual:
-      \_RealTypespec: (my_real), line:9:9, endln:9:13
+      \_TypedefTypespec: (my_real), line:9:14, endln:9:21
     |vpiName:my_real_net
     |vpiFullName:work@dut.my_real_net
+    |vpiRandType:1
     |vpiVisibility:1
   |vpiImportTypespec:
   \_RealVar: (work@dut.my_real_net), line:13:13, endln:13:24
   |vpiDefName:work@dut
 |vpiTypedef:
-\_BitTypespec: (net_bit), line:6:9, endln:6:12
+\_BitTypespec: , line:6:9, endln:6:12
+  |vpiParent:
+  \_Design: (unnamed)
+|vpiTypedef:
+\_TypedefTypespec: (net_bit), line:6:13, endln:6:20
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:net_bit
+  |vpiTypedefAlias:
+  \_RefTypespec: (net_bit), line:6:9, endln:6:12
+    |vpiParent:
+    \_TypedefTypespec: (net_bit), line:6:13, endln:6:20
+    |vpiFullName:net_bit
+    |vpiActual:
+    \_BitTypespec: , line:6:9, endln:6:12
 |vpiTypedef:
-\_RealTypespec: (my_real), line:9:9, endln:9:13
+\_RealTypespec: , line:9:9, endln:9:13
+  |vpiParent:
+  \_Design: (unnamed)
+|vpiTypedef:
+\_TypedefTypespec: (my_real), line:9:14, endln:9:21
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:my_real
+  |vpiTypedefAlias:
+  \_RefTypespec: (my_real), line:9:9, endln:9:13
+    |vpiParent:
+    \_TypedefTypespec: (my_real), line:9:14, endln:9:21
+    |vpiFullName:my_real
+    |vpiActual:
+    \_RealTypespec: , line:9:9, endln:9:13
 |vpiTypedef:
-\_StructTypespec: (T), line:22:9, endln:25:2
+\_TypedefTypespec: (myalias), line:18:25, endln:18:32
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:myalias
+  |vpiTypedefAlias:
+  \_RefTypespec: (myalias), line:18:9, endln:18:24
+    |vpiParent:
+    \_TypedefTypespec: (myalias), line:18:25, endln:18:32
+    |vpiFullName:myalias
+    |vpiActual:
+    \_UnsupportedTypespec: (some_other_type), line:18:9, endln:18:24
+|vpiTypedef:
+\_UnsupportedTypespec: (some_other_type), line:18:9, endln:18:24
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:some_other_type
+|vpiTypedef:
+\_TypedefTypespec: (T), line:25:3, endln:25:4
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:T
+  |vpiTypedefAlias:
+  \_RefTypespec: (T), line:22:9, endln:25:2
+    |vpiParent:
+    \_TypedefTypespec: (T), line:25:3, endln:25:4
+    |vpiFullName:T
+    |vpiActual:
+    \_StructTypespec: , line:22:9, endln:25:2
+|vpiTypedef:
+\_StructTypespec: , line:22:9, endln:25:2
+  |vpiParent:
+  \_Design: (unnamed)
   |vpiTypespecMember:
   \_TypespecMember: (field1), line:23:8, endln:23:14
     |vpiParent:
-    \_StructTypespec: (T), line:22:9, endln:25:2
+    \_StructTypespec: , line:22:9, endln:25:2
     |vpiName:field1
     |vpiTypespec:
-    \_RefTypespec: (T.field1), line:23:3, endln:23:7
+    \_RefTypespec: (field1), line:23:3, endln:23:7
       |vpiParent:
       \_TypespecMember: (field1), line:23:8, endln:23:14
-      |vpiFullName:T.field1
+      |vpiFullName:field1
       |vpiActual:
       \_RealTypespec: , line:23:3, endln:23:7
   |vpiTypespecMember:
   \_TypespecMember: (field2), line:24:7, endln:24:13
     |vpiParent:
-    \_StructTypespec: (T), line:22:9, endln:25:2
+    \_StructTypespec: , line:22:9, endln:25:2
     |vpiName:field2
     |vpiTypespec:
-    \_RefTypespec: (T.field2), line:24:3, endln:24:6
+    \_RefTypespec: (field2), line:24:3, endln:24:6
       |vpiParent:
       \_TypespecMember: (field2), line:24:7, endln:24:13
-      |vpiFullName:T.field2
+      |vpiFullName:field2
       |vpiActual:
       \_BitTypespec: , line:24:3, endln:24:6
 |vpiTypedef:
@@ -301,10 +354,68 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
 |vpiTypedef:
-\_RealTypespec: (my_real), line:39:9, endln:39:13
+\_TypedefTypespec: (wT), line:34:11, endln:34:13
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:wT
+  |vpiTypedefAlias:
+  \_RefTypespec: (wT), line:34:9, endln:34:10
+    |vpiParent:
+    \_TypedefTypespec: (wT), line:34:11, endln:34:13
+    |vpiFullName:wT
+    |vpiActual:
+    \_TypedefTypespec: (T), line:25:3, endln:25:4
+|vpiTypedef:
+\_TypedefTypespec: (wTsum), line:36:11, endln:36:16
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:wTsum
+  |vpiTypedefAlias:
+  \_RefTypespec: (wTsum), line:36:9, endln:36:10
+    |vpiParent:
+    \_TypedefTypespec: (wTsum), line:36:11, endln:36:16
+    |vpiFullName:wTsum
+    |vpiActual:
+    \_TypedefTypespec: (T), line:25:3, endln:25:4
+|vpiTypedef:
+\_RealTypespec: , line:39:9, endln:39:13
+  |vpiParent:
+  \_Design: (unnamed)
+|vpiTypedef:
+\_TypedefTypespec: (my_real), line:39:14, endln:39:21
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:my_real
+  |vpiTypedefAlias:
+  \_RefTypespec: (my_real), line:39:9, endln:39:13
+    |vpiParent:
+    \_TypedefTypespec: (my_real), line:39:14, endln:39:21
+    |vpiFullName:my_real
+    |vpiActual:
+    \_RealTypespec: , line:39:9, endln:39:13
+|vpiTypedef:
+\_ArrayTypespec: , line:28:34, endln:28:44
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiArrayType:2
+  |vpiElemTypespec:
+  \_RefTypespec: (T), line:28:34, endln:28:35
+    |vpiParent:
+    \_ArrayTypespec: , line:28:34, endln:28:44
+    |vpiName:T
+    |vpiActual:
+    \_TypedefTypespec: (T), line:25:3, endln:25:4
+|vpiTypedef:
+\_ArrayTypespec: , line:41:44, endln:41:58
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiArrayType:2
+  |vpiElemTypespec:
+  \_RefTypespec: , line:41:44, endln:41:48
+    |vpiParent:
+    \_ArrayTypespec: , line:41:44, endln:41:58
+    |vpiActual:
+    \_RealTypespec: , line:41:44, endln:41:48
 |vpiTaskFunc:
 \_Function: (my_function), line:3:1, endln:4:12
   |vpiParent:
@@ -471,7 +582,7 @@ Design: (unnamed)
     |vpiName:T
     |vpiFullName:Tsum.T
     |vpiActual:
-    \_StructTypespec: (T), line:22:9, endln:25:2
+    \_TypedefTypespec: (T), line:25:3, endln:25:4
   |vpiIODecl:
   \_IODecl: (driver), line:28:36, endln:28:42
     |vpiParent:
@@ -498,13 +609,13 @@ Design: (unnamed)
         |STRING:unsized
         |vpiConstType:6
     |vpiTypedef:
-    \_RefTypespec: (Tsum.driver.T), line:22:9, endln:25:2
+    \_RefTypespec: (Tsum.driver.T), line:28:34, endln:28:44
       |vpiParent:
       \_IODecl: (driver), line:28:36, endln:28:42
       |vpiName:T
       |vpiFullName:Tsum.driver.T
       |vpiActual:
-      \_StructTypespec: (T), line:22:9, endln:25:2
+      \_ArrayTypespec: , line:28:34, endln:28:44
   |vpiStmt:
   \_Begin: (Tsum)
 |vpiTaskFunc:
@@ -560,12 +671,12 @@ Design: (unnamed)
         |STRING:unsized
         |vpiConstType:6
     |vpiTypedef:
-    \_RefTypespec: (my_function2.driver), line:41:44, endln:41:48
+    \_RefTypespec: (my_function2.driver), line:41:44, endln:41:58
       |vpiParent:
       \_IODecl: (driver), line:41:49, endln:41:55
       |vpiFullName:my_function2.driver
       |vpiActual:
-      \_RealTypespec: , line:41:44, endln:41:48
+      \_ArrayTypespec: , line:41:44, endln:41:58
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

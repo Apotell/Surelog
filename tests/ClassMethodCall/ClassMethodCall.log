@@ -271,15 +271,16 @@ IfStmt                                                 1
 Initial                                                1
 IntTypespec                                            4
 IntVar                                                 2
+LogicNet                                               1
 LogicTypespec                                          5
-LogicVar                                               4
+LogicVar                                               3
 MethodFuncCall                                         3
 Module                                                 1
 Package                                                1
 ParamAssign                                            3
 Parameter                                              3
 RefObj                                                 6
-RefTypespec                                           11
+RefTypespec                                           12
 Task                                                   2
 TaskDecl                                               1
 UnsupportedTypespec                                    1
@@ -315,6 +316,7 @@ Design: (unnamed)
       |vpiFullName:pack::door::state
       |vpiSigned:1
       |vpiAutomatic:1
+      |vpiRandType:1
       |vpiVisibility:1
     |vpiVariables:
     \_IntVar: (pack::door::timer), line:7:9, endln:7:14
@@ -331,6 +333,7 @@ Design: (unnamed)
       |vpiFullName:pack::door::timer
       |vpiSigned:1
       |vpiAutomatic:1
+      |vpiRandType:1
       |vpiVisibility:1
     |vpiVariables:
     \_LogicVar: (pack::door::open), line:8:11, endln:8:15
@@ -346,6 +349,7 @@ Design: (unnamed)
       |vpiName:open
       |vpiFullName:pack::door::open
       |vpiAutomatic:1
+      |vpiRandType:1
       |vpiVisibility:1
     |vpiVariables:
     \_LogicVar: (pack::door::lock), line:8:16, endln:8:20
@@ -361,6 +365,7 @@ Design: (unnamed)
       |vpiName:lock
       |vpiFullName:pack::door::lock
       |vpiAutomatic:1
+      |vpiRandType:1
       |vpiVisibility:1
     |vpiVariables:
     \_LogicVar: (pack::door::clock), line:8:21, endln:8:26
@@ -376,6 +381,7 @@ Design: (unnamed)
       |vpiName:clock
       |vpiFullName:pack::door::clock
       |vpiAutomatic:1
+      |vpiRandType:1
       |vpiVisibility:1
     |vpiReg:
     \_LogicVar: (pack::door::open), line:8:11, endln:8:15
@@ -713,15 +719,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@door_mod
-  |vpiVariables:
-  \_LogicVar: (work@door_mod.open), line:45:20, endln:45:24
-    |vpiParent:
-    \_Module: work@door_mod (work@door_mod), file:${SURELOG_DIR}/tests/ClassMethodCall/dut.sv, line:43:1, endln:51:10
-    |vpiName:open
-    |vpiFullName:work@door_mod.open
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@door_mod.open), line:45:20, endln:45:24
   |vpiTypedef:
   \_UnsupportedTypespec: (pack::doorOpen), line:45:5, endln:45:19
     |vpiParent:
@@ -730,8 +727,22 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_UnsupportedTypespec: (pack::doorOpen), line:45:5, endln:45:19
   |vpiImportTypespec:
-  \_LogicVar: (work@door_mod.open), line:45:20, endln:45:24
+  \_LogicNet: (work@door_mod.open), line:45:20, endln:45:24
+    |vpiParent:
+    \_Module: work@door_mod (work@door_mod), file:${SURELOG_DIR}/tests/ClassMethodCall/dut.sv, line:43:1, endln:51:10
+    |vpiTypespec:
+    \_RefTypespec: (work@door_mod.open.pack::doorOpen), line:45:5, endln:45:19
+      |vpiParent:
+      \_LogicNet: (work@door_mod.open), line:45:20, endln:45:24
+      |vpiName:pack::doorOpen
+      |vpiFullName:work@door_mod.open.pack::doorOpen
+      |vpiActual:
+      \_UnsupportedTypespec: (pack::doorOpen), line:45:5, endln:45:19
+    |vpiName:open
+    |vpiFullName:work@door_mod.open
   |vpiDefName:work@door_mod
+  |vpiNet:
+  \_LogicNet: (work@door_mod.open), line:45:20, endln:45:24
   |vpiProcess:
   \_Initial: , line:46:5, endln:50:8
     |vpiParent:
@@ -759,7 +770,7 @@ Design: (unnamed)
           |vpiName:open
           |vpiFullName:work@door_mod.open
           |vpiActual:
-          \_LogicVar: (work@door_mod.open), line:45:20, endln:45:24
+          \_LogicNet: (work@door_mod.open), line:45:20, endln:45:24
       |vpiStmt:
       \_MethodFuncCall: (door_fsm), line:48:9, endln:48:23
         |vpiParent:
@@ -772,7 +783,7 @@ Design: (unnamed)
           |vpiName:open
           |vpiFullName:work@door_mod.open
           |vpiActual:
-          \_LogicVar: (work@door_mod.open), line:45:20, endln:45:24
+          \_LogicNet: (work@door_mod.open), line:45:20, endln:45:24
       |vpiStmt:
       \_MethodFuncCall: (f1), line:49:9, endln:49:17
         |vpiParent:
@@ -785,7 +796,7 @@ Design: (unnamed)
           |vpiName:open
           |vpiFullName:work@door_mod.open
           |vpiActual:
-          \_LogicVar: (work@door_mod.open), line:45:20, endln:45:24
+          \_LogicNet: (work@door_mod.open), line:45:20, endln:45:24
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

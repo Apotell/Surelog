@@ -127,6 +127,7 @@ AST_DEBUG_END
 [NTE:CP0309] ${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv:8:19: Implicit port type (wire) for "o".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+ArrayNet                                               1
 ArrayTypespec                                          1
 BitSelect                                              2
 Constant                                               5
@@ -135,16 +136,15 @@ Design                                                 1
 HierPath                                               2
 LogicNet                                               1
 LogicTypespec                                          1
-LogicVar                                               1
 Module                                                 1
 Package                                                1
 Port                                                   1
 Range                                                  1
 RefObj                                                 3
-RefTypespec                                            1
+RefTypespec                                            5
 StructTypespec                                         1
+TypedefTypespec                                        2
 TypespecMember                                         1
-UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypedefUnpacked/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -157,21 +157,32 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:pkg
   |vpiTypedef:
-  \_StructTypespec: (pkg::a), line:2:12, endln:4:5
+  \_TypedefTypespec: (pkg::a), line:4:6, endln:4:7
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv, line:1:1, endln:6:11
     |vpiName:pkg::a
+    |vpiTypedefAlias:
+    \_RefTypespec: (pkg::a), line:2:12, endln:4:5
+      |vpiParent:
+      \_TypedefTypespec: (pkg::a), line:4:6, endln:4:7
+      |vpiFullName:pkg::a
+      |vpiActual:
+      \_StructTypespec: , line:2:12, endln:4:5
+  |vpiTypedef:
+  \_StructTypespec: , line:2:12, endln:4:5
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv, line:1:1, endln:6:11
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (x), line:3:16, endln:3:17
       |vpiParent:
-      \_StructTypespec: (pkg::a), line:2:12, endln:4:5
+      \_StructTypespec: , line:2:12, endln:4:5
       |vpiName:x
       |vpiTypespec:
-      \_RefTypespec: (pkg::a::x), line:3:7, endln:3:12
+      \_RefTypespec: (pkg::x), line:3:7, endln:3:12
         |vpiParent:
         \_TypespecMember: (x), line:3:16, endln:3:17
-        |vpiFullName:pkg::a::x
+        |vpiFullName:pkg::x
         |vpiActual:
         \_LogicTypespec: , line:3:7, endln:3:12
   |vpiTypedef:
@@ -179,13 +190,26 @@ Design: (unnamed)
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv, line:1:1, endln:6:11
   |vpiTypedef:
-  \_ArrayTypespec: , line:5:14, endln:5:20
+  \_TypedefTypespec: (pkg::b), line:5:14, endln:5:15
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv, line:1:1, endln:6:11
+    |vpiName:pkg::b
+    |vpiTypedefAlias:
+    \_RefTypespec: (pkg::b), line:5:12, endln:5:13
+      |vpiParent:
+      \_TypedefTypespec: (pkg::b), line:5:14, endln:5:15
+      |vpiFullName:pkg::b
+      |vpiActual:
+      \_ArrayTypespec: , line:5:12, endln:5:20
+  |vpiTypedef:
+  \_ArrayTypespec: , line:5:12, endln:5:20
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv, line:1:1, endln:6:11
+    |vpiArrayType:1
     |vpiRange:
     \_Range: , line:5:15, endln:5:20
       |vpiParent:
-      \_ArrayTypespec: , line:5:14, endln:5:20
+      \_ArrayTypespec: , line:5:12, endln:5:20
       |vpiLeftRange:
       \_Constant: , line:5:16, endln:5:17
         |vpiParent:
@@ -202,32 +226,29 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (pkg::a), line:5:12, endln:5:13
+      |vpiParent:
+      \_ArrayTypespec: , line:5:12, endln:5:20
+      |vpiName:pkg::a
+      |vpiActual:
+      \_TypedefTypespec: (pkg::a), line:4:6, endln:4:7
   |vpiImportTypespec:
-  \_StructTypespec: (pkg::a), line:2:12, endln:4:5
+  \_TypedefTypespec: (pkg::a), line:4:6, endln:4:7
+  |vpiImportTypespec:
+  \_StructTypespec: , line:2:12, endln:4:5
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:7, endln:3:12
   |vpiImportTypespec:
-  \_ArrayTypespec: , line:5:14, endln:5:20
+  \_TypedefTypespec: (pkg::b), line:5:14, endln:5:15
+  |vpiImportTypespec:
+  \_ArrayTypespec: , line:5:12, endln:5:20
   |vpiDefName:pkg
 |vpiAllModules:
 \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv, line:8:1, endln:12:10
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@dut
-  |vpiVariables:
-  \_LogicVar: (work@dut.c), line:9:11, endln:9:12
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv, line:8:1, endln:12:10
-    |vpiName:c
-    |vpiFullName:work@dut.c
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@dut.c), line:9:11, endln:9:12
-  |vpiTypedef:
-  \_UnsupportedTypespec: (pkg::b), line:9:4, endln:9:10
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv, line:8:1, endln:12:10
-    |vpiName:pkg::b
   |vpiImportTypespec:
   \_LogicNet: (work@dut.o), line:8:19, endln:8:20
     |vpiParent:
@@ -235,9 +256,19 @@ Design: (unnamed)
     |vpiName:o
     |vpiFullName:work@dut.o
   |vpiImportTypespec:
-  \_UnsupportedTypespec: (pkg::b), line:9:4, endln:9:10
-  |vpiImportTypespec:
-  \_LogicVar: (work@dut.c), line:9:11, endln:9:12
+  \_ArrayNet: (work@dut.c), line:9:11, endln:9:12
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/TypedefUnpacked/dut.sv, line:8:1, endln:12:10
+    |vpiTypespec:
+    \_RefTypespec: (work@dut.c.pkg::b), line:9:4, endln:9:10
+      |vpiParent:
+      \_ArrayNet: (work@dut.c), line:9:11, endln:9:12
+      |vpiName:pkg::b
+      |vpiFullName:work@dut.c.pkg::b
+      |vpiActual:
+      \_TypedefTypespec: (pkg::b), line:5:14, endln:5:15
+    |vpiName:c
+    |vpiFullName:work@dut.c
   |vpiImportTypespec:
   \_LogicNet: (work@dut.x), line:10:16, endln:10:17
     |vpiParent:
@@ -250,6 +281,8 @@ Design: (unnamed)
   \_LogicNet: (work@dut.o), line:8:19, endln:8:20
   |vpiNet:
   \_LogicNet: (work@dut.x), line:10:16, endln:10:17
+  |vpiArrayNet:
+  \_ArrayNet: (work@dut.c), line:9:11, endln:9:12
   |vpiPort:
   \_Port: (o), line:8:19, endln:8:20
     |vpiParent:
@@ -279,7 +312,7 @@ Design: (unnamed)
         |vpiName:c
         |vpiFullName:c[1]
         |vpiActual:
-        \_LogicVar: (work@dut.c), line:9:11, endln:9:12
+        \_ArrayNet: (work@dut.c), line:9:11, endln:9:12
         |vpiIndex:
         \_Constant: , line:10:13, endln:10:14
           |vpiParent:
@@ -312,7 +345,7 @@ Design: (unnamed)
         |vpiName:c
         |vpiFullName:c[1]
         |vpiActual:
-        \_LogicVar: (work@dut.c), line:9:11, endln:9:12
+        \_ArrayNet: (work@dut.c), line:9:11, endln:9:12
         |vpiIndex:
         \_Constant: , line:11:17, endln:11:18
           |vpiParent:

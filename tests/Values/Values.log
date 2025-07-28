@@ -159,20 +159,21 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ClassDefn                                              8
 ClassTypespec                                          1
-Constant                                              30
+Constant                                              20
 Design                                                 1
 EnumConst                                              5
 EnumTypespec                                           1
 Function                                               9
 IODecl                                                11
 IntTypespec                                            9
+LogicNet                                               5
 LogicTypespec                                          6
-LogicVar                                               5
 Module                                                 2
 Package                                                1
-Range                                                 10
-RefTypespec                                           17
+Range                                                  5
+RefTypespec                                           18
 Task                                                   9
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Values/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -441,7 +442,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -475,14 +476,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/Values/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -490,7 +490,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -498,7 +498,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -506,7 +506,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -514,13 +514,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/Values/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -722,126 +736,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@top
-  |vpiVariables:
-  \_LogicVar: (work@top.first), line:2:15, endln:2:20
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/Values/dut.sv, line:1:1, endln:7:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.first), line:2:2, endln:2:14
-      |vpiParent:
-      \_LogicVar: (work@top.first), line:2:15, endln:2:20
-      |vpiFullName:work@top.first
-      |vpiActual:
-      \_LogicTypespec: , line:2:2, endln:2:14
-    |vpiName:first
-    |vpiFullName:work@top.first
-    |vpiVisibility:1
-    |vpiExpr:
-    \_Constant: , line:2:24, endln:2:29
-      |vpiParent:
-      \_LogicVar: (work@top.first), line:2:15, endln:2:20
-      |vpiDecompile:12'h1
-      |vpiSize:12
-      |HEX:1
-      |vpiConstType:5
-  |vpiVariables:
-  \_LogicVar: (work@top.second), line:3:15, endln:3:21
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/Values/dut.sv, line:1:1, endln:7:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.second), line:3:2, endln:3:14
-      |vpiParent:
-      \_LogicVar: (work@top.second), line:3:15, endln:3:21
-      |vpiFullName:work@top.second
-      |vpiActual:
-      \_LogicTypespec: , line:3:2, endln:3:14
-    |vpiName:second
-    |vpiFullName:work@top.second
-    |vpiVisibility:1
-    |vpiExpr:
-    \_Constant: , line:3:25, endln:3:30
-      |vpiParent:
-      \_LogicVar: (work@top.second), line:3:15, endln:3:21
-      |vpiDecompile:12'd1
-      |vpiSize:12
-      |DEC:1
-      |vpiConstType:1
-  |vpiVariables:
-  \_LogicVar: (work@top.third), line:4:15, endln:4:20
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/Values/dut.sv, line:1:1, endln:7:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.third), line:4:2, endln:4:14
-      |vpiParent:
-      \_LogicVar: (work@top.third), line:4:15, endln:4:20
-      |vpiFullName:work@top.third
-      |vpiActual:
-      \_LogicTypespec: , line:4:2, endln:4:14
-    |vpiName:third
-    |vpiFullName:work@top.third
-    |vpiVisibility:1
-    |vpiExpr:
-    \_Constant: , line:4:24, endln:4:29
-      |vpiParent:
-      \_LogicVar: (work@top.third), line:4:15, endln:4:20
-      |vpiDecompile:12'b1
-      |vpiSize:12
-      |BIN:1
-      |vpiConstType:3
-  |vpiVariables:
-  \_LogicVar: (work@top.forth), line:5:15, endln:5:20
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/Values/dut.sv, line:1:1, endln:7:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.forth), line:5:2, endln:5:14
-      |vpiParent:
-      \_LogicVar: (work@top.forth), line:5:15, endln:5:20
-      |vpiFullName:work@top.forth
-      |vpiActual:
-      \_LogicTypespec: , line:5:2, endln:5:14
-    |vpiName:forth
-    |vpiFullName:work@top.forth
-    |vpiVisibility:1
-    |vpiExpr:
-    \_Constant: , line:5:24, endln:5:29
-      |vpiParent:
-      \_LogicVar: (work@top.forth), line:5:15, endln:5:20
-      |vpiDecompile:12'o1
-      |vpiSize:12
-      |OCT:1
-      |vpiConstType:4
-  |vpiVariables:
-  \_LogicVar: (work@top.fifth), line:6:15, endln:6:20
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/Values/dut.sv, line:1:1, endln:7:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.fifth), line:6:2, endln:6:14
-      |vpiParent:
-      \_LogicVar: (work@top.fifth), line:6:15, endln:6:20
-      |vpiFullName:work@top.fifth
-      |vpiActual:
-      \_LogicTypespec: , line:6:2, endln:6:14
-    |vpiName:fifth
-    |vpiFullName:work@top.fifth
-    |vpiVisibility:1
-    |vpiExpr:
-    \_Constant: , line:6:24, endln:6:25
-      |vpiParent:
-      \_LogicVar: (work@top.fifth), line:6:15, endln:6:20
-      |vpiDecompile:1
-      |vpiSize:12
-      |UINT:1
-      |vpiConstType:9
-  |vpiReg:
-  \_LogicVar: (work@top.first), line:2:15, endln:2:20
-  |vpiReg:
-  \_LogicVar: (work@top.second), line:3:15, endln:3:21
-  |vpiReg:
-  \_LogicVar: (work@top.third), line:4:15, endln:4:20
-  |vpiReg:
-  \_LogicVar: (work@top.forth), line:5:15, endln:5:20
-  |vpiReg:
-  \_LogicVar: (work@top.fifth), line:6:15, endln:6:20
   |vpiTypedef:
   \_LogicTypespec: , line:2:2, endln:2:14
     |vpiParent:
@@ -965,24 +859,94 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:2, endln:2:14
   |vpiImportTypespec:
-  \_LogicVar: (work@top.first), line:2:15, endln:2:20
+  \_LogicNet: (work@top.first), line:2:15, endln:2:20
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/Values/dut.sv, line:1:1, endln:7:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.first), line:2:2, endln:2:14
+      |vpiParent:
+      \_LogicNet: (work@top.first), line:2:15, endln:2:20
+      |vpiFullName:work@top.first
+      |vpiActual:
+      \_LogicTypespec: , line:2:2, endln:2:14
+    |vpiName:first
+    |vpiFullName:work@top.first
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:2, endln:3:14
   |vpiImportTypespec:
-  \_LogicVar: (work@top.second), line:3:15, endln:3:21
+  \_LogicNet: (work@top.second), line:3:15, endln:3:21
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/Values/dut.sv, line:1:1, endln:7:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.second), line:3:2, endln:3:14
+      |vpiParent:
+      \_LogicNet: (work@top.second), line:3:15, endln:3:21
+      |vpiFullName:work@top.second
+      |vpiActual:
+      \_LogicTypespec: , line:3:2, endln:3:14
+    |vpiName:second
+    |vpiFullName:work@top.second
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicTypespec: , line:4:2, endln:4:14
   |vpiImportTypespec:
-  \_LogicVar: (work@top.third), line:4:15, endln:4:20
+  \_LogicNet: (work@top.third), line:4:15, endln:4:20
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/Values/dut.sv, line:1:1, endln:7:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.third), line:4:2, endln:4:14
+      |vpiParent:
+      \_LogicNet: (work@top.third), line:4:15, endln:4:20
+      |vpiFullName:work@top.third
+      |vpiActual:
+      \_LogicTypespec: , line:4:2, endln:4:14
+    |vpiName:third
+    |vpiFullName:work@top.third
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicTypespec: , line:5:2, endln:5:14
   |vpiImportTypespec:
-  \_LogicVar: (work@top.forth), line:5:15, endln:5:20
+  \_LogicNet: (work@top.forth), line:5:15, endln:5:20
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/Values/dut.sv, line:1:1, endln:7:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.forth), line:5:2, endln:5:14
+      |vpiParent:
+      \_LogicNet: (work@top.forth), line:5:15, endln:5:20
+      |vpiFullName:work@top.forth
+      |vpiActual:
+      \_LogicTypespec: , line:5:2, endln:5:14
+    |vpiName:forth
+    |vpiFullName:work@top.forth
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicTypespec: , line:6:2, endln:6:14
   |vpiImportTypespec:
-  \_LogicVar: (work@top.fifth), line:6:15, endln:6:20
+  \_LogicNet: (work@top.fifth), line:6:15, endln:6:20
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/Values/dut.sv, line:1:1, endln:7:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.fifth), line:6:2, endln:6:14
+      |vpiParent:
+      \_LogicNet: (work@top.fifth), line:6:15, endln:6:20
+      |vpiFullName:work@top.fifth
+      |vpiActual:
+      \_LogicTypespec: , line:6:2, endln:6:14
+    |vpiName:fifth
+    |vpiFullName:work@top.fifth
+    |vpiNetType:36
   |vpiDefName:work@top
+  |vpiNet:
+  \_LogicNet: (work@top.first), line:2:15, endln:2:20
+  |vpiNet:
+  \_LogicNet: (work@top.second), line:3:15, endln:3:21
+  |vpiNet:
+  \_LogicNet: (work@top.third), line:4:15, endln:4:20
+  |vpiNet:
+  \_LogicNet: (work@top.forth), line:5:15, endln:5:20
+  |vpiNet:
+  \_LogicNet: (work@top.fifth), line:6:15, endln:6:20
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

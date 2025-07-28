@@ -156,15 +156,17 @@ Module                                                 2
 ModuleTypespec                                         1
 Operation                                              1
 Package                                                1
+PackedArrayTypespec                                    1
 ParamAssign                                            2
 Parameter                                              2
 Range                                                  1
 RefModule                                              1
-RefTypespec                                           18
+RefTypespec                                           21
 StringTypespec                                         2
 StructTypespec                                         1
 TaggedPattern                                          2
 Task                                                   9
+TypedefTypespec                                        2
 TypespecMember                                         2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamConcat/slpp_all/surelog.uhdm ...
@@ -434,7 +436,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -468,14 +470,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ParamConcat/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -483,7 +484,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -491,7 +492,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -499,7 +500,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -507,13 +508,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ParamConcat/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -726,7 +741,7 @@ Design: (unnamed)
       \_Parameter: (work@ibex_csr.ResetValue), line:2:25, endln:2:40
       |vpiFullName:work@ibex_csr.ResetValue
       |vpiActual:
-      \_BitTypespec: , line:2:15, endln:2:24
+      \_PackedArrayTypespec: , line:2:15, endln:2:24
     |vpiName:ResetValue
     |vpiFullName:work@ibex_csr.ResetValue
   |vpiParamAssign:
@@ -744,13 +759,17 @@ Design: (unnamed)
     |vpiLhs:
     \_Parameter: (work@ibex_csr.ResetValue), line:2:25, endln:2:40
   |vpiTypedef:
-  \_BitTypespec: , line:2:15, endln:2:24
+  \_BitTypespec: , line:2:15, endln:2:18
+    |vpiParent:
+    \_Module: work@ibex_csr (work@ibex_csr), file:${SURELOG_DIR}/tests/ParamConcat/dut.sv, line:1:1, endln:4:10
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:2:15, endln:2:24
     |vpiParent:
     \_Module: work@ibex_csr (work@ibex_csr), file:${SURELOG_DIR}/tests/ParamConcat/dut.sv, line:1:1, endln:4:10
     |vpiRange:
     \_Range: , line:2:19, endln:2:24
       |vpiParent:
-      \_BitTypespec: , line:2:15, endln:2:24
+      \_PackedArrayTypespec: , line:2:15, endln:2:24
       |vpiLeftRange:
       \_Constant: , line:2:20, endln:2:21
         |vpiParent:
@@ -767,8 +786,17 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@ibex_csr), line:2:15, endln:2:18
+      |vpiParent:
+      \_PackedArrayTypespec: , line:2:15, endln:2:24
+      |vpiFullName:work@ibex_csr
+      |vpiActual:
+      \_BitTypespec: , line:2:15, endln:2:18
   |vpiImportTypespec:
-  \_BitTypespec: , line:2:15, endln:2:24
+  \_BitTypespec: , line:2:15, endln:2:18
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:2:15, endln:2:24
   |vpiDefName:work@ibex_csr
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamConcat/dut.sv, line:6:1, endln:19:10
@@ -786,7 +814,7 @@ Design: (unnamed)
       |vpiName:status_t
       |vpiFullName:work@top.MSTATUS_RST_VAL.status_t
       |vpiActual:
-      \_StructTypespec: (status_t), line:9:11, endln:12:4
+      \_TypedefTypespec: (status_t), line:12:5, endln:12:13
     |vpiLocalParam:1
     |vpiName:MSTATUS_RST_VAL
     |vpiFullName:work@top.MSTATUS_RST_VAL
@@ -818,7 +846,7 @@ Design: (unnamed)
           |vpiName:mpie
           |vpiFullName:work@top.mpie
           |vpiActual:
-          \_StringTypespec: (mpie), line:14:43, endln:14:47
+          \_StringTypespec: , line:14:43, endln:14:47
       |vpiOperand:
       \_TaggedPattern: , line:15:43, endln:15:52
         |vpiParent:
@@ -838,37 +866,48 @@ Design: (unnamed)
           |vpiName:mie
           |vpiFullName:work@top.mie
           |vpiActual:
-          \_StringTypespec: (mie), line:15:43, endln:15:46
+          \_StringTypespec: , line:15:43, endln:15:46
     |vpiLhs:
     \_Parameter: (work@top.MSTATUS_RST_VAL), line:14:23, endln:15:53
   |vpiTypedef:
-  \_StructTypespec: (status_t), line:9:11, endln:12:4
+  \_TypedefTypespec: (status_t), line:12:5, endln:12:13
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamConcat/dut.sv, line:6:1, endln:19:10
     |vpiName:status_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@top.status_t), line:9:11, endln:12:4
+      |vpiParent:
+      \_TypedefTypespec: (status_t), line:12:5, endln:12:13
+      |vpiFullName:work@top.status_t
+      |vpiActual:
+      \_StructTypespec: , line:9:11, endln:12:4
+  |vpiTypedef:
+  \_StructTypespec: , line:9:11, endln:12:4
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamConcat/dut.sv, line:6:1, endln:19:10
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (mie), line:10:11, endln:10:14
       |vpiParent:
-      \_StructTypespec: (status_t), line:9:11, endln:12:4
+      \_StructTypespec: , line:9:11, endln:12:4
       |vpiName:mie
       |vpiTypespec:
-      \_RefTypespec: (work@top.status_t.mie), line:10:5, endln:10:10
+      \_RefTypespec: (work@top.mie), line:10:5, endln:10:10
         |vpiParent:
         \_TypespecMember: (mie), line:10:11, endln:10:14
-        |vpiFullName:work@top.status_t.mie
+        |vpiFullName:work@top.mie
         |vpiActual:
         \_LogicTypespec: , line:10:5, endln:10:10
     |vpiTypespecMember:
     \_TypespecMember: (mpie), line:11:11, endln:11:15
       |vpiParent:
-      \_StructTypespec: (status_t), line:9:11, endln:12:4
+      \_StructTypespec: , line:9:11, endln:12:4
       |vpiName:mpie
       |vpiTypespec:
-      \_RefTypespec: (work@top.status_t.mpie), line:11:5, endln:11:10
+      \_RefTypespec: (work@top.mpie), line:11:5, endln:11:10
         |vpiParent:
         \_TypespecMember: (mpie), line:11:11, endln:11:15
-        |vpiFullName:work@top.status_t.mpie
+        |vpiFullName:work@top.mpie
         |vpiActual:
         \_LogicTypespec: , line:11:5, endln:11:10
   |vpiTypedef:
@@ -880,30 +919,30 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamConcat/dut.sv, line:6:1, endln:19:10
   |vpiTypedef:
-  \_StringTypespec: (mpie), line:14:43, endln:14:47
+  \_StringTypespec: , line:14:43, endln:14:47
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamConcat/dut.sv, line:6:1, endln:19:10
-    |vpiName:mpie
   |vpiTypedef:
-  \_StringTypespec: (mie), line:15:43, endln:15:46
+  \_StringTypespec: , line:15:43, endln:15:46
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamConcat/dut.sv, line:6:1, endln:19:10
-    |vpiName:mie
   |vpiTypedef:
   \_ModuleTypespec: (ibex_csr), line:16:3, endln:16:11
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamConcat/dut.sv, line:6:1, endln:19:10
     |vpiName:ibex_csr
   |vpiImportTypespec:
-  \_StructTypespec: (status_t), line:9:11, endln:12:4
+  \_TypedefTypespec: (status_t), line:12:5, endln:12:13
+  |vpiImportTypespec:
+  \_StructTypespec: , line:9:11, endln:12:4
   |vpiImportTypespec:
   \_LogicTypespec: , line:10:5, endln:10:10
   |vpiImportTypespec:
   \_LogicTypespec: , line:11:5, endln:11:10
   |vpiImportTypespec:
-  \_StringTypespec: (mpie), line:14:43, endln:14:47
+  \_StringTypespec: , line:14:43, endln:14:47
   |vpiImportTypespec:
-  \_StringTypespec: (mie), line:15:43, endln:15:46
+  \_StringTypespec: , line:15:43, endln:15:46
   |vpiImportTypespec:
   \_ModuleTypespec: (ibex_csr), line:16:3, endln:16:11
   |vpiDefName:work@top

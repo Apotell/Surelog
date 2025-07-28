@@ -135,9 +135,10 @@ Module                                                 1
 PartSelect                                             2
 Range                                                  2
 RefObj                                                 2
-RefTypespec                                            2
+RefTypespec                                            3
 StructNet                                              1
 StructTypespec                                         1
+TypedefTypespec                                        1
 TypespecMember                                         1
 VarSelect                                              2
 === UHDM Object Stats End ===
@@ -156,13 +157,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/MultiPartSelect/dut.sv, line:5:1, endln:11:10
     |vpiTypespec:
-    \_RefTypespec: (work@top.xx.xx), line:7:5, endln:7:10
+    \_RefTypespec: (work@top.xx.tier1), line:7:5, endln:7:10
       |vpiParent:
       \_StructNet: (work@top.xx), line:7:11, endln:7:13
-      |vpiName:xx
-      |vpiFullName:work@top.xx.xx
+      |vpiName:tier1
+      |vpiFullName:work@top.xx.tier1
       |vpiActual:
-      \_StructTypespec: (tier1), line:1:9, endln:3:2
+      \_TypedefTypespec: (tier1), line:3:3, endln:3:8
     |vpiName:xx
     |vpiFullName:work@top.xx
   |vpiDefName:work@top
@@ -293,21 +294,32 @@ Design: (unnamed)
             |vpiConstType:9
       |vpiName:xx.a[1][1:0]
 |vpiTypedef:
-\_StructTypespec: (tier1), line:1:9, endln:3:2
+\_TypedefTypespec: (tier1), line:3:3, endln:3:8
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:tier1
+  |vpiTypedefAlias:
+  \_RefTypespec: (tier1), line:1:9, endln:3:2
+    |vpiParent:
+    \_TypedefTypespec: (tier1), line:3:3, endln:3:8
+    |vpiFullName:tier1
+    |vpiActual:
+    \_StructTypespec: , line:1:9, endln:3:2
+|vpiTypedef:
+\_StructTypespec: , line:1:9, endln:3:2
+  |vpiParent:
+  \_Design: (unnamed)
   |vpiPacked:1
   |vpiTypespecMember:
   \_TypespecMember: (a), line:2:22, endln:2:23
     |vpiParent:
-    \_StructTypespec: (tier1), line:1:9, endln:3:2
+    \_StructTypespec: , line:1:9, endln:3:2
     |vpiName:a
     |vpiTypespec:
-    \_RefTypespec: (tier1.a), line:2:5, endln:2:21
+    \_RefTypespec: (a), line:2:5, endln:2:21
       |vpiParent:
       \_TypespecMember: (a), line:2:22, endln:2:23
-      |vpiFullName:tier1.a
+      |vpiFullName:a
       |vpiActual:
       \_LogicTypespec: , line:2:5, endln:2:21
 |vpiTypedef:

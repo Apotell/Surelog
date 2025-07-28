@@ -204,12 +204,13 @@ AST_DEBUG_END
 [INF:CP0302] Compile class "builtin::semaphore".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+ArrayTypespec                                          1
 Assignment                                             3
 Begin                                                  3
 BitSelect                                              2
 ClassDefn                                              8
 ClassTypespec                                          1
-Constant                                              25
+Constant                                              27
 Design                                                 1
 EnumConst                                              5
 EnumTypespec                                           1
@@ -227,11 +228,12 @@ Operation                                              7
 Package                                                2
 ParamAssign                                            2
 Parameter                                              2
-Range                                                  1
-RefObj                                                 9
-RefTypespec                                           20
+Range                                                  3
+RefObj                                                12
+RefTypespec                                           24
 ReturnStmt                                             1
 Task                                                   9
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EvalFuncArray/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -500,7 +502,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -534,14 +536,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/EvalFuncArray/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -549,7 +550,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -557,7 +558,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -565,7 +566,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -573,13 +574,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/EvalFuncArray/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1144,12 +1159,12 @@ Design: (unnamed)
             |vpiActual:
             \_Parameter: (earlgrey::InfoTypes), line:10:15, endln:10:28
       |vpiTypedef:
-      \_RefTypespec: (earlgrey::max_info_pages::infos), line:12:46, endln:12:49
+      \_RefTypespec: (earlgrey::max_info_pages::infos), line:12:46, endln:12:66
         |vpiParent:
         \_IODecl: (infos), line:12:50, endln:12:55
         |vpiFullName:earlgrey::max_info_pages::infos
         |vpiActual:
-        \_IntTypespec: , line:12:46, endln:12:49
+        \_ArrayTypespec: , line:12:46, endln:12:66
     |vpiStmt:
     \_Begin: (earlgrey::max_info_pages)
     |vpiInstance:
@@ -1163,13 +1178,42 @@ Design: (unnamed)
   \_IntTypespec: , line:10:11, endln:10:14
     |vpiParent:
     \_Package: earlgrey (earlgrey), file:${SURELOG_DIR}/tests/EvalFuncArray/dut.sv, line:1:1, endln:24:11
+    |vpiExpr:
+    \_RefObj: (earlgrey::InfoTypes), line:12:56, endln:12:65
+      |vpiParent:
+      \_IntTypespec: , line:10:11, endln:10:14
+      |vpiName:InfoTypes
+      |vpiFullName:earlgrey::InfoTypes
+      |vpiActual:
+      \_Parameter: (earlgrey::InfoTypes), line:10:15, endln:10:28
     |vpiSigned:1
+  |vpiTypedef:
+  \_ArrayTypespec: , line:12:46, endln:12:66
+    |vpiParent:
+    \_Package: earlgrey (earlgrey), file:${SURELOG_DIR}/tests/EvalFuncArray/dut.sv, line:1:1, endln:24:11
+    |vpiArrayType:3
+    |vpiIndexTypespec:
+    \_RefTypespec: (earlgrey), line:12:55, endln:12:66
+      |vpiParent:
+      \_ArrayTypespec: , line:12:46, endln:12:66
+      |vpiFullName:earlgrey
+      |vpiActual:
+      \_IntTypespec: , line:10:11, endln:10:14
+    |vpiElemTypespec:
+    \_RefTypespec: (earlgrey), line:12:46, endln:12:49
+      |vpiParent:
+      \_ArrayTypespec: , line:12:46, endln:12:66
+      |vpiFullName:earlgrey
+      |vpiActual:
+      \_IntTypespec: , line:12:46, endln:12:49
   |vpiImportTypespec:
   \_Function: (earlgrey::max_info_pages), line:12:4, endln:21:14
   |vpiImportTypespec:
   \_IntTypespec: , line:3:11, endln:3:14
   |vpiImportTypespec:
   \_IntTypespec: , line:10:11, endln:10:14
+  |vpiImportTypespec:
+  \_ArrayTypespec: , line:12:46, endln:12:66
   |vpiDefName:earlgrey
   |vpiTaskFunc:
   \_Function: (earlgrey::max_info_pages), line:12:4, endln:21:14

@@ -113,15 +113,15 @@ Function                                               9
 IODecl                                                11
 ImportTypespec                                         1
 IntTypespec                                            9
-LogicNet                                               1
 LogicTypespec                                          3
 Module                                                 1
 Package                                                3
-RefTypespec                                           17
+RefTypespec                                           20
+StructNet                                              1
 StructTypespec                                         3
 Task                                                   9
+TypedefTypespec                                        3
 TypespecMember                                         4
-UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/StructTypedef/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -390,7 +390,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -424,14 +424,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/StructTypedef/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -439,7 +438,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -447,7 +446,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -455,7 +454,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -463,13 +462,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/StructTypedef/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -672,33 +685,44 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:flash_ctrl_reg_pkg
   |vpiTypedef:
-  \_StructTypespec: (flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t), line:3:9, endln:10:4
+  \_TypedefTypespec: (flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t), line:10:5, endln:10:43
     |vpiParent:
     \_Package: flash_ctrl_reg_pkg (flash_ctrl_reg_pkg), file:${SURELOG_DIR}/tests/StructTypedef/dut.sv, line:1:1, endln:12:11
     |vpiName:flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t), line:3:9, endln:10:4
+      |vpiParent:
+      \_TypedefTypespec: (flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t), line:10:5, endln:10:43
+      |vpiFullName:flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t
+      |vpiActual:
+      \_StructTypespec: , line:3:9, endln:10:4
+  |vpiTypedef:
+  \_StructTypespec: , line:3:9, endln:10:4
+    |vpiParent:
+    \_Package: flash_ctrl_reg_pkg (flash_ctrl_reg_pkg), file:${SURELOG_DIR}/tests/StructTypedef/dut.sv, line:1:1, endln:12:11
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (en), line:6:7, endln:6:9
       |vpiParent:
-      \_StructTypespec: (flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t), line:3:9, endln:10:4
+      \_StructTypespec: , line:3:9, endln:10:4
       |vpiName:en
       |vpiTypespec:
-      \_RefTypespec: (flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t::en), line:4:5, endln:6:6
+      \_RefTypespec: (flash_ctrl_reg_pkg::en), line:4:5, endln:6:6
         |vpiParent:
         \_TypespecMember: (en), line:6:7, endln:6:9
-        |vpiFullName:flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t::en
+        |vpiFullName:flash_ctrl_reg_pkg::en
         |vpiActual:
         \_StructTypespec: , line:4:5, endln:6:6
     |vpiTypespecMember:
     \_TypespecMember: (rd_en), line:9:7, endln:9:12
       |vpiParent:
-      \_StructTypespec: (flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t), line:3:9, endln:10:4
+      \_StructTypespec: , line:3:9, endln:10:4
       |vpiName:rd_en
       |vpiTypespec:
-      \_RefTypespec: (flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t::rd_en), line:7:5, endln:9:6
+      \_RefTypespec: (flash_ctrl_reg_pkg::rd_en), line:7:5, endln:9:6
         |vpiParent:
         \_TypespecMember: (rd_en), line:9:7, endln:9:12
-        |vpiFullName:flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t::rd_en
+        |vpiFullName:flash_ctrl_reg_pkg::rd_en
         |vpiActual:
         \_StructTypespec: , line:7:5, endln:9:6
   |vpiTypedef:
@@ -744,7 +768,9 @@ Design: (unnamed)
     |vpiParent:
     \_Package: flash_ctrl_reg_pkg (flash_ctrl_reg_pkg), file:${SURELOG_DIR}/tests/StructTypedef/dut.sv, line:1:1, endln:12:11
   |vpiImportTypespec:
-  \_StructTypespec: (flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t), line:3:9, endln:10:4
+  \_TypedefTypespec: (flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t), line:10:5, endln:10:43
+  |vpiImportTypespec:
+  \_StructTypespec: , line:3:9, endln:10:4
   |vpiImportTypespec:
   \_StructTypespec: , line:4:5, endln:6:6
   |vpiImportTypespec:
@@ -759,6 +785,20 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:flash_ctrl_pkg
+  |vpiTypedef:
+  \_TypedefTypespec: (flash_ctrl_pkg::mp_region_cfg_t), line:17:69, endln:17:84
+    |vpiParent:
+    \_Package: flash_ctrl_pkg (flash_ctrl_pkg), file:${SURELOG_DIR}/tests/StructTypedef/dut.sv, line:15:1, endln:19:11
+    |vpiName:flash_ctrl_pkg::mp_region_cfg_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (flash_ctrl_pkg::mp_region_cfg_t), line:17:10, endln:17:30
+      |vpiParent:
+      \_TypedefTypespec: (flash_ctrl_pkg::mp_region_cfg_t), line:17:69, endln:17:84
+      |vpiFullName:flash_ctrl_pkg::mp_region_cfg_t
+      |vpiActual:
+      \_TypedefTypespec: (flash_ctrl_reg_pkg::flash_ctrl_reg2hw_mp_region_cfg_mreg_t), line:10:5, endln:10:43
+  |vpiImportTypespec:
+  \_TypedefTypespec: (flash_ctrl_pkg::mp_region_cfg_t), line:17:69, endln:17:84
   |vpiDefName:flash_ctrl_pkg
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/StructTypedef/dut.sv, line:21:1, endln:27:10
@@ -778,32 +818,25 @@ Design: (unnamed)
       |vpiSize:8
       |STRING:*
       |vpiConstType:8
-  |vpiTypedef:
-  \_UnsupportedTypespec: (mp_region_cfg_t), line:24:4, endln:24:19
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/StructTypedef/dut.sv, line:21:1, endln:27:10
-    |vpiName:mp_region_cfg_t
   |vpiImportTypespec:
   \_ImportTypespec: (flash_ctrl_pkg), line:22:10, endln:22:27
   |vpiImportTypespec:
-  \_UnsupportedTypespec: (mp_region_cfg_t), line:24:4, endln:24:19
-  |vpiImportTypespec:
-  \_LogicNet: (work@top.region_cfg), line:24:20, endln:24:30
+  \_StructNet: (work@top.region_cfg), line:24:20, endln:24:30
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/StructTypedef/dut.sv, line:21:1, endln:27:10
     |vpiTypespec:
     \_RefTypespec: (work@top.region_cfg.mp_region_cfg_t), line:24:4, endln:24:19
       |vpiParent:
-      \_LogicNet: (work@top.region_cfg), line:24:20, endln:24:30
+      \_StructNet: (work@top.region_cfg), line:24:20, endln:24:30
       |vpiName:mp_region_cfg_t
       |vpiFullName:work@top.region_cfg.mp_region_cfg_t
       |vpiActual:
-      \_UnsupportedTypespec: (mp_region_cfg_t), line:24:4, endln:24:19
+      \_TypedefTypespec: (flash_ctrl_pkg::mp_region_cfg_t), line:17:69, endln:17:84
     |vpiName:region_cfg
     |vpiFullName:work@top.region_cfg
   |vpiDefName:work@top
   |vpiNet:
-  \_LogicNet: (work@top.region_cfg), line:24:20, endln:24:30
+  \_StructNet: (work@top.region_cfg), line:24:20, endln:24:30
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

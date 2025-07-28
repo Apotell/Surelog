@@ -189,8 +189,8 @@ IODecl                                                 3
 ImmediateAssert                                        3
 LetDecl                                                3
 LetExpr                                                3
+LogicNet                                               1
 LogicTypespec                                          1
-LogicVar                                               1
 Module                                                 1
 Operation                                              1
 RefObj                                                 7
@@ -208,22 +208,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@m
-  |vpiVariables:
-  \_LogicVar: (work@m.a), line:3:7, endln:3:8
-    |vpiParent:
-    \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/LetExpr/dut.sv, line:2:1, endln:16:14
-    |vpiTypespec:
-    \_RefTypespec: (work@m.a), line:3:1, endln:3:6
-      |vpiParent:
-      \_LogicVar: (work@m.a), line:3:7, endln:3:8
-      |vpiFullName:work@m.a
-      |vpiActual:
-      \_LogicTypespec: , line:3:1, endln:3:6
-    |vpiName:a
-    |vpiFullName:work@m.a
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@m.a), line:3:7, endln:3:8
   |vpiTypedef:
   \_LogicTypespec: , line:3:1, endln:3:6
     |vpiParent:
@@ -231,7 +215,19 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:1, endln:3:6
   |vpiImportTypespec:
-  \_LogicVar: (work@m.a), line:3:7, endln:3:8
+  \_LogicNet: (work@m.a), line:3:7, endln:3:8
+    |vpiParent:
+    \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/LetExpr/dut.sv, line:2:1, endln:16:14
+    |vpiTypespec:
+    \_RefTypespec: (work@m.a), line:3:1, endln:3:6
+      |vpiParent:
+      \_LogicNet: (work@m.a), line:3:7, endln:3:8
+      |vpiFullName:work@m.a
+      |vpiActual:
+      \_LogicTypespec: , line:3:1, endln:3:6
+    |vpiName:a
+    |vpiFullName:work@m.a
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicNet: (work@m.x), line:4:19, endln:4:20
     |vpiParent:
@@ -346,6 +342,8 @@ Design: (unnamed)
     |vpiName:s
   |vpiDefName:work@m
   |vpiNet:
+  \_LogicNet: (work@m.a), line:3:7, endln:3:8
+  |vpiNet:
   \_LogicNet: (work@m.x), line:4:19, endln:4:20
   |vpiNet:
   \_LogicNet: (work@m.clock), line:6:33, endln:6:38
@@ -374,7 +372,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@m.a
             |vpiActual:
-            \_LogicVar: (work@m.a), line:3:7, endln:3:8
+            \_LogicNet: (work@m.a), line:3:7, endln:3:8
           |vpiLetDecl:
           \_LetDecl: (p1), line:4:5, endln:4:7
       |vpiImportTypespec:
@@ -393,7 +391,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@m.a
             |vpiActual:
-            \_LogicVar: (work@m.a), line:3:7, endln:3:8
+            \_LogicNet: (work@m.a), line:3:7, endln:3:8
           |vpiLetDecl:
           \_LetDecl: (p2), line:6:5, endln:6:7
       |vpiImportTypespec:
@@ -412,7 +410,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@m.a
             |vpiActual:
-            \_LogicVar: (work@m.a), line:3:7, endln:3:8
+            \_LogicNet: (work@m.a), line:3:7, endln:3:8
           |vpiLetDecl:
           \_LetDecl: (s), line:7:5, endln:7:6
       |vpiStmt:

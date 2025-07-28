@@ -178,12 +178,11 @@ AST_DEBUG_END
 Assignment                                             3
 Begin                                                  1
 BitSelect                                              2
-Constant                                              16
+Constant                                              14
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              2
 EnumTypespec                                           1
-EnumVar                                                1
 FuncCall                                               1
 Function                                               1
 IntTypespec                                            1
@@ -191,12 +190,13 @@ IntVar                                                 1
 LogicTypespec                                          1
 Module                                                 2
 Operation                                              1
+PackedArrayNet                                         1
 PackedArrayTypespec                                    3
-PackedArrayVar                                         1
-Range                                                  5
+Range                                                  4
 RefObj                                                 4
-RefTypespec                                            8
+RefTypespec                                            9
 ReturnStmt                                             1
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedEnumVar/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -222,6 +222,7 @@ Design: (unnamed)
     |vpiName:o
     |vpiFullName:work@top.o
     |vpiSigned:1
+    |vpiRandType:1
     |vpiVisibility:1
   |vpiInternalScope:
   \_Function: (work@top.get_BA), line:9:4, endln:14:15
@@ -234,85 +235,6 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (work@top.get_BA), line:9:4, endln:14:15
       |vpiFullName:work@top.get_BA
-      |vpiVariables:
-      \_EnumVar: (work@top.get_BA), line:10:20, endln:10:23
-        |vpiParent:
-        \_Begin: (work@top.get_BA)
-        |vpiFullName:work@top.get_BA
-      |vpiVariables:
-      \_PackedArrayVar: (work@top.get_BA.out), line:10:20, endln:10:23
-        |vpiParent:
-        \_Begin: (work@top.get_BA)
-        |vpiTypespec:
-        \_RefTypespec: (work@top.get_BA.out.sp2v_e), line:10:7, endln:10:19
-          |vpiParent:
-          \_PackedArrayVar: (work@top.get_BA.out), line:10:20, endln:10:23
-          |vpiName:sp2v_e
-          |vpiFullName:work@top.get_BA.out.sp2v_e
-          |vpiActual:
-          \_PackedArrayTypespec: , line:10:14, endln:10:19
-        |vpiName:out
-        |vpiFullName:work@top.get_BA.out
-        |vpiRange:
-        \_Range: , line:10:14, endln:10:19
-          |vpiParent:
-          \_PackedArrayVar: (work@top.get_BA.out), line:10:20, endln:10:23
-          |vpiLeftRange:
-          \_Constant: , line:10:15, endln:10:16
-            |vpiParent:
-            \_Range: , line:10:14, endln:10:19
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
-            |vpiConstType:9
-          |vpiRightRange:
-          \_Constant: , line:10:17, endln:10:18
-            |vpiParent:
-            \_Range: , line:10:14, endln:10:19
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
-            |vpiConstType:9
-        |vpiElement:
-        \_EnumVar: (work@top.get_BA), line:10:20, endln:10:23
-      |vpiTypedef:
-      \_PackedArrayTypespec: , line:10:14, endln:10:19
-        |vpiParent:
-        \_Begin: (work@top.get_BA)
-        |vpiRange:
-        \_Range: , line:10:14, endln:10:19
-          |vpiParent:
-          \_PackedArrayTypespec: , line:10:14, endln:10:19
-          |vpiLeftRange:
-          \_Constant: , line:10:15, endln:10:16
-            |vpiParent:
-            \_Range: , line:10:14, endln:10:19
-            |vpiDecompile:1
-            |vpiSize:64
-            |UINT:1
-            |vpiConstType:9
-          |vpiRightRange:
-          \_Constant: , line:10:17, endln:10:18
-            |vpiParent:
-            \_Range: , line:10:14, endln:10:19
-            |vpiDecompile:0
-            |vpiSize:64
-            |UINT:0
-            |vpiConstType:9
-        |vpiElemTypespec:
-        \_RefTypespec: (work@top.get_BA.sp2v_e), line:10:7, endln:10:13
-          |vpiParent:
-          \_PackedArrayTypespec: , line:10:14, endln:10:19
-          |vpiName:sp2v_e
-          |vpiFullName:work@top.get_BA.sp2v_e
-          |vpiActual:
-          \_EnumTypespec: (sp2v_e), line:2:12, endln:5:12
-      |vpiImportTypespec:
-      \_PackedArrayTypespec: , line:10:14, endln:10:19
-      |vpiImportTypespec:
-      \_EnumVar: (work@top.get_BA), line:10:20, endln:10:23
-      |vpiImportTypespec:
-      \_PackedArrayVar: (work@top.get_BA.out), line:10:20, endln:10:23
       |vpiStmt:
       \_Assignment: , line:11:7, endln:11:17
         |vpiParent:
@@ -334,7 +256,7 @@ Design: (unnamed)
           |vpiName:out
           |vpiFullName:work@top.get_BA.out
           |vpiActual:
-          \_PackedArrayVar: (work@top.get_BA.out), line:10:20, endln:10:23
+          \_PackedArrayNet: (work@top.out), line:10:20, endln:10:23
           |vpiIndex:
           \_Constant: , line:11:11, endln:11:12
             |vpiParent:
@@ -364,7 +286,7 @@ Design: (unnamed)
           |vpiName:out
           |vpiFullName:work@top.get_BA.out
           |vpiActual:
-          \_PackedArrayVar: (work@top.get_BA.out), line:10:20, endln:10:23
+          \_PackedArrayNet: (work@top.out), line:10:20, endln:10:23
           |vpiIndex:
           \_Constant: , line:12:11, endln:12:12
             |vpiParent:
@@ -384,41 +306,7 @@ Design: (unnamed)
           |vpiName:out
           |vpiFullName:work@top.get_BA.out
           |vpiActual:
-          \_PackedArrayVar: (work@top.get_BA.out), line:10:20, endln:10:23
-    |vpiTypedef:
-    \_PackedArrayTypespec: , line:9:30, endln:9:35
-      |vpiParent:
-      \_Function: (work@top.get_BA), line:9:4, endln:14:15
-      |vpiRange:
-      \_Range: , line:9:30, endln:9:35
-        |vpiParent:
-        \_PackedArrayTypespec: , line:9:30, endln:9:35
-        |vpiLeftRange:
-        \_Constant: , line:9:31, endln:9:32
-          |vpiParent:
-          \_Range: , line:9:30, endln:9:35
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-        |vpiRightRange:
-        \_Constant: , line:9:33, endln:9:34
-          |vpiParent:
-          \_Range: , line:9:30, endln:9:35
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiConstType:9
-      |vpiElemTypespec:
-      \_RefTypespec: (work@top.get_BA.sp2v_e), line:9:23, endln:9:29
-        |vpiParent:
-        \_PackedArrayTypespec: , line:9:30, endln:9:35
-        |vpiName:sp2v_e
-        |vpiFullName:work@top.get_BA.sp2v_e
-        |vpiActual:
-        \_EnumTypespec: (sp2v_e), line:2:12, endln:5:12
-    |vpiImportTypespec:
-    \_PackedArrayTypespec: , line:9:30, endln:9:35
+          \_PackedArrayNet: (work@top.out), line:10:20, endln:10:23
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
@@ -430,6 +318,33 @@ Design: (unnamed)
       \_PackedArrayTypespec: , line:9:30, endln:9:35
     |vpiStmt:
     \_Begin: (work@top.get_BA)
+  |vpiTypedef:
+  \_EnumTypespec: , line:2:12, endln:5:12
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackedEnumVar/dut.sv, line:1:1, endln:19:10
+    |vpiBaseTypespec:
+    \_RefTypespec: (work@top), line:2:17, endln:2:28
+      |vpiParent:
+      \_EnumTypespec: , line:2:12, endln:5:12
+      |vpiFullName:work@top
+      |vpiActual:
+      \_LogicTypespec: , line:2:17, endln:2:28
+    |vpiEnumConst:
+    \_EnumConst: (A), line:3:7, endln:3:17
+      |vpiParent:
+      \_EnumTypespec: , line:2:12, endln:5:12
+      |vpiName:A
+      |BIN:000
+      |vpiDecompile:3'b000
+      |vpiSize:3
+    |vpiEnumConst:
+    \_EnumConst: (B), line:4:7, endln:4:17
+      |vpiParent:
+      \_EnumTypespec: , line:2:12, endln:5:12
+      |vpiName:B
+      |BIN:111
+      |vpiDecompile:3'b111
+      |vpiSize:3
   |vpiTypedef:
   \_LogicTypespec: , line:2:17, endln:2:28
     |vpiParent:
@@ -455,33 +370,49 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_EnumTypespec: (sp2v_e), line:2:12, endln:5:12
+  \_TypedefTypespec: (sp2v_e), line:5:6, endln:5:12
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackedEnumVar/dut.sv, line:1:1, endln:19:10
     |vpiName:sp2v_e
-    |vpiBaseTypespec:
-    \_RefTypespec: (work@top.sp2v_e), line:2:17, endln:2:28
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@top.sp2v_e), line:2:12, endln:5:5
       |vpiParent:
-      \_EnumTypespec: (sp2v_e), line:2:12, endln:5:12
+      \_TypedefTypespec: (sp2v_e), line:5:6, endln:5:12
       |vpiFullName:work@top.sp2v_e
       |vpiActual:
-      \_LogicTypespec: , line:2:17, endln:2:28
-    |vpiEnumConst:
-    \_EnumConst: (A), line:3:7, endln:3:17
+      \_EnumTypespec: , line:2:12, endln:5:12
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:9:23, endln:9:35
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackedEnumVar/dut.sv, line:1:1, endln:19:10
+    |vpiRange:
+    \_Range: , line:9:30, endln:9:35
       |vpiParent:
-      \_EnumTypespec: (sp2v_e), line:2:12, endln:5:12
-      |vpiName:A
-      |BIN:000
-      |vpiDecompile:3'b000
-      |vpiSize:3
-    |vpiEnumConst:
-    \_EnumConst: (B), line:4:7, endln:4:17
+      \_PackedArrayTypespec: , line:9:23, endln:9:35
+      |vpiLeftRange:
+      \_Constant: , line:9:31, endln:9:32
+        |vpiParent:
+        \_Range: , line:9:30, endln:9:35
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:9:33, endln:9:34
+        |vpiParent:
+        \_Range: , line:9:30, endln:9:35
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@top.sp2v_e), line:5:6, endln:5:12
       |vpiParent:
-      \_EnumTypespec: (sp2v_e), line:2:12, endln:5:12
-      |vpiName:B
-      |BIN:111
-      |vpiDecompile:3'b111
-      |vpiSize:3
+      \_PackedArrayTypespec: , line:9:23, endln:9:35
+      |vpiName:sp2v_e
+      |vpiFullName:work@top.sp2v_e
+      |vpiActual:
+      \_TypedefTypespec: (sp2v_e), line:5:6, endln:5:12
   |vpiTypedef:
   \_PackedArrayTypespec: , line:9:30, endln:9:35
     |vpiParent:
@@ -507,12 +438,44 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (work@top.get_BA), line:9:23, endln:9:35
+    \_RefTypespec: (work@top), line:9:23, endln:9:35
       |vpiParent:
-      \_PackedArrayTypespec: , line:9:30, endln:9:35
-      |vpiFullName:work@top.get_BA
+      \_PackedArrayTypespec: , line:9:23, endln:9:35
+      |vpiFullName:work@top
       |vpiActual:
-      \_PackedArrayTypespec: , line:9:30, endln:9:35
+      \_PackedArrayTypespec: , line:9:23, endln:9:35
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:10:7, endln:10:19
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackedEnumVar/dut.sv, line:1:1, endln:19:10
+    |vpiRange:
+    \_Range: , line:10:14, endln:10:19
+      |vpiParent:
+      \_PackedArrayTypespec: , line:10:7, endln:10:19
+      |vpiLeftRange:
+      \_Constant: , line:10:15, endln:10:16
+        |vpiParent:
+        \_Range: , line:10:14, endln:10:19
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:10:17, endln:10:18
+        |vpiParent:
+        \_Range: , line:10:14, endln:10:19
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@top.sp2v_e), line:5:6, endln:5:12
+      |vpiParent:
+      \_PackedArrayTypespec: , line:10:7, endln:10:19
+      |vpiName:sp2v_e
+      |vpiFullName:work@top.sp2v_e
+      |vpiActual:
+      \_TypedefTypespec: (sp2v_e), line:5:6, endln:5:12
   |vpiTypedef:
   \_IntTypespec: , line:8:4, endln:8:7
     |vpiParent:
@@ -521,11 +484,31 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_Function: (work@top.get_BA), line:9:4, endln:14:15
   |vpiImportTypespec:
+  \_EnumTypespec: , line:2:12, endln:5:12
+  |vpiImportTypespec:
   \_LogicTypespec: , line:2:17, endln:2:28
   |vpiImportTypespec:
-  \_EnumTypespec: (sp2v_e), line:2:12, endln:5:12
+  \_TypedefTypespec: (sp2v_e), line:5:6, endln:5:12
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:9:23, endln:9:35
   |vpiImportTypespec:
   \_PackedArrayTypespec: , line:9:30, endln:9:35
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:10:7, endln:10:19
+  |vpiImportTypespec:
+  \_PackedArrayNet: (work@top.out), line:10:20, endln:10:23
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackedEnumVar/dut.sv, line:1:1, endln:19:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.out.sp2v_e), line:10:7, endln:10:19
+      |vpiParent:
+      \_PackedArrayNet: (work@top.out), line:10:20, endln:10:23
+      |vpiName:sp2v_e
+      |vpiFullName:work@top.out.sp2v_e
+      |vpiActual:
+      \_PackedArrayTypespec: , line:10:7, endln:10:19
+    |vpiName:out
+    |vpiFullName:work@top.out
   |vpiImportTypespec:
   \_IntTypespec: , line:8:4, endln:8:7
   |vpiImportTypespec:
@@ -533,6 +516,8 @@ Design: (unnamed)
   |vpiDefName:work@top
   |vpiTaskFunc:
   \_Function: (work@top.get_BA), line:9:4, endln:14:15
+  |vpiNet:
+  \_PackedArrayNet: (work@top.out), line:10:20, endln:10:23
   |vpiContAssign:
   \_ContAssign: , line:16:11, endln:16:29
     |vpiParent:

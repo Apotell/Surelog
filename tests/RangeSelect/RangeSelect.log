@@ -150,20 +150,22 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayNet                                               1
+ArrayTypespec                                          1
 BitSelect                                              1
-Constant                                              12
+Constant                                              10
 Design                                                 1
 HierPath                                               2
 IndexedPartSelect                                      2
+LogicNet                                               2
 LogicTypespec                                          3
-LogicVar                                               2
 Module                                                 1
 Operation                                              1
-Range                                                  4
+Range                                                  3
 RefObj                                                 1
-RefTypespec                                            5
-StructNet                                              2
+RefTypespec                                            7
+StructNet                                              1
 StructTypespec                                         1
+TypedefTypespec                                        1
 TypespecMember                                         1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/RangeSelect/slpp_unit/surelog.uhdm ...
@@ -176,139 +178,33 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@top
-  |vpiVariables:
-  \_LogicVar: (work@top.c), line:8:10, endln:8:11
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/RangeSelect/dut.sv, line:1:1, endln:11:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.c), line:8:4, endln:8:9
-      |vpiParent:
-      \_LogicVar: (work@top.c), line:8:10, endln:8:11
-      |vpiFullName:work@top.c
-      |vpiActual:
-      \_LogicTypespec: , line:8:4, endln:8:9
-    |vpiName:c
-    |vpiFullName:work@top.c
-    |vpiVisibility:1
-    |vpiExpr:
-    \_HierPath: (a[0].source[6-:2]), line:8:14, endln:8:32
-      |vpiParent:
-      \_LogicVar: (work@top.c), line:8:10, endln:8:11
-      |vpiActual:
-      \_BitSelect: (a[0]), line:8:14, endln:8:15
-        |vpiParent:
-        \_HierPath: (a[0].source[6-:2]), line:8:14, endln:8:32
-        |vpiName:a
-        |vpiFullName:a[0]
-        |vpiActual:
-        \_StructNet: (work@top.a), line:6:13, endln:6:14
-        |vpiIndex:
-        \_Constant: , line:8:16, endln:8:17
-          |vpiParent:
-          \_BitSelect: (a[0]), line:8:14, endln:8:15
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiConstType:9
-      |vpiActual:
-      \_IndexedPartSelect: (a[0].source[6-:2]), line:8:19, endln:8:32
-        |vpiParent:
-        \_HierPath: (a[0].source[6-:2]), line:8:14, endln:8:32
-        |vpiName:source
-        |vpiFullName:a[0].source[6-:2]
-        |vpiActual:
-        \_LogicNet: (work@top.source), line:8:19, endln:8:32
-        |vpiConstantSelect:1
-        |vpiIndexedPartSelectType:2
-        |vpiBaseExpr:
-        \_Constant: , line:8:26, endln:8:27
-          |vpiParent:
-          \_IndexedPartSelect: (a[0].source[6-:2]), line:8:19, endln:8:32
-          |vpiDecompile:6
-          |vpiSize:64
-          |UINT:6
-          |vpiConstType:9
-        |vpiWidthExpr:
-        \_Constant: , line:8:31, endln:8:32
-          |vpiParent:
-          \_IndexedPartSelect: (a[0].source[6-:2]), line:8:19, endln:8:32
-          |vpiDecompile:2
-          |vpiSize:64
-          |UINT:2
-          |vpiConstType:9
-      |vpiName:a[0].source[6-:2]
-  |vpiVariables:
-  \_LogicVar: (work@top.d), line:9:16, endln:9:17
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/RangeSelect/dut.sv, line:1:1, endln:11:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.d), line:9:4, endln:9:15
-      |vpiParent:
-      \_LogicVar: (work@top.d), line:9:16, endln:9:17
-      |vpiFullName:work@top.d
-      |vpiActual:
-      \_LogicTypespec: , line:9:4, endln:9:15
-    |vpiName:d
-    |vpiFullName:work@top.d
-    |vpiVisibility:1
-    |vpiExpr:
-    \_HierPath: (b.source[6-:2]), line:9:20, endln:9:35
-      |vpiParent:
-      \_LogicVar: (work@top.d), line:9:16, endln:9:17
-      |vpiActual:
-      \_RefObj: (b), line:9:20, endln:9:21
-        |vpiParent:
-        \_HierPath: (b.source[6-:2]), line:9:20, endln:9:35
-        |vpiName:b
-        |vpiActual:
-        \_StructNet: (work@top.b), line:7:13, endln:7:14
-      |vpiActual:
-      \_IndexedPartSelect: (b.source[6-:2]), line:9:22, endln:9:35
-        |vpiParent:
-        \_HierPath: (b.source[6-:2]), line:9:20, endln:9:35
-        |vpiName:source
-        |vpiFullName:b.source[6-:2]
-        |vpiActual:
-        \_LogicNet: (work@top.source), line:8:19, endln:8:32
-        |vpiConstantSelect:1
-        |vpiIndexedPartSelectType:2
-        |vpiBaseExpr:
-        \_Constant: , line:9:29, endln:9:30
-          |vpiParent:
-          \_IndexedPartSelect: (b.source[6-:2]), line:9:22, endln:9:35
-          |vpiDecompile:6
-          |vpiSize:64
-          |UINT:6
-          |vpiConstType:9
-        |vpiWidthExpr:
-        \_Constant: , line:9:34, endln:9:35
-          |vpiParent:
-          \_IndexedPartSelect: (b.source[6-:2]), line:9:22, endln:9:35
-          |vpiDecompile:2
-          |vpiSize:64
-          |UINT:2
-          |vpiConstType:9
-      |vpiName:b.source[6-:2]
-  |vpiReg:
-  \_LogicVar: (work@top.c), line:8:10, endln:8:11
-  |vpiReg:
-  \_LogicVar: (work@top.d), line:9:16, endln:9:17
   |vpiTypedef:
-  \_StructTypespec: (tl_h2d_t), line:2:12, endln:4:5
+  \_TypedefTypespec: (tl_h2d_t), line:4:6, endln:4:14
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/RangeSelect/dut.sv, line:1:1, endln:11:10
     |vpiName:tl_h2d_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@top.tl_h2d_t), line:2:12, endln:4:5
+      |vpiParent:
+      \_TypedefTypespec: (tl_h2d_t), line:4:6, endln:4:14
+      |vpiFullName:work@top.tl_h2d_t
+      |vpiActual:
+      \_StructTypespec: , line:2:12, endln:4:5
+  |vpiTypedef:
+  \_StructTypespec: , line:2:12, endln:4:5
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/RangeSelect/dut.sv, line:1:1, endln:11:10
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (source), line:3:19, endln:3:25
       |vpiParent:
-      \_StructTypespec: (tl_h2d_t), line:2:12, endln:4:5
+      \_StructTypespec: , line:2:12, endln:4:5
       |vpiName:source
       |vpiTypespec:
-      \_RefTypespec: (work@top.tl_h2d_t.source), line:3:7, endln:3:18
+      \_RefTypespec: (work@top.source), line:3:7, endln:3:18
         |vpiParent:
         \_TypespecMember: (source), line:3:19, endln:3:25
-        |vpiFullName:work@top.tl_h2d_t.source
+        |vpiFullName:work@top.source
         |vpiActual:
         \_LogicTypespec: , line:3:7, endln:3:18
   |vpiTypedef:
@@ -335,6 +231,36 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_ArrayTypespec: , line:6:4, endln:6:17
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/RangeSelect/dut.sv, line:1:1, endln:11:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:6:14, endln:6:17
+      |vpiParent:
+      \_ArrayTypespec: , line:6:4, endln:6:17
+      |vpiRightRange:
+      \_Operation: , line:6:15, endln:6:16
+        |vpiParent:
+        \_Range: , line:6:14, endln:6:17
+        |vpiOpType:11
+        |vpiOperand:
+        \_Constant: , line:6:15, endln:6:16
+          |vpiParent:
+          \_Operation: , line:6:15, endln:6:16
+          |vpiDecompile:4
+          |vpiSize:64
+          |UINT:4
+          |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@top.tl_h2d_t), line:6:4, endln:6:12
+      |vpiParent:
+      \_ArrayTypespec: , line:6:4, endln:6:17
+      |vpiName:tl_h2d_t
+      |vpiFullName:work@top.tl_h2d_t
+      |vpiActual:
+      \_TypedefTypespec: (tl_h2d_t), line:4:6, endln:4:14
   |vpiTypedef:
   \_LogicTypespec: , line:8:4, endln:8:9
     |vpiParent:
@@ -364,83 +290,80 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiImportTypespec:
-  \_StructTypespec: (tl_h2d_t), line:2:12, endln:4:5
+  \_TypedefTypespec: (tl_h2d_t), line:4:6, endln:4:14
+  |vpiImportTypespec:
+  \_StructTypespec: , line:2:12, endln:4:5
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:7, endln:3:18
   |vpiImportTypespec:
-  \_StructNet: (work@top.a), line:6:13, endln:6:14
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/RangeSelect/dut.sv, line:1:1, endln:11:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.a.a), line:6:4, endln:6:12
-      |vpiParent:
-      \_StructNet: (work@top.a), line:6:13, endln:6:14
-      |vpiName:a
-      |vpiFullName:work@top.a.a
-      |vpiActual:
-      \_StructTypespec: (tl_h2d_t), line:2:12, endln:4:5
-    |vpiName:a
-    |vpiFullName:work@top.a
+  \_ArrayTypespec: , line:6:4, endln:6:17
   |vpiImportTypespec:
   \_ArrayNet: (work@top.a), line:6:13, endln:6:14
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/RangeSelect/dut.sv, line:1:1, endln:11:10
-    |vpiSize:1
-    |vpiName:a
-    |vpiFullName:work@top.a
-    |vpiRange:
-    \_Range: , line:6:14, endln:6:17
+    |vpiTypespec:
+    \_RefTypespec: (work@top.a.tl_h2d_t), line:6:4, endln:6:12
       |vpiParent:
       \_ArrayNet: (work@top.a), line:6:13, endln:6:14
-      |vpiRightRange:
-      \_Operation: , line:6:15, endln:6:16
-        |vpiParent:
-        \_Range: , line:6:14, endln:6:17
-        |vpiOpType:11
-        |vpiOperand:
-        \_Constant: , line:6:15, endln:6:16
-          |vpiParent:
-          \_Operation: , line:6:15, endln:6:16
-          |vpiDecompile:4
-          |vpiSize:64
-          |UINT:4
-          |vpiConstType:9
+      |vpiName:tl_h2d_t
+      |vpiFullName:work@top.a.tl_h2d_t
+      |vpiActual:
+      \_ArrayTypespec: , line:6:4, endln:6:17
+    |vpiName:a
+    |vpiFullName:work@top.a
   |vpiImportTypespec:
   \_StructNet: (work@top.b), line:7:13, endln:7:14
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/RangeSelect/dut.sv, line:1:1, endln:11:10
     |vpiTypespec:
-    \_RefTypespec: (work@top.b.b), line:7:4, endln:7:12
+    \_RefTypespec: (work@top.b.tl_h2d_t), line:7:4, endln:7:12
       |vpiParent:
       \_StructNet: (work@top.b), line:7:13, endln:7:14
-      |vpiName:b
-      |vpiFullName:work@top.b.b
+      |vpiName:tl_h2d_t
+      |vpiFullName:work@top.b.tl_h2d_t
       |vpiActual:
-      \_StructTypespec: (tl_h2d_t), line:2:12, endln:4:5
+      \_TypedefTypespec: (tl_h2d_t), line:4:6, endln:4:14
     |vpiName:b
     |vpiFullName:work@top.b
   |vpiImportTypespec:
   \_LogicTypespec: , line:8:4, endln:8:9
   |vpiImportTypespec:
-  \_LogicVar: (work@top.c), line:8:10, endln:8:11
+  \_LogicNet: (work@top.c), line:8:10, endln:8:11
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/RangeSelect/dut.sv, line:1:1, endln:11:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.c), line:8:4, endln:8:9
+      |vpiParent:
+      \_LogicNet: (work@top.c), line:8:10, endln:8:11
+      |vpiFullName:work@top.c
+      |vpiActual:
+      \_LogicTypespec: , line:8:4, endln:8:9
+    |vpiName:c
+    |vpiFullName:work@top.c
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicTypespec: , line:9:4, endln:9:15
   |vpiImportTypespec:
-  \_LogicVar: (work@top.d), line:9:16, endln:9:17
-  |vpiImportTypespec:
-  \_LogicNet: (work@top.source), line:8:19, endln:8:32
+  \_LogicNet: (work@top.d), line:9:16, endln:9:17
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/RangeSelect/dut.sv, line:1:1, endln:11:10
-    |vpiName:source
-    |vpiFullName:work@top.source
-    |vpiNetType:1
+    |vpiTypespec:
+    \_RefTypespec: (work@top.d), line:9:4, endln:9:15
+      |vpiParent:
+      \_LogicNet: (work@top.d), line:9:16, endln:9:17
+      |vpiFullName:work@top.d
+      |vpiActual:
+      \_LogicTypespec: , line:9:4, endln:9:15
+    |vpiName:d
+    |vpiFullName:work@top.d
+    |vpiNetType:36
   |vpiDefName:work@top
-  |vpiNet:
-  \_StructNet: (work@top.a), line:6:13, endln:6:14
   |vpiNet:
   \_StructNet: (work@top.b), line:7:13, endln:7:14
   |vpiNet:
-  \_LogicNet: (work@top.source), line:8:19, endln:8:32
+  \_LogicNet: (work@top.c), line:8:10, endln:8:11
+  |vpiNet:
+  \_LogicNet: (work@top.d), line:9:16, endln:9:17
   |vpiArrayNet:
   \_ArrayNet: (work@top.a), line:6:13, endln:6:14
 ===================

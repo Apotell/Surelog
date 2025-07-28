@@ -188,13 +188,12 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/FuncDefaultVal/dut.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+ArrayNet                                               1
 ArrayTypespec                                          1
-ArrayVar                                               1
 Assignment                                             2
 Begin                                                  1
 BitTypespec                                            1
-BitVar                                                 1
-Constant                                              13
+Constant                                               9
 Design                                                 1
 FuncCall                                               2
 Function                                               1
@@ -202,8 +201,9 @@ IODecl                                                 1
 IfStmt                                                 1
 Module                                                 1
 Operation                                              3
+PackedArrayTypespec                                    1
 PartSelect                                             1
-Range                                                  5
+Range                                                  3
 RefObj                                                11
 RefTypespec                                            4
 StringTypespec                                         1
@@ -219,56 +219,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@top
-  |vpiVariables:
-  \_BitVar: (work@top), line:3:18, endln:3:21
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FuncDefaultVal/dut.sv, line:1:1, endln:10:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top), line:3:1, endln:3:17
-      |vpiParent:
-      \_BitVar: (work@top), line:3:18, endln:3:21
-      |vpiFullName:work@top
-      |vpiActual:
-      \_BitTypespec: , line:3:1, endln:3:17
-    |vpiFullName:work@top
-  |vpiVariables:
-  \_ArrayVar: (work@top.gpr), line:3:18, endln:3:21
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FuncDefaultVal/dut.sv, line:1:1, endln:10:10
-    |vpiSize:1
-    |vpiTypespec:
-    \_RefTypespec: (work@top.gpr), line:3:21, endln:3:24
-      |vpiParent:
-      \_ArrayVar: (work@top.gpr), line:3:18, endln:3:21
-      |vpiFullName:work@top.gpr
-      |vpiActual:
-      \_ArrayTypespec: , line:3:21, endln:3:24
-    |vpiName:gpr
-    |vpiFullName:work@top.gpr
-    |vpiRandType:1
-    |vpiVisibility:1
-    |vpiArrayType:1
-    |vpiRange:
-    \_Range: , line:3:21, endln:3:24
-      |vpiParent:
-      \_ArrayVar: (work@top.gpr), line:3:18, endln:3:21
-      |vpiRightRange:
-      \_Operation: , line:3:22, endln:3:23
-        |vpiParent:
-        \_Range: , line:3:21, endln:3:24
-        |vpiOpType:11
-        |vpiOperand:
-        \_Constant: , line:3:22, endln:3:23
-          |vpiParent:
-          \_Operation: , line:3:22, endln:3:23
-          |vpiDecompile:2
-          |vpiSize:64
-          |UINT:2
-          |vpiConstType:9
-    |vpiReg:
-    \_BitVar: (work@top), line:3:18, endln:3:21
-  |vpiRegArray:
-  \_ArrayVar: (work@top.gpr), line:3:18, endln:3:21
   |vpiInternalScope:
   \_Function: (work@top.dasm), line:5:1, endln:8:12
     |vpiParent:
@@ -457,7 +407,7 @@ Design: (unnamed)
             |vpiName:gpr
             |vpiFullName:work@top.dasm.gpr
             |vpiActual:
-            \_ArrayVar: (work@top.gpr), line:3:18, endln:3:21
+            \_ArrayNet: (work@top.gpr), line:3:18, endln:3:21
             |vpiIndex:
             \_RefObj: (work@top.dasm.gpr.tid), line:7:18, endln:7:21
               |vpiParent:
@@ -505,13 +455,17 @@ Design: (unnamed)
     |vpiStmt:
     \_Begin: (work@top.dasm)
   |vpiTypedef:
-  \_BitTypespec: , line:3:1, endln:3:17
+  \_BitTypespec: , line:3:1, endln:3:4
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FuncDefaultVal/dut.sv, line:1:1, endln:10:10
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:3:1, endln:3:17
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FuncDefaultVal/dut.sv, line:1:1, endln:10:10
     |vpiRange:
     \_Range: , line:3:4, endln:3:10
       |vpiParent:
-      \_BitTypespec: , line:3:1, endln:3:17
+      \_PackedArrayTypespec: , line:3:1, endln:3:17
       |vpiLeftRange:
       \_Constant: , line:3:5, endln:3:7
         |vpiParent:
@@ -531,7 +485,7 @@ Design: (unnamed)
     |vpiRange:
     \_Range: , line:3:11, endln:3:17
       |vpiParent:
-      \_BitTypespec: , line:3:1, endln:3:17
+      \_PackedArrayTypespec: , line:3:1, endln:3:17
       |vpiLeftRange:
       \_Constant: , line:3:12, endln:3:14
         |vpiParent:
@@ -548,30 +502,68 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@top), line:3:4, endln:3:17
+      |vpiParent:
+      \_PackedArrayTypespec: , line:3:1, endln:3:17
+      |vpiFullName:work@top
+      |vpiActual:
+      \_BitTypespec: , line:3:1, endln:3:4
   |vpiTypedef:
-  \_ArrayTypespec: , line:3:21, endln:3:24
+  \_ArrayTypespec: , line:3:1, endln:3:24
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FuncDefaultVal/dut.sv, line:1:1, endln:10:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:3:21, endln:3:24
+      |vpiParent:
+      \_ArrayTypespec: , line:3:1, endln:3:24
+      |vpiRightRange:
+      \_Operation: , line:3:22, endln:3:23
+        |vpiParent:
+        \_Range: , line:3:21, endln:3:24
+        |vpiOpType:11
+        |vpiOperand:
+        \_Constant: , line:3:22, endln:3:23
+          |vpiParent:
+          \_Operation: , line:3:22, endln:3:23
+          |vpiDecompile:2
+          |vpiSize:64
+          |UINT:2
+          |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@top), line:3:1, endln:3:17
       |vpiParent:
-      \_ArrayTypespec: , line:3:21, endln:3:24
+      \_ArrayTypespec: , line:3:1, endln:3:24
       |vpiFullName:work@top
       |vpiActual:
-      \_BitTypespec: , line:3:1, endln:3:17
+      \_PackedArrayTypespec: , line:3:1, endln:3:17
   |vpiImportTypespec:
   \_Function: (work@top.dasm), line:5:1, endln:8:12
   |vpiImportTypespec:
-  \_BitTypespec: , line:3:1, endln:3:17
+  \_BitTypespec: , line:3:1, endln:3:4
   |vpiImportTypespec:
-  \_BitVar: (work@top), line:3:18, endln:3:21
+  \_PackedArrayTypespec: , line:3:1, endln:3:17
   |vpiImportTypespec:
-  \_ArrayVar: (work@top.gpr), line:3:18, endln:3:21
+  \_ArrayTypespec: , line:3:1, endln:3:24
   |vpiImportTypespec:
-  \_ArrayTypespec: , line:3:21, endln:3:24
+  \_ArrayNet: (work@top.gpr), line:3:18, endln:3:21
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/FuncDefaultVal/dut.sv, line:1:1, endln:10:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.gpr), line:3:1, endln:3:17
+      |vpiParent:
+      \_ArrayNet: (work@top.gpr), line:3:18, endln:3:21
+      |vpiFullName:work@top.gpr
+      |vpiActual:
+      \_ArrayTypespec: , line:3:1, endln:3:24
+    |vpiName:gpr
+    |vpiFullName:work@top.gpr
   |vpiDefName:work@top
   |vpiTaskFunc:
   \_Function: (work@top.dasm), line:5:1, endln:8:12
+  |vpiArrayNet:
+  \_ArrayNet: (work@top.gpr), line:3:18, endln:3:21
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

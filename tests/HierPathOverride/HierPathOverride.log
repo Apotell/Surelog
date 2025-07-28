@@ -369,10 +369,11 @@ Parameter                                              5
 Range                                                  2
 RefModule                                              2
 RefObj                                                13
-RefTypespec                                           13
+RefTypespec                                           15
 StringTypespec                                         3
 StructTypespec                                         1
 TaggedPattern                                          3
+TypedefTypespec                                        2
 TypespecMember                                         1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathOverride/slpp_all/surelog.uhdm ...
@@ -420,6 +421,33 @@ Design: (unnamed)
     \_Package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg), file:${SURELOG_DIR}/tests/HierPathOverride/dut.sv, line:1:1, endln:8:34
     |vpiSigned:1
   |vpiTypedef:
+  \_EnumTypespec: , line:4:12, endln:7:16
+    |vpiParent:
+    \_Package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg), file:${SURELOG_DIR}/tests/HierPathOverride/dut.sv, line:1:1, endln:8:34
+    |vpiBaseTypespec:
+    \_RefTypespec: (prim_pad_wrapper_pkg), line:4:18, endln:4:29
+      |vpiParent:
+      \_EnumTypespec: , line:4:12, endln:7:16
+      |vpiFullName:prim_pad_wrapper_pkg
+      |vpiActual:
+      \_LogicTypespec: , line:4:18, endln:4:29
+    |vpiEnumConst:
+    \_EnumConst: (A), line:5:7, endln:5:15
+      |vpiParent:
+      \_EnumTypespec: , line:4:12, endln:7:16
+      |vpiName:A
+      |HEX:0
+      |vpiDecompile:3'h0
+      |vpiSize:3
+    |vpiEnumConst:
+    \_EnumConst: (B), line:6:7, endln:6:15
+      |vpiParent:
+      \_EnumTypespec: , line:4:12, endln:7:16
+      |vpiName:B
+      |HEX:1
+      |vpiDecompile:3'h1
+      |vpiSize:3
+  |vpiTypedef:
   \_LogicTypespec: , line:4:18, endln:4:29
     |vpiParent:
     \_Package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg), file:${SURELOG_DIR}/tests/HierPathOverride/dut.sv, line:1:1, endln:8:34
@@ -444,39 +472,25 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_EnumTypespec: (prim_pad_wrapper_pkg::pad_type_e), line:4:12, endln:7:16
+  \_TypedefTypespec: (prim_pad_wrapper_pkg::pad_type_e), line:7:6, endln:7:16
     |vpiParent:
     \_Package: prim_pad_wrapper_pkg (prim_pad_wrapper_pkg), file:${SURELOG_DIR}/tests/HierPathOverride/dut.sv, line:1:1, endln:8:34
     |vpiName:prim_pad_wrapper_pkg::pad_type_e
-    |vpiBaseTypespec:
-    \_RefTypespec: (prim_pad_wrapper_pkg::pad_type_e), line:4:18, endln:4:29
+    |vpiTypedefAlias:
+    \_RefTypespec: (prim_pad_wrapper_pkg::pad_type_e), line:4:12, endln:7:5
       |vpiParent:
-      \_EnumTypespec: (prim_pad_wrapper_pkg::pad_type_e), line:4:12, endln:7:16
+      \_TypedefTypespec: (prim_pad_wrapper_pkg::pad_type_e), line:7:6, endln:7:16
       |vpiFullName:prim_pad_wrapper_pkg::pad_type_e
       |vpiActual:
-      \_LogicTypespec: , line:4:18, endln:4:29
-    |vpiEnumConst:
-    \_EnumConst: (A), line:5:7, endln:5:15
-      |vpiParent:
-      \_EnumTypespec: (prim_pad_wrapper_pkg::pad_type_e), line:4:12, endln:7:16
-      |vpiName:A
-      |HEX:0
-      |vpiDecompile:3'h0
-      |vpiSize:3
-    |vpiEnumConst:
-    \_EnumConst: (B), line:6:7, endln:6:15
-      |vpiParent:
-      \_EnumTypespec: (prim_pad_wrapper_pkg::pad_type_e), line:4:12, endln:7:16
-      |vpiName:B
-      |HEX:1
-      |vpiDecompile:3'h1
-      |vpiSize:3
+      \_EnumTypespec: , line:4:12, endln:7:16
   |vpiImportTypespec:
   \_IntTypespec: , line:2:14, endln:2:17
   |vpiImportTypespec:
+  \_EnumTypespec: , line:4:12, endln:7:16
+  |vpiImportTypespec:
   \_LogicTypespec: , line:4:18, endln:4:29
   |vpiImportTypespec:
-  \_EnumTypespec: (prim_pad_wrapper_pkg::pad_type_e), line:4:12, endln:7:16
+  \_TypedefTypespec: (prim_pad_wrapper_pkg::pad_type_e), line:7:6, endln:7:16
   |vpiDefName:prim_pad_wrapper_pkg
   |vpiEndLabel:prim_pad_wrapper_pkg
 |vpiAllPackages:
@@ -495,7 +509,7 @@ Design: (unnamed)
       |vpiName:target_cfg_t
       |vpiFullName:pinmux_pkg::DefaultTargetCfg::target_cfg_t
       |vpiActual:
-      \_StructTypespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
+      \_TypedefTypespec: (pinmux_pkg::target_cfg_t), line:15:6, endln:15:18
     |vpiName:DefaultTargetCfg
     |vpiFullName:pinmux_pkg::DefaultTargetCfg
   |vpiParamAssign:
@@ -544,7 +558,7 @@ Design: (unnamed)
           |vpiName:dio_pad_type
           |vpiFullName:pinmux_pkg::dio_pad_type
           |vpiActual:
-          \_StringTypespec: (dio_pad_type), line:18:7, endln:18:19
+          \_StringTypespec: , line:18:7, endln:18:19
     |vpiLhs:
     \_Parameter: (pinmux_pkg::DefaultTargetCfg), line:17:27, endln:19:5
   |vpiTypedef:
@@ -561,32 +575,43 @@ Design: (unnamed)
       |STRING:*
       |vpiConstType:8
   |vpiTypedef:
-  \_StructTypespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
+  \_TypedefTypespec: (pinmux_pkg::target_cfg_t), line:15:6, endln:15:18
     |vpiParent:
     \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/HierPathOverride/dut.sv, line:10:1, endln:20:24
     |vpiName:pinmux_pkg::target_cfg_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
+      |vpiParent:
+      \_TypedefTypespec: (pinmux_pkg::target_cfg_t), line:15:6, endln:15:18
+      |vpiFullName:pinmux_pkg::target_cfg_t
+      |vpiActual:
+      \_StructTypespec: , line:13:12, endln:15:5
+  |vpiTypedef:
+  \_StructTypespec: , line:13:12, endln:15:5
+    |vpiParent:
+    \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/HierPathOverride/dut.sv, line:10:1, endln:20:24
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (dio_pad_type), line:14:33, endln:14:45
       |vpiParent:
-      \_StructTypespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
+      \_StructTypespec: , line:13:12, endln:15:5
       |vpiName:dio_pad_type
       |vpiTypespec:
-      \_RefTypespec: (pinmux_pkg::target_cfg_t::dio_pad_type::pad_type_e), line:14:7, endln:14:32
+      \_RefTypespec: (pinmux_pkg::dio_pad_type::pad_type_e), line:14:7, endln:14:32
         |vpiParent:
         \_TypespecMember: (dio_pad_type), line:14:33, endln:14:45
         |vpiName:pad_type_e
-        |vpiFullName:pinmux_pkg::target_cfg_t::dio_pad_type::pad_type_e
+        |vpiFullName:pinmux_pkg::dio_pad_type::pad_type_e
         |vpiActual:
-        \_PackedArrayTypespec: , line:14:18, endln:14:32
+        \_PackedArrayTypespec: , line:14:7, endln:14:32
   |vpiTypedef:
-  \_PackedArrayTypespec: , line:14:18, endln:14:32
+  \_PackedArrayTypespec: , line:14:7, endln:14:32
     |vpiParent:
     \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/HierPathOverride/dut.sv, line:10:1, endln:20:24
     |vpiRange:
     \_Range: , line:14:18, endln:14:32
       |vpiParent:
-      \_PackedArrayTypespec: , line:14:18, endln:14:32
+      \_PackedArrayTypespec: , line:14:7, endln:14:32
       |vpiLeftRange:
       \_Operation: , line:14:19, endln:14:29
         |vpiParent:
@@ -617,40 +642,39 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (pinmux_pkg::pad_type_e), line:14:7, endln:14:17
+    \_RefTypespec: (pinmux_pkg::prim_pad_wrapper_pkg::pad_type_e), line:7:6, endln:7:16
       |vpiParent:
-      \_PackedArrayTypespec: , line:14:18, endln:14:32
-      |vpiName:pad_type_e
-      |vpiFullName:pinmux_pkg::pad_type_e
+      \_PackedArrayTypespec: , line:14:7, endln:14:32
+      |vpiName:prim_pad_wrapper_pkg::pad_type_e
+      |vpiFullName:pinmux_pkg::prim_pad_wrapper_pkg::pad_type_e
       |vpiActual:
-      \_EnumTypespec: (prim_pad_wrapper_pkg::pad_type_e), line:4:12, endln:7:16
+      \_TypedefTypespec: (prim_pad_wrapper_pkg::pad_type_e), line:7:6, endln:7:16
   |vpiTypedef:
-  \_StringTypespec: (dio_pad_type), line:18:7, endln:18:19
+  \_StringTypespec: , line:18:7, endln:18:19
     |vpiParent:
     \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/HierPathOverride/dut.sv, line:10:1, endln:20:24
-    |vpiName:dio_pad_type
   |vpiTypedef:
-  \_StringTypespec: (dio_pad_type), line:18:7, endln:18:19
+  \_StringTypespec: , line:18:7, endln:18:19
     |vpiParent:
     \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/HierPathOverride/dut.sv, line:10:1, endln:20:24
-    |vpiName:dio_pad_type
   |vpiTypedef:
-  \_StringTypespec: (dio_pad_type), line:18:7, endln:18:19
+  \_StringTypespec: , line:18:7, endln:18:19
     |vpiParent:
     \_Package: pinmux_pkg (pinmux_pkg), file:${SURELOG_DIR}/tests/HierPathOverride/dut.sv, line:10:1, endln:20:24
-    |vpiName:dio_pad_type
   |vpiImportTypespec:
   \_ImportTypespec: (prim_pad_wrapper_pkg), line:11:11, endln:11:34
   |vpiImportTypespec:
-  \_StructTypespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
+  \_TypedefTypespec: (pinmux_pkg::target_cfg_t), line:15:6, endln:15:18
   |vpiImportTypespec:
-  \_PackedArrayTypespec: , line:14:18, endln:14:32
+  \_StructTypespec: , line:13:12, endln:15:5
   |vpiImportTypespec:
-  \_StringTypespec: (dio_pad_type), line:18:7, endln:18:19
+  \_PackedArrayTypespec: , line:14:7, endln:14:32
   |vpiImportTypespec:
-  \_StringTypespec: (dio_pad_type), line:18:7, endln:18:19
+  \_StringTypespec: , line:18:7, endln:18:19
   |vpiImportTypespec:
-  \_StringTypespec: (dio_pad_type), line:18:7, endln:18:19
+  \_StringTypespec: , line:18:7, endln:18:19
+  |vpiImportTypespec:
+  \_StringTypespec: , line:18:7, endln:18:19
   |vpiDefName:pinmux_pkg
   |vpiEndLabel:pinmux_pkg
 |vpiAllModules:
@@ -669,7 +693,7 @@ Design: (unnamed)
       |vpiName:pad_type_e
       |vpiFullName:work@prim_generic_pad_attr.PadType.pad_type_e
       |vpiActual:
-      \_EnumTypespec: (prim_pad_wrapper_pkg::pad_type_e), line:4:12, endln:7:16
+      \_TypedefTypespec: (prim_pad_wrapper_pkg::pad_type_e), line:7:6, endln:7:16
     |vpiName:PadType
     |vpiFullName:work@prim_generic_pad_attr.PadType
   |vpiParamAssign:
@@ -797,7 +821,7 @@ Design: (unnamed)
       |vpiName:pad_type_e
       |vpiFullName:work@prim_pad_attr.PadType.pad_type_e
       |vpiActual:
-      \_EnumTypespec: (prim_pad_wrapper_pkg::pad_type_e), line:4:12, endln:7:16
+      \_TypedefTypespec: (prim_pad_wrapper_pkg::pad_type_e), line:7:6, endln:7:16
     |vpiName:PadType
     |vpiFullName:work@prim_pad_attr.PadType
   |vpiParamAssign:
@@ -890,7 +914,7 @@ Design: (unnamed)
       |vpiName:target_cfg_t
       |vpiFullName:work@top.TargetCfg.target_cfg_t
       |vpiActual:
-      \_StructTypespec: (pinmux_pkg::target_cfg_t), line:13:12, endln:15:5
+      \_TypedefTypespec: (pinmux_pkg::target_cfg_t), line:15:6, endln:15:18
     |vpiName:TargetCfg
     |vpiFullName:work@top.TargetCfg
   |vpiParamAssign:

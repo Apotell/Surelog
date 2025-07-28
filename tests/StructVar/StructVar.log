@@ -574,14 +574,13 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/StructVar/dut.sv:69:1: Compile module "work@test".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-ArrayNet                                               2
-ArrayTypespec                                          7
-ArrayVar                                               7
+ArrayNet                                               9
+ArrayTypespec                                          9
 Assignment                                             1
 Begin                                                  1
 BitSelect                                              2
 BitTypespec                                            5
-Constant                                              35
+Constant                                              33
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              1
@@ -589,20 +588,21 @@ EnumTypespec                                           1
 GenFor                                                 1
 HierPath                                               2
 Initial                                                1
-LogicNet                                               3
+LogicNet                                               1
 LogicTypespec                                         11
-LogicVar                                               3
 Module                                                 5
 ModuleTypespec                                         3
 Operation                                             18
-Range                                                 21
+PackedArrayTypespec                                    4
+Range                                                 20
 RefModule                                              3
 RefObj                                                 9
-RefTypespec                                           37
+RefTypespec                                           41
 RefVar                                                 1
+StructNet                                              2
 StructTypespec                                         4
-StructVar                                              6
 SysFuncCall                                            1
+TypedefTypespec                                        5
 TypespecMember                                        10
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/StructVar/slpp_unit/surelog.uhdm ...
@@ -615,295 +615,71 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@dut1
-  |vpiVariables:
-  \_StructVar: (work@dut1.mem1), line:9:9, endln:9:13
-    |vpiParent:
-    \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
-    |vpiTypespec:
-    \_RefTypespec: (work@dut1.mem1.mem_s), line:9:3, endln:9:8
-      |vpiParent:
-      \_StructVar: (work@dut1.mem1), line:9:9, endln:9:13
-      |vpiName:mem_s
-      |vpiFullName:work@dut1.mem1.mem_s
-      |vpiActual:
-      \_StructTypespec: (mem_s), line:3:11, endln:7:4
-    |vpiName:mem1
-    |vpiFullName:work@dut1.mem1
-    |vpiVisibility:1
-  |vpiVariables:
-  \_StructVar: (work@dut1), line:11:9, endln:11:13
-    |vpiParent:
-    \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
-    |vpiTypespec:
-    \_RefTypespec: (work@dut1.mem_s), line:11:3, endln:11:8
-      |vpiParent:
-      \_StructVar: (work@dut1), line:11:9, endln:11:13
-      |vpiName:mem_s
-      |vpiFullName:work@dut1.mem_s
-      |vpiActual:
-      \_StructTypespec: (mem_s), line:3:11, endln:7:4
-    |vpiFullName:work@dut1
-  |vpiVariables:
-  \_ArrayVar: (work@dut1.mem2), line:11:9, endln:11:13
-    |vpiParent:
-    \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
-    |vpiSize:1
-    |vpiTypespec:
-    \_RefTypespec: (work@dut1.mem2), line:11:14, endln:11:17
-      |vpiParent:
-      \_ArrayVar: (work@dut1.mem2), line:11:9, endln:11:13
-      |vpiFullName:work@dut1.mem2
-      |vpiActual:
-      \_ArrayTypespec: , line:11:14, endln:11:17
-    |vpiName:mem2
-    |vpiFullName:work@dut1.mem2
-    |vpiRandType:1
-    |vpiVisibility:1
-    |vpiArrayType:1
-    |vpiRange:
-    \_Range: , line:11:14, endln:11:17
-      |vpiParent:
-      \_ArrayVar: (work@dut1.mem2), line:11:9, endln:11:13
-      |vpiRightRange:
-      \_Operation: , line:11:15, endln:11:16
-        |vpiParent:
-        \_Range: , line:11:14, endln:11:17
-        |vpiOpType:11
-        |vpiOperand:
-        \_Constant: , line:11:15, endln:11:16
-          |vpiParent:
-          \_Operation: , line:11:15, endln:11:16
-          |vpiDecompile:2
-          |vpiSize:64
-          |UINT:2
-          |vpiConstType:9
-    |vpiReg:
-    \_StructVar: (work@dut1), line:11:9, endln:11:13
-  |vpiVariables:
-  \_LogicVar: (work@dut1), line:26:16, endln:26:28
-    |vpiParent:
-    \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
-    |vpiTypespec:
-    \_RefTypespec: (work@dut1), line:26:3, endln:26:15
-      |vpiParent:
-      \_LogicVar: (work@dut1), line:26:16, endln:26:28
-      |vpiFullName:work@dut1
-      |vpiActual:
-      \_LogicTypespec: , line:26:3, endln:26:15
-    |vpiFullName:work@dut1
-  |vpiVariables:
-  \_ArrayVar: (work@dut1.csr_pmp_addr), line:26:16, endln:26:28
-    |vpiParent:
-    \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
-    |vpiSize:1
-    |vpiTypespec:
-    \_RefTypespec: (work@dut1.csr_pmp_addr), line:26:29, endln:26:32
-      |vpiParent:
-      \_ArrayVar: (work@dut1.csr_pmp_addr), line:26:16, endln:26:28
-      |vpiFullName:work@dut1.csr_pmp_addr
-      |vpiActual:
-      \_ArrayTypespec: , line:26:29, endln:26:32
-    |vpiName:csr_pmp_addr
-    |vpiFullName:work@dut1.csr_pmp_addr
-    |vpiRandType:1
-    |vpiVisibility:1
-    |vpiArrayType:1
-    |vpiRange:
-    \_Range: , line:26:29, endln:26:32
-      |vpiParent:
-      \_ArrayVar: (work@dut1.csr_pmp_addr), line:26:16, endln:26:28
-      |vpiRightRange:
-      \_Operation: , line:26:30, endln:26:31
-        |vpiParent:
-        \_Range: , line:26:29, endln:26:32
-        |vpiOpType:11
-        |vpiOperand:
-        \_Constant: , line:26:30, endln:26:31
-          |vpiParent:
-          \_Operation: , line:26:30, endln:26:31
-          |vpiDecompile:2
-          |vpiSize:64
-          |UINT:2
-          |vpiConstType:9
-    |vpiReg:
-    \_LogicVar: (work@dut1), line:26:16, endln:26:28
-  |vpiVariables:
-  \_LogicVar: (work@dut1), line:27:16, endln:27:27
-    |vpiParent:
-    \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
-    |vpiTypespec:
-    \_RefTypespec: (work@dut1), line:27:3, endln:27:8
-      |vpiParent:
-      \_LogicVar: (work@dut1), line:27:16, endln:27:27
-      |vpiFullName:work@dut1
-      |vpiActual:
-      \_LogicTypespec: , line:27:3, endln:27:8
-    |vpiFullName:work@dut1
-  |vpiVariables:
-  \_ArrayVar: (work@dut1.pmp_req_err), line:27:16, endln:27:27
-    |vpiParent:
-    \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
-    |vpiSize:1
-    |vpiTypespec:
-    \_RefTypespec: (work@dut1.pmp_req_err), line:27:29, endln:27:32
-      |vpiParent:
-      \_ArrayVar: (work@dut1.pmp_req_err), line:27:16, endln:27:27
-      |vpiFullName:work@dut1.pmp_req_err
-      |vpiActual:
-      \_ArrayTypespec: , line:27:29, endln:27:32
-    |vpiName:pmp_req_err
-    |vpiFullName:work@dut1.pmp_req_err
-    |vpiRandType:1
-    |vpiVisibility:1
-    |vpiArrayType:1
-    |vpiRange:
-    \_Range: , line:27:29, endln:27:32
-      |vpiParent:
-      \_ArrayVar: (work@dut1.pmp_req_err), line:27:16, endln:27:27
-      |vpiRightRange:
-      \_Operation: , line:27:30, endln:27:31
-        |vpiParent:
-        \_Range: , line:27:29, endln:27:32
-        |vpiOpType:11
-        |vpiOperand:
-        \_Constant: , line:27:30, endln:27:31
-          |vpiParent:
-          \_Operation: , line:27:30, endln:27:31
-          |vpiDecompile:2
-          |vpiSize:64
-          |UINT:2
-          |vpiConstType:9
-    |vpiReg:
-    \_LogicVar: (work@dut1), line:27:16, endln:27:27
-  |vpiVariables:
-  \_LogicVar: (work@dut1), line:28:16, endln:28:28
-    |vpiParent:
-    \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
-    |vpiTypespec:
-    \_RefTypespec: (work@dut1), line:28:3, endln:28:8
-      |vpiParent:
-      \_LogicVar: (work@dut1), line:28:16, endln:28:28
-      |vpiFullName:work@dut1
-      |vpiActual:
-      \_LogicTypespec: , line:28:3, endln:28:8
-    |vpiFullName:work@dut1
-  |vpiVariables:
-  \_ArrayVar: (work@dut1.pmp_req_err1), line:28:16, endln:28:28
-    |vpiParent:
-    \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
-    |vpiSize:1
-    |vpiTypespec:
-    \_RefTypespec: (work@dut1.pmp_req_err1), line:28:30, endln:28:33
-      |vpiParent:
-      \_ArrayVar: (work@dut1.pmp_req_err1), line:28:16, endln:28:28
-      |vpiFullName:work@dut1.pmp_req_err1
-      |vpiActual:
-      \_ArrayTypespec: , line:28:30, endln:28:33
-    |vpiName:pmp_req_err1
-    |vpiFullName:work@dut1.pmp_req_err1
-    |vpiRandType:1
-    |vpiVisibility:1
-    |vpiArrayType:1
-    |vpiRange:
-    \_Range: , line:28:30, endln:28:33
-      |vpiParent:
-      \_ArrayVar: (work@dut1.pmp_req_err1), line:28:16, endln:28:28
-      |vpiRightRange:
-      \_Operation: , line:28:31, endln:28:32
-        |vpiParent:
-        \_Range: , line:28:30, endln:28:33
-        |vpiOpType:11
-        |vpiOperand:
-        \_Constant: , line:28:31, endln:28:32
-          |vpiParent:
-          \_Operation: , line:28:31, endln:28:32
-          |vpiDecompile:2
-          |vpiSize:64
-          |UINT:2
-          |vpiConstType:9
-    |vpiRange:
-    \_Range: , line:28:33, endln:28:36
-      |vpiParent:
-      \_ArrayVar: (work@dut1.pmp_req_err1), line:28:16, endln:28:28
-      |vpiRightRange:
-      \_Operation: , line:28:34, endln:28:35
-        |vpiParent:
-        \_Range: , line:28:33, endln:28:36
-        |vpiOpType:11
-        |vpiOperand:
-        \_Constant: , line:28:34, endln:28:35
-          |vpiParent:
-          \_Operation: , line:28:34, endln:28:35
-          |vpiDecompile:3
-          |vpiSize:64
-          |UINT:3
-          |vpiConstType:9
-    |vpiReg:
-    \_LogicVar: (work@dut1), line:28:16, endln:28:28
-  |vpiReg:
-  \_LogicVar: (work@dut1), line:26:16, endln:26:28
-  |vpiReg:
-  \_LogicVar: (work@dut1), line:27:16, endln:27:27
-  |vpiReg:
-  \_LogicVar: (work@dut1), line:28:16, endln:28:28
-  |vpiRegArray:
-  \_ArrayVar: (work@dut1.mem2), line:11:9, endln:11:13
-  |vpiRegArray:
-  \_ArrayVar: (work@dut1.csr_pmp_addr), line:26:16, endln:26:28
-  |vpiRegArray:
-  \_ArrayVar: (work@dut1.pmp_req_err), line:27:16, endln:27:27
-  |vpiRegArray:
-  \_ArrayVar: (work@dut1.pmp_req_err1), line:28:16, endln:28:28
   |vpiTypedef:
-  \_StructTypespec: (mem_s), line:3:11, endln:7:4
+  \_TypedefTypespec: (mem_s), line:7:5, endln:7:10
     |vpiParent:
     \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
     |vpiName:mem_s
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@dut1.mem_s), line:3:11, endln:7:4
+      |vpiParent:
+      \_TypedefTypespec: (mem_s), line:7:5, endln:7:10
+      |vpiFullName:work@dut1.mem_s
+      |vpiActual:
+      \_StructTypespec: , line:3:11, endln:7:4
+  |vpiTypedef:
+  \_StructTypespec: , line:3:11, endln:7:4
+    |vpiParent:
+    \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (addr), line:4:20, endln:4:24
       |vpiParent:
-      \_StructTypespec: (mem_s), line:3:11, endln:7:4
+      \_StructTypespec: , line:3:11, endln:7:4
       |vpiName:addr
       |vpiTypespec:
-      \_RefTypespec: (work@dut1.mem_s.addr), line:4:6, endln:4:17
+      \_RefTypespec: (work@dut1.addr), line:4:6, endln:4:17
         |vpiParent:
         \_TypespecMember: (addr), line:4:20, endln:4:24
-        |vpiFullName:work@dut1.mem_s.addr
+        |vpiFullName:work@dut1.addr
         |vpiActual:
-        \_BitTypespec: , line:4:6, endln:4:17
+        \_PackedArrayTypespec: , line:4:6, endln:4:17
     |vpiTypespecMember:
     \_TypespecMember: (data), line:5:20, endln:5:24
       |vpiParent:
-      \_StructTypespec: (mem_s), line:3:11, endln:7:4
+      \_StructTypespec: , line:3:11, endln:7:4
       |vpiName:data
       |vpiTypespec:
-      \_RefTypespec: (work@dut1.mem_s.data), line:5:6, endln:5:17
+      \_RefTypespec: (work@dut1.data), line:5:6, endln:5:17
         |vpiParent:
         \_TypespecMember: (data), line:5:20, endln:5:24
-        |vpiFullName:work@dut1.mem_s.data
+        |vpiFullName:work@dut1.data
         |vpiActual:
-        \_BitTypespec: , line:5:6, endln:5:17
+        \_PackedArrayTypespec: , line:5:6, endln:5:17
     |vpiTypespecMember:
     \_TypespecMember: (wr), line:6:20, endln:6:22
       |vpiParent:
-      \_StructTypespec: (mem_s), line:3:11, endln:7:4
+      \_StructTypespec: , line:3:11, endln:7:4
       |vpiName:wr
       |vpiTypespec:
-      \_RefTypespec: (work@dut1.mem_s.wr), line:6:6, endln:6:9
+      \_RefTypespec: (work@dut1.wr), line:6:6, endln:6:9
         |vpiParent:
         \_TypespecMember: (wr), line:6:20, endln:6:22
-        |vpiFullName:work@dut1.mem_s.wr
+        |vpiFullName:work@dut1.wr
         |vpiActual:
         \_BitTypespec: , line:6:6, endln:6:9
   |vpiTypedef:
-  \_BitTypespec: , line:4:6, endln:4:17
+  \_BitTypespec: , line:4:6, endln:4:9
+    |vpiParent:
+    \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:4:6, endln:4:17
     |vpiParent:
     \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
     |vpiRange:
     \_Range: , line:4:12, endln:4:17
       |vpiParent:
-      \_BitTypespec: , line:4:6, endln:4:17
+      \_PackedArrayTypespec: , line:4:6, endln:4:17
       |vpiLeftRange:
       \_Constant: , line:4:13, endln:4:14
         |vpiParent:
@@ -920,14 +696,25 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@dut1), line:4:6, endln:4:9
+      |vpiParent:
+      \_PackedArrayTypespec: , line:4:6, endln:4:17
+      |vpiFullName:work@dut1
+      |vpiActual:
+      \_BitTypespec: , line:4:6, endln:4:9
   |vpiTypedef:
-  \_BitTypespec: , line:5:6, endln:5:17
+  \_BitTypespec: , line:5:6, endln:5:9
+    |vpiParent:
+    \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:5:6, endln:5:17
     |vpiParent:
     \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
     |vpiRange:
     \_Range: , line:5:12, endln:5:17
       |vpiParent:
-      \_BitTypespec: , line:5:6, endln:5:17
+      \_PackedArrayTypespec: , line:5:6, endln:5:17
       |vpiLeftRange:
       \_Constant: , line:5:13, endln:5:14
         |vpiParent:
@@ -944,49 +731,67 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@dut1), line:5:6, endln:5:9
+      |vpiParent:
+      \_PackedArrayTypespec: , line:5:6, endln:5:17
+      |vpiFullName:work@dut1
+      |vpiActual:
+      \_BitTypespec: , line:5:6, endln:5:9
   |vpiTypedef:
   \_BitTypespec: , line:6:6, endln:6:9
     |vpiParent:
     \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
   |vpiTypedef:
-  \_StructTypespec: (intf), line:13:11, endln:17:4
+  \_TypedefTypespec: (intf), line:17:5, endln:17:9
     |vpiParent:
     \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
     |vpiName:intf
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@dut1.intf), line:13:11, endln:17:4
+      |vpiParent:
+      \_TypedefTypespec: (intf), line:17:5, endln:17:9
+      |vpiFullName:work@dut1.intf
+      |vpiActual:
+      \_StructTypespec: , line:13:11, endln:17:4
+  |vpiTypedef:
+  \_StructTypespec: , line:13:11, endln:17:4
+    |vpiParent:
+    \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
     |vpiTypespecMember:
     \_TypespecMember: (addr), line:14:22, endln:14:26
       |vpiParent:
-      \_StructTypespec: (intf), line:13:11, endln:17:4
+      \_StructTypespec: , line:13:11, endln:17:4
       |vpiName:addr
       |vpiTypespec:
-      \_RefTypespec: (work@dut1.intf.addr), line:14:6, endln:14:19
+      \_RefTypespec: (work@dut1.addr), line:14:6, endln:14:19
         |vpiParent:
         \_TypespecMember: (addr), line:14:22, endln:14:26
-        |vpiFullName:work@dut1.intf.addr
+        |vpiFullName:work@dut1.addr
         |vpiActual:
         \_LogicTypespec: , line:14:6, endln:14:19
     |vpiTypespecMember:
     \_TypespecMember: (data), line:15:22, endln:15:26
       |vpiParent:
-      \_StructTypespec: (intf), line:13:11, endln:17:4
+      \_StructTypespec: , line:13:11, endln:17:4
       |vpiName:data
       |vpiTypespec:
-      \_RefTypespec: (work@dut1.intf.data), line:15:6, endln:15:19
+      \_RefTypespec: (work@dut1.data), line:15:6, endln:15:19
         |vpiParent:
         \_TypespecMember: (data), line:15:22, endln:15:26
-        |vpiFullName:work@dut1.intf.data
+        |vpiFullName:work@dut1.data
         |vpiActual:
         \_LogicTypespec: , line:15:6, endln:15:19
     |vpiTypespecMember:
     \_TypespecMember: (wr), line:16:22, endln:16:24
       |vpiParent:
-      \_StructTypespec: (intf), line:13:11, endln:17:4
+      \_StructTypespec: , line:13:11, endln:17:4
       |vpiName:wr
       |vpiTypespec:
-      \_RefTypespec: (work@dut1.intf.wr), line:16:6, endln:16:11
+      \_RefTypespec: (work@dut1.wr), line:16:6, endln:16:11
         |vpiParent:
         \_TypespecMember: (wr), line:16:22, endln:16:24
-        |vpiFullName:work@dut1.intf.wr
+        |vpiFullName:work@dut1.wr
         |vpiActual:
         \_LogicTypespec: , line:16:6, endln:16:11
   |vpiTypedef:
@@ -1042,17 +847,35 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
   |vpiTypedef:
-  \_ArrayTypespec: , line:11:14, endln:11:17
+  \_ArrayTypespec: , line:11:3, endln:11:17
     |vpiParent:
     \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:11:14, endln:11:17
+      |vpiParent:
+      \_ArrayTypespec: , line:11:3, endln:11:17
+      |vpiRightRange:
+      \_Operation: , line:11:15, endln:11:16
+        |vpiParent:
+        \_Range: , line:11:14, endln:11:17
+        |vpiOpType:11
+        |vpiOperand:
+        \_Constant: , line:11:15, endln:11:16
+          |vpiParent:
+          \_Operation: , line:11:15, endln:11:16
+          |vpiDecompile:2
+          |vpiSize:64
+          |UINT:2
+          |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@dut1.mem_s), line:11:3, endln:11:8
       |vpiParent:
-      \_ArrayTypespec: , line:11:14, endln:11:17
+      \_ArrayTypespec: , line:11:3, endln:11:17
       |vpiName:mem_s
       |vpiFullName:work@dut1.mem_s
       |vpiActual:
-      \_StructTypespec: (mem_s), line:3:11, endln:7:4
+      \_TypedefTypespec: (mem_s), line:7:5, endln:7:10
   |vpiTypedef:
   \_LogicTypespec: , line:19:3, endln:19:7
     |vpiParent:
@@ -1062,9 +885,84 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
   |vpiTypedef:
+  \_ArrayTypespec: , line:21:3, endln:21:23
+    |vpiParent:
+    \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:21:20, endln:21:23
+      |vpiParent:
+      \_ArrayTypespec: , line:21:3, endln:21:23
+      |vpiRightRange:
+      \_Operation: , line:21:21, endln:21:22
+        |vpiParent:
+        \_Range: , line:21:20, endln:21:23
+        |vpiOpType:11
+        |vpiOperand:
+        \_Constant: , line:21:21, endln:21:22
+          |vpiParent:
+          \_Operation: , line:21:21, endln:21:22
+          |vpiDecompile:2
+          |vpiSize:64
+          |UINT:2
+          |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@dut1), line:21:3, endln:21:7
+      |vpiParent:
+      \_ArrayTypespec: , line:21:3, endln:21:23
+      |vpiFullName:work@dut1
+      |vpiActual:
+      \_LogicTypespec: , line:21:3, endln:21:7
+  |vpiTypedef:
   \_LogicTypespec: , line:22:3, endln:22:7
     |vpiParent:
     \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
+  |vpiTypedef:
+  \_ArrayTypespec: , line:22:3, endln:22:26
+    |vpiParent:
+    \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:22:20, endln:22:23
+      |vpiParent:
+      \_ArrayTypespec: , line:22:3, endln:22:26
+      |vpiRightRange:
+      \_Operation: , line:22:21, endln:22:22
+        |vpiParent:
+        \_Range: , line:22:20, endln:22:23
+        |vpiOpType:11
+        |vpiOperand:
+        \_Constant: , line:22:21, endln:22:22
+          |vpiParent:
+          \_Operation: , line:22:21, endln:22:22
+          |vpiDecompile:2
+          |vpiSize:64
+          |UINT:2
+          |vpiConstType:9
+    |vpiRange:
+    \_Range: , line:22:23, endln:22:26
+      |vpiParent:
+      \_ArrayTypespec: , line:22:3, endln:22:26
+      |vpiRightRange:
+      \_Operation: , line:22:24, endln:22:25
+        |vpiParent:
+        \_Range: , line:22:23, endln:22:26
+        |vpiOpType:11
+        |vpiOperand:
+        \_Constant: , line:22:24, endln:22:25
+          |vpiParent:
+          \_Operation: , line:22:24, endln:22:25
+          |vpiDecompile:3
+          |vpiSize:64
+          |UINT:3
+          |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@dut1), line:22:3, endln:22:7
+      |vpiParent:
+      \_ArrayTypespec: , line:22:3, endln:22:26
+      |vpiFullName:work@dut1
+      |vpiActual:
+      \_LogicTypespec: , line:22:3, endln:22:7
   |vpiTypedef:
   \_LogicTypespec: , line:26:3, endln:26:15
     |vpiParent:
@@ -1090,13 +988,31 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_ArrayTypespec: , line:26:29, endln:26:32
+  \_ArrayTypespec: , line:26:3, endln:26:32
     |vpiParent:
     \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:26:29, endln:26:32
+      |vpiParent:
+      \_ArrayTypespec: , line:26:3, endln:26:32
+      |vpiRightRange:
+      \_Operation: , line:26:30, endln:26:31
+        |vpiParent:
+        \_Range: , line:26:29, endln:26:32
+        |vpiOpType:11
+        |vpiOperand:
+        \_Constant: , line:26:30, endln:26:31
+          |vpiParent:
+          \_Operation: , line:26:30, endln:26:31
+          |vpiDecompile:2
+          |vpiSize:64
+          |UINT:2
+          |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@dut1), line:26:3, endln:26:15
       |vpiParent:
-      \_ArrayTypespec: , line:26:29, endln:26:32
+      \_ArrayTypespec: , line:26:3, endln:26:32
       |vpiFullName:work@dut1
       |vpiActual:
       \_LogicTypespec: , line:26:3, endln:26:15
@@ -1105,13 +1021,31 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
   |vpiTypedef:
-  \_ArrayTypespec: , line:27:29, endln:27:32
+  \_ArrayTypespec: , line:27:3, endln:27:32
     |vpiParent:
     \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:27:29, endln:27:32
+      |vpiParent:
+      \_ArrayTypespec: , line:27:3, endln:27:32
+      |vpiRightRange:
+      \_Operation: , line:27:30, endln:27:31
+        |vpiParent:
+        \_Range: , line:27:29, endln:27:32
+        |vpiOpType:11
+        |vpiOperand:
+        \_Constant: , line:27:30, endln:27:31
+          |vpiParent:
+          \_Operation: , line:27:30, endln:27:31
+          |vpiDecompile:2
+          |vpiSize:64
+          |UINT:2
+          |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@dut1), line:27:3, endln:27:8
       |vpiParent:
-      \_ArrayTypespec: , line:27:29, endln:27:32
+      \_ArrayTypespec: , line:27:3, endln:27:32
       |vpiFullName:work@dut1
       |vpiActual:
       \_LogicTypespec: , line:27:3, endln:27:8
@@ -1120,26 +1054,69 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
   |vpiTypedef:
-  \_ArrayTypespec: , line:28:30, endln:28:33
+  \_ArrayTypespec: , line:28:3, endln:28:36
     |vpiParent:
     \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:28:30, endln:28:33
+      |vpiParent:
+      \_ArrayTypespec: , line:28:3, endln:28:36
+      |vpiRightRange:
+      \_Operation: , line:28:31, endln:28:32
+        |vpiParent:
+        \_Range: , line:28:30, endln:28:33
+        |vpiOpType:11
+        |vpiOperand:
+        \_Constant: , line:28:31, endln:28:32
+          |vpiParent:
+          \_Operation: , line:28:31, endln:28:32
+          |vpiDecompile:2
+          |vpiSize:64
+          |UINT:2
+          |vpiConstType:9
+    |vpiRange:
+    \_Range: , line:28:33, endln:28:36
+      |vpiParent:
+      \_ArrayTypespec: , line:28:3, endln:28:36
+      |vpiRightRange:
+      \_Operation: , line:28:34, endln:28:35
+        |vpiParent:
+        \_Range: , line:28:33, endln:28:36
+        |vpiOpType:11
+        |vpiOperand:
+        \_Constant: , line:28:34, endln:28:35
+          |vpiParent:
+          \_Operation: , line:28:34, endln:28:35
+          |vpiDecompile:3
+          |vpiSize:64
+          |UINT:3
+          |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@dut1), line:28:3, endln:28:8
       |vpiParent:
-      \_ArrayTypespec: , line:28:30, endln:28:33
+      \_ArrayTypespec: , line:28:3, endln:28:36
       |vpiFullName:work@dut1
       |vpiActual:
       \_LogicTypespec: , line:28:3, endln:28:8
   |vpiImportTypespec:
-  \_StructTypespec: (mem_s), line:3:11, endln:7:4
+  \_TypedefTypespec: (mem_s), line:7:5, endln:7:10
   |vpiImportTypespec:
-  \_BitTypespec: , line:4:6, endln:4:17
+  \_StructTypespec: , line:3:11, endln:7:4
   |vpiImportTypespec:
-  \_BitTypespec: , line:5:6, endln:5:17
+  \_BitTypespec: , line:4:6, endln:4:9
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:4:6, endln:4:17
+  |vpiImportTypespec:
+  \_BitTypespec: , line:5:6, endln:5:9
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:5:6, endln:5:17
   |vpiImportTypespec:
   \_BitTypespec: , line:6:6, endln:6:9
   |vpiImportTypespec:
-  \_StructTypespec: (intf), line:13:11, endln:17:4
+  \_TypedefTypespec: (intf), line:17:5, endln:17:9
+  |vpiImportTypespec:
+  \_StructTypespec: , line:13:11, endln:17:4
   |vpiImportTypespec:
   \_LogicTypespec: , line:14:6, endln:14:19
   |vpiImportTypespec:
@@ -1147,13 +1124,35 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:16:6, endln:16:11
   |vpiImportTypespec:
-  \_StructVar: (work@dut1.mem1), line:9:9, endln:9:13
+  \_StructNet: (work@dut1.mem1), line:9:9, endln:9:13
+    |vpiParent:
+    \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
+    |vpiTypespec:
+    \_RefTypespec: (work@dut1.mem1.mem_s), line:9:3, endln:9:8
+      |vpiParent:
+      \_StructNet: (work@dut1.mem1), line:9:9, endln:9:13
+      |vpiName:mem_s
+      |vpiFullName:work@dut1.mem1.mem_s
+      |vpiActual:
+      \_TypedefTypespec: (mem_s), line:7:5, endln:7:10
+    |vpiName:mem1
+    |vpiFullName:work@dut1.mem1
   |vpiImportTypespec:
-  \_StructVar: (work@dut1), line:11:9, endln:11:13
+  \_ArrayTypespec: , line:11:3, endln:11:17
   |vpiImportTypespec:
-  \_ArrayVar: (work@dut1.mem2), line:11:9, endln:11:13
-  |vpiImportTypespec:
-  \_ArrayTypespec: , line:11:14, endln:11:17
+  \_ArrayNet: (work@dut1.mem2), line:11:9, endln:11:13
+    |vpiParent:
+    \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
+    |vpiTypespec:
+    \_RefTypespec: (work@dut1.mem2.mem_s), line:11:3, endln:11:8
+      |vpiParent:
+      \_ArrayNet: (work@dut1.mem2), line:11:9, endln:11:13
+      |vpiName:mem_s
+      |vpiFullName:work@dut1.mem2.mem_s
+      |vpiActual:
+      \_ArrayTypespec: , line:11:3, endln:11:17
+    |vpiName:mem2
+    |vpiFullName:work@dut1.mem2
   |vpiImportTypespec:
   \_LogicTypespec: , line:19:3, endln:19:7
   |vpiImportTypespec:
@@ -1173,243 +1172,168 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:21:3, endln:21:7
   |vpiImportTypespec:
-  \_LogicNet: (work@dut1.intf2), line:21:13, endln:21:18
+  \_ArrayTypespec: , line:21:3, endln:21:23
+  |vpiImportTypespec:
+  \_ArrayNet: (work@dut1.intf2), line:21:13, endln:21:18
     |vpiParent:
     \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
     |vpiTypespec:
     \_RefTypespec: (work@dut1.intf2), line:21:3, endln:21:7
       |vpiParent:
-      \_LogicNet: (work@dut1.intf2), line:21:13, endln:21:18
+      \_ArrayNet: (work@dut1.intf2), line:21:13, endln:21:18
       |vpiFullName:work@dut1.intf2
       |vpiActual:
-      \_LogicTypespec: , line:21:3, endln:21:7
+      \_ArrayTypespec: , line:21:3, endln:21:23
     |vpiName:intf2
     |vpiFullName:work@dut1.intf2
     |vpiNetType:1
   |vpiImportTypespec:
   \_LogicTypespec: , line:22:3, endln:22:7
   |vpiImportTypespec:
-  \_LogicNet: (work@dut1.intf3), line:22:13, endln:22:18
+  \_ArrayTypespec: , line:22:3, endln:22:26
+  |vpiImportTypespec:
+  \_ArrayNet: (work@dut1.intf3), line:22:13, endln:22:18
     |vpiParent:
     \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
     |vpiTypespec:
     \_RefTypespec: (work@dut1.intf3), line:22:3, endln:22:7
       |vpiParent:
-      \_LogicNet: (work@dut1.intf3), line:22:13, endln:22:18
+      \_ArrayNet: (work@dut1.intf3), line:22:13, endln:22:18
       |vpiFullName:work@dut1.intf3
       |vpiActual:
-      \_LogicTypespec: , line:22:3, endln:22:7
+      \_ArrayTypespec: , line:22:3, endln:22:26
     |vpiName:intf3
     |vpiFullName:work@dut1.intf3
     |vpiNetType:1
   |vpiImportTypespec:
   \_LogicTypespec: , line:26:3, endln:26:15
   |vpiImportTypespec:
-  \_LogicVar: (work@dut1), line:26:16, endln:26:28
+  \_ArrayTypespec: , line:26:3, endln:26:32
   |vpiImportTypespec:
-  \_ArrayVar: (work@dut1.csr_pmp_addr), line:26:16, endln:26:28
-  |vpiImportTypespec:
-  \_ArrayTypespec: , line:26:29, endln:26:32
+  \_ArrayNet: (work@dut1.csr_pmp_addr), line:26:16, endln:26:28
+    |vpiParent:
+    \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
+    |vpiTypespec:
+    \_RefTypespec: (work@dut1.csr_pmp_addr), line:26:3, endln:26:15
+      |vpiParent:
+      \_ArrayNet: (work@dut1.csr_pmp_addr), line:26:16, endln:26:28
+      |vpiFullName:work@dut1.csr_pmp_addr
+      |vpiActual:
+      \_ArrayTypespec: , line:26:3, endln:26:32
+    |vpiName:csr_pmp_addr
+    |vpiFullName:work@dut1.csr_pmp_addr
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicTypespec: , line:27:3, endln:27:8
   |vpiImportTypespec:
-  \_LogicVar: (work@dut1), line:27:16, endln:27:27
+  \_ArrayTypespec: , line:27:3, endln:27:32
   |vpiImportTypespec:
-  \_ArrayVar: (work@dut1.pmp_req_err), line:27:16, endln:27:27
-  |vpiImportTypespec:
-  \_ArrayTypespec: , line:27:29, endln:27:32
+  \_ArrayNet: (work@dut1.pmp_req_err), line:27:16, endln:27:27
+    |vpiParent:
+    \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
+    |vpiTypespec:
+    \_RefTypespec: (work@dut1.pmp_req_err), line:27:3, endln:27:8
+      |vpiParent:
+      \_ArrayNet: (work@dut1.pmp_req_err), line:27:16, endln:27:27
+      |vpiFullName:work@dut1.pmp_req_err
+      |vpiActual:
+      \_ArrayTypespec: , line:27:3, endln:27:32
+    |vpiName:pmp_req_err
+    |vpiFullName:work@dut1.pmp_req_err
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicTypespec: , line:28:3, endln:28:8
   |vpiImportTypespec:
-  \_LogicVar: (work@dut1), line:28:16, endln:28:28
+  \_ArrayTypespec: , line:28:3, endln:28:36
   |vpiImportTypespec:
-  \_ArrayVar: (work@dut1.pmp_req_err1), line:28:16, endln:28:28
-  |vpiImportTypespec:
-  \_ArrayTypespec: , line:28:30, endln:28:33
+  \_ArrayNet: (work@dut1.pmp_req_err1), line:28:16, endln:28:28
+    |vpiParent:
+    \_Module: work@dut1 (work@dut1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:1:1, endln:31:10
+    |vpiTypespec:
+    \_RefTypespec: (work@dut1.pmp_req_err1), line:28:3, endln:28:8
+      |vpiParent:
+      \_ArrayNet: (work@dut1.pmp_req_err1), line:28:16, endln:28:28
+      |vpiFullName:work@dut1.pmp_req_err1
+      |vpiActual:
+      \_ArrayTypespec: , line:28:3, endln:28:36
+    |vpiName:pmp_req_err1
+    |vpiFullName:work@dut1.pmp_req_err1
+    |vpiNetType:36
   |vpiDefName:work@dut1
   |vpiNet:
+  \_StructNet: (work@dut1.mem1), line:9:9, endln:9:13
+  |vpiNet:
   \_LogicNet: (work@dut1.intf1), line:19:13, endln:19:18
-  |vpiNet:
-  \_LogicNet: (work@dut1.intf2), line:21:13, endln:21:18
-  |vpiNet:
-  \_LogicNet: (work@dut1.intf3), line:22:13, endln:22:18
+  |vpiArrayNet:
+  \_ArrayNet: (work@dut1.mem2), line:11:9, endln:11:13
+  |vpiArrayNet:
+  \_ArrayNet: (work@dut1.intf2), line:21:13, endln:21:18
+  |vpiArrayNet:
+  \_ArrayNet: (work@dut1.intf3), line:22:13, endln:22:18
+  |vpiArrayNet:
+  \_ArrayNet: (work@dut1.csr_pmp_addr), line:26:16, endln:26:28
+  |vpiArrayNet:
+  \_ArrayNet: (work@dut1.pmp_req_err), line:27:16, endln:27:27
+  |vpiArrayNet:
+  \_ArrayNet: (work@dut1.pmp_req_err1), line:28:16, endln:28:28
 |vpiAllModules:
 \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:34:1, endln:44:10
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@dut2
-  |vpiVariables:
-  \_StructVar: (work@dut2.mem), line:41:9, endln:41:12
-    |vpiParent:
-    \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:34:1, endln:44:10
-    |vpiTypespec:
-    \_RefTypespec: (work@dut2.mem.mem_s), line:41:3, endln:41:8
-      |vpiParent:
-      \_StructVar: (work@dut2.mem), line:41:9, endln:41:12
-      |vpiName:mem_s
-      |vpiFullName:work@dut2.mem.mem_s
-      |vpiActual:
-      \_StructTypespec: (mem_s), line:36:11, endln:39:4
-    |vpiName:mem
-    |vpiFullName:work@dut2.mem
-    |vpiVisibility:1
-  |vpiVariables:
-  \_StructVar: (work@dut2), line:42:9, endln:42:15
-    |vpiParent:
-    \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:34:1, endln:44:10
-    |vpiTypespec:
-    \_RefTypespec: (work@dut2.mem_s), line:42:3, endln:42:8
-      |vpiParent:
-      \_StructVar: (work@dut2), line:42:9, endln:42:15
-      |vpiName:mem_s
-      |vpiFullName:work@dut2.mem_s
-      |vpiActual:
-      \_StructTypespec: (mem_s), line:36:11, endln:39:4
-    |vpiFullName:work@dut2
-  |vpiVariables:
-  \_ArrayVar: (work@dut2.memArr), line:42:9, endln:42:15
-    |vpiParent:
-    \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:34:1, endln:44:10
-    |vpiSize:1
-    |vpiTypespec:
-    \_RefTypespec: (work@dut2.memArr), line:42:16, endln:42:20
-      |vpiParent:
-      \_ArrayVar: (work@dut2.memArr), line:42:9, endln:42:15
-      |vpiFullName:work@dut2.memArr
-      |vpiActual:
-      \_ArrayTypespec: , line:42:16, endln:42:20
-    |vpiName:memArr
-    |vpiFullName:work@dut2.memArr
-    |vpiRandType:1
-    |vpiVisibility:1
-    |vpiArrayType:1
-    |vpiRange:
-    \_Range: , line:42:16, endln:42:20
-      |vpiParent:
-      \_ArrayVar: (work@dut2.memArr), line:42:9, endln:42:15
-      |vpiRightRange:
-      \_Operation: , line:42:17, endln:42:19
-        |vpiParent:
-        \_Range: , line:42:16, endln:42:20
-        |vpiOpType:11
-        |vpiOperand:
-        \_Constant: , line:42:17, endln:42:19
-          |vpiParent:
-          \_Operation: , line:42:17, endln:42:19
-          |vpiDecompile:20
-          |vpiSize:64
-          |UINT:20
-          |vpiConstType:9
-    |vpiReg:
-    \_StructVar: (work@dut2), line:42:9, endln:42:15
-  |vpiVariables:
-  \_StructVar: (work@dut2), line:43:9, endln:43:17
-    |vpiParent:
-    \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:34:1, endln:44:10
-    |vpiTypespec:
-    \_RefTypespec: (work@dut2.mem_s), line:43:3, endln:43:8
-      |vpiParent:
-      \_StructVar: (work@dut2), line:43:9, endln:43:17
-      |vpiName:mem_s
-      |vpiFullName:work@dut2.mem_s
-      |vpiActual:
-      \_StructTypespec: (mem_s), line:36:11, endln:39:4
-    |vpiFullName:work@dut2
-  |vpiVariables:
-  \_ArrayVar: (work@dut2.memMulti), line:43:9, endln:43:17
-    |vpiParent:
-    \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:34:1, endln:44:10
-    |vpiSize:1
-    |vpiTypespec:
-    \_RefTypespec: (work@dut2.memMulti), line:43:18, endln:43:26
-      |vpiParent:
-      \_ArrayVar: (work@dut2.memMulti), line:43:9, endln:43:17
-      |vpiFullName:work@dut2.memMulti
-      |vpiActual:
-      \_ArrayTypespec: , line:43:18, endln:43:26
-    |vpiName:memMulti
-    |vpiFullName:work@dut2.memMulti
-    |vpiRandType:1
-    |vpiVisibility:1
-    |vpiArrayType:1
-    |vpiRange:
-    \_Range: , line:43:18, endln:43:22
-      |vpiParent:
-      \_ArrayVar: (work@dut2.memMulti), line:43:9, endln:43:17
-      |vpiRightRange:
-      \_Operation: , line:43:19, endln:43:21
-        |vpiParent:
-        \_Range: , line:43:18, endln:43:22
-        |vpiOpType:11
-        |vpiOperand:
-        \_Constant: , line:43:19, endln:43:21
-          |vpiParent:
-          \_Operation: , line:43:19, endln:43:21
-          |vpiDecompile:20
-          |vpiSize:64
-          |UINT:20
-          |vpiConstType:9
-    |vpiRange:
-    \_Range: , line:43:22, endln:43:26
-      |vpiParent:
-      \_ArrayVar: (work@dut2.memMulti), line:43:9, endln:43:17
-      |vpiRightRange:
-      \_Operation: , line:43:23, endln:43:25
-        |vpiParent:
-        \_Range: , line:43:22, endln:43:26
-        |vpiOpType:11
-        |vpiOperand:
-        \_Constant: , line:43:23, endln:43:25
-          |vpiParent:
-          \_Operation: , line:43:23, endln:43:25
-          |vpiDecompile:30
-          |vpiSize:64
-          |UINT:30
-          |vpiConstType:9
-    |vpiReg:
-    \_StructVar: (work@dut2), line:43:9, endln:43:17
-  |vpiRegArray:
-  \_ArrayVar: (work@dut2.memArr), line:42:9, endln:42:15
-  |vpiRegArray:
-  \_ArrayVar: (work@dut2.memMulti), line:43:9, endln:43:17
   |vpiTypedef:
-  \_StructTypespec: (mem_s), line:36:11, endln:39:4
+  \_TypedefTypespec: (mem_s), line:39:5, endln:39:10
     |vpiParent:
     \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:34:1, endln:44:10
     |vpiName:mem_s
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@dut2.mem_s), line:36:11, endln:39:4
+      |vpiParent:
+      \_TypedefTypespec: (mem_s), line:39:5, endln:39:10
+      |vpiFullName:work@dut2.mem_s
+      |vpiActual:
+      \_StructTypespec: , line:36:11, endln:39:4
+  |vpiTypedef:
+  \_StructTypespec: , line:36:11, endln:39:4
+    |vpiParent:
+    \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:34:1, endln:44:10
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (addr), line:37:20, endln:37:24
       |vpiParent:
-      \_StructTypespec: (mem_s), line:36:11, endln:39:4
+      \_StructTypespec: , line:36:11, endln:39:4
       |vpiName:addr
       |vpiTypespec:
-      \_RefTypespec: (work@dut2.mem_s.addr), line:37:6, endln:37:17
+      \_RefTypespec: (work@dut2.addr), line:37:6, endln:37:17
         |vpiParent:
         \_TypespecMember: (addr), line:37:20, endln:37:24
-        |vpiFullName:work@dut2.mem_s.addr
+        |vpiFullName:work@dut2.addr
         |vpiActual:
-        \_BitTypespec: , line:37:6, endln:37:17
+        \_PackedArrayTypespec: , line:37:6, endln:37:17
     |vpiTypespecMember:
     \_TypespecMember: (data), line:38:20, endln:38:24
       |vpiParent:
-      \_StructTypespec: (mem_s), line:36:11, endln:39:4
+      \_StructTypespec: , line:36:11, endln:39:4
       |vpiName:data
       |vpiTypespec:
-      \_RefTypespec: (work@dut2.mem_s.data), line:38:6, endln:38:17
+      \_RefTypespec: (work@dut2.data), line:38:6, endln:38:17
         |vpiParent:
         \_TypespecMember: (data), line:38:20, endln:38:24
-        |vpiFullName:work@dut2.mem_s.data
+        |vpiFullName:work@dut2.data
         |vpiActual:
-        \_BitTypespec: , line:38:6, endln:38:17
+        \_PackedArrayTypespec: , line:38:6, endln:38:17
   |vpiTypedef:
-  \_BitTypespec: , line:37:6, endln:37:17
+  \_BitTypespec: , line:37:6, endln:37:9
+    |vpiParent:
+    \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:34:1, endln:44:10
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:37:6, endln:37:17
     |vpiParent:
     \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:34:1, endln:44:10
     |vpiRange:
     \_Range: , line:37:12, endln:37:17
       |vpiParent:
-      \_BitTypespec: , line:37:6, endln:37:17
+      \_PackedArrayTypespec: , line:37:6, endln:37:17
       |vpiLeftRange:
       \_Constant: , line:37:13, endln:37:14
         |vpiParent:
@@ -1426,14 +1350,25 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@dut2), line:37:6, endln:37:9
+      |vpiParent:
+      \_PackedArrayTypespec: , line:37:6, endln:37:17
+      |vpiFullName:work@dut2
+      |vpiActual:
+      \_BitTypespec: , line:37:6, endln:37:9
   |vpiTypedef:
-  \_BitTypespec: , line:38:6, endln:38:17
+  \_BitTypespec: , line:38:6, endln:38:9
+    |vpiParent:
+    \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:34:1, endln:44:10
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:38:6, endln:38:17
     |vpiParent:
     \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:34:1, endln:44:10
     |vpiRange:
     \_Range: , line:38:12, endln:38:17
       |vpiParent:
-      \_BitTypespec: , line:38:6, endln:38:17
+      \_PackedArrayTypespec: , line:38:6, endln:38:17
       |vpiLeftRange:
       \_Constant: , line:38:13, endln:38:14
         |vpiParent:
@@ -1450,107 +1385,160 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@dut2), line:38:6, endln:38:9
+      |vpiParent:
+      \_PackedArrayTypespec: , line:38:6, endln:38:17
+      |vpiFullName:work@dut2
+      |vpiActual:
+      \_BitTypespec: , line:38:6, endln:38:9
   |vpiTypedef:
-  \_ArrayTypespec: , line:42:16, endln:42:20
+  \_ArrayTypespec: , line:42:3, endln:42:20
     |vpiParent:
     \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:34:1, endln:44:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:42:16, endln:42:20
+      |vpiParent:
+      \_ArrayTypespec: , line:42:3, endln:42:20
+      |vpiRightRange:
+      \_Operation: , line:42:17, endln:42:19
+        |vpiParent:
+        \_Range: , line:42:16, endln:42:20
+        |vpiOpType:11
+        |vpiOperand:
+        \_Constant: , line:42:17, endln:42:19
+          |vpiParent:
+          \_Operation: , line:42:17, endln:42:19
+          |vpiDecompile:20
+          |vpiSize:64
+          |UINT:20
+          |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@dut2.mem_s), line:42:3, endln:42:8
       |vpiParent:
-      \_ArrayTypespec: , line:42:16, endln:42:20
+      \_ArrayTypespec: , line:42:3, endln:42:20
       |vpiName:mem_s
       |vpiFullName:work@dut2.mem_s
       |vpiActual:
-      \_StructTypespec: (mem_s), line:36:11, endln:39:4
+      \_TypedefTypespec: (mem_s), line:39:5, endln:39:10
   |vpiTypedef:
-  \_ArrayTypespec: , line:43:18, endln:43:26
+  \_ArrayTypespec: , line:43:3, endln:43:26
     |vpiParent:
     \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:34:1, endln:44:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:43:18, endln:43:22
+      |vpiParent:
+      \_ArrayTypespec: , line:43:3, endln:43:26
+      |vpiRightRange:
+      \_Operation: , line:43:19, endln:43:21
+        |vpiParent:
+        \_Range: , line:43:18, endln:43:22
+        |vpiOpType:11
+        |vpiOperand:
+        \_Constant: , line:43:19, endln:43:21
+          |vpiParent:
+          \_Operation: , line:43:19, endln:43:21
+          |vpiDecompile:20
+          |vpiSize:64
+          |UINT:20
+          |vpiConstType:9
+    |vpiRange:
+    \_Range: , line:43:22, endln:43:26
+      |vpiParent:
+      \_ArrayTypespec: , line:43:3, endln:43:26
+      |vpiRightRange:
+      \_Operation: , line:43:23, endln:43:25
+        |vpiParent:
+        \_Range: , line:43:22, endln:43:26
+        |vpiOpType:11
+        |vpiOperand:
+        \_Constant: , line:43:23, endln:43:25
+          |vpiParent:
+          \_Operation: , line:43:23, endln:43:25
+          |vpiDecompile:30
+          |vpiSize:64
+          |UINT:30
+          |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@dut2.mem_s), line:43:3, endln:43:8
       |vpiParent:
-      \_ArrayTypespec: , line:43:18, endln:43:26
+      \_ArrayTypespec: , line:43:3, endln:43:26
       |vpiName:mem_s
       |vpiFullName:work@dut2.mem_s
       |vpiActual:
-      \_StructTypespec: (mem_s), line:36:11, endln:39:4
+      \_TypedefTypespec: (mem_s), line:39:5, endln:39:10
   |vpiImportTypespec:
-  \_StructTypespec: (mem_s), line:36:11, endln:39:4
+  \_TypedefTypespec: (mem_s), line:39:5, endln:39:10
   |vpiImportTypespec:
-  \_BitTypespec: , line:37:6, endln:37:17
+  \_StructTypespec: , line:36:11, endln:39:4
   |vpiImportTypespec:
-  \_BitTypespec: , line:38:6, endln:38:17
+  \_BitTypespec: , line:37:6, endln:37:9
   |vpiImportTypespec:
-  \_StructVar: (work@dut2.mem), line:41:9, endln:41:12
+  \_PackedArrayTypespec: , line:37:6, endln:37:17
   |vpiImportTypespec:
-  \_StructVar: (work@dut2), line:42:9, endln:42:15
+  \_BitTypespec: , line:38:6, endln:38:9
   |vpiImportTypespec:
-  \_ArrayVar: (work@dut2.memArr), line:42:9, endln:42:15
+  \_PackedArrayTypespec: , line:38:6, endln:38:17
   |vpiImportTypespec:
-  \_ArrayTypespec: , line:42:16, endln:42:20
+  \_StructNet: (work@dut2.mem), line:41:9, endln:41:12
+    |vpiParent:
+    \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:34:1, endln:44:10
+    |vpiTypespec:
+    \_RefTypespec: (work@dut2.mem.mem_s), line:41:3, endln:41:8
+      |vpiParent:
+      \_StructNet: (work@dut2.mem), line:41:9, endln:41:12
+      |vpiName:mem_s
+      |vpiFullName:work@dut2.mem.mem_s
+      |vpiActual:
+      \_TypedefTypespec: (mem_s), line:39:5, endln:39:10
+    |vpiName:mem
+    |vpiFullName:work@dut2.mem
   |vpiImportTypespec:
-  \_StructVar: (work@dut2), line:43:9, endln:43:17
+  \_ArrayTypespec: , line:42:3, endln:42:20
   |vpiImportTypespec:
-  \_ArrayVar: (work@dut2.memMulti), line:43:9, endln:43:17
+  \_ArrayNet: (work@dut2.memArr), line:42:9, endln:42:15
+    |vpiParent:
+    \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:34:1, endln:44:10
+    |vpiTypespec:
+    \_RefTypespec: (work@dut2.memArr.mem_s), line:42:3, endln:42:8
+      |vpiParent:
+      \_ArrayNet: (work@dut2.memArr), line:42:9, endln:42:15
+      |vpiName:mem_s
+      |vpiFullName:work@dut2.memArr.mem_s
+      |vpiActual:
+      \_ArrayTypespec: , line:42:3, endln:42:20
+    |vpiName:memArr
+    |vpiFullName:work@dut2.memArr
   |vpiImportTypespec:
-  \_ArrayTypespec: , line:43:18, endln:43:26
+  \_ArrayTypespec: , line:43:3, endln:43:26
+  |vpiImportTypespec:
+  \_ArrayNet: (work@dut2.memMulti), line:43:9, endln:43:17
+    |vpiParent:
+    \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:34:1, endln:44:10
+    |vpiTypespec:
+    \_RefTypespec: (work@dut2.memMulti.mem_s), line:43:3, endln:43:8
+      |vpiParent:
+      \_ArrayNet: (work@dut2.memMulti), line:43:9, endln:43:17
+      |vpiName:mem_s
+      |vpiFullName:work@dut2.memMulti.mem_s
+      |vpiActual:
+      \_ArrayTypespec: , line:43:3, endln:43:26
+    |vpiName:memMulti
+    |vpiFullName:work@dut2.memMulti
   |vpiDefName:work@dut2
+  |vpiNet:
+  \_StructNet: (work@dut2.mem), line:41:9, endln:41:12
+  |vpiArrayNet:
+  \_ArrayNet: (work@dut2.memArr), line:42:9, endln:42:15
+  |vpiArrayNet:
+  \_ArrayNet: (work@dut2.memMulti), line:43:9, endln:43:17
 |vpiAllModules:
 \_Module: work@prim_generic_ram_1 (work@prim_generic_ram_1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:47:1, endln:66:10
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@prim_generic_ram_1
-  |vpiVariables:
-  \_StructVar: (work@prim_generic_ram_1), line:57:17, endln:57:24
-    |vpiParent:
-    \_Module: work@prim_generic_ram_1 (work@prim_generic_ram_1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:47:1, endln:66:10
-    |vpiTypespec:
-    \_RefTypespec: (work@prim_generic_ram_1.pmp_cfg_t), line:57:3, endln:57:12
-      |vpiParent:
-      \_StructVar: (work@prim_generic_ram_1), line:57:17, endln:57:24
-      |vpiName:pmp_cfg_t
-      |vpiFullName:work@prim_generic_ram_1.pmp_cfg_t
-      |vpiActual:
-      \_StructTypespec: (pmp_cfg_t), line:52:11, endln:55:4
-    |vpiFullName:work@prim_generic_ram_1
-  |vpiVariables:
-  \_ArrayVar: (work@prim_generic_ram_1.pmp_cfg), line:57:17, endln:57:24
-    |vpiParent:
-    \_Module: work@prim_generic_ram_1 (work@prim_generic_ram_1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:47:1, endln:66:10
-    |vpiSize:1
-    |vpiTypespec:
-    \_RefTypespec: (work@prim_generic_ram_1.pmp_cfg), line:57:26, endln:57:29
-      |vpiParent:
-      \_ArrayVar: (work@prim_generic_ram_1.pmp_cfg), line:57:17, endln:57:24
-      |vpiFullName:work@prim_generic_ram_1.pmp_cfg
-      |vpiActual:
-      \_ArrayTypespec: , line:57:26, endln:57:29
-    |vpiName:pmp_cfg
-    |vpiFullName:work@prim_generic_ram_1.pmp_cfg
-    |vpiRandType:1
-    |vpiVisibility:1
-    |vpiArrayType:1
-    |vpiRange:
-    \_Range: , line:57:26, endln:57:29
-      |vpiParent:
-      \_ArrayVar: (work@prim_generic_ram_1.pmp_cfg), line:57:17, endln:57:24
-      |vpiRightRange:
-      \_Operation: , line:57:27, endln:57:28
-        |vpiParent:
-        \_Range: , line:57:26, endln:57:29
-        |vpiOpType:11
-        |vpiOperand:
-        \_Constant: , line:57:27, endln:57:28
-          |vpiParent:
-          \_Operation: , line:57:27, endln:57:28
-          |vpiDecompile:2
-          |vpiSize:64
-          |UINT:2
-          |vpiConstType:9
-    |vpiReg:
-    \_StructVar: (work@prim_generic_ram_1), line:57:17, endln:57:24
-  |vpiRegArray:
-  \_ArrayVar: (work@prim_generic_ram_1.pmp_cfg), line:57:17, endln:57:24
   |vpiInternalScope:
   \_GenFor: (work@prim_generic_ram_1), line:59:2, endln:64:5
     |vpiParent:
@@ -1574,6 +1562,20 @@ Design: (unnamed)
         \_Begin: (work@prim_generic_ram_1.g_pmp_csrs), line:59:33, endln:64:5
         |vpiName:i
         |vpiFullName:work@prim_generic_ram_1.g_pmp_csrs.i
+        |vpiNetType:1
+      |vpiImportTypespec:
+      \_LogicNet: (work@prim_generic_ram_1.g_pmp_csrs.lock), line:61:36, endln:61:40
+        |vpiParent:
+        \_Begin: (work@prim_generic_ram_1.g_pmp_csrs), line:59:33, endln:64:5
+        |vpiName:lock
+        |vpiFullName:work@prim_generic_ram_1.g_pmp_csrs.lock
+        |vpiNetType:1
+      |vpiImportTypespec:
+      \_LogicNet: (work@prim_generic_ram_1.g_pmp_csrs.mode), line:62:17, endln:62:21
+        |vpiParent:
+        \_Begin: (work@prim_generic_ram_1.g_pmp_csrs), line:59:33, endln:64:5
+        |vpiName:mode
+        |vpiFullName:work@prim_generic_ram_1.g_pmp_csrs.mode
         |vpiNetType:1
       |vpiImportTypespec:
       \_LogicNet: (work@prim_generic_ram_1.g_pmp_csrs.pmp_addr_we), line:61:10, endln:61:21
@@ -1607,7 +1609,7 @@ Design: (unnamed)
                 |vpiName:pmp_cfg
                 |vpiFullName:pmp_cfg[i]
                 |vpiActual:
-                \_ArrayVar: (work@prim_generic_ram_1.pmp_cfg), line:57:17, endln:57:24
+                \_ArrayNet: (work@prim_generic_ram_1.pmp_cfg), line:57:17, endln:57:24
                 |vpiIndex:
                 \_RefObj: (work@prim_generic_ram_1.g_pmp_csrs.pmp_cfg[i].lock.i), line:61:33, endln:61:34
                   |vpiParent:
@@ -1623,7 +1625,7 @@ Design: (unnamed)
                 |vpiName:lock
                 |vpiFullName:work@prim_generic_ram_1.g_pmp_csrs.lock
                 |vpiActual:
-                \_TypespecMember: (lock), line:53:20, endln:53:24
+                \_LogicNet: (work@prim_generic_ram_1.g_pmp_csrs.lock), line:61:36, endln:61:40
               |vpiName:pmp_cfg[i].lock
           |vpiOperand:
           \_Operation: , line:62:4, endln:62:37
@@ -1641,7 +1643,7 @@ Design: (unnamed)
                 |vpiName:pmp_cfg
                 |vpiFullName:pmp_cfg[i + 1]
                 |vpiActual:
-                \_ArrayVar: (work@prim_generic_ram_1.pmp_cfg), line:57:17, endln:57:24
+                \_ArrayNet: (work@prim_generic_ram_1.pmp_cfg), line:57:17, endln:57:24
                 |vpiIndex:
                 \_Operation: , line:62:12, endln:62:15
                   |vpiParent:
@@ -1670,7 +1672,7 @@ Design: (unnamed)
                 |vpiName:mode
                 |vpiFullName:work@prim_generic_ram_1.g_pmp_csrs.mode
                 |vpiActual:
-                \_TypespecMember: (mode), line:54:20, endln:54:24
+                \_LogicNet: (work@prim_generic_ram_1.g_pmp_csrs.mode), line:62:17, endln:62:21
               |vpiName:pmp_cfg[i + 1].mode
             |vpiOperand:
             \_RefObj: (work@prim_generic_ram_1.g_pmp_csrs.PMP_MODE_TOR), line:62:25, endln:62:37
@@ -1755,6 +1757,25 @@ Design: (unnamed)
     |vpiStmt:
     \_Begin: (work@prim_generic_ram_1.g_pmp_csrs), line:59:33, endln:64:5
   |vpiTypedef:
+  \_EnumTypespec: , line:49:11, endln:51:19
+    |vpiParent:
+    \_Module: work@prim_generic_ram_1 (work@prim_generic_ram_1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:47:1, endln:66:10
+    |vpiBaseTypespec:
+    \_RefTypespec: (work@prim_generic_ram_1), line:49:16, endln:49:27
+      |vpiParent:
+      \_EnumTypespec: , line:49:11, endln:51:19
+      |vpiFullName:work@prim_generic_ram_1
+      |vpiActual:
+      \_LogicTypespec: , line:49:16, endln:49:27
+    |vpiEnumConst:
+    \_EnumConst: (PMP_MODE_TOR), line:50:5, endln:50:27
+      |vpiParent:
+      \_EnumTypespec: , line:49:11, endln:51:19
+      |vpiName:PMP_MODE_TOR
+      |BIN:01
+      |vpiDecompile:2'b01
+      |vpiSize:2
+  |vpiTypedef:
   \_LogicTypespec: , line:49:16, endln:49:27
     |vpiParent:
     \_Module: work@prim_generic_ram_1 (work@prim_generic_ram_1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:47:1, endln:66:10
@@ -1779,87 +1800,124 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_EnumTypespec: (pmp_cfg_mode_e), line:49:11, endln:51:19
+  \_TypedefTypespec: (pmp_cfg_mode_e), line:51:5, endln:51:19
     |vpiParent:
     \_Module: work@prim_generic_ram_1 (work@prim_generic_ram_1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:47:1, endln:66:10
     |vpiName:pmp_cfg_mode_e
-    |vpiBaseTypespec:
-    \_RefTypespec: (work@prim_generic_ram_1.pmp_cfg_mode_e), line:49:16, endln:49:27
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@prim_generic_ram_1.pmp_cfg_mode_e), line:49:11, endln:51:4
       |vpiParent:
-      \_EnumTypespec: (pmp_cfg_mode_e), line:49:11, endln:51:19
+      \_TypedefTypespec: (pmp_cfg_mode_e), line:51:5, endln:51:19
       |vpiFullName:work@prim_generic_ram_1.pmp_cfg_mode_e
       |vpiActual:
-      \_LogicTypespec: , line:49:16, endln:49:27
-    |vpiEnumConst:
-    \_EnumConst: (PMP_MODE_TOR), line:50:5, endln:50:27
-      |vpiParent:
-      \_EnumTypespec: (pmp_cfg_mode_e), line:49:11, endln:51:19
-      |vpiName:PMP_MODE_TOR
-      |BIN:01
-      |vpiDecompile:2'b01
-      |vpiSize:2
+      \_EnumTypespec: , line:49:11, endln:51:19
   |vpiTypedef:
-  \_StructTypespec: (pmp_cfg_t), line:52:11, endln:55:4
+  \_TypedefTypespec: (pmp_cfg_t), line:55:5, endln:55:14
     |vpiParent:
     \_Module: work@prim_generic_ram_1 (work@prim_generic_ram_1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:47:1, endln:66:10
     |vpiName:pmp_cfg_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@prim_generic_ram_1.pmp_cfg_t), line:52:11, endln:55:4
+      |vpiParent:
+      \_TypedefTypespec: (pmp_cfg_t), line:55:5, endln:55:14
+      |vpiFullName:work@prim_generic_ram_1.pmp_cfg_t
+      |vpiActual:
+      \_StructTypespec: , line:52:11, endln:55:4
+  |vpiTypedef:
+  \_StructTypespec: , line:52:11, endln:55:4
+    |vpiParent:
+    \_Module: work@prim_generic_ram_1 (work@prim_generic_ram_1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:47:1, endln:66:10
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (lock), line:53:20, endln:53:24
       |vpiParent:
-      \_StructTypespec: (pmp_cfg_t), line:52:11, endln:55:4
+      \_StructTypespec: , line:52:11, endln:55:4
       |vpiName:lock
       |vpiTypespec:
-      \_RefTypespec: (work@prim_generic_ram_1.pmp_cfg_t.lock), line:53:5, endln:53:10
+      \_RefTypespec: (work@prim_generic_ram_1.lock), line:53:5, endln:53:10
         |vpiParent:
         \_TypespecMember: (lock), line:53:20, endln:53:24
-        |vpiFullName:work@prim_generic_ram_1.pmp_cfg_t.lock
+        |vpiFullName:work@prim_generic_ram_1.lock
         |vpiActual:
         \_LogicTypespec: , line:53:5, endln:53:10
     |vpiTypespecMember:
     \_TypespecMember: (mode), line:54:20, endln:54:24
       |vpiParent:
-      \_StructTypespec: (pmp_cfg_t), line:52:11, endln:55:4
+      \_StructTypespec: , line:52:11, endln:55:4
       |vpiName:mode
       |vpiTypespec:
-      \_RefTypespec: (work@prim_generic_ram_1.pmp_cfg_t.mode.pmp_cfg_mode_e), line:54:5, endln:54:19
+      \_RefTypespec: (work@prim_generic_ram_1.mode.pmp_cfg_mode_e), line:54:5, endln:54:19
         |vpiParent:
         \_TypespecMember: (mode), line:54:20, endln:54:24
         |vpiName:pmp_cfg_mode_e
-        |vpiFullName:work@prim_generic_ram_1.pmp_cfg_t.mode.pmp_cfg_mode_e
+        |vpiFullName:work@prim_generic_ram_1.mode.pmp_cfg_mode_e
         |vpiActual:
-        \_EnumTypespec: (pmp_cfg_mode_e), line:49:11, endln:51:19
+        \_TypedefTypespec: (pmp_cfg_mode_e), line:51:5, endln:51:19
   |vpiTypedef:
   \_LogicTypespec: , line:53:5, endln:53:10
     |vpiParent:
     \_Module: work@prim_generic_ram_1 (work@prim_generic_ram_1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:47:1, endln:66:10
   |vpiTypedef:
-  \_ArrayTypespec: , line:57:26, endln:57:29
+  \_ArrayTypespec: , line:57:3, endln:57:29
     |vpiParent:
     \_Module: work@prim_generic_ram_1 (work@prim_generic_ram_1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:47:1, endln:66:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:57:26, endln:57:29
+      |vpiParent:
+      \_ArrayTypespec: , line:57:3, endln:57:29
+      |vpiRightRange:
+      \_Operation: , line:57:27, endln:57:28
+        |vpiParent:
+        \_Range: , line:57:26, endln:57:29
+        |vpiOpType:11
+        |vpiOperand:
+        \_Constant: , line:57:27, endln:57:28
+          |vpiParent:
+          \_Operation: , line:57:27, endln:57:28
+          |vpiDecompile:2
+          |vpiSize:64
+          |UINT:2
+          |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@prim_generic_ram_1.pmp_cfg_t), line:57:3, endln:57:12
       |vpiParent:
-      \_ArrayTypespec: , line:57:26, endln:57:29
+      \_ArrayTypespec: , line:57:3, endln:57:29
       |vpiName:pmp_cfg_t
       |vpiFullName:work@prim_generic_ram_1.pmp_cfg_t
       |vpiActual:
-      \_StructTypespec: (pmp_cfg_t), line:52:11, endln:55:4
+      \_TypedefTypespec: (pmp_cfg_t), line:55:5, endln:55:14
+  |vpiImportTypespec:
+  \_EnumTypespec: , line:49:11, endln:51:19
   |vpiImportTypespec:
   \_LogicTypespec: , line:49:16, endln:49:27
   |vpiImportTypespec:
-  \_EnumTypespec: (pmp_cfg_mode_e), line:49:11, endln:51:19
+  \_TypedefTypespec: (pmp_cfg_mode_e), line:51:5, endln:51:19
   |vpiImportTypespec:
-  \_StructTypespec: (pmp_cfg_t), line:52:11, endln:55:4
+  \_TypedefTypespec: (pmp_cfg_t), line:55:5, endln:55:14
+  |vpiImportTypespec:
+  \_StructTypespec: , line:52:11, endln:55:4
   |vpiImportTypespec:
   \_LogicTypespec: , line:53:5, endln:53:10
   |vpiImportTypespec:
-  \_StructVar: (work@prim_generic_ram_1), line:57:17, endln:57:24
+  \_ArrayTypespec: , line:57:3, endln:57:29
   |vpiImportTypespec:
-  \_ArrayVar: (work@prim_generic_ram_1.pmp_cfg), line:57:17, endln:57:24
-  |vpiImportTypespec:
-  \_ArrayTypespec: , line:57:26, endln:57:29
+  \_ArrayNet: (work@prim_generic_ram_1.pmp_cfg), line:57:17, endln:57:24
+    |vpiParent:
+    \_Module: work@prim_generic_ram_1 (work@prim_generic_ram_1), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:47:1, endln:66:10
+    |vpiTypespec:
+    \_RefTypespec: (work@prim_generic_ram_1.pmp_cfg.pmp_cfg_t), line:57:3, endln:57:12
+      |vpiParent:
+      \_ArrayNet: (work@prim_generic_ram_1.pmp_cfg), line:57:17, endln:57:24
+      |vpiName:pmp_cfg_t
+      |vpiFullName:work@prim_generic_ram_1.pmp_cfg.pmp_cfg_t
+      |vpiActual:
+      \_ArrayTypespec: , line:57:3, endln:57:29
+    |vpiName:pmp_cfg
+    |vpiFullName:work@prim_generic_ram_1.pmp_cfg
   |vpiDefName:work@prim_generic_ram_1
+  |vpiArrayNet:
+  \_ArrayNet: (work@prim_generic_ram_1.pmp_cfg), line:57:17, endln:57:24
 |vpiAllModules:
 \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/StructVar/dut.sv, line:69:1, endln:76:10
   |vpiParent:

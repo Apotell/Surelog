@@ -599,15 +599,17 @@ Module                                                 4
 ModuleTypespec                                         3
 Operation                                             15
 Package                                                1
+PackedArrayTypespec                                    6
 ParamAssign                                           11
 Parameter                                             11
 Range                                                  6
 RefModule                                              3
 RefObj                                                13
-RefTypespec                                           23
+RefTypespec                                           30
 RefVar                                                 2
 SysFuncCall                                            2
 Task                                                   9
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ElabCParam/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -876,7 +878,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -910,14 +912,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ElabCParam/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -925,7 +926,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -933,7 +934,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -941,7 +942,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -949,13 +950,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ElabCParam/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1181,7 +1196,7 @@ Design: (unnamed)
       \_Parameter: (work@all_zero.DReqDepth), line:56:23, endln:56:44
       |vpiFullName:work@all_zero.DReqDepth
       |vpiActual:
-      \_BitTypespec: , line:56:13, endln:56:22
+      \_PackedArrayTypespec: , line:56:13, endln:56:22
     |vpiName:DReqDepth
     |vpiFullName:work@all_zero.DReqDepth
   |vpiParameter:
@@ -1194,7 +1209,7 @@ Design: (unnamed)
       \_Parameter: (work@all_zero.AA), line:57:23, endln:57:41
       |vpiFullName:work@all_zero.AA
       |vpiActual:
-      \_BitTypespec: , line:57:13, endln:57:22
+      \_PackedArrayTypespec: , line:57:13, endln:57:22
     |vpiName:AA
     |vpiFullName:work@all_zero.AA
   |vpiParameter:
@@ -1207,7 +1222,7 @@ Design: (unnamed)
       \_Parameter: (work@all_zero.BB), line:58:23, endln:58:45
       |vpiFullName:work@all_zero.BB
       |vpiActual:
-      \_BitTypespec: , line:58:13, endln:58:22
+      \_PackedArrayTypespec: , line:58:13, endln:58:22
     |vpiName:BB
     |vpiFullName:work@all_zero.BB
   |vpiParamAssign:
@@ -1432,13 +1447,17 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@all_zero (work@all_zero), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:54:1, endln:67:10
   |vpiTypedef:
-  \_BitTypespec: , line:56:13, endln:56:22
+  \_BitTypespec: , line:56:13, endln:56:16
+    |vpiParent:
+    \_Module: work@all_zero (work@all_zero), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:54:1, endln:67:10
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:56:13, endln:56:22
     |vpiParent:
     \_Module: work@all_zero (work@all_zero), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:54:1, endln:67:10
     |vpiRange:
     \_Range: , line:56:17, endln:56:22
       |vpiParent:
-      \_BitTypespec: , line:56:13, endln:56:22
+      \_PackedArrayTypespec: , line:56:13, endln:56:22
       |vpiLeftRange:
       \_Constant: , line:56:18, endln:56:19
         |vpiParent:
@@ -1455,14 +1474,25 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@all_zero), line:56:13, endln:56:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:56:13, endln:56:22
+      |vpiFullName:work@all_zero
+      |vpiActual:
+      \_BitTypespec: , line:56:13, endln:56:16
   |vpiTypedef:
-  \_BitTypespec: , line:57:13, endln:57:22
+  \_BitTypespec: , line:57:13, endln:57:16
+    |vpiParent:
+    \_Module: work@all_zero (work@all_zero), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:54:1, endln:67:10
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:57:13, endln:57:22
     |vpiParent:
     \_Module: work@all_zero (work@all_zero), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:54:1, endln:67:10
     |vpiRange:
     \_Range: , line:57:17, endln:57:22
       |vpiParent:
-      \_BitTypespec: , line:57:13, endln:57:22
+      \_PackedArrayTypespec: , line:57:13, endln:57:22
       |vpiLeftRange:
       \_Constant: , line:57:18, endln:57:19
         |vpiParent:
@@ -1479,14 +1509,25 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@all_zero), line:57:13, endln:57:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:57:13, endln:57:22
+      |vpiFullName:work@all_zero
+      |vpiActual:
+      \_BitTypespec: , line:57:13, endln:57:16
   |vpiTypedef:
-  \_BitTypespec: , line:58:13, endln:58:22
+  \_BitTypespec: , line:58:13, endln:58:16
+    |vpiParent:
+    \_Module: work@all_zero (work@all_zero), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:54:1, endln:67:10
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:58:13, endln:58:22
     |vpiParent:
     \_Module: work@all_zero (work@all_zero), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:54:1, endln:67:10
     |vpiRange:
     \_Range: , line:58:17, endln:58:22
       |vpiParent:
-      \_BitTypespec: , line:58:13, endln:58:22
+      \_PackedArrayTypespec: , line:58:13, endln:58:22
       |vpiLeftRange:
       \_Constant: , line:58:18, endln:58:19
         |vpiParent:
@@ -1503,14 +1544,27 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@all_zero), line:58:13, endln:58:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:58:13, endln:58:22
+      |vpiFullName:work@all_zero
+      |vpiActual:
+      \_BitTypespec: , line:58:13, endln:58:16
   |vpiImportTypespec:
   \_IntTypespec: , line:55:13, endln:55:25
   |vpiImportTypespec:
-  \_BitTypespec: , line:56:13, endln:56:22
+  \_BitTypespec: , line:56:13, endln:56:16
   |vpiImportTypespec:
-  \_BitTypespec: , line:57:13, endln:57:22
+  \_PackedArrayTypespec: , line:56:13, endln:56:22
   |vpiImportTypespec:
-  \_BitTypespec: , line:58:13, endln:58:22
+  \_BitTypespec: , line:57:13, endln:57:16
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:57:13, endln:57:22
+  |vpiImportTypespec:
+  \_BitTypespec: , line:58:13, endln:58:16
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:58:13, endln:58:22
   |vpiDefName:work@all_zero
 |vpiAllModules:
 \_Module: work@fifo_sync (work@fifo_sync), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:24:1, endln:33:10
@@ -1768,7 +1822,7 @@ Design: (unnamed)
       \_Parameter: (work@socket_1n.DReqDepth), line:40:23, endln:40:44
       |vpiFullName:work@socket_1n.DReqDepth
       |vpiActual:
-      \_BitTypespec: , line:40:13, endln:40:22
+      \_PackedArrayTypespec: , line:40:13, endln:40:22
     |vpiName:DReqDepth
     |vpiFullName:work@socket_1n.DReqDepth
   |vpiParameter:
@@ -1781,7 +1835,7 @@ Design: (unnamed)
       \_Parameter: (work@socket_1n.AA), line:41:23, endln:41:41
       |vpiFullName:work@socket_1n.AA
       |vpiActual:
-      \_BitTypespec: , line:41:13, endln:41:22
+      \_PackedArrayTypespec: , line:41:13, endln:41:22
     |vpiName:AA
     |vpiFullName:work@socket_1n.AA
   |vpiParameter:
@@ -1794,7 +1848,7 @@ Design: (unnamed)
       \_Parameter: (work@socket_1n.BB), line:42:23, endln:42:45
       |vpiFullName:work@socket_1n.BB
       |vpiActual:
-      \_BitTypespec: , line:42:13, endln:42:22
+      \_PackedArrayTypespec: , line:42:13, endln:42:22
     |vpiName:BB
     |vpiFullName:work@socket_1n.BB
   |vpiParamAssign:
@@ -2019,13 +2073,17 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@socket_1n (work@socket_1n), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:38:1, endln:51:10
   |vpiTypedef:
-  \_BitTypespec: , line:40:13, endln:40:22
+  \_BitTypespec: , line:40:13, endln:40:16
+    |vpiParent:
+    \_Module: work@socket_1n (work@socket_1n), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:38:1, endln:51:10
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:40:13, endln:40:22
     |vpiParent:
     \_Module: work@socket_1n (work@socket_1n), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:38:1, endln:51:10
     |vpiRange:
     \_Range: , line:40:17, endln:40:22
       |vpiParent:
-      \_BitTypespec: , line:40:13, endln:40:22
+      \_PackedArrayTypespec: , line:40:13, endln:40:22
       |vpiLeftRange:
       \_Constant: , line:40:18, endln:40:19
         |vpiParent:
@@ -2042,14 +2100,25 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@socket_1n), line:40:13, endln:40:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:40:13, endln:40:22
+      |vpiFullName:work@socket_1n
+      |vpiActual:
+      \_BitTypespec: , line:40:13, endln:40:16
   |vpiTypedef:
-  \_BitTypespec: , line:41:13, endln:41:22
+  \_BitTypespec: , line:41:13, endln:41:16
+    |vpiParent:
+    \_Module: work@socket_1n (work@socket_1n), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:38:1, endln:51:10
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:41:13, endln:41:22
     |vpiParent:
     \_Module: work@socket_1n (work@socket_1n), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:38:1, endln:51:10
     |vpiRange:
     \_Range: , line:41:17, endln:41:22
       |vpiParent:
-      \_BitTypespec: , line:41:13, endln:41:22
+      \_PackedArrayTypespec: , line:41:13, endln:41:22
       |vpiLeftRange:
       \_Constant: , line:41:18, endln:41:19
         |vpiParent:
@@ -2066,14 +2135,25 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@socket_1n), line:41:13, endln:41:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:41:13, endln:41:22
+      |vpiFullName:work@socket_1n
+      |vpiActual:
+      \_BitTypespec: , line:41:13, endln:41:16
   |vpiTypedef:
-  \_BitTypespec: , line:42:13, endln:42:22
+  \_BitTypespec: , line:42:13, endln:42:16
+    |vpiParent:
+    \_Module: work@socket_1n (work@socket_1n), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:38:1, endln:51:10
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:42:13, endln:42:22
     |vpiParent:
     \_Module: work@socket_1n (work@socket_1n), file:${SURELOG_DIR}/tests/ElabCParam/dut.sv, line:38:1, endln:51:10
     |vpiRange:
     \_Range: , line:42:17, endln:42:22
       |vpiParent:
-      \_BitTypespec: , line:42:13, endln:42:22
+      \_PackedArrayTypespec: , line:42:13, endln:42:22
       |vpiLeftRange:
       \_Constant: , line:42:18, endln:42:19
         |vpiParent:
@@ -2090,14 +2170,27 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@socket_1n), line:42:13, endln:42:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:42:13, endln:42:22
+      |vpiFullName:work@socket_1n
+      |vpiActual:
+      \_BitTypespec: , line:42:13, endln:42:16
   |vpiImportTypespec:
   \_IntTypespec: , line:39:13, endln:39:25
   |vpiImportTypespec:
-  \_BitTypespec: , line:40:13, endln:40:22
+  \_BitTypespec: , line:40:13, endln:40:16
   |vpiImportTypespec:
-  \_BitTypespec: , line:41:13, endln:41:22
+  \_PackedArrayTypespec: , line:40:13, endln:40:22
   |vpiImportTypespec:
-  \_BitTypespec: , line:42:13, endln:42:22
+  \_BitTypespec: , line:41:13, endln:41:16
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:41:13, endln:41:22
+  |vpiImportTypespec:
+  \_BitTypespec: , line:42:13, endln:42:16
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:42:13, endln:42:22
   |vpiDefName:work@socket_1n
 ===================
 [  FATAL] : 0

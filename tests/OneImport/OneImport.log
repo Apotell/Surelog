@@ -231,7 +231,7 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/OneImport/dut.sv:11:1: Compile module "work@dut".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                              34
+Constant                                              18
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              2
@@ -246,9 +246,10 @@ Package                                                1
 ParamAssign                                            1
 Parameter                                              1
 Port                                                   2
-Range                                                 11
+Range                                                  3
 RefObj                                                 3
-RefTypespec                                            5
+RefTypespec                                            6
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/OneImport/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -289,6 +290,33 @@ Design: (unnamed)
     |vpiLhs:
     \_Parameter: (my_pkg::PMP_CFG_W), line:7:24, endln:7:37
   |vpiTypedef:
+  \_EnumTypespec: , line:2:11, endln:5:13
+    |vpiParent:
+    \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/OneImport/dut.sv, line:1:1, endln:9:11
+    |vpiBaseTypespec:
+    \_RefTypespec: (my_pkg), line:2:16, endln:2:27
+      |vpiParent:
+      \_EnumTypespec: , line:2:11, endln:5:13
+      |vpiFullName:my_pkg
+      |vpiActual:
+      \_LogicTypespec: , line:2:16, endln:2:27
+    |vpiEnumConst:
+    \_EnumConst: (OPCODE_LOAD), line:3:5, endln:3:28
+      |vpiParent:
+      \_EnumTypespec: , line:2:11, endln:5:13
+      |vpiName:OPCODE_LOAD
+      |HEX:03
+      |vpiDecompile:6'h03
+      |vpiSize:6
+    |vpiEnumConst:
+    \_EnumConst: (OPCODE_STORE), line:4:5, endln:4:28
+      |vpiParent:
+      \_EnumTypespec: , line:2:11, endln:5:13
+      |vpiName:OPCODE_STORE
+      |HEX:13
+      |vpiDecompile:6'h13
+      |vpiSize:6
+  |vpiTypedef:
   \_LogicTypespec: , line:2:16, endln:2:27
     |vpiParent:
     \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/OneImport/dut.sv, line:1:1, endln:9:11
@@ -313,41 +341,27 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_EnumTypespec: (my_pkg::opcode_e), line:2:11, endln:5:13
+  \_TypedefTypespec: (my_pkg::opcode_e), line:5:5, endln:5:13
     |vpiParent:
     \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/OneImport/dut.sv, line:1:1, endln:9:11
     |vpiName:my_pkg::opcode_e
-    |vpiBaseTypespec:
-    \_RefTypespec: (my_pkg::opcode_e), line:2:16, endln:2:27
+    |vpiTypedefAlias:
+    \_RefTypespec: (my_pkg::opcode_e), line:2:11, endln:5:4
       |vpiParent:
-      \_EnumTypespec: (my_pkg::opcode_e), line:2:11, endln:5:13
+      \_TypedefTypespec: (my_pkg::opcode_e), line:5:5, endln:5:13
       |vpiFullName:my_pkg::opcode_e
       |vpiActual:
-      \_LogicTypespec: , line:2:16, endln:2:27
-    |vpiEnumConst:
-    \_EnumConst: (OPCODE_LOAD), line:3:5, endln:3:28
-      |vpiParent:
-      \_EnumTypespec: (my_pkg::opcode_e), line:2:11, endln:5:13
-      |vpiName:OPCODE_LOAD
-      |HEX:03
-      |vpiDecompile:6'h03
-      |vpiSize:6
-    |vpiEnumConst:
-    \_EnumConst: (OPCODE_STORE), line:4:5, endln:4:28
-      |vpiParent:
-      \_EnumTypespec: (my_pkg::opcode_e), line:2:11, endln:5:13
-      |vpiName:OPCODE_STORE
-      |HEX:13
-      |vpiDecompile:6'h13
-      |vpiSize:6
+      \_EnumTypespec: , line:2:11, endln:5:13
   |vpiTypedef:
   \_IntTypespec: , line:7:11, endln:7:23
     |vpiParent:
     \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/OneImport/dut.sv, line:1:1, endln:9:11
   |vpiImportTypespec:
+  \_EnumTypespec: , line:2:11, endln:5:13
+  |vpiImportTypespec:
   \_LogicTypespec: , line:2:16, endln:2:27
   |vpiImportTypespec:
-  \_EnumTypespec: (my_pkg::opcode_e), line:2:11, endln:5:13
+  \_TypedefTypespec: (my_pkg::opcode_e), line:5:5, endln:5:13
   |vpiImportTypespec:
   \_IntTypespec: , line:7:11, endln:7:23
   |vpiDefName:my_pkg
@@ -465,14 +479,14 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ImportTypespec: (my_pkg), line:13:28, endln:13:47
   |vpiImportTypespec:
-  \_LogicNet: (work@dut.a), line:14:15, endln:14:16
+  \_LogicNet: (work@dut.a), line:11:13, endln:11:14
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneImport/dut.sv, line:11:1, endln:20:10
     |vpiName:a
     |vpiFullName:work@dut.a
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@dut.b), line:15:16, endln:15:17
+  \_LogicNet: (work@dut.b), line:11:16, endln:11:17
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneImport/dut.sv, line:11:1, endln:20:10
     |vpiName:b
@@ -485,7 +499,7 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneImport/dut.sv, line:11:1, endln:20:10
     |vpiTypespec:
-    \_RefTypespec: (work@dut.a), line:16:3, endln:16:13
+    \_RefTypespec: (work@dut.a), line:16:3, endln:16:7
       |vpiParent:
       \_LogicNet: (work@dut.a), line:16:14, endln:16:15
       |vpiFullName:work@dut.a
@@ -519,9 +533,9 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@dut
   |vpiNet:
-  \_LogicNet: (work@dut.a), line:14:15, endln:14:16
+  \_LogicNet: (work@dut.a), line:11:13, endln:11:14
   |vpiNet:
-  \_LogicNet: (work@dut.b), line:15:16, endln:15:17
+  \_LogicNet: (work@dut.b), line:11:16, endln:11:17
   |vpiNet:
   \_LogicNet: (work@dut.a), line:16:14, endln:16:15
   |vpiNet:
@@ -579,7 +593,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@dut.a
             |vpiActual:
-            \_LogicNet: (work@dut.a), line:14:15, endln:14:16
+            \_LogicNet: (work@dut.a), line:11:13, endln:11:14
           |vpiOperand:
           \_RefObj: (work@dut.OPCODE_LOAD), line:19:23, endln:19:34
             |vpiParent:
@@ -595,7 +609,7 @@ Design: (unnamed)
       |vpiName:b
       |vpiFullName:work@dut.b
       |vpiActual:
-      \_LogicNet: (work@dut.b), line:15:16, endln:15:17
+      \_LogicNet: (work@dut.b), line:11:16, endln:11:17
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

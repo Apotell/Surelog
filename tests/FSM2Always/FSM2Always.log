@@ -859,7 +859,7 @@ CaseItem                                               8
 CaseStmt                                               2
 ClassDefn                                              8
 ClassTypespec                                          1
-Constant                                              34
+Constant                                              30
 DelayControl                                          12
 Design                                                 1
 EnumConst                                              5
@@ -872,15 +872,16 @@ IntTypespec                                            9
 LogicNet                                              14
 LogicTypespec                                          9
 Module                                                 1
-Operation                                             14
+Operation                                             12
 Package                                                1
 ParamAssign                                            4
 Parameter                                              4
 Port                                                   6
-Range                                                  4
-RefObj                                                54
-RefTypespec                                           20
+Range                                                  2
+RefObj                                                52
+RefTypespec                                           21
 Task                                                   9
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FSM2Always/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -1149,7 +1150,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -1183,14 +1184,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/FSM2Always/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -1198,7 +1198,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -1206,7 +1206,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -1214,7 +1214,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -1222,13 +1222,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/FSM2Always/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1613,42 +1627,42 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiImportTypespec:
-  \_LogicNet: (work@fsm_using_always.clock), line:15:9, endln:15:14
+  \_LogicNet: (work@fsm_using_always.clock), line:7:1, endln:7:6
     |vpiParent:
     \_Module: work@fsm_using_always (work@fsm_using_always), file:${SURELOG_DIR}/tests/FSM2Always/top.sv, line:6:1, endln:91:10
     |vpiName:clock
     |vpiFullName:work@fsm_using_always.clock
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@fsm_using_always.reset), line:15:15, endln:15:20
+  \_LogicNet: (work@fsm_using_always.reset), line:8:1, endln:8:6
     |vpiParent:
     \_Module: work@fsm_using_always (work@fsm_using_always), file:${SURELOG_DIR}/tests/FSM2Always/top.sv, line:6:1, endln:91:10
     |vpiName:reset
     |vpiFullName:work@fsm_using_always.reset
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@fsm_using_always.req_0), line:15:21, endln:15:26
+  \_LogicNet: (work@fsm_using_always.req_0), line:9:1, endln:9:6
     |vpiParent:
     \_Module: work@fsm_using_always (work@fsm_using_always), file:${SURELOG_DIR}/tests/FSM2Always/top.sv, line:6:1, endln:91:10
     |vpiName:req_0
     |vpiFullName:work@fsm_using_always.req_0
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@fsm_using_always.req_1), line:15:27, endln:15:32
+  \_LogicNet: (work@fsm_using_always.req_1), line:10:1, endln:10:6
     |vpiParent:
     \_Module: work@fsm_using_always (work@fsm_using_always), file:${SURELOG_DIR}/tests/FSM2Always/top.sv, line:6:1, endln:91:10
     |vpiName:req_1
     |vpiFullName:work@fsm_using_always.req_1
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@fsm_using_always.gnt_0), line:17:9, endln:17:14
+  \_LogicNet: (work@fsm_using_always.gnt_0), line:11:1, endln:11:6
     |vpiParent:
     \_Module: work@fsm_using_always (work@fsm_using_always), file:${SURELOG_DIR}/tests/FSM2Always/top.sv, line:6:1, endln:91:10
     |vpiName:gnt_0
     |vpiFullName:work@fsm_using_always.gnt_0
     |vpiNetType:48
   |vpiImportTypespec:
-  \_LogicNet: (work@fsm_using_always.gnt_1), line:17:15, endln:17:20
+  \_LogicNet: (work@fsm_using_always.gnt_1), line:12:1, endln:12:6
     |vpiParent:
     \_Module: work@fsm_using_always (work@fsm_using_always), file:${SURELOG_DIR}/tests/FSM2Always/top.sv, line:6:1, endln:91:10
     |vpiName:gnt_1
@@ -1784,17 +1798,17 @@ Design: (unnamed)
     |vpiNetType:48
   |vpiDefName:work@fsm_using_always
   |vpiNet:
-  \_LogicNet: (work@fsm_using_always.clock), line:15:9, endln:15:14
+  \_LogicNet: (work@fsm_using_always.clock), line:7:1, endln:7:6
   |vpiNet:
-  \_LogicNet: (work@fsm_using_always.reset), line:15:15, endln:15:20
+  \_LogicNet: (work@fsm_using_always.reset), line:8:1, endln:8:6
   |vpiNet:
-  \_LogicNet: (work@fsm_using_always.req_0), line:15:21, endln:15:26
+  \_LogicNet: (work@fsm_using_always.req_0), line:9:1, endln:9:6
   |vpiNet:
-  \_LogicNet: (work@fsm_using_always.req_1), line:15:27, endln:15:32
+  \_LogicNet: (work@fsm_using_always.req_1), line:10:1, endln:10:6
   |vpiNet:
-  \_LogicNet: (work@fsm_using_always.gnt_0), line:17:9, endln:17:14
+  \_LogicNet: (work@fsm_using_always.gnt_0), line:11:1, endln:11:6
   |vpiNet:
-  \_LogicNet: (work@fsm_using_always.gnt_1), line:17:15, endln:17:20
+  \_LogicNet: (work@fsm_using_always.gnt_1), line:12:1, endln:12:6
   |vpiNet:
   \_LogicNet: (work@fsm_using_always.clock), line:19:9, endln:19:14
   |vpiNet:
@@ -1880,7 +1894,7 @@ Design: (unnamed)
             |vpiName:req_0
             |vpiFullName:work@fsm_using_always.req_0
             |vpiActual:
-            \_LogicNet: (work@fsm_using_always.req_0), line:15:21, endln:15:26
+            \_LogicNet: (work@fsm_using_always.req_0), line:9:1, endln:9:6
         |vpiOperand:
         \_RefObj: (work@fsm_using_always.req_1), line:29:29, endln:29:34
           |vpiParent:
@@ -1888,7 +1902,7 @@ Design: (unnamed)
           |vpiName:req_1
           |vpiFullName:work@fsm_using_always.req_1
           |vpiActual:
-          \_LogicNet: (work@fsm_using_always.req_1), line:15:27, endln:15:32
+          \_LogicNet: (work@fsm_using_always.req_1), line:10:1, endln:10:6
       |vpiStmt:
       \_Begin: (work@fsm_using_always.FSM_COMBO), line:30:1, endln:52:4
         |vpiParent:
@@ -1958,7 +1972,7 @@ Design: (unnamed)
                   |vpiName:req_0
                   |vpiFullName:work@fsm_using_always.FSM_COMBO.req_0
                   |vpiActual:
-                  \_LogicNet: (work@fsm_using_always.req_0), line:15:21, endln:15:26
+                  \_LogicNet: (work@fsm_using_always.req_0), line:9:1, endln:9:6
                 |vpiOperand:
                 \_Constant: , line:33:24, endln:33:28
                   |vpiParent:
@@ -2010,7 +2024,7 @@ Design: (unnamed)
                     |vpiName:req_1
                     |vpiFullName:work@fsm_using_always.FSM_COMBO.req_1
                     |vpiActual:
-                    \_LogicNet: (work@fsm_using_always.req_1), line:15:27, endln:15:32
+                    \_LogicNet: (work@fsm_using_always.req_1), line:10:1, endln:10:6
                   |vpiOperand:
                   \_Constant: , line:35:37, endln:35:41
                     |vpiParent:
@@ -2101,7 +2115,7 @@ Design: (unnamed)
                   |vpiName:req_0
                   |vpiFullName:work@fsm_using_always.FSM_COMBO.req_0
                   |vpiActual:
-                  \_LogicNet: (work@fsm_using_always.req_0), line:15:21, endln:15:26
+                  \_LogicNet: (work@fsm_using_always.req_0), line:9:1, endln:9:6
                 |vpiOperand:
                 \_Constant: , line:40:24, endln:40:28
                   |vpiParent:
@@ -2192,7 +2206,7 @@ Design: (unnamed)
                   |vpiName:req_1
                   |vpiFullName:work@fsm_using_always.FSM_COMBO.req_1
                   |vpiActual:
-                  \_LogicNet: (work@fsm_using_always.req_1), line:15:27, endln:15:32
+                  \_LogicNet: (work@fsm_using_always.req_1), line:10:1, endln:10:6
                 |vpiOperand:
                 \_Constant: , line:45:24, endln:45:28
                   |vpiParent:
@@ -2302,7 +2316,7 @@ Design: (unnamed)
           |vpiName:clock
           |vpiFullName:work@fsm_using_always.clock
           |vpiActual:
-          \_LogicNet: (work@fsm_using_always.clock), line:15:9, endln:15:14
+          \_LogicNet: (work@fsm_using_always.clock), line:7:1, endln:7:6
       |vpiStmt:
       \_Begin: (work@fsm_using_always.FSM_SEQ), line:55:1, endln:61:4
         |vpiParent:
@@ -2325,7 +2339,7 @@ Design: (unnamed)
               |vpiName:reset
               |vpiFullName:work@fsm_using_always.FSM_SEQ.reset
               |vpiActual:
-              \_LogicNet: (work@fsm_using_always.reset), line:15:15, endln:15:20
+              \_LogicNet: (work@fsm_using_always.reset), line:8:1, endln:8:6
             |vpiOperand:
             \_Constant: , line:56:16, endln:56:20
               |vpiParent:
@@ -2417,7 +2431,7 @@ Design: (unnamed)
           |vpiName:clock
           |vpiFullName:work@fsm_using_always.clock
           |vpiActual:
-          \_LogicNet: (work@fsm_using_always.clock), line:15:9, endln:15:14
+          \_LogicNet: (work@fsm_using_always.clock), line:7:1, endln:7:6
       |vpiStmt:
       \_Begin: (work@fsm_using_always.OUTPUT_LOGIC), line:64:1, endln:89:4
         |vpiParent:
@@ -2440,7 +2454,7 @@ Design: (unnamed)
               |vpiName:reset
               |vpiFullName:work@fsm_using_always.OUTPUT_LOGIC.reset
               |vpiActual:
-              \_LogicNet: (work@fsm_using_always.reset), line:15:15, endln:15:20
+              \_LogicNet: (work@fsm_using_always.reset), line:8:1, endln:8:6
             |vpiOperand:
             \_Constant: , line:65:14, endln:65:18
               |vpiParent:
@@ -2474,7 +2488,7 @@ Design: (unnamed)
                 |vpiName:gnt_0
                 |vpiFullName:work@fsm_using_always.OUTPUT_LOGIC.gnt_0
                 |vpiActual:
-                \_LogicNet: (work@fsm_using_always.gnt_0), line:17:9, endln:17:14
+                \_LogicNet: (work@fsm_using_always.gnt_0), line:11:1, endln:11:6
               |vpiDelayControl:
               \_DelayControl: , line:66:12, endln:66:14
                 |vpiParent:
@@ -2500,7 +2514,7 @@ Design: (unnamed)
                 |vpiName:gnt_1
                 |vpiFullName:work@fsm_using_always.OUTPUT_LOGIC.gnt_1
                 |vpiActual:
-                \_LogicNet: (work@fsm_using_always.gnt_1), line:17:15, endln:17:20
+                \_LogicNet: (work@fsm_using_always.gnt_1), line:12:1, endln:12:6
               |vpiDelayControl:
               \_DelayControl: , line:67:12, endln:67:14
                 |vpiParent:
@@ -2561,7 +2575,7 @@ Design: (unnamed)
                       |vpiName:gnt_0
                       |vpiFullName:work@fsm_using_always.OUTPUT_LOGIC.gnt_0
                       |vpiActual:
-                      \_LogicNet: (work@fsm_using_always.gnt_0), line:17:9, endln:17:14
+                      \_LogicNet: (work@fsm_using_always.gnt_0), line:11:1, endln:11:6
                     |vpiDelayControl:
                     \_DelayControl: , line:72:28, endln:72:30
                       |vpiParent:
@@ -2587,7 +2601,7 @@ Design: (unnamed)
                       |vpiName:gnt_1
                       |vpiFullName:work@fsm_using_always.OUTPUT_LOGIC.gnt_1
                       |vpiActual:
-                      \_LogicNet: (work@fsm_using_always.gnt_1), line:17:15, endln:17:20
+                      \_LogicNet: (work@fsm_using_always.gnt_1), line:12:1, endln:12:6
                     |vpiDelayControl:
                     \_DelayControl: , line:73:28, endln:73:30
                       |vpiParent:
@@ -2630,7 +2644,7 @@ Design: (unnamed)
                       |vpiName:gnt_0
                       |vpiFullName:work@fsm_using_always.OUTPUT_LOGIC.gnt_0
                       |vpiActual:
-                      \_LogicNet: (work@fsm_using_always.gnt_0), line:17:9, endln:17:14
+                      \_LogicNet: (work@fsm_using_always.gnt_0), line:11:1, endln:11:6
                     |vpiDelayControl:
                     \_DelayControl: , line:76:29, endln:76:31
                       |vpiParent:
@@ -2656,7 +2670,7 @@ Design: (unnamed)
                       |vpiName:gnt_1
                       |vpiFullName:work@fsm_using_always.OUTPUT_LOGIC.gnt_1
                       |vpiActual:
-                      \_LogicNet: (work@fsm_using_always.gnt_1), line:17:15, endln:17:20
+                      \_LogicNet: (work@fsm_using_always.gnt_1), line:12:1, endln:12:6
                     |vpiDelayControl:
                     \_DelayControl: , line:77:29, endln:77:31
                       |vpiParent:
@@ -2699,7 +2713,7 @@ Design: (unnamed)
                       |vpiName:gnt_0
                       |vpiFullName:work@fsm_using_always.OUTPUT_LOGIC.gnt_0
                       |vpiActual:
-                      \_LogicNet: (work@fsm_using_always.gnt_0), line:17:9, endln:17:14
+                      \_LogicNet: (work@fsm_using_always.gnt_0), line:11:1, endln:11:6
                     |vpiDelayControl:
                     \_DelayControl: , line:80:29, endln:80:31
                       |vpiParent:
@@ -2725,7 +2739,7 @@ Design: (unnamed)
                       |vpiName:gnt_1
                       |vpiFullName:work@fsm_using_always.OUTPUT_LOGIC.gnt_1
                       |vpiActual:
-                      \_LogicNet: (work@fsm_using_always.gnt_1), line:17:15, endln:17:20
+                      \_LogicNet: (work@fsm_using_always.gnt_1), line:12:1, endln:12:6
                     |vpiDelayControl:
                     \_DelayControl: , line:81:29, endln:81:31
                       |vpiParent:
@@ -2760,7 +2774,7 @@ Design: (unnamed)
                       |vpiName:gnt_0
                       |vpiFullName:work@fsm_using_always.OUTPUT_LOGIC.gnt_0
                       |vpiActual:
-                      \_LogicNet: (work@fsm_using_always.gnt_0), line:17:9, endln:17:14
+                      \_LogicNet: (work@fsm_using_always.gnt_0), line:11:1, endln:11:6
                     |vpiDelayControl:
                     \_DelayControl: , line:84:30, endln:84:32
                       |vpiParent:
@@ -2786,7 +2800,7 @@ Design: (unnamed)
                       |vpiName:gnt_1
                       |vpiFullName:work@fsm_using_always.OUTPUT_LOGIC.gnt_1
                       |vpiActual:
-                      \_LogicNet: (work@fsm_using_always.gnt_1), line:17:15, endln:17:20
+                      \_LogicNet: (work@fsm_using_always.gnt_1), line:12:1, endln:12:6
                     |vpiDelayControl:
                     \_DelayControl: , line:85:30, endln:85:32
                       |vpiParent:

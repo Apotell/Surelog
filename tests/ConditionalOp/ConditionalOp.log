@@ -399,25 +399,26 @@ AST_DEBUG_END
 BitTypespec                                            1
 ClassDefn                                              8
 ClassTypespec                                          1
-Constant                                              39
+Constant                                              29
 Design                                                 1
 EnumConst                                              5
 EnumTypespec                                           1
 Function                                               9
 IODecl                                                11
 IntTypespec                                           17
+LogicNet                                               3
 LogicTypespec                                          4
-LogicVar                                               3
 Module                                                 2
-Operation                                             18
+Operation                                             13
 Package                                                1
 ParamAssign                                            9
 Parameter                                              9
-Range                                                 10
-RefObj                                                17
-RefTypespec                                           24
+Range                                                  5
+RefObj                                                12
+RefTypespec                                           25
 SysFuncCall                                            2
 Task                                                   9
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConditionalOp/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -686,7 +687,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -720,14 +721,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ConditionalOp/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -735,7 +735,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -743,7 +743,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -751,7 +751,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -759,13 +759,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ConditionalOp/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -967,54 +981,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@ibex_register_file
-  |vpiVariables:
-  \_LogicVar: (work@ibex_register_file.rf_reg), line:21:40, endln:21:46
-    |vpiParent:
-    \_Module: work@ibex_register_file (work@ibex_register_file), file:${SURELOG_DIR}/tests/ConditionalOp/dut.sv, line:14:1, endln:24:10
-    |vpiTypespec:
-    \_RefTypespec: (work@ibex_register_file.rf_reg), line:21:3, endln:21:39
-      |vpiParent:
-      \_LogicVar: (work@ibex_register_file.rf_reg), line:21:40, endln:21:46
-      |vpiFullName:work@ibex_register_file.rf_reg
-      |vpiActual:
-      \_LogicTypespec: , line:21:3, endln:21:39
-    |vpiName:rf_reg
-    |vpiFullName:work@ibex_register_file.rf_reg
-    |vpiVisibility:1
-  |vpiVariables:
-  \_LogicVar: (work@ibex_register_file.rf_reg_q), line:22:40, endln:22:48
-    |vpiParent:
-    \_Module: work@ibex_register_file (work@ibex_register_file), file:${SURELOG_DIR}/tests/ConditionalOp/dut.sv, line:14:1, endln:24:10
-    |vpiTypespec:
-    \_RefTypespec: (work@ibex_register_file.rf_reg_q), line:22:3, endln:22:39
-      |vpiParent:
-      \_LogicVar: (work@ibex_register_file.rf_reg_q), line:22:40, endln:22:48
-      |vpiFullName:work@ibex_register_file.rf_reg_q
-      |vpiActual:
-      \_LogicTypespec: , line:22:3, endln:22:39
-    |vpiName:rf_reg_q
-    |vpiFullName:work@ibex_register_file.rf_reg_q
-    |vpiVisibility:1
-  |vpiVariables:
-  \_LogicVar: (work@ibex_register_file.we_a_dec), line:23:40, endln:23:48
-    |vpiParent:
-    \_Module: work@ibex_register_file (work@ibex_register_file), file:${SURELOG_DIR}/tests/ConditionalOp/dut.sv, line:14:1, endln:24:10
-    |vpiTypespec:
-    \_RefTypespec: (work@ibex_register_file.we_a_dec), line:23:3, endln:23:24
-      |vpiParent:
-      \_LogicVar: (work@ibex_register_file.we_a_dec), line:23:40, endln:23:48
-      |vpiFullName:work@ibex_register_file.we_a_dec
-      |vpiActual:
-      \_LogicTypespec: , line:23:3, endln:23:24
-    |vpiName:we_a_dec
-    |vpiFullName:work@ibex_register_file.we_a_dec
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@ibex_register_file.rf_reg), line:21:40, endln:21:46
-  |vpiReg:
-  \_LogicVar: (work@ibex_register_file.rf_reg_q), line:22:40, endln:22:48
-  |vpiReg:
-  \_LogicVar: (work@ibex_register_file.we_a_dec), line:23:40, endln:23:48
   |vpiParameter:
   \_Parameter: (work@ibex_register_file.RV32E), line:15:28, endln:15:49
     |vpiParent:
@@ -1365,16 +1331,58 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:21:3, endln:21:39
   |vpiImportTypespec:
-  \_LogicVar: (work@ibex_register_file.rf_reg), line:21:40, endln:21:46
+  \_LogicNet: (work@ibex_register_file.rf_reg), line:21:40, endln:21:46
+    |vpiParent:
+    \_Module: work@ibex_register_file (work@ibex_register_file), file:${SURELOG_DIR}/tests/ConditionalOp/dut.sv, line:14:1, endln:24:10
+    |vpiTypespec:
+    \_RefTypespec: (work@ibex_register_file.rf_reg), line:21:3, endln:21:39
+      |vpiParent:
+      \_LogicNet: (work@ibex_register_file.rf_reg), line:21:40, endln:21:46
+      |vpiFullName:work@ibex_register_file.rf_reg
+      |vpiActual:
+      \_LogicTypespec: , line:21:3, endln:21:39
+    |vpiName:rf_reg
+    |vpiFullName:work@ibex_register_file.rf_reg
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicTypespec: , line:22:3, endln:22:39
   |vpiImportTypespec:
-  \_LogicVar: (work@ibex_register_file.rf_reg_q), line:22:40, endln:22:48
+  \_LogicNet: (work@ibex_register_file.rf_reg_q), line:22:40, endln:22:48
+    |vpiParent:
+    \_Module: work@ibex_register_file (work@ibex_register_file), file:${SURELOG_DIR}/tests/ConditionalOp/dut.sv, line:14:1, endln:24:10
+    |vpiTypespec:
+    \_RefTypespec: (work@ibex_register_file.rf_reg_q), line:22:3, endln:22:39
+      |vpiParent:
+      \_LogicNet: (work@ibex_register_file.rf_reg_q), line:22:40, endln:22:48
+      |vpiFullName:work@ibex_register_file.rf_reg_q
+      |vpiActual:
+      \_LogicTypespec: , line:22:3, endln:22:39
+    |vpiName:rf_reg_q
+    |vpiFullName:work@ibex_register_file.rf_reg_q
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicTypespec: , line:23:3, endln:23:24
   |vpiImportTypespec:
-  \_LogicVar: (work@ibex_register_file.we_a_dec), line:23:40, endln:23:48
+  \_LogicNet: (work@ibex_register_file.we_a_dec), line:23:40, endln:23:48
+    |vpiParent:
+    \_Module: work@ibex_register_file (work@ibex_register_file), file:${SURELOG_DIR}/tests/ConditionalOp/dut.sv, line:14:1, endln:24:10
+    |vpiTypespec:
+    \_RefTypespec: (work@ibex_register_file.we_a_dec), line:23:3, endln:23:24
+      |vpiParent:
+      \_LogicNet: (work@ibex_register_file.we_a_dec), line:23:40, endln:23:48
+      |vpiFullName:work@ibex_register_file.we_a_dec
+      |vpiActual:
+      \_LogicTypespec: , line:23:3, endln:23:24
+    |vpiName:we_a_dec
+    |vpiFullName:work@ibex_register_file.we_a_dec
+    |vpiNetType:36
   |vpiDefName:work@ibex_register_file
+  |vpiNet:
+  \_LogicNet: (work@ibex_register_file.rf_reg), line:21:40, endln:21:46
+  |vpiNet:
+  \_LogicNet: (work@ibex_register_file.rf_reg_q), line:22:40, endln:22:48
+  |vpiNet:
+  \_LogicNet: (work@ibex_register_file.we_a_dec), line:23:40, endln:23:48
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConditionalOp/dut.sv, line:1:1, endln:12:10
   |vpiParent:

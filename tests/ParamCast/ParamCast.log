@@ -105,7 +105,7 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ClassDefn                                              8
 ClassTypespec                                          1
-Constant                                              10
+Constant                                               8
 Design                                                 1
 EnumConst                                              9
 EnumTypespec                                           2
@@ -113,17 +113,18 @@ Function                                               9
 IODecl                                                11
 ImportTypespec                                         1
 IntTypespec                                           10
+LogicNet                                               1
 LogicTypespec                                          2
-LogicVar                                               1
 Module                                                 1
-Operation                                              5
+Operation                                              4
 Package                                                2
 ParamAssign                                            1
 Parameter                                              1
-Range                                                  2
-RefObj                                                 5
-RefTypespec                                           15
+Range                                                  1
+RefObj                                                 4
+RefTypespec                                           17
 Task                                                   9
+TypedefTypespec                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamCast/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -392,7 +393,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -426,14 +427,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ParamCast/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -441,7 +441,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -449,7 +449,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -457,7 +457,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -465,13 +465,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ParamCast/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -707,14 +721,13 @@ Design: (unnamed)
     |vpiLhs:
     \_Parameter: (otp_ctrl_part_pkg::NumAgents), line:10:16, endln:10:46
   |vpiTypedef:
-  \_EnumTypespec: (otp_ctrl_part_pkg::part_idx_e), line:3:9, endln:8:15
+  \_EnumTypespec: , line:3:9, endln:8:15
     |vpiParent:
     \_Package: otp_ctrl_part_pkg (otp_ctrl_part_pkg), file:${SURELOG_DIR}/tests/ParamCast/dut.sv, line:1:1, endln:12:11
-    |vpiName:otp_ctrl_part_pkg::part_idx_e
     |vpiEnumConst:
     \_EnumConst: (CreatorSwCfgIdx), line:4:5, endln:4:20
       |vpiParent:
-      \_EnumTypespec: (otp_ctrl_part_pkg::part_idx_e), line:3:9, endln:8:15
+      \_EnumTypespec: , line:3:9, endln:8:15
       |vpiName:CreatorSwCfgIdx
       |INT:0
       |vpiDecompile:0
@@ -722,7 +735,7 @@ Design: (unnamed)
     |vpiEnumConst:
     \_EnumConst: (Blah), line:5:5, endln:5:9
       |vpiParent:
-      \_EnumTypespec: (otp_ctrl_part_pkg::part_idx_e), line:3:9, endln:8:15
+      \_EnumTypespec: , line:3:9, endln:8:15
       |vpiName:Blah
       |INT:1
       |vpiDecompile:1
@@ -730,7 +743,7 @@ Design: (unnamed)
     |vpiEnumConst:
     \_EnumConst: (Boo), line:6:5, endln:6:8
       |vpiParent:
-      \_EnumTypespec: (otp_ctrl_part_pkg::part_idx_e), line:3:9, endln:8:15
+      \_EnumTypespec: , line:3:9, endln:8:15
       |vpiName:Boo
       |INT:2
       |vpiDecompile:2
@@ -738,18 +751,32 @@ Design: (unnamed)
     |vpiEnumConst:
     \_EnumConst: (NumAgentsIdx), line:7:5, endln:7:17
       |vpiParent:
-      \_EnumTypespec: (otp_ctrl_part_pkg::part_idx_e), line:3:9, endln:8:15
+      \_EnumTypespec: , line:3:9, endln:8:15
       |vpiName:NumAgentsIdx
       |INT:3
       |vpiDecompile:3
       |vpiSize:64
+  |vpiTypedef:
+  \_TypedefTypespec: (otp_ctrl_part_pkg::part_idx_e), line:8:5, endln:8:15
+    |vpiParent:
+    \_Package: otp_ctrl_part_pkg (otp_ctrl_part_pkg), file:${SURELOG_DIR}/tests/ParamCast/dut.sv, line:1:1, endln:12:11
+    |vpiName:otp_ctrl_part_pkg::part_idx_e
+    |vpiTypedefAlias:
+    \_RefTypespec: (otp_ctrl_part_pkg::part_idx_e), line:3:9, endln:8:4
+      |vpiParent:
+      \_TypedefTypespec: (otp_ctrl_part_pkg::part_idx_e), line:8:5, endln:8:15
+      |vpiFullName:otp_ctrl_part_pkg::part_idx_e
+      |vpiActual:
+      \_EnumTypespec: , line:3:9, endln:8:15
   |vpiTypedef:
   \_IntTypespec: , line:10:12, endln:10:15
     |vpiParent:
     \_Package: otp_ctrl_part_pkg (otp_ctrl_part_pkg), file:${SURELOG_DIR}/tests/ParamCast/dut.sv, line:1:1, endln:12:11
     |vpiSigned:1
   |vpiImportTypespec:
-  \_EnumTypespec: (otp_ctrl_part_pkg::part_idx_e), line:3:9, endln:8:15
+  \_EnumTypespec: , line:3:9, endln:8:15
+  |vpiImportTypespec:
+  \_TypedefTypespec: (otp_ctrl_part_pkg::part_idx_e), line:8:5, endln:8:15
   |vpiImportTypespec:
   \_IntTypespec: , line:10:12, endln:10:15
   |vpiDefName:otp_ctrl_part_pkg
@@ -758,22 +785,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@otp_ctrl
-  |vpiVariables:
-  \_LogicVar: (work@otp_ctrl.part_otp_arb_req), line:17:28, endln:17:44
-    |vpiParent:
-    \_Module: work@otp_ctrl (work@otp_ctrl), file:${SURELOG_DIR}/tests/ParamCast/dut.sv, line:15:1, endln:18:10
-    |vpiTypespec:
-    \_RefTypespec: (work@otp_ctrl.part_otp_arb_req), line:17:3, endln:17:24
-      |vpiParent:
-      \_LogicVar: (work@otp_ctrl.part_otp_arb_req), line:17:28, endln:17:44
-      |vpiFullName:work@otp_ctrl.part_otp_arb_req
-      |vpiActual:
-      \_LogicTypespec: , line:17:3, endln:17:24
-    |vpiName:part_otp_arb_req
-    |vpiFullName:work@otp_ctrl.part_otp_arb_req
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@otp_ctrl.part_otp_arb_req), line:17:28, endln:17:44
   |vpiTypedef:
   \_ImportTypespec: (otp_ctrl_part_pkg), line:16:10, endln:16:30
     |vpiParent:
@@ -829,7 +840,19 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:17:3, endln:17:24
   |vpiImportTypespec:
-  \_LogicVar: (work@otp_ctrl.part_otp_arb_req), line:17:28, endln:17:44
+  \_LogicNet: (work@otp_ctrl.part_otp_arb_req), line:17:28, endln:17:44
+    |vpiParent:
+    \_Module: work@otp_ctrl (work@otp_ctrl), file:${SURELOG_DIR}/tests/ParamCast/dut.sv, line:15:1, endln:18:10
+    |vpiTypespec:
+    \_RefTypespec: (work@otp_ctrl.part_otp_arb_req), line:17:3, endln:17:24
+      |vpiParent:
+      \_LogicNet: (work@otp_ctrl.part_otp_arb_req), line:17:28, endln:17:44
+      |vpiFullName:work@otp_ctrl.part_otp_arb_req
+      |vpiActual:
+      \_LogicTypespec: , line:17:3, endln:17:24
+    |vpiName:part_otp_arb_req
+    |vpiFullName:work@otp_ctrl.part_otp_arb_req
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicNet: (work@otp_ctrl.NumAgents), line:17:10, endln:17:19
     |vpiParent:
@@ -838,6 +861,8 @@ Design: (unnamed)
     |vpiFullName:work@otp_ctrl.NumAgents
     |vpiNetType:1
   |vpiDefName:work@otp_ctrl
+  |vpiNet:
+  \_LogicNet: (work@otp_ctrl.part_otp_arb_req), line:17:28, endln:17:44
   |vpiNet:
   \_LogicNet: (work@otp_ctrl.NumAgents), line:17:10, endln:17:19
 ===================

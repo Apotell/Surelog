@@ -141,21 +141,21 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/DollarBitsUnary/dut.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                              14
+Constant                                               6
 ContAssign                                             1
 Design                                                 1
-LogicNet                                               1
+LogicNet                                               2
 LogicTypespec                                          4
-LogicVar                                               1
 Module                                                 1
-Operation                                              4
+Operation                                              3
 PartSelect                                             1
 Port                                                   1
-Range                                                  6
-RefObj                                                 4
-RefTypespec                                            4
+Range                                                  2
+RefObj                                                 3
+RefTypespec                                            5
 StructTypespec                                         1
-SysFuncCall                                            3
+SysFuncCall                                            2
+TypedefTypespec                                        1
 TypespecMember                                         1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/DollarBitsUnary/slpp_all/surelog.uhdm ...
@@ -168,38 +168,33 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@top
-  |vpiVariables:
-  \_LogicVar: (work@top.dr_q), line:6:28, endln:6:32
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DollarBitsUnary/dut.sv, line:1:1, endln:9:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.dr_q), line:6:3, endln:6:27
-      |vpiParent:
-      \_LogicVar: (work@top.dr_q), line:6:28, endln:6:32
-      |vpiFullName:work@top.dr_q
-      |vpiActual:
-      \_LogicTypespec: , line:6:3, endln:6:27
-    |vpiName:dr_q
-    |vpiFullName:work@top.dr_q
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@top.dr_q), line:6:28, endln:6:32
   |vpiTypedef:
-  \_StructTypespec: (dmi_t), line:2:12, endln:4:5
+  \_TypedefTypespec: (dmi_t), line:4:6, endln:4:11
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DollarBitsUnary/dut.sv, line:1:1, endln:9:10
     |vpiName:dmi_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@top.dmi_t), line:2:12, endln:4:5
+      |vpiParent:
+      \_TypedefTypespec: (dmi_t), line:4:6, endln:4:11
+      |vpiFullName:work@top.dmi_t
+      |vpiActual:
+      \_StructTypespec: , line:2:12, endln:4:5
+  |vpiTypedef:
+  \_StructTypespec: , line:2:12, endln:4:5
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DollarBitsUnary/dut.sv, line:1:1, endln:9:10
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (data), line:3:20, endln:3:24
       |vpiParent:
-      \_StructTypespec: (dmi_t), line:2:12, endln:4:5
+      \_StructTypespec: , line:2:12, endln:4:5
       |vpiName:data
       |vpiTypespec:
-      \_RefTypespec: (work@top.dmi_t.data), line:3:7, endln:3:19
+      \_RefTypespec: (work@top.data), line:3:7, endln:3:19
         |vpiParent:
         \_TypespecMember: (data), line:3:20, endln:3:24
-        |vpiFullName:work@top.dmi_t.data
+        |vpiFullName:work@top.data
         |vpiActual:
         \_LogicTypespec: , line:3:7, endln:3:19
   |vpiTypedef:
@@ -227,29 +222,9 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_LogicTypespec: , line:1:19, endln:1:31
+  \_LogicTypespec: , line:1:19, endln:1:24
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DollarBitsUnary/dut.sv, line:1:1, endln:9:10
-    |vpiRange:
-    \_Range: , line:1:25, endln:1:31
-      |vpiParent:
-      \_LogicTypespec: , line:1:19, endln:1:31
-      |vpiLeftRange:
-      \_Constant: , line:1:26, endln:1:28
-        |vpiParent:
-        \_Range: , line:1:25, endln:1:31
-        |vpiDecompile:31
-        |vpiSize:64
-        |UINT:31
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:1:29, endln:1:30
-        |vpiParent:
-        \_Range: , line:1:25, endln:1:31
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiTypedef:
   \_LogicTypespec: , line:6:3, endln:6:27
     |vpiParent:
@@ -274,7 +249,7 @@ Design: (unnamed)
             |vpiName:dmi_t
             |vpiFullName:work@top.dmi_t
             |vpiActual:
-            \_StructTypespec: (dmi_t), line:2:12, endln:4:5
+            \_TypedefTypespec: (dmi_t), line:4:6, endln:4:11
           |vpiName:$bits
         |vpiOperand:
         \_Constant: , line:6:23, endln:6:24
@@ -293,55 +268,49 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_LogicTypespec: , line:1:19, endln:1:31
+  \_LogicTypespec: , line:1:19, endln:1:24
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DollarBitsUnary/dut.sv, line:1:1, endln:9:10
-    |vpiRange:
-    \_Range: , line:1:25, endln:1:31
-      |vpiParent:
-      \_LogicTypespec: , line:1:19, endln:1:31
-      |vpiLeftRange:
-      \_Constant: , line:1:26, endln:1:28
-        |vpiParent:
-        \_Range: , line:1:25, endln:1:31
-        |vpiDecompile:31
-        |vpiSize:64
-        |UINT:31
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:1:29, endln:1:30
-        |vpiParent:
-        \_Range: , line:1:25, endln:1:31
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiImportTypespec:
-  \_StructTypespec: (dmi_t), line:2:12, endln:4:5
+  \_TypedefTypespec: (dmi_t), line:4:6, endln:4:11
+  |vpiImportTypespec:
+  \_StructTypespec: , line:2:12, endln:4:5
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:7, endln:3:19
   |vpiImportTypespec:
-  \_LogicTypespec: , line:1:19, endln:1:31
+  \_LogicTypespec: , line:1:19, endln:1:24
   |vpiImportTypespec:
   \_LogicNet: (work@top.o), line:1:32, endln:1:33
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DollarBitsUnary/dut.sv, line:1:1, endln:9:10
     |vpiTypespec:
-    \_RefTypespec: (work@top.o), line:1:19, endln:1:31
+    \_RefTypespec: (work@top.o), line:1:19, endln:1:24
       |vpiParent:
       \_LogicNet: (work@top.o), line:1:32, endln:1:33
       |vpiFullName:work@top.o
       |vpiActual:
-      \_LogicTypespec: , line:1:19, endln:1:31
+      \_LogicTypespec: , line:1:19, endln:1:24
     |vpiName:o
     |vpiFullName:work@top.o
     |vpiNetType:36
   |vpiImportTypespec:
   \_LogicTypespec: , line:6:3, endln:6:27
   |vpiImportTypespec:
-  \_LogicVar: (work@top.dr_q), line:6:28, endln:6:32
+  \_LogicNet: (work@top.dr_q), line:6:28, endln:6:32
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/DollarBitsUnary/dut.sv, line:1:1, endln:9:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.dr_q), line:6:3, endln:6:27
+      |vpiParent:
+      \_LogicNet: (work@top.dr_q), line:6:28, endln:6:32
+      |vpiFullName:work@top.dr_q
+      |vpiActual:
+      \_LogicTypespec: , line:6:3, endln:6:27
+    |vpiName:dr_q
+    |vpiFullName:work@top.dr_q
+    |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicTypespec: , line:1:19, endln:1:31
+  \_LogicTypespec: , line:1:19, endln:1:24
   |vpiImportTypespec:
   \_LogicNet: (work@top.dr_x), line:8:15, endln:8:37
     |vpiParent:
@@ -352,6 +321,8 @@ Design: (unnamed)
   |vpiDefName:work@top
   |vpiNet:
   \_LogicNet: (work@top.o), line:1:32, endln:1:33
+  |vpiNet:
+  \_LogicNet: (work@top.dr_q), line:6:28, endln:6:32
   |vpiNet:
   \_LogicNet: (work@top.dr_x), line:8:15, endln:8:37
   |vpiPort:
@@ -366,7 +337,7 @@ Design: (unnamed)
       \_Port: (o), line:1:32, endln:1:33
       |vpiFullName:work@top.o
       |vpiActual:
-      \_LogicTypespec: , line:1:19, endln:1:31
+      \_LogicTypespec: , line:1:19, endln:1:24
   |vpiContAssign:
   \_ContAssign: , line:8:11, endln:8:37
     |vpiParent:
@@ -402,7 +373,7 @@ Design: (unnamed)
               |vpiName:dr_q
               |vpiFullName:work@top.dr_x.dr_q
               |vpiActual:
-              \_LogicVar: (work@top.dr_q), line:6:28, endln:6:32
+              \_LogicNet: (work@top.dr_q), line:6:28, endln:6:32
           |vpiName:$bits
         |vpiOperand:
         \_Constant: , line:8:33, endln:8:34

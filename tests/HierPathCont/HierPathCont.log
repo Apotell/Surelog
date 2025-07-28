@@ -161,7 +161,7 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/HierPathCont/dut.sv:3:1: Compile module "work@unsized_single_bit_1".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                              12
+Constant                                              10
 ContAssign                                             4
 Design                                                 1
 HierPath                                               1
@@ -170,11 +170,12 @@ LogicTypespec                                          7
 Module                                                 1
 Operation                                              2
 Port                                                   4
-Range                                                  4
+Range                                                  3
 RefObj                                                 7
-RefTypespec                                            9
+RefTypespec                                           10
 StructNet                                              1
 StructTypespec                                         1
+TypedefTypespec                                        1
 TypespecMember                                         1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathCont/slpp_all/surelog.uhdm ...
@@ -258,7 +259,7 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@unsized_single_bit_1 (work@unsized_single_bit_1), file:${SURELOG_DIR}/tests/HierPathCont/dut.sv, line:3:1, endln:22:33
     |vpiTypespec:
-    \_RefTypespec: (work@unsized_single_bit_1.out1), line:4:12, endln:4:22
+    \_RefTypespec: (work@unsized_single_bit_1.out1), line:4:12, endln:4:16
       |vpiParent:
       \_LogicNet: (work@unsized_single_bit_1.out1), line:4:23, endln:4:27
       |vpiFullName:work@unsized_single_bit_1.out1
@@ -288,13 +289,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@unsized_single_bit_1 (work@unsized_single_bit_1), file:${SURELOG_DIR}/tests/HierPathCont/dut.sv, line:3:1, endln:22:33
     |vpiTypespec:
-    \_RefTypespec: (work@unsized_single_bit_1.out3.out3), line:6:12, endln:6:30
+    \_RefTypespec: (work@unsized_single_bit_1.out3.my_struct_packed_t), line:6:12, endln:6:30
       |vpiParent:
       \_StructNet: (work@unsized_single_bit_1.out3), line:6:31, endln:6:35
-      |vpiName:out3
-      |vpiFullName:work@unsized_single_bit_1.out3.out3
+      |vpiName:my_struct_packed_t
+      |vpiFullName:work@unsized_single_bit_1.out3.my_struct_packed_t
       |vpiActual:
-      \_StructTypespec: (my_struct_packed_t), line:1:9, endln:1:39
+      \_TypedefTypespec: (my_struct_packed_t), line:1:40, endln:1:58
     |vpiName:out3
     |vpiFullName:work@unsized_single_bit_1.out3
   |vpiImportTypespec:
@@ -367,7 +368,7 @@ Design: (unnamed)
       |vpiName:my_struct_packed_t
       |vpiFullName:work@unsized_single_bit_1.out3.my_struct_packed_t
       |vpiActual:
-      \_StructTypespec: (my_struct_packed_t), line:1:9, endln:1:39
+      \_TypedefTypespec: (my_struct_packed_t), line:1:40, endln:1:58
   |vpiPort:
   \_Port: (out4), line:7:17, endln:7:21
     |vpiParent:
@@ -500,21 +501,32 @@ Design: (unnamed)
       \_LogicNet: (work@unsized_single_bit_1.out4), line:7:17, endln:7:21
   |vpiEndLabel:unsized_single_bit_1
 |vpiTypedef:
-\_StructTypespec: (my_struct_packed_t), line:1:9, endln:1:39
+\_TypedefTypespec: (my_struct_packed_t), line:1:40, endln:1:58
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:my_struct_packed_t
+  |vpiTypedefAlias:
+  \_RefTypespec: (my_struct_packed_t), line:1:9, endln:1:39
+    |vpiParent:
+    \_TypedefTypespec: (my_struct_packed_t), line:1:40, endln:1:58
+    |vpiFullName:my_struct_packed_t
+    |vpiActual:
+    \_StructTypespec: , line:1:9, endln:1:39
+|vpiTypedef:
+\_StructTypespec: , line:1:9, endln:1:39
+  |vpiParent:
+  \_Design: (unnamed)
   |vpiPacked:1
   |vpiTypespecMember:
   \_TypespecMember: (a), line:1:36, endln:1:37
     |vpiParent:
-    \_StructTypespec: (my_struct_packed_t), line:1:9, endln:1:39
+    \_StructTypespec: , line:1:9, endln:1:39
     |vpiName:a
     |vpiTypespec:
-    \_RefTypespec: (my_struct_packed_t.a), line:1:24, endln:1:35
+    \_RefTypespec: (a), line:1:24, endln:1:35
       |vpiParent:
       \_TypespecMember: (a), line:1:36, endln:1:37
-      |vpiFullName:my_struct_packed_t.a
+      |vpiFullName:a
       |vpiActual:
       \_LogicTypespec: , line:1:24, endln:1:35
 |vpiTypedef:

@@ -97,9 +97,10 @@ LogicTypespec                                          2
 Module                                                 2
 PackedArrayTypespec                                    1
 Range                                                  2
-RefTypespec                                            5
+RefTypespec                                            6
+StructNet                                              1
 StructTypespec                                         1
-StructVar                                              1
+TypedefTypespec                                        1
 TypespecMember                                         2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedEnum/slpp_all/surelog.uhdm ...
@@ -112,40 +113,21 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@dut
-  |vpiVariables:
-  \_StructVar: (work@dut.hw2reg_wrap_t), line:7:6, endln:7:19
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PackedEnum/dut.sv, line:1:1, endln:8:10
-    |vpiTypespec:
-    \_RefTypespec: (work@dut.hw2reg_wrap_t), line:4:4, endln:4:17
-      |vpiParent:
-      \_StructVar: (work@dut.hw2reg_wrap_t), line:7:6, endln:7:19
-      |vpiFullName:work@dut.hw2reg_wrap_t
-      |vpiActual:
-      \_StructTypespec: , line:4:4, endln:7:5
-    |vpiName:hw2reg_wrap_t
-    |vpiFullName:work@dut.hw2reg_wrap_t
-    |vpiVisibility:1
   |vpiTypedef:
-  \_LogicTypespec: , line:2:17, endln:2:22
+  \_EnumTypespec: , line:2:12, endln:2:46
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PackedEnum/dut.sv, line:1:1, endln:8:10
-  |vpiTypedef:
-  \_EnumTypespec: (cstate_e), line:2:12, endln:2:46
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PackedEnum/dut.sv, line:1:1, endln:8:10
-    |vpiName:cstate_e
     |vpiBaseTypespec:
-    \_RefTypespec: (work@dut.cstate_e), line:2:17, endln:2:22
+    \_RefTypespec: (work@dut), line:2:17, endln:2:22
       |vpiParent:
-      \_EnumTypespec: (cstate_e), line:2:12, endln:2:46
-      |vpiFullName:work@dut.cstate_e
+      \_EnumTypespec: , line:2:12, endln:2:46
+      |vpiFullName:work@dut
       |vpiActual:
       \_LogicTypespec: , line:2:17, endln:2:22
     |vpiEnumConst:
     \_EnumConst: (c), line:2:24, endln:2:29
       |vpiParent:
-      \_EnumTypespec: (cstate_e), line:2:12, endln:2:46
+      \_EnumTypespec: , line:2:12, endln:2:46
       |vpiName:c
       |UINT:0
       |vpiDecompile:0
@@ -153,11 +135,27 @@ Design: (unnamed)
     |vpiEnumConst:
     \_EnumConst: (d), line:2:31, endln:2:36
       |vpiParent:
-      \_EnumTypespec: (cstate_e), line:2:12, endln:2:46
+      \_EnumTypespec: , line:2:12, endln:2:46
       |vpiName:d
       |UINT:1
       |vpiDecompile:1
       |vpiSize:64
+  |vpiTypedef:
+  \_LogicTypespec: , line:2:17, endln:2:22
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PackedEnum/dut.sv, line:1:1, endln:8:10
+  |vpiTypedef:
+  \_TypedefTypespec: (cstate_e), line:2:38, endln:2:46
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PackedEnum/dut.sv, line:1:1, endln:8:10
+    |vpiName:cstate_e
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@dut.cstate_e), line:2:12, endln:2:37
+      |vpiParent:
+      \_TypedefTypespec: (cstate_e), line:2:38, endln:2:46
+      |vpiFullName:work@dut.cstate_e
+      |vpiActual:
+      \_EnumTypespec: , line:2:12, endln:2:46
   |vpiTypedef:
   \_StructTypespec: , line:4:4, endln:7:5
     |vpiParent:
@@ -175,7 +173,7 @@ Design: (unnamed)
         |vpiName:cstate_e
         |vpiFullName:work@dut.class_esc_state.cstate_e
         |vpiActual:
-        \_PackedArrayTypespec: , line:5:16, endln:5:21
+        \_PackedArrayTypespec: , line:5:7, endln:5:21
     |vpiTypespecMember:
     \_TypespecMember: (blah), line:6:19, endln:6:23
       |vpiParent:
@@ -189,13 +187,13 @@ Design: (unnamed)
         |vpiActual:
         \_LogicTypespec: , line:6:7, endln:6:18
   |vpiTypedef:
-  \_PackedArrayTypespec: , line:5:16, endln:5:21
+  \_PackedArrayTypespec: , line:5:7, endln:5:21
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PackedEnum/dut.sv, line:1:1, endln:8:10
     |vpiRange:
     \_Range: , line:5:16, endln:5:21
       |vpiParent:
-      \_PackedArrayTypespec: , line:5:16, endln:5:21
+      \_PackedArrayTypespec: , line:5:7, endln:5:21
       |vpiLeftRange:
       \_Constant: , line:5:17, endln:5:18
         |vpiParent:
@@ -213,13 +211,13 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (work@dut.cstate_e), line:5:7, endln:5:15
+    \_RefTypespec: (work@dut.cstate_e), line:2:38, endln:2:46
       |vpiParent:
-      \_PackedArrayTypespec: , line:5:16, endln:5:21
+      \_PackedArrayTypespec: , line:5:7, endln:5:21
       |vpiName:cstate_e
       |vpiFullName:work@dut.cstate_e
       |vpiActual:
-      \_EnumTypespec: (cstate_e), line:2:12, endln:2:46
+      \_TypedefTypespec: (cstate_e), line:2:38, endln:2:46
   |vpiTypedef:
   \_LogicTypespec: , line:6:7, endln:6:18
     |vpiParent:
@@ -245,18 +243,33 @@ Design: (unnamed)
         |UINT:2
         |vpiConstType:9
   |vpiImportTypespec:
+  \_EnumTypespec: , line:2:12, endln:2:46
+  |vpiImportTypespec:
   \_LogicTypespec: , line:2:17, endln:2:22
   |vpiImportTypespec:
-  \_EnumTypespec: (cstate_e), line:2:12, endln:2:46
+  \_TypedefTypespec: (cstate_e), line:2:38, endln:2:46
   |vpiImportTypespec:
   \_StructTypespec: , line:4:4, endln:7:5
   |vpiImportTypespec:
-  \_PackedArrayTypespec: , line:5:16, endln:5:21
+  \_PackedArrayTypespec: , line:5:7, endln:5:21
   |vpiImportTypespec:
   \_LogicTypespec: , line:6:7, endln:6:18
   |vpiImportTypespec:
-  \_StructVar: (work@dut.hw2reg_wrap_t), line:7:6, endln:7:19
+  \_StructNet: (work@dut.hw2reg_wrap_t), line:7:6, endln:7:19
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PackedEnum/dut.sv, line:1:1, endln:8:10
+    |vpiTypespec:
+    \_RefTypespec: (work@dut.hw2reg_wrap_t), line:4:4, endln:7:5
+      |vpiParent:
+      \_StructNet: (work@dut.hw2reg_wrap_t), line:7:6, endln:7:19
+      |vpiFullName:work@dut.hw2reg_wrap_t
+      |vpiActual:
+      \_StructTypespec: , line:4:4, endln:7:5
+    |vpiName:hw2reg_wrap_t
+    |vpiFullName:work@dut.hw2reg_wrap_t
   |vpiDefName:work@dut
+  |vpiNet:
+  \_StructNet: (work@dut.hw2reg_wrap_t), line:7:6, endln:7:19
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

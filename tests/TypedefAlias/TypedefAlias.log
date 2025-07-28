@@ -119,18 +119,17 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/TypedefAlias/dut.sv:15:1: Compile module "work@test".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                               4
+Constant                                               2
 Design                                                 1
 LogicNet                                               2
 LogicTypespec                                          2
 Module                                                 1
 Package                                                2
-PackedArrayTypespec                                    1
-Range                                                  2
-RefTypespec                                            3
+Range                                                  1
+RefTypespec                                            8
 StructTypespec                                         1
+TypedefTypespec                                        5
 TypespecMember                                         1
-UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypedefAlias/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -143,31 +142,58 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:package1
   |vpiTypedef:
-  \_StructTypespec: (package1::type_t), line:2:11, endln:4:4
+  \_TypedefTypespec: (package1::type_t), line:4:5, endln:4:11
     |vpiParent:
     \_Package: package1 (package1), file:${SURELOG_DIR}/tests/TypedefAlias/dut.sv, line:1:1, endln:7:22
     |vpiName:package1::type_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (package1::type_t), line:2:11, endln:4:4
+      |vpiParent:
+      \_TypedefTypespec: (package1::type_t), line:4:5, endln:4:11
+      |vpiFullName:package1::type_t
+      |vpiActual:
+      \_StructTypespec: , line:2:11, endln:4:4
+  |vpiTypedef:
+  \_StructTypespec: , line:2:11, endln:4:4
+    |vpiParent:
+    \_Package: package1 (package1), file:${SURELOG_DIR}/tests/TypedefAlias/dut.sv, line:1:1, endln:7:22
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (q), line:3:20, endln:3:21
       |vpiParent:
-      \_StructTypespec: (package1::type_t), line:2:11, endln:4:4
+      \_StructTypespec: , line:2:11, endln:4:4
       |vpiName:q
       |vpiTypespec:
-      \_RefTypespec: (package1::type_t::q), line:3:7, endln:3:12
+      \_RefTypespec: (package1::q), line:3:7, endln:3:12
         |vpiParent:
         \_TypespecMember: (q), line:3:20, endln:3:21
-        |vpiFullName:package1::type_t::q
+        |vpiFullName:package1::q
         |vpiActual:
         \_LogicTypespec: , line:3:7, endln:3:12
   |vpiTypedef:
   \_LogicTypespec: , line:3:7, endln:3:12
     |vpiParent:
     \_Package: package1 (package1), file:${SURELOG_DIR}/tests/TypedefAlias/dut.sv, line:1:1, endln:7:22
+  |vpiTypedef:
+  \_TypedefTypespec: (package1::type_alias), line:6:28, endln:6:38
+    |vpiParent:
+    \_Package: package1 (package1), file:${SURELOG_DIR}/tests/TypedefAlias/dut.sv, line:1:1, endln:7:22
+    |vpiName:package1::type_alias
+    |vpiTypedefAlias:
+    \_RefTypespec: (package1::type_alias), line:6:11, endln:6:21
+      |vpiParent:
+      \_TypedefTypespec: (package1::type_alias), line:6:28, endln:6:38
+      |vpiFullName:package1::type_alias
+      |vpiActual:
+      \_TypedefTypespec: (package1::type_t), line:4:5, endln:4:11
   |vpiImportTypespec:
-  \_StructTypespec: (package1::type_t), line:2:11, endln:4:4
+  \_TypedefTypespec: (package1::type_t), line:4:5, endln:4:11
+  |vpiImportTypespec:
+  \_StructTypespec: , line:2:11, endln:4:4
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:7, endln:3:12
+  |vpiImportTypespec:
+  \_TypedefTypespec: (package1::type_alias), line:6:28, endln:6:38
   |vpiDefName:package1
   |vpiEndLabel:package1
 |vpiAllPackages:
@@ -175,6 +201,20 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:package2
+  |vpiTypedef:
+  \_TypedefTypespec: (package2::type_alias), line:10:28, endln:10:38
+    |vpiParent:
+    \_Package: package2 (package2), file:${SURELOG_DIR}/tests/TypedefAlias/dut.sv, line:9:1, endln:11:22
+    |vpiName:package2::type_alias
+    |vpiTypedefAlias:
+    \_RefTypespec: (package2::type_alias), line:10:11, endln:10:21
+      |vpiParent:
+      \_TypedefTypespec: (package2::type_alias), line:10:28, endln:10:38
+      |vpiFullName:package2::type_alias
+      |vpiActual:
+      \_TypedefTypespec: (package1::type_t), line:4:5, endln:4:11
+  |vpiImportTypespec:
+  \_TypedefTypespec: (package2::type_alias), line:10:28, endln:10:38
   |vpiDefName:package2
   |vpiEndLabel:package2
 |vpiAllModules:
@@ -183,13 +223,13 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:work@test
   |vpiTypedef:
-  \_PackedArrayTypespec: , line:16:13, endln:16:24
+  \_LogicTypespec: , line:16:13, endln:16:24
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/TypedefAlias/dut.sv, line:15:1, endln:20:10
     |vpiRange:
     \_Range: , line:16:19, endln:16:24
       |vpiParent:
-      \_PackedArrayTypespec: , line:16:13, endln:16:24
+      \_LogicTypespec: , line:16:13, endln:16:24
       |vpiLeftRange:
       \_Constant: , line:16:20, endln:16:21
         |vpiParent:
@@ -207,39 +247,35 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_LogicTypespec: (t_two_bits), line:16:13, endln:16:24
+  \_TypedefTypespec: (t_two_bits), line:16:25, endln:16:35
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/TypedefAlias/dut.sv, line:15:1, endln:20:10
     |vpiName:t_two_bits
-    |vpiRange:
-    \_Range: , line:16:19, endln:16:24
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@test.t_two_bits), line:16:13, endln:16:18
       |vpiParent:
-      \_LogicTypespec: (t_two_bits), line:16:13, endln:16:24
-      |vpiLeftRange:
-      \_Constant: , line:16:20, endln:16:21
-        |vpiParent:
-        \_Range: , line:16:19, endln:16:24
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:16:22, endln:16:23
-        |vpiParent:
-        \_Range: , line:16:19, endln:16:24
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
+      \_TypedefTypespec: (t_two_bits), line:16:25, endln:16:35
+      |vpiFullName:work@test.t_two_bits
+      |vpiActual:
+      \_LogicTypespec: , line:16:13, endln:16:24
   |vpiTypedef:
-  \_UnsupportedTypespec: (t_two_bits_copy), line:19:5, endln:19:20
+  \_TypedefTypespec: (t_two_bits_copy), line:17:24, endln:17:39
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/TypedefAlias/dut.sv, line:15:1, endln:20:10
     |vpiName:t_two_bits_copy
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@test.t_two_bits_copy), line:17:13, endln:17:23
+      |vpiParent:
+      \_TypedefTypespec: (t_two_bits_copy), line:17:24, endln:17:39
+      |vpiFullName:work@test.t_two_bits_copy
+      |vpiActual:
+      \_TypedefTypespec: (t_two_bits), line:16:25, endln:16:35
   |vpiImportTypespec:
-  \_PackedArrayTypespec: , line:16:13, endln:16:24
+  \_LogicTypespec: , line:16:13, endln:16:24
   |vpiImportTypespec:
-  \_LogicTypespec: (t_two_bits), line:16:13, endln:16:24
+  \_TypedefTypespec: (t_two_bits), line:16:25, endln:16:35
+  |vpiImportTypespec:
+  \_TypedefTypespec: (t_two_bits_copy), line:17:24, endln:17:39
   |vpiImportTypespec:
   \_LogicNet: (work@test.kkkk), line:18:16, endln:18:20
     |vpiParent:
@@ -251,11 +287,9 @@ Design: (unnamed)
       |vpiName:t_two_bits
       |vpiFullName:work@test.kkkk.t_two_bits
       |vpiActual:
-      \_LogicTypespec: (t_two_bits), line:16:13, endln:16:24
+      \_TypedefTypespec: (t_two_bits), line:16:25, endln:16:35
     |vpiName:kkkk
     |vpiFullName:work@test.kkkk
-  |vpiImportTypespec:
-  \_UnsupportedTypespec: (t_two_bits_copy), line:19:5, endln:19:20
   |vpiImportTypespec:
   \_LogicNet: (work@test.zzzz), line:19:21, endln:19:25
     |vpiParent:
@@ -267,7 +301,7 @@ Design: (unnamed)
       |vpiName:t_two_bits_copy
       |vpiFullName:work@test.zzzz.t_two_bits_copy
       |vpiActual:
-      \_UnsupportedTypespec: (t_two_bits_copy), line:19:5, endln:19:20
+      \_TypedefTypespec: (t_two_bits_copy), line:17:24, endln:17:39
     |vpiName:zzzz
     |vpiFullName:work@test.zzzz
   |vpiDefName:work@test

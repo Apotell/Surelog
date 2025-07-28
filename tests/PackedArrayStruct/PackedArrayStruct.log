@@ -95,18 +95,20 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/PackedArrayStruct/dut.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                               8
+Constant                                               2
 ContAssign                                             1
 Design                                                 1
-LogicNet                                               2
+LogicNet                                               1
 LogicTypespec                                          3
 Module                                                 1
+PackedArrayNet                                         1
 PackedArrayTypespec                                    1
 Port                                                   1
-Range                                                  4
+Range                                                  1
 RefObj                                                 2
-RefTypespec                                            5
+RefTypespec                                            6
 StructTypespec                                         1
+TypedefTypespec                                        1
 TypespecMember                                         1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedArrayStruct/slpp_all/surelog.uhdm ...
@@ -119,6 +121,18 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@top
+  |vpiTypedef:
+  \_TypedefTypespec: (struct_array_t), line:4:13, endln:4:27
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayStruct/dut.sv, line:1:1, endln:7:10
+    |vpiName:struct_array_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@top.struct_array_t), line:2:12, endln:4:12
+      |vpiParent:
+      \_TypedefTypespec: (struct_array_t), line:4:13, endln:4:27
+      |vpiFullName:work@top.struct_array_t
+      |vpiActual:
+      \_PackedArrayTypespec: , line:2:12, endln:4:12
   |vpiTypedef:
   \_StructTypespec: , line:2:12, endln:4:5
     |vpiParent:
@@ -141,14 +155,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayStruct/dut.sv, line:1:1, endln:7:10
   |vpiTypedef:
-  \_PackedArrayTypespec: (struct_array_t), line:4:6, endln:4:12
+  \_PackedArrayTypespec: , line:2:12, endln:4:12
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayStruct/dut.sv, line:1:1, endln:7:10
-    |vpiName:struct_array_t
     |vpiRange:
     \_Range: , line:4:6, endln:4:12
       |vpiParent:
-      \_PackedArrayTypespec: (struct_array_t), line:4:6, endln:4:12
+      \_PackedArrayTypespec: , line:2:12, endln:4:12
       |vpiLeftRange:
       \_Constant: , line:4:7, endln:4:9
         |vpiParent:
@@ -166,103 +179,65 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (work@top.struct_array_t), line:2:12, endln:4:5
+    \_RefTypespec: (work@top), line:2:12, endln:4:5
       |vpiParent:
-      \_PackedArrayTypespec: (struct_array_t), line:4:6, endln:4:12
-      |vpiFullName:work@top.struct_array_t
+      \_PackedArrayTypespec: , line:2:12, endln:4:12
+      |vpiFullName:work@top
       |vpiActual:
       \_StructTypespec: , line:2:12, endln:4:5
   |vpiTypedef:
-  \_LogicTypespec: , line:1:19, endln:1:31
+  \_LogicTypespec: , line:1:19, endln:1:24
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayStruct/dut.sv, line:1:1, endln:7:10
-    |vpiRange:
-    \_Range: , line:1:25, endln:1:31
-      |vpiParent:
-      \_LogicTypespec: , line:1:19, endln:1:31
-      |vpiLeftRange:
-      \_Constant: , line:1:26, endln:1:28
-        |vpiParent:
-        \_Range: , line:1:25, endln:1:31
-        |vpiDecompile:31
-        |vpiSize:64
-        |UINT:31
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:1:29, endln:1:30
-        |vpiParent:
-        \_Range: , line:1:25, endln:1:31
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiTypedef:
-  \_LogicTypespec: , line:1:19, endln:1:31
+  \_LogicTypespec: , line:1:19, endln:1:24
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayStruct/dut.sv, line:1:1, endln:7:10
-    |vpiRange:
-    \_Range: , line:1:25, endln:1:31
-      |vpiParent:
-      \_LogicTypespec: , line:1:19, endln:1:31
-      |vpiLeftRange:
-      \_Constant: , line:1:26, endln:1:28
-        |vpiParent:
-        \_Range: , line:1:25, endln:1:31
-        |vpiDecompile:31
-        |vpiSize:64
-        |UINT:31
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:1:29, endln:1:30
-        |vpiParent:
-        \_Range: , line:1:25, endln:1:31
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
+  |vpiImportTypespec:
+  \_TypedefTypespec: (struct_array_t), line:4:13, endln:4:27
   |vpiImportTypespec:
   \_StructTypespec: , line:2:12, endln:4:5
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:7, endln:3:12
   |vpiImportTypespec:
-  \_PackedArrayTypespec: (struct_array_t), line:4:6, endln:4:12
+  \_PackedArrayTypespec: , line:2:12, endln:4:12
   |vpiImportTypespec:
-  \_LogicTypespec: , line:1:19, endln:1:31
+  \_LogicTypespec: , line:1:19, endln:1:24
   |vpiImportTypespec:
   \_LogicNet: (work@top.o), line:1:32, endln:1:33
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayStruct/dut.sv, line:1:1, endln:7:10
     |vpiTypespec:
-    \_RefTypespec: (work@top.o), line:1:19, endln:1:31
+    \_RefTypespec: (work@top.o), line:1:19, endln:1:24
       |vpiParent:
       \_LogicNet: (work@top.o), line:1:32, endln:1:33
       |vpiFullName:work@top.o
       |vpiActual:
-      \_LogicTypespec: , line:1:19, endln:1:31
+      \_LogicTypespec: , line:1:19, endln:1:24
     |vpiName:o
     |vpiFullName:work@top.o
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicNet: (work@top.a), line:5:19, endln:5:20
+  \_PackedArrayNet: (work@top.a), line:5:19, endln:5:20
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PackedArrayStruct/dut.sv, line:1:1, endln:7:10
     |vpiTypespec:
     \_RefTypespec: (work@top.a.struct_array_t), line:5:4, endln:5:18
       |vpiParent:
-      \_LogicNet: (work@top.a), line:5:19, endln:5:20
+      \_PackedArrayNet: (work@top.a), line:5:19, endln:5:20
       |vpiName:struct_array_t
       |vpiFullName:work@top.a.struct_array_t
       |vpiActual:
-      \_PackedArrayTypespec: (struct_array_t), line:4:6, endln:4:12
+      \_TypedefTypespec: (struct_array_t), line:4:13, endln:4:27
     |vpiName:a
     |vpiFullName:work@top.a
   |vpiImportTypespec:
-  \_LogicTypespec: , line:1:19, endln:1:31
+  \_LogicTypespec: , line:1:19, endln:1:24
   |vpiDefName:work@top
   |vpiNet:
   \_LogicNet: (work@top.o), line:1:32, endln:1:33
   |vpiNet:
-  \_LogicNet: (work@top.a), line:5:19, endln:5:20
+  \_PackedArrayNet: (work@top.a), line:5:19, endln:5:20
   |vpiPort:
   \_Port: (o), line:1:32, endln:1:33
     |vpiParent:
@@ -275,7 +250,7 @@ Design: (unnamed)
       \_Port: (o), line:1:32, endln:1:33
       |vpiFullName:work@top.o
       |vpiActual:
-      \_LogicTypespec: , line:1:19, endln:1:31
+      \_LogicTypespec: , line:1:19, endln:1:24
   |vpiContAssign:
   \_ContAssign: , line:6:11, endln:6:16
     |vpiParent:
@@ -287,7 +262,7 @@ Design: (unnamed)
       |vpiName:a
       |vpiFullName:work@top.a
       |vpiActual:
-      \_LogicNet: (work@top.a), line:5:19, endln:5:20
+      \_PackedArrayNet: (work@top.a), line:5:19, endln:5:20
     |vpiLhs:
     \_RefObj: (work@top.o), line:6:11, endln:6:12
       |vpiParent:

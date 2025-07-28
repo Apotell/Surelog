@@ -139,9 +139,10 @@ Operation                                              1
 Range                                                  2
 RefModule                                              1
 RefObj                                                 1
-RefTypespec                                            5
+RefTypespec                                            6
 StructTypespec                                         1
 TypeParameter                                          1
+TypedefTypespec                                        1
 TypespecMember                                         3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypeParam2/slpp_unit/surelog.uhdm ...
@@ -242,45 +243,56 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:work@top
   |vpiTypedef:
-  \_StructTypespec: (output_t), line:9:10, endln:13:4
+  \_TypedefTypespec: (output_t), line:13:5, endln:13:13
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TypeParam2/dut.sv, line:8:1, endln:20:10
     |vpiName:output_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@top.output_t), line:9:10, endln:13:4
+      |vpiParent:
+      \_TypedefTypespec: (output_t), line:13:5, endln:13:13
+      |vpiFullName:work@top.output_t
+      |vpiActual:
+      \_StructTypespec: , line:9:10, endln:13:4
+  |vpiTypedef:
+  \_StructTypespec: , line:9:10, endln:13:4
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TypeParam2/dut.sv, line:8:1, endln:20:10
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (result), line:10:19, endln:10:25
       |vpiParent:
-      \_StructTypespec: (output_t), line:9:10, endln:13:4
+      \_StructTypespec: , line:9:10, endln:13:4
       |vpiName:result
       |vpiTypespec:
-      \_RefTypespec: (work@top.output_t.result), line:10:5, endln:10:16
+      \_RefTypespec: (work@top.result), line:10:5, endln:10:16
         |vpiParent:
         \_TypespecMember: (result), line:10:19, endln:10:25
-        |vpiFullName:work@top.output_t.result
+        |vpiFullName:work@top.result
         |vpiActual:
         \_LogicTypespec: , line:10:5, endln:10:16
     |vpiTypespecMember:
     \_TypespecMember: (status), line:11:11, endln:11:17
       |vpiParent:
-      \_StructTypespec: (output_t), line:9:10, endln:13:4
+      \_StructTypespec: , line:9:10, endln:13:4
       |vpiName:status
       |vpiTypespec:
-      \_RefTypespec: (work@top.output_t.status), line:11:5, endln:11:10
+      \_RefTypespec: (work@top.status), line:11:5, endln:11:10
         |vpiParent:
         \_TypespecMember: (status), line:11:11, endln:11:17
-        |vpiFullName:work@top.output_t.status
+        |vpiFullName:work@top.status
         |vpiActual:
         \_LogicTypespec: , line:11:5, endln:11:10
     |vpiTypespecMember:
     \_TypespecMember: (tag), line:12:22, endln:12:25
       |vpiParent:
-      \_StructTypespec: (output_t), line:9:10, endln:13:4
+      \_StructTypespec: , line:9:10, endln:13:4
       |vpiName:tag
       |vpiTypespec:
-      \_RefTypespec: (work@top.output_t.tag), line:12:5, endln:12:10
+      \_RefTypespec: (work@top.tag), line:12:5, endln:12:10
         |vpiParent:
         \_TypespecMember: (tag), line:12:22, endln:12:25
-        |vpiFullName:work@top.output_t.tag
+        |vpiFullName:work@top.tag
         |vpiActual:
         \_LogicTypespec: , line:12:5, endln:12:10
   |vpiTypedef:
@@ -321,7 +333,9 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TypeParam2/dut.sv, line:8:1, endln:20:10
     |vpiName:rr_arb_tree
   |vpiImportTypespec:
-  \_StructTypespec: (output_t), line:9:10, endln:13:4
+  \_TypedefTypespec: (output_t), line:13:5, endln:13:13
+  |vpiImportTypespec:
+  \_StructTypespec: , line:9:10, endln:13:4
   |vpiImportTypespec:
   \_LogicTypespec: , line:10:5, endln:10:16
   |vpiImportTypespec:

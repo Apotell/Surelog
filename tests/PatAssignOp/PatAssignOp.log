@@ -269,8 +269,9 @@ Parameter                                              6
 Range                                                  1
 RefModule                                              2
 RefObj                                                11
-RefTypespec                                           14
+RefTypespec                                           15
 Task                                                   9
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PatAssignOp/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -539,7 +540,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -573,14 +574,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/PatAssignOp/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -588,7 +588,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -596,7 +596,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -604,7 +604,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -612,13 +612,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/PatAssignOp/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -856,35 +870,14 @@ Design: (unnamed)
   \_Parameter: (work@top.coh_noc_cord_markers_pos_p), line:7:18, endln:8:84
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PatAssignOp/dut.sv, line:2:1, endln:16:10
-    |vpiSize:1
     |vpiTypespec:
     \_RefTypespec: (work@top.coh_noc_cord_markers_pos_p), line:7:14, endln:7:17
       |vpiParent:
       \_Parameter: (work@top.coh_noc_cord_markers_pos_p), line:7:18, endln:8:84
       |vpiFullName:work@top.coh_noc_cord_markers_pos_p
       |vpiActual:
-      \_ArrayTypespec: , line:7:44, endln:7:62
+      \_ArrayTypespec: , line:7:14, endln:8:84
     |vpiSigned:1
-    |vpiRange:
-    \_Range: , line:7:44, endln:7:62
-      |vpiParent:
-      \_Parameter: (work@top.coh_noc_cord_markers_pos_p), line:7:18, endln:8:84
-      |vpiLeftRange:
-      \_RefObj: (work@top.coh_noc_cord_markers_pos_p.coh_noc_dims_p), line:7:45, endln:7:59
-        |vpiParent:
-        \_Range: , line:7:44, endln:7:62
-        |vpiName:coh_noc_dims_p
-        |vpiFullName:work@top.coh_noc_cord_markers_pos_p.coh_noc_dims_p
-        |vpiActual:
-        \_Parameter: (work@top.coh_noc_dims_p), line:3:14, endln:3:40
-      |vpiRightRange:
-      \_Constant: , line:7:60, endln:7:61
-        |vpiParent:
-        \_Range: , line:7:44, endln:7:62
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
     |vpiLocalParam:1
     |vpiName:coh_noc_cord_markers_pos_p
     |vpiFullName:work@top.coh_noc_cord_markers_pos_p
@@ -1118,22 +1111,41 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PatAssignOp/dut.sv, line:2:1, endln:16:10
     |vpiSigned:1
   |vpiTypedef:
-  \_ArrayTypespec: , line:7:44, endln:7:62
+  \_ArrayTypespec: , line:7:14, endln:8:84
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PatAssignOp/dut.sv, line:2:1, endln:16:10
+    |vpiArrayType:1
     |vpiRange:
     \_Range: , line:7:44, endln:7:62
+      |vpiParent:
+      \_ArrayTypespec: , line:7:14, endln:8:84
+      |vpiLeftRange:
+      \_RefObj: (work@top.coh_noc_dims_p), line:7:45, endln:7:59
+        |vpiParent:
+        \_Range: , line:7:44, endln:7:62
+        |vpiName:coh_noc_dims_p
+        |vpiFullName:work@top.coh_noc_dims_p
+        |vpiActual:
+        \_Parameter: (work@top.coh_noc_dims_p), line:3:14, endln:3:40
+      |vpiRightRange:
+      \_Constant: , line:7:60, endln:7:61
+        |vpiParent:
+        \_Range: , line:7:44, endln:7:62
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@top), line:7:14, endln:7:17
       |vpiParent:
-      \_ArrayTypespec: , line:7:44, endln:7:62
+      \_ArrayTypespec: , line:7:14, endln:8:84
       |vpiFullName:work@top
       |vpiActual:
       \_IntTypespec: , line:7:14, endln:7:17
   |vpiImportTypespec:
   \_IntTypespec: , line:7:14, endln:7:17
   |vpiImportTypespec:
-  \_ArrayTypespec: , line:7:44, endln:7:62
+  \_ArrayTypespec: , line:7:14, endln:8:84
   |vpiDefName:work@top
   |vpiGenStmt:
   \_GenIf: , line:10:3, endln:12:6

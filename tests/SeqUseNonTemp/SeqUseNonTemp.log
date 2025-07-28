@@ -210,8 +210,8 @@ AST_DEBUG_END
 ClockedSeq                                             1
 Constant                                               2
 Design                                                 1
+LogicNet                                               3
 LogicTypespec                                          3
-LogicVar                                               3
 Module                                                 1
 MulticlockSequenceExpr                                 1
 Operation                                             11
@@ -261,7 +261,7 @@ Design: (unnamed)
           |vpiName:count
           |vpiFullName:work@top.p1_count_increment.count
           |vpiActual:
-          \_LogicVar: (work@top.count), line:3:7, endln:3:12
+          \_LogicNet: (work@top.count), line:3:7, endln:3:12
   |vpiPropertyDecl:
   \_PropertyDecl: (work@top.p1_count_increment), line:15:1, endln:17:12
     |vpiParent:
@@ -284,7 +284,7 @@ Design: (unnamed)
           |vpiName:clk
           |vpiFullName:work@top.p1_count_increment.clk
           |vpiActual:
-          \_LogicVar: (work@top.clk), line:3:14, endln:3:17
+          \_LogicNet: (work@top.clk), line:3:14, endln:3:17
       |vpiPropertyExpr:
       \_Operation: , line:16:18, endln:16:47
         |vpiParent:
@@ -305,7 +305,7 @@ Design: (unnamed)
           |vpiName:count
           |vpiFullName:work@top.p1_count_increment.count
           |vpiActual:
-          \_LogicVar: (work@top.count), line:3:7, endln:3:12
+          \_LogicNet: (work@top.count), line:3:7, endln:3:12
   |vpiPropertyDecl:
   \_PropertyDecl: (work@top.p2_count_increment), line:20:1, endln:22:12
     |vpiParent:
@@ -328,7 +328,7 @@ Design: (unnamed)
           |vpiName:clk
           |vpiFullName:work@top.p2_count_increment.clk
           |vpiActual:
-          \_LogicVar: (work@top.clk), line:3:14, endln:3:17
+          \_LogicNet: (work@top.clk), line:3:14, endln:3:17
       |vpiPropertyExpr:
       \_Operation: , line:21:18, endln:21:47
         |vpiParent:
@@ -341,7 +341,7 @@ Design: (unnamed)
           |vpiName:count
           |vpiFullName:work@top.p2_count_increment.count
           |vpiActual:
-          \_LogicVar: (work@top.count), line:3:7, endln:3:12
+          \_LogicNet: (work@top.count), line:3:7, endln:3:12
         |vpiOperand:
         \_RefObj: (work@top.p2_count_increment.seq_count_increment), line:21:28, endln:21:47
           |vpiParent:
@@ -372,7 +372,7 @@ Design: (unnamed)
           |vpiName:clk
           |vpiFullName:work@top.p3_count_increment.clk
           |vpiActual:
-          \_LogicVar: (work@top.clk), line:3:14, endln:3:17
+          \_LogicNet: (work@top.clk), line:3:14, endln:3:17
       |vpiPropertyExpr:
       \_Operation: , line:26:18, endln:26:61
         |vpiParent:
@@ -420,7 +420,7 @@ Design: (unnamed)
             |vpiName:clk
             |vpiFullName:work@top.seq_count_increment.clk
             |vpiActual:
-            \_LogicVar: (work@top.clk), line:3:14, endln:3:17
+            \_LogicNet: (work@top.clk), line:3:14, endln:3:17
         |vpiSequenceExpr:
         \_Operation: , line:6:16, endln:6:52
           |vpiParent:
@@ -438,7 +438,7 @@ Design: (unnamed)
               |vpiName:count
               |vpiFullName:work@top.seq_count_increment.count
               |vpiActual:
-              \_LogicVar: (work@top.count), line:3:7, endln:3:12
+              \_LogicNet: (work@top.count), line:3:7, endln:3:12
             |vpiOperand:
             \_Constant: , line:6:25, endln:6:29
               |vpiParent:
@@ -459,7 +459,7 @@ Design: (unnamed)
               |vpiName:count
               |vpiFullName:work@top.seq_count_increment.count
               |vpiActual:
-              \_LogicVar: (work@top.count), line:3:7, endln:3:12
+              \_LogicNet: (work@top.count), line:3:7, endln:3:12
             |vpiOperand:
             \_Constant: , line:6:44, endln:6:51
               |vpiParent:
@@ -468,78 +468,66 @@ Design: (unnamed)
               |vpiSize:4
               |BIN:1111
               |vpiConstType:3
-  |vpiVariables:
-  \_LogicVar: (work@top.count), line:3:7, endln:3:12
+  |vpiTypedef:
+  \_LogicTypespec: , line:3:1, endln:3:6
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv, line:2:1, endln:29:10
+  |vpiTypedef:
+  \_LogicTypespec: , line:3:1, endln:3:6
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv, line:2:1, endln:29:10
+  |vpiTypedef:
+  \_LogicTypespec: , line:3:1, endln:3:6
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv, line:2:1, endln:29:10
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:3:1, endln:3:6
+  |vpiImportTypespec:
+  \_LogicNet: (work@top.count), line:3:7, endln:3:12
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv, line:2:1, endln:29:10
     |vpiTypespec:
     \_RefTypespec: (work@top.count), line:3:1, endln:3:6
       |vpiParent:
-      \_LogicVar: (work@top.count), line:3:7, endln:3:12
+      \_LogicNet: (work@top.count), line:3:7, endln:3:12
       |vpiFullName:work@top.count
       |vpiActual:
       \_LogicTypespec: , line:3:1, endln:3:6
     |vpiName:count
     |vpiFullName:work@top.count
-    |vpiVisibility:1
-  |vpiVariables:
-  \_LogicVar: (work@top.clk), line:3:14, endln:3:17
+    |vpiNetType:36
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:3:1, endln:3:6
+  |vpiImportTypespec:
+  \_LogicNet: (work@top.clk), line:3:14, endln:3:17
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv, line:2:1, endln:29:10
     |vpiTypespec:
     \_RefTypespec: (work@top.clk), line:3:1, endln:3:6
       |vpiParent:
-      \_LogicVar: (work@top.clk), line:3:14, endln:3:17
+      \_LogicNet: (work@top.clk), line:3:14, endln:3:17
       |vpiFullName:work@top.clk
       |vpiActual:
       \_LogicTypespec: , line:3:1, endln:3:6
     |vpiName:clk
     |vpiFullName:work@top.clk
-    |vpiVisibility:1
-  |vpiVariables:
-  \_LogicVar: (work@top.reset), line:3:19, endln:3:24
+    |vpiNetType:36
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:3:1, endln:3:6
+  |vpiImportTypespec:
+  \_LogicNet: (work@top.reset), line:3:19, endln:3:24
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv, line:2:1, endln:29:10
     |vpiTypespec:
     \_RefTypespec: (work@top.reset), line:3:1, endln:3:6
       |vpiParent:
-      \_LogicVar: (work@top.reset), line:3:19, endln:3:24
+      \_LogicNet: (work@top.reset), line:3:19, endln:3:24
       |vpiFullName:work@top.reset
       |vpiActual:
       \_LogicTypespec: , line:3:1, endln:3:6
     |vpiName:reset
     |vpiFullName:work@top.reset
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@top.count), line:3:7, endln:3:12
-  |vpiReg:
-  \_LogicVar: (work@top.clk), line:3:14, endln:3:17
-  |vpiReg:
-  \_LogicVar: (work@top.reset), line:3:19, endln:3:24
-  |vpiTypedef:
-  \_LogicTypespec: , line:3:1, endln:3:6
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv, line:2:1, endln:29:10
-  |vpiTypedef:
-  \_LogicTypespec: , line:3:1, endln:3:6
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv, line:2:1, endln:29:10
-  |vpiTypedef:
-  \_LogicTypespec: , line:3:1, endln:3:6
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/SeqUseNonTemp/dut.sv, line:2:1, endln:29:10
-  |vpiImportTypespec:
-  \_LogicTypespec: , line:3:1, endln:3:6
-  |vpiImportTypespec:
-  \_LogicVar: (work@top.count), line:3:7, endln:3:12
-  |vpiImportTypespec:
-  \_LogicTypespec: , line:3:1, endln:3:6
-  |vpiImportTypespec:
-  \_LogicVar: (work@top.clk), line:3:14, endln:3:17
-  |vpiImportTypespec:
-  \_LogicTypespec: , line:3:1, endln:3:6
-  |vpiImportTypespec:
-  \_LogicVar: (work@top.reset), line:3:19, endln:3:24
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicNet: (work@top.seq_count_increment), line:11:3, endln:11:22
     |vpiParent:
@@ -548,6 +536,12 @@ Design: (unnamed)
     |vpiFullName:work@top.seq_count_increment
     |vpiNetType:1
   |vpiDefName:work@top
+  |vpiNet:
+  \_LogicNet: (work@top.count), line:3:7, endln:3:12
+  |vpiNet:
+  \_LogicNet: (work@top.clk), line:3:14, endln:3:17
+  |vpiNet:
+  \_LogicNet: (work@top.reset), line:3:19, endln:3:24
   |vpiNet:
   \_LogicNet: (work@top.seq_count_increment), line:11:3, endln:11:22
 ===================

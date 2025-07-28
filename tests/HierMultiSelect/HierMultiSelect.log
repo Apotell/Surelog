@@ -222,8 +222,8 @@ ContAssign                                             4
 Design                                                 1
 HierPath                                               7
 IndexedPartSelect                                      3
+LogicNet                                               1
 LogicTypespec                                          1
-LogicVar                                               1
 MethodFuncCall                                         1
 Module                                                 1
 Operation                                              5
@@ -242,67 +242,6 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:work@dm_csrs
   |vpiVariables:
-  \_LogicVar: (work@dm_csrs.c), line:6:9, endln:6:10
-    |vpiParent:
-    \_Module: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
-    |vpiTypespec:
-    \_RefTypespec: (work@dm_csrs.c), line:6:3, endln:6:8
-      |vpiParent:
-      \_LogicVar: (work@dm_csrs.c), line:6:9, endln:6:10
-      |vpiFullName:work@dm_csrs.c
-      |vpiActual:
-      \_LogicTypespec: , line:6:3, endln:6:8
-    |vpiName:c
-    |vpiFullName:work@dm_csrs.c
-    |vpiVisibility:1
-    |vpiExpr:
-    \_HierPath: (a[0].source[6-:2]), line:6:13, endln:6:31
-      |vpiParent:
-      \_LogicVar: (work@dm_csrs.c), line:6:9, endln:6:10
-      |vpiActual:
-      \_BitSelect: (a[0]), line:6:13, endln:6:14
-        |vpiParent:
-        \_HierPath: (a[0].source[6-:2]), line:6:13, endln:6:31
-        |vpiName:a
-        |vpiFullName:a[0]
-        |vpiActual:
-        \_LogicNet: (work@dm_csrs.a), line:6:13, endln:6:14
-        |vpiIndex:
-        \_Constant: , line:6:15, endln:6:16
-          |vpiParent:
-          \_BitSelect: (a[0]), line:6:13, endln:6:14
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiConstType:9
-      |vpiActual:
-      \_IndexedPartSelect: (a[0].source[6-:2]), line:6:18, endln:6:31
-        |vpiParent:
-        \_HierPath: (a[0].source[6-:2]), line:6:13, endln:6:31
-        |vpiName:source
-        |vpiFullName:a[0].source[6-:2]
-        |vpiActual:
-        \_LogicNet: (work@dm_csrs.source), line:6:18, endln:6:31
-        |vpiConstantSelect:1
-        |vpiIndexedPartSelectType:2
-        |vpiBaseExpr:
-        \_Constant: , line:6:25, endln:6:26
-          |vpiParent:
-          \_IndexedPartSelect: (a[0].source[6-:2]), line:6:18, endln:6:31
-          |vpiDecompile:6
-          |vpiSize:64
-          |UINT:6
-          |vpiConstType:9
-        |vpiWidthExpr:
-        \_Constant: , line:6:30, endln:6:31
-          |vpiParent:
-          \_IndexedPartSelect: (a[0].source[6-:2]), line:6:18, endln:6:31
-          |vpiDecompile:2
-          |vpiSize:64
-          |UINT:2
-          |vpiConstType:9
-      |vpiName:a[0].source[6-:2]
-  |vpiVariables:
   \_ByteVar: (work@dm_csrs.o), line:7:8, endln:7:9
     |vpiParent:
     \_Module: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
@@ -316,6 +255,7 @@ Design: (unnamed)
     |vpiName:o
     |vpiFullName:work@dm_csrs.o
     |vpiSigned:1
+    |vpiRandType:1
     |vpiVisibility:1
     |vpiExpr:
     \_HierPath: (b), line:7:12, endln:7:17
@@ -335,8 +275,6 @@ Design: (unnamed)
         \_HierPath: (b), line:7:12, endln:7:17
         |vpiName:and
       |vpiName:b
-  |vpiReg:
-  \_LogicVar: (work@dm_csrs.c), line:6:9, endln:6:10
   |vpiTypedef:
   \_LogicTypespec: , line:6:3, endln:6:8
     |vpiParent:
@@ -349,25 +287,23 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:6:3, endln:6:8
   |vpiImportTypespec:
-  \_LogicVar: (work@dm_csrs.c), line:6:9, endln:6:10
+  \_LogicNet: (work@dm_csrs.c), line:6:9, endln:6:10
+    |vpiParent:
+    \_Module: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
+    |vpiTypespec:
+    \_RefTypespec: (work@dm_csrs.c), line:6:3, endln:6:8
+      |vpiParent:
+      \_LogicNet: (work@dm_csrs.c), line:6:9, endln:6:10
+      |vpiFullName:work@dm_csrs.c
+      |vpiActual:
+      \_LogicTypespec: , line:6:3, endln:6:8
+    |vpiName:c
+    |vpiFullName:work@dm_csrs.c
+    |vpiNetType:36
   |vpiImportTypespec:
   \_ByteTypespec: , line:7:3, endln:7:7
   |vpiImportTypespec:
   \_ByteVar: (work@dm_csrs.o), line:7:8, endln:7:9
-  |vpiImportTypespec:
-  \_LogicNet: (work@dm_csrs.a), line:6:13, endln:6:14
-    |vpiParent:
-    \_Module: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
-    |vpiName:a
-    |vpiFullName:work@dm_csrs.a
-    |vpiNetType:1
-  |vpiImportTypespec:
-  \_LogicNet: (work@dm_csrs.source), line:6:18, endln:6:31
-    |vpiParent:
-    \_Module: work@dm_csrs (work@dm_csrs), file:${SURELOG_DIR}/tests/HierMultiSelect/dut.sv, line:1:1, endln:8:10
-    |vpiName:source
-    |vpiFullName:work@dm_csrs.source
-    |vpiNetType:1
   |vpiImportTypespec:
   \_LogicNet: (work@dm_csrs.b), line:7:12, endln:7:13
     |vpiParent:
@@ -454,9 +390,7 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@dm_csrs
   |vpiNet:
-  \_LogicNet: (work@dm_csrs.a), line:6:13, endln:6:14
-  |vpiNet:
-  \_LogicNet: (work@dm_csrs.source), line:6:18, endln:6:31
+  \_LogicNet: (work@dm_csrs.c), line:6:9, endln:6:10
   |vpiNet:
   \_LogicNet: (work@dm_csrs.b), line:7:12, endln:7:13
   |vpiNet:

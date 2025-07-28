@@ -91,6 +91,7 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayNet                                               1
+ArrayTypespec                                          1
 BitSelect                                              1
 Constant                                               2
 ContAssign                                             1
@@ -101,9 +102,9 @@ Module                                                 1
 Operation                                              1
 Range                                                  1
 RefObj                                                 3
-RefTypespec                                            3
-StructNet                                              1
+RefTypespec                                            6
 StructTypespec                                         2
+TypedefTypespec                                        2
 TypespecMember                                         2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SelectHierPath/slpp_all/surelog.uhdm ...
@@ -116,31 +117,15 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@IntegerRegisterWriteStage
-  |vpiImportTypespec:
-  \_StructNet: (work@IntegerRegisterWriteStage.pipeReg), line:12:34, endln:12:41
+  |vpiTypedef:
+  \_ArrayTypespec: , line:12:1, endln:12:45
     |vpiParent:
     \_Module: work@IntegerRegisterWriteStage (work@IntegerRegisterWriteStage), file:${SURELOG_DIR}/tests/SelectHierPath/dut.sv, line:10:1, endln:16:10
-    |vpiTypespec:
-    \_RefTypespec: (work@IntegerRegisterWriteStage.pipeReg.pipeReg), line:12:1, endln:12:33
-      |vpiParent:
-      \_StructNet: (work@IntegerRegisterWriteStage.pipeReg), line:12:34, endln:12:41
-      |vpiName:pipeReg
-      |vpiFullName:work@IntegerRegisterWriteStage.pipeReg.pipeReg
-      |vpiActual:
-      \_StructTypespec: (IntegerRegisterWriteStageRegPath), line:5:9, endln:7:2
-    |vpiName:pipeReg
-    |vpiFullName:work@IntegerRegisterWriteStage.pipeReg
-  |vpiImportTypespec:
-  \_ArrayNet: (work@IntegerRegisterWriteStage.pipeReg), line:12:34, endln:12:41
-    |vpiParent:
-    \_Module: work@IntegerRegisterWriteStage (work@IntegerRegisterWriteStage), file:${SURELOG_DIR}/tests/SelectHierPath/dut.sv, line:10:1, endln:16:10
-    |vpiSize:1
-    |vpiName:pipeReg
-    |vpiFullName:work@IntegerRegisterWriteStage.pipeReg
+    |vpiArrayType:1
     |vpiRange:
     \_Range: , line:12:42, endln:12:45
       |vpiParent:
-      \_ArrayNet: (work@IntegerRegisterWriteStage.pipeReg), line:12:34, endln:12:41
+      \_ArrayTypespec: , line:12:1, endln:12:45
       |vpiRightRange:
       \_Operation: , line:12:43, endln:12:44
         |vpiParent:
@@ -154,6 +139,30 @@ Design: (unnamed)
           |vpiSize:64
           |UINT:2
           |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@IntegerRegisterWriteStage.IntegerRegisterWriteStageRegPath), line:12:1, endln:12:33
+      |vpiParent:
+      \_ArrayTypespec: , line:12:1, endln:12:45
+      |vpiName:IntegerRegisterWriteStageRegPath
+      |vpiFullName:work@IntegerRegisterWriteStage.IntegerRegisterWriteStageRegPath
+      |vpiActual:
+      \_TypedefTypespec: (IntegerRegisterWriteStageRegPath), line:7:3, endln:7:35
+  |vpiImportTypespec:
+  \_ArrayTypespec: , line:12:1, endln:12:45
+  |vpiImportTypespec:
+  \_ArrayNet: (work@IntegerRegisterWriteStage.pipeReg), line:12:34, endln:12:41
+    |vpiParent:
+    \_Module: work@IntegerRegisterWriteStage (work@IntegerRegisterWriteStage), file:${SURELOG_DIR}/tests/SelectHierPath/dut.sv, line:10:1, endln:16:10
+    |vpiTypespec:
+    \_RefTypespec: (work@IntegerRegisterWriteStage.pipeReg.IntegerRegisterWriteStageRegPath), line:12:1, endln:12:33
+      |vpiParent:
+      \_ArrayNet: (work@IntegerRegisterWriteStage.pipeReg), line:12:34, endln:12:41
+      |vpiName:IntegerRegisterWriteStageRegPath
+      |vpiFullName:work@IntegerRegisterWriteStage.pipeReg.IntegerRegisterWriteStageRegPath
+      |vpiActual:
+      \_ArrayTypespec: , line:12:1, endln:12:45
+    |vpiName:pipeReg
+    |vpiFullName:work@IntegerRegisterWriteStage.pipeReg
   |vpiImportTypespec:
   \_LogicNet: (work@IntegerRegisterWriteStage.o), line:14:8, endln:14:9
     |vpiParent:
@@ -162,8 +171,6 @@ Design: (unnamed)
     |vpiFullName:work@IntegerRegisterWriteStage.o
     |vpiNetType:1
   |vpiDefName:work@IntegerRegisterWriteStage
-  |vpiNet:
-  \_StructNet: (work@IntegerRegisterWriteStage.pipeReg), line:12:34, endln:12:41
   |vpiNet:
   \_LogicNet: (work@IntegerRegisterWriteStage.o), line:14:8, endln:14:9
   |vpiArrayNet:
@@ -183,7 +190,7 @@ Design: (unnamed)
         |vpiName:pipeReg
         |vpiFullName:pipeReg[1]
         |vpiActual:
-        \_StructNet: (work@IntegerRegisterWriteStage.pipeReg), line:12:34, endln:12:41
+        \_ArrayNet: (work@IntegerRegisterWriteStage.pipeReg), line:12:34, endln:12:41
         |vpiIndex:
         \_Constant: , line:14:20, endln:14:21
           |vpiParent:
@@ -217,21 +224,32 @@ Design: (unnamed)
       |vpiActual:
       \_LogicNet: (work@IntegerRegisterWriteStage.o), line:14:8, endln:14:9
 |vpiTypedef:
-\_StructTypespec: (BranchResult), line:1:9, endln:3:2
+\_TypedefTypespec: (BranchResult), line:3:3, endln:3:15
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:BranchResult
+  |vpiTypedefAlias:
+  \_RefTypespec: (BranchResult), line:1:9, endln:3:2
+    |vpiParent:
+    \_TypedefTypespec: (BranchResult), line:3:3, endln:3:15
+    |vpiFullName:BranchResult
+    |vpiActual:
+    \_StructTypespec: , line:1:9, endln:3:2
+|vpiTypedef:
+\_StructTypespec: , line:1:9, endln:3:2
+  |vpiParent:
+  \_Design: (unnamed)
   |vpiPacked:1
   |vpiTypespecMember:
   \_TypespecMember: (nextAddr), line:2:9, endln:2:17
     |vpiParent:
-    \_StructTypespec: (BranchResult), line:1:9, endln:3:2
+    \_StructTypespec: , line:1:9, endln:3:2
     |vpiName:nextAddr
     |vpiTypespec:
-    \_RefTypespec: (BranchResult.nextAddr), line:2:5, endln:2:8
+    \_RefTypespec: (nextAddr), line:2:5, endln:2:8
       |vpiParent:
       \_TypespecMember: (nextAddr), line:2:9, endln:2:17
-      |vpiFullName:BranchResult.nextAddr
+      |vpiFullName:nextAddr
       |vpiActual:
       \_IntTypespec: , line:2:5, endln:2:8
 |vpiTypedef:
@@ -240,24 +258,35 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiSigned:1
 |vpiTypedef:
-\_StructTypespec: (IntegerRegisterWriteStageRegPath), line:5:9, endln:7:2
+\_TypedefTypespec: (IntegerRegisterWriteStageRegPath), line:7:3, endln:7:35
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:IntegerRegisterWriteStageRegPath
+  |vpiTypedefAlias:
+  \_RefTypespec: (IntegerRegisterWriteStageRegPath), line:5:9, endln:7:2
+    |vpiParent:
+    \_TypedefTypespec: (IntegerRegisterWriteStageRegPath), line:7:3, endln:7:35
+    |vpiFullName:IntegerRegisterWriteStageRegPath
+    |vpiActual:
+    \_StructTypespec: , line:5:9, endln:7:2
+|vpiTypedef:
+\_StructTypespec: , line:5:9, endln:7:2
+  |vpiParent:
+  \_Design: (unnamed)
   |vpiPacked:1
   |vpiTypespecMember:
   \_TypespecMember: (brResult), line:6:18, endln:6:26
     |vpiParent:
-    \_StructTypespec: (IntegerRegisterWriteStageRegPath), line:5:9, endln:7:2
+    \_StructTypespec: , line:5:9, endln:7:2
     |vpiName:brResult
     |vpiTypespec:
-    \_RefTypespec: (IntegerRegisterWriteStageRegPath.brResult.BranchResult), line:6:5, endln:6:17
+    \_RefTypespec: (brResult.BranchResult), line:6:5, endln:6:17
       |vpiParent:
       \_TypespecMember: (brResult), line:6:18, endln:6:26
       |vpiName:BranchResult
-      |vpiFullName:IntegerRegisterWriteStageRegPath.brResult.BranchResult
+      |vpiFullName:brResult.BranchResult
       |vpiActual:
-      \_StructTypespec: (BranchResult), line:1:9, endln:3:2
+      \_TypedefTypespec: (BranchResult), line:3:3, endln:3:15
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

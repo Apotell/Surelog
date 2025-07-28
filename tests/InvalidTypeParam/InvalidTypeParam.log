@@ -67,7 +67,8 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Design                                                 1
 Interface                                              1
-LogicNet                                               2
+LogicNet                                               1
+LogicVar                                               1
 Module                                                 1
 ModuleTypespec                                         1
 RefModule                                              1
@@ -84,6 +85,24 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@Interface
+  |vpiVariables:
+  \_LogicVar: (work@Interface.x), line:3:7, endln:3:8
+    |vpiParent:
+    \_Interface: work@Interface (work@Interface), file:${SURELOG_DIR}/tests/InvalidTypeParam/dut.sv, line:1:1, endln:4:13
+    |vpiTypespec:
+    \_RefTypespec: (work@Interface.x.P), line:3:5, endln:3:6
+      |vpiParent:
+      \_LogicVar: (work@Interface.x), line:3:7, endln:3:8
+      |vpiName:P
+      |vpiFullName:work@Interface.x.P
+      |vpiActual:
+      \_TypeParameter: (work@Interface.P), line:2:20, endln:2:21
+    |vpiName:x
+    |vpiFullName:work@Interface.x
+    |vpiRandType:1
+    |vpiVisibility:1
+  |vpiReg:
+  \_LogicVar: (work@Interface.x), line:3:7, endln:3:8
   |vpiParameter:
   \_TypeParameter: (work@Interface.P), line:2:20, endln:2:21
     |vpiParent:
@@ -95,19 +114,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_TypeParameter: (work@Interface.P), line:2:20, endln:2:21
   |vpiImportTypespec:
-  \_LogicNet: (work@Interface.x), line:3:7, endln:3:8
-    |vpiParent:
-    \_Interface: work@Interface (work@Interface), file:${SURELOG_DIR}/tests/InvalidTypeParam/dut.sv, line:1:1, endln:4:13
-    |vpiTypespec:
-    \_RefTypespec: (work@Interface.x.P), line:3:5, endln:3:6
-      |vpiParent:
-      \_LogicNet: (work@Interface.x), line:3:7, endln:3:8
-      |vpiName:P
-      |vpiFullName:work@Interface.x.P
-      |vpiActual:
-      \_TypeParameter: (work@Interface.P), line:2:20, endln:2:21
-    |vpiName:x
-    |vpiFullName:work@Interface.x
+  \_LogicVar: (work@Interface.x), line:3:7, endln:3:8
   |vpiImportTypespec:
   \_LogicNet: (work@Interface.x), line:3:7, endln:3:8
     |vpiParent:
@@ -123,8 +130,6 @@ Design: (unnamed)
     |vpiName:x
     |vpiFullName:work@Interface.x
   |vpiDefName:work@Interface
-  |vpiNet:
-  \_LogicNet: (work@Interface.x), line:3:7, endln:3:8
   |vpiNet:
   \_LogicNet: (work@Interface.x), line:3:7, endln:3:8
 |vpiAllModules:

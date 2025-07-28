@@ -331,22 +331,23 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayNet                                               4
+ArrayTypespec                                          4
 Begin                                                 12
-Constant                                              17
+Constant                                              15
 ContAssign                                             4
 Design                                                 1
 GenIfElse                                              6
 HierPath                                               8
-LogicNet                                               5
+LogicNet                                               1
 LogicTypespec                                          6
 Module                                                 2
 Operation                                             10
 ParamAssign                                            1
 Parameter                                              1
 Port                                                   1
-Range                                                  7
+Range                                                  6
 RefObj                                                26
-RefTypespec                                            6
+RefTypespec                                           10
 SysFuncCall                                            4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/GenScopeHierPath2/slpp_all/surelog.uhdm ...
@@ -392,20 +393,6 @@ Design: (unnamed)
       \_Begin: (work@mod.blk1), line:5:17, endln:7:8
     |vpiImportTypespec:
     \_LogicTypespec: , line:6:9, endln:6:13
-    |vpiImportTypespec:
-    \_LogicNet: (work@mod.blk1.w), line:6:14, endln:6:15
-      |vpiParent:
-      \_Begin: (work@mod.blk1), line:5:17, endln:7:8
-      |vpiTypespec:
-      \_RefTypespec: (work@mod.blk1.w), line:6:9, endln:6:13
-        |vpiParent:
-        \_LogicNet: (work@mod.blk1.w), line:6:14, endln:6:15
-        |vpiFullName:work@mod.blk1.w
-        |vpiActual:
-        \_LogicTypespec: , line:6:9, endln:6:13
-      |vpiName:w
-      |vpiFullName:work@mod.blk1.w
-      |vpiNetType:1
   |vpiInternalScope:
   \_Begin: (work@mod), line:8:10, endln:16:8
     |vpiParent:
@@ -423,20 +410,6 @@ Design: (unnamed)
         \_Begin: (work@mod.blk2), line:8:22, endln:10:8
       |vpiImportTypespec:
       \_LogicTypespec: , line:9:9, endln:9:13
-      |vpiImportTypespec:
-      \_LogicNet: (work@mod.blk2.x), line:9:14, endln:9:15
-        |vpiParent:
-        \_Begin: (work@mod.blk2), line:8:22, endln:10:8
-        |vpiTypespec:
-        \_RefTypespec: (work@mod.blk2.x), line:9:9, endln:9:13
-          |vpiParent:
-          \_LogicNet: (work@mod.blk2.x), line:9:14, endln:9:15
-          |vpiFullName:work@mod.blk2.x
-          |vpiActual:
-          \_LogicTypespec: , line:9:9, endln:9:13
-        |vpiName:x
-        |vpiFullName:work@mod.blk2.x
-        |vpiNetType:1
     |vpiInternalScope:
     \_Begin: (work@mod), line:11:10, endln:16:8
       |vpiParent:
@@ -454,20 +427,6 @@ Design: (unnamed)
           \_Begin: (work@mod.blk3), line:11:22, endln:13:8
         |vpiImportTypespec:
         \_LogicTypespec: , line:12:9, endln:12:13
-        |vpiImportTypespec:
-        \_LogicNet: (work@mod.blk3.y), line:12:14, endln:12:15
-          |vpiParent:
-          \_Begin: (work@mod.blk3), line:11:22, endln:13:8
-          |vpiTypespec:
-          \_RefTypespec: (work@mod.blk3.y), line:12:9, endln:12:13
-            |vpiParent:
-            \_LogicNet: (work@mod.blk3.y), line:12:14, endln:12:15
-            |vpiFullName:work@mod.blk3.y
-            |vpiActual:
-            \_LogicTypespec: , line:12:9, endln:12:13
-          |vpiName:y
-          |vpiFullName:work@mod.blk3.y
-          |vpiNetType:1
       |vpiInternalScope:
       \_Begin: (work@mod.blk4), line:14:10, endln:16:8
         |vpiParent:
@@ -480,20 +439,6 @@ Design: (unnamed)
           \_Begin: (work@mod.blk4), line:14:10, endln:16:8
         |vpiImportTypespec:
         \_LogicTypespec: , line:15:9, endln:15:13
-        |vpiImportTypespec:
-        \_LogicNet: (work@mod.blk4.z), line:15:14, endln:15:15
-          |vpiParent:
-          \_Begin: (work@mod.blk4), line:14:10, endln:16:8
-          |vpiTypespec:
-          \_RefTypespec: (work@mod.blk4.z), line:15:9, endln:15:13
-            |vpiParent:
-            \_LogicNet: (work@mod.blk4.z), line:15:14, endln:15:15
-            |vpiFullName:work@mod.blk4.z
-            |vpiActual:
-            \_LogicTypespec: , line:15:9, endln:15:13
-          |vpiName:z
-          |vpiFullName:work@mod.blk4.z
-          |vpiNetType:1
       |vpiStmt:
       \_GenIfElse: , line:11:10, endln:16:8
         |vpiParent:
@@ -583,7 +528,7 @@ Design: (unnamed)
             |vpiName:w
             |vpiFullName:work@mod.w
             |vpiActual:
-            \_LogicNet: (work@mod.blk1.w), line:6:14, endln:6:15
+            \_ArrayNet: (work@mod.w), line:6:14, endln:6:15
           |vpiName:blk1.w
         |vpiName:$bits
       |vpiLhs:
@@ -611,13 +556,6 @@ Design: (unnamed)
         |vpiName:blk2
         |vpiFullName:work@mod.blk2
         |vpiNetType:1
-      |vpiImportTypespec:
-      \_LogicNet: (work@mod.x), line:20:33, endln:20:34
-        |vpiParent:
-        \_Begin: (work@mod), line:20:9, endln:20:36
-        |vpiName:x
-        |vpiFullName:work@mod.x
-        |vpiNetType:1
       |vpiStmt:
       \_ContAssign: , line:20:16, endln:20:35
         |vpiParent:
@@ -644,7 +582,7 @@ Design: (unnamed)
               |vpiName:x
               |vpiFullName:work@mod.x
               |vpiActual:
-              \_LogicNet: (work@mod.x), line:20:33, endln:20:34
+              \_ArrayNet: (work@mod.x), line:9:14, endln:9:15
             |vpiName:blk2.x
           |vpiName:$bits
         |vpiLhs:
@@ -672,13 +610,6 @@ Design: (unnamed)
           |vpiName:blk3
           |vpiFullName:work@mod.blk3
           |vpiNetType:1
-        |vpiImportTypespec:
-        \_LogicNet: (work@mod.y), line:22:33, endln:22:34
-          |vpiParent:
-          \_Begin: (work@mod), line:22:9, endln:22:36
-          |vpiName:y
-          |vpiFullName:work@mod.y
-          |vpiNetType:1
         |vpiStmt:
         \_ContAssign: , line:22:16, endln:22:35
           |vpiParent:
@@ -705,7 +636,7 @@ Design: (unnamed)
                 |vpiName:y
                 |vpiFullName:work@mod.y
                 |vpiActual:
-                \_LogicNet: (work@mod.y), line:22:33, endln:22:34
+                \_ArrayNet: (work@mod.y), line:12:14, endln:12:15
               |vpiName:blk3.y
             |vpiName:$bits
           |vpiLhs:
@@ -727,13 +658,6 @@ Design: (unnamed)
           \_Begin: (work@mod), line:24:9, endln:24:36
           |vpiName:blk4
           |vpiFullName:work@mod.blk4
-          |vpiNetType:1
-        |vpiImportTypespec:
-        \_LogicNet: (work@mod.z), line:24:33, endln:24:34
-          |vpiParent:
-          \_Begin: (work@mod), line:24:9, endln:24:36
-          |vpiName:z
-          |vpiFullName:work@mod.z
           |vpiNetType:1
         |vpiStmt:
         \_ContAssign: , line:24:16, endln:24:35
@@ -761,7 +685,7 @@ Design: (unnamed)
                 |vpiName:z
                 |vpiFullName:work@mod.z
                 |vpiActual:
-                \_LogicNet: (work@mod.z), line:24:33, endln:24:34
+                \_ArrayNet: (work@mod.z), line:15:14, endln:15:15
               |vpiName:blk4.z
             |vpiName:$bits
           |vpiLhs:
@@ -855,6 +779,122 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_ArrayTypespec: , line:6:9, endln:6:19
+    |vpiParent:
+    \_Module: work@mod (work@mod), file:${SURELOG_DIR}/tests/GenScopeHierPath2/dut.sv, line:1:1, endln:25:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:6:16, endln:6:19
+      |vpiParent:
+      \_ArrayTypespec: , line:6:9, endln:6:19
+      |vpiRightRange:
+      \_Operation: , line:6:17, endln:6:18
+        |vpiParent:
+        \_Range: , line:6:16, endln:6:19
+        |vpiOpType:11
+        |vpiOperand:
+        \_Constant: , line:6:17, endln:6:18
+          |vpiParent:
+          \_Operation: , line:6:17, endln:6:18
+          |vpiDecompile:2
+          |vpiSize:64
+          |UINT:2
+          |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@mod), line:6:9, endln:6:13
+      |vpiParent:
+      \_ArrayTypespec: , line:6:9, endln:6:19
+      |vpiFullName:work@mod
+      |vpiActual:
+      \_LogicTypespec: , line:6:9, endln:6:13
+  |vpiTypedef:
+  \_ArrayTypespec: , line:9:9, endln:9:19
+    |vpiParent:
+    \_Module: work@mod (work@mod), file:${SURELOG_DIR}/tests/GenScopeHierPath2/dut.sv, line:1:1, endln:25:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:9:16, endln:9:19
+      |vpiParent:
+      \_ArrayTypespec: , line:9:9, endln:9:19
+      |vpiRightRange:
+      \_Operation: , line:9:17, endln:9:18
+        |vpiParent:
+        \_Range: , line:9:16, endln:9:19
+        |vpiOpType:11
+        |vpiOperand:
+        \_Constant: , line:9:17, endln:9:18
+          |vpiParent:
+          \_Operation: , line:9:17, endln:9:18
+          |vpiDecompile:3
+          |vpiSize:64
+          |UINT:3
+          |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@mod), line:9:9, endln:9:13
+      |vpiParent:
+      \_ArrayTypespec: , line:9:9, endln:9:19
+      |vpiFullName:work@mod
+      |vpiActual:
+      \_LogicTypespec: , line:9:9, endln:9:13
+  |vpiTypedef:
+  \_ArrayTypespec: , line:12:9, endln:12:19
+    |vpiParent:
+    \_Module: work@mod (work@mod), file:${SURELOG_DIR}/tests/GenScopeHierPath2/dut.sv, line:1:1, endln:25:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:12:16, endln:12:19
+      |vpiParent:
+      \_ArrayTypespec: , line:12:9, endln:12:19
+      |vpiRightRange:
+      \_Operation: , line:12:17, endln:12:18
+        |vpiParent:
+        \_Range: , line:12:16, endln:12:19
+        |vpiOpType:11
+        |vpiOperand:
+        \_Constant: , line:12:17, endln:12:18
+          |vpiParent:
+          \_Operation: , line:12:17, endln:12:18
+          |vpiDecompile:5
+          |vpiSize:64
+          |UINT:5
+          |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@mod), line:12:9, endln:12:13
+      |vpiParent:
+      \_ArrayTypespec: , line:12:9, endln:12:19
+      |vpiFullName:work@mod
+      |vpiActual:
+      \_LogicTypespec: , line:12:9, endln:12:13
+  |vpiTypedef:
+  \_ArrayTypespec: , line:15:9, endln:15:19
+    |vpiParent:
+    \_Module: work@mod (work@mod), file:${SURELOG_DIR}/tests/GenScopeHierPath2/dut.sv, line:1:1, endln:25:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:15:16, endln:15:19
+      |vpiParent:
+      \_ArrayTypespec: , line:15:9, endln:15:19
+      |vpiRightRange:
+      \_Operation: , line:15:17, endln:15:18
+        |vpiParent:
+        \_Range: , line:15:16, endln:15:19
+        |vpiOpType:11
+        |vpiOperand:
+        \_Constant: , line:15:17, endln:15:18
+          |vpiParent:
+          \_Operation: , line:15:17, endln:15:18
+          |vpiDecompile:7
+          |vpiSize:64
+          |UINT:7
+          |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@mod), line:15:9, endln:15:13
+      |vpiParent:
+      \_ArrayTypespec: , line:15:9, endln:15:19
+      |vpiFullName:work@mod
+      |vpiActual:
+      \_LogicTypespec: , line:15:9, endln:15:13
+  |vpiTypedef:
   \_LogicTypespec: , line:2:12, endln:2:23
     |vpiParent:
     \_Module: work@mod (work@mod), file:${SURELOG_DIR}/tests/GenScopeHierPath2/dut.sv, line:1:1, endln:25:10
@@ -885,7 +925,7 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@mod (work@mod), file:${SURELOG_DIR}/tests/GenScopeHierPath2/dut.sv, line:1:1, endln:25:10
     |vpiTypespec:
-    \_RefTypespec: (work@mod.out), line:2:12, endln:2:23
+    \_RefTypespec: (work@mod.out), line:2:12, endln:2:16
       |vpiParent:
       \_LogicNet: (work@mod.out), line:2:24, endln:2:27
       |vpiFullName:work@mod.out
@@ -895,10 +935,82 @@ Design: (unnamed)
     |vpiFullName:work@mod.out
     |vpiNetType:1
   |vpiImportTypespec:
+  \_ArrayTypespec: , line:6:9, endln:6:19
+  |vpiImportTypespec:
+  \_ArrayNet: (work@mod.w), line:6:14, endln:6:15
+    |vpiParent:
+    \_Module: work@mod (work@mod), file:${SURELOG_DIR}/tests/GenScopeHierPath2/dut.sv, line:1:1, endln:25:10
+    |vpiTypespec:
+    \_RefTypespec: (work@mod.w), line:6:9, endln:6:13
+      |vpiParent:
+      \_ArrayNet: (work@mod.w), line:6:14, endln:6:15
+      |vpiFullName:work@mod.w
+      |vpiActual:
+      \_ArrayTypespec: , line:6:9, endln:6:19
+    |vpiName:w
+    |vpiFullName:work@mod.w
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_ArrayTypespec: , line:9:9, endln:9:19
+  |vpiImportTypespec:
+  \_ArrayNet: (work@mod.x), line:9:14, endln:9:15
+    |vpiParent:
+    \_Module: work@mod (work@mod), file:${SURELOG_DIR}/tests/GenScopeHierPath2/dut.sv, line:1:1, endln:25:10
+    |vpiTypespec:
+    \_RefTypespec: (work@mod.x), line:9:9, endln:9:13
+      |vpiParent:
+      \_ArrayNet: (work@mod.x), line:9:14, endln:9:15
+      |vpiFullName:work@mod.x
+      |vpiActual:
+      \_ArrayTypespec: , line:9:9, endln:9:19
+    |vpiName:x
+    |vpiFullName:work@mod.x
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_ArrayTypespec: , line:12:9, endln:12:19
+  |vpiImportTypespec:
+  \_ArrayNet: (work@mod.y), line:12:14, endln:12:15
+    |vpiParent:
+    \_Module: work@mod (work@mod), file:${SURELOG_DIR}/tests/GenScopeHierPath2/dut.sv, line:1:1, endln:25:10
+    |vpiTypespec:
+    \_RefTypespec: (work@mod.y), line:12:9, endln:12:13
+      |vpiParent:
+      \_ArrayNet: (work@mod.y), line:12:14, endln:12:15
+      |vpiFullName:work@mod.y
+      |vpiActual:
+      \_ArrayTypespec: , line:12:9, endln:12:19
+    |vpiName:y
+    |vpiFullName:work@mod.y
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_ArrayTypespec: , line:15:9, endln:15:19
+  |vpiImportTypespec:
+  \_ArrayNet: (work@mod.z), line:15:14, endln:15:15
+    |vpiParent:
+    \_Module: work@mod (work@mod), file:${SURELOG_DIR}/tests/GenScopeHierPath2/dut.sv, line:1:1, endln:25:10
+    |vpiTypespec:
+    \_RefTypespec: (work@mod.z), line:15:9, endln:15:13
+      |vpiParent:
+      \_ArrayNet: (work@mod.z), line:15:14, endln:15:15
+      |vpiFullName:work@mod.z
+      |vpiActual:
+      \_ArrayTypespec: , line:15:9, endln:15:19
+    |vpiName:z
+    |vpiFullName:work@mod.z
+    |vpiNetType:1
+  |vpiImportTypespec:
   \_LogicTypespec: , line:2:12, endln:2:23
   |vpiDefName:work@mod
   |vpiNet:
   \_LogicNet: (work@mod.out), line:2:24, endln:2:27
+  |vpiArrayNet:
+  \_ArrayNet: (work@mod.w), line:6:14, endln:6:15
+  |vpiArrayNet:
+  \_ArrayNet: (work@mod.x), line:9:14, endln:9:15
+  |vpiArrayNet:
+  \_ArrayNet: (work@mod.y), line:12:14, endln:12:15
+  |vpiArrayNet:
+  \_ArrayNet: (work@mod.z), line:15:14, endln:15:15
   |vpiPort:
   \_Port: (out), line:2:24, endln:2:27
     |vpiParent:

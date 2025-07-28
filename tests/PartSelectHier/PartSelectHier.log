@@ -119,20 +119,21 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/PartSelectHier/dut.sv:6:1: Compile module "work@dut".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                               8
+Constant                                               6
 ContAssign                                             1
 Design                                                 1
 HierPath                                               1
+LogicNet                                               1
 LogicTypespec                                          2
-LogicVar                                               1
 Module                                                 1
 Package                                                1
 PartSelect                                             1
-Range                                                  3
+Range                                                  2
 RefObj                                                 2
-RefTypespec                                            3
+RefTypespec                                            4
 StructNet                                              1
 StructTypespec                                         1
+TypedefTypespec                                        1
 TypespecMember                                         1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PartSelectHier/slpp_all/surelog.uhdm ...
@@ -146,21 +147,32 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:tlul_pkg
   |vpiTypedef:
-  \_StructTypespec: (tlul_pkg::tl_d2h_t), line:2:11, endln:4:4
+  \_TypedefTypespec: (tlul_pkg::tl_d2h_t), line:4:5, endln:4:13
     |vpiParent:
     \_Package: tlul_pkg (tlul_pkg), file:${SURELOG_DIR}/tests/PartSelectHier/dut.sv, line:1:1, endln:5:11
     |vpiName:tlul_pkg::tl_d2h_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (tlul_pkg::tl_d2h_t), line:2:11, endln:4:4
+      |vpiParent:
+      \_TypedefTypespec: (tlul_pkg::tl_d2h_t), line:4:5, endln:4:13
+      |vpiFullName:tlul_pkg::tl_d2h_t
+      |vpiActual:
+      \_StructTypespec: , line:2:11, endln:4:4
+  |vpiTypedef:
+  \_StructTypespec: , line:2:11, endln:4:4
+    |vpiParent:
+    \_Package: tlul_pkg (tlul_pkg), file:${SURELOG_DIR}/tests/PartSelectHier/dut.sv, line:1:1, endln:5:11
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (d_source), line:3:20, endln:3:28
       |vpiParent:
-      \_StructTypespec: (tlul_pkg::tl_d2h_t), line:2:11, endln:4:4
+      \_StructTypespec: , line:2:11, endln:4:4
       |vpiName:d_source
       |vpiTypespec:
-      \_RefTypespec: (tlul_pkg::tl_d2h_t::d_source), line:3:5, endln:3:18
+      \_RefTypespec: (tlul_pkg::d_source), line:3:5, endln:3:18
         |vpiParent:
         \_TypespecMember: (d_source), line:3:20, endln:3:28
-        |vpiFullName:tlul_pkg::tl_d2h_t::d_source
+        |vpiFullName:tlul_pkg::d_source
         |vpiActual:
         \_LogicTypespec: , line:3:5, endln:3:18
   |vpiTypedef:
@@ -188,7 +200,9 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiImportTypespec:
-  \_StructTypespec: (tlul_pkg::tl_d2h_t), line:2:11, endln:4:4
+  \_TypedefTypespec: (tlul_pkg::tl_d2h_t), line:4:5, endln:4:13
+  |vpiImportTypespec:
+  \_StructTypespec: , line:2:11, endln:4:4
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:5, endln:3:18
   |vpiDefName:tlul_pkg
@@ -197,22 +211,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@dut
-  |vpiVariables:
-  \_LogicVar: (work@dut.hfifo_rspid), line:8:15, endln:8:26
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PartSelectHier/dut.sv, line:6:1, endln:10:10
-    |vpiTypespec:
-    \_RefTypespec: (work@dut.hfifo_rspid), line:8:3, endln:8:14
-      |vpiParent:
-      \_LogicVar: (work@dut.hfifo_rspid), line:8:15, endln:8:26
-      |vpiFullName:work@dut.hfifo_rspid
-      |vpiActual:
-      \_LogicTypespec: , line:8:3, endln:8:14
-    |vpiName:hfifo_rspid
-    |vpiFullName:work@dut.hfifo_rspid
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@dut.hfifo_rspid), line:8:15, endln:8:26
   |vpiTypedef:
   \_LogicTypespec: , line:8:3, endln:8:14
     |vpiParent:
@@ -242,19 +240,31 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PartSelectHier/dut.sv, line:6:1, endln:10:10
     |vpiTypespec:
-    \_RefTypespec: (work@dut.drsp_fifo_o.drsp_fifo_o), line:7:3, endln:7:21
+    \_RefTypespec: (work@dut.drsp_fifo_o.tlul_pkg::tl_d2h_t), line:7:3, endln:7:21
       |vpiParent:
       \_StructNet: (work@dut.drsp_fifo_o), line:7:22, endln:7:33
-      |vpiName:drsp_fifo_o
-      |vpiFullName:work@dut.drsp_fifo_o.drsp_fifo_o
+      |vpiName:tlul_pkg::tl_d2h_t
+      |vpiFullName:work@dut.drsp_fifo_o.tlul_pkg::tl_d2h_t
       |vpiActual:
-      \_StructTypespec: (tlul_pkg::tl_d2h_t), line:2:11, endln:4:4
+      \_TypedefTypespec: (tlul_pkg::tl_d2h_t), line:4:5, endln:4:13
     |vpiName:drsp_fifo_o
     |vpiFullName:work@dut.drsp_fifo_o
   |vpiImportTypespec:
   \_LogicTypespec: , line:8:3, endln:8:14
   |vpiImportTypespec:
-  \_LogicVar: (work@dut.hfifo_rspid), line:8:15, endln:8:26
+  \_LogicNet: (work@dut.hfifo_rspid), line:8:15, endln:8:26
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/PartSelectHier/dut.sv, line:6:1, endln:10:10
+    |vpiTypespec:
+    \_RefTypespec: (work@dut.hfifo_rspid), line:8:3, endln:8:14
+      |vpiParent:
+      \_LogicNet: (work@dut.hfifo_rspid), line:8:15, endln:8:26
+      |vpiFullName:work@dut.hfifo_rspid
+      |vpiActual:
+      \_LogicTypespec: , line:8:3, endln:8:14
+    |vpiName:hfifo_rspid
+    |vpiFullName:work@dut.hfifo_rspid
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicNet: (work@dut.d_source), line:9:36, endln:9:48
     |vpiParent:
@@ -265,6 +275,8 @@ Design: (unnamed)
   |vpiDefName:work@dut
   |vpiNet:
   \_StructNet: (work@dut.drsp_fifo_o), line:7:22, endln:7:33
+  |vpiNet:
+  \_LogicNet: (work@dut.hfifo_rspid), line:8:15, endln:8:26
   |vpiNet:
   \_LogicNet: (work@dut.d_source), line:9:36, endln:9:48
   |vpiContAssign:
@@ -315,7 +327,7 @@ Design: (unnamed)
       |vpiName:hfifo_rspid
       |vpiFullName:work@dut.hfifo_rspid
       |vpiActual:
-      \_LogicVar: (work@dut.hfifo_rspid), line:8:15, endln:8:26
+      \_LogicNet: (work@dut.hfifo_rspid), line:8:15, endln:8:26
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

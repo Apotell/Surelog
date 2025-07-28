@@ -49,13 +49,14 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayNet                                               1
-Constant                                               6
+ArrayTypespec                                          1
+Constant                                               4
 Design                                                 1
-LogicNet                                               2
+LogicNet                                               1
 LogicTypespec                                          2
 Module                                                 1
-Range                                                  3
-RefTypespec                                            2
+Range                                                  2
+RefTypespec                                            3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnsizedPacked/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -71,6 +72,18 @@ Design: (unnamed)
   \_LogicTypespec: , line:3:1, endln:3:4
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/UnsizedPacked/dut.sv, line:1:1, endln:7:10
+  |vpiTypedef:
+  \_ArrayTypespec: , line:3:1, endln:3:13
+    |vpiParent:
+    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/UnsizedPacked/dut.sv, line:1:1, endln:7:10
+    |vpiArrayType:2
+    |vpiElemTypespec:
+    \_RefTypespec: (work@test), line:3:1, endln:3:4
+      |vpiParent:
+      \_ArrayTypespec: , line:3:1, endln:3:13
+      |vpiFullName:work@test
+      |vpiActual:
+      \_LogicTypespec: , line:3:1, endln:3:4
   |vpiTypedef:
   \_LogicTypespec: , line:5:1, endln:5:7
     |vpiParent:
@@ -97,16 +110,18 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:1, endln:3:4
   |vpiImportTypespec:
-  \_LogicNet: (work@test.legal), line:3:5, endln:3:10
+  \_ArrayTypespec: , line:3:1, endln:3:13
+  |vpiImportTypespec:
+  \_ArrayNet: (work@test.legal), line:3:5, endln:3:10
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/UnsizedPacked/dut.sv, line:1:1, endln:7:10
     |vpiTypespec:
     \_RefTypespec: (work@test.legal), line:3:1, endln:3:4
       |vpiParent:
-      \_LogicNet: (work@test.legal), line:3:5, endln:3:10
+      \_ArrayNet: (work@test.legal), line:3:5, endln:3:10
       |vpiFullName:work@test.legal
       |vpiActual:
-      \_LogicTypespec: , line:3:1, endln:3:4
+      \_ArrayTypespec: , line:3:1, endln:3:13
     |vpiName:legal
     |vpiFullName:work@test.legal
     |vpiNetType:48
@@ -128,9 +143,9 @@ Design: (unnamed)
     |vpiNetType:48
   |vpiDefName:work@test
   |vpiNet:
-  \_LogicNet: (work@test.legal), line:3:5, endln:3:10
-  |vpiNet:
   \_LogicNet: (work@test.illegal), line:5:8, endln:5:15
+  |vpiArrayNet:
+  \_ArrayNet: (work@test.legal), line:3:5, endln:3:10
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

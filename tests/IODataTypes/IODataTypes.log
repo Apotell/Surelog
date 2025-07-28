@@ -79,8 +79,8 @@ ByteVar                                                1
 Design                                                 1
 IntTypespec                                            2
 IntVar                                                 1
+IntegerNet                                             1
 IntegerTypespec                                        2
-IntegerVar                                             1
 LongIntTypespec                                        2
 LongIntVar                                             1
 Module                                                 1
@@ -113,6 +113,7 @@ Design: (unnamed)
     |vpiName:a
     |vpiFullName:work@dff_diffDataTypes.a
     |vpiSigned:1
+    |vpiRandType:1
     |vpiVisibility:1
   |vpiVariables:
   \_ByteVar: (work@dff_diffDataTypes.b), line:3:12, endln:3:13
@@ -128,6 +129,7 @@ Design: (unnamed)
     |vpiName:b
     |vpiFullName:work@dff_diffDataTypes.b
     |vpiSigned:1
+    |vpiRandType:1
     |vpiVisibility:1
   |vpiVariables:
   \_ShortIntVar: (work@dff_diffDataTypes.c), line:4:16, endln:4:17
@@ -143,6 +145,7 @@ Design: (unnamed)
     |vpiName:c
     |vpiFullName:work@dff_diffDataTypes.c
     |vpiSigned:1
+    |vpiRandType:1
     |vpiVisibility:1
   |vpiVariables:
   \_LongIntVar: (work@dff_diffDataTypes.d), line:5:15, endln:5:16
@@ -158,21 +161,7 @@ Design: (unnamed)
     |vpiName:d
     |vpiFullName:work@dff_diffDataTypes.d
     |vpiSigned:1
-    |vpiVisibility:1
-  |vpiVariables:
-  \_IntegerVar: (work@dff_diffDataTypes.e), line:6:15, endln:6:16
-    |vpiParent:
-    \_Module: work@dff_diffDataTypes (work@dff_diffDataTypes), file:${SURELOG_DIR}/tests/IODataTypes/dut.sv, line:1:1, endln:9:10
-    |vpiTypespec:
-    \_RefTypespec: (work@dff_diffDataTypes.e), line:6:7, endln:6:14
-      |vpiParent:
-      \_IntegerVar: (work@dff_diffDataTypes.e), line:6:15, endln:6:16
-      |vpiFullName:work@dff_diffDataTypes.e
-      |vpiActual:
-      \_IntegerTypespec: , line:6:7, endln:6:14
-    |vpiName:e
-    |vpiFullName:work@dff_diffDataTypes.e
-    |vpiSigned:1
+    |vpiRandType:1
     |vpiVisibility:1
   |vpiVariables:
   \_ShortIntVar: (work@dff_diffDataTypes.f), line:7:23, endln:7:24
@@ -188,6 +177,7 @@ Design: (unnamed)
     |vpiName:f
     |vpiFullName:work@dff_diffDataTypes.f
     |vpiSigned:1
+    |vpiRandType:1
     |vpiVisibility:1
   |vpiTypedef:
   \_IntTypespec: , line:2:7, endln:2:10
@@ -268,7 +258,19 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntegerTypespec: , line:6:7, endln:6:14
   |vpiImportTypespec:
-  \_IntegerVar: (work@dff_diffDataTypes.e), line:6:15, endln:6:16
+  \_IntegerNet: (work@dff_diffDataTypes.e), line:6:15, endln:6:16
+    |vpiParent:
+    \_Module: work@dff_diffDataTypes (work@dff_diffDataTypes), file:${SURELOG_DIR}/tests/IODataTypes/dut.sv, line:1:1, endln:9:10
+    |vpiTypespec:
+    \_RefTypespec: (work@dff_diffDataTypes.e), line:6:7, endln:6:14
+      |vpiParent:
+      \_IntegerNet: (work@dff_diffDataTypes.e), line:6:15, endln:6:16
+      |vpiFullName:work@dff_diffDataTypes.e
+      |vpiActual:
+      \_IntegerTypespec: , line:6:7, endln:6:14
+    |vpiName:e
+    |vpiFullName:work@dff_diffDataTypes.e
+    |vpiSigned:1
   |vpiImportTypespec:
   \_ShortIntTypespec: , line:7:7, endln:7:15
   |vpiImportTypespec:
@@ -286,6 +288,8 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ShortIntTypespec: , line:7:7, endln:7:15
   |vpiDefName:work@dff_diffDataTypes
+  |vpiNet:
+  \_IntegerNet: (work@dff_diffDataTypes.e), line:6:15, endln:6:16
   |vpiPort:
   \_Port: (a), line:2:11, endln:2:12
     |vpiParent:

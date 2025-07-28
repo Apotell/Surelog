@@ -215,19 +215,18 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/TypeParam/dut.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                               3
+Constant                                               2
 Design                                                 1
 IntTypespec                                            2
-LogicNet                                               4
+LogicNet                                               5
 LogicTypespec                                          3
-LogicVar                                               1
 Module                                                 3
 ModuleTypespec                                         2
 ParamAssign                                            1
 Parameter                                              1
-Range                                                  2
+Range                                                  1
 RefModule                                              3
-RefObj                                                 2
+RefObj                                                 1
 RefTypespec                                            9
 TypeParameter                                          4
 === UHDM Object Stats End ===
@@ -241,22 +240,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@bottom
-  |vpiVariables:
-  \_LogicVar: (work@bottom.a), line:19:20, endln:19:21
-    |vpiParent:
-    \_Module: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/TypeParam/dut.sv, line:17:1, endln:21:10
-    |vpiTypespec:
-    \_RefTypespec: (work@bottom.a), line:19:5, endln:19:19
-      |vpiParent:
-      \_LogicVar: (work@bottom.a), line:19:20, endln:19:21
-      |vpiFullName:work@bottom.a
-      |vpiActual:
-      \_LogicTypespec: , line:19:5, endln:19:19
-    |vpiName:a
-    |vpiFullName:work@bottom.a
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@bottom.a), line:19:20, endln:19:21
   |vpiParameter:
   \_TypeParameter: (work@bottom.TP1), line:17:32, endln:17:35
     |vpiParent:
@@ -366,7 +349,19 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:19:5, endln:19:19
   |vpiImportTypespec:
-  \_LogicVar: (work@bottom.a), line:19:20, endln:19:21
+  \_LogicNet: (work@bottom.a), line:19:20, endln:19:21
+    |vpiParent:
+    \_Module: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/TypeParam/dut.sv, line:17:1, endln:21:10
+    |vpiTypespec:
+    \_RefTypespec: (work@bottom.a), line:19:5, endln:19:19
+      |vpiParent:
+      \_LogicNet: (work@bottom.a), line:19:20, endln:19:21
+      |vpiFullName:work@bottom.a
+      |vpiActual:
+      \_LogicTypespec: , line:19:5, endln:19:19
+    |vpiName:a
+    |vpiFullName:work@bottom.a
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicNet: (work@bottom.DATA2), line:20:9, endln:20:14
     |vpiParent:
@@ -384,6 +379,8 @@ Design: (unnamed)
   |vpiDefName:work@bottom
   |vpiNet:
   \_LogicNet: (work@bottom.DATA1), line:18:9, endln:18:14
+  |vpiNet:
+  \_LogicNet: (work@bottom.a), line:19:20, endln:19:21
   |vpiNet:
   \_LogicNet: (work@bottom.DATA2), line:20:9, endln:20:14
 |vpiAllModules:

@@ -156,7 +156,7 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Begin                                                  1
-Constant                                              10
+Constant                                               8
 ContAssign                                             1
 Design                                                 1
 GenIf                                                  1
@@ -166,15 +166,15 @@ IntVar                                                 1
 LogicTypespec                                          1
 Module                                                 3
 ModuleTypespec                                         1
-Operation                                              3
+Operation                                              2
 Package                                                1
-PackedArrayTypespec                                    1
 ParamAssign                                            2
 Parameter                                              2
-Range                                                  2
+Range                                                  1
 RefModule                                              1
-RefObj                                                 5
-RefTypespec                                            4
+RefObj                                                 4
+RefTypespec                                            5
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ImportPackage/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -221,13 +221,13 @@ Design: (unnamed)
     \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:4:1, endln:7:25
     |vpiSigned:1
   |vpiTypedef:
-  \_PackedArrayTypespec: , line:6:12, endln:6:31
+  \_LogicTypespec: , line:6:12, endln:6:31
     |vpiParent:
     \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:4:1, endln:7:25
     |vpiRange:
     \_Range: , line:6:18, endln:6:31
       |vpiParent:
-      \_PackedArrayTypespec: , line:6:12, endln:6:31
+      \_LogicTypespec: , line:6:12, endln:6:31
       |vpiLeftRange:
       \_Operation: , line:6:19, endln:6:28
         |vpiParent:
@@ -258,49 +258,23 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_LogicTypespec: (unused_type_t), line:6:12, endln:6:31
+  \_TypedefTypespec: (lc_ctrl_pkg::unused_type_t), line:6:32, endln:6:45
     |vpiParent:
     \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/ImportPackage/dut.sv, line:4:1, endln:7:25
-    |vpiName:unused_type_t
-    |vpiRange:
-    \_Range: , line:6:18, endln:6:31
+    |vpiName:lc_ctrl_pkg::unused_type_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (lc_ctrl_pkg::unused_type_t), line:6:12, endln:6:17
       |vpiParent:
-      \_LogicTypespec: (unused_type_t), line:6:12, endln:6:31
-      |vpiLeftRange:
-      \_Operation: , line:6:19, endln:6:28
-        |vpiParent:
-        \_Range: , line:6:18, endln:6:31
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (lc_ctrl_pkg::unused_type_t::TxWidth), line:6:19, endln:6:26
-          |vpiParent:
-          \_Operation: , line:6:19, endln:6:28
-          |vpiName:TxWidth
-          |vpiFullName:lc_ctrl_pkg::unused_type_t::TxWidth
-          |vpiActual:
-          \_Parameter: (lc_ctrl_pkg::TxWidth), line:5:18, endln:5:29
-        |vpiOperand:
-        \_Constant: , line:6:27, endln:6:28
-          |vpiParent:
-          \_Operation: , line:6:19, endln:6:28
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:6:29, endln:6:30
-        |vpiParent:
-        \_Range: , line:6:18, endln:6:31
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
+      \_TypedefTypespec: (lc_ctrl_pkg::unused_type_t), line:6:32, endln:6:45
+      |vpiFullName:lc_ctrl_pkg::unused_type_t
+      |vpiActual:
+      \_LogicTypespec: , line:6:12, endln:6:31
   |vpiImportTypespec:
   \_IntTypespec: , line:5:14, endln:5:17
   |vpiImportTypespec:
-  \_PackedArrayTypespec: , line:6:12, endln:6:31
+  \_LogicTypespec: , line:6:12, endln:6:31
   |vpiImportTypespec:
-  \_LogicTypespec: (unused_type_t), line:6:12, endln:6:31
+  \_TypedefTypespec: (lc_ctrl_pkg::unused_type_t), line:6:32, endln:6:45
   |vpiDefName:lc_ctrl_pkg
   |vpiEndLabel:lc_ctrl_pkg
 |vpiAllModules:
@@ -328,6 +302,7 @@ Design: (unnamed)
     |vpiName:o
     |vpiFullName:work@top.o
     |vpiSigned:1
+    |vpiRandType:1
     |vpiVisibility:1
   |vpiParameter:
   \_Parameter: (work@top.TxWidth), line:11:18, endln:11:29

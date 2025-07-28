@@ -131,11 +131,12 @@ Package                                                2
 ParamAssign                                            2
 Parameter                                              2
 Range                                                  1
-RefTypespec                                           23
+RefTypespec                                           25
 StringTypespec                                         6
 StructTypespec                                         1
 TaggedPattern                                          6
 Task                                                   9
+TypedefTypespec                                        2
 TypespecMember                                         1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LargeHexCast/slpp_all/surelog.uhdm ...
@@ -405,7 +406,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -439,14 +440,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/LargeHexCast/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -454,7 +454,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -462,7 +462,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -470,7 +470,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -478,13 +478,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/LargeHexCast/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -697,7 +711,7 @@ Design: (unnamed)
       |vpiName:app_config_t
       |vpiFullName:kmac_pkg::A::app_config_t
       |vpiActual:
-      \_StructTypespec: (kmac_pkg::app_config_t), line:2:12, endln:4:5
+      \_TypedefTypespec: (kmac_pkg::app_config_t), line:4:6, endln:4:18
     |vpiName:A
     |vpiFullName:kmac_pkg::A
   |vpiParameter:
@@ -711,7 +725,7 @@ Design: (unnamed)
       |vpiName:app_config_t
       |vpiFullName:kmac_pkg::B::app_config_t
       |vpiActual:
-      \_StructTypespec: (kmac_pkg::app_config_t), line:2:12, endln:4:5
+      \_TypedefTypespec: (kmac_pkg::app_config_t), line:4:6, endln:4:18
     |vpiName:B
     |vpiFullName:kmac_pkg::B
   |vpiParamAssign:
@@ -747,7 +761,7 @@ Design: (unnamed)
           |vpiName:Prefix
           |vpiFullName:kmac_pkg::Prefix
           |vpiActual:
-          \_StringTypespec: (Prefix), line:7:7, endln:7:13
+          \_StringTypespec: , line:7:7, endln:7:13
     |vpiLhs:
     \_Parameter: (kmac_pkg::A), line:6:27, endln:8:5
   |vpiParamAssign:
@@ -778,25 +792,36 @@ Design: (unnamed)
           |vpiName:Prefix
           |vpiFullName:kmac_pkg::Prefix
           |vpiActual:
-          \_StringTypespec: (Prefix), line:11:7, endln:11:13
+          \_StringTypespec: , line:11:7, endln:11:13
     |vpiLhs:
     \_Parameter: (kmac_pkg::B), line:10:27, endln:12:5
   |vpiTypedef:
-  \_StructTypespec: (kmac_pkg::app_config_t), line:2:12, endln:4:5
+  \_TypedefTypespec: (kmac_pkg::app_config_t), line:4:6, endln:4:18
     |vpiParent:
     \_Package: kmac_pkg (kmac_pkg), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
     |vpiName:kmac_pkg::app_config_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (kmac_pkg::app_config_t), line:2:12, endln:4:5
+      |vpiParent:
+      \_TypedefTypespec: (kmac_pkg::app_config_t), line:4:6, endln:4:18
+      |vpiFullName:kmac_pkg::app_config_t
+      |vpiActual:
+      \_StructTypespec: , line:2:12, endln:4:5
+  |vpiTypedef:
+  \_StructTypespec: , line:2:12, endln:4:5
+    |vpiParent:
+    \_Package: kmac_pkg (kmac_pkg), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (Prefix), line:3:20, endln:3:26
       |vpiParent:
-      \_StructTypespec: (kmac_pkg::app_config_t), line:2:12, endln:4:5
+      \_StructTypespec: , line:2:12, endln:4:5
       |vpiName:Prefix
       |vpiTypespec:
-      \_RefTypespec: (kmac_pkg::app_config_t::Prefix), line:3:7, endln:3:19
+      \_RefTypespec: (kmac_pkg::Prefix), line:3:7, endln:3:19
         |vpiParent:
         \_TypespecMember: (Prefix), line:3:20, endln:3:26
-        |vpiFullName:kmac_pkg::app_config_t::Prefix
+        |vpiFullName:kmac_pkg::Prefix
         |vpiActual:
         \_LogicTypespec: , line:3:7, endln:3:19
   |vpiTypedef:
@@ -824,51 +849,47 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_StringTypespec: (Prefix), line:7:7, endln:7:13
+  \_StringTypespec: , line:7:7, endln:7:13
     |vpiParent:
     \_Package: kmac_pkg (kmac_pkg), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
-    |vpiName:Prefix
   |vpiTypedef:
-  \_StringTypespec: (Prefix), line:7:7, endln:7:13
+  \_StringTypespec: , line:7:7, endln:7:13
     |vpiParent:
     \_Package: kmac_pkg (kmac_pkg), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
-    |vpiName:Prefix
   |vpiTypedef:
-  \_StringTypespec: (Prefix), line:7:7, endln:7:13
+  \_StringTypespec: , line:7:7, endln:7:13
     |vpiParent:
     \_Package: kmac_pkg (kmac_pkg), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
-    |vpiName:Prefix
   |vpiTypedef:
-  \_StringTypespec: (Prefix), line:11:7, endln:11:13
+  \_StringTypespec: , line:11:7, endln:11:13
     |vpiParent:
     \_Package: kmac_pkg (kmac_pkg), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
-    |vpiName:Prefix
   |vpiTypedef:
-  \_StringTypespec: (Prefix), line:11:7, endln:11:13
+  \_StringTypespec: , line:11:7, endln:11:13
     |vpiParent:
     \_Package: kmac_pkg (kmac_pkg), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
-    |vpiName:Prefix
   |vpiTypedef:
-  \_StringTypespec: (Prefix), line:11:7, endln:11:13
+  \_StringTypespec: , line:11:7, endln:11:13
     |vpiParent:
     \_Package: kmac_pkg (kmac_pkg), file:${SURELOG_DIR}/tests/LargeHexCast/dut.sv, line:1:1, endln:13:22
-    |vpiName:Prefix
   |vpiImportTypespec:
-  \_StructTypespec: (kmac_pkg::app_config_t), line:2:12, endln:4:5
+  \_TypedefTypespec: (kmac_pkg::app_config_t), line:4:6, endln:4:18
+  |vpiImportTypespec:
+  \_StructTypespec: , line:2:12, endln:4:5
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:7, endln:3:19
   |vpiImportTypespec:
-  \_StringTypespec: (Prefix), line:7:7, endln:7:13
+  \_StringTypespec: , line:7:7, endln:7:13
   |vpiImportTypespec:
-  \_StringTypespec: (Prefix), line:7:7, endln:7:13
+  \_StringTypespec: , line:7:7, endln:7:13
   |vpiImportTypespec:
-  \_StringTypespec: (Prefix), line:7:7, endln:7:13
+  \_StringTypespec: , line:7:7, endln:7:13
   |vpiImportTypespec:
-  \_StringTypespec: (Prefix), line:11:7, endln:11:13
+  \_StringTypespec: , line:11:7, endln:11:13
   |vpiImportTypespec:
-  \_StringTypespec: (Prefix), line:11:7, endln:11:13
+  \_StringTypespec: , line:11:7, endln:11:13
   |vpiImportTypespec:
-  \_StringTypespec: (Prefix), line:11:7, endln:11:13
+  \_StringTypespec: , line:11:7, endln:11:13
   |vpiDefName:kmac_pkg
   |vpiEndLabel:kmac_pkg
 |vpiAllModules:

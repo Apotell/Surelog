@@ -105,11 +105,11 @@ Design                                                 1
 GenIf                                                  1
 LogicTypespec                                          2
 Module                                                 1
-RefTypespec                                            4
+RefTypespec                                            7
+StructNet                                              1
 StructTypespec                                         2
-StructVar                                              1
+TypedefTypespec                                        3
 TypespecMember                                         3
-UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypeDefGenScope/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -121,21 +121,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@dut
-  |vpiVariables:
-  \_StructVar: (work@dut.mem_fwd_header_cast_i), line:19:33, endln:19:54
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/TypeDefGenScope/dut.sv, line:1:1, endln:24:10
-    |vpiTypespec:
-    \_RefTypespec: (work@dut.mem_fwd_header_cast_i.bp_bedrock_mem_fwd_header_s), line:19:5, endln:19:32
-      |vpiParent:
-      \_StructVar: (work@dut.mem_fwd_header_cast_i), line:19:33, endln:19:54
-      |vpiName:bp_bedrock_mem_fwd_header_s
-      |vpiFullName:work@dut.mem_fwd_header_cast_i.bp_bedrock_mem_fwd_header_s
-      |vpiActual:
-      \_StructTypespec: (bp_bedrock_mem_fwd_header_s), line:13:13, endln:16:6
-    |vpiName:mem_fwd_header_cast_i
-    |vpiFullName:work@dut.mem_fwd_header_cast_i
-    |vpiVisibility:1
   |vpiInternalScope:
   \_Begin: (work@dut.m), line:3:11, endln:21:7
     |vpiParent:
@@ -143,33 +128,44 @@ Design: (unnamed)
     |vpiName:m
     |vpiFullName:work@dut.m
     |vpiTypedef:
-    \_StructTypespec: (bp_bedrock_mem_fwd_payload_s), line:5:13, endln:9:6
+    \_TypedefTypespec: (bp_bedrock_mem_fwd_payload_s), line:9:7, endln:9:35
       |vpiParent:
       \_Begin: (work@dut.m), line:3:11, endln:21:7
       |vpiName:bp_bedrock_mem_fwd_payload_s
+      |vpiTypedefAlias:
+      \_RefTypespec: (work@dut.m.bp_bedrock_mem_fwd_payload_s), line:5:13, endln:9:6
+        |vpiParent:
+        \_TypedefTypespec: (bp_bedrock_mem_fwd_payload_s), line:9:7, endln:9:35
+        |vpiFullName:work@dut.m.bp_bedrock_mem_fwd_payload_s
+        |vpiActual:
+        \_StructTypespec: , line:5:13, endln:9:6
+    |vpiTypedef:
+    \_StructTypespec: , line:5:13, endln:9:6
+      |vpiParent:
+      \_Begin: (work@dut.m), line:3:11, endln:21:7
       |vpiPacked:1
       |vpiTypespecMember:
       \_TypespecMember: (uncached), line:7:52, endln:7:60
         |vpiParent:
-        \_StructTypespec: (bp_bedrock_mem_fwd_payload_s), line:5:13, endln:9:6
+        \_StructTypespec: , line:5:13, endln:9:6
         |vpiName:uncached
         |vpiTypespec:
-        \_RefTypespec: (work@dut.m.bp_bedrock_mem_fwd_payload_s.uncached), line:7:7, endln:7:12
+        \_RefTypespec: (work@dut.m.uncached), line:7:7, endln:7:12
           |vpiParent:
           \_TypespecMember: (uncached), line:7:52, endln:7:60
-          |vpiFullName:work@dut.m.bp_bedrock_mem_fwd_payload_s.uncached
+          |vpiFullName:work@dut.m.uncached
           |vpiActual:
           \_LogicTypespec: , line:7:7, endln:7:12
       |vpiTypespecMember:
       \_TypespecMember: (speculative), line:8:52, endln:8:63
         |vpiParent:
-        \_StructTypespec: (bp_bedrock_mem_fwd_payload_s), line:5:13, endln:9:6
+        \_StructTypespec: , line:5:13, endln:9:6
         |vpiName:speculative
         |vpiTypespec:
-        \_RefTypespec: (work@dut.m.bp_bedrock_mem_fwd_payload_s.speculative), line:8:7, endln:8:12
+        \_RefTypespec: (work@dut.m.speculative), line:8:7, endln:8:12
           |vpiParent:
           \_TypespecMember: (speculative), line:8:52, endln:8:63
-          |vpiFullName:work@dut.m.bp_bedrock_mem_fwd_payload_s.speculative
+          |vpiFullName:work@dut.m.speculative
           |vpiActual:
           \_LogicTypespec: , line:8:7, endln:8:12
     |vpiTypedef:
@@ -181,42 +177,78 @@ Design: (unnamed)
       |vpiParent:
       \_Begin: (work@dut.m), line:3:11, endln:21:7
     |vpiTypedef:
-    \_StructTypespec: (bp_bedrock_mem_fwd_header_s), line:13:13, endln:16:6
+    \_TypedefTypespec: (bp_bedrock_mem_rev_payload_s), line:10:42, endln:10:70
+      |vpiParent:
+      \_Begin: (work@dut.m), line:3:11, endln:21:7
+      |vpiName:bp_bedrock_mem_rev_payload_s
+      |vpiTypedefAlias:
+      \_RefTypespec: (work@dut.m.bp_bedrock_mem_rev_payload_s), line:10:13, endln:10:41
+        |vpiParent:
+        \_TypedefTypespec: (bp_bedrock_mem_rev_payload_s), line:10:42, endln:10:70
+        |vpiFullName:work@dut.m.bp_bedrock_mem_rev_payload_s
+        |vpiActual:
+        \_TypedefTypespec: (bp_bedrock_mem_fwd_payload_s), line:9:7, endln:9:35
+    |vpiTypedef:
+    \_TypedefTypespec: (bp_bedrock_mem_fwd_header_s), line:16:7, endln:16:34
       |vpiParent:
       \_Begin: (work@dut.m), line:3:11, endln:21:7
       |vpiName:bp_bedrock_mem_fwd_header_s
+      |vpiTypedefAlias:
+      \_RefTypespec: (work@dut.m.bp_bedrock_mem_fwd_header_s), line:13:13, endln:16:6
+        |vpiParent:
+        \_TypedefTypespec: (bp_bedrock_mem_fwd_header_s), line:16:7, endln:16:34
+        |vpiFullName:work@dut.m.bp_bedrock_mem_fwd_header_s
+        |vpiActual:
+        \_StructTypespec: , line:13:13, endln:16:6
+    |vpiTypedef:
+    \_StructTypespec: , line:13:13, endln:16:6
+      |vpiParent:
+      \_Begin: (work@dut.m), line:3:11, endln:21:7
       |vpiPacked:1
       |vpiTypespecMember:
       \_TypespecMember: (payload), line:15:68, endln:15:75
         |vpiParent:
-        \_StructTypespec: (bp_bedrock_mem_fwd_header_s), line:13:13, endln:16:6
+        \_StructTypespec: , line:13:13, endln:16:6
         |vpiName:payload
         |vpiTypespec:
-        \_RefTypespec: (work@dut.m.bp_bedrock_mem_fwd_header_s.payload.bp_bedrock_mem_rev_payload_s), line:15:9, endln:15:37
+        \_RefTypespec: (work@dut.m.payload.bp_bedrock_mem_rev_payload_s), line:15:9, endln:15:37
           |vpiParent:
           \_TypespecMember: (payload), line:15:68, endln:15:75
           |vpiName:bp_bedrock_mem_rev_payload_s
-          |vpiFullName:work@dut.m.bp_bedrock_mem_fwd_header_s.payload.bp_bedrock_mem_rev_payload_s
+          |vpiFullName:work@dut.m.payload.bp_bedrock_mem_rev_payload_s
           |vpiActual:
-          \_UnsupportedTypespec: (bp_bedrock_mem_rev_payload_s), line:15:9, endln:15:37
+          \_TypedefTypespec: (bp_bedrock_mem_rev_payload_s), line:10:42, endln:10:70
     |vpiImportTypespec:
-    \_StructTypespec: (bp_bedrock_mem_fwd_payload_s), line:5:13, endln:9:6
+    \_TypedefTypespec: (bp_bedrock_mem_fwd_payload_s), line:9:7, endln:9:35
+    |vpiImportTypespec:
+    \_StructTypespec: , line:5:13, endln:9:6
     |vpiImportTypespec:
     \_LogicTypespec: , line:7:7, endln:7:12
     |vpiImportTypespec:
     \_LogicTypespec: , line:8:7, endln:8:12
     |vpiImportTypespec:
-    \_StructTypespec: (bp_bedrock_mem_fwd_header_s), line:13:13, endln:16:6
-  |vpiTypedef:
-  \_UnsupportedTypespec: (bp_bedrock_mem_rev_payload_s), line:15:9, endln:15:37
+    \_TypedefTypespec: (bp_bedrock_mem_rev_payload_s), line:10:42, endln:10:70
+    |vpiImportTypespec:
+    \_TypedefTypespec: (bp_bedrock_mem_fwd_header_s), line:16:7, endln:16:34
+    |vpiImportTypespec:
+    \_StructTypespec: , line:13:13, endln:16:6
+  |vpiImportTypespec:
+  \_StructNet: (work@dut.mem_fwd_header_cast_i), line:19:33, endln:19:54
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/TypeDefGenScope/dut.sv, line:1:1, endln:24:10
-    |vpiName:bp_bedrock_mem_rev_payload_s
-  |vpiImportTypespec:
-  \_UnsupportedTypespec: (bp_bedrock_mem_rev_payload_s), line:15:9, endln:15:37
-  |vpiImportTypespec:
-  \_StructVar: (work@dut.mem_fwd_header_cast_i), line:19:33, endln:19:54
+    |vpiTypespec:
+    \_RefTypespec: (work@dut.mem_fwd_header_cast_i.bp_bedrock_mem_fwd_header_s), line:19:5, endln:19:32
+      |vpiParent:
+      \_StructNet: (work@dut.mem_fwd_header_cast_i), line:19:33, endln:19:54
+      |vpiName:bp_bedrock_mem_fwd_header_s
+      |vpiFullName:work@dut.mem_fwd_header_cast_i.bp_bedrock_mem_fwd_header_s
+      |vpiActual:
+      \_TypedefTypespec: (bp_bedrock_mem_fwd_header_s), line:16:7, endln:16:34
+    |vpiName:mem_fwd_header_cast_i
+    |vpiFullName:work@dut.mem_fwd_header_cast_i
   |vpiDefName:work@dut
+  |vpiNet:
+  \_StructNet: (work@dut.mem_fwd_header_cast_i), line:19:33, endln:19:54
   |vpiGenStmt:
   \_GenIf: , line:3:4, endln:21:7
     |vpiParent:

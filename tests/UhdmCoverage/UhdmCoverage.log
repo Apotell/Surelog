@@ -884,7 +884,7 @@ ArrayTypespec                                          1
 Begin                                                  6
 BitSelect                                              3
 BitTypespec                                            1
-Constant                                              35
+Constant                                              32
 ContAssign                                             6
 Design                                                 1
 GenIf                                                  1
@@ -898,14 +898,15 @@ LogicNet                                               6
 LogicTypespec                                          1
 Module                                                10
 ModuleTypespec                                         4
-Operation                                             19
+Operation                                             16
+PackedArrayTypespec                                    1
 ParamAssign                                           12
 Parameter                                             12
 Port                                                   8
-Range                                                  7
+Range                                                  4
 RefModule                                              4
-RefObj                                                38
-RefTypespec                                            7
+RefObj                                                32
+RefTypespec                                            8
 StringTypespec                                         3
 TaggedPattern                                          3
 === UHDM Object Stats End ===
@@ -980,35 +981,14 @@ Design: (unnamed)
   \_Parameter: (work@bsg_wormhole_router.cord_markers_pos_p), line:5:19, endln:5:69
     |vpiParent:
     \_Module: work@bsg_wormhole_router (work@bsg_wormhole_router), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:1:1, endln:13:10
-    |vpiSize:1
     |vpiTypespec:
     \_RefTypespec: (work@bsg_wormhole_router.cord_markers_pos_p), line:5:15, endln:5:18
       |vpiParent:
       \_Parameter: (work@bsg_wormhole_router.cord_markers_pos_p), line:5:19, endln:5:69
       |vpiFullName:work@bsg_wormhole_router.cord_markers_pos_p
       |vpiActual:
-      \_ArrayTypespec: , line:5:37, endln:5:52
+      \_ArrayTypespec: , line:5:15, endln:5:69
     |vpiSigned:1
-    |vpiRange:
-    \_Range: , line:5:37, endln:5:52
-      |vpiParent:
-      \_Parameter: (work@bsg_wormhole_router.cord_markers_pos_p), line:5:19, endln:5:69
-      |vpiLeftRange:
-      \_RefObj: (work@bsg_wormhole_router.cord_markers_pos_p.cord_dims_p), line:5:38, endln:5:49
-        |vpiParent:
-        \_Range: , line:5:37, endln:5:52
-        |vpiName:cord_dims_p
-        |vpiFullName:work@bsg_wormhole_router.cord_markers_pos_p.cord_dims_p
-        |vpiActual:
-        \_Parameter: (work@bsg_wormhole_router.cord_dims_p), line:4:14, endln:4:34
-      |vpiRightRange:
-      \_Constant: , line:5:50, endln:5:51
-        |vpiParent:
-        \_Range: , line:5:37, endln:5:52
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
     |vpiName:cord_markers_pos_p
     |vpiFullName:work@bsg_wormhole_router.cord_markers_pos_p
   |vpiParameter:
@@ -1021,7 +1001,7 @@ Design: (unnamed)
       \_Parameter: (work@bsg_wormhole_router.routing_matrix_p), line:6:51, endln:6:105
       |vpiFullName:work@bsg_wormhole_router.routing_matrix_p
       |vpiActual:
-      \_BitTypespec: , line:6:15, endln:6:50
+      \_PackedArrayTypespec: , line:6:15, endln:6:50
     |vpiName:routing_matrix_p
     |vpiFullName:work@bsg_wormhole_router.routing_matrix_p
   |vpiParamAssign:
@@ -1127,26 +1107,49 @@ Design: (unnamed)
     \_Module: work@bsg_wormhole_router (work@bsg_wormhole_router), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:1:1, endln:13:10
     |vpiSigned:1
   |vpiTypedef:
-  \_ArrayTypespec: , line:5:37, endln:5:52
+  \_ArrayTypespec: , line:5:15, endln:5:69
     |vpiParent:
     \_Module: work@bsg_wormhole_router (work@bsg_wormhole_router), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:1:1, endln:13:10
+    |vpiArrayType:1
     |vpiRange:
     \_Range: , line:5:37, endln:5:52
+      |vpiParent:
+      \_ArrayTypespec: , line:5:15, endln:5:69
+      |vpiLeftRange:
+      \_RefObj: (work@bsg_wormhole_router.cord_dims_p), line:5:38, endln:5:49
+        |vpiParent:
+        \_Range: , line:5:37, endln:5:52
+        |vpiName:cord_dims_p
+        |vpiFullName:work@bsg_wormhole_router.cord_dims_p
+        |vpiActual:
+        \_Parameter: (work@bsg_wormhole_router.cord_dims_p), line:4:14, endln:4:34
+      |vpiRightRange:
+      \_Constant: , line:5:50, endln:5:51
+        |vpiParent:
+        \_Range: , line:5:37, endln:5:52
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@bsg_wormhole_router), line:5:15, endln:5:18
       |vpiParent:
-      \_ArrayTypespec: , line:5:37, endln:5:52
+      \_ArrayTypespec: , line:5:15, endln:5:69
       |vpiFullName:work@bsg_wormhole_router
       |vpiActual:
       \_IntTypespec: , line:5:15, endln:5:18
   |vpiTypedef:
-  \_BitTypespec: , line:6:15, endln:6:50
+  \_BitTypespec: , line:6:15, endln:6:18
+    |vpiParent:
+    \_Module: work@bsg_wormhole_router (work@bsg_wormhole_router), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:1:1, endln:13:10
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:6:15, endln:6:50
     |vpiParent:
     \_Module: work@bsg_wormhole_router (work@bsg_wormhole_router), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:1:1, endln:13:10
     |vpiRange:
     \_Range: , line:6:19, endln:6:24
       |vpiParent:
-      \_BitTypespec: , line:6:15, endln:6:50
+      \_PackedArrayTypespec: , line:6:15, endln:6:50
       |vpiLeftRange:
       \_Constant: , line:6:20, endln:6:21
         |vpiParent:
@@ -1166,7 +1169,7 @@ Design: (unnamed)
     |vpiRange:
     \_Range: , line:6:24, endln:6:37
       |vpiParent:
-      \_BitTypespec: , line:6:15, endln:6:50
+      \_PackedArrayTypespec: , line:6:15, endln:6:50
       |vpiLeftRange:
       \_Operation: , line:6:25, endln:6:34
         |vpiParent:
@@ -1199,7 +1202,7 @@ Design: (unnamed)
     |vpiRange:
     \_Range: , line:6:37, endln:6:50
       |vpiParent:
-      \_BitTypespec: , line:6:15, endln:6:50
+      \_PackedArrayTypespec: , line:6:15, endln:6:50
       |vpiLeftRange:
       \_Operation: , line:6:38, endln:6:47
         |vpiParent:
@@ -1229,12 +1232,21 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@bsg_wormhole_router), line:6:15, endln:6:18
+      |vpiParent:
+      \_PackedArrayTypespec: , line:6:15, endln:6:50
+      |vpiFullName:work@bsg_wormhole_router
+      |vpiActual:
+      \_BitTypespec: , line:6:15, endln:6:18
   |vpiImportTypespec:
   \_IntTypespec: , line:5:15, endln:5:18
   |vpiImportTypespec:
-  \_ArrayTypespec: , line:5:37, endln:5:52
+  \_ArrayTypespec: , line:5:15, endln:5:69
   |vpiImportTypespec:
-  \_BitTypespec: , line:6:15, endln:6:50
+  \_BitTypespec: , line:6:15, endln:6:18
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:6:15, endln:6:50
   |vpiImportTypespec:
   \_LogicNet: (work@bsg_wormhole_router.clk_i), line:9:10, endln:9:15
     |vpiParent:
@@ -1984,31 +1996,28 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:work@e
   |vpiTypedef:
-  \_StringTypespec: (data), line:102:35, endln:102:39
+  \_StringTypespec: , line:102:35, endln:102:39
     |vpiParent:
     \_Module: work@e (work@e), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:99:1, endln:115:10
-    |vpiName:data
   |vpiTypedef:
-  \_StringTypespec: (v), line:103:42, endln:103:43
+  \_StringTypespec: , line:103:42, endln:103:43
     |vpiParent:
     \_Module: work@e (work@e), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:99:1, endln:115:10
-    |vpiName:v
   |vpiTypedef:
-  \_StringTypespec: (ready_and_rev), line:104:38, endln:104:51
+  \_StringTypespec: , line:104:38, endln:104:51
     |vpiParent:
     \_Module: work@e (work@e), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:99:1, endln:115:10
-    |vpiName:ready_and_rev
   |vpiTypedef:
   \_ModuleTypespec: (MOD), line:107:4, endln:107:7
     |vpiParent:
     \_Module: work@e (work@e), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:99:1, endln:115:10
     |vpiName:MOD
   |vpiImportTypespec:
-  \_StringTypespec: (data), line:102:35, endln:102:39
+  \_StringTypespec: , line:102:35, endln:102:39
   |vpiImportTypespec:
-  \_StringTypespec: (v), line:103:42, endln:103:43
+  \_StringTypespec: , line:103:42, endln:103:43
   |vpiImportTypespec:
-  \_StringTypespec: (ready_and_rev), line:104:38, endln:104:51
+  \_StringTypespec: , line:104:38, endln:104:51
   |vpiImportTypespec:
   \_ModuleTypespec: (MOD), line:107:4, endln:107:7
   |vpiImportTypespec:
@@ -2019,11 +2028,32 @@ Design: (unnamed)
     |vpiFullName:work@e.resp_concentrated_link_lo
     |vpiNetType:1
   |vpiImportTypespec:
+  \_LogicNet: (work@e.data), line:102:77, endln:102:81
+    |vpiParent:
+    \_Module: work@e (work@e), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:99:1, endln:115:10
+    |vpiName:data
+    |vpiFullName:work@e.data
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_LogicNet: (work@e.v), line:103:83, endln:103:84
+    |vpiParent:
+    \_Module: work@e (work@e), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:99:1, endln:115:10
+    |vpiName:v
+    |vpiFullName:work@e.v
+    |vpiNetType:1
+  |vpiImportTypespec:
   \_LogicNet: (work@e.cce_lce_resp_link_lo), line:104:53, endln:104:73
     |vpiParent:
     \_Module: work@e (work@e), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:99:1, endln:115:10
     |vpiName:cce_lce_resp_link_lo
     |vpiFullName:work@e.cce_lce_resp_link_lo
+    |vpiNetType:1
+  |vpiImportTypespec:
+  \_LogicNet: (work@e.ready_and_rev), line:104:74, endln:104:87
+    |vpiParent:
+    \_Module: work@e (work@e), file:${SURELOG_DIR}/tests/UhdmCoverage/dut.sv, line:99:1, endln:115:10
+    |vpiName:ready_and_rev
+    |vpiFullName:work@e.ready_and_rev
     |vpiNetType:1
   |vpiImportTypespec:
   \_LogicNet: (work@e.lce_resp_link_cast_o), line:102:10, endln:102:30
@@ -2036,7 +2066,13 @@ Design: (unnamed)
   |vpiNet:
   \_LogicNet: (work@e.resp_concentrated_link_lo), line:102:51, endln:102:76
   |vpiNet:
+  \_LogicNet: (work@e.data), line:102:77, endln:102:81
+  |vpiNet:
+  \_LogicNet: (work@e.v), line:103:83, endln:103:84
+  |vpiNet:
   \_LogicNet: (work@e.cce_lce_resp_link_lo), line:104:53, endln:104:73
+  |vpiNet:
+  \_LogicNet: (work@e.ready_and_rev), line:104:74, endln:104:87
   |vpiNet:
   \_LogicNet: (work@e.lce_resp_link_cast_o), line:102:10, endln:102:30
   |vpiContAssign:
@@ -2064,13 +2100,13 @@ Design: (unnamed)
             |vpiActual:
             \_LogicNet: (work@e.resp_concentrated_link_lo), line:102:51, endln:102:76
           |vpiActual:
-          \_RefTypespec: (work@e.resp_concentrated_link_lo.data.data), line:102:77, endln:102:81
+          \_RefObj: (work@e.data), line:102:77, endln:102:81
             |vpiParent:
             \_HierPath: (resp_concentrated_link_lo.data), line:102:51, endln:102:81
             |vpiName:data
-            |vpiFullName:work@e.resp_concentrated_link_lo.data.data
+            |vpiFullName:work@e.data
             |vpiActual:
-            \_StringTypespec: (data), line:102:35, endln:102:39
+            \_LogicNet: (work@e.data), line:102:77, endln:102:81
           |vpiName:resp_concentrated_link_lo.data
         |vpiTypespec:
         \_RefTypespec: (work@e.data), line:102:35, endln:102:39
@@ -2079,7 +2115,7 @@ Design: (unnamed)
           |vpiName:data
           |vpiFullName:work@e.data
           |vpiActual:
-          \_StringTypespec: (data), line:102:35, endln:102:39
+          \_StringTypespec: , line:102:35, endln:102:39
       |vpiOperand:
       \_TaggedPattern: , line:103:42, endln:103:84
         |vpiParent:
@@ -2096,13 +2132,13 @@ Design: (unnamed)
             |vpiActual:
             \_LogicNet: (work@e.resp_concentrated_link_lo), line:102:51, endln:102:76
           |vpiActual:
-          \_RefTypespec: (work@e.resp_concentrated_link_lo.v.v), line:103:83, endln:103:84
+          \_RefObj: (work@e.v), line:103:83, endln:103:84
             |vpiParent:
             \_HierPath: (resp_concentrated_link_lo.v), line:103:57, endln:103:84
             |vpiName:v
-            |vpiFullName:work@e.resp_concentrated_link_lo.v.v
+            |vpiFullName:work@e.v
             |vpiActual:
-            \_StringTypespec: (v), line:103:42, endln:103:43
+            \_LogicNet: (work@e.v), line:103:83, endln:103:84
           |vpiName:resp_concentrated_link_lo.v
         |vpiTypespec:
         \_RefTypespec: (work@e.v), line:103:42, endln:103:43
@@ -2111,7 +2147,7 @@ Design: (unnamed)
           |vpiName:v
           |vpiFullName:work@e.v
           |vpiActual:
-          \_StringTypespec: (v), line:103:42, endln:103:43
+          \_StringTypespec: , line:103:42, endln:103:43
       |vpiOperand:
       \_TaggedPattern: , line:104:38, endln:104:87
         |vpiParent:
@@ -2128,13 +2164,13 @@ Design: (unnamed)
             |vpiActual:
             \_LogicNet: (work@e.cce_lce_resp_link_lo), line:104:53, endln:104:73
           |vpiActual:
-          \_RefTypespec: (work@e.cce_lce_resp_link_lo.ready_and_rev.ready_and_rev), line:104:74, endln:104:87
+          \_RefObj: (work@e.ready_and_rev), line:104:74, endln:104:87
             |vpiParent:
             \_HierPath: (cce_lce_resp_link_lo.ready_and_rev), line:104:53, endln:104:87
             |vpiName:ready_and_rev
-            |vpiFullName:work@e.cce_lce_resp_link_lo.ready_and_rev.ready_and_rev
+            |vpiFullName:work@e.ready_and_rev
             |vpiActual:
-            \_StringTypespec: (ready_and_rev), line:104:38, endln:104:51
+            \_LogicNet: (work@e.ready_and_rev), line:104:74, endln:104:87
           |vpiName:cce_lce_resp_link_lo.ready_and_rev
         |vpiTypespec:
         \_RefTypespec: (work@e.ready_and_rev), line:104:38, endln:104:51
@@ -2143,7 +2179,7 @@ Design: (unnamed)
           |vpiName:ready_and_rev
           |vpiFullName:work@e.ready_and_rev
           |vpiActual:
-          \_StringTypespec: (ready_and_rev), line:104:38, endln:104:51
+          \_StringTypespec: , line:104:38, endln:104:51
     |vpiLhs:
     \_RefObj: (work@e.lce_resp_link_cast_o), line:102:10, endln:102:30
       |vpiParent:

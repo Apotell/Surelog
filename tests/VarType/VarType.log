@@ -80,7 +80,7 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Constant                                               2
 Design                                                 1
-LogicVar                                               1
+LogicNet                                               1
 Module                                                 2
 Operation                                              1
 RealTypespec                                           2
@@ -111,6 +111,7 @@ Design: (unnamed)
       \_RealTypespec: , line:2:1, endln:2:5
     |vpiName:a
     |vpiFullName:work@top.a
+    |vpiRandType:1
     |vpiVisibility:1
     |vpiExpr:
     \_Constant: , line:2:10, endln:2:14
@@ -133,6 +134,7 @@ Design: (unnamed)
       \_RealTypespec: , line:3:1, endln:3:5
     |vpiName:b
     |vpiFullName:work@top.b
+    |vpiRandType:1
     |vpiVisibility:1
     |vpiExpr:
     \_Constant: , line:3:10, endln:3:14
@@ -142,15 +144,6 @@ Design: (unnamed)
       |vpiSize:64
       |REAL:0.740000
       |vpiConstType:2
-  |vpiVariables:
-  \_LogicVar: (work@top.c), line:4:15, endln:4:16
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/VarType/dut.sv, line:1:1, endln:5:10
-    |vpiName:c
-    |vpiFullName:work@top.c
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@top.c), line:4:15, endln:4:16
   |vpiTypedef:
   \_RealTypespec: , line:2:1, endln:2:5
     |vpiParent:
@@ -168,8 +161,14 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_RealVar: (work@top.b), line:3:6, endln:3:7
   |vpiImportTypespec:
-  \_LogicVar: (work@top.c), line:4:15, endln:4:16
+  \_LogicNet: (work@top.c), line:4:15, endln:4:16
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/VarType/dut.sv, line:1:1, endln:5:10
+    |vpiName:c
+    |vpiFullName:work@top.c
   |vpiDefName:work@top
+  |vpiNet:
+  \_LogicNet: (work@top.c), line:4:15, endln:4:16
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

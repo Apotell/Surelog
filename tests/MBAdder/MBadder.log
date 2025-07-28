@@ -140,7 +140,7 @@ there are 1 more instances of this message.
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ClassDefn                                              8
 ClassTypespec                                          1
-Constant                                              23
+Constant                                               5
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              5
@@ -154,10 +154,10 @@ Module                                                 1
 Operation                                              3
 Package                                                1
 Port                                                   5
-Range                                                  9
 RefObj                                                 5
-RefTypespec                                           12
+RefTypespec                                           13
 Task                                                   9
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/MBadder/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -426,7 +426,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -460,14 +460,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/MBAdder/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -475,7 +474,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -483,7 +482,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -491,7 +490,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -499,13 +498,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/MBAdder/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -708,46 +721,46 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:work@MultibitAdder
   |vpiImportTypespec:
-  \_LogicNet: (work@MultibitAdder.a), line:2:14, endln:2:15
+  \_LogicNet: (work@MultibitAdder.a), line:1:22, endln:1:23
     |vpiParent:
     \_Module: work@MultibitAdder (work@MultibitAdder), file:${SURELOG_DIR}/tests/MBAdder/dut.sv, line:1:1, endln:7:10
     |vpiName:a
     |vpiFullName:work@MultibitAdder.a
   |vpiImportTypespec:
-  \_LogicNet: (work@MultibitAdder.b), line:2:16, endln:2:17
+  \_LogicNet: (work@MultibitAdder.b), line:1:24, endln:1:25
     |vpiParent:
     \_Module: work@MultibitAdder (work@MultibitAdder), file:${SURELOG_DIR}/tests/MBAdder/dut.sv, line:1:1, endln:7:10
     |vpiName:b
     |vpiFullName:work@MultibitAdder.b
   |vpiImportTypespec:
-  \_LogicNet: (work@MultibitAdder.cin), line:3:8, endln:3:11
+  \_LogicNet: (work@MultibitAdder.cin), line:1:26, endln:1:29
     |vpiParent:
     \_Module: work@MultibitAdder (work@MultibitAdder), file:${SURELOG_DIR}/tests/MBAdder/dut.sv, line:1:1, endln:7:10
     |vpiName:cin
     |vpiFullName:work@MultibitAdder.cin
   |vpiImportTypespec:
-  \_LogicNet: (work@MultibitAdder.sum), line:4:14, endln:4:17
+  \_LogicNet: (work@MultibitAdder.sum), line:1:30, endln:1:33
     |vpiParent:
     \_Module: work@MultibitAdder (work@MultibitAdder), file:${SURELOG_DIR}/tests/MBAdder/dut.sv, line:1:1, endln:7:10
     |vpiName:sum
     |vpiFullName:work@MultibitAdder.sum
   |vpiImportTypespec:
-  \_LogicNet: (work@MultibitAdder.cout), line:5:9, endln:5:13
+  \_LogicNet: (work@MultibitAdder.cout), line:1:34, endln:1:38
     |vpiParent:
     \_Module: work@MultibitAdder (work@MultibitAdder), file:${SURELOG_DIR}/tests/MBAdder/dut.sv, line:1:1, endln:7:10
     |vpiName:cout
     |vpiFullName:work@MultibitAdder.cout
   |vpiDefName:work@MultibitAdder
   |vpiNet:
-  \_LogicNet: (work@MultibitAdder.a), line:2:14, endln:2:15
+  \_LogicNet: (work@MultibitAdder.a), line:1:22, endln:1:23
   |vpiNet:
-  \_LogicNet: (work@MultibitAdder.b), line:2:16, endln:2:17
+  \_LogicNet: (work@MultibitAdder.b), line:1:24, endln:1:25
   |vpiNet:
-  \_LogicNet: (work@MultibitAdder.cin), line:3:8, endln:3:11
+  \_LogicNet: (work@MultibitAdder.cin), line:1:26, endln:1:29
   |vpiNet:
-  \_LogicNet: (work@MultibitAdder.sum), line:4:14, endln:4:17
+  \_LogicNet: (work@MultibitAdder.sum), line:1:30, endln:1:33
   |vpiNet:
-  \_LogicNet: (work@MultibitAdder.cout), line:5:9, endln:5:13
+  \_LogicNet: (work@MultibitAdder.cout), line:1:34, endln:1:38
   |vpiPort:
   \_Port: (a), line:1:22, endln:1:23
     |vpiParent:
@@ -799,7 +812,7 @@ Design: (unnamed)
           |vpiName:a
           |vpiFullName:work@MultibitAdder.a
           |vpiActual:
-          \_LogicNet: (work@MultibitAdder.a), line:2:14, endln:2:15
+          \_LogicNet: (work@MultibitAdder.a), line:1:22, endln:1:23
         |vpiOperand:
         \_RefObj: (work@MultibitAdder.b), line:6:22, endln:6:23
           |vpiParent:
@@ -807,7 +820,7 @@ Design: (unnamed)
           |vpiName:b
           |vpiFullName:work@MultibitAdder.b
           |vpiActual:
-          \_LogicNet: (work@MultibitAdder.b), line:2:16, endln:2:17
+          \_LogicNet: (work@MultibitAdder.b), line:1:24, endln:1:25
       |vpiOperand:
       \_RefObj: (work@MultibitAdder.cin), line:6:24, endln:6:27
         |vpiParent:
@@ -815,7 +828,7 @@ Design: (unnamed)
         |vpiName:cin
         |vpiFullName:work@MultibitAdder.cin
         |vpiActual:
-        \_LogicNet: (work@MultibitAdder.cin), line:3:8, endln:3:11
+        \_LogicNet: (work@MultibitAdder.cin), line:1:26, endln:1:29
     |vpiLhs:
     \_Operation: , line:6:9, endln:6:19
       |vpiParent:
@@ -828,7 +841,7 @@ Design: (unnamed)
         |vpiName:cout
         |vpiFullName:work@MultibitAdder.cout
         |vpiActual:
-        \_LogicNet: (work@MultibitAdder.cout), line:5:9, endln:5:13
+        \_LogicNet: (work@MultibitAdder.cout), line:1:34, endln:1:38
       |vpiOperand:
       \_RefObj: (work@MultibitAdder.sum), line:6:15, endln:6:18
         |vpiParent:
@@ -836,7 +849,7 @@ Design: (unnamed)
         |vpiName:sum
         |vpiFullName:work@MultibitAdder.sum
         |vpiActual:
-        \_LogicNet: (work@MultibitAdder.sum), line:4:14, endln:4:17
+        \_LogicNet: (work@MultibitAdder.sum), line:1:30, endln:1:33
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

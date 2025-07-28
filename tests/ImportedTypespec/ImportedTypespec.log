@@ -102,7 +102,7 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/ImportedTypespec/dut.sv:6:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                               8
+Constant                                               6
 ContAssign                                             1
 Design                                                 1
 ImportTypespec                                         1
@@ -110,16 +110,16 @@ IntTypespec                                            3
 IntVar                                                 1
 LogicTypespec                                          1
 Module                                                 2
-Operation                                              2
+Operation                                              1
 Package                                                1
-PackedArrayTypespec                                    1
 ParamAssign                                            1
 Parameter                                              1
 Port                                                   1
-Range                                                  2
-RefObj                                                 4
-RefTypespec                                            4
+Range                                                  1
+RefObj                                                 3
+RefTypespec                                            5
 SysFuncCall                                            1
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ImportedTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -164,13 +164,13 @@ Design: (unnamed)
     |vpiParent:
     \_Package: spi_device_pkg (spi_device_pkg), file:${SURELOG_DIR}/tests/ImportedTypespec/dut.sv, line:1:1, endln:4:11
   |vpiTypedef:
-  \_PackedArrayTypespec: , line:3:12, endln:3:30
+  \_LogicTypespec: , line:3:12, endln:3:30
     |vpiParent:
     \_Package: spi_device_pkg (spi_device_pkg), file:${SURELOG_DIR}/tests/ImportedTypespec/dut.sv, line:1:1, endln:4:11
     |vpiRange:
     \_Range: , line:3:18, endln:3:30
       |vpiParent:
-      \_PackedArrayTypespec: , line:3:12, endln:3:30
+      \_LogicTypespec: , line:3:12, endln:3:30
       |vpiLeftRange:
       \_Operation: , line:3:19, endln:3:27
         |vpiParent:
@@ -201,49 +201,23 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_LogicTypespec: (sram_addr_t), line:3:12, endln:3:30
+  \_TypedefTypespec: (spi_device_pkg::sram_addr_t), line:3:31, endln:3:42
     |vpiParent:
     \_Package: spi_device_pkg (spi_device_pkg), file:${SURELOG_DIR}/tests/ImportedTypespec/dut.sv, line:1:1, endln:4:11
-    |vpiName:sram_addr_t
-    |vpiRange:
-    \_Range: , line:3:18, endln:3:30
+    |vpiName:spi_device_pkg::sram_addr_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (spi_device_pkg::sram_addr_t), line:3:12, endln:3:17
       |vpiParent:
-      \_LogicTypespec: (sram_addr_t), line:3:12, endln:3:30
-      |vpiLeftRange:
-      \_Operation: , line:3:19, endln:3:27
-        |vpiParent:
-        \_Range: , line:3:18, endln:3:30
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (spi_device_pkg::sram_addr_t::SramAw), line:3:19, endln:3:25
-          |vpiParent:
-          \_Operation: , line:3:19, endln:3:27
-          |vpiName:SramAw
-          |vpiFullName:spi_device_pkg::sram_addr_t::SramAw
-          |vpiActual:
-          \_Parameter: (spi_device_pkg::SramAw), line:2:27, endln:2:38
-        |vpiOperand:
-        \_Constant: , line:3:26, endln:3:27
-          |vpiParent:
-          \_Operation: , line:3:19, endln:3:27
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:3:28, endln:3:29
-        |vpiParent:
-        \_Range: , line:3:18, endln:3:30
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
+      \_TypedefTypespec: (spi_device_pkg::sram_addr_t), line:3:31, endln:3:42
+      |vpiFullName:spi_device_pkg::sram_addr_t
+      |vpiActual:
+      \_LogicTypespec: , line:3:12, endln:3:30
   |vpiImportTypespec:
   \_IntTypespec: , line:2:14, endln:2:26
   |vpiImportTypespec:
-  \_PackedArrayTypespec: , line:3:12, endln:3:30
+  \_LogicTypespec: , line:3:12, endln:3:30
   |vpiImportTypespec:
-  \_LogicTypespec: (sram_addr_t), line:3:12, endln:3:30
+  \_TypedefTypespec: (spi_device_pkg::sram_addr_t), line:3:31, endln:3:42
   |vpiDefName:spi_device_pkg
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ImportedTypespec/dut.sv, line:6:1, endln:10:10
@@ -264,6 +238,7 @@ Design: (unnamed)
     |vpiName:o
     |vpiFullName:work@top.o
     |vpiSigned:1
+    |vpiRandType:1
     |vpiVisibility:1
   |vpiTypedef:
   \_ImportTypespec: (spi_device_pkg), line:7:11, endln:7:28

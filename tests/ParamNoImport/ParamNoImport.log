@@ -131,10 +131,11 @@ ParamAssign                                            2
 Parameter                                              2
 Range                                                  1
 RefModule                                              1
-RefTypespec                                            6
+RefTypespec                                            7
 StringTypespec                                         3
 StructTypespec                                         1
 TaggedPattern                                          3
+TypedefTypespec                                        1
 TypespecMember                                         1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamNoImport/slpp_all/surelog.uhdm ...
@@ -158,7 +159,7 @@ Design: (unnamed)
       |vpiName:pwr_ast_rsp_t
       |vpiFullName:pkg::PWR_AST_RSP_DEFAULT::pwr_ast_rsp_t
       |vpiActual:
-      \_StructTypespec: (pkg::pwr_ast_rsp_t), line:6:9, endln:8:2
+      \_TypedefTypespec: (pkg::pwr_ast_rsp_t), line:8:3, endln:8:16
     |vpiName:PWR_AST_RSP_DEFAULT
     |vpiFullName:pkg::PWR_AST_RSP_DEFAULT
   |vpiParamAssign:
@@ -189,25 +190,36 @@ Design: (unnamed)
           |vpiName:slow_clk_val
           |vpiFullName:pkg::slow_clk_val
           |vpiActual:
-          \_StringTypespec: (slow_clk_val), line:10:3, endln:10:15
+          \_StringTypespec: , line:10:3, endln:10:15
     |vpiLhs:
     \_Parameter: (pkg::PWR_AST_RSP_DEFAULT), line:9:25, endln:11:2
   |vpiTypedef:
-  \_StructTypespec: (pkg::pwr_ast_rsp_t), line:6:9, endln:8:2
+  \_TypedefTypespec: (pkg::pwr_ast_rsp_t), line:8:3, endln:8:16
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
     |vpiName:pkg::pwr_ast_rsp_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (pkg::pwr_ast_rsp_t), line:6:9, endln:8:2
+      |vpiParent:
+      \_TypedefTypespec: (pkg::pwr_ast_rsp_t), line:8:3, endln:8:16
+      |vpiFullName:pkg::pwr_ast_rsp_t
+      |vpiActual:
+      \_StructTypespec: , line:6:9, endln:8:2
+  |vpiTypedef:
+  \_StructTypespec: , line:6:9, endln:8:2
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (slow_clk_val), line:7:15, endln:7:27
       |vpiParent:
-      \_StructTypespec: (pkg::pwr_ast_rsp_t), line:6:9, endln:8:2
+      \_StructTypespec: , line:6:9, endln:8:2
       |vpiName:slow_clk_val
       |vpiTypespec:
-      \_RefTypespec: (pkg::pwr_ast_rsp_t::slow_clk_val), line:7:3, endln:7:14
+      \_RefTypespec: (pkg::slow_clk_val), line:7:3, endln:7:14
         |vpiParent:
         \_TypespecMember: (slow_clk_val), line:7:15, endln:7:27
-        |vpiFullName:pkg::pwr_ast_rsp_t::slow_clk_val
+        |vpiFullName:pkg::slow_clk_val
         |vpiActual:
         \_LogicTypespec: , line:7:3, endln:7:14
   |vpiTypedef:
@@ -235,30 +247,29 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_StringTypespec: (slow_clk_val), line:10:3, endln:10:15
+  \_StringTypespec: , line:10:3, endln:10:15
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
-    |vpiName:slow_clk_val
   |vpiTypedef:
-  \_StringTypespec: (slow_clk_val), line:10:3, endln:10:15
+  \_StringTypespec: , line:10:3, endln:10:15
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
-    |vpiName:slow_clk_val
   |vpiTypedef:
-  \_StringTypespec: (slow_clk_val), line:10:3, endln:10:15
+  \_StringTypespec: , line:10:3, endln:10:15
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:5:1, endln:12:11
-    |vpiName:slow_clk_val
   |vpiImportTypespec:
-  \_StructTypespec: (pkg::pwr_ast_rsp_t), line:6:9, endln:8:2
+  \_TypedefTypespec: (pkg::pwr_ast_rsp_t), line:8:3, endln:8:16
+  |vpiImportTypespec:
+  \_StructTypespec: , line:6:9, endln:8:2
   |vpiImportTypespec:
   \_LogicTypespec: , line:7:3, endln:7:14
   |vpiImportTypespec:
-  \_StringTypespec: (slow_clk_val), line:10:3, endln:10:15
+  \_StringTypespec: , line:10:3, endln:10:15
   |vpiImportTypespec:
-  \_StringTypespec: (slow_clk_val), line:10:3, endln:10:15
+  \_StringTypespec: , line:10:3, endln:10:15
   |vpiImportTypespec:
-  \_StringTypespec: (slow_clk_val), line:10:3, endln:10:15
+  \_StringTypespec: , line:10:3, endln:10:15
   |vpiDefName:pkg
 |vpiAllModules:
 \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamNoImport/dut.sv, line:14:1, endln:18:10

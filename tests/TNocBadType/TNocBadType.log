@@ -74,7 +74,8 @@ Interface                                              1
 InterfaceTypespec                                      1
 LogicNet                                               1
 Module                                                 1
-RefTypespec                                            1
+RefTypespec                                            3
+TypedefTypespec                                        2
 UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TNocBadType/slpp_all/surelog.uhdm ...
@@ -88,15 +89,28 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:work@tnoc_types
   |vpiTypedef:
-  \_IntTypespec: (tnoc_common_header), line:2:10, endln:2:13
+  \_IntTypespec: , line:2:10, endln:2:13
     |vpiParent:
     \_Interface: work@tnoc_types (work@tnoc_types), file:${SURELOG_DIR}/tests/TNocBadType/dut.sv, line:1:1, endln:4:13
-    |vpiName:tnoc_common_header
+    |vpiSigned:1
+  |vpiTypedef:
+  \_TypedefTypespec: (tnoc_common_header), line:2:14, endln:2:32
+    |vpiParent:
+    \_Interface: work@tnoc_types (work@tnoc_types), file:${SURELOG_DIR}/tests/TNocBadType/dut.sv, line:1:1, endln:4:13
     |vpiInstance:
     \_Interface: work@tnoc_types (work@tnoc_types), file:${SURELOG_DIR}/tests/TNocBadType/dut.sv, line:1:1, endln:4:13
-    |vpiSigned:1
+    |vpiName:tnoc_common_header
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@tnoc_types.tnoc_common_header), line:2:10, endln:2:13
+      |vpiParent:
+      \_TypedefTypespec: (tnoc_common_header), line:2:14, endln:2:32
+      |vpiFullName:work@tnoc_types.tnoc_common_header
+      |vpiActual:
+      \_IntTypespec: , line:2:10, endln:2:13
   |vpiImportTypespec:
-  \_IntTypespec: (tnoc_common_header), line:2:10, endln:2:13
+  \_IntTypespec: , line:2:10, endln:2:13
+  |vpiImportTypespec:
+  \_TypedefTypespec: (tnoc_common_header), line:2:14, endln:2:32
   |vpiDefName:work@tnoc_types
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TNocBadType/dut.sv, line:7:1, endln:13:10
@@ -104,21 +118,35 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:work@top
   |vpiTypedef:
+  \_TypedefTypespec: (tnoc_common_header), line:10:37, endln:10:55
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TNocBadType/dut.sv, line:7:1, endln:13:10
+    |vpiName:tnoc_common_header
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@top.tnoc_common_header), line:10:11, endln:10:16
+      |vpiParent:
+      \_TypedefTypespec: (tnoc_common_header), line:10:37, endln:10:55
+      |vpiFullName:work@top.tnoc_common_header
+      |vpiActual:
+      \_UnsupportedTypespec: (types), line:10:11, endln:10:16
+  |vpiTypedef:
+  \_UnsupportedTypespec: (types), line:10:11, endln:10:16
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TNocBadType/dut.sv, line:7:1, endln:13:10
+    |vpiName:types
+  |vpiTypedef:
   \_InterfaceTypespec: (tnoc_types), line:8:4, endln:8:14
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TNocBadType/dut.sv, line:7:1, endln:13:10
     |vpiName:tnoc_types
     |vpiInterface:
     \_Interface: work@tnoc_types (work@tnoc_types), file:${SURELOG_DIR}/tests/TNocBadType/dut.sv, line:1:1, endln:4:13
-  |vpiTypedef:
-  \_UnsupportedTypespec: (tnoc_common_header), line:12:3, endln:12:21
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TNocBadType/dut.sv, line:7:1, endln:13:10
-    |vpiName:tnoc_common_header
+  |vpiImportTypespec:
+  \_TypedefTypespec: (tnoc_common_header), line:10:37, endln:10:55
+  |vpiImportTypespec:
+  \_UnsupportedTypespec: (types), line:10:11, endln:10:16
   |vpiImportTypespec:
   \_InterfaceTypespec: (tnoc_types), line:8:4, endln:8:14
-  |vpiImportTypespec:
-  \_UnsupportedTypespec: (tnoc_common_header), line:12:3, endln:12:21
   |vpiImportTypespec:
   \_LogicNet: (work@top.common_header), line:12:23, endln:12:36
     |vpiParent:
@@ -130,7 +158,7 @@ Design: (unnamed)
       |vpiName:tnoc_common_header
       |vpiFullName:work@top.common_header.tnoc_common_header
       |vpiActual:
-      \_UnsupportedTypespec: (tnoc_common_header), line:12:3, endln:12:21
+      \_TypedefTypespec: (tnoc_common_header), line:10:37, endln:10:55
     |vpiName:common_header
     |vpiFullName:work@top.common_header
   |vpiDefName:work@top

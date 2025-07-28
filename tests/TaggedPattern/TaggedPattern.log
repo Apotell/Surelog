@@ -153,15 +153,17 @@ IntTypespec                                            9
 LogicTypespec                                          1
 Module                                                 1
 Package                                                1
+PackedArrayTypespec                                    2
 Range                                                  2
 RefObj                                                 3
-RefTypespec                                           15
-StructNet                                              1
+RefTypespec                                           18
 SysFuncCall                                            1
 TaggedPattern                                          2
 Task                                                   9
+TypedefTypespec                                        1
 TypespecMember                                         2
 UnionTypespec                                          1
+UnionVar                                               1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TaggedPattern/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -430,7 +432,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -464,14 +466,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/TaggedPattern/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -479,7 +480,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -487,7 +488,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -495,7 +496,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -503,13 +504,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/TaggedPattern/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -711,6 +726,21 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@top
+  |vpiVariables:
+  \_UnionVar: (work@top.un), line:6:4, endln:6:6
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TaggedPattern/dut.sv, line:1:1, endln:14:11
+    |vpiTypespec:
+    \_RefTypespec: (work@top.un), line:3:2, endln:6:3
+      |vpiParent:
+      \_UnionVar: (work@top.un), line:6:4, endln:6:6
+      |vpiFullName:work@top.un
+      |vpiActual:
+      \_UnionTypespec: , line:3:2, endln:6:3
+    |vpiName:un
+    |vpiFullName:work@top.un
+    |vpiRandType:1
+    |vpiVisibility:1
   |vpiTypedef:
   \_UnionTypespec: , line:3:2, endln:6:3
     |vpiParent:
@@ -727,7 +757,7 @@ Design: (unnamed)
         \_TypespecMember: (v1), line:4:13, endln:4:15
         |vpiFullName:work@top.v1
         |vpiActual:
-        \_BitTypespec: , line:4:3, endln:4:12
+        \_PackedArrayTypespec: , line:4:3, endln:4:12
     |vpiTypespecMember:
     \_TypespecMember: (v2), line:5:13, endln:5:15
       |vpiParent:
@@ -739,15 +769,19 @@ Design: (unnamed)
         \_TypespecMember: (v2), line:5:13, endln:5:15
         |vpiFullName:work@top.v2
         |vpiActual:
-        \_BitTypespec: , line:5:3, endln:5:12
+        \_PackedArrayTypespec: , line:5:3, endln:5:12
   |vpiTypedef:
-  \_BitTypespec: , line:4:3, endln:4:12
+  \_BitTypespec: , line:4:3, endln:4:6
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TaggedPattern/dut.sv, line:1:1, endln:14:11
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:4:3, endln:4:12
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TaggedPattern/dut.sv, line:1:1, endln:14:11
     |vpiRange:
     \_Range: , line:4:7, endln:4:12
       |vpiParent:
-      \_BitTypespec: , line:4:3, endln:4:12
+      \_PackedArrayTypespec: , line:4:3, endln:4:12
       |vpiLeftRange:
       \_Constant: , line:4:8, endln:4:9
         |vpiParent:
@@ -764,14 +798,25 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@top), line:4:3, endln:4:6
+      |vpiParent:
+      \_PackedArrayTypespec: , line:4:3, endln:4:12
+      |vpiFullName:work@top
+      |vpiActual:
+      \_BitTypespec: , line:4:3, endln:4:6
   |vpiTypedef:
-  \_BitTypespec: , line:5:3, endln:5:12
+  \_BitTypespec: , line:5:3, endln:5:6
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TaggedPattern/dut.sv, line:1:1, endln:14:11
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:5:3, endln:5:12
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TaggedPattern/dut.sv, line:1:1, endln:14:11
     |vpiRange:
     \_Range: , line:5:7, endln:5:12
       |vpiParent:
-      \_BitTypespec: , line:5:3, endln:5:12
+      \_PackedArrayTypespec: , line:5:3, endln:5:12
       |vpiLeftRange:
       \_Constant: , line:5:8, endln:5:9
         |vpiParent:
@@ -788,29 +833,26 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@top), line:5:3, endln:5:6
+      |vpiParent:
+      \_PackedArrayTypespec: , line:5:3, endln:5:12
+      |vpiFullName:work@top
+      |vpiActual:
+      \_BitTypespec: , line:5:3, endln:5:6
   |vpiImportTypespec:
   \_UnionTypespec: , line:3:2, endln:6:3
   |vpiImportTypespec:
-  \_BitTypespec: , line:4:3, endln:4:12
+  \_BitTypespec: , line:4:3, endln:4:6
   |vpiImportTypespec:
-  \_BitTypespec: , line:5:3, endln:5:12
+  \_PackedArrayTypespec: , line:4:3, endln:4:12
   |vpiImportTypespec:
-  \_StructNet: (work@top.un), line:6:4, endln:6:6
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TaggedPattern/dut.sv, line:1:1, endln:14:11
-    |vpiTypespec:
-    \_RefTypespec: (work@top.un.un), line:3:2, endln:3:21
-      |vpiParent:
-      \_StructNet: (work@top.un), line:6:4, endln:6:6
-      |vpiName:un
-      |vpiFullName:work@top.un.un
-      |vpiActual:
-      \_UnionTypespec: , line:3:2, endln:6:3
-    |vpiName:un
-    |vpiFullName:work@top.un
+  \_BitTypespec: , line:5:3, endln:5:6
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:5:3, endln:5:12
+  |vpiImportTypespec:
+  \_UnionVar: (work@top.un), line:6:4, endln:6:6
   |vpiDefName:work@top
-  |vpiNet:
-  \_StructNet: (work@top.un), line:6:4, endln:6:6
   |vpiProcess:
   \_Initial: , line:8:2, endln:12:5
     |vpiParent:
@@ -846,7 +888,7 @@ Design: (unnamed)
           |vpiName:un
           |vpiFullName:work@top.un
           |vpiActual:
-          \_StructNet: (work@top.un), line:6:4, endln:6:6
+          \_UnionVar: (work@top.un), line:6:4, endln:6:6
       |vpiStmt:
       \_Assignment: , line:10:3, endln:10:22
         |vpiParent:
@@ -873,7 +915,7 @@ Design: (unnamed)
           |vpiName:un
           |vpiFullName:work@top.un
           |vpiActual:
-          \_StructNet: (work@top.un), line:6:4, endln:6:6
+          \_UnionVar: (work@top.un), line:6:4, endln:6:6
       |vpiStmt:
       \_SysFuncCall: ($display), line:11:3, endln:11:49
         |vpiParent:
@@ -893,7 +935,7 @@ Design: (unnamed)
           |vpiName:un
           |vpiFullName:work@top.un
           |vpiActual:
-          \_StructNet: (work@top.un), line:6:4, endln:6:6
+          \_UnionVar: (work@top.un), line:6:4, endln:6:6
         |vpiName:$display
 ===================
 [  FATAL] : 0

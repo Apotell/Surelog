@@ -170,24 +170,24 @@ Function                                               1
 HierPath                                               2
 IntTypespec                                            1
 IntVar                                                 1
-LogicVar                                               1
+LogicNet                                               1
 MethodFuncCall                                         1
 Module                                                 1
 Package                                                1
 Range                                                  2
 RefObj                                                 5
-RefTypespec                                           11
+RefTypespec                                           12
 RefVar                                                 3
 TypeParameter                                          2
 UnsupportedTypespec                                    1
 VoidTypespec                                           1
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:60: Failed to bind object: "id: 48, name: cb_".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:60: Illegal implicit net "id:48, name: cb_".
-[ERR:UH0734] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:73: Failed to bind object: "id: 50, name: cb_".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:73: Illegal implicit net "id:50, name: cb_".
-[ERR:UH0734] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:77: Failed to bind object: "id: 51, name: get_inst_id".
-[ERR:EL0535] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:77: Illegal implicit net "id:51, name: get_inst_id".
+[ERR:UH0734] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:60: Failed to bind object: "id: 49, name: cb_".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:60: Illegal implicit net "id:49, name: cb_".
+[ERR:UH0734] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:73: Failed to bind object: "id: 51, name: cb_".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:73: Illegal implicit net "id:51, name: cb_".
+[ERR:UH0734] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:77: Failed to bind object: "id: 52, name: get_inst_id".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv:19:77: Illegal implicit net "id:52, name: get_inst_id".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ArrayMethodIterator/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -225,6 +225,7 @@ Design: (unnamed)
       |vpiFullName:pkg::uvm_callback::get_inst_id
       |vpiSigned:1
       |vpiAutomatic:1
+      |vpiRandType:1
       |vpiVisibility:1
     |vpiTypedef:
     \_IntTypespec: , line:7:4, endln:7:7
@@ -537,15 +538,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@top
-  |vpiVariables:
-  \_LogicVar: (work@top.c1), line:29:20, endln:29:22
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:27:1, endln:31:10
-    |vpiName:c1
-    |vpiFullName:work@top.c1
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@top.c1), line:29:20, endln:29:22
   |vpiTypedef:
   \_UnsupportedTypespec: (pkg::uvm_callbacks), line:29:1, endln:29:19
     |vpiParent:
@@ -554,8 +546,22 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_UnsupportedTypespec: (pkg::uvm_callbacks), line:29:1, endln:29:19
   |vpiImportTypespec:
-  \_LogicVar: (work@top.c1), line:29:20, endln:29:22
+  \_LogicNet: (work@top.c1), line:29:20, endln:29:22
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ArrayMethodIterator/dut.sv, line:27:1, endln:31:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.c1.pkg::uvm_callbacks), line:29:1, endln:29:19
+      |vpiParent:
+      \_LogicNet: (work@top.c1), line:29:20, endln:29:22
+      |vpiName:pkg::uvm_callbacks
+      |vpiFullName:work@top.c1.pkg::uvm_callbacks
+      |vpiActual:
+      \_UnsupportedTypespec: (pkg::uvm_callbacks), line:29:1, endln:29:19
+    |vpiName:c1
+    |vpiFullName:work@top.c1
   |vpiDefName:work@top
+  |vpiNet:
+  \_LogicNet: (work@top.c1), line:29:20, endln:29:22
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

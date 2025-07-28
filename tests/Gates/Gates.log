@@ -2837,7 +2837,7 @@ Assignment                                            48
 Begin                                                  7
 ClassDefn                                              8
 ClassTypespec                                          1
-Constant                                              68
+Constant                                              62
 DelayControl                                          33
 Design                                                 1
 EnumConst                                              5
@@ -2855,11 +2855,12 @@ Operation                                              6
 Package                                                1
 Port                                                   4
 PrimTerm                                              91
-Range                                                  7
+Range                                                  4
 RefObj                                               186
-RefTypespec                                           76
+RefTypespec                                           77
 SysFuncCall                                           16
 Task                                                   9
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Gates/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -3128,7 +3129,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -3162,14 +3163,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/Gates/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -3177,7 +3177,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -3185,7 +3185,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -3193,7 +3193,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -3201,13 +3201,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/Gates/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -4943,7 +4957,7 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@gate_array (work@gate_array), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:230:1, endln:235:10
     |vpiTypespec:
-    \_RefTypespec: (work@gate_array.out), line:232:1, endln:232:11
+    \_RefTypespec: (work@gate_array.out), line:232:1, endln:232:5
       |vpiParent:
       \_LogicNet: (work@gate_array.out), line:232:12, endln:232:15
       |vpiFullName:work@gate_array.out
@@ -4959,7 +4973,7 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@gate_array (work@gate_array), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:230:1, endln:235:10
     |vpiTypespec:
-    \_RefTypespec: (work@gate_array.in1), line:232:1, endln:232:11
+    \_RefTypespec: (work@gate_array.in1), line:232:1, endln:232:5
       |vpiParent:
       \_LogicNet: (work@gate_array.in1), line:232:17, endln:232:20
       |vpiFullName:work@gate_array.in1
@@ -4975,7 +4989,7 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@gate_array (work@gate_array), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:230:1, endln:235:10
     |vpiTypespec:
-    \_RefTypespec: (work@gate_array.in2), line:232:1, endln:232:11
+    \_RefTypespec: (work@gate_array.in2), line:232:1, endln:232:5
       |vpiParent:
       \_LogicNet: (work@gate_array.in2), line:232:22, endln:232:25
       |vpiFullName:work@gate_array.in2
@@ -5709,13 +5723,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@half_adder (work@half_adder), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:222:1, endln:227:10
   |vpiImportTypespec:
-  \_LogicNet: (work@half_adder.A), line:223:8, endln:223:9
+  \_LogicNet: (work@half_adder.A), line:222:31, endln:222:32
     |vpiParent:
     \_Module: work@half_adder (work@half_adder), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:222:1, endln:227:10
     |vpiName:A
     |vpiFullName:work@half_adder.A
   |vpiImportTypespec:
-  \_LogicNet: (work@half_adder.B), line:223:11, endln:223:12
+  \_LogicNet: (work@half_adder.B), line:222:34, endln:222:35
     |vpiParent:
     \_Module: work@half_adder (work@half_adder), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:222:1, endln:227:10
     |vpiName:B
@@ -5723,13 +5737,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:224:9, endln:224:13
   |vpiImportTypespec:
-  \_LogicNet: (work@half_adder.Sum), line:224:14, endln:224:17
+  \_LogicNet: (work@half_adder.Sum), line:222:19, endln:222:22
     |vpiParent:
     \_Module: work@half_adder (work@half_adder), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:222:1, endln:227:10
     |vpiTypespec:
     \_RefTypespec: (work@half_adder.Sum), line:224:9, endln:224:13
       |vpiParent:
-      \_LogicNet: (work@half_adder.Sum), line:224:14, endln:224:17
+      \_LogicNet: (work@half_adder.Sum), line:222:19, endln:222:22
       |vpiFullName:work@half_adder.Sum
       |vpiActual:
       \_LogicTypespec: , line:224:9, endln:224:13
@@ -5739,13 +5753,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:224:9, endln:224:13
   |vpiImportTypespec:
-  \_LogicNet: (work@half_adder.Carry), line:224:19, endln:224:24
+  \_LogicNet: (work@half_adder.Carry), line:222:24, endln:222:29
     |vpiParent:
     \_Module: work@half_adder (work@half_adder), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:222:1, endln:227:10
     |vpiTypespec:
     \_RefTypespec: (work@half_adder.Carry), line:224:9, endln:224:13
       |vpiParent:
-      \_LogicNet: (work@half_adder.Carry), line:224:19, endln:224:24
+      \_LogicNet: (work@half_adder.Carry), line:222:24, endln:222:29
       |vpiFullName:work@half_adder.Carry
       |vpiActual:
       \_LogicTypespec: , line:224:9, endln:224:13
@@ -5758,13 +5772,13 @@ Design: (unnamed)
   \_LogicTypespec: , line:224:9, endln:224:13
   |vpiDefName:work@half_adder
   |vpiNet:
-  \_LogicNet: (work@half_adder.A), line:223:8, endln:223:9
+  \_LogicNet: (work@half_adder.A), line:222:31, endln:222:32
   |vpiNet:
-  \_LogicNet: (work@half_adder.B), line:223:11, endln:223:12
+  \_LogicNet: (work@half_adder.B), line:222:34, endln:222:35
   |vpiNet:
-  \_LogicNet: (work@half_adder.Sum), line:224:14, endln:224:17
+  \_LogicNet: (work@half_adder.Sum), line:222:19, endln:222:22
   |vpiNet:
-  \_LogicNet: (work@half_adder.Carry), line:224:19, endln:224:24
+  \_LogicNet: (work@half_adder.Carry), line:222:24, endln:222:29
   |vpiPort:
   \_Port: (Sum), line:222:19, endln:222:22
     |vpiParent:
@@ -5822,7 +5836,7 @@ Design: (unnamed)
         |vpiName:A
         |vpiFullName:work@half_adder.work@xor.A
         |vpiActual:
-        \_LogicNet: (work@half_adder.A), line:223:8, endln:223:9
+        \_LogicNet: (work@half_adder.A), line:222:31, endln:222:32
     |vpiPrimTerm:
     \_PrimTerm: , line:225:21, endln:225:22
       |vpiParent:
@@ -5836,7 +5850,7 @@ Design: (unnamed)
         |vpiName:B
         |vpiFullName:work@half_adder.work@xor.B
         |vpiActual:
-        \_LogicNet: (work@half_adder.B), line:223:11, endln:223:12
+        \_LogicNet: (work@half_adder.B), line:222:34, endln:222:35
   |vpiPrimitive:
   \_Gate: work@and (work@half_adder.work@and), line:226:12, endln:226:25
     |vpiParent:
@@ -5856,7 +5870,7 @@ Design: (unnamed)
         |vpiName:A
         |vpiFullName:work@half_adder.work@and.A
         |vpiActual:
-        \_LogicNet: (work@half_adder.A), line:223:8, endln:223:9
+        \_LogicNet: (work@half_adder.A), line:222:31, endln:222:32
     |vpiPrimTerm:
     \_PrimTerm: , line:226:23, endln:226:24
       |vpiParent:
@@ -5870,7 +5884,7 @@ Design: (unnamed)
         |vpiName:B
         |vpiFullName:work@half_adder.work@and.B
         |vpiActual:
-        \_LogicNet: (work@half_adder.B), line:223:11, endln:223:12
+        \_LogicNet: (work@half_adder.B), line:222:34, endln:222:35
 |vpiAllModules:
 \_Module: work@mux_from_gates (work@mux_from_gates), file:${SURELOG_DIR}/tests/Gates/dut.sv, line:85:1, endln:121:10
   |vpiParent:

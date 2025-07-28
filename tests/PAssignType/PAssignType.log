@@ -210,11 +210,12 @@ ParamAssign                                            3
 Parameter                                              3
 Range                                                  3
 RefModule                                              2
-RefTypespec                                            9
+RefTypespec                                           10
 StringTypespec                                         3
 StructNet                                              1
 StructTypespec                                         1
 TaggedPattern                                          3
+TypedefTypespec                                        1
 TypespecMember                                         1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PAssignType/slpp_all/surelog.uhdm ...
@@ -238,7 +239,7 @@ Design: (unnamed)
       |vpiName:ctrl_reg_t
       |vpiFullName:aes_pkg::CTRL_RESET::ctrl_reg_t
       |vpiActual:
-      \_StructTypespec: (aes_pkg::ctrl_reg_t), line:2:9, endln:4:2
+      \_TypedefTypespec: (aes_pkg::ctrl_reg_t), line:4:3, endln:4:13
     |vpiName:CTRL_RESET
     |vpiFullName:aes_pkg::CTRL_RESET
   |vpiParamAssign:
@@ -269,25 +270,36 @@ Design: (unnamed)
           |vpiName:manual_operation
           |vpiFullName:aes_pkg::manual_operation
           |vpiActual:
-          \_StringTypespec: (manual_operation), line:7:3, endln:7:19
+          \_StringTypespec: , line:7:3, endln:7:19
     |vpiLhs:
     \_Parameter: (aes_pkg::CTRL_RESET), line:6:22, endln:8:2
   |vpiTypedef:
-  \_StructTypespec: (aes_pkg::ctrl_reg_t), line:2:9, endln:4:2
+  \_TypedefTypespec: (aes_pkg::ctrl_reg_t), line:4:3, endln:4:13
     |vpiParent:
     \_Package: aes_pkg (aes_pkg), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:1:1, endln:9:11
     |vpiName:aes_pkg::ctrl_reg_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (aes_pkg::ctrl_reg_t), line:2:9, endln:4:2
+      |vpiParent:
+      \_TypedefTypespec: (aes_pkg::ctrl_reg_t), line:4:3, endln:4:13
+      |vpiFullName:aes_pkg::ctrl_reg_t
+      |vpiActual:
+      \_StructTypespec: , line:2:9, endln:4:2
+  |vpiTypedef:
+  \_StructTypespec: , line:2:9, endln:4:2
+    |vpiParent:
+    \_Package: aes_pkg (aes_pkg), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:1:1, endln:9:11
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (manual_operation), line:3:15, endln:3:31
       |vpiParent:
-      \_StructTypespec: (aes_pkg::ctrl_reg_t), line:2:9, endln:4:2
+      \_StructTypespec: , line:2:9, endln:4:2
       |vpiName:manual_operation
       |vpiTypespec:
-      \_RefTypespec: (aes_pkg::ctrl_reg_t::manual_operation), line:3:3, endln:3:14
+      \_RefTypespec: (aes_pkg::manual_operation), line:3:3, endln:3:14
         |vpiParent:
         \_TypespecMember: (manual_operation), line:3:15, endln:3:31
-        |vpiFullName:aes_pkg::ctrl_reg_t::manual_operation
+        |vpiFullName:aes_pkg::manual_operation
         |vpiActual:
         \_LogicTypespec: , line:3:3, endln:3:14
   |vpiTypedef:
@@ -315,30 +327,29 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_StringTypespec: (manual_operation), line:7:3, endln:7:19
+  \_StringTypespec: , line:7:3, endln:7:19
     |vpiParent:
     \_Package: aes_pkg (aes_pkg), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:1:1, endln:9:11
-    |vpiName:manual_operation
   |vpiTypedef:
-  \_StringTypespec: (manual_operation), line:7:3, endln:7:19
+  \_StringTypespec: , line:7:3, endln:7:19
     |vpiParent:
     \_Package: aes_pkg (aes_pkg), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:1:1, endln:9:11
-    |vpiName:manual_operation
   |vpiTypedef:
-  \_StringTypespec: (manual_operation), line:7:3, endln:7:19
+  \_StringTypespec: , line:7:3, endln:7:19
     |vpiParent:
     \_Package: aes_pkg (aes_pkg), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:1:1, endln:9:11
-    |vpiName:manual_operation
   |vpiImportTypespec:
-  \_StructTypespec: (aes_pkg::ctrl_reg_t), line:2:9, endln:4:2
+  \_TypedefTypespec: (aes_pkg::ctrl_reg_t), line:4:3, endln:4:13
+  |vpiImportTypespec:
+  \_StructTypespec: , line:2:9, endln:4:2
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:3, endln:3:14
   |vpiImportTypespec:
-  \_StringTypespec: (manual_operation), line:7:3, endln:7:19
+  \_StringTypespec: , line:7:3, endln:7:19
   |vpiImportTypespec:
-  \_StringTypespec: (manual_operation), line:7:3, endln:7:19
+  \_StringTypespec: , line:7:3, endln:7:19
   |vpiImportTypespec:
-  \_StringTypespec: (manual_operation), line:7:3, endln:7:19
+  \_StringTypespec: , line:7:3, endln:7:19
   |vpiDefName:aes_pkg
 |vpiAllModules:
 \_Module: work@aes_core (work@aes_core), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:22:1, endln:26:10
@@ -372,13 +383,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@aes_core (work@aes_core), file:${SURELOG_DIR}/tests/PAssignType/dut.sv, line:22:1, endln:26:10
     |vpiTypespec:
-    \_RefTypespec: (work@aes_core.ctrl_q.ctrl_q), line:24:3, endln:24:13
+    \_RefTypespec: (work@aes_core.ctrl_q.ctrl_reg_t), line:24:3, endln:24:13
       |vpiParent:
       \_StructNet: (work@aes_core.ctrl_q), line:24:14, endln:24:20
-      |vpiName:ctrl_q
-      |vpiFullName:work@aes_core.ctrl_q.ctrl_q
+      |vpiName:ctrl_reg_t
+      |vpiFullName:work@aes_core.ctrl_q.ctrl_reg_t
       |vpiActual:
-      \_StructTypespec: (aes_pkg::ctrl_reg_t), line:2:9, endln:4:2
+      \_TypedefTypespec: (aes_pkg::ctrl_reg_t), line:4:3, endln:4:13
     |vpiName:ctrl_q
     |vpiFullName:work@aes_core.ctrl_q
   |vpiDefName:work@aes_core

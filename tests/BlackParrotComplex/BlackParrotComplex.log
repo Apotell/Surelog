@@ -2911,14 +2911,16 @@ Module                                                 3
 ModuleTypespec                                         3
 Operation                                            211
 Package                                                1
+PackedArrayTypespec                                    3
 ParamAssign                                           11
 Parameter                                             11
 Range                                                 11
 RefModule                                              3
 RefObj                                                76
-RefTypespec                                           19
+RefTypespec                                           23
 SysFuncCall                                            2
 Task                                                   9
+TypedefTypespec                                        1
 VarSelect                                             66
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BlackParrotComplex/slpp_all/surelog.uhdm ...
@@ -3188,7 +3190,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -3222,14 +3224,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/BlackParrotComplex/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -3237,7 +3238,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -3245,7 +3246,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -3253,7 +3254,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -3261,13 +3262,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/BlackParrotComplex/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -3473,35 +3488,14 @@ Design: (unnamed)
   \_Parameter: (work@bottom.A3), line:81:17, endln:81:36
     |vpiParent:
     \_Module: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/BlackParrotComplex/dut.sv, line:79:1, endln:88:10
-    |vpiSize:1
     |vpiTypespec:
     \_RefTypespec: (work@bottom.A3), line:81:13, endln:81:16
       |vpiParent:
       \_Parameter: (work@bottom.A3), line:81:17, endln:81:36
       |vpiFullName:work@bottom.A3
       |vpiActual:
-      \_ArrayTypespec: , line:81:19, endln:81:24
+      \_ArrayTypespec: , line:81:13, endln:81:36
     |vpiSigned:1
-    |vpiRange:
-    \_Range: , line:81:19, endln:81:24
-      |vpiParent:
-      \_Parameter: (work@bottom.A3), line:81:17, endln:81:36
-      |vpiLeftRange:
-      \_Constant: , line:81:20, endln:81:21
-        |vpiParent:
-        \_Range: , line:81:19, endln:81:24
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:81:22, endln:81:23
-        |vpiParent:
-        \_Range: , line:81:19, endln:81:24
-        |vpiDecompile:2
-        |vpiSize:64
-        |UINT:2
-        |vpiConstType:9
     |vpiName:A3
     |vpiFullName:work@bottom.A3
   |vpiParameter:
@@ -3591,22 +3585,41 @@ Design: (unnamed)
     \_Module: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/BlackParrotComplex/dut.sv, line:79:1, endln:88:10
     |vpiSigned:1
   |vpiTypedef:
-  \_ArrayTypespec: , line:81:19, endln:81:24
+  \_ArrayTypespec: , line:81:13, endln:81:36
     |vpiParent:
     \_Module: work@bottom (work@bottom), file:${SURELOG_DIR}/tests/BlackParrotComplex/dut.sv, line:79:1, endln:88:10
+    |vpiArrayType:1
     |vpiRange:
     \_Range: , line:81:19, endln:81:24
+      |vpiParent:
+      \_ArrayTypespec: , line:81:13, endln:81:36
+      |vpiLeftRange:
+      \_Constant: , line:81:20, endln:81:21
+        |vpiParent:
+        \_Range: , line:81:19, endln:81:24
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:81:22, endln:81:23
+        |vpiParent:
+        \_Range: , line:81:19, endln:81:24
+        |vpiDecompile:2
+        |vpiSize:64
+        |UINT:2
+        |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@bottom), line:81:13, endln:81:16
       |vpiParent:
-      \_ArrayTypespec: , line:81:19, endln:81:24
+      \_ArrayTypespec: , line:81:13, endln:81:36
       |vpiFullName:work@bottom
       |vpiActual:
       \_IntTypespec: , line:81:13, endln:81:16
   |vpiImportTypespec:
   \_IntTypespec: , line:81:13, endln:81:16
   |vpiImportTypespec:
-  \_ArrayTypespec: , line:81:19, endln:81:24
+  \_ArrayTypespec: , line:81:13, endln:81:36
   |vpiDefName:work@bottom
   |vpiGenStmt:
   \_GenIf: , line:84:1, endln:86:4
@@ -3644,35 +3657,14 @@ Design: (unnamed)
   \_Parameter: (work@middle.A3), line:69:17, endln:69:37
     |vpiParent:
     \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/BlackParrotComplex/dut.sv, line:67:1, endln:76:10
-    |vpiSize:1
     |vpiTypespec:
     \_RefTypespec: (work@middle.A3), line:69:13, endln:69:16
       |vpiParent:
       \_Parameter: (work@middle.A3), line:69:17, endln:69:37
       |vpiFullName:work@middle.A3
       |vpiActual:
-      \_ArrayTypespec: , line:69:19, endln:69:24
+      \_ArrayTypespec: , line:69:13, endln:69:37
     |vpiSigned:1
-    |vpiRange:
-    \_Range: , line:69:19, endln:69:24
-      |vpiParent:
-      \_Parameter: (work@middle.A3), line:69:17, endln:69:37
-      |vpiLeftRange:
-      \_Constant: , line:69:20, endln:69:21
-        |vpiParent:
-        \_Range: , line:69:19, endln:69:24
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:69:22, endln:69:23
-        |vpiParent:
-        \_Range: , line:69:19, endln:69:24
-        |vpiDecompile:2
-        |vpiSize:64
-        |UINT:2
-        |vpiConstType:9
     |vpiName:A3
     |vpiFullName:work@middle.A3
   |vpiParameter:
@@ -3762,22 +3754,41 @@ Design: (unnamed)
     \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/BlackParrotComplex/dut.sv, line:67:1, endln:76:10
     |vpiSigned:1
   |vpiTypedef:
-  \_ArrayTypespec: , line:69:19, endln:69:24
+  \_ArrayTypespec: , line:69:13, endln:69:37
     |vpiParent:
     \_Module: work@middle (work@middle), file:${SURELOG_DIR}/tests/BlackParrotComplex/dut.sv, line:67:1, endln:76:10
+    |vpiArrayType:1
     |vpiRange:
     \_Range: , line:69:19, endln:69:24
+      |vpiParent:
+      \_ArrayTypespec: , line:69:13, endln:69:37
+      |vpiLeftRange:
+      \_Constant: , line:69:20, endln:69:21
+        |vpiParent:
+        \_Range: , line:69:19, endln:69:24
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:69:22, endln:69:23
+        |vpiParent:
+        \_Range: , line:69:19, endln:69:24
+        |vpiDecompile:2
+        |vpiSize:64
+        |UINT:2
+        |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@middle), line:69:13, endln:69:16
       |vpiParent:
-      \_ArrayTypespec: , line:69:19, endln:69:24
+      \_ArrayTypespec: , line:69:13, endln:69:37
       |vpiFullName:work@middle
       |vpiActual:
       \_IntTypespec: , line:69:13, endln:69:16
   |vpiImportTypespec:
   \_IntTypespec: , line:69:13, endln:69:16
   |vpiImportTypespec:
-  \_ArrayTypespec: , line:69:19, endln:69:24
+  \_ArrayTypespec: , line:69:13, endln:69:37
   |vpiDefName:work@middle
   |vpiGenStmt:
   \_GenIf: , line:72:1, endln:74:4
@@ -3842,7 +3853,7 @@ Design: (unnamed)
       \_Parameter: (work@top.StrictXY), line:8:34, endln:25:33
       |vpiFullName:work@top.StrictXY
       |vpiActual:
-      \_BitTypespec: , line:8:14, endln:8:33
+      \_PackedArrayTypespec: , line:8:14, endln:8:33
     |vpiLocalParam:1
     |vpiName:StrictXY
     |vpiFullName:work@top.StrictXY
@@ -3856,7 +3867,7 @@ Design: (unnamed)
       \_Parameter: (work@top.StrictX), line:27:36, endln:38:32
       |vpiFullName:work@top.StrictX
       |vpiActual:
-      \_BitTypespec: , line:27:16, endln:27:35
+      \_PackedArrayTypespec: , line:27:16, endln:27:35
     |vpiLocalParam:1
     |vpiName:StrictX
     |vpiFullName:work@top.StrictX
@@ -3870,7 +3881,7 @@ Design: (unnamed)
       \_Parameter: (work@top.routing_matrix_p), line:40:48, endln:40:102
       |vpiFullName:work@top.routing_matrix_p
       |vpiActual:
-      \_BitTypespec: , line:40:12, endln:40:47
+      \_PackedArrayTypespec: , line:40:12, endln:40:47
     |vpiName:routing_matrix_p
     |vpiFullName:work@top.routing_matrix_p
   |vpiParameter:
@@ -7774,13 +7785,17 @@ Design: (unnamed)
       |vpiName:bad
       |vpiDefName:work@BAD
   |vpiTypedef:
-  \_BitTypespec: , line:8:14, endln:8:33
+  \_BitTypespec: , line:8:14, endln:8:17
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackParrotComplex/dut.sv, line:3:1, endln:64:10
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:8:14, endln:8:33
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackParrotComplex/dut.sv, line:3:1, endln:64:10
     |vpiRange:
     \_Range: , line:8:18, endln:8:23
       |vpiParent:
-      \_BitTypespec: , line:8:14, endln:8:33
+      \_PackedArrayTypespec: , line:8:14, endln:8:33
       |vpiLeftRange:
       \_Constant: , line:8:19, endln:8:20
         |vpiParent:
@@ -7800,7 +7815,7 @@ Design: (unnamed)
     |vpiRange:
     \_Range: , line:8:23, endln:8:28
       |vpiParent:
-      \_BitTypespec: , line:8:14, endln:8:33
+      \_PackedArrayTypespec: , line:8:14, endln:8:33
       |vpiLeftRange:
       \_Constant: , line:8:24, endln:8:25
         |vpiParent:
@@ -7820,7 +7835,7 @@ Design: (unnamed)
     |vpiRange:
     \_Range: , line:8:28, endln:8:33
       |vpiParent:
-      \_BitTypespec: , line:8:14, endln:8:33
+      \_PackedArrayTypespec: , line:8:14, endln:8:33
       |vpiLeftRange:
       \_Constant: , line:8:29, endln:8:30
         |vpiParent:
@@ -7837,14 +7852,25 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@top), line:8:14, endln:8:17
+      |vpiParent:
+      \_PackedArrayTypespec: , line:8:14, endln:8:33
+      |vpiFullName:work@top
+      |vpiActual:
+      \_BitTypespec: , line:8:14, endln:8:17
   |vpiTypedef:
-  \_BitTypespec: , line:27:16, endln:27:35
+  \_BitTypespec: , line:27:16, endln:27:19
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackParrotComplex/dut.sv, line:3:1, endln:64:10
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:27:16, endln:27:35
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackParrotComplex/dut.sv, line:3:1, endln:64:10
     |vpiRange:
     \_Range: , line:27:20, endln:27:25
       |vpiParent:
-      \_BitTypespec: , line:27:16, endln:27:35
+      \_PackedArrayTypespec: , line:27:16, endln:27:35
       |vpiLeftRange:
       \_Constant: , line:27:21, endln:27:22
         |vpiParent:
@@ -7864,7 +7890,7 @@ Design: (unnamed)
     |vpiRange:
     \_Range: , line:27:25, endln:27:30
       |vpiParent:
-      \_BitTypespec: , line:27:16, endln:27:35
+      \_PackedArrayTypespec: , line:27:16, endln:27:35
       |vpiLeftRange:
       \_Constant: , line:27:26, endln:27:27
         |vpiParent:
@@ -7884,7 +7910,7 @@ Design: (unnamed)
     |vpiRange:
     \_Range: , line:27:30, endln:27:35
       |vpiParent:
-      \_BitTypespec: , line:27:16, endln:27:35
+      \_PackedArrayTypespec: , line:27:16, endln:27:35
       |vpiLeftRange:
       \_Constant: , line:27:31, endln:27:32
         |vpiParent:
@@ -7901,14 +7927,25 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@top), line:27:16, endln:27:19
+      |vpiParent:
+      \_PackedArrayTypespec: , line:27:16, endln:27:35
+      |vpiFullName:work@top
+      |vpiActual:
+      \_BitTypespec: , line:27:16, endln:27:19
   |vpiTypedef:
-  \_BitTypespec: , line:40:12, endln:40:47
+  \_BitTypespec: , line:40:12, endln:40:15
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackParrotComplex/dut.sv, line:3:1, endln:64:10
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:40:12, endln:40:47
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackParrotComplex/dut.sv, line:3:1, endln:64:10
     |vpiRange:
     \_Range: , line:40:16, endln:40:21
       |vpiParent:
-      \_BitTypespec: , line:40:12, endln:40:47
+      \_PackedArrayTypespec: , line:40:12, endln:40:47
       |vpiLeftRange:
       \_Constant: , line:40:17, endln:40:18
         |vpiParent:
@@ -7928,7 +7965,7 @@ Design: (unnamed)
     |vpiRange:
     \_Range: , line:40:21, endln:40:34
       |vpiParent:
-      \_BitTypespec: , line:40:12, endln:40:47
+      \_PackedArrayTypespec: , line:40:12, endln:40:47
       |vpiLeftRange:
       \_Operation: , line:40:22, endln:40:31
         |vpiParent:
@@ -7961,7 +7998,7 @@ Design: (unnamed)
     |vpiRange:
     \_Range: , line:40:34, endln:40:47
       |vpiParent:
-      \_BitTypespec: , line:40:12, endln:40:47
+      \_PackedArrayTypespec: , line:40:12, endln:40:47
       |vpiLeftRange:
       \_Operation: , line:40:35, endln:40:44
         |vpiParent:
@@ -7991,12 +8028,25 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@top), line:40:12, endln:40:15
+      |vpiParent:
+      \_PackedArrayTypespec: , line:40:12, endln:40:47
+      |vpiFullName:work@top
+      |vpiActual:
+      \_BitTypespec: , line:40:12, endln:40:15
   |vpiImportTypespec:
-  \_BitTypespec: , line:8:14, endln:8:33
+  \_BitTypespec: , line:8:14, endln:8:17
   |vpiImportTypespec:
-  \_BitTypespec: , line:27:16, endln:27:35
+  \_PackedArrayTypespec: , line:8:14, endln:8:33
   |vpiImportTypespec:
-  \_BitTypespec: , line:40:12, endln:40:47
+  \_BitTypespec: , line:27:16, endln:27:19
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:27:16, endln:27:35
+  |vpiImportTypespec:
+  \_BitTypespec: , line:40:12, endln:40:15
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:40:12, endln:40:47
   |vpiDefName:work@top
   |vpiProcess:
   \_Initial: , line:56:1, endln:58:4

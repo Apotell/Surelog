@@ -130,17 +130,17 @@ Design                                                 1
 HierPath                                               2
 LogicNet                                               1
 LogicTypespec                                          1
-LogicVar                                               1
 Module                                                 1
 Package                                                1
+PackedArrayNet                                         1
 PackedArrayTypespec                                    1
 Port                                                   1
 Range                                                  1
 RefObj                                                 3
-RefTypespec                                            1
+RefTypespec                                            5
 StructTypespec                                         1
+TypedefTypespec                                        2
 TypespecMember                                         1
-UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -153,27 +153,50 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:pkg
   |vpiTypedef:
-  \_StructTypespec: (pkg::a), line:2:12, endln:4:5
+  \_TypedefTypespec: (pkg::a), line:4:6, endln:4:7
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/HierPathTypespec/dut.sv, line:1:1, endln:6:11
     |vpiName:pkg::a
+    |vpiTypedefAlias:
+    \_RefTypespec: (pkg::a), line:2:12, endln:4:5
+      |vpiParent:
+      \_TypedefTypespec: (pkg::a), line:4:6, endln:4:7
+      |vpiFullName:pkg::a
+      |vpiActual:
+      \_StructTypespec: , line:2:12, endln:4:5
+  |vpiTypedef:
+  \_StructTypespec: , line:2:12, endln:4:5
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/HierPathTypespec/dut.sv, line:1:1, endln:6:11
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (x), line:3:19, endln:3:20
       |vpiParent:
-      \_StructTypespec: (pkg::a), line:2:12, endln:4:5
+      \_StructTypespec: , line:2:12, endln:4:5
       |vpiName:x
       |vpiTypespec:
-      \_RefTypespec: (pkg::a::x), line:3:7, endln:3:12
+      \_RefTypespec: (pkg::x), line:3:7, endln:3:12
         |vpiParent:
         \_TypespecMember: (x), line:3:19, endln:3:20
-        |vpiFullName:pkg::a::x
+        |vpiFullName:pkg::x
         |vpiActual:
         \_LogicTypespec: , line:3:7, endln:3:12
   |vpiTypedef:
   \_LogicTypespec: , line:3:7, endln:3:12
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/HierPathTypespec/dut.sv, line:1:1, endln:6:11
+  |vpiTypedef:
+  \_TypedefTypespec: (pkg::b), line:5:19, endln:5:20
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/HierPathTypespec/dut.sv, line:1:1, endln:6:11
+    |vpiName:pkg::b
+    |vpiTypedefAlias:
+    \_RefTypespec: (pkg::b), line:5:12, endln:5:13
+      |vpiParent:
+      \_TypedefTypespec: (pkg::b), line:5:19, endln:5:20
+      |vpiFullName:pkg::b
+      |vpiActual:
+      \_PackedArrayTypespec: , line:5:12, endln:5:18
   |vpiTypedef:
   \_PackedArrayTypespec: , line:5:12, endln:5:18
     |vpiParent:
@@ -198,10 +221,21 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (pkg::a), line:4:6, endln:4:7
+      |vpiParent:
+      \_PackedArrayTypespec: , line:5:12, endln:5:18
+      |vpiName:pkg::a
+      |vpiActual:
+      \_TypedefTypespec: (pkg::a), line:4:6, endln:4:7
   |vpiImportTypespec:
-  \_StructTypespec: (pkg::a), line:2:12, endln:4:5
+  \_TypedefTypespec: (pkg::a), line:4:6, endln:4:7
+  |vpiImportTypespec:
+  \_StructTypespec: , line:2:12, endln:4:5
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:7, endln:3:12
+  |vpiImportTypespec:
+  \_TypedefTypespec: (pkg::b), line:5:19, endln:5:20
   |vpiImportTypespec:
   \_PackedArrayTypespec: , line:5:12, endln:5:18
   |vpiDefName:pkg
@@ -210,20 +244,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@top
-  |vpiVariables:
-  \_LogicVar: (work@top.c), line:10:11, endln:10:12
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathTypespec/dut.sv, line:8:1, endln:14:10
-    |vpiName:c
-    |vpiFullName:work@top.c
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@top.c), line:10:11, endln:10:12
-  |vpiTypedef:
-  \_UnsupportedTypespec: (pkg::b), line:10:4, endln:10:10
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathTypespec/dut.sv, line:8:1, endln:14:10
-    |vpiName:pkg::b
   |vpiImportTypespec:
   \_LogicNet: (work@top.o), line:8:19, endln:8:20
     |vpiParent:
@@ -231,9 +251,19 @@ Design: (unnamed)
     |vpiName:o
     |vpiFullName:work@top.o
   |vpiImportTypespec:
-  \_UnsupportedTypespec: (pkg::b), line:10:4, endln:10:10
-  |vpiImportTypespec:
-  \_LogicVar: (work@top.c), line:10:11, endln:10:12
+  \_PackedArrayNet: (work@top.c), line:10:11, endln:10:12
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HierPathTypespec/dut.sv, line:8:1, endln:14:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.c.pkg::b), line:10:4, endln:10:10
+      |vpiParent:
+      \_PackedArrayNet: (work@top.c), line:10:11, endln:10:12
+      |vpiName:pkg::b
+      |vpiFullName:work@top.c.pkg::b
+      |vpiActual:
+      \_TypedefTypespec: (pkg::b), line:5:19, endln:5:20
+    |vpiName:c
+    |vpiFullName:work@top.c
   |vpiImportTypespec:
   \_LogicNet: (work@top.x), line:12:16, endln:12:17
     |vpiParent:
@@ -244,6 +274,8 @@ Design: (unnamed)
   |vpiDefName:work@top
   |vpiNet:
   \_LogicNet: (work@top.o), line:8:19, endln:8:20
+  |vpiNet:
+  \_PackedArrayNet: (work@top.c), line:10:11, endln:10:12
   |vpiNet:
   \_LogicNet: (work@top.x), line:12:16, endln:12:17
   |vpiPort:
@@ -275,7 +307,7 @@ Design: (unnamed)
         |vpiName:c
         |vpiFullName:c[1]
         |vpiActual:
-        \_LogicVar: (work@top.c), line:10:11, endln:10:12
+        \_PackedArrayNet: (work@top.c), line:10:11, endln:10:12
         |vpiIndex:
         \_Constant: , line:12:13, endln:12:14
           |vpiParent:
@@ -308,7 +340,7 @@ Design: (unnamed)
         |vpiName:c
         |vpiFullName:c[1]
         |vpiActual:
-        \_LogicVar: (work@top.c), line:10:11, endln:10:12
+        \_PackedArrayNet: (work@top.c), line:10:11, endln:10:12
         |vpiIndex:
         \_Constant: , line:13:17, endln:13:18
           |vpiParent:

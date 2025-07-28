@@ -203,23 +203,22 @@ Always                                                 1
 Assignment                                             1
 Begin                                                  1
 BitSelect                                              1
-Constant                                              11
+Constant                                               8
 ContAssign                                             1
 Design                                                 1
 EventControl                                           1
-FuncCall                                               2
+FuncCall                                               1
 Function                                               1
 IODecl                                                 1
 ImportTypespec                                         1
 IntegerTypespec                                        2
-LogicNet                                               2
+LogicNet                                               3
 LogicTypespec                                          1
-LogicVar                                               1
 Module                                                 1
-Operation                                              6
+Operation                                              5
 Package                                                1
 Port                                                   2
-Range                                                  2
+Range                                                  1
 RefObj                                                 6
 RefTypespec                                            3
 ReturnStmt                                             1
@@ -340,22 +339,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@foo
-  |vpiVariables:
-  \_LogicVar: (work@foo.a), line:6:22, endln:6:23
-    |vpiParent:
-    \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/FileList/dut.sv, line:1:1, endln:11:10
-    |vpiTypespec:
-    \_RefTypespec: (work@foo.a), line:6:1, endln:6:21
-      |vpiParent:
-      \_LogicVar: (work@foo.a), line:6:22, endln:6:23
-      |vpiFullName:work@foo.a
-      |vpiActual:
-      \_LogicTypespec: , line:6:1, endln:6:21
-    |vpiName:a
-    |vpiFullName:work@foo.a
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@foo.a), line:6:22, endln:6:23
   |vpiTypedef:
   \_ImportTypespec: (prim_util_pkg), line:5:8, endln:5:28
     |vpiParent:
@@ -430,12 +413,26 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:6:1, endln:6:21
   |vpiImportTypespec:
-  \_LogicVar: (work@foo.a), line:6:22, endln:6:23
+  \_LogicNet: (work@foo.a), line:6:22, endln:6:23
+    |vpiParent:
+    \_Module: work@foo (work@foo), file:${SURELOG_DIR}/tests/FileList/dut.sv, line:1:1, endln:11:10
+    |vpiTypespec:
+    \_RefTypespec: (work@foo.a), line:6:1, endln:6:21
+      |vpiParent:
+      \_LogicNet: (work@foo.a), line:6:22, endln:6:23
+      |vpiFullName:work@foo.a
+      |vpiActual:
+      \_LogicTypespec: , line:6:1, endln:6:21
+    |vpiName:a
+    |vpiFullName:work@foo.a
+    |vpiNetType:36
   |vpiDefName:work@foo
   |vpiNet:
   \_LogicNet: (work@foo.clk), line:2:11, endln:2:14
   |vpiNet:
   \_LogicNet: (work@foo.out), line:3:12, endln:3:15
+  |vpiNet:
+  \_LogicNet: (work@foo.a), line:6:22, endln:6:23
   |vpiPort:
   \_Port: (clk), line:2:11, endln:2:14
     |vpiParent:
@@ -491,7 +488,7 @@ Design: (unnamed)
               |vpiName:a
               |vpiFullName:work@foo.a
               |vpiActual:
-              \_LogicVar: (work@foo.a), line:6:22, endln:6:23
+              \_LogicNet: (work@foo.a), line:6:22, endln:6:23
             |vpiOperand:
             \_Constant: , line:8:14, endln:8:18
               |vpiParent:
@@ -507,7 +504,7 @@ Design: (unnamed)
             |vpiName:a
             |vpiFullName:work@foo.a
             |vpiActual:
-            \_LogicVar: (work@foo.a), line:6:22, endln:6:23
+            \_LogicNet: (work@foo.a), line:6:22, endln:6:23
     |vpiAlwaysType:1
   |vpiContAssign:
   \_ContAssign: , line:10:8, endln:10:18
@@ -520,7 +517,7 @@ Design: (unnamed)
       |vpiName:a
       |vpiFullName:work@foo.a
       |vpiActual:
-      \_LogicVar: (work@foo.a), line:6:22, endln:6:23
+      \_LogicNet: (work@foo.a), line:6:22, endln:6:23
       |vpiIndex:
       \_Constant: , line:10:16, endln:10:17
         |vpiParent:

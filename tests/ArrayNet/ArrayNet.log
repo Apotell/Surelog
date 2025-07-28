@@ -81,16 +81,16 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayNet                                               1
+ArrayTypespec                                          1
 Begin                                                  1
-Constant                                               7
+Constant                                               5
 Design                                                 1
 Initial                                                1
-LogicNet                                               1
 LogicTypespec                                          1
 Module                                                 1
-Range                                                  3
+Range                                                  2
 RefObj                                                 1
-RefTypespec                                            1
+RefTypespec                                            2
 SysFuncCall                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ArrayNet/slpp_all/surelog.uhdm ...
@@ -127,25 +127,59 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_ArrayTypespec: , line:2:1, endln:2:28
+    |vpiParent:
+    \_Module: work@memory (work@memory), file:${SURELOG_DIR}/tests/ArrayNet/dut.sv, line:1:1, endln:7:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:2:21, endln:2:28
+      |vpiParent:
+      \_ArrayTypespec: , line:2:1, endln:2:28
+      |vpiLeftRange:
+      \_Constant: , line:2:22, endln:2:23
+        |vpiParent:
+        \_Range: , line:2:21, endln:2:28
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:2:24, endln:2:27
+        |vpiParent:
+        \_Range: , line:2:21, endln:2:28
+        |vpiDecompile:255
+        |vpiSize:64
+        |UINT:255
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@memory), line:2:1, endln:2:10
+      |vpiParent:
+      \_ArrayTypespec: , line:2:1, endln:2:28
+      |vpiFullName:work@memory
+      |vpiActual:
+      \_LogicTypespec: , line:2:1, endln:2:10
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:1, endln:2:10
   |vpiImportTypespec:
-  \_LogicNet: (work@memory.my_memory), line:2:11, endln:2:20
+  \_ArrayTypespec: , line:2:1, endln:2:28
+  |vpiImportTypespec:
+  \_ArrayNet: (work@memory.my_memory), line:2:11, endln:2:20
     |vpiParent:
     \_Module: work@memory (work@memory), file:${SURELOG_DIR}/tests/ArrayNet/dut.sv, line:1:1, endln:7:10
     |vpiTypespec:
     \_RefTypespec: (work@memory.my_memory), line:2:1, endln:2:10
       |vpiParent:
-      \_LogicNet: (work@memory.my_memory), line:2:11, endln:2:20
+      \_ArrayNet: (work@memory.my_memory), line:2:11, endln:2:20
       |vpiFullName:work@memory.my_memory
       |vpiActual:
-      \_LogicTypespec: , line:2:1, endln:2:10
+      \_ArrayTypespec: , line:2:1, endln:2:28
     |vpiName:my_memory
     |vpiFullName:work@memory.my_memory
     |vpiNetType:48
   |vpiDefName:work@memory
-  |vpiNet:
-  \_LogicNet: (work@memory.my_memory), line:2:11, endln:2:20
+  |vpiArrayNet:
+  \_ArrayNet: (work@memory.my_memory), line:2:11, endln:2:20
   |vpiProcess:
   \_Initial: , line:4:1, endln:6:4
     |vpiParent:
@@ -174,7 +208,7 @@ Design: (unnamed)
           |vpiName:my_memory
           |vpiFullName:work@memory.my_memory
           |vpiActual:
-          \_LogicNet: (work@memory.my_memory), line:2:11, endln:2:20
+          \_ArrayNet: (work@memory.my_memory), line:2:11, endln:2:20
         |vpiName:$readmemh
 ===================
 [  FATAL] : 0

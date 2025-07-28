@@ -346,10 +346,11 @@ Parameter                                              3
 Range                                                  7
 RefModule                                              2
 RefObj                                                 3
-RefTypespec                                           14
+RefTypespec                                           18
 StringTypespec                                         4
 StructTypespec                                         2
 TaggedPattern                                          4
+TypedefTypespec                                        4
 TypespecMember                                         4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EnumConstElab/slpp_all/surelog.uhdm ...
@@ -376,6 +377,7 @@ Design: (unnamed)
     |vpiName:a
     |vpiFullName:work@prim_subreg.a
     |vpiSigned:1
+    |vpiRandType:1
     |vpiVisibility:1
     |vpiExpr:
     \_Operation: , line:3:12, endln:3:24
@@ -470,7 +472,7 @@ Design: (unnamed)
       |vpiName:struct_t
       |vpiFullName:work@prim_subreg_shadow.RESVAL.struct_t
       |vpiActual:
-      \_StructTypespec: (struct_t), line:7:12, endln:10:5
+      \_TypedefTypespec: (struct_t), line:10:6, endln:10:14
     |vpiName:RESVAL
     |vpiFullName:work@prim_subreg_shadow.RESVAL
   |vpiParamAssign:
@@ -501,7 +503,7 @@ Design: (unnamed)
           |vpiName:a
           |vpiFullName:work@prim_subreg_shadow.a
           |vpiActual:
-          \_StringTypespec: (a), line:17:7, endln:17:8
+          \_StringTypespec: , line:17:7, endln:17:8
       |vpiOperand:
       \_TaggedPattern: , line:18:7, endln:18:12
         |vpiParent:
@@ -521,37 +523,48 @@ Design: (unnamed)
           |vpiName:b
           |vpiFullName:work@prim_subreg_shadow.b
           |vpiActual:
-          \_StringTypespec: (b), line:18:7, endln:18:8
+          \_StringTypespec: , line:18:7, endln:18:8
     |vpiLhs:
     \_Parameter: (work@prim_subreg_shadow.RESVAL), line:16:23, endln:19:5
   |vpiTypedef:
-  \_StructTypespec: (struct_t), line:7:12, endln:10:5
+  \_TypedefTypespec: (struct_t), line:10:6, endln:10:14
     |vpiParent:
     \_Module: work@prim_subreg_shadow (work@prim_subreg_shadow), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:6:1, endln:24:10
     |vpiName:struct_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@prim_subreg_shadow.struct_t), line:7:12, endln:10:5
+      |vpiParent:
+      \_TypedefTypespec: (struct_t), line:10:6, endln:10:14
+      |vpiFullName:work@prim_subreg_shadow.struct_t
+      |vpiActual:
+      \_StructTypespec: , line:7:12, endln:10:5
+  |vpiTypedef:
+  \_StructTypespec: , line:7:12, endln:10:5
+    |vpiParent:
+    \_Module: work@prim_subreg_shadow (work@prim_subreg_shadow), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:6:1, endln:24:10
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (a), line:8:19, endln:8:20
       |vpiParent:
-      \_StructTypespec: (struct_t), line:7:12, endln:10:5
+      \_StructTypespec: , line:7:12, endln:10:5
       |vpiName:a
       |vpiTypespec:
-      \_RefTypespec: (work@prim_subreg_shadow.struct_t.a), line:8:7, endln:8:18
+      \_RefTypespec: (work@prim_subreg_shadow.a), line:8:7, endln:8:18
         |vpiParent:
         \_TypespecMember: (a), line:8:19, endln:8:20
-        |vpiFullName:work@prim_subreg_shadow.struct_t.a
+        |vpiFullName:work@prim_subreg_shadow.a
         |vpiActual:
         \_LogicTypespec: , line:8:7, endln:8:18
     |vpiTypespecMember:
     \_TypespecMember: (b), line:9:19, endln:9:20
       |vpiParent:
-      \_StructTypespec: (struct_t), line:7:12, endln:10:5
+      \_StructTypespec: , line:7:12, endln:10:5
       |vpiName:b
       |vpiTypespec:
-      \_RefTypespec: (work@prim_subreg_shadow.struct_t.b), line:9:7, endln:9:18
+      \_RefTypespec: (work@prim_subreg_shadow.b), line:9:7, endln:9:18
         |vpiParent:
         \_TypespecMember: (b), line:9:19, endln:9:20
-        |vpiFullName:work@prim_subreg_shadow.struct_t.b
+        |vpiFullName:work@prim_subreg_shadow.b
         |vpiActual:
         \_LogicTypespec: , line:9:7, endln:9:18
   |vpiTypedef:
@@ -603,6 +616,25 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_EnumTypespec: , line:12:12, endln:14:12
+    |vpiParent:
+    \_Module: work@prim_subreg_shadow (work@prim_subreg_shadow), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:6:1, endln:24:10
+    |vpiBaseTypespec:
+    \_RefTypespec: (work@prim_subreg_shadow), line:12:17, endln:12:28
+      |vpiParent:
+      \_EnumTypespec: , line:12:12, endln:14:12
+      |vpiFullName:work@prim_subreg_shadow
+      |vpiActual:
+      \_LogicTypespec: , line:12:17, endln:12:28
+    |vpiEnumConst:
+    \_EnumConst: (ENUM_ITEM), line:13:7, endln:13:25
+      |vpiParent:
+      \_EnumTypespec: , line:12:12, endln:14:12
+      |vpiName:ENUM_ITEM
+      |BIN:000
+      |vpiDecompile:3'b000
+      |vpiSize:3
+  |vpiTypedef:
   \_LogicTypespec: , line:12:17, endln:12:28
     |vpiParent:
     \_Module: work@prim_subreg_shadow (work@prim_subreg_shadow), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:6:1, endln:24:10
@@ -627,54 +659,48 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_EnumTypespec: (enum_t), line:12:12, endln:14:12
+  \_TypedefTypespec: (enum_t), line:14:6, endln:14:12
     |vpiParent:
     \_Module: work@prim_subreg_shadow (work@prim_subreg_shadow), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:6:1, endln:24:10
     |vpiName:enum_t
-    |vpiBaseTypespec:
-    \_RefTypespec: (work@prim_subreg_shadow.enum_t), line:12:17, endln:12:28
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@prim_subreg_shadow.enum_t), line:12:12, endln:14:5
       |vpiParent:
-      \_EnumTypespec: (enum_t), line:12:12, endln:14:12
+      \_TypedefTypespec: (enum_t), line:14:6, endln:14:12
       |vpiFullName:work@prim_subreg_shadow.enum_t
       |vpiActual:
-      \_LogicTypespec: , line:12:17, endln:12:28
-    |vpiEnumConst:
-    \_EnumConst: (ENUM_ITEM), line:13:7, endln:13:25
-      |vpiParent:
-      \_EnumTypespec: (enum_t), line:12:12, endln:14:12
-      |vpiName:ENUM_ITEM
-      |BIN:000
-      |vpiDecompile:3'b000
-      |vpiSize:3
+      \_EnumTypespec: , line:12:12, endln:14:12
   |vpiTypedef:
-  \_StringTypespec: (a), line:17:7, endln:17:8
+  \_StringTypespec: , line:17:7, endln:17:8
     |vpiParent:
     \_Module: work@prim_subreg_shadow (work@prim_subreg_shadow), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:6:1, endln:24:10
-    |vpiName:a
   |vpiTypedef:
-  \_StringTypespec: (b), line:18:7, endln:18:8
+  \_StringTypespec: , line:18:7, endln:18:8
     |vpiParent:
     \_Module: work@prim_subreg_shadow (work@prim_subreg_shadow), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:6:1, endln:24:10
-    |vpiName:b
   |vpiTypedef:
   \_ModuleTypespec: (prim_subreg), line:21:4, endln:21:15
     |vpiParent:
     \_Module: work@prim_subreg_shadow (work@prim_subreg_shadow), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:6:1, endln:24:10
     |vpiName:prim_subreg
   |vpiImportTypespec:
-  \_StructTypespec: (struct_t), line:7:12, endln:10:5
+  \_TypedefTypespec: (struct_t), line:10:6, endln:10:14
+  |vpiImportTypespec:
+  \_StructTypespec: , line:7:12, endln:10:5
   |vpiImportTypespec:
   \_LogicTypespec: , line:8:7, endln:8:18
   |vpiImportTypespec:
   \_LogicTypespec: , line:9:7, endln:9:18
   |vpiImportTypespec:
+  \_EnumTypespec: , line:12:12, endln:14:12
+  |vpiImportTypespec:
   \_LogicTypespec: , line:12:17, endln:12:28
   |vpiImportTypespec:
-  \_EnumTypespec: (enum_t), line:12:12, endln:14:12
+  \_TypedefTypespec: (enum_t), line:14:6, endln:14:12
   |vpiImportTypespec:
-  \_StringTypespec: (a), line:17:7, endln:17:8
+  \_StringTypespec: , line:17:7, endln:17:8
   |vpiImportTypespec:
-  \_StringTypespec: (b), line:18:7, endln:18:8
+  \_StringTypespec: , line:18:7, endln:18:8
   |vpiImportTypespec:
   \_ModuleTypespec: (prim_subreg), line:21:4, endln:21:15
   |vpiDefName:work@prim_subreg_shadow
@@ -702,7 +728,7 @@ Design: (unnamed)
       |vpiName:struct_t
       |vpiFullName:work@top.CTRL_RESET.struct_t
       |vpiActual:
-      \_StructTypespec: (struct_t), line:27:12, endln:30:5
+      \_TypedefTypespec: (struct_t), line:30:6, endln:30:14
     |vpiName:CTRL_RESET
     |vpiFullName:work@top.CTRL_RESET
   |vpiParamAssign:
@@ -733,7 +759,7 @@ Design: (unnamed)
           |vpiName:a
           |vpiFullName:work@top.a
           |vpiActual:
-          \_StringTypespec: (a), line:37:7, endln:37:8
+          \_StringTypespec: , line:37:7, endln:37:8
       |vpiOperand:
       \_TaggedPattern: , line:38:7, endln:38:12
         |vpiParent:
@@ -753,37 +779,48 @@ Design: (unnamed)
           |vpiName:b
           |vpiFullName:work@top.b
           |vpiActual:
-          \_StringTypespec: (b), line:38:7, endln:38:8
+          \_StringTypespec: , line:38:7, endln:38:8
     |vpiLhs:
     \_Parameter: (work@top.CTRL_RESET), line:36:23, endln:39:5
   |vpiTypedef:
-  \_StructTypespec: (struct_t), line:27:12, endln:30:5
+  \_TypedefTypespec: (struct_t), line:30:6, endln:30:14
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:26:1, endln:44:10
     |vpiName:struct_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@top.struct_t), line:27:12, endln:30:5
+      |vpiParent:
+      \_TypedefTypespec: (struct_t), line:30:6, endln:30:14
+      |vpiFullName:work@top.struct_t
+      |vpiActual:
+      \_StructTypespec: , line:27:12, endln:30:5
+  |vpiTypedef:
+  \_StructTypespec: , line:27:12, endln:30:5
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:26:1, endln:44:10
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (a), line:28:19, endln:28:20
       |vpiParent:
-      \_StructTypespec: (struct_t), line:27:12, endln:30:5
+      \_StructTypespec: , line:27:12, endln:30:5
       |vpiName:a
       |vpiTypespec:
-      \_RefTypespec: (work@top.struct_t.a), line:28:7, endln:28:18
+      \_RefTypespec: (work@top.a), line:28:7, endln:28:18
         |vpiParent:
         \_TypespecMember: (a), line:28:19, endln:28:20
-        |vpiFullName:work@top.struct_t.a
+        |vpiFullName:work@top.a
         |vpiActual:
         \_LogicTypespec: , line:28:7, endln:28:18
     |vpiTypespecMember:
     \_TypespecMember: (b), line:29:19, endln:29:20
       |vpiParent:
-      \_StructTypespec: (struct_t), line:27:12, endln:30:5
+      \_StructTypespec: , line:27:12, endln:30:5
       |vpiName:b
       |vpiTypespec:
-      \_RefTypespec: (work@top.struct_t.b), line:29:7, endln:29:18
+      \_RefTypespec: (work@top.b), line:29:7, endln:29:18
         |vpiParent:
         \_TypespecMember: (b), line:29:19, endln:29:20
-        |vpiFullName:work@top.struct_t.b
+        |vpiFullName:work@top.b
         |vpiActual:
         \_LogicTypespec: , line:29:7, endln:29:18
   |vpiTypedef:
@@ -835,6 +872,25 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_EnumTypespec: , line:32:12, endln:34:12
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:26:1, endln:44:10
+    |vpiBaseTypespec:
+    \_RefTypespec: (work@top), line:32:17, endln:32:28
+      |vpiParent:
+      \_EnumTypespec: , line:32:12, endln:34:12
+      |vpiFullName:work@top
+      |vpiActual:
+      \_LogicTypespec: , line:32:17, endln:32:28
+    |vpiEnumConst:
+    \_EnumConst: (ENUM_ITEM), line:33:7, endln:33:24
+      |vpiParent:
+      \_EnumTypespec: , line:32:12, endln:34:12
+      |vpiName:ENUM_ITEM
+      |BIN:11
+      |vpiDecompile:2'b11
+      |vpiSize:2
+  |vpiTypedef:
   \_LogicTypespec: , line:32:17, endln:32:28
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:26:1, endln:44:10
@@ -859,54 +915,48 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_EnumTypespec: (enum_t), line:32:12, endln:34:12
+  \_TypedefTypespec: (enum_t), line:34:6, endln:34:12
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:26:1, endln:44:10
     |vpiName:enum_t
-    |vpiBaseTypespec:
-    \_RefTypespec: (work@top.enum_t), line:32:17, endln:32:28
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@top.enum_t), line:32:12, endln:34:5
       |vpiParent:
-      \_EnumTypespec: (enum_t), line:32:12, endln:34:12
+      \_TypedefTypespec: (enum_t), line:34:6, endln:34:12
       |vpiFullName:work@top.enum_t
       |vpiActual:
-      \_LogicTypespec: , line:32:17, endln:32:28
-    |vpiEnumConst:
-    \_EnumConst: (ENUM_ITEM), line:33:7, endln:33:24
-      |vpiParent:
-      \_EnumTypespec: (enum_t), line:32:12, endln:34:12
-      |vpiName:ENUM_ITEM
-      |BIN:11
-      |vpiDecompile:2'b11
-      |vpiSize:2
+      \_EnumTypespec: , line:32:12, endln:34:12
   |vpiTypedef:
-  \_StringTypespec: (a), line:37:7, endln:37:8
+  \_StringTypespec: , line:37:7, endln:37:8
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:26:1, endln:44:10
-    |vpiName:a
   |vpiTypedef:
-  \_StringTypespec: (b), line:38:7, endln:38:8
+  \_StringTypespec: , line:38:7, endln:38:8
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:26:1, endln:44:10
-    |vpiName:b
   |vpiTypedef:
   \_ModuleTypespec: (prim_subreg_shadow), line:41:4, endln:41:22
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/EnumConstElab/dut.sv, line:26:1, endln:44:10
     |vpiName:prim_subreg_shadow
   |vpiImportTypespec:
-  \_StructTypespec: (struct_t), line:27:12, endln:30:5
+  \_TypedefTypespec: (struct_t), line:30:6, endln:30:14
+  |vpiImportTypespec:
+  \_StructTypespec: , line:27:12, endln:30:5
   |vpiImportTypespec:
   \_LogicTypespec: , line:28:7, endln:28:18
   |vpiImportTypespec:
   \_LogicTypespec: , line:29:7, endln:29:18
   |vpiImportTypespec:
+  \_EnumTypespec: , line:32:12, endln:34:12
+  |vpiImportTypespec:
   \_LogicTypespec: , line:32:17, endln:32:28
   |vpiImportTypespec:
-  \_EnumTypespec: (enum_t), line:32:12, endln:34:12
+  \_TypedefTypespec: (enum_t), line:34:6, endln:34:12
   |vpiImportTypespec:
-  \_StringTypespec: (a), line:37:7, endln:37:8
+  \_StringTypespec: , line:37:7, endln:37:8
   |vpiImportTypespec:
-  \_StringTypespec: (b), line:38:7, endln:38:8
+  \_StringTypespec: , line:38:7, endln:38:8
   |vpiImportTypespec:
   \_ModuleTypespec: (prim_subreg_shadow), line:41:4, endln:41:22
   |vpiDefName:work@top

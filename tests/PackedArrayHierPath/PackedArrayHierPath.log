@@ -214,16 +214,17 @@ ParamAssign                                            2
 Parameter                                              2
 Range                                                  1
 RefObj                                                 5
-RefTypespec                                            8
+RefTypespec                                            9
 ReturnStmt                                             1
 StructTypespec                                         1
+TypedefTypespec                                        1
 TypespecMember                                         2
 UnsupportedTypespec                                    1
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:26: Failed to bind object: "id: 86, name: exp_bits".
-[ERR:EL0535] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:26: Illegal implicit net "id:86, name: exp_bits".
-[ERR:UH0734] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:55: Failed to bind object: "id: 91, name: man_bits".
-[ERR:EL0535] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:55: Illegal implicit net "id:91, name: man_bits".
+[ERR:UH0734] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:26: Failed to bind object: "id: 88, name: exp_bits".
+[ERR:EL0535] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:26: Illegal implicit net "id:88, name: exp_bits".
+[ERR:UH0734] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:55: Failed to bind object: "id: 93, name: man_bits".
+[ERR:EL0535] ${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv:18:55: Illegal implicit net "id:93, name: man_bits".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackedArrayHierPath/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -252,7 +253,7 @@ Design: (unnamed)
       |vpiName:fp_encoding_t
       |vpiFullName:uvm::FP_ENCODINGS::fp_encoding_t
       |vpiActual:
-      \_PackedArrayTypespec: , line:8:26, endln:8:46
+      \_PackedArrayTypespec: , line:8:12, endln:8:46
     |vpiLocalParam:1
     |vpiName:FP_ENCODINGS
     |vpiFullName:uvm::FP_ENCODINGS
@@ -500,33 +501,44 @@ Design: (unnamed)
     |vpiInstance:
     \_Package: uvm (uvm), file:${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv, line:1:1, endln:21:11
   |vpiTypedef:
-  \_StructTypespec: (uvm::fp_encoding_t), line:2:9, endln:5:2
+  \_TypedefTypespec: (uvm::fp_encoding_t), line:5:3, endln:5:16
     |vpiParent:
     \_Package: uvm (uvm), file:${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv, line:1:1, endln:21:11
     |vpiName:uvm::fp_encoding_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (uvm::fp_encoding_t), line:2:9, endln:5:2
+      |vpiParent:
+      \_TypedefTypespec: (uvm::fp_encoding_t), line:5:3, endln:5:16
+      |vpiFullName:uvm::fp_encoding_t
+      |vpiActual:
+      \_StructTypespec: , line:2:9, endln:5:2
+  |vpiTypedef:
+  \_StructTypespec: , line:2:9, endln:5:2
+    |vpiParent:
+    \_Package: uvm (uvm), file:${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv, line:1:1, endln:21:11
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (exp_bits), line:3:16, endln:3:24
       |vpiParent:
-      \_StructTypespec: (uvm::fp_encoding_t), line:2:9, endln:5:2
+      \_StructTypespec: , line:2:9, endln:5:2
       |vpiName:exp_bits
       |vpiTypespec:
-      \_RefTypespec: (uvm::fp_encoding_t::exp_bits), line:3:3, endln:3:15
+      \_RefTypespec: (uvm::exp_bits), line:3:3, endln:3:15
         |vpiParent:
         \_TypespecMember: (exp_bits), line:3:16, endln:3:24
-        |vpiFullName:uvm::fp_encoding_t::exp_bits
+        |vpiFullName:uvm::exp_bits
         |vpiActual:
         \_IntTypespec: , line:3:3, endln:3:15
     |vpiTypespecMember:
     \_TypespecMember: (man_bits), line:4:16, endln:4:24
       |vpiParent:
-      \_StructTypespec: (uvm::fp_encoding_t), line:2:9, endln:5:2
+      \_StructTypespec: , line:2:9, endln:5:2
       |vpiName:man_bits
       |vpiTypespec:
-      \_RefTypespec: (uvm::fp_encoding_t::man_bits), line:4:3, endln:4:15
+      \_RefTypespec: (uvm::man_bits), line:4:3, endln:4:15
         |vpiParent:
         \_TypespecMember: (man_bits), line:4:16, endln:4:24
-        |vpiFullName:uvm::fp_encoding_t::man_bits
+        |vpiFullName:uvm::man_bits
         |vpiActual:
         \_IntTypespec: , line:4:3, endln:4:15
   |vpiTypedef:
@@ -538,13 +550,13 @@ Design: (unnamed)
     |vpiParent:
     \_Package: uvm (uvm), file:${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv, line:1:1, endln:21:11
   |vpiTypedef:
-  \_PackedArrayTypespec: , line:8:26, endln:8:46
+  \_PackedArrayTypespec: , line:8:12, endln:8:46
     |vpiParent:
     \_Package: uvm (uvm), file:${SURELOG_DIR}/tests/PackedArrayHierPath/dut.sv, line:1:1, endln:21:11
     |vpiRange:
     \_Range: , line:8:26, endln:8:46
       |vpiParent:
-      \_PackedArrayTypespec: , line:8:26, endln:8:46
+      \_PackedArrayTypespec: , line:8:12, endln:8:46
       |vpiLeftRange:
       \_Constant: , line:8:27, endln:8:28
         |vpiParent:
@@ -575,13 +587,12 @@ Design: (unnamed)
           |UINT:1
           |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (uvm::fp_encoding_t), line:8:12, endln:8:25
+    \_RefTypespec: (uvm::fp_encoding_t), line:5:3, endln:5:16
       |vpiParent:
-      \_PackedArrayTypespec: , line:8:26, endln:8:46
-      |vpiName:fp_encoding_t
-      |vpiFullName:uvm::fp_encoding_t
+      \_PackedArrayTypespec: , line:8:12, endln:8:46
+      |vpiName:uvm::fp_encoding_t
       |vpiActual:
-      \_StructTypespec: (uvm::fp_encoding_t), line:2:9, endln:5:2
+      \_TypedefTypespec: (uvm::fp_encoding_t), line:5:3, endln:5:16
   |vpiTypedef:
   \_UnsupportedTypespec: (fp_format_e), line:17:42, endln:17:53
     |vpiParent:
@@ -590,13 +601,15 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_Function: (uvm::fp_width), line:17:1, endln:19:12
   |vpiImportTypespec:
-  \_StructTypespec: (uvm::fp_encoding_t), line:2:9, endln:5:2
+  \_TypedefTypespec: (uvm::fp_encoding_t), line:5:3, endln:5:16
+  |vpiImportTypespec:
+  \_StructTypespec: , line:2:9, endln:5:2
   |vpiImportTypespec:
   \_IntTypespec: , line:3:3, endln:3:15
   |vpiImportTypespec:
   \_IntTypespec: , line:4:3, endln:4:15
   |vpiImportTypespec:
-  \_PackedArrayTypespec: , line:8:26, endln:8:46
+  \_PackedArrayTypespec: , line:8:12, endln:8:46
   |vpiImportTypespec:
   \_UnsupportedTypespec: (fp_format_e), line:17:42, endln:17:53
   |vpiDefName:uvm

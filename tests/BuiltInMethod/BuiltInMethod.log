@@ -139,10 +139,10 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/BuiltInMethod/dut.sv:1:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+ArrayNet                                               1
 ArrayTypespec                                          1
-ArrayVar                                               1
 ByteTypespec                                           5
-ByteVar                                                5
+ByteVar                                                4
 Constant                                               5
 Design                                                 1
 HierPath                                               4
@@ -151,7 +151,7 @@ Module                                                 2
 Operation                                              1
 Range                                                  1
 RefObj                                                 4
-RefTypespec                                            7
+RefTypespec                                            6
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BuiltInMethod/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -163,69 +163,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@top
-  |vpiVariables:
-  \_ByteVar: (work@top), line:2:10, endln:2:11
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BuiltInMethod/dut.sv, line:1:1, endln:7:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top), line:2:5, endln:2:9
-      |vpiParent:
-      \_ByteVar: (work@top), line:2:10, endln:2:11
-      |vpiFullName:work@top
-      |vpiActual:
-      \_ByteTypespec: , line:2:5, endln:2:9
-    |vpiFullName:work@top
-    |vpiExpr:
-    \_Operation: , line:2:16, endln:2:25
-      |vpiParent:
-      \_ArrayVar: (work@top.b), line:2:10, endln:2:11
-      |vpiOpType:33
-      |vpiOperand:
-      \_Constant: , line:2:17, endln:2:18
-        |vpiParent:
-        \_Operation: , line:2:16, endln:2:25
-        |vpiDecompile:1
-        |vpiSize:8
-        |UINT:1
-        |vpiConstType:9
-      |vpiOperand:
-      \_Constant: , line:2:20, endln:2:21
-        |vpiParent:
-        \_Operation: , line:2:16, endln:2:25
-        |vpiDecompile:1
-        |vpiSize:8
-        |UINT:1
-        |vpiConstType:9
-      |vpiOperand:
-      \_Constant: , line:2:23, endln:2:24
-        |vpiParent:
-        \_Operation: , line:2:16, endln:2:25
-        |vpiDecompile:1
-        |vpiSize:8
-        |UINT:1
-        |vpiConstType:9
-  |vpiVariables:
-  \_ArrayVar: (work@top.b), line:2:10, endln:2:11
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BuiltInMethod/dut.sv, line:1:1, endln:7:10
-    |vpiSize:1
-    |vpiTypespec:
-    \_RefTypespec: (work@top.b), line:2:11, endln:2:13
-      |vpiParent:
-      \_ArrayVar: (work@top.b), line:2:10, endln:2:11
-      |vpiFullName:work@top.b
-      |vpiActual:
-      \_ArrayTypespec: , line:2:11, endln:2:13
-    |vpiName:b
-    |vpiFullName:work@top.b
-    |vpiSigned:1
-    |vpiRandType:1
-    |vpiVisibility:1
-    |vpiExpr:
-    \_Operation: , line:2:16, endln:2:25
-    |vpiArrayType:2
-    |vpiReg:
-    \_ByteVar: (work@top), line:2:10, endln:2:11
   |vpiVariables:
   \_ByteVar: (work@top.o), line:3:10, endln:3:11
     |vpiParent:
@@ -240,6 +177,7 @@ Design: (unnamed)
     |vpiName:o
     |vpiFullName:work@top.o
     |vpiSigned:1
+    |vpiRandType:1
     |vpiVisibility:1
     |vpiExpr:
     \_HierPath: (b), line:3:14, endln:3:19
@@ -252,7 +190,7 @@ Design: (unnamed)
         |vpiName:b
         |vpiFullName:work@top.o.b
         |vpiActual:
-        \_ArrayVar: (work@top.b), line:2:10, endln:2:11
+        \_ArrayNet: (work@top.b), line:2:10, endln:2:11
       |vpiActual:
       \_MethodFuncCall: (and), line:3:16, endln:3:19
         |vpiParent:
@@ -273,6 +211,7 @@ Design: (unnamed)
     |vpiName:o
     |vpiFullName:work@top.o
     |vpiSigned:1
+    |vpiRandType:1
     |vpiVisibility:1
     |vpiExpr:
     \_HierPath: (b), line:4:14, endln:4:18
@@ -285,7 +224,7 @@ Design: (unnamed)
         |vpiName:b
         |vpiFullName:work@top.o.b
         |vpiActual:
-        \_ArrayVar: (work@top.b), line:2:10, endln:2:11
+        \_ArrayNet: (work@top.b), line:2:10, endln:2:11
       |vpiActual:
       \_MethodFuncCall: (or), line:4:16, endln:4:18
         |vpiParent:
@@ -306,6 +245,7 @@ Design: (unnamed)
     |vpiName:o
     |vpiFullName:work@top.o
     |vpiSigned:1
+    |vpiRandType:1
     |vpiVisibility:1
     |vpiExpr:
     \_HierPath: (b), line:5:14, endln:5:19
@@ -318,7 +258,7 @@ Design: (unnamed)
         |vpiName:b
         |vpiFullName:work@top.o.b
         |vpiActual:
-        \_ArrayVar: (work@top.b), line:2:10, endln:2:11
+        \_ArrayNet: (work@top.b), line:2:10, endln:2:11
       |vpiActual:
       \_MethodFuncCall: (xor), line:5:16, endln:5:19
         |vpiParent:
@@ -339,6 +279,7 @@ Design: (unnamed)
     |vpiName:o
     |vpiFullName:work@top.o
     |vpiSigned:1
+    |vpiRandType:1
     |vpiVisibility:1
     |vpiExpr:
     \_HierPath: (b), line:6:14, endln:6:22
@@ -351,28 +292,27 @@ Design: (unnamed)
         |vpiName:b
         |vpiFullName:work@top.o.b
         |vpiActual:
-        \_ArrayVar: (work@top.b), line:2:10, endln:2:11
+        \_ArrayNet: (work@top.b), line:2:10, endln:2:11
       |vpiActual:
       \_MethodFuncCall: (unique), line:6:16, endln:6:22
         |vpiParent:
         \_HierPath: (b), line:6:14, endln:6:22
         |vpiName:unique
       |vpiName:b
-  |vpiRegArray:
-  \_ArrayVar: (work@top.b), line:2:10, endln:2:11
   |vpiTypedef:
   \_ByteTypespec: , line:2:5, endln:2:9
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BuiltInMethod/dut.sv, line:1:1, endln:7:10
     |vpiSigned:1
   |vpiTypedef:
-  \_ArrayTypespec: , line:2:11, endln:2:13
+  \_ArrayTypespec: , line:2:5, endln:2:25
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BuiltInMethod/dut.sv, line:1:1, endln:7:10
+    |vpiArrayType:2
     |vpiElemTypespec:
     \_RefTypespec: (work@top), line:2:5, endln:2:9
       |vpiParent:
-      \_ArrayTypespec: , line:2:11, endln:2:13
+      \_ArrayTypespec: , line:2:5, endln:2:25
       |vpiFullName:work@top
       |vpiActual:
       \_ByteTypespec: , line:2:5, endln:2:9
@@ -399,11 +339,21 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ByteTypespec: , line:2:5, endln:2:9
   |vpiImportTypespec:
-  \_ByteVar: (work@top), line:2:10, endln:2:11
+  \_ArrayTypespec: , line:2:5, endln:2:25
   |vpiImportTypespec:
-  \_ArrayVar: (work@top.b), line:2:10, endln:2:11
-  |vpiImportTypespec:
-  \_ArrayTypespec: , line:2:11, endln:2:13
+  \_ArrayNet: (work@top.b), line:2:10, endln:2:11
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BuiltInMethod/dut.sv, line:1:1, endln:7:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.b), line:2:5, endln:2:9
+      |vpiParent:
+      \_ArrayNet: (work@top.b), line:2:10, endln:2:11
+      |vpiFullName:work@top.b
+      |vpiActual:
+      \_ArrayTypespec: , line:2:5, endln:2:25
+    |vpiName:b
+    |vpiFullName:work@top.b
+    |vpiSigned:1
   |vpiImportTypespec:
   \_ByteTypespec: , line:3:5, endln:3:9
   |vpiImportTypespec:
@@ -421,6 +371,8 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ByteVar: (work@top.o), line:6:10, endln:6:11
   |vpiDefName:work@top
+  |vpiArrayNet:
+  \_ArrayNet: (work@top.b), line:2:10, endln:2:11
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

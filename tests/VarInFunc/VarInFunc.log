@@ -133,7 +133,7 @@ Assignment                                             1
 Begin                                                  1
 ClassDefn                                              8
 ClassTypespec                                          1
-Constant                                              20
+Constant                                              12
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              5
@@ -142,18 +142,18 @@ FuncCall                                               1
 Function                                              10
 IODecl                                                11
 IntTypespec                                            9
-LogicNet                                               2
+LogicNet                                               3
 LogicTypespec                                          3
-LogicVar                                               1
 Module                                                 1
 Package                                                1
 PackedArrayTypespec                                    1
 Port                                                   2
-Range                                                  7
+Range                                                  3
 RefObj                                                 3
-RefTypespec                                           16
+RefTypespec                                           17
 ReturnStmt                                             1
 Task                                                   9
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/VarInFunc/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -422,7 +422,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -456,14 +456,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/VarInFunc/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -471,7 +470,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -479,7 +478,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -487,7 +486,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -495,13 +494,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/VarInFunc/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -714,21 +727,6 @@ Design: (unnamed)
       |vpiParent:
       \_Function: (work@top.compute_next_state), line:2:3, endln:6:35
       |vpiFullName:work@top.compute_next_state
-      |vpiVariables:
-      \_LogicVar: (work@top.compute_next_state.function_variable), line:3:17, endln:3:34
-        |vpiParent:
-        \_Begin: (work@top.compute_next_state)
-        |vpiTypespec:
-        \_RefTypespec: (work@top.compute_next_state.function_variable), line:3:5, endln:3:16
-          |vpiParent:
-          \_LogicVar: (work@top.compute_next_state.function_variable), line:3:17, endln:3:34
-          |vpiFullName:work@top.compute_next_state.function_variable
-          |vpiActual:
-          \_LogicTypespec: , line:3:5, endln:3:16
-        |vpiName:function_variable
-        |vpiFullName:work@top.compute_next_state.function_variable
-      |vpiReg:
-      \_LogicVar: (work@top.compute_next_state.function_variable), line:3:17, endln:3:34
       |vpiTypedef:
       \_LogicTypespec: , line:3:5, endln:3:16
         |vpiParent:
@@ -756,7 +754,19 @@ Design: (unnamed)
       |vpiImportTypespec:
       \_LogicTypespec: , line:3:5, endln:3:16
       |vpiImportTypespec:
-      \_LogicVar: (work@top.compute_next_state.function_variable), line:3:17, endln:3:34
+      \_LogicNet: (work@top.compute_next_state.function_variable), line:3:17, endln:3:34
+        |vpiParent:
+        \_Begin: (work@top.compute_next_state)
+        |vpiTypespec:
+        \_RefTypespec: (work@top.compute_next_state.function_variable), line:3:5, endln:3:16
+          |vpiParent:
+          \_LogicNet: (work@top.compute_next_state.function_variable), line:3:17, endln:3:34
+          |vpiFullName:work@top.compute_next_state.function_variable
+          |vpiActual:
+          \_LogicTypespec: , line:3:5, endln:3:16
+        |vpiName:function_variable
+        |vpiFullName:work@top.compute_next_state.function_variable
+        |vpiSigned:1
       |vpiStmt:
       \_AssignStmt: , line:4:5, endln:4:36
         |vpiParent:
@@ -776,7 +786,7 @@ Design: (unnamed)
           |vpiName:function_variable
           |vpiFullName:work@top.compute_next_state.function_variable
           |vpiActual:
-          \_LogicVar: (work@top.compute_next_state.function_variable), line:3:17, endln:3:34
+          \_LogicNet: (work@top.compute_next_state.function_variable), line:3:17, endln:3:34
       |vpiStmt:
       \_ReturnStmt: , line:5:5, endln:5:29
         |vpiParent:
@@ -788,7 +798,7 @@ Design: (unnamed)
           |vpiName:function_variable
           |vpiFullName:work@top.compute_next_state.function_variable
           |vpiActual:
-          \_LogicVar: (work@top.compute_next_state.function_variable), line:3:17, endln:3:34
+          \_LogicNet: (work@top.compute_next_state.function_variable), line:3:17, endln:3:34
     |vpiTypedef:
     \_LogicTypespec: , line:2:22, endln:2:33
       |vpiParent:

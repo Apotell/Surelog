@@ -91,15 +91,14 @@ AST_DEBUG_END
 Constant                                               2
 Design                                                 1
 EnumConst                                              3
+EnumNet                                                2
 EnumTypespec                                           1
-EnumVar                                                1
 LogicTypespec                                          1
-LogicVar                                               1
 Module                                                 2
 Package                                                1
 Range                                                  1
-RefTypespec                                            2
-UnsupportedTypespec                                    1
+RefTypespec                                            5
+TypedefTypespec                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EnumVar/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -111,6 +110,41 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:pkg
+  |vpiTypedef:
+  \_EnumTypespec: , line:2:11, endln:6:11
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/EnumVar/dut.sv, line:1:1, endln:9:11
+    |vpiBaseTypespec:
+    \_RefTypespec: (pkg), line:2:16, endln:2:26
+      |vpiParent:
+      \_EnumTypespec: , line:2:11, endln:6:11
+      |vpiFullName:pkg
+      |vpiActual:
+      \_LogicTypespec: , line:2:16, endln:2:26
+    |vpiEnumConst:
+    \_EnumConst: (ONE), line:3:5, endln:3:8
+      |vpiParent:
+      \_EnumTypespec: , line:2:11, endln:6:11
+      |vpiName:ONE
+      |INT:0
+      |vpiDecompile:0
+      |vpiSize:8
+    |vpiEnumConst:
+    \_EnumConst: (TWO), line:4:5, endln:4:8
+      |vpiParent:
+      \_EnumTypespec: , line:2:11, endln:6:11
+      |vpiName:TWO
+      |INT:1
+      |vpiDecompile:1
+      |vpiSize:8
+    |vpiEnumConst:
+    \_EnumConst: (THREE), line:5:5, endln:5:10
+      |vpiParent:
+      \_EnumTypespec: , line:2:11, endln:6:11
+      |vpiName:THREE
+      |INT:2
+      |vpiDecompile:2
+      |vpiSize:8
   |vpiTypedef:
   \_LogicTypespec: , line:2:16, endln:2:26
     |vpiParent:
@@ -136,87 +170,76 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_EnumTypespec: (pkg::enum_t), line:2:11, endln:6:11
+  \_TypedefTypespec: (pkg::enum_t), line:6:5, endln:6:11
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/EnumVar/dut.sv, line:1:1, endln:9:11
     |vpiName:pkg::enum_t
-    |vpiBaseTypespec:
-    \_RefTypespec: (pkg::enum_t), line:2:16, endln:2:26
+    |vpiTypedefAlias:
+    \_RefTypespec: (pkg::enum_t), line:2:11, endln:6:4
       |vpiParent:
-      \_EnumTypespec: (pkg::enum_t), line:2:11, endln:6:11
+      \_TypedefTypespec: (pkg::enum_t), line:6:5, endln:6:11
       |vpiFullName:pkg::enum_t
       |vpiActual:
-      \_LogicTypespec: , line:2:16, endln:2:26
-    |vpiEnumConst:
-    \_EnumConst: (ONE), line:3:5, endln:3:8
+      \_EnumTypespec: , line:2:11, endln:6:11
+  |vpiTypedef:
+  \_TypedefTypespec: (pkg::alias_t), line:8:18, endln:8:25
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/EnumVar/dut.sv, line:1:1, endln:9:11
+    |vpiName:pkg::alias_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (pkg::alias_t), line:8:11, endln:8:17
       |vpiParent:
-      \_EnumTypespec: (pkg::enum_t), line:2:11, endln:6:11
-      |vpiName:ONE
-      |INT:0
-      |vpiDecompile:0
-      |vpiSize:8
-    |vpiEnumConst:
-    \_EnumConst: (TWO), line:4:5, endln:4:8
-      |vpiParent:
-      \_EnumTypespec: (pkg::enum_t), line:2:11, endln:6:11
-      |vpiName:TWO
-      |INT:1
-      |vpiDecompile:1
-      |vpiSize:8
-    |vpiEnumConst:
-    \_EnumConst: (THREE), line:5:5, endln:5:10
-      |vpiParent:
-      \_EnumTypespec: (pkg::enum_t), line:2:11, endln:6:11
-      |vpiName:THREE
-      |INT:2
-      |vpiDecompile:2
-      |vpiSize:8
+      \_TypedefTypespec: (pkg::alias_t), line:8:18, endln:8:25
+      |vpiFullName:pkg::alias_t
+      |vpiActual:
+      \_TypedefTypespec: (pkg::enum_t), line:6:5, endln:6:11
+  |vpiImportTypespec:
+  \_EnumTypespec: , line:2:11, endln:6:11
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:16, endln:2:26
   |vpiImportTypespec:
-  \_EnumTypespec: (pkg::enum_t), line:2:11, endln:6:11
+  \_TypedefTypespec: (pkg::enum_t), line:6:5, endln:6:11
+  |vpiImportTypespec:
+  \_TypedefTypespec: (pkg::alias_t), line:8:18, endln:8:25
   |vpiDefName:pkg
 |vpiAllModules:
 \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/EnumVar/dut.sv, line:11:1, endln:14:10
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@dut
-  |vpiVariables:
-  \_EnumVar: (work@dut.a), line:12:15, endln:12:16
+  |vpiImportTypespec:
+  \_EnumNet: (work@dut.a), line:12:15, endln:12:16
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/EnumVar/dut.sv, line:11:1, endln:14:10
     |vpiTypespec:
     \_RefTypespec: (work@dut.a.pkg::enum_t), line:12:3, endln:12:14
       |vpiParent:
-      \_EnumVar: (work@dut.a), line:12:15, endln:12:16
+      \_EnumNet: (work@dut.a), line:12:15, endln:12:16
       |vpiName:pkg::enum_t
       |vpiFullName:work@dut.a.pkg::enum_t
       |vpiActual:
-      \_EnumTypespec: (pkg::enum_t), line:2:11, endln:6:11
+      \_TypedefTypespec: (pkg::enum_t), line:6:5, endln:6:11
     |vpiName:a
     |vpiFullName:work@dut.a
-    |vpiVisibility:1
-  |vpiVariables:
-  \_LogicVar: (work@dut.b), line:13:16, endln:13:17
+  |vpiImportTypespec:
+  \_EnumNet: (work@dut.b), line:13:16, endln:13:17
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/EnumVar/dut.sv, line:11:1, endln:14:10
+    |vpiTypespec:
+    \_RefTypespec: (work@dut.b.pkg::alias_t), line:13:3, endln:13:15
+      |vpiParent:
+      \_EnumNet: (work@dut.b), line:13:16, endln:13:17
+      |vpiName:pkg::alias_t
+      |vpiFullName:work@dut.b.pkg::alias_t
+      |vpiActual:
+      \_TypedefTypespec: (pkg::alias_t), line:8:18, endln:8:25
     |vpiName:b
     |vpiFullName:work@dut.b
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@dut.b), line:13:16, endln:13:17
-  |vpiTypedef:
-  \_UnsupportedTypespec: (pkg::alias_t), line:13:3, endln:13:15
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/EnumVar/dut.sv, line:11:1, endln:14:10
-    |vpiName:pkg::alias_t
-  |vpiImportTypespec:
-  \_EnumVar: (work@dut.a), line:12:15, endln:12:16
-  |vpiImportTypespec:
-  \_UnsupportedTypespec: (pkg::alias_t), line:13:3, endln:13:15
-  |vpiImportTypespec:
-  \_LogicVar: (work@dut.b), line:13:16, endln:13:17
   |vpiDefName:work@dut
+  |vpiNet:
+  \_EnumNet: (work@dut.a), line:12:15, endln:12:16
+  |vpiNet:
+  \_EnumNet: (work@dut.b), line:13:16, endln:13:17
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

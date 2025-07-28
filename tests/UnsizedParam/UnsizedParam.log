@@ -146,21 +146,21 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/UnsizedParam/dut.sv:8:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                               6
+Constant                                               4
 ContAssign                                             1
 Design                                                 1
 IntTypespec                                            1
 LogicTypespec                                          1
 Module                                                 2
 ModuleTypespec                                         1
-Operation                                              3
-PackedArrayTypespec                                    1
+Operation                                              2
 ParamAssign                                            2
 Parameter                                              2
-Range                                                  2
+Range                                                  1
 RefModule                                              2
-RefObj                                                 4
-RefTypespec                                            2
+RefObj                                                 3
+RefTypespec                                            3
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnsizedParam/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -199,7 +199,7 @@ Design: (unnamed)
       |vpiName:my_type_t
       |vpiFullName:work@submodule.Y.my_type_t
       |vpiActual:
-      \_LogicTypespec: (my_type_t), line:3:12, endln:3:25
+      \_TypedefTypespec: (my_type_t), line:3:26, endln:3:35
     |vpiName:Y
     |vpiFullName:work@submodule.Y
   |vpiParamAssign:
@@ -236,13 +236,13 @@ Design: (unnamed)
     \_Module: work@submodule (work@submodule), file:${SURELOG_DIR}/tests/UnsizedParam/dut.sv, line:1:1, endln:6:10
     |vpiSigned:1
   |vpiTypedef:
-  \_PackedArrayTypespec: , line:3:12, endln:3:25
+  \_LogicTypespec: , line:3:12, endln:3:25
     |vpiParent:
     \_Module: work@submodule (work@submodule), file:${SURELOG_DIR}/tests/UnsizedParam/dut.sv, line:1:1, endln:6:10
     |vpiRange:
     \_Range: , line:3:18, endln:3:25
       |vpiParent:
-      \_PackedArrayTypespec: , line:3:12, endln:3:25
+      \_LogicTypespec: , line:3:12, endln:3:25
       |vpiLeftRange:
       \_Operation: , line:3:19, endln:3:22
         |vpiParent:
@@ -273,49 +273,23 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_LogicTypespec: (my_type_t), line:3:12, endln:3:25
+  \_TypedefTypespec: (my_type_t), line:3:26, endln:3:35
     |vpiParent:
     \_Module: work@submodule (work@submodule), file:${SURELOG_DIR}/tests/UnsizedParam/dut.sv, line:1:1, endln:6:10
     |vpiName:my_type_t
-    |vpiRange:
-    \_Range: , line:3:18, endln:3:25
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@submodule.my_type_t), line:3:12, endln:3:17
       |vpiParent:
-      \_LogicTypespec: (my_type_t), line:3:12, endln:3:25
-      |vpiLeftRange:
-      \_Operation: , line:3:19, endln:3:22
-        |vpiParent:
-        \_Range: , line:3:18, endln:3:25
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (work@submodule.my_type_t.X), line:3:19, endln:3:20
-          |vpiParent:
-          \_Operation: , line:3:19, endln:3:22
-          |vpiName:X
-          |vpiFullName:work@submodule.my_type_t.X
-          |vpiActual:
-          \_Parameter: (work@submodule.X), line:2:18, endln:2:24
-        |vpiOperand:
-        \_Constant: , line:3:21, endln:3:22
-          |vpiParent:
-          \_Operation: , line:3:19, endln:3:22
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:3:23, endln:3:24
-        |vpiParent:
-        \_Range: , line:3:18, endln:3:25
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
+      \_TypedefTypespec: (my_type_t), line:3:26, endln:3:35
+      |vpiFullName:work@submodule.my_type_t
+      |vpiActual:
+      \_LogicTypespec: , line:3:12, endln:3:25
   |vpiImportTypespec:
   \_IntTypespec: , line:2:14, endln:2:17
   |vpiImportTypespec:
-  \_PackedArrayTypespec: , line:3:12, endln:3:25
+  \_LogicTypespec: , line:3:12, endln:3:25
   |vpiImportTypespec:
-  \_LogicTypespec: (my_type_t), line:3:12, endln:3:25
+  \_TypedefTypespec: (my_type_t), line:3:26, endln:3:35
   |vpiImportTypespec:
   \_LogicNet: (work@submodule.a), line:5:11, endln:5:12
     |vpiParent:

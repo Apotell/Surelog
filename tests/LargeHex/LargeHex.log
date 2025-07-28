@@ -265,7 +265,7 @@ AST_DEBUG_END
 BitTypespec                                            1
 ClassDefn                                              8
 ClassTypespec                                          1
-Constant                                              26
+Constant                                              20
 Design                                                 1
 EnumConst                                              5
 EnumTypespec                                           1
@@ -273,19 +273,21 @@ Function                                               9
 IODecl                                                11
 IndexedPartSelect                                      2
 IntTypespec                                           12
+LogicNet                                               3
 LogicTypespec                                          4
-LogicVar                                               3
 Module                                                 2
 ModuleTypespec                                         1
-Operation                                              7
+Operation                                              4
 Package                                                1
+PackedArrayTypespec                                    1
 ParamAssign                                            4
 Parameter                                              4
-Range                                                  7
+Range                                                  4
 RefModule                                              1
-RefObj                                                 6
-RefTypespec                                           19
+RefObj                                                 3
+RefTypespec                                           21
 Task                                                   9
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LargeHex/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -554,7 +556,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -588,14 +590,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/LargeHex/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -603,7 +604,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -611,7 +612,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -619,7 +620,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -627,13 +628,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/LargeHex/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -835,22 +850,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@tlul_fifo_sync
-  |vpiVariables:
-  \_LogicVar: (work@tlul_fifo_sync.storage), line:2:25, endln:2:32
-    |vpiParent:
-    \_Module: work@tlul_fifo_sync (work@tlul_fifo_sync), file:${SURELOG_DIR}/tests/LargeHex/dut.sv, line:1:1, endln:3:10
-    |vpiTypespec:
-    \_RefTypespec: (work@tlul_fifo_sync.storage), line:2:4, endln:2:24
-      |vpiParent:
-      \_LogicVar: (work@tlul_fifo_sync.storage), line:2:25, endln:2:32
-      |vpiFullName:work@tlul_fifo_sync.storage
-      |vpiActual:
-      \_LogicTypespec: , line:2:4, endln:2:24
-    |vpiName:storage
-    |vpiFullName:work@tlul_fifo_sync.storage
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@tlul_fifo_sync.storage), line:2:25, endln:2:32
   |vpiParameter:
   \_Parameter: (work@tlul_fifo_sync.ReqDepth), line:1:48, endln:1:60
     |vpiParent:
@@ -925,45 +924,27 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:4, endln:2:24
   |vpiImportTypespec:
-  \_LogicVar: (work@tlul_fifo_sync.storage), line:2:25, endln:2:32
+  \_LogicNet: (work@tlul_fifo_sync.storage), line:2:25, endln:2:32
+    |vpiParent:
+    \_Module: work@tlul_fifo_sync (work@tlul_fifo_sync), file:${SURELOG_DIR}/tests/LargeHex/dut.sv, line:1:1, endln:3:10
+    |vpiTypespec:
+    \_RefTypespec: (work@tlul_fifo_sync.storage), line:2:4, endln:2:24
+      |vpiParent:
+      \_LogicNet: (work@tlul_fifo_sync.storage), line:2:25, endln:2:32
+      |vpiFullName:work@tlul_fifo_sync.storage
+      |vpiActual:
+      \_LogicTypespec: , line:2:4, endln:2:24
+    |vpiName:storage
+    |vpiFullName:work@tlul_fifo_sync.storage
+    |vpiNetType:36
   |vpiDefName:work@tlul_fifo_sync
+  |vpiNet:
+  \_LogicNet: (work@tlul_fifo_sync.storage), line:2:25, endln:2:32
 |vpiAllModules:
 \_Module: work@tlul_socket_1n (work@tlul_socket_1n), file:${SURELOG_DIR}/tests/LargeHex/dut.sv, line:6:1, endln:18:10
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@tlul_socket_1n
-  |vpiVariables:
-  \_LogicVar: (work@tlul_socket_1n.storageKO), line:9:29, endln:9:38
-    |vpiParent:
-    \_Module: work@tlul_socket_1n (work@tlul_socket_1n), file:${SURELOG_DIR}/tests/LargeHex/dut.sv, line:6:1, endln:18:10
-    |vpiTypespec:
-    \_RefTypespec: (work@tlul_socket_1n.storageKO), line:9:6, endln:9:28
-      |vpiParent:
-      \_LogicVar: (work@tlul_socket_1n.storageKO), line:9:29, endln:9:38
-      |vpiFullName:work@tlul_socket_1n.storageKO
-      |vpiActual:
-      \_LogicTypespec: , line:9:6, endln:9:28
-    |vpiName:storageKO
-    |vpiFullName:work@tlul_socket_1n.storageKO
-    |vpiVisibility:1
-  |vpiVariables:
-  \_LogicVar: (work@tlul_socket_1n.storageOK), line:12:29, endln:12:38
-    |vpiParent:
-    \_Module: work@tlul_socket_1n (work@tlul_socket_1n), file:${SURELOG_DIR}/tests/LargeHex/dut.sv, line:6:1, endln:18:10
-    |vpiTypespec:
-    \_RefTypespec: (work@tlul_socket_1n.storageOK), line:12:6, endln:12:28
-      |vpiParent:
-      \_LogicVar: (work@tlul_socket_1n.storageOK), line:12:29, endln:12:38
-      |vpiFullName:work@tlul_socket_1n.storageOK
-      |vpiActual:
-      \_LogicTypespec: , line:12:6, endln:12:28
-    |vpiName:storageOK
-    |vpiFullName:work@tlul_socket_1n.storageOK
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@tlul_socket_1n.storageKO), line:9:29, endln:9:38
-  |vpiReg:
-  \_LogicVar: (work@tlul_socket_1n.storageOK), line:12:29, endln:12:38
   |vpiParameter:
   \_Parameter: (work@tlul_socket_1n.DReqDepth), line:7:27, endln:7:60
     |vpiParent:
@@ -975,7 +956,7 @@ Design: (unnamed)
       \_Parameter: (work@tlul_socket_1n.DReqDepth), line:7:27, endln:7:60
       |vpiFullName:work@tlul_socket_1n.DReqDepth
       |vpiActual:
-      \_BitTypespec: , line:7:16, endln:7:26
+      \_PackedArrayTypespec: , line:7:16, endln:7:26
     |vpiName:DReqDepth
     |vpiFullName:work@tlul_socket_1n.DReqDepth
   |vpiParameter:
@@ -1098,13 +1079,17 @@ Design: (unnamed)
     |vpiLhs:
     \_Parameter: (work@tlul_socket_1n.ReqDepthOK), line:11:29, endln:11:57
   |vpiTypedef:
-  \_BitTypespec: , line:7:16, endln:7:26
+  \_BitTypespec: , line:7:16, endln:7:19
+    |vpiParent:
+    \_Module: work@tlul_socket_1n (work@tlul_socket_1n), file:${SURELOG_DIR}/tests/LargeHex/dut.sv, line:6:1, endln:18:10
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:7:16, endln:7:26
     |vpiParent:
     \_Module: work@tlul_socket_1n (work@tlul_socket_1n), file:${SURELOG_DIR}/tests/LargeHex/dut.sv, line:6:1, endln:18:10
     |vpiRange:
     \_Range: , line:7:20, endln:7:26
       |vpiParent:
-      \_BitTypespec: , line:7:16, endln:7:26
+      \_PackedArrayTypespec: , line:7:16, endln:7:26
       |vpiLeftRange:
       \_Constant: , line:7:21, endln:7:23
         |vpiParent:
@@ -1121,6 +1106,13 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@tlul_socket_1n), line:7:16, endln:7:19
+      |vpiParent:
+      \_PackedArrayTypespec: , line:7:16, endln:7:26
+      |vpiFullName:work@tlul_socket_1n
+      |vpiActual:
+      \_BitTypespec: , line:7:16, endln:7:19
   |vpiTypedef:
   \_IntTypespec: , line:8:16, endln:8:28
     |vpiParent:
@@ -1209,7 +1201,9 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiImportTypespec:
-  \_BitTypespec: , line:7:16, endln:7:26
+  \_BitTypespec: , line:7:16, endln:7:19
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:7:16, endln:7:26
   |vpiImportTypespec:
   \_IntTypespec: , line:8:16, endln:8:28
   |vpiImportTypespec:
@@ -1219,12 +1213,40 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:9:6, endln:9:28
   |vpiImportTypespec:
-  \_LogicVar: (work@tlul_socket_1n.storageKO), line:9:29, endln:9:38
+  \_LogicNet: (work@tlul_socket_1n.storageKO), line:9:29, endln:9:38
+    |vpiParent:
+    \_Module: work@tlul_socket_1n (work@tlul_socket_1n), file:${SURELOG_DIR}/tests/LargeHex/dut.sv, line:6:1, endln:18:10
+    |vpiTypespec:
+    \_RefTypespec: (work@tlul_socket_1n.storageKO), line:9:6, endln:9:28
+      |vpiParent:
+      \_LogicNet: (work@tlul_socket_1n.storageKO), line:9:29, endln:9:38
+      |vpiFullName:work@tlul_socket_1n.storageKO
+      |vpiActual:
+      \_LogicTypespec: , line:9:6, endln:9:28
+    |vpiName:storageKO
+    |vpiFullName:work@tlul_socket_1n.storageKO
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicTypespec: , line:12:6, endln:12:28
   |vpiImportTypespec:
-  \_LogicVar: (work@tlul_socket_1n.storageOK), line:12:29, endln:12:38
+  \_LogicNet: (work@tlul_socket_1n.storageOK), line:12:29, endln:12:38
+    |vpiParent:
+    \_Module: work@tlul_socket_1n (work@tlul_socket_1n), file:${SURELOG_DIR}/tests/LargeHex/dut.sv, line:6:1, endln:18:10
+    |vpiTypespec:
+    \_RefTypespec: (work@tlul_socket_1n.storageOK), line:12:6, endln:12:28
+      |vpiParent:
+      \_LogicNet: (work@tlul_socket_1n.storageOK), line:12:29, endln:12:38
+      |vpiFullName:work@tlul_socket_1n.storageOK
+      |vpiActual:
+      \_LogicTypespec: , line:12:6, endln:12:28
+    |vpiName:storageOK
+    |vpiFullName:work@tlul_socket_1n.storageOK
+    |vpiNetType:36
   |vpiDefName:work@tlul_socket_1n
+  |vpiNet:
+  \_LogicNet: (work@tlul_socket_1n.storageKO), line:9:29, endln:9:38
+  |vpiNet:
+  \_LogicNet: (work@tlul_socket_1n.storageOK), line:12:29, endln:12:38
   |vpiRefModule:
   \_RefModule: work@tlul_fifo_sync (fifo_d), line:14:5, endln:14:19
     |vpiParent:

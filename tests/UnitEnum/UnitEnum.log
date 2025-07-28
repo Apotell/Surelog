@@ -134,8 +134,8 @@ ClassVar                                               1
 Constant                                               6
 Design                                                 1
 EnumConst                                             13
+EnumNet                                                2
 EnumTypespec                                           3
-EnumVar                                                2
 Function                                               9
 IODecl                                                11
 ImportTypespec                                         1
@@ -144,8 +144,9 @@ LogicNet                                               2
 LogicTypespec                                          1
 Module                                                 1
 Package                                                2
-RefTypespec                                           17
+RefTypespec                                           20
 Task                                                   9
+TypedefTypespec                                        3
 UnsupportedTypespec                                    2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnitEnum/slpp_unit/surelog.uhdm ...
@@ -415,7 +416,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -449,14 +450,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/UnitEnum/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -464,7 +464,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -472,7 +472,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -480,7 +480,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -488,13 +488,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/UnitEnum/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -703,14 +717,13 @@ Design: (unnamed)
     |vpiName:Configuration1
     |vpiFullName:pkg::Configuration1
   |vpiTypedef:
-  \_EnumTypespec: (pkg::fsm_t_pkg), line:6:10, endln:6:47
+  \_EnumTypespec: , line:6:10, endln:6:47
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:2:1, endln:8:11
-    |vpiName:pkg::fsm_t_pkg
     |vpiEnumConst:
     \_EnumConst: (IDLE), line:6:16, endln:6:20
       |vpiParent:
-      \_EnumTypespec: (pkg::fsm_t_pkg), line:6:10, endln:6:47
+      \_EnumTypespec: , line:6:10, endln:6:47
       |vpiName:IDLE
       |INT:0
       |vpiDecompile:0
@@ -718,7 +731,7 @@ Design: (unnamed)
     |vpiEnumConst:
     \_EnumConst: (WRITE), line:6:21, endln:6:26
       |vpiParent:
-      \_EnumTypespec: (pkg::fsm_t_pkg), line:6:10, endln:6:47
+      \_EnumTypespec: , line:6:10, endln:6:47
       |vpiName:WRITE
       |INT:1
       |vpiDecompile:1
@@ -726,7 +739,7 @@ Design: (unnamed)
     |vpiEnumConst:
     \_EnumConst: (READ), line:6:27, endln:6:31
       |vpiParent:
-      \_EnumTypespec: (pkg::fsm_t_pkg), line:6:10, endln:6:47
+      \_EnumTypespec: , line:6:10, endln:6:47
       |vpiName:READ
       |INT:2
       |vpiDecompile:2
@@ -734,15 +747,29 @@ Design: (unnamed)
     |vpiEnumConst:
     \_EnumConst: (DONE), line:6:32, endln:6:36
       |vpiParent:
-      \_EnumTypespec: (pkg::fsm_t_pkg), line:6:10, endln:6:47
+      \_EnumTypespec: , line:6:10, endln:6:47
       |vpiName:DONE
       |INT:3
       |vpiDecompile:3
       |vpiSize:64
+  |vpiTypedef:
+  \_TypedefTypespec: (pkg::fsm_t_pkg), line:6:38, endln:6:47
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:2:1, endln:8:11
+    |vpiName:pkg::fsm_t_pkg
+    |vpiTypedefAlias:
+    \_RefTypespec: (pkg::fsm_t_pkg), line:6:10, endln:6:37
+      |vpiParent:
+      \_TypedefTypespec: (pkg::fsm_t_pkg), line:6:38, endln:6:47
+      |vpiFullName:pkg::fsm_t_pkg
+      |vpiActual:
+      \_EnumTypespec: , line:6:10, endln:6:47
   |vpiImportTypespec:
   \_ClassDefn: (pkg::Configuration1), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:3:1, endln:4:9
   |vpiImportTypespec:
-  \_EnumTypespec: (pkg::fsm_t_pkg), line:6:10, endln:6:47
+  \_EnumTypespec: , line:6:10, endln:6:47
+  |vpiImportTypespec:
+  \_TypedefTypespec: (pkg::fsm_t_pkg), line:6:38, endln:6:47
   |vpiDefName:pkg
   |vpiClassDefn:
   \_ClassDefn: (pkg::Configuration1), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:3:1, endln:4:9
@@ -757,36 +784,6 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:work@top
   |vpiVariables:
-  \_EnumVar: (work@top.state), line:18:7, endln:18:12
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:14:1, endln:24:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.state.fsm_t), line:18:1, endln:18:6
-      |vpiParent:
-      \_EnumVar: (work@top.state), line:18:7, endln:18:12
-      |vpiName:fsm_t
-      |vpiFullName:work@top.state.fsm_t
-      |vpiActual:
-      \_EnumTypespec: (fsm_t), line:16:10, endln:16:43
-    |vpiName:state
-    |vpiFullName:work@top.state
-    |vpiVisibility:1
-  |vpiVariables:
-  \_EnumVar: (work@top.state2), line:19:11, endln:19:17
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:14:1, endln:24:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.state2.fsm_t_pkg), line:19:1, endln:19:10
-      |vpiParent:
-      \_EnumVar: (work@top.state2), line:19:11, endln:19:17
-      |vpiName:fsm_t_pkg
-      |vpiFullName:work@top.state2.fsm_t_pkg
-      |vpiActual:
-      \_EnumTypespec: (pkg::fsm_t_pkg), line:6:10, endln:6:47
-    |vpiName:state2
-    |vpiFullName:work@top.state2
-    |vpiVisibility:1
-  |vpiVariables:
   \_ClassVar: (work@top.cfg), line:23:16, endln:23:19
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:14:1, endln:24:10
@@ -800,6 +797,7 @@ Design: (unnamed)
       \_ClassTypespec: (Configuration2), line:23:1, endln:23:15
     |vpiName:cfg
     |vpiFullName:work@top.cfg
+    |vpiRandType:1
     |vpiVisibility:1
   |vpiTypedef:
   \_ImportTypespec: (pkg), line:15:9, endln:15:15
@@ -815,14 +813,13 @@ Design: (unnamed)
       |STRING:*
       |vpiConstType:8
   |vpiTypedef:
-  \_EnumTypespec: (fsm_t), line:16:10, endln:16:43
+  \_EnumTypespec: , line:16:10, endln:16:43
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:14:1, endln:24:10
-    |vpiName:fsm_t
     |vpiEnumConst:
     \_EnumConst: (IDLE), line:16:16, endln:16:20
       |vpiParent:
-      \_EnumTypespec: (fsm_t), line:16:10, endln:16:43
+      \_EnumTypespec: , line:16:10, endln:16:43
       |vpiName:IDLE
       |INT:0
       |vpiDecompile:0
@@ -830,7 +827,7 @@ Design: (unnamed)
     |vpiEnumConst:
     \_EnumConst: (WRITE), line:16:21, endln:16:26
       |vpiParent:
-      \_EnumTypespec: (fsm_t), line:16:10, endln:16:43
+      \_EnumTypespec: , line:16:10, endln:16:43
       |vpiName:WRITE
       |INT:1
       |vpiDecompile:1
@@ -838,7 +835,7 @@ Design: (unnamed)
     |vpiEnumConst:
     \_EnumConst: (READ), line:16:27, endln:16:31
       |vpiParent:
-      \_EnumTypespec: (fsm_t), line:16:10, endln:16:43
+      \_EnumTypespec: , line:16:10, endln:16:43
       |vpiName:READ
       |INT:2
       |vpiDecompile:2
@@ -846,11 +843,23 @@ Design: (unnamed)
     |vpiEnumConst:
     \_EnumConst: (DONE), line:16:32, endln:16:36
       |vpiParent:
-      \_EnumTypespec: (fsm_t), line:16:10, endln:16:43
+      \_EnumTypespec: , line:16:10, endln:16:43
       |vpiName:DONE
       |INT:3
       |vpiDecompile:3
       |vpiSize:64
+  |vpiTypedef:
+  \_TypedefTypespec: (fsm_t), line:16:38, endln:16:43
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:14:1, endln:24:10
+    |vpiName:fsm_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@top.fsm_t), line:16:10, endln:16:37
+      |vpiParent:
+      \_TypedefTypespec: (fsm_t), line:16:38, endln:16:43
+      |vpiFullName:work@top.fsm_t
+      |vpiActual:
+      \_EnumTypespec: , line:16:10, endln:16:43
   |vpiTypedef:
   \_UnsupportedTypespec: (Environment), line:21:1, endln:21:12
     |vpiParent:
@@ -871,11 +880,37 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ImportTypespec: (pkg), line:15:9, endln:15:15
   |vpiImportTypespec:
-  \_EnumTypespec: (fsm_t), line:16:10, endln:16:43
+  \_EnumTypespec: , line:16:10, endln:16:43
   |vpiImportTypespec:
-  \_EnumVar: (work@top.state), line:18:7, endln:18:12
+  \_TypedefTypespec: (fsm_t), line:16:38, endln:16:43
   |vpiImportTypespec:
-  \_EnumVar: (work@top.state2), line:19:11, endln:19:17
+  \_EnumNet: (work@top.state), line:18:7, endln:18:12
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:14:1, endln:24:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.state.fsm_t), line:18:1, endln:18:6
+      |vpiParent:
+      \_EnumNet: (work@top.state), line:18:7, endln:18:12
+      |vpiName:fsm_t
+      |vpiFullName:work@top.state.fsm_t
+      |vpiActual:
+      \_TypedefTypespec: (fsm_t), line:16:38, endln:16:43
+    |vpiName:state
+    |vpiFullName:work@top.state
+  |vpiImportTypespec:
+  \_EnumNet: (work@top.state2), line:19:11, endln:19:17
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitEnum/top.v, line:14:1, endln:24:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.state2.fsm_t_pkg), line:19:1, endln:19:10
+      |vpiParent:
+      \_EnumNet: (work@top.state2), line:19:11, endln:19:17
+      |vpiName:fsm_t_pkg
+      |vpiFullName:work@top.state2.fsm_t_pkg
+      |vpiActual:
+      \_TypedefTypespec: (pkg::fsm_t_pkg), line:6:38, endln:6:47
+    |vpiName:state2
+    |vpiFullName:work@top.state2
   |vpiImportTypespec:
   \_UnsupportedTypespec: (Environment), line:21:1, endln:21:12
   |vpiImportTypespec:
@@ -913,6 +948,10 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ClassVar: (work@top.cfg), line:23:16, endln:23:19
   |vpiDefName:work@top
+  |vpiNet:
+  \_EnumNet: (work@top.state), line:18:7, endln:18:12
+  |vpiNet:
+  \_EnumNet: (work@top.state2), line:19:11, endln:19:17
   |vpiNet:
   \_LogicNet: (work@top.env), line:21:13, endln:21:16
   |vpiNet:

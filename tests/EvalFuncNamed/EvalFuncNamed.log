@@ -241,7 +241,7 @@ Assignment                                             2
 Begin                                                  2
 ClassDefn                                              8
 ClassTypespec                                          1
-Constant                                              28
+Constant                                              16
 Design                                                 1
 EnumConst                                              5
 EnumTypespec                                           1
@@ -253,15 +253,15 @@ IntTypespec                                           15
 LogicNet                                               3
 LogicTypespec                                          3
 Module                                                 1
-Operation                                              7
+Operation                                              1
 Package                                                3
 ParamAssign                                            2
 Parameter                                              2
 Port                                                   3
-Range                                                  6
-RefObj                                                12
-RefTypespec                                           22
+RefObj                                                 6
+RefTypespec                                           23
 Task                                                   9
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EvalFuncNamed/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -530,7 +530,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -564,14 +564,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/EvalFuncNamed/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -579,7 +578,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -587,7 +586,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -595,7 +594,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -603,13 +602,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/EvalFuncNamed/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1132,79 +1145,13 @@ Design: (unnamed)
       |STRING:*
       |vpiConstType:8
   |vpiTypedef:
-  \_LogicTypespec: , line:28:12, endln:28:32
+  \_LogicTypespec: , line:28:12, endln:28:17
     |vpiParent:
     \_Module: work@t (work@t), file:${SURELOG_DIR}/tests/EvalFuncNamed/dut.sv, line:23:1, endln:31:10
-    |vpiRange:
-    \_Range: , line:28:18, endln:28:32
-      |vpiParent:
-      \_LogicTypespec: , line:28:12, endln:28:32
-      |vpiLeftRange:
-      \_Operation: , line:28:19, endln:28:29
-        |vpiParent:
-        \_Range: , line:28:18, endln:28:32
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (work@t.MY_PARAM), line:28:19, endln:28:27
-          |vpiParent:
-          \_Operation: , line:28:19, endln:28:29
-          |vpiName:MY_PARAM
-          |vpiFullName:work@t.MY_PARAM
-          |vpiActual:
-          \_LogicNet: (work@t.MY_PARAM), line:28:19, endln:28:27
-        |vpiOperand:
-        \_Constant: , line:28:28, endln:28:29
-          |vpiParent:
-          \_Operation: , line:28:19, endln:28:29
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:28:30, endln:28:31
-        |vpiParent:
-        \_Range: , line:28:18, endln:28:32
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiTypedef:
-  \_LogicTypespec: , line:28:12, endln:28:32
+  \_LogicTypespec: , line:28:12, endln:28:17
     |vpiParent:
     \_Module: work@t (work@t), file:${SURELOG_DIR}/tests/EvalFuncNamed/dut.sv, line:23:1, endln:31:10
-    |vpiRange:
-    \_Range: , line:28:18, endln:28:32
-      |vpiParent:
-      \_LogicTypespec: , line:28:12, endln:28:32
-      |vpiLeftRange:
-      \_Operation: , line:28:19, endln:28:29
-        |vpiParent:
-        \_Range: , line:28:18, endln:28:32
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (work@t.MY_PARAM), line:28:19, endln:28:27
-          |vpiParent:
-          \_Operation: , line:28:19, endln:28:29
-          |vpiName:MY_PARAM
-          |vpiFullName:work@t.MY_PARAM
-          |vpiActual:
-          \_LogicNet: (work@t.MY_PARAM), line:28:19, endln:28:27
-        |vpiOperand:
-        \_Constant: , line:28:28, endln:28:29
-          |vpiParent:
-          \_Operation: , line:28:19, endln:28:29
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:28:30, endln:28:31
-        |vpiParent:
-        \_Range: , line:28:18, endln:28:32
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiImportTypespec:
   \_ImportTypespec: (my_module_types), line:24:10, endln:24:28
   |vpiImportTypespec:
@@ -1220,30 +1167,23 @@ Design: (unnamed)
     |vpiName:i_d
     |vpiFullName:work@t.i_d
   |vpiImportTypespec:
-  \_LogicTypespec: , line:28:12, endln:28:32
+  \_LogicTypespec: , line:28:12, endln:28:17
   |vpiImportTypespec:
   \_LogicNet: (work@t.o_q), line:28:33, endln:28:36
     |vpiParent:
     \_Module: work@t (work@t), file:${SURELOG_DIR}/tests/EvalFuncNamed/dut.sv, line:23:1, endln:31:10
     |vpiTypespec:
-    \_RefTypespec: (work@t.o_q), line:28:12, endln:28:32
+    \_RefTypespec: (work@t.o_q), line:28:12, endln:28:17
       |vpiParent:
       \_LogicNet: (work@t.o_q), line:28:33, endln:28:36
       |vpiFullName:work@t.o_q
       |vpiActual:
-      \_LogicTypespec: , line:28:12, endln:28:32
+      \_LogicTypespec: , line:28:12, endln:28:17
     |vpiName:o_q
     |vpiFullName:work@t.o_q
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicTypespec: , line:28:12, endln:28:32
-  |vpiImportTypespec:
-  \_LogicNet: (work@t.MY_PARAM), line:28:19, endln:28:27
-    |vpiParent:
-    \_Module: work@t (work@t), file:${SURELOG_DIR}/tests/EvalFuncNamed/dut.sv, line:23:1, endln:31:10
-    |vpiName:MY_PARAM
-    |vpiFullName:work@t.MY_PARAM
-    |vpiNetType:1
+  \_LogicTypespec: , line:28:12, endln:28:17
   |vpiDefName:work@t
   |vpiNet:
   \_LogicNet: (work@t.i_clk), line:26:14, endln:26:19
@@ -1251,8 +1191,6 @@ Design: (unnamed)
   \_LogicNet: (work@t.i_d), line:27:27, endln:27:30
   |vpiNet:
   \_LogicNet: (work@t.o_q), line:28:33, endln:28:36
-  |vpiNet:
-  \_LogicNet: (work@t.MY_PARAM), line:28:19, endln:28:27
   |vpiPort:
   \_Port: (i_clk), line:26:14, endln:26:19
     |vpiParent:
@@ -1277,7 +1215,7 @@ Design: (unnamed)
       \_Port: (o_q), line:28:33, endln:28:36
       |vpiFullName:work@t.o_q
       |vpiActual:
-      \_LogicTypespec: , line:28:12, endln:28:32
+      \_LogicTypespec: , line:28:12, endln:28:17
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

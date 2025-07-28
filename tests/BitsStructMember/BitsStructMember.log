@@ -282,7 +282,7 @@ Begin                                                  3
 BitSelect                                              1
 CaseItem                                               1
 CaseStmt                                               1
-Constant                                              18
+Constant                                              12
 Design                                                 1
 ForStmt                                                1
 HierPath                                               3
@@ -292,17 +292,18 @@ IntVar                                                 1
 LogicNet                                               1
 LogicTypespec                                          6
 Module                                                 3
-Operation                                             11
+Operation                                              8
 Package                                                1
 ParamAssign                                            1
 Parameter                                              1
 Port                                                   2
-Range                                                  5
-RefObj                                                16
-RefTypespec                                           11
+Range                                                  2
+RefObj                                                13
+RefTypespec                                           12
 StructNet                                              1
 StructTypespec                                         1
 SysFuncCall                                            1
+TypedefTypespec                                        1
 TypespecMember                                         4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BitsStructMember/slpp_all/surelog.uhdm ...
@@ -350,57 +351,68 @@ Design: (unnamed)
     \_Package: keymgr_pkg (keymgr_pkg), file:${SURELOG_DIR}/tests/BitsStructMember/dut.sv, line:1:1, endln:14:11
     |vpiSigned:1
   |vpiTypedef:
-  \_StructTypespec: (keymgr_pkg::kmac_data_req_t), line:5:11, endln:12:4
+  \_TypedefTypespec: (keymgr_pkg::kmac_data_req_t), line:12:5, endln:12:20
     |vpiParent:
     \_Package: keymgr_pkg (keymgr_pkg), file:${SURELOG_DIR}/tests/BitsStructMember/dut.sv, line:1:1, endln:14:11
     |vpiName:keymgr_pkg::kmac_data_req_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (keymgr_pkg::kmac_data_req_t), line:5:11, endln:12:4
+      |vpiParent:
+      \_TypedefTypespec: (keymgr_pkg::kmac_data_req_t), line:12:5, endln:12:20
+      |vpiFullName:keymgr_pkg::kmac_data_req_t
+      |vpiActual:
+      \_StructTypespec: , line:5:11, endln:12:4
+  |vpiTypedef:
+  \_StructTypespec: , line:5:11, endln:12:4
+    |vpiParent:
+    \_Package: keymgr_pkg (keymgr_pkg), file:${SURELOG_DIR}/tests/BitsStructMember/dut.sv, line:1:1, endln:14:11
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (valid), line:6:11, endln:6:16
       |vpiParent:
-      \_StructTypespec: (keymgr_pkg::kmac_data_req_t), line:5:11, endln:12:4
+      \_StructTypespec: , line:5:11, endln:12:4
       |vpiName:valid
       |vpiTypespec:
-      \_RefTypespec: (keymgr_pkg::kmac_data_req_t::valid), line:6:5, endln:6:10
+      \_RefTypespec: (keymgr_pkg::valid), line:6:5, endln:6:10
         |vpiParent:
         \_TypespecMember: (valid), line:6:11, endln:6:16
-        |vpiFullName:keymgr_pkg::kmac_data_req_t::valid
+        |vpiFullName:keymgr_pkg::valid
         |vpiActual:
         \_LogicTypespec: , line:6:5, endln:6:10
     |vpiTypespecMember:
     \_TypespecMember: (data), line:7:33, endln:7:37
       |vpiParent:
-      \_StructTypespec: (keymgr_pkg::kmac_data_req_t), line:5:11, endln:12:4
+      \_StructTypespec: , line:5:11, endln:12:4
       |vpiName:data
       |vpiTypespec:
-      \_RefTypespec: (keymgr_pkg::kmac_data_req_t::data), line:7:5, endln:7:32
+      \_RefTypespec: (keymgr_pkg::data), line:7:5, endln:7:32
         |vpiParent:
         \_TypespecMember: (data), line:7:33, endln:7:37
-        |vpiFullName:keymgr_pkg::kmac_data_req_t::data
+        |vpiFullName:keymgr_pkg::data
         |vpiActual:
         \_LogicTypespec: , line:7:5, endln:7:32
     |vpiTypespecMember:
     \_TypespecMember: (strb), line:8:35, endln:8:39
       |vpiParent:
-      \_StructTypespec: (keymgr_pkg::kmac_data_req_t), line:5:11, endln:12:4
+      \_StructTypespec: , line:5:11, endln:12:4
       |vpiName:strb
       |vpiTypespec:
-      \_RefTypespec: (keymgr_pkg::kmac_data_req_t::strb), line:8:5, endln:8:34
+      \_RefTypespec: (keymgr_pkg::strb), line:8:5, endln:8:34
         |vpiParent:
         \_TypespecMember: (strb), line:8:35, endln:8:39
-        |vpiFullName:keymgr_pkg::kmac_data_req_t::strb
+        |vpiFullName:keymgr_pkg::strb
         |vpiActual:
         \_LogicTypespec: , line:8:5, endln:8:34
     |vpiTypespecMember:
     \_TypespecMember: (last), line:11:11, endln:11:15
       |vpiParent:
-      \_StructTypespec: (keymgr_pkg::kmac_data_req_t), line:5:11, endln:12:4
+      \_StructTypespec: , line:5:11, endln:12:4
       |vpiName:last
       |vpiTypespec:
-      \_RefTypespec: (keymgr_pkg::kmac_data_req_t::last), line:11:5, endln:11:10
+      \_RefTypespec: (keymgr_pkg::last), line:11:5, endln:11:10
         |vpiParent:
         \_TypespecMember: (last), line:11:11, endln:11:15
-        |vpiFullName:keymgr_pkg::kmac_data_req_t::last
+        |vpiFullName:keymgr_pkg::last
         |vpiActual:
         \_LogicTypespec: , line:11:5, endln:11:10
   |vpiTypedef:
@@ -501,7 +513,9 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:3:13, endln:3:16
   |vpiImportTypespec:
-  \_StructTypespec: (keymgr_pkg::kmac_data_req_t), line:5:11, endln:12:4
+  \_TypedefTypespec: (keymgr_pkg::kmac_data_req_t), line:12:5, endln:12:20
+  |vpiImportTypespec:
+  \_StructTypespec: , line:5:11, endln:12:4
   |vpiImportTypespec:
   \_LogicTypespec: , line:6:5, endln:6:10
   |vpiImportTypespec:
@@ -517,125 +531,50 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:work@top
   |vpiTypedef:
-  \_LogicTypespec: , line:17:9, endln:17:29
+  \_LogicTypespec: , line:17:9, endln:17:14
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitsStructMember/dut.sv, line:16:1, endln:28:10
-    |vpiRange:
-    \_Range: , line:17:15, endln:17:29
-      |vpiParent:
-      \_LogicTypespec: , line:17:9, endln:17:29
-      |vpiLeftRange:
-      \_Operation: , line:17:16, endln:17:26
-        |vpiParent:
-        \_Range: , line:17:15, endln:17:29
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (work@top.MsgWidth), line:17:16, endln:17:24
-          |vpiParent:
-          \_Operation: , line:17:16, endln:17:26
-          |vpiName:MsgWidth
-          |vpiFullName:work@top.MsgWidth
-          |vpiActual:
-          \_LogicNet: (work@top.MsgWidth), line:17:16, endln:17:24
-        |vpiOperand:
-        \_Constant: , line:17:25, endln:17:26
-          |vpiParent:
-          \_Operation: , line:17:16, endln:17:26
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:17:27, endln:17:28
-        |vpiParent:
-        \_Range: , line:17:15, endln:17:29
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiTypedef:
-  \_LogicTypespec: , line:17:9, endln:17:29
+  \_LogicTypespec: , line:17:9, endln:17:14
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitsStructMember/dut.sv, line:16:1, endln:28:10
-    |vpiRange:
-    \_Range: , line:17:15, endln:17:29
-      |vpiParent:
-      \_LogicTypespec: , line:17:9, endln:17:29
-      |vpiLeftRange:
-      \_Operation: , line:17:16, endln:17:26
-        |vpiParent:
-        \_Range: , line:17:15, endln:17:29
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (work@top.MsgWidth), line:17:16, endln:17:24
-          |vpiParent:
-          \_Operation: , line:17:16, endln:17:26
-          |vpiName:MsgWidth
-          |vpiFullName:work@top.MsgWidth
-          |vpiActual:
-          \_LogicNet: (work@top.MsgWidth), line:17:16, endln:17:24
-        |vpiOperand:
-        \_Constant: , line:17:25, endln:17:26
-          |vpiParent:
-          \_Operation: , line:17:16, endln:17:26
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:17:27, endln:17:28
-        |vpiParent:
-        \_Range: , line:17:15, endln:17:29
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiImportTypespec:
   \_StructNet: (work@top.keymgr_data_i), line:16:48, endln:16:61
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitsStructMember/dut.sv, line:16:1, endln:28:10
     |vpiTypespec:
-    \_RefTypespec: (work@top.keymgr_data_i.keymgr_data_i), line:16:20, endln:16:47
+    \_RefTypespec: (work@top.keymgr_data_i.keymgr_pkg::kmac_data_req_t), line:16:20, endln:16:47
       |vpiParent:
       \_StructNet: (work@top.keymgr_data_i), line:16:48, endln:16:61
-      |vpiName:keymgr_data_i
-      |vpiFullName:work@top.keymgr_data_i.keymgr_data_i
+      |vpiName:keymgr_pkg::kmac_data_req_t
+      |vpiFullName:work@top.keymgr_data_i.keymgr_pkg::kmac_data_req_t
       |vpiActual:
-      \_StructTypespec: (keymgr_pkg::kmac_data_req_t), line:5:11, endln:12:4
+      \_TypedefTypespec: (keymgr_pkg::kmac_data_req_t), line:12:5, endln:12:20
     |vpiName:keymgr_data_i
     |vpiFullName:work@top.keymgr_data_i
   |vpiImportTypespec:
-  \_LogicTypespec: , line:17:9, endln:17:29
+  \_LogicTypespec: , line:17:9, endln:17:14
   |vpiImportTypespec:
   \_LogicNet: (work@top.kmac_mask_o), line:17:30, endln:17:41
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitsStructMember/dut.sv, line:16:1, endln:28:10
     |vpiTypespec:
-    \_RefTypespec: (work@top.kmac_mask_o), line:17:9, endln:17:29
+    \_RefTypespec: (work@top.kmac_mask_o), line:17:9, endln:17:14
       |vpiParent:
       \_LogicNet: (work@top.kmac_mask_o), line:17:30, endln:17:41
       |vpiFullName:work@top.kmac_mask_o
       |vpiActual:
-      \_LogicTypespec: , line:17:9, endln:17:29
+      \_LogicTypespec: , line:17:9, endln:17:14
     |vpiName:kmac_mask_o
     |vpiFullName:work@top.kmac_mask_o
     |vpiNetType:36
   |vpiImportTypespec:
-  \_LogicTypespec: , line:17:9, endln:17:29
-  |vpiImportTypespec:
-  \_LogicNet: (work@top.MsgWidth), line:17:16, endln:17:24
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitsStructMember/dut.sv, line:16:1, endln:28:10
-    |vpiName:MsgWidth
-    |vpiFullName:work@top.MsgWidth
-    |vpiNetType:1
+  \_LogicTypespec: , line:17:9, endln:17:14
   |vpiDefName:work@top
   |vpiNet:
   \_StructNet: (work@top.keymgr_data_i), line:16:48, endln:16:61
   |vpiNet:
   \_LogicNet: (work@top.kmac_mask_o), line:17:30, endln:17:41
-  |vpiNet:
-  \_LogicNet: (work@top.MsgWidth), line:17:16, endln:17:24
   |vpiPort:
   \_Port: (keymgr_data_i), line:16:48, endln:16:61
     |vpiParent:
@@ -649,7 +588,7 @@ Design: (unnamed)
       |vpiName:keymgr_pkg::kmac_data_req_t
       |vpiFullName:work@top.keymgr_data_i.keymgr_pkg::kmac_data_req_t
       |vpiActual:
-      \_StructTypespec: (keymgr_pkg::kmac_data_req_t), line:5:11, endln:12:4
+      \_TypedefTypespec: (keymgr_pkg::kmac_data_req_t), line:12:5, endln:12:20
   |vpiPort:
   \_Port: (kmac_mask_o), line:17:30, endln:17:41
     |vpiParent:
@@ -662,7 +601,7 @@ Design: (unnamed)
       \_Port: (kmac_mask_o), line:17:30, endln:17:41
       |vpiFullName:work@top.kmac_mask_o
       |vpiActual:
-      \_LogicTypespec: , line:17:9, endln:17:29
+      \_LogicTypespec: , line:17:9, endln:17:14
   |vpiProcess:
   \_Always: , line:19:3, endln:27:6
     |vpiParent:

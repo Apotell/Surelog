@@ -84,15 +84,15 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayNet                                               1
-Constant                                              10
+ArrayTypespec                                          1
+Constant                                               8
 ContAssign                                             1
 Design                                                 1
 IndexedPartSelect                                      1
-LogicNet                                               1
 LogicTypespec                                          1
 Module                                                 1
-Range                                                  3
-RefTypespec                                            1
+Range                                                  2
+RefTypespec                                            2
 VarSelect                                              1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/WireUnpacked/slpp_all/surelog.uhdm ...
@@ -129,25 +129,59 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_ArrayTypespec: , line:2:1, endln:2:28
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/WireUnpacked/dut.sv, line:1:1, endln:4:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:2:21, endln:2:28
+      |vpiParent:
+      \_ArrayTypespec: , line:2:1, endln:2:28
+      |vpiLeftRange:
+      \_Constant: , line:2:22, endln:2:23
+        |vpiParent:
+        \_Range: , line:2:21, endln:2:28
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:2:24, endln:2:27
+        |vpiParent:
+        \_Range: , line:2:21, endln:2:28
+        |vpiDecompile:100
+        |vpiSize:64
+        |UINT:100
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@dut), line:2:1, endln:2:5
+      |vpiParent:
+      \_ArrayTypespec: , line:2:1, endln:2:28
+      |vpiFullName:work@dut
+      |vpiActual:
+      \_LogicTypespec: , line:2:1, endln:2:11
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:1, endln:2:11
   |vpiImportTypespec:
-  \_LogicNet: (work@dut.read_buf), line:2:12, endln:2:20
+  \_ArrayTypespec: , line:2:1, endln:2:28
+  |vpiImportTypespec:
+  \_ArrayNet: (work@dut.read_buf), line:2:12, endln:2:20
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/WireUnpacked/dut.sv, line:1:1, endln:4:10
     |vpiTypespec:
-    \_RefTypespec: (work@dut.read_buf), line:2:1, endln:2:11
+    \_RefTypespec: (work@dut.read_buf), line:2:1, endln:2:5
       |vpiParent:
-      \_LogicNet: (work@dut.read_buf), line:2:12, endln:2:20
+      \_ArrayNet: (work@dut.read_buf), line:2:12, endln:2:20
       |vpiFullName:work@dut.read_buf
       |vpiActual:
-      \_LogicTypespec: , line:2:1, endln:2:11
+      \_ArrayTypespec: , line:2:1, endln:2:28
     |vpiName:read_buf
     |vpiFullName:work@dut.read_buf
     |vpiNetType:1
   |vpiDefName:work@dut
-  |vpiNet:
-  \_LogicNet: (work@dut.read_buf), line:2:12, endln:2:20
+  |vpiArrayNet:
+  \_ArrayNet: (work@dut.read_buf), line:2:12, endln:2:20
   |vpiContAssign:
   \_ContAssign: , line:3:8, endln:3:32
     |vpiParent:
@@ -167,7 +201,7 @@ Design: (unnamed)
       |vpiName:read_buf
       |vpiFullName:work@dut.read_buf
       |vpiActual:
-      \_LogicNet: (work@dut.read_buf), line:2:12, endln:2:20
+      \_ArrayNet: (work@dut.read_buf), line:2:12, endln:2:20
       |vpiIndex:
       \_Constant: , line:3:17, endln:3:18
         |vpiParent:
@@ -184,7 +218,7 @@ Design: (unnamed)
         |vpiFullName:work@dut.read_buf
         |vpiDefName:read_buf
         |vpiActual:
-        \_LogicNet: (work@dut.read_buf), line:2:12, endln:2:20
+        \_ArrayNet: (work@dut.read_buf), line:2:12, endln:2:20
         |vpiConstantSelect:1
         |vpiIndexedPartSelectType:2
         |vpiBaseExpr:

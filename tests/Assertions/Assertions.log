@@ -445,12 +445,11 @@ AST_DEBUG_END
 Always                                                 1
 Assert                                                 1
 BitTypespec                                            2
-Constant                                              12
+Constant                                               6
 Design                                                 1
 ImmediateAssert                                        1
-LogicNet                                               1
+LogicNet                                               5
 LogicTypespec                                          4
-LogicVar                                               4
 Module                                                 2
 Operation                                             12
 PackedArrayTypespec                                    1
@@ -458,9 +457,10 @@ Port                                                   1
 PropFormalDecl                                         2
 PropertyDecl                                           1
 PropertySpec                                           2
-Range                                                  6
+Range                                                  3
 RefObj                                                 7
-RefTypespec                                            6
+RefTypespec                                            8
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Assertions/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -603,70 +603,10 @@ Design: (unnamed)
           |vpiFullName:work@m.a2.clock
           |vpiActual:
           \_LogicNet: (work@m.clock), line:1:16, endln:1:21
-  |vpiVariables:
-  \_LogicVar: (work@m.a), line:2:14, endln:2:15
+  |vpiTypedef:
+  \_BitTypespec: , line:4:9, endln:4:12
     |vpiParent:
     \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
-    |vpiTypespec:
-    \_RefTypespec: (work@m.a), line:2:1, endln:2:13
-      |vpiParent:
-      \_LogicVar: (work@m.a), line:2:14, endln:2:15
-      |vpiFullName:work@m.a
-      |vpiActual:
-      \_LogicTypespec: , line:2:1, endln:2:13
-    |vpiName:a
-    |vpiFullName:work@m.a
-    |vpiVisibility:1
-  |vpiVariables:
-  \_LogicVar: (work@m.b), line:2:17, endln:2:18
-    |vpiParent:
-    \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
-    |vpiTypespec:
-    \_RefTypespec: (work@m.b), line:2:1, endln:2:13
-      |vpiParent:
-      \_LogicVar: (work@m.b), line:2:17, endln:2:18
-      |vpiFullName:work@m.b
-      |vpiActual:
-      \_LogicTypespec: , line:2:1, endln:2:13
-    |vpiName:b
-    |vpiFullName:work@m.b
-    |vpiVisibility:1
-  |vpiVariables:
-  \_LogicVar: (work@m.c), line:3:7, endln:3:8
-    |vpiParent:
-    \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
-    |vpiTypespec:
-    \_RefTypespec: (work@m.c), line:3:1, endln:3:6
-      |vpiParent:
-      \_LogicVar: (work@m.c), line:3:7, endln:3:8
-      |vpiFullName:work@m.c
-      |vpiActual:
-      \_LogicTypespec: , line:3:1, endln:3:6
-    |vpiName:c
-    |vpiFullName:work@m.c
-    |vpiVisibility:1
-  |vpiVariables:
-  \_LogicVar: (work@m.d), line:3:10, endln:3:11
-    |vpiParent:
-    \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
-    |vpiTypespec:
-    \_RefTypespec: (work@m.d), line:3:1, endln:3:6
-      |vpiParent:
-      \_LogicVar: (work@m.d), line:3:10, endln:3:11
-      |vpiFullName:work@m.d
-      |vpiActual:
-      \_LogicTypespec: , line:3:1, endln:3:6
-    |vpiName:d
-    |vpiFullName:work@m.d
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@m.a), line:2:14, endln:2:15
-  |vpiReg:
-  \_LogicVar: (work@m.b), line:2:17, endln:2:18
-  |vpiReg:
-  \_LogicVar: (work@m.c), line:3:7, endln:3:8
-  |vpiReg:
-  \_LogicVar: (work@m.d), line:3:10, endln:3:11
   |vpiTypedef:
   \_PackedArrayTypespec: , line:4:9, endln:4:19
     |vpiParent:
@@ -691,31 +631,25 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@m), line:4:9, endln:4:12
+      |vpiParent:
+      \_PackedArrayTypespec: , line:4:9, endln:4:19
+      |vpiFullName:work@m
+      |vpiActual:
+      \_BitTypespec: , line:4:9, endln:4:12
   |vpiTypedef:
-  \_BitTypespec: (bits), line:4:9, endln:4:19
+  \_TypedefTypespec: (bits), line:4:20, endln:4:24
     |vpiParent:
     \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
     |vpiName:bits
-    |vpiRange:
-    \_Range: , line:4:13, endln:4:19
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@m.bits), line:4:9, endln:4:12
       |vpiParent:
-      \_BitTypespec: (bits), line:4:9, endln:4:19
-      |vpiLeftRange:
-      \_Constant: , line:4:14, endln:4:16
-        |vpiParent:
-        \_Range: , line:4:13, endln:4:19
-        |vpiDecompile:15
-        |vpiSize:64
-        |UINT:15
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:4:17, endln:4:18
-        |vpiParent:
-        \_Range: , line:4:13, endln:4:19
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
+      \_TypedefTypespec: (bits), line:4:20, endln:4:24
+      |vpiFullName:work@m.bits
+      |vpiActual:
+      \_PackedArrayTypespec: , line:4:9, endln:4:19
   |vpiTypedef:
   \_BitTypespec: , line:9:18, endln:9:21
     |vpiParent:
@@ -777,9 +711,11 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
   |vpiImportTypespec:
+  \_BitTypespec: , line:4:9, endln:4:12
+  |vpiImportTypespec:
   \_PackedArrayTypespec: , line:4:9, endln:4:19
   |vpiImportTypespec:
-  \_BitTypespec: (bits), line:4:9, endln:4:19
+  \_TypedefTypespec: (bits), line:4:20, endln:4:24
   |vpiImportTypespec:
   \_ImmediateAssert: , line:8:4, endln:8:35
     |vpiParent:
@@ -802,7 +738,7 @@ Design: (unnamed)
           |vpiName:a
           |vpiFullName:work@m.a
           |vpiActual:
-          \_LogicVar: (work@m.a), line:2:14, endln:2:15
+          \_LogicNet: (work@m.a), line:2:14, endln:2:15
       |vpiOperand:
       \_Operation: , line:8:24, endln:8:32
         |vpiParent:
@@ -815,7 +751,7 @@ Design: (unnamed)
           |vpiName:b
           |vpiFullName:work@m.b
           |vpiActual:
-          \_LogicVar: (work@m.b), line:2:17, endln:2:18
+          \_LogicNet: (work@m.b), line:2:17, endln:2:18
   |vpiImportTypespec:
   \_BitTypespec: , line:9:18, endln:9:21
   |vpiImportTypespec:
@@ -827,19 +763,67 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:1, endln:2:13
   |vpiImportTypespec:
-  \_LogicVar: (work@m.a), line:2:14, endln:2:15
+  \_LogicNet: (work@m.a), line:2:14, endln:2:15
+    |vpiParent:
+    \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
+    |vpiTypespec:
+    \_RefTypespec: (work@m.a), line:2:1, endln:2:13
+      |vpiParent:
+      \_LogicNet: (work@m.a), line:2:14, endln:2:15
+      |vpiFullName:work@m.a
+      |vpiActual:
+      \_LogicTypespec: , line:2:1, endln:2:13
+    |vpiName:a
+    |vpiFullName:work@m.a
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:1, endln:2:13
   |vpiImportTypespec:
-  \_LogicVar: (work@m.b), line:2:17, endln:2:18
+  \_LogicNet: (work@m.b), line:2:17, endln:2:18
+    |vpiParent:
+    \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
+    |vpiTypespec:
+    \_RefTypespec: (work@m.b), line:2:1, endln:2:13
+      |vpiParent:
+      \_LogicNet: (work@m.b), line:2:17, endln:2:18
+      |vpiFullName:work@m.b
+      |vpiActual:
+      \_LogicTypespec: , line:2:1, endln:2:13
+    |vpiName:b
+    |vpiFullName:work@m.b
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:1, endln:3:6
   |vpiImportTypespec:
-  \_LogicVar: (work@m.c), line:3:7, endln:3:8
+  \_LogicNet: (work@m.c), line:3:7, endln:3:8
+    |vpiParent:
+    \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
+    |vpiTypespec:
+    \_RefTypespec: (work@m.c), line:3:1, endln:3:6
+      |vpiParent:
+      \_LogicNet: (work@m.c), line:3:7, endln:3:8
+      |vpiFullName:work@m.c
+      |vpiActual:
+      \_LogicTypespec: , line:3:1, endln:3:6
+    |vpiName:c
+    |vpiFullName:work@m.c
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:1, endln:3:6
   |vpiImportTypespec:
-  \_LogicVar: (work@m.d), line:3:10, endln:3:11
+  \_LogicNet: (work@m.d), line:3:10, endln:3:11
+    |vpiParent:
+    \_Module: work@m (work@m), file:${SURELOG_DIR}/tests/Assertions/dut.sv, line:1:1, endln:13:14
+    |vpiTypespec:
+    \_RefTypespec: (work@m.d), line:3:1, endln:3:6
+      |vpiParent:
+      \_LogicNet: (work@m.d), line:3:10, endln:3:11
+      |vpiFullName:work@m.d
+      |vpiActual:
+      \_LogicTypespec: , line:3:1, endln:3:6
+    |vpiName:d
+    |vpiFullName:work@m.d
+    |vpiNetType:36
   |vpiImportTypespec:
   \_Assert: (work@m.a2), line:12:5, endln:12:54
   |vpiImportTypespec:
@@ -859,6 +843,14 @@ Design: (unnamed)
   |vpiDefName:work@m
   |vpiNet:
   \_LogicNet: (work@m.clock), line:1:16, endln:1:21
+  |vpiNet:
+  \_LogicNet: (work@m.a), line:2:14, endln:2:15
+  |vpiNet:
+  \_LogicNet: (work@m.b), line:2:17, endln:2:18
+  |vpiNet:
+  \_LogicNet: (work@m.c), line:3:7, endln:3:8
+  |vpiNet:
+  \_LogicNet: (work@m.d), line:3:10, endln:3:11
   |vpiNet:
   \_LogicNet: (work@m.x), line:10:9, endln:10:10
   |vpiNet:

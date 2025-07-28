@@ -244,8 +244,9 @@ Parameter                                              1
 Range                                                  1
 RefModule                                              1
 RefObj                                                 7
-RefTypespec                                            3
+RefTypespec                                            4
 ReturnStmt                                             5
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FuncCase/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -285,13 +286,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:grp
       |vpiTypedef:
-      \_RefTypespec: (fpnew_pkg::num_operands::grp::opgroup_e), line:2:9, endln:4:14
+      \_RefTypespec: (fpnew_pkg::num_operands::grp::opgroup_e), line:4:5, endln:4:14
         |vpiParent:
         \_IODecl: (grp), line:7:56, endln:7:59
         |vpiName:opgroup_e
         |vpiFullName:fpnew_pkg::num_operands::grp::opgroup_e
         |vpiActual:
-        \_EnumTypespec: (fpnew_pkg::opgroup_e), line:2:9, endln:4:14
+        \_TypedefTypespec: (fpnew_pkg::opgroup_e), line:4:5, endln:4:14
     |vpiStmt:
     \_CaseStmt: , line:8:5, endln:14:12
       |vpiParent:
@@ -421,6 +422,49 @@ Design: (unnamed)
     |vpiInstance:
     \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/FuncCase/dut.sv, line:1:1, endln:17:11
   |vpiTypedef:
+  \_EnumTypespec: , line:2:9, endln:4:14
+    |vpiParent:
+    \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/FuncCase/dut.sv, line:1:1, endln:17:11
+    |vpiBaseTypespec:
+    \_RefTypespec: (fpnew_pkg), line:2:14, endln:2:25
+      |vpiParent:
+      \_EnumTypespec: , line:2:9, endln:4:14
+      |vpiFullName:fpnew_pkg
+      |vpiActual:
+      \_LogicTypespec: , line:2:14, endln:2:25
+    |vpiEnumConst:
+    \_EnumConst: (ADDMUL), line:3:5, endln:3:11
+      |vpiParent:
+      \_EnumTypespec: , line:2:9, endln:4:14
+      |vpiName:ADDMUL
+      |INT:0
+      |vpiDecompile:0
+      |vpiSize:2
+    |vpiEnumConst:
+    \_EnumConst: (DIVSQRT), line:3:13, endln:3:20
+      |vpiParent:
+      \_EnumTypespec: , line:2:9, endln:4:14
+      |vpiName:DIVSQRT
+      |INT:1
+      |vpiDecompile:1
+      |vpiSize:2
+    |vpiEnumConst:
+    \_EnumConst: (NONCOMP), line:3:22, endln:3:29
+      |vpiParent:
+      \_EnumTypespec: , line:2:9, endln:4:14
+      |vpiName:NONCOMP
+      |INT:2
+      |vpiDecompile:2
+      |vpiSize:2
+    |vpiEnumConst:
+    \_EnumConst: (CONV), line:3:31, endln:3:35
+      |vpiParent:
+      \_EnumTypespec: , line:2:9, endln:4:14
+      |vpiName:CONV
+      |INT:3
+      |vpiDecompile:3
+      |vpiSize:2
+  |vpiTypedef:
   \_LogicTypespec: , line:2:14, endln:2:25
     |vpiParent:
     \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/FuncCase/dut.sv, line:1:1, endln:17:11
@@ -445,55 +489,25 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_EnumTypespec: (fpnew_pkg::opgroup_e), line:2:9, endln:4:14
+  \_TypedefTypespec: (fpnew_pkg::opgroup_e), line:4:5, endln:4:14
     |vpiParent:
     \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/FuncCase/dut.sv, line:1:1, endln:17:11
     |vpiName:fpnew_pkg::opgroup_e
-    |vpiBaseTypespec:
-    \_RefTypespec: (fpnew_pkg::opgroup_e), line:2:14, endln:2:25
+    |vpiTypedefAlias:
+    \_RefTypespec: (fpnew_pkg::opgroup_e), line:2:9, endln:4:4
       |vpiParent:
-      \_EnumTypespec: (fpnew_pkg::opgroup_e), line:2:9, endln:4:14
+      \_TypedefTypespec: (fpnew_pkg::opgroup_e), line:4:5, endln:4:14
       |vpiFullName:fpnew_pkg::opgroup_e
       |vpiActual:
-      \_LogicTypespec: , line:2:14, endln:2:25
-    |vpiEnumConst:
-    \_EnumConst: (ADDMUL), line:3:5, endln:3:11
-      |vpiParent:
-      \_EnumTypespec: (fpnew_pkg::opgroup_e), line:2:9, endln:4:14
-      |vpiName:ADDMUL
-      |INT:0
-      |vpiDecompile:0
-      |vpiSize:2
-    |vpiEnumConst:
-    \_EnumConst: (DIVSQRT), line:3:13, endln:3:20
-      |vpiParent:
-      \_EnumTypespec: (fpnew_pkg::opgroup_e), line:2:9, endln:4:14
-      |vpiName:DIVSQRT
-      |INT:1
-      |vpiDecompile:1
-      |vpiSize:2
-    |vpiEnumConst:
-    \_EnumConst: (NONCOMP), line:3:22, endln:3:29
-      |vpiParent:
-      \_EnumTypespec: (fpnew_pkg::opgroup_e), line:2:9, endln:4:14
-      |vpiName:NONCOMP
-      |INT:2
-      |vpiDecompile:2
-      |vpiSize:2
-    |vpiEnumConst:
-    \_EnumConst: (CONV), line:3:31, endln:3:35
-      |vpiParent:
-      \_EnumTypespec: (fpnew_pkg::opgroup_e), line:2:9, endln:4:14
-      |vpiName:CONV
-      |INT:3
-      |vpiDecompile:3
-      |vpiSize:2
+      \_EnumTypespec: , line:2:9, endln:4:14
   |vpiImportTypespec:
   \_Function: (fpnew_pkg::num_operands), line:7:1, endln:15:14
   |vpiImportTypespec:
+  \_EnumTypespec: , line:2:9, endln:4:14
+  |vpiImportTypespec:
   \_LogicTypespec: , line:2:14, endln:2:25
   |vpiImportTypespec:
-  \_EnumTypespec: (fpnew_pkg::opgroup_e), line:2:9, endln:4:14
+  \_TypedefTypespec: (fpnew_pkg::opgroup_e), line:4:5, endln:4:14
   |vpiDefName:fpnew_pkg
   |vpiTaskFunc:
   \_Function: (fpnew_pkg::num_operands), line:7:1, endln:15:14

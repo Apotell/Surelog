@@ -130,13 +130,13 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayNet                                               1
-ArrayTypespec                                          1
+ArrayTypespec                                          3
 Assignment                                             1
 Begin                                                  1
 BitSelect                                              1
 ClassDefn                                              8
 ClassTypespec                                          1
-Constant                                              12
+Constant                                              13
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              5
@@ -147,16 +147,16 @@ IODecl                                                11
 IntTypespec                                            9
 LogicTypespec                                          2
 Module                                                 1
-Operation                                              5
+Operation                                              6
 Package                                                1
 Port                                                   1
-Range                                                  3
+Range                                                  4
 RefObj                                                 3
-RefTypespec                                           16
+RefTypespec                                           20
 RefVar                                                 1
-StructNet                                              1
 StructTypespec                                         1
 Task                                                   9
+TypedefTypespec                                        2
 TypespecMember                                         1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnpackPort/slpp_all/surelog.uhdm ...
@@ -426,7 +426,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -460,14 +460,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/UnpackPort/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -475,7 +474,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -483,7 +482,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -491,7 +490,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -499,13 +498,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/UnpackPort/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -755,7 +768,7 @@ Design: (unnamed)
           |vpiName:var3
           |vpiFullName:work@dut.g_fill.var3
           |vpiActual:
-          \_StructNet: (work@dut.var3), line:6:18, endln:6:22
+          \_ArrayNet: (work@dut.var3), line:1:12, endln:1:16
           |vpiIndex:
           \_RefObj: (work@dut.g_fill.i), line:9:19, endln:9:20
             |vpiParent:
@@ -831,21 +844,32 @@ Design: (unnamed)
     |vpiStmt:
     \_Begin: (work@dut.g_fill), line:8:30, endln:10:6
   |vpiTypedef:
-  \_StructTypespec: (struct2), line:2:11, endln:4:4
+  \_TypedefTypespec: (struct2), line:4:5, endln:4:12
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/UnpackPort/dut.sv, line:1:1, endln:11:10
     |vpiName:struct2
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@dut.struct2), line:2:11, endln:4:4
+      |vpiParent:
+      \_TypedefTypespec: (struct2), line:4:5, endln:4:12
+      |vpiFullName:work@dut.struct2
+      |vpiActual:
+      \_StructTypespec: , line:2:11, endln:4:4
+  |vpiTypedef:
+  \_StructTypespec: , line:2:11, endln:4:4
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/UnpackPort/dut.sv, line:1:1, endln:11:10
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (third), line:3:19, endln:3:24
       |vpiParent:
-      \_StructTypespec: (struct2), line:2:11, endln:4:4
+      \_StructTypespec: , line:2:11, endln:4:4
       |vpiName:third
       |vpiTypespec:
-      \_RefTypespec: (work@dut.struct2.third), line:3:7, endln:3:18
+      \_RefTypespec: (work@dut.third), line:3:7, endln:3:18
         |vpiParent:
         \_TypespecMember: (third), line:3:19, endln:3:24
-        |vpiFullName:work@dut.struct2.third
+        |vpiFullName:work@dut.third
         |vpiActual:
         \_LogicTypespec: , line:3:7, endln:3:18
   |vpiTypedef:
@@ -873,6 +897,36 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_ArrayTypespec: , line:6:10, endln:6:26
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/UnpackPort/dut.sv, line:1:1, endln:11:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:6:23, endln:6:26
+      |vpiParent:
+      \_ArrayTypespec: , line:6:10, endln:6:26
+      |vpiRightRange:
+      \_Operation: , line:6:24, endln:6:25
+        |vpiParent:
+        \_Range: , line:6:23, endln:6:26
+        |vpiOpType:11
+        |vpiOperand:
+        \_Constant: , line:6:24, endln:6:25
+          |vpiParent:
+          \_Operation: , line:6:24, endln:6:25
+          |vpiDecompile:7
+          |vpiSize:64
+          |UINT:7
+          |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@dut.struct2), line:6:10, endln:6:17
+      |vpiParent:
+      \_ArrayTypespec: , line:6:10, endln:6:26
+      |vpiName:struct2
+      |vpiFullName:work@dut.struct2
+      |vpiActual:
+      \_TypedefTypespec: (struct2), line:4:5, endln:4:12
+  |vpiTypedef:
   \_ArrayTypespec: , line:6:23, endln:6:26
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/UnpackPort/dut.sv, line:1:1, endln:11:10
@@ -895,42 +949,21 @@ Design: (unnamed)
           |UINT:7
           |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (work@dut.struct2), line:6:10, endln:6:17
+    \_RefTypespec: (work@dut), line:6:10, endln:6:17
       |vpiParent:
       \_ArrayTypespec: , line:6:23, endln:6:26
-      |vpiName:struct2
-      |vpiFullName:work@dut.struct2
+      |vpiFullName:work@dut
       |vpiActual:
-      \_StructTypespec: (struct2), line:2:11, endln:4:4
-  |vpiImportTypespec:
-  \_StructTypespec: (struct2), line:2:11, endln:4:4
-  |vpiImportTypespec:
-  \_LogicTypespec: , line:3:7, endln:3:18
-  |vpiImportTypespec:
-  \_StructNet: (work@dut.var3), line:6:18, endln:6:22
+      \_ArrayTypespec: , line:6:10, endln:6:26
+  |vpiTypedef:
+  \_ArrayTypespec: , line:6:10, endln:6:26
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/UnpackPort/dut.sv, line:1:1, endln:11:10
-    |vpiTypespec:
-    \_RefTypespec: (work@dut.var3.var3), line:6:10, endln:6:17
-      |vpiParent:
-      \_StructNet: (work@dut.var3), line:6:18, endln:6:22
-      |vpiName:var3
-      |vpiFullName:work@dut.var3.var3
-      |vpiActual:
-      \_StructTypespec: (struct2), line:2:11, endln:4:4
-    |vpiName:var3
-    |vpiFullName:work@dut.var3
-  |vpiImportTypespec:
-  \_ArrayNet: (work@dut.var3), line:6:18, endln:6:22
-    |vpiParent:
-    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/UnpackPort/dut.sv, line:1:1, endln:11:10
-    |vpiSize:1
-    |vpiName:var3
-    |vpiFullName:work@dut.var3
+    |vpiArrayType:1
     |vpiRange:
     \_Range: , line:6:23, endln:6:26
       |vpiParent:
-      \_ArrayNet: (work@dut.var3), line:6:18, endln:6:22
+      \_ArrayTypespec: , line:6:10, endln:6:26
       |vpiRightRange:
       \_Operation: , line:6:24, endln:6:25
         |vpiParent:
@@ -944,13 +977,43 @@ Design: (unnamed)
           |vpiSize:64
           |UINT:7
           |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@dut.struct2), line:6:10, endln:6:17
+      |vpiParent:
+      \_ArrayTypespec: , line:6:10, endln:6:26
+      |vpiName:struct2
+      |vpiFullName:work@dut.struct2
+      |vpiActual:
+      \_TypedefTypespec: (struct2), line:4:5, endln:4:12
+  |vpiImportTypespec:
+  \_TypedefTypespec: (struct2), line:4:5, endln:4:12
+  |vpiImportTypespec:
+  \_StructTypespec: , line:2:11, endln:4:4
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:3:7, endln:3:18
+  |vpiImportTypespec:
+  \_ArrayTypespec: , line:6:10, endln:6:26
+  |vpiImportTypespec:
+  \_ArrayNet: (work@dut.var3), line:1:12, endln:1:16
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/UnpackPort/dut.sv, line:1:1, endln:11:10
+    |vpiTypespec:
+    \_RefTypespec: (work@dut.var3.struct2), line:6:10, endln:6:17
+      |vpiParent:
+      \_ArrayNet: (work@dut.var3), line:1:12, endln:1:16
+      |vpiName:struct2
+      |vpiFullName:work@dut.var3.struct2
+      |vpiActual:
+      \_ArrayTypespec: , line:6:10, endln:6:26
+    |vpiName:var3
+    |vpiFullName:work@dut.var3
   |vpiImportTypespec:
   \_ArrayTypespec: , line:6:23, endln:6:26
+  |vpiImportTypespec:
+  \_ArrayTypespec: , line:6:10, endln:6:26
   |vpiDefName:work@dut
-  |vpiNet:
-  \_StructNet: (work@dut.var3), line:6:18, endln:6:22
   |vpiArrayNet:
-  \_ArrayNet: (work@dut.var3), line:6:18, endln:6:22
+  \_ArrayNet: (work@dut.var3), line:1:12, endln:1:16
   |vpiPort:
   \_Port: (var3), line:1:12, endln:1:16
     |vpiParent:

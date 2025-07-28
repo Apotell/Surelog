@@ -223,19 +223,19 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 BitSelect                                              1
-Constant                                              21
+Constant                                              13
 ContAssign                                             1
 Design                                                 1
 IntTypespec                                            3
+LogicNet                                               3
 LogicTypespec                                          3
-LogicVar                                               3
 Module                                                 1
-Operation                                              9
+Operation                                              5
 ParamAssign                                            3
 Parameter                                              3
 PartSelect                                             1
-Range                                                  8
-RefObj                                                10
+Range                                                  4
+RefObj                                                 6
 RefTypespec                                            6
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BitPartSelect/slpp_all/surelog.uhdm ...
@@ -248,54 +248,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@top
-  |vpiVariables:
-  \_LogicVar: (work@top.storage), line:5:33, endln:5:40
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitPartSelect/dut.sv, line:1:1, endln:10:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.storage), line:5:4, endln:5:32
-      |vpiParent:
-      \_LogicVar: (work@top.storage), line:5:33, endln:5:40
-      |vpiFullName:work@top.storage
-      |vpiActual:
-      \_LogicTypespec: , line:5:4, endln:5:32
-    |vpiName:storage
-    |vpiFullName:work@top.storage
-    |vpiVisibility:1
-  |vpiVariables:
-  \_LogicVar: (work@top.storage_rdata), line:6:22, endln:6:35
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitPartSelect/dut.sv, line:1:1, endln:10:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.storage_rdata), line:6:4, endln:6:21
-      |vpiParent:
-      \_LogicVar: (work@top.storage_rdata), line:6:22, endln:6:35
-      |vpiFullName:work@top.storage_rdata
-      |vpiActual:
-      \_LogicTypespec: , line:6:4, endln:6:21
-    |vpiName:storage_rdata
-    |vpiFullName:work@top.storage_rdata
-    |vpiVisibility:1
-  |vpiVariables:
-  \_LogicVar: (work@top.fifo_rptr), line:7:25, endln:7:34
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitPartSelect/dut.sv, line:1:1, endln:10:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.fifo_rptr), line:7:3, endln:7:24
-      |vpiParent:
-      \_LogicVar: (work@top.fifo_rptr), line:7:25, endln:7:34
-      |vpiFullName:work@top.fifo_rptr
-      |vpiActual:
-      \_LogicTypespec: , line:7:3, endln:7:24
-    |vpiName:fifo_rptr
-    |vpiFullName:work@top.fifo_rptr
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@top.storage), line:5:33, endln:5:40
-  |vpiReg:
-  \_LogicVar: (work@top.storage_rdata), line:6:22, endln:6:35
-  |vpiReg:
-  \_LogicVar: (work@top.fifo_rptr), line:7:25, endln:7:34
   |vpiParameter:
   \_Parameter: (work@top.Width), line:2:27, endln:2:43
     |vpiParent:
@@ -546,16 +498,58 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:5:4, endln:5:32
   |vpiImportTypespec:
-  \_LogicVar: (work@top.storage), line:5:33, endln:5:40
+  \_LogicNet: (work@top.storage), line:5:33, endln:5:40
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitPartSelect/dut.sv, line:1:1, endln:10:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.storage), line:5:4, endln:5:32
+      |vpiParent:
+      \_LogicNet: (work@top.storage), line:5:33, endln:5:40
+      |vpiFullName:work@top.storage
+      |vpiActual:
+      \_LogicTypespec: , line:5:4, endln:5:32
+    |vpiName:storage
+    |vpiFullName:work@top.storage
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicTypespec: , line:6:4, endln:6:21
   |vpiImportTypespec:
-  \_LogicVar: (work@top.storage_rdata), line:6:22, endln:6:35
+  \_LogicNet: (work@top.storage_rdata), line:6:22, endln:6:35
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitPartSelect/dut.sv, line:1:1, endln:10:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.storage_rdata), line:6:4, endln:6:21
+      |vpiParent:
+      \_LogicNet: (work@top.storage_rdata), line:6:22, endln:6:35
+      |vpiFullName:work@top.storage_rdata
+      |vpiActual:
+      \_LogicTypespec: , line:6:4, endln:6:21
+    |vpiName:storage_rdata
+    |vpiFullName:work@top.storage_rdata
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicTypespec: , line:7:3, endln:7:24
   |vpiImportTypespec:
-  \_LogicVar: (work@top.fifo_rptr), line:7:25, endln:7:34
+  \_LogicNet: (work@top.fifo_rptr), line:7:25, endln:7:34
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitPartSelect/dut.sv, line:1:1, endln:10:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.fifo_rptr), line:7:3, endln:7:24
+      |vpiParent:
+      \_LogicNet: (work@top.fifo_rptr), line:7:25, endln:7:34
+      |vpiFullName:work@top.fifo_rptr
+      |vpiActual:
+      \_LogicTypespec: , line:7:3, endln:7:24
+    |vpiName:fifo_rptr
+    |vpiFullName:work@top.fifo_rptr
+    |vpiNetType:36
   |vpiDefName:work@top
+  |vpiNet:
+  \_LogicNet: (work@top.storage), line:5:33, endln:5:40
+  |vpiNet:
+  \_LogicNet: (work@top.storage_rdata), line:6:22, endln:6:35
+  |vpiNet:
+  \_LogicNet: (work@top.fifo_rptr), line:7:25, endln:7:34
   |vpiContAssign:
   \_ContAssign: , line:9:11, endln:9:60
     |vpiParent:
@@ -567,7 +561,7 @@ Design: (unnamed)
       |vpiName:storage
       |vpiFullName:work@top.storage
       |vpiActual:
-      \_LogicVar: (work@top.storage), line:5:33, endln:5:40
+      \_LogicNet: (work@top.storage), line:5:33, endln:5:40
       |vpiIndex:
       \_PartSelect: fifo_rptr (work@top.storage.fifo_rptr), line:9:35, endln:9:59
         |vpiParent:
@@ -576,7 +570,7 @@ Design: (unnamed)
         |vpiFullName:work@top.storage.fifo_rptr
         |vpiDefName:fifo_rptr
         |vpiActual:
-        \_LogicVar: (work@top.fifo_rptr), line:7:25, endln:7:34
+        \_LogicNet: (work@top.fifo_rptr), line:7:25, endln:7:34
         |vpiConstantSelect:1
         |vpiLeftRange:
         \_Operation: , line:9:45, endln:9:56
@@ -614,7 +608,7 @@ Design: (unnamed)
       |vpiName:storage_rdata
       |vpiFullName:work@top.storage_rdata
       |vpiActual:
-      \_LogicVar: (work@top.storage_rdata), line:6:22, endln:6:35
+      \_LogicNet: (work@top.storage_rdata), line:6:22, endln:6:35
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

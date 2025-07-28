@@ -94,9 +94,10 @@ Operation                                              1
 Port                                                   2
 Range                                                  1
 RefObj                                                 2
-RefTypespec                                            5
+RefTypespec                                            6
 StructNet                                              1
 StructTypespec                                         1
+TypedefTypespec                                        1
 TypespecMember                                         1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConstantNoElabUhdm/slpp_all/surelog.uhdm ...
@@ -122,13 +123,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ConstantNoElabUhdm/dut.sv, line:3:1, endln:8:16
     |vpiTypespec:
-    \_RefTypespec: (work@top.out3.out3), line:4:12, endln:4:30
+    \_RefTypespec: (work@top.out3.my_struct_packed_t), line:4:12, endln:4:30
       |vpiParent:
       \_StructNet: (work@top.out3), line:4:31, endln:4:35
-      |vpiName:out3
-      |vpiFullName:work@top.out3.out3
+      |vpiName:my_struct_packed_t
+      |vpiFullName:work@top.out3.my_struct_packed_t
       |vpiActual:
-      \_StructTypespec: (my_struct_packed_t), line:2:9, endln:2:39
+      \_TypedefTypespec: (my_struct_packed_t), line:2:40, endln:2:58
     |vpiName:out3
     |vpiFullName:work@top.out3
   |vpiImportTypespec:
@@ -167,7 +168,7 @@ Design: (unnamed)
       |vpiName:my_struct_packed_t
       |vpiFullName:work@top.out3.my_struct_packed_t
       |vpiActual:
-      \_StructTypespec: (my_struct_packed_t), line:2:9, endln:2:39
+      \_TypedefTypespec: (my_struct_packed_t), line:2:40, endln:2:58
   |vpiPort:
   \_Port: (out4), line:5:17, endln:5:21
     |vpiParent:
@@ -216,21 +217,32 @@ Design: (unnamed)
       \_LogicNet: (work@top.out4), line:5:17, endln:5:21
   |vpiEndLabel:top
 |vpiTypedef:
-\_StructTypespec: (my_struct_packed_t), line:2:9, endln:2:39
+\_TypedefTypespec: (my_struct_packed_t), line:2:40, endln:2:58
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:my_struct_packed_t
+  |vpiTypedefAlias:
+  \_RefTypespec: (my_struct_packed_t), line:2:9, endln:2:39
+    |vpiParent:
+    \_TypedefTypespec: (my_struct_packed_t), line:2:40, endln:2:58
+    |vpiFullName:my_struct_packed_t
+    |vpiActual:
+    \_StructTypespec: , line:2:9, endln:2:39
+|vpiTypedef:
+\_StructTypespec: , line:2:9, endln:2:39
+  |vpiParent:
+  \_Design: (unnamed)
   |vpiPacked:1
   |vpiTypespecMember:
   \_TypespecMember: (a), line:2:36, endln:2:37
     |vpiParent:
-    \_StructTypespec: (my_struct_packed_t), line:2:9, endln:2:39
+    \_StructTypespec: , line:2:9, endln:2:39
     |vpiName:a
     |vpiTypespec:
-    \_RefTypespec: (my_struct_packed_t.a), line:2:24, endln:2:35
+    \_RefTypespec: (a), line:2:24, endln:2:35
       |vpiParent:
       \_TypespecMember: (a), line:2:36, endln:2:37
-      |vpiFullName:my_struct_packed_t.a
+      |vpiFullName:a
       |vpiActual:
       \_LogicTypespec: , line:2:24, endln:2:35
 |vpiTypedef:

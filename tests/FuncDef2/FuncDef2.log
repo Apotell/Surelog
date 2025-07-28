@@ -3616,13 +3616,13 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Always                                                 3
 ArrayNet                                               1
-ArrayTypespec                                          1
+ArrayTypespec                                          3
 Assignment                                            75
 Begin                                                 51
 BitSelect                                             16
 BitTypespec                                            4
 BreakStmt                                              1
-Constant                                             112
+Constant                                             116
 Design                                                 1
 EnumConst                                             13
 EnumTypespec                                           4
@@ -3638,17 +3638,18 @@ IfStmt                                                 9
 ImportTypespec                                         1
 IntTypespec                                           48
 IntVar                                                18
-LogicNet                                               3
+LogicNet                                               2
 LogicTypespec                                         13
 Module                                                 2
-Operation                                             57
+Operation                                             56
 Package                                                1
+PackedArrayTypespec                                    1
 ParamAssign                                            7
 Parameter                                              7
 Port                                                   3
-Range                                                  5
-RefObj                                               222
-RefTypespec                                          145
+Range                                                  8
+RefObj                                               227
+RefTypespec                                          158
 RefVar                                                 1
 ReturnStmt                                            44
 ShortIntTypespec                                       8
@@ -3656,6 +3657,7 @@ StringTypespec                                        24
 StructTypespec                                         2
 SysFuncCall                                            5
 TaggedPattern                                         24
+TypedefTypespec                                        6
 TypespecMember                                        11
 UnsupportedTypespec                                    6
 === UHDM Object Stats End ===
@@ -3680,7 +3682,7 @@ Design: (unnamed)
       |vpiName:tnoc_packet_config
       |vpiFullName:tnoc_pkg::TNOC_DEFAULT_PACKET_CONFIG::tnoc_packet_config
       |vpiActual:
-      \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+      \_TypedefTypespec: (tnoc_pkg::tnoc_packet_config), line:53:5, endln:53:23
     |vpiLocalParam:1
     |vpiName:TNOC_DEFAULT_PACKET_CONFIG
     |vpiFullName:tnoc_pkg::TNOC_DEFAULT_PACKET_CONFIG
@@ -3760,7 +3762,7 @@ Design: (unnamed)
           |vpiName:size_x
           |vpiFullName:tnoc_pkg::size_x
           |vpiActual:
-          \_StringTypespec: (size_x), line:56:5, endln:56:11
+          \_StringTypespec: , line:56:5, endln:56:11
       |vpiOperand:
       \_TaggedPattern: , line:57:5, endln:9:32
         |vpiParent:
@@ -3780,7 +3782,7 @@ Design: (unnamed)
           |vpiName:size_y
           |vpiFullName:tnoc_pkg::size_y
           |vpiActual:
-          \_StringTypespec: (size_y), line:57:5, endln:57:11
+          \_StringTypespec: , line:57:5, endln:57:11
       |vpiOperand:
       \_TaggedPattern: , line:58:5, endln:13:42
         |vpiParent:
@@ -3800,7 +3802,7 @@ Design: (unnamed)
           |vpiName:virtual_channels
           |vpiFullName:tnoc_pkg::virtual_channels
           |vpiActual:
-          \_StringTypespec: (virtual_channels), line:58:5, endln:58:21
+          \_StringTypespec: , line:58:5, endln:58:21
       |vpiOperand:
       \_TaggedPattern: , line:59:5, endln:17:32
         |vpiParent:
@@ -3820,7 +3822,7 @@ Design: (unnamed)
           |vpiName:tags
           |vpiFullName:tnoc_pkg::tags
           |vpiActual:
-          \_StringTypespec: (tags), line:59:5, endln:59:9
+          \_StringTypespec: , line:59:5, endln:59:9
       |vpiOperand:
       \_TaggedPattern: , line:60:5, endln:21:41
         |vpiParent:
@@ -3840,7 +3842,7 @@ Design: (unnamed)
           |vpiName:address_width
           |vpiFullName:tnoc_pkg::address_width
           |vpiActual:
-          \_StringTypespec: (address_width), line:60:5, endln:60:18
+          \_StringTypespec: , line:60:5, endln:60:18
       |vpiOperand:
       \_TaggedPattern: , line:61:5, endln:25:38
         |vpiParent:
@@ -3860,7 +3862,7 @@ Design: (unnamed)
           |vpiName:data_width
           |vpiFullName:tnoc_pkg::data_width
           |vpiActual:
-          \_StringTypespec: (data_width), line:61:5, endln:61:15
+          \_StringTypespec: , line:61:5, endln:61:15
       |vpiOperand:
       \_TaggedPattern: , line:62:5, endln:29:42
         |vpiParent:
@@ -3880,7 +3882,7 @@ Design: (unnamed)
           |vpiName:max_data_width
           |vpiFullName:tnoc_pkg::max_data_width
           |vpiActual:
-          \_StringTypespec: (max_data_width), line:62:5, endln:62:19
+          \_StringTypespec: , line:62:5, endln:62:19
       |vpiOperand:
       \_TaggedPattern: , line:63:5, endln:33:45
         |vpiParent:
@@ -3900,7 +3902,7 @@ Design: (unnamed)
           |vpiName:max_byte_length
           |vpiFullName:tnoc_pkg::max_byte_length
           |vpiActual:
-          \_StringTypespec: (max_byte_length), line:63:5, endln:63:20
+          \_StringTypespec: , line:63:5, endln:63:20
     |vpiLhs:
     \_Parameter: (tnoc_pkg::TNOC_DEFAULT_PACKET_CONFIG), line:55:35, endln:64:4
   |vpiParamAssign:
@@ -4228,33 +4230,13 @@ Design: (unnamed)
       \_Function: (tnoc_pkg::tnoc_clog2), line:66:3, endln:83:14
       |vpiSigned:1
     |vpiTypedef:
-    \_BitTypespec: , line:66:37, endln:66:47
+    \_BitTypespec: , line:66:37, endln:66:40
       |vpiParent:
       \_Function: (tnoc_pkg::tnoc_clog2), line:66:3, endln:83:14
-      |vpiRange:
-      \_Range: , line:66:41, endln:66:47
-        |vpiParent:
-        \_BitTypespec: , line:66:37, endln:66:47
-        |vpiLeftRange:
-        \_Constant: , line:66:42, endln:66:44
-          |vpiParent:
-          \_Range: , line:66:41, endln:66:47
-          |vpiDecompile:31
-          |vpiSize:64
-          |UINT:31
-          |vpiConstType:9
-        |vpiRightRange:
-        \_Constant: , line:66:45, endln:66:46
-          |vpiParent:
-          \_Range: , line:66:41, endln:66:47
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiConstType:9
     |vpiImportTypespec:
     \_IntTypespec: , line:66:22, endln:66:25
     |vpiImportTypespec:
-    \_BitTypespec: , line:66:37, endln:66:47
+    \_BitTypespec: , line:66:37, endln:66:40
     |vpiVisibility:1
     |vpiAutomatic:1
     |vpiReturn:
@@ -4276,7 +4258,7 @@ Design: (unnamed)
         \_IODecl: (n), line:66:48, endln:66:49
         |vpiFullName:tnoc_pkg::tnoc_clog2::n
         |vpiActual:
-        \_BitTypespec: , line:66:37, endln:66:47
+        \_PackedArrayTypespec: , line:66:37, endln:66:47
     |vpiStmt:
     \_Begin: (tnoc_pkg::tnoc_clog2)
     |vpiInstance:
@@ -4310,13 +4292,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:packet_config
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::get_id_x_width::packet_config::tnoc_packet_config), line:44:11, endln:53:4
+      \_RefTypespec: (tnoc_pkg::get_id_x_width::packet_config::tnoc_packet_config), line:53:5, endln:53:23
         |vpiParent:
         \_IODecl: (packet_config), line:85:60, endln:85:73
         |vpiName:tnoc_packet_config
         |vpiFullName:tnoc_pkg::get_id_x_width::packet_config::tnoc_packet_config
         |vpiActual:
-        \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+        \_TypedefTypespec: (tnoc_pkg::tnoc_packet_config), line:53:5, endln:53:23
     |vpiStmt:
     \_IfElse: , line:86:5, endln:91:8
       |vpiParent:
@@ -4438,13 +4420,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:packet_config
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::get_id_y_width::packet_config::tnoc_packet_config), line:44:11, endln:53:4
+      \_RefTypespec: (tnoc_pkg::get_id_y_width::packet_config::tnoc_packet_config), line:53:5, endln:53:23
         |vpiParent:
         \_IODecl: (packet_config), line:94:60, endln:94:73
         |vpiName:tnoc_packet_config
         |vpiFullName:tnoc_pkg::get_id_y_width::packet_config::tnoc_packet_config
         |vpiActual:
-        \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+        \_TypedefTypespec: (tnoc_pkg::tnoc_packet_config), line:53:5, endln:53:23
     |vpiStmt:
     \_IfElse: , line:95:5, endln:100:8
       |vpiParent:
@@ -4566,13 +4548,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:packet_config
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::get_location_id_width::packet_config::tnoc_packet_config), line:44:11, endln:53:4
+      \_RefTypespec: (tnoc_pkg::get_location_id_width::packet_config::tnoc_packet_config), line:53:5, endln:53:23
         |vpiParent:
         \_IODecl: (packet_config), line:103:67, endln:103:80
         |vpiName:tnoc_packet_config
         |vpiFullName:tnoc_pkg::get_location_id_width::packet_config::tnoc_packet_config
         |vpiActual:
-        \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+        \_TypedefTypespec: (tnoc_pkg::tnoc_packet_config), line:53:5, endln:53:23
     |vpiStmt:
     \_ReturnStmt: , line:104:5, endln:104:73
       |vpiParent:
@@ -4643,13 +4625,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:packet_config
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::get_vc_width::packet_config::tnoc_packet_config), line:44:11, endln:53:4
+      \_RefTypespec: (tnoc_pkg::get_vc_width::packet_config::tnoc_packet_config), line:53:5, endln:53:23
         |vpiParent:
         \_IODecl: (packet_config), line:107:58, endln:107:71
         |vpiName:tnoc_packet_config
         |vpiFullName:tnoc_pkg::get_vc_width::packet_config::tnoc_packet_config
         |vpiActual:
-        \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+        \_TypedefTypespec: (tnoc_pkg::tnoc_packet_config), line:53:5, endln:53:23
     |vpiStmt:
     \_IfElse: , line:108:5, endln:113:8
       |vpiParent:
@@ -4771,13 +4753,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:packet_config
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::get_tag_width::packet_config::tnoc_packet_config), line:44:11, endln:53:4
+      \_RefTypespec: (tnoc_pkg::get_tag_width::packet_config::tnoc_packet_config), line:53:5, endln:53:23
         |vpiParent:
         \_IODecl: (packet_config), line:116:59, endln:116:72
         |vpiName:tnoc_packet_config
         |vpiFullName:tnoc_pkg::get_tag_width::packet_config::tnoc_packet_config
         |vpiActual:
-        \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+        \_TypedefTypespec: (tnoc_pkg::tnoc_packet_config), line:53:5, endln:53:23
     |vpiStmt:
     \_IfElse: , line:117:5, endln:122:8
       |vpiParent:
@@ -4899,13 +4881,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:packet_config
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::get_byte_size_width::packet_config::tnoc_packet_config), line:44:11, endln:53:4
+      \_RefTypespec: (tnoc_pkg::get_byte_size_width::packet_config::tnoc_packet_config), line:53:5, endln:53:23
         |vpiParent:
         \_IODecl: (packet_config), line:125:65, endln:125:78
         |vpiName:tnoc_packet_config
         |vpiFullName:tnoc_pkg::get_byte_size_width::packet_config::tnoc_packet_config
         |vpiActual:
-        \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+        \_TypedefTypespec: (tnoc_pkg::tnoc_packet_config), line:53:5, endln:53:23
     |vpiStmt:
     \_IfElse: , line:126:5, endln:131:8
       |vpiParent:
@@ -5060,13 +5042,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:packet_config
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::get_byte_length_width::packet_config::tnoc_packet_config), line:44:11, endln:53:4
+      \_RefTypespec: (tnoc_pkg::get_byte_length_width::packet_config::tnoc_packet_config), line:53:5, endln:53:23
         |vpiParent:
         \_IODecl: (packet_config), line:134:67, endln:134:80
         |vpiName:tnoc_packet_config
         |vpiFullName:tnoc_pkg::get_byte_length_width::packet_config::tnoc_packet_config
         |vpiActual:
-        \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+        \_TypedefTypespec: (tnoc_pkg::tnoc_packet_config), line:53:5, endln:53:23
     |vpiStmt:
     \_ReturnStmt: , line:135:5, endln:135:57
       |vpiParent:
@@ -5142,13 +5124,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:packet_config
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::get_packed_byte_length_width::packet_config::tnoc_packet_config), line:44:11, endln:53:4
+      \_RefTypespec: (tnoc_pkg::get_packed_byte_length_width::packet_config::tnoc_packet_config), line:53:5, endln:53:23
         |vpiParent:
         \_IODecl: (packet_config), line:138:74, endln:138:87
         |vpiName:tnoc_packet_config
         |vpiFullName:tnoc_pkg::get_packed_byte_length_width::packet_config::tnoc_packet_config
         |vpiActual:
-        \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+        \_TypedefTypespec: (tnoc_pkg::tnoc_packet_config), line:53:5, endln:53:23
     |vpiStmt:
     \_IfElse: , line:139:5, endln:144:8
       |vpiParent:
@@ -5270,13 +5252,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:packet_config
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::get_byte_offset_width::packet_config::tnoc_packet_config), line:44:11, endln:53:4
+      \_RefTypespec: (tnoc_pkg::get_byte_offset_width::packet_config::tnoc_packet_config), line:53:5, endln:53:23
         |vpiParent:
         \_IODecl: (packet_config), line:147:67, endln:147:80
         |vpiName:tnoc_packet_config
         |vpiFullName:tnoc_pkg::get_byte_offset_width::packet_config::tnoc_packet_config
         |vpiActual:
-        \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+        \_TypedefTypespec: (tnoc_pkg::tnoc_packet_config), line:53:5, endln:53:23
     |vpiStmt:
     \_IfElse: , line:148:5, endln:153:8
       |vpiParent:
@@ -5411,13 +5393,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:packet_config
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::get_byte_end_width::packet_config::tnoc_packet_config), line:44:11, endln:53:4
+      \_RefTypespec: (tnoc_pkg::get_byte_end_width::packet_config::tnoc_packet_config), line:53:5, endln:53:23
         |vpiParent:
         \_IODecl: (packet_config), line:156:64, endln:156:77
         |vpiName:tnoc_packet_config
         |vpiFullName:tnoc_pkg::get_byte_end_width::packet_config::tnoc_packet_config
         |vpiActual:
-        \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+        \_TypedefTypespec: (tnoc_pkg::tnoc_packet_config), line:53:5, endln:53:23
     |vpiStmt:
     \_IfElse: , line:157:5, endln:162:8
       |vpiParent:
@@ -5684,13 +5666,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:packet_config
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::get_burst_length_width::packet_config::tnoc_packet_config), line:44:11, endln:53:4
+      \_RefTypespec: (tnoc_pkg::get_burst_length_width::packet_config::tnoc_packet_config), line:53:5, endln:53:23
         |vpiParent:
         \_IODecl: (packet_config), line:165:68, endln:165:81
         |vpiName:tnoc_packet_config
         |vpiFullName:tnoc_pkg::get_burst_length_width::packet_config::tnoc_packet_config
         |vpiActual:
-        \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+        \_TypedefTypespec: (tnoc_pkg::tnoc_packet_config), line:53:5, endln:53:23
     |vpiStmt:
     \_Begin: (tnoc_pkg::get_burst_length_width)
     |vpiInstance:
@@ -5723,13 +5705,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:packet_type
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::is_valid_packet_type::packet_type::tnoc_packet_type), line:174:11, endln:181:21
+      \_RefTypespec: (tnoc_pkg::is_valid_packet_type::packet_type::tnoc_packet_type), line:181:5, endln:181:21
         |vpiParent:
         \_IODecl: (packet_type), line:199:66, endln:199:77
         |vpiName:tnoc_packet_type
         |vpiFullName:tnoc_pkg::is_valid_packet_type::packet_type::tnoc_packet_type
         |vpiActual:
-        \_EnumTypespec: (tnoc_pkg::tnoc_packet_type), line:174:11, endln:181:21
+        \_TypedefTypespec: (tnoc_pkg::tnoc_packet_type), line:181:5, endln:181:21
     |vpiStmt:
     \_ReturnStmt: , line:200:5, endln:200:47
       |vpiParent:
@@ -5785,13 +5767,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:packet_type
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::is_request_packet_type::packet_type::tnoc_packet_type), line:174:11, endln:181:21
+      \_RefTypespec: (tnoc_pkg::is_request_packet_type::packet_type::tnoc_packet_type), line:181:5, endln:181:21
         |vpiParent:
         \_IODecl: (packet_type), line:203:68, endln:203:79
         |vpiName:tnoc_packet_type
         |vpiFullName:tnoc_pkg::is_request_packet_type::packet_type::tnoc_packet_type
         |vpiActual:
-        \_EnumTypespec: (tnoc_pkg::tnoc_packet_type), line:174:11, endln:181:21
+        \_TypedefTypespec: (tnoc_pkg::tnoc_packet_type), line:181:5, endln:181:21
     |vpiStmt:
     \_ReturnStmt: , line:204:5, endln:204:95
       |vpiParent:
@@ -5867,13 +5849,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:packet_type
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::is_response_packet_type::packet_type::tnoc_packet_type), line:174:11, endln:181:21
+      \_RefTypespec: (tnoc_pkg::is_response_packet_type::packet_type::tnoc_packet_type), line:181:5, endln:181:21
         |vpiParent:
         \_IODecl: (packet_type), line:207:69, endln:207:80
         |vpiName:tnoc_packet_type
         |vpiFullName:tnoc_pkg::is_response_packet_type::packet_type::tnoc_packet_type
         |vpiActual:
-        \_EnumTypespec: (tnoc_pkg::tnoc_packet_type), line:174:11, endln:181:21
+        \_TypedefTypespec: (tnoc_pkg::tnoc_packet_type), line:181:5, endln:181:21
     |vpiStmt:
     \_ReturnStmt: , line:208:5, endln:208:92
       |vpiParent:
@@ -5944,13 +5926,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:packet_type
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::is_packet_with_payload_type::packet_type::tnoc_packet_type), line:174:11, endln:181:21
+      \_RefTypespec: (tnoc_pkg::is_packet_with_payload_type::packet_type::tnoc_packet_type), line:181:5, endln:181:21
         |vpiParent:
         \_IODecl: (packet_type), line:211:73, endln:211:84
         |vpiName:tnoc_packet_type
         |vpiFullName:tnoc_pkg::is_packet_with_payload_type::packet_type::tnoc_packet_type
         |vpiActual:
-        \_EnumTypespec: (tnoc_pkg::tnoc_packet_type), line:174:11, endln:181:21
+        \_TypedefTypespec: (tnoc_pkg::tnoc_packet_type), line:181:5, endln:181:21
     |vpiStmt:
     \_ReturnStmt: , line:212:5, endln:212:91
       |vpiParent:
@@ -6021,13 +6003,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:packet_type
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::is_header_only_packet_type::packet_type::tnoc_packet_type), line:174:11, endln:181:21
+      \_RefTypespec: (tnoc_pkg::is_header_only_packet_type::packet_type::tnoc_packet_type), line:181:5, endln:181:21
         |vpiParent:
         \_IODecl: (packet_type), line:215:72, endln:215:83
         |vpiName:tnoc_packet_type
         |vpiFullName:tnoc_pkg::is_header_only_packet_type::packet_type::tnoc_packet_type
         |vpiActual:
-        \_EnumTypespec: (tnoc_pkg::tnoc_packet_type), line:174:11, endln:181:21
+        \_TypedefTypespec: (tnoc_pkg::tnoc_packet_type), line:181:5, endln:181:21
     |vpiStmt:
     \_ReturnStmt: , line:216:5, endln:216:94
       |vpiParent:
@@ -6103,13 +6085,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:packet_type
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::is_posted_request_packet_type::packet_type::tnoc_packet_type), line:174:11, endln:181:21
+      \_RefTypespec: (tnoc_pkg::is_posted_request_packet_type::packet_type::tnoc_packet_type), line:181:5, endln:181:21
         |vpiParent:
         \_IODecl: (packet_type), line:219:75, endln:219:86
         |vpiName:tnoc_packet_type
         |vpiFullName:tnoc_pkg::is_posted_request_packet_type::packet_type::tnoc_packet_type
         |vpiActual:
-        \_EnumTypespec: (tnoc_pkg::tnoc_packet_type), line:174:11, endln:181:21
+        \_TypedefTypespec: (tnoc_pkg::tnoc_packet_type), line:181:5, endln:181:21
     |vpiStmt:
     \_ReturnStmt: , line:220:5, endln:220:99
       |vpiParent:
@@ -6185,13 +6167,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:packet_type
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::is_non_posted_request_packet_type::packet_type::tnoc_packet_type), line:174:11, endln:181:21
+      \_RefTypespec: (tnoc_pkg::is_non_posted_request_packet_type::packet_type::tnoc_packet_type), line:181:5, endln:181:21
         |vpiParent:
         \_IODecl: (packet_type), line:223:79, endln:223:90
         |vpiName:tnoc_packet_type
         |vpiFullName:tnoc_pkg::is_non_posted_request_packet_type::packet_type::tnoc_packet_type
         |vpiActual:
-        \_EnumTypespec: (tnoc_pkg::tnoc_packet_type), line:174:11, endln:181:21
+        \_TypedefTypespec: (tnoc_pkg::tnoc_packet_type), line:181:5, endln:181:21
     |vpiStmt:
     \_ReturnStmt: , line:224:5, endln:224:96
       |vpiParent:
@@ -6307,7 +6289,7 @@ Design: (unnamed)
             |vpiName:tnoc_packet_type
             |vpiFullName:tnoc_pkg::get_common_header_field_width::tnoc_packet_type
             |vpiActual:
-            \_EnumTypespec: (tnoc_pkg::tnoc_packet_type), line:174:11, endln:181:21
+            \_TypedefTypespec: (tnoc_pkg::tnoc_packet_type), line:181:5, endln:181:21
           |vpiName:$bits
         |vpiLhs:
         \_RefObj: (tnoc_pkg::get_common_header_field_width::width), line:230:5, endln:230:10
@@ -6490,13 +6472,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:packet_config
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::get_common_header_field_width::packet_config::tnoc_packet_config), line:44:11, endln:53:4
+      \_RefTypespec: (tnoc_pkg::get_common_header_field_width::packet_config::tnoc_packet_config), line:53:5, endln:53:23
         |vpiParent:
         \_IODecl: (packet_config), line:227:75, endln:227:88
         |vpiName:tnoc_packet_config
         |vpiFullName:tnoc_pkg::get_common_header_field_width::packet_config::tnoc_packet_config
         |vpiActual:
-        \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+        \_TypedefTypespec: (tnoc_pkg::tnoc_packet_config), line:53:5, endln:53:23
     |vpiStmt:
     \_Begin: (tnoc_pkg::get_common_header_field_width)
     |vpiInstance:
@@ -6695,7 +6677,7 @@ Design: (unnamed)
             |vpiName:tnoc_burst_type
             |vpiFullName:tnoc_pkg::get_request_header_width::tnoc_burst_type
             |vpiActual:
-            \_EnumTypespec: (tnoc_pkg::tnoc_burst_type), line:187:11, endln:191:20
+            \_TypedefTypespec: (tnoc_pkg::tnoc_burst_type), line:191:5, endln:191:20
           |vpiName:$bits
         |vpiLhs:
         \_RefObj: (tnoc_pkg::get_request_header_width::width), line:246:5, endln:246:10
@@ -6740,13 +6722,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:packet_config
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::get_request_header_width::packet_config::tnoc_packet_config), line:44:11, endln:53:4
+      \_RefTypespec: (tnoc_pkg::get_request_header_width::packet_config::tnoc_packet_config), line:53:5, endln:53:23
         |vpiParent:
         \_IODecl: (packet_config), line:239:70, endln:239:83
         |vpiName:tnoc_packet_config
         |vpiFullName:tnoc_pkg::get_request_header_width::packet_config::tnoc_packet_config
         |vpiActual:
-        \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+        \_TypedefTypespec: (tnoc_pkg::tnoc_packet_config), line:53:5, endln:53:23
     |vpiStmt:
     \_Begin: (tnoc_pkg::get_request_header_width)
     |vpiInstance:
@@ -6911,7 +6893,7 @@ Design: (unnamed)
             |vpiName:tnoc_response_status
             |vpiFullName:tnoc_pkg::get_response_header_width::tnoc_response_status
             |vpiActual:
-            \_StructTypespec: (tnoc_pkg::tnoc_response_status), line:193:11, endln:197:4
+            \_TypedefTypespec: (tnoc_pkg::tnoc_response_status), line:197:5, endln:197:25
           |vpiName:$bits
         |vpiLhs:
         \_RefObj: (tnoc_pkg::get_response_header_width::width), line:256:5, endln:256:10
@@ -6956,13 +6938,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:packet_config
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::get_response_header_width::packet_config::tnoc_packet_config), line:44:11, endln:53:4
+      \_RefTypespec: (tnoc_pkg::get_response_header_width::packet_config::tnoc_packet_config), line:53:5, endln:53:23
         |vpiParent:
         \_IODecl: (packet_config), line:250:71, endln:250:84
         |vpiName:tnoc_packet_config
         |vpiFullName:tnoc_pkg::get_response_header_width::packet_config::tnoc_packet_config
         |vpiActual:
-        \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+        \_TypedefTypespec: (tnoc_pkg::tnoc_packet_config), line:53:5, endln:53:23
     |vpiStmt:
     \_Begin: (tnoc_pkg::get_response_header_width)
     |vpiInstance:
@@ -7190,13 +7172,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:packet_config
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::get_header_width::packet_config::tnoc_packet_config), line:44:11, endln:53:4
+      \_RefTypespec: (tnoc_pkg::get_header_width::packet_config::tnoc_packet_config), line:53:5, endln:53:23
         |vpiParent:
         \_IODecl: (packet_config), line:260:62, endln:260:75
         |vpiName:tnoc_packet_config
         |vpiFullName:tnoc_pkg::get_header_width::packet_config::tnoc_packet_config
         |vpiActual:
-        \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+        \_TypedefTypespec: (tnoc_pkg::tnoc_packet_config), line:53:5, endln:53:23
     |vpiStmt:
     \_Begin: (tnoc_pkg::get_header_width)
     |vpiInstance:
@@ -7373,13 +7355,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:packet_config
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::get_request_payload_width::packet_config::tnoc_packet_config), line:44:11, endln:53:4
+      \_RefTypespec: (tnoc_pkg::get_request_payload_width::packet_config::tnoc_packet_config), line:53:5, endln:53:23
         |vpiParent:
         \_IODecl: (packet_config), line:274:71, endln:274:84
         |vpiName:tnoc_packet_config
         |vpiFullName:tnoc_pkg::get_request_payload_width::packet_config::tnoc_packet_config
         |vpiActual:
-        \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+        \_TypedefTypespec: (tnoc_pkg::tnoc_packet_config), line:53:5, endln:53:23
     |vpiStmt:
     \_Begin: (tnoc_pkg::get_request_payload_width)
     |vpiInstance:
@@ -7491,7 +7473,7 @@ Design: (unnamed)
             |vpiName:tnoc_response_status
             |vpiFullName:tnoc_pkg::get_response_payload_width::tnoc_response_status
             |vpiActual:
-            \_StructTypespec: (tnoc_pkg::tnoc_response_status), line:193:11, endln:197:4
+            \_TypedefTypespec: (tnoc_pkg::tnoc_response_status), line:197:5, endln:197:25
           |vpiName:$bits
         |vpiLhs:
         \_RefObj: (tnoc_pkg::get_response_payload_width::width), line:286:5, endln:286:10
@@ -7587,13 +7569,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:packet_config
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::get_response_payload_width::packet_config::tnoc_packet_config), line:44:11, endln:53:4
+      \_RefTypespec: (tnoc_pkg::get_response_payload_width::packet_config::tnoc_packet_config), line:53:5, endln:53:23
         |vpiParent:
         \_IODecl: (packet_config), line:282:72, endln:282:85
         |vpiName:tnoc_packet_config
         |vpiFullName:tnoc_pkg::get_response_payload_width::packet_config::tnoc_packet_config
         |vpiActual:
-        \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+        \_TypedefTypespec: (tnoc_pkg::tnoc_packet_config), line:53:5, endln:53:23
     |vpiStmt:
     \_Begin: (tnoc_pkg::get_response_payload_width)
     |vpiInstance:
@@ -7821,13 +7803,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:packet_config
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::get_payload_width::packet_config::tnoc_packet_config), line:44:11, endln:53:4
+      \_RefTypespec: (tnoc_pkg::get_payload_width::packet_config::tnoc_packet_config), line:53:5, endln:53:23
         |vpiParent:
         \_IODecl: (packet_config), line:292:63, endln:292:76
         |vpiName:tnoc_packet_config
         |vpiFullName:tnoc_pkg::get_payload_width::packet_config::tnoc_packet_config
         |vpiActual:
-        \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+        \_TypedefTypespec: (tnoc_pkg::tnoc_packet_config), line:53:5, endln:53:23
     |vpiStmt:
     \_Begin: (tnoc_pkg::get_payload_width)
     |vpiInstance:
@@ -8055,13 +8037,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:packet_config
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::get_flit_data_width::packet_config::tnoc_packet_config), line:44:11, endln:53:4
+      \_RefTypespec: (tnoc_pkg::get_flit_data_width::packet_config::tnoc_packet_config), line:53:5, endln:53:23
         |vpiParent:
         \_IODecl: (packet_config), line:314:65, endln:314:78
         |vpiName:tnoc_packet_config
         |vpiFullName:tnoc_pkg::get_flit_data_width::packet_config::tnoc_packet_config
         |vpiActual:
-        \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+        \_TypedefTypespec: (tnoc_pkg::tnoc_packet_config), line:53:5, endln:53:23
     |vpiStmt:
     \_Begin: (tnoc_pkg::get_flit_data_width)
     |vpiInstance:
@@ -8139,7 +8121,7 @@ Design: (unnamed)
             |vpiName:tnoc_flit_type
             |vpiFullName:tnoc_pkg::get_flit_width::tnoc_flit_type
             |vpiActual:
-            \_EnumTypespec: (tnoc_pkg::tnoc_flit_type), line:309:11, endln:312:19
+            \_TypedefTypespec: (tnoc_pkg::tnoc_flit_type), line:312:5, endln:312:19
           |vpiName:$bits
         |vpiLhs:
         \_RefObj: (tnoc_pkg::get_flit_width::width), line:332:5, endln:332:10
@@ -8257,13 +8239,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:packet_config
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::get_flit_width::packet_config::tnoc_packet_config), line:44:11, endln:53:4
+      \_RefTypespec: (tnoc_pkg::get_flit_width::packet_config::tnoc_packet_config), line:53:5, endln:53:23
         |vpiParent:
         \_IODecl: (packet_config), line:328:60, endln:328:73
         |vpiName:tnoc_packet_config
         |vpiFullName:tnoc_pkg::get_flit_width::packet_config::tnoc_packet_config
         |vpiActual:
-        \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+        \_TypedefTypespec: (tnoc_pkg::tnoc_packet_config), line:53:5, endln:53:23
     |vpiStmt:
     \_Begin: (tnoc_pkg::get_flit_width)
     |vpiInstance:
@@ -8457,13 +8439,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:packet_config
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::get_request_header_flits::packet_config::tnoc_packet_config), line:44:11, endln:53:4
+      \_RefTypespec: (tnoc_pkg::get_request_header_flits::packet_config::tnoc_packet_config), line:53:5, endln:53:23
         |vpiParent:
         \_IODecl: (packet_config), line:340:70, endln:340:83
         |vpiName:tnoc_packet_config
         |vpiFullName:tnoc_pkg::get_request_header_flits::packet_config::tnoc_packet_config
         |vpiActual:
-        \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+        \_TypedefTypespec: (tnoc_pkg::tnoc_packet_config), line:53:5, endln:53:23
     |vpiStmt:
     \_Begin: (tnoc_pkg::get_request_header_flits)
     |vpiInstance:
@@ -8657,13 +8639,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:packet_config
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::get_response_header_flits::packet_config::tnoc_packet_config), line:44:11, endln:53:4
+      \_RefTypespec: (tnoc_pkg::get_response_header_flits::packet_config::tnoc_packet_config), line:53:5, endln:53:23
         |vpiParent:
         \_IODecl: (packet_config), line:348:71, endln:348:84
         |vpiName:tnoc_packet_config
         |vpiFullName:tnoc_pkg::get_response_header_flits::packet_config::tnoc_packet_config
         |vpiActual:
-        \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+        \_TypedefTypespec: (tnoc_pkg::tnoc_packet_config), line:53:5, endln:53:23
     |vpiStmt:
     \_Begin: (tnoc_pkg::get_response_header_flits)
     |vpiInstance:
@@ -8891,13 +8873,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:packet_config
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::get_header_flits::packet_config::tnoc_packet_config), line:44:11, endln:53:4
+      \_RefTypespec: (tnoc_pkg::get_header_flits::packet_config::tnoc_packet_config), line:53:5, endln:53:23
         |vpiParent:
         \_IODecl: (packet_config), line:356:62, endln:356:75
         |vpiName:tnoc_packet_config
         |vpiFullName:tnoc_pkg::get_header_flits::packet_config::tnoc_packet_config
         |vpiActual:
-        \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+        \_TypedefTypespec: (tnoc_pkg::tnoc_packet_config), line:53:5, endln:53:23
     |vpiStmt:
     \_Begin: (tnoc_pkg::get_header_flits)
     |vpiInstance:
@@ -8930,13 +8912,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:port_type
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::is_local_port::port_type::tnoc_port_type), line:373:11, endln:376:19
+      \_RefTypespec: (tnoc_pkg::is_local_port::port_type::tnoc_port_type), line:376:5, endln:376:19
         |vpiParent:
         \_IODecl: (port_type), line:378:55, endln:378:64
         |vpiName:tnoc_port_type
         |vpiFullName:tnoc_pkg::is_local_port::port_type::tnoc_port_type
         |vpiActual:
-        \_EnumTypespec: (tnoc_pkg::tnoc_port_type), line:373:11, endln:376:19
+        \_TypedefTypespec: (tnoc_pkg::tnoc_port_type), line:376:5, endln:376:19
     |vpiStmt:
     \_ReturnStmt: , line:379:5, endln:379:41
       |vpiParent:
@@ -8992,13 +8974,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:port_type
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::is_interna_port::port_type::tnoc_port_type), line:373:11, endln:376:19
+      \_RefTypespec: (tnoc_pkg::is_interna_port::port_type::tnoc_port_type), line:376:5, endln:376:19
         |vpiParent:
         \_IODecl: (port_type), line:382:57, endln:382:66
         |vpiName:tnoc_port_type
         |vpiFullName:tnoc_pkg::is_interna_port::port_type::tnoc_port_type
         |vpiActual:
-        \_EnumTypespec: (tnoc_pkg::tnoc_port_type), line:373:11, endln:376:19
+        \_TypedefTypespec: (tnoc_pkg::tnoc_port_type), line:376:5, endln:376:19
     |vpiStmt:
     \_ReturnStmt: , line:383:5, endln:383:44
       |vpiParent:
@@ -9185,13 +9167,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:packet_config
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::get_port_flit_width::packet_config::tnoc_packet_config), line:44:11, endln:53:4
+      \_RefTypespec: (tnoc_pkg::get_port_flit_width::packet_config::tnoc_packet_config), line:53:5, endln:53:23
         |vpiParent:
         \_IODecl: (packet_config), line:387:25, endln:387:38
         |vpiName:tnoc_packet_config
         |vpiFullName:tnoc_pkg::get_port_flit_width::packet_config::tnoc_packet_config
         |vpiActual:
-        \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+        \_TypedefTypespec: (tnoc_pkg::tnoc_packet_config), line:53:5, endln:53:23
     |vpiIODecl:
     \_IODecl: (port_type), line:388:25, endln:388:34
       |vpiParent:
@@ -9199,13 +9181,13 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:port_type
       |vpiTypedef:
-      \_RefTypespec: (tnoc_pkg::get_port_flit_width::port_type::tnoc_port_type), line:373:11, endln:376:19
+      \_RefTypespec: (tnoc_pkg::get_port_flit_width::port_type::tnoc_port_type), line:376:5, endln:376:19
         |vpiParent:
         \_IODecl: (port_type), line:388:25, endln:388:34
         |vpiName:tnoc_port_type
         |vpiFullName:tnoc_pkg::get_port_flit_width::port_type::tnoc_port_type
         |vpiActual:
-        \_EnumTypespec: (tnoc_pkg::tnoc_port_type), line:373:11, endln:376:19
+        \_TypedefTypespec: (tnoc_pkg::tnoc_port_type), line:376:5, endln:376:19
     |vpiIODecl:
     \_IODecl: (channels), line:389:25, endln:389:33
       |vpiParent:
@@ -9224,105 +9206,116 @@ Design: (unnamed)
     |vpiInstance:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
   |vpiTypedef:
-  \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+  \_TypedefTypespec: (tnoc_pkg::tnoc_packet_config), line:53:5, endln:53:23
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
     |vpiName:tnoc_pkg::tnoc_packet_config
+    |vpiTypedefAlias:
+    \_RefTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+      |vpiParent:
+      \_TypedefTypespec: (tnoc_pkg::tnoc_packet_config), line:53:5, endln:53:23
+      |vpiFullName:tnoc_pkg::tnoc_packet_config
+      |vpiActual:
+      \_StructTypespec: , line:44:11, endln:53:4
+  |vpiTypedef:
+  \_StructTypespec: , line:44:11, endln:53:4
+    |vpiParent:
+    \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (size_x), line:45:15, endln:45:21
       |vpiParent:
-      \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+      \_StructTypespec: , line:44:11, endln:53:4
       |vpiName:size_x
       |vpiTypespec:
-      \_RefTypespec: (tnoc_pkg::tnoc_packet_config::size_x), line:45:5, endln:45:13
+      \_RefTypespec: (tnoc_pkg::size_x), line:45:5, endln:45:13
         |vpiParent:
         \_TypespecMember: (size_x), line:45:15, endln:45:21
-        |vpiFullName:tnoc_pkg::tnoc_packet_config::size_x
+        |vpiFullName:tnoc_pkg::size_x
         |vpiActual:
         \_ShortIntTypespec: , line:45:5, endln:45:13
     |vpiTypespecMember:
     \_TypespecMember: (size_y), line:46:15, endln:46:21
       |vpiParent:
-      \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+      \_StructTypespec: , line:44:11, endln:53:4
       |vpiName:size_y
       |vpiTypespec:
-      \_RefTypespec: (tnoc_pkg::tnoc_packet_config::size_y), line:46:5, endln:46:13
+      \_RefTypespec: (tnoc_pkg::size_y), line:46:5, endln:46:13
         |vpiParent:
         \_TypespecMember: (size_y), line:46:15, endln:46:21
-        |vpiFullName:tnoc_pkg::tnoc_packet_config::size_y
+        |vpiFullName:tnoc_pkg::size_y
         |vpiActual:
         \_ShortIntTypespec: , line:46:5, endln:46:13
     |vpiTypespecMember:
     \_TypespecMember: (virtual_channels), line:47:15, endln:47:31
       |vpiParent:
-      \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+      \_StructTypespec: , line:44:11, endln:53:4
       |vpiName:virtual_channels
       |vpiTypespec:
-      \_RefTypespec: (tnoc_pkg::tnoc_packet_config::virtual_channels), line:47:5, endln:47:13
+      \_RefTypespec: (tnoc_pkg::virtual_channels), line:47:5, endln:47:13
         |vpiParent:
         \_TypespecMember: (virtual_channels), line:47:15, endln:47:31
-        |vpiFullName:tnoc_pkg::tnoc_packet_config::virtual_channels
+        |vpiFullName:tnoc_pkg::virtual_channels
         |vpiActual:
         \_ShortIntTypespec: , line:47:5, endln:47:13
     |vpiTypespecMember:
     \_TypespecMember: (tags), line:48:15, endln:48:19
       |vpiParent:
-      \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+      \_StructTypespec: , line:44:11, endln:53:4
       |vpiName:tags
       |vpiTypespec:
-      \_RefTypespec: (tnoc_pkg::tnoc_packet_config::tags), line:48:5, endln:48:13
+      \_RefTypespec: (tnoc_pkg::tags), line:48:5, endln:48:13
         |vpiParent:
         \_TypespecMember: (tags), line:48:15, endln:48:19
-        |vpiFullName:tnoc_pkg::tnoc_packet_config::tags
+        |vpiFullName:tnoc_pkg::tags
         |vpiActual:
         \_ShortIntTypespec: , line:48:5, endln:48:13
     |vpiTypespecMember:
     \_TypespecMember: (address_width), line:49:15, endln:49:28
       |vpiParent:
-      \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+      \_StructTypespec: , line:44:11, endln:53:4
       |vpiName:address_width
       |vpiTypespec:
-      \_RefTypespec: (tnoc_pkg::tnoc_packet_config::address_width), line:49:5, endln:49:13
+      \_RefTypespec: (tnoc_pkg::address_width), line:49:5, endln:49:13
         |vpiParent:
         \_TypespecMember: (address_width), line:49:15, endln:49:28
-        |vpiFullName:tnoc_pkg::tnoc_packet_config::address_width
+        |vpiFullName:tnoc_pkg::address_width
         |vpiActual:
         \_ShortIntTypespec: , line:49:5, endln:49:13
     |vpiTypespecMember:
     \_TypespecMember: (data_width), line:50:15, endln:50:25
       |vpiParent:
-      \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+      \_StructTypespec: , line:44:11, endln:53:4
       |vpiName:data_width
       |vpiTypespec:
-      \_RefTypespec: (tnoc_pkg::tnoc_packet_config::data_width), line:50:5, endln:50:13
+      \_RefTypespec: (tnoc_pkg::data_width), line:50:5, endln:50:13
         |vpiParent:
         \_TypespecMember: (data_width), line:50:15, endln:50:25
-        |vpiFullName:tnoc_pkg::tnoc_packet_config::data_width
+        |vpiFullName:tnoc_pkg::data_width
         |vpiActual:
         \_ShortIntTypespec: , line:50:5, endln:50:13
     |vpiTypespecMember:
     \_TypespecMember: (max_data_width), line:51:15, endln:51:29
       |vpiParent:
-      \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+      \_StructTypespec: , line:44:11, endln:53:4
       |vpiName:max_data_width
       |vpiTypespec:
-      \_RefTypespec: (tnoc_pkg::tnoc_packet_config::max_data_width), line:51:5, endln:51:13
+      \_RefTypespec: (tnoc_pkg::max_data_width), line:51:5, endln:51:13
         |vpiParent:
         \_TypespecMember: (max_data_width), line:51:15, endln:51:29
-        |vpiFullName:tnoc_pkg::tnoc_packet_config::max_data_width
+        |vpiFullName:tnoc_pkg::max_data_width
         |vpiActual:
         \_ShortIntTypespec: , line:51:5, endln:51:13
     |vpiTypespecMember:
     \_TypespecMember: (max_byte_length), line:52:15, endln:52:30
       |vpiParent:
-      \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+      \_StructTypespec: , line:44:11, endln:53:4
       |vpiName:max_byte_length
       |vpiTypespec:
-      \_RefTypespec: (tnoc_pkg::tnoc_packet_config::max_byte_length), line:52:5, endln:52:13
+      \_RefTypespec: (tnoc_pkg::max_byte_length), line:52:5, endln:52:13
         |vpiParent:
         \_TypespecMember: (max_byte_length), line:52:15, endln:52:30
-        |vpiFullName:tnoc_pkg::tnoc_packet_config::max_byte_length
+        |vpiFullName:tnoc_pkg::max_byte_length
         |vpiActual:
         \_ShortIntTypespec: , line:52:5, endln:52:13
   |vpiTypedef:
@@ -9366,125 +9359,191 @@ Design: (unnamed)
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
     |vpiSigned:1
   |vpiTypedef:
-  \_StringTypespec: (size_x), line:56:5, endln:56:11
+  \_StringTypespec: , line:56:5, endln:56:11
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
-    |vpiName:size_x
   |vpiTypedef:
-  \_StringTypespec: (size_y), line:57:5, endln:57:11
+  \_StringTypespec: , line:57:5, endln:57:11
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
-    |vpiName:size_y
   |vpiTypedef:
-  \_StringTypespec: (virtual_channels), line:58:5, endln:58:21
+  \_StringTypespec: , line:58:5, endln:58:21
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
-    |vpiName:virtual_channels
   |vpiTypedef:
-  \_StringTypespec: (tags), line:59:5, endln:59:9
+  \_StringTypespec: , line:59:5, endln:59:9
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
-    |vpiName:tags
   |vpiTypedef:
-  \_StringTypespec: (address_width), line:60:5, endln:60:18
+  \_StringTypespec: , line:60:5, endln:60:18
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
-    |vpiName:address_width
   |vpiTypedef:
-  \_StringTypespec: (data_width), line:61:5, endln:61:15
+  \_StringTypespec: , line:61:5, endln:61:15
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
-    |vpiName:data_width
   |vpiTypedef:
-  \_StringTypespec: (max_data_width), line:62:5, endln:62:19
+  \_StringTypespec: , line:62:5, endln:62:19
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
-    |vpiName:max_data_width
   |vpiTypedef:
-  \_StringTypespec: (max_byte_length), line:63:5, endln:63:20
+  \_StringTypespec: , line:63:5, endln:63:20
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
-    |vpiName:max_byte_length
   |vpiTypedef:
-  \_StringTypespec: (size_x), line:56:5, endln:56:11
+  \_StringTypespec: , line:56:5, endln:56:11
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
-    |vpiName:size_x
   |vpiTypedef:
-  \_StringTypespec: (size_y), line:57:5, endln:57:11
+  \_StringTypespec: , line:57:5, endln:57:11
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
-    |vpiName:size_y
   |vpiTypedef:
-  \_StringTypespec: (virtual_channels), line:58:5, endln:58:21
+  \_StringTypespec: , line:58:5, endln:58:21
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
-    |vpiName:virtual_channels
   |vpiTypedef:
-  \_StringTypespec: (tags), line:59:5, endln:59:9
+  \_StringTypespec: , line:59:5, endln:59:9
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
-    |vpiName:tags
   |vpiTypedef:
-  \_StringTypespec: (address_width), line:60:5, endln:60:18
+  \_StringTypespec: , line:60:5, endln:60:18
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
-    |vpiName:address_width
   |vpiTypedef:
-  \_StringTypespec: (data_width), line:61:5, endln:61:15
+  \_StringTypespec: , line:61:5, endln:61:15
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
-    |vpiName:data_width
   |vpiTypedef:
-  \_StringTypespec: (max_data_width), line:62:5, endln:62:19
+  \_StringTypespec: , line:62:5, endln:62:19
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
-    |vpiName:max_data_width
   |vpiTypedef:
-  \_StringTypespec: (max_byte_length), line:63:5, endln:63:20
+  \_StringTypespec: , line:63:5, endln:63:20
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
-    |vpiName:max_byte_length
   |vpiTypedef:
-  \_StringTypespec: (size_x), line:56:5, endln:56:11
+  \_StringTypespec: , line:56:5, endln:56:11
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
-    |vpiName:size_x
   |vpiTypedef:
-  \_StringTypespec: (size_y), line:57:5, endln:57:11
+  \_StringTypespec: , line:57:5, endln:57:11
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
-    |vpiName:size_y
   |vpiTypedef:
-  \_StringTypespec: (virtual_channels), line:58:5, endln:58:21
+  \_StringTypespec: , line:58:5, endln:58:21
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
-    |vpiName:virtual_channels
   |vpiTypedef:
-  \_StringTypespec: (tags), line:59:5, endln:59:9
+  \_StringTypespec: , line:59:5, endln:59:9
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
-    |vpiName:tags
   |vpiTypedef:
-  \_StringTypespec: (address_width), line:60:5, endln:60:18
+  \_StringTypespec: , line:60:5, endln:60:18
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
-    |vpiName:address_width
   |vpiTypedef:
-  \_StringTypespec: (data_width), line:61:5, endln:61:15
+  \_StringTypespec: , line:61:5, endln:61:15
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
-    |vpiName:data_width
   |vpiTypedef:
-  \_StringTypespec: (max_data_width), line:62:5, endln:62:19
+  \_StringTypespec: , line:62:5, endln:62:19
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
-    |vpiName:max_data_width
   |vpiTypedef:
-  \_StringTypespec: (max_byte_length), line:63:5, endln:63:20
+  \_StringTypespec: , line:63:5, endln:63:20
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
-    |vpiName:max_byte_length
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:66:37, endln:66:47
+    |vpiParent:
+    \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
+    |vpiRange:
+    \_Range: , line:66:41, endln:66:47
+      |vpiParent:
+      \_PackedArrayTypespec: , line:66:37, endln:66:47
+      |vpiLeftRange:
+      \_Constant: , line:66:42, endln:66:44
+        |vpiParent:
+        \_Range: , line:66:41, endln:66:47
+        |vpiDecompile:31
+        |vpiSize:64
+        |UINT:31
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:66:45, endln:66:46
+        |vpiParent:
+        \_Range: , line:66:41, endln:66:47
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (tnoc_pkg), line:66:37, endln:66:40
+      |vpiParent:
+      \_PackedArrayTypespec: , line:66:37, endln:66:47
+      |vpiFullName:tnoc_pkg
+      |vpiActual:
+      \_BitTypespec: , line:66:37, endln:66:40
+  |vpiTypedef:
+  \_EnumTypespec: , line:174:11, endln:181:21
+    |vpiParent:
+    \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
+    |vpiBaseTypespec:
+    \_RefTypespec: (tnoc_pkg), line:174:16, endln:174:27
+      |vpiParent:
+      \_EnumTypespec: , line:174:11, endln:181:21
+      |vpiFullName:tnoc_pkg
+      |vpiActual:
+      \_LogicTypespec: , line:174:16, endln:174:27
+    |vpiEnumConst:
+    \_EnumConst: (TNOC_INVALID_PACKET), line:175:5, endln:175:42
+      |vpiParent:
+      \_EnumTypespec: , line:174:11, endln:181:21
+      |vpiName:TNOC_INVALID_PACKET
+      |BIN:00000000
+      |vpiDecompile:'b00000000
+      |vpiSize:-1
+    |vpiEnumConst:
+    \_EnumConst: (TNOC_READ), line:176:5, endln:176:42
+      |vpiParent:
+      \_EnumTypespec: , line:174:11, endln:181:21
+      |vpiName:TNOC_READ
+      |BIN:00100000
+      |vpiDecompile:'b00100000
+      |vpiSize:-1
+    |vpiEnumConst:
+    \_EnumConst: (TNOC_WRITE), line:177:5, endln:177:42
+      |vpiParent:
+      \_EnumTypespec: , line:174:11, endln:181:21
+      |vpiName:TNOC_WRITE
+      |BIN:01100000
+      |vpiDecompile:'b01100000
+      |vpiSize:-1
+    |vpiEnumConst:
+    \_EnumConst: (TNOC_POSTED_WRITE), line:178:5, endln:178:42
+      |vpiParent:
+      \_EnumTypespec: , line:174:11, endln:181:21
+      |vpiName:TNOC_POSTED_WRITE
+      |BIN:01000000
+      |vpiDecompile:'b01000000
+      |vpiSize:-1
+    |vpiEnumConst:
+    \_EnumConst: (TNOC_RESPONSE), line:179:5, endln:179:42
+      |vpiParent:
+      \_EnumTypespec: , line:174:11, endln:181:21
+      |vpiName:TNOC_RESPONSE
+      |BIN:10000000
+      |vpiDecompile:'b10000000
+      |vpiSize:-1
+    |vpiEnumConst:
+    \_EnumConst: (TNOC_RESPONSE_WITH_DATA), line:180:5, endln:180:42
+      |vpiParent:
+      \_EnumTypespec: , line:174:11, endln:181:21
+      |vpiName:TNOC_RESPONSE_WITH_DATA
+      |BIN:11000000
+      |vpiDecompile:'b11000000
+      |vpiSize:-1
   |vpiTypedef:
   \_LogicTypespec: , line:174:16, endln:174:27
     |vpiParent:
@@ -9510,65 +9569,17 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_EnumTypespec: (tnoc_pkg::tnoc_packet_type), line:174:11, endln:181:21
+  \_TypedefTypespec: (tnoc_pkg::tnoc_packet_type), line:181:5, endln:181:21
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
     |vpiName:tnoc_pkg::tnoc_packet_type
-    |vpiBaseTypespec:
-    \_RefTypespec: (tnoc_pkg::tnoc_packet_type), line:174:16, endln:174:27
+    |vpiTypedefAlias:
+    \_RefTypespec: (tnoc_pkg::tnoc_packet_type), line:174:11, endln:181:4
       |vpiParent:
-      \_EnumTypespec: (tnoc_pkg::tnoc_packet_type), line:174:11, endln:181:21
+      \_TypedefTypespec: (tnoc_pkg::tnoc_packet_type), line:181:5, endln:181:21
       |vpiFullName:tnoc_pkg::tnoc_packet_type
       |vpiActual:
-      \_LogicTypespec: , line:174:16, endln:174:27
-    |vpiEnumConst:
-    \_EnumConst: (TNOC_INVALID_PACKET), line:175:5, endln:175:42
-      |vpiParent:
-      \_EnumTypespec: (tnoc_pkg::tnoc_packet_type), line:174:11, endln:181:21
-      |vpiName:TNOC_INVALID_PACKET
-      |BIN:00000000
-      |vpiDecompile:'b00000000
-      |vpiSize:-1
-    |vpiEnumConst:
-    \_EnumConst: (TNOC_READ), line:176:5, endln:176:42
-      |vpiParent:
-      \_EnumTypespec: (tnoc_pkg::tnoc_packet_type), line:174:11, endln:181:21
-      |vpiName:TNOC_READ
-      |BIN:00100000
-      |vpiDecompile:'b00100000
-      |vpiSize:-1
-    |vpiEnumConst:
-    \_EnumConst: (TNOC_WRITE), line:177:5, endln:177:42
-      |vpiParent:
-      \_EnumTypespec: (tnoc_pkg::tnoc_packet_type), line:174:11, endln:181:21
-      |vpiName:TNOC_WRITE
-      |BIN:01100000
-      |vpiDecompile:'b01100000
-      |vpiSize:-1
-    |vpiEnumConst:
-    \_EnumConst: (TNOC_POSTED_WRITE), line:178:5, endln:178:42
-      |vpiParent:
-      \_EnumTypespec: (tnoc_pkg::tnoc_packet_type), line:174:11, endln:181:21
-      |vpiName:TNOC_POSTED_WRITE
-      |BIN:01000000
-      |vpiDecompile:'b01000000
-      |vpiSize:-1
-    |vpiEnumConst:
-    \_EnumConst: (TNOC_RESPONSE), line:179:5, endln:179:42
-      |vpiParent:
-      \_EnumTypespec: (tnoc_pkg::tnoc_packet_type), line:174:11, endln:181:21
-      |vpiName:TNOC_RESPONSE
-      |BIN:10000000
-      |vpiDecompile:'b10000000
-      |vpiSize:-1
-    |vpiEnumConst:
-    \_EnumConst: (TNOC_RESPONSE_WITH_DATA), line:180:5, endln:180:42
-      |vpiParent:
-      \_EnumTypespec: (tnoc_pkg::tnoc_packet_type), line:174:11, endln:181:21
-      |vpiName:TNOC_RESPONSE_WITH_DATA
-      |BIN:11000000
-      |vpiDecompile:'b11000000
-      |vpiSize:-1
+      \_EnumTypespec: , line:174:11, endln:181:21
   |vpiTypedef:
   \_IntTypespec: , line:183:15, endln:183:18
     |vpiParent:
@@ -9584,6 +9595,41 @@ Design: (unnamed)
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
     |vpiSigned:1
+  |vpiTypedef:
+  \_EnumTypespec: , line:187:11, endln:191:20
+    |vpiParent:
+    \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
+    |vpiBaseTypespec:
+    \_RefTypespec: (tnoc_pkg), line:187:16, endln:187:27
+      |vpiParent:
+      \_EnumTypespec: , line:187:11, endln:191:20
+      |vpiFullName:tnoc_pkg
+      |vpiActual:
+      \_LogicTypespec: , line:187:16, endln:187:27
+    |vpiEnumConst:
+    \_EnumConst: (TNOC_FIXED_BURST), line:188:5, endln:188:32
+      |vpiParent:
+      \_EnumTypespec: , line:187:11, endln:191:20
+      |vpiName:TNOC_FIXED_BURST
+      |BIN:00
+      |vpiDecompile:2'b00
+      |vpiSize:2
+    |vpiEnumConst:
+    \_EnumConst: (TNOC_NORMAL_BURST), line:189:5, endln:189:32
+      |vpiParent:
+      \_EnumTypespec: , line:187:11, endln:191:20
+      |vpiName:TNOC_NORMAL_BURST
+      |BIN:01
+      |vpiDecompile:2'b01
+      |vpiSize:2
+    |vpiEnumConst:
+    \_EnumConst: (TNOC_WRAPPING_BURST), line:190:5, endln:190:32
+      |vpiParent:
+      \_EnumTypespec: , line:187:11, endln:191:20
+      |vpiName:TNOC_WRAPPING_BURST
+      |BIN:10
+      |vpiDecompile:2'b10
+      |vpiSize:2
   |vpiTypedef:
   \_LogicTypespec: , line:187:16, endln:187:27
     |vpiParent:
@@ -9609,81 +9655,68 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_EnumTypespec: (tnoc_pkg::tnoc_burst_type), line:187:11, endln:191:20
+  \_TypedefTypespec: (tnoc_pkg::tnoc_burst_type), line:191:5, endln:191:20
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
     |vpiName:tnoc_pkg::tnoc_burst_type
-    |vpiBaseTypespec:
-    \_RefTypespec: (tnoc_pkg::tnoc_burst_type), line:187:16, endln:187:27
+    |vpiTypedefAlias:
+    \_RefTypespec: (tnoc_pkg::tnoc_burst_type), line:187:11, endln:191:4
       |vpiParent:
-      \_EnumTypespec: (tnoc_pkg::tnoc_burst_type), line:187:11, endln:191:20
+      \_TypedefTypespec: (tnoc_pkg::tnoc_burst_type), line:191:5, endln:191:20
       |vpiFullName:tnoc_pkg::tnoc_burst_type
       |vpiActual:
-      \_LogicTypespec: , line:187:16, endln:187:27
-    |vpiEnumConst:
-    \_EnumConst: (TNOC_FIXED_BURST), line:188:5, endln:188:32
-      |vpiParent:
-      \_EnumTypespec: (tnoc_pkg::tnoc_burst_type), line:187:11, endln:191:20
-      |vpiName:TNOC_FIXED_BURST
-      |BIN:00
-      |vpiDecompile:2'b00
-      |vpiSize:2
-    |vpiEnumConst:
-    \_EnumConst: (TNOC_NORMAL_BURST), line:189:5, endln:189:32
-      |vpiParent:
-      \_EnumTypespec: (tnoc_pkg::tnoc_burst_type), line:187:11, endln:191:20
-      |vpiName:TNOC_NORMAL_BURST
-      |BIN:01
-      |vpiDecompile:2'b01
-      |vpiSize:2
-    |vpiEnumConst:
-    \_EnumConst: (TNOC_WRAPPING_BURST), line:190:5, endln:190:32
-      |vpiParent:
-      \_EnumTypespec: (tnoc_pkg::tnoc_burst_type), line:187:11, endln:191:20
-      |vpiName:TNOC_WRAPPING_BURST
-      |BIN:10
-      |vpiDecompile:2'b10
-      |vpiSize:2
+      \_EnumTypespec: , line:187:11, endln:191:20
   |vpiTypedef:
-  \_StructTypespec: (tnoc_pkg::tnoc_response_status), line:193:11, endln:197:4
+  \_TypedefTypespec: (tnoc_pkg::tnoc_response_status), line:197:5, endln:197:25
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
     |vpiName:tnoc_pkg::tnoc_response_status
+    |vpiTypedefAlias:
+    \_RefTypespec: (tnoc_pkg::tnoc_response_status), line:193:11, endln:197:4
+      |vpiParent:
+      \_TypedefTypespec: (tnoc_pkg::tnoc_response_status), line:197:5, endln:197:25
+      |vpiFullName:tnoc_pkg::tnoc_response_status
+      |vpiActual:
+      \_StructTypespec: , line:193:11, endln:197:4
+  |vpiTypedef:
+  \_StructTypespec: , line:193:11, endln:197:4
+    |vpiParent:
+    \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (exokay), line:194:11, endln:194:17
       |vpiParent:
-      \_StructTypespec: (tnoc_pkg::tnoc_response_status), line:193:11, endln:197:4
+      \_StructTypespec: , line:193:11, endln:197:4
       |vpiName:exokay
       |vpiTypespec:
-      \_RefTypespec: (tnoc_pkg::tnoc_response_status::exokay), line:194:5, endln:194:10
+      \_RefTypespec: (tnoc_pkg::exokay), line:194:5, endln:194:10
         |vpiParent:
         \_TypespecMember: (exokay), line:194:11, endln:194:17
-        |vpiFullName:tnoc_pkg::tnoc_response_status::exokay
+        |vpiFullName:tnoc_pkg::exokay
         |vpiActual:
         \_LogicTypespec: , line:194:5, endln:194:10
     |vpiTypespecMember:
     \_TypespecMember: (slave_error), line:195:11, endln:195:22
       |vpiParent:
-      \_StructTypespec: (tnoc_pkg::tnoc_response_status), line:193:11, endln:197:4
+      \_StructTypespec: , line:193:11, endln:197:4
       |vpiName:slave_error
       |vpiTypespec:
-      \_RefTypespec: (tnoc_pkg::tnoc_response_status::slave_error), line:195:5, endln:195:10
+      \_RefTypespec: (tnoc_pkg::slave_error), line:195:5, endln:195:10
         |vpiParent:
         \_TypespecMember: (slave_error), line:195:11, endln:195:22
-        |vpiFullName:tnoc_pkg::tnoc_response_status::slave_error
+        |vpiFullName:tnoc_pkg::slave_error
         |vpiActual:
         \_LogicTypespec: , line:195:5, endln:195:10
     |vpiTypespecMember:
     \_TypespecMember: (decode_error), line:196:11, endln:196:23
       |vpiParent:
-      \_StructTypespec: (tnoc_pkg::tnoc_response_status), line:193:11, endln:197:4
+      \_StructTypespec: , line:193:11, endln:197:4
       |vpiName:decode_error
       |vpiTypespec:
-      \_RefTypespec: (tnoc_pkg::tnoc_response_status::decode_error), line:196:5, endln:196:10
+      \_RefTypespec: (tnoc_pkg::decode_error), line:196:5, endln:196:10
         |vpiParent:
         \_TypespecMember: (decode_error), line:196:11, endln:196:23
-        |vpiFullName:tnoc_pkg::tnoc_response_status::decode_error
+        |vpiFullName:tnoc_pkg::decode_error
         |vpiActual:
         \_LogicTypespec: , line:196:5, endln:196:10
   |vpiTypedef:
@@ -9699,25 +9732,20 @@ Design: (unnamed)
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
   |vpiTypedef:
-  \_LogicTypespec: , line:309:16, endln:309:21
+  \_EnumTypespec: , line:309:11, endln:312:19
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
-  |vpiTypedef:
-  \_EnumTypespec: (tnoc_pkg::tnoc_flit_type), line:309:11, endln:312:19
-    |vpiParent:
-    \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
-    |vpiName:tnoc_pkg::tnoc_flit_type
     |vpiBaseTypespec:
-    \_RefTypespec: (tnoc_pkg::tnoc_flit_type), line:309:16, endln:309:21
+    \_RefTypespec: (tnoc_pkg), line:309:16, endln:309:21
       |vpiParent:
-      \_EnumTypespec: (tnoc_pkg::tnoc_flit_type), line:309:11, endln:312:19
-      |vpiFullName:tnoc_pkg::tnoc_flit_type
+      \_EnumTypespec: , line:309:11, endln:312:19
+      |vpiFullName:tnoc_pkg
       |vpiActual:
       \_LogicTypespec: , line:309:16, endln:309:21
     |vpiEnumConst:
     \_EnumConst: (TNOC_HEADER_FLIT), line:310:5, endln:310:29
       |vpiParent:
-      \_EnumTypespec: (tnoc_pkg::tnoc_flit_type), line:309:11, endln:312:19
+      \_EnumTypespec: , line:309:11, endln:312:19
       |vpiName:TNOC_HEADER_FLIT
       |BIN:0
       |vpiDecompile:1'b0
@@ -9725,8 +9753,51 @@ Design: (unnamed)
     |vpiEnumConst:
     \_EnumConst: (TNOC_PAYLOAD_FLIT), line:311:5, endln:311:29
       |vpiParent:
-      \_EnumTypespec: (tnoc_pkg::tnoc_flit_type), line:309:11, endln:312:19
+      \_EnumTypespec: , line:309:11, endln:312:19
       |vpiName:TNOC_PAYLOAD_FLIT
+      |BIN:1
+      |vpiDecompile:1'b1
+      |vpiSize:1
+  |vpiTypedef:
+  \_LogicTypespec: , line:309:16, endln:309:21
+    |vpiParent:
+    \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
+  |vpiTypedef:
+  \_TypedefTypespec: (tnoc_pkg::tnoc_flit_type), line:312:5, endln:312:19
+    |vpiParent:
+    \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
+    |vpiName:tnoc_pkg::tnoc_flit_type
+    |vpiTypedefAlias:
+    \_RefTypespec: (tnoc_pkg::tnoc_flit_type), line:309:11, endln:312:4
+      |vpiParent:
+      \_TypedefTypespec: (tnoc_pkg::tnoc_flit_type), line:312:5, endln:312:19
+      |vpiFullName:tnoc_pkg::tnoc_flit_type
+      |vpiActual:
+      \_EnumTypespec: , line:309:11, endln:312:19
+  |vpiTypedef:
+  \_EnumTypespec: , line:373:11, endln:376:19
+    |vpiParent:
+    \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
+    |vpiBaseTypespec:
+    \_RefTypespec: (tnoc_pkg), line:373:16, endln:373:19
+      |vpiParent:
+      \_EnumTypespec: , line:373:11, endln:376:19
+      |vpiFullName:tnoc_pkg
+      |vpiActual:
+      \_BitTypespec: , line:373:16, endln:373:19
+    |vpiEnumConst:
+    \_EnumConst: (TNOC_LOCAL_PORT), line:374:5, endln:374:31
+      |vpiParent:
+      \_EnumTypespec: , line:373:11, endln:376:19
+      |vpiName:TNOC_LOCAL_PORT
+      |BIN:0
+      |vpiDecompile:1'b0
+      |vpiSize:1
+    |vpiEnumConst:
+    \_EnumConst: (TNOC_INTERNAL_PORT), line:375:5, endln:375:31
+      |vpiParent:
+      \_EnumTypespec: , line:373:11, endln:376:19
+      |vpiName:TNOC_INTERNAL_PORT
       |BIN:1
       |vpiDecompile:1'b1
       |vpiSize:1
@@ -9735,33 +9806,17 @@ Design: (unnamed)
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
   |vpiTypedef:
-  \_EnumTypespec: (tnoc_pkg::tnoc_port_type), line:373:11, endln:376:19
+  \_TypedefTypespec: (tnoc_pkg::tnoc_port_type), line:376:5, endln:376:19
     |vpiParent:
     \_Package: tnoc_pkg (tnoc_pkg), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:40:1, endln:400:11
     |vpiName:tnoc_pkg::tnoc_port_type
-    |vpiBaseTypespec:
-    \_RefTypespec: (tnoc_pkg::tnoc_port_type), line:373:16, endln:373:19
+    |vpiTypedefAlias:
+    \_RefTypespec: (tnoc_pkg::tnoc_port_type), line:373:11, endln:376:4
       |vpiParent:
-      \_EnumTypespec: (tnoc_pkg::tnoc_port_type), line:373:11, endln:376:19
+      \_TypedefTypespec: (tnoc_pkg::tnoc_port_type), line:376:5, endln:376:19
       |vpiFullName:tnoc_pkg::tnoc_port_type
       |vpiActual:
-      \_BitTypespec: , line:373:16, endln:373:19
-    |vpiEnumConst:
-    \_EnumConst: (TNOC_LOCAL_PORT), line:374:5, endln:374:31
-      |vpiParent:
-      \_EnumTypespec: (tnoc_pkg::tnoc_port_type), line:373:11, endln:376:19
-      |vpiName:TNOC_LOCAL_PORT
-      |BIN:0
-      |vpiDecompile:1'b0
-      |vpiSize:1
-    |vpiEnumConst:
-    \_EnumConst: (TNOC_INTERNAL_PORT), line:375:5, endln:375:31
-      |vpiParent:
-      \_EnumTypespec: (tnoc_pkg::tnoc_port_type), line:373:11, endln:376:19
-      |vpiName:TNOC_INTERNAL_PORT
-      |BIN:1
-      |vpiDecompile:1'b1
-      |vpiSize:1
+      \_EnumTypespec: , line:373:11, endln:376:19
   |vpiImportTypespec:
   \_Function: (tnoc_pkg::tnoc_clog2), line:66:3, endln:83:14
   |vpiImportTypespec:
@@ -9831,7 +9886,9 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_Function: (tnoc_pkg::get_port_flit_width), line:386:3, endln:399:14
   |vpiImportTypespec:
-  \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+  \_TypedefTypespec: (tnoc_pkg::tnoc_packet_config), line:53:5, endln:53:23
+  |vpiImportTypespec:
+  \_StructTypespec: , line:44:11, endln:53:4
   |vpiImportTypespec:
   \_ShortIntTypespec: , line:45:5, endln:45:13
   |vpiImportTypespec:
@@ -9849,57 +9906,61 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ShortIntTypespec: , line:52:5, endln:52:13
   |vpiImportTypespec:
-  \_StringTypespec: (size_x), line:56:5, endln:56:11
+  \_StringTypespec: , line:56:5, endln:56:11
   |vpiImportTypespec:
-  \_StringTypespec: (size_y), line:57:5, endln:57:11
+  \_StringTypespec: , line:57:5, endln:57:11
   |vpiImportTypespec:
-  \_StringTypespec: (virtual_channels), line:58:5, endln:58:21
+  \_StringTypespec: , line:58:5, endln:58:21
   |vpiImportTypespec:
-  \_StringTypespec: (tags), line:59:5, endln:59:9
+  \_StringTypespec: , line:59:5, endln:59:9
   |vpiImportTypespec:
-  \_StringTypespec: (address_width), line:60:5, endln:60:18
+  \_StringTypespec: , line:60:5, endln:60:18
   |vpiImportTypespec:
-  \_StringTypespec: (data_width), line:61:5, endln:61:15
+  \_StringTypespec: , line:61:5, endln:61:15
   |vpiImportTypespec:
-  \_StringTypespec: (max_data_width), line:62:5, endln:62:19
+  \_StringTypespec: , line:62:5, endln:62:19
   |vpiImportTypespec:
-  \_StringTypespec: (max_byte_length), line:63:5, endln:63:20
+  \_StringTypespec: , line:63:5, endln:63:20
   |vpiImportTypespec:
-  \_StringTypespec: (size_x), line:56:5, endln:56:11
+  \_StringTypespec: , line:56:5, endln:56:11
   |vpiImportTypespec:
-  \_StringTypespec: (size_y), line:57:5, endln:57:11
+  \_StringTypespec: , line:57:5, endln:57:11
   |vpiImportTypespec:
-  \_StringTypespec: (virtual_channels), line:58:5, endln:58:21
+  \_StringTypespec: , line:58:5, endln:58:21
   |vpiImportTypespec:
-  \_StringTypespec: (tags), line:59:5, endln:59:9
+  \_StringTypespec: , line:59:5, endln:59:9
   |vpiImportTypespec:
-  \_StringTypespec: (address_width), line:60:5, endln:60:18
+  \_StringTypespec: , line:60:5, endln:60:18
   |vpiImportTypespec:
-  \_StringTypespec: (data_width), line:61:5, endln:61:15
+  \_StringTypespec: , line:61:5, endln:61:15
   |vpiImportTypespec:
-  \_StringTypespec: (max_data_width), line:62:5, endln:62:19
+  \_StringTypespec: , line:62:5, endln:62:19
   |vpiImportTypespec:
-  \_StringTypespec: (max_byte_length), line:63:5, endln:63:20
+  \_StringTypespec: , line:63:5, endln:63:20
   |vpiImportTypespec:
-  \_StringTypespec: (size_x), line:56:5, endln:56:11
+  \_StringTypespec: , line:56:5, endln:56:11
   |vpiImportTypespec:
-  \_StringTypespec: (size_y), line:57:5, endln:57:11
+  \_StringTypespec: , line:57:5, endln:57:11
   |vpiImportTypespec:
-  \_StringTypespec: (virtual_channels), line:58:5, endln:58:21
+  \_StringTypespec: , line:58:5, endln:58:21
   |vpiImportTypespec:
-  \_StringTypespec: (tags), line:59:5, endln:59:9
+  \_StringTypespec: , line:59:5, endln:59:9
   |vpiImportTypespec:
-  \_StringTypespec: (address_width), line:60:5, endln:60:18
+  \_StringTypespec: , line:60:5, endln:60:18
   |vpiImportTypespec:
-  \_StringTypespec: (data_width), line:61:5, endln:61:15
+  \_StringTypespec: , line:61:5, endln:61:15
   |vpiImportTypespec:
-  \_StringTypespec: (max_data_width), line:62:5, endln:62:19
+  \_StringTypespec: , line:62:5, endln:62:19
   |vpiImportTypespec:
-  \_StringTypespec: (max_byte_length), line:63:5, endln:63:20
+  \_StringTypespec: , line:63:5, endln:63:20
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:66:37, endln:66:47
+  |vpiImportTypespec:
+  \_EnumTypespec: , line:174:11, endln:181:21
   |vpiImportTypespec:
   \_LogicTypespec: , line:174:16, endln:174:27
   |vpiImportTypespec:
-  \_EnumTypespec: (tnoc_pkg::tnoc_packet_type), line:174:11, endln:181:21
+  \_TypedefTypespec: (tnoc_pkg::tnoc_packet_type), line:181:5, endln:181:21
   |vpiImportTypespec:
   \_IntTypespec: , line:183:15, endln:183:18
   |vpiImportTypespec:
@@ -9907,11 +9968,15 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:185:15, endln:185:18
   |vpiImportTypespec:
+  \_EnumTypespec: , line:187:11, endln:191:20
+  |vpiImportTypespec:
   \_LogicTypespec: , line:187:16, endln:187:27
   |vpiImportTypespec:
-  \_EnumTypespec: (tnoc_pkg::tnoc_burst_type), line:187:11, endln:191:20
+  \_TypedefTypespec: (tnoc_pkg::tnoc_burst_type), line:191:5, endln:191:20
   |vpiImportTypespec:
-  \_StructTypespec: (tnoc_pkg::tnoc_response_status), line:193:11, endln:197:4
+  \_TypedefTypespec: (tnoc_pkg::tnoc_response_status), line:197:5, endln:197:25
+  |vpiImportTypespec:
+  \_StructTypespec: , line:193:11, endln:197:4
   |vpiImportTypespec:
   \_LogicTypespec: , line:194:5, endln:194:10
   |vpiImportTypespec:
@@ -9919,13 +9984,17 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:196:5, endln:196:10
   |vpiImportTypespec:
+  \_EnumTypespec: , line:309:11, endln:312:19
+  |vpiImportTypespec:
   \_LogicTypespec: , line:309:16, endln:309:21
   |vpiImportTypespec:
-  \_EnumTypespec: (tnoc_pkg::tnoc_flit_type), line:309:11, endln:312:19
+  \_TypedefTypespec: (tnoc_pkg::tnoc_flit_type), line:312:5, endln:312:19
+  |vpiImportTypespec:
+  \_EnumTypespec: , line:373:11, endln:376:19
   |vpiImportTypespec:
   \_BitTypespec: , line:373:16, endln:373:19
   |vpiImportTypespec:
-  \_EnumTypespec: (tnoc_pkg::tnoc_port_type), line:373:11, endln:376:19
+  \_TypedefTypespec: (tnoc_pkg::tnoc_port_type), line:376:5, endln:376:19
   |vpiDefName:tnoc_pkg
   |vpiTaskFunc:
   \_Function: (tnoc_pkg::tnoc_clog2), line:66:3, endln:83:14
@@ -10011,7 +10080,7 @@ Design: (unnamed)
       |vpiName:tnoc_packet_config
       |vpiFullName:work@tnoc_vc_splitter.PACKET_CONFIG.tnoc_packet_config
       |vpiActual:
-      \_StructTypespec: (tnoc_pkg::tnoc_packet_config), line:44:11, endln:53:4
+      \_TypedefTypespec: (tnoc_pkg::tnoc_packet_config), line:53:5, endln:53:23
     |vpiName:PACKET_CONFIG
     |vpiFullName:work@tnoc_vc_splitter.PACKET_CONFIG
   |vpiParameter:
@@ -10025,7 +10094,7 @@ Design: (unnamed)
       |vpiName:tnoc_port_type
       |vpiFullName:work@tnoc_vc_splitter.PORT_TYPE.tnoc_port_type
       |vpiActual:
-      \_EnumTypespec: (tnoc_pkg::tnoc_port_type), line:373:11, endln:376:19
+      \_TypedefTypespec: (tnoc_pkg::tnoc_port_type), line:376:5, endln:376:19
     |vpiName:PORT_TYPE
     |vpiFullName:work@tnoc_vc_splitter.PORT_TYPE
   |vpiParameter:
@@ -10187,7 +10256,7 @@ Design: (unnamed)
                   |vpiName:sender_if
                   |vpiFullName:sender_if[i]
                   |vpiActual:
-                  \_LogicNet: (work@tnoc_vc_splitter.sender_if), line:413:25, endln:413:34
+                  \_ArrayNet: (work@tnoc_vc_splitter.sender_if), line:413:25, endln:413:34
                   |vpiIndex:
                   \_RefObj: (work@tnoc_vc_splitter.g.g.sender_if[i].flit.i), line:424:19, endln:424:20
                     |vpiParent:
@@ -10272,7 +10341,7 @@ Design: (unnamed)
                   |vpiName:sender_if
                   |vpiFullName:sender_if[i]
                   |vpiActual:
-                  \_LogicNet: (work@tnoc_vc_splitter.sender_if), line:413:25, endln:413:34
+                  \_ArrayNet: (work@tnoc_vc_splitter.sender_if), line:413:25, endln:413:34
                   |vpiIndex:
                   \_RefObj: (work@tnoc_vc_splitter.g.g.sender_if[i].flit.i), line:429:19, endln:429:20
                     |vpiParent:
@@ -10373,7 +10442,7 @@ Design: (unnamed)
                 |vpiName:sender_if
                 |vpiFullName:sender_if[i]
                 |vpiActual:
-                \_LogicNet: (work@tnoc_vc_splitter.sender_if), line:413:25, endln:413:34
+                \_ArrayNet: (work@tnoc_vc_splitter.sender_if), line:413:25, endln:413:34
                 |vpiIndex:
                 \_RefObj: (work@tnoc_vc_splitter.g.sender_if[i].valid.i), line:417:17, endln:417:18
                   |vpiParent:
@@ -10408,7 +10477,7 @@ Design: (unnamed)
                 |vpiName:sender_if
                 |vpiFullName:sender_if[i]
                 |vpiActual:
-                \_LogicNet: (work@tnoc_vc_splitter.sender_if), line:413:25, endln:413:34
+                \_ArrayNet: (work@tnoc_vc_splitter.sender_if), line:413:25, endln:413:34
                 |vpiIndex:
                 \_RefObj: (work@tnoc_vc_splitter.g.sender_if[i].ready.i), line:418:43, endln:418:44
                   |vpiParent:
@@ -10471,7 +10540,7 @@ Design: (unnamed)
                 |vpiName:sender_if
                 |vpiFullName:sender_if[i]
                 |vpiActual:
-                \_LogicNet: (work@tnoc_vc_splitter.sender_if), line:413:25, endln:413:34
+                \_ArrayNet: (work@tnoc_vc_splitter.sender_if), line:413:25, endln:413:34
                 |vpiIndex:
                 \_RefObj: (work@tnoc_vc_splitter.g.sender_if[i].vc_ready.i), line:419:43, endln:419:44
                   |vpiParent:
@@ -10624,6 +10693,14 @@ Design: (unnamed)
   \_IntTypespec: , line:409:15, endln:409:18
     |vpiParent:
     \_Module: work@tnoc_vc_splitter (work@tnoc_vc_splitter), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:404:1, endln:433:10
+    |vpiExpr:
+    \_RefObj: (work@tnoc_vc_splitter.CHANNELS), line:413:35, endln:413:43
+      |vpiParent:
+      \_IntTypespec: , line:409:15, endln:409:18
+      |vpiName:CHANNELS
+      |vpiFullName:work@tnoc_vc_splitter.CHANNELS
+      |vpiActual:
+      \_Parameter: (work@tnoc_vc_splitter.CHANNELS), line:409:35, endln:409:81
     |vpiSigned:1
   |vpiTypedef:
   \_UnsupportedTypespec: (tnoc_types), line:411:3, endln:411:13
@@ -10640,6 +10717,26 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@tnoc_vc_splitter (work@tnoc_vc_splitter), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:404:1, endln:433:10
     |vpiName:tnoc_flit_if
+  |vpiTypedef:
+  \_ArrayTypespec: , line:413:3, endln:413:44
+    |vpiParent:
+    \_Module: work@tnoc_vc_splitter (work@tnoc_vc_splitter), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:404:1, endln:433:10
+    |vpiArrayType:3
+    |vpiIndexTypespec:
+    \_RefTypespec: (work@tnoc_vc_splitter), line:413:34, endln:413:44
+      |vpiParent:
+      \_ArrayTypespec: , line:413:3, endln:413:44
+      |vpiFullName:work@tnoc_vc_splitter
+      |vpiActual:
+      \_IntTypespec: , line:409:15, endln:409:18
+    |vpiElemTypespec:
+    \_RefTypespec: (work@tnoc_vc_splitter.tnoc_flit_if), line:413:3, endln:413:15
+      |vpiParent:
+      \_ArrayTypespec: , line:413:3, endln:413:44
+      |vpiName:tnoc_flit_if
+      |vpiFullName:work@tnoc_vc_splitter.tnoc_flit_if
+      |vpiActual:
+      \_UnsupportedTypespec: (tnoc_flit_if), line:413:3, endln:413:15
   |vpiTypedef:
   \_UnsupportedTypespec: (tnoc_types), line:411:3, endln:411:13
     |vpiParent:
@@ -10673,18 +10770,37 @@ Design: (unnamed)
           |vpiActual:
           \_Parameter: (work@tnoc_vc_splitter.CHANNELS), line:409:35, endln:409:81
     |vpiElemTypespec:
-    \_RefTypespec: (work@tnoc_vc_splitter.tnoc_flit_if), line:413:3, endln:413:15
+    \_RefTypespec: (work@tnoc_vc_splitter), line:413:3, endln:413:15
       |vpiParent:
       \_ArrayTypespec: , line:413:34, endln:413:44
-      |vpiName:tnoc_flit_if
-      |vpiFullName:work@tnoc_vc_splitter.tnoc_flit_if
+      |vpiFullName:work@tnoc_vc_splitter
       |vpiActual:
-      \_UnsupportedTypespec: (tnoc_flit_if), line:413:3, endln:413:15
+      \_ArrayTypespec: , line:413:3, endln:413:44
   |vpiTypedef:
   \_UnsupportedTypespec: (tnoc_flit_if), line:413:3, endln:413:15
     |vpiParent:
     \_Module: work@tnoc_vc_splitter (work@tnoc_vc_splitter), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:404:1, endln:433:10
     |vpiName:tnoc_flit_if
+  |vpiTypedef:
+  \_ArrayTypespec: , line:413:3, endln:413:44
+    |vpiParent:
+    \_Module: work@tnoc_vc_splitter (work@tnoc_vc_splitter), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:404:1, endln:433:10
+    |vpiArrayType:3
+    |vpiIndexTypespec:
+    \_RefTypespec: (work@tnoc_vc_splitter), line:413:34, endln:413:44
+      |vpiParent:
+      \_ArrayTypespec: , line:413:3, endln:413:44
+      |vpiFullName:work@tnoc_vc_splitter
+      |vpiActual:
+      \_IntTypespec: , line:409:15, endln:409:18
+    |vpiElemTypespec:
+    \_RefTypespec: (work@tnoc_vc_splitter.tnoc_flit_if), line:413:3, endln:413:15
+      |vpiParent:
+      \_ArrayTypespec: , line:413:3, endln:413:44
+      |vpiName:tnoc_flit_if
+      |vpiFullName:work@tnoc_vc_splitter.tnoc_flit_if
+      |vpiActual:
+      \_UnsupportedTypespec: (tnoc_flit_if), line:413:3, endln:413:15
   |vpiImportTypespec:
   \_ImportTypespec: (tnoc_pkg), line:405:11, endln:405:22
   |vpiImportTypespec:
@@ -10724,17 +10840,19 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_UnsupportedTypespec: (tnoc_flit_if), line:413:3, endln:413:15
   |vpiImportTypespec:
-  \_LogicNet: (work@tnoc_vc_splitter.sender_if), line:413:25, endln:413:34
+  \_ArrayTypespec: , line:413:3, endln:413:44
+  |vpiImportTypespec:
+  \_ArrayNet: (work@tnoc_vc_splitter.sender_if), line:413:25, endln:413:34
     |vpiParent:
     \_Module: work@tnoc_vc_splitter (work@tnoc_vc_splitter), file:${SURELOG_DIR}/tests/FuncDef2/dut.sv, line:404:1, endln:433:10
     |vpiTypespec:
     \_RefTypespec: (work@tnoc_vc_splitter.sender_if.tnoc_flit_if), line:413:3, endln:413:15
       |vpiParent:
-      \_LogicNet: (work@tnoc_vc_splitter.sender_if), line:413:25, endln:413:34
+      \_ArrayNet: (work@tnoc_vc_splitter.sender_if), line:413:25, endln:413:34
       |vpiName:tnoc_flit_if
       |vpiFullName:work@tnoc_vc_splitter.sender_if.tnoc_flit_if
       |vpiActual:
-      \_UnsupportedTypespec: (tnoc_flit_if), line:413:3, endln:413:15
+      \_ArrayTypespec: , line:413:3, endln:413:44
     |vpiName:sender_if
     |vpiFullName:work@tnoc_vc_splitter.sender_if
   |vpiImportTypespec:
@@ -10745,6 +10863,8 @@ Design: (unnamed)
   \_ArrayTypespec: , line:413:34, endln:413:44
   |vpiImportTypespec:
   \_UnsupportedTypespec: (tnoc_flit_if), line:413:3, endln:413:15
+  |vpiImportTypespec:
+  \_ArrayTypespec: , line:413:3, endln:413:44
   |vpiImportTypespec:
   \_LogicNet: (work@tnoc_vc_splitter.TNOC_DEFAULT_PACKET_CONFIG), line:407:51, endln:407:77
     |vpiParent:
@@ -10765,11 +10885,11 @@ Design: (unnamed)
   |vpiNet:
   \_LogicNet: (work@tnoc_vc_splitter.receiver_if), line:412:25, endln:412:36
   |vpiNet:
-  \_LogicNet: (work@tnoc_vc_splitter.sender_if), line:413:25, endln:413:34
-  |vpiNet:
   \_LogicNet: (work@tnoc_vc_splitter.TNOC_DEFAULT_PACKET_CONFIG), line:407:51, endln:407:77
   |vpiNet:
   \_LogicNet: (work@tnoc_vc_splitter.TNOC_LOCAL_PORT), line:408:51, endln:408:66
+  |vpiArrayNet:
+  \_ArrayNet: (work@tnoc_vc_splitter.sender_if), line:413:25, endln:413:34
   |vpiPort:
   \_Port: (types), line:411:25, endln:411:30
     |vpiParent:

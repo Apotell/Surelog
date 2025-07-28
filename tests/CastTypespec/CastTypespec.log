@@ -485,13 +485,14 @@ ParamAssign                                            8
 Parameter                                              8
 Range                                                  3
 RefObj                                                17
-RefTypespec                                           41
+RefTypespec                                           42
 StringTypespec                                         2
+StructNet                                              2
 StructTypespec                                         2
-StructVar                                              2
 SysFuncCall                                            6
 TaggedPattern                                          2
 Task                                                   9
+TypedefTypespec                                        2
 TypespecMember                                         5
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CastTypespec/slpp_all/surelog.uhdm ...
@@ -761,7 +762,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -795,14 +796,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -810,7 +810,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -818,7 +818,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -826,7 +826,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -834,13 +834,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/CastTypespec/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1342,19 +1356,17 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:work@tlul_adapter_host
   |vpiTypedef:
-  \_StringTypespec: (a_param), line:17:7, endln:17:14
+  \_StringTypespec: , line:17:7, endln:17:14
     |vpiParent:
     \_Module: work@tlul_adapter_host (work@tlul_adapter_host), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:14:3, endln:23:12
-    |vpiName:a_param
   |vpiTypedef:
-  \_StringTypespec: (a_size), line:18:7, endln:18:13
+  \_StringTypespec: , line:18:7, endln:18:13
     |vpiParent:
     \_Module: work@tlul_adapter_host (work@tlul_adapter_host), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:14:3, endln:23:12
-    |vpiName:a_size
   |vpiImportTypespec:
-  \_StringTypespec: (a_param), line:17:7, endln:17:14
+  \_StringTypespec: , line:17:7, endln:17:14
   |vpiImportTypespec:
-  \_StringTypespec: (a_size), line:18:7, endln:18:13
+  \_StringTypespec: , line:18:7, endln:18:13
   |vpiImportTypespec:
   \_LogicNet: (work@tlul_adapter_host.WordSize), line:18:35, endln:18:43
     |vpiParent:
@@ -1402,7 +1414,7 @@ Design: (unnamed)
           |vpiName:a_param
           |vpiFullName:work@tlul_adapter_host.a_param
           |vpiActual:
-          \_StringTypespec: (a_param), line:17:7, endln:17:14
+          \_StringTypespec: , line:17:7, endln:17:14
       |vpiOperand:
       \_TaggedPattern: , line:18:7, endln:18:44
         |vpiParent:
@@ -1427,7 +1439,7 @@ Design: (unnamed)
           |vpiName:a_size
           |vpiFullName:work@tlul_adapter_host.a_size
           |vpiActual:
-          \_StringTypespec: (a_size), line:18:7, endln:18:13
+          \_StringTypespec: , line:18:7, endln:18:13
     |vpiLhs:
     \_RefObj: (work@tlul_adapter_host.tl_o), line:16:12, endln:16:16
       |vpiParent:
@@ -1442,46 +1454,6 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:work@top
   |vpiVariables:
-  \_StructVar: (work@top.XYZ), line:26:25, endln:26:28
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
-    |vpiTypespec:
-    \_RefTypespec: (work@top.XYZ), line:26:5, endln:26:23
-      |vpiParent:
-      \_StructVar: (work@top.XYZ), line:26:25, endln:26:28
-      |vpiFullName:work@top.XYZ
-      |vpiActual:
-      \_StructTypespec: , line:26:5, endln:26:24
-    |vpiName:XYZ
-    |vpiFullName:work@top.XYZ
-    |vpiVisibility:1
-    |vpiExpr:
-    \_Operation: , line:26:31, endln:26:38
-      |vpiParent:
-      \_StructVar: (work@top.XYZ), line:26:25, endln:26:28
-      |vpiOpType:76
-      |vpiOperand:
-      \_Constant: , line:26:33, endln:26:34
-        |vpiParent:
-        \_Operation: , line:26:31, endln:26:38
-        |vpiDecompile:3
-        |vpiSize:96
-        |UINT:3
-        |vpiConstType:9
-      |vpiOperand:
-      \_Operation: , line:26:35, endln:26:36
-        |vpiParent:
-        \_Operation: , line:26:31, endln:26:38
-        |vpiOpType:33
-        |vpiOperand:
-        \_Constant: , line:26:35, endln:26:36
-          |vpiParent:
-          \_Operation: , line:26:35, endln:26:36
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-  |vpiVariables:
   \_IntVar: (work@top.a), line:28:9, endln:28:10
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
@@ -1495,6 +1467,7 @@ Design: (unnamed)
     |vpiName:a
     |vpiFullName:work@top.a
     |vpiSigned:1
+    |vpiRandType:1
     |vpiVisibility:1
   |vpiVariables:
   \_IntVar: (work@top.b), line:28:11, endln:28:12
@@ -1510,6 +1483,7 @@ Design: (unnamed)
     |vpiName:b
     |vpiFullName:work@top.b
     |vpiSigned:1
+    |vpiRandType:1
     |vpiVisibility:1
   |vpiVariables:
   \_IntVar: (work@top.c), line:28:13, endln:28:14
@@ -1525,6 +1499,7 @@ Design: (unnamed)
     |vpiName:c
     |vpiFullName:work@top.c
     |vpiSigned:1
+    |vpiRandType:1
     |vpiVisibility:1
   |vpiParameter:
   \_Parameter: (work@top.HartSelLen), line:35:14, endln:35:28
@@ -1549,34 +1524,45 @@ Design: (unnamed)
     |vpiLhs:
     \_Parameter: (work@top.HartSelLen), line:35:14, endln:35:28
   |vpiTypedef:
-  \_StructTypespec: (ab_t), line:27:13, endln:27:33
+  \_TypedefTypespec: (ab_t), line:27:34, endln:27:38
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
     |vpiName:ab_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@top.ab_t), line:27:13, endln:27:33
+      |vpiParent:
+      \_TypedefTypespec: (ab_t), line:27:34, endln:27:38
+      |vpiFullName:work@top.ab_t
+      |vpiActual:
+      \_StructTypespec: , line:27:13, endln:27:33
+  |vpiTypedef:
+  \_StructTypespec: , line:27:13, endln:27:33
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
     |vpiTypespecMember:
     \_TypespecMember: (a), line:27:25, endln:27:26
       |vpiParent:
-      \_StructTypespec: (ab_t), line:27:13, endln:27:33
+      \_StructTypespec: , line:27:13, endln:27:33
       |vpiName:a
       |vpiTypespec:
-      \_RefTypespec: (work@top.ab_t.a), line:27:21, endln:27:24
+      \_RefTypespec: (work@top.a), line:27:21, endln:27:24
         |vpiParent:
         \_TypespecMember: (a), line:27:25, endln:27:26
-        |vpiFullName:work@top.ab_t.a
+        |vpiFullName:work@top.a
         |vpiActual:
         \_IntTypespec: , line:27:21, endln:27:24
     |vpiTypespecMember:
     \_TypespecMember: (b), line:27:27, endln:27:31
       |vpiParent:
-      \_StructTypespec: (ab_t), line:27:13, endln:27:33
+      \_StructTypespec: , line:27:13, endln:27:33
       |vpiName:b
       |vpiTypespec:
-      \_RefTypespec: (work@top.ab_t.b), line:27:21, endln:27:24
+      \_RefTypespec: (work@top.b), line:27:21, endln:27:24
         |vpiParent:
         \_TypespecMember: (b), line:27:27, endln:27:31
-        |vpiFullName:work@top.ab_t.b
+        |vpiFullName:work@top.b
         |vpiActual:
-        \_ArrayTypespec: , line:27:28, endln:27:31
+        \_ArrayTypespec: , line:27:21, endln:27:31
   |vpiTypedef:
   \_IntTypespec: , line:27:21, endln:27:24
     |vpiParent:
@@ -1588,13 +1574,14 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
     |vpiSigned:1
   |vpiTypedef:
-  \_ArrayTypespec: , line:27:28, endln:27:31
+  \_ArrayTypespec: , line:27:21, endln:27:31
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
+    |vpiArrayType:1
     |vpiRange:
     \_Range: , line:27:28, endln:27:31
       |vpiParent:
-      \_ArrayTypespec: , line:27:28, endln:27:31
+      \_ArrayTypespec: , line:27:21, endln:27:31
       |vpiRightRange:
       \_Operation: , line:27:29, endln:27:30
         |vpiParent:
@@ -1611,7 +1598,7 @@ Design: (unnamed)
     |vpiElemTypespec:
     \_RefTypespec: (work@top), line:27:21, endln:27:24
       |vpiParent:
-      \_ArrayTypespec: , line:27:28, endln:27:31
+      \_ArrayTypespec: , line:27:21, endln:27:31
       |vpiFullName:work@top
       |vpiActual:
       \_IntTypespec: , line:27:21, endln:27:24
@@ -1686,13 +1673,29 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
     |vpiSigned:1
   |vpiImportTypespec:
-  \_StructTypespec: (ab_t), line:27:13, endln:27:33
+  \_TypedefTypespec: (ab_t), line:27:34, endln:27:38
+  |vpiImportTypespec:
+  \_StructTypespec: , line:27:13, endln:27:33
   |vpiImportTypespec:
   \_IntTypespec: , line:27:21, endln:27:24
   |vpiImportTypespec:
   \_IntTypespec: , line:27:21, endln:27:24
   |vpiImportTypespec:
-  \_ArrayTypespec: , line:27:28, endln:27:31
+  \_ArrayTypespec: , line:27:21, endln:27:31
+  |vpiImportTypespec:
+  \_StructNet: (work@top.v1), line:31:12, endln:31:14
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
+    |vpiTypespec:
+    \_RefTypespec: (work@top.v1.ab_t), line:31:7, endln:31:11
+      |vpiParent:
+      \_StructNet: (work@top.v1), line:31:12, endln:31:14
+      |vpiName:ab_t
+      |vpiFullName:work@top.v1.ab_t
+      |vpiActual:
+      \_TypedefTypespec: (ab_t), line:27:34, endln:27:38
+    |vpiName:v1
+    |vpiFullName:work@top.v1
   |vpiImportTypespec:
   \_StructTypespec: , line:26:5, endln:26:24
   |vpiImportTypespec:
@@ -1702,7 +1705,18 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:26:13, endln:26:16
   |vpiImportTypespec:
-  \_StructVar: (work@top.XYZ), line:26:25, endln:26:28
+  \_StructNet: (work@top.XYZ), line:26:25, endln:26:28
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CastTypespec/dut.sv, line:25:3, endln:42:12
+    |vpiTypespec:
+    \_RefTypespec: (work@top.XYZ), line:26:5, endln:26:24
+      |vpiParent:
+      \_StructNet: (work@top.XYZ), line:26:25, endln:26:28
+      |vpiFullName:work@top.XYZ
+      |vpiActual:
+      \_StructTypespec: , line:26:5, endln:26:24
+    |vpiName:XYZ
+    |vpiFullName:work@top.XYZ
   |vpiImportTypespec:
   \_IntTypespec: , line:28:5, endln:28:8
   |vpiImportTypespec:
@@ -1716,6 +1730,10 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntVar: (work@top.c), line:28:13, endln:28:14
   |vpiDefName:work@top
+  |vpiNet:
+  \_StructNet: (work@top.v1), line:31:12, endln:31:14
+  |vpiNet:
+  \_StructNet: (work@top.XYZ), line:26:25, endln:26:28
   |vpiProcess:
   \_Initial: , line:30:5, endln:33:8
     |vpiParent:
@@ -1725,19 +1743,6 @@ Design: (unnamed)
       |vpiParent:
       \_Initial: , line:30:5, endln:33:8
       |vpiFullName:work@top
-      |vpiVariables:
-      \_StructVar: (work@top), line:31:12, endln:31:14
-        |vpiParent:
-        \_Begin: (work@top), line:30:13, endln:33:8
-        |vpiTypespec:
-        \_RefTypespec: (work@top.ab_t), line:31:7, endln:31:11
-          |vpiParent:
-          \_StructVar: (work@top), line:31:12, endln:31:14
-          |vpiName:ab_t
-          |vpiFullName:work@top.ab_t
-          |vpiActual:
-          \_StructTypespec: (ab_t), line:27:13, endln:27:33
-        |vpiFullName:work@top
       |vpiVariables:
       \_ArrayVar: (work@top.v1), line:31:12, endln:31:14
         |vpiParent:
@@ -1798,16 +1803,6 @@ Design: (unnamed)
             |vpiSize:64
             |UINT:0
             |vpiConstType:9
-        |vpiElemTypespec:
-        \_RefTypespec: (work@top.ab_t), line:31:7, endln:31:11
-          |vpiParent:
-          \_ArrayTypespec: , line:31:14, endln:31:25
-          |vpiName:ab_t
-          |vpiFullName:work@top.ab_t
-          |vpiActual:
-          \_StructTypespec: (ab_t), line:27:13, endln:27:33
-      |vpiImportTypespec:
-      \_StructVar: (work@top), line:31:12, endln:31:14
       |vpiImportTypespec:
       \_ArrayTypespec: , line:31:14, endln:31:25
       |vpiImportTypespec:

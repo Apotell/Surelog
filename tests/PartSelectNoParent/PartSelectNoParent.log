@@ -249,9 +249,10 @@ PartSelect                                             1
 Port                                                   1
 Range                                                  2
 RefObj                                                 7
-RefTypespec                                           11
+RefTypespec                                           12
 StructNet                                              1
 StructTypespec                                         1
+TypedefTypespec                                        1
 TypespecMember                                         1
 VarSelect                                              1
 === UHDM Object Stats End ===
@@ -368,21 +369,32 @@ Design: (unnamed)
     \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/PartSelectNoParent/dut.sv, line:1:1, endln:9:11
     |vpiSigned:1
   |vpiTypedef:
-  \_StructTypespec: (my_pkg::hw_key_req_t), line:6:12, endln:8:5
+  \_TypedefTypespec: (my_pkg::hw_key_req_t), line:8:6, endln:8:18
     |vpiParent:
     \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/PartSelectNoParent/dut.sv, line:1:1, endln:9:11
     |vpiName:my_pkg::hw_key_req_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (my_pkg::hw_key_req_t), line:6:12, endln:8:5
+      |vpiParent:
+      \_TypedefTypespec: (my_pkg::hw_key_req_t), line:8:6, endln:8:18
+      |vpiFullName:my_pkg::hw_key_req_t
+      |vpiActual:
+      \_StructTypespec: , line:6:12, endln:8:5
+  |vpiTypedef:
+  \_StructTypespec: , line:6:12, endln:8:5
+    |vpiParent:
+    \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/PartSelectNoParent/dut.sv, line:1:1, endln:9:11
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (key), line:7:40, endln:7:43
       |vpiParent:
-      \_StructTypespec: (my_pkg::hw_key_req_t), line:6:12, endln:8:5
+      \_StructTypespec: , line:6:12, endln:8:5
       |vpiName:key
       |vpiTypespec:
-      \_RefTypespec: (my_pkg::hw_key_req_t::key), line:7:7, endln:7:39
+      \_RefTypespec: (my_pkg::key), line:7:7, endln:7:39
         |vpiParent:
         \_TypespecMember: (key), line:7:40, endln:7:43
-        |vpiFullName:my_pkg::hw_key_req_t::key
+        |vpiFullName:my_pkg::key
         |vpiActual:
         \_LogicTypespec: , line:7:7, endln:7:39
   |vpiTypedef:
@@ -462,7 +474,9 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:4:14, endln:4:17
   |vpiImportTypespec:
-  \_StructTypespec: (my_pkg::hw_key_req_t), line:6:12, endln:8:5
+  \_TypedefTypespec: (my_pkg::hw_key_req_t), line:8:6, endln:8:18
+  |vpiImportTypespec:
+  \_StructTypespec: , line:6:12, endln:8:5
   |vpiImportTypespec:
   \_LogicTypespec: , line:7:7, endln:7:39
   |vpiDefName:my_pkg
@@ -485,6 +499,7 @@ Design: (unnamed)
     |vpiName:o
     |vpiFullName:work@top.o
     |vpiSigned:1
+    |vpiRandType:1
     |vpiVisibility:1
   |vpiTypedef:
   \_ImportTypespec: (my_pkg), line:12:11, endln:12:20
@@ -520,13 +535,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PartSelectNoParent/dut.sv, line:11:1, endln:19:10
     |vpiTypespec:
-    \_RefTypespec: (work@top.keymgr_key_i.keymgr_key_i), line:13:4, endln:13:16
+    \_RefTypespec: (work@top.keymgr_key_i.hw_key_req_t), line:13:4, endln:13:16
       |vpiParent:
       \_StructNet: (work@top.keymgr_key_i), line:13:17, endln:13:29
-      |vpiName:keymgr_key_i
-      |vpiFullName:work@top.keymgr_key_i.keymgr_key_i
+      |vpiName:hw_key_req_t
+      |vpiFullName:work@top.keymgr_key_i.hw_key_req_t
       |vpiActual:
-      \_StructTypespec: (my_pkg::hw_key_req_t), line:6:12, endln:8:5
+      \_TypedefTypespec: (my_pkg::hw_key_req_t), line:8:6, endln:8:18
     |vpiName:keymgr_key_i
     |vpiFullName:work@top.keymgr_key_i
   |vpiImportTypespec:

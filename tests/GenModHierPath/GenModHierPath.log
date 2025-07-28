@@ -103,8 +103,8 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/GenModHierPath/dut.sv:8:1: Compile module "work@InitializedBlockRAM".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+ArrayNet                                               1
 ArrayTypespec                                          1
-ArrayVar                                               1
 Begin                                                  2
 Constant                                               2
 Design                                                 1
@@ -113,14 +113,13 @@ GenIf                                                  1
 GenRegion                                              1
 HierPath                                               1
 IntTypespec                                            1
-IntVar                                                 1
 Module                                                 2
 ModuleTypespec                                         1
 Operation                                              1
 Range                                                  1
 RefModule                                              1
 RefObj                                                 3
-RefTypespec                                            4
+RefTypespec                                            3
 SysFuncCall                                            1
 VoidTypespec                                           1
 === UHDM Object Stats End ===
@@ -134,40 +133,20 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@ForNarrowRequest
-  |vpiVariables:
-  \_IntVar: (work@ForNarrowRequest), line:3:7, endln:3:12
+  |vpiTypedef:
+  \_IntTypespec: , line:3:3, endln:3:6
     |vpiParent:
     \_Module: work@ForNarrowRequest (work@ForNarrowRequest), file:${SURELOG_DIR}/tests/GenModHierPath/dut.sv, line:1:1, endln:5:10
-    |vpiTypespec:
-    \_RefTypespec: (work@ForNarrowRequest), line:3:3, endln:3:6
-      |vpiParent:
-      \_IntVar: (work@ForNarrowRequest), line:3:7, endln:3:12
-      |vpiFullName:work@ForNarrowRequest
-      |vpiActual:
-      \_IntTypespec: , line:3:3, endln:3:6
-    |vpiFullName:work@ForNarrowRequest
-  |vpiVariables:
-  \_ArrayVar: (work@ForNarrowRequest.array), line:3:7, endln:3:12
-    |vpiParent:
-    \_Module: work@ForNarrowRequest (work@ForNarrowRequest), file:${SURELOG_DIR}/tests/GenModHierPath/dut.sv, line:1:1, endln:5:10
-    |vpiSize:1
-    |vpiTypespec:
-    \_RefTypespec: (work@ForNarrowRequest.array), line:3:12, endln:3:16
-      |vpiParent:
-      \_ArrayVar: (work@ForNarrowRequest.array), line:3:7, endln:3:12
-      |vpiFullName:work@ForNarrowRequest.array
-      |vpiActual:
-      \_ArrayTypespec: , line:3:12, endln:3:16
-    |vpiName:array
-    |vpiFullName:work@ForNarrowRequest.array
     |vpiSigned:1
-    |vpiRandType:1
-    |vpiVisibility:1
+  |vpiTypedef:
+  \_ArrayTypespec: , line:3:3, endln:3:16
+    |vpiParent:
+    \_Module: work@ForNarrowRequest (work@ForNarrowRequest), file:${SURELOG_DIR}/tests/GenModHierPath/dut.sv, line:1:1, endln:5:10
     |vpiArrayType:1
     |vpiRange:
     \_Range: , line:3:12, endln:3:16
       |vpiParent:
-      \_ArrayVar: (work@ForNarrowRequest.array), line:3:7, endln:3:12
+      \_ArrayTypespec: , line:3:3, endln:3:16
       |vpiRightRange:
       \_Operation: , line:3:13, endln:3:15
         |vpiParent:
@@ -181,35 +160,34 @@ Design: (unnamed)
           |vpiSize:64
           |UINT:10
           |vpiConstType:9
-    |vpiReg:
-    \_IntVar: (work@ForNarrowRequest), line:3:7, endln:3:12
-  |vpiRegArray:
-  \_ArrayVar: (work@ForNarrowRequest.array), line:3:7, endln:3:12
-  |vpiTypedef:
-  \_IntTypespec: , line:3:3, endln:3:6
-    |vpiParent:
-    \_Module: work@ForNarrowRequest (work@ForNarrowRequest), file:${SURELOG_DIR}/tests/GenModHierPath/dut.sv, line:1:1, endln:5:10
-    |vpiSigned:1
-  |vpiTypedef:
-  \_ArrayTypespec: , line:3:12, endln:3:16
-    |vpiParent:
-    \_Module: work@ForNarrowRequest (work@ForNarrowRequest), file:${SURELOG_DIR}/tests/GenModHierPath/dut.sv, line:1:1, endln:5:10
     |vpiElemTypespec:
     \_RefTypespec: (work@ForNarrowRequest), line:3:3, endln:3:6
       |vpiParent:
-      \_ArrayTypespec: , line:3:12, endln:3:16
+      \_ArrayTypespec: , line:3:3, endln:3:16
       |vpiFullName:work@ForNarrowRequest
       |vpiActual:
       \_IntTypespec: , line:3:3, endln:3:6
   |vpiImportTypespec:
   \_IntTypespec: , line:3:3, endln:3:6
   |vpiImportTypespec:
-  \_IntVar: (work@ForNarrowRequest), line:3:7, endln:3:12
+  \_ArrayTypespec: , line:3:3, endln:3:16
   |vpiImportTypespec:
-  \_ArrayVar: (work@ForNarrowRequest.array), line:3:7, endln:3:12
-  |vpiImportTypespec:
-  \_ArrayTypespec: , line:3:12, endln:3:16
+  \_ArrayNet: (work@ForNarrowRequest.array), line:3:7, endln:3:12
+    |vpiParent:
+    \_Module: work@ForNarrowRequest (work@ForNarrowRequest), file:${SURELOG_DIR}/tests/GenModHierPath/dut.sv, line:1:1, endln:5:10
+    |vpiTypespec:
+    \_RefTypespec: (work@ForNarrowRequest.array), line:3:3, endln:3:6
+      |vpiParent:
+      \_ArrayNet: (work@ForNarrowRequest.array), line:3:7, endln:3:12
+      |vpiFullName:work@ForNarrowRequest.array
+      |vpiActual:
+      \_ArrayTypespec: , line:3:3, endln:3:16
+    |vpiName:array
+    |vpiFullName:work@ForNarrowRequest.array
+    |vpiSigned:1
   |vpiDefName:work@ForNarrowRequest
+  |vpiArrayNet:
+  \_ArrayNet: (work@ForNarrowRequest.array), line:3:7, endln:3:12
 |vpiAllModules:
 \_Module: work@InitializedBlockRAM (work@InitializedBlockRAM), file:${SURELOG_DIR}/tests/GenModHierPath/dut.sv, line:8:1, endln:20:10
   |vpiParent:

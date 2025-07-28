@@ -246,22 +246,21 @@ Assignment                                             2
 Begin                                                  4
 CaseItem                                               1
 CaseStmt                                               1
-Constant                                               9
+Constant                                               7
 Design                                                 1
 EventControl                                           1
 FuncCall                                               1
 Function                                               1
 IODecl                                                 1
 IfStmt                                                 1
-LogicNet                                               3
+LogicNet                                               4
 LogicTypespec                                          5
-LogicVar                                               1
 Module                                                 1
 Operation                                              2
 ParamAssign                                            1
 Parameter                                              1
 Port                                                   2
-Range                                                  3
+Range                                                  2
 RefObj                                                 9
 RefTypespec                                            4
 === UHDM Object Stats End ===
@@ -302,20 +301,6 @@ Design: (unnamed)
     \_Module: work@vend (work@vend), file:${SURELOG_DIR}/tests/FuncBinding2/dut.sv, line:1:1, endln:33:10
     |vpiName:fsm
     |vpiFullName:work@vend.fsm
-    |vpiReg:
-    \_LogicVar: (work@vend.fsm.fsm_newspaper), line:12:5, endln:12:18
-      |vpiParent:
-      \_Function: (work@vend.fsm), line:10:1, endln:26:12
-      |vpiTypespec:
-      \_RefTypespec: (work@vend.fsm.fsm_newspaper), line:12:1, endln:12:4
-        |vpiParent:
-        \_LogicVar: (work@vend.fsm.fsm_newspaper), line:12:5, endln:12:18
-        |vpiFullName:work@vend.fsm.fsm_newspaper
-        |vpiActual:
-        \_LogicTypespec: , line:12:1, endln:12:4
-      |vpiName:fsm_newspaper
-      |vpiFullName:work@vend.fsm.fsm_newspaper
-      |vpiAutomatic:1
     |vpiInternalScope:
     \_Begin: (work@vend.fsm), line:14:1, endln:25:4
       |vpiParent:
@@ -409,7 +394,7 @@ Design: (unnamed)
                     |vpiName:fsm_newspaper
                     |vpiFullName:work@vend.fsm.fsm_newspaper
                     |vpiActual:
-                    \_LogicVar: (work@vend.fsm.fsm_newspaper), line:12:5, endln:12:18
+                    \_LogicNet: (work@vend.fsm.fsm_newspaper), line:12:5, endln:12:18
       |vpiStmt:
       \_Assignment: , line:24:1, endln:24:20
         |vpiParent:
@@ -423,7 +408,7 @@ Design: (unnamed)
           |vpiName:fsm_newspaper
           |vpiFullName:work@vend.fsm.fsm_newspaper
           |vpiActual:
-          \_LogicVar: (work@vend.fsm.fsm_newspaper), line:12:5, endln:12:18
+          \_LogicNet: (work@vend.fsm.fsm_newspaper), line:12:5, endln:12:18
         |vpiLhs:
         \_RefObj: (work@vend.fsm.fsm), line:24:1, endln:24:4
           |vpiParent:
@@ -497,7 +482,19 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_LogicTypespec: , line:12:1, endln:12:4
     |vpiImportTypespec:
-    \_LogicVar: (work@vend.fsm.fsm_newspaper), line:12:5, endln:12:18
+    \_LogicNet: (work@vend.fsm.fsm_newspaper), line:12:5, endln:12:18
+      |vpiParent:
+      \_Function: (work@vend.fsm), line:10:1, endln:26:12
+      |vpiTypespec:
+      \_RefTypespec: (work@vend.fsm.fsm_newspaper), line:12:1, endln:12:4
+        |vpiParent:
+        \_LogicNet: (work@vend.fsm.fsm_newspaper), line:12:5, endln:12:18
+        |vpiFullName:work@vend.fsm.fsm_newspaper
+        |vpiActual:
+        \_LogicTypespec: , line:12:1, endln:12:4
+      |vpiName:fsm_newspaper
+      |vpiFullName:work@vend.fsm.fsm_newspaper
+      |vpiSigned:1
     |vpiVisibility:1
     |vpiReturn:
     \_RefTypespec: (work@vend.fsm), line:10:10, endln:10:15
@@ -528,13 +525,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_Function: (work@vend.fsm), line:10:1, endln:26:12
   |vpiImportTypespec:
-  \_LogicNet: (work@vend.clock), line:3:7, endln:3:12
+  \_LogicNet: (work@vend.clock), line:1:13, endln:1:18
     |vpiParent:
     \_Module: work@vend (work@vend), file:${SURELOG_DIR}/tests/FuncBinding2/dut.sv, line:1:1, endln:33:10
     |vpiName:clock
     |vpiFullName:work@vend.clock
   |vpiImportTypespec:
-  \_LogicNet: (work@vend.newspaper), line:4:8, endln:4:17
+  \_LogicNet: (work@vend.newspaper), line:1:20, endln:1:29
     |vpiParent:
     \_Module: work@vend (work@vend), file:${SURELOG_DIR}/tests/FuncBinding2/dut.sv, line:1:1, endln:33:10
     |vpiName:newspaper
@@ -560,9 +557,9 @@ Design: (unnamed)
   |vpiTaskFunc:
   \_Function: (work@vend.fsm), line:10:1, endln:26:12
   |vpiNet:
-  \_LogicNet: (work@vend.clock), line:3:7, endln:3:12
+  \_LogicNet: (work@vend.clock), line:1:13, endln:1:18
   |vpiNet:
-  \_LogicNet: (work@vend.newspaper), line:4:8, endln:4:17
+  \_LogicNet: (work@vend.newspaper), line:1:20, endln:1:29
   |vpiNet:
   \_LogicNet: (work@vend.newspaper), line:5:6, endln:5:15
   |vpiPort:
@@ -597,7 +594,7 @@ Design: (unnamed)
           |vpiName:clock
           |vpiFullName:work@vend.clock
           |vpiActual:
-          \_LogicNet: (work@vend.clock), line:3:7, endln:3:12
+          \_LogicNet: (work@vend.clock), line:1:13, endln:1:18
       |vpiStmt:
       \_Begin: (work@vend), line:29:1, endln:31:4
         |vpiParent:
@@ -636,7 +633,7 @@ Design: (unnamed)
             |vpiName:newspaper
             |vpiFullName:work@vend.newspaper
             |vpiActual:
-            \_LogicNet: (work@vend.newspaper), line:4:8, endln:4:17
+            \_LogicNet: (work@vend.newspaper), line:1:20, endln:1:29
     |vpiAlwaysType:1
 ===================
 [  FATAL] : 0

@@ -80,15 +80,16 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/LogicTypespec/dut.sv:5:1: Compile module "work@logic_typespec".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                              12
+Constant                                               6
 Design                                                 1
 LogicTypespec                                          1
-LogicVar                                               1
 Module                                                 1
 Package                                                1
+PackedArrayNet                                         1
 PackedArrayTypespec                                    1
-Range                                                  6
-RefTypespec                                            1
+Range                                                  3
+RefTypespec                                            3
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LogicTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -101,13 +102,13 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:my_package
   |vpiTypedef:
-  \_PackedArrayTypespec: , line:2:9, endln:2:20
+  \_LogicTypespec: , line:2:9, endln:2:20
     |vpiParent:
     \_Package: my_package (my_package), file:${SURELOG_DIR}/tests/LogicTypespec/dut.sv, line:1:1, endln:3:23
     |vpiRange:
     \_Range: , line:2:15, endln:2:20
       |vpiParent:
-      \_PackedArrayTypespec: , line:2:9, endln:2:20
+      \_LogicTypespec: , line:2:9, endln:2:20
       |vpiLeftRange:
       \_Constant: , line:2:16, endln:2:17
         |vpiParent:
@@ -125,34 +126,21 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_LogicTypespec: (typedef_logic_typespec), line:2:9, endln:2:20
+  \_TypedefTypespec: (my_package::typedef_logic_typespec), line:2:21, endln:2:43
     |vpiParent:
     \_Package: my_package (my_package), file:${SURELOG_DIR}/tests/LogicTypespec/dut.sv, line:1:1, endln:3:23
-    |vpiName:typedef_logic_typespec
-    |vpiRange:
-    \_Range: , line:2:15, endln:2:20
+    |vpiName:my_package::typedef_logic_typespec
+    |vpiTypedefAlias:
+    \_RefTypespec: (my_package::typedef_logic_typespec), line:2:9, endln:2:14
       |vpiParent:
-      \_LogicTypespec: (typedef_logic_typespec), line:2:9, endln:2:20
-      |vpiLeftRange:
-      \_Constant: , line:2:16, endln:2:17
-        |vpiParent:
-        \_Range: , line:2:15, endln:2:20
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:2:18, endln:2:19
-        |vpiParent:
-        \_Range: , line:2:15, endln:2:20
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
+      \_TypedefTypespec: (my_package::typedef_logic_typespec), line:2:21, endln:2:43
+      |vpiFullName:my_package::typedef_logic_typespec
+      |vpiActual:
+      \_LogicTypespec: , line:2:9, endln:2:20
   |vpiImportTypespec:
-  \_PackedArrayTypespec: , line:2:9, endln:2:20
+  \_LogicTypespec: , line:2:9, endln:2:20
   |vpiImportTypespec:
-  \_LogicTypespec: (typedef_logic_typespec), line:2:9, endln:2:20
+  \_TypedefTypespec: (my_package::typedef_logic_typespec), line:2:21, endln:2:43
   |vpiDefName:my_package
   |vpiEndLabel:my_package
 |vpiAllModules:
@@ -160,26 +148,77 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@logic_typespec
-  |vpiVariables:
-  \_LogicVar: (work@logic_typespec.my_instance), line:7:50, endln:7:61
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:7:1, endln:7:49
+    |vpiParent:
+    \_Module: work@logic_typespec (work@logic_typespec), file:${SURELOG_DIR}/tests/LogicTypespec/dut.sv, line:5:1, endln:9:27
+    |vpiRange:
+    \_Range: , line:7:39, endln:7:44
+      |vpiParent:
+      \_PackedArrayTypespec: , line:7:1, endln:7:49
+      |vpiLeftRange:
+      \_Constant: , line:7:40, endln:7:41
+        |vpiParent:
+        \_Range: , line:7:39, endln:7:44
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:7:42, endln:7:43
+        |vpiParent:
+        \_Range: , line:7:39, endln:7:44
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiRange:
+    \_Range: , line:7:44, endln:7:49
+      |vpiParent:
+      \_PackedArrayTypespec: , line:7:1, endln:7:49
+      |vpiLeftRange:
+      \_Constant: , line:7:45, endln:7:46
+        |vpiParent:
+        \_Range: , line:7:44, endln:7:49
+        |vpiDecompile:7
+        |vpiSize:64
+        |UINT:7
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:7:47, endln:7:48
+        |vpiParent:
+        \_Range: , line:7:44, endln:7:49
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@logic_typespec.my_package::typedef_logic_typespec), line:2:21, endln:2:43
+      |vpiParent:
+      \_PackedArrayTypespec: , line:7:1, endln:7:49
+      |vpiName:my_package::typedef_logic_typespec
+      |vpiFullName:work@logic_typespec.my_package::typedef_logic_typespec
+      |vpiActual:
+      \_TypedefTypespec: (my_package::typedef_logic_typespec), line:2:21, endln:2:43
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:7:1, endln:7:49
+  |vpiImportTypespec:
+  \_PackedArrayNet: (work@logic_typespec.my_instance), line:7:50, endln:7:61
     |vpiParent:
     \_Module: work@logic_typespec (work@logic_typespec), file:${SURELOG_DIR}/tests/LogicTypespec/dut.sv, line:5:1, endln:9:27
     |vpiTypespec:
     \_RefTypespec: (work@logic_typespec.my_instance.my_package::typedef_logic_typespec), line:7:1, endln:7:49
       |vpiParent:
-      \_LogicVar: (work@logic_typespec.my_instance), line:7:50, endln:7:61
+      \_PackedArrayNet: (work@logic_typespec.my_instance), line:7:50, endln:7:61
       |vpiName:my_package::typedef_logic_typespec
       |vpiFullName:work@logic_typespec.my_instance.my_package::typedef_logic_typespec
       |vpiActual:
-      \_LogicTypespec: (typedef_logic_typespec), line:2:9, endln:2:20
+      \_PackedArrayTypespec: , line:7:1, endln:7:49
     |vpiName:my_instance
     |vpiFullName:work@logic_typespec.my_instance
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@logic_typespec.my_instance), line:7:50, endln:7:61
-  |vpiImportTypespec:
-  \_LogicVar: (work@logic_typespec.my_instance), line:7:50, endln:7:61
   |vpiDefName:work@logic_typespec
+  |vpiNet:
+  \_PackedArrayNet: (work@logic_typespec.my_instance), line:7:50, endln:7:61
   |vpiEndLabel:logic_typespec
 ===================
 [  FATAL] : 0

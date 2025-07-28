@@ -126,15 +126,15 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/LocalVarTypespec/dut.sv:1:1: Compile module "work@shift".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                              27
+Constant                                              24
 Design                                                 1
 Function                                               1
+LogicNet                                               3
 LogicTypespec                                          7
-LogicVar                                               3
 Module                                                 1
-Operation                                              9
+Operation                                              8
 PackedArrayTypespec                                    1
-Range                                                  9
+Range                                                  8
 RefTypespec                                            6
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/LocalVarTypespec/slpp_all/surelog.uhdm ...
@@ -153,48 +153,6 @@ Design: (unnamed)
     \_Module: work@shift (work@shift), file:${SURELOG_DIR}/tests/LocalVarTypespec/dut.sv, line:1:1, endln:7:10
     |vpiName:fshr_u
     |vpiFullName:work@shift.fshr_u
-    |vpiReg:
-    \_LogicVar: (work@shift.fshr_u.signed_result), line:3:22, endln:3:35
-      |vpiParent:
-      \_Function: (work@shift.fshr_u), line:2:1, endln:6:12
-      |vpiTypespec:
-      \_RefTypespec: (work@shift.fshr_u.signed_result), line:3:3, endln:3:21
-        |vpiParent:
-        \_LogicVar: (work@shift.fshr_u.signed_result), line:3:22, endln:3:35
-        |vpiFullName:work@shift.fshr_u.signed_result
-        |vpiActual:
-        \_LogicTypespec: , line:3:3, endln:3:21
-      |vpiName:signed_result
-      |vpiFullName:work@shift.fshr_u.signed_result
-      |vpiAutomatic:1
-    |vpiReg:
-    \_LogicVar: (work@shift.fshr_u.unsigned_result), line:4:24, endln:4:39
-      |vpiParent:
-      \_Function: (work@shift.fshr_u), line:2:1, endln:6:12
-      |vpiTypespec:
-      \_RefTypespec: (work@shift.fshr_u.unsigned_result), line:4:3, endln:4:23
-        |vpiParent:
-        \_LogicVar: (work@shift.fshr_u.unsigned_result), line:4:24, endln:4:39
-        |vpiFullName:work@shift.fshr_u.unsigned_result
-        |vpiActual:
-        \_LogicTypespec: , line:4:3, endln:4:23
-      |vpiName:unsigned_result
-      |vpiFullName:work@shift.fshr_u.unsigned_result
-      |vpiAutomatic:1
-    |vpiReg:
-    \_LogicVar: (work@shift.fshr_u.nosign_result), line:5:15, endln:5:28
-      |vpiParent:
-      \_Function: (work@shift.fshr_u), line:2:1, endln:6:12
-      |vpiTypespec:
-      \_RefTypespec: (work@shift.fshr_u.nosign_result), line:5:3, endln:5:14
-        |vpiParent:
-        \_LogicVar: (work@shift.fshr_u.nosign_result), line:5:15, endln:5:28
-        |vpiFullName:work@shift.fshr_u.nosign_result
-        |vpiActual:
-        \_LogicTypespec: , line:5:3, endln:5:14
-      |vpiName:nosign_result
-      |vpiFullName:work@shift.fshr_u.nosign_result
-      |vpiAutomatic:1
     |vpiTypedef:
     \_LogicTypespec: , line:2:10, endln:2:23
       |vpiParent:
@@ -463,19 +421,54 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_LogicTypespec: , line:3:3, endln:3:21
     |vpiImportTypespec:
-    \_LogicVar: (work@shift.fshr_u.signed_result), line:3:22, endln:3:35
+    \_LogicNet: (work@shift.fshr_u.signed_result), line:3:22, endln:3:35
+      |vpiParent:
+      \_Function: (work@shift.fshr_u), line:2:1, endln:6:12
+      |vpiTypespec:
+      \_RefTypespec: (work@shift.fshr_u.signed_result), line:3:3, endln:3:21
+        |vpiParent:
+        \_LogicNet: (work@shift.fshr_u.signed_result), line:3:22, endln:3:35
+        |vpiFullName:work@shift.fshr_u.signed_result
+        |vpiActual:
+        \_LogicTypespec: , line:3:3, endln:3:21
+      |vpiName:signed_result
+      |vpiFullName:work@shift.fshr_u.signed_result
+      |vpiSigned:1
     |vpiImportTypespec:
     \_LogicTypespec: , line:4:3, endln:4:23
     |vpiImportTypespec:
     \_LogicTypespec: , line:4:3, endln:4:23
     |vpiImportTypespec:
-    \_LogicVar: (work@shift.fshr_u.unsigned_result), line:4:24, endln:4:39
+    \_LogicNet: (work@shift.fshr_u.unsigned_result), line:4:24, endln:4:39
+      |vpiParent:
+      \_Function: (work@shift.fshr_u), line:2:1, endln:6:12
+      |vpiTypespec:
+      \_RefTypespec: (work@shift.fshr_u.unsigned_result), line:4:3, endln:4:23
+        |vpiParent:
+        \_LogicNet: (work@shift.fshr_u.unsigned_result), line:4:24, endln:4:39
+        |vpiFullName:work@shift.fshr_u.unsigned_result
+        |vpiActual:
+        \_LogicTypespec: , line:4:3, endln:4:23
+      |vpiName:unsigned_result
+      |vpiFullName:work@shift.fshr_u.unsigned_result
     |vpiImportTypespec:
     \_LogicTypespec: , line:5:3, endln:5:14
     |vpiImportTypespec:
     \_LogicTypespec: , line:5:3, endln:5:14
     |vpiImportTypespec:
-    \_LogicVar: (work@shift.fshr_u.nosign_result), line:5:15, endln:5:28
+    \_LogicNet: (work@shift.fshr_u.nosign_result), line:5:15, endln:5:28
+      |vpiParent:
+      \_Function: (work@shift.fshr_u), line:2:1, endln:6:12
+      |vpiTypespec:
+      \_RefTypespec: (work@shift.fshr_u.nosign_result), line:5:3, endln:5:14
+        |vpiParent:
+        \_LogicNet: (work@shift.fshr_u.nosign_result), line:5:15, endln:5:28
+        |vpiFullName:work@shift.fshr_u.nosign_result
+        |vpiActual:
+        \_LogicTypespec: , line:5:3, endln:5:14
+      |vpiName:nosign_result
+      |vpiFullName:work@shift.fshr_u.nosign_result
+      |vpiSigned:1
     |vpiVisibility:1
     |vpiReturn:
     \_RefTypespec: (work@shift.fshr_u), line:2:10, endln:2:23

@@ -146,14 +146,15 @@ ParamAssign                                            2
 Parameter                                              2
 RefModule                                              1
 RefObj                                                 1
-RefTypespec                                            6
+RefTypespec                                            7
 StringTypespec                                         2
 StructTypespec                                         1
 TaggedPattern                                          2
+TypedefTypespec                                        1
 TypespecMember                                         2
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/TaggedParam/dut.sv:12:62: Failed to bind object: "id: 15, name: fpnew_pkg::RV64D_Xsflt".
-[ERR:EL0535] ${SURELOG_DIR}/tests/TaggedParam/dut.sv:12:62: Illegal implicit net "id:15, name: fpnew_pkg::RV64D_Xsflt".
+[ERR:UH0734] ${SURELOG_DIR}/tests/TaggedParam/dut.sv:12:62: Failed to bind object: "id: 17, name: fpnew_pkg::RV64D_Xsflt".
+[ERR:EL0535] ${SURELOG_DIR}/tests/TaggedParam/dut.sv:12:62: Illegal implicit net "id:17, name: fpnew_pkg::RV64D_Xsflt".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TaggedParam/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -165,33 +166,44 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:fpnew_pkg
   |vpiTypedef:
-  \_StructTypespec: (fpnew_pkg::fpu_features_t), line:3:9, endln:6:4
+  \_TypedefTypespec: (fpnew_pkg::fpu_features_t), line:6:5, endln:6:19
     |vpiParent:
     \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/TaggedParam/dut.sv, line:1:1, endln:8:11
     |vpiName:fpnew_pkg::fpu_features_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (fpnew_pkg::fpu_features_t), line:3:9, endln:6:4
+      |vpiParent:
+      \_TypedefTypespec: (fpnew_pkg::fpu_features_t), line:6:5, endln:6:19
+      |vpiFullName:fpnew_pkg::fpu_features_t
+      |vpiActual:
+      \_StructTypespec: , line:3:9, endln:6:4
+  |vpiTypedef:
+  \_StructTypespec: , line:3:9, endln:6:4
+    |vpiParent:
+    \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/TaggedParam/dut.sv, line:1:1, endln:8:11
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (Width), line:4:18, endln:4:23
       |vpiParent:
-      \_StructTypespec: (fpnew_pkg::fpu_features_t), line:3:9, endln:6:4
+      \_StructTypespec: , line:3:9, endln:6:4
       |vpiName:Width
       |vpiTypespec:
-      \_RefTypespec: (fpnew_pkg::fpu_features_t::Width), line:4:5, endln:4:17
+      \_RefTypespec: (fpnew_pkg::Width), line:4:5, endln:4:17
         |vpiParent:
         \_TypespecMember: (Width), line:4:18, endln:4:23
-        |vpiFullName:fpnew_pkg::fpu_features_t::Width
+        |vpiFullName:fpnew_pkg::Width
         |vpiActual:
         \_IntTypespec: , line:4:5, endln:4:17
     |vpiTypespecMember:
     \_TypespecMember: (EnableNanBox), line:5:18, endln:5:30
       |vpiParent:
-      \_StructTypespec: (fpnew_pkg::fpu_features_t), line:3:9, endln:6:4
+      \_StructTypespec: , line:3:9, endln:6:4
       |vpiName:EnableNanBox
       |vpiTypespec:
-      \_RefTypespec: (fpnew_pkg::fpu_features_t::EnableNanBox), line:5:5, endln:5:10
+      \_RefTypespec: (fpnew_pkg::EnableNanBox), line:5:5, endln:5:10
         |vpiParent:
         \_TypespecMember: (EnableNanBox), line:5:18, endln:5:30
-        |vpiFullName:fpnew_pkg::fpu_features_t::EnableNanBox
+        |vpiFullName:fpnew_pkg::EnableNanBox
         |vpiActual:
         \_LogicTypespec: , line:5:5, endln:5:10
   |vpiTypedef:
@@ -203,7 +215,9 @@ Design: (unnamed)
     |vpiParent:
     \_Package: fpnew_pkg (fpnew_pkg), file:${SURELOG_DIR}/tests/TaggedParam/dut.sv, line:1:1, endln:8:11
   |vpiImportTypespec:
-  \_StructTypespec: (fpnew_pkg::fpu_features_t), line:3:9, endln:6:4
+  \_TypedefTypespec: (fpnew_pkg::fpu_features_t), line:6:5, endln:6:19
+  |vpiImportTypespec:
+  \_StructTypespec: , line:3:9, endln:6:4
   |vpiImportTypespec:
   \_IntTypespec: , line:4:5, endln:4:17
   |vpiImportTypespec:
@@ -225,7 +239,7 @@ Design: (unnamed)
       |vpiName:fpnew_pkg::fpu_features_t
       |vpiFullName:work@fpnew_top.Features.fpnew_pkg::fpu_features_t
       |vpiActual:
-      \_StructTypespec: (fpnew_pkg::fpu_features_t), line:3:9, endln:6:4
+      \_TypedefTypespec: (fpnew_pkg::fpu_features_t), line:6:5, endln:6:19
     |vpiName:Features
     |vpiFullName:work@fpnew_top.Features
   |vpiParamAssign:
@@ -257,7 +271,7 @@ Design: (unnamed)
       |vpiName:fpnew_pkg::fpu_features_t
       |vpiFullName:work@fpu_wrap.FPU_FEATURES.fpnew_pkg::fpu_features_t
       |vpiActual:
-      \_StructTypespec: (fpnew_pkg::fpu_features_t), line:3:9, endln:6:4
+      \_TypedefTypespec: (fpnew_pkg::fpu_features_t), line:6:5, endln:6:19
     |vpiLocalParam:1
     |vpiName:FPU_FEATURES
     |vpiFullName:work@fpu_wrap.FPU_FEATURES
@@ -289,7 +303,7 @@ Design: (unnamed)
           |vpiName:Width
           |vpiFullName:work@fpu_wrap.Width
           |vpiActual:
-          \_StringTypespec: (Width), line:19:7, endln:19:12
+          \_StringTypespec: , line:19:7, endln:19:12
       |vpiOperand:
       \_TaggedPattern: , line:20:7, endln:20:26
         |vpiParent:
@@ -309,28 +323,26 @@ Design: (unnamed)
           |vpiName:EnableNanBox
           |vpiFullName:work@fpu_wrap.EnableNanBox
           |vpiActual:
-          \_StringTypespec: (EnableNanBox), line:20:7, endln:20:19
+          \_StringTypespec: , line:20:7, endln:20:19
     |vpiLhs:
     \_Parameter: (work@fpu_wrap.FPU_FEATURES), line:18:38, endln:21:6
   |vpiTypedef:
-  \_StringTypespec: (Width), line:19:7, endln:19:12
+  \_StringTypespec: , line:19:7, endln:19:12
     |vpiParent:
     \_Module: work@fpu_wrap (work@fpu_wrap), file:${SURELOG_DIR}/tests/TaggedParam/dut.sv, line:16:1, endln:27:10
-    |vpiName:Width
   |vpiTypedef:
-  \_StringTypespec: (EnableNanBox), line:20:7, endln:20:19
+  \_StringTypespec: , line:20:7, endln:20:19
     |vpiParent:
     \_Module: work@fpu_wrap (work@fpu_wrap), file:${SURELOG_DIR}/tests/TaggedParam/dut.sv, line:16:1, endln:27:10
-    |vpiName:EnableNanBox
   |vpiTypedef:
   \_ModuleTypespec: (fpnew_top), line:23:8, endln:23:17
     |vpiParent:
     \_Module: work@fpu_wrap (work@fpu_wrap), file:${SURELOG_DIR}/tests/TaggedParam/dut.sv, line:16:1, endln:27:10
     |vpiName:fpnew_top
   |vpiImportTypespec:
-  \_StringTypespec: (Width), line:19:7, endln:19:12
+  \_StringTypespec: , line:19:7, endln:19:12
   |vpiImportTypespec:
-  \_StringTypespec: (EnableNanBox), line:20:7, endln:20:19
+  \_StringTypespec: , line:20:7, endln:20:19
   |vpiImportTypespec:
   \_ModuleTypespec: (fpnew_top), line:23:8, endln:23:17
   |vpiDefName:work@fpu_wrap

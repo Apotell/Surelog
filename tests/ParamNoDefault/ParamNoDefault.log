@@ -143,10 +143,11 @@ ParamAssign                                            2
 Parameter                                              2
 Range                                                  2
 RefModule                                              1
-RefTypespec                                            5
+RefTypespec                                            6
 StringTypespec                                         2
 StructTypespec                                         1
 TaggedPattern                                          2
+TypedefTypespec                                        1
 TypespecMember                                         1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamNoDefault/slpp_all/surelog.uhdm ...
@@ -221,7 +222,7 @@ Design: (unnamed)
       |vpiName:struct_1
       |vpiFullName:work@top.X.struct_1
       |vpiActual:
-      \_StructTypespec: (struct_1), line:7:12, endln:10:5
+      \_TypedefTypespec: (struct_1), line:10:6, endln:10:14
     |vpiName:X
     |vpiFullName:work@top.X
   |vpiParamAssign:
@@ -252,7 +253,7 @@ Design: (unnamed)
           |vpiName:a
           |vpiFullName:work@top.a
           |vpiActual:
-          \_StringTypespec: (a), line:14:29, endln:14:30
+          \_StringTypespec: , line:14:29, endln:14:30
       |vpiOperand:
       \_TaggedPattern: , line:14:36, endln:14:41
         |vpiParent:
@@ -272,25 +273,36 @@ Design: (unnamed)
           |vpiName:b
           |vpiFullName:work@top.b
           |vpiActual:
-          \_StringTypespec: (b), line:14:36, endln:14:37
+          \_StringTypespec: , line:14:36, endln:14:37
     |vpiLhs:
     \_Parameter: (work@top.X), line:14:23, endln:14:42
   |vpiTypedef:
-  \_StructTypespec: (struct_1), line:7:12, endln:10:5
+  \_TypedefTypespec: (struct_1), line:10:6, endln:10:14
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamNoDefault/dut.sv, line:6:1, endln:18:10
     |vpiName:struct_1
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@top.struct_1), line:7:12, endln:10:5
+      |vpiParent:
+      \_TypedefTypespec: (struct_1), line:10:6, endln:10:14
+      |vpiFullName:work@top.struct_1
+      |vpiActual:
+      \_StructTypespec: , line:7:12, endln:10:5
+  |vpiTypedef:
+  \_StructTypespec: , line:7:12, endln:10:5
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamNoDefault/dut.sv, line:6:1, endln:18:10
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (a), line:8:19, endln:8:20
       |vpiParent:
-      \_StructTypespec: (struct_1), line:7:12, endln:10:5
+      \_StructTypespec: , line:7:12, endln:10:5
       |vpiName:a
       |vpiTypespec:
-      \_RefTypespec: (work@top.struct_1.a), line:8:7, endln:8:18
+      \_RefTypespec: (work@top.a), line:8:7, endln:8:18
         |vpiParent:
         \_TypespecMember: (a), line:8:19, endln:8:20
-        |vpiFullName:work@top.struct_1.a
+        |vpiFullName:work@top.a
         |vpiActual:
         \_LogicTypespec: , line:8:7, endln:8:18
   |vpiTypedef:
@@ -318,28 +330,28 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_StringTypespec: (a), line:14:29, endln:14:30
+  \_StringTypespec: , line:14:29, endln:14:30
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamNoDefault/dut.sv, line:6:1, endln:18:10
-    |vpiName:a
   |vpiTypedef:
-  \_StringTypespec: (b), line:14:36, endln:14:37
+  \_StringTypespec: , line:14:36, endln:14:37
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamNoDefault/dut.sv, line:6:1, endln:18:10
-    |vpiName:b
   |vpiTypedef:
   \_ModuleTypespec: (dut), line:17:4, endln:17:7
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamNoDefault/dut.sv, line:6:1, endln:18:10
     |vpiName:dut
   |vpiImportTypespec:
-  \_StructTypespec: (struct_1), line:7:12, endln:10:5
+  \_TypedefTypespec: (struct_1), line:10:6, endln:10:14
+  |vpiImportTypespec:
+  \_StructTypespec: , line:7:12, endln:10:5
   |vpiImportTypespec:
   \_LogicTypespec: , line:8:7, endln:8:18
   |vpiImportTypespec:
-  \_StringTypespec: (a), line:14:29, endln:14:30
+  \_StringTypespec: , line:14:29, endln:14:30
   |vpiImportTypespec:
-  \_StringTypespec: (b), line:14:36, endln:14:37
+  \_StringTypespec: , line:14:36, endln:14:37
   |vpiImportTypespec:
   \_ModuleTypespec: (dut), line:17:4, endln:17:7
   |vpiDefName:work@top

@@ -240,12 +240,13 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 BitTypespec                                            2
-BitVar                                                 2
-Constant                                               8
+Constant                                               4
 Design                                                 1
 Module                                                 1
-Range                                                  4
-RefTypespec                                            2
+PackedArrayNet                                         2
+PackedArrayTypespec                                    2
+Range                                                  2
+RefTypespec                                            4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CrossItem/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -257,91 +258,115 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@top
-  |vpiVariables:
-  \_BitVar: (work@top.v_a), line:2:12, endln:2:15
+  |vpiTypedef:
+  \_BitTypespec: , line:2:2, endln:2:5
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CrossItem/dut.sv, line:1:1, endln:25:10
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:2:2, endln:2:11
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CrossItem/dut.sv, line:1:1, endln:25:10
+    |vpiRange:
+    \_Range: , line:2:6, endln:2:11
+      |vpiParent:
+      \_PackedArrayTypespec: , line:2:2, endln:2:11
+      |vpiLeftRange:
+      \_Constant: , line:2:7, endln:2:8
+        |vpiParent:
+        \_Range: , line:2:6, endln:2:11
+        |vpiDecompile:7
+        |vpiSize:64
+        |UINT:7
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:2:9, endln:2:10
+        |vpiParent:
+        \_Range: , line:2:6, endln:2:11
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@top), line:2:2, endln:2:5
+      |vpiParent:
+      \_PackedArrayTypespec: , line:2:2, endln:2:11
+      |vpiFullName:work@top
+      |vpiActual:
+      \_BitTypespec: , line:2:2, endln:2:5
+  |vpiTypedef:
+  \_BitTypespec: , line:2:2, endln:2:5
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CrossItem/dut.sv, line:1:1, endln:25:10
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:2:2, endln:2:11
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CrossItem/dut.sv, line:1:1, endln:25:10
+    |vpiRange:
+    \_Range: , line:2:6, endln:2:11
+      |vpiParent:
+      \_PackedArrayTypespec: , line:2:2, endln:2:11
+      |vpiLeftRange:
+      \_Constant: , line:2:7, endln:2:8
+        |vpiParent:
+        \_Range: , line:2:6, endln:2:11
+        |vpiDecompile:7
+        |vpiSize:64
+        |UINT:7
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:2:9, endln:2:10
+        |vpiParent:
+        \_Range: , line:2:6, endln:2:11
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@top), line:2:2, endln:2:5
+      |vpiParent:
+      \_PackedArrayTypespec: , line:2:2, endln:2:11
+      |vpiFullName:work@top
+      |vpiActual:
+      \_BitTypespec: , line:2:2, endln:2:5
+  |vpiImportTypespec:
+  \_BitTypespec: , line:2:2, endln:2:5
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:2:2, endln:2:11
+  |vpiImportTypespec:
+  \_PackedArrayNet: (work@top.v_a), line:2:12, endln:2:15
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CrossItem/dut.sv, line:1:1, endln:25:10
     |vpiTypespec:
     \_RefTypespec: (work@top.v_a), line:2:2, endln:2:11
       |vpiParent:
-      \_BitVar: (work@top.v_a), line:2:12, endln:2:15
+      \_PackedArrayNet: (work@top.v_a), line:2:12, endln:2:15
       |vpiFullName:work@top.v_a
       |vpiActual:
-      \_BitTypespec: , line:2:2, endln:2:11
+      \_PackedArrayTypespec: , line:2:2, endln:2:11
     |vpiName:v_a
     |vpiFullName:work@top.v_a
-    |vpiVisibility:1
-  |vpiVariables:
-  \_BitVar: (work@top.v_b), line:2:17, endln:2:20
+  |vpiImportTypespec:
+  \_BitTypespec: , line:2:2, endln:2:5
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:2:2, endln:2:11
+  |vpiImportTypespec:
+  \_PackedArrayNet: (work@top.v_b), line:2:17, endln:2:20
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CrossItem/dut.sv, line:1:1, endln:25:10
     |vpiTypespec:
     \_RefTypespec: (work@top.v_b), line:2:2, endln:2:11
       |vpiParent:
-      \_BitVar: (work@top.v_b), line:2:17, endln:2:20
+      \_PackedArrayNet: (work@top.v_b), line:2:17, endln:2:20
       |vpiFullName:work@top.v_b
       |vpiActual:
-      \_BitTypespec: , line:2:2, endln:2:11
+      \_PackedArrayTypespec: , line:2:2, endln:2:11
     |vpiName:v_b
     |vpiFullName:work@top.v_b
-    |vpiVisibility:1
-  |vpiTypedef:
-  \_BitTypespec: , line:2:2, endln:2:11
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CrossItem/dut.sv, line:1:1, endln:25:10
-    |vpiRange:
-    \_Range: , line:2:6, endln:2:11
-      |vpiParent:
-      \_BitTypespec: , line:2:2, endln:2:11
-      |vpiLeftRange:
-      \_Constant: , line:2:7, endln:2:8
-        |vpiParent:
-        \_Range: , line:2:6, endln:2:11
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:2:9, endln:2:10
-        |vpiParent:
-        \_Range: , line:2:6, endln:2:11
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_BitTypespec: , line:2:2, endln:2:11
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CrossItem/dut.sv, line:1:1, endln:25:10
-    |vpiRange:
-    \_Range: , line:2:6, endln:2:11
-      |vpiParent:
-      \_BitTypespec: , line:2:2, endln:2:11
-      |vpiLeftRange:
-      \_Constant: , line:2:7, endln:2:8
-        |vpiParent:
-        \_Range: , line:2:6, endln:2:11
-        |vpiDecompile:7
-        |vpiSize:64
-        |UINT:7
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:2:9, endln:2:10
-        |vpiParent:
-        \_Range: , line:2:6, endln:2:11
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiImportTypespec:
-  \_BitTypespec: , line:2:2, endln:2:11
-  |vpiImportTypespec:
-  \_BitVar: (work@top.v_a), line:2:12, endln:2:15
-  |vpiImportTypespec:
-  \_BitTypespec: , line:2:2, endln:2:11
-  |vpiImportTypespec:
-  \_BitVar: (work@top.v_b), line:2:17, endln:2:20
   |vpiDefName:work@top
+  |vpiNet:
+  \_PackedArrayNet: (work@top.v_a), line:2:12, endln:2:15
+  |vpiNet:
+  \_PackedArrayNet: (work@top.v_b), line:2:17, endln:2:20
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

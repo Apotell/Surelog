@@ -39,14 +39,14 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayNet                                               1
+ArrayTypespec                                          1
 Constant                                               1
 Design                                                 1
-LogicNet                                               1
 LogicTypespec                                          1
 Module                                                 1
 Operation                                              1
 Range                                                  1
-RefTypespec                                            1
+RefTypespec                                            2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/IllegalZeroValue/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -62,25 +62,56 @@ Design: (unnamed)
   \_LogicTypespec: , line:3:1, endln:3:4
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/IllegalZeroValue/dut.sv, line:1:1, endln:5:10
+  |vpiTypedef:
+  \_ArrayTypespec: , line:3:1, endln:3:15
+    |vpiParent:
+    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/IllegalZeroValue/dut.sv, line:1:1, endln:5:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:3:12, endln:3:15
+      |vpiParent:
+      \_ArrayTypespec: , line:3:1, endln:3:15
+      |vpiRightRange:
+      \_Operation: , line:3:13, endln:3:14
+        |vpiParent:
+        \_Range: , line:3:12, endln:3:15
+        |vpiOpType:11
+        |vpiOperand:
+        \_Constant: , line:3:13, endln:3:14
+          |vpiParent:
+          \_Operation: , line:3:13, endln:3:14
+          |vpiDecompile:0
+          |vpiSize:64
+          |UINT:0
+          |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@test), line:3:1, endln:3:4
+      |vpiParent:
+      \_ArrayTypespec: , line:3:1, endln:3:15
+      |vpiFullName:work@test
+      |vpiActual:
+      \_LogicTypespec: , line:3:1, endln:3:4
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:1, endln:3:4
   |vpiImportTypespec:
-  \_LogicNet: (work@test.illegal), line:3:5, endln:3:12
+  \_ArrayTypespec: , line:3:1, endln:3:15
+  |vpiImportTypespec:
+  \_ArrayNet: (work@test.illegal), line:3:5, endln:3:12
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/IllegalZeroValue/dut.sv, line:1:1, endln:5:10
     |vpiTypespec:
     \_RefTypespec: (work@test.illegal), line:3:1, endln:3:4
       |vpiParent:
-      \_LogicNet: (work@test.illegal), line:3:5, endln:3:12
+      \_ArrayNet: (work@test.illegal), line:3:5, endln:3:12
       |vpiFullName:work@test.illegal
       |vpiActual:
-      \_LogicTypespec: , line:3:1, endln:3:4
+      \_ArrayTypespec: , line:3:1, endln:3:15
     |vpiName:illegal
     |vpiFullName:work@test.illegal
     |vpiNetType:48
   |vpiDefName:work@test
-  |vpiNet:
-  \_LogicNet: (work@test.illegal), line:3:5, endln:3:12
+  |vpiArrayNet:
+  \_ArrayNet: (work@test.illegal), line:3:5, endln:3:12
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

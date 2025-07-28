@@ -170,12 +170,12 @@ FunctionDecl                                           1
 HierPath                                               2
 IODecl                                                 2
 Initial                                                1
-LogicVar                                               1
+LogicNet                                               1
 MethodFuncCall                                         2
-Module                                                 2
+Module                                                 1
 Package                                                1
 RefObj                                                 6
-RefTypespec                                            6
+RefTypespec                                            7
 UnsupportedTypespec                                    1
 VoidTypespec                                           2
 === UHDM Object Stats End ===
@@ -209,13 +209,14 @@ Design: (unnamed)
       |vpiName:identifier
       |vpiFullName:pkg::m_uvm_printer_knobs::identifier
       |vpiAutomatic:1
+      |vpiRandType:1
       |vpiVisibility:1
       |vpiExpr:
       \_Constant: , line:5:20, endln:5:21
         |vpiParent:
         \_BitVar: (pkg::m_uvm_printer_knobs::identifier), line:5:7, endln:5:17
         |vpiDecompile:1
-        |vpiSize:1
+        |vpiSize:64
         |UINT:1
         |vpiConstType:9
     |vpiTypedef:
@@ -247,6 +248,7 @@ Design: (unnamed)
       |vpiName:knobs
       |vpiFullName:pkg::uvm_printer::knobs
       |vpiAutomatic:1
+      |vpiRandType:1
       |vpiVisibility:1
     |vpiInternalScope:
     \_Function: (pkg::uvm_printer::set_name_enabled), line:11:3, endln:11:63
@@ -407,15 +409,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@top
-  |vpiVariables:
-  \_LogicVar: (work@top.printer), line:24:18, endln:24:25
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:22:1, endln:29:10
-    |vpiName:printer
-    |vpiFullName:work@top.printer
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@top.printer), line:24:18, endln:24:25
   |vpiTypedef:
   \_UnsupportedTypespec: (pkg::uvm_printer), line:24:1, endln:24:17
     |vpiParent:
@@ -424,8 +417,22 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_UnsupportedTypespec: (pkg::uvm_printer), line:24:1, endln:24:17
   |vpiImportTypespec:
-  \_LogicVar: (work@top.printer), line:24:18, endln:24:25
+  \_LogicNet: (work@top.printer), line:24:18, endln:24:25
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClassMemberRef/dut.sv, line:22:1, endln:29:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.printer.pkg::uvm_printer), line:24:1, endln:24:17
+      |vpiParent:
+      \_LogicNet: (work@top.printer), line:24:18, endln:24:25
+      |vpiName:pkg::uvm_printer
+      |vpiFullName:work@top.printer.pkg::uvm_printer
+      |vpiActual:
+      \_UnsupportedTypespec: (pkg::uvm_printer), line:24:1, endln:24:17
+    |vpiName:printer
+    |vpiFullName:work@top.printer
   |vpiDefName:work@top
+  |vpiNet:
+  \_LogicNet: (work@top.printer), line:24:18, endln:24:25
   |vpiProcess:
   \_Initial: , line:25:1, endln:28:4
     |vpiParent:
@@ -460,7 +467,7 @@ Design: (unnamed)
           |vpiName:printer
           |vpiFullName:work@top.printer
           |vpiActual:
-          \_LogicVar: (work@top.printer), line:24:18, endln:24:25
+          \_LogicNet: (work@top.printer), line:24:18, endln:24:25
       |vpiStmt:
       \_MethodFuncCall: (set_name_enabled), line:27:1, endln:27:29
         |vpiParent:
@@ -481,7 +488,7 @@ Design: (unnamed)
           |vpiName:printer
           |vpiFullName:work@top.printer
           |vpiActual:
-          \_LogicVar: (work@top.printer), line:24:18, endln:24:25
+          \_LogicNet: (work@top.printer), line:24:18, endln:24:25
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

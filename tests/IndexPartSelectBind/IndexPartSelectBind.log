@@ -159,16 +159,17 @@ IntVar                                                 1
 Operation                                              3
 Package                                                1
 RefObj                                                 8
-RefTypespec                                            4
+RefTypespec                                            5
 ReturnStmt                                             1
 StructTypespec                                         1
+TypedefTypespec                                        1
 TypespecMember                                         1
 UnsupportedTypespec                                    2
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:12:21: Failed to bind object: "id: 22, name: nbytes".
-[ERR:EL0535] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:12:21: Illegal implicit net "id:22, name: nbytes".
-[ERR:UH0734] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:17:8: Failed to bind object: "id: 39, name: gp".
-[ERR:EL0535] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:17:8: Illegal implicit net "id:39, name: gp".
+[ERR:UH0734] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:12:21: Failed to bind object: "id: 24, name: nbytes".
+[ERR:EL0535] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:12:21: Illegal implicit net "id:24, name: nbytes".
+[ERR:UH0734] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:17:8: Failed to bind object: "id: 41, name: gp".
+[ERR:EL0535] ${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv:17:8: Illegal implicit net "id:41, name: gp".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/IndexPartSelectBind/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -392,13 +393,13 @@ Design: (unnamed)
         |vpiDirection:6
         |vpiName:rw
         |vpiTypedef:
-        \_RefTypespec: (pkg::tt::reg2bus::rw::uvm_reg_bus_op), line:4:9, endln:6:2
+        \_RefTypespec: (pkg::tt::reg2bus::rw::uvm_reg_bus_op), line:6:3, endln:6:17
           |vpiParent:
           \_IODecl: (rw), line:10:69, endln:10:71
           |vpiName:uvm_reg_bus_op
           |vpiFullName:pkg::tt::reg2bus::rw::uvm_reg_bus_op
           |vpiActual:
-          \_StructTypespec: (pkg::uvm_reg_bus_op), line:4:9, endln:6:2
+          \_TypedefTypespec: (pkg::uvm_reg_bus_op), line:6:3, endln:6:17
       |vpiStmt:
       \_Begin: (pkg::tt::reg2bus)
     |vpiTypedef:
@@ -413,21 +414,32 @@ Design: (unnamed)
     |vpiMethod:
     \_Function: (pkg::tt::reg2bus), line:10:1, endln:19:12
   |vpiTypedef:
-  \_StructTypespec: (pkg::uvm_reg_bus_op), line:4:9, endln:6:2
+  \_TypedefTypespec: (pkg::uvm_reg_bus_op), line:6:3, endln:6:17
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:1:1, endln:23:11
     |vpiName:pkg::uvm_reg_bus_op
+    |vpiTypedefAlias:
+    \_RefTypespec: (pkg::uvm_reg_bus_op), line:4:9, endln:6:2
+      |vpiParent:
+      \_TypedefTypespec: (pkg::uvm_reg_bus_op), line:6:3, endln:6:17
+      |vpiFullName:pkg::uvm_reg_bus_op
+      |vpiActual:
+      \_StructTypespec: , line:4:9, endln:6:2
+  |vpiTypedef:
+  \_StructTypespec: , line:4:9, endln:6:2
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:1:1, endln:23:11
     |vpiTypespecMember:
     \_TypespecMember: (data), line:5:18, endln:5:22
       |vpiParent:
-      \_StructTypespec: (pkg::uvm_reg_bus_op), line:4:9, endln:6:2
+      \_StructTypespec: , line:4:9, endln:6:2
       |vpiName:data
       |vpiTypespec:
-      \_RefTypespec: (pkg::uvm_reg_bus_op::data::uvm_reg_data_t), line:5:3, endln:5:17
+      \_RefTypespec: (pkg::data::uvm_reg_data_t), line:5:3, endln:5:17
         |vpiParent:
         \_TypespecMember: (data), line:5:18, endln:5:22
         |vpiName:uvm_reg_data_t
-        |vpiFullName:pkg::uvm_reg_bus_op::data::uvm_reg_data_t
+        |vpiFullName:pkg::data::uvm_reg_data_t
         |vpiActual:
         \_UnsupportedTypespec: (uvm_reg_data_t), line:5:3, endln:5:17
   |vpiTypedef:
@@ -438,7 +450,9 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ClassDefn: (pkg::tt), file:${SURELOG_DIR}/tests/IndexPartSelectBind/dut.sv, line:8:1, endln:21:9
   |vpiImportTypespec:
-  \_StructTypespec: (pkg::uvm_reg_bus_op), line:4:9, endln:6:2
+  \_TypedefTypespec: (pkg::uvm_reg_bus_op), line:6:3, endln:6:17
+  |vpiImportTypespec:
+  \_StructTypespec: , line:4:9, endln:6:2
   |vpiImportTypespec:
   \_UnsupportedTypespec: (uvm_reg_data_t), line:5:3, endln:5:17
   |vpiDefName:pkg

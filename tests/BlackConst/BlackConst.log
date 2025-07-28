@@ -1370,7 +1370,7 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Begin                                                  1
-Constant                                              85
+Constant                                              79
 ContAssign                                             1
 Design                                                 1
 EnumConst                                             10
@@ -1382,15 +1382,16 @@ LogicNet                                               3
 LogicTypespec                                         27
 Module                                                 3
 ModuleTypespec                                         1
-Operation                                             42
+Operation                                             41
 ParamAssign                                            8
 Parameter                                              8
-Range                                                 28
+Range                                                 25
 RefModule                                              1
-RefObj                                                34
-RefTypespec                                           37
+RefObj                                                33
+RefTypespec                                           47
 StructTypespec                                         7
 SysFuncCall                                           11
+TypedefTypespec                                       10
 TypespecMember                                        25
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/BlackConst/slpp_all/surelog.uhdm ...
@@ -1763,81 +1764,92 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiSigned:1
   |vpiTypedef:
-  \_StructTypespec: (bp_icache_req_s), line:19:11, endln:27:4
+  \_TypedefTypespec: (bp_icache_req_s), line:27:6, endln:27:21
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiName:bp_icache_req_s
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@top.bp_icache_req_s), line:19:11, endln:27:4
+      |vpiParent:
+      \_TypedefTypespec: (bp_icache_req_s), line:27:6, endln:27:21
+      |vpiFullName:work@top.bp_icache_req_s
+      |vpiActual:
+      \_StructTypespec: , line:19:11, endln:27:4
+  |vpiTypedef:
+  \_StructTypespec: , line:19:11, endln:27:4
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (hit), line:21:11, endln:21:14
       |vpiParent:
-      \_StructTypespec: (bp_icache_req_s), line:19:11, endln:27:4
+      \_StructTypespec: , line:19:11, endln:27:4
       |vpiName:hit
       |vpiTypespec:
-      \_RefTypespec: (work@top.bp_icache_req_s.hit), line:21:5, endln:21:10
+      \_RefTypespec: (work@top.hit), line:21:5, endln:21:10
         |vpiParent:
         \_TypespecMember: (hit), line:21:11, endln:21:14
-        |vpiFullName:work@top.bp_icache_req_s.hit
+        |vpiFullName:work@top.hit
         |vpiActual:
         \_LogicTypespec: , line:21:5, endln:21:10
     |vpiTypespecMember:
     \_TypespecMember: (data), line:22:32, endln:22:36
       |vpiParent:
-      \_StructTypespec: (bp_icache_req_s), line:19:11, endln:27:4
+      \_StructTypespec: , line:19:11, endln:27:4
       |vpiName:data
       |vpiTypespec:
-      \_RefTypespec: (work@top.bp_icache_req_s.data), line:22:5, endln:22:31
+      \_RefTypespec: (work@top.data), line:22:5, endln:22:31
         |vpiParent:
         \_TypespecMember: (data), line:22:32, endln:22:36
-        |vpiFullName:work@top.bp_icache_req_s.data
+        |vpiFullName:work@top.data
         |vpiActual:
         \_LogicTypespec: , line:22:5, endln:22:31
     |vpiTypespecMember:
     \_TypespecMember: (size), line:23:9, endln:23:13
       |vpiParent:
-      \_StructTypespec: (bp_icache_req_s), line:19:11, endln:27:4
+      \_StructTypespec: , line:19:11, endln:27:4
       |vpiName:size
       |vpiTypespec:
-      \_RefTypespec: (work@top.bp_icache_req_s.size), line:23:5, endln:23:8
+      \_RefTypespec: (work@top.size), line:23:5, endln:23:8
         |vpiParent:
         \_TypespecMember: (size), line:23:9, endln:23:13
-        |vpiFullName:work@top.bp_icache_req_s.size
+        |vpiFullName:work@top.size
         |vpiActual:
         \_IntTypespec: , line:23:5, endln:23:8
     |vpiTypespecMember:
     \_TypespecMember: (addr), line:24:31, endln:24:35
       |vpiParent:
-      \_StructTypespec: (bp_icache_req_s), line:19:11, endln:27:4
+      \_StructTypespec: , line:19:11, endln:27:4
       |vpiName:addr
       |vpiTypespec:
-      \_RefTypespec: (work@top.bp_icache_req_s.addr), line:24:5, endln:24:30
+      \_RefTypespec: (work@top.addr), line:24:5, endln:24:30
         |vpiParent:
         \_TypespecMember: (addr), line:24:31, endln:24:35
-        |vpiFullName:work@top.bp_icache_req_s.addr
+        |vpiFullName:work@top.addr
         |vpiActual:
         \_LogicTypespec: , line:24:5, endln:24:30
     |vpiTypespecMember:
     \_TypespecMember: (msg_type), line:25:9, endln:25:17
       |vpiParent:
-      \_StructTypespec: (bp_icache_req_s), line:19:11, endln:27:4
+      \_StructTypespec: , line:19:11, endln:27:4
       |vpiName:msg_type
       |vpiTypespec:
-      \_RefTypespec: (work@top.bp_icache_req_s.msg_type), line:25:5, endln:25:8
+      \_RefTypespec: (work@top.msg_type), line:25:5, endln:25:8
         |vpiParent:
         \_TypespecMember: (msg_type), line:25:9, endln:25:17
-        |vpiFullName:work@top.bp_icache_req_s.msg_type
+        |vpiFullName:work@top.msg_type
         |vpiActual:
         \_IntTypespec: , line:25:5, endln:25:8
     |vpiTypespecMember:
     \_TypespecMember: (subop), line:26:9, endln:26:14
       |vpiParent:
-      \_StructTypespec: (bp_icache_req_s), line:19:11, endln:27:4
+      \_StructTypespec: , line:19:11, endln:27:4
       |vpiName:subop
       |vpiTypespec:
-      \_RefTypespec: (work@top.bp_icache_req_s.subop), line:26:5, endln:26:8
+      \_RefTypespec: (work@top.subop), line:26:5, endln:26:8
         |vpiParent:
         \_TypespecMember: (subop), line:26:9, endln:26:14
-        |vpiFullName:work@top.bp_icache_req_s.subop
+        |vpiFullName:work@top.subop
         |vpiActual:
         \_IntTypespec: , line:26:5, endln:26:8
   |vpiTypedef:
@@ -1934,33 +1946,44 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiSigned:1
   |vpiTypedef:
-  \_StructTypespec: (bp_icache_req_metadata_s), line:33:11, endln:37:4
+  \_TypedefTypespec: (bp_icache_req_metadata_s), line:37:6, endln:37:30
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiName:bp_icache_req_metadata_s
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@top.bp_icache_req_metadata_s), line:33:11, endln:37:4
+      |vpiParent:
+      \_TypedefTypespec: (bp_icache_req_metadata_s), line:37:6, endln:37:30
+      |vpiFullName:work@top.bp_icache_req_metadata_s
+      |vpiActual:
+      \_StructTypespec: , line:33:11, endln:37:4
+  |vpiTypedef:
+  \_StructTypespec: , line:33:11, endln:37:4
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (hit_or_repl_way), line:35:42, endln:35:57
       |vpiParent:
-      \_StructTypespec: (bp_icache_req_metadata_s), line:33:11, endln:37:4
+      \_StructTypespec: , line:33:11, endln:37:4
       |vpiName:hit_or_repl_way
       |vpiTypespec:
-      \_RefTypespec: (work@top.bp_icache_req_metadata_s.hit_or_repl_way), line:35:5, endln:35:41
+      \_RefTypespec: (work@top.hit_or_repl_way), line:35:5, endln:35:41
         |vpiParent:
         \_TypespecMember: (hit_or_repl_way), line:35:42, endln:35:57
-        |vpiFullName:work@top.bp_icache_req_metadata_s.hit_or_repl_way
+        |vpiFullName:work@top.hit_or_repl_way
         |vpiActual:
         \_LogicTypespec: , line:35:5, endln:35:41
     |vpiTypespecMember:
     \_TypespecMember: (dirty), line:36:11, endln:36:16
       |vpiParent:
-      \_StructTypespec: (bp_icache_req_metadata_s), line:33:11, endln:37:4
+      \_StructTypespec: , line:33:11, endln:37:4
       |vpiName:dirty
       |vpiTypespec:
-      \_RefTypespec: (work@top.bp_icache_req_metadata_s.dirty), line:36:5, endln:36:10
+      \_RefTypespec: (work@top.dirty), line:36:5, endln:36:10
         |vpiParent:
         \_TypespecMember: (dirty), line:36:11, endln:36:16
-        |vpiFullName:work@top.bp_icache_req_metadata_s.dirty
+        |vpiFullName:work@top.dirty
         |vpiActual:
         \_LogicTypespec: , line:36:5, endln:36:10
   |vpiTypedef:
@@ -2044,72 +2067,83 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
   |vpiTypedef:
-  \_StructTypespec: (bp_icache_data_mem_pkt_s), line:74:11, endln:81:4
+  \_TypedefTypespec: (bp_icache_data_mem_pkt_s), line:81:6, endln:81:30
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiName:bp_icache_data_mem_pkt_s
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@top.bp_icache_data_mem_pkt_s), line:74:11, endln:81:4
+      |vpiParent:
+      \_TypedefTypespec: (bp_icache_data_mem_pkt_s), line:81:6, endln:81:30
+      |vpiFullName:work@top.bp_icache_data_mem_pkt_s
+      |vpiActual:
+      \_StructTypespec: , line:74:11, endln:81:4
+  |vpiTypedef:
+  \_StructTypespec: , line:74:11, endln:81:4
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (index), line:76:52, endln:76:57
       |vpiParent:
-      \_StructTypespec: (bp_icache_data_mem_pkt_s), line:74:11, endln:81:4
+      \_StructTypespec: , line:74:11, endln:81:4
       |vpiName:index
       |vpiTypespec:
-      \_RefTypespec: (work@top.bp_icache_data_mem_pkt_s.index), line:76:5, endln:76:40
+      \_RefTypespec: (work@top.index), line:76:5, endln:76:40
         |vpiParent:
         \_TypespecMember: (index), line:76:52, endln:76:57
-        |vpiFullName:work@top.bp_icache_data_mem_pkt_s.index
+        |vpiFullName:work@top.index
         |vpiActual:
         \_LogicTypespec: , line:76:5, endln:76:40
     |vpiTypespecMember:
     \_TypespecMember: (way_id), line:77:53, endln:77:59
       |vpiParent:
-      \_StructTypespec: (bp_icache_data_mem_pkt_s), line:74:11, endln:81:4
+      \_StructTypespec: , line:74:11, endln:81:4
       |vpiName:way_id
       |vpiTypespec:
-      \_RefTypespec: (work@top.bp_icache_data_mem_pkt_s.way_id), line:77:5, endln:77:41
+      \_RefTypespec: (work@top.way_id), line:77:5, endln:77:41
         |vpiParent:
         \_TypespecMember: (way_id), line:77:53, endln:77:59
-        |vpiFullName:work@top.bp_icache_data_mem_pkt_s.way_id
+        |vpiFullName:work@top.way_id
         |vpiActual:
         \_LogicTypespec: , line:77:5, endln:77:41
     |vpiTypespecMember:
     \_TypespecMember: (data), line:78:52, endln:78:56
       |vpiParent:
-      \_StructTypespec: (bp_icache_data_mem_pkt_s), line:74:11, endln:81:4
+      \_StructTypespec: , line:74:11, endln:81:4
       |vpiName:data
       |vpiTypespec:
-      \_RefTypespec: (work@top.bp_icache_data_mem_pkt_s.data), line:78:5, endln:78:29
+      \_RefTypespec: (work@top.data), line:78:5, endln:78:29
         |vpiParent:
         \_TypespecMember: (data), line:78:52, endln:78:56
-        |vpiFullName:work@top.bp_icache_data_mem_pkt_s.data
+        |vpiFullName:work@top.data
         |vpiActual:
         \_LogicTypespec: , line:78:5, endln:78:29
     |vpiTypespecMember:
     \_TypespecMember: (fill_index), line:79:46, endln:79:56
       |vpiParent:
-      \_StructTypespec: (bp_icache_data_mem_pkt_s), line:74:11, endln:81:4
+      \_StructTypespec: , line:74:11, endln:81:4
       |vpiName:fill_index
       |vpiTypespec:
-      \_RefTypespec: (work@top.bp_icache_data_mem_pkt_s.fill_index), line:79:5, endln:79:45
+      \_RefTypespec: (work@top.fill_index), line:79:5, endln:79:45
         |vpiParent:
         \_TypespecMember: (fill_index), line:79:46, endln:79:56
-        |vpiFullName:work@top.bp_icache_data_mem_pkt_s.fill_index
+        |vpiFullName:work@top.fill_index
         |vpiActual:
         \_LogicTypespec: , line:79:5, endln:79:45
     |vpiTypespecMember:
     \_TypespecMember: (opcode), line:80:53, endln:80:59
       |vpiParent:
-      \_StructTypespec: (bp_icache_data_mem_pkt_s), line:74:11, endln:81:4
+      \_StructTypespec: , line:74:11, endln:81:4
       |vpiName:opcode
       |vpiTypespec:
-      \_RefTypespec: (work@top.bp_icache_data_mem_pkt_s.opcode.bp_cache_data_mem_opcode_e), line:80:5, endln:80:31
+      \_RefTypespec: (work@top.opcode.bp_cache_data_mem_opcode_e), line:80:5, endln:80:31
         |vpiParent:
         \_TypespecMember: (opcode), line:80:53, endln:80:59
         |vpiName:bp_cache_data_mem_opcode_e
-        |vpiFullName:work@top.bp_icache_data_mem_pkt_s.opcode.bp_cache_data_mem_opcode_e
+        |vpiFullName:work@top.opcode.bp_cache_data_mem_opcode_e
         |vpiActual:
-        \_EnumTypespec: (bp_cache_data_mem_opcode_e), line:42:11, endln:49:31
+        \_TypedefTypespec: (bp_cache_data_mem_opcode_e), line:49:5, endln:49:31
   |vpiTypedef:
   \_LogicTypespec: , line:76:5, endln:76:40
     |vpiParent:
@@ -2350,69 +2384,80 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_StructTypespec: (bp_icache_tag_mem_pkt_s), line:88:11, endln:95:4
+  \_TypedefTypespec: (bp_icache_tag_mem_pkt_s), line:95:6, endln:95:29
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiName:bp_icache_tag_mem_pkt_s
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@top.bp_icache_tag_mem_pkt_s), line:88:11, endln:95:4
+      |vpiParent:
+      \_TypedefTypespec: (bp_icache_tag_mem_pkt_s), line:95:6, endln:95:29
+      |vpiFullName:work@top.bp_icache_tag_mem_pkt_s
+      |vpiActual:
+      \_StructTypespec: , line:88:11, endln:95:4
+  |vpiTypedef:
+  \_StructTypespec: , line:88:11, endln:95:4
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (index), line:90:48, endln:90:53
       |vpiParent:
-      \_StructTypespec: (bp_icache_tag_mem_pkt_s), line:88:11, endln:95:4
+      \_StructTypespec: , line:88:11, endln:95:4
       |vpiName:index
       |vpiTypespec:
-      \_RefTypespec: (work@top.bp_icache_tag_mem_pkt_s.index), line:90:5, endln:90:40
+      \_RefTypespec: (work@top.index), line:90:5, endln:90:40
         |vpiParent:
         \_TypespecMember: (index), line:90:48, endln:90:53
-        |vpiFullName:work@top.bp_icache_tag_mem_pkt_s.index
+        |vpiFullName:work@top.index
         |vpiActual:
         \_LogicTypespec: , line:90:5, endln:90:40
     |vpiTypespecMember:
     \_TypespecMember: (way_id), line:91:48, endln:91:54
       |vpiParent:
-      \_StructTypespec: (bp_icache_tag_mem_pkt_s), line:88:11, endln:95:4
+      \_StructTypespec: , line:88:11, endln:95:4
       |vpiName:way_id
       |vpiTypespec:
-      \_RefTypespec: (work@top.bp_icache_tag_mem_pkt_s.way_id), line:91:4, endln:91:40
+      \_RefTypespec: (work@top.way_id), line:91:4, endln:91:40
         |vpiParent:
         \_TypespecMember: (way_id), line:91:48, endln:91:54
-        |vpiFullName:work@top.bp_icache_tag_mem_pkt_s.way_id
+        |vpiFullName:work@top.way_id
         |vpiActual:
         \_LogicTypespec: , line:91:4, endln:91:40
     |vpiTypespecMember:
     \_TypespecMember: (state), line:92:37, endln:92:42
       |vpiParent:
-      \_StructTypespec: (bp_icache_tag_mem_pkt_s), line:88:11, endln:95:4
+      \_StructTypespec: , line:88:11, endln:95:4
       |vpiName:state
       |vpiTypespec:
-      \_RefTypespec: (work@top.bp_icache_tag_mem_pkt_s.state), line:92:5, endln:92:8
+      \_RefTypespec: (work@top.state), line:92:5, endln:92:8
         |vpiParent:
         \_TypespecMember: (state), line:92:37, endln:92:42
-        |vpiFullName:work@top.bp_icache_tag_mem_pkt_s.state
+        |vpiFullName:work@top.state
         |vpiActual:
         \_IntTypespec: , line:92:5, endln:92:8
     |vpiTypespecMember:
     \_TypespecMember: (tag), line:93:49, endln:93:52
       |vpiParent:
-      \_StructTypespec: (bp_icache_tag_mem_pkt_s), line:88:11, endln:95:4
+      \_StructTypespec: , line:88:11, endln:95:4
       |vpiName:tag
       |vpiTypespec:
-      \_RefTypespec: (work@top.bp_icache_tag_mem_pkt_s.tag), line:93:5, endln:93:29
+      \_RefTypespec: (work@top.tag), line:93:5, endln:93:29
         |vpiParent:
         \_TypespecMember: (tag), line:93:49, endln:93:52
-        |vpiFullName:work@top.bp_icache_tag_mem_pkt_s.tag
+        |vpiFullName:work@top.tag
         |vpiActual:
         \_LogicTypespec: , line:93:5, endln:93:29
     |vpiTypespecMember:
     \_TypespecMember: (opcode), line:94:27, endln:94:33
       |vpiParent:
-      \_StructTypespec: (bp_icache_tag_mem_pkt_s), line:88:11, endln:95:4
+      \_StructTypespec: , line:88:11, endln:95:4
       |vpiName:opcode
       |vpiTypespec:
-      \_RefTypespec: (work@top.bp_icache_tag_mem_pkt_s.opcode), line:94:5, endln:94:8
+      \_RefTypespec: (work@top.opcode), line:94:5, endln:94:8
         |vpiParent:
         \_TypespecMember: (opcode), line:94:27, endln:94:33
-        |vpiFullName:work@top.bp_icache_tag_mem_pkt_s.opcode
+        |vpiFullName:work@top.opcode
         |vpiActual:
         \_IntTypespec: , line:94:5, endln:94:8
   |vpiTypedef:
@@ -2615,59 +2660,46 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiSigned:1
   |vpiTypedef:
-  \_StructTypespec: (bp_icache_tag_info_s), line:101:11, endln:104:4
+  \_TypedefTypespec: (bp_icache_tag_info_s), line:104:6, endln:104:26
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiName:bp_icache_tag_info_s
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@top.bp_icache_tag_info_s), line:101:11, endln:104:4
+      |vpiParent:
+      \_TypedefTypespec: (bp_icache_tag_info_s), line:104:6, endln:104:26
+      |vpiFullName:work@top.bp_icache_tag_info_s
+      |vpiActual:
+      \_StructTypespec: , line:101:11, endln:104:4
+  |vpiTypedef:
+  \_StructTypespec: , line:101:11, endln:104:4
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (state), line:102:40, endln:102:45
       |vpiParent:
-      \_StructTypespec: (bp_icache_tag_info_s), line:101:11, endln:104:4
+      \_StructTypespec: , line:101:11, endln:104:4
       |vpiName:state
       |vpiTypespec:
-      \_RefTypespec: (work@top.bp_icache_tag_info_s.state), line:102:5, endln:102:39
+      \_RefTypespec: (work@top.state), line:102:5, endln:102:39
         |vpiParent:
         \_TypespecMember: (state), line:102:40, endln:102:45
-        |vpiFullName:work@top.bp_icache_tag_info_s.state
+        |vpiFullName:work@top.state
         |vpiActual:
         \_LogicTypespec: , line:102:5, endln:102:39
     |vpiTypespecMember:
     \_TypespecMember: (tag), line:103:40, endln:103:43
       |vpiParent:
-      \_StructTypespec: (bp_icache_tag_info_s), line:101:11, endln:104:4
+      \_StructTypespec: , line:101:11, endln:104:4
       |vpiName:tag
       |vpiTypespec:
-      \_RefTypespec: (work@top.bp_icache_tag_info_s.tag), line:103:5, endln:103:29
+      \_RefTypespec: (work@top.tag), line:103:5, endln:103:29
         |vpiParent:
         \_TypespecMember: (tag), line:103:40, endln:103:43
-        |vpiFullName:work@top.bp_icache_tag_info_s.tag
+        |vpiFullName:work@top.tag
         |vpiActual:
         \_LogicTypespec: , line:103:5, endln:103:29
-  |vpiTypedef:
-  \_LogicTypespec: , line:145:3, endln:145:13
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
-    |vpiRange:
-    \_Range: , line:145:7, endln:145:13
-      |vpiParent:
-      \_LogicTypespec: , line:145:3, endln:145:13
-      |vpiLeftRange:
-      \_Constant: , line:145:8, endln:145:10
-        |vpiParent:
-        \_Range: , line:145:7, endln:145:13
-        |vpiDecompile:12
-        |vpiSize:64
-        |UINT:12
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:145:11, endln:145:12
-        |vpiParent:
-        \_Range: , line:145:7, endln:145:13
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiTypedef:
   \_LogicTypespec: , line:102:5, endln:102:39
     |vpiParent:
@@ -2711,6 +2743,30 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_LogicTypespec: , line:145:3, endln:145:13
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
+    |vpiRange:
+    \_Range: , line:145:7, endln:145:13
+      |vpiParent:
+      \_LogicTypespec: , line:145:3, endln:145:13
+      |vpiLeftRange:
+      \_Constant: , line:145:8, endln:145:10
+        |vpiParent:
+        \_Range: , line:145:7, endln:145:13
+        |vpiDecompile:12
+        |vpiSize:64
+        |UINT:12
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:145:11, endln:145:12
+        |vpiParent:
+        \_Range: , line:145:7, endln:145:13
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
   \_LogicTypespec: , line:103:5, endln:103:29
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
@@ -2748,45 +2804,56 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_StructTypespec: (bp_icache_stat_mem_pkt_s), line:110:11, endln:115:4
+  \_TypedefTypespec: (bp_icache_stat_mem_pkt_s), line:115:6, endln:115:30
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiName:bp_icache_stat_mem_pkt_s
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@top.bp_icache_stat_mem_pkt_s), line:110:11, endln:115:4
+      |vpiParent:
+      \_TypedefTypespec: (bp_icache_stat_mem_pkt_s), line:115:6, endln:115:30
+      |vpiFullName:work@top.bp_icache_stat_mem_pkt_s
+      |vpiActual:
+      \_StructTypespec: , line:110:11, endln:115:4
+  |vpiTypedef:
+  \_StructTypespec: , line:110:11, endln:115:4
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (index), line:112:44, endln:112:49
       |vpiParent:
-      \_StructTypespec: (bp_icache_stat_mem_pkt_s), line:110:11, endln:115:4
+      \_StructTypespec: , line:110:11, endln:115:4
       |vpiName:index
       |vpiTypespec:
-      \_RefTypespec: (work@top.bp_icache_stat_mem_pkt_s.index), line:112:5, endln:112:40
+      \_RefTypespec: (work@top.index), line:112:5, endln:112:40
         |vpiParent:
         \_TypespecMember: (index), line:112:44, endln:112:49
-        |vpiFullName:work@top.bp_icache_stat_mem_pkt_s.index
+        |vpiFullName:work@top.index
         |vpiActual:
         \_LogicTypespec: , line:112:5, endln:112:40
     |vpiTypespecMember:
     \_TypespecMember: (way_id), line:113:45, endln:113:51
       |vpiParent:
-      \_StructTypespec: (bp_icache_stat_mem_pkt_s), line:110:11, endln:115:4
+      \_StructTypespec: , line:110:11, endln:115:4
       |vpiName:way_id
       |vpiTypespec:
-      \_RefTypespec: (work@top.bp_icache_stat_mem_pkt_s.way_id), line:113:5, endln:113:41
+      \_RefTypespec: (work@top.way_id), line:113:5, endln:113:41
         |vpiParent:
         \_TypespecMember: (way_id), line:113:45, endln:113:51
-        |vpiFullName:work@top.bp_icache_stat_mem_pkt_s.way_id
+        |vpiFullName:work@top.way_id
         |vpiActual:
         \_LogicTypespec: , line:113:5, endln:113:41
     |vpiTypespecMember:
     \_TypespecMember: (opcode), line:114:22, endln:114:28
       |vpiParent:
-      \_StructTypespec: (bp_icache_stat_mem_pkt_s), line:110:11, endln:115:4
+      \_StructTypespec: , line:110:11, endln:115:4
       |vpiName:opcode
       |vpiTypespec:
-      \_RefTypespec: (work@top.bp_icache_stat_mem_pkt_s.opcode), line:114:5, endln:114:8
+      \_RefTypespec: (work@top.opcode), line:114:5, endln:114:8
         |vpiParent:
         \_TypespecMember: (opcode), line:114:22, endln:114:28
-        |vpiFullName:work@top.bp_icache_stat_mem_pkt_s.opcode
+        |vpiFullName:work@top.opcode
         |vpiActual:
         \_IntTypespec: , line:114:5, endln:114:8
   |vpiTypedef:
@@ -2947,33 +3014,44 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiSigned:1
   |vpiTypedef:
-  \_StructTypespec: (bp_icache_stat_info_s), line:121:11, endln:125:4
+  \_TypedefTypespec: (bp_icache_stat_info_s), line:125:6, endln:125:27
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiName:bp_icache_stat_info_s
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@top.bp_icache_stat_info_s), line:121:11, endln:125:4
+      |vpiParent:
+      \_TypedefTypespec: (bp_icache_stat_info_s), line:125:6, endln:125:27
+      |vpiFullName:work@top.bp_icache_stat_info_s
+      |vpiActual:
+      \_StructTypespec: , line:121:11, endln:125:4
+  |vpiTypedef:
+  \_StructTypespec: , line:121:11, endln:125:4
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (lru), line:123:43, endln:123:46
       |vpiParent:
-      \_StructTypespec: (bp_icache_stat_info_s), line:121:11, endln:125:4
+      \_StructTypespec: , line:121:11, endln:125:4
       |vpiName:lru
       |vpiTypespec:
-      \_RefTypespec: (work@top.bp_icache_stat_info_s.lru), line:123:5, endln:123:42
+      \_RefTypespec: (work@top.lru), line:123:5, endln:123:42
         |vpiParent:
         \_TypespecMember: (lru), line:123:43, endln:123:46
-        |vpiFullName:work@top.bp_icache_stat_info_s.lru
+        |vpiFullName:work@top.lru
         |vpiActual:
         \_LogicTypespec: , line:123:5, endln:123:42
     |vpiTypespecMember:
     \_TypespecMember: (dirty), line:124:43, endln:124:48
       |vpiParent:
-      \_StructTypespec: (bp_icache_stat_info_s), line:121:11, endln:125:4
+      \_StructTypespec: , line:121:11, endln:125:4
       |vpiName:dirty
       |vpiTypespec:
-      \_RefTypespec: (work@top.bp_icache_stat_info_s.dirty), line:124:5, endln:124:24
+      \_RefTypespec: (work@top.dirty), line:124:5, endln:124:24
         |vpiParent:
         \_TypespecMember: (dirty), line:124:43, endln:124:48
-        |vpiFullName:work@top.bp_icache_stat_info_s.dirty
+        |vpiFullName:work@top.dirty
         |vpiActual:
         \_LogicTypespec: , line:124:5, endln:124:24
   |vpiTypedef:
@@ -3230,7 +3308,9 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:152:13, endln:152:16
   |vpiImportTypespec:
-  \_StructTypespec: (bp_icache_req_s), line:19:11, endln:27:4
+  \_TypedefTypespec: (bp_icache_req_s), line:27:6, endln:27:21
+  |vpiImportTypespec:
+  \_StructTypespec: , line:19:11, endln:27:4
   |vpiImportTypespec:
   \_LogicTypespec: , line:21:5, endln:21:10
   |vpiImportTypespec:
@@ -3244,13 +3324,17 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:26:5, endln:26:8
   |vpiImportTypespec:
-  \_StructTypespec: (bp_icache_req_metadata_s), line:33:11, endln:37:4
+  \_TypedefTypespec: (bp_icache_req_metadata_s), line:37:6, endln:37:30
+  |vpiImportTypespec:
+  \_StructTypespec: , line:33:11, endln:37:4
   |vpiImportTypespec:
   \_LogicTypespec: , line:35:5, endln:35:41
   |vpiImportTypespec:
   \_LogicTypespec: , line:36:5, endln:36:10
   |vpiImportTypespec:
-  \_StructTypespec: (bp_icache_data_mem_pkt_s), line:74:11, endln:81:4
+  \_TypedefTypespec: (bp_icache_data_mem_pkt_s), line:81:6, endln:81:30
+  |vpiImportTypespec:
+  \_StructTypespec: , line:74:11, endln:81:4
   |vpiImportTypespec:
   \_LogicTypespec: , line:76:5, endln:76:40
   |vpiImportTypespec:
@@ -3260,7 +3344,9 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:79:5, endln:79:45
   |vpiImportTypespec:
-  \_StructTypespec: (bp_icache_tag_mem_pkt_s), line:88:11, endln:95:4
+  \_TypedefTypespec: (bp_icache_tag_mem_pkt_s), line:95:6, endln:95:29
+  |vpiImportTypespec:
+  \_StructTypespec: , line:88:11, endln:95:4
   |vpiImportTypespec:
   \_LogicTypespec: , line:90:5, endln:90:40
   |vpiImportTypespec:
@@ -3272,15 +3358,19 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:94:5, endln:94:8
   |vpiImportTypespec:
-  \_StructTypespec: (bp_icache_tag_info_s), line:101:11, endln:104:4
+  \_TypedefTypespec: (bp_icache_tag_info_s), line:104:6, endln:104:26
   |vpiImportTypespec:
-  \_LogicTypespec: , line:145:3, endln:145:13
+  \_StructTypespec: , line:101:11, endln:104:4
   |vpiImportTypespec:
   \_LogicTypespec: , line:102:5, endln:102:39
   |vpiImportTypespec:
+  \_LogicTypespec: , line:145:3, endln:145:13
+  |vpiImportTypespec:
   \_LogicTypespec: , line:103:5, endln:103:29
   |vpiImportTypespec:
-  \_StructTypespec: (bp_icache_stat_mem_pkt_s), line:110:11, endln:115:4
+  \_TypedefTypespec: (bp_icache_stat_mem_pkt_s), line:115:6, endln:115:30
+  |vpiImportTypespec:
+  \_StructTypespec: , line:110:11, endln:115:4
   |vpiImportTypespec:
   \_LogicTypespec: , line:112:5, endln:112:40
   |vpiImportTypespec:
@@ -3288,7 +3378,9 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:114:5, endln:114:8
   |vpiImportTypespec:
-  \_StructTypespec: (bp_icache_stat_info_s), line:121:11, endln:125:4
+  \_TypedefTypespec: (bp_icache_stat_info_s), line:125:6, endln:125:27
+  |vpiImportTypespec:
+  \_StructTypespec: , line:121:11, endln:125:4
   |vpiImportTypespec:
   \_LogicTypespec: , line:123:5, endln:123:42
   |vpiImportTypespec:
@@ -3304,7 +3396,7 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiTypespec:
-    \_RefTypespec: (work@top.pc), line:144:3, endln:144:14
+    \_RefTypespec: (work@top.pc), line:144:3, endln:144:7
       |vpiParent:
       \_LogicNet: (work@top.pc), line:144:15, endln:144:17
       |vpiFullName:work@top.pc
@@ -3336,7 +3428,7 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BlackConst/dut.sv, line:142:1, endln:164:10
     |vpiTypespec:
-    \_RefTypespec: (work@top.pc_sext_li), line:154:1, endln:154:26
+    \_RefTypespec: (work@top.pc_sext_li), line:154:1, endln:154:5
       |vpiParent:
       \_LogicNet: (work@top.pc_sext_li), line:154:27, endln:154:37
       |vpiFullName:work@top.pc_sext_li
@@ -3425,6 +3517,40 @@ Design: (unnamed)
     |vpiStmt:
     \_Begin: (work@top), line:158:54, endln:160:4
 |vpiTypedef:
+\_EnumTypespec: , line:42:11, endln:49:31
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiBaseTypespec:
+  \_RefTypespec: , line:42:16, endln:42:27
+    |vpiParent:
+    \_EnumTypespec: , line:42:11, endln:49:31
+    |vpiActual:
+    \_LogicTypespec: , line:42:16, endln:42:27
+  |vpiEnumConst:
+  \_EnumConst: (e_cache_data_mem_write), line:44:4, endln:44:26
+    |vpiParent:
+    \_EnumTypespec: , line:42:11, endln:49:31
+    |vpiName:e_cache_data_mem_write
+    |INT:0
+    |vpiDecompile:0
+    |vpiSize:2
+  |vpiEnumConst:
+  \_EnumConst: (e_cache_data_mem_read), line:46:5, endln:46:26
+    |vpiParent:
+    \_EnumTypespec: , line:42:11, endln:49:31
+    |vpiName:e_cache_data_mem_read
+    |INT:1
+    |vpiDecompile:1
+    |vpiSize:2
+  |vpiEnumConst:
+  \_EnumConst: (e_cache_data_mem_uncached), line:48:5, endln:48:30
+    |vpiParent:
+    \_EnumTypespec: , line:42:11, endln:49:31
+    |vpiName:e_cache_data_mem_uncached
+    |INT:2
+    |vpiDecompile:2
+    |vpiSize:2
+|vpiTypedef:
 \_LogicTypespec: , line:42:16, endln:42:27
   |vpiParent:
   \_Design: (unnamed)
@@ -3449,41 +3575,59 @@ Design: (unnamed)
       |UINT:0
       |vpiConstType:9
 |vpiTypedef:
-\_EnumTypespec: (bp_cache_data_mem_opcode_e), line:42:11, endln:49:31
+\_TypedefTypespec: (bp_cache_data_mem_opcode_e), line:49:5, endln:49:31
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:bp_cache_data_mem_opcode_e
-  |vpiBaseTypespec:
-  \_RefTypespec: (bp_cache_data_mem_opcode_e), line:42:16, endln:42:27
+  |vpiTypedefAlias:
+  \_RefTypespec: (bp_cache_data_mem_opcode_e), line:42:11, endln:49:4
     |vpiParent:
-    \_EnumTypespec: (bp_cache_data_mem_opcode_e), line:42:11, endln:49:31
+    \_TypedefTypespec: (bp_cache_data_mem_opcode_e), line:49:5, endln:49:31
     |vpiFullName:bp_cache_data_mem_opcode_e
     |vpiActual:
-    \_LogicTypespec: , line:42:16, endln:42:27
-  |vpiEnumConst:
-  \_EnumConst: (e_cache_data_mem_write), line:44:4, endln:44:26
+    \_EnumTypespec: , line:42:11, endln:49:31
+|vpiTypedef:
+\_EnumTypespec: , line:52:11, endln:61:30
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiBaseTypespec:
+  \_RefTypespec: , line:52:16, endln:52:27
     |vpiParent:
-    \_EnumTypespec: (bp_cache_data_mem_opcode_e), line:42:11, endln:49:31
-    |vpiName:e_cache_data_mem_write
+    \_EnumTypespec: , line:52:11, endln:61:30
+    |vpiActual:
+    \_LogicTypespec: , line:52:16, endln:52:27
+  |vpiEnumConst:
+  \_EnumConst: (e_cache_tag_mem_set_clear), line:54:4, endln:54:29
+    |vpiParent:
+    \_EnumTypespec: , line:52:11, endln:61:30
+    |vpiName:e_cache_tag_mem_set_clear
     |INT:0
     |vpiDecompile:0
-    |vpiSize:2
+    |vpiSize:3
   |vpiEnumConst:
-  \_EnumConst: (e_cache_data_mem_read), line:46:5, endln:46:26
+  \_EnumConst: (e_cache_tag_mem_set_tag), line:56:5, endln:56:28
     |vpiParent:
-    \_EnumTypespec: (bp_cache_data_mem_opcode_e), line:42:11, endln:49:31
-    |vpiName:e_cache_data_mem_read
+    \_EnumTypespec: , line:52:11, endln:61:30
+    |vpiName:e_cache_tag_mem_set_tag
     |INT:1
     |vpiDecompile:1
-    |vpiSize:2
+    |vpiSize:3
   |vpiEnumConst:
-  \_EnumConst: (e_cache_data_mem_uncached), line:48:5, endln:48:30
+  \_EnumConst: (e_cache_tag_mem_set_state), line:58:5, endln:58:30
     |vpiParent:
-    \_EnumTypespec: (bp_cache_data_mem_opcode_e), line:42:11, endln:49:31
-    |vpiName:e_cache_data_mem_uncached
+    \_EnumTypespec: , line:52:11, endln:61:30
+    |vpiName:e_cache_tag_mem_set_state
     |INT:2
     |vpiDecompile:2
-    |vpiSize:2
+    |vpiSize:3
+  |vpiEnumConst:
+  \_EnumConst: (e_cache_tag_mem_read), line:60:5, endln:60:25
+    |vpiParent:
+    \_EnumTypespec: , line:52:11, endln:61:30
+    |vpiName:e_cache_tag_mem_read
+    |INT:3
+    |vpiDecompile:3
+    |vpiSize:3
 |vpiTypedef:
 \_LogicTypespec: , line:52:16, endln:52:27
   |vpiParent:
@@ -3509,49 +3653,51 @@ Design: (unnamed)
       |UINT:0
       |vpiConstType:9
 |vpiTypedef:
-\_EnumTypespec: (bp_cache_tag_mem_opcode_e), line:52:11, endln:61:30
+\_TypedefTypespec: (bp_cache_tag_mem_opcode_e), line:61:5, endln:61:30
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:bp_cache_tag_mem_opcode_e
-  |vpiBaseTypespec:
-  \_RefTypespec: (bp_cache_tag_mem_opcode_e), line:52:16, endln:52:27
+  |vpiTypedefAlias:
+  \_RefTypespec: (bp_cache_tag_mem_opcode_e), line:52:11, endln:61:4
     |vpiParent:
-    \_EnumTypespec: (bp_cache_tag_mem_opcode_e), line:52:11, endln:61:30
+    \_TypedefTypespec: (bp_cache_tag_mem_opcode_e), line:61:5, endln:61:30
     |vpiFullName:bp_cache_tag_mem_opcode_e
     |vpiActual:
-    \_LogicTypespec: , line:52:16, endln:52:27
-  |vpiEnumConst:
-  \_EnumConst: (e_cache_tag_mem_set_clear), line:54:4, endln:54:29
+    \_EnumTypespec: , line:52:11, endln:61:30
+|vpiTypedef:
+\_EnumTypespec: , line:64:11, endln:71:31
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiBaseTypespec:
+  \_RefTypespec: , line:64:16, endln:64:27
     |vpiParent:
-    \_EnumTypespec: (bp_cache_tag_mem_opcode_e), line:52:11, endln:61:30
-    |vpiName:e_cache_tag_mem_set_clear
+    \_EnumTypespec: , line:64:11, endln:71:31
+    |vpiActual:
+    \_LogicTypespec: , line:64:16, endln:64:27
+  |vpiEnumConst:
+  \_EnumConst: (e_cache_stat_mem_set_clear), line:66:4, endln:66:30
+    |vpiParent:
+    \_EnumTypespec: , line:64:11, endln:71:31
+    |vpiName:e_cache_stat_mem_set_clear
     |INT:0
     |vpiDecompile:0
-    |vpiSize:3
+    |vpiSize:2
   |vpiEnumConst:
-  \_EnumConst: (e_cache_tag_mem_set_tag), line:56:5, endln:56:28
+  \_EnumConst: (e_cache_stat_mem_read), line:68:5, endln:68:26
     |vpiParent:
-    \_EnumTypespec: (bp_cache_tag_mem_opcode_e), line:52:11, endln:61:30
-    |vpiName:e_cache_tag_mem_set_tag
+    \_EnumTypespec: , line:64:11, endln:71:31
+    |vpiName:e_cache_stat_mem_read
     |INT:1
     |vpiDecompile:1
-    |vpiSize:3
+    |vpiSize:2
   |vpiEnumConst:
-  \_EnumConst: (e_cache_tag_mem_set_state), line:58:5, endln:58:30
+  \_EnumConst: (e_cache_stat_mem_clear_dirty), line:70:5, endln:70:33
     |vpiParent:
-    \_EnumTypespec: (bp_cache_tag_mem_opcode_e), line:52:11, endln:61:30
-    |vpiName:e_cache_tag_mem_set_state
+    \_EnumTypespec: , line:64:11, endln:71:31
+    |vpiName:e_cache_stat_mem_clear_dirty
     |INT:2
     |vpiDecompile:2
-    |vpiSize:3
-  |vpiEnumConst:
-  \_EnumConst: (e_cache_tag_mem_read), line:60:5, endln:60:25
-    |vpiParent:
-    \_EnumTypespec: (bp_cache_tag_mem_opcode_e), line:52:11, endln:61:30
-    |vpiName:e_cache_tag_mem_read
-    |INT:3
-    |vpiDecompile:3
-    |vpiSize:3
+    |vpiSize:2
 |vpiTypedef:
 \_LogicTypespec: , line:64:16, endln:64:27
   |vpiParent:
@@ -3577,41 +3723,17 @@ Design: (unnamed)
       |UINT:0
       |vpiConstType:9
 |vpiTypedef:
-\_EnumTypespec: (bp_cache_stat_mem_opcode_e), line:64:11, endln:71:31
+\_TypedefTypespec: (bp_cache_stat_mem_opcode_e), line:71:5, endln:71:31
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:bp_cache_stat_mem_opcode_e
-  |vpiBaseTypespec:
-  \_RefTypespec: (bp_cache_stat_mem_opcode_e), line:64:16, endln:64:27
+  |vpiTypedefAlias:
+  \_RefTypespec: (bp_cache_stat_mem_opcode_e), line:64:11, endln:71:4
     |vpiParent:
-    \_EnumTypespec: (bp_cache_stat_mem_opcode_e), line:64:11, endln:71:31
+    \_TypedefTypespec: (bp_cache_stat_mem_opcode_e), line:71:5, endln:71:31
     |vpiFullName:bp_cache_stat_mem_opcode_e
     |vpiActual:
-    \_LogicTypespec: , line:64:16, endln:64:27
-  |vpiEnumConst:
-  \_EnumConst: (e_cache_stat_mem_set_clear), line:66:4, endln:66:30
-    |vpiParent:
-    \_EnumTypespec: (bp_cache_stat_mem_opcode_e), line:64:11, endln:71:31
-    |vpiName:e_cache_stat_mem_set_clear
-    |INT:0
-    |vpiDecompile:0
-    |vpiSize:2
-  |vpiEnumConst:
-  \_EnumConst: (e_cache_stat_mem_read), line:68:5, endln:68:26
-    |vpiParent:
-    \_EnumTypespec: (bp_cache_stat_mem_opcode_e), line:64:11, endln:71:31
-    |vpiName:e_cache_stat_mem_read
-    |INT:1
-    |vpiDecompile:1
-    |vpiSize:2
-  |vpiEnumConst:
-  \_EnumConst: (e_cache_stat_mem_clear_dirty), line:70:5, endln:70:33
-    |vpiParent:
-    \_EnumTypespec: (bp_cache_stat_mem_opcode_e), line:64:11, endln:71:31
-    |vpiName:e_cache_stat_mem_clear_dirty
-    |INT:2
-    |vpiDecompile:2
-    |vpiSize:2
+    \_EnumTypespec: , line:64:11, endln:71:31
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

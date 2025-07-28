@@ -296,8 +296,8 @@ CheckerInst                                            1
 ClockingBlock                                          1
 Design                                                 1
 EventControl                                           1
+LogicNet                                               4
 LogicTypespec                                          4
-LogicVar                                               4
 Module                                                 1
 Operation                                              2
 PropFormalDecl                                         5
@@ -406,70 +406,6 @@ Design: (unnamed)
           |vpiFullName:work@top.p2.interrupt
           |vpiActual:
           \_LogicNet: (work@top.interrupt), line:10:32, endln:10:41
-  |vpiVariables:
-  \_LogicVar: (work@top.a), line:2:9, endln:2:10
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CheckerInst/dut.sv, line:1:1, endln:16:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.a), line:2:3, endln:2:8
-      |vpiParent:
-      \_LogicVar: (work@top.a), line:2:9, endln:2:10
-      |vpiFullName:work@top.a
-      |vpiActual:
-      \_LogicTypespec: , line:2:3, endln:2:8
-    |vpiName:a
-    |vpiFullName:work@top.a
-    |vpiVisibility:1
-  |vpiVariables:
-  \_LogicVar: (work@top.b), line:2:12, endln:2:13
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CheckerInst/dut.sv, line:1:1, endln:16:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.b), line:2:3, endln:2:8
-      |vpiParent:
-      \_LogicVar: (work@top.b), line:2:12, endln:2:13
-      |vpiFullName:work@top.b
-      |vpiActual:
-      \_LogicTypespec: , line:2:3, endln:2:8
-    |vpiName:b
-    |vpiFullName:work@top.b
-    |vpiVisibility:1
-  |vpiVariables:
-  \_LogicVar: (work@top.c), line:2:15, endln:2:16
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CheckerInst/dut.sv, line:1:1, endln:16:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.c), line:2:3, endln:2:8
-      |vpiParent:
-      \_LogicVar: (work@top.c), line:2:15, endln:2:16
-      |vpiFullName:work@top.c
-      |vpiActual:
-      \_LogicTypespec: , line:2:3, endln:2:8
-    |vpiName:c
-    |vpiFullName:work@top.c
-    |vpiVisibility:1
-  |vpiVariables:
-  \_LogicVar: (work@top.clk), line:2:18, endln:2:21
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CheckerInst/dut.sv, line:1:1, endln:16:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.clk), line:2:3, endln:2:8
-      |vpiParent:
-      \_LogicVar: (work@top.clk), line:2:18, endln:2:21
-      |vpiFullName:work@top.clk
-      |vpiActual:
-      \_LogicTypespec: , line:2:3, endln:2:8
-    |vpiName:clk
-    |vpiFullName:work@top.clk
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@top.a), line:2:9, endln:2:10
-  |vpiReg:
-  \_LogicVar: (work@top.b), line:2:12, endln:2:13
-  |vpiReg:
-  \_LogicVar: (work@top.c), line:2:15, endln:2:16
-  |vpiReg:
-  \_LogicVar: (work@top.clk), line:2:18, endln:2:21
   |vpiInternalScope:
   \_ClockingBlock: (work@top.top_clocking), line:3:3, endln:3:51
     |vpiParent:
@@ -487,7 +423,7 @@ Design: (unnamed)
         |vpiName:clk
         |vpiFullName:work@top.top_clocking.clk
         |vpiActual:
-        \_LogicVar: (work@top.clk), line:2:18, endln:2:21
+        \_LogicNet: (work@top.clk), line:2:18, endln:2:21
   |vpiInternalScope:
   \_CheckerInst: my_checker (work@top.check), line:13:3, endln:15:36
     |vpiParent:
@@ -514,19 +450,67 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:3, endln:2:8
   |vpiImportTypespec:
-  \_LogicVar: (work@top.a), line:2:9, endln:2:10
+  \_LogicNet: (work@top.a), line:2:9, endln:2:10
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CheckerInst/dut.sv, line:1:1, endln:16:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.a), line:2:3, endln:2:8
+      |vpiParent:
+      \_LogicNet: (work@top.a), line:2:9, endln:2:10
+      |vpiFullName:work@top.a
+      |vpiActual:
+      \_LogicTypespec: , line:2:3, endln:2:8
+    |vpiName:a
+    |vpiFullName:work@top.a
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:3, endln:2:8
   |vpiImportTypespec:
-  \_LogicVar: (work@top.b), line:2:12, endln:2:13
+  \_LogicNet: (work@top.b), line:2:12, endln:2:13
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CheckerInst/dut.sv, line:1:1, endln:16:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.b), line:2:3, endln:2:8
+      |vpiParent:
+      \_LogicNet: (work@top.b), line:2:12, endln:2:13
+      |vpiFullName:work@top.b
+      |vpiActual:
+      \_LogicTypespec: , line:2:3, endln:2:8
+    |vpiName:b
+    |vpiFullName:work@top.b
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:3, endln:2:8
   |vpiImportTypespec:
-  \_LogicVar: (work@top.c), line:2:15, endln:2:16
+  \_LogicNet: (work@top.c), line:2:15, endln:2:16
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CheckerInst/dut.sv, line:1:1, endln:16:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.c), line:2:3, endln:2:8
+      |vpiParent:
+      \_LogicNet: (work@top.c), line:2:15, endln:2:16
+      |vpiFullName:work@top.c
+      |vpiActual:
+      \_LogicTypespec: , line:2:3, endln:2:8
+    |vpiName:c
+    |vpiFullName:work@top.c
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicTypespec: , line:2:3, endln:2:8
   |vpiImportTypespec:
-  \_LogicVar: (work@top.clk), line:2:18, endln:2:21
+  \_LogicNet: (work@top.clk), line:2:18, endln:2:21
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/CheckerInst/dut.sv, line:1:1, endln:16:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.clk), line:2:3, endln:2:8
+      |vpiParent:
+      \_LogicNet: (work@top.clk), line:2:18, endln:2:21
+      |vpiFullName:work@top.clk
+      |vpiActual:
+      \_LogicTypespec: , line:2:3, endln:2:8
+    |vpiName:clk
+    |vpiFullName:work@top.clk
+    |vpiNetType:36
   |vpiImportTypespec:
   \_CheckerInst: my_checker (work@top.check), line:13:3, endln:15:36
   |vpiImportTypespec:
@@ -551,6 +535,14 @@ Design: (unnamed)
     |vpiFullName:work@top.interrupt
     |vpiNetType:1
   |vpiDefName:work@top
+  |vpiNet:
+  \_LogicNet: (work@top.a), line:2:9, endln:2:10
+  |vpiNet:
+  \_LogicNet: (work@top.b), line:2:12, endln:2:13
+  |vpiNet:
+  \_LogicNet: (work@top.c), line:2:15, endln:2:16
+  |vpiNet:
+  \_LogicNet: (work@top.clk), line:2:18, endln:2:21
   |vpiNet:
   \_LogicNet: (work@top.req), line:6:22, endln:6:25
   |vpiNet:

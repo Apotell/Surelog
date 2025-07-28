@@ -113,8 +113,8 @@ Operation                                              3
 RealTypespec                                           2
 RefTypespec                                           12
 StringTypespec                                         3
+StructNet                                              1
 StructTypespec                                         3
-StructVar                                              1
 TaggedPattern                                          4
 TypespecMember                                         7
 === UHDM Object Stats End ===
@@ -128,113 +128,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@top
-  |vpiVariables:
-  \_StructVar: (work@top.ABC), line:8:3, endln:8:6
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PatternOrder/dut.sv, line:1:1, endln:10:16
-    |vpiTypespec:
-    \_RefTypespec: (work@top.ABC), line:2:4, endln:3:9
-      |vpiParent:
-      \_StructVar: (work@top.ABC), line:8:3, endln:8:6
-      |vpiFullName:work@top.ABC
-      |vpiActual:
-      \_StructTypespec: , line:2:4, endln:8:2
-    |vpiName:ABC
-    |vpiFullName:work@top.ABC
-    |vpiVisibility:1
-    |vpiExpr:
-    \_Operation: , line:8:9, endln:8:57
-      |vpiParent:
-      \_StructVar: (work@top.ABC), line:8:3, endln:8:6
-      |vpiOpType:75
-      |vpiOperand:
-      \_TaggedPattern: , line:8:11, endln:8:28
-        |vpiParent:
-        \_Operation: , line:8:9, endln:8:57
-        |vpiPattern:
-        \_Operation: , line:8:16, endln:8:28
-          |vpiParent:
-          \_TaggedPattern: , line:8:11, endln:8:28
-          |vpiOpType:75
-          |vpiOperand:
-          \_Constant: , line:8:18, endln:8:22
-            |vpiParent:
-            \_Operation: , line:8:16, endln:8:28
-            |vpiDecompile:1'b1
-            |vpiSize:1
-            |BIN:1
-            |vpiConstType:3
-          |vpiOperand:
-          \_Constant: , line:8:24, endln:8:27
-            |vpiParent:
-            \_Operation: , line:8:16, endln:8:28
-            |vpiDecompile:1.0
-            |vpiSize:64
-            |REAL:1.000000
-            |vpiConstType:2
-        |vpiTypespec:
-        \_RefTypespec: (work@top.ABC.BC1), line:8:11, endln:8:14
-          |vpiParent:
-          \_TaggedPattern: , line:8:11, endln:8:28
-          |vpiName:BC1
-          |vpiFullName:work@top.ABC.BC1
-          |vpiActual:
-          \_StringTypespec: (BC1), line:8:11, endln:8:14
-      |vpiOperand:
-      \_TaggedPattern: , line:8:30, endln:8:36
-        |vpiParent:
-        \_Operation: , line:8:9, endln:8:57
-        |vpiPattern:
-        \_Constant: , line:8:35, endln:8:36
-          |vpiParent:
-          \_TaggedPattern: , line:8:30, endln:8:36
-          |vpiDecompile:0
-          |vpiSize:64
-          |UINT:0
-          |vpiConstType:9
-        |vpiTypespec:
-        \_RefTypespec: (work@top.ABC), line:8:30, endln:8:33
-          |vpiParent:
-          \_TaggedPattern: , line:8:30, endln:8:36
-          |vpiFullName:work@top.ABC
-          |vpiActual:
-          \_IntTypespec: , line:8:30, endln:8:33
-      |vpiOperand:
-      \_TaggedPattern: , line:8:38, endln:8:56
-        |vpiParent:
-        \_Operation: , line:8:9, endln:8:57
-        |vpiPattern:
-        \_Operation: , line:8:43, endln:8:56
-          |vpiParent:
-          \_TaggedPattern: , line:8:38, endln:8:56
-          |vpiOpType:75
-          |vpiOperand:
-          \_TaggedPattern: , line:8:45, endln:8:55
-            |vpiParent:
-            \_Operation: , line:8:43, endln:8:56
-            |vpiPattern:
-            \_Constant: , line:8:54, endln:8:55
-              |vpiParent:
-              \_TaggedPattern: , line:8:45, endln:8:55
-              |vpiDecompile:0
-              |vpiSize:64
-              |UINT:0
-              |vpiConstType:9
-            |vpiTypespec:
-            \_RefTypespec: (work@top.ABC), line:8:45, endln:8:52
-              |vpiParent:
-              \_TaggedPattern: , line:8:45, endln:8:55
-              |vpiFullName:work@top.ABC
-              |vpiActual:
-              \_StringTypespec: (default), line:8:45, endln:8:52
-        |vpiTypespec:
-        \_RefTypespec: (work@top.ABC.BC2), line:8:38, endln:8:41
-          |vpiParent:
-          \_TaggedPattern: , line:8:38, endln:8:56
-          |vpiName:BC2
-          |vpiFullName:work@top.ABC.BC2
-          |vpiActual:
-          \_StringTypespec: (BC2), line:8:38, endln:8:41
   |vpiTypedef:
   \_StructTypespec: , line:2:4, endln:8:2
     |vpiParent:
@@ -353,25 +246,22 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PatternOrder/dut.sv, line:1:1, endln:10:16
   |vpiTypedef:
-  \_StringTypespec: (BC1), line:8:11, endln:8:14
+  \_StringTypespec: , line:8:11, endln:8:14
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PatternOrder/dut.sv, line:1:1, endln:10:16
-    |vpiName:BC1
   |vpiTypedef:
   \_IntTypespec: , line:8:30, endln:8:33
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PatternOrder/dut.sv, line:1:1, endln:10:16
     |vpiSigned:1
   |vpiTypedef:
-  \_StringTypespec: (default), line:8:45, endln:8:52
+  \_StringTypespec: , line:8:45, endln:8:52
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PatternOrder/dut.sv, line:1:1, endln:10:16
-    |vpiName:default
   |vpiTypedef:
-  \_StringTypespec: (BC2), line:8:38, endln:8:41
+  \_StringTypespec: , line:8:38, endln:8:41
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PatternOrder/dut.sv, line:1:1, endln:10:16
-    |vpiName:BC2
   |vpiImportTypespec:
   \_StructTypespec: , line:2:4, endln:8:2
   |vpiImportTypespec:
@@ -389,16 +279,29 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_RealTypespec: , line:6:5, endln:6:9
   |vpiImportTypespec:
-  \_StringTypespec: (BC1), line:8:11, endln:8:14
+  \_StringTypespec: , line:8:11, endln:8:14
   |vpiImportTypespec:
   \_IntTypespec: , line:8:30, endln:8:33
   |vpiImportTypespec:
-  \_StringTypespec: (default), line:8:45, endln:8:52
+  \_StringTypespec: , line:8:45, endln:8:52
   |vpiImportTypespec:
-  \_StringTypespec: (BC2), line:8:38, endln:8:41
+  \_StringTypespec: , line:8:38, endln:8:41
   |vpiImportTypespec:
-  \_StructVar: (work@top.ABC), line:8:3, endln:8:6
+  \_StructNet: (work@top.ABC), line:8:3, endln:8:6
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PatternOrder/dut.sv, line:1:1, endln:10:16
+    |vpiTypespec:
+    \_RefTypespec: (work@top.ABC), line:2:4, endln:8:2
+      |vpiParent:
+      \_StructNet: (work@top.ABC), line:8:3, endln:8:6
+      |vpiFullName:work@top.ABC
+      |vpiActual:
+      \_StructTypespec: , line:2:4, endln:8:2
+    |vpiName:ABC
+    |vpiFullName:work@top.ABC
   |vpiDefName:work@top
+  |vpiNet:
+  \_StructNet: (work@top.ABC), line:8:3, endln:8:6
   |vpiEndLabel:top
 ===================
 [  FATAL] : 0

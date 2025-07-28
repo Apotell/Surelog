@@ -285,8 +285,9 @@ Package                                                1
 Port                                                  13
 RefModule                                              1
 RefObj                                                14
-RefTypespec                                           15
+RefTypespec                                           16
 Task                                                   9
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/JKFlipflop/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -555,7 +556,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -589,14 +590,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/JKFlipflop/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -604,7 +604,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -612,7 +612,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -620,7 +620,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -628,13 +628,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/JKFlipflop/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -845,19 +859,19 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@D_Flipflop (work@D_Flipflop), file:${SURELOG_DIR}/tests/JKFlipflop/dut.sv, line:9:1, endln:19:10
   |vpiImportTypespec:
-  \_LogicNet: (work@D_Flipflop.Din), line:10:11, endln:10:14
+  \_LogicNet: (work@D_Flipflop.Din), line:9:19, endln:9:22
     |vpiParent:
     \_Module: work@D_Flipflop (work@D_Flipflop), file:${SURELOG_DIR}/tests/JKFlipflop/dut.sv, line:9:1, endln:19:10
     |vpiName:Din
     |vpiFullName:work@D_Flipflop.Din
   |vpiImportTypespec:
-  \_LogicNet: (work@D_Flipflop.clk), line:10:15, endln:10:18
+  \_LogicNet: (work@D_Flipflop.clk), line:9:23, endln:9:26
     |vpiParent:
     \_Module: work@D_Flipflop (work@D_Flipflop), file:${SURELOG_DIR}/tests/JKFlipflop/dut.sv, line:9:1, endln:19:10
     |vpiName:clk
     |vpiFullName:work@D_Flipflop.clk
   |vpiImportTypespec:
-  \_LogicNet: (work@D_Flipflop.reset), line:10:19, endln:10:24
+  \_LogicNet: (work@D_Flipflop.reset), line:9:27, endln:9:32
     |vpiParent:
     \_Module: work@D_Flipflop (work@D_Flipflop), file:${SURELOG_DIR}/tests/JKFlipflop/dut.sv, line:9:1, endln:19:10
     |vpiName:reset
@@ -865,13 +879,13 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:11:12, endln:11:15
   |vpiImportTypespec:
-  \_LogicNet: (work@D_Flipflop.q), line:11:16, endln:11:17
+  \_LogicNet: (work@D_Flipflop.q), line:9:33, endln:9:34
     |vpiParent:
     \_Module: work@D_Flipflop (work@D_Flipflop), file:${SURELOG_DIR}/tests/JKFlipflop/dut.sv, line:9:1, endln:19:10
     |vpiTypespec:
     \_RefTypespec: (work@D_Flipflop.q), line:11:12, endln:11:15
       |vpiParent:
-      \_LogicNet: (work@D_Flipflop.q), line:11:16, endln:11:17
+      \_LogicNet: (work@D_Flipflop.q), line:9:33, endln:9:34
       |vpiFullName:work@D_Flipflop.q
       |vpiActual:
       \_LogicTypespec: , line:11:12, endln:11:15
@@ -882,13 +896,13 @@ Design: (unnamed)
   \_LogicTypespec: , line:11:12, endln:11:15
   |vpiDefName:work@D_Flipflop
   |vpiNet:
-  \_LogicNet: (work@D_Flipflop.Din), line:10:11, endln:10:14
+  \_LogicNet: (work@D_Flipflop.Din), line:9:19, endln:9:22
   |vpiNet:
-  \_LogicNet: (work@D_Flipflop.clk), line:10:15, endln:10:18
+  \_LogicNet: (work@D_Flipflop.clk), line:9:23, endln:9:26
   |vpiNet:
-  \_LogicNet: (work@D_Flipflop.reset), line:10:19, endln:10:24
+  \_LogicNet: (work@D_Flipflop.reset), line:9:27, endln:9:32
   |vpiNet:
-  \_LogicNet: (work@D_Flipflop.q), line:11:16, endln:11:17
+  \_LogicNet: (work@D_Flipflop.q), line:9:33, endln:9:34
   |vpiPort:
   \_Port: (Din), line:9:19, endln:9:22
     |vpiParent:
@@ -940,7 +954,7 @@ Design: (unnamed)
           |vpiName:clk
           |vpiFullName:work@D_Flipflop.clk
           |vpiActual:
-          \_LogicNet: (work@D_Flipflop.clk), line:10:15, endln:10:18
+          \_LogicNet: (work@D_Flipflop.clk), line:9:23, endln:9:26
       |vpiStmt:
       \_Begin: (work@D_Flipflop), line:13:5, endln:18:8
         |vpiParent:
@@ -957,7 +971,7 @@ Design: (unnamed)
             |vpiName:reset
             |vpiFullName:work@D_Flipflop.reset
             |vpiActual:
-            \_LogicNet: (work@D_Flipflop.reset), line:10:19, endln:10:24
+            \_LogicNet: (work@D_Flipflop.reset), line:9:27, endln:9:32
           |vpiStmt:
           \_Assignment: , line:15:5, endln:15:11
             |vpiParent:
@@ -979,7 +993,7 @@ Design: (unnamed)
               |vpiName:q
               |vpiFullName:work@D_Flipflop.q
               |vpiActual:
-              \_LogicNet: (work@D_Flipflop.q), line:11:16, endln:11:17
+              \_LogicNet: (work@D_Flipflop.q), line:9:33, endln:9:34
           |vpiElseStmt:
           \_Assignment: , line:17:5, endln:17:10
             |vpiParent:
@@ -993,7 +1007,7 @@ Design: (unnamed)
               |vpiName:Din
               |vpiFullName:work@D_Flipflop.Din
               |vpiActual:
-              \_LogicNet: (work@D_Flipflop.Din), line:10:11, endln:10:14
+              \_LogicNet: (work@D_Flipflop.Din), line:9:19, endln:9:22
             |vpiLhs:
             \_RefObj: (work@D_Flipflop.q), line:17:5, endln:17:6
               |vpiParent:
@@ -1001,7 +1015,7 @@ Design: (unnamed)
               |vpiName:q
               |vpiFullName:work@D_Flipflop.q
               |vpiActual:
-              \_LogicNet: (work@D_Flipflop.q), line:11:16, endln:11:17
+              \_LogicNet: (work@D_Flipflop.q), line:9:33, endln:9:34
     |vpiAlwaysType:1
 |vpiAllModules:
 \_Module: work@JKFlipflop (work@JKFlipflop), file:${SURELOG_DIR}/tests/JKFlipflop/dut.sv, line:1:1, endln:7:10
@@ -1020,31 +1034,31 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ModuleTypespec: (D_Flipflop), line:6:3, endln:6:13
   |vpiImportTypespec:
-  \_LogicNet: (work@JKFlipflop.J), line:2:9, endln:2:10
+  \_LogicNet: (work@JKFlipflop.J), line:1:19, endln:1:20
     |vpiParent:
     \_Module: work@JKFlipflop (work@JKFlipflop), file:${SURELOG_DIR}/tests/JKFlipflop/dut.sv, line:1:1, endln:7:10
     |vpiName:J
     |vpiFullName:work@JKFlipflop.J
   |vpiImportTypespec:
-  \_LogicNet: (work@JKFlipflop.K), line:2:11, endln:2:12
+  \_LogicNet: (work@JKFlipflop.K), line:1:21, endln:1:22
     |vpiParent:
     \_Module: work@JKFlipflop (work@JKFlipflop), file:${SURELOG_DIR}/tests/JKFlipflop/dut.sv, line:1:1, endln:7:10
     |vpiName:K
     |vpiFullName:work@JKFlipflop.K
   |vpiImportTypespec:
-  \_LogicNet: (work@JKFlipflop.clk), line:2:13, endln:2:16
+  \_LogicNet: (work@JKFlipflop.clk), line:1:23, endln:1:26
     |vpiParent:
     \_Module: work@JKFlipflop (work@JKFlipflop), file:${SURELOG_DIR}/tests/JKFlipflop/dut.sv, line:1:1, endln:7:10
     |vpiName:clk
     |vpiFullName:work@JKFlipflop.clk
   |vpiImportTypespec:
-  \_LogicNet: (work@JKFlipflop.reset), line:2:17, endln:2:22
+  \_LogicNet: (work@JKFlipflop.reset), line:1:27, endln:1:32
     |vpiParent:
     \_Module: work@JKFlipflop (work@JKFlipflop), file:${SURELOG_DIR}/tests/JKFlipflop/dut.sv, line:1:1, endln:7:10
     |vpiName:reset
     |vpiFullName:work@JKFlipflop.reset
   |vpiImportTypespec:
-  \_LogicNet: (work@JKFlipflop.q), line:3:10, endln:3:11
+  \_LogicNet: (work@JKFlipflop.q), line:1:33, endln:1:34
     |vpiParent:
     \_Module: work@JKFlipflop (work@JKFlipflop), file:${SURELOG_DIR}/tests/JKFlipflop/dut.sv, line:1:1, endln:7:10
     |vpiName:q
@@ -1067,15 +1081,15 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@JKFlipflop
   |vpiNet:
-  \_LogicNet: (work@JKFlipflop.J), line:2:9, endln:2:10
+  \_LogicNet: (work@JKFlipflop.J), line:1:19, endln:1:20
   |vpiNet:
-  \_LogicNet: (work@JKFlipflop.K), line:2:11, endln:2:12
+  \_LogicNet: (work@JKFlipflop.K), line:1:21, endln:1:22
   |vpiNet:
-  \_LogicNet: (work@JKFlipflop.clk), line:2:13, endln:2:16
+  \_LogicNet: (work@JKFlipflop.clk), line:1:23, endln:1:26
   |vpiNet:
-  \_LogicNet: (work@JKFlipflop.reset), line:2:17, endln:2:22
+  \_LogicNet: (work@JKFlipflop.reset), line:1:27, endln:1:32
   |vpiNet:
-  \_LogicNet: (work@JKFlipflop.q), line:3:10, endln:3:11
+  \_LogicNet: (work@JKFlipflop.q), line:1:33, endln:1:34
   |vpiNet:
   \_LogicNet: (work@JKFlipflop.w), line:4:8, endln:4:9
   |vpiPort:
@@ -1129,7 +1143,7 @@ Design: (unnamed)
           |vpiName:J
           |vpiFullName:work@JKFlipflop.J
           |vpiActual:
-          \_LogicNet: (work@JKFlipflop.J), line:2:9, endln:2:10
+          \_LogicNet: (work@JKFlipflop.J), line:1:19, endln:1:20
         |vpiOperand:
         \_Operation: , line:5:15, endln:5:17
           |vpiParent:
@@ -1142,7 +1156,7 @@ Design: (unnamed)
             |vpiName:q
             |vpiFullName:work@JKFlipflop.q
             |vpiActual:
-            \_LogicNet: (work@JKFlipflop.q), line:3:10, endln:3:11
+            \_LogicNet: (work@JKFlipflop.q), line:1:33, endln:1:34
       |vpiOperand:
       \_Operation: , line:5:20, endln:5:24
         |vpiParent:
@@ -1160,7 +1174,7 @@ Design: (unnamed)
             |vpiName:K
             |vpiFullName:work@JKFlipflop.K
             |vpiActual:
-            \_LogicNet: (work@JKFlipflop.K), line:2:11, endln:2:12
+            \_LogicNet: (work@JKFlipflop.K), line:1:21, endln:1:22
         |vpiOperand:
         \_RefObj: (work@JKFlipflop.q), line:5:23, endln:5:24
           |vpiParent:
@@ -1168,7 +1182,7 @@ Design: (unnamed)
           |vpiName:q
           |vpiFullName:work@JKFlipflop.q
           |vpiActual:
-          \_LogicNet: (work@JKFlipflop.q), line:3:10, endln:3:11
+          \_LogicNet: (work@JKFlipflop.q), line:1:33, endln:1:34
     |vpiLhs:
     \_RefObj: (work@JKFlipflop.w), line:5:10, endln:5:11
       |vpiParent:
@@ -1208,7 +1222,7 @@ Design: (unnamed)
         |vpiName:clk
         |vpiFullName:work@JKFlipflop.dff.clk
         |vpiActual:
-        \_LogicNet: (work@JKFlipflop.clk), line:2:13, endln:2:16
+        \_LogicNet: (work@JKFlipflop.clk), line:1:23, endln:1:26
     |vpiPort:
     \_Port: , line:6:24, endln:6:29
       |vpiParent:
@@ -1220,7 +1234,7 @@ Design: (unnamed)
         |vpiName:reset
         |vpiFullName:work@JKFlipflop.dff.reset
         |vpiActual:
-        \_LogicNet: (work@JKFlipflop.reset), line:2:17, endln:2:22
+        \_LogicNet: (work@JKFlipflop.reset), line:1:27, endln:1:32
     |vpiPort:
     \_Port: , line:6:30, endln:6:31
       |vpiParent:
@@ -1232,7 +1246,7 @@ Design: (unnamed)
         |vpiName:q
         |vpiFullName:work@JKFlipflop.dff.q
         |vpiActual:
-        \_LogicNet: (work@JKFlipflop.q), line:3:10, endln:3:11
+        \_LogicNet: (work@JKFlipflop.q), line:1:33, endln:1:34
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

@@ -191,7 +191,7 @@ Begin                                                  2
 BitSelect                                              2
 ClassDefn                                              8
 ClassTypespec                                          1
-Constant                                              24
+Constant                                              26
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              5
@@ -204,15 +204,16 @@ ImportTypespec                                         1
 IntTypespec                                           13
 LogicTypespec                                          1
 Module                                                 2
-Operation                                              7
+Operation                                              6
 Package                                                2
 ParamAssign                                            4
 Parameter                                              4
-Range                                                  1
-RefObj                                                 7
-RefTypespec                                           20
+Range                                                  2
+RefObj                                                 9
+RefTypespec                                           23
 RefVar                                                 1
 Task                                                   9
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ComplexBitSelect/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -481,7 +482,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -515,14 +516,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -530,7 +530,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -538,7 +538,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -546,7 +546,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -554,13 +554,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/ComplexBitSelect/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -781,32 +795,14 @@ Design: (unnamed)
   \_Parameter: (flash_ctrl_pkg::InfoTypeSize), line:3:17, endln:7:4
     |vpiParent:
     \_Package: flash_ctrl_pkg (flash_ctrl_pkg), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
-    |vpiSize:1
     |vpiTypespec:
     \_RefTypespec: (flash_ctrl_pkg::InfoTypeSize), line:3:13, endln:3:16
       |vpiParent:
       \_Parameter: (flash_ctrl_pkg::InfoTypeSize), line:3:17, endln:7:4
       |vpiFullName:flash_ctrl_pkg::InfoTypeSize
       |vpiActual:
-      \_ArrayTypespec: , line:3:30, endln:3:41
+      \_ArrayTypespec: , line:3:13, endln:7:4
     |vpiSigned:1
-    |vpiRange:
-    \_Range: , line:3:30, endln:3:41
-      |vpiParent:
-      \_Parameter: (flash_ctrl_pkg::InfoTypeSize), line:3:17, endln:7:4
-      |vpiRightRange:
-      \_Operation: , line:3:31, endln:3:40
-        |vpiParent:
-        \_Range: , line:3:30, endln:3:41
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (flash_ctrl_pkg::InfoTypeSize::InfoTypes), line:3:31, endln:3:40
-          |vpiParent:
-          \_Operation: , line:3:31, endln:3:40
-          |vpiName:InfoTypes
-          |vpiFullName:flash_ctrl_pkg::InfoTypeSize::InfoTypes
-          |vpiActual:
-          \_Parameter: (flash_ctrl_pkg::InfoTypes), line:2:17, endln:2:36
     |vpiName:InfoTypeSize
     |vpiFullName:flash_ctrl_pkg::InfoTypeSize
   |vpiParameter:
@@ -891,6 +887,14 @@ Design: (unnamed)
   \_IntTypespec: , line:2:13, endln:2:16
     |vpiParent:
     \_Package: flash_ctrl_pkg (flash_ctrl_pkg), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
+    |vpiExpr:
+    \_RefObj: (flash_ctrl_pkg::InfoTypes), line:3:31, endln:3:40
+      |vpiParent:
+      \_IntTypespec: , line:2:13, endln:2:16
+      |vpiName:InfoTypes
+      |vpiFullName:flash_ctrl_pkg::InfoTypes
+      |vpiActual:
+      \_Parameter: (flash_ctrl_pkg::InfoTypes), line:2:17, endln:2:36
     |vpiSigned:1
   |vpiTypedef:
   \_IntTypespec: , line:3:13, endln:3:16
@@ -898,15 +902,21 @@ Design: (unnamed)
     \_Package: flash_ctrl_pkg (flash_ctrl_pkg), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
     |vpiSigned:1
   |vpiTypedef:
-  \_ArrayTypespec: , line:3:30, endln:3:41
+  \_ArrayTypespec: , line:3:13, endln:7:4
     |vpiParent:
     \_Package: flash_ctrl_pkg (flash_ctrl_pkg), file:${SURELOG_DIR}/tests/ComplexBitSelect/dut.sv, line:1:1, endln:9:11
-    |vpiRange:
-    \_Range: , line:3:30, endln:3:41
+    |vpiArrayType:3
+    |vpiIndexTypespec:
+    \_RefTypespec: (flash_ctrl_pkg), line:3:30, endln:3:41
+      |vpiParent:
+      \_ArrayTypespec: , line:3:13, endln:7:4
+      |vpiFullName:flash_ctrl_pkg
+      |vpiActual:
+      \_IntTypespec: , line:2:13, endln:2:16
     |vpiElemTypespec:
     \_RefTypespec: (flash_ctrl_pkg), line:3:13, endln:3:16
       |vpiParent:
-      \_ArrayTypespec: , line:3:30, endln:3:41
+      \_ArrayTypespec: , line:3:13, endln:7:4
       |vpiFullName:flash_ctrl_pkg
       |vpiActual:
       \_IntTypespec: , line:3:13, endln:3:16
@@ -920,7 +930,7 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:3:13, endln:3:16
   |vpiImportTypespec:
-  \_ArrayTypespec: , line:3:30, endln:3:41
+  \_ArrayTypespec: , line:3:13, endln:7:4
   |vpiImportTypespec:
   \_IntTypespec: , line:8:13, endln:8:16
   |vpiDefName:flash_ctrl_pkg

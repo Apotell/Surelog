@@ -477,6 +477,7 @@ AST_DEBUG_END
 [INF:CP0302] Compile class "builtin::semaphore".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+ArrayTypespec                                          1
 Assignment                                             8
 Begin                                                  5
 BitSelect                                              2
@@ -496,22 +497,23 @@ IntTypespec                                           16
 IntVar                                                 2
 IntegerTypespec                                        6
 IntegerVar                                             1
+LogicNet                                               1
 LogicTypespec                                          2
-LogicVar                                               1
 Module                                                 2
-Operation                                             15
+Operation                                             14
 Package                                                4
 ParamAssign                                            4
 Parameter                                              4
-Range                                                  3
-RefObj                                                27
-RefTypespec                                           30
+Range                                                  4
+RefObj                                                29
+RefTypespec                                           34
 RefVar                                                 1
 ReturnStmt                                             3
 Task                                                   9
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:54:38: Failed to bind object: "id: 147, name: InfosPerBank".
-[ERR:EL0535] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:54:38: Illegal implicit net "id:147, name: InfosPerBank".
+[ERR:UH0734] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:54:38: Failed to bind object: "id: 158, name: InfosPerBank".
+[ERR:EL0535] ${SURELOG_DIR}/tests/EvalFuncPack/dut.sv:54:38: Illegal implicit net "id:158, name: InfosPerBank".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/EvalFuncPack/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -779,7 +781,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -813,14 +815,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/EvalFuncPack/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -828,7 +829,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -836,7 +837,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -844,7 +845,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -852,13 +853,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/EvalFuncPack/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1800,12 +1815,12 @@ Design: (unnamed)
             |vpiActual:
             \_Parameter: (flash_ctrl_pkg::InfoTypes), line:26:15, endln:26:28
       |vpiTypedef:
-      \_RefTypespec: (flash_ctrl_pkg::max_info_pages::infos), line:35:43, endln:35:46
+      \_RefTypespec: (flash_ctrl_pkg::max_info_pages::infos), line:35:43, endln:35:63
         |vpiParent:
         \_IODecl: (infos), line:35:47, endln:35:52
         |vpiFullName:flash_ctrl_pkg::max_info_pages::infos
         |vpiActual:
-        \_IntTypespec: , line:35:43, endln:35:46
+        \_ArrayTypespec: , line:35:43, endln:35:63
     |vpiStmt:
     \_Begin: (flash_ctrl_pkg::max_info_pages)
     |vpiInstance:
@@ -1814,6 +1829,14 @@ Design: (unnamed)
   \_IntTypespec: , line:26:11, endln:26:14
     |vpiParent:
     \_Package: flash_ctrl_pkg (flash_ctrl_pkg), file:${SURELOG_DIR}/tests/EvalFuncPack/dut.sv, line:24:1, endln:45:11
+    |vpiExpr:
+    \_RefObj: (flash_ctrl_pkg::InfoTypes), line:35:53, endln:35:62
+      |vpiParent:
+      \_IntTypespec: , line:26:11, endln:26:14
+      |vpiName:InfoTypes
+      |vpiFullName:flash_ctrl_pkg::InfoTypes
+      |vpiActual:
+      \_Parameter: (flash_ctrl_pkg::InfoTypes), line:26:15, endln:26:28
     |vpiSigned:1
   |vpiTypedef:
   \_IntTypespec: , line:27:11, endln:27:14
@@ -1825,6 +1848,25 @@ Design: (unnamed)
     |vpiParent:
     \_Package: flash_ctrl_pkg (flash_ctrl_pkg), file:${SURELOG_DIR}/tests/EvalFuncPack/dut.sv, line:24:1, endln:45:11
     |vpiSigned:1
+  |vpiTypedef:
+  \_ArrayTypespec: , line:35:43, endln:35:63
+    |vpiParent:
+    \_Package: flash_ctrl_pkg (flash_ctrl_pkg), file:${SURELOG_DIR}/tests/EvalFuncPack/dut.sv, line:24:1, endln:45:11
+    |vpiArrayType:3
+    |vpiIndexTypespec:
+    \_RefTypespec: (flash_ctrl_pkg), line:35:52, endln:35:63
+      |vpiParent:
+      \_ArrayTypespec: , line:35:43, endln:35:63
+      |vpiFullName:flash_ctrl_pkg
+      |vpiActual:
+      \_IntTypespec: , line:26:11, endln:26:14
+    |vpiElemTypespec:
+    \_RefTypespec: (flash_ctrl_pkg), line:35:43, endln:35:46
+      |vpiParent:
+      \_ArrayTypespec: , line:35:43, endln:35:63
+      |vpiFullName:flash_ctrl_pkg
+      |vpiActual:
+      \_IntTypespec: , line:35:43, endln:35:46
   |vpiImportTypespec:
   \_Function: (flash_ctrl_pkg::max_info_pages), line:35:1, endln:43:14
   |vpiImportTypespec:
@@ -1833,6 +1875,8 @@ Design: (unnamed)
   \_IntTypespec: , line:27:11, endln:27:14
   |vpiImportTypespec:
   \_IntTypespec: , line:33:12, endln:33:15
+  |vpiImportTypespec:
+  \_ArrayTypespec: , line:35:43, endln:35:63
   |vpiDefName:flash_ctrl_pkg
   |vpiTaskFunc:
   \_Function: (flash_ctrl_pkg::max_info_pages), line:35:1, endln:43:14
@@ -1902,22 +1946,6 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@flash_ctrl_info_cfg
-  |vpiVariables:
-  \_LogicVar: (work@flash_ctrl_info_cfg.CurPage), line:61:23, endln:61:30
-    |vpiParent:
-    \_Module: work@flash_ctrl_info_cfg (work@flash_ctrl_info_cfg), file:${SURELOG_DIR}/tests/EvalFuncPack/dut.sv, line:59:1, endln:63:10
-    |vpiTypespec:
-    \_RefTypespec: (work@flash_ctrl_info_cfg.CurPage), line:61:1, endln:61:22
-      |vpiParent:
-      \_LogicVar: (work@flash_ctrl_info_cfg.CurPage), line:61:23, endln:61:30
-      |vpiFullName:work@flash_ctrl_info_cfg.CurPage
-      |vpiActual:
-      \_LogicTypespec: , line:61:1, endln:61:22
-    |vpiName:CurPage
-    |vpiFullName:work@flash_ctrl_info_cfg.CurPage
-    |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@flash_ctrl_info_cfg.CurPage), line:61:23, endln:61:30
   |vpiTypedef:
   \_ImportTypespec: (flash_ctrl_pkg), line:59:35, endln:59:52
     |vpiParent:
@@ -1973,7 +2001,19 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:61:1, endln:61:22
   |vpiImportTypespec:
-  \_LogicVar: (work@flash_ctrl_info_cfg.CurPage), line:61:23, endln:61:30
+  \_LogicNet: (work@flash_ctrl_info_cfg.CurPage), line:61:23, endln:61:30
+    |vpiParent:
+    \_Module: work@flash_ctrl_info_cfg (work@flash_ctrl_info_cfg), file:${SURELOG_DIR}/tests/EvalFuncPack/dut.sv, line:59:1, endln:63:10
+    |vpiTypespec:
+    \_RefTypespec: (work@flash_ctrl_info_cfg.CurPage), line:61:1, endln:61:22
+      |vpiParent:
+      \_LogicNet: (work@flash_ctrl_info_cfg.CurPage), line:61:23, endln:61:30
+      |vpiFullName:work@flash_ctrl_info_cfg.CurPage
+      |vpiActual:
+      \_LogicTypespec: , line:61:1, endln:61:22
+    |vpiName:CurPage
+    |vpiFullName:work@flash_ctrl_info_cfg.CurPage
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicNet: (work@flash_ctrl_info_cfg.InfoPageW), line:61:8, endln:61:17
     |vpiParent:
@@ -1982,6 +2022,8 @@ Design: (unnamed)
     |vpiFullName:work@flash_ctrl_info_cfg.InfoPageW
     |vpiNetType:1
   |vpiDefName:work@flash_ctrl_info_cfg
+  |vpiNet:
+  \_LogicNet: (work@flash_ctrl_info_cfg.CurPage), line:61:23, endln:61:30
   |vpiNet:
   \_LogicNet: (work@flash_ctrl_info_cfg.InfoPageW), line:61:8, endln:61:17
 ===================

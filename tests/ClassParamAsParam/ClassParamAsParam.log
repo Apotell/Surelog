@@ -141,17 +141,17 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ClassDefn                                              4
-ClassTypespec                                          1
-ClassVar                                               1
+ClassTypespec                                          2
+ClassVar                                               2
 Design                                                 1
 Extends                                                1
 IntTypespec                                            4
-LogicVar                                               1
 MethodFuncCall                                         1
 Module                                                 1
-RefTypespec                                            6
+RefObj                                                 1
+RefTypespec                                            8
 TypeParameter                                          4
-UnsupportedTypespec                                    1
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassParamAsParam/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -275,15 +275,22 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:work@resource_db
   |vpiVariables:
-  \_LogicVar: (work@resource_db::rsrc), line:10:9, endln:10:13
+  \_ClassVar: (work@resource_db::rsrc), line:10:9, endln:10:13
     |vpiParent:
     \_ClassDefn: (work@resource_db), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:7:1, endln:12:9
+    |vpiTypespec:
+    \_RefTypespec: (work@resource_db::rsrc::rsrc_t), line:10:2, endln:10:8
+      |vpiParent:
+      \_ClassVar: (work@resource_db::rsrc), line:10:9, endln:10:13
+      |vpiName:rsrc_t
+      |vpiFullName:work@resource_db::rsrc::rsrc_t
+      |vpiActual:
+      \_TypedefTypespec: (rsrc_t), line:9:24, endln:9:30
     |vpiName:rsrc
     |vpiFullName:work@resource_db::rsrc
     |vpiAutomatic:1
+    |vpiRandType:1
     |vpiVisibility:1
-  |vpiReg:
-  \_LogicVar: (work@resource_db::rsrc), line:10:9, endln:10:13
   |vpiParameter:
   \_TypeParameter: (work@resource_db::T), line:7:26, endln:7:27
     |vpiParent:
@@ -305,20 +312,38 @@ Design: (unnamed)
   |vpiTypedef:
   \_TypeParameter: (work@resource_db::T), line:7:26, endln:7:27
   |vpiTypedef:
-  \_UnsupportedTypespec: (rsrc_t), line:10:2, endln:10:8
+  \_TypedefTypespec: (rsrc_t), line:9:24, endln:9:30
     |vpiParent:
     \_ClassDefn: (work@resource_db), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:7:1, endln:12:9
     |vpiName:rsrc_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@resource_db::rsrc_t), line:9:10, endln:9:18
+      |vpiParent:
+      \_TypedefTypespec: (rsrc_t), line:9:24, endln:9:30
+      |vpiFullName:work@resource_db::rsrc_t
+      |vpiActual:
+      \_ClassTypespec: (resource), line:9:10, endln:9:18
+  |vpiTypedef:
+  \_ClassTypespec: (resource), line:9:10, endln:9:18
+    |vpiParent:
+    \_ClassDefn: (work@resource_db), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:7:1, endln:12:9
+    |vpiName:resource
+    |vpiClassDefn:
+    \_ClassDefn: (work@resource), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:4:1, endln:5:9
   |vpiImportTypespec:
   \_IntTypespec: , line:7:28, endln:7:31
   |vpiImportTypespec:
   \_TypeParameter: (work@resource_db::T), line:7:26, endln:7:27
   |vpiImportTypespec:
-  \_UnsupportedTypespec: (rsrc_t), line:10:2, endln:10:8
+  \_TypedefTypespec: (rsrc_t), line:9:24, endln:9:30
   |vpiImportTypespec:
-  \_LogicVar: (work@resource_db::rsrc), line:10:9, endln:10:13
+  \_ClassTypespec: (resource), line:9:10, endln:9:18
+  |vpiImportTypespec:
+  \_ClassVar: (work@resource_db::rsrc), line:10:9, endln:10:13
   |vpiDerivedClasses:
   \_ClassDefn: (work@config_db), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:14:1, endln:15:9
+  |vpiClassTypespec:
+  \_ClassTypespec: (resource), line:9:10, endln:9:18
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClassParamAsParam/dut.sv, line:17:1, endln:19:10
   |vpiParent:
@@ -338,6 +363,7 @@ Design: (unnamed)
       \_ClassTypespec: (config_db), line:18:3, endln:18:12
     |vpiName:misc2
     |vpiFullName:work@top.misc2
+    |vpiRandType:1
     |vpiVisibility:1
     |vpiExpr:
     \_MethodFuncCall: (new), line:18:40, endln:18:43

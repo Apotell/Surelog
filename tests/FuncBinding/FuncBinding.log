@@ -569,8 +569,8 @@ Constant                                              17
 DelayControl                                           2
 Design                                                 1
 EnumConst                                              3
+EnumNet                                                2
 EnumTypespec                                           1
-EnumVar                                                2
 EventControl                                           2
 FuncCall                                               1
 Function                                               1
@@ -582,7 +582,8 @@ Operation                                              7
 Port                                                   6
 Range                                                  3
 RefObj                                                36
-RefTypespec                                           20
+RefTypespec                                           21
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FuncBinding/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -607,6 +608,7 @@ Design: (unnamed)
       \_BitTypespec: , line:2:7, endln:2:10
     |vpiName:clock
     |vpiFullName:work@fsm_using_function.clock
+    |vpiRandType:1
     |vpiVisibility:1
   |vpiVariables:
   \_BitVar: (work@fsm_using_function.reset), line:3:11, endln:3:16
@@ -621,6 +623,7 @@ Design: (unnamed)
       \_BitTypespec: , line:3:7, endln:3:10
     |vpiName:reset
     |vpiFullName:work@fsm_using_function.reset
+    |vpiRandType:1
     |vpiVisibility:1
   |vpiVariables:
   \_BitVar: (work@fsm_using_function.req_0), line:4:11, endln:4:16
@@ -635,6 +638,7 @@ Design: (unnamed)
       \_BitTypespec: , line:4:7, endln:4:10
     |vpiName:req_0
     |vpiFullName:work@fsm_using_function.req_0
+    |vpiRandType:1
     |vpiVisibility:1
   |vpiVariables:
   \_BitVar: (work@fsm_using_function.req_1), line:5:11, endln:5:16
@@ -649,6 +653,7 @@ Design: (unnamed)
       \_BitTypespec: , line:5:7, endln:5:10
     |vpiName:req_1
     |vpiFullName:work@fsm_using_function.req_1
+    |vpiRandType:1
     |vpiVisibility:1
   |vpiVariables:
   \_BitVar: (work@fsm_using_function.gnt_0), line:6:12, endln:6:17
@@ -663,6 +668,7 @@ Design: (unnamed)
       \_BitTypespec: , line:6:8, endln:6:11
     |vpiName:gnt_0
     |vpiFullName:work@fsm_using_function.gnt_0
+    |vpiRandType:1
     |vpiVisibility:1
   |vpiVariables:
   \_BitVar: (work@fsm_using_function.gnt_1), line:7:12, endln:7:17
@@ -677,36 +683,7 @@ Design: (unnamed)
       \_BitTypespec: , line:7:8, endln:7:11
     |vpiName:gnt_1
     |vpiFullName:work@fsm_using_function.gnt_1
-    |vpiVisibility:1
-  |vpiVariables:
-  \_EnumVar: (work@fsm_using_function.curr_state), line:12:7, endln:12:17
-    |vpiParent:
-    \_Module: work@fsm_using_function (work@fsm_using_function), file:${SURELOG_DIR}/tests/FuncBinding/dut.sv, line:1:1, endln:53:10
-    |vpiTypespec:
-    \_RefTypespec: (work@fsm_using_function.curr_state.state), line:12:1, endln:12:6
-      |vpiParent:
-      \_EnumVar: (work@fsm_using_function.curr_state), line:12:7, endln:12:17
-      |vpiName:state
-      |vpiFullName:work@fsm_using_function.curr_state.state
-      |vpiActual:
-      \_EnumTypespec: (state), line:11:9, endln:11:60
-    |vpiName:curr_state
-    |vpiFullName:work@fsm_using_function.curr_state
-    |vpiVisibility:1
-  |vpiVariables:
-  \_EnumVar: (work@fsm_using_function.next_state), line:12:19, endln:12:29
-    |vpiParent:
-    \_Module: work@fsm_using_function (work@fsm_using_function), file:${SURELOG_DIR}/tests/FuncBinding/dut.sv, line:1:1, endln:53:10
-    |vpiTypespec:
-    \_RefTypespec: (work@fsm_using_function.next_state.state), line:12:1, endln:12:6
-      |vpiParent:
-      \_EnumVar: (work@fsm_using_function.next_state), line:12:19, endln:12:29
-      |vpiName:state
-      |vpiFullName:work@fsm_using_function.next_state.state
-      |vpiActual:
-      \_EnumTypespec: (state), line:11:9, endln:11:60
-    |vpiName:next_state
-    |vpiFullName:work@fsm_using_function.next_state
+    |vpiRandType:1
     |vpiVisibility:1
   |vpiInternalScope:
   \_Function: (work@fsm_using_function.fsm_function), line:21:1, endln:42:12
@@ -1209,6 +1186,41 @@ Design: (unnamed)
             |vpiActual:
             \_IODecl: (future_state), line:21:100, endln:21:112
   |vpiTypedef:
+  \_EnumTypespec: , line:11:9, endln:11:60
+    |vpiParent:
+    \_Module: work@fsm_using_function (work@fsm_using_function), file:${SURELOG_DIR}/tests/FuncBinding/dut.sv, line:1:1, endln:53:10
+    |vpiBaseTypespec:
+    \_RefTypespec: (work@fsm_using_function), line:11:14, endln:11:25
+      |vpiParent:
+      \_EnumTypespec: , line:11:9, endln:11:60
+      |vpiFullName:work@fsm_using_function
+      |vpiActual:
+      \_LogicTypespec: , line:11:14, endln:11:25
+    |vpiEnumConst:
+    \_EnumConst: (IDLE), line:11:27, endln:11:35
+      |vpiParent:
+      \_EnumTypespec: , line:11:9, endln:11:60
+      |vpiName:IDLE
+      |UINT:1
+      |vpiDecompile:1
+      |vpiSize:64
+    |vpiEnumConst:
+    \_EnumConst: (GNT0), line:11:36, endln:11:44
+      |vpiParent:
+      \_EnumTypespec: , line:11:9, endln:11:60
+      |vpiName:GNT0
+      |UINT:2
+      |vpiDecompile:2
+      |vpiSize:64
+    |vpiEnumConst:
+    \_EnumConst: (GNT1), line:11:45, endln:11:53
+      |vpiParent:
+      \_EnumTypespec: , line:11:9, endln:11:60
+      |vpiName:GNT1
+      |UINT:3
+      |vpiDecompile:3
+      |vpiSize:64
+  |vpiTypedef:
   \_LogicTypespec: , line:11:14, endln:11:25
     |vpiParent:
     \_Module: work@fsm_using_function (work@fsm_using_function), file:${SURELOG_DIR}/tests/FuncBinding/dut.sv, line:1:1, endln:53:10
@@ -1233,41 +1245,17 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_EnumTypespec: (state), line:11:9, endln:11:60
+  \_TypedefTypespec: (state), line:11:55, endln:11:60
     |vpiParent:
     \_Module: work@fsm_using_function (work@fsm_using_function), file:${SURELOG_DIR}/tests/FuncBinding/dut.sv, line:1:1, endln:53:10
     |vpiName:state
-    |vpiBaseTypespec:
-    \_RefTypespec: (work@fsm_using_function.state), line:11:14, endln:11:25
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@fsm_using_function.state), line:11:9, endln:11:54
       |vpiParent:
-      \_EnumTypespec: (state), line:11:9, endln:11:60
+      \_TypedefTypespec: (state), line:11:55, endln:11:60
       |vpiFullName:work@fsm_using_function.state
       |vpiActual:
-      \_LogicTypespec: , line:11:14, endln:11:25
-    |vpiEnumConst:
-    \_EnumConst: (IDLE), line:11:27, endln:11:35
-      |vpiParent:
-      \_EnumTypespec: (state), line:11:9, endln:11:60
-      |vpiName:IDLE
-      |UINT:1
-      |vpiDecompile:1
-      |vpiSize:64
-    |vpiEnumConst:
-    \_EnumConst: (GNT0), line:11:36, endln:11:44
-      |vpiParent:
-      \_EnumTypespec: (state), line:11:9, endln:11:60
-      |vpiName:GNT0
-      |UINT:2
-      |vpiDecompile:2
-      |vpiSize:64
-    |vpiEnumConst:
-    \_EnumConst: (GNT1), line:11:45, endln:11:53
-      |vpiParent:
-      \_EnumTypespec: (state), line:11:9, endln:11:60
-      |vpiName:GNT1
-      |UINT:3
-      |vpiDecompile:3
-      |vpiSize:64
+      \_EnumTypespec: , line:11:9, endln:11:60
   |vpiTypedef:
   \_BitTypespec: , line:2:7, endln:2:10
     |vpiParent:
@@ -1319,9 +1307,11 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_Function: (work@fsm_using_function.fsm_function), line:21:1, endln:42:12
   |vpiImportTypespec:
+  \_EnumTypespec: , line:11:9, endln:11:60
+  |vpiImportTypespec:
   \_LogicTypespec: , line:11:14, endln:11:25
   |vpiImportTypespec:
-  \_EnumTypespec: (state), line:11:9, endln:11:60
+  \_TypedefTypespec: (state), line:11:55, endln:11:60
   |vpiImportTypespec:
   \_BitTypespec: , line:2:7, endln:2:10
   |vpiImportTypespec:
@@ -1347,9 +1337,33 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_BitVar: (work@fsm_using_function.gnt_1), line:7:12, endln:7:17
   |vpiImportTypespec:
-  \_EnumVar: (work@fsm_using_function.curr_state), line:12:7, endln:12:17
+  \_EnumNet: (work@fsm_using_function.curr_state), line:12:7, endln:12:17
+    |vpiParent:
+    \_Module: work@fsm_using_function (work@fsm_using_function), file:${SURELOG_DIR}/tests/FuncBinding/dut.sv, line:1:1, endln:53:10
+    |vpiTypespec:
+    \_RefTypespec: (work@fsm_using_function.curr_state.state), line:12:1, endln:12:6
+      |vpiParent:
+      \_EnumNet: (work@fsm_using_function.curr_state), line:12:7, endln:12:17
+      |vpiName:state
+      |vpiFullName:work@fsm_using_function.curr_state.state
+      |vpiActual:
+      \_TypedefTypespec: (state), line:11:55, endln:11:60
+    |vpiName:curr_state
+    |vpiFullName:work@fsm_using_function.curr_state
   |vpiImportTypespec:
-  \_EnumVar: (work@fsm_using_function.next_state), line:12:19, endln:12:29
+  \_EnumNet: (work@fsm_using_function.next_state), line:12:19, endln:12:29
+    |vpiParent:
+    \_Module: work@fsm_using_function (work@fsm_using_function), file:${SURELOG_DIR}/tests/FuncBinding/dut.sv, line:1:1, endln:53:10
+    |vpiTypespec:
+    \_RefTypespec: (work@fsm_using_function.next_state.state), line:12:1, endln:12:6
+      |vpiParent:
+      \_EnumNet: (work@fsm_using_function.next_state), line:12:19, endln:12:29
+      |vpiName:state
+      |vpiFullName:work@fsm_using_function.next_state.state
+      |vpiActual:
+      \_TypedefTypespec: (state), line:11:55, endln:11:60
+    |vpiName:next_state
+    |vpiFullName:work@fsm_using_function.next_state
   |vpiImportTypespec:
   \_BitTypespec: , line:2:7, endln:2:10
   |vpiImportTypespec:
@@ -1365,6 +1379,10 @@ Design: (unnamed)
   |vpiDefName:work@fsm_using_function
   |vpiTaskFunc:
   \_Function: (work@fsm_using_function.fsm_function), line:21:1, endln:42:12
+  |vpiNet:
+  \_EnumNet: (work@fsm_using_function.curr_state), line:12:7, endln:12:17
+  |vpiNet:
+  \_EnumNet: (work@fsm_using_function.next_state), line:12:19, endln:12:29
   |vpiPort:
   \_Port: (clock), line:2:11, endln:2:16
     |vpiParent:
@@ -1485,7 +1503,7 @@ Design: (unnamed)
               |vpiName:curr_state
               |vpiFullName:work@fsm_using_function.FUN.curr_state
               |vpiActual:
-              \_EnumVar: (work@fsm_using_function.curr_state), line:12:7, endln:12:17
+              \_EnumNet: (work@fsm_using_function.curr_state), line:12:7, endln:12:17
             |vpiArgument:
             \_RefObj: (work@fsm_using_function.FUN.req_0), line:17:47, endln:17:52
               |vpiParent:
@@ -1509,7 +1527,7 @@ Design: (unnamed)
               |vpiName:next_state
               |vpiFullName:work@fsm_using_function.FUN.next_state
               |vpiActual:
-              \_EnumVar: (work@fsm_using_function.next_state), line:12:19, endln:12:29
+              \_EnumNet: (work@fsm_using_function.next_state), line:12:19, endln:12:29
             |vpiName:fsm_function
             |vpiFunction:
             \_Function: (work@fsm_using_function.fsm_function), line:21:1, endln:42:12
@@ -1520,7 +1538,7 @@ Design: (unnamed)
             |vpiName:next_state
             |vpiFullName:work@fsm_using_function.FUN.next_state
             |vpiActual:
-            \_EnumVar: (work@fsm_using_function.next_state), line:12:19, endln:12:29
+            \_EnumNet: (work@fsm_using_function.next_state), line:12:19, endln:12:29
     |vpiAlwaysType:1
   |vpiProcess:
   \_Always: , line:45:1, endln:52:4
@@ -1599,7 +1617,7 @@ Design: (unnamed)
                 |vpiName:curr_state
                 |vpiFullName:work@fsm_using_function.FSM_SEQ.curr_state
                 |vpiActual:
-                \_EnumVar: (work@fsm_using_function.curr_state), line:12:7, endln:12:17
+                \_EnumNet: (work@fsm_using_function.curr_state), line:12:7, endln:12:17
               |vpiDelayControl:
               \_DelayControl: , line:48:19, endln:48:21
                 |vpiParent:
@@ -1622,7 +1640,7 @@ Design: (unnamed)
                 |vpiName:next_state
                 |vpiFullName:work@fsm_using_function.FSM_SEQ.next_state
                 |vpiActual:
-                \_EnumVar: (work@fsm_using_function.next_state), line:12:19, endln:12:29
+                \_EnumNet: (work@fsm_using_function.next_state), line:12:19, endln:12:29
               |vpiLhs:
               \_RefObj: (work@fsm_using_function.FSM_SEQ.curr_state), line:50:5, endln:50:15
                 |vpiParent:
@@ -1630,7 +1648,7 @@ Design: (unnamed)
                 |vpiName:curr_state
                 |vpiFullName:work@fsm_using_function.FSM_SEQ.curr_state
                 |vpiActual:
-                \_EnumVar: (work@fsm_using_function.curr_state), line:12:7, endln:12:17
+                \_EnumNet: (work@fsm_using_function.curr_state), line:12:7, endln:12:17
               |vpiDelayControl:
               \_DelayControl: , line:50:19, endln:50:21
                 |vpiParent:

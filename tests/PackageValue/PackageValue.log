@@ -618,8 +618,9 @@ ParamAssign                                           14
 Parameter                                             14
 Range                                                 13
 RefObj                                                43
-RefTypespec                                           40
+RefTypespec                                           42
 Task                                                   9
+TypedefTypespec                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageValue/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -888,7 +889,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -922,14 +923,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/PackageValue/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -937,7 +937,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -945,7 +945,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -953,7 +953,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -961,13 +961,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/PackageValue/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1170,26 +1184,20 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:prim_pkg
   |vpiTypedef:
-  \_IntegerTypespec: , line:4:16, endln:4:23
+  \_EnumTypespec: , line:4:11, endln:7:11
     |vpiParent:
     \_Package: prim_pkg (prim_pkg), file:${SURELOG_DIR}/tests/PackageValue/top.sv, line:1:1, endln:9:11
-    |vpiSigned:1
-  |vpiTypedef:
-  \_EnumTypespec: (prim_pkg::impl_e), line:4:11, endln:7:11
-    |vpiParent:
-    \_Package: prim_pkg (prim_pkg), file:${SURELOG_DIR}/tests/PackageValue/top.sv, line:1:1, endln:9:11
-    |vpiName:prim_pkg::impl_e
     |vpiBaseTypespec:
-    \_RefTypespec: (prim_pkg::impl_e), line:4:16, endln:4:23
+    \_RefTypespec: (prim_pkg), line:4:16, endln:4:23
       |vpiParent:
-      \_EnumTypespec: (prim_pkg::impl_e), line:4:11, endln:7:11
-      |vpiFullName:prim_pkg::impl_e
+      \_EnumTypespec: , line:4:11, endln:7:11
+      |vpiFullName:prim_pkg
       |vpiActual:
       \_IntegerTypespec: , line:4:16, endln:4:23
     |vpiEnumConst:
     \_EnumConst: (ImplGeneric), line:5:5, endln:5:20
       |vpiParent:
-      \_EnumTypespec: (prim_pkg::impl_e), line:4:11, endln:7:11
+      \_EnumTypespec: , line:4:11, endln:7:11
       |vpiName:ImplGeneric
       |UINT:1
       |vpiDecompile:1
@@ -1197,15 +1205,34 @@ Design: (unnamed)
     |vpiEnumConst:
     \_EnumConst: (ImplXilinx), line:6:5, endln:6:20
       |vpiParent:
-      \_EnumTypespec: (prim_pkg::impl_e), line:4:11, endln:7:11
+      \_EnumTypespec: , line:4:11, endln:7:11
       |vpiName:ImplXilinx
       |UINT:0
       |vpiDecompile:0
       |vpiSize:64
+  |vpiTypedef:
+  \_IntegerTypespec: , line:4:16, endln:4:23
+    |vpiParent:
+    \_Package: prim_pkg (prim_pkg), file:${SURELOG_DIR}/tests/PackageValue/top.sv, line:1:1, endln:9:11
+    |vpiSigned:1
+  |vpiTypedef:
+  \_TypedefTypespec: (prim_pkg::impl_e), line:7:5, endln:7:11
+    |vpiParent:
+    \_Package: prim_pkg (prim_pkg), file:${SURELOG_DIR}/tests/PackageValue/top.sv, line:1:1, endln:9:11
+    |vpiName:prim_pkg::impl_e
+    |vpiTypedefAlias:
+    \_RefTypespec: (prim_pkg::impl_e), line:4:11, endln:7:4
+      |vpiParent:
+      \_TypedefTypespec: (prim_pkg::impl_e), line:7:5, endln:7:11
+      |vpiFullName:prim_pkg::impl_e
+      |vpiActual:
+      \_EnumTypespec: , line:4:11, endln:7:11
+  |vpiImportTypespec:
+  \_EnumTypespec: , line:4:11, endln:7:11
   |vpiImportTypespec:
   \_IntegerTypespec: , line:4:16, endln:4:23
   |vpiImportTypespec:
-  \_EnumTypespec: (prim_pkg::impl_e), line:4:11, endln:7:11
+  \_TypedefTypespec: (prim_pkg::impl_e), line:7:5, endln:7:11
   |vpiDefName:prim_pkg
 |vpiAllPackages:
 \_Package: riscv (riscv), file:${SURELOG_DIR}/tests/PackageValue/top.sv, line:37:1, endln:53:11
@@ -2092,7 +2119,7 @@ Design: (unnamed)
       |vpiName:prim_pkg::impl_e
       |vpiFullName:work@prim_diff_decode.Impl.prim_pkg::impl_e
       |vpiActual:
-      \_EnumTypespec: (prim_pkg::impl_e), line:4:11, endln:7:11
+      \_TypedefTypespec: (prim_pkg::impl_e), line:7:5, endln:7:11
     |vpiName:Impl
     |vpiFullName:work@prim_diff_decode.Impl
   |vpiParamAssign:

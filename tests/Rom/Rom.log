@@ -169,28 +169,29 @@ AST_DEBUG_END
 [INF:CP0302] Compile class "builtin::semaphore".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
+ArrayNet                                               1
 ArrayTypespec                                          2
-ArrayVar                                               1
 ClassDefn                                              8
 ClassTypespec                                          1
-Constant                                              28
+Constant                                              22
 Design                                                 1
 EnumConst                                              5
 EnumTypespec                                           1
 Function                                               9
 IODecl                                                11
 IntTypespec                                           10
+LogicNet                                               1
 LogicTypespec                                          3
-LogicVar                                               2
 Module                                                 2
-Operation                                             10
+Operation                                              9
 Package                                                1
 ParamAssign                                            1
 Parameter                                              1
-Range                                                  9
-RefObj                                                 2
+Range                                                  6
+RefObj                                                 1
 RefTypespec                                           18
 Task                                                   9
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/Rom/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -459,7 +460,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -493,14 +494,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/Rom/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -508,7 +508,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -516,7 +516,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -524,7 +524,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -532,13 +532,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/Rom/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -740,167 +754,18 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@top
-  |vpiVariables:
-  \_LogicVar: (work@top.mem), line:3:33, endln:3:36
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/Rom/dut.sv, line:1:1, endln:20:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top.mem), line:3:7, endln:3:32
-      |vpiParent:
-      \_LogicVar: (work@top.mem), line:3:33, endln:3:36
-      |vpiFullName:work@top.mem
-      |vpiActual:
-      \_LogicTypespec: , line:3:7, endln:3:32
-    |vpiName:mem
-    |vpiFullName:work@top.mem
-    |vpiConstantVariable:1
-    |vpiVisibility:1
-    |vpiExpr:
-    \_Operation: , line:3:39, endln:6:7
-      |vpiParent:
-      \_LogicVar: (work@top.mem), line:3:33, endln:3:36
-      |vpiOpType:33
-      |vpiOperand:
-      \_Constant: , line:4:8, endln:4:29
-        |vpiParent:
-        \_Operation: , line:3:39, endln:6:7
-        |vpiDecompile:64'h000000007b200073
-        |vpiSize:64
-        |HEX:000000007b200073
-        |vpiConstType:5
-      |vpiOperand:
-      \_Constant: , line:5:8, endln:5:29
-        |vpiParent:
-        \_Operation: , line:3:39, endln:6:7
-        |vpiDecompile:64'h7b3025737b202473
-        |vpiSize:64
-        |HEX:7b3025737b202473
-        |vpiConstType:5
-  |vpiVariables:
-  \_LogicVar: (work@top), line:8:20, endln:8:28
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/Rom/dut.sv, line:1:1, endln:20:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top), line:8:8, endln:8:19
-      |vpiParent:
-      \_LogicVar: (work@top), line:8:20, endln:8:28
-      |vpiFullName:work@top
-      |vpiActual:
-      \_LogicTypespec: , line:8:8, endln:8:19
-    |vpiFullName:work@top
-    |vpiExpr:
-    \_Operation: , line:8:37, endln:11:4
-      |vpiParent:
-      \_ArrayVar: (work@top.sbox_enc), line:8:20, endln:8:28
-      |vpiOpType:75
-      |vpiOperand:
-      \_Constant: , line:9:7, endln:9:12
-        |vpiParent:
-        \_Operation: , line:8:37, endln:11:4
-        |vpiDecompile:8'h63
-        |vpiSize:8
-        |HEX:63
-        |vpiConstType:5
-      |vpiOperand:
-      \_Constant: , line:10:7, endln:10:12
-        |vpiParent:
-        \_Operation: , line:8:37, endln:11:4
-        |vpiDecompile:8'h7C
-        |vpiSize:8
-        |HEX:7C
-        |vpiConstType:5
-  |vpiVariables:
-  \_ArrayVar: (work@top.sbox_enc), line:8:20, endln:8:28
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/Rom/dut.sv, line:1:1, endln:20:10
-    |vpiSize:1
-    |vpiTypespec:
-    \_RefTypespec: (work@top.sbox_enc), line:8:29, endln:8:34
-      |vpiParent:
-      \_ArrayVar: (work@top.sbox_enc), line:8:20, endln:8:28
-      |vpiFullName:work@top.sbox_enc
-      |vpiActual:
-      \_ArrayTypespec: , line:8:29, endln:8:34
-    |vpiName:sbox_enc
-    |vpiFullName:work@top.sbox_enc
-    |vpiConstantVariable:1
-    |vpiRandType:1
-    |vpiVisibility:1
-    |vpiExpr:
-    \_Operation: , line:8:37, endln:11:4
-    |vpiArrayType:1
-    |vpiRange:
-    \_Range: , line:8:29, endln:8:34
-      |vpiParent:
-      \_ArrayVar: (work@top.sbox_enc), line:8:20, endln:8:28
-      |vpiRightRange:
-      \_Operation: , line:8:30, endln:8:33
-        |vpiParent:
-        \_Range: , line:8:29, endln:8:34
-        |vpiOpType:11
-        |vpiOperand:
-        \_Constant: , line:8:30, endln:8:33
-          |vpiParent:
-          \_Operation: , line:8:30, endln:8:33
-          |vpiDecompile:256
-          |vpiSize:64
-          |UINT:256
-          |vpiConstType:9
-    |vpiReg:
-    \_LogicVar: (work@top), line:8:20, endln:8:28
-  |vpiReg:
-  \_LogicVar: (work@top.mem), line:3:33, endln:3:36
-  |vpiReg:
-  \_LogicVar: (work@top), line:8:20, endln:8:28
-  |vpiRegArray:
-  \_ArrayVar: (work@top.sbox_enc), line:8:20, endln:8:28
   |vpiParameter:
   \_Parameter: (work@top.RhoOffset), line:13:18, endln:17:7
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/Rom/dut.sv, line:1:1, endln:20:10
-    |vpiSize:1
     |vpiTypespec:
     \_RefTypespec: (work@top.RhoOffset), line:13:14, endln:13:17
       |vpiParent:
       \_Parameter: (work@top.RhoOffset), line:13:18, endln:17:7
       |vpiFullName:work@top.RhoOffset
       |vpiActual:
-      \_ArrayTypespec: , line:13:28, endln:13:34
+      \_ArrayTypespec: , line:13:14, endln:17:7
     |vpiSigned:1
-    |vpiRange:
-    \_Range: , line:13:28, endln:13:31
-      |vpiParent:
-      \_Parameter: (work@top.RhoOffset), line:13:18, endln:17:7
-      |vpiRightRange:
-      \_Operation: , line:13:29, endln:13:30
-        |vpiParent:
-        \_Range: , line:13:28, endln:13:31
-        |vpiOpType:11
-        |vpiOperand:
-        \_Constant: , line:13:29, endln:13:30
-          |vpiParent:
-          \_Operation: , line:13:29, endln:13:30
-          |vpiDecompile:5
-          |vpiSize:64
-          |UINT:5
-          |vpiConstType:9
-    |vpiRange:
-    \_Range: , line:13:31, endln:13:34
-      |vpiParent:
-      \_Parameter: (work@top.RhoOffset), line:13:18, endln:17:7
-      |vpiRightRange:
-      \_Operation: , line:13:32, endln:13:33
-        |vpiParent:
-        \_Range: , line:13:31, endln:13:34
-        |vpiOpType:11
-        |vpiOperand:
-        \_Constant: , line:13:32, endln:13:33
-          |vpiParent:
-          \_Operation: , line:13:32, endln:13:33
-          |vpiDecompile:5
-          |vpiSize:64
-          |UINT:5
-          |vpiConstType:9
     |vpiLocalParam:1
     |vpiName:RhoOffset
     |vpiFullName:work@top.RhoOffset
@@ -963,17 +828,48 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/Rom/dut.sv, line:1:1, endln:20:10
     |vpiSigned:1
   |vpiTypedef:
-  \_ArrayTypespec: , line:13:28, endln:13:34
+  \_ArrayTypespec: , line:13:14, endln:17:7
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/Rom/dut.sv, line:1:1, endln:20:10
+    |vpiArrayType:1
     |vpiRange:
     \_Range: , line:13:28, endln:13:31
+      |vpiParent:
+      \_ArrayTypespec: , line:13:14, endln:17:7
+      |vpiRightRange:
+      \_Operation: , line:13:29, endln:13:30
+        |vpiParent:
+        \_Range: , line:13:28, endln:13:31
+        |vpiOpType:11
+        |vpiOperand:
+        \_Constant: , line:13:29, endln:13:30
+          |vpiParent:
+          \_Operation: , line:13:29, endln:13:30
+          |vpiDecompile:5
+          |vpiSize:64
+          |UINT:5
+          |vpiConstType:9
     |vpiRange:
     \_Range: , line:13:31, endln:13:34
+      |vpiParent:
+      \_ArrayTypespec: , line:13:14, endln:17:7
+      |vpiRightRange:
+      \_Operation: , line:13:32, endln:13:33
+        |vpiParent:
+        \_Range: , line:13:31, endln:13:34
+        |vpiOpType:11
+        |vpiOperand:
+        \_Constant: , line:13:32, endln:13:33
+          |vpiParent:
+          \_Operation: , line:13:32, endln:13:33
+          |vpiDecompile:5
+          |vpiSize:64
+          |UINT:5
+          |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@top), line:13:14, endln:13:17
       |vpiParent:
-      \_ArrayTypespec: , line:13:28, endln:13:34
+      \_ArrayTypespec: , line:13:14, endln:17:7
       |vpiFullName:work@top
       |vpiActual:
       \_IntTypespec: , line:13:14, endln:13:17
@@ -1059,32 +955,72 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_ArrayTypespec: , line:8:29, endln:8:34
+  \_ArrayTypespec: , line:8:8, endln:11:4
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/Rom/dut.sv, line:1:1, endln:20:10
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:8:29, endln:8:34
+      |vpiParent:
+      \_ArrayTypespec: , line:8:8, endln:11:4
+      |vpiRightRange:
+      \_Operation: , line:8:30, endln:8:33
+        |vpiParent:
+        \_Range: , line:8:29, endln:8:34
+        |vpiOpType:11
+        |vpiOperand:
+        \_Constant: , line:8:30, endln:8:33
+          |vpiParent:
+          \_Operation: , line:8:30, endln:8:33
+          |vpiDecompile:256
+          |vpiSize:64
+          |UINT:256
+          |vpiConstType:9
     |vpiElemTypespec:
     \_RefTypespec: (work@top), line:8:8, endln:8:19
       |vpiParent:
-      \_ArrayTypespec: , line:8:29, endln:8:34
+      \_ArrayTypespec: , line:8:8, endln:11:4
       |vpiFullName:work@top
       |vpiActual:
       \_LogicTypespec: , line:8:8, endln:8:19
   |vpiImportTypespec:
   \_IntTypespec: , line:13:14, endln:13:17
   |vpiImportTypespec:
-  \_ArrayTypespec: , line:13:28, endln:13:34
+  \_ArrayTypespec: , line:13:14, endln:17:7
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:7, endln:3:32
   |vpiImportTypespec:
-  \_LogicVar: (work@top.mem), line:3:33, endln:3:36
+  \_LogicNet: (work@top.mem), line:3:33, endln:3:36
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/Rom/dut.sv, line:1:1, endln:20:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.mem), line:3:7, endln:3:32
+      |vpiParent:
+      \_LogicNet: (work@top.mem), line:3:33, endln:3:36
+      |vpiFullName:work@top.mem
+      |vpiActual:
+      \_LogicTypespec: , line:3:7, endln:3:32
+    |vpiName:mem
+    |vpiFullName:work@top.mem
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicTypespec: , line:8:8, endln:8:19
   |vpiImportTypespec:
-  \_LogicVar: (work@top), line:8:20, endln:8:28
+  \_ArrayTypespec: , line:8:8, endln:11:4
   |vpiImportTypespec:
-  \_ArrayVar: (work@top.sbox_enc), line:8:20, endln:8:28
-  |vpiImportTypespec:
-  \_ArrayTypespec: , line:8:29, endln:8:34
+  \_ArrayNet: (work@top.sbox_enc), line:8:20, endln:8:28
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/Rom/dut.sv, line:1:1, endln:20:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.sbox_enc), line:8:8, endln:8:19
+      |vpiParent:
+      \_ArrayNet: (work@top.sbox_enc), line:8:20, endln:8:28
+      |vpiFullName:work@top.sbox_enc
+      |vpiActual:
+      \_ArrayTypespec: , line:8:8, endln:11:4
+    |vpiName:sbox_enc
+    |vpiFullName:work@top.sbox_enc
+    |vpiNetType:36
   |vpiImportTypespec:
   \_LogicNet: (work@top.RomSize), line:3:14, endln:3:21
     |vpiParent:
@@ -1094,7 +1030,11 @@ Design: (unnamed)
     |vpiNetType:1
   |vpiDefName:work@top
   |vpiNet:
+  \_LogicNet: (work@top.mem), line:3:33, endln:3:36
+  |vpiNet:
   \_LogicNet: (work@top.RomSize), line:3:14, endln:3:21
+  |vpiArrayNet:
+  \_ArrayNet: (work@top.sbox_enc), line:8:20, endln:8:28
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

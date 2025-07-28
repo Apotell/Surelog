@@ -251,12 +251,13 @@ IntTypespec                                            2
 Module                                                 4
 ModuleTypespec                                         2
 Operation                                              5
+PackedArrayTypespec                                    1
 ParamAssign                                            5
 Parameter                                              5
 Range                                                  1
 RefModule                                              2
 RefObj                                                 4
-RefTypespec                                            3
+RefTypespec                                            4
 RefVar                                                 1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PartSelect4/slpp_all/surelog.uhdm ...
@@ -323,7 +324,7 @@ Design: (unnamed)
       \_Parameter: (work@tlul_socket_1n.DReqDepth), line:5:75, endln:5:84
       |vpiFullName:work@tlul_socket_1n.DReqDepth
       |vpiActual:
-      \_BitTypespec: , line:5:61, endln:5:74
+      \_PackedArrayTypespec: , line:5:61, endln:5:74
     |vpiName:DReqDepth
     |vpiFullName:work@tlul_socket_1n.DReqDepth
   |vpiParamAssign:
@@ -441,13 +442,17 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@tlul_socket_1n (work@tlul_socket_1n), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:5:1, endln:9:10
   |vpiTypedef:
-  \_BitTypespec: , line:5:61, endln:5:74
+  \_BitTypespec: , line:5:61, endln:5:64
+    |vpiParent:
+    \_Module: work@tlul_socket_1n (work@tlul_socket_1n), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:5:1, endln:9:10
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:5:61, endln:5:74
     |vpiParent:
     \_Module: work@tlul_socket_1n (work@tlul_socket_1n), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:5:1, endln:9:10
     |vpiRange:
     \_Range: , line:5:65, endln:5:74
       |vpiParent:
-      \_BitTypespec: , line:5:61, endln:5:74
+      \_PackedArrayTypespec: , line:5:61, endln:5:74
       |vpiLeftRange:
       \_Operation: , line:5:66, endln:5:71
         |vpiParent:
@@ -490,10 +495,19 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@tlul_socket_1n), line:5:61, endln:5:64
+      |vpiParent:
+      \_PackedArrayTypespec: , line:5:61, endln:5:74
+      |vpiFullName:work@tlul_socket_1n
+      |vpiActual:
+      \_BitTypespec: , line:5:61, endln:5:64
   |vpiImportTypespec:
   \_IntTypespec: , line:5:35, endln:5:47
   |vpiImportTypespec:
-  \_BitTypespec: , line:5:61, endln:5:74
+  \_BitTypespec: , line:5:61, endln:5:64
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:5:61, endln:5:74
   |vpiDefName:work@tlul_socket_1n
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PartSelect4/dut.sv, line:16:1, endln:21:10

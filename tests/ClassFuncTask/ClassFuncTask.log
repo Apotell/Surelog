@@ -190,22 +190,23 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Assignment                                             1
 BitTypespec                                            1
-BitVar                                                 1
 ClassDefn                                              3
-Constant                                               6
+Constant                                               4
 Design                                                 1
 Function                                               2
 IODecl                                                 2
 IntTypespec                                            6
 IntVar                                                 1
 MethodFuncCall                                         1
-Operation                                              2
+Operation                                              1
 Package                                                1
+PackedArrayTypespec                                    1
+PackedArrayVar                                         1
 ParamAssign                                            1
 Parameter                                              1
-Range                                                  2
-RefObj                                                10
-RefTypespec                                            8
+Range                                                  1
+RefObj                                                 9
+RefTypespec                                            9
 ReturnStmt                                             1
 ShortIntTypespec                                       1
 Task                                                   1
@@ -228,19 +229,20 @@ Design: (unnamed)
     |vpiName:Vector
     |vpiFullName:pack::Vector
     |vpiVariables:
-    \_BitVar: (pack::Vector::data), line:6:19, endln:6:23
+    \_PackedArrayVar: (pack::Vector::data), line:6:19, endln:6:23
       |vpiParent:
       \_ClassDefn: (pack::Vector), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:5:1, endln:7:9
       |vpiTypespec:
       \_RefTypespec: (pack::Vector::data), line:6:3, endln:6:18
         |vpiParent:
-        \_BitVar: (pack::Vector::data), line:6:19, endln:6:23
+        \_PackedArrayVar: (pack::Vector::data), line:6:19, endln:6:23
         |vpiFullName:pack::Vector::data
         |vpiActual:
-        \_BitTypespec: , line:6:3, endln:6:18
+        \_PackedArrayTypespec: , line:6:3, endln:6:18
       |vpiName:data
       |vpiFullName:pack::Vector::data
       |vpiAutomatic:1
+      |vpiRandType:1
       |vpiVisibility:1
     |vpiParameter:
     \_Parameter: (pack::Vector::WIDTH), line:5:26, endln:5:33
@@ -264,13 +266,17 @@ Design: (unnamed)
       |vpiLhs:
       \_Parameter: (pack::Vector::WIDTH), line:5:26, endln:5:33
     |vpiTypedef:
-    \_BitTypespec: , line:6:3, endln:6:18
+    \_BitTypespec: , line:6:3, endln:6:6
+      |vpiParent:
+      \_ClassDefn: (pack::Vector), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:5:1, endln:7:9
+    |vpiTypedef:
+    \_PackedArrayTypespec: , line:6:3, endln:6:18
       |vpiParent:
       \_ClassDefn: (pack::Vector), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:5:1, endln:7:9
       |vpiRange:
       \_Range: , line:6:7, endln:6:18
         |vpiParent:
-        \_BitTypespec: , line:6:3, endln:6:18
+        \_PackedArrayTypespec: , line:6:3, endln:6:18
         |vpiLeftRange:
         \_Operation: , line:6:8, endln:6:15
           |vpiParent:
@@ -300,10 +306,19 @@ Design: (unnamed)
           |vpiSize:64
           |UINT:0
           |vpiConstType:9
+      |vpiElemTypespec:
+      \_RefTypespec: (pack::Vector), line:6:3, endln:6:6
+        |vpiParent:
+        \_PackedArrayTypespec: , line:6:3, endln:6:18
+        |vpiFullName:pack::Vector
+        |vpiActual:
+        \_BitTypespec: , line:6:3, endln:6:6
     |vpiImportTypespec:
-    \_BitTypespec: , line:6:3, endln:6:18
+    \_BitTypespec: , line:6:3, endln:6:6
     |vpiImportTypespec:
-    \_BitVar: (pack::Vector::data), line:6:19, endln:6:23
+    \_PackedArrayTypespec: , line:6:3, endln:6:18
+    |vpiImportTypespec:
+    \_PackedArrayVar: (pack::Vector::data), line:6:19, endln:6:23
   |vpiInternalScope:
   \_ClassDefn: (pack::ovm_queue), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:9:1, endln:10:9
     |vpiParent:
@@ -379,6 +394,7 @@ Design: (unnamed)
       |vpiFullName:pack::C::x
       |vpiSigned:1
       |vpiAutomatic:1
+      |vpiRandType:1
       |vpiVisibility:1
     |vpiParameter:
     \_TypeParameter: (pack::C::T), line:12:16, endln:12:17

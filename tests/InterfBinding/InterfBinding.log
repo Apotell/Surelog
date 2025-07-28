@@ -131,17 +131,18 @@ IODecl                                                 1
 ImportTypespec                                         1
 Interface                                              1
 InterfaceTypespec                                      3
-LogicNet                                               4
+LogicNet                                               3
 LogicTypespec                                          6
-LogicVar                                               1
+LogicVar                                               2
 Modport                                                1
 Module                                                 1
 Package                                                1
 Port                                                   3
 RefObj                                                 5
-RefTypespec                                            9
-StructNet                                              1
+RefTypespec                                           10
 StructTypespec                                         1
+StructVar                                              1
+TypedefTypespec                                        1
 TypespecMember                                         2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InterfBinding/slpp_all/surelog.uhdm ...
@@ -155,33 +156,44 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:pack
   |vpiTypedef:
-  \_StructTypespec: (pack::PipelineControll), line:2:9, endln:6:2
+  \_TypedefTypespec: (pack::PipelineControll), line:6:3, endln:6:19
     |vpiParent:
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:1:1, endln:8:11
     |vpiName:pack::PipelineControll
+    |vpiTypedefAlias:
+    \_RefTypespec: (pack::PipelineControll), line:2:9, endln:6:2
+      |vpiParent:
+      \_TypedefTypespec: (pack::PipelineControll), line:6:3, endln:6:19
+      |vpiFullName:pack::PipelineControll
+      |vpiActual:
+      \_StructTypespec: , line:2:9, endln:6:2
+  |vpiTypedef:
+  \_StructTypespec: , line:2:9, endln:6:2
+    |vpiParent:
+    \_Package: pack (pack), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:1:1, endln:8:11
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (stall), line:4:11, endln:4:16
       |vpiParent:
-      \_StructTypespec: (pack::PipelineControll), line:2:9, endln:6:2
+      \_StructTypespec: , line:2:9, endln:6:2
       |vpiName:stall
       |vpiTypespec:
-      \_RefTypespec: (pack::PipelineControll::stall), line:4:5, endln:4:10
+      \_RefTypespec: (pack::stall), line:4:5, endln:4:10
         |vpiParent:
         \_TypespecMember: (stall), line:4:11, endln:4:16
-        |vpiFullName:pack::PipelineControll::stall
+        |vpiFullName:pack::stall
         |vpiActual:
         \_LogicTypespec: , line:4:5, endln:4:10
     |vpiTypespecMember:
     \_TypespecMember: (clear), line:5:11, endln:5:16
       |vpiParent:
-      \_StructTypespec: (pack::PipelineControll), line:2:9, endln:6:2
+      \_StructTypespec: , line:2:9, endln:6:2
       |vpiName:clear
       |vpiTypespec:
-      \_RefTypespec: (pack::PipelineControll::clear), line:5:5, endln:5:10
+      \_RefTypespec: (pack::clear), line:5:5, endln:5:10
         |vpiParent:
         \_TypespecMember: (clear), line:5:11, endln:5:16
-        |vpiFullName:pack::PipelineControll::clear
+        |vpiFullName:pack::clear
         |vpiActual:
         \_LogicTypespec: , line:5:5, endln:5:10
   |vpiTypedef:
@@ -193,7 +205,9 @@ Design: (unnamed)
     |vpiParent:
     \_Package: pack (pack), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:1:1, endln:8:11
   |vpiImportTypespec:
-  \_StructTypespec: (pack::PipelineControll), line:2:9, endln:6:2
+  \_TypedefTypespec: (pack::PipelineControll), line:6:3, endln:6:19
+  |vpiImportTypespec:
+  \_StructTypespec: , line:2:9, endln:6:2
   |vpiImportTypespec:
   \_LogicTypespec: , line:4:5, endln:4:10
   |vpiImportTypespec:
@@ -204,6 +218,37 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@ControllerIF
+  |vpiVariables:
+  \_LogicVar: (work@ControllerIF.clk), line:14:14, endln:14:17
+    |vpiParent:
+    \_Interface: work@ControllerIF (work@ControllerIF), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:12:1, endln:25:13
+    |vpiTypespec:
+    \_RefTypespec: (work@ControllerIF.clk), line:14:8, endln:14:13
+      |vpiParent:
+      \_LogicVar: (work@ControllerIF.clk), line:14:14, endln:14:17
+      |vpiFullName:work@ControllerIF.clk
+      |vpiActual:
+      \_LogicTypespec: , line:14:8, endln:14:13
+    |vpiName:clk
+    |vpiFullName:work@ControllerIF.clk
+    |vpiRandType:1
+    |vpiVisibility:1
+  |vpiVariables:
+  \_StructVar: (work@ControllerIF.backEnd), line:18:21, endln:18:28
+    |vpiParent:
+    \_Interface: work@ControllerIF (work@ControllerIF), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:12:1, endln:25:13
+    |vpiTypespec:
+    \_RefTypespec: (work@ControllerIF.backEnd.PipelineControll), line:18:4, endln:18:20
+      |vpiParent:
+      \_StructVar: (work@ControllerIF.backEnd), line:18:21, endln:18:28
+      |vpiName:PipelineControll
+      |vpiFullName:work@ControllerIF.backEnd.PipelineControll
+      |vpiActual:
+      \_TypedefTypespec: (pack::PipelineControll), line:6:3, endln:6:19
+    |vpiName:backEnd
+    |vpiFullName:work@ControllerIF.backEnd
+    |vpiRandType:1
+    |vpiVisibility:1
   |vpiVariables:
   \_LogicVar: (work@ControllerIF.rst), line:15:14, endln:15:17
     |vpiParent:
@@ -217,7 +262,10 @@ Design: (unnamed)
       \_LogicTypespec: , line:15:8, endln:15:13
     |vpiName:rst
     |vpiFullName:work@ControllerIF.rst
+    |vpiRandType:1
     |vpiVisibility:1
+  |vpiReg:
+  \_LogicVar: (work@ControllerIF.clk), line:14:14, endln:14:17
   |vpiReg:
   \_LogicVar: (work@ControllerIF.rst), line:15:14, endln:15:17
   |vpiTypedef:
@@ -239,33 +287,9 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_LogicTypespec: , line:14:8, endln:14:13
   |vpiImportTypespec:
-  \_LogicNet: (work@ControllerIF.clk), line:14:14, endln:14:17
-    |vpiParent:
-    \_Interface: work@ControllerIF (work@ControllerIF), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:12:1, endln:25:13
-    |vpiTypespec:
-    \_RefTypespec: (work@ControllerIF.clk), line:14:8, endln:14:13
-      |vpiParent:
-      \_LogicNet: (work@ControllerIF.clk), line:14:14, endln:14:17
-      |vpiFullName:work@ControllerIF.clk
-      |vpiActual:
-      \_LogicTypespec: , line:14:8, endln:14:13
-    |vpiName:clk
-    |vpiFullName:work@ControllerIF.clk
-    |vpiNetType:36
+  \_LogicVar: (work@ControllerIF.clk), line:14:14, endln:14:17
   |vpiImportTypespec:
-  \_StructNet: (work@ControllerIF.backEnd), line:18:21, endln:18:28
-    |vpiParent:
-    \_Interface: work@ControllerIF (work@ControllerIF), file:${SURELOG_DIR}/tests/InterfBinding/dut.sv, line:12:1, endln:25:13
-    |vpiTypespec:
-    \_RefTypespec: (work@ControllerIF.backEnd.backEnd), line:18:4, endln:18:20
-      |vpiParent:
-      \_StructNet: (work@ControllerIF.backEnd), line:18:21, endln:18:28
-      |vpiName:backEnd
-      |vpiFullName:work@ControllerIF.backEnd.backEnd
-      |vpiActual:
-      \_StructTypespec: (pack::PipelineControll), line:2:9, endln:6:2
-    |vpiName:backEnd
-    |vpiFullName:work@ControllerIF.backEnd
+  \_StructVar: (work@ControllerIF.backEnd), line:18:21, endln:18:28
   |vpiImportTypespec:
   \_LogicTypespec: , line:15:8, endln:15:13
   |vpiImportTypespec:
@@ -292,7 +316,7 @@ Design: (unnamed)
       |vpiName:pack::PipelineControll
       |vpiFullName:work@ControllerIF.backEnd.pack::PipelineControll
       |vpiActual:
-      \_StructTypespec: (pack::PipelineControll), line:2:9, endln:6:2
+      \_TypedefTypespec: (pack::PipelineControll), line:6:3, endln:6:19
     |vpiName:backEnd
     |vpiFullName:work@ControllerIF.backEnd
   |vpiImportTypespec:
@@ -303,10 +327,6 @@ Design: (unnamed)
     |vpiFullName:work@ControllerIF.rst
     |vpiNetType:36
   |vpiDefName:work@ControllerIF
-  |vpiNet:
-  \_LogicNet: (work@ControllerIF.clk), line:14:14, endln:14:17
-  |vpiNet:
-  \_StructNet: (work@ControllerIF.backEnd), line:18:21, endln:18:28
   |vpiNet:
   \_LogicNet: (work@ControllerIF.clk), line:14:14, endln:14:17
   |vpiNet:
@@ -430,7 +450,7 @@ Design: (unnamed)
         |vpiName:backEnd
         |vpiFullName:work@BypassNetwork.backEnd
         |vpiActual:
-        \_StructNet: (work@ControllerIF.backEnd), line:18:21, endln:18:28
+        \_LogicNet: (work@ControllerIF.backEnd), line:18:21, endln:18:28
       |vpiName:ctrl.backEnd
     |vpiLhs:
     \_RefObj: (work@BypassNetwork.o), line:33:9, endln:33:10

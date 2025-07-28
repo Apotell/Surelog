@@ -177,10 +177,11 @@ MethodFuncCall                                         5
 Module                                                 2
 Package                                                1
 RefObj                                                 7
-RefTypespec                                           17
+RefTypespec                                           18
 StringTypespec                                         2
 StringVar                                              2
 Task                                                   9
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/StringMethod/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -449,7 +450,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -483,14 +484,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/StringMethod/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -498,7 +498,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -506,7 +506,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -514,7 +514,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -522,13 +522,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/StringMethod/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -744,6 +758,7 @@ Design: (unnamed)
       \_StringTypespec: , line:2:4, endln:2:10
     |vpiName:s
     |vpiFullName:work@top.s
+    |vpiRandType:1
     |vpiVisibility:1
     |vpiExpr:
     \_Constant: , line:2:15, endln:2:21
@@ -767,6 +782,7 @@ Design: (unnamed)
       \_StringTypespec: , line:3:4, endln:3:10
     |vpiName:t
     |vpiFullName:work@top.t
+    |vpiRandType:1
     |vpiVisibility:1
     |vpiExpr:
     \_HierPath: (s.substr), line:3:15, endln:3:29
@@ -815,6 +831,7 @@ Design: (unnamed)
     |vpiName:a
     |vpiFullName:work@top.a
     |vpiSigned:1
+    |vpiRandType:1
     |vpiVisibility:1
     |vpiExpr:
     \_HierPath: (s.getc), line:7:13, endln:7:22
@@ -855,6 +872,7 @@ Design: (unnamed)
     |vpiName:b
     |vpiFullName:work@top.b
     |vpiSigned:1
+    |vpiRandType:1
     |vpiVisibility:1
     |vpiExpr:
     \_HierPath: (s.compare), line:8:13, endln:8:25
@@ -895,6 +913,7 @@ Design: (unnamed)
     |vpiName:c
     |vpiFullName:work@top.c
     |vpiSigned:1
+    |vpiRandType:1
     |vpiVisibility:1
     |vpiExpr:
     \_HierPath: (s.icompare), line:9:13, endln:9:26

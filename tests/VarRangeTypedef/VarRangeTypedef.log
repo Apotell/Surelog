@@ -56,8 +56,9 @@ Design                                                 1
 LogicTypespec                                          1
 Package                                                1
 Range                                                  1
-RefTypespec                                            1
+RefTypespec                                            4
 StructTypespec                                         1
+TypedefTypespec                                        2
 TypespecMember                                         1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/VarRangeTypedef/slpp_all/surelog.uhdm ...
@@ -71,21 +72,32 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:pkg
   |vpiTypedef:
-  \_StructTypespec: (pkg::a), line:2:12, endln:4:5
+  \_TypedefTypespec: (pkg::a), line:4:6, endln:4:7
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/VarRangeTypedef/dut.sv, line:1:1, endln:6:11
     |vpiName:pkg::a
+    |vpiTypedefAlias:
+    \_RefTypespec: (pkg::a), line:2:12, endln:4:5
+      |vpiParent:
+      \_TypedefTypespec: (pkg::a), line:4:6, endln:4:7
+      |vpiFullName:pkg::a
+      |vpiActual:
+      \_StructTypespec: , line:2:12, endln:4:5
+  |vpiTypedef:
+  \_StructTypespec: , line:2:12, endln:4:5
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/VarRangeTypedef/dut.sv, line:1:1, endln:6:11
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (x), line:3:16, endln:3:17
       |vpiParent:
-      \_StructTypespec: (pkg::a), line:2:12, endln:4:5
+      \_StructTypespec: , line:2:12, endln:4:5
       |vpiName:x
       |vpiTypespec:
-      \_RefTypespec: (pkg::a::x), line:3:7, endln:3:12
+      \_RefTypespec: (pkg::x), line:3:7, endln:3:12
         |vpiParent:
         \_TypespecMember: (x), line:3:16, endln:3:17
-        |vpiFullName:pkg::a::x
+        |vpiFullName:pkg::x
         |vpiActual:
         \_LogicTypespec: , line:3:7, endln:3:12
   |vpiTypedef:
@@ -93,13 +105,26 @@ Design: (unnamed)
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/VarRangeTypedef/dut.sv, line:1:1, endln:6:11
   |vpiTypedef:
-  \_ArrayTypespec: , line:5:14, endln:5:20
+  \_TypedefTypespec: (pkg::b), line:5:14, endln:5:15
     |vpiParent:
     \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/VarRangeTypedef/dut.sv, line:1:1, endln:6:11
+    |vpiName:pkg::b
+    |vpiTypedefAlias:
+    \_RefTypespec: (pkg::b), line:5:12, endln:5:13
+      |vpiParent:
+      \_TypedefTypespec: (pkg::b), line:5:14, endln:5:15
+      |vpiFullName:pkg::b
+      |vpiActual:
+      \_ArrayTypespec: , line:5:12, endln:5:20
+  |vpiTypedef:
+  \_ArrayTypespec: , line:5:12, endln:5:20
+    |vpiParent:
+    \_Package: pkg (pkg), file:${SURELOG_DIR}/tests/VarRangeTypedef/dut.sv, line:1:1, endln:6:11
+    |vpiArrayType:1
     |vpiRange:
     \_Range: , line:5:15, endln:5:20
       |vpiParent:
-      \_ArrayTypespec: , line:5:14, endln:5:20
+      \_ArrayTypespec: , line:5:12, endln:5:20
       |vpiLeftRange:
       \_Constant: , line:5:16, endln:5:17
         |vpiParent:
@@ -116,12 +141,23 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (pkg::a), line:5:12, endln:5:13
+      |vpiParent:
+      \_ArrayTypespec: , line:5:12, endln:5:20
+      |vpiName:pkg::a
+      |vpiActual:
+      \_TypedefTypespec: (pkg::a), line:4:6, endln:4:7
   |vpiImportTypespec:
-  \_StructTypespec: (pkg::a), line:2:12, endln:4:5
+  \_TypedefTypespec: (pkg::a), line:4:6, endln:4:7
+  |vpiImportTypespec:
+  \_StructTypespec: , line:2:12, endln:4:5
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:7, endln:3:12
   |vpiImportTypespec:
-  \_ArrayTypespec: , line:5:14, endln:5:20
+  \_TypedefTypespec: (pkg::b), line:5:14, endln:5:15
+  |vpiImportTypespec:
+  \_ArrayTypespec: , line:5:12, endln:5:20
   |vpiDefName:pkg
 ===================
 [  FATAL] : 0

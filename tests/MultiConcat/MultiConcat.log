@@ -1667,26 +1667,27 @@ AST_DEBUG_END
 [INF:CP0300] Compilation...
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                             425
+Constant                                             407
 Design                                                 1
 EnumConst                                             23
 EnumTypespec                                           3
 IntTypespec                                            6
 LogicTypespec                                          6
 Module                                                 1
-Operation                                            512
+Operation                                            509
 Package                                                1
-PackedArrayTypespec                                    4
+PackedArrayTypespec                                    1
 ParamAssign                                            9
 Parameter                                              9
-Range                                                 11
-RefObj                                               305
-RefTypespec                                           22
+Range                                                  8
+RefObj                                               302
+RefTypespec                                           28
+TypedefTypespec                                        6
 === UHDM Object Stats End ===
-[ERR:UH0734] ${SURELOG_DIR}/tests/MultiConcat/dut.sv:132:26: Failed to bind object: "id: 214, name: NumLcStates".
-[ERR:EL0535] ${SURELOG_DIR}/tests/MultiConcat/dut.sv:132:26: Illegal implicit net "id:214, name: NumLcStates".
-[ERR:UH0734] ${SURELOG_DIR}/tests/MultiConcat/dut.sv:132:43: Failed to bind object: "id: 219, name: NumLcStates".
-[ERR:EL0535] ${SURELOG_DIR}/tests/MultiConcat/dut.sv:132:43: Illegal implicit net "id:219, name: NumLcStates".
+[ERR:UH0734] ${SURELOG_DIR}/tests/MultiConcat/dut.sv:132:26: Failed to bind object: "id: 202, name: NumLcStates".
+[ERR:EL0535] ${SURELOG_DIR}/tests/MultiConcat/dut.sv:132:26: Illegal implicit net "id:202, name: NumLcStates".
+[ERR:UH0734] ${SURELOG_DIR}/tests/MultiConcat/dut.sv:132:43: Failed to bind object: "id: 207, name: NumLcStates".
+[ERR:EL0535] ${SURELOG_DIR}/tests/MultiConcat/dut.sv:132:43: Illegal implicit net "id:207, name: NumLcStates".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/MultiConcat/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -1753,7 +1754,7 @@ Design: (unnamed)
       |vpiName:lc_tx_t
       |vpiFullName:lc_ctrl_pkg::LC_TX_DEFAULT::lc_tx_t
       |vpiActual:
-      \_LogicTypespec: (lc_tx_t), line:33:11, endln:33:30
+      \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_t), line:33:31, endln:33:38
     |vpiName:LC_TX_DEFAULT
     |vpiFullName:lc_ctrl_pkg::LC_TX_DEFAULT
   |vpiParameter:
@@ -1783,7 +1784,7 @@ Design: (unnamed)
       |vpiName:lc_flash_rma_seed_t
       |vpiFullName:lc_ctrl_pkg::LC_FLASH_RMA_SEED_DEFAULT::lc_flash_rma_seed_t
       |vpiActual:
-      \_LogicTypespec: (lc_flash_rma_seed_t), line:37:11, endln:37:35
+      \_TypedefTypespec: (lc_ctrl_pkg::lc_flash_rma_seed_t), line:37:36, endln:37:55
     |vpiName:LC_FLASH_RMA_SEED_DEFAULT
     |vpiFullName:lc_ctrl_pkg::LC_FLASH_RMA_SEED_DEFAULT
   |vpiParameter:
@@ -1828,7 +1829,7 @@ Design: (unnamed)
       |vpiName:token_idx_e
       |vpiFullName:lc_ctrl_pkg::TransTokenIdxMatrix::token_idx_e
       |vpiActual:
-      \_PackedArrayTypespec: , line:132:25, endln:132:59
+      \_PackedArrayTypespec: , line:132:13, endln:132:59
     |vpiName:TransTokenIdxMatrix
     |vpiFullName:lc_ctrl_pkg::TransTokenIdxMatrix
   |vpiParamAssign:
@@ -4411,6 +4412,65 @@ Design: (unnamed)
     \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/MultiConcat/dut.sv, line:2:1, endln:172:25
     |vpiSigned:1
   |vpiTypedef:
+  \_EnumTypespec: , line:10:11, endln:21:16
+    |vpiParent:
+    \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/MultiConcat/dut.sv, line:2:1, endln:172:25
+    |vpiBaseTypespec:
+    \_RefTypespec: (lc_ctrl_pkg), line:10:16, endln:10:41
+      |vpiParent:
+      \_EnumTypespec: , line:10:11, endln:21:16
+      |vpiFullName:lc_ctrl_pkg
+      |vpiActual:
+      \_LogicTypespec: , line:10:16, endln:10:41
+    |vpiEnumConst:
+    \_EnumConst: (ZeroTokenIdx), line:13:5, endln:13:30
+      |vpiParent:
+      \_EnumTypespec: , line:10:11, endln:21:16
+      |vpiName:ZeroTokenIdx
+      |HEX:0
+      |vpiDecompile:3'h0
+      |vpiSize:3
+    |vpiEnumConst:
+    \_EnumConst: (RawUnlockTokenIdx), line:14:5, endln:14:30
+      |vpiParent:
+      \_EnumTypespec: , line:10:11, endln:21:16
+      |vpiName:RawUnlockTokenIdx
+      |HEX:1
+      |vpiDecompile:3'h1
+      |vpiSize:3
+    |vpiEnumConst:
+    \_EnumConst: (TestUnlockTokenIdx), line:15:5, endln:15:30
+      |vpiParent:
+      \_EnumTypespec: , line:10:11, endln:21:16
+      |vpiName:TestUnlockTokenIdx
+      |HEX:2
+      |vpiDecompile:3'h2
+      |vpiSize:3
+    |vpiEnumConst:
+    \_EnumConst: (TestExitTokenIdx), line:16:5, endln:16:30
+      |vpiParent:
+      \_EnumTypespec: , line:10:11, endln:21:16
+      |vpiName:TestExitTokenIdx
+      |HEX:3
+      |vpiDecompile:3'h3
+      |vpiSize:3
+    |vpiEnumConst:
+    \_EnumConst: (RmaTokenIdx), line:17:5, endln:17:30
+      |vpiParent:
+      \_EnumTypespec: , line:10:11, endln:21:16
+      |vpiName:RmaTokenIdx
+      |HEX:4
+      |vpiDecompile:3'h4
+      |vpiSize:3
+    |vpiEnumConst:
+    \_EnumConst: (InvalidTokenIdx), line:20:5, endln:20:30
+      |vpiParent:
+      \_EnumTypespec: , line:10:11, endln:21:16
+      |vpiName:InvalidTokenIdx
+      |HEX:5
+      |vpiDecompile:3'h5
+      |vpiSize:3
+  |vpiTypedef:
   \_LogicTypespec: , line:10:16, endln:10:41
     |vpiParent:
     \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/MultiConcat/dut.sv, line:2:1, endln:172:25
@@ -4448,70 +4508,49 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_EnumTypespec: (lc_ctrl_pkg::token_idx_e), line:10:11, endln:21:16
+  \_TypedefTypespec: (lc_ctrl_pkg::token_idx_e), line:21:5, endln:21:16
     |vpiParent:
     \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/MultiConcat/dut.sv, line:2:1, endln:172:25
     |vpiName:lc_ctrl_pkg::token_idx_e
-    |vpiBaseTypespec:
-    \_RefTypespec: (lc_ctrl_pkg::token_idx_e), line:10:16, endln:10:41
+    |vpiTypedefAlias:
+    \_RefTypespec: (lc_ctrl_pkg::token_idx_e), line:10:11, endln:21:4
       |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::token_idx_e), line:10:11, endln:21:16
+      \_TypedefTypespec: (lc_ctrl_pkg::token_idx_e), line:21:5, endln:21:16
       |vpiFullName:lc_ctrl_pkg::token_idx_e
       |vpiActual:
-      \_LogicTypespec: , line:10:16, endln:10:41
-    |vpiEnumConst:
-    \_EnumConst: (ZeroTokenIdx), line:13:5, endln:13:30
-      |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::token_idx_e), line:10:11, endln:21:16
-      |vpiName:ZeroTokenIdx
-      |HEX:0
-      |vpiDecompile:3'h0
-      |vpiSize:3
-    |vpiEnumConst:
-    \_EnumConst: (RawUnlockTokenIdx), line:14:5, endln:14:30
-      |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::token_idx_e), line:10:11, endln:21:16
-      |vpiName:RawUnlockTokenIdx
-      |HEX:1
-      |vpiDecompile:3'h1
-      |vpiSize:3
-    |vpiEnumConst:
-    \_EnumConst: (TestUnlockTokenIdx), line:15:5, endln:15:30
-      |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::token_idx_e), line:10:11, endln:21:16
-      |vpiName:TestUnlockTokenIdx
-      |HEX:2
-      |vpiDecompile:3'h2
-      |vpiSize:3
-    |vpiEnumConst:
-    \_EnumConst: (TestExitTokenIdx), line:16:5, endln:16:30
-      |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::token_idx_e), line:10:11, endln:21:16
-      |vpiName:TestExitTokenIdx
-      |HEX:3
-      |vpiDecompile:3'h3
-      |vpiSize:3
-    |vpiEnumConst:
-    \_EnumConst: (RmaTokenIdx), line:17:5, endln:17:30
-      |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::token_idx_e), line:10:11, endln:21:16
-      |vpiName:RmaTokenIdx
-      |HEX:4
-      |vpiDecompile:3'h4
-      |vpiSize:3
-    |vpiEnumConst:
-    \_EnumConst: (InvalidTokenIdx), line:20:5, endln:20:30
-      |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::token_idx_e), line:10:11, endln:21:16
-      |vpiName:InvalidTokenIdx
-      |HEX:5
-      |vpiDecompile:3'h5
-      |vpiSize:3
+      \_EnumTypespec: , line:10:11, endln:21:16
   |vpiTypedef:
   \_IntTypespec: , line:27:13, endln:27:16
     |vpiParent:
     \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/MultiConcat/dut.sv, line:2:1, endln:172:25
     |vpiSigned:1
+  |vpiTypedef:
+  \_EnumTypespec: , line:29:11, endln:32:12
+    |vpiParent:
+    \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/MultiConcat/dut.sv, line:2:1, endln:172:25
+    |vpiBaseTypespec:
+    \_RefTypespec: (lc_ctrl_pkg), line:29:16, endln:29:35
+      |vpiParent:
+      \_EnumTypespec: , line:29:11, endln:32:12
+      |vpiFullName:lc_ctrl_pkg
+      |vpiActual:
+      \_LogicTypespec: , line:29:16, endln:29:35
+    |vpiEnumConst:
+    \_EnumConst: (On), line:30:5, endln:30:18
+      |vpiParent:
+      \_EnumTypespec: , line:29:11, endln:32:12
+      |vpiName:On
+      |BIN:1010
+      |vpiDecompile:4'b1010
+      |vpiSize:4
+    |vpiEnumConst:
+    \_EnumConst: (Off), line:31:5, endln:31:18
+      |vpiParent:
+      \_EnumTypespec: , line:29:11, endln:32:12
+      |vpiName:Off
+      |BIN:0101
+      |vpiDecompile:4'b0101
+      |vpiSize:4
   |vpiTypedef:
   \_LogicTypespec: , line:29:16, endln:29:35
     |vpiParent:
@@ -4550,41 +4589,25 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_EnumTypespec: (lc_ctrl_pkg::lc_tx_e), line:29:11, endln:32:12
+  \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_e), line:32:5, endln:32:12
     |vpiParent:
     \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/MultiConcat/dut.sv, line:2:1, endln:172:25
     |vpiName:lc_ctrl_pkg::lc_tx_e
-    |vpiBaseTypespec:
-    \_RefTypespec: (lc_ctrl_pkg::lc_tx_e), line:29:16, endln:29:35
+    |vpiTypedefAlias:
+    \_RefTypespec: (lc_ctrl_pkg::lc_tx_e), line:29:11, endln:32:4
       |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::lc_tx_e), line:29:11, endln:32:12
+      \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_e), line:32:5, endln:32:12
       |vpiFullName:lc_ctrl_pkg::lc_tx_e
       |vpiActual:
-      \_LogicTypespec: , line:29:16, endln:29:35
-    |vpiEnumConst:
-    \_EnumConst: (On), line:30:5, endln:30:18
-      |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::lc_tx_e), line:29:11, endln:32:12
-      |vpiName:On
-      |BIN:1010
-      |vpiDecompile:4'b1010
-      |vpiSize:4
-    |vpiEnumConst:
-    \_EnumConst: (Off), line:31:5, endln:31:18
-      |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::lc_tx_e), line:29:11, endln:32:12
-      |vpiName:Off
-      |BIN:0101
-      |vpiDecompile:4'b0101
-      |vpiSize:4
+      \_EnumTypespec: , line:29:11, endln:32:12
   |vpiTypedef:
-  \_PackedArrayTypespec: , line:33:11, endln:33:30
+  \_LogicTypespec: , line:33:11, endln:33:30
     |vpiParent:
     \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/MultiConcat/dut.sv, line:2:1, endln:172:25
     |vpiRange:
     \_Range: , line:33:17, endln:33:30
       |vpiParent:
-      \_PackedArrayTypespec: , line:33:11, endln:33:30
+      \_LogicTypespec: , line:33:11, endln:33:30
       |vpiLeftRange:
       \_Operation: , line:33:18, endln:33:27
         |vpiParent:
@@ -4615,56 +4638,30 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_LogicTypespec: (lc_tx_t), line:33:11, endln:33:30
+  \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_t), line:33:31, endln:33:38
     |vpiParent:
     \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/MultiConcat/dut.sv, line:2:1, endln:172:25
-    |vpiName:lc_tx_t
-    |vpiRange:
-    \_Range: , line:33:17, endln:33:30
+    |vpiName:lc_ctrl_pkg::lc_tx_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (lc_ctrl_pkg::lc_tx_t), line:33:11, endln:33:16
       |vpiParent:
-      \_LogicTypespec: (lc_tx_t), line:33:11, endln:33:30
-      |vpiLeftRange:
-      \_Operation: , line:33:18, endln:33:27
-        |vpiParent:
-        \_Range: , line:33:17, endln:33:30
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (lc_ctrl_pkg::lc_tx_t::TxWidth), line:33:18, endln:33:25
-          |vpiParent:
-          \_Operation: , line:33:18, endln:33:27
-          |vpiName:TxWidth
-          |vpiFullName:lc_ctrl_pkg::lc_tx_t::TxWidth
-          |vpiActual:
-          \_Parameter: (lc_ctrl_pkg::TxWidth), line:27:17, endln:27:28
-        |vpiOperand:
-        \_Constant: , line:33:26, endln:33:27
-          |vpiParent:
-          \_Operation: , line:33:18, endln:33:27
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:33:28, endln:33:29
-        |vpiParent:
-        \_Range: , line:33:17, endln:33:30
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
+      \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_t), line:33:31, endln:33:38
+      |vpiFullName:lc_ctrl_pkg::lc_tx_t
+      |vpiActual:
+      \_LogicTypespec: , line:33:11, endln:33:30
   |vpiTypedef:
   \_IntTypespec: , line:36:13, endln:36:16
     |vpiParent:
     \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/MultiConcat/dut.sv, line:2:1, endln:172:25
     |vpiSigned:1
   |vpiTypedef:
-  \_PackedArrayTypespec: , line:37:11, endln:37:35
+  \_LogicTypespec: , line:37:11, endln:37:35
     |vpiParent:
     \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/MultiConcat/dut.sv, line:2:1, endln:172:25
     |vpiRange:
     \_Range: , line:37:17, endln:37:35
       |vpiParent:
-      \_PackedArrayTypespec: , line:37:11, endln:37:35
+      \_LogicTypespec: , line:37:11, endln:37:35
       |vpiLeftRange:
       \_Operation: , line:37:18, endln:37:32
         |vpiParent:
@@ -4695,56 +4692,30 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_LogicTypespec: (lc_flash_rma_seed_t), line:37:11, endln:37:35
+  \_TypedefTypespec: (lc_ctrl_pkg::lc_flash_rma_seed_t), line:37:36, endln:37:55
     |vpiParent:
     \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/MultiConcat/dut.sv, line:2:1, endln:172:25
-    |vpiName:lc_flash_rma_seed_t
-    |vpiRange:
-    \_Range: , line:37:17, endln:37:35
+    |vpiName:lc_ctrl_pkg::lc_flash_rma_seed_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (lc_ctrl_pkg::lc_flash_rma_seed_t), line:37:11, endln:37:16
       |vpiParent:
-      \_LogicTypespec: (lc_flash_rma_seed_t), line:37:11, endln:37:35
-      |vpiLeftRange:
-      \_Operation: , line:37:18, endln:37:32
-        |vpiParent:
-        \_Range: , line:37:17, endln:37:35
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (lc_ctrl_pkg::lc_flash_rma_seed_t::RmaSeedWidth), line:37:18, endln:37:30
-          |vpiParent:
-          \_Operation: , line:37:18, endln:37:32
-          |vpiName:RmaSeedWidth
-          |vpiFullName:lc_ctrl_pkg::lc_flash_rma_seed_t::RmaSeedWidth
-          |vpiActual:
-          \_Parameter: (lc_ctrl_pkg::RmaSeedWidth), line:36:17, endln:36:34
-        |vpiOperand:
-        \_Constant: , line:37:31, endln:37:32
-          |vpiParent:
-          \_Operation: , line:37:18, endln:37:32
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:37:33, endln:37:34
-        |vpiParent:
-        \_Range: , line:37:17, endln:37:35
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
+      \_TypedefTypespec: (lc_ctrl_pkg::lc_flash_rma_seed_t), line:37:36, endln:37:55
+      |vpiFullName:lc_ctrl_pkg::lc_flash_rma_seed_t
+      |vpiActual:
+      \_LogicTypespec: , line:37:11, endln:37:35
   |vpiTypedef:
   \_IntTypespec: , line:40:13, endln:40:16
     |vpiParent:
     \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/MultiConcat/dut.sv, line:2:1, endln:172:25
     |vpiSigned:1
   |vpiTypedef:
-  \_PackedArrayTypespec: , line:41:11, endln:41:39
+  \_LogicTypespec: , line:41:11, endln:41:39
     |vpiParent:
     \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/MultiConcat/dut.sv, line:2:1, endln:172:25
     |vpiRange:
     \_Range: , line:41:17, endln:41:39
       |vpiParent:
-      \_PackedArrayTypespec: , line:41:11, endln:41:39
+      \_LogicTypespec: , line:41:11, endln:41:39
       |vpiLeftRange:
       \_Operation: , line:41:18, endln:41:36
         |vpiParent:
@@ -4775,48 +4746,153 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_LogicTypespec: (lc_keymgr_div_t), line:41:11, endln:41:39
+  \_TypedefTypespec: (lc_ctrl_pkg::lc_keymgr_div_t), line:41:40, endln:41:55
     |vpiParent:
     \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/MultiConcat/dut.sv, line:2:1, endln:172:25
-    |vpiName:lc_keymgr_div_t
-    |vpiRange:
-    \_Range: , line:41:17, endln:41:39
+    |vpiName:lc_ctrl_pkg::lc_keymgr_div_t
+    |vpiTypedefAlias:
+    \_RefTypespec: (lc_ctrl_pkg::lc_keymgr_div_t), line:41:11, endln:41:16
       |vpiParent:
-      \_LogicTypespec: (lc_keymgr_div_t), line:41:11, endln:41:39
-      |vpiLeftRange:
-      \_Operation: , line:41:18, endln:41:36
-        |vpiParent:
-        \_Range: , line:41:17, endln:41:39
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (lc_ctrl_pkg::lc_keymgr_div_t::LcKeymgrDivWidth), line:41:18, endln:41:34
-          |vpiParent:
-          \_Operation: , line:41:18, endln:41:36
-          |vpiName:LcKeymgrDivWidth
-          |vpiFullName:lc_ctrl_pkg::lc_keymgr_div_t::LcKeymgrDivWidth
-          |vpiActual:
-          \_Parameter: (lc_ctrl_pkg::LcKeymgrDivWidth), line:40:17, endln:40:39
-        |vpiOperand:
-        \_Constant: , line:41:35, endln:41:36
-          |vpiParent:
-          \_Operation: , line:41:18, endln:41:36
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:41:37, endln:41:38
-        |vpiParent:
-        \_Range: , line:41:17, endln:41:39
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
+      \_TypedefTypespec: (lc_ctrl_pkg::lc_keymgr_div_t), line:41:40, endln:41:55
+      |vpiFullName:lc_ctrl_pkg::lc_keymgr_div_t
+      |vpiActual:
+      \_LogicTypespec: , line:41:11, endln:41:39
   |vpiTypedef:
   \_IntTypespec: , line:76:14, endln:76:17
     |vpiParent:
     \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/MultiConcat/dut.sv, line:2:1, endln:172:25
     |vpiSigned:1
+  |vpiTypedef:
+  \_EnumTypespec: , line:77:11, endln:93:16
+    |vpiParent:
+    \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/MultiConcat/dut.sv, line:2:1, endln:172:25
+    |vpiBaseTypespec:
+    \_RefTypespec: (lc_ctrl_pkg), line:77:16, endln:77:41
+      |vpiParent:
+      \_EnumTypespec: , line:77:11, endln:93:16
+      |vpiFullName:lc_ctrl_pkg
+      |vpiActual:
+      \_LogicTypespec: , line:77:16, endln:77:41
+    |vpiEnumConst:
+    \_EnumConst: (ResetSt), line:78:5, endln:78:41
+      |vpiParent:
+      \_EnumTypespec: , line:77:11, endln:93:16
+      |vpiName:ResetSt
+      |BIN:1100000001111011
+      |vpiDecompile:16'b1100000001111011
+      |vpiSize:16
+    |vpiEnumConst:
+    \_EnumConst: (IdleSt), line:79:5, endln:79:41
+      |vpiParent:
+      \_EnumTypespec: , line:77:11, endln:93:16
+      |vpiName:IdleSt
+      |BIN:1111011010111100
+      |vpiDecompile:16'b1111011010111100
+      |vpiSize:16
+    |vpiEnumConst:
+    \_EnumConst: (ClkMuxSt), line:80:5, endln:80:41
+      |vpiParent:
+      \_EnumTypespec: , line:77:11, endln:93:16
+      |vpiName:ClkMuxSt
+      |BIN:0000011110101101
+      |vpiDecompile:16'b0000011110101101
+      |vpiSize:16
+    |vpiEnumConst:
+    \_EnumConst: (CntIncrSt), line:81:5, endln:81:41
+      |vpiParent:
+      \_EnumTypespec: , line:77:11, endln:93:16
+      |vpiName:CntIncrSt
+      |BIN:1100111011001001
+      |vpiDecompile:16'b1100111011001001
+      |vpiSize:16
+    |vpiEnumConst:
+    \_EnumConst: (CntProgSt), line:82:5, endln:82:41
+      |vpiParent:
+      \_EnumTypespec: , line:77:11, endln:93:16
+      |vpiName:CntProgSt
+      |BIN:0011001111000111
+      |vpiDecompile:16'b0011001111000111
+      |vpiSize:16
+    |vpiEnumConst:
+    \_EnumConst: (TransCheckSt), line:83:5, endln:83:41
+      |vpiParent:
+      \_EnumTypespec: , line:77:11, endln:93:16
+      |vpiName:TransCheckSt
+      |BIN:0000110001010100
+      |vpiDecompile:16'b0000110001010100
+      |vpiSize:16
+    |vpiEnumConst:
+    \_EnumConst: (TokenHashSt), line:84:5, endln:84:41
+      |vpiParent:
+      \_EnumTypespec: , line:77:11, endln:93:16
+      |vpiName:TokenHashSt
+      |BIN:0110111010110000
+      |vpiDecompile:16'b0110111010110000
+      |vpiSize:16
+    |vpiEnumConst:
+    \_EnumConst: (FlashRmaSt), line:85:5, endln:85:41
+      |vpiParent:
+      \_EnumTypespec: , line:77:11, endln:93:16
+      |vpiName:FlashRmaSt
+      |BIN:1110100010001111
+      |vpiDecompile:16'b1110100010001111
+      |vpiSize:16
+    |vpiEnumConst:
+    \_EnumConst: (TokenCheck0St), line:86:5, endln:86:41
+      |vpiParent:
+      \_EnumTypespec: , line:77:11, endln:93:16
+      |vpiName:TokenCheck0St
+      |BIN:0010000011000000
+      |vpiDecompile:16'b0010000011000000
+      |vpiSize:16
+    |vpiEnumConst:
+    \_EnumConst: (TokenCheck1St), line:87:5, endln:87:41
+      |vpiParent:
+      \_EnumTypespec: , line:77:11, endln:93:16
+      |vpiName:TokenCheck1St
+      |BIN:1101010101101111
+      |vpiDecompile:16'b1101010101101111
+      |vpiSize:16
+    |vpiEnumConst:
+    \_EnumConst: (TransProgSt), line:88:5, endln:88:41
+      |vpiParent:
+      \_EnumTypespec: , line:77:11, endln:93:16
+      |vpiName:TransProgSt
+      |BIN:1000000110101011
+      |vpiDecompile:16'b1000000110101011
+      |vpiSize:16
+    |vpiEnumConst:
+    \_EnumConst: (PostTransSt), line:89:5, endln:89:41
+      |vpiParent:
+      \_EnumTypespec: , line:77:11, endln:93:16
+      |vpiName:PostTransSt
+      |BIN:0110110100101100
+      |vpiDecompile:16'b0110110100101100
+      |vpiSize:16
+    |vpiEnumConst:
+    \_EnumConst: (ScrapSt), line:90:5, endln:90:41
+      |vpiParent:
+      \_EnumTypespec: , line:77:11, endln:93:16
+      |vpiName:ScrapSt
+      |BIN:1010100001010001
+      |vpiDecompile:16'b1010100001010001
+      |vpiSize:16
+    |vpiEnumConst:
+    \_EnumConst: (EscalateSt), line:91:5, endln:91:41
+      |vpiParent:
+      \_EnumTypespec: , line:77:11, endln:93:16
+      |vpiName:EscalateSt
+      |BIN:1011110110011011
+      |vpiDecompile:16'b1011110110011011
+      |vpiSize:16
+    |vpiEnumConst:
+    \_EnumConst: (InvalidSt), line:92:5, endln:92:41
+      |vpiParent:
+      \_EnumTypespec: , line:77:11, endln:93:16
+      |vpiName:InvalidSt
+      |BIN:0011000101001100
+      |vpiDecompile:16'b0011000101001100
+      |vpiSize:16
   |vpiTypedef:
   \_LogicTypespec: , line:77:16, endln:77:41
     |vpiParent:
@@ -4855,145 +4931,25 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_EnumTypespec: (lc_ctrl_pkg::fsm_state_e), line:77:11, endln:93:16
+  \_TypedefTypespec: (lc_ctrl_pkg::fsm_state_e), line:93:5, endln:93:16
     |vpiParent:
     \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/MultiConcat/dut.sv, line:2:1, endln:172:25
     |vpiName:lc_ctrl_pkg::fsm_state_e
-    |vpiBaseTypespec:
-    \_RefTypespec: (lc_ctrl_pkg::fsm_state_e), line:77:16, endln:77:41
+    |vpiTypedefAlias:
+    \_RefTypespec: (lc_ctrl_pkg::fsm_state_e), line:77:11, endln:93:4
       |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::fsm_state_e), line:77:11, endln:93:16
+      \_TypedefTypespec: (lc_ctrl_pkg::fsm_state_e), line:93:5, endln:93:16
       |vpiFullName:lc_ctrl_pkg::fsm_state_e
       |vpiActual:
-      \_LogicTypespec: , line:77:16, endln:77:41
-    |vpiEnumConst:
-    \_EnumConst: (ResetSt), line:78:5, endln:78:41
-      |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::fsm_state_e), line:77:11, endln:93:16
-      |vpiName:ResetSt
-      |BIN:1100000001111011
-      |vpiDecompile:16'b1100000001111011
-      |vpiSize:16
-    |vpiEnumConst:
-    \_EnumConst: (IdleSt), line:79:5, endln:79:41
-      |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::fsm_state_e), line:77:11, endln:93:16
-      |vpiName:IdleSt
-      |BIN:1111011010111100
-      |vpiDecompile:16'b1111011010111100
-      |vpiSize:16
-    |vpiEnumConst:
-    \_EnumConst: (ClkMuxSt), line:80:5, endln:80:41
-      |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::fsm_state_e), line:77:11, endln:93:16
-      |vpiName:ClkMuxSt
-      |BIN:0000011110101101
-      |vpiDecompile:16'b0000011110101101
-      |vpiSize:16
-    |vpiEnumConst:
-    \_EnumConst: (CntIncrSt), line:81:5, endln:81:41
-      |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::fsm_state_e), line:77:11, endln:93:16
-      |vpiName:CntIncrSt
-      |BIN:1100111011001001
-      |vpiDecompile:16'b1100111011001001
-      |vpiSize:16
-    |vpiEnumConst:
-    \_EnumConst: (CntProgSt), line:82:5, endln:82:41
-      |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::fsm_state_e), line:77:11, endln:93:16
-      |vpiName:CntProgSt
-      |BIN:0011001111000111
-      |vpiDecompile:16'b0011001111000111
-      |vpiSize:16
-    |vpiEnumConst:
-    \_EnumConst: (TransCheckSt), line:83:5, endln:83:41
-      |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::fsm_state_e), line:77:11, endln:93:16
-      |vpiName:TransCheckSt
-      |BIN:0000110001010100
-      |vpiDecompile:16'b0000110001010100
-      |vpiSize:16
-    |vpiEnumConst:
-    \_EnumConst: (TokenHashSt), line:84:5, endln:84:41
-      |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::fsm_state_e), line:77:11, endln:93:16
-      |vpiName:TokenHashSt
-      |BIN:0110111010110000
-      |vpiDecompile:16'b0110111010110000
-      |vpiSize:16
-    |vpiEnumConst:
-    \_EnumConst: (FlashRmaSt), line:85:5, endln:85:41
-      |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::fsm_state_e), line:77:11, endln:93:16
-      |vpiName:FlashRmaSt
-      |BIN:1110100010001111
-      |vpiDecompile:16'b1110100010001111
-      |vpiSize:16
-    |vpiEnumConst:
-    \_EnumConst: (TokenCheck0St), line:86:5, endln:86:41
-      |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::fsm_state_e), line:77:11, endln:93:16
-      |vpiName:TokenCheck0St
-      |BIN:0010000011000000
-      |vpiDecompile:16'b0010000011000000
-      |vpiSize:16
-    |vpiEnumConst:
-    \_EnumConst: (TokenCheck1St), line:87:5, endln:87:41
-      |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::fsm_state_e), line:77:11, endln:93:16
-      |vpiName:TokenCheck1St
-      |BIN:1101010101101111
-      |vpiDecompile:16'b1101010101101111
-      |vpiSize:16
-    |vpiEnumConst:
-    \_EnumConst: (TransProgSt), line:88:5, endln:88:41
-      |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::fsm_state_e), line:77:11, endln:93:16
-      |vpiName:TransProgSt
-      |BIN:1000000110101011
-      |vpiDecompile:16'b1000000110101011
-      |vpiSize:16
-    |vpiEnumConst:
-    \_EnumConst: (PostTransSt), line:89:5, endln:89:41
-      |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::fsm_state_e), line:77:11, endln:93:16
-      |vpiName:PostTransSt
-      |BIN:0110110100101100
-      |vpiDecompile:16'b0110110100101100
-      |vpiSize:16
-    |vpiEnumConst:
-    \_EnumConst: (ScrapSt), line:90:5, endln:90:41
-      |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::fsm_state_e), line:77:11, endln:93:16
-      |vpiName:ScrapSt
-      |BIN:1010100001010001
-      |vpiDecompile:16'b1010100001010001
-      |vpiSize:16
-    |vpiEnumConst:
-    \_EnumConst: (EscalateSt), line:91:5, endln:91:41
-      |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::fsm_state_e), line:77:11, endln:93:16
-      |vpiName:EscalateSt
-      |BIN:1011110110011011
-      |vpiDecompile:16'b1011110110011011
-      |vpiSize:16
-    |vpiEnumConst:
-    \_EnumConst: (InvalidSt), line:92:5, endln:92:41
-      |vpiParent:
-      \_EnumTypespec: (lc_ctrl_pkg::fsm_state_e), line:77:11, endln:93:16
-      |vpiName:InvalidSt
-      |BIN:0011000101001100
-      |vpiDecompile:16'b0011000101001100
-      |vpiSize:16
+      \_EnumTypespec: , line:77:11, endln:93:16
   |vpiTypedef:
-  \_PackedArrayTypespec: , line:132:25, endln:132:59
+  \_PackedArrayTypespec: , line:132:13, endln:132:59
     |vpiParent:
     \_Package: lc_ctrl_pkg (lc_ctrl_pkg), file:${SURELOG_DIR}/tests/MultiConcat/dut.sv, line:2:1, endln:172:25
     |vpiRange:
     \_Range: , line:132:25, endln:132:42
       |vpiParent:
-      \_PackedArrayTypespec: , line:132:25, endln:132:59
+      \_PackedArrayTypespec: , line:132:13, endln:132:59
       |vpiLeftRange:
       \_Operation: , line:132:26, endln:132:39
         |vpiParent:
@@ -5024,7 +4980,7 @@ Design: (unnamed)
     |vpiRange:
     \_Range: , line:132:42, endln:132:59
       |vpiParent:
-      \_PackedArrayTypespec: , line:132:25, endln:132:59
+      \_PackedArrayTypespec: , line:132:13, endln:132:59
       |vpiLeftRange:
       \_Operation: , line:132:43, endln:132:56
         |vpiParent:
@@ -5053,51 +5009,56 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
     |vpiElemTypespec:
-    \_RefTypespec: (lc_ctrl_pkg::token_idx_e), line:132:13, endln:132:24
+    \_RefTypespec: (lc_ctrl_pkg::token_idx_e), line:21:5, endln:21:16
       |vpiParent:
-      \_PackedArrayTypespec: , line:132:25, endln:132:59
-      |vpiName:token_idx_e
-      |vpiFullName:lc_ctrl_pkg::token_idx_e
+      \_PackedArrayTypespec: , line:132:13, endln:132:59
+      |vpiName:lc_ctrl_pkg::token_idx_e
       |vpiActual:
-      \_EnumTypespec: (lc_ctrl_pkg::token_idx_e), line:10:11, endln:21:16
+      \_TypedefTypespec: (lc_ctrl_pkg::token_idx_e), line:21:5, endln:21:16
   |vpiImportTypespec:
   \_IntTypespec: , line:8:13, endln:8:16
   |vpiImportTypespec:
   \_IntTypespec: , line:9:13, endln:9:16
   |vpiImportTypespec:
+  \_EnumTypespec: , line:10:11, endln:21:16
+  |vpiImportTypespec:
   \_LogicTypespec: , line:10:16, endln:10:41
   |vpiImportTypespec:
-  \_EnumTypespec: (lc_ctrl_pkg::token_idx_e), line:10:11, endln:21:16
+  \_TypedefTypespec: (lc_ctrl_pkg::token_idx_e), line:21:5, endln:21:16
   |vpiImportTypespec:
   \_IntTypespec: , line:27:13, endln:27:16
   |vpiImportTypespec:
+  \_EnumTypespec: , line:29:11, endln:32:12
+  |vpiImportTypespec:
   \_LogicTypespec: , line:29:16, endln:29:35
   |vpiImportTypespec:
-  \_EnumTypespec: (lc_ctrl_pkg::lc_tx_e), line:29:11, endln:32:12
+  \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_e), line:32:5, endln:32:12
   |vpiImportTypespec:
-  \_PackedArrayTypespec: , line:33:11, endln:33:30
+  \_LogicTypespec: , line:33:11, endln:33:30
   |vpiImportTypespec:
-  \_LogicTypespec: (lc_tx_t), line:33:11, endln:33:30
+  \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_t), line:33:31, endln:33:38
   |vpiImportTypespec:
   \_IntTypespec: , line:36:13, endln:36:16
   |vpiImportTypespec:
-  \_PackedArrayTypespec: , line:37:11, endln:37:35
+  \_LogicTypespec: , line:37:11, endln:37:35
   |vpiImportTypespec:
-  \_LogicTypespec: (lc_flash_rma_seed_t), line:37:11, endln:37:35
+  \_TypedefTypespec: (lc_ctrl_pkg::lc_flash_rma_seed_t), line:37:36, endln:37:55
   |vpiImportTypespec:
   \_IntTypespec: , line:40:13, endln:40:16
   |vpiImportTypespec:
-  \_PackedArrayTypespec: , line:41:11, endln:41:39
+  \_LogicTypespec: , line:41:11, endln:41:39
   |vpiImportTypespec:
-  \_LogicTypespec: (lc_keymgr_div_t), line:41:11, endln:41:39
+  \_TypedefTypespec: (lc_ctrl_pkg::lc_keymgr_div_t), line:41:40, endln:41:55
   |vpiImportTypespec:
   \_IntTypespec: , line:76:14, endln:76:17
   |vpiImportTypespec:
+  \_EnumTypespec: , line:77:11, endln:93:16
+  |vpiImportTypespec:
   \_LogicTypespec: , line:77:16, endln:77:41
   |vpiImportTypespec:
-  \_EnumTypespec: (lc_ctrl_pkg::fsm_state_e), line:77:11, endln:93:16
+  \_TypedefTypespec: (lc_ctrl_pkg::fsm_state_e), line:93:5, endln:93:16
   |vpiImportTypespec:
-  \_PackedArrayTypespec: , line:132:25, endln:132:59
+  \_PackedArrayTypespec: , line:132:13, endln:132:59
   |vpiDefName:lc_ctrl_pkg
   |vpiEndLabel:lc_ctrl_pkg
 ===================

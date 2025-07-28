@@ -400,7 +400,7 @@ CaseItem                                               6
 CaseStmt                                               2
 ClassDefn                                              8
 ClassTypespec                                          1
-Constant                                              22
+Constant                                              14
 Design                                                 1
 EnumConst                                              5
 EnumTypespec                                           1
@@ -418,10 +418,11 @@ Package                                                1
 ParamAssign                                            7
 Parameter                                              7
 Port                                                   5
-Range                                                  5
+Range                                                  1
 RefObj                                                21
-RefTypespec                                           20
+RefTypespec                                           21
 Task                                                   9
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CaseFullElab/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -690,7 +691,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -724,14 +725,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/CaseFullElab/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -739,7 +739,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -747,7 +747,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -755,7 +755,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -763,13 +763,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/CaseFullElab/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1171,28 +1185,28 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@FSM (work@FSM), file:${SURELOG_DIR}/tests/CaseFullElab/top.sv, line:1:1, endln:42:12
   |vpiImportTypespec:
-  \_LogicNet: (work@FSM.clock), line:2:9, endln:2:14
+  \_LogicNet: (work@FSM.clock), line:1:12, endln:1:17
     |vpiParent:
     \_Module: work@FSM (work@FSM), file:${SURELOG_DIR}/tests/CaseFullElab/top.sv, line:1:1, endln:42:12
     |vpiName:clock
     |vpiFullName:work@FSM.clock
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@FSM.keys), line:2:16, endln:2:20
+  \_LogicNet: (work@FSM.keys), line:1:19, endln:1:23
     |vpiParent:
     \_Module: work@FSM (work@FSM), file:${SURELOG_DIR}/tests/CaseFullElab/top.sv, line:1:1, endln:42:12
     |vpiName:keys
     |vpiFullName:work@FSM.keys
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@FSM.brake), line:2:22, endln:2:27
+  \_LogicNet: (work@FSM.brake), line:1:25, endln:1:30
     |vpiParent:
     \_Module: work@FSM (work@FSM), file:${SURELOG_DIR}/tests/CaseFullElab/top.sv, line:1:1, endln:42:12
     |vpiName:brake
     |vpiFullName:work@FSM.brake
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@FSM.accelerate), line:2:29, endln:2:39
+  \_LogicNet: (work@FSM.accelerate), line:1:32, endln:1:42
     |vpiParent:
     \_Module: work@FSM (work@FSM), file:${SURELOG_DIR}/tests/CaseFullElab/top.sv, line:1:1, endln:42:12
     |vpiName:accelerate
@@ -1263,7 +1277,7 @@ Design: (unnamed)
     |vpiFullName:work@FSM.accelerate
     |vpiNetType:1
   |vpiImportTypespec:
-  \_LogicNet: (work@FSM.Speed), line:4:16, endln:4:21
+  \_LogicNet: (work@FSM.Speed), line:1:44, endln:1:49
     |vpiParent:
     \_Module: work@FSM (work@FSM), file:${SURELOG_DIR}/tests/CaseFullElab/top.sv, line:1:1, endln:42:12
     |vpiName:Speed
@@ -1335,13 +1349,13 @@ Design: (unnamed)
     |vpiNetType:48
   |vpiDefName:work@FSM
   |vpiNet:
-  \_LogicNet: (work@FSM.clock), line:2:9, endln:2:14
+  \_LogicNet: (work@FSM.clock), line:1:12, endln:1:17
   |vpiNet:
-  \_LogicNet: (work@FSM.keys), line:2:16, endln:2:20
+  \_LogicNet: (work@FSM.keys), line:1:19, endln:1:23
   |vpiNet:
-  \_LogicNet: (work@FSM.brake), line:2:22, endln:2:27
+  \_LogicNet: (work@FSM.brake), line:1:25, endln:1:30
   |vpiNet:
-  \_LogicNet: (work@FSM.accelerate), line:2:29, endln:2:39
+  \_LogicNet: (work@FSM.accelerate), line:1:32, endln:1:42
   |vpiNet:
   \_LogicNet: (work@FSM.clock), line:3:8, endln:3:13
   |vpiNet:
@@ -1351,7 +1365,7 @@ Design: (unnamed)
   |vpiNet:
   \_LogicNet: (work@FSM.accelerate), line:3:28, endln:3:38
   |vpiNet:
-  \_LogicNet: (work@FSM.Speed), line:4:16, endln:4:21
+  \_LogicNet: (work@FSM.Speed), line:1:44, endln:1:49
   |vpiNet:
   \_LogicNet: (work@FSM.Speed), line:5:13, endln:5:18
   |vpiNet:
@@ -1415,7 +1429,7 @@ Design: (unnamed)
             |vpiName:clock
             |vpiFullName:work@FSM.clock
             |vpiActual:
-            \_LogicNet: (work@FSM.clock), line:2:9, endln:2:14
+            \_LogicNet: (work@FSM.clock), line:1:12, endln:1:17
         |vpiOperand:
         \_Operation: , line:17:29, endln:17:41
           |vpiParent:
@@ -1428,7 +1442,7 @@ Design: (unnamed)
             |vpiName:keys
             |vpiFullName:work@FSM.keys
             |vpiActual:
-            \_LogicNet: (work@FSM.keys), line:2:16, endln:2:20
+            \_LogicNet: (work@FSM.keys), line:1:19, endln:1:23
       |vpiStmt:
       \_Begin: (work@FSM.FSM3), line:17:43, endln:40:6
         |vpiParent:
@@ -1446,7 +1460,7 @@ Design: (unnamed)
             |vpiName:keys
             |vpiFullName:work@FSM.FSM3.keys
             |vpiActual:
-            \_LogicNet: (work@FSM.keys), line:2:16, endln:2:20
+            \_LogicNet: (work@FSM.keys), line:1:19, endln:1:23
           |vpiStmt:
           \_Begin: (work@FSM.FSM3), line:19:13, endln:28:8
             |vpiParent:
@@ -1463,7 +1477,7 @@ Design: (unnamed)
                 |vpiName:accelerate
                 |vpiFullName:work@FSM.FSM3.accelerate
                 |vpiActual:
-                \_LogicNet: (work@FSM.accelerate), line:2:29, endln:2:39
+                \_LogicNet: (work@FSM.accelerate), line:1:32, endln:1:42
               |vpiStmt:
               \_CaseStmt: , line:22:7, endln:27:14
                 |vpiParent:
@@ -1476,7 +1490,7 @@ Design: (unnamed)
                   |vpiName:Speed
                   |vpiFullName:work@FSM.FSM3.Speed
                   |vpiActual:
-                  \_LogicNet: (work@FSM.Speed), line:4:16, endln:4:21
+                  \_LogicNet: (work@FSM.Speed), line:1:44, endln:1:49
                 |vpiCaseItem:
                 \_CaseItem: , line:23:7, endln:23:29
                   |vpiParent:
@@ -1509,7 +1523,7 @@ Design: (unnamed)
                       |vpiName:Speed
                       |vpiFullName:work@FSM.FSM3.Speed
                       |vpiActual:
-                      \_LogicNet: (work@FSM.Speed), line:4:16, endln:4:21
+                      \_LogicNet: (work@FSM.Speed), line:1:44, endln:1:49
                 |vpiCaseItem:
                 \_CaseItem: , line:24:7, endln:24:31
                   |vpiParent:
@@ -1542,7 +1556,7 @@ Design: (unnamed)
                       |vpiName:Speed
                       |vpiFullName:work@FSM.FSM3.Speed
                       |vpiActual:
-                      \_LogicNet: (work@FSM.Speed), line:4:16, endln:4:21
+                      \_LogicNet: (work@FSM.Speed), line:1:44, endln:1:49
                 |vpiCaseItem:
                 \_CaseItem: , line:25:7, endln:26:10
                   |vpiParent:
@@ -1563,7 +1577,7 @@ Design: (unnamed)
               |vpiName:brake
               |vpiFullName:work@FSM.FSM3.brake
               |vpiActual:
-              \_LogicNet: (work@FSM.brake), line:2:22, endln:2:27
+              \_LogicNet: (work@FSM.brake), line:1:25, endln:1:30
             |vpiStmt:
             \_CaseStmt: , line:30:5, endln:35:12
               |vpiParent:
@@ -1576,7 +1590,7 @@ Design: (unnamed)
                 |vpiName:Speed
                 |vpiFullName:work@FSM.FSM3.Speed
                 |vpiActual:
-                \_LogicNet: (work@FSM.Speed), line:4:16, endln:4:21
+                \_LogicNet: (work@FSM.Speed), line:1:44, endln:1:49
               |vpiCaseItem:
               \_CaseItem: , line:31:7, endln:31:31
                 |vpiParent:
@@ -1609,7 +1623,7 @@ Design: (unnamed)
                     |vpiName:Speed
                     |vpiFullName:work@FSM.FSM3.Speed
                     |vpiActual:
-                    \_LogicNet: (work@FSM.Speed), line:4:16, endln:4:21
+                    \_LogicNet: (work@FSM.Speed), line:1:44, endln:1:49
               |vpiCaseItem:
               \_CaseItem: , line:32:7, endln:32:31
                 |vpiParent:
@@ -1642,7 +1656,7 @@ Design: (unnamed)
                     |vpiName:Speed
                     |vpiFullName:work@FSM.FSM3.Speed
                     |vpiActual:
-                    \_LogicNet: (work@FSM.Speed), line:4:16, endln:4:21
+                    \_LogicNet: (work@FSM.Speed), line:1:44, endln:1:49
               |vpiCaseItem:
               \_CaseItem: , line:33:7, endln:34:10
                 |vpiParent:
@@ -1669,7 +1683,7 @@ Design: (unnamed)
                   |vpiName:Speed
                   |vpiFullName:work@FSM.FSM3.Speed
                   |vpiActual:
-                  \_LogicNet: (work@FSM.Speed), line:4:16, endln:4:21
+                  \_LogicNet: (work@FSM.Speed), line:1:44, endln:1:49
                 |vpiLhs:
                 \_RefObj: (work@FSM.FSM3.Speed), line:37:5, endln:37:10
                   |vpiParent:
@@ -1677,7 +1691,7 @@ Design: (unnamed)
                   |vpiName:Speed
                   |vpiFullName:work@FSM.FSM3.Speed
                   |vpiActual:
-                  \_LogicNet: (work@FSM.Speed), line:4:16, endln:4:21
+                  \_LogicNet: (work@FSM.Speed), line:1:44, endln:1:49
     |vpiAlwaysType:1
 ===================
 [  FATAL] : 0

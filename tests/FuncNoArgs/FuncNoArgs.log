@@ -267,30 +267,31 @@ Begin                                                  1
 BitSelect                                              1
 ClassDefn                                              8
 ClassTypespec                                          1
-Constant                                              21
+Constant                                              19
 Design                                                 1
 EnumConst                                              5
 EnumTypespec                                           1
 ForStmt                                                1
-FuncCall                                               2
+FuncCall                                               1
 Function                                              10
 IODecl                                                11
 IfStmt                                                 1
 IntTypespec                                            9
+IntegerNet                                             1
 IntegerTypespec                                        3
-IntegerVar                                             1
 LogicNet                                               1
 LogicTypespec                                          3
 Module                                                 1
-Operation                                              7
+Operation                                              6
 Package                                                1
 ParamAssign                                            3
 Parameter                                              3
-Range                                                  4
+Range                                                  3
 RefObj                                                 8
-RefTypespec                                           16
+RefTypespec                                           17
 RefVar                                                 1
 Task                                                   9
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FuncNoArgs/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -559,7 +560,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -593,14 +594,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/FuncNoArgs/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -608,7 +608,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -616,7 +616,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -624,7 +624,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -632,13 +632,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/FuncNoArgs/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -975,7 +989,7 @@ Design: (unnamed)
               |vpiName:i
               |vpiFullName:work@my_opt_reduce_or.count_nonconst_bits.i
               |vpiActual:
-              \_IntegerVar: (work@my_opt_reduce_or.count_nonconst_bits.i), line:8:17, endln:8:18
+              \_IntegerNet: (work@my_opt_reduce_or.count_nonconst_bits.i), line:8:17, endln:8:18
             |vpiOperand:
             \_Constant: , line:11:42, endln:11:43
               |vpiParent:
@@ -991,7 +1005,7 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:work@my_opt_reduce_or.count_nonconst_bits.i
             |vpiActual:
-            \_IntegerVar: (work@my_opt_reduce_or.count_nonconst_bits.i), line:8:17, endln:8:18
+            \_IntegerNet: (work@my_opt_reduce_or.count_nonconst_bits.i), line:8:17, endln:8:18
         |vpiCondition:
         \_Operation: , line:11:25, endln:11:36
           |vpiParent:
@@ -1004,7 +1018,7 @@ Design: (unnamed)
             |vpiName:i
             |vpiFullName:work@my_opt_reduce_or.count_nonconst_bits.i
             |vpiActual:
-            \_IntegerVar: (work@my_opt_reduce_or.count_nonconst_bits.i), line:8:17, endln:8:18
+            \_IntegerNet: (work@my_opt_reduce_or.count_nonconst_bits.i), line:8:17, endln:8:18
           |vpiOperand:
           \_RefObj: (work@my_opt_reduce_or.count_nonconst_bits.A_WIDTH), line:11:29, endln:11:36
             |vpiParent:
@@ -1037,7 +1051,7 @@ Design: (unnamed)
                 |vpiName:i
                 |vpiFullName:work@my_opt_reduce_or.count_nonconst_bits.i
                 |vpiActual:
-                \_IntegerVar: (work@my_opt_reduce_or.count_nonconst_bits.i), line:8:17, endln:8:18
+                \_IntegerNet: (work@my_opt_reduce_or.count_nonconst_bits.i), line:8:17, endln:8:18
           |vpiStmt:
           \_Assignment: , line:13:21, endln:13:64
             |vpiParent:
@@ -1121,20 +1135,19 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_IntegerTypespec: , line:8:9, endln:8:16
     |vpiImportTypespec:
-    \_IntegerVar: (work@my_opt_reduce_or.count_nonconst_bits.i), line:8:17, endln:8:18
+    \_IntegerNet: (work@my_opt_reduce_or.count_nonconst_bits.i), line:8:17, endln:8:18
       |vpiParent:
       \_Function: (work@my_opt_reduce_or.count_nonconst_bits), line:7:5, endln:15:16
       |vpiTypespec:
       \_RefTypespec: (work@my_opt_reduce_or.count_nonconst_bits.i), line:8:9, endln:8:16
         |vpiParent:
-        \_IntegerVar: (work@my_opt_reduce_or.count_nonconst_bits.i), line:8:17, endln:8:18
+        \_IntegerNet: (work@my_opt_reduce_or.count_nonconst_bits.i), line:8:17, endln:8:18
         |vpiFullName:work@my_opt_reduce_or.count_nonconst_bits.i
         |vpiActual:
         \_IntegerTypespec: , line:8:9, endln:8:16
       |vpiName:i
       |vpiFullName:work@my_opt_reduce_or.count_nonconst_bits.i
       |vpiSigned:1
-      |vpiAutomatic:1
     |vpiVisibility:1
     |vpiReturn:
     \_RefTypespec: (work@my_opt_reduce_or.count_nonconst_bits), line:7:14, endln:7:21

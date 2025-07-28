@@ -306,7 +306,8 @@ Parameter                                              1
 Port                                                   1
 RefModule                                              1
 RefObj                                                16
-RefTypespec                                            4
+RefTypespec                                            5
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/InsideOp/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -319,26 +320,20 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:my_pkg
   |vpiTypedef:
-  \_IntTypespec: , line:3:16, endln:3:19
+  \_EnumTypespec: , line:3:11, endln:10:10
     |vpiParent:
     \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:1:1, endln:12:11
-    |vpiSigned:1
-  |vpiTypedef:
-  \_EnumTypespec: (my_pkg::get_e), line:3:11, endln:10:10
-    |vpiParent:
-    \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:1:1, endln:12:11
-    |vpiName:my_pkg::get_e
     |vpiBaseTypespec:
-    \_RefTypespec: (my_pkg::get_e), line:3:16, endln:3:19
+    \_RefTypespec: (my_pkg), line:3:16, endln:3:19
       |vpiParent:
-      \_EnumTypespec: (my_pkg::get_e), line:3:11, endln:10:10
-      |vpiFullName:my_pkg::get_e
+      \_EnumTypespec: , line:3:11, endln:10:10
+      |vpiFullName:my_pkg
       |vpiActual:
       \_IntTypespec: , line:3:16, endln:3:19
     |vpiEnumConst:
     \_EnumConst: (Get0), line:4:5, endln:4:13
       |vpiParent:
-      \_EnumTypespec: (my_pkg::get_e), line:3:11, endln:10:10
+      \_EnumTypespec: , line:3:11, endln:10:10
       |vpiName:Get0
       |UINT:0
       |vpiDecompile:0
@@ -346,7 +341,7 @@ Design: (unnamed)
     |vpiEnumConst:
     \_EnumConst: (Get1), line:5:5, endln:5:13
       |vpiParent:
-      \_EnumTypespec: (my_pkg::get_e), line:3:11, endln:10:10
+      \_EnumTypespec: , line:3:11, endln:10:10
       |vpiName:Get1
       |UINT:1
       |vpiDecompile:1
@@ -354,7 +349,7 @@ Design: (unnamed)
     |vpiEnumConst:
     \_EnumConst: (Get2), line:6:5, endln:6:13
       |vpiParent:
-      \_EnumTypespec: (my_pkg::get_e), line:3:11, endln:10:10
+      \_EnumTypespec: , line:3:11, endln:10:10
       |vpiName:Get2
       |UINT:2
       |vpiDecompile:2
@@ -362,7 +357,7 @@ Design: (unnamed)
     |vpiEnumConst:
     \_EnumConst: (Get3), line:7:5, endln:7:13
       |vpiParent:
-      \_EnumTypespec: (my_pkg::get_e), line:3:11, endln:10:10
+      \_EnumTypespec: , line:3:11, endln:10:10
       |vpiName:Get3
       |UINT:3
       |vpiDecompile:3
@@ -370,7 +365,7 @@ Design: (unnamed)
     |vpiEnumConst:
     \_EnumConst: (Get4), line:8:5, endln:8:13
       |vpiParent:
-      \_EnumTypespec: (my_pkg::get_e), line:3:11, endln:10:10
+      \_EnumTypespec: , line:3:11, endln:10:10
       |vpiName:Get4
       |UINT:4
       |vpiDecompile:4
@@ -378,15 +373,34 @@ Design: (unnamed)
     |vpiEnumConst:
     \_EnumConst: (GetDefault), line:9:5, endln:9:21
       |vpiParent:
-      \_EnumTypespec: (my_pkg::get_e), line:3:11, endln:10:10
+      \_EnumTypespec: , line:3:11, endln:10:10
       |vpiName:GetDefault
       |UINT:100
       |vpiDecompile:100
       |vpiSize:64
+  |vpiTypedef:
+  \_IntTypespec: , line:3:16, endln:3:19
+    |vpiParent:
+    \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:1:1, endln:12:11
+    |vpiSigned:1
+  |vpiTypedef:
+  \_TypedefTypespec: (my_pkg::get_e), line:10:5, endln:10:10
+    |vpiParent:
+    \_Package: my_pkg (my_pkg), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:1:1, endln:12:11
+    |vpiName:my_pkg::get_e
+    |vpiTypedefAlias:
+    \_RefTypespec: (my_pkg::get_e), line:3:11, endln:10:4
+      |vpiParent:
+      \_TypedefTypespec: (my_pkg::get_e), line:10:5, endln:10:10
+      |vpiFullName:my_pkg::get_e
+      |vpiActual:
+      \_EnumTypespec: , line:3:11, endln:10:10
+  |vpiImportTypespec:
+  \_EnumTypespec: , line:3:11, endln:10:10
   |vpiImportTypespec:
   \_IntTypespec: , line:3:16, endln:3:19
   |vpiImportTypespec:
-  \_EnumTypespec: (my_pkg::get_e), line:3:11, endln:10:10
+  \_TypedefTypespec: (my_pkg::get_e), line:10:5, endln:10:10
   |vpiDefName:my_pkg
 |vpiAllModules:
 \_Module: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/InsideOp/dut.sv, line:14:1, endln:15:10
@@ -413,6 +427,7 @@ Design: (unnamed)
     |vpiName:out
     |vpiFullName:work@top.out
     |vpiSigned:1
+    |vpiRandType:1
     |vpiVisibility:1
   |vpiParameter:
   \_Parameter: (work@top.GetWhat), line:20:21, endln:20:35
@@ -425,7 +440,7 @@ Design: (unnamed)
       |vpiName:get_e
       |vpiFullName:work@top.GetWhat.get_e
       |vpiActual:
-      \_EnumTypespec: (my_pkg::get_e), line:3:11, endln:10:10
+      \_TypedefTypespec: (my_pkg::get_e), line:10:5, endln:10:10
     |vpiName:GetWhat
     |vpiFullName:work@top.GetWhat
   |vpiParamAssign:

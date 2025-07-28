@@ -118,7 +118,7 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Assignment                                             1
 Begin                                                  1
-Constant                                              11
+Constant                                               9
 Design                                                 1
 ImportTypespec                                         1
 Initial                                                1
@@ -127,12 +127,12 @@ LogicTypespec                                          1
 Module                                                 1
 Operation                                              1
 Package                                                1
-PackedArrayTypespec                                    1
 ParamAssign                                            2
 Parameter                                              2
-Range                                                  2
+Range                                                  1
 RefObj                                                 3
-RefTypespec                                            3
+RefTypespec                                            4
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageNet/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -188,13 +188,13 @@ Design: (unnamed)
     |vpiLhs:
     \_Parameter: (my_package1::p2), line:4:12, endln:4:18
   |vpiTypedef:
-  \_PackedArrayTypespec: , line:6:9, endln:6:20
+  \_LogicTypespec: , line:6:9, endln:6:20
     |vpiParent:
     \_Package: my_package1 (my_package1), file:${SURELOG_DIR}/tests/PackageNet/dut.sv, line:1:1, endln:10:11
     |vpiRange:
     \_Range: , line:6:15, endln:6:20
       |vpiParent:
-      \_PackedArrayTypespec: , line:6:9, endln:6:20
+      \_LogicTypespec: , line:6:9, endln:6:20
       |vpiLeftRange:
       \_Constant: , line:6:16, endln:6:17
         |vpiParent:
@@ -212,46 +212,33 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_LogicTypespec: (word), line:6:9, endln:6:20
+  \_TypedefTypespec: (my_package1::word), line:6:21, endln:6:25
     |vpiParent:
     \_Package: my_package1 (my_package1), file:${SURELOG_DIR}/tests/PackageNet/dut.sv, line:1:1, endln:10:11
-    |vpiName:word
-    |vpiRange:
-    \_Range: , line:6:15, endln:6:20
+    |vpiName:my_package1::word
+    |vpiTypedefAlias:
+    \_RefTypespec: (my_package1::word), line:6:9, endln:6:14
       |vpiParent:
-      \_LogicTypespec: (word), line:6:9, endln:6:20
-      |vpiLeftRange:
-      \_Constant: , line:6:16, endln:6:17
-        |vpiParent:
-        \_Range: , line:6:15, endln:6:20
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:6:18, endln:6:19
-        |vpiParent:
-        \_Range: , line:6:15, endln:6:20
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
+      \_TypedefTypespec: (my_package1::word), line:6:21, endln:6:25
+      |vpiFullName:my_package1::word
+      |vpiActual:
+      \_LogicTypespec: , line:6:9, endln:6:20
   |vpiImportTypespec:
-  \_PackedArrayTypespec: , line:6:9, endln:6:20
+  \_LogicTypespec: , line:6:9, endln:6:20
   |vpiImportTypespec:
-  \_LogicTypespec: (word), line:6:9, endln:6:20
+  \_TypedefTypespec: (my_package1::word), line:6:21, endln:6:25
   |vpiImportTypespec:
   \_LogicNet: (my_package1::v), line:8:6, endln:8:7
     |vpiParent:
     \_Package: my_package1 (my_package1), file:${SURELOG_DIR}/tests/PackageNet/dut.sv, line:1:1, endln:10:11
     |vpiTypespec:
-    \_RefTypespec: (my_package1::v::word), line:8:1, endln:8:5
+    \_RefTypespec: (my_package1::v::my_package1::word), line:8:1, endln:8:5
       |vpiParent:
       \_LogicNet: (my_package1::v), line:8:6, endln:8:7
-      |vpiName:word
-      |vpiFullName:my_package1::v::word
+      |vpiName:my_package1::word
+      |vpiFullName:my_package1::v::my_package1::word
       |vpiActual:
-      \_LogicTypespec: (word), line:6:9, endln:6:20
+      \_TypedefTypespec: (my_package1::word), line:6:21, endln:6:25
     |vpiName:v
     |vpiFullName:my_package1::v
   |vpiDefName:my_package1

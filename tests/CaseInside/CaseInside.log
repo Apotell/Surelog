@@ -194,8 +194,9 @@ Operation                                              5
 Package                                                2
 Range                                                  1
 RefObj                                                 5
-RefTypespec                                           13
+RefTypespec                                           15
 Task                                                   9
+TypedefTypespec                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CaseInside/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -464,7 +465,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -498,14 +499,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/CaseInside/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -513,7 +513,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -521,7 +521,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -529,7 +529,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -537,13 +537,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/CaseInside/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -746,6 +760,41 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:dm
   |vpiTypedef:
+  \_EnumTypespec: , line:4:11, endln:8:13
+    |vpiParent:
+    \_Package: dm (dm), file:${SURELOG_DIR}/tests/CaseInside/top.sv, line:1:1, endln:10:16
+    |vpiBaseTypespec:
+    \_RefTypespec: (dm), line:4:16, endln:4:27
+      |vpiParent:
+      \_EnumTypespec: , line:4:11, endln:8:13
+      |vpiFullName:dm
+      |vpiActual:
+      \_LogicTypespec: , line:4:16, endln:4:27
+    |vpiEnumConst:
+    \_EnumConst: (DMControl), line:5:5, endln:5:25
+      |vpiParent:
+      \_EnumTypespec: , line:4:11, endln:8:13
+      |vpiName:DMControl
+      |HEX:10
+      |vpiDecompile:8'h10
+      |vpiSize:8
+    |vpiEnumConst:
+    \_EnumConst: (Data0), line:6:5, endln:6:25
+      |vpiParent:
+      \_EnumTypespec: , line:4:11, endln:8:13
+      |vpiName:Data0
+      |HEX:11
+      |vpiDecompile:8'h11
+      |vpiSize:8
+    |vpiEnumConst:
+    \_EnumConst: (Data1), line:7:5, endln:7:25
+      |vpiParent:
+      \_EnumTypespec: , line:4:11, endln:8:13
+      |vpiName:Data1
+      |HEX:12
+      |vpiDecompile:8'h12
+      |vpiSize:8
+  |vpiTypedef:
   \_LogicTypespec: , line:4:16, endln:4:27
     |vpiParent:
     \_Package: dm (dm), file:${SURELOG_DIR}/tests/CaseInside/top.sv, line:1:1, endln:10:16
@@ -770,45 +819,23 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_EnumTypespec: (dm::dm_csr_e), line:4:11, endln:8:13
+  \_TypedefTypespec: (dm::dm_csr_e), line:8:5, endln:8:13
     |vpiParent:
     \_Package: dm (dm), file:${SURELOG_DIR}/tests/CaseInside/top.sv, line:1:1, endln:10:16
     |vpiName:dm::dm_csr_e
-    |vpiBaseTypespec:
-    \_RefTypespec: (dm::dm_csr_e), line:4:16, endln:4:27
+    |vpiTypedefAlias:
+    \_RefTypespec: (dm::dm_csr_e), line:4:11, endln:8:4
       |vpiParent:
-      \_EnumTypespec: (dm::dm_csr_e), line:4:11, endln:8:13
+      \_TypedefTypespec: (dm::dm_csr_e), line:8:5, endln:8:13
       |vpiFullName:dm::dm_csr_e
       |vpiActual:
-      \_LogicTypespec: , line:4:16, endln:4:27
-    |vpiEnumConst:
-    \_EnumConst: (DMControl), line:5:5, endln:5:25
-      |vpiParent:
-      \_EnumTypespec: (dm::dm_csr_e), line:4:11, endln:8:13
-      |vpiName:DMControl
-      |HEX:10
-      |vpiDecompile:8'h10
-      |vpiSize:8
-    |vpiEnumConst:
-    \_EnumConst: (Data0), line:6:5, endln:6:25
-      |vpiParent:
-      \_EnumTypespec: (dm::dm_csr_e), line:4:11, endln:8:13
-      |vpiName:Data0
-      |HEX:11
-      |vpiDecompile:8'h11
-      |vpiSize:8
-    |vpiEnumConst:
-    \_EnumConst: (Data1), line:7:5, endln:7:25
-      |vpiParent:
-      \_EnumTypespec: (dm::dm_csr_e), line:4:11, endln:8:13
-      |vpiName:Data1
-      |HEX:12
-      |vpiDecompile:8'h12
-      |vpiSize:8
+      \_EnumTypespec: , line:4:11, endln:8:13
+  |vpiImportTypespec:
+  \_EnumTypespec: , line:4:11, endln:8:13
   |vpiImportTypespec:
   \_LogicTypespec: , line:4:16, endln:4:27
   |vpiImportTypespec:
-  \_EnumTypespec: (dm::dm_csr_e), line:4:11, endln:8:13
+  \_TypedefTypespec: (dm::dm_csr_e), line:8:5, endln:8:13
   |vpiDefName:dm
   |vpiEndLabel:dm
 |vpiAllModules:

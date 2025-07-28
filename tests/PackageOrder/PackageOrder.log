@@ -64,6 +64,8 @@ Design                                                 1
 ImportTypespec                                         2
 LogicTypespec                                          1
 Package                                                3
+RefTypespec                                            1
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageOrder/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -76,12 +78,25 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:B
   |vpiTypedef:
-  \_LogicTypespec: (C), line:2:11, endln:2:16
+  \_LogicTypespec: , line:2:11, endln:2:16
     |vpiParent:
     \_Package: B (B), file:${SURELOG_DIR}/tests/PackageOrder/dut.sv, line:1:1, endln:3:11
-    |vpiName:C
+  |vpiTypedef:
+  \_TypedefTypespec: (B::C), line:2:17, endln:2:18
+    |vpiParent:
+    \_Package: B (B), file:${SURELOG_DIR}/tests/PackageOrder/dut.sv, line:1:1, endln:3:11
+    |vpiName:B::C
+    |vpiTypedefAlias:
+    \_RefTypespec: (B::C), line:2:11, endln:2:16
+      |vpiParent:
+      \_TypedefTypespec: (B::C), line:2:17, endln:2:18
+      |vpiFullName:B::C
+      |vpiActual:
+      \_LogicTypespec: , line:2:11, endln:2:16
   |vpiImportTypespec:
-  \_LogicTypespec: (C), line:2:11, endln:2:16
+  \_LogicTypespec: , line:2:11, endln:2:16
+  |vpiImportTypespec:
+  \_TypedefTypespec: (B::C), line:2:17, endln:2:18
   |vpiDefName:B
 |vpiAllPackages:
 \_Package: D (D), file:${SURELOG_DIR}/tests/PackageOrder/dut.sv, line:5:1, endln:7:11

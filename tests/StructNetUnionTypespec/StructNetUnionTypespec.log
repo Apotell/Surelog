@@ -206,7 +206,7 @@ Begin                                                  2
 BitTypespec                                            1
 ClassDefn                                              8
 ClassTypespec                                          1
-Constant                                              15
+Constant                                               9
 Design                                                 1
 EnumConst                                              5
 EnumTypespec                                           1
@@ -220,14 +220,16 @@ LogicNet                                               1
 LogicTypespec                                          3
 Module                                                 2
 Package                                                1
+PackedArrayTypespec                                    1
 Port                                                   2
-Range                                                  4
+Range                                                  1
 RefObj                                                 9
-RefTypespec                                           21
-StructNet                                              2
+RefTypespec                                           23
 Task                                                   9
+TypedefTypespec                                        1
 TypespecMember                                         3
 UnionTypespec                                          2
+UnionVar                                               2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/StructNetUnionTypespec/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -496,7 +498,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -530,14 +532,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/StructNetUnionTypespec/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -545,7 +546,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -553,7 +554,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -561,7 +562,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -569,13 +570,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/StructNetUnionTypespec/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -791,6 +806,22 @@ Design: (unnamed)
     |vpiName:o
     |vpiFullName:work@AnonymousUnion.o
     |vpiSigned:1
+    |vpiRandType:1
+    |vpiVisibility:1
+  |vpiVariables:
+  \_UnionVar: (work@AnonymousUnion.un), line:5:6, endln:5:8
+    |vpiParent:
+    \_Module: work@AnonymousUnion (work@AnonymousUnion), file:${SURELOG_DIR}/tests/StructNetUnionTypespec/dut.sv, line:1:1, endln:11:10
+    |vpiTypespec:
+    \_RefTypespec: (work@AnonymousUnion.un), line:2:4, endln:5:5
+      |vpiParent:
+      \_UnionVar: (work@AnonymousUnion.un), line:5:6, endln:5:8
+      |vpiFullName:work@AnonymousUnion.un
+      |vpiActual:
+      \_UnionTypespec: , line:2:4, endln:5:5
+    |vpiName:un
+    |vpiFullName:work@AnonymousUnion.un
+    |vpiRandType:1
     |vpiVisibility:1
   |vpiTypedef:
   \_IntTypespec: , line:1:30, endln:1:33
@@ -852,24 +883,10 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_IntTypespec: , line:4:7, endln:4:10
   |vpiImportTypespec:
-  \_StructNet: (work@AnonymousUnion.un), line:5:6, endln:5:8
-    |vpiParent:
-    \_Module: work@AnonymousUnion (work@AnonymousUnion), file:${SURELOG_DIR}/tests/StructNetUnionTypespec/dut.sv, line:1:1, endln:11:10
-    |vpiTypespec:
-    \_RefTypespec: (work@AnonymousUnion.un.un), line:2:4, endln:2:16
-      |vpiParent:
-      \_StructNet: (work@AnonymousUnion.un), line:5:6, endln:5:8
-      |vpiName:un
-      |vpiFullName:work@AnonymousUnion.un.un
-      |vpiActual:
-      \_UnionTypespec: , line:2:4, endln:5:5
-    |vpiName:un
-    |vpiFullName:work@AnonymousUnion.un
+  \_UnionVar: (work@AnonymousUnion.un), line:5:6, endln:5:8
   |vpiImportTypespec:
   \_IntTypespec: , line:1:30, endln:1:33
   |vpiDefName:work@AnonymousUnion
-  |vpiNet:
-  \_StructNet: (work@AnonymousUnion.un), line:5:6, endln:5:8
   |vpiPort:
   \_Port: (o), line:1:34, endln:1:35
     |vpiParent:
@@ -892,20 +909,6 @@ Design: (unnamed)
       |vpiParent:
       \_Initial: , line:7:4, endln:10:7
       |vpiFullName:work@AnonymousUnion
-      |vpiImportTypespec:
-      \_LogicNet: (work@AnonymousUnion.v1), line:8:10, endln:8:12
-        |vpiParent:
-        \_Begin: (work@AnonymousUnion), line:7:12, endln:10:7
-        |vpiName:v1
-        |vpiFullName:work@AnonymousUnion.v1
-        |vpiNetType:1
-      |vpiImportTypespec:
-      \_LogicNet: (work@AnonymousUnion.v2), line:9:14, endln:9:16
-        |vpiParent:
-        \_Begin: (work@AnonymousUnion), line:7:12, endln:10:7
-        |vpiName:v2
-        |vpiFullName:work@AnonymousUnion.v2
-        |vpiNetType:1
       |vpiStmt:
       \_Assignment: , line:8:7, endln:8:16
         |vpiParent:
@@ -930,14 +933,14 @@ Design: (unnamed)
             \_HierPath: (un.v1), line:8:9, endln:8:12
             |vpiName:un
             |vpiActual:
-            \_StructNet: (work@AnonymousUnion.un), line:5:6, endln:5:8
+            \_UnionVar: (work@AnonymousUnion.un), line:5:6, endln:5:8
           |vpiActual:
           \_RefObj: (v1), line:8:10, endln:8:12
             |vpiParent:
             \_HierPath: (un.v1), line:8:9, endln:8:12
             |vpiName:v1
             |vpiActual:
-            \_LogicNet: (work@AnonymousUnion.v1), line:8:10, endln:8:12
+            \_TypespecMember: (v1), line:3:11, endln:3:13
           |vpiName:un.v1
       |vpiStmt:
       \_Assignment: , line:9:7, endln:9:16
@@ -955,7 +958,7 @@ Design: (unnamed)
             \_HierPath: (un.v2), line:9:11, endln:9:16
             |vpiName:un
             |vpiActual:
-            \_StructNet: (work@AnonymousUnion.un), line:5:6, endln:5:8
+            \_UnionVar: (work@AnonymousUnion.un), line:5:6, endln:5:8
           |vpiActual:
           \_RefObj: (work@AnonymousUnion.v2), line:9:14, endln:9:16
             |vpiParent:
@@ -963,7 +966,7 @@ Design: (unnamed)
             |vpiName:v2
             |vpiFullName:work@AnonymousUnion.v2
             |vpiActual:
-            \_LogicNet: (work@AnonymousUnion.v2), line:9:14, endln:9:16
+            \_TypespecMember: (v2), line:4:11, endln:4:13
           |vpiName:un.v2
         |vpiLhs:
         \_RefObj: (work@AnonymousUnion.o), line:9:7, endln:9:8
@@ -978,30 +981,25 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@AssignToUnionAndReadField
-  |vpiTypedef:
-  \_LogicTypespec: , line:13:41, endln:13:52
+  |vpiVariables:
+  \_UnionVar: (work@AssignToUnionAndReadField.un), line:16:6, endln:16:8
     |vpiParent:
     \_Module: work@AssignToUnionAndReadField (work@AssignToUnionAndReadField), file:${SURELOG_DIR}/tests/StructNetUnionTypespec/dut.sv, line:13:1, endln:22:10
-    |vpiRange:
-    \_Range: , line:13:47, endln:13:52
+    |vpiTypespec:
+    \_RefTypespec: (work@AssignToUnionAndReadField.un), line:14:4, endln:16:5
       |vpiParent:
-      \_LogicTypespec: , line:13:41, endln:13:52
-      |vpiLeftRange:
-      \_Constant: , line:13:48, endln:13:49
-        |vpiParent:
-        \_Range: , line:13:47, endln:13:52
-        |vpiDecompile:3
-        |vpiSize:64
-        |UINT:3
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:13:50, endln:13:51
-        |vpiParent:
-        \_Range: , line:13:47, endln:13:52
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
+      \_UnionVar: (work@AssignToUnionAndReadField.un), line:16:6, endln:16:8
+      |vpiFullName:work@AssignToUnionAndReadField.un
+      |vpiActual:
+      \_UnionTypespec: , line:14:4, endln:16:5
+    |vpiName:un
+    |vpiFullName:work@AssignToUnionAndReadField.un
+    |vpiRandType:1
+    |vpiVisibility:1
+  |vpiTypedef:
+  \_LogicTypespec: , line:13:41, endln:13:46
+    |vpiParent:
+    \_Module: work@AssignToUnionAndReadField (work@AssignToUnionAndReadField), file:${SURELOG_DIR}/tests/StructNetUnionTypespec/dut.sv, line:13:1, endln:22:10
   |vpiTypedef:
   \_UnionTypespec: , line:14:4, endln:16:5
     |vpiParent:
@@ -1018,15 +1016,19 @@ Design: (unnamed)
         \_TypespecMember: (field), line:15:17, endln:15:22
         |vpiFullName:work@AssignToUnionAndReadField.field
         |vpiActual:
-        \_BitTypespec: , line:15:7, endln:15:16
+        \_PackedArrayTypespec: , line:15:7, endln:15:16
   |vpiTypedef:
-  \_BitTypespec: , line:15:7, endln:15:16
+  \_BitTypespec: , line:15:7, endln:15:10
+    |vpiParent:
+    \_Module: work@AssignToUnionAndReadField (work@AssignToUnionAndReadField), file:${SURELOG_DIR}/tests/StructNetUnionTypespec/dut.sv, line:13:1, endln:22:10
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:15:7, endln:15:16
     |vpiParent:
     \_Module: work@AssignToUnionAndReadField (work@AssignToUnionAndReadField), file:${SURELOG_DIR}/tests/StructNetUnionTypespec/dut.sv, line:13:1, endln:22:10
     |vpiRange:
     \_Range: , line:15:11, endln:15:16
       |vpiParent:
-      \_BitTypespec: , line:15:7, endln:15:16
+      \_PackedArrayTypespec: , line:15:7, endln:15:16
       |vpiLeftRange:
       \_Constant: , line:15:12, endln:15:13
         |vpiParent:
@@ -1043,71 +1045,46 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@AssignToUnionAndReadField), line:15:7, endln:15:10
+      |vpiParent:
+      \_PackedArrayTypespec: , line:15:7, endln:15:16
+      |vpiFullName:work@AssignToUnionAndReadField
+      |vpiActual:
+      \_BitTypespec: , line:15:7, endln:15:10
   |vpiTypedef:
-  \_LogicTypespec: , line:13:41, endln:13:52
+  \_LogicTypespec: , line:13:41, endln:13:46
     |vpiParent:
     \_Module: work@AssignToUnionAndReadField (work@AssignToUnionAndReadField), file:${SURELOG_DIR}/tests/StructNetUnionTypespec/dut.sv, line:13:1, endln:22:10
-    |vpiRange:
-    \_Range: , line:13:47, endln:13:52
-      |vpiParent:
-      \_LogicTypespec: , line:13:41, endln:13:52
-      |vpiLeftRange:
-      \_Constant: , line:13:48, endln:13:49
-        |vpiParent:
-        \_Range: , line:13:47, endln:13:52
-        |vpiDecompile:3
-        |vpiSize:64
-        |UINT:3
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:13:50, endln:13:51
-        |vpiParent:
-        \_Range: , line:13:47, endln:13:52
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
   |vpiImportTypespec:
-  \_LogicTypespec: , line:13:41, endln:13:52
+  \_LogicTypespec: , line:13:41, endln:13:46
   |vpiImportTypespec:
   \_LogicNet: (work@AssignToUnionAndReadField.o), line:13:53, endln:13:54
     |vpiParent:
     \_Module: work@AssignToUnionAndReadField (work@AssignToUnionAndReadField), file:${SURELOG_DIR}/tests/StructNetUnionTypespec/dut.sv, line:13:1, endln:22:10
     |vpiTypespec:
-    \_RefTypespec: (work@AssignToUnionAndReadField.o), line:13:41, endln:13:52
+    \_RefTypespec: (work@AssignToUnionAndReadField.o), line:13:41, endln:13:46
       |vpiParent:
       \_LogicNet: (work@AssignToUnionAndReadField.o), line:13:53, endln:13:54
       |vpiFullName:work@AssignToUnionAndReadField.o
       |vpiActual:
-      \_LogicTypespec: , line:13:41, endln:13:52
+      \_LogicTypespec: , line:13:41, endln:13:46
     |vpiName:o
     |vpiFullName:work@AssignToUnionAndReadField.o
     |vpiNetType:36
   |vpiImportTypespec:
   \_UnionTypespec: , line:14:4, endln:16:5
   |vpiImportTypespec:
-  \_BitTypespec: , line:15:7, endln:15:16
+  \_BitTypespec: , line:15:7, endln:15:10
   |vpiImportTypespec:
-  \_StructNet: (work@AssignToUnionAndReadField.un), line:16:6, endln:16:8
-    |vpiParent:
-    \_Module: work@AssignToUnionAndReadField (work@AssignToUnionAndReadField), file:${SURELOG_DIR}/tests/StructNetUnionTypespec/dut.sv, line:13:1, endln:22:10
-    |vpiTypespec:
-    \_RefTypespec: (work@AssignToUnionAndReadField.un.un), line:14:4, endln:14:16
-      |vpiParent:
-      \_StructNet: (work@AssignToUnionAndReadField.un), line:16:6, endln:16:8
-      |vpiName:un
-      |vpiFullName:work@AssignToUnionAndReadField.un.un
-      |vpiActual:
-      \_UnionTypespec: , line:14:4, endln:16:5
-    |vpiName:un
-    |vpiFullName:work@AssignToUnionAndReadField.un
+  \_PackedArrayTypespec: , line:15:7, endln:15:16
   |vpiImportTypespec:
-  \_LogicTypespec: , line:13:41, endln:13:52
+  \_UnionVar: (work@AssignToUnionAndReadField.un), line:16:6, endln:16:8
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:13:41, endln:13:46
   |vpiDefName:work@AssignToUnionAndReadField
   |vpiNet:
   \_LogicNet: (work@AssignToUnionAndReadField.o), line:13:53, endln:13:54
-  |vpiNet:
-  \_StructNet: (work@AssignToUnionAndReadField.un), line:16:6, endln:16:8
   |vpiPort:
   \_Port: (o), line:13:53, endln:13:54
     |vpiParent:
@@ -1120,7 +1097,7 @@ Design: (unnamed)
       \_Port: (o), line:13:53, endln:13:54
       |vpiFullName:work@AssignToUnionAndReadField.o
       |vpiActual:
-      \_LogicTypespec: , line:13:41, endln:13:52
+      \_LogicTypespec: , line:13:41, endln:13:46
   |vpiProcess:
   \_Initial: , line:18:4, endln:21:7
     |vpiParent:
@@ -1130,13 +1107,6 @@ Design: (unnamed)
       |vpiParent:
       \_Initial: , line:18:4, endln:21:7
       |vpiFullName:work@AssignToUnionAndReadField
-      |vpiImportTypespec:
-      \_LogicNet: (work@AssignToUnionAndReadField.field), line:20:14, endln:20:19
-        |vpiParent:
-        \_Begin: (work@AssignToUnionAndReadField), line:18:12, endln:21:7
-        |vpiName:field
-        |vpiFullName:work@AssignToUnionAndReadField.field
-        |vpiNetType:1
       |vpiStmt:
       \_Assignment: , line:19:7, endln:19:16
         |vpiParent:
@@ -1158,7 +1128,7 @@ Design: (unnamed)
           |vpiName:un
           |vpiFullName:work@AssignToUnionAndReadField.un
           |vpiActual:
-          \_StructNet: (work@AssignToUnionAndReadField.un), line:16:6, endln:16:8
+          \_UnionVar: (work@AssignToUnionAndReadField.un), line:16:6, endln:16:8
       |vpiStmt:
       \_Assignment: , line:20:7, endln:20:19
         |vpiParent:
@@ -1175,7 +1145,7 @@ Design: (unnamed)
             \_HierPath: (un.field), line:20:11, endln:20:19
             |vpiName:un
             |vpiActual:
-            \_StructNet: (work@AssignToUnionAndReadField.un), line:16:6, endln:16:8
+            \_UnionVar: (work@AssignToUnionAndReadField.un), line:16:6, endln:16:8
           |vpiActual:
           \_RefObj: (work@AssignToUnionAndReadField.field), line:20:14, endln:20:19
             |vpiParent:
@@ -1183,7 +1153,7 @@ Design: (unnamed)
             |vpiName:field
             |vpiFullName:work@AssignToUnionAndReadField.field
             |vpiActual:
-            \_LogicNet: (work@AssignToUnionAndReadField.field), line:20:14, endln:20:19
+            \_TypespecMember: (field), line:15:17, endln:15:22
           |vpiName:un.field
         |vpiLhs:
         \_RefObj: (work@AssignToUnionAndReadField.o), line:20:7, endln:20:8

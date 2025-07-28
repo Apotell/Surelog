@@ -1071,7 +1071,7 @@ Begin                                                 18
 CaseItem                                               3
 ClassDefn                                              8
 ClassTypespec                                          1
-Constant                                              52
+Constant                                              32
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              5
@@ -1097,12 +1097,13 @@ ParamAssign                                            5
 Parameter                                              5
 Port                                                  28
 PrimTerm                                               6
-Range                                                 13
+Range                                                  3
 RefModule                                              9
 RefObj                                                44
-RefTypespec                                           13
+RefTypespec                                           14
 RefVar                                                 4
 Task                                                   9
+TypedefTypespec                                        1
 Udp                                                    1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnitElab/slpp_unit/surelog.uhdm ...
@@ -1372,7 +1373,7 @@ Design: (unnamed)
         |vpiName:state
         |vpiFullName:builtin::process::status::state
         |vpiActual:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiInternalScope:
     \_Task: (builtin::process::kill), line:40:5, endln:41:12
       |vpiParent:
@@ -1406,14 +1407,13 @@ Design: (unnamed)
       |vpiMethod:1
       |vpiVisibility:1
     |vpiTypedef:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
       |vpiParent:
       \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/UnitElab/builtin.sv, line:30:3, endln:52:11
-      |vpiName:state
       |vpiEnumConst:
       \_EnumConst: (FINISHED), line:32:20, endln:32:28
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:FINISHED
         |INT:0
         |vpiDecompile:0
@@ -1421,7 +1421,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (RUNNING), line:32:30, endln:32:37
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:RUNNING
         |INT:1
         |vpiDecompile:1
@@ -1429,7 +1429,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (WAITING), line:32:39, endln:32:46
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:WAITING
         |INT:2
         |vpiDecompile:2
@@ -1437,7 +1437,7 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (SUSPENDED), line:32:48, endln:32:57
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:SUSPENDED
         |INT:3
         |vpiDecompile:3
@@ -1445,13 +1445,27 @@ Design: (unnamed)
       |vpiEnumConst:
       \_EnumConst: (KILLED), line:32:59, endln:32:65
         |vpiParent:
-        \_EnumTypespec: (state), line:32:13, endln:32:73
+        \_EnumTypespec: , line:32:13, endln:32:73
         |vpiName:KILLED
         |INT:4
         |vpiDecompile:4
         |vpiSize:64
+    |vpiTypedef:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
+      |vpiParent:
+      \_ClassDefn: (builtin::process), file:${SURELOG_DIR}/tests/UnitElab/builtin.sv, line:30:3, endln:52:11
+      |vpiName:state
+      |vpiTypedefAlias:
+      \_RefTypespec: (builtin::process::state), line:32:13, endln:32:67
+        |vpiParent:
+        \_TypedefTypespec: (state), line:32:68, endln:32:73
+        |vpiFullName:builtin::process::state
+        |vpiActual:
+        \_EnumTypespec: , line:32:13, endln:32:73
     |vpiImportTypespec:
-    \_EnumTypespec: (state), line:32:13, endln:32:73
+    \_EnumTypespec: , line:32:13, endln:32:73
+    |vpiImportTypespec:
+    \_TypedefTypespec: (state), line:32:68, endln:32:73
     |vpiImportTypespec:
     \_Function: (builtin::process::self), line:34:5, endln:35:16
     |vpiImportTypespec:
@@ -1941,30 +1955,30 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:work@my_module
   |vpiImportTypespec:
-  \_LogicNet: (work@my_module.a), line:21:7, endln:21:8
+  \_LogicNet: (work@my_module.a), line:20:19, endln:20:20
     |vpiParent:
     \_Module: work@my_module (work@my_module), file:${SURELOG_DIR}/tests/UnitElab/top.v, line:20:1, endln:24:10
     |vpiName:a
     |vpiFullName:work@my_module.a
   |vpiImportTypespec:
-  \_LogicNet: (work@my_module.b), line:21:10, endln:21:11
+  \_LogicNet: (work@my_module.b), line:20:22, endln:20:23
     |vpiParent:
     \_Module: work@my_module (work@my_module), file:${SURELOG_DIR}/tests/UnitElab/top.v, line:20:1, endln:24:10
     |vpiName:b
     |vpiFullName:work@my_module.b
   |vpiImportTypespec:
-  \_LogicNet: (work@my_module.c), line:22:8, endln:22:9
+  \_LogicNet: (work@my_module.c), line:20:25, endln:20:26
     |vpiParent:
     \_Module: work@my_module (work@my_module), file:${SURELOG_DIR}/tests/UnitElab/top.v, line:20:1, endln:24:10
     |vpiName:c
     |vpiFullName:work@my_module.c
   |vpiDefName:work@my_module
   |vpiNet:
-  \_LogicNet: (work@my_module.a), line:21:7, endln:21:8
+  \_LogicNet: (work@my_module.a), line:20:19, endln:20:20
   |vpiNet:
-  \_LogicNet: (work@my_module.b), line:21:10, endln:21:11
+  \_LogicNet: (work@my_module.b), line:20:22, endln:20:23
   |vpiNet:
-  \_LogicNet: (work@my_module.c), line:22:8, endln:22:9
+  \_LogicNet: (work@my_module.c), line:20:25, endln:20:26
   |vpiPort:
   \_Port: (a), line:20:19, endln:20:20
     |vpiParent:
@@ -1999,7 +2013,7 @@ Design: (unnamed)
         |vpiName:a
         |vpiFullName:work@my_module.a
         |vpiActual:
-        \_LogicNet: (work@my_module.a), line:21:7, endln:21:8
+        \_LogicNet: (work@my_module.a), line:20:19, endln:20:20
       |vpiOperand:
       \_RefObj: (work@my_module.b), line:23:18, endln:23:19
         |vpiParent:
@@ -2007,7 +2021,7 @@ Design: (unnamed)
         |vpiName:b
         |vpiFullName:work@my_module.b
         |vpiActual:
-        \_LogicNet: (work@my_module.b), line:21:10, endln:21:11
+        \_LogicNet: (work@my_module.b), line:20:22, endln:20:23
     |vpiLhs:
     \_RefObj: (work@my_module.c), line:23:10, endln:23:11
       |vpiParent:
@@ -2015,7 +2029,7 @@ Design: (unnamed)
       |vpiName:c
       |vpiFullName:work@my_module.c
       |vpiActual:
-      \_LogicNet: (work@my_module.c), line:22:8, endln:22:9
+      \_LogicNet: (work@my_module.c), line:20:25, endln:20:26
 |vpiAllModules:
 \_Module: work@small_test (work@small_test), file:${SURELOG_DIR}/tests/UnitElab/small.v, line:5:1, endln:54:10
   |vpiParent:
@@ -3065,30 +3079,30 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ModuleTypespec: (my_module), line:29:3, endln:29:12
   |vpiImportTypespec:
-  \_LogicNet: (work@top.a), line:27:13, endln:27:14
+  \_LogicNet: (work@top.a), line:26:13, endln:26:14
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitElab/top.v, line:26:1, endln:31:10
     |vpiName:a
     |vpiFullName:work@top.a
   |vpiImportTypespec:
-  \_LogicNet: (work@top.b), line:27:16, endln:27:17
+  \_LogicNet: (work@top.b), line:26:16, endln:26:17
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitElab/top.v, line:26:1, endln:31:10
     |vpiName:b
     |vpiFullName:work@top.b
   |vpiImportTypespec:
-  \_LogicNet: (work@top.c), line:28:14, endln:28:15
+  \_LogicNet: (work@top.c), line:26:19, endln:26:20
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitElab/top.v, line:26:1, endln:31:10
     |vpiName:c
     |vpiFullName:work@top.c
   |vpiDefName:work@top
   |vpiNet:
-  \_LogicNet: (work@top.a), line:27:13, endln:27:14
+  \_LogicNet: (work@top.a), line:26:13, endln:26:14
   |vpiNet:
-  \_LogicNet: (work@top.b), line:27:16, endln:27:17
+  \_LogicNet: (work@top.b), line:26:16, endln:26:17
   |vpiNet:
-  \_LogicNet: (work@top.c), line:28:14, endln:28:15
+  \_LogicNet: (work@top.c), line:26:19, endln:26:20
   |vpiPort:
   \_Port: (a), line:26:13, endln:26:14
     |vpiParent:
@@ -3192,7 +3206,7 @@ Design: (unnamed)
         |vpiName:a
         |vpiFullName:work@top.inst.a
         |vpiActual:
-        \_LogicNet: (work@top.a), line:27:13, endln:27:14
+        \_LogicNet: (work@top.a), line:26:13, endln:26:14
     |vpiPort:
     \_Port: , line:29:38, endln:29:39
       |vpiParent:
@@ -3204,7 +3218,7 @@ Design: (unnamed)
         |vpiName:b
         |vpiFullName:work@top.inst.b
         |vpiActual:
-        \_LogicNet: (work@top.b), line:27:16, endln:27:17
+        \_LogicNet: (work@top.b), line:26:16, endln:26:17
     |vpiPort:
     \_Port: , line:29:41, endln:29:42
       |vpiParent:
@@ -3216,7 +3230,7 @@ Design: (unnamed)
         |vpiName:c
         |vpiFullName:work@top.inst.c
         |vpiActual:
-        \_LogicNet: (work@top.c), line:28:14, endln:28:15
+        \_LogicNet: (work@top.c), line:26:19, endln:26:20
   |vpiRefModule:
   \_RefModule: work@my_module (inst1), line:30:3, endln:30:12
     |vpiParent:
@@ -3236,7 +3250,7 @@ Design: (unnamed)
         |vpiName:a
         |vpiFullName:work@top.inst1.a
         |vpiActual:
-        \_LogicNet: (work@top.a), line:27:13, endln:27:14
+        \_LogicNet: (work@top.a), line:26:13, endln:26:14
     |vpiPort:
     \_Port: , line:30:24, endln:30:25
       |vpiParent:
@@ -3248,7 +3262,7 @@ Design: (unnamed)
         |vpiName:b
         |vpiFullName:work@top.inst1.b
         |vpiActual:
-        \_LogicNet: (work@top.b), line:27:16, endln:27:17
+        \_LogicNet: (work@top.b), line:26:16, endln:26:17
     |vpiPort:
     \_Port: , line:30:27, endln:30:28
       |vpiParent:
@@ -3260,7 +3274,7 @@ Design: (unnamed)
         |vpiName:c
         |vpiFullName:work@top.inst1.c
         |vpiActual:
-        \_LogicNet: (work@top.c), line:28:14, endln:28:15
+        \_LogicNet: (work@top.c), line:26:19, endln:26:20
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

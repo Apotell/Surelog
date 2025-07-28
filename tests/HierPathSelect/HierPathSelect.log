@@ -88,9 +88,10 @@ LogicTypespec                                          1
 Module                                                 1
 Range                                                  1
 RefObj                                                 1
-RefTypespec                                            2
+RefTypespec                                            3
 StructNet                                              1
 StructTypespec                                         1
+TypedefTypespec                                        1
 TypespecMember                                         1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HierPathSelect/slpp_all/surelog.uhdm ...
@@ -104,21 +105,32 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:work@dut2
   |vpiTypedef:
-  \_StructTypespec: (struct_typedef), line:3:9, endln:5:2
+  \_TypedefTypespec: (struct_typedef), line:5:3, endln:5:17
     |vpiParent:
     \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/HierPathSelect/dut.sv, line:1:1, endln:10:10
     |vpiName:struct_typedef
+    |vpiTypedefAlias:
+    \_RefTypespec: (work@dut2.struct_typedef), line:3:9, endln:5:2
+      |vpiParent:
+      \_TypedefTypespec: (struct_typedef), line:5:3, endln:5:17
+      |vpiFullName:work@dut2.struct_typedef
+      |vpiActual:
+      \_StructTypespec: , line:3:9, endln:5:2
+  |vpiTypedef:
+  \_StructTypespec: , line:3:9, endln:5:2
+    |vpiParent:
+    \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/HierPathSelect/dut.sv, line:1:1, endln:10:10
     |vpiPacked:1
     |vpiTypespecMember:
     \_TypespecMember: (q), line:4:15, endln:4:16
       |vpiParent:
-      \_StructTypespec: (struct_typedef), line:3:9, endln:5:2
+      \_StructTypespec: , line:3:9, endln:5:2
       |vpiName:q
       |vpiTypespec:
-      \_RefTypespec: (work@dut2.struct_typedef.q), line:4:3, endln:4:14
+      \_RefTypespec: (work@dut2.q), line:4:3, endln:4:14
         |vpiParent:
         \_TypespecMember: (q), line:4:15, endln:4:16
-        |vpiFullName:work@dut2.struct_typedef.q
+        |vpiFullName:work@dut2.q
         |vpiActual:
         \_LogicTypespec: , line:4:3, endln:4:14
   |vpiTypedef:
@@ -146,7 +158,9 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiImportTypespec:
-  \_StructTypespec: (struct_typedef), line:3:9, endln:5:2
+  \_TypedefTypespec: (struct_typedef), line:5:3, endln:5:17
+  |vpiImportTypespec:
+  \_StructTypespec: , line:3:9, endln:5:2
   |vpiImportTypespec:
   \_LogicTypespec: , line:4:3, endln:4:14
   |vpiImportTypespec:
@@ -154,13 +168,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dut2 (work@dut2), file:${SURELOG_DIR}/tests/HierPathSelect/dut.sv, line:1:1, endln:10:10
     |vpiTypespec:
-    \_RefTypespec: (work@dut2.read_buf.read_buf), line:6:1, endln:6:15
+    \_RefTypespec: (work@dut2.read_buf.struct_typedef), line:6:1, endln:6:15
       |vpiParent:
       \_StructNet: (work@dut2.read_buf), line:6:16, endln:6:24
-      |vpiName:read_buf
-      |vpiFullName:work@dut2.read_buf.read_buf
+      |vpiName:struct_typedef
+      |vpiFullName:work@dut2.read_buf.struct_typedef
       |vpiActual:
-      \_StructTypespec: (struct_typedef), line:3:9, endln:5:2
+      \_TypedefTypespec: (struct_typedef), line:5:3, endln:5:17
     |vpiName:read_buf
     |vpiFullName:work@dut2.read_buf
   |vpiImportTypespec:

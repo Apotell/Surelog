@@ -123,8 +123,9 @@ IntTypespec                                            1
 Operation                                              1
 Package                                                1
 RefObj                                                 4
-RefTypespec                                            5
+RefTypespec                                            6
 StructTypespec                                         1
+TypedefTypespec                                        1
 TypespecMember                                         1
 UnsupportedTypespec                                    2
 VoidTypespec                                           2
@@ -146,20 +147,31 @@ Design: (unnamed)
     |vpiName:uvm_resource_types
     |vpiFullName:uvm_pkg::uvm_resource_types
     |vpiTypedef:
-    \_StructTypespec: (access_t), line:5:11, endln:8:4
+    \_TypedefTypespec: (access_t), line:8:5, endln:8:13
       |vpiParent:
       \_ClassDefn: (uvm_pkg::uvm_resource_types), file:${SURELOG_DIR}/tests/IOClassStruct/dut.sv, line:3:1, endln:10:9
       |vpiName:access_t
+      |vpiTypedefAlias:
+      \_RefTypespec: (uvm_pkg::uvm_resource_types::access_t), line:5:11, endln:8:4
+        |vpiParent:
+        \_TypedefTypespec: (access_t), line:8:5, endln:8:13
+        |vpiFullName:uvm_pkg::uvm_resource_types::access_t
+        |vpiActual:
+        \_StructTypespec: , line:5:11, endln:8:4
+    |vpiTypedef:
+    \_StructTypespec: , line:5:11, endln:8:4
+      |vpiParent:
+      \_ClassDefn: (uvm_pkg::uvm_resource_types), file:${SURELOG_DIR}/tests/IOClassStruct/dut.sv, line:3:1, endln:10:9
       |vpiTypespecMember:
       \_TypespecMember: (read_count), line:7:18, endln:7:28
         |vpiParent:
-        \_StructTypespec: (access_t), line:5:11, endln:8:4
+        \_StructTypespec: , line:5:11, endln:8:4
         |vpiName:read_count
         |vpiTypespec:
-        \_RefTypespec: (uvm_pkg::uvm_resource_types::access_t::read_count), line:7:5, endln:7:17
+        \_RefTypespec: (uvm_pkg::uvm_resource_types::read_count), line:7:5, endln:7:17
           |vpiParent:
           \_TypespecMember: (read_count), line:7:18, endln:7:28
-          |vpiFullName:uvm_pkg::uvm_resource_types::access_t::read_count
+          |vpiFullName:uvm_pkg::uvm_resource_types::read_count
           |vpiActual:
           \_IntTypespec: , line:7:5, endln:7:17
     |vpiTypedef:
@@ -167,7 +179,9 @@ Design: (unnamed)
       |vpiParent:
       \_ClassDefn: (uvm_pkg::uvm_resource_types), file:${SURELOG_DIR}/tests/IOClassStruct/dut.sv, line:3:1, endln:10:9
     |vpiImportTypespec:
-    \_StructTypespec: (access_t), line:5:11, endln:8:4
+    \_TypedefTypespec: (access_t), line:8:5, endln:8:13
+    |vpiImportTypespec:
+    \_StructTypespec: , line:5:11, endln:8:4
     |vpiImportTypespec:
     \_IntTypespec: , line:7:5, endln:7:17
   |vpiInternalScope:
@@ -198,7 +212,7 @@ Design: (unnamed)
             |vpiName:uvm_resource_types::access_t
             |vpiFullName:uvm_pkg::uvm_resource_base::record_read_access::access_record::uvm_resource_types::access_t
             |vpiActual:
-            \_StructTypespec: (access_t), line:5:11, endln:8:4
+            \_TypedefTypespec: (access_t), line:8:5, endln:8:13
           |vpiName:access_record
           |vpiFullName:uvm_pkg::uvm_resource_base::record_read_access::access_record
         |vpiTypedef:
@@ -292,7 +306,7 @@ Design: (unnamed)
           |vpiName:uvm_resource_types::access_t
           |vpiFullName:uvm_pkg::uvm_resource_base::init_access_record::access_record::uvm_resource_types::access_t
           |vpiActual:
-          \_StructTypespec: (access_t), line:5:11, endln:8:4
+          \_TypedefTypespec: (access_t), line:8:5, endln:8:13
       |vpiStmt:
       \_Assignment: , line:24:3, endln:24:31
         |vpiParent:

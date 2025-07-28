@@ -280,25 +280,23 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Always                                                 2
-ArrayNet                                               1
-ArrayTypespec                                          3
-ArrayVar                                               1
+ArrayNet                                               2
+ArrayTypespec                                          6
 Assignment                                             3
 Begin                                                  3
 BitTypespec                                            2
-BitVar                                                 1
-Constant                                              31
+Constant                                              18
 Design                                                 1
 EventControl                                           2
 ForeachStmt                                            3
-LogicNet                                               3
+LogicNet                                               2
 LogicTypespec                                          2
 Module                                                 2
-Operation                                             10
+Operation                                             13
 Port                                                   4
-Range                                                 17
+Range                                                 12
 RefObj                                                13
-RefTypespec                                           14
+RefTypespec                                           16
 RefVar                                                 9
 UnsupportedTypespec                                    6
 VarSelect                                              3
@@ -314,29 +312,55 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:work@dut
   |vpiTypedef:
-  \_LogicTypespec: , line:1:30, endln:1:42
+  \_LogicTypespec: , line:1:30, endln:1:35
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:1:1, endln:7:10
+  |vpiTypedef:
+  \_ArrayTypespec: , line:1:30, endln:1:53
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:1:1, endln:7:10
+    |vpiArrayType:1
     |vpiRange:
-    \_Range: , line:1:36, endln:1:42
+    \_Range: , line:1:47, endln:1:50
       |vpiParent:
-      \_LogicTypespec: , line:1:30, endln:1:42
-      |vpiLeftRange:
-      \_Constant: , line:1:37, endln:1:39
-        |vpiParent:
-        \_Range: , line:1:36, endln:1:42
-        |vpiDecompile:31
-        |vpiSize:64
-        |UINT:31
-        |vpiConstType:9
+      \_ArrayTypespec: , line:1:30, endln:1:53
       |vpiRightRange:
-      \_Constant: , line:1:40, endln:1:41
+      \_Operation: , line:1:48, endln:1:49
         |vpiParent:
-        \_Range: , line:1:36, endln:1:42
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
+        \_Range: , line:1:47, endln:1:50
+        |vpiOpType:11
+        |vpiOperand:
+        \_Constant: , line:1:48, endln:1:49
+          |vpiParent:
+          \_Operation: , line:1:48, endln:1:49
+          |vpiDecompile:4
+          |vpiSize:64
+          |UINT:4
+          |vpiConstType:9
+    |vpiRange:
+    \_Range: , line:1:50, endln:1:53
+      |vpiParent:
+      \_ArrayTypespec: , line:1:30, endln:1:53
+      |vpiRightRange:
+      \_Operation: , line:1:51, endln:1:52
+        |vpiParent:
+        \_Range: , line:1:50, endln:1:53
+        |vpiOpType:11
+        |vpiOperand:
+        \_Constant: , line:1:51, endln:1:52
+          |vpiParent:
+          \_Operation: , line:1:51, endln:1:52
+          |vpiDecompile:4
+          |vpiSize:64
+          |UINT:4
+          |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@dut), line:1:30, endln:1:35
+      |vpiParent:
+      \_ArrayTypespec: , line:1:30, endln:1:53
+      |vpiFullName:work@dut
+      |vpiActual:
+      \_LogicTypespec: , line:1:30, endln:1:35
   |vpiTypedef:
   \_ArrayTypespec: , line:1:47, endln:1:53
     |vpiParent:
@@ -382,31 +406,57 @@ Design: (unnamed)
       \_ArrayTypespec: , line:1:47, endln:1:53
       |vpiFullName:work@dut
       |vpiActual:
-      \_LogicTypespec: , line:1:30, endln:1:42
+      \_ArrayTypespec: , line:1:30, endln:1:53
   |vpiTypedef:
-  \_LogicTypespec: , line:1:30, endln:1:42
+  \_LogicTypespec: , line:1:30, endln:1:35
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:1:1, endln:7:10
+  |vpiTypedef:
+  \_ArrayTypespec: , line:1:30, endln:1:53
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:1:1, endln:7:10
+    |vpiArrayType:1
     |vpiRange:
-    \_Range: , line:1:36, endln:1:42
+    \_Range: , line:1:47, endln:1:50
       |vpiParent:
-      \_LogicTypespec: , line:1:30, endln:1:42
-      |vpiLeftRange:
-      \_Constant: , line:1:37, endln:1:39
-        |vpiParent:
-        \_Range: , line:1:36, endln:1:42
-        |vpiDecompile:31
-        |vpiSize:64
-        |UINT:31
-        |vpiConstType:9
+      \_ArrayTypespec: , line:1:30, endln:1:53
       |vpiRightRange:
-      \_Constant: , line:1:40, endln:1:41
+      \_Operation: , line:1:48, endln:1:49
         |vpiParent:
-        \_Range: , line:1:36, endln:1:42
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
+        \_Range: , line:1:47, endln:1:50
+        |vpiOpType:11
+        |vpiOperand:
+        \_Constant: , line:1:48, endln:1:49
+          |vpiParent:
+          \_Operation: , line:1:48, endln:1:49
+          |vpiDecompile:4
+          |vpiSize:64
+          |UINT:4
+          |vpiConstType:9
+    |vpiRange:
+    \_Range: , line:1:50, endln:1:53
+      |vpiParent:
+      \_ArrayTypespec: , line:1:30, endln:1:53
+      |vpiRightRange:
+      \_Operation: , line:1:51, endln:1:52
+        |vpiParent:
+        \_Range: , line:1:50, endln:1:53
+        |vpiOpType:11
+        |vpiOperand:
+        \_Constant: , line:1:51, endln:1:52
+          |vpiParent:
+          \_Operation: , line:1:51, endln:1:52
+          |vpiDecompile:4
+          |vpiSize:64
+          |UINT:4
+          |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@dut), line:1:30, endln:1:35
+      |vpiParent:
+      \_ArrayTypespec: , line:1:30, endln:1:53
+      |vpiFullName:work@dut
+      |vpiActual:
+      \_LogicTypespec: , line:1:30, endln:1:35
   |vpiImportTypespec:
   \_LogicNet: (work@dut.clk), line:1:18, endln:1:21
     |vpiParent:
@@ -414,30 +464,34 @@ Design: (unnamed)
     |vpiName:clk
     |vpiFullName:work@dut.clk
   |vpiImportTypespec:
-  \_LogicTypespec: , line:1:30, endln:1:42
+  \_LogicTypespec: , line:1:30, endln:1:35
   |vpiImportTypespec:
-  \_LogicNet: (work@dut.data), line:1:43, endln:1:47
+  \_ArrayTypespec: , line:1:30, endln:1:53
+  |vpiImportTypespec:
+  \_ArrayNet: (work@dut.data), line:1:43, endln:1:47
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:1:1, endln:7:10
     |vpiTypespec:
-    \_RefTypespec: (work@dut.data), line:1:30, endln:1:42
+    \_RefTypespec: (work@dut.data), line:1:30, endln:1:35
       |vpiParent:
-      \_LogicNet: (work@dut.data), line:1:43, endln:1:47
+      \_ArrayNet: (work@dut.data), line:1:43, endln:1:47
       |vpiFullName:work@dut.data
       |vpiActual:
-      \_LogicTypespec: , line:1:30, endln:1:42
+      \_ArrayTypespec: , line:1:30, endln:1:53
     |vpiName:data
     |vpiFullName:work@dut.data
     |vpiNetType:36
   |vpiImportTypespec:
   \_ArrayTypespec: , line:1:47, endln:1:53
   |vpiImportTypespec:
-  \_LogicTypespec: , line:1:30, endln:1:42
+  \_LogicTypespec: , line:1:30, endln:1:35
+  |vpiImportTypespec:
+  \_ArrayTypespec: , line:1:30, endln:1:53
   |vpiDefName:work@dut
   |vpiNet:
   \_LogicNet: (work@dut.clk), line:1:18, endln:1:21
-  |vpiNet:
-  \_LogicNet: (work@dut.data), line:1:43, endln:1:47
+  |vpiArrayNet:
+  \_ArrayNet: (work@dut.data), line:1:43, endln:1:47
   |vpiPort:
   \_Port: (clk), line:1:18, endln:1:21
     |vpiParent:
@@ -639,39 +693,19 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@top
-  |vpiVariables:
-  \_BitVar: (work@top), line:9:45, endln:9:46
+  |vpiTypedef:
+  \_BitTypespec: , line:9:30, endln:9:33
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
-    |vpiTypespec:
-    \_RefTypespec: (work@top), line:9:30, endln:9:44
-      |vpiParent:
-      \_BitVar: (work@top), line:9:45, endln:9:46
-      |vpiFullName:work@top
-      |vpiActual:
-      \_BitTypespec: , line:9:30, endln:9:44
-    |vpiFullName:work@top
-  |vpiVariables:
-  \_ArrayVar: (work@top.B), line:9:45, endln:9:46
+  |vpiTypedef:
+  \_ArrayTypespec: , line:9:30, endln:9:55
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
-    |vpiSize:1
-    |vpiTypespec:
-    \_RefTypespec: (work@top.B), line:9:47, endln:9:55
-      |vpiParent:
-      \_ArrayVar: (work@top.B), line:9:45, endln:9:46
-      |vpiFullName:work@top.B
-      |vpiActual:
-      \_ArrayTypespec: , line:9:47, endln:9:55
-    |vpiName:B
-    |vpiFullName:work@top.B
-    |vpiRandType:1
-    |vpiVisibility:1
     |vpiArrayType:1
     |vpiRange:
     \_Range: , line:9:47, endln:9:52
       |vpiParent:
-      \_ArrayVar: (work@top.B), line:9:45, endln:9:46
+      \_ArrayTypespec: , line:9:30, endln:9:55
       |vpiLeftRange:
       \_Constant: , line:9:48, endln:9:49
         |vpiParent:
@@ -691,7 +725,7 @@ Design: (unnamed)
     |vpiRange:
     \_Range: , line:9:52, endln:9:55
       |vpiParent:
-      \_ArrayVar: (work@top.B), line:9:45, endln:9:46
+      \_ArrayTypespec: , line:9:30, endln:9:55
       |vpiRightRange:
       \_Operation: , line:9:53, endln:9:54
         |vpiParent:
@@ -705,65 +739,13 @@ Design: (unnamed)
           |vpiSize:64
           |UINT:2
           |vpiConstType:9
-    |vpiReg:
-    \_BitVar: (work@top), line:9:45, endln:9:46
-  |vpiRegArray:
-  \_ArrayVar: (work@top.B), line:9:45, endln:9:46
-  |vpiTypedef:
-  \_BitTypespec: , line:9:30, endln:9:44
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
-    |vpiRange:
-    \_Range: , line:9:34, endln:9:39
-      |vpiParent:
-      \_BitTypespec: , line:9:30, endln:9:44
-      |vpiLeftRange:
-      \_Constant: , line:9:35, endln:9:36
-        |vpiParent:
-        \_Range: , line:9:34, endln:9:39
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:9:37, endln:9:38
-        |vpiParent:
-        \_Range: , line:9:34, endln:9:39
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-    |vpiRange:
-    \_Range: , line:9:39, endln:9:44
-      |vpiParent:
-      \_BitTypespec: , line:9:30, endln:9:44
-      |vpiLeftRange:
-      \_Constant: , line:9:40, endln:9:41
-        |vpiParent:
-        \_Range: , line:9:39, endln:9:44
-        |vpiDecompile:3
-        |vpiSize:64
-        |UINT:3
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:9:42, endln:9:43
-        |vpiParent:
-        \_Range: , line:9:39, endln:9:44
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-  |vpiTypedef:
-  \_ArrayTypespec: , line:9:47, endln:9:55
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
     |vpiElemTypespec:
     \_RefTypespec: (work@top), line:9:30, endln:9:33
       |vpiParent:
-      \_ArrayTypespec: , line:9:47, endln:9:55
+      \_ArrayTypespec: , line:9:30, endln:9:55
       |vpiFullName:work@top
       |vpiActual:
-      \_BitTypespec: , line:9:30, endln:9:44
+      \_BitTypespec: , line:9:30, endln:9:33
   |vpiTypedef:
   \_ArrayTypespec: , line:9:47, endln:9:55
     |vpiParent:
@@ -812,51 +794,60 @@ Design: (unnamed)
       \_ArrayTypespec: , line:9:47, endln:9:55
       |vpiFullName:work@top
       |vpiActual:
-      \_BitTypespec: , line:9:30, endln:9:44
+      \_ArrayTypespec: , line:9:30, endln:9:55
   |vpiTypedef:
-  \_BitTypespec: , line:9:30, endln:9:44
+  \_BitTypespec: , line:9:30, endln:9:33
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
+  |vpiTypedef:
+  \_ArrayTypespec: , line:9:30, endln:9:55
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
+    |vpiArrayType:1
     |vpiRange:
-    \_Range: , line:9:34, endln:9:39
+    \_Range: , line:9:47, endln:9:52
       |vpiParent:
-      \_BitTypespec: , line:9:30, endln:9:44
+      \_ArrayTypespec: , line:9:30, endln:9:55
       |vpiLeftRange:
-      \_Constant: , line:9:35, endln:9:36
+      \_Constant: , line:9:48, endln:9:49
         |vpiParent:
-        \_Range: , line:9:34, endln:9:39
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:9:37, endln:9:38
-        |vpiParent:
-        \_Range: , line:9:34, endln:9:39
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-    |vpiRange:
-    \_Range: , line:9:39, endln:9:44
-      |vpiParent:
-      \_BitTypespec: , line:9:30, endln:9:44
-      |vpiLeftRange:
-      \_Constant: , line:9:40, endln:9:41
-        |vpiParent:
-        \_Range: , line:9:39, endln:9:44
+        \_Range: , line:9:47, endln:9:52
         |vpiDecompile:3
         |vpiSize:64
         |UINT:3
         |vpiConstType:9
       |vpiRightRange:
-      \_Constant: , line:9:42, endln:9:43
+      \_Constant: , line:9:50, endln:9:51
         |vpiParent:
-        \_Range: , line:9:39, endln:9:44
+        \_Range: , line:9:47, endln:9:52
         |vpiDecompile:0
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+    |vpiRange:
+    \_Range: , line:9:52, endln:9:55
+      |vpiParent:
+      \_ArrayTypespec: , line:9:30, endln:9:55
+      |vpiRightRange:
+      \_Operation: , line:9:53, endln:9:54
+        |vpiParent:
+        \_Range: , line:9:52, endln:9:55
+        |vpiOpType:11
+        |vpiOperand:
+        \_Constant: , line:9:53, endln:9:54
+          |vpiParent:
+          \_Operation: , line:9:53, endln:9:54
+          |vpiDecompile:2
+          |vpiSize:64
+          |UINT:2
+          |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@top), line:9:30, endln:9:33
+      |vpiParent:
+      \_ArrayTypespec: , line:9:30, endln:9:55
+      |vpiFullName:work@top
+      |vpiActual:
+      \_BitTypespec: , line:9:30, endln:9:33
   |vpiImportTypespec:
   \_LogicNet: (work@top.clk), line:9:18, endln:9:21
     |vpiParent:
@@ -864,20 +855,33 @@ Design: (unnamed)
     |vpiName:clk
     |vpiFullName:work@top.clk
   |vpiImportTypespec:
-  \_BitTypespec: , line:9:30, endln:9:44
+  \_BitTypespec: , line:9:30, endln:9:33
   |vpiImportTypespec:
-  \_BitVar: (work@top), line:9:45, endln:9:46
+  \_ArrayTypespec: , line:9:30, endln:9:55
   |vpiImportTypespec:
-  \_ArrayVar: (work@top.B), line:9:45, endln:9:46
+  \_ArrayNet: (work@top.B), line:9:45, endln:9:46
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/SynthForeach/dut.sv, line:9:1, endln:16:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.B), line:9:30, endln:9:33
+      |vpiParent:
+      \_ArrayNet: (work@top.B), line:9:45, endln:9:46
+      |vpiFullName:work@top.B
+      |vpiActual:
+      \_ArrayTypespec: , line:9:30, endln:9:55
+    |vpiName:B
+    |vpiFullName:work@top.B
   |vpiImportTypespec:
   \_ArrayTypespec: , line:9:47, endln:9:55
   |vpiImportTypespec:
-  \_ArrayTypespec: , line:9:47, endln:9:55
+  \_BitTypespec: , line:9:30, endln:9:33
   |vpiImportTypespec:
-  \_BitTypespec: , line:9:30, endln:9:44
+  \_ArrayTypespec: , line:9:30, endln:9:55
   |vpiDefName:work@top
   |vpiNet:
   \_LogicNet: (work@top.clk), line:9:18, endln:9:21
+  |vpiArrayNet:
+  \_ArrayNet: (work@top.B), line:9:45, endln:9:46
   |vpiPort:
   \_Port: (clk), line:9:18, endln:9:21
     |vpiParent:

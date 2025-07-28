@@ -66,7 +66,8 @@ Package                                                2
 ParamAssign                                            1
 Parameter                                              1
 RefObj                                                 2
-RefTypespec                                            3
+RefTypespec                                            4
+TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PackageConst/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -119,33 +120,46 @@ Design: (unnamed)
   \_Design: (unnamed)
   |vpiName:spi_device_pkg
   |vpiTypedef:
-  \_IntTypespec: , line:6:17, endln:6:29
+  \_EnumTypespec: , line:6:12, endln:8:22
     |vpiParent:
     \_Package: spi_device_pkg (spi_device_pkg), file:${SURELOG_DIR}/tests/PackageConst/dut.sv, line:5:1, endln:9:11
-  |vpiTypedef:
-  \_EnumTypespec: (spi_device_pkg::cmd_info_index_e), line:6:12, endln:8:22
-    |vpiParent:
-    \_Package: spi_device_pkg (spi_device_pkg), file:${SURELOG_DIR}/tests/PackageConst/dut.sv, line:5:1, endln:9:11
-    |vpiName:spi_device_pkg::cmd_info_index_e
     |vpiBaseTypespec:
-    \_RefTypespec: (spi_device_pkg::cmd_info_index_e), line:6:17, endln:6:29
+    \_RefTypespec: (spi_device_pkg), line:6:17, endln:6:29
       |vpiParent:
-      \_EnumTypespec: (spi_device_pkg::cmd_info_index_e), line:6:12, endln:8:22
-      |vpiFullName:spi_device_pkg::cmd_info_index_e
+      \_EnumTypespec: , line:6:12, endln:8:22
+      |vpiFullName:spi_device_pkg
       |vpiActual:
       \_IntTypespec: , line:6:17, endln:6:29
     |vpiEnumConst:
     \_EnumConst: (CmdInfoReserveEnd), line:7:7, endln:7:57
       |vpiParent:
-      \_EnumTypespec: (spi_device_pkg::cmd_info_index_e), line:6:12, endln:8:22
+      \_EnumTypespec: , line:6:12, endln:8:22
       |vpiName:CmdInfoReserveEnd
       |UINT:24
       |vpiDecompile:spi_device_reg_pkg::NumCmdInfo
       |vpiSize:32
+  |vpiTypedef:
+  \_IntTypespec: , line:6:17, endln:6:29
+    |vpiParent:
+    \_Package: spi_device_pkg (spi_device_pkg), file:${SURELOG_DIR}/tests/PackageConst/dut.sv, line:5:1, endln:9:11
+  |vpiTypedef:
+  \_TypedefTypespec: (spi_device_pkg::cmd_info_index_e), line:8:6, endln:8:22
+    |vpiParent:
+    \_Package: spi_device_pkg (spi_device_pkg), file:${SURELOG_DIR}/tests/PackageConst/dut.sv, line:5:1, endln:9:11
+    |vpiName:spi_device_pkg::cmd_info_index_e
+    |vpiTypedefAlias:
+    \_RefTypespec: (spi_device_pkg::cmd_info_index_e), line:6:12, endln:8:5
+      |vpiParent:
+      \_TypedefTypespec: (spi_device_pkg::cmd_info_index_e), line:8:6, endln:8:22
+      |vpiFullName:spi_device_pkg::cmd_info_index_e
+      |vpiActual:
+      \_EnumTypespec: , line:6:12, endln:8:22
+  |vpiImportTypespec:
+  \_EnumTypespec: , line:6:12, endln:8:22
   |vpiImportTypespec:
   \_IntTypespec: , line:6:17, endln:6:29
   |vpiImportTypespec:
-  \_EnumTypespec: (spi_device_pkg::cmd_info_index_e), line:6:12, endln:8:22
+  \_TypedefTypespec: (spi_device_pkg::cmd_info_index_e), line:8:6, endln:8:22
   |vpiDefName:spi_device_pkg
 ===================
 [  FATAL] : 0

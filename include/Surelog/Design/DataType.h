@@ -60,13 +60,7 @@ class DataType : public RTTI {
 
   DataType() = default;
   DataType(const FileContent* fC, NodeId id, std::string_view name,
-           VObjectType type, bool isParameter = false)
-      : m_fileContent(fC),
-        m_id(id),
-        m_name(name),
-        m_definition(nullptr),
-        m_type(type),
-        m_is_parameter(isParameter) {}
+           VObjectType type, bool isParameter = false);
 
   void init(const FileContent* fC, NodeId id, std::string_view name,
             VObjectType type, bool isParameter = false) {
@@ -112,7 +106,7 @@ class DataType : public RTTI {
   virtual bool isNet() const { return false; }
 
   uhdm::Typespec* getTypespec() const { return m_typespec; }
-  virtual void setTypespec(uhdm::Typespec* typespec) { m_typespec = typespec; }
+  virtual void setTypespec(uhdm::Typespec* typespec);
 
   uhdm::Typespec* getUnpackedTypespec() const { return m_unpackedTypespec; }
   void setUnpackedTypespec(uhdm::Typespec* typespec) {

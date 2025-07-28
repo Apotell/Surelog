@@ -748,14 +748,15 @@ bool TestbenchElaboration::bindProperties_() {
       NodeId typeSpecId = sig->getTypespecId();
       if (typeSpecId) {
         tps = m_helper.compileTypespec(classDefinition, fC, typeSpecId,
-                                       m_compileDesign, Reduce::Yes, nullptr,
-                                       nullptr, false);
+                                       unpackedDimension, m_compileDesign,
+                                       Reduce::Yes, nullptr, nullptr, false);
       }
       if (tps == nullptr) {
         if (sig->getInterfaceTypeNameId()) {
-          tps = m_helper.compileTypespec(
-              classDefinition, fC, sig->getInterfaceTypeNameId(),
-              m_compileDesign, Reduce::Yes, nullptr, nullptr, false);
+          tps = m_helper.compileTypespec(classDefinition, fC,
+                                         sig->getInterfaceTypeNameId(),
+                                         unpackedDimension, m_compileDesign,
+                                         Reduce::Yes, nullptr, nullptr, false);
         }
       }
 

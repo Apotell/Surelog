@@ -298,13 +298,14 @@ uhdm::AnyCollection* CompileHelper::compileGenStmt(
     uhdm::Assignment* assign_stmt = s.make<uhdm::Assignment>();
     assign_stmt->setParent(genfor);
     fC->populateCoreMembers(varInit, varInit, assign_stmt);
-    if (uhdm::Variables* varb = (uhdm::Variables*)compileVariable(
-            component, fC, Var, Var, compileDesign, Reduce::No, genfor, nullptr,
-            false)) {
-      assign_stmt->setLhs(varb);
-      varb->setParent(assign_stmt);
-      varb->setName(fC->SymName(Var));
-      fC->populateCoreMembers(Var, Var, varb);
+    if (uhdm::Any* any = compileVariable(component, fC, Var, Var, compileDesign,
+                                         Reduce::No, genfor, nullptr, false)) {
+      if (uhdm::Variables* const var = any_cast<uhdm::Variables>(any)) {
+        assign_stmt->setLhs(var);
+        var->setName(fC->SymName(Var));
+      }
+      any->setParent(assign_stmt);
+      fC->populateCoreMembers(Var, Var, any);
     }
     checkForLoops(true);
     if (uhdm::Expr* rhs = (uhdm::Expr*)compileExpression(

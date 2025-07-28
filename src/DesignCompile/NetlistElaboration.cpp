@@ -1842,16 +1842,17 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
   NodeId typeSpecId = sig->getTypespecId();
   if (typeSpecId) {
     m_helper.checkForLoops(true);
-    tps = m_helper.compileTypespec(comp, fC, typeSpecId, m_compileDesign,
-                                   reduce, nullptr, child, true);
+    tps =
+        m_helper.compileTypespec(comp, fC, typeSpecId, unpackedDimension,
+                                 m_compileDesign, reduce, nullptr, child, true);
     m_helper.checkForLoops(false);
   }
   if (tps == nullptr) {
     if (sig->getInterfaceTypeNameId()) {
       m_helper.checkForLoops(true);
       tps = m_helper.compileTypespec(comp, fC, sig->getInterfaceTypeNameId(),
-                                     m_compileDesign, reduce, nullptr, child,
-                                     true);
+                                     unpackedDimension, m_compileDesign, reduce,
+                                     nullptr, child, true);
       m_helper.checkForLoops(false);
     }
   }
@@ -2029,9 +2030,10 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
           logicn->setTypespec(rt);
           spec->setParent(logicn);
           obj = logicn;
-        } else {
-          uhdm::Variables* var = m_helper.getSimpleVarFromTypespec(
-              fC, id, id, spec, packedDimensions, m_compileDesign);
+        } else if (uhdm::Variables* var =
+                       any_cast<uhdm::Variables>(m_helper.compileVariable(
+                           comp, fC, m_compileDesign, id, subnettype,
+                           typeSpecId, spec))) {
           if (sig->attributes()) {
             var->setAttributes(sig->attributes());
             for (auto a : *sig->attributes()) a->setParent(var);
@@ -2201,9 +2203,10 @@ bool NetlistElaboration::elabSignal(Signal* sig, ModuleInstance* instance,
           logicn->setTypespec(rt);
           spec->setParent(logicn);
           obj = logicn;
-        } else {
-          uhdm::Variables* var = m_helper.getSimpleVarFromTypespec(
-              fC, id, id, spec, packedDimensions, m_compileDesign);
+        } else if (uhdm::Variables* var =
+                       any_cast<uhdm::Variables>(m_helper.compileVariable(
+                           comp, fC, m_compileDesign, id, subnettype,
+                           typeSpecId, spec))) {
           if (sig->attributes()) {
             var->setAttributes(sig->attributes());
             for (auto a : *sig->attributes()) a->setParent(var);
@@ -2510,9 +2513,9 @@ bool NetlistElaboration::elab_ports_nets_(
         if (typeSpecId) {
           uhdm::Typespec* tps = nullptr;
           m_helper.checkForLoops(true);
-          tps =
-              m_helper.compileTypespec(comp, fC, typeSpecId, m_compileDesign,
-                                       Reduce::Yes, dest_port, instance, true);
+          tps = m_helper.compileTypespec(
+              comp, fC, typeSpecId, unpackedDimension, m_compileDesign,
+              Reduce::Yes, dest_port, instance, true);
           m_helper.checkForLoops(false);
           if (tps) {
             if (dest_port->getTypespec() == nullptr) {

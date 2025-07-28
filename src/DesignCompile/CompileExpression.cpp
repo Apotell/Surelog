@@ -254,8 +254,8 @@ uhdm::Any *CompileHelper::getObject(std::string_view name,
       if (sig->getTypespecId()) {
         result = compileTypespec(
             sig->getComponent(), sig->getFileContent(), sig->getTypespecId(),
-            compileDesign, Reduce::No, sig->getComponent()->getUhdmModel(),
-            instance, true);
+            sig->getUnpackedDimension(), compileDesign, Reduce::No,
+            sig->getComponent()->getUhdmModel(), instance, true);
       }
     }
   }
@@ -2426,9 +2426,9 @@ uhdm::Any *CompileHelper::compileExpression(
               }
             }
             if (m_elaborate == Elaborate::Yes) {
-              if (uhdm::Typespec *tps =
-                      compileTypespec(component, fC, Simple_type, compileDesign,
-                                      reduce, operation, instance, false)) {
+              if (uhdm::Typespec *tps = compileTypespec(
+                      component, fC, Simple_type, InvalidNodeId, compileDesign,
+                      reduce, operation, instance, false)) {
                 if (operation->getTypespec() == nullptr) {
                   uhdm::RefTypespec *rttps = s.make<uhdm::RefTypespec>();
                   rttps->setName(fC->SymName(Simple_type));
@@ -2644,12 +2644,14 @@ uhdm::Any *CompileHelper::compileExpression(
                                 }
                               }
                               uhdm::Expr *res = (uhdm::Expr *)result;
-                              if (tps && (res->getTypespec() == nullptr)) {
-                                uhdm::RefTypespec *tps_rt =
-                                    s.make<uhdm::RefTypespec>();
-                                tps_rt->setParent(res);
-                                tps_rt->setActual(tps);
-                                res->setTypespec(tps_rt);
+                              if (tps) {
+                                if (res->getTypespec() == nullptr) {
+                                  uhdm::RefTypespec *tps_rt =
+                                      s.make<uhdm::RefTypespec>();
+                                  tps_rt->setParent(res);
+                                  res->setTypespec(tps_rt);
+                                }
+                                res->getTypespec()->setActual(tps);
                               }
                               break;
                             }
@@ -2720,12 +2722,14 @@ uhdm::Any *CompileHelper::compileExpression(
                           }
 
                           uhdm::Expr *res = (uhdm::Expr *)result;
-                          if (tps && (res->getTypespec() == nullptr)) {
-                            uhdm::RefTypespec *tps_rt =
-                                s.make<uhdm::RefTypespec>();
-                            tps_rt->setParent(res);
-                            tps_rt->setActual(tps);
-                            res->setTypespec(tps_rt);
+                          if (tps) {
+                            if (res->getTypespec() == nullptr) {
+                              uhdm::RefTypespec *tps_rt =
+                                  s.make<uhdm::RefTypespec>();
+                              tps_rt->setParent(res);
+                              res->setTypespec(tps_rt);
+                            }
+                            res->getTypespec()->setActual(tps);
                           }
                           break;
                         }
@@ -3554,11 +3558,6 @@ uhdm::Any *CompileHelper::compileAssignmentPattern(
           NodeId Constant_primary = fC->Child(Constant_expression);
           if (!Constant_primary) {
             uhdm::StringTypespec *tps = s.make<uhdm::StringTypespec>();
-            if (fC->Type(Constant_expression) == VObjectType::STRING_CONST) {
-              tps->setName(fC->SymName(Constant_expression));
-            } else {
-              tps->setName("default");
-            }
             fC->populateCoreMembers(Constant_expression, Constant_expression,
                                     tps);
             tps->setParent(pattern);
@@ -3576,11 +3575,12 @@ uhdm::Any *CompileHelper::compileAssignmentPattern(
             fC->populateCoreMembers(Constant_expression, Expression, pattern);
           } else {
             NodeId Primary_literal = Constant_primary;
-            if (fC->Type(Primary_literal) != VObjectType::paPrimary_literal)
+            if (fC->Type(Primary_literal) != VObjectType::paPrimary_literal) {
               Primary_literal = fC->Child(Constant_primary);
+            }
             if (uhdm::Typespec *tps = compileTypespec(
-                    component, fC, Primary_literal, compileDesign, Reduce::Yes,
-                    nullptr, instance, false)) {
+                    component, fC, Primary_literal, InvalidNodeId,
+                    compileDesign, Reduce::Yes, nullptr, instance, false)) {
               if (pattern->getTypespec() == nullptr) {
                 uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
                 rt->setParent(pattern);
@@ -3853,9 +3853,9 @@ uhdm::RangeCollection *CompileHelper::compileRanges(
         }
         if (rexp && (rexp->getUhdmType() == uhdm::UhdmType::RefObj) &&
             (reduce == Reduce::Yes)) {
-          if (uhdm::Typespec *assoc_tps =
-                  compileTypespec(component, fC, rexpr, compileDesign, reduce,
-                                  nullptr, instance, true)) {
+          if (uhdm::Typespec *assoc_tps = compileTypespec(
+                  component, fC, rexpr, InvalidNodeId, compileDesign, reduce,
+                  nullptr, instance, true)) {
             associativeArray = true;
             uhdm::Range *range = s.make<uhdm::Range>();
             fC->populateCoreMembers(Packed_dimension, Packed_dimension, range);
@@ -3968,9 +3968,9 @@ uhdm::RangeCollection *CompileHelper::compileRanges(
         range->setRightExpr(rexpc);
         fC->populateCoreMembers(InvalidNodeId, InvalidNodeId, rexpc);
 
-        if (uhdm::Typespec *assoc_tps =
-                compileTypespec(component, fC, DataType, compileDesign, reduce,
-                                nullptr, instance, true)) {
+        if (uhdm::Typespec *assoc_tps = compileTypespec(
+                component, fC, DataType, InvalidNodeId, compileDesign, reduce,
+                nullptr, instance, true)) {
           uhdm::RefTypespec *assoc_tps_rt = s.make<uhdm::RefTypespec>();
           assoc_tps_rt->setParent(rexpc);
           assoc_tps_rt->setActual(assoc_tps);
@@ -4288,54 +4288,18 @@ const uhdm::Typespec *CompileHelper::getTypespec(
     }
     if (sig) {
       if (NodeId sigTypeId = sig->getTypespecId()) {
-        result = compileTypespec(
-            sig->getComponent(), fC, sigTypeId, compileDesign, reduce,
-            sig->getComponent()->getUhdmModel(), instance, true);
-        NodeId Unpacked_dimension = sig->getUnpackedDimension();
-        if (fC->Type(Unpacked_dimension) != VObjectType::_INVALID_) {
-          uhdm::ArrayTypespec *array = s.make<uhdm::ArrayTypespec>();
-          int32_t size;
-          if (uhdm::RangeCollection *ranges = compileRanges(
-                  component, fC, Unpacked_dimension, compileDesign, reduce,
-                  array, instance, size, false)) {
-            array->setRanges(ranges);
-          }
-          uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
-          rt->setParent(array);
-          rt->setActual(const_cast<uhdm::Typespec *>(result));
-          array->setElemTypespec(rt);
-          fC->populateCoreMembers(
-              sigTypeId, Unpacked_dimension ? Unpacked_dimension : sigTypeId,
-              array);
-          result = array;
-        }
+        result = compileTypespec(sig->getComponent(), fC, sigTypeId,
+                                 sig->getUnpackedDimension(), compileDesign,
+                                 reduce, sig->getComponent()->getUhdmModel(),
+                                 instance, true);
       } else {
         NodeId Packed_dimension = sig->getPackedDimension();
         if (fC->Type(Packed_dimension) != VObjectType::_INVALID_) {
           NodeId DataType = fC->Parent(Packed_dimension);
-          result = compileTypespec(
-              sig->getComponent(), fC, DataType, compileDesign, reduce,
-              sig->getComponent()->getUhdmModel(), instance, false);
-        }
-        NodeId Unpacked_dimension = sig->getUnpackedDimension();
-        if (fC->Type(Unpacked_dimension) != VObjectType::_INVALID_) {
-          uhdm::ArrayTypespec *array = s.make<uhdm::ArrayTypespec>();
-          int32_t size;
-          if (uhdm::RangeCollection *ranges = compileRanges(
-                  component, fC, Unpacked_dimension, compileDesign, reduce,
-                  array, instance, size, false)) {
-            array->setRanges(ranges);
-          }
-          if (result == nullptr) {
-            result = compileBuiltinTypespec(
-                sig->getComponent(), fC, sig->getNodeId(), sig->getType(),
-                compileDesign, nullptr, sig->getComponent()->getUhdmModel());
-          }
-          uhdm::RefTypespec *rt = s.make<uhdm::RefTypespec>();
-          rt->setParent(array);
-          rt->setActual(const_cast<uhdm::Typespec *>(result));
-          array->setElemTypespec(rt);
-          result = array;
+          result = compileTypespec(sig->getComponent(), fC, DataType,
+                                   sig->getUnpackedDimension(), compileDesign,
+                                   reduce, sig->getComponent()->getUhdmModel(),
+                                   instance, false);
         }
       }
     }

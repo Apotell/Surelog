@@ -2405,9 +2405,9 @@ std::vector<std::string_view> DesignElaboration::collectParams_(
                       uhdm::Serializer& s = m_compileDesign->getSerializer();
                       uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
                       tsRef->setParent(c);
-                      tsRef->setActual(ts);
                       c->setTypespec(tsRef);
                     }
+                    c->getTypespec()->setActual(ts);
                   }
                 }
 

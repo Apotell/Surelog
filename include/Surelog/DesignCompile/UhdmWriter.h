@@ -131,12 +131,6 @@ class UhdmWriter final {
                        DesignComponent* mod, uhdm::Any* scope,
                        std::vector<uhdm::ContAssign*>* assigns);
 
-  uhdm::Any* swapForSpecifiedVar(uhdm::Serializer& s, DesignComponent* mod,
-                                 uhdm::Any* tmp,
-                                 uhdm::VariablesCollection* lvariables,
-                                 uhdm::Variables* lvariable,
-                                 std::string_view name, const uhdm::Any* var,
-                                 const uhdm::Any* parent);
   void bind(uhdm::Serializer& s, const std::vector<vpiHandle>& designs);
 
  private:

@@ -469,8 +469,9 @@ uhdm::PropertyDecl* CompileHelper::compilePropertyDeclaration(
       NodeId Data_type_or_implicit = fC->Child(SeqFormatType_Data);
       NodeId Data_type = fC->Child(Data_type_or_implicit);
       if (Data_type) {
-        tps = compileTypespec(component, fC, Data_type, compileDesign,
-                              Reduce::No, pstmt, instance, false);
+        tps =
+            compileTypespec(component, fC, Data_type, InvalidNodeId,
+                            compileDesign, Reduce::No, pstmt, instance, false);
       } else {
         Data_type = last_Data_type;
       }
@@ -563,18 +564,19 @@ uhdm::SequenceDecl* CompileHelper::compileSequenceDeclaration(
       NodeId SeqFormatType_Data = fC->Child(Sequence_formal_type);
       NodeId Data_type_or_implicit = fC->Child(SeqFormatType_Data);
       NodeId Data_type = fC->Child(Data_type_or_implicit);
-      uhdm::Typespec* tps =
-          compileTypespec(component, fC, Data_type, compileDesign, Reduce::No,
-                          pstmt, instance, false);
-
       NodeId Port_name = fC->Sibling(Sequence_formal_type);
       uhdm::SeqFormalDecl* prop_port_decl = s.make<uhdm::SeqFormalDecl>();
       fC->populateCoreMembers(Sequence_expr, Sequence_expr, prop_port_decl);
       ports->emplace_back(prop_port_decl);
       prop_port_decl->setName(fC->SymName(Port_name));
-      uhdm::RefTypespec* rtps = s.make<uhdm::RefTypespec>();
-      rtps->setActual(tps);
-      prop_port_decl->setTypespec(rtps);
+      if (uhdm::Typespec* tps = compileTypespec(
+              component, fC, Data_type, InvalidNodeId, compileDesign,
+              Reduce::No, pstmt, instance, false)) {
+        uhdm::RefTypespec* rtps = s.make<uhdm::RefTypespec>();
+        rtps->setParent(prop_port_decl);
+        rtps->setActual(tps);
+        prop_port_decl->setTypespec(rtps);
+      }
       Sequence_port_item = fC->Sibling(Sequence_port_item);
     }
     Sequence_expr = fC->Sibling(Sequence_expr);

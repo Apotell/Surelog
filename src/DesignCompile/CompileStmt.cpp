@@ -520,7 +520,7 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
           uhdm::RefVar* ref = s.make<uhdm::RefVar>();
           ref->setName(fC->SymName(loopVarId));
           fC->populateCoreMembers(loopVarId, loopVarId, ref);
-          uhdm::Typespec* tps = s.make<uhdm::UnsupportedTypespec>();
+          uhdm::UnsupportedTypespec* tps = s.make<uhdm::UnsupportedTypespec>();
           tps->setName(fC->SymName(loopVarId));
           fC->populateCoreMembers(loopVarId, loopVarId, tps);
           tps->setParent(ref);
@@ -586,11 +586,12 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
     case VObjectType::paLocal_parameter_declaration: {
       NodeId Data_type_or_implicit = fC->Child(the_stmt);
       NodeId Data_type = fC->Child(Data_type_or_implicit);
-      uhdm::Typespec* ts =
-          compileTypespec(component, fC, fC->Child(Data_type_or_implicit),
-                          compileDesign, Reduce::Yes, nullptr, nullptr, false);
       NodeId List_of_param_assignments = fC->Sibling(Data_type_or_implicit);
       NodeId Param_assignment = fC->Child(List_of_param_assignments);
+      NodeId unpackedDimId = fC->Sibling(fC->Child(Param_assignment));
+      uhdm::Typespec* ts = compileTypespec(
+          component, fC, fC->Child(Data_type_or_implicit), unpackedDimId,
+          compileDesign, Reduce::Yes, nullptr, nullptr, false);
       uhdm::AnyCollection* param_assigns = s.makeCollection<Any>();
       while (Param_assignment) {
         NodeId name = fC->Child(Param_assignment);
@@ -1170,15 +1171,17 @@ uhdm::AnyCollection* CompileHelper::compileDataDeclaration(
                (fC->Type(Expression) != VObjectType::paExpression)) {
           Expression = fC->Sibling(Expression);
         }
-        uhdm::Variables* var = (uhdm::Variables*)compileVariable(
-            component, fC, Data_type, Var, compileDesign, Reduce::No, pstmt,
-            instance, false);
+        uhdm::Any* var =
+            compileVariable(component, fC, Data_type, Var, compileDesign,
+                            Reduce::No, pstmt, instance, false);
 
-        if (var) {
+        if (var != nullptr) {
           fC->populateCoreMembers(Var, Var, var);
-          var->setConstantVariable(const_status);
-          var->setAutomatic(automatic_status);
-          var->setName(fC->SymName(Var));
+          if (uhdm::Variables* const v = any_cast<uhdm::Variables>(var)) {
+            v->setConstantVariable(const_status);
+            v->setAutomatic(automatic_status);
+            v->setName(fC->SymName(Var));
+          }
 
           if (unpackedDimensions) {
             uhdm::ArrayVar* arr = s.make<uhdm::ArrayVar>();
@@ -1190,16 +1193,18 @@ uhdm::AnyCollection* CompileHelper::compileDataDeclaration(
             tps->setRanges(unpackedDimensions);
             for (auto r : *unpackedDimensions) r->setParent(tps, true);
 
-            if (uhdm::RefTypespec* var_ts = var->getTypespec()) {
-              if (uhdm::Typespec* ts = var_ts->getActual()) {
-                if (tps->getElemTypespec() == nullptr) {
-                  uhdm::RefTypespec* varRef = s.make<uhdm::RefTypespec>();
-                  varRef->setParent(tps);
-                  varRef->setName(fC->SymName(Data_type));
-                  fC->populateCoreMembers(Data_type, Data_type, varRef);
-                  tps->setElemTypespec(varRef);
+            if (uhdm::Variables* const v = any_cast<uhdm::Variables>(var)) {
+              if (uhdm::RefTypespec* var_ts = v->getTypespec()) {
+                if (uhdm::Typespec* ts = var_ts->getActual()) {
+                  if (tps->getElemTypespec() == nullptr) {
+                    uhdm::RefTypespec* varRef = s.make<uhdm::RefTypespec>();
+                    varRef->setParent(tps);
+                    varRef->setName(fC->SymName(Data_type));
+                    fC->populateCoreMembers(Data_type, Data_type, varRef);
+                    tps->setElemTypespec(varRef);
+                  }
+                  tps->getElemTypespec()->setActual(ts);
                 }
-                tps->getElemTypespec()->setActual(ts);
               }
             }
             if (arr->getTypespec() == nullptr) {
@@ -1241,7 +1246,9 @@ uhdm::AnyCollection* CompileHelper::compileDataDeclaration(
               }
             }
             arr->setName(fC->SymName(Var));
-            var->setName("");
+            if (uhdm::Variables* const v = any_cast<uhdm::Variables>(var)) {
+              v->setName("");
+            }
             var->setParent(pstmt);
             var = arr;
           }
@@ -1253,9 +1260,9 @@ uhdm::AnyCollection* CompileHelper::compileDataDeclaration(
         uhdm::Assignment* assign_stmt = s.make<uhdm::Assignment>();
         assign_stmt->setOpType(vpiAssignmentOp);
         assign_stmt->setBlocking(true);
-        if (var != nullptr) {
+        if (uhdm::Variables* const v = any_cast<uhdm::Variables>(var)) {
           var->setParent(assign_stmt, true);
-          assign_stmt->setLhs(var);
+          assign_stmt->setLhs(v);
         }
         fC->populateCoreMembers(Variable_decl_assignment,
                                 Variable_decl_assignment, assign_stmt);
@@ -1583,8 +1590,9 @@ n<> u<142> t<Tf_item_declaration> p<386> c<141> s<384> l<28>
         NodeId Data_type = fC->Child(Data_type_or_implicit);
         uhdm::Typespec* ts = nullptr;
         if (fC->Type(Data_type) == VObjectType::paData_type) {
-          ts = compileTypespec(component, fC, Data_type, compileDesign,
-                               Reduce::Yes, parent, nullptr, false);
+          ts = compileTypespec(component, fC, Data_type, InvalidNodeId,
+                               compileDesign, Reduce::Yes, parent, nullptr,
+                               false);
         } else if (fC->Type(Data_type) == VObjectType::paPacked_dimension) {
           // Implicit type
           uhdm::LogicTypespec* pts = s.make<uhdm::LogicTypespec>();
@@ -1653,9 +1661,9 @@ n<> u<142> t<Tf_item_declaration> p<386> c<141> s<384> l<28>
             Variable_declaration = fC->Sibling(Variable_declaration);
           }
           NodeId Data_type = fC->Child(Variable_declaration);
-          uhdm::Typespec* ts =
-              compileTypespec(component, fC, Data_type, compileDesign,
-                              Reduce::No, parent, nullptr, false);
+          uhdm::Typespec* ts = compileTypespec(
+              component, fC, Data_type, InvalidNodeId, compileDesign,
+              Reduce::No, parent, nullptr, false);
           NodeId List_of_variable_decl_assignments = fC->Sibling(Data_type);
           NodeId Variable_decl_assignment =
               fC->Child(List_of_variable_decl_assignments);
@@ -1665,19 +1673,23 @@ n<> u<142> t<Tf_item_declaration> p<386> c<141> s<384> l<28>
             std::map<std::string, uhdm::IODecl*>::iterator itr =
                 ioMap.find(name);
             if (itr == ioMap.end()) {
-              if (uhdm::Variables* var = (uhdm::Variables*)compileVariable(
+              if (uhdm::Any* var = compileVariable(
                       component, fC, Data_type, nameId, compileDesign,
                       Reduce::No, parent, nullptr, false)) {
-                var->setAutomatic(!is_static);
-                var->setName(name);
+                if (uhdm::Variables* const v = any_cast<uhdm::Variables>(var)) {
+                  v->setAutomatic(!is_static);
+                  v->setName(name);
+                }
                 if (ts != nullptr) {
-                  if (var->getTypespec() == nullptr) {
-                    uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
-                    tsRef->setParent(var);
-                    fC->populateCoreMembers(Data_type, Data_type, tsRef);
-                    var->setTypespec(tsRef);
+                  if (uhdm::Expr* e = any_cast<uhdm::Expr>(var)) {
+                    if (e->getTypespec() == nullptr) {
+                      uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
+                      tsRef->setParent(var);
+                      fC->populateCoreMembers(Data_type, Data_type, tsRef);
+                      e->setTypespec(tsRef);
+                    }
+                    e->getTypespec()->setActual(ts);
                   }
-                  var->getTypespec()->setActual(ts);
                 }
               }
             } else if (ts != nullptr) {
@@ -1783,8 +1795,8 @@ std::vector<uhdm::IODecl*>* CompileHelper::compileTfPortList(
     }
     fC->populateCoreMembers(tf_param_name, tf_param_name, decl);
     if (uhdm::Typespec* tempts =
-            compileTypespec(component, fC, type, compileDesign, Reduce::No,
-                            decl, nullptr, true)) {
+            compileTypespec(component, fC, type, unpackedDimension,
+                            compileDesign, Reduce::No, decl, nullptr, true)) {
       ts = tempts;
     }
     decl->setParent(parent);
@@ -2422,8 +2434,8 @@ bool CompileHelper::compileFunction(DesignComponent* component,
 
     uhdm::Typespec* ts = nullptr;
     if (Return_data_type) {
-      ts = compileTypespec(component, fC, Return_data_type, compileDesign,
-                           reduce, func, instance, true);
+      ts = compileTypespec(component, fC, Return_data_type, InvalidNodeId,
+                           compileDesign, reduce, func, instance, true);
     } else if (!Function_data_type) {
       // Implicit return type
       ts = s.make<uhdm::LogicTypespec>();
@@ -2874,8 +2886,10 @@ Function* CompileHelper::compileFunctionPrototype(
   func->setName(funcName);
   func->setParent(scope->getUhdmModel());
   fC->populateCoreMembers(id, id, func);
-  uhdm::Typespec* ts = compileTypespec(scope, fC, type, compileDesign,
-                                       Reduce::Yes, func, nullptr, true);
+
+  uhdm::Typespec* ts =
+      compileTypespec(scope, fC, type, InvalidNodeId, compileDesign,
+                      Reduce::Yes, func, nullptr, true);
   NodeId Packed_dimension = type;
   if (fC->Type(Packed_dimension) != VObjectType::paPacked_dimension)
     Packed_dimension = fC->Sibling(type);
@@ -3133,10 +3147,12 @@ uhdm::Any* CompileHelper::compileForLoop(DesignComponent* component,
         fC->populateCoreMembers(For_variable_declaration,
                                 For_variable_declaration, assign_stmt);
 
-        if (uhdm::Variables* var = (uhdm::Variables*)compileVariable(
-                component, fC, Data_type, Var, compileDesign, Reduce::Yes,
-                assign_stmt, nullptr, false)) {
-          assign_stmt->setLhs(var);
+        if (uhdm::Any* var =
+                compileVariable(component, fC, Data_type, Var, compileDesign,
+                                Reduce::Yes, assign_stmt, nullptr, false)) {
+          if (uhdm::Variables* const v = any_cast<uhdm::Variables>(var)) {
+            assign_stmt->setLhs(v);
+          }
         }
         if (uhdm::Expr* rhs = (uhdm::Expr*)compileExpression(
                 component, fC, Expression, compileDesign, Reduce::No,
@@ -3169,10 +3185,12 @@ uhdm::Any* CompileHelper::compileForLoop(DesignComponent* component,
         fC->populateCoreMembers(Variable_assignment, Variable_assignment,
                                 assign_stmt);
 
-        if (uhdm::Variables* var = (uhdm::Variables*)compileVariable(
+        if (uhdm::Any* var = compileVariable(
                 component, fC, Hierarchical_identifier, Hierarchical_identifier,
                 compileDesign, Reduce::Yes, assign_stmt, nullptr, false)) {
-          assign_stmt->setLhs(var);
+          if (uhdm::Variables* const v = any_cast<uhdm::Variables>(var)) {
+            assign_stmt->setLhs(v);
+          }
         }
 
         if (uhdm::Expr* rhs = (uhdm::Expr*)compileExpression(

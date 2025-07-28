@@ -299,50 +299,24 @@ bool CompileClass::compile(Elaborate elaborate, Reduce reduce) {
 
 bool CompileClass::compile_properties() {
   uhdm::ClassDefn* defn = m_class->getUhdmModel<uhdm::ClassDefn>();
+  const uhdm::ScopedScope scopedScope(defn);
   for (Signal* sig : m_class->getSignals()) {
     const FileContent* fC = sig->getFileContent();
     NodeId id = sig->getNodeId();
-    NodeId packedDimension = sig->getPackedDimension();
-    NodeId unpackedDimension = sig->getUnpackedDimension();
-
-    // Packed and unpacked ranges
-    int32_t packedSize = 0;
-    int32_t unpackedSize = 0;
-    std::vector<uhdm::Range*>* packedDimensions = m_helper.compileRanges(
-        m_class, fC, packedDimension, m_compileDesign, Reduce::Yes, nullptr,
-        nullptr, packedSize, false);
-    std::vector<uhdm::Range*>* unpackedDimensions = nullptr;
-    if (fC->Type(unpackedDimension) == VObjectType::paClass_new) {
-    } else {
-      unpackedDimensions = m_helper.compileRanges(
-          m_class, fC, unpackedDimension, m_compileDesign, Reduce::Yes, nullptr,
-          nullptr, unpackedSize, false);
-    }
-    uhdm::Typespec* tps = nullptr;
-    NodeId typeSpecId = sig->getTypespecId();
-    if (typeSpecId) {
-      tps = m_helper.compileTypespec(m_class, fC, typeSpecId, m_compileDesign,
-                                     Reduce::Yes, defn, nullptr, false);
-    }
-    if (tps == nullptr) {
-      if (sig->getInterfaceTypeNameId()) {
-        tps = m_helper.compileTypespec(
-            m_class, fC, sig->getInterfaceTypeNameId(), m_compileDesign,
-            Reduce::Yes, defn, nullptr, false);
-      }
-    }
-
     // Assignment to a default value
     uhdm::Expr* exp = m_helper.exprFromAssign(m_class, m_compileDesign, fC, id,
-                                              unpackedDimension);
-    if (uhdm::Any* obj = m_helper.compileVariable(
-            m_class, m_compileDesign, sig, packedDimensions, packedSize,
-            unpackedDimensions, unpackedSize, exp, tps)) {
+                                              sig->getUnpackedDimension());
+    if (uhdm::Any* obj =
+            m_helper.compileSignals(m_class, m_compileDesign, sig)) {
       fC->populateCoreMembers(sig->getNameId(), sig->getNameId(), obj);
       obj->setParent(defn);
-      if (exp != nullptr) exp->setParent(obj, true);
+      if (exp != nullptr) {
+        exp->setParent(obj, true);
+        if (uhdm::Variables* const var = any_cast<uhdm::Variables>(obj)) {
+          var->setExpr(exp);
+        }
+      }
     }
-    if (exp != nullptr) exp->setParent(defn);
   }
   return true;
 }

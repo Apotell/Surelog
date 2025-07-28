@@ -30,6 +30,15 @@
 namespace SURELOG {
 int32_t DataType::s_id = 0;
 
+DataType::DataType(const FileContent* fC, NodeId id, std::string_view name,
+                   VObjectType type, bool isParameter)
+    : m_fileContent(fC),
+      m_id(id),
+      m_name(name),
+      m_definition(nullptr),
+      m_type(type),
+      m_is_parameter(isParameter) {}
+
 const DataType* DataType::getActual() const {
   const DataType* actual = this;
   const DataType* tmp = actual;
@@ -39,6 +48,8 @@ const DataType* DataType::getActual() const {
   }
   return actual;
 }
+
+void DataType::setTypespec(uhdm::Typespec* typespec) { m_typespec = typespec; }
 
 bool DataType::isInteger_type(VObjectType type) {
   return (isInteger_vector_type(type) || isInteger_atom_type(type));

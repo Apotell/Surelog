@@ -290,25 +290,36 @@ class CompileHelper final {
                              CompileDesign* compileDesign, Reduce reduce,
                              uhdm::Any* pstmt, ValuedComponentI* instance,
                              bool muteErrors);
-  uhdm::Any* compileVariable(DesignComponent* component,
-                             CompileDesign* compileDesign, Signal* sig,
-                             std::vector<uhdm::Range*>* packedDimensions,
-                             int32_t packedSize,
-                             std::vector<uhdm::Range*>* unpackedDimensions,
-                             int32_t unpackedSize, uhdm::Expr* assignExp,
+  uhdm::Any* compileSignals(DesignComponent* component,
+                            CompileDesign* compileDesign, Signal* sig,
+                            uhdm::Typespec* tps);
+
+  uhdm::Any* compileVariable(DesignComponent* component, const FileContent* fC,
+                             CompileDesign* compileDesign, NodeId nameId,
+                             VObjectType subnettype, NodeId typespecId,
                              uhdm::Typespec* tps);
+
+  uhdm::Any* compileSignals(DesignComponent* component,
+                            CompileDesign* compileDesign, Signal* sig);
 
   uhdm::Typespec* compileTypespec(DesignComponent* component,
                                   const FileContent* fC, NodeId nodeId,
+                                  NodeId unpackedDimId,
                                   CompileDesign* compileDesign, Reduce reduce,
                                   uhdm::Any* pstmt, ValuedComponentI* instance,
                                   bool isVariable);
+
+  uhdm::Typespec* compileUpdatedTypespec(DesignComponent* component,
+                                         const FileContent* fC, NodeId nodeId,
+                                         NodeId packedId, NodeId unpackedId,
+                                         CompileDesign* compileDesign,
+                                         Reduce reduce, uhdm::Any* pstmt,
+                                         uhdm::Typespec* ts);
 
   uhdm::Typespec* compileBuiltinTypespec(DesignComponent* component,
                                          const FileContent* fC, NodeId type,
                                          VObjectType the_type,
                                          CompileDesign* compileDesign,
-                                         std::vector<uhdm::Range*>* ranges,
                                          uhdm::Any* pstmt);
 
   uhdm::Typespec* compileDatastructureTypespec(
@@ -588,11 +599,6 @@ class CompileHelper final {
                 DesignComponent* component, CompileDesign* compileDesign,
                 Reduce reduce, ValuedComponentI* instance, PathId fileId,
                 uint32_t lineNumber, bool sizeMode);
-
-  uhdm::Variables* getSimpleVarFromTypespec(
-      const FileContent* fC, NodeId declarationId, NodeId nameId,
-      uhdm::Typespec* spec, std::vector<uhdm::Range*>* packedDimensions,
-      CompileDesign* compileDesign);
 
   std::pair<uhdm::TaskFunc*, DesignComponent*> getTaskFunc(
       std::string_view name, DesignComponent* component,

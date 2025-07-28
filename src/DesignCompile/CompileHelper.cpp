@@ -530,10 +530,29 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
     const std::string_view name = fC->SymName(type_name);
     const TypeDef* prevDef = scope->getTypeDef(name);
     if (prevDef) return prevDef;
+
     if (fC->Type(type_name) == VObjectType::STRING_CONST) {
       TypeDef* newTypeDef = new TypeDef(fC, type_declaration, type_name, name);
       scope->insertTypeDef(newTypeDef);
       newType = newTypeDef;
+
+      uhdm::TypedefTypespec* typespecTypespec = s.make<uhdm::TypedefTypespec>();
+      typespecTypespec->setName(name);
+      typespecTypespec->setParent(pstmt);
+      fC->populateCoreMembers(type_name, type_name, typespecTypespec);
+
+      uhdm::RefTypespec* refTypespec = s.make<uhdm::RefTypespec>();
+      refTypespec->setParent(typespecTypespec);
+      fC->populateCoreMembers(type_name, type_name, refTypespec);
+
+      uhdm::StringTypespec* st = s.make<uhdm::StringTypespec>();
+      st->setParent(pstmt);
+      fC->populateCoreMembers(data_type, data_type, st);
+
+      refTypespec->setActual(st);
+      typespecTypespec->setTypedefAlias(refTypespec);
+      newTypeDef->setTypespec(typespecTypespec);
+
       return newType;
     }
   } else if (dtype == VObjectType::STRING_CONST) {
@@ -562,25 +581,14 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
   uhdm::PackedArrayTypespec* packed_array_tps = nullptr;
   uhdm::Function* resolution_func = nullptr;
   std::string resolutionFunctionName;
-  if (Variable_dimension) {
-    if (fC->Type(Variable_dimension) == VObjectType::STRING_CONST) {
-      std::string_view name = fC->SymName(Variable_dimension);
-      std::pair<uhdm::TaskFunc*, DesignComponent*> ret =
-          getTaskFunc(name, scope, compileDesign, nullptr, nullptr);
-      uhdm::TaskFunc* tf = ret.first;
-      resolution_func = any_cast<uhdm::Function*>(tf);
-      resolutionFunctionName = name;
-    } else {
-      array_tps = s.make<uhdm::ArrayTypespec>();
-      array_tps->setParent(pstmt);
-      fC->populateCoreMembers(type_name, Variable_dimension, array_tps);
-      int32_t size;
-      if (uhdm::RangeCollection* ranges =
-              compileRanges(scope, fC, Variable_dimension, compileDesign,
-                            reduce, array_tps, nullptr, size, false)) {
-        array_tps->setRanges(ranges);
-      }
-    }
+  if (Variable_dimension &&
+      (fC->Type(Variable_dimension) == VObjectType::STRING_CONST)) {
+    std::string_view name = fC->SymName(Variable_dimension);
+    std::pair<uhdm::TaskFunc*, DesignComponent*> ret =
+        getTaskFunc(name, scope, compileDesign, nullptr, nullptr);
+    uhdm::TaskFunc* tf = ret.first;
+    resolution_func = any_cast<uhdm::Function*>(tf);
+    resolutionFunctionName = name;
   }
   std::string_view name = fC->SymName(type_name);
   std::string fullName(name);
@@ -613,18 +621,6 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
   bool enumType = false;
   bool structType = false;
   NodeId Packed_dimension = fC->Sibling(enum_base_type);
-  if (Packed_dimension &&
-      (fC->Type(Packed_dimension) == VObjectType::paPacked_dimension)) {
-    packed_array_tps = s.make<uhdm::PackedArrayTypespec>();
-    packed_array_tps->setParent(pstmt);
-    fC->populateCoreMembers(data_type, data_type, packed_array_tps);
-    int32_t size;
-    if (uhdm::RangeCollection* ranges =
-            compileRanges(scope, fC, Packed_dimension, compileDesign, reduce,
-                          packed_array_tps, nullptr, size, false)) {
-      packed_array_tps->setRanges(ranges);
-    }
-  }
   NodeId enum_name_declaration;
   if (fC->Type(enum_base_type) == VObjectType::paEnum_base_type) {
     enum_name_declaration = fC->Sibling(enum_base_type);
@@ -643,68 +639,58 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       Struct* st = new Struct(fC, type_name, enum_base_type);
       newTypeDef->setDataType(st);
       newTypeDef->setDefinition(st);
-      uhdm::Typespec* ts = compileTypespec(scope, fC, data_type, compileDesign,
-                                           reduce, pstmt, nullptr, false);
-      if ((m_reduce == Reduce::Yes) && (reduce == Reduce::Yes) &&
-          (valuedcomponenti_cast<Package>(scope))) {
-        ts->setInstance(scope->getUhdmModel<uhdm::Instance>());
-      }
-      if (array_tps) {
-        st->setTypespec(array_tps);
-        if (array_tps->getElemTypespec() == nullptr) {
-          uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
-          rt->setParent(array_tps);
-          array_tps->setElemTypespec(rt);
+
+      uhdm::TypedefTypespec* typedefTypespec = s.make<uhdm::TypedefTypespec>();
+      typedefTypespec->setName(fullName);
+      typedefTypespec->setParent(pstmt);
+      fC->populateCoreMembers(type_name, type_name, typedefTypespec);
+
+      if (uhdm::Typespec* ts =
+              compileTypespec(scope, fC, data_type, Variable_dimension,
+                              compileDesign, reduce, pstmt, nullptr, false)) {
+        if ((m_reduce == Reduce::Yes) && (reduce == Reduce::Yes) &&
+            (valuedcomponenti_cast<Package>(scope))) {
+          ts->setInstance(scope->getUhdmModel<uhdm::Instance>());
         }
-        array_tps->getElemTypespec()->setActual(ts);
-        array_tps->setName(fullName);
-      } else if (packed_array_tps) {
-        st->setTypespec(packed_array_tps);
-        if (packed_array_tps->getElemTypespec() == nullptr) {
-          uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
-          rt->setParent(packed_array_tps);
-          packed_array_tps->setElemTypespec(rt);
-        }
-        packed_array_tps->getElemTypespec()->setActual(ts);
-        packed_array_tps->setName(fullName);
-      } else {
-        ts->setName(fullName);
         st->setTypespec(ts);
+
+        uhdm::RefTypespec* refTypespec = s.make<uhdm::RefTypespec>();
+        refTypespec->setActual(ts);
+        refTypespec->setParent(typedefTypespec);
+        typedefTypespec->setTypedefAlias(refTypespec);
+        fC->populateCoreMembers(data_type, data_type, refTypespec);
       }
+
+      newTypeDef->setTypespec(typedefTypespec);
+
     } else if (struct_or_union_type == VObjectType::paUnion_keyword) {
       Union* st = new Union(fC, type_name, enum_base_type);
       newTypeDef->setDataType(st);
       newTypeDef->setDefinition(st);
-      uhdm::Typespec* ts =
-          compileTypespec(scope, fC, enum_base_type, compileDesign, reduce,
-                          pstmt, nullptr, false);
-      fC->populateCoreMembers(enum_base_type, type_name, ts, true);
-      if ((m_reduce == Reduce::Yes) && (reduce == Reduce::Yes) &&
-          (valuedcomponenti_cast<Package>(scope))) {
-        ts->setInstance(scope->getUhdmModel<uhdm::Instance>());
-      }
-      if (array_tps) {
-        st->setTypespec(array_tps);
-        if (array_tps->getElemTypespec() == nullptr) {
-          uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
-          rt->setParent(array_tps);
-          array_tps->setElemTypespec(rt);
+
+      uhdm::TypedefTypespec* typedefTypespec = s.make<uhdm::TypedefTypespec>();
+      typedefTypespec->setName(fullName);
+      typedefTypespec->setParent(pstmt);
+      fC->populateCoreMembers(type_name, type_name, typedefTypespec);
+
+      if (uhdm::Typespec* ts =
+              compileTypespec(scope, fC, enum_base_type, Variable_dimension,
+                              compileDesign, reduce, pstmt, nullptr, false)) {
+        fC->populateCoreMembers(enum_base_type, type_name, ts, true);
+        if ((m_reduce == Reduce::Yes) && (reduce == Reduce::Yes) &&
+            (valuedcomponenti_cast<Package>(scope))) {
+          ts->setInstance(scope->getUhdmModel<uhdm::Instance>());
         }
-        array_tps->getElemTypespec()->setActual(ts);
-        array_tps->setName(fullName);
-      } else if (packed_array_tps) {
-        st->setTypespec(packed_array_tps);
-        if (packed_array_tps->getElemTypespec() == nullptr) {
-          uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
-          rt->setParent(packed_array_tps);
-          packed_array_tps->setElemTypespec(rt);
-        }
-        packed_array_tps->getElemTypespec()->setActual(ts);
-        packed_array_tps->setName(fullName);
-      } else {
-        ts->setName(fullName);
         st->setTypespec(ts);
+
+        uhdm::RefTypespec* refTypespec = s.make<uhdm::RefTypespec>();
+        refTypespec->setActual(ts);
+        refTypespec->setParent(typedefTypespec);
+        typedefTypespec->setTypedefAlias(refTypespec);
+        fC->populateCoreMembers(data_type, data_type, refTypespec);
       }
+
+      newTypeDef->setTypespec(typedefTypespec);
     }
 
     if (scope) {
@@ -726,50 +712,28 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
     Enum* the_enum = new Enum(fC, type_name, enum_base_type);
     newTypeDef->setDataType(the_enum);
     newTypeDef->setDefinition(the_enum);
-    the_enum->setBaseTypespec(
-        compileTypespec(scope, fC, fC->Child(enum_base_type), compileDesign,
-                        reduce, pstmt, nullptr, false));
+    NodeId tmpNodeId = fC->Child(enum_base_type);
 
     uhdm::EnumTypespec* enum_t = s.make<uhdm::EnumTypespec>();
     enum_t->setParent(pstmt);
-
-    if (array_tps) {
-      the_enum->setTypespec(array_tps);
-      if (array_tps->getElemTypespec() == nullptr) {
-        uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
-        rt->setParent(array_tps);
-        array_tps->setElemTypespec(rt);
-      }
-      array_tps->getElemTypespec()->setActual(enum_t);
-      array_tps->setName(name);
-    } else if (packed_array_tps) {
-      the_enum->setTypespec(packed_array_tps);
-      if (packed_array_tps->getElemTypespec() == nullptr) {
-        uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
-        rt->setParent(packed_array_tps);
-        packed_array_tps->setElemTypespec(rt);
-      }
-      packed_array_tps->getElemTypespec()->setActual(enum_t);
-      packed_array_tps->setName(name);
-    } else {
-      enum_t->setName(fullName);
-      the_enum->setTypespec(enum_t);
-    }
-
+    the_enum->setTypespec(enum_t);
     the_enum->getFileContent()->populateCoreMembers(data_type, type_name,
                                                     enum_t);
 
     // Enum basetype
-    if (uhdm::Typespec* basets = the_enum->getBaseTypespec()) {
-      if (enum_t->getBaseTypespec() == nullptr) {
-        uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
-        rt->setParent(enum_t);
-        the_enum->getFileContent()->populateCoreMembers(enum_base_type,
-                                                        enum_base_type, rt);
-        enum_t->setBaseTypespec(rt);
-      }
-      enum_t->getBaseTypespec()->setActual(basets);
+    if (uhdm::Typespec* tps =
+            compileTypespec(scope, fC, enum_base_type, Variable_dimension,
+                            compileDesign, reduce, pstmt, nullptr, false)) {
+      the_enum->setBaseTypespec(tps);
+
+      uhdm::RefTypespec* baseTypeRef = s.make<uhdm::RefTypespec>();
+      baseTypeRef->setParent(enum_t);
+      baseTypeRef->setName(tps->getName());
+      baseTypeRef->setActual(tps);
+      fC->populateCoreMembers(enum_base_type, enum_base_type, baseTypeRef);
+      enum_t->setBaseTypespec(baseTypeRef);
     }
+
     if ((m_reduce == Reduce::Yes) && (reduce == Reduce::Yes) &&
         (valuedcomponenti_cast<Package>(scope))) {
       enum_t->setInstance(scope->getUhdmModel<uhdm::Instance>());
@@ -832,6 +796,19 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       enum_name_declaration = fC->Sibling(enum_name_declaration);
     }
 
+    uhdm::TypedefTypespec* typedefTypespec = s.make<uhdm::TypedefTypespec>();
+    typedefTypespec->setName(fullName);
+    typedefTypespec->setParent(pstmt);
+    fC->populateCoreMembers(type_name, type_name, typedefTypespec);
+
+    uhdm::RefTypespec* refTypespec = s.make<uhdm::RefTypespec>();
+    refTypespec->setParent(typedefTypespec);
+    refTypespec->setActual(enum_t);
+    fC->populateCoreMembers(data_type, data_type, refTypespec);
+
+    typedefTypespec->setTypedefAlias(refTypespec);
+    newTypeDef->setTypespec(typedefTypespec);
+
     type->setDefinition(newTypeDef);
     if (scope) scope->insertTypeDef(newTypeDef);
     newType = newTypeDef;
@@ -857,13 +834,31 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       DummyType* dummy = new DummyType(fC, type_name, stype);
       newTypeDef->setDataType(dummy);
       newTypeDef->setDefinition(dummy);
+
+      uhdm::TypedefTypespec* typedefTypespec = s.make<uhdm::TypedefTypespec>();
+      typedefTypespec->setName(fullName);
+      typedefTypespec->setParent(pstmt);
+      fC->populateCoreMembers(type_name, type_name, typedefTypespec);
+
+      if (uhdm::Typespec* tps =
+              compileTypespec(scope, fC, data_type, Variable_dimension,
+                              compileDesign, reduce, pstmt, nullptr, false)) {
+        uhdm::RefTypespec* refTypespec = s.make<uhdm::RefTypespec>();
+        refTypespec->setParent(typedefTypespec);
+        refTypespec->setActual(tps);
+        fC->populateCoreMembers(stype, stype, refTypespec);
+        typedefTypespec->setTypedefAlias(refTypespec);
+      }
+      newTypeDef->setTypespec(typedefTypespec);
+
       // Don't create the typespec here, as it is most likely going to be
       // incomplete at compilation time, except for packages and FileContent
       if ((m_reduce == Reduce::Yes) && (reduce == Reduce::Yes) &&
           (valuedcomponenti_cast<Package>(scope) ||
            valuedcomponenti_cast<FileContent*>(scope))) {
-        uhdm::Typespec* ts = compileTypespec(scope, fC, stype, compileDesign,
-                                             reduce, pstmt, nullptr, false);
+        uhdm::Typespec* ts =
+            compileTypespec(scope, fC, stype, Variable_dimension, compileDesign,
+                            reduce, pstmt, nullptr, false);
         if (ts && (ts->getUhdmType() != uhdm::UhdmType::ClassTypespec) &&
             (ts->getUhdmType() != uhdm::UhdmType::UnsupportedTypespec)) {
           uhdm::ElaboratorContext elaboratorContext(&s, false, true);
@@ -880,7 +875,6 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
 
           if (array_tps) {
             array_tps->setInstance(scope->getUhdmModel<uhdm::Instance>());
-            array_tps->setName(name);
             if (array_tps->getElemTypespec() == nullptr) {
               uhdm::RefTypespec* tpcloneRef = s.make<uhdm::RefTypespec>();
               tpcloneRef->setParent(array_tps);
@@ -903,7 +897,6 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
               logic_array_tps->setRanges(packed_array_tps->getRanges());
               logic_array_tps->setInstance(
                   scope->getUhdmModel<uhdm::Instance>());
-              logic_array_tps->setName(name);
               if (logic_array_tps->getElemTypespec() == nullptr) {
                 uhdm::RefTypespec* tpcloneRef = s.make<uhdm::RefTypespec>();
                 tpcloneRef->setParent(logic_array_tps);
@@ -921,7 +914,6 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
             } else {
               if (ts->getUhdmType() == uhdm::UhdmType::PackedArrayTypespec) {
                 tpclone->setInstance(scope->getUhdmModel<uhdm::Instance>());
-                tpclone->setName(name);
                 if (tpclone_typedef != nullptr) {
                   tpclone_typedef->getTypedefAlias()->setActual(ts);
                 }
@@ -944,7 +936,6 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
               } else {
                 packed_array_tps->setInstance(
                     scope->getUhdmModel<uhdm::Instance>());
-                packed_array_tps->setName(name);
                 if (packed_array_tps->getElemTypespec() == nullptr) {
                   uhdm::RefTypespec* tpcloneRef = s.make<uhdm::RefTypespec>();
                   tpcloneRef->setParent(packed_array_tps);
@@ -963,7 +954,10 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
             }
           } else {
             tpclone->setInstance(scope->getUhdmModel<uhdm::Instance>());
-            tpclone->setName(name);
+            if (uhdm::TypedefTypespec* tt =
+                    any_cast<uhdm::TypedefTypespec>(tpclone)) {
+              tt->setName(fullName);
+            }
             if (tpclone_typedef != nullptr) {
               tpclone_typedef->getTypedefAlias()->setActual(ts);
             }
@@ -998,20 +992,9 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
       SimpleType* simple = new SimpleType(fC, type_name, stype);
       newTypeDef->setDataType(simple);
       newTypeDef->setDefinition(simple);
-      if (uhdm::Typespec* ts = compileTypespec(scope, fC, stype, compileDesign,
-                                               reduce, pstmt, nullptr, false)) {
-        if (array_tps) {
-          if (array_tps->getElemTypespec() == nullptr) {
-            uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
-            tsRef->setParent(array_tps);
-            fC->populateCoreMembers(stype, InvalidNodeId, tsRef);
-            tsRef->setEndLine(ts->getEndLine());
-            tsRef->setEndColumn(ts->getEndColumn());
-            array_tps->setElemTypespec(tsRef);
-          }
-          array_tps->getElemTypespec()->setActual(ts);
-          ts = array_tps;
-        }
+      if (uhdm::Typespec* ts =
+              compileTypespec(scope, fC, data_type, Variable_dimension,
+                              compileDesign, reduce, pstmt, nullptr, false)) {
         if (resolution_func) {
           if (ts->getUhdmType() == uhdm::UhdmType::BitTypespec) {
             uhdm::BitTypespec* btps = (uhdm::BitTypespec*)ts;
@@ -1032,8 +1015,24 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
             (valuedcomponenti_cast<Package>(scope))) {
           ts->setInstance(scope->getUhdmModel<uhdm::Instance>());
         }
-        ts->setName(name);
+        if (uhdm::TypedefTypespec* tt = any_cast<uhdm::TypedefTypespec>(ts)) {
+          tt->setName(fullName);
+        }
         simple->setTypespec(ts);
+
+        uhdm::TypedefTypespec* typedefTypespec =
+            s.make<uhdm::TypedefTypespec>();
+        typedefTypespec->setName(fullName);
+        typedefTypespec->setParent(pstmt);
+        fC->populateCoreMembers(type_name, type_name, typedefTypespec);
+
+        uhdm::RefTypespec* refTypespec = s.make<uhdm::RefTypespec>();
+        refTypespec->setParent(typedefTypespec);
+        refTypespec->setActual(ts);
+        fC->populateCoreMembers(stype, stype, refTypespec);
+
+        typedefTypespec->setTypedefAlias(refTypespec);
+        newTypeDef->setTypespec(typedefTypespec);
       }
       newType = newTypeDef;
     }
@@ -1912,18 +1911,15 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
     }
   }
 
-  if (sig->getTypespecId()) {
+  NodeId tysNodeId = sig->getTypespecId() ? sig->getTypespecId()
+                                          : sig->getInterfaceTypeNameId();
+  if (tysNodeId) {
     checkForLoops(true);
-    tps = compileTypespec(comp, fC, sig->getTypespecId(), compileDesign, reduce,
-                          uhdmScope, nullptr, true);
-    checkForLoops(false);
-  }
-  if ((tps == nullptr) && sig->getInterfaceTypeNameId()) {
-    checkForLoops(true);
-    tps = compileTypespec(comp, fC, sig->getInterfaceTypeNameId(),
+    tps = compileTypespec(comp, fC, tysNodeId, sig->getUnpackedDimension(),
                           compileDesign, reduce, uhdmScope, nullptr, true);
     checkForLoops(false);
   }
+
   if (tps) {
     uhdm::Typespec* tmp = tps;
     uhdm::UhdmType ttmp = tmp->getUhdmType();
@@ -1980,19 +1976,6 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
   const NodeId rtEndId =
       sig->getPackedDimension() ? sig->getPackedDimension() : rtBeginId;
 
-  // Packed and unpacked ranges
-  int32_t packedSize;
-  int32_t unpackedSize;
-  checkForLoops(true);
-  std::vector<uhdm::Range*>* packedDimensions =
-      compileRanges(comp, fC, packedDimension, compileDesign, reduce, nullptr,
-                    nullptr, packedSize, false);
-  checkForLoops(false);
-  checkForLoops(true);
-  std::vector<uhdm::Range*>* unpackedDimensions =
-      compileRanges(comp, fC, unpackedDimension, compileDesign, reduce, nullptr,
-                    nullptr, unpackedSize, false);
-  checkForLoops(false);
   uhdm::Any* obj = nullptr;
 
   // Assignment to a default value
@@ -2005,478 +1988,63 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
                                        compileDesign, reduce, nullptr, nullptr);
     checkForLoops(false);
   }
-  if (isNet) {
-    // Nets
-    if (dtype) {
-      dtype = dtype->getActual();
-      if (const DummyType* en = datatype_cast<DummyType>(dtype)) {
-        uhdm::Typespec* spec = en->getTypespec();
-        if (spec->getUhdmType() == uhdm::UhdmType::LogicTypespec) {
-          uhdm::LogicNet* logicn = s.make<uhdm::LogicNet>();
-          if (sig->attributes()) {
-            logicn->setAttributes(sig->attributes());
-            for (auto a : *sig->attributes()) a->setParent(logicn);
-          }
-          logicn->setSigned(sig->isSigned());
-          logicn->setNetType(UhdmWriter::getVpiNetType(sig->getType()));
-          fC->populateCoreMembers(sig->getNetNameId(), sig->getNetNameId(),
-                                  logicn);
-          // Move range to typespec for simple types
-          // logicn->setRanges(packedDimensions);
-          uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
-          rt->setParent(logicn);
-          rt->setActual(spec);
-          fC->populateCoreMembers(rtBeginId, rtEndId, rt);
-          logicn->setTypespec(rt);
-          logicn->setName(signame);
-          spec->setParent(logicn);
-          obj = logicn;
-        } else if (spec->getUhdmType() == uhdm::UhdmType::StructTypespec) {
-          uhdm::StructNet* stv = s.make<uhdm::StructNet>();
-          if (sig->attributes()) {
-            stv->setAttributes(sig->attributes());
-            for (auto a : *sig->attributes()) a->setParent(stv);
-          }
-          fC->populateCoreMembers(sig->getNetNameId(), sig->getNetNameId(),
-                                  stv);
-          uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
-          rt->setParent(stv);
-          rt->setActual(spec);
-          fC->populateCoreMembers(rtBeginId, rtEndId, rt);
-          stv->setTypespec(rt);
-          spec->setParent(stv);
-          obj = stv;
-          if (packedDimensions) {
-            uhdm::PackedArrayNet* pnets = s.make<uhdm::PackedArrayNet>();
-            pnets->setRanges(packedDimensions);
-            pnets->getElements(true)->emplace_back(stv);
-            stv->setParent(pnets);
-            for (auto r : *packedDimensions) r->setParent(pnets);
-            obj = pnets;
-          }
-        } else if (spec->getUhdmType() == uhdm::UhdmType::EnumTypespec) {
-          uhdm::EnumNet* stv = s.make<uhdm::EnumNet>();
-          if (sig->attributes()) {
-            stv->setAttributes(sig->attributes());
-            for (auto a : *sig->attributes()) a->setParent(stv);
-          }
-          fC->populateCoreMembers(sig->getNetNameId(), sig->getNetNameId(),
-                                  stv);
-          uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
-          rt->setParent(stv);
-          rt->setActual(spec);
-          fC->populateCoreMembers(rtBeginId, rtEndId, rt);
-          stv->setTypespec(rt);
-          spec->setParent(stv);
-          obj = stv;
-          if (packedDimensions) {
-            uhdm::PackedArrayNet* pnets = s.make<uhdm::PackedArrayNet>();
-            pnets->setRanges(packedDimensions);
-            pnets->getElements(true)->emplace_back(stv);
-            stv->setParent(pnets);
-            for (auto r : *packedDimensions) r->setParent(pnets);
-            obj = pnets;
-          }
-        } else if (spec->getUhdmType() == uhdm::UhdmType::BitTypespec) {
-          uhdm::BitVar* logicn = s.make<uhdm::BitVar>();
-          if (sig->attributes()) {
-            logicn->setAttributes(sig->attributes());
-            for (auto a : *sig->attributes()) a->setParent(logicn);
-          }
-          logicn->setSigned(sig->isSigned());
-          fC->populateCoreMembers(sig->getNetNameId(), sig->getNetNameId(),
-                                  logicn);
-          // Move range to typespec for simple types
-          // logicn->setRanges(packedDimensions);
-          uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
-          rt->setParent(logicn);
-          rt->setActual(spec);
-          fC->populateCoreMembers(rtBeginId, rtEndId, rt);
-          logicn->setTypespec(rt);
-          logicn->setName(signame);
-          spec->setParent(logicn);
-          obj = logicn;
-        } else if (spec->getUhdmType() == uhdm::UhdmType::ByteTypespec) {
-          uhdm::ByteVar* logicn = s.make<uhdm::ByteVar>();
-          if (sig->attributes()) {
-            logicn->setAttributes(sig->attributes());
-            for (auto a : *sig->attributes()) a->setParent(logicn);
-          }
-          fC->populateCoreMembers(sig->getNetNameId(), sig->getNetNameId(),
-                                  logicn);
-          logicn->setSigned(sig->isSigned());
-          logicn->setName(signame);
-          uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
-          rt->setParent(logicn);
-          rt->setActual(spec);
-          fC->populateCoreMembers(rtBeginId, rtEndId, rt);
-          logicn->setTypespec(rt);
-          spec->setParent(logicn);
-          obj = logicn;
-        } else {
-          uhdm::Variables* var = getSimpleVarFromTypespec(
-              fC, id, id, spec, packedDimensions, compileDesign);
-          if (sig->attributes()) {
-            var->setAttributes(sig->attributes());
-            for (auto a : *sig->attributes()) a->setParent(var);
-          }
-          var->setExpr(exp);
-          var->setConstantVariable(sig->isConst());
-          var->setSigned(sig->isSigned());
-          var->setName(signame);
-          exp->setParent(var);
-          fC->populateCoreMembers(sig->getNetNameId(), sig->getNetNameId(),
-                                  var);
-          obj = var;
-        }
-      } else if (const Enum* en = datatype_cast<Enum>(dtype)) {
-        uhdm::EnumNet* stv = s.make<uhdm::EnumNet>();
-        stv->setName(signame);
-        fC->populateCoreMembers(sig->getNetNameId(), sig->getNetNameId(), stv);
-        uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
-        rt->setParent(stv);
-        rt->setActual(en->getTypespec());
-        fC->populateCoreMembers(rtBeginId, rtEndId, rt);
-        stv->setTypespec(rt);
-        if (sig->attributes()) {
-          stv->setAttributes(sig->attributes());
-          for (auto a : *sig->attributes()) a->setParent(stv);
-        }
-        obj = stv;
-        if (packedDimensions) {
-          uhdm::PackedArrayNet* pnets = s.make<uhdm::PackedArrayNet>();
-          pnets->setRanges(packedDimensions);
-          pnets->getElements(true)->emplace_back(stv);
-          stv->setParent(pnets);
-          for (auto r : *packedDimensions) r->setParent(pnets);
-          obj = pnets;
-          pnets->setNetType(UhdmWriter::getVpiNetType(sig->getType()));
-        } else {
-          stv->setNetType(UhdmWriter::getVpiNetType(sig->getType()));
-        }
-      } else if (const Struct* st = datatype_cast<Struct>(dtype)) {
-        uhdm::StructNet* stv = s.make<uhdm::StructNet>();
-        stv->setName(signame);
-        if (sig->attributes()) {
-          stv->setAttributes(sig->attributes());
-          for (auto a : *sig->attributes()) a->setParent(stv);
-        }
-        fC->populateCoreMembers(sig->getNetNameId(), sig->getNetNameId(), stv);
-        uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
-        rt->setParent(stv);
-        rt->setActual(st->getTypespec());
-        fC->populateCoreMembers(rtBeginId, rtEndId, rt);
-        stv->setTypespec(rt);
-        obj = stv;
-        if (packedDimensions) {
-          uhdm::PackedArrayNet* pnets = s.make<uhdm::PackedArrayNet>();
-          pnets->setRanges(packedDimensions);
-          pnets->getElements(true)->emplace_back(stv);
-          stv->setParent(pnets);
-          for (auto r : *packedDimensions) r->setParent(pnets);
-          obj = pnets;
-          pnets->setNetType(UhdmWriter::getVpiNetType(sig->getType()));
-        } else {
-          stv->setNetType(UhdmWriter::getVpiNetType(sig->getType()));
-        }
-      } else if (dtype->getCategory() == DataType::Category::PARAMETER ||
-                 dtype->getCategory() == DataType::Category::SIMPLE_TYPEDEF) {
-        uhdm::Typespec* spec = nullptr;
-        if (dtype->getCategory() == DataType::Category::SIMPLE_TYPEDEF) {
-          const SimpleType* sit = datatype_cast<SimpleType>(dtype);
-          spec = sit->getTypespec();
-        } else {
-          const Parameter* param = datatype_cast<Parameter>(dtype);
-          spec = param->getTypespec();
-          if (spec == nullptr) {
-            spec = tps;
-          }
-        }
-        if (spec->getUhdmType() == uhdm::UhdmType::LogicTypespec) {
-          uhdm::LogicNet* logicn = s.make<uhdm::LogicNet>();
-          if (sig->attributes()) {
-            logicn->setAttributes(sig->attributes());
-            for (auto a : *sig->attributes()) a->setParent(logicn);
-          }
-          logicn->setSigned(sig->isSigned());
-          logicn->setNetType(UhdmWriter::getVpiNetType(sig->getType()));
-          fC->populateCoreMembers(sig->getNetNameId(), sig->getNetNameId(),
-                                  logicn);
-          // Move range to typespec for simple types
-          // logicn->setRanges(packedDimensions);
-          uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
-          rt->setParent(logicn);
-          rt->setActual(spec);
-          fC->populateCoreMembers(rtBeginId, rtEndId, rt);
-          logicn->setTypespec(rt);
-          spec->setParent(logicn);
-          logicn->setName(signame);
-          obj = logicn;
-        } else if (spec->getUhdmType() == uhdm::UhdmType::StructTypespec) {
-          uhdm::StructNet* stv = s.make<uhdm::StructNet>();
-          stv->setName(signame);
-          if (sig->attributes()) {
-            stv->setAttributes(sig->attributes());
-            for (auto a : *sig->attributes()) a->setParent(stv);
-          }
-          fC->populateCoreMembers(sig->getNetNameId(), sig->getNetNameId(),
-                                  stv);
-          uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
-          rt->setParent(stv);
-          rt->setActual(spec);
-          fC->populateCoreMembers(rtBeginId, rtEndId, rt);
-          stv->setTypespec(rt);
-          spec->setParent(stv);
-          obj = stv;
-          if (packedDimensions) {
-            uhdm::PackedArrayNet* pnets = s.make<uhdm::PackedArrayNet>();
-            pnets->setRanges(packedDimensions);
-            pnets->getElements(true)->emplace_back(stv);
-            stv->setParent(pnets);
-            for (auto r : *packedDimensions) r->setParent(pnets);
-            obj = pnets;
-            pnets->setNetType(UhdmWriter::getVpiNetType(sig->getType()));
-          } else {
-            stv->setNetType(UhdmWriter::getVpiNetType(sig->getType()));
-          }
-        } else if (spec->getUhdmType() == uhdm::UhdmType::EnumTypespec) {
-          uhdm::EnumNet* stv = s.make<uhdm::EnumNet>();
-          stv->setName(signame);
-          if (sig->attributes()) {
-            stv->setAttributes(sig->attributes());
-            for (auto a : *sig->attributes()) a->setParent(stv);
-          }
-          fC->populateCoreMembers(sig->getNetNameId(), sig->getNetNameId(),
-                                  stv);
-          uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
-          rt->setParent(stv);
-          rt->setActual(spec);
-          fC->populateCoreMembers(rtBeginId, rtEndId, rt);
-          stv->setTypespec(rt);
-          spec->setParent(stv);
-          obj = stv;
-          if (packedDimensions) {
-            uhdm::PackedArrayNet* pnets = s.make<uhdm::PackedArrayNet>();
-            pnets->setRanges(packedDimensions);
-            pnets->getElements(true)->emplace_back(stv);
-            stv->setParent(pnets);
-            fC->populateCoreMembers(sig->getNetNameId(), sig->getNetNameId(),
-                                    pnets);
-            for (auto r : *packedDimensions) r->setParent(pnets);
-            obj = pnets;
-            pnets->setNetType(UhdmWriter::getVpiNetType(sig->getType()));
-          } else {
-            stv->setNetType(UhdmWriter::getVpiNetType(sig->getType()));
-          }
-        } else if (spec->getUhdmType() == uhdm::UhdmType::BitTypespec) {
-          uhdm::BitVar* logicn = s.make<uhdm::BitVar>();
-          if (sig->attributes()) {
-            logicn->setAttributes(sig->attributes());
-            for (auto a : *sig->attributes()) a->setParent(logicn);
-          }
-          logicn->setSigned(sig->isSigned());
-          fC->populateCoreMembers(sig->getNetNameId(), sig->getNetNameId(),
-                                  logicn);
-          uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
-          rt->setParent(logicn);
-          rt->setActual(spec);
-          fC->populateCoreMembers(rtBeginId, rtEndId, rt);
-          logicn->setTypespec(rt);
-          spec->setParent(logicn);
-          // Move range to typespec for simple types
-          // logicn->setRanges(packedDimensions);
-          logicn->setName(signame);
-          obj = logicn;
-        } else if (spec->getUhdmType() == uhdm::UhdmType::ByteTypespec) {
-          uhdm::ByteVar* logicn = s.make<uhdm::ByteVar>();
-          if (sig->attributes()) {
-            logicn->setAttributes(sig->attributes());
-            for (auto a : *sig->attributes()) a->setParent(logicn);
-          }
-          logicn->setSigned(sig->isSigned());
-          logicn->setName(signame);
-          fC->populateCoreMembers(sig->getNetNameId(), sig->getNetNameId(),
-                                  logicn);
-          uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
-          rt->setParent(logicn);
-          rt->setActual(spec);
-          fC->populateCoreMembers(rtBeginId, rtEndId, rt);
-          logicn->setTypespec(rt);
-          spec->setParent(logicn);
-          obj = logicn;
-        } else {
-          uhdm::Variables* var = getSimpleVarFromTypespec(
-              fC, id, id, spec, packedDimensions, compileDesign);
-          if (sig->attributes()) {
-            var->setAttributes(sig->attributes());
-            for (auto a : *sig->attributes()) a->setParent(var);
-          }
-          var->setExpr(exp);
-          var->setConstantVariable(sig->isConst());
-          var->setSigned(sig->isSigned());
-          var->setName(signame);
-          fC->populateCoreMembers(sig->getNetNameId(), sig->getNetNameId(),
-                                  var);
-          exp->setParent(var);
-          obj = var;
-        }
-      } else {
-        uhdm::LogicNet* logicn = s.make<uhdm::LogicNet>();
-        if (sig->attributes()) {
-          logicn->setAttributes(sig->attributes());
-          for (auto a : *sig->attributes()) a->setParent(logicn);
-        }
-        logicn->setParent(uhdmScope);
-        logicn->setSigned(sig->isSigned());
-        logicn->setNetType(UhdmWriter::getVpiNetType(sig->getType()));
-        fC->populateCoreMembers(sig->getNetNameId(), sig->getNetNameId(),
-                                logicn);
-        if (tps != nullptr) {
-          uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
-          rt->setParent(logicn);
-          rt->setActual(tps);
-          fC->populateCoreMembers(rtBeginId, rtEndId, rt);
-          logicn->setTypespec(rt);
-        }
-        // Move range to typespec for simple types
-        // logicn->setRanges(packedDimensions);
-        logicn->setName(signame);
-        obj = logicn;
+  obj = compileSignals(comp, compileDesign, sig, tps);
+  if (isNet && exp && (!signalIsPort)) {
+    uhdm::ContAssign* assign = s.make<uhdm::ContAssign>();
+    assign->setNetDeclAssign(true);
+    fC->populateCoreMembers(id, id, assign);
+    assign->setLhs((uhdm::Expr*)obj);
+    assign->setRhs(exp);
+    obj->setParent(assign);
+    exp->setParent(assign);
+    if (sig->getDelay()) {
+      checkForLoops(true);
+      if (uhdm::Expr* delay_expr = (uhdm::Expr*)compileExpression(
+              comp, fC, sig->getDelay(), compileDesign, reduce, assign,
+              nullptr)) {
+        assign->setDelay(delay_expr);
       }
-
-      if (unpackedDimensions) {
-        uhdm::ArrayNet* array_net = s.make<uhdm::ArrayNet>();
-        array_net->setParent(uhdmScope);
-        array_net->setRanges(unpackedDimensions);
-        array_net->setName(signame);
-        array_net->setSize(unpackedSize);
-        for (auto r : *unpackedDimensions) r->setParent(array_net);
-        fC->populateCoreMembers(sig->getNetNameId(), sig->getNetNameId(),
-                                array_net);
-        obj->setParent(array_net);
-      } else {
-        uhdm::UhdmType nettype = obj->getUhdmType();
-        if (nettype == uhdm::UhdmType::EnumNet) {
-          ((uhdm::EnumNet*)obj)->setName(signame);
-        } else if (nettype == uhdm::UhdmType::StructNet) {
-          ((uhdm::StructNet*)obj)->setName(signame);
-        } else if (nettype == uhdm::UhdmType::PackedArrayNet) {
-          ((uhdm::PackedArrayNet*)obj)->setName(signame);
-        }
-      }
-    } else if (subnettype == VObjectType::paStruct_union) {
-      // Implicit type
-      uhdm::StructNet* stv = s.make<uhdm::StructNet>();
-      stv->setName(signame);
-      stv->setParent(uhdmScope);
-      fC->populateCoreMembers(sig->getNetNameId(), sig->getNetNameId(), stv);
-      if (sig->attributes()) {
-        stv->setAttributes(sig->attributes());
-        for (auto a : *sig->attributes()) a->setParent(stv);
-      }
-      if (tps != nullptr) {
-        uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
-        rt->setParent(stv);
-        rt->setActual(tps);
-        rt->setName(fC->SymName(sig->getNameId()));
-        fC->populateCoreMembers(rtBeginId, rtEndId, rt);
-        stv->setTypespec(rt);
-      }
-      obj = stv;
-    } else if (tps && tps->getUhdmType() == uhdm::UhdmType::StructTypespec) {
-      uhdm::StructNet* stv = s.make<uhdm::StructNet>();
-      stv->setName(signame);
-      fC->populateCoreMembers(sig->getNetNameId(), sig->getNetNameId(), stv);
-      uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
-      rt->setParent(stv);
-      rt->setName(fC->SymName(sig->getNameId()));
-      fC->populateCoreMembers(rtBeginId, rtEndId, rt);
-      rt->setActual(tps);
-      stv->setTypespec(rt);
-      stv->setParent(uhdmScope);
-      obj = stv;
-      if (unpackedDimensions) {
-        uhdm::ArrayNet* array_net = s.make<uhdm::ArrayNet>();
-        array_net->setParent(uhdmScope);
-        array_net->setRanges(unpackedDimensions);
-        array_net->setName(signame);
-        array_net->setSize(unpackedSize);
-        for (auto r : *unpackedDimensions) r->setParent(array_net);
-        fC->populateCoreMembers(sig->getNetNameId(), sig->getNetNameId(),
-                                array_net);
-      } else {
-        if (obj->getUhdmType() == uhdm::UhdmType::EnumNet) {
-          ((uhdm::EnumNet*)obj)->setName(signame);
-        } else if (obj->getUhdmType() == uhdm::UhdmType::StructNet) {
-          ((uhdm::StructNet*)obj)->setName(signame);
-        }
-      }
-    } else {
-      uhdm::LogicNet* logicn = s.make<uhdm::LogicNet>();
-      logicn->setSigned(sig->isSigned());
-      logicn->setNetType(UhdmWriter::getVpiNetType(sig->getType()));
-      logicn->setName(fC->SymName(sig->getNetNameId()));
-      fC->populateCoreMembers(sig->getNetNameId(), sig->getNetNameId(), logicn);
-      if (sig->attributes()) {
-        logicn->setAttributes(sig->attributes());
-        for (auto a : *sig->attributes()) a->setParent(logicn);
-      }
-      if (tps != nullptr) {
-        // Move range to typespec for simple types
-        // logicn->setRanges(packedDimensions);
-        uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
-        rt->setParent(logicn);
-        rt->setName(tps->getName());
-        rt->setActual(tps);
-        logicn->setTypespec(rt);
-        fC->populateCoreMembers(rtBeginId, rtEndId, rt);
-      }
-      if (unpackedDimensions) {
-        uhdm::ArrayNet* array_net = s.make<uhdm::ArrayNet>();
-        array_net->setRanges(unpackedDimensions);
-        array_net->setName(signame);
-        array_net->setSize(unpackedSize);
-        for (auto r : *unpackedDimensions) r->setParent(array_net);
-        fC->populateCoreMembers(sig->getNetNameId(), sig->getNetNameId(),
-                                array_net);
-        logicn->setParent(uhdmScope);
-        obj = array_net;
-      } else {
-        logicn->setName(signame);
-        logicn->setSigned(sig->isSigned());
-        logicn->setParent(uhdmScope);
-        obj = logicn;
-      }
+      checkForLoops(false);
     }
-
-    if (exp && (!signalIsPort)) {
-      uhdm::ContAssign* assign = s.make<uhdm::ContAssign>();
-      assign->setNetDeclAssign(true);
-      fC->populateCoreMembers(id, id, assign);
-      assign->setLhs((uhdm::Expr*)obj);
-      assign->setRhs(exp);
-      obj->setParent(assign);
-      exp->setParent(assign);
-      if (sig->getDelay()) {
-        checkForLoops(true);
-        if (uhdm::Expr* delay_expr = (uhdm::Expr*)compileExpression(
-                comp, fC, sig->getDelay(), compileDesign, reduce, assign,
-                nullptr)) {
-          assign->setDelay(delay_expr);
-        }
-        checkForLoops(false);
-      }
-    }
-  } else {
-    // Vars
-    obj =
-        compileVariable(comp, compileDesign, sig, packedDimensions, packedSize,
-                        unpackedDimensions, unpackedSize, exp, tps);
-    if (exp != nullptr) exp->setParent(obj, true);
   }
 
   if (obj) {
+    if (uhdm::Variables* v = any_cast<uhdm::Variables>(obj)) {
+      // KS: Need input. If org_tps is not null then how to link typedef
+      // typespec with curent typespec,
+      // if ((v->getTypespec() != nullptr) && (org_tps != nullptr) &&
+      //    (org_tps->getUhdmType() == uhdm::UhdmType::TypedefTypespec))
+      //  v->getTypespec()->setActual(org_tps);
+    }
     fC->populateCoreMembers(sig->getNameId(), sig->getNameId(), obj);
+    // set assignExp once get variable object
+    if (exp != nullptr) {
+      if (uhdm::Variables* const v = any_cast<uhdm::Variables>(obj)) {
+        v->setExpr(exp);
+        exp->setParent(obj, true);
+      }
+      if (exp->getUhdmType() == uhdm::UhdmType::Constant) {
+        adjustSize(tps, comp, compileDesign, nullptr, (uhdm::Constant*)exp);
+      } else if (exp->getUhdmType() == uhdm::UhdmType::Operation) {
+        uhdm::Operation* op = (uhdm::Operation*)exp;
+        int32_t opType = op->getOpType();
+        const uhdm::Typespec* tp = tps;
+        if (opType == vpiAssignmentPatternOp) {
+          if (tp && tp->getUhdmType() == uhdm::UhdmType::PackedArrayTypespec) {
+            uhdm::PackedArrayTypespec* ptp = (uhdm::PackedArrayTypespec*)tp;
+            if (const uhdm::RefTypespec* ert = ptp->getElemTypespec()) {
+              tp = ert->getActual();
+            }
+            if (tp == nullptr) tp = tps;
+          }
+        }
+        for (auto oper : *op->getOperands()) {
+          if (oper->getUhdmType() == uhdm::UhdmType::Constant)
+            adjustSize(tp, comp, compileDesign, nullptr, (uhdm::Constant*)oper,
+                       false, true);
+        }
+      }
+    }
   } else {
     // Unsupported type
     ErrorContainer* errors = m_session->getErrorContainer();
@@ -3293,7 +2861,7 @@ CompileHelper::compileInstantiation(ModuleDefinition* mod,
         tpsRef->setParent(mod_array);
         fC->populateCoreMembers(typespecId, typespecId, tpsRef);
         mod_array->setElemTypespec(tpsRef);
-        mod_array->getElemTypespec()->setActual(tps);
+        tpsRef->setActual(tps);
 
         compileHighConn(parentModuleDefinition, fC, compileDesign, id,
                         mod_array->getPorts(true), mod_array);
@@ -4656,8 +4224,8 @@ bool CompileHelper::compileParameterDeclaration(
       p->setName(fC->SymName(typeNameId));
       fC->populateCoreMembers(typeNameId, typeNameId, p);
       if (uhdm::Typespec* tps =
-              compileTypespec(component, fC, ntype, compileDesign, Reduce::No,
-                              p, nullptr, false)) {
+              compileTypespec(component, fC, ntype, InvalidNodeId,
+                              compileDesign, Reduce::No, p, nullptr, false)) {
         if (p->getTypespec() == nullptr) {
           uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
           tpsRef->setName(tps->getName());
@@ -4695,8 +4263,8 @@ bool CompileHelper::compileParameterDeclaration(
       fC->populateCoreMembers(Identifier, Identifier, p);
       NodeId Data_type = fC->Child(Constant_param_expression);
       if (uhdm::Typespec* tps =
-              compileTypespec(component, fC, Data_type, compileDesign,
-                              Reduce::No, p, nullptr, false)) {
+              compileTypespec(component, fC, Data_type, InvalidNodeId,
+                              compileDesign, Reduce::No, p, nullptr, false)) {
         if (p->getTypespec() == nullptr) {
           uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
           tpsRef->setName(tps->getName());
@@ -4732,9 +4300,16 @@ bool CompileHelper::compileParameterDeclaration(
     NodeId Param_assignment = fC->Child(List_of_param_assignments);
     while (Param_assignment) {
       uhdm::Typespec* ts = nullptr;
+      NodeId name = fC->Child(Param_assignment);
+      NodeId value = fC->Sibling(name);
+      NodeId unpackedDimId =
+          (fC->Type(value) == VObjectType::paUnpacked_dimension)
+              ? value
+              : InvalidNodeId;
       if (Data_type_or_implicit) {
         ts = compileTypespec(component, fC, fC->Child(Data_type_or_implicit),
-                             compileDesign, reduce, pany, instance, false);
+                             unpackedDimId, compileDesign, reduce, pany,
+                             instance, false);
       }
       bool isSigned = false;
       NodeId Data_type = fC->Child(Data_type_or_implicit);
@@ -4757,51 +4332,19 @@ bool CompileHelper::compileParameterDeclaration(
           isSigned = false;
       }
 
-      bool isMultiDimension = isMultidimensional(ts, component);
-      bool isDecreasing = isDecreasingRange(ts, component);
-
-      NodeId name = fC->Child(Param_assignment);
-      NodeId value = fC->Sibling(name);
-
       uhdm::Parameter* param = s.make<uhdm::Parameter>();
       param->setParent(pany);
       fC->populateCoreMembers(Param_assignment, Param_assignment, param);
       Parameter* p =
           new Parameter(fC, name, fC->SymName(name),
                         fC->Child(Data_type_or_implicit), port_param);
-
-      // Unpacked dimensions
-      if (fC->Type(value) == VObjectType::paUnpacked_dimension) {
-        int32_t unpackedSize;
-        std::vector<uhdm::Range*>* unpackedDimensions =
-            compileRanges(component, fC, value, compileDesign, reduce, param,
-                          instance, unpackedSize, muteErrors);
-        param->setRanges(unpackedDimensions);
-        param->setSize(unpackedSize);
-        uhdm::ArrayTypespec* atps = s.make<uhdm::ArrayTypespec>();
-        uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
-        tsRef->setName(fC->SymName(Data_typeId));
-        tsRef->setParent(atps);
-        tsRef->setActual(ts);
-        fC->populateCoreMembers(Data_typeId, Data_typeId, tsRef);
-        atps->setElemTypespec(tsRef);
-        uhdm::RefTypespec* atpsRef = s.make<uhdm::RefTypespec>();
-        atpsRef->setParent(param);
-        atpsRef->setActual(atps);
-        fC->populateCoreMembers(Data_typeId, Data_typeId, atpsRef);
-        param->setTypespec(atpsRef);
-        p->setTypespec(atps);
-        fC->populateCoreMembers(value, value, atps);
-        atps->setRanges(unpackedDimensions);
-        while (fC->Type(value) == VObjectType::paUnpacked_dimension) {
-          value = fC->Sibling(value);
-        }
-        ts = atps;
-        isMultiDimension = true;
+      while (fC->Type(value) == VObjectType::paUnpacked_dimension) {
+        value = fC->Sibling(value);
       }
-
       const std::string_view the_name = fC->SymName(name);
       NodeId actual_value = value;
+      bool isMultiDimension = isMultidimensional(ts, component);
+      bool isDecreasing = isDecreasingRange(ts, component);
 
       if ((valuedcomponenti_cast<Package>(component) ||
            valuedcomponenti_cast<FileContent*>(component)) &&
@@ -4835,9 +4378,9 @@ bool CompileHelper::compileParameterDeclaration(
           if (c->getTypespec() == nullptr) {
             uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
             tsRef->setParent(c);
-            tsRef->setActual(ts);
             c->setTypespec(tsRef);
           }
+          c->getTypespec()->setActual(ts);
           int32_t size = c->getSize();
           if (ts) {
             bool invalidValue = false;
@@ -4855,9 +4398,9 @@ bool CompileHelper::compileParameterDeclaration(
           if (the_expr->getTypespec() == nullptr) {
             uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
             tsRef->setParent(the_expr);
-            tsRef->setActual(ts);
             the_expr->setTypespec(tsRef);
           }
+          the_expr->getTypespec()->setActual(ts);
           ExprEval expr_eval(the_expr, instance, fC->getFileId(),
                              fC->Line(name), nullptr);
           component->scheduleParamExprEval(the_name, expr_eval);
@@ -4869,9 +4412,9 @@ bool CompileHelper::compileParameterDeclaration(
           if (the_expr->getTypespec() == nullptr) {
             uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
             tsRef->setParent(the_expr);
-            tsRef->setActual(ts);
             the_expr->setTypespec(tsRef);
           }
+          the_expr->getTypespec()->setActual(ts);
           if (isDecreasing &&
               (expr->getUhdmType() == uhdm::UhdmType::Operation)) {
             uhdm::Operation* op = (uhdm::Operation*)expr;
@@ -5066,7 +4609,6 @@ bool CompileHelper::compileParameterDeclaration(
                   tsRef->setParent(param);
                   fC->populateCoreMembers(Data_type_or_implicit,
                                           Data_type_or_implicit, tsRef);
-
                   param->setTypespec(tsRef);
                 }
                 param->getTypespec()->setActual(ts);
@@ -5118,8 +4660,8 @@ bool CompileHelper::compileParameterDeclaration(
             rhs->setTypespec(tsRef);
             fC->populateCoreMembers(Data_type_or_implicit,
                                     Data_type_or_implicit, tsRef);
-            rhs->getTypespec()->setActual(ts);
           }
+          rhs->getTypespec()->setActual(ts);
           c->setSize(size);
         }
         param_assign->setRhs(rhs);

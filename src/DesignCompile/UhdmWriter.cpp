@@ -739,9 +739,9 @@ void UhdmWriter::writePorts(const std::vector<Signal*>& orig_ports,
             dest_port->setTypespec(dest_port_rt);
           }
           dest_port->getTypespec()->setActual(array_ts);
-
           if (uhdm::Typespec* ts = m_helper.compileTypespec(
-                  mod, fC, orig_port->getTypespecId(), m_compileDesign,
+                  mod, fC, orig_port->getTypespecId(),
+                  orig_port->getUnpackedDimension(), m_compileDesign,
                   Reduce::No, array_ts, nullptr, true)) {
             if (array_ts->getElemTypespec() == nullptr) {
               uhdm::RefTypespec* array_ts_rt = s.make<uhdm::RefTypespec>();
@@ -758,7 +758,8 @@ void UhdmWriter::writePorts(const std::vector<Signal*>& orig_ports,
           }
         }
       } else if (uhdm::Typespec* ts = m_helper.compileTypespec(
-                     mod, fC, orig_port->getTypespecId(), m_compileDesign,
+                     mod, fC, orig_port->getTypespecId(),
+                     orig_port->getUnpackedDimension(), m_compileDesign,
                      Reduce::No, dest_port, nullptr, true)) {
         if (dest_port->getTypespec() == nullptr) {
           uhdm::RefTypespec* dest_port_rt = s.make<uhdm::RefTypespec>();
@@ -794,7 +795,9 @@ void UhdmWriter::writeDataTypes(const DesignComponent::DataTypeMap& datatypeMap,
       if (tps && (tps->getName().find("::") == std::string::npos)) {
         const std::string newName =
             StrCat(parent->getName(), "::", tps->getName());
-        tps->setName(newName);
+        if (uhdm::TypedefTypespec* tt = any_cast<uhdm::TypedefTypespec>(tps)) {
+          tt->setName(newName);
+        }
       }
     }
 
@@ -872,7 +875,8 @@ void UhdmWriter::writeNets(DesignComponent* mod,
           // location information if there is any in the typespec.
           if (orig_net->getTypespecId()) {
             if (uhdm::Typespec* ts = m_helper.compileTypespec(
-                    mod, fC, orig_net->getTypespecId(), m_compileDesign,
+                    mod, fC, orig_net->getTypespecId(),
+                    orig_net->getUnpackedDimension(), m_compileDesign,
                     Reduce::No, nullptr, nullptr, true)) {
               uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
               rt->setName(ts->getName());
@@ -2205,85 +2209,6 @@ bool UhdmWriter::writeElabGenScope(Serializer& s, ModuleInstance* instance,
   }
 
   return true;
-}
-
-uhdm::Any* UhdmWriter::swapForSpecifiedVar(
-    uhdm::Serializer& s, DesignComponent* mod, uhdm::Any* tmp,
-    uhdm::VariablesCollection* lvariables, uhdm::Variables* lvariable,
-    std::string_view name, const uhdm::Any* var, const uhdm::Any* parent) {
-  FileSystem* const fileSystem = m_session->getFileSystem();
-  SymbolTable* const symbols = m_session->getSymbolTable();
-  if (tmp->getName() == name) {
-    if (var->getUhdmType() == uhdm::UhdmType::RefVar) {
-      uhdm::RefVar* ref = (uhdm::RefVar*)var;
-      const uhdm::Typespec* tp = nullptr;
-      if (uhdm::RefTypespec* rt = ref->getTypespec()) tp = rt->getActual();
-      if (tp && tp->getUhdmType() == uhdm::UhdmType::UnsupportedTypespec) {
-        const uhdm::Typespec* indexTypespec = nullptr;
-        if (lvariables) {
-          for (auto var : *lvariables) {
-            if (var->getUhdmType() == uhdm::UhdmType::HierPath) {
-              PathId parentFileId =
-                  fileSystem->toPathId(parent->getFile(), symbols);
-              bool invalidValue = false;
-              indexTypespec = (uhdm::Typespec*)m_helper.decodeHierPath(
-                  (uhdm::HierPath*)var, invalidValue, mod, m_compileDesign,
-                  Reduce::Yes, nullptr, parentFileId, parent->getStartLine(),
-                  (uhdm::Any*)parent, true /*mute for now*/, true);
-            }
-          }
-        } else if (const uhdm::Variables* var = lvariable) {
-          if (var->getUhdmType() == uhdm::UhdmType::HierPath) {
-            PathId parentFileId =
-                fileSystem->toPathId(parent->getFile(), symbols);
-            bool invalidValue = false;
-            indexTypespec = (uhdm::Typespec*)m_helper.decodeHierPath(
-                (uhdm::HierPath*)var, invalidValue, mod, m_compileDesign,
-                Reduce::Yes, nullptr, parentFileId, parent->getStartLine(),
-                (uhdm::Any*)parent, true /*mute for now*/, true);
-          } else if (var->getUhdmType() == uhdm::UhdmType::RefVar) {
-            bool invalidValue = false;
-            uhdm::HierPath* path = s.make<uhdm::HierPath>();
-            uhdm::AnyCollection* elems = path->getPathElems(true);
-            uhdm::RefObj* ref = s.make<uhdm::RefObj>();
-            elems->emplace_back(ref);
-            ref->setName(var->getName());
-            path->setFullName(var->getName());
-            PathId parentFileId =
-                fileSystem->toPathId(parent->getFile(), symbols);
-            indexTypespec = (uhdm::Typespec*)m_helper.decodeHierPath(
-                path, invalidValue, mod, m_compileDesign, Reduce::Yes, nullptr,
-                parentFileId, parent->getStartLine(), (uhdm::Any*)parent,
-                true /*mute for now*/, true);
-          }
-        }
-        uhdm::Variables* swapVar = nullptr;
-        if (indexTypespec) {
-          swapVar = m_helper.getSimpleVarFromTypespec(
-              nullptr, InvalidNodeId, InvalidNodeId,
-              (uhdm::Typespec*)indexTypespec, nullptr, m_compileDesign);
-        } else {
-          uhdm::IntVar* ivar = s.make<uhdm::IntVar>();
-          uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
-          rt->setActual(s.make<uhdm::IntTypespec>());
-          rt->setParent(ivar);
-          ivar->setTypespec(rt);
-          swapVar = ivar;
-        }
-        if (swapVar) {
-          swapVar->setName(ref->getName());
-          swapVar->setParent(const_cast<uhdm::Any*>(ref->getParent()));
-          swapVar->setFile(ref->getFile());
-          swapVar->setStartLine(ref->getStartLine());
-          swapVar->setStartColumn(ref->getStartColumn());
-          swapVar->setEndLine(ref->getEndLine());
-          swapVar->setEndColumn(ref->getEndColumn());
-          tmp = swapVar;
-        }
-      }
-    }
-  }
-  return tmp;
 }
 
 void UhdmWriter::bind(uhdm::Serializer& s,

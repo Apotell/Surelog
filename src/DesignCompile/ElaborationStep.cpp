@@ -186,8 +186,8 @@ bool ElaborationStep::bindTypedefs_() {
               fC->Type(Packed_dimension) == VObjectType::paPacked_dimension) {
             tpclone = m_helper.compileTypespec(
                 defTuple.second, typd->getFileContent(),
-                typd->getDefinitionNode(), m_compileDesign, Reduce::Yes,
-                nullptr, nullptr, false);
+                typd->getDefinitionNode(), InvalidNodeId, m_compileDesign,
+                Reduce::Yes, nullptr, nullptr, false);
           } else if (uhdm::Typespec* tps = def->getTypespec()) {
             uhdm::ElaboratorContext elaboratorContext(&s, false, true);
             tpclone = (uhdm::Typespec*)uhdm::clone_tree((uhdm::Any*)tps,
@@ -216,7 +216,10 @@ bool ElaborationStep::bindTypedefs_() {
 
           if (tpclone) {
             typd->setTypespec(tpclone);
-            tpclone->setName(typd->getName());
+            if (uhdm::TypedefTypespec* tt =
+                    any_cast<uhdm::TypedefTypespec>(tpclone)) {
+              tt->setName(typd->getName());
+            }
             specs.emplace(typd->getName(), tpclone);
             if (Package* pack = valuedcomponenti_cast<Package>(comp)) {
               std::string name = StrCat(pack->getName(), "::", typd->getName());
@@ -229,10 +232,12 @@ bool ElaborationStep::bindTypedefs_() {
         const FileContent* typeF = typd->getFileContent();
         NodeId typeId = typd->getDefinitionNode();
         uhdm::Typespec* ts = m_helper.compileTypespec(
-            defTuple.second, typeF, typeId, m_compileDesign, Reduce::Yes,
-            nullptr, nullptr, false);
+            defTuple.second, typeF, typeId, InvalidNodeId, m_compileDesign,
+            Reduce::Yes, nullptr, nullptr, false);
         if (ts) {
-          ts->setName(typd->getName());
+          if (uhdm::TypedefTypespec* tt = any_cast<uhdm::TypedefTypespec>(ts)) {
+            tt->setName(ts->getName());
+          }
           std::string name;
           if (typeF->Type(typeId) == VObjectType::STRING_CONST) {
             name = typeF->SymName(typeId);
@@ -273,10 +278,13 @@ bool ElaborationStep::bindTypedefs_() {
         typd->setTypespec(nullptr);
         uhdm::Typespec* ts = m_helper.compileTypespec(
             defTuple.second, typd->getFileContent(), typd->getDefinitionNode(),
-            m_compileDesign, Reduce::Yes, nullptr, nullptr, false);
+            InvalidNodeId, m_compileDesign, Reduce::Yes, nullptr, nullptr,
+            false);
         if (ts) {
           specs.emplace(typd->getName(), ts);
-          ts->setName(typd->getName());
+          if (uhdm::TypedefTypespec* tt = any_cast<uhdm::TypedefTypespec>(ts)) {
+            tt->setName(typd->getName());
+          }
           if (Package* pack = valuedcomponenti_cast<Package>(comp)) {
             std::string name = StrCat(pack->getName(), "::", typd->getName());
             specs.emplace(name, ts);
@@ -1453,7 +1461,8 @@ uhdm::Typespec* ElaborationStep::elabTypeParameter_(DesignComponent* component,
         if (ModuleInstance* pinst = instance->getParent()) parent = pinst;
         override_spec = m_helper.compileTypespec(
             component, param->getFileContent(), param->getNodeType(),
-            m_compileDesign, Reduce::Yes, nullptr, parent, false);
+            InvalidNodeId, m_compileDesign, Reduce::Yes, nullptr, parent,
+            false);
       }
 
       if (override_spec) {
@@ -1489,596 +1498,12 @@ uhdm::Any* ElaborationStep::makeVar_(
     std::vector<uhdm::Range*>* unpackedDimensions, int32_t unpackedSize,
     ModuleInstance* instance, uhdm::VariablesCollection* vars,
     uhdm::Expr* assignExp, uhdm::Typespec* tps) {
-  uhdm::Serializer& s = m_compileDesign->getSerializer();
-  const DataType* dtype = sig->getDataType();
-  VObjectType subnettype = sig->getType();
-
-  const std::string_view signame = sig->getName();
-  const FileContent* const fC = sig->getFileContent();
-
-  uhdm::Variables* obj = nullptr;
-  bool found = false;
-  while (dtype) {
-    if (const TypeDef* tdef = datatype_cast<const TypeDef*>(dtype)) {
-      if (tdef->getTypespec()) {
-        tps = tdef->getTypespec();
-        found = false;
-        break;
-      }
-    } else if (const Enum* en = datatype_cast<const Enum*>(dtype)) {
-      if (en->getTypespec()) {
-        uhdm::EnumVar* stv = s.make<uhdm::EnumVar>();
-        if (uhdm::Typespec* ts = en->getTypespec()) {
-          uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
-          tsRef->setParent(stv);
-          tsRef->setActual(ts);
-          stv->setTypespec(tsRef);
-        }
-        if (assignExp != nullptr) {
-          stv->setExpr(assignExp);
-          assignExp->setParent(stv);
-        }
-        obj = stv;
-        found = true;
-        break;
-      }
-    } else if (const Struct* st = datatype_cast<const Struct*>(dtype)) {
-      if (st->getTypespec()) {
-        uhdm::StructVar* stv = s.make<uhdm::StructVar>();
-        if (uhdm::Typespec* ts = st->getTypespec()) {
-          uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
-          tsRef->setParent(stv);
-          tsRef->setActual(ts);
-          stv->setTypespec(tsRef);
-        }
-        if (assignExp != nullptr) {
-          stv->setExpr(assignExp);
-          assignExp->setParent(stv);
-        }
-        obj = stv;
-        found = true;
-        break;
-      }
-    } else if (const Union* un = datatype_cast<const Union*>(dtype)) {
-      if (un->getTypespec()) {
-        uhdm::UnionVar* stv = s.make<uhdm::UnionVar>();
-        if (uhdm::Typespec* ts = un->getTypespec()) {
-          uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
-          tsRef->setParent(stv);
-          tsRef->setActual(ts);
-          stv->setTypespec(tsRef);
-        }
-        if (assignExp != nullptr) {
-          stv->setExpr(assignExp);
-          assignExp->setParent(stv);
-        }
-        obj = stv;
-        found = true;
-        break;
-      }
-    } else if (const DummyType* un = datatype_cast<const DummyType*>(dtype)) {
-      uhdm::Typespec* tps = un->getTypespec();
-      if (tps == nullptr) {
-        tps = m_helper.compileTypespec(component, un->getFileContent(),
-                                       un->getNodeId(), m_compileDesign,
-                                       Reduce::Yes, nullptr, instance, true);
-        ((DummyType*)un)->setTypespec(tps);
-      }
-      uhdm::Variables* var = nullptr;
-      uhdm::UhdmType ttps = tps->getUhdmType();
-      if (ttps == uhdm::UhdmType::EnumTypespec) {
-        var = s.make<uhdm::EnumVar>();
-      } else if (ttps == uhdm::UhdmType::StructTypespec) {
-        var = s.make<uhdm::StructVar>();
-      } else if (ttps == uhdm::UhdmType::UnionTypespec) {
-        var = s.make<uhdm::UnionVar>();
-      } else if (ttps == uhdm::UhdmType::PackedArrayTypespec) {
-        var = s.make<uhdm::PackedArrayVar>();
-      } else if (ttps == uhdm::UhdmType::ArrayTypespec) {
-        uhdm::ArrayVar* array_var = s.make<uhdm::ArrayVar>();
-        uhdm::RefTypespec* tmpRef = s.make<uhdm::RefTypespec>();
-        tmpRef->setParent(array_var);
-        tmpRef->setActual(s.make<uhdm::ArrayTypespec>());
-        array_var->setTypespec(tmpRef);
-        array_var->setArrayType(vpiStaticArray);
-        array_var->setRandType(vpiNotRand);
-        var = array_var;
-      } else if (ttps == uhdm::UhdmType::IntTypespec) {
-        var = s.make<uhdm::IntVar>();
-      } else if (ttps == uhdm::UhdmType::IntegerTypespec) {
-        var = s.make<uhdm::IntegerVar>();
-      } else if (ttps == uhdm::UhdmType::ByteTypespec) {
-        var = s.make<uhdm::ByteVar>();
-      } else if (ttps == uhdm::UhdmType::BitTypespec) {
-        var = s.make<uhdm::BitVar>();
-      } else if (ttps == uhdm::UhdmType::ShortIntTypespec) {
-        var = s.make<uhdm::ShortIntVar>();
-      } else if (ttps == uhdm::UhdmType::LongIntTypespec) {
-        var = s.make<uhdm::LongIntVar>();
-      } else if (ttps == uhdm::UhdmType::StringTypespec) {
-        var = s.make<uhdm::StringVar>();
-      } else if (ttps == uhdm::UhdmType::LogicTypespec) {
-        uhdm::LogicTypespec* ltps = (uhdm::LogicTypespec*)tps;
-        uhdm::LogicVar* avar = s.make<uhdm::LogicVar>();
-        avar->setRanges(ltps->getRanges());
-        var = avar;
-      } else {
-        var = s.make<uhdm::LogicVar>();
-      }
-      var->setName(signame);
-      if (var->getTypespec() == nullptr) {
-        uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
-        tpsRef->setParent(var);
-        var->setTypespec(tpsRef);
-      }
-      var->getTypespec()->setActual(tps);
-      if (assignExp != nullptr) {
-        var->setExpr(assignExp);
-        assignExp->setParent(var);
-      }
-      obj = var;
-      found = true;
-      break;
-    } else if (const SimpleType* sit =
-                   datatype_cast<const SimpleType*>(dtype)) {
-      uhdm::Typespec* spec = sit->getTypespec();
-      spec = m_helper.elabTypespec(component, spec, m_compileDesign, nullptr,
-                                   instance);
-      uhdm::Variables* var = m_helper.getSimpleVarFromTypespec(
-          fC, sit->getNodeId(), sit->getNodeId(), spec, packedDimensions,
-          m_compileDesign);
-      var->setConstantVariable(sig->isConst());
-      var->setSigned(sig->isSigned());
-      var->setName(signame);
-      if (var->getTypespec() == nullptr) {
-        uhdm::RefTypespec* specRef = s.make<uhdm::RefTypespec>();
-        specRef->setParent(var);
-        var->setTypespec(specRef);
-      }
-      var->getTypespec()->setActual(spec);
-      if (assignExp != nullptr) {
-        var->setExpr(assignExp);
-        assignExp->setParent(var);
-      }
-      obj = var;
-      found = true;
-      break;
-    } else if (/*const ClassDefinition* cl = */ datatype_cast<
-               const ClassDefinition*>(dtype)) {
-      uhdm::ClassVar* stv = s.make<uhdm::ClassVar>();
-      uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
-      tpsRef->setParent(stv);
-      tpsRef->setActual(tps);
-      stv->setTypespec(tpsRef);
-      if (assignExp != nullptr) {
-        stv->setExpr(assignExp);
-        assignExp->setParent(stv);
-      }
-      obj = stv;
-      found = true;
-      break;
-    } else if (Parameter* sit =
-                   const_cast<Parameter*>(datatype_cast<Parameter>(dtype))) {
-      if (uhdm::Typespec* spec = elabTypeParameter_(component, sit, instance)) {
-        if (uhdm::Variables* var = m_helper.getSimpleVarFromTypespec(
-                fC, sit->getNodeId(), sit->getNodeId(), spec, packedDimensions,
-                m_compileDesign)) {
-          var->setConstantVariable(sig->isConst());
-          var->setSigned(sig->isSigned());
-          var->setName(signame);
-          if (assignExp != nullptr) {
-            var->setExpr(assignExp);
-            assignExp->setParent(var);
-          }
-          obj = var;
-          found = true;
-          break;
-        }
-      }
-    }
-    dtype = dtype->getDefinition();
-  }
-
-  if ((found == false) && tps) {
-    uhdm::UhdmType tpstype = tps->getUhdmType();
-    if (tpstype == uhdm::UhdmType::StructTypespec) {
-      uhdm::StructVar* stv = s.make<uhdm::StructVar>();
-      obj = stv;
-    } else if (tpstype == uhdm::UhdmType::LogicTypespec) {
-      uhdm::LogicVar* stv = s.make<uhdm::LogicVar>();
-      // Do not set packedDimensions, it is a repeat of the typespec packed
-      // dimension.
-      // stv->setRanges(packedDimensions);
-      obj = stv;
-    } else if (tpstype == uhdm::UhdmType::EnumTypespec) {
-      uhdm::EnumVar* stv = s.make<uhdm::EnumVar>();
-      obj = stv;
-    } else if (tpstype == uhdm::UhdmType::BitTypespec) {
-      uhdm::BitVar* stv = s.make<uhdm::BitVar>();
-      stv->setRanges(unpackedDimensions);
-      obj = stv;
-    } else if (tpstype == uhdm::UhdmType::ByteTypespec) {
-      uhdm::ByteVar* stv = s.make<uhdm::ByteVar>();
-      obj = stv;
-    } else if (tpstype == uhdm::UhdmType::RealTypespec) {
-      uhdm::RealVar* stv = s.make<uhdm::RealVar>();
-      obj = stv;
-    } else if (tpstype == uhdm::UhdmType::IntTypespec) {
-      uhdm::IntVar* stv = s.make<uhdm::IntVar>();
-      obj = stv;
-    } else if (tpstype == uhdm::UhdmType::IntegerTypespec) {
-      uhdm::IntegerVar* stv = s.make<uhdm::IntegerVar>();
-      obj = stv;
-    } else if (tpstype == uhdm::UhdmType::LongIntTypespec) {
-      uhdm::LongIntVar* stv = s.make<uhdm::LongIntVar>();
-      obj = stv;
-    } else if (tpstype == uhdm::UhdmType::ShortIntTypespec) {
-      uhdm::ShortIntVar* stv = s.make<uhdm::ShortIntVar>();
-      obj = stv;
-    } else if (tpstype == uhdm::UhdmType::StringTypespec) {
-      uhdm::StringVar* stv = s.make<uhdm::StringVar>();
-      obj = stv;
-    } else if (tpstype == uhdm::UhdmType::BitTypespec) {
-      uhdm::BitVar* stv = s.make<uhdm::BitVar>();
-      obj = stv;
-    } else if (tpstype == uhdm::UhdmType::ByteTypespec) {
-      uhdm::ByteVar* stv = s.make<uhdm::ByteVar>();
-      obj = stv;
-    } else if (tpstype == uhdm::UhdmType::TimeTypespec) {
-      uhdm::TimeVar* stv = s.make<uhdm::TimeVar>();
-      obj = stv;
-    } else if (tpstype == uhdm::UhdmType::UnionTypespec) {
-      uhdm::UnionVar* stv = s.make<uhdm::UnionVar>();
-      obj = stv;
-    } else if (tpstype == uhdm::UhdmType::ClassTypespec) {
-      uhdm::ClassVar* stv = s.make<uhdm::ClassVar>();
-      obj = stv;
-    } else if (tpstype == uhdm::UhdmType::PackedArrayTypespec) {
-      uhdm::PackedArrayVar* stv = s.make<uhdm::PackedArrayVar>();
-      obj = stv;
-    } else if (tpstype == uhdm::UhdmType::ArrayTypespec) {
-      uhdm::ArrayVar* stv = s.make<uhdm::ArrayVar>();
-      obj = stv;
-    }
-
-    if (obj != nullptr) {
-      if (assignExp != nullptr) {
-        assignExp->setParent(obj);
-        obj->setExpr(assignExp);
-      }
-      if (tps != nullptr) {
-        if (obj->getTypespec() == nullptr) {
-          uhdm::RefTypespec* rt = s.make<uhdm::RefTypespec>();
-          rt->setParent(obj);
-          obj->setTypespec(rt);
-        }
-        obj->getTypespec()->setActual(tps);
-        tps->setParent(obj);
-      }
-      obj->setName(signame);
-    }
-  }
-
-  if (obj == nullptr) {
-    uhdm::Variables* var = nullptr;
-    if (subnettype == VObjectType::paIntegerAtomType_Shortint) {
-      uhdm::ShortIntVar* int_var = s.make<uhdm::ShortIntVar>();
-      var = int_var;
-      tps = s.make<uhdm::ShortIntTypespec>();
-      uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
-      tpsRef->setParent(int_var);
-      tpsRef->setActual(tps);
-      int_var->setTypespec(tpsRef);
-    } else if (subnettype == VObjectType::paIntegerAtomType_Int) {
-      uhdm::IntVar* int_var = s.make<uhdm::IntVar>();
-      var = int_var;
-      tps = s.make<uhdm::IntTypespec>();
-      uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
-      tpsRef->setParent(int_var);
-      tpsRef->setActual(tps);
-      int_var->setTypespec(tpsRef);
-    } else if (subnettype == VObjectType::paIntegerAtomType_Integer) {
-      uhdm::IntegerVar* int_var = s.make<uhdm::IntegerVar>();
-      var = int_var;
-      tps = s.make<uhdm::IntegerTypespec>();
-      uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
-      tpsRef->setParent(int_var);
-      tpsRef->setActual(tps);
-      int_var->setTypespec(tpsRef);
-    } else if (subnettype == VObjectType::paIntegerAtomType_LongInt) {
-      uhdm::LongIntVar* int_var = s.make<uhdm::LongIntVar>();
-      var = int_var;
-      tps = s.make<uhdm::LongIntTypespec>();
-      uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
-      tpsRef->setParent(int_var);
-      tpsRef->setActual(tps);
-      int_var->setTypespec(tpsRef);
-    } else if (subnettype == VObjectType::paIntegerAtomType_Time) {
-      uhdm::TimeVar* int_var = s.make<uhdm::TimeVar>();
-      var = int_var;
-    } else if (subnettype == VObjectType::paIntVec_TypeBit) {
-      uhdm::BitVar* int_var = s.make<uhdm::BitVar>();
-      uhdm::BitTypespec* btps = s.make<uhdm::BitTypespec>();
-      btps->setRanges(packedDimensions);
-      tps = btps;
-      uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
-      tpsRef->setParent(int_var);
-      tpsRef->setActual(tps);
-      int_var->setTypespec(tpsRef);
-      int_var->setRanges(packedDimensions);
-      var = int_var;
-    } else if (subnettype == VObjectType::paIntegerAtomType_Byte) {
-      uhdm::ByteVar* int_var = s.make<uhdm::ByteVar>();
-      uhdm::ByteTypespec* btps = s.make<uhdm::ByteTypespec>();
-      tps = btps;
-      uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
-      tpsRef->setParent(int_var);
-      tpsRef->setActual(tps);
-      int_var->setTypespec(tpsRef);
-      var = int_var;
-    } else if (subnettype == VObjectType::paNonIntType_ShortReal) {
-      uhdm::ShortRealVar* int_var = s.make<uhdm::ShortRealVar>();
-      var = int_var;
-    } else if (subnettype == VObjectType::paNonIntType_Real) {
-      uhdm::RealVar* int_var = s.make<uhdm::RealVar>();
-      var = int_var;
-    } else if (subnettype == VObjectType::paNonIntType_RealTime) {
-      uhdm::TimeVar* int_var = s.make<uhdm::TimeVar>();
-      var = int_var;
-    } else if (subnettype == VObjectType::paString_type) {
-      uhdm::StringVar* int_var = s.make<uhdm::StringVar>();
-      var = int_var;
-    } else if (subnettype == VObjectType::paChandle_type) {
-      uhdm::ChandleVar* chandle_var = s.make<uhdm::ChandleVar>();
-      var = chandle_var;
-    } else if (subnettype == VObjectType::paIntVec_TypeLogic) {
-      uhdm::LogicVar* logicv = s.make<uhdm::LogicVar>();
-      logicv->setRanges(packedDimensions);
-      uhdm::LogicTypespec* ltps = s.make<uhdm::LogicTypespec>();
-      ltps->setRanges(packedDimensions);
-      NodeId id;
-      if (sig->getPackedDimension()) id = fC->Parent(sig->getPackedDimension());
-      if (!id) id = sig->getNodeId();
-      if (id) {
-        fC->populateCoreMembers(id, id, ltps);
-      }
-      tps = ltps;
-      uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
-      tpsRef->setParent(logicv);
-      tpsRef->setActual(tps);
-      logicv->setTypespec(tpsRef);
-      var = logicv;
-    } else if (subnettype == VObjectType::paEvent_type) {
-      uhdm::NamedEvent* event = s.make<uhdm::NamedEvent>();
-      event->setName(signame);
-      if (instance) {
-        Netlist* netlist = instance->getNetlist();
-        uhdm::NamedEventCollection* events = netlist->named_events();
-        if (events == nullptr) {
-          netlist->named_events(s.makeCollection<uhdm::NamedEvent>());
-          events = netlist->named_events();
-        }
-        events->emplace_back(event);
-      }
-      return event;
-    } else {
-      // default type (fallback)
-      uhdm::LogicVar* logicv = s.make<uhdm::LogicVar>();
-      logicv->setRanges(packedDimensions);
-      var = logicv;
-    }
-    var->setSigned(sig->isSigned());
-    var->setConstantVariable(sig->isConst());
-    var->setName(signame);
-    var->setExpr(assignExp);
-    obj = var;
-  } else if (packedDimensions &&
-             (obj->getUhdmType() != uhdm::UhdmType::LogicVar) &&
-             (obj->getUhdmType() != uhdm::UhdmType::BitVar) &&
-             (obj->getUhdmType() != uhdm::UhdmType::PackedArrayVar)) {
-    // packed struct array ...
-    uhdm::PackedArrayVar* parray = s.make<uhdm::PackedArrayVar>();
-    parray->setRanges(packedDimensions);
-    parray->getElements(true)->emplace_back(obj);
-    obj->setParent(parray);
-    parray->setName(signame);
-    obj = parray;
-  }
-
-  if (unpackedDimensions) {
-    uhdm::ArrayVar* array_var = s.make<uhdm::ArrayVar>();
-    bool dynamic = false;
-    bool associative = false;
-    bool queue = false;
-    int32_t index = 0;
-    for (auto itr = unpackedDimensions->begin();
-         itr != unpackedDimensions->end(); itr++) {
-      uhdm::Range* r = *itr;
-      const uhdm::Expr* rhs = r->getRightExpr();
-      if (rhs->getUhdmType() == uhdm::UhdmType::Constant) {
-        const std::string_view value = rhs->getValue();
-        if (value == "STRING:$") {
-          queue = true;
-          unpackedDimensions->erase(itr);
-          break;
-        } else if (value == "STRING:associative") {
-          associative = true;
-          const uhdm::Typespec* tp = nullptr;
-          if (const uhdm::RefTypespec* rt = rhs->getTypespec()) {
-            tp = rt->getActual();
-          }
-          uhdm::ArrayTypespec* taps = s.make<uhdm::ArrayTypespec>();
-          uhdm::RefTypespec* tpRef = s.make<uhdm::RefTypespec>();
-          tpRef->setParent(taps);
-          tpRef->setActual(const_cast<uhdm::Typespec*>(tp));
-          taps->setIndexTypespec(tpRef);
-
-          uhdm::RefTypespec* taps_ref = s.make<uhdm::RefTypespec>();
-          taps_ref->setParent(array_var);
-          taps_ref->setActual(taps);
-          array_var->setTypespec(taps_ref);
-          unpackedDimensions->erase(itr);
-          break;
-        } else if (value == "STRING:unsized") {
-          dynamic = true;
-          unpackedDimensions->erase(itr);
-          break;
-        }
-      }
-      index++;
-    }
-
-    if (associative || queue || dynamic) {
-      if (!unpackedDimensions->empty()) {
-        if (index == 0) {
-          array_var->setRanges(unpackedDimensions);
-        } else {
-          uhdm::ArrayTypespec* tps = s.make<uhdm::ArrayTypespec>();
-          uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
-          tpsRef->setParent(array_var);
-          tpsRef->setActual(tps);
-          array_var->setTypespec(tpsRef);
-
-          if (associative)
-            tps->setArrayType(vpiAssocArray);
-          else if (queue)
-            tps->setArrayType(vpiQueueArray);
-          else if (dynamic)
-            tps->setArrayType(vpiDynamicArray);
-          else
-            tps->setArrayType(vpiStaticArray);
-          uhdm::ArrayTypespec* subtps = s.make<uhdm::ArrayTypespec>();
-          tpsRef = s.make<uhdm::RefTypespec>();
-          tpsRef->setParent(tps);
-          tpsRef->setActual(subtps);
-          tps->setElemTypespec(tpsRef);
-
-          subtps->setRanges(unpackedDimensions);
-          switch (obj->getUhdmType()) {
-            case uhdm::UhdmType::IntVar: {
-              uhdm::IntTypespec* ts = s.make<uhdm::IntTypespec>();
-              tpsRef = s.make<uhdm::RefTypespec>();
-              tpsRef->setParent(subtps);
-              tpsRef->setActual(ts);
-              subtps->setElemTypespec(tpsRef);
-              break;
-            }
-            case uhdm::UhdmType::IntegerVar: {
-              uhdm::IntegerTypespec* ts = s.make<uhdm::IntegerTypespec>();
-              tpsRef = s.make<uhdm::RefTypespec>();
-              tpsRef->setParent(subtps);
-              tpsRef->setActual(ts);
-              subtps->setElemTypespec(tpsRef);
-              break;
-            }
-            case uhdm::UhdmType::LogicVar: {
-              uhdm::LogicTypespec* ts = s.make<uhdm::LogicTypespec>();
-              tpsRef = s.make<uhdm::RefTypespec>();
-              tpsRef->setParent(subtps);
-              tpsRef->setActual(ts);
-              subtps->setElemTypespec(tpsRef);
-              break;
-            }
-            case uhdm::UhdmType::LongIntVar: {
-              uhdm::LongIntTypespec* ts = s.make<uhdm::LongIntTypespec>();
-              tpsRef = s.make<uhdm::RefTypespec>();
-              tpsRef->setParent(subtps);
-              tpsRef->setActual(ts);
-              subtps->setElemTypespec(tpsRef);
-              break;
-            }
-            case uhdm::UhdmType::ShortIntVar: {
-              uhdm::ShortIntTypespec* ts = s.make<uhdm::ShortIntTypespec>();
-              tpsRef = s.make<uhdm::RefTypespec>();
-              tpsRef->setParent(subtps);
-              tpsRef->setActual(ts);
-              subtps->setElemTypespec(tpsRef);
-              break;
-            }
-            case uhdm::UhdmType::ByteVar: {
-              uhdm::ByteTypespec* ts = s.make<uhdm::ByteTypespec>();
-              tpsRef = s.make<uhdm::RefTypespec>();
-              tpsRef->setParent(subtps);
-              tpsRef->setActual(ts);
-              subtps->setElemTypespec(tpsRef);
-              break;
-            }
-            case uhdm::UhdmType::BitVar: {
-              uhdm::BitTypespec* ts = s.make<uhdm::BitTypespec>();
-              tpsRef = s.make<uhdm::RefTypespec>();
-              tpsRef->setParent(subtps);
-              tpsRef->setActual(ts);
-              subtps->setElemTypespec(tpsRef);
-              break;
-            }
-            case uhdm::UhdmType::StringVar: {
-              uhdm::StringTypespec* ts = s.make<uhdm::StringTypespec>();
-              tpsRef = s.make<uhdm::RefTypespec>();
-              tpsRef->setParent(subtps);
-              tpsRef->setActual(ts);
-              subtps->setElemTypespec(tpsRef);
-              break;
-            }
-            default: {
-              uhdm::UnsupportedTypespec* ts =
-                  s.make<uhdm::UnsupportedTypespec>();
-              tpsRef = s.make<uhdm::RefTypespec>();
-              tpsRef->setParent(subtps);
-              tpsRef->setActual(ts);
-              subtps->setElemTypespec(tpsRef);
-              break;
-            }
-          }
-        }
-      }
-    }
-
-    if (associative) {
-      array_var->setArrayType(vpiAssocArray);
-    } else if (queue) {
-      array_var->setArrayType(vpiQueueArray);
-    } else if (dynamic) {
-      array_var->setArrayType(vpiDynamicArray);
-    } else {
-      array_var->setRanges(unpackedDimensions);
-      array_var->setArrayType(vpiStaticArray);
-    }
-    array_var->setSize(unpackedSize);
-    array_var->setName(signame);
-    array_var->setRandType(vpiNotRand);
-    array_var->setVisibility(vpiPublicVis);
-    fC->populateCoreMembers(sig->getNodeId(), sig->getNodeId(), array_var);
-    vars->emplace_back(array_var);
-    obj->setParent(array_var);
-    if ((array_var->getTypespec() == nullptr) || associative) {
-      array_var->getVariables(true)->emplace_back(obj);
-      obj->setName("");
-    }
-    if (array_var->getTypespec() == nullptr) {
-      uhdm::RefTypespec* tsRef = s.make<uhdm::RefTypespec>();
-      tsRef->setParent(array_var);
-      tsRef->setActual(s.make<uhdm::ArrayTypespec>());
-      array_var->setTypespec(tsRef);
-    }
-    array_var->setExpr(assignExp);
-    fC->populateCoreMembers(sig->getNodeId(), sig->getNodeId(), obj);
-    obj = array_var;
-  } else {
-    if (obj->getUhdmType() == uhdm::UhdmType::EnumVar) {
-      ((uhdm::EnumVar*)obj)->setName(signame);
-    } else if (obj->getUhdmType() == uhdm::UhdmType::StructVar) {
-      ((uhdm::StructVar*)obj)->setName(signame);
-    } else if (obj->getUhdmType() == uhdm::UhdmType::UnionVar) {
-      ((uhdm::UnionVar*)obj)->setName(signame);
-    } else if (obj->getUhdmType() == uhdm::UhdmType::ClassVar) {
-      ((uhdm::ClassVar*)obj)->setName(signame);
-    } else if (obj->getUhdmType() == uhdm::UhdmType::LogicVar) {
-      ((uhdm::LogicVar*)obj)->setName(signame);
-    }
-    vars->emplace_back(obj);
-  }
-
+  uhdm::Variables* obj = (uhdm::Variables*)m_helper.compileSignals(
+      component, m_compileDesign, sig);
   if (assignExp) {
+    assignExp->setParent(obj);
+    obj->setExpr(assignExp);
+
     if (assignExp->getUhdmType() == uhdm::UhdmType::Constant) {
       m_helper.adjustSize(tps, component, m_compileDesign, instance,
                           (uhdm::Constant*)assignExp);
@@ -2103,36 +1528,6 @@ uhdm::Any* ElaborationStep::makeVar_(
     }
   }
 
-  if (obj) {
-    if (packedDimensions != nullptr) {
-      for (auto r : *packedDimensions) r->setParent(obj);
-    }
-    if (unpackedDimensions != nullptr) {
-      for (auto r : *unpackedDimensions) r->setParent(obj);
-    }
-
-    uhdm::ExprEval eval;
-    obj->setExpr(eval.flattenPatternAssignments(s, tps, assignExp));
-    obj->setSigned(sig->isSigned());
-    obj->setConstantVariable(sig->isConst());
-    obj->setIsRandomized(sig->isRand() || sig->isRandc());
-    if (sig->isRand())
-      obj->setRandType(vpiRand);
-    else if (sig->isRandc())
-      obj->setRandType(vpiRandC);
-    if (sig->isStatic()) {
-      obj->setAutomatic(false);
-    } else {
-      obj->setAutomatic(true);
-    }
-    if (sig->isProtected()) {
-      obj->setVisibility(vpiProtectedVis);
-    } else if (sig->isLocal()) {
-      obj->setVisibility(vpiLocalVis);
-    } else {
-      obj->setVisibility(vpiPublicVis);
-    }
-  }
   return obj;
 }
 }  // namespace SURELOG

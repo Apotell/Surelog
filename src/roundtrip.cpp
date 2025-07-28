@@ -2056,7 +2056,7 @@ class RoundTripTracer final : public uhdm::UhdmListener {
     int32_t end_column = object->getStartColumn() + text.length();
 
     // NOTE(HS): For implicit return, the location data is never set
-    if (const uhdm::Variables *const returnValue = object->getReturn()) {
+    if (const uhdm::RefTypespec *const returnValue = object->getReturn()) {
       if (returnValue->getEndColumn() > 0) {
         end_column = returnValue->getEndColumn();
       }

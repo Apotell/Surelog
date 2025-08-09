@@ -396,6 +396,24 @@ NodeId SV3_1aPreprocessorTreeListener::addVObject(
       hasCR = true;
     }
 
+    const size_t parentRuleIndex =
+        ((antlr4::ParserRuleContext *)node->parent)->getRuleIndex();
+    if (((parentRuleIndex == SV3_1aPpParser::RuleDefine_directive) ||
+         (parentRuleIndex ==
+          SV3_1aPpParser::RuleMultiline_args_macro_definition) ||
+         (parentRuleIndex ==
+          SV3_1aPpParser::RuleSimple_no_args_macro_definition) ||
+         (parentRuleIndex ==
+          SV3_1aPpParser::RuleMultiline_no_args_macro_definition) ||
+         (parentRuleIndex ==
+          SV3_1aPpParser::RuleSimple_args_macro_definition)) &&
+        (node->parent->children.back() == node)) {
+      // If the comment is at the end of a macro definition don't add the newline
+      // When merged with the parser tree, the newline after the PreprocEnd ends up
+      // being duplicated.
+      hasCR = false;
+    }
+
     if (!trimmed.empty()) {
       nodeId = addVObject(node, trimmed, objectType);
       // Adjust the end location of the object
@@ -418,8 +436,6 @@ NodeId SV3_1aPreprocessorTreeListener::addVObject(
 
 void SV3_1aPreprocessorTreeListener::adjustMacroDefinitionLocation(
     antlr4::tree::ParseTree *tree, NodeId nodeId) {
-  if (!m_inMacroDefinitionParsing) return;
-
   LineColumn elc = ParseUtils::getEndLineColumn(m_pp->getTokenStream(), tree);
   std::string text = tree->getText();
 
@@ -1642,9 +1658,18 @@ void SV3_1aPreprocessorTreeListener::exitEveryRule(
   }
   // clang-format on
 
-  if (nodeId && m_inMacroDefinitionParsing) {
+  if (nodeId &&
+      ((ruleIndex == SV3_1aPpParser::RuleMacro_definition) ||
+       (ruleIndex == SV3_1aPpParser::RuleDefine_directive) ||
+       (ruleIndex == SV3_1aPpParser::RuleMultiline_args_macro_definition) ||
+       (ruleIndex == SV3_1aPpParser::RuleSimple_no_args_macro_definition) ||
+       (ruleIndex == SV3_1aPpParser::RuleMultiline_no_args_macro_definition) ||
+       (ruleIndex == SV3_1aPpParser::RuleSimple_args_macro_definition))) {
     // When parsing a macro, ensure that the tree
     // doesn't include the terminal newline.
+    // NOTE: We can't just check the m_inMacroDefinitionParsing flag since
+    // exitEveryRule gets called after exitMacro_definition which sets the flag
+    // back to false.
     adjustMacroDefinitionLocation(ctx, nodeId);
   }
 }

@@ -211,7 +211,7 @@ fragment Non_zero_unsigned_number
 
 fragment Decimal_number
   : Unsigned_number
-  | (Non_zero_unsigned_number WS*)? Decimal_base WS* Unsigned_number*
+  | (Non_zero_unsigned_number WS*)? Decimal_base WS* Unsigned_number
   | (Non_zero_unsigned_number WS*)? Decimal_base WS* X_digit '_'*
   | (Non_zero_unsigned_number WS*)? Decimal_base WS* Z_digit '_'*
   ;
@@ -244,25 +244,25 @@ INTEGRAL_NUMBER
 /* unsigned_number <<1>> ::= decimal_digit { _ | decimal_digit } */
 
 fragment Unsigned_number
-  : Decimal_digit ('_' | Decimal_digit | ' ')*
+  : Decimal_digit ('_' | Decimal_digit)*
   ;
 
 /* binary_value <<1>> ::= binary_digit { _ | binary_digit } */
 
 fragment Binary_value
-  : '_'* Binary_digit* (' ' | '_' | Binary_digit_no_qm)*
+  : '_'* Binary_digit* ('_' | Binary_digit_no_qm)*
   ;
 
 /* octal_value <<1>> ::= octal_digit { _ | octal_digit } */
 
 fragment Octal_value
-  : '_'* Octal_digit* (' ' | '_' | Octal_digit_no_qm)*
+  : '_'* Octal_digit* ('_' | Octal_digit_no_qm)*
   ;
 
 /* hex_value <<1>> ::= hex_digit { _ | hex_digit } */
 
 fragment Hex_value
-  : '_'* Hex_digit* (' ' | '_' | Hex_digit_no_qm)*
+  : '_'* Hex_digit* ('_' | Hex_digit_no_qm)*
   ;
 
 /* decimal_base <<1>> ::= [s|S]d | [s|S]D */

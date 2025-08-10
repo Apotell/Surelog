@@ -1,7 +1,4 @@
 [INF:CM0023] Creating log file "${SURELOG_DIR}/build/regression/PreprocLine/slpp_all/surelog.log".
-[SNT:PP0106] ${SURELOG_DIR}/tests/PreprocLine/dut.sv:9:6: Syntax error: mismatched input '`new_line_num' expecting INTEGRAL_NUMBER,
-`line `new_line_num `foo(line) 1
-      ^-- ${SURELOG_DIR}/tests/PreprocLine/dut.sv:9:6:.
 [ERR:PP0101] ${SURELOG_DIR}/tests/PreprocLine/dut.sv:7: Cannot open include file "${SURELOG_DIR}/tests/PreprocLine/line.vh".
 AST_DEBUG_BEGIN
 Count: 70
@@ -73,15 +70,107 @@ n<> u<69> t<Top_level_rule> c<1> l<1:1> el<13:1>
                                       n<> u<48> t<Expression> p<49> c<47> l<10:22> el<10:23>
                                         n<> u<47> t<Primary> p<48> c<46> l<10:22> el<10:23>
                                           n<> u<46> t<Primary_literal> p<47> c<45> l<10:22> el<10:23>
-                                            n<1> u<45> t<INT_CONST> p<46> l<10:22> el<10:23>
+                                            n<2> u<45> t<INT_CONST> p<46> l<10:22> el<10:23>
                         n<> u<56> t<END> p<57> l<11:5> el<11:8>
         n<> u<65> t<ENDMODULE> p<66> l<12:1> el<12:10>
 AST_DEBUG_END
-[SNT:PA0207] ${SURELOG_DIR}/tests/PreprocLine/dut.sv:7: Syntax error: extraneous input '"line.vh"' expecting {POUND_POUND_DELAY, POUND_DELAY, ATSTAR, AT_PARENS_STAR, ';', 'type', 'local', 'super', '{', '->', 'if', 'foreach', 'byte', 'shortint', 'int', 'longint', 'integer', 'time', 'void', '$', '++', '--', DOLLAR_UNIT, '(*', 'assert', 'assume', 'cover', 'expect', 'disable', '##', '#', 'begin', 'end', 'case', 'for', 'assign', 'deassign', 'force', 'release', 'fork', 'repeat', '@', 'return', 'break', 'continue', 'wait', 'wait_order', 'unique', 'unique0', 'priority', 'casez', 'casex', 'randcase', 'forever', 'while', 'do', 'restrict', ''', 'randsequence', 'this', DOLLAR_ROOT, 'randomize', 'sample', '->>', ESCAPED_IDENTIFIER, SIMPLE_IDENTIFIER, SURELOG_MACRO_NOT_DEFINED},
-"line.vh"
-^-- ${SURELOG_DIR}/tests/PreprocLine/dut.sv:7:0:.
+[WRN:PA0205] ${SURELOG_DIR}/tests/PreprocLine/dut.sv:1:1: No timescale set for "top".
+[INF:CP0300] Compilation...
+[INF:CP0303] ${SURELOG_DIR}/tests/PreprocLine/dut.sv:1:1: Compile module "work@top".
+[INF:UH0706] Creating UHDM Model...
+=== UHDM Object Stats Begin (Non-Elaborated Model) ===
+Begin                                                  1
+Constant                                               6
+Design                                                 1
+Initial                                                1
+Module                                                 1
+SysFuncCall                                            3
+=== UHDM Object Stats End ===
+[INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PreprocLine/slpp_all/surelog.uhdm ...
+[INF:UH0711] Decompiling UHDM...
+====== UHDM =======
+Design: (unnamed)
+|vpiName:unnamed
+|vpiAllModules:
+\_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PreprocLine/dut.sv, line:1:1, endln:12:10
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiName:work@top
+  |vpiDefName:work@top
+  |vpiProcess:
+  \_Initial: , line:2:5, endln:11:8
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/PreprocLine/dut.sv, line:1:1, endln:12:10
+    |vpiStmt:
+    \_Begin: (work@top), line:2:13, endln:11:8
+      |vpiParent:
+      \_Initial: , line:2:5, endln:11:8
+      |vpiFullName:work@top
+      |vpiStmt:
+      \_SysFuncCall: ($display), line:3:9, endln:3:82
+        |vpiParent:
+        \_Begin: (work@top), line:2:13, endln:11:8
+        |vpiArgument:
+        \_Constant: , line:3:18, endln:3:78
+          |vpiParent:
+          \_SysFuncCall: ($display), line:3:9, endln:3:82
+          |vpiDecompile:"${SURELOG_DIR}/tests/PreprocLine/dut.sv"
+          |vpiSize:464
+          |STRING:${SURELOG_DIR}/tests/PreprocLine/dut.sv
+          |vpiConstType:6
+        |vpiArgument:
+        \_Constant: , line:3:80, endln:3:81
+          |vpiParent:
+          \_SysFuncCall: ($display), line:3:9, endln:3:82
+          |vpiDecompile:3
+          |vpiSize:64
+          |UINT:3
+          |vpiConstType:9
+        |vpiName:$display
+      |vpiStmt:
+      \_SysFuncCall: ($display), line:5:9, endln:5:84
+        |vpiParent:
+        \_Begin: (work@top), line:2:13, endln:11:8
+        |vpiArgument:
+        \_Constant: , line:5:18, endln:5:78
+          |vpiParent:
+          \_SysFuncCall: ($display), line:5:9, endln:5:84
+          |vpiDecompile:"${SURELOG_DIR}/tests/PreprocLine/fake.v"
+          |vpiSize:464
+          |STRING:${SURELOG_DIR}/tests/PreprocLine/fake.v
+          |vpiConstType:6
+        |vpiArgument:
+        \_Constant: , line:5:80, endln:5:83
+          |vpiParent:
+          \_SysFuncCall: ($display), line:5:9, endln:5:84
+          |vpiDecompile:102
+          |vpiSize:64
+          |UINT:102
+          |vpiConstType:9
+        |vpiName:$display
+      |vpiStmt:
+      \_SysFuncCall: ($display), line:10:9, endln:10:24
+        |vpiParent:
+        \_Begin: (work@top), line:2:13, endln:11:8
+        |vpiArgument:
+        \_Constant: , line:10:18, endln:10:20
+          |vpiParent:
+          \_SysFuncCall: ($display), line:10:9, endln:10:24
+          |vpiDecompile:""
+          |STRING:
+          |vpiConstType:6
+        |vpiArgument:
+        \_Constant: , line:10:22, endln:10:23
+          |vpiParent:
+          \_SysFuncCall: ($display), line:10:9, endln:10:24
+          |vpiDecompile:2
+          |vpiSize:64
+          |UINT:2
+          |vpiConstType:9
+        |vpiName:$display
+===================
 [  FATAL] : 0
-[ SYNTAX] : 2
+[ SYNTAX] : 0
 [  ERROR] : 1
-[WARNING] : 0
+[WARNING] : 1
 [   NOTE] : 0

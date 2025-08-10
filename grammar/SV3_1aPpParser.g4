@@ -143,7 +143,18 @@ include_directive
   )
   ;
 
-line_directive: TICK_LINE SPACES integral_number QUOTED_STRING SPACES integral_number;
+line_directive
+  : TICK_LINE SPACES (
+      integral_number
+      | macro_instance
+    ) SPACES (
+      QUOTED_STRING
+      | macro_instance
+    ) SPACES (
+      integral_number
+      | macro_instance
+    )
+  ;
 
 default_nettype_directive
   : TICK_DEFAULT_NETTYPE SPACES SIMPLE_IDENTIFIER

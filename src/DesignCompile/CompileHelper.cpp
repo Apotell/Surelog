@@ -620,7 +620,6 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
   NodeId enum_base_type = fC->Child(data_type);
   bool enumType = false;
   bool structType = false;
-  NodeId Packed_dimension = fC->Sibling(enum_base_type);
   NodeId enum_name_declaration;
   if (fC->Type(enum_base_type) == VObjectType::paEnum_base_type) {
     enum_name_declaration = fC->Sibling(enum_base_type);
@@ -712,7 +711,6 @@ const DataType* CompileHelper::compileTypeDef(DesignComponent* scope,
     Enum* the_enum = new Enum(fC, type_name, enum_base_type);
     newTypeDef->setDataType(the_enum);
     newTypeDef->setDefinition(the_enum);
-    NodeId tmpNodeId = fC->Child(enum_base_type);
 
     uhdm::EnumTypespec* enum_t = s.make<uhdm::EnumTypespec>();
     enum_t->setParent(pstmt);
@@ -1875,7 +1873,6 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
 
   const FileContent* fC = sig->getFileContent();
   NodeId id = sig->getNodeId();
-  NodeId packedDimension = sig->getPackedDimension();
   NodeId unpackedDimension = sig->getUnpackedDimension();
   // Nets pass
   const DataType* dtype = sig->getDataType();
@@ -1970,12 +1967,6 @@ bool CompileHelper::compileSignal(DesignComponent* comp,
 
   const std::string_view signame = sig->getName();
   const std::string parentSymbol = StrCat(prefix, signame);
-  const NodeId rtBeginId = sig->getInterfaceTypeNameId()
-                               ? sig->getInterfaceTypeNameId()
-                               : sig->getTypespecId();
-  const NodeId rtEndId =
-      sig->getPackedDimension() ? sig->getPackedDimension() : rtBeginId;
-
   uhdm::Any* obj = nullptr;
 
   // Assignment to a default value

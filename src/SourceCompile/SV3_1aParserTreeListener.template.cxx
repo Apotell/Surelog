@@ -416,6 +416,12 @@ void SV3_1aParserTreeListener::exitEveryRule(antlr4::ParserRuleContext *ctx) {
                     return NodeIdFromContext(child);
                   });
 
+  if (ctx->getRuleIndex() == SV3_1aParser::RuleSource_text) {
+    processPendingTokens(ctx->children.empty() ? ctx : ctx->children.back(),
+                         m_tokens->size());
+    m_enteredSourceText = false;
+  }
+
   // clang-format off
   if (shouldAddVObject) {
     switch (ctx->getRuleIndex()) {
@@ -431,10 +437,7 @@ void SV3_1aParserTreeListener::exitEveryRule(antlr4::ParserRuleContext *ctx) {
     }
   }
 
-  if (ctx->getRuleIndex() == SV3_1aParser::RuleSource_text) {
-    processPendingTokens(ctx, m_tokens->size());
-    m_enteredSourceText = false;
-  } else if (ctx->getRuleIndex() == SV3_1aParser::RuleTop_level_rule) {
+  if (ctx->getRuleIndex() == SV3_1aParser::RuleTop_level_rule) {
     applyLocationOffsets();
   }
 }

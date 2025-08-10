@@ -396,6 +396,24 @@ NodeId SV3_1aPreprocessorTreeListener::addVObject(
       hasCR = true;
     }
 
+    const size_t parentRuleIndex =
+        ((antlr4::ParserRuleContext *)node->parent)->getRuleIndex();
+    if (((parentRuleIndex == SV3_1aPpParser::RuleDefine_directive) ||
+         (parentRuleIndex ==
+          SV3_1aPpParser::RuleMultiline_args_macro_definition) ||
+         (parentRuleIndex ==
+          SV3_1aPpParser::RuleSimple_no_args_macro_definition) ||
+         (parentRuleIndex ==
+          SV3_1aPpParser::RuleMultiline_no_args_macro_definition) ||
+         (parentRuleIndex ==
+          SV3_1aPpParser::RuleSimple_args_macro_definition)) &&
+        (node->parent->children.back() == node)) {
+      // If the comment is at the end of a macro definition don't add the newline
+      // When merged with the parser tree, the newline after the PreprocEnd ends up
+      // being duplicated.
+      hasCR = false;
+    }
+
     if (!trimmed.empty()) {
       nodeId = addVObject(node, trimmed, objectType);
       // Adjust the end location of the object
@@ -418,8 +436,6 @@ NodeId SV3_1aPreprocessorTreeListener::addVObject(
 
 void SV3_1aPreprocessorTreeListener::adjustMacroDefinitionLocation(
     antlr4::tree::ParseTree *tree, NodeId nodeId) {
-  if (!m_inMacroDefinitionParsing) return;
-
   LineColumn elc = ParseUtils::getEndLineColumn(m_pp->getTokenStream(), tree);
   std::string text = tree->getText();
 
@@ -609,9 +625,9 @@ void SV3_1aPreprocessorTreeListener::exitIfdef_directive(
     SV3_1aPpParser::Ifdef_directiveContext *ctx) {
   if (m_inProtectedRegion || m_inMacroDefinitionParsing) return;
 
-  if (!m_passThrough) {
-    addVObject(ctx, VObjectType::ppIfdef_directive);
+  addVObject(ctx, VObjectType::ppIfdef_directive);
 
+  if (!m_passThrough) {
     std::string text = ctx->getText();
     std::replace_if(
         text.begin(), text.end(), [](char ch) { return ch != '\n'; }, ' ');
@@ -678,9 +694,9 @@ void SV3_1aPreprocessorTreeListener::exitIfndef_directive(
     SV3_1aPpParser::Ifndef_directiveContext *ctx) {
   if (m_inProtectedRegion || m_inMacroDefinitionParsing) return;
 
-  if (!m_passThrough) {
-    addVObject(ctx, VObjectType::ppIfndef_directive);
+  addVObject(ctx, VObjectType::ppIfndef_directive);
 
+  if (!m_passThrough) {
     std::string text = ctx->getText();
     std::replace_if(
         text.begin(), text.end(), [](char ch) { return ch != '\n'; }, ' ');
@@ -707,9 +723,9 @@ void SV3_1aPreprocessorTreeListener::exitUndef_directive(
     SV3_1aPpParser::Undef_directiveContext *ctx) {
   if (m_inProtectedRegion || m_inMacroDefinitionParsing) return;
 
-  if (!m_passThrough) {
-    addVObject(ctx, VObjectType::ppUndef_directive);
+  addVObject(ctx, VObjectType::ppUndef_directive);
 
+  if (!m_passThrough) {
     std::string text = ctx->getText();
     std::replace_if(
         text.begin(), text.end(), [](char ch) { return ch != '\n'; }, ' ');
@@ -778,9 +794,9 @@ void SV3_1aPreprocessorTreeListener::exitElsif_directive(
     SV3_1aPpParser::Elsif_directiveContext *ctx) {
   if (m_inProtectedRegion || m_inMacroDefinitionParsing) return;
 
-  if (!m_passThrough) {
-    addVObject(ctx, VObjectType::ppElsif_directive);
+  addVObject(ctx, VObjectType::ppElsif_directive);
 
+  if (!m_passThrough) {
     std::string text = ctx->getText();
     std::replace_if(
         text.begin(), text.end(), [](char ch) { return ch != '\n'; }, ' ');
@@ -816,9 +832,9 @@ void SV3_1aPreprocessorTreeListener::exitElse_directive(
   item.m_previousActiveState = m_inActiveBranch;
   setCurrentBranchActivity(lc.first);
 
-  if (!m_passThrough) {
-    addVObject(ctx, VObjectType::ppElse_directive);
+  addVObject(ctx, VObjectType::ppElse_directive);
 
+  if (!m_passThrough) {
     std::string text = ctx->getText();
     std::replace_if(
         text.begin(), text.end(), [](char ch) { return ch != '\n'; }, ' ');
@@ -876,8 +892,9 @@ void SV3_1aPreprocessorTreeListener::exitEndif_directive(
 
   if (m_inActiveBranch) m_passThrough = false;
 
+  addVObject(ctx, VObjectType::ppEndif_directive);
+
   if (!m_passThrough) {
-    addVObject(ctx, VObjectType::ppEndif_directive);
     appendPreprocEnd();
   }
 }
@@ -1641,9 +1658,18 @@ void SV3_1aPreprocessorTreeListener::exitEveryRule(
   }
   // clang-format on
 
-  if (nodeId && m_inMacroDefinitionParsing) {
+  if (nodeId &&
+      ((ruleIndex == SV3_1aPpParser::RuleMacro_definition) ||
+       (ruleIndex == SV3_1aPpParser::RuleDefine_directive) ||
+       (ruleIndex == SV3_1aPpParser::RuleMultiline_args_macro_definition) ||
+       (ruleIndex == SV3_1aPpParser::RuleSimple_no_args_macro_definition) ||
+       (ruleIndex == SV3_1aPpParser::RuleMultiline_no_args_macro_definition) ||
+       (ruleIndex == SV3_1aPpParser::RuleSimple_args_macro_definition))) {
     // When parsing a macro, ensure that the tree
     // doesn't include the terminal newline.
+    // NOTE: We can't just check the m_inMacroDefinitionParsing flag since
+    // exitEveryRule gets called after exitMacro_definition which sets the flag
+    // back to false.
     adjustMacroDefinitionLocation(ctx, nodeId);
   }
 }

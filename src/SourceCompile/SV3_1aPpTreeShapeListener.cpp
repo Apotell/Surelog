@@ -367,12 +367,11 @@ void SV3_1aPpTreeShapeListener::enterInclude_directive(
       const std::string &pp_result = std::get<0>(result);
       sectionLineColumnEnd = std::get<1>(result);
       if (!pp_result.empty()) m_pp->append(pre + pp_result + post);
-      if (ctx->macro_instance()) {
-        m_appendPausedContext = ctx;
-        m_pp->pauseAppend();
-      }
     }
-
+    if (ctx->macro_instance()) {
+      m_appendPausedContext = ctx;
+      m_pp->pauseAppend();
+    }
     const LineColumn sourceLineColumnEnd = m_pp->getCurrentPosition();
     m_pp->getSourceFile()->addIncludeFileInfo(
         /* context */ IncludeFileInfo::Context::Include,

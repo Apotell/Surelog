@@ -557,7 +557,6 @@ uhdm::Any* CompileHelper::compileSignals(DesignComponent* component,
   NodeId signalId = sig->getNameId();
   NodeId typespecId = sig->getTypespecId() ? sig->getTypespecId()
                                            : sig->getInterfaceTypeNameId();
-  const std::string_view signame = sig->getName();
   const FileContent* const fC = sig->getFileContent();
   Design* const design = compileDesign->getCompiler()->getDesign();
   uhdm::Any* pscope = component->getUhdmModel();
@@ -656,8 +655,6 @@ uhdm::Any* CompileHelper::compileSignals(DesignComponent* component,
   if (pscope == nullptr) pscope = design->getUhdmDesign();
 
   uhdm::Any* uhdmScope = sig->uhdmScopeModel();
-  NodeId packedDimension = sig->getPackedDimension();
-  NodeId unpackedDimension = sig->getUnpackedDimension();
   NodeId typeSpecId = sig->getTypespecId() ? sig->getTypespecId()
                                            : sig->getInterfaceTypeNameId();
   if (uhdm::Typespec* tps = compileTypespec(

@@ -5303,18 +5303,6 @@ uhdm::Assignment* CompileHelper::compileBlockingAssignment(
   return assign;
 }
 
-uhdm::ArrayVar* CompileHelper::compileArrayVar(DesignComponent* component,
-                                               const FileContent* fC,
-                                               NodeId varId,
-                                               CompileDesign* compileDesign,
-                                               uhdm::Any* pexpr,
-                                               ValuedComponentI* instance) {
-  uhdm::Serializer& s = compileDesign->getSerializer();
-  uhdm::ArrayVar* result = s.make<uhdm::ArrayVar>();
-
-  return result;
-}
-
 uhdm::AttributeCollection* CompileHelper::compileAttributes(
     DesignComponent* component, const FileContent* fC, NodeId nodeId,
     CompileDesign* compileDesign, uhdm::Any* pexpr) {

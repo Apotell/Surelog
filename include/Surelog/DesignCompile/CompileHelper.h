@@ -287,9 +287,9 @@ class CompileHelper final {
 
   uhdm::Any* compileVariable(DesignComponent* component, const FileContent* fC,
                              NodeId declarationId, NodeId nameId,
-                             CompileDesign* compileDesign, Reduce reduce,
-                             uhdm::Any* pstmt, ValuedComponentI* instance,
-                             bool muteErrors);
+                             NodeId unpackedDimId, CompileDesign* compileDesign,
+                             Reduce reduce, uhdm::Any* pstmt,
+                             ValuedComponentI* instance, bool muteErrors);
   uhdm::Any* compileSignals(DesignComponent* component,
                             CompileDesign* compileDesign, Signal* sig,
                             uhdm::Typespec* tps);
@@ -410,11 +410,6 @@ class CompileHelper final {
                                       CompileDesign* compileDesign,
                                       Reduce reduce, uhdm::Any* pexpr,
                                       ValuedComponentI* instance);
-
-  uhdm::ArrayVar* compileArrayVar(DesignComponent* component,
-                                  const FileContent* fC, NodeId varId,
-                                  CompileDesign* compileDesign,
-                                  uhdm::Any* pexpr, ValuedComponentI* instance);
 
   uhdm::Any* compileProceduralContinuousAssign(DesignComponent* component,
                                                const FileContent* fC,

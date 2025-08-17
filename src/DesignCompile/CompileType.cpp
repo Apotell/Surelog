@@ -79,8 +79,9 @@ using namespace uhdm;  // NOLINT (using a bunch of them)
 
 uhdm::Any* CompileHelper::compileVariable(
     DesignComponent* component, const FileContent* fC, NodeId declarationId,
-    NodeId nameId, CompileDesign* compileDesign, Reduce reduce,
-    uhdm::Any* pstmt, SURELOG::ValuedComponentI* instance, bool muteErrors) {
+    NodeId nameId, NodeId unpackedDimId, CompileDesign* compileDesign,
+    Reduce reduce, uhdm::Any* pstmt, SURELOG::ValuedComponentI* instance,
+    bool muteErrors) {
   uhdm::Serializer& s = compileDesign->getSerializer();
   Design* const design = compileDesign->getCompiler()->getDesign();
   uhdm::Any* result = nullptr;
@@ -154,7 +155,7 @@ uhdm::Any* CompileHelper::compileVariable(
   if ((decl_type != VObjectType::paPs_or_hierarchical_identifier) &&
       (decl_type != VObjectType::paImplicit_class_handle) &&
       (decl_type != VObjectType::STRING_CONST)) {
-    ts = compileTypespec(component, fC, declarationId, InvalidNodeId,
+    ts = compileTypespec(component, fC, declarationId, unpackedDimId,
                          compileDesign, reduce, pstmt, instance, true);
   }
   bool isSigned = true;
@@ -243,7 +244,15 @@ uhdm::Any* CompileHelper::compileVariable(
           }
           result = var;
         } else {
-          uhdm::RefVar* ref = s.make<uhdm::RefVar>();
+          uhdm::Variables* ref = nullptr;
+          if (ts && (ts->getUhdmType() == uhdm::UhdmType::ArrayTypespec)) {
+            ref = s.make<uhdm::ArrayVar>();
+          } else if (ts && (ts->getUhdmType() ==
+                            uhdm::UhdmType::PackedArrayTypespec)) {
+            ref = s.make<uhdm::PackedArrayVar>();
+          } else {
+            ref = s.make<uhdm::RefVar>();
+          }
           ref->setName(fC->SymName(nameId));
           fC->populateCoreMembers(nameId, nameId, ref);
           if (ts != nullptr) {
@@ -1683,33 +1692,29 @@ uhdm::Typespec* CompileHelper::compileTypespec(
       break;
     }
     case VObjectType::paSigning_Unsigned: {
-      if (m_elaborate == Elaborate::Yes) {
-        if (isVariable) {
-          // 6.8 Variable declarations, implicit type
-          uhdm::LogicTypespec* tps = s.make<uhdm::LogicTypespec>();
-          result = tps;
-        } else {
-          // Parameter implicit type is int
-          uhdm::IntTypespec* tps = s.make<uhdm::IntTypespec>();
-          result = tps;
-        }
-        fC->populateCoreMembers(type, type, result);
+      if (isVariable) {
+        // 6.8 Variable declarations, implicit type
+        uhdm::LogicTypespec* tps = s.make<uhdm::LogicTypespec>();
+        result = tps;
+      } else {
+        // Parameter implicit type is int
+        uhdm::IntTypespec* tps = s.make<uhdm::IntTypespec>();
+        result = tps;
       }
+      fC->populateCoreMembers(type, type, result);
       break;
     }
     case VObjectType::paPacked_dimension: {
-      if (m_elaborate == Elaborate::Yes) {
-        if (isVariable) {
-          // 6.8 Variable declarations, implicit type
-          uhdm::LogicTypespec* tps = s.make<uhdm::LogicTypespec>();
-          result = tps;
-        } else {
-          // Parameter implicit type is bit
-          uhdm::IntTypespec* tps = s.make<uhdm::IntTypespec>();
-          result = tps;
-        }
-        fC->populateCoreMembers(type, type, result);
+      if (isVariable) {
+        // 6.8 Variable declarations, implicit type
+        uhdm::LogicTypespec* tps = s.make<uhdm::LogicTypespec>();
+        result = tps;
+      } else {
+        // Parameter implicit type is bit
+        uhdm::IntTypespec* tps = s.make<uhdm::IntTypespec>();
+        result = tps;
       }
+      fC->populateCoreMembers(type, type, result);
       break;
     }
     case VObjectType::paExpression: {
@@ -2253,9 +2258,7 @@ uhdm::Typespec* CompileHelper::compileTypespec(
         !result->getInstance()) {
       result->setInstance(component->getUhdmModel<uhdm::Instance>());
     }
-    if (component->getUhdmModel() != nullptr) {
-      result->setParent(component->getUhdmModel());
-    }
+    result->setParent(pstmt);
   }
 
   return result;

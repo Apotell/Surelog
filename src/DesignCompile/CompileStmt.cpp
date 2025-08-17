@@ -497,8 +497,8 @@ uhdm::AnyCollection* CompileHelper::compileStmt(
       NodeId Ps_or_hierarchical_array_identifier = fC->Sibling(the_stmt);
       uhdm::Any* var = compileVariable(
           component, fC, fC->Child(Ps_or_hierarchical_array_identifier),
-          fC->Child(Ps_or_hierarchical_array_identifier), compileDesign,
-          Reduce::No, for_each, nullptr, false);
+          fC->Child(Ps_or_hierarchical_array_identifier), InvalidNodeId,
+          compileDesign, Reduce::No, for_each, nullptr, false);
       NodeId Loop_variables = fC->Sibling(Ps_or_hierarchical_array_identifier);
       NodeId loopVarId = fC->Child(Loop_variables);
       NodeId Statement = Loop_variables;
@@ -1152,121 +1152,31 @@ uhdm::AnyCollection* CompileHelper::compileDataDeclaration(
       while (Variable_decl_assignment) {
         NodeId Var = Variable_decl_assignment;
         if (fC->Child(Var)) Var = fC->Child(Var);
-        NodeId UnpackedDimensionsStartId = fC->Sibling(Var);
-        std::vector<uhdm::Range*>* unpackedDimensions = nullptr;
-        if (fC->Type(UnpackedDimensionsStartId) != VObjectType::paExpression) {
-          int32_t unpackedSize;
-          unpackedDimensions = compileRanges(
-              component, fC, UnpackedDimensionsStartId, compileDesign, reduce,
-              nullptr, instance, unpackedSize, false);
-        }
-        NodeId UnpackedDimensionsEndId = UnpackedDimensionsStartId;
-        for (NodeId n = UnpackedDimensionsEndId;
-             n && (fC->Type(n) == VObjectType::paVariable_dimension);
-             n = fC->Sibling(n)) {
-          UnpackedDimensionsEndId = n;
-        }
-        NodeId Expression = UnpackedDimensionsStartId;
-        while (Expression &&
-               (fC->Type(Expression) != VObjectType::paExpression)) {
-          Expression = fC->Sibling(Expression);
-        }
-        uhdm::Any* var =
-            compileVariable(component, fC, Data_type, Var, compileDesign,
-                            Reduce::No, pstmt, instance, false);
 
-        if (var != nullptr) {
+        uhdm::Assignment* assign_stmt = s.make<uhdm::Assignment>();
+        assign_stmt->setOpType(vpiAssignmentOp);
+        assign_stmt->setBlocking(true);
+        fC->populateCoreMembers(Variable_decl_assignment,
+                                Variable_decl_assignment, assign_stmt);
+
+        NodeId UnpackedDimensionsStartId = fC->Sibling(Var);
+        if (uhdm::Any* var = compileVariable(
+                component, fC, Data_type, Var, UnpackedDimensionsStartId,
+                compileDesign, Reduce::No, assign_stmt, instance, false)) {
           fC->populateCoreMembers(Var, Var, var);
           if (uhdm::Variables* const v = any_cast<uhdm::Variables>(var)) {
             v->setConstantVariable(const_status);
             v->setAutomatic(automatic_status);
             v->setName(fC->SymName(Var));
-          }
-
-          if (unpackedDimensions) {
-            uhdm::ArrayVar* arr = s.make<uhdm::ArrayVar>();
-            fC->populateCoreMembers(Var, Var, arr);
-            uhdm::ArrayTypespec* tps = s.make<uhdm::ArrayTypespec>();
-            tps->setParent(pstmt);
-            fC->populateCoreMembers(UnpackedDimensionsStartId,
-                                    UnpackedDimensionsEndId, tps);
-            tps->setRanges(unpackedDimensions);
-            for (auto r : *unpackedDimensions) r->setParent(tps, true);
-
-            if (uhdm::Variables* const v = any_cast<uhdm::Variables>(var)) {
-              if (uhdm::RefTypespec* var_ts = v->getTypespec()) {
-                if (uhdm::Typespec* ts = var_ts->getActual()) {
-                  if (tps->getElemTypespec() == nullptr) {
-                    uhdm::RefTypespec* varRef = s.make<uhdm::RefTypespec>();
-                    varRef->setParent(tps);
-                    varRef->setName(fC->SymName(Data_type));
-                    fC->populateCoreMembers(Data_type, Data_type, varRef);
-                    tps->setElemTypespec(varRef);
-                  }
-                  tps->getElemTypespec()->setActual(ts);
-                }
-              }
-            }
-            if (arr->getTypespec() == nullptr) {
-              uhdm::RefTypespec* tpsRef = s.make<uhdm::RefTypespec>();
-              tpsRef->setParent(arr);
-              fC->populateCoreMembers(UnpackedDimensionsStartId,
-                                      UnpackedDimensionsEndId, tpsRef);
-              arr->setTypespec(tpsRef);
-            }
-            arr->getTypespec()->setActual(tps);
-            for (uhdm::Range* r : *unpackedDimensions) {
-              const uhdm::Expr* rrange = r->getRightExpr();
-              if (rrange->getValue() == "STRING:associative") {
-                arr->setArrayType(vpiAssocArray);
-                if (const uhdm::RefTypespec* rrange_ts =
-                        rrange->getTypespec()) {
-                  if (const uhdm::Typespec* ts = rrange_ts->getActual()) {
-                    if (tps->getIndexTypespec() == nullptr) {
-                      uhdm::RefTypespec* indexRef = s.make<uhdm::RefTypespec>();
-                      indexRef->setParent(tps);
-                      indexRef->setName(ts->getName());
-                      indexRef->setFile(ts->getFile());
-                      indexRef->setStartLine(ts->getStartLine());
-                      indexRef->setStartColumn(ts->getStartColumn());
-                      indexRef->setEndLine(ts->getEndLine());
-                      indexRef->setEndColumn(ts->getEndColumn());
-                      tps->setIndexTypespec(indexRef);
-                    }
-                    tps->getIndexTypespec()->setActual(
-                        const_cast<uhdm::Typespec*>(ts));
-                  }
-                }
-              } else if (rrange->getValue() == "STRING:unsized") {
-                arr->setArrayType(vpiDynamicArray);
-              } else if (rrange->getValue() == "STRING:$") {
-                arr->setArrayType(vpiQueueArray);
-              } else {
-                arr->setArrayType(vpiStaticArray);
-              }
-            }
-            arr->setName(fC->SymName(Var));
-            if (uhdm::Variables* const v = any_cast<uhdm::Variables>(var)) {
-              v->setName("");
-            }
-            var->setParent(pstmt);
-            var = arr;
+            assign_stmt->setLhs(v);
           }
         }
 
-        if (results == nullptr) {
-          results = s.makeCollection<Any>();
+        NodeId Expression = UnpackedDimensionsStartId;
+        while (Expression &&
+               (fC->Type(Expression) != VObjectType::paExpression)) {
+          Expression = fC->Sibling(Expression);
         }
-        uhdm::Assignment* assign_stmt = s.make<uhdm::Assignment>();
-        assign_stmt->setOpType(vpiAssignmentOp);
-        assign_stmt->setBlocking(true);
-        if (uhdm::Variables* const v = any_cast<uhdm::Variables>(var)) {
-          var->setParent(assign_stmt, true);
-          assign_stmt->setLhs(v);
-        }
-        fC->populateCoreMembers(Variable_decl_assignment,
-                                Variable_decl_assignment, assign_stmt);
-        results->emplace_back(assign_stmt);
         if (Expression) {
           if (uhdm::Expr* rhs = (uhdm::Expr*)compileExpression(
                   component, fC, Expression, compileDesign, Reduce::No,
@@ -1274,6 +1184,9 @@ uhdm::AnyCollection* CompileHelper::compileDataDeclaration(
             assign_stmt->setRhs(rhs);
           }
         }
+
+        if (results == nullptr) results = s.makeCollection<Any>();
+        results->emplace_back(assign_stmt);
 
         Variable_decl_assignment = fC->Sibling(Variable_decl_assignment);
       }
@@ -1674,8 +1587,8 @@ n<> u<142> t<Tf_item_declaration> p<386> c<141> s<384> l<28>
                 ioMap.find(name);
             if (itr == ioMap.end()) {
               if (uhdm::Any* var = compileVariable(
-                      component, fC, Data_type, nameId, compileDesign,
-                      Reduce::No, parent, nullptr, false)) {
+                      component, fC, Data_type, nameId, InvalidNodeId,
+                      compileDesign, Reduce::No, parent, nullptr, false)) {
                 if (uhdm::Variables* const v = any_cast<uhdm::Variables>(var)) {
                   v->setAutomatic(!is_static);
                   v->setName(name);
@@ -2170,7 +2083,7 @@ bool CompileHelper::compileClassConstructorDeclaration(
     task_funcs = component->getTaskFuncs();
   }
   uhdm::Function* func = s.make<uhdm::Function>();
-  const uhdm::ScopedScope scopeScope(func);
+  func->setParent(component->getUhdmModel());
   func->setMethod(true);
   task_funcs->emplace_back(func);
   fC->populateCoreMembers(nodeId, nodeId, func);
@@ -2432,6 +2345,7 @@ bool CompileHelper::compileFunction(DesignComponent* component,
       Return_data_type = Function_data_type;
     }
 
+    const uhdm::ScopedScope scopedScope(func);
     uhdm::Typespec* ts = nullptr;
     if (Return_data_type) {
       ts = compileTypespec(component, fC, Return_data_type, InvalidNodeId,
@@ -2445,72 +2359,6 @@ bool CompileHelper::compileFunction(DesignComponent* component,
       ts = s.make<uhdm::VoidTypespec>();
       ts->setParent(func);
       fC->populateCoreMembers(Function_data_type, Function_data_type, ts);
-    }
-
-    NodeId Packed_dimension = Return_data_type;
-    if (fC->Type(Packed_dimension) == VObjectType::paData_type) {
-      if (fC->Type(fC->Child(Packed_dimension)) ==
-          VObjectType::paPacked_dimension) {
-        Packed_dimension = fC->Child(Packed_dimension);
-      } else {
-        Packed_dimension = fC->Sibling(fC->Child(Packed_dimension));
-      }
-    }
-    if (fC->Type(Packed_dimension) != VObjectType::paPacked_dimension) {
-      Packed_dimension = fC->Sibling(Return_data_type);
-    }
-    if (!Packed_dimension) {
-      // Implicit return value:
-      // function [1:0] fct();
-      if (fC->Type(Return_data_type) == VObjectType::paConstant_range) {
-        Packed_dimension = Return_data_type;
-      }
-    }
-    if (ts && Packed_dimension) {
-      int32_t size = 0;
-      uhdm::RangeCollection* ranges =
-          compileRanges(component, fC, Packed_dimension, compileDesign, reduce,
-                        func, instance, size, false);
-
-      uhdm::PackedArrayTypespec* tpaps = s.make<uhdm::PackedArrayTypespec>();
-      tpaps->setParent(pscope);
-      fC->populateCoreMembers(Packed_dimension, Packed_dimension, tpaps);
-
-      uhdm::RefTypespec* pret = s.make<uhdm::RefTypespec>();
-      pret->setParent(tpaps);
-      pret->setActual(tpaps);
-
-      uhdm::RefTypespec* ert = s.make<uhdm::RefTypespec>();
-      ert->setParent(ts);
-      ert->setActual(ts);
-      ert->setName(ts->getName());
-      tpaps->setElemTypespec(ert);
-      fC->populateCoreMembers(Return_data_type, Return_data_type, ert);
-
-      if ((ranges != nullptr) && !ranges->empty()) {
-        tpaps->setRanges(ranges);
-        for (uhdm::Range* r : *ranges) r->setParent(tpaps, true);
-        ts->setEndLine(ranges->back()->getEndLine());
-        ts->setEndColumn(ranges->back()->getEndColumn());
-      }
-      ts = tpaps;
-    }
-    if ((ts == nullptr) && Packed_dimension) {
-      uhdm::LogicTypespec* lts = s.make<uhdm::LogicTypespec>();
-      lts->setParent(func);
-      fC->populateCoreMembers(Return_data_type, Return_data_type, lts);
-
-      int32_t size;
-      uhdm::RangeCollection* ranges =
-          compileRanges(component, fC, Packed_dimension, compileDesign, reduce,
-                        func, instance, size, false);
-      if ((ranges != nullptr) && !ranges->empty()) {
-        lts->setRanges(ranges);
-        for (uhdm::Range* r : *ranges) r->setParent(lts, true);
-        lts->setEndLine(ranges->back()->getEndLine());
-        lts->setEndColumn(ranges->back()->getEndColumn());
-      }
-      ts = lts;
     }
 
     if (ts != nullptr) {
@@ -2837,7 +2685,6 @@ Function* CompileHelper::compileFunctionPrototype(
     task_funcs = scope->getTaskFuncDecls();
   }
   uhdm::FunctionDecl* func = s.make<uhdm::FunctionDecl>();
-  const uhdm::ScopedScope scopeScope(func);
   task_funcs->emplace_back(func);
   /*
   n<"DPI-C"> u<2> t<StringLiteral> p<15> s<3> l<3>
@@ -3147,9 +2994,9 @@ uhdm::Any* CompileHelper::compileForLoop(DesignComponent* component,
         fC->populateCoreMembers(For_variable_declaration,
                                 For_variable_declaration, assign_stmt);
 
-        if (uhdm::Any* var =
-                compileVariable(component, fC, Data_type, Var, compileDesign,
-                                Reduce::Yes, assign_stmt, nullptr, false)) {
+        if (uhdm::Any* var = compileVariable(
+                component, fC, Data_type, Var, InvalidNodeId, compileDesign,
+                Reduce::Yes, assign_stmt, nullptr, false)) {
           if (uhdm::Variables* const v = any_cast<uhdm::Variables>(var)) {
             assign_stmt->setLhs(v);
           }
@@ -3187,7 +3034,8 @@ uhdm::Any* CompileHelper::compileForLoop(DesignComponent* component,
 
         if (uhdm::Any* var = compileVariable(
                 component, fC, Hierarchical_identifier, Hierarchical_identifier,
-                compileDesign, Reduce::Yes, assign_stmt, nullptr, false)) {
+                InvalidNodeId, compileDesign, Reduce::Yes, assign_stmt, nullptr,
+                false)) {
           if (uhdm::Variables* const v = any_cast<uhdm::Variables>(var)) {
             assign_stmt->setLhs(v);
           }

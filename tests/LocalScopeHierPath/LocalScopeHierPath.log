@@ -145,7 +145,7 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 ArrayTypespec                                          2
-ArrayVar                                               2
+ArrayVar                                               1
 Assignment                                             3
 Begin                                                  3
 BitSelect                                              2
@@ -160,7 +160,7 @@ HierPath                                               2
 Package                                                1
 Range                                                  2
 RefObj                                                 6
-RefTypespec                                           12
+RefTypespec                                           11
 RefVar                                                 3
 StringTypespec                                         2
 StringVar                                              1
@@ -240,34 +240,19 @@ Design: (unnamed)
         \_Function: (pack::uvm_mem_mam::check_reg), line:13:1, endln:23:12
         |vpiFullName:pack::uvm_mem_mam::check_reg
         |vpiVariables:
-        \_ClassVar: (pack::uvm_mem_mam::check_reg), line:14:23, endln:14:28
+        \_ClassVar: (pack::uvm_mem_mam::check_reg::paths), line:14:23, endln:14:28
           |vpiParent:
           \_Begin: (pack::uvm_mem_mam::check_reg)
           |vpiTypespec:
-          \_RefTypespec: (pack::uvm_mem_mam::check_reg::pack::uvm_hdl_path_concat), line:14:3, endln:14:22
+          \_RefTypespec: (pack::uvm_mem_mam::check_reg::paths::pack::uvm_hdl_path_concat), line:14:3, endln:14:22
             |vpiParent:
-            \_ClassVar: (pack::uvm_mem_mam::check_reg), line:14:23, endln:14:28
+            \_ClassVar: (pack::uvm_mem_mam::check_reg::paths), line:14:23, endln:14:28
             |vpiName:pack::uvm_hdl_path_concat
-            |vpiFullName:pack::uvm_mem_mam::check_reg::pack::uvm_hdl_path_concat
+            |vpiFullName:pack::uvm_mem_mam::check_reg::paths::pack::uvm_hdl_path_concat
             |vpiActual:
-            \_ClassTypespec: (uvm_hdl_path_concat), line:14:3, endln:14:22
-          |vpiFullName:pack::uvm_mem_mam::check_reg
-        |vpiVariables:
-        \_ArrayVar: (pack::uvm_mem_mam::check_reg::paths), line:14:23, endln:14:28
-          |vpiParent:
-          \_Begin: (pack::uvm_mem_mam::check_reg)
-          |vpiTypespec:
-          \_RefTypespec: (pack::uvm_mem_mam::check_reg::paths), line:14:28, endln:14:31
-            |vpiParent:
-            \_ArrayVar: (pack::uvm_mem_mam::check_reg::paths), line:14:23, endln:14:28
-            |vpiFullName:pack::uvm_mem_mam::check_reg::paths
-            |vpiActual:
-            \_ArrayTypespec: , line:14:28, endln:14:31
+            \_ArrayTypespec: , line:14:3, endln:14:31
           |vpiName:paths
           |vpiFullName:pack::uvm_mem_mam::check_reg::paths
-          |vpiArrayType:4
-        |vpiRegArray:
-        \_ArrayVar: (pack::uvm_mem_mam::check_reg::paths), line:14:23, endln:14:28
         |vpiInternalScope:
         \_ForeachStmt: (pack::uvm_mem_mam::check_reg), line:16:3, endln:21:6
           |vpiParent:
@@ -486,30 +471,6 @@ Design: (unnamed)
           |vpiClassDefn:
           \_ClassDefn: (pack::uvm_hdl_path_concat), file:${SURELOG_DIR}/tests/LocalScopeHierPath/dut.sv, line:7:1, endln:9:9
         |vpiTypedef:
-        \_ArrayTypespec: , line:14:28, endln:14:31
-          |vpiParent:
-          \_Begin: (pack::uvm_mem_mam::check_reg)
-          |vpiRange:
-          \_Range: , line:14:28, endln:14:31
-            |vpiParent:
-            \_ArrayTypespec: , line:14:28, endln:14:31
-            |vpiRightRange:
-            \_Constant: , line:14:29, endln:14:30
-              |vpiParent:
-              \_Range: , line:14:28, endln:14:31
-              |vpiDecompile:$
-              |vpiSize:1
-              |STRING:$
-              |vpiConstType:10
-          |vpiElemTypespec:
-          \_RefTypespec: (pack::uvm_mem_mam::check_reg::uvm_hdl_path_concat), line:14:3, endln:14:22
-            |vpiParent:
-            \_ArrayTypespec: , line:14:28, endln:14:31
-            |vpiName:uvm_hdl_path_concat
-            |vpiFullName:pack::uvm_mem_mam::check_reg::uvm_hdl_path_concat
-            |vpiActual:
-            \_ClassTypespec: (uvm_hdl_path_concat), line:14:3, endln:14:22
-        |vpiTypedef:
         \_UnsupportedTypespec: (p), line:16:17, endln:16:18
           |vpiParent:
           \_Begin: (pack::uvm_mem_mam::check_reg)
@@ -517,11 +478,7 @@ Design: (unnamed)
         |vpiImportTypespec:
         \_ClassTypespec: (uvm_hdl_path_concat), line:14:3, endln:14:22
         |vpiImportTypespec:
-        \_ClassVar: (pack::uvm_mem_mam::check_reg), line:14:23, endln:14:28
-        |vpiImportTypespec:
-        \_ArrayTypespec: , line:14:28, endln:14:31
-        |vpiImportTypespec:
-        \_ArrayVar: (pack::uvm_mem_mam::check_reg::paths), line:14:23, endln:14:28
+        \_ClassVar: (pack::uvm_mem_mam::check_reg::paths), line:14:23, endln:14:28
         |vpiImportTypespec:
         \_UnsupportedTypespec: (p), line:16:17, endln:16:18
         |vpiStmt:
@@ -544,8 +501,23 @@ Design: (unnamed)
         \_VoidTypespec: , line:13:28, endln:13:32
       |vpiStmt:
       \_Begin: (pack::uvm_mem_mam::check_reg)
+    |vpiTypedef:
+    \_ArrayTypespec: , line:14:3, endln:14:31
+      |vpiParent:
+      \_ClassDefn: (pack::uvm_mem_mam), file:${SURELOG_DIR}/tests/LocalScopeHierPath/dut.sv, line:11:1, endln:25:9
+      |vpiArrayType:4
+      |vpiElemTypespec:
+      \_RefTypespec: (pack::uvm_mem_mam::uvm_hdl_path_concat), line:14:3, endln:14:22
+        |vpiParent:
+        \_ArrayTypespec: , line:14:3, endln:14:31
+        |vpiName:uvm_hdl_path_concat
+        |vpiFullName:pack::uvm_mem_mam::uvm_hdl_path_concat
+        |vpiActual:
+        \_ClassTypespec: (uvm_hdl_path_concat), line:14:3, endln:14:22
     |vpiImportTypespec:
     \_Function: (pack::uvm_mem_mam::check_reg), line:13:1, endln:23:12
+    |vpiImportTypespec:
+    \_ArrayTypespec: , line:14:3, endln:14:31
     |vpiMethod:
     \_Function: (pack::uvm_mem_mam::check_reg), line:13:1, endln:23:12
   |vpiTypedef:

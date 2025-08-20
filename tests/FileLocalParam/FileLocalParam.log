@@ -114,17 +114,20 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Begin                                                  1
-Constant                                               4
+Constant                                               5
 Design                                                 1
 GenIf                                                  1
-Module                                                 2
+IntTypespec                                            1
+Module                                                 3
 ModuleTypespec                                         1
 Operation                                              4
+PackedArrayTypespec                                    1
 ParamAssign                                            3
 Parameter                                              3
+Range                                                  1
 RefModule                                              1
-RefObj                                                 5
-RefTypespec                                            2
+RefObj                                                 6
+RefTypespec                                            4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/FileLocalParam/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -210,6 +213,35 @@ Design: (unnamed)
         |vpiConstType:3
     |vpiStmt:
     \_Begin: (work@top), line:15:50, endln:17:6
+|vpiTypedef:
+\_PackedArrayTypespec: , line:3:12, endln:3:22
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiRange:
+  \_Range: , line:3:12, endln:3:22
+    |vpiParent:
+    \_PackedArrayTypespec: , line:3:12, endln:3:22
+    |vpiLeftRange:
+    \_RefObj: (AWIDTH), line:3:13, endln:3:19
+      |vpiParent:
+      \_Range: , line:3:12, endln:3:22
+      |vpiName:AWIDTH
+      |vpiActual:
+      \_Parameter: (AWIDTH), line:1:25, endln:1:58
+    |vpiRightRange:
+    \_Constant: , line:3:20, endln:3:21
+      |vpiParent:
+      \_Range: , line:3:12, endln:3:22
+      |vpiDecompile:0
+      |vpiSize:64
+      |UINT:0
+      |vpiConstType:9
+  |vpiElemTypespec:
+  \_RefTypespec: , line:3:12, endln:3:22
+    |vpiParent:
+    \_PackedArrayTypespec: , line:3:12, endln:3:22
+    |vpiActual:
+    \_IntTypespec: , line:3:12, endln:3:22
 |vpiParameter:
 \_Parameter: (AWIDTH), line:1:25, endln:1:58
   |vpiParent:
@@ -221,8 +253,17 @@ Design: (unnamed)
 \_Parameter: (MAP), line:3:23, endln:5:48
   |vpiParent:
   \_Design: (unnamed)
+  |vpiTypespec:
+  \_RefTypespec: (MAP), line:3:12, endln:3:22
+    |vpiParent:
+    \_Parameter: (MAP), line:3:23, endln:5:48
+    |vpiFullName:MAP
+    |vpiActual:
+    \_PackedArrayTypespec: , line:3:12, endln:3:22
   |vpiLocalParam:1
   |vpiName:MAP
+\_weaklyReferenced:
+\_IntTypespec: , line:3:12, endln:3:22
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

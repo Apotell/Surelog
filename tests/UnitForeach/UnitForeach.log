@@ -468,10 +468,9 @@ Operation                                              1
 Package                                                2
 Range                                                  5
 RefObj                                                25
-RefTypespec                                           34
+RefTypespec                                           33
 RefVar                                                10
 StringTypespec                                         1
-StringVar                                              1
 SysFuncCall                                            2
 Task                                                   9
 TypedefTypespec                                        1
@@ -530,6 +529,41 @@ Design: (unnamed)
     \_Package: (builtin)
     |vpiName:mailbox
     |vpiFullName:builtin::mailbox
+    |vpiInternalScope:
+    \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
+      |vpiParent:
+      \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/UnitForeach/builtin.sv, line:1:3, endln:27:11
+      |vpiName:new
+      |vpiFullName:builtin::mailbox::new
+      |vpiTypedef:
+      \_IntTypespec: , line:3:19, endln:3:22
+        |vpiParent:
+        \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
+        |vpiSigned:1
+      |vpiImportTypespec:
+      \_IntTypespec: , line:3:19, endln:3:22
+      |vpiMethod:1
+      |vpiIODecl:
+      \_IODecl: (bound), line:3:23, endln:3:28
+        |vpiParent:
+        \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
+        |vpiDirection:1
+        |vpiName:bound
+        |vpiExpr:
+        \_Constant: , line:3:31, endln:3:32
+          |vpiParent:
+          \_IODecl: (bound), line:3:23, endln:3:28
+          |vpiDecompile:0
+          |vpiSize:64
+          |UINT:0
+          |vpiConstType:9
+        |vpiTypedef:
+        \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
+          |vpiParent:
+          \_IODecl: (bound), line:3:23, endln:3:28
+          |vpiFullName:builtin::mailbox::new::bound
+          |vpiActual:
+          \_IntTypespec: , line:3:19, endln:3:22
     |vpiInternalScope:
     \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
       |vpiParent:
@@ -678,6 +712,8 @@ Design: (unnamed)
         |vpiDirection:6
         |vpiName:message
     |vpiImportTypespec:
+    \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
+    |vpiImportTypespec:
     \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
     |vpiImportTypespec:
     \_Task: (builtin::mailbox::put), line:9:5, endln:10:12
@@ -691,6 +727,8 @@ Design: (unnamed)
     \_Task: (builtin::mailbox::peek), line:21:5, endln:22:12
     |vpiImportTypespec:
     \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
+    |vpiMethod:
+    \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
     |vpiMethod:
     \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
     |vpiMethod:
@@ -875,6 +913,41 @@ Design: (unnamed)
     |vpiName:semaphore
     |vpiFullName:builtin::semaphore
     |vpiInternalScope:
+    \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
+      |vpiParent:
+      \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/UnitForeach/builtin.sv, line:55:3, endln:69:11
+      |vpiName:new
+      |vpiFullName:builtin::semaphore::new
+      |vpiTypedef:
+      \_IntTypespec: , line:57:18, endln:57:21
+        |vpiParent:
+        \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
+        |vpiSigned:1
+      |vpiImportTypespec:
+      \_IntTypespec: , line:57:18, endln:57:21
+      |vpiMethod:1
+      |vpiIODecl:
+      \_IODecl: (keyCount), line:57:22, endln:57:30
+        |vpiParent:
+        \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
+        |vpiDirection:1
+        |vpiName:keyCount
+        |vpiExpr:
+        \_Constant: , line:57:33, endln:57:34
+          |vpiParent:
+          \_IODecl: (keyCount), line:57:22, endln:57:30
+          |vpiDecompile:0
+          |vpiSize:64
+          |UINT:0
+          |vpiConstType:9
+        |vpiTypedef:
+        \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
+          |vpiParent:
+          \_IODecl: (keyCount), line:57:22, endln:57:30
+          |vpiFullName:builtin::semaphore::new::keyCount
+          |vpiActual:
+          \_IntTypespec: , line:57:18, endln:57:21
+    |vpiInternalScope:
     \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
       |vpiParent:
       \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/UnitForeach/builtin.sv, line:55:3, endln:69:11
@@ -997,11 +1070,15 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: , line:66:26, endln:66:29
     |vpiImportTypespec:
+    \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
+    |vpiImportTypespec:
     \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
     |vpiImportTypespec:
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
     |vpiImportTypespec:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+    |vpiMethod:
+    \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
     |vpiMethod:
     \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
     |vpiMethod:
@@ -1412,33 +1489,20 @@ Design: (unnamed)
       \_Function: (work@uvm_reg_map::set_check_on_read), line:49:3, endln:79:15
       |vpiFullName:work@uvm_reg_map::set_check_on_read
       |vpiVariables:
-      \_StringVar: (work@uvm_reg_map::set_check_on_read), line:50:14, endln:50:20
-        |vpiParent:
-        \_Begin: (work@uvm_reg_map::set_check_on_read)
-        |vpiTypespec:
-        \_RefTypespec: (work@uvm_reg_map::set_check_on_read::string), line:50:7, endln:50:13
-          |vpiParent:
-          \_StringVar: (work@uvm_reg_map::set_check_on_read), line:50:14, endln:50:20
-          |vpiName:string
-          |vpiFullName:work@uvm_reg_map::set_check_on_read::string
-          |vpiActual:
-          \_StringTypespec: , line:50:7, endln:50:13
-        |vpiFullName:work@uvm_reg_map::set_check_on_read
-        |vpiSigned:1
-      |vpiVariables:
       \_ArrayVar: (work@uvm_reg_map::set_check_on_read::sarray), line:50:14, endln:50:20
         |vpiParent:
         \_Begin: (work@uvm_reg_map::set_check_on_read)
         |vpiTypespec:
-        \_RefTypespec: (work@uvm_reg_map::set_check_on_read::sarray), line:50:20, endln:50:24
+        \_RefTypespec: (work@uvm_reg_map::set_check_on_read::sarray::string), line:50:7, endln:50:13
           |vpiParent:
           \_ArrayVar: (work@uvm_reg_map::set_check_on_read::sarray), line:50:14, endln:50:20
-          |vpiFullName:work@uvm_reg_map::set_check_on_read::sarray
+          |vpiName:string
+          |vpiFullName:work@uvm_reg_map::set_check_on_read::sarray::string
           |vpiActual:
-          \_ArrayTypespec: , line:50:20, endln:50:24
+          \_ArrayTypespec: , line:50:7, endln:50:24
         |vpiName:sarray
         |vpiFullName:work@uvm_reg_map::set_check_on_read::sarray
-        |vpiArrayType:1
+        |vpiSigned:1
       |vpiVariables:
       \_ClassVar: (work@uvm_reg_map::set_check_on_read::an_obj), line:51:14, endln:51:20
         |vpiParent:
@@ -1760,35 +1824,6 @@ Design: (unnamed)
         |vpiParent:
         \_Begin: (work@uvm_reg_map::set_check_on_read)
       |vpiTypedef:
-      \_ArrayTypespec: , line:50:20, endln:50:24
-        |vpiParent:
-        \_Begin: (work@uvm_reg_map::set_check_on_read)
-        |vpiRange:
-        \_Range: , line:50:20, endln:50:24
-          |vpiParent:
-          \_ArrayTypespec: , line:50:20, endln:50:24
-          |vpiRightRange:
-          \_Operation: , line:50:21, endln:50:23
-            |vpiParent:
-            \_Range: , line:50:20, endln:50:24
-            |vpiOpType:11
-            |vpiOperand:
-            \_Constant: , line:50:21, endln:50:23
-              |vpiParent:
-              \_Operation: , line:50:21, endln:50:23
-              |vpiDecompile:10
-              |vpiSize:64
-              |UINT:10
-              |vpiConstType:9
-        |vpiElemTypespec:
-        \_RefTypespec: (work@uvm_reg_map::set_check_on_read::string), line:50:7, endln:50:13
-          |vpiParent:
-          \_ArrayTypespec: , line:50:20, endln:50:24
-          |vpiName:string
-          |vpiFullName:work@uvm_reg_map::set_check_on_read::string
-          |vpiActual:
-          \_StringTypespec: , line:50:7, endln:50:13
-      |vpiTypedef:
       \_UnsupportedTypespec: (submap), line:54:25, endln:54:31
         |vpiParent:
         \_Begin: (work@uvm_reg_map::set_check_on_read)
@@ -1810,10 +1845,6 @@ Design: (unnamed)
         |vpiName:submap
       |vpiImportTypespec:
       \_StringTypespec: , line:50:7, endln:50:13
-      |vpiImportTypespec:
-      \_StringVar: (work@uvm_reg_map::set_check_on_read), line:50:14, endln:50:20
-      |vpiImportTypespec:
-      \_ArrayTypespec: , line:50:20, endln:50:24
       |vpiImportTypespec:
       \_ArrayVar: (work@uvm_reg_map::set_check_on_read::sarray), line:50:14, endln:50:20
       |vpiImportTypespec:
@@ -1872,6 +1903,35 @@ Design: (unnamed)
       \_VoidTypespec: , line:49:12, endln:49:16
     |vpiStmt:
     \_Begin: (work@uvm_reg_map::set_check_on_read)
+  |vpiTypedef:
+  \_ArrayTypespec: , line:50:7, endln:50:24
+    |vpiParent:
+    \_ClassDefn: (work@uvm_reg_map), file:${SURELOG_DIR}/tests/UnitForeach/top.v, line:7:1, endln:83:9
+    |vpiArrayType:1
+    |vpiRange:
+    \_Range: , line:50:20, endln:50:24
+      |vpiParent:
+      \_ArrayTypespec: , line:50:7, endln:50:24
+      |vpiRightRange:
+      \_Operation: , line:50:21, endln:50:23
+        |vpiParent:
+        \_Range: , line:50:20, endln:50:24
+        |vpiOpType:11
+        |vpiOperand:
+        \_Constant: , line:50:21, endln:50:23
+          |vpiParent:
+          \_Operation: , line:50:21, endln:50:23
+          |vpiDecompile:10
+          |vpiSize:64
+          |UINT:10
+          |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@uvm_reg_map), line:50:7, endln:50:13
+      |vpiParent:
+      \_ArrayTypespec: , line:50:7, endln:50:24
+      |vpiFullName:work@uvm_reg_map
+      |vpiActual:
+      \_StringTypespec: , line:50:7, endln:50:13
   |vpiTypedef:
   \_ClassTypespec: (moreobj), line:51:6, endln:51:13
     |vpiParent:
@@ -1956,6 +2016,8 @@ Design: (unnamed)
       \_ClassTypespec: (moreobj), line:48:9, endln:48:16
   |vpiImportTypespec:
   \_Function: (work@uvm_reg_map::set_check_on_read), line:49:3, endln:79:15
+  |vpiImportTypespec:
+  \_ArrayTypespec: , line:50:7, endln:50:24
   |vpiImportTypespec:
   \_ClassTypespec: (moreobj), line:51:6, endln:51:13
   |vpiImportTypespec:

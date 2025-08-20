@@ -231,7 +231,7 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/OneImport/dut.sv:11:1: Compile module "work@dut".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                              18
+Constant                                              26
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              2
@@ -239,16 +239,16 @@ EnumTypespec                                           1
 ImportTypespec                                         4
 IntTypespec                                            1
 LogicNet                                               4
-LogicTypespec                                          3
+LogicTypespec                                          7
 Module                                                 2
 Operation                                              4
 Package                                                1
 ParamAssign                                            1
 Parameter                                              1
 Port                                                   2
-Range                                                  3
+Range                                                  7
 RefObj                                                 3
-RefTypespec                                            6
+RefTypespec                                           10
 TypedefTypespec                                        1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/OneImport/slpp_all/surelog.uhdm ...
@@ -423,6 +423,54 @@ Design: (unnamed)
       |STRING:OPCODE_LOAD
       |vpiConstType:8
   |vpiTypedef:
+  \_LogicTypespec: , line:14:9, endln:14:14
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneImport/dut.sv, line:11:1, endln:20:10
+    |vpiRange:
+    \_Range: , line:14:9, endln:14:14
+      |vpiParent:
+      \_LogicTypespec: , line:14:9, endln:14:14
+      |vpiLeftRange:
+      \_Constant: , line:14:10, endln:14:11
+        |vpiParent:
+        \_Range: , line:14:9, endln:14:14
+        |vpiDecompile:5
+        |vpiSize:64
+        |UINT:5
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:14:12, endln:14:13
+        |vpiParent:
+        \_Range: , line:14:9, endln:14:14
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_LogicTypespec: , line:15:10, endln:15:15
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneImport/dut.sv, line:11:1, endln:20:10
+    |vpiRange:
+    \_Range: , line:15:10, endln:15:15
+      |vpiParent:
+      \_LogicTypespec: , line:15:10, endln:15:15
+      |vpiLeftRange:
+      \_Constant: , line:15:11, endln:15:12
+        |vpiParent:
+        \_Range: , line:15:10, endln:15:15
+        |vpiDecompile:2
+        |vpiSize:64
+        |UINT:2
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:15:13, endln:15:14
+        |vpiParent:
+        \_Range: , line:15:10, endln:15:15
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
   \_LogicTypespec: , line:16:3, endln:16:13
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneImport/dut.sv, line:11:1, endln:20:10
@@ -470,6 +518,54 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_LogicTypespec: , line:14:9, endln:14:14
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneImport/dut.sv, line:11:1, endln:20:10
+    |vpiRange:
+    \_Range: , line:14:9, endln:14:14
+      |vpiParent:
+      \_LogicTypespec: , line:14:9, endln:14:14
+      |vpiLeftRange:
+      \_Constant: , line:14:10, endln:14:11
+        |vpiParent:
+        \_Range: , line:14:9, endln:14:14
+        |vpiDecompile:5
+        |vpiSize:64
+        |UINT:5
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:14:12, endln:14:13
+        |vpiParent:
+        \_Range: , line:14:9, endln:14:14
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_LogicTypespec: , line:15:10, endln:15:15
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneImport/dut.sv, line:11:1, endln:20:10
+    |vpiRange:
+    \_Range: , line:15:10, endln:15:15
+      |vpiParent:
+      \_LogicTypespec: , line:15:10, endln:15:15
+      |vpiLeftRange:
+      \_Constant: , line:15:11, endln:15:12
+        |vpiParent:
+        \_Range: , line:15:10, endln:15:15
+        |vpiDecompile:2
+        |vpiSize:64
+        |UINT:2
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:15:13, endln:15:14
+        |vpiParent:
+        \_Range: , line:15:10, endln:15:15
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
   |vpiImportTypespec:
   \_ImportTypespec: (my_pkg), line:12:10, endln:12:19
   |vpiImportTypespec:
@@ -479,16 +575,34 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_ImportTypespec: (my_pkg), line:13:28, endln:13:47
   |vpiImportTypespec:
+  \_LogicTypespec: , line:14:9, endln:14:14
+  |vpiImportTypespec:
   \_LogicNet: (work@dut.a), line:11:13, endln:11:14
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneImport/dut.sv, line:11:1, endln:20:10
+    |vpiTypespec:
+    \_RefTypespec: (work@dut.a), line:14:9, endln:14:14
+      |vpiParent:
+      \_LogicNet: (work@dut.a), line:11:13, endln:11:14
+      |vpiFullName:work@dut.a
+      |vpiActual:
+      \_LogicTypespec: , line:14:9, endln:14:14
     |vpiName:a
     |vpiFullName:work@dut.a
     |vpiNetType:1
   |vpiImportTypespec:
+  \_LogicTypespec: , line:15:10, endln:15:15
+  |vpiImportTypespec:
   \_LogicNet: (work@dut.b), line:11:16, endln:11:17
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneImport/dut.sv, line:11:1, endln:20:10
+    |vpiTypespec:
+    \_RefTypespec: (work@dut.b), line:15:10, endln:15:15
+      |vpiParent:
+      \_LogicNet: (work@dut.b), line:11:16, endln:11:17
+      |vpiFullName:work@dut.b
+      |vpiActual:
+      \_LogicTypespec: , line:15:10, endln:15:15
     |vpiName:b
     |vpiFullName:work@dut.b
     |vpiNetType:48
@@ -525,6 +639,10 @@ Design: (unnamed)
     |vpiFullName:work@dut.b
     |vpiNetType:48
   |vpiImportTypespec:
+  \_LogicTypespec: , line:14:9, endln:14:14
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:15:10, endln:15:15
+  |vpiImportTypespec:
   \_LogicNet: (work@dut.OPCODE_LOAD), line:19:23, endln:19:34
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneImport/dut.sv, line:11:1, endln:20:10
@@ -548,12 +666,26 @@ Design: (unnamed)
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneImport/dut.sv, line:11:1, endln:20:10
     |vpiName:a
     |vpiDirection:1
+    |vpiTypespec:
+    \_RefTypespec: (work@dut.a), line:14:9, endln:14:14
+      |vpiParent:
+      \_Port: (a), line:11:13, endln:11:14
+      |vpiFullName:work@dut.a
+      |vpiActual:
+      \_LogicTypespec: , line:14:9, endln:14:14
   |vpiPort:
   \_Port: (b), line:11:16, endln:11:17
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/OneImport/dut.sv, line:11:1, endln:20:10
     |vpiName:b
     |vpiDirection:2
+    |vpiTypespec:
+    \_RefTypespec: (work@dut.b), line:15:10, endln:15:15
+      |vpiParent:
+      \_Port: (b), line:11:16, endln:11:17
+      |vpiFullName:work@dut.b
+      |vpiActual:
+      \_LogicTypespec: , line:15:10, endln:15:15
   |vpiContAssign:
   \_ContAssign: , line:18:10, endln:19:35
     |vpiParent:

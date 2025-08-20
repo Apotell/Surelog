@@ -172,17 +172,18 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/SignedBinConst/dut.sv:8:1: Compile module "work@top2".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                              10
+Constant                                              14
 Design                                                 1
-IntTypespec                                            2
+IntTypespec                                            4
 IntVar                                                 1
 LogicNet                                               2
 LogicTypespec                                          2
 Module                                                 3
+PackedArrayTypespec                                    2
 ParamAssign                                            3
 Parameter                                              3
-Range                                                  2
-RefTypespec                                            4
+Range                                                  4
+RefTypespec                                            8
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SignedBinConst/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -199,6 +200,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top1 (work@top1), file:${SURELOG_DIR}/tests/SignedBinConst/dut.sv, line:1:1, endln:5:10
     |BIN:1
+    |vpiTypespec:
+    \_RefTypespec: (work@top1.p1), line:2:13, endln:2:18
+      |vpiParent:
+      \_Parameter: (work@top1.p1), line:2:19, endln:2:30
+      |vpiFullName:work@top1.p1
+      |vpiActual:
+      \_PackedArrayTypespec: , line:2:13, endln:2:18
     |vpiName:p1
     |vpiFullName:work@top1.p1
   |vpiParameter:
@@ -206,6 +214,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top1 (work@top1), file:${SURELOG_DIR}/tests/SignedBinConst/dut.sv, line:1:1, endln:5:10
     |BIN:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top1.p2), line:3:13, endln:3:18
+      |vpiParent:
+      \_Parameter: (work@top1.p2), line:3:19, endln:3:31
+      |vpiFullName:work@top1.p2
+      |vpiActual:
+      \_PackedArrayTypespec: , line:3:13, endln:3:18
     |vpiName:p2
     |vpiFullName:work@top1.p2
   |vpiParameter:
@@ -266,10 +281,76 @@ Design: (unnamed)
     |vpiLhs:
     \_Parameter: (work@top1.p3), line:4:17, endln:4:29
   |vpiTypedef:
+  \_PackedArrayTypespec: , line:2:13, endln:2:18
+    |vpiParent:
+    \_Module: work@top1 (work@top1), file:${SURELOG_DIR}/tests/SignedBinConst/dut.sv, line:1:1, endln:5:10
+    |vpiRange:
+    \_Range: , line:2:13, endln:2:18
+      |vpiParent:
+      \_PackedArrayTypespec: , line:2:13, endln:2:18
+      |vpiLeftRange:
+      \_Constant: , line:2:14, endln:2:15
+        |vpiParent:
+        \_Range: , line:2:13, endln:2:18
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:2:16, endln:2:17
+        |vpiParent:
+        \_Range: , line:2:13, endln:2:18
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@top1), line:2:13, endln:2:18
+      |vpiParent:
+      \_PackedArrayTypespec: , line:2:13, endln:2:18
+      |vpiFullName:work@top1
+      |vpiActual:
+      \_IntTypespec: , line:2:13, endln:2:18
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:3:13, endln:3:18
+    |vpiParent:
+    \_Module: work@top1 (work@top1), file:${SURELOG_DIR}/tests/SignedBinConst/dut.sv, line:1:1, endln:5:10
+    |vpiRange:
+    \_Range: , line:3:13, endln:3:18
+      |vpiParent:
+      \_PackedArrayTypespec: , line:3:13, endln:3:18
+      |vpiLeftRange:
+      \_Constant: , line:3:14, endln:3:15
+        |vpiParent:
+        \_Range: , line:3:13, endln:3:18
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:3:16, endln:3:17
+        |vpiParent:
+        \_Range: , line:3:13, endln:3:18
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@top1), line:3:13, endln:3:18
+      |vpiParent:
+      \_PackedArrayTypespec: , line:3:13, endln:3:18
+      |vpiFullName:work@top1
+      |vpiActual:
+      \_IntTypespec: , line:3:13, endln:3:18
+  |vpiTypedef:
   \_IntTypespec: , line:4:13, endln:4:16
     |vpiParent:
     \_Module: work@top1 (work@top1), file:${SURELOG_DIR}/tests/SignedBinConst/dut.sv, line:1:1, endln:5:10
     |vpiSigned:1
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:2:13, endln:2:18
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:3:13, endln:3:18
   |vpiImportTypespec:
   \_IntTypespec: , line:4:13, endln:4:16
   |vpiDefName:work@top1
@@ -396,6 +477,9 @@ Design: (unnamed)
   \_LogicNet: (work@top2.p1), line:9:13, endln:9:15
   |vpiNet:
   \_LogicNet: (work@top2.p2), line:10:13, endln:10:15
+\_weaklyReferenced:
+\_IntTypespec: , line:2:13, endln:2:18
+\_IntTypespec: , line:3:13, endln:3:18
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

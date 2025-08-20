@@ -186,7 +186,7 @@ AST_DEBUG_END
 Assignment                                             2
 Begin                                                  1
 BitSelect                                              1
-Constant                                              16
+Constant                                              14
 ContAssign                                             1
 Design                                                 1
 FuncCall                                               1
@@ -198,12 +198,11 @@ LogicNet                                               1
 LogicTypespec                                          2
 Module                                                 1
 Operation                                              1
-PackedArrayTypespec                                    1
 PartSelect                                             2
 Port                                                   1
-Range                                                  4
+Range                                                  3
 RefObj                                                 1
-RefTypespec                                            8
+RefTypespec                                            6
 ReturnStmt                                             1
 TypedefTypespec                                        1
 VarSelect                                              2
@@ -389,7 +388,7 @@ Design: (unnamed)
       \_Function: (work@top.iota), line:6:4, endln:10:22
       |vpiFullName:work@top.iota
       |vpiActual:
-      \_PackedArrayTypespec: , line:6:29, endln:6:34
+      \_LogicTypespec: , line:6:23, endln:6:34
     |vpiIODecl:
     \_IODecl: (state), line:6:46, endln:6:51
       |vpiParent:
@@ -463,37 +462,6 @@ Design: (unnamed)
       |vpiActual:
       \_LogicTypespec: , line:2:12, endln:2:28
   |vpiTypedef:
-  \_PackedArrayTypespec: , line:6:29, endln:6:34
-    |vpiParent:
-    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectPartSelectInFunction/dut.sv, line:1:1, endln:12:10
-    |vpiRange:
-    \_Range: , line:6:29, endln:6:34
-      |vpiParent:
-      \_PackedArrayTypespec: , line:6:29, endln:6:34
-      |vpiLeftRange:
-      \_Constant: , line:6:30, endln:6:31
-        |vpiParent:
-        \_Range: , line:6:29, endln:6:34
-        |vpiDecompile:1
-        |vpiSize:64
-        |UINT:1
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:6:32, endln:6:33
-        |vpiParent:
-        \_Range: , line:6:29, endln:6:34
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-    |vpiElemTypespec:
-    \_RefTypespec: (work@top.iota), line:6:23, endln:6:34
-      |vpiParent:
-      \_LogicTypespec: , line:6:23, endln:6:34
-      |vpiFullName:work@top.iota
-      |vpiActual:
-      \_LogicTypespec: , line:6:23, endln:6:34
-  |vpiTypedef:
   \_IntTypespec: , line:1:19, endln:1:22
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/BitSelectPartSelectInFunction/dut.sv, line:1:1, endln:12:10
@@ -509,8 +477,6 @@ Design: (unnamed)
   \_LogicTypespec: , line:2:12, endln:2:28
   |vpiImportTypespec:
   \_TypedefTypespec: (box_t), line:2:29, endln:2:34
-  |vpiImportTypespec:
-  \_PackedArrayTypespec: , line:6:29, endln:6:34
   |vpiImportTypespec:
   \_LogicNet: (work@top.result), line:7:13, endln:7:19
     |vpiParent:

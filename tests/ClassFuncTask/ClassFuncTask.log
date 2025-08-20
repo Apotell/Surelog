@@ -212,6 +212,16 @@ ShortIntTypespec                                       1
 Task                                                   1
 TypeParameter                                          3
 === UHDM Object Stats End ===
+[ERR:UH0734] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:15: Failed to bind object: "id: 15, name: name".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:15: Illegal implicit net "id:15, name: name".
+[ERR:UH0734] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:21: Failed to bind object: "id: 16, name: parent".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:21: Illegal implicit net "id:16, name: parent".
+[ERR:UH0734] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:29: Failed to bind object: "id: 17, name: UVM_PORT".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:29: Illegal implicit net "id:17, name: UVM_PORT".
+[ERR:UH0734] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:39: Failed to bind object: "id: 18, name: min_size".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:39: Illegal implicit net "id:18, name: min_size".
+[ERR:UH0734] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:49: Failed to bind object: "id: 19, name: max_size".
+[ERR:EL0535] ${SURELOG_DIR}/tests/ClassFuncTask/dut.sv:16:49: Illegal implicit net "id:19, name: max_size".
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClassFuncTask/slpp_unit/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
@@ -410,6 +420,76 @@ Design: (unnamed)
         |vpiActual:
         \_IntTypespec: , line:12:18, endln:12:21
     |vpiInternalScope:
+    \_Function: (pack::C::new), line:15:3, endln:17:14
+      |vpiParent:
+      \_ClassDefn: (pack::C), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:12:1, endln:25:9
+      |vpiName:new
+      |vpiFullName:pack::C::new
+      |vpiTypedef:
+      \_IntTypespec: , line:15:17, endln:15:20
+        |vpiParent:
+        \_Function: (pack::C::new), line:15:3, endln:17:14
+        |vpiSigned:1
+      |vpiImportTypespec:
+      \_IntTypespec: , line:15:17, endln:15:20
+      |vpiMethod:1
+      |vpiIODecl:
+      \_IODecl: (bound), line:15:21, endln:15:26
+        |vpiParent:
+        \_Function: (pack::C::new), line:15:3, endln:17:14
+        |vpiDirection:1
+        |vpiName:bound
+        |vpiExpr:
+        \_Constant: , line:15:29, endln:15:30
+          |vpiParent:
+          \_IODecl: (bound), line:15:21, endln:15:26
+          |vpiDecompile:0
+          |vpiSize:64
+          |UINT:0
+          |vpiConstType:9
+        |vpiTypedef:
+        \_RefTypespec: (pack::C::new::bound), line:15:17, endln:15:20
+          |vpiParent:
+          \_IODecl: (bound), line:15:21, endln:15:26
+          |vpiFullName:pack::C::new::bound
+          |vpiActual:
+          \_IntTypespec: , line:15:17, endln:15:20
+      |vpiStmt:
+      \_MethodFuncCall: (super.new), line:16:15, endln:16:57
+        |vpiParent:
+        \_Function: (pack::C::new), line:15:3, endln:17:14
+        |vpiArgument:
+        \_RefObj: (pack::C::new::name), line:16:15, endln:16:19
+          |vpiParent:
+          \_MethodFuncCall: (super.new), line:16:15, endln:16:57
+          |vpiName:name
+          |vpiFullName:pack::C::new::name
+        |vpiArgument:
+        \_RefObj: (pack::C::new::parent), line:16:21, endln:16:27
+          |vpiParent:
+          \_MethodFuncCall: (super.new), line:16:15, endln:16:57
+          |vpiName:parent
+          |vpiFullName:pack::C::new::parent
+        |vpiArgument:
+        \_RefObj: (pack::C::new::UVM_PORT), line:16:29, endln:16:37
+          |vpiParent:
+          \_MethodFuncCall: (super.new), line:16:15, endln:16:57
+          |vpiName:UVM_PORT
+          |vpiFullName:pack::C::new::UVM_PORT
+        |vpiArgument:
+        \_RefObj: (pack::C::new::min_size), line:16:39, endln:16:47
+          |vpiParent:
+          \_MethodFuncCall: (super.new), line:16:15, endln:16:57
+          |vpiName:min_size
+          |vpiFullName:pack::C::new::min_size
+        |vpiArgument:
+        \_RefObj: (pack::C::new::max_size), line:16:49, endln:16:57
+          |vpiParent:
+          \_MethodFuncCall: (super.new), line:16:15, endln:16:57
+          |vpiName:max_size
+          |vpiFullName:pack::C::new::max_size
+        |vpiName:super.new
+    |vpiInternalScope:
     \_Task: (pack::C::set), line:19:3, endln:21:10
       |vpiParent:
       \_ClassDefn: (pack::C), file:${SURELOG_DIR}/tests/ClassFuncTask/dut.sv, line:12:1, endln:25:9
@@ -510,6 +590,8 @@ Design: (unnamed)
     |vpiImportTypespec:
     \_TypeParameter: (pack::C::T), line:12:16, endln:12:17
     |vpiImportTypespec:
+    \_Function: (pack::C::new), line:15:3, endln:17:14
+    |vpiImportTypespec:
     \_Task: (pack::C::set), line:19:3, endln:21:10
     |vpiImportTypespec:
     \_Function: (pack::C::get), line:22:3, endln:24:14
@@ -517,6 +599,8 @@ Design: (unnamed)
     \_IntTypespec: , line:13:3, endln:13:6
     |vpiImportTypespec:
     \_IntVar: (pack::C::x), line:13:7, endln:13:8
+    |vpiMethod:
+    \_Function: (pack::C::new), line:15:3, endln:17:14
     |vpiMethod:
     \_Task: (pack::C::set), line:19:3, endln:21:10
     |vpiMethod:
@@ -537,6 +621,6 @@ Design: (unnamed)
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0
-[  ERROR] : 0
+[  ERROR] : 10
 [WARNING] : 1
 [   NOTE] : 0

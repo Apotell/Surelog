@@ -129,21 +129,23 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/SimplifyHierPath/dut.sv:7:1: Compile module "work@module_scope_top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                               9
+Constant                                              11
 ContAssign                                             1
 Design                                                 1
 HierPath                                               2
+IntTypespec                                            1
 LogicNet                                               2
 LogicTypespec                                          4
 Module                                                 2
 ModuleTypespec                                         1
+PackedArrayTypespec                                    1
 ParamAssign                                            1
 Parameter                                              1
 Port                                                   3
-Range                                                  4
+Range                                                  5
 RefModule                                              1
 RefObj                                                 5
-RefTypespec                                            4
+RefTypespec                                            6
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/SimplifyHierPath/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -160,6 +162,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@module_scope_Example (work@module_scope_Example), file:${SURELOG_DIR}/tests/SimplifyHierPath/dut.sv, line:1:1, endln:5:10
     |UINT:10
+    |vpiTypespec:
+    \_RefTypespec: (work@module_scope_Example.v1), line:2:14, endln:2:20
+      |vpiParent:
+      \_Parameter: (work@module_scope_Example.v1), line:2:21, endln:2:28
+      |vpiFullName:work@module_scope_Example.v1
+      |vpiActual:
+      \_PackedArrayTypespec: , line:2:14, endln:2:20
     |vpiName:v1
     |vpiFullName:work@module_scope_Example.v1
   |vpiParamAssign:
@@ -177,6 +186,37 @@ Design: (unnamed)
     |vpiLhs:
     \_Parameter: (work@module_scope_Example.v1), line:2:21, endln:2:28
   |vpiTypedef:
+  \_PackedArrayTypespec: , line:2:14, endln:2:20
+    |vpiParent:
+    \_Module: work@module_scope_Example (work@module_scope_Example), file:${SURELOG_DIR}/tests/SimplifyHierPath/dut.sv, line:1:1, endln:5:10
+    |vpiRange:
+    \_Range: , line:2:14, endln:2:20
+      |vpiParent:
+      \_PackedArrayTypespec: , line:2:14, endln:2:20
+      |vpiLeftRange:
+      \_Constant: , line:2:15, endln:2:17
+        |vpiParent:
+        \_Range: , line:2:14, endln:2:20
+        |vpiDecompile:31
+        |vpiSize:64
+        |UINT:31
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:2:18, endln:2:19
+        |vpiParent:
+        \_Range: , line:2:14, endln:2:20
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@module_scope_Example), line:2:14, endln:2:20
+      |vpiParent:
+      \_PackedArrayTypespec: , line:2:14, endln:2:20
+      |vpiFullName:work@module_scope_Example
+      |vpiActual:
+      \_IntTypespec: , line:2:14, endln:2:20
+  |vpiTypedef:
   \_LogicTypespec: , line:3:11, endln:3:22
     |vpiParent:
     \_Module: work@module_scope_Example (work@module_scope_Example), file:${SURELOG_DIR}/tests/SimplifyHierPath/dut.sv, line:1:1, endln:5:10
@@ -224,6 +264,8 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:2:14, endln:2:20
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:11, endln:3:22
   |vpiImportTypespec:
@@ -416,6 +458,8 @@ Design: (unnamed)
         |vpiFullName:work@module_scope_top.a.a1.a1
         |vpiActual:
         \_LogicNet: (work@module_scope_top.a1), line:8:23, endln:8:25
+\_weaklyReferenced:
+\_IntTypespec: , line:2:14, endln:2:20
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

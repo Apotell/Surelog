@@ -505,7 +505,7 @@ Begin                                                  3
 BitSelect                                              2
 ClassDefn                                              8
 ClassTypespec                                          1
-Constant                                              91
+Constant                                              89
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              5
@@ -522,13 +522,12 @@ LogicVar                                               1
 Module                                                 1
 Operation                                             15
 Package                                                2
-PackedArrayTypespec                                    1
 ParamAssign                                            2
 Parameter                                              2
 PartSelect                                             1
-Range                                                 10
+Range                                                  9
 RefObj                                                15
-RefTypespec                                           24
+RefTypespec                                           22
 ReturnStmt                                             1
 Task                                                   9
 TypedefTypespec                                        1
@@ -580,6 +579,41 @@ Design: (unnamed)
     \_Package: (builtin)
     |vpiName:mailbox
     |vpiFullName:builtin::mailbox
+    |vpiInternalScope:
+    \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
+      |vpiParent:
+      \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/PackageFuncCall/builtin.sv, line:1:3, endln:27:11
+      |vpiName:new
+      |vpiFullName:builtin::mailbox::new
+      |vpiTypedef:
+      \_IntTypespec: , line:3:19, endln:3:22
+        |vpiParent:
+        \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
+        |vpiSigned:1
+      |vpiImportTypespec:
+      \_IntTypespec: , line:3:19, endln:3:22
+      |vpiMethod:1
+      |vpiIODecl:
+      \_IODecl: (bound), line:3:23, endln:3:28
+        |vpiParent:
+        \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
+        |vpiDirection:1
+        |vpiName:bound
+        |vpiExpr:
+        \_Constant: , line:3:31, endln:3:32
+          |vpiParent:
+          \_IODecl: (bound), line:3:23, endln:3:28
+          |vpiDecompile:0
+          |vpiSize:64
+          |UINT:0
+          |vpiConstType:9
+        |vpiTypedef:
+        \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
+          |vpiParent:
+          \_IODecl: (bound), line:3:23, endln:3:28
+          |vpiFullName:builtin::mailbox::new::bound
+          |vpiActual:
+          \_IntTypespec: , line:3:19, endln:3:22
     |vpiInternalScope:
     \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
       |vpiParent:
@@ -728,6 +762,8 @@ Design: (unnamed)
         |vpiDirection:6
         |vpiName:message
     |vpiImportTypespec:
+    \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
+    |vpiImportTypespec:
     \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
     |vpiImportTypespec:
     \_Task: (builtin::mailbox::put), line:9:5, endln:10:12
@@ -741,6 +777,8 @@ Design: (unnamed)
     \_Task: (builtin::mailbox::peek), line:21:5, endln:22:12
     |vpiImportTypespec:
     \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
+    |vpiMethod:
+    \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
     |vpiMethod:
     \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
     |vpiMethod:
@@ -925,6 +963,41 @@ Design: (unnamed)
     |vpiName:semaphore
     |vpiFullName:builtin::semaphore
     |vpiInternalScope:
+    \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
+      |vpiParent:
+      \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/PackageFuncCall/builtin.sv, line:55:3, endln:69:11
+      |vpiName:new
+      |vpiFullName:builtin::semaphore::new
+      |vpiTypedef:
+      \_IntTypespec: , line:57:18, endln:57:21
+        |vpiParent:
+        \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
+        |vpiSigned:1
+      |vpiImportTypespec:
+      \_IntTypespec: , line:57:18, endln:57:21
+      |vpiMethod:1
+      |vpiIODecl:
+      \_IODecl: (keyCount), line:57:22, endln:57:30
+        |vpiParent:
+        \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
+        |vpiDirection:1
+        |vpiName:keyCount
+        |vpiExpr:
+        \_Constant: , line:57:33, endln:57:34
+          |vpiParent:
+          \_IODecl: (keyCount), line:57:22, endln:57:30
+          |vpiDecompile:0
+          |vpiSize:64
+          |UINT:0
+          |vpiConstType:9
+        |vpiTypedef:
+        \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
+          |vpiParent:
+          \_IODecl: (keyCount), line:57:22, endln:57:30
+          |vpiFullName:builtin::semaphore::new::keyCount
+          |vpiActual:
+          \_IntTypespec: , line:57:18, endln:57:21
+    |vpiInternalScope:
     \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
       |vpiParent:
       \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/PackageFuncCall/builtin.sv, line:55:3, endln:69:11
@@ -1047,11 +1120,15 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: , line:66:26, endln:66:29
     |vpiImportTypespec:
+    \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
+    |vpiImportTypespec:
     \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
     |vpiImportTypespec:
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
     |vpiImportTypespec:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+    |vpiMethod:
+    \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
     |vpiMethod:
     \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
     |vpiMethod:
@@ -1652,7 +1729,7 @@ Design: (unnamed)
       \_Function: (prim_cipher_pkg::sbox4_64bit), line:8:3, endln:15:28
       |vpiFullName:prim_cipher_pkg::sbox4_64bit
       |vpiActual:
-      \_PackedArrayTypespec: , line:8:28, endln:8:34
+      \_LogicTypespec: , line:8:22, endln:8:34
     |vpiIODecl:
     \_IODecl: (state_in), line:8:60, endln:8:68
       |vpiParent:
@@ -1728,37 +1805,6 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
-  \_PackedArrayTypespec: , line:8:28, endln:8:34
-    |vpiParent:
-    \_Package: prim_cipher_pkg (prim_cipher_pkg), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:1:1, endln:23:29
-    |vpiRange:
-    \_Range: , line:8:28, endln:8:34
-      |vpiParent:
-      \_PackedArrayTypespec: , line:8:28, endln:8:34
-      |vpiLeftRange:
-      \_Constant: , line:8:29, endln:8:31
-        |vpiParent:
-        \_Range: , line:8:28, endln:8:34
-        |vpiDecompile:63
-        |vpiSize:64
-        |UINT:63
-        |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:8:32, endln:8:33
-        |vpiParent:
-        \_Range: , line:8:28, endln:8:34
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-    |vpiElemTypespec:
-    \_RefTypespec: (prim_cipher_pkg::sbox4_64bit), line:8:22, endln:8:34
-      |vpiParent:
-      \_LogicTypespec: , line:8:22, endln:8:34
-      |vpiFullName:prim_cipher_pkg::sbox4_64bit
-      |vpiActual:
-      \_LogicTypespec: , line:8:22, endln:8:34
-  |vpiTypedef:
   \_LogicTypespec: , line:18:13, endln:18:31
     |vpiParent:
     \_Package: prim_cipher_pkg (prim_cipher_pkg), file:${SURELOG_DIR}/tests/PackageFuncCall/dut.sv, line:1:1, endln:23:29
@@ -1806,8 +1852,6 @@ Design: (unnamed)
   \_Function: (prim_cipher_pkg::sbox4_64bit), line:8:3, endln:15:28
   |vpiImportTypespec:
   \_LogicTypespec: , line:3:13, endln:3:30
-  |vpiImportTypespec:
-  \_PackedArrayTypespec: , line:8:28, endln:8:34
   |vpiImportTypespec:
   \_LogicTypespec: , line:18:13, endln:18:31
   |vpiDefName:prim_cipher_pkg

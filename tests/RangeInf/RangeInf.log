@@ -206,7 +206,7 @@ AST_DEBUG_END
 BitSelect                                              1
 ClassDefn                                              8
 ClassTypespec                                          1
-Constant                                              14
+Constant                                              22
 ContAssign                                             3
 Design                                                 1
 EnumConst                                              5
@@ -215,15 +215,15 @@ Function                                               9
 IODecl                                                11
 IntTypespec                                            9
 LogicNet                                               6
-LogicTypespec                                          6
+LogicTypespec                                         10
 Module                                                 1
 Operation                                              2
 Package                                                1
 PartSelect                                             1
 Port                                                   5
-Range                                                  3
+Range                                                  7
 RefObj                                                 6
-RefTypespec                                           18
+RefTypespec                                           22
 Task                                                   9
 TypedefTypespec                                        1
 === UHDM Object Stats End ===
@@ -273,6 +273,41 @@ Design: (unnamed)
     \_Package: (builtin)
     |vpiName:mailbox
     |vpiFullName:builtin::mailbox
+    |vpiInternalScope:
+    \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
+      |vpiParent:
+      \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/RangeInf/builtin.sv, line:1:3, endln:27:11
+      |vpiName:new
+      |vpiFullName:builtin::mailbox::new
+      |vpiTypedef:
+      \_IntTypespec: , line:3:19, endln:3:22
+        |vpiParent:
+        \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
+        |vpiSigned:1
+      |vpiImportTypespec:
+      \_IntTypespec: , line:3:19, endln:3:22
+      |vpiMethod:1
+      |vpiIODecl:
+      \_IODecl: (bound), line:3:23, endln:3:28
+        |vpiParent:
+        \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
+        |vpiDirection:1
+        |vpiName:bound
+        |vpiExpr:
+        \_Constant: , line:3:31, endln:3:32
+          |vpiParent:
+          \_IODecl: (bound), line:3:23, endln:3:28
+          |vpiDecompile:0
+          |vpiSize:64
+          |UINT:0
+          |vpiConstType:9
+        |vpiTypedef:
+        \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
+          |vpiParent:
+          \_IODecl: (bound), line:3:23, endln:3:28
+          |vpiFullName:builtin::mailbox::new::bound
+          |vpiActual:
+          \_IntTypespec: , line:3:19, endln:3:22
     |vpiInternalScope:
     \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
       |vpiParent:
@@ -421,6 +456,8 @@ Design: (unnamed)
         |vpiDirection:6
         |vpiName:message
     |vpiImportTypespec:
+    \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
+    |vpiImportTypespec:
     \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
     |vpiImportTypespec:
     \_Task: (builtin::mailbox::put), line:9:5, endln:10:12
@@ -434,6 +471,8 @@ Design: (unnamed)
     \_Task: (builtin::mailbox::peek), line:21:5, endln:22:12
     |vpiImportTypespec:
     \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
+    |vpiMethod:
+    \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
     |vpiMethod:
     \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
     |vpiMethod:
@@ -618,6 +657,41 @@ Design: (unnamed)
     |vpiName:semaphore
     |vpiFullName:builtin::semaphore
     |vpiInternalScope:
+    \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
+      |vpiParent:
+      \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/RangeInf/builtin.sv, line:55:3, endln:69:11
+      |vpiName:new
+      |vpiFullName:builtin::semaphore::new
+      |vpiTypedef:
+      \_IntTypespec: , line:57:18, endln:57:21
+        |vpiParent:
+        \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
+        |vpiSigned:1
+      |vpiImportTypespec:
+      \_IntTypespec: , line:57:18, endln:57:21
+      |vpiMethod:1
+      |vpiIODecl:
+      \_IODecl: (keyCount), line:57:22, endln:57:30
+        |vpiParent:
+        \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
+        |vpiDirection:1
+        |vpiName:keyCount
+        |vpiExpr:
+        \_Constant: , line:57:33, endln:57:34
+          |vpiParent:
+          \_IODecl: (keyCount), line:57:22, endln:57:30
+          |vpiDecompile:0
+          |vpiSize:64
+          |UINT:0
+          |vpiConstType:9
+        |vpiTypedef:
+        \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
+          |vpiParent:
+          \_IODecl: (keyCount), line:57:22, endln:57:30
+          |vpiFullName:builtin::semaphore::new::keyCount
+          |vpiActual:
+          \_IntTypespec: , line:57:18, endln:57:21
+    |vpiInternalScope:
     \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
       |vpiParent:
       \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/RangeInf/builtin.sv, line:55:3, endln:69:11
@@ -740,11 +814,15 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: , line:66:26, endln:66:29
     |vpiImportTypespec:
+    \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
+    |vpiImportTypespec:
     \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
     |vpiImportTypespec:
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
     |vpiImportTypespec:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+    |vpiMethod:
+    \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
     |vpiMethod:
     \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
     |vpiMethod:
@@ -788,6 +866,54 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@FullAdder
+  |vpiTypedef:
+  \_LogicTypespec: , line:2:10, endln:2:15
+    |vpiParent:
+    \_Module: work@FullAdder (work@FullAdder), file:${SURELOG_DIR}/tests/RangeInf/dut.sv, line:1:1, endln:10:10
+    |vpiRange:
+    \_Range: , line:2:10, endln:2:15
+      |vpiParent:
+      \_LogicTypespec: , line:2:10, endln:2:15
+      |vpiLeftRange:
+      \_Constant: , line:2:11, endln:2:12
+        |vpiParent:
+        \_Range: , line:2:10, endln:2:15
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:2:13, endln:2:14
+        |vpiParent:
+        \_Range: , line:2:10, endln:2:15
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_LogicTypespec: , line:2:10, endln:2:15
+    |vpiParent:
+    \_Module: work@FullAdder (work@FullAdder), file:${SURELOG_DIR}/tests/RangeInf/dut.sv, line:1:1, endln:10:10
+    |vpiRange:
+    \_Range: , line:2:10, endln:2:15
+      |vpiParent:
+      \_LogicTypespec: , line:2:10, endln:2:15
+      |vpiLeftRange:
+      \_Constant: , line:2:11, endln:2:12
+        |vpiParent:
+        \_Range: , line:2:10, endln:2:15
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:2:13, endln:2:14
+        |vpiParent:
+        \_Range: , line:2:10, endln:2:15
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
   |vpiTypedef:
   \_LogicTypespec: , line:4:11, endln:4:21
     |vpiParent:
@@ -841,6 +967,54 @@ Design: (unnamed)
         |UINT:0
         |vpiConstType:9
   |vpiTypedef:
+  \_LogicTypespec: , line:2:10, endln:2:15
+    |vpiParent:
+    \_Module: work@FullAdder (work@FullAdder), file:${SURELOG_DIR}/tests/RangeInf/dut.sv, line:1:1, endln:10:10
+    |vpiRange:
+    \_Range: , line:2:10, endln:2:15
+      |vpiParent:
+      \_LogicTypespec: , line:2:10, endln:2:15
+      |vpiLeftRange:
+      \_Constant: , line:2:11, endln:2:12
+        |vpiParent:
+        \_Range: , line:2:10, endln:2:15
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:2:13, endln:2:14
+        |vpiParent:
+        \_Range: , line:2:10, endln:2:15
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_LogicTypespec: , line:2:10, endln:2:15
+    |vpiParent:
+    \_Module: work@FullAdder (work@FullAdder), file:${SURELOG_DIR}/tests/RangeInf/dut.sv, line:1:1, endln:10:10
+    |vpiRange:
+    \_Range: , line:2:10, endln:2:15
+      |vpiParent:
+      \_LogicTypespec: , line:2:10, endln:2:15
+      |vpiLeftRange:
+      \_Constant: , line:2:11, endln:2:12
+        |vpiParent:
+        \_Range: , line:2:10, endln:2:15
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:2:13, endln:2:14
+        |vpiParent:
+        \_Range: , line:2:10, endln:2:15
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
   \_LogicTypespec: , line:4:11, endln:4:21
     |vpiParent:
     \_Module: work@FullAdder (work@FullAdder), file:${SURELOG_DIR}/tests/RangeInf/dut.sv, line:1:1, endln:10:10
@@ -869,15 +1043,33 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@FullAdder (work@FullAdder), file:${SURELOG_DIR}/tests/RangeInf/dut.sv, line:1:1, endln:10:10
   |vpiImportTypespec:
+  \_LogicTypespec: , line:2:10, endln:2:15
+  |vpiImportTypespec:
   \_LogicNet: (work@FullAdder.A), line:1:18, endln:1:19
     |vpiParent:
     \_Module: work@FullAdder (work@FullAdder), file:${SURELOG_DIR}/tests/RangeInf/dut.sv, line:1:1, endln:10:10
+    |vpiTypespec:
+    \_RefTypespec: (work@FullAdder.A), line:2:10, endln:2:15
+      |vpiParent:
+      \_LogicNet: (work@FullAdder.A), line:1:18, endln:1:19
+      |vpiFullName:work@FullAdder.A
+      |vpiActual:
+      \_LogicTypespec: , line:2:10, endln:2:15
     |vpiName:A
     |vpiFullName:work@FullAdder.A
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:2:10, endln:2:15
   |vpiImportTypespec:
   \_LogicNet: (work@FullAdder.B), line:1:20, endln:1:21
     |vpiParent:
     \_Module: work@FullAdder (work@FullAdder), file:${SURELOG_DIR}/tests/RangeInf/dut.sv, line:1:1, endln:10:10
+    |vpiTypespec:
+    \_RefTypespec: (work@FullAdder.B), line:2:10, endln:2:15
+      |vpiParent:
+      \_LogicNet: (work@FullAdder.B), line:1:20, endln:1:21
+      |vpiFullName:work@FullAdder.B
+      |vpiActual:
+      \_LogicTypespec: , line:2:10, endln:2:15
     |vpiName:B
     |vpiFullName:work@FullAdder.B
   |vpiImportTypespec:
@@ -935,6 +1127,10 @@ Design: (unnamed)
     |vpiFullName:work@FullAdder.temp
     |vpiNetType:1
   |vpiImportTypespec:
+  \_LogicTypespec: , line:2:10, endln:2:15
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:2:10, endln:2:15
+  |vpiImportTypespec:
   \_LogicTypespec: , line:4:11, endln:4:21
   |vpiImportTypespec:
   \_LogicTypespec: , line:5:11, endln:5:15
@@ -957,12 +1153,26 @@ Design: (unnamed)
     \_Module: work@FullAdder (work@FullAdder), file:${SURELOG_DIR}/tests/RangeInf/dut.sv, line:1:1, endln:10:10
     |vpiName:A
     |vpiDirection:1
+    |vpiTypespec:
+    \_RefTypespec: (work@FullAdder.A), line:2:10, endln:2:15
+      |vpiParent:
+      \_Port: (A), line:1:18, endln:1:19
+      |vpiFullName:work@FullAdder.A
+      |vpiActual:
+      \_LogicTypespec: , line:2:10, endln:2:15
   |vpiPort:
   \_Port: (B), line:1:20, endln:1:21
     |vpiParent:
     \_Module: work@FullAdder (work@FullAdder), file:${SURELOG_DIR}/tests/RangeInf/dut.sv, line:1:1, endln:10:10
     |vpiName:B
     |vpiDirection:1
+    |vpiTypespec:
+    \_RefTypespec: (work@FullAdder.B), line:2:10, endln:2:15
+      |vpiParent:
+      \_Port: (B), line:1:20, endln:1:21
+      |vpiFullName:work@FullAdder.B
+      |vpiActual:
+      \_LogicTypespec: , line:2:10, endln:2:15
   |vpiPort:
   \_Port: (Cin), line:1:22, endln:1:25
     |vpiParent:

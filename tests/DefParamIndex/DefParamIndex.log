@@ -279,19 +279,23 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Assignment                                             2
 Begin                                                  6
-Constant                                               7
+Constant                                               9
 Design                                                 1
 GenFor                                                 1
 GenIf                                                  3
 GenRegion                                              2
 GenVar                                                 1
+IntTypespec                                            1
 Module                                                 4
 ModuleTypespec                                         5
 Operation                                              5
+PackedArrayTypespec                                    1
 ParamAssign                                            1
 Parameter                                              1
+Range                                                  1
 RefModule                                              5
 RefObj                                                 6
+RefTypespec                                            2
 RefVar                                                 1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/DefParamIndex/slpp_all/surelog.uhdm ...
@@ -446,6 +450,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@hierdefparam_b (work@hierdefparam_b), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:22:1, endln:33:10
     |UINT:44
+    |vpiTypespec:
+    \_RefTypespec: (work@hierdefparam_b.addvalue), line:23:13, endln:23:18
+      |vpiParent:
+      \_Parameter: (work@hierdefparam_b.addvalue), line:23:19, endln:23:32
+      |vpiFullName:work@hierdefparam_b.addvalue
+      |vpiActual:
+      \_PackedArrayTypespec: , line:23:13, endln:23:18
     |vpiName:addvalue
     |vpiFullName:work@hierdefparam_b.addvalue
   |vpiParamAssign:
@@ -520,6 +531,39 @@ Design: (unnamed)
       \_Begin: (work@hierdefparam_b), line:30:23, endln:32:6
       |vpiName:bad
       |vpiDefName:work@BAD
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:23:13, endln:23:18
+    |vpiParent:
+    \_Module: work@hierdefparam_b (work@hierdefparam_b), file:${SURELOG_DIR}/tests/DefParamIndex/dut.sv, line:22:1, endln:33:10
+    |vpiRange:
+    \_Range: , line:23:13, endln:23:18
+      |vpiParent:
+      \_PackedArrayTypespec: , line:23:13, endln:23:18
+      |vpiLeftRange:
+      \_Constant: , line:23:14, endln:23:15
+        |vpiParent:
+        \_Range: , line:23:13, endln:23:18
+        |vpiDecompile:7
+        |vpiSize:64
+        |UINT:7
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:23:16, endln:23:17
+        |vpiParent:
+        \_Range: , line:23:13, endln:23:18
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@hierdefparam_b), line:23:13, endln:23:18
+      |vpiParent:
+      \_PackedArrayTypespec: , line:23:13, endln:23:18
+      |vpiFullName:work@hierdefparam_b
+      |vpiActual:
+      \_IntTypespec: , line:23:13, endln:23:18
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:23:13, endln:23:18
   |vpiDefName:work@hierdefparam_b
   |vpiGenStmt:
   \_GenIf: , line:24:3, endln:26:6
@@ -636,6 +680,8 @@ Design: (unnamed)
     |vpiStmt:
     \_Begin: (work@hierdefparam_top.foo), line:5:12, endln:7:6
   |vpiDefName:work@hierdefparam_top
+\_weaklyReferenced:
+\_IntTypespec: , line:23:13, endln:23:18
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

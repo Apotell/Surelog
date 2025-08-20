@@ -115,21 +115,21 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/TypedefPack/dut.sv:10:1: Compile module "work@prim_lc_sender".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                               6
+Constant                                              10
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              2
 EnumNet                                                1
 EnumTypespec                                           1
 LogicNet                                               1
-LogicTypespec                                          1
+LogicTypespec                                          3
 Module                                                 2
 Operation                                              1
 Package                                                1
 Port                                                   2
-Range                                                  1
+Range                                                  3
 RefObj                                                 2
-RefTypespec                                            5
+RefTypespec                                            7
 TypedefTypespec                                        2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/TypedefPack/slpp_all/surelog.uhdm ...
@@ -232,10 +232,67 @@ Design: (unnamed)
   |vpiParent:
   \_Design: (unnamed)
   |vpiName:work@prim_lc_sender
+  |vpiTypedef:
+  \_LogicTypespec: , line:11:10, endln:11:15
+    |vpiParent:
+    \_Module: work@prim_lc_sender (work@prim_lc_sender), file:${SURELOG_DIR}/tests/TypedefPack/dut.sv, line:10:1, endln:15:27
+    |vpiRange:
+    \_Range: , line:11:10, endln:11:15
+      |vpiParent:
+      \_LogicTypespec: , line:11:10, endln:11:15
+      |vpiLeftRange:
+      \_Constant: , line:11:11, endln:11:12
+        |vpiParent:
+        \_Range: , line:11:10, endln:11:15
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:11:13, endln:11:14
+        |vpiParent:
+        \_Range: , line:11:10, endln:11:15
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_LogicTypespec: , line:11:10, endln:11:15
+    |vpiParent:
+    \_Module: work@prim_lc_sender (work@prim_lc_sender), file:${SURELOG_DIR}/tests/TypedefPack/dut.sv, line:10:1, endln:15:27
+    |vpiRange:
+    \_Range: , line:11:10, endln:11:15
+      |vpiParent:
+      \_LogicTypespec: , line:11:10, endln:11:15
+      |vpiLeftRange:
+      \_Constant: , line:11:11, endln:11:12
+        |vpiParent:
+        \_Range: , line:11:10, endln:11:15
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:11:13, endln:11:14
+        |vpiParent:
+        \_Range: , line:11:10, endln:11:15
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:11:10, endln:11:15
   |vpiImportTypespec:
   \_LogicNet: (work@prim_lc_sender.lc_en_i), line:11:16, endln:11:23
     |vpiParent:
     \_Module: work@prim_lc_sender (work@prim_lc_sender), file:${SURELOG_DIR}/tests/TypedefPack/dut.sv, line:10:1, endln:15:27
+    |vpiTypespec:
+    \_RefTypespec: (work@prim_lc_sender.lc_en_i), line:11:10, endln:11:15
+      |vpiParent:
+      \_LogicNet: (work@prim_lc_sender.lc_en_i), line:11:16, endln:11:23
+      |vpiFullName:work@prim_lc_sender.lc_en_i
+      |vpiActual:
+      \_LogicTypespec: , line:11:10, endln:11:15
     |vpiName:lc_en_i
     |vpiFullName:work@prim_lc_sender.lc_en_i
   |vpiImportTypespec:
@@ -252,6 +309,8 @@ Design: (unnamed)
       \_TypedefTypespec: (lc_ctrl_pkg::lc_tx_t), line:7:19, endln:7:26
     |vpiName:lc_en_o
     |vpiFullName:work@prim_lc_sender.lc_en_o
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:11:10, endln:11:15
   |vpiDefName:work@prim_lc_sender
   |vpiNet:
   \_LogicNet: (work@prim_lc_sender.lc_en_i), line:11:16, endln:11:23
@@ -263,6 +322,13 @@ Design: (unnamed)
     \_Module: work@prim_lc_sender (work@prim_lc_sender), file:${SURELOG_DIR}/tests/TypedefPack/dut.sv, line:10:1, endln:15:27
     |vpiName:lc_en_i
     |vpiDirection:1
+    |vpiTypespec:
+    \_RefTypespec: (work@prim_lc_sender.lc_en_i), line:11:10, endln:11:15
+      |vpiParent:
+      \_Port: (lc_en_i), line:11:16, endln:11:23
+      |vpiFullName:work@prim_lc_sender.lc_en_i
+      |vpiActual:
+      \_LogicTypespec: , line:11:10, endln:11:15
   |vpiPort:
   \_Port: (lc_en_o), line:12:31, endln:12:38
     |vpiParent:

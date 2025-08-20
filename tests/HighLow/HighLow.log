@@ -286,17 +286,21 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Begin                                                  4
-Constant                                               5
+Constant                                               7
 ContAssign                                             1
 Design                                                 1
 GenIf                                                  4
+IntTypespec                                            1
 Module                                                 2
 ModuleTypespec                                         4
 Operation                                              4
+PackedArrayTypespec                                    1
 ParamAssign                                            5
 Parameter                                              5
+Range                                                  1
 RefModule                                              4
 RefObj                                                15
+RefTypespec                                            2
 SysFuncCall                                            5
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/HighLow/slpp_all/surelog.uhdm ...
@@ -320,6 +324,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:4:1, endln:26:10
     |UINT:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.a), line:6:13, endln:6:18
+      |vpiParent:
+      \_Parameter: (work@top.a), line:6:19, endln:6:25
+      |vpiFullName:work@top.a
+      |vpiActual:
+      \_PackedArrayTypespec: , line:6:13, endln:6:18
     |vpiName:a
     |vpiFullName:work@top.a
   |vpiParameter:
@@ -516,6 +527,39 @@ Design: (unnamed)
       |vpiDefName:work@GOOD
       |vpiActual:
       \_Module: work@GOOD (work@GOOD), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:1:1, endln:2:10
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:6:13, endln:6:18
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/HighLow/dut.sv, line:4:1, endln:26:10
+    |vpiRange:
+    \_Range: , line:6:13, endln:6:18
+      |vpiParent:
+      \_PackedArrayTypespec: , line:6:13, endln:6:18
+      |vpiLeftRange:
+      \_Constant: , line:6:14, endln:6:15
+        |vpiParent:
+        \_Range: , line:6:13, endln:6:18
+        |vpiDecompile:2
+        |vpiSize:64
+        |UINT:2
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:6:16, endln:6:17
+        |vpiParent:
+        \_Range: , line:6:13, endln:6:18
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@top), line:6:13, endln:6:18
+      |vpiParent:
+      \_PackedArrayTypespec: , line:6:13, endln:6:18
+      |vpiFullName:work@top
+      |vpiActual:
+      \_IntTypespec: , line:6:13, endln:6:18
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:6:13, endln:6:18
   |vpiImportTypespec:
   \_LogicNet: (work@top.ccc), line:12:10, endln:12:13
     |vpiParent:
@@ -659,6 +703,8 @@ Design: (unnamed)
         |vpiConstType:9
     |vpiStmt:
     \_Begin: (work@top), line:23:19, endln:25:6
+\_weaklyReferenced:
+\_IntTypespec: , line:6:13, endln:6:18
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

@@ -247,7 +247,7 @@ AST_DEBUG_END
 Begin                                                  1
 ClockingBlock                                          3
 ClockingIODecl                                         6
-Constant                                               5
+Constant                                              13
 ContAssign                                             1
 DelayControl                                           2
 Design                                                 1
@@ -255,14 +255,14 @@ EventControl                                           3
 HierPath                                               1
 Initial                                                1
 LogicNet                                               7
-LogicTypespec                                          3
+LogicTypespec                                          7
 Module                                                 1
 Operation                                              4
 PartSelect                                             1
 Port                                                   6
-Range                                                  1
+Range                                                  5
 RefObj                                                11
-RefTypespec                                            3
+RefTypespec                                            7
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ClockingSntx/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -501,9 +501,57 @@ Design: (unnamed)
       |vpiDirection:1
       |vpiName:enable
   |vpiTypedef:
+  \_LogicTypespec: , line:8:21, endln:8:27
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClockingSntx/dut.sv, line:1:1, endln:27:10
+    |vpiRange:
+    \_Range: , line:8:21, endln:8:27
+      |vpiParent:
+      \_LogicTypespec: , line:8:21, endln:8:27
+      |vpiLeftRange:
+      \_Constant: , line:8:22, endln:8:24
+        |vpiParent:
+        \_Range: , line:8:21, endln:8:27
+        |vpiDecompile:15
+        |vpiSize:64
+        |UINT:15
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:8:25, endln:8:26
+        |vpiParent:
+        \_Range: , line:8:21, endln:8:27
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
   \_LogicTypespec: , line:8:41, endln:8:46
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClockingSntx/dut.sv, line:1:1, endln:27:10
+  |vpiTypedef:
+  \_LogicTypespec: , line:9:21, endln:9:26
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClockingSntx/dut.sv, line:1:1, endln:27:10
+    |vpiRange:
+    \_Range: , line:9:21, endln:9:26
+      |vpiParent:
+      \_LogicTypespec: , line:9:21, endln:9:26
+      |vpiLeftRange:
+      \_Constant: , line:9:22, endln:9:23
+        |vpiParent:
+        \_Range: , line:9:21, endln:9:26
+        |vpiDecompile:8
+        |vpiSize:64
+        |UINT:8
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:9:24, endln:9:25
+        |vpiParent:
+        \_Range: , line:9:21, endln:9:26
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
   |vpiTypedef:
   \_LogicTypespec: , line:11:2, endln:11:11
     |vpiParent:
@@ -529,9 +577,57 @@ Design: (unnamed)
         |UINT:1
         |vpiConstType:9
   |vpiTypedef:
+  \_LogicTypespec: , line:8:21, endln:8:27
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClockingSntx/dut.sv, line:1:1, endln:27:10
+    |vpiRange:
+    \_Range: , line:8:21, endln:8:27
+      |vpiParent:
+      \_LogicTypespec: , line:8:21, endln:8:27
+      |vpiLeftRange:
+      \_Constant: , line:8:22, endln:8:24
+        |vpiParent:
+        \_Range: , line:8:21, endln:8:27
+        |vpiDecompile:15
+        |vpiSize:64
+        |UINT:15
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:8:25, endln:8:26
+        |vpiParent:
+        \_Range: , line:8:21, endln:8:27
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
   \_LogicTypespec: , line:8:41, endln:8:46
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClockingSntx/dut.sv, line:1:1, endln:27:10
+  |vpiTypedef:
+  \_LogicTypespec: , line:9:21, endln:9:26
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClockingSntx/dut.sv, line:1:1, endln:27:10
+    |vpiRange:
+    \_Range: , line:9:21, endln:9:26
+      |vpiParent:
+      \_LogicTypespec: , line:9:21, endln:9:26
+      |vpiLeftRange:
+      \_Constant: , line:9:22, endln:9:23
+        |vpiParent:
+        \_Range: , line:9:21, endln:9:26
+        |vpiDecompile:8
+        |vpiSize:64
+        |UINT:8
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:9:24, endln:9:25
+        |vpiParent:
+        \_Range: , line:9:21, endln:9:26
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
   |vpiImportTypespec:
   \_LogicNet: (work@top.phi1), line:8:9, endln:8:13
     |vpiParent:
@@ -539,9 +635,18 @@ Design: (unnamed)
     |vpiName:phi1
     |vpiFullName:work@top.phi1
   |vpiImportTypespec:
+  \_LogicTypespec: , line:8:21, endln:8:27
+  |vpiImportTypespec:
   \_LogicNet: (work@top.data), line:8:28, endln:8:32
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClockingSntx/dut.sv, line:1:1, endln:27:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.data), line:8:21, endln:8:27
+      |vpiParent:
+      \_LogicNet: (work@top.data), line:8:28, endln:8:32
+      |vpiFullName:work@top.data
+      |vpiActual:
+      \_LogicTypespec: , line:8:21, endln:8:27
     |vpiName:data
     |vpiFullName:work@top.data
   |vpiImportTypespec:
@@ -567,9 +672,18 @@ Design: (unnamed)
     |vpiName:phi2
     |vpiFullName:work@top.phi2
   |vpiImportTypespec:
+  \_LogicTypespec: , line:9:21, endln:9:26
+  |vpiImportTypespec:
   \_LogicNet: (work@top.cmd), line:9:27, endln:9:30
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClockingSntx/dut.sv, line:1:1, endln:27:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.cmd), line:9:21, endln:9:26
+      |vpiParent:
+      \_LogicNet: (work@top.cmd), line:9:27, endln:9:30
+      |vpiFullName:work@top.cmd
+      |vpiActual:
+      \_LogicTypespec: , line:9:21, endln:9:26
     |vpiName:cmd
     |vpiFullName:work@top.cmd
   |vpiImportTypespec:
@@ -595,7 +709,11 @@ Design: (unnamed)
     |vpiFullName:work@top.cmd_reg
     |vpiNetType:48
   |vpiImportTypespec:
+  \_LogicTypespec: , line:8:21, endln:8:27
+  |vpiImportTypespec:
   \_LogicTypespec: , line:8:41, endln:8:46
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:9:21, endln:9:26
   |vpiDefName:work@top
   |vpiNet:
   \_LogicNet: (work@top.phi1), line:8:9, endln:8:13
@@ -623,6 +741,13 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClockingSntx/dut.sv, line:1:1, endln:27:10
     |vpiName:data
     |vpiDirection:1
+    |vpiTypespec:
+    \_RefTypespec: (work@top.data), line:8:21, endln:8:27
+      |vpiParent:
+      \_Port: (data), line:8:28, endln:8:32
+      |vpiFullName:work@top.data
+      |vpiActual:
+      \_LogicTypespec: , line:8:21, endln:8:27
   |vpiPort:
   \_Port: (write), line:8:47, endln:8:52
     |vpiParent:
@@ -648,6 +773,13 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ClockingSntx/dut.sv, line:1:1, endln:27:10
     |vpiName:cmd
     |vpiDirection:3
+    |vpiTypespec:
+    \_RefTypespec: (work@top.cmd), line:9:21, endln:9:26
+      |vpiParent:
+      \_Port: (cmd), line:9:27, endln:9:30
+      |vpiFullName:work@top.cmd
+      |vpiActual:
+      \_LogicTypespec: , line:9:21, endln:9:26
   |vpiPort:
   \_Port: (enable), line:9:38, endln:9:44
     |vpiParent:

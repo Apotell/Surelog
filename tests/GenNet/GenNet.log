@@ -250,24 +250,24 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Assignment                                             2
 Begin                                                  3
-Constant                                               9
+Constant                                              13
 ContAssign                                             2
 Design                                                 1
 GenIf                                                  1
 GenIfElse                                              1
 IntTypespec                                            1
 LogicNet                                               3
-LogicTypespec                                          2
+LogicTypespec                                          4
 Module                                                 2
 ModuleTypespec                                         1
-Operation                                              6
+Operation                                              8
 ParamAssign                                            2
 Parameter                                              2
 Port                                                   1
-Range                                                  2
+Range                                                  4
 RefModule                                              1
-RefObj                                                 9
-RefTypespec                                            3
+RefObj                                                11
+RefTypespec                                            5
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/GenNet/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -557,14 +557,99 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@prim_subreg_arb (work@prim_subreg_arb), file:${SURELOG_DIR}/tests/GenNet/dut.sv, line:1:1, endln:15:10
     |vpiSigned:1
+  |vpiTypedef:
+  \_LogicTypespec: , line:5:9, endln:5:17
+    |vpiParent:
+    \_Module: work@prim_subreg_arb (work@prim_subreg_arb), file:${SURELOG_DIR}/tests/GenNet/dut.sv, line:1:1, endln:15:10
+    |vpiRange:
+    \_Range: , line:5:9, endln:5:17
+      |vpiParent:
+      \_LogicTypespec: , line:5:9, endln:5:17
+      |vpiLeftRange:
+      \_Operation: , line:5:10, endln:5:14
+        |vpiParent:
+        \_Range: , line:5:9, endln:5:17
+        |vpiOpType:11
+        |vpiOperand:
+        \_RefObj: (work@prim_subreg_arb.DW), line:5:10, endln:5:12
+          |vpiParent:
+          \_Operation: , line:5:10, endln:5:14
+          |vpiName:DW
+          |vpiFullName:work@prim_subreg_arb.DW
+          |vpiActual:
+          \_Parameter: (work@prim_subreg_arb.DW), line:2:17, endln:2:30
+        |vpiOperand:
+        \_Constant: , line:5:13, endln:5:14
+          |vpiParent:
+          \_Operation: , line:5:10, endln:5:14
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:5:15, endln:5:16
+        |vpiParent:
+        \_Range: , line:5:9, endln:5:17
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_LogicTypespec: , line:5:9, endln:5:17
+    |vpiParent:
+    \_Module: work@prim_subreg_arb (work@prim_subreg_arb), file:${SURELOG_DIR}/tests/GenNet/dut.sv, line:1:1, endln:15:10
+    |vpiRange:
+    \_Range: , line:5:9, endln:5:17
+      |vpiParent:
+      \_LogicTypespec: , line:5:9, endln:5:17
+      |vpiLeftRange:
+      \_Operation: , line:5:10, endln:5:14
+        |vpiParent:
+        \_Range: , line:5:9, endln:5:17
+        |vpiOpType:11
+        |vpiOperand:
+        \_RefObj: (work@prim_subreg_arb.DW), line:5:10, endln:5:12
+          |vpiParent:
+          \_Operation: , line:5:10, endln:5:14
+          |vpiName:DW
+          |vpiFullName:work@prim_subreg_arb.DW
+          |vpiActual:
+          \_Parameter: (work@prim_subreg_arb.DW), line:2:17, endln:2:30
+        |vpiOperand:
+        \_Constant: , line:5:13, endln:5:14
+          |vpiParent:
+          \_Operation: , line:5:10, endln:5:14
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:5:15, endln:5:16
+        |vpiParent:
+        \_Range: , line:5:9, endln:5:17
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
   |vpiImportTypespec:
   \_IntTypespec: , line:2:13, endln:2:16
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:5:9, endln:5:17
   |vpiImportTypespec:
   \_LogicNet: (work@prim_subreg_arb.q), line:5:18, endln:5:19
     |vpiParent:
     \_Module: work@prim_subreg_arb (work@prim_subreg_arb), file:${SURELOG_DIR}/tests/GenNet/dut.sv, line:1:1, endln:15:10
+    |vpiTypespec:
+    \_RefTypespec: (work@prim_subreg_arb.q), line:5:9, endln:5:17
+      |vpiParent:
+      \_LogicNet: (work@prim_subreg_arb.q), line:5:18, endln:5:19
+      |vpiFullName:work@prim_subreg_arb.q
+      |vpiActual:
+      \_LogicTypespec: , line:5:9, endln:5:17
     |vpiName:q
     |vpiFullName:work@prim_subreg_arb.q
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:5:9, endln:5:17
   |vpiDefName:work@prim_subreg_arb
   |vpiNet:
   \_LogicNet: (work@prim_subreg_arb.q), line:5:18, endln:5:19
@@ -574,6 +659,13 @@ Design: (unnamed)
     \_Module: work@prim_subreg_arb (work@prim_subreg_arb), file:${SURELOG_DIR}/tests/GenNet/dut.sv, line:1:1, endln:15:10
     |vpiName:q
     |vpiDirection:1
+    |vpiTypespec:
+    \_RefTypespec: (work@prim_subreg_arb.q), line:5:9, endln:5:17
+      |vpiParent:
+      \_Port: (q), line:5:18, endln:5:19
+      |vpiFullName:work@prim_subreg_arb.q
+      |vpiActual:
+      \_LogicTypespec: , line:5:9, endln:5:17
   |vpiGenStmt:
   \_GenIfElse: , line:8:3, endln:14:6
     |vpiParent:

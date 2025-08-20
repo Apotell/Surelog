@@ -160,21 +160,21 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/TypespecBits/dut.sv:2:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                               7
+Constant                                              11
 ContAssign                                             1
 Design                                                 1
 IndexedPartSelect                                      1
 IntTypespec                                            1
 LogicNet                                               2
-LogicTypespec                                          2
+LogicTypespec                                          4
 Module                                                 1
 Operation                                              2
 ParamAssign                                            1
 Parameter                                              1
 Port                                                   1
-Range                                                  3
+Range                                                  5
 RefObj                                                 5
-RefTypespec                                            3
+RefTypespec                                            5
 SysFuncCall                                            3
 TypedefTypespec                                        1
 === UHDM Object Stats End ===
@@ -279,6 +279,30 @@ Design: (unnamed)
       |vpiActual:
       \_LogicTypespec: , line:4:9, endln:4:30
   |vpiTypedef:
+  \_LogicTypespec: , line:2:42, endln:2:48
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TypespecBits/dut.sv, line:2:1, endln:9:10
+    |vpiRange:
+    \_Range: , line:2:42, endln:2:48
+      |vpiParent:
+      \_LogicTypespec: , line:2:42, endln:2:48
+      |vpiLeftRange:
+      \_Constant: , line:2:43, endln:2:45
+        |vpiParent:
+        \_Range: , line:2:42, endln:2:48
+        |vpiDecompile:31
+        |vpiSize:64
+        |UINT:31
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:2:46, endln:2:47
+        |vpiParent:
+        \_Range: , line:2:42, endln:2:48
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
   \_LogicTypespec: , line:6:1, endln:6:27
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TypespecBits/dut.sv, line:2:1, endln:9:10
@@ -320,6 +344,30 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiTypedef:
+  \_LogicTypespec: , line:2:42, endln:2:48
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TypespecBits/dut.sv, line:2:1, endln:9:10
+    |vpiRange:
+    \_Range: , line:2:42, endln:2:48
+      |vpiParent:
+      \_LogicTypespec: , line:2:42, endln:2:48
+      |vpiLeftRange:
+      \_Constant: , line:2:43, endln:2:45
+        |vpiParent:
+        \_Range: , line:2:42, endln:2:48
+        |vpiDecompile:31
+        |vpiSize:64
+        |UINT:31
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:2:46, endln:2:47
+        |vpiParent:
+        \_Range: , line:2:42, endln:2:48
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
   |vpiImportTypespec:
   \_IntTypespec: , line:2:24, endln:2:27
   |vpiImportTypespec:
@@ -327,9 +375,18 @@ Design: (unnamed)
   |vpiImportTypespec:
   \_TypedefTypespec: (sheet_t), line:4:31, endln:4:38
   |vpiImportTypespec:
+  \_LogicTypespec: , line:2:42, endln:2:48
+  |vpiImportTypespec:
   \_LogicNet: (work@top.rand_i), line:2:49, endln:2:55
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TypespecBits/dut.sv, line:2:1, endln:9:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.rand_i), line:2:42, endln:2:48
+      |vpiParent:
+      \_LogicNet: (work@top.rand_i), line:2:49, endln:2:55
+      |vpiFullName:work@top.rand_i
+      |vpiActual:
+      \_LogicTypespec: , line:2:42, endln:2:48
     |vpiName:rand_i
     |vpiFullName:work@top.rand_i
   |vpiImportTypespec:
@@ -348,6 +405,8 @@ Design: (unnamed)
     |vpiName:c0
     |vpiFullName:work@top.c0
     |vpiNetType:36
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:2:42, endln:2:48
   |vpiDefName:work@top
   |vpiNet:
   \_LogicNet: (work@top.rand_i), line:2:49, endln:2:55
@@ -359,6 +418,13 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/TypespecBits/dut.sv, line:2:1, endln:9:10
     |vpiName:rand_i
     |vpiDirection:1
+    |vpiTypespec:
+    \_RefTypespec: (work@top.rand_i), line:2:42, endln:2:48
+      |vpiParent:
+      \_Port: (rand_i), line:2:49, endln:2:55
+      |vpiFullName:work@top.rand_i
+      |vpiActual:
+      \_LogicTypespec: , line:2:42, endln:2:48
   |vpiContAssign:
   \_ContAssign: , line:7:8, endln:7:53
     |vpiParent:

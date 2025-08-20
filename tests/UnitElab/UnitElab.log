@@ -1071,7 +1071,7 @@ Begin                                                 18
 CaseItem                                               3
 ClassDefn                                              8
 ClassTypespec                                          1
-Constant                                              32
+Constant                                              44
 ContAssign                                             1
 Design                                                 1
 EnumConst                                              5
@@ -1087,7 +1087,7 @@ GenVar                                                 1
 IODecl                                                11
 IntTypespec                                            9
 LogicNet                                              16
-LogicTypespec                                          1
+LogicTypespec                                          7
 Module                                                 9
 ModuleArray                                            1
 ModuleTypespec                                         9
@@ -1097,10 +1097,10 @@ ParamAssign                                            5
 Parameter                                              5
 Port                                                  28
 PrimTerm                                               6
-Range                                                  3
+Range                                                  9
 RefModule                                              9
 RefObj                                                44
-RefTypespec                                           14
+RefTypespec                                           20
 RefVar                                                 4
 Task                                                   9
 TypedefTypespec                                        1
@@ -1152,6 +1152,41 @@ Design: (unnamed)
     \_Package: (builtin)
     |vpiName:mailbox
     |vpiFullName:builtin::mailbox
+    |vpiInternalScope:
+    \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
+      |vpiParent:
+      \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/UnitElab/builtin.sv, line:1:3, endln:27:11
+      |vpiName:new
+      |vpiFullName:builtin::mailbox::new
+      |vpiTypedef:
+      \_IntTypespec: , line:3:19, endln:3:22
+        |vpiParent:
+        \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
+        |vpiSigned:1
+      |vpiImportTypespec:
+      \_IntTypespec: , line:3:19, endln:3:22
+      |vpiMethod:1
+      |vpiIODecl:
+      \_IODecl: (bound), line:3:23, endln:3:28
+        |vpiParent:
+        \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
+        |vpiDirection:1
+        |vpiName:bound
+        |vpiExpr:
+        \_Constant: , line:3:31, endln:3:32
+          |vpiParent:
+          \_IODecl: (bound), line:3:23, endln:3:28
+          |vpiDecompile:0
+          |vpiSize:64
+          |UINT:0
+          |vpiConstType:9
+        |vpiTypedef:
+        \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
+          |vpiParent:
+          \_IODecl: (bound), line:3:23, endln:3:28
+          |vpiFullName:builtin::mailbox::new::bound
+          |vpiActual:
+          \_IntTypespec: , line:3:19, endln:3:22
     |vpiInternalScope:
     \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
       |vpiParent:
@@ -1300,6 +1335,8 @@ Design: (unnamed)
         |vpiDirection:6
         |vpiName:message
     |vpiImportTypespec:
+    \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
+    |vpiImportTypespec:
     \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
     |vpiImportTypespec:
     \_Task: (builtin::mailbox::put), line:9:5, endln:10:12
@@ -1313,6 +1350,8 @@ Design: (unnamed)
     \_Task: (builtin::mailbox::peek), line:21:5, endln:22:12
     |vpiImportTypespec:
     \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
+    |vpiMethod:
+    \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
     |vpiMethod:
     \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
     |vpiMethod:
@@ -1497,6 +1536,41 @@ Design: (unnamed)
     |vpiName:semaphore
     |vpiFullName:builtin::semaphore
     |vpiInternalScope:
+    \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
+      |vpiParent:
+      \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/UnitElab/builtin.sv, line:55:3, endln:69:11
+      |vpiName:new
+      |vpiFullName:builtin::semaphore::new
+      |vpiTypedef:
+      \_IntTypespec: , line:57:18, endln:57:21
+        |vpiParent:
+        \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
+        |vpiSigned:1
+      |vpiImportTypespec:
+      \_IntTypespec: , line:57:18, endln:57:21
+      |vpiMethod:1
+      |vpiIODecl:
+      \_IODecl: (keyCount), line:57:22, endln:57:30
+        |vpiParent:
+        \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
+        |vpiDirection:1
+        |vpiName:keyCount
+        |vpiExpr:
+        \_Constant: , line:57:33, endln:57:34
+          |vpiParent:
+          \_IODecl: (keyCount), line:57:22, endln:57:30
+          |vpiDecompile:0
+          |vpiSize:64
+          |UINT:0
+          |vpiConstType:9
+        |vpiTypedef:
+        \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
+          |vpiParent:
+          \_IODecl: (keyCount), line:57:22, endln:57:30
+          |vpiFullName:builtin::semaphore::new::keyCount
+          |vpiActual:
+          \_IntTypespec: , line:57:18, endln:57:21
+    |vpiInternalScope:
     \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
       |vpiParent:
       \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/UnitElab/builtin.sv, line:55:3, endln:69:11
@@ -1619,11 +1693,15 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: , line:66:26, endln:66:29
     |vpiImportTypespec:
+    \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
+    |vpiImportTypespec:
     \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
     |vpiImportTypespec:
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
     |vpiImportTypespec:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+    |vpiMethod:
+    \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
     |vpiMethod:
     \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
     |vpiMethod:
@@ -3076,26 +3154,203 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitElab/top.v, line:26:1, endln:31:10
     |vpiName:my_module
+  |vpiTypedef:
+  \_LogicTypespec: , line:27:7, endln:27:12
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitElab/top.v, line:26:1, endln:31:10
+    |vpiRange:
+    \_Range: , line:27:7, endln:27:12
+      |vpiParent:
+      \_LogicTypespec: , line:27:7, endln:27:12
+      |vpiLeftRange:
+      \_Constant: , line:27:8, endln:27:9
+        |vpiParent:
+        \_Range: , line:27:7, endln:27:12
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:27:10, endln:27:11
+        |vpiParent:
+        \_Range: , line:27:7, endln:27:12
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_LogicTypespec: , line:27:7, endln:27:12
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitElab/top.v, line:26:1, endln:31:10
+    |vpiRange:
+    \_Range: , line:27:7, endln:27:12
+      |vpiParent:
+      \_LogicTypespec: , line:27:7, endln:27:12
+      |vpiLeftRange:
+      \_Constant: , line:27:8, endln:27:9
+        |vpiParent:
+        \_Range: , line:27:7, endln:27:12
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:27:10, endln:27:11
+        |vpiParent:
+        \_Range: , line:27:7, endln:27:12
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_LogicTypespec: , line:28:8, endln:28:13
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitElab/top.v, line:26:1, endln:31:10
+    |vpiRange:
+    \_Range: , line:28:8, endln:28:13
+      |vpiParent:
+      \_LogicTypespec: , line:28:8, endln:28:13
+      |vpiLeftRange:
+      \_Constant: , line:28:9, endln:28:10
+        |vpiParent:
+        \_Range: , line:28:8, endln:28:13
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:28:11, endln:28:12
+        |vpiParent:
+        \_Range: , line:28:8, endln:28:13
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_LogicTypespec: , line:27:7, endln:27:12
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitElab/top.v, line:26:1, endln:31:10
+    |vpiRange:
+    \_Range: , line:27:7, endln:27:12
+      |vpiParent:
+      \_LogicTypespec: , line:27:7, endln:27:12
+      |vpiLeftRange:
+      \_Constant: , line:27:8, endln:27:9
+        |vpiParent:
+        \_Range: , line:27:7, endln:27:12
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:27:10, endln:27:11
+        |vpiParent:
+        \_Range: , line:27:7, endln:27:12
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_LogicTypespec: , line:27:7, endln:27:12
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitElab/top.v, line:26:1, endln:31:10
+    |vpiRange:
+    \_Range: , line:27:7, endln:27:12
+      |vpiParent:
+      \_LogicTypespec: , line:27:7, endln:27:12
+      |vpiLeftRange:
+      \_Constant: , line:27:8, endln:27:9
+        |vpiParent:
+        \_Range: , line:27:7, endln:27:12
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:27:10, endln:27:11
+        |vpiParent:
+        \_Range: , line:27:7, endln:27:12
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_LogicTypespec: , line:28:8, endln:28:13
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitElab/top.v, line:26:1, endln:31:10
+    |vpiRange:
+    \_Range: , line:28:8, endln:28:13
+      |vpiParent:
+      \_LogicTypespec: , line:28:8, endln:28:13
+      |vpiLeftRange:
+      \_Constant: , line:28:9, endln:28:10
+        |vpiParent:
+        \_Range: , line:28:8, endln:28:13
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:28:11, endln:28:12
+        |vpiParent:
+        \_Range: , line:28:8, endln:28:13
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
   |vpiImportTypespec:
   \_ModuleTypespec: (my_module), line:29:3, endln:29:12
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:27:7, endln:27:12
   |vpiImportTypespec:
   \_LogicNet: (work@top.a), line:26:13, endln:26:14
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitElab/top.v, line:26:1, endln:31:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.a), line:27:7, endln:27:12
+      |vpiParent:
+      \_LogicNet: (work@top.a), line:26:13, endln:26:14
+      |vpiFullName:work@top.a
+      |vpiActual:
+      \_LogicTypespec: , line:27:7, endln:27:12
     |vpiName:a
     |vpiFullName:work@top.a
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:27:7, endln:27:12
   |vpiImportTypespec:
   \_LogicNet: (work@top.b), line:26:16, endln:26:17
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitElab/top.v, line:26:1, endln:31:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.b), line:27:7, endln:27:12
+      |vpiParent:
+      \_LogicNet: (work@top.b), line:26:16, endln:26:17
+      |vpiFullName:work@top.b
+      |vpiActual:
+      \_LogicTypespec: , line:27:7, endln:27:12
     |vpiName:b
     |vpiFullName:work@top.b
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:28:8, endln:28:13
   |vpiImportTypespec:
   \_LogicNet: (work@top.c), line:26:19, endln:26:20
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitElab/top.v, line:26:1, endln:31:10
+    |vpiTypespec:
+    \_RefTypespec: (work@top.c), line:28:8, endln:28:13
+      |vpiParent:
+      \_LogicNet: (work@top.c), line:26:19, endln:26:20
+      |vpiFullName:work@top.c
+      |vpiActual:
+      \_LogicTypespec: , line:28:8, endln:28:13
     |vpiName:c
     |vpiFullName:work@top.c
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:27:7, endln:27:12
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:27:7, endln:27:12
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:28:8, endln:28:13
   |vpiDefName:work@top
   |vpiNet:
   \_LogicNet: (work@top.a), line:26:13, endln:26:14
@@ -3109,18 +3364,39 @@ Design: (unnamed)
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitElab/top.v, line:26:1, endln:31:10
     |vpiName:a
     |vpiDirection:1
+    |vpiTypespec:
+    \_RefTypespec: (work@top.a), line:27:7, endln:27:12
+      |vpiParent:
+      \_Port: (a), line:26:13, endln:26:14
+      |vpiFullName:work@top.a
+      |vpiActual:
+      \_LogicTypespec: , line:27:7, endln:27:12
   |vpiPort:
   \_Port: (b), line:26:16, endln:26:17
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitElab/top.v, line:26:1, endln:31:10
     |vpiName:b
     |vpiDirection:1
+    |vpiTypespec:
+    \_RefTypespec: (work@top.b), line:27:7, endln:27:12
+      |vpiParent:
+      \_Port: (b), line:26:16, endln:26:17
+      |vpiFullName:work@top.b
+      |vpiActual:
+      \_LogicTypespec: , line:27:7, endln:27:12
   |vpiPort:
   \_Port: (c), line:26:19, endln:26:20
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/UnitElab/top.v, line:26:1, endln:31:10
     |vpiName:c
     |vpiDirection:2
+    |vpiTypespec:
+    \_RefTypespec: (work@top.c), line:28:8, endln:28:13
+      |vpiParent:
+      \_Port: (c), line:26:19, endln:26:20
+      |vpiFullName:work@top.c
+      |vpiActual:
+      \_LogicTypespec: , line:28:8, endln:28:13
   |vpiModuleArrays:
   \_ModuleArray: (work@my_module), line:29:13, endln:29:17
     |vpiParent:

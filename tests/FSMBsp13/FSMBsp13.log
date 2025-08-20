@@ -6124,7 +6124,7 @@ CaseItem                                              42
 CaseStmt                                               5
 ClassDefn                                              8
 ClassTypespec                                          1
-Constant                                             136
+Constant                                             188
 DelayControl                                          30
 Design                                                 1
 EnumConst                                              5
@@ -6137,20 +6137,21 @@ HierPath                                               1
 IODecl                                                11
 IfElse                                                51
 Initial                                               13
-IntTypespec                                            9
+IntTypespec                                           31
 LogicNet                                              61
-LogicTypespec                                         48
+LogicTypespec                                         52
 Module                                                 4
 ModuleTypespec                                         3
 Operation                                            116
 Package                                                1
+PackedArrayTypespec                                   22
 ParamAssign                                           29
 Parameter                                             29
 Port                                                  28
-Range                                                  8
+Range                                                 34
 RefModule                                              3
 RefObj                                               507
-RefTypespec                                           60
+RefTypespec                                          108
 SysFuncCall                                            2
 Task                                                  10
 TaskCall                                              10
@@ -6202,6 +6203,41 @@ Design: (unnamed)
     \_Package: (builtin)
     |vpiName:mailbox
     |vpiFullName:builtin::mailbox
+    |vpiInternalScope:
+    \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
+      |vpiParent:
+      \_ClassDefn: (builtin::mailbox), file:${SURELOG_DIR}/tests/FSMBsp13/builtin.sv, line:1:3, endln:27:11
+      |vpiName:new
+      |vpiFullName:builtin::mailbox::new
+      |vpiTypedef:
+      \_IntTypespec: , line:3:19, endln:3:22
+        |vpiParent:
+        \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
+        |vpiSigned:1
+      |vpiImportTypespec:
+      \_IntTypespec: , line:3:19, endln:3:22
+      |vpiMethod:1
+      |vpiIODecl:
+      \_IODecl: (bound), line:3:23, endln:3:28
+        |vpiParent:
+        \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
+        |vpiDirection:1
+        |vpiName:bound
+        |vpiExpr:
+        \_Constant: , line:3:31, endln:3:32
+          |vpiParent:
+          \_IODecl: (bound), line:3:23, endln:3:28
+          |vpiDecompile:0
+          |vpiSize:64
+          |UINT:0
+          |vpiConstType:9
+        |vpiTypedef:
+        \_RefTypespec: (builtin::mailbox::new::bound), line:3:19, endln:3:22
+          |vpiParent:
+          \_IODecl: (bound), line:3:23, endln:3:28
+          |vpiFullName:builtin::mailbox::new::bound
+          |vpiActual:
+          \_IntTypespec: , line:3:19, endln:3:22
     |vpiInternalScope:
     \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
       |vpiParent:
@@ -6350,6 +6386,8 @@ Design: (unnamed)
         |vpiDirection:6
         |vpiName:message
     |vpiImportTypespec:
+    \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
+    |vpiImportTypespec:
     \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
     |vpiImportTypespec:
     \_Task: (builtin::mailbox::put), line:9:5, endln:10:12
@@ -6363,6 +6401,8 @@ Design: (unnamed)
     \_Task: (builtin::mailbox::peek), line:21:5, endln:22:12
     |vpiImportTypespec:
     \_Function: (builtin::mailbox::try_peek), line:24:5, endln:25:16
+    |vpiMethod:
+    \_Function: (builtin::mailbox::new), line:3:5, endln:4:16
     |vpiMethod:
     \_Function: (builtin::mailbox::num), line:6:5, endln:7:16
     |vpiMethod:
@@ -6547,6 +6587,41 @@ Design: (unnamed)
     |vpiName:semaphore
     |vpiFullName:builtin::semaphore
     |vpiInternalScope:
+    \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
+      |vpiParent:
+      \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/FSMBsp13/builtin.sv, line:55:3, endln:69:11
+      |vpiName:new
+      |vpiFullName:builtin::semaphore::new
+      |vpiTypedef:
+      \_IntTypespec: , line:57:18, endln:57:21
+        |vpiParent:
+        \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
+        |vpiSigned:1
+      |vpiImportTypespec:
+      \_IntTypespec: , line:57:18, endln:57:21
+      |vpiMethod:1
+      |vpiIODecl:
+      \_IODecl: (keyCount), line:57:22, endln:57:30
+        |vpiParent:
+        \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
+        |vpiDirection:1
+        |vpiName:keyCount
+        |vpiExpr:
+        \_Constant: , line:57:33, endln:57:34
+          |vpiParent:
+          \_IODecl: (keyCount), line:57:22, endln:57:30
+          |vpiDecompile:0
+          |vpiSize:64
+          |UINT:0
+          |vpiConstType:9
+        |vpiTypedef:
+        \_RefTypespec: (builtin::semaphore::new::keyCount), line:57:18, endln:57:21
+          |vpiParent:
+          \_IODecl: (keyCount), line:57:22, endln:57:30
+          |vpiFullName:builtin::semaphore::new::keyCount
+          |vpiActual:
+          \_IntTypespec: , line:57:18, endln:57:21
+    |vpiInternalScope:
     \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
       |vpiParent:
       \_ClassDefn: (builtin::semaphore), file:${SURELOG_DIR}/tests/FSMBsp13/builtin.sv, line:55:3, endln:69:11
@@ -6669,11 +6744,15 @@ Design: (unnamed)
           |vpiActual:
           \_IntTypespec: , line:66:26, endln:66:29
     |vpiImportTypespec:
+    \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
+    |vpiImportTypespec:
     \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
     |vpiImportTypespec:
     \_Task: (builtin::semaphore::get), line:63:5, endln:64:12
     |vpiImportTypespec:
     \_Function: (builtin::semaphore::try_get), line:66:5, endln:67:16
+    |vpiMethod:
+    \_Function: (builtin::semaphore::new), line:57:5, endln:58:16
     |vpiMethod:
     \_Task: (builtin::semaphore::put), line:60:5, endln:61:12
     |vpiMethod:
@@ -6722,6 +6801,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@FSM1 (work@FSM1), file:${SURELOG_DIR}/tests/FSMBsp13/fsm1.v, line:1:1, endln:158:10
     |UINT:0
+    |vpiTypespec:
+    \_RefTypespec: (work@FSM1.ST_Read), line:7:11, endln:7:16
+      |vpiParent:
+      \_Parameter: (work@FSM1.ST_Read), line:7:17, endln:7:28
+      |vpiFullName:work@FSM1.ST_Read
+      |vpiActual:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
     |vpiName:ST_Read
     |vpiFullName:work@FSM1.ST_Read
   |vpiParameter:
@@ -6729,6 +6815,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@FSM1 (work@FSM1), file:${SURELOG_DIR}/tests/FSMBsp13/fsm1.v, line:1:1, endln:158:10
     |UINT:1
+    |vpiTypespec:
+    \_RefTypespec: (work@FSM1.ST_Write), line:7:11, endln:7:16
+      |vpiParent:
+      \_Parameter: (work@FSM1.ST_Write), line:7:30, endln:7:42
+      |vpiFullName:work@FSM1.ST_Write
+      |vpiActual:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
     |vpiName:ST_Write
     |vpiFullName:work@FSM1.ST_Write
   |vpiParameter:
@@ -6736,6 +6829,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@FSM1 (work@FSM1), file:${SURELOG_DIR}/tests/FSMBsp13/fsm1.v, line:1:1, endln:158:10
     |UINT:2
+    |vpiTypespec:
+    \_RefTypespec: (work@FSM1.ST_Delay), line:7:11, endln:7:16
+      |vpiParent:
+      \_Parameter: (work@FSM1.ST_Delay), line:7:44, endln:7:56
+      |vpiFullName:work@FSM1.ST_Delay
+      |vpiActual:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
     |vpiName:ST_Delay
     |vpiFullName:work@FSM1.ST_Delay
   |vpiParameter:
@@ -6743,6 +6843,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@FSM1 (work@FSM1), file:${SURELOG_DIR}/tests/FSMBsp13/fsm1.v, line:1:1, endln:158:10
     |UINT:3
+    |vpiTypespec:
+    \_RefTypespec: (work@FSM1.ST_Trx), line:7:11, endln:7:16
+      |vpiParent:
+      \_Parameter: (work@FSM1.ST_Trx), line:8:17, endln:8:27
+      |vpiFullName:work@FSM1.ST_Trx
+      |vpiActual:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
     |vpiName:ST_Trx
     |vpiFullName:work@FSM1.ST_Trx
   |vpiParameter:
@@ -6750,6 +6857,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@FSM1 (work@FSM1), file:${SURELOG_DIR}/tests/FSMBsp13/fsm1.v, line:1:1, endln:158:10
     |UINT:4
+    |vpiTypespec:
+    \_RefTypespec: (work@FSM1.ST_Hold), line:7:11, endln:7:16
+      |vpiParent:
+      \_Parameter: (work@FSM1.ST_Hold), line:8:29, endln:8:40
+      |vpiFullName:work@FSM1.ST_Hold
+      |vpiActual:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
     |vpiName:ST_Hold
     |vpiFullName:work@FSM1.ST_Hold
   |vpiParameter:
@@ -6757,6 +6871,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@FSM1 (work@FSM1), file:${SURELOG_DIR}/tests/FSMBsp13/fsm1.v, line:1:1, endln:158:10
     |UINT:5
+    |vpiTypespec:
+    \_RefTypespec: (work@FSM1.ST_Block), line:7:11, endln:7:16
+      |vpiParent:
+      \_Parameter: (work@FSM1.ST_Block), line:8:42, endln:8:54
+      |vpiFullName:work@FSM1.ST_Block
+      |vpiActual:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
     |vpiName:ST_Block
     |vpiFullName:work@FSM1.ST_Block
   |vpiParameter:
@@ -6764,6 +6885,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@FSM1 (work@FSM1), file:${SURELOG_DIR}/tests/FSMBsp13/fsm1.v, line:1:1, endln:158:10
     |UINT:6
+    |vpiTypespec:
+    \_RefTypespec: (work@FSM1.ST_Wait), line:7:11, endln:7:16
+      |vpiParent:
+      \_Parameter: (work@FSM1.ST_Wait), line:9:17, endln:9:28
+      |vpiFullName:work@FSM1.ST_Wait
+      |vpiActual:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
     |vpiName:ST_Wait
     |vpiFullName:work@FSM1.ST_Wait
   |vpiParameter:
@@ -6771,6 +6899,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@FSM1 (work@FSM1), file:${SURELOG_DIR}/tests/FSMBsp13/fsm1.v, line:1:1, endln:158:10
     |UINT:7
+    |vpiTypespec:
+    \_RefTypespec: (work@FSM1.ST_Turn), line:7:11, endln:7:16
+      |vpiParent:
+      \_Parameter: (work@FSM1.ST_Turn), line:9:30, endln:9:41
+      |vpiFullName:work@FSM1.ST_Turn
+      |vpiActual:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
     |vpiName:ST_Turn
     |vpiFullName:work@FSM1.ST_Turn
   |vpiParameter:
@@ -6778,6 +6913,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@FSM1 (work@FSM1), file:${SURELOG_DIR}/tests/FSMBsp13/fsm1.v, line:1:1, endln:158:10
     |UINT:8
+    |vpiTypespec:
+    \_RefTypespec: (work@FSM1.ST_Quit), line:7:11, endln:7:16
+      |vpiParent:
+      \_Parameter: (work@FSM1.ST_Quit), line:9:43, endln:9:54
+      |vpiFullName:work@FSM1.ST_Quit
+      |vpiActual:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
     |vpiName:ST_Quit
     |vpiFullName:work@FSM1.ST_Quit
   |vpiParameter:
@@ -6785,6 +6927,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@FSM1 (work@FSM1), file:${SURELOG_DIR}/tests/FSMBsp13/fsm1.v, line:1:1, endln:158:10
     |UINT:9
+    |vpiTypespec:
+    \_RefTypespec: (work@FSM1.ST_Exit), line:7:11, endln:7:16
+      |vpiParent:
+      \_Parameter: (work@FSM1.ST_Exit), line:10:17, endln:10:28
+      |vpiFullName:work@FSM1.ST_Exit
+      |vpiActual:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
     |vpiName:ST_Exit
     |vpiFullName:work@FSM1.ST_Exit
   |vpiParameter:
@@ -6792,6 +6941,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@FSM1 (work@FSM1), file:${SURELOG_DIR}/tests/FSMBsp13/fsm1.v, line:1:1, endln:158:10
     |UINT:10
+    |vpiTypespec:
+    \_RefTypespec: (work@FSM1.ST_Done), line:7:11, endln:7:16
+      |vpiParent:
+      \_Parameter: (work@FSM1.ST_Done), line:10:30, endln:10:42
+      |vpiFullName:work@FSM1.ST_Done
+      |vpiActual:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
     |vpiName:ST_Done
     |vpiFullName:work@FSM1.ST_Done
   |vpiParamAssign:
@@ -6949,6 +7105,347 @@ Design: (unnamed)
     |vpiLhs:
     \_Parameter: (work@FSM1.ST_Done), line:10:30, endln:10:42
   |vpiTypedef:
+  \_PackedArrayTypespec: , line:7:11, endln:7:16
+    |vpiParent:
+    \_Module: work@FSM1 (work@FSM1), file:${SURELOG_DIR}/tests/FSMBsp13/fsm1.v, line:1:1, endln:158:10
+    |vpiRange:
+    \_Range: , line:7:11, endln:7:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
+      |vpiLeftRange:
+      \_Constant: , line:7:12, endln:7:13
+        |vpiParent:
+        \_Range: , line:7:11, endln:7:16
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:7:14, endln:7:15
+        |vpiParent:
+        \_Range: , line:7:11, endln:7:16
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@FSM1), line:7:11, endln:7:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
+      |vpiFullName:work@FSM1
+      |vpiActual:
+      \_IntTypespec: , line:7:11, endln:7:16
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:7:11, endln:7:16
+    |vpiParent:
+    \_Module: work@FSM1 (work@FSM1), file:${SURELOG_DIR}/tests/FSMBsp13/fsm1.v, line:1:1, endln:158:10
+    |vpiRange:
+    \_Range: , line:7:11, endln:7:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
+      |vpiLeftRange:
+      \_Constant: , line:7:12, endln:7:13
+        |vpiParent:
+        \_Range: , line:7:11, endln:7:16
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:7:14, endln:7:15
+        |vpiParent:
+        \_Range: , line:7:11, endln:7:16
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@FSM1), line:7:11, endln:7:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
+      |vpiFullName:work@FSM1
+      |vpiActual:
+      \_IntTypespec: , line:7:11, endln:7:16
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:7:11, endln:7:16
+    |vpiParent:
+    \_Module: work@FSM1 (work@FSM1), file:${SURELOG_DIR}/tests/FSMBsp13/fsm1.v, line:1:1, endln:158:10
+    |vpiRange:
+    \_Range: , line:7:11, endln:7:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
+      |vpiLeftRange:
+      \_Constant: , line:7:12, endln:7:13
+        |vpiParent:
+        \_Range: , line:7:11, endln:7:16
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:7:14, endln:7:15
+        |vpiParent:
+        \_Range: , line:7:11, endln:7:16
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@FSM1), line:7:11, endln:7:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
+      |vpiFullName:work@FSM1
+      |vpiActual:
+      \_IntTypespec: , line:7:11, endln:7:16
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:7:11, endln:7:16
+    |vpiParent:
+    \_Module: work@FSM1 (work@FSM1), file:${SURELOG_DIR}/tests/FSMBsp13/fsm1.v, line:1:1, endln:158:10
+    |vpiRange:
+    \_Range: , line:7:11, endln:7:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
+      |vpiLeftRange:
+      \_Constant: , line:7:12, endln:7:13
+        |vpiParent:
+        \_Range: , line:7:11, endln:7:16
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:7:14, endln:7:15
+        |vpiParent:
+        \_Range: , line:7:11, endln:7:16
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@FSM1), line:7:11, endln:7:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
+      |vpiFullName:work@FSM1
+      |vpiActual:
+      \_IntTypespec: , line:7:11, endln:7:16
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:7:11, endln:7:16
+    |vpiParent:
+    \_Module: work@FSM1 (work@FSM1), file:${SURELOG_DIR}/tests/FSMBsp13/fsm1.v, line:1:1, endln:158:10
+    |vpiRange:
+    \_Range: , line:7:11, endln:7:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
+      |vpiLeftRange:
+      \_Constant: , line:7:12, endln:7:13
+        |vpiParent:
+        \_Range: , line:7:11, endln:7:16
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:7:14, endln:7:15
+        |vpiParent:
+        \_Range: , line:7:11, endln:7:16
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@FSM1), line:7:11, endln:7:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
+      |vpiFullName:work@FSM1
+      |vpiActual:
+      \_IntTypespec: , line:7:11, endln:7:16
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:7:11, endln:7:16
+    |vpiParent:
+    \_Module: work@FSM1 (work@FSM1), file:${SURELOG_DIR}/tests/FSMBsp13/fsm1.v, line:1:1, endln:158:10
+    |vpiRange:
+    \_Range: , line:7:11, endln:7:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
+      |vpiLeftRange:
+      \_Constant: , line:7:12, endln:7:13
+        |vpiParent:
+        \_Range: , line:7:11, endln:7:16
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:7:14, endln:7:15
+        |vpiParent:
+        \_Range: , line:7:11, endln:7:16
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@FSM1), line:7:11, endln:7:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
+      |vpiFullName:work@FSM1
+      |vpiActual:
+      \_IntTypespec: , line:7:11, endln:7:16
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:7:11, endln:7:16
+    |vpiParent:
+    \_Module: work@FSM1 (work@FSM1), file:${SURELOG_DIR}/tests/FSMBsp13/fsm1.v, line:1:1, endln:158:10
+    |vpiRange:
+    \_Range: , line:7:11, endln:7:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
+      |vpiLeftRange:
+      \_Constant: , line:7:12, endln:7:13
+        |vpiParent:
+        \_Range: , line:7:11, endln:7:16
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:7:14, endln:7:15
+        |vpiParent:
+        \_Range: , line:7:11, endln:7:16
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@FSM1), line:7:11, endln:7:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
+      |vpiFullName:work@FSM1
+      |vpiActual:
+      \_IntTypespec: , line:7:11, endln:7:16
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:7:11, endln:7:16
+    |vpiParent:
+    \_Module: work@FSM1 (work@FSM1), file:${SURELOG_DIR}/tests/FSMBsp13/fsm1.v, line:1:1, endln:158:10
+    |vpiRange:
+    \_Range: , line:7:11, endln:7:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
+      |vpiLeftRange:
+      \_Constant: , line:7:12, endln:7:13
+        |vpiParent:
+        \_Range: , line:7:11, endln:7:16
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:7:14, endln:7:15
+        |vpiParent:
+        \_Range: , line:7:11, endln:7:16
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@FSM1), line:7:11, endln:7:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
+      |vpiFullName:work@FSM1
+      |vpiActual:
+      \_IntTypespec: , line:7:11, endln:7:16
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:7:11, endln:7:16
+    |vpiParent:
+    \_Module: work@FSM1 (work@FSM1), file:${SURELOG_DIR}/tests/FSMBsp13/fsm1.v, line:1:1, endln:158:10
+    |vpiRange:
+    \_Range: , line:7:11, endln:7:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
+      |vpiLeftRange:
+      \_Constant: , line:7:12, endln:7:13
+        |vpiParent:
+        \_Range: , line:7:11, endln:7:16
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:7:14, endln:7:15
+        |vpiParent:
+        \_Range: , line:7:11, endln:7:16
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@FSM1), line:7:11, endln:7:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
+      |vpiFullName:work@FSM1
+      |vpiActual:
+      \_IntTypespec: , line:7:11, endln:7:16
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:7:11, endln:7:16
+    |vpiParent:
+    \_Module: work@FSM1 (work@FSM1), file:${SURELOG_DIR}/tests/FSMBsp13/fsm1.v, line:1:1, endln:158:10
+    |vpiRange:
+    \_Range: , line:7:11, endln:7:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
+      |vpiLeftRange:
+      \_Constant: , line:7:12, endln:7:13
+        |vpiParent:
+        \_Range: , line:7:11, endln:7:16
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:7:14, endln:7:15
+        |vpiParent:
+        \_Range: , line:7:11, endln:7:16
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@FSM1), line:7:11, endln:7:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
+      |vpiFullName:work@FSM1
+      |vpiActual:
+      \_IntTypespec: , line:7:11, endln:7:16
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:7:11, endln:7:16
+    |vpiParent:
+    \_Module: work@FSM1 (work@FSM1), file:${SURELOG_DIR}/tests/FSMBsp13/fsm1.v, line:1:1, endln:158:10
+    |vpiRange:
+    \_Range: , line:7:11, endln:7:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
+      |vpiLeftRange:
+      \_Constant: , line:7:12, endln:7:13
+        |vpiParent:
+        \_Range: , line:7:11, endln:7:16
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:7:14, endln:7:15
+        |vpiParent:
+        \_Range: , line:7:11, endln:7:16
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@FSM1), line:7:11, endln:7:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:7:11, endln:7:16
+      |vpiFullName:work@FSM1
+      |vpiActual:
+      \_IntTypespec: , line:7:11, endln:7:16
+  |vpiTypedef:
   \_LogicTypespec: , line:5:1, endln:5:4
     |vpiParent:
     \_Module: work@FSM1 (work@FSM1), file:${SURELOG_DIR}/tests/FSMBsp13/fsm1.v, line:1:1, endln:158:10
@@ -7012,6 +7509,28 @@ Design: (unnamed)
         |vpiSize:64
         |UINT:0
         |vpiConstType:9
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:7:11, endln:7:16
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:7:11, endln:7:16
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:7:11, endln:7:16
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:7:11, endln:7:16
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:7:11, endln:7:16
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:7:11, endln:7:16
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:7:11, endln:7:16
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:7:11, endln:7:16
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:7:11, endln:7:16
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:7:11, endln:7:16
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:7:11, endln:7:16
   |vpiImportTypespec:
   \_LogicNet: (work@FSM1.Clk), line:1:14, endln:1:17
     |vpiParent:
@@ -10345,6 +10864,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
     |UINT:0
+    |vpiTypespec:
+    \_RefTypespec: (work@FSM2.ST0), line:6:11, endln:6:16
+      |vpiParent:
+      \_Parameter: (work@FSM2.ST0), line:6:17, endln:6:23
+      |vpiFullName:work@FSM2.ST0
+      |vpiActual:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
     |vpiName:ST0
     |vpiFullName:work@FSM2.ST0
   |vpiParameter:
@@ -10352,6 +10878,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
     |UINT:1
+    |vpiTypespec:
+    \_RefTypespec: (work@FSM2.ST1), line:6:11, endln:6:16
+      |vpiParent:
+      \_Parameter: (work@FSM2.ST1), line:6:25, endln:6:30
+      |vpiFullName:work@FSM2.ST1
+      |vpiActual:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
     |vpiName:ST1
     |vpiFullName:work@FSM2.ST1
   |vpiParameter:
@@ -10359,6 +10892,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
     |UINT:2
+    |vpiTypespec:
+    \_RefTypespec: (work@FSM2.ST2), line:6:11, endln:6:16
+      |vpiParent:
+      \_Parameter: (work@FSM2.ST2), line:6:32, endln:6:37
+      |vpiFullName:work@FSM2.ST2
+      |vpiActual:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
     |vpiName:ST2
     |vpiFullName:work@FSM2.ST2
   |vpiParameter:
@@ -10366,6 +10906,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
     |UINT:3
+    |vpiTypespec:
+    \_RefTypespec: (work@FSM2.ST3), line:6:11, endln:6:16
+      |vpiParent:
+      \_Parameter: (work@FSM2.ST3), line:6:39, endln:6:44
+      |vpiFullName:work@FSM2.ST3
+      |vpiActual:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
     |vpiName:ST3
     |vpiFullName:work@FSM2.ST3
   |vpiParameter:
@@ -10373,6 +10920,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
     |UINT:4
+    |vpiTypespec:
+    \_RefTypespec: (work@FSM2.ST4), line:6:11, endln:6:16
+      |vpiParent:
+      \_Parameter: (work@FSM2.ST4), line:6:46, endln:6:51
+      |vpiFullName:work@FSM2.ST4
+      |vpiActual:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
     |vpiName:ST4
     |vpiFullName:work@FSM2.ST4
   |vpiParameter:
@@ -10380,6 +10934,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
     |UINT:5
+    |vpiTypespec:
+    \_RefTypespec: (work@FSM2.ST5), line:6:11, endln:6:16
+      |vpiParent:
+      \_Parameter: (work@FSM2.ST5), line:6:53, endln:6:58
+      |vpiFullName:work@FSM2.ST5
+      |vpiActual:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
     |vpiName:ST5
     |vpiFullName:work@FSM2.ST5
   |vpiParameter:
@@ -10387,6 +10948,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
     |UINT:6
+    |vpiTypespec:
+    \_RefTypespec: (work@FSM2.ST6), line:6:11, endln:6:16
+      |vpiParent:
+      \_Parameter: (work@FSM2.ST6), line:6:60, endln:6:65
+      |vpiFullName:work@FSM2.ST6
+      |vpiActual:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
     |vpiName:ST6
     |vpiFullName:work@FSM2.ST6
   |vpiParameter:
@@ -10394,6 +10962,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
     |UINT:7
+    |vpiTypespec:
+    \_RefTypespec: (work@FSM2.ST7), line:6:11, endln:6:16
+      |vpiParent:
+      \_Parameter: (work@FSM2.ST7), line:6:66, endln:6:71
+      |vpiFullName:work@FSM2.ST7
+      |vpiActual:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
     |vpiName:ST7
     |vpiFullName:work@FSM2.ST7
   |vpiParameter:
@@ -10401,6 +10976,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
     |UINT:8
+    |vpiTypespec:
+    \_RefTypespec: (work@FSM2.ST8), line:6:11, endln:6:16
+      |vpiParent:
+      \_Parameter: (work@FSM2.ST8), line:7:17, endln:7:22
+      |vpiFullName:work@FSM2.ST8
+      |vpiActual:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
     |vpiName:ST8
     |vpiFullName:work@FSM2.ST8
   |vpiParameter:
@@ -10408,6 +10990,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
     |UINT:9
+    |vpiTypespec:
+    \_RefTypespec: (work@FSM2.ST9), line:6:11, endln:6:16
+      |vpiParent:
+      \_Parameter: (work@FSM2.ST9), line:7:24, endln:7:29
+      |vpiFullName:work@FSM2.ST9
+      |vpiActual:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
     |vpiName:ST9
     |vpiFullName:work@FSM2.ST9
   |vpiParameter:
@@ -10415,6 +11004,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
     |UINT:10
+    |vpiTypespec:
+    \_RefTypespec: (work@FSM2.ST10), line:6:11, endln:6:16
+      |vpiParent:
+      \_Parameter: (work@FSM2.ST10), line:7:31, endln:7:38
+      |vpiFullName:work@FSM2.ST10
+      |vpiActual:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
     |vpiName:ST10
     |vpiFullName:work@FSM2.ST10
   |vpiParamAssign:
@@ -10775,6 +11371,371 @@ Design: (unnamed)
     |vpiStmt:
     \_Begin: (work@FSM2.SwitchCtrl), line:24:1, endln:32:4
   |vpiTypedef:
+  \_PackedArrayTypespec: , line:6:11, endln:6:16
+    |vpiParent:
+    \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
+    |vpiRange:
+    \_Range: , line:6:11, endln:6:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
+      |vpiLeftRange:
+      \_Constant: , line:6:12, endln:6:13
+        |vpiParent:
+        \_Range: , line:6:11, endln:6:16
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:6:14, endln:6:15
+        |vpiParent:
+        \_Range: , line:6:11, endln:6:16
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@FSM2), line:6:11, endln:6:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
+      |vpiFullName:work@FSM2
+      |vpiActual:
+      \_IntTypespec: , line:6:11, endln:6:16
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:6:11, endln:6:16
+    |vpiParent:
+    \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
+    |vpiRange:
+    \_Range: , line:6:11, endln:6:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
+      |vpiLeftRange:
+      \_Constant: , line:6:12, endln:6:13
+        |vpiParent:
+        \_Range: , line:6:11, endln:6:16
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:6:14, endln:6:15
+        |vpiParent:
+        \_Range: , line:6:11, endln:6:16
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@FSM2), line:6:11, endln:6:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
+      |vpiFullName:work@FSM2
+      |vpiActual:
+      \_IntTypespec: , line:6:11, endln:6:16
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:6:11, endln:6:16
+    |vpiParent:
+    \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
+    |vpiRange:
+    \_Range: , line:6:11, endln:6:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
+      |vpiLeftRange:
+      \_Constant: , line:6:12, endln:6:13
+        |vpiParent:
+        \_Range: , line:6:11, endln:6:16
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:6:14, endln:6:15
+        |vpiParent:
+        \_Range: , line:6:11, endln:6:16
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@FSM2), line:6:11, endln:6:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
+      |vpiFullName:work@FSM2
+      |vpiActual:
+      \_IntTypespec: , line:6:11, endln:6:16
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:6:11, endln:6:16
+    |vpiParent:
+    \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
+    |vpiRange:
+    \_Range: , line:6:11, endln:6:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
+      |vpiLeftRange:
+      \_Constant: , line:6:12, endln:6:13
+        |vpiParent:
+        \_Range: , line:6:11, endln:6:16
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:6:14, endln:6:15
+        |vpiParent:
+        \_Range: , line:6:11, endln:6:16
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@FSM2), line:6:11, endln:6:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
+      |vpiFullName:work@FSM2
+      |vpiActual:
+      \_IntTypespec: , line:6:11, endln:6:16
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:6:11, endln:6:16
+    |vpiParent:
+    \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
+    |vpiRange:
+    \_Range: , line:6:11, endln:6:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
+      |vpiLeftRange:
+      \_Constant: , line:6:12, endln:6:13
+        |vpiParent:
+        \_Range: , line:6:11, endln:6:16
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:6:14, endln:6:15
+        |vpiParent:
+        \_Range: , line:6:11, endln:6:16
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@FSM2), line:6:11, endln:6:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
+      |vpiFullName:work@FSM2
+      |vpiActual:
+      \_IntTypespec: , line:6:11, endln:6:16
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:6:11, endln:6:16
+    |vpiParent:
+    \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
+    |vpiRange:
+    \_Range: , line:6:11, endln:6:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
+      |vpiLeftRange:
+      \_Constant: , line:6:12, endln:6:13
+        |vpiParent:
+        \_Range: , line:6:11, endln:6:16
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:6:14, endln:6:15
+        |vpiParent:
+        \_Range: , line:6:11, endln:6:16
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@FSM2), line:6:11, endln:6:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
+      |vpiFullName:work@FSM2
+      |vpiActual:
+      \_IntTypespec: , line:6:11, endln:6:16
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:6:11, endln:6:16
+    |vpiParent:
+    \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
+    |vpiRange:
+    \_Range: , line:6:11, endln:6:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
+      |vpiLeftRange:
+      \_Constant: , line:6:12, endln:6:13
+        |vpiParent:
+        \_Range: , line:6:11, endln:6:16
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:6:14, endln:6:15
+        |vpiParent:
+        \_Range: , line:6:11, endln:6:16
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@FSM2), line:6:11, endln:6:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
+      |vpiFullName:work@FSM2
+      |vpiActual:
+      \_IntTypespec: , line:6:11, endln:6:16
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:6:11, endln:6:16
+    |vpiParent:
+    \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
+    |vpiRange:
+    \_Range: , line:6:11, endln:6:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
+      |vpiLeftRange:
+      \_Constant: , line:6:12, endln:6:13
+        |vpiParent:
+        \_Range: , line:6:11, endln:6:16
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:6:14, endln:6:15
+        |vpiParent:
+        \_Range: , line:6:11, endln:6:16
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@FSM2), line:6:11, endln:6:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
+      |vpiFullName:work@FSM2
+      |vpiActual:
+      \_IntTypespec: , line:6:11, endln:6:16
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:6:11, endln:6:16
+    |vpiParent:
+    \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
+    |vpiRange:
+    \_Range: , line:6:11, endln:6:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
+      |vpiLeftRange:
+      \_Constant: , line:6:12, endln:6:13
+        |vpiParent:
+        \_Range: , line:6:11, endln:6:16
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:6:14, endln:6:15
+        |vpiParent:
+        \_Range: , line:6:11, endln:6:16
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@FSM2), line:6:11, endln:6:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
+      |vpiFullName:work@FSM2
+      |vpiActual:
+      \_IntTypespec: , line:6:11, endln:6:16
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:6:11, endln:6:16
+    |vpiParent:
+    \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
+    |vpiRange:
+    \_Range: , line:6:11, endln:6:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
+      |vpiLeftRange:
+      \_Constant: , line:6:12, endln:6:13
+        |vpiParent:
+        \_Range: , line:6:11, endln:6:16
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:6:14, endln:6:15
+        |vpiParent:
+        \_Range: , line:6:11, endln:6:16
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@FSM2), line:6:11, endln:6:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
+      |vpiFullName:work@FSM2
+      |vpiActual:
+      \_IntTypespec: , line:6:11, endln:6:16
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:6:11, endln:6:16
+    |vpiParent:
+    \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
+    |vpiRange:
+    \_Range: , line:6:11, endln:6:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
+      |vpiLeftRange:
+      \_Constant: , line:6:12, endln:6:13
+        |vpiParent:
+        \_Range: , line:6:11, endln:6:16
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:6:14, endln:6:15
+        |vpiParent:
+        \_Range: , line:6:11, endln:6:16
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@FSM2), line:6:11, endln:6:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:6:11, endln:6:16
+      |vpiFullName:work@FSM2
+      |vpiActual:
+      \_IntTypespec: , line:6:11, endln:6:16
+  |vpiTypedef:
+  \_LogicTypespec: , line:3:8, endln:3:13
+    |vpiParent:
+    \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
+    |vpiRange:
+    \_Range: , line:3:8, endln:3:13
+      |vpiParent:
+      \_LogicTypespec: , line:3:8, endln:3:13
+      |vpiLeftRange:
+      \_Constant: , line:3:9, endln:3:10
+        |vpiParent:
+        \_Range: , line:3:8, endln:3:13
+        |vpiDecompile:2
+        |vpiSize:64
+        |UINT:2
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:3:11, endln:3:12
+        |vpiParent:
+        \_Range: , line:3:8, endln:3:13
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
   \_LogicTypespec: , line:4:1, endln:4:10
     |vpiParent:
     \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
@@ -10874,8 +11835,54 @@ Design: (unnamed)
   \_LogicTypespec: , line:10:1, endln:10:4
     |vpiParent:
     \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
+  |vpiTypedef:
+  \_LogicTypespec: , line:3:8, endln:3:13
+    |vpiParent:
+    \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
+    |vpiRange:
+    \_Range: , line:3:8, endln:3:13
+      |vpiParent:
+      \_LogicTypespec: , line:3:8, endln:3:13
+      |vpiLeftRange:
+      \_Constant: , line:3:9, endln:3:10
+        |vpiParent:
+        \_Range: , line:3:8, endln:3:13
+        |vpiDecompile:2
+        |vpiSize:64
+        |UINT:2
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:3:11, endln:3:12
+        |vpiParent:
+        \_Range: , line:3:8, endln:3:13
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
   |vpiImportTypespec:
   \_Task: (work@FSM2.SwitchCtrl), line:23:1, endln:33:8
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:6:11, endln:6:16
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:6:11, endln:6:16
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:6:11, endln:6:16
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:6:11, endln:6:16
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:6:11, endln:6:16
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:6:11, endln:6:16
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:6:11, endln:6:16
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:6:11, endln:6:16
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:6:11, endln:6:16
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:6:11, endln:6:16
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:6:11, endln:6:16
   |vpiImportTypespec:
   \_LogicNet: (work@FSM2.clock), line:1:13, endln:1:18
     |vpiParent:
@@ -10895,9 +11902,18 @@ Design: (unnamed)
     |vpiName:control
     |vpiFullName:work@FSM2.control
   |vpiImportTypespec:
+  \_LogicTypespec: , line:3:8, endln:3:13
+  |vpiImportTypespec:
   \_LogicNet: (work@FSM2.y), line:1:36, endln:1:37
     |vpiParent:
     \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
+    |vpiTypespec:
+    \_RefTypespec: (work@FSM2.y), line:3:8, endln:3:13
+      |vpiParent:
+      \_LogicNet: (work@FSM2.y), line:1:36, endln:1:37
+      |vpiFullName:work@FSM2.y
+      |vpiActual:
+      \_LogicTypespec: , line:3:8, endln:3:13
     |vpiName:y
     |vpiFullName:work@FSM2.y
     |vpiNetType:48
@@ -11061,6 +12077,8 @@ Design: (unnamed)
     |vpiName:Ctrl7
     |vpiFullName:work@FSM2.Ctrl7
     |vpiNetType:48
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:3:8, endln:3:13
   |vpiDefName:work@FSM2
   |vpiTaskFunc:
   \_Task: (work@FSM2.SwitchCtrl), line:23:1, endln:33:8
@@ -11116,6 +12134,13 @@ Design: (unnamed)
     \_Module: work@FSM2 (work@FSM2), file:${SURELOG_DIR}/tests/FSMBsp13/fsm2.v, line:1:1, endln:135:10
     |vpiName:y
     |vpiDirection:2
+    |vpiTypespec:
+    \_RefTypespec: (work@FSM2.y), line:3:8, endln:3:13
+      |vpiParent:
+      \_Port: (y), line:1:36, endln:1:37
+      |vpiFullName:work@FSM2.y
+      |vpiActual:
+      \_LogicTypespec: , line:3:8, endln:3:13
   |vpiProcess:
   \_Initial: , line:12:1, endln:20:4
     |vpiParent:
@@ -12895,6 +13920,30 @@ Design: (unnamed)
     |vpiLhs:
     \_Parameter: (work@FSM3.Faster), line:14:11, endln:14:28
   |vpiTypedef:
+  \_LogicTypespec: , line:3:8, endln:3:13
+    |vpiParent:
+    \_Module: work@FSM3 (work@FSM3), file:${SURELOG_DIR}/tests/FSMBsp13/fsm3.v, line:1:1, endln:64:10
+    |vpiRange:
+    \_Range: , line:3:8, endln:3:13
+      |vpiParent:
+      \_LogicTypespec: , line:3:8, endln:3:13
+      |vpiLeftRange:
+      \_Constant: , line:3:9, endln:3:10
+        |vpiParent:
+        \_Range: , line:3:8, endln:3:13
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:3:11, endln:3:12
+        |vpiParent:
+        \_Range: , line:3:8, endln:3:13
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
   \_LogicTypespec: , line:4:1, endln:4:10
     |vpiParent:
     \_Module: work@FSM3 (work@FSM3), file:${SURELOG_DIR}/tests/FSMBsp13/fsm3.v, line:1:1, endln:64:10
@@ -12930,6 +13979,30 @@ Design: (unnamed)
   \_LogicTypespec: , line:6:1, endln:6:4
     |vpiParent:
     \_Module: work@FSM3 (work@FSM3), file:${SURELOG_DIR}/tests/FSMBsp13/fsm3.v, line:1:1, endln:64:10
+  |vpiTypedef:
+  \_LogicTypespec: , line:3:8, endln:3:13
+    |vpiParent:
+    \_Module: work@FSM3 (work@FSM3), file:${SURELOG_DIR}/tests/FSMBsp13/fsm3.v, line:1:1, endln:64:10
+    |vpiRange:
+    \_Range: , line:3:8, endln:3:13
+      |vpiParent:
+      \_LogicTypespec: , line:3:8, endln:3:13
+      |vpiLeftRange:
+      \_Constant: , line:3:9, endln:3:10
+        |vpiParent:
+        \_Range: , line:3:8, endln:3:13
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:3:11, endln:3:12
+        |vpiParent:
+        \_Range: , line:3:8, endln:3:13
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
   |vpiImportTypespec:
   \_LogicNet: (work@FSM3.clock), line:1:13, endln:1:18
     |vpiParent:
@@ -12955,9 +14028,18 @@ Design: (unnamed)
     |vpiName:accelerate
     |vpiFullName:work@FSM3.accelerate
   |vpiImportTypespec:
+  \_LogicTypespec: , line:3:8, endln:3:13
+  |vpiImportTypespec:
   \_LogicNet: (work@FSM3.Speed), line:1:45, endln:1:50
     |vpiParent:
     \_Module: work@FSM3 (work@FSM3), file:${SURELOG_DIR}/tests/FSMBsp13/fsm3.v, line:1:1, endln:64:10
+    |vpiTypespec:
+    \_RefTypespec: (work@FSM3.Speed), line:3:8, endln:3:13
+      |vpiParent:
+      \_LogicNet: (work@FSM3.Speed), line:1:45, endln:1:50
+      |vpiFullName:work@FSM3.Speed
+      |vpiActual:
+      \_LogicTypespec: , line:3:8, endln:3:13
     |vpiName:Speed
     |vpiFullName:work@FSM3.Speed
     |vpiNetType:48
@@ -13025,6 +14107,8 @@ Design: (unnamed)
     |vpiName:Ctrl3
     |vpiFullName:work@FSM3.Ctrl3
     |vpiNetType:48
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:3:8, endln:3:13
   |vpiDefName:work@FSM3
   |vpiNet:
   \_LogicNet: (work@FSM3.clock), line:1:13, endln:1:18
@@ -13074,6 +14158,13 @@ Design: (unnamed)
     \_Module: work@FSM3 (work@FSM3), file:${SURELOG_DIR}/tests/FSMBsp13/fsm3.v, line:1:1, endln:64:10
     |vpiName:Speed
     |vpiDirection:2
+    |vpiTypespec:
+    \_RefTypespec: (work@FSM3.Speed), line:3:8, endln:3:13
+      |vpiParent:
+      \_Port: (Speed), line:1:45, endln:1:50
+      |vpiFullName:work@FSM3.Speed
+      |vpiActual:
+      \_LogicTypespec: , line:3:8, endln:3:13
   |vpiProcess:
   \_Initial: , line:16:1, endln:20:4
     |vpiParent:
@@ -16513,6 +17604,29 @@ Design: (unnamed)
         |vpiFullName:work@top.F3.Speed.speed
         |vpiActual:
         \_LogicNet: (work@top.speed), line:9:12, endln:9:17
+\_weaklyReferenced:
+\_IntTypespec: , line:7:11, endln:7:16
+\_IntTypespec: , line:7:11, endln:7:16
+\_IntTypespec: , line:7:11, endln:7:16
+\_IntTypespec: , line:7:11, endln:7:16
+\_IntTypespec: , line:7:11, endln:7:16
+\_IntTypespec: , line:7:11, endln:7:16
+\_IntTypespec: , line:7:11, endln:7:16
+\_IntTypespec: , line:7:11, endln:7:16
+\_IntTypespec: , line:7:11, endln:7:16
+\_IntTypespec: , line:7:11, endln:7:16
+\_IntTypespec: , line:7:11, endln:7:16
+\_IntTypespec: , line:6:11, endln:6:16
+\_IntTypespec: , line:6:11, endln:6:16
+\_IntTypespec: , line:6:11, endln:6:16
+\_IntTypespec: , line:6:11, endln:6:16
+\_IntTypespec: , line:6:11, endln:6:16
+\_IntTypespec: , line:6:11, endln:6:16
+\_IntTypespec: , line:6:11, endln:6:16
+\_IntTypespec: , line:6:11, endln:6:16
+\_IntTypespec: , line:6:11, endln:6:16
+\_IntTypespec: , line:6:11, endln:6:16
+\_IntTypespec: , line:6:11, endln:6:16
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

@@ -363,7 +363,7 @@ AST_DEBUG_END
 Assignment                                             2
 Begin                                                  4
 BitSelect                                              3
-Constant                                               6
+Constant                                              18
 ContAssign                                             5
 Design                                                 1
 GenFor                                                 1
@@ -372,14 +372,15 @@ GenRegion                                              1
 GenVar                                                 1
 HierPath                                               2
 LogicNet                                               7
-LogicTypespec                                          4
+LogicTypespec                                         10
 Module                                                 1
-Operation                                             13
+Operation                                             19
 ParamAssign                                            1
 Parameter                                              1
 Port                                                   3
-RefObj                                                25
-RefTypespec                                            4
+Range                                                  6
+RefObj                                                31
+RefTypespec                                           10
 RefVar                                                 1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/CarryAdd/slpp_all/surelog.uhdm ...
@@ -866,22 +867,271 @@ Design: (unnamed)
       \_GenFor: (work@carryadd), line:10:9, endln:19:12
     |vpiStmt:
     \_Begin: (work@carryadd), line:10:9, endln:19:12
+  |vpiTypedef:
+  \_LogicTypespec: , line:5:7, endln:5:18
+    |vpiParent:
+    \_Module: work@carryadd (work@carryadd), file:${SURELOG_DIR}/tests/CarryAdd/dut.sv, line:1:1, endln:24:10
+    |vpiRange:
+    \_Range: , line:5:7, endln:5:18
+      |vpiParent:
+      \_LogicTypespec: , line:5:7, endln:5:18
+      |vpiLeftRange:
+      \_Operation: , line:5:8, endln:5:15
+        |vpiParent:
+        \_Range: , line:5:7, endln:5:18
+        |vpiOpType:11
+        |vpiOperand:
+        \_RefObj: (work@carryadd.WIDTH), line:5:8, endln:5:13
+          |vpiParent:
+          \_Operation: , line:5:8, endln:5:15
+          |vpiName:WIDTH
+          |vpiFullName:work@carryadd.WIDTH
+          |vpiActual:
+          \_Parameter: (work@carryadd.WIDTH), line:3:11, endln:3:20
+        |vpiOperand:
+        \_Constant: , line:5:14, endln:5:15
+          |vpiParent:
+          \_Operation: , line:5:8, endln:5:15
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:5:16, endln:5:17
+        |vpiParent:
+        \_Range: , line:5:7, endln:5:18
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_LogicTypespec: , line:5:7, endln:5:18
+    |vpiParent:
+    \_Module: work@carryadd (work@carryadd), file:${SURELOG_DIR}/tests/CarryAdd/dut.sv, line:1:1, endln:24:10
+    |vpiRange:
+    \_Range: , line:5:7, endln:5:18
+      |vpiParent:
+      \_LogicTypespec: , line:5:7, endln:5:18
+      |vpiLeftRange:
+      \_Operation: , line:5:8, endln:5:15
+        |vpiParent:
+        \_Range: , line:5:7, endln:5:18
+        |vpiOpType:11
+        |vpiOperand:
+        \_RefObj: (work@carryadd.WIDTH), line:5:8, endln:5:13
+          |vpiParent:
+          \_Operation: , line:5:8, endln:5:15
+          |vpiName:WIDTH
+          |vpiFullName:work@carryadd.WIDTH
+          |vpiActual:
+          \_Parameter: (work@carryadd.WIDTH), line:3:11, endln:3:20
+        |vpiOperand:
+        \_Constant: , line:5:14, endln:5:15
+          |vpiParent:
+          \_Operation: , line:5:8, endln:5:15
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:5:16, endln:5:17
+        |vpiParent:
+        \_Range: , line:5:7, endln:5:18
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_LogicTypespec: , line:6:8, endln:6:19
+    |vpiParent:
+    \_Module: work@carryadd (work@carryadd), file:${SURELOG_DIR}/tests/CarryAdd/dut.sv, line:1:1, endln:24:10
+    |vpiRange:
+    \_Range: , line:6:8, endln:6:19
+      |vpiParent:
+      \_LogicTypespec: , line:6:8, endln:6:19
+      |vpiLeftRange:
+      \_Operation: , line:6:9, endln:6:16
+        |vpiParent:
+        \_Range: , line:6:8, endln:6:19
+        |vpiOpType:11
+        |vpiOperand:
+        \_RefObj: (work@carryadd.WIDTH), line:6:9, endln:6:14
+          |vpiParent:
+          \_Operation: , line:6:9, endln:6:16
+          |vpiName:WIDTH
+          |vpiFullName:work@carryadd.WIDTH
+          |vpiActual:
+          \_Parameter: (work@carryadd.WIDTH), line:3:11, endln:3:20
+        |vpiOperand:
+        \_Constant: , line:6:15, endln:6:16
+          |vpiParent:
+          \_Operation: , line:6:9, endln:6:16
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:6:17, endln:6:18
+        |vpiParent:
+        \_Range: , line:6:8, endln:6:19
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_LogicTypespec: , line:5:7, endln:5:18
+    |vpiParent:
+    \_Module: work@carryadd (work@carryadd), file:${SURELOG_DIR}/tests/CarryAdd/dut.sv, line:1:1, endln:24:10
+    |vpiRange:
+    \_Range: , line:5:7, endln:5:18
+      |vpiParent:
+      \_LogicTypespec: , line:5:7, endln:5:18
+      |vpiLeftRange:
+      \_Operation: , line:5:8, endln:5:15
+        |vpiParent:
+        \_Range: , line:5:7, endln:5:18
+        |vpiOpType:11
+        |vpiOperand:
+        \_RefObj: (work@carryadd.WIDTH), line:5:8, endln:5:13
+          |vpiParent:
+          \_Operation: , line:5:8, endln:5:15
+          |vpiName:WIDTH
+          |vpiFullName:work@carryadd.WIDTH
+          |vpiActual:
+          \_Parameter: (work@carryadd.WIDTH), line:3:11, endln:3:20
+        |vpiOperand:
+        \_Constant: , line:5:14, endln:5:15
+          |vpiParent:
+          \_Operation: , line:5:8, endln:5:15
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:5:16, endln:5:17
+        |vpiParent:
+        \_Range: , line:5:7, endln:5:18
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_LogicTypespec: , line:5:7, endln:5:18
+    |vpiParent:
+    \_Module: work@carryadd (work@carryadd), file:${SURELOG_DIR}/tests/CarryAdd/dut.sv, line:1:1, endln:24:10
+    |vpiRange:
+    \_Range: , line:5:7, endln:5:18
+      |vpiParent:
+      \_LogicTypespec: , line:5:7, endln:5:18
+      |vpiLeftRange:
+      \_Operation: , line:5:8, endln:5:15
+        |vpiParent:
+        \_Range: , line:5:7, endln:5:18
+        |vpiOpType:11
+        |vpiOperand:
+        \_RefObj: (work@carryadd.WIDTH), line:5:8, endln:5:13
+          |vpiParent:
+          \_Operation: , line:5:8, endln:5:15
+          |vpiName:WIDTH
+          |vpiFullName:work@carryadd.WIDTH
+          |vpiActual:
+          \_Parameter: (work@carryadd.WIDTH), line:3:11, endln:3:20
+        |vpiOperand:
+        \_Constant: , line:5:14, endln:5:15
+          |vpiParent:
+          \_Operation: , line:5:8, endln:5:15
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:5:16, endln:5:17
+        |vpiParent:
+        \_Range: , line:5:7, endln:5:18
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_LogicTypespec: , line:6:8, endln:6:19
+    |vpiParent:
+    \_Module: work@carryadd (work@carryadd), file:${SURELOG_DIR}/tests/CarryAdd/dut.sv, line:1:1, endln:24:10
+    |vpiRange:
+    \_Range: , line:6:8, endln:6:19
+      |vpiParent:
+      \_LogicTypespec: , line:6:8, endln:6:19
+      |vpiLeftRange:
+      \_Operation: , line:6:9, endln:6:16
+        |vpiParent:
+        \_Range: , line:6:8, endln:6:19
+        |vpiOpType:11
+        |vpiOperand:
+        \_RefObj: (work@carryadd.WIDTH), line:6:9, endln:6:14
+          |vpiParent:
+          \_Operation: , line:6:9, endln:6:16
+          |vpiName:WIDTH
+          |vpiFullName:work@carryadd.WIDTH
+          |vpiActual:
+          \_Parameter: (work@carryadd.WIDTH), line:3:11, endln:3:20
+        |vpiOperand:
+        \_Constant: , line:6:15, endln:6:16
+          |vpiParent:
+          \_Operation: , line:6:9, endln:6:16
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:6:17, endln:6:18
+        |vpiParent:
+        \_Range: , line:6:8, endln:6:19
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:5:7, endln:5:18
   |vpiImportTypespec:
   \_LogicNet: (work@carryadd.a), line:1:17, endln:1:18
     |vpiParent:
     \_Module: work@carryadd (work@carryadd), file:${SURELOG_DIR}/tests/CarryAdd/dut.sv, line:1:1, endln:24:10
+    |vpiTypespec:
+    \_RefTypespec: (work@carryadd.a), line:5:7, endln:5:18
+      |vpiParent:
+      \_LogicNet: (work@carryadd.a), line:1:17, endln:1:18
+      |vpiFullName:work@carryadd.a
+      |vpiActual:
+      \_LogicTypespec: , line:5:7, endln:5:18
     |vpiName:a
     |vpiFullName:work@carryadd.a
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:5:7, endln:5:18
   |vpiImportTypespec:
   \_LogicNet: (work@carryadd.b), line:1:20, endln:1:21
     |vpiParent:
     \_Module: work@carryadd (work@carryadd), file:${SURELOG_DIR}/tests/CarryAdd/dut.sv, line:1:1, endln:24:10
+    |vpiTypespec:
+    \_RefTypespec: (work@carryadd.b), line:5:7, endln:5:18
+      |vpiParent:
+      \_LogicNet: (work@carryadd.b), line:1:20, endln:1:21
+      |vpiFullName:work@carryadd.b
+      |vpiActual:
+      \_LogicTypespec: , line:5:7, endln:5:18
     |vpiName:b
     |vpiFullName:work@carryadd.b
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:6:8, endln:6:19
   |vpiImportTypespec:
   \_LogicNet: (work@carryadd.y), line:1:23, endln:1:24
     |vpiParent:
     \_Module: work@carryadd (work@carryadd), file:${SURELOG_DIR}/tests/CarryAdd/dut.sv, line:1:1, endln:24:10
+    |vpiTypespec:
+    \_RefTypespec: (work@carryadd.y), line:6:8, endln:6:19
+      |vpiParent:
+      \_LogicNet: (work@carryadd.y), line:1:23, endln:1:24
+      |vpiFullName:work@carryadd.y
+      |vpiActual:
+      \_LogicTypespec: , line:6:8, endln:6:19
     |vpiName:y
     |vpiFullName:work@carryadd.y
   |vpiImportTypespec:
@@ -940,6 +1190,12 @@ Design: (unnamed)
     |vpiName:Y
     |vpiFullName:work@carryadd.Y
     |vpiNetType:1
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:5:7, endln:5:18
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:5:7, endln:5:18
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:6:8, endln:6:19
   |vpiDefName:work@carryadd
   |vpiNet:
   \_LogicNet: (work@carryadd.a), line:1:17, endln:1:18
@@ -961,18 +1217,39 @@ Design: (unnamed)
     \_Module: work@carryadd (work@carryadd), file:${SURELOG_DIR}/tests/CarryAdd/dut.sv, line:1:1, endln:24:10
     |vpiName:a
     |vpiDirection:1
+    |vpiTypespec:
+    \_RefTypespec: (work@carryadd.a), line:5:7, endln:5:18
+      |vpiParent:
+      \_Port: (a), line:1:17, endln:1:18
+      |vpiFullName:work@carryadd.a
+      |vpiActual:
+      \_LogicTypespec: , line:5:7, endln:5:18
   |vpiPort:
   \_Port: (b), line:1:20, endln:1:21
     |vpiParent:
     \_Module: work@carryadd (work@carryadd), file:${SURELOG_DIR}/tests/CarryAdd/dut.sv, line:1:1, endln:24:10
     |vpiName:b
     |vpiDirection:1
+    |vpiTypespec:
+    \_RefTypespec: (work@carryadd.b), line:5:7, endln:5:18
+      |vpiParent:
+      \_Port: (b), line:1:20, endln:1:21
+      |vpiFullName:work@carryadd.b
+      |vpiActual:
+      \_LogicTypespec: , line:5:7, endln:5:18
   |vpiPort:
   \_Port: (y), line:1:23, endln:1:24
     |vpiParent:
     \_Module: work@carryadd (work@carryadd), file:${SURELOG_DIR}/tests/CarryAdd/dut.sv, line:1:1, endln:24:10
     |vpiName:y
     |vpiDirection:2
+    |vpiTypespec:
+    \_RefTypespec: (work@carryadd.y), line:6:8, endln:6:19
+      |vpiParent:
+      \_Port: (y), line:1:23, endln:1:24
+      |vpiFullName:work@carryadd.y
+      |vpiActual:
+      \_LogicTypespec: , line:6:8, endln:6:19
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

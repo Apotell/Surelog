@@ -228,20 +228,24 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Assignment                                             2
 Begin                                                  4
-Constant                                              12
+Constant                                              14
 Design                                                 1
 GenFor                                                 1
 GenIf                                                  1
 GenIfElse                                              1
 GenVar                                                 1
+IntTypespec                                            1
 Module                                                 1
 ModuleTypespec                                         2
 Operation                                             10
+PackedArrayTypespec                                    1
 ParamAssign                                            2
 Parameter                                              2
 PartSelect                                             2
+Range                                                  1
 RefModule                                              2
 RefObj                                                 8
+RefTypespec                                            2
 RefVar                                                 1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PartSelectRange/slpp_all/surelog.uhdm ...
@@ -265,6 +269,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/PartSelectRange/dut.sv, line:1:1, endln:19:10
     |BIN:0100
+    |vpiTypespec:
+    \_RefTypespec: (work@test.MAP), line:3:13, endln:3:18
+      |vpiParent:
+      \_Parameter: (work@test.MAP), line:3:19, endln:3:33
+      |vpiFullName:work@test.MAP
+      |vpiActual:
+      \_PackedArrayTypespec: , line:3:13, endln:3:18
     |vpiName:MAP
     |vpiFullName:work@test.MAP
   |vpiParameter:
@@ -605,7 +616,42 @@ Design: (unnamed)
         \_GenVar: (work@test.i), line:6:10, endln:6:11
     |vpiStmt:
     \_Begin: (work@test.loop), line:8:6, endln:17:9
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:3:13, endln:3:18
+    |vpiParent:
+    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/PartSelectRange/dut.sv, line:1:1, endln:19:10
+    |vpiRange:
+    \_Range: , line:3:13, endln:3:18
+      |vpiParent:
+      \_PackedArrayTypespec: , line:3:13, endln:3:18
+      |vpiLeftRange:
+      \_Constant: , line:3:14, endln:3:15
+        |vpiParent:
+        \_Range: , line:3:13, endln:3:18
+        |vpiDecompile:3
+        |vpiSize:64
+        |UINT:3
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:3:16, endln:3:17
+        |vpiParent:
+        \_Range: , line:3:13, endln:3:18
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@test), line:3:13, endln:3:18
+      |vpiParent:
+      \_PackedArrayTypespec: , line:3:13, endln:3:18
+      |vpiFullName:work@test
+      |vpiActual:
+      \_IntTypespec: , line:3:13, endln:3:18
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:3:13, endln:3:18
   |vpiDefName:work@test
+\_weaklyReferenced:
+\_IntTypespec: , line:3:13, endln:3:18
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

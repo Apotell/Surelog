@@ -172,19 +172,21 @@ AST_DEBUG_END
 [INF:CP0303] ${SURELOG_DIR}/tests/ParamMultiConcat/dut.sv:9:1: Compile module "work@top".
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
-Constant                                               4
+Constant                                               8
 Design                                                 1
 IntTypespec                                            4
 LogicNet                                               1
+LogicTypespec                                          2
 Module                                                 2
 ModuleTypespec                                         1
-Operation                                              6
+Operation                                              8
 ParamAssign                                            4
 Parameter                                              4
 Port                                                   2
+Range                                                  2
 RefModule                                              1
-RefObj                                                 4
-RefTypespec                                            4
+RefObj                                                 6
+RefTypespec                                            6
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ParamMultiConcat/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -221,14 +223,99 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamMultiConcat/dut.sv, line:1:1, endln:7:10
     |vpiSigned:1
+  |vpiTypedef:
+  \_LogicTypespec: , line:5:10, endln:5:21
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamMultiConcat/dut.sv, line:1:1, endln:7:10
+    |vpiRange:
+    \_Range: , line:5:10, endln:5:21
+      |vpiParent:
+      \_LogicTypespec: , line:5:10, endln:5:21
+      |vpiLeftRange:
+      \_Operation: , line:5:11, endln:5:18
+        |vpiParent:
+        \_Range: , line:5:10, endln:5:21
+        |vpiOpType:11
+        |vpiOperand:
+        \_RefObj: (work@dut.Width), line:5:11, endln:5:16
+          |vpiParent:
+          \_Operation: , line:5:11, endln:5:18
+          |vpiName:Width
+          |vpiFullName:work@dut.Width
+          |vpiActual:
+          \_Parameter: (work@dut.Width), line:3:18, endln:3:23
+        |vpiOperand:
+        \_Constant: , line:5:17, endln:5:18
+          |vpiParent:
+          \_Operation: , line:5:11, endln:5:18
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:5:19, endln:5:20
+        |vpiParent:
+        \_Range: , line:5:10, endln:5:21
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+  |vpiTypedef:
+  \_LogicTypespec: , line:5:10, endln:5:21
+    |vpiParent:
+    \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamMultiConcat/dut.sv, line:1:1, endln:7:10
+    |vpiRange:
+    \_Range: , line:5:10, endln:5:21
+      |vpiParent:
+      \_LogicTypespec: , line:5:10, endln:5:21
+      |vpiLeftRange:
+      \_Operation: , line:5:11, endln:5:18
+        |vpiParent:
+        \_Range: , line:5:10, endln:5:21
+        |vpiOpType:11
+        |vpiOperand:
+        \_RefObj: (work@dut.Width), line:5:11, endln:5:16
+          |vpiParent:
+          \_Operation: , line:5:11, endln:5:18
+          |vpiName:Width
+          |vpiFullName:work@dut.Width
+          |vpiActual:
+          \_Parameter: (work@dut.Width), line:3:18, endln:3:23
+        |vpiOperand:
+        \_Constant: , line:5:17, endln:5:18
+          |vpiParent:
+          \_Operation: , line:5:11, endln:5:18
+          |vpiDecompile:1
+          |vpiSize:64
+          |UINT:1
+          |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:5:19, endln:5:20
+        |vpiParent:
+        \_Range: , line:5:10, endln:5:21
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
   |vpiImportTypespec:
   \_IntTypespec: , line:3:14, endln:3:17
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:5:10, endln:5:21
   |vpiImportTypespec:
   \_LogicNet: (work@dut.wmask_i), line:5:22, endln:5:29
     |vpiParent:
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamMultiConcat/dut.sv, line:1:1, endln:7:10
+    |vpiTypespec:
+    \_RefTypespec: (work@dut.wmask_i), line:5:10, endln:5:21
+      |vpiParent:
+      \_LogicNet: (work@dut.wmask_i), line:5:22, endln:5:29
+      |vpiFullName:work@dut.wmask_i
+      |vpiActual:
+      \_LogicTypespec: , line:5:10, endln:5:21
     |vpiName:wmask_i
     |vpiFullName:work@dut.wmask_i
+  |vpiImportTypespec:
+  \_LogicTypespec: , line:5:10, endln:5:21
   |vpiDefName:work@dut
   |vpiNet:
   \_LogicNet: (work@dut.wmask_i), line:5:22, endln:5:29
@@ -238,6 +325,13 @@ Design: (unnamed)
     \_Module: work@dut (work@dut), file:${SURELOG_DIR}/tests/ParamMultiConcat/dut.sv, line:1:1, endln:7:10
     |vpiName:wmask_i
     |vpiDirection:1
+    |vpiTypespec:
+    \_RefTypespec: (work@dut.wmask_i), line:5:10, endln:5:21
+      |vpiParent:
+      \_Port: (wmask_i), line:5:22, endln:5:29
+      |vpiFullName:work@dut.wmask_i
+      |vpiActual:
+      \_LogicTypespec: , line:5:10, endln:5:21
 |vpiAllModules:
 \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ParamMultiConcat/dut.sv, line:9:1, endln:18:10
   |vpiParent:

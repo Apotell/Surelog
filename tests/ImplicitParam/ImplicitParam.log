@@ -73,13 +73,13 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Constant                                               2
 Design                                                 1
-IntTypespec                                            2
+IntTypespec                                            3
 IntVar                                                 1
 Module                                                 1
 ParamAssign                                            2
 Parameter                                              2
 Port                                                   1
-RefTypespec                                            2
+RefTypespec                                            3
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ImplicitParam/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -112,6 +112,13 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ImplicitParam/dut.sv, line:1:1, endln:4:10
     |UINT:15
+    |vpiTypespec:
+    \_RefTypespec: (work@top.P), line:2:15, endln:2:23
+      |vpiParent:
+      \_Parameter: (work@top.P), line:2:24, endln:2:30
+      |vpiFullName:work@top.P
+      |vpiActual:
+      \_IntTypespec: , line:2:15, endln:2:23
     |vpiLocalParam:1
     |vpiName:P
     |vpiFullName:work@top.P
@@ -152,6 +159,10 @@ Design: (unnamed)
     |vpiLhs:
     \_Parameter: (work@top.n), line:3:29, endln:3:46
   |vpiTypedef:
+  \_IntTypespec: , line:2:15, endln:2:23
+    |vpiParent:
+    \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ImplicitParam/dut.sv, line:1:1, endln:4:10
+  |vpiTypedef:
   \_IntTypespec: , line:1:19, endln:1:22
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ImplicitParam/dut.sv, line:1:1, endln:4:10
@@ -161,6 +172,8 @@ Design: (unnamed)
     |vpiParent:
     \_Module: work@top (work@top), file:${SURELOG_DIR}/tests/ImplicitParam/dut.sv, line:1:1, endln:4:10
     |vpiSigned:1
+  |vpiImportTypespec:
+  \_IntTypespec: , line:2:15, endln:2:23
   |vpiImportTypespec:
   \_IntTypespec: , line:1:19, endln:1:22
   |vpiImportTypespec:

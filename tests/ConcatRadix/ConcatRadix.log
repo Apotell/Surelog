@@ -83,16 +83,20 @@ AST_DEBUG_END
 [INF:UH0706] Creating UHDM Model...
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Begin                                                  1
-Constant                                               3
+Constant                                               5
 Design                                                 1
 GenIf                                                  1
+IntTypespec                                            1
 Module                                                 1
 ModuleTypespec                                         1
 Operation                                              2
+PackedArrayTypespec                                    1
 ParamAssign                                            1
 Parameter                                              1
+Range                                                  1
 RefModule                                              1
 RefObj                                                 1
+RefTypespec                                            2
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/ConcatRadix/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
@@ -108,6 +112,13 @@ Design: (unnamed)
   \_Parameter: (work@test.foo), line:3:17, endln:3:35
     |vpiParent:
     \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/ConcatRadix/dut.sv, line:1:1, endln:9:10
+    |vpiTypespec:
+    \_RefTypespec: (work@test.foo), line:3:11, endln:3:16
+      |vpiParent:
+      \_Parameter: (work@test.foo), line:3:17, endln:3:35
+      |vpiFullName:work@test.foo
+      |vpiActual:
+      \_PackedArrayTypespec: , line:3:11, endln:3:16
     |vpiName:foo
     |vpiFullName:work@test.foo
   |vpiParamAssign:
@@ -155,6 +166,39 @@ Design: (unnamed)
       \_Begin: (work@test), line:5:19, endln:7:4
       |vpiName:mybar
       |vpiDefName:work@bar
+  |vpiTypedef:
+  \_PackedArrayTypespec: , line:3:11, endln:3:16
+    |vpiParent:
+    \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/ConcatRadix/dut.sv, line:1:1, endln:9:10
+    |vpiRange:
+    \_Range: , line:3:11, endln:3:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:3:11, endln:3:16
+      |vpiLeftRange:
+      \_Constant: , line:3:12, endln:3:13
+        |vpiParent:
+        \_Range: , line:3:11, endln:3:16
+        |vpiDecompile:1
+        |vpiSize:64
+        |UINT:1
+        |vpiConstType:9
+      |vpiRightRange:
+      \_Constant: , line:3:14, endln:3:15
+        |vpiParent:
+        \_Range: , line:3:11, endln:3:16
+        |vpiDecompile:0
+        |vpiSize:64
+        |UINT:0
+        |vpiConstType:9
+    |vpiElemTypespec:
+    \_RefTypespec: (work@test), line:3:11, endln:3:16
+      |vpiParent:
+      \_PackedArrayTypespec: , line:3:11, endln:3:16
+      |vpiFullName:work@test
+      |vpiActual:
+      \_IntTypespec: , line:3:11, endln:3:16
+  |vpiImportTypespec:
+  \_PackedArrayTypespec: , line:3:11, endln:3:16
   |vpiDefName:work@test
   |vpiGenStmt:
   \_GenIf: , line:5:1, endln:7:4
@@ -183,6 +227,8 @@ Design: (unnamed)
         |vpiConstType:3
     |vpiStmt:
     \_Begin: (work@test), line:5:19, endln:7:4
+\_weaklyReferenced:
+\_IntTypespec: , line:3:11, endln:3:16
 ===================
 [  FATAL] : 0
 [ SYNTAX] : 0

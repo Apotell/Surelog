@@ -190,7 +190,7 @@ AST_DEBUG_END
 === UHDM Object Stats Begin (Non-Elaborated Model) ===
 Assignment                                             2
 Begin                                                  2
-Constant                                               8
+Constant                                               6
 Design                                                 1
 FuncCall                                               1
 Function                                               1
@@ -201,15 +201,14 @@ LogicNet                                               1
 LogicTypespec                                          2
 Module                                                 2
 ModuleTypespec                                         1
-Operation                                              4
-PackedArrayTypespec                                    1
+Operation                                              3
 ParamAssign                                            1
 Parameter                                              1
 Port                                                   3
-Range                                                  3
+Range                                                  2
 RefModule                                              1
-RefObj                                                 6
-RefTypespec                                            9
+RefObj                                                 5
+RefTypespec                                            7
 ReturnStmt                                             1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/UnsizedFunc/slpp_all/surelog.uhdm ...
@@ -403,57 +402,13 @@ Design: (unnamed)
       \_Function: (work@prim_lfsr.get_1s), line:5:4, endln:8:15
       |vpiFullName:work@prim_lfsr.get_1s
       |vpiActual:
-      \_PackedArrayTypespec: , line:5:29, endln:5:41
+      \_LogicTypespec: , line:5:23, endln:5:41
     |vpiStmt:
     \_Begin: (work@prim_lfsr.get_1s)
   |vpiTypedef:
   \_IntTypespec: , line:4:14, endln:4:26
     |vpiParent:
     \_Module: work@prim_lfsr (work@prim_lfsr), file:${SURELOG_DIR}/tests/UnsizedFunc/dut.sv, line:3:1, endln:13:10
-  |vpiTypedef:
-  \_PackedArrayTypespec: , line:5:29, endln:5:41
-    |vpiParent:
-    \_Module: work@prim_lfsr (work@prim_lfsr), file:${SURELOG_DIR}/tests/UnsizedFunc/dut.sv, line:3:1, endln:13:10
-    |vpiRange:
-    \_Range: , line:5:29, endln:5:41
-      |vpiParent:
-      \_PackedArrayTypespec: , line:5:29, endln:5:41
-      |vpiLeftRange:
-      \_Operation: , line:5:30, endln:5:38
-        |vpiParent:
-        \_Range: , line:5:29, endln:5:41
-        |vpiOpType:11
-        |vpiOperand:
-        \_RefObj: (work@prim_lfsr.LfsrDw), line:5:30, endln:5:36
-          |vpiParent:
-          \_Operation: , line:5:30, endln:5:38
-          |vpiName:LfsrDw
-          |vpiFullName:work@prim_lfsr.LfsrDw
-          |vpiActual:
-          \_Parameter: (work@prim_lfsr.LfsrDw), line:4:27, endln:4:38
-        |vpiOperand:
-        \_Constant: , line:5:37, endln:5:38
-          |vpiParent:
-          \_Operation: , line:5:30, endln:5:38
-          |vpiDecompile:1
-          |vpiSize:64
-          |UINT:1
-          |vpiConstType:9
-      |vpiRightRange:
-      \_Constant: , line:5:39, endln:5:40
-        |vpiParent:
-        \_Range: , line:5:29, endln:5:41
-        |vpiDecompile:0
-        |vpiSize:64
-        |UINT:0
-        |vpiConstType:9
-    |vpiElemTypespec:
-    \_RefTypespec: (work@prim_lfsr.get_1s), line:5:23, endln:5:41
-      |vpiParent:
-      \_LogicTypespec: , line:5:23, endln:5:41
-      |vpiFullName:work@prim_lfsr.get_1s
-      |vpiActual:
-      \_LogicTypespec: , line:5:23, endln:5:41
   |vpiTypedef:
   \_IntTypespec: , line:3:25, endln:3:28
     |vpiParent:
@@ -468,8 +423,6 @@ Design: (unnamed)
   \_Function: (work@prim_lfsr.get_1s), line:5:4, endln:8:15
   |vpiImportTypespec:
   \_IntTypespec: , line:4:14, endln:4:26
-  |vpiImportTypespec:
-  \_PackedArrayTypespec: , line:5:29, endln:5:41
   |vpiImportTypespec:
   \_IntTypespec: , line:3:25, endln:3:28
   |vpiImportTypespec:

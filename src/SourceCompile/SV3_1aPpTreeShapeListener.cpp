@@ -227,9 +227,14 @@ void SV3_1aPpTreeShapeListener::exitPragma_expression(
   addVObject(ctx, ctx->getText(), VObjectType::ppPragma_expression);
 }
 
-void SV3_1aPpTreeShapeListener::exitMacro_arg(
-    SV3_1aPpParser::Macro_argContext *ctx) {
+void SV3_1aPpTreeShapeListener::exitMacro_actual_arg(
+    SV3_1aPpParser::Macro_actual_argContext *ctx) {
   addVObject(ctx, ctx->getText(), VObjectType::ppText_blob);
+}
+
+void SV3_1aPpTreeShapeListener::exitMacro_actual_arg_fragment(
+    SV3_1aPpParser::Macro_actual_arg_fragmentContext *ctx) {
+  // Do nothing.. let Macro_actual_arg be the leaf node of this sub-tree
 }
 
 void SV3_1aPpTreeShapeListener::exitString_blob(
@@ -498,8 +503,8 @@ void SV3_1aPpTreeShapeListener::enterMacroInstanceWithArgs(
       macroName.erase(0, 1);
       macroName = StringUtils::rtrim(macroName);
     }
-    SV3_1aPpParser::Macro_actual_argsContext *const argsCtx =
-        ctx->macro_actual_args();
+    SV3_1aPpParser::Macro_actual_arg_listContext *const argsCtx =
+        ctx->macro_actual_arg_list();
     std::string macroArgs = argsCtx->getText();
     int32_t nbCRinArgs = std::count(macroArgs.cbegin(), macroArgs.cend(), '\n');
     std::vector<antlr4::tree::ParseTree *> tokens;
@@ -513,6 +518,9 @@ void SV3_1aPpTreeShapeListener::enterMacroInstanceWithArgs(
     }
     std::vector<std::string> actualArgs;
     ParseUtils::tokenizeAtComma(actualArgs, tokens);
+    if ((actualArgs.size() == 1) && actualArgs.back().empty()) {
+      actualArgs.clear();
+    }
     macroName.erase(macroName.begin());
 
     int32_t openingIndex = -1;
@@ -643,7 +651,7 @@ void SV3_1aPpTreeShapeListener::enterMacroInstanceWithArgs(
           /* indexOpposite */ openingIndex);
     }
   } else if ((!m_inActiveBranch) && (!m_inMacroDefinitionParsing)) {
-    std::string macroArgs = ctx->macro_actual_args()->getText();
+    std::string macroArgs = ctx->macro_actual_arg_list()->getText();
     int32_t nbCRinArgs = std::count(macroArgs.cbegin(), macroArgs.cend(), '\n');
     m_pp->append(std::string(nbCRinArgs, '\n'));
   }
@@ -1617,7 +1625,7 @@ void SV3_1aPpTreeShapeListener::enterMultiline_args_macro_definition(
     m_inMacroDefinitionParsing = true;
     SV3_1aPpParser::Escaped_macro_definition_bodyContext *cBody =
         ctx->escaped_macro_definition_body();
-    const std::string arguments = ctx->macro_arguments()->getText();
+    const std::string arguments = ctx->macro_formal_args()->getText();
 
     std::vector<antlr4::Token *> tokens = m_tokens->getTokens(
         cBody->getStart()->getTokenIndex(), cBody->getStop()->getTokenIndex());
@@ -1685,7 +1693,7 @@ void SV3_1aPpTreeShapeListener::enterSimple_args_macro_definition(
     m_inMacroDefinitionParsing = true;
     SV3_1aPpParser::Simple_macro_definition_bodyContext *cBody =
         ctx->simple_macro_definition_body();
-    std::string arguments = ctx->macro_arguments()->getText();
+    std::string arguments = ctx->macro_formal_args()->getText();
 
     std::vector<antlr4::Token *> tokens = m_tokens->getTokens(
         cBody->getStart()->getTokenIndex(), cBody->getStop()->getTokenIndex());

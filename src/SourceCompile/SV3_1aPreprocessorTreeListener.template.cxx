@@ -1083,7 +1083,8 @@ void SV3_1aPreprocessorTreeListener::enterMacroInstanceWithArgs(
   macroName.erase(macroName.begin());
 
   std::vector<antlr4::tree::ParseTree *> tokens;
-  for (antlr4::tree::ParseTree *child : ctx->macro_actual_args()->children) {
+  for (antlr4::tree::ParseTree *child :
+       ctx->macro_actual_arg_list()->children) {
     if (child->getTreeType() == antlr4::tree::ParseTreeType::TERMINAL) {
       tokens.emplace_back(child);
     } else {
@@ -1139,7 +1140,7 @@ void SV3_1aPreprocessorTreeListener::enterMacroInstanceWithArgs(
                                 m_pp->m_instructions);
   }
 
-  const std::string macroArgs = ctx->macro_actual_args()->getText();
+  const std::string macroArgs = ctx->macro_actual_arg_list()->getText();
   const size_t nCRinArgs =
       std::count(macroArgs.cbegin(), macroArgs.cend(), '\n');
 
@@ -1359,7 +1360,7 @@ void SV3_1aPreprocessorTreeListener::enterMacro_definition(
       macroName = StringUtils::rtrim(svname);
     }
 
-    arguments = simpleArgsDefinition->macro_arguments()->getText();
+    arguments = simpleArgsDefinition->macro_formal_args()->getText();
     body = simpleArgsDefinition->simple_macro_definition_body();
   } else if (SV3_1aPpParser::Multiline_no_args_macro_definitionContext
                  *const multiNoArgsDefinition =
@@ -1385,7 +1386,7 @@ void SV3_1aPreprocessorTreeListener::enterMacro_definition(
       macroName = StringUtils::rtrim(svname);
     }
 
-    arguments = multiArgsDefinition->macro_arguments()->getText();
+    arguments = multiArgsDefinition->macro_formal_args()->getText();
     body = multiArgsDefinition->escaped_macro_definition_body();
   } else if (SV3_1aPpParser::Define_directiveContext *const defineDirective =
                  ctx->define_directive()) {

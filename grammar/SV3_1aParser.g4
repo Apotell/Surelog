@@ -565,9 +565,7 @@ class_method
   )
   ;
 
-class_constructor_prototype
-  : FUNCTION NEW (OPEN_PARENS tf_port_list? CLOSE_PARENS)?
-  ;
+class_constructor_prototype: FUNCTION NEW tf_port_item_list?;
 
 class_constraint: constraint_prototype | constraint_declaration;
 
@@ -593,9 +591,7 @@ method_prototype: task_prototype | function_prototype;
 super_dot_new: SUPER DOT NEW;
 
 class_constructor_declaration
-  : FUNCTION class_scope? NEW (
-    OPEN_PARENS tf_port_list? CLOSE_PARENS
-  )? SEMICOLON block_item_declaration* (
+  : FUNCTION class_scope? NEW tf_port_item_list? SEMICOLON block_item_declaration* (
     super_dot_new (OPEN_PARENS argument_list CLOSE_PARENS)? SEMICOLON
   )? function_statement_or_null* ENDFUNCTION (COLON NEW)?
   ;
@@ -794,14 +790,12 @@ type_declaration
     ((data_type | net_type) identifier variable_dimension*)
     | (identifier constant_bit_select DOT identifier identifier)
     | (
-      (
         enum_keyword
         | struct_keyword
         | union_keyword
         | class_keyword
         | interface_class_keyword
       )? identifier
-    )
   ) SEMICOLON
   ;
 
@@ -1208,20 +1202,18 @@ function_body_declaration
   : function_data_type_or_implicit (
     interface_identifier DOT
     | class_scope
-  )? identifier SEMICOLON tf_item_declaration* function_statement_or_null* ENDFUNCTION (
+  )? identifier SEMICOLON tf_item_declaration_list function_statement_or_null* ENDFUNCTION (
     COLON identifier
   )?
   | function_data_type_or_implicit (
     interface_identifier DOT
     | class_scope
-  )? identifier OPEN_PARENS tf_port_list? CLOSE_PARENS SEMICOLON block_item_declaration*
+  )? identifier (tf_port_item_list? | OPEN_PARENS CLOSE_PARENS) SEMICOLON block_item_declaration*
       function_statement_or_null* ENDFUNCTION (COLON identifier)?
   ;
 
 function_prototype
-  : FUNCTION function_data_type_or_implicit identifier (
-    OPEN_PARENS tf_port_list? CLOSE_PARENS
-  )?
+  : FUNCTION function_data_type_or_implicit identifier tf_port_item_list?
   ;
 
 dpi_import_export
@@ -1248,20 +1240,22 @@ pure_keyword: PURE;
 task_declaration: TASK lifetime? task_body_declaration;
 
 task_body_declaration
-  : (interface_identifier DOT | class_scope)? identifier SEMICOLON tf_item_declaration*
+  : (interface_identifier DOT | class_scope)? identifier SEMICOLON tf_item_declaration_list
       statement_or_null* ENDTASK (COLON identifier)?
-  | (interface_identifier DOT | class_scope)? identifier OPEN_PARENS tf_port_list? CLOSE_PARENS
+  | (interface_identifier DOT | class_scope)? identifier (tf_port_item_list? | OPEN_PARENS CLOSE_PARENS)
       SEMICOLON block_item_declaration* statement_or_null* ENDTASK (
     COLON identifier
   )?
   ;
+
+tf_item_declaration_list: tf_item_declaration*?;
 
 tf_item_declaration
   : block_item_declaration
   | tf_port_declaration
   ;
 
-tf_port_list: tf_port_item (COMMA tf_port_item)*;
+tf_port_item_list: OPEN_PARENS (tf_port_item (COMMA tf_port_item)*)? CLOSE_PARENS;
 
 tf_port_item
   : attribute_instance* tf_port_direction? var_type? data_type_or_implicit identifier
@@ -1275,9 +1269,7 @@ tf_port_declaration
       tf_variable_identifier_list SEMICOLON
   ;
 
-task_prototype
-  : TASK identifier (OPEN_PARENS tf_port_list? CLOSE_PARENS)?
-  ;
+task_prototype: TASK identifier tf_port_item_list?;
 
 block_item_declaration
   : attribute_instance* (
@@ -1637,9 +1629,7 @@ let_formal_type: data_type_or_implicit | UNTYPED;
  */
 
 covergroup_declaration
-  : COVERGROUP identifier (
-    OPEN_PARENS tf_port_list? CLOSE_PARENS
-  )? coverage_event? SEMICOLON coverage_spec_or_option* ENDGROUP (
+  : COVERGROUP identifier tf_port_item_list? coverage_event? SEMICOLON coverage_spec_or_option* ENDGROUP (
     COLON identifier
   )?
   ;
@@ -1660,7 +1650,7 @@ coverage_spec: cover_point | cover_cross;
 
 coverage_event
   : clocking_event
-  | WITH FUNCTION SAMPLE OPEN_PARENS tf_port_list? CLOSE_PARENS
+  | WITH FUNCTION SAMPLE (tf_port_item_list | OPEN_PARENS CLOSE_PARENS)
   | ATAT OPEN_PARENS block_event_expression CLOSE_PARENS
   ;
 
@@ -2734,9 +2724,7 @@ randsequence_statement
   ;
 
 production
-  : function_data_type? identifier (
-    OPEN_PARENS tf_port_list CLOSE_PARENS
-  )? COLON rs_rule (BITW_OR rs_rule)* SEMICOLON
+  : function_data_type? identifier tf_port_item_list? COLON rs_rule (BITW_OR rs_rule)* SEMICOLON
   ;
 
 rs_rule
@@ -3179,13 +3167,10 @@ subroutine_call
 
 argument: expression?;
 
+named_argument: DOT identifier OPEN_PARENS expression? CLOSE_PARENS;
+ 
 argument_list
-  : expression? (COMMA argument)* (
-    COMMA DOT identifier OPEN_PARENS expression? CLOSE_PARENS
-  )*
-  | DOT identifier OPEN_PARENS expression? CLOSE_PARENS (
-    COMMA DOT identifier OPEN_PARENS expression? CLOSE_PARENS
-  )*
+  : (expression? (COMMA argument)* | named_argument) (COMMA named_argument)*
   ;
 
 method_call
@@ -3586,7 +3571,7 @@ complex_func_call
   )? dollar_root_keyword? identifier (
     (OPEN_BRACKET constant_expression CLOSE_BRACKET)* DOT identifier
   )* attribute_instance* (
-    (OPEN_PARENS (argument_list) CLOSE_PARENS)
+    OPEN_PARENS argument_list CLOSE_PARENS
     | select
   ) (DOT method_call_body)?
   ;

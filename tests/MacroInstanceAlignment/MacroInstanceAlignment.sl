@@ -1,0 +1,1 @@
+-parse -d ast dut.sv -nobuiltin

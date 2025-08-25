@@ -426,7 +426,8 @@ bool CompileHelper::compileTfPortList(Procedure* parent, const FileContent* fC,
    n<> u<52> t<Tf_port_item> p<53> c<49> l<18>
   */
   // Compile arguments
-  if (tf_port_list && (fC->Type(tf_port_list) == VObjectType::paTf_port_list)) {
+  if (tf_port_list &&
+      (fC->Type(tf_port_list) == VObjectType::paTf_port_item_list)) {
     NodeId tf_port_item = fC->Child(tf_port_list);
     while (tf_port_item) {
       Value* value = nullptr;
@@ -5096,7 +5097,8 @@ uhdm::AnyCollection* CompileHelper::compileTfCallArguments(
   std::vector<uhdm::Any*> argOrder;
   while (argumentNode) {
     NodeId argument = argumentNode;
-    if (fC->Type(argument) == VObjectType::paArgument) {
+    if ((fC->Type(argument) == VObjectType::paArgument) ||
+        (fC->Type(argument) == VObjectType::paNamed_argument)) {
       argument = fC->Child(argument);
     }
     NodeId sibling = fC->Sibling(argument);
@@ -5113,7 +5115,6 @@ uhdm::AnyCollection* CompileHelper::compileTfCallArguments(
         args.emplace(fC->SymName(argument), exp);
         argOrder.emplace_back(exp);
       }
-      argumentNode = fC->Sibling(argumentNode);
     } else if (((fC->Type(argument) == VObjectType::paUnary_Tilda) ||
                 (fC->Type(argument) == VObjectType::paUnary_Not)) &&
                (fC->Type(sibling) == VObjectType::paExpression)) {
@@ -5126,7 +5127,6 @@ uhdm::AnyCollection* CompileHelper::compileTfCallArguments(
         if (exp->getParent() == nullptr) exp->setParent(call);
         arguments->emplace_back(exp);
       }
-      argumentNode = fC->Sibling(argumentNode);
     } else {
       // arg by position
       Expression = argument;

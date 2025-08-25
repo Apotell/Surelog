@@ -1589,6 +1589,9 @@ n<> u<142> t<Tf_item_declaration> p<386> c<141> s<384> l<28>
               if (uhdm::Any* var = compileVariable(
                       component, fC, Data_type, nameId, InvalidNodeId,
                       compileDesign, Reduce::No, parent, nullptr, false)) {
+                // if (uhdm::Any* var = compileVariable(component, fC,
+                // compileDesign, nameId, VObjectType::NO_TYPE, Data_type,
+                // ts)) {
                 if (uhdm::Variables* const v = any_cast<uhdm::Variables>(var)) {
                   v->setAutomatic(!is_static);
                   v->setName(name);
@@ -1630,7 +1633,7 @@ std::vector<uhdm::IODecl*>* CompileHelper::compileTfPortList(
     DesignComponent* component, uhdm::Any* parent, const FileContent* fC,
     NodeId tf_port_list, CompileDesign* compileDesign) {
   if ((!tf_port_list) ||
-      ((fC->Type(tf_port_list) != VObjectType::paTf_port_list) &&
+      ((fC->Type(tf_port_list) != VObjectType::paTf_port_item_list) &&
        (fC->Type(tf_port_list) != VObjectType::paLet_port_list))) {
     return nullptr;
   }
@@ -1929,35 +1932,30 @@ bool CompileHelper::compileTask(DesignComponent* component,
   const uhdm::ScopedScope scopedScope(task);
   NodeId Tf_port_list = fC->Sibling(task_name);
   NodeId Statement_or_null;
-  if (fC->Type(Tf_port_list) == VObjectType::paTf_port_list) {
+  if (fC->Type(Tf_port_list) == VObjectType::paTf_port_item_list) {
     Statement_or_null = fC->Sibling(Tf_port_list);
     task->setIODecls(
         compileTfPortList(component, task, fC, Tf_port_list, compileDesign));
-  } else if (fC->Type(Tf_port_list) == VObjectType::paTf_item_declaration) {
-    NodeId Block_item_declaration = fC->Child(Tf_port_list);
-    if (fC->Type(Block_item_declaration) !=
-        VObjectType::paBlock_item_declaration) {
-      compileTfPortDecl(component, task, fC, Tf_port_list, compileDesign);
-      while (fC->Type(Tf_port_list) == VObjectType::paTf_item_declaration) {
-        NodeId Tf_port_declaration = fC->Child(Tf_port_list);
-        if (fC->Type(Tf_port_declaration) ==
-            VObjectType::paTf_port_declaration) {
-        } else if (fC->Type(Tf_port_declaration) ==
-                   VObjectType::paBlock_item_declaration) {
-          NodeId ItemNode = fC->Child(Tf_port_declaration);
-          if (fC->Type(ItemNode) != VObjectType::paData_declaration) break;
-        } else {
-          break;
-        }
-        Tf_port_list = fC->Sibling(Tf_port_list);
+  } else if (fC->Type(Tf_port_list) ==
+             VObjectType::paTf_item_declaration_list) {
+    Statement_or_null = fC->Sibling(Tf_port_list);
+    Tf_port_list = fC->Child(Tf_port_list);
+    compileTfPortDecl(component, task, fC, Tf_port_list, compileDesign);
+    while (Tf_port_list &&
+           (fC->Type(Tf_port_list) == VObjectType::paTf_item_declaration)) {
+      NodeId Block_item_declaration = fC->Child(Tf_port_list);
+      NodeId Parameter_declaration = fC->Child(Block_item_declaration);
+      if (Parameter_declaration && (fC->Type(Parameter_declaration) ==
+                                    VObjectType::paParameter_declaration)) {
+        compileStmt(component, fC, Parameter_declaration, compileDesign, reduce,
+                    task, instance);
       }
+      Tf_port_list = fC->Sibling(Tf_port_list);
     }
-    Statement_or_null = Tf_port_list;
   } else if (fC->Type(Tf_port_list) == VObjectType::paBlock_item_declaration) {
     Statement_or_null = Tf_port_list;
-  } else {
-    if (fC->Type(Tf_port_list) == VObjectType::paStatement_or_null)
-      Statement_or_null = Tf_port_list;
+  } else if (fC->Type(Tf_port_list) == VObjectType::paStatement_or_null) {
+    Statement_or_null = Tf_port_list;
   }
 
   NodeId MoreStatement_or_null = fC->Sibling(Statement_or_null);
@@ -1974,59 +1972,37 @@ bool CompileHelper::compileTask(DesignComponent* component,
     uhdm::AnyCollection* stmts = begin->getStmts(true);
     const NodeId firstStatementId = Statement_or_null;
     NodeId lastStatementId = Statement_or_null;
-    while (Statement_or_null) {
-      if (Statement_or_null &&
-          (fC->Type(Statement_or_null) == VObjectType::ENDTASK))
-        break;
-      if (fC->Type(fC->Child(Statement_or_null)) ==
-          VObjectType::paTf_port_declaration) {
-        compileTfPortDecl(component, task, fC, Statement_or_null,
-                          compileDesign);
-        while (fC->Type(Statement_or_null) ==
-               VObjectType::paTf_item_declaration) {
-          NodeId Tf_port_declaration = fC->Child(Statement_or_null);
-          if (fC->Type(Tf_port_declaration) ==
-              VObjectType::paTf_port_declaration) {
-          } else if (fC->Type(Tf_port_declaration) ==
-                     VObjectType::paBlock_item_declaration) {
-            NodeId ItemNode = fC->Child(Tf_port_declaration);
-            if (fC->Type(ItemNode) != VObjectType::paData_declaration) break;
-          } else {
-            break;
+    while (Statement_or_null &&
+           (fC->Type(Statement_or_null) != VObjectType::ENDTASK)) {
+      if (uhdm::AnyCollection* sts =
+              compileStmt(component, fC, Statement_or_null, compileDesign,
+                          reduce, begin, instance)) {
+        for (uhdm::Any* st : *sts) {
+          uhdm::UhdmType stmt_type = st->getUhdmType();
+          if (stmt_type == uhdm::UhdmType::ParamAssign) {
+            if (uhdm::ParamAssign* pst = any_cast<uhdm::ParamAssign>(st))
+              task->getParamAssigns(true)->emplace_back(pst);
           }
-          Statement_or_null = fC->Sibling(Statement_or_null);
-        }
-      } else {
-        if (uhdm::AnyCollection* sts =
-                compileStmt(component, fC, Statement_or_null, compileDesign,
-                            reduce, begin, instance)) {
-          for (uhdm::Any* st : *sts) {
-            uhdm::UhdmType stmt_type = st->getUhdmType();
-            if (stmt_type == uhdm::UhdmType::ParamAssign) {
-              if (uhdm::ParamAssign* pst = any_cast<uhdm::ParamAssign>(st))
-                task->getParamAssigns(true)->emplace_back(pst);
-            }
-            if (stmt_type == uhdm::UhdmType::Assignment) {
-              uhdm::Assignment* stmt = (uhdm::Assignment*)st;
-              if (stmt->getRhs() == nullptr ||
-                  any_cast<uhdm::Variables>((uhdm::Expr*)stmt->getLhs())) {
-                // Declaration
-                if (stmt->getRhs() != nullptr) {
-                  stmts->emplace_back(st);
-                } else {
-                  if (uhdm::Variables* var = any_cast<uhdm::Variables>(
-                          (uhdm::Expr*)stmt->getLhs()))
-                    var->setParent(begin);
-                  // s.Erase(stmt);
-                }
-              } else {
+          if (stmt_type == uhdm::UhdmType::Assignment) {
+            uhdm::Assignment* stmt = (uhdm::Assignment*)st;
+            if (stmt->getRhs() == nullptr ||
+                any_cast<uhdm::Variables>((uhdm::Expr*)stmt->getLhs())) {
+              // Declaration
+              if (stmt->getRhs() != nullptr) {
                 stmts->emplace_back(st);
+              } else {
+                if (uhdm::Variables* var =
+                        any_cast<uhdm::Variables>((uhdm::Expr*)stmt->getLhs()))
+                  var->setParent(begin);
+                // s.Erase(stmt);
               }
             } else {
               stmts->emplace_back(st);
             }
-            st->setParent(begin);
+          } else {
+            stmts->emplace_back(st);
           }
+          st->setParent(begin);
         }
       }
       lastStatementId = Statement_or_null;
@@ -2037,35 +2013,11 @@ bool CompileHelper::compileTask(DesignComponent* component,
     // Page 983, 2017 Standard: 0 or 1 Stmt
     if (Statement_or_null &&
         (fC->Type(Statement_or_null) != VObjectType::ENDTASK)) {
-      uhdm::AnyCollection* stmts =
-          compileStmt(component, fC, Statement_or_null, compileDesign, reduce,
-                      task, instance);
-      if (stmts) {
-        for (uhdm::Any* st : *stmts) {
-          uhdm::UhdmType stmt_type = st->getUhdmType();
-          if (stmt_type == uhdm::UhdmType::ParamAssign) {
-            if (uhdm::ParamAssign* pst = any_cast<uhdm::ParamAssign>(st))
-              task->getParamAssigns(true)->emplace_back(pst);
-          } else if (stmt_type == uhdm::UhdmType::Assignment) {
-            uhdm::Assignment* stmt = (uhdm::Assignment*)st;
-            if (stmt->getRhs() == nullptr ||
-                any_cast<uhdm::Variables>((uhdm::Expr*)stmt->getLhs())) {
-              // Declaration
-              if (stmt->getRhs() != nullptr) {
-                task->setStmt(st);
-              } else {
-                if (uhdm::Variables* var =
-                        any_cast<uhdm::Variables>((uhdm::Expr*)stmt->getLhs()))
-                  var->setParent(task);
-                // s.Erase(stmt);
-              }
-            } else {
-              task->setStmt(st);
-            }
-          } else {
-            task->setStmt(st);
-          }
-          st->setParent(task);
+      if (uhdm::AnyCollection* stmts =
+              compileStmt(component, fC, Statement_or_null, compileDesign,
+                          reduce, task, instance)) {
+        if (!stmts->empty()) {
+          task->setStmt(stmts->at(0));
         }
       }
     }
@@ -2361,11 +2313,14 @@ bool CompileHelper::compileFunction(DesignComponent* component,
   }
 
   NodeId Function_statement_or_null = Tf_port_list;
-  if (fC->Type(Tf_port_list) == VObjectType::paTf_port_list) {
+  if (fC->Type(Tf_port_list) == VObjectType::paTf_port_item_list) {
     func->setIODecls(
         compileTfPortList(component, func, fC, Tf_port_list, compileDesign));
     Function_statement_or_null = fC->Sibling(Tf_port_list);
-  } else if (fC->Type(Tf_port_list) == VObjectType::paTf_item_declaration) {
+  } else if (fC->Type(Tf_port_list) ==
+             VObjectType::paTf_item_declaration_list) {
+    Function_statement_or_null = fC->Sibling(Tf_port_list);
+    Tf_port_list = fC->Child(Tf_port_list);
     auto results =
         compileTfPortDecl(component, func, fC, Tf_port_list, compileDesign);
     func->setIODecls(results.first);
@@ -2399,7 +2354,6 @@ bool CompileHelper::compileFunction(DesignComponent* component,
 
       Tf_port_list = fC->Sibling(Tf_port_list);
     }
-    Function_statement_or_null = Tf_port_list;
   }
 
   NodeId MoreFunction_statement_or_null =
@@ -2648,7 +2602,7 @@ Task* CompileHelper::compileTaskPrototype(DesignComponent* scope,
   task->setName(taskName);
   task->setParent(scope->getUhdmModel());
 
-  if (fC->Type(Tf_port_list) == VObjectType::paTf_port_list) {
+  if (fC->Type(Tf_port_list) == VObjectType::paTf_port_item_list) {
     task->setIODecls(
         compileTfPortList(scope, task, fC, Tf_port_list, compileDesign));
   } else if (fC->Type(Tf_port_list) == VObjectType::paTf_item_declaration) {
@@ -2768,7 +2722,7 @@ Function* CompileHelper::compileFunctionPrototype(
     Tf_port_list = fC->Sibling(suffixname);
   }
 
-  if (fC->Type(Tf_port_list) == VObjectType::paTf_port_list) {
+  if (fC->Type(Tf_port_list) == VObjectType::paTf_port_item_list) {
     func->setIODecls(
         compileTfPortList(scope, func, fC, Tf_port_list, compileDesign));
   } else if (fC->Type(Tf_port_list) == VObjectType::paTf_item_declaration) {

@@ -2953,13 +2953,13 @@ uhdm::Any *CompileHelper::compileExpression(
           NodeId List_of_arguments = fC->Sibling(nameId);
           std::string name(fC->SymName(nameId));
           if (name == "bits") {
-            NodeId Expression = fC->Child(List_of_arguments);
-            result = compileBits(component, fC, Expression, compileDesign,
-                                 reduce, pexpr, instance, false, muteErrors);
+            result =
+                compileBits(component, fC, List_of_arguments, compileDesign,
+                            reduce, pexpr, instance, false, muteErrors);
           } else if (name == "size") {
-            NodeId Expression = fC->Child(List_of_arguments);
-            result = compileBits(component, fC, Expression, compileDesign,
-                                 reduce, pexpr, instance, true, muteErrors);
+            result =
+                compileBits(component, fC, List_of_arguments, compileDesign,
+                            reduce, pexpr, instance, true, muteErrors);
           } else if (name == "clog2") {
             result =
                 compileClog2(component, fC, List_of_arguments, compileDesign,

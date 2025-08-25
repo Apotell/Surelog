@@ -987,41 +987,34 @@ PreprocessFile::evaluateMacro_(
 
   bool incorrectArgNb = false;
   static const std::regex ws_re("[ \t]+");
-  for (uint32_t i = 0; i < formal_args.size(); i++) {
+  for (uint32_t i = 0, ni = formal_args.size(); i < ni; ++i) {
     std::vector<std::string> formal_arg_default;
     StringUtils::tokenize(formal_args[i], "=", formal_arg_default);
     const std::string formal =
         std::regex_replace(formal_arg_default[0], ws_re, "");
-    bool empty_actual = true;
-    if (i < actual_args.size()) {
-      for (char c : actual_args[i]) {
-        if (c != ' ') {
-          empty_actual = false;
-          break;
-        }
-      }
-    }
+    bool empty_actual =
+        (i >= actual_args.size()) ||
+        (actual_args[i].find_first_not_of(' ') == std::string_view::npos);
     if (!empty_actual) {
       if (actual_args[i] == SymbolTable::getEmptyMacroMarker()) {
         actual_args[i].clear();
       }
-
-      const std::string pattern = "`" + formal;
-      StringUtils::replaceInTokenVector(body_tokens, {"``", pattern, "``"},
-                                        "`" + actual_args[i]);
+      std::string_view actual_arg = StringUtils::trim(actual_args[i]);
+      StringUtils::replaceInTokenVector(body_tokens,
+                                        {"``", StrCat("`", formal), "``"},
+                                        StrCat("`", actual_arg));
       StringUtils::replaceInTokenVector(body_tokens, {"``", formal, "``"},
-                                        actual_args[i]);
+                                        actual_arg);
       StringUtils::replaceInTokenVector(body_tokens, "``" + formal + "``",
-                                        actual_args[i]);
+                                        actual_arg);
       StringUtils::replaceInTokenVector(body_tokens, {formal, "``"},
-                                        actual_args[i]);
+                                        actual_arg);
       StringUtils::replaceInTokenVector(body_tokens, {"``", formal},
-                                        actual_args[i]);
+                                        actual_arg);
       StringUtils::replaceInTokenVector(body_tokens, {formal, " ", "``"},
-                                        actual_args[i]);
-      StringUtils::replaceInTokenVector(body_tokens, formal + "``",
-                                        actual_args[i]);
-      StringUtils::replaceInTokenVector(body_tokens, formal, actual_args[i]);
+                                        actual_arg);
+      StringUtils::replaceInTokenVector(body_tokens, formal + "``", actual_arg);
+      StringUtils::replaceInTokenVector(body_tokens, formal, actual_arg);
     } else if (formal_arg_default.size() == 2) {
       const std::string default_val =
           std::regex_replace(formal_arg_default[1], ws_re, "");
@@ -1047,7 +1040,7 @@ PreprocessFile::evaluateMacro_(
       StringUtils::replaceInTokenVector(body_tokens, formal + "``", "");
       StringUtils::replaceInTokenVector(body_tokens, formal, "");
 
-      if ((int32_t)i > (int32_t)(((int32_t)actual_args.size()) - 1)) {
+      if (i >= actual_args.size()) {
         if (!instructions.m_mute) {
           Location loc(callingFile->getFileId(callingLine),
                        callingFile->getLineNb(callingLine), 0, getId(name));

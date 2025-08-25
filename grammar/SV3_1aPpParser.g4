@@ -104,14 +104,14 @@ description
 escaped_identifier: ESCAPED_IDENTIFIER;
 
 macro_instance
-  : (MACRO_IDENTIFIER | MACRO_ESCAPED_IDENTIFIER) SPACES* OPEN_PARENS macro_actual_args CLOSE_PARENS
-      # MacroInstanceWithArgs
+  : (MACRO_IDENTIFIER | MACRO_ESCAPED_IDENTIFIER) SPACES*
+      OPEN_PARENS macro_actual_arg_list CLOSE_PARENS # MacroInstanceWithArgs
   | (MACRO_IDENTIFIER | MACRO_ESCAPED_IDENTIFIER) # MacroInstanceNoArgs
   ;
 
 unterminated_string: DOUBLE_QUOTE string_blob* CR;
 
-macro_actual_args: macro_arg* (COMMA macro_arg*)*;
+macro_actual_arg_list: macro_actual_arg (COMMA macro_actual_arg)*;
 
 comment
   : LINE_COMMENT
@@ -362,7 +362,7 @@ multiline_no_args_macro_definition
   ;
 
 multiline_args_macro_definition
-  : TICK_DEFINE SPACES (SIMPLE_IDENTIFIER | ESCAPED_IDENTIFIER) macro_arguments SPACES*
+  : TICK_DEFINE SPACES (SIMPLE_IDENTIFIER | ESCAPED_IDENTIFIER) macro_formal_args SPACES*
       escaped_macro_definition_body
   ;
 
@@ -373,9 +373,9 @@ simple_no_args_macro_definition
   ;
 
 simple_args_macro_definition
-  : TICK_DEFINE SPACES (SIMPLE_IDENTIFIER | ESCAPED_IDENTIFIER) macro_arguments SPACES
+  : TICK_DEFINE SPACES (SIMPLE_IDENTIFIER | ESCAPED_IDENTIFIER) macro_formal_args SPACES
       simple_macro_definition_body (CR | LINE_COMMENT)
-  | TICK_DEFINE SPACES (SIMPLE_IDENTIFIER | ESCAPED_IDENTIFIER) macro_arguments SPACES* CR
+  | TICK_DEFINE SPACES (SIMPLE_IDENTIFIER | ESCAPED_IDENTIFIER) macro_formal_args SPACES* CR
   ;
 
 identifier_in_macro_body: (SIMPLE_IDENTIFIER TICK_TICK?)*;
@@ -399,11 +399,11 @@ simple_args_macro_definition_in_macro_body
   : TICK_DEFINE SPACES (
     identifier_in_macro_body
     | ESCAPED_IDENTIFIER
-  ) macro_arguments SPACES simple_macro_definition_body_in_macro_body
+  ) macro_formal_args SPACES simple_macro_definition_body_in_macro_body
   | TICK_DEFINE SPACES (
     identifier_in_macro_body
     | ESCAPED_IDENTIFIER
-  ) macro_arguments
+  ) macro_formal_args
   ;
 
 directive_in_macro
@@ -473,7 +473,7 @@ directive_in_macro
   | pound_pound_delay
   ;
 
-macro_arguments
+macro_formal_args
   : OPEN_PARENS (
     (
       SPACES* SIMPLE_IDENTIFIER SPACES* (ASSIGN_OP default_value*)*
@@ -622,7 +622,9 @@ pragma_expression
   | ANY
   ;
 
-macro_arg
+macro_actual_arg: macro_actual_arg_fragment*;
+
+macro_actual_arg_fragment
   : SIMPLE_IDENTIFIER
   | integral_number
   | SPACES

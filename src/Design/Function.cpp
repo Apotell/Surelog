@@ -66,7 +66,7 @@ bool Function::compile(CompileHelper& compile_helper) {
       break;
     }
   }
-  if (fC->Type(tf_port_list) == VObjectType::paTf_port_list) {
+  if (fC->Type(tf_port_list) == VObjectType::paTf_port_item_list) {
     result &=
         compile_helper.compileTfPortList(this, fC, tf_port_list, m_params);
     function_statement_or_null = fC->Sibling(tf_port_list);

@@ -374,6 +374,7 @@ def _get_run_args(name, filepath, dirpath, binary_filepath, uvm_reldirpath, mp, 
       parts += ['-mp', (mp or '0')]
     parts += ['-d', 'uhdmstats'] # Force print uhdm stats
     parts += ['-d', 'cache']
+    parts += ['-d', 'uhdm']
 
     rel_output_dirpath = os.path.relpath(output_dirpath, dirpath)
     if 'MSYSTEM' in os.environ:

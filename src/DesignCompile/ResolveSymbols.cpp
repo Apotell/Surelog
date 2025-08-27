@@ -128,7 +128,7 @@ void ResolveSymbols::createFastLookup() {
                   new ClassDefinition(name, lib, pdef, m_fileData, subobject,
                                       nullptr, s.MakeClass_defn());
               m_fileData->addClassDefinition(fullSubName, def);
-              pdef->addClassDefinition(name, def);
+              pdef->getUnElabPackage()->addClassDefinition(name, def);
             }
           }
           break;
@@ -175,7 +175,7 @@ void ResolveSymbols::createFastLookup() {
               VObjectType::paModule_declaration};
           std::vector<NodeId> subobjects =
               m_fileData->sl_collect_all(object, subtypes, subtypes);
-          for (auto subobject : subobjects) {
+          for (auto& subobject : subobjects) {
             NodeId stId =
                 m_fileData->sl_collect(subobject, VObjectType::slStringConst,
                                        VObjectType::paAttr_spec);
@@ -191,7 +191,7 @@ void ResolveSymbols::createFastLookup() {
                     new ClassDefinition(name, lib, mdef, m_fileData, subobject,
                                         nullptr, s.MakeClass_defn());
                 m_fileData->addClassDefinition(fullSubName, def);
-                mdef->addClassDefinition(name, def);
+                mdef->getUnelabMmodule()->addClassDefinition(name, def);
               } else {
                 ModuleDefinition* def =
                     new ModuleDefinition(m_fileData, subobject, fullSubName);
@@ -205,11 +205,11 @@ void ResolveSymbols::createFastLookup() {
         case VObjectType::paConfig_declaration:
         case VObjectType::paUdp_declaration:
         case VObjectType::paInterface_declaration:
-        default:
+        default: {
           ModuleDefinition* def =
               new ModuleDefinition(m_fileData, object, fullName);
           m_fileData->addModuleDefinition(fullName, def);
-          break;
+        } break;
       }
     }
   }

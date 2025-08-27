@@ -230,7 +230,7 @@ void CompileDesign::collectObjects_(Design::FileIdDesignContentMap& all_files,
     for (const auto& prog : fC->getProgramDefinitions()) {
       design->addProgramDefinition(prog.first, prog.second);
     }
-    for (auto pack : fC->getPackageDefinitions()) {
+    for (auto& pack : fC->getPackageDefinitions()) {
       Package* existing = design->getPackage(pack.first);
       if (existing) {
         const FileContent* oldFC = existing->getFileContents()[0];
@@ -259,7 +259,7 @@ void CompileDesign::collectObjects_(Design::FileIdDesignContentMap& all_files,
         if (oldParentFile && (oldParentFile == newParentFile)) {
           // Recombine split package
           existing->addFileContent(newFC, newNodeId);
-          for (auto classdef : pack.second->getClassDefinitions()) {
+          for (auto& classdef : pack.second->getClassDefinitions()) {
             existing->addClassDefinition(classdef.first, classdef.second);
             classdef.second->setContainer(existing);
           }

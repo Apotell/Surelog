@@ -883,7 +883,7 @@ void DesignElaboration::elaborateInstance_(
 
   std::vector<NodeId> subInstances =
       fC->sl_collect_all(nodeId, types, stopPoints);
-  for (auto subInstanceId : subInstances) {
+  for (auto& subInstanceId : subInstances) {
     VObjectType type = fC->Type(subInstanceId);
     std::vector<NodeId> subSubInstances;
     std::string instName;

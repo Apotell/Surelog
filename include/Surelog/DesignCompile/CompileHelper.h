@@ -100,6 +100,7 @@ class FScope : public ValuedComponentI {
 };
 
 using Scopes = std::vector<FScope*>;
+enum class Elaborate : bool { Yes = true, No = false };
 enum class Reduce : bool { Yes = true, No = false };
 
 class CompileHelper final {
@@ -654,7 +655,11 @@ class CompileHelper final {
 
   std::string decompileHelper(const UHDM::any* sel);
 
-  void setElabMode(bool on) { m_elabMode = on; }
+  Elaborate getElaborate() const { return m_elaborate; }
+  void setElaborate(Elaborate elaborate) { m_elaborate = elaborate; }
+
+  Reduce getReduce() const { return m_reduce; }
+  void setReduce(Reduce reduce) { m_reduce = reduce; }
 
  private:
   ErrorContainer* m_errors = nullptr;
@@ -679,7 +684,8 @@ class CompileHelper final {
   bool m_checkForLoops = false;
   int32_t m_stackLevel = 0;
   bool m_unwind = false;
-  bool m_elabMode = true;
+  Elaborate m_elaborate = Elaborate::Yes;
+  Reduce m_reduce = Reduce::Yes;
 };
 
 }  // namespace SURELOG

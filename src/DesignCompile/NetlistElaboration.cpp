@@ -456,14 +456,15 @@ bool NetlistElaboration::elab_parameters_(ModuleInstance* instance,
               if (!isMultidimensional) {
                 bool invalidValue = false;
                 m_helper.checkForLoops(true);
-                expr* tmp = m_helper.reduceExpr(
-                    exp, invalidValue, mod, m_compileDesign, instance,
-                    fileSystem->toPathId(
-                        exp->VpiFile(),
-                        m_compileDesign->getCompiler()->getSymbolTable()),
-                    exp->VpiLineNo(), nullptr, true);
+                if (expr* tmp = m_helper.reduceExpr(
+                        exp, invalidValue, mod, m_compileDesign, instance,
+                        fileSystem->toPathId(
+                            exp->VpiFile(),
+                            m_compileDesign->getCompiler()->getSymbolTable()),
+                        exp->VpiLineNo(), nullptr, true)) {
+                  if (!invalidValue) exp = tmp;
+                }
                 m_helper.checkForLoops(false);
-                if (tmp && (invalidValue == false)) exp = tmp;
               }
             }
           }
@@ -2556,11 +2557,12 @@ bool NetlistElaboration::elab_ports_nets_(
           NodeId Port_expr = fC->Sibling(PortName);
           if (fC->Type(Port_expr) == VObjectType::paPort_expression) {
             m_helper.checkForLoops(true);
-            any* exp =
-                m_helper.compileExpression(comp, fC, Port_expr, m_compileDesign,
-                                           Reduce::Yes, nullptr, child, false);
+            if (any* exp = m_helper.compileExpression(
+                    comp, fC, Port_expr, m_compileDesign, Reduce::Yes, nullptr,
+                    child, false)) {
+              dest_port->Low_conn(exp);
+            }
             m_helper.checkForLoops(false);
-            dest_port->Low_conn(exp);
           }
         }
         fC->populateCoreMembers(id, id, dest_port);

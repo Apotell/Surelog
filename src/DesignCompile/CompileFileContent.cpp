@@ -39,7 +39,7 @@ namespace SURELOG {
 int32_t FunctorCompileFileContentDecl::operator()() const {
   CompileFileContent* instance = new CompileFileContent(
       m_compileDesign, m_fileContent, m_design, true, m_symbols, m_errors);
-  instance->compile(Elaborate::No, Reduce::No);
+  instance->compile(Elaborate::No, Reduce::Yes);
   delete instance;
   return 0;
 }
@@ -47,7 +47,7 @@ int32_t FunctorCompileFileContentDecl::operator()() const {
 int32_t FunctorCompileFileContent::operator()() const {
   CompileFileContent* instance = new CompileFileContent(
       m_compileDesign, m_fileContent, m_design, false, m_symbols, m_errors);
-  instance->compile(Elaborate::No, Reduce::No);
+  instance->compile(Elaborate::No, Reduce::Yes);
   delete instance;
   return 0;
 }

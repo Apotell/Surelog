@@ -81,7 +81,7 @@ int32_t FunctorCompileModule::operator()() const {
   if (CompileModule* instance =
           new CompileModule(m_compileDesign, m_module->getUnelabMmodule(),
                             m_design, m_symbols, m_errors, nullptr)) {
-    instance->compile(Elaborate::No, Reduce::No);
+    instance->compile(Elaborate::No, Reduce::Yes);
     delete instance;
   }
 

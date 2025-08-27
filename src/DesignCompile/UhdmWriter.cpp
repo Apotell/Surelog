@@ -4720,7 +4720,7 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
       m_compileDesign->getCompiler()->getCommandLineParser()->muteStdout());
 
   m_helper.setElaborate(Elaborate::No);
-  m_helper.setReduce(Reduce::No);
+  m_helper.setReduce(Reduce::Yes);
 
   // Compute list of design components that are part of the instance tree
   std::set<DesignComponent*> designComponents;
@@ -4873,7 +4873,7 @@ vpiHandle UhdmWriter::write(PathId uhdmFileId) {
     }
 
     m_helper.setElaborate(Elaborate::No);
-    m_helper.setReduce(Reduce::No);
+    m_helper.setReduce(Reduce::Yes);
 
     VectorOfpackage* v3 = s.MakePackageVec();
     d->AllPackages(v3);

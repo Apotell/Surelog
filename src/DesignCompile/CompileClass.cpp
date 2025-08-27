@@ -64,7 +64,7 @@ namespace SURELOG {
 int32_t FunctorCompileClass::operator()() const {
   CompileClass* instance =
       new CompileClass(m_compileDesign, m_class, m_design, m_symbols, m_errors);
-  instance->compile(Elaborate::No, Reduce::No);
+  instance->compile(Elaborate::No, Reduce::Yes);
   delete instance;
   return true;
 }

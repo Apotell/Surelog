@@ -61,7 +61,7 @@ int32_t FunctorCompilePackage::operator()() const {
   if (CompilePackage* instance =
           new CompilePackage(m_compileDesign, m_package->getUnElabPackage(),
                              m_design, m_symbols, m_errors)) {
-    instance->compile(Elaborate::No, Reduce::No);
+    instance->compile(Elaborate::No, Reduce::Yes);
     delete instance;
   }
 

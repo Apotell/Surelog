@@ -159,6 +159,7 @@ description
   | attribute_instance* (package_item | bind_directive)
   | config_declaration
   | top_directives
+  | comment
   ;
 
 module_nonansi_header
@@ -4000,3 +4001,5 @@ use_clause
   )*
   | USE parameter_value_assignment
   ;
+
+comment: LINE_COMMENT | BLOCK_COMMENT;

@@ -120,7 +120,7 @@ endif()
 if (SURELOG_BUILD_TESTS)
   if(SURELOG_USE_HOST_GTEST)
     find_package(GTest REQUIRED)
-  else()
+  elseif(NOT UHDM_BUILD_TESTS)
     add_subdirectory(third_party/googletest EXCLUDE_FROM_ALL)
     set(GTEST_INCLUDE_DIRS third_party/googletest/googletest/include third_party/googletest/googlemock/include)
   endif()
@@ -695,8 +695,8 @@ if (SURELOG_BUILD_TESTS)
   endif()
 
   # All unit-tests are registered with this custom target as dependency, so
-  # just `make UnitTests` will build them all.
-  add_custom_target(UnitTests)
+  # just `make SurelogUnitTests` will build them all.
+  add_custom_target(SurelogUnitTests)
 
   # Concise way to register a new google test
   # call with register_gtest(path/to/UnitTestFile.cpp)
@@ -717,8 +717,8 @@ if (SURELOG_BUILD_TESTS)
         TEST_PREFIX "${test_prefix}/"
         DISCOVERY_TIMEOUT 60)
 
-      # Now, add this binary to our UnitTests target that it builds this
-      add_dependencies(UnitTests ${test_bin})
+      # Now, add this binary to our SurelogUnitTests target that it builds this
+      add_dependencies(SurelogUnitTests ${test_bin})
     endforeach()
   endfunction()
 

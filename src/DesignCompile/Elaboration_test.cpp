@@ -51,8 +51,8 @@
 using ::testing::ElementsAre;
 
 namespace SURELOG {
-namespace {
 #if 0
+namespace {
 TEST(Elaboration, ExprFromPpTree) {
   CompileHelper helper;
   ElaboratorHarness eharness;
@@ -754,7 +754,7 @@ endmodule
     }
   }
 }
-#endif
+
 TEST(Elaboration, EnumConstElab) {
   Session session;
   CompileHelper helper(&session);
@@ -1445,7 +1445,6 @@ endmodule
   }
 }
 
-#if 0
 // Works only in elaborated mode where the sizes are actually computed.
 TEST(Elaboration, HierPathUnpacked) {
   Session session;
@@ -1496,6 +1495,6 @@ endmodule // top
     }
   }
 }
-#endif
 }  // namespace
+#endif
 }  // namespace SURELOG

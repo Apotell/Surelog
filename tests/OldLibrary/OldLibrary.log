@@ -1,8 +1,8 @@
 [INF:CM0023] Creating log file "${SURELOG_DIR}/build/regression/OldLibrary/slpp_all/surelog.log".
 [INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/OldLibrary/top.v".
-[INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/OldLibrary/lib/CELL1.v".
 [INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/OldLibrary/lib/CELL3.v".
 [INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/OldLibrary/lib/CELL2.v".
+[INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/OldLibrary/lib/CELL1.v".
 [INF:PA0201] Parsing source file "${SURELOG_DIR}/tests/OldLibrary/top.v".
 AST_DEBUG_BEGIN
 Count: 32
@@ -39,23 +39,6 @@ n<> u<31> t<Top_level_rule> c<1> l<1:1> el<9:1>
                   n<> u<21> t<Port_connection_list> p<22> c<20> l<5:16> el<5:16>
                     n<> u<20> t<Ordered_port_connection> p<21> l<5:16> el<5:16>
         n<> u<27> t<ENDMODULE> p<28> l<7:1> el<7:10>
-AST_DEBUG_END
-[INF:PA0201] Parsing source file "${SURELOG_DIR}/tests/OldLibrary/lib/CELL1.v".
-AST_DEBUG_BEGIN
-Count: 12
-LIB: work
-FILE: ${SURELOG_DIR}/tests/OldLibrary/lib/CELL1.v
-n<> u<11> t<Top_level_rule> c<1> l<1:1> el<4:1>
-  n<> u<1> t<Null_rule> p<11> s<10> l<1:1>
-  n<> u<10> t<Source_text> p<11> c<9> l<1:1> el<2:10>
-    n<> u<9> t<Description> p<10> c<8> l<1:1> el<2:10>
-      n<> u<8> t<Module_declaration> p<9> c<6> l<1:1> el<2:10>
-        n<> u<6> t<Module_nonansi_header> p<8> c<2> s<7> l<1:1> el<1:17>
-          n<module> u<2> t<Module_keyword> p<6> s<3> l<1:1> el<1:7>
-          n<CELL1> u<3> t<STRING_CONST> p<6> s<4> l<1:8> el<1:13>
-          n<> u<4> t<Package_import_declaration_list> p<6> s<5> l<1:14> el<1:14>
-          n<> u<5> t<Port_list> p<6> l<1:14> el<1:16>
-        n<> u<7> t<ENDMODULE> p<8> l<2:1> el<2:10>
 AST_DEBUG_END
 [INF:PA0201] Parsing source file "${SURELOG_DIR}/tests/OldLibrary/lib/CELL3.v".
 AST_DEBUG_BEGIN
@@ -165,10 +148,27 @@ n<> u<48> t<Top_level_rule> c<1> l<1:1> el<18:1>
             n<> u<41> t<ENDTABLE> p<42> l<16:3> el<16:11>
         n<> u<44> t<ENDPRIMITIVE> p<45> l<17:1> el<17:13>
 AST_DEBUG_END
+[INF:PA0201] Parsing source file "${SURELOG_DIR}/tests/OldLibrary/lib/CELL1.v".
+AST_DEBUG_BEGIN
+Count: 12
+LIB: work
+FILE: ${SURELOG_DIR}/tests/OldLibrary/lib/CELL1.v
+n<> u<11> t<Top_level_rule> c<1> l<1:1> el<4:1>
+  n<> u<1> t<Null_rule> p<11> s<10> l<1:1>
+  n<> u<10> t<Source_text> p<11> c<9> l<1:1> el<2:10>
+    n<> u<9> t<Description> p<10> c<8> l<1:1> el<2:10>
+      n<> u<8> t<Module_declaration> p<9> c<6> l<1:1> el<2:10>
+        n<> u<6> t<Module_nonansi_header> p<8> c<2> s<7> l<1:1> el<1:17>
+          n<module> u<2> t<Module_keyword> p<6> s<3> l<1:1> el<1:7>
+          n<CELL1> u<3> t<STRING_CONST> p<6> s<4> l<1:8> el<1:13>
+          n<> u<4> t<Package_import_declaration_list> p<6> s<5> l<1:14> el<1:14>
+          n<> u<5> t<Port_list> p<6> l<1:14> el<1:16>
+        n<> u<7> t<ENDMODULE> p<8> l<2:1> el<2:10>
+AST_DEBUG_END
 [WRN:PA0205] ${SURELOG_DIR}/tests/OldLibrary/top.v:1:1: No timescale set for "top".
-[WRN:PA0205] ${SURELOG_DIR}/tests/OldLibrary/lib/CELL1.v:1:1: No timescale set for "CELL1".
 [WRN:PA0205] ${SURELOG_DIR}/tests/OldLibrary/lib/CELL3.v:1:1: No timescale set for "CELL3".
 [WRN:PA0205] ${SURELOG_DIR}/tests/OldLibrary/lib/CELL2.v:1:1: No timescale set for "CELL2".
+[WRN:PA0205] ${SURELOG_DIR}/tests/OldLibrary/lib/CELL1.v:1:1: No timescale set for "CELL1".
 [INF:CP0300] Compilation...
 [INF:CP0303] ${SURELOG_DIR}/tests/OldLibrary/lib/CELL1.v:1:1: Compile module "work@CELL1".
 [INF:CP0305] ${SURELOG_DIR}/tests/OldLibrary/lib/CELL2.v:1:1: Compile udp "work@CELL2".
@@ -195,6 +195,7 @@ ModuleTypespec                                         1
 Package                                                1
 RefModule                                              1
 RefTypespec                                           13
+SourceFile                                             4
 TableEntry                                             6
 Task                                                   9
 TypedefTypespec                                        1

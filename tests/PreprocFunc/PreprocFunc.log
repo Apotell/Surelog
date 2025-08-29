@@ -406,10 +406,13 @@ Operation                                             12
 Package                                                1
 ParamAssign                                            6
 Parameter                                              6
+PreprocMacroDefinition                                 2
+PreprocMacroInstance                                   2
 Range                                                  2
 RefObj                                                23
 RefTypespec                                           17
 RefVar                                                 1
+SourceFile                                             2
 Task                                                   9
 TypedefTypespec                                        1
 === UHDM Object Stats End ===
@@ -418,6 +421,118 @@ TypedefTypespec                                        1
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_SourceFile: , file:${SURELOG_DIR}/tests/PreprocFunc/dut.sv
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiIncludes:
+  \_SourceFile: (inc.h), file:${SURELOG_DIR}/tests/PreprocFunc/inc.h, line:2:1, endln:2:17
+    |vpiParent:
+    \_SourceFile: , file:${SURELOG_DIR}/tests/PreprocFunc/dut.sv
+    |vpiName:inc.h
+    |vpiPreprocMacroDefinition:
+    \_PreprocMacroDefinition: (min), line:2:1, endln:2:41
+      |vpiParent:
+      \_SourceFile: (inc.h), file:${SURELOG_DIR}/tests/PreprocFunc/inc.h, line:2:1, endln:2:17
+      |vpiName:min
+      |vpiNameStartColumn:9
+      |vpiBodyStartColumn:18
+  |vpiPreprocMacroDefinition:
+  \_PreprocMacroDefinition: (max), line:9:1, endln:9:41
+    |vpiParent:
+    \_SourceFile: , file:${SURELOG_DIR}/tests/PreprocFunc/dut.sv
+    |vpiName:max
+    |vpiNameStartColumn:9
+    |vpiBodyStartColumn:18
+  |vpiPreprocMacroInstance:
+  \_PreprocMacroInstance: (max), file:${SURELOG_DIR}/tests/PreprocFunc/dut.sv, line:30:23, endln:30:43
+    |vpiParent:
+    \_SourceFile: , file:${SURELOG_DIR}/tests/PreprocFunc/dut.sv
+    |vpiName:max
+    |vpiPreprocMacroDefinition:
+    \_PreprocMacroDefinition: (max), line:9:1, endln:9:41
+    |vpiSectionStartLine:9
+    |vpiSectionStartColumn:18
+    |vpiSectionEndLine:9
+    |vpiSectionEndColumn:61
+    |vpiSourceStartLine:33
+    |vpiSourceStartColumn:23
+    |vpiSourceEndLine:33
+    |vpiSourceEndColumn:66
+    |vpiObject:
+    \_Operation: , line:9:18, endln:9:61
+      |vpiParent:
+      \_ParamAssign: , line:30:12, endln:30:43
+      |vpiOpType:33
+      |vpiOperand:
+      \_Operation: , line:9:19, endln:9:60
+        |vpiParent:
+        \_Operation: , line:9:18, endln:9:61
+        |vpiOpType:32
+        |vpiOperand:
+        \_Operation: , line:9:19, endln:9:38
+          |vpiParent:
+          \_Operation: , line:9:19, endln:9:60
+          |vpiOpType:18
+          |vpiOperand:
+          \_RefObj: (work@asym_ram.WIDTHA), line:9:20, endln:9:26
+            |vpiParent:
+            \_Operation: , line:9:19, endln:9:38
+            |vpiName:WIDTHA
+            |vpiFullName:work@asym_ram.WIDTHA
+            |vpiActual:
+            \_Parameter: (work@asym_ram.WIDTHA), line:7:11, endln:7:21
+          |vpiOperand:
+          \_RefObj: (work@asym_ram.WIDTHB), line:9:31, endln:9:37
+            |vpiParent:
+            \_Operation: , line:9:19, endln:9:38
+            |vpiName:WIDTHB
+            |vpiFullName:work@asym_ram.WIDTHB
+            |vpiActual:
+            \_Parameter: (work@asym_ram.WIDTHB), line:6:11, endln:6:21
+        |vpiOperand:
+        \_RefObj: (work@asym_ram.WIDTHA), line:9:42, endln:9:48
+          |vpiParent:
+          \_Operation: , line:9:19, endln:9:60
+          |vpiName:WIDTHA
+          |vpiFullName:work@asym_ram.WIDTHA
+          |vpiActual:
+          \_Parameter: (work@asym_ram.WIDTHA), line:7:11, endln:7:21
+        |vpiOperand:
+        \_RefObj: (work@asym_ram.WIDTHB), line:9:53, endln:9:59
+          |vpiParent:
+          \_Operation: , line:9:19, endln:9:60
+          |vpiName:WIDTHB
+          |vpiFullName:work@asym_ram.WIDTHB
+          |vpiActual:
+          \_Parameter: (work@asym_ram.WIDTHB), line:6:11, endln:6:21
+    |vpiObject:
+    \_RefObj: (work@asym_ram.WIDTHA), line:9:20, endln:9:26
+    |vpiObject:
+    \_Operation: , line:9:19, endln:9:38
+    |vpiObject:
+    \_RefObj: (work@asym_ram.WIDTHB), line:9:31, endln:9:37
+    |vpiObject:
+    \_Operation: , line:9:19, endln:9:60
+    |vpiObject:
+    \_RefObj: (work@asym_ram.WIDTHA), line:9:42, endln:9:48
+    |vpiObject:
+    \_RefObj: (work@asym_ram.WIDTHB), line:9:53, endln:9:59
+  |vpiPreprocMacroInstance:
+  \_PreprocMacroInstance: (min), file:${SURELOG_DIR}/tests/PreprocFunc/dut.sv, line:35:23, endln:35:43
+    |vpiParent:
+    \_SourceFile: , file:${SURELOG_DIR}/tests/PreprocFunc/dut.sv
+    |vpiName:min
+    |vpiPreprocMacroDefinition:
+    \_PreprocMacroDefinition: (min), line:2:1, endln:2:41
+    |vpiSectionStartLine:2
+    |vpiSectionStartColumn:18
+    |vpiSectionEndLine:2
+    |vpiSectionEndColumn:61
+    |vpiSourceStartLine:38
+    |vpiSourceStartColumn:23
+    |vpiSourceEndLine:38
+    |vpiSourceEndColumn:66
 |vpiAllPackages:
 \_Package: (builtin)
   |vpiParent:
@@ -1128,51 +1243,6 @@ Design: (unnamed)
     \_Module: work@asym_ram (work@asym_ram), file:${SURELOG_DIR}/tests/PreprocFunc/dut.sv, line:5:1, endln:45:10
     |vpiRhs:
     \_Operation: , line:9:18, endln:9:61
-      |vpiParent:
-      \_ParamAssign: , line:30:12, endln:30:43
-      |vpiOpType:33
-      |vpiOperand:
-      \_Operation: , line:9:19, endln:9:60
-        |vpiParent:
-        \_Operation: , line:9:18, endln:9:61
-        |vpiOpType:32
-        |vpiOperand:
-        \_Operation: , line:9:19, endln:9:38
-          |vpiParent:
-          \_Operation: , line:9:19, endln:9:60
-          |vpiOpType:18
-          |vpiOperand:
-          \_RefObj: (work@asym_ram.WIDTHA), line:9:20, endln:9:26
-            |vpiParent:
-            \_Operation: , line:9:19, endln:9:38
-            |vpiName:WIDTHA
-            |vpiFullName:work@asym_ram.WIDTHA
-            |vpiActual:
-            \_Parameter: (work@asym_ram.WIDTHA), line:7:11, endln:7:21
-          |vpiOperand:
-          \_RefObj: (work@asym_ram.WIDTHB), line:9:31, endln:9:37
-            |vpiParent:
-            \_Operation: , line:9:19, endln:9:38
-            |vpiName:WIDTHB
-            |vpiFullName:work@asym_ram.WIDTHB
-            |vpiActual:
-            \_Parameter: (work@asym_ram.WIDTHB), line:6:11, endln:6:21
-        |vpiOperand:
-        \_RefObj: (work@asym_ram.WIDTHA), line:9:42, endln:9:48
-          |vpiParent:
-          \_Operation: , line:9:19, endln:9:60
-          |vpiName:WIDTHA
-          |vpiFullName:work@asym_ram.WIDTHA
-          |vpiActual:
-          \_Parameter: (work@asym_ram.WIDTHA), line:7:11, endln:7:21
-        |vpiOperand:
-        \_RefObj: (work@asym_ram.WIDTHB), line:9:53, endln:9:59
-          |vpiParent:
-          \_Operation: , line:9:19, endln:9:60
-          |vpiName:WIDTHB
-          |vpiFullName:work@asym_ram.WIDTHB
-          |vpiActual:
-          \_Parameter: (work@asym_ram.WIDTHB), line:6:11, endln:6:21
     |vpiLhs:
     \_Parameter: (work@asym_ram.maxWIDTH), line:30:12, endln:30:43
   |vpiParamAssign:

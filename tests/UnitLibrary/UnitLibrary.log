@@ -252,8 +252,8 @@ LIB: lib1
      ${SURELOG_DIR}/tests/UnitLibrary/lib1/bot.sv
 
 LIB: lib2
-     ${SURELOG_DIR}/tests/UnitLibrary/lib2/bot.sv
      ${SURELOG_DIR}/tests/UnitLibrary/lib2/sub.v
+     ${SURELOG_DIR}/tests/UnitLibrary/lib2/bot.sv
 
 LIB: lib3
      ${SURELOG_DIR}/tests/UnitLibrary/lib3/sub.v
@@ -279,8 +279,8 @@ LIB: libw
 [INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/UnitLibrary/rtl/adder.v".
 [INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/UnitLibrary/gate/adder.vg".
 [INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/UnitLibrary/lib1/bot.sv".
-[INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/UnitLibrary/lib2/bot.sv".
 [INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/UnitLibrary/lib2/sub.v".
+[INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/UnitLibrary/lib2/bot.sv".
 [INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/UnitLibrary/lib3/sub.v".
 [INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/UnitLibrary/libwconfig/libw1/wsub.v".
 [INF:PP0122] Preprocessing source file "${SURELOG_DIR}/tests/UnitLibrary/libwconfig/libw2/wsub.v".
@@ -613,6 +613,23 @@ n<> u<11> t<Top_level_rule> c<1> l<1:1> el<4:1>
           n<> u<5> t<Port_list> p<6> l<1:12> el<1:14>
         n<> u<7> t<ENDMODULE> p<8> l<2:1> el<2:10>
 AST_DEBUG_END
+[INF:PA0201] Parsing source file "${SURELOG_DIR}/tests/UnitLibrary/lib2/sub.v".
+AST_DEBUG_BEGIN
+Count: 12
+LIB: lib2
+FILE: ${SURELOG_DIR}/tests/UnitLibrary/lib2/sub.v
+n<> u<11> t<Top_level_rule> c<1> l<1:1> el<4:1>
+  n<> u<1> t<Null_rule> p<11> s<10> l<1:1>
+  n<> u<10> t<Source_text> p<11> c<9> l<1:1> el<2:10>
+    n<> u<9> t<Description> p<10> c<8> l<1:1> el<2:10>
+      n<> u<8> t<Module_declaration> p<9> c<6> l<1:1> el<2:10>
+        n<> u<6> t<Module_nonansi_header> p<8> c<2> s<7> l<1:1> el<1:15>
+          n<module> u<2> t<Module_keyword> p<6> s<3> l<1:1> el<1:7>
+          n<sub> u<3> t<STRING_CONST> p<6> s<4> l<1:8> el<1:11>
+          n<> u<4> t<Package_import_declaration_list> p<6> s<5> l<1:12> el<1:12>
+          n<> u<5> t<Port_list> p<6> l<1:12> el<1:14>
+        n<> u<7> t<ENDMODULE> p<8> l<2:1> el<2:10>
+AST_DEBUG_END
 [INF:PA0201] Parsing source file "${SURELOG_DIR}/tests/UnitLibrary/lib2/bot.sv".
 AST_DEBUG_BEGIN
 Count: 32
@@ -649,23 +666,6 @@ n<> u<31> t<Top_level_rule> c<1> l<1:1> el<6:1>
                   n<> u<21> t<Port_connection_list> p<22> c<20> l<3:10> el<3:10>
                     n<> u<20> t<Ordered_port_connection> p<21> l<3:10> el<3:10>
         n<> u<27> t<ENDMODULE> p<28> l<4:1> el<4:10>
-AST_DEBUG_END
-[INF:PA0201] Parsing source file "${SURELOG_DIR}/tests/UnitLibrary/lib2/sub.v".
-AST_DEBUG_BEGIN
-Count: 12
-LIB: lib2
-FILE: ${SURELOG_DIR}/tests/UnitLibrary/lib2/sub.v
-n<> u<11> t<Top_level_rule> c<1> l<1:1> el<4:1>
-  n<> u<1> t<Null_rule> p<11> s<10> l<1:1>
-  n<> u<10> t<Source_text> p<11> c<9> l<1:1> el<2:10>
-    n<> u<9> t<Description> p<10> c<8> l<1:1> el<2:10>
-      n<> u<8> t<Module_declaration> p<9> c<6> l<1:1> el<2:10>
-        n<> u<6> t<Module_nonansi_header> p<8> c<2> s<7> l<1:1> el<1:15>
-          n<module> u<2> t<Module_keyword> p<6> s<3> l<1:1> el<1:7>
-          n<sub> u<3> t<STRING_CONST> p<6> s<4> l<1:8> el<1:11>
-          n<> u<4> t<Package_import_declaration_list> p<6> s<5> l<1:12> el<1:12>
-          n<> u<5> t<Port_list> p<6> l<1:12> el<1:14>
-        n<> u<7> t<ENDMODULE> p<8> l<2:1> el<2:10>
 AST_DEBUG_END
 [INF:PA0201] Parsing source file "${SURELOG_DIR}/tests/UnitLibrary/lib3/sub.v".
 AST_DEBUG_BEGIN
@@ -855,6 +855,7 @@ ModuleTypespec                                         7
 Package                                                1
 RefModule                                             14
 RefTypespec                                           13
+SourceFile                                            12
 Task                                                   9
 TypedefTypespec                                        1
 === UHDM Object Stats End ===

@@ -26,22 +26,6 @@ n<> u<21> t<Top_level_rule> c<1> l<1:1> el<4:1>
         n<> u<17> t<ENDMODULE> p<18> l<3:1> el<3:10>
 AST_DEBUG_END
 AST_DEBUG_BEGIN
-Count: 12
-LIB: work
-FILE: ${SURELOG_DIR}/tests/DashYTest/lib/OR.v
-n<> u<11> t<Top_level_rule> c<1> l<1:1> el<3:1>
-  n<> u<1> t<Null_rule> p<11> s<10> l<1:1>
-  n<> u<10> t<Source_text> p<11> c<9> l<1:1> el<2:10>
-    n<> u<9> t<Description> p<10> c<8> l<1:1> el<2:10>
-      n<> u<8> t<Module_declaration> p<9> c<6> l<1:1> el<2:10>
-        n<> u<6> t<Module_nonansi_header> p<8> c<2> s<7> l<1:1> el<1:13>
-          n<module> u<2> t<Module_keyword> p<6> s<3> l<1:1> el<1:7>
-          n<OR> u<3> t<STRING_CONST> p<6> s<4> l<1:8> el<1:10>
-          n<> u<4> t<Package_import_declaration_list> p<6> s<5> l<1:10> el<1:10>
-          n<> u<5> t<Port_list> p<6> l<1:10> el<1:12>
-        n<> u<7> t<ENDMODULE> p<8> l<2:1> el<2:10>
-AST_DEBUG_END
-AST_DEBUG_BEGIN
 Count: 30
 LIB: work
 FILE: ${SURELOG_DIR}/tests/DashYTest/lib/SIM.v
@@ -78,6 +62,22 @@ AST_DEBUG_END
 AST_DEBUG_BEGIN
 Count: 12
 LIB: work
+FILE: ${SURELOG_DIR}/tests/DashYTest/lib/OR.v
+n<> u<11> t<Top_level_rule> c<1> l<1:1> el<3:1>
+  n<> u<1> t<Null_rule> p<11> s<10> l<1:1>
+  n<> u<10> t<Source_text> p<11> c<9> l<1:1> el<2:10>
+    n<> u<9> t<Description> p<10> c<8> l<1:1> el<2:10>
+      n<> u<8> t<Module_declaration> p<9> c<6> l<1:1> el<2:10>
+        n<> u<6> t<Module_nonansi_header> p<8> c<2> s<7> l<1:1> el<1:13>
+          n<module> u<2> t<Module_keyword> p<6> s<3> l<1:1> el<1:7>
+          n<OR> u<3> t<STRING_CONST> p<6> s<4> l<1:8> el<1:10>
+          n<> u<4> t<Package_import_declaration_list> p<6> s<5> l<1:10> el<1:10>
+          n<> u<5> t<Port_list> p<6> l<1:10> el<1:12>
+        n<> u<7> t<ENDMODULE> p<8> l<2:1> el<2:10>
+AST_DEBUG_END
+AST_DEBUG_BEGIN
+Count: 12
+LIB: work
 FILE: ${SURELOG_DIR}/tests/DashYTest/lib/AND.v
 n<> u<11> t<Top_level_rule> c<1> l<1:1> el<3:1>
   n<> u<1> t<Null_rule> p<11> s<10> l<1:1>
@@ -105,12 +105,29 @@ Initial                                                1
 Module                                                 4
 ModuleTypespec                                         1
 RefModule                                              1
+SourceFile                                             4
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/DashYTest/slpp_all/surelog.uhdm ...
 [INF:UH0711] Decompiling UHDM...
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_SourceFile: , file:${SURELOG_DIR}/tests/DashYTest/dut.sv
+  |vpiParent:
+  \_Design: (unnamed)
+|vpiSourceFiles:
+\_SourceFile: , file:${SURELOG_DIR}/tests/DashYTest/lib/SIM.v
+  |vpiParent:
+  \_Design: (unnamed)
+|vpiSourceFiles:
+\_SourceFile: , file:${SURELOG_DIR}/tests/DashYTest/lib/OR.v
+  |vpiParent:
+  \_Design: (unnamed)
+|vpiSourceFiles:
+\_SourceFile: , file:${SURELOG_DIR}/tests/DashYTest/lib/AND.v
+  |vpiParent:
+  \_Design: (unnamed)
 |vpiAllModules:
 \_Module: work@AND (work@AND), file:${SURELOG_DIR}/tests/DashYTest/lib/AND.v, line:1:1, endln:2:10
   |vpiParent:

@@ -48,6 +48,9 @@ Constant                                               1
 Design                                                 1
 Initial                                                1
 Module                                                 1
+PreprocMacroDefinition                                 2
+PreprocMacroInstance                                   2
+SourceFile                                             1
 SysFuncCall                                            1
 === UHDM Object Stats End ===
 [INF:UH0708] Writing UHDM DB: ${SURELOG_DIR}/build/regression/PreprocString/slpp_all/surelog.uhdm ...
@@ -55,6 +58,62 @@ SysFuncCall                                            1
 ====== UHDM =======
 Design: (unnamed)
 |vpiName:unnamed
+|vpiSourceFiles:
+\_SourceFile: , file:${SURELOG_DIR}/tests/PreprocString/dut.sv
+  |vpiParent:
+  \_Design: (unnamed)
+  |vpiPreprocMacroDefinition:
+  \_PreprocMacroDefinition: (message), line:3:1, endln:3:27
+    |vpiParent:
+    \_SourceFile: , file:${SURELOG_DIR}/tests/PreprocString/dut.sv
+    |vpiName:message
+    |vpiNameStartColumn:9
+    |vpiBodyStartColumn:23
+  |vpiPreprocMacroDefinition:
+  \_PreprocMacroDefinition: (MAKE_MEM_PATH), line:5:1, endln:5:63
+    |vpiParent:
+    \_SourceFile: , file:${SURELOG_DIR}/tests/PreprocString/dut.sv
+    |vpiName:MAKE_MEM_PATH
+    |vpiNameStartColumn:9
+    |vpiBodyStartColumn:33
+  |vpiPreprocMacroInstance:
+  \_PreprocMacroInstance: (MAKE_MEM_PATH), file:${SURELOG_DIR}/tests/PreprocString/dut.sv, line:7:14, endln:7:37
+    |vpiParent:
+    \_SourceFile: , file:${SURELOG_DIR}/tests/PreprocString/dut.sv
+    |vpiName:MAKE_MEM_PATH
+    |vpiPreprocMacroDefinition:
+    \_PreprocMacroDefinition: (MAKE_MEM_PATH), line:5:1, endln:5:63
+    |vpiPreprocMacroInstance:
+    \_PreprocMacroInstance: (message), file:${SURELOG_DIR}/tests/PreprocString/dut.sv, line:5:51, endln:5:59
+      |vpiParent:
+      \_PreprocMacroInstance: (MAKE_MEM_PATH), file:${SURELOG_DIR}/tests/PreprocString/dut.sv, line:7:14, endln:7:37
+      |vpiName:message
+      |vpiPreprocMacroDefinition:
+      \_PreprocMacroDefinition: (message), line:3:1, endln:3:27
+      |vpiSectionStartLine:3
+      |vpiSectionStartColumn:23
+      |vpiSectionEndLine:1
+      |vpiSectionEndColumn:9
+      |vpiSourceStartLine:7
+      |vpiSourceStartColumn:27
+      |vpiSourceEndLine:7
+      |vpiSourceEndColumn:35
+    |vpiSectionStartLine:5
+    |vpiSectionStartColumn:33
+    |vpiSectionEndLine:5
+    |vpiSectionEndColumn:55
+    |vpiSourceStartLine:7
+    |vpiSourceStartColumn:14
+    |vpiSourceEndLine:7
+    |vpiSourceEndColumn:36
+    |vpiObject:
+    \_Constant: , line:5:33, endln:5:60
+      |vpiParent:
+      \_SysFuncCall: ($display), line:7:5, endln:7:38
+      |vpiDecompile:"test/rom.mem`message"
+      |vpiSize:160
+      |STRING:test/rom.mem`message
+      |vpiConstType:6
 |vpiAllModules:
 \_Module: work@test (work@test), file:${SURELOG_DIR}/tests/PreprocString/dut.sv, line:1:1, endln:9:10
   |vpiParent:
@@ -76,12 +135,6 @@ Design: (unnamed)
         \_Begin: (work@test), line:6:9, endln:8:8
         |vpiArgument:
         \_Constant: , line:5:33, endln:5:60
-          |vpiParent:
-          \_SysFuncCall: ($display), line:7:5, endln:7:38
-          |vpiDecompile:"test/rom.mem`message"
-          |vpiSize:160
-          |STRING:test/rom.mem`message
-          |vpiConstType:6
         |vpiName:$display
 ===================
 [  FATAL] : 0

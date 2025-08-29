@@ -750,6 +750,8 @@ def _print_report(results):
     'NOTE', 'CPU-TIME', 'VTL-MEM', 'PHY-MEM'
   ]
 
+  results = sorted(results, key=lambda r: (-r['STATUS'].value, r['TESTNAME']))
+
   rows = []
   summary = OrderedDict([(status.name, 0) for status in Status])
   summary[''] = ''

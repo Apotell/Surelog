@@ -1234,7 +1234,7 @@ bool Compiler::compile() {
     createFileList_();
   }
 
-  // writeUhdmSourceFiles();
+  writeUhdmSourceFiles();
 
   if (clp->profile()) {
     std::string msg =
@@ -1290,7 +1290,7 @@ bool Compiler::compile() {
       tmr.reset();
     }
 
-    // writePreprocMacroInstances();
+    writePreprocMacroInstances();
     m_compileDesign->purgeParsers();
 
     if (clp->elaborate()) {
